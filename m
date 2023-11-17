@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75223C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 15:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3AE4C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 15:48:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 800FE86EC9;
-	Fri, 17 Nov 2023 16:47:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EE09C86EB8;
+	Fri, 17 Nov 2023 16:48:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fvzh/MtM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lcK0GWTr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 392B586F68; Fri, 17 Nov 2023 16:47:30 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 8477386DB1; Fri, 17 Nov 2023 16:48:08 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E852486EB8
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 16:47:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3468743F
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 16:48:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5c6705515d8so11038107b3.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 07:47:24 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5b499b18b28so24010477b3.0
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 07:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700236043; x=1700840843; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4Qd8cCsWLSo1+yA+Oe7nx2Vu7qqF2KSdBsO0SOFEbFQ=;
- b=Fvzh/MtM16fRdN2UjvxhXfqu8QC2YRIrD3dYPwcRndtgMQjrPhOlI5yzYOh01wsQL0
- Aw6oC/iElF/CvwA+IjiWhoAvoCVSUHFsgK03etONHFboeYBLx9SBWuXL3ZUF943mqXbX
- DyQ4BN52GhKpRzOAwi24xsufp85E6gAzwTmWk=
+ d=konsulko.com; s=google; t=1700236079; x=1700840879; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ywXp+B39WiaUwvxEf0qHkFAGi6blErhyjzyBtFpikA8=;
+ b=lcK0GWTrcqDdSL12sasydkkZ78sAmGX8Z+xDh1o/zTStU8lTMUuF4O688xjm4Ms/x1
+ +Bu6ET4AfZGyX4O6SvEXcv82tdESJ3ELm4HPDt80V32lY5dmiw4pBDWWN6kwMydb68MS
+ HHZZMt5l9URP7LlqV+aaL7vWQXOPdchIH8AWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700236043; x=1700840843;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4Qd8cCsWLSo1+yA+Oe7nx2Vu7qqF2KSdBsO0SOFEbFQ=;
- b=vD3s+ggucGAmAoWlgQvUVVKhbKYd8iAeIP1mXqTanwofhVdud+xoWfAfnJJbydvGgd
- qPdjhBhyS0G294Ftt+sqEwmEHmKEoSjtr+Gpu8MnxuMKLtrL8yCxGxbOey+N4/uaBv3x
- jj3wENP5y1LCHxPy4O3X85i1v/sW4IJP3cMnaVgIPfD29GJ4uxT8mdwtv0EU7MnRfgKL
- FR4kZdjeWnHWl8eO8HBUMY/rkCohE2qkDlPbiC9taGY1IoEV25b4zWUsQh/XHpCvkbgn
- Gcead+bTA7/BQ581A1YCj7ZffezawzLFp1LTcM4ChBLaJ8QItk+cPYGjMtRRL5h/Hv5C
- yx2A==
-X-Gm-Message-State: AOJu0YxLOTT9DCOpp3RPwrt02jWYfH2sW7pbZhLBtM1wK40vunEueBTi
- 0auYgs9IO07FnCWlbSG7fEaTp1C/EsYmRyFxYqWm4A==
-X-Google-Smtp-Source: AGHT+IH8NO5zwGKBiSwolceSSpqvOFTIxwJRX2rQU90i66H+ktXuz7gdXokWyzjLkzr+sLXYE5DVJA==
-X-Received: by 2002:a81:6d16:0:b0:5a7:bff3:6fe4 with SMTP id
- i22-20020a816d16000000b005a7bff36fe4mr20087737ywc.9.1700236043614; 
- Fri, 17 Nov 2023 07:47:23 -0800 (PST)
-Received: from bill-the-cat
+ d=1e100.net; s=20230601; t=1700236079; x=1700840879;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ywXp+B39WiaUwvxEf0qHkFAGi6blErhyjzyBtFpikA8=;
+ b=EMi/LNkLaKeSVMssDBP1oLtluyeXkkVa0wf/inBbw+4gBcERGOlkhhsIB6pDijhroT
+ JTxWB2H/vgG9ODEIH4UY6NhNUAFp8SEnr0lfoLopf18u+1542pa4RJFm3Wzoyx81L9L9
+ QZBC5kwx9KWfDjTrkgXhujB6dV0d8xqaC3wJ9VncPPu6RblwekcmAb5Oa1msO/2tHrAj
+ pg6cKwsj8pa7pkmyvhO351QIIyts7jJQWQz6AIpqPTbTpDD86C+Yix+FCaJCYCYbAUCy
+ UBQBiwaOE2bghZgEiKCF4AEpkQbQhqWFtZ3HUdY5ToOBilqpF+vX367tIkzmQw9TLzsX
+ qdXQ==
+X-Gm-Message-State: AOJu0YzJjI7ZyTkK8NyU4rerNC2oXAufu+QCXpLLL5eHasNsroJrn2Ew
+ rZsY/M0wkKJbuZvDeS5oGTqkCa7Lfykzb3yrBPBGfg==
+X-Google-Smtp-Source: AGHT+IG3L7HMBDfxpVFSWqIJeDW2tA5QmrY4zYbW7I3lTVo3TiG72Kh+AnTeyTjha4uIuZqlF1VJVg==
+X-Received: by 2002:a05:690c:4683:b0:5c1:47f2:6e05 with SMTP id
+ gx3-20020a05690c468300b005c147f26e05mr17251956ywb.9.1700236079095; 
+ Fri, 17 Nov 2023 07:47:59 -0800 (PST)
+Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- t139-20020a0dea91000000b005a7ab32d454sm551671ywe.10.2023.11.17.07.47.22
+ v13-20020a81480d000000b005af81610bdbsm546299ywa.122.2023.11.17.07.47.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 07:47:23 -0800 (PST)
-Date: Fri, 17 Nov 2023 10:47:21 -0500
+ Fri, 17 Nov 2023 07:47:58 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/4] fwu-mdata: Make FWU_MDATA_GPT_BLK depend on DFU
-Message-ID: <20231117154721.GM170968@bill-the-cat>
-References: <20230817174125.369849-1-trini@konsulko.com>
- <20230817174125.369849-2-trini@konsulko.com>
- <c91e201c-e902-4853-b224-d5ba4813cd2e@gmx.de>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Matthias Winker <matthias.winker@de.bosch.com>,
+ Philip Oberfichtner <pro@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sergey Temerkhanov <s.temerkhanov@gmail.com>
+Subject: [PATCH] boards: Disable NET on platforms without NETDEVICES
+Date: Fri, 17 Nov 2023 10:47:57 -0500
+Message-Id: <20231117154757.777827-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oI4jfAYanU8r7mDw"
-Content-Disposition: inline
-In-Reply-To: <c91e201c-e902-4853-b224-d5ba4813cd2e@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,81 +93,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+None of these platforms enabled a networking devices, and disabled
+CMD_NET. Given that we used to gate network support on CMD_NET rather
+than NET, we disable CONFIG_NET on these platforms now.
 
---oI4jfAYanU8r7mDw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Matthias Winker <matthias.winker@de.bosch.com>
+Cc: Philip Oberfichtner <pro@denx.de>
+Cc: Minkyu Kang <mk7.kang@samsung.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Sergey Temerkhanov <s.temerkhanov@gmail.com>
+---
+ configs/efi-x86_app32_defconfig     | 3 +--
+ configs/efi-x86_app64_defconfig     | 3 +--
+ configs/imx6q_bosch_acc_defconfig   | 3 +--
+ configs/origen_defconfig            | 2 +-
+ configs/s5pc210_universal_defconfig | 2 +-
+ configs/stm32mp25_defconfig         | 2 +-
+ configs/thunderx_88xx_defconfig     | 2 +-
+ configs/trats2_defconfig            | 2 +-
+ configs/trats_defconfig             | 2 +-
+ 9 files changed, 9 insertions(+), 12 deletions(-)
 
-On Fri, Nov 17, 2023 at 04:35:22PM +0100, Heinrich Schuchardt wrote:
-> On 8/17/23 19:41, Tom Rini wrote:
-> > The implementation of this option in lib/fwu_updates/fwu_gpt.c is wholly
-> > dependent on DFU, so make that a requirement here.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > I'm honestly not sure how to best proceed here as
-> > drivers/fwu-mdata/gpt_blk.c doesn't need DFU, but both files are
-> > controlled by this single symbol.
-> >=20
-> > Cc: Masami Hiramatsu <masami.hiramatsu@linaro.org>
-> > Cc: Jassi Brar <jaswinder.singh@linaro.org>
-> > Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > ---
-> >   drivers/fwu-mdata/Kconfig | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/drivers/fwu-mdata/Kconfig b/drivers/fwu-mdata/Kconfig
-> > index 42736a5e43b0..0bd5fef4abfa 100644
-> > --- a/drivers/fwu-mdata/Kconfig
-> > +++ b/drivers/fwu-mdata/Kconfig
-> > @@ -15,7 +15,7 @@ config FWU_MDATA_GPT_BLK
-> >   	bool "FWU Metadata access for GPT partitioned Block devices"
-> >   	select PARTITION_TYPE_GUID
-> >   	select PARTITION_UUIDS
-> > -	depends on FWU_MDATA && BLK && EFI_PARTITION
-> > +	depends on FWU_MDATA && BLK && EFI_PARTITION && DFU
->=20
-> Hello Tom,
->=20
-> This looks like the wrong level of configuration to add a DFU dependency.
->=20
-> EFI_CAPSULE_FIRMWARE_FIT and EFI_CAPSULE_FIRMWARE_RAW select DFU and
-> EFI_CAPSULE_FIRMWARE.
->=20
-> We probably should let CONFIG_FWU_MDATA depend on EFI_CAPSULE_ON_DISK.
+diff --git a/configs/efi-x86_app32_defconfig b/configs/efi-x86_app32_defconfig
+index 682ba5b89576..e2e6f42c9a9d 100644
+--- a/configs/efi-x86_app32_defconfig
++++ b/configs/efi-x86_app32_defconfig
+@@ -21,7 +21,6 @@ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_PART=y
+ # CONFIG_CMD_SCSI is not set
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_EXT4=y
+@@ -36,7 +35,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+-CONFIG_USE_ROOTPATH=y
++# CONFIG_NET is not set
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ # CONFIG_REGEX is not set
+diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defconfig
+index d6b6c3d82995..14b5cd0fa0ee 100644
+--- a/configs/efi-x86_app64_defconfig
++++ b/configs/efi-x86_app64_defconfig
+@@ -22,7 +22,6 @@ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_PART=y
+ # CONFIG_CMD_SCSI is not set
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_EXT2=y
+@@ -38,7 +37,7 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+-CONFIG_USE_ROOTPATH=y
++# CONFIG_NET is not set
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+ CONFIG_CONSOLE_SCROLL_LINES=5
+diff --git a/configs/imx6q_bosch_acc_defconfig b/configs/imx6q_bosch_acc_defconfig
+index 05bab034e0f9..6abb7954ba2d 100644
+--- a/configs/imx6q_bosch_acc_defconfig
++++ b/configs/imx6q_bosch_acc_defconfig
+@@ -63,7 +63,6 @@ CONFIG_CMD_PART=y
+ # CONFIG_CMD_ITEST is not set
+ # CONFIG_CMD_SOURCE is not set
+ # CONFIG_CMD_SETEXPR is not set
+-# CONFIG_CMD_NET is not set
+ # CONFIG_CMD_BLOCK_CACHE is not set
+ # CONFIG_CMD_SLEEP is not set
+ # CONFIG_CMD_MP is not set
+@@ -82,7 +81,7 @@ CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_ENV_WRITEABLE_LIST=y
+ CONFIG_ENV_ACCESS_IGNORE_FORCE=y
+ CONFIG_VERSION_VARIABLE=y
+-CONFIG_TFTP_BLOCKSIZE=512
++# CONFIG_NET is not set
+ CONFIG_SPL_DM=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_DM_BOOTCOUNT=y
+diff --git a/configs/origen_defconfig b/configs/origen_defconfig
+index 3a71d6e582a7..5e55b712df9e 100644
+--- a/configs/origen_defconfig
++++ b/configs/origen_defconfig
+@@ -35,13 +35,13 @@ CONFIG_CMD_DFU=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++# CONFIG_NET is not set
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_MMC_DW=y
+diff --git a/configs/s5pc210_universal_defconfig b/configs/s5pc210_universal_defconfig
+index f585c510635a..ac236c82a1fc 100644
+--- a/configs/s5pc210_universal_defconfig
++++ b/configs/s5pc210_universal_defconfig
+@@ -33,7 +33,6 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_CMD_EXT4_WRITE=y
+@@ -42,6 +41,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++# CONFIG_NET is not set
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_SYS_I2C_S3C24X0=y
+diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+index 8423943f091c..75f27c98b441 100644
+--- a/configs/stm32mp25_defconfig
++++ b/configs/stm32mp25_defconfig
+@@ -23,7 +23,6 @@ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPIO=y
+ # CONFIG_CMD_LOADB is not set
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_RNG=y
+@@ -31,6 +30,7 @@ CONFIG_CMD_TIMER=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_LOG=y
+ CONFIG_OF_LIVE=y
++# CONFIG_NET is not set
+ CONFIG_GPIO_HOG=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_STM32F7=y
+diff --git a/configs/thunderx_88xx_defconfig b/configs/thunderx_88xx_defconfig
+index 5c24b38bb1fa..0c71b298ada5 100644
+--- a/configs/thunderx_88xx_defconfig
++++ b/configs/thunderx_88xx_defconfig
+@@ -32,8 +32,8 @@ CONFIG_SYS_BOOTM_LEN=0x800000
+ # CONFIG_CMD_EDITENV is not set
+ # CONFIG_CMD_SAVEENV is not set
+ # CONFIG_CMD_ENV_EXISTS is not set
+-# CONFIG_CMD_NET is not set
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++# CONFIG_NET is not set
+ # CONFIG_MMC is not set
+ CONFIG_DM_SERIAL=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+diff --git a/configs/trats2_defconfig b/configs/trats2_defconfig
+index 6c4909f12be0..045c74f95efb 100644
+--- a/configs/trats2_defconfig
++++ b/configs/trats2_defconfig
+@@ -36,7 +36,6 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_CMD_EXT4_WRITE=y
+@@ -44,6 +43,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++# CONFIG_NET is not set
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_DM_I2C_GPIO=y
+diff --git a/configs/trats_defconfig b/configs/trats_defconfig
+index 78484c071945..b1adaef17a01 100644
+--- a/configs/trats_defconfig
++++ b/configs/trats_defconfig
+@@ -35,7 +35,6 @@ CONFIG_CMD_GPT=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+-# CONFIG_CMD_NET is not set
+ CONFIG_CMD_CACHE=y
+ # CONFIG_CMD_SLEEP is not set
+ CONFIG_CMD_EXT4_WRITE=y
+@@ -43,6 +42,7 @@ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++# CONFIG_NET is not set
+ CONFIG_DFU_MMC=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x2000000
+ CONFIG_DM_I2C_GPIO=y
+-- 
+2.34.1
 
-OK, but that doesn't address the dependency? The code in
-lib/fwu_updates/fwu_gpt.c needs DFU and is under FWU_MDATA_GPT_BLK. It
-provides fwu_plat_get_alt_num() which is called by fwu_get_image_index()
-and is under FWU_MULTI_BANK_UPDATE and in turn called by
-efi_firmware_raw_set_image() which is under EFI_CAPSULE_FIRMWARE_RAW. If
-both lib/fwu_updates/fwu_gpt.c and drivers/fwu-mdata/gpt_blk.c should be
-under the same symbol then it needs to depend on DFU, since it's a
-direct dependency in the code. We could change it up to
-EFI_CAPSULE_FIRMWARE_RAW I guess, but I'm not sure that's cleaner.
-
---=20
-Tom
-
---oI4jfAYanU8r7mDw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXiwMACgkQFHw5/5Y0
-tyyeXwv9FAiMDncj9CsqaC3oGcjR6by98EpprS4eAGnGaywteXb20DqxTm7FbUYP
-m9Weei7DE5vF7463CGpHGD7osF2mhV+9f7uDi1AddvAFYE1gFetdK4450TUPeKso
-lRBdDxihW4+KAGY1fEqk57N4M5nzmlaYZ2F+Oh3XH7V7rYEMJ575FoTTYXNQt3su
-n41n7mvIpV6en/n1VdAxbGgLCKhmvx1w+3NfbtJrXUQmiGcEz0tk1xXC91X3nhb1
-A/lp3WYneMOJZMB3RB7zgFRa9T6fay0dU1/6uBarnt6qwNEmRKKbnFh9dcZ5XtX6
-I2zp3ScFU3nTu55n1DIXuBmzf4bTU1cQkoJGOWYwV+flsScYar1ugKRpGnO8WFwn
-caV6zXye0DxNHpyA+flV7zudgss5cG8+dqHIZ+xEXTKmJ5i4BZiC+HOM3VDCPDPZ
-O+45kFzB0RtIgANNkNcZOWQDJKa6VUw5BfIuZqV4AhiPo0dKmxYtkq+cgYk5AUi0
-6wjkeZ6G
-=+SSe
------END PGP SIGNATURE-----
-
---oI4jfAYanU8r7mDw--
