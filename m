@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3D49C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 17:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2850C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 18:43:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F118386FE8;
-	Fri, 17 Nov 2023 18:50:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 906C886F1F;
+	Fri, 17 Nov 2023 19:43:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HDuSjlN0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wbDL81Hv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A23D86EA3; Fri, 17 Nov 2023 18:50:29 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CEB6D86F1F; Fri, 17 Nov 2023 19:43:19 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BF0E86E64
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 18:50:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27B4686EA3
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 19:43:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7789a4c01ddso138770385a.1
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 09:50:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700243424; x=1700848224; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Q3WS5DnKqdiNt4Ag5ns+16EAmkC0hs5MKz2YzUafAHs=;
- b=HDuSjlN0UHaQYjqcmyoeD0BLYr3N5265dBHfb6qKyPUtud3LOWkNWM49PkZG9zM9kP
- WaAmdKwZGb+fGibF9vw3iECFPjPx9O2KTn1/cUVayYlprW3xSOEcGzRL07SoV6zl6k7h
- KhCyRqIArEUWZ9R0JRzobH2FM4qxEMY5e2qxo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700243424; x=1700848224;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q3WS5DnKqdiNt4Ag5ns+16EAmkC0hs5MKz2YzUafAHs=;
- b=dHy5q6iUR21z5nqcAwAQwucQIRNEb4nJpUcNovme1oxS3NEk/I25ECzYWQfYolWiE+
- hDXSkSQ3U4oxH8cIErk7s9nXP3whkwhHBVoak96AJBSgHiNJvWFHXqdiWCYyp7UMs8FE
- a/nLSI9UXYWWv11JgrG+5NvxsfHeAtC6ig8EeZZyGCfcWSh3J9aVqswJ4BtiDJupOr54
- o/Yis+van7WmwkqRsoKOgCnYfj1+FEX/ZPXN+XrTPIQ9xBlcd1L/r12U1P9sg2g/8v/m
- S5NnNorJrw63YbqKS/sqaNA8novTtHLBWPJiMko01weGK/LkTpEx4Udg5iO05PkUy8zc
- uOLA==
-X-Gm-Message-State: AOJu0YwQOyk0SSfCzGecp9W58Dl3pOES6HOjyuOtaA09SUFnRO5YEs8m
- A7cA3B1gICa2TjSbgY1AQW10oA==
-X-Google-Smtp-Source: AGHT+IHtG7jp6gvI1UhG3EHeqvyeYGbFIwGtkBXzx64P0UPHfSf7hzsJME1g3IiuUZIbZKW2wmDuKQ==
-X-Received: by 2002:a05:620a:6791:b0:779:cf30:600b with SMTP id
- rr17-20020a05620a679100b00779cf30600bmr166478qkn.4.1700243424139; 
- Fri, 17 Nov 2023 09:50:24 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
- [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
- by smtp.gmail.com with ESMTPSA id
- qf9-20020a05620a660900b007676f3859fasm765964qkn.30.2023.11.17.09.50.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 09:50:22 -0800 (PST)
-Date: Fri, 17 Nov 2023 12:50:20 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Slawomir Stepien <sst@poczta.fm>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- John Clark <inindev@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/4] rockchip: rk3588: Fix boot from SPI flash
-Message-ID: <20231117175020.GP170968@bill-the-cat>
-References: <20231112102705.1180714-1-jonas@kwiboo.se>
- <20231112102705.1180714-2-jonas@kwiboo.se>
- <561f7d8a-bf46-4ba7-a353-b5d3dfab95b0@theobroma-systems.com>
- <ZVdyu2vjW0LrW6Jf@nr200>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AHIh3t4100152;
+ Fri, 17 Nov 2023 12:43:03 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700246583;
+ bh=YSkVW6uszasyolRewkSV4kIabZYg/jdK8CRdimGpduc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wbDL81Hvw5IRYZ9nDHe+Gsa5pI14a8Nnw9mCIUmnK7XsR9XrXOSov5oifdU6eKFTh
+ pNzPldnnLpm3ZDkLXnMMPDGUAkmHJ4tgoJmsA0hguiKQ5RoZPUX7qZfAXeUdZnX9Ax
+ n1LWCjwUB8s++GY9vXDbTPafsNJFEhJlW7KnEiYY=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AHIh3Av126212
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 17 Nov 2023 12:43:03 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
+ Nov 2023 12:43:03 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 17 Nov 2023 12:43:03 -0600
+Received: from [10.250.36.5] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AHIh2ot025776;
+ Fri, 17 Nov 2023 12:43:02 -0600
+Message-ID: <335167c2-4f59-4190-80a4-d27c036ba8a9@ti.com>
+Date: Fri, 17 Nov 2023 12:43:02 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="POdIdO2rvLMGmnp3"
-Content-Disposition: inline
-In-Reply-To: <ZVdyu2vjW0LrW6Jf@nr200>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 14/15] board: ti: Add j721e_beagleboneai64_* config
+ fragments and env file
+Content-Language: en-US
+To: Romain Naour <romain.naour@smile.fr>, Nishanth Menon <nm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sinthu Raja <sinthu.raja@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Reid Tonking <reidt@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
+ Jason Kridner <jkridner@beagleboard.org>, <u-boot@lists.denx.de>
+References: <20231103003805.2420005-1-nm@ti.com>
+ <20231103003805.2420005-15-nm@ti.com>
+ <f0f4b6af-9831-4231-8316-1e0b0dd2dab2@ti.com>
+ <20231103190629.flhz4cr5wyjyym2g@remix>
+ <ee1eec62-c7ca-450c-959f-f83d5b71f8ca@ti.com>
+ <e65bb379-d4e4-4c05-9855-b69443886ebd@smile.fr>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <e65bb379-d4e4-4c05-9855-b69443886ebd@smile.fr>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,107 +89,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/17/23 8:27 AM, Romain Naour wrote:
+> Hello Andrew, All,
+> 
+> Le 03/11/2023 à 20:20, Andrew Davis a écrit :
+>> On 11/3/23 2:06 PM, Nishanth Menon wrote:
+>>> On 13:51-20231103, Andrew Davis wrote:
+>>>> On 11/2/23 7:38 PM, Nishanth Menon wrote:
+>>>>> Add defconfig fragments for J721E based BeagleBone AI-64 and
+>>>>> corresponding customized environment.
+>>>>>
+>>>>> Signed-off-by: Nishanth Menon <nm@ti.com>
+>>>>> ---
+>>>>>     board/ti/j721e/beagleboneai64.env        | 19 ++++++++
+>>>>>     board/ti/j721e/beagleboneai64_a72.config | 55 ++++++++++++++++++++++++
+>>>>>     board/ti/j721e/beagleboneai64_r5.config  | 19 ++++++++
+>>>>
+>>>> Beagle boards are not TI boards, add the board support to board/beagle/
+>>>
+>>> Huh, why bring in commercials and organization changes here? am335x
+>>> and am62 are under the TI umbrella.
+>>>
+>>
+>> The SoCs used are yes, the boards are not, we only make our EVM/SK
+>> line of boards in house.
+>>
+>> We did AM335x wrong, in board/ti/am335x/board.c we tried to support
+>> like 11 different boards in one file. And while it might have made adding
+>> our own extra EVMs easier, it only made things less clear for folks trying
+>> to add their own AM335x based boards[0].
+>>
+>> We don't integrate support for any other board partner like this. Our
+>> friends over at Toradex or Phytec are currently upstreaming boards based
+>> on K3 SoCs and in doing so have shown us some areas we can improve.
+>>
+>> We focus on these little short-cuts to make adding our EVMs (or boards
+>> that look like our EVMs) easy. But that only leads to extra work and
+>> code duplication for external boards.
+>>
+>> If something is actually common to the SoC then lets move it to
+>> arch/arm/mach-k3/j721e. Tricks like board-variants.c only hide the
+>> issue and doesn't help folks wanting to add their boards based on our
+>> SoCs to their board/<vendor>/ directory.
+> 
+> I'm starting a new custom board bring-up based on a j721e SoC (without any SOM)
+> and adding a now board variant from the u-boot provided in the TI SDK (based on
+> 2023.04) is far from easy for the reasons mentioned above (extra work and code
+> duplication for external boards).
+> 
+> Also the build break for j7200/j721e SoC as soon as CONFIG_TARGET_J721E_A72_EVM
+> and CONFIG_TARGET_J7200_A72_EVM are undefined:
+> 
 
---POdIdO2rvLMGmnp3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The issue is we didn't properly split J7200 support from J721e and now that
+there are differences between the two, the only way we have to check which
+is which is to check the TARGET board, not the SOC (as there is no SOC_K3_J7200,
+but we are working on that [0]). So currently adding new J721E/J7200 TARGET
+boards breaks things :(
 
-On Fri, Nov 17, 2023 at 03:03:39PM +0100, Slawomir Stepien wrote:
-> On lis 14, 2023 15:06, Quentin Schulz wrote:
-> > Hi Jonas,
->=20
-> Hi Quentin
->=20
-> > On 11/12/23 11:26, Jonas Karlman wrote:
-> > > The commit fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from =
-SPI
-> > > NOR flash") added a new BROM_BOOTSOURCE_SPINOR_RK3588 with value 6.
-> > >=20
-> > > At the time the reason for this new bootsource id value 6 was unknown.
-> > >=20
-> > > We now know that the BootRom on RK3588 use different bootsource id
-> > > values depending on the iomux used by the flash spi controller, and n=
-ot
-> > > by the type of spi nor or spi nand flash used.
-> > >=20
-> > > Add the following defines and use them for RK3588 boot_devices.
-> > >=20
-> > > - BROM_BOOTSOURCE_FSPI_M0 =3D 3
-> > > - BROM_BOOTSOURCE_FSPI_M1 =3D 4
-> > > - BROM_BOOTSOURCE_FSPI_M2 =3D 6
-> > >=20
-> > > Fixes: fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from SPI =
-NOR flash")
-> > > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > > ---
-> > >   arch/arm/include/asm/arch-rockchip/bootrom.h | 4 +++-
-> > >   arch/arm/mach-rockchip/rk3588/rk3588.c       | 5 +++--
-> > >   2 files changed, 6 insertions(+), 3 deletions(-)
-> > >=20
-> > > diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/=
-include/asm/arch-rockchip/bootrom.h
-> > > index 7dab18fbc3fb..f78337397d63 100644
-> > > --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > > +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > > @@ -47,8 +47,10 @@ enum {
-> > >   	BROM_BOOTSOURCE_EMMC =3D 2,
-> > >   	BROM_BOOTSOURCE_SPINOR =3D 3,
-> > >   	BROM_BOOTSOURCE_SPINAND =3D 4,
-> > > +	BROM_BOOTSOURCE_FSPI_M0 =3D 3,
-> > > +	BROM_BOOTSOURCE_FSPI_M1 =3D 4,
-> >=20
-> > I'm a bit wary of two pairs of enums sharing the same value, especially=
- when
-> > we want to use them as offset in a static definition of an array.
-> >=20
-> > Should we #ifdef it (meh) for RK3588?
-> > Should we add a suffix like before for identifying RK3588-specific opti=
-ons?
-> >=20
-> > At the very least explicit that those are RK3588-specific in a comment =
-for
-> > both conflicts (the ones that apply to everything except RK3588 to say =
-to
-> > use only for !RK3588, and the ones that apply to RK3588 only)?
->=20
-> Can you say why it is so important to know that given enum is specific to=
- given CPU here in the
-> header file? I think that the enums in the bootrom.h should be as generic=
- as possible.
->=20
-> By using the possible enums in a static array, "solves" the problem of as=
-signing the boot source to
-> specific CPU. There is not need to make such grouping in the bootrom.h.
+> https://source.denx.de/u-boot/u-boot/-/blob/v2023.10/arch/arm/mach-k3/arm64-mmu.c?ref_type=tags#L71
+> 
+> I always wonder if I should work on top of EVMs board or create a new
+> board/<vendor>/ directory for customer boards.
+> 
 
-Do we have any insight as to why Rockchip re-used those values? Looking
-at the header I see RK3588 has a different SPINOR value than others.
-Does RK3588 share the same value for other sources? How much of
-bootrom.h is still correct for RK3588? I'd rather not have to move to
-having bootrom_${soc}.h like so many other headers are, and if it's just
-these values, it might be cleaner to #if .. #else .. #endif the whole
-enum, and then re-evaluate things abased on whatever the next new SoC
-does here.
+New board/<vendor>/ would be preferred, we do things in our EVM board/ti/
+dir that are specific to our EVMs, and there will be more churn, etc..
 
---=20
-Tom
+If adding a new board/<vendor>/ for our SoCs is difficult just let us know,
+we are working several issues to make it more easy going forward and guiding
+feedback always helps.
 
---POdIdO2rvLMGmnp3
-Content-Type: application/pgp-signature; name="signature.asc"
+Andrew
 
------BEGIN PGP SIGNATURE-----
+[0] https://lore.kernel.org/all/20231106165044.xrmlxoyfbnkmpb5v@revolt/
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXp9MACgkQFHw5/5Y0
-tyxOVQv+P1KolL+iXeEb9QrcCB5rPvNTR3Ij7N/MPo2m/VNOm1HLCtd5joEAuNsz
-wraCgHvkf4uOx7gkT8g4sYFHZmsUSuzy/FoKrsP+qzlQMtIF5lUquEVGINfSIHP+
-szDnA1Z7Vzathze/JdxoyJXXtOXp5I04NuPjFR18nIb2OApqb0Rh5mUyEWUIyOoy
-9nCqyl7Kb51ZmTqcA7Tj0pq4n40TMc8co7Rpw49d4duAOTle3A7mFnnCTnnH1xsV
-gHoejV80bQW94FFqTj0X7iTjuZUvQDfpm5BLViBLUqcD23UslGgTsA0h6yeTKc78
-3MG9JAE9LiWqjhn8I00WHJRE60TNS5nFEDu1omMxarf5psvcBS7r+dZBD/Sj4yzY
-mY7904GIo+09WHOgx+NiIMXZJJpPJXyjX4i30i68i0t/9wUQULiTxqZeCvbbJhrW
-6rh0gFauSTIp8P6QlQpDbiLMWf65VKSPQHK0WGfTDzM7KqHV+fUqe6syVZAZr+4j
-FSdPJK8C
-=SrE2
------END PGP SIGNATURE-----
-
---POdIdO2rvLMGmnp3--
+> Best regards,
+> Romain
+> 
+>>
+>> Andrew
+>>
+>> [0] See "Software Design" https://jaycarlson.net/embedded-linux/#am335x
+>>
+>>> $ git grep beagle board/|cut -d ':' -f1|sort -u
+>>> board/ti/am335x/board.c
+>>> board/ti/am335x/board.h
+>>> board/ti/am57xx/board.c
+>>> board/ti/am62x/beagleplay_a53.config
+>>> board/ti/am62x/beagleplay_r5.config
+>>> board/ti/am62x/MAINTAINERS
+>>> board/ti/beagle/beagle.c
+>>> board/ti/beagle/Kconfig
+>>> board/ti/beagle/led.c
+>>> board/ti/beagle/MAINTAINERS
+>>> board/ti/beagle/Makefile
+>>> board/ti/j721e/beagleboneai64_a72.config
+>>> board/ti/j721e/beagleboneai64_r5.config
+>>> board/ti/j721e/MAINTAINERS
+>>> board/timll/devkit8000/README
+>>>
+> 
