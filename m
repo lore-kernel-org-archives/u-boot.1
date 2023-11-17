@@ -4,56 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 668C3C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 16:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25309C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 17:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C12FB86FB8;
-	Fri, 17 Nov 2023 17:52:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=poczta.fm
+	by phobos.denx.de (Postfix) with ESMTP id 6616C86F1F;
+	Fri, 17 Nov 2023 18:01:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=poczta.fm header.i=@poczta.fm header.b="lgvyCaRI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Idci3TnV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 777388749F; Fri, 17 Nov 2023 15:03:46 +0100 (CET)
-Received: from smtpo26.interia.pl (smtpo26.interia.pl [217.74.67.26])
+ id BFDB386EEE; Fri, 17 Nov 2023 18:01:16 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72CC68744B
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 15:03:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=poczta.fm
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sst@poczta.fm
-Received: from nr200 (ipv4-80-68-225-159.net.internetunion.pl [80.68.225.159])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-256) server-digest SHA256)
- (No client certificate requested)
- by poczta.interia.pl (INTERIA.PL) with ESMTPSA;
- Fri, 17 Nov 2023 15:03:40 +0100 (CET)
-Date: Fri, 17 Nov 2023 15:03:39 +0100
-From: Slawomir Stepien <sst@poczta.fm>
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- John Clark <inindev@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/4] rockchip: rk3588: Fix boot from SPI flash
-Message-ID: <ZVdyu2vjW0LrW6Jf@nr200>
-References: <20231112102705.1180714-1-jonas@kwiboo.se>
- <20231112102705.1180714-2-jonas@kwiboo.se>
- <561f7d8a-bf46-4ba7-a353-b5d3dfab95b0@theobroma-systems.com>
+ by phobos.denx.de (Postfix) with ESMTPS id A7AFF86F7C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 18:01:12 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=968596d76e=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3AHFxjsP007511; Fri, 17 Nov 2023 18:01:11 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=mqknBeT
+ RL8BHSk0QspU5guqei8NhggzIyvbbShRwJho=; b=Idci3TnVWJ5uZVVndnV/GAY
+ +x5GcBJ1Ww+Ww5zZnR3wCmL75ruTvd1xb//eDJjtrBCbi0ITqELgH7uZu2AIWifb
+ 8tW2X6thu6DeGg1YmS5/EpAzX3gmHrharHAKDHh9Y2TXoAw3hIRX9GNEe+Yku9Rh
+ 79bz6tVp371Q6j7KFmcNQYtM0NPDvjykar93T0/2JEsWDKcYlT+lckF6KqzsXD1G
+ MkTTP43b+wc8GWjD27mC3jLHNaH0eEiwu4a7PnlBwD1vYyugrAewxqro9Q9CpYfw
+ N8LIVcsjxGlqJbLZ7nwSl4hm8KKUfH2OLSfZLAfz3WpcekylOtAv9rtfV8BPSkA=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u9ym94q7n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Nov 2023 18:01:11 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 156C510002A;
+ Fri, 17 Nov 2023 18:01:10 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F3567257AA6;
+ Fri, 17 Nov 2023 18:01:09 +0100 (CET)
+Received: from localhost (10.252.0.168) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 17 Nov
+ 2023 18:01:09 +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH 1/2] board: st: common: Fix board_get_alt_info_mtd()
+Date: Fri, 17 Nov 2023 18:01:06 +0100
+Message-ID: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <561f7d8a-bf46-4ba7-a353-b5d3dfab95b0@theobroma-systems.com>
-X-IPL-Priority-Group: 0-0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=poczta.fm; s=dk;
- t=1700229822; bh=auvfGFPundameoL/vQ57L5skCkg/2jtT0uRW27LbmQQ=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type;
- b=lgvyCaRIPc6mhExt3AAdhAoc5kGXL9Gh1N8+m2HqlIjUJ7YJDzjSOzGRSNYkyagsF
- YoYN9gQdWx/AYdBwUXCDF6/T6j60JP1LN53DxMT/uNAiVUeRdEjV9k0k7zmWv9kAPC
- hs5uO/9pY4Hi3bqmdXMNDuJzzn7k/ZTWTU0c7hkM=
-X-Mailman-Approved-At: Fri, 17 Nov 2023 17:52:24 +0100
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.0.168]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-17_16,2023-11-17_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,60 +87,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lis 14, 2023 15:06, Quentin Schulz wrote:
-> Hi Jonas,
+Since MTD devices are partioned, we got the following
+error when command "dfu 0" is executed:
 
-Hi Quentin
+DFU alt info setting: done
+ERROR: Too many arguments for nor0
+ERROR: DFU entities configuration failed!
+ERROR: (partition table does not match dfu_alt_info?)
 
-> On 11/12/23 11:26, Jonas Karlman wrote:
-> > The commit fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from SPI
-> > NOR flash") added a new BROM_BOOTSOURCE_SPINOR_RK3588 with value 6.
-> > 
-> > At the time the reason for this new bootsource id value 6 was unknown.
-> > 
-> > We now know that the BootRom on RK3588 use different bootsource id
-> > values depending on the iomux used by the flash spi controller, and not
-> > by the type of spi nor or spi nand flash used.
-> > 
-> > Add the following defines and use them for RK3588 boot_devices.
-> > 
-> > - BROM_BOOTSOURCE_FSPI_M0 = 3
-> > - BROM_BOOTSOURCE_FSPI_M1 = 4
-> > - BROM_BOOTSOURCE_FSPI_M2 = 6
-> > 
-> > Fixes: fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from SPI NOR flash")
-> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > ---
-> >   arch/arm/include/asm/arch-rockchip/bootrom.h | 4 +++-
-> >   arch/arm/mach-rockchip/rk3588/rk3588.c       | 5 +++--
-> >   2 files changed, 6 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > index 7dab18fbc3fb..f78337397d63 100644
-> > --- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > +++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-> > @@ -47,8 +47,10 @@ enum {
-> >   	BROM_BOOTSOURCE_EMMC = 2,
-> >   	BROM_BOOTSOURCE_SPINOR = 3,
-> >   	BROM_BOOTSOURCE_SPINAND = 4,
-> > +	BROM_BOOTSOURCE_FSPI_M0 = 3,
-> > +	BROM_BOOTSOURCE_FSPI_M1 = 4,
-> 
-> I'm a bit wary of two pairs of enums sharing the same value, especially when
-> we want to use them as offset in a static definition of an array.
-> 
-> Should we #ifdef it (meh) for RK3588?
-> Should we add a suffix like before for identifying RK3588-specific options?
-> 
-> At the very least explicit that those are RK3588-specific in a comment for
-> both conflicts (the ones that apply to everything except RK3588 to say to
-> use only for !RK3588, and the ones that apply to RK3588 only)?
+Fixes: 31325e1b8b9c ("stm32mp1: dynamically build DFU_ALT_INFO")
 
-Can you say why it is so important to know that given enum is specific to given CPU here in the
-header file? I think that the enums in the bootrom.h should be as generic as possible.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-By using the possible enums in a static array, "solves" the problem of assigning the boot source to
-specific CPU. There is not need to make such grouping in the bootrom.h.
+ board/st/common/stm32mp_dfu.c | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
+diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
+index a8eb8d5cae2..ded3bf81961 100644
+--- a/board/st/common/stm32mp_dfu.c
++++ b/board/st/common/stm32mp_dfu.c
+@@ -73,7 +73,6 @@ static void board_get_alt_info_mmc(struct udevice *dev, char *buf)
+ static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+ {
+ 	struct mtd_info *part;
+-	bool first = true;
+ 	const char *name;
+ 	int len, partnum = 0;
+ 
+@@ -86,17 +85,13 @@ static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+ 			"mtd %s=", name);
+ 
+ 	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+-			"%s raw 0x0 0x%llx ",
++			"%s raw 0x0 0x%llx",
+ 			name, mtd->size);
+ 
+ 	list_for_each_entry(part, &mtd->partitions, node) {
+ 		partnum++;
+-		if (!first)
+-			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len, ";");
+-		first = false;
+-
+ 		len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+-				"%s_%s part %d",
++				";%s_%s part %d",
+ 				name, part->name, partnum);
+ 	}
+ }
 -- 
-Slawomir Stepien
+2.25.1
+
