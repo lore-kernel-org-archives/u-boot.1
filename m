@@ -4,75 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A69B7C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 17:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D4DC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 17:18:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF711871B4;
-	Fri, 17 Nov 2023 18:01:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id B3EDD86FB8;
+	Fri, 17 Nov 2023 18:17:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="vmQiN6cD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rrv0imK7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F284786EEE; Fri, 17 Nov 2023 18:01:16 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DD01D86FB8; Fri, 17 Nov 2023 18:17:56 +0100 (CET)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B203E86FF7
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 18:01:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE05E86DEE
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 18:17:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=968596d76e=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3AHBUQ4s003521; Fri, 17 Nov 2023 18:01:11 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=8YNOvJcA3+H7HcOoLsQS+BL6qJ8QfXWrONNMR9j5dUw=; b=vm
- QiN6cDAFLTtZBVVmWZqmks8lMyEuGQfqoQvsTS5AJrvP6mHhA8F2vkVPnVZuE7Jj
- 50PX8AHP66tLwwLDqyx+FTumOzMrzCVWJa/UZTC9Ko+OiOHYj8xKwxp63FfQ1BuH
- ItiU73xsUNLN7uRDrXGTt4c/Ucx4QU0k5rRz2nxQ3NEGqXFxFwgVT2uYIiCmtg4G
- YN0NeHvFKBMJFNM3kF38jLt5FJwAVDtuvuuk0g4cRpnZjHTRq1UAdU3dPeI6RB4a
- 5W2Kls3eoRN25Hy6f3N/raoVuDOzpXVbyLzyRVAddXz8HSOgs+WuQCH0UCPEKY2j
- RlAagcCs1R1t1ojKwoAw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ua1chmedb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Nov 2023 18:01:11 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BADD0100034;
- Fri, 17 Nov 2023 18:01:10 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B44B0257AA2;
- Fri, 17 Nov 2023 18:01:10 +0100 (CET)
-Received: from localhost (10.252.0.168) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 17 Nov
- 2023 18:01:10 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH 2/2] board: st: common: simplify MTD device parsing
-Date: Fri, 17 Nov 2023 18:01:07 +0100
-Message-ID: <20231117170107.1147598-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
-References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-42135f8e08fso12669221cf.1
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 09:17:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700241469; x=1700846269; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DWz1xUPShg0Z8poMN37FNFFtfk3489BzdXUEiCtOFuA=;
+ b=rrv0imK7zMJmCwMNpo4eS+A8TaJhyxcB+PB7cPrwnUrnUty6+LETcOjRz5DcWH/jCB
+ Ck2JztcG7DH0hMvEe3Zrg8ZmbcEW0fWo4Fvg9E5I57WzYUhfcs7fbxZn6DWxPZCqwo6z
+ l3KNPdn0VOZQqCc9qYk7cLkjXcwpXHHjabe20=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700241469; x=1700846269;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DWz1xUPShg0Z8poMN37FNFFtfk3489BzdXUEiCtOFuA=;
+ b=pz53r6JA9+k6Mo9Vz/nhX3pS0Elz2LKEhgR9q1dMfUJtO6sWjyvGGn+ho12VZsHNPf
+ xdCKuH6yRNbl5tayXLfDQal/XNKH5bQLfa5W/ew1x8N9VNnlHKN4sDtdPR9esw3RDAJ0
+ BhlPMJbxp6n8WMmr/wZEKiLTak3NBWmKKHOMz9zzceYOxI7PtfMaNlOfEpHyFaohF48A
+ yaBjNz3FzcY+3R+B0RjldBxtodiaph49mlomyiQMowCYosKzexVUVJhe/GoRKb1J3N6V
+ XGFHJUVwBIkZ2/GMWJGj2FVXMdEpeDEkjVl6q8UlbV4jTsspdVHpJkgFEPk7D4xeMkRv
+ yMDw==
+X-Gm-Message-State: AOJu0YyQnA5FlN+bn5+vhQy/eLtI/0Gef908MJAC0IvRphFjtH54SbP/
+ IpNtFmj39r4VXaQG3sPsR3PvDw==
+X-Google-Smtp-Source: AGHT+IGVR2oX2pPwA0l/CslMFo+ZFk4+Ekw1mEoBnj6bX1FvTRQqOoEa9qM64JRYngHMNgntUWMt8Q==
+X-Received: by 2002:a05:622a:118c:b0:41c:c8f2:58ce with SMTP id
+ m12-20020a05622a118c00b0041cc8f258cemr309551qtk.27.1700241469468; 
+ Fri, 17 Nov 2023 09:17:49 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
+ [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
+ by smtp.gmail.com with ESMTPSA id
+ t20-20020ac86a14000000b004179e79069asm710158qtr.21.2023.11.17.09.17.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Nov 2023 09:17:48 -0800 (PST)
+Date: Fri, 17 Nov 2023 12:17:46 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>
+Subject: Re: [PATCH v2 06/32] bootstd: Introduce programmable boot
+Message-ID: <20231117171746.GO170968@bill-the-cat>
+References: <20231116041043.362055-1-sjg@chromium.org>
+ <20231116041043.362055-7-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.0.168]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-17_16,2023-11-17_01,2023-05-22_02
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6OMrGGsJD5+VM5mq"
+Content-Disposition: inline
+In-Reply-To: <20231116041043.362055-7-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,45 +96,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify the way all MTD devices are parsed.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+--6OMrGGsJD5+VM5mq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- board/st/common/stm32mp_dfu.c | 19 ++-----------------
- 1 file changed, 2 insertions(+), 17 deletions(-)
+On Wed, Nov 15, 2023 at 09:10:06PM -0700, Simon Glass wrote:
 
-diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
-index ded3bf81961..77edb86e78c 100644
---- a/board/st/common/stm32mp_dfu.c
-+++ b/board/st/common/stm32mp_dfu.c
-@@ -123,24 +123,9 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		/* probe all MTD devices */
- 		mtd_probe_devices();
- 
--		/* probe SPI flash device on a bus */
--		if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
--			mtd = get_mtd_device_nm("nor0");
--			if (!IS_ERR_OR_NULL(mtd))
-+		mtd_for_each_device(mtd)
-+			if (!mtd_is_partition(mtd))
- 				board_get_alt_info_mtd(mtd, buf);
--
--			mtd = get_mtd_device_nm("nor1");
--			if (!IS_ERR_OR_NULL(mtd))
--				board_get_alt_info_mtd(mtd, buf);
--		}
--
--		mtd = get_mtd_device_nm("nand0");
--		if (!IS_ERR_OR_NULL(mtd))
--			board_get_alt_info_mtd(mtd, buf);
--
--		mtd = get_mtd_device_nm("spi-nand0");
--		if (!IS_ERR_OR_NULL(mtd))
--			board_get_alt_info_mtd(mtd, buf);
- 	}
- 
- 	if (IS_ENABLED(CONFIG_DFU_VIRT)) {
--- 
-2.25.1
+> At present bootstd requires CONFIG_CMDLINE to operate. Add a new
+> 'programmable' boot which can be used when no command line is available.
+> For now it does almost nothing, since most bootmeths require the
+> command line.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> @@ -67,6 +68,14 @@ void main_loop(void)
+> =20
+>  	autoboot_command(s);
+> =20
+> +	if (IS_ENABLED(CONFIG_BOOTSTD_PROG)) {
+> +		int ret;
+> +
+> +		ret =3D bootstd_prog_boot();
+> +		printf("Standard boot failed (err=3D%dE)\n", ret);
+> +	}
+> +
+>  	cli_loop();
+> +
+>  	panic("No CLI available");
 
+I think this this brings in at least a 3rd option now, we should try and
+condense things a little or clean it up maybe. We have common/autoboot.c
+which is what will fire off menu_show() and drop things in to that menu
+instead of the cmdline (but that does have cmdline as an option to run,
+and I suspect that just exits gracefully from the cmd). With CMDLINE=3Dn,
+cli_loop prints we can't do anything and then panics, so we should also
+maybe panic() in the case it bootstd_prog_boot fails rather than
+continue?
+
+--=20
+Tom
+
+--6OMrGGsJD5+VM5mq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXoDcACgkQFHw5/5Y0
+tyy1VQwAmtcaXjCfEfQlGWrXykoWuRRcf5WVyIASBhQJNYQhjOqZmXgNiDgsBgrS
+4ga9DEAF0aSYD5CnKhpSQUZjdblgoYQPpRTn1RNlPVN+EA8qDvsRhmQy/1f+K4GQ
+vXbeKHlkewtQHZMYacn5TUPIZ66DnJnTA3DoecsrclwcS/QcDREkyWqdUTjXHgSA
+hbbz+Ml5b/eEm/xL/0Fo1bqUMe/2Sk3ouymbvxpK56WGHBVFK/WRYzmDaeMe+DFl
+YPMeMc/X2qaXt+LMhzrwlxrXOptt7usRW5yW31IIjdTDE0alHfd1UoaErZzxhEKG
+0zEwRFh8tO9ws2O+UdHcDwb263LiwXKw2M3RRWMBSFRGaJHCJF1wLnBqSAxxkDLF
+7nlJlFFg2fpgebtesmOnlPdbMUe1xU7FyjeEI3gC//s+GHeZlzGV730+VuObpQua
+MtSVAQPqWyi+1yo/YmRoEpBCB/O2GBXyc0JqpkbJGeb1iCWyQrzj/w9c5mbG8eXB
+HheITnPn
+=srv8
+-----END PGP SIGNATURE-----
+
+--6OMrGGsJD5+VM5mq--
