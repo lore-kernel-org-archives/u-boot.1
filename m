@@ -4,72 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91C4C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 08:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C13C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 08:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AD7286F83;
-	Fri, 17 Nov 2023 09:30:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DBFED86F67;
+	Fri, 17 Nov 2023 09:35:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aO4WxBbb";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8D6F86FCE; Fri, 17 Nov 2023 09:30:54 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BC1B86F5C
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 09:30:49 +0100 (CET)
+ id B155186F67; Fri, 17 Nov 2023 09:35:26 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id A907886F5C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 09:35:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AH8UlOW055420;
- Fri, 17 Nov 2023 02:30:47 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700209847;
- bh=fFoptRHz+gGIKkLi7NG5yxl1eEr+hLY0nsnFraEbbtc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=aO4WxBbb9lQ+DnYkSTz7VVahHsiyUaD8t2Ig2SwKeYz8EQweU0En3jaNA/rFZqVpb
- mqGs1ZDH52eP66KPff05Ltw2pL6c9qHP2H2224ZxenqN0s5sDL5UwGlhDzETI9JNzz
- yKFSvwuvRHfsdKTOyqctLdNspID6C+CmhK8jFvwo=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AH8Ul5q037784
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Nov 2023 02:30:47 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
- Nov 2023 02:30:46 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 17 Nov 2023 02:30:46 -0600
-Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AH8UiPH066203;
- Fri, 17 Nov 2023 02:30:45 -0600
-Message-ID: <4f440a06-892b-4098-9565-6b21778bb5bb@ti.com>
-Date: Fri, 17 Nov 2023 14:00:43 +0530
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.04,206,1695654000"; 
+ d="asc'?scan'208";a="187148836"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 17 Nov 2023 17:35:07 +0900
+Received: from unknown (unknown [10.226.93.135])
+ by relmlir6.idc.renesas.com (Postfix) with SMTP id B857E41B7CE0;
+ Fri, 17 Nov 2023 17:35:04 +0900 (JST)
+Date: Fri, 17 Nov 2023 08:35:01 +0000
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Jim Liu <jim.t90615@gmail.com>
+Cc: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] net: designware: Add bitbang feature for designware
+ driver
+Message-ID: <20231117083501.2fpnpdr3bejt6i6w@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20231117020453.1111505-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
- J7200
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, <nm@ti.com>
-CC: "Kumar, Udit" <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>
-References: <20231003081038.24299-1-j-keerthy@ti.com>
- <20231003081038.24299-11-j-keerthy@ti.com>
- <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
- <20231003151033.GD8465@bill-the-cat>
- <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
- <20231116184052.GE170968@bill-the-cat>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231116184052.GE170968@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="dwyeotoas7e2epcf"
+Content-Disposition: inline
+In-Reply-To: <20231117020453.1111505-1-JJLIU0@nuvoton.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,66 +58,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
 
-On 17/11/23 00:10, Tom Rini wrote:
-> On Thu, Nov 16, 2023 at 11:43:50AM +0530, Neha Malcom Francis wrote:
->> Hi Tom,
->>
->> Trying to bring back this series here.
->>
->> On 03/10/23 20:40, Tom Rini wrote:
->>> On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
->>>>
->>>> On 10/3/2023 1:40 PM, Keerthy wrote:
->>>>> Enable ESM initialization for J7200
->>>>>
->>>>> Signed-off-by: Keerthy <j-keerthy@ti.com>
->>>>> ---
->>>>>     board/ti/j721e/evm.c | 6 ++++--
->>>>>     1 file changed, 4 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
->>>>> index 42fa94b7a5..070b28326f 100644
->>>>> --- a/board/ti/j721e/evm.c
->>>>> +++ b/board/ti/j721e/evm.c
->>>>> @@ -543,7 +543,8 @@ void spl_board_init(void)
->>>>>     	}
->>>>>     #ifdef CONFIG_ESM_K3
->>>>> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
->>>>> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
->>>>> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
->>>>
->>>>
->>>> Could we align on one kind of check,  For J721E check is done against
->>>> board-id, whereas for J7200 checking
->>>
->>> We should look at figuring out how to split this file in two.  One for
->>> "generic J721E systems" and one for "TI EVMs", as I've mentioned in
->>> other threads, so that it's easier for custom platforms to drop code
->>> they don' require.
->>>
->>
->> Yes that does make sense. Would it be okay if we solve that problem
->> separately in a different patch series? We can move along with this current
->> series for now (after making the required change in CONFIG/board-id for v2)
->> since ESM support is important for these platforms.
-> 
-> Well, I think part of the answer to your question is (and this is a more
-> general TI one too), what outstanding changes need to come in now to
-> make existing platforms functional for v2024.01 ? My first thought is
-> that this series would be taken to -next, if I took it now, which means
-> there's time before it would be in master, and so if it really makes the
-> re-org later easier, we could take it, but if not, can we re-org then do
-> this? But if we need this to deal with regressions, OK, yes, we can take
-> it like this now.
-> 
+--dwyeotoas7e2epcf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Maybe focusing on the re-org after having in the changes would help give more 
-perspective on how we can split? Not sure just a thought... in that case I 
-prefer taking this in and having a working error signaling module in rather than 
-delaying it if that's okay.
+On Fri, Nov 17, 2023 at 10:04:53AM +0800, Jim Liu wrote:
+> Add bb_miiphy_bus function for designware bitbang feature.
+>=20
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> ---
+> Changes for v2:
+>    - add bitbang delay dts read
+>    - modify printf to debug
+> ---
+>  drivers/net/designware.c | 105 +++++++++++++++++++++++++++++++++++++++
+>  drivers/net/designware.h |   5 ++
+>  2 files changed, 110 insertions(+)
+>=20
+> diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+> index a174344b3e..e86f96fc1a 100644
+> --- a/drivers/net/designware.c
+> +++ b/drivers/net/designware.c
+> @@ -767,6 +767,31 @@ int designware_eth_probe(struct udevice *dev)
+>  	priv->bus =3D miiphy_get_dev_by_name(dev->name);
+>  	priv->dev =3D dev;
+> =20
+> +#if defined(CONFIG_BITBANGMII) && CONFIG_IS_ENABLED(DM_GPIO)
+> +	if (dev_read_bool(dev, "snps,bitbang-mii")) {
+> +		debug("\n%s: use bitbang mii..\n", dev->name);
+> +		ret =3D gpio_request_by_name(dev, "snps,mdc-gpio", 0,
+> +                                &priv->mdc_gpio, GPIOD_IS_OUT | GPIOD_IS=
+_OUT_ACTIVE);
+> +		if (ret) {
+> +			printf("no mdc-gpio\n");
+> +			return ret;
+> +		}
+> +		ret =3D gpio_request_by_name(dev, "snps,mdio-gpio", 0,
+> +                                &priv->mdio_gpio, GPIOD_IS_OUT | GPIOD_I=
+S_OUT_ACTIVE);
+> +		if (ret) {
+> +			printf("no mdio-gpio\n");
+> +			return ret;
+> +		}
+> +
+> +		priv->bb_delay =3D dev_read_u32_default(dev, "snps,bitbang-delay", 1);
+> +
+> +		bb_miiphy_buses[0].priv =3D priv;
+> +		sprintf(bb_miiphy_buses[0].name, dev->name);
 
--- 
-Thanking You
-Neha Malcom Francis
+If designware_eth_probe() is called for multiple Ethernet interfaces
+then only the last interface to be probed will have a working MDIO bus.
+
+We should either support multiple buses here or raise an error if there
+is an attempt to probe a second interface.
+
+(I spotted the same issue in the ravb driver while extending it to
+support a board with two Ethernet interfaces)
+
+Thanks,
+Paul
+
+--dwyeotoas7e2epcf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZVclogAKCRDbaV4Vf/JG
+vXJKAP9gwVAw3xYoEuqtFQmGbOKicfdEI/onK4LYpMGvyduxlgEAw8xx1ffdqmC5
+Vi3bC7KUxNvLDzxaudycU+bG/UhdgQs=
+=H/G9
+-----END PGP SIGNATURE-----
+
+--dwyeotoas7e2epcf--
