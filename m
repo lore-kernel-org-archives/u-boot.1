@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C85C2C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 19:42:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63318C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 19:42:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 713C886EC9;
+	by phobos.denx.de (Postfix) with ESMTP id DDEB5870A2;
 	Fri, 17 Nov 2023 20:42:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZOTV8vvH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E7GsoRUR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B01E986EC9; Fri, 17 Nov 2023 20:42:05 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id C284786DEE; Fri, 17 Nov 2023 20:42:05 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51EA686F6C
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 20:41:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 816A486EE2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 20:42:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-778925998cbso143102085a.0
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 11:41:59 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-778a20df8c3so145154985a.3
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 11:42:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700250118; x=1700854918; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700250122; x=1700854922; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=znLiuTm80zAh3M+hMK+UN7ZOL1GnMoVLo8se/WR/tGA=;
- b=ZOTV8vvHN0yAEjLSBEE4p6nnxGHZ2u47oH7sEpE7k/YBFQ9Te7YU352Yb+utL+E46o
- RjYf+jUxADSQ8QjTIoDI39k7Cv3ybqlyiKtSW/wdDgJuulp8WHOgxO0kQwuKj8rjQ+4V
- epl4JLOP7OrQh+89Xxwzx4Kv0Q4jcy93pYN6k=
+ bh=JusrKhRXeVpAQ6PisLjcbG3zXtAcvSzPpOalnpYk5JM=;
+ b=E7GsoRURIepQqR5uYHCZTCf6N8YPNrv4fcYFXNCGPEHeFFl08VMFcELKxSroafiPpy
+ vm3YCBR6k34xktVGTqxmX9u2tF+AD4mykLB2cicLTX615I6C8vyH+MmEtR9HBv8Q7Upw
+ zbDhLKrecIBAUI039Ol14PqVWCF6QWn6Ua75E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700250118; x=1700854918;
+ d=1e100.net; s=20230601; t=1700250122; x=1700854922;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=znLiuTm80zAh3M+hMK+UN7ZOL1GnMoVLo8se/WR/tGA=;
- b=syMT6aIDQakDgc1M3lGsVYMj3T1lsDrQef1VrYI8d1G7BMrddv0nCjL2hTuqLFUgr9
- u1lN0z/nHG+BUTRMVpvmN/cOMXaptqTa/s1jMn97r/VZ4f4bm1qMTtVGmWEe6yUaPhs0
- EUfcUhjv6UNX2zerzn23631Ivy1anLQqVVfwDHoqxndVd5heD0Kb2UUxMTw1SxdUpW5n
- bvIzjwwai0swbHBvdT2FEN6/8wU5GT4isRT41ACbS3jQAopmnalAJPFYuik+jpRNZmmM
- V0EsmD38s3dkTb3x+8oev1fhAOtZaGp39t+6+qyFzfrZOnUYvK4AoudU60ZwQZo+SyyV
- 4P1A==
-X-Gm-Message-State: AOJu0YwE0iMmIPfQma/EknN6I6HwpnaFoKfhlDjEAetU5nvLR6IVLsji
- CzJcHpgPa1kvfxFNLX+LpIDEUw==
-X-Google-Smtp-Source: AGHT+IGpj0oR6fMPzEd216UgkcniogafdcA4uMqZWuVGLGgtfelIW/jfPN4RIZSPGhRg0wTOuTmU9Q==
-X-Received: by 2002:a05:620a:15af:b0:779:e118:a025 with SMTP id
- f15-20020a05620a15af00b00779e118a025mr537844qkk.34.1700250118090; 
- Fri, 17 Nov 2023 11:41:58 -0800 (PST)
+ bh=JusrKhRXeVpAQ6PisLjcbG3zXtAcvSzPpOalnpYk5JM=;
+ b=ENheiqmDUe2GiLN7vsd21TiG6p3dZkwMK14Izy0stIn51GSzZjLTHvUfkr71MfCMP3
+ gIGA0Tfij6O0b8dKK+iIH5VwsMHfGZGv7I0Y79+UexGSWkX5L+ZDJuXdY+iIprll9xcY
+ 6njxGnhLhgPo2qPIuRfFcJXmaWhDUDg5B92Fi8t6c0lNI8Gx4VzWjw857/lp3hQm1VM4
+ KDE60IzboBbmafh03+WNkXu2yAP8/JhP6Mtl/65xpUq8h6NFs4V4SFn0HtwMQVVzlVSi
+ erJ156G4oB+myOR3eAD0Mm6WCZodnKJdyNTV07+AWqaC6VDs5BvFC8luHRlprkwmXwAW
+ 1q2Q==
+X-Gm-Message-State: AOJu0Yx0ikWNj8eRRcVaHzr+B96i3+2Y/0vOxFp9AMFm3+d6DSOTzHpP
+ ekDX54SploRAJTnf9ruPhdTtgw==
+X-Google-Smtp-Source: AGHT+IHTly14vypiKxv0EbdnUk2gZMrG74EZVYu9ScKQ8ULo4+Sz+LNTH0PIbCz+nubSxy6weVFL7w==
+X-Received: by 2002:a05:620a:3955:b0:779:f0a1:3128 with SMTP id
+ qs21-20020a05620a395500b00779f0a13128mr585494qkn.63.1700250122330; 
+ Fri, 17 Nov 2023 11:42:02 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- tl11-20020a05620a3b0b00b007789072e445sm839112qkn.31.2023.11.17.11.41.57
+ p25-20020a05620a113900b00767dcf6f4adsm821104qkk.51.2023.11.17.11.42.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 11:41:57 -0800 (PST)
-Date: Fri, 17 Nov 2023 14:41:55 -0500
+ Fri, 17 Nov 2023 11:42:01 -0800 (PST)
+Date: Fri, 17 Nov 2023 14:42:00 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Chris Packham <judge.packham@gmail.com>
-Cc: =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
- u-boot <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Marc Zyngier <maz@kernel.org>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Will Deacon <willdeacon@google.com>,
- Ye Li <ye.li@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- meitao <meitaogao@asrmicro.com>, Alistair Delva <adelva@google.com>
-Subject: Re: [PATCH 0/3] Revert HAFDBS changes
-Message-ID: <20231117194155.GR170968@bill-the-cat>
-References: <20231027002409.430285-1-judge.packham@gmail.com>
- <20231027094947.bhtwngq26e3loya5@google.com>
- <20231027172237.GB496310@bill-the-cat>
- <20231109213348.GP6601@bill-the-cat>
- <CAFOYHZAbkKLuC9KiH0KNz7hj31QsYohmJRCgu-Pk_yr4yXtEDw@mail.gmail.com>
+To: Marcel Ziswiler <marcel@ziswiler.com>
+Cc: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefano Babic <sbabic@denx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH v1 1/2] imx: spl_imx_romapi: fix comment about
+ stream(usb) download failure
+Message-ID: <20231117194200.GS170968@bill-the-cat>
+References: <20231026073220.244387-1-marcel@ziswiler.com>
+ <20231026073220.244387-2-marcel@ziswiler.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4J65dpR1ZI22kJKl"
+ protocol="application/pgp-signature"; boundary="g1fJ62k5+z+tRtwP"
 Content-Disposition: inline
-In-Reply-To: <CAFOYHZAbkKLuC9KiH0KNz7hj31QsYohmJRCgu-Pk_yr4yXtEDw@mail.gmail.com>
+In-Reply-To: <20231026073220.244387-2-marcel@ziswiler.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,90 +98,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4J65dpR1ZI22kJKl
-Content-Type: text/plain; charset=iso-8859-1
+--g1fJ62k5+z+tRtwP
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 10, 2023 at 06:38:40PM +1300, Chris Packham wrote:
-> On Fri, 10 Nov 2023, 10:33 am Tom Rini, <trini@konsulko.com> wrote:
->=20
-> > On Fri, Oct 27, 2023 at 01:22:37PM -0400, Tom Rini wrote:
-> > > On Fri, Oct 27, 2023 at 10:49:47AM +0100, Pierre-Cl=E9ment Tosi wrote:
-> > > > Hi Chris,
-> > > >
-> > > > On Fri, Oct 27, 2023 at 01:23:51PM +1300, Chris Packham wrote:
-> > > > > As discussed this series reverts the HAFDBS changes that caused an
-> > issue
-> > > > > on AC5/AC5X. I think there are some improvements that can be made=
- to
-> > the
-> > > > > initial memory map for the AC5/AC5X but so far nothing I've found
-> > makes
-> > > > > it compatible with the HAFDBS changes.
-> > > >
-> > > > Would you mind briefly explaining what those issues are and/or point
-> > me to the
-> > > > discussion where it was decided to revert these patches?
-> > > >
-> > > > The feature is quite useful for users of CONFIG_CMO_BY_VA_ONLY, to
-> > speed up the
-> > > > boot sequence: instead of reverting these patches altogether, would=
- a
-> > reasonable
-> > > > alternative be to put them behind a build option?
-> > > >
-> > > > Also, could you confirm that the "initial memory map" you are
-> > referring to above
-> > > > only describes actual memory as, IIRC, some boards were using mappi=
-ngs
-> > **much**
-> > > > larger than their DRAM address space?
-> > >
-> > > The most details are in this thread:
-> > >
-> > https://lore.kernel.org/u-boot/CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=3DJ0=
-oHyvN75bTaCUw@mail.gmail.com/
-> > > with some follow-up in:
-> > >
-> > https://lore.kernel.org/u-boot/CAFOYHZB7jJWwD24oWzx6u55w2whHYjK56f=3DQy=
-N0LWU4Z8dSP+Q@mail.gmail.com/
-> >
-> > Checking to see if you have any feedback for these platforms? I would
-> > like to have them working again one way or another in v2024.01, thanks.
-> >
->=20
-> Either this series or
-> https://lore.kernel.org/u-boot/20231018205358.1557234-1-judge.packham@gma=
-il.com/
-> will get the AC5X boards back working. I'm out of other ideas but happy to
-> test patches.
+On Thu, Oct 26, 2023 at 09:32:19AM +0200, Marcel Ziswiler wrote:
 
-Following up here on the cover letter as well that I've applied the
-revert for now. I'm happy to revert the revert if we can get the AC5X
-platforms fixed, and perhaps a little documentation about what was going
-wrong as I believe the other thread at least hinted that other platforms
-might be doing a workaround as well but didn't spell out why.
+> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>=20
+> Fix comment about Stream(USB) download failure.
+>=20
+> Fixes: 1cbebc786276 ("imx: add rom api support")
+> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---4J65dpR1ZI22kJKl
+--g1fJ62k5+z+tRtwP
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXwgAACgkQFHw5/5Y0
-tyxhBwwAiz9AtttYVOg7C5j+NeB/LinF7bY8bcODqEETbqUL+9rZyLyAT+sZlOQm
-qWOcDxVVdCFkea8mkl5NAWYCNCpyGxT9+6A3E3G6G4Idn9vXvlZBgTYJyNBYk4zU
-JBlDoyVrBEHMOWVbe9H6bSyyefQhtUm/PjEdCCrR2ov4CVYx2SuQvXYJLU7QH80a
-gry90BHIxnjoVFU//M1EM9+Y05vYdVfbe6f3J9sah7YlezOSpdh7ZJInMPyu7po+
-E7tK1elyfIEX1HHiu0vKw8KhgR4mtYyvxtIQhcJGiIrh7n412ui2Xy1p0jYS8KyN
-iE/1ECUUltjRj2KIE8m2G3E3UZwbCMxsPlN5lGRLxjV7mD9S7YsNrg8vAGb1cXUB
-B21dNjzdC6nTHbJtU/HPJ1EjCXLO60IjkDMac9Zws8oBrZCVFV8dU8Jl/gjiO6cm
-POgiliRPcCiAtukwX65ZJuQQ/OQ1O0IwZP12aTFAiTGfOCb7gkiXJv98nJCRlOSD
-P4I1IEQP
-=j0UJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXwggACgkQFHw5/5Y0
+tyy6Wwv/Q9qs7xGibJvdiLHDUl44tLkTkbInRSowOhPpY3by5iPwEcDp4yJGWzAY
+wczVyJQSA4nYxcyBEMXwcCVAaOqyY4NL5VOmm8outbw7Jx/UhBeZt3ewTgrbntJT
+vSwWSsQw3LarAt8iIo6aPWQ5AofXfsvG4T24i9RMAJBLp3aarxSglP14yAmZzUuB
+SUbVwfgMwNhQ4HfdRsJ/zajDOhV6p3nQB2dD2kQgdjZ6M/HoJ24P5xVp6LJio8rw
+UurWDi81JccmoxVzyTO0kvampAYwbhOjYT5oHrdVe41fk7rA5/1hV/aaQ6aA93U3
+n182qNlctgAU9MK5Bmp3siyMCCh19J/QX4Q5n9NDM4cUM5as0pV7nEh3wV8/8w4+
+eKCGOizy+spMNEw2I8J4yaMcQMFek9OpJNlZ1MXnowKkxjEqYSVMDOj3C32toXuZ
+wEihDUIByNpHTi4rtB9+c0qUP7Y2CrDgB4iDYl3UZahEcC5tJJQ/ygXoVA38hWmX
+9pndSD/T
+=MOz6
 -----END PGP SIGNATURE-----
 
---4J65dpR1ZI22kJKl--
+--g1fJ62k5+z+tRtwP--
