@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BDE6C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 21:22:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A767C54FB9
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 21:22:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4DAE874DE;
-	Fri, 17 Nov 2023 22:22:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70540874FB;
+	Fri, 17 Nov 2023 22:22:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="f9xDcl0e";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="CpdtvX70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 553BA874FD; Fri, 17 Nov 2023 22:22:01 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id B247687500; Fri, 17 Nov 2023 22:22:01 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25C76874F6
+ by phobos.denx.de (Postfix) with ESMTPS id C8989874EB
  for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 22:21:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32d9d8284abso1580118f8f.3
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-32f7abbb8b4so1568317f8f.0
  for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 13:21:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700256118; x=1700860918;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700256119; x=1700860919;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n49Enfsq+O+OaWtRv4lW0fr1tptAe9PunBsSitoO6Y0=;
- b=f9xDcl0eVZJqkwggpzTzrmHv2Bk3eqaHahX8AxiPhdof9cdVT1QvjXNC2OdLrXESc7
- 0rUAWMEX/IlrKj8Na0lL+uN7YSmimR/cmdmt/cOQypZqW9cuEl8iumTmI13JHt0b5bv0
- Wf8z6aXDqObFYKxlVQgDvEZawT7+ZIeKEzeJ7qcH+VNN8ODhopIY0Ggv1r9SDQsDqbC6
- ijbkMvF5CuGAZUOIUgsMC/epxNi4xkUYy9hxMBfUGH56K0UOgV1XPFtr1n5lkk/TSAQg
- s9Fq5brjzLOoy/wHN+FUEIuOM1ws9viQliOo6Pt/WFet7bKAbs6TXX/W/uaHP4TYvvUI
- rqAA==
+ bh=ynuH2028f8KnFWflJGE0N65LAnse1efDqjBRSAzKZ8w=;
+ b=CpdtvX704JZNeVjHqQDse8sP6NUZZCfsZf++DybgyP6y5lyqUUTj6EAL4GoOu7ZJGu
+ zVaq0y9pVcJqM/fzDy1BP0ryRBkKmSHy24nAZr7fbnSxP/vajM0KmEYaT94Kd1p44fhR
+ qsh/lb72Xc+5BMr/wWxICXLfrnlChETCQOIByc++svoN8mDbe0oSp8fMgjLjJHcP6TgI
+ UKfid/UnAGi7ku+o6ksPBIKzg/nZbm3pBAV4QpIN6aGLuSD6pi6RjW/QIE3N1ksaNR/Y
+ 5uuG8Ndi0bc6HF6RD6st9ZH6mIwu5qQlMMc1lmamOcyinMRaooLzzwsk7rxFX1nWH9CK
+ oGJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700256118; x=1700860918;
+ d=1e100.net; s=20230601; t=1700256119; x=1700860919;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n49Enfsq+O+OaWtRv4lW0fr1tptAe9PunBsSitoO6Y0=;
- b=RBnSNrPLO7zOWQCZAoaR2c8z1K11XdoW6GkHSTV1JHZKZ/vnBpQ7cqE3BZ1XE4CmxH
- AiSwhH15kl95fXEizySMBimlIYZ6Tgdoe+2CwowKvxYUPx5+kt6Bag2MaTKQGDkbZFIc
- HdgwNeS6kt3bip/pHqGrfuqNEOSNjUCo+h4RThlXaqT1RIEfz0Dk0prWZv2mbLurjZFU
- ezayDHMNBMU7fmCxMQMk4e4l6uqRVJi8GOuHO6RQmS3onoJXDG6T/rFJTnQQETg/hUOy
- /d0GmzqPOt9VYinpprS9mTDJY07jV4PG0pskW/O/IIBW2Lz/cIwBBu6s9so67dkNTW8e
- 49uw==
-X-Gm-Message-State: AOJu0YyBM2I1Cceic4m3nQ1ztuz58hZLRE5dePmZmrFdW6x677edTPQL
- DFd7hdgfJec0QZeVRcS3hNwMaPyiC25F/Cyht2nCV47qvbw=
-X-Google-Smtp-Source: AGHT+IGNL610R2gwdvxhvdT/Uo7jDTW79eeAjO9iZih8vCi1Ka29YZAvIuu5D2STelX5qLgbwIe6nA==
-X-Received: by 2002:a5d:588c:0:b0:321:6bed:1646 with SMTP id
- n12-20020a5d588c000000b003216bed1646mr171630wrf.14.1700256118263; 
- Fri, 17 Nov 2023 13:21:58 -0800 (PST)
+ bh=ynuH2028f8KnFWflJGE0N65LAnse1efDqjBRSAzKZ8w=;
+ b=PXtF0cy8Vg6+DefZX+qdN1zF/YAyM/2iPNQEcmxmeOBnh03zRMb48LE8SfZ1BU5gqP
+ wwT0/vU1vwJuWBsykmJCNDykQxVwQnFsCZ8cveM8gyUpTK/ZWCmG8WO2caxu3vIZ4eC/
+ ZfGH+DONCYUMbo2rDFtWYcc1anXkYHLUAcAWoQ37V17uqGg/XzTvZBFaiervqjFSUWPE
+ A/5cmFpdgcO25hRsQLZcg39cEtAbQgCXRb1042bNOH267ODL7uav/XxODsJFr9IJQ10v
+ 8vVN7d2egNEx3gWh6Xm3j2jBoZpWrfnxsoK8WwpmNBRR/GLi8+H1F3dPLfoQ6yKLCACW
+ gnSg==
+X-Gm-Message-State: AOJu0YzD+BQTtvBnqBy4851cFa47GDm9PSD6jIxTwkxtK9TbZuWP2AQC
+ q28Swvgq1SpHY4Zry634FLIPYjest8E/PAzP7jWxd9v8Y9g=
+X-Google-Smtp-Source: AGHT+IGeiayU3i/PulQqb0DRmTuUzaHFvoWeHJWaLM4jejTThBlns+aQ3oHYRlFDQuWvUXwyI8xKWw==
+X-Received: by 2002:a5d:4088:0:b0:32d:a98c:aa20 with SMTP id
+ o8-20020a5d4088000000b0032da98caa20mr169142wrp.59.1700256119000; 
+ Fri, 17 Nov 2023 13:21:59 -0800 (PST)
 Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
  [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- t6-20020adff046000000b0032d9a1f2ec3sm3393540wro.27.2023.11.17.13.21.57
+ t6-20020adff046000000b0032d9a1f2ec3sm3393540wro.27.2023.11.17.13.21.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 13:21:57 -0800 (PST)
+ Fri, 17 Nov 2023 13:21:58 -0800 (PST)
 From: Shantur Rathore <i@shantur.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, xypron.glpk@gmx.de,
  Shantur Rathore <i@shantur.com>
-Subject: [PATCH v2 2/4] bootflow: bootmeth_efi: Don't set bootdev again
-Date: Fri, 17 Nov 2023 21:20:37 +0000
-Message-Id: <20231117212039.1210784-3-i@shantur.com>
+Subject: [PATCH v2 3/4] bootflow: bootmeth_efi: Handle fdt not available.
+Date: Fri, 17 Nov 2023 21:20:38 +0000
+Message-Id: <20231117212039.1210784-4-i@shantur.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231117212039.1210784-1-i@shantur.com>
 References: <20231117212039.1210784-1-i@shantur.com>
@@ -92,28 +92,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-efi_set_bootdev is already called as part of tftp while doing dhcp_run()
-Doing this again crashes U-boot and we don't need to call again.
+While booting with efi, if fdt isn't available externally,
+just use the built-in one.
 
 Signed-off-by: Shantur Rathore <i@shantur.com>
 ---
- boot/bootmeth_efi.c | 3 ---
- 1 file changed, 3 deletions(-)
+ boot/bootmeth_efi.c | 10 +++++++++-
+ include/bootflow.h  |  1 +
+ 2 files changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index 682cf5b23b..5917458dc5 100644
+index 5917458dc5..5e67afed88 100644
 --- a/boot/bootmeth_efi.c
 +++ b/boot/bootmeth_efi.c
-@@ -360,9 +360,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 		return log_msg_ret("sz", -EINVAL);
- 	bflow->size = size;
+@@ -313,6 +313,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 		 */
+ 	} else {
+ 		log_debug("No device tree available\n");
++		bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
+ 	}
  
--	/* do the hideous EFI hack */
--	efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
--			bflow->size);
+ 	return 0;
+@@ -382,6 +383,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 		bflow->fdt_addr = fdt_addr;
+ 	} else {
+ 		log_debug("No device tree available\n");
++		bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
+ 	}
  
- 	/* read the DT file also */
- 	fdt_addr_str = env_get("fdt_addr_r");
+ 	bflow->state = BOOTFLOWST_READY;
+@@ -443,7 +445,13 @@ static int distro_efi_boot(struct udevice *dev, struct bootflow *bflow)
+ 	 * At some point we can add a real interface to bootefi so we can call
+ 	 * this directly. For now, go through the CLI, like distro boot.
+ 	 */
+-	snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
++	if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
++		log_debug("Booting with built-in fdt\n");
++		snprintf(cmd, sizeof(cmd), "bootefi %lx", kernel);
++	} else {
++		snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
++	}
++
+ 	if (run_command(cmd, 0))
+ 		return log_msg_ret("run", -EINVAL);
+ 
+diff --git a/include/bootflow.h b/include/bootflow.h
+index fede8f22a2..3890cd4bc2 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -49,6 +49,7 @@ enum bootflow_state_t {
+ enum bootflow_flags_t {
+ 	BOOTFLOWF_USE_PRIOR_FDT	= 1 << 0,
+ 	BOOTFLOWF_STATIC_BUF	= 1 << 1,
++	BOOTFLOWF_USE_BUILTIN_FDT	= 1 << 2,
+ };
+ 
+ /**
 -- 
 2.40.1
 
