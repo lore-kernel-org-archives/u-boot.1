@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C46AC5ACB3
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 11:39:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17137C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 11:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19D9D874DA;
-	Fri, 17 Nov 2023 12:38:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FF088700A;
+	Fri, 17 Nov 2023 12:38:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="QglaFfWG";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="UpjGrO16";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAB4086FEF; Fri, 17 Nov 2023 12:38:42 +0100 (CET)
+ id A584F874C3; Fri, 17 Nov 2023 12:38:46 +0100 (CET)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20724.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::724])
+ (mail-db8eur05on20730.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::730])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 798C7874A1
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 12:38:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 152A48700A
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 12:38:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ina49ezH+GBwSQ2lPBcurHcmG46B7AUAN/d1oq4t/rPNcGuNnMy8iVmH1grXuG4If0MSvozp91YN6MZNN5DjjXCjTrHDiyh/BLMZhR/mW8UL5D7jeL0wTWP5Huu8ebpQwYW8NtplQVGZyfRyjY8xQX1mqK6wHx89vnK1Haa7dq9HAO2OdFSLp2FQons4elp7nh0uUwz40xrecuZ8H7NOqvIy0TEmQCKGVFKliV1y3LcX8O/s/xmCKJBtJqQQBYqi//0nm15ExRYBx09ifsHXj1gnXlXuCIu6ZhfzuLa4Img7gEeufAIgKcmtOZz6+QJLhPWxs/1DGXTgymzfuIfS2g==
+ b=cXlCDTbGVptmN4ySo08FZu3w2DF8+lU00EVsv1kkEifWBkFVLOU0DuxjrMcbNMB02PRH50K7nPrysHcZWL/V+4EZGQcEAwDuQUIF+pXhE7x+tVPn+9HJHXonLPL1TCC3YMz3MI08BKygKjLqN1dOkLwra59iHWSk9xhAaL+MxXi9ZNRG7luZReLwGP+EVusyjRFYShqF3JY2VlcjVlg9TnoveSyx5UmDwK6CLZoUNM5rRMIeX/SdnIoobGN3s61ZvT0ryZ8iOFe870ZEyD9yP6/SACizYsHBnWW67n4HcsLipAvBvcNq5XFQW9ivI5IpMsVDYNp6BVMCyjobLa9W5A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bOpKsrW+ICNeNcBe54IP0ktuQesHn6Px/9wxnX42YAc=;
- b=cohm79wzCGOCFNipS6ac0196l3YCxz7FiiHme8poMPtlNqEyKZyTAWJzCjSmmFifLxoYUxo/asAthAJCj16rTPsbKFHDsXT/M+qF/gWrQj2lNH3XrKRgo4KeX4+T2aOFceAU4naNBtiAWxLcs0Ez5foKenCn7bw2Tmfktda42KezVBpEsspU20Yj3ZIc9A3oe2MuHreQjJXu1c88oxCybLoEYHHP0EozZ32QiXptMEtuejsrh5fAAGmcJJugnjIbvBOE2eFt2une9gKRZ9e2WSeOC70V7LM1r02HaaFWt2NQwTrlHZxHNOx9cwSORM57odPyHYg7S/+mhzTv/jiHXw==
+ bh=6fSI7/xn02EatSRAaXuthuJNosdTzLuB9JzGwKeIGPk=;
+ b=NXHYGMt9vWEV9Xmmi7RPsqNYd+FM4Nw+bdlONw/ZjcZWHRf9h6z6mDm4eVj5xvzvsg/OrcoEeRUYraABbeY9UpXfSH560w8fbFMtAMxUXda7V6q6/Uid0GuYgLm2aEQmSQKwO8r2cI5keN8uxWzrFkialFiaKi/0Q7/g4F8SfV5xaA5sUXuaauJw47nWtoJcfRqmFJnpjM67mScEHWn1WAvA47QJzUe0S47oiTr6TUKnDwUnvEnd5lfo9FWJ4Fg7JX2Sz5uT0FNgQxMSDbxZEv9iAqUsBTYPMGhq587bIoz6SZJ63p/O6AuxyOp4gnzTZ1n5bRCsh+3zUrdi+xrM1w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bOpKsrW+ICNeNcBe54IP0ktuQesHn6Px/9wxnX42YAc=;
- b=QglaFfWG009/F8ZJVNZ8YeSJhFkAuEOZKa58H/2dY7W4+hzWirVnUNV6h5C0/ESuVRkLk4f9uuyJESDBaSA/bhzL7+ewuePuZXHWsK5PYQYZ/uqUnrKcFVeiJaVx52bOgLfRAdFLiCA1ewhRIrsPPJjfEDqztAvQNOJ6033hMWY=
+ bh=6fSI7/xn02EatSRAaXuthuJNosdTzLuB9JzGwKeIGPk=;
+ b=UpjGrO162OORxH8KrlnG8dkANpMXXOPG0IK4DlXnXP5RqvPvFOTVVJDey6FeajEhlEPZXERtV7oJM7AHK3UezqJh9XXjf0h0TinO0PZLyTdCz9xs0J/lWdkfkK/PcjzED+xPZgpHs/KFHgmPgKg3wvitLmFOhLRBzAufXYt+Sis=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
  by VI1PR10MB3664.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:13f::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7002.23; Fri, 17 Nov
- 2023 11:38:24 +0000
+ 2023 11:38:22 +0000
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8bd9:31bc:d048:af15]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::8bd9:31bc:d048:af15%5]) with mapi id 15.20.7002.021; Fri, 17 Nov 2023
- 11:38:24 +0000
+ 11:38:22 +0000
 From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
@@ -59,9 +59,10 @@ Cc: Marek Vasut <marex@denx.de>,
  Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>,
  Christian Gmeiner <christian.gmeiner@gmail.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH v2 4/6] led: led_gpio: use led_bind_generic() helper
-Date: Fri, 17 Nov 2023 12:38:09 +0100
-Message-Id: <20231117113811.149329-5-rasmus.villemoes@prevas.dk>
+Subject: [PATCH v2 2/6] led-uclass: do not create fallback label for top-level
+ node
+Date: Fri, 17 Nov 2023 12:38:07 +0100
+Message-Id: <20231117113811.149329-3-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.40.1.1.g1c60b9335d
 In-Reply-To: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
 References: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
@@ -73,53 +74,53 @@ X-ClientProxiedBy: GVX0EPF0000FA93.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|VI1PR10MB3664:EE_
-X-MS-Office365-Filtering-Correlation-Id: be91a5ed-7f4a-475d-d081-08dbe761b4ff
+X-MS-Office365-Filtering-Correlation-Id: e1892985-25fd-4ac4-85cd-08dbe761b418
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ZUehenPnHTVNHEV/VJfE8qRqDZ88eTRmwL/OacWYkOLf591VrRogPhfiibuxz3+hPUVf6XStZGyyL0hloC41f2Y5XO1fIQBb5HRAgXBmSRHnTKsh0gzWcyGCPDFUZjApjP34S/x58AVuXAy0/MBaGdqEmnoGs0EMj4lPIEd2LlWGHudtYe0LIga6MsnGx0K0uwpIqQlZXed4gCCQKfdDXmKLOzuJ/RIpu7mYBZOlVMsU73ehjcyUa3zL/PyK5yn5HDVOQTX+yvmpAlZew2BMO9QWvKwXKZZwHXWy4qYSXSahS9IVp583YJtZ8uIdqajVYfwqf5WT0AAeTFe+yWxIK+J568JpfGoHzXuqkxo1x+OHNVTSLXug1bmvHkF+9Y+YMuK3O1FaOwutKDALWEy6QTIsBfGgHZxEPLNIVKihVkE4qC+6FhB3+Wi0DDAw5neNUCkLBKpBqfgJw8cbmWxBv+kmM8m7KMzNJmOtXZx09H4XnHV3xDjXpDhpG+LtIzO4AIYxfUTYg0SeVUkq56bE752d72mrR1V1WTN+9tu8UQWeqv7SeQylDkdILISoaXtc9oNG4qflDE1yxD+lT0rqSqAmFFU6/vi15HphqXJbdyrZnSrtvWHUp+EV5naDDOZkK81BR//c4JqE9346ImF+CA==
+X-Microsoft-Antispam-Message-Info: NfUuPVSubpPXPg2WUMaiLDVoOcOK3kiGw1srnuxz+Qkvwm+OL6LYlWPi9BprnQb8Z06jyZVrwsBqVoTQoB2i73ch/wXCkCB9qLSGbP24JDicKyr5wmZlfHT1kYDqU1XsfSVHIYoBSxpGFyem0AgVLQ/NODXYRTSKRszKsL9jWyZucpKJ1l6rHK89ZGwxSK/CsPZ4UOsXYrrEJitDnB2IidV+I4gZpJszJl7I5TiLEysZTKn8hKHGjEhLOIv8QwNksKmkqjdKGAwDCrPz/yIdigj8wjz7g1IlyFfj/sdQ+c+LXMz/wJr6oS+Z3AXz+ifjP+tV/tex6+Ckg5UlLJz3TJtgLz28Lh85t3L4VUxpt2zmNYEePMgRP6+jyjvQqn/Wpzhh6QZ74H+IxrHsFhTT0o2qo0BXrr7snmfnFPJD2fq3m65qwST9+9QO6KDc5Mtnrhwvpwd1GOA6CPfLg/HXS5Ov5QCffwdTaI1wxA2Mcb9LKhWTljqezXsM2zWW7MVFBb0XVoABGVVe9gb5SPAjMEgpCzY/+c6QtOogs3YugSczSwWiqS7jAXEzMQE3nO+I+qsFXF2Xl4saQX2/9yKgy9p9AmNFZYONb9UyF7Pg0pCXfE5bDakehW70xwnLY/Yy
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(366004)(376002)(39840400004)(136003)(346002)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(52116002)(6506007)(6512007)(36756003)(6486002)(41300700001)(8976002)(8936002)(4744005)(6666004)(107886003)(5660300002)(86362001)(1076003)(8676002)(4326008)(38100700002)(26005)(2906002)(44832011)(83380400001)(66476007)(66556008)(54906003)(66946007)(478600001)(6916009)(316002)(2616005)(41533002);
+ SFS:(13230031)(396003)(366004)(376002)(39840400004)(136003)(346002)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(38350700005)(52116002)(6506007)(6512007)(36756003)(6486002)(41300700001)(8976002)(8936002)(6666004)(107886003)(5660300002)(86362001)(1076003)(8676002)(4326008)(38100700002)(26005)(2906002)(44832011)(83380400001)(66476007)(66556008)(54906003)(66946007)(478600001)(6916009)(316002)(2616005);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MP4LEZK1sZAU6w3Uk7eMe0G5f+w9Px38GLfgeHlfL3Q5cG+A435qDlI48e9S?=
- =?us-ascii?Q?sJFPN6tQ0BKUZi2y3AxT5Mihz8Ol77sLML0xlRbNCpsVBfwGlmAj42QyJPvA?=
- =?us-ascii?Q?pF3oXgYIy4EaMdxpTPNr9wNY5SyGhoEdnXVioYs5YEtuwZK9DgFr3LjM9h+N?=
- =?us-ascii?Q?RUiQeEIjb+4J/KXf9vDScol5mkHArNkyA0KaEgRW8fByz0qRdhvVQqkMV0Ga?=
- =?us-ascii?Q?O4ox5uQy09ablfAOCQykLm0buZcdH2Leyy98MYPqoiV0u7aeSXk1egSgVfzV?=
- =?us-ascii?Q?oyBBpTKEo8y5jl6JBnT4v5Jos6RFvQF9s1XgHX8mTu7WE9KDBsOWPekv4iRO?=
- =?us-ascii?Q?1KEvdHlPxLuhVFKmeEvFTGm0ntfswuQz0U3LKajiCGg/uoZevuJ5mBaiRf+1?=
- =?us-ascii?Q?n3Qh0hG2dvoYIEBXzNl5TuqdfifJGn3HVOI4ZbMDt6MofJF86Rprq7ZYDejm?=
- =?us-ascii?Q?A6XJZV5BNqOjkoKxlw3NP1UwZkGnbGbK+E7pYU2ea1z+1Y32oxNcJ9LLaFQF?=
- =?us-ascii?Q?XfqgIJlk+WtlgPtlIhcrEFbIiZGpDgEv3xxXNCJaOdzE+adblWCJUnixkvWx?=
- =?us-ascii?Q?iJsVAV/X+XxO5JqOHMotC4jUanVo6Cbe1oAdBkTtJbLKeZsIiE7XwXQirqjy?=
- =?us-ascii?Q?JjfH4oiyNfKmYWUVGBiQK6byn03MSq6eSZH4HTonxr4tF8O2ekHbnzky4uL/?=
- =?us-ascii?Q?oWO1US+DEBXyWf9eRAIv3KJn6qJPMQ78Er1b8HgLWebVU5ZtlPEtgmAdAkIF?=
- =?us-ascii?Q?2Mb0/04NJKxeeLEmFxNhxNadJWiU09uUyI2bBmnmWjygc+slzW5oLlIhm3Ax?=
- =?us-ascii?Q?6xayKH0JbNZdIkNKiyBHKRl8yzWO5L13i2MbFeX6ZhgmTAVVOX4dCUuh4/Yo?=
- =?us-ascii?Q?zEbWzPRRMCNa75M4/ox67npZMoaSgoa4oJ1C6n0kKaKHiWGNwQ80pzZlq+fy?=
- =?us-ascii?Q?0z6qoq0CgSWcMkgE5uxjNys7qLoQvHGef3C8NMKOL86m6jt5bBPo1POu/Y6A?=
- =?us-ascii?Q?Bned8dyh3H1V7bfHyomR6ihBeS0FZ68NYii63SUfagLvyqiAfmpz/BcMTAqG?=
- =?us-ascii?Q?b5+kIiYHZQyTvXHKwdd/IOlVo9xOrEhdUd8i1hN0JWjIl3ys0qi1UNf+H7Vf?=
- =?us-ascii?Q?Z+HtebueotrV8TXoZhd3iBsS1NTH6D5aNIdEGd8sl8LUYxQqxuCun9PEM/w0?=
- =?us-ascii?Q?lQm4/+bxZJnvJOZMMVMaqECOEVQFZYJpcbSfnbBJ87WygZ3aNmqn3URblVZB?=
- =?us-ascii?Q?J31zpyD74MPVug9w/W+AEe7ZV5ACiLufXnBeLTT6qYgKM1QRnkeh+b4MMvub?=
- =?us-ascii?Q?3/vm35f608vsx2K5hhzMlDG8kKeAHn4/LweJl4F8y/VXU4jo9RC1nEykm0VC?=
- =?us-ascii?Q?XhjT6fBD+Or4yGw1JI008ka/LthEBRGkp/x8eOMIvscg08luPejM7si+F7Mg?=
- =?us-ascii?Q?dic3YxOH2vMvf9B+B+zc1kWxhBRhpjsb6HikilWi9SjpmlmZtDETRh7lzhMY?=
- =?us-ascii?Q?5cVsAMOest3EFZpmjPlMJFxnVyld34XMW/pzHaCG6MjPe8m+cVxN/Y06BlG/?=
- =?us-ascii?Q?bMaoOJq8jL4S667e8y2dT4m15czXAQ33IStbHukTzEln6Owf8w9B/F3kJzO/?=
- =?us-ascii?Q?aQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?BaXqTg0ncEMKybhp0hyccI+AyAvgvfXt1ATdS1CM3UyyFR+bOQsmWPR4vSHp?=
+ =?us-ascii?Q?2pyprvToLUBd3ykHDzzySp5qZAgFA/JBs5z3+lPpwA5WIMBKT8KOBjwxwMaL?=
+ =?us-ascii?Q?f6wniyYSvuI9yu5Cjwmk/EIm2PMLi1Qtf0FosH8b3e2byHqq4XTpIU81LRtB?=
+ =?us-ascii?Q?ehTHAb73Zf/BouP8DhY2uIR3WBJ+yTgaPl7zVBNo961D5XD2URH9Y6Urxmfz?=
+ =?us-ascii?Q?tZ+FVZn5bFl/+LYfTs9ItNF4fo7X5ANge+CX7zie6Sae4LK3vrqa6N15KNtD?=
+ =?us-ascii?Q?lKJCw9Ta644ChX2+p6HvIxcApz2IViOYL1tz/Rms1TYbov72Hy9bxe+bTcsY?=
+ =?us-ascii?Q?OluEP4bRwMYiiEj0N+H91tDfmYzVA7dyN99u4xmOvmN/jNkHTsKR2X1C37H7?=
+ =?us-ascii?Q?LCInFpdotRmBgTej7M/+wZOQ2HQp16KGFdGvqvHQ4vXry0joxL3Tob6jDDjG?=
+ =?us-ascii?Q?DpbF7juqpdsI0MgMApkXHdusZ4ppfvRnzCS8aXpGCyR4xQJ9aVYRP9A1z6G3?=
+ =?us-ascii?Q?gRj3Uhl6OKw7ODENOOLEZowOxcZxCopUAlJ53a0WY7b+aWlfKQMxFhMXYdxr?=
+ =?us-ascii?Q?g9xZDQVQ0+6V3xiTipG8539BoymkIuxrfv96KsuAgM74O2Pmgf3ZD3Pcrw9v?=
+ =?us-ascii?Q?1jWwqNkL+6UbGrkRT52ImvKMsvf42ckUNa9K6PFjYunbO8OQqNFE+/ZTJua1?=
+ =?us-ascii?Q?Ia+7ZocUuCVTh8ddlkDNisqr9bpiHIfUDVW+hfSNh6Gx/lUDSpahTkG2VpL4?=
+ =?us-ascii?Q?zQPWGSRck2hc6VNuWUzPerFSY+D44TpeV9/lvM8ZlQygzVJKjq9nGSUlw8Wh?=
+ =?us-ascii?Q?fWtWtDGWa25y3AcOQER2YukSjsFx9UD/4xYLYfZEPjlxLYylt+ad4IhrW6+j?=
+ =?us-ascii?Q?GkClUCijEYBPflMMz0fzx2f4b5qiNfPA3+Z7YZhnP5fAgDFMEKeTvHqCuvmG?=
+ =?us-ascii?Q?vraX0Nl+69RQpRYLeGp2gfy3e5oMhifjkX+31brIEjSa8NKf9/60hpFKR+0/?=
+ =?us-ascii?Q?vEHNYFqKyMCc7gaTaXf0aDR76XjaJOebsQMmWw+DxiH0JMxezZKptH4O70Nb?=
+ =?us-ascii?Q?y45dV9ivKQhPoxY+pKvH6WsiJYVaCHD/haKW7GlUvI7nA+NhcDGYvTWhRxTG?=
+ =?us-ascii?Q?vvtvi6rIGNX648ZuVr8sOSI7pNhAm8cZQKRUPcTO4RMxJqdheBdKHUz3Nbsr?=
+ =?us-ascii?Q?DD3EDMx8bMrNz73cHMErdEqhwmEyGXjaMdruwj2VVCDOwI2cMXHhrHKIGHgM?=
+ =?us-ascii?Q?ARStU+KefEpJkOa8Wng333dhDLR4GHJB3AmvJnozpQtzyLzRkaPmaRQ5E2lz?=
+ =?us-ascii?Q?vkf6B80gdoX8prWEq+B/EXuMrTrswW2iL+buJ0KZ4kVw7PUXf0v21pA2oa1q?=
+ =?us-ascii?Q?EnczqGS7xVGzIHntpmgUcz5f6NaiO7VEGZlt4XzJ+BvVd4EDEWGPaaEykv/M?=
+ =?us-ascii?Q?63BbYRVJH/i42OhqnK7K3Xg5VGH8S2esV9sBH/BYxVwBzmDPdpv7qDMNBurF?=
+ =?us-ascii?Q?XUPL0gbhtsSSavVy+5NZgZjf3q2aIm/I09W3VW7jAbXGEbTiuR8jbrn7Tz38?=
+ =?us-ascii?Q?5reIj6lLauNZngt5axG12sP9Hl6A0NS6R1AhiStDGZUF74ibhKaG1s9O+rX8?=
+ =?us-ascii?Q?LQ=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: be91a5ed-7f4a-475d-d081-08dbe761b4ff
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1892985-25fd-4ac4-85cd-08dbe761b418
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2023 11:38:24.5249 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Nov 2023 11:38:22.3411 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Oc/v06O0E9TFX+FrPGv2Flao1IMX+szQ1gMY10SjbpY2lxgCHP4SJbOEmN+8CmlYHI6GjV+HVjzgwLRs+f8Tz1qRvd1+ZRYN2+iwFJWUVbs=
+X-MS-Exchange-CrossTenant-UserPrincipalName: QnzmGGlGuE5CUR7p4viVvYr4Vip1UHZwIR6TPyy2pQZDaHPq9RxIi5ahvf0UNSFzU2tnmU4DO5KFd1qj+sB28WuWSWbMWnR8sLSeI/MZzFA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3664
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,46 +138,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the helper led_bind_generic() to reduce code duplication.
+Many existing drivers, and led-uclass itself, rely on uc_plat->label
+being NULL for the device representing the top node, as opposed to the
+child nodes representing individual LEDs. This means that the drivers
+whose .probe methods rely on this were broken by 83c63f0d1185 ("led:
+Move OF "label" property parsing to core"), and also that the top node
+wrongly shows up with 'led list'.
 
+Binding the same driver to the top node as to the individual child
+nodes is arguably wrong, and the approach of using a UCLASS_NOP driver
+for the top node is probably better - this has for example been done
+in commits 01074697801b and 910b01c27c04.
+
+Until remaining affected drivers are fixed, we can use a heuristic
+that only sets the label to the fallback value derived from the node
+name if the node does not have a "compatible" property - i.e., if it
+has been bound to the LED driver explicitly via
+device_bind_driver_to_node(). This is similar to what e3aa76644c2a did
+for gpio_led, but that fix was then supplanted by 01074697801b.
+
+Fixes: 83c63f0d1185 ("led: Move OF "label" property parsing to core")
 Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 ---
- drivers/led/led_gpio.c | 15 +--------------
- 1 file changed, 1 insertion(+), 14 deletions(-)
+ drivers/led/led-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
-index fbed151b5d9..71421de628c 100644
---- a/drivers/led/led_gpio.c
-+++ b/drivers/led/led_gpio.c
-@@ -11,7 +11,6 @@
- #include <log.h>
- #include <malloc.h>
- #include <asm/gpio.h>
--#include <dm/lists.h>
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index 009f1080197..0232fa84def 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -74,7 +74,7 @@ static int led_post_bind(struct udevice *dev)
+ 	if (!uc_plat->label)
+ 		uc_plat->label = dev_read_string(dev, "label");
  
- struct led_gpio_priv {
- 	struct gpio_desc gpio;
-@@ -80,19 +79,7 @@ static int led_gpio_remove(struct udevice *dev)
+-	if (!uc_plat->label)
++	if (!uc_plat->label && !dev_read_string(dev, "compatible"))
+ 		uc_plat->label = ofnode_get_name(dev_ofnode(dev));
  
- static int led_gpio_bind(struct udevice *parent)
- {
--	struct udevice *dev;
--	ofnode node;
--	int ret;
--
--	dev_for_each_subnode(node, parent) {
--		ret = device_bind_driver_to_node(parent, "gpio_led",
--						 ofnode_get_name(node),
--						 node, &dev);
--		if (ret)
--			return ret;
--	}
--
--	return 0;
-+	return led_bind_generic(parent, "gpio_led");
- }
- 
- static const struct led_ops gpio_led_ops = {
+ 	uc_plat->default_state = LEDST_COUNT;
 -- 
 2.40.1.1.g1c60b9335d
 
