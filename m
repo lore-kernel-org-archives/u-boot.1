@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79568C197A0
-	for <u-boot@archiver.kernel.org>; Thu, 16 Nov 2023 23:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11277C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 00:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E58186ED6;
-	Fri, 17 Nov 2023 00:53:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1029C86D85;
+	Fri, 17 Nov 2023 01:02:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eIMdwPxP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MmIaeC16";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FBE586ECA; Fri, 17 Nov 2023 00:53:16 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id B2D1586EDA; Fri, 17 Nov 2023 01:02:37 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E142F86053
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 00:52:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7238386CBD
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 01:02:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7789cc5c8ccso122027685a.0
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 15:52:53 -0800 (PST)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7a67b9cd230so47228639f.1
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:02:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700178772; x=1700783572; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=G4gxXUvh7P+zZQ8yNmWvHnmLCxgoa2S8x2teU+yY6vA=;
- b=eIMdwPxPm/iXPezXHLJ6DcAEksAlzhxnxxTxqtmgCS2ZH4GrXA/HOnb2ZUFMwA094X
- Y+Jf2zqLGjSQ10zNNQdvrkXAIiQwn9co5OdkeCEfI8fdBPxBAAaqJGW14DzL+leusYHT
- h4hDxSPbFkjjmtAWhsxlqHgH/oKcZv0vywMmg=
+ d=gmail.com; s=20230601; t=1700179349; x=1700784149; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+C/0f0RwwMrCcpiivnqc0iwtsTAvMud5uUB5t84DlvE=;
+ b=MmIaeC16TTgSVkGZGiP/IoSxtipti14xPwDZIZGKeD9rMVpu3eyyoBVMRGyn4PYpLO
+ +S0bNhSJTHIhYmWNKYH/O9WTQo88HRTqwGxBNrXq7aLrCSmXuYhJVJNqJcIJgmwHG63m
+ 9cWuXn+5HuniXsapqPsuhY8ogYNWMtgbkKO6qI4uAPlQC1WURR6vbTrat2MKaM8PCnTr
+ JpGFjsiALw/M1Dd74M2YnGGCpFQS6ld7vtR6ty/r/x6e7qc6eboJRDTwa4H/Xfk0SwL1
+ nUP08ryLnh5tHfJfr7WOkaqvFgTqn0NiR9nlt4KFymfcmN22+lt2rlcwrVZ+FWmRjHEX
+ cRwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700178772; x=1700783572;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G4gxXUvh7P+zZQ8yNmWvHnmLCxgoa2S8x2teU+yY6vA=;
- b=pzGHOtZ6YKiXbYxf7OyvJjliklRTEyMC7Xo+Jfa4EAEIXm8U06hXbPDx2zBDjpgIa+
- QG0V+wY4wmvnpYvvz2AWQXUEBEESHFFmACC54yfdCjBe3nfoOHsO9Zlb16N2SLBvEvK4
- aL8mZ19ohhDGPx3xZbkcbE22lAwUs65kvgHHReHHxWP76DhUcj1HlYemtfJDDa0WYIS2
- mNqQ865YHW07JiN0D5nsScUA7EcMA3yoVnqInpbY2+bvcbkDM3FmUuzDca9Cr7PtE5wS
- qMBlG9mWXyZaJD04rba9QaeQHztfLCCTEYncq5R1z8eYA4rDBlqpggzMvKgToKBVfEv+
- xVhg==
-X-Gm-Message-State: AOJu0YzcHa6jBccX5eU8m0ZC/K+JhquHrMNBDHNW3HBgyDobVWbPUrci
- YCZK7Wzb8MVofuy5dNopSQfNpBdj6o/SQYOkrUk25w==
-X-Google-Smtp-Source: AGHT+IHiDN46oTn5eOU3vsNqZ0BBT+hhRiRK1nToAAyoMSKfrLaqtUZzADrFv6/Od2RNIPzaZ760Ow==
-X-Received: by 2002:a05:620a:2587:b0:779:e19b:64f5 with SMTP id
- x7-20020a05620a258700b00779e19b64f5mr4833902qko.21.1700178772524; 
- Thu, 16 Nov 2023 15:52:52 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
- [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
+ d=1e100.net; s=20230601; t=1700179349; x=1700784149;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+C/0f0RwwMrCcpiivnqc0iwtsTAvMud5uUB5t84DlvE=;
+ b=tPAv+bzEnqaWg/VlXoY3ow/XO0Z195OMu1C0XgW4XCZnPhDmh7wdEIesQye8owlgj+
+ KP5dNQ5f7FKH2t453wgdk8QApbvgajpiEU+bkEvnxsSH20NmTNHm45EqOoFQzrd3Mlm5
+ FNDnK/e/OyntVmS4rmGnGonaf7n9GmfrBU/R7bIPKnSnx0OuTDA5iFBOAMSwy2ErnBin
+ h4sGHalZodlAxM0qfbKFggI9g8d3SJ+lBXHH6Ju/nbCrqatyo4XnLUsb8VrWPWh2g8xA
+ HyteD5/ty4p63Mcl77cBSgi45D3Bwb5d2ccgEcWQJrxkAqHMFVF/wx6K7AH2b7GoXc5f
+ /FtA==
+X-Gm-Message-State: AOJu0Ywi/hBs7hoc4QZVcxIdH0ABjZbjijUjNWH2+EmPQqwzkKV3dulh
+ 6e6ajXUhKdT17tR3eW0aWRc=
+X-Google-Smtp-Source: AGHT+IG7DD8CuYDK3wR3G6ILckPsZRml8ENJjFGrnHS60pf9bTdk2CN3qFtmeAv9wc4+vuam8NMqfA==
+X-Received: by 2002:a05:6602:b98:b0:792:9416:9c7f with SMTP id
+ fm24-20020a0566020b9800b0079294169c7fmr24740952iob.9.1700179349083; 
+ Thu, 16 Nov 2023 16:02:29 -0800 (PST)
+Received: from ?IPV6:2001:470:42c4:101:d821:af43:e0a8:c160?
+ ([2001:470:42c4:101:d821:af43:e0a8:c160])
  by smtp.gmail.com with ESMTPSA id
- k9-20020a0cebc9000000b0066d818fa482sm175570qvq.115.2023.11.16.15.52.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 15:52:51 -0800 (PST)
-Date: Thu, 16 Nov 2023 18:52:49 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Samuel Holland <samuel@sholland.org>
-Cc: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [RESEND PATCH v3] serial: ns16550: Enable clocks during probe
-Message-ID: <20231116235249.GA623444@bill-the-cat>
-References: <20231031050611.55422-1-samuel@sholland.org>
+ p18-20020a02b892000000b004648955bda2sm144282jam.97.2023.11.16.16.02.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Nov 2023 16:02:28 -0800 (PST)
+Message-ID: <df0b432c-483b-5ebb-20bd-29800554b860@gmail.com>
+Date: Thu, 16 Nov 2023 17:02:27 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lu96YwNflfOz1xXu"
-Content-Disposition: inline
-In-Reply-To: <20231031050611.55422-1-samuel@sholland.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH] fs: btrfs: fix reading when length specified
+Content-Language: en-US
+To: Qu Wenruo <quwenruo.btrfs@gmx.com>, u-boot@lists.denx.de,
+ =?UTF-8?Q?Marek_Beh=c3=ban?= <kabel@kernel.org>
+Cc: Qu Wenruo <wqu@suse.com>
+References: <20231111151904.149009-1-CFSworks@gmail.com>
+ <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,77 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/15/23 21:43, Qu Wenruo wrote:
+> 
+> I'm not sure why this happend for the EFI environment.
+> 
+> Doesn't the EFI runtime should also try to read the whole file? Or that
+> EFI environment has specified the length to read instead?
+> 
 
---lu96YwNflfOz1xXu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Qu,
 
-On Tue, Oct 31, 2023 at 12:06:09AM -0500, Samuel Holland wrote:
+The Linux EFISTUB file loading routine (handle_cmdline_files) reads 
+files in chunks, and not (necessarily) the whole file in one go. On x86 
+platforms, the chunk size is 1MB, and the comments explain that this is 
+to work around firmware implementations that have problems with large 
+reads. On non-x86 platforms, the chunk size is ULONG_MAX -- which in 
+practice means it reads the whole file in one exact-filesize chunk.
 
-> If the UART bus or baud clock has a gate, it must be enabled before the
-> UART can be used.
->=20
-> Reviewed-by: Stefan Roese <sr@denx.de>
-> Signed-off-by: Samuel Holland <samuel@sholland.org>
-> ---
->=20
-> Changes in v3:
->  - Switch back to the original patch, now that the phycore-rk3288 build
->    is fixed by enabling LTO.
->=20
-> Changes in v2:
->  - Only enable the first clock, as using the clk_get_bulk() API pushes
->    a board (phycore-rk3288) over its SPL size limit.
->=20
->  drivers/serial/ns16550.c | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-> index 6deb1d8ddc5..a206d00919c 100644
-> --- a/drivers/serial/ns16550.c
-> +++ b/drivers/serial/ns16550.c
-> @@ -514,6 +514,7 @@ int ns16550_serial_probe(struct udevice *dev)
->  	struct ns16550_plat *plat =3D dev_get_plat(dev);
->  	struct ns16550 *const com_port =3D dev_get_priv(dev);
->  	struct reset_ctl_bulk reset_bulk;
-> +	struct clk_bulk clk_bulk;
->  	fdt_addr_t addr;
->  	fdt_addr_t size;
->  	int ret;
-> @@ -533,6 +534,10 @@ int ns16550_serial_probe(struct udevice *dev)
->  	if (!ret)
->  		reset_deassert_bulk(&reset_bulk);
-> =20
-> +	ret =3D clk_get_bulk(dev, &clk_bulk);
-> +	if (!ret)
-> +		clk_enable_bulk(&clk_bulk);
-> +
->  	com_port->plat =3D dev_get_plat(dev);
->  	ns16550_init(com_port, -1);
+So, to answer your questions: "either/both depending on platform."
 
-This causes some failure to builds on platforms where we don't have
-clk_get_bulk available such as lion-rk3368.
+(The bug in the U-Boot implementation doubtlessly affects more than just 
+EFI; I only happened to discover it while trying to use EFI.)
 
---=20
-Tom
+>>
+>> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> 
+> Anyway, the fix looks good to me.
+> 
+> Reviewed-by: Qu Wenruo <wqu@suse.com>
 
---lu96YwNflfOz1xXu
-Content-Type: application/pgp-signature; name="signature.asc"
+Thank you greatly for the review!
 
------BEGIN PGP SIGNATURE-----
+> 
+> Thanks,
+> Qu
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVWq04ACgkQFHw5/5Y0
-tyxJ7Qv/fYQGfgzDChh5ZI5qwlUp9pfYbBftYq1tn8mRaK7q6WEFQnR1ExPdH49O
-VTSLD6iksA3cGCDOZc4+uJIa9ZC7IldCY4A5w0bnSewuBJ/CcPegOK1r84Ydgx1Y
-BcH1WUWYtCjWMe9o301zwLRAfcZuqiWbcKtv13sv3VurUcmRxIV/FIN9JfArRvsj
-hQfFySrKGi7sWehd2nr5OEmIkocbGAWllKtqSCIJ29lYjlw22dTbWfqp3/CjZ3oH
-x9pXewfsx4SA1JBJBgEI07Br8JQ9TfJ493oyz+geYaYo+cpnX9FcXO4XAW7n+kbV
-OEhf/E15lhfAagZwkFCk+7zA/QOxCSGku3GZ3RjRdwSV5vZ3nrJgdAyXgWbZU4zr
-XHf+Ui25EfVXG82TqxQy31QZe92IvUgKhgexoaARO4EAEnRvHeXBVh8FqQKCQ1Ax
-oNqLaJqT9rKxoeS/gwsJ+ucbn8V3THGI9K9iInJQo5P0YWPhpB20if9PI0hTkOZ2
-lpXOU10Z
-=idaD
------END PGP SIGNATURE-----
-
---lu96YwNflfOz1xXu--
+Likewise,
+Sam
