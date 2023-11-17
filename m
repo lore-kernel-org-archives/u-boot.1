@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11277C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 00:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CED3C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 00:36:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1029C86D85;
-	Fri, 17 Nov 2023 01:02:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 40D9986F67;
+	Fri, 17 Nov 2023 01:36:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MmIaeC16";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="O2pihF7B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2D1586EDA; Fri, 17 Nov 2023 01:02:37 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 3630386D9A; Fri, 17 Nov 2023 01:36:34 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7238386CBD
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 01:02:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6469F8746C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 01:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7a67b9cd230so47228639f.1
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:02:30 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-507962561adso2154372e87.0
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:36:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700179349; x=1700784149; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+C/0f0RwwMrCcpiivnqc0iwtsTAvMud5uUB5t84DlvE=;
- b=MmIaeC16TTgSVkGZGiP/IoSxtipti14xPwDZIZGKeD9rMVpu3eyyoBVMRGyn4PYpLO
- +S0bNhSJTHIhYmWNKYH/O9WTQo88HRTqwGxBNrXq7aLrCSmXuYhJVJNqJcIJgmwHG63m
- 9cWuXn+5HuniXsapqPsuhY8ogYNWMtgbkKO6qI4uAPlQC1WURR6vbTrat2MKaM8PCnTr
- JpGFjsiALw/M1Dd74M2YnGGCpFQS6ld7vtR6ty/r/x6e7qc6eboJRDTwa4H/Xfk0SwL1
- nUP08ryLnh5tHfJfr7WOkaqvFgTqn0NiR9nlt4KFymfcmN22+lt2rlcwrVZ+FWmRjHEX
- cRwQ==
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700181365; x=1700786165;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IvZf+/8FSjBKre8WabLsXf8/rtu1MkEH5hHXbGva9sE=;
+ b=O2pihF7BG0mKPuhx+VZq5Oxcd/bUrc99fkvX3JgYWweqyt88/DYMlaHBkBZy0NDvWq
+ wggRYyNN+L54gB1CBepHJSJ0PZELcF8ogwLbIqsfff7WUMsmBZD+osE/9ToH48I7xFOW
+ 6RPWG62gp0Suv7EEg3vDosyQLOAst45xL0S+0uP72/h9VRCaqcfToSsU2WrNyTdya7Xa
+ ACwnxCz1O8QvTPbttwv5x0t8xcDHRGv92bQa282nY5ZkAJBYo7GepKCEKi8RpUdkjIx6
+ 5KnyX6IIUGo7H+eCdvl+f0htcIet4k1H41mL+DtlcaNofEXOnnXB6rD0/LHwzx7jYb5t
+ Zb1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700179349; x=1700784149;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+C/0f0RwwMrCcpiivnqc0iwtsTAvMud5uUB5t84DlvE=;
- b=tPAv+bzEnqaWg/VlXoY3ow/XO0Z195OMu1C0XgW4XCZnPhDmh7wdEIesQye8owlgj+
- KP5dNQ5f7FKH2t453wgdk8QApbvgajpiEU+bkEvnxsSH20NmTNHm45EqOoFQzrd3Mlm5
- FNDnK/e/OyntVmS4rmGnGonaf7n9GmfrBU/R7bIPKnSnx0OuTDA5iFBOAMSwy2ErnBin
- h4sGHalZodlAxM0qfbKFggI9g8d3SJ+lBXHH6Ju/nbCrqatyo4XnLUsb8VrWPWh2g8xA
- HyteD5/ty4p63Mcl77cBSgi45D3Bwb5d2ccgEcWQJrxkAqHMFVF/wx6K7AH2b7GoXc5f
- /FtA==
-X-Gm-Message-State: AOJu0Ywi/hBs7hoc4QZVcxIdH0ABjZbjijUjNWH2+EmPQqwzkKV3dulh
- 6e6ajXUhKdT17tR3eW0aWRc=
-X-Google-Smtp-Source: AGHT+IG7DD8CuYDK3wR3G6ILckPsZRml8ENJjFGrnHS60pf9bTdk2CN3qFtmeAv9wc4+vuam8NMqfA==
-X-Received: by 2002:a05:6602:b98:b0:792:9416:9c7f with SMTP id
- fm24-20020a0566020b9800b0079294169c7fmr24740952iob.9.1700179349083; 
- Thu, 16 Nov 2023 16:02:29 -0800 (PST)
-Received: from ?IPV6:2001:470:42c4:101:d821:af43:e0a8:c160?
- ([2001:470:42c4:101:d821:af43:e0a8:c160])
- by smtp.gmail.com with ESMTPSA id
- p18-20020a02b892000000b004648955bda2sm144282jam.97.2023.11.16.16.02.28
+ d=1e100.net; s=20230601; t=1700181365; x=1700786165;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IvZf+/8FSjBKre8WabLsXf8/rtu1MkEH5hHXbGva9sE=;
+ b=UqDe725ztsPF6SN2dWtq79vee4bxUESUgcHyam8juJNUcEoMVs0/WW7Bteu7tXtJS4
+ dSRv43tJoNS8iwPVyAIlXU1n7/eF/CljvAg7vD1s+nD8Y5eXuFQ1uCkQI1FRbd7LGDDc
+ GjHSXGYDofZT5Xsv56dfcMhd08oCYLJsQQzs9rd9mZ45ogkCY0SKSgg3Jk+RSxaotdDm
+ aK62LUoKzFpsf8zhyiuAsCpoa+zHei5XGzMV1fu2PAwfGiN4aEETt7lZbA/SN9BI43ll
+ H13Rha9Cx3NFyFCM3NYZ3Jh3zcSChjBGYHhsjC32zTwjl6dDdYyoCELJ6+UW6KLVXBAW
+ pH/g==
+X-Gm-Message-State: AOJu0Yw39iVgkvnaZ5fwLHEVxl598gkOOaGedA6SOj/8MKIsMrSDF8rh
+ JF5PI/Xt9iKiet8tq7KBUF3udNWo2jEjQ0Y3E1umng==
+X-Google-Smtp-Source: AGHT+IHwNBLHu0S7tJ+bOWJjHiVWHAi0qdJoPZ624c0QSem4Zllju4h7eTMD6jFkppI51InBkiZkfQ==
+X-Received: by 2002:a05:6512:3d18:b0:500:92f1:c341 with SMTP id
+ d24-20020a0565123d1800b0050092f1c341mr16750324lfv.54.1700181365116; 
+ Thu, 16 Nov 2023 16:36:05 -0800 (PST)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com.
+ [209.85.167.45]) by smtp.gmail.com with ESMTPSA id
+ x18-20020a056512131200b00507cf5fa20esm61010lfu.97.2023.11.16.16.36.04
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Nov 2023 16:02:28 -0800 (PST)
-Message-ID: <df0b432c-483b-5ebb-20bd-29800554b860@gmail.com>
-Date: Thu, 16 Nov 2023 17:02:27 -0700
+ Thu, 16 Nov 2023 16:36:04 -0800 (PST)
+Received: by mail-lf1-f45.google.com with SMTP id
+ 2adb3069b0e04-5099184f8a3so2130052e87.2
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 16:36:04 -0800 (PST)
+X-Received: by 2002:ac2:511e:0:b0:508:1470:6168 with SMTP id
+ q30-20020ac2511e000000b0050814706168mr12559994lfb.57.1700181363922; Thu, 16
+ Nov 2023 16:36:03 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] fs: btrfs: fix reading when length specified
-Content-Language: en-US
-To: Qu Wenruo <quwenruo.btrfs@gmx.com>, u-boot@lists.denx.de,
- =?UTF-8?Q?Marek_Beh=c3=ban?= <kabel@kernel.org>
-Cc: Qu Wenruo <wqu@suse.com>
-References: <20231111151904.149009-1-CFSworks@gmail.com>
- <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <fff8b725-1c64-4407-acb8-c47c258e6571@gmx.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
+In-Reply-To: <20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid>
+From: Shantur Rathore <i@shantur.com>
+Date: Fri, 17 Nov 2023 00:35:52 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t2rC_ir-UqLt+tLJpyZqy3XUS5qttnu3zXgO19J0Jj7Xw@mail.gmail.com>
+Message-ID: <CAHc5_t2rC_ir-UqLt+tLJpyZqy3XUS5qttnu3zXgO19J0Jj7Xw@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Avoid freeing a non-allocated buffer
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +100,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/15/23 21:43, Qu Wenruo wrote:
-> 
-> I'm not sure why this happend for the EFI environment.
-> 
-> Doesn't the EFI runtime should also try to read the whole file? Or that
-> EFI environment has specified the length to read instead?
-> 
-
-Hi Qu,
-
-The Linux EFISTUB file loading routine (handle_cmdline_files) reads 
-files in chunks, and not (necessarily) the whole file in one go. On x86 
-platforms, the chunk size is 1MB, and the comments explain that this is 
-to work around firmware implementations that have problems with large 
-reads. On non-x86 platforms, the chunk size is ULONG_MAX -- which in 
-practice means it reads the whole file in one exact-filesize chunk.
-
-So, to answer your questions: "either/both depending on platform."
-
-(The bug in the U-Boot implementation doubtlessly affects more than just 
-EFI; I only happened to discover it while trying to use EFI.)
-
->>
->> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> 
-> Anyway, the fix looks good to me.
-> 
-> Reviewed-by: Qu Wenruo <wqu@suse.com>
-
-Thank you greatly for the review!
-
-> 
-> Thanks,
-> Qu
-
-Likewise,
-Sam
+On Thu, Nov 16, 2023 at 1:35=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> EFI applications can be very large and thus used to cause boot failures
+> when malloc() space was exhausted.
+>
+> A recent changed fixed this by using the kernel_addr_r environment var
+> as the address of the buffer. However, it still frees the buffer when
+> the bootflow is discarded.
+>
+> Fix this by introducing a flag to indicate whether the buffer was
+> allocated, or not.
+>
+> Note that kernel_addr_r is not the last word here. It might be better
+> to use lmb to place images. But there is a lot of refactoring to do
+> before we can remove the environment variables. The distro scripts rely
+> on them so it is safe for bootstd to do so too.
+>
+> Fixes: 6a8c2f9781c bootstd: Avoid allocating memory for the EFI file
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reported by: Simon Glass <sjg@chromium.org>
+> Reported by: Shantur Rathore <i@shantur.com>
+Tested by: Shantur Rathore <i@shantur.com>
+> ---
+>
+>  boot/bootflow.c     | 3 ++-
+>  boot/bootmeth_efi.c | 1 +
+>  include/bootflow.h  | 5 ++++-
+>  3 files changed, 7 insertions(+), 2 deletions(-)
+>
+> diff --git a/boot/bootflow.c b/boot/bootflow.c
+> index 6922e7e0c4e7..1ea2966ae9a5 100644
+> --- a/boot/bootflow.c
+> +++ b/boot/bootflow.c
+> @@ -467,7 +467,8 @@ void bootflow_free(struct bootflow *bflow)
+>         free(bflow->name);
+>         free(bflow->subdir);
+>         free(bflow->fname);
+> -       free(bflow->buf);
+> +       if (!(bflow->flags & BOOTFLOWF_STATIC_BUF))
+> +               free(bflow->buf);
+>         free(bflow->os_name);
+>         free(bflow->fdt_fname);
+>         free(bflow->bootmeth_priv);
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index ae936c8daa18..9ba7734911e1 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -160,6 +160,7 @@ static int efiload_read_file(struct bootflow *bflow, =
+ulong addr)
+>         if (ret)
+>                 return log_msg_ret("read", ret);
+>         bflow->buf =3D map_sysmem(addr, bflow->size);
+> +       bflow->flags |=3D BOOTFLOWF_STATIC_BUF;
+>
+>         set_efi_bootdev(desc, bflow);
+>
+> diff --git a/include/bootflow.h b/include/bootflow.h
+> index 44d3741eacae..fede8f22a2b8 100644
+> --- a/include/bootflow.h
+> +++ b/include/bootflow.h
+> @@ -43,9 +43,12 @@ enum bootflow_state_t {
+>   *     and it is using the prior-stage FDT, which is the U-Boot control =
+FDT.
+>   *     This is only possible with the EFI bootmeth (distro-efi) and only=
+ when
+>   *     CONFIG_OF_HAS_PRIOR_STAGE is enabled
+> + * @BOOTFLOWF_STATIC_BUF: Indicates that @bflow->buf is statically set, =
+rather
+> + *     than being allocated by malloc().
+>   */
+>  enum bootflow_flags_t {
+>         BOOTFLOWF_USE_PRIOR_FDT =3D 1 << 0,
+> +       BOOTFLOWF_STATIC_BUF    =3D 1 << 1,
+>  };
+>
+>  /**
+> @@ -72,7 +75,7 @@ enum bootflow_flags_t {
+>   * @fname: Filename of bootflow file (allocated)
+>   * @logo: Logo to display for this bootflow (BMP format)
+>   * @logo_size: Size of the logo in bytes
+> - * @buf: Bootflow file contents (allocated)
+> + * @buf: Bootflow file contents (allocated unless @flags & BOOTFLOWF_STA=
+TIC_BUF)
+>   * @size: Size of bootflow file in bytes
+>   * @err: Error number received (0 if OK)
+>   * @os_name: Name of the OS / distro being booted, or NULL if not known
+> --
+> 2.43.0.rc0.421.g78406f8d94-goog
+>
