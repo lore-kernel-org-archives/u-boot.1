@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0185C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 21:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4003C54FB9
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 21:50:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9B22874A1;
-	Fri, 17 Nov 2023 22:49:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 43DEE874D9;
+	Fri, 17 Nov 2023 22:49:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="O8bn3sTn";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="JSu7qLsL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE543874EB; Fri, 17 Nov 2023 22:49:38 +0100 (CET)
+ id 2F8A5874EB; Fri, 17 Nov 2023 22:49:39 +0100 (CET)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 1639787252
+ by phobos.denx.de (Postfix) with ESMTP id 0F22286E42
  for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 22:49:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 26CDF20B74C1;
+ by linux.microsoft.com (Postfix) with ESMTPSA id 496DF20B74C2;
  Fri, 17 Nov 2023 13:49:27 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 26CDF20B74C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 496DF20B74C2
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
  s=default; t=1700257767;
- bh=yIkVSfhFsDeY+ewGXuyT5ZQORuBakNRvi+zq3nMS4X8=;
+ bh=jGUBvSXh8jHmyHRepSwb5+LUUJY0CA7fUDS7L9sjIM8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=O8bn3sTncx2QT1wljI2WDkPLI92aA7N655/OV/zt7ypMiA5P5HYzbpauVJy4SJjjv
- 1r/YsC7LoGByuD2I0RP0vyZK4VtyiMktNKQjBfH29XC2LQH4H9zRbhA4hkSJb1HrgS
- E0L/nLF1ThcJa7tfHNwcy3Q+qC/jNWGasIz+NurQ=
+ b=JSu7qLsLVwDhaetDDV3ioOPR51Oa/XSIuLMmfK13gAZQGcR+qvSpHswrm8VmTdU/E
+ bvwLh/1zGdKWHivXHbtlTLdctYqZgSq3AIDy8o6+uGzJwuML4eyhd0B1NuvVBQN2QB
+ OojdXc6gYJ2xlGmLEWhjPB/YK3b3pRNwfE7N5e0Q=
 From: seanedmond@linux.microsoft.com
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de,
 	pbrobinson@gmail.com,
 	trini@konsulko.com
-Subject: [PATCH v4 1/3] net: Additional fixes for dhcp option 209
-Date: Fri, 17 Nov 2023 13:49:23 -0800
-Message-ID: <20231117214925.138486-2-seanedmond@linux.microsoft.com>
+Subject: [PATCH v4 2/3] net: bootp: BOOTP/DHCPv4 retransmission improvements
+Date: Fri, 17 Nov 2023 13:49:24 -0800
+Message-ID: <20231117214925.138486-3-seanedmond@linux.microsoft.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
 References: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -65,79 +66,198 @@ X-Virus-Status: Clean
 
 From: Sean Edmond <seanedmond@microsoft.com>
 
-Addresses feedback from latest review:
-- Enable option 209 by default
-- Set pxelinux_configfile to NULL to avoid potential double free
-- change hardcoced 209 to a define
+This patch introduces 3 improvements to align with RFC 951:
+- retransmission backoff interval maximum is configurable
+- initial retranmission backoff interval is configurable
+- transaction ID is kept the same for each BOOTP/DHCPv4 request
+
+In applications where thousands of nodes are serviced by a single DHCP
+server, maximizing the retransmission backoff interval at 2 seconds (the
+current u-boot default) exerts high pressure on the DHCP server and
+network layer.
+
+RFC 951 “7.2. Client Retransmission Strategy” states that the
+retransmission backoff interval should be limited to 60 seconds.  This
+patch allows the interval to be configurable using the environment
+variable "bootpretransmitperiodmax"
+
+The initial retranmission backoff period defaults to 250ms, which is
+also too small for these scenarios with many clients.  This patch makes
+the initial retransmission interval to be configurable using the
+environment variable "bootpretransmitperiodinit".
+
+Also, on a retransmission it is not expected for the transaction ID to
+change (only the 'secs' field should be updated). Let's save the
+transaction ID and use the same transaction ID for each BOOTP/DHCPv4
+exchange.
 
 Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 ---
- cmd/Kconfig | 1 +
- cmd/pxe.c   | 2 ++
- net/bootp.c | 4 ++--
- net/bootp.h | 2 ++
- 4 files changed, 7 insertions(+), 2 deletions(-)
+ cmd/Kconfig |  2 +-
+ net/bootp.c | 71 +++++++++++++++++++++++++++++++++++++++++------------
+ 2 files changed, 56 insertions(+), 17 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index df6d71c103f..ae846b204dc 100644
+index ae846b204dc..93bf752035c 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -1842,6 +1842,7 @@ config BOOTP_PXE_CLIENTARCH
+@@ -1717,6 +1717,7 @@ if CMD_NET
+ config CMD_BOOTP
+ 	bool "bootp"
+ 	default y
++	select LIB_RAND
+ 	help
+ 	  bootp - boot image via network using BOOTP/TFTP protocol
  
- config BOOTP_PXE_DHCP_OPTION
- 	bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
-+	default y
- 	depends on BOOTP_PXE
- 
- config BOOTP_VCI_STRING
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 21134eb7a30..9404f445187 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context *ctx, unsigned long pxefile_a
- 	int ret = get_pxe_file(ctx, pxelinux_configfile, pxefile_addr_r);
- 
- 	free(pxelinux_configfile);
-+	/* set to NULL to avoid double-free if DHCP is tried again */
-+	pxelinux_configfile = NULL;
- 
- 	return ret;
- }
+@@ -1725,7 +1726,6 @@ config CMD_DHCP
+ 	depends on CMD_BOOTP
+ 	help
+ 	  Boot image via network using DHCP/TFTP protocol
+-
+ config CMD_DHCP6
+ 	bool "dhcp6"
+ 	depends on IPV6
 diff --git a/net/bootp.c b/net/bootp.c
-index 68002909634..24547cf7bfd 100644
+index 24547cf7bfd..89425717328 100644
 --- a/net/bootp.c
 +++ b/net/bootp.c
-@@ -603,7 +603,7 @@ static int dhcp_extended(u8 *e, int message_type, struct in_addr server_ip,
- 	*cnt += 1;
- #endif
- 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
--		*e++ = 209;	/* PXELINUX Config File */
-+		*e++ = DHCP_OPTION_PXE_CONFIG_FILE;	/* PXELINUX Config File */
- 		*cnt += 1;
- 	}
- 	/* no options, so back up to avoid sending an empty request list */
-@@ -914,7 +914,7 @@ static void dhcp_process_options(uchar *popt, uchar *end)
- 				net_boot_file_name[size] = 0;
- 			}
- 			break;
--		case 209:	/* PXELINUX Config File */
-+		case DHCP_OPTION_PXE_CONFIG_FILE:	/* PXELINUX Config File */
- 			if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
- 				/* In case it has already been allocated when get DHCP Offer packet,
- 				 * free first to avoid memory leak.
-diff --git a/net/bootp.h b/net/bootp.h
-index 4e32b19d424..24b32c73f62 100644
---- a/net/bootp.h
-+++ b/net/bootp.h
-@@ -91,6 +91,8 @@ typedef enum { INIT,
- #define DHCP_NAK      6
- #define DHCP_RELEASE  7
+@@ -42,6 +42,22 @@
+  */
+ #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
  
-+#define DHCP_OPTION_PXE_CONFIG_FILE	209	/* "ConfigFile" option according to rfc5071 */
++/*
++ * According to rfc951 : 7.2. Client Retransmission Strategy
++ * "After the 'average' backoff reaches about 60 seconds, it should be
++ * increased no further, but still randomized."
++ *
++ * U-Boot has saturated this backoff at 2 seconds for a long time.
++ * To modify, set the environment variable "bootpretransmitperiodmax"
++ */
++#define RETRANSMIT_PERIOD_MAX_MS	60000
 +
- /**********************************************************************/
++/* Retransmission timeout for the initial packet (in milliseconds).
++ * This timeout will double on each retry.  To modify, set the
++ * environment variable bootpretransmitperiodinit.
++ */
++#define RETRANSMIT_PERIOD_INIT_MS	250
++
+ #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
+ #define CFG_DHCP_MIN_EXT_LEN 64
+ #endif
+@@ -53,6 +69,7 @@
+ u32		bootp_ids[CFG_BOOTP_ID_CACHE_SIZE];
+ unsigned int	bootp_num_ids;
+ int		bootp_try;
++u32		bootp_id;
+ ulong		bootp_start;
+ ulong		bootp_timeout;
+ char net_nis_domain[32] = {0,}; /* Our NIS domain */
+@@ -60,6 +77,7 @@ char net_hostname[32] = {0,}; /* Our hostname */
+ char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] = {0,}; /* Our bootpath */
  
- #endif /* __BOOTP_H__ */
+ static ulong time_taken_max;
++static u32   retransmit_period_max_ms;
+ 
+ #if defined(CONFIG_CMD_DHCP)
+ static dhcp_state_t dhcp_state = INIT;
+@@ -396,6 +414,7 @@ static void bootp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ static void bootp_timeout_handler(void)
+ {
+ 	ulong time_taken = get_timer(bootp_start);
++	int rand_minus_plus_100;
+ 
+ 	if (time_taken >= time_taken_max) {
+ #ifdef CONFIG_BOOTP_MAY_FAIL
+@@ -414,8 +433,17 @@ static void bootp_timeout_handler(void)
+ 		}
+ 	} else {
+ 		bootp_timeout *= 2;
+-		if (bootp_timeout > 2000)
+-			bootp_timeout = 2000;
++		if (bootp_timeout > retransmit_period_max_ms)
++			bootp_timeout = retransmit_period_max_ms;
++
++		/* Randomize by adding bootp_timeout*RAND, where RAND
++		 * is a randomization factor between -0.1..+0.1
++		 */
++		srand(get_ticks() + rand());
++		rand_minus_plus_100 = ((rand() % 200) - 100);
++		bootp_timeout = bootp_timeout +
++				(((int)bootp_timeout * rand_minus_plus_100) / 1000);
++
+ 		net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
+ 		bootp_request();
+ 	}
+@@ -711,10 +739,14 @@ static int bootp_extended(u8 *e)
+ 
+ void bootp_reset(void)
+ {
++	char *ep;  /* Environment pointer */
++
+ 	bootp_num_ids = 0;
+ 	bootp_try = 0;
+ 	bootp_start = get_timer(0);
+-	bootp_timeout = 250;
++
++	bootp_timeout = env_get_ulong("bootpretransmitperiodinit", 10, RETRANSMIT_PERIOD_INIT_MS);
++
+ }
+ 
+ void bootp_request(void)
+@@ -726,7 +758,6 @@ void bootp_request(void)
+ #ifdef CONFIG_BOOTP_RANDOM_DELAY
+ 	ulong rand_ms;
+ #endif
+-	u32 bootp_id;
+ 	struct in_addr zero_ip;
+ 	struct in_addr bcast_ip;
+ 	char *ep;  /* Environment pointer */
+@@ -742,6 +773,9 @@ void bootp_request(void)
+ 	else
+ 		time_taken_max = TIMEOUT_MS;
+ 
++	retransmit_period_max_ms = env_get_ulong("bootpretransmitperiodmax", 10,
++						 RETRANSMIT_PERIOD_MAX_MS);
++
+ #ifdef CONFIG_BOOTP_RANDOM_DELAY		/* Random BOOTP delay */
+ 	if (bootp_try == 0)
+ 		srand_mac();
+@@ -801,18 +835,23 @@ void bootp_request(void)
+ 	extlen = bootp_extended((u8 *)bp->bp_vend);
+ #endif
+ 
+-	/*
+-	 *	Bootp ID is the lower 4 bytes of our ethernet address
+-	 *	plus the current time in ms.
+-	 */
+-	bootp_id = ((u32)net_ethaddr[2] << 24)
+-		| ((u32)net_ethaddr[3] << 16)
+-		| ((u32)net_ethaddr[4] << 8)
+-		| (u32)net_ethaddr[5];
+-	bootp_id += get_timer(0);
+-	bootp_id = htonl(bootp_id);
+-	bootp_add_id(bootp_id);
+-	net_copy_u32(&bp->bp_id, &bootp_id);
++	/* Only generate a new transaction ID for each new BOOTP request */
++	if (bootp_try == 1) {
++		/*
++		 *	Bootp ID is the lower 4 bytes of our ethernet address
++		 *	plus the current time in ms.
++		 */
++		bootp_id = ((u32)net_ethaddr[2] << 24)
++			| ((u32)net_ethaddr[3] << 16)
++			| ((u32)net_ethaddr[4] << 8)
++			| (u32)net_ethaddr[5];
++		bootp_id += get_timer(0);
++		bootp_id = htonl(bootp_id);
++		bootp_add_id(bootp_id);
++		net_copy_u32(&bp->bp_id, &bootp_id);
++	} else {
++		net_copy_u32(&bp->bp_id, &bootp_id);
++	}
+ 
+ 	/*
+ 	 * Calculate proper packet lengths taking into account the
 -- 
 2.42.0
 
