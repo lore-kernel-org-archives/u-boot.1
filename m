@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5404EC197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 04:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B415AC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 05:02:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FD8C86CBD;
-	Fri, 17 Nov 2023 05:55:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF7B286E64;
+	Fri, 17 Nov 2023 06:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ODKy+Zx0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UHaV/Qxk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BB2186FA6; Fri, 17 Nov 2023 05:55:48 +0100 (CET)
-Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
- [IPv6:2607:f8b0:4864:20::a35])
+ id 96F1286E64; Fri, 17 Nov 2023 06:02:22 +0100 (CET)
+Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
+ [IPv6:2607:f8b0:4864:20::a31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD29386564
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:55:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4DCA842D0
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:02:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa35.google.com with SMTP id
- 71dfb90a1353d-4abf80eab14so583622e0c.2
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 20:55:43 -0800 (PST)
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-4af6a700086so593432e0c.1
+ for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 21:02:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700196942; x=1700801742; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700197332; x=1700802132; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=d0iUL6mTr7wWtPuWRf5x+V4GaTw0hTOBgrJ3BX3hryw=;
- b=ODKy+Zx0ii/q0d35buae1HXJT5iUJTdUHqdB150alP7o/lvmYJdbb+grt49jjphjcX
- f7yVbzJ43qEi6Rzz1t58I0CZIHMu5BDwOssx7OYSH7/AVcdLk1ZKk7PxIh4J13IqSFcc
- ZlsbgdlgmBaPiG+EahG9uNwhRUCx5ov7urG84b7y6xvJcu/k6tsunXQhMuhCeLevQ8lV
- YM1uzb0WQ7gsylcK5XJCFuASaT+eK0WNKDwvCQW4SWb/Jk1VmZp2PQG4Yftl6puKJuzJ
- wJav5Bn3zaAfvZ9roPFO+r71VCve9K/R9JcBxW/Xa9r4oIyUiH0b2+aksUJ8acuDXVqC
- /VsQ==
+ bh=NpfZVPZ//vVPIWI48i2XQuQd34kdp+wuuqsnm3A7HhM=;
+ b=UHaV/QxkFyAVaU03kax4DMV3Y/KXVSHFVO1RjdrDQPfnxTCNV+6FWWsX0C/lj6300u
+ jxtzBQl6TLqrqNjv70bTC4Ol1xC2YsIrK4HxADTzMGZXutRsf2ElPmdKyv2YyCb7FmUK
+ N2NtntMHK1lgydFMJbG3OUEnkvOfc7bPQpb6qwkdZ16lhkjU2v1g8AVGfuGWvwwfZlo4
+ VgrOXIg8/DmzVqCZlRig3/wPQnUFO1c+KSbd+gbvZ7Glo8J8qnYamk8pFP5pmctjXABg
+ MLBB0ZigqJBDcpntimQx5eeJ6Dd0yQfpHoMVAlxf1NR4TAZj3U8CZEZ1PCrobnh+88hN
+ TY0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700196942; x=1700801742;
+ d=1e100.net; s=20230601; t=1700197332; x=1700802132;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=d0iUL6mTr7wWtPuWRf5x+V4GaTw0hTOBgrJ3BX3hryw=;
- b=AkKlZQPTv3QVE/r4LCM4OPeyneo53bJWuSDZDXu7cVogPOHmT9T5cjgVjyIqbVYg13
- R/aYFKerBmTdf5rMjT4OWGCpfLd7jVKGVcSOEoMb1bQX7ONsSnI9J5TsQLGQPplC+3i7
- iEgHJpkzDKnMLWedXG+NYydyNJsQliLC61XiTZu0uh63N5igSWm7NZS8OlF0jOFcvYou
- 7mIHOaHa68FR0Ya+evBwpEH1GOu86xBpndmid7oBp/CDrn+mYgcK0SFQwtZk2OuHu2Cj
- 2gKIf/xbiNwOIoIlf4pbqrO/tH0iYn8kTyKyqliVru7ms+VnGIZlgrOnmWxvPJSsK+hU
- a8YA==
-X-Gm-Message-State: AOJu0YwJnlZ0SSl/crgeqYOlZhB8zYXGR+DvS2tEOSRSTG2X2i51bxbJ
- VtyqMxnXlfLxsi5cnyvRsvFK81Jmx3RNZiPE0i7V/w==
-X-Google-Smtp-Source: AGHT+IGWWodWbWryIAYZgdXu98VUXfDj0IIqr9lQnBXH4LfUWklZ6NEgKOpQBV522URmHNIUdGBl8v4R7lsnGUsGu6s=
-X-Received: by 2002:a1f:ee04:0:b0:4ac:1423:1be9 with SMTP id
- m4-20020a1fee04000000b004ac14231be9mr17358403vkh.13.1700196942333; Thu, 16
- Nov 2023 20:55:42 -0800 (PST)
+ bh=NpfZVPZ//vVPIWI48i2XQuQd34kdp+wuuqsnm3A7HhM=;
+ b=FGVzGbDoJPUcroA3nNt8Uo59WoDqBbCy1Z24wFSPNzlWIap7s7nARX9kAplZ84NMKS
+ 15hHL86E+EWZlqf0RsW/bbXiDPmE3Kls4Ua1qPlXfSxZydH9JXoJQdOLl8iAb1oQGZwg
+ y+FBiSu1QqnZEp6y4TsMRC86RjSriB6zWLYEbpIRkwcLepxG84WEjaA2HzMNeECeAC7Z
+ EQULol9EgBZzHbtZ8YNOOuv8AcybPZ/eKO/tA095P9mN2XpDIw8uqv60bdBt+fUhoa0Y
+ xsB9EkPz+Dw29eXrCd7CIr+CQyJxQPAuoTfBdWY0ixrrGF1TvU+zEKoLv1EMI3GqZFxb
+ tCkQ==
+X-Gm-Message-State: AOJu0YzL8jrXjhs1BZWQl/RABeMORRCaidzEi7umhE4cPn0AIq1WiayG
+ 6DozGipSUAtRPU86lNTRwvjlucBAPJdsUzwlmpR5sQ==
+X-Google-Smtp-Source: AGHT+IH5X+dP3ut9hNL9oPA4HruLESOUHq/fxxeLgz7+1Y01JaWWFeNIux/0nj3acO7WQsa1ND8DBXQ4pwv1CRVpTbA=
+X-Received: by 2002:a1f:cb86:0:b0:4af:f921:e6d3 with SMTP id
+ b128-20020a1fcb86000000b004aff921e6d3mr733636vkg.14.1700197332340; Thu, 16
+ Nov 2023 21:02:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org>
  <20231114-b4-qcom-dt-compat-v3-2-88a92f8f00ba@linaro.org>
 In-Reply-To: <20231114-b4-qcom-dt-compat-v3-2-88a92f8f00ba@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 17 Nov 2023 10:25:31 +0530
-Message-ID: <CAFA6WYNXrknzFHNvuZxwx1st4NmM_vGr44yBsZoYrHX2kGGYqg@mail.gmail.com>
+Date: Fri, 17 Nov 2023 10:32:01 +0530
+Message-ID: <CAFA6WYOA_CJWG=MHUWqHh1dEqR+wsG08=tttVSDAq=fKCK7zYA@mail.gmail.com>
 Subject: Re: [PATCH v3 2/5] gpio: qcom_pmic: rework pwrkey driver into a
  button driver
 To: Caleb Connolly <caleb.connolly@linaro.org>
@@ -171,6 +171,14 @@ On Tue, 14 Nov 2023 at 19:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 > -                                       reg = <0x800 0x96>;
 > -                                       #gpio-cells = <2>;
 > -                                       gpio-controller;
+
+Since you have switched to upstream Linux bindings here, there isn't
+any need for custom binding in u-boot here:
+doc/device-tree-bindings/gpio/pm8916_gpio.txt. So you can drop that as
+well.
+
+-Sumit
+
 > +                               pon@800 {
 > +                                       compatible = "qcom,pm8916-pon";
 > +                                       reg = <0x800 0x100>;
@@ -308,11 +316,6 @@ On Tue, 14 Nov 2023 at 19:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 > +                                               debounce = <15625>;
 > +                                               bias-pull-up;
 > +                                               status = "disabled";
-
-Is there a particular reason to keep the resin button disabled by default here?
-
--Sumit
-
 > +                                       };
 >                                 };
 >
