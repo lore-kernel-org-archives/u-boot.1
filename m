@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BBFC197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:30:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 146BFC197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:41:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C93D86F27;
-	Fri, 17 Nov 2023 14:30:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30FB486FA7;
+	Fri, 17 Nov 2023 14:41:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tzX7zFVs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q7HbleF3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 011E386EB8; Fri, 17 Nov 2023 14:30:43 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id E31E68749F; Fri, 17 Nov 2023 14:41:01 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A32B86F27
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:30:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0EE486FB8
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:40:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a90d6ab962so21965137b3.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:30:34 -0800 (PST)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-677f832d844so2262576d6.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:40:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700227833; x=1700832633; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OAG+ZLLQww6uEhigOIKN6lUXZM/HY8BUG/kGAZ1/pAY=;
- b=tzX7zFVsco5CjKvYzyWz/W0xkYTRgEsmQJ3HFAlMlUSohiJzeyyCdfciucjAiKtLIe
- BxQLxAP5kDOB4R/JZDVW+MbS0NoZW4CUA0YMaxNmTK2jZS5p8dpisZ3SZiHGo3s4ziPe
- roM1ek31f6pQPFUmCNWoH310gokVCyhpjdJjU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700227833; x=1700832633;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1700228456; x=1700833256; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OAG+ZLLQww6uEhigOIKN6lUXZM/HY8BUG/kGAZ1/pAY=;
- b=FtxKBeoGWBd3MKlkOqO+t7mAppbHGewocPPvPeI04O+s2gSJHRAiBysHswq4O/7s/J
- IK2AuhP0iAkrr58D0vxC8nxW/Eup0gVu529CwjlmmRgGg1TvRcW2kqtuaLLoVraKLvv6
- H2uwupHF/1sYGPhgydaeIEqK4Ms51EIJMtFKrH1X9On9UT8zEZrGEUK/DNk/Ckrn3a8E
- FkpYvbjC/lOzMJIdUb6khNf+za6s04stl5MxRauDu9FmFE8DwL5lqLzx3wQO6/fz72ry
- SiY26wsvDnWVrOqeofg93DNKiDIEyyWmjHGpdVZVc2N8wY0bZk+vVTqrb8Z2WYP2qe7f
- qwkQ==
-X-Gm-Message-State: AOJu0Yy/LBX684z1WP9KnDdkMNPGzg9IdXwdT5ZrkUcAOnusxI0QDMEH
- 9Fu3UGptWQ01brZ0yBsbWUOCDg==
-X-Google-Smtp-Source: AGHT+IHCI6yIfQPcqBZ3RfJtW5x9Qo94aQc6LrGPJf3+koHAZq3T2qnOLPczT4zuauuQ//FG8iFm6g==
-X-Received: by 2002:a0d:f383:0:b0:589:c065:b419 with SMTP id
- c125-20020a0df383000000b00589c065b419mr19171851ywf.34.1700227832822; 
- Fri, 17 Nov 2023 05:30:32 -0800 (PST)
-Received: from bill-the-cat
+ bh=K2SoHUNWiUM/4zw4Hi63H8zUeC6WgFwwCl8VEZlBQAI=;
+ b=q7HbleF3hkwrESFpnSLGMZsO6OSLlFML5fECJzo7V1pX7xr0r8mH5vyC+5M6LD6N6s
+ FyrNZKAY7pFnX6QBGuvMqSVmu2TscQCWNI3MaeeWoQUH4kEjCCw9TcryukoSxtwWXU0e
+ Ww29R0sgoHOm1IwqetDQS742ikdkPYJFG9qLI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700228456; x=1700833256;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K2SoHUNWiUM/4zw4Hi63H8zUeC6WgFwwCl8VEZlBQAI=;
+ b=eKBPyf/GrcZ1u+G2CnLwDnwFEU5r+vI/dwnkTn2pDGIBkWfAne8kNr3whr69Vfv6F/
+ eKfnONglSWsCJWC9yuRFPoTg1TL4Az19S2ZOsbEpvOueVjn9yf+3l3UMg7zMgteuzHXN
+ MS8zphkoq5KEpAKJqAPIp4DcJJ9Z+di82I7Kfl1JOEBKM37NLZMlD5nLAIZMWrHzVk6m
+ U4kMEk+luBaABQwSsuXn9BI9IAOhDCj6uHLesxfuf/IkqEr2ukHQobxn+eoMVa7P/0dU
+ VkXM7wxHlEVEkUGLOM9K6YFYF0XEwmkzkz//oeqP1ZkkG2t2OW2rXpz0xS6qV7xwLrxK
+ gwnw==
+X-Gm-Message-State: AOJu0YxzrY+9wZs6t6eep8notc441soeGKmoirntBlAQlevp6rxwFT2g
+ awZz3PwMrmZLNLDXsgA7cqX+oQ==
+X-Google-Smtp-Source: AGHT+IGmOKiTW2a+cbG3H7flpm3WUjeIq+XOjmAyEvXVy9oHq55x6vFBJZ2snHKXnp0soPUV3Kky+Q==
+X-Received: by 2002:a0c:ee63:0:b0:677:864d:c72 with SMTP id
+ n3-20020a0cee63000000b00677864d0c72mr11668317qvs.26.1700228455812; 
+ Fri, 17 Nov 2023 05:40:55 -0800 (PST)
+Received: from [127.0.1.1]
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- x83-20020a814a56000000b005bf57ef572dsm475416ywa.140.2023.11.17.05.30.31
+ lw23-20020a05621457d700b00670f8570a24sm633820qvb.23.2023.11.17.05.40.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 05:30:32 -0800 (PST)
-Date: Fri, 17 Nov 2023 08:30:30 -0500
+ Fri, 17 Nov 2023 05:40:55 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Mihai.Sain@microchip.com, seanga2@gmail.com, u-boot@lists.denx.de,
- Nicolas.Ferre@microchip.com, Aubin.Constans@microchip.com,
- Cristian.Birsan@microchip.com
-Subject: Re: [PATCH] arm: Enable SYS_THUMB_BUILD on AT91
-Message-ID: <20231117133030.GI170968@bill-the-cat>
-References: <20231105022742.632175-1-seanga2@gmail.com>
- <20231116184702.GA344953@bill-the-cat>
- <4906942a-8140-4264-afaa-3072f2eaed98@collabora.com>
- <PH8PR11MB68049E01B9388C294E9DD10582B7A@PH8PR11MB6804.namprd11.prod.outlook.com>
- <6133d5a4-9baf-486f-a595-59ce922964f9@collabora.com>
+To: u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Sean Anderson <seanga2@gmail.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
+In-Reply-To: <20231104203753.1579217-1-seanga2@gmail.com>
+References: <20231104203753.1579217-1-seanga2@gmail.com>
+Subject: Re: [PATCH v2 00/15] nand: Add sandbox tests
+Message-Id: <170022845499.752997.11727109077004834794.b4-ty@konsulko.com>
+Date: Fri, 17 Nov 2023 08:40:54 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="v6RB6ZjvAXykGFRZ"
-Content-Disposition: inline
-In-Reply-To: <6133d5a4-9baf-486f-a595-59ce922964f9@collabora.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,53 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 04 Nov 2023 16:37:38 -0400, Sean Anderson wrote:
 
---v6RB6ZjvAXykGFRZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This series tests raw nand flash in sandbox and fixes various bugs discovered in
+> the process. I've tried to do things in a contemporary manner, avoiding the
+> (numerous) variations present on only a few boards. The test is pretty minimal.
+> Future work could test the rest of the nand API as well as the MTD API.
+> 
+> Bloat (for v1) at [1] (for boards with SPL_NAND_SUPPORT enabled). Almost
+> everything grows by a few bytes due to nand_page_size. A few boards grow more,
+> mostly those using nand_spl_loaders.c. CI at [2].
+> 
+> [...]
 
-On Fri, Nov 17, 2023 at 01:58:35PM +0200, Eugen Hristev wrote:
-> On 11/17/23 11:15, Mihai.Sain@microchip.com wrote:
-> > Hi Eugen,
-> >=20
-> > I built new binaries with CONFIG_SYS_THUMB_BUILD=3Dy for sam9x60_curios=
-ity, sama5d29_curiosity, sama7g5ek and new sam9x75_curiosity board.
-> > I used the latest u-boot/master branch for this test.
-> > I noticed that the file size of the binaries have beed reduced with apr=
-ox 150KiB due to CONFIG_SYS_THUMB_BUILD=3Dy.
-> > After flashing the new binaries on these boards I can confirm that on a=
-ll boards the linux kernel was booted properly from mmc, qspi-flash, nand-f=
-lash and usb.
-> > I tested using bootm and bootz commands.
->=20
-> Thank you Mihai,
->=20
-> Tom, Sean, are you okay with this going in the next merge window ?
-> It is definitely not a fix, so that would be the best.
+Applied to u-boot/next, thanks!
 
-Thanks. I was looking at this for a series to go in to -next at this
-point, so v2024.04 release.
-
---=20
+-- 
 Tom
 
---v6RB6ZjvAXykGFRZ
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXavMACgkQFHw5/5Y0
-tyzoLwwAhlDCiRPk/YBJn/9YQw2vmBT8C6bmuVoa5NbS8wgScA7CnUf7tZFfNSp8
-C+11qy3wdufhdljSOpNy2WrTUhzytTLPEgNuGiRJkxsnwee6Fj01RmsH129xkYyY
-3QdJpYNL4ByZfnd4j7vizVBE+9H8+X8dbBAhqMxQMny9Unc952g7hIHkCO1mkaw4
-b7/LLVCu1ATK4sqq23CQjT9l7hizyuboRdELt405irfMGyqZ5EKbGjphnrWv7Yea
-lTGMiqLGO8mspPahhc0dqNp0/sffOQdMURaWSMVOR+MDI+r7xGEXUqGDubl2yOZH
-EEQ+KlOYflh4wYyuZr/y477q3g2Djv06UwuPzLEd37MV058JjwjxdkW7bxLhj6vY
-IlZ1J2pEDzUWwYI6/CE+t8O5QyaeeCf0npp1HpCxybMS2fUt63GQAYaT6Jjy7swM
-ZlIcrBsdpdmoXPzbCkBTe/keFcsy8B7+rGVyhobolgwoYQqDDzCxEb5pLTUq/6uM
-lC4OTOaO
-=hHPT
------END PGP SIGNATURE-----
-
---v6RB6ZjvAXykGFRZ--
