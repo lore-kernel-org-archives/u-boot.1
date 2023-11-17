@@ -4,50 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4003C54FB9
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 21:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EF5C54FB9
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:08:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43DEE874D9;
-	Fri, 17 Nov 2023 22:49:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 7785A86E96;
+	Fri, 17 Nov 2023 23:08:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="JSu7qLsL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p9kwZQAJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F8A5874EB; Fri, 17 Nov 2023 22:49:39 +0100 (CET)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 0F22286E42
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 22:49:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.microsoft.com
+ id B542F86EB8; Fri, 17 Nov 2023 23:08:46 +0100 (CET)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1147786E42
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:08:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 496DF20B74C2;
- Fri, 17 Nov 2023 13:49:27 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 496DF20B74C2
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
- s=default; t=1700257767;
- bh=jGUBvSXh8jHmyHRepSwb5+LUUJY0CA7fUDS7L9sjIM8=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=JSu7qLsLVwDhaetDDV3ioOPR51Oa/XSIuLMmfK13gAZQGcR+qvSpHswrm8VmTdU/E
- bvwLh/1zGdKWHivXHbtlTLdctYqZgSq3AIDy8o6+uGzJwuML4eyhd0B1NuvVBQN2QB
- OojdXc6gYJ2xlGmLEWhjPB/YK3b3pRNwfE7N5e0Q=
-From: seanedmond@linux.microsoft.com
-To: u-boot@lists.denx.de
-Cc: xypron.glpk@gmx.de,
-	pbrobinson@gmail.com,
-	trini@konsulko.com
-Subject: [PATCH v4 2/3] net: bootp: BOOTP/DHCPv4 retransmission improvements
-Date: Fri, 17 Nov 2023 13:49:24 -0800
-Message-ID: <20231117214925.138486-3-seanedmond@linux.microsoft.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-7781bc3783fso152663385a.1
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:08:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700258916; x=1700863716; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=coVk7OS4T/V+OJOGSWsotlQM4gavKpmydSpX/cZmkZU=;
+ b=p9kwZQAJkOMJxo6RlH+/DnzqUI4CAgLcioE/bDS492SeYMMrpS4er6yYTIAaO5JnSJ
+ 2UXzP+EQ0qZ+2w1S+kdAhxyZvlG5nExZVji0gU4jlo30uwWt/Wb/0Jyw+QjJ6gG1/Hm1
+ O5ad6yk2bAl635CGfwQVoS0ZJwF7xzhGUJ+Ag=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700258916; x=1700863716;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=coVk7OS4T/V+OJOGSWsotlQM4gavKpmydSpX/cZmkZU=;
+ b=UKnUADbZ3oFE5nCjmBnbUPDrKtTqv8Qzx4p+1AnFdb1LcwgU9rmXvsdI3VtshBeVDP
+ jwzUZlfVQSOsBkMyX/oG8pumL/8bCSD9nRsda7D/Z8Jn+FuZHRlWc8eDR0pnVTyvzlF5
+ JE9BuvxsIxAy670GbZhFAKSardy6qLOp4qIyCACxnnz8N3qppSL6gNGNtB7Hd7yZscDk
+ 1pNz0KKs5Hv72xIoW97pDvtxttjCYsBndRlepg4cJtT/dVOn/AUDQxImF6N7y/B4Bs4W
+ JnzRCfgyt11bN6VFTGls5xWBXl5UYsfteg/P5qyvkdU+RDFFiQhiUdOEbVLakhTC35XU
+ AGlw==
+X-Gm-Message-State: AOJu0YxhkBnT9ZYcNjQ7VtLe9ZlXGKA3qWC80QOU6UKODhApeS93dhOq
+ qv9ucpqpSJOBnVMbM3noL34MfA==
+X-Google-Smtp-Source: AGHT+IFWKiUN494pGkFP2UP2cBVZv8H9qCrOYBa/oHvkboKtZWA/9m37GjEMq3CwI7rgSdGGFrREoQ==
+X-Received: by 2002:ae9:ee03:0:b0:774:3147:425a with SMTP id
+ i3-20020ae9ee03000000b007743147425amr886567qkg.16.1700258915820; 
+ Fri, 17 Nov 2023 14:08:35 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
+ [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
+ by smtp.gmail.com with ESMTPSA id
+ ox15-20020a05620a828f00b0077a02cf7949sm916305qkn.32.2023.11.17.14.08.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Nov 2023 14:08:35 -0800 (PST)
+Date: Fri, 17 Nov 2023 17:08:33 -0500
+From: Tom Rini <trini@konsulko.com>
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, pbrobinson@gmail.com
+Subject: Re: [PATCH v4 3/3] net: bootp: add config option BOOTP_RANDOM_XID
+Message-ID: <20231117220833.GB170968@bill-the-cat>
 References: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
+ <20231117214925.138486-4-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rO2kDkkT0WBXQJX3"
+Content-Disposition: inline
+In-Reply-To: <20231117214925.138486-4-seanedmond@linux.microsoft.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,200 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sean Edmond <seanedmond@microsoft.com>
 
-This patch introduces 3 improvements to align with RFC 951:
-- retransmission backoff interval maximum is configurable
-- initial retranmission backoff interval is configurable
-- transaction ID is kept the same for each BOOTP/DHCPv4 request
+--rO2kDkkT0WBXQJX3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-In applications where thousands of nodes are serviced by a single DHCP
-server, maximizing the retransmission backoff interval at 2 seconds (the
-current u-boot default) exerts high pressure on the DHCP server and
-network layer.
+On Fri, Nov 17, 2023 at 01:49:25PM -0800, seanedmond@linux.microsoft.com wr=
+ote:
+> From: Sean Edmond <seanedmond@microsoft.com>
+>=20
+> The new config option BOOTP_RANDOM_XID will randomize the transaction ID
+> for each new BOOT/DHCPv4 exchange.
+>=20
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  cmd/Kconfig |  7 +++++++
+>  net/bootp.c | 31 +++++++++++++++++--------------
+>  2 files changed, 24 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 93bf752035c..244237e6d60 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1853,6 +1853,13 @@ config BOOTP_VCI_STRING
+>  	default "U-Boot.arm" if ARM
+>  	default "U-Boot"
+> =20
+> +config BOOTP_RANDOM_XID
+> +	bool "Send random transaction ID to BOOTP/DHCP server"
+> +	depends on CMD_BOOTP && (LIB_RAND || EXYNOS_ACE_SHA || RNG_NPCM)
 
-RFC 951 “7.2. Client Retransmission Strategy” states that the
-retransmission backoff interval should be limited to 60 seconds.  This
-patch allows the interval to be configurable using the environment
-variable "bootpretransmitperiodmax"
+This should be (LIB_RAND || LIB_HW_RAND)
 
-The initial retranmission backoff period defaults to 250ms, which is
-also too small for these scenarios with many clients.  This patch makes
-the initial retransmission interval to be configurable using the
-environment variable "bootpretransmitperiodinit".
+--=20
+Tom
 
-Also, on a retransmission it is not expected for the transaction ID to
-change (only the 'secs' field should be updated). Let's save the
-transaction ID and use the same transaction ID for each BOOTP/DHCPv4
-exchange.
+--rO2kDkkT0WBXQJX3
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
----
- cmd/Kconfig |  2 +-
- net/bootp.c | 71 +++++++++++++++++++++++++++++++++++++++++------------
- 2 files changed, 56 insertions(+), 17 deletions(-)
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index ae846b204dc..93bf752035c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1717,6 +1717,7 @@ if CMD_NET
- config CMD_BOOTP
- 	bool "bootp"
- 	default y
-+	select LIB_RAND
- 	help
- 	  bootp - boot image via network using BOOTP/TFTP protocol
- 
-@@ -1725,7 +1726,6 @@ config CMD_DHCP
- 	depends on CMD_BOOTP
- 	help
- 	  Boot image via network using DHCP/TFTP protocol
--
- config CMD_DHCP6
- 	bool "dhcp6"
- 	depends on IPV6
-diff --git a/net/bootp.c b/net/bootp.c
-index 24547cf7bfd..89425717328 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -42,6 +42,22 @@
-  */
- #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
- 
-+/*
-+ * According to rfc951 : 7.2. Client Retransmission Strategy
-+ * "After the 'average' backoff reaches about 60 seconds, it should be
-+ * increased no further, but still randomized."
-+ *
-+ * U-Boot has saturated this backoff at 2 seconds for a long time.
-+ * To modify, set the environment variable "bootpretransmitperiodmax"
-+ */
-+#define RETRANSMIT_PERIOD_MAX_MS	60000
-+
-+/* Retransmission timeout for the initial packet (in milliseconds).
-+ * This timeout will double on each retry.  To modify, set the
-+ * environment variable bootpretransmitperiodinit.
-+ */
-+#define RETRANSMIT_PERIOD_INIT_MS	250
-+
- #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
- #define CFG_DHCP_MIN_EXT_LEN 64
- #endif
-@@ -53,6 +69,7 @@
- u32		bootp_ids[CFG_BOOTP_ID_CACHE_SIZE];
- unsigned int	bootp_num_ids;
- int		bootp_try;
-+u32		bootp_id;
- ulong		bootp_start;
- ulong		bootp_timeout;
- char net_nis_domain[32] = {0,}; /* Our NIS domain */
-@@ -60,6 +77,7 @@ char net_hostname[32] = {0,}; /* Our hostname */
- char net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN] = {0,}; /* Our bootpath */
- 
- static ulong time_taken_max;
-+static u32   retransmit_period_max_ms;
- 
- #if defined(CONFIG_CMD_DHCP)
- static dhcp_state_t dhcp_state = INIT;
-@@ -396,6 +414,7 @@ static void bootp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
- static void bootp_timeout_handler(void)
- {
- 	ulong time_taken = get_timer(bootp_start);
-+	int rand_minus_plus_100;
- 
- 	if (time_taken >= time_taken_max) {
- #ifdef CONFIG_BOOTP_MAY_FAIL
-@@ -414,8 +433,17 @@ static void bootp_timeout_handler(void)
- 		}
- 	} else {
- 		bootp_timeout *= 2;
--		if (bootp_timeout > 2000)
--			bootp_timeout = 2000;
-+		if (bootp_timeout > retransmit_period_max_ms)
-+			bootp_timeout = retransmit_period_max_ms;
-+
-+		/* Randomize by adding bootp_timeout*RAND, where RAND
-+		 * is a randomization factor between -0.1..+0.1
-+		 */
-+		srand(get_ticks() + rand());
-+		rand_minus_plus_100 = ((rand() % 200) - 100);
-+		bootp_timeout = bootp_timeout +
-+				(((int)bootp_timeout * rand_minus_plus_100) / 1000);
-+
- 		net_set_timeout_handler(bootp_timeout, bootp_timeout_handler);
- 		bootp_request();
- 	}
-@@ -711,10 +739,14 @@ static int bootp_extended(u8 *e)
- 
- void bootp_reset(void)
- {
-+	char *ep;  /* Environment pointer */
-+
- 	bootp_num_ids = 0;
- 	bootp_try = 0;
- 	bootp_start = get_timer(0);
--	bootp_timeout = 250;
-+
-+	bootp_timeout = env_get_ulong("bootpretransmitperiodinit", 10, RETRANSMIT_PERIOD_INIT_MS);
-+
- }
- 
- void bootp_request(void)
-@@ -726,7 +758,6 @@ void bootp_request(void)
- #ifdef CONFIG_BOOTP_RANDOM_DELAY
- 	ulong rand_ms;
- #endif
--	u32 bootp_id;
- 	struct in_addr zero_ip;
- 	struct in_addr bcast_ip;
- 	char *ep;  /* Environment pointer */
-@@ -742,6 +773,9 @@ void bootp_request(void)
- 	else
- 		time_taken_max = TIMEOUT_MS;
- 
-+	retransmit_period_max_ms = env_get_ulong("bootpretransmitperiodmax", 10,
-+						 RETRANSMIT_PERIOD_MAX_MS);
-+
- #ifdef CONFIG_BOOTP_RANDOM_DELAY		/* Random BOOTP delay */
- 	if (bootp_try == 0)
- 		srand_mac();
-@@ -801,18 +835,23 @@ void bootp_request(void)
- 	extlen = bootp_extended((u8 *)bp->bp_vend);
- #endif
- 
--	/*
--	 *	Bootp ID is the lower 4 bytes of our ethernet address
--	 *	plus the current time in ms.
--	 */
--	bootp_id = ((u32)net_ethaddr[2] << 24)
--		| ((u32)net_ethaddr[3] << 16)
--		| ((u32)net_ethaddr[4] << 8)
--		| (u32)net_ethaddr[5];
--	bootp_id += get_timer(0);
--	bootp_id = htonl(bootp_id);
--	bootp_add_id(bootp_id);
--	net_copy_u32(&bp->bp_id, &bootp_id);
-+	/* Only generate a new transaction ID for each new BOOTP request */
-+	if (bootp_try == 1) {
-+		/*
-+		 *	Bootp ID is the lower 4 bytes of our ethernet address
-+		 *	plus the current time in ms.
-+		 */
-+		bootp_id = ((u32)net_ethaddr[2] << 24)
-+			| ((u32)net_ethaddr[3] << 16)
-+			| ((u32)net_ethaddr[4] << 8)
-+			| (u32)net_ethaddr[5];
-+		bootp_id += get_timer(0);
-+		bootp_id = htonl(bootp_id);
-+		bootp_add_id(bootp_id);
-+		net_copy_u32(&bp->bp_id, &bootp_id);
-+	} else {
-+		net_copy_u32(&bp->bp_id, &bootp_id);
-+	}
- 
- 	/*
- 	 * Calculate proper packet lengths taking into account the
--- 
-2.42.0
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVX5F4ACgkQFHw5/5Y0
+tyxIJAv/fbyngZ8nlTBttCrRve03fYv7P3dWi4nXrtKBkg4+hQ2Cc49YfBdognFD
+PmqpKH774CeH+NFuRDW2qXG/zfhwWVjzT4uVPewf20PDaDXOJoEBLM831SJcbxZJ
+UfMAyPynp9fasIZfU8AUP7YP8EYsd4fRYI+a2Wl2Xy4e6CyGJU+SKNMSFoKhuxp1
+WnsdW+/rueH32AOke49w5lraTx5ZWg9Pxw3/nb2WKeIj2IhBTUnAD88F73+L2GON
+WxeFuy/V43MbT4I5IYUxB1F3+TLn2Ld5JPux2yj8s95WKqG7J5/OYVrnUSWjYj4U
+2+Cbp6WXG1GnlNbXWSEZBR/mIf4ncMwEPE0MuoP/Kse8pZqEIh2cV9j930Xri4rc
+hA4CtDLp6icohaKJSZlBBcTix1H+dBcRzzE9bJAquaKEby9bxYy2Jm3eqOjYQQhd
+FmX4HMbFsttCze8gc7JTaiS7EG8pWKJPXzZCgkO1Jd61jLG7VwjXX+37x6LBcVs8
+y83PZlpn
+=OPpe
+-----END PGP SIGNATURE-----
 
+--rO2kDkkT0WBXQJX3--
