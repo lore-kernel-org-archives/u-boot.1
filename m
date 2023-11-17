@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FCC1C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:44:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B4AC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BB5C8751B;
-	Fri, 17 Nov 2023 14:42:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0773287508;
+	Fri, 17 Nov 2023 14:42:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eg6Q6wfU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TyZWSdBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD154874F6; Fri, 17 Nov 2023 14:42:19 +0100 (CET)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id F111E8750C; Fri, 17 Nov 2023 14:42:31 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35D7986F5C
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:42:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F08D587508
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:42:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6cd09663b1cso1183129a34.3
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:42:07 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-778999c5ecfso114058585a.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:42:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700228525; x=1700833325; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700228547; x=1700833347; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xdi5l0eA8JrC3fUWFYEk1+RHkV3Q3oLrfCZbs2waG7Q=;
- b=eg6Q6wfUOfrmsFwzmia+KFltExLRP+sye2Dj9aQ7xsyTRMxxflnRZpI/xTTTvUU6sp
- eh8obSnki1oy9jZPoi4ous9+LmICZqArnoSgxHIpOCdhH8GEHDcESvSB/yVFNj+FlkN3
- qO6LF9DIaQpQJOAwGOYU31vUGQRkZLKleRors=
+ bh=37Z69/mc3nTxGUqGWdjDDqjSU9x5K6FuwLTym+g4sPQ=;
+ b=TyZWSdBYQCkucgR5yCf+YhkAL3qJcpllyCNmnaW1LJapm+BmqWSAYWaW1QaBhc/3ty
+ aqPpTOEXA+l5TySMn2ecivcXNRgHPXoQRQVN1a793a4VyCGihx2fANPLDVQNM5K66MY8
+ 01QjAut/X7RlgUwhBlda6WkzKIbCWe22whcpw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700228525; x=1700833325;
+ d=1e100.net; s=20230601; t=1700228547; x=1700833347;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xdi5l0eA8JrC3fUWFYEk1+RHkV3Q3oLrfCZbs2waG7Q=;
- b=kDK+lBKKUOFFsHXByqKZdfABmvoQ+JJcyiBmFpoi7ZVUVBFj9vgIius2CAMsTFdnu+
- 04VUMxbRNyvokeIKWebVegt4oZhf5U9gtnnvaw7hj+9CkED/vKjXj4KVuKYc9i/NeXZx
- ik+wDJAuGqh7sUHKOITtk0Wvs66rkqV2SZqHNQ70yj7DpXlHKXrZwAS/XVU80ho1P8sQ
- dhXUkbe/FYy6yFLNHKZNVsCTD1YJruF7B0BENbitKiT2JGGxSWnhrBjnCrW9krAc39S3
- 4ZmBj+YHujb43ImfYxsOccyfZ8ajnVjpIX3vIohjDC/Yr16/RsZTHMiJ3cccyET/d09c
- CPuQ==
-X-Gm-Message-State: AOJu0YylkrZmfP7mTzrd0UawtcogpKMPti38WfUB+Qeqp9DevZzowRUi
- TZQwm48gFraFCq+AttI9nvSbig==
-X-Google-Smtp-Source: AGHT+IEX90SGbbNwtx1vl9mM4Jc5eRDK7k2JDhbS6i6OpL39inxVkuC7Z9tDsjOvVzlRqs7/EZG5wQ==
-X-Received: by 2002:a05:6358:52ce:b0:16b:c486:c315 with SMTP id
- z14-20020a05635852ce00b0016bc486c315mr14965643rwz.3.1700228525730; 
- Fri, 17 Nov 2023 05:42:05 -0800 (PST)
+ bh=37Z69/mc3nTxGUqGWdjDDqjSU9x5K6FuwLTym+g4sPQ=;
+ b=ZwiaoPMIwYs6Ns/JDCcIDcx0EHwXIL3kCznwO7tNOqHVu4TfwkY/QMUly6olZuF0tO
+ FD5/6HWFtZ/8IRUYxltuYqPfg2E1Yt7piZv7/THtaWBUcOjJ+Odh35CZqRdZIQXoL8cO
+ LGXWTkXidBUHca6Hn3YlPCFc4IScZE1aDnsH0BgsLPI+q8bk3vwkjilZqRrdqQ2mcYAb
+ JtR0T1FBZ7KLI8KjbjHe8EAdxdk8tVKhfpBO3ONs/71IccZWMrG118pUTm+F8cEIyc1C
+ bQrcL1cZKd3fzduBsDz6rBYT0lZ07Im48fOmpsFZPm79F5i5LNtXFysJz3wEtiY8k0jD
+ vd2g==
+X-Gm-Message-State: AOJu0YyaqDIzu5rdyrKje/n3GMzz4bSE/bq8jupyTCpyCm4stRJfGGF3
+ k9BEFbYFeG1VLfX1PeMeJ3Jbqg==
+X-Google-Smtp-Source: AGHT+IFnrjNAAbToMv3FYKqMnijXY3zx5Op0LDsj0aN2STNDPZhkQNEUuUU10GAVXUL8HAPD7JAksA==
+X-Received: by 2002:a05:6214:4598:b0:66d:5d31:999e with SMTP id
+ op24-20020a056214459800b0066d5d31999emr16374344qvb.43.1700228546864; 
+ Fri, 17 Nov 2023 05:42:26 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- o5-20020ac86985000000b0040399fb5ef3sm598869qtq.0.2023.11.17.05.42.04
+ lg22-20020a056214549600b00671248b9cfcsm630598qvb.67.2023.11.17.05.42.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 05:42:05 -0800 (PST)
-Date: Fri, 17 Nov 2023 08:42:03 -0500
+ Fri, 17 Nov 2023 05:42:26 -0800 (PST)
+Date: Fri, 17 Nov 2023 08:42:24 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Igor Prusov <ivprusov@salutedevices.com>
-Cc: u-boot@lists.denx.de, kernel@sberdevices.ru, prusovigor@gmail.com
-Subject: Re: [PATCH 1/3] linux/time.h: Add Linux time conversion defines
-Message-ID: <20231117134203.GU170968@bill-the-cat>
-References: <20231109171004.193521-1-ivprusov@salutedevices.com>
- <20231109200943.1.I1c2b8677c33d4dd9e8a0963acccebeb5c56118d2@changeid>
+To: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: u-boot@lists.denx.de, Peter Griffin <peter.griffin@linaro.org>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Shawn Guo <shawn.guo@linaro.org>
+Subject: Re: [PATCH v1 1/2] poplar: use random mac address
+Message-ID: <20231117134224.GX170968@bill-the-cat>
+References: <20231109223435.706053-1-igor.opaniuk@foundries.io>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GGFktFReenSUYnuo"
+ protocol="application/pgp-signature"; boundary="eP0Xs01zZUiLEVbJ"
 Content-Disposition: inline
-In-Reply-To: <20231109200943.1.I1c2b8677c33d4dd9e8a0963acccebeb5c56118d2@changeid>
+In-Reply-To: <20231109223435.706053-1-igor.opaniuk@foundries.io>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,41 +95,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GGFktFReenSUYnuo
+--eP0Xs01zZUiLEVbJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 09, 2023 at 08:10:02PM +0300, Igor Prusov wrote:
+On Thu, Nov 09, 2023 at 11:34:34PM +0100, Igor Opaniuk wrote:
 
-> Currently there are no defines for time conversion in time.h, which
-> leads to drivers declaring those locally or not using defines at all, so
-> add them from Linux.
+> Set CONFIG_NET_RANDOM_ETHADDR=3Dy, which sets random eth address in
+> case there is no configuration provided neither in CONFIG_ETHADDR
+> nor in "ethaddr" env variable.
 >=20
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> This fixes the problem:
+> poplar# dhcp
+> Error: ethernet@9841000 address not set.
+>=20
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---GGFktFReenSUYnuo
+--eP0Xs01zZUiLEVbJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXbasACgkQFHw5/5Y0
-tyytUgv+Ojp1orNY/cYIEQ6Cd+eIEGSx9eWb2dGJ6E8Zjxptz8N2D9wzuYg9XNpB
-gSLxeo1SVbvzv+sVsCq2qGvx0CRyrVEP2213KVzX6UnG1ElR0EhYdq9jwZB5QPHc
-XyqDPCgrkHYIX3+Y7ADOfTQ+/VLfexxPsSvMiGtGOPEUdt8b/vdIZEGwBpxYNkNg
-bNLKykfbccEtpnVjJ/4NXNKhMYQRnA6iLxgeQnQuNuAk/cjVXJN5KFvUPkUKFEnH
-2x3Olxw4Pji2hOaCRA1oO54zqEOwZxAtjTSjYKye4tGSWsp5hCFRkB/tM8rWlkKb
-2/JI7R4g7MfiaX7L6BSA5PIHXUW9pWAXzK2UpHT6LcwA/nu7wUJR0BjX0xHoDaNA
-HLePx7ETFM/Ar4gWiK2N+FpXDnX8s77/v9Hsg5Pu7nZe1ATREdocaPKnwrHxzdS4
-91tdSyhY4Ssw6wDVngep81edSfb271auNdJmiZkerF3ydR62PhctFOi9cv3+r6Mp
-KNji+E8z
-=ulcn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXbcAACgkQFHw5/5Y0
+tyzWSAv8DRnTDZFjlYu9nvO33cEVk7BbyKDO7s6YC9Eqsk/9FmmDoLGnWKBEnDEz
+sH/ltNjWHb4m7vQtcBHMsqn6bibyT0+J9FJOrN0YEcGUNnXJPbHjfRnMNejAlEgI
+0/B5po2kesrEubhybRy3dHWY+zSxxIW2LfQkXsOBk8ExvHg5KK5Sio20EUJ37iim
+CHNXwgD6BWZt5jnOxMFYvHYdcBynQyX8z0wLwMaIs1rfdM49ADkF/Tj10rqHmkti
+rBex3KGzvZkvWjocBLZw2Z+fNx/6hAk0mMlBWvIp+WY84oxDClFWK4c78Tno4KZ3
+smjo7UejfUjtGNCdmF/nzpoeXnj1SVb3e0WVqOLBF/oq1YwPye5mh3bznRmthsXX
+9V/diF0MORYYcA7UeQ2xTAZuiSFlbR48+9Mrm50TP/cABRbJafGjtiILeeCpMcxC
+ti2EaOXjRPBdOhY+vxc68bOEP+eYlm87AGKJVUn1A56ebksYiMKYHPfWljIMTK9V
+2YT302ZB
+=0cP8
 -----END PGP SIGNATURE-----
 
---GGFktFReenSUYnuo--
+--eP0Xs01zZUiLEVbJ--
