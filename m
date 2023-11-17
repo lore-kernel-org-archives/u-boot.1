@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A821C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 14:03:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CB37C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 14:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28ACD8748C;
-	Fri, 17 Nov 2023 15:03:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 954C186FC9;
+	Fri, 17 Nov 2023 15:07:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gITYR4w0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Arn1EFgl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45AB88749F; Fri, 17 Nov 2023 15:03:28 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id A0B6987083; Fri, 17 Nov 2023 15:07:27 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71AC28744B
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 15:03:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C7DE986FA7
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 15:07:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6cd0a8bc6dcso1117323a34.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:03:18 -0800 (PST)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-778711ee748so123323885a.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:07:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700229797; x=1700834597; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700230035; x=1700834835; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GNBdhkzUV4zm1DAohxoeKzY+E0lwZkznHrJkFRbad6k=;
- b=gITYR4w06Py/PmHUlx7KpMV/kEd9c36JZEeV8Uyh8NoLzpWsKfNkpKv8jT11NdQGrp
- aPgB0jmJLqd9Fj3XO81DbZhbqE6/jpwlcJUeX+fS3g8E/YDGtZoYcKMhUuiZAqXN0MpE
- niFqOGs3dGSallMCLe8qbA1iBNn13A++//IBg=
+ bh=cqwiS/Aj6Y5uefvjqWW87/5GHOBtMTDq0PXna+TzxIE=;
+ b=Arn1EFgl0CaQj3KInf7hM3/nZi+EqYVI8yDnPu/7NErnA07zF1lwl9nwRXZWixA7i6
+ 7Uy7aM2dW6Tjno0VsmkVxkGA6gZxqujg4TSvmNsTs1Jnq5ET8Vshn/9MW1EJDMCshYkM
+ IuHKxOx1CmY4m8KpFEwDW11vFI3ad1OVr5flU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700229797; x=1700834597;
+ d=1e100.net; s=20230601; t=1700230035; x=1700834835;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GNBdhkzUV4zm1DAohxoeKzY+E0lwZkznHrJkFRbad6k=;
- b=ucjHx/DfDYU9pXtZSF+tE22x4ENQg6NpLO0SyzK27q+w+fSDuFD/7+MzlpbMUiCqmi
- 7RMIEZJ+NJhrUAz82j8JgG8Y82vr7eiV0GabqSro5H45wESKWqoRx3Nf8+sCMig0vMdD
- clWH06yxq2vCf95ec7zp9yx4XOJKlyd8VUZJm07Vj84gXHaDy4n6W0/uNcK2ehjyV25l
- qgG5PIF25HTresokue3Ji5b7aeKYEMv9C+xeiZYdtKPAwNmy4S+DIV9sO1u6ZbmFqZG6
- Eu4zXi+V3qCuWTHDGs4dogKoBJPuA+aNUy0DuBMORfYkZERENtKHK6sToi97sg4O8G2D
- XzbA==
-X-Gm-Message-State: AOJu0YwQtWIsMofAr41suetnZ04L1rFSiw4idWvDysHkKqDNmvVUG/Se
- w+kpOLjZm1uKqKACFrQo95rPBg==
-X-Google-Smtp-Source: AGHT+IFHvvtUMfaeoc0ObDMpSSs7m2TgS49XVsCthuXES3PMQvpu8rbqVKcrAVGv4QwH9CIi95ijJQ==
-X-Received: by 2002:a05:6830:4409:b0:6c6:4a8d:da98 with SMTP id
- q9-20020a056830440900b006c64a8dda98mr15481548otv.24.1700229796948; 
- Fri, 17 Nov 2023 06:03:16 -0800 (PST)
+ bh=cqwiS/Aj6Y5uefvjqWW87/5GHOBtMTDq0PXna+TzxIE=;
+ b=lBmzYySLt5fvf7+BGJedBA+eQqZ1u5Sh5DL9IrX6a57LkJVi0NtMLnDNrUI6jNW3kf
+ VhTPpmOtCIIH0YGwUYBNQaJADxYdRNUKpUNbS5pHKwOAFlYZeW7mB4BkxV99aog/6JNL
+ 19pj7q8lPS3Rk8p9wpWbHKM1D7E4o5hSJ7NRHIkZOUIJKPHVLBCLWmlJk2cX97WwT96s
+ moCpKLQzhQVgLrKPRZqyeL01KhXNV3p4Iulx4s6T7E/MoT+E/StEVESEYnqq/sz3x++u
+ 0WvxWOQAHSdRPe07+h8+pIP1FpBumWlSC1zmnb4X+bkcSGLmLlzMKc3hMhXQRTfO3VBx
+ vcgg==
+X-Gm-Message-State: AOJu0YwloLvh+uYGCCBXczDBiMS+rneNZlR5eYPH74EPQMkgJ3sXltT7
+ /lyZQ7RiIXz/n+jWx9xQg4KzpQ==
+X-Google-Smtp-Source: AGHT+IGaZgCsxwTsxTSSy+aoN1HsebOSywKVueP8c/M+xFNGCGk4ok0jiDDPouYbdSca5n8NLfcBJA==
+X-Received: by 2002:a05:620a:133a:b0:775:cf5e:a66d with SMTP id
+ p26-20020a05620a133a00b00775cf5ea66dmr11077204qkj.24.1700230035565; 
+ Fri, 17 Nov 2023 06:07:15 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- jh5-20020a0562141fc500b0065b13180892sm658260qvb.16.2023.11.17.06.03.16
+ vv24-20020a05620a563800b0076cda7eab11sm606395qkn.133.2023.11.17.06.07.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 06:03:16 -0800 (PST)
-Date: Fri, 17 Nov 2023 09:03:14 -0500
+ Fri, 17 Nov 2023 06:07:15 -0800 (PST)
+Date: Fri, 17 Nov 2023 09:07:13 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>, Aubin.Constans@microchip.com
-Subject: Re: [PATCH] arm: Enable SYS_THUMB_BUILD on AT91
-Message-ID: <20231117140314.GC170968@bill-the-cat>
-References: <20231105022742.632175-1-seanga2@gmail.com>
- <170022845734.752997.10698883770687016451.b4-ty@konsulko.com>
- <7c54854e-9319-4577-aa10-44a49a9160c1@collabora.com>
- <20231117134633.GB170968@bill-the-cat>
- <5009cc6a-6f48-4cea-96b1-e7ce8370ed5d@collabora.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: nm@ti.com, "Kumar, Udit" <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>,
+ u-boot@lists.denx.de, vigneshr@ti.com
+Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization
+ for J7200
+Message-ID: <20231117140713.GD170968@bill-the-cat>
+References: <20231003081038.24299-1-j-keerthy@ti.com>
+ <20231003081038.24299-11-j-keerthy@ti.com>
+ <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
+ <20231003151033.GD8465@bill-the-cat>
+ <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
+ <20231116184052.GE170968@bill-the-cat>
+ <4f440a06-892b-4098-9565-6b21778bb5bb@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="twGgsXJFEU2Wp31T"
+ protocol="application/pgp-signature"; boundary="WrgB1c8gDq1G5UZk"
 Content-Disposition: inline
-In-Reply-To: <5009cc6a-6f48-4cea-96b1-e7ce8370ed5d@collabora.com>
+In-Reply-To: <4f440a06-892b-4098-9565-6b21778bb5bb@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,69 +100,99 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---twGgsXJFEU2Wp31T
-Content-Type: text/plain; charset=us-ascii
+--WrgB1c8gDq1G5UZk
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 17, 2023 at 03:49:57PM +0200, Eugen Hristev wrote:
-> On 11/17/23 15:46, Tom Rini wrote:
-> > On Fri, Nov 17, 2023 at 03:45:02PM +0200, Eugen Hristev wrote:
-> > > On 11/17/23 15:40, Tom Rini wrote:
-> > > > On Sat, 04 Nov 2023 22:27:42 -0400, Sean Anderson wrote:
-> > > >=20
-> > > > > Several AT91 boards are quite close to their SPL size limit. For =
-example,
-> > > > > sama5d27_wlsom1_ek_mmc is just 173 bytes short of its limit and d=
-oesn't
-> > > > > even fit with older GCCs.
+On Fri, Nov 17, 2023 at 02:00:43PM +0530, Neha Malcom Francis wrote:
+> Hi Tom
+>=20
+> On 17/11/23 00:10, Tom Rini wrote:
+> > On Thu, Nov 16, 2023 at 11:43:50AM +0530, Neha Malcom Francis wrote:
+> > > Hi Tom,
+> > >=20
+> > > Trying to bring back this series here.
+> > >=20
+> > > On 03/10/23 20:40, Tom Rini wrote:
+> > > > On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
 > > > > >=20
-> > > > > All AT91 processors should have thumb support. Enable SYS_THUMB_B=
-UILD. This
-> > > > > shrinks SPL by around 30%.
+> > > > > On 10/3/2023 1:40 PM, Keerthy wrote:
+> > > > > > Enable ESM initialization for J7200
+> > > > > >=20
+> > > > > > Signed-off-by: Keerthy <j-keerthy@ti.com>
+> > > > > > ---
+> > > > > >     board/ti/j721e/evm.c | 6 ++++--
+> > > > > >     1 file changed, 4 insertions(+), 2 deletions(-)
+> > > > > >=20
+> > > > > > diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> > > > > > index 42fa94b7a5..070b28326f 100644
+> > > > > > --- a/board/ti/j721e/evm.c
+> > > > > > +++ b/board/ti/j721e/evm.c
+> > > > > > @@ -543,7 +543,8 @@ void spl_board_init(void)
+> > > > > >     	}
+> > > > > >     #ifdef CONFIG_ESM_K3
+> > > > > > -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+> > > > > > +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
+> > > > > > +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
 > > > > >=20
-> > > > > [...]
+> > > > >=20
+> > > > > Could we align on one kind of check,=A0 For J721E check is done a=
+gainst
+> > > > > board-id, whereas for J7200 checking
 > > > >=20
-> > > > Applied to u-boot/next, thanks!
+> > > > We should look at figuring out how to split this file in two.  One =
+for
+> > > > "generic J721E systems" and one for "TI EVMs", as I've mentioned in
+> > > > other threads, so that it's easier for custom platforms to drop code
+> > > > they don' require.
 > > > >=20
 > > >=20
-> > > so I'd assume that it would go through at91 tree.
+> > > Yes that does make sense. Would it be okay if we solve that problem
+> > > separately in a different patch series? We can move along with this c=
+urrent
+> > > series for now (after making the required change in CONFIG/board-id f=
+or v2)
+> > > since ESM support is important for these platforms.
 > >=20
-> > Ah, sorry. Since it was blocking two other series from coming in and you
-> > had gotten it tested I had assumed I could pull it to -next now to
-> > unblock that work.
+> > Well, I think part of the answer to your question is (and this is a more
+> > general TI one too), what outstanding changes need to come in now to
+> > make existing platforms functional for v2024.01 ? My first thought is
+> > that this series would be taken to -next, if I took it now, which means
+> > there's time before it would be in master, and so if it really makes the
+> > re-org later easier, we could take it, but if not, can we re-org then do
+> > this? But if we need this to deal with regressions, OK, yes, we can take
+> > it like this now.
+> >=20
 >=20
-> This is yet another time at91 patches get applied directly. Maybe you do =
-not
-> really need an at91 maintainer ?
+> Maybe focusing on the re-org after having in the changes would help give
+> more perspective on how we can split? Not sure just a thought... in that
+> case I prefer taking this in and having a working error signaling module =
+in
+> rather than delaying it if that's okay.
 
-U-Boot does not tend to have the strict sub-tree breakdown that the
-kernel does. Given what happened last time I was hoping that reaching
-out and then that you were able to have the changes tested would be
-sufficient for changes going to -next, rather than the current release.
-In future I will just wait for changes to come via the at91 tree, like I
-do for some other areas where the overall custodian prefers to have a
-more strict policy. Sorry.
+OK, please rebase on top of whatever other series are needed (and note
+so in the cover letter) and mark it as non-RFC, thanks.
 
 --=20
 Tom
 
---twGgsXJFEU2Wp31T
+--WrgB1c8gDq1G5UZk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXcpgACgkQFHw5/5Y0
-tywIOAv+Ks/+nYBPe05qRHGahZTcoc5nBtRb1TROMKMigs/esorzHGE3urw675qH
-VT2S19Jkys6xfJ9hii86gV1eDWqRsd0KLrFpkOUAvjkFy2m4AkZksRXV/1RmU1sh
-0Nk56PJxbIY2Vwa37BLeMDkgs7i+gLaKYotJLgoID7OcEHW4be3Vep4oECRk3Q9X
-KJJf1sv2dMFMEKtGijPwt6gjyiHl6kuE57snXhPwWYbJwUJw2aTs+i5eB0HGU8Wb
-s2BwMDaBFeLxI311hdAVxYn84tytcctBrno2/K4FhY/YcjU79bfhaxP+zwccuGcO
-ylqUMkvDouc0inSoPg0QjuIAmG0mjxqD1pzDoeXOyLxrEjJi9ehj91fYkXIsCTFd
-MYIcWxwvI7RvtuQd8UhOVq8Q7i3dCUbFPjL9o8W18HqCAWvHkYD9Wmje5Vkddgq/
-0bWCno4uNX3eyK/0cl2Hd/LUNo1iE7+GCIRn4C/neMV/jkF8MIaLsx9fDck5gzg6
-9hpH8zsd
-=URqE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXc5EACgkQFHw5/5Y0
+tywWmAv+IMhrLD0S0YAxyZtoWTy4BsEVZxWWel56oiXed9g2SuSZKecBolQTt+4V
+YSaOgOcTBSZidYdIArlrV+PNItvhukkjnaedke6uteuiZlsZ62VSra00Hp1usl/6
+v2HBbOKbjtyP/5XMItYN5OGOM+Wr0Zsynn+K5pfudWthalLf+2fMbCQr1YoMnUl6
+/qsxJadEnlfSZyqyOJj9dR8tkHk8IHLsmIlpVqD69U94uFknLTv203kWQqrGiNOe
+pH1vuhGTKTbTc/+i7uLR14iZqlKWynS/SXWqw6pjYkkKO+xMd/D8fQc0OQupeV/t
+Xbp6UpUCCBY3y5ytvsA2U9hwZ2EzM+Fs010CoyGdIoFd58wF/dtjwivk+1H0DpvT
+Ikb6xuWGDzUJZEtSKo0THgNrTy9hDB6oa5bUVEDKIgT7ABo4kiBjjjCsPS/YpP4w
+EcpGgh9zHdbN7dNp8/jDkPfRQsTvkErf7lwJrUfDLO32EILa1QiApXbGmWBBsqvp
+kRRIzeP/
+=fr7w
 -----END PGP SIGNATURE-----
 
---twGgsXJFEU2Wp31T--
+--WrgB1c8gDq1G5UZk--
