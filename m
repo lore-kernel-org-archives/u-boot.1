@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D844DC072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:54:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AC9C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:54:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C7BD874E9;
+	by phobos.denx.de (Postfix) with ESMTP id E54FA87508;
 	Fri, 17 Nov 2023 23:53:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Syfs8b6x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qj3rRIJw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 238AF874FB; Fri, 17 Nov 2023 23:53:32 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 4254E874D9; Fri, 17 Nov 2023 23:53:32 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2D4C874D9
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:53:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0C7F874E5
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:53:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-677f832d844so5242506d6.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:53:18 -0800 (PST)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-66d87554434so14477016d6.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:53:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700261597; x=1700866397; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700261598; x=1700866398; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=yncfUOdR428xSI5RG+oWq1WkcHuS7poQBB7zxlboJuk=;
- b=Syfs8b6xIWMpJFp4E86brt6DSTmhyblHzCaHpSJz1B4jpgbMYcBfifBWAgz6Hwzk8r
- AiYYnl8gEov2D6ghkMrYdz5btL9zu2GA9yvRV0dIYL8b8g6cPTgm9DmONGgdqby08Ovt
- 1rxwKAMMKyMYAK7GgkOHAP3mYwVGrkJIBY3p0=
+ :reply-to; bh=YcfJ6K7jKF5p31pulOyoPWyI2txGZxXMYqU9ANtYwrE=;
+ b=qj3rRIJwRxaryb5lihZWGPkL+emgKypAKf12cM9PZfagwOqTAlJVjsYaHPCC5xhowg
+ lyax+fuCHt00YnXqM56uIHny7f1odyn2i5HW6u8eaMX7mwINDnDXGWTGHzxlfStWHoeT
+ lWUjCdrS5HV5rPoPANkkOTmdcMQxTjFk7UrKY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700261597; x=1700866397;
+ d=1e100.net; s=20230601; t=1700261598; x=1700866398;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yncfUOdR428xSI5RG+oWq1WkcHuS7poQBB7zxlboJuk=;
- b=OGkIubAkUq9nYie2O1nEAsy4HWGeJzKkOGI+WFHq00DVk8PmDBUmHl++Qjr7QcmE/V
- 9DpMAaEfJL+0baREA37FkkNDtDO4SQkG4GgzCVi+amJW2S8gqqY3aKvXJODYslPCeHfx
- lFiZxZCWDCb0kUEykWdA8UtPS6T5dJBR/UJCA+RlSLb4zBSe0lsPXpmAsKvg6/iqwfkq
- 8JihLt7w2IoDVAUrsS+vRN0FkxKX0I5PlMX4fGwt7Mk3GlwdwJH+3bwciR2en7NeN0wN
- qEKiStk5ZMtSAOivW+Mjd0QFj9hLEHQaAkEWdXvrF7mg4pIrSkKEMNDGrC5QbZwmtNFu
- MTsw==
-X-Gm-Message-State: AOJu0YyypU9VX6z4EpRioH61WAJuDX+EiW4kE3xeA0OUq1IKwOLR1QxT
- JbgxnNW139mMqCXoD5VpbJ3aWghUTi4nwn8ZrrS8uA==
-X-Google-Smtp-Source: AGHT+IFYuk9FzJATu2P2MqqyZzqOMjE64P+ehKly6bVxTs9oa8QPePm4nLCbVEVjDiobtudMHBejtw==
-X-Received: by 2002:a05:6214:1d23:b0:66f:b8a2:521a with SMTP id
- f3-20020a0562141d2300b0066fb8a2521amr736220qvd.17.1700261596748; 
- Fri, 17 Nov 2023 14:53:16 -0800 (PST)
+ bh=YcfJ6K7jKF5p31pulOyoPWyI2txGZxXMYqU9ANtYwrE=;
+ b=BLQPO4WvNbeA42NtqdS1H7mr970Qek2U0ZiFBm8LtXlb1/LcYc6whohOyURoyVf861
+ 7aDwGB1HO1ZBm/Y4kbZKsQRpIjUg42Nn0r6k9BQWY3HIDhPf3P57xe3WZBNBDakB8JNh
+ dkgD2YRuxPBlq3bdNqBH9zCxBtlopUPkMPSxv2Hg3xkahT+CNk6RCpJMutlb5ngQI/k/
+ jZ3tOvjwQwd+R4Z43AC0it8iEc7l6MoQDcJDwT5gqLaK6pufWDTzDy6FXRCnVImeYOIG
+ mRYCKeoykrhdj9yiYDib2FgZwpDHOLJ1XP3X8wn/78kZsOWvGZ17tHbL1nHmVQHc6JRC
+ f4AA==
+X-Gm-Message-State: AOJu0YzY0En7L9dIncFLkyFqD4s5B5YadKw2Q+HxiO4+dTV2s3Us/rnL
+ Gi14pbNy/BuLcIqDVC8H5OEMSU7WDy4oJ3CYPrmwuA==
+X-Google-Smtp-Source: AGHT+IFad82TSJgijBJzHz1rbwmXNY14tw5lFfuemlweTE+3CMFvRt4f0tKcak5BZdipsCTmE5JuZg==
+X-Received: by 2002:ad4:5e89:0:b0:65b:ed3:9a02 with SMTP id
+ jl9-20020ad45e89000000b0065b0ed39a02mr685997qvb.17.1700261597726; 
+ Fri, 17 Nov 2023 14:53:17 -0800 (PST)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
  [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
@@ -62,12 +62,12 @@ Received: from bill-the-cat.lan
  r12-20020a05621410cc00b0065b08bb01afsm961084qvs.124.2023.11.17.14.53.16
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 14:53:16 -0800 (PST)
+ Fri, 17 Nov 2023 14:53:17 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 4/5] sandbox: Audit config.h and common.h usage
-Date: Fri, 17 Nov 2023 17:53:12 -0500
-Message-Id: <20231117225313.2144665-4-trini@konsulko.com>
+Subject: [PATCH 5/5] global: Drop common.h inclusion
+Date: Fri, 17 Nov 2023 17:53:13 -0500
+Message-Id: <20231117225313.2144665-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231117225313.2144665-1-trini@konsulko.com>
 References: <20231117225313.2144665-1-trini@konsulko.com>
@@ -89,188 +89,438 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove and replace common.h and config.h in sandbox when it's not needed
-and add some explicit includes where needed.
+In order to make it easier to move on to dropping common.h from code
+directly, remove common.h inclusion from the rest of the header file
+which had been including it.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/sandbox/cpu/cache.c         | 1 -
- arch/sandbox/cpu/cpu.c           | 1 -
- arch/sandbox/cpu/sdl.c           | 2 +-
- arch/sandbox/cpu/spl.c           | 1 -
- arch/sandbox/cpu/start.c         | 2 +-
- arch/sandbox/cpu/state.c         | 2 +-
- arch/sandbox/include/asm/io.h    | 2 ++
- arch/sandbox/include/asm/state.h | 1 -
- arch/sandbox/lib/bootm.c         | 1 -
- arch/sandbox/lib/fdt_fixup.c     | 1 -
- arch/sandbox/lib/interrupts.c    | 1 -
- arch/sandbox/lib/pci_io.c        | 1 -
- board/sandbox/sandbox.c          | 2 +-
- 13 files changed, 6 insertions(+), 12 deletions(-)
+ board/BuR/common/br_resetc.h                   | 1 -
+ board/CZ.NIC/turris_mox/mox_sp.h               | 2 --
+ board/freescale/common/vsc3316_3308.h          | 1 -
+ board/ti/ks2_evm/mux-k2g.h                     | 1 -
+ board/tq/tqma6/tqma6_bb.h                      | 2 --
+ board/xilinx/zynqmp/xil_io.h                   | 1 -
+ disk/part_amiga.h                              | 1 -
+ drivers/bios_emulator/include/x86emu.h         | 1 -
+ drivers/crypto/fsl/jobdesc.h                   | 1 -
+ drivers/crypto/fsl/rsa_caam.h                  | 2 --
+ drivers/ddr/altera/sdram_soc64.h               | 1 -
+ drivers/ddr/marvell/a38x/ddr_ml_wrapper.h      | 1 -
+ drivers/net/fm/fm.h                            | 1 -
+ drivers/net/fsl-mc/dpio/qbman_private.h        | 1 -
+ drivers/net/fsl-mc/dpio/qbman_sys.h            | 1 +
+ drivers/net/mscc_eswitch/mscc_mac_table.c      | 1 +
+ drivers/net/mscc_eswitch/mscc_mac_table.h      | 2 --
+ drivers/net/mscc_eswitch/mscc_xfer.c           | 1 +
+ drivers/net/mscc_eswitch/mscc_xfer.h           | 2 --
+ drivers/pci/pcie_layerscape_fixup_common.h     | 2 --
+ drivers/pci_endpoint/pcie-cadence.h            | 1 -
+ drivers/pinctrl/mtmips/pinctrl-mtmips-common.h | 2 --
+ drivers/usb/gadget/bcm_udc_otg.h               | 2 --
+ fs/btrfs/ctree.h                               | 1 -
+ fs/yaffs2/ydirectenv.h                         | 1 -
+ lib/libavb/avb_sysdeps.h                       | 4 +++-
+ lib/zlib/zlib.h                                | 1 -
+ net/arp.h                                      | 2 --
+ net/link_local.h                               | 5 +----
+ net/net_rand.h                                 | 1 -
+ net/ping.h                                     | 1 -
+ 31 files changed, 7 insertions(+), 40 deletions(-)
 
-diff --git a/arch/sandbox/cpu/cache.c b/arch/sandbox/cpu/cache.c
-index 46c62c0b4461..c8a5e64214b6 100644
---- a/arch/sandbox/cpu/cache.c
-+++ b/arch/sandbox/cpu/cache.c
-@@ -3,7 +3,6 @@
-  * Copyright 2020, Heinrich Schuchardt <xypron.glpk@gmx.de>
+diff --git a/board/BuR/common/br_resetc.h b/board/BuR/common/br_resetc.h
+index ba0689bf2050..999045b867d2 100644
+--- a/board/BuR/common/br_resetc.h
++++ b/board/BuR/common/br_resetc.h
+@@ -7,7 +7,6 @@
   */
+ #ifndef __CONFIG_BRRESETC_H__
+ #define __CONFIG_BRRESETC_H__
+-#include <common.h>
+ 
+ int br_resetc_regget(u8 reg, u8 *dst);
+ int br_resetc_regset(u8 reg, u8 val);
+diff --git a/board/CZ.NIC/turris_mox/mox_sp.h b/board/CZ.NIC/turris_mox/mox_sp.h
+index 720880d5df32..c766c7423ac5 100644
+--- a/board/CZ.NIC/turris_mox/mox_sp.h
++++ b/board/CZ.NIC/turris_mox/mox_sp.h
+@@ -6,8 +6,6 @@
+ #ifndef _BOARD_CZNIC_TURRIS_MOX_MOX_SP_H_
+ #define _BOARD_CZNIC_TURRIS_MOX_MOX_SP_H_
  
 -#include <common.h>
- #include <cpu_func.h>
- #include <asm/state.h>
- 
-diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index a1c5c7c4311a..d6475c969c4d 100644
---- a/arch/sandbox/cpu/cpu.c
-+++ b/arch/sandbox/cpu/cpu.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY	LOGC_SANDBOX
- 
--#include <common.h>
- #include <bootstage.h>
- #include <cpu_func.h>
- #include <errno.h>
-diff --git a/arch/sandbox/cpu/sdl.c b/arch/sandbox/cpu/sdl.c
-index 590e406517bf..ed84646bdab7 100644
---- a/arch/sandbox/cpu/sdl.c
-+++ b/arch/sandbox/cpu/sdl.c
-@@ -72,7 +72,7 @@ static struct sdl_info {
- static void sandbox_sdl_poll_events(void)
- {
- 	/*
--	 * We don't want to include common.h in this file since it uses
-+	 * We don't want to include cpu_func.h in this file since it uses
- 	 * system headers. So add a declation here.
- 	 */
- 	extern void reset_cpu(void);
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index 16b766279833..9ad9da686c6a 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2016 Google, Inc
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <hang.h>
- #include <handoff.h>
-diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
-index 2589c2eba738..dce804165296 100644
---- a/arch/sandbox/cpu/start.c
-+++ b/arch/sandbox/cpu/start.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2011-2012 The Chromium OS Authors.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <cli.h>
- #include <command.h>
- #include <efi_loader.h>
-diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
-index e38bb248b7ff..2462f990baae 100644
---- a/arch/sandbox/cpu/state.c
-+++ b/arch/sandbox/cpu/state.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2011-2012 The Chromium OS Authors.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <autoboot.h>
- #include <bloblist.h>
- #include <errno.h>
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index 31ab7289b4bd..1ccb25a0fe1e 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -6,6 +6,8 @@
- #ifndef __SANDBOX_ASM_IO_H
- #define __SANDBOX_ASM_IO_H
- 
-+#include <linux/types.h>
-+
- enum sandboxio_size_t {
- 	SB_SIZE_8,
- 	SB_SIZE_16,
-diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
-index 59a20595f51d..c84a1f7060f4 100644
---- a/arch/sandbox/include/asm/state.h
-+++ b/arch/sandbox/include/asm/state.h
+-
+ enum cznic_a3720_board {
+ 	BOARD_UNDEFINED		= 0x0,
+ 	BOARD_TURRIS_MOX	= 0x1,
+diff --git a/board/freescale/common/vsc3316_3308.h b/board/freescale/common/vsc3316_3308.h
+index 8d343ba4d654..9725d6d9e390 100644
+--- a/board/freescale/common/vsc3316_3308.h
++++ b/board/freescale/common/vsc3316_3308.h
 @@ -6,7 +6,6 @@
- #ifndef __SANDBOX_STATE_H
- #define __SANDBOX_STATE_H
+ #ifndef __VSC_CROSSBAR_H_
+ #define __VSC_CROSSBAR_H_
  
--#include <config.h>
- #include <sysreset.h>
- #include <stdbool.h>
- #include <linux/list.h>
-diff --git a/arch/sandbox/lib/bootm.c b/arch/sandbox/lib/bootm.c
-index dc8b8e46cb41..270671145a0b 100644
---- a/arch/sandbox/lib/bootm.c
-+++ b/arch/sandbox/lib/bootm.c
-@@ -4,7 +4,6 @@
-  * Copyright (c) 2015 Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+-#include <common.h>
+ #include <i2c.h>
+ #include <errno.h>
+ 
+diff --git a/board/ti/ks2_evm/mux-k2g.h b/board/ti/ks2_evm/mux-k2g.h
+index f24e62850b8b..447e70607f96 100644
+--- a/board/ti/ks2_evm/mux-k2g.h
++++ b/board/ti/ks2_evm/mux-k2g.h
+@@ -6,7 +6,6 @@
+  *     Texas Instruments Incorporated, <www.ti.com>
   */
  
 -#include <common.h>
- #include <bootstage.h>
- #include <image.h>
+ #include <hang.h>
  #include <asm/io.h>
-diff --git a/arch/sandbox/lib/fdt_fixup.c b/arch/sandbox/lib/fdt_fixup.c
-index a646f2059c2c..e333bd52ea28 100644
---- a/arch/sandbox/lib/fdt_fixup.c
-+++ b/arch/sandbox/lib/fdt_fixup.c
-@@ -2,7 +2,6 @@
- 
- #define LOG_CATEGORY LOGC_ARCH
+ #include <asm/arch/mux-k2g.h>
+diff --git a/board/tq/tqma6/tqma6_bb.h b/board/tq/tqma6/tqma6_bb.h
+index ca81bdf58535..a2f871af1f83 100644
+--- a/board/tq/tqma6/tqma6_bb.h
++++ b/board/tq/tqma6/tqma6_bb.h
+@@ -7,8 +7,6 @@
+ #ifndef __TQMA6_BB__
+ #define __TQMA6_BB__
  
 -#include <common.h>
- #include <fdt_support.h>
- #include <log.h>
- 
-diff --git a/arch/sandbox/lib/interrupts.c b/arch/sandbox/lib/interrupts.c
-index 4d7cbff802c6..3f6583e11f04 100644
---- a/arch/sandbox/lib/interrupts.c
-+++ b/arch/sandbox/lib/interrupts.c
+-
+ int tqma6_bb_board_mmc_getwp(struct mmc *mmc);
+ int tqma6_bb_board_mmc_getcd(struct mmc *mmc);
+ int tqma6_bb_board_mmc_init(struct bd_info *bis);
+diff --git a/board/xilinx/zynqmp/xil_io.h b/board/xilinx/zynqmp/xil_io.h
+index e6caa7c85033..dd823d6f62a5 100644
+--- a/board/xilinx/zynqmp/xil_io.h
++++ b/board/xilinx/zynqmp/xil_io.h
 @@ -5,7 +5,6 @@
-  * found in the LICENSE file.
-  */
+ 
+ /* FIXME remove this when vivado is fixed */
+ #include <asm/io.h>
+-#include <common.h>
+ #include <linux/delay.h>
+ 
+ #define xil_printf(...)
+diff --git a/disk/part_amiga.h b/disk/part_amiga.h
+index 42f5eb0f941c..dfa70bdb8a8c 100644
+--- a/disk/part_amiga.h
++++ b/disk/part_amiga.h
+@@ -7,7 +7,6 @@
+ 
+ #ifndef _DISK_PART_AMIGA_H
+ #define _DISK_PART_AMIGA_H
+-#include <common.h>
+ 
+ #if CONFIG_IS_ENABLED(ISO_PARTITION)
+ /* Make the buffers bigger if ISO partition support is enabled -- CD-ROMS
+diff --git a/drivers/bios_emulator/include/x86emu.h b/drivers/bios_emulator/include/x86emu.h
+index b28cdc6b8cad..d2650a8d1600 100644
+--- a/drivers/bios_emulator/include/x86emu.h
++++ b/drivers/bios_emulator/include/x86emu.h
+@@ -42,7 +42,6 @@
+ #define __X86EMU_X86EMU_H
+ 
+ #include <asm/types.h>
+-#include <common.h>
+ #include <pci.h>
+ #include <asm/io.h>
+ #define X86API
+diff --git a/drivers/crypto/fsl/jobdesc.h b/drivers/crypto/fsl/jobdesc.h
+index c4501abd26b2..69adfdca95b5 100644
+--- a/drivers/crypto/fsl/jobdesc.h
++++ b/drivers/crypto/fsl/jobdesc.h
+@@ -7,7 +7,6 @@
+ #ifndef __JOBDESC_H
+ #define __JOBDESC_H
  
 -#include <common.h>
- #include <efi_loader.h>
- #include <irq_func.h>
- #include <os.h>
-diff --git a/arch/sandbox/lib/pci_io.c b/arch/sandbox/lib/pci_io.c
-index 2038141947ab..6040eacb594f 100644
---- a/arch/sandbox/lib/pci_io.c
-+++ b/arch/sandbox/lib/pci_io.c
-@@ -8,7 +8,6 @@
-  * IO space access commands.
-  */
+ #include <asm/io.h>
+ #include "rsa_caam.h"
+ 
+diff --git a/drivers/crypto/fsl/rsa_caam.h b/drivers/crypto/fsl/rsa_caam.h
+index 9a6a8afa4aa7..fb132a3d1814 100644
+--- a/drivers/crypto/fsl/rsa_caam.h
++++ b/drivers/crypto/fsl/rsa_caam.h
+@@ -6,8 +6,6 @@
+ #ifndef __RSA_CAAM_H
+ #define __RSA_CAAM_H
  
 -#include <common.h>
- #include <command.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
-index 9d58860451c5..802596569c64 100644
---- a/board/sandbox/sandbox.c
-+++ b/board/sandbox/sandbox.c
-@@ -3,8 +3,8 @@
-  * Copyright (c) 2011 The Chromium OS Authors.
-  */
+-
+ /**
+  * struct pk_in_params - holder for input to PKHA block in CAAM
+  * These parameters are required to perform Modular Exponentiation
+diff --git a/drivers/ddr/altera/sdram_soc64.h b/drivers/ddr/altera/sdram_soc64.h
+index 07a0f9f2ae9b..87a70a861baa 100644
+--- a/drivers/ddr/altera/sdram_soc64.h
++++ b/drivers/ddr/altera/sdram_soc64.h
+@@ -6,7 +6,6 @@
+ #ifndef	_SDRAM_SOC64_H_
+ #define	_SDRAM_SOC64_H_
  
 -#include <common.h>
- #include <addr_map.h>
+ #include <linux/sizes.h>
+ 
+ struct altera_sdram_priv {
+diff --git a/drivers/ddr/marvell/a38x/ddr_ml_wrapper.h b/drivers/ddr/marvell/a38x/ddr_ml_wrapper.h
+index 735731196589..dff56338b19e 100644
+--- a/drivers/ddr/marvell/a38x/ddr_ml_wrapper.h
++++ b/drivers/ddr/marvell/a38x/ddr_ml_wrapper.h
+@@ -6,7 +6,6 @@
+ #ifndef _DDR_ML_WRAPPER_H
+ #define _DDR_ML_WRAPPER_H
+ 
+-#include <common.h>
+ #include <i2c.h>
+ #include <spl.h>
+ #include <asm/io.h>
+diff --git a/drivers/net/fm/fm.h b/drivers/net/fm/fm.h
+index a2d5b03429ab..5c45ad56d0a5 100644
+--- a/drivers/net/fm/fm.h
++++ b/drivers/net/fm/fm.h
+@@ -6,7 +6,6 @@
+ #ifndef __FM_H__
+ #define __FM_H__
+ 
+-#include <common.h>
+ #include <phy.h>
+ #include <fm_eth.h>
+ #include <fsl_fman.h>
+diff --git a/drivers/net/fsl-mc/dpio/qbman_private.h b/drivers/net/fsl-mc/dpio/qbman_private.h
+index 53f1300eaf80..f9dad178075f 100644
+--- a/drivers/net/fsl-mc/dpio/qbman_private.h
++++ b/drivers/net/fsl-mc/dpio/qbman_private.h
+@@ -4,7 +4,6 @@
+  */
+ 
+ /* Perform extra checking */
+-#include <common.h>
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <linux/bug.h>
+diff --git a/drivers/net/fsl-mc/dpio/qbman_sys.h b/drivers/net/fsl-mc/dpio/qbman_sys.h
+index 1c6e48913028..cac70a1291c7 100644
+--- a/drivers/net/fsl-mc/dpio/qbman_sys.h
++++ b/drivers/net/fsl-mc/dpio/qbman_sys.h
+@@ -20,6 +20,7 @@
+ 
+ /* Trace the 3 different classes of read/write access to QBMan. #undef as
+  * required. */
 +#include <config.h>
- #include <cpu_func.h>
- #include <cros_ec.h>
- #include <dm.h>
+ #include <linux/bug.h>
+ #include <linux/printk.h>
+ #undef QBMAN_CCSR_TRACE
+diff --git a/drivers/net/mscc_eswitch/mscc_mac_table.c b/drivers/net/mscc_eswitch/mscc_mac_table.c
+index 25b9cad42c97..06e1f625fb74 100644
+--- a/drivers/net/mscc_eswitch/mscc_mac_table.c
++++ b/drivers/net/mscc_eswitch/mscc_mac_table.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
++#include <errno.h>
+ #include <linux/bitops.h>
+ #include <linux/io.h>
+ #include "mscc_mac_table.h"
+diff --git a/drivers/net/mscc_eswitch/mscc_mac_table.h b/drivers/net/mscc_eswitch/mscc_mac_table.h
+index 17fed2e79253..5ec8db25417d 100644
+--- a/drivers/net/mscc_eswitch/mscc_mac_table.h
++++ b/drivers/net/mscc_eswitch/mscc_mac_table.h
+@@ -3,8 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+-
+ #define ETH_LEN 6
+ #define MAC_VID 1
+ 
+diff --git a/drivers/net/mscc_eswitch/mscc_xfer.c b/drivers/net/mscc_eswitch/mscc_xfer.c
+index 6f7474645717..ee6bf065d3a8 100644
+--- a/drivers/net/mscc_eswitch/mscc_xfer.c
++++ b/drivers/net/mscc_eswitch/mscc_xfer.c
+@@ -3,6 +3,7 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
++#include <errno.h>
+ #include <log.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/net/mscc_eswitch/mscc_xfer.h b/drivers/net/mscc_eswitch/mscc_xfer.h
+index c880a4e7e6a6..70f279401e19 100644
+--- a/drivers/net/mscc_eswitch/mscc_xfer.h
++++ b/drivers/net/mscc_eswitch/mscc_xfer.h
+@@ -3,8 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+-
+ enum mscc_regs_qs {
+ 	MSCC_QS_XTR_RD,
+ 	MSCC_QS_XTR_FLUSH,
+diff --git a/drivers/pci/pcie_layerscape_fixup_common.h b/drivers/pci/pcie_layerscape_fixup_common.h
+index 70bd3f0cba31..3255b7648c0a 100644
+--- a/drivers/pci/pcie_layerscape_fixup_common.h
++++ b/drivers/pci/pcie_layerscape_fixup_common.h
+@@ -9,8 +9,6 @@
+ #ifndef _PCIE_LAYERSCAPE_FIXUP_COMMON_H_
+ #define _PCIE_LAYERSCAPE_FIXUP_COMMON_H_
+ 
+-#include <common.h>
+-
+ void ft_pci_setup_ls(void *blob, struct bd_info *bd);
+ 
+ #ifdef CONFIG_PCIE_LAYERSCAPE_GEN4
+diff --git a/drivers/pci_endpoint/pcie-cadence.h b/drivers/pci_endpoint/pcie-cadence.h
+index 8a659c36aa24..dd0101a33af9 100644
+--- a/drivers/pci_endpoint/pcie-cadence.h
++++ b/drivers/pci_endpoint/pcie-cadence.h
+@@ -11,7 +11,6 @@
+ #ifndef PCIE_CADENCE_H
+ #define PCIE_CADENCE_H
+ 
+-#include <common.h>
+ #include <pci_ep.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/pinctrl/mtmips/pinctrl-mtmips-common.h b/drivers/pinctrl/mtmips/pinctrl-mtmips-common.h
+index 1f1023ef4213..7a38f8d87532 100644
+--- a/drivers/pinctrl/mtmips/pinctrl-mtmips-common.h
++++ b/drivers/pinctrl/mtmips/pinctrl-mtmips-common.h
+@@ -8,8 +8,6 @@
+ #ifndef _PINCTRL_MTMIPS_COMMON_H_
+ #define _PINCTRL_MTMIPS_COMMON_H_
+ 
+-#include <common.h>
+-
+ struct mtmips_pmx_func {
+ 	const char *name;
+ 	int value;
+diff --git a/drivers/usb/gadget/bcm_udc_otg.h b/drivers/usb/gadget/bcm_udc_otg.h
+index 24cc936c6b48..48370f37d8a2 100644
+--- a/drivers/usb/gadget/bcm_udc_otg.h
++++ b/drivers/usb/gadget/bcm_udc_otg.h
+@@ -6,8 +6,6 @@
+ #ifndef __BCM_UDC_OTG_H
+ #define __BCM_UDC_OTG_H
+ 
+-#include <common.h>
+-
+ static inline void wfld_set(uintptr_t addr, uint32_t fld_val, uint32_t fld_mask)
+ {
+ 	writel(((readl(addr) & ~(fld_mask)) | (fld_val)), (addr));
+diff --git a/fs/btrfs/ctree.h b/fs/btrfs/ctree.h
+index ffd095ffdd2e..59439552a45c 100644
+--- a/fs/btrfs/ctree.h
++++ b/fs/btrfs/ctree.h
+@@ -9,7 +9,6 @@
+ #ifndef __BTRFS_CTREE_H__
+ #define __BTRFS_CTREE_H__
+ 
+-#include <common.h>
+ #include <compiler.h>
+ #include <linux/rbtree.h>
+ #include <linux/bug.h>
+diff --git a/fs/yaffs2/ydirectenv.h b/fs/yaffs2/ydirectenv.h
+index d274f22e84d0..790f8512f742 100644
+--- a/fs/yaffs2/ydirectenv.h
++++ b/fs/yaffs2/ydirectenv.h
+@@ -20,7 +20,6 @@
+ #ifndef __YDIRECTENV_H__
+ #define __YDIRECTENV_H__
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <linux/compat.h>
+ 
+diff --git a/lib/libavb/avb_sysdeps.h b/lib/libavb/avb_sysdeps.h
+index f52428cc622f..aece8e0a0180 100644
+--- a/lib/libavb/avb_sysdeps.h
++++ b/lib/libavb/avb_sysdeps.h
+@@ -19,7 +19,9 @@ extern "C" {
+  * like uint8_t, uint64_t, and bool (with |false|, |true| keywords)
+  * must be present.
+  */
+-#include <common.h>
++#include <stdio.h>
++#include <stdbool.h>
++#include <linux/types.h>
+ 
+ /* If you don't have gcc or clang, these attribute macros may need to
+  * be adjusted.
+diff --git a/lib/zlib/zlib.h b/lib/zlib/zlib.h
+index af3703e6d770..560e7be97d3a 100644
+--- a/lib/zlib/zlib.h
++++ b/lib/zlib/zlib.h
+@@ -2,7 +2,6 @@
+ #ifndef __GLUE_ZLIB_H__
+ #define __GLUE_ZLIB_H__
+ 
+-#include <common.h>
+ #include <linux/compiler.h>
+ #include <asm/unaligned.h>
+ #include <watchdog.h>
+diff --git a/net/arp.h b/net/arp.h
+index 25b3c00d5c56..c50885fb9a57 100644
+--- a/net/arp.h
++++ b/net/arp.h
+@@ -12,8 +12,6 @@
+ #ifndef __ARP_H__
+ #define __ARP_H__
+ 
+-#include <common.h>
+-
+ extern struct in_addr net_arp_wait_packet_ip;
+ /* MAC address of waiting packet's destination */
+ extern uchar *arp_wait_packet_ethaddr;
+diff --git a/net/link_local.h b/net/link_local.h
+index bb998164df9b..d8701255142f 100644
+--- a/net/link_local.h
++++ b/net/link_local.h
+@@ -10,15 +10,12 @@
+  * Licensed under the GPL v2 or later
+  */
+ 
+-#if defined(CONFIG_CMD_LINK_LOCAL)
+-
+ #ifndef __LINK_LOCAL_H__
+ #define __LINK_LOCAL_H__
+ 
+-#include <common.h>
++struct arp_hdr;
+ 
+ void link_local_receive_arp(struct arp_hdr *arp, int len);
+ void link_local_start(void);
+ 
+ #endif /* __LINK_LOCAL_H__ */
+-#endif
+diff --git a/net/net_rand.h b/net/net_rand.h
+index 6a52cda85e03..d3c5559adfd4 100644
+--- a/net/net_rand.h
++++ b/net/net_rand.h
+@@ -9,7 +9,6 @@
+ #ifndef __NET_RAND_H__
+ #define __NET_RAND_H__
+ 
+-#include <common.h>
+ #include <dm/uclass.h>
+ #include <rng.h>
+ 
+diff --git a/net/ping.h b/net/ping.h
+index 7b6f4e566dbd..76ac225fc075 100644
+--- a/net/ping.h
++++ b/net/ping.h
+@@ -12,7 +12,6 @@
+ #ifndef __PING_H__
+ #define __PING_H__
+ 
+-#include <common.h>
+ #include <net.h>
+ 
+ /*
 -- 
 2.34.1
 
