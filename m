@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF802C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 08:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D91C4C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 08:30:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3534C86FFE;
-	Fri, 17 Nov 2023 09:17:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9AD7286F83;
+	Fri, 17 Nov 2023 09:30:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700209049;
-	bh=3stlUCyOKBXH8lCuYZhQJ0Afh4bTVCuxYISQVpDcC2M=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Ejj8kmfoKrP+dvMfj6MNKXGXnFckJ2WwjVcuWL3DVwrn3NSOChOwT+lJHYSRvUlKM
-	 9N1Kx3zHQh1Vgyv2uFtuQ80Lntt2eomcefni4DR1+1G/oLpVMjPek1pZQY2VQdQEAT
-	 WLqXDqTbEYMPFkW4rhWvtyXl6nTpAbi1+aftEhNLQCF+wzYknCo9I/fD+/2RahWmJa
-	 eLFZb2c1hgjpB5xbTZePZLrgADr5MYIp1IDMqqNnlDgOvE7WzYHDqUoAg97+5Y1lB/
-	 vgkfGhN19M2V3VONWbc2dxt9Y2Wz9++v74QLbrncrTpr4xWoLAWXCPsPwy4h6qekOF
-	 XIG9VpvUNSH9Q==
-Received: from [IPV6:2001:a61:6115:df01:cb0c:1603:a432:5b7e] (unknown
- [IPv6:2001:a61:6115:df01:cb0c:1603:a432:5b7e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aO4WxBbb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C8D6F86FCE; Fri, 17 Nov 2023 09:30:54 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: sbabic@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1D39686EEE;
- Fri, 17 Nov 2023 09:17:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700209048;
- bh=3stlUCyOKBXH8lCuYZhQJ0Afh4bTVCuxYISQVpDcC2M=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SArupE8HJXVXUxuwaGbsJAVmPWXLe1AKGTYqqIJja1IMmkSSKBSseG55E5QbHgKQX
- OQ/HeEDwrLSRkkgn9lTYAgWeh6pddQwXjLK8mwaXk52yAX0NgQ3IAL+22cfcyy3Sra
- GQZ/yAAWiGgDnnk4UmC0le48BDYfShWU/f+B8yVIGSL1IJUO7z9DTe77e9l1oa35Ih
- PfN007rScSbiLTtbPDQVM+MeQkDhR2G7x/9gxhd4m66vmVtgc85BG6l6oX+Nm8QbhV
- c3+4i9iIiaMBBKux1mxus+Trmu17B7klivRPK0yUJE4SY3NkzQwC9Z8ohrDMaIVXyQ
- WiB63xmpLHgRw==
-Message-ID: <91c3d742-a87a-458a-ab6f-6a56706bb78c@denx.de>
-Date: Fri, 17 Nov 2023 09:17:27 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 4BC1B86F5C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 09:30:49 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AH8UlOW055420;
+ Fri, 17 Nov 2023 02:30:47 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700209847;
+ bh=fFoptRHz+gGIKkLi7NG5yxl1eEr+hLY0nsnFraEbbtc=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=aO4WxBbb9lQ+DnYkSTz7VVahHsiyUaD8t2Ig2SwKeYz8EQweU0En3jaNA/rFZqVpb
+ mqGs1ZDH52eP66KPff05Ltw2pL6c9qHP2H2224ZxenqN0s5sDL5UwGlhDzETI9JNzz
+ yKFSvwuvRHfsdKTOyqctLdNspID6C+CmhK8jFvwo=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AH8Ul5q037784
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 17 Nov 2023 02:30:47 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
+ Nov 2023 02:30:46 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 17 Nov 2023 02:30:46 -0600
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AH8UiPH066203;
+ Fri, 17 Nov 2023 02:30:45 -0600
+Message-ID: <4f440a06-892b-4098-9565-6b21778bb5bb@ti.com>
+Date: Fri, 17 Nov 2023 14:00:43 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] imx: spl_imx_romapi: fix emmc fast boot mode case
-To: Tom Rini <trini@konsulko.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Cc: "festevam@gmail.com" <festevam@gmail.com>,
- "peng.fan@nxp.com" <peng.fan@nxp.com>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>
-References: <20231026073220.244387-1-marcel@ziswiler.com>
- <20231026073220.244387-3-marcel@ziswiler.com>
- <f9ce2b20-1fa1-408c-9ae6-4dd382c9c999@prevas.dk>
- <6ab14ae1-7044-4663-98e4-919b9d1757b9@denx.de>
- <899b50aa96b802275035f9ee40f46b461f8bfb46.camel@toradex.com>
- <86ddb623945da5a507fb4632375f7cb70361ac58.camel@toradex.com>
- <20231116184226.GF170968@bill-the-cat>
-Content-Language: de-DE
-From: Stefano Babic <sbabic@denx.de>
-In-Reply-To: <20231116184226.GF170968@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
+ J7200
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, <nm@ti.com>
+CC: "Kumar, Udit" <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>,
+ <u-boot@lists.denx.de>, <vigneshr@ti.com>
+References: <20231003081038.24299-1-j-keerthy@ti.com>
+ <20231003081038.24299-11-j-keerthy@ti.com>
+ <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
+ <20231003151033.GD8465@bill-the-cat>
+ <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
+ <20231116184052.GE170968@bill-the-cat>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231116184052.GE170968@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,67 +86,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Marcel,
+Hi Tom
 
-On 16.11.23 19:42, Tom Rini wrote:
-> On Thu, Nov 16, 2023 at 10:57:27AM +0000, Marcel Ziswiler wrote:
->> Hi Tom
+On 17/11/23 00:10, Tom Rini wrote:
+> On Thu, Nov 16, 2023 at 11:43:50AM +0530, Neha Malcom Francis wrote:
+>> Hi Tom,
 >>
->> On Thu, 2023-11-02 at 08:09 +0100, Marcel Ziswiler wrote:
->>> Hi Stefano
->>>
->>> On Thu, 2023-10-26 at 10:36 +0200, Stefano Babic wrote:
->>>> On 26.10.23 10:29, Rasmus Villemoes wrote:
->>>>> On 26/10/2023 09.32, Marcel Ziswiler wrote:
->>>>>> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
->>>>>>
->>>>>> This fixes a regression in the eMMC fast boot mode case where the buffer
->>>>>> was missing 464 bytes.
->>>>>>
->>>>>> The code figures out how many bytes must at least be fetched to honor
->>>>>> the current read, rounds that up to the ss->pagesize [which is a no-op
->>>>>> in the USB download case because that has ->pagesize==1], fetches that
->>>>>> many bytes, but then recorded the original upper bound as the new end of
->>>>>> the valid data. However, this did not take into account the rounding up
->>>>>> to the ss->pagesize. Fix this by recording the actual bytes downloaded.
->>>>>>
->>>>>> Fixes: 4b4472438f5a ("imx: spl_imx_romapi: avoid tricky use of spl_load_simple_fit() to get full FIT
->>>>>> size")
->>>>>> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
->>>>>>
->>>>>
->>>>> Thanks for reporting and fixing this, and sorry for the trouble.
->>>>>
->>>>> Acked-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
->>>>>
+>> Trying to bring back this series here.
+>>
+>> On 03/10/23 20:40, Tom Rini wrote:
+>>> On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
 >>>>
->>>> And thanks for all your work - I will apply this fix soon.
+>>>> On 10/3/2023 1:40 PM, Keerthy wrote:
+>>>>> Enable ESM initialization for J7200
+>>>>>
+>>>>> Signed-off-by: Keerthy <j-keerthy@ti.com>
+>>>>> ---
+>>>>>     board/ti/j721e/evm.c | 6 ++++--
+>>>>>     1 file changed, 4 insertions(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+>>>>> index 42fa94b7a5..070b28326f 100644
+>>>>> --- a/board/ti/j721e/evm.c
+>>>>> +++ b/board/ti/j721e/evm.c
+>>>>> @@ -543,7 +543,8 @@ void spl_board_init(void)
+>>>>>     	}
+>>>>>     #ifdef CONFIG_ESM_K3
+>>>>> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+>>>>> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
+>>>>> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
+>>>>
+>>>>
+>>>> Could we align on one kind of check,  For J721E check is done against
+>>>> board-id, whereas for J7200 checking
 >>>
->>> Any news on applying this fix? Note that master still stays broken as of today.
+>>> We should look at figuring out how to split this file in two.  One for
+>>> "generic J721E systems" and one for "TI EVMs", as I've mentioned in
+>>> other threads, so that it's easier for custom platforms to drop code
+>>> they don' require.
+>>>
 >>
->> And two weeks later still broken!
+>> Yes that does make sense. Would it be okay if we solve that problem
+>> separately in a different patch series? We can move along with this current
+>> series for now (after making the required change in CONFIG/board-id for v2)
+>> since ESM support is important for these platforms.
 > 
-> I've put this in my not to forget queue for the next -rc.
+> Well, I think part of the answer to your question is (and this is a more
+> general TI one too), what outstanding changes need to come in now to
+> make existing platforms functional for v2024.01 ? My first thought is
+> that this series would be taken to -next, if I took it now, which means
+> there's time before it would be in master, and so if it really makes the
+> re-org later easier, we could take it, but if not, can we re-org then do
+> this? But if we need this to deal with regressions, OK, yes, we can take
+> it like this now.
 > 
->> Anyway, I feel i.MX maintainership seems rather stalled at times most of the time. I don't want to criticise
->> anybody knowing how busy our trade can get. However, if it helps the cause Toradex would be ready to step up.
->> Let me know what you think. Thanks!
-> 
-> I would be happy to see an additional custodian for the imx tree, if
-> that's agreeable with Stefano.
 
-I have rather less time for U-Boot and it won't be better in the near 
-future. Fabio is co-maintainer and he has accepted to take over the 
-repository and go on maintaining u-boot-imx. Just let him some time to 
-be confident with patchwork and CI.
-
-Thanks,
-Stefano
+Maybe focusing on the re-org after having in the changes would help give more 
+perspective on how we can split? Not sure just a thought... in that case I 
+prefer taking this in and having a working error signaling module in rather than 
+delaying it if that's okay.
 
 -- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
-Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
-=====================================================================
-
+Thanking You
+Neha Malcom Francis
