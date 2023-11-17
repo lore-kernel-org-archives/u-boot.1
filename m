@@ -4,80 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC31FC072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 14:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F77FC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 15:00:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24E8686FF7;
-	Fri, 17 Nov 2023 15:53:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7575C86F56;
+	Fri, 17 Nov 2023 16:00:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G2ea7iOI";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Df6arIKC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA8C286FEF; Fri, 17 Nov 2023 15:53:03 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D66C686FBE; Fri, 17 Nov 2023 16:00:48 +0100 (CET)
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+ [217.70.183.200])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E7EB86F56
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 15:53:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DC8786EE2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 16:00:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5c59fe8b07bso15765747b3.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:53:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700232780; x=1700837580; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yqJQo90aaQqbpmCjIp7jpEeg3rXtfLzyFTba85eO1NY=;
- b=G2ea7iOIqiPx6HWD/ynDLkupQOcuomcEm6//cM/Yn9eFPRndFB0DbHlFoVQOVgHlgG
- HRinLYQO+zPGIJ/JBciDjoNp7DN1a7UY4dR110stxjSDSujxhV9xhWBpP8DuO3yF1D7K
- bgcB3UPB/k5PEi69AdsD7gllqcY9Cuv8eulFM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700232780; x=1700837580;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yqJQo90aaQqbpmCjIp7jpEeg3rXtfLzyFTba85eO1NY=;
- b=nZqU3pWyWlUyxqT8D0dd0fSUTULoNbzSsH/xv90NygfqVIfQJnkXI0pC3IBbxtjuct
- /I6dwrDrAKmkylIQub1zkPbvpK56o/dfM7DmQcvJVARq2B9NvC/Xs/K0e0cweIiLmvD/
- U8ffWHFVuflG83mIZ45N9/y8BVXcDtkozUPfZfNgKZT2sfPqz0WvQb1wm4UYUCTKrQLn
- Top96XygOcObTNaNs0QhyZOI6z/K8qZ4KLe29m+ul61+jCiDLwIUIeuSbUfPGLSIxPMK
- LPmjGkQrNU2rwQLWr8y7M9Z/Pcesi957w/ZiM7iOx+7nACbAFdOn/wiwgQVOkro1LTNk
- NeBQ==
-X-Gm-Message-State: AOJu0YwOJa7rqrQzB/gd9j6ia2qncnDr5DfiFVOM3qwtIPR055RYHBzp
- r4d++4zu8uvL7UGBD4xbFzlXty0In289khBzzV08pw==
-X-Google-Smtp-Source: AGHT+IHLXUAOiwHu0IhpT/aEF9gQ3yoOQckpSbNDnr56gcw+1C36T1WasmREzn4egdabNWUgOenA3Q==
-X-Received: by 2002:a05:690c:b09:b0:5c6:3c93:cf1a with SMTP id
- cj9-20020a05690c0b0900b005c63c93cf1amr2635442ywb.17.1700232779973; 
- Fri, 17 Nov 2023 06:52:59 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
- [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
- by smtp.gmail.com with ESMTPSA id
- n8-20020a0cee68000000b0065afbb39b2dsm681853qvs.47.2023.11.17.06.52.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 06:52:59 -0800 (PST)
-Date: Fri, 17 Nov 2023 09:52:57 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, sbabic@denx.de, aford@beaconembedded.com,
- festevam@gmail.com, nm@ti.com
-Subject: Re: [PATCH] arm64: imx: imx8mp-beacon: Add support for 4GB Variant
-Message-ID: <20231117145257.GH170968@bill-the-cat>
-References: <20231117013153.4299-1-aford173@gmail.com>
- <20231117144144.GG170968@bill-the-cat>
- <CAHCN7xKiEMTBnXmiVTtp6M3Zwb_vOxgmaQhS=VtA4760bnUELA@mail.gmail.com>
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 7D8E82000C;
+ Fri, 17 Nov 2023 15:00:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1700233245;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=BFYgt3YSwc3c7zwmUHoXs2tB4th1gjHzbfPcaB3KVlQ=;
+ b=Df6arIKCOvr7YCMNZEic6HcU6Bjkjm4qeE7MLZkwoCNVPd3u77e/bWzszh9ifSRmHYtUuu
+ jJIYKIVpM9V8PH0SH4zB4IgKGQqnJv3z4YTkIjy+5HOroxaver7llLqA4MRRHYZ1o6dXB2
+ UAWUjyLiS5J3JAi0Vp7EE6dHCq9Us1NlyN9ixYJgilHAJYyPisSMMmERPfOC4xmQRGKUaS
+ imoUG9Y4bTfcHLzQbRyrcpNM1P8yBxrBJtwgN2IXYmt5PeY2qchOE8eO6EtBKTO6V7iMmG
+ QdZNdO7bEDitoGDBt88iU2OAUVzuTxyGhpnS8mdx7lNZ+ABTwTJNI3a1nU+ufA==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Markus Niebel <Markus.Niebel@tq-group.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Alexander Stein <alexander.stein@ew.tq-group.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH] tqma6: Fix DDR configuration
+Date: Fri, 17 Nov 2023 16:00:44 +0100
+Message-Id: <20231117150044.1792080-1-miquel.raynal@bootlin.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ODvawLcHD6ZHhp1S"
-Content-Disposition: inline
-In-Reply-To: <CAHCN7xKiEMTBnXmiVTtp6M3Zwb_vOxgmaQhS=VtA4760bnUELA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,64 +67,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Initially investigating a Linux network issue causing a lot of drop and
+poor network performances on a custom system based on a TQMA6A module
+(based on an iMX6Q), [1st link below].
 
---ODvawLcHD6ZHhp1S
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I eventually correlated my observations with a contention at the NIC
+level when in concurrency with the graphics pipeline. Troubleshooting
+this in the kernel lead to disabling DMA bursts accesses made by the IPU
+in order to avoid triggering the QoS at the interconnect level, reducing
+from 50 to 10% the drop rate on eth0, [2nd link below]. The solution
+worked on my setup but not on others, which still suffered from
+abnormally high drop rates even with this "fix".
 
-On Fri, Nov 17, 2023 at 08:48:00AM -0600, Adam Ford wrote:
-> On Fri, Nov 17, 2023 at 8:41=E2=80=AFAM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Thu, Nov 16, 2023 at 07:31:53PM -0600, Adam Ford wrote:
-> >
-> > > A new variant of the i.MX8MP System-on-module from Beacon is
-> > > available which contains 4GB of RAM vs 6GB.  The memory
-> > > timings are slightly different, so a different config is necessary
-> > > to build the different timing file.
-> > >
-> > > Signed-off-by: Adam Ford <aford173@gmail.com>
-> >
-> > Might this be a case for using config fragments instead?
->=20
-> I didn't realize U-Boot was supporting that.  I'll submit a V2 with
-> the defconfig option removed.  Is there an example you can direct me
-> to that does this already?
+After looking a while into TQ Systems BSP I figured out a number of
+differences in recent U-Boot out-of-tree patches they had in their
+repository [3rd link]. Parsing the differences one after the other lead
+me to this final solution.
 
-The beagleplay boards are currently handled via config fragments as well
-as a few asus platforms (grouper, transformer-t30). I just now noticed
-the latter places the fragments in a configs subdirectory which is nice
-I think when there's going to be a number of fragments, but not required.
+The reset pad of the DDR controller was apparently misconfigured, Bit
+18-19 picturing the "DDR select field". The current value b11 is
+reserved. The only defined value as of version 6 of the iMX6Q manual was
+b00 "DDR3 and LPDDR2 mode". In practice no register difference has been
+spotted after changing this configuration but all issues tracked thus
+far just vanished. All previous fixes have been proven irrelevant. Just
+clearing this field solved all our network issues and the drop rate as
+measured by iperf3 felt back to 0%.
 
->=20
-> thanks!
->=20
-> adam
-> > See doc/develop/board_best_practices.rst
-> >
-> > --
-> > Tom
+Link: https://lore.kernel.org/netdev/20231012193410.3d1812cf@xps-13/
+Link: https://lists.freedesktop.org/archives/dri-devel/2023-October/428251.html
+Link: https://github.com/tq-systems/u-boot-tqmaxx/commit/15eb6abbefbf6916c28467b85485911dad3da6bc
+Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+---
+ board/tq/tqma6/tqma6q.cfg | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---=20
-Tom
+diff --git a/board/tq/tqma6/tqma6q.cfg b/board/tq/tqma6/tqma6q.cfg
+index a49489aed3f..a345c4de93d 100644
+--- a/board/tq/tqma6/tqma6q.cfg
++++ b/board/tq/tqma6/tqma6q.cfg
+@@ -36,7 +36,7 @@ DATA 4, MX6_IOM_DRAM_SDCLK_1, 0x00008030
+ DATA 4, MX6_IOM_DRAM_CAS, 0x00008030
+ DATA 4, MX6_IOM_DRAM_RAS, 0x00008030
+ DATA 4, MX6_IOM_GRP_ADDDS, 0x00000030
+-DATA 4, MX6_IOM_DRAM_RESET, 0x000C3030
++DATA 4, MX6_IOM_DRAM_RESET, 0x00003030
+ DATA 4, MX6_IOM_DRAM_SDCKE0, 0x00003000
+ DATA 4, MX6_IOM_DRAM_SDCKE1, 0x00000000
+ DATA 4, MX6_IOM_DRAM_SDBA2, 0x00000000
+-- 
+2.34.1
 
---ODvawLcHD6ZHhp1S
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXfkMACgkQFHw5/5Y0
-tyySngwArpZLVCFM78+tMipCIS+4fkPpcTWM2tN20v6nrCb3LXShtplsVoP2MpkE
-S+/580k2XohFMfo6jnZeLFtNneYANFVAU6/1BjYglFTKAYi40CUwaQu1jLdxvsTR
-jlHDtov3cTJJc2D3hWFwC5gx3ZIKVi330MhmirUjtHvxvFcI8nmdBGyGWvFypxrL
-OHYxyclko6DeNkOsrYSAa3U7htuq4oY1BHIYpZzDwkzX7MZ+dumZGw1gpph/70bD
-V1QixxZmMBvXRqoR0QQ2MPSwmCxjL24N+AZ6/Cs01m8ofzyJqyEnd5gRi8n7WEH9
-CkKzZmfCj7dG5Hb5SCvuND6TzUU0geSPDws5hZEBE0FTBVSz78J5Rx5ETm2yU3uR
-M/Tv/Y/WTExqChxfv2AkKKjZfocLfR9pD2IZBrrqH/LV8QSEpt47qfap58zKpPmn
-49h+o2bPzLFk4nHKgtdiOnKQo78TJBNZzvWotPQEH/sis33AjsCGLs+0HBcAY8X8
-LBpRf6Ly
-=ry2k
------END PGP SIGNATURE-----
-
---ODvawLcHD6ZHhp1S--
