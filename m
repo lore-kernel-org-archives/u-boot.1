@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DBCC54FB9
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 23:25:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04F8EC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 23:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6194874D5;
-	Sat, 18 Nov 2023 00:25:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E22E874A1;
+	Sat, 18 Nov 2023 00:25:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oKVSiKPd";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="CYwRBDmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F52E874D5; Sat, 18 Nov 2023 00:25:11 +0100 (CET)
+ id C03DF874E9; Sat, 18 Nov 2023 00:25:23 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8630386F1F
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 00:25:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25C0386DA2
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 00:25:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1700263494; bh=7lZTkRYWlmbZ4o4kHceuYVSZSVIdhG9voFkmY7nk5vE=;
- b=oKVSiKPdtGr9CNWk0V+EpuSWhTw/UiNMpQYEAJCFnwARvGXtM2WXHyUMy03ZcnPEoU4jjDDFI
- FpwleK+2wmnw3pyaXlQZa2NQ6ZWbtF+3X9L6f/try3AK4YvIhgyTX7XOc3aaUBW45iXYLfpZCId
- 6af9uJj8EfFIVh3HRpBrS9q1JH3YzaVSAl6pZ8ycZNExs1Fny8sjN+tJ43vVBCc9YgcjzGDP+1f
- yqm4oXHsXud9J9hfWOEZoMTQM3cYcTktsrSCv8AlIccStbPvqqcCngAs2I9k0Y4bkO3J+OxcUAd
- 18RugVF9l/GyEHTUs5lJAQTaUFTB87vVC6KFEQvPwT+g==
+ t=1700263491; bh=dpp4fg5Q+zE2hjc4aQo4qsEaOpyN3rbz/NbKRpPauLw=;
+ b=CYwRBDmB683BJ7Er3opl8Ei0emCyE7NueYDPiqSnHxUsEbfSF0XavwybwBNb1yn6to6IFr5qx
+ HoKc8EuKwA/CxpkpvDC9rkBmvr84wXmqsrdkAYq2lka9bkJzBDUZlaLqrtFEbODQhBl001Bwqve
+ sNLhgXjVbc8Q8vMWK6dib6jsq2oGUKvA4U2VKaebGBMQS3JxalfxTvYcWOujMp++MbJZfYn187N
+ rjokZYBUT6NYoSrP88EvLJhCmYXDxz0hW1hW8k9gzyMpTypNLYSdrgnaErWSMJ0BzZQZjs/+dQa
+ aRFXNP3gdiKLZHyLmGXlFr6C4ubu3RcmRtIr2CN6o8/w==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark
- <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Slawomir Stepien <sst@poczta.fm>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/4] rockchip: rk3588-nanopc-t6: Build SPI image
-Date: Fri, 17 Nov 2023 23:24:35 +0000
-Message-ID: <20231117232442.1430276-3-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: John Clark <inindev@gmail.com>, Slawomir Stepien <sst@poczta.fm>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 1/4] rockchip: rk3588: Fix boot from SPI flash
+Date: Fri, 17 Nov 2023 23:24:34 +0000
+Message-ID: <20231117232442.1430276-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231117232442.1430276-1-jonas@kwiboo.se>
 References: <20231117232442.1430276-1-jonas@kwiboo.se>
@@ -54,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6557f645943be35dca803c25
+X-ForwardEmail-ID: 6557f642943be35dca803c17
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,33 +71,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: John Clark <inindev@gmail.com>
+The commit fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from SPI
+NOR flash") added a new BROM_BOOTSOURCE_SPINOR_RK3588 with value 6.
 
-Enable building of the SPI image, u-boot-rockchip-spi.bin, now that we
-know what bootsource id values BootRom use for SPI flash on RK3588.
+At the time the reason for this new bootsource id value 6 was unknown.
 
-Fixes: b0b8086898f8 ("board: rockchip: add FriendlyElec NanoPC-T6 rk3588 board")
-Signed-off-by: John Clark <inindev@gmail.com>
+We now know that the BootRom on RK3588 use different bootsource id
+values depending on the iomux used by the flash spi controller, and not
+by the type of spi nor or spi nand flash used.
+
+Add the following enum values and use them for RK3588 boot_devices.
+
+- BROM_BOOTSOURCE_FSPI_M0 = 3
+- BROM_BOOTSOURCE_FSPI_M1 = 4
+- BROM_BOOTSOURCE_FSPI_M2 = 6
+
+Fixes: fd6e425be243 ("rockchip: rk3588-rock-5b: Enable boot from SPI NOR flash")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Tested-by: Slawomir Stepien <sst@poczta.fm>
 ---
 v2:
-- No change
+- Move FSPI M0/M1/M2 enum values from bootrom.h to rk3588.c
+- Add t-b tag
 
- configs/nanopc-t6-rk3588_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/include/asm/arch-rockchip/bootrom.h |  1 -
+ arch/arm/mach-rockchip/rk3588/rk3588.c       | 16 ++++++++++++++--
+ 2 files changed, 14 insertions(+), 3 deletions(-)
 
-diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
-index 070399ce2a86..daa13a4ffff8 100644
---- a/configs/nanopc-t6-rk3588_defconfig
-+++ b/configs/nanopc-t6-rk3588_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
- CONFIG_ROCKCHIP_RK3588=y
- CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
- CONFIG_TARGET_NANOPCT6_RK3588=y
+diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
+index 7dab18fbc3fb..4276a0f6811a 100644
+--- a/arch/arm/include/asm/arch-rockchip/bootrom.h
++++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
+@@ -48,7 +48,6 @@ enum {
+ 	BROM_BOOTSOURCE_SPINOR = 3,
+ 	BROM_BOOTSOURCE_SPINAND = 4,
+ 	BROM_BOOTSOURCE_SD = 5,
+-	BROM_BOOTSOURCE_SPINOR_RK3588 = 6,
+ 	BROM_BOOTSOURCE_USB = 10,
+ 	BROM_LAST_BOOTSOURCE = BROM_BOOTSOURCE_USB
+ };
+diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+index b1f535fad505..7b0349ec2577 100644
+--- a/arch/arm/mach-rockchip/rk3588/rk3588.c
++++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+@@ -37,11 +37,23 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define BUS_IOC_GPIO2D_IOMUX_SEL_H	0x5c
+ #define BUS_IOC_GPIO3A_IOMUX_SEL_L	0x60
+ 
++/**
++ * Boot-device identifiers used by the BROM on RK3588 when device is booted
++ * from SPI flash. IOMUX used for SPI flash affect the value used by the BROM
++ * and not the type of SPI flash used.
++ */
++enum {
++	BROM_BOOTSOURCE_FSPI_M0 = 3,
++	BROM_BOOTSOURCE_FSPI_M1 = 4,
++	BROM_BOOTSOURCE_FSPI_M2 = 6,
++};
++
+ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe2e0000",
+-	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
++	[BROM_BOOTSOURCE_FSPI_M0] = "/spi@fe2b0000/flash@0",
++	[BROM_BOOTSOURCE_FSPI_M1] = "/spi@fe2b0000/flash@0",
++	[BROM_BOOTSOURCE_FSPI_M2] = "/spi@fe2b0000/flash@0",
+ 	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
+-	[BROM_BOOTSOURCE_SPINOR_RK3588] = "/spi@fe2b0000/flash@0",
+ };
+ 
+ static struct mm_region rk3588_mem_map[] = {
 -- 
 2.42.0
 
