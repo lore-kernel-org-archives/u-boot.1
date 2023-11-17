@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3459C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 12:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BBFC197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:30:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D3A886E64;
-	Fri, 17 Nov 2023 13:50:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1C93D86F27;
+	Fri, 17 Nov 2023 14:30:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VYX9nZke";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tzX7zFVs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E008586E42; Fri, 17 Nov 2023 13:50:21 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 011E386EB8; Fri, 17 Nov 2023 14:30:43 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF1E98701C
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 13:50:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A32B86F27
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:30:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AHCnuTL108823;
- Fri, 17 Nov 2023 06:49:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700225396;
- bh=WT/CUSASpJlL0hPQBdFxqY6ib0FZe6b1SQAX0bKrBPc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=VYX9nZkeb1Moq/lwXen9oOj/T3PZP+ooyEoSlGGBWyeWABLk58d4/pIwscvooE5GF
- Pm/5x2a+muOU0AujPonlALFMA96uKxPlX5+HoJ2JQbqfKvQj0I1xZ0aXo9at7bhYhM
- OJa6BFAZv1SKQSjEsZGZbzcFBJJKcV3n8Yug/zbo=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AHCnubk020528
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Nov 2023 06:49:56 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 17
- Nov 2023 06:49:55 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 17 Nov 2023 06:49:56 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AHCntm5067870;
- Fri, 17 Nov 2023 06:49:55 -0600
-Date: Fri, 17 Nov 2023 06:49:55 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Enric Balletbo i Serra <eballetb@redhat.com>, Maxime Ripard
- <mripard@redhat.com>, Apurva Nandan <a-nandan@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha Malcom
- Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew Davis
- <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>
-Subject: Re: [PATCH v4 00/16] Introduce initial TI's J784S4 and AM69 support
-Message-ID: <20231117124955.4u3v4p57zl2rclab@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20231001165545.494212-1-a-nandan@ti.com>
- <lusvfc2to2akeccammsslooai53i4tflvcv4k2iofz3yqco3u6@uvn5flsjhxv3>
- <CALE0LRsTUFdSKYEoWDhPZRQEZbwv3-CMV5931KRbPvWmvWTSQA@mail.gmail.com>
- <719afeb3-7106-43e8-926f-4aa54d373055@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5a90d6ab962so21965137b3.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:30:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700227833; x=1700832633; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OAG+ZLLQww6uEhigOIKN6lUXZM/HY8BUG/kGAZ1/pAY=;
+ b=tzX7zFVsco5CjKvYzyWz/W0xkYTRgEsmQJ3HFAlMlUSohiJzeyyCdfciucjAiKtLIe
+ BxQLxAP5kDOB4R/JZDVW+MbS0NoZW4CUA0YMaxNmTK2jZS5p8dpisZ3SZiHGo3s4ziPe
+ roM1ek31f6pQPFUmCNWoH310gokVCyhpjdJjU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700227833; x=1700832633;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OAG+ZLLQww6uEhigOIKN6lUXZM/HY8BUG/kGAZ1/pAY=;
+ b=FtxKBeoGWBd3MKlkOqO+t7mAppbHGewocPPvPeI04O+s2gSJHRAiBysHswq4O/7s/J
+ IK2AuhP0iAkrr58D0vxC8nxW/Eup0gVu529CwjlmmRgGg1TvRcW2kqtuaLLoVraKLvv6
+ H2uwupHF/1sYGPhgydaeIEqK4Ms51EIJMtFKrH1X9On9UT8zEZrGEUK/DNk/Ckrn3a8E
+ FkpYvbjC/lOzMJIdUb6khNf+za6s04stl5MxRauDu9FmFE8DwL5lqLzx3wQO6/fz72ry
+ SiY26wsvDnWVrOqeofg93DNKiDIEyyWmjHGpdVZVc2N8wY0bZk+vVTqrb8Z2WYP2qe7f
+ qwkQ==
+X-Gm-Message-State: AOJu0Yy/LBX684z1WP9KnDdkMNPGzg9IdXwdT5ZrkUcAOnusxI0QDMEH
+ 9Fu3UGptWQ01brZ0yBsbWUOCDg==
+X-Google-Smtp-Source: AGHT+IHCI6yIfQPcqBZ3RfJtW5x9Qo94aQc6LrGPJf3+koHAZq3T2qnOLPczT4zuauuQ//FG8iFm6g==
+X-Received: by 2002:a0d:f383:0:b0:589:c065:b419 with SMTP id
+ c125-20020a0df383000000b00589c065b419mr19171851ywf.34.1700227832822; 
+ Fri, 17 Nov 2023 05:30:32 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
+ [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
+ by smtp.gmail.com with ESMTPSA id
+ x83-20020a814a56000000b005bf57ef572dsm475416ywa.140.2023.11.17.05.30.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Nov 2023 05:30:32 -0800 (PST)
+Date: Fri, 17 Nov 2023 08:30:30 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Mihai.Sain@microchip.com, seanga2@gmail.com, u-boot@lists.denx.de,
+ Nicolas.Ferre@microchip.com, Aubin.Constans@microchip.com,
+ Cristian.Birsan@microchip.com
+Subject: Re: [PATCH] arm: Enable SYS_THUMB_BUILD on AT91
+Message-ID: <20231117133030.GI170968@bill-the-cat>
+References: <20231105022742.632175-1-seanga2@gmail.com>
+ <20231116184702.GA344953@bill-the-cat>
+ <4906942a-8140-4264-afaa-3072f2eaed98@collabora.com>
+ <PH8PR11MB68049E01B9388C294E9DD10582B7A@PH8PR11MB6804.namprd11.prod.outlook.com>
+ <6133d5a4-9baf-486f-a595-59ce922964f9@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="v6RB6ZjvAXykGFRZ"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <719afeb3-7106-43e8-926f-4aa54d373055@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <6133d5a4-9baf-486f-a595-59ce922964f9@collabora.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,39 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On November 17, 2023 thus sayeth Kumar, Udit:
-> > On Wed, Nov 15, 2023 at 2:54 PM Maxime Ripard <mripard@redhat.com> 
-> > wrote:
-> > > On Sun, Oct 01, 2023 at 10:25:29PM +0530, Apurva Nandan wrote:
-> > >
 
-...
+--v6RB6ZjvAXykGFRZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> > > 
-> > > SoC:   J784S4 SR1.0 HS-FS
-> > > Model: Texas Instruments J784S4 EVM
-> > Maybe something changed but I'm surprised about it reporting an EVM
-> > board. I was expecting something like
-> > 
-> > Model: Texas Instruments AM69 SK
-> > Board: AM69-SK rev E2
-> > 
-> > Did you use the am69_sk_a72/r5  defconfigs?
-> 
-> Please apply AM69 config fragment
-> 
-> https://lore.kernel.org/all/20231001165545.494212-16-a-nandan@ti.com/
-> 
-> make ARCH=arm j784s4_evm_a72_defconfig am69_sk_a72.config
-> make ARCH=arm
-> 
-> OR
-> 
-> make ARCH=arm j784s4_evm_r5_defconfig am69_sk_r5.config
-> make ARCH=arm
-       ^^^^^^^^ 
+On Fri, Nov 17, 2023 at 01:58:35PM +0200, Eugen Hristev wrote:
+> On 11/17/23 11:15, Mihai.Sain@microchip.com wrote:
+> > Hi Eugen,
+> >=20
+> > I built new binaries with CONFIG_SYS_THUMB_BUILD=3Dy for sam9x60_curios=
+ity, sama5d29_curiosity, sama7g5ek and new sam9x75_curiosity board.
+> > I used the latest u-boot/master branch for this test.
+> > I noticed that the file size of the binaries have beed reduced with apr=
+ox 150KiB due to CONFIG_SYS_THUMB_BUILD=3Dy.
+> > After flashing the new binaries on these boards I can confirm that on a=
+ll boards the linux kernel was booted properly from mmc, qspi-flash, nand-f=
+lash and usb.
+> > I tested using bootm and bootz commands.
+>=20
+> Thank you Mihai,
+>=20
+> Tom, Sean, are you okay with this going in the next merge window ?
+> It is definitely not a fix, so that would be the best.
 
-Just a heads up, adding the ARCH variable isn't really needed and I've 
-heard of this causing problems for others :)
+Thanks. I was looking at this for a series to go in to -next at this
+point, so v2024.04 release.
 
-~Bryan
+--=20
+Tom
+
+--v6RB6ZjvAXykGFRZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXavMACgkQFHw5/5Y0
+tyzoLwwAhlDCiRPk/YBJn/9YQw2vmBT8C6bmuVoa5NbS8wgScA7CnUf7tZFfNSp8
+C+11qy3wdufhdljSOpNy2WrTUhzytTLPEgNuGiRJkxsnwee6Fj01RmsH129xkYyY
+3QdJpYNL4ByZfnd4j7vizVBE+9H8+X8dbBAhqMxQMny9Unc952g7hIHkCO1mkaw4
+b7/LLVCu1ATK4sqq23CQjT9l7hizyuboRdELt405irfMGyqZ5EKbGjphnrWv7Yea
+lTGMiqLGO8mspPahhc0dqNp0/sffOQdMURaWSMVOR+MDI+r7xGEXUqGDubl2yOZH
+EEQ+KlOYflh4wYyuZr/y477q3g2Djv06UwuPzLEd37MV058JjwjxdkW7bxLhj6vY
+IlZ1J2pEDzUWwYI6/CE+t8O5QyaeeCf0npp1HpCxybMS2fUt63GQAYaT6Jjy7swM
+ZlIcrBsdpdmoXPzbCkBTe/keFcsy8B7+rGVyhobolgwoYQqDDzCxEb5pLTUq/6uM
+lC4OTOaO
+=hHPT
+-----END PGP SIGNATURE-----
+
+--v6RB6ZjvAXykGFRZ--
