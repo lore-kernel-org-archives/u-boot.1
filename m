@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B415AC072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 05:02:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C1CAC197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 05:03:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF7B286E64;
-	Fri, 17 Nov 2023 06:02:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DC76586EDA;
+	Fri, 17 Nov 2023 06:03:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UHaV/Qxk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CrqOR/Ae";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F1286E64; Fri, 17 Nov 2023 06:02:22 +0100 (CET)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18D4786E64; Fri, 17 Nov 2023 06:03:10 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4DCA842D0
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:02:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 47F0D87469
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 06:03:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-4af6a700086so593432e0c.1
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 21:02:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700197332; x=1700802132; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NpfZVPZ//vVPIWI48i2XQuQd34kdp+wuuqsnm3A7HhM=;
- b=UHaV/QxkFyAVaU03kax4DMV3Y/KXVSHFVO1RjdrDQPfnxTCNV+6FWWsX0C/lj6300u
- jxtzBQl6TLqrqNjv70bTC4Ol1xC2YsIrK4HxADTzMGZXutRsf2ElPmdKyv2YyCb7FmUK
- N2NtntMHK1lgydFMJbG3OUEnkvOfc7bPQpb6qwkdZ16lhkjU2v1g8AVGfuGWvwwfZlo4
- VgrOXIg8/DmzVqCZlRig3/wPQnUFO1c+KSbd+gbvZ7Glo8J8qnYamk8pFP5pmctjXABg
- MLBB0ZigqJBDcpntimQx5eeJ6Dd0yQfpHoMVAlxf1NR4TAZj3U8CZEZ1PCrobnh+88hN
- TY0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700197332; x=1700802132;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NpfZVPZ//vVPIWI48i2XQuQd34kdp+wuuqsnm3A7HhM=;
- b=FGVzGbDoJPUcroA3nNt8Uo59WoDqBbCy1Z24wFSPNzlWIap7s7nARX9kAplZ84NMKS
- 15hHL86E+EWZlqf0RsW/bbXiDPmE3Kls4Ua1qPlXfSxZydH9JXoJQdOLl8iAb1oQGZwg
- y+FBiSu1QqnZEp6y4TsMRC86RjSriB6zWLYEbpIRkwcLepxG84WEjaA2HzMNeECeAC7Z
- EQULol9EgBZzHbtZ8YNOOuv8AcybPZ/eKO/tA095P9mN2XpDIw8uqv60bdBt+fUhoa0Y
- xsB9EkPz+Dw29eXrCd7CIr+CQyJxQPAuoTfBdWY0ixrrGF1TvU+zEKoLv1EMI3GqZFxb
- tCkQ==
-X-Gm-Message-State: AOJu0YzL8jrXjhs1BZWQl/RABeMORRCaidzEi7umhE4cPn0AIq1WiayG
- 6DozGipSUAtRPU86lNTRwvjlucBAPJdsUzwlmpR5sQ==
-X-Google-Smtp-Source: AGHT+IH5X+dP3ut9hNL9oPA4HruLESOUHq/fxxeLgz7+1Y01JaWWFeNIux/0nj3acO7WQsa1ND8DBXQ4pwv1CRVpTbA=
-X-Received: by 2002:a1f:cb86:0:b0:4af:f921:e6d3 with SMTP id
- b128-20020a1fcb86000000b004aff921e6d3mr733636vkg.14.1700197332340; Thu, 16
- Nov 2023 21:02:12 -0800 (PST)
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AH532g9121936;
+ Thu, 16 Nov 2023 23:03:02 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700197382;
+ bh=gfycF+/xEI+O9vLuoHLigJllkDFLICSnD4tarj9JDr8=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=CrqOR/AeSsmPHixr+h571UJ8yFYkTgDtsw3LBinNMFWs/may0IozvREu77RHX0UWL
+ +nCeCsOvcvBa+zROQ9S4/QoQmM+2N6X1ajt0mpGObJRpHjeBvmTChjPDzbPpa7okqj
+ TTZVdTfLC/BaY9BkW/O+f8p+ZCg2X1uofRw4Fsgg=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AH5329O039139
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 16 Nov 2023 23:03:02 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 16
+ Nov 2023 23:03:01 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 16 Nov 2023 23:03:02 -0600
+Received: from [127.0.1.1] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AH52uM4002965;
+ Thu, 16 Nov 2023 23:03:00 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Fri, 17 Nov 2023 10:32:56 +0530
+Subject: [PATCH 1/2] arm: dts: k3-j721s2*: Sync with kernel v6.7-rc1
 MIME-Version: 1.0
-References: <20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org>
- <20231114-b4-qcom-dt-compat-v3-2-88a92f8f00ba@linaro.org>
-In-Reply-To: <20231114-b4-qcom-dt-compat-v3-2-88a92f8f00ba@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 17 Nov 2023 10:32:01 +0530
-Message-ID: <CAFA6WYOA_CJWG=MHUWqHh1dEqR+wsG08=tttVSDAq=fKCK7zYA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/5] gpio: qcom_pmic: rework pwrkey driver into a
- button driver
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20231117-b4-upstream-j721s2-dt-sync-6-7-rc1-v1-1-d9a8cfbf1be7@ti.com>
+References: <20231117-b4-upstream-j721s2-dt-sync-6-7-rc1-v1-0-d9a8cfbf1be7@ti.com>
+In-Reply-To: <20231117-b4-upstream-j721s2-dt-sync-6-7-rc1-v1-0-d9a8cfbf1be7@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>, Reid Tonking
+ <reidt@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1700197376; l=16859;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=HqH/pT3SU2HbQUPfWb4ISOPx7ltee/dSm+OjPh3Qfxs=;
+ b=Q6WXkYGUF6iuAncbG4c/lGff0pnq5+zA3k67ZeGFKyPEvYwsM9UVNkUTJxHsMNRJ8uuVXifS0
+ IwU4CzhdDT5BUkW0+xv+H+rQX6YmbyZJ2lGb6fxCPARgyUrCF+pMBQB
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,821 +89,599 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Nov 2023 at 19:18, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> The power and resin keys were implemented as GPIOs here, but their only
-> use would be as buttons. Avoid the additional layer of introspection and
-> rework this driver into a button driver.
->
-> While we're here, replace the "qcom,pm8998-pwrkey" compatible with
-> "qcom,pm8941-pwrkey" to match upstream (Linux).
->
-> The dragonboard410c and 820c boards are adjusted to benefit from this
-> change too, simplify their custom board init code.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  MAINTAINERS                                      |   1 +
->  arch/arm/dts/dragonboard410c-uboot.dtsi          |  11 --
->  arch/arm/dts/dragonboard410c.dts                 |  22 ++-
->  arch/arm/dts/dragonboard820c-uboot.dtsi          |  12 --
->  arch/arm/dts/dragonboard820c.dts                 |  23 +++-
->  arch/arm/dts/dragonboard845c-uboot.dtsi          |  11 --
->  arch/arm/dts/dragonboard845c.dts                 |   4 +
->  arch/arm/dts/sdm845.dtsi                         |  23 +++-
->  arch/arm/dts/starqltechn-uboot.dtsi              |  10 --
->  arch/arm/dts/starqltechn.dts                     |  20 +--
->  arch/arm/mach-snapdragon/Kconfig                 |   3 +
->  arch/arm/mach-snapdragon/init_sdm845.c           |  45 ++-----
->  board/qualcomm/dragonboard410c/dragonboard410c.c |  31 ++---
->  board/qualcomm/dragonboard820c/dragonboard820c.c |  29 ++--
->  drivers/button/Kconfig                           |   9 ++
->  drivers/button/Makefile                          |   1 +
->  drivers/button/button-qcom-pmic.c                | 165 +++++++++++++++++++++++
->  drivers/gpio/Kconfig                             |   3 +-
->  drivers/gpio/qcom_pmic_gpio.c                    | 104 --------------
->  19 files changed, 269 insertions(+), 258 deletions(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index f6d63c8ab563..8cd102eaa070 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -572,6 +572,7 @@ M:  Neil Armstrong <neil.armstrong@linaro.org>
->  R:     Sumit Garg <sumit.garg@linaro.org>
->  S:     Maintained
->  F:     arch/arm/mach-snapdragon/
-> +F:     drivers/button/button-qcom-pmic.c
->  F:     drivers/clk/qcom/
->  F:     drivers/gpio/msm_gpio.c
->  F:     drivers/mmc/msm_sdhci.c
-> diff --git a/arch/arm/dts/dragonboard410c-uboot.dtsi b/arch/arm/dts/dragonboard410c-uboot.dtsi
-> index 3b0bd0ed0a1b..cec64bf80f99 100644
-> --- a/arch/arm/dts/dragonboard410c-uboot.dtsi
-> +++ b/arch/arm/dts/dragonboard410c-uboot.dtsi
-> @@ -42,14 +42,3 @@
->                 gpios = <&pm8916_gpios 3 0>;
->         };
->  };
-> -
-> -
-> -&pm8916_pon {
-> -       key_vol_down {
-> -               gpios = <&pm8916_pon 1 0>;
-> -       };
-> -
-> -       key_power {
-> -               gpios = <&pm8916_pon 0 0>;
-> -       };
-> -};
-> diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-> index 9230dd3fd96c..c41fee977813 100644
-> --- a/arch/arm/dts/dragonboard410c.dts
-> +++ b/arch/arm/dts/dragonboard410c.dts
-> @@ -147,11 +147,23 @@
->                                 #address-cells = <0x1>;
->                                 #size-cells = <0x1>;
->
-> -                               pm8916_pon: pm8916_pon@800 {
-> -                                       compatible = "qcom,pm8916-pwrkey";
-> -                                       reg = <0x800 0x96>;
-> -                                       #gpio-cells = <2>;
-> -                                       gpio-controller;
+Sync devicetree with kernel v6.7-rc1
 
-Since you have switched to upstream Linux bindings here, there isn't
-any need for custom binding in u-boot here:
-doc/device-tree-bindings/gpio/pm8916_gpio.txt. So you can drop that as
-well.
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+ arch/arm/dts/k3-j721s2-main.dtsi       | 232 ++++++++++++++++++++++++++++++++-
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi |  82 +++++++++++-
+ arch/arm/dts/k3-j721s2-som-p0.dtsi     | 208 +++++++++++++++++++++++++++++
+ 3 files changed, 520 insertions(+), 2 deletions(-)
 
--Sumit
+diff --git a/arch/arm/dts/k3-j721s2-main.dtsi b/arch/arm/dts/k3-j721s2-main.dtsi
+index 084f8f5b6699..b03731b53a26 100644
+--- a/arch/arm/dts/k3-j721s2-main.dtsi
++++ b/arch/arm/dts/k3-j721s2-main.dtsi
+@@ -775,7 +775,7 @@
+ 	};
+ 
+ 	main_navss: bus@30000000 {
+-		compatible = "simple-mfd";
++		compatible = "simple-bus";
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges = <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+@@ -807,6 +807,7 @@
+ 			ti,sci = <&sms>;
+ 			ti,sci-dev-id = <265>;
+ 			ti,interrupt-ranges = <0 0 256>;
++			ti,unmapped-event-sources = <&main_bcdma_csi>;
+ 		};
+ 
+ 		secure_proxy_main: mailbox@32c00000 {
+@@ -1103,6 +1104,22 @@
+ 			ti,sci-rm-range-rflow = <0x00>; /* GP RFLOW */
+ 		};
+ 
++		main_bcdma_csi: dma-controller@311a0000 {
++			compatible = "ti,j721s2-dmss-bcdma-csi";
++			reg = <0x00 0x311a0000 0x00 0x100>,
++			      <0x00 0x35d00000 0x00 0x20000>,
++			      <0x00 0x35c00000 0x00 0x10000>,
++			      <0x00 0x35e00000 0x00 0x80000>;
++			reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt";
++			msi-parent = <&main_udmass_inta>;
++			#dma-cells = <3>;
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <225>;
++			ti,sci-rm-range-rchan = <0x21>;
++			ti,sci-rm-range-tchan = <0x22>;
++			status = "disabled";
++		};
++
+ 		cpts@310d0000 {
+ 			compatible = "ti,j721e-cpts";
+ 			reg = <0x0 0x310d0000 0x0 0x400>;
+@@ -1695,4 +1712,217 @@
+ 		dss_ports: ports {
+ 		};
+ 	};
++
++	main_r5fss0: r5fss@5c00000 {
++		compatible = "ti,j721s2-r5fss";
++		ti,cluster-mode = <1>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges = <0x5c00000 0x00 0x5c00000 0x20000>,
++			 <0x5d00000 0x00 0x5d00000 0x20000>;
++		power-domains = <&k3_pds 277 TI_SCI_PD_EXCLUSIVE>;
++
++		main_r5fss0_core0: r5f@5c00000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x5c00000 0x00010000>,
++			      <0x5c10000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <279>;
++			ti,sci-proc-ids = <0x06 0xff>;
++			resets = <&k3_reset 279 1>;
++			firmware-name = "j721s2-main-r5f0_0-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++
++		main_r5fss0_core1: r5f@5d00000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x5d00000 0x00010000>,
++			      <0x5d10000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <280>;
++			ti,sci-proc-ids = <0x07 0xff>;
++			resets = <&k3_reset 280 1>;
++			firmware-name = "j721s2-main-r5f0_1-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++	};
++
++	main_r5fss1: r5fss@5e00000 {
++		compatible = "ti,j721s2-r5fss";
++		ti,cluster-mode = <1>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges = <0x5e00000 0x00 0x5e00000 0x20000>,
++			 <0x5f00000 0x00 0x5f00000 0x20000>;
++		power-domains = <&k3_pds 278 TI_SCI_PD_EXCLUSIVE>;
++
++		main_r5fss1_core0: r5f@5e00000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x5e00000 0x00010000>,
++			      <0x5e10000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <281>;
++			ti,sci-proc-ids = <0x08 0xff>;
++			resets = <&k3_reset 281 1>;
++			firmware-name = "j721s2-main-r5f1_0-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++
++		main_r5fss1_core1: r5f@5f00000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x5f00000 0x00010000>,
++			      <0x5f10000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <282>;
++			ti,sci-proc-ids = <0x09 0xff>;
++			resets = <&k3_reset 282 1>;
++			firmware-name = "j721s2-main-r5f1_1-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++	};
++
++	c71_0: dsp@64800000 {
++		compatible = "ti,j721s2-c71-dsp";
++		reg = <0x00 0x64800000 0x00 0x00080000>,
++		      <0x00 0x64e00000 0x00 0x0000c000>;
++		reg-names = "l2sram", "l1dram";
++		ti,sci = <&sms>;
++		ti,sci-dev-id = <8>;
++		ti,sci-proc-ids = <0x30 0xff>;
++		resets = <&k3_reset 8 1>;
++		firmware-name = "j721s2-c71_0-fw";
++		status = "disabled";
++	};
++
++	c71_1: dsp@65800000 {
++		compatible = "ti,j721s2-c71-dsp";
++		reg = <0x00 0x65800000 0x00 0x00080000>,
++		      <0x00 0x65e00000 0x00 0x0000c000>;
++		reg-names = "l2sram", "l1dram";
++		ti,sci = <&sms>;
++		ti,sci-dev-id = <11>;
++		ti,sci-proc-ids = <0x31 0xff>;
++		resets = <&k3_reset 11 1>;
++		firmware-name = "j721s2-c71_1-fw";
++		status = "disabled";
++	};
++
++	main_esm: esm@700000 {
++		compatible = "ti,j721e-esm";
++		reg = <0x00 0x700000 0x00 0x1000>;
++		ti,esm-pins = <688>, <689>;
++		bootph-pre-ram;
++	};
++
++	watchdog0: watchdog@2200000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x2200000 0x00 0x100>;
++		clocks = <&k3_clks 286 1>;
++		power-domains = <&k3_pds 286 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 286 1>;
++		assigned-clock-parents = <&k3_clks 286 5>;
++	};
++
++	watchdog1: watchdog@2210000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x2210000 0x00 0x100>;
++		clocks = <&k3_clks 287 1>;
++		power-domains = <&k3_pds 287 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 287 1>;
++		assigned-clock-parents = <&k3_clks 287 5>;
++	};
++
++	/*
++	 * The following RTI instances are coupled with MCU R5Fs, c7x and
++	 * GPU so keeping them reserved as these will be used by their
++	 * respective firmware
++	 */
++	watchdog2: watchdog@22f0000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x22f0000 0x00 0x100>;
++		clocks = <&k3_clks 290 1>;
++		power-domains = <&k3_pds 290 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 290 1>;
++		assigned-clock-parents = <&k3_clks 290 5>;
++		/* reserved for GPU */
++		status = "reserved";
++	};
++
++	watchdog3: watchdog@2300000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x2300000 0x00 0x100>;
++		clocks = <&k3_clks 288 1>;
++		power-domains = <&k3_pds 288 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 288 1>;
++		assigned-clock-parents = <&k3_clks 288 5>;
++		/* reserved for C7X_0 */
++		status = "reserved";
++	};
++
++	watchdog4: watchdog@2310000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x2310000 0x00 0x100>;
++		clocks = <&k3_clks 289 1>;
++		power-domains = <&k3_pds 289 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 289 1>;
++		assigned-clock-parents = <&k3_clks 289 5>;
++		/* reserved for C7X_1 */
++		status = "reserved";
++	};
++
++	watchdog5: watchdog@23c0000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x23c0000 0x00 0x100>;
++		clocks = <&k3_clks 291 1>;
++		power-domains = <&k3_pds 291 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 291 1>;
++		assigned-clock-parents = <&k3_clks 291 5>;
++		/* reserved for MAIN_R5F0_0 */
++		status = "reserved";
++	};
++
++	watchdog6: watchdog@23d0000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x23d0000 0x00 0x100>;
++		clocks = <&k3_clks 292 1>;
++		power-domains = <&k3_pds 292 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 292 1>;
++		assigned-clock-parents = <&k3_clks 292 5>;
++		/* reserved for MAIN_R5F0_1 */
++		status = "reserved";
++	};
++
++	watchdog7: watchdog@23e0000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x23e0000 0x00 0x100>;
++		clocks = <&k3_clks 293 1>;
++		power-domains = <&k3_pds 293 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 293 1>;
++		assigned-clock-parents = <&k3_clks 293 5>;
++		/* reserved for MAIN_R5F1_0 */
++		status = "reserved";
++	};
++
++	watchdog8: watchdog@23f0000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x23f0000 0x00 0x100>;
++		clocks = <&k3_clks 294 1>;
++		power-domains = <&k3_pds 294 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 294 1>;
++		assigned-clock-parents = <&k3_clks 294 5>;
++		/* reserved for MAIN_R5F1_1 */
++		status = "reserved";
++	};
+ };
+diff --git a/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi b/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
+index 2ddad9318554..7254f3bd3634 100644
+--- a/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
++++ b/arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi
+@@ -443,7 +443,7 @@
+ 	};
+ 
+ 	mcu_navss: bus@28380000 {
+-		compatible = "simple-mfd";
++		compatible = "simple-bus";
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>;
+@@ -655,4 +655,84 @@
+ 		power-domains = <&k3_pds 154 TI_SCI_PD_SHARED>;
+ 		#thermal-sensor-cells = <1>;
+ 	};
++
++	mcu_r5fss0: r5fss@41000000 {
++		compatible = "ti,j721s2-r5fss";
++		ti,cluster-mode = <1>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges = <0x41000000 0x00 0x41000000 0x20000>,
++			 <0x41400000 0x00 0x41400000 0x20000>;
++		power-domains = <&k3_pds 283 TI_SCI_PD_EXCLUSIVE>;
++
++		mcu_r5fss0_core0: r5f@41000000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x41000000 0x00010000>,
++			      <0x41010000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <284>;
++			ti,sci-proc-ids = <0x01 0xff>;
++			resets = <&k3_reset 284 1>;
++			firmware-name = "j721s2-mcu-r5f0_0-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++
++		mcu_r5fss0_core1: r5f@41400000 {
++			compatible = "ti,j721s2-r5f";
++			reg = <0x41400000 0x00010000>,
++			      <0x41410000 0x00010000>;
++			reg-names = "atcm", "btcm";
++			ti,sci = <&sms>;
++			ti,sci-dev-id = <285>;
++			ti,sci-proc-ids = <0x02 0xff>;
++			resets = <&k3_reset 285 1>;
++			firmware-name = "j721s2-mcu-r5f0_1-fw";
++			ti,atcm-enable = <1>;
++			ti,btcm-enable = <1>;
++			ti,loczrama = <1>;
++		};
++	};
++
++	mcu_esm: esm@40800000 {
++		compatible = "ti,j721e-esm";
++		reg = <0x00 0x40800000 0x00 0x1000>;
++		ti,esm-pins = <95>;
++		bootph-pre-ram;
++	};
++
++	wkup_esm: esm@42080000 {
++		compatible = "ti,j721e-esm";
++		reg = <0x00 0x42080000 0x00 0x1000>;
++		ti,esm-pins = <63>;
++		bootph-pre-ram;
++	};
++
++	/*
++	 * The 2 RTI instances are couple with MCU R5Fs so keeping them
++	 * reserved as these will be used by their respective firmware
++	 */
++	mcu_watchdog0: watchdog@40600000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x40600000 0x00 0x100>;
++		clocks = <&k3_clks 295 1>;
++		power-domains = <&k3_pds 295 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 295 1>;
++		assigned-clock-parents = <&k3_clks 295 5>;
++		/* reserved for MCU_R5F0_0 */
++		status = "reserved";
++	};
++
++	mcu_watchdog1: watchdog@40610000 {
++		compatible = "ti,j7-rti-wdt";
++		reg = <0x00 0x40610000 0x00 0x100>;
++		clocks = <&k3_clks 296 1>;
++		power-domains = <&k3_pds 296 TI_SCI_PD_EXCLUSIVE>;
++		assigned-clocks = <&k3_clks 296 1>;
++		assigned-clock-parents = <&k3_clks 296 5>;
++		/* reserved for MCU_R5F0_1 */
++		status = "reserved";
++	};
+ };
+diff --git a/arch/arm/dts/k3-j721s2-som-p0.dtsi b/arch/arm/dts/k3-j721s2-som-p0.dtsi
+index a4006f328027..dcad372620b1 100644
+--- a/arch/arm/dts/k3-j721s2-som-p0.dtsi
++++ b/arch/arm/dts/k3-j721s2-som-p0.dtsi
+@@ -29,6 +29,108 @@
+ 			alignment = <0x1000>;
+ 			no-map;
+ 		};
++
++		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa0000000 0x00 0x100000>;
++			no-map;
++		};
++
++		mcu_r5fss0_core0_memory_region: r5f-memory@a0100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa0100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		mcu_r5fss0_core1_dma_memory_region: r5f-dma-memory@a1000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa1000000 0x00 0x100000>;
++			no-map;
++		};
++
++		mcu_r5fss0_core1_memory_region: r5f-memory@a1100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa1100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		main_r5fss0_core0_dma_memory_region: r5f-dma-memory@a2000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa2000000 0x00 0x100000>;
++			no-map;
++		};
++
++		main_r5fss0_core0_memory_region: r5f-memory@a2100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa2100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		main_r5fss0_core1_dma_memory_region: r5f-dma-memory@a3000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa3000000 0x00 0x100000>;
++			no-map;
++		};
++
++		main_r5fss0_core1_memory_region: r5f-memory@a3100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa3100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		main_r5fss1_core0_dma_memory_region: r5f-dma-memory@a4000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa4000000 0x00 0x100000>;
++			no-map;
++		};
++
++		main_r5fss1_core0_memory_region: r5f-memory@a4100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa4100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		main_r5fss1_core1_dma_memory_region: r5f-dma-memory@a5000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa5000000 0x00 0x100000>;
++			no-map;
++		};
++
++		main_r5fss1_core1_memory_region: r5f-memory@a5100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa5100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		c71_0_dma_memory_region: c71-dma-memory@a6000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa6000000 0x00 0x100000>;
++			no-map;
++		};
++
++		c71_0_memory_region: c71-memory@a6100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa6100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		c71_1_dma_memory_region: c71-dma-memory@a7000000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa7000000 0x00 0x100000>;
++			no-map;
++		};
++
++		c71_1_memory_region: c71-memory@a7100000 {
++			compatible = "shared-dma-pool";
++			reg = <0x00 0xa7100000 0x00 0xf00000>;
++			no-map;
++		};
++
++		rtos_ipc_memory_region: ipc-memories@a8000000 {
++			reg = <0x00 0xa8000000 0x00 0x01c00000>;
++			alignment = <0x1000>;
++			no-map;
++		};
+ 	};
+ 
+ 	mux0: mux-controller {
+@@ -151,3 +253,109 @@
+ 		cdns,read-delay = <4>;
+ 	};
+ };
++
++&mailbox0_cluster0 {
++	status = "okay";
++	interrupts = <436>;
++	mbox_mcu_r5fss0_core0: mbox-mcu-r5fss0-core0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++
++	mbox_mcu_r5fss0_core1: mbox-mcu-r5fss0-core1 {
++		ti,mbox-rx = <2 0 0>;
++		ti,mbox-tx = <3 0 0>;
++	};
++};
++
++&mailbox0_cluster1 {
++	status = "okay";
++	interrupts = <432>;
++	mbox_main_r5fss0_core0: mbox-main-r5fss0-core0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++
++	mbox_main_r5fss0_core1: mbox-main-r5fss0-core1 {
++		ti,mbox-rx = <2 0 0>;
++		ti,mbox-tx = <3 0 0>;
++	};
++};
++
++&mailbox0_cluster2 {
++	status = "okay";
++	interrupts = <428>;
++	mbox_main_r5fss1_core0: mbox-main-r5fss1-core0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++
++	mbox_main_r5fss1_core1: mbox-main-r5fss1-core1 {
++		ti,mbox-rx = <2 0 0>;
++		ti,mbox-tx = <3 0 0>;
++	};
++};
++
++&mailbox0_cluster4 {
++	status = "okay";
++	interrupts = <420>;
++	mbox_c71_0: mbox-c71-0 {
++		ti,mbox-rx = <0 0 0>;
++		ti,mbox-tx = <1 0 0>;
++	};
++
++	mbox_c71_1: mbox-c71-1 {
++		ti,mbox-rx = <2 0 0>;
++		ti,mbox-tx = <3 0 0>;
++	};
++};
++
++&mcu_r5fss0_core0 {
++	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core0>;
++	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
++			<&mcu_r5fss0_core0_memory_region>;
++};
++
++&mcu_r5fss0_core1 {
++	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core1>;
++	memory-region = <&mcu_r5fss0_core1_dma_memory_region>,
++			<&mcu_r5fss0_core1_memory_region>;
++};
++
++&main_r5fss0_core0 {
++	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core0>;
++	memory-region = <&main_r5fss0_core0_dma_memory_region>,
++			<&main_r5fss0_core0_memory_region>;
++};
++
++&main_r5fss0_core1 {
++	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core1>;
++	memory-region = <&main_r5fss0_core1_dma_memory_region>,
++			<&main_r5fss0_core1_memory_region>;
++};
++
++&main_r5fss1_core0 {
++	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core0>;
++	memory-region = <&main_r5fss1_core0_dma_memory_region>,
++			<&main_r5fss1_core0_memory_region>;
++};
++
++&main_r5fss1_core1 {
++	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core1>;
++	memory-region = <&main_r5fss1_core1_dma_memory_region>,
++			<&main_r5fss1_core1_memory_region>;
++};
++
++&c71_0 {
++	status = "okay";
++	mboxes = <&mailbox0_cluster4>, <&mbox_c71_0>;
++	memory-region = <&c71_0_dma_memory_region>,
++			<&c71_0_memory_region>;
++};
++
++&c71_1 {
++	status = "okay";
++	mboxes = <&mailbox0_cluster4>, <&mbox_c71_1>;
++	memory-region = <&c71_1_dma_memory_region>,
++			<&c71_1_memory_region>;
++};
 
-> +                               pon@800 {
-> +                                       compatible = "qcom,pm8916-pon";
-> +                                       reg = <0x800 0x100>;
-> +                                       mode-bootloader = <0x2>;
-> +                                       mode-recovery = <0x1>;
-> +
-> +                                       pwrkey {
-> +                                               compatible = "qcom,pm8941-pwrkey";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                       };
-> +
-> +                                       pm8916_resin: resin {
-> +                                               compatible = "qcom,pm8941-resin";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                       };
->                                 };
->
->                                 pm8916_gpios: pm8916_gpios@c000 {
-> diff --git a/arch/arm/dts/dragonboard820c-uboot.dtsi b/arch/arm/dts/dragonboard820c-uboot.dtsi
-> index 457728a43ecb..d93c7c1fbdee 100644
-> --- a/arch/arm/dts/dragonboard820c-uboot.dtsi
-> +++ b/arch/arm/dts/dragonboard820c-uboot.dtsi
-> @@ -30,15 +30,3 @@
->                 };
->         };
->  };
-> -
-> -&pm8994_pon {
-> -       key_vol_down {
-> -               gpios = <&pm8994_pon 1 0>;
-> -               label = "key_vol_down";
-> -       };
-> -
-> -       key_power {
-> -               gpios = <&pm8994_pon 0 0>;
-> -               label = "key_power";
-> -       };
-> -};
-> diff --git a/arch/arm/dts/dragonboard820c.dts b/arch/arm/dts/dragonboard820c.dts
-> index ad201d48749c..0d9c9f7a4922 100644
-> --- a/arch/arm/dts/dragonboard820c.dts
-> +++ b/arch/arm/dts/dragonboard820c.dts
-> @@ -109,12 +109,23 @@
->                                 #address-cells = <0x1>;
->                                 #size-cells = <0x1>;
->
-> -                               pm8994_pon: pm8994_pon@800 {
-> -                                       compatible = "qcom,pm8994-pwrkey";
-> -                                       reg = <0x800 0x96>;
-> -                                       #gpio-cells = <2>;
-> -                                       gpio-controller;
-> -                                       gpio-bank-name="pm8994_key.";
-> +                               pm8994_pon: pon@800 {
-> +                                       compatible = "qcom,pm8916-pon";
-> +                                       reg = <0x800 0x100>;
-> +                                       mode-bootloader = <0x2>;
-> +                                       mode-recovery = <0x1>;
-> +
-> +                                       pwrkey {
-> +                                               compatible = "qcom,pm8941-pwrkey";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                       };
-> +
-> +                                       pm8994_resin: resin {
-> +                                               compatible = "qcom,pm8941-resin";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                       };
->                                 };
->
->                                 pm8994_gpios: pm8994_gpios@c000 {
-> diff --git a/arch/arm/dts/dragonboard845c-uboot.dtsi b/arch/arm/dts/dragonboard845c-uboot.dtsi
-> index 7728f4f4a3e5..775f45c0149f 100644
-> --- a/arch/arm/dts/dragonboard845c-uboot.dtsi
-> +++ b/arch/arm/dts/dragonboard845c-uboot.dtsi
-> @@ -24,14 +24,3 @@
->                 };
->         };
->  };
-> -
-> -&pm8998_pon {
-> -       key_vol_down {
-> -               gpios = <&pm8998_pon 1 0>;
-> -               label = "key_vol_down";
-> -       };
-> -       key_power {
-> -               gpios = <&pm8998_pon 0 0>;
-> -               label = "key_power";
-> -       };
-> -};
-> diff --git a/arch/arm/dts/dragonboard845c.dts b/arch/arm/dts/dragonboard845c.dts
-> index b4f057ac6537..054f253eb32a 100644
-> --- a/arch/arm/dts/dragonboard845c.dts
-> +++ b/arch/arm/dts/dragonboard845c.dts
-> @@ -41,4 +41,8 @@
->         };
->  };
->
-> +&pm8998_resin {
-> +       status = "okay";
-> +};
-> +
->  #include "dragonboard845c-uboot.dtsi"
-> diff --git a/arch/arm/dts/sdm845.dtsi b/arch/arm/dts/sdm845.dtsi
-> index 4798ace0ff8b..cd5d890e9a45 100644
-> --- a/arch/arm/dts/sdm845.dtsi
-> +++ b/arch/arm/dts/sdm845.dtsi
-> @@ -78,12 +78,25 @@
->                                 #address-cells = <0x1>;
->                                 #size-cells = <0x1>;
->
-> -                               pm8998_pon: pm8998_pon@800 {
-> -                                       compatible = "qcom,pm8998-pwrkey";
-> +                               pm8998_pon: pon@800 {
-> +                                       compatible = "qcom,pm8998-pon";
-> +
->                                         reg = <0x800 0x100>;
-> -                                       #gpio-cells = <2>;
-> -                                       gpio-controller;
-> -                                       gpio-bank-name = "pm8998_key.";
-> +                                       mode-bootloader = <0x2>;
-> +                                       mode-recovery = <0x1>;
-> +
-> +                                       pm8998_pwrkey: pwrkey {
-> +                                               compatible = "qcom,pm8941-pwrkey";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                       };
-> +
-> +                                       pm8998_resin: resin {
-> +                                               compatible = "qcom,pm8941-resin";
-> +                                               debounce = <15625>;
-> +                                               bias-pull-up;
-> +                                               status = "disabled";
-> +                                       };
->                                 };
->
->                                 pm8998_gpios: pm8998_gpios@c000 {
-> diff --git a/arch/arm/dts/starqltechn-uboot.dtsi b/arch/arm/dts/starqltechn-uboot.dtsi
-> index 034d5c1c07ed..55c6d18412ba 100644
-> --- a/arch/arm/dts/starqltechn-uboot.dtsi
-> +++ b/arch/arm/dts/starqltechn-uboot.dtsi
-> @@ -25,13 +25,3 @@
->         };
->  };
->
-> -&pm8998_pon {
-> -       key_vol_down {
-> -               gpios = <&pm8998_pon 1 0>;
-> -               label = "key_vol_down";
-> -       };
-> -       key_power {
-> -               gpios = <&pm8998_pon 0 0>;
-> -               label = "key_power";
-> -       };
-> -};
-> diff --git a/arch/arm/dts/starqltechn.dts b/arch/arm/dts/starqltechn.dts
-> index 5b6372bee79a..0842e19adb60 100644
-> --- a/arch/arm/dts/starqltechn.dts
-> +++ b/arch/arm/dts/starqltechn.dts
-> @@ -45,22 +45,6 @@
->                 format = "a8r8g8b8";
->         };
->
-> -       gpio-keys {
-> -               compatible = "gpio-keys";
-> -
-> -               key-pwr {
-> -                       label = "Power";
-> -                       linux,code = <KEY_ENTER>;
-> -                       gpios = <&pm8998_pon 0 GPIO_ACTIVE_LOW>;
-> -               };
-> -
-> -               key-vol-down {
-> -                       label = "Volume Down";
-> -                       linux,code = <KEY_DOWN>;
-> -                       gpios = <&pm8998_pon 1 GPIO_ACTIVE_LOW>;
-> -               };
-> -       };
-> -
->         soc: soc {
->                 serial@a84000 {
->                         status = "okay";
-> @@ -68,6 +52,10 @@
->         };
->  };
->
-> +&pm8998_resin {
-> +       status = "okay";
-> +};
-> +
->  &tlmm {
->         muic_i2c: muic-i2c-n {
->                 pins = "GPIO_33", "GPIO_34";
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index 3c9f3bee3f18..ad6671081910 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -17,6 +17,7 @@ config SDM845
->         select LINUX_KERNEL_IMAGE_HEADER
->         imply CLK_QCOM_SDM845
->         imply PINCTRL_QCOM_SDM845
-> +       imply BUTTON_QCOM_PMIC
->
->  config LNX_KRNL_IMG_TEXT_OFFSET_BASE
->         default 0x80000000
-> @@ -30,6 +31,7 @@ config TARGET_DRAGONBOARD410C
->         select ENABLE_ARM_SOC_BOOT0_HOOK
->         imply CLK_QCOM_APQ8016
->         imply PINCTRL_QCOM_APQ8016
-> +       imply BUTTON_QCOM_PMIC
->         help
->           Support for 96Boards Dragonboard 410C. This board complies with
->           96Board Open Platform Specifications. Features:
-> @@ -45,6 +47,7 @@ config TARGET_DRAGONBOARD820C
->         bool "96Boards Dragonboard 820C"
->         imply CLK_QCOM_APQ8096
->         imply PINCTRL_QCOM_APQ8096
-> +       imply BUTTON_QCOM_PMIC
->         help
->           Support for 96Boards Dragonboard 820C. This board complies with
->           96Board Open Platform Specifications. Features:
-> diff --git a/arch/arm/mach-snapdragon/init_sdm845.c b/arch/arm/mach-snapdragon/init_sdm845.c
-> index 1f8850239437..067acc9a6f44 100644
-> --- a/arch/arm/mach-snapdragon/init_sdm845.c
-> +++ b/arch/arm/mach-snapdragon/init_sdm845.c
-> @@ -5,6 +5,7 @@
->   * (C) Copyright 2021 Dzmitry Sankouski <dsankouski@gmail.com>
->   */
->
-> +#include <button.h>
->  #include <init.h>
->  #include <env.h>
->  #include <common.h>
-> @@ -32,46 +33,18 @@ __weak int board_init(void)
->  /* Check for vol- and power buttons */
->  __weak int misc_init_r(void)
->  {
-> -       struct udevice *pon;
-> -       struct gpio_desc resin;
-> -       int node, ret;
-> +       struct udevice *btn;
-> +       int ret;
-> +       enum button_state_t state;
->
-> -       ret = uclass_get_device_by_name(UCLASS_GPIO, "pm8998_pon@800", &pon);
-> +       ret = button_get_by_label("pwrkey", &btn);
->         if (ret < 0) {
-> -               printf("Failed to find PMIC pon node. Check device tree\n");
-> -               return 0;
-> +               printf("Couldn't find power button!\n");
-> +               return ret;
->         }
->
-> -       node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pon),
-> -                                 "key_vol_down");
-> -       if (node < 0) {
-> -               printf("Failed to find key_vol_down node. Check device tree\n");
-> -               return 0;
-> -       }
-> -       if (gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
-> -                                      &resin, 0)) {
-> -               printf("Failed to request key_vol_down button.\n");
-> -               return 0;
-> -       }
-> -       if (dm_gpio_get_value(&resin)) {
-> -               env_set("key_vol_down", "1");
-> -               printf("Volume down button pressed\n");
-> -       } else {
-> -               env_set("key_vol_down", "0");
-> -       }
-> -
-> -       node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pon),
-> -                                 "key_power");
-> -       if (node < 0) {
-> -               printf("Failed to find key_power node. Check device tree\n");
-> -               return 0;
-> -       }
-> -       if (gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
-> -                                      &resin, 0)) {
-> -               printf("Failed to request key_power button.\n");
-> -               return 0;
-> -       }
-> -       if (dm_gpio_get_value(&resin)) {
-> +       state = button_get_state(btn);
-> +       if (state == BUTTON_ON) {
->                 env_set("key_power", "1");
->                 printf("Power button pressed\n");
->         } else {
-> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> index 371b3262f8c5..350e0e9e20aa 100644
-> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-> @@ -5,6 +5,7 @@
->   * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
->   */
->
-> +#include <button.h>
->  #include <common.h>
->  #include <cpu_func.h>
->  #include <dm.h>
-> @@ -108,32 +109,20 @@ int board_usb_init(int index, enum usb_init_type init)
->  /* Check for vol- button - if pressed - stop autoboot */
->  int misc_init_r(void)
->  {
-> -       struct udevice *pon;
-> -       struct gpio_desc resin;
-> -       int node, ret;
-> +       struct udevice *btn;
-> +       int ret;
-> +       enum button_state_t state;
->
-> -       ret = uclass_get_device_by_name(UCLASS_GPIO, "pm8916_pon@800", &pon);
-> +       ret = button_get_by_label("vol_down", &btn);
->         if (ret < 0) {
-> -               printf("Failed to find PMIC pon node. Check device tree\n");
-> -               return 0;
-> +               printf("Couldn't find power button!\n");
-> +               return ret;
->         }
->
-> -       node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pon),
-> -                                 "key_vol_down");
-> -       if (node < 0) {
-> -               printf("Failed to find key_vol_down node. Check device tree\n");
-> -               return 0;
-> -       }
-> -
-> -       if (gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
-> -                                      &resin, 0)) {
-> -               printf("Failed to request key_vol_down button.\n");
-> -               return 0;
-> -       }
-> -
-> -       if (dm_gpio_get_value(&resin)) {
-> +       state = button_get_state(btn);
-> +       if (state == BUTTON_ON) {
->                 env_set("preboot", "setenv preboot; fastboot 0");
-> -               printf("key_vol_down pressed - Starting fastboot.\n");
-> +               printf("vol_down pressed - Starting fastboot.\n");
->         }
->
->         return 0;
-> diff --git a/board/qualcomm/dragonboard820c/dragonboard820c.c b/board/qualcomm/dragonboard820c/dragonboard820c.c
-> index 6785bf58e949..2f0db628368b 100644
-> --- a/board/qualcomm/dragonboard820c/dragonboard820c.c
-> +++ b/board/qualcomm/dragonboard820c/dragonboard820c.c
-> @@ -5,6 +5,7 @@
->   * (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@linaro.org>
->   */
->
-> +#include <button.h>
->  #include <cpu_func.h>
->  #include <init.h>
->  #include <env.h>
-> @@ -139,30 +140,18 @@ void reset_cpu(void)
->  /* Check for vol- button - if pressed - stop autoboot */
->  int misc_init_r(void)
->  {
-> -       struct udevice *pon;
-> -       struct gpio_desc resin;
-> -       int node, ret;
-> +       struct udevice *btn;
-> +       int ret;
-> +       enum button_state_t state;
->
-> -       ret = uclass_get_device_by_name(UCLASS_GPIO, "pm8994_pon@800", &pon);
-> +       ret = button_get_by_label("pwrkey", &btn);
->         if (ret < 0) {
-> -               printf("Failed to find PMIC pon node. Check device tree\n");
-> -               return 0;
-> +               printf("Couldn't find power button!\n");
-> +               return ret;
->         }
->
-> -       node = fdt_subnode_offset(gd->fdt_blob, dev_of_offset(pon),
-> -                                 "key_vol_down");
-> -       if (node < 0) {
-> -               printf("Failed to find key_vol_down node. Check device tree\n");
-> -               return 0;
-> -       }
-> -
-> -       if (gpio_request_by_name_nodev(offset_to_ofnode(node), "gpios", 0,
-> -                                      &resin, 0)) {
-> -               printf("Failed to request key_vol_down button.\n");
-> -               return 0;
-> -       }
-> -
-> -       if (dm_gpio_get_value(&resin)) {
-> +       state = button_get_state(btn);
-> +       if (state == BUTTON_ON) {
->                 env_set("bootdelay", "-1");
->                 printf("Power button pressed - dropping to console.\n");
->         }
-> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
-> index 8ce2de37d62a..097b05f822e7 100644
-> --- a/drivers/button/Kconfig
-> +++ b/drivers/button/Kconfig
-> @@ -27,4 +27,13 @@ config BUTTON_GPIO
->           The GPIO driver must used driver model. Buttons are configured using
->           the device tree.
->
-> +config BUTTON_QCOM_PMIC
-> +       bool "Qualcomm power button"
-> +       depends on BUTTON
-> +       depends on PMIC_QCOM
-> +       help
-> +         Enable support for the power and "resin" (usually volume down) buttons
-> +         on Qualcomm SoCs. These will be configured as the Enter and Down keys
-> +         respectively, allowing navigation of bootmenu with buttons on device.
-> +
->  endmenu
-> diff --git a/drivers/button/Makefile b/drivers/button/Makefile
-> index bbd18af14940..68555081a47a 100644
-> --- a/drivers/button/Makefile
-> +++ b/drivers/button/Makefile
-> @@ -5,3 +5,4 @@
->  obj-$(CONFIG_BUTTON) += button-uclass.o
->  obj-$(CONFIG_BUTTON_ADC) += button-adc.o
->  obj-$(CONFIG_BUTTON_GPIO) += button-gpio.o
-> +obj-$(CONFIG_BUTTON_QCOM_PMIC) += button-qcom-pmic.o
-> \ No newline at end of file
-> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
-> new file mode 100644
-> index 000000000000..34a976d1e6c6
-> --- /dev/null
-> +++ b/drivers/button/button-qcom-pmic.c
-> @@ -0,0 +1,165 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Qualcomm generic pmic gpio driver
-> + *
-> + * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-> + * (C) Copyright 2023 Linaro Ltd.
-> + */
-> +
-> +#include <button.h>
-> +#include <dt-bindings/input/linux-event-codes.h>
-> +#include <dm.h>
-> +#include <dm/device-internal.h>
-> +#include <dm/lists.h>
-> +#include <log.h>
-> +#include <power/pmic.h>
-> +#include <spmi/spmi.h>
-> +#include <linux/bitops.h>
-> +
-> +#define REG_TYPE               0x4
-> +#define REG_SUBTYPE            0x5
-> +
-> +struct qcom_pmic_btn_priv {
-> +       u32 base;
-> +       u32 status_bit;
-> +       int code;
-> +       struct udevice *pmic;
-> +};
-> +
-> +#define PON_INT_RT_STS                        0x10
-> +#define KPDPWR_ON_INT_BIT                     0
-> +#define RESIN_ON_INT_BIT                      1
-> +
-> +#define NODE_IS_PWRKEY(node) (!strncmp(ofnode_get_name(node), "pwrkey", strlen("pwrkey")))
-> +#define NODE_IS_RESIN(node) (!strncmp(ofnode_get_name(node), "resin", strlen("resin")))
-> +
-> +static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
-> +{
-> +       struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
-> +
-> +       int reg = pmic_reg_read(priv->pmic, priv->base + PON_INT_RT_STS);
-> +
-> +       if (reg < 0)
-> +               return 0;
-> +
-> +       return (reg & BIT(priv->status_bit)) != 0;
-> +}
-> +
-> +static int qcom_pwrkey_get_code(struct udevice *dev)
-> +{
-> +       struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
-> +
-> +       return priv->code;
-> +}
-> +
-> +static int qcom_pwrkey_probe(struct udevice *dev)
-> +{
-> +       struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +       struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
-> +       ofnode node = dev_ofnode(dev);
-> +       int ret;
-> +       u64 base;
-> +
-> +       /* Ignore the top-level pon node */
-> +       if (!uc_plat->label)
-> +               return 0;
-> +
-> +       /* the pwrkey and resin nodes are children of the "pon" node, get the
-> +        * PMIC device to use in pmic_reg_* calls.
-> +        */
-> +       priv->pmic = dev->parent->parent;
-> +
-> +       /* Get the address of the parent pon node */
-> +       base = dev_read_addr(dev->parent);
-> +       if (base == FDT_ADDR_T_NONE) {
-> +               printf("%s: Can't find address\n", dev->name);
-> +               return -EINVAL;
-> +       }
-> +
-> +       priv->base = base;
-> +
-> +       /* Do a sanity check */
-> +       ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
-> +       if (ret != 0x1 && ret != 0xb) {
-> +               printf("%s: unexpected PMIC function type %d\n", dev->name, ret);
-> +               return -ENXIO;
-> +       }
-> +
-> +       ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
-> +       if ((ret & 0x7) == 0) {
-> +               printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
-> +               return -ENXIO;
-> +       }
-> +
-> +       if (NODE_IS_PWRKEY(node)) {
-> +               priv->status_bit = 0;
-> +               priv->code = KEY_ENTER;
-> +       } else if (NODE_IS_RESIN(node)) {
-> +               priv->status_bit = 1;
-> +               priv->code = KEY_DOWN;
-> +       } else {
-> +               /* Should not get here! */
-> +               printf("Invalid pon node '%s' should be 'pwrkey' or 'resin'\n",
-> +                      ofnode_get_name(node));
-> +               return -EINVAL;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static int button_qcom_pmic_bind(struct udevice *parent)
-> +{
-> +       struct udevice *dev;
-> +       ofnode node;
-> +       int ret;
-> +
-> +       dev_for_each_subnode(node, parent) {
-> +               struct button_uc_plat *uc_plat;
-> +               const char *label;
-> +
-> +               if (!ofnode_is_enabled(node))
-> +                       continue;
-> +
-> +               ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
-> +                                                ofnode_get_name(node),
-> +                                                node, &dev);
-> +               if (ret) {
-> +                       printf("Failed to bind %s! %d\n", label, ret);
-> +                       return ret;
-> +               }
-> +               uc_plat = dev_get_uclass_plat(dev);
-> +               if (NODE_IS_PWRKEY(node)) {
-> +                       uc_plat->label = "pwrkey";
-> +               } else if (NODE_IS_RESIN(node)) {
-> +                       uc_plat->label = "vol_down";
-> +               } else {
-> +                       printf("Unknown button node '%s' should be 'pwrkey' or 'resin'\n",
-> +                              ofnode_get_name(node));
-> +                       device_unbind(dev);
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct button_ops button_qcom_pmic_ops = {
-> +       .get_state      = qcom_pwrkey_get_state,
-> +       .get_code       = qcom_pwrkey_get_code,
-> +};
-> +
-> +static const struct udevice_id qcom_pwrkey_ids[] = {
-> +       { .compatible = "qcom,pm8916-pon" },
-> +       { .compatible = "qcom,pm8941-pon" },
-> +       { .compatible = "qcom,pm8998-pon" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(qcom_pwrkey) = {
-> +       .name = "qcom_pwrkey",
-> +       .id = UCLASS_BUTTON,
-> +       .of_match = qcom_pwrkey_ids,
-> +       .bind = button_qcom_pmic_bind,
-> +       .probe = qcom_pwrkey_probe,
-> +       .ops = &button_qcom_pmic_ops,
-> +       .priv_auto = sizeof(struct qcom_pmic_btn_priv),
-> +};
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> index ba42b0768e12..fbf77673c5e0 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -309,12 +309,13 @@ config CMD_PCA953X
->  config QCOM_PMIC_GPIO
->         bool "Qualcomm generic PMIC GPIO/keypad driver"
->         depends on DM_GPIO && PMIC_QCOM
-> +       select BUTTON
->         help
->           Support for GPIO pins and power/reset buttons found on
->           Qualcomm SoCs PMIC.
->           Default name for GPIO bank is "pm8916".
->           Power and reset buttons are placed in "pwkey_qcom" bank and
-> -          have gpio numbers 0 and 1 respectively.
-> +         have gpio numbers 0 and 1 respectively.
->
->  config PCF8575_GPIO
->         bool "PCF8575 I2C GPIO Expander driver"
-> diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-> index e5841f502953..7b83c67fa464 100644
-> --- a/drivers/gpio/qcom_pmic_gpio.c
-> +++ b/drivers/gpio/qcom_pmic_gpio.c
-> @@ -275,107 +275,3 @@ U_BOOT_DRIVER(qcom_pmic_gpio) = {
->         .priv_auto      = sizeof(struct qcom_gpio_bank),
->  };
->
-> -
-> -/* Add pmic buttons as GPIO as well - there is no generic way for now */
-> -#define PON_INT_RT_STS                        0x10
-> -#define KPDPWR_ON_INT_BIT                     0
-> -#define RESIN_ON_INT_BIT                      1
-> -
-> -static int qcom_pwrkey_get_function(struct udevice *dev, unsigned offset)
-> -{
-> -       return GPIOF_INPUT;
-> -}
-> -
-> -static int qcom_pwrkey_get_value(struct udevice *dev, unsigned offset)
-> -{
-> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
-> -
-> -       int reg = pmic_reg_read(dev->parent, priv->pid + PON_INT_RT_STS);
-> -
-> -       if (reg < 0)
-> -               return 0;
-> -
-> -       switch (offset) {
-> -       case 0: /* Power button */
-> -               return (reg & BIT(KPDPWR_ON_INT_BIT)) != 0;
-> -               break;
-> -       case 1: /* Reset button */
-> -       default:
-> -               return (reg & BIT(RESIN_ON_INT_BIT)) != 0;
-> -               break;
-> -       }
-> -}
-> -
-> -/*
-> - * Since pmic buttons modelled as GPIO, we need empty direction functions
-> - * to trick u-boot button driver
-> - */
-> -static int qcom_pwrkey_direction_input(struct udevice *dev, unsigned int offset)
-> -{
-> -       return 0;
-> -}
-> -
-> -static int qcom_pwrkey_direction_output(struct udevice *dev, unsigned int offset, int value)
-> -{
-> -       return -EOPNOTSUPP;
-> -}
-> -
-> -static const struct dm_gpio_ops qcom_pwrkey_ops = {
-> -       .get_value              = qcom_pwrkey_get_value,
-> -       .get_function           = qcom_pwrkey_get_function,
-> -       .direction_input        = qcom_pwrkey_direction_input,
-> -       .direction_output       = qcom_pwrkey_direction_output,
-> -};
-> -
-> -static int qcom_pwrkey_probe(struct udevice *dev)
-> -{
-> -       struct qcom_gpio_bank *priv = dev_get_priv(dev);
-> -       int reg;
-> -       u64 pid;
-> -
-> -       pid = dev_read_addr(dev);
-> -       if (pid == FDT_ADDR_T_NONE)
-> -               return log_msg_ret("bad address", -EINVAL);
-> -
-> -       priv->pid = pid;
-> -
-> -       /* Do a sanity check */
-> -       reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
-> -       if (reg != 0x1)
-> -               return log_msg_ret("bad type", -ENXIO);
-> -
-> -       reg = pmic_reg_read(dev->parent, priv->pid + REG_SUBTYPE);
-> -       if ((reg & 0x5) == 0)
-> -               return log_msg_ret("bad subtype", -ENXIO);
-> -
-> -       return 0;
-> -}
-> -
-> -static int qcom_pwrkey_of_to_plat(struct udevice *dev)
-> -{
-> -       struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-> -
-> -       uc_priv->gpio_count = 2;
-> -       uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
-> -       if (uc_priv->bank_name == NULL)
-> -               uc_priv->bank_name = "pwkey_qcom";
-> -
-> -       return 0;
-> -}
-> -
-> -static const struct udevice_id qcom_pwrkey_ids[] = {
-> -       { .compatible = "qcom,pm8916-pwrkey" },
-> -       { .compatible = "qcom,pm8994-pwrkey" },
-> -       { .compatible = "qcom,pm8998-pwrkey" },
-> -       { }
-> -};
-> -
-> -U_BOOT_DRIVER(pwrkey_qcom) = {
-> -       .name   = "pwrkey_qcom",
-> -       .id     = UCLASS_GPIO,
-> -       .of_match = qcom_pwrkey_ids,
-> -       .of_to_plat = qcom_pwrkey_of_to_plat,
-> -       .probe  = qcom_pwrkey_probe,
-> -       .ops    = &qcom_pwrkey_ops,
-> -       .priv_auto      = sizeof(struct qcom_gpio_bank),
-> -};
->
-> --
-> 2.42.1
->
+-- 
+2.41.0
+
