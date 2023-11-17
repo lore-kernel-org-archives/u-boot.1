@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 146BFC197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:41:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E999C197A0
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 13:41:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30FB486FA7;
-	Fri, 17 Nov 2023 14:41:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A6F97871B4;
+	Fri, 17 Nov 2023 14:41:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q7HbleF3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AWJj5Jt1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E31E68749F; Fri, 17 Nov 2023 14:41:01 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id C72FF8701C; Fri, 17 Nov 2023 14:41:05 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0EE486FB8
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:40:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59F8D8708C
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:40:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-677f832d844so2262576d6.2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:40:57 -0800 (PST)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-77ba6d5123fso264575985a.0
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 05:40:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700228456; x=1700833256; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700228458; x=1700833258; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K2SoHUNWiUM/4zw4Hi63H8zUeC6WgFwwCl8VEZlBQAI=;
- b=q7HbleF3hkwrESFpnSLGMZsO6OSLlFML5fECJzo7V1pX7xr0r8mH5vyC+5M6LD6N6s
- FyrNZKAY7pFnX6QBGuvMqSVmu2TscQCWNI3MaeeWoQUH4kEjCCw9TcryukoSxtwWXU0e
- Ww29R0sgoHOm1IwqetDQS742ikdkPYJFG9qLI=
+ bh=Mo6M8sdtGqk3WtdWEJFgTa8/MV86+2VlOvnF5ExFX5M=;
+ b=AWJj5Jt1shShGcsW1Qs9N0lLwqcSUZHJ38UL8od8y1H+qlvU3H6d2ueR2nTw0YR5q8
+ SYgqoI9JuyuLrxEsKVnaxlWNxaXM/Vv2Ftd9UBgQ7Zu/ExQyhGWn3U8VDjIippcmnvJA
+ ysCzg+IgJ1Di/Fjh5+rZjxrsxpjSgz31BzSls=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700228456; x=1700833256;
+ d=1e100.net; s=20230601; t=1700228458; x=1700833258;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K2SoHUNWiUM/4zw4Hi63H8zUeC6WgFwwCl8VEZlBQAI=;
- b=eKBPyf/GrcZ1u+G2CnLwDnwFEU5r+vI/dwnkTn2pDGIBkWfAne8kNr3whr69Vfv6F/
- eKfnONglSWsCJWC9yuRFPoTg1TL4Az19S2ZOsbEpvOueVjn9yf+3l3UMg7zMgteuzHXN
- MS8zphkoq5KEpAKJqAPIp4DcJJ9Z+di82I7Kfl1JOEBKM37NLZMlD5nLAIZMWrHzVk6m
- U4kMEk+luBaABQwSsuXn9BI9IAOhDCj6uHLesxfuf/IkqEr2ukHQobxn+eoMVa7P/0dU
- VkXM7wxHlEVEkUGLOM9K6YFYF0XEwmkzkz//oeqP1ZkkG2t2OW2rXpz0xS6qV7xwLrxK
- gwnw==
-X-Gm-Message-State: AOJu0YxzrY+9wZs6t6eep8notc441soeGKmoirntBlAQlevp6rxwFT2g
- awZz3PwMrmZLNLDXsgA7cqX+oQ==
-X-Google-Smtp-Source: AGHT+IGmOKiTW2a+cbG3H7flpm3WUjeIq+XOjmAyEvXVy9oHq55x6vFBJZ2snHKXnp0soPUV3Kky+Q==
-X-Received: by 2002:a0c:ee63:0:b0:677:864d:c72 with SMTP id
- n3-20020a0cee63000000b00677864d0c72mr11668317qvs.26.1700228455812; 
- Fri, 17 Nov 2023 05:40:55 -0800 (PST)
+ bh=Mo6M8sdtGqk3WtdWEJFgTa8/MV86+2VlOvnF5ExFX5M=;
+ b=sDT1FYcKW3a9o/cdIdzo5Wz416piPMwVVAFS1iXKZmuMo+4hUWFEx7DsGtxVb/JAEL
+ c1CYVeKB7f4u/qT8w1EXv1hgi4AbsItygHFAIdrAy5MAOwKok2TzRVE4CvTsBH2NbnJh
+ fK50fexpn07CqvPXZcHVOx0w0kU0DeCAuImLi/y5v1rZ5SXsK1YLfOPoXNJMyCaiOq/V
+ KZk1BWQXEwVb7nvbJrdiKAnM98V9/sNpK+imI1g3sa9ttqy0BuXTrzHFIs8zEtyFT74g
+ UNinn40Rmzl0cMIFJV+vbJrdSbKUwHqPwmfJh3La0pcC0PMgXfJNoEu6nlFI62et8xwd
+ nbkg==
+X-Gm-Message-State: AOJu0YxVCcSgoCpukBhFuy3gNWmFP9IUN1kZao4VyxglIa9M8qHVjC4d
+ 9ZzWAOrwvH6V8b/5Y2q08biEbWMz5KCDYQJGW6Tmvw==
+X-Google-Smtp-Source: AGHT+IHBEvC+oxJsd+EmFcX8nVipSUU1xK4Og7xEN1/N+XGtaVY49P7YJuCSo2ZLNozLbGYrzSFBRA==
+X-Received: by 2002:a05:6214:161:b0:66d:2ec5:c1b9 with SMTP id
+ y1-20020a056214016100b0066d2ec5c1b9mr6685119qvs.11.1700228458052; 
+ Fri, 17 Nov 2023 05:40:58 -0800 (PST)
 Received: from [127.0.1.1]
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- lw23-20020a05621457d700b00670f8570a24sm633820qvb.23.2023.11.17.05.40.55
+ lw23-20020a05621457d700b00670f8570a24sm633820qvb.23.2023.11.17.05.40.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 05:40:55 -0800 (PST)
+ Fri, 17 Nov 2023 05:40:57 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
+To: u-boot@lists.denx.de, Eugen Hristev <eugen.hristev@collabora.com>, 
  Sean Anderson <seanga2@gmail.com>
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Weijie Gao <weijie.gao@mediatek.com>
-In-Reply-To: <20231104203753.1579217-1-seanga2@gmail.com>
-References: <20231104203753.1579217-1-seanga2@gmail.com>
-Subject: Re: [PATCH v2 00/15] nand: Add sandbox tests
-Message-Id: <170022845499.752997.11727109077004834794.b4-ty@konsulko.com>
-Date: Fri, 17 Nov 2023 08:40:54 -0500
+Cc: Nicolas Ferre <nicolas.ferre@microchip.com>, Aubin.Constans@microchip.com
+In-Reply-To: <20231105022742.632175-1-seanga2@gmail.com>
+References: <20231105022742.632175-1-seanga2@gmail.com>
+Subject: Re: [PATCH] arm: Enable SYS_THUMB_BUILD on AT91
+Message-Id: <170022845734.752997.10698883770687016451.b4-ty@konsulko.com>
+Date: Fri, 17 Nov 2023 08:40:57 -0500
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +92,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 04 Nov 2023 16:37:38 -0400, Sean Anderson wrote:
+On Sat, 04 Nov 2023 22:27:42 -0400, Sean Anderson wrote:
 
-> This series tests raw nand flash in sandbox and fixes various bugs discovered in
-> the process. I've tried to do things in a contemporary manner, avoiding the
-> (numerous) variations present on only a few boards. The test is pretty minimal.
-> Future work could test the rest of the nand API as well as the MTD API.
+> Several AT91 boards are quite close to their SPL size limit. For example,
+> sama5d27_wlsom1_ek_mmc is just 173 bytes short of its limit and doesn't
+> even fit with older GCCs.
 > 
-> Bloat (for v1) at [1] (for boards with SPL_NAND_SUPPORT enabled). Almost
-> everything grows by a few bytes due to nand_page_size. A few boards grow more,
-> mostly those using nand_spl_loaders.c. CI at [2].
+> All AT91 processors should have thumb support. Enable SYS_THUMB_BUILD. This
+> shrinks SPL by around 30%.
 > 
 > [...]
 
