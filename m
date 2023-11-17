@@ -4,74 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACC4C197A0
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 07:53:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF802C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 08:17:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDC9A86FB7;
-	Fri, 17 Nov 2023 08:53:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3534C86FFE;
+	Fri, 17 Nov 2023 09:17:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UadiyATE";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BE95786FDE; Fri, 17 Nov 2023 08:53:14 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700209049;
+	bh=3stlUCyOKBXH8lCuYZhQJ0Afh4bTVCuxYISQVpDcC2M=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Ejj8kmfoKrP+dvMfj6MNKXGXnFckJ2WwjVcuWL3DVwrn3NSOChOwT+lJHYSRvUlKM
+	 9N1Kx3zHQh1Vgyv2uFtuQ80Lntt2eomcefni4DR1+1G/oLpVMjPek1pZQY2VQdQEAT
+	 WLqXDqTbEYMPFkW4rhWvtyXl6nTpAbi1+aftEhNLQCF+wzYknCo9I/fD+/2RahWmJa
+	 eLFZb2c1hgjpB5xbTZePZLrgADr5MYIp1IDMqqNnlDgOvE7WzYHDqUoAg97+5Y1lB/
+	 vgkfGhN19M2V3VONWbc2dxt9Y2Wz9++v74QLbrncrTpr4xWoLAWXCPsPwy4h6qekOF
+	 XIG9VpvUNSH9Q==
+Received: from [IPV6:2001:a61:6115:df01:cb0c:1603:a432:5b7e] (unknown
+ [IPv6:2001:a61:6115:df01:cb0c:1603:a432:5b7e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61061863FD
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 08:53:05 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-9dd6dc9c00cso235021766b.3
- for <u-boot@lists.denx.de>; Thu, 16 Nov 2023 23:53:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700207585; x=1700812385; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6j8Ygf0AQTvc3l7HfA+uvS2JOlSC8Sq7YYtyuq9wtE4=;
- b=UadiyATEuwnbbk4clhLLR4v+c0d9gaHinj7UUbboGJZnCpjlql3DEGCw8fqxZnIpm/
- vic4tkXE0jAP5W8F408z/wy+YYeqGOgjVYlP7NzOOf3epW3O61sFeSWvPPHUO2cFcLSR
- RUPSkKY9NNpVvNvNLd//I3rcDnOX77ByyLGEI9qELIYh5x5CniOYBcfprgK7pXN93O9Y
- bNMCjRRBXonvDMUud/NUOYn6JR87xPg8BV7zdlk7DZhuauik0Yv9ubUq0mA1Rbn8KLT+
- A7TdCKgQy04ZXhB3c792nnBBdIjZkkLxGAdLQem7z8JZr0QwvY5P936i0qrtXplrMFfz
- uatA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700207585; x=1700812385;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6j8Ygf0AQTvc3l7HfA+uvS2JOlSC8Sq7YYtyuq9wtE4=;
- b=WSp/OBuBeFJ0ubxf5sN2lt8GerdPlfS7ehu17iipKcajZF4qWJ9xMcC+OQusGxkPA8
- pJscfX2zv8XkpPs4Kdt7/O3qczXGku1WtyHnlVQqZ7SZBv+OyMUbAjwxTJcvHtMHro96
- ObWNBm00mh54NJhJjVuVH2KC55D+lzMLTcoI3raHWlLZua+PBg6qP8Rin0N6lJYJ7PvQ
- 2JTCRDVt0pfwFhDokGgqpGIUc6JVwy4r4MgJcRJ7QFawQzn/uorkENv2JroEyG5OBkj/
- sFOHzFMa4q7z+gJiSF3tQ3dEGDSMrk3HmO8t2Cg+U1ZuHxPDNhmaMrkHoQcVn6UPRNVe
- lElA==
-X-Gm-Message-State: AOJu0YzwYatXLIg6e4IjY5vIkoEBz6V03i1LR+lDdvfageOfxqvaO1d0
- MSM7tKnrRwG18JnCtFwv5Tk=
-X-Google-Smtp-Source: AGHT+IERJiv9pPcmXGDDPdpsjRHKmm60uh8N33l6AcT2E2boEFLoZK/tju1H/VFRMYQVhIlNU+5u7w==
-X-Received: by 2002:a17:906:a0d1:b0:9e6:1ee5:be0e with SMTP id
- bh17-20020a170906a0d100b009e61ee5be0emr4285562ejb.21.1700207584656; 
- Thu, 16 Nov 2023 23:53:04 -0800 (PST)
-Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- lo7-20020a170906fa0700b00988e953a586sm503967ejb.61.2023.11.16.23.53.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Nov 2023 23:53:04 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/1] Fix clk-gpio driver
-Date: Fri, 17 Nov 2023 09:52:39 +0200
-Message-Id: <20231117075240.15741-1-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
+ (Authenticated sender: sbabic@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1D39686EEE;
+ Fri, 17 Nov 2023 09:17:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700209048;
+ bh=3stlUCyOKBXH8lCuYZhQJ0Afh4bTVCuxYISQVpDcC2M=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=SArupE8HJXVXUxuwaGbsJAVmPWXLe1AKGTYqqIJja1IMmkSSKBSseG55E5QbHgKQX
+ OQ/HeEDwrLSRkkgn9lTYAgWeh6pddQwXjLK8mwaXk52yAX0NgQ3IAL+22cfcyy3Sra
+ GQZ/yAAWiGgDnnk4UmC0le48BDYfShWU/f+B8yVIGSL1IJUO7z9DTe77e9l1oa35Ih
+ PfN007rScSbiLTtbPDQVM+MeQkDhR2G7x/9gxhd4m66vmVtgc85BG6l6oX+Nm8QbhV
+ c3+4i9iIiaMBBKux1mxus+Trmu17B7klivRPK0yUJE4SY3NkzQwC9Z8ohrDMaIVXyQ
+ WiB63xmpLHgRw==
+Message-ID: <91c3d742-a87a-458a-ab6f-6a56706bb78c@denx.de>
+Date: Fri, 17 Nov 2023 09:17:27 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 2/2] imx: spl_imx_romapi: fix emmc fast boot mode case
+To: Tom Rini <trini@konsulko.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: "festevam@gmail.com" <festevam@gmail.com>,
+ "peng.fan@nxp.com" <peng.fan@nxp.com>, "uboot-imx@nxp.com"
+ <uboot-imx@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>
+References: <20231026073220.244387-1-marcel@ziswiler.com>
+ <20231026073220.244387-3-marcel@ziswiler.com>
+ <f9ce2b20-1fa1-408c-9ae6-4dd382c9c999@prevas.dk>
+ <6ab14ae1-7044-4663-98e4-919b9d1757b9@denx.de>
+ <899b50aa96b802275035f9ee40f46b461f8bfb46.camel@toradex.com>
+ <86ddb623945da5a507fb4632375f7cb70361ac58.camel@toradex.com>
+ <20231116184226.GF170968@bill-the-cat>
+Content-Language: de-DE
+From: Stefano Babic <sbabic@denx.de>
+In-Reply-To: <20231116184226.GF170968@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,19 +80,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Existing gpio-gate-clock driver acts like a simple GPIO switch without any
-effect on gated clock. Add actual clock actions into enable/disable ops and
-implement get_rate op by passing gated clock if it is enabled.
+Hi Tom, Marcel,
 
-Testing current driver implementation shows that it is not fully capable
-and lacks gated clock manipulations.
+On 16.11.23 19:42, Tom Rini wrote:
+> On Thu, Nov 16, 2023 at 10:57:27AM +0000, Marcel Ziswiler wrote:
+>> Hi Tom
+>>
+>> On Thu, 2023-11-02 at 08:09 +0100, Marcel Ziswiler wrote:
+>>> Hi Stefano
+>>>
+>>> On Thu, 2023-10-26 at 10:36 +0200, Stefano Babic wrote:
+>>>> On 26.10.23 10:29, Rasmus Villemoes wrote:
+>>>>> On 26/10/2023 09.32, Marcel Ziswiler wrote:
+>>>>>> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>>>>>>
+>>>>>> This fixes a regression in the eMMC fast boot mode case where the buffer
+>>>>>> was missing 464 bytes.
+>>>>>>
+>>>>>> The code figures out how many bytes must at least be fetched to honor
+>>>>>> the current read, rounds that up to the ss->pagesize [which is a no-op
+>>>>>> in the USB download case because that has ->pagesize==1], fetches that
+>>>>>> many bytes, but then recorded the original upper bound as the new end of
+>>>>>> the valid data. However, this did not take into account the rounding up
+>>>>>> to the ss->pagesize. Fix this by recording the actual bytes downloaded.
+>>>>>>
+>>>>>> Fixes: 4b4472438f5a ("imx: spl_imx_romapi: avoid tricky use of spl_load_simple_fit() to get full FIT
+>>>>>> size")
+>>>>>> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>>>>>>
+>>>>>
+>>>>> Thanks for reporting and fixing this, and sorry for the trouble.
+>>>>>
+>>>>> Acked-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+>>>>>
+>>>>
+>>>> And thanks for all your work - I will apply this fix soon.
+>>>
+>>> Any news on applying this fix? Note that master still stays broken as of today.
+>>
+>> And two weeks later still broken!
+> 
+> I've put this in my not to forget queue for the next -rc.
+> 
+>> Anyway, I feel i.MX maintainership seems rather stalled at times most of the time. I don't want to criticise
+>> anybody knowing how busy our trade can get. However, if it helps the cause Toradex would be ready to step up.
+>> Let me know what you think. Thanks!
+> 
+> I would be happy to see an additional custodian for the imx tree, if
+> that's agreeable with Stefano.
 
-Svyatoslav Ryhel (1):
-  clk: clk-gpio: add actual gated clock
+I have rather less time for U-Boot and it won't be better in the near 
+future. Fabio is co-maintainer and he has accepted to take over the 
+repository and go on maintaining u-boot-imx. Just let him some time to 
+be confident with patchwork and CI.
 
- drivers/clk/clk-gpio.c | 47 +++++++++++++++++++++++++++++++++++-------
- 1 file changed, 40 insertions(+), 7 deletions(-)
+Thanks,
+Stefano
 
 -- 
-2.40.1
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
+HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
 
