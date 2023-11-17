@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63318C072A2
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 19:42:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F7FC072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 19:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDEB5870A2;
-	Fri, 17 Nov 2023 20:42:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 574AB874BA;
+	Fri, 17 Nov 2023 20:42:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E7GsoRUR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RFVk0n5p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C284786DEE; Fri, 17 Nov 2023 20:42:05 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 2EE4E874A5; Fri, 17 Nov 2023 20:42:21 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 816A486EE2
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 20:42:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D413E874C3
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 20:42:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-778a20df8c3so145154985a.3
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 11:42:03 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-677f832d844so4440126d6.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 11:42:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700250122; x=1700854922; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700250135; x=1700854935; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JusrKhRXeVpAQ6PisLjcbG3zXtAcvSzPpOalnpYk5JM=;
- b=E7GsoRURIepQqR5uYHCZTCf6N8YPNrv4fcYFXNCGPEHeFFl08VMFcELKxSroafiPpy
- vm3YCBR6k34xktVGTqxmX9u2tF+AD4mykLB2cicLTX615I6C8vyH+MmEtR9HBv8Q7Upw
- zbDhLKrecIBAUI039Ol14PqVWCF6QWn6Ua75E=
+ bh=0zkZ61yWb6Qgj7rWsBnH2boRgiD7cpmz79MULqtm+eA=;
+ b=RFVk0n5p9mVC8a1fF1iezvHCvnO9HB7zs7Smv/othtgENIi5aTJaE3tN0VQjdf9vXa
+ sNWtAA2dPdUxyHOHqhUufnzPIFT0n6FGGojfqcn+A5wPzcXuA+SekX3kDH8TCotRTfir
+ G6kthyHFczrSoehItx1N45gxub99pLutc9jew=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700250122; x=1700854922;
+ d=1e100.net; s=20230601; t=1700250135; x=1700854935;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JusrKhRXeVpAQ6PisLjcbG3zXtAcvSzPpOalnpYk5JM=;
- b=ENheiqmDUe2GiLN7vsd21TiG6p3dZkwMK14Izy0stIn51GSzZjLTHvUfkr71MfCMP3
- gIGA0Tfij6O0b8dKK+iIH5VwsMHfGZGv7I0Y79+UexGSWkX5L+ZDJuXdY+iIprll9xcY
- 6njxGnhLhgPo2qPIuRfFcJXmaWhDUDg5B92Fi8t6c0lNI8Gx4VzWjw857/lp3hQm1VM4
- KDE60IzboBbmafh03+WNkXu2yAP8/JhP6Mtl/65xpUq8h6NFs4V4SFn0HtwMQVVzlVSi
- erJ156G4oB+myOR3eAD0Mm6WCZodnKJdyNTV07+AWqaC6VDs5BvFC8luHRlprkwmXwAW
- 1q2Q==
-X-Gm-Message-State: AOJu0Yx0ikWNj8eRRcVaHzr+B96i3+2Y/0vOxFp9AMFm3+d6DSOTzHpP
- ekDX54SploRAJTnf9ruPhdTtgw==
-X-Google-Smtp-Source: AGHT+IHTly14vypiKxv0EbdnUk2gZMrG74EZVYu9ScKQ8ULo4+Sz+LNTH0PIbCz+nubSxy6weVFL7w==
-X-Received: by 2002:a05:620a:3955:b0:779:f0a1:3128 with SMTP id
- qs21-20020a05620a395500b00779f0a13128mr585494qkn.63.1700250122330; 
- Fri, 17 Nov 2023 11:42:02 -0800 (PST)
+ bh=0zkZ61yWb6Qgj7rWsBnH2boRgiD7cpmz79MULqtm+eA=;
+ b=vGzp42z+Qf2kSgNQl80jJEV8V45Scn/p1zEuMtGtkYkmYkZFurS7fhkdyfoCWYf9if
+ 8HRSjht5JqbN6HDPcs1pytqIVS3YeoIb9bY+pjmgcV2psckPY8togwsGJCAaERqnaqNm
+ Nc3GW3YT9zukqN+XW+BepR5feoHM9D0XI/9DN4u1yG9EPxMd1BcYu9ipUVMnLxqhXflo
+ qcvTCTJm/97H1Mh5j5kKLZ/sPHUjt7bsO6pTHrc0f3+NQHenB1fMnCcA5UVq/oDV0RQm
+ TUXOD8GUg65A7sL2upRG8K2eLwInIoKGx4RDbjAAnsbPoIbMkFFDOcbFmu8bkFpuDWLp
+ WLSA==
+X-Gm-Message-State: AOJu0Yx/1dfZ3Is22eSBF8rXqZ4uy4iqppv7gRBP+s+uJS+VpTVnt1fb
+ vZn0zt2qxmKooVcITUF+IbT+LA==
+X-Google-Smtp-Source: AGHT+IHNKV/ex+mw1rNzdz3GiTJfse1t/OYADVwTnJka0Fe/7H2EgJ8tXo2co/XsPihqHHfjujiuyw==
+X-Received: by 2002:a0c:8bc9:0:b0:672:e2d5:7a7f with SMTP id
+ a9-20020a0c8bc9000000b00672e2d57a7fmr80787qvc.29.1700250135626; 
+ Fri, 17 Nov 2023 11:42:15 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-a78f-80e1-dc58-f720.res6.spectrum.com.
  [2603:6081:7b00:6400:a78f:80e1:dc58:f720])
  by smtp.gmail.com with ESMTPSA id
- p25-20020a05620a113900b00767dcf6f4adsm821104qkk.51.2023.11.17.11.42.01
+ z1-20020a0cfec1000000b00677f40b564esm760816qvs.117.2023.11.17.11.42.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 11:42:01 -0800 (PST)
-Date: Fri, 17 Nov 2023 14:42:00 -0500
+ Fri, 17 Nov 2023 11:42:15 -0800 (PST)
+Date: Fri, 17 Nov 2023 14:42:13 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Marcel Ziswiler <marcel@ziswiler.com>
-Cc: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefano Babic <sbabic@denx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH v1 1/2] imx: spl_imx_romapi: fix comment about
- stream(usb) download failure
-Message-ID: <20231117194200.GS170968@bill-the-cat>
-References: <20231026073220.244387-1-marcel@ziswiler.com>
- <20231026073220.244387-2-marcel@ziswiler.com>
+To: Chris Packham <judge.packham@gmail.com>
+Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>,
+ Marc Zyngier <maz@kernel.org>, Peng Fan <peng.fan@nxp.com>,
+ =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
+ Simon Glass <sjg@chromium.org>, Ye Li <ye.li@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ meitao <meitaogao@asrmicro.com>
+Subject: Re: [PATCH 2/3] Revert "arm64: Use level-2 for largest block
+ mappings when FEAT_HAFDBS is present"
+Message-ID: <20231117194213.GV170968@bill-the-cat>
+References: <20231027002409.430285-1-judge.packham@gmail.com>
+ <20231027002409.430285-3-judge.packham@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g1fJ62k5+z+tRtwP"
+ protocol="application/pgp-signature"; boundary="u+u6UlJGrSWd2qTQ"
 Content-Disposition: inline
-In-Reply-To: <20231026073220.244387-2-marcel@ziswiler.com>
+In-Reply-To: <20231027002409.430285-3-judge.packham@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,42 +99,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---g1fJ62k5+z+tRtwP
+--u+u6UlJGrSWd2qTQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 26, 2023 at 09:32:19AM +0200, Marcel Ziswiler wrote:
+On Fri, Oct 27, 2023 at 01:23:53PM +1300, Chris Packham wrote:
 
-> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> This reverts commit 836b8d4b205d2175b57cb9ef271e638b0c116e89. This is
+> part of a series trying to make use of the arm64 hardware features for
+> tracking dirty pages. Unfortunately this series causes problems for the
+> AC5/AC5X SoCs. Having exhausted other options the consensus seems to be
+> reverting this series is the best course of action.
 >=20
-> Fix comment about Stream(USB) download failure.
->=20
-> Fixes: 1cbebc786276 ("imx: add rom api support")
-> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Chris Packham <judge.packham@gmail.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---g1fJ62k5+z+tRtwP
+--u+u6UlJGrSWd2qTQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXwggACgkQFHw5/5Y0
-tyy6Wwv/Q9qs7xGibJvdiLHDUl44tLkTkbInRSowOhPpY3by5iPwEcDp4yJGWzAY
-wczVyJQSA4nYxcyBEMXwcCVAaOqyY4NL5VOmm8outbw7Jx/UhBeZt3ewTgrbntJT
-vSwWSsQw3LarAt8iIo6aPWQ5AofXfsvG4T24i9RMAJBLp3aarxSglP14yAmZzUuB
-SUbVwfgMwNhQ4HfdRsJ/zajDOhV6p3nQB2dD2kQgdjZ6M/HoJ24P5xVp6LJio8rw
-UurWDi81JccmoxVzyTO0kvampAYwbhOjYT5oHrdVe41fk7rA5/1hV/aaQ6aA93U3
-n182qNlctgAU9MK5Bmp3siyMCCh19J/QX4Q5n9NDM4cUM5as0pV7nEh3wV8/8w4+
-eKCGOizy+spMNEw2I8J4yaMcQMFek9OpJNlZ1MXnowKkxjEqYSVMDOj3C32toXuZ
-wEihDUIByNpHTi4rtB9+c0qUP7Y2CrDgB4iDYl3UZahEcC5tJJQ/ygXoVA38hWmX
-9pndSD/T
-=MOz6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVXwhUACgkQFHw5/5Y0
+tyzxJAwAsWXCV92pnr8mcwLP3uhv8Tm7tAyh/PDL00Ea5cLzQoYDAlWtSkKwEx4p
+ebq7gkKggFPV4Njn6lwD5ro7jpr1oCL87ZXu1Xvx+CbfVnZS+Zm9Sd+ZmZmorrY6
+1Ho4ZprgJJFeBwdPQcsMRyDfupr8GYUly2EuxJZbPAeOOZgwUprvnxZTsG+uujn1
+B9ZMbeV3mRNKUzszfseSF40GiSIKB86ONc2IyhRbgR6ZTZM9kbfP0J3l3N2D1Uzr
+llubdIP0qWKD80oiPgw2Hr5ZbbpGSVwpRrxF8aAmtPy4ITcAjYURk/TWx6eW0SvN
+WvWsTFevpD7fDVj7Xvb4++ikRAMW5vkAId0mT8b49FTQJGnxi2964ueGGEGIT3/J
+uU9RKiNHlkP0VGR+IVZpVSH3KOCuiYstrP3fzi5lSXb4riGQ4N4kDvLZmr096Pp9
+a75xu3o7mCwRn1CqAUVJUlnkipU45/I/fRCd/LP8ICzUuU2FaBkUQsDjIx+t9j+A
+6a70CbCq
+=bomo
 -----END PGP SIGNATURE-----
 
---g1fJ62k5+z+tRtwP--
+--u+u6UlJGrSWd2qTQ--
