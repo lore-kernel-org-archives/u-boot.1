@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EF5C54FB9
-	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B3D7C072A2
+	for <u-boot@archiver.kernel.org>; Fri, 17 Nov 2023 22:10:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7785A86E96;
-	Fri, 17 Nov 2023 23:08:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD6AB86F56;
+	Fri, 17 Nov 2023 23:10:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p9kwZQAJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RFijvocM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B542F86EB8; Fri, 17 Nov 2023 23:08:46 +0100 (CET)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 1190F86FC9; Fri, 17 Nov 2023 23:10:16 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1147786E42
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:08:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64DCD86F56
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:10:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7781bc3783fso152663385a.1
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:08:36 -0800 (PST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-778999c5ecfso144385185a.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 14:10:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700258916; x=1700863716; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700259005; x=1700863805; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=coVk7OS4T/V+OJOGSWsotlQM4gavKpmydSpX/cZmkZU=;
- b=p9kwZQAJkOMJxo6RlH+/DnzqUI4CAgLcioE/bDS492SeYMMrpS4er6yYTIAaO5JnSJ
- 2UXzP+EQ0qZ+2w1S+kdAhxyZvlG5nExZVji0gU4jlo30uwWt/Wb/0Jyw+QjJ6gG1/Hm1
- O5ad6yk2bAl635CGfwQVoS0ZJwF7xzhGUJ+Ag=
+ bh=puChSOCGWrnLc8JHhVOP0I0GLk7nHKOfC5MznETCIks=;
+ b=RFijvocMuyfrRCrfglbeL9mq5OZpwXenTvUfYvp/UWgZWLUmhXnae1pzWdJuXhuMlC
+ o8odzbdZK0uOuCCY00MC0VEGa1M8QCmCXQfydhAtAIShLBPyyhDDDmX6pg+0wfyZ8MYO
+ 4dAt0fH7+Hlc2B4FLx84rKFab4+3bqz2JUyiA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700258916; x=1700863716;
+ d=1e100.net; s=20230601; t=1700259005; x=1700863805;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=coVk7OS4T/V+OJOGSWsotlQM4gavKpmydSpX/cZmkZU=;
- b=UKnUADbZ3oFE5nCjmBnbUPDrKtTqv8Qzx4p+1AnFdb1LcwgU9rmXvsdI3VtshBeVDP
- jwzUZlfVQSOsBkMyX/oG8pumL/8bCSD9nRsda7D/Z8Jn+FuZHRlWc8eDR0pnVTyvzlF5
- JE9BuvxsIxAy670GbZhFAKSardy6qLOp4qIyCACxnnz8N3qppSL6gNGNtB7Hd7yZscDk
- 1pNz0KKs5Hv72xIoW97pDvtxttjCYsBndRlepg4cJtT/dVOn/AUDQxImF6N7y/B4Bs4W
- JnzRCfgyt11bN6VFTGls5xWBXl5UYsfteg/P5qyvkdU+RDFFiQhiUdOEbVLakhTC35XU
- AGlw==
-X-Gm-Message-State: AOJu0YxhkBnT9ZYcNjQ7VtLe9ZlXGKA3qWC80QOU6UKODhApeS93dhOq
- qv9ucpqpSJOBnVMbM3noL34MfA==
-X-Google-Smtp-Source: AGHT+IFWKiUN494pGkFP2UP2cBVZv8H9qCrOYBa/oHvkboKtZWA/9m37GjEMq3CwI7rgSdGGFrREoQ==
-X-Received: by 2002:ae9:ee03:0:b0:774:3147:425a with SMTP id
- i3-20020ae9ee03000000b007743147425amr886567qkg.16.1700258915820; 
- Fri, 17 Nov 2023 14:08:35 -0800 (PST)
+ bh=puChSOCGWrnLc8JHhVOP0I0GLk7nHKOfC5MznETCIks=;
+ b=xILkxBLDve8FGth5UXOBe1hswyBOWq7ODgF6Qxag9YQKIuwSaeCClMRpAjFLZz2DzV
+ lAqdRVLD/PU7st7CZf5CttHyvXyyXReWQ2bOs39H0p+vLubaxQ13ExqSCgGTs7o/lKRI
+ L6G23OTVXEIqxxnetya4+HfJT9rWjcU0K0zIYTc31LPRKPpJdeWNI+e+KnIM4eLtw3TV
+ Kk1/GRMr1Ywxt8r8Mxk/YNY9AVheXq0rz3yrsHIjSKkzNk+GNLnuPensLojMJ/MuWOZ/
+ IKcyjkOi7JkQj721nX0fWOGm4LM0kvBTxkulQdIcC7o+UHQeJ77s9m9Xs+QKz9NJXP0m
+ RLwQ==
+X-Gm-Message-State: AOJu0YxluaU/OBlUXq4zGOs+oLSVU7MltMGVSP6fJCRPpDy0nWWQI466
+ Dug10I8zwVb2V+nRuV7jELbQAg==
+X-Google-Smtp-Source: AGHT+IFAwQhUPzSmmttUB8E2YTrg+cUZL+rGDXi7amZvEBRlKpo1b9pkbNq4xTpHsjcNFXoOPjB9eQ==
+X-Received: by 2002:a05:6214:234e:b0:658:65ed:7e8 with SMTP id
+ hu14-20020a056214234e00b0065865ed07e8mr540850qvb.57.1700259004951; 
+ Fri, 17 Nov 2023 14:10:04 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
  [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
  by smtp.gmail.com with ESMTPSA id
- ox15-20020a05620a828f00b0077a02cf7949sm916305qkn.32.2023.11.17.14.08.35
+ r12-20020a05621410cc00b0066d132b1c8bsm931243qvs.102.2023.11.17.14.10.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Nov 2023 14:08:35 -0800 (PST)
-Date: Fri, 17 Nov 2023 17:08:33 -0500
+ Fri, 17 Nov 2023 14:10:04 -0800 (PST)
+Date: Fri, 17 Nov 2023 17:10:02 -0500
 From: Tom Rini <trini@konsulko.com>
 To: seanedmond@linux.microsoft.com
 Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, pbrobinson@gmail.com
-Subject: Re: [PATCH v4 3/3] net: bootp: add config option BOOTP_RANDOM_XID
-Message-ID: <20231117220833.GB170968@bill-the-cat>
+Subject: Re: [PATCH v4 0/3] [PATCH v4 0/3] [PATCH v3 0/3] BOOTP/DHCPv4
+ enhancements
+Message-ID: <20231117221002.GC170968@bill-the-cat>
 References: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
- <20231117214925.138486-4-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rO2kDkkT0WBXQJX3"
+ protocol="application/pgp-signature"; boundary="oJoVpqmAKzDVZt+K"
 Content-Disposition: inline
-In-Reply-To: <20231117214925.138486-4-seanedmond@linux.microsoft.com>
+In-Reply-To: <20231117214925.138486-1-seanedmond@linux.microsoft.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,57 +93,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---rO2kDkkT0WBXQJX3
+--oJoVpqmAKzDVZt+K
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 17, 2023 at 01:49:25PM -0800, seanedmond@linux.microsoft.com wr=
+On Fri, Nov 17, 2023 at 01:49:22PM -0800, seanedmond@linux.microsoft.com wr=
 ote:
+
 > From: Sean Edmond <seanedmond@microsoft.com>
 >=20
-> The new config option BOOTP_RANDOM_XID will randomize the transaction ID
-> for each new BOOT/DHCPv4 exchange.
+> In our datacenter application, a single DHCP server is servicing 36000+ c=
+lients.
+> Improvements are required to the DHCPv4 retransmission behavior to align =
+with
+> RFC and ensure less pressure is exerted on the server:
+> - retransmission backoff interval maximum is configurable=20
+>   (environment variable bootpretransmitperiodmax)
+> - initial retransmission backoff interval is configurable=20
+>   (environment variable bootpretransmitperiodinit)
+> - transaction ID is kept the same for each BOOTP/DHCPv4 request=20
+>   (not recreated on each retry)
 >=20
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->  cmd/Kconfig |  7 +++++++
->  net/bootp.c | 31 +++++++++++++++++--------------
->  2 files changed, 24 insertions(+), 14 deletions(-)
+> For our application we'll use:
+> - bootpretransmitperiodmax=3D16000
+> - bootpretransmitperiodinit=3D2000
 >=20
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 93bf752035c..244237e6d60 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1853,6 +1853,13 @@ config BOOTP_VCI_STRING
->  	default "U-Boot.arm" if ARM
->  	default "U-Boot"
-> =20
-> +config BOOTP_RANDOM_XID
-> +	bool "Send random transaction ID to BOOTP/DHCP server"
-> +	depends on CMD_BOOTP && (LIB_RAND || EXYNOS_ACE_SHA || RNG_NPCM)
+> A new configuration BOOTP_RANDOM_XID has been added to enable a randomized
+> BOOTP/DHCPv4 transaction ID.
+>=20
+> Enhance DHCPv4 sending/parsing option 209 (PXE config file).  A previous
+> patch was accepted.  A new patch fixes a possible double free() and
+> addresses latest review comments.
 
-This should be (LIB_RAND || LIB_HW_RAND)
+The changes from revision to revision should be below the "---" in a
+commit and not the commit message itself. Please reword things for v5.
+Thanks.
 
 --=20
 Tom
 
---rO2kDkkT0WBXQJX3
+--oJoVpqmAKzDVZt+K
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVX5F4ACgkQFHw5/5Y0
-tyxIJAv/fbyngZ8nlTBttCrRve03fYv7P3dWi4nXrtKBkg4+hQ2Cc49YfBdognFD
-PmqpKH774CeH+NFuRDW2qXG/zfhwWVjzT4uVPewf20PDaDXOJoEBLM831SJcbxZJ
-UfMAyPynp9fasIZfU8AUP7YP8EYsd4fRYI+a2Wl2Xy4e6CyGJU+SKNMSFoKhuxp1
-WnsdW+/rueH32AOke49w5lraTx5ZWg9Pxw3/nb2WKeIj2IhBTUnAD88F73+L2GON
-WxeFuy/V43MbT4I5IYUxB1F3+TLn2Ld5JPux2yj8s95WKqG7J5/OYVrnUSWjYj4U
-2+Cbp6WXG1GnlNbXWSEZBR/mIf4ncMwEPE0MuoP/Kse8pZqEIh2cV9j930Xri4rc
-hA4CtDLp6icohaKJSZlBBcTix1H+dBcRzzE9bJAquaKEby9bxYy2Jm3eqOjYQQhd
-FmX4HMbFsttCze8gc7JTaiS7EG8pWKJPXzZCgkO1Jd61jLG7VwjXX+37x6LBcVs8
-y83PZlpn
-=OPpe
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVX5LoACgkQFHw5/5Y0
+tywYEgwAg3eoqoTmV5NTZCnUEpPJbNNfCej3XKEsbjMQp5baNv/S/8oa8HHBZA8W
+BnXDdsWrPJ3dXUjB8CRgUVbNH/Hd9Rycm+tYQpnX9JUrUyUSIY54Ad5e/tmK2Z+2
+xJGagNYrm402J6UtffXcteGb2CW3o/IuCXQuMDr04OaLjsM6Wa9MrObn0osfD1K3
+NW50daBBFswUU9Z1h/hLfLFq8g+339cmLUKL+RhbHQjJtk6tgXGtdsRGY4X02L5A
+IY/witRtAtTL9yU4PHntH+XqAXBjEUAw0hABiczPypEZ6tGMRcrZfPN5tI26fNyy
+Yl03gRwl9BUWpl8gcKm4k41eE58LjJcrba3pZAoyR53SyMONYBJc3Q06MAixPWlc
+13NGJYZEJ3+9dnZfOanTOnxJfsVZTnp8avFf8pcS0rWwxt3Hc+Kz2fZTCHkaHnJJ
+Q/t3dKLRXt5r4CIaol3EyHXsShN9qafplTbwCxGzPRKpHmTyfn7diuckklc/dB46
+HmvCZf7f
+=Yy25
 -----END PGP SIGNATURE-----
 
---rO2kDkkT0WBXQJX3--
+--oJoVpqmAKzDVZt+K--
