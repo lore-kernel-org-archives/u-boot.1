@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C518C54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13EC0C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:11:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 348DF8754F;
+	by phobos.denx.de (Postfix) with ESMTP id 9DC0087555;
 	Sat, 18 Nov 2023 22:06:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h6CgL8yU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="am4TC4Ij";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C86A2870F9; Sat, 18 Nov 2023 22:06:32 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 404F9870F9; Sat, 18 Nov 2023 22:06:33 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D051187103
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22A01874A3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-7a6774da682so133601139f.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:15 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7b006f7c473so108759039f.2
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700341574; x=1700946374; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700341567; x=1700946367; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5SYssJFjHtupbaMjtm7cj/H8lKy9yf5GwYleaDBMxbc=;
- b=h6CgL8yUySEyp7EG8z9DRCmoZhYffQXNN/rMpNRKgPeLu3OvA0+evHKz+nMLuobbOi
- gMPKXdZff+cFK54uc02U2XllmiXSwGSj5ILdF43ULjWhPjY6uyPj23+6SZ/U5vguIzm8
- lNF57kFNMM41X8350A/pZRqRRA+Uc9c49cBEU=
+ bh=lAJ99tGmbChp3MuzFYlZxoRSKCEls7mEO/WGI/69pHQ=;
+ b=am4TC4IjdvJAqpPiC2bmBvdgLRvf5qtRrYdJd8ytGbXxPj7O7DQ891jCfn/lwG9thb
+ vm74fVVEU6FSl2WaJ2St5PAfxQ2YDooNjUpqR4J3oXNaT5UvduMh1cNoBOCtoFqSLv1W
+ n1L0djgLXsycj1iF3a6Q9U04sFbkQXBmTrrkQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700341574; x=1700946374;
+ d=1e100.net; s=20230601; t=1700341567; x=1700946367;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5SYssJFjHtupbaMjtm7cj/H8lKy9yf5GwYleaDBMxbc=;
- b=Yww59DqwV4NIhs0vqw2wTQNeU3yaTc6VGoSOXW0U+t/zw+KeJ+l5PX5WkqR+4rZO/N
- c4KuoG/pvcpKtNz7kk/Hy712BaP6zxYX945rygd0hPDiw/v9gEkT+AD7TzxWoE4Y9HeG
- iHALzEiAgti+r4HR0FO5t6Zem8DZWR4oruz0oukNcXwmbBoJkNcYYJcH0QkqbaXF125T
- NMz/JaczokW4sn81DijEQAnnnQFXqt9ExaskRzRguTpk0DSrAifS2T7BiAGc4u5GVMab
- DxaiQAS+rYyt1Lcs/gs0M+E+L3lOOT/orl7vnpa7XgWSordWEJoGKYwA9/W0k870t2zi
- 8gSg==
-X-Gm-Message-State: AOJu0Yyj/PAAjaNeV1mFcoZgkiL+JGb4kP/CGBDsMkDBSGsqvSRfSof2
- 0fW6LCO4AKL0GiwuIejYLk4NpSMZ1oDYriePIGpQLA==
-X-Google-Smtp-Source: AGHT+IF4zahF615tn2gnEz3dDC2WVBCHUEe2na4oT4F5GCsyEh2TI1WZscQcKr82FfAnIwDFGevmrQ==
-X-Received: by 2002:a92:ce11:0:b0:35a:fad1:73cd with SMTP id
- b17-20020a92ce11000000b0035afad173cdmr1331057ilo.11.1700341574430; 
- Sat, 18 Nov 2023 13:06:14 -0800 (PST)
+ bh=lAJ99tGmbChp3MuzFYlZxoRSKCEls7mEO/WGI/69pHQ=;
+ b=E7rYr4C0vrJVcjSSLrKlVMuyjSAInGTegHRtv93YhzMJO9Jw3Ny58v6+WQLZA3KQv5
+ zOvX/L+G5dA8Banq/CmEVIuvO/SnRNQCBKDGehQod7sHdrkuX+GnaNmrb5L1RybTtKkl
+ yl5NLusW1rRfQOHZFQCEpFvCPS44taChuvcuBXD3JqVs2I140kOyaeOr84RctE2soEnI
+ sbHVR104b2QGzfnUzTKEC08jh6zkDf0jcaMI9f2vVySDBkSZS81oNlNQ9k/gRjdJW9/E
+ NXZ4uP6ozfmZpVAHLrwO42vT+p3pBHV/b0kEE3Hg4J96CgWrGZ6vnW/6e48Z4BFmLWkH
+ 6atA==
+X-Gm-Message-State: AOJu0Yzug6THUmmq1jRY3cHet/UalA/rM5t1sGIDBoT7wQ0SZuj76HEg
+ eA5p9F/20RGNUvPiX997NvFUTOwtzDGj3JTPbsZG/g==
+X-Google-Smtp-Source: AGHT+IGS73EZK8M0TjQl4F8NZUiDEY9W7iyJqz9m76YuB/oIgSdmj+7HQxIV++3aWLZ/aRB8zcCLyg==
+X-Received: by 2002:a05:6602:6421:b0:792:9a3e:2dd with SMTP id
+ gn33-20020a056602642100b007929a3e02ddmr5375288iob.3.1700341567301; 
+ Sat, 18 Nov 2023 13:06:07 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.06.13
+ eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.06.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 13:06:14 -0800 (PST)
+ Sat, 18 Nov 2023 13:06:07 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>
-Subject: [PATCH v3 21/32] bootm: Pass image buffer to boot_get_fdt()
-Date: Sat, 18 Nov 2023 14:05:09 -0700
-Message-ID: <20231118210547.577026-22-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v3 13/32] bootm: Adjust position of unmap_sysmem() in
+ boot_get_kernel()
+Date: Sat, 18 Nov 2023 14:05:01 -0700
+Message-ID: <20231118210547.577026-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
 References: <20231118210547.577026-1-sjg@chromium.org>
@@ -91,151 +92,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than having boot_get_fdt() calculate this, move the calculation
-into the caller. This removes the access to argv[0] in this function,
-so we can later refactor it to just accept argv[2] instead of the whole
-argv[].
-
-Move the function comment to the header file and fix the u8 argument,
-while we are here.
+These unmaps should happen regardless of the return value. Move them
+before the 'return' statement.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- boot/bootm.c     | 11 +++++++----
- boot/image-fdt.c | 32 +++-----------------------------
- include/image.h  | 31 ++++++++++++++++++++++++++++---
- 3 files changed, 38 insertions(+), 36 deletions(-)
+Changes in v2:
+- Add new patch to adjust position of unmap_sysmem() in boot_get_kernel()
+
+ boot/bootm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index d9c62d730f7f..cd11994e21ce 100644
+index 1f3a01994cbe..6ed60bf05084 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -490,11 +490,11 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
- 		      ulong size)
- {
- 	const char *select = NULL;
-+	ulong img_addr;
-+	void *buf;
- 	int ret;
- 
- 	if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
--		char *buf;
--
- 		/* Look for an Android boot image */
- 		buf = map_sysmem(images.os.start, 0);
- 		if (buf && genimg_get_format(buf) == IMAGE_FORMAT_ANDROID)
-@@ -525,9 +525,12 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+@@ -222,12 +222,12 @@ static int boot_get_kernel(const char *cmd_name, const char *addr_fit,
+ 		printf("## Booting Android Image at 0x%08lx ...\n", img_addr);
+ 		ret = android_image_get_kernel(boot_img, vendor_boot_img,
+ 					       images->verify, os_data, os_len);
+-		if (ret)
+-			return ret;
+ 		if (IS_ENABLED(CONFIG_CMD_ABOOTIMG)) {
+ 			unmap_sysmem(vendor_boot_img);
+ 			unmap_sysmem(boot_img);
+ 		}
++		if (ret)
++			return ret;
+ 		break;
  	}
- 
- 	if (CONFIG_IS_ENABLED(OF_LIBFDT)) {
-+		img_addr = argc ? hextoul(argv[0], NULL) : image_load_addr;
-+		buf = map_sysmem(img_addr, 0);
-+
- 		/* find flattened device tree */
--		ret = boot_get_fdt(flag, argc, argv, IH_ARCH_DEFAULT, &images,
--				   &images.ft_addr, &images.ft_len);
-+		ret = boot_get_fdt(buf, flag, argc, argv, IH_ARCH_DEFAULT,
-+				   &images, &images.ft_addr, &images.ft_len);
- 		if (ret) {
- 			puts("Could not find a valid device tree\n");
- 			return 1;
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index f10200f64743..6ff2d52d6c70 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -447,43 +447,17 @@ static int select_fdt(struct bootm_headers *images, const char *select, u8 arch,
- 	return 0;
- }
- 
--/**
-- * boot_get_fdt - main fdt handling routine
-- * @argc: command argument count
-- * @argv: command argument list
-- * @arch: architecture (IH_ARCH_...)
-- * @images: pointer to the bootm images structure
-- * @of_flat_tree: pointer to a char* variable, will hold fdt start address
-- * @of_size: pointer to a ulong variable, will hold fdt length
-- *
-- * boot_get_fdt() is responsible for finding a valid flat device tree image.
-- * Currently supported are the following ramdisk sources:
-- *      - multicomponent kernel/ramdisk image,
-- *      - commandline provided address of decicated ramdisk image.
-- *
-- * returns:
-- *     0, if fdt image was found and valid, or skipped
-- *     of_flat_tree and of_size are set to fdt start address and length if
-- *     fdt image is found and valid
-- *
-- *     1, if fdt image is found but corrupted
-- *     of_flat_tree and of_size are set to 0 if no fdt exists
-- */
--int boot_get_fdt(int flag, int argc, char *const argv[], uint8_t arch,
--		 struct bootm_headers *images, char **of_flat_tree, ulong *of_size)
-+int boot_get_fdt(void *buf, int flag, int argc, char *const argv[], uint arch,
-+		 struct bootm_headers *images, char **of_flat_tree,
-+		 ulong *of_size)
- {
--	ulong		img_addr;
- 	ulong		fdt_addr;
- 	char		*fdt_blob = NULL;
--	void		*buf;
- 	const char *select = NULL;
- 
- 	*of_flat_tree = NULL;
- 	*of_size = 0;
- 
--	img_addr = (argc == 0) ? image_load_addr : hextoul(argv[0], NULL);
--	buf = map_sysmem(img_addr, 0);
--
- 	if (argc > 2)
- 		select = argv[2];
- 	if (select || genimg_has_config(images)) {
-diff --git a/include/image.h b/include/image.h
-index 3e48ad5b303e..a4555f25fb56 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -808,9 +808,34 @@ int image_locate_script(void *buf, int size, const char *fit_uname,
- int fit_get_node_from_config(struct bootm_headers *images,
- 			     const char *prop_name, ulong addr);
- 
--int boot_get_fdt(int flag, int argc, char *const argv[], uint8_t arch,
--		 struct bootm_headers *images,
--		 char **of_flat_tree, ulong *of_size);
-+/**
-+ * boot_get_fdt() - locate FDT devicetree to use for booting
-+ *
-+ * @buf: Pointer to image
-+ * @argc: command argument count
-+ * @argv: command argument list
-+ * @arch: architecture (IH_ARCH_...)
-+ * @images: pointer to the bootm images structure
-+ * @of_flat_tree: pointer to a char* variable, will hold fdt start address
-+ * @of_size: pointer to a ulong variable, will hold fdt length
-+ *
-+ * boot_get_fdt() is responsible for finding a valid flat device tree image.
-+ * Currently supported are the following FDT sources:
-+ *      - multicomponent kernel/ramdisk/FDT image,
-+ *      - commandline provided address of decicated FDT image.
-+ *
-+ * Return:
-+ *     0, if fdt image was found and valid, or skipped
-+ *     of_flat_tree and of_size are set to fdt start address and length if
-+ *     fdt image is found and valid
-+ *
-+ *     1, if fdt image is found but corrupted
-+ *     of_flat_tree and of_size are set to 0 if no fdt exists
-+ */
-+int boot_get_fdt(void *buf, int flag, int argc, char *const argv[], uint arch,
-+		 struct bootm_headers *images, char **of_flat_tree,
-+		 ulong *of_size);
-+
- void boot_fdt_add_mem_rsv_regions(struct lmb *lmb, void *fdt_blob);
- int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size);
- 
+ #endif
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
