@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C9AC5ACB3
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AA61C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:14:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E852874E4;
-	Sat, 18 Nov 2023 18:12:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2151874EC;
+	Sat, 18 Nov 2023 18:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UGb8xzXx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SNdXIAtX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25FB6870D5; Sat, 18 Nov 2023 18:11:56 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 52E9C874A5; Sat, 18 Nov 2023 18:11:57 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAD1287252
+ by phobos.denx.de (Postfix) with ESMTPS id A3A4186D11
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:11:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-daead9cde1eso2833248276.2
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-daead9cde1eso2833245276.2
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:11:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700327505; x=1700932305; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Uu2bV4oYXpi42oICHvj6jkN5m1jxTpH88uxOdKkPH08=;
- b=UGb8xzXxk9LhNmkamHB+2eeIOFBiGVv11BdwDQsmr3XzK+/rAD+qrjYNs2HqDmRz8F
- BeAqqo3j5zbCcDEDWX1NURkXJYO0F+Eoj+27yPZmVev4BrrjRMKV3rlZxp3Os2aK/xI1
- ZP9CGLLzddT18vukWWiQl7zbMHwSDh+NHe2Bc=
+ bh=+oZ9X1Muiy571IrY33ehp9c9cPLllmdt61z0tW2YjSw=;
+ b=SNdXIAtXqFa5OrKJPI9l9aiCGOIcBUB75WV9vYqORM9vV1ZqVLJ4dB45Zgnq1qDdi4
+ YAY38ESl6hbgwMyuCnEEEeTJ7QYNyWoBjSXJxp0kOxHbhghUUtbCvzXZAuLaRlvxHWal
+ Gkv9MaP3t40qlaK0AWZTXLBIsmmvKzH4KoKRE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700327505; x=1700932305;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Uu2bV4oYXpi42oICHvj6jkN5m1jxTpH88uxOdKkPH08=;
- b=EDoCE6p+ooiGfrYCe/ZvrKs+s9Zg4cb8v/BPM5IniWMOjAhEEVTjlqzwNAwCJA4lyY
- /4de88eKDwhn7ItlUmmxjcyPFwD9++9xFJnOLjq2L/Wz4RFgwAhPAnOG4+QT7HozBlXQ
- KqH7sSjbWMePcVI1WxXQHNXE51sonUzKINNB7uilow5jdZCIV4GlX1cKfZO29tEg+gdc
- /JWaWXs5hiA7Pagnyrtr9dgl+s0cy/Ez6m4l3fxVolmrLbwIZA7zCPBqoJNuyelnbDYS
- /kasow33hGWuCuBxPO31lpj/FWab4qZSrIFiTnyCAWN2b+jqusTP3+vRegZEqt6pLXTj
- 4kjg==
-X-Gm-Message-State: AOJu0YwvoH/tkW+4g+foHBossLGhfUWiFvYtkKjMT/rFzfbIgQILuJIb
- aIWjaaE7j9oRBbCwV6aUvTvrfcH2+VULm66vHXc5RQ==
-X-Google-Smtp-Source: AGHT+IHH1yQyGPhRUpI6pZKnu/C9B9A99rb7iymxEe+i8CC7s0yxiAJBBudI4HSbt7YPnz59s73MZJzq4QR/g2YYHRM=
-X-Received: by 2002:a25:ea49:0:b0:d9c:66d1:958f with SMTP id
- o9-20020a25ea49000000b00d9c66d1958fmr2069545ybe.55.1700327504846; Sat, 18 Nov
- 2023 09:11:44 -0800 (PST)
+ bh=+oZ9X1Muiy571IrY33ehp9c9cPLllmdt61z0tW2YjSw=;
+ b=IAh0q+yLx1NUiRE6dvMJ06RTyAs1wrtCNEewErvlUQFFjXtBEhWcM/RjJjJ3Zb2h9r
+ wLYpDeGxhW1MdJW3Bh6v7jqRN7PMd8vRELFoOVF827msmrMVpOW4pq7CTQDmIE9q9vkF
+ QEY9q+jsvzQldByCMLmIZpOVxMIlzfBBsQgUs9Hs9tM9eSR9hLIMOJnF9vp/o7TLgt1H
+ W6FZrFC4o5GlspQ4G/ZScWB7v0zIF5oW1kbkSmU8RYo4fTY3PivvBizctE9R8GQgPUpY
+ RbBDWG/AsP281GdU1izriLr7eiwUN/X3AS3YQ3/M8zCWLaHKvSaPYD+ZXZDnL6rk8HAD
+ fXgw==
+X-Gm-Message-State: AOJu0YzD7mYRgcEnh1yrepnLseum5hQ1CL3o/kfh9wSWSbB2UxvDCkgB
+ qqhz/YISO7V1L73G7fzA0rBKr+uGLV1AxIQ79n3+8A==
+X-Google-Smtp-Source: AGHT+IF9zqJp8Dc6q4bKuKzsO7+4vhxsL6bzoCZH72TcR0wx6Oajf1mTpGGzMDzTYid61iU9Cb8rsAu6EYLueceILbA=
+X-Received: by 2002:a25:3618:0:b0:da0:3b6c:fc22 with SMTP id
+ d24-20020a253618000000b00da03b6cfc22mr2030930yba.31.1700327504836; Sat, 18
+ Nov 2023 09:11:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
- <20231115142355.123038-2-heinrich.schuchardt@canonical.com>
- <20231116183345.GA170968@bill-the-cat>
- <86182fad-ba42-46ba-a504-9f3f4deb34a4@canonical.com>
-In-Reply-To: <86182fad-ba42-46ba-a504-9f3f4deb34a4@canonical.com>
+References: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 10:10:12 -0700
-Message-ID: <CAPnjgZ2JiOjwiEJ2p7f56SX2OFOp2j9ZZNqGwfQDBxkrMc6D_g@mail.gmail.com>
-Subject: Re: [PATCH 1/6] acpi: do not write ACPI tables on TARGET_QEMU_VIRT
+Date: Sat, 18 Nov 2023 10:10:13 -0700
+Message-ID: <CAPnjgZ27mmK9BYE=rbGKGe9=xvZdG9reU659n-0D_wRfNemX5Q@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: create memory reservations in ACPI case
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Angelo Dureghello <angelo@kernel-space.org>,
- Alexander Gendin <agendin@matrox.com>, 
- Zong Li <zong.li@sifive.com>, Yu Chien Peter Lin <peterlin@andestech.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kautuk Consul <kconsul@ventanamicro.com>, 
- Brandon Maier <brandon.maier@collins.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,57 +82,29 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Thu, 16 Nov 2023 at 12:43, Heinrich Schuchardt
+On Thu, 16 Nov 2023 at 02:29, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On 11/16/23 19:33, Tom Rini wrote:
-> > On Wed, Nov 15, 2023 at 03:23:50PM +0100, Heinrich Schuchardt wrote:
-> >
-> >> RISC-V QEMU provides the ACPI tables. We do not need to generate them
-> >> ourselves.
-> >>
-> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> >> ---
-> >>   lib/acpi/Makefile      | 2 +-
-> >>   lib/acpi/acpi_writer.c | 2 +-
-> >>   2 files changed, 2 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
-> >> index c1c9675b5d..19fa6ac869 100644
-> >> --- a/lib/acpi/Makefile
-> >> +++ b/lib/acpi/Makefile
-> >> @@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
-> >>   obj-y += acpi_writer.o
-> >>
-> >>   # With QEMU the ACPI tables come from there, not from U-Boot
-> >> -ifndef CONFIG_QEMU
-> >> +ifeq ($(CONFIG_QEMU)$(CONFIG_TARGET_QEMU_VIRT),)
-> >
-> > The goal here is to say that we have been passed ACPI tables, and not to
-> > generate them, yes? Lets just introduce a symbol which says that and
-> > enable it as needed in both QEMU targets and others as needed please.
->
-> These are the conflicting function implementations:
->
-> drivers/misc/qfw.c:158:ulong write_acpi_tables(ulong addr)
-> lib/acpi/acpi_writer.c:72:ulong write_acpi_tables(ulong start_addr)
->
-> drivers/misc/Makefile has:
->
-> ifdef CONFIG_QFW
-> obj-y += qfw.o
->
-> but inside the driver we find another constraint:
->
-> #if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
->
-> So probably we should probably have a symbol which is set for
->
-> CONFIG_QFW && CONFIG_GENERATE_ACPI_TABLE && !CONFIG_SANDBOX
->
-> Maybe call it CONFIG_QFW_ACPI, "Read ACPI tables from QEMU".
+> ACPI tables cannot convey memory reservations for least ARM and RISC-V.
+> x86 uses the BIOS E820 table for this purpose. We cannot simply ignore the
+> device-tree when booting via ACPI.
 
-Yes that sounds good.
+Why is that? I had thought that we had to use one or the other. Isn't
+the devicetree irrelevant when booting with ACPI, so we can just drop
+it?
+
+> We have to assign EfiReservedMemory
+> according to the prior stage device-tree ($fdtaddr) or as fallback the
+> control device-tree ($fdtcontroladdr).
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  cmd/bootefi.c           | 25 ++++++++++---------------
+>  lib/efi_loader/Makefile |  2 --
+>  2 files changed, 10 insertions(+), 17 deletions(-)
+>
+
+The code looks fine, but I would like to better understand why this is needed.
 
 Regards,
 Simon
