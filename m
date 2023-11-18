@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA085C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:12:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D42C5ACB3
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:12:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B85D8713D;
-	Sat, 18 Nov 2023 18:11:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E1E1874A3;
+	Sat, 18 Nov 2023 18:11:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZXN/ynuR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FEEx6s7F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 434D686FED; Sat, 18 Nov 2023 18:11:35 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 2A47286DEE; Sat, 18 Nov 2023 18:11:46 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 512F086D11
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:11:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A82B86FED
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:11:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5c9169300caso6127847b3.2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:11:30 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5a7fb84f6ceso30057397b3.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:11:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700327489; x=1700932289; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700327495; x=1700932295; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xqC2v5WHF+QnG4TItPwb/wS1HB/6JE7k+uolNQnJAck=;
- b=ZXN/ynuRz62Y5Y52GLnDbl5oZ8GaR+hI+Lksm6f8aNPyiHbqdmPVuXi+qZvCW5qbTy
- wD12WP2l/TkyPnU228tOWsmDAuuNBtlfQO1FgXfZcn4bqt9UPeg3+CsPwR02Kog6gi+E
- zGV7QOFoxIxUCLkg2a38vdRRWlVoUIhdATtI8=
+ bh=A3Kv9zqad8q8LZvFpTWo7SxC9LOvZPGMFyklSlv+JKY=;
+ b=FEEx6s7FKKuDjl8cxBDTxt5rsE6l1PxMMHXzFcuyUo83jCKQlpmJgG2KcP3hUdp3Ox
+ 0bURY/Zs8rpyrIbFQjZK1R/SiJmg/slO6BHuPz0BUcz6ku9TkUgL8xW0YaPRcWC7feYv
+ 7vjazurMoiqP5xv0pZ6RT2l0VdxjWJiznPWsY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700327489; x=1700932289;
+ d=1e100.net; s=20230601; t=1700327495; x=1700932295;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xqC2v5WHF+QnG4TItPwb/wS1HB/6JE7k+uolNQnJAck=;
- b=F5mKa4Q5njUjyGZ6WN0EPKzzcz62L8LaKoKi9+54a06p1yDw8NeXHPlLfu2cl17JCa
- CYQG0e29Imu0hapWwLHMOlwy73w/e00/8553Guy18u7wFuYOWdqwNIP7Iu47UtIUjDzt
- TE+ZTUP9TkOgOJ/SM2GspcNirAIPVNfrgZC7TsdQH5QTxB3IWf9w3t+HFafumy/+95SF
- iqH1gBvRf3APiKWhalr4OGU/P16CgNykQxDmC1FJFXGA1XuJcLePS5lKRnASa5U+wHop
- xjpkSLu1KrJWPPO3cBKdbU6Hp+xbslLR8T2Nba0sMFzJdI+rzPCsltqpnstGYjDo6UtE
- 27rA==
-X-Gm-Message-State: AOJu0YxCekmAIrMroiLvyPmWjzLlIM/+G2yoJTWTYvIqm98/vsu0bHdO
- /XOJN8kMyvOYzkTUpuV+s8b1/uzXtA+6tPE8pDw9xg==
-X-Google-Smtp-Source: AGHT+IFmGmNELC9ub8iOg/0uIUuQyKA7+NWHS0POROas+HoYI2SBz6VeTId2RIdyo5UpCXWlPiRPARjiQlCGTNowYCk=
-X-Received: by 2002:a0d:c8c6:0:b0:583:c917:7ff0 with SMTP id
- k189-20020a0dc8c6000000b00583c9177ff0mr2434105ywd.51.1700327488792; Sat, 18
- Nov 2023 09:11:28 -0800 (PST)
+ bh=A3Kv9zqad8q8LZvFpTWo7SxC9LOvZPGMFyklSlv+JKY=;
+ b=hUjoGt3wQVVp4V3Jpfo/CdVEZHNLnac/ATvVUsvLfsKcsQoBl0UenhnfjyLPER9v9H
+ SkFzNtk1sEYFFV5BZDQJnoQtcj9S1OzN568Y6kaF8uoqAp8zlVjL0SxKTQVvuiY60i7x
+ FfO/ZkskIhHMgEg5+fNTvCj5UBUCDgO8kkR7f3BsJvZyZhGLWAdlA++P4StvIralAlgf
+ 277jYuREaEELdu97bXqe8dLqFPWeNVW3kLemJ7WcgH8W0lGIYHug1Yz8hK3Ys8h/PVoi
+ Uda0Np3WWGoY6TQ/nnbDIbDqYeXjB/sqNrssz3woh1fb7gWwf6BXfo2qDsn2v2fCckf5
+ MXhw==
+X-Gm-Message-State: AOJu0YxmdYlVWciY+XsDyAsAt9Bfe/F4g5uzi2em4BK2f1CHdcu48GT0
+ T3shEv3AbrrFK9B17kY/wCREVHMfGygBPoXm5tutTA==
+X-Google-Smtp-Source: AGHT+IE/HlVcLoaSnBDmZevKy0vSPdr+T2KFghJOI5A0MgC0rSHeh5ExAuEurh333Ojwos8Nhgtjob/PGzWjdge6Rt0=
+X-Received: by 2002:a81:6d0b:0:b0:5c5:9f98:8b6b with SMTP id
+ i11-20020a816d0b000000b005c59f988b6bmr2311895ywc.38.1700327495535; Sat, 18
+ Nov 2023 09:11:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117212039.1210784-1-i@shantur.com>
- <20231117212039.1210784-4-i@shantur.com>
-In-Reply-To: <20231117212039.1210784-4-i@shantur.com>
+References: <20231117154757.777827-1-trini@konsulko.com>
+In-Reply-To: <20231117154757.777827-1-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 10:10:08 -0700
-Message-ID: <CAPnjgZ1HHhFdgDUWfN7shw11Vo_-xVDmz55jk6Whfv9p03ZMtQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] bootflow: bootmeth_efi: Handle fdt not available.
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
+Date: Sat, 18 Nov 2023 10:09:50 -0700
+Message-ID: <CAPnjgZ1fFC7QW5xWXrqDEptOOfKeYNERM8BbA8FWeg28VYYi=Q@mail.gmail.com>
+Subject: Re: [PATCH] boards: Disable NET on platforms without NETDEVICES
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Matthias Winker <matthias.winker@de.bosch.com>,
+ Philip Oberfichtner <pro@denx.de>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sergey Temerkhanov <s.temerkhanov@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,85 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
-
-On Fri, 17 Nov 2023 at 14:22, Shantur Rathore <i@shantur.com> wrote:
+On Fri, 17 Nov 2023 at 08:48, Tom Rini <trini@konsulko.com> wrote:
 >
-> While booting with efi, if fdt isn't available externally,
-> just use the built-in one.
+> None of these platforms enabled a networking devices, and disabled
+> CMD_NET. Given that we used to gate network support on CMD_NET rather
+> than NET, we disable CONFIG_NET on these platforms now.
 >
-> Signed-off-by: Shantur Rathore <i@shantur.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->  boot/bootmeth_efi.c | 10 +++++++++-
->  include/bootflow.h  |  1 +
->  2 files changed, 10 insertions(+), 1 deletion(-)
->
-> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> index 5917458dc5..5e67afed88 100644
-> --- a/boot/bootmeth_efi.c
-> +++ b/boot/bootmeth_efi.c
-> @@ -313,6 +313,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
->                  */
->         } else {
->                 log_debug("No device tree available\n");
-> +               bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
->         }
->
->         return 0;
-> @@ -382,6 +383,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
->                 bflow->fdt_addr = fdt_addr;
->         } else {
->                 log_debug("No device tree available\n");
-> +               bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
->         }
->
->         bflow->state = BOOTFLOWST_READY;
-> @@ -443,7 +445,13 @@ static int distro_efi_boot(struct udevice *dev, struct bootflow *bflow)
->          * At some point we can add a real interface to bootefi so we can call
->          * this directly. For now, go through the CLI, like distro boot.
->          */
-> -       snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
-> +       if (bflow->flags & BOOTFLOWF_USE_BUILTIN_FDT) {
-> +               log_debug("Booting with built-in fdt\n");
-> +               snprintf(cmd, sizeof(cmd), "bootefi %lx", kernel);
-> +       } else {
-> +               snprintf(cmd, sizeof(cmd), "bootefi %lx %lx", kernel, fdt);
-> +       }
-> +
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Cc: Matthias Winker <matthias.winker@de.bosch.com>
+> Cc: Philip Oberfichtner <pro@denx.de>
+> Cc: Minkyu Kang <mk7.kang@samsung.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Sergey Temerkhanov <s.temerkhanov@gmail.com>
+> ---
+>  configs/efi-x86_app32_defconfig     | 3 +--
+>  configs/efi-x86_app64_defconfig     | 3 +--
+>  configs/imx6q_bosch_acc_defconfig   | 3 +--
+>  configs/origen_defconfig            | 2 +-
+>  configs/s5pc210_universal_defconfig | 2 +-
+>  configs/stm32mp25_defconfig         | 2 +-
+>  configs/thunderx_88xx_defconfig     | 2 +-
+>  configs/trats2_defconfig            | 2 +-
+>  configs/trats_defconfig             | 2 +-
+>  9 files changed, 9 insertions(+), 12 deletions(-)
 
-There is some code (not shown) in this function:
-
-   /*
-    * use the provided device tree if available, else fall back to
-    * the control FDT
-    */
-   if (bflow->fdt_fname)
-
-I believe that should use your flag as well. So instead of using
-fdt_fname to indicate whether there is an fdt, we should use your new
-flag.
-
->         if (run_command(cmd, 0))
->                 return log_msg_ret("run", -EINVAL);
->
-> diff --git a/include/bootflow.h b/include/bootflow.h
-> index fede8f22a2..3890cd4bc2 100644
-> --- a/include/bootflow.h
-> +++ b/include/bootflow.h
-> @@ -49,6 +49,7 @@ enum bootflow_state_t {
->  enum bootflow_flags_t {
->         BOOTFLOWF_USE_PRIOR_FDT = 1 << 0,
->         BOOTFLOWF_STATIC_BUF    = 1 << 1,
-> +       BOOTFLOWF_USE_BUILTIN_FDT       = 1 << 2,
-
-Please update the comment for the enum to fully explain what it does
-
->  };
->
->  /**
-> --
-> 2.40.1
->
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
