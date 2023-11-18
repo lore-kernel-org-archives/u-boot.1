@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4906C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 18:47:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 719FAC54E76
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 18:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24A0886BFA;
+	by phobos.denx.de (Postfix) with ESMTP id 87C48870E2;
 	Sat, 18 Nov 2023 19:47:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=fastmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=fastmail.com header.i=@fastmail.com header.b="bhuAqGHm";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="BIcxBEVj";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=fastmail.com header.i=@fastmail.com header.b="abb9VuWW";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NKRuvd72";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0C92870E3; Sat, 18 Nov 2023 19:44:38 +0100 (CET)
+ id CF756870E2; Sat, 18 Nov 2023 19:44:42 +0100 (CET)
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
  [66.111.4.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0DC087006
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 19:44:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E6B863FD
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 19:44:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=fastmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jaredbaur@fastmail.com
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id 192A05C01AF;
- Sat, 18 Nov 2023 13:44:29 -0500 (EST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id BBAEF5C01BD;
+ Sat, 18 Nov 2023 13:44:34 -0500 (EST)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Sat, 18 Nov 2023 13:44:29 -0500
+ by compute6.internal (MEProxy); Sat, 18 Nov 2023 13:44:34 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.com; h=
  cc:cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:message-id:mime-version:reply-to:sender:subject
- :subject:to:to; s=fm1; t=1700333069; x=1700419469; bh=73Tpal9j78
- DAXeeZ2CTwURv2kc46vElElnVKOIqVXXE=; b=bhuAqGHmq7oicuXrP1QSX3jhLF
- +YhpZwyW4XKNSuK/b3QGsUNbEAOJ0LkmCy9ti6RGk2uxakwK4+V7qFVzR0bKBQBY
- eIg/gv5J6U7ae/KePjtaMi+NFVynut4b1WlaQJpdYacU4Zgsla5DrF8cI1rkHggv
- LnArqNic6Be2AcgyGzaTnmRpslmlsTt05IXh0J35djKmeq6HBECTbMAguvNo3dNF
- Wu+0i4cPCwiasyvluDqpB9+RXaevzKTNIcdpIwpYFz6yKvbG1sUpTheSQurO8lJ5
- 0aWAlhyWU4RYx5ZyDS9V6T64m1S4nzCbB2lDkosyGqe7G9Y04uOgWJLa2VIQ==
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to; s=fm1; t=1700333074; x=
+ 1700419474; bh=+c2ovXrR4rG9QCuiIE+V7qTy/vBmSzRvxRnAAib6Ll0=; b=a
+ bb9VuWWiKZk3TJGALIVMCVEUrghCeyyO0VMmquTjMg5I6Oz4IlX2n/0ZotSkQras
+ FKpjLNdYFohSNtu6pKcvEhAGtwV/3v4EANLVAiRXpqawaMcgGXGvqdMaQpI9Bj6R
+ BIeW79qPs6GxgMqO0lt5R4k7C1QnuTwLtXA75/J35SsDiXNnVZGHPokb6ih4+gKj
+ 3BNtjfkxAFNQuHAIUgcJc3cnq1O1J4W2ih/WD4tPJ+S4oOIsXr5KjfOghSBpxIok
+ T4/viY7LphbifrQT2pwIy9bkFYAAJB9P9JSp/P5w8uF3zodPqtizK2zsftianE0O
+ EfenrPY39SD2GCr4pSr7A==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-transfer-encoding
  :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:message-id:mime-version:reply-to:sender:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm1; t=1700333069; x=1700419469; bh=73Tpal9j78DAX
- eeZ2CTwURv2kc46vElElnVKOIqVXXE=; b=BIcxBEVjxaNCVqAxsxAmpZsnmyyNJ
- clEKNw9pzfPYqr1rcBsMFq2Rebwgu5QgYXyDdcAIMxzP154iQ3SH7pYrjMAh2Fxh
- 4HwsPBeOWe708QX2PRyw55YZayxWKzAfAE+lPupQtsW/Aerjov0CPyY8yooHMX7C
- 3mxyDHIqZAyrxgoM+Osv+zk8l4BmIKjFjvGyx6aky7q0P1mm4vbb1A4ZlRdU5tW6
- gcn7vETrpZDK+3ywyxtToZaXFWnprYVEo1QJyyo/LnMOMY6xviX7MbhTQxAflZQU
- fyeXf+vFpI+rMFxlnVVg0ErIdHb6DbfAGi/Ga4ZURdWsZJ6OqmdUks4Lw==
-X-ME-Sender: <xms:DAZZZcDm0mczUgnIVeC59BvF5letpVmTIluNknUUEnBaJWKw-12h6A>
- <xme:DAZZZejbEjF-rUdE7qmHt3HtVxKpljTiOE4tOHi-hi_jeCNvKChgjNZbuUP6NqNN6
- YnnJ5nq572LUqqpd00>
-X-ME-Received: <xmr:DAZZZflp2rcWfk4XVPCJPHlavw9A3uyVc81Tf8EwSRH7LUweQNGDbNJ8IcWe645eiCdrA83T_SKeYnZZHXjPeDho6e9UoLoqfKOX8w>
+ :in-reply-to:in-reply-to:message-id:mime-version:references
+ :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1700333074; x=
+ 1700419474; bh=+c2ovXrR4rG9QCuiIE+V7qTy/vBmSzRvxRnAAib6Ll0=; b=N
+ KRuvd72ttOnoa36zd7N+6/MLbUhoqkNYqt5dEjcDtpbK0C4Pw53c6HvcBZ/5gukD
+ 1Yv3beVeXCZDM9a1CEn57rpuH/t9Xk3epwvmI/oiBcoki1GsMf2J4jsQMZ71Cneq
+ fS+9Z+T6RnuwQqnSn5v0wc7i7m76QduAmrIejRpgV3OOQJZ/X/e36CxU4i1hJO8T
+ qWgAyhgYkN3DADDn3xuGh1J4lJmuaZhoXI3LCXbKg+nxg2eZiSO2VqJCyJG6ZAsx
+ sZTSZB1AdNHWAWPXC7/dkxezYyUgEf7CgktmfWRVzHVUj3zYRfPaZ/twIBJVV7Vs
+ XOvWwqKTzXgQcW3BNGNZg==
+X-ME-Sender: <xms:EgZZZYOk78jukyLQ1v9OpVaOnpJUjVdLH4jd2c16e0Gf-KDZ9A4lPQ>
+ <xme:EgZZZe_ZkGbXnsfQrxa7I0o_yg3UXhZyzFjOfonXWIi05eoXW50lKFYt7KgBX9m8C
+ 930tsveStO-3_Cs30k>
+X-ME-Received: <xmr:EgZZZfTcLfHzdiVuZ7gWACgXQ-hvhsPTMLDX_kG1pXcsX-ptxVCIavQCMRWYRmg6GI9VvJ1Ge89IpEWnWQCmvdEdJAMMSM5qa6esSw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrudegvddgudduhecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgggfestdekre
- dtredttdenucfhrhhomheplfgrrhgvugcuuegruhhruceojhgrrhgvuggsrghurhesfhgr
- shhtmhgrihhlrdgtohhmqeenucggtffrrghtthgvrhhnpedtjedvieegjefhteetffevge
- fhhfdugfeugeelfeetheetvdefheejvefgudeiueenucevlhhushhtvghrufhiiigvpedt
- necurfgrrhgrmhepmhgrihhlfhhrohhmpehjrghrvggusggruhhrsehfrghsthhmrghilh
- drtghomh
-X-ME-Proxy: <xmx:DAZZZSxBpGdMGjgE8dbEqAYmplOeiiG1XDCOSVUI8UnXVYnW8ufecQ>
- <xmx:DAZZZRQMUSyrI4V1XPaZlqphcQ9b35B9IRJHlL2T4s388p0UiIESMw>
- <xmx:DAZZZda4sqrakOnfkFIBn5PQ4Xcysj2ml5o_wOn93cLoRcavGzAp0g>
- <xmx:DQZZZS5tQ3sPj4J0h5E1vbhNB9mWUP5AonkJXltiEbE2xC8EpfceEg>
+ necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgjfhgggfestd
+ ekredtredttdenucfhrhhomheplfgrrhgvugcuuegruhhruceojhgrrhgvuggsrghurhes
+ fhgrshhtmhgrihhlrdgtohhmqeenucggtffrrghtthgvrhhnpeehleevgfduvdeutdehke
+ fguefhueeujeetudfgvedugfefjeejkeekkeekfeehudenucevlhhushhtvghrufhiiigv
+ pedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjrghrvggusggruhhrsehfrghsthhmrg
+ hilhdrtghomh
+X-ME-Proxy: <xmx:EgZZZQu43XL16Ysz2uRgfjo5vVgkpjCF1XmtrrOR7P2G4qPNCXQISg>
+ <xmx:EgZZZQcDKYx5ejUP75IhIIOd8Fk5heGdfmz2KfAy4TRND9aI_yL_-w>
+ <xmx:EgZZZU0wiePyBdb5NKk6W46z-EOVi0D8EWinMnx_0zvpCO2Ed2fTmg>
+ <xmx:EgZZZYkktjYhWCgeM6x-eZBeahYRRCJ_NmxOKuwuNeRkodeqxNeqRw>
 Feedback-ID: i1961441c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 18 Nov 2023 13:44:28 -0500 (EST)
+ 18 Nov 2023 13:44:34 -0500 (EST)
 From: Jared Baur <jaredbaur@fastmail.com>
 To: u-boot@lists.denx.de
 Cc: Jared Baur <jaredbaur@fastmail.com>
-Subject: [PATCH 0/1] Fix DFU updates on the zynqmp platform
-Date: Sat, 18 Nov 2023 18:44:19 +0000
-Message-ID: <20231118184426.2808502-1-jaredbaur@fastmail.com>
+Subject: [PATCH 1/1] Write upper-case BOOT.BIN to zynqmp MMC
+Date: Sat, 18 Nov 2023 18:44:20 +0000
+Message-ID: <20231118184426.2808502-2-jaredbaur@fastmail.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231118184426.2808502-1-jaredbaur@fastmail.com>
+References: <20231118184426.2808502-1-jaredbaur@fastmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sat, 18 Nov 2023 19:47:00 +0100
@@ -99,19 +103,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When using DFU alt info via EFI capsule updates on an Ultra96 V2 board,
-`dfu_alt_info` is automatically set to write a `boot.bin` file to the SD
-card when in SD boot mode and not using multiboot. After the update is
-applied, the board reboots and does not come back up. When writing an
-upper-case `BOOT.BIN` file to the SD card instead, the board updates and
-comes back up successfully.
+The zynqmp bootrom will not boot from an SD card with a fat32 fileystem
+with a lowercase boot.bin file on it. This means that using DFU to
+update the boot.bin file will render the device unusable since it is not
+written in upper-case.
 
-Jared Baur (1):
-  Write upper-case BOOT.BIN to zynqmp MMC
-
+Signed-off-by: Jared Baur <jaredbaur@fastmail.com>
+---
  board/xilinx/zynqmp/zynqmp.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index f162803084..bcccf5b7c1 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -647,14 +647,14 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 	case SD_MODE1:
+ 		bootseq = mmc_get_env_dev();
+ 
+-		len += snprintf(buf + len, DFU_ALT_BUF_LEN, "mmc %d=boot",
++		len += snprintf(buf + len, DFU_ALT_BUF_LEN, "mmc %d=BOOT",
+ 			       bootseq);
+ 
+ 		if (multiboot)
+ 			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
+ 				       "%04d", multiboot);
+ 
+-		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".bin fat %d 1",
++		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".BIN fat %d 1",
+ 			       bootseq);
+ #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
+ 		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ";%s fat %d 1",
 -- 
 2.42.0
 
