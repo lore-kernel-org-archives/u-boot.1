@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892A7C54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00645C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:57:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA3F886FE4;
-	Sat, 18 Nov 2023 22:52:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 617F88708B;
+	Sat, 18 Nov 2023 22:57:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bZmZwy5k";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RGtpMbso";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B64DE8700D; Sat, 18 Nov 2023 22:52:48 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 4A8D787134; Sat, 18 Nov 2023 22:57:37 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B813B86F40
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:52:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7620386FE4
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,25 +31,25 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A6B8D413CE; 
- Sat, 18 Nov 2023 21:52:45 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 9CB2C3F278; 
+ Sat, 18 Nov 2023 21:57:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700344365;
- bh=wJag742UB9ym2k9xxNQ+7QI0R7BmDPg9nXB41wevxVs=;
+ s=20210705; t=1700344652;
+ bh=0UJQJrcF5bmyeAkE4OnuQuonvmVvakOeugY2XPHrsI0=;
  h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=bZmZwy5kLTE1sOzr8aXJgPxnaho4mSZMUPxedDxVI3UvvCQcSO2zLunJZcsgrfcFn
- uwy7+oQ5KTnQxs6osc28AAP8ajd/QAl+iAbZza0ERN0DJT4rfS4JiaHMBDqmc05i81
- Sc60IO0OKlm948pmGq18qOtQ0FGujzMMzmIajlCqanlk6nEzCaO7Q95o0sfO5lmfDY
- dAsClXb6YM+UPk+TmRS/AqyDdor4iKqkRRqoXl52N8ra1ZUQhosI2op8mCm+V2BT4g
- axN7Dp0dSpuKrXr94BDSwoP/1eGrPcxz/FJZXxWh0YKe0khbcwg2fNPR3Niv93nd3U
- Bp7MwvqhEW7EA==
+ b=RGtpMbso8M7yw6Lp35febk9zP5HcPQibQy/77A7ZCE44WxiGbja2B9f6YeOkiV12m
+ 1WL8wayRcwjHat1v632NkoM6mp8jj4XBhpQqPy79pxo4Serh6TjQvbXTC4gb5VFkTF
+ cdCc9m/JbONnDT4Q66xlf3HtvuLD4mwaDboHyHiCZ8zc+RoRsjmuLNesj1HdJXg4HJ
+ kkWmtz5Wk8wDsm360LQSu2+lRJpTBMNBA5tdpGFSou3nD8lfHjXppK3TR1y0f+Ehc6
+ OYyx7+EUgYWwbhhm3tTH2aB0nPTpMefcZkLDxNYwY23L4dpgqc4L0Xs9Zf/Y8u2DYB
+ Ecp2GRuhOVi4Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] acpi: simplify acpi_write_ssdt()
-Date: Sat, 18 Nov 2023 22:52:37 +0100
-Message-Id: <20231118215237.94875-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 0/2] acpi: consider XSDT in acpi_find_table()
+Date: Sat, 18 Nov 2023 22:57:25 +0100
+Message-Id: <20231118215727.95086-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -69,31 +69,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-* Converting to void * is superfluous when calling memset().
-* acpi_fill_header() already fills oem_table_id.
+The RSDT table is deprecated and does not exist on all systems.
 
-Fixes: d953137526cc ("x86: Move SSDT table to a writer function")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/acpi/ssdt.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+By preference scan XSDT for the table to find. If no XSDT table exists, try
+to use the RSDT table.
 
-diff --git a/lib/acpi/ssdt.c b/lib/acpi/ssdt.c
-index 659c1aad40..b140b4b2ff 100644
---- a/lib/acpi/ssdt.c
-+++ b/lib/acpi/ssdt.c
-@@ -18,10 +18,9 @@ int acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	int ret;
- 
- 	ssdt = ctx->current;
--	memset((void *)ssdt, '\0', sizeof(struct acpi_table_header));
-+	memset(ssdt, '\0', sizeof(struct acpi_table_header));
- 
- 	acpi_fill_header(ssdt, "SSDT");
--	memcpy(ssdt->oem_table_id, OEM_TABLE_ID, sizeof(ssdt->oem_table_id));
- 	ssdt->revision = acpi_get_table_revision(ACPITAB_SSDT);
- 	ssdt->aslc_revision = 1;
- 	ssdt->length = sizeof(struct acpi_table_header);
+Provide a unit test for acpi_find_table().
+
+v2:
+	Consider that map_sysmem(0, 0) != NULL.
+	Add unit test.
+
+*** BLURB HERE ***
+
+Heinrich Schuchardt (2):
+  acpi: consider XSDT in acpi_find_table()
+  test: unit test for acpi_find_table()
+
+ lib/acpi/acpi.c | 20 ++++++++---
+ test/dm/acpi.c  | 96 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 112 insertions(+), 4 deletions(-)
+
 -- 
 2.40.1
 
