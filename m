@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 275B1C54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA653C54E76
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAF0287252;
-	Sat, 18 Nov 2023 22:57:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC83C8714F;
+	Sat, 18 Nov 2023 22:57:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="I4LfmrZf";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AcpOsCeV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA99186FE4; Sat, 18 Nov 2023 22:57:37 +0100 (CET)
+ id 95552874C5; Sat, 18 Nov 2023 22:57:47 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D925D870E2
+ by phobos.denx.de (Postfix) with ESMTPS id C0AA88714F
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:57:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,26 +31,26 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6A20A3FB4A; 
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 0B8F23FB46; 
  Sat, 18 Nov 2023 21:57:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1700344653;
- bh=abGl699mmT2HUpZFfLRBw4uFdtFJvrihYUWjl33vd+4=;
+ bh=pyTFOpVTzkaoAOeHeLFrFq3hFM2tbjhu4GZMrIVF/8s=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=I4LfmrZfil+ib4UmmPx6im6S1fR3T11/rKYfmJ+958tTVKtbKs6LGiyBfL+9O43dm
- +t9j19Vehyjcl8dLLGLnb8JSPjni1rAov0Twb1nGTrPilmhoKHG8UW9czy2FMtUx4N
- xZc7ovphYxTq765DJlFCJ8/W0Ww4HiZ74vBj/Si8rSL1gPyF62hdInEtkKiBzM18Po
- scZ80fQrwjUO6j90VfwOm7wAAxjILJMQ1Q5Pql+hPMIoPHcp3L3W1+UjQzFpKIuceW
- CnZnUcGDVb0rXiaRwDkI3D3A4KIaV0WKyrT2QH9f83LrsVPQ7DzqpwgI8fNHxHrBUl
- TLriZoqbmx34Q==
+ b=AcpOsCeV0/jwpXWKBT+mWPMCxuX0xyfwOuWem3WffUwZScg9MnWhtZxvKPRDApS82
+ W1LhmOMvnEX4tuQESUb7VBJ16Z6rl4UwTXSpvX88Yx1KkqH5COU4HlxGgjIUy2ttpC
+ a02TClgwI3OYnSNVHlRjOAlgaX8VSj3kOUY8F7DpNV5rd3GYAaXZJpCHacSeLu8ip+
+ 5dnkHC5k/VtQJuvIpkJ6d7cfonaDCFG9etOveYoVhnT08bfvZ4GnB6N8D4yw5z+z0u
+ eOkbMTFFqG4WUbwibFFRbIwN9O2HNGZBMartf3qvHlHHj/hz58Nw6kVDChR4ev3aha
+ A0bB4z8oz35Sg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 2/2] test: unit test for acpi_find_table()
-Date: Sat, 18 Nov 2023 22:57:27 +0100
-Message-Id: <20231118215727.95086-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/2] acpi: consider XSDT in acpi_find_table()
+Date: Sat, 18 Nov 2023 22:57:26 +0100
+Message-Id: <20231118215727.95086-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231118215727.95086-1-heinrich.schuchardt@canonical.com>
 References: <20231118215727.95086-1-heinrich.schuchardt@canonical.com>
@@ -72,120 +72,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a unit test for acpi_find_table()
+The RSDT table is deprecated and does not exist on all systems.
+
+By preference scan XSDT for the table to find. If no XSDT table exists, try
+to use the RSDT table.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	new patch
+	consider that map_sysmem(0, 0) != NULL
 ---
- test/dm/acpi.c | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 96 insertions(+)
+ lib/acpi/acpi.c | 20 ++++++++++++++++----
+ 1 file changed, 16 insertions(+), 4 deletions(-)
 
-diff --git a/test/dm/acpi.c b/test/dm/acpi.c
-index 5997bda649..58cc6c3474 100644
---- a/test/dm/acpi.c
-+++ b/test/dm/acpi.c
-@@ -651,3 +651,99 @@ static int dm_test_acpi_cmd_set(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_acpi_cmd_set, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-+
-+/**
-+ * dm_test_write_test_table() - create test ACPI table
-+ *
-+ * Create an ACPI table TSTn, where n is given by @index.
-+ *
-+ * @ctx:	ACPI table writing context
-+ * @index:	table index
-+ * Return:	generated table
-+ */
-+static struct acpi_table_header
-+*dm_test_write_test_table(struct acpi_ctx *ctx, int index)
-+{
-+	struct acpi_table_header *tbl = ctx->current;
-+	char signature[5];
-+
-+	snprintf(signature, sizeof(signature), "TST%1d", index);
-+	memset(tbl, 0, sizeof(*tbl));
-+	acpi_fill_header(tbl, signature);
-+	acpi_inc(ctx, sizeof(struct acpi_table_header));
-+	tbl->length = (u8 *)ctx->current - (u8 *)tbl;
-+	tbl->checksum = table_compute_checksum(tbl, tbl->length);
-+	acpi_add_table(ctx, tbl);
-+
-+	return tbl;
-+}
-+
-+/* Test acpi_find_table() */
-+static int dm_test_acpi_find_table(struct unit_test_state *uts)
-+{
-+	struct acpi_ctx ctx;
-+	ulong acpi_start, addr;
-+	void *buf;
-+	struct acpi_table_header *table, *table1, *table2, *table3;
-+	struct acpi_rsdp *rsdp;
-+	ulong rsdt;
-+	ulong xsdt;
-+
-+	/* Keep reference to original ACPI tables */
-+	acpi_start = gd_acpi_start();
-+
-+	/* Setup new ACPI tables */
-+	buf = memalign(16, BUF_SIZE);
-+	ut_assertnonnull(buf);
-+	addr = map_to_sysmem(buf);
-+	ut_assertok(setup_ctx_and_base_tables(uts, &ctx, addr));
-+	table3 = dm_test_write_test_table(&ctx, 3);
-+	table1 = dm_test_write_test_table(&ctx, 1);
-+	table2 = dm_test_write_test_table(&ctx, 2);
-+
-+	/* Retrieve RSDP, RSDT, XSDT */
-+	rsdp = map_sysmem(gd_acpi_start(), 0);
-+	ut_assertnonnull(rsdp);
-+	rsdt = rsdp->rsdt_address;
-+	ut_assert(rsdt);
-+	xsdt = rsdp->xsdt_address;
-+	ut_assert(xsdt);
-+
-+	/* Find with both RSDT and XSDT */
-+	table = acpi_find_table("TST1");
-+	ut_asserteq_ptr(table1, table);
-+	ut_asserteq_strn("TST1", table->signature);
-+	table = acpi_find_table("TST2");
-+	ut_asserteq_ptr(table2, table);
-+	ut_asserteq_strn("TST2", table->signature);
-+	table = acpi_find_table("TST3");
-+	ut_asserteq_ptr(table3, table);
-+	ut_asserteq_strn("TST3", table->signature);
-+
-+	/* Find with XSDT only */
-+	rsdp->rsdt_address = 0;
-+	table = acpi_find_table("TST1");
-+	ut_asserteq_ptr(table1, table);
-+	table = acpi_find_table("TST2");
-+	ut_asserteq_ptr(table2, table);
-+	table = acpi_find_table("TST3");
-+	ut_asserteq_ptr(table3, table);
-+	rsdp->rsdt_address = rsdt;
-+
-+	/* Find with RSDT only */
-+	rsdp->xsdt_address = 0;
-+	table = acpi_find_table("TST1");
-+	ut_asserteq_ptr(table1, table);
-+	table = acpi_find_table("TST2");
-+	ut_asserteq_ptr(table2, table);
-+	table = acpi_find_table("TST3");
-+	ut_asserteq_ptr(table3, table);
-+	rsdp->xsdt_address = xsdt;
-+
-+	/* Restore previous ACPI tables */
-+	gd_set_acpi_start(acpi_start);
-+	free(buf);
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_acpi_find_table, 0);
+diff --git a/lib/acpi/acpi.c b/lib/acpi/acpi.c
+index 14b15754f4..f21e509461 100644
+--- a/lib/acpi/acpi.c
++++ b/lib/acpi/acpi.c
+@@ -16,18 +16,30 @@ struct acpi_table_header *acpi_find_table(const char *sig)
+ {
+ 	struct acpi_rsdp *rsdp;
+ 	struct acpi_rsdt *rsdt;
++	struct acpi_xsdt *xsdt;
+ 	int len, i, count;
+ 
+ 	rsdp = map_sysmem(gd_acpi_start(), 0);
+ 	if (!rsdp)
+ 		return NULL;
+-	rsdt = map_sysmem(rsdp->rsdt_address, 0);
+-	len = rsdt->header.length - sizeof(rsdt->header);
+-	count = len / sizeof(u32);
++	if (rsdp->xsdt_address) {
++		xsdt = map_sysmem(rsdp->xsdt_address, 0);
++		len = xsdt->header.length - sizeof(xsdt->header);
++		count = len / sizeof(u64);
++	} else {
++		if (!rsdp->rsdt_address)
++			return NULL;
++		rsdt = map_sysmem(rsdp->rsdt_address, 0);
++		len = rsdt->header.length - sizeof(rsdt->header);
++		count = len / sizeof(u32);
++	}
+ 	for (i = 0; i < count; i++) {
+ 		struct acpi_table_header *hdr;
+ 
+-		hdr = map_sysmem(rsdt->entry[i], 0);
++		if (rsdp->xsdt_address)
++			hdr = map_sysmem(xsdt->entry[i], 0);
++		else
++			hdr = map_sysmem(rsdt->entry[i], 0);
+ 		if (!memcmp(hdr->signature, sig, ACPI_NAME_LEN))
+ 			return hdr;
+ 		if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN)) {
 -- 
 2.40.1
 
