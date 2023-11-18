@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534C6C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C9AC5ACB3
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:14:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B769874CA;
+	by phobos.denx.de (Postfix) with ESMTP id 8E852874E4;
 	Sat, 18 Nov 2023 18:12:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MZvG4QBB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UGb8xzXx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8E73874D0; Sat, 18 Nov 2023 18:11:54 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 25FB6870D5; Sat, 18 Nov 2023 18:11:56 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24AA98749E
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:11:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD1287252
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:11:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-daec4e4c5eeso2841935276.1
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:11:47 -0800 (PST)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-daead9cde1eso2833248276.2
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:11:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700327505; x=1700932305; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZTeBbheuEiSDFBAzn5zHiol1CTl/9zu4xSAEekDEGyA=;
- b=MZvG4QBBzpi5/NALqjkuXNvuPkU+H6Ys5bJ+WTCyGcTZomV2GXTqsumyK/lIj/wBpG
- kax+nbNQKqfotALzcUQaqNjxwNTq+hKV8SR/nvsrB+/ndsmI/AGwTXVIDx8RZ2hmVmgq
- +E+faytkik1vh4X5ka8LZbNi+SyRkHkhMe7Y0=
+ bh=Uu2bV4oYXpi42oICHvj6jkN5m1jxTpH88uxOdKkPH08=;
+ b=UGb8xzXxk9LhNmkamHB+2eeIOFBiGVv11BdwDQsmr3XzK+/rAD+qrjYNs2HqDmRz8F
+ BeAqqo3j5zbCcDEDWX1NURkXJYO0F+Eoj+27yPZmVev4BrrjRMKV3rlZxp3Os2aK/xI1
+ ZP9CGLLzddT18vukWWiQl7zbMHwSDh+NHe2Bc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700327505; x=1700932305;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZTeBbheuEiSDFBAzn5zHiol1CTl/9zu4xSAEekDEGyA=;
- b=VBaa4E0GUdZA+EnEYk8OE2gNMKtF3kye5nkzSc58u92XmLzja4nNDdEoGBHUZ96cEX
- hfQP6/I+KplqZjdp1PQF+NeODHQ5WG2LHymTHcENekBfOLCvd4I7WAAUr0l+5fRO8y4R
- v2UwbEuINPl5+I59c6N1LZAB13P2sAnV2Yq/zo2UA9YoaxN4G1LgqLvoyB01kNBBke67
- AjZeugbXn39p4KKjx7rUDBpTgKvdIFuuW3diFWy5aY7hqlHrYkSRnX0Vvnbfn2fG3h2a
- nk9Zisens3vWGUqKI2iDU2pXQrj2Xpn+ILnLSriNwnO8Ivx8E/g+Ed+oeXR+eiK6KksR
- 04rw==
-X-Gm-Message-State: AOJu0YwrI//8X8CGtKewkCz7wchmljOLf7RW/emrY/bl7zW4PPEOsEP0
- yZzJlgvhE3blpZT5hhu5IKwq/dsNNi9aSSGgWyILCg==
-X-Google-Smtp-Source: AGHT+IE9cAwmGov8MJ5zgtYoHKVFMTZoLkVp0uM3EcSRvrwXMa5m+0hkWiUmJrPfKLp7ZxCwghgy5fhk4C/M49kyb1c=
-X-Received: by 2002:a25:4c05:0:b0:d9b:6c9d:e6a with SMTP id
- z5-20020a254c05000000b00d9b6c9d0e6amr2565359yba.0.1700327504869; Sat, 18 Nov
+ bh=Uu2bV4oYXpi42oICHvj6jkN5m1jxTpH88uxOdKkPH08=;
+ b=EDoCE6p+ooiGfrYCe/ZvrKs+s9Zg4cb8v/BPM5IniWMOjAhEEVTjlqzwNAwCJA4lyY
+ /4de88eKDwhn7ItlUmmxjcyPFwD9++9xFJnOLjq2L/Wz4RFgwAhPAnOG4+QT7HozBlXQ
+ KqH7sSjbWMePcVI1WxXQHNXE51sonUzKINNB7uilow5jdZCIV4GlX1cKfZO29tEg+gdc
+ /JWaWXs5hiA7Pagnyrtr9dgl+s0cy/Ez6m4l3fxVolmrLbwIZA7zCPBqoJNuyelnbDYS
+ /kasow33hGWuCuBxPO31lpj/FWab4qZSrIFiTnyCAWN2b+jqusTP3+vRegZEqt6pLXTj
+ 4kjg==
+X-Gm-Message-State: AOJu0YwvoH/tkW+4g+foHBossLGhfUWiFvYtkKjMT/rFzfbIgQILuJIb
+ aIWjaaE7j9oRBbCwV6aUvTvrfcH2+VULm66vHXc5RQ==
+X-Google-Smtp-Source: AGHT+IHH1yQyGPhRUpI6pZKnu/C9B9A99rb7iymxEe+i8CC7s0yxiAJBBudI4HSbt7YPnz59s73MZJzq4QR/g2YYHRM=
+X-Received: by 2002:a25:ea49:0:b0:d9c:66d1:958f with SMTP id
+ o9-20020a25ea49000000b00d9c66d1958fmr2069545ybe.55.1700327504846; Sat, 18 Nov
  2023 09:11:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117211506.1396929-1-macroalpha82@gmail.com>
- <20231117211506.1396929-2-macroalpha82@gmail.com>
-In-Reply-To: <20231117211506.1396929-2-macroalpha82@gmail.com>
+References: <20231115142355.123038-1-heinrich.schuchardt@canonical.com>
+ <20231115142355.123038-2-heinrich.schuchardt@canonical.com>
+ <20231116183345.GA170968@bill-the-cat>
+ <86182fad-ba42-46ba-a504-9f3f4deb34a4@canonical.com>
+In-Reply-To: <86182fad-ba42-46ba-a504-9f3f4deb34a4@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 10:10:04 -0700
-Message-ID: <CAPnjgZ27Ut4mQXtjDYPeMhfzS2w9Jm_MKOhuRRAxJw2Z7A4OwQ@mail.gmail.com>
-Subject: Re: [PATCH V2 1/4] board: rockchip: Refactor panel auto-detect code
-To: Chris Morgan <macroalpha82@gmail.com>
-Cc: u-boot@lists.denx.de, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- Chris Morgan <macromorgan@hotmail.com>
+Date: Sat, 18 Nov 2023 10:10:12 -0700
+Message-ID: <CAPnjgZ2JiOjwiEJ2p7f56SX2OFOp2j9ZZNqGwfQDBxkrMc6D_g@mail.gmail.com>
+Subject: Re: [PATCH 1/6] acpi: do not write ACPI tables on TARGET_QEMU_VIRT
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Zong Li <zong.li@sifive.com>, Yu Chien Peter Lin <peterlin@andestech.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kautuk Consul <kconsul@ventanamicro.com>, 
+ Brandon Maier <brandon.maier@collins.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,33 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
+Hi Heinrich,
 
-On Fri, 17 Nov 2023 at 14:15, Chris Morgan <macroalpha82@gmail.com> wrote:
+On Thu, 16 Nov 2023 at 12:43, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> From: Chris Morgan <macromorgan@hotmail.com>
+> On 11/16/23 19:33, Tom Rini wrote:
+> > On Wed, Nov 15, 2023 at 03:23:50PM +0100, Heinrich Schuchardt wrote:
+> >
+> >> RISC-V QEMU provides the ACPI tables. We do not need to generate them
+> >> ourselves.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   lib/acpi/Makefile      | 2 +-
+> >>   lib/acpi/acpi_writer.c | 2 +-
+> >>   2 files changed, 2 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
+> >> index c1c9675b5d..19fa6ac869 100644
+> >> --- a/lib/acpi/Makefile
+> >> +++ b/lib/acpi/Makefile
+> >> @@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
+> >>   obj-y += acpi_writer.o
+> >>
+> >>   # With QEMU the ACPI tables come from there, not from U-Boot
+> >> -ifndef CONFIG_QEMU
+> >> +ifeq ($(CONFIG_QEMU)$(CONFIG_TARGET_QEMU_VIRT),)
+> >
+> > The goal here is to say that we have been passed ACPI tables, and not to
+> > generate them, yes? Lets just introduce a symbol which says that and
+> > enable it as needed in both QEMU targets and others as needed please.
 >
-> Make the inability to detect a panel using the auto detection code not
-> fail the entire boot process. This means that if the panel ID cannot
-> be read we don't set an environment variable for the panel, and if an
-> environment variable for the panel is not set we don't attempt to
-> update the compatible string. Changes to the code also ensure that
-> when there are multiple compatible strings required for the panel
-> we use them both, which solves some issues that will pop up soon
-> for the Linux driver.
+> These are the conflicting function implementations:
 >
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->  board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 115 +++++++++++++--------
->  1 file changed, 74 insertions(+), 41 deletions(-)
+> drivers/misc/qfw.c:158:ulong write_acpi_tables(ulong addr)
+> lib/acpi/acpi_writer.c:72:ulong write_acpi_tables(ulong start_addr)
+>
+> drivers/misc/Makefile has:
+>
+> ifdef CONFIG_QFW
+> obj-y += qfw.o
+>
+> but inside the driver we find another constraint:
+>
+> #if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
+>
+> So probably we should probably have a symbol which is set for
+>
+> CONFIG_QFW && CONFIG_GENERATE_ACPI_TABLE && !CONFIG_SANDBOX
+>
+> Maybe call it CONFIG_QFW_ACPI, "Read ACPI tables from QEMU".
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-This seems similar to the extension_board command in some ways.
-
-Raspberry Pi has some vaguely similar logic.
-
-I wonder if we could figure out a generic way of handling this?
+Yes that sounds good.
 
 Regards,
 Simon
