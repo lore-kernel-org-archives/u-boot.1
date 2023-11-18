@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72775C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 16:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5556C5ACB3
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3CFA86F7C;
-	Sat, 18 Nov 2023 17:42:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
+	by phobos.denx.de (Postfix) with ESMTP id 285F286EE5;
+	Sat, 18 Nov 2023 18:10:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="oJCRQwqd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lSkBesye";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECEF186BAC; Sat, 18 Nov 2023 17:42:25 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 291F786A6B; Sat, 18 Nov 2023 18:10:30 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFDEB86BF7
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 17:42:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=bedrocksystems.com
+ by phobos.denx.de (Postfix) with ESMTPS id 33F0786EB8
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:10:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-5bd5809f63aso1891997a12.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:42:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9c603e2354fso571736666b.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bedrocksystems.com; s=google; t=1700325730; x=1700930530; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=ofIv+UPSh3veN4mOPCftCPIlk0Oo16b32ZnIYd7U1wI=;
- b=oJCRQwqd4iIzriW2wpT48SJJGSI3BxmWeX7xVmbryIapsNH9JDUM+0uNR2OYkBBhwN
- OIfygozbxdZJaIzh3Pe9QFM4Nioj53lTCOYKK/ws5Kr8S67rHbqxOABOJyqN/PErTV9q
- pjwtU08ez6RqSRvHjz1oACFWr+XpJH6QGrwSYEbrWMnz7BPfWStcz3JPKzjEJSWOvJrK
- +/a7oeBYGZcMO3Z6eDlQqMPAjjdultiLV1rR+6UeKH1edr//JD/XR3LBoTyzZE71Nhfo
- WGCuKzroa/YaYwt3utPclIQ9WEOVUaWxsqexYXGlY9HlXt33IsJlaEc+wXhydvMH8jz5
- 7ApA==
+ d=chromium.org; s=google; t=1700327422; x=1700932222; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=76kAPuYL/YpEcKveCGdBWhoJsWqzjFudMNF6ewQj4c8=;
+ b=lSkBesyeo7VmJgMn0XswqyjmFLhWtvnOXbgR8FEMrilqT7rRR4+TPM6ZR1Jz6awAiB
+ OxhN/Iz1HVMLZI/dCKLp9nyu75Yku4WMRJnC7DhAnKLctlKDuRPNEdCvqPklY2hBmrra
+ iSV5BsBx0V4B/9hw76TAB2xaQnWLFLh1SQh1s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700325730; x=1700930530;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ofIv+UPSh3veN4mOPCftCPIlk0Oo16b32ZnIYd7U1wI=;
- b=GIX3M0eFVxUq9P8pdQQYU8zpDYKhDmoz2VhShPQqPpMM2oByHRq2S5RUFGqDyqLSWA
- 3mT16wpAihRc4baOTmXCgKMpnKPK0VU/1wmGk1ULQ20QZdsbf6nA8p5u9UhZPB9gDBDn
- LYgzpDoq6gsAv4IXLfdJrKiK6FDBndCXcwPX251aCCWqpmToruUbYp1lo5tG5VrcxrSD
- +782CxuJovr1RVenk6XOKmpd55bDFQYL/M4sSqrvAn4KzT2aH/RBzVSHUoJYjndCtX0N
- lJFGNwkpxo13XDp2Ao06tbwJRNI3Z8ETHEQZggQh8ALY2zZthQlWOqaCohAP1eaKH9VB
- W/Yg==
-X-Gm-Message-State: AOJu0YxOrxMiJ/voWSK/XFPqzXeBZdbWMNBc7Cx+/MsNgfXPc3WGu0gF
- oeGztgPFRlMkfFUn1Ov7/6MZ3o3sQFCAtGACjPJia8MXu929B5HFpg3+mw==
-X-Google-Smtp-Source: AGHT+IE4M2+fzyjViOXI861nCWiCWlkPYWWybnlUexJAiRPLzuyUy2X22vwgZRmp8k0SSTtokcWXqqQtq3lEVMU1pJc=
-X-Received: by 2002:a05:6a21:3804:b0:187:865f:b3d1 with SMTP id
- yi4-20020a056a21380400b00187865fb3d1mr1667229pzb.36.1700325730214; Sat, 18
- Nov 2023 08:42:10 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700327422; x=1700932222;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=76kAPuYL/YpEcKveCGdBWhoJsWqzjFudMNF6ewQj4c8=;
+ b=EvNn+UuAuZ9Xh0KL7mNeIB3JLc0ircwheIAIYQZAnokWom3JzYj1sF6BgkqzIWr/FH
+ HxIAiYqQQ23fdl2f/0bOqm7ceZH5bNVT6R/twJaLicxpdyVgs7y9ZwDOeHYbppANHofb
+ LcVTk/umWh9o4A+jYQ6scZFseP+m3qJy0uojDBQKpc9r+nFchaOJiCZwOHZcvP6X7eMI
+ DjHKb861bir9VFEPCBgLQcMjhNy2tdUv5Ya0FsJ0Eng+AHFE37crZCpyeyGBZscfPFz3
+ /QKvuuWQ6JFCr3fwua7+o3at6NlekZt+TsIOEZPEsOUty52RCrsNOE3055D1ccLxk+9s
+ kcXg==
+X-Gm-Message-State: AOJu0YwnVU9K7cezbRT6pMD8VSkcYspWEy2d8WVZkKZxGBkggBLUnq/7
+ 5LjDFURao3o0KtZi5Z1U0wVylWlXu5DAhxaV921bLg==
+X-Google-Smtp-Source: AGHT+IHAB9UTPxWENDRrESAk19gtY4zBVz3h8KABQiBYiId96Gg7iij8Zsfc1i3KbxH5U2lhvMxHlrbeB3kHM5tLUik=
+X-Received: by 2002:a17:907:801e:b0:9c3:dc6b:b7ad with SMTP id
+ ft30-20020a170907801e00b009c3dc6bb7admr2185298ejc.22.1700327422498; Sat, 18
+ Nov 2023 09:10:22 -0800 (PST)
 MIME-Version: 1.0
-From: Dmitry Malkin <dmitry@bedrocksystems.com>
-Date: Sat, 18 Nov 2023 17:41:59 +0100
-Message-ID: <CAKRNjQ0CKPJkR8ONivsOrb3fr=J-0f7ubvVfD7KWdo=g2dKCrA@mail.gmail.com>
-Subject: [RFC PATCH 2/2] rpi5: initial support
-To: u-boot@lists.denx.de
+References: <20231117223829.346652-1-afd@ti.com>
+In-Reply-To: <20231117223829.346652-1-afd@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 18 Nov 2023 10:10:00 -0700
+Message-ID: <CAPnjgZ0bg298+KMmtWeQLHTK51QZH3KcP+XrOG32b8Wqoy2_mw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] configs: keystone2: Remove unused SPL_MALLOC_F_SIZE
+ and KEYSTONE_SPL_STACK_SIZE
+To: Andrew Davis <afd@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Sat, 18 Nov 2023 17:42:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,51 +81,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rpi5: add initial memory map for bcm2712
+On Fri, 17 Nov 2023 at 15:38, Andrew Davis <afd@ti.com> wrote:
+>
+> These are leftover definitions. While here cleanup some leftover comments.
+>
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  include/configs/ti_armv7_keystone2.h | 22 ----------------------
+>  1 file changed, 22 deletions(-)
+>
 
----
- arch/arm/mach-bcm283x/init.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
-
-diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-index d76c8e5eb2..3424b116d5 100644
---- a/arch/arm/mach-bcm283x/init.c
-+++ b/arch/arm/mach-bcm283x/init.c
-@@ -68,6 +68,26 @@ static struct mm_region
-bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
-     }
- };
-
-+static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
-+    {
-+        .virt = 0x00000000UL,
-+        .phys = 0x00000000UL,
-+        .size = 0x3f800000UL,
-+        .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+             PTE_BLOCK_INNER_SHARE
-+    }, {
-+        .virt = 0x107c000000UL,
-+        .phys = 0x107c000000UL,
-+        .size = 0x0004000000UL,
-+        .attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+             PTE_BLOCK_NON_SHARE |
-+             PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+    }, {
-+        /* List terminator */
-+        0,
-+    }
-+};
-+
- struct mm_region *mem_map = bcm283x_mem_map;
-
- /*
-@@ -78,6 +98,7 @@ static const struct udevice_id board_ids[] = {
-     { .compatible = "brcm,bcm2837", .data = (ulong)&bcm283x_mem_map},
-     { .compatible = "brcm,bcm2838", .data = (ulong)&bcm2711_mem_map},
-     { .compatible = "brcm,bcm2711", .data = (ulong)&bcm2711_mem_map},
-+    { .compatible = "brcm,bcm2712", .data = (ulong)&bcm2712_mem_map},
-     { },
- };
-
--- 
-2.40.1
+Reviewed-by: Simon Glass <sjg@chromium.org>
