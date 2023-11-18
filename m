@@ -4,55 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75DF6C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 11:40:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6979EC2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 15:24:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8537D86CBD;
-	Sat, 18 Nov 2023 12:40:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EEFE86C47;
+	Sat, 18 Nov 2023 16:24:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qB+85cCY";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QiSB3sSj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SA63JCRq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54DB586E88; Sat, 18 Nov 2023 12:40:50 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 0045B86C83; Sat, 18 Nov 2023 16:24:03 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AA3A86BDB
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 12:40:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC40186BFA
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:23:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id AC70D413CE; 
- Sat, 18 Nov 2023 11:40:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700307640;
- bh=XCfHbyaO0frNlshKEc19+FLP7HUmUshFmnFziLFaC+Y=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=qB+85cCYlDabAj+I8VmoKlM3JiaSRp6/ILny5MPOxMJofzT/1BpDsurRgzdUXAie/
- W3eTvgCuGsXyN5OmTAf79N9TrJ+dOOyKzhFSr/3ZPgnJp2qQfmDo4OqZArosGKu1hV
- LNqOvneQCuKE2sGPkccZ8gMZZTKe6euBsQ6++G4fdbwkSAp15/tEtQqFD6uJ/oJUmn
- slYbqBq/xSXdxC9d4ExJqCR4fweCjWurLXyOugYnqp7llJ6vLZUP+hum0cquSaeCoR
- 7F++6+JVB648Q0Eopw5IYtTCGtlx1zUPIcFpllpIPnP1E0YhAfegkNBIs4QODZkxfj
- Z389aWjkVGfGA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] cmd: eficonfig: create shortened boot options
-Date: Sat, 18 Nov 2023 12:40:32 +0100
-Message-Id: <20231118114032.19098-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4SXcxS34CJz9sjr;
+ Sat, 18 Nov 2023 16:23:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1700321036;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=cv7bxHhcyKfFDkeZqWapacrGlE7XQsPTm+HYkYb7Xqg=;
+ b=QiSB3sSjWDlMoSbkga55zm9mRufFy3lYqNZp7Vre/1ITnn7dr78k4Upi0FY9K0G37tm+cz
+ /ybVdoz6O7qRZh2FbyqpOB9nfJB3HsuQSqWDf9oAg7t7zzb73AmZMaxCrDOskaAketUYw3
+ E1N/bWjjAgfkRUQeSbzAnxLYJ9AMZk02sYnRjO/+nFW/hlcJZEnt7eCYvEdn9ZaGbEcAtp
+ NU+lZN4u4UlP+KEurTUzxzTu76KwCXiR7IPdK0b98WFbXLNpQte2RDZojuFkJKBIlrgVLF
+ 3DFvrHKrcjzoHfgWdk/4NJJgta94jJOqvpeWig9N6hbFMpbZYOiqo+kHjxCI8w==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1700321034;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=cv7bxHhcyKfFDkeZqWapacrGlE7XQsPTm+HYkYb7Xqg=;
+ b=SA63JCRqJnjcAV2CsfZWWeSQ4NS/7x3/lvwHvMO0KfN2vVXv/orYsi4x9k5eZHYVu8vhyY
+ M+mJCFs/TrXqRppFRZVwaOA/B3WQiYpmoB3BtclFLEYQsQC+GJXgW47VF08nXAMpLFSwuD
+ MnowCcr3j/GJTbd+jW+4BZUoIFduOR9dJmokYwrIUybPs0YRDbsEUoygjmaT5o3G6EniNd
+ FTnFTN8TQTQ1C+ULJhzIxAuGAXtiQx0LRpYdzWfoPldSNlRtRK9q+UIn9WSl/JRiOH+pPC
+ 3CO/CVVWkWwBzE7AEh0A2BpbIEwUXatFfrMNSbuslNuSPPrt4edXc63Zc69IhA==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master-mmc-clock
+Date: Sat, 18 Nov 2023 16:23:17 +0100
+Message-ID: <20231118152341.63823-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 8f76ea3e4b02612d30e
+X-MBO-RS-META: 8pfkxor74u8gzepswd1zejckamjy7zun
+X-Rspamd-Queue-Id: 4SXcxS34CJz9sjr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,34 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The boot options created by eficonfig should use shortened device-paths to
-avoid problems if drives are enumerated in a different sequence.
+The following changes since commit 17e9db18f17b6cad278694d4a61df95e96bdf4f5:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v2:
-	Correctly handle the case that dp_volume does not refer to a block
-	device.
----
- cmd/eficonfig.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+  Merge tag 'doc-2024-01-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2023-11-11 09:22:54 -0500)
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index e6e8a0a488..34a59cb15d 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -528,7 +528,10 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
- 	p += fp_size;
- 	*((struct efi_device_path *)p) = END;
- 
--	dp = efi_dp_append(dp_volume, (struct efi_device_path *)buf);
-+	dp = efi_dp_shorten(dp_volume);
-+	if (!dp)
-+		dp = dp_volume;
-+	dp = efi_dp_append(dp, &fp->dp);
- 	free(buf);
- 
- 	return dp;
--- 
-2.40.1
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-mmc-clock
+
+for you to fetch changes up to 70d2c9940e54ada6bf9e1e538c958f13ccc97c38:
+
+  mmc: renesas-sdhi: Disable clock after tuning reset when possible (2023-11-13 04:12:47 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (1):
+      mmc: renesas-sdhi: Disable clock after tuning reset when possible
+
+ drivers/mmc/renesas-sdhi.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
