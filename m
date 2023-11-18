@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6979EC2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 15:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE3AC2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 16:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EEFE86C47;
-	Sat, 18 Nov 2023 16:24:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id AE82986BAC;
+	Sat, 18 Nov 2023 17:42:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QiSB3sSj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SA63JCRq";
+	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="QSKj1vt4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0045B86C83; Sat, 18 Nov 2023 16:24:03 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9603786BF7; Sat, 18 Nov 2023 17:41:53 +0100 (CET)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC40186BFA
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:23:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 328D286AB3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 17:41:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4SXcxS34CJz9sjr;
- Sat, 18 Nov 2023 16:23:56 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700321036;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=cv7bxHhcyKfFDkeZqWapacrGlE7XQsPTm+HYkYb7Xqg=;
- b=QiSB3sSjWDlMoSbkga55zm9mRufFy3lYqNZp7Vre/1ITnn7dr78k4Upi0FY9K0G37tm+cz
- /ybVdoz6O7qRZh2FbyqpOB9nfJB3HsuQSqWDf9oAg7t7zzb73AmZMaxCrDOskaAketUYw3
- E1N/bWjjAgfkRUQeSbzAnxLYJ9AMZk02sYnRjO/+nFW/hlcJZEnt7eCYvEdn9ZaGbEcAtp
- NU+lZN4u4UlP+KEurTUzxzTu76KwCXiR7IPdK0b98WFbXLNpQte2RDZojuFkJKBIlrgVLF
- 3DFvrHKrcjzoHfgWdk/4NJJgta94jJOqvpeWig9N6hbFMpbZYOiqo+kHjxCI8w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700321034;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=cv7bxHhcyKfFDkeZqWapacrGlE7XQsPTm+HYkYb7Xqg=;
- b=SA63JCRqJnjcAV2CsfZWWeSQ4NS/7x3/lvwHvMO0KfN2vVXv/orYsi4x9k5eZHYVu8vhyY
- M+mJCFs/TrXqRppFRZVwaOA/B3WQiYpmoB3BtclFLEYQsQC+GJXgW47VF08nXAMpLFSwuD
- MnowCcr3j/GJTbd+jW+4BZUoIFduOR9dJmokYwrIUybPs0YRDbsEUoygjmaT5o3G6EniNd
- FTnFTN8TQTQ1C+ULJhzIxAuGAXtiQx0LRpYdzWfoPldSNlRtRK9q+UIn9WSl/JRiOH+pPC
- 3CO/CVVWkWwBzE7AEh0A2BpbIEwUXatFfrMNSbuslNuSPPrt4edXc63Zc69IhA==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master-mmc-clock
-Date: Sat, 18 Nov 2023 16:23:17 +0100
-Message-ID: <20231118152341.63823-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6c431b91b2aso2765335b3a.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:41:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bedrocksystems.com; s=google; t=1700325706; x=1700930506; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=iU4t1zBvAl07M7i62a2UxshdDsSxeltA3hn3+9XrfvQ=;
+ b=QSKj1vt4n1ggg61AOk1LhHMYf9HUDKaj9PiGtejBO6Cno+R/gZYrYYaxogwOsjWDWC
+ SEanQE0t6WaatdVdkCUJm35izSaFEsMBXucK23t6alFEYTn0btGieC9HOrwI2S2DIjMX
+ y4BOBWoUClcbAMBH44GWj+t8kbTuOHO8lFpceR5xgZjlRt05wea2KqiCgxjXrnThlhRy
+ X71fx6uN7EFrnhKvz++M8a1+sswJ6ULPEZxfDiJJ3zHLFKoJYKntqhi5C65GTsQgClBi
+ dXOCeCCe3HTLdqGUqv/pj19sJUQ/djz5/AZG85J0J9BCZa84AQ1c8hoPQnKWrqhMbfRA
+ Zqaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700325706; x=1700930506;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iU4t1zBvAl07M7i62a2UxshdDsSxeltA3hn3+9XrfvQ=;
+ b=dMiX+gRLspQu4s9NzWyaEt8M3jwNbRxynQYIskh3i8Ls6XSBQMvcgYj6tgcKL+DiKf
+ b0FgYG2bLQIuii2bxDOKmSpGiVFPHiMOi8Tn4jM8CX3v0znxOss7JNuhURJKZ+TQokxl
+ 13deeY3hmWz5xh9C8WdAtCi9qCTwDkgsaLpxqeokZMbCuqQGubgeaoUHdWznPKSdRW43
+ S2Ts/oKa/oQsTYrvM7C451m3zOd8EnekPQJx4rxDXiRAhsGcrMhGr3CtuIA1+imkZDHC
+ N7z2LjVwPK8rSvGPBH4pZcJ5ehHBZ0Q+gqk93GCp/oj2Fc7ExSVFidEA17eCFqA5hgZz
+ V6yg==
+X-Gm-Message-State: AOJu0YwxC6X6DvV0a5GkwQOT+V/97ScUdQeOdbZ6A90jk8R2ar4vgFGG
+ qbdi4AmKkOPNaCyzro1l+VRyNPXoS3hN/hx1QIh5pNvOvyhAm5VAZJTe0Q==
+X-Google-Smtp-Source: AGHT+IE6ZLd9hQhoGoktGkt7zaSflRtFet1CzwrHH1nKdKvVmaAANL9P2AF6nD12xrgI8J80W7PIT8ZV5JY9NtZ5a0k=
+X-Received: by 2002:a05:6a20:2d09:b0:186:7eaf:7176 with SMTP id
+ g9-20020a056a202d0900b001867eaf7176mr3014274pzl.59.1700325706097; Sat, 18 Nov
+ 2023 08:41:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 8f76ea3e4b02612d30e
-X-MBO-RS-META: 8pfkxor74u8gzepswd1zejckamjy7zun
-X-Rspamd-Queue-Id: 4SXcxS34CJz9sjr
+From: Dmitry Malkin <dmitry@bedrocksystems.com>
+Date: Sat, 18 Nov 2023 17:41:34 +0100
+Message-ID: <CAKRNjQ3iYXO5b3NBBwsuyCeZoexfRyA+CCNxKRMNR_EfJiCVPw@mail.gmail.com>
+Subject: [RFC PATCH 0/2] rpi5: initial support
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sat, 18 Nov 2023 17:42:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,21 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 17e9db18f17b6cad278694d4a61df95e96bdf4f5:
+I was not able to boot rpi5 with the latest master. I run into
+dram_init() error:
+> DRAM:  mbox: Timeout waiting for response
+> bcm2835: Could not query ARM memory size
 
-  Merge tag 'doc-2024-01-rc3' of https://source.denx.de/u-boot/custodians/u-boot-efi (2023-11-11 09:22:54 -0500)
+Apparently there is a new peripheral layout and ARMC MBOX has a
+different offset within.
 
-are available in the Git repository at:
+Turns out there is a compatible node "brcm,bcm2835-mbox" for all RPIs
+(bcm238x/bcm271x).
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master-mmc-clock
+After fixing this I got to the point where mmu_setup() was hanging
+(looks like it was due to incorrect mapping). So I've added a
+definition of first gigabyte of RAM and SOC range for bcm2712 into
+rpi.c.
 
-for you to fetch changes up to 70d2c9940e54ada6bf9e1e538c958f13ccc97c38:
+With those two patches and rpi_arm64_defconfig (with disabled
+CONFIG_VIDEO_BCM2835) I'm able to get a working u-boot prompt (over
+serial). FDT comes from firmware (EEPROM).
 
-  mmc: renesas-sdhi: Disable clock after tuning reset when possible (2023-11-13 04:12:47 +0100)
+These patches are based on v2024.01-rc2 and tested with RPI5 8GB.
 
-----------------------------------------------------------------
-Marek Vasut (1):
-      mmc: renesas-sdhi: Disable clock after tuning reset when possible
+Known issues:
+* CONFIG_VIDEO_BCM2835 doesn't work.
+* MBOX get board revision (0x10002) doesn't work (the response status
+is 0x8000_0001).
 
- drivers/mmc/renesas-sdhi.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+
+Dmitry Malkin (2):
+  rpi5: add alternative way to get MBOX address via FDT node
+  rpi5: add initial memory map for bcm2712
+
+ arch/arm/mach-bcm283x/include/mach/base.h |  1 +
+ arch/arm/mach-bcm283x/include/mach/mbox.h |  4 ++--
+ arch/arm/mach-bcm283x/init.c              | 29 ++++++++++++++++++++++-
+ 3 files changed, 31 insertions(+), 3 deletions(-)
+
+-- 
+2.40.1
