@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE3AC2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 16:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAD43C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 16:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE82986BAC;
-	Sat, 18 Nov 2023 17:42:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DA9086F1F;
+	Sat, 18 Nov 2023 17:42:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="QSKj1vt4";
+	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="R4nOP5jB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9603786BF7; Sat, 18 Nov 2023 17:41:53 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id E5F3C86BFA; Sat, 18 Nov 2023 17:42:05 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 328D286AB3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 17:41:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E04FE86AB3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 17:41:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6c431b91b2aso2765335b3a.1
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:41:48 -0800 (PST)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2839b922c18so1103038a91.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:41:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bedrocksystems.com; s=google; t=1700325706; x=1700930506; darn=lists.denx.de;
+ d=bedrocksystems.com; s=google; t=1700325714; x=1700930514; darn=lists.denx.de;
  h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=iU4t1zBvAl07M7i62a2UxshdDsSxeltA3hn3+9XrfvQ=;
- b=QSKj1vt4n1ggg61AOk1LhHMYf9HUDKaj9PiGtejBO6Cno+R/gZYrYYaxogwOsjWDWC
- SEanQE0t6WaatdVdkCUJm35izSaFEsMBXucK23t6alFEYTn0btGieC9HOrwI2S2DIjMX
- y4BOBWoUClcbAMBH44GWj+t8kbTuOHO8lFpceR5xgZjlRt05wea2KqiCgxjXrnThlhRy
- X71fx6uN7EFrnhKvz++M8a1+sswJ6ULPEZxfDiJJ3zHLFKoJYKntqhi5C65GTsQgClBi
- dXOCeCCe3HTLdqGUqv/pj19sJUQ/djz5/AZG85J0J9BCZa84AQ1c8hoPQnKWrqhMbfRA
- Zqaw==
+ bh=Zt+xm0H7H77zcxTbKb+bTa+WYaPcMoNijUUckxVJFIk=;
+ b=R4nOP5jB4zZfiGxbtJQbh4OO7bdhYY3PQQsTUz/pF4y+zGzDu2UOyTotc5QxFnJKTC
+ fp3T/aEyrMtLSe3aZwFavOQQZ+dwzWLn5k58Aqf1kbqwoWBUHztR3TZ9Qe7CCx04iD96
+ /obReDT1g6xBLsM0Gql5puBQ9hs+0RgYsFB6TpClHweMGCiNkn8sxzBovWOtPaTrDkK3
+ p59OJp36E2cWsnLjiBJvrdPrzmCCbrBc0oL7wzaRLTMFNXf0thHLdijZkj4Q9g2zdtJe
+ 3UNPgFYKU4kaamWbfETQZcip2BbUyZynqh3LzQUakjhullKJJJmWUfqyml8ls7ziaS6G
+ gSjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700325706; x=1700930506;
+ d=1e100.net; s=20230601; t=1700325714; x=1700930514;
  h=to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=iU4t1zBvAl07M7i62a2UxshdDsSxeltA3hn3+9XrfvQ=;
- b=dMiX+gRLspQu4s9NzWyaEt8M3jwNbRxynQYIskh3i8Ls6XSBQMvcgYj6tgcKL+DiKf
- b0FgYG2bLQIuii2bxDOKmSpGiVFPHiMOi8Tn4jM8CX3v0znxOss7JNuhURJKZ+TQokxl
- 13deeY3hmWz5xh9C8WdAtCi9qCTwDkgsaLpxqeokZMbCuqQGubgeaoUHdWznPKSdRW43
- S2Ts/oKa/oQsTYrvM7C451m3zOd8EnekPQJx4rxDXiRAhsGcrMhGr3CtuIA1+imkZDHC
- N7z2LjVwPK8rSvGPBH4pZcJ5ehHBZ0Q+gqk93GCp/oj2Fc7ExSVFidEA17eCFqA5hgZz
- V6yg==
-X-Gm-Message-State: AOJu0YwxC6X6DvV0a5GkwQOT+V/97ScUdQeOdbZ6A90jk8R2ar4vgFGG
- qbdi4AmKkOPNaCyzro1l+VRyNPXoS3hN/hx1QIh5pNvOvyhAm5VAZJTe0Q==
-X-Google-Smtp-Source: AGHT+IE6ZLd9hQhoGoktGkt7zaSflRtFet1CzwrHH1nKdKvVmaAANL9P2AF6nD12xrgI8J80W7PIT8ZV5JY9NtZ5a0k=
-X-Received: by 2002:a05:6a20:2d09:b0:186:7eaf:7176 with SMTP id
- g9-20020a056a202d0900b001867eaf7176mr3014274pzl.59.1700325706097; Sat, 18 Nov
- 2023 08:41:46 -0800 (PST)
+ bh=Zt+xm0H7H77zcxTbKb+bTa+WYaPcMoNijUUckxVJFIk=;
+ b=fBejRSY7TTQEWDqduSDU2LHPxXozqQTKfuwdsg3DP1V2q58Dp/2xh12Za11vBTDqTk
+ WpWHFMcsOcMj9HeuxTGITZWncjoevpTBxYPDfTem1lNZO4AVobxYQs9JA8M7sfHyG3Hb
+ 9anP003NvYCT/ow5X3FDJiq+sErjoEew9VKoBTbTUJf9RAArOAD8KQThelGGYc1xpDDi
+ mk2n0m8qQLPWbMV3COwMP09UVmiwM1E1wNzXtSiAilM+VySM+Y25H1t3V5lbjFMXJDeZ
+ Bj5BnPncnH5neIbI2s0XPbdG+OxOtErvQcFtwWigrRvx3pu0kPEiyuNn3ULceovTCtQE
+ HBrg==
+X-Gm-Message-State: AOJu0Yy9KSqqr3skcwh0kiI3bTavVnjgyeVu/FDFrSrpfT1Qk8EbCy3g
+ 3lsQuNKwsZhjrOmdDeBagVCuFIBgZhFUBmuE+HAwIdMEPlpIgSC9H4Yz3w==
+X-Google-Smtp-Source: AGHT+IHITNZHJYwZqX90SdTlFjOjlykKnvQIvdZ8jN/PI6Qhw8mO5UsQH6nW4B4bVM5dWA+NubCpvQB8dH7bSuLB3rc=
+X-Received: by 2002:a17:90b:3ecb:b0:283:27e0:6548 with SMTP id
+ rm11-20020a17090b3ecb00b0028327e06548mr2505790pjb.47.1700325713921; Sat, 18
+ Nov 2023 08:41:53 -0800 (PST)
 MIME-Version: 1.0
 From: Dmitry Malkin <dmitry@bedrocksystems.com>
-Date: Sat, 18 Nov 2023 17:41:34 +0100
-Message-ID: <CAKRNjQ3iYXO5b3NBBwsuyCeZoexfRyA+CCNxKRMNR_EfJiCVPw@mail.gmail.com>
-Subject: [RFC PATCH 0/2] rpi5: initial support
+Date: Sat, 18 Nov 2023 17:41:43 +0100
+Message-ID: <CAKRNjQ0GwWEzYWQuFAVDan9Zj09V9a8f2HJ3+Y85J_2_Vtfdfg@mail.gmail.com>
+Subject: [RFC PATCH 1/2] rpi5: initial support
 To: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sat, 18 Nov 2023 17:42:48 +0100
@@ -81,42 +81,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I was not able to boot rpi5 with the latest master. I run into
-dram_init() error:
-> DRAM:  mbox: Timeout waiting for response
-> bcm2835: Could not query ARM memory size
+rpi5: add alternative way to get MBOX address via FDT node
 
-Apparently there is a new peripheral layout and ARMC MBOX has a
-different offset within.
+MBOX on RPI5/bcm2712 has a different offset. Find it via the
+"brcm,bcm2835-mbox" node.
+---
+ arch/arm/mach-bcm283x/include/mach/base.h | 1 +
+ arch/arm/mach-bcm283x/include/mach/mbox.h | 4 ++--
+ arch/arm/mach-bcm283x/init.c              | 8 +++++++-
+ 3 files changed, 10 insertions(+), 3 deletions(-)
 
-Turns out there is a compatible node "brcm,bcm2835-mbox" for all RPIs
-(bcm238x/bcm271x).
+diff --git a/arch/arm/mach-bcm283x/include/mach/base.h
+b/arch/arm/mach-bcm283x/include/mach/base.h
+index 4ccaf69693..8cd224921e 100644
+--- a/arch/arm/mach-bcm283x/include/mach/base.h
++++ b/arch/arm/mach-bcm283x/include/mach/base.h
+@@ -7,6 +7,7 @@
+ #define _BCM283x_BASE_H_
 
-After fixing this I got to the point where mmu_setup() was hanging
-(looks like it was due to incorrect mapping). So I've added a
-definition of first gigabyte of RAM and SOC range for bcm2712 into
-rpi.c.
+ extern unsigned long rpi_bcm283x_base;
++extern unsigned long rpi_bcm283x_mbox_addr;
 
-With those two patches and rpi_arm64_defconfig (with disabled
-CONFIG_VIDEO_BCM2835) I'm able to get a working u-boot prompt (over
-serial). FDT comes from firmware (EEPROM).
+ #ifdef CONFIG_ARMV7_LPAE
+ #ifdef CONFIG_TARGET_RPI_4_32B
+diff --git a/arch/arm/mach-bcm283x/include/mach/mbox.h
+b/arch/arm/mach-bcm283x/include/mach/mbox.h
+index 490664f878..ad086be467 100644
+--- a/arch/arm/mach-bcm283x/include/mach/mbox.h
++++ b/arch/arm/mach-bcm283x/include/mach/mbox.h
+@@ -38,8 +38,8 @@
 
-These patches are based on v2024.01-rc2 and tested with RPI5 8GB.
+ /* Raw mailbox HW */
 
-Known issues:
-* CONFIG_VIDEO_BCM2835 doesn't work.
-* MBOX get board revision (0x10002) doesn't work (the response status
-is 0x8000_0001).
+-#define BCM2835_MBOX_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
+-                 rpi_bcm283x_base + 0x0000b880; })
++#define BCM2835_MBOX_PHYSADDR ({ BUG_ON(!rpi_bcm283x_mbox_addr); \
++                 rpi_bcm283x_mbox_addr; })
 
+ struct bcm2835_mbox_regs {
+     u32 read;
+diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+index 7265faf6ce..d76c8e5eb2 100644
+--- a/arch/arm/mach-bcm283x/init.c
++++ b/arch/arm/mach-bcm283x/init.c
+@@ -116,6 +116,7 @@ static void rpi_update_mem_map(void) {}
+ #endif
 
-Dmitry Malkin (2):
-  rpi5: add alternative way to get MBOX address via FDT node
-  rpi5: add initial memory map for bcm2712
+ unsigned long rpi_bcm283x_base = 0x3f000000;
++unsigned long rpi_bcm283x_mbox_addr;
 
- arch/arm/mach-bcm283x/include/mach/base.h |  1 +
- arch/arm/mach-bcm283x/include/mach/mbox.h |  4 ++--
- arch/arm/mach-bcm283x/init.c              | 29 ++++++++++++++++++++++-
- 3 files changed, 31 insertions(+), 3 deletions(-)
+ int arch_cpu_init(void)
+ {
+@@ -126,7 +127,7 @@ int arch_cpu_init(void)
 
+ int mach_cpu_init(void)
+ {
+-    int ret, soc_offset;
++    int ret, soc_offset, mbox_offset;
+     u64 io_base, size;
+
+     rpi_update_mem_map();
+@@ -142,6 +143,11 @@ int mach_cpu_init(void)
+         return ret;
+
+     rpi_bcm283x_base = io_base;
++    rpi_bcm283x_mbox_addr = rpi_bcm283x_base + 0xb880;
++
++    mbox_offset = fdt_node_offset_by_compatible((void*)gd->fdt_blob,
+soc_offset, "brcm,bcm2835-mbox");
++    if (mbox_offset > 0)
++        rpi_bcm283x_mbox_addr =
+fdt_get_base_address((void*)gd->fdt_blob, mbox_offset);
+
+     return 0;
+ }
 -- 
 2.40.1
