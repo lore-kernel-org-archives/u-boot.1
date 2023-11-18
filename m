@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60FEDC54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 20:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0459CC2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 733B886F2A;
-	Sat, 18 Nov 2023 21:29:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 367C88749D;
+	Sat, 18 Nov 2023 22:06:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jBgYxGhx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P3FWu6LD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F7A986BFA; Sat, 18 Nov 2023 21:29:57 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 51E968711D; Sat, 18 Nov 2023 22:06:07 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A0AA86F87
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 21:29:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E8F68701D
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:05:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-540c54944c4so5928786a12.1
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 12:29:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-7a94c550cc8so109835939f.0
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:05:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700339388; x=1700944188; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=95MEEn6SeNp/ZlSaZJsx9+PIGaX/dVce5H4ZMRrd1Rg=;
- b=jBgYxGhxVHISxETj7Vwlz00Az8VIlfR4EADFUFNA6j1Z3ySqr6halSbe9jilm9Xb9g
- 7z/18IOvzk4fEFH1vvXel/VifXNw3Rfuwm/9LnmbO3aMR81ekNQJN1yF7W87LT3Vm/dn
- zy0s94D9zzDfqs9lTbr6lBEAEAcfuYqJz6JgpX3UZdAqcnKtzi0JKKGNYTOCrVQAD+bs
- xkWfdp/ULuUTXLuY7RgEZp2fxWcfzZksdOgRtMd8+6COAjc1lQxo53MFbHiQyFeG5qQb
- H/86W86cdozYT/c05WK4sUhPFf2yGbTPQnj3yJ+yC00YhZ2L0OIBUAPoH4uh67gFmENx
- q+UA==
+ d=chromium.org; s=google; t=1700341556; x=1700946356; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LzXkcCSsp+slrCG+DPZ2tlV+JWyDgj/mkJQKg1tlBLs=;
+ b=P3FWu6LDNhgwOdjBcVPEm915/Rb4QM7WAvKCavwBRzg19Y+iEFQVXTIFS79xckTWJZ
+ XovByPlqyhgp5ZOXsdlwdTTL5zSxrB9oddtk2Pm1MxUK7teVEJlXaSvg45KClzk0b7Zs
+ nyc3FnaZkWaxyS3SKnroWNgwbt5BMjsInDINM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700339388; x=1700944188;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=95MEEn6SeNp/ZlSaZJsx9+PIGaX/dVce5H4ZMRrd1Rg=;
- b=hy+glLEqgxCxr7IGNxSmfaI/r+g56MfNSuSjLOsY1YRdRgj42PDrdUxpoNk/O6kkyM
- CdXHw/+XPMWPhbeEIht7FBdPTrytDEM1zdELJ9+8XKBiFKyUnpDPd5QrBVgVdgrK+JQX
- WS9+Zz+7cnkPBzH19QRwTL/TWld3IWNCNVVPYMr4grXicJ+j+uofDxtzvcXr7XcdfzOs
- E+mBt21Sx9AITEv0U+7ohIay+o51oC3QWxVRz3cwHFEdNR51Xl+103DNMbPbjplXxnyn
- 7SPTjcSuNWjsKko/9nuGqSB5mdVf9ujaUv4ulBFlFCtgc2MjV4Dp0hf31gaUBYNaB/8x
- aK7w==
-X-Gm-Message-State: AOJu0Yw6Wt7KJ5oCDoC/eJ/La+b54DZni3oaLk3ApSgdQHEPn0iZ7YWa
- DMepMhNBb2s8WU9mkb0KFQ+cPwFiUGn4lJzISIY=
-X-Google-Smtp-Source: AGHT+IFRMxag63SUar0lAGh6G5Kmr+isY3mGc5QlG71uZXsgO0mjzqdLzvMMx9iOlWfv0NA/hpnHlQ==
-X-Received: by 2002:a05:6402:1815:b0:540:911b:72b1 with SMTP id
- g21-20020a056402181500b00540911b72b1mr2799978edy.7.1700339388076; 
- Sat, 18 Nov 2023 12:29:48 -0800 (PST)
-Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
- [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
- a21-20020a50ff15000000b0053de19620b9sm1953661edu.2.2023.11.18.12.29.47
+ d=1e100.net; s=20230601; t=1700341556; x=1700946356;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LzXkcCSsp+slrCG+DPZ2tlV+JWyDgj/mkJQKg1tlBLs=;
+ b=ezfhwtU43JSyOxFbpP8rWhlgLbyeZUEZ8bgS8waSMMouV5py5Zlgdnz7rLJJggDTxf
+ Y1rkhF2nJBLXYJ2kxwaoAdcKx52sc2fJNNnXFs9EXKs8M2qs64Onw0HsFFzs3sCLB2iP
+ 3I804sT7bpriWq3P6bxmYIvWB1YCJLLJPxpLU9nD57HKloWjvh8iaf2Mv7N1m+6QhqJz
+ lGmoKWVFvPweckAlYlotj/OVgdle+lYcJOZ37lWG0dnF04S6Xcm2YRHDpHU2ff9wqXL4
+ WDKNWpv99ydT9sPWHiBYgQksODIPEm9vQhIvvc1jt9zYArmHrVoF4q1c7qLQQEU7FPOg
+ 6y8Q==
+X-Gm-Message-State: AOJu0Yw0jYE9JfaAMIpF3BYtiJdVS07ICidRB7ErtVo5a2lbjAVSo7s/
+ M905IERtUxtRvjtcgl6DeU8F1XngVSo1/oqDjIGotw==
+X-Google-Smtp-Source: AGHT+IFccAMmXDtJUd8kaAzZx9YxYzHPsz/2A3GeRTKY2Qqg2Ri37aqSD4PFZN4OHC4pwuwcSTYz0A==
+X-Received: by 2002:a6b:e406:0:b0:7a9:5e03:a785 with SMTP id
+ u6-20020a6be406000000b007a95e03a785mr3659312iog.15.1700341556589; 
+ Sat, 18 Nov 2023 13:05:56 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.05.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 12:29:47 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com
-Cc: xypron.glpk@gmx.de,
-	masahisa.kojima@linaro.org,
-	raymond.mao@linaro.org
-Subject: Pull request for efi-next-18112023
-Date: Sat, 18 Nov 2023 22:29:45 +0200
-Message-Id: <20231118202945.265566-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.40.1
+ Sat, 18 Nov 2023 13:05:56 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v3 01/32] arm: x86: Drop discarding of command linker-lists
+Date: Sat, 18 Nov 2023 14:04:49 -0700
+Message-ID: <20231118210547.577026-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
+References: <20231118210547.577026-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,83 +90,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Since we can now cleanly disable CMDLINE when needed, drop the rules
+which discard the command code.  It will not be built in the first
+place.
 
-The following changes since commit ae7ec8b0be41b59ef323f7531c0fe6745e8fef45:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
 
-  Merge branch '2023-11-16-assorted-updates' into next (2023-11-17 08:38:05 -0500)
+(no changes since v1)
 
-are available in the Git repository at:
+ arch/arm/cpu/u-boot.lds     | 3 ---
+ arch/x86/cpu/u-boot-64.lds  | 4 ----
+ arch/x86/cpu/u-boot-spl.lds | 4 ----
+ arch/x86/cpu/u-boot.lds     | 4 ----
+ 4 files changed, 15 deletions(-)
 
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/efi-next-18112023
+diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+index fc4f63d83489..7724c9332c3b 100644
+--- a/arch/arm/cpu/u-boot.lds
++++ b/arch/arm/cpu/u-boot.lds
+@@ -14,9 +14,6 @@ OUTPUT_ARCH(arm)
+ ENTRY(_start)
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+ #if defined(CONFIG_ARMV7_SECURE_BASE) && defined(CONFIG_ARMV7_NONSEC)
+ 	/*
+ 	 * If CONFIG_ARMV7_SECURE_BASE is true, secure code will not
+diff --git a/arch/x86/cpu/u-boot-64.lds b/arch/x86/cpu/u-boot-64.lds
+index d0398ff00d71..00a6d8691211 100644
+--- a/arch/x86/cpu/u-boot-64.lds
++++ b/arch/x86/cpu/u-boot-64.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
+ 
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ #ifdef CONFIG_TEXT_BASE
+ 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
+ #endif
+diff --git a/arch/x86/cpu/u-boot-spl.lds b/arch/x86/cpu/u-boot-spl.lds
+index a0a2a06a18cd..50b4b1608552 100644
+--- a/arch/x86/cpu/u-boot-spl.lds
++++ b/arch/x86/cpu/u-boot-spl.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
+ 
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ 	. = IMAGE_TEXT_BASE;	/* Location of bootcode in flash */
+ 	__text_start = .;
+ 	.text  : {
+diff --git a/arch/x86/cpu/u-boot.lds b/arch/x86/cpu/u-boot.lds
+index a31f4220a000..c418ff44aa08 100644
+--- a/arch/x86/cpu/u-boot.lds
++++ b/arch/x86/cpu/u-boot.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
+ 
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
+ 	__text_start = .;
+ 
+-- 
+2.43.0.rc0.421.g78406f8d94-goog
 
-for you to fetch changes up to c022eed4bedf2e16e737fde22b03289d2a48cb27:
-
-  doc: uefi: add HTTP Boot support (2023-11-18 10:08:09 +0200)
-
-EFI HTTP Boot is currently supported by using a combination of
-wget, blkmap and bootefi commands. The user has to download the
-image, mount it using blkmap and then execute the efi installer
-using bootefi.
-This series simplifies the user experience. Instead of doing all the
-steps manually, users can now enable a new Kconfig (EFI_HTTP_BOOT)
-which will select wget, blkmap and dns options. They can then use
-efidebug command to add a boot option for the EFI Bootmanager using
-=> efidebug boot add -u 3 netinst http://<path>
-=> efidebug boot order 3
-=> bootefi bootmgr
-
-The boot manager will automatically download and mount the image.
-Once it's mounted it will locate and launch the installer.
-
-It's worth noting that this rarely fails, but the reason is irrelevant
-to the current patchset. More information can be found here
-https://lore.kernel.org/u-boot/CAOMZO5CoduEgwgdQiybmoKh6qQZOezUtRRQO4ecaGdZBBz5dDw@mail.gmail.com/
-The tl;dr is that wget sometimes fails to download the file correctly
-or set the size env variables. We expect all these to be solved once
-LWIP is stable and pulled
-
-The CI reported no issues
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/18623
-Please consider pulling!
-
-----------------------------------------------------------------
-Add EFI HTTP Boot support options for the EFI Bootmanager
-
-----------------------------------------------------------------
-Masahisa Kojima (8):
-      net: wget: prevent overwriting reserved memory
-      net: wget: add wget with dns utility function
-      blk: blkmap: add ramdisk creation utility function
-      efi_loader: add missing const classifier for event service
-      efi_loader: add return to efibootmgr event group
-      efi_loader: support boot from URI device path
-      cmd: efidebug: add uri device path
-      doc: uefi: add HTTP Boot support
-
-Raymond Mao (1):
-      efi_loader: Boot var automatic management
-
- cmd/bootefi.c                                      |  12 +
- cmd/efidebug.c                                     |  78 +++++
- doc/develop/uefi/uefi.rst                          |  34 ++
- drivers/block/Makefile                             |   3 +-
- drivers/block/blkmap.c                             |  15 -
- drivers/block/blkmap_helper.c                      |  53 +++
- include/blkmap.h                                   |  29 ++
- include/efi_api.h                                  |   5 +-
- include/efi_loader.h                               |   4 +-
- include/net.h                                      |  17 +
- lib/efi_loader/Kconfig                             |   9 +
- lib/efi_loader/efi_bootmgr.c                       | 386 +++++++++++++++++++++
- lib/efi_loader/efi_boottime.c                      |   7 +-
- lib/efi_loader/efi_disk.c                          |  18 +
- lib/efi_loader/efi_setup.c                         |   7 +
- net/wget.c                                         | 205 ++++++++++-
- test/py/tests/test_efi_secboot/test_signed.py      |  42 +--
- .../py/tests/test_efi_secboot/test_signed_intca.py |  14 +-
- test/py/tests/test_efi_secboot/test_unsigned.py    |  14 +-
- test/py/tests/test_fs/test_erofs.py                |   9 +
- .../py/tests/test_fs/test_squashfs/test_sqfs_ls.py |   9 +
- 21 files changed, 908 insertions(+), 62 deletions(-)
- create mode 100644 drivers/block/blkmap_helper.c
