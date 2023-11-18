@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 348B6C072A2
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 00:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21527C072A2
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 00:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6825E87513;
-	Sat, 18 Nov 2023 01:49:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9A6608751F;
+	Sat, 18 Nov 2023 01:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="Kj/bcpxh";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lk+dsan4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F44687021; Sat, 18 Nov 2023 01:48:41 +0100 (CET)
+ id 8C0A587021; Sat, 18 Nov 2023 01:48:46 +0100 (CET)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 71830874E4
+ by phobos.denx.de (Postfix) with ESMTP id D9E72874EE
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 01:48:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 55C7220B74C1;
+ by linux.microsoft.com (Postfix) with ESMTPSA id 97B6720B74C3;
  Fri, 17 Nov 2023 16:48:27 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 55C7220B74C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 97B6720B74C3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
  s=default; t=1700268507;
- bh=Qhv5BtGYfOjqlxzwOFQ7kfMT9BHWrT2ggrZl0W2dI6A=;
+ bh=m1WQRGiqoS+ST7kLsm5tkJySnAH11vVnWNnr7opwCls=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Kj/bcpxheBg8XZWUwmVJAOyZ0Bieu9nB2hJfpiYOXQJt7ifQsSUumeMxawthqZFhu
- +WNoUqdFT5qS5lE9b3aARwB1lzUVIndol7WWA4bAkhnPhglH3ORSTyiA6P3fMYKt3x
- V8tzEkSfLcKe+qpH7KrO9I5Tq40gl7WYLWIEGwSc=
+ b=lk+dsan4rdLOldWEfi82Wh6duHCbNadvepr8wMnw2bmoe+qxHhhKdMuq4AELohkbj
+ Wo+aOyZHyiEFM0VoqEcuglAI1vX9v5ZZyOuIuEF213D7F12cOcj7oxrL8VKN9ljn0Z
+ kosAorKJ8wh0+ub+lU0Ka2MhMFurtvQmkbn1bLLI=
 From: seanedmond@linux.microsoft.com
 To: u-boot@lists.denx.de
 Cc: xypron.glpk@gmx.de,
 	pbrobinson@gmail.com,
 	trini@konsulko.com
-Subject: [PATCH v5 1/3] net: Additional fixes for dhcp option 209
-Date: Fri, 17 Nov 2023 16:48:24 -0800
-Message-ID: <20231118004826.157835-2-seanedmond@linux.microsoft.com>
+Subject: [PATCH v5 3/3] net: bootp: add config option BOOTP_RANDOM_XID
+Date: Fri, 17 Nov 2023 16:48:26 -0800
+Message-ID: <20231118004826.157835-4-seanedmond@linux.microsoft.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231118004826.157835-1-seanedmond@linux.microsoft.com>
 References: <20231118004826.157835-1-seanedmond@linux.microsoft.com>
@@ -65,89 +65,85 @@ X-Virus-Status: Clean
 
 From: Sean Edmond <seanedmond@microsoft.com>
 
-Addresses feedback from latest review:
-- Enable option 209 by default
-- Set pxelinux_configfile to NULL to avoid potential double free
-- change hardcoced 209 to a define
+The new config option BOOTP_RANDOM_XID will randomize the transaction ID
+for each new BOOT/DHCPv4 exchange.
 
 Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 ---
 
-changes in v4:
-- rebase master and resolve conflicts
-- change commit description for this patch (this is now
-  an enhancement patch)
-- default y for BOOTP_PXE_DHCP_OPTION (feedback from review)
+changes in v5:
+- fix depends for BOOTP_RANDOM_XID:
+  "depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)"
 
 changes in v3:
-- add define for option 209 and rfc5071 reference
+- Add depends for BOOTP_RANDOM_XID
 
- cmd/Kconfig | 1 +
- cmd/pxe.c   | 2 ++
- net/bootp.c | 4 ++--
- net/bootp.h | 2 ++
- 4 files changed, 7 insertions(+), 2 deletions(-)
+ cmd/Kconfig |  7 +++++++
+ net/bootp.c | 31 +++++++++++++++++--------------
+ 2 files changed, 24 insertions(+), 14 deletions(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index df6d71c103f..ae846b204dc 100644
+index 93bf752035c..baab359c55b 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -1842,6 +1842,7 @@ config BOOTP_PXE_CLIENTARCH
+@@ -1853,6 +1853,13 @@ config BOOTP_VCI_STRING
+ 	default "U-Boot.arm" if ARM
+ 	default "U-Boot"
  
- config BOOTP_PXE_DHCP_OPTION
- 	bool "Request & store 'pxe_configfile' from BOOTP/DHCP server"
-+	default y
- 	depends on BOOTP_PXE
++config BOOTP_RANDOM_XID
++	bool "Send random transaction ID to BOOTP/DHCP server"
++	depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)
++	help
++	  Selecting this will allow for a random transaction ID to get
++	  selected for each BOOTP/DHCPv4 exchange.
++
+ if CMD_DHCP6
  
- config BOOTP_VCI_STRING
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 21134eb7a30..9404f445187 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -65,6 +65,8 @@ static int pxe_dhcp_option_path(struct pxe_context *ctx, unsigned long pxefile_a
- 	int ret = get_pxe_file(ctx, pxelinux_configfile, pxefile_addr_r);
- 
- 	free(pxelinux_configfile);
-+	/* set to NULL to avoid double-free if DHCP is tried again */
-+	pxelinux_configfile = NULL;
- 
- 	return ret;
- }
+ config DHCP6_PXE_CLIENTARCH
 diff --git a/net/bootp.c b/net/bootp.c
-index 68002909634..24547cf7bfd 100644
+index 89425717328..49cd9064436 100644
 --- a/net/bootp.c
 +++ b/net/bootp.c
-@@ -603,7 +603,7 @@ static int dhcp_extended(u8 *e, int message_type, struct in_addr server_ip,
- 	*cnt += 1;
- #endif
- 	if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
--		*e++ = 209;	/* PXELINUX Config File */
-+		*e++ = DHCP_OPTION_PXE_CONFIG_FILE;	/* PXELINUX Config File */
- 		*cnt += 1;
+@@ -837,22 +837,25 @@ void bootp_request(void)
+ 
+ 	/* Only generate a new transaction ID for each new BOOTP request */
+ 	if (bootp_try == 1) {
+-		/*
+-		 *	Bootp ID is the lower 4 bytes of our ethernet address
+-		 *	plus the current time in ms.
+-		 */
+-		bootp_id = ((u32)net_ethaddr[2] << 24)
+-			| ((u32)net_ethaddr[3] << 16)
+-			| ((u32)net_ethaddr[4] << 8)
+-			| (u32)net_ethaddr[5];
+-		bootp_id += get_timer(0);
+-		bootp_id = htonl(bootp_id);
+-		bootp_add_id(bootp_id);
+-		net_copy_u32(&bp->bp_id, &bootp_id);
+-	} else {
+-		net_copy_u32(&bp->bp_id, &bootp_id);
++		if (IS_ENABLED(CONFIG_BOOTP_RANDOM_XID)) {
++			srand(get_ticks() + rand());
++			bootp_id = rand();
++		} else {
++			/*
++			 *	Bootp ID is the lower 4 bytes of our ethernet address
++			 *	plus the current time in ms.
++			 */
++			bootp_id = ((u32)net_ethaddr[2] << 24)
++				| ((u32)net_ethaddr[3] << 16)
++				| ((u32)net_ethaddr[4] << 8)
++				| (u32)net_ethaddr[5];
++			bootp_id += get_timer(0);
++			bootp_id = htonl(bootp_id);
++		}
  	}
- 	/* no options, so back up to avoid sending an empty request list */
-@@ -914,7 +914,7 @@ static void dhcp_process_options(uchar *popt, uchar *end)
- 				net_boot_file_name[size] = 0;
- 			}
- 			break;
--		case 209:	/* PXELINUX Config File */
-+		case DHCP_OPTION_PXE_CONFIG_FILE:	/* PXELINUX Config File */
- 			if (IS_ENABLED(CONFIG_BOOTP_PXE_DHCP_OPTION)) {
- 				/* In case it has already been allocated when get DHCP Offer packet,
- 				 * free first to avoid memory leak.
-diff --git a/net/bootp.h b/net/bootp.h
-index 4e32b19d424..24b32c73f62 100644
---- a/net/bootp.h
-+++ b/net/bootp.h
-@@ -91,6 +91,8 @@ typedef enum { INIT,
- #define DHCP_NAK      6
- #define DHCP_RELEASE  7
  
-+#define DHCP_OPTION_PXE_CONFIG_FILE	209	/* "ConfigFile" option according to rfc5071 */
-+
- /**********************************************************************/
- 
- #endif /* __BOOTP_H__ */
++	bootp_add_id(bootp_id);
++	net_copy_u32(&bp->bp_id, &bootp_id);
+ 	/*
+ 	 * Calculate proper packet lengths taking into account the
+ 	 * variable size of the options field
 -- 
 2.42.0
 
