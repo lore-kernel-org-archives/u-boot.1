@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B297C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A69C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 825078744B;
+	by phobos.denx.de (Postfix) with ESMTP id DD4F9874F0;
 	Sat, 18 Nov 2023 22:06:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kDnPfiTS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xa3o8u1P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1153A874CC; Sat, 18 Nov 2023 22:06:13 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id F3E5F874D5; Sat, 18 Nov 2023 22:06:13 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64061870E2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40305870F9
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7b06afbd3cdso133360139f.2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:01 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7a94c550cc8so109837239f.0
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700341560; x=1700946360; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700341561; x=1700946361; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nNVaek+O7GjkmT8Y0EBZ3p1EOozK169Cakl7Vz5Z2Tk=;
- b=kDnPfiTSfkVP4ZPUOGdLTDq6jycDft1e+5hCP2EcAUcUi91WhEU/n2bLVhhyuBQ8wQ
- VVu7XH20erDh7AHtcpf9SB/Isl/0gRxHEQ0Vb/FIYJjvwE2uPi9x69vlTXrU7c0DdHPk
- VYQxCkMJIouvHd/OHF1bO1yH71B1Tr88bTf+A=
+ bh=XK388huLgge56Hj7hiy5i3x6lUCDWRrEdn3EMHObIwM=;
+ b=Xa3o8u1PQLm6S+a+cxU//5sylfjcF6+pw/RRsUQ6E7tQyXW00YNs8dglEhmszmtync
+ Ug92/SAGM50IVl58KEbvr8LqXM2JLmRSQ3B/I+Sz/Uv/yJKp7yvJsmKrJ7yAHocVPgUd
+ 3h+LKr8YlyA5JTs8M+plMgP5y7cmEb9KwxEb8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700341560; x=1700946360;
+ d=1e100.net; s=20230601; t=1700341561; x=1700946361;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nNVaek+O7GjkmT8Y0EBZ3p1EOozK169Cakl7Vz5Z2Tk=;
- b=E6/jZ4+j+LMkWwiG/9l7Rw0sQsQSW2MrlmJp1GZcR37BCSNaz0Xrdn26ByOnixM3QU
- x7zj4HcL2sI7ZeFnBxmpO+liknnA9lZRXdrdeWbim49DADT4yRWcz2IV3tZ4QQl3KgS4
- x5FCAm5ozw2banmK2RZ7XlMqE62JEbLlA8YVvhLPJ5jiwbsSP/lXXHDazeVn91+3ps/p
- 6d7S33n/DE1fCzU33bkL3on37BC77+fGI/8G/7pVhCxZVpk7nzyVhLyJuPu1qB+NUTAy
- pgvqG8EiLBUQvSBsCti000LPWH5upV+KnGO4agpW5y+3CGDFkP8phjJGBkXOISTLbahK
- mamg==
-X-Gm-Message-State: AOJu0YxWJZ7oVRqz/SqOrPiEbvqXmX4FP6iMoswuQtD7Ik2Yg6Y/tYbY
- SK/M6AaTvI/OitL62m1q185Fh1ptt8yAYH4rpXnPoQ==
-X-Google-Smtp-Source: AGHT+IGNk0W29Gq0Nubf6FZNzI8Uc7Vg8PKj6EYv2WbKwLTEgshrtsi7m8tXlVFwUx1291HrlS19Dw==
-X-Received: by 2002:a5e:8d03:0:b0:7a9:9235:7817 with SMTP id
- m3-20020a5e8d03000000b007a992357817mr3542832ioj.11.1700341560040; 
+ bh=XK388huLgge56Hj7hiy5i3x6lUCDWRrEdn3EMHObIwM=;
+ b=Kwl1xXxPjlIoMV+LnMu2hbYWHdCbGi1L1Bl35WVvALkXpdo2ffeWHwLaUJ7jnuHP1v
+ KITmJsJZVLXOwJ5PkEv9lhuNaknjeNzBgtXQAFkg7E4rJ9NOKmeYyA8EBYFz7ltizw3m
+ KJpXnJUeyCyS+lFVMD55SOyJYJWv4J7+5jGnR9tm5SnoCtN3tMKgU06jx3GiLQNj2ebm
+ UaRu74OptJGn/G2WFX00xlJOpo7WmMMyeny0kv9hXbScinoTw7iSdThrSA9nhNaOp2L6
+ 6zzUxWrW0pgqYnK15Lt/onG76o/mBMFaZ4biuTEDi+eWwhI8IpZX/pfQ+lfc3ZBc/d8R
+ b0Sg==
+X-Gm-Message-State: AOJu0YyRXsZKEbyrCWE4tnsyQk9W9ELL+982IdlcxNyHwjxf6klHtTK8
+ yPEm/YMCSr8WBOd+jb3s7ylfaAT3hF5ujaqTMZmwTw==
+X-Google-Smtp-Source: AGHT+IEkhc/95cMpq/rzINWvtHS3iI/ZVWwvhLq80JOEEQo267wFAfgOwewAa3jpcjaA5nuVnsd1Fw==
+X-Received: by 2002:a6b:c94d:0:b0:7b0:2664:ba1f with SMTP id
+ z74-20020a6bc94d000000b007b02664ba1fmr3337403iof.2.1700341560785; 
  Sat, 18 Nov 2023 13:06:00 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.05.59
+ eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.06.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 13:05:59 -0800 (PST)
+ Sat, 18 Nov 2023 13:06:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 05/32] bootstd: Add missing header file from bootdev.h
-Date: Sat, 18 Nov 2023 14:04:53 -0700
-Message-ID: <20231118210547.577026-6-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v3 06/32] bootm: Drop arguments from bootm_start()
+Date: Sat, 18 Nov 2023 14:04:54 -0700
+Message-ID: <20231118210547.577026-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
 References: <20231118210547.577026-1-sjg@chromium.org>
@@ -89,30 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a dm/uclass-id.h to the bootdev header file, since it uses
-enum uclass_id
+This function does not use its arguments. Drop them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- include/bootdev.h | 1 +
- 1 file changed, 1 insertion(+)
+ boot/bootm.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/include/bootdev.h b/include/bootdev.h
-index b079a91b5b7f..c1362673d418 100644
---- a/include/bootdev.h
-+++ b/include/bootdev.h
-@@ -7,6 +7,7 @@
- #ifndef __bootdev_h
- #define __bootdev_h
+diff --git a/boot/bootm.c b/boot/bootm.c
+index cb61485c226c..fda97706fc26 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -69,8 +69,7 @@ static void boot_start_lmb(struct bootm_headers *images)
+ static inline void boot_start_lmb(struct bootm_headers *images) { }
+ #endif
  
-+#include <dm/uclass-id.h>
- #include <linux/list.h>
+-static int bootm_start(struct cmd_tbl *cmdtp, int flag, int argc,
+-		       char *const argv[])
++static int bootm_start(void)
+ {
+ 	memset((void *)&images, 0, sizeof(images));
+ 	images.verify = env_get_yesno("verify");
+@@ -783,7 +782,7 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	 * any error.
+ 	 */
+ 	if (states & BOOTM_STATE_START)
+-		ret = bootm_start(cmdtp, flag, argc, argv);
++		ret = bootm_start();
  
- struct bootflow;
+ 	if (!ret && (states & BOOTM_STATE_PRE_LOAD))
+ 		ret = bootm_pre_load(cmdtp, flag, argc, argv);
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
