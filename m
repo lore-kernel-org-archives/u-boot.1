@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2CDC54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 07:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 082C4C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 07:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C76786E42;
-	Sat, 18 Nov 2023 08:34:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5ADFC86D9E;
+	Sat, 18 Nov 2023 08:36:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M6WcRCvz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z1UPbu5b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7412E86E81; Sat, 18 Nov 2023 08:34:03 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 047B786CBD; Sat, 18 Nov 2023 08:36:14 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 168B986D9E
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:33:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A43C86E42
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50949b7d7ffso3895498e87.0
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:33:58 -0800 (PST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2c5071165d5so34474581fa.0
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:36:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700292837; x=1700897637; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700292968; x=1700897768; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qpTbf71UwG6AjE06fMPrZz+lEps4VRicf05x37iQ46E=;
- b=M6WcRCvzV8u4JZrItwF6heqPf4l2FmiYuJ6IYGnn2THtyOscAd0gAaQd5Kmuxfuvli
- ghs7ZWAWLC/mk20Vxbk3+bju7hZ95d/4+WuxCdCyu9fgkzUpvOjFOAoelcXJTlsrfvbJ
- zBPOpz+EUs7JbsCcK6jONoH1rGZCs6/6rP8kXEMU2SHbflJlH7onzK/lQJU9YGgHrUu2
- WrkRtWKwxqrpgjNom65XejAqy4thM1HV0Z7U1PCBNmNmI3OCeeTKf9KUppSLbM8n3Y7h
- 7uQOAbh9pVPk3128Q7ntvprcsjmSprrjpMUl1IFa37L81uo41+RewQbvQFATqYpDY3NW
- wiaQ==
+ bh=JSrdffDTlLIvNxjuslDHGB/gkOxpqoo0kMkzmga/GNM=;
+ b=z1UPbu5bOvV+DEqENB+MU1IoWeLlsizj2WfUkPFJszW5ilQKjzUbZicWCn7fsBuG+j
+ +dB7pqCraOloiakL25E58CQXR35MbQNAqfjzWQJ65ZF34pJNHkSlonYHqWmI5GtcEbXa
+ +ZhkrwnFV6QZFyJVjhBrlNTJB2mD2KpxQAlU50cHIkjuUbMZsoysW5x0flqH8uBF0hGy
+ L69OvZj4uKGJxtR//TwBur3+eVmigznlieyhqmJQold3BDC8bNwqjQUOnsmIMhM1OcSp
+ DIanBVgK6/qpukORGNMtCRvh1K7Zmzb3MQxe/KslfB2h3TXrOT2rvLmHEOe0Kvt/UT1M
+ BA1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700292837; x=1700897637;
+ d=1e100.net; s=20230601; t=1700292968; x=1700897768;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qpTbf71UwG6AjE06fMPrZz+lEps4VRicf05x37iQ46E=;
- b=AKxMIiGpBD6xUtJH16EGFyBP9EfRNTXzcevOZNbZ/2PqFTJ3YrEKtJuYT0xup1LL3d
- gMqGwSg6naXbBLWhKu9aBxyAasrsiCUVAtW9udRTBIHOabXP3c1ZjTbmd/0kDo5Y0W2R
- 6EiCDoXmDOTN68x54KL88N8zjVx6qsXQSKaYkwhPEjOlleg5JejS4KQh/3QYXLghsXyQ
- hckXvWQw5gvkrhJMdSmo12aMCylpg+e5QthCWLyBPJculjyBFVNTkPS8+mTmzNHnKUJA
- W7PP7KR4x28KrDyieMZam9Eum2thdPSFhZpjHv7eyPbO+ZbGhE+MalhQ3zvhu+AvrgGj
- EbQg==
-X-Gm-Message-State: AOJu0YykPnyYtRB5XmQh982R7S0+vwQ/y1P4ui5lSc1uKdU0cHpTZOPn
- M1afEeDR9EH2JBH/8+Xdg+bwntnXJllGhowmfFE0Ag==
-X-Google-Smtp-Source: AGHT+IGAUmfgha4QwBLoABgVqNkqJaoVnE5L9pfd0hg6QM5/nDfGk1hm/WBWf1A4L9e2P4s3BiCMOJsJZJr+aD4KFek=
-X-Received: by 2002:a19:7616:0:b0:50a:a2cb:cd72 with SMTP id
- c22-20020a197616000000b0050aa2cbcd72mr1151740lff.68.1700292837162; Fri, 17
- Nov 2023 23:33:57 -0800 (PST)
+ bh=JSrdffDTlLIvNxjuslDHGB/gkOxpqoo0kMkzmga/GNM=;
+ b=gX2/UxGP2xAhXKN2n3pVhNwJT/NLPrWeo4Gm1Ye+xwkF38GRB2Yn1cRbajbr5Ajf26
+ 215EYtwZWaGUN51KlaagqgJHxany7zjreitIVjoF+6e2wkuk6pCYzK9DH2kWIUic2HzD
+ jUPIW7jndPy/2xvC2bkDbOPieVbx2Yosz02DBDXM2v8tE3cgGcl7XSNjq3lx5vzrNzSF
+ ROb8zXL+tdmdC5zpDoepXPcGJTDoHYAQizCU3bkMbzYovQE68IFMVYRtLh/oDlzo8Pu9
+ Y328CRj/to4K7SRPm8F8pNQnsM8NZhjOg/E7VFcv6MZNAaV1NBgNBYlMEufXutifXnJU
+ 0bWQ==
+X-Gm-Message-State: AOJu0YzRP+VBWNivefWi7qGRuIOda+NmHigccv6TELWoNUsaXKBq/M1b
+ iOVIr6NxnndOu+vWKMTpROOUAoMQpl7M6jqokiKzwQ==
+X-Google-Smtp-Source: AGHT+IHfap8rej7O/6Tv2di4YQb0Rcu3bA81gAhe6pUaT2dWhReAUe0DXEHwHzLKjJ7wTgA7qetal7TBtB07S/RgLGo=
+X-Received: by 2002:a2e:81d8:0:b0:2c6:f625:cc61 with SMTP id
+ s24-20020a2e81d8000000b002c6f625cc61mr1354307ljg.31.1700292968608; Fri, 17
+ Nov 2023 23:36:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117020207.948636-1-seanedmond@linux.microsoft.com>
- <20231117020207.948636-3-seanedmond@linux.microsoft.com>
-In-Reply-To: <20231117020207.948636-3-seanedmond@linux.microsoft.com>
+References: <20231116230806.20506-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231116230806.20506-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 18 Nov 2023 09:33:21 +0200
-Message-ID: <CAC_iWjJf87DM=J0aKUHbOMj8ZhMi=8UtDEEyHRSL3Vv0s+iarQ@mail.gmail.com>
-Subject: Re: [PATCH v5 2/5] fdt: kaslr seed from RNG device
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, trini@konsulko.com, 
- sjg@chromium.org
+Date: Sat, 18 Nov 2023 09:35:32 +0200
+Message-ID: <CAC_iWj+=XdBzhnLvTp9Sv=bc6aC5pzUQD0ZQkUdagAhJ037Adw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: eficonfig: create shortened boot options
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,102 +84,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean
-There are a few reviewed-by tags missing since v3/v4.  Any reason you
-dropped those? The change log doesn't mention anything
+Hi Heinrich
+
+On Fri, 17 Nov 2023 at 01:08, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> The boot options created by eficonfig should use shortened device-paths to
+> avoid problems if drives are enumerated in a different sequence.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  cmd/eficonfig.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> index e6e8a0a488..3d95092109 100644
+> --- a/cmd/eficonfig.c
+> +++ b/cmd/eficonfig.c
+> @@ -528,6 +528,7 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
+>         p += fp_size;
+>         *((struct efi_device_path *)p) = END;
+>
+> +       dp_volume = efi_dp_shorten(dp_volume);
+
+efi_dp_shorten can return null.  Dont we need to check that here?
 
 Thanks
 /Ilias
-
-On Fri, 17 Nov 2023 at 04:02, <seanedmond@linux.microsoft.com> wrote:
+>         dp = efi_dp_append(dp_volume, (struct efi_device_path *)buf);
+>         free(buf);
 >
-> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
->
-> Add support for KASLR seed from the RNG device. Invokes dm_rng_read()
-> API to read 8-bytes of random bytes.  Performs the FDT fixup using event
-> spy.  To enable use CONFIG_KASLR_RNG_SEED
->
-> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
-> Signed-off-by: Drew Kluemke <ankluemk@microsoft.com>
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->  boot/fdt_support.c | 36 ++++++++++++++++++++++++++++++++++++
->  lib/Kconfig        |  7 +++++++
->  2 files changed, 43 insertions(+)
->
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 49d14a949be..12defcf645c 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -12,7 +12,10 @@
->  #include <log.h>
->  #include <mapmem.h>
->  #include <net.h>
-> +#include <rng.h>
->  #include <stdio_dev.h>
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
->  #include <dm/ofnode.h>
->  #include <linux/ctype.h>
->  #include <linux/types.h>
-> @@ -650,6 +653,39 @@ int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
->         return 0;
->  }
->
-> +int fdt_rng_kaslr_seed(void *ctx, struct event *event)
-> +{
-> +       u8 rand[8] = {0};
-> +       struct udevice *dev;
-> +       int ret;
-> +       oftree tree = event->data.ft_fixup.tree;
-> +       ofnode root_node = oftree_root(tree);
-> +
-> +       ret = uclass_first_device_err(UCLASS_RNG, &dev);
-> +       if (ret) {
-> +               printf("ERROR: Failed to find RNG device\n");
-> +               return ret;
-> +       }
-> +
-> +       ret = dm_rng_read(dev, rand, sizeof(rand));
-> +       if (ret) {
-> +               printf("ERROR: RNG read failed, ret=%d\n", ret);
-> +               return ret;
-> +       }
-> +
-> +       ret = fdt_fixup_kaslr_seed(root_node, rand, sizeof(rand));
-> +       if (ret) {
-> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
-> +               return ret;
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +#if defined(CONFIG_KASLR_RNG_SEED)
-> +EVENT_SPY(EVT_FT_FIXUP, fdt_rng_kaslr_seed);
-> +#endif
-> +
->  int fdt_record_loadable(void *blob, u32 index, const char *name,
->                         uintptr_t load_addr, u32 size, uintptr_t entry_point,
->                         const char *type, const char *os, const char *arch)
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 19649517a39..4f5dfc00d6f 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -477,6 +477,13 @@ config VPL_TPM
->           for the low-level TPM interface, but only one TPM is supported at
->           a time by the TPM library.
->
-> +config KASLR_RNG_SEED
-> +       bool "Use RNG driver for KASLR random seed"
-> +       depends on DM_RNG
-> +       help
-> +         This enables support for using the RNG driver as entropy source for
-> +         KASLR seed populated in kernel's device tree.
-> +
->  endmenu
->
->  menu "Android Verified Boot"
 > --
-> 2.42.0
+> 2.40.1
 >
