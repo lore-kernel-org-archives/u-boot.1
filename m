@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 082C4C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 07:36:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA21C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 07:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5ADFC86D9E;
-	Sat, 18 Nov 2023 08:36:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A93FF86D11;
+	Sat, 18 Nov 2023 08:50:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z1UPbu5b";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q0jDblPT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 047B786CBD; Sat, 18 Nov 2023 08:36:14 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id E658D86D10; Sat, 18 Nov 2023 08:50:34 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A43C86E42
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:36:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A24B086828
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 08:50:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2c5071165d5so34474581fa.0
- for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:36:09 -0800 (PST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2c4fdf94666so34157121fa.2
+ for <u-boot@lists.denx.de>; Fri, 17 Nov 2023 23:50:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700292968; x=1700897768; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700293826; x=1700898626; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JSrdffDTlLIvNxjuslDHGB/gkOxpqoo0kMkzmga/GNM=;
- b=z1UPbu5bOvV+DEqENB+MU1IoWeLlsizj2WfUkPFJszW5ilQKjzUbZicWCn7fsBuG+j
- +dB7pqCraOloiakL25E58CQXR35MbQNAqfjzWQJ65ZF34pJNHkSlonYHqWmI5GtcEbXa
- +ZhkrwnFV6QZFyJVjhBrlNTJB2mD2KpxQAlU50cHIkjuUbMZsoysW5x0flqH8uBF0hGy
- L69OvZj4uKGJxtR//TwBur3+eVmigznlieyhqmJQold3BDC8bNwqjQUOnsmIMhM1OcSp
- DIanBVgK6/qpukORGNMtCRvh1K7Zmzb3MQxe/KslfB2h3TXrOT2rvLmHEOe0Kvt/UT1M
- BA1g==
+ bh=FTG1Ocz9hT+diFOd+bFOG/B69vQCBq8/WgwkRBYlwAw=;
+ b=Q0jDblPTBG4oLYFRx+ZCwgUNpIA1uzgzP8pLS0eNI7v73zB/iSCbK8Vfm9MJXnK/bO
+ aqdyKiMtFYxH2BE9+suqTQjcYZolTImI8K+/fvExjhKBkY2qtxPc1UnPYdqNlXT6NCv6
+ hi24LVIEl8vzKYKWc28YKQ2NbVjUKbMljG+O8Aai2X1NC7xZFP/cBfxt5DszQJV9yYSv
+ 1RDxW33UmL7OstVxAtwoa8zhzt62BsZkaDcq5Esv4FGzz2xDI0LY/T4s2K6ANUqe+Hjj
+ too4ZY4+R8rIceqbTF9KzOVtnUMtZVRfPH6BvL+J+pGyxfmPwIlKRSUZhjR1ndFLkP06
+ aGvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700292968; x=1700897768;
+ d=1e100.net; s=20230601; t=1700293826; x=1700898626;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JSrdffDTlLIvNxjuslDHGB/gkOxpqoo0kMkzmga/GNM=;
- b=gX2/UxGP2xAhXKN2n3pVhNwJT/NLPrWeo4Gm1Ye+xwkF38GRB2Yn1cRbajbr5Ajf26
- 215EYtwZWaGUN51KlaagqgJHxany7zjreitIVjoF+6e2wkuk6pCYzK9DH2kWIUic2HzD
- jUPIW7jndPy/2xvC2bkDbOPieVbx2Yosz02DBDXM2v8tE3cgGcl7XSNjq3lx5vzrNzSF
- ROb8zXL+tdmdC5zpDoepXPcGJTDoHYAQizCU3bkMbzYovQE68IFMVYRtLh/oDlzo8Pu9
- Y328CRj/to4K7SRPm8F8pNQnsM8NZhjOg/E7VFcv6MZNAaV1NBgNBYlMEufXutifXnJU
- 0bWQ==
-X-Gm-Message-State: AOJu0YzRP+VBWNivefWi7qGRuIOda+NmHigccv6TELWoNUsaXKBq/M1b
- iOVIr6NxnndOu+vWKMTpROOUAoMQpl7M6jqokiKzwQ==
-X-Google-Smtp-Source: AGHT+IHfap8rej7O/6Tv2di4YQb0Rcu3bA81gAhe6pUaT2dWhReAUe0DXEHwHzLKjJ7wTgA7qetal7TBtB07S/RgLGo=
-X-Received: by 2002:a2e:81d8:0:b0:2c6:f625:cc61 with SMTP id
- s24-20020a2e81d8000000b002c6f625cc61mr1354307ljg.31.1700292968608; Fri, 17
- Nov 2023 23:36:08 -0800 (PST)
+ bh=FTG1Ocz9hT+diFOd+bFOG/B69vQCBq8/WgwkRBYlwAw=;
+ b=M3bpHvzzlyEnPPTthf5ahs2XGgsCfKdoGmB7576bxsvXTr70dNb8RpagjmE5HLEXm3
+ 9ojtDFwls/vRxj8Vdw1jVuE0ZsyCDJaKIQrsdjl2s+YfY39kSntycaBIcqhMDSBMdRdc
+ X0UGcfxnzLyoFnvoKrOmKvfg67HcdUJ5nwtXOLOkBTSDF8+8YTjxzhkTlwbQ+EYnjUs7
+ +DcOcs2CGxiOo+RV3ayAhJZik156X+fzazIhffqV5cqRhcYROSHOKS17sFZCyeL5EdbH
+ o59CwDETopEKWgesFfM/OKiuc711BVRqsJSSMaBvUID8VQ7sYAQmqsnLw/b4miH8EYXj
+ MfbA==
+X-Gm-Message-State: AOJu0YzLpUWnSEDDkWPz8/08gDRWV8rAAoAJ7N6+jKQgeClqQpfrYoy9
+ qFaZ9AD+P8LDdxsFdC+MNLntc9XPV7bmg1sdvCTD2w==
+X-Google-Smtp-Source: AGHT+IFs6iMJhSOpapb22qHFxmo7cWiprS/og+Pb0vm4evYyUirnaMNTOU1y4Sb6WNpG1Y42HMNtKYcnMg9fjskd2Ng=
+X-Received: by 2002:a2e:b904:0:b0:2c0:318a:6ee1 with SMTP id
+ b4-20020a2eb904000000b002c0318a6ee1mr1185128ljb.49.1700293825741; Fri, 17 Nov
+ 2023 23:50:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20231116230806.20506-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231116230806.20506-1-heinrich.schuchardt@canonical.com>
+References: <20231116041043.362055-1-sjg@chromium.org>
+ <20231116041043.362055-2-sjg@chromium.org>
+In-Reply-To: <20231116041043.362055-2-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 18 Nov 2023 09:35:32 +0200
-Message-ID: <CAC_iWj+=XdBzhnLvTp9Sv=bc6aC5pzUQD0ZQkUdagAhJ037Adw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: eficonfig: create shortened boot options
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
+Date: Sat, 18 Nov 2023 09:49:49 +0200
+Message-ID: <CAC_iWjLF_wvaMpLWo+Xs1BLnPkcPe2oReq6krqJz3EPh6=53mA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/32] arm: x86: Drop discarding of command linker-lists
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,36 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
-
-On Fri, 17 Nov 2023 at 01:08, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Thu, 16 Nov 2023 at 06:11, Simon Glass <sjg@chromium.org> wrote:
 >
-> The boot options created by eficonfig should use shortened device-paths to
-> avoid problems if drives are enumerated in a different sequence.
+> Since we can now cleanly disable CMDLINE when needed, drop the rules
+> which discard the command code.  It will not be built in the first
+> place.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 > ---
->  cmd/eficonfig.c | 1 +
->  1 file changed, 1 insertion(+)
 >
-> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-> index e6e8a0a488..3d95092109 100644
-> --- a/cmd/eficonfig.c
-> +++ b/cmd/eficonfig.c
-> @@ -528,6 +528,7 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
->         p += fp_size;
->         *((struct efi_device_path *)p) = END;
+> (no changes since v1)
 >
-> +       dp_volume = efi_dp_shorten(dp_volume);
+>  arch/arm/cpu/u-boot.lds     | 3 ---
+>  arch/x86/cpu/u-boot-64.lds  | 4 ----
+>  arch/x86/cpu/u-boot-spl.lds | 4 ----
+>  arch/x86/cpu/u-boot.lds     | 4 ----
+>  4 files changed, 15 deletions(-)
 
-efi_dp_shorten can return null.  Dont we need to check that here?
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Thanks
-/Ilias
->         dp = efi_dp_append(dp_volume, (struct efi_device_path *)buf);
->         free(buf);
+>
+> diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+> index fc4f63d83489..7724c9332c3b 100644
+> --- a/arch/arm/cpu/u-boot.lds
+> +++ b/arch/arm/cpu/u-boot.lds
+> @@ -14,9 +14,6 @@ OUTPUT_ARCH(arm)
+>  ENTRY(_start)
+>  SECTIONS
+>  {
+> -#ifndef CONFIG_CMDLINE
+> -       /DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+> -#endif
+>  #if defined(CONFIG_ARMV7_SECURE_BASE) && defined(CONFIG_ARMV7_NONSEC)
+>         /*
+>          * If CONFIG_ARMV7_SECURE_BASE is true, secure code will not
+> diff --git a/arch/x86/cpu/u-boot-64.lds b/arch/x86/cpu/u-boot-64.lds
+> index d0398ff00d71..00a6d8691211 100644
+> --- a/arch/x86/cpu/u-boot-64.lds
+> +++ b/arch/x86/cpu/u-boot-64.lds
+> @@ -11,10 +11,6 @@ ENTRY(_start)
+>
+>  SECTIONS
+>  {
+> -#ifndef CONFIG_CMDLINE
+> -       /DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+> -#endif
+> -
+>  #ifdef CONFIG_TEXT_BASE
+>         . = CONFIG_TEXT_BASE;   /* Location of bootcode in flash */
+>  #endif
+> diff --git a/arch/x86/cpu/u-boot-spl.lds b/arch/x86/cpu/u-boot-spl.lds
+> index a0a2a06a18cd..50b4b1608552 100644
+> --- a/arch/x86/cpu/u-boot-spl.lds
+> +++ b/arch/x86/cpu/u-boot-spl.lds
+> @@ -11,10 +11,6 @@ ENTRY(_start)
+>
+>  SECTIONS
+>  {
+> -#ifndef CONFIG_CMDLINE
+> -       /DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+> -#endif
+> -
+>         . = IMAGE_TEXT_BASE;    /* Location of bootcode in flash */
+>         __text_start = .;
+>         .text  : {
+> diff --git a/arch/x86/cpu/u-boot.lds b/arch/x86/cpu/u-boot.lds
+> index a31f4220a000..c418ff44aa08 100644
+> --- a/arch/x86/cpu/u-boot.lds
+> +++ b/arch/x86/cpu/u-boot.lds
+> @@ -11,10 +11,6 @@ ENTRY(_start)
+>
+>  SECTIONS
+>  {
+> -#ifndef CONFIG_CMDLINE
+> -       /DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+> -#endif
+> -
+>         . = CONFIG_TEXT_BASE;   /* Location of bootcode in flash */
+>         __text_start = .;
 >
 > --
-> 2.40.1
+> 2.43.0.rc0.421.g78406f8d94-goog
 >
