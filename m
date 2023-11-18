@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31EA9C54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19F3C2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64ED78755A;
-	Sat, 18 Nov 2023 22:06:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7DA05874A5;
+	Sat, 18 Nov 2023 22:06:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IufFvt6T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aCzouG3q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 396D186FC9; Sat, 18 Nov 2023 22:06:38 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 9335886F95; Sat, 18 Nov 2023 22:06:39 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E68E986F95
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6A7A8750C
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:06:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-7b063a6420dso81852739f.1
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:22 -0800 (PST)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-7a67b9cd230so109731439f.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:06:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700341581; x=1700946381; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700341579; x=1700946379; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DK1vRDL3fIxrh/9oQHdQ4Or8TuX0aJ6e+eIa9BPHwXI=;
- b=IufFvt6TGbdqS2aHxwsIU1VOzqfA++Bm87us4kc98Fw/bXqRXS84zFzDAuP/Pn8KbF
- bOFjwKTRgTHXl+uhspCZ0tzBxUwNq/+DrIeOrEiuLjAiqdjwtJCkZgU4iqgPHziJtg1w
- dlOpoHnxj8nHrq/BrS2LauticzLKbHj3/09JI=
+ bh=pTlhEXm87sL9cLjIF1h0Wxx2yOxwTLUOi4sXQYLXtd4=;
+ b=aCzouG3q0n9rDUfs+9Y2MFEYs5J/GHjQKuUoQIMhH8+E8P2wyCJzgPDB55xotuVvso
+ dJnPzgdwllLinMZA96685TukNqXyKj/FNAV+YHXuQ9/PiUO3ZCwiLjaFu5dI5HPzHDwV
+ Yxb2KSwXJMXy38wF7BaPFGtGDD0M76OA9A40g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700341581; x=1700946381;
+ d=1e100.net; s=20230601; t=1700341579; x=1700946379;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DK1vRDL3fIxrh/9oQHdQ4Or8TuX0aJ6e+eIa9BPHwXI=;
- b=QXITkmFfJFMWu4yh9/lz1BQ2jSsJScZsqqO+JrT7gvls9aqVcbmQaFwijgkpj2J+2y
- OISzQWq/gYxWPwaQZyQXgPRV1Am24uWmKyErOFUobKq+FXy2gFbwDxuqyGIj0G+37TGF
- R9rKegEaPPjhqNY6PFee0ZXzn6aYjvnC5K0ejOxxJNj0DZZSwzi8FX6QSCnUYHuV62l+
- 1Xbcv5LLVnEj/NnC1bUc6owPwoaEi1LxHwgsEjOIHyOAl+XzR7+3/zjeSW9CmlT4ggkD
- en34VH2KtWpcHGcmzquTuSgBsz2ZNj5/EtPOFEidAXzc/k+4lxrYAwzqNUX2RziaCD8T
- aHPQ==
-X-Gm-Message-State: AOJu0YxInYjkRj1vdTqR0vUmo1hEVKbfBg4wMwqS0YLng3SM4p8pUkSI
- FRpIlGldupunAar7PxoZq5iw5NEXSyQtw8pQlHVNuQ==
-X-Google-Smtp-Source: AGHT+IHEtrEumb7JuJaXCACI5DGT56Znqfj2BWIN5MeeWS10Sm2jPTQrNuxPBePGc97J9O/29KQxIQ==
-X-Received: by 2002:a5e:aa17:0:b0:7a6:7b18:dbf3 with SMTP id
- s23-20020a5eaa17000000b007a67b18dbf3mr7639567ioe.7.1700341581431; 
- Sat, 18 Nov 2023 13:06:21 -0800 (PST)
+ bh=pTlhEXm87sL9cLjIF1h0Wxx2yOxwTLUOi4sXQYLXtd4=;
+ b=sIikRny8t5wxtFqjAV43iMJPfP1v06hWKZeHHs5MZ0dxadtAdSfsLfFdPHj6azYZWi
+ Eq/YNb9aR4hxvaKUfV/kErn6TgmaVL4kc8+ySHsqARKTJQnQgfkVIyHYyT/7w/2ORAFk
+ jPG4AxHBFDj1jwFY1YByV9sSn2r3d42/Kpwk6k2XDpdw5frE6JiUeEzfGEOSbKW8gV66
+ K0TK0q1rFcFLyIHroNVykmWTAaXv3mzVtFVVGSSc2bsTpBiv/FIJRL0fUp+WDqnY8Npb
+ kaRPsXWi58QcqCajokIs6OlzHGeJL1ek/Xompej9jkmorPYSIOr2Ix09Hdbxe3fymzvJ
+ oOIQ==
+X-Gm-Message-State: AOJu0YxaXEWq2CEHN2AX2qGCsf3etBGLzhRqbEkAeBIDWzSrifnMA+xT
+ R8dyZUlPimewh8kp/sIP4yWc6D4zZ5uE66qSsKgTyw==
+X-Google-Smtp-Source: AGHT+IF1pDRF0CqU5+QNRqqZqy8irmu/73AFp6zZ/oSPf1ImgpFP0UMI7smf7KhJj13OzqdoBC1lLg==
+X-Received: by 2002:a6b:f815:0:b0:79f:c9ad:19ce with SMTP id
+ o21-20020a6bf815000000b0079fc9ad19cemr3821582ioh.15.1700341579097; 
+ Sat, 18 Nov 2023 13:06:19 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.06.20
+ eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.06.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 13:06:21 -0800 (PST)
+ Sat, 18 Nov 2023 13:06:18 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH v3 28/32] bootm: Adjust the parameters of bootm_find_images()
-Date: Sat, 18 Nov 2023 14:05:16 -0700
-Message-ID: <20231118210547.577026-29-sjg@chromium.org>
+ Safae Ouajih <souajih@baylibre.com>, Sean Anderson <sean.anderson@seco.com>
+Subject: [PATCH v3 26/32] bootm: efi: Drop special call to bootm_find_other()
+Date: Sat, 18 Nov 2023 14:05:14 -0700
+Message-ID: <20231118210547.577026-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
 References: <20231118210547.577026-1-sjg@chromium.org>
@@ -91,175 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than passing it all the command-line args, pass in the pieces
-that it needs. These are the image address, the ramdisk address/name
-and the FDT address/name.
-
-Ultimately this will allow usage of this function without being called
-from the command line.
-
-Move the function comment to the header file and tidy it a little.
+The normal bootm flow calls bootm_find_other() can call the
+BOOTM_STATE_FINDOTHER state as part of its processing. Fix the
+condition there so that this hack can be removed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootm.c    | 45 ++++++++++++++-------------------------------
- cmd/booti.c     |  4 +++-
- cmd/bootz.c     |  4 +++-
- include/bootm.h | 26 +++++++++++++++++++++++---
- 4 files changed, 43 insertions(+), 36 deletions(-)
+ boot/bootm.c    | 10 +++++-----
+ boot/bootm_os.c |  6 ------
+ 2 files changed, 5 insertions(+), 11 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index 45491e3f30aa..fe6e84601f58 100644
+index db1466cecf2d..dc64de952c23 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -468,35 +468,14 @@ static int bootm_find_os(const char *cmd_name, const char *addr_fit)
- 	return 0;
- }
- 
--/**
-- * bootm_find_images - wrapper to find and locate various images
-- * @flag: Ignored Argument
-- * @argc: command argument count
-- * @argv: command argument list
-- * @start: OS image start address
-- * @size: OS image size
-- *
-- * boot_find_images() will attempt to load an available ramdisk,
-- * flattened device tree, as well as specifically marked
-- * "loadable" images (loadables are FIT only)
-- *
-- * Note: bootm_find_images will skip an image if it is not found
-- *
-- * @return:
-- *     0, if all existing images were loaded correctly
-- *     1, if an image is found but corrupted, or invalid
-- */
--int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
--		      ulong size)
-+int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
-+		      const char *conf_fdt, ulong start, ulong size)
+@@ -580,11 +580,11 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ static int bootm_find_other(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			    char *const argv[])
  {
--	const char *select = NULL;
-+	const char *select = conf_ramdisk;
- 	char addr_str[17];
--	ulong img_addr;
- 	void *buf;
- 	int ret;
+-	if (((images.os.type == IH_TYPE_KERNEL) ||
+-	     (images.os.type == IH_TYPE_KERNEL_NOLOAD) ||
+-	     (images.os.type == IH_TYPE_MULTI)) &&
+-	    (images.os.os == IH_OS_LINUX ||
+-		 images.os.os == IH_OS_VXWORKS))
++	if ((images.os.type == IH_TYPE_KERNEL ||
++	     images.os.type == IH_TYPE_KERNEL_NOLOAD ||
++	     images.os.type == IH_TYPE_MULTI) &&
++	    (images.os.os == IH_OS_LINUX || images.os.os == IH_OS_VXWORKS ||
++	     images.os.os == IH_OS_EFI))
+ 		return bootm_find_images(flag, argc, argv, 0, 0);
  
--	img_addr = argc ? hextoul(argv[0], NULL) : image_load_addr;
+ 	return 0;
+diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+index 30296eb27d7d..af25c9e7c81b 100644
+--- a/boot/bootm_os.c
++++ b/boot/bootm_os.c
+@@ -486,18 +486,12 @@ static int do_bootm_tee(int flag, int argc, char *const argv[],
+ static int do_bootm_efi(int flag, int argc, char *const argv[],
+ 			struct bootm_headers *images)
+ {
+-	int ret;
+ 	efi_status_t efi_ret;
+ 	void *image_buf;
+ 
+ 	if (flag != BOOTM_STATE_OS_GO)
+ 		return 0;
+ 
+-	/* Locate FDT, if provided */
+-	ret = bootm_find_images(flag, argc, argv, 0, 0);
+-	if (ret)
+-		return ret;
 -
- 	if (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE)) {
- 		/* Look for an Android boot image */
- 		buf = map_sysmem(images.os.start, 0);
-@@ -506,8 +485,8 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
- 		}
- 	}
- 
--	if (argc >= 2)
--		select = argv[1];
-+	if (conf_ramdisk)
-+		select = conf_ramdisk;
- 
- 	/* find ramdisk */
- 	ret = boot_get_ramdisk(select, &images, IH_INITRD_ARCH,
-@@ -533,9 +512,8 @@ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
- 		buf = map_sysmem(img_addr, 0);
- 
- 		/* find flattened device tree */
--		ret = boot_get_fdt(buf, argc > 2 ? argv[2] : NULL,
--				   IH_ARCH_DEFAULT, &images, &images.ft_addr,
--				   &images.ft_len);
-+		ret = boot_get_fdt(buf, conf_fdt, IH_ARCH_DEFAULT, &images,
-+				   &images.ft_addr, &images.ft_len);
- 		if (ret) {
- 			puts("Could not find a valid device tree\n");
- 			return 1;
-@@ -584,8 +562,13 @@ static int bootm_find_other(struct cmd_tbl *cmdtp, int flag, int argc,
- 	     images.os.type == IH_TYPE_KERNEL_NOLOAD ||
- 	     images.os.type == IH_TYPE_MULTI) &&
- 	    (images.os.os == IH_OS_LINUX || images.os.os == IH_OS_VXWORKS ||
--	     images.os.os == IH_OS_EFI || images.os.os == IH_OS_TEE))
--		return bootm_find_images(flag, argc, argv, 0, 0);
-+	     images.os.os == IH_OS_EFI || images.os.os == IH_OS_TEE)) {
-+		ulong img_addr;
-+
-+		img_addr = argc ? hextoul(argv[0], NULL) : image_load_addr;
-+		return bootm_find_images(img_addr, argc > 1 ? argv[1] : NULL,
-+					 argc > 2 ? argv[2] : NULL, 0, 0);
-+	}
- 
- 	return 0;
- }
-diff --git a/cmd/booti.c b/cmd/booti.c
-index a6c7db272c57..dc73c83f0db0 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -95,7 +95,9 @@ static int booti_start(struct cmd_tbl *cmdtp, int flag, int argc,
- 	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
- 	 * have a header that provide this informaiton.
- 	 */
--	if (bootm_find_images(flag, argc, argv, relocated_addr, image_size))
-+	if (bootm_find_images(image_load_addr, argc > 1 ? argv[1] : NULL,
-+			      argc > 2 ? argv[2] : NULL, relocated_addr,
-+			      image_size))
- 		return 1;
- 
- 	return 0;
-diff --git a/cmd/bootz.c b/cmd/bootz.c
-index dd6fe4904b02..bcf232b4f305 100644
---- a/cmd/bootz.c
-+++ b/cmd/bootz.c
-@@ -54,7 +54,9 @@ static int bootz_start(struct cmd_tbl *cmdtp, int flag, int argc,
- 	 * Handle the BOOTM_STATE_FINDOTHER state ourselves as we do not
- 	 * have a header that provide this informaiton.
- 	 */
--	if (bootm_find_images(flag, argc, argv, images->ep, zi_end - zi_start))
-+	if (bootm_find_images(image_load_addr, argc > 1 ? argv[1] : NULL,
-+			      argc > 2 ? argv[2] : NULL, images->ep,
-+			      zi_end - zi_start))
- 		return 1;
- 
- 	return 0;
-diff --git a/include/bootm.h b/include/bootm.h
-index 10a1bd65a754..f5229ea90b33 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -52,9 +52,29 @@ int boot_selected_os(int argc, char *const argv[], int state,
- 
- ulong bootm_disable_interrupts(void);
- 
--/* This is a special function used by booti/bootz */
--int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
--		      ulong size);
-+/**
-+ * bootm_find_images() - find and locate various images
-+ *
-+ * @img_addr: Address of image being loaded
-+ * @conf_ramdisk: Indicates the ramdisk to use (typically second arg of bootm)
-+ * @conf_fdt: Indicates the FDT to use (typically third arg of bootm)
-+ * @start: OS image start address
-+ * @size: OS image size
-+ *
-+ * boot_find_images() will attempt to load an available ramdisk,
-+ * flattened device tree, as well as specifically marked
-+ * "loadable" images (loadables are FIT only)
-+ *
-+ * Note: bootm_find_images will skip an image if it is not found
-+ *
-+ * This is a special function used by booti/bootz
-+ *
-+ * Return:
-+ *     0, if all existing images were loaded correctly
-+ *     1, if an image is found but corrupted, or invalid
-+ */
-+int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
-+		      const char *conf_fdt, ulong start, ulong size);
- 
- /*
-  * Measure the boot images. Measurement is the process of hashing some binary
+ 	/* Initialize EFI drivers */
+ 	efi_ret = efi_init_obj_list();
+ 	if (efi_ret != EFI_SUCCESS) {
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
