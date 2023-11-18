@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 719FAC54E76
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 18:47:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCBBC2BB3F
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 19:02:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87C48870E2;
-	Sat, 18 Nov 2023 19:47:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=fastmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FBE486F27;
+	Sat, 18 Nov 2023 20:02:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=fastmail.com header.i=@fastmail.com header.b="abb9VuWW";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NKRuvd72";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kIohC6ST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF756870E2; Sat, 18 Nov 2023 19:44:42 +0100 (CET)
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28])
+ id B70C28701D; Sat, 18 Nov 2023 20:02:37 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97E6B863FD
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 19:44:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 587DD86D4C
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 20:02:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=fastmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jaredbaur@fastmail.com
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id BBAEF5C01BD;
- Sat, 18 Nov 2023 13:44:34 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute6.internal (MEProxy); Sat, 18 Nov 2023 13:44:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fastmail.com; h=
- cc:cc:content-transfer-encoding:content-type:date:date:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to; s=fm1; t=1700333074; x=
- 1700419474; bh=+c2ovXrR4rG9QCuiIE+V7qTy/vBmSzRvxRnAAib6Ll0=; b=a
- bb9VuWWiKZk3TJGALIVMCVEUrghCeyyO0VMmquTjMg5I6Oz4IlX2n/0ZotSkQras
- FKpjLNdYFohSNtu6pKcvEhAGtwV/3v4EANLVAiRXpqawaMcgGXGvqdMaQpI9Bj6R
- BIeW79qPs6GxgMqO0lt5R4k7C1QnuTwLtXA75/J35SsDiXNnVZGHPokb6ih4+gKj
- 3BNtjfkxAFNQuHAIUgcJc3cnq1O1J4W2ih/WD4tPJ+S4oOIsXr5KjfOghSBpxIok
- T4/viY7LphbifrQT2pwIy9bkFYAAJB9P9JSp/P5w8uF3zodPqtizK2zsftianE0O
- EfenrPY39SD2GCr4pSr7A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:date:date:feedback-id:feedback-id:from:from
- :in-reply-to:in-reply-to:message-id:mime-version:references
- :reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1700333074; x=
- 1700419474; bh=+c2ovXrR4rG9QCuiIE+V7qTy/vBmSzRvxRnAAib6Ll0=; b=N
- KRuvd72ttOnoa36zd7N+6/MLbUhoqkNYqt5dEjcDtpbK0C4Pw53c6HvcBZ/5gukD
- 1Yv3beVeXCZDM9a1CEn57rpuH/t9Xk3epwvmI/oiBcoki1GsMf2J4jsQMZ71Cneq
- fS+9Z+T6RnuwQqnSn5v0wc7i7m76QduAmrIejRpgV3OOQJZ/X/e36CxU4i1hJO8T
- qWgAyhgYkN3DADDn3xuGh1J4lJmuaZhoXI3LCXbKg+nxg2eZiSO2VqJCyJG6ZAsx
- sZTSZB1AdNHWAWPXC7/dkxezYyUgEf7CgktmfWRVzHVUj3zYRfPaZ/twIBJVV7Vs
- XOvWwqKTzXgQcW3BNGNZg==
-X-ME-Sender: <xms:EgZZZYOk78jukyLQ1v9OpVaOnpJUjVdLH4jd2c16e0Gf-KDZ9A4lPQ>
- <xme:EgZZZe_ZkGbXnsfQrxa7I0o_yg3UXhZyzFjOfonXWIi05eoXW50lKFYt7KgBX9m8C
- 930tsveStO-3_Cs30k>
-X-ME-Received: <xmr:EgZZZfTcLfHzdiVuZ7gWACgXQ-hvhsPTMLDX_kG1pXcsX-ptxVCIavQCMRWYRmg6GI9VvJ1Ge89IpEWnWQCmvdEdJAMMSM5qa6esSw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvkedrudegvddgudduhecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkofgjfhgggfestd
- ekredtredttdenucfhrhhomheplfgrrhgvugcuuegruhhruceojhgrrhgvuggsrghurhes
- fhgrshhtmhgrihhlrdgtohhmqeenucggtffrrghtthgvrhhnpeehleevgfduvdeutdehke
- fguefhueeujeetudfgvedugfefjeejkeekkeekfeehudenucevlhhushhtvghrufhiiigv
- pedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjrghrvggusggruhhrsehfrghsthhmrg
- hilhdrtghomh
-X-ME-Proxy: <xmx:EgZZZQu43XL16Ysz2uRgfjo5vVgkpjCF1XmtrrOR7P2G4qPNCXQISg>
- <xmx:EgZZZQcDKYx5ejUP75IhIIOd8Fk5heGdfmz2KfAy4TRND9aI_yL_-w>
- <xmx:EgZZZU0wiePyBdb5NKk6W46z-EOVi0D8EWinMnx_0zvpCO2Ed2fTmg>
- <xmx:EgZZZYkktjYhWCgeM6x-eZBeahYRRCJ_NmxOKuwuNeRkodeqxNeqRw>
-Feedback-ID: i1961441c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
- 18 Nov 2023 13:44:34 -0500 (EST)
-From: Jared Baur <jaredbaur@fastmail.com>
-To: u-boot@lists.denx.de
-Cc: Jared Baur <jaredbaur@fastmail.com>
-Subject: [PATCH 1/1] Write upper-case BOOT.BIN to zynqmp MMC
-Date: Sat, 18 Nov 2023 18:44:20 +0000
-Message-ID: <20231118184426.2808502-2-jaredbaur@fastmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231118184426.2808502-1-jaredbaur@fastmail.com>
-References: <20231118184426.2808502-1-jaredbaur@fastmail.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C18963F6E6
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 19:02:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1700334148;
+ bh=KfdK/Wai5yXnoJRDHaUZp2BJdc4XQHKYV5pNGWfX11s=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=kIohC6STxWo7fMOKqCWUb+V68eFcrfkRrLFejvum6NPQs3F3rF1Ivwwt+d2Ghv3f6
+ W3RrR9Ygcf4HBDO0O0voHI/shryNzLX5fn4BionSXiO/uf3HVCx38A1r+GdaIz/XX2
+ 9rmzuSSu4Q7HDTiUuEswY/1wEW763/uZIBoON70TswsU9O7j40/pnHtu4bpnYZ9eIR
+ 1f/PD4VfxtCt1W7LpWnHVyPOPTSLuUdO0NXvt+1ZyvbMO0IjPRkN6qBEf9BdSDlydO
+ sYpgpICPr22WrBV/pgd6WXTRQvsjRzA/ycbkeo4b06LGHYBW44iAH7e2/NQXLqkgMA
+ 9IkS+xYWoJ6ow==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4090181eec2so4470355e9.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 11:02:28 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700334148; x=1700938948;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KfdK/Wai5yXnoJRDHaUZp2BJdc4XQHKYV5pNGWfX11s=;
+ b=vYtibzD87HFOOqrlSU12w6rOtQSe4lNSGcc9wFR7vmR7ib8538bqKZHqAXGFxF0k2i
+ WWaFXChEbIwHtv7V6CQMtp/2Gnv5jRzNnpJlE/xIpaUBxnhammR3zjQxoWdH/u3x320U
+ oLu6ei+J4/gwjyWKgfqTJajmnI+Re7aIN+cT+oCshsytXeQxexuWyKceXA2wpho7s3pB
+ 34WViJxtNqOyHM/clFjy2eM0Yx3FlvXR4ks+JMPW98svrR8yvjcYyDyaG59ixcekc4vb
+ DLxj0hH/v44pTSZLFprpj4k6/0AbftGhmmppddezi+aWY1QJn5zvST3Vxyi8yEkpdwjG
+ gBgA==
+X-Gm-Message-State: AOJu0YzsexMyr9xkqWAezMU6+fU99pXGSsb+FgX28sboT/Dngcl/S/47
+ VCOAffVonryWMO1a8HoQyTIxqOVPNq9xgBpOT7xtDwsm7Z46Wsrr7tCG715gn60GU/KoMSXxdsU
+ 9MZ7VFmLql4Jqetslb/rg3i+QW8sf6OrYT96ej7A=
+X-Received: by 2002:a05:600c:1da9:b0:408:39d3:a26b with SMTP id
+ p41-20020a05600c1da900b0040839d3a26bmr2488313wms.40.1700334148296; 
+ Sat, 18 Nov 2023 11:02:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFndFOWOhdJH1oDNWtXYUNNe8O+dJGGOG5u2vgMQhZueHeNqaeO2pGrkwHW6Sutzan3dIoSNg==
+X-Received: by 2002:a05:600c:1da9:b0:408:39d3:a26b with SMTP id
+ p41-20020a05600c1da900b0040839d3a26bmr2488296wms.40.1700334147831; 
+ Sat, 18 Nov 2023 11:02:27 -0800 (PST)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ n13-20020a05600c500d00b004083996dad8sm11817664wmr.18.2023.11.18.11.02.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 18 Nov 2023 11:02:27 -0800 (PST)
+Message-ID: <6541e6cc-44c8-4348-9cfd-248cb8d42180@canonical.com>
+Date: Sat, 18 Nov 2023 20:02:26 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 18 Nov 2023 19:47:00 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] cmd: acpi: fix acpi list command
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
+References: <20231112070316.17982-1-heinrich.schuchardt@canonical.com>
+ <20231112070316.17982-3-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3scsicFCvRwWapE9SxPoj2Vk9+TJRx2b0o7iE7vQAv3w@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAPnjgZ3scsicFCvRwWapE9SxPoj2Vk9+TJRx2b0o7iE7vQAv3w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,37 +106,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The zynqmp bootrom will not boot from an SD card with a fat32 fileystem
-with a lowercase boot.bin file on it. This means that using DFU to
-update the boot.bin file will render the device unusable since it is not
-written in upper-case.
+On 11/12/23 21:01, Simon Glass wrote:
+> On Sun, 12 Nov 2023 at 00:03, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
+>> to check the presence of the RSDT table before accessing it. This leads to
+>> an exception if the RSDT table is not provided.
+>>
+>> The XSDT table takes precedence over the RSDT table.
+>>
+>> Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
+>>
+>> As the RSDT table has to be ignored if the XSDT command is present there is
+>> no need to compare the tables in a display command. Anyway the
+>> specification does not require that the sequence of addresses in the RSDT
+>> and XSDT table are the same.
+>>
+>> The FACS table header does not provide revision information. Correct the
+>> description of dump_hdr().
+>>
+>> Adjust the ACPI test to match the changed output format of the 'acpi list'
+>> command.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>>          add unit test for offset of field Entry in RSDT, XSDT
+>>          merge patch 2 and 3
+>>          remove leading zeros from address output
+>> ---
+>>   cmd/acpi.c     | 48 +++++++++++++++++++++++++++++-------------------
+>>   test/dm/acpi.c | 18 +++++++++---------
+>>   2 files changed, 38 insertions(+), 28 deletions(-)
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Jared Baur <jaredbaur@fastmail.com>
----
- board/xilinx/zynqmp/zynqmp.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The patch does not consider that
 
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index f162803084..bcccf5b7c1 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -647,14 +647,14 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 	case SD_MODE1:
- 		bootseq = mmc_get_env_dev();
- 
--		len += snprintf(buf + len, DFU_ALT_BUF_LEN, "mmc %d=boot",
-+		len += snprintf(buf + len, DFU_ALT_BUF_LEN, "mmc %d=BOOT",
- 			       bootseq);
- 
- 		if (multiboot)
- 			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
- 				       "%04d", multiboot);
- 
--		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".bin fat %d 1",
-+		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".BIN fat %d 1",
- 			       bootseq);
- #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
- 		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ";%s fat %d 1",
--- 
-2.42.0
+     map_sysmem(0, 0) != NULL
 
+on the sandbox.
+
+list_rsdp() needs to be changed to pass rsdt or xsdt as NULL if 
+rsdt_address or xsdt_address is zero when invoking list_rsdt().
+
+So this needs a respin.
+
+Best regards
+
+Heinrich
