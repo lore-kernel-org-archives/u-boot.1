@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3E2C2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:34:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD129C5AD4C
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:46:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7482B87006;
-	Sat, 18 Nov 2023 18:34:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 1534286F9F;
+	Sat, 18 Nov 2023 18:46:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SF9AjgRH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c53tt297";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C2D48701D; Sat, 18 Nov 2023 18:34:18 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3D12A86FF7; Sat, 18 Nov 2023 18:46:05 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E90386FF7
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:34:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F2853804CE
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:45:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1F9CA3F87E
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 17:34:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700328847;
- bh=9GVCZG4VYN+FVpYv+tS/xerKyokiRxGJC0dLk5J8FBU=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=SF9AjgRHgvmCVcPpEITAB8tz/p671qTsgbiljlkq67IZEYPjsNRXoiTJC+SWOm2yX
- ol7MLHUU2/phiPsv0F6RfESjN18nW8WtoT6Yo0kHQyL8RRn9XjefA7AyevULvjb3Pg
- lP3gVur2PhORZJsM3kTg16l8rgNOO9Ex/iBczQAjJSsSp6hsD/FvTz8jJqibn8ZtRD
- 0qe+kVmuWiI1900r2lSbDMGX8l0ZAHMYOAJ06cV+vX0fJqfigDHgicWcq5Vag8AAXg
- ksCGBuKfIIhx/tUuOd7U1i1KsO0lSfORgQKJWxDjqq+rzc0NR6LYDIfUZFouCWlEEO
- fmRVyr/J6P7TA==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-408597a1ae3so4022595e9.0
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:34:07 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-41e1974783cso17450991cf.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:45:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700329553; x=1700934353; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9AOVCxEcWfmZ3x/4Zonxq8L4a4eBRjniZW0va0Ymb2c=;
+ b=c53tt297Uxx+NZ/YazebgAmxiE7O/4f94lm8Z+XQPsh6SxWgfNrw25t1rsOAvd252N
+ yxTvicpKciReRoz8XnI/MWGfVce2kQ8gUrUK7E4V30GACx1CQpEp78r32JXKDYzuaaHY
+ GtxtiimcIg33n5m77n7vzD5lm3BZ7WMj7jpIo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700328846; x=1700933646;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9GVCZG4VYN+FVpYv+tS/xerKyokiRxGJC0dLk5J8FBU=;
- b=crK93sFr1pamR10STPnkxtpFro+d7FgAiwF6+xPid+wcqXxXdYO6xu7VxYh4Zviwn9
- Un9rtIsNG09ijD0W041gxifk5+LhFFuejmeKiMthsj1JGINQVf4T2LuY1mK4bJx0dSli
- avUIruP8nux/R8ZFSnmxPbYaoKxXBNUfdbFMtbmM2GqDuT25PRMwONxfyT683lnxaxWs
- KhIDr8NPZwqJFBhxUu+11LYkqmvbr2bKM1r2RVKcBQLdxrzhJpAZH3Lef9LkcjdV9zAM
- toePVVv/ThxIayFgc3NmNYvmaQNcZ/SoGwtZInFnMTBl/ZzkrP0aTr7pbr6pPhc8fgql
- LNoQ==
-X-Gm-Message-State: AOJu0Yy0neknijhfVwV+uuscmbMazrRiL7yS7YKLeHxyk8U3RdNKwEU0
- YeTUEVDff9mgqVVaIOgWJbK3RpHd2n+6BkOJplldXcv7gu3RIXiIQAiCIvkSXfi8a25TiWfa9EG
- e2to1exOFCDhDGCKRXEzVTTXM7ngBRNw=
-X-Received: by 2002:a05:600c:4445:b0:40a:392c:5b79 with SMTP id
- v5-20020a05600c444500b0040a392c5b79mr2157408wmn.14.1700328846257; 
- Sat, 18 Nov 2023 09:34:06 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFdsF32hLdd3CUQS0NZ76c/B3Bcw+yh/O/hMUkfzEe+QrCFRX2gP0Z8gz1shStg65F5yOrnQA==
-X-Received: by 2002:a05:600c:4445:b0:40a:392c:5b79 with SMTP id
- v5-20020a05600c444500b0040a392c5b79mr2157395wmn.14.1700328845764; 
- Sat, 18 Nov 2023 09:34:05 -0800 (PST)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- v6-20020a05600c470600b0040a5290dceesm7213755wmo.0.2023.11.18.09.34.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 18 Nov 2023 09:34:05 -0800 (PST)
-Message-ID: <3dd07df2-a261-47e6-9627-34e4529584c4@canonical.com>
-Date: Sat, 18 Nov 2023 18:34:03 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] efi_loader: create memory reservations in ACPI case
+ d=1e100.net; s=20230601; t=1700329553; x=1700934353;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9AOVCxEcWfmZ3x/4Zonxq8L4a4eBRjniZW0va0Ymb2c=;
+ b=Fhw0ePGFvZHX1ftks7dVH7CYhhGWdRs+hFhJW9ezw1ZlBP4qZUnyi0iQ0W+TwO685N
+ ufwuZGm7fDCdGowDGHIcEXCgrX5t4Ha1Sgv8Ayj8akuG6zO+7ROZxCi5vb1nh3dPRPyM
+ tfQ1EDJqMwYqVsndQnh3cpvbyc1dvoNjkgM+ZJZ2SMxJI+e1CUWF4tb5rUq8BqYdgkC5
+ 0u1OtcPgU8Rv3iD5XN9SI6+xupz8O5Vtbh5RP2A5S2daDFOqRJ+PyBKflNZDqaZNqGhq
+ O/egNQVNyPOujnlz+ju1FKjMzb5ZmYGACxH1xJWfucS3X/DdqhR2Ak3Ot4ucFXeHbJIL
+ eJgg==
+X-Gm-Message-State: AOJu0Yyn40K1zPce45o789mvYqYDOCP/BtFMNzDRLQd7W+SkYAVdIqma
+ qY4Lt4VnxBn+aRx2Fv50/7agd74jnKTct63A0UbOxw==
+X-Google-Smtp-Source: AGHT+IFaSkRWARXRZyA0/v+Oy4IrHMh1peySLjkpS7sKWYurLdnnsV8kD3lFk7KWkWErutlxw300UA==
+X-Received: by 2002:a05:622a:1707:b0:410:9111:4a0b with SMTP id
+ h7-20020a05622a170700b0041091114a0bmr4150405qtk.13.1700329553705; 
+ Sat, 18 Nov 2023 09:45:53 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
+ [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
+ by smtp.gmail.com with ESMTPSA id
+ h5-20020ac846c5000000b0041abcc69050sm1392954qto.95.2023.11.18.09.45.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Nov 2023 09:45:52 -0800 (PST)
+Date: Sat, 18 Nov 2023 12:45:50 -0500
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ27mmK9BYE=rbGKGe9=xvZdG9reU659n-0D_wRfNemX5Q@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAPnjgZ27mmK9BYE=rbGKGe9=xvZdG9reU659n-0D_wRfNemX5Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 4/5] sandbox: Audit config.h and common.h usage
+Message-ID: <20231118174550.GI170968@bill-the-cat>
+References: <20231117225313.2144665-1-trini@konsulko.com>
+ <20231117225313.2144665-4-trini@konsulko.com>
+ <CAPnjgZ2N__uy8qdhJfwzrk088dyG8fFGXbsh4-Z4yWa6rkDFNA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lmHXUNnBpGEZAnKi"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ2N__uy8qdhJfwzrk088dyG8fFGXbsh4-Z4yWa6rkDFNA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,53 +93,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/18/23 18:10, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Thu, 16 Nov 2023 at 02:29, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> ACPI tables cannot convey memory reservations for least ARM and RISC-V.
->> x86 uses the BIOS E820 table for this purpose. We cannot simply ignore the
->> device-tree when booting via ACPI.
-> 
-> Why is that? I had thought that we had to use one or the other. Isn't
-> the devicetree irrelevant when booting with ACPI, so we can just drop
-> it?
 
-Linux Documentation/arch/arm64/acpi_object_usage.rst, line 718f 
-describes the mechanism to convey memory information as follows:
+--lmHXUNnBpGEZAnKi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-"For arm64, we will only support UEFI for booting with ACPI, hence the 
-UEFI GetMemoryMap() boot service is the only mechanism that will be used."
+On Sat, Nov 18, 2023 at 10:09:55AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 17 Nov 2023 at 15:54, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > Remove and replace common.h and config.h in sandbox when it's not needed
+> > and add some explicit includes where needed.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >  arch/sandbox/cpu/cache.c         | 1 -
+> >  arch/sandbox/cpu/cpu.c           | 1 -
+> >  arch/sandbox/cpu/sdl.c           | 2 +-
+> >  arch/sandbox/cpu/spl.c           | 1 -
+> >  arch/sandbox/cpu/start.c         | 2 +-
+> >  arch/sandbox/cpu/state.c         | 2 +-
+> >  arch/sandbox/include/asm/io.h    | 2 ++
+> >  arch/sandbox/include/asm/state.h | 1 -
+> >  arch/sandbox/lib/bootm.c         | 1 -
+> >  arch/sandbox/lib/fdt_fixup.c     | 1 -
+> >  arch/sandbox/lib/interrupts.c    | 1 -
+> >  arch/sandbox/lib/pci_io.c        | 1 -
+> >  board/sandbox/sandbox.c          | 2 +-
+> >  13 files changed, 6 insertions(+), 12 deletions(-)
+>=20
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> Is it possible to move CFG_SYS_SDRAM_BASE/SIZE to Kconfig?
 
-With the patch we tell the UEFI sub-system which memory areas are 
-reserved (e.g. for TF-A on ARM or for OpenSBI on RISC-V). This 
-information is inferred from the device-tree. The operating system will 
-collect this information by calling GetMemoryMap() immediately before 
-ExitBootServices().
+Possible? Sure. But I think it would end up being fairly horrible. What
+would be nice I think is some Zephyr-style "convert
+CONFIG_DEFAULT_DEVICE_TREE to some defines" because we could parse out
+/memory to CFG_SYS_SDRAM_BASE/SIZE and that's something we _need_ at
+build time.
 
-Without the patch Linux on RISC-V using ACPI crashed when illegally 
-accessing the memory reserved for OpenSBI.
+> For CFG_SYS_BAUDRATE_TABLE perhaps we could have a standard set that
+> most boards use, or turn it into a set of word flags with a bit for
+> each rate?
 
-Best regards
+We do, largely, use a default table. I forget which further rework I
+posted as an RFC a few years ago, but I believe it was largely seen as
+being uglier than what we have today.
 
-Heinrich
+--=20
+Tom
 
-> 
->> We have to assign EfiReservedMemory
->> according to the prior stage device-tree ($fdtaddr) or as fallback the
->> control device-tree ($fdtcontroladdr).
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   cmd/bootefi.c           | 25 ++++++++++---------------
->>   lib/efi_loader/Makefile |  2 --
->>   2 files changed, 10 insertions(+), 17 deletions(-)
->>
-> 
-> The code looks fine, but I would like to better understand why this is needed.
-> 
-> Regards,
-> Simon
+--lmHXUNnBpGEZAnKi
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVY+EoACgkQFHw5/5Y0
+tyygBAv+M06erTeYnwJjsOVztQC+hh6N1VQ6JBD4AvZKd/gVc4YW2+4MXC4YmZzk
+Ukuy1W8JgiCEolKixevmCAZXAWAhPs3GgoLKvkz5FnjnHzeAw5HG7RI6AeXU9ZGF
+NfQhgX06Gc6ZaIxvddXJLvwCt6Wo0JloSi3UiwMC0jd1JVHHBgOH/bkwdLewkBTB
+QlSspcvE6AOCGBEDn969L1iTJ3z5e6mJqiO/qhIXWxlcDt0R60ZzEC44XxcRNs9E
+wn87JhG51uvCEk4iLDLY6g1stlXrmWh/vsG0WmQsr2/W49ybyYaCbEFh/+loPfiN
+hyr+oasjwFzww3cqQiixhy4srUDk2UIcwEpSPSNGa5pVoJ3imHq319jFFQQF3aIZ
+Qh7FHB+ElRyeGIs9xzUNpov4z5fBIdV48gj4wLHlX6T5S1kBNWwRcNcmgB1ElLM2
+0aNNW2bddL5cBe0CXUeZr9tescerGclX9MlUONalHYfe+dXX3fUfV6VVOlemxPUF
+XPbORY9F
+=VXQw
+-----END PGP SIGNATURE-----
+
+--lmHXUNnBpGEZAnKi--
