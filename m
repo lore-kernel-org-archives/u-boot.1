@@ -4,96 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 746FDC2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 19:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60FEDC54E76
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 20:30:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7124986D4C;
-	Sat, 18 Nov 2023 20:15:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 733B886F2A;
+	Sat, 18 Nov 2023 21:29:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pnCIqS8v";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jBgYxGhx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8B2186D82; Sat, 18 Nov 2023 20:15:16 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 3F7A986BFA; Sat, 18 Nov 2023 21:29:57 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 114C886564
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 20:15:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A0AA86F87
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 21:29:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5c6705515d8so21593077b3.2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 11:15:11 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-540c54944c4so5928786a12.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 12:29:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700334911; x=1700939711; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1GIglmwFl9/ejHZpqr/X9ANNxH6ROc9mZyPn5OrVTIQ=;
- b=pnCIqS8v7frJDhgxT9MBKGvPU+n+n04ixpQL9sFg2DdDkfrbCgNCY4Zf7SYy7BfqGQ
- BgSEio2UiLAhyLtjRRQ4rdQpkCMh0frgfzGkLMEG90oCyi4GJqXOftE9zQqR1ibSd3pa
- YrE829A4SU252tj8dptDlyxdR/RVCdZILh3co=
+ d=linaro.org; s=google; t=1700339388; x=1700944188; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=95MEEn6SeNp/ZlSaZJsx9+PIGaX/dVce5H4ZMRrd1Rg=;
+ b=jBgYxGhxVHISxETj7Vwlz00Az8VIlfR4EADFUFNA6j1Z3ySqr6halSbe9jilm9Xb9g
+ 7z/18IOvzk4fEFH1vvXel/VifXNw3Rfuwm/9LnmbO3aMR81ekNQJN1yF7W87LT3Vm/dn
+ zy0s94D9zzDfqs9lTbr6lBEAEAcfuYqJz6JgpX3UZdAqcnKtzi0JKKGNYTOCrVQAD+bs
+ xkWfdp/ULuUTXLuY7RgEZp2fxWcfzZksdOgRtMd8+6COAjc1lQxo53MFbHiQyFeG5qQb
+ H/86W86cdozYT/c05WK4sUhPFf2yGbTPQnj3yJ+yC00YhZ2L0OIBUAPoH4uh67gFmENx
+ q+UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700334911; x=1700939711;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1GIglmwFl9/ejHZpqr/X9ANNxH6ROc9mZyPn5OrVTIQ=;
- b=HyO4swrvbQbJf0tprVimJN3wFk58cJDObi+NwUkp4lmPRjC/E83mBawN2UJRtVegbS
- 1M80yGbkGrhXbQsBENeFqdiWPX4koVnV4FJslzVj6PmPUhOrHa11OfyWg77kV8r1E2lz
- 9O0KQNPMqjMLgb2GO5zGQSskgpahlpzwqLWwbBd4o2y/kH65o+7cgmIT5N8m9wjm/ac1
- haIlfLxq8mx09TN8h9dZPnGWrO4fU/cdLuADV675hShp8JnD200Hqxd8B3Jb1wUxfBg3
- a35vo2LOK1C6dKiC/2JueJlnBhRBB2gNrGltteesfUNqJZxKHuyCkmC/tpeVyzlUzvpq
- iuXA==
-X-Gm-Message-State: AOJu0YwJ2poOZtvztLSV+FsPO94jFALHg1RtJ03I2Mb8ikjDGcTf45Vl
- EZZG4g1gIdwCL2gReF2Q6KNevg==
-X-Google-Smtp-Source: AGHT+IFoAX+Dy1FXwffZoW/lI2XbKArZe1B6ogBYbARIxseq6owRyqVuge4LKiFuVLIcQtKCPZospw==
-X-Received: by 2002:a0d:e615:0:b0:5c1:25f:5674 with SMTP id
- p21-20020a0de615000000b005c1025f5674mr3506280ywe.32.1700334910734; 
- Sat, 18 Nov 2023 11:15:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-dbd8-aafa-ccfe-bf84.res6.spectrum.com.
- [2603:6081:7b00:6400:dbd8:aafa:ccfe:bf84])
- by smtp.gmail.com with ESMTPSA id
- i9-20020a0ddf09000000b005a7a92a62besm1266341ywe.8.2023.11.18.11.15.09
+ d=1e100.net; s=20230601; t=1700339388; x=1700944188;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=95MEEn6SeNp/ZlSaZJsx9+PIGaX/dVce5H4ZMRrd1Rg=;
+ b=hy+glLEqgxCxr7IGNxSmfaI/r+g56MfNSuSjLOsY1YRdRgj42PDrdUxpoNk/O6kkyM
+ CdXHw/+XPMWPhbeEIht7FBdPTrytDEM1zdELJ9+8XKBiFKyUnpDPd5QrBVgVdgrK+JQX
+ WS9+Zz+7cnkPBzH19QRwTL/TWld3IWNCNVVPYMr4grXicJ+j+uofDxtzvcXr7XcdfzOs
+ E+mBt21Sx9AITEv0U+7ohIay+o51oC3QWxVRz3cwHFEdNR51Xl+103DNMbPbjplXxnyn
+ 7SPTjcSuNWjsKko/9nuGqSB5mdVf9ujaUv4ulBFlFCtgc2MjV4Dp0hf31gaUBYNaB/8x
+ aK7w==
+X-Gm-Message-State: AOJu0Yw6Wt7KJ5oCDoC/eJ/La+b54DZni3oaLk3ApSgdQHEPn0iZ7YWa
+ DMepMhNBb2s8WU9mkb0KFQ+cPwFiUGn4lJzISIY=
+X-Google-Smtp-Source: AGHT+IFRMxag63SUar0lAGh6G5Kmr+isY3mGc5QlG71uZXsgO0mjzqdLzvMMx9iOlWfv0NA/hpnHlQ==
+X-Received: by 2002:a05:6402:1815:b0:540:911b:72b1 with SMTP id
+ g21-20020a056402181500b00540911b72b1mr2799978edy.7.1700339388076; 
+ Sat, 18 Nov 2023 12:29:48 -0800 (PST)
+Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
+ [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
+ a21-20020a50ff15000000b0053de19620b9sm1953661edu.2.2023.11.18.12.29.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 11:15:10 -0800 (PST)
-Date: Sat, 18 Nov 2023 14:15:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH v2] smbios: arm64: Allow table to be written at a fixed
- addr
-Message-ID: <20231118191508.GL170968@bill-the-cat>
-References: <CAPnjgZ2ZFSbUYPVq+A1jQBy8s=DOO8Cz+epHGL++KSEN-pr-wA@mail.gmail.com>
- <32facf81-f2bf-460a-9104-cae1dcef0cbe@gmx.de>
- <CAPnjgZ20bRUP7KFwRpe7dmbxbQFMJmHB55dkXpEjv3fyX++M3A@mail.gmail.com>
- <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
- <CC91949C-3BBF-452B-906F-93520A314858@gmx.de>
- <CAPnjgZ0sgCtPXa5ZOOpW-zyCnVm_cNU3OyDjzPercdY1=Y1_dQ@mail.gmail.com>
- <20231103192548.GR496310@bill-the-cat>
- <CAPnjgZ1QhQ0Kx7S8nof4Hs6cX9b+tKyMOyzg2dod-WvjOkoMTg@mail.gmail.com>
- <20231103201341.GU496310@bill-the-cat>
- <CAPnjgZ2LnT=esHGNRf0RNCPaf1BNhzA+QxWcQbjnBfy9B3QUuQ@mail.gmail.com>
+ Sat, 18 Nov 2023 12:29:47 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	trini@konsulko.com
+Cc: xypron.glpk@gmx.de,
+	masahisa.kojima@linaro.org,
+	raymond.mao@linaro.org
+Subject: Pull request for efi-next-18112023
+Date: Sat, 18 Nov 2023 22:29:45 +0200
+Message-Id: <20231118202945.265566-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PryLUHkmL3V8PfKl"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2LnT=esHGNRf0RNCPaf1BNhzA+QxWcQbjnBfy9B3QUuQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,46 +91,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---PryLUHkmL3V8PfKl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit ae7ec8b0be41b59ef323f7531c0fe6745e8fef45:
 
-Splitting things in two again..
+  Merge branch '2023-11-16-assorted-updates' into next (2023-11-17 08:38:05 -0500)
 
-On Sat, Nov 18, 2023 at 10:10:17AM -0700, Simon Glass wrote:
+are available in the Git repository at:
 
-[snip]
-> This is the bug report of trying to boot into U-Boot on arm64 with
-> more than 3GB of memory.
+  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/efi-next-18112023
 
-OK, so can we just please fix this, for v2024.01, in a way that won't
-make things harder? Fixed memory addresses aren't the right choice. We
-need to have the discussion about memory allocation/reservation
-elsewhere, outside of this patch, to have something that works for
-everyones use-cases. And possibly a similar discussion about when data
-structures get populated/updated.
+for you to fetch changes up to c022eed4bedf2e16e737fde22b03289d2a48cb27:
 
---=20
-Tom
+  doc: uefi: add HTTP Boot support (2023-11-18 10:08:09 +0200)
 
---PryLUHkmL3V8PfKl
-Content-Type: application/pgp-signature; name="signature.asc"
+EFI HTTP Boot is currently supported by using a combination of
+wget, blkmap and bootefi commands. The user has to download the
+image, mount it using blkmap and then execute the efi installer
+using bootefi.
+This series simplifies the user experience. Instead of doing all the
+steps manually, users can now enable a new Kconfig (EFI_HTTP_BOOT)
+which will select wget, blkmap and dns options. They can then use
+efidebug command to add a boot option for the EFI Bootmanager using
+=> efidebug boot add -u 3 netinst http://<path>
+=> efidebug boot order 3
+=> bootefi bootmgr
 
------BEGIN PGP SIGNATURE-----
+The boot manager will automatically download and mount the image.
+Once it's mounted it will locate and launch the installer.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVZDTgACgkQFHw5/5Y0
-tyyDRQv/a3dx22lI7Ce+iOrUpkVm87T8MP1Ig2wGQiq6ULIiiok/iGjsrTDfqFw7
-JOF6HrDfvhVreDCbw1s1gF2fdnZeGaBpgVUpi6PUXUCqi/XtBtLPO+lJwBe9PZia
-SJ7vku/fUUaXjc++VtUVvbinBG6cOHaZ9TJVSHs0J+pqJ6Mby7Q9dE1ukNVsPdvi
-XN4HoxYD8n+/cTZjYEtl/+NpCTgaFB/klJRSBG1C1gdXgAU/MlpFiZWNXEnEYF2S
-LVoCKzoBXV08ZudRWFsqBKHcKIBIR5uN/gC+W7JDiq/eQcV+N64tfb19BLzPQEeG
-K8idxUsOXkWPCMiwAlhhvAMRV9tPST1bXSfvSKkp9tiP/QImzgCaJr8TiGzA6OOA
-hhk7Fdio0O0YUh1bs9TbGI/DE5omlwGUFtkhyTOT1zvDB8lw5TSvOeexgnMOk3I0
-2f+/6e3jl4hUq3EVlV+hKPJyGWlyahOKLrthusUdYxwvJd4fgvGKE2fcA4qWvqtO
-Kp8XBzi1
-=szfr
------END PGP SIGNATURE-----
+It's worth noting that this rarely fails, but the reason is irrelevant
+to the current patchset. More information can be found here
+https://lore.kernel.org/u-boot/CAOMZO5CoduEgwgdQiybmoKh6qQZOezUtRRQO4ecaGdZBBz5dDw@mail.gmail.com/
+The tl;dr is that wget sometimes fails to download the file correctly
+or set the size env variables. We expect all these to be solved once
+LWIP is stable and pulled
 
---PryLUHkmL3V8PfKl--
+The CI reported no issues
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/18623
+Please consider pulling!
+
+----------------------------------------------------------------
+Add EFI HTTP Boot support options for the EFI Bootmanager
+
+----------------------------------------------------------------
+Masahisa Kojima (8):
+      net: wget: prevent overwriting reserved memory
+      net: wget: add wget with dns utility function
+      blk: blkmap: add ramdisk creation utility function
+      efi_loader: add missing const classifier for event service
+      efi_loader: add return to efibootmgr event group
+      efi_loader: support boot from URI device path
+      cmd: efidebug: add uri device path
+      doc: uefi: add HTTP Boot support
+
+Raymond Mao (1):
+      efi_loader: Boot var automatic management
+
+ cmd/bootefi.c                                      |  12 +
+ cmd/efidebug.c                                     |  78 +++++
+ doc/develop/uefi/uefi.rst                          |  34 ++
+ drivers/block/Makefile                             |   3 +-
+ drivers/block/blkmap.c                             |  15 -
+ drivers/block/blkmap_helper.c                      |  53 +++
+ include/blkmap.h                                   |  29 ++
+ include/efi_api.h                                  |   5 +-
+ include/efi_loader.h                               |   4 +-
+ include/net.h                                      |  17 +
+ lib/efi_loader/Kconfig                             |   9 +
+ lib/efi_loader/efi_bootmgr.c                       | 386 +++++++++++++++++++++
+ lib/efi_loader/efi_boottime.c                      |   7 +-
+ lib/efi_loader/efi_disk.c                          |  18 +
+ lib/efi_loader/efi_setup.c                         |   7 +
+ net/wget.c                                         | 205 ++++++++++-
+ test/py/tests/test_efi_secboot/test_signed.py      |  42 +--
+ .../py/tests/test_efi_secboot/test_signed_intca.py |  14 +-
+ test/py/tests/test_efi_secboot/test_unsigned.py    |  14 +-
+ test/py/tests/test_fs/test_erofs.py                |   9 +
+ .../py/tests/test_fs/test_squashfs/test_sqfs_ls.py |   9 +
+ 21 files changed, 908 insertions(+), 62 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
