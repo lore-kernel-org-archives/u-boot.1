@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 440D8C5ACB3
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64B0CC5ACB3
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 17:59:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6419587087;
-	Sat, 18 Nov 2023 18:59:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E2E8787083;
+	Sat, 18 Nov 2023 18:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jDBZ9chQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O062TygP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C65148708C; Sat, 18 Nov 2023 18:59:13 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 6BB4487103; Sat, 18 Nov 2023 18:59:18 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 518B587006
+ by phobos.denx.de (Postfix) with ESMTPS id 50E8986F1F
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 18:59:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-daf26d84100so3052928276.3
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-daf26d84100so3052927276.3
  for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 09:59:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700330347; x=1700935147; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Hncm6TXRxRJl4I71CXA6RZyMnkh8gOYN0hylBoDKKZA=;
- b=jDBZ9chQxqP02cjutH4k+/h0gje8o9aVOAz96I5lMIyykrPuNIWoSReQ1JNgILRdzt
- uL5BVvUGzB0fZBKVvkS8cZ6IU+U0RIJSAnsDprAJlQyhjbLzW5NTzI9NH0TUGmLcyuOf
- 15Qrgfp02jFYxgDNaZCvquwYOUwlydxNDJYkM=
+ bh=+ynffNwnLIaxtgXVCStI6WnnK5FHvt2m6FmiUTFCR1A=;
+ b=O062TygPjmm6wFncZCbnKn/rGmKbLalsVCwJAFIzUh8Fr38R8SKZSfJzBugHhSNLUW
+ 9hbqeC1B0Ti1LUkq0XZpoWQ9wZHrBQRZOF9W4LC4TrNj5fuhtet+rj6dv6HGKTP0kjUw
+ tXqfiJS45j5ESva9pd2giRrsVpBkdNTdDHCkg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700330347; x=1700935147;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Hncm6TXRxRJl4I71CXA6RZyMnkh8gOYN0hylBoDKKZA=;
- b=BiwSwUoVQY7fXZb5sDHEKFaiJMOM1k/Gdx3yz1e88wxJlh2SV7g1nZIfe8chfm3m3W
- aogDL9JK6cxAs0IZzv4SP5L7lWtLOL7xqY3m1BFIJWUBgeO7ud4IjBv9b5fs5flQlXbW
- DLlMyj9vvtkNU5Cj+IdOs5eNhUeg38VbH0DMiMBwM2AwRl15GNgtNWLzOpxByYudba53
- ws8H2OyizysWvv4Q/t5bvFBb0fNZziG6WCXasvjIgicl+1QDvWsL/VOvhKthW7ymKllj
- dicps/WvRH9nBlmV66Y7kmYnbO54TyYX3lNziBOyOgly/u9E4z6rI6nj6KWvugjEkaJR
- xJoQ==
-X-Gm-Message-State: AOJu0YyQ6tEpkXD/JoZkxyat2Yb3o3e7yx6qOQP3Fmhu0kkhLeRk62Xo
- zsKsyvtR5ZyBfC5SayFVe+HfkdVYqKwrX0cyqS+hZEvRSZq/X8jcAoA=
-X-Google-Smtp-Source: AGHT+IFZRwJK4O6u76+HtjiDEVkEpgMirqB5/jhIMGWC2m+jg9WkoNfqkLeHM3VvA0/PY6Q6Vz/GFyX2Xa5R46+bhj0=
-X-Received: by 2002:a25:d3d3:0:b0:d42:d029:ff99 with SMTP id
- e202-20020a25d3d3000000b00d42d029ff99mr2737814ybf.55.1700330346776; Sat, 18
+ bh=+ynffNwnLIaxtgXVCStI6WnnK5FHvt2m6FmiUTFCR1A=;
+ b=SwuVJv2h3HV7f8axWOtF2RJakPmRqkfSIfiVo6LCJSd9hb6kv0xGzaDrx8hloKMGjF
+ 1Pg07pjoL1J0UOJAhcdl1+P3DSAokFcW2O58AB0VQwHguej1krqMaBkrlPF08XuUIO9f
+ 7XC1uCgau/7Kh6G2DZ/SmbXqcbLIsJ1FMNjKBJqZRl2ftHbKp3Avm/iPdht1GNWgytr7
+ 9ywAuGz4NB2WG5Wq6/yrTO3Dz3DCn2Uoso1FIHrOhqdCfoCMGIGhc9ut8qxTBq/3bb7U
+ 0VhAtw9T6rMCZpGzefpyTE9qW2Ngag7+BBYVQN0VC/kvyUj8K5xHwpXJiny1xh3ibQ5h
+ 1HDA==
+X-Gm-Message-State: AOJu0Yxy1b7FpUg3ajrLhDAUd2d/zU3z7PRokyWyhvRSEiLgsLSeZ9QI
+ 0zncUSHb4tWkQJptWDDeO1d2y/b06WheRTu/JaXOgQ==
+X-Google-Smtp-Source: AGHT+IFzaQ1IO7aCdOQ8dwXAwFd2uu0PERBk9QyJWGmXaFfLEej2BZIcC9CSBGRHp4BguvlbtdYqRssoI5gfIhFP47k=
+X-Received: by 2002:a25:d84e:0:b0:da3:7764:41d0 with SMTP id
+ p75-20020a25d84e000000b00da3776441d0mr2863977ybg.31.1700330346778; Sat, 18
  Nov 2023 09:59:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117225313.2144665-1-trini@konsulko.com>
- <20231117225313.2144665-4-trini@konsulko.com>
- <CAPnjgZ2N__uy8qdhJfwzrk088dyG8fFGXbsh4-Z4yWa6rkDFNA@mail.gmail.com>
- <20231118174550.GI170968@bill-the-cat>
-In-Reply-To: <20231118174550.GI170968@bill-the-cat>
+References: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ27mmK9BYE=rbGKGe9=xvZdG9reU659n-0D_wRfNemX5Q@mail.gmail.com>
+ <3dd07df2-a261-47e6-9627-34e4529584c4@canonical.com>
+In-Reply-To: <3dd07df2-a261-47e6-9627-34e4529584c4@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 10:58:50 -0700
-Message-ID: <CAPnjgZ2vYJbk_pU9DgnQTfr_DavFM970v4PfWdEpUtjEx441cw@mail.gmail.com>
-Subject: Re: [PATCH 4/5] sandbox: Audit config.h and common.h usage
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 18 Nov 2023 10:58:49 -0700
+Message-ID: <CAPnjgZ2kFYiQuwzw5GP8OJteKhhGVRqdnNtAGY5v-C+3c-KZ+A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: create memory reservations in ACPI case
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,73 +82,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Sat, 18 Nov 2023 at 10:45, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 18 Nov 2023 at 10:34, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Sat, Nov 18, 2023 at 10:09:55AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On 11/18/23 18:10, Simon Glass wrote:
+> > Hi Heinrich,
 > >
-> > On Fri, 17 Nov 2023 at 15:54, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > Remove and replace common.h and config.h in sandbox when it's not needed
-> > > and add some explicit includes where needed.
-> > >
-> > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > ---
-> > >  arch/sandbox/cpu/cache.c         | 1 -
-> > >  arch/sandbox/cpu/cpu.c           | 1 -
-> > >  arch/sandbox/cpu/sdl.c           | 2 +-
-> > >  arch/sandbox/cpu/spl.c           | 1 -
-> > >  arch/sandbox/cpu/start.c         | 2 +-
-> > >  arch/sandbox/cpu/state.c         | 2 +-
-> > >  arch/sandbox/include/asm/io.h    | 2 ++
-> > >  arch/sandbox/include/asm/state.h | 1 -
-> > >  arch/sandbox/lib/bootm.c         | 1 -
-> > >  arch/sandbox/lib/fdt_fixup.c     | 1 -
-> > >  arch/sandbox/lib/interrupts.c    | 1 -
-> > >  arch/sandbox/lib/pci_io.c        | 1 -
-> > >  board/sandbox/sandbox.c          | 2 +-
-> > >  13 files changed, 6 insertions(+), 12 deletions(-)
+> > On Thu, 16 Nov 2023 at 02:29, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> ACPI tables cannot convey memory reservations for least ARM and RISC-V.
+> >> x86 uses the BIOS E820 table for this purpose. We cannot simply ignore the
+> >> device-tree when booting via ACPI.
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > Is it possible to move CFG_SYS_SDRAM_BASE/SIZE to Kconfig?
+> > Why is that? I had thought that we had to use one or the other. Isn't
+> > the devicetree irrelevant when booting with ACPI, so we can just drop
+> > it?
 >
-> Possible? Sure. But I think it would end up being fairly horrible. What
-> would be nice I think is some Zephyr-style "convert
-> CONFIG_DEFAULT_DEVICE_TREE to some defines" because we could parse out
-> /memory to CFG_SYS_SDRAM_BASE/SIZE and that's something we _need_ at
-> build time.
-
-That would be pretty easy to do. But I would prefer to have it create
-CONFIG_SYS_SDRAM_BASE/SIZE so that it fits in with Kconfig, just that
-the value is set for you.
-
-If you like you could create an issue for it.
-
+> Linux Documentation/arch/arm64/acpi_object_usage.rst, line 718f
+> describes the mechanism to convey memory information as follows:
 >
-> > For CFG_SYS_BAUDRATE_TABLE perhaps we could have a standard set that
-> > most boards use, or turn it into a set of word flags with a bit for
-> > each rate?
+> "For arm64, we will only support UEFI for booting with ACPI, hence the
+> UEFI GetMemoryMap() boot service is the only mechanism that will be used."
 >
-> We do, largely, use a default table. I forget which further rework I
-> posted as an RFC a few years ago, but I believe it was largely seen as
-> being uglier than what we have today.
+> With the patch we tell the UEFI sub-system which memory areas are
+> reserved (e.g. for TF-A on ARM or for OpenSBI on RISC-V). This
+> information is inferred from the device-tree. The operating system will
+> collect this information by calling GetMemoryMap() immediately before
+> ExitBootServices().
+>
+> Without the patch Linux on RISC-V using ACPI crashed when illegally
+> accessing the memory reserved for OpenSBI.
 
-I found these:
+OK thank you, I misunderstood it.
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=262148&state=*
-http://patchwork.ozlabs.org/project/uboot/patch/20210925121958.26001-1-pali@kernel.org/
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-IMO the second one from Pali makes sense, but it was never followed
-up. It doesn't look too difficult.
-
-We should have a policy that if people complain about a patch but
-don't follow up, we apply the patch we have.
-
-I would like to drop configs/sandbox.h at some point and these two
-points are all that is left.
+Perhaps someone could convert efi_carve_out_dt_rsv() to use the ofnode API?
 
 Regards,
 Simon
