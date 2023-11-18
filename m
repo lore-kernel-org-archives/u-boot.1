@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0459CC2BB3F
-	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65371C54E76
+	for <u-boot@archiver.kernel.org>; Sat, 18 Nov 2023 21:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 367C88749D;
-	Sat, 18 Nov 2023 22:06:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95CF1874B9;
+	Sat, 18 Nov 2023 22:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P3FWu6LD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F7vRYRDl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51E968711D; Sat, 18 Nov 2023 22:06:07 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id DA6B4870C3; Sat, 18 Nov 2023 22:06:10 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E8F68701D
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:05:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CEA186A43
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 22:05:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7a94c550cc8so109835939f.0
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:05:57 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7a66aa8ebb7so124548039f.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 13:05:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700341556; x=1700946356; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700341558; x=1700946358; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LzXkcCSsp+slrCG+DPZ2tlV+JWyDgj/mkJQKg1tlBLs=;
- b=P3FWu6LDNhgwOdjBcVPEm915/Rb4QM7WAvKCavwBRzg19Y+iEFQVXTIFS79xckTWJZ
- XovByPlqyhgp5ZOXsdlwdTTL5zSxrB9oddtk2Pm1MxUK7teVEJlXaSvg45KClzk0b7Zs
- nyc3FnaZkWaxyS3SKnroWNgwbt5BMjsInDINM=
+ bh=tceC/EkaNu43ZPV0xbWIcKWexiTBY9v1/HMf01mPmHA=;
+ b=F7vRYRDlF+kYK9/+UiP/W9sGPU1UYTdiJpBS89XcsBMO+oopf2PPqOpxOAtB4lR1xN
+ giyVR8oERHsxnMF8RYj1cEB99xufiFOceZqflAeTkb8gqVm1xaADJpR3O4q2dANDj1ky
+ d0JhjVhj+OO/3LeIy7ISticzznLUZ5O1hj/Tc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700341556; x=1700946356;
+ d=1e100.net; s=20230601; t=1700341558; x=1700946358;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LzXkcCSsp+slrCG+DPZ2tlV+JWyDgj/mkJQKg1tlBLs=;
- b=ezfhwtU43JSyOxFbpP8rWhlgLbyeZUEZ8bgS8waSMMouV5py5Zlgdnz7rLJJggDTxf
- Y1rkhF2nJBLXYJ2kxwaoAdcKx52sc2fJNNnXFs9EXKs8M2qs64Onw0HsFFzs3sCLB2iP
- 3I804sT7bpriWq3P6bxmYIvWB1YCJLLJPxpLU9nD57HKloWjvh8iaf2Mv7N1m+6QhqJz
- lGmoKWVFvPweckAlYlotj/OVgdle+lYcJOZ37lWG0dnF04S6Xcm2YRHDpHU2ff9wqXL4
- WDKNWpv99ydT9sPWHiBYgQksODIPEm9vQhIvvc1jt9zYArmHrVoF4q1c7qLQQEU7FPOg
- 6y8Q==
-X-Gm-Message-State: AOJu0Yw0jYE9JfaAMIpF3BYtiJdVS07ICidRB7ErtVo5a2lbjAVSo7s/
- M905IERtUxtRvjtcgl6DeU8F1XngVSo1/oqDjIGotw==
-X-Google-Smtp-Source: AGHT+IFccAMmXDtJUd8kaAzZx9YxYzHPsz/2A3GeRTKY2Qqg2Ri37aqSD4PFZN4OHC4pwuwcSTYz0A==
-X-Received: by 2002:a6b:e406:0:b0:7a9:5e03:a785 with SMTP id
- u6-20020a6be406000000b007a95e03a785mr3659312iog.15.1700341556589; 
- Sat, 18 Nov 2023 13:05:56 -0800 (PST)
+ bh=tceC/EkaNu43ZPV0xbWIcKWexiTBY9v1/HMf01mPmHA=;
+ b=EnLNW6whJV32LStKqfPTbiaa24WQ6qoWZRB4sa78uDEcbaT4A3P34Qk/nbYGV5J7d3
+ 9OAL7DOjCCl+vIBwEUYgmk6vns4gLQEPZMTNfwnY2mwGHszuv/tue36K3w1+PchFmzwZ
+ gd+8t1z5jSfNbOErLfPROICOnAJAHfNsISDCfzCT0UcSFpSCGBzVo/6Vb0MwnFyhyuMa
+ vJOgAkaZnjd3DscU3NTYn14+ESpVCECa58siJKqFKznZ6sUZP+rsQ3c8MhiIt+u5quBR
+ PXy8vi4AZ9+u3OB6y6CjVPZssODSKIc5NS0scRwwoWIdcaqIk9m649pPMe6+FAd9ZeWf
+ Kifw==
+X-Gm-Message-State: AOJu0Yzwam/qrskG+kTvrbe5zeMls6dWZUEMSh74wJKKgY3ZvgLBQTqp
+ AWNdHOOwwgluGA+7l2kxUv8MiqKJnpdVmHCbJp5d6g==
+X-Google-Smtp-Source: AGHT+IGsPalgGiXWryfTMBxG57YssCgNkXUrXs7QHTzXcE+pHrcepn4zKbFu/isrIcYXbbb5QpHp+A==
+X-Received: by 2002:a6b:5114:0:b0:7b0:aee5:a413 with SMTP id
+ f20-20020a6b5114000000b007b0aee5a413mr1075275iob.15.1700341558222; 
+ Sat, 18 Nov 2023 13:05:58 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.05.55
+ eq11-20020a0566384e2b00b00464001012c7sm1126731jab.129.2023.11.18.13.05.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 18 Nov 2023 13:05:56 -0800 (PST)
+ Sat, 18 Nov 2023 13:05:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v3 01/32] arm: x86: Drop discarding of command linker-lists
-Date: Sat, 18 Nov 2023 14:04:49 -0700
-Message-ID: <20231118210547.577026-2-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH v3 03/32] mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
+Date: Sat, 18 Nov 2023 14:04:51 -0700
+Message-ID: <20231118210547.577026-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
 References: <20231118210547.577026-1-sjg@chromium.org>
@@ -90,82 +90,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we can now cleanly disable CMDLINE when needed, drop the rules
-which discard the command code.  It will not be built in the first
-place.
+The declaration of U_BOOT_ENV_LOCATION() uses a different #ifdef
+condition from the code it calls. Use the same condition to avoid a
+build warning if CONFIG_CMD_SAVEENV is disabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
 (no changes since v1)
 
- arch/arm/cpu/u-boot.lds     | 3 ---
- arch/x86/cpu/u-boot-64.lds  | 4 ----
- arch/x86/cpu/u-boot-spl.lds | 4 ----
- arch/x86/cpu/u-boot.lds     | 4 ----
- 4 files changed, 15 deletions(-)
+ env/mmc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-index fc4f63d83489..7724c9332c3b 100644
---- a/arch/arm/cpu/u-boot.lds
-+++ b/arch/arm/cpu/u-boot.lds
-@@ -14,9 +14,6 @@ OUTPUT_ARCH(arm)
- ENTRY(_start)
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
- #if defined(CONFIG_ARMV7_SECURE_BASE) && defined(CONFIG_ARMV7_NONSEC)
- 	/*
- 	 * If CONFIG_ARMV7_SECURE_BASE is true, secure code will not
-diff --git a/arch/x86/cpu/u-boot-64.lds b/arch/x86/cpu/u-boot-64.lds
-index d0398ff00d71..00a6d8691211 100644
---- a/arch/x86/cpu/u-boot-64.lds
-+++ b/arch/x86/cpu/u-boot-64.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
- 
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- #ifdef CONFIG_TEXT_BASE
- 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
+diff --git a/env/mmc.c b/env/mmc.c
+index cb14bbb58f13..da84cddd74f0 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -495,7 +495,7 @@ U_BOOT_ENV_LOCATION(mmc) = {
+ 	.location	= ENVL_MMC,
+ 	ENV_NAME("MMC")
+ 	.load		= env_mmc_load,
+-#ifndef CONFIG_SPL_BUILD
++#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_SPL_BUILD)
+ 	.save		= env_save_ptr(env_mmc_save),
+ 	.erase		= ENV_ERASE_PTR(env_mmc_erase)
  #endif
-diff --git a/arch/x86/cpu/u-boot-spl.lds b/arch/x86/cpu/u-boot-spl.lds
-index a0a2a06a18cd..50b4b1608552 100644
---- a/arch/x86/cpu/u-boot-spl.lds
-+++ b/arch/x86/cpu/u-boot-spl.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
- 
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- 	. = IMAGE_TEXT_BASE;	/* Location of bootcode in flash */
- 	__text_start = .;
- 	.text  : {
-diff --git a/arch/x86/cpu/u-boot.lds b/arch/x86/cpu/u-boot.lds
-index a31f4220a000..c418ff44aa08 100644
---- a/arch/x86/cpu/u-boot.lds
-+++ b/arch/x86/cpu/u-boot.lds
-@@ -11,10 +11,6 @@ ENTRY(_start)
- 
- SECTIONS
- {
--#ifndef CONFIG_CMDLINE
--	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
--#endif
--
- 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
- 	__text_start = .;
- 
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
