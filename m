@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEDCC072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 14:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F63C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 14:49:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7787E87135;
-	Sun, 19 Nov 2023 15:47:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B1AD8712E;
+	Sun, 19 Nov 2023 15:49:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PPAApbAL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G4VJ4SlO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A86587005; Sun, 19 Nov 2023 15:47:28 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 4CCC087124; Sun, 19 Nov 2023 15:49:54 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097EA87186
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 15:47:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31A7386F45
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 15:49:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7a94c5538aeso114852339f.3
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 06:47:11 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-54366784377so4836714a12.3
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 06:49:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700405230; x=1701010030; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=G1zxTdWrCMUEsyEdmlBqfPioITLYUvTt8UJ2EZDi++E=;
- b=PPAApbAL5bijYlemyA/Vlrg73XlviBn4ghwLhXQmP5Q4D4vtB9cWUDwFkmZuH8YUGx
- ZOKu3rPhdqw6U8BorQZynLxrqWxbqHaGS0RyK+XMLj/y5rRsKELKFPGUUtLV1bkgYp6K
- 5fuwir0uDtwCc7ojcD7W1l5kXDCsSvvX4XFho=
+ d=chromium.org; s=google; t=1700405389; x=1701010189; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7Trkp/64Bzc5cixlO+Z8AJO4bH5Vl0KMTcBPMfmov5A=;
+ b=G4VJ4SlOMAB3mKWXjcFoTsJg/csAST+3OTPpmz67F2ApOi0RwfGuYUUUEOnU+3nZ0/
+ adQHG+tttQjoVQCFn/nFRN4tvkX/KJjUnBLS4QbkGpkd4lUpyBkbAZJigvbl0R+iYT7a
+ Q+LAAIHvE99qL3odLBfHIOlD9lhzd96M1beyY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700405230; x=1701010030;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=G1zxTdWrCMUEsyEdmlBqfPioITLYUvTt8UJ2EZDi++E=;
- b=HPwyOyKNVcUx69aw+fwABA01D5NtumfhayOQLvEYn7gvI1BJkpZ2sjSyA4LIcYLTRm
- JFT/GiVbZOUqCe3e6g5RLggY6MC7Pwr2PBGXBoS0X9xp5794VgQF8IVkw2iBCvsxU+xg
- +Y80QJEpp4BmB48yY8aetM/wx4mRudjLzSUdOqA/byCPWSc/Y+8I9RMfjks5vS9RM1j1
- a92Xv4LeFZSc2wV35NrPkNrejhcdRrKAx/EIafXCdJkOpaDlexsFxrDVjFwXb5px8MAl
- GMzApHwwQtmoNIWt0G34zCvxxLTIBDXE9ZcmXGFgxk/f5UD1XcrM2U9eZfQwwokwngrA
- HUVQ==
-X-Gm-Message-State: AOJu0YzJVJJt/QD2MxZ8G0E7ct3OyaqCyc3kERUeWuskD105UByANoYJ
- UnDYgoRbxzET/ZH0sVoqz+DSXLPVB6vWpFbteaD+TQ==
-X-Google-Smtp-Source: AGHT+IE9VrnyuS/FnsTxHPGJp0LdC7nSC+uHoIcTp5Q+KtH4oYBEjN/5shL7rt8EYDP3H/xyfYkpyg==
-X-Received: by 2002:a5d:9ad4:0:b0:7a6:7e93:6f86 with SMTP id
- x20-20020a5d9ad4000000b007a67e936f86mr6183853ion.10.1700405230681; 
- Sun, 19 Nov 2023 06:47:10 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- w6-20020a023946000000b0043194542229sm1450695jae.52.2023.11.19.06.47.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 06:47:10 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 5/5] sandbox: Drop video-sync in serial driver
-Date: Sun, 19 Nov 2023 07:46:43 -0700
-Message-ID: <20231119144700.631322-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
-In-Reply-To: <20231119144700.631322-1-sjg@chromium.org>
-References: <20231119144700.631322-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1700405389; x=1701010189;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7Trkp/64Bzc5cixlO+Z8AJO4bH5Vl0KMTcBPMfmov5A=;
+ b=blr0irpqhrVdJ6LNwz09BZ+nvBgpAp8XQ2UELBxH4IKMgfHImJWcDCqexUfSl6Z4CN
+ KdVvU2MSDWsKU9oS4oDn+fX9f31kfJx1pJRyviEPJ0eyhIrUxKeL1TZbQW6+c2eBJpXk
+ jQwr8N/2439PhCbBOBKR6pw+fc5clVl/kITUGVW6jxtWLraqPb5lVPSzu/SBR4WVGHUZ
+ MoKcX6ZtAbkhNZ+Vs1ZjJ7SSOxOtzCFasrTaPeuF50Vh5GsmJzz3SNArNxBK2kCBvhvm
+ X/1GpFa9VZfs3xg3c6pUk7D3ZagvWbeqknzAKZn7WMitzVayqRyLuIzoUEaZ7owoDTIm
+ jg3g==
+X-Gm-Message-State: AOJu0YzfLGO07QYPBH0zkuOCND0DhFEKggWOVEpRZxzEcuHjXN9MRond
+ SwAAwO5q1RljpEXH//8Iay0XTzdSOjMbrPU5Gmncag==
+X-Google-Smtp-Source: AGHT+IHM5GLg7HgDWgEGZZv1FpPdWT/E3oeHAdNPennQwCSU0EyRRTrAH2XPvl5HCT0BsKBeg85X7XVpz71fZQuO97M=
+X-Received: by 2002:a17:906:a219:b0:9e4:a597:ffe with SMTP id
+ r25-20020a170906a21900b009e4a5970ffemr3075990ejy.44.1700405389440; Sun, 19
+ Nov 2023 06:49:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231112000923.73568-1-sjg@chromium.org>
+ <20231112000923.73568-3-sjg@chromium.org>
+ <f5201167-c4a3-4867-ae9f-6110f685652d@gmx.de>
+In-Reply-To: <f5201167-c4a3-4867-ae9f-6110f685652d@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Nov 2023 07:49:32 -0700
+Message-ID: <CAPnjgZ1X7k2THgD7-os04OXyrPgYwp+GgdQdtWvXg3s=ZjJnkg@mail.gmail.com>
+Subject: Re: [PATCH 02/29] mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,31 +86,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With sandbox, when U-Boot is waiting for input it syncs the video
-display, since presumably the user has finished typing.
+Hi Heinrich,
 
-Now that cyclic is used for video syncing, we can drop this. Cyclic
-will automatically call the video_idle() function when idle.
+On Wed, 15 Nov 2023 at 03:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/12/23 01:08, Simon Glass wrote:
+> > The declaration of U_BOOT_ENV_LOCATION() uses a different #ifdef
+> > condition from the code it calls. Use the same condition to avoid a
+> > build warning if CONFIG_CMD_SAVEENV is disabled.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >   env/mmc.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/env/mmc.c b/env/mmc.c
+> > index cb14bbb58f13..da84cddd74f0 100644
+> > --- a/env/mmc.c
+> > +++ b/env/mmc.c
+> > @@ -495,7 +495,7 @@ U_BOOT_ENV_LOCATION(mmc) = {
+> >       .location       = ENVL_MMC,
+> >       ENV_NAME("MMC")
+> >       .load           = env_mmc_load,
+> > -#ifndef CONFIG_SPL_BUILD
+> > +#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_SPL_BUILD)
+>
+> According to README CONFIG_SPL_BUILD is not defined for TPL builds.
+>
+> I assume that we don't want to have below fields in TPL either. Please, use
+>
+> #if CONFIG_IS_ENABLED(CMD_SAVEENV)
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+I missed this comment in the new version. But note that
+CONFIG_SPL_BUILD covers TPL (and others) as well.
 
- drivers/serial/sandbox.c | 2 --
- 1 file changed, 2 deletions(-)
+It is a bit confusing. Perhaps we should introduce CONFIG_XPL_BUILD to
+mean anything other than U-Boot proper?
 
-diff --git a/drivers/serial/sandbox.c b/drivers/serial/sandbox.c
-index f6ac3d228526..be72fd2c65f7 100644
---- a/drivers/serial/sandbox.c
-+++ b/drivers/serial/sandbox.c
-@@ -139,8 +139,6 @@ static int sandbox_serial_pending(struct udevice *dev, bool input)
- 		return 0;
- 
- 	os_usleep(100);
--	if (IS_ENABLED(CONFIG_VIDEO) && !IS_ENABLED(CONFIG_SPL_BUILD))
--		video_sync_all();
- 	avail = membuff_putraw(&priv->buf, 100, false, &data);
- 	if (!avail)
- 		return 1;	/* buffer full */
--- 
-2.43.0.rc0.421.g78406f8d94-goog
+>
+> Best regards
+>
+> Heinrich
+>
+> >       .save           = env_save_ptr(env_mmc_save),
+> >       .erase          = ENV_ERASE_PTR(env_mmc_erase)
+> >   #endif
+>
 
+Regards,
+Simon
