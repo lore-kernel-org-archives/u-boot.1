@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F154C072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E3D5C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:12:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAFD6874CC;
-	Sun, 19 Nov 2023 20:12:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35954871C7;
+	Sun, 19 Nov 2023 20:12:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lbYHVncj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mpLzbqB3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7243E874BB; Sun, 19 Nov 2023 20:12:20 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id C6229871ED; Sun, 19 Nov 2023 20:12:20 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C1E6871ED
+ by phobos.denx.de (Postfix) with ESMTPS id AA9D78272A
  for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-7a93df91813so118515339f.2
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-357cc880bd8so14077405ab.0
  for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700421133; x=1701025933; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700421134; x=1701025934; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4f8vQiSFowsYdygfc4rlj3q1P14WUjefrA2IpQ6NKu8=;
- b=lbYHVncjoCEZqvev7jokuE9J4gE6d/1rpchCvPn2k4syLg9aeHg1k9ouwJdZUSa2TH
- ljtOU2DUvoo7BZ2kbwiMtf8+9b3lpWpEhUNaz+PqaigIxiNOfUqrP5RJ6hestQoelDeH
- dG5sl2d/3cyHRZoIZThbsPbmGb0sY4/ly6Kdw=
+ bh=ffyijbZj0PYGQJTk2nPZyXM5agjM9ZiGMWAHMtyamfQ=;
+ b=mpLzbqB3WGapNBWZhov2nKzh0uvY8W9L1SDcZYp8AI/0htD9gm1LLk9JVHGCDes5cG
+ i+YqdF+Nj4V1qzbAgz0zY0SzVqbT44iOoFiiUaPEhiiBZztxDeuH6fVUBngmiLtuuzv0
+ R30ZAt6NrL0QfkzzV95uv4qeBbxRialgX3We8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700421133; x=1701025933;
+ d=1e100.net; s=20230601; t=1700421134; x=1701025934;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4f8vQiSFowsYdygfc4rlj3q1P14WUjefrA2IpQ6NKu8=;
- b=WjyZeo+hWr4lt9dWhlMdQu8fOU8IeRBHmQBOtza7Bl32PrDpoFHOujIJENOtCctamt
- asQ8MjUDvGHJvAzYs9Hn4C8qU2Xgf6kjXW3UZd3wiD7aNvohYgMOfiGKWgdfeW3jbu9A
- i9oC9QUdFhdx0PHTcvLNlnrQRISTHrk1hLdsaGNJbZ84ysfPmA1rhOCB5cAxbQQpX9Uw
- 453nViE1t49+bU/Bp6bErKAQmVpWAyJqTgeRX1RO7pnieId3oSPKG2f9vKIZig6NQzl5
- Tzg78U11CHfRsXdmjWBVoq8lcr5T6Ni/nWr12PPQG1wjPzX8xo6MR2wdcUsAvwptAt4K
- Vv9Q==
-X-Gm-Message-State: AOJu0Yw9A0X0EV6KzVLbYyv/FdEV0Nuux6An7DpjOuLnnax0Ao0zXKIB
- JH+cry0C1YV2xe26PjE5+Po/t/mpjQn9kdH4w0t1pQ==
-X-Google-Smtp-Source: AGHT+IGeu58enXg9f8heMBMmXfi8NpO6E18L4IiTroKhUssEr1Jic9wcfziOphkU0vQyG5HM6ClUrA==
-X-Received: by 2002:a92:ab05:0:b0:357:f41c:8bf6 with SMTP id
- v5-20020a92ab05000000b00357f41c8bf6mr6456608ilh.17.1700421133547; 
- Sun, 19 Nov 2023 11:12:13 -0800 (PST)
+ bh=ffyijbZj0PYGQJTk2nPZyXM5agjM9ZiGMWAHMtyamfQ=;
+ b=ZEyKgHc6+BlnmcSrlXTqPkbRwfsgAy+TCYXx7WakZ+EqwxfRdxOu4IWyPs3xB7+RMV
+ AiYN6bX0R4e3zCiLnvI0nHWR9GSS14nWPKvhBysPb+JL/ny6S1JgwIUpGJ8fGCSPRr4D
+ TPA8eLL1tBh/ahcERPYzoHznFGG2rp0ppDNKRXPjizfl3RVFhANd614zbTIQvLH49Q9X
+ YwWZ8fwUhTcQTw8RD4z3OKycepelAD4+KpvfYypsEbTOalaVrY/fsXjEDa7J2zxEpdmF
+ 5pR6/iXB3j2thGOJCL/B9faV4sqbvrF972wvcu5Z4RGC3SUc84a86++5ZX/jc/FgezYP
+ Xeow==
+X-Gm-Message-State: AOJu0YyjJWYGmmbjzCVvM0fBodJOp8V6Su62foReC88Kh+q1YqmWK6c5
+ OyEkidhY4ptLeCR8tn/GTT7/Q9lfgMdaLz4HjW0NYQ==
+X-Google-Smtp-Source: AGHT+IEsYtoy/+16HOuPrQ0+k/r1MtXmDZPymPAd6s4kvwxjWBhycNARj1u+Vztxhl8NnP12UrG3TQ==
+X-Received: by 2002:a92:ca0d:0:b0:35a:f715:7a0e with SMTP id
+ j13-20020a92ca0d000000b0035af7157a0emr7226432ils.14.1700421134253; 
+ Sun, 19 Nov 2023 11:12:14 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 11:12:13 -0800 (PST)
+ Sun, 19 Nov 2023 11:12:14 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Jaewon Jung <jaewon8868@gmail.com>
-Subject: [PATCH v5 03/12] bootstd: Add a return code to bootflow menu
-Date: Sun, 19 Nov 2023 12:11:38 -0700
-Message-ID: <20231119121144.v5.3.Iaa9b5bbab0f25012cfc68a803a9da83e71b19aaf@changeid>
+Cc: Simon Glass <sjg@chromium.org>,
+	Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v5 04/12] x86: coreboot: Add a boot script
+Date: Sun, 19 Nov 2023 12:11:39 -0700
+Message-ID: <20231119121144.v5.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231119191202.667180-1-sjg@chromium.org>
 References: <20231119191202.667180-1-sjg@chromium.org>
@@ -88,244 +88,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return an error when the user does not select an OS, so we know whether
-to boot or not.
-
-Move calling of bootflow_menu_run() into a separate function so we can
-call it from other places.
-
-Expand the test to cover these cases.
-
-Add some documentation also, while we are here.
+Provide the user with a list of available boot options. Selecting one
+causes it to be booted. Pressing <ESC> causes U-Boot to return to the
+command-line prompt.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
 (no changes since v3)
 
 Changes in v3:
-- Add missing word 'function' in the commit message
+- Clear the screen before booting
 
 Changes in v2:
-- Add new patch to add a return code to bootflow menu
+- Add new patch to add a coreboot boot script
 
- cmd/bootflow.c             | 53 +++++++++++++++++++++++-------
- doc/usage/cmd/bootflow.rst | 67 ++++++++++++++++++++++++++++++++++++++
- test/boot/bootflow.c       | 15 +++++++++
- 3 files changed, 123 insertions(+), 12 deletions(-)
+ configs/coreboot64_defconfig | 1 +
+ configs/coreboot_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index ad39ebe4379f..3aeb40d690f4 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -89,6 +89,44 @@ static void show_footer(int count, int num_valid)
- 	       num_valid);
- }
- 
-+/**
-+ * bootflow_handle_menu() - Handle running the menu and updating cur bootflow
-+ *
-+ * This shows the menu, allows the user to select something and then prints
-+ * what happened
-+ *
-+ * @std: bootstd information
-+ * @text_mode: true to run the menu in text mode
-+ * @bflowp: Returns selected bootflow, on success
-+ * Return: 0 on success (a bootflow was selected), -EAGAIN if nothing was
-+ *	chosen, other -ve value on other error
-+ */
-+__maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
-+					       bool text_mode,
-+					       struct bootflow **bflowp)
-+{
-+	struct bootflow *bflow;
-+	int ret;
-+
-+	ret = bootflow_menu_run(std, text_mode, &bflow);
-+	if (ret) {
-+		if (ret == -EAGAIN) {
-+			printf("Nothing chosen\n");
-+			std->cur_bootflow = NULL;
-+		} else {
-+			printf("Menu failed (err=%d)\n", ret);
-+		}
-+
-+		return ret;
-+	}
-+
-+	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
-+	std->cur_bootflow = bflow;
-+	*bflowp = bflow;
-+
-+	return 0;
-+}
-+
- static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 			    char *const argv[])
- {
-@@ -455,18 +493,9 @@ static int do_bootflow_menu(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (ret)
- 		return CMD_RET_FAILURE;
- 
--	ret = bootflow_menu_run(std, text_mode, &bflow);
--	if (ret) {
--		if (ret == -EAGAIN)
--			printf("Nothing chosen\n");
--		else {
--			printf("Menu failed (err=%d)\n", ret);
--			return CMD_RET_FAILURE;
--		}
--	}
--
--	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
--	std->cur_bootflow = bflow;
-+	ret = bootflow_handle_menu(std, text_mode, &bflow);
-+	if (ret)
-+		return CMD_RET_FAILURE;
- 
- 	return 0;
- }
-diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
-index 9c5ea9c5d84e..2198ff60493e 100644
---- a/doc/usage/cmd/bootflow.rst
-+++ b/doc/usage/cmd/bootflow.rst
-@@ -15,6 +15,7 @@ Synopis
-     bootflow read
-     bootflow boot
-     bootflow cmdline [set|get|clear|delete|auto] <param> [<value>]
-+    bootfloe menu [-t]
- 
- Description
- -----------
-@@ -24,6 +25,9 @@ locate bootflows, list them and boot them.
- 
- See :doc:`../../develop/bootstd` for more information.
- 
-+Note that `CONFIG_BOOTSTD_FULL` (which enables `CONFIG_CMD_BOOTFLOW_FULL) must
-+be enabled to obtain full functionality with this command. Otherwise, it only
-+supports `bootflow scan` which scans and boots the first available bootflow.
- 
- bootflow scan
- ~~~~~~~~~~~~~
-@@ -247,6 +251,16 @@ can be used to set the early console (or console) to a suitable value so that
- output appears on the serial port. This is only supported by the 16550 serial
- driver so far.
- 
-+bootflow menu
-+~~~~~~~~~~~~~
-+
-+This shows a menu with available bootflows. The user can select a particular
-+bootflow, which then becomes the current one.
-+
-+The `-t` flag requests a text menu. Otherwise, if a display is available, a
-+graphical menu is shown.
-+
-+
- Example
- -------
- 
-@@ -658,6 +672,56 @@ Now the buffer can be accessed::
-     77b7e4e0: 320fc000 08e8ba0f c031300f b8d0000f  ...2.....01.....
-     77b7e4f0: 00000020 6ad8000f 00858d10 50000002   ......j.......P
- 
-+This shows using a text menu to boot an OS::
-+
-+    => bootflow scan
-+    => bootfl list
-+    => bootfl menu -t
-+    U-Boot    :    Boot Menu
-+
-+    UP and DOWN to choose, ENTER to select
-+
-+      >    0  mmc1        mmc1.bootdev.whole
-+           1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-+           2  mmc1        mmc1.bootdev.part_1
-+           3  mmc4        mmc4.bootdev.whole
-+           4  mmc4        Armbian
-+           5  mmc4        mmc4.bootdev.part_1
-+           6  mmc5        mmc5.bootdev.whole
-+           7  mmc5        ChromeOS
-+           8  mmc5        ChromeOS
-+    U-Boot    :    Boot Menu
-+
-+    UP and DOWN to choose, ENTER to select
-+
-+           0  mmc1        mmc1.bootdev.whole
-+      >    1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-+           2  mmc1        mmc1.bootdev.part_1
-+           3  mmc4        mmc4.bootdev.whole
-+           4  mmc4        Armbian
-+           5  mmc4        mmc4.bootdev.part_1
-+           6  mmc5        mmc5.bootdev.whole
-+           7  mmc5        ChromeOS
-+           8  mmc5        ChromeOS
-+    U-Boot    :    Boot Menu
-+
-+    Selected: Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-+    => bootfl boot
-+    ** Booting bootflow 'mmc1.bootdev.part_1' with extlinux
-+    Ignoring unknown command: ui
-+    Ignoring malformed menu command:  autoboot
-+    Ignoring malformed menu command:  hidden
-+    Ignoring unknown command: totaltimeout
-+    Fedora-Workstation-armhfp-31-1.9 Boot Options.
-+    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-+    Enter choice: 1
-+    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-+    Retrieving file: /vmlinuz-5.3.7-301.fc31.armv7hl
-+    Retrieving file: /initramfs-5.3.7-301.fc31.armv7hl.img
-+    append: ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB
-+    Retrieving file: /dtb-5.3.7-301.fc31.armv7hl/sandbox.dtb
-+    ...
-+
- 
- Return value
- ------------
-@@ -667,6 +731,9 @@ return to U-Boot. If something about the U-Boot processing fails, then the
- return value $? is 1. If the boot succeeds but for some reason the Operating
- System returns, then $? is 0, indicating success.
- 
-+For `bootflow menu` the return value is $? is 0 (true) if an option was choses,
-+else 1.
-+
- For other subcommands, the return value $? is always 0 (true).
- 
- 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 102b2b561356..b97c566f000b 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -604,8 +604,12 @@ static int scan_mmc4_bootdev(struct unit_test_state *uts)
- /* Check 'bootflow menu' to select a bootflow */
- static int bootflow_cmd_menu(struct unit_test_state *uts)
- {
-+	struct bootstd_priv *std;
- 	char prev[3];
- 
-+	/* get access to the current bootflow */
-+	ut_assertok(bootstd_get_priv(&std));
-+
- 	ut_assertok(scan_mmc4_bootdev(uts));
- 
- 	/* Add keypresses to move to and select the second one in the list */
-@@ -616,6 +620,17 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
- 
- 	ut_assertok(run_command("bootflow menu", 0));
- 	ut_assert_nextline("Selected: Armbian");
-+	ut_assertnonnull(std->cur_bootflow);
-+	ut_assert_console_end();
-+
-+	/* Check not selecting anything */
-+	prev[0] = '\e';
-+	prev[1] = '\0';
-+	ut_asserteq(1, console_in_puts(prev));
-+
-+	ut_asserteq(1, run_command("bootflow menu", 0));
-+	ut_assertnull(std->cur_bootflow);
-+	ut_assert_nextline("Nothing chosen");
- 	ut_assert_console_end();
- 
- 	return 0;
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index 1f1327f5bfec..92cca6e6aaef 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -17,6 +17,7 @@ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index 8356bc12659c..3762cde6f3a6 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -15,6 +15,7 @@ CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
