@@ -4,65 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D3BDC2BB3F
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CEB1C2BB3F
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:43:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3222686EDA;
-	Sun, 19 Nov 2023 01:43:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1384286F5E;
+	Sun, 19 Nov 2023 01:43:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MX6EyfOh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DzMZ2EL2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1578C87006; Sun, 19 Nov 2023 01:43:26 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id E5EFB87032; Sun, 19 Nov 2023 01:43:30 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17A8586EDA
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B0EE86EB8
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-9d216597f64so437494766b.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:22 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-9f2a53704aaso420555266b.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700354601; x=1700959401; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Tz6P96QUD105FW+BI8o/OmKDz+DlWKLpJkO1CmXBiag=;
- b=MX6EyfOh9VOuMMNNTwmIv4InDI73rER5yEfVNykEatOOJjm2+EvtGDmmtmtIdjIC43
- 4oa0T2Sbfo4yT5trCqxfGKi3FyLOWm9WoRCn+nqpgERbO3nVyJBqHz7DA2HZ7Efq21RS
- L8ULZ4k0EfSl56Yft3H5lXEm2UD2uDcvl7w9o=
+ bh=lkn1InEA6DSrmfkoKAkdcHz0geUYdseFLgf7LvtxTcU=;
+ b=DzMZ2EL2AfmaH+tsodyrkU3HimdeQIIgF0JyqbUcKCdXsa42sXRKKOtQpmoBQ8ZPnz
+ O3WTlDdBn0KFGeBahPACumUc52nqOUeznAKih6g5RzFRtdFP6F/Te2YZX52BNKu09fuf
+ 5a7OzmLq/4VsxhYCJVk9sTfNIpQjySkYpfv3E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700354601; x=1700959401;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Tz6P96QUD105FW+BI8o/OmKDz+DlWKLpJkO1CmXBiag=;
- b=HE65EjqEWKaVheiehZSPPwyy/Clh8DPs3YYEg8TwhL/8iTZPMFJTFuPF+bQfJ6deek
- /3jCba773kfs45PhdrycY6YUbZi0uhP1DwkO2ZJ9XcIuGZQWkSV2z8cvodZwIfHfG+gs
- 9dcCrYOqz7FGSDL1H470LAx/+uC+67X7AzdMIfIpaDQN4E7HxQPgHfaFqEApZbZhuiYJ
- jZ17aqTe7w1ieVll6gsEuOMuFRpQkBLTitutiE5ND0cvZjSyQD8xcig3UX3kAv6dXPzz
- wuIiTBI3I2T9oJvq8JDA7pCQXNVxVlYVWVKZgUf38rX+2iGk8+Vc+YVVYSc0s7LAe82P
- 1/7w==
-X-Gm-Message-State: AOJu0Yz8gNwDnIf+1XgSVp4DeUtefS9Q6ghVc9Ab+jLiWhA6Va3wFHqO
- d5vb5p4xsLJsEcq0Qp0NeY47HER6mGA6yv7moO79u8Ehd8HpvhxN5EI=
-X-Google-Smtp-Source: AGHT+IHNj8NuaE+1d2QLV7C78CyIKp6QG6dm5o3vZn/1crznVX9o/CSQ5WZPJxiEyOw5sR9UC1lxpH9qCDKK5dIQGNM=
-X-Received: by 2002:a17:906:99d6:b0:9be:68db:b763 with SMTP id
- s22-20020a17090699d600b009be68dbb763mr3981866ejn.71.1700354601243; Sat, 18
- Nov 2023 16:43:21 -0800 (PST)
+ bh=lkn1InEA6DSrmfkoKAkdcHz0geUYdseFLgf7LvtxTcU=;
+ b=E94IG/inRzbqDdkLE+TeZv4JMF5/eFfeEeRCgsSgibnjUCC8RZiYKUde8BsKgF9kKW
+ /b30BWFaC4Ys4BsDXFr2pTC/OIAZhVpDlI4ZVoiO/c72ZKLCVTnowAKVbFJLjmGJ+hJs
+ Mzu99iLELgC1iyi+b5R0EfkQPucsYS+Vze9WXXP0VbW1DsTCP2+SXAbfPOyLIaBRBtqC
+ TvWcoIqf0nZcv3azCSs1VbKQ7qKQ2AQlVOTi2RuGFPvcf8pR6Xq/SddS7l9RKLMzNuCr
+ kzWtFWhjJDaIGmybHtvTBJGjF+0i29G+/vUQ9VfBITKvYnLDt4xeRLU/6U5CzHZcxnvb
+ VLuw==
+X-Gm-Message-State: AOJu0YwQXv6KwUZbbdUD1DzCypmUWDhd99gA8P0TfqjHfaFyVjBRy3gR
+ soeyqFVPfRrDMaWNmCsdxaWj7PSxw7LHUyE4i9qyQVVW26Jx2nTaVyM=
+X-Google-Smtp-Source: AGHT+IF6xkKUum11+VMENrvWcXP5sHFNEtnjF833jKaOOhY5xVbjmy+M04FmLgHEHVeQ1EagfJIzTidqjxfRQ8fuFJs=
+X-Received: by 2002:a17:906:1848:b0:9ba:65e:7529 with SMTP id
+ w8-20020a170906184800b009ba065e7529mr2673790eje.68.1700354601242; Sat, 18 Nov
+ 2023 16:43:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20231118215237.94875-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231118215237.94875-1-heinrich.schuchardt@canonical.com>
+References: <CABEcMwWNxzvkkC6-OwUx7AedhctfT00fM-ubXVf9ec1RoMmgOQ@mail.gmail.com>
+ <20231114203309.852289-1-i@shantur.com>
+In-Reply-To: <20231114203309.852289-1-i@shantur.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 17:43:02 -0700
-Message-ID: <CAPnjgZ1VV13ESFie-8XEu1JEC=5YX9D-TATDVPwJC6M7AYTxsQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] acpi: simplify acpi_write_ssdt()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 18 Nov 2023 17:42:58 -0700
+Message-ID: <CAPnjgZ1PBMCKj1unHXWHxvLo5Gy2pP207MxEnPoqzLik8nsGdg@mail.gmail.com>
+Subject: Re: [PATCH v2] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+To: Shantur Rathore <i@shantur.com>
+Cc: jonas@kwiboo.se, u-boot@lists.denx.de, philipp.tomsich@vrull.eu, 
+ kever.yang@rock-chips.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,16 +83,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Nov 2023 at 14:52, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Tue, 14 Nov 2023 at 13:34, Shantur Rathore <i@shantur.com> wrote:
 >
-> * Converting to void * is superfluous when calling memset().
-> * acpi_fill_header() already fills oem_table_id.
->
-> Fixes: d953137526cc ("x86: Move SSDT table to a writer function")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Shantur Rathore <i@shantur.com>
 > ---
->  lib/acpi/ssdt.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+>  arch/arm/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+But it needs a commit message
+
+
+
+>
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index d812685c98..fca6ef6d7e 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
+>         imply CMD_DM
+>         imply DEBUG_UART_BOARD_INIT
+>         imply BOOTSTD_DEFAULTS
+> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
+>         imply FAT_WRITE
+>         imply SARADC_ROCKCHIP
+>         imply SPL_SYSRESET
+> --
+> 2.40.1
+>
