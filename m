@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483DEC5AE5B
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 17:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E147C54E76
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 18:24:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FE6086D0E;
-	Sun, 19 Nov 2023 18:38:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 439E4870E7;
+	Sun, 19 Nov 2023 19:24:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="H2saiZi3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LNCq2CJy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06F34868BF; Sun, 19 Nov 2023 18:38:23 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 07A74868D1; Sun, 19 Nov 2023 19:24:03 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 071198701F
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 18:38:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE5EF869C4
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 19:23:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 5a44726b-8702-11ee-abd3-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 5a44726b-8702-11ee-abd3-005056999439;
- Sun, 19 Nov 2023 18:37:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=content-type:mime-version:subject:to:from:message-id:date;
- bh=SguFD/HiDP2G8BFzZEOopSxdl4/B7pcVRgeliq1dN0g=;
- b=H2saiZi3WV0UBXJb8a6sjuuEssKXcLRHqZbnKAhRL0Nq70NCaRZMwixLnFp0lrM6+YYVEiG6CzeTx
- jUH8w22aqAJ17XNZrFUyVbuc9CoZ5LVZf7gRg53y6FS6oFomZPdAL74Qv47zGXq/eYu/iTgroZuEgd
- EWuzpw2GsuNtWWE79e9NTFj8O0GP8ZBd2bBNyaul6iYiO41P9kSiPqyi91LJcPcnps9vOF14R9lIB3
- ULcaAfVnLnWdLkk53MmpM2CwyIPfaVxOeOQmh67+ildtqAILVQkiYw+Bj/kKyPjsAYK6X+6FuX3N42
- PowLgW+nR5sClkET/lttz6voqDt3j6Q==
-X-KPN-MID: 33|T0JU03f+OO0w5EtaZr/owX4VSMYTnE0z/TWXNDzGnKWJHxHHdy6fr9jvi1WwoLT
- mkLJ4R/UT+aOx88E6gB3NYtzV07CgV2j85gHydu6bN74=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|WZAwNb6Qiug27SSGl3ZMZ/zvLNhpOYVEXoLZ/C08/VX/lyqzGH0pedkcou2iyxc
- 1XGxp0C6/6jcHD08MUE9yxA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 6c87c6f9-8702-11ee-9dc8-00505699772e;
- Sun, 19 Nov 2023 18:38:18 +0100 (CET)
-Date: Sun, 19 Nov 2023 18:38:17 +0100
-Message-Id: <87fs11tzhy.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: i@shantur.com, u-boot@lists.denx.de, sjg@chromium.org,
- ilias.apalodimas@linaro.org, trini@konsulko.com
-In-Reply-To: <adf71fc6-9323-4c56-9f26-f12c09fa7275@canonical.com> (message
- from Heinrich Schuchardt on Sat, 18 Nov 2023 23:52:11 +0100)
-Subject: Re: bootstd: Support for distro specific EFI folders
-References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
- <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
- <CAHc5_t33K1J=mDteE8jTLoLpFonPSKWBgs43Ak748q1WJ4Uv8A@mail.gmail.com>
- <493b645c-1bf2-4bd9-9457-30e98aa17040@canonical.com>
- <CAHc5_t3_soy2Je+CMazMMW+1Dhx15704SMuXZwnYhToxdb8vnw@mail.gmail.com>
- <adf71fc6-9323-4c56-9f26-f12c09fa7275@canonical.com>
-MIME-version: 1.0
-Content-type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5435336ab0bso5350770a12.1
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 10:23:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1700418238; x=1701023038; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=OpWbDZKk0t9YGxJOtind4x9VtkT+kSzaDiHZa/vRsdY=;
+ b=LNCq2CJyW5Gv+Drq2+ceFStzLcfDiJdRmLPA9uUoLwv8hT2pwjguhH0hK1Eo3iBibz
+ PYlnAAG4+8ewDyWc4yhhkQm56miznyC+6lXV7c+rpXzEenzqRFVOdFRXJvaJP69DMrEC
+ WNvshnnvvtpbxYBzHbp2fnc4FhnzImvsuJNLA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700418238; x=1701023038;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OpWbDZKk0t9YGxJOtind4x9VtkT+kSzaDiHZa/vRsdY=;
+ b=NhNwPUBud8+L8GujEaC3qPJbgo+cXqybaHezZ8b4K9RRK1g+uEg62bEf4w5/HSJ5od
+ B1WcJssIY6uwr8OjBB7UgmGz+BAUAAXMciv5TyKuBr/yu9uYPdidALsQ/EsTrTggOviN
+ 2iWG/Lb7HWHdHkZVoPHOhaWKa9Ps1GY3ULmt4jfoHKFpvlRchKbs1Wdg2Q5ia6t7B7BD
+ G4tWiwtZ+VEyqkXdzHd18lXk5Qc0xrapNS43fnc5Bp3NVdgqnkdsAdz7NvDSIAOuQGhp
+ cRCCne64scKkmdAvDEGsT6hPixa4OQGItpYbF/aUXxAgBcQNuG7H0E8t3d4WlwybEYaS
+ YrEA==
+X-Gm-Message-State: AOJu0YwvmTVwBaYQjud6ZLSYgJ73OZJJ5GDf0jxnFjwFg/RUFy8psprb
+ FUi9sN+IiNHpSTLHlRs9Xyj7xjGX7ELylkPdc/gzBg==
+X-Google-Smtp-Source: AGHT+IFzgbWjkgx2J8IGboo54K/y15YBiOB2xzx+4SxOdcAE/b+S8a1A8jz0z+ssi1V56Hn9dRN4XnEwQfXU/w12nKw=
+X-Received: by 2002:a17:907:3f19:b0:9d0:51d4:4d87 with SMTP id
+ hq25-20020a1709073f1900b009d051d44d87mr5528778ejc.62.1700418238123; Sun, 19
+ Nov 2023 10:23:58 -0800 (PST)
+MIME-Version: 1.0
+References: <20231119144700.631322-1-sjg@chromium.org>
+ <20231119144700.631322-2-sjg@chromium.org>
+ <20231119155909.GC2513409@bill-the-cat>
+In-Reply-To: <20231119155909.GC2513409@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Nov 2023 11:23:41 -0700
+Message-ID: <CAPnjgZ0LDXcstrAgx8nb53Cw1=1Y8Zait-e884A5i8H5CY6hnQ@mail.gmail.com>
+Subject: Re: [PATCH 1/5] cyclic: Disable in SPL builds
+To: Tom Rini <trini@konsulko.com>
+Cc: Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Nikhil M Jain <n-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,148 +85,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Sat, 18 Nov 2023 23:52:11 +0100
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Hi Tom,
 
-Hi Heinrich,
+On Sun, 19 Nov 2023 at 08:59, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Nov 19, 2023 at 07:46:39AM -0700, Simon Glass wrote:
+>
+> > The cyclic subsystem is currently enabled in all build phases or none.
+> > So far it doesn't have any purpose within SPL builds, so adjust the
+> > rules to prevent it being built in that case.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  common/Makefile  | 2 +-
+> >  include/cyclic.h | 6 ++++--
+> >  2 files changed, 5 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/common/Makefile b/common/Makefile
+> > index 1495436d5d45..27443863bf9b 100644
+> > --- a/common/Makefile
+> > +++ b/common/Makefile
+> > @@ -77,7 +77,7 @@ obj-$(CONFIG_CROS_EC) += cros_ec.o
+> >  obj-y += dlmalloc.o
+> >  obj-$(CONFIG_$(SPL_TPL_)SYS_MALLOC_F) += malloc_simple.o
+> >
+> > -obj-$(CONFIG_CYCLIC) += cyclic.o
+> > +obj-$(CONFIG_$(SPL_TPL_)CYCLIC) += cyclic.o
+> >  obj-$(CONFIG_$(SPL_TPL_)EVENT) += event.o
+> >
+> >  obj-$(CONFIG_$(SPL_TPL_)HASH) += hash.o
+>
+> This is fine, but I suspect we're missing SPL_CYCLIC as a symbol and
+> SPL_WDT should be select'ing that, same as "WDT".
 
-> On 11/18/23 22:28, Shantur Rathore wrote:
-> > Hi Heinrich,
-> > 
-> > On Fri, Nov 17, 2023 at 3:12 PM Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 11/16/23 19:45, Shantur Rathore wrote:
-> >>> On Thu, Nov 16, 2023 at 6:15 PM Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>
-> >>>> On 11/16/23 17:52, Shantur Rathore wrote:
-> >>>>> Hi Simon,
-> >>>>>
-> >>>>> Currently bootstd - bootmethod_efi only looks for the default
-> >>>>> bootxx64.efi in /EFI/boot folder only.
-> >>>>> Generally many distros end up putting their bootloaders in
-> >>>>> EFI/<distro> folders like EFI/ubuntu and EFI/debian etc.
-> >>>>>
-> >>>>> In x86 worlds, the NVRAM is modified and new boot entries are added to
-> >>>>> support these but in the U-boot world the NVRAM variables are
-> >>>>> read-only.
-> >>>>
-> >>>> I guess you are referring to UEFI boot options. These typically are not
-> >>>> stored in non-volatile RAM but on a SPI flash device.
-> >>>>
-> >>>
-> >>> Thanks for correcting me.
-> >>>
-> >>>>>
-> >>>>> What would be the best way to implement this?
-> >>>>>
-> >>>>> I was thinking of having a "efi_prefixes" environment variable which
-> >>>>> can be set to "ubuntu debian centos" etc and bootmethod_efi can try
-> >>>>> all of them. Will bootmethod_efi be able to support multiple entries (
-> >>>>> thinking of multiboot ) ?
-> >>>>
-> >>>> On my laptop I have:
-> >>>>
-> >>>> EFI/Microsoft/Boot/bootmgr.efi
-> >>>> EFI/Microsoft/Boot/memtest.efi
-> >>>> EFI/Boot/bootx64.efi
-> >>>> EFI/Boot/fbx64.efi
-> >>>> EFI/Boot/mmx64.efi
-> >>>> EFI/debian/shimx64.efi
-> >>>> EFI/debian/grubx64.efi
-> >>>> EFI/debian/mmx64.efi
-> >>>> EFI/debian/fbx64.efi
-> >>>> EFI/ubuntu/grubx64.efi
-> >>>> EFI/ubuntu/shimx64.efi
-> >>>> EFI/ubuntu/mmx64.efi
-> >>>>
-> >>>> Obviously each installed operating system provides multiple EFI binaries
-> >>>> and non uses the fallback file name BOOT<ARCH>.EFI. A value "ubuntu
-> >>>> debian centos" would not be able to describe which file you are looking
-> >>>> for.
-> >>>>
-> >>>> We already have the U-Boot command line eficonfig and efidebug commands
-> >>>> to set up UEFI boot options which can describe which EFI binary to load
-> >>>> and which command line to pass to it. These are considered by the
-> >>>> existing boot flows.
-> >>>
-> >>> So, I am building a new RockPro64 based cluster and using Canonical
-> >>> MAAS to set them up automatically, booting them up using DHCP and
-> >>> installing them over the network.
-> >>> I configured an Armbian image using Packer to be compatible with MAAS
-> >>> and it happily installs it. As part of installation process, a
-> >>> grub-install is run which installs the grub efi,
-> >>> this EFI ends up in EFI/debian instead of expected EFI/boot.
-> >>> To be able to make it boot, I have to add commands to move it to
-> >>> EFI/boot. I am trying to find a way in U-Boot that would allow me to
-> >>> skip this step.
-> >>> With eficonfig if I understand correctly, it would need manual
-> >>> intervention to create boot entries.
-> >>>
-> >>>>
-> >>>> If you are installing the shim-signed package on Ubuntu, the EFI boot
-> >>>> option for Ubuntu is set up by EFI/BOOT/BOOT<ARCH>.EFI using the content
-> >>>> of EFI/ubuntu/BOOT<ARCH>.CSV. This is done before ExitBootServices() and
-> >>>> therefore should work with current U-Boot.
-> >>>>
-> >>>> Patches are pending upstream to make EFI variables writable from Linux
-> >>>> if they are stored in the RPMB partition in the eMMC. See this series:
-> >>>>
-> >>>> https://lore.kernel.org/linux-efi/20231107054057.1893-2-masahisa.kojima@linaro.org/
-> >>>>
-> >>>
-> >>> Would it be possible to save it in SPI Flash as the U-Boot environment ?
-> >>
-> >> Currently this is not supported by U-Boot.
-> >>
-> >> The U-Boot environment variables can be stored in lots of different
-> >> places SPI flash is only one of these. But none of these locations is
-> >> protected from OS access which would be preferable for UEFI variables
-> >> for security reasons.
-> >>
-> >> To support boards without eMMC the right way forward would be writing a
-> >> new implementation of the OP-TEE standalone MM which writes the
-> >> variables to SPI flash instead of the RPMB partition and ensures that
-> >> the SPI flash' MMIO registers are protected against access from the
-> >> non-secure world.
-> > 
-> > Thanks for explaining this to me.
-> > This seems like a long way to go, for now what would be an acceptable
-> > solution, some options are
-> > 
-> > 1. Allow to set a space separated efi_prefixes (e.g. "boot ubuntu
-> > debian") variable which is ready by bootmeth_efi and used as
-> > efi/<efi_prefix> instead of efi/boot.
-> > 2. Improve bootmeth_efi to find all bootxxxx.efi in efi/ folder and
-> > present all them as bootflows to bootstd.
-> 
-> As mentioned in a prior mail ubuntu/bootxxxx.efi and debian/bootxxxx.efi 
-> don't exist. I would prefer not to add any distro specific stuff in 
-> upstream U-Boot. Instead we will continue to drive what Linaro has 
-> suggested to improve U-Boot EFI variables support in Linux.
+Ooops I had assumed that it wasn't used in SPL but of course watchdog
+is completely migrated to it now...I will add a symbol.
 
-I agree that adding hacks like this is not a good idea.
+BTW the watchdog Kconfig seems a little confusiing. There is only one
+board using WATCHDOG without WDT and only 3 using HW_WATCHDOG
 
-The Linaro approach that involves OP-TEE makes for a fairly complex
-solution.  And there are plenty of boards that have neither eMMC nor
-SPI flash.  If Secure Boot is not a requirement (and I'd argue that
-for most "hobbyist" boards it isn't) storing the EFI variables in a
-file on the ESP (as implemented by the CONFIG_EFI_VARIABLE_FILE_STORE
-Kconfig option) is a workable alternative.  And this is actually what
-the rockpro64-rk3399_defconfig enables.
+Setfan, I wonder if some more clean-up could be done?
 
-I noticed that the latest EBBR attempts to standardize this:
+>
+> > diff --git a/include/cyclic.h b/include/cyclic.h
+> > index 44ad3cb6b803..d3b368dd90df 100644
+> > --- a/include/cyclic.h
+> > +++ b/include/cyclic.h
+> > @@ -11,6 +11,7 @@
+> >  #ifndef __cyclic_h
+> >  #define __cyclic_h
+> >
+> > +#include <linux/kconfig.h>
+> >  #include <linux/list.h>
+> >  #include <asm/types.h>
+>
+> Is this really needed? What's blowing up since we should have -include
+> .../linux/kconfig.h cover this.
 
-  https://arm-software.github.io/ebbr/index.html#document-chapter5-variable-storage
+It is the CONFIG_IS_ENABLED() when building. We have kconfig.h in a
+few other places (used by tools) too.
 
-Not sure what the status here is.  But if the Linux kernel folks
-accept that alternative implementations for runtime EFI variable
-access are a thing, then a method that modifies the file would be
-possible as well.  Or maybe it is good enough to implement support for
-this in the efivar library.
+In file included from include/watchdog.h:13,
+                 from tools/../lib/sha1.c:25,
+                 from tools/generated/lib/sha1.c:1:
+include/cyclic.h:47:22: error: missing binary operator before token "("
+   47 | #if CONFIG_IS_ENABLED(CYCLIC)
+      |                      ^
 
-That said, Linux distros probably should install their EFI bootloader
-as EFI/BOOT/BOOTxxxx.EFI if that file doesn't exist yet.  Some Linux
-distros already do this.  This would make the distro work "out of the
-box" on a lot more boards.
+Regards,
+Simon
