@@ -4,55 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CED9C54FB9
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:08:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F31C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90B8C87483;
-	Sun, 19 Nov 2023 21:08:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3595787483;
+	Sun, 19 Nov 2023 21:10:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700424497;
-	bh=CxtwTpKnwXXhWSldFGaimZ660MQoOXtAtyNioYo6Z7k=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WNyxBXK6uMxqrAqCoXpIAvwILRcRXRhzU0Qf2QbxENdzlQp0MRFCLjEhw7cHi9AMA
-	 z4X1sEtCDlShicepIXcJOTdEgzAAGLVzJsI5jAc+y7lls54oTPh4jgBqnXhUsZvSgS
-	 MNEKOtbICQh2Iyj1rquMX2jBKValOSlFAJQmq03UDpSTOtV+PEQqK7k4vkZ3or2Fje
-	 CiBX8MQqml/6BoGE1cA0VKL2a8SvQzhOFhY3PBCYUcKGLGzaJx1aC6J5sn8pFB6UL4
-	 WAcVw4vjPXgdtjVzdjscYqLn31EgrS06bLz+/DIvvxOcb7CD7pRas9SSVTUmVOzAO7
-	 AVr+njQkE3kjw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eSVtIftl";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XE3hpKE8";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 93AB687483; Sun, 19 Nov 2023 21:10:25 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 783B286F44;
- Sun, 19 Nov 2023 21:08:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700424496;
- bh=CxtwTpKnwXXhWSldFGaimZ660MQoOXtAtyNioYo6Z7k=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oI0UodQQLch8MblRwgQgNw0lWP7s9jmvZXo5S0stLHuYbVWfb05Z3gBtSphAvft8w
- 42XZzfIA1h/C4HQsA4qRK0G6eJnOoPt4OzM+Z2sJ2vsQVqs1CrDg8nAVB0RvWo4Hf/
- pnOH1iRhgEIqgXSRACGMgimkUm7wQs08k4wG/lpHEAIQAKY5ay/SRuqMhPUF2DckIC
- Juz/r6T4l6cf07k4SLsjNy+83hlaHbAzrzqC3gGZjgAGt62f1Lkl4eNuLmvnGcVGQJ
- RXk6UQqNtrOji10Z/9jjQEbGFGIo6i0aH/NhPEg46xTei+AiUtHdyzhGLZY3ceqomQ
- 6LFrGNX65+OzA==
-Message-ID: <fe844c63-0c44-469c-a4e0-f0e1f2ac63fc@denx.de>
-Date: Sun, 19 Nov 2023 21:08:09 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id C545F86F80
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 21:10:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4SYMFW3fS3z9sqP;
+ Sun, 19 Nov 2023 21:10:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1700424623;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KXGXUMVEwzmfBHmMJEUS/VKDqa/dhUISg6lM3bJ2zgs=;
+ b=eSVtIftlGifUlM49aC4aVq4fkSI+AR3+1BQyPnecPMOcNe+Q2xNMIvHN1OT4uHRW6tPC9d
+ D72j53Sqshllz4liDCyJevSyVXfz/3M9m/B2/kMYuErT38yXom5XAXyAhpjYyW+yUJGrXw
+ 4Ggxya6+9WHuHl5X4eKywanVZesGl6oW8AtF90VPTIf7cox72ABz48Ckxu+R4vhB3Pqg0O
+ dRZyGuaj9xr72JBqRq34eQACSHUSSOO5s8aXImCKpIDzYleypYVEUzadV3jFfpRhIlaQs1
+ a4OQDFow1dZvBKDSq0a4kw/8j7WylW848uArwpmZYrgoqxXyD2iXYA6CgCEHtg==
+Message-ID: <ac3796f3-19aa-4683-a92a-993260dc6a7d@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1700424621;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KXGXUMVEwzmfBHmMJEUS/VKDqa/dhUISg6lM3bJ2zgs=;
+ b=XE3hpKE8gw8gd5Qn1Kmiq3iTnWavJogmHwgGfp/vw1CKF3xMwxqhN55V7utZDR3+i0SzKS
+ +SjynkA8bqtTDahESGcOR+cCYPfqJNTBxlImFolaPaQ/Ofj/6S34zBuS87NP2fAbM6hDVj
+ zrW5ovrlm9bxdmhGHZpRxCzLyPv3N3Q9v54Bm2cHMakFWPC6VbVHHC5QPVieRdmIO9I2pA
+ 8EB0zocSBeQ1oSogP66+8qS8F+5SfskwcVyi3KnjJvbwC9Sx2D4R7ouY2RgADc3UH6UXsI
+ IOzG41SbtoR4+zsiddY8qfB9uOWOS1odDuz3YeD4nvy68ekBpeoe9ZoWmlpNTQ==
+Date: Sun, 19 Nov 2023 21:10:19 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] USB fixes: xHCI error handling
+Subject: Re: [PATCH 1/5] clk: renesas: Confirm all clock & reset changes on
+ RZ/G2L
 Content-Language: en-US
-To: Hector Martin <marcan@marcan.st>, Bin Meng <bmeng.cn@gmail.com>
-Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
- asahi@lists.linux.dev
-References: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+ <20231115174025.12974-2-paul.barker.ct@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231115174025.12974-2-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: rt9xrcsgzbr493o13hdyrx33cs4johuy
+X-MBO-RS-ID: 62507f1cb3343dc94bb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,16 +91,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/27/23 01:16, Hector Martin wrote:
-> This series is the first of a few bundles of USB fixes we have been
-> carrying downstream on the Asahi U-Boot branch for a few months.
+On 11/15/23 18:40, Paul Barker wrote:
+> When enabling/disabling a clock or reset signal, confirm that the change
+> has completed before returning from the function. A somewhat arbitrary
+> 100ms timeout is defined to ensure that the system doesn't lock up in
+> the case of an error.
 > 
-> Most importantly, this related set of patches makes xHCI error/stall
-> recovery more robust (or work at all in some cases). There are also a
-> couple patches fixing other xHCI bugs and adding better debug logs.
+> Since we need to dynamically determine if we're waiting for a 0 bit or a
+> 1 bit, it's easier to use wait_for_bit_32() than readl_poll_timeout().
 > 
-> I believe this should fix this Fedora bug too:
+> This change is needed for reliable initialization of the I2C driver
+> which is added in a following patch.
 > 
-> https://bugzilla.redhat.com/show_bug.cgi?id=2244305
+> Fixes: 1918ff5c95be ("clk: renesas: Add RZ/G2L & RZ/G2LC CPG driver")
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
-Was there ever a V2 of these patches I might've missed ?
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
