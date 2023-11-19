@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53A9C54E76
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 15:37:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED00C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 15:38:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBE42870D0;
-	Sun, 19 Nov 2023 16:36:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5F0B870E7;
+	Sun, 19 Nov 2023 16:36:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JfQSksAF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gmT7OjY1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2506871ED; Sun, 19 Nov 2023 16:36:33 +0100 (CET)
+ id 20DC4869CA; Sun, 19 Nov 2023 16:36:34 +0100 (CET)
 Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
  [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 398B1870AF
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:36:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F25BB8714F
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:36:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7a93b7fedc8so167058739f.1
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:36:16 -0800 (PST)
+ ca18e2360f4ac-7b06841efdcso151958939f.2
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:36:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700408174; x=1701012974; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700408176; x=1701012976; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x9xsOZUrmuu+pDErx65tG/x/3ai9t5Y+oEfmmwQff0o=;
- b=JfQSksAF8U0iU7pHrGrwZ/Upmah7hdoywX7Ebs5J+GZ4POOufe+rkIzX+t3alQZjN6
- eLZrd8izv3dHVyfgwQbeaQDmKIoIvc5Tn5wCJiBQE+/A+0VMWHk+yiEqWM/R9EOWJiw/
- y8XAjWMrzGizozgoHSCV4aryNveqDUcNIh+2w=
+ bh=pel2U1kgIvGpJvsWg703Hsr9FPfCAvRECTGPDM6G6SA=;
+ b=gmT7OjY1rzP/nXSST1ljMXEe9vpddFlYfdsBcISDSDcyuMKJOmxq2auGUtQ2zucrwQ
+ XtM/cSha5W8+zmy6lAMiXR1g522ocF6Qkab+AeY9UufV6gLf9Mi6hydEi45rB6TnsKjx
+ H2gdwi7sSGeblDuROqkvCZ9wvi96+I0vwHH8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700408174; x=1701012974;
+ d=1e100.net; s=20230601; t=1700408176; x=1701012976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x9xsOZUrmuu+pDErx65tG/x/3ai9t5Y+oEfmmwQff0o=;
- b=YV/eAFbD7tergMpp4TDjt1mhXRHDBlEUOC6ikqujAvTjmH+ucLaHbVcknP0Y+C7bK8
- DSG3uHkFhlTwFh5+qcjxLWHVUcI8Zbk3R8qYztKS1//ztADM+dI5BbYG1X+XZIg8w0+5
- D+6yCuwZZ8HuHClsDZfyyzGz6LN4YZfGUgbD5X1qPusnISOtv0t6KwjMgiGnCT8Ej8zE
- ANImtky8SkrtODJBiUahN116I0lyT3hmpN+46qh4Cln0cA1jYGTFcEKcmTFGPxy1optc
- 20IxuxqryWSNCaT2NzRRANo/sdQoZyzPwYZ6mDcE2UYklr+dBYoclNI0ObSrBUi7Ohb3
- dXog==
-X-Gm-Message-State: AOJu0Ywzc6tBJyf8TVlhWYpG9X7xy1qPtAiyI2miTGDQPKoGRknbW2uE
- Bl86W3NqS6CoHa/MmBw/wugNp8AUHARLEfSJarfOyw==
-X-Google-Smtp-Source: AGHT+IH3rNfiLs0T4sfgCnG1C4I1g6SPoR47zz2ht5nJRDzpfQsOa2UzfnoHT/S8Zr8wAJK18WT52w==
-X-Received: by 2002:a05:6602:21cb:b0:79f:ca2f:9198 with SMTP id
- c11-20020a05660221cb00b0079fca2f9198mr6252288ioc.2.1700408174784; 
- Sun, 19 Nov 2023 07:36:14 -0800 (PST)
+ bh=pel2U1kgIvGpJvsWg703Hsr9FPfCAvRECTGPDM6G6SA=;
+ b=k3atkP+bVPGeSkWN2mdE5sx1Z+3lul5XYkPvITftGE30jxdvZrioT9L28vteeAldXI
+ W30/hfrwQO9liauSbc1ZYB6XYwZSSjKWuU7aqEiKt0d11LHAtDMJc7ImUvpWzyzJTKET
+ PZaFhTkqanhwnEjQW5e8cv4gnW0Y2Wo87p1fmn+jZW41A25LdU76unVbYK+z0Vk8zMJY
+ cI36emyrH+VpKoEPKOUR7bxG6I54rqEU2fYSy4LvHnGxwWqIeCep4vkxIcXPufWRN/Qq
+ X84QBl2NjZNGN/r/v9y7sn8FEs0UmQe1AQfwFmJxRpnARsRdM9eq/Ds/vYt7Ev1M+Iun
+ JDcg==
+X-Gm-Message-State: AOJu0YzVF1ifst0PTs26sx8csehfMUyg67wRjuvsViRAnSXnTMfBRzXv
+ YxrKy/jOaG4VMv2B06KBxIczVg3+2/Mw0+UuTTg2lQ==
+X-Google-Smtp-Source: AGHT+IGuhr7haH2GatsIg/VULRpfT1h1T8o94TA4N4PwAuduXO9KDx5OqkO/kiahTeQHWCjYip6lVQ==
+X-Received: by 2002:a05:6602:641e:b0:7b0:1bbf:b050 with SMTP id
+ gn30-20020a056602641e00b007b01bbfb050mr7893293iob.1.1700408176612; 
+ Sun, 19 Nov 2023 07:36:16 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- 19-20020a0566380a5300b0046456924383sm1466712jap.73.2023.11.19.07.36.14
+ 19-20020a0566380a5300b0046456924383sm1466712jap.73.2023.11.19.07.36.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 07:36:14 -0800 (PST)
+ Sun, 19 Nov 2023 07:36:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/7] u_boot_pylib: Correct readme formatting
-Date: Sun, 19 Nov 2023 08:36:01 -0700
-Message-ID: <20231119153611.639252-3-sjg@chromium.org>
+Subject: [PATCH 5/7] tools/make_pip: Add mention of u_boot_pylib in tool list
+Date: Sun, 19 Nov 2023 08:36:04 -0700
+Message-ID: <20231119153611.639252-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231119153611.639252-1-sjg@chromium.org>
 References: <20231119153611.639252-1-sjg@chromium.org>
@@ -87,29 +87,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct a heading which is too short in the readme.
-
-Fixes: 75554dfac29 ("patman: Add support for building a u_boot_tools...")
+This is not a tool but it is handled by the script, so update the help
+to include it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/u_boot_pylib/README.rst | 2 +-
+ scripts/make_pip.sh | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/u_boot_pylib/README.rst b/tools/u_boot_pylib/README.rst
-index 93858f5571da..36a18256d8b1 100644
---- a/tools/u_boot_pylib/README.rst
-+++ b/tools/u_boot_pylib/README.rst
-@@ -1,7 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
+diff --git a/scripts/make_pip.sh b/scripts/make_pip.sh
+index 25a4049271c9..d2639ffd6e43 100755
+--- a/scripts/make_pip.sh
++++ b/scripts/make_pip.sh
+@@ -39,7 +39,7 @@ flags="$*"
+ if [[ "${tool}" =~ ^(patman|buildman|dtoc|binman|u_boot_pylib)$ ]]; then
+ 	echo "Building dist package for tool ${tool}"
+ else
+-	echo "Unknown tool ${tool}: use patman, buildman, dtoc or binman"
++	echo "Unknown tool ${tool}: use u_boot_pylib, patman, buildman, dtoc or binman"
+ 	exit 1
+ fi
  
- # U-Boot Python Library
--=====================
-+=======================
- 
- This is a Python library used by various U-Boot tools, including patman,
- buildman and binman.
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
