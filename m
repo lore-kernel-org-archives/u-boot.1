@@ -4,66 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189E1C072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:09:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA55C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:12:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18B7D86FB4;
-	Sun, 19 Nov 2023 20:09:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3B56871ED;
+	Sun, 19 Nov 2023 20:12:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kYK2O0x0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JfF4vg11";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60D2587075; Sun, 19 Nov 2023 20:09:30 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id AC8FB86EE2; Sun, 19 Nov 2023 20:12:15 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CC9B86EE2
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:09:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 722D483414
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-991c786369cso507618166b.1
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:09:24 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3574f99d236so14023665ab.2
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700420963; x=1701025763; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5soCQgbZ7GqLr8s+Il1Y/NG0AyQKWnjExJ9cQ97a7uE=;
- b=kYK2O0x0CcnfvHQ+FFNIBjIq4vGP+r7OYUba2CRv4i2DIQVcB3OQ1CCsrguMHPPeHc
- z3frPOexb8Znsc+9F5jcKJYd2MALlly31eDw2c3yWOmqSsOWTHLJaF7d5I/kH9MWARwJ
- 0PHkjiTa52xNVdtR/iNyCoAQDff76OVcSid+w=
+ d=chromium.org; s=google; t=1700421132; x=1701025932; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yQks5KhT/4xqvadIm2Fk0hRL5uWtvQ5W4KSqSv7KXEs=;
+ b=JfF4vg11y9DV7OQfBZdIg9XrIv3eQx8CG2fa6K1bUQ9i8ZTwY93nh6BTquEh4ivs5H
+ kUW9XyBdZUrxv0Gx1ImDuiAdVg9XJycAN5OIx7E8OJZXP7c8OAhv+1ydsGTrrvoJJpvV
+ 9dZK8SQY6u95oQa91hYa0de3qLSDCHmO4g2EA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700420963; x=1701025763;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5soCQgbZ7GqLr8s+Il1Y/NG0AyQKWnjExJ9cQ97a7uE=;
- b=bfuETVyv0JYsX3QbwgsabKG0oSpo/3SPYtRTJfBCL98KEx1IuOynjZ5z3EO6opSRja
- AsbrAT2OucNaNZozkYjrOcLmKdn99b8vUCczNl+03GqdnOW6BAS/R7ru8KEZZEHbte3W
- P3ZvlZvh1yLkPyJDDbel4SfkAehR5uDt28TVbpDurdSCN3fq1c6A6Lbwd2qY9Pc9uNSw
- +YvOmkrJkfBqGIvDmHTglzNdWDg1hI3ktAlky5W4gUeVVIYzdRjS+3091tg6OXrQm74a
- MkXKz0bNt2JMJuc9oEoLkU3+Bl4iR8LK3iBtlM7HWg+YLnYoEf3oHO1ch8KzmMNnL7MW
- c2oA==
-X-Gm-Message-State: AOJu0YwvUxK5jM6xLPsoqJTBqEoPb399snFizjBeOBobPvqjTCcyn/fx
- i/SPElrhwVKRdzPIq1B7GC2II11L5lTsaGGK4o/d1A==
-X-Google-Smtp-Source: AGHT+IHqXMUg8rum9EG9nwjpiXNnhJg6QLLpIlxW8QaC9z+YdJAzsksN0kPaGYP+3VRHSzh3iZPvEA+MO6g3NSKYWpk=
-X-Received: by 2002:a17:907:71d5:b0:9ae:5370:81d5 with SMTP id
- zw21-20020a17090771d500b009ae537081d5mr3388093ejb.41.1700420963023; Sun, 19
- Nov 2023 11:09:23 -0800 (PST)
-MIME-Version: 1.0
-References: <20231117225214.2144414-1-trini@konsulko.com>
-In-Reply-To: <20231117225214.2144414-1-trini@konsulko.com>
+ d=1e100.net; s=20230601; t=1700421132; x=1701025932;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yQks5KhT/4xqvadIm2Fk0hRL5uWtvQ5W4KSqSv7KXEs=;
+ b=ws1Wpu/C7cEGGBzhvSxq5fQPjSEWyBzZWtp6gXMRF1V3D5UJvezDk7aRAAZBtJeRSw
+ ifoV7g2t+E0IIz4iG5d+UD84nn9ZZfnKprGE0M14fJsuF0xF1iVgBweeYmzDRuRa92/x
+ eF2yLLgi3SZO49LN1KMIi57JKJUOs4WKJvrbEY0JrhxyzszTy5doCZhwicvdWCKz8EMq
+ TTMwXZDpMeaRsi7QqLsJuwbVYnh4wishdMLhUSa2qeEGL4RVjYTucD/H8G7jYms6w5SR
+ 8cnc93qw16nhKafjq8eAR9Mp2V2i95y0cnVxcZDb9Syk+AKHY++pj7LG4vNzGJsBjREz
+ E0hQ==
+X-Gm-Message-State: AOJu0YyrssHXlXOQKccWUyNZoJq5qbOaYxycKJMbuvkWnMU6zdYLd5y6
+ kRDdhnSUqzId701HTzJH/x6kylDis+mnDjLBCwKoYA==
+X-Google-Smtp-Source: AGHT+IHP1d/pfWmZ/olzyeOSz6pvjhX9cQ3JpKFcM/t1uE6AF+b7NKeBojQGBg0Rb6F66OhdKcGUXg==
+X-Received: by 2002:a92:c26d:0:b0:35b:695:c3c8 with SMTP id
+ h13-20020a92c26d000000b0035b0695c3c8mr257582ild.9.1700421132038; 
+ Sun, 19 Nov 2023 11:12:12 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Nov 2023 11:12:11 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Nov 2023 12:09:07 -0700
-Message-ID: <CAPnjgZ23gJb6mu53Tmmy9OdaRLu9zCCLgJTGsTVjjKcCv63VqA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] global: Clean up arch/*/dts/Makefile
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Alexander Graf <agraf@csgraf.de>, Anatolij Gustschin <agust@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v5 01/12] efi: Correct handling of frame buffer
+Date: Sun, 19 Nov 2023 12:11:36 -0700
+Message-ID: <20231119121144.v5.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+In-Reply-To: <20231119191202.667180-1-sjg@chromium.org>
+References: <20231119191202.667180-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,61 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The efi_gop driver uses private fields from the video uclass to obtain a
+pointer to the frame buffer. Use the platform data instead.
 
-On Fri, 17 Nov 2023 at 15:52, Tom Rini <trini@konsulko.com> wrote:
->
-> With commit 3609e1dc ("dts: automatically build necessary .dtb files")
-> we now have logic that will ensure that all device trees needed in the
-> binary are built automatically. Any device tree that the developer needs
-> while working can still be built normally via make arch/.../foo.dtb so
-> we can simply drop the rest of this logic.
->
-> Suggested-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  arch/arc/dts/Makefile        |    8 -
->  arch/arm/dts/Makefile        | 1436 +---------------------------------
->  arch/m68k/dts/Makefile       |   18 -
->  arch/microblaze/dts/Makefile |    2 -
->  arch/mips/dts/Makefile       |   37 -
->  arch/nios2/dts/Makefile      |    2 -
->  arch/powerpc/dts/Makefile    |   32 -
->  arch/riscv/dts/Makefile      |    9 -
->  arch/sandbox/dts/Makefile    |    5 -
->  arch/sh/dts/Makefile         |    2 +-
->  arch/x86/dts/Makefile        |   22 -
->  arch/xtensa/dts/Makefile     |    2 -
->  configs/iot2050_defconfig    |    1 +
->  13 files changed, 6 insertions(+), 1570 deletions(-)
+Check the VIDEO_COPY setting to determine which frame buffer to use. Once
+the next stage is running (and making use of U-Boot's EFI boot services)
+U-Boot does not handle copying from priv->fb to the hardware framebuffer,
+so we must allow EFI to write directly to the hardware framebuffer.
 
-I can see the motivation for this, but it ends up moving us away from
-driver model and devicetree, IMO. For example, rk3399 and other
-rockchip boards use DT for their init so the same U-Boot can be used
-for all, mostly. Ideally that is the way all boards would be, as they
-are in Linux.
+We could provide a function to read this, but it seems better to just
+document how it works. The original change ignored an explicit comment
+in the video.h file ("Things that are private to the uclass: don't use
+these in the driver") which is why this was missed when the VIDEO_COPY
+feature was added.
 
-But here I have to manually add all the rk3399 boards to OF_LIST for
-each board and enable SPL_LOAD_FIT (and SPL_FRAMEWORK but that is
-fine) to make this work.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+---
 
-So this is teaching people to use a board.c file, to use #ifdefs for
-device-specific differences, etc. It will be easier to do that than to
-do the right thing.
+(no changes since v2)
 
-One day I predict distros will be updating U-Boot on boards as a
-matter of course, perhaps using fwupd. Having a full U-Boot build for
-every single board is going to take up a lot of space and create a lot
-of confusion for people trying to figure out which one to use to
-update.
+Changes in v2:
+- Rebase to -next
+- Add some more comments to the header file
+- Add fixes tag
 
-Could we instead reduce it down to a rule for each SoC that lists all
-the DTs for that SoC? The consistent naming of these files (with the
-rk3399- prefix for example) might make this easier?
+ include/video.h          |  9 ++++++---
+ lib/efi_loader/efi_gop.c | 12 +++++++-----
+ 2 files changed, 13 insertions(+), 8 deletions(-)
 
-With Linux right now I can build an arm64 build which supports most of
-the boards...with about 990 devicetree files. Do we really want 990
-U-Boot builds?
+diff --git a/include/video.h b/include/video.h
+index 5048116a3d57..4d8df9baaada 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -21,9 +21,12 @@ struct udevice;
+  * @align: Frame-buffer alignment, indicating the memory boundary the frame
+  *	buffer should start on. If 0, 1MB is assumed
+  * @size: Frame-buffer size, in bytes
+- * @base: Base address of frame buffer, 0 if not yet known
+- * @copy_base: Base address of a hardware copy of the frame buffer. See
+- *	CONFIG_VIDEO_COPY.
++ * @base: Base address of frame buffer, 0 if not yet known. If CONFIG_VIDEO_COPY
++ *	is enabled, this is the software copy, so writes to this will not be
++ *	visible until vidconsole_sync_copy() is called. If CONFIG_VIDEO_COPY is
++ *	disabled, this is the hardware framebuffer.
++ * @copy_base: Base address of a hardware copy of the frame buffer. If
++ *	CONFIG_VIDEO_COPY is disabled, this is not used.
+  * @copy_size: Size of copy framebuffer, used if @size is 0
+  * @hide_logo: Hide the logo (used for testing)
+  */
+diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
+index 778b693f983a..a09db31eb465 100644
+--- a/lib/efi_loader/efi_gop.c
++++ b/lib/efi_loader/efi_gop.c
+@@ -10,6 +10,7 @@
+ #include <efi_loader.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <mapmem.h>
+ #include <video.h>
+ #include <asm/global_data.h>
+ 
+@@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
+ 	struct efi_gop_obj *gopobj;
+ 	u32 bpix, format, col, row;
+ 	u64 fb_base, fb_size;
+-	void *fb;
+ 	efi_status_t ret;
+ 	struct udevice *vdev;
+ 	struct video_priv *priv;
++	struct video_uc_plat *plat;
+ 
+ 	/* We only support a single video output device for now */
+ 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
+@@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
+ 	format = priv->format;
+ 	col = video_get_xsize(vdev);
+ 	row = video_get_ysize(vdev);
+-	fb_base = (uintptr_t)priv->fb;
+-	fb_size = priv->fb_size;
+-	fb = priv->fb;
++
++	plat = dev_get_uclass_plat(vdev);
++	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
++	fb_size = plat->size;
+ 
+ 	switch (bpix) {
+ 	case VIDEO_BPP16:
+@@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
+ 	}
+ 	gopobj->info.pixels_per_scanline = col;
+ 	gopobj->bpix = bpix;
+-	gopobj->fb = fb;
++	gopobj->fb = map_sysmem(fb_base, fb_size);
+ 
+ 	return EFI_SUCCESS;
+ }
+-- 
+2.43.0.rc0.421.g78406f8d94-goog
 
-Regards,
-Simon
