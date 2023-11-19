@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9041DC072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 15:36:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891EEC072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 15:37:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F32F6871A5;
-	Sun, 19 Nov 2023 16:36:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8695087186;
+	Sun, 19 Nov 2023 16:36:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mqfs0DAK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CC8y8S0I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72D4887186; Sun, 19 Nov 2023 16:36:20 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id EC23D87186; Sun, 19 Nov 2023 16:36:28 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C196286A43
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:36:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA852870D0
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7a66aa8ebb7so152173939f.3
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:36:14 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7a9857c14c5so132035839f.3
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:36:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700408173; x=1701012973; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=360U9Hc3UE20eyx5EJCVl8N1/JiIWuHzS7lAz9I4kRs=;
- b=Mqfs0DAK7qa5g4pDmQHsM4xTaYaKzBMMVv1dfy0OB8qkBqJzo1X/RPN0o98lEwXJNw
- rV0ERfM7vdFAi0K9RRPAREYp0ljOice5GKo9lfVFGBJv10gd4zxeuBzqEQO7cSBvXwcI
- yLa7t3CLBYRnrvX5jO66f4nCm7c5F/50f39Ps=
+ d=chromium.org; s=google; t=1700408175; x=1701012975; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=f/iIpS/hvCst/DJxhnXJQ2xG3OSRvKee1VdJ7EeJbSs=;
+ b=CC8y8S0IxPYxt3Z/5Vo0NlJZoAPJU5Dm47cWY89YS4oWMwbHL3hDruqQZKIlL0ROhC
+ +IaetKRQrk0X8Z2X8jSRWFgxugE7MCzKte6yraIxGE+12QaAOhDZdTFGUVEuOFEgsy+P
+ 3IOqZ5dx3ayZxkjFSEmyvIOEtTFCdnEFvKm+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700408173; x=1701012973;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=360U9Hc3UE20eyx5EJCVl8N1/JiIWuHzS7lAz9I4kRs=;
- b=QWGTOQwyDnEgpderalkgwaFvXYM2mU9IzpyQKESHqiIoMIP/4aDVA6H4k6/7reIT0n
- 5AKeQmmDAzWXAG1oq2aqHj/tE8/qxNVcKC0IIPptI5f9KDveoF65wpaIVZmS1RZzQQVi
- tuEdJFYKEDUOL0KfpDHM3sdNWsJDQShbOYNuySWDsiyzfa6Mawc4OS7egvhKZ3huykUF
- 28KShjOOpkIu/uwmpp0fOS0VsKFty1zjtlq/+rihRXa+HvkD/C0df+dR6l5mZziOeynW
- NWxG1nTslezEJfkbhSuiYQ47QF5VORmlhb7agxuDK8BwNXF110n+Ld5WzdYNie7fc7QO
- Dsjw==
-X-Gm-Message-State: AOJu0YxPI8CLiq7vjcvaBOhQhsdeQ+kt9op/uguvTkchktFsLjC6ziZp
- Y36kjGhuN0JyLVJEktgaLc3yo3akf96MVY3j9TemHA==
-X-Google-Smtp-Source: AGHT+IHOv9ak9R5QY2Br3s1mASyQH54LV6pmVUbUGnEjyMN/7C0UV/8a+F6k41cqIP4ndiW5n8cdBg==
-X-Received: by 2002:a05:6602:47c8:b0:7b0:ae77:36ec with SMTP id
- ea8-20020a05660247c800b007b0ae7736ecmr3524708iob.9.1700408173238; 
- Sun, 19 Nov 2023 07:36:13 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700408175; x=1701012975;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=f/iIpS/hvCst/DJxhnXJQ2xG3OSRvKee1VdJ7EeJbSs=;
+ b=HKYUeIkqvUt6oRo9gnStYQqjfJgxHbsmQwNNVsBsqSiDonXLyBT5IkDWgjOp51VkeL
+ 34EWyvxG83dVRHJvslbo/WoVMMOBp4NRjYsNR8VSXLToQphpcbb7KTX+bQyW5eun6ihK
+ CbX0uLmCcb671IgVGjTWsSIr70ISHCE2uw96ybDiW4UTVIHPG0r3A/Vb6GVDNJTGM7+r
+ 7WvA2Xl7j3HIDhGlKXzpWt1dZR5MFWXD5ANG5P/IT2XaV3hoM/zHr/zbcAti0UYn1UMO
+ fbpIiuMV23uM089EtjURIXSjuL0yE0uS0WEa72x14uYUVD3zt84v2yBegYGly3IaMoSL
+ kc/g==
+X-Gm-Message-State: AOJu0YwjCUZqjutwYBE9AJke1kzp7XB2b/ylwRU3UJ1Vp6KPVo8frwRX
+ aHsUwGHZG99Y3vKo+EO+6pRj5u3TvjKWS4n3jlqkAw==
+X-Google-Smtp-Source: AGHT+IGuDFqKsI6frbR2f4v0CHlS9zb6agek3aMp8FcOd0b2vq6c9eEpiKj4seOE9yW0QaAysrIatA==
+X-Received: by 2002:a6b:e304:0:b0:794:c9a2:5fe3 with SMTP id
+ u4-20020a6be304000000b00794c9a25fe3mr6382500ioc.4.1700408175338; 
+ Sun, 19 Nov 2023 07:36:15 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- 19-20020a0566380a5300b0046456924383sm1466712jap.73.2023.11.19.07.36.12
+ 19-20020a0566380a5300b0046456924383sm1466712jap.73.2023.11.19.07.36.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 07:36:13 -0800 (PST)
+ Sun, 19 Nov 2023 07:36:15 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Maxim Cournoyer <maxim.cournoyer@gmail.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH 0/7] doc: tools: Tidy up toml files for a new release
-Date: Sun, 19 Nov 2023 08:35:59 -0700
-Message-ID: <20231119153611.639252-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 3/7] tools: Keep test_util and patman test files in the pip
+ release
+Date: Sun, 19 Nov 2023 08:36:02 -0700
+Message-ID: <20231119153611.639252-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
+In-Reply-To: <20231119153611.639252-1-sjg@chromium.org>
+References: <20231119153611.639252-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,36 +88,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series corrects a few problems with the generation of pip packages
-which showed up during a recent tools release.
+The test_util module is actually imported by some tools, e.g. binman so
+include it in the pip release.
 
-A new release has been completed for all tools with a new version
-number of 0.0.6 so this series reflects the changes there.
+The patman tool uses its test code when starting up, so keep that too.
 
-It also updates the documentation URL to use the u-boot.org domain.
+Show a list of deleted files so it is clear what is happening.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (7):
-  doc: Update documentation URL
-  u_boot_pylib: Correct readme formatting
-  tools: Keep test_util and patman test files in the pip release
-  u_boot_pylib: Correct files used for pip release
-  tools/make_pip: Add mention of u_boot_pylib in tool list
-  patman: Update the run script
-  tools: Move python tools to version 0.0.6
+ scripts/make_pip.sh | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
- MAINTAINERS                       |  2 +-
- README                            |  2 +-
- doc/build/documentation.rst       |  2 +-
- scripts/make_pip.sh               | 14 ++++++++++++--
- tools/binman/pyproject.toml       |  6 +++---
- tools/buildman/pyproject.toml     |  6 +++---
- tools/dtoc/pyproject.toml         |  6 +++---
- tools/patman/pyproject.toml       |  8 ++++----
- tools/u_boot_pylib/README.rst     |  2 +-
- tools/u_boot_pylib/pyproject.toml |  9 ++++-----
- 10 files changed, 33 insertions(+), 24 deletions(-)
-
+diff --git a/scripts/make_pip.sh b/scripts/make_pip.sh
+index 4602dcf61c88..25a4049271c9 100755
+--- a/scripts/make_pip.sh
++++ b/scripts/make_pip.sh
+@@ -29,6 +29,9 @@ repo="--repository testpypi"
+ # Non-empty to do the actual upload
+ upload=1
+ 
++# Non-empty to delete files used for testing
++delete_testfiles=1
++
+ tool="$1"
+ shift
+ flags="$*"
+@@ -58,6 +61,11 @@ if [ -n "${upload}" ]; then
+ 	fi
+ fi
+ 
++if [[ "${tool}" =~ ^(patman|u_boot_pylib)$ ]]; then
++	# Leave test_util.py and patman test files alone
++	delete_testfiles=
++fi
++
+ # Create a temp dir to work in
+ dir=$(mktemp -d)
+ 
+@@ -91,7 +99,9 @@ find ${dest} -name __pycache__ -type f -exec rm {} \;
+ find ${dest} -depth -name __pycache__ -exec rmdir 112 \;
+ 
+ # Remove test files
+-rm -rf ${dest}/*test*
++if [ -n "${delete_testfiles}" ]; then
++	rm -rfv ${dest}/*test*
++fi
+ 
+ mkdir ${dir}/tests
+ cd ${dir}
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
