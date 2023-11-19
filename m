@@ -4,79 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA80C072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:43:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E9CEC072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E7D887083;
-	Sun, 19 Nov 2023 21:43:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 6CDB587185;
+	Sun, 19 Nov 2023 21:49:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="WFSSebV5";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sGQ+iJtf";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCFDC870EB; Sun, 19 Nov 2023 21:43:14 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86BE786940
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 21:43:05 +0100 (CET)
+ id 0A17786E65; Sun, 19 Nov 2023 21:49:03 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 6F0AE87185
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 21:48:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SYMzF1MRzz9sdW;
- Sun, 19 Nov 2023 21:43:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700426585;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7XcxpA4LhpSjq18Q2JgTLrQHEQQq7xu4YG7xnk5UlM8=;
- b=WFSSebV5qMj+7hiJIRJ3UCTVIORnsNB849kDX8vRt+Rn7pA+yf8gP8qxoQslf6tg17RiV2
- bvnpacReV39ixjiUF88fAxRwlBlUP+db0zlTBjdz7TMDaP6+H9nCOtL1DusCWKjMBAhVIT
- FJn2HouY7+JpbbwLUd83rk5XnmAvbJJgNOH52e+/tBpSL2NvNOT7XZv1Iq7zUBOMl2Eqa2
- vNim8+UtTJmw3A3X8HJdkX0xmn9niAaW9IimOrl9b43Db1G3QgVwsa/pOrOSceTf/KxTCl
- 9TrsrfrFH+oN63vGqnAG5BS6dN2orRtxiZjunzHeIbWA9HgHqxHUQ/GHCoiHLQ==
-Message-ID: <5c3afcfe-40ed-420a-845c-046e36a167f5@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700426583;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7XcxpA4LhpSjq18Q2JgTLrQHEQQq7xu4YG7xnk5UlM8=;
- b=sGQ+iJtfwYcJ/WLhJ0dPT1aa5SgTVYgbhoiLMYZe5oNXnvNC3eU3L3P+Nx5pCT7/hgn9Gu
- pWi6Z5ih6ovSwUnc0sotCjCJgafFlT69FOzmxdMExd6qKTxGykgXlqVzIuLKBqfcNBtdD9
- Klq50vevuHiZnzoEso2WFHSt/aRDu92MBGDz0OGjbeU060IMm9RBkPSpnKkiuq1F/go/8b
- 6mQRojJjjWSVcdmJI2HCCu4lkxjoLk0XRmGxOS6ia+gpZgrMoo3JAlpaXdeXuz21UenIBR
- G2lmtYzv8XkszK/3HFh/NnNtlQiTxrCEu++2Tan4q4LK5bTgr5jgEZZZqRz9Xw==
-Date: Sun, 19 Nov 2023 21:43:00 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.04,212,1695654000"; 
+ d="asc'?scan'208";a="187341278"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 20 Nov 2023 05:48:56 +0900
+Received: from unknown (unknown [10.226.92.15])
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id DE53C4003FDB;
+ Mon, 20 Nov 2023 05:48:54 +0900 (JST)
+Date: Sun, 19 Nov 2023 20:48:53 +0000
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Heiko Schocher <hs@denx.de>
+Subject: Re: [PATCH 3/5] i2c: rzg2l: Add I2C driver for RZ/G2L family
+Message-ID: <20231119204853.bmg4ghuo625c3zkm@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
+ <20231115174025.12974-4-paul.barker.ct@bp.renesas.com>
+ <90feb671-d939-4dbf-9a49-418fc9a56b23@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] scsi: set dma direction to NONE for TEST UNIT READY
-Content-Language: en-US
-To: Nikita Yushchenko <nikita.yoush@cogentembedded.com>,
- Simon Glass <sjg@chromium.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>, Johan Jonker <jbx6244@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20231113055102.4041946-1-nikita.yoush@cogentembedded.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231113055102.4041946-1-nikita.yoush@cogentembedded.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: tm3uf68s5esw3fczbtjuc74tjmu4trjq
-X-MBO-RS-ID: 795241cce503400e16f
-X-Rspamd-Queue-Id: 4SYMzF1MRzz9sdW
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="uriuhymfhfkc3ge3"
+Content-Disposition: inline
+In-Reply-To: <90feb671-d939-4dbf-9a49-418fc9a56b23@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +59,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/13/23 06:51, Nikita Yushchenko wrote:
-> SCSI device scan code was executing TEST UNIT READY command without
-> explicitly setting dma direction in struct scsi_cmd to NONE, so command
-> was passed to driver with dma direction set to DMA_FROM_DEVICE,
-> inherited from older usage.
-> 
-> With WDC SDINDDH6-64G ufs device, that caused TEST UNIT READY to
-> return error.
-> 
-> Fix that, by explicitly setting dma direction to NONE for
-> TEST UNIT READY, and restoring it back DMA_FROM_DEVICE for the
-> following READ CAPACITY.
-> 
-> Signed-off-by: Nikita Yushchenko <nikita.yoush@cogentembedded.com>
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+--uriuhymfhfkc3ge3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tom, would be likely good to pick into this release.
+On Sun, Nov 19, 2023 at 09:15:36PM +0100, Marek Vasut wrote:
+> On 11/15/23 18:40, Paul Barker wrote:
+> > This driver supports the I2C module on the Renesas RZ/G2L (R9A07G044)
+> > SoC, also known as the RIIC module.
+> >=20
+> > This patch is based on both the u-boot driver in the Renesas RZ BSP
+> > 3.0.5 release [1] (commit 7fcc1fdc2534), and the Linux v6.6 driver
+> > (commit ffc253263a13).
+> >=20
+> > Support for deblocking the I2C bus is included as this may be needed
+> > after triggering a reset via the Power Management IC (PMIC) over I2C
+> > (the PMIC asserts the reset line before the SoC completes the I2C write
+> > transaction with obvious bus locking effects). If the SDA line is
+> > observed to be low during initialisation, we automatically attempt to
+> > deblock.
+> >=20
+> > [1]: https://github.com/renesas-rz/renesas-u-boot-cip
+> >=20
+> > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>=20
+> The driver seems very similar to drivers/i2c/rcar_iic.c , can there be so=
+me
+> code reuse ?
+
+My initial idea was to extend the R-Car iic driver but I quickly saw
+that would be very messy. All the registers and bits are in different
+places, the calculations are different (particularly in regard to
+setting bus speed) and the read/write process has more edge cases for
+the RZ/G2L. The bus recovery mechanism we use also doesn't exist on
+previous R-Car SoCs.
+
+The Linux drivers for these modules are also separate, see
+drivers/i2c/busses/i2c-sh_mobile.c (for R-Car and earlier SoCs) and
+drivers/i2c/busses/i2c-riic.c (for RZ/G2L) in the Linux kernel.
+
+Thanks,
+Paul
+
+--uriuhymfhfkc3ge3
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZVp0oQAKCRDbaV4Vf/JG
+vbCgAP9reIWrhFIJxRUpPL8JHCMhyckjAu3LxJzfYT4HvKMP7gEA+zZQFbzf7OJt
+Es3dU1b8mNtjp1fsM3gU6ZJ9Q0bfBQo=
+=T4bc
+-----END PGP SIGNATURE-----
+
+--uriuhymfhfkc3ge3--
