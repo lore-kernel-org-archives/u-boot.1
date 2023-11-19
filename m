@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31122C072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 14:48:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EEDCC072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 14:49:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 674C287124;
-	Sun, 19 Nov 2023 15:47:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7787E87135;
+	Sun, 19 Nov 2023 15:47:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L3TL6h60";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PPAApbAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4E3C87116; Sun, 19 Nov 2023 15:47:26 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 4A86587005; Sun, 19 Nov 2023 15:47:28 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B2F68714F
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 15:47:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 097EA87186
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 15:47:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7affff20d38so136481739f.0
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-7a94c5538aeso114852339f.3
  for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 06:47:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700405229; x=1701010029; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700405230; x=1701010030; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aeMRzhweb6I38GLgsic7DodqYiG2Tsr2CARijlepS/M=;
- b=L3TL6h60fjRh/FhRIh/rekf3CuZgSxaIJgonokMSReFJKRnEXbYV8uNSeJ39poTlgc
- UdQGH1eIy/gMU6d2AlU6ImQuoBcLZ46N8g92pZgeP+soqSnga/FX7PbjTPo8pNjprgYh
- H+TQnyFSeJMUkUxsjT8E5hPBABX3qOCFC7G2s=
+ bh=G1zxTdWrCMUEsyEdmlBqfPioITLYUvTt8UJ2EZDi++E=;
+ b=PPAApbAL5bijYlemyA/Vlrg73XlviBn4ghwLhXQmP5Q4D4vtB9cWUDwFkmZuH8YUGx
+ ZOKu3rPhdqw6U8BorQZynLxrqWxbqHaGS0RyK+XMLj/y5rRsKELKFPGUUtLV1bkgYp6K
+ 5fuwir0uDtwCc7ojcD7W1l5kXDCsSvvX4XFho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700405229; x=1701010029;
+ d=1e100.net; s=20230601; t=1700405230; x=1701010030;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aeMRzhweb6I38GLgsic7DodqYiG2Tsr2CARijlepS/M=;
- b=iOn4eMKsMiS5NS+aYoZdypDRq2/9k6m2ML3v7aiRPitnttkxyGtOMiBySlQR5vnjDc
- e/LItDH7WgeLMif8KpjqOY9FAjUkeE+jmO6vuLIQZtRXg/8VxAwilk8z1+QxT20JpT/X
- aq5yWC1tH0pv88btl/NJpTZunSsght08EvEWZ7nWvBKWbaYo2kxS1oLBrxIrr77SZi3P
- Hk3Em+QhishDjr6V8/xVAysQ/6MtGlu4ihNjLZWwnyhiWeCFdUHYNkzJ+zzOSvPnx1Uc
- ZieOqy27F0bRLAJETc7wVw7IWt0oicyrFsOM5P74Rda3K0O7cD2oiw+Kr5mW3vxrE5xX
- 9JLg==
-X-Gm-Message-State: AOJu0Yygo9ytPScIH5I4T5Cf8swmtUsfIaankuYAWLVoS/ERt9VNK1B2
- a5tcp2b+q1Yfp6WZlUn6x4lEroLBR6RcI1V6Co+BhA==
-X-Google-Smtp-Source: AGHT+IHa9tp/5zA+lz7YZ67SAgOGgFwXxnHFYVd1hvcpAc1dE+ZJ8dNUo8/wYeMqE6mY/3bvUBF67w==
-X-Received: by 2002:a5e:c604:0:b0:7b0:733:b8fe with SMTP id
- f4-20020a5ec604000000b007b00733b8femr6464284iok.12.1700405229778; 
- Sun, 19 Nov 2023 06:47:09 -0800 (PST)
+ bh=G1zxTdWrCMUEsyEdmlBqfPioITLYUvTt8UJ2EZDi++E=;
+ b=HPwyOyKNVcUx69aw+fwABA01D5NtumfhayOQLvEYn7gvI1BJkpZ2sjSyA4LIcYLTRm
+ JFT/GiVbZOUqCe3e6g5RLggY6MC7Pwr2PBGXBoS0X9xp5794VgQF8IVkw2iBCvsxU+xg
+ +Y80QJEpp4BmB48yY8aetM/wx4mRudjLzSUdOqA/byCPWSc/Y+8I9RMfjks5vS9RM1j1
+ a92Xv4LeFZSc2wV35NrPkNrejhcdRrKAx/EIafXCdJkOpaDlexsFxrDVjFwXb5px8MAl
+ GMzApHwwQtmoNIWt0G34zCvxxLTIBDXE9ZcmXGFgxk/f5UD1XcrM2U9eZfQwwokwngrA
+ HUVQ==
+X-Gm-Message-State: AOJu0YzJVJJt/QD2MxZ8G0E7ct3OyaqCyc3kERUeWuskD105UByANoYJ
+ UnDYgoRbxzET/ZH0sVoqz+DSXLPVB6vWpFbteaD+TQ==
+X-Google-Smtp-Source: AGHT+IE9VrnyuS/FnsTxHPGJp0LdC7nSC+uHoIcTp5Q+KtH4oYBEjN/5shL7rt8EYDP3H/xyfYkpyg==
+X-Received: by 2002:a5d:9ad4:0:b0:7a6:7e93:6f86 with SMTP id
+ x20-20020a5d9ad4000000b007a67e936f86mr6183853ion.10.1700405230681; 
+ Sun, 19 Nov 2023 06:47:10 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- w6-20020a023946000000b0043194542229sm1450695jae.52.2023.11.19.06.47.09
+ w6-20020a023946000000b0043194542229sm1450695jae.52.2023.11.19.06.47.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 06:47:09 -0800 (PST)
+ Sun, 19 Nov 2023 06:47:10 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nikhil M Jain <n-jain1@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH 4/5] sandbox: Increase cyclic CPU-time limit
-Date: Sun, 19 Nov 2023 07:46:42 -0700
-Message-ID: <20231119144700.631322-5-sjg@chromium.org>
+ Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH 5/5] sandbox: Drop video-sync in serial driver
+Date: Sun, 19 Nov 2023 07:46:43 -0700
+Message-ID: <20231119144700.631322-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231119144700.631322-1-sjg@chromium.org>
 References: <20231119144700.631322-1-sjg@chromium.org>
@@ -92,29 +88,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that sandbox is using cyclic for video, it trips the 1us time
-limit. Updating the sandbox display often takes 20ms or more.
+With sandbox, when U-Boot is waiting for input it syncs the video
+display, since presumably the user has finished typing.
 
-Increase the limit to 100ms to avoid a warning.
+Now that cyclic is used for video syncing, we can drop this. Cyclic
+will automatically call the video_idle() function when idle.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/serial/sandbox.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 0283701f1d05..07fe53dba687 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -628,6 +628,7 @@ if CYCLIC
+diff --git a/drivers/serial/sandbox.c b/drivers/serial/sandbox.c
+index f6ac3d228526..be72fd2c65f7 100644
+--- a/drivers/serial/sandbox.c
++++ b/drivers/serial/sandbox.c
+@@ -139,8 +139,6 @@ static int sandbox_serial_pending(struct udevice *dev, bool input)
+ 		return 0;
  
- config CYCLIC_MAX_CPU_TIME_US
- 	int "Sets the max allowed time for a cyclic function in us"
-+	default 100000 if SANDBOX  # sandbox video is quite slow
- 	default 1000
- 	help
- 	  The max allowed time for a cyclic function in us. If a functions
+ 	os_usleep(100);
+-	if (IS_ENABLED(CONFIG_VIDEO) && !IS_ENABLED(CONFIG_SPL_BUILD))
+-		video_sync_all();
+ 	avail = membuff_putraw(&priv->buf, 100, false, &data);
+ 	if (!avail)
+ 		return 1;	/* buffer full */
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
