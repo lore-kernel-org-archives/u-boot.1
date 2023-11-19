@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D6ADC54E76
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 15:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 791E4C54E76
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 16:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 024C4871B2;
-	Sun, 19 Nov 2023 16:59:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 765AC87168;
+	Sun, 19 Nov 2023 16:59:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pkuxoB8i";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dUy6Bylc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED2C28713C; Sun, 19 Nov 2023 16:59:27 +0100 (CET)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id C0B41870E2; Sun, 19 Nov 2023 16:59:29 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16C8A8710A
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45E5B8749D
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6ce2b6cb933so2187106a34.0
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:59:14 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-da041ffef81so3642527276.0
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 07:59:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700409547; x=1701014347; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700409552; x=1701014352; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=upbP9jooJ6LpiOAd0Qbtc+/DobwB8SAhZu0AZYzr83A=;
- b=pkuxoB8id5m6fH60yhCQPnc55zJLd0ykspcRneSTvSKmyfOkaBDGoKLVRLsrj0YnQo
- RIymcpWa9ZmAHMmOFmfuk59K+7iRVp+8KTqBm60FCX+fu3CpHu+C9FjQ4d94JNtjjeAV
- PMEcja2Ju7HYO1hOq2AUWiO+CdGBkWhDfA2HE=
+ bh=Rchym97Go7b6jGFFnL6wdw2gwGGBnxMWoydUYrE6C/0=;
+ b=dUy6BylcRHi3iwW3TuDbzdMUQtLYsEU02dYmFiBWIeL2HBTdgYFu1cj8/ZXoRiPWOd
+ ekyUdM2tQpfEWsuv3eVqQ8WaxUj6veHslHKoBfKMb8iosxsQoHpmCgrJW5iqvk65E32N
+ DAZWMSkI2ShYQP9DgY+5Z3sqZyIlX0gwinLOs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700409547; x=1701014347;
+ d=1e100.net; s=20230601; t=1700409552; x=1701014352;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=upbP9jooJ6LpiOAd0Qbtc+/DobwB8SAhZu0AZYzr83A=;
- b=hY7Cas6DYdPPpKs08ZD0rbDqD4CaH8koxVoyMngFtU/C0c02W3qLBXf3w3dB+L4ZkZ
- uylraLL7FKrBahJfRFBbZ11g5yLJo8vGii/MSbUkW6RUhY8wefgsiJNNVXgcbmEq0XzQ
- r9sQ6XZ076HS+iSI70GVpczifNnChbXojT1tUb+AxbyWXu2kLSWxwixuKEvag/vm/dwj
- Xh69HsCiQjE+FrRe8Fv2XNg5R+U8hVD3oLdHGa40l+/C91t9hmWpNDPxXmfnJR657Hrp
- /ltXbvOGtCnf5Tn7ZEvzda4NSK+I6SdVCbejfO1mDeFu6CEfe6LSkczAJbqvRmsg7L6l
- 6Snw==
-X-Gm-Message-State: AOJu0YydswkXPnzEQgrqpJLmCgpHslkHRHAvYLYulneKgVPiHg4uuM7w
- XbYlpmkLX7WXftIkm+X26jCIsQ==
-X-Google-Smtp-Source: AGHT+IE0g0TCLLxaIanLpMEn/OChVen/EgCtkE1Hd03pD7fKvviQUxFRDeyO/ocxRg4XYYwS8D4qiQ==
-X-Received: by 2002:a05:6358:8a0:b0:16d:984a:7459 with SMTP id
- m32-20020a05635808a000b0016d984a7459mr2827536rwj.26.1700409546924; 
- Sun, 19 Nov 2023 07:59:06 -0800 (PST)
+ bh=Rchym97Go7b6jGFFnL6wdw2gwGGBnxMWoydUYrE6C/0=;
+ b=ajTX2x6quo6jXiHdWHgnsup1cO/6/QtM/LmIODLCec5QyDUCxCqD5760z4t9qpSe+x
+ 91dl0AwwvbMgvt+KpzXdYrpydUbvRx9d+ZFMY5j054q0W1nuf7o9PZW4jy8AVrkciZ/e
+ FyhPT6iuc5PbTdV6/mQaGFdP9l82VrZEiRHtqjMc+HxVYlITGbUgoojCJIhEPPkkYeP5
+ QRqqDKEaErFGLbd4yoHWbHMRTBFKHtCPTFGi1Wy7Ao6jC6SETPP+5Ebbckx3WJX55h+c
+ 3TmeP7A4LqZrm446SwPNlTv6wFWMLwYWo6Bx/drmjYw10F53vlcMoyfFF7PpDkZ1fxj3
+ FAWQ==
+X-Gm-Message-State: AOJu0Yxt8AaOtXzYuO2rL7klASsPfQBhsEc3+0bTWZtFz5FXZzMn7uFl
+ H5kkjRLQ/GF7PdhxR9B8584ZEQ==
+X-Google-Smtp-Source: AGHT+IGDRV6GsN4MuU/s4IyKW+7fOSZmMAypzz4YHb3hu6QgM1RVUnQRC5E5xaK8FI0ciAFGR6IIRQ==
+X-Received: by 2002:a25:8b05:0:b0:d9a:4db9:3259 with SMTP id
+ i5-20020a258b05000000b00d9a4db93259mr5002382ybl.38.1700409552158; 
+ Sun, 19 Nov 2023 07:59:12 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-af10-dfdb-a5aa-dfc7.res6.spectrum.com.
  [2603:6081:7b00:6400:af10:dfdb:a5aa:dfc7])
  by smtp.gmail.com with ESMTPSA id
- s185-20020a0dd0c2000000b005b03d703564sm1817205ywd.137.2023.11.19.07.59.06
+ p19-20020a25f453000000b00d815cb9accbsm1522817ybe.32.2023.11.19.07.59.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 07:59:06 -0800 (PST)
-Date: Sun, 19 Nov 2023 10:59:04 -0500
+ Sun, 19 Nov 2023 07:59:11 -0800 (PST)
+Date: Sun, 19 Nov 2023 10:59:09 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, xypron.glpk@gmx.de, masahisa.kojima@linaro.org,
- raymond.mao@linaro.org
-Subject: Re: Pull request for efi-next-18112023
-Message-ID: <20231119155904.GB2513409@bill-the-cat>
-References: <20231118202945.265566-1-ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH 1/5] cyclic: Disable in SPL builds
+Message-ID: <20231119155909.GC2513409@bill-the-cat>
+References: <20231119144700.631322-1-sjg@chromium.org>
+ <20231119144700.631322-2-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hFK8rY775K2CKvlr"
+ protocol="application/pgp-signature"; boundary="rNIwEMRIUqRA4BXj"
 Content-Disposition: inline
-In-Reply-To: <20231118202945.265566-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <20231119144700.631322-2-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,79 +97,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hFK8rY775K2CKvlr
+--rNIwEMRIUqRA4BXj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 18, 2023 at 10:29:45PM +0200, Ilias Apalodimas wrote:
+On Sun, Nov 19, 2023 at 07:46:39AM -0700, Simon Glass wrote:
 
-> Hi Tom,
+> The cyclic subsystem is currently enabled in all build phases or none.
+> So far it doesn't have any purpose within SPL builds, so adjust the
+> rules to prevent it being built in that case.
 >=20
-> The following changes since commit ae7ec8b0be41b59ef323f7531c0fe6745e8fef=
-45:
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >=20
->   Merge branch '2023-11-16-assorted-updates' into next (2023-11-17 08:38:=
-05 -0500)
+>  common/Makefile  | 2 +-
+>  include/cyclic.h | 6 ++++--
+>  2 files changed, 5 insertions(+), 3 deletions(-)
 >=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/efi-next-1811=
-2023
->=20
-> for you to fetch changes up to c022eed4bedf2e16e737fde22b03289d2a48cb27:
->=20
->   doc: uefi: add HTTP Boot support (2023-11-18 10:08:09 +0200)
->=20
-> EFI HTTP Boot is currently supported by using a combination of
-> wget, blkmap and bootefi commands. The user has to download the
-> image, mount it using blkmap and then execute the efi installer
-> using bootefi.
-> This series simplifies the user experience. Instead of doing all the
-> steps manually, users can now enable a new Kconfig (EFI_HTTP_BOOT)
-> which will select wget, blkmap and dns options. They can then use
-> efidebug command to add a boot option for the EFI Bootmanager using
-> =3D> efidebug boot add -u 3 netinst http://<path>
-> =3D> efidebug boot order 3
-> =3D> bootefi bootmgr
->=20
-> The boot manager will automatically download and mount the image.
-> Once it's mounted it will locate and launch the installer.
->=20
-> It's worth noting that this rarely fails, but the reason is irrelevant
-> to the current patchset. More information can be found here
-> https://lore.kernel.org/u-boot/CAOMZO5CoduEgwgdQiybmoKh6qQZOezUtRRQO4ecaG=
-dZBBz5dDw@mail.gmail.com/
-> The tl;dr is that wget sometimes fails to download the file correctly
-> or set the size env variables. We expect all these to be solved once
-> LWIP is stable and pulled
->=20
-> The CI reported no issues
-> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/18623
-> Please consider pulling!
->=20
+> diff --git a/common/Makefile b/common/Makefile
+> index 1495436d5d45..27443863bf9b 100644
+> --- a/common/Makefile
+> +++ b/common/Makefile
+> @@ -77,7 +77,7 @@ obj-$(CONFIG_CROS_EC) +=3D cros_ec.o
+>  obj-y +=3D dlmalloc.o
+>  obj-$(CONFIG_$(SPL_TPL_)SYS_MALLOC_F) +=3D malloc_simple.o
+> =20
+> -obj-$(CONFIG_CYCLIC) +=3D cyclic.o
+> +obj-$(CONFIG_$(SPL_TPL_)CYCLIC) +=3D cyclic.o
+>  obj-$(CONFIG_$(SPL_TPL_)EVENT) +=3D event.o
+> =20
+>  obj-$(CONFIG_$(SPL_TPL_)HASH) +=3D hash.o
 
-Applied to u-boot/next, thanks!
+This is fine, but I suspect we're missing SPL_CYCLIC as a symbol and
+SPL_WDT should be select'ing that, same as "WDT".
+
+> diff --git a/include/cyclic.h b/include/cyclic.h
+> index 44ad3cb6b803..d3b368dd90df 100644
+> --- a/include/cyclic.h
+> +++ b/include/cyclic.h
+> @@ -11,6 +11,7 @@
+>  #ifndef __cyclic_h
+>  #define __cyclic_h
+> =20
+> +#include <linux/kconfig.h>
+>  #include <linux/list.h>
+>  #include <asm/types.h>
+
+Is this really needed? What's blowing up since we should have -include
+=2E../linux/kconfig.h cover this.
 
 --=20
 Tom
 
---hFK8rY775K2CKvlr
+--rNIwEMRIUqRA4BXj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVaMMgACgkQFHw5/5Y0
-tyx3EQv+KQYiRwyYLgzJJL3Gf7Eh5EJBLBbmAf5CiCHt7G4vgsbzk/s3BK25YRMm
-DBCGwnLAJN/2l9jwJ8MzPSkREs9rEg1GIScChM6GVk0irJqAyAMac1MX9WEI/XvK
-3Xoxk8Ph1rVkADLZ+4xp4ebSiWXQ/DkQeNkkEvFNUOBkrFavDRhSWjunJslMDxZr
-mLJVF6Z47t1523awf/QN70cqcQoZoBj0j596ReQKT6lj0fTs1tTby8VWNAfyZyRV
-3bOWZwTuQ1VfJs5Kb96Tfw9K+YWQxaHUzW1G+dgroOZeNqA37svk+EFmq++zKneQ
-C3NnZE5VP8o9NnuIC3IVx58yBpkXFNSdZPDMIU1DhFkAXPGRH6o03NWWw9cvX+Ev
-NxNMb20Wy4cC/KihaLsHDCBYiwGwnMMC9SSM/OCPuYCPMKE1uRmkZlV4CnyVHe1Q
-8givEjdtELFMaywjPe98vlhw7a3b8dLMJXWR4MrK+2EtGxIA567AfCU/Hz8i2/Gt
-gIK6W1F1
-=UVqr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVaMM0ACgkQFHw5/5Y0
+tyygxgwAkGaNA3+8vmggEtaUlup1z4WAIswYeYAix6oiC+cSKUwoyTmRGLEL1m23
+B6xcZ39+fG5Hlivz0qi8lqsEjEa284jXuZWSLJP3rOK3GxY4Fa5Kja4rwv7w/0Er
+93txJT7BP2xxMF3TBMVmyumgcQP7rFOyqyWamxINibkUzhAO9KU/8a0NvPCvTZRZ
+zmCvALaDTDmmZitTju9p7G3ZyCRPL9hIMcmCxZgbF8yCd5XL0SegwvNJqcJVd19F
+AkLn0XyLljPPMN6Z37UFVIxAFWgCDFu2RgoPT/Grr+2nCJ3gWl3HBqdA9REJEUNB
+Sn37RiTk29tcNQHndXK6igMOWU2qSs6UFk47HwDq1uoa/jlDXOl6OOXaxFm6uI/E
+qWU9g5tiUfGDkh6qvYcWR3ehh8m3FSVZ4HJ0673FlsVjWb7V1YzvzbSkTdkpxFu7
+TA0Y/dkmTi/gl9N9xZvhtwYsIFhugcDP4ea1x68mCt+eFfu6owJtNMhSPy5/tVWV
+r8JW7+js
+=9Rve
 -----END PGP SIGNATURE-----
 
---hFK8rY775K2CKvlr--
+--rNIwEMRIUqRA4BXj--
