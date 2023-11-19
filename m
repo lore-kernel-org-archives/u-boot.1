@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194EDC072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F21DDC072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62AD5874A5;
-	Sun, 19 Nov 2023 21:17:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BDA5987174;
+	Sun, 19 Nov 2023 21:28:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xNznRdKa";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="siTjSO60";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LwyoZZKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B11D287243; Sun, 19 Nov 2023 21:17:56 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8443A86F80; Sun, 19 Nov 2023 21:28:09 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02AB9874A5
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 21:17:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D0E886940
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 21:28:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SYMQ04CrGz9smV;
- Sun, 19 Nov 2023 21:17:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700425064;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PGTB9tWWB5BpsNfKkOzhR91hM8AuprKFCPIO87ss8K0=;
- b=xNznRdKau4G0+VonHIKLkN0nQiCcPr8qlXu7rMVZMe1IdvI9HVoXcOmyfJw6PNCyJvw2tw
- gKMF2PSAAJUUYSL5zKgPTKmeLln03Emu1uiwAPUcQPRPrQT9DZIvhEtXmbGnorjQvLlww3
- WvWeMCmgHUvTvNBY27NUTR4q6evxUNxA9g7NhURZbiyfoYDG6+UMUIoOiZG8MNcdwuldqv
- M1p716BX8X+Dg+WcoRBgUe+FI/IMjOBmF2mqh+GrikL5QosAirZ+mMnFt3w/HS561D4lFB
- /i4nxDgYLnqAJcZgQvtQFDcE0paGYfMM21RMaJ5Zj6ziWkRSiWGiXs/WtPJ1BA==
-Message-ID: <6d47aaa8-543a-4420-973d-7a28941b475e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700425062;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PGTB9tWWB5BpsNfKkOzhR91hM8AuprKFCPIO87ss8K0=;
- b=siTjSO60xHr3Ks2GK20mFD+rDydCyFkOX0RnYeeh1e7RFEZM6VgSx+Ae1rR9szCEKwiElF
- 7r0zI6aqttSaQJMBaODW6qw8vUqVxGkCtk3t8wNPelc13Cs/ADOJ1k6NKNwmamcBYKNcyh
- /88O9iL5ielwC7PMCED6dJqupMASnEbR3ABNSRU+mNhrPsh+KouyPYJi1SMskpKZ/rK4jO
- NaZN5YFYLokEOR3C8VsJ/mZT88LLJWDcGwomxh/qd+s7D+E45oZxXIGbQipWapGIu7U424
- /1poJAL8+BnKJDz8KGfzhOZqu85Vted+CvQdoWscLiH9zPat6iQd3H99Y5/ylw==
-Date: Sun, 19 Nov 2023 21:17:40 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5c9adcaf514so7655677b3.2
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 12:28:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700425685; x=1701030485; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lw8nil8ExBKqzPf3/xCchv0ktaUmnJkHs8M9hYY11U4=;
+ b=LwyoZZKNKRe8wKJTHhnvetpiYH3YXKa79/zSXAmJmaXiXrR078jcf7Pl1JfO75+ywr
+ fIcEZhLertORoepIgbYBp4/w3RJMS5Avc2UvNJHqKmr2r5NziIO6gJFmgDgYumviZv6X
+ 46pz0F4P5CyzYCUxYhc1Iaxttt/5GFrlyo3Ac=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700425685; x=1701030485;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Lw8nil8ExBKqzPf3/xCchv0ktaUmnJkHs8M9hYY11U4=;
+ b=GGdCToctfvKXbKMHJhLplBD1j/mFkOpT99faTGuqrtyzRktwYEIPeD3HgkrFPF5h16
+ 66tx5DjVFStOxqWuaZnHTssFic40l22nJ5rE829t0ibphD4do5Afn8sqzMaF+AqFLKxR
+ PazIPtsiayBTqrWoDFJ+8jVIMds8d4cmm4TcCRVeIkyDWWRVD6WXHK66UIazobW/Q1oL
+ OjiCujGAoCLoG0FP8LuTUzCSSihupfVAYFxCSJcQnI/EqAkF+4HsllTVq21tRfXk99py
+ dMt1GIkAsv8fVUicdJB6A1pn3zlBu9RvaXlQ/1sMy29MYLFKHyG9OU8nYMliOI+By04y
+ 2FsA==
+X-Gm-Message-State: AOJu0YwdVSveXr+0n6aGZBPldLjphCvvoEI1B47sjpZAyMeISLGWdBxy
+ u8OCLnk9PhCyQkTF9Yqg/P6LH4ZgmKW+56jpfk3Faw==
+X-Google-Smtp-Source: AGHT+IHpdJ0la5tsyIX/I0QzsdJSKFn0FMfSAQL/a9keld4z5oANQNjq9AKUvpWGAWxo7LrTmDtEjQ==
+X-Received: by 2002:a0d:ff45:0:b0:577:189b:ad4 with SMTP id
+ p66-20020a0dff45000000b00577189b0ad4mr6046155ywf.48.1700425685348; 
+ Sun, 19 Nov 2023 12:28:05 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-af10-dfdb-a5aa-dfc7.res6.spectrum.com.
+ [2603:6081:7b00:6400:af10:dfdb:a5aa:dfc7])
+ by smtp.gmail.com with ESMTPSA id
+ e81-20020a816954000000b0059b2be24f88sm1891841ywc.143.2023.11.19.12.28.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Nov 2023 12:28:04 -0800 (PST)
+Date: Sun, 19 Nov 2023 15:28:02 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH 1/2] global: Clean up arch/*/dts/Makefile
+Message-ID: <20231119202802.GF2513409@bill-the-cat>
+References: <20231117225214.2144414-1-trini@konsulko.com>
+ <CAPnjgZ23gJb6mu53Tmmy9OdaRLu9zCCLgJTGsTVjjKcCv63VqA@mail.gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 5/5] sysreset: Support reset via Renesas RAA215300 PMIC
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Jaehoon Chung <jh80.chung@samsung.com>
-References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
- <20231115174025.12974-6-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231115174025.12974-6-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: wk7979uoiaaoufbmhfpc3zef5m1m5t65
-X-MBO-RS-ID: 390679704e8b523a995
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1CJmZgCnO3wDJ/AP"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ23gJb6mu53Tmmy9OdaRLu9zCCLgJTGsTVjjKcCv63VqA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,183 +92,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/15/23 18:40, Paul Barker wrote:
-> This patch allows us to reset the RZ/G2L board via the RAA215300 PMIC.
-> 
-> Note that the RAA215300 documentation names the available reset types
-> differently to u-boot:
-> 
->    - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
->      (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
-> 
->    - A "cold" reset via the RAA215300 PMIC will cycle all power supply
->      rails, so this corresponds to SYSRESET_POWER.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> ---
->   board/renesas/rzg2l/rzg2l.c           |  8 ----
->   configs/renesas_rzg2l_smarc_defconfig |  2 +
->   drivers/power/pmic/raa215300.c        | 17 ++++++++
->   drivers/sysreset/Kconfig              |  6 +++
->   drivers/sysreset/Makefile             |  1 +
->   drivers/sysreset/sysreset_raa215300.c | 58 +++++++++++++++++++++++++++
->   6 files changed, 84 insertions(+), 8 deletions(-)
->   create mode 100644 drivers/sysreset/sysreset_raa215300.c
-> 
-> diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-> index 73201a8c69e5..0f6d6e7f514f 100644
-> --- a/board/renesas/rzg2l/rzg2l.c
-> +++ b/board/renesas/rzg2l/rzg2l.c
-> @@ -56,11 +56,3 @@ int board_init(void)
->   {
->   	return 0;
->   }
-> -
-> -void reset_cpu(void)
-> -{
-> -	/*
-> -	 * TODO: Implement reset support once TrustedFirmware supports
-> -	 * the appropriate call.
-> -	 */
-> -}
 
-Board change -- separate patch please.
+--1CJmZgCnO3wDJ/AP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-> index b62eae4ee0a4..ba96e746df9e 100644
-> --- a/configs/renesas_rzg2l_smarc_defconfig
-> +++ b/configs/renesas_rzg2l_smarc_defconfig
-> @@ -55,3 +55,5 @@ CONFIG_PMIC_RAA215300=y
->   CONFIG_DM_REGULATOR=y
->   CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_DM_REGULATOR_GPIO=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_RAA215300=y
-> diff --git a/drivers/power/pmic/raa215300.c b/drivers/power/pmic/raa215300.c
-> index 9c0b720994b2..7f68f95f25cf 100644
-> --- a/drivers/power/pmic/raa215300.c
-> +++ b/drivers/power/pmic/raa215300.c
-> @@ -27,9 +27,26 @@ static const struct udevice_id raa215300_ids[] = {
->   	{ /* sentinel */ }
->   };
->   
-> +static int raa215300_bind(struct udevice *dev)
-> +{
-> +	struct driver *drv;
-> +
-> +	if (IS_ENABLED(CONFIG_SYSRESET_RAA215300)) {
-> +		drv = lists_driver_lookup_name("raa215300_sysreset");
-> +		if (!drv)
-> +			return -ENOENT;
-> +
-> +		return device_bind(dev, drv, dev->name, NULL, dev_ofnode(dev),
-> +				   NULL);
-> +	}
-> +
-> +	return 0;
-> +}
+On Sun, Nov 19, 2023 at 12:09:07PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 17 Nov 2023 at 15:52, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > With commit 3609e1dc ("dts: automatically build necessary .dtb files")
+> > we now have logic that will ensure that all device trees needed in the
+> > binary are built automatically. Any device tree that the developer needs
+> > while working can still be built normally via make arch/.../foo.dtb so
+> > we can simply drop the rest of this logic.
+> >
+> > Suggested-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >  arch/arc/dts/Makefile        |    8 -
+> >  arch/arm/dts/Makefile        | 1436 +---------------------------------
+> >  arch/m68k/dts/Makefile       |   18 -
+> >  arch/microblaze/dts/Makefile |    2 -
+> >  arch/mips/dts/Makefile       |   37 -
+> >  arch/nios2/dts/Makefile      |    2 -
+> >  arch/powerpc/dts/Makefile    |   32 -
+> >  arch/riscv/dts/Makefile      |    9 -
+> >  arch/sandbox/dts/Makefile    |    5 -
+> >  arch/sh/dts/Makefile         |    2 +-
+> >  arch/x86/dts/Makefile        |   22 -
+> >  arch/xtensa/dts/Makefile     |    2 -
+> >  configs/iot2050_defconfig    |    1 +
+> >  13 files changed, 6 insertions(+), 1570 deletions(-)
+>=20
+> I can see the motivation for this, but it ends up moving us away from
+> driver model and devicetree, IMO. For example, rk3399 and other
+> rockchip boards use DT for their init so the same U-Boot can be used
+> for all, mostly. Ideally that is the way all boards would be, as they
+> are in Linux.
+>=20
+> But here I have to manually add all the rk3399 boards to OF_LIST for
+> each board and enable SPL_LOAD_FIT (and SPL_FRAMEWORK but that is
+> fine) to make this work.
 
-Driver change should be squashed in 4/5.
+How are you doing this today on N rk3399 boards if you aren't tweaking a
+CONFIG option to get the correct dtb in to the final binary? That I
+think is where we go back-and-forth on stuff like this. If there's
+deconfigs that can support N boards, but only list a, or only a few, dtb
+files in the right CONFIG variable how do you get it to run on the
+others? I know you noted some Exynos platforms it's a simple concat to
+make another platform work instead. But I really don't know how common
+that is in theory, and even less so in practice. Picking up rk3399, you
+need bl31 and op-tee and you can only get those so generic too.
 
->   U_BOOT_DRIVER(raa215300_pmic) = {
->   	.name = "raa215300_pmic",
->   	.id = UCLASS_PMIC,
->   	.of_match = raa215300_ids,
-> +	.bind = raa215300_bind,
->   	.ops = &raa215300_ops,
->   };
-> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-> index 0e52f996283c..49c0787b26d8 100644
-> --- a/drivers/sysreset/Kconfig
-> +++ b/drivers/sysreset/Kconfig
-> @@ -229,6 +229,12 @@ config SYSRESET_MPC83XX
->   	help
->   	  Reboot support for NXP MPC83xx SoCs.
->   
-> +config SYSRESET_RAA215300
-> +	bool "Support sysreset via Renesas RAA215300 PMIC"
-> +	depends on PMIC_RAA215300
-> +	help
-> +	  Add support for the system reboot via the Renesas RAA215300 PMIC.
-> +
->   endif
+And part of the issue is that with Linux, the "do board specific things"
+just gets pushed down a layer, to us. We have to just know X/Y/Z at
+build time so that someone else can know it at run time.
 
-Sysreset driver should be separate patch .
+--=20
+Tom
 
->   endmenu
-> diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-> index c9f1c625aebb..e0e732205df3 100644
-> --- a/drivers/sysreset/Makefile
-> +++ b/drivers/sysreset/Makefile
-> @@ -27,4 +27,5 @@ obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
->   obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
->   obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
->   obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
-> +obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
->   obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
-> diff --git a/drivers/sysreset/sysreset_raa215300.c b/drivers/sysreset/sysreset_raa215300.c
-> new file mode 100644
-> index 000000000000..32dfcb0aec84
-> --- /dev/null
-> +++ b/drivers/sysreset/sysreset_raa215300.c
-> @@ -0,0 +1,58 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2023 Renesas Electronics Corporation
-> + */
-> +
-> +#include <dm.h>
-> +#include <power/pmic.h>
-> +#include <sysreset.h>
-> +
-> +#define RAA215300_REG_SWRESET	0x6D
-> +#define RAA215300_COLD_RESET	BIT(0)
-> +#define RAA215300_WARM_RESET	BIT(1)
-> +
-> +static int raa215300_sysreset_request(struct udevice *dev, enum sysreset_t type)
-> +{
-> +	struct udevice *pmic = dev_get_parent(dev);
-> +	int ret;
-> +	u8 val;
-> +
-> +	/*
-> +	 * The RAA215300 documentation names the available reset types
-> +	 * differently to u-boot:
-> +	 *
-> +	 *   - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
-> +	 *     (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
-> +	 *
-> +	 *   - A "cold" reset via the RAA215300 PMIC will cycle all power supply
-> +	 *     rails, so this corresponds to SYSRESET_POWER.
-> +	 */
-> +	switch (type) {
-> +	case SYSRESET_COLD:
-> +		val = RAA215300_WARM_RESET;
-> +		break;
-> +
-> +	case SYSRESET_POWER:
-> +		val = RAA215300_COLD_RESET;
-> +		break;
-> +
-> +	default:
-> +		return -EPROTONOSUPPORT;
-> +	}
-> +
-> +	ret = pmic_reg_write(pmic, RAA215300_REG_SWRESET, val);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return -EINPROGRESS;
-> +}
-> +
-> +static struct sysreset_ops raa215300_sysreset_ops = {
-> +	.request = raa215300_sysreset_request,
-> +};
-> +
-> +U_BOOT_DRIVER(raa215300_sysreset) = {
-> +	.name = "raa215300_sysreset",
-> +	.id = UCLASS_SYSRESET,
-> +	.ops = &raa215300_sysreset_ops,
-> +};
+--1CJmZgCnO3wDJ/AP
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Looks good otherwise.
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVab88ACgkQFHw5/5Y0
+tyxDeAwAjCvdGB1+E8Ut/5zavAMZV7cz60C2cipWC9C/tjrJ3ZzobkXKKq5eEoKz
+xZk4CHL2nGSZQa5GG7SNoCYduYij3MDv9PUp3cZlJiAsyl70NtD9gNTWQjWtJUHy
+OM9J/jVaFdEKNWakTom6VBYsj02B48Hnk8QCepDcPvy+qsxOya5aW6yW0SRyb//3
+ZDe4knaSuZnzN/ZJIt9e5teu4e9LMU9rdEDOJzAMQHicOfGa9WMm6lxJVb8S6Urs
+PTvwcgb8AylqdEonyDCk/+HOxlCk3VIUdxfUv0RHpz8p7ormVV0C+tCeCpvx5SeC
+mG9KVnLDyxyWNVHb2dKAL5KAFmExlHD7ny80t+1QUhmewZkfXK1MNBgj+VRYpYLj
+pwS97Oz9K5TI9AEnd6J8wK4sqF+6OPnB3NGQillxu/8UTpjiWWyFR5B38RH27YAE
+VfHvS15Zl5WdzzW3SOmOWRE+9Y6nzy6MVO+zlk0vH8FrX7GqfYCOYtaL8c8UuKbg
+zG4lfKrd
+=0sqb
+-----END PGP SIGNATURE-----
+
+--1CJmZgCnO3wDJ/AP--
