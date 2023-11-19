@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81583C54FB9
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:13:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65E69C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37704874A5;
-	Sun, 19 Nov 2023 20:12:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9838F874BB;
+	Sun, 19 Nov 2023 20:12:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="akQKen/F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nJws2sD0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4F65871B2; Sun, 19 Nov 2023 20:12:26 +0100 (CET)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id C6C1C87252; Sun, 19 Nov 2023 20:12:27 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43C938749F
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 78BF8874C7
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-35930447ae9so11541515ab.2
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:14 -0800 (PST)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-35937f2fadeso12702565ab.2
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700421133; x=1701025933; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700421136; x=1701025936; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JRWk81JcMvP7cgeud20z4e5gp032PBZXA4Jarr//M+E=;
- b=akQKen/FIRPaSDqsuwivArtBduppWdMDYYtujaDLsSu3IEFnR88/rloDsP8as16JpE
- Xdzw4uwuEHXNcDhlhg+VfHudKnXd+6Fa/7TwhBDj8pgebjnrpDIqwqDnlLFMG7KKHwx+
- IT1R9qOkEHkiIwbDcjMp8R4PHwHJo3fBoDlY0=
+ bh=oWP3OYNytmY0ZdZot+gmmzi9Dio5JwvKwKjZzVHUqJc=;
+ b=nJws2sD0wRpg59BIUm/u4/STPZSR3LVWQ+OYxsdi7XWWRdR9ffyoP5hyb7Ds60z/7D
+ cQuibH6ybfG1pJXYvPADA7hXlxV9iCcWQqIUmd/lYTI61i1hImpffpPPQuHkztz3s3va
+ CjqGNEj5IdB4X+KC96VlnVNqV7OCAR1dlK2wA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700421133; x=1701025933;
+ d=1e100.net; s=20230601; t=1700421136; x=1701025936;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JRWk81JcMvP7cgeud20z4e5gp032PBZXA4Jarr//M+E=;
- b=q4sY3paG++FTJpuS5yA0yDFeqsgPz8WoFhefNwknTz/UPT4jDHx2kPMQZcOrE90FEG
- pQ5ihpeyIzKLzEXbZUYBAzfb8T7ERgHyPqYVk/brkR9eYxOY1a+s/x0uvwaNFVmv76Rk
- ENuM1ZNTGHGvjOE2AeIM9h7Pi205Jmh7H6928mH9SmV1CLWxVPoHsnG4ujDP1OEXucod
- 2Ngddlr6uU/rN+CXKWk34LL5fxPIQvNvlbANoB0CTj+WFdDmimwVCb0A7yC1uPRaa/wW
- LjR0BNZDgvH6SYT9KuKFzrnpmB5u83KuqpQFvwYmQyN0PgL8vE00fMN6aOzm9q20hHQw
- XP3w==
-X-Gm-Message-State: AOJu0YxwqEb4nSqlpdmQ1b6+x0V5ZOsIprDbDzSRQeTmz0wEjjxPveTM
- zJMImFACaaIDnHMQ5BOu2B6Z4y73e6AVCXOWHfPp1g==
-X-Google-Smtp-Source: AGHT+IHfNUzcHDk8BpoTc2ui4E2lwfG6PplHz+r8YKCkpKQTtRHp0FNh5LdVJfFRd/1A4r/LND/7RA==
-X-Received: by 2002:a92:c6c1:0:b0:359:554:790f with SMTP id
- v1-20020a92c6c1000000b003590554790fmr6676819ilm.2.1700421132731; 
- Sun, 19 Nov 2023 11:12:12 -0800 (PST)
+ bh=oWP3OYNytmY0ZdZot+gmmzi9Dio5JwvKwKjZzVHUqJc=;
+ b=H4zTGqeA0ajlrSge9CvkGLKkaVSGO9Pg86sUDFqzt4q/FB2R3tvJ6KoLFhsyWjapuM
+ b9EOTwP9F2x07ReiYo75FCJlmJPaoRMqqz/yjmhmaLBzuweSn5/094eaGt9FcV+0/GBG
+ wNKx5JayN9jq7WLvX/r7sS9cRouPoPByegGvlpklv0Vtp+dWhBPA/2xkeX8x0/yrmGwb
+ H2CFNkhnP6Q7M/o77q123oxxmCrqttXzxIcJDdqHt/enwmC4NIds4BpyeF5gKelJOQT1
+ RxBFduj10pUdRMRS6adpNE0FkpOhaSxcUQ7EFLaMb2AnzMMWLsdrKKJEgjnAtOHFsxWY
+ VZRw==
+X-Gm-Message-State: AOJu0Yz+qrjPRH0LHJYv3K/Jt0lL31BxExfNJ7bF5lS2sXp9MKgJJ8rB
+ tgl6aUeSx3tLtT3BwF1SqOb3KuCvg6wiCFOj/I4jwg==
+X-Google-Smtp-Source: AGHT+IHsMb0KrVX7iFaNMFo3Mltdk3agNvlvWuN0tAwnhYK/NLgjNrJmZPnqRGPakZ5sUnZD8UOLNw==
+X-Received: by 2002:a92:c951:0:b0:35a:ff35:b475 with SMTP id
+ i17-20020a92c951000000b0035aff35b475mr1669789ilq.3.1700421136086; 
+ Sun, 19 Nov 2023 11:12:16 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.12
+ q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 11:12:12 -0800 (PST)
+ Sun, 19 Nov 2023 11:12:15 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 02/12] bootstd: Refactor mmc prep to allow a different scan
-Date: Sun, 19 Nov 2023 12:11:37 -0700
-Message-ID: <20231119191202.667180-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>,
+	Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v5 06/12] expo: Correct background colour
+Date: Sun, 19 Nov 2023 12:11:41 -0700
+Message-ID: <20231119121144.v5.6.I0229a119165879ecce6bafc8568708326bf5ba78@changeid>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231119191202.667180-1-sjg@chromium.org>
 References: <20231119191202.667180-1-sjg@chromium.org>
@@ -87,136 +88,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust scan_mmc4_bootdev() and related function so that the caller can
-do its own 'bootflow scan' command. This allows it to change the flags
-if needed.
+Use the correct background colour when using white-on-black.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Add new patch to refactor mmc prep to allow a different scan
+ boot/expo.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
- test/boot/bootflow.c | 49 ++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 40 insertions(+), 9 deletions(-)
-
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index f640db8a2418..102b2b561356 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -511,19 +511,27 @@ BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
- /**
-  * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other distros
-  *
-+ * After calling this function, set std->bootdev_order to *@old_orderp to
-+ * restore normal operation of bootstd (i.e. with the original bootdev order)
-+ *
-  * @uts: Unit test state
-- * @mmc_dev: MMC device to use, e.g. "mmc4"
-+ * @mmc_dev: MMC device to use, e.g. "mmc4". Note that this must remain valid
-+ *	in the caller until
-+ * @bind_cros: true to bind the ChromiumOS bootmeth
-+ * @old_orderp: Returns the original bootdev order, which must be restored
-  * Returns 0 on success, -ve on failure
-  */
- static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
--			    bool bind_cros)
-+			    bool bind_cros, const char ***old_orderp)
- {
--	const char *order[] = {"mmc2", "mmc1", mmc_dev, NULL};
-+	static const char *order[] = {"mmc2", "mmc1", NULL, NULL};
- 	struct udevice *dev, *bootstd;
- 	struct bootstd_priv *std;
- 	const char **old_order;
- 	ofnode root, node;
+diff --git a/boot/expo.c b/boot/expo.c
+index 139d684f8e6e..cadb6a0ad6e3 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -190,10 +190,12 @@ int expo_render(struct expo *exp)
+ 	struct udevice *dev = exp->display;
+ 	struct video_priv *vid_priv = dev_get_uclass_priv(dev);
+ 	struct scene *scn = NULL;
++	enum colour_idx back;
+ 	u32 colour;
+ 	int ret;
  
-+	order[2] = mmc_dev;
-+
- 	/* Enable the mmc4 node since we need a second bootflow */
- 	root = oftree_root(oftree_default());
- 	node = ofnode_find_subnode(root, mmc_dev);
-@@ -546,26 +554,49 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
- 	std = dev_get_priv(bootstd);
- 	old_order = std->bootdev_order;
- 	std->bootdev_order = order;
-+	*old_orderp = old_order;
-+
-+	return 0;
-+}
-+
-+/**
-+ * scan_mmc_bootdev() - Set up an mmc bootdev so we can access other distros
-+ *
-+ * @uts: Unit test state
-+ * @mmc_dev: MMC device to use, e.g. "mmc4"
-+ * @bind_cros: true to bind the ChromiumOS bootmeth
-+ * Returns 0 on success, -ve on failure
-+ */
-+static int scan_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
-+			    bool bind_cros)
-+{
-+	struct bootstd_priv *std;
-+	struct udevice *bootstd;
-+	const char **old_order;
-+
-+	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, bind_cros, &old_order));
- 
- 	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan", 0));
- 	ut_assert_console_end();
- 
- 	/* Restore the order used by the device tree */
-+	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
-+	std = dev_get_priv(bootstd);
- 	std->bootdev_order = old_order;
- 
- 	return 0;
- }
- 
- /**
-- * prep_mmc4_bootdev() - Set up the mmc4 bootdev so we can access a fake Armbian
-+ * scan_mmc4_bootdev() - Set up the mmc4 bootdev so we can access a fake Armbian
-  *
-  * @uts: Unit test state
-  * Returns 0 on success, -ve on failure
-  */
--static int prep_mmc4_bootdev(struct unit_test_state *uts)
-+static int scan_mmc4_bootdev(struct unit_test_state *uts)
- {
--	ut_assertok(prep_mmc_bootdev(uts, "mmc4", false));
-+	ut_assertok(scan_mmc_bootdev(uts, "mmc4", false));
- 
- 	return 0;
- }
-@@ -575,7 +606,7 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
- {
- 	char prev[3];
- 
--	ut_assertok(prep_mmc4_bootdev(uts));
-+	ut_assertok(scan_mmc4_bootdev(uts));
- 
- 	/* Add keypresses to move to and select the second one in the list */
- 	prev[0] = CTL_CH('n');
-@@ -681,7 +712,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
- 	ofnode node;
- 	int i;
- 
--	ut_assertok(prep_mmc4_bootdev(uts));
-+	ut_assertok(scan_mmc4_bootdev(uts));
- 
- 	ut_assertok(bootflow_menu_new(&exp));
- 	node = ofnode_path("/bootstd/theme");
-@@ -996,7 +1027,7 @@ BOOTSTD_TEST(bootflow_cmdline_special, 0);
- /* Test ChromiumOS bootmeth */
- static int bootflow_cros(struct unit_test_state *uts)
- {
--	ut_assertok(prep_mmc_bootdev(uts, "mmc5", true));
-+	ut_assertok(scan_mmc_bootdev(uts, "mmc5", true));
- 	ut_assertok(run_command("bootflow list", 0));
- 
- 	ut_assert_nextlinen("Showing all");
+-	colour = video_index_to_colour(vid_priv, VID_WHITE);
++	back = CONFIG_IS_ENABLED(SYS_WHITE_ON_BLACK) ? VID_BLACK : VID_WHITE;
++	colour = video_index_to_colour(vid_priv, back);
+ 	ret = video_fill(dev, colour);
+ 	if (ret)
+ 		return log_msg_ret("fill", ret);
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
