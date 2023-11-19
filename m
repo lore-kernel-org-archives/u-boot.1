@@ -4,55 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6571DC072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 06:37:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A34F3C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 06:38:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DFF987005;
-	Sun, 19 Nov 2023 07:37:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4099986E65;
+	Sun, 19 Nov 2023 07:37:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700375871;
-	bh=ylrzZDgPChkdcsP4ip3RxeXTTQi6aUH8BnQxQ6G+3dw=;
+	s=phobos-20191101; t=1700375877;
+	bh=xm6YWyFmDDH59P/5ldoG/1V1539DT1l+G+GHtMeDkTs=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=G+s3ZCc3ZFI5zPavBxZyagrBgfXfYYlgMwRUqjyzWXF68i7yVgp69rOT5AJOB8DOE
-	 5zN+44n4MyGgqlmR4IDy/rVaRGGt5AJ9P/BmFSVIizNO93dDK3yXlx/9bu7CKnruKv
-	 tCOAxH8G7/uPbtCOb0RjWwlgOcC6ZIuqjungUELIpNd4zH5pHPLOpTt9gH8fG7v4qt
-	 wFL+ci9kGgmv2z63Qc59OLdCUBlaHlj5+PDDyxc0DBUjNdQ/0WSB+AQ+vE+mPB8PjB
-	 0wGhlCUQ8HVrpTtecUG8HjHqZ9IXmHmiN/QAR4u6za7FUxP2ralVg5V9KCAI/zzhXn
-	 iemu/K9EWYSQw==
+	b=jijxGXkcYornma9wOQ6vntaLpTwkUz8FIjgus8hp9N92eiMZXnylMwz2OCyWjqoMN
+	 uypTHpBcLSIN4ee0dBzjOj8dP7Bksz7E0XfJng1xxfjKAoFi/CumZBd6JvnymnasQY
+	 e8mjdODLP6Or0XhCZcEmIBJqFLDTRc8v3F60J1F6dmU+b3d4koxzTfnAs1IndBZuwJ
+	 c7oGmlzv3AJ2LiQ1Ax51Tp59edYZ/1pgJwLvVeKcypRd6XghAghyDiEvTG4OilumFX
+	 MVjYWPgoE+oGnQ6mIeWXLEmcqLMsofNzx0mF5pZ3k7lFwYE+VO2f7lkBw4D0O5zvct
+	 qCvEtFj9IzJFQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B8C8986E65;
- Sun, 19 Nov 2023 07:37:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 864AA86F40;
+ Sun, 19 Nov 2023 07:37:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1700375869;
- bh=ylrzZDgPChkdcsP4ip3RxeXTTQi6aUH8BnQxQ6G+3dw=;
+ bh=xm6YWyFmDDH59P/5ldoG/1V1539DT1l+G+GHtMeDkTs=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=o/EDlyUDyoNFb0+w11tWG/6eWhHB/C0BQC/RcWw1oQm9FEKHN2Hc8KJsOWVn/5J6h
- ID5n8wasWxNcV3c3E0fXJzdw5JgC0P0fwEaPo5rouWNuLgk7GGtFkVjD37mm1/4IS2
- XQxqAGy7pNLDp+Ux8QOSG8fvRgDQmyxWI/BSLZ5B7O/6wy72jCvvbiRpe1gOjjbqAe
- lCEIA5Ge5rtgI+W80Hkb/vbdcU0oWrfhFb/L2Vi2kgEmMR6LfLSobsW+nQUzs6iMwz
- FEgfTjwBfCSwjnEQ8P/zl+GUnIzXG9ftJoYMkwqc0Rjugrw25+hnrbapPQ3sOJnrDC
- tr3JUpDIkC3rw==
-Message-ID: <5ed434eb-3d62-4301-ba50-480f3ebb3f13@denx.de>
-Date: Sun, 19 Nov 2023 03:17:51 +0100
+ b=t4ZMCghy6N1IAJ3rzeR4nUGwhVu6mSpxN8fojOx0MapJjsiZ2lXsveMQx+rRBXi7T
+ ALfvjbAcs8hPhGeEDL/dDY48AfSYxLCbaoOSQmN2kGJenj4R10CfHh9gZATTdGMX3s
+ RzvEzEooJ/Ypib+X3yz2zTHfJ+FVOGcJJQ1tBuGyHIa9Oz5c+isz5ZpzwI3iETEOck
+ 7YoQXjZOZdGTr2tqLa3lo/6ygfJfEtNj4IXyPzmUM74etqOUzXgRotVnY2z52d7GEu
+ ebNWvUEZcMcDzm2lOnT1BnT7kfhnWUz6Egndo1QsYDdhHX3iJnMsp6iDI1PFZO9Gk9
+ DI4z/HGsP5s0g==
+Message-ID: <db979264-a009-4e65-889a-99900455071a@denx.de>
+Date: Sun, 19 Nov 2023 03:19:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] usb: fastboot: Add missing newline in pr_err
-To: Simon Holesch <simon@holesch.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH 1/2] usb: ci: Fix gadget reinit
+Content-Language: en-US
+To: Simon Holesch <simon@holesch.de>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de
 References: <20231119010453.294168-1-simon@holesch.de>
- <20231119010453.294168-2-simon@holesch.de>
-Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231119010453.294168-2-simon@holesch.de>
+In-Reply-To: <20231119010453.294168-1-simon@holesch.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,28 +70,87 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/19/23 02:04, Simon Holesch wrote:
-
-Please also add missing commit message (can be just the subject copied 
-into the body)
-
+> The ChipIdea device controller wasn't properly cleaned up when disabled.
+> So enabling it again left it in a broken state. The problem occurred for
+> example when the host unbinds the driver and binds it again.
+> 
+> During the first setup, when the out request is queued, the endpoint is
+> primed (`epprime`). If the endpoint is then disabled, it stayed primed
+> with the initial buffer. So after the endpoint is re-enabled, the device
+> controller and device driver were out of sync: the new out request was
+> in the driver queue head, yet not submitted, but the "complete" function
+> was still called, since the endpoint was primed with the old buffer.
+> 
+> With the fastboot function this error led to the (rather confusing)
+> error message "buffer overflow".
+> 
+> Fixed by clearing the primed buffers with the `epflush` (`ENDPTFLUSH`)
+> register.
+> 
 > Signed-off-by: Simon Holesch <simon@holesch.de>
 > ---
->   drivers/usb/gadget/f_fastboot.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/usb/gadget/ci_udc.c | 33 +++++++++++++++++++++++++++++++++
+>   1 file changed, 33 insertions(+)
 > 
-> diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-> index 741775a7bc..9f322c9550 100644
-> --- a/drivers/usb/gadget/f_fastboot.c
-> +++ b/drivers/usb/gadget/f_fastboot.c
-> @@ -520,7 +520,7 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
->   		cmdbuf[req->actual] = '\0';
->   		cmd = fastboot_handle_command(cmdbuf, response);
->   	} else {
-> -		pr_err("buffer overflow");
-> +		pr_err("buffer overflow\n");
->   		fastboot_fail("buffer overflow", response);
->   	}
+> diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+> index 2bfacfe59f..4ad991c72b 100644
+> --- a/drivers/usb/gadget/ci_udc.c
+> +++ b/drivers/usb/gadget/ci_udc.c
+> @@ -354,12 +354,45 @@ static int ci_ep_enable(struct usb_ep *ep,
+>   	return 0;
+>   }
+>   
+> +static void ep_disable(int num, int in)
+> +{
+> +	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
+> +	unsigned int ep_bit, n, enable_bit;
+> +
+> +	if (in) {
+> +		ep_bit = EPT_TX(num);
+> +		enable_bit = CTRL_TXE;
+> +	} else {
+> +		ep_bit = EPT_RX(num);
+> +		enable_bit = CTRL_RXE;
+> +	}
 
-With that fixed:
+Please use setbits_le32()
+
+> +	/* clear primed buffers */
+> +	do {
+> +		writel(ep_bit, &udc->epflush);
+> +		while (readl(&udc->epflush) & ep_bit)
+> +			;
+> +	} while (readl(&udc->epstat) & ep_bit);
+
+wait_for_bit_le32() with suitable timeout
+
+> +	/* clear enable bit */
+> +	n = readl(&udc->epctrl[num]);
+> +	n &= ~enable_bit;
+> +	writel(n, &udc->epctrl[num]);
+
+clrbits_le32()
+
+> +}
+> +
+>   static int ci_ep_disable(struct usb_ep *ep)
+>   {
+>   	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
+> +	int num, in;
+> +
+> +	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
+> +	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
+> +
+> +	ep_disable(num, in);
+>   
+>   	ci_ep->desc = NULL;
+>   	ep->desc = NULL;
+> +	ci_ep->req_primed = false;
+>   	return 0;
+>   }
+
+With those fixed:
 
 Reviewed-by: Marek Vasut <marex@denx.de>
+
+Thanks !
