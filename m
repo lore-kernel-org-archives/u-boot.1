@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAC99C54E76
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:47:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF9A5C2BB3F
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:47:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5B41874ED;
-	Sun, 19 Nov 2023 01:45:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FB6A87505;
+	Sun, 19 Nov 2023 01:45:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ij2BGVP+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B25Cw8io";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2FD870D2; Sun, 19 Nov 2023 01:44:15 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id B8A6686EDA; Sun, 19 Nov 2023 01:43:27 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAC0687446
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D6DDB86E95
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-da0cfcb9f40so3230674276.2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:59 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-9dd6dc9c00cso447483366b.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700354638; x=1700959438; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700354601; x=1700959401; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=25WPOGfZnuoxd4M+Kv2flpYcLZfSY+MTwezFGM7NaKs=;
- b=Ij2BGVP+rQvtFugW0DEMdTWKf1LUihyrviN1yzZWieBzLRgue1M4EVrxT0pa16Z/6E
- d9uPsCk5etCBjDwIr/FUnbZ/Qkk1Vsxe5G5NjK96crkCcZgqVXLWx2QL11HAYu+/a6ZN
- zpYq1rrYHpIsC7TSi13XAq3rKUl6xrfc8OVKw=
+ bh=yQzmbS8X8/IWoZHemoC2zYpWGh5AVUPJ5SI+4ssbS9c=;
+ b=B25Cw8ioR5xjzqGPmY9A+LCBZaWuYjLREFipmn5mtE8j7sApDexa1JB1Y9IM2sB2h5
+ pcKJUnNdQjA96gDtnVzLDJgTS8QWLN3Ia971Gs9T2vC9z1d3P+obfI7G9PibUM+Qw1pB
+ v7HNK40wYQ5t+L7Dg9OYFX7KpZmK1L0bd4GOs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700354638; x=1700959438;
+ d=1e100.net; s=20230601; t=1700354601; x=1700959401;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=25WPOGfZnuoxd4M+Kv2flpYcLZfSY+MTwezFGM7NaKs=;
- b=a3DPyZFhOkxU6/Z+XEdOg66gY9sqQP8HYfExXvLN+NGkx1UHqI2PyU6qzKcb9yYtOT
- zCib3ea226Bvj3aL83tF067lZv6FY+OOCLUbo/CKqNuWq/3TYiL/kWgexUe/rUl5IGKQ
- YvWf4H7339g1HHlvYftWMuhhRrns9cFTlVFkGZx50+iNzhnlirf8EQUyri0RRX/RYQdA
- PbzysRk34uQOlZ3NK21P+zGH3EAkjZ2zIVyhzqHlmWT+7rnoRijblfYPv2ZrYdU3AJjc
- mRcaLYnzXADX8B+QsfeBdD3ac2RBXUuCr0AKZpK5A7fPrg3+4SsX4uyrGrnyB0LSjnt5
- +G3A==
-X-Gm-Message-State: AOJu0YxNLMpi947t1hH6qRcASts030LBmNBH5ubRVKzSIR219jAkSBAA
- aveVSRqXbRFbViOIXMqt+80FJJtY4p471y1MGX/m5w==
-X-Google-Smtp-Source: AGHT+IH1+9DzJZf3GW8+z3cOhcODmXEO3doUw93yoIZwy47bnubEBLa7JfKUPC6booEhJLdR6AzkyWROlfHPr6+QaiY=
-X-Received: by 2002:a25:cfc9:0:b0:db0:279e:5ce3 with SMTP id
- f192-20020a25cfc9000000b00db0279e5ce3mr3199876ybg.13.1700354637896; Sat, 18
- Nov 2023 16:43:57 -0800 (PST)
+ bh=yQzmbS8X8/IWoZHemoC2zYpWGh5AVUPJ5SI+4ssbS9c=;
+ b=EcROlVo6Pdbm9cEiTT2rcsoxSbyMRCbWISGxzHw6SRJVlw2RDFivp5R6FxdtmBM0jg
+ mb2wKVRYB/W+BNSmobIDU7dJWf9UuwYoY9htmQ5RcapkHQGkCf6hyu+NeepwTmKGtWbU
+ fUB05Y2/uFw4iRCU82CSOUiQfkxWVodMXtxiY+MKcug0s6W4v54VKcFSFB3/5V3gbapL
+ YSktPirOu166HI6j1E+1+1BA4AlWGFrzMQFs42itLTkXd2mDAeT0n0bDo7mhP95QiuQd
+ 9U3qCFqsAR2KLmedkYRaQL7xxJWuE47rT+sm3rkmX/pzh6160mTNSIBxQ+ZeC2xWs8hG
+ 6I1A==
+X-Gm-Message-State: AOJu0Yy3bdbTzmZvSYWepNPsIGtyOLOjONdjK0wvvwvV6mLPT/TZE1mK
+ OaRxNWwbOahmeYUyihJS9vrA+b5Z14wNDRYytZhIyQ==
+X-Google-Smtp-Source: AGHT+IHEriU8/TcBoiCNMINpQjb0dBsh/csR+T8Lxzk8/ir9QSUMUwUmRZzcIuzUCD2IAQjNnVBxRvjrFRaooHIwj30=
+X-Received: by 2002:a17:907:9546:b0:9f5:9c7c:cbbc with SMTP id
+ ex6-20020a170907954600b009f59c7ccbbcmr1669570ejc.32.1700354601244; Sat, 18
+ Nov 2023 16:43:21 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPnjgZ2ZFSbUYPVq+A1jQBy8s=DOO8Cz+epHGL++KSEN-pr-wA@mail.gmail.com>
- <32facf81-f2bf-460a-9104-cae1dcef0cbe@gmx.de>
- <CAPnjgZ20bRUP7KFwRpe7dmbxbQFMJmHB55dkXpEjv3fyX++M3A@mail.gmail.com>
- <CAPnjgZ1Ao_ikgwPR8-fGVzbBfzRQYm0bxz9LgVHs1FP7+HG3cw@mail.gmail.com>
- <CC91949C-3BBF-452B-906F-93520A314858@gmx.de>
- <CAPnjgZ0sgCtPXa5ZOOpW-zyCnVm_cNU3OyDjzPercdY1=Y1_dQ@mail.gmail.com>
- <20231103192548.GR496310@bill-the-cat>
- <CAPnjgZ1QhQ0Kx7S8nof4Hs6cX9b+tKyMOyzg2dod-WvjOkoMTg@mail.gmail.com>
- <20231103201341.GU496310@bill-the-cat>
- <CAPnjgZ2LnT=esHGNRf0RNCPaf1BNhzA+QxWcQbjnBfy9B3QUuQ@mail.gmail.com>
- <20231118191508.GL170968@bill-the-cat>
-In-Reply-To: <20231118191508.GL170968@bill-the-cat>
+References: <20231118225248.105229-1-heinrich.schuchardt@canonical.com>
+ <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 17:43:01 -0700
-Message-ID: <CAPnjgZ23jZX1Dt-vdQFH-=+CvRUZdoeB8Du577swDhnukeF+Tw@mail.gmail.com>
-Subject: Re: [PATCH v2] smbios: arm64: Allow table to be written at a fixed
- addr
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Mark Kettenis <kettenis@openbsd.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>
+Date: Sat, 18 Nov 2023 17:43:05 -0700
+Message-ID: <CAPnjgZ0jWeqVHvuSLnrwsawK+zrcinC4vyinOQnm9Lvp3vB0-w@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] cmd: acpi: fix acpi list command
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,35 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Sat, 18 Nov 2023 at 12:15, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 18 Nov 2023 at 15:54, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Splitting things in two again..
+> ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
+> to check the presence of the RSDT table before accessing it. This leads to
+> an exception if the RSDT table is not provided.
 >
-> On Sat, Nov 18, 2023 at 10:10:17AM -0700, Simon Glass wrote:
+> The XSDT table takes precedence over the RSDT table.
 >
-> [snip]
-> > This is the bug report of trying to boot into U-Boot on arm64 with
-> > more than 3GB of memory.
+> The return values of list_rsdt() and list_rsdp() are always zero and not
+> checked. Remove the return values.
 >
-> OK, so can we just please fix this, for v2024.01, in a way that won't
-> make things harder? Fixed memory addresses aren't the right choice.
+> Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
+>
+> As the RSDT table has to be ignored if the XSDT command is present there is
+> no need to compare the tables in a display command. Anyway the
+> specification does not require that the sequence of addresses in the RSDT
+> and XSDT table are the same.
+>
+> The FACS table header does not provide revision information. Correct the
+> description of dump_hdr().
+>
+> Adjust the ACPI test to match the changed output format of the 'acpi list'
+> command.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v3:
+>         consider map_sysmem(0, 0) != NULL on the sandbox
+>         adjust signature of list_rsdt() and list_rsdp()
+> v2:
+>         add unit test for offset of field Entry in RSDT, XSDT
+>         merge patch 2 and 3
+>         remove leading zeros from address output
+> ---
+>  cmd/acpi.c     | 67 +++++++++++++++++++++++++++-----------------------
+>  test/dm/acpi.c | 18 +++++++-------
+>  2 files changed, 45 insertions(+), 40 deletions(-)
 
-It actually doesn't use fixed addresses. That was the previous
-version. I believe this is the right fix, until...
-
-> We
-> need to have the discussion about memory allocation/reservation
-> elsewhere, outside of this patch, to have something that works for
-> everyones use-cases. And possibly a similar discussion about when data
-> structures get populated/updated.
-
-This is the thread that needs to be started.
-
-But just for the tables (SMBIOS and ACPI) I would like to use
-bloblist, as is done on x86. It keeps all the tables in one place and
-provides allocation, etc.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
