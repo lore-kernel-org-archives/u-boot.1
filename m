@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF9A5C2BB3F
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D68AC54E76
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:47:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FB6A87505;
-	Sun, 19 Nov 2023 01:45:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D9F387239;
+	Sun, 19 Nov 2023 01:45:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B25Cw8io";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k/1M5Eh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8A6686EDA; Sun, 19 Nov 2023 01:43:27 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id A5FF086F64; Sun, 19 Nov 2023 01:44:16 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6DDB86E95
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B033874BB
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-9dd6dc9c00cso447483366b.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:21 -0800 (PST)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-da41acaea52so3073034276.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700354601; x=1700959401; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700354638; x=1700959438; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yQzmbS8X8/IWoZHemoC2zYpWGh5AVUPJ5SI+4ssbS9c=;
- b=B25Cw8ioR5xjzqGPmY9A+LCBZaWuYjLREFipmn5mtE8j7sApDexa1JB1Y9IM2sB2h5
- pcKJUnNdQjA96gDtnVzLDJgTS8QWLN3Ia971Gs9T2vC9z1d3P+obfI7G9PibUM+Qw1pB
- v7HNK40wYQ5t+L7Dg9OYFX7KpZmK1L0bd4GOs=
+ bh=rgqPx229YKaUEKcu5yrNZPdN6fJSwe31uoefqS3hTkA=;
+ b=k/1M5Eh6s68Gr7ogvX0exnQfFtYvDU7T3GKVsi+Q4GHyWlfQTbvS3pHNrRnh6VrN11
+ iSF2s5GwusjfvftchKFbJPeIzu4lu5DxFM/mbucaS7Nb1B1K1Sd3IMszMDgMcCezv+A2
+ DIW6g2/9c+fXwMl5r+dHKYdGcTB09ADciDmmI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700354601; x=1700959401;
+ d=1e100.net; s=20230601; t=1700354638; x=1700959438;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yQzmbS8X8/IWoZHemoC2zYpWGh5AVUPJ5SI+4ssbS9c=;
- b=EcROlVo6Pdbm9cEiTT2rcsoxSbyMRCbWISGxzHw6SRJVlw2RDFivp5R6FxdtmBM0jg
- mb2wKVRYB/W+BNSmobIDU7dJWf9UuwYoY9htmQ5RcapkHQGkCf6hyu+NeepwTmKGtWbU
- fUB05Y2/uFw4iRCU82CSOUiQfkxWVodMXtxiY+MKcug0s6W4v54VKcFSFB3/5V3gbapL
- YSktPirOu166HI6j1E+1+1BA4AlWGFrzMQFs42itLTkXd2mDAeT0n0bDo7mhP95QiuQd
- 9U3qCFqsAR2KLmedkYRaQL7xxJWuE47rT+sm3rkmX/pzh6160mTNSIBxQ+ZeC2xWs8hG
- 6I1A==
-X-Gm-Message-State: AOJu0Yy3bdbTzmZvSYWepNPsIGtyOLOjONdjK0wvvwvV6mLPT/TZE1mK
- OaRxNWwbOahmeYUyihJS9vrA+b5Z14wNDRYytZhIyQ==
-X-Google-Smtp-Source: AGHT+IHEriU8/TcBoiCNMINpQjb0dBsh/csR+T8Lxzk8/ir9QSUMUwUmRZzcIuzUCD2IAQjNnVBxRvjrFRaooHIwj30=
-X-Received: by 2002:a17:907:9546:b0:9f5:9c7c:cbbc with SMTP id
- ex6-20020a170907954600b009f59c7ccbbcmr1669570ejc.32.1700354601244; Sat, 18
- Nov 2023 16:43:21 -0800 (PST)
+ bh=rgqPx229YKaUEKcu5yrNZPdN6fJSwe31uoefqS3hTkA=;
+ b=qPA94RlmMBlAp0gfgQ1K4OnLZHFZ/51BwILsYfW4CwYsV9QZXE71J9HD7tTWbh+p2V
+ 6k0f9jzcoh/7+aLwKlp/j41HazNzzlCv+tLCIizp5T4bpc7jdGHQ+A9GxZ6F8HaNeh6R
+ EKNG2mgDU4Dw7rmyrSnT9NKrs+iF3Zz4ITZ0GJfwjo2jMJ87V30PZExrsP2JCAN0muEO
+ FyavU+XoQ5G50D3+AywukiaHQb1OgMpDQI/g9psnc9ioVxyJ/aDQQktZ2WuDA7+dyRUq
+ 1ho81h3GUoDOLCKYHBr8YxvNa8WMwvud3zvsiJ3Bbkq2ngLIoOWX/j1+sOYcADA7+MWS
+ erdg==
+X-Gm-Message-State: AOJu0YwG4zndsvC8HXA3Lai/ZUNKVrcTe9h7HpPCwTujZr31Ai6+qE6+
+ 4HraHijqRL35nqYeGLkGi29Uw6J28ypQkJTJy6CPIw==
+X-Google-Smtp-Source: AGHT+IESnu65unu7DCtmwhKFORnRB/h51TvAq0TgrLjFl7aBmk9+FiqR11laqCSCpkn7p3CYZHf87JIJ/9R43FGI07E=
+X-Received: by 2002:a25:f821:0:b0:da0:caba:9017 with SMTP id
+ u33-20020a25f821000000b00da0caba9017mr3436782ybd.16.1700354637908; Sat, 18
+ Nov 2023 16:43:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20231118225248.105229-1-heinrich.schuchardt@canonical.com>
- <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
+References: <20231118220313.1271556-1-i@shantur.com>
+ <20231118220634.1271886-1-i@shantur.com>
+In-Reply-To: <20231118220634.1271886-1-i@shantur.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 17:43:05 -0700
-Message-ID: <CAPnjgZ0jWeqVHvuSLnrwsawK+zrcinC4vyinOQnm9Lvp3vB0-w@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] cmd: acpi: fix acpi list command
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
+Date: Sat, 18 Nov 2023 17:43:07 -0700
+Message-ID: <CAPnjgZ2LWRgFERh5bgeXNCAZjmc7CDC0shBSwcXcO8q15Y0DMg@mail.gmail.com>
+Subject: Re: [PATCH v3 2/4] bootflow: bootmeth_efi: set bflow->fname from
+ bootfile name
+To: Shantur Rathore <i@shantur.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,43 +82,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Nov 2023 at 15:54, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sat, 18 Nov 2023 at 15:07, Shantur Rathore <i@shantur.com> wrote:
 >
-> ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
-> to check the presence of the RSDT table before accessing it. This leads to
-> an exception if the RSDT table is not provided.
+> We need to set boot->fname before calling efi_set_bootdev
+> otherwise this crashes as bflow->fname is null.
 >
-> The XSDT table takes precedence over the RSDT table.
->
-> The return values of list_rsdt() and list_rsdp() are always zero and not
-> checked. Remove the return values.
->
-> Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
->
-> As the RSDT table has to be ignored if the XSDT command is present there is
-> no need to compare the tables in a display command. Anyway the
-> specification does not require that the sequence of addresses in the RSDT
-> and XSDT table are the same.
->
-> The FACS table header does not provide revision information. Correct the
-> description of dump_hdr().
->
-> Adjust the ACPI test to match the changed output format of the 'acpi list'
-> command.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Shantur Rathore <i@shantur.com>
 > ---
-> v3:
->         consider map_sysmem(0, 0) != NULL on the sandbox
->         adjust signature of list_rsdt() and list_rsdp()
-> v2:
->         add unit test for offset of field Entry in RSDT, XSDT
->         merge patch 2 and 3
->         remove leading zeros from address output
-> ---
->  cmd/acpi.c     | 67 +++++++++++++++++++++++++++-----------------------
->  test/dm/acpi.c | 18 +++++++-------
->  2 files changed, 45 insertions(+), 40 deletions(-)
+>  boot/bootmeth_efi.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+We definitely need to figure out a way to get this code. The boostd
+tests don't go much into the bothmeths unfortunately
+
+
+- Simon
