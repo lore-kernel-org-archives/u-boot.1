@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5950BC2BB3F
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:47:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E017C54E76
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:48:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE1238751C;
-	Sun, 19 Nov 2023 01:45:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52B2B8752B;
+	Sun, 19 Nov 2023 01:45:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DrI+0cmB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fy7z3rmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28D40870E3; Sun, 19 Nov 2023 01:44:18 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 1652A870E3; Sun, 19 Nov 2023 01:44:26 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AE8D874BA
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B7587446
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-da41acaea52so3073035276.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:59 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5c5b9c142e8so26031387b3.3
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700354638; x=1700959438; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JNcHyFcDe31ciAtZ4OGBH8RgC6ZeirHWcTuefvMocvs=;
- b=DrI+0cmBA9tmZH21LOd0x2aDAr9JMqfMmG39DhWOo7DdLodkkwzUA74fwVFI3pI1t+
- 77GINbyT1RwRkTXLH5ZY8CetyanB43j4BWcgmoHdZx0CXW3GE5hh1oW4vS8YspPHekKE
- TqcAk01AKBgY8ZNajhUT8DB9I+qVmJqVibNbk=
+ d=chromium.org; s=google; t=1700354655; x=1700959455; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vlg8fiRR4Wtp7p8S2QUR9JS1LkGrz3XryUNiYLOzdGE=;
+ b=fy7z3rmtsFzfeEzH+0NfYzX0sa88RtkXQquj1ge6tvkVG1vc0Va5fhc//Y/yyWXR5X
+ B7Z/DLYG6CVHbpdUPbc7+9V6tx+Qm0zBqs7YCTusCohrpLSCNR1vXNolOjkpthWPnaJH
+ 8lnwQYBO6xx21vBBwW5zz7tJKOhR7wxMKZPhs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700354638; x=1700959438;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JNcHyFcDe31ciAtZ4OGBH8RgC6ZeirHWcTuefvMocvs=;
- b=UwIO1cz8bLc+F4nRAR6Yz54TKrCIjgqrAo6iPHC7IjiOFsWkfzt/l6noH/hPDDUmZ0
- BDCi/+UBmKLmXxfabQP2NBO9BG0sQBXmMPbUUSV7Z59bXMiMi97ct0ClSgP/OiSPnn2b
- 6AD3ecXXYiOjFtsxDpYizy8F4xD731lvXpSTodFgum9Aja9jgLTH/lm8juxFmIdEhNXB
- K9GR6UZvZzsqsyDBmXBqTlewSQLXOIWJ5nN0kzhLEfdvpKkzl7V6WkBo6sInGDqPP8AG
- 1r1C+DiBJ/tYp5qXBLBz+iojmXxj7sRM4L+YIBmlRqzro3ekZClNi6tXwMrCZWObjNha
- +N8w==
-X-Gm-Message-State: AOJu0YyOZ2cc0lwJxOlwUkTAF++GtsvrEt6BX/zxkCVVudthPzaoIFSX
- 9/Qpr8fHy9VwqmzcwhOCuNK/Vg1FpQFBFEpitXeEyw==
-X-Google-Smtp-Source: AGHT+IFlcwryl4ltfKCptI6jJq6Tw3YqhylE2/LHTt4qJ4E0s+yYjenSwcWWH4r52D0C1gx0CE716KbxM8NbVcnjdo8=
-X-Received: by 2002:a25:e30f:0:b0:da0:84b2:5e3e with SMTP id
- z15-20020a25e30f000000b00da084b25e3emr3201007ybd.21.1700354637901; Sat, 18
- Nov 2023 16:43:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700354655; x=1700959455;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vlg8fiRR4Wtp7p8S2QUR9JS1LkGrz3XryUNiYLOzdGE=;
+ b=cl0lFMCcB2L72yenv7h0iDYZ/Kr/Z6XxBRrnO6xXZtke7DlSYjJXuv04dG3QIVVDzn
+ Jxs7HUyZYbQGolESxVX256djOJWX1L4CxP/Bifr1P+p8DTxvmBG0IOkQXRqX1j0nnfS2
+ iL8hSP2eKCOJUG/36Myt1dbHZgBsItqiQd1nPHdJAbgLHq6ypYlnk+jl8KegOrPn9tIh
+ lQrFyvTmpUCJiqhdcuK0DLX8irflCXZPY86sUQDJu/0MbvogvbmwRKH2AevGm37VW6lq
+ 7pVpYN8Xl53mf6TvI2F1CIXQw+okD+vZ2IdfA77fRK5WCcwgiwTzmSW+H0Mr7y0OZKfY
+ LpyA==
+X-Gm-Message-State: AOJu0YxX7lKjNZ4LCocYuDiJzbt7eRQtp9EBl8dlKG5493xJSCnfGJRW
+ x/xiuQ33jX8x50IfP3+rVMSgLPSznFAFErfqWh2NoKYcwbfXddqVcUc=
+X-Google-Smtp-Source: AGHT+IF0MFna+IdufB10gyDYjRfmjZltzYEwJzQm1SKx46gNrubGvIU5ibSHQWcmb0uAF/GoMnJ5I/V7+XCj+D/7t5I=
+X-Received: by 2002:a0d:ea8e:0:b0:5ae:c35a:807a with SMTP id
+ t136-20020a0dea8e000000b005aec35a807amr3854924ywe.48.1700354655313; Sat, 18
+ Nov 2023 16:44:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231116092928.21633-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ27mmK9BYE=rbGKGe9=xvZdG9reU659n-0D_wRfNemX5Q@mail.gmail.com>
- <3dd07df2-a261-47e6-9627-34e4529584c4@canonical.com>
- <CAPnjgZ2kFYiQuwzw5GP8OJteKhhGVRqdnNtAGY5v-C+3c-KZ+A@mail.gmail.com>
- <189ebb7f-5b25-475e-b180-8b8d8c21b55f@canonical.com>
-In-Reply-To: <189ebb7f-5b25-475e-b180-8b8d8c21b55f@canonical.com>
+References: <20231117212039.1210784-1-i@shantur.com>
+ <20231117212039.1210784-3-i@shantur.com>
+ <CAPnjgZ19Q4RZMR080gqqzginpCNkCkj4OuVgJX6drRt+dJbLNQ@mail.gmail.com>
+ <CAHc5_t1rR0gjkP2z=CQh0zy3hYUf734fVUq8eKjG1i2V3h0Hsw@mail.gmail.com>
+In-Reply-To: <CAHc5_t1rR0gjkP2z=CQh0zy3hYUf734fVUq8eKjG1i2V3h0Hsw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 17:43:11 -0700
-Message-ID: <CAPnjgZ1P91W_05L9aK5-vrEp-tuJO==whWx+p7z20wm9k=YakA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: create memory reservations in ACPI case
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Date: Sat, 18 Nov 2023 17:43:10 -0700
+Message-ID: <CAPnjgZ3E4CFBH6xHqmt9HyvKZOJwfMc4YX3qXw0ndhZ36aWsQQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] bootflow: bootmeth_efi: Don't set bootdev again
+To: Shantur Rathore <i@shantur.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,63 +86,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Shantur,
 
-On Sat, 18 Nov 2023 at 16:06, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sat, 18 Nov 2023 at 14:17, Shantur Rathore <i@shantur.com> wrote:
 >
-> On 11/18/23 18:58, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Sat, 18 Nov 2023 at 10:34, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 11/18/23 18:10, Simon Glass wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On Thu, 16 Nov 2023 at 02:29, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>
-> >>>> ACPI tables cannot convey memory reservations for least ARM and RISC-V.
-> >>>> x86 uses the BIOS E820 table for this purpose. We cannot simply ignore the
-> >>>> device-tree when booting via ACPI.
-> >>>
-> >>> Why is that? I had thought that we had to use one or the other. Isn't
-> >>> the devicetree irrelevant when booting with ACPI, so we can just drop
-> >>> it?
-> >>
-> >> Linux Documentation/arch/arm64/acpi_object_usage.rst, line 718f
-> >> describes the mechanism to convey memory information as follows:
-> >>
-> >> "For arm64, we will only support UEFI for booting with ACPI, hence the
-> >> UEFI GetMemoryMap() boot service is the only mechanism that will be used."
-> >>
-> >> With the patch we tell the UEFI sub-system which memory areas are
-> >> reserved (e.g. for TF-A on ARM or for OpenSBI on RISC-V). This
-> >> information is inferred from the device-tree. The operating system will
-> >> collect this information by calling GetMemoryMap() immediately before
-> >> ExitBootServices().
-> >>
-> >> Without the patch Linux on RISC-V using ACPI crashed when illegally
-> >> accessing the memory reserved for OpenSBI.
-> >
-> > OK thank you, I misunderstood it.
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > Perhaps someone could convert efi_carve_out_dt_rsv() to use the ofnode API?
+> Hi Simon,
 >
-> Is there any ofnode API to retrieve reservations as easily as with
-> fdt_get_mem_rsv(), fdt_num_mem_rsv()?
-
-Not yet :-)
-
+> On Sat, Nov 18, 2023 at 5:11=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > +Ilias too as this involves a design decision
+> >
+> > Hi Shantur,
+> >
+> > On Fri, 17 Nov 2023 at 14:22, Shantur Rathore <i@shantur.com> wrote:
+> > >
+> > > efi_set_bootdev is already called as part of tftp while doing dhcp_ru=
+n()
+> >
+> > Is that in tftp_complete() ?
+> >
+> > > Doing this again crashes U-boot and we don't need to call again.
+> >
+> > U-Boot
+> >
+> > The problem is that we might scan for 4 bootflows, then later decide
+> > which one to boot. So we cannot know which one it will be until that
+> > point.
+> >
+> > The hack is needed so that it actually tells EFI about the right one.
+> >
+> > The addition of EFI hacks when reading files (i.e. the code in
+> > tftp_complete()) is a real problem, unfortunately. I understand that
+> > it was a convenient hack, but with standard boot we really don't want
+> > it to do that. We end up calling it multiple times for bootflows that
+> > won't be used.
+> >
+> > So I believe the fix is to be able to disable those calls, leaving it
+> > to bootstd.
+> >
+> > I'm not sure of the best way to do that. Perhaps we should have a
+> > function like bootstd_scanning() which returns a bool indicating that
+> > bootstd is scanning? If that is true then no efi_set_bootdev() calls
+> > are made? We could have a flag in 'struct bootstd_priv' which is set
+> > before bootflow_check() is called and cleared afterwards.
+> >
+> > As to how this should be done with standard boot, we should create a
+> > function like efi_start_app() and pass it the information we need.
+> > That function should do the equivalent of the 'bootefi' command,
+> > except programmatically, with no prior state hanging around.
+> >
+> > As to when we might be able to do that, we need more refactoring of
+> > the bootm code. There is a start on this [1] but it likely needs 2-3
+> > more series before it might be possible.
+> >
+> > So for now, I think bootstd_scanning() is the best approach. If you
+> > are not sure about that, I can send a patch.
+> >
 >
-> boot/image-fdt.c, boot/fdt_region.c, boot/fdt_support.c, cmd/fdt.c all
-> use the libfdt API directly.
+> My apologies, the fix I submitted is incorrect.
+> After reading your explanation, I started thinking on why dhcp can
+> call this multiple times but bootmethod can't.
+>
+> There it was clear that the issue bflow->fname is null when we call
+> this function.
+> The correct fix should be below
+>
+> +       /* bootfile should be setup by dhcp by now*/
+> +       bootfile_name =3D env_get("bootfile");
+> +       if (!bootfile_name)
+> +               return log_msg_ret("bootfile_name", ret);
+> +       bflow->fname =3D strdup(bootfile_name);
+> +
+>     /* do the hideous EFI hack */
+>     efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
+>                     bflow->size);
+>
+> I have a patch ready for this which I will send but I have some
+> queries regarding that.
+> As I sent this a series of patches out of which 2 were reviewed,
+> should I send a new version for the whole series even though 2 are not
+> going to be changed?
 
-Yes, but it is starting to change. Ultimately we will likely use
-livetree for fixups due to efficiency.
+Yes you normally send the whole series but include any review/tested
+tags that you received for each patch ('patman status' can help).
+
+> Another thing, should I send them as a reply to the original email or
+> a new thread?
+
+A new thread is fine.
 
 Regards,
 Simon
