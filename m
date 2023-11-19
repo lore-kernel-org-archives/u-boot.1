@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CEB1C2BB3F
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F386BC2BB3F
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 00:44:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1384286F5E;
-	Sun, 19 Nov 2023 01:43:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 858128710A;
+	Sun, 19 Nov 2023 01:43:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DzMZ2EL2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f3CJOjRr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5EFB87032; Sun, 19 Nov 2023 01:43:30 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 63EDF86EB8; Sun, 19 Nov 2023 01:43:31 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B0EE86EB8
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B109E86F64
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 01:43:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-9f2a53704aaso420555266b.3
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:21 -0800 (PST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-544455a4b56so4443302a12.1
+ for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 16:43:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700354601; x=1700959401; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700354602; x=1700959402; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lkn1InEA6DSrmfkoKAkdcHz0geUYdseFLgf7LvtxTcU=;
- b=DzMZ2EL2AfmaH+tsodyrkU3HimdeQIIgF0JyqbUcKCdXsa42sXRKKOtQpmoBQ8ZPnz
- O3WTlDdBn0KFGeBahPACumUc52nqOUeznAKih6g5RzFRtdFP6F/Te2YZX52BNKu09fuf
- 5a7OzmLq/4VsxhYCJVk9sTfNIpQjySkYpfv3E=
+ bh=joR0kY1gadNsRUDBN+tHYED9QT5yAyoGH1J6kPTudiw=;
+ b=f3CJOjRryMniBQigAXu4f0gxZtU3a9Weuil3SZELmEZLYDO2R7PCGccGlFG91iw+J7
+ 34zmcqTLfUPc3SUU7osG8TQaQsBEHYsTrgooNfNMN/JpJNsFVlMapZFxqzMdBpbNu6YF
+ lsYuxJIZI60SzmNWpVfmnV5KJSveYI8GAxR3s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700354601; x=1700959401;
+ d=1e100.net; s=20230601; t=1700354602; x=1700959402;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lkn1InEA6DSrmfkoKAkdcHz0geUYdseFLgf7LvtxTcU=;
- b=E94IG/inRzbqDdkLE+TeZv4JMF5/eFfeEeRCgsSgibnjUCC8RZiYKUde8BsKgF9kKW
- /b30BWFaC4Ys4BsDXFr2pTC/OIAZhVpDlI4ZVoiO/c72ZKLCVTnowAKVbFJLjmGJ+hJs
- Mzu99iLELgC1iyi+b5R0EfkQPucsYS+Vze9WXXP0VbW1DsTCP2+SXAbfPOyLIaBRBtqC
- TvWcoIqf0nZcv3azCSs1VbKQ7qKQ2AQlVOTi2RuGFPvcf8pR6Xq/SddS7l9RKLMzNuCr
- kzWtFWhjJDaIGmybHtvTBJGjF+0i29G+/vUQ9VfBITKvYnLDt4xeRLU/6U5CzHZcxnvb
- VLuw==
-X-Gm-Message-State: AOJu0YwQXv6KwUZbbdUD1DzCypmUWDhd99gA8P0TfqjHfaFyVjBRy3gR
- soeyqFVPfRrDMaWNmCsdxaWj7PSxw7LHUyE4i9qyQVVW26Jx2nTaVyM=
-X-Google-Smtp-Source: AGHT+IF6xkKUum11+VMENrvWcXP5sHFNEtnjF833jKaOOhY5xVbjmy+M04FmLgHEHVeQ1EagfJIzTidqjxfRQ8fuFJs=
-X-Received: by 2002:a17:906:1848:b0:9ba:65e:7529 with SMTP id
- w8-20020a170906184800b009ba065e7529mr2673790eje.68.1700354601242; Sat, 18 Nov
- 2023 16:43:21 -0800 (PST)
+ bh=joR0kY1gadNsRUDBN+tHYED9QT5yAyoGH1J6kPTudiw=;
+ b=U/nKYFsThBEXXuOTzv0A709cx+zUmEpfoX14rrqF/U43kVqn2MMVVdkgNEBJIk6lCk
+ h83ja6ZQpxSvU0eTb+WGrPFPUqJp2B/BrxxJvj6nktf8z1KHv4sJS9EMAU8eAdmtuMLN
+ u4DCdh9r02mlleoXqMumPcIqyGrKD55oi25pXBvXE9fnNYgj84n3rzzK4CYc+p8qV8W6
+ mi1ys+qcEvsktQ22xxLlrPZALA2dnKpEBoZr7y87fpmGQq3z+tLT3jmpZ2FPUjCVEelg
+ 2L14vVDsrbhVOWxn6hkIWQ4qCVawmdsW06alsnSOFjqP2GACEYbwJanagd4tkXIIQMhA
+ qBIw==
+X-Gm-Message-State: AOJu0YzdX5oFr2etRCNA5svJJWtYriW/SRbS7TAqlPKuIIuUaZRLr04R
+ Ro4Ga0d9IkqQQo7nZOlpp/MBjTOjvdl77rLwUOuyiQ==
+X-Google-Smtp-Source: AGHT+IGatQyiYy1zGXdOCAxgACyUq/1mDgU7MY1DEio0DShDV5vHCZcbZ8mePE+EowYEnq9GqodQ04NB1bxf+sqsGM4=
+X-Received: by 2002:a17:907:29d5:b0:9be:839a:3372 with SMTP id
+ ev21-20020a17090729d500b009be839a3372mr1986628ejc.59.1700354602146; Sat, 18
+ Nov 2023 16:43:22 -0800 (PST)
 MIME-Version: 1.0
-References: <CABEcMwWNxzvkkC6-OwUx7AedhctfT00fM-ubXVf9ec1RoMmgOQ@mail.gmail.com>
- <20231114203309.852289-1-i@shantur.com>
-In-Reply-To: <20231114203309.852289-1-i@shantur.com>
+References: <20231118220313.1271556-1-i@shantur.com>
+ <20231118220313.1271556-2-i@shantur.com>
+In-Reply-To: <20231118220313.1271556-2-i@shantur.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Nov 2023 17:42:58 -0700
-Message-ID: <CAPnjgZ1PBMCKj1unHXWHxvLo5Gy2pP207MxEnPoqzLik8nsGdg@mail.gmail.com>
-Subject: Re: [PATCH v2] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
+Date: Sat, 18 Nov 2023 17:43:06 -0700
+Message-ID: <CAPnjgZ0NwDZYUC1p7A3gs9gkeCGS8f0BkQPYim+hhjAtjkDtrA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] bootflow: bootmeth_efi: Set bootp_arch as hex
 To: Shantur Rathore <i@shantur.com>
-Cc: jonas@kwiboo.se, u-boot@lists.denx.de, philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com
+Cc: u-boot@lists.denx.de, trini@konsulko.com, xypron.glpk@gmx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,32 +81,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 14 Nov 2023 at 13:34, Shantur Rathore <i@shantur.com> wrote:
+Hi Shantur,
+
+On Sat, 18 Nov 2023 at 15:04, Shantur Rathore <i@shantur.com> wrote:
+>
+> bootmeth_efi sets up bootp_arch which is read later in bootp.c
+> Currently bootp_arch is being set as integer string and being
+> read in bootp.c as hex, this sends incorrect arch value to dhcp server
+> which in return sends wrong file for network boot.
+>
+> For ARM64 UEFI Arch value is 0xb (11), here we set environment as 11
+> and later is read as 0x11 and 17 is sent to dhcp server.
+>
+> Setting it as hex string fixes the problem.
 >
 > Signed-off-by: Shantur Rathore <i@shantur.com>
 > ---
->  arch/arm/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  boot/bootmeth_efi.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I think you dropped my review tag on this version.
 
-But it needs a commit message
+You can use 'patman status' to collect review tags automatically.
 
-
-
->
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index d812685c98..fca6ef6d7e 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
->         imply CMD_DM
->         imply DEBUG_UART_BOARD_INIT
->         imply BOOTSTD_DEFAULTS
-> +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
->         imply FAT_WRITE
->         imply SARADC_ROCKCHIP
->         imply SPL_SYSRESET
-> --
-> 2.40.1
->
+Regards,
+Simon
