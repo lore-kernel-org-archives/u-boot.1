@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E147C54E76
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 18:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D74BC54E76
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 18:24:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 439E4870E7;
-	Sun, 19 Nov 2023 19:24:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 762BC868D1;
+	Sun, 19 Nov 2023 19:24:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LNCq2CJy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kSNEzftS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07A74868D1; Sun, 19 Nov 2023 19:24:03 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 724A1868D1; Sun, 19 Nov 2023 19:24:15 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE5EF869C4
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 19:23:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DEDA8615A
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 19:24:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5435336ab0bso5350770a12.1
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 10:23:58 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-9e1021dbd28so503140066b.3
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 10:24:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700418238; x=1701023038; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700418251; x=1701023051; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OpWbDZKk0t9YGxJOtind4x9VtkT+kSzaDiHZa/vRsdY=;
- b=LNCq2CJyW5Gv+Drq2+ceFStzLcfDiJdRmLPA9uUoLwv8hT2pwjguhH0hK1Eo3iBibz
- PYlnAAG4+8ewDyWc4yhhkQm56miznyC+6lXV7c+rpXzEenzqRFVOdFRXJvaJP69DMrEC
- WNvshnnvvtpbxYBzHbp2fnc4FhnzImvsuJNLA=
+ bh=PbjCGPy7n1JWj0X6Lk1RWKI4YAHKkBfh3qlMEpYUdsY=;
+ b=kSNEzftSTLQSL5rBHwaXHNcX9yJm9TRlp+VG8qy+wRWjIcnDxiOiqFEvzgAgELjc25
+ 1FJ0DnlzgGdpQ6BSHwzwoiSkhCguJ0cQC0m/qI5I0Qja+SCz0slzB+BIwGNXMae88ePL
+ yxUCl4+ocOreUkkwadSnn4y5Jq4l/d7aIq6i0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700418238; x=1701023038;
+ d=1e100.net; s=20230601; t=1700418251; x=1701023051;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OpWbDZKk0t9YGxJOtind4x9VtkT+kSzaDiHZa/vRsdY=;
- b=NhNwPUBud8+L8GujEaC3qPJbgo+cXqybaHezZ8b4K9RRK1g+uEg62bEf4w5/HSJ5od
- B1WcJssIY6uwr8OjBB7UgmGz+BAUAAXMciv5TyKuBr/yu9uYPdidALsQ/EsTrTggOviN
- 2iWG/Lb7HWHdHkZVoPHOhaWKa9Ps1GY3ULmt4jfoHKFpvlRchKbs1Wdg2Q5ia6t7B7BD
- G4tWiwtZ+VEyqkXdzHd18lXk5Qc0xrapNS43fnc5Bp3NVdgqnkdsAdz7NvDSIAOuQGhp
- cRCCne64scKkmdAvDEGsT6hPixa4OQGItpYbF/aUXxAgBcQNuG7H0E8t3d4WlwybEYaS
- YrEA==
-X-Gm-Message-State: AOJu0YwvmTVwBaYQjud6ZLSYgJ73OZJJ5GDf0jxnFjwFg/RUFy8psprb
- FUi9sN+IiNHpSTLHlRs9Xyj7xjGX7ELylkPdc/gzBg==
-X-Google-Smtp-Source: AGHT+IFzgbWjkgx2J8IGboo54K/y15YBiOB2xzx+4SxOdcAE/b+S8a1A8jz0z+ssi1V56Hn9dRN4XnEwQfXU/w12nKw=
-X-Received: by 2002:a17:907:3f19:b0:9d0:51d4:4d87 with SMTP id
- hq25-20020a1709073f1900b009d051d44d87mr5528778ejc.62.1700418238123; Sun, 19
- Nov 2023 10:23:58 -0800 (PST)
+ bh=PbjCGPy7n1JWj0X6Lk1RWKI4YAHKkBfh3qlMEpYUdsY=;
+ b=QhVOH/6bND5rQ1GSs6tXeZJeO66b6YELrKOK+lfSUZ/LUKPcRlU3OS9RtD1loyQs/B
+ c3u3+LvPCpVFI+mQVxDfXkTm7OrmDTNJ64Isb5O8Rpu0b0LBOuSuwaXQJ0AY9WU4UMaD
+ PIr/8oVqA4RIzVMGXqUJsnDBF/Vz0GPGo2jg/OQZ64uyaZjrFlmnOtNI61wzSlA+Te9l
+ KNYKeKZqJf3Aj0jwTQYFCTsgOeXi40/zL0nlqb+QMuwqwgc6Raitjg2zd9KgKDaRn6Fl
+ g5L6taHb1yoG+PpNMCiqAYAgRUj/JjW+q38XcryvgwFTwlwXGV6RnoNtwGi7sQVvtHO1
+ QsVg==
+X-Gm-Message-State: AOJu0Yx+fXuswbgKSP59krilXJXwPZ7Oa6YXYiJ5WlWyOdnjF1my7bEQ
+ KYinDFvXHBBG/5M5BwByq/OS19vCz/ughWsGFyZ/osGcKdl56atg+As=
+X-Google-Smtp-Source: AGHT+IFAvJjieMRIM6K/4qODmj8aYE1Zby9PflMdcG1NzrEIpV3lKSh0DvFgt0+J6N/6ZsKkg/V7jmGqzWiSG8yGOTQ=
+X-Received: by 2002:a17:906:24d4:b0:9fd:59ea:2dec with SMTP id
+ f20-20020a17090624d400b009fd59ea2decmr1220075ejb.73.1700418250647; Sun, 19
+ Nov 2023 10:24:10 -0800 (PST)
 MIME-Version: 1.0
 References: <20231119144700.631322-1-sjg@chromium.org>
- <20231119144700.631322-2-sjg@chromium.org>
- <20231119155909.GC2513409@bill-the-cat>
-In-Reply-To: <20231119155909.GC2513409@bill-the-cat>
+ <20231119144700.631322-4-sjg@chromium.org>
+ <20231119155914.GD2513409@bill-the-cat>
+In-Reply-To: <20231119155914.GD2513409@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Nov 2023 11:23:41 -0700
-Message-ID: <CAPnjgZ0LDXcstrAgx8nb53Cw1=1Y8Zait-e884A5i8H5CY6hnQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] cyclic: Disable in SPL builds
+Date: Sun, 19 Nov 2023 11:23:59 -0700
+Message-ID: <CAPnjgZ2fsudcDFAr-sXhviYCBNwQtJJs3Tvi8yqgx4TUL7h=jA@mail.gmail.com>
+Subject: Re: [PATCH 3/5] video: Use cyclic to handle video sync
 To: Tom Rini <trini@konsulko.com>
 Cc: Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Nikhil M Jain <n-jain1@ti.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Anatolij Gustschin <agust@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,69 +87,49 @@ Hi Tom,
 
 On Sun, 19 Nov 2023 at 08:59, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sun, Nov 19, 2023 at 07:46:39AM -0700, Simon Glass wrote:
->
-> > The cyclic subsystem is currently enabled in all build phases or none.
-> > So far it doesn't have any purpose within SPL builds, so adjust the
-> > rules to prevent it being built in that case.
+> On Sun, Nov 19, 2023 at 07:46:41AM -0700, Simon Glass wrote:
+> > At present U-Boot flushes the cache after every character written to
+> > ths display. This makes the command-line slower, to the point that
+> > pasting in long strings can fail.
+> >
+> > Add a cyclic function to sync the display every 10ms. Enable this by
+> > default.
+> >
+> > Allow much longer times for sandbox, since the SDL display is quite
+> > slow.
+> >
+> > Avoid size growth if the feature is disabled by making the new init and
+> > destroy functions dependent on CYCLIC being enabled.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> >  common/Makefile  | 2 +-
-> >  include/cyclic.h | 6 ++++--
-> >  2 files changed, 5 insertions(+), 3 deletions(-)
+> >  drivers/video/Kconfig        | 30 +++++++++++++++++++++++
+> >  drivers/video/video-uclass.c | 46 ++++++++++++++++++++++++++++++++----
+> >  2 files changed, 72 insertions(+), 4 deletions(-)
 > >
-> > diff --git a/common/Makefile b/common/Makefile
-> > index 1495436d5d45..27443863bf9b 100644
-> > --- a/common/Makefile
-> > +++ b/common/Makefile
-> > @@ -77,7 +77,7 @@ obj-$(CONFIG_CROS_EC) += cros_ec.o
-> >  obj-y += dlmalloc.o
-> >  obj-$(CONFIG_$(SPL_TPL_)SYS_MALLOC_F) += malloc_simple.o
-> >
-> > -obj-$(CONFIG_CYCLIC) += cyclic.o
-> > +obj-$(CONFIG_$(SPL_TPL_)CYCLIC) += cyclic.o
-> >  obj-$(CONFIG_$(SPL_TPL_)EVENT) += event.o
-> >
-> >  obj-$(CONFIG_$(SPL_TPL_)HASH) += hash.o
+> > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> > index 6f319ba0d544..1742e342f466 100644
+> > --- a/drivers/video/Kconfig
+> > +++ b/drivers/video/Kconfig
+> > @@ -7,6 +7,7 @@ menu "Graphics support"
+> >  config VIDEO
+> >       bool "Enable driver model support for LCD/video"
+> >       depends on DM
+> > +     imply CYCLIC
+> >       help
+> >         This enables driver model for LCD and video devices. These support
+> >         a bitmap display of various sizes and depths which can be drawn on
 >
-> This is fine, but I suspect we're missing SPL_CYCLIC as a symbol and
-> SPL_WDT should be select'ing that, same as "WDT".
+> We should at least expand the help message to say that if you enable
+> cyclic you get some other behavior. In hind sight, cyclic shouldn't be
+> prompted and it should be selected as used. But that's not an issue for
+> this patch set.
 
-Ooops I had assumed that it wasn't used in SPL but of course watchdog
-is completely migrated to it now...I will add a symbol.
+Yes it is similar to EVENT I think. But note that some boards do use
+it for other purposes.
 
-BTW the watchdog Kconfig seems a little confusiing. There is only one
-board using WATCHDOG without WDT and only 3 using HW_WATCHDOG
-
-Setfan, I wonder if some more clean-up could be done?
-
->
-> > diff --git a/include/cyclic.h b/include/cyclic.h
-> > index 44ad3cb6b803..d3b368dd90df 100644
-> > --- a/include/cyclic.h
-> > +++ b/include/cyclic.h
-> > @@ -11,6 +11,7 @@
-> >  #ifndef __cyclic_h
-> >  #define __cyclic_h
-> >
-> > +#include <linux/kconfig.h>
-> >  #include <linux/list.h>
-> >  #include <asm/types.h>
->
-> Is this really needed? What's blowing up since we should have -include
-> .../linux/kconfig.h cover this.
-
-It is the CONFIG_IS_ENABLED() when building. We have kconfig.h in a
-few other places (used by tools) too.
-
-In file included from include/watchdog.h:13,
-                 from tools/../lib/sha1.c:25,
-                 from tools/generated/lib/sha1.c:1:
-include/cyclic.h:47:22: error: missing binary operator before token "("
-   47 | #if CONFIG_IS_ENABLED(CYCLIC)
-      |                      ^
+I assume you mean to expand the help for VIDEO
 
 Regards,
 Simon
