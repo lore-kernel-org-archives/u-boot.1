@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA55C072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:12:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F154C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 19:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3B56871ED;
-	Sun, 19 Nov 2023 20:12:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BAFD6874CC;
+	Sun, 19 Nov 2023 20:12:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JfF4vg11";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lbYHVncj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC8FB86EE2; Sun, 19 Nov 2023 20:12:15 +0100 (CET)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 7243E874BB; Sun, 19 Nov 2023 20:12:20 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 722D483414
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C1E6871ED
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 20:12:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3574f99d236so14023665ab.2
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:13 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-7a93df91813so118515339f.2
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 11:12:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700421132; x=1701025932; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700421133; x=1701025933; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yQks5KhT/4xqvadIm2Fk0hRL5uWtvQ5W4KSqSv7KXEs=;
- b=JfF4vg11y9DV7OQfBZdIg9XrIv3eQx8CG2fa6K1bUQ9i8ZTwY93nh6BTquEh4ivs5H
- kUW9XyBdZUrxv0Gx1ImDuiAdVg9XJycAN5OIx7E8OJZXP7c8OAhv+1ydsGTrrvoJJpvV
- 9dZK8SQY6u95oQa91hYa0de3qLSDCHmO4g2EA=
+ bh=4f8vQiSFowsYdygfc4rlj3q1P14WUjefrA2IpQ6NKu8=;
+ b=lbYHVncjoCEZqvev7jokuE9J4gE6d/1rpchCvPn2k4syLg9aeHg1k9ouwJdZUSa2TH
+ ljtOU2DUvoo7BZ2kbwiMtf8+9b3lpWpEhUNaz+PqaigIxiNOfUqrP5RJ6hestQoelDeH
+ dG5sl2d/3cyHRZoIZThbsPbmGb0sY4/ly6Kdw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700421132; x=1701025932;
+ d=1e100.net; s=20230601; t=1700421133; x=1701025933;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yQks5KhT/4xqvadIm2Fk0hRL5uWtvQ5W4KSqSv7KXEs=;
- b=ws1Wpu/C7cEGGBzhvSxq5fQPjSEWyBzZWtp6gXMRF1V3D5UJvezDk7aRAAZBtJeRSw
- ifoV7g2t+E0IIz4iG5d+UD84nn9ZZfnKprGE0M14fJsuF0xF1iVgBweeYmzDRuRa92/x
- eF2yLLgi3SZO49LN1KMIi57JKJUOs4WKJvrbEY0JrhxyzszTy5doCZhwicvdWCKz8EMq
- TTMwXZDpMeaRsi7QqLsJuwbVYnh4wishdMLhUSa2qeEGL4RVjYTucD/H8G7jYms6w5SR
- 8cnc93qw16nhKafjq8eAR9Mp2V2i95y0cnVxcZDb9Syk+AKHY++pj7LG4vNzGJsBjREz
- E0hQ==
-X-Gm-Message-State: AOJu0YyrssHXlXOQKccWUyNZoJq5qbOaYxycKJMbuvkWnMU6zdYLd5y6
- kRDdhnSUqzId701HTzJH/x6kylDis+mnDjLBCwKoYA==
-X-Google-Smtp-Source: AGHT+IHP1d/pfWmZ/olzyeOSz6pvjhX9cQ3JpKFcM/t1uE6AF+b7NKeBojQGBg0Rb6F66OhdKcGUXg==
-X-Received: by 2002:a92:c26d:0:b0:35b:695:c3c8 with SMTP id
- h13-20020a92c26d000000b0035b0695c3c8mr257582ild.9.1700421132038; 
- Sun, 19 Nov 2023 11:12:12 -0800 (PST)
+ bh=4f8vQiSFowsYdygfc4rlj3q1P14WUjefrA2IpQ6NKu8=;
+ b=WjyZeo+hWr4lt9dWhlMdQu8fOU8IeRBHmQBOtza7Bl32PrDpoFHOujIJENOtCctamt
+ asQ8MjUDvGHJvAzYs9Hn4C8qU2Xgf6kjXW3UZd3wiD7aNvohYgMOfiGKWgdfeW3jbu9A
+ i9oC9QUdFhdx0PHTcvLNlnrQRISTHrk1hLdsaGNJbZ84ysfPmA1rhOCB5cAxbQQpX9Uw
+ 453nViE1t49+bU/Bp6bErKAQmVpWAyJqTgeRX1RO7pnieId3oSPKG2f9vKIZig6NQzl5
+ Tzg78U11CHfRsXdmjWBVoq8lcr5T6Ni/nWr12PPQG1wjPzX8xo6MR2wdcUsAvwptAt4K
+ Vv9Q==
+X-Gm-Message-State: AOJu0Yw9A0X0EV6KzVLbYyv/FdEV0Nuux6An7DpjOuLnnax0Ao0zXKIB
+ JH+cry0C1YV2xe26PjE5+Po/t/mpjQn9kdH4w0t1pQ==
+X-Google-Smtp-Source: AGHT+IGeu58enXg9f8heMBMmXfi8NpO6E18L4IiTroKhUssEr1Jic9wcfziOphkU0vQyG5HM6ClUrA==
+X-Received: by 2002:a92:ab05:0:b0:357:f41c:8bf6 with SMTP id
+ v5-20020a92ab05000000b00357f41c8bf6mr6456608ilh.17.1700421133547; 
+ Sun, 19 Nov 2023 11:12:13 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.11
+ q17-20020a920511000000b0035ab2c7016bsm1951032ile.50.2023.11.19.11.12.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 11:12:11 -0800 (PST)
+ Sun, 19 Nov 2023 11:12:13 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Alexander Graf <agraf@csgraf.de>, Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v5 01/12] efi: Correct handling of frame buffer
-Date: Sun, 19 Nov 2023 12:11:36 -0700
-Message-ID: <20231119121144.v5.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+ Jaewon Jung <jaewon8868@gmail.com>
+Subject: [PATCH v5 03/12] bootstd: Add a return code to bootflow menu
+Date: Sun, 19 Nov 2023 12:11:38 -0700
+Message-ID: <20231119121144.v5.3.Iaa9b5bbab0f25012cfc68a803a9da83e71b19aaf@changeid>
 X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 In-Reply-To: <20231119191202.667180-1-sjg@chromium.org>
 References: <20231119191202.667180-1-sjg@chromium.org>
@@ -90,103 +88,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_gop driver uses private fields from the video uclass to obtain a
-pointer to the frame buffer. Use the platform data instead.
+Return an error when the user does not select an OS, so we know whether
+to boot or not.
 
-Check the VIDEO_COPY setting to determine which frame buffer to use. Once
-the next stage is running (and making use of U-Boot's EFI boot services)
-U-Boot does not handle copying from priv->fb to the hardware framebuffer,
-so we must allow EFI to write directly to the hardware framebuffer.
+Move calling of bootflow_menu_run() into a separate function so we can
+call it from other places.
 
-We could provide a function to read this, but it seems better to just
-document how it works. The original change ignored an explicit comment
-in the video.h file ("Things that are private to the uclass: don't use
-these in the driver") which is why this was missed when the VIDEO_COPY
-feature was added.
+Expand the test to cover these cases.
+
+Add some documentation also, while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-(no changes since v2)
+(no changes since v3)
+
+Changes in v3:
+- Add missing word 'function' in the commit message
 
 Changes in v2:
-- Rebase to -next
-- Add some more comments to the header file
-- Add fixes tag
+- Add new patch to add a return code to bootflow menu
 
- include/video.h          |  9 ++++++---
- lib/efi_loader/efi_gop.c | 12 +++++++-----
- 2 files changed, 13 insertions(+), 8 deletions(-)
+ cmd/bootflow.c             | 53 +++++++++++++++++++++++-------
+ doc/usage/cmd/bootflow.rst | 67 ++++++++++++++++++++++++++++++++++++++
+ test/boot/bootflow.c       | 15 +++++++++
+ 3 files changed, 123 insertions(+), 12 deletions(-)
 
-diff --git a/include/video.h b/include/video.h
-index 5048116a3d57..4d8df9baaada 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -21,9 +21,12 @@ struct udevice;
-  * @align: Frame-buffer alignment, indicating the memory boundary the frame
-  *	buffer should start on. If 0, 1MB is assumed
-  * @size: Frame-buffer size, in bytes
-- * @base: Base address of frame buffer, 0 if not yet known
-- * @copy_base: Base address of a hardware copy of the frame buffer. See
-- *	CONFIG_VIDEO_COPY.
-+ * @base: Base address of frame buffer, 0 if not yet known. If CONFIG_VIDEO_COPY
-+ *	is enabled, this is the software copy, so writes to this will not be
-+ *	visible until vidconsole_sync_copy() is called. If CONFIG_VIDEO_COPY is
-+ *	disabled, this is the hardware framebuffer.
-+ * @copy_base: Base address of a hardware copy of the frame buffer. If
-+ *	CONFIG_VIDEO_COPY is disabled, this is not used.
-  * @copy_size: Size of copy framebuffer, used if @size is 0
-  * @hide_logo: Hide the logo (used for testing)
-  */
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 778b693f983a..a09db31eb465 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -10,6 +10,7 @@
- #include <efi_loader.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <video.h>
- #include <asm/global_data.h>
- 
-@@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
- 	struct efi_gop_obj *gopobj;
- 	u32 bpix, format, col, row;
- 	u64 fb_base, fb_size;
--	void *fb;
- 	efi_status_t ret;
- 	struct udevice *vdev;
- 	struct video_priv *priv;
-+	struct video_uc_plat *plat;
- 
- 	/* We only support a single video output device for now */
- 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-@@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
- 	format = priv->format;
- 	col = video_get_xsize(vdev);
- 	row = video_get_ysize(vdev);
--	fb_base = (uintptr_t)priv->fb;
--	fb_size = priv->fb_size;
--	fb = priv->fb;
-+
-+	plat = dev_get_uclass_plat(vdev);
-+	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
-+	fb_size = plat->size;
- 
- 	switch (bpix) {
- 	case VIDEO_BPP16:
-@@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
- 	}
- 	gopobj->info.pixels_per_scanline = col;
- 	gopobj->bpix = bpix;
--	gopobj->fb = fb;
-+	gopobj->fb = map_sysmem(fb_base, fb_size);
- 
- 	return EFI_SUCCESS;
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index ad39ebe4379f..3aeb40d690f4 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -89,6 +89,44 @@ static void show_footer(int count, int num_valid)
+ 	       num_valid);
  }
+ 
++/**
++ * bootflow_handle_menu() - Handle running the menu and updating cur bootflow
++ *
++ * This shows the menu, allows the user to select something and then prints
++ * what happened
++ *
++ * @std: bootstd information
++ * @text_mode: true to run the menu in text mode
++ * @bflowp: Returns selected bootflow, on success
++ * Return: 0 on success (a bootflow was selected), -EAGAIN if nothing was
++ *	chosen, other -ve value on other error
++ */
++__maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
++					       bool text_mode,
++					       struct bootflow **bflowp)
++{
++	struct bootflow *bflow;
++	int ret;
++
++	ret = bootflow_menu_run(std, text_mode, &bflow);
++	if (ret) {
++		if (ret == -EAGAIN) {
++			printf("Nothing chosen\n");
++			std->cur_bootflow = NULL;
++		} else {
++			printf("Menu failed (err=%d)\n", ret);
++		}
++
++		return ret;
++	}
++
++	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
++	std->cur_bootflow = bflow;
++	*bflowp = bflow;
++
++	return 0;
++}
++
+ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			    char *const argv[])
+ {
+@@ -455,18 +493,9 @@ static int do_bootflow_menu(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (ret)
+ 		return CMD_RET_FAILURE;
+ 
+-	ret = bootflow_menu_run(std, text_mode, &bflow);
+-	if (ret) {
+-		if (ret == -EAGAIN)
+-			printf("Nothing chosen\n");
+-		else {
+-			printf("Menu failed (err=%d)\n", ret);
+-			return CMD_RET_FAILURE;
+-		}
+-	}
+-
+-	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
+-	std->cur_bootflow = bflow;
++	ret = bootflow_handle_menu(std, text_mode, &bflow);
++	if (ret)
++		return CMD_RET_FAILURE;
+ 
+ 	return 0;
+ }
+diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
+index 9c5ea9c5d84e..2198ff60493e 100644
+--- a/doc/usage/cmd/bootflow.rst
++++ b/doc/usage/cmd/bootflow.rst
+@@ -15,6 +15,7 @@ Synopis
+     bootflow read
+     bootflow boot
+     bootflow cmdline [set|get|clear|delete|auto] <param> [<value>]
++    bootfloe menu [-t]
+ 
+ Description
+ -----------
+@@ -24,6 +25,9 @@ locate bootflows, list them and boot them.
+ 
+ See :doc:`../../develop/bootstd` for more information.
+ 
++Note that `CONFIG_BOOTSTD_FULL` (which enables `CONFIG_CMD_BOOTFLOW_FULL) must
++be enabled to obtain full functionality with this command. Otherwise, it only
++supports `bootflow scan` which scans and boots the first available bootflow.
+ 
+ bootflow scan
+ ~~~~~~~~~~~~~
+@@ -247,6 +251,16 @@ can be used to set the early console (or console) to a suitable value so that
+ output appears on the serial port. This is only supported by the 16550 serial
+ driver so far.
+ 
++bootflow menu
++~~~~~~~~~~~~~
++
++This shows a menu with available bootflows. The user can select a particular
++bootflow, which then becomes the current one.
++
++The `-t` flag requests a text menu. Otherwise, if a display is available, a
++graphical menu is shown.
++
++
+ Example
+ -------
+ 
+@@ -658,6 +672,56 @@ Now the buffer can be accessed::
+     77b7e4e0: 320fc000 08e8ba0f c031300f b8d0000f  ...2.....01.....
+     77b7e4f0: 00000020 6ad8000f 00858d10 50000002   ......j.......P
+ 
++This shows using a text menu to boot an OS::
++
++    => bootflow scan
++    => bootfl list
++    => bootfl menu -t
++    U-Boot    :    Boot Menu
++
++    UP and DOWN to choose, ENTER to select
++
++      >    0  mmc1        mmc1.bootdev.whole
++           1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++           2  mmc1        mmc1.bootdev.part_1
++           3  mmc4        mmc4.bootdev.whole
++           4  mmc4        Armbian
++           5  mmc4        mmc4.bootdev.part_1
++           6  mmc5        mmc5.bootdev.whole
++           7  mmc5        ChromeOS
++           8  mmc5        ChromeOS
++    U-Boot    :    Boot Menu
++
++    UP and DOWN to choose, ENTER to select
++
++           0  mmc1        mmc1.bootdev.whole
++      >    1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++           2  mmc1        mmc1.bootdev.part_1
++           3  mmc4        mmc4.bootdev.whole
++           4  mmc4        Armbian
++           5  mmc4        mmc4.bootdev.part_1
++           6  mmc5        mmc5.bootdev.whole
++           7  mmc5        ChromeOS
++           8  mmc5        ChromeOS
++    U-Boot    :    Boot Menu
++
++    Selected: Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    => bootfl boot
++    ** Booting bootflow 'mmc1.bootdev.part_1' with extlinux
++    Ignoring unknown command: ui
++    Ignoring malformed menu command:  autoboot
++    Ignoring malformed menu command:  hidden
++    Ignoring unknown command: totaltimeout
++    Fedora-Workstation-armhfp-31-1.9 Boot Options.
++    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    Enter choice: 1
++    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    Retrieving file: /vmlinuz-5.3.7-301.fc31.armv7hl
++    Retrieving file: /initramfs-5.3.7-301.fc31.armv7hl.img
++    append: ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB
++    Retrieving file: /dtb-5.3.7-301.fc31.armv7hl/sandbox.dtb
++    ...
++
+ 
+ Return value
+ ------------
+@@ -667,6 +731,9 @@ return to U-Boot. If something about the U-Boot processing fails, then the
+ return value $? is 1. If the boot succeeds but for some reason the Operating
+ System returns, then $? is 0, indicating success.
+ 
++For `bootflow menu` the return value is $? is 0 (true) if an option was choses,
++else 1.
++
+ For other subcommands, the return value $? is always 0 (true).
+ 
+ 
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 102b2b561356..b97c566f000b 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -604,8 +604,12 @@ static int scan_mmc4_bootdev(struct unit_test_state *uts)
+ /* Check 'bootflow menu' to select a bootflow */
+ static int bootflow_cmd_menu(struct unit_test_state *uts)
+ {
++	struct bootstd_priv *std;
+ 	char prev[3];
+ 
++	/* get access to the current bootflow */
++	ut_assertok(bootstd_get_priv(&std));
++
+ 	ut_assertok(scan_mmc4_bootdev(uts));
+ 
+ 	/* Add keypresses to move to and select the second one in the list */
+@@ -616,6 +620,17 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
+ 
+ 	ut_assertok(run_command("bootflow menu", 0));
+ 	ut_assert_nextline("Selected: Armbian");
++	ut_assertnonnull(std->cur_bootflow);
++	ut_assert_console_end();
++
++	/* Check not selecting anything */
++	prev[0] = '\e';
++	prev[1] = '\0';
++	ut_asserteq(1, console_in_puts(prev));
++
++	ut_asserteq(1, run_command("bootflow menu", 0));
++	ut_assertnull(std->cur_bootflow);
++	ut_assert_nextline("Nothing chosen");
+ 	ut_assert_console_end();
+ 
+ 	return 0;
 -- 
 2.43.0.rc0.421.g78406f8d94-goog
 
