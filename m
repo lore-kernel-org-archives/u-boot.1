@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F71CC072A2
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 07:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03E9C072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 14:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F8E386E95;
-	Sun, 19 Nov 2023 08:50:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 937A986EF6;
+	Sun, 19 Nov 2023 15:43:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iPfTwD7v";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WOCnz/TC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E7FC86FB4; Sun, 19 Nov 2023 08:50:24 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 9793086EF6; Sun, 19 Nov 2023 15:43:52 +0100 (CET)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E04786D93
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 08:50:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7E7F86EF6
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 15:43:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2c876e44157so9615211fa.2
- for <u-boot@lists.denx.de>; Sat, 18 Nov 2023 23:50:18 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3594c100735so8773175ab.1
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 06:43:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700380218; x=1700985018; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WR/u0jhwxxBgcKV7mNMzS3JfZRlOS5y92KjrQ2kHXjY=;
- b=iPfTwD7vl62m79k7GBzDPUvgjdJz3yyxhLx698cvzz6uQkIa4Yc9dR6gmdKotfqFN2
- CeHI+vZqdxDkAbdPI48nnuDaUL3IB6VQSz36N/wMiu3q3T155LhX05jCEQgBpaiyb7H7
- ZUK5X3OGJwRl4U9st9CsgDLZqWSU4Go4DHRBEmYRRvJ1e9O1/aHty8DtjwpQW+tZi19J
- mcZpptbH6FacqEOFVPOK2W8QeSMP8daGP3r3GSOJ3msm805EppES0mz5b6ggIfosfWNp
- 1hBalM86v1gwwDxAQ8UpZPSZw8xXrnqPNCUwr3QLwf9p/EWn2zfMvqy6hYhVqUHyS+Ez
- bDug==
+ d=chromium.org; s=google; t=1700405028; x=1701009828; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gDDuSb6z5LoAjT4G5HlvqsQ80XrpG+/Ef3l8jhXaeRU=;
+ b=WOCnz/TCIfNIF0fF6PzGKYcMERtPEvODYH4KT7Kg4MuWrdViXkc43Yaeoj82I1WnlH
+ kz6m2EW+fgRSFOunqnwWePaF8ljtEvmCKIOZoic23b//DPsGDNkyIaTNpIousW3Cu5SV
+ so9bOHzfIC+ezkCJzYZ6sOTEfqL52wKRLM4XQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700380218; x=1700985018;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1700405028; x=1701009828;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WR/u0jhwxxBgcKV7mNMzS3JfZRlOS5y92KjrQ2kHXjY=;
- b=f7prHh/pbhGynPTcsQxfVYachc5wLkeZJLBknGXiHp7mzKFtgC1eBw3dzkAS/XlD7D
- nny7g0cplrNsPmdCDk8bHQ0MJR4gB1o6xenBYLBNrqxOqwQZi9XMOxD/yoI3TDwxaou1
- xC/asI3GwjBD1RhxlYf2SeS51tYfpbf0YNVbwqCX9FGOMcr2Nzu/SMISMM2G1yM2bYxi
- V4d5VGNjn+1GFHORYNWw4OHP1O4/FQNxfEmvzKxEgb24ojClNHSY2NLdKuU1r+aA0uHT
- ty/lGffA9oy7X45oUYA5yFDieYcZ0rG/asCsfe2bpb2SEo1EXgn2XWUUn+rPqLv+HgF8
- kY7w==
-X-Gm-Message-State: AOJu0YyZYO4z9aIbNn1KWAkbusNIOHHX91j0wNK71Jtsi8SErLaGmugI
- LjkjB5NPhqFnMAlpulyrtaeeynjyEXQ+yLXLfoNoag==
-X-Google-Smtp-Source: AGHT+IFmzvco6Rzced580rLtEJyTp1VZkCzI3uXgVzX4kIKxv1rpYA4fZRvQ3/HFpuKZ1Zhz7i7cFZwt33CmnPiXKbI=
-X-Received: by 2002:ac2:51b5:0:b0:502:d743:9fc4 with SMTP id
- f21-20020ac251b5000000b00502d7439fc4mr3380662lfk.37.1700380217586; Sat, 18
- Nov 2023 23:50:17 -0800 (PST)
+ bh=gDDuSb6z5LoAjT4G5HlvqsQ80XrpG+/Ef3l8jhXaeRU=;
+ b=dQAkRPeBfTy5LRpHcuQLzsCyzjnKxCZfb2RU/5z0+U8eSe0gPyHz0/1sSSu+fO78EF
+ fViQ0CTAhP+K8RzLN3nfbE2XwszXaCko1tCCdszk7dbrU5yhSSPIBYrOIX/Kogbe7+Zk
+ 4bVI/w2PdD3L+zq/LToFEmGnO4Ztryo0oQ0Hb4qj87Ap7TI2JKAQZ/MnZG7nFbRVevck
+ cQgHRUdPxnbcGuXW8OxvzTK02S+7WzA2ViupHatXsMSrTsrmZUcQil1pdyCIO7jpqQzV
+ OKdHivu1sqBuOsASc5svJ7jjPecI0XmCWmlGLh1ztKtU6af+k+2T6/tkO7o+VApv/PDK
+ pB2Q==
+X-Gm-Message-State: AOJu0YxnbXsr8qJh5QA7CEeokO7Vnh95XQ5YHug7NOyQl7mXn6vqxPAG
+ a3FGnTVwAAqfaDY5LPubd8F/QH1Rr/ekzfqbhs4IJQ==
+X-Google-Smtp-Source: AGHT+IGTxYh6TGsnHSJMnAAP2wH1AxOcn/VIld3l777Nco8Y3Lu2ihInO0iXDEi8JSyaxQda8ZyuoA==
+X-Received: by 2002:a92:3301:0:b0:359:31a1:4702 with SMTP id
+ a1-20020a923301000000b0035931a14702mr3295897ilf.6.1700405028223; 
+ Sun, 19 Nov 2023 06:43:48 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ k5-20020a023505000000b00463f8b3e34asm1511196jaa.23.2023.11.19.06.43.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Nov 2023 06:43:47 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marc Kleine-Budde <mkl@pengutronix.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Safae Ouajih <souajih@baylibre.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v3 0/4] bootm: Handle compressed arm64 images with bootm
+Date: Sun, 19 Nov 2023 07:43:30 -0700
+Message-ID: <20231119144338.630138-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.rc0.421.g78406f8d94-goog
 MIME-Version: 1.0
-References: <20231117212039.1210784-1-i@shantur.com>
- <20231117212039.1210784-3-i@shantur.com>
- <CAPnjgZ19Q4RZMR080gqqzginpCNkCkj4OuVgJX6drRt+dJbLNQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ19Q4RZMR080gqqzginpCNkCkj4OuVgJX6drRt+dJbLNQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 19 Nov 2023 09:49:41 +0200
-Message-ID: <CAC_iWjJapxvTqB1R-9CDMYDeyFDikJiZ=3JXCNArdLQr=FtMTA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] bootflow: bootmeth_efi: Don't set bootdev again
-To: Simon Glass <sjg@chromium.org>
-Cc: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de, trini@konsulko.com, 
- xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,93 +94,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This little series corrects a problem I noticed with arm64 images,
+where the kernel is not recognised if compression is used:
 
-Thanks for looping me in
+   U-Boot> tftp image.fit
+   Using ethernet@7d580000 device
+   TFTP from server 192.168.4.7; our IP address is 192.168.4.147
+   Filename 'image.fit'.
+   Load address: 0x1000000
+   Loading: ##################################################  23 MiB
+   	 20.5 MiB/s
+   done
+   Bytes transferred = 24118272 (1700400 hex)
+   U-Boot> bootm
+   ## Loading kernel from FIT Image at 01000000 ...
+      Using 'conf-768' configuration
+      Trying 'kernel' kernel subimage
+        Description:  Linux
+        Type:         Kernel Image (no loading done)
+        Compression:  gzip compressed
+        Data Start:   0x01000120
+        Data Size:    13662338 Bytes = 13 MiB
+      Verifying Hash Integrity ... OK
+   Bad Linux ARM64 Image magic!
 
-On Sat, 18 Nov 2023 at 19:11, Simon Glass <sjg@chromium.org> wrote:
->
-> +Ilias too as this involves a design decision
->
-> Hi Shantur,
->
-> On Fri, 17 Nov 2023 at 14:22, Shantur Rathore <i@shantur.com> wrote:
-> >
-> > efi_set_bootdev is already called as part of tftp while doing dhcp_run()
->
-> Is that in tftp_complete() ?
->
-> > Doing this again crashes U-boot and we don't need to call again.
+With this series:
 
-Yes, we should fine the root cause here instead of papering over the problem
+   U-Boot> tftp 20000000 image.fit
+   Using ethernet@7d580000 device
+   TFTP from server 192.168.4.7; our IP address is 192.168.4.147
+   Filename 'image.fit'.
+   Load address: 0x20000000
+   Loading: ##################################################  23.5 MiB
+   	 20.8 MiB/s
+   done
+   Bytes transferred = 24642560 (1780400 hex)
+   U-Boot> bootm 0x20000000
+   ## Loading kernel from FIT Image at 20000000 ...
+      Using 'conf-768' configuration
+      Trying 'kernel' kernel subimage
+        Description:  Linux
+        Type:         Kernel Image (no loading done)
+        Compression:  zstd compressed
+        Data Start:   0x20000120
+        Data Size:    14333475 Bytes = 13.7 MiB
+      Verifying Hash Integrity ... OK
+   Using kernel load address 80000
+   ## Loading fdt from FIT Image at 20000000 ...
+      Using 'conf-768' configuration
+      Trying 'fdt-768' fdt subimage
+        Description:  Raspberry Pi 4 Model B
+        Type:         Flat Device Tree
+        Compression:  zstd compressed
+        Data Start:   0x215f820c
+        Data Size:    9137 Bytes = 8.9 KiB
+        Architecture: AArch64
+      Verifying Hash Integrity ... OK
+      Uncompressing Flat Device Tree to 3aff3010
+      Booting using the fdt blob at 0x3aff3010
+   Working FDT set to 3aff3010
+      Uncompressing Kernel Image (no loading done) to 80000
+   Moving Image from 0x80000 to 0x200000, end=2b00000
+      Using Device Tree in place at 000000003aff3010, end 000000003afff4c4
+   Working FDT set to 3aff3010
 
->
-> U-Boot
->
-> The problem is that we might scan for 4 bootflows, then later decide
-> which one to boot. So we cannot know which one it will be until that
-> point.
->
-> The hack is needed so that it actually tells EFI about the right one.
->
-> The addition of EFI hacks when reading files (i.e. the code in
-> tftp_complete()) is a real problem, unfortunately. I understand that
-> it was a convenient hack, but with standard boot we really don't want
-> it to do that. We end up calling it multiple times for bootflows that
-> won't be used.
->
-> So I believe the fix is to be able to disable those calls, leaving it
-> to bootstd.
->
-> I'm not sure of the best way to do that. Perhaps we should have a
-> function like bootstd_scanning() which returns a bool indicating that
-> bootstd is scanning? If that is true then no efi_set_bootdev() calls
-> are made? We could have a flag in 'struct bootstd_priv' which is set
-> before bootflow_check() is called and cleared afterwards.
->
-> As to how this should be done with standard boot, we should create a
-> function like efi_start_app() and pass it the information we need.
-> That function should do the equivalent of the 'bootefi' command,
-> except programmatically, with no prior state hanging around.
->
-> As to when we might be able to do that, we need more refactoring of
-> the bootm code. There is a start on this [1] but it likely needs 2-3
-> more series before it might be possible.
->
-> So for now, I think bootstd_scanning() is the best approach. If you
-> are not sure about that, I can send a patch.
+   Starting kernel ...
 
-I'll have a closer look at the efi bootmeth as well and come back with
-suggestions
+   [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd083]
 
-Thanks
-/Ilias
->
-> >
-> > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > ---
-> >  boot/bootmeth_efi.c | 3 ---
-> >  1 file changed, 3 deletions(-)
-> >
-> > diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-> > index 682cf5b23b..5917458dc5 100644
-> > --- a/boot/bootmeth_efi.c
-> > +++ b/boot/bootmeth_efi.c
-> > @@ -360,9 +360,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
-> >                 return log_msg_ret("sz", -EINVAL);
-> >         bflow->size = size;
-> >
-> > -       /* do the hideous EFI hack */
-> > -       efi_set_bootdev("Net", "", bflow->fname, map_sysmem(addr, 0),
-> > -                       bflow->size);
-> >
-> >         /* read the DT file also */
-> >         fdt_addr_str = env_get("fdt_addr_r");
-> > --
-> > 2.40.1
-> >
->
-> Regards,
-> Simon
->
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=382423
+The problem is that the arm64 magic is checked before the image is
+decompressed. However this is only part of it. The kernel_noload image
+type doesn't work with compression, since the kernel is not loaded. So
+this series deals with that by using an lmb-allocated buffer for the
+uncompressed kernel.
+
+Another issue is that the arm64 handling is done too early, before the
+image is loaded. This series moves it to after loading, so that
+compression can be handled.
+
+A patch is included to show the kernel load-address, so it is easy to
+see what is going on.
+
+One annoying feature of arm64 is that the image is often copied to
+another address. It might be possible for U-Boot to figure that out
+earlier and decompress it to the right place, but perhaps not.
+
+With all of this it should be possible to boot a compressed kernel on
+any of the 990 arm64 boards supported by Linux, although I have only
+tested two.
+
+Changes in v3:
+- Rebase on to bootm-refactoring series
+- Support compression with an lmb-allocated region
+- Drop patch to disallow kernel_noload with compression
+- Drop patch 'bootm: Allow omitting the load address'
+
+Changes in v2:
+- Rework the patch based on a better understanding of events
+- Add a 'success' case to the cover letter
+- Redo how the arm64 support is implemented
+
+Simon Glass (4):
+  image: Correct load_bug typo
+  image: Show the load address when decompressing
+  bootm: Move arm64-image processing later
+  bootm: Support kernel_noload with compression
+
+ boot/bootm.c    | 63 +++++++++++++++++++++++++++++++++++--------------
+ boot/image.c    | 13 ++++++----
+ include/image.h |  2 +-
+ 3 files changed, 55 insertions(+), 23 deletions(-)
+
+-- 
+2.43.0.rc0.421.g78406f8d94-goog
+
