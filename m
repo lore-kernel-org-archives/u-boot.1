@@ -4,55 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C6D6C54FB9
-	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 20:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4B0DC072A2
+	for <u-boot@archiver.kernel.org>; Sun, 19 Nov 2023 21:08:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EBD186F0D;
-	Sun, 19 Nov 2023 21:53:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4AB1A870E7;
+	Sun, 19 Nov 2023 22:08:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700427190;
-	bh=dGj+dyesMJbjxATMRPwBNvGMybzcViw6y7RtkanSQ+k=;
-	h=Date:Subject:To:References:Cc:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pxfY89jN1vyt+uq7zdg8Mmszr1P5ceSD22o+tVfxuhlP33mtEDNhPgkx2g41MXUqB
-	 RwI+elCR157WYey9jjm9Bukx6IcAl/dxueEKMt0qq4pcOEeVXUNs1UGUVwwg7hcptM
-	 qIEedqZ5kXVHteHTV9esPIJYzwqQ1/JpbkwG3aTs3Og98p/0FXJI2ufRm+DUjTrJED
-	 GFYk3b6aYoq2RSk2wjoUf2fZ4uIR+nKOSi4vMTOfAzcJgKbQSlQtENv+yStNOP7M44
-	 Qezc7X51qQMDUJ+Hi+cFzKjDZvG1AbQK1gpTW9OhlfhJCqAqwPzsGGM2R8oMKebnsC
-	 uLL9XOQ8PHESw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="length tag value exceeds body size" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="QUDfX2D3";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6076E87083; Sun, 19 Nov 2023 22:08:13 +0100 (CET)
+Received: from web-out.onbox.hu (fmfe37.freemail.hu [46.107.16.242])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 062AE86E65;
- Sun, 19 Nov 2023 21:53:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700427184;
- bh=dGj+dyesMJbjxATMRPwBNvGMybzcViw6y7RtkanSQ+k=;
- h=Date:Subject:To:References:Cc:From:In-Reply-To:From;
- b=OO23xjGcz06QCIIPkZd5ous9ScIbs9Kj/Q8WkWqhM4TzcSG7Daj/RFDj195JSmKHN
- AnN4QF4Bb2mH2eP6fcf6caZAlVQj9saGKkh7xVrQvI7z1MTqzZBTO9EF1Y8p13WLu/
- LgkYZ8W1I5eXIScEWzJ6vJvxtC66HGM2RVWK2JL+A3E0QpCUykg+FlCPQscc0vwDHn
- xNXya4OINi5l7oilwyzPB+9lo9MxMtYdnCLfdbgsgen2YX3UeFffiOUnMZIKN5r/Gz
- xFvZ/PVn1QNHBGeUupUI+WSG1OXAFFmRRtDyZ5hUcqMRoARfzo49zkOMdnn0OqE7nE
- L/HI3YQBPUmvQ==
-Message-ID: <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
-Date: Sun, 19 Nov 2023 21:53:03 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B6B3B871DF
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 22:08:01 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=freemail.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+X-fm-smtp-source: yes
+Received: from localhost (localhost [80.98.74.198])
+ by web-out.onbox.hu (Postfix) with SMTP id 4SYNX03zGczPlc;
+ Sun, 19 Nov 2023 22:08:00 +0100 (CET)
+Date: Sun, 19 Nov 2023 21:08:00 +0000 (GMT)
+From: =?utf-8?Q?Sz=C5=91ke_K=C3=A1lm=C3=A1n_Benjamin?= <egyszeregy@freemail.hu>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "otavio@ossystems.com.br" <otavio@ossystems.com.br>,
+ "sbabic@denx.de" <sbabic@denx.de>
+Message-ID: <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
+In-Reply-To: <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+References: <20231107221617.470-1-egyszeregy@freemail.hu>
+ <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
-References: <20231110141311.512334-1-i@shantur.com>
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231110141311.512334-1-i@shantur.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-AccountId: 2510275
+X-Originating-Ip: 80.98.74.198
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1700428081; 
+ s=20181004; d=freemail.hu;
+ h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type;
+ l=7409; bh=jkzLW6LNoeEaSszxRaOyVZcBFHK3aF2m02EtX20xv/A=;
+ b=QUDfX2D3LmG18REyVzCaCBDhb9ZHep+Nvm80CYfCGhm6LBktq7lKnljKkbk4Gqqp
+ 565yMWJ0PTWsXUG1Rm5ahM26jxLD79xi86P9Zv2gX0vXF4k8XhWMZkHmFF32OMkLUNb
+ 4HdcrRPAlTlr3qVgslfsrwxr2RwNHZ+e3UHlu7gnzcVN3z9zGRYGTngm2z8hSFHWGRx
+ VZJzfD3T5/cfLW2tLAXiatMYBj2R4pIcRdxi8lUElDvj6PS800wmFYqM8D5W2UF3IjT
+ J2kJ2rSrS+NnNyysK1LOom5/La3iyTYUrQfYZMQudAf8f6FcNLPi8IgA0dtLAl5OJSK
+ hLTSFEdQXQ==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,35 +72,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/10/23 15:13, Shantur Rathore wrote:
-> Currently when a hub is turned on, all the ports are powered on.
-> This works well for hubs which have individual power control.
-> 
-> For the hubs without individual power control this has no effect.
-
-OK
-
-> Mostly in these scenarios the hub port is powered before the USB
-> controller is enabled, this can lead to some devices in unexpected
-> state.
-
-This ^ part needs clarification.
-
-Which devices are in incorrect state, the ones connected to the hub 
-downstream facing ports ?
-
-> With this patch, we explicitly reset the port while powering up hub
-> This resets the port for hubs without port power control and has
-> no effect on hubs with port power control as the port is still off.
-
-Should common/usb_hub.c usb_hub_port_connect_change() trigger the reset?
-
-Could it be you do not get a connect change event ?
-
-> Before this patch AMicro AM8180 based NVME to USB adapter won't be
-> detected as a USB3.0 Mass Storage device but with this it works as
-> expected.
-
-Do you have HUB power control ?
-
-I recall there was some companion hub discussion recently.
+Hi,All previouse stage/patches was a "blind alley" solution because finally=
+ i found, many code parts are ready from freesacle sources. So needed to re=
+factor the full codes, which seems now a totally new code/solution for it.S=
+o, I don't see the point in describing them in a changelog, useless to shar=
+e logs about=C2=A0crappy attempts. Also i do not know how can be the git co=
+nfigured to use custom PATCH prefix, it was generated by git automatically.=
+(void)(devno); is need because devno arguments is an unused variable, need =
+to use this solution to suppress any potential warnings.I am ready with thi=
+s patch, i will not change anything, i am done. If you feel something is mi=
+ssing in the descriptions or in code feel free to change it in text of my p=
+atch source or in a new patch, you can do it, if you are a maintainer. Now =
+it's your turn to finalize it if something need more.-------- Eredeti lev=
+=C3=A9l --------Felad=C3=B3: Fabio Estevam <festevam@gmail.com>D=C3=A1tum: =
+2023 november 15 18:31:21T=C3=A1rgy: Re: [PATCH 1/1] pico-imx7d: add basebo=
+ard SD card boot detectC=C3=ADmzett: egyszeregy@freemail.huHi Benjamin,  Yo=
+u should have indicated that this is v7.  The subject should be:  [PATCH v7=
+] pico-imx7d: add baseboard SD card boot detect  No need for adding 1/1 for=
+ a single patch.  On Tue, Nov 7, 2023 at 7:16=E2=80=AFPM <egyszeregy@freema=
+il.hu> wrote: > > From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu> > > Te=
+chnexion PICO-IMX7 SoM is supporting USDHC3 (eMMC or micro SD on SoM) > and=
+ USDHC1 (SD on carrier board) to use on any carrier board like > PICO-NYMPH=
+. Based on the U-Boot version from Technexion it adds > baseboard SD card b=
+oot detect to able to boot from selected USDHC1 > or USDHC3 boot devices. >=
+ >     - Add baseboard SD card boot detect from Technexion's U-Boot. >     =
+- Implement board_mmc_get_env_dev() for pico-imx7d SoM. >     - Implement m=
+mc_map_to_kernel_blk() for pico-imx7d SoM. >     - Add board_late_mmc_env_i=
+nit() to use from common freescale >       functions to able to provide "mm=
+cdev" and "mmcroot" variables >       in environment of U-boot. >     - Add=
+ "mmc1" alias to use for usdhc1 in imx7d-pico-pi-u-boot.dtsi. >     - In de=
+fault environment set "mmcautodetect=3Dyes" to use boot detection.  These c=
+omments above should be placed below the --- line.  > Signed-off-by: Benjam=
+in Sz=C5=91ke <egyszeregy@freemail.hu> > ---  Here you should place the cha=
+ngelog:  Changes since v6: - bla bla bla  > +#if CONFIG_IS_ENABLED(FSL_ESDH=
+C_IMX) > +#if CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || CONFIG_IS_ENABLED(ENV_IS_=
+NOWHERE) > +int board_mmc_get_env_dev(int devno) > +{ > +       int dev_env=
+ =3D 0; > +       (void)(devno);  Why? Just drop this ' (void)(devno);' lin=
+e.  I tested it successfully, so:  Tested-by: Fabio Estevam <festevam@gmail=
+.com>=20
