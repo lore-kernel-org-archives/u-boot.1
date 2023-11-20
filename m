@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8CEC5ACB3
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 02:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99426C197A0
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 04:41:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2568E86FB6;
-	Mon, 20 Nov 2023 03:36:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8044F8700E;
+	Mon, 20 Nov 2023 05:41:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OezQ97C/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fYnW+qSF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36792874D9; Mon, 20 Nov 2023 03:36:23 +0100 (CET)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E84E87063; Mon, 20 Nov 2023 05:41:22 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 398DF86F6F
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 03:36:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BA0C86BFA
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 05:41:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=inindev@gmail.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-66d09b6d007so10800726d6.1
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 18:36:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700447775; x=1701052575; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=yvZ9/bWaq3kEJR7ltu8Ht5f5dHO0iVAfaQeN6uBhnG4=;
- b=OezQ97C/QO3h36bt6Z1TcViuRnPoY6VsUnySiV5O6Id0NZtSRR4sC9WTggDMI8/LqZ
- Pf4VtocrcK5d/WyYBmoF32iwH3zCZQeAEwhOoHBQvHKgCMGBR+oig8Mxh+t1OLpToVui
- BKXMKfC7sZKCw5ChlO8iFr42WvNA4geT07txLzszx6pbFr5bko2KdgXiUEpjFOtSexxJ
- HTZwjCsVTVQWa24btcwdVKKDdVniUWHaACybo3WhVncz/kXBzwKXMCnDgAqDn2GFTOI5
- pMcHpjQh64hITAg8xTh1XhpmP5Gmq0g4k22v99GArqn4fGmgn0A4FeqOIpYYP90omksm
- OgjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700447775; x=1701052575;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yvZ9/bWaq3kEJR7ltu8Ht5f5dHO0iVAfaQeN6uBhnG4=;
- b=VOumxfUfyjss25o60CYqyqTjDLnaf14pJNAmP5pbWfdTRUoAf7tNgOayyVLEg0NT9p
- dAvvKgPmQI8rkZvcLXcXnEkbWz7TLaH5UWuaS5b2HsZZ7RekEKr3akn4zZYxoXtY3zqb
- p7EvFs8PqOIgOP+GFs3DrBh+kqS+GCubsmggph2pc8q3Q7Hjgb4OSfweBDcbQe1NwTdj
- FhAFiSXmHiKgUP9qV1OefhfqiWIyXVzQEwEo7bwbRQFlVkSMQWs+acGJMQTsKDN7JM6v
- /+yJL9RTk+5/S/8lj5Z90NxhMSuoNtV0RE2rfFAzMwZ7hVTa7md3KXijXWB29IUQQEGJ
- FsMw==
-X-Gm-Message-State: AOJu0YwU1ux6SaIguM9yPeW1v88a4Nj9950mamn63qKxsOIpJA9hKdlY
- 4f9/QrgJwF0oVNCQdb8sKxI=
-X-Google-Smtp-Source: AGHT+IHodOUhvMKvQzDJdXm0oIKyK7qeFe4STI1LeUPv7XX0HVQ71V0ISmMy4Z1DRnNHPNE0CdVdcQ==
-X-Received: by 2002:a05:6214:20cc:b0:679:d40e:d699 with SMTP id
- 12-20020a05621420cc00b00679d40ed699mr3698207qve.6.1700447774926; 
- Sun, 19 Nov 2023 18:36:14 -0800 (PST)
-Received: from localhost.localdomain (cpe-107-15-246-199.nc.res.rr.com.
- [107.15.246.199]) by smtp.gmail.com with ESMTPSA id
- i19-20020a05620a0a1300b00767d4a3f4d9sm2349204qka.29.2023.11.19.18.36.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Nov 2023 18:36:14 -0800 (PST)
-From: John Clark <inindev@gmail.com>
-To: Leo Yu-Chi Liang <ycliang@andestech.com>
-Cc: John Clark <inindev@gmail.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, u-boot@lists.denx.de
-Subject: [PATCH] starfive: visionfive2: add device tree overlay support
-Date: Mon, 20 Nov 2023 02:35:31 +0000
-Message-ID: <20231120023549.13902-1-inindev@gmail.com>
-X-Mailer: git-send-email 2.42.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AK4fBs0043093;
+ Sun, 19 Nov 2023 22:41:11 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700455271;
+ bh=xUm8axQFNrIE9leX2cTottOOkBt+auiM2aZC++w7hsQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=fYnW+qSFIi81qoYpiNdimD48V0mcHpryTX5AvkE4FV243bF8swMJjHy5cSLjHdNNb
+ jHFp16MBHc+RUNSbUrwf55L9iEyqg72suaOk++wDUdrSqwXEp7JxQ1FSVYJjpOJo4U
+ 1/Gc+X5A/rch6i/0nfL+fB3WHiY9Ti2Ct/595xg4=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AK4fBNX103727
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sun, 19 Nov 2023 22:41:11 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 19
+ Nov 2023 22:41:11 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 19 Nov 2023 22:41:11 -0600
+Received: from [172.24.227.36] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AK4f87Y119961;
+ Sun, 19 Nov 2023 22:41:09 -0600
+Message-ID: <46e34035-a503-4548-8958-5fd7cacaa058@ti.com>
+Date: Mon, 20 Nov 2023 10:11:08 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
+ J7200
+To: Tom Rini <trini@konsulko.com>
+CC: <nm@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>, 
+ <u-boot@lists.denx.de>, <vigneshr@ti.com>
+References: <20231003081038.24299-1-j-keerthy@ti.com>
+ <20231003081038.24299-11-j-keerthy@ti.com>
+ <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
+ <20231003151033.GD8465@bill-the-cat>
+ <726d44fe-bd81-4409-a9b2-776eea34fd67@ti.com>
+ <20231116184052.GE170968@bill-the-cat>
+ <4f440a06-892b-4098-9565-6b21778bb5bb@ti.com>
+ <20231117140713.GD170968@bill-the-cat>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231117140713.GD170968@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,34 +88,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-device tree overlay support requires fdtoverlay_addr_r to be set
+Hi Tom,
 
-before
-~~~~~~
-Invalid fdtoverlay_addr_r for loading overlays
+On 17/11/23 19:37, Tom Rini wrote:
+> On Fri, Nov 17, 2023 at 02:00:43PM +0530, Neha Malcom Francis wrote:
+>> Hi Tom
+>>
+>> On 17/11/23 00:10, Tom Rini wrote:
+>>> On Thu, Nov 16, 2023 at 11:43:50AM +0530, Neha Malcom Francis wrote:
+>>>> Hi Tom,
+>>>>
+>>>> Trying to bring back this series here.
+>>>>
+>>>> On 03/10/23 20:40, Tom Rini wrote:
+>>>>> On Tue, Oct 03, 2023 at 07:57:04PM +0530, Kumar, Udit wrote:
+>>>>>>
+>>>>>> On 10/3/2023 1:40 PM, Keerthy wrote:
+>>>>>>> Enable ESM initialization for J7200
+>>>>>>>
+>>>>>>> Signed-off-by: Keerthy <j-keerthy@ti.com>
+>>>>>>> ---
+>>>>>>>      board/ti/j721e/evm.c | 6 ++++--
+>>>>>>>      1 file changed, 4 insertions(+), 2 deletions(-)
+>>>>>>>
+>>>>>>> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+>>>>>>> index 42fa94b7a5..070b28326f 100644
+>>>>>>> --- a/board/ti/j721e/evm.c
+>>>>>>> +++ b/board/ti/j721e/evm.c
+>>>>>>> @@ -543,7 +543,8 @@ void spl_board_init(void)
+>>>>>>>      	}
+>>>>>>>      #ifdef CONFIG_ESM_K3
+>>>>>>> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+>>>>>>> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
+>>>>>>> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
+>>>>>>
+>>>>>>
+>>>>>> Could we align on one kind of check,  For J721E check is done against
+>>>>>> board-id, whereas for J7200 checking
+>>>>>
+>>>>> We should look at figuring out how to split this file in two.  One for
+>>>>> "generic J721E systems" and one for "TI EVMs", as I've mentioned in
+>>>>> other threads, so that it's easier for custom platforms to drop code
+>>>>> they don' require.
+>>>>>
+>>>>
+>>>> Yes that does make sense. Would it be okay if we solve that problem
+>>>> separately in a different patch series? We can move along with this current
+>>>> series for now (after making the required change in CONFIG/board-id for v2)
+>>>> since ESM support is important for these platforms.
+>>>
+>>> Well, I think part of the answer to your question is (and this is a more
+>>> general TI one too), what outstanding changes need to come in now to
+>>> make existing platforms functional for v2024.01 ? My first thought is
+>>> that this series would be taken to -next, if I took it now, which means
+>>> there's time before it would be in master, and so if it really makes the
+>>> re-org later easier, we could take it, but if not, can we re-org then do
+>>> this? But if we need this to deal with regressions, OK, yes, we can take
+>>> it like this now.
+>>>
+>>
+>> Maybe focusing on the re-org after having in the changes would help give
+>> more perspective on how we can split? Not sure just a thought... in that
+>> case I prefer taking this in and having a working error signaling module in
+>> rather than delaying it if that's okay.
+> 
+> OK, please rebase on top of whatever other series are needed (and note
+> so in the cover letter) and mark it as non-RFC, thanks.
+> 
 
-after
-~~~~~
-Retrieving file: /boot/overlay/rtc-ds3231.dtbo
+Thanks! I'll rebase and send the next version.
 
-Signed-off-by: John Clark <inindev@gmail.com>
----
-
- include/configs/starfive-visionfive2.h | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/include/configs/starfive-visionfive2.h b/include/configs/starfive-visionfive2.h
-index ff43113f24..29c74470c7 100644
---- a/include/configs/starfive-visionfive2.h
-+++ b/include/configs/starfive-visionfive2.h
-@@ -40,6 +40,7 @@
- 	"kernel_comp_addr_r=0x88000000\0" \
- 	"kernel_comp_size=0x4000000\0" \
- 	"fdt_addr_r=0x46000000\0" \
-+	"fdtoverlay_addr_r=0x45800000\0" \
- 	"scriptaddr=0x43900000\0" \
- 	"pxefile_addr_r=0x45900000\0" \
- 	"ramdisk_addr_r=0x46100000\0" \
 -- 
-2.42.0
-
+Thanking You
+Neha Malcom Francis
