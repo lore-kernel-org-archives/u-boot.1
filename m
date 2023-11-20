@@ -4,75 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 798BDC197A0
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 21:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8AA9C197A0
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 22:10:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D45C786A4B;
-	Mon, 20 Nov 2023 22:02:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 00CAA8755A;
+	Mon, 20 Nov 2023 23:10:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEXjPslk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZVdiMJhu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67BBA871FC; Mon, 20 Nov 2023 22:02:08 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC4708753D; Mon, 20 Nov 2023 23:10:18 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AEFC86308
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 22:02:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40A5E87579
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 23:10:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-507be298d2aso6276164e87.1
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 13:02:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700514126; x=1701118926; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hnX+PPhPED81a8n57PhMUXRr/5Z2PW4ZrFWe0A9QuOs=;
- b=zEXjPslkyahPSMcfDUJ8HcnaTWrdREE20fUB2797W5I3ZyfHHAZJBxxQQ+tRN1Gw42
- 1G9KImHhqRsA+by/sRSLTZNdzVQCfhviqi2Oq1Faiq3QPSv27QM+0a/Cs/LZUF0Yw9Zq
- QB53cEb6KAYsANl5jKqJL0z6zcNImOpTq5Q1vYbnprwqoQt1XDhY2kevC6faYViQy99e
- z/xJYWsV2zeLNuep3ypRE6Zjk48W7urvg6nR6QeXP0bTdXv/qhyfVnuGlevo0sbeiVcQ
- PelIB1ggY4yWn0nKzG5E27pEOcdUVWdkkNv/vWtnv2C25Fru3YSPnxSLl2VzIHgnVof7
- Pfig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700514126; x=1701118926;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hnX+PPhPED81a8n57PhMUXRr/5Z2PW4ZrFWe0A9QuOs=;
- b=TItYOm8QAopbpt4ykg7CKTm5jHPhQh4UsiTFeenXVErNZdmQvS4geixTRG4+AP3sbf
- ao4OPl35+YU4aD6KouyVLT4RN+jSRrySjc+ul6t23O6ZnnetHHnKtCAHeTYGKcFotixE
- QmRSX9EgctYLsYLBWO0123WnckiHPtUJo7NG3fGdU5wSZ+jcyd/cNLGYWdazmoSWWDXl
- ZA+31yKnKN7lVvZt7tIiuK85P2KaN3nh+VTnNbaKAZPocGjXujfQuKOpYPHYaRgk6ob7
- MTi2D4fRVgzz/tZq++LeMiC8j43/fj3YxIaVXTvj7ZgQ2gFLkeBUhHJL32iXilRB94SI
- kikw==
-X-Gm-Message-State: AOJu0Yzd+6OO6+k5TemnqMAovchIGkwujBQDe9HuOmtThMXF5egQ+rXB
- mlgBx8NJ5C6bLnhcenox4Q0PCqG8YJ/lBdDPrnoSDA==
-X-Google-Smtp-Source: AGHT+IHXS7QmUUGvauAkhxbWxoNjbq52zcjFdET9eC8dyJL2DxWucrQQLNWVCQ/cpcrPdVX7fMKMGwSJpdMqDekZlxs=
-X-Received: by 2002:ac2:4ed2:0:b0:507:9e51:a6c7 with SMTP id
- p18-20020ac24ed2000000b005079e51a6c7mr5742407lfr.58.1700514125497; Mon, 20
- Nov 2023 13:02:05 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AKMACv7045890;
+ Mon, 20 Nov 2023 16:10:12 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700518212;
+ bh=dsgVS3vmvMLIR/mbi2JZPDE5QFu4V2d6CkxxevyGyqk=;
+ h=From:To:CC:Subject:Date;
+ b=ZVdiMJhuDdjPBLXPKSd/YxHgOk9SJAoZ5zM3VWYJdyWckLSlnniDhiHWQvr8xGANJ
+ /H44CHoXrlnBf68+LdZTr6AdoOrq54yN6CGG/OmiTnWTUtRo41tLtmDaGjtiZ1nY08
+ H4c1sHfi8QCLPqFO+QT8z5j98AU7KlaK6Hta799E=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AKMACFl005938
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 20 Nov 2023 16:10:12 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
+ Nov 2023 16:10:11 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 20 Nov 2023 16:10:11 -0600
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AKMABJZ092803;
+ Mon, 20 Nov 2023 16:10:11 -0600
+From: Reid Tonking <reidt@ti.com>
+To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <p.yadav@ti.com>
+CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <reidt@ti.com>
+Subject: [PATCH] arm: mach-k3: J721e: Add xSPI boot mode
+Date: Mon, 20 Nov 2023 16:09:27 -0600
+Message-ID: <20231120220927.3611197-1-reidt@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231118210547.577026-1-sjg@chromium.org>
- <20231118210547.577026-8-sjg@chromium.org>
-In-Reply-To: <20231118210547.577026-8-sjg@chromium.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 20 Nov 2023 23:01:29 +0200
-Message-ID: <CAC_iWjKgDKb_S6+LySsK2AdzgLcSnSfEeBChTOO+4j8AdPuPLg@mail.gmail.com>
-Subject: Re: [PATCH v3 07/32] bootm: Simplify arguments for bootm_pre_load()
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Eddie James <eajames@linux.ibm.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,39 +76,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
-On Sat, 18 Nov 2023 at 23:06, Simon Glass <sjg@chromium.org> wrote:
->
-> Move the argument decoding to the caller, to avoid needing to pass the
-> command-line arguments.
->
-> Add a function comment while we are here.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
->
-> (no changes since v1)
+J7200 ROM supports booting from xSPI compliant flash. Detect if ROM
+booted from xSPI bootmode and map that to BOOT_DEVICE_SPI
 
-[...]
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Pratyush Yadav <p.yadav@ti.com>
+---
+ arch/arm/mach-k3/include/mach/j721e_spl.h | 3 ++-
+ arch/arm/mach-k3/j721e_init.c             | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
->
->         if (IS_ENABLED(CONFIG_CMD_BOOTM_PRE_LOAD))
-> @@ -785,7 +794,7 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
->                 ret = bootm_start();
->
->         if (!ret && (states & BOOTM_STATE_PRE_LOAD))
-> -               ret = bootm_pre_load(cmdtp, flag, argc, argv);
-> +               ret = bootm_pre_load(argv[0]);
+diff --git a/arch/arm/mach-k3/include/mach/j721e_spl.h b/arch/arm/mach-k3/include/mach/j721e_spl.h
+index ed3d7333bd..c51bc5ab8e 100644
+--- a/arch/arm/mach-k3/include/mach/j721e_spl.h
++++ b/arch/arm/mach-k3/include/mach/j721e_spl.h
+@@ -24,8 +24,9 @@
+ #define BOOT_DEVICE_UFS			0x13
+ #define BOOT_DEVIE_GPMC			0x14
+ #define BOOT_DEVICE_PCIE		0x15
+-#define BOOT_DEVICE_MMC2_2		0x16
++#define BOOT_DEVICE_XSPI		0x16
+ #define BOOT_DEVICE_RAM			0x17
++#define BOOT_DEVICE_MMC2_2		0xFF /* Invalid value */
+ 
+ /* Backup boot modes with MCU Only = 0 */
+ #define BACKUP_BOOT_DEVICE_RAM		0x0
+diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
+index 18814c39ec..7bd64107b2 100644
+--- a/arch/arm/mach-k3/j721e_init.c
++++ b/arch/arm/mach-k3/j721e_init.c
+@@ -340,7 +340,8 @@ static u32 __get_primary_bootmedia(u32 main_devstat, u32 wkup_devstat)
+ 	bootmode |= (main_devstat & MAIN_DEVSTAT_BOOT_MODE_B_MASK) <<
+ 			BOOT_MODE_B_SHIFT;
+ 
+-	if (bootmode == BOOT_DEVICE_OSPI || bootmode ==	BOOT_DEVICE_QSPI)
++	if (bootmode == BOOT_DEVICE_OSPI || bootmode ==	BOOT_DEVICE_QSPI ||
++	    bootmode == BOOT_DEVICE_XSPI)
+ 		bootmode = BOOT_DEVICE_SPI;
+ 
+ 	if (bootmode == BOOT_DEVICE_MMC2) {
+-- 
+2.34.1
 
-Is there a check for the validity of argv[0] before this call?
-
-Thanks
-/Ilias
->
->         if (!ret && (states & BOOTM_STATE_FINDOS))
->                 ret = bootm_find_os(cmdtp, flag, argc, argv);
-> --
-> 2.43.0.rc0.421.g78406f8d94-goog
->
