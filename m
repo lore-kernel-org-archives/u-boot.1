@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A972C2BB3F
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 20:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 798BDC197A0
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 21:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C689D86A4B;
-	Mon, 20 Nov 2023 21:59:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D45C786A4B;
+	Mon, 20 Nov 2023 22:02:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qroQbUmU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zEXjPslk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C36A887562; Mon, 20 Nov 2023 21:58:58 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 67BBA871FC; Mon, 20 Nov 2023 22:02:08 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5A6E87579
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 21:58:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AEFC86308
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 22:02:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a877e0f0d8so45655787b3.1
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 12:58:56 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507be298d2aso6276164e87.1
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 13:02:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700513935; x=1701118735; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IX/VNw2IqKrO/dcr0jNEs79Fyl5w3Rj4C7xwHvm3zZY=;
- b=qroQbUmUPsXm2qLehqEM9yRqKZhcbIRytPlDp9fGZXq90dXZcU2BjAL0gQw62tTChu
- +3rPSxwFW23TRPvy/xZo5W9LgKsmxgnrNt5JzHM+dmXl97KXaG14TxnYrv1G/RE94Hp+
- Y3nI59wqgkVpCA2UrwLK87+u4eCZa6LsA9E4I=
+ d=linaro.org; s=google; t=1700514126; x=1701118926; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hnX+PPhPED81a8n57PhMUXRr/5Z2PW4ZrFWe0A9QuOs=;
+ b=zEXjPslkyahPSMcfDUJ8HcnaTWrdREE20fUB2797W5I3ZyfHHAZJBxxQQ+tRN1Gw42
+ 1G9KImHhqRsA+by/sRSLTZNdzVQCfhviqi2Oq1Faiq3QPSv27QM+0a/Cs/LZUF0Yw9Zq
+ QB53cEb6KAYsANl5jKqJL0z6zcNImOpTq5Q1vYbnprwqoQt1XDhY2kevC6faYViQy99e
+ z/xJYWsV2zeLNuep3ypRE6Zjk48W7urvg6nR6QeXP0bTdXv/qhyfVnuGlevo0sbeiVcQ
+ PelIB1ggY4yWn0nKzG5E27pEOcdUVWdkkNv/vWtnv2C25Fru3YSPnxSLl2VzIHgnVof7
+ Pfig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700513935; x=1701118735;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IX/VNw2IqKrO/dcr0jNEs79Fyl5w3Rj4C7xwHvm3zZY=;
- b=mYlBgYFoso765+JoY1TJQDAaEnBSFO+shGRtoOvsGmnn0bL9zj5vLdhTr0/GgsYgdw
- DIdL4q3G8eMdwEW7PfAHN2o7WHwC49amyqdvxpsT77g9qwqgiPXljQxWgozqZQYMrGKL
- 8T6/4Bqaprc4VOsBKFtroAeMoEhRf7nyG6GIiFoPgUhg0qLsGlwQL/heU4U/UCELRbph
- NWzHGuJV8hwBHB8+eTS2AYC8t5cFnNpPSxuJbq9CNAFCCehIp4MPFGNw7N1wBvNEv6DJ
- hx+s2i7aSiH86nCj7vhJq+BFCjVg5Ie/HaFeuIVXgXFlVopakTiELNtKAxeFdqnsqW6b
- dcPA==
-X-Gm-Message-State: AOJu0Yxmxb+eu8cvNBZVWuAl9clLQaUBMkttGzy0zWhIgViSWNdmQ0Od
- soO7GqB26RVhi2/2FNxSLjqp1w==
-X-Google-Smtp-Source: AGHT+IE4tdcGH75L58mFIH8npEHtuTObDfVhNcaum+DEPugDM174KkttMfhMKK0GfuA+aNq9o2mh3w==
-X-Received: by 2002:a81:f802:0:b0:5ca:9794:34d4 with SMTP id
- z2-20020a81f802000000b005ca979434d4mr658806ywm.19.1700513935437; 
- Mon, 20 Nov 2023 12:58:55 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6bdd-4a9c-acaa-1ce1.res6.spectrum.com.
- [2603:6081:7b00:6400:6bdd:4a9c:acaa:1ce1])
- by smtp.gmail.com with ESMTPSA id
- h71-20020a816c4a000000b0059beb468cb4sm2592017ywc.1.2023.11.20.12.58.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 12:58:55 -0800 (PST)
-Date: Mon, 20 Nov 2023 15:58:53 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Nikhil M Jain <n-jain1@ti.com>
-Subject: Re: [PATCH 1/5] cyclic: Disable in SPL builds
-Message-ID: <20231120205853.GK2513409@bill-the-cat>
-References: <20231119144700.631322-1-sjg@chromium.org>
- <20231119144700.631322-2-sjg@chromium.org>
- <20231119155909.GC2513409@bill-the-cat>
- <CAPnjgZ0LDXcstrAgx8nb53Cw1=1Y8Zait-e884A5i8H5CY6hnQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1700514126; x=1701118926;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hnX+PPhPED81a8n57PhMUXRr/5Z2PW4ZrFWe0A9QuOs=;
+ b=TItYOm8QAopbpt4ykg7CKTm5jHPhQh4UsiTFeenXVErNZdmQvS4geixTRG4+AP3sbf
+ ao4OPl35+YU4aD6KouyVLT4RN+jSRrySjc+ul6t23O6ZnnetHHnKtCAHeTYGKcFotixE
+ QmRSX9EgctYLsYLBWO0123WnckiHPtUJo7NG3fGdU5wSZ+jcyd/cNLGYWdazmoSWWDXl
+ ZA+31yKnKN7lVvZt7tIiuK85P2KaN3nh+VTnNbaKAZPocGjXujfQuKOpYPHYaRgk6ob7
+ MTi2D4fRVgzz/tZq++LeMiC8j43/fj3YxIaVXTvj7ZgQ2gFLkeBUhHJL32iXilRB94SI
+ kikw==
+X-Gm-Message-State: AOJu0Yzd+6OO6+k5TemnqMAovchIGkwujBQDe9HuOmtThMXF5egQ+rXB
+ mlgBx8NJ5C6bLnhcenox4Q0PCqG8YJ/lBdDPrnoSDA==
+X-Google-Smtp-Source: AGHT+IHXS7QmUUGvauAkhxbWxoNjbq52zcjFdET9eC8dyJL2DxWucrQQLNWVCQ/cpcrPdVX7fMKMGwSJpdMqDekZlxs=
+X-Received: by 2002:ac2:4ed2:0:b0:507:9e51:a6c7 with SMTP id
+ p18-20020ac24ed2000000b005079e51a6c7mr5742407lfr.58.1700514125497; Mon, 20
+ Nov 2023 13:02:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CfHC62yX1rrFbTTH"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0LDXcstrAgx8nb53Cw1=1Y8Zait-e884A5i8H5CY6hnQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231118210547.577026-1-sjg@chromium.org>
+ <20231118210547.577026-8-sjg@chromium.org>
+In-Reply-To: <20231118210547.577026-8-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 20 Nov 2023 23:01:29 +0200
+Message-ID: <CAC_iWjKgDKb_S6+LySsK2AdzgLcSnSfEeBChTOO+4j8AdPuPLg@mail.gmail.com>
+Subject: Re: [PATCH v3 07/32] bootm: Simplify arguments for bootm_pre_load()
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Eddie James <eajames@linux.ibm.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,66 +89,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---CfHC62yX1rrFbTTH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, 18 Nov 2023 at 23:06, Simon Glass <sjg@chromium.org> wrote:
+>
+> Move the argument decoding to the caller, to avoid needing to pass the
+> command-line arguments.
+>
+> Add a function comment while we are here.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+>
+> (no changes since v1)
 
-On Sun, Nov 19, 2023 at 11:23:41AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 19 Nov 2023 at 08:59, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Nov 19, 2023 at 07:46:39AM -0700, Simon Glass wrote:
-[snip]
-> > > diff --git a/include/cyclic.h b/include/cyclic.h
-> > > index 44ad3cb6b803..d3b368dd90df 100644
-> > > --- a/include/cyclic.h
-> > > +++ b/include/cyclic.h
-> > > @@ -11,6 +11,7 @@
-> > >  #ifndef __cyclic_h
-> > >  #define __cyclic_h
-> > >
-> > > +#include <linux/kconfig.h>
-> > >  #include <linux/list.h>
-> > >  #include <asm/types.h>
-> >
-> > Is this really needed? What's blowing up since we should have -include
-> > .../linux/kconfig.h cover this.
->=20
-> It is the CONFIG_IS_ENABLED() when building. We have kconfig.h in a
-> few other places (used by tools) too.
->=20
-> In file included from include/watchdog.h:13,
->                  from tools/../lib/sha1.c:25,
->                  from tools/generated/lib/sha1.c:1:
-> include/cyclic.h:47:22: error: missing binary operator before token "("
->    47 | #if CONFIG_IS_ENABLED(CYCLIC)
->       |                      ^
+[...]
 
-OK, for this we need to cleanup lib/sha*.c include directives. I'm
-tackling that now.
+>
+>         if (IS_ENABLED(CONFIG_CMD_BOOTM_PRE_LOAD))
+> @@ -785,7 +794,7 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+>                 ret = bootm_start();
+>
+>         if (!ret && (states & BOOTM_STATE_PRE_LOAD))
+> -               ret = bootm_pre_load(cmdtp, flag, argc, argv);
+> +               ret = bootm_pre_load(argv[0]);
 
---=20
-Tom
+Is there a check for the validity of argv[0] before this call?
 
---CfHC62yX1rrFbTTH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVbyIoACgkQFHw5/5Y0
-tyzXRgv/aU4WzL2uW860Gy4pldpjpZKwrDECbkHsNOx4cFoz4MmTXTVjArJnVXwc
-ic5wrO1nGehRBwS636XFxHHuHsIrgnosWmkBtLIx0QOOtNBuWIMW8BqxELlVMW2q
-jdTGC/Y5ThDbmkyGqGZcuIEtmKcZAbdD3yUNsG7S6MECkrTqD/a1RjGoVMZm1rk6
-AZWQHiXytvEeUea+UYYQ3FlX9aiQUaO0cRPsASwZiy88eLEtYt5EXkO2/bNTU7/S
-eBk6NCj0il/Tiwylx7dRLPU43ASHxsr2OG8BhTMASwVULD/M1a6X39ZuVhHP+YlX
-3XaBpU0ClDt30p7mYlXzHpza7rogzjS1KInhwTwwCQQTTsTbcCZ3aptAb/gQo90J
-MtND/m3Wixz7ekfxiBPWKb4Rk5seQXdA6dNbamZWR9JCpHLhokJ8Dyss5wHNR2Lb
-ZPjyzAToxVVyU9+gbTRC+onujySXIknXUiOYqQkpo1IBt7QDUTPaxCtwsqoAyTfd
-RICp8qqt
-=22DD
------END PGP SIGNATURE-----
-
---CfHC62yX1rrFbTTH--
+Thanks
+/Ilias
+>
+>         if (!ret && (states & BOOTM_STATE_FINDOS))
+>                 ret = bootm_find_os(cmdtp, flag, argc, argv);
+> --
+> 2.43.0.rc0.421.g78406f8d94-goog
+>
