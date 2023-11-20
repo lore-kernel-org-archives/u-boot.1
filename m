@@ -4,59 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B8EC197A0
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 10:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCFFC54E76
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 11:28:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B77486F6F;
-	Mon, 20 Nov 2023 11:45:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
+	by phobos.denx.de (Postfix) with ESMTP id 96F84874AC;
+	Mon, 20 Nov 2023 12:28:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="pRPvttM6";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="W6z0lExw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B11F86C72; Mon, 20 Nov 2023 11:45:42 +0100 (CET)
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2480D874BA; Mon, 20 Nov 2023 12:28:37 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6797486F6F
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 11:45:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=marcan.st
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
-Received: from [127.0.0.1] (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: marcan@marcan.st)
- by mail.marcansoft.com (Postfix) with ESMTPSA id 09D5A447AA;
- Mon, 20 Nov 2023 10:45:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
- t=1700477138; bh=qmP3hWL13gso9o5mqGUPC12XwCGGaP/x+1OOolYYNvU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=pRPvttM6SrKu4eMQxtbsP+RRgDzkTgrnSi8vryaMwJNnj4MXyagn2ZE8gHYBCEhuy
- m7pLRF3P1VdL/AsnnFA8kfnqDROpHJDI8rqrX9ohjUikfrddKehEICZC4dvTmd/bIx
- Z3U0Z61JTmyRc+ZsYwKu/frzpY2u6yJwy3PuEMNj+L7B2F9Z2WUu202j2aiZ1vvbMC
- 6ePIbo6nolURlMq0TnFTShxUrMbqca7W7Q/Tg3p2SNQul3aKI5L41NDRen7J/cfzSA
- r6hLjMJ9kn5Cq1FPp2p5rnSYUthfhv5IcLkcC4PXfyVS5CcS0ZCXqXH6dEsjQ9e7V1
- ZoYWqPt9NJMQw==
-Message-ID: <cdb3df49-1ba3-4b87-bc2e-57c71a7ce725@marcan.st>
-Date: Mon, 20 Nov 2023 19:45:33 +0900
+ by phobos.denx.de (Postfix) with ESMTPS id 680828717E
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 12:28:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux.intel.com
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=andriy.shevchenko@linux.intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1700479714; x=1732015714;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=BXBjDQdQLajeHvKCqT0YuRqAGlOfnGE2mmOwbEqQ01I=;
+ b=W6z0lExw0lkXUaySfX/F5cvAUuJYUaOZrFJ7HZykJBroC3cd2F/UJsZK
+ xgYiVZc36ncV/fuMu3PsWSUgUnwWtOUTirMOa3GlGoDnEuk3+q4eVSLVB
+ ocsDOCBRwKfcoE599H+hyisfsS+9QcYOU52fh4vSdvFM7ZSFEW3Swduj1
+ wvJOsB+Ci2gRjVIVmDcW7EeQkRzXNUdDr4CNypfgDAnAplwYqGcy9hqZD
+ gwStT/PdnLwRFlKHOsI04hWPaj91XZokTUFgnpeg6m6FzBqjCnWLPysBF
+ Sh/DhzsQPqHyYl+btoKBUMfpkV3iU8M8etKRylVBUytAHt4MeErTrSQob w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10899"; a="458097578"
+X-IronPort-AV: E=Sophos;i="6.04,213,1695711600"; d="scan'208";a="458097578"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Nov 2023 03:28:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10899"; a="910078647"
+X-IronPort-AV: E=Sophos;i="6.04,213,1695711600"; d="scan'208";a="910078647"
+Received: from smile.fi.intel.com ([10.237.72.54])
+ by fmsmga001.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Nov 2023 03:28:16 -0800
+Received: from andy by smile.fi.intel.com with local (Exim 4.97)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1r52Rp-0000000FXD4-1nGy; Mon, 20 Nov 2023 13:28:13 +0200
+Date: Mon, 20 Nov 2023 13:28:13 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 2/2] cmd: acpi: fix acpi list command
+Message-ID: <ZVtCzUlhBv59DdLY@smile.fi.intel.com>
+References: <20231118225248.105229-1-heinrich.schuchardt@canonical.com>
+ <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] USB fixes: xHCI error handling
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Shantur Rathore <i@shantur.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de, asahi@lists.linux.dev
-References: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
- <fe844c63-0c44-469c-a4e0-f0e1f2ac63fc@denx.de>
- <CAHc5_t2WFZH65MJENGvC6u21ETcRn47ceQd8jrHV9DVmmM10Vw@mail.gmail.com>
- <3b662808-e047-4023-a00c-1b6728bd5c86@denx.de>
-From: Hector Martin <marcan@marcan.st>
-In-Reply-To: <3b662808-e047-4023-a00c-1b6728bd5c86@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231118225248.105229-3-heinrich.schuchardt@canonical.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,36 +81,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 2023/11/20 11:09, Marek Vasut wrote:
-> On 11/20/23 00:17, Shantur Rathore wrote:
->> On Sun, Nov 19, 2023 at 8:08 PM Marek Vasut <marex@denx.de> wrote:
->>>
->>> On 10/27/23 01:16, Hector Martin wrote:
->>>> This series is the first of a few bundles of USB fixes we have been
->>>> carrying downstream on the Asahi U-Boot branch for a few months.
->>>>
->>>> Most importantly, this related set of patches makes xHCI error/stall
->>>> recovery more robust (or work at all in some cases). There are also a
->>>> couple patches fixing other xHCI bugs and adding better debug logs.
->>>>
->>>> I believe this should fix this Fedora bug too:
->>>>
->>>> https://bugzilla.redhat.com/show_bug.cgi?id=2244305
->>>
->>> Was there ever a V2 of these patches I might've missed ?
->>
->> Is it this one?
->> https://patchwork.ozlabs.org/project/uboot/list/?series=379807
+On Sat, Nov 18, 2023 at 11:52:48PM +0100, Heinrich Schuchardt wrote:
+> ACPI tables may comprise either RSDT, XSDT, or both. The current code fails
+> to check the presence of the RSDT table before accessing it. This leads to
+> an exception if the RSDT table is not provided.
 > 
-> I think so, thanks.
+> The XSDT table takes precedence over the RSDT table.
 > 
-> And uh, my question therefore it, is there a V3 which addresses the 3/8 
-> and 8/8 comment ?
+> The return values of list_rsdt() and list_rsdp() are always zero and not
+> checked. Remove the return values.
+> 
+> Addresses in the XSDT table are 64-bit. Adjust the output accordingly.
+> 
+> As the RSDT table has to be ignored if the XSDT command is present there is
+> no need to compare the tables in a display command. Anyway the
+> specification does not require that the sequence of addresses in the RSDT
+> and XSDT table are the same.
+> 
+> The FACS table header does not provide revision information. Correct the
+> description of dump_hdr().
+> 
+> Adjust the ACPI test to match the changed output format of the 'acpi list'
+> command.
 
-Not yet, no. Sorry, I probably won't have time to work on this in a
-while, currently busy with other stuff.
+(Side question: Do you use --histogram when preparing patches? if no, try it.)
+
+...
 
 
-- Hector
+> +		if (rsdp->xsdt_address) {
+> +			if (!xsdt->entry[i])
+> +				break;
+> +			hdr = map_sysmem(xsdt->entry[i], 0);
+> +		} else {
+> +			if (!rsdt->entry[i])
+> +				break;
+> +			hdr = map_sysmem(rsdt->entry[i], 0);
+> +		}
+
+With a help of temporary variable this can be rewritten as
+
+		tmp = 0; // or NULL, I haven't checked the type.
+
+		if (rsdp->xsdt_address)
+			tmp = xsdt->entry[i];
+		else
+			tmp = rsdt->entry[i];
+
+		if (!tmp)
+			break;
+
+		hdr = map_sysmem(tmp, 0);
+
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
