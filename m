@@ -4,78 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88254C54FB9
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 00:18:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E981C072A2
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 00:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0B1B8753D;
-	Mon, 20 Nov 2023 01:18:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A17F387558;
+	Mon, 20 Nov 2023 01:21:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=holesch.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Un/iCSzZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7C038753F; Mon, 20 Nov 2023 01:18:26 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2396087525; Mon, 20 Nov 2023 01:21:23 +0100 (CET)
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0447C8751E
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 01:18:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81B418756C
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 01:21:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-27fe16e8e02so622848a91.0
- for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 16:18:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700439502; x=1701044302; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P6YrD268+S507Otjrl0qb01gq1BgMZnP4JcwXdUWELU=;
- b=Un/iCSzZLvB2OJlmwdkvE0sVxZxtvb24l+AvpEa5dwN8s4t+v312KgigOaFRCFcgmp
- ijsN+vPh3IgrlEXBO3+1hVxmvuRuVtZYfXbW44jvPLmT7hnrNLrMtcJTAWnJj6o63XFH
- 90XKhi0D5RJ2WSaaSwJVy64BuXobbDbQnAJLG5I3MCdMCz6TfkSDlrfGi4VYcEIjjHke
- vX1/JeSNBrpPp66rUPfGHdC0aqfWNExGco5tPVMY92kK+96GCbQSWs2S7XUByiVseEKN
- KcQ8mXPu9byLpS4idPiUNOz5u/ZznSMeBmP6/Ll7QcddiZmBxyJc4f/i96QvcyiYAnZS
- /vVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700439502; x=1701044302;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P6YrD268+S507Otjrl0qb01gq1BgMZnP4JcwXdUWELU=;
- b=hvgoXdy4JDvXBVgYLSTDAa4p0Qpt8TJJQ/Ryi0XVkuMYCzL4mZva/ptcWJEsOyNNTE
- q6e3TKj3oiZv/mN/aZ2VxwO7Q78HJ+f1vEvlQ2rBbeqiYMhjvvC0f8OlGAjSPVN1xWHD
- 3bKtBVSm+Gni/kSOWNSmwsdaysaqWXSSybEBd/CLSK8qC8Pm5jmgkr1X3IzW46ZNQWIo
- Mzwn/6xYNetg791KoCGJogXMja3ji48DClSH4TQBxZRxLA+OqG3fHIsjqF1pGCfuu54x
- EHjHWWJQNv9llGl1sM+ykxeFOGgQXct5eBCHADLPg5b7jYC3Yd43GEQQsCca+JU518C8
- 4JcA==
-X-Gm-Message-State: AOJu0Yz0PAuMRqnVYKbg2BY4GQTjv2Gf474m5TLOSbT/d5gh1quS+y9k
- mFuueUNnMcUhJcPUkjHPA4pl7dFw1mk2pelG0aM=
-X-Google-Smtp-Source: AGHT+IHCvxtrUa/ULKOEcObYkqslsqkBNy5wXKsQoKlDKVlIN7HJKd2CVHFyA1FflulhmzkVlX0781mv93IX7i6/qcQ=
-X-Received: by 2002:a17:90b:115:b0:280:259:435d with SMTP id
- p21-20020a17090b011500b002800259435dmr6190185pjz.4.1700439502282; Sun, 19 Nov
- 2023 16:18:22 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=holesch.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=simon@holesch.de
+Received: from localhost ([80.209.221.177]) by mrelayeu.kundenserver.de
+ (mreue106 [212.227.15.183]) with ESMTPSA (Nemesis) id
+ 1Mq2Sa-1rhlHg2sKI-00n93g; Mon, 20 Nov 2023 01:21:02 +0100
+From: Simon Holesch <simon@holesch.de>
+To: Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Marek Vasut <marex@denx.de>
+Cc: Simon Holesch <simon@holesch.de>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 1/2] usb: ci: Fix gadget reinit
+Date: Mon, 20 Nov 2023 01:08:34 +0100
+Message-ID: <20231120002024.32865-1-simon@holesch.de>
+X-Mailer: git-send-email 2.42.1
 MIME-Version: 1.0
-References: <20231107221617.470-1-egyszeregy@freemail.hu>
- <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
- <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
- <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
- <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
-In-Reply-To: <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 19 Nov 2023 21:18:09 -0300
-Message-ID: <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
-To: =?UTF-8?B?U3rFkWtlIEvDoWxtw6FuIEJlbmphbWlu?= <egyszeregy@freemail.hu>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "otavio@ossystems.com.br" <otavio@ossystems.com.br>,
- "sbabic@denx.de" <sbabic@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:5yafAO9ryahOvF2mRe3BOdUBXNoo7/S0gAD6sAc2HlJkbacXnAe
+ bs/ZkwC3RSI6Pijz7WezF9IMXxr82rlJEYrHCxuj4HizeZ+geFCInAynjDM88I4BmB9KMj2
+ zR5W0XsRBp/7ZjcHLX6wqYdCaC9Dqb8nid/gqYSpWLZLRPiADW+XNx9SEkVJ89L6hUhTAi+
+ q0kT4WrlfYBy+6jmQN9bg==
+UI-OutboundReport: notjunk:1;M01:P0:8sDGuqunn4I=;ze/5gF5sokfTDlWxeQ9I3B/KDak
+ SdSPkbDF/U73NmvhkwBqSO99rcgz4nKDp8oEvKC0/FYDeZvpplVesulqDrEQnt83Y4BIiWIPp
+ j09pn0pYhQPLb0SEjngRf3WBaGhozr66y+e6WDH2UucLxUWAfr00E5z44OedkJ5P1LAmEUF7p
+ nSnAvmigv/mDv3CAd9pVbN+XGsM7scroJaHdntOwG/NYpUI87UijHzLXEJlDZ8ge4y+vRqxQn
+ 1TJ4S7DzMbpenG4QxY5dKSKO26Z8NdsWfyRy40EdHq+GJLRPCfWQBmT8JHM3biVCi1RVxakmu
+ RSNEZS/aMe6gfI+1bgTwIJfJ2w7PAKNLoRz23IpyetKv5LN30pZxLsiosP3bvL/lIgfRVkKI3
+ DblOnNzyHCwrxvDSe+LRva/IaCm8GGCFPnE2XexRgkcvEVr8xBvJOCfFCogdozDRN7b2q28NB
+ KtoSh9Cofln8WE+NMGQCLlgRL248xiwlPKRjslmU0eTT9CCiK/6Tnv/F9FTEZtrwsB+/lMXkm
+ bbNZMUCp2VWMyODwHVO8HX0RFzflG/vinndanTYQt+YI73idRVQGcQmDU4kABCkJLcBaadnqR
+ 1MbUlwvN9xNniLH7tgdEbAvJ0Yom06z/1GpHoyoBnkz9qDfHQW9AxsWri7ctLiVODzoUO5N+A
+ Uh+AmKrrV2ZzaHdBDETyuaZQrp0IZECfiMFAF+XNV5OUoS8BROn2UQ4J/71hHLmFjr62bgDQG
+ q17KXkCbrVLYTtO3oznsyKafE9ajmnMwQCrz4UF1nSWy/dz0z7wSU0NaaZCAeSE9z63BIPHr1
+ yiAKAIFNwiSJRteCgaqu8TUO80ppvlwUSYBxCBlWcXHiNVZbNaetypmwx2qJGsTZg13umB6ir
+ OnsSVaU2nDPmVkw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,12 +70,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Nov 19, 2023 at 8:47=E2=80=AFPM Sz=C5=91ke K=C3=A1lm=C3=A1n Benjami=
-n
-<egyszeregy@freemail.hu> wrote:
->
-> It will warn, if warning levels is set correctly. I will do not remove it=
-.
+The ChipIdea device controller wasn't properly cleaned up when disabled.
+So enabling it again left it in a broken state. The problem occurred for
+example when the host unbinds the driver and binds it again.
 
-How can it happen if U-Boot uses
-warning-1 :=3D -Wextra -Wunused -Wno-unused-parameter ?
+During the first setup, when the out request is queued, the endpoint is
+primed (`epprime`). If the endpoint is then disabled, it stayed primed
+with the initial buffer. So after the endpoint is re-enabled, the device
+controller and device driver were out of sync: the new out request was
+in the driver queue head, yet not submitted, but the "complete" function
+was still called, since the endpoint was primed with the old buffer.
+
+With the fastboot function this error led to the (rather confusing)
+error message "buffer overflow".
+
+Fixed by clearing the primed buffers with the `epflush` (`ENDPTFLUSH`)
+register.
+
+Signed-off-by: Simon Holesch <simon@holesch.de>
+Reviewed-by: Marek Vasut <marex@denx.de>
+---
+
+Changes in v2:
+- use wait_for_bit_le32(), clrbits_le32
+
+I didn't use setbits_le32(), because the epflush register ignores 0 bits.
+
+Thanks for the review!
+
+ drivers/usb/gadget/ci_udc.c | 38 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
+diff --git a/drivers/usb/gadget/ci_udc.c b/drivers/usb/gadget/ci_udc.c
+index 2bfacfe59f..750d471487 100644
+--- a/drivers/usb/gadget/ci_udc.c
++++ b/drivers/usb/gadget/ci_udc.c
+@@ -13,6 +13,7 @@
+ #include <cpu_func.h>
+ #include <net.h>
+ #include <malloc.h>
++#include <wait_bit.h>
+ #include <asm/byteorder.h>
+ #include <asm/cache.h>
+ #include <linux/delay.h>
+@@ -354,12 +355,49 @@ static int ci_ep_enable(struct usb_ep *ep,
+ 	return 0;
+ }
+ 
++static int ep_disable(int num, int in)
++{
++	struct ci_udc *udc = (struct ci_udc *)controller.ctrl->hcor;
++	unsigned int ep_bit, enable_bit;
++	int err;
++
++	if (in) {
++		ep_bit = EPT_TX(num);
++		enable_bit = CTRL_TXE;
++	} else {
++		ep_bit = EPT_RX(num);
++		enable_bit = CTRL_RXE;
++	}
++
++	/* clear primed buffers */
++	do {
++		writel(ep_bit, &udc->epflush);
++		err = wait_for_bit_le32(&udc->epflush, ep_bit, false, 1000, false);
++		if (err)
++			return err;
++	} while (readl(&udc->epstat) & ep_bit);
++
++	/* clear enable bit */
++	clrbits_le32(&udc->epctrl[num], enable_bit);
++
++	return 0;
++}
++
+ static int ci_ep_disable(struct usb_ep *ep)
+ {
+ 	struct ci_ep *ci_ep = container_of(ep, struct ci_ep, ep);
++	int num, in, err;
++
++	num = ci_ep->desc->bEndpointAddress & USB_ENDPOINT_NUMBER_MASK;
++	in = (ci_ep->desc->bEndpointAddress & USB_DIR_IN) != 0;
++
++	err = ep_disable(num, in);
++	if (err)
++		return err;
+ 
+ 	ci_ep->desc = NULL;
+ 	ep->desc = NULL;
++	ci_ep->req_primed = false;
+ 	return 0;
+ }
+ 
+-- 
+2.42.1
+
