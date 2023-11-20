@@ -4,57 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25556C072A2
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 02:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB8CEC5ACB3
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 02:36:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EE9A87525;
-	Mon, 20 Nov 2023 03:09:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2568E86FB6;
+	Mon, 20 Nov 2023 03:36:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700446198;
-	bh=FKMQmFwpbVhLN6t1zUmQJtu3CJn8J6byTrmtRDECin8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bhnSKOZDPqaRgYZp3Kwq4vPHXOu4e40X6hnL0Ks8MFuFqxfa5TnShwyryu7uW3zCQ
-	 IVUNcv2TxMYNcA+ZvNEs2qD5Ru+/epIhy4XtSRjl20ye5DGSRg5igsxnwS6K/uv9Q5
-	 7wvfLgjPCeaYDRwmw10mBmtxsQQMUbgrmOOZXtfZDytNkeDeVf3xCcg51v+tdC1fjB
-	 8Kr587bAYOY38v3S6jyiyW4OWz68I44K7ZwTddFt8+0fGDLk9hU+N7i6tNhAvBMC44
-	 EETY/CkXBT9TCGMnxKPZrXISH4Zx2azVH4lIy+xqbjqCDNQ48W4VZxI09Ft3hGxVlE
-	 WjvVmwGiAbJsg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OezQ97C/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 36792874D9; Mon, 20 Nov 2023 03:36:23 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 291D886EFA;
- Mon, 20 Nov 2023 03:09:56 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700446196;
- bh=FKMQmFwpbVhLN6t1zUmQJtu3CJn8J6byTrmtRDECin8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=R/THLcvQSn0iF5vERo4UORN9s9C64bZOBmnWnvHK6X5ap8jqkAr+u2mWP3SWW2c34
- W3VMQigtXqyjzsBzYltRoEGpSWrshO54O80k1wKqoiATYlqgyYNJupvJRJgn9+9akY
- t3vfCfq+oVRBqHg0nETaO4uGQtPW+vsWezCM+bP4NwvOOFQ5JvxhvH3wLtUUeuNEMQ
- sd9LQv3GNIcwU48OzoJ2UHveaWRQP65XvlFtpMvywvCU0j3Wj6dVKbM/oHzQ7mBTN2
- t2sXXYFuxWTMFTTPRROGHVGk9NoQl9MNa2dAZbhepUo64wcIZmst1k8TfznLu05WF0
- zgLfj05+GYIPA==
-Message-ID: <3b662808-e047-4023-a00c-1b6728bd5c86@denx.de>
-Date: Mon, 20 Nov 2023 03:09:55 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 398DF86F6F
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 03:36:16 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=inindev@gmail.com
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-66d09b6d007so10800726d6.1
+ for <u-boot@lists.denx.de>; Sun, 19 Nov 2023 18:36:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700447775; x=1701052575; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yvZ9/bWaq3kEJR7ltu8Ht5f5dHO0iVAfaQeN6uBhnG4=;
+ b=OezQ97C/QO3h36bt6Z1TcViuRnPoY6VsUnySiV5O6Id0NZtSRR4sC9WTggDMI8/LqZ
+ Pf4VtocrcK5d/WyYBmoF32iwH3zCZQeAEwhOoHBQvHKgCMGBR+oig8Mxh+t1OLpToVui
+ BKXMKfC7sZKCw5ChlO8iFr42WvNA4geT07txLzszx6pbFr5bko2KdgXiUEpjFOtSexxJ
+ HTZwjCsVTVQWa24btcwdVKKDdVniUWHaACybo3WhVncz/kXBzwKXMCnDgAqDn2GFTOI5
+ pMcHpjQh64hITAg8xTh1XhpmP5Gmq0g4k22v99GArqn4fGmgn0A4FeqOIpYYP90omksm
+ OgjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700447775; x=1701052575;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yvZ9/bWaq3kEJR7ltu8Ht5f5dHO0iVAfaQeN6uBhnG4=;
+ b=VOumxfUfyjss25o60CYqyqTjDLnaf14pJNAmP5pbWfdTRUoAf7tNgOayyVLEg0NT9p
+ dAvvKgPmQI8rkZvcLXcXnEkbWz7TLaH5UWuaS5b2HsZZ7RekEKr3akn4zZYxoXtY3zqb
+ p7EvFs8PqOIgOP+GFs3DrBh+kqS+GCubsmggph2pc8q3Q7Hjgb4OSfweBDcbQe1NwTdj
+ FhAFiSXmHiKgUP9qV1OefhfqiWIyXVzQEwEo7bwbRQFlVkSMQWs+acGJMQTsKDN7JM6v
+ /+yJL9RTk+5/S/8lj5Z90NxhMSuoNtV0RE2rfFAzMwZ7hVTa7md3KXijXWB29IUQQEGJ
+ FsMw==
+X-Gm-Message-State: AOJu0YwU1ux6SaIguM9yPeW1v88a4Nj9950mamn63qKxsOIpJA9hKdlY
+ 4f9/QrgJwF0oVNCQdb8sKxI=
+X-Google-Smtp-Source: AGHT+IHodOUhvMKvQzDJdXm0oIKyK7qeFe4STI1LeUPv7XX0HVQ71V0ISmMy4Z1DRnNHPNE0CdVdcQ==
+X-Received: by 2002:a05:6214:20cc:b0:679:d40e:d699 with SMTP id
+ 12-20020a05621420cc00b00679d40ed699mr3698207qve.6.1700447774926; 
+ Sun, 19 Nov 2023 18:36:14 -0800 (PST)
+Received: from localhost.localdomain (cpe-107-15-246-199.nc.res.rr.com.
+ [107.15.246.199]) by smtp.gmail.com with ESMTPSA id
+ i19-20020a05620a0a1300b00767d4a3f4d9sm2349204qka.29.2023.11.19.18.36.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Nov 2023 18:36:14 -0800 (PST)
+From: John Clark <inindev@gmail.com>
+To: Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc: John Clark <inindev@gmail.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, u-boot@lists.denx.de
+Subject: [PATCH] starfive: visionfive2: add device tree overlay support
+Date: Mon, 20 Nov 2023 02:35:31 +0000
+Message-ID: <20231120023549.13902-1-inindev@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] USB fixes: xHCI error handling
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: Hector Martin <marcan@marcan.st>, Bin Meng <bmeng.cn@gmail.com>,
- Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de,
- asahi@lists.linux.dev
-References: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
- <fe844c63-0c44-469c-a4e0-f0e1f2ac63fc@denx.de>
- <CAHc5_t2WFZH65MJENGvC6u21ETcRn47ceQd8jrHV9DVmmM10Vw@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAHc5_t2WFZH65MJENGvC6u21ETcRn47ceQd8jrHV9DVmmM10Vw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,27 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/20/23 00:17, Shantur Rathore wrote:
-> On Sun, Nov 19, 2023 at 8:08 PM Marek Vasut <marex@denx.de> wrote:
->>
->> On 10/27/23 01:16, Hector Martin wrote:
->>> This series is the first of a few bundles of USB fixes we have been
->>> carrying downstream on the Asahi U-Boot branch for a few months.
->>>
->>> Most importantly, this related set of patches makes xHCI error/stall
->>> recovery more robust (or work at all in some cases). There are also a
->>> couple patches fixing other xHCI bugs and adding better debug logs.
->>>
->>> I believe this should fix this Fedora bug too:
->>>
->>> https://bugzilla.redhat.com/show_bug.cgi?id=2244305
->>
->> Was there ever a V2 of these patches I might've missed ?
-> 
-> Is it this one?
-> https://patchwork.ozlabs.org/project/uboot/list/?series=379807
+device tree overlay support requires fdtoverlay_addr_r to be set
 
-I think so, thanks.
+before
+~~~~~~
+Invalid fdtoverlay_addr_r for loading overlays
 
-And uh, my question therefore it, is there a V3 which addresses the 3/8 
-and 8/8 comment ?
+after
+~~~~~
+Retrieving file: /boot/overlay/rtc-ds3231.dtbo
+
+Signed-off-by: John Clark <inindev@gmail.com>
+---
+
+ include/configs/starfive-visionfive2.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/starfive-visionfive2.h b/include/configs/starfive-visionfive2.h
+index ff43113f24..29c74470c7 100644
+--- a/include/configs/starfive-visionfive2.h
++++ b/include/configs/starfive-visionfive2.h
+@@ -40,6 +40,7 @@
+ 	"kernel_comp_addr_r=0x88000000\0" \
+ 	"kernel_comp_size=0x4000000\0" \
+ 	"fdt_addr_r=0x46000000\0" \
++	"fdtoverlay_addr_r=0x45800000\0" \
+ 	"scriptaddr=0x43900000\0" \
+ 	"pxefile_addr_r=0x45900000\0" \
+ 	"ramdisk_addr_r=0x46100000\0" \
+-- 
+2.42.0
+
