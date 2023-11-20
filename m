@@ -4,62 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8AA9C197A0
-	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 22:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE03C2BB3F
+	for <u-boot@archiver.kernel.org>; Mon, 20 Nov 2023 22:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00CAA8755A;
-	Mon, 20 Nov 2023 23:10:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AAF78758F;
+	Mon, 20 Nov 2023 23:33:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZVdiMJhu";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lPG+ywDO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC4708753D; Mon, 20 Nov 2023 23:10:18 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1E8AA87585; Mon, 20 Nov 2023 23:33:53 +0100 (CET)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40A5E87579
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 23:10:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FA9987250
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 23:33:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AKMACv7045890;
- Mon, 20 Nov 2023 16:10:12 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700518212;
- bh=dsgVS3vmvMLIR/mbi2JZPDE5QFu4V2d6CkxxevyGyqk=;
- h=From:To:CC:Subject:Date;
- b=ZVdiMJhuDdjPBLXPKSd/YxHgOk9SJAoZ5zM3VWYJdyWckLSlnniDhiHWQvr8xGANJ
- /H44CHoXrlnBf68+LdZTr6AdoOrq54yN6CGG/OmiTnWTUtRo41tLtmDaGjtiZ1nY08
- H4c1sHfi8QCLPqFO+QT8z5j98AU7KlaK6Hta799E=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AKMACFl005938
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 20 Nov 2023 16:10:12 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 20
- Nov 2023 16:10:11 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 20 Nov 2023 16:10:11 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AKMABJZ092803;
- Mon, 20 Nov 2023 16:10:11 -0600
-From: Reid Tonking <reidt@ti.com>
-To: <trini@konsulko.com>, <nm@ti.com>, <vigneshr@ti.com>, <p.yadav@ti.com>
-CC: <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <reidt@ti.com>
-Subject: [PATCH] arm: mach-k3: J721e: Add xSPI boot mode
-Date: Mon, 20 Nov 2023 16:09:27 -0600
-Message-ID: <20231120220927.3611197-1-reidt@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 220CA3F280; 
+ Mon, 20 Nov 2023 22:33:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1700519630;
+ bh=zcufABWP/oe4aZPAtu8GaSAVXhQgNuhzwPxvvA8GLQs=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=lPG+ywDOlt/i3q7l5qpsHpCld7cj5l7UPMpKsQnT7gbz4i3fA/2r/YDW4moqSgPzX
+ 3l7QuHKNmuQnjF/Q/hbfKt9Rabqv2dEkcXRfj08qa7sOeIzh4fRr5IcDPbfjRn0zwL
+ dMc/eX9O+h/rxTu3pDbmUE+aHPvJX3rRVlyx7rendtTr6sTlAP03JasnbbSaRWWwGE
+ ZHO4YAeAF87TjGbxci8V17RSk0LkWpdaxVlR5UWRE6xMbPzeikzxnj46uOwbVVBrnJ
+ IJNVhYrt2j8Ts0/eO5yQuuHhDuyzyagmOlcIWgwBNOiPoUA/Yxe1Fp7BrD5OCf6xfT
+ 3Q+FdUg929dmw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: generated SMBIOS table below 4 GiB
+Date: Mon, 20 Nov 2023 23:25:58 +0100
+Message-Id: <20231120222558.32014-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,47 +70,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vignesh Raghavendra <vigneshr@ti.com>
+We currently use an outdated format 32-bit format for SMBIOS tables.
+So we must allocate SMBIOS tables below 4 GiB.
 
-J7200 ROM supports booting from xSPI compliant flash. Detect if ROM
-booted from xSPI bootmode and map that to BOOT_DEVICE_SPI
-
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-Signed-off-by: Pratyush Yadav <p.yadav@ti.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- arch/arm/mach-k3/include/mach/j721e_spl.h | 3 ++-
- arch/arm/mach-k3/j721e_init.c             | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ lib/efi_loader/efi_smbios.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/mach-k3/include/mach/j721e_spl.h b/arch/arm/mach-k3/include/mach/j721e_spl.h
-index ed3d7333bd..c51bc5ab8e 100644
---- a/arch/arm/mach-k3/include/mach/j721e_spl.h
-+++ b/arch/arm/mach-k3/include/mach/j721e_spl.h
-@@ -24,8 +24,9 @@
- #define BOOT_DEVICE_UFS			0x13
- #define BOOT_DEVIE_GPMC			0x14
- #define BOOT_DEVICE_PCIE		0x15
--#define BOOT_DEVICE_MMC2_2		0x16
-+#define BOOT_DEVICE_XSPI		0x16
- #define BOOT_DEVICE_RAM			0x17
-+#define BOOT_DEVICE_MMC2_2		0xFF /* Invalid value */
+diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
+index 48446f654d..0fbf51b98d 100644
+--- a/lib/efi_loader/efi_smbios.c
++++ b/lib/efi_loader/efi_smbios.c
+@@ -49,25 +49,27 @@ efi_status_t efi_smbios_register(void)
  
- /* Backup boot modes with MCU Only = 0 */
- #define BACKUP_BOOT_DEVICE_RAM		0x0
-diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
-index 18814c39ec..7bd64107b2 100644
---- a/arch/arm/mach-k3/j721e_init.c
-+++ b/arch/arm/mach-k3/j721e_init.c
-@@ -340,7 +340,8 @@ static u32 __get_primary_bootmedia(u32 main_devstat, u32 wkup_devstat)
- 	bootmode |= (main_devstat & MAIN_DEVSTAT_BOOT_MODE_B_MASK) <<
- 			BOOT_MODE_B_SHIFT;
+ static int install_smbios_table(void)
+ {
+-	ulong addr;
+-	void *buf;
++	u64 addr;
++	efi_status_t ret;
  
--	if (bootmode == BOOT_DEVICE_OSPI || bootmode ==	BOOT_DEVICE_QSPI)
-+	if (bootmode == BOOT_DEVICE_OSPI || bootmode ==	BOOT_DEVICE_QSPI ||
-+	    bootmode == BOOT_DEVICE_XSPI)
- 		bootmode = BOOT_DEVICE_SPI;
+ 	if (!IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE) || IS_ENABLED(CONFIG_X86))
+ 		return 0;
  
- 	if (bootmode == BOOT_DEVICE_MMC2) {
+-	/* Align the table to a 4KB boundary to keep EFI happy */
+-	buf = memalign(SZ_4K, TABLE_SIZE);
+-	if (!buf)
++	addr = SZ_4G;
++	ret = efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS,
++				 EFI_RUNTIME_SERVICES_DATA,
++				 efi_size_in_pages(TABLE_SIZE), &addr);
++	if (ret != EFI_SUCCESS)
+ 		return log_msg_ret("mem", -ENOMEM);
+ 
+-	addr = map_to_sysmem(buf);
++	addr = map_to_sysmem((void *)(uintptr_t)addr);
+ 	if (!write_smbios_table(addr)) {
+ 		log_err("Failed to write SMBIOS table\n");
+ 		return log_msg_ret("smbios", -EINVAL);
+ 	}
+ 
+ 	/* Make a note of where we put it */
+-	log_debug("SMBIOS tables written to %lx\n", addr);
++	log_debug("SMBIOS tables written to %llx\n", addr);
+ 	gd->arch.smbios_start = addr;
+ 
+ 	return 0;
 -- 
-2.34.1
+2.40.1
 
