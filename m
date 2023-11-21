@@ -4,96 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75736C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C27C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A88FE87582;
-	Tue, 21 Nov 2023 20:30:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C70CF875E5;
+	Tue, 21 Nov 2023 20:31:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oqewcRQU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LK4Yvrgr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0B6C87582; Tue, 21 Nov 2023 20:30:40 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E700586BFA; Tue, 21 Nov 2023 20:31:39 +0100 (CET)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B018D86BFA
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:30:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E3EF487616
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:31:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 13A4A40614
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:30:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700595038;
- bh=bvD4BeVz9+LtBwbOT8WzQtlpbiKpIX2h1DtaJdOTHYo=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=oqewcRQUwtt3vPEWMnsNj+qjsXL+n67btZeSi7AEcTqyZPsi8oEYzxzbw9ekgaM8N
- xPWcd87E/PiEK3NOeFi8AJKNIelhHD1LZvQlNsRrKBzePDn0fQuE/XCf3YLYumnw6M
- 1JePxduYklovU4uJ0RGcfhIvLc32jvJELTOMIT9fMtZBrJgA7ZjUOLDQf/LbR2WyOX
- Io1GmxGh7JLBiEAZqvjJIxTUmnVLD3WgDDfEPqo6kwkck6hOBsCMIsK91xcW4Q/rGk
- S1o9rVmoXkDhKxGcKm+1fJGxZpcF83dAeqCAxNehlRbJtuQt4vHHd4ttUn7AVIuDGK
- /Wr+BLbM3LwKg==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-40845fe2d1cso21926415e9.0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:30:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-77d631aab99so7758685a.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:31:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700595095; x=1701199895; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tk08R67i33ZD+vttE38+RBxdRRr9Dtu4nj+CJcKuSQ0=;
+ b=LK4YvrgrciUh0MksApN9nJqIo6ob9Fn+JbPUNEqGOYWLmXw31/diCOgM50AAzk1FEZ
+ X37zeEtI5SbXZTBhA7LdghAH6LM4LTLKcGKKYaR9DRiJItbfEpCsTrXH/nGT5ykas64i
+ KRw+naNmvHEY2d7uXcppjx2EYlv1h8PDayP9Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700595037; x=1701199837;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bvD4BeVz9+LtBwbOT8WzQtlpbiKpIX2h1DtaJdOTHYo=;
- b=DcR/68LPOzzYvTizgwHcLdS5ccEhViVLGep3spGWm7+OMZbZCbHh4+nWQpgLe6jIOR
- 0h0mLIBCcwhx77XH2wmJ8uqamh5VHeYv4DwsUgY16aUW3lFVfrrZixZ+yztS34/Q1qfm
- D46jPT/xf7p+52hEUv7EeE2NZAiVwiDeHRaZd9grJpvde2v1wkEZ9jq7N2Y9LwO+cce5
- VaL4f2bzlagz7CHFPwixRyRul+KjvFD/e/8y1gFR5fWuRN0JTzBPyWtu6L8TggGvb2v0
- TMkKNZPJQy5wG+Z/lno37OTtq2g/0re4zV072fujDe19QCX/GdfnxoxskoGGTGU0dpeg
- No6g==
-X-Gm-Message-State: AOJu0YxZBlOmDk0ST70AnBWEc8ipgMTJR4SxYODtjOFr6y+bcUMxd1+b
- kJ7U8wdJK4QPqKWz+y4WIOY4V2DTRAIIcsV1/fh/IVdNd3ShLjEINgfUejmxFL7CkSao6zDGdrQ
- GqZwiMDaUdN6ZLT54UXIhg6gLoU/Fq2w=
-X-Received: by 2002:a05:600c:310f:b0:40b:2979:52ad with SMTP id
- g15-20020a05600c310f00b0040b297952admr230973wmo.41.1700595037569; 
- Tue, 21 Nov 2023 11:30:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFFJjSpdkhO+x1PYNmBehMYZrMGqD6e+WBk9SgKKtAik/Krc4Trr+jVja7IkepJgU7fOO+VTA==
-X-Received: by 2002:a05:600c:310f:b0:40b:2979:52ad with SMTP id
- g15-20020a05600c310f00b0040b297952admr230954wmo.41.1700595037119; 
- Tue, 21 Nov 2023 11:30:37 -0800 (PST)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- u25-20020a7bcb19000000b00405391f485fsm17669737wmj.41.2023.11.21.11.30.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Nov 2023 11:30:36 -0800 (PST)
-Message-ID: <28fdf7b8-8e6f-47c9-81f5-9b95acccc3ab@canonical.com>
-Date: Tue, 21 Nov 2023 20:30:34 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] acpi: Kconfig symbol CONFIG_QFW_ACPI
-To: Tom Rini <trini@konsulko.com>
-Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Miao Yan <yanmiaobest@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
+ d=1e100.net; s=20230601; t=1700595095; x=1701199895;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Tk08R67i33ZD+vttE38+RBxdRRr9Dtu4nj+CJcKuSQ0=;
+ b=Hvi2vorz9BcZRp0CJHG4ozE8tgEcVvTXM3BjtdYf7dkxx0qkvW84Sm4KkjlXSFtcar
+ xBpIRlR6UFkUvbdxPXL11Yimj8O32AeCeiJC9AP8u03mclMvF1INK5196Lc9nMB83+k+
+ pfOcJZwE7l8DGT51Lrhc6Pg65trXCKl4LGCeMjKw9b6MyODFWdg7UvBb0T2y1h6pYPEe
+ cJXIhq7K9zS6YM6MBgwKQJ4yVv/im4/m3w60J7ZOwWl6K8+CsvUeEhknphYr9oXJ9r7x
+ +SZg1zH8SVc5VpD6QZ55qGOiRwK6+h+jSJrcZHKChKXc62xDfs39isikHKw4CAeji1Ub
+ OJyA==
+X-Gm-Message-State: AOJu0YxWMwVTASCXLforB5BygpfA17iM1MNwqK6W+SZH47tU5ZKsr34i
+ tIki2hW6RKiVDwCXVEslo3fEVg==
+X-Google-Smtp-Source: AGHT+IGo6grL8iBYctkUe5iqzmGpkoZxI0NL6oXN3dKru/70OWcQ1A0w7qTwJXX0++QpwxxuE2wKMg==
+X-Received: by 2002:a05:622a:d3:b0:423:6e89:a540 with SMTP id
+ p19-20020a05622a00d300b004236e89a540mr199264qtw.9.1700595095702; 
+ Tue, 21 Nov 2023 11:31:35 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
+ [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
+ by smtp.gmail.com with ESMTPSA id
+ p2-20020ac84602000000b00419801b1094sm3836396qtn.13.2023.11.21.11.31.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 11:31:35 -0800 (PST)
+Date: Tue, 21 Nov 2023 14:31:33 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de
-References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
- <20231121152740.24783-2-heinrich.schuchardt@canonical.com>
- <20231121190000.GA2513409@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231121190000.GA2513409@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 21/21] MAINTAINERS: Qualcomm: add some missing paths
+Message-ID: <20231121193133.GG2513409@bill-the-cat>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <20231121-b4-qcom-common-target-v1-21-9492198e0c15@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VxcEV98mjPIJG+n8"
+Content-Disposition: inline
+In-Reply-To: <20231121-b4-qcom-common-target-v1-21-9492198e0c15@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,67 +100,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/23 20:00, Tom Rini wrote:
-> On Tue, Nov 21, 2023 at 04:27:34PM +0100, Heinrich Schuchardt wrote:
-> 
->> We have two implementations of write_acpi_tables(). One for writing ACPI
->> tables based on ACPI_WRITER() entries another based on copying tables from
->> QEMU.
->>
->> Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
->> QEMU and use it consistently.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> v2:
->> 	new patch
->> ---
->>   drivers/misc/Kconfig   | 7 +++++++
->>   drivers/misc/qfw.c     | 4 ++--
->>   lib/acpi/Makefile      | 2 +-
->>   lib/acpi/acpi_writer.c | 4 ++--
->>   4 files changed, 12 insertions(+), 5 deletions(-)
-> 
-> I still feel like this is a weird direction to go in and that:
->> diff --git a/lib/acpi/acpi_writer.c b/lib/acpi/acpi_writer.c
->> index 946f90e8e7..9b9fdc190b 100644
->> --- a/lib/acpi/acpi_writer.c
->> +++ b/lib/acpi/acpi_writer.c
->> @@ -48,7 +48,7 @@ int acpi_write_one(struct acpi_ctx *ctx, const struct acpi_writer *entry)
->>   	return 0;
->>   }
->>   
->> -#ifndef CONFIG_QEMU
->> +#ifndef CONFIG_QFW_ACPI
->>   static int acpi_write_all(struct acpi_ctx *ctx)
->>   {
->>   	const struct acpi_writer *writer =
->> @@ -115,7 +115,7 @@ ulong acpi_get_rsdp_addr(void)
->>   
->>   	return map_to_sysmem(gd->acpi_ctx->rsdp);
->>   }
->> -#endif /* QEMU */
->> +#endif /* QFW_ACPI */
->>   
->>   void acpi_setup_ctx(struct acpi_ctx *ctx, ulong start)
->>   {
-> 
-> Will need to be tweaked later on still with some other symbol to denote
-> "ACPI tables were passed along on real hardware by $mechanism". But we
-> can cross that when we come to it.
-> 
 
-QFW is only about QEMU. What I did here is separating the transfer of 
-ACPI tables from QEMU from the code co-used by the sandbox. Do you think 
-this is wrong?
+--VxcEV98mjPIJG+n8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Probably when booting U-Boot via Coreboot we should be able to copy ACPI 
-tables. But this will not involve QFW. Is there any code, yet, where 
-U-Boot is picking up ACPI tables from Coreboot?
+On Tue, Nov 21, 2023 at 05:09:44PM +0000, Caleb Connolly wrote:
 
-In this case you would not set symbol CONFIG_GENERATE_ACPI_TABLES. Do we 
-really need yet another symbol?
+> Add board/qualcomm and the SoC/PMIC DTSI files.
+> Adjust the driver paths to use globs rather than hardcoding every
+> specific driver.
+>=20
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+[snip]
+> +F:	arch/arm/dts/msm8*.dtsi
+> +F:	arch/arm/dts/pm8???.dtsi
+> +F:	arch/arm/dts/pms405.dtsi
+> +F:	arch/arm/dts/sdm845.dtsi
+>  F:	arch/arm/mach-snapdragon/
+> +F:	board/qualcomm
 
-Best regards
+Maybe:
+N:	qualcomm
+N:	qcom
 
-Heinrich
+>  F:	configs/qcom_defconfig
+>  F:	doc/board/qualcomm
+> -F:	drivers/button/button-qcom-pmic.c
+> -F:	drivers/clk/qcom/
+> +F:	drivers/*/*/pm8???-*
+> +F:	drivers/*/*/qcom*
+> +F:	drivers/*/*/qcom/
+> +F:	drivers/*/*qcom*
+> +F:	drivers/*/qcom/
+>  F:	drivers/gpio/msm_gpio.c
+>  F:	drivers/mmc/msm_sdhci.c
+>  F:	drivers/phy/msm8916-usbh-phy.c
+> -F:	drivers/pinctrl/qcom/
+>  F:	drivers/serial/serial_msm.c
+>  F:	drivers/serial/serial_msm_geni.c
+>  F:	drivers/smem/msm_smem.c
+
+What about drivers/usb/host/ehci-msm.c drivers/rng/msm_rng.c and
+drivers/phy/qcom/msm8916-usbh-phy.c ?
+
+--=20
+Tom
+
+--VxcEV98mjPIJG+n8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVdBZUACgkQFHw5/5Y0
+tyx4bQv/fs6EXw0nreq4+mlMXSUjceGj1ieIqS1KP0Q7F3+RgzZ+HrO/PIE/6uxZ
+V8jcFfnSXHao9HY+KcqGmEnVRsh4v0DztIt/bvuxaxyz4zri67TnsmQliQk2Br9o
+IzruZa1EiKgvkm+SEti1QHlRhD+lpnICWfKNN+6mreJW8DC4jyPAIKirneBlWVwe
+1igKWKWVOH9doS1rqSkzBRRikaSyFurS/g0UpQtZT08Fz8TjP5W23i2+pWHTSCMQ
+ogIoxVUWz77zqiSZ+qv8rvuM1RIsRHwH3W5YFHwXmZwHNeFfT7ev9ejlL2dqiwI2
+hg4UWUPQDb8/zKr92aqryzqcJ7UAUSsbSnVs0FpX9u1MgcR7obaFbWTL0PbxYoV5
+It9YrKKUDSoWX6HuoGkV11eGbrAZjVJ1NjJekE9dPHHx+zlvxSd7roZRjf1lTL6Q
+/NCkDDCfAhcs19C+ZXrqIIQ1igE2Si0spO8dapf5jZFu5xAMo8reB4+GWNjVpgK/
+uA+IrlP4
+=x/Q+
+-----END PGP SIGNATURE-----
+
+--VxcEV98mjPIJG+n8--
