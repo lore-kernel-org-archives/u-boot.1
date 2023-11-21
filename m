@@ -4,106 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA57DC5ACB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 09:18:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA16C5ACB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 09:25:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 997EB8757E;
-	Tue, 21 Nov 2023 10:18:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 668A2874E8;
+	Tue, 21 Nov 2023 10:25:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ycsJK0Hz";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="p8iqsb8o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED1A8874E8; Tue, 21 Nov 2023 10:18:08 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 3005A871FC; Tue, 21 Nov 2023 10:25:27 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 673F8871CD
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:18:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFCDF87593
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:25:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-32f737deedfso3415896f8f.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 01:18:06 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-507c5249d55so7745412e87.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 01:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700558286; x=1701163086; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=In9SnW6V42J9lK1zUchnAXRX4VyoLJCwhg874RYUt90=;
- b=ycsJK0Hzteyvyhc9gvgcVw7HefRrFcKnPC2h/KCkqUF7mkh5CAwI5CvAMdsUgpFMAc
- y3sr8F1aE9272moMpIEEiJo6SiTGAuDNcLjuHaB9UbVG8GxzVbFWa4lS0vDJy+tvQvxN
- X676yKWwbym5tV0XzfbX/LvzOB6ch3Ln5PN5lDrzvJPhK3maEkjMJAvNrTa3pNaQiQqh
- uH4obKw46zFbv0Rd8/ex4H1Bjlq9eXPBpJ0AerZv4COWrhVWmMeLZ9KgtyMUBdJNS6KZ
- RYN5R8mpNQlHz+mrQPMYhc8oqZnChvQbxAbW+S3mIRso2FVj+jNvLPX4z09gRt9lrzDU
- i2oA==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1700558722; x=1701163522;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NtM2EJCeggeAyPW9uhOWWLDG+nO44xWnQlzYG1h2q0Q=;
+ b=p8iqsb8orIL9eAoHja8S2VTusQiWAptuaUjk/fE6SE+rwVDfB3R5qyVP6E8uyKlesO
+ nQckQaM0pGadlYetvW/vHKDGTaxlAtBIlpLBPlCTqclrLYfesq6zmdCDclqDyocU5LKO
+ 9zYAOFgaNDTvQaBbkl4K7ZdANY7mvEmvENDTtlas1ySGkAeKErYmbKfr1isqzlBRkTsU
+ T17TbrpU3CrImE6q2VeBc2yshZ6sfG9k5Z9QrIT7s9krd6Z4IYMiDQy1ndaAoHUF334n
+ 7YupN9mTft4yWjGpshQ+zu81PqiT+6Mk4z2iS5MJUrdc+DWv0PUpgEdR8mQY6ZaeVWdh
+ jGvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700558286; x=1701163086;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=In9SnW6V42J9lK1zUchnAXRX4VyoLJCwhg874RYUt90=;
- b=rjiS1/sBtgHGQTlgLYf8qs31ENsB2CLKaF5bN9sd5iceMpcxIm1sZZMOP3eDzbCVhB
- JbGMvDYmKcyZsnh7CYZOF7IpRHDSzZY1GSjhjYiF83MvObUqab+RjNKSyHS35sMWsRNr
- 1gI4WTHXVszzd+uct7I3cTERz2SNKduRiWp+7PH+9ohdY29az/49EZYYTFFWlJJi7KRG
- h7k5XBzcx5zrEOnLPHDIMb0aa95/nRJlFhTwHeSIOH4P9/fdleA2FdBfJnF0db6dwqPT
- ayhHGMHaBlP4dZLMAiwX+7QlUmrAQCnn6h5XTwZEIBH3/mIEdU5rd691oILh7B8e0E9e
- WWlg==
-X-Gm-Message-State: AOJu0YxJAPSOa5fVxQJz4goA7eQcvtKtBxARqLfRhfUCJW35jo5BGrAE
- S0pa8rysywOtm1MVF4VrYqQ9oA==
-X-Google-Smtp-Source: AGHT+IFh1j3TmFbCNxOBS+eQs3WV7FIaJmy/wpDmCZI8cRh0wpzDULN5/Nr/hxnnqnHg3m8ui1ojSQ==
-X-Received: by 2002:a05:6000:178b:b0:332:cb20:ddc2 with SMTP id
- e11-20020a056000178b00b00332cb20ddc2mr2923477wrg.40.1700558285741; 
- Tue, 21 Nov 2023 01:18:05 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:2a39:bc19:20b6:16a?
- ([2a01:e0a:982:cbb0:2a39:bc19:20b6:16a])
- by smtp.gmail.com with ESMTPSA id
- d1-20020adfe841000000b00332cfd83b8dsm122642wrn.96.2023.11.21.01.18.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Nov 2023 01:18:05 -0800 (PST)
-Message-ID: <a653e096-cf28-4573-856f-d52dae233b46@linaro.org>
-Date: Tue, 21 Nov 2023 10:18:04 +0100
+ d=1e100.net; s=20230601; t=1700558722; x=1701163522;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NtM2EJCeggeAyPW9uhOWWLDG+nO44xWnQlzYG1h2q0Q=;
+ b=DV39FFvm6eeJaLVsCOFuDKoIxFba3crZAQTWvNoAkwvvJpQrI8AvkOL3kFoWIqTNdC
+ fetcew9M3KWXdUHhMo09fgEmcD566AyZISXaOJ9v1pEaYCK/4MH5pSyDwmtj1EGTgtLM
+ Db5C+mlK2/m/C1AyrgMcTRZcm22cAnU38ygOIOw2fHFi0WanE6FOFh5mp0U+FJ6CI/0c
+ /M0ygnTHIQ0Kv5BEWy3gE1QWlLnszvNV3QE+nbFqF9pERydncnunxqfCrnQtx2KCK86H
+ J9PelT+ZGe/dEjzhf3tJ6/TdNTPYPOQ3uVXBGgzXZOCBnqbGvqERlTKEC/wPswxTeYns
+ 2vpw==
+X-Gm-Message-State: AOJu0Yxs2KzBdSu4bvEkQIHT45mFrsieQftaDZzm6MJyGsNH/W1PSxLV
+ K53AZzImFcO+mhpC5LfJ6PnXQg==
+X-Google-Smtp-Source: AGHT+IFSBWYHN8sQZYN3jdLHkEm9AmFO1rSClDgOBT94ON9Q/WFr2Hcx4WZP2qskR0j+ABvcP0JQNA==
+X-Received: by 2002:a05:6512:3d91:b0:50a:a6d2:b5cd with SMTP id
+ k17-20020a0565123d9100b0050aa6d2b5cdmr7555472lfv.53.1700558722153; 
+ Tue, 21 Nov 2023 01:25:22 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ je14-20020a05600c1f8e00b0040596352951sm21223152wmb.5.2023.11.21.01.25.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 01:25:21 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Joe
+ Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, Svyatoslav
+ Ryhel <clamor95@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Harald Seiler <hws@denx.de>, Sean Anderson <sean.anderson@seco.com>, Heiko
+ Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/5] fastboot: multiresponse support
+In-Reply-To: <20231115153836.16537-2-clamor95@gmail.com>
+References: <20231115153836.16537-1-clamor95@gmail.com>
+ <20231115153836.16537-2-clamor95@gmail.com>
+Date: Tue, 21 Nov 2023 10:25:20 +0100
+Message-ID: <877cmbmpa7.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] libretech-cc: Populate SMBIOS information
-Content-Language: en-US, fr
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: u-boot-amlogic@groups.io
-References: <20231120201609.619598-1-trini@konsulko.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231120201609.619598-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,86 +92,220 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Svyatoslav,
 
-On 20/11/2023 21:16, Tom Rini wrote:
-> Enable CONFIG_SYSINFO_SMBIOS and populate the nodes so that Linux can
-> eventually display this information
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+Thank you for the patch.
+
+On mer., nov. 15, 2023 at 17:38, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+
+> From: Ion Agorria <ion@agorria.com>
+>
+> Currently u-boot fastboot can only send one message back to host,
+> so if there is a need to print more than one line messages must be
+> kept sending until all the required data is obtained. This behavior
+> can be adjusted using multiresponce ability (getting multiple lines
+> of response) proposed in this patch.
+>
+> Signed-off-by: Ion Agorria <ion@agorria.com>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 > ---
-> Posting this as this was the easiest platform for me to test some SMBIOS
-> related patches on and I needed to populate the nodes so I could check
-> things in dmidecode once Linux was up.
-
-Sorry to be late a the party, but can't this be dynamically found from DT's compatible & model ?
-Since I'll probably need to add this to all boards, it seems like a duplicate of what's already in the DT.
-
-> 
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: u-boot-amlogic@groups.io
-> ---
->   .../meson-gxl-s905x-libretech-cc-u-boot.dtsi  | 23 +++++++++++++++++++
->   configs/libretech-cc_defconfig                |  2 ++
->   2 files changed, 25 insertions(+)
-> 
-> diff --git a/arch/arm/dts/meson-gxl-s905x-libretech-cc-u-boot.dtsi b/arch/arm/dts/meson-gxl-s905x-libretech-cc-u-boot.dtsi
-> index 39270ea71c8b..e56cd67a9d91 100644
-> --- a/arch/arm/dts/meson-gxl-s905x-libretech-cc-u-boot.dtsi
-> +++ b/arch/arm/dts/meson-gxl-s905x-libretech-cc-u-boot.dtsi
-> @@ -5,3 +5,26 @@
->    */
->   
->   #include "meson-gxl-u-boot.dtsi"
+>  drivers/fastboot/fb_command.c   | 10 ++++++++++
+>  drivers/usb/gadget/f_fastboot.c | 29 +++++++++++++++++++++++++++++
+>  include/fastboot.h              | 18 ++++++++++++++++++
+>  net/fastboot_udp.c              | 29 +++++++++++++++++++++++------
+>  4 files changed, 80 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> index 5fcadcdf50..ab72d8c781 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -5,6 +5,7 @@
+>  
+>  #include <common.h>
+>  #include <command.h>
+> +#include <console.h>
+>  #include <env.h>
+>  #include <fastboot.h>
+>  #include <fastboot-internal.h>
+> @@ -152,6 +153,15 @@ int fastboot_handle_command(char *cmd_string, char *response)
+>  	return -1;
+>  }
+>  
+> +void fastboot_multiresponse(int cmd, char *response)
+> +{
+> +	switch (cmd) {
+> +	default:
+> +		fastboot_fail("Unknown multiresponse command", response);
+> +		break;
+> +	}
+> +}
 > +
-> +/ {
-> +	smbios {
-> +		compatible = "u-boot,sysinfo-smbios";
+>  /**
+>   * okay() - Send bare OKAY response
+>   *
+> diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
+> index 741775a7bc..0850350331 100644
+> --- a/drivers/usb/gadget/f_fastboot.c
+> +++ b/drivers/usb/gadget/f_fastboot.c
+> @@ -497,6 +497,25 @@ static void do_bootm_on_complete(struct usb_ep *ep, struct usb_request *req)
+>  	do_exit_on_complete(ep, req);
+>  }
+>  
+> +static int multiresponse_cmd = -1;
+> +static void multiresponse_on_complete(struct usb_ep *ep, struct usb_request *req)
+> +{
+> +	char response[FASTBOOT_RESPONSE_LEN] = {0};
 > +
-> +		smbios {
-> +			system {
-> +				manufacturer = "libre.computer";
-> +				product = "Le Potato";
-
-I'll use the real product identifier here instead: AML-S905X-CC
-
-Here's the downstream vendor change:
-https://github.com/libre-computer-project/libretech-u-boot/commit/cb68b838f1b80ad201ec02f04d2841ee535b9818
-
-> +			};
+> +	if (multiresponse_cmd == -1)
+> +		return;
 > +
-> +			baseboard {
-> +				manufacturer = "libre.computer";
-> +				product = "Le Potato";
-> +			};
+> +	/* Call handler to obtain next response */
+> +	fastboot_multiresponse(multiresponse_cmd, response);
+> +	fastboot_tx_write_str(response);
 > +
-> +			chassis {
-> +				manufacturer = "libre.computer";
-> +				product = "Le Potato";
-> +			};
-> +		};
-> +	};
-> +};
-> diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
-> index baa9b1b3dbc5..24a46f50d0d9 100644
-> --- a/configs/libretech-cc_defconfig
-> +++ b/configs/libretech-cc_defconfig
-> @@ -55,6 +55,8 @@ CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_DEBUG_UART_ANNOUNCE=y
->   CONFIG_DEBUG_UART_SKIP_INIT=y
->   CONFIG_MESON_SERIAL=y
-> +CONFIG_SYSINFO=y
-> +CONFIG_SYSINFO_SMBIOS=y
->   CONFIG_USB=y
->   CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_XHCI_HCD=y
-
-Thanks,
-Neil
-
+> +	/* If response is final OKAY/FAIL response disconnect this handler and unset cmd */
+> +	if (!strncmp("OKAY", response, 4) || !strncmp("FAIL", response, 4)) {
+> +		multiresponse_cmd = -1;
+> +		fastboot_func->in_req->complete = fastboot_complete;
+> +	}
+> +}
+> +
+>  static void do_acmd_complete(struct usb_ep *ep, struct usb_request *req)
+>  {
+>  	/* When usb dequeue complete will be called
+> @@ -524,6 +543,16 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
+>  		fastboot_fail("buffer overflow", response);
+>  	}
+>  
+> +	if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
+> +		multiresponse_cmd = cmd;
+> +		fastboot_multiresponse(multiresponse_cmd, response);
+> +
+> +		/* Only add complete callback if first is not a final OKAY/FAIL response */
+> +		if (strncmp("OKAY", response, 4) && strncmp("FAIL", response, 4)) {
+> +			fastboot_func->in_req->complete = multiresponse_on_complete;
+> +		}
+> +	}
+> +
+>  	if (!strncmp("DATA", response, 4)) {
+>  		req->complete = rx_handler_dl_image;
+>  		req->length = rx_bytes_expected(ep);
+> diff --git a/include/fastboot.h b/include/fastboot.h
+> index 296451f89d..59cbea61ec 100644
+> --- a/include/fastboot.h
+> +++ b/include/fastboot.h
+> @@ -14,6 +14,16 @@
+>  
+>  #define FASTBOOT_VERSION	"0.4"
+>  
+> +/*
+> + * Signals u-boot fastboot code to send multiple responses by
+> + * calling response generating function repeatedly until a OKAY/FAIL
+> + * is generated as final response.
+> + *
+> + * This status code is only used internally to signal, must NOT
+> + * be sent to host.
+> + */
+> +#define FASTBOOT_MULTIRESPONSE_START	("MORE")
+> +
+>  /* The 64 defined bytes plus \0 */
+>  #define FASTBOOT_COMMAND_LEN	(64 + 1)
+>  #define FASTBOOT_RESPONSE_LEN	(64 + 1)
+> @@ -172,5 +182,13 @@ void fastboot_data_download(const void *fastboot_data,
+>   */
+>  void fastboot_data_complete(char *response);
+>  
+> +/**
+> + * fastboot_handle_multiresponse() - Called for each response to send
+> + *
+> + * @cmd: Command id that requested multiresponse
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +void fastboot_multiresponse(int cmd, char *response);
+> +
+>  void fastboot_acmd_complete(void);
+>  #endif /* _FASTBOOT_H_ */
+> diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
+> index d690787478..6fee441ab3 100644
+> --- a/net/fastboot_udp.c
+> +++ b/net/fastboot_udp.c
+> @@ -42,16 +42,15 @@ static int fastboot_remote_port;
+>  static int fastboot_our_port;
+>  
+>  /**
+> - * fastboot_udp_send_info() - Send an INFO packet during long commands.
+> + * fastboot_udp_send_response() - Send an response into UDP
+>   *
+> - * @msg: String describing the reason for waiting
+> + * @response: Response to send
+>   */
+> -static void fastboot_udp_send_info(const char *msg)
+> +static void fastboot_udp_send_response(const char *response)
+>  {
+>  	uchar *packet;
+>  	uchar *packet_base;
+>  	int len = 0;
+> -	char response[FASTBOOT_RESPONSE_LEN] = {0};
+>  
+>  	struct fastboot_header response_header = {
+>  		.id = FASTBOOT_FASTBOOT,
+> @@ -66,7 +65,6 @@ static void fastboot_udp_send_info(const char *msg)
+>  	memcpy(packet, &response_header, sizeof(response_header));
+>  	packet += sizeof(response_header);
+>  	/* Write response */
+> -	fastboot_response("INFO", response, "%s", msg);
+>  	memcpy(packet, response, strlen(response));
+>  	packet += strlen(response);
+>  
+> @@ -91,6 +89,7 @@ static void fastboot_udp_send_info(const char *msg)
+>  static void fastboot_timed_send_info(const char *msg)
+>  {
+>  	static ulong start;
+> +	char response[FASTBOOT_RESPONSE_LEN] = {0};
+>  
+>  	/* Initialize timer */
+>  	if (start == 0)
+> @@ -99,7 +98,8 @@ static void fastboot_timed_send_info(const char *msg)
+>  	/* Send INFO packet to host every 30 seconds */
+>  	if (time >= 30000) {
+>  		start = get_timer(0);
+> -		fastboot_udp_send_info(msg);
+> +		fastboot_response("INFO", response, "%s", msg);
+> +		fastboot_udp_send_response(response);
+>  	}
+>  }
+>  
+> @@ -180,6 +180,23 @@ static void fastboot_send(struct fastboot_header header, char *fastboot_data,
+>  		} else {
+>  			cmd = fastboot_handle_command(command, response);
+>  			pending_command = false;
+> +
+> +			if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
+> +				while (1) {
+> +					/* Call handler to obtain next response */
+> +					fastboot_multiresponse(cmd, response);
+> +
+> +					/*
+> +					 * Send more responses or break to send
+> +					 * final OKAY/FAIL response
+> +					 */
+> +					if (strncmp("OKAY", response, 4) &&
+> +					    strncmp("FAIL", response, 4))
+> +						fastboot_udp_send_response(response);
+> +					else
+> +						break;
+> +				}
+> +			}
+>  		}
+>  		/*
+>  		 * Sent some INFO packets, need to update sequence number in
+> -- 
+> 2.40.1
