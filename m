@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E45C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:32:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53AC9C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:38:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70BB687545;
-	Tue, 21 Nov 2023 18:32:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 965C287590;
+	Tue, 21 Nov 2023 18:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NXkMG9Zj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yv05+dX4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81E24875F4; Tue, 21 Nov 2023 18:32:43 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 87B3487595; Tue, 21 Nov 2023 18:38:24 +0100 (CET)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48AE887250
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:32:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4720087574
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:38:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2851cc359c1so1642746a91.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:32:41 -0800 (PST)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-6c4eb5fda3cso5913378b3a.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:38:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700587959; x=1701192759; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700588300; x=1701193100; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jULxanMrniC6VII5HDwFala9W4yJEsWBh65iGBbi8mQ=;
- b=NXkMG9ZjTUYR40DlD+w9jv0LE0Y2AVSAKjn0SiRT8lo5mpAF4nzBZgr1IP6NWqDdKM
- JREaLtrYy5I4m6GbgQ5mwgbb5HpY2XQGA5kGtETyoor2SKcHISEULaKZy4NIv3+o1PUW
- egYDFue8SCFTdJsZlNaC3RNmS5gvrPQBmCcrjuFM/FokUfFyrsXq2225iOnR8VTuF0xj
- 9YzCp21rCpXaEQS9OnZndXTZktj2rm07b+/j1pScJe746law/eAXxcyf4SOpl7WL3zfP
- yh+uQdMJz5BGAxdkuOhkxyv9HrzaucO28BBj8xmBCqcwMLremMLJu6TATcngdhH7+lq8
- KE8g==
+ bh=6+JZlqWz/1r54JnY1igSm/zzUzZ0EwHIgzwHJ+rnuyc=;
+ b=Yv05+dX4hE3Xo935i09Ip+WW1bcXR9RG1D46EyJnRBRFJJILnFPLpngEGCkcvtT83g
+ odogYx9kceWDUAvmJpV1AOjDA/ut4aybCmdCpuVrtFhT+Zi/7ADFbrw7KhLFTi9eUXHN
+ YOriEBKRPirsj5ZQStFOsNuxt2LfSmdyGCAH5Z5ib684uIExEzsQlW/yr4i5eu++qnwp
+ xJwGHDlhgDrnxGDiPa9iQl2HVdeq8u23Ol1DVuMXMgsKBqeAR9N03AC/Un8bh1vZkqEF
+ a3pYbs6wdMewTzUT21iytfzATkaybmznb5eJiFHPCiJ9wKR+gmMdumm5CJEbG6yJ1iBs
+ abtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700587959; x=1701192759;
+ d=1e100.net; s=20230601; t=1700588300; x=1701193100;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jULxanMrniC6VII5HDwFala9W4yJEsWBh65iGBbi8mQ=;
- b=OLcbU30mtDIQk2WQ497hhzTDUrISRV3J6D/Tu4rtm5xNp30fP4jreO2roocOBRsld6
- LAAOMey6nb0ghlf6NIEcJTXAeZGWHGZ3OHBfzSqxtzPZTcS0+dLKGGkeeTt+8XSPJ2ce
- S1ySEyty11f3wjkrSwWebsg/BM4JjDrh1sjFgIAirVO7JFcL3k+2C8P40e0fmZlr4fhI
- SpDyu2EFPtxDgBI8aWXQqEjLO/vkC4b3HW7g9qJSX8MjIkkPxGf2atmd6tlMXGsOv0Yj
- 8e+PMPhAkHJ5Q/fzVNmv75HCEM3oQkoLoldTRYFcLqcP6r7oiOQ5E3glyYaSGg6iBFTk
- 97Mw==
-X-Gm-Message-State: AOJu0YxraiVtHG5PVlJKeDIpj563iA2+VamW2QnqWeMW/qpF+2grtHmf
- 6AOVUGMlDSXG/bgnalHjl3y4+q808f/yRI+DcIu2AA==
-X-Google-Smtp-Source: AGHT+IH54DKtE5abtLV0IwLJ7P0ZGZm+MG6RmLKh/Q3xC1pwjvSH9WaOkNnMar+pspAlAI4meq80/yKMyH7cSTf9iCE=
-X-Received: by 2002:a17:90b:1b01:b0:280:1fdf:2f3d with SMTP id
- nu1-20020a17090b1b0100b002801fdf2f3dmr9000266pjb.16.1700587959629; Tue, 21
- Nov 2023 09:32:39 -0800 (PST)
+ bh=6+JZlqWz/1r54JnY1igSm/zzUzZ0EwHIgzwHJ+rnuyc=;
+ b=mYp0zYk7ZPJ6E1/PwJT+DGI1BfRxXa+OKa9528/1gUgKa1PqTywGFCLKeW5sn4yXOL
+ JGGlkRudVqBQFqzuNdCdj33u0cEDWEUks/LSNFMymBEJLksh2OCiXR9SWZTOL2+UzpJC
+ 1fcVxv75ASU8TUkuej8wtTPH7pN/sDKg3vQ02HLWd6iDsu79A26UWLSEcHnM8lnAqftx
+ QZhpguXNk8lYOwYfMBsOL5fGFPxlNkElD5x8yWpK3qNdRou363bcX/zN7LS5JXI0zIEx
+ 3SHdasn6X1MvjnFbhIhKGcbv21whMhVJLAHJCNLlljjWW2TwnQG6Ja9zYovWejeZfr6R
+ sI6w==
+X-Gm-Message-State: AOJu0YzUniUyyajqDJ1+Zfgo/nwn+JO7Ooc4JrOuusM3Fu8ni9IpeSLF
+ XmKfZwTvdSDLn+L8NJjY3iHxRgoi9ki/hTJHRxIeaQ==
+X-Google-Smtp-Source: AGHT+IG5sySGCQ0YgE2W/A6+Ikyu14XowG9OKnzqNBEgdFYB61sEi+Sv1VXHL0GsuLNxNXPmKmxdqFL0nOSs6zvJRNc=
+X-Received: by 2002:a05:6a20:8fa6:b0:188:5e5:82e6 with SMTP id
+ k38-20020a056a208fa600b0018805e582e6mr10054269pzj.61.1700588300590; Tue, 21
+ Nov 2023 09:38:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20231107190601.17151-1-semen.protsenko@linaro.org>
- <20231107190601.17151-3-semen.protsenko@linaro.org>
- <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
- <CAPLW+4mtbbEZmQtik_qEtmo0Ehr7R=-yZOO8xVL2Dp0rCCHZ4Q@mail.gmail.com>
- <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
+References: <20231109201313.29791-1-semen.protsenko@linaro.org>
+In-Reply-To: <20231109201313.29791-1-semen.protsenko@linaro.org>
 From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Tue, 21 Nov 2023 11:32:28 -0600
-Message-ID: <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
+Date: Tue, 21 Nov 2023 11:38:09 -0600
+Message-ID: <CAPLW+4kFgeUP+bvbPcLbTiakF-SmcnNj7Fu-H12Vtm_xKVbS6g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] board: samsung: Fix SYS_CONFIG_NAME configs in
+ axy17lte Kconfig
+To: Minkyu Kang <promsoft@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Dzmitry Sankouski <dsankouski@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,79 +87,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 13, 2023 at 12:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
-> >
-> > The 'port_id' seems to be needed for ARCH_EXYNOS4 boards. Because
-> > Exynos4 doesn't have proper DM clocks, it uses 'id' property to get
-> > corresponding UART clock frequency from its mach code.
-> >
-> > Here is what's happening in the serial driver in case of Exynos4:
-> >
-> >   1. get_uart_clk(port_id) is called
-> >   2. which in turn calls exynos4_get_uart_clk(port_id)
-> >   3. which uses "port_id" value to read corresponding bits of of
-> > CLK_SRC_PERIL0 register
-> >   4. those bits are used to get corresponding PLL clock's frequency
-> >   5. which is in turn used to calculate UART clock rate
-> >   6. calculated rate is returned by get_uart_clk() to serial driver
-> >
-> > So I don't see any *easy* way we can get rid of that id property.
-> >
-> > The proper way of doing that would require converting Exynos4 clock
-> > code to CCF (enabling CONFIG_CLK_EXYNOS). Which of course also means
-> > implementing clocks in dts, akin to kernel's exynos4.dtsi. Then it'll
-> > be possible to get rid of 'id' property.
->
-> That sounds good!
->
-> >
-> > Maybe I'm missing something, please let me know.
->
-> An easy way in the meantime would be to look at the compatible / reg
-> property, e.g. here is a sketch:
->
-> static int get_id(ofnode node)
-> {
-> ulong addr =3D (ulong)plat->reg;
-> if (ofnode_device_is_compatible(node, "samsung,exynos4210-uart")) {
->     return (addr >> 16) & 0xf;
-> ...
->
-> reg =3D <0x13800000 0x3c>;
-> id =3D <0>;
-> };
->
-> serail_1: serial@13810000 {
-> compatible =3D "samsung,exynos4210-uart";
-> reg =3D <0x13810000 0x3c>;
-> id =3D <1>;
-> };
->
-> serial_2: serial@13820000 {
-> compatible =3D "samsung,exynos4210-uart";
-> reg =3D <0x13820000 0x3c>;
-> id =3D <2>;
-> };
->
-> serial_3: serial@13830000 {
-> compatible =3D "samsung,exynos4210-uart";
-> reg =3D <0x13830000 0x3c>;
-> id =3D <3>;
-> };
->
-> serial_4: serial@13840000 {
-> compatible =3D "samsung,exynos4210-uart";
-> reg =3D <0x13840000 0x3c>;
-> id =3D <4>;
->
+Hi Tom, Minkyu,
 
-To be honest, I'm a bit of busy right now working on U-Boot port for a
-new Exynos dev board, which I want to finalize and upstream ASAP. Do
-you think it's possible to take this one as is for now? At least it
-fixes one issue (fdtdec API and global data pointer).
+On Thu, Nov 9, 2023 at 2:13=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
+o.org> wrote:
+>
+> There is a couple of issues related to SYS_CONFIG_NAME config in
+> axy17lte Kconfig.
+>
+> 1. The global SYS_CONFIG_NAME in axy17lte Kconfig overrides
+>    SYS_CONFIG_NAME for all boards specified after this line in
+>    arch/arm/mach-exynos/Kconfig:
+>
+>        source "board/samsung/axy17lte/Kconfig"
+>
+>    Right now it's the last 'source' line there, so the issue is not
+>    reproducible. But once some board is moved or added after this line
+>    the next build error will happen:
+>
+>        GEN     include/autoconf.mk.dep
+>      In file included from ./include/common.h:16:
+>      include/config.h:3:10: fatal error: configs/exynos78x0-common.h.h:
+>                             No such file or directory
+>          3 | #include <configs/exynos78x0-common.h.h>
+>            |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>      compilation terminated.
+>
+>    That's happening because axy17lte Kconfig defines SYS_CONFIG_NAME
+>    option in global namespace (not guarded with any "if TARGET_..."), so
+>    it basically rewrites the correct SYS_CONFIG_NAME defined in the
+>    hypothetical boards which might appear after axy17lte in mach-exynos
+>    Kconfig.
+>
+> 2. Another side of the issue is that SYS_CONFIG_NAME is defined
+>    incorrectly in axy17lte Kconfig:
+>
+>        config SYS_CONFIG_NAME
+>            default "exynos78x0-common.h"
+>
+>    The .h extension should not have been specified there. It's leading
+>    to a build error, as the generated include file has a double '.h'
+>    extension.
+>
+> 3. Each target in axy17lte/Kconfig defines its own SYS_CONFIG_NAME. But
+>    all of those in fact incorrect, as corresponding
+>    include/configs/<CONFIG_SYS_CONFIG_NAME>.h header files don't exist.
+>
+> 4. The global SYS_CONFIG_NAME pretty much repeats the help description
+>    from arch/Kconfig and doc/README.kconfig.
+>
+> Corresponding defconfig files (a*y17lte_defconfig) fix above issues by
+> overriding SYS_CONFIG_NAME and correctly setting it to
+> "exynos78x0-common".
+>
+> Fix all mentioned issues by removing the incorrect global
+> SYS_CONFIG_NAME and instead specifying it (correctly) in SYS_CONFIG_NAME
+> options for each target instead.
+>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> Fixes: 3e2095e960b4 ("board: samsung: add support for Galaxy A series of =
+2017 (a5y17lte)")
+> ---
+
+If this series (v2) looks good to you, can you please apply it? It's
+needed for the new Exynos dev board port I'm working on right now, and
+expect to submit the patches soon.
 
 Thanks!
 
-> Regards,
-> Simon
+> Changes in v2:
+>   - Don't just remove global SYS_CONFIG_NAME, also fix SYS_CONFIG_NAME
+>     for each target in Kconfig
+>
+>  board/samsung/axy17lte/Kconfig | 14 +++-----------
+>  1 file changed, 3 insertions(+), 11 deletions(-)
+>
+> diff --git a/board/samsung/axy17lte/Kconfig b/board/samsung/axy17lte/Kcon=
+fig
+> index a018547ff5d4..64a4ffa7e673 100644
+> --- a/board/samsung/axy17lte/Kconfig
+> +++ b/board/samsung/axy17lte/Kconfig
+> @@ -1,11 +1,3 @@
+> -config SYS_CONFIG_NAME
+> -       string "Board configuration name"
+> -       default "exynos78x0-common.h"
+> -       help
+> -         This option contains information about board configuration name=
+.
+> -         Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h=
+ header
+> -         will be used for board configuration.
+> -
+>  if TARGET_A5Y17LTE
+>  config SYS_BOARD
+>         default "axy17lte"
+> @@ -16,7 +8,7 @@ config SYS_VENDOR
+>         default "samsung"
+>
+>  config SYS_CONFIG_NAME
+> -       default "a5y17lte"
+> +       default "exynos78x0-common"
+>
+>  config EXYNOS7880
+>      bool "Exynos 7880 SOC support"
+> @@ -33,7 +25,7 @@ config SYS_VENDOR
+>         default "samsung"
+>
+>  config SYS_CONFIG_NAME
+> -       default "a5y17lte"
+> +       default "exynos78x0-common"
+>
+>  config EXYNOS7880
+>      bool "Exynos 7880 SOC support"
+> @@ -50,7 +42,7 @@ config SYS_VENDOR
+>         default "samsung"
+>
+>  config SYS_CONFIG_NAME
+> -       default "a3y17lte"
+> +       default "exynos78x0-common"
+>
+>  config EXYNOS7870
+>      bool "Exynos 7870 SOC support"
+> --
+> 2.39.2
+>
