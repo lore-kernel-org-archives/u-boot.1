@@ -4,62 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928C2C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 21:56:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB44CC61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:10:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B25EA87582;
-	Tue, 21 Nov 2023 22:56:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 14EB786538;
+	Tue, 21 Nov 2023 23:10:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="r3t7cAOt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="knQPC3bs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39448875C3; Tue, 21 Nov 2023 22:56:29 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3C71887585; Tue, 21 Nov 2023 23:10:56 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA1E08744F
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 22:56:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C6BA8269F
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 45E1BCE119A;
- Tue, 21 Nov 2023 21:56:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BC63C433C8;
- Tue, 21 Nov 2023 21:56:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700603783;
- bh=5wfX8K1p0Vxz2lneSzbxkc0OyVB3rE4zOCdQ/vZt29I=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=r3t7cAOt0US8CUGhB81Zkey9dCH4OelEpwx8XMG8SqH2kWL6zYyVzLt4ZXSH00/08
- lmkssIMFs8bGAOYgG7ZIMVXHkjKzTJRY1XdNjS+kieZFicm7wwWPFSxGXZcKrademI
- DzlpXQtxdGefCPRaAfeF8cnJL7Y4CO/ErzWpT5p2w1MBIGUbU4BNBbrFigH0s21sHy
- 9lrPrpHflRpcUx0oPWiIoK5Wbnu0QgM2LB+UVxPxF8/f76hwsRHw4R+0cJP/usOeRH
- 6bgFBrI8327mWiVaDcPO7i3ONVpYl9/rirBor4BtKReFmTL+T0rv5DUCm8P1KEnwaZ
- jpbeqJk3VC8Lw==
-Message-ID: <3d76daea-2f07-48f9-865b-81e01964704d@kernel.org>
-Date: Tue, 21 Nov 2023 23:56:18 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-548d1f8b38bso3584852a12.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1700604653; x=1701209453; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UEIubZ2dXB+NAgyIgVQo5uLj/cQFs73nUjfXFbZi63Y=;
+ b=knQPC3bst5OQYMxJvjf+z8/0cgCZR2yZs0nytpzNC2A+msw8IgtJI4Kvv9+n29FMbx
+ VqyHMWBttA0DtLOuEc2WOlcwGso6rotj5p5TxdE5IlQHmfixxqZSRBTZeLKm9rYicCjY
+ VeloNLV3vh1YYCVIgHPIxGRpPSVlotECeF/f8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700604653; x=1701209453;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UEIubZ2dXB+NAgyIgVQo5uLj/cQFs73nUjfXFbZi63Y=;
+ b=UsDr3cI0vFgLM1L42Zr3EnX7C3iLVUEsybvHiBZoVGf49a0miPLXUO0OrUgVnkZAVY
+ akDuGa3rUEBZ+ogdZXVOMpefewpdRivZFM2+Wj2YX8g9Ffn+tNy3oskSQZ2/PsaqrkzL
+ mgiNerPMc1Hgqwi+Q7Th6dA0s5avtfGYHODnULTay97y/L6ouRNpFFrQtw74ACuor5Kb
+ zVz8I5TrtZvSEgppPzllEer/bKHn0f1OtxtbWpYKhBDTdvU6PV9rAEiqVBX16rzK2nmy
+ Mg/QSwLhfUHeHT6bElnREe3UZQ6PEGJUXl8OtnXMXd1phkjW1WiYrjKVdv7pj3Aq2GE1
+ H9Gw==
+X-Gm-Message-State: AOJu0YwYSdydyXEwu4UfclJy9DN84NLHv5Xz0FjbPLYnmWfKpKZ8XI6O
+ 5lZspnxm3UE1UTKeL3D9vtxkNwiAvbPwwiwVKtTrvQ==
+X-Google-Smtp-Source: AGHT+IHsYXGyhJi51Cr77wz0Ufb2qASyNr2hwYtQvazDCMGVpUqirv6NXsa1pkYc4V+sZzTTt9Mqr8SMRouqvgTIWBQ=
+X-Received: by 2002:a17:906:eb4c:b0:a02:8b23:895d with SMTP id
+ mc12-20020a170906eb4c00b00a028b23895dmr175867ejb.35.1700604653320; Tue, 21
+ Nov 2023 14:10:53 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: rawnand: omap_gpmc: fix BCH8 HW based correction
-Content-Language: en-US
-To: hs@denx.de, U-Boot Mailing List <u-boot@lists.denx.de>,
- Enrico Leto <enrico.leto@siemens.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
- "Bajjuri, Praneeth" <praneeth@ti.com>,
- "Govindarajan, Sriramakrishnan" <srk@ti.com>
-References: <20231115054044.3937543-1-hs@denx.de>
- <f21f052e-1b6d-45bc-8987-3b33eee7e09a@kernel.org>
- <0d68e932-f631-4154-4d2a-6cd2508da4bb@denx.de>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <0d68e932-f631-4154-4d2a-6cd2508da4bb@denx.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20231121113557.800353-1-sjg@chromium.org>
+ <20231121113557.800353-8-sjg@chromium.org>
+ <555a04a5-170e-409e-bae5-b2b0ba03e09e@gmx.de>
+In-Reply-To: <555a04a5-170e-409e-bae5-b2b0ba03e09e@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 21 Nov 2023 15:10:42 -0700
+Message-ID: <CAPnjgZ0K=fCvqtZLEsCPgh9iOvb44U+e39kNT3B-xQFRX9HZcw@mail.gmail.com>
+Subject: Re: [PATCH 7/7] WIP: efi: debugging
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,114 +83,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Heinrich,
 
-On 15/11/2023 13:36, Heiko Schocher wrote:
-> Hello Roger,
-> 
-> On 15.11.23 12:09, Roger Quadros wrote:
->>
->>
->> On 15/11/2023 07:40, Heiko Schocher wrote:
->>> commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
->>>
->>> broke AM335x based boards booting from NAND with ECC BCH8 code.
->>>
->>> Use omap_enable_hwecc() instead of omap_enable_hwecc_bch()
->>> in SPL restores correct SPL nand_read_page functionality.
->>>
->>> Tested on draco thuban board.
->>>
->>> Signed-off-by: Heiko Schocher <hs@denx.de>
->>>
->>> ---
->>> fix NAND boot for BCH8 based TI AM335x boards
->>>
->>> Fix is based on series from Enrico:
->>>
->>> https://lists.denx.de/pipermail/u-boot/2023-November/536793.html
->>>
->>> and fixes NAND boot for the draco thuban board. But this patch
->>> apply also without the patches from above patchseries, see
->>> azure build:
->>>
->>> https://dev.azure.com/hs0298/hs/_build/results?buildId=111&view=results
->>>
->>> which is clean.
->>>
->>> Above commit seems to change only U-Boot code and did not
->>> adapt am335x_spl_bch.c, which breaks nand_read_page in SPL
->>> code for AM335x based boards. So use in SPL "old" hw setup
->>> and reading page from NAND in SPL works again.
->>>
->>>
->>>  drivers/mtd/nand/raw/omap_gpmc.c | 4 ++++
->>>  1 file changed, 4 insertions(+)
->>>
->>> diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
->>> index 1a5ed0de31..c9b66dadbd 100644
->>> --- a/drivers/mtd/nand/raw/omap_gpmc.c
->>> +++ b/drivers/mtd/nand/raw/omap_gpmc.c
->>> @@ -983,7 +983,11 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
->>>  		nand->ecc.strength	= 8;
->>>  		nand->ecc.size		= SECTOR_BYTES;
->>>  		nand->ecc.bytes		= 14;
->>> +#if defined(CONFIG_SPL_BUILD)
->>> +		nand->ecc.hwctl		= omap_enable_hwecc;
->>
->> I don't think this is correct. omap_enable_hwecc does not setup
->> the BCH settings and should be used only for 1-bit ECC i.e. OMAP_ECC_HAM1_CODE_*
->>
->> I'm sure it will break the boards not using
->> CONFIG_SPL_NAND_AM33XX_BCH which is
->> pretty much most TI boards that are not AM335x.
->>
->> Now, I need to identify why AM335x NAND is broken.
-> 
-> Yes, I played with setting up stuff in drivers/mtd/nand/raw/am335x_spl_bch.c
-> but failed ...
-> 
-> If I can help you testing, feel free to ask!
+On Tue, 21 Nov 2023 at 10:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/21/23 12:35, Simon Glass wrote:
+> > This works when run outside a test:
+> >
+> > good:
+> >
+> > /tmp/b/sandbox/u-boot -T
+> >      -c "bootfl scan mmc; bootfl sel 1; bootfl list; bootfl b"
+> >
+> > ** Booting bootflow 'mmc7.bootdev.part_1' with efi
+> > desc = 0000000018c86ee0
+> > dev=mmc, devnr=7:1, path=efi/boot/bootsbox.efi, buffer=0000000011001000, size=1600
+> > - boot device /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
+> > - image /efi\boot\bootsbox.efi
+> > No EFI system partition
+> > No EFI system partition
+> > Failed to persist EFI variables
+> > EFI using ACPI tables at 8ef8000
+> > WARNING: Can't have ACPI table and device tree - ignoring DT.
+> > Loaded from disk
+> > Booting /efi\boot\bootsbox.efi
+> > EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+> > info->device_handle = 0000000018f180e0
+> > loaded_image info for 0000000018f184e0: 0000000018f18470
+> >
+> > EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+> > EFI: Call: efi_start_image(handle, &exit_data_size, &exit_data)
+> > Hello, world!
+> > Running on UEFI 2.10
+> > Have ACPI 2.0 table
+> > Have SMBIOS table
+> > 18f18470
+> > Load options: <none>
+> > finding
+> > - search 0000000018c931a0 ret=0
+> > File path: /efi\boot\bootsbox.efi
+> > Vendor: Das U-Boot
+> > Boot device: /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
+> > Exiting boot sevices
+> > EFI: 5 returned by efi_start_image(handle, &exit_data_size, &exit_data)
+> > Boot failed (err=-22)
+> >
+> > bad:
+> >
+> > rtv bootflow_efi
+> >
+> > ** Booting bootflow 'mmc7.bootdev.part_1' with efi
+>
+> Should we have an ESP on the MMC image to persist UEFI variables?
 
-OK. So I did some tests and we are ending up in a different ECC config on AM335x.
-The ecc.steps is not set at all by the driver (it is at 0) and so so nsectors gets
-set to -1 and so 7 (0b111) which is wrong.
+That would be a good enhancement, but I would like to get the basics
+going first.
 
-static void __maybe_unused omap_enable_hwecc_bch(struct mtd_info *mtd,
-						 int mode)
-{
-...
-	case OMAP_ECC_BCH8_CODE_HW:
-		bch_type = 1;
-		nsectors = chip->ecc.steps;
-...
-	/* BCH configuration */
-	val = ((1			<< 16) | /* enable BCH */
-	       (bch_type		<< 12) | /* BCH4/BCH8/BCH16 */
-	       (wr_mode			<<  8) | /* wrap mode */
-	       (dev_width		<<  7) | /* bus width */
--->	       (((nsectors - 1) & 0x7)	<<  4) | /* number of sectors */
-	       (info->cs		<<  1) | /* ECC CS */
-	       (0x1));	
-...
-}
-
-setting chip->ecc.steps needs to be fixed in original commit 
-c3754e9cc23a ("omap_gpmc: BCH8 support (ELM based)")
-
-But this will still not fix the issue for AM335x as am335x_spl_bch.c
-expects 1 sector at a time ECC calculation.
-
-I also realized that the error correction logic (ELM) is not in page mode
-and so is not suitable for multi-sector error correction.
-
-This means we have to revert the commit
-04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
-
-and go back to 1 sector BCH ECC generation and correction.
-
-I will send a patch fix in a day or two after doing some tests at my end.
-
--- 
-cheers,
--roger
+Regards,
+Simon
