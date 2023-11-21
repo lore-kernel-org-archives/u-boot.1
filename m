@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F56FC61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E93C61D98
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:58:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6697087622;
+	by phobos.denx.de (Postfix) with ESMTP id D9E0487631;
 	Tue, 21 Nov 2023 23:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="BQSzU+jG";
+	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="JG18W77W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 598C487282; Tue, 21 Nov 2023 23:54:52 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 58EF4870BC; Tue, 21 Nov 2023 23:55:07 +0100 (CET)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A57DA86784
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:54:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE2BE86784
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:55:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-5c210e34088so3369619a12.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:54:49 -0800 (PST)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-5c2066accc5so2899703a12.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:55:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bedrocksystems.com; s=google; t=1700607288; x=1701212088; darn=lists.denx.de;
+ d=bedrocksystems.com; s=google; t=1700607303; x=1701212103; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=ZS/y2YMV7keJ93NCFqF3kU/QNVVc3pdB+4H5q7GkX3Y=;
- b=BQSzU+jGcXd5a/cIg7ZpiDW3yUPuB/fokViIn11U0GvNVi9EpDLmdIznHvoaDRGQdG
- A5T5zu9PLVY6mgEq6aEeXAsZ9T2F0nDali5kQBKfEz45hD+8+oUrFjboR9RMRUuKio54
- cj19LCivTsj27D3r6a0aGCMlXaYYKjYn2ldVg9oXvblwmqX4XD1MpJShhS9f4iWah7O+
- cdMS5n66/OuGz9zN9VUF7jnpkggfOAOQ3awcAyMXcG/dp+XZG/+gg5MrdiAtW5IgYXYV
- gd/o0uRq4sxVMnKs5J5h52r5FZq56rqj4xZ35LsbXTeEvP8LHI251YAhnDUdAmRBrPVE
- vd0g==
+ bh=pTWisbXcwRmT71j6A/W3LvK+3NyLhRFLC/WMMi8iDn0=;
+ b=JG18W77WNYY9CAYrP3j7CMYyyZw9XSSJwndynvTgHkDrkLCRGbk4KtiQueCujdwdcE
+ YXmdNPSp9Wxk6hUvY2yjGlF00Xbhn5nkBVJ2KSvujwOTIKiMfMe0EDEYffkqMKkAeCI1
+ lUCO+Km/Xgvi48l9TpmRzPy51cvreE8bzZpZX8+cxT4KayiH0hoty8mMj2VBSG0dRjDl
+ zGnyywchjLIP06nmRuSn2o8GGhBdkqPzb0YH1AskpM4ndUCTty3hn1fVNBg8m/db90sm
+ lfjb6/f4LPwxDkZG4Mn2re+F4Xr8twov6ehxldrXzcuj82FjcGoAJOjtKoDOukh2WFDK
+ P5rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700607288; x=1701212088;
+ d=1e100.net; s=20230601; t=1700607303; x=1701212103;
  h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZS/y2YMV7keJ93NCFqF3kU/QNVVc3pdB+4H5q7GkX3Y=;
- b=Bij1j0T/95MkcKeX46hjeaYNh3OBhyWohnkODzU2XSurYXLxPkQh7m7ozdEjWg9d71
- uwTQqlEUslzGfoV5R63mr65scs2VzQPyhqZ0Nc9BH5bclwdtQIHY8dV0GwTIgiDvQrmv
- O9qK8ul5RtZcRrSP7MweuPfyzJJig1IO3vajRmNDyUlwvCvl1XfGdaRl5WAJVtFM0EKx
- 9fU3G3oPfByE/o7dix+RTJ7x4XsvOSjuwGWX3KTnq650GDgTLEu1YsIl3UGhpTTHvzR7
- A6hBTfb3PJOpr8XdLP40JfU4/g+IlXfzLM/vd9HoPZZG8twWAXZBMNVfniwegVMpTWH2
- Ilng==
-X-Gm-Message-State: AOJu0Yzr0C3ncXvm9fd9bLKz+PUKihLcRrvtTkaPkDZ/3xtq/GpNjIaF
- waLPLp33HMTOeflYO1WV211Of7Kzd8FBYSfloWGw0+RYXcXIxAPoeDS8XQ==
-X-Google-Smtp-Source: AGHT+IHtlkP85rpC5zxbtnm75evTP7njps6KBtxYoF5WTo8cFfgVrPGNnKvePfuA7WnlY9jwSj9gGiFVOKGoqpf56Xo=
-X-Received: by 2002:a17:90b:4ace:b0:280:2652:d42 with SMTP id
- mh14-20020a17090b4ace00b0028026520d42mr736984pjb.23.1700607287908; Tue, 21
- Nov 2023 14:54:47 -0800 (PST)
+ bh=pTWisbXcwRmT71j6A/W3LvK+3NyLhRFLC/WMMi8iDn0=;
+ b=GfCDFjLB02wfAFBOyqpVjQ+ts9jNiMxgI70Em4VZAHtAxpIAUciCaxwAoMwutp0Pc5
+ kHqdOAUSMiW62vAsXZbJDv8Of8UsFLkyZBm879JYNTSt4EeF9FA1g4zONhO7X4e6AfwW
+ VWzkI7EOo5tnPsxAeLVCK6SszYoZBc6oaFyfH80i8akk5JTmoXo2pvTDVwuFClgPpUWO
+ Z8bJ6Z1Sp/WpbW5hKDyC05Ju3WMnFKeXFV68mrK8PKa0xmpH6N42sK8Bsmw+lYn9IkP/
+ ZFcJmfMYMdB3G1GFxM2XtcmKyI36hYJkP+yDWKaGQoDguKeo8pSRi3DdqN+mzi9iKBY0
+ CseA==
+X-Gm-Message-State: AOJu0Yy9tkJU8Xuxz2km9SCxXT569ipHOdogU3Ztuh+xWpqLk5RcA5Gy
+ lQ9FtgM75RntBqfrW25Ba3GzSNPcXLgetFm0lVKCN2zmkXwQ61C8C11m9w==
+X-Google-Smtp-Source: AGHT+IEe8jqyAAKcN16GcFLPVyITkeHE/tYPh63CqAM+v3718JzrXx3gAY69epalB4Aowt78u7Oi50ULmwokcG5dn9k=
+X-Received: by 2002:a17:90b:4ace:b0:27c:f80a:2c8a with SMTP id
+ mh14-20020a17090b4ace00b0027cf80a2c8amr760276pjb.0.1700607302890; Tue, 21 Nov
+ 2023 14:55:02 -0800 (PST)
 MIME-Version: 1.0
 From: Dmitry Malkin <dmitry@bedrocksystems.com>
-Date: Tue, 21 Nov 2023 23:54:37 +0100
-Message-ID: <CAKRNjQ20oazcjhAR3+WaQG0MObvHC_Zya8mZKwaRrcCeuZAhpw@mail.gmail.com>
-Subject: [PATCH v2 2/3] rpi5: initial support
+Date: Tue, 21 Nov 2023 23:54:52 +0100
+Message-ID: <CAKRNjQ3YjFQGDmGmowbtbFnpAn7k3nHfbwqpx0_BX-+v_kQkzw@mail.gmail.com>
+Subject: [PATCH v2 3/3] rpi5: initial support
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, mbrugger@suse.com, pbrobinson@gmail.com
 Content-Type: text/plain; charset="UTF-8"
@@ -82,89 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rpi5: add alternative way to get MBOX address via FDT
- node
+rpi5: get_board is no longer works. Print model name from
+ FW FDT
 
-MBOX on RPI5/bcm2712 has a different offset. Find it via
-"brcm,bcm2835-mbox" node.
+rpi5 deprecated some calls/tags for MBOX. Better to use FW FDT.
+However it does not give all information.
 
 Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
 ---
 v2:
       new patch
 ---
- arch/arm/mach-bcm283x/include/mach/base.h |  1 +
- arch/arm/mach-bcm283x/include/mach/mbox.h |  4 ++--
- arch/arm/mach-bcm283x/init.c              | 12 +++++++++++-
- 3 files changed, 14 insertions(+), 3 deletions(-)
+ board/raspberrypi/rpi/rpi.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm/mach-bcm283x/include/mach/base.h
-b/arch/arm/mach-bcm283x/include/mach/base.h
-index 4ccaf69693..8cd224921e 100644
---- a/arch/arm/mach-bcm283x/include/mach/base.h
-+++ b/arch/arm/mach-bcm283x/include/mach/base.h
-@@ -7,6 +7,7 @@
- #define _BCM283x_BASE_H_
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index cd823ad746..6b678c5d23 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -429,6 +429,7 @@ static void get_board_revision(void)
+     int ret;
+     const struct rpi_model *models;
+     uint32_t models_count;
++    const char *fdt_model;
 
- extern unsigned long rpi_bcm283x_base;
-+extern unsigned long rpi_bcm283x_mbox_addr;
+     BCM2835_MBOX_INIT_HDR(msg);
+     BCM2835_MBOX_INIT_TAG(&msg->get_board_rev, GET_BOARD_REV);
+@@ -437,6 +438,11 @@ static void get_board_revision(void)
+     if (ret) {
+         printf("bcm2835: Could not query board revision\n");
+         /* Ignore error; not critical */
++        if (fdt_magic(fw_dtb_pointer) == FDT_MAGIC) {
++            fdt_model = fdt_getprop((void *)fw_dtb_pointer, 0, "model", NULL);
++            if (fdt_model != 0)
++                printf("FW FDT model : %s\n", fdt_model);
++        }
+         return;
+     }
 
- #ifdef CONFIG_ARMV7_LPAE
- #ifdef CONFIG_TARGET_RPI_4_32B
-diff --git a/arch/arm/mach-bcm283x/include/mach/mbox.h
-b/arch/arm/mach-bcm283x/include/mach/mbox.h
-index 490664f878..ad086be467 100644
---- a/arch/arm/mach-bcm283x/include/mach/mbox.h
-+++ b/arch/arm/mach-bcm283x/include/mach/mbox.h
-@@ -38,8 +38,8 @@
-
- /* Raw mailbox HW */
-
--#define BCM2835_MBOX_PHYSADDR ({ BUG_ON(!rpi_bcm283x_base); \
--                 rpi_bcm283x_base + 0x0000b880; })
-+#define BCM2835_MBOX_PHYSADDR ({ BUG_ON(!rpi_bcm283x_mbox_addr); \
-+                 rpi_bcm283x_mbox_addr; })
-
- struct bcm2835_mbox_regs {
-     u32 read;
-diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-index 362838e9b9..aef3a31f29 100644
---- a/arch/arm/mach-bcm283x/init.c
-+++ b/arch/arm/mach-bcm283x/init.c
-@@ -145,6 +145,11 @@ static void rpi_update_mem_map(void) {}
-
- unsigned long rpi_bcm283x_base = 0x3f000000;
-
-+/* This is intialized before relocation. Enforce .data section usage.
-+ * Otherwise it's going to .bss and will be zero after relocation.
-+ */
-+unsigned long __section(".data") rpi_bcm283x_mbox_addr;
-+
- int arch_cpu_init(void)
- {
-     icache_enable();
-@@ -154,7 +159,7 @@ int arch_cpu_init(void)
-
- int mach_cpu_init(void)
- {
--    int ret, soc_offset;
-+    int ret, soc_offset, mbox_offset;
-     u64 io_base, size;
-
-     rpi_update_mem_map();
-@@ -170,6 +175,11 @@ int mach_cpu_init(void)
-         return ret;
-
-     rpi_bcm283x_base = io_base;
-+    rpi_bcm283x_mbox_addr = rpi_bcm283x_base + 0xb880;
-+
-+    mbox_offset = fdt_node_offset_by_compatible((void*)gd->fdt_blob,
-soc_offset, "brcm,bcm2835-mbox");
-+    if (mbox_offset > soc_offset)
-+        rpi_bcm283x_mbox_addr =
-fdt_get_base_address((void*)gd->fdt_blob, mbox_offset);
-
-     return 0;
- }
 -- 
 2.40.1
