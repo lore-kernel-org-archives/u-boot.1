@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502ABC61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E45C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B813C875C9;
-	Tue, 21 Nov 2023 18:32:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 70BB687545;
+	Tue, 21 Nov 2023 18:32:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NOtnCrH8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NXkMG9Zj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF78C87545; Tue, 21 Nov 2023 18:32:05 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 81E24875F4; Tue, 21 Nov 2023 18:32:43 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 940F387250
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:32:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48AE887250
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:32:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700587922; x=1701192722; i=xypron.glpk@gmx.de;
- bh=YKdKPGf2NITUbkhUdUHu3XJaWzuqr9LRh5BDrb3hyE4=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=NOtnCrH8VOAffWeBXFe7KLneR1r8gYzGlg86sy9VUnjBNwEHAPBZ9oz21bEz38Cx
- aCOdXaJlcQyBDeMLUKHXyfvY1aOJtVzr1owSVvWUhKOFlvBFOVLHmGSokqAmegyia
- 31lhRYZyGWUtA+VDc4DCPaUt3OEnAumpdiPH0eQUVdn97gSzVJsT0wkRcQvrykcCu
- w395w4ZKDvq5J6uJL5odZ9Fc2relm5tUj76glnbpe1g1k4Jae1r8Zm1uvGHHujV0X
- UnsKBrgedE2vFabUgDeyco6i8G93B/n1nOww0GjdqIRq52Z6O7iSR5MuRsX3DSu6C
- qLA88xFSvs6Kd2Vuzw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MaJ7v-1qrO0C42In-00WBIW; Tue, 21
- Nov 2023 18:32:02 +0100
-Message-ID: <539b4abc-be46-45c5-98d0-71f2b289540c@gmx.de>
-Date: Tue, 21 Nov 2023 18:32:01 +0100
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2851cc359c1so1642746a91.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:32:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1700587959; x=1701192759; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jULxanMrniC6VII5HDwFala9W4yJEsWBh65iGBbi8mQ=;
+ b=NXkMG9ZjTUYR40DlD+w9jv0LE0Y2AVSAKjn0SiRT8lo5mpAF4nzBZgr1IP6NWqDdKM
+ JREaLtrYy5I4m6GbgQ5mwgbb5HpY2XQGA5kGtETyoor2SKcHISEULaKZy4NIv3+o1PUW
+ egYDFue8SCFTdJsZlNaC3RNmS5gvrPQBmCcrjuFM/FokUfFyrsXq2225iOnR8VTuF0xj
+ 9YzCp21rCpXaEQS9OnZndXTZktj2rm07b+/j1pScJe746law/eAXxcyf4SOpl7WL3zfP
+ yh+uQdMJz5BGAxdkuOhkxyv9HrzaucO28BBj8xmBCqcwMLremMLJu6TATcngdhH7+lq8
+ KE8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700587959; x=1701192759;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jULxanMrniC6VII5HDwFala9W4yJEsWBh65iGBbi8mQ=;
+ b=OLcbU30mtDIQk2WQ497hhzTDUrISRV3J6D/Tu4rtm5xNp30fP4jreO2roocOBRsld6
+ LAAOMey6nb0ghlf6NIEcJTXAeZGWHGZ3OHBfzSqxtzPZTcS0+dLKGGkeeTt+8XSPJ2ce
+ S1ySEyty11f3wjkrSwWebsg/BM4JjDrh1sjFgIAirVO7JFcL3k+2C8P40e0fmZlr4fhI
+ SpDyu2EFPtxDgBI8aWXQqEjLO/vkC4b3HW7g9qJSX8MjIkkPxGf2atmd6tlMXGsOv0Yj
+ 8e+PMPhAkHJ5Q/fzVNmv75HCEM3oQkoLoldTRYFcLqcP6r7oiOQ5E3glyYaSGg6iBFTk
+ 97Mw==
+X-Gm-Message-State: AOJu0YxraiVtHG5PVlJKeDIpj563iA2+VamW2QnqWeMW/qpF+2grtHmf
+ 6AOVUGMlDSXG/bgnalHjl3y4+q808f/yRI+DcIu2AA==
+X-Google-Smtp-Source: AGHT+IH54DKtE5abtLV0IwLJ7P0ZGZm+MG6RmLKh/Q3xC1pwjvSH9WaOkNnMar+pspAlAI4meq80/yKMyH7cSTf9iCE=
+X-Received: by 2002:a17:90b:1b01:b0:280:1fdf:2f3d with SMTP id
+ nu1-20020a17090b1b0100b002801fdf2f3dmr9000266pjb.16.1700587959629; Tue, 21
+ Nov 2023 09:32:39 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] efi: test: Create a disk image with and EFI app in it
-Content-Language: en-US, de-DE
+References: <20231107190601.17151-1-semen.protsenko@linaro.org>
+ <20231107190601.17151-3-semen.protsenko@linaro.org>
+ <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
+ <CAPLW+4mtbbEZmQtik_qEtmo0Ehr7R=-yZOO8xVL2Dp0rCCHZ4Q@mail.gmail.com>
+ <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 21 Nov 2023 11:32:28 -0600
+Message-ID: <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
+Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-4-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231121113557.800353-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:x5T93VPLjBjg8RNWLetMSpQEHaqXnUiKUUwEd7TkzhflmMPStau
- knvEVebzQYhL4G+djlKWID/0xYKbebu4ZAB+3LKgcJjSFF5zWblU2+nL0QFBVC21KFxeLGE
- ZSjGMnYTC/R2R+HU5jwH6KXWaUcRXOY06NBtn1x2CA7ClcaPWUkqSYoIomQMcxas64yok8r
- EohxeBIzKrPIVefNKSgiQ==
-UI-OutboundReport: notjunk:1;M01:P0:rmtA0EGsJNo=;bGJAs4zg+fGZl6BxfF7CCUohqoc
- QEiob4SEPfhzfyZSN2D3iJvt4qr+ci0qk2U8ODdDTEU/6tUjitgLJDl86dFKVWGt0QNZ4KWZ+
- rE0nOYDedMIe08nHvlX5k4s69J5VnSW7qzCVQtTfnJvxA8xODeGL+HZYPSwy6FJq8QdjfCZoh
- elLDBNaYE2u5pmhk7gqhI0b1W9Gs/50EEHDkcDHGqR1Im1jn2fIqsFlFbt7Ahg/E7X42VwrU1
- YEK9sw0wIC6oDCQAuV0UzL7Rm2hFpwEq1h6q94IN+bDFdJCWkhvFdr4F2Trsu6923KbCvdzpr
- Z7cl6BMxhEsGrAtitvurZBCdaeGkLZPLD+vl/fRd5gMjhdkXPreV1mRJE/ug3PbulQwusOUGa
- l6tpEh9Pfn+ZjIZftGCxGIebXIjbtR0P/hP9ZzfZgU8YUOKRs8Bp1PMUv7gbyTAewaNV7Fg6U
- TR2x60uy2Qefjbmi53sCmyh8CcAz5ju2wA3pVdeQJI2OlaR9JdmLfX7JTUVUFFHL15/JE8tQp
- T65XVTmm/8bXSHlsA/3rzn0pzIassv16EbglqsRSxo6jyjmyuPEJRyLPFtoySltBJOEMUjeDj
- czgu9L3lS/Dlld4in1qavB/nurl3SA+xBXydkbjIngBAy92o4RriDcXmOMZRzqiuV+LycmDfC
- ff21UYAvW3lG/qqIrNl7CSGcMH73OMoqeRT51cuAHpP6nluiMh74K22VoDYL0P/9GLeSaGsUu
- hGtZCW0CKjcOVP0UnvHzqxitEnLOW72J5I1R3zdHlC5dJn9c2qL0NMcZrWaWE+qYpVB0wvlwa
- dQD2PM835gdTes48OZ/0y5t0evFhjO8rhVLk9c+hqBn49AVmhJkb9NPJaImsaxoA+MP/memNF
- AzvgKEbOAAEiK+lE5ji1cOXgpGWhBG8Ej0BGF2gtHaj+cqEQ7ga9icnot8UmbRFb8KaKRh/eA
- 7I3xmgltSrmL9u5uIsqHjKJ89Gs=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,80 +91,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/23 12:35, Simon Glass wrote:
-> Create a new disk for use with test, which contains the sandbox
-> helloworld app. This will be used to test the EFI boot bootmeth.
+On Mon, Nov 13, 2023 at 12:01=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
+> >
+> > The 'port_id' seems to be needed for ARCH_EXYNOS4 boards. Because
+> > Exynos4 doesn't have proper DM clocks, it uses 'id' property to get
+> > corresponding UART clock frequency from its mach code.
+> >
+> > Here is what's happening in the serial driver in case of Exynos4:
+> >
+> >   1. get_uart_clk(port_id) is called
+> >   2. which in turn calls exynos4_get_uart_clk(port_id)
+> >   3. which uses "port_id" value to read corresponding bits of of
+> > CLK_SRC_PERIL0 register
+> >   4. those bits are used to get corresponding PLL clock's frequency
+> >   5. which is in turn used to calculate UART clock rate
+> >   6. calculated rate is returned by get_uart_clk() to serial driver
+> >
+> > So I don't see any *easy* way we can get rid of that id property.
+> >
+> > The proper way of doing that would require converting Exynos4 clock
+> > code to CCF (enabling CONFIG_CLK_EXYNOS). Which of course also means
+> > implementing clocks in dts, akin to kernel's exynos4.dtsi. Then it'll
+> > be possible to get rid of 'id' property.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> That sounds good!
 >
->   test/py/tests/test_ut.py | 32 ++++++++++++++++++++++++++++++++
->   1 file changed, 32 insertions(+)
+> >
+> > Maybe I'm missing something, please let me know.
 >
-> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-> index 1d9149a3f683..f6220c05238a 100644
-> --- a/test/py/tests/test_ut.py
-> +++ b/test/py/tests/test_ut.py
-> @@ -468,6 +468,37 @@ def test_ut_dm_init(u_boot_console):
->       with open(fn, 'wb') as fh:
->           fh.write(data)
+> An easy way in the meantime would be to look at the compatible / reg
+> property, e.g. here is a sketch:
 >
-> +
-> +def setup_efi_image(cons):
-> +    """Create a 20MB disk image with an EFI app on it"""
-> +    mmc_dev =3D 7
-> +    fname, mnt =3D setup_image(cons, mmc_dev, 0xc, second_part=3DTrue)
-
-If you would set the partition type GUID to ESP, U-Boot would stop to
-complain about EFI variable that cannot be persisted.
-
-There is a pending patch that wants to make the failure to persist EFI
-variable fatal.
-
-[RESEND,v2] efi_loader: Fix UEFI variable error handling
-https://patchwork.ozlabs.org/project/uboot/patch/20231113161031.138304-1-o=
-451686892@gmail.com/
-
-Best regards
-
-Heinrich
-
-> +
-> +    loop =3D None
-> +    mounted =3D False
-> +    try:
-> +        loop =3D mount_image(cons, fname, mnt, 'ext4')
-> +        mounted =3D True
-> +        efi_dir =3D os.path.join(mnt, 'efi')
-> +        mkdir_cond(efi_dir)
-> +        bootdir =3D os.path.join(efi_dir, 'boot')
-> +        mkdir_cond(bootdir)
-> +        efi_src =3D os.path.join(cons.config.build_dir,
-> +                               f'lib/efi_loader/helloworld.efi')
-> +        efi_dst =3D os.path.join(bootdir, 'bootsbox.efi')
-> +        with open(efi_src, 'rb') as inf:
-> +            with open(efi_dst, 'wb') as outf:
-> +                outf.write(inf.read())
-> +
-> +    finally:
-> +        if mounted:
-> +            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mn=
-t)
-> +        if loop:
-> +            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
-> +
-> +
-> +
-> +
->   @pytest.mark.buildconfigspec('cmd_bootflow')
->   def test_ut_dm_init_bootstd(u_boot_console):
->       """Initialise data for bootflow tests"""
-> @@ -476,6 +507,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
->       setup_bootmenu_image(u_boot_console)
->       setup_cedit_file(u_boot_console)
->       setup_cros_image(u_boot_console)
-> +    setup_efi_image(u_boot_console)
+> static int get_id(ofnode node)
+> {
+> ulong addr =3D (ulong)plat->reg;
+> if (ofnode_device_is_compatible(node, "samsung,exynos4210-uart")) {
+>     return (addr >> 16) & 0xf;
+> ...
 >
->       # Restart so that the new mmc1.img is picked up
->       u_boot_console.restart_uboot()
+> reg =3D <0x13800000 0x3c>;
+> id =3D <0>;
+> };
+>
+> serail_1: serial@13810000 {
+> compatible =3D "samsung,exynos4210-uart";
+> reg =3D <0x13810000 0x3c>;
+> id =3D <1>;
+> };
+>
+> serial_2: serial@13820000 {
+> compatible =3D "samsung,exynos4210-uart";
+> reg =3D <0x13820000 0x3c>;
+> id =3D <2>;
+> };
+>
+> serial_3: serial@13830000 {
+> compatible =3D "samsung,exynos4210-uart";
+> reg =3D <0x13830000 0x3c>;
+> id =3D <3>;
+> };
+>
+> serial_4: serial@13840000 {
+> compatible =3D "samsung,exynos4210-uart";
+> reg =3D <0x13840000 0x3c>;
+> id =3D <4>;
+>
 
+To be honest, I'm a bit of busy right now working on U-Boot port for a
+new Exynos dev board, which I want to finalize and upstream ASAP. Do
+you think it's possible to take this one as is for now? At least it
+fixes one issue (fdtdec API and global data pointer).
+
+Thanks!
+
+> Regards,
+> Simon
