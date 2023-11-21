@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920B5C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFF1C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D062E8759B;
-	Tue, 21 Nov 2023 19:18:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6A23C875F5;
+	Tue, 21 Nov 2023 19:19:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="i3aQPfgF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RnEo4rA1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4B158759B; Tue, 21 Nov 2023 19:18:03 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4425287605; Tue, 21 Nov 2023 19:19:47 +0100 (CET)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DF0087448
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:18:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8900A875F5
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:19:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700590680; x=1701195480; i=xypron.glpk@gmx.de;
- bh=v0ViEAWv1sJKXK24POYdz49AZXl16bG1GGwhaEsv7qg=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=i3aQPfgFYudaYdJgg+MdCosjr7piiXVemSRhKQqjJNWIDJNDCNw2qdJ9RwoyHkM8
- 2Tw3bVgb2DSiANND7/dwy/D2bfrE8ilYkqixLuilMd+y53B89HPUw+xO1JbSJ0aSh
- SF5tAVr0sFdCjB0Rt89Ky+B7OnvT+EjrsepgQVqoZ/YHUL+EhbonGt+AAI8mY9R3T
- NPz54S7jLWaNBDl85l6BijGFDOOnp/piQ2rXJ8yXEBY931xBULefQIfNVv5JRsfk5
- zbyslYPHXWU8QbskH5dzDQXJi8vU/QKhZWQzpzqG0vNI9/jptVNuZscXf5o1Pc83c
- 1tnPKH0EJPHl6P9U6Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLzFr-1qo71l1iu9-00HwMS; Tue, 21
- Nov 2023 19:18:00 +0100
-Message-ID: <75b45f55-9248-4821-b428-11ca3e8943a6@gmx.de>
-Date: Tue, 21 Nov 2023 19:17:59 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] efi: Show the vendor in helloworld
-Content-Language: en-US, de-DE
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-77d58a21a0dso58113785a.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:19:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700590783; x=1701195583; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dFR914ufj+plIDdIGJxaTk8tHIvXm84/ffGr4cfdm28=;
+ b=RnEo4rA1r9vlX93Vc/dIYIm1O15a2S8M0agE+0VtrB8g2KRbehYMFPEMAUs6tcmDsQ
+ 3cf0uE/4YkY6DGzHBCB9vnpU/WsaoWtjWrBVXz3+4GLDQuAZQdWy2PYwG2J0jz8nvDQ9
+ ChM0ybUVDdy8Snc0ayCFBtCjO3SpunzcToX7w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700590783; x=1701195583;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dFR914ufj+plIDdIGJxaTk8tHIvXm84/ffGr4cfdm28=;
+ b=czklz0C/91XAuuE+lmnCUr2QQQ1SMdLIf3dN1lymnTz+16TfK1TbjPnC2RFABhHHzE
+ Gk8UVkWih7f+XXj/KOzdl9JRrgIoljrrQKHYPTuUIz1ZpeJJWaHIweLEyOsGCCrCakcY
+ bZe//cRTb0Ju2Kz2mH0Kj/eo6Za3Zth0/DdHpxRDjp7GJgQ7mBsZpkYEif3Q3amcuCX5
+ B+QRQv385gex6DxE8rPGigFgQP6wxUxAp8ERbjYWOmy4hQ6afuUYvBpNl/RMfUlNHvvZ
+ 75d7nMMirIqZC++SmEMViwFYBY/Syt4hx3wPJt0KatrfxqIOL9EchLbFcGYWU0egB3Dr
+ JfkA==
+X-Gm-Message-State: AOJu0YzKiM78lBuD8O2yYDLNd6NODjUsjNMcXqKarj84H/CJr05bhHfW
+ SB4Cj8wfgk5tweLDKXfKAq2vuQBSQtW0+XEd0xmG9g==
+X-Google-Smtp-Source: AGHT+IGNhQ1RCHKjJP5oRNKhcn8pLnwnf7UV7EGv8o1+ypD8oHt7KMjZL9lugZfcdBQuZRq6BtBHZQ==
+X-Received: by 2002:a05:620a:11ab:b0:77a:29a:2758 with SMTP id
+ c11-20020a05620a11ab00b0077a029a2758mr12997939qkk.73.1700590783336; 
+ Tue, 21 Nov 2023 10:19:43 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
+ [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
+ by smtp.gmail.com with ESMTPSA id
+ s26-20020a05620a16ba00b0077a029b7bf1sm3805032qkj.28.2023.11.21.10.19.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 10:19:42 -0800 (PST)
+Date: Tue, 21 Nov 2023 13:19:40 -0500
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-3-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231121113557.800353-3-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:PUj7aKbEVfecEQI2uc3BGHoNAOA6fTj8IkEZxCUrM4vAqsIBDso
- 0XozCt/OgKmGruQAWlsT6jDl1VKhmLcmgXz2Kv4XdYOghzUs9NJcEdqgQ8giYw8xjKrBNdc
- Q1Gd78y+jHsbRnpuzkE4o2lLPxMWkfObSYCtimOwCkksvgMYhZkZmgKzAy/PXv2b+9OdFVT
- hn3cYBwfPCOQt7hZeSi0Q==
-UI-OutboundReport: notjunk:1;M01:P0:7PoMh0ybRYU=;dgwgjSOATZABUlUVT6bo8kPCseM
- ceYReJhnzp8c9+gvk9P+6OpvLHIKy32PT0l3G50ZHEdORasE4tJg3xqdaB1y5bOhSINIQcxdo
- EXV+KSdcmOHhAwydLobek7/CEoOOZ/1mmncjY4Ob7IZ2LFRCbLkq3NS/tx6lD9SkGOrOJsSjX
- 1oIZ3NFL8DOHMu+JNm4c4DO5JvAD52P7vyKOt3hDxjbMxirlwjzxPxeH9w9e+b35oz1DvLd7w
- 7XQKGN5jJOZReGmh8W8DAOgrdb5ZNOO+XmhDqxwUdqOSVRZzAagjVtMRsNJp8GJdp8Tkz6hFW
- +99CIfA3b/K7Rii+5Y/vntR08weUb1/RpnVpD+cwRTwSioDCk59q5SQxyi3pMCLJP5e4g+m5G
- TRhQf3+PgHeUdG3p2JaWdj6Nq74tAkit7ov2wuaU/5XX6/YCNyaCmeXrd4CMV5Of/O5fBYH9Q
- 8dubMGu0cjZyd5IzwoPmHWCzqPVqxfTJgqLyQDFw8MKmSspRI/iGZkN+p3ZrNQJ8XIjya5pc8
- vSyLWL3LcA1imw7+R084flAr2kRsNWjO18LmnlXFbIVmLrrxKyt2KX3TXqlIy4ddusCnhyaEa
- I90S1Vdc/2gG+aSMP5Mgnj/G9ISJHIPQ5Ktn9spfMyvE1QY5hkDI6fz2Ae9PYZa6MueLwa2Ba
- T/yB9ncIz75uGqITCZTvdS6zEsDnGFbl8PaAY9c+egTNgsZLhqmfRfoB42OLk3nojzle6vxi/
- 1pmJrp8CPyyHqw79PwQRtXJiqJQUXdhAZBsHO4u5zoWEhL5GQ2Nq7jTSqqwJn/VfCCXN5Alwv
- 6sJqW/begt3TqzQfo67P0Rd0DwcnF1lUx0KoahJwJLm7twxZoBLKfL33XZ1zO6x5yRZ4c+do/
- jG9hGIjTUeclLscEt+uaRGUaOcqcTTGg8RRJsXjJYi+4LM7ONFkh1t1QtS7AnIN7LcMT4+EEJ
- R0ulBgmFANrXuAxfvQXaZpZyMYw=
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Anatolij Gustschin <agust@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bin Meng <bmeng@tinylab.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: Re: [PATCH v2 1/5] cyclic: Add a symbol for SPL
+Message-ID: <20231121181940.GZ2513409@bill-the-cat>
+References: <20231121020932.733405-1-sjg@chromium.org>
+ <20231121020932.733405-2-sjg@chromium.org>
+ <20231121130630.GM2513409@bill-the-cat>
+ <CAPnjgZ02NZp6fcx+o=HJ0maGxSJQTkSzAoEtSCdgP4oqHdy3KA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="s3IxnwLop564Gui7"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ02NZp6fcx+o=HJ0maGxSJQTkSzAoEtSCdgP4oqHdy3KA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,35 +103,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/21/23 12:35, Simon Glass wrote:
-> Show the vendor name since it useful to see that.
 
-With this commit message it remains unclear why displaying the constant
-value (u"Das U-Boot") is of any value.
+--s3IxnwLop564Gui7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
+On Tue, Nov 21, 2023 at 09:20:39AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 21 Nov 2023 at 06:06, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Nov 20, 2023 at 07:09:25PM -0700, Simon Glass wrote:
+> >
+> > > The cyclic subsystem is currently enabled either in all build phases
+> > > or none. For tools this should not be enabled, but since lib/shc256.c
+> > > and other files include watchdog.h in the host build, we must make
+> > > sure that it is not enabled there.
+> > >
+> > > Add an SPL symbol so that there is more control of this.
+> > >
+> > > Add an include into cyclic.h so that tools can include this file.
+> > >
+> > > Also add the kconfig.h header so that CONFIG_IS_ENABLED() works. We
+> > > could avoid this for now by moving the location of the watchdog.h
+> > > inclusion to outside the USE_HOSTCC area. But at some point the #ifde=
+fs
+> > > from these files will likely be removed, so there is no benefit in
+> > > going that way.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > [snip]
+> > > --- a/include/cyclic.h
+> > > +++ b/include/cyclic.h
+> > > @@ -11,6 +11,7 @@
+> > >  #ifndef __cyclic_h
+> > >  #define __cyclic_h
+> > >
+> > > +#include <linux/kconfig.h>
+> > >  #include <linux/list.h>
+> > >  #include <asm/types.h>
+> >
+> > As I said, we just need to fix lib/sha*.c so NAK. The only thing that
+> > stopped me from posting that patch last night was that I went and
+> > removed <common.h> from everything in lib/ as a follow-up and that's
+> > taken a few more iterations.
+> >
+>=20
+> Yes I had the same thought the first time and mentioned it
+> specifically in this version.
+>=20
+> If you are a doing a clean-up, perhaps you could drop the #idefs in
+> the sha files?
 
-Heinrich
+Nope, they specifically need <cyclic.h> outside of tools builds for
+schedule().
 
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
->   lib/efi_loader/helloworld.c | 3 +++
->   1 file changed, 3 insertions(+)
->
-> diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-> index bd72822c0b72..1135d3a3c37e 100644
-> --- a/lib/efi_loader/helloworld.c
-> +++ b/lib/efi_loader/helloworld.c
-> @@ -234,6 +234,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
->   			(con_out, u"Missing device path for device handle\r\n");
->   		goto out;
->   	}
-> +	con_out->output_string(con_out, u"Vendor: ");
-> +	con_out->output_string(con_out, systab->fw_vendor);
-> +	con_out->output_string(con_out, u"\n");
->   	con_out->output_string(con_out, u"Boot device: ");
->   	ret =3D print_device_path(device_path, device_path_to_text);
->   	if (ret !=3D EFI_SUCCESS)
+--=20
+Tom
 
+--s3IxnwLop564Gui7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVc9LwACgkQFHw5/5Y0
+tyzqcAwAk67Mu4VcfT+dEjOaTZ4zOpEugyjvlhYoIBZpNOoZHIMkAMNSFWvV7W/T
+fW8+/ojp4Xd1Lr0WgAaZ10jleED/xb616ZtWc9Ywq5814KIqgfP1uJlYkRL18xD6
+ZksikXg3NlqGquqyepUsi0aqtmDkTHTA1pDDcjJ5lZK7y2wkhcQtWbdNBWAj91uk
+LGM0bL9eY07xkNfmUeeOz9Z/CR/Tdd0NXAa5+eP3nTD/HOPNWjYj8u2wd67VNWtf
+S/D0mfdkqLhwOrm8NDRgZjKL1y9izQJeNlkeOJA+Brpq4DgJaEASflLp8kUj27Hj
+et/88q2xIwMH91pC3ZMMG4+Z2qgeq8qXA8XVoHdFQRmJjBwO2wimWUYTGBv+wk/f
+hUreswWPuAfe9hegmQifIb8V/e0TDaDNfMJT9Si/e1A1kJ2HzbBrfAezm+eVMa5m
+Y5O0Ob9R3THQxFhBFAcGjDyNtEIu1h3o+PFBBG5VrQFt5RxI+hRFO5VLD6kaKfRR
+x/v+Ebdm
+=UcoU
+-----END PGP SIGNATURE-----
+
+--s3IxnwLop564Gui7--
