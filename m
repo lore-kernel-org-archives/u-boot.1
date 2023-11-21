@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B922C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6556CC61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A5B7875C7;
-	Tue, 21 Nov 2023 18:09:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21B1B8763A;
+	Tue, 21 Nov 2023 18:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tlEB8hUH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iWCVR6Jm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D792287669; Tue, 21 Nov 2023 18:09:49 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 787F4875FC; Tue, 21 Nov 2023 18:09:50 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71C9E87637
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8282887642
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-40b2afd049aso5411745e9.0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:39 -0800 (PST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2c8880fbb33so20817181fa.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586579; x=1701191379; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586580; x=1701191380; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3/Qkl++NBc48pED0qyHU6lBLjSptauontEX6xhL/kog=;
- b=tlEB8hUHwfOO5NSBHzrMzWlUDAhcnPzJbanokPJQza/LUqtu/8uwyDnrHytso23huU
- J3fRWMw6aRPd9r4B7F0OaMkFEgb8q/g9s78wB6EG456GFPVzJljZAm/dl5yCaP46zNPc
- lwzWhtccLWYWx+KK2lobpz90tWNJWI9rXM8kxFGYmb/ZvGQrNwBQfjEJ0sud+ZMWPrXR
- xv9SHk5oRBwRX2nYUQrCLy/qOLotGF49jg8FIIz96Ej3kVozDa3OMw0wtCCE2YTkUgRz
- pOx9l+H4mnXijaMXfprUbAs8oIw2c17QZPrC6z3tU3PMwl5qlb3etBE8CuEzVGTsg6n4
- O0Cw==
+ :reply-to; bh=d4YhP6MdZSOZ44DXIDRNYanXLEw0d+r3l7ESBfKug2M=;
+ b=iWCVR6Jmb7y54SaUGgEDdvNuGmht1TUvIkbpS73dLNz0kGp/kMsrMXXiBDR5MpCnIR
+ 1GRnTURxlAvsf7bxTG40RBfgzN7/zRS0Lucb2CUEWPa9pURlEh5DLbk+MQNjzGeNj2a+
+ e43teoSXYakx8NvQNkmufKLfL2aOuBkui/tQTsWusgFbViJtmAqT+k3EZuNBLrnXFDGf
+ naTNXjSkxtVZfMdTQJf6SyaSTTPM2DH4PRdXLTnL5VChKSb5esGQxVp0fqXK96DdUb+Q
+ DoMkhZkI73E8nbAHez+LqSZn4VU5dgnQJoWL8eUnm5b8xZL2Ccfkh9aMYax2LKmWCpel
+ dEkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586579; x=1701191379;
+ d=1e100.net; s=20230601; t=1700586580; x=1701191380;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3/Qkl++NBc48pED0qyHU6lBLjSptauontEX6xhL/kog=;
- b=U7JaTXkPIUJlOdlTXpRR9w7PYDslE5V2z6+B0N86j3eoHtUE0ooEiKHI1mFlHiX7Em
- EOMnLn7run8tevvspX2x0kUTlLjVLA8XODmmt6YvAlRDnkwd1AIr7zJOwtM1BIdTYQ/k
- Oi7owtae6dFx3vhf3FuPgF48d6OYlyFd6sVSMKXr89zKqqOqiU1Vg+SPMLpYQC6qQtVq
- DhI5Izwc1Hblaf5OFjBuWgB8ZqrHwOHbze+Osks3Pn8s7lDK3baYGxDAfdkQtsg/T3xd
- OyArfm8EZECbK26wV8aaAeZzirf3qFvATNUEwvx5gp596mqWXzqqV4JPgqdHmG+SWnEs
- ryrA==
-X-Gm-Message-State: AOJu0Yz9ivWr268r/Uou88t8pPOhkvji2J8nNZrgZPqqrFShaBrr9cs/
- TLug3QQoYFCMufk0Xu1tgGNJ76iIl8KXjeuyq1YMsA==
-X-Google-Smtp-Source: AGHT+IE8zqWPo6zobv+fPxtffTuRF56cnQnhfhunn6WWi7PhlLqSNqOufiUP7E2TERXr0GZ6JB8vdg==
-X-Received: by 2002:a05:600c:46d1:b0:3f9:b430:199b with SMTP id
- q17-20020a05600c46d100b003f9b430199bmr7721786wmo.15.1700586578964; 
- Tue, 21 Nov 2023 09:09:38 -0800 (PST)
+ bh=d4YhP6MdZSOZ44DXIDRNYanXLEw0d+r3l7ESBfKug2M=;
+ b=P1P5QNiTLP1mAYIP4AS0ynVMorK0cx40EpZVrLOekpUnq/qAFVSVHKg+6DMxkKrSsT
+ IaJynMKhLfciRuF5BZkTUFQXMXDz/LGZ4NLswax93OxzxBwI8I+Tkz3X3dnZmxl88Q3g
+ wGDm/hwfvLqHTTWXBa4Knz/2KELmSoq4I0Cw6wqctlS3UBgpzztIb86DPuA29EitlsCV
+ U6OfQK/6zpSvRUpim1LAZv+x7nCVm5PMp1DpdAPxKSRZuCsOqSH53pVDeZ2xkveHNVrr
+ X2s1nB7ENsU69oZ+HJfwGTbpR65tcpbZMAKhKxpEKyq7sb+o5dsAj5YCazKAhkets8TQ
+ 4isw==
+X-Gm-Message-State: AOJu0Yz2TJUQ6kvcd/z9Oqr1O4w8+IFsu+GpakmDAFd+UPzKymPLr4OG
+ zYlGjInPBBDumRmnfL3yE7BLnw==
+X-Google-Smtp-Source: AGHT+IErn2Yz+cwYOt6Hfub+A9meRkqcuQlTzHyVGGe2LG6L0Vosvu8Hf3GAUVtg0yCPCpOvTE1mog==
+X-Received: by 2002:a05:651c:157:b0:2c5:1d11:5688 with SMTP id
+ c23-20020a05651c015700b002c51d115688mr6883527ljd.14.1700586579855; 
+ Tue, 21 Nov 2023 09:09:39 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.38
+ 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:38 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:39 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:33 +0000
-Subject: [PATCH 10/21] dts: dragonboard410c: fix compatible and clocks
+Date: Tue, 21 Nov 2023 17:09:34 +0000
+Subject: [PATCH 11/21] board: dragonboard410c: import board code from
+ mach-snapdragon
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-10-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-11-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +84,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10960;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7010;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HWyNrvssFYL644V3rv1Imzi098XoJZUriFDqWelzcGc=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ25qGl8OR/z7kDj5DZfkKv3n74yvC84zs1HWnXjQq
- vlTxg65jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR0hJGhhUib0rUHsyM+FFY
- b/QhyyepfLrDFNfXm9c/Wsj465ROmiQjw4auCfZP/8/p9zY/070i2/RNXn+Rmc/CPxOiz+kvLHz
- j7wcA
+ bh=NRk2wgImu9xSxY0Jqke9wn+fk97YriyFyd2l5TJfhPk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ24HT3ZMcJhzcuGtXb0eflx+2TPZEpoyLBWtX1u/T
+ /WPOhnQUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbC0c3IMFEvkf9Mg9EZZXbN
+ w763Mzbop3+pvGzj+lZwK/c3n2nfVzEybPkvYGJwJv3LMksf48qvFavMH/0zXxL+YuX27WzmK5S
+ unwQA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,329 +109,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the root compatible strings from upstream Linux, add missing
-'#clock-cells' property to the gcc node.
-
-Adjust some of the msm8916/apq8016 drivers to use the correct upstream
-compatible properties and DT bindings.
+Some of the db410c board support code was written to be generic and
+placed in mach-snapdragon. However, as the db410c is the only board
+using this, move the code out of mach-snapdragon. This makes is more
+obvious what code is relevant for which targets and helps tidy things up
+a little more.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/dragonboard410c.dts             |   7 +-
- doc/device-tree-bindings/usb/ehci-msm.txt    |  10 --
- drivers/clk/qcom/clock-apq8016.c             |   7 +-
- drivers/phy/qcom/msm8916-usbh-phy.c          |   2 +-
- drivers/pinctrl/qcom/pinctrl-apq8016.c       |   2 +-
- drivers/usb/host/ehci-msm.c                  |   2 +-
- include/dt-bindings/clock/qcom,gcc-msm8916.h | 179 +++++++++++++++++++++++++++
- 7 files changed, 190 insertions(+), 19 deletions(-)
+ arch/arm/mach-snapdragon/Makefile                  |  2 -
+ arch/arm/mach-snapdragon/include/mach/dram.h       | 12 -----
+ arch/arm/mach-snapdragon/misc.c                    | 55 ----------------------
+ board/qualcomm/dragonboard410c/Makefile            |  3 +-
+ board/qualcomm/dragonboard410c/dragonboard410c.c   |  4 +-
+ .../qualcomm/dragonboard410c/misc.c                | 51 +++++++++++++++++++-
+ .../mach => board/qualcomm/dragonboard410c}/misc.h |  1 +
+ 7 files changed, 54 insertions(+), 74 deletions(-)
 
-diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-index c395e6cc0427..a42b68fee8c0 100644
---- a/arch/arm/dts/dragonboard410c.dts
-+++ b/arch/arm/dts/dragonboard410c.dts
-@@ -12,7 +12,7 @@
- 
- / {
- 	model = "Qualcomm Technologies, Inc. Dragonboard 410c";
--	compatible = "qcom,dragonboard", "qcom,apq8016-sbc";
-+	compatible = "qcom,apq8016-sbc", "qcom,apq8016";
- 	qcom,msm-id = <0xce 0x0 0xf8 0x0 0xf9 0x0 0xfa 0x0 0xf7 0x0>;
- 	qcom,board-id = <0x10018 0x0>;
- 	#address-cells = <0x2>;
-@@ -79,6 +79,7 @@
- 			reg = <0x1800000 0x80000>;
- 			#address-cells = <0x1>;
- 			#size-cells = <0x0>;
-+			#clock-cells = <0x1>;
- 		};
- 
- 		serial@78b0000 {
-@@ -91,13 +92,13 @@
- 		};
- 
- 		ehci@78d9000 {
--			compatible = "qcom,ehci-host";
-+			compatible = "qcom,ci-hdrc";
- 			reg = <0x78d9000 0x400>;
- 			phys = <&ehci_phy>;
- 		};
- 
- 		ehci_phy: ehci_phy@78d9000 {
--			compatible = "qcom,apq8016-usbphy";
-+			compatible = "qcom,usb-hs-phy-msm8916";
- 			reg = <0x78d9000 0x400>;
- 			#phy-cells = <0>;
- 		};
-diff --git a/doc/device-tree-bindings/usb/ehci-msm.txt b/doc/device-tree-bindings/usb/ehci-msm.txt
+diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+index 3a3a297c1768..d02432df8b04 100644
+--- a/arch/arm/mach-snapdragon/Makefile
++++ b/arch/arm/mach-snapdragon/Makefile
+@@ -6,6 +6,4 @@ obj-$(CONFIG_SDM845) += sysmap-sdm845.o
+ obj-$(CONFIG_SDM845) += init_sdm845.o
+ obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
+ obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
+-obj-y += misc.o
+-obj-y += dram.o
+ obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
+diff --git a/arch/arm/mach-snapdragon/include/mach/dram.h b/arch/arm/mach-snapdragon/include/mach/dram.h
 deleted file mode 100644
-index 205bb07220fb..000000000000
---- a/doc/device-tree-bindings/usb/ehci-msm.txt
+index 0a9eedda414c..000000000000
+--- a/arch/arm/mach-snapdragon/include/mach/dram.h
 +++ /dev/null
-@@ -1,10 +0,0 @@
--Chipidea EHCI controller (part of OTG controller) used on Qualcomm devices.
+@@ -1,12 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Snapdragon DRAM
+- * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
+- */
 -
--Required properties:
--- compatible: must be "qcom,ehci-host"
--- reg: start address and size of the registers
+-#ifndef DRAM_H
+-#define DRAM_H
 -
--ehci@78d9000 {
--	compatible = "qcom,ehci-host";
--	reg = <0x78d9000 0x400>;
--};
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index 0af7191cff52..9de0ad5ed32d 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -13,6 +13,7 @@
- #include <errno.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,gcc-msm8916.h>
+-int msm_fixup_memory(void *blob);
+-
+-#endif
+diff --git a/arch/arm/mach-snapdragon/misc.c b/arch/arm/mach-snapdragon/misc.c
+deleted file mode 100644
+index 7d452f4529b7..000000000000
+--- a/arch/arm/mach-snapdragon/misc.c
++++ /dev/null
+@@ -1,55 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Miscellaneous Snapdragon functionality
+- *
+- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+- *
+- */
+-
+-#include <common.h>
+-#include <mmc.h>
+-#include <asm/arch/misc.h>
+-#include <asm/unaligned.h>
+-
+-/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
+-#define UNSTUFF_BITS(resp, start, size) \
+-	({ \
+-		const int __size = size; \
+-		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
+-		const int __off = 3 - ((start) / 32); \
+-		const int __shft = (start) & 31; \
+-		u32 __res; \
+-					\
+-		__res = resp[__off] >> __shft; \
+-		if (__size + __shft > 32) \
+-			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
+-		__res & __mask;	\
+-	})
+-
+-u32 msm_board_serial(void)
+-{
+-	struct mmc *mmc_dev;
+-
+-	mmc_dev = find_mmc_device(0);
+-	if (!mmc_dev)
+-		return 0;
+-
+-	if (mmc_init(mmc_dev))
+-		return 0;
+-
+-	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
+-}
+-
+-void msm_generate_mac_addr(u8 *mac)
+-{
+-	/* use locally adminstrated pool */
+-	mac[0] = 0x02;
+-	mac[1] = 0x00;
+-
+-	/*
+-	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
+-	 * Use big endian order so it is consistent with the serial number
+-	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
+-	 */
+-	put_unaligned_be32(msm_board_serial(), &mac[2]);
+-}
+diff --git a/board/qualcomm/dragonboard410c/Makefile b/board/qualcomm/dragonboard410c/Makefile
+index 1b99c8b0efef..a3ae1a5f9136 100644
+--- a/board/qualcomm/dragonboard410c/Makefile
++++ b/board/qualcomm/dragonboard410c/Makefile
+@@ -2,4 +2,5 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
  
- #include "clock-qcom.h"
+-obj-y	:= dragonboard410c.o
++obj-y += dragonboard410c.o
++obj-y += misc.o
+diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
+index 350e0e9e20aa..3ee7e806918b 100644
+--- a/board/qualcomm/dragonboard410c/dragonboard410c.c
++++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
+@@ -17,10 +17,10 @@
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+ #include <fdt_support.h>
+-#include <asm/arch/dram.h>
+-#include <asm/arch/misc.h>
+ #include <linux/delay.h>
  
-@@ -125,13 +126,13 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++#include "misc.h"
++
+ DECLARE_GLOBAL_DATA_PTR;
  
- 	switch (clk->id) {
--	case 0: /* SDC1 */
-+	case GCC_SDCC1_APPS_CLK: /* SDC1 */
- 		return clk_init_sdc(priv, 0, rate);
- 		break;
--	case 1: /* SDC2 */
-+	case GCC_SDCC2_APPS_CLK: /* SDC2 */
- 		return clk_init_sdc(priv, 1, rate);
- 		break;
--	case 4: /* UART2 */
-+	case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
- 		return clk_init_uart(priv);
- 		break;
- 	default:
-diff --git a/drivers/phy/qcom/msm8916-usbh-phy.c b/drivers/phy/qcom/msm8916-usbh-phy.c
-index 7c9d030a4d8a..b63115036ad9 100644
---- a/drivers/phy/qcom/msm8916-usbh-phy.c
-+++ b/drivers/phy/qcom/msm8916-usbh-phy.c
-@@ -96,7 +96,7 @@ static struct phy_ops msm_phy_ops = {
- };
+ int dram_init(void)
+diff --git a/arch/arm/mach-snapdragon/dram.c b/board/qualcomm/dragonboard410c/misc.c
+similarity index 64%
+rename from arch/arm/mach-snapdragon/dram.c
+rename to board/qualcomm/dragonboard410c/misc.c
+index 499dfdf0da6e..27d51ef78914 100644
+--- a/arch/arm/mach-snapdragon/dram.c
++++ b/board/qualcomm/dragonboard410c/misc.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+- * Onboard memory detection for Snapdragon boards
++ * Miscellaneous Snapdragon functionality
+  *
+  * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+  *
+@@ -9,10 +9,56 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
++#include <mmc.h>
+ #include <part.h>
+ #include <smem.h>
+ #include <fdt_support.h>
+-#include <asm/arch/dram.h>
++#include <asm/unaligned.h>
++
++#include "misc.h"
++
++/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
++#define UNSTUFF_BITS(resp, start, size) \
++	({ \
++		const int __size = size; \
++		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
++		const int __off = 3 - ((start) / 32); \
++		const int __shft = (start) & 31; \
++		u32 __res; \
++					\
++		__res = resp[__off] >> __shft; \
++		if (__size + __shft > 32) \
++			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
++		__res & __mask;	\
++	})
++
++u32 msm_board_serial(void)
++{
++	struct mmc *mmc_dev;
++
++	mmc_dev = find_mmc_device(0);
++	if (!mmc_dev)
++		return 0;
++
++	if (mmc_init(mmc_dev))
++		return 0;
++
++	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
++}
++
++void msm_generate_mac_addr(u8 *mac)
++{
++	/* use locally adminstrated pool */
++	mac[0] = 0x02;
++	mac[1] = 0x00;
++
++	/*
++	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
++	 * Use big endian order so it is consistent with the serial number
++	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
++	 */
++	put_unaligned_be32(msm_board_serial(), &mac[2]);
++}
  
- static const struct udevice_id msm_phy_ids[] = {
--	{ .compatible = "qcom,apq8016-usbphy" },
-+	{ .compatible = "qcom,usb-hs-phy-msm8916" },
- 	{ }
- };
+ #define SMEM_USABLE_RAM_PARTITION_TABLE 402
+ #define RAM_PART_NAME_LENGTH            16
+@@ -97,3 +143,4 @@ int msm_fixup_memory(void *blob)
  
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-index 8149ffd83cc4..8e698085d78b 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -29,7 +29,7 @@ static const char * const msm_pinctrl_pins[] = {
- };
+ 	return 0;
+ }
++
+diff --git a/arch/arm/mach-snapdragon/include/mach/misc.h b/board/qualcomm/dragonboard410c/misc.h
+similarity index 87%
+rename from arch/arm/mach-snapdragon/include/mach/misc.h
+rename to board/qualcomm/dragonboard410c/misc.h
+index c60e3e472470..fe44caf51b18 100644
+--- a/arch/arm/mach-snapdragon/include/mach/misc.h
++++ b/board/qualcomm/dragonboard410c/misc.h
+@@ -9,5 +9,6 @@
  
- static const struct pinctrl_function msm_pinctrl_functions[] = {
--	{"blsp1_uart", 2},
-+	{"blsp_uart2", 2},
- };
+ u32 msm_board_serial(void);
+ void msm_generate_mac_addr(u8 *mac);
++int msm_fixup_memory(void *blob);
  
- static const char *apq8016_get_function_name(struct udevice *dev,
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index dd0d153500cb..46910159e844 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -132,7 +132,7 @@ void ci_init_after_reset(struct ehci_ctrl *ctrl)
  #endif
- 
- static const struct udevice_id ehci_usb_ids[] = {
--	{ .compatible = "qcom,ehci-host", },
-+	{ .compatible = "qcom,ci-hdrc", },
- 	{ }
- };
- 
-diff --git a/include/dt-bindings/clock/qcom,gcc-msm8916.h b/include/dt-bindings/clock/qcom,gcc-msm8916.h
-new file mode 100644
-index 000000000000..563034406184
---- /dev/null
-+++ b/include/dt-bindings/clock/qcom,gcc-msm8916.h
-@@ -0,0 +1,179 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright 2015 Linaro Limited
-+ */
-+
-+#ifndef _DT_BINDINGS_CLK_MSM_GCC_8916_H
-+#define _DT_BINDINGS_CLK_MSM_GCC_8916_H
-+
-+#define GPLL0					0
-+#define GPLL0_VOTE				1
-+#define BIMC_PLL				2
-+#define BIMC_PLL_VOTE				3
-+#define GPLL1					4
-+#define GPLL1_VOTE				5
-+#define GPLL2					6
-+#define GPLL2_VOTE				7
-+#define PCNOC_BFDCD_CLK_SRC			8
-+#define SYSTEM_NOC_BFDCD_CLK_SRC		9
-+#define CAMSS_AHB_CLK_SRC			10
-+#define APSS_AHB_CLK_SRC			11
-+#define CSI0_CLK_SRC				12
-+#define CSI1_CLK_SRC				13
-+#define GFX3D_CLK_SRC				14
-+#define VFE0_CLK_SRC				15
-+#define BLSP1_QUP1_I2C_APPS_CLK_SRC		16
-+#define BLSP1_QUP1_SPI_APPS_CLK_SRC		17
-+#define BLSP1_QUP2_I2C_APPS_CLK_SRC		18
-+#define BLSP1_QUP2_SPI_APPS_CLK_SRC		19
-+#define BLSP1_QUP3_I2C_APPS_CLK_SRC		20
-+#define BLSP1_QUP3_SPI_APPS_CLK_SRC		21
-+#define BLSP1_QUP4_I2C_APPS_CLK_SRC		22
-+#define BLSP1_QUP4_SPI_APPS_CLK_SRC		23
-+#define BLSP1_QUP5_I2C_APPS_CLK_SRC		24
-+#define BLSP1_QUP5_SPI_APPS_CLK_SRC		25
-+#define BLSP1_QUP6_I2C_APPS_CLK_SRC		26
-+#define BLSP1_QUP6_SPI_APPS_CLK_SRC		27
-+#define BLSP1_UART1_APPS_CLK_SRC		28
-+#define BLSP1_UART2_APPS_CLK_SRC		29
-+#define CCI_CLK_SRC				30
-+#define CAMSS_GP0_CLK_SRC			31
-+#define CAMSS_GP1_CLK_SRC			32
-+#define JPEG0_CLK_SRC				33
-+#define MCLK0_CLK_SRC				34
-+#define MCLK1_CLK_SRC				35
-+#define CSI0PHYTIMER_CLK_SRC			36
-+#define CSI1PHYTIMER_CLK_SRC			37
-+#define CPP_CLK_SRC				38
-+#define CRYPTO_CLK_SRC				39
-+#define GP1_CLK_SRC				40
-+#define GP2_CLK_SRC				41
-+#define GP3_CLK_SRC				42
-+#define BYTE0_CLK_SRC				43
-+#define ESC0_CLK_SRC				44
-+#define MDP_CLK_SRC				45
-+#define PCLK0_CLK_SRC				46
-+#define VSYNC_CLK_SRC				47
-+#define PDM2_CLK_SRC				48
-+#define SDCC1_APPS_CLK_SRC			49
-+#define SDCC2_APPS_CLK_SRC			50
-+#define APSS_TCU_CLK_SRC			51
-+#define USB_HS_SYSTEM_CLK_SRC			52
-+#define VCODEC0_CLK_SRC				53
-+#define GCC_BLSP1_AHB_CLK			54
-+#define GCC_BLSP1_SLEEP_CLK			55
-+#define GCC_BLSP1_QUP1_I2C_APPS_CLK		56
-+#define GCC_BLSP1_QUP1_SPI_APPS_CLK		57
-+#define GCC_BLSP1_QUP2_I2C_APPS_CLK		58
-+#define GCC_BLSP1_QUP2_SPI_APPS_CLK		59
-+#define GCC_BLSP1_QUP3_I2C_APPS_CLK		60
-+#define GCC_BLSP1_QUP3_SPI_APPS_CLK		61
-+#define GCC_BLSP1_QUP4_I2C_APPS_CLK		62
-+#define GCC_BLSP1_QUP4_SPI_APPS_CLK		63
-+#define GCC_BLSP1_QUP5_I2C_APPS_CLK		64
-+#define GCC_BLSP1_QUP5_SPI_APPS_CLK		65
-+#define GCC_BLSP1_QUP6_I2C_APPS_CLK		66
-+#define GCC_BLSP1_QUP6_SPI_APPS_CLK		67
-+#define GCC_BLSP1_UART1_APPS_CLK		68
-+#define GCC_BLSP1_UART2_APPS_CLK		69
-+#define GCC_BOOT_ROM_AHB_CLK			70
-+#define GCC_CAMSS_CCI_AHB_CLK			71
-+#define GCC_CAMSS_CCI_CLK			72
-+#define GCC_CAMSS_CSI0_AHB_CLK			73
-+#define GCC_CAMSS_CSI0_CLK			74
-+#define GCC_CAMSS_CSI0PHY_CLK			75
-+#define GCC_CAMSS_CSI0PIX_CLK			76
-+#define GCC_CAMSS_CSI0RDI_CLK			77
-+#define GCC_CAMSS_CSI1_AHB_CLK			78
-+#define GCC_CAMSS_CSI1_CLK			79
-+#define GCC_CAMSS_CSI1PHY_CLK			80
-+#define GCC_CAMSS_CSI1PIX_CLK			81
-+#define GCC_CAMSS_CSI1RDI_CLK			82
-+#define GCC_CAMSS_CSI_VFE0_CLK			83
-+#define GCC_CAMSS_GP0_CLK			84
-+#define GCC_CAMSS_GP1_CLK			85
-+#define GCC_CAMSS_ISPIF_AHB_CLK			86
-+#define GCC_CAMSS_JPEG0_CLK			87
-+#define GCC_CAMSS_JPEG_AHB_CLK			88
-+#define GCC_CAMSS_JPEG_AXI_CLK			89
-+#define GCC_CAMSS_MCLK0_CLK			90
-+#define GCC_CAMSS_MCLK1_CLK			91
-+#define GCC_CAMSS_MICRO_AHB_CLK			92
-+#define GCC_CAMSS_CSI0PHYTIMER_CLK		93
-+#define GCC_CAMSS_CSI1PHYTIMER_CLK		94
-+#define GCC_CAMSS_AHB_CLK			95
-+#define GCC_CAMSS_TOP_AHB_CLK			96
-+#define GCC_CAMSS_CPP_AHB_CLK			97
-+#define GCC_CAMSS_CPP_CLK			98
-+#define GCC_CAMSS_VFE0_CLK			99
-+#define GCC_CAMSS_VFE_AHB_CLK			100
-+#define GCC_CAMSS_VFE_AXI_CLK			101
-+#define GCC_CRYPTO_AHB_CLK			102
-+#define GCC_CRYPTO_AXI_CLK			103
-+#define GCC_CRYPTO_CLK				104
-+#define GCC_OXILI_GMEM_CLK			105
-+#define GCC_GP1_CLK				106
-+#define GCC_GP2_CLK				107
-+#define GCC_GP3_CLK				108
-+#define GCC_MDSS_AHB_CLK			109
-+#define GCC_MDSS_AXI_CLK			110
-+#define GCC_MDSS_BYTE0_CLK			111
-+#define GCC_MDSS_ESC0_CLK			112
-+#define GCC_MDSS_MDP_CLK			113
-+#define GCC_MDSS_PCLK0_CLK			114
-+#define GCC_MDSS_VSYNC_CLK			115
-+#define GCC_MSS_CFG_AHB_CLK			116
-+#define GCC_OXILI_AHB_CLK			117
-+#define GCC_OXILI_GFX3D_CLK			118
-+#define GCC_PDM2_CLK				119
-+#define GCC_PDM_AHB_CLK				120
-+#define GCC_PRNG_AHB_CLK			121
-+#define GCC_SDCC1_AHB_CLK			122
-+#define GCC_SDCC1_APPS_CLK			123
-+#define GCC_SDCC2_AHB_CLK			124
-+#define GCC_SDCC2_APPS_CLK			125
-+#define GCC_GTCU_AHB_CLK			126
-+#define GCC_JPEG_TBU_CLK			127
-+#define GCC_MDP_TBU_CLK				128
-+#define GCC_SMMU_CFG_CLK			129
-+#define GCC_VENUS_TBU_CLK			130
-+#define GCC_VFE_TBU_CLK				131
-+#define GCC_USB2A_PHY_SLEEP_CLK			132
-+#define GCC_USB_HS_AHB_CLK			133
-+#define GCC_USB_HS_SYSTEM_CLK			134
-+#define GCC_VENUS0_AHB_CLK			135
-+#define GCC_VENUS0_AXI_CLK			136
-+#define GCC_VENUS0_VCODEC0_CLK			137
-+#define BIMC_DDR_CLK_SRC			138
-+#define GCC_APSS_TCU_CLK			139
-+#define GCC_GFX_TCU_CLK				140
-+#define BIMC_GPU_CLK_SRC			141
-+#define GCC_BIMC_GFX_CLK			142
-+#define GCC_BIMC_GPU_CLK			143
-+#define ULTAUDIO_LPAIF_PRI_I2S_CLK_SRC		144
-+#define ULTAUDIO_LPAIF_SEC_I2S_CLK_SRC		145
-+#define ULTAUDIO_LPAIF_AUX_I2S_CLK_SRC		146
-+#define ULTAUDIO_XO_CLK_SRC			147
-+#define ULTAUDIO_AHBFABRIC_CLK_SRC		148
-+#define CODEC_DIGCODEC_CLK_SRC			149
-+#define GCC_ULTAUDIO_PCNOC_MPORT_CLK		150
-+#define GCC_ULTAUDIO_PCNOC_SWAY_CLK		151
-+#define GCC_ULTAUDIO_AVSYNC_XO_CLK		152
-+#define GCC_ULTAUDIO_STC_XO_CLK			153
-+#define GCC_ULTAUDIO_AHBFABRIC_IXFABRIC_CLK	154
-+#define GCC_ULTAUDIO_AHBFABRIC_IXFABRIC_LPM_CLK	155
-+#define GCC_ULTAUDIO_LPAIF_PRI_I2S_CLK		156
-+#define GCC_ULTAUDIO_LPAIF_SEC_I2S_CLK		157
-+#define GCC_ULTAUDIO_LPAIF_AUX_I2S_CLK		158
-+#define GCC_CODEC_DIGCODEC_CLK			159
-+#define GCC_MSS_Q6_BIMC_AXI_CLK			160
-+
-+/* Indexes for GDSCs */
-+#define BIMC_GDSC				0
-+#define VENUS_GDSC				1
-+#define MDSS_GDSC				2
-+#define JPEG_GDSC				3
-+#define VFE_GDSC				4
-+#define OXILI_GDSC				5
-+
-+#endif
 
 -- 
 2.42.1
