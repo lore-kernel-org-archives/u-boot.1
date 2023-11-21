@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CEFEC61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 15:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F46C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 15:28:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93DFE87582;
-	Tue, 21 Nov 2023 16:28:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12D408760C;
+	Tue, 21 Nov 2023 16:28:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FE02ywQZ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k1Isln/Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A08B8875F1; Tue, 21 Nov 2023 16:28:02 +0100 (CET)
+ id 5395E8760C; Tue, 21 Nov 2023 16:28:09 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCD2287582
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 16:28:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 605B387611
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 16:28:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id D8830423D3; 
- Tue, 21 Nov 2023 15:27:58 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 77B3D42F44; 
+ Tue, 21 Nov 2023 15:28:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700580479;
- bh=YtPbyBe9YFS+T8Qg5uHgprJqbnlqHJuTTO4hDa46Q6Q=;
+ s=20210705; t=1700580480;
+ bh=uUf862BTNIW9VmyldswXcVc44Sm4WYP6fb2D9VBhKo0=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=FE02ywQZFoc2c0HOqih4y+k17jRNxXdhi1gRLhsgGHK/d9V9h+EEyMOd0yLkY5tP1
- yC39kz4YbFz4VAuUXLBI8nFedpG34se7ek4N59CeyYg67VzjTOGwV1NnBEdjYJdDfv
- hObziMxk3zL6Gi3r02jGWqQfoYLhDW2MK2L2Fc9ul0VdkFHpasUX+GYLHYeVsEskvH
- OOU+cY3sdn2CNN933QFJSMv4ygujRjT/y/XPGuFi61g8nVDw4EwdpxnTlGYuPrPuNt
- WwFcD+e9xO60utEzHJK/uYSTv+qP14SjLwCxb9LhMm6L/D2ULnngdBmUom2Cjoor9F
- Sqm6ZxbBpSn6Q==
+ b=k1Isln/QHifKpx/+zJhXDrI/7/LvWFcpJapPAZoHMF6zoi0tVejHyk/QLll1We1bo
+ xBCSVYi/4cAhOrzwxeD6YFGcCJsmXDR8lP32fnEU700Q44J1s0ksx/W7t81ImyYbml
+ AGKnysKzbcaclvpTVfGBEj/GNToww/ONvbORSyZIsXhzua6f6Hh6y4oH9j8JGV1FWt
+ 2ykq3pKgdFiRHHB9NxO1U3pcmAP4xPs4nyUiq7CpZQyl2qbp3ib9rAnHQ9n8cZMQb8
+ RfXjVnvaPtoHR/nRwY7LyEIbe4dEbsOT5AGbRiGJNMyFk0Wi4ObJ65Ysq4x1b92SjH
+ PMG8bNHJMGhvw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
@@ -52,9 +52,9 @@ Cc: Yu Chien Peter Lin <peterlin@andestech.com>,
  Miao Yan <yanmiaobest@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/7] acpi: Kconfig symbol CONFIG_QFW_ACPI
-Date: Tue, 21 Nov 2023 16:27:34 +0100
-Message-Id: <20231121152740.24783-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 3/7] risc-v: add ACPI fields to global data
+Date: Tue, 21 Nov 2023 16:27:36 +0100
+Message-Id: <20231121152740.24783-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
 References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
@@ -76,99 +76,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have two implementations of write_acpi_tables(). One for writing ACPI
-tables based on ACPI_WRITER() entries another based on copying tables from
-QEMU.
-
-Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
-QEMU and use it consistently.
+Add fields for the location of ACPI tables to the global data.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	new patch
+	no change
 ---
- drivers/misc/Kconfig   | 7 +++++++
- drivers/misc/qfw.c     | 4 ++--
- lib/acpi/Makefile      | 2 +-
- lib/acpi/acpi_writer.c | 4 ++--
- 4 files changed, 12 insertions(+), 5 deletions(-)
+ arch/riscv/include/asm/global_data.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 97057de8bf..86529efb2e 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -540,6 +540,13 @@ config QFW
- 	  Hidden option to enable QEMU fw_cfg interface and uclass. This will
- 	  be selected by either CONFIG_CMD_QFW or CONFIG_GENERATE_ACPI_TABLE.
- 
-+config QFW_ACPI
-+	bool
-+	default y
-+	depends on QFW && GENERATE_ACPI_TABLE && !SANDBOX
-+	help
-+	  Hidden option to read ACPI tables from QEMU.
-+
- config QFW_PIO
- 	bool
- 	depends on QFW
-diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
-index e3b6b4cd74..307334faf4 100644
---- a/drivers/misc/qfw.c
-+++ b/drivers/misc/qfw.c
-@@ -21,7 +21,7 @@
- #include <tables_csum.h>
- #include <asm/acpi_table.h>
- 
--#if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
-+#ifdef QFW_ACPI
- /*
-  * This function allocates memory for ACPI tables
-  *
-@@ -259,7 +259,7 @@ ulong acpi_get_rsdp_addr(void)
- 	file = qfw_find_file(dev, "etc/acpi/rsdp");
- 	return file->addr;
- }
--#endif
-+#endif /* QFW_ACPI */
- 
- static void qfw_read_entry_io(struct qfw_dev *qdev, u16 entry, u32 size,
- 			      void *address)
-diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
-index c1c9675b5d..cc2868488a 100644
---- a/lib/acpi/Makefile
-+++ b/lib/acpi/Makefile
-@@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
- obj-y += acpi_writer.o
- 
- # With QEMU the ACPI tables come from there, not from U-Boot
--ifndef CONFIG_QEMU
-+ifndef CONFIG_QFW_ACPI
- obj-y += base.o
- obj-y += csrt.o
- obj-y += mcfg.o
-diff --git a/lib/acpi/acpi_writer.c b/lib/acpi/acpi_writer.c
-index 946f90e8e7..9b9fdc190b 100644
---- a/lib/acpi/acpi_writer.c
-+++ b/lib/acpi/acpi_writer.c
-@@ -48,7 +48,7 @@ int acpi_write_one(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	return 0;
- }
- 
--#ifndef CONFIG_QEMU
-+#ifndef CONFIG_QFW_ACPI
- static int acpi_write_all(struct acpi_ctx *ctx)
- {
- 	const struct acpi_writer *writer =
-@@ -115,7 +115,7 @@ ulong acpi_get_rsdp_addr(void)
- 
- 	return map_to_sysmem(gd->acpi_ctx->rsdp);
- }
--#endif /* QEMU */
-+#endif /* QFW_ACPI */
- 
- void acpi_setup_ctx(struct acpi_ctx *ctx, ulong start)
- {
+diff --git a/arch/riscv/include/asm/global_data.h b/arch/riscv/include/asm/global_data.h
+index 937fa4d154..a8f6a217f1 100644
+--- a/arch/riscv/include/asm/global_data.h
++++ b/arch/riscv/include/asm/global_data.h
+@@ -32,6 +32,10 @@ struct arch_global_data {
+ 	ulong available_harts;
+ #endif
+ #endif
++	ulong table_start;		/* Start address of ACPI tables */
++	ulong table_end;		/* End address of ACPI tables */
++	ulong table_start_high;		/* Start address of high ACPI tables */
++	ulong table_end_high;		/* End address of high ACPI tables */
+ #ifdef CONFIG_SMBIOS
+ 	ulong smbios_start;		/* Start address of SMBIOS table */
+ #endif
 -- 
 2.40.1
 
