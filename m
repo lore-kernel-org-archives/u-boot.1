@@ -4,84 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B44C54FB9
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 05:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964D9C54FB9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 06:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB2698720A;
-	Tue, 21 Nov 2023 06:00:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8DAF287118;
+	Tue, 21 Nov 2023 07:47:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QJI+6FcC";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="roxzu6Mu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86867870F8; Tue, 21 Nov 2023 06:00:25 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 00D9A87250; Tue, 21 Nov 2023 07:46:59 +0100 (CET)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C017A8744B
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:00:22 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1cc28719cb0so9120715ad.0
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 21:00:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700542821; x=1701147621; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k+cpgU+aBGNJ3v4PH4Wp/jZVvawmxWsyemz3wTzFW8g=;
- b=QJI+6FcC/315CiKL42xm0WDzcFaKhIIGTsQ9VNr1G2bjtKQZ48miUTdx85ug6j93S7
- mM53kUzxkfRo3E41DbptX0GcjlDZoPgxpWWyJ47FWktSM8z0LIw6Te5RpbMvmyADvoKh
- RHRAes3rJ1mGlUfj9qcvL2YfMDWNoM6NRX28Wj1wB4stivthtoEtKY1SuM6A3W1hcAaC
- +LhyrL9i7vqgIMlG9iNmSlwn7HT1yhYEQMJf10JtpofC88G7PtRHhTeHUDfVOu+sR2Lr
- t9dRCJNwgnZasNncYVIYkHNUEE2cxhD6ArFx6epj3Q9Cz3qSkNeD7SSG004ltK27IIQs
- WXtw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700542821; x=1701147621;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=k+cpgU+aBGNJ3v4PH4Wp/jZVvawmxWsyemz3wTzFW8g=;
- b=LJvE5buX+P4HErLrg3/ElMOVrHfNml42w5s8tsXX7E/Mf5NFg148EQSHlSNu/iDE4R
- AqHi8KBuaHZpY9wycRm6+o3Duq9+pjphzy8VCUBH/1/d/fUtf0nKqtl0lUxRVx7JieqM
- wpkASqn5ncoFG31yMpLNjE0pKmJ99wBVQF5npzpWPxtm08MrH+PUH41qwhqCTjsB9OUl
- Q8Dc7k4TP8Jgklt/bW2XWaHSM9tkZClxBP+nc5Y/ZtDyY/YCk5RPdikBhqYnXMJaIaQF
- zW1j28E11U4pzRdNpuVoo/WfxEN66wilcax4sPT52OfSVLRYsKqowtuxVZ3G3SWDZKK7
- DfhA==
-X-Gm-Message-State: AOJu0YziJBaZ7LWNF0i/kc6YeunGukuek8Z6oq9Mhhn/WZSvufcD7Cuc
- 3oBqbLmxD9MiRBjZBcFX3Vos9A==
-X-Google-Smtp-Source: AGHT+IFvxmdHp5vHKVud0JmGo4fxAAn/4n8MhopevQqCQbcwlkduMFj1cCYWoK22Q4KUTjU08+sIig==
-X-Received: by 2002:a17:903:22c1:b0:1cf:5806:5634 with SMTP id
- y1-20020a17090322c100b001cf58065634mr8630949plg.1.1700542820950; 
- Mon, 20 Nov 2023 21:00:20 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:f6af:a59c:7ca:897f])
- by smtp.gmail.com with ESMTPSA id
- ij26-20020a170902ab5a00b001cc1f504082sm7120150plb.56.2023.11.20.21.00.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 21:00:20 -0800 (PST)
-Date: Tue, 21 Nov 2023 14:00:16 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v2 03/12] cmd: bootefi: carve out EFI boot manager
- interface
-Message-ID: <ZVw5YCx83nn3RgHW@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
-References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
- <20231121012950.156539-4-takahiro.akashi@linaro.org>
- <fffc514b-a986-482c-a468-6d52598a046e@gmx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id E05D487118
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 07:46:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: marcan@marcan.st)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id 7882842137;
+ Tue, 21 Nov 2023 06:46:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1700549215; bh=+VM56IWifyfr+4nKeejuFeJYZgFdQVpPoQf4v0u2B3Y=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=roxzu6MuR+FBIHWSxmGrERJT6L19yeWdF9EXvNPYMrexORQG6x68gnKkVRvm24vPY
+ bNCaGTpGDwWZkPSRcKlXwn0ELj5dlMUPlBeXRUEi52wr+pG0BoJqPoaItb4z8ALUtH
+ /yIpC6XQkXAchBU+8KUEPHb/mjozxu2xUHXPCHXRMVZTrN4RPVPQvO6SdMRmlKHXJX
+ 9jxHK0kAXOKVojlRgYwD1lOomwKRTSW9CXaiI8qh4Xc2FKYOrf+tBAYJVGheWnDezl
+ h0bEXJ49R3bM4RodvnwpjcWszBk9Ri8/+wKfajkODwZOodJR+A/2wn21D/JLPMJa2O
+ Axb7hZF9w9F4Q==
+Message-ID: <f6df901a-245a-494a-952a-c9bace244fdc@marcan.st>
+Date: Tue, 21 Nov 2023 15:46:49 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fffc514b-a986-482c-a468-6d52598a046e@gmx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] USB fixes: xHCI error handling
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Shantur Rathore <i@shantur.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de, asahi@lists.linux.dev
+References: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
+ <fe844c63-0c44-469c-a4e0-f0e1f2ac63fc@denx.de>
+ <CAHc5_t2WFZH65MJENGvC6u21ETcRn47ceQd8jrHV9DVmmM10Vw@mail.gmail.com>
+ <3b662808-e047-4023-a00c-1b6728bd5c86@denx.de>
+ <cdb3df49-1ba3-4b87-bc2e-57c71a7ce725@marcan.st>
+ <51d7ba01-bb22-4246-b67b-675511ca0be2@denx.de>
+From: Hector Martin <marcan@marcan.st>
+In-Reply-To: <51d7ba01-bb22-4246-b67b-675511ca0be2@denx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,113 +75,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Nov 21, 2023 at 04:38:12AM +0100, Heinrich Schuchardt wrote:
-> On 11/21/23 02:29, AKASHI Takahiro wrote:
-> > Carve EFI boot manager related code out of do_bootefi_image() in order
-> > to move boot manager specific code into library directory in the later
-> > commit.
-> > 
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > ---
-> >   cmd/bootefi.c | 43 ++++++++++++++++++++++++-------------------
-> >   1 file changed, 24 insertions(+), 19 deletions(-)
-> > 
-> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> > index e9e5ab67a1f5..87910c42333a 100644
-> > --- a/cmd/bootefi.c
-> > +++ b/cmd/bootefi.c
-> > @@ -413,28 +413,40 @@ out:
-> >   }
-> > 
-> >   /**
-> > - * do_efibootmgr() - execute EFI boot manager
-> > + * efi_bootmgr_run() - execute EFI boot manager
-> > + * fdt:	Flat device tree
-> > + *
-> > + * Invoke EFI boot manager and execute a binary depending on
-> > + * boot options. If @fdt is not NULL, it will be passed to
-> > + * the executed binary.
-> 
-> How about the fallback to the control device-tree?
 
-efi_install_fdt() will take care of that if fdt == EFI_FDT_INTERNAL_USE.
-I didn't change any semantics.
-I will add some description here to clarify it.
 
-> How about booting with ACPI?
+On 2023/11/20 21:15, Marek Vasut wrote:
+> On 11/20/23 11:45, Hector Martin wrote:
+>>
+>>
+>> On 2023/11/20 11:09, Marek Vasut wrote:
+>>> On 11/20/23 00:17, Shantur Rathore wrote:
+>>>> On Sun, Nov 19, 2023 at 8:08 PM Marek Vasut <marex@denx.de> wrote:
+>>>>>
+>>>>> On 10/27/23 01:16, Hector Martin wrote:
+>>>>>> This series is the first of a few bundles of USB fixes we have been
+>>>>>> carrying downstream on the Asahi U-Boot branch for a few months.
+>>>>>>
+>>>>>> Most importantly, this related set of patches makes xHCI error/stall
+>>>>>> recovery more robust (or work at all in some cases). There are also a
+>>>>>> couple patches fixing other xHCI bugs and adding better debug logs.
+>>>>>>
+>>>>>> I believe this should fix this Fedora bug too:
+>>>>>>
+>>>>>> https://bugzilla.redhat.com/show_bug.cgi?id=2244305
+>>>>>
+>>>>> Was there ever a V2 of these patches I might've missed ?
+>>>>
+>>>> Is it this one?
+>>>> https://patchwork.ozlabs.org/project/uboot/list/?series=379807
+>>>
+>>> I think so, thanks.
+>>>
+>>> And uh, my question therefore it, is there a V3 which addresses the 3/8
+>>> and 8/8 comment ?
+>>
+>> Not yet, no. Sorry, I probably won't have time to work on this in a
+>> while, currently busy with other stuff.
+> 
+> I can probably fix the patches up myself if that is fine with you, I'd 
+> really like to get these fixes into the release soon. Would that be OK 
+> with you ?
+> 
 
-Not sure what is your concern, but
-I didn't change any semantics in bootmgr use-case.
+Of course, I would appreciate that :)
 
--Takahiro Akashi
-
-> 
-> Best regards
-> 
-> Heinrich
-> 
-> >    *
-> >    * Return:	status code
-> >    */
-> > -static int do_efibootmgr(void)
-> > +static efi_status_t efi_bootmgr_run(void *fdt)
-> >   {
-> >   	efi_handle_t handle;
-> > -	efi_status_t ret;
-> >   	void *load_options;
-> > +	efi_status_t ret;
-> > 
-> > -	ret = efi_bootmgr_load(&handle, &load_options);
-> > +	/* Initialize EFI drivers */
-> > +	ret = efi_init_obj_list();
-> >   	if (ret != EFI_SUCCESS) {
-> > -		log_notice("EFI boot manager: Cannot load any image\n");
-> > +		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > +			ret & ~EFI_ERROR_MASK);
-> >   		return CMD_RET_FAILURE;
-> >   	}
-> > 
-> > -	ret = do_bootefi_exec(handle, load_options);
-> > -
-> > +	ret = efi_install_fdt(fdt);
-> >   	if (ret != EFI_SUCCESS)
-> > -		return CMD_RET_FAILURE;
-> > +		return ret;
-> > 
-> > -	return CMD_RET_SUCCESS;
-> > +	ret = efi_bootmgr_load(&handle, &load_options);
-> > +	if (ret != EFI_SUCCESS) {
-> > +		log_notice("EFI boot manager: Cannot load any image\n");
-> > +		return ret;
-> > +	}
-> > +
-> > +	return do_bootefi_exec(handle, load_options);
-> >   }
-> > 
-> >   /**
-> > @@ -624,21 +636,14 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
-> > 
-> >   	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
-> >   	    !strcmp(argv[1], "bootmgr")) {
-> > -		/* Initialize EFI drivers */
-> > -		ret = efi_init_obj_list();
-> > -		if (ret != EFI_SUCCESS) {
-> > -			log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > -				ret & ~EFI_ERROR_MASK);
-> > -			return CMD_RET_FAILURE;
-> > -		}
-> > +		ret = efi_bootmgr_run(fdt);
-> > 
-> > -		ret = efi_install_fdt(fdt);
-> >   		if (ret == EFI_INVALID_PARAMETER)
-> >   			return CMD_RET_USAGE;
-> > -		else if (ret != EFI_SUCCESS)
-> > +		else if (ret)
-> >   			return CMD_RET_FAILURE;
-> > 
-> > -		return do_efibootmgr();
-> > +		return CMD_RET_SUCCESS;
-> >   	}
-> > 
-> >   	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
-> 
+- Hector
