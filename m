@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20103C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCC75C61D92
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 780C4871CD;
-	Tue, 21 Nov 2023 15:09:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 20B0787197;
+	Tue, 21 Nov 2023 15:21:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VZWyj2mj";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="va75qCtc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37E7B87264; Tue, 21 Nov 2023 15:09:36 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 48B45863F8; Tue, 21 Nov 2023 15:20:59 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFC2087197
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:09:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43C9987264
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:20:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-670e7ae4a2eso24867146d6.1
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:09:33 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4083ac51d8aso25981605e9.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:20:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700575772; x=1701180572; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NzHgzlpLVoZ5UkHF4NnwFsRGXxpsmY5b9XKQU6YTQkY=;
- b=VZWyj2mjtQuA/z/zahQMEcZw7+wEWMyZDyxidosPF2fSVswHv/BFKwKpHMU2YSTHkw
- uqTuVkiSfX6aI/8ZFSwecnXWABiNefxIHXL5qZJxtHNSNpF3lerj3xp4QIaR0e5BOSpQ
- +xaivBSsHQBRhNlCBIK3YjLihA9kdaOSTwQFA=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1700576457; x=1701181257;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cluqEBqOTcuIHyOP71zgMBwcEjBCIBor79nfJ+/hfjc=;
+ b=va75qCtcUvfQ2vhLwF6BSmPLwiRODwSMyLFTuZHOK5cgcK7Qv4ZPjP6/d3vfw05DVQ
+ H0jmI776dYjI/2oW+UVx4nPLXOuRm0JtW9nhST1o6Vz5lLHqy/f/4vzmFDoAkzKekU2k
+ 75cM0aVOUqoajpZZKvQOou5QH2X2VLjX2aepd4CX/nzvqmldnbhebzDlo55pRwLM7O6z
+ dcmE8lvnjxfEmIDleG9WrymCGmS0Bwc31qydiAXHHQP2fk6nIyhlr4C37CDkmD/IUseQ
+ GQ4NFIpjKka70BLLfD7l/z0yJG5tMrBjUN/VSUv8MB/t7pjFvkHB9bfyqY0mkJTsZYHt
+ FEZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700575772; x=1701180572;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NzHgzlpLVoZ5UkHF4NnwFsRGXxpsmY5b9XKQU6YTQkY=;
- b=cFbEwYWiuw5ivuJAK+9+0gDkHyehB4gOVN2T8h1nl9nhkR0IeR7L8+7kyTX2Q7GExj
- VDlr4a/Op+cWEF+ucvbGbxrUhzgFUXozZ8UCLAND1DuQTQVVUhQ433NfRO0Fqu+pACk4
- 8DLPnKlHt3oa2vgZAILd3D+bWGFdpfbPB1ZUlJl9bI2FXivXD1SXnMo5jduLGj8kEFvA
- Sw57BaYt4ZijVTm7tTe5Cb0TWJ+CwAzgYPZmcgO40iOuOPxxkP6zw1xPb0BFv6q/2kuG
- NyUm9UARcv7j2c3Th0LbnwC6PSCjPtA5yXNDv35sRNnO06rRc8cwSAMewWDDOHIrQQer
- +Gig==
-X-Gm-Message-State: AOJu0Ywj5CiPAvylMF1HFeLKc6udCDtNClUjG1qv4hsQE6XBnwdzkELW
- 11MGPJV8SdfeVb+twk0iBhbuyQ==
-X-Google-Smtp-Source: AGHT+IGWYtE8ZOo5MoTZ4gi4xRh/qOTVIKHDAUyyWHoH8xASsIfyS/CMSnz4VfvlcsoKexbh5wN6yw==
-X-Received: by 2002:ad4:5763:0:b0:679:d38e:3387 with SMTP id
- r3-20020ad45763000000b00679d38e3387mr3931624qvx.11.1700575772377; 
- Tue, 21 Nov 2023 06:09:32 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
- [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
- by smtp.gmail.com with ESMTPSA id
- m5-20020a0562141bc500b00679d90922c8sm2000163qvc.131.2023.11.21.06.09.31
+ d=1e100.net; s=20230601; t=1700576457; x=1701181257;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=cluqEBqOTcuIHyOP71zgMBwcEjBCIBor79nfJ+/hfjc=;
+ b=F1sG2laSVcEp/YMnuZVLeo6iq1WPRb/NtS45Qo30kwFqnY/lw+1YYgormcoG/cFDco
+ USIC/c5YklTJj7vgKim4KiN2octR6FGs38VY5jCFaOwQCWOfzOJoDATQY6KZGSiJvT4e
+ nW0NRQsDAlpDgJRJshynmTVFbOsrg4jB8l4AEOKEZPDfCR0ZP5yvZcVru+IHC4Md3QbQ
+ 1R53JdD+kGZ9ehN0KkH2lPimABBipaefOwH4jRsxrCFiqtZLVLrcy+Axi8fN1zEDPXsf
+ g3esJQ7aEXpmJeMgW2yumwitAxwuisUQHkEp36CTa0RWC0UP1VQmyEIdWZ1bUx5q5uDi
+ mZ3Q==
+X-Gm-Message-State: AOJu0Yxv2JOwFCQcmYES8Fd49J8XRR8lp2P6xtY4qWPZDUAj0QllZGFe
+ +A2k/RqKgatKi/U5pitwPTiVEw==
+X-Google-Smtp-Source: AGHT+IFm1/l8jzHwzij68PEGOh6zv2d9FzPQvPSWsmdoR2fVf2R5EwAeRGZNfRnefdgRHrfd575f5Q==
+X-Received: by 2002:a05:6000:2a5:b0:332:c9f5:e5e6 with SMTP id
+ l5-20020a05600002a500b00332c9f5e5e6mr3714956wry.17.1700576456542; 
+ Tue, 21 Nov 2023 06:20:56 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ m17-20020adfe0d1000000b0033130644c87sm14564334wri.54.2023.11.21.06.20.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 06:09:31 -0800 (PST)
-Date: Tue, 21 Nov 2023 09:09:29 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] libretech-cc: Populate SMBIOS information
-Message-ID: <20231121140929.GV2513409@bill-the-cat>
-References: <20231120201609.619598-1-trini@konsulko.com>
- <a653e096-cf28-4573-856f-d52dae233b46@linaro.org>
- <20231121131551.GP2513409@bill-the-cat>
- <d59de63c-4d4c-4141-9b4f-9a279da596d4@linaro.org>
+ Tue, 21 Nov 2023 06:20:56 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>, Bin
+ Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, Fabrice
+ Gasnier <fabrice.gasnier@foss.st.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marex@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH v5 05/12] usb: Avoid unbinding devices in use by bootflows
+In-Reply-To: <20231119121144.v5.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+References: <20231119191202.667180-1-sjg@chromium.org>
+ <20231119121144.v5.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+Date: Tue, 21 Nov 2023 15:20:54 +0100
+Message-ID: <87o7fnkx15.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hNoQF73Icd3x5eaO"
-Content-Disposition: inline
-In-Reply-To: <d59de63c-4d4c-4141-9b4f-9a279da596d4@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,103 +94,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---hNoQF73Icd3x5eaO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thank you for your patch.
 
-On Tue, Nov 21, 2023 at 02:46:29PM +0100, Neil Armstrong wrote:
-> On 21/11/2023 14:15, Tom Rini wrote:
-> > On Tue, Nov 21, 2023 at 10:18:04AM +0100, Neil Armstrong wrote:
-> > > Hi Tom,
-> > >=20
-> > > On 20/11/2023 21:16, Tom Rini wrote:
-> > > > Enable CONFIG_SYSINFO_SMBIOS and populate the nodes so that Linux c=
-an
-> > > > eventually display this information
-> > > >=20
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > > Posting this as this was the easiest platform for me to test some S=
-MBIOS
-> > > > related patches on and I needed to populate the nodes so I could ch=
-eck
-> > > > things in dmidecode once Linux was up.
-> > >=20
-> > > Sorry to be late a the party, but can't this be dynamically found fro=
-m DT's compatible & model ?
-> > > Since I'll probably need to add this to all boards, it seems like a d=
-uplicate of what's already in the DT.
-> >=20
-> > Part of the "fun" as to why we have the binding here is that while we
-> > could use the top-level model property, there's not a corresponding one
-> > for manufacturer. I'm fine ignoring the patch I posted here and having a
-> > longer discussion about populating SMBIOS more usefully, globally, as I
-> > think has been suggested a time or two.
-> >=20
->=20
-> I'm ok landing it with the same data as from the vendor.
-> but couldn't we use the first top-level compatible as default smbios data=
- ?
->=20
-> compatible =3D "vendor1,board-name", "vendor1,soc-name";
->=20
-> and translate to:
->=20
->=20
-> smbios {
-> 	system {
-> 		manufacturer =3D "vendor1";
-> 		product =3D "board-name";
-> 	};
->=20
-> 	baseboard {
-> 		manufacturer =3D "vendor1";
-> 		product =3D "board-name";
-> 	};
->=20
-> 	chassis {
-> 		manufacturer =3D "vendor1";
-> 		product =3D "board-name";
-> 	};
-> };
->=20
-> since the vendor name should be already documented in the linux
-> bindings, same for the board name.
-> And we would be free to add some custom data in the DT if needed.
->=20
-> Anyway, not sure it's the right place to discuss about that !
+On dim., nov. 19, 2023 at 12:11, Simon Glass <sjg@chromium.org> wrote:
 
-That's essentially
-https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-2-ili=
-as.apalodimas@linaro.org/
-which had a bunch of comments on 1/2:
-https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-1-ili=
-as.apalodimas@linaro.org/
+> When a USB device is unbound, it causes any bootflows attached to it to
+> be removed, via a call to bootdev_clear_bootflows() from
+> bootdev_pre_unbind(). This obviously makes it impossible to boot the
+> bootflow.
+>
+> However, when booting a bootflow that relies on USB, usb_stop() is
+> called, which unbinds the device. At that point any information
+> attached to the bootflow is dropped.
+>
+> This is quite risky since the contents of freed memory are not
+> guaranteed to remain unchanged. Depending on what other options are
+> done before boot, a hard-to-find bug may crop up.
+>
+> There is no need to unbind all the USB devices just to quiesce them.
+> Add a new usb_pause() call which removes them but leaves them bound.
+>
+> Tested-by: Shantur Rathore <i@shantur.com>
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-But I think that since then some thoughts on the subject have changed
-and that approach might be more welcome now than it was then.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
---=20
-Tom
-
---hNoQF73Icd3x5eaO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVcuhkACgkQFHw5/5Y0
-tyw1HwwAiGhL5ytMB41hDUR0c1kOOvYWALEfr/vwFuTDmxz68yBe4E35by4Zj3gX
-5Gl6hRVBALrM/E7z3N0pD4Gr5sWZXiulPSno132ktGLYov7kPKuQiShJe19oRuKs
-SGA1DWJJxxXsY1EW4t16EIx/H7+sl4q88SOHUieu1d5OkZcVwYc/9Y2brGYABiYv
-BAENcJb1YE0VIEwRRz665r3dmpnXGTX4yUvODBB88hA8ILaUEgcq93gha9yGoOvt
-A0OmO1J0MXuc6s/Ui+V0bJBq/pjDTzJcOtlOfFQ59plaiFY5l0i+8NKnwjm1k8xd
-Ch+MZEeMDGxyJ7F0zeO0VPQ7LW7qpPIEaiGtvKA08v6xiwKlbKvXaxzDWi3Uz4TU
-i5bLY0sWH04pXTYShPhK5KmliGfessaM+y33jWW3XigBH/Hr1wRaQ1tRy40iWd0u
-HT47kTAhy4vRx/qjJQ160BAERk2r/vaN3/sO8KD/hNO7WIlsx6gCnZMCZXLEpEVb
-Q+efy3Ej
-=kboi
------END PGP SIGNATURE-----
-
---hNoQF73Icd3x5eaO--
+> ---
+>
+> Changes in v5:
+> - Adjust motivation for patch, since the EFI hang is fixed
+>
+> Changes in v4:
+> - Don't rename the legacy-USB functions
+> - Add a bit more detail to the comment
+>
+> Changes in v2:
+> - Add new patch to avoid unbinding devices in use by bootflows
+>
+>  boot/bootm.c                  |  2 +-
+>  common/usb.c                  |  5 +++++
+>  drivers/usb/host/usb-uclass.c | 14 ++++++++++++--
+>  include/usb.h                 | 21 ++++++++++++++++++++-
+>  4 files changed, 38 insertions(+), 4 deletions(-)
+>
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index cb61485c226c..d9c3fa8dad99 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -502,7 +502,7 @@ ulong bootm_disable_interrupts(void)
+>  	 * updated every 1 ms within the HCCA structure in SDRAM! For more
+>  	 * details see the OpenHCI specification.
+>  	 */
+> -	usb_stop();
+> +	usb_pause();
+>  #endif
+>  	return iflag;
+>  }
+> diff --git a/common/usb.c b/common/usb.c
+> index 836506dcd9e9..a486d1c87d4d 100644
+> --- a/common/usb.c
+> +++ b/common/usb.c
+> @@ -144,6 +144,11 @@ int usb_stop(void)
+>  	return 0;
+>  }
+>  
+> +int usb_pause(void)
+> +{
+> +	return usb_stop();
+> +}
+> +
+>  /******************************************************************************
+>   * Detect if a USB device has been plugged or unplugged.
+>   */
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> index a1cd0ad2d669..c26c65d7986b 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -173,7 +173,7 @@ int usb_get_max_xfer_size(struct usb_device *udev, size_t *size)
+>  	return ops->get_max_xfer_size(bus, size);
+>  }
+>  
+> -int usb_stop(void)
+> +static int usb_finish(bool unbind_all)
+>  {
+>  	struct udevice *bus;
+>  	struct udevice *rh;
+> @@ -195,7 +195,7 @@ int usb_stop(void)
+>  
+>  		/* Locate root hub device */
+>  		device_find_first_child(bus, &rh);
+> -		if (rh) {
+> +		if (rh && unbind_all) {
+>  			/*
+>  			 * All USB devices are children of root hub.
+>  			 * Unbinding root hub will unbind all of its children.
+> @@ -222,6 +222,16 @@ int usb_stop(void)
+>  	return err;
+>  }
+>  
+> +int usb_stop(void)
+> +{
+> +	return usb_finish(true);
+> +}
+> +
+> +int usb_pause(void)
+> +{
+> +	return usb_finish(false);
+> +}
+> +
+>  static void usb_scan_bus(struct udevice *bus, bool recurse)
+>  {
+>  	struct usb_bus_priv *priv;
+> diff --git a/include/usb.h b/include/usb.h
+> index 09e3f0cb309c..b964e2e1f6b2 100644
+> --- a/include/usb.h
+> +++ b/include/usb.h
+> @@ -265,7 +265,26 @@ int usb_kbd_deregister(int force);
+>   */
+>  int usb_init(void);
+>  
+> -int usb_stop(void); /* stop the USB Controller */
+> +/**
+> + * usb_stop() - stop the USB Controller and unbind all USB controllers/devices
+> + *
+> + * This unbinds all devices on the USB buses.
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int usb_stop(void);
+> +
+> +/**
+> + * usb_pause() - stop the USB Controller DMA, etc.
+> + *
+> + * Note that this does not unbind bus devices, so using usb_init() after this
+> + * call is not permitted. This function is only useful just before booting, to
+> + * ensure that devices are dormant.
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int usb_pause(void);
+> +
+>  int usb_detect_change(void); /* detect if a USB device has been (un)plugged */
+>  
+>  
+> -- 
+> 2.43.0.rc0.421.g78406f8d94-goog
