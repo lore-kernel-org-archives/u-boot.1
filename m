@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A243C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F4C9C54FB9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E58A875A1;
-	Tue, 21 Nov 2023 12:36:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CCF4875A7;
+	Tue, 21 Nov 2023 12:36:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e3Ri46G+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DKuVC4sd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62C0E87563; Tue, 21 Nov 2023 12:36:10 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 03549870BC; Tue, 21 Nov 2023 12:36:11 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4702F87498
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3918E870BC
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-7b34ec3e44fso3463539f.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:06 -0800 (PST)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7a956887c20so215168339f.1
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700566565; x=1701171365; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700566566; x=1701171366; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EpuN2vlvQOYmxvVUvjBANWARYoE21aWTPx1Tk5RAYG8=;
- b=e3Ri46G+e2+vRAe8VJtnDbB8jT5ISm0Y+vqP82RAt28OIYdTDqDIDeWevpjiUSEjco
- LawYVIpLZlt3M3evl4OB15n1BPLoeMZ8E5iRiKAQyVyXtmrASjN7ioO4XgB0JDTFYPyM
- fLUhGebknKhmo6+nK8GpMr3dqmzrk2Me8HYj8=
+ bh=SnOVFeMdlhE3pzwNFmBI72VrRkwcs0KKzj9SGXipPJI=;
+ b=DKuVC4sd2HsbdonRTxidDwEzm8P+x349QVC3MlcLuRWfZ6nTF5vInKtfrm/x3zAARd
+ QFQoEQ200lZfIM5iDvakHM8P2CKhR1ayCUzdbYEdcCpNxm6RJeVlONmaGt4lEEP3ECFY
+ qdl9E/Bu8/teF25YdblqbJfxxggqoMTZJQuho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700566565; x=1701171365;
+ d=1e100.net; s=20230601; t=1700566566; x=1701171366;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EpuN2vlvQOYmxvVUvjBANWARYoE21aWTPx1Tk5RAYG8=;
- b=hEKtpzWKrcuTKUJ1wC/TkjombQnPm0+qrSDS2iT98Vbsu27CKsGcTYMw/wOLwdKRNO
- KsEYup6yQubivXAgYdlae7sinjwGJ73nWlp/yOxUS55lT/gdTNGHbCMtUcHRs2GNnUg/
- 64lGcUL7CIKFEPuvRK3vYBvjt71uYX1t1M8hSGxNrnZ7IrGnArUcHRmPjXQf/T6YMcAW
- JRvTDqf2ZL6PGrCqsWcVKtsZug5nryAKKdbmaWNsYJIkV1QoGOEAtn5vZx6OLb0pycdl
- 1Dmbwm2qk9kHWzlJTp54sWxprfIlSijEQGGT7rqarlfKzplUjKHrhhuIZvH58YNeJgkZ
- 1g9A==
-X-Gm-Message-State: AOJu0Yw1S6RP7+IOEzbTRaa7aPCzi4MIVFGld90LM8VzTQyDfsGvSQzU
- /fn1dnIfwruqmz9gYSU2IQpqrBGI+WGxz/hVu1buHA==
-X-Google-Smtp-Source: AGHT+IHAXXdHec+5Zwt9I+GaqBB56NfeQmxYw5F2z6CNTS9eEjiKj9KBXA15JZ4gDPQA2vmZo0gtRA==
-X-Received: by 2002:a05:6602:3b90:b0:787:8fc:75d8 with SMTP id
- dm16-20020a0566023b9000b0078708fc75d8mr11927757iob.9.1700566564922; 
- Tue, 21 Nov 2023 03:36:04 -0800 (PST)
+ bh=SnOVFeMdlhE3pzwNFmBI72VrRkwcs0KKzj9SGXipPJI=;
+ b=Iyv1QbFUqKuOsQWEKkaQ9x5JI+Zy/nohOcyHQTUvDLnbJoBVWp45Wq90zMtUIgT73S
+ TH53g1M12afFq5oiAfzVLyCjmp/09QSChzplte4DYXoFXzYA2YjtjIIOOjMHPG0OV7G5
+ wHrnlbYRSOJpKxM5VkeiXW1nUJtpGUfdPnPnGHQZMJ3e+jReL8fYhf6j0U0Tot3so0No
+ Cpn1GVDGumC191ZHP9dLb3KDeBtVh1D1As3wq1hoQF7uVkgMTw50e9Zsp/PmDuv6mB96
+ e7QBBrcMi9rIqdYy4LVjpCnuAUlONIb5c0fmol4EzEYyHDWZhUWkMUfwwoZWA2ugpEoR
+ HDng==
+X-Gm-Message-State: AOJu0YxsqJifD85nbrt/JOwQ4w4CFatYsIiPBfLyK4MwrB6RJ8DT+ME+
+ hpIrakPSOULLDiEZqtmbpx9krwjWYspQeFvuC9ODfw==
+X-Google-Smtp-Source: AGHT+IHWSMzE7qOB0Pui+0dM5j0e1Y2duZd0jNAog3mp/4FLd6fvbzzbg3tUKzcifKokPTfWLIKjyg==
+X-Received: by 2002:a05:6602:d1:b0:7b3:4b1a:e414 with SMTP id
+ z17-20020a05660200d100b007b34b1ae414mr987795ioe.11.1700566565806; 
+ Tue, 21 Nov 2023 03:36:05 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.04
+ h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 03:36:04 -0800 (PST)
+ Tue, 21 Nov 2023 03:36:05 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/7] efi: Show the vendor in helloworld
-Date: Tue, 21 Nov 2023 04:35:48 -0700
-Message-ID: <20231121113557.800353-3-sjg@chromium.org>
+Subject: [PATCH 3/7] efi: test: Create a disk image with and EFI app in it
+Date: Tue, 21 Nov 2023 04:35:49 -0700
+Message-ID: <20231121113557.800353-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
 In-Reply-To: <20231121113557.800353-1-sjg@chromium.org>
 References: <20231121113557.800353-1-sjg@chromium.org>
@@ -89,28 +89,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the vendor name since it useful to see that.
+Create a new disk for use with test, which contains the sandbox
+helloworld app. This will be used to test the EFI boot bootmeth.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/efi_loader/helloworld.c | 3 +++
- 1 file changed, 3 insertions(+)
+ test/py/tests/test_ut.py | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-index bd72822c0b72..1135d3a3c37e 100644
---- a/lib/efi_loader/helloworld.c
-+++ b/lib/efi_loader/helloworld.c
-@@ -234,6 +234,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
- 			(con_out, u"Missing device path for device handle\r\n");
- 		goto out;
- 	}
-+	con_out->output_string(con_out, u"Vendor: ");
-+	con_out->output_string(con_out, systab->fw_vendor);
-+	con_out->output_string(con_out, u"\n");
- 	con_out->output_string(con_out, u"Boot device: ");
- 	ret = print_device_path(device_path, device_path_to_text);
- 	if (ret != EFI_SUCCESS)
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index 1d9149a3f683..f6220c05238a 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -468,6 +468,37 @@ def test_ut_dm_init(u_boot_console):
+     with open(fn, 'wb') as fh:
+         fh.write(data)
+ 
++
++def setup_efi_image(cons):
++    """Create a 20MB disk image with an EFI app on it"""
++    mmc_dev = 7
++    fname, mnt = setup_image(cons, mmc_dev, 0xc, second_part=True)
++
++    loop = None
++    mounted = False
++    try:
++        loop = mount_image(cons, fname, mnt, 'ext4')
++        mounted = True
++        efi_dir = os.path.join(mnt, 'efi')
++        mkdir_cond(efi_dir)
++        bootdir = os.path.join(efi_dir, 'boot')
++        mkdir_cond(bootdir)
++        efi_src = os.path.join(cons.config.build_dir,
++                               f'lib/efi_loader/helloworld.efi')
++        efi_dst = os.path.join(bootdir, 'bootsbox.efi')
++        with open(efi_src, 'rb') as inf:
++            with open(efi_dst, 'wb') as outf:
++                outf.write(inf.read())
++
++    finally:
++        if mounted:
++            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
++        if loop:
++            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
++
++
++
++
+ @pytest.mark.buildconfigspec('cmd_bootflow')
+ def test_ut_dm_init_bootstd(u_boot_console):
+     """Initialise data for bootflow tests"""
+@@ -476,6 +507,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
+     setup_bootmenu_image(u_boot_console)
+     setup_cedit_file(u_boot_console)
+     setup_cros_image(u_boot_console)
++    setup_efi_image(u_boot_console)
+ 
+     # Restart so that the new mmc1.img is picked up
+     u_boot_console.restart_uboot()
 -- 
 2.43.0.rc1.413.gea7ed67945-goog
 
