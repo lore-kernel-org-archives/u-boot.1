@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5640C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15956C5AD4C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A3D3870F8;
-	Tue, 21 Nov 2023 03:11:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C48B3870F8;
+	Tue, 21 Nov 2023 03:12:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HVC+4voi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f0uxTc2g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E137875A1; Tue, 21 Nov 2023 03:11:39 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AF9C3869F6; Tue, 21 Nov 2023 03:12:31 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B98EB869F6
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:11:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21BBB875D6
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:12:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700532694; x=1701137494; i=xypron.glpk@gmx.de;
- bh=jbmDPkuA+0UeYSXieuGpHZ7I6bhQMm6EyIE4qdE0s1w=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=HVC+4voikzwxNFZk2x2pR3KswzuFejpxQRnAvz63gPA8OZr/RqhFuf3+eDJD4+C4
- /aigyFLZ0zcQWXHFH+GRhe9aMTk+Ut8JgMve5xTTcCs7la9osQ5h1l9flCLQVPIq7
- YpA5wromNvbsm8bmuwYJ44OxfsOcafvO5tOjwHBMT6jj1atw6HAo+0NBPKFBbtCwy
- YHnSKJcaoNVRPm/6fHEf1fk8UR5ykUMVNNstgFq3USbG47oxEdvymxX0P8Q3itKyO
- f5BkUnx+R2zWwUg9LPyenkAFZQfMkOw3Bzaj7YuS7ZwC2FvldZwniUdWByNGq9+Sz
- YfwgSZfoB+3Xaila1A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfpSl-1rYGGF1Sbx-00gEee; Tue, 21
- Nov 2023 03:11:34 +0100
-Message-ID: <4ba6fd96-d4aa-45bc-be9d-cb8689606596@gmx.de>
-Date: Tue, 21 Nov 2023 03:11:33 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-991c786369cso693078466b.1
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:12:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1700532747; x=1701137547; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9oErZSNPpRWj6cWya6fUNKL2baOOgkbfElqn5bDFEVg=;
+ b=f0uxTc2g+bM8emomnLjI1stwZscbCpuDPArShPFv+AfmQ7PpHl/CayNfLDWQVWQ86m
+ UkIvIwEhaYWtH3FQCZSxCiLOm6/9GhsPfYudHNm7qXJlgfhPsegJGu+jzt6x7dIiR1vq
+ KWgECP9GHhBQltQJh6KSEsa+3DoZOZyLjAFgY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700532747; x=1701137547;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9oErZSNPpRWj6cWya6fUNKL2baOOgkbfElqn5bDFEVg=;
+ b=cIIjt9h0kxEbrSg77IdPCmYNeVx2wzPX8JtUDZUMKCjeUlEDFyPtHoK/O1lVa+QwQl
+ EyLk7X18M3T3jFDKoltwIntFf/Y0G16w7E++0DrQFheFSiXGxPa4wnbOATLHZKCnoIlP
+ BkrGVbPFz7GzyC4Hrx4T208zBckxzA+Hi1rPh1E7HYLYRLwxhPyq8B6s05AXphIQOPKs
+ RDn0FnqDnS7WETIoz8r/mXYFE0xUVZYEniv7uFu/Skz7FQcbCEd6eqhxHZd1YEnI8GNN
+ qvSmd+AvJJ8U724hIiF0LSTGImbGfSwtwgmtzc6O1I4kREINX22I1xa6nihwL3bz/pAL
+ PmJQ==
+X-Gm-Message-State: AOJu0YwnTHGBBcBa4q33T2IdQciP9v8uo0P6M7Gy9LBPG1NmYTU3fOR+
+ k9y1thNVOB3ZLq2AlcnBBvA9QeaD3jnOrMf1yWTRDg==
+X-Google-Smtp-Source: AGHT+IEzZ6s5vb8lIiHxjBh0g3WDopuC29/uf986diynE3D2QSfTI/OYBwO7jAdNcvlEjuiL/tfXN7R6J2D15fFjvM0=
+X-Received: by 2002:a17:906:224d:b0:9bf:2f84:5de7 with SMTP id
+ 13-20020a170906224d00b009bf2f845de7mr6153971ejr.4.1700532747244; Mon, 20 Nov
+ 2023 18:12:27 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/6] smbios: Use SMBIOS 3.0 to support an address above
- 4GB
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <20231015024511.3995580-1-sjg@chromium.org>
- <20231015024511.3995580-4-sjg@chromium.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231015024511.3995580-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+ <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 20 Nov 2023 19:12:15 -0700
+Message-ID: <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Ard Biesheuvel <ardb@kernel.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nyChwuljvL5YZvCC8ljT34sdOyxdL9kSFw8rXadlbkpkpqLIrOe
- iTNu+muHW8BnCBqNkTNvLcCPM3jDv6a04zggxsUkW0Qw8OzcJ6ATEEBAaXNvQwBmRwrEftw
- 23D0JIKERWDDZOfeO01HcFZkCVI1jrIUcVLMHazqSE2P+PyA9EYZW5/BBVXVod07OAljaQs
- 6fWfjTULkZFx3k7X+diHA==
-UI-OutboundReport: notjunk:1;M01:P0:epDIck+J6ow=;Qmg03aqDrUt4qbp82MidRSrHbt9
- JkC0+oU0s8TdGD+liZhf3EhJsW5X4tXgSJMpwCAzaEI9OMVBFldd6ToQbB/YC7m+kMd2ilL5+
- hYyqLnJYvoPuMe8Xq9fo6kSln1uSWgXteQ9NwHK3ORVWiKe6Zo/ht0X4NfzNScGDaIldMaFbw
- 9eXWaesmReP18kmqGgV/+zv6y6BUw35tTVY+P/EliJ82bFGqsrvJEQ/QFU19u4ezwOT0WhUNx
- gktuqzSNj89L58X+TNweKaqRU5e/2GcvV3QdcQXan28EERkMfzMsIbpdZzNcx86R9x/0V13Q1
- rBXI121lVjm1ejj9cDbxYZlprCaxD4lx8cwdYfC8tyQiSO5EBgWgOCQTMfxfQGaUW6xMFj+kW
- QfLO1bYIJMYQliPP3YbSUiS/o1IadqaoQhCxwBDmsS1t1493NH9ogyw8uFmJQcbwRVEnzdmBf
- KSmNHZ4MjgsGf0qS0VZ6YKLY70cBM3+fNAUgRAjfDjNABT2Odw5rq41kFMIZldFQq2Y92a/tl
- B5ah0Kky8f4/YiiCDp15but/KJvx9m23oBn4etQl5ADtLE0Xd4Uq1+Wh1j5WoLLnBupoisw/m
- +g7wqcefAI0hJsjS8RC0DB3sV2I0Gxvp0YnXCDzDkPcQLgPB4VgKq5tD0MMk4+NXSiYHr+NVL
- 5z2J6f3KkCIUqb7F8E6RO3AUyt8rTCZ0U9FHmZS1/1HKlUOkxoycl8H9nueCk3TFpTyI1eQAg
- Uinmo1suzbohmuyV2XiYpgvauaE8K8jdOTXcGDsHx1KhWRVZ0q5yBmWOQl/Nj/7j75n9TvFSG
- E4loLGRsbriXs/jDh3lbVQrf04tuI7dqI9cnNaZsHmD+9BgyFrtlWsjv2+/sd7kEbsqWr+oZz
- 13ssxBhLpGbYxvHRIqm/eJ7kwC5okWrNrC5WOSmdiEiVNPn8hBJDhQGCylxE3Dm5JauhZ4rGX
- dj+WzQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,149 +96,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/15/23 04:45, Simon Glass wrote:
-> When the SMBIOS table is written to an address above 4GB a 32-bit table
-> address is not large enough.
+Hi,
+
+On Mon, 13 Nov 2023 at 11:09, Chiu, Chasel <chasel.chiu@intel.com> wrote:
 >
-> Use an SMBIOS3 table in that case.
 >
-> Note that we cannot use efi_allocate_pages() since this function has
-> nothing to do with EFI. There is no equivalent function to allocate
-> memory below 4GB in U-Boot. One solution would be to create a separate
-> malloc() pool, or just always put the malloc() pool below 4GB.
+> Hi Ard,
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Please see my reply below inline.
 >
-> Changes in v2:
-> - Check the end of the table rather than the start.
+> Thanks,
+> Chasel
 >
->   include/smbios.h | 22 +++++++++++++++++++++-
->   lib/smbios.c     | 24 +++++++++++++++++++-----
->   2 files changed, 40 insertions(+), 6 deletions(-)
 >
-> diff --git a/include/smbios.h b/include/smbios.h
-> index c9df2706f5a6..ddabb558299e 100644
-> --- a/include/smbios.h
-> +++ b/include/smbios.h
-> @@ -12,7 +12,8 @@
+> > -----Original Message-----
+> > From: Ard Biesheuvel <ardb@kernel.org>
+> > Sent: Saturday, November 11, 2023 3:04 AM
+> > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Ru=
+tland
+> > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
+> > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
+> > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
+> > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
+> > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minn=
+ich
+> > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
+> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
+> > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > usages
+> >
+> > On Sat, 11 Nov 2023 at 04:20, Chiu, Chasel <chasel.chiu@intel.com> wrot=
+e:
+> > >
+> > >
+> > > Just sharing some usage examples from UEFI/EDK2 scenario.
+> > > To support ACPI S4/Hibernation, memory map must be consistent before
+> > > entering and after resuming from S4, in this case payload may need to
+> > > know previous memory map from bootloader (currently generic payload
+> > > cannot access platform/bootloader specific non-volatile data, thus
+> > > could not save/restore memory map information)
+> >
+> > So how would EDK2 reconstruct the entire EFI memory map from just these
+> > unannotated /reserved-memory nodes? The EFI memory map contains much
+> > more information than that, and all of it has to match the pre-hibernat=
+e situation,
+> > right? Can you given an example?
 >
->   /* SMBIOS spec version implemented */
->   #define SMBIOS_MAJOR_VER	3
-> -#define SMBIOS_MINOR_VER	0
-> +#define SMBIOS_MINOR_VER	7
-> +
 >
->   enum {
->   	SMBIOS_STR_MAX	=3D 64,	/* Maximum length allowed for a string */
-> @@ -54,6 +55,25 @@ struct __packed smbios_entry {
->   	u8 bcd_rev;
->   };
+> Here we listed only typically memory types that may change cross differen=
+t platforms.
+> Reserved memory type already can be handled by reserved-memory node, and =
+rest of the types usually no need to change cross platforms thus currently =
+we could rely on default in generic payload.
+> In the future if we see a need to add new memory types we will discuss an=
+d add it to FDT schema.
 >
-> +struct __packed smbios3_entry {
-> +	u8 anchor[5];
-> +	u8 checksum;
-> +	u8 length;
-> +	u8 major_ver;
-> +
-> +	u8 minor_ver;
-> +	u8 docrev;
-> +	u8 entry_point_rev;
-> +	u8 reserved;
-> +	u32 max_struct_size;
-> +
-> +	u64 struct_table_address;
-> +};
-> +
-> +/* These two structures should use the same amount of 16-byte-aligned s=
-pace */
-> +static_assert(ALIGN(16, sizeof(struct smbios_entry)) =3D=3D
-> +	      ALIGN(16, sizeof(struct smbios3_entry)));
-> +
->   /* BIOS characteristics */
->   #define BIOS_CHARACTERISTICS_PCI_SUPPORTED	(1 << 7)
->   #define BIOS_CHARACTERISTICS_UPGRADEABLE	(1 << 11)
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index c7a557bc9b7b..92e98388084f 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -487,7 +487,11 @@ ulong write_smbios_table(ulong addr)
->   	addr =3D ALIGN(addr, 16);
->   	start_addr =3D addr;
 >
-> -	addr +=3D sizeof(struct smbios_entry);
-> +	/*
-> +	 * So far we don't know which struct will be used, but they both end
-> +	 * up using the same amount of 16-bit-aligned space
-> +	 */
-> +	addr +=3D max(sizeof(struct smbios_entry), sizeof(struct smbios3_entry=
-));
->   	addr =3D ALIGN(addr, 16);
->   	tables =3D addr;
 >
-> @@ -512,14 +516,24 @@ ulong write_smbios_table(ulong addr)
->   	 * sandbox's DRAM buffer.
->   	 */
->   	table_addr =3D (ulong)map_sysmem(tables, 0);
-> -	if (sizeof(table_addr) > sizeof(u32) && table_addr > (ulong)UINT_MAX) =
-{
-> +	if (sizeof(table_addr) > sizeof(u32) && addr >=3D (ulong)UINT_MAX) {
-
-You have to check the end of the the last SMBIOS structure not the start
-of the first SMBIOS structure against UINT_MAX.
-
-> +		struct smbios3_entry *se;
->   		/*
->   		 * We need to put this >32-bit pointer into the table but the
->   		 * field is only 32 bits wide.
->   		 */
-> -		printf("WARNING: SMBIOS table_address overflow %llx\n",
-> -		       (unsigned long long)table_addr);
-> -		addr =3D 0;
-> +		printf("WARNING: Using SMBIOS3.0 due to table-address overflow %lx\n"=
-,
-> +		       table_addr);
-
-This should be log_debug().
-
-> +		se =3D map_sysmem(start_addr, sizeof(struct smbios_entry));
-> +		memset(se, '\0', sizeof(struct smbios_entry));
-> +		memcpy(se->anchor, "_SM3_", 5);
-> +		se->length =3D sizeof(struct smbios3_entry);
-> +		se->major_ver =3D SMBIOS_MAJOR_VER;
-> +		se->minor_ver =3D SMBIOS_MINOR_VER;
-> +		se->docrev =3D 0;
-> +		se->entry_point_rev =3D 1;
-> +		se->max_struct_size =3D len;
-> +		se->struct_table_address =3D table_addr;
-
-You must fill the checksum:
-
-se->checksum =3D table_compute_checksum(se, sizeof(struct smbios3_entry));
-
-With the checksum filled I can use dmidecode in Linux based on the
-SMBIOS3 table:
-
-ubuntu@ubuntu:~$ sudo dmidecode
-# dmidecode 3.5
-# SMBIOS3 entry point at 0x27ef53000
-Found SMBIOS entry point in EFI, reading table from /dev/mem.
-SMBIOS 3.7.0 present.
-# SMBIOS implementations newer than version 3.5.0 are not
-# fully supported by this version of dmidecode.
-Table at 0x27EF53020.
-
-Handle 0x0000, DMI type 0, 24 bytes
-BIOS Information
-         Vendor: U-Boot
-...
-
-Best regards
-
-Heinrich
-
-
->   	} else {
->   		struct smbios_entry *se;
+> >
+> > > Another usage is to support binary model which generic payload is a p=
+rebuilt
+> > binary compatible for all platforms/configurations, however the payload=
+ default
+> > memory map might not always work for all the configurations and we want=
+ to
+> > allow bootloader to override payload default memory map without recompi=
+ling.
+> > >
+> >
+> > Agreed. But can you explain how a EDK2 payload might make meaningful us=
+e of
+> > 'runtime-code' regions provided via DT  by the non-EDK2 platform init? =
+Can you
+> > give an example?
 >
+>
+> Runtime-code/data is used by UEFI payload for booting UEFI OS which requi=
+red UEFI runtime services.
+> Platform Init will select some regions from the usable memory and assign =
+it to runtime-code/data for UPL to consume. Or assign same runtime-code/dat=
+a from previous boot.
+> If UEFI OS is not supported, PlatformInit may not need to provide runtime=
+-code/data regions to payload. (always providing runtime-code/data should b=
+e supported too)
+>
+>
+> >
+> > > Under below assumption:
+> > >         FDT OS impact has been evaluated and taken care by relevant
+> > experts/stakeholders.
+> > > Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
+> > >
+> >
+> > I am sorry but I don't know what 'FDT OS impact' means. We are talking =
+about a
+> > firmware-to-firmware abstraction that has the potential to leak into th=
+e OS
+> > visible interface.
+> >
+> > I am a maintainer in the Tianocore project myself, so it would help if =
+you could
+> > explain who these relevant experts and stakeholders are. Was this discu=
+ssed on
+> > the edk2-devel mailing list? If so, apologies for missing it but I may =
+not have been
+> > cc'ed perhaps?
+>
+>
+>
+>
+> I'm not familiar with FDT OS, also I do not know if who from edk2-devel w=
+ere supporting FDT OS, I think Simon might be able to connect FDT OS expert=
+s/stakeholders.
+> We are mostly focusing on payload firmware phase implementation in edk2 (=
+and other payloads too), however, since we have aligned the payload FDT and=
+ OS FDT months ago, I'm assuming FDT OS impact must be there and we need (o=
+r already done?) FDT OS experts to support it. (again, maybe Simon could sh=
+are more information about FDT OS)
+>
+> In edk2 such FDT schema is UefiPayloadPkg internal usage only and payload=
+ entry will convert FDT into HOB thus we expected the most of the edk2 gene=
+ric code are no-touch/no impact, that's why we only had small group (UefiPa=
+yloadPkg) discussion.
+> Ard, if you are aware of any edk2 code that's for supporting FDT OS, plea=
+se let us know and we can discuss if those code were impacted or not.
 
+We discussed this and just to clarify, 'FDT OS' is not a special OS,
+it is just Linux.
+
+So, with the above, are we all on the same page? Can the patch be
+applied, perhaps? If not, what other discussion is needed?
+
+Regards,
+Simon
+
+>
+>
+>
+>
+> >
+> >
+> > >
+> > > > -----Original Message-----
+> > > > From: Simon Glass <sjg@chromium.org>
+> > > > Sent: Tuesday, September 26, 2023 12:43 PM
+> > > > To: devicetree@vger.kernel.org
+> > > > Cc: Mark Rutland <mark.rutland@arm.com>; Rob Herring
+> > > > <robh@kernel.org>; Tan, Lean Sheng <sheng.tan@9elements.com>; lkml
+> > > > <linux- kernel@vger.kernel.org>; Dhaval Sharma
+> > > > <dhaval@rivosinc.com>; Brune, Maximilian
+> > > > <maximilian.brune@9elements.com>; Yunhui Cui
+> > > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> > > > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> > > > <gua.guo@intel.com>; Chiu, Chasel <chasel.chiu@intel.com>; linux-
+> > > > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>;
+> > > > Ard Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
+> > > > Subject: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > > > usages
+> > > >
+> > > > It is common to split firmware into 'Platform Init', which does the
+> > > > initial hardware setup and a "Payload" which selects the OS to be b=
+ooted.
+> > > > Thus an handover interface is required between these two pieces.
+> > > >
+> > > > Where UEFI boot-time services are not available, but UEFI firmware
+> > > > is present on either side of this interface, information about
+> > > > memory usage and attributes must be presented to the "Payload" in s=
+ome
+> > form.
+> > > >
+> > > > This aims to provide an small schema addition for the memory mappin=
+g
+> > > > needed to keep these two pieces working together well.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > Changes in v7:
+> > > > - Rename acpi-reclaim to acpi
+> > > > - Drop individual mention of when memory can be reclaimed
+> > > > - Rewrite the item descriptions
+> > > > - Add back the UEFI text (with trepidation)
+> > > >
+> > > > Changes in v6:
+> > > > - Drop mention of UEFI
+> > > > - Use compatible strings instead of node names
+> > > >
+> > > > Changes in v5:
+> > > > - Drop the memory-map node (should have done that in v4)
+> > > > - Tidy up schema a bit
+> > > >
+> > > > Changes in v4:
+> > > > - Make use of the reserved-memory node instead of creating a new on=
+e
+> > > >
+> > > > Changes in v3:
+> > > > - Reword commit message again
+> > > > - cc a lot more people, from the FFI patch
+> > > > - Split out the attributes into the /memory nodes
+> > > >
+> > > > Changes in v2:
+> > > > - Reword commit message
+> > > >
+> > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++=
+++++
+> > > >  1 file changed, 71 insertions(+)
+> > > >  create mode 100644 dtschema/schemas/reserved-memory/common-
+> > > > reserved.yaml
+> > > >
+> > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > new file mode 100644
+> > > > index 0000000..f7fbdfd
+> > > > --- /dev/null
+> > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > @@ -0,0 +1,71 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause %YAML 1.2
+> > > > +---
+> > > > +$id:
+> > > > +http://devicetree.org/schemas/reserved-memory/common-reserved.yaml=
+#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Common memory reservations
+> > > > +
+> > > > +description: |
+> > > > +  Specifies that the reserved memory region can be used for the
+> > > > +purpose
+> > > > +  indicated by its compatible string.
+> > > > +
+> > > > +  Clients may reuse this reserved memory if they understand what i=
+t
+> > > > + is for,  subject to the notes below.
+> > > > +
+> > > > +maintainers:
+> > > > +  - Simon Glass <sjg@chromium.org>
+> > > > +
+> > > > +allOf:
+> > > > +  - $ref: reserved-memory.yaml
+> > > > +
+> > > > +properties:
+> > > > +  compatible:
+> > > > +    description: |
+> > > > +      This describes some common memory reservations, with the com=
+patible
+> > > > +      string indicating what it is used for:
+> > > > +
+> > > > +         acpi: Advanced Configuration and Power Interface (ACPI) t=
+ables
+> > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This i=
+s reserved by
+> > > > +           the firmware for its use and is required to be saved an=
+d restored
+> > > > +           across an NVS sleep
+> > > > +         boot-code: Contains code used for booting which is not ne=
+eded by the
+> > OS
+> > > > +         boot-code: Contains data used for booting which is not ne=
+eded by the
+> > OS
+> > > > +         runtime-code: Contains code used for interacting with the=
+ system when
+> > > > +           running the OS
+> > > > +         runtime-data: Contains data used for interacting with the=
+ system when
+> > > > +           running the OS
+> > > > +
+> > > > +    enum:
+> > > > +      - acpi
+> > > > +      - acpi-nvs
+> > > > +      - boot-code
+> > > > +      - boot-data
+> > > > +      - runtime-code
+> > > > +      - runtime-data
+> > > > +
+> > > > +  reg:
+> > > > +    description: region of memory that is reserved for the purpose=
+ indicated
+> > > > +      by the compatible string.
+> > > > +
+> > > > +required:
+> > > > +  - reg
+> > > > +
+> > > > +unevaluatedProperties: false
+> > > > +
+> > > > +examples:
+> > > > +  - |
+> > > > +    reserved-memory {
+> > > > +        #address-cells =3D <1>;
+> > > > +        #size-cells =3D <1>;
+> > > > +
+> > > > +        reserved@12340000 {
+> > > > +            compatible =3D "boot-code";
+> > > > +            reg =3D <0x12340000 0x00800000>;
+> > > > +        };
+> > > > +
+> > > > +        reserved@43210000 {
+> > > > +            compatible =3D "boot-data";
+> > > > +            reg =3D <0x43210000 0x00800000>;
+> > > > +        };
+> > > > +    };
+> > > > --
+> > > > 2.42.0.515.g380fc7ccd1-goog
+> > >
