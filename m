@@ -4,89 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 150EFC61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 20:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B36C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 20:27:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B34287572;
-	Tue, 21 Nov 2023 21:23:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CC9487253;
+	Tue, 21 Nov 2023 21:27:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CkRh74M+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XFN0vdth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5809B87619; Tue, 21 Nov 2023 21:23:07 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id E01B68747E; Tue, 21 Nov 2023 21:27:12 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20782875FB
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 21:23:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDB43871CD
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 21:27:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6ce2c5b2154so3613838a34.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:23:04 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-507cd62472dso174250e87.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:27:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700598183; x=1701202983; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pSdSM8CxcLaUF8fU0Ai9SdmNqXAmiGPS1r9ki/YttjQ=;
- b=CkRh74M+bxdffVXVrCYV9SKB//P4u4ckw0yDx8KXyS7DbU7fYnFsSod57fZKBUwy/C
- 608nAvjI7k6+mmMxNH00VeL6PpZFggpXEPLePD5VC7BWDqJlQVLPQgDUmnvBX23C+KlN
- XxXsKfAL87Wky9SwNsr4gs0e8rnNwzJ4j6eik=
+ d=linaro.org; s=google; t=1700598430; x=1701203230; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2CegMM8P5WFDVtiQgWuqAKEjyya1Xvd3jPRM1KljiwI=;
+ b=XFN0vdth1zjfZaOSodgwzbgfV67ApaNMkh8ct52CkDTHkKEngaGKrdcJcqymBUQG53
+ p4QktydZE41wgJD5EkMixbKCnjVSHA0F7/2SBd4OBF26E/RB+CaFmZI5VpjiyJTAcACu
+ g8mfacT/9coV8cako27dyyYfRvFm65/IQaw/9hksBKkIf8ofqx3mqhjJQ2qW01wiXTlP
+ z34wFQC8voufS4huMo/nGIKXo7A7I29nBh4tfUuwuUBtfqvOtKysXPI6kWtilBIvLAIC
+ gGYeDe2KUPv94OWhSP8cDoyrqGEqPS6JZC2MER25Pz4QkLpUCtdZsS22SemW1kPE8cR6
+ mFtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700598183; x=1701202983;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pSdSM8CxcLaUF8fU0Ai9SdmNqXAmiGPS1r9ki/YttjQ=;
- b=DRIBMzdMQwTKrMncVXojCqaGwb6oZ2AEI4rwWfAqwCoM5pF2TrjJVmm7kJLtrrYDFQ
- Xn6gLpVK3IRZnWPO2IHK3rN3yWyIIXxpOJTtBlDUhoN3l3/9DRLnyeyASzlg8bYUQw2W
- hGMTntB3/UW0sKkJuEogTOWuIjoWJSxoWt1jLqRdfXeQwbpptXyjfACgYVZHfp5Q75D6
- fAlURZDXZK3Srwvo8QWbToOC5A0PZQKaq8OIBKXicM3KgM5zonmI6h15D8WTPHjF/TMs
- 5teYRxkF/KoczMErKYt5nL3gqMNV+erO63x8mokpHTUfk8JIUF8l3R/7HDlok92mKPID
- /WGw==
-X-Gm-Message-State: AOJu0Yx3ypldbViVT0uMZff7dC8GuGy92Jy3+UTiNznrxmHB5U0ZjChi
- aPWhgfpbKmVTosqfsjb2E3kqjw==
-X-Google-Smtp-Source: AGHT+IGcNlxDaRsZ7b0ZHhTwYYnnp56yP4HTcyCQMgddwGULZpcNbxoY/WxuvO53l38ejo/g8CKfEw==
-X-Received: by 2002:a9d:6185:0:b0:6b9:b600:589 with SMTP id
- g5-20020a9d6185000000b006b9b6000589mr419292otk.15.1700598182802; 
- Tue, 21 Nov 2023 12:23:02 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
- [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
- by smtp.gmail.com with ESMTPSA id
- p16-20020a0cc3d0000000b006648514e276sm4224709qvi.78.2023.11.21.12.23.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 12:23:02 -0800 (PST)
-Date: Tue, 21 Nov 2023 15:22:59 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 02/21] arm: allow CONFIG_LINUX_KERNEL_IMAGE_HEADER to be
- set in defconfig
-Message-ID: <20231121202259.GK2513409@bill-the-cat>
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <20231121-b4-qcom-common-target-v1-2-9492198e0c15@linaro.org>
- <20231121190720.GD2513409@bill-the-cat>
- <adda70dc-b81e-4684-9ff2-7169af1ce4f3@linaro.org>
+ d=1e100.net; s=20230601; t=1700598430; x=1701203230;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2CegMM8P5WFDVtiQgWuqAKEjyya1Xvd3jPRM1KljiwI=;
+ b=gH1atOA906Yf2Lq7vPzKmAxtnmpWmm5EawalU7g7LIwrmbb73GdbLCLBvmqWHfasO3
+ JsU4q/N7TV1T+b+LNOasr8EzChG6GGGoggG5L64vMKRbn1l8sNt9xsYFrda9A7iJnpPm
+ xqtlrtYMgnvjpl2JyVF2JGG7zXcxnPBn5M1+TheapdpG/kik4O+owYiPKTKRlo5gU54t
+ jjMJRrYKcDtP9xJ9VB33jsS0karxMdXvyF3enax5CZTvOAjpaP9QQhkEFEIMBKAb2Gyr
+ Nwe3k6rWqtiJmvsFAz2wsaPpQ7Su9SBIFKUszpOetBaAU/g8ZqEiNHITo2t+fSVc2KH+
+ vA3w==
+X-Gm-Message-State: AOJu0YxMYQQQq+7aApGxzoAA3g0ma7k6+c3R14KlCrKe1ltEUmExKQyB
+ E9BuMPaWlJJcjUnNWD3uyE8tTb4Q3I3g1U2ZMtHbJQ==
+X-Google-Smtp-Source: AGHT+IGeu10ZJCAVG6QQnBIZsQEmyvDKYtfyNlh8uqu6wFvw6Tp0CKQdy+1CdbdxGvvs0x3Nj14Hud26ZzAorgBqSsU=
+X-Received: by 2002:a05:6512:124e:b0:4f9:dac6:2f3d with SMTP id
+ fb14-20020a056512124e00b004f9dac62f3dmr178835lfb.13.1700598430069; Tue, 21
+ Nov 2023 12:27:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5hlxPdkEr9UoXkxk"
-Content-Disposition: inline
-In-Reply-To: <adda70dc-b81e-4684-9ff2-7169af1ce4f3@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
+ <20231121152740.24783-8-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231121152740.24783-8-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 21 Nov 2023 22:26:34 +0200
+Message-ID: <CAC_iWj+jGQeOuf9obDwTiHY5X=4GagPT5ZLcXUpzFu_-WSTCGA@mail.gmail.com>
+Subject: Re: [PATCH v2 7/7] configs: qemu: add config fragment for ACPI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Yu Chien Peter Lin <peterlin@andestech.com>, Miao Yan <yanmiaobest@gmail.com>, 
+ Asherah Connor <ashe@kivikakk.ee>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,80 +89,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 21 Nov 2023 at 17:28, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Provide a configuration fragment to enable ACPI on QEMU.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         new patch
+> ---
+>  MAINTAINERS                         |  1 +
+>  board/emulation/configs/acpi.config |  3 +++
+>  doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
+>  doc/board/emulation/index.rst       |  1 +
+>  4 files changed, 28 insertions(+)
+>  create mode 100644 board/emulation/configs/acpi.config
+>  create mode 100644 doc/board/emulation/acpi.rst
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7c1cb2dc4d..9f443674cb 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -53,6 +53,7 @@ Maintainers List (try to look for most precise areas first)
+>  ACPI:
+>  M:     Simon Glass <sjg@chromium.org>
+>  S:     Maintained
+> +F:     board/emulation/configs/acpi.config
+>  F:     cmd/acpi.c
+>  F:     lib/acpi/
+>
+> diff --git a/board/emulation/configs/acpi.config b/board/emulation/configs/acpi.config
+> new file mode 100644
+> index 0000000000..b7ed811e33
+> --- /dev/null
+> +++ b/board/emulation/configs/acpi.config
+> @@ -0,0 +1,3 @@
+> +CONFIG_CMD_QFW=y
+> +CONFIG_ACPI=y
+> +CONFIG_GENERATE_ACPI_TABLE=y
+> diff --git a/doc/board/emulation/acpi.rst b/doc/board/emulation/acpi.rst
+> new file mode 100644
+> index 0000000000..e1208ca51e
+> --- /dev/null
+> +++ b/doc/board/emulation/acpi.rst
+> @@ -0,0 +1,23 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +ACPI on QEMU
+> +============
+> +
+> +QEMU can provide ACPI tables on ARM, RISC-V, and x86.
+> +
+> +The following settings are needed::
+> +
+> +    CONFIG_CMD_QFW=y
+> +    CONFIG_ACPI=y
+> +    CONFIG_GENERATE_ACPI_TABLE=y
+> +
+> +On x86 these settings are already included in the defconfig files. ARM and
+> +RISC-V default to use device-trees.
+> +
+> +Instead of updating the configuration manually you can add the configuration
+> +fragment `acpi.config` to the make command for initializing the configuration.
+> +E.g.
+> +
+> +.. code-block:: bash
+> +
+> +    make qemu-riscv64_smode_defconfig acpi.config
+> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+> index 932c65adeb..d3d6b8f3d8 100644
+> --- a/doc/board/emulation/index.rst
+> +++ b/doc/board/emulation/index.rst
+> @@ -6,6 +6,7 @@ Emulation
+>  .. toctree::
+>     :maxdepth: 1
+>
+> +   acpi
+>     blkdev
+>     ../../usage/semihosting
+>     qemu-arm
+> --
+> 2.40.1
+>
 
---5hlxPdkEr9UoXkxk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Nov 21, 2023 at 08:17:30PM +0000, Caleb Connolly wrote:
->=20
->=20
-> On 21/11/2023 19:07, Tom Rini wrote:
-> > On Tue, Nov 21, 2023 at 05:09:25PM +0000, Caleb Connolly wrote:
-> >=20
-> >> Let this option be enabled dynamically for boards that support multiple
-> >> mechanisms for booting U-Boot (e.g. as a first-stage or chainloaded
-> >> bootloader).
-> >>
-> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> >> ---
-> >> This patch has no dependencies
-> >>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> ---
-> >>  arch/arm/Kconfig | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >> index bd48131292e3..1add4282f336 100644
-> >> --- a/arch/arm/Kconfig
-> >> +++ b/arch/arm/Kconfig
-> >> @@ -81,7 +81,7 @@ config SPL_SYS_NO_VECTOR_TABLE
-> >> =20
-> >>  config LINUX_KERNEL_IMAGE_HEADER
-> >>  	depends on ARM64
-> >> -	bool
-> >> +	bool "Linux kernel binary header"
-> >>  	help
-> >>  	  Place a Linux kernel image header at the start of the U-Boot binar=
-y.
-> >>  	  The format of the header is described in the Linux kernel source at
-> >=20
-> > Why are we not select'ing this like the other platforms which need the
-> > same do?
->=20
-> On some Qualcomm boards we can boot either as a Linux kernel or we can
-> replace the first-stage bootloader. To run as the primary bootloader we
-> unset this option and enable REMAKE_ELF as well as configuring a few
-> other things.
->=20
-> Would it make more sense to introduce a Qualcomm specific config option
-> to handle these cases?
-
-Well, part of the image header is that if you try and execute it, it's a
-jump over the rest of the header, yes? So can't we still do the
-REMAKE_ELF on top of it?
-
---=20
-Tom
-
---5hlxPdkEr9UoXkxk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVdEaAACgkQFHw5/5Y0
-tyyVuAv+JT2whQBabRX71hPr24+Fwb6JZKqHYIZg+RD98ypOX114b9+zblqqfn2N
-amuznXIwba+CuOZOkGHXq79CasWGutkLtrFJHAywg1dmljjJRVCASSUSsaA2ExCb
-bfsoCB+xtR+53ogNyQs5bl5/EaWbi8jDlo5XtJw2NUGts89kXrEmk62ijqP0sTkG
-IOTqQyXLVqAOqmUMkR68HxDVFAKnD5miySZwa/jilky2gJzjIUr5Fuoi5icN9cm0
-eNngNHbgiLkxKojpcxf1sDpIuX6H5k/Cqd5Q3fjFdGlmT/g6PMpWssie8rUpucAu
-yTqIP/J7TD31vx/3NQ8X4PI5yUSUFhh4WPzCRWNQDadKbNeu7/HvWKQlQwtNnHhR
-H1iyPc/3H4C7j3FYnR6p4+EGn5ah5waoQxyl1yplySx1Cekf6M5r26qStY/szslk
-3LCRyN8WKBU/Ry+5xMdaeKWihxEW11/LHBnM6Cn0+z2PikfrzYNRgVJUjlblDKN2
-62Z7AwwJ
-=e9+b
------END PGP SIGNATURE-----
-
---5hlxPdkEr9UoXkxk--
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
