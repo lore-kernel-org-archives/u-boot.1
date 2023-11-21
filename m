@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6556CC61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:11:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA13C61D92
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:11:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21B1B8763A;
+	by phobos.denx.de (Postfix) with ESMTP id AFEE6875A4;
 	Tue, 21 Nov 2023 18:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iWCVR6Jm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UQPDAd1w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 787F4875FC; Tue, 21 Nov 2023 18:09:50 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id AC1DE87637; Tue, 21 Nov 2023 18:09:52 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8282887642
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6194B875AB
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2c8880fbb33so20817181fa.0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:40 -0800 (PST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2c501bd6ff1so72211741fa.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586580; x=1701191380; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586581; x=1701191381; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=d4YhP6MdZSOZ44DXIDRNYanXLEw0d+r3l7ESBfKug2M=;
- b=iWCVR6Jmb7y54SaUGgEDdvNuGmht1TUvIkbpS73dLNz0kGp/kMsrMXXiBDR5MpCnIR
- 1GRnTURxlAvsf7bxTG40RBfgzN7/zRS0Lucb2CUEWPa9pURlEh5DLbk+MQNjzGeNj2a+
- e43teoSXYakx8NvQNkmufKLfL2aOuBkui/tQTsWusgFbViJtmAqT+k3EZuNBLrnXFDGf
- naTNXjSkxtVZfMdTQJf6SyaSTTPM2DH4PRdXLTnL5VChKSb5esGQxVp0fqXK96DdUb+Q
- DoMkhZkI73E8nbAHez+LqSZn4VU5dgnQJoWL8eUnm5b8xZL2Ccfkh9aMYax2LKmWCpel
- dEkQ==
+ :reply-to; bh=9imF+YbrKT9/xfJzuapVm/9Tvcy100kolJOoerob2SU=;
+ b=UQPDAd1w8eXiKZbgBQsvWDQ/J/9jciGtaFdaD/GLk9o+db8WUBxL5j1/Q5cknm/IIq
+ 4YZYFkU2eySAJAqxFUDPJ6/7/anzwQaTvlvVlLjfT6xC91l0fU3UiJkeMmlIp1OkKIB6
+ VtO01CJHCyC4JDY7BGhG4fzgdWh1QoszwUaiLvARtl6utWFhEPUv1wJmDt7eNXnsajF6
+ 6ueiIKKhA8YOEuAm54FVcDgc/Zlb2N8mSAFi9nhWcsi/ioBgFWtyQopf3DgHmVZ6qKwn
+ SRmkv7lEj4IsuafsK1/vtaqFg/i/y5ZV9FuAzvfKH9kdvgA6KOToTlvnhtQ+nX24yX5t
+ BqWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586580; x=1701191380;
+ d=1e100.net; s=20230601; t=1700586581; x=1701191381;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d4YhP6MdZSOZ44DXIDRNYanXLEw0d+r3l7ESBfKug2M=;
- b=P1P5QNiTLP1mAYIP4AS0ynVMorK0cx40EpZVrLOekpUnq/qAFVSVHKg+6DMxkKrSsT
- IaJynMKhLfciRuF5BZkTUFQXMXDz/LGZ4NLswax93OxzxBwI8I+Tkz3X3dnZmxl88Q3g
- wGDm/hwfvLqHTTWXBa4Knz/2KELmSoq4I0Cw6wqctlS3UBgpzztIb86DPuA29EitlsCV
- U6OfQK/6zpSvRUpim1LAZv+x7nCVm5PMp1DpdAPxKSRZuCsOqSH53pVDeZ2xkveHNVrr
- X2s1nB7ENsU69oZ+HJfwGTbpR65tcpbZMAKhKxpEKyq7sb+o5dsAj5YCazKAhkets8TQ
- 4isw==
-X-Gm-Message-State: AOJu0Yz2TJUQ6kvcd/z9Oqr1O4w8+IFsu+GpakmDAFd+UPzKymPLr4OG
- zYlGjInPBBDumRmnfL3yE7BLnw==
-X-Google-Smtp-Source: AGHT+IErn2Yz+cwYOt6Hfub+A9meRkqcuQlTzHyVGGe2LG6L0Vosvu8Hf3GAUVtg0yCPCpOvTE1mog==
-X-Received: by 2002:a05:651c:157:b0:2c5:1d11:5688 with SMTP id
- c23-20020a05651c015700b002c51d115688mr6883527ljd.14.1700586579855; 
- Tue, 21 Nov 2023 09:09:39 -0800 (PST)
+ bh=9imF+YbrKT9/xfJzuapVm/9Tvcy100kolJOoerob2SU=;
+ b=sy5Tqpl96oj6wMmEnb6JzaVzte1Lc3y/auI6JOeNwmF0PHUOnY8wPcX/FNDR2ecAMJ
+ 8V1YsXKJzWOl7WKXuES/kXMH3DS6toJH1mcY95IDf9kMLVq/Gkr9EMsrDkT1Uwn548S2
+ rPI35orkpakcuh3rlxJo1R/LbsxkJeUqur7nE6YY7oLghOLcpfihio3xfAkisPsbv078
+ Tglquh52pnnjdNU/+SFf7i7/T/hHtaDeYUqtgBvxY7OC9eIhZl78ozlQxaBFk0ROQ1RU
+ 8WkDf0PcbUXgmRc5Lgq2VJHG8zhsGielK4AZpGkfJwAjDm6xkyjq8BkSWUheRWyTBuh1
+ yT4A==
+X-Gm-Message-State: AOJu0YyFuTaSAWr6u0e40lRCztoWW10elUCbec8S59aVP4ZXdX+Kyt8g
+ lByFvtOHbkqiYdaN1Dm+nnvCDQ==
+X-Google-Smtp-Source: AGHT+IHWkc6yxFWl1zbv4Jjlfbwsrst9HrXy1XoDEkNxFgEHzChlIwxzaYhK5yWBU4KWwd2oMn0VPQ==
+X-Received: by 2002:a05:651c:10af:b0:2c6:eb44:2e12 with SMTP id
+ k15-20020a05651c10af00b002c6eb442e12mr7538829ljn.43.1700586580764; 
+ Tue, 21 Nov 2023 09:09:40 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
  1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:39 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:40 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:34 +0000
-Subject: [PATCH 11/21] board: dragonboard410c: import board code from
- mach-snapdragon
+Date: Tue, 21 Nov 2023 17:09:35 +0000
+Subject: [PATCH 12/21] board: dragonboard820c: use
+ LINUX_KERNEL_IMAGE_HEADER
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-11-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-12-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -84,13 +84,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7010;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4782;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=NRk2wgImu9xSxY0Jqke9wn+fk97YriyFyd2l5TJfhPk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ24HT3ZMcJhzcuGtXb0eflx+2TPZEpoyLBWtX1u/T
- /WPOhnQUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACbC0c3IMFEvkf9Mg9EZZXbN
- w763Mzbop3+pvGzj+lZwK/c3n2nfVzEybPkvYGJwJv3LMksf48qvFavMH/0zXxL+YuX27WzmK5S
- unwQA
+ bh=U0b2nNmR3fgt8e8auYahMhinsHk+zS8tzZkNflPHqRk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ25tbmum/BW/mVi3Zkbwv9au9qUxdxO4btzYH1i/u
+ XKXnfiajlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR2VkMf8XVTKyF9yxjbWDO
+ Xxp4+kWX84eiiY+mPBL8uyjY3PvjwcMM/8ultdJsZ/Ef13jjvStrmvZi2/cXu88LVpVdcIx5wyW
+ +bB0A
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,233 +109,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the db410c board support code was written to be generic and
-placed in mach-snapdragon. However, as the db410c is the only board
-using this, move the code out of mach-snapdragon. This makes is more
-obvious what code is relevant for which targets and helps tidy things up
-a little more.
+db820c predated support for prepending the kernel image header
+automatically, drop it's custom linker script and head.S in favour of
+this generic support.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/Makefile                  |  2 -
- arch/arm/mach-snapdragon/include/mach/dram.h       | 12 -----
- arch/arm/mach-snapdragon/misc.c                    | 55 ----------------------
- board/qualcomm/dragonboard410c/Makefile            |  3 +-
- board/qualcomm/dragonboard410c/dragonboard410c.c   |  4 +-
- .../qualcomm/dragonboard410c/misc.c                | 51 +++++++++++++++++++-
- .../mach => board/qualcomm/dragonboard410c}/misc.h |  1 +
- 7 files changed, 54 insertions(+), 74 deletions(-)
+ arch/arm/mach-snapdragon/Kconfig          |   1 +
+ board/qualcomm/dragonboard820c/Makefile   |   1 -
+ board/qualcomm/dragonboard820c/head.S     |  33 ---------
+ board/qualcomm/dragonboard820c/u-boot.lds | 111 ------------------------------
+ 4 files changed, 1 insertion(+), 145 deletions(-)
 
-diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
-index 3a3a297c1768..d02432df8b04 100644
---- a/arch/arm/mach-snapdragon/Makefile
-+++ b/arch/arm/mach-snapdragon/Makefile
-@@ -6,6 +6,4 @@ obj-$(CONFIG_SDM845) += sysmap-sdm845.o
- obj-$(CONFIG_SDM845) += init_sdm845.o
- obj-$(CONFIG_TARGET_DRAGONBOARD820C) += sysmap-apq8096.o
- obj-$(CONFIG_TARGET_DRAGONBOARD410C) += sysmap-apq8016.o
--obj-y += misc.o
--obj-y += dram.o
- obj-$(CONFIG_TARGET_QCS404EVB) += sysmap-qcs404.o
-diff --git a/arch/arm/mach-snapdragon/include/mach/dram.h b/arch/arm/mach-snapdragon/include/mach/dram.h
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index ad6671081910..f897c393464f 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -45,6 +45,7 @@ config TARGET_DRAGONBOARD410C
+ 
+ config TARGET_DRAGONBOARD820C
+ 	bool "96Boards Dragonboard 820C"
++	select LINUX_KERNEL_IMAGE_HEADER
+ 	imply CLK_QCOM_APQ8096
+ 	imply PINCTRL_QCOM_APQ8096
+ 	imply BUTTON_QCOM_PMIC
+diff --git a/board/qualcomm/dragonboard820c/Makefile b/board/qualcomm/dragonboard820c/Makefile
+index 643311f5b3ba..2ae6d16364aa 100644
+--- a/board/qualcomm/dragonboard820c/Makefile
++++ b/board/qualcomm/dragonboard820c/Makefile
+@@ -3,4 +3,3 @@
+ # (C) Copyright 2017 Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@gmail.com>
+ 
+ obj-y	:= dragonboard820c.o
+-extra-y += head.o
+diff --git a/board/qualcomm/dragonboard820c/head.S b/board/qualcomm/dragonboard820c/head.S
 deleted file mode 100644
-index 0a9eedda414c..000000000000
---- a/arch/arm/mach-snapdragon/include/mach/dram.h
+index b052a858fd32..000000000000
+--- a/board/qualcomm/dragonboard820c/head.S
 +++ /dev/null
-@@ -1,12 +0,0 @@
+@@ -1,33 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0+ */
 -/*
-- * Snapdragon DRAM
-- * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
+- * ARM64 header for proper chain-loading with Little Kernel.
+- *
+- * Little Kernel shipped with Dragonboard820C boots standard Linux images for
+- * ARM64. This file adds header that is required to boot U-Boot properly.
+- *
+- * For details see:
+- * https://www.kernel.org/doc/Documentation/arm64/booting.txt
+- *
+- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
 - */
 -
--#ifndef DRAM_H
--#define DRAM_H
+-#include <config.h>
 -
--int msm_fixup_memory(void *blob);
--
--#endif
-diff --git a/arch/arm/mach-snapdragon/misc.c b/arch/arm/mach-snapdragon/misc.c
-deleted file mode 100644
-index 7d452f4529b7..000000000000
---- a/arch/arm/mach-snapdragon/misc.c
-+++ /dev/null
-@@ -1,55 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Miscellaneous Snapdragon functionality
+- *   per document in linux/Doc/arm64/booting.text
+- */
+-.global _arm64_header
+-_arm64_header:
+-	b _start
+-	.word 0
+-	.quad   CONFIG_TEXT_BASE-PHYS_SDRAM_1 /* Image load offset, LE */
+-	.quad   0    /* Effective size of kernel image, little-endian */
+-	.quad   0    /* kernel flags, little-endian */
+-	.quad   0    /* reserved */
+-	.quad   0    /* reserved */
+-	.quad   0    /* reserved */
+-	.byte   0x41 /* Magic number, "ARM\x64" */
+-	.byte   0x52
+-	.byte   0x4d
+-	.byte   0x64
+-	.word   0    /* reserved (used for PE COFF offset) */
+diff --git a/board/qualcomm/dragonboard820c/u-boot.lds b/board/qualcomm/dragonboard820c/u-boot.lds
+deleted file mode 100644
+index 5251b59fbe76..000000000000
+--- a/board/qualcomm/dragonboard820c/u-boot.lds
++++ /dev/null
+@@ -1,111 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Override linker script for fastboot-readable images
 - *
-- * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
+- * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
 - *
+- * Based on arch/arm/cpu/armv8/u-boot.lds (Just add header)
 - */
 -
--#include <common.h>
--#include <mmc.h>
--#include <asm/arch/misc.h>
--#include <asm/unaligned.h>
--
--/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
--#define UNSTUFF_BITS(resp, start, size) \
--	({ \
--		const int __size = size; \
--		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
--		const int __off = 3 - ((start) / 32); \
--		const int __shft = (start) & 31; \
--		u32 __res; \
--					\
--		__res = resp[__off] >> __shft; \
--		if (__size + __shft > 32) \
--			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
--		__res & __mask;	\
--	})
--
--u32 msm_board_serial(void)
+-OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+-OUTPUT_ARCH(aarch64)
+-ENTRY(_arm64_header)
+-SECTIONS
 -{
--	struct mmc *mmc_dev;
+-	. = 0x00000000;
 -
--	mmc_dev = find_mmc_device(0);
--	if (!mmc_dev)
--		return 0;
+-	. = ALIGN(8);
+-	.text :
+-	{
+-		*(.__image_copy_start)
+-		board/qualcomm/dragonboard820c/head.o (.text*)
+-		CPUDIR/start.o (.text*)
+-	}
 -
--	if (mmc_init(mmc_dev))
--		return 0;
+-	/* This needs to come before *(.text*) */
+-	.efi_runtime : {
+-                __efi_runtime_start = .;
+-		*(.text.efi_runtime*)
+-		*(.rodata.efi_runtime*)
+-		*(.data.efi_runtime*)
+-                __efi_runtime_stop = .;
+-	}
 -
--	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
+-	.text_rest :
+-	{
+-		*(.text*)
+-	}
+-
+-	. = ALIGN(8);
+-	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+-
+-	. = ALIGN(8);
+-	.data : {
+-		*(.data*)
+-	}
+-
+-	. = ALIGN(8);
+-
+-	. = .;
+-
+-	. = ALIGN(8);
+-	__u_boot_list : {
+-		KEEP(*(SORT(__u_boot_list*)));
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.efi_runtime_rel : {
+-                __efi_runtime_rel_start = .;
+-		*(.rel*.efi_runtime)
+-		*(.rel*.efi_runtime.*)
+-                __efi_runtime_rel_stop = .;
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.image_copy_end :
+-	{
+-		*(.__image_copy_end)
+-	}
+-
+-	. = ALIGN(8);
+-
+-	.rel_dyn_start :
+-	{
+-		*(.__rel_dyn_start)
+-	}
+-
+-	.rela.dyn : {
+-		*(.rela*)
+-	}
+-
+-	.rel_dyn_end :
+-	{
+-		*(.__rel_dyn_end)
+-	}
+-
+-	_end = .;
+-
+-	. = ALIGN(8);
+-
+-	.bss_start : {
+-		KEEP(*(.__bss_start));
+-	}
+-
+-	.bss : {
+-		*(.bss*)
+-		 . = ALIGN(8);
+-	}
+-
+-	.bss_end : {
+-		KEEP(*(.__bss_end));
+-	}
+-
+-	/DISCARD/ : { *(.dynsym) }
+-	/DISCARD/ : { *(.dynstr*) }
+-	/DISCARD/ : { *(.dynamic*) }
+-	/DISCARD/ : { *(.plt*) }
+-	/DISCARD/ : { *(.interp*) }
+-	/DISCARD/ : { *(.gnu*) }
 -}
--
--void msm_generate_mac_addr(u8 *mac)
--{
--	/* use locally adminstrated pool */
--	mac[0] = 0x02;
--	mac[1] = 0x00;
--
--	/*
--	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
--	 * Use big endian order so it is consistent with the serial number
--	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
--	 */
--	put_unaligned_be32(msm_board_serial(), &mac[2]);
--}
-diff --git a/board/qualcomm/dragonboard410c/Makefile b/board/qualcomm/dragonboard410c/Makefile
-index 1b99c8b0efef..a3ae1a5f9136 100644
---- a/board/qualcomm/dragonboard410c/Makefile
-+++ b/board/qualcomm/dragonboard410c/Makefile
-@@ -2,4 +2,5 @@
- #
- # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
- 
--obj-y	:= dragonboard410c.o
-+obj-y += dragonboard410c.o
-+obj-y += misc.o
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index 350e0e9e20aa..3ee7e806918b 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -17,10 +17,10 @@
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <fdt_support.h>
--#include <asm/arch/dram.h>
--#include <asm/arch/misc.h>
- #include <linux/delay.h>
- 
-+#include "misc.h"
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- int dram_init(void)
-diff --git a/arch/arm/mach-snapdragon/dram.c b/board/qualcomm/dragonboard410c/misc.c
-similarity index 64%
-rename from arch/arm/mach-snapdragon/dram.c
-rename to board/qualcomm/dragonboard410c/misc.c
-index 499dfdf0da6e..27d51ef78914 100644
---- a/arch/arm/mach-snapdragon/dram.c
-+++ b/board/qualcomm/dragonboard410c/misc.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Onboard memory detection for Snapdragon boards
-+ * Miscellaneous Snapdragon functionality
-  *
-  * (C) Copyright 2018 Ramon Fried <ramon.fried@gmail.com>
-  *
-@@ -9,10 +9,56 @@
- #include <common.h>
- #include <dm.h>
- #include <log.h>
-+#include <mmc.h>
- #include <part.h>
- #include <smem.h>
- #include <fdt_support.h>
--#include <asm/arch/dram.h>
-+#include <asm/unaligned.h>
-+
-+#include "misc.h"
-+
-+/* UNSTUFF_BITS macro taken from Linux Kernel: drivers/mmc/core/sd.c */
-+#define UNSTUFF_BITS(resp, start, size) \
-+	({ \
-+		const int __size = size; \
-+		const u32 __mask = (__size < 32 ? 1 << __size : 0) - 1;	\
-+		const int __off = 3 - ((start) / 32); \
-+		const int __shft = (start) & 31; \
-+		u32 __res; \
-+					\
-+		__res = resp[__off] >> __shft; \
-+		if (__size + __shft > 32) \
-+			__res |= resp[__off - 1] << ((32 - __shft) % 32); \
-+		__res & __mask;	\
-+	})
-+
-+u32 msm_board_serial(void)
-+{
-+	struct mmc *mmc_dev;
-+
-+	mmc_dev = find_mmc_device(0);
-+	if (!mmc_dev)
-+		return 0;
-+
-+	if (mmc_init(mmc_dev))
-+		return 0;
-+
-+	return UNSTUFF_BITS(mmc_dev->cid, 16, 32);
-+}
-+
-+void msm_generate_mac_addr(u8 *mac)
-+{
-+	/* use locally adminstrated pool */
-+	mac[0] = 0x02;
-+	mac[1] = 0x00;
-+
-+	/*
-+	 * Put the 32-bit serial number in the last 32-bit of the MAC address.
-+	 * Use big endian order so it is consistent with the serial number
-+	 * written as a hexadecimal string, e.g. 0x1234abcd -> 02:00:12:34:ab:cd
-+	 */
-+	put_unaligned_be32(msm_board_serial(), &mac[2]);
-+}
- 
- #define SMEM_USABLE_RAM_PARTITION_TABLE 402
- #define RAM_PART_NAME_LENGTH            16
-@@ -97,3 +143,4 @@ int msm_fixup_memory(void *blob)
- 
- 	return 0;
- }
-+
-diff --git a/arch/arm/mach-snapdragon/include/mach/misc.h b/board/qualcomm/dragonboard410c/misc.h
-similarity index 87%
-rename from arch/arm/mach-snapdragon/include/mach/misc.h
-rename to board/qualcomm/dragonboard410c/misc.h
-index c60e3e472470..fe44caf51b18 100644
---- a/arch/arm/mach-snapdragon/include/mach/misc.h
-+++ b/board/qualcomm/dragonboard410c/misc.h
-@@ -9,5 +9,6 @@
- 
- u32 msm_board_serial(void);
- void msm_generate_mac_addr(u8 *mac);
-+int msm_fixup_memory(void *blob);
- 
- #endif
 
 -- 
 2.42.1
