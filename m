@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB44CC61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18AB4C61D97
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14EB786538;
-	Tue, 21 Nov 2023 23:10:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7AB87875FB;
+	Tue, 21 Nov 2023 23:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="knQPC3bs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cTvz0SSd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C71887585; Tue, 21 Nov 2023 23:10:56 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 199DC87585; Tue, 21 Nov 2023 23:10:58 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C6BA8269F
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2619A87563
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-548d1f8b38bso3584852a12.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:54 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a02ba1f500fso141695666b.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700604653; x=1701209453; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700604655; x=1701209455; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UEIubZ2dXB+NAgyIgVQo5uLj/cQFs73nUjfXFbZi63Y=;
- b=knQPC3bst5OQYMxJvjf+z8/0cgCZR2yZs0nytpzNC2A+msw8IgtJI4Kvv9+n29FMbx
- VqyHMWBttA0DtLOuEc2WOlcwGso6rotj5p5TxdE5IlQHmfixxqZSRBTZeLKm9rYicCjY
- VeloNLV3vh1YYCVIgHPIxGRpPSVlotECeF/f8=
+ bh=WvHAcp47btrWMjA7VbkdKRxRYXnbEDNO49pxckoYRWg=;
+ b=cTvz0SSdn6W4wChS7N2o3K+F4PAx6IjAm7k4gO9walCmk6+9eDxIz35WG0LgsKv3eI
+ MZmArKRq2xh0JHwHaeKrWUm/eaoRddZdWVp/w0DHKfJYOVTgVeXRA1iA6ROytGfW1Brd
+ cydGJ8s/H+0s0TTMGbuKD5impfvUVOguzW5no=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700604653; x=1701209453;
+ d=1e100.net; s=20230601; t=1700604655; x=1701209455;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UEIubZ2dXB+NAgyIgVQo5uLj/cQFs73nUjfXFbZi63Y=;
- b=UsDr3cI0vFgLM1L42Zr3EnX7C3iLVUEsybvHiBZoVGf49a0miPLXUO0OrUgVnkZAVY
- akDuGa3rUEBZ+ogdZXVOMpefewpdRivZFM2+Wj2YX8g9Ffn+tNy3oskSQZ2/PsaqrkzL
- mgiNerPMc1Hgqwi+Q7Th6dA0s5avtfGYHODnULTay97y/L6ouRNpFFrQtw74ACuor5Kb
- zVz8I5TrtZvSEgppPzllEer/bKHn0f1OtxtbWpYKhBDTdvU6PV9rAEiqVBX16rzK2nmy
- Mg/QSwLhfUHeHT6bElnREe3UZQ6PEGJUXl8OtnXMXd1phkjW1WiYrjKVdv7pj3Aq2GE1
- H9Gw==
-X-Gm-Message-State: AOJu0YwYSdydyXEwu4UfclJy9DN84NLHv5Xz0FjbPLYnmWfKpKZ8XI6O
- 5lZspnxm3UE1UTKeL3D9vtxkNwiAvbPwwiwVKtTrvQ==
-X-Google-Smtp-Source: AGHT+IHsYXGyhJi51Cr77wz0Ufb2qASyNr2hwYtQvazDCMGVpUqirv6NXsa1pkYc4V+sZzTTt9Mqr8SMRouqvgTIWBQ=
-X-Received: by 2002:a17:906:eb4c:b0:a02:8b23:895d with SMTP id
- mc12-20020a170906eb4c00b00a028b23895dmr175867ejb.35.1700604653320; Tue, 21
- Nov 2023 14:10:53 -0800 (PST)
+ bh=WvHAcp47btrWMjA7VbkdKRxRYXnbEDNO49pxckoYRWg=;
+ b=OITKz6tis5mmgCqeSbTlWCqr0hk/K7xFYRwovJT+3sCeOfO1TtwDUNWHyFsQUqJKfL
+ mkyiYAQu9FkUvJR1+cg9IH3E/KEm088t2lKHNdUEFqPfZ8/PacOo8hT5JWpyr1om5iEQ
+ BvgVtU5nAWmbypN3Et6skZG009Zhn+kfamn831SrOEayMRijm6NS7Z33CVftTBUM7xzv
+ bDednL34armoNc3ehcopFzoG3h6GQuw4FfxmMA6NLqWFrStq/qB29hCgI1iAkq8ahTM3
+ 0vblzL8j2LfgLd3pyOSJU5sSMAwgK/Ukf8V3ynabnGcKyFb6l8Hw4HNqLL9A+87kcTQC
+ WahA==
+X-Gm-Message-State: AOJu0Yzv08K8wwU2EwuRBYafG9EbbfkVv5oEas4VgLZNHvDU6Frv94sh
+ 8kRF3ml6aBzDyyoP1gFJ7snmX6bLRsRY3k54OWqjWlwKk3G3QKIAMUk=
+X-Google-Smtp-Source: AGHT+IF0uq1if9PS3DRZIYC8/R9Mx0HIP/lS5i2+iJAhKAs7wwyd8ZXlSLrnsWnL1oLhVtFSRO05V4XxfqaJieOYEEo=
+X-Received: by 2002:a17:907:b92:b0:9b2:df16:851d with SMTP id
+ ey18-20020a1709070b9200b009b2df16851dmr166677ejc.57.1700604655483; Tue, 21
+ Nov 2023 14:10:55 -0800 (PST)
 MIME-Version: 1.0
 References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-8-sjg@chromium.org>
- <555a04a5-170e-409e-bae5-b2b0ba03e09e@gmx.de>
-In-Reply-To: <555a04a5-170e-409e-bae5-b2b0ba03e09e@gmx.de>
+ <20231121113557.800353-7-sjg@chromium.org>
+ <07051882-8b13-4878-8f6f-1fe31fe97467@gmx.de>
+In-Reply-To: <07051882-8b13-4878-8f6f-1fe31fe97467@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 15:10:42 -0700
-Message-ID: <CAPnjgZ0K=fCvqtZLEsCPgh9iOvb44U+e39kNT3B-xQFRX9HZcw@mail.gmail.com>
-Subject: Re: [PATCH 7/7] WIP: efi: debugging
+Date: Tue, 21 Nov 2023 15:10:44 -0700
+Message-ID: <CAPnjgZ3fv_NgDOAA-GdQD084ZTkKi5ZfO2kpUoNDVi9=Ar1iFA@mail.gmail.com>
+Subject: Re: [PATCH 6/7] WIP: efi: Allow helloworld to exit boot services
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -85,59 +85,85 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Tue, 21 Nov 2023 at 10:20, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 21 Nov 2023 at 10:17, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 11/21/23 12:35, Simon Glass wrote:
-> > This works when run outside a test:
+> > This allows testing of the exit_boot_services call, providing more
+> > coverage of the EFI bootmeth.
 > >
-> > good:
-> >
-> > /tmp/b/sandbox/u-boot -T
-> >      -c "bootfl scan mmc; bootfl sel 1; bootfl list; bootfl b"
-> >
-> > ** Booting bootflow 'mmc7.bootdev.part_1' with efi
-> > desc = 0000000018c86ee0
-> > dev=mmc, devnr=7:1, path=efi/boot/bootsbox.efi, buffer=0000000011001000, size=1600
-> > - boot device /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
-> > - image /efi\boot\bootsbox.efi
-> > No EFI system partition
-> > No EFI system partition
-> > Failed to persist EFI variables
-> > EFI using ACPI tables at 8ef8000
-> > WARNING: Can't have ACPI table and device tree - ignoring DT.
-> > Loaded from disk
-> > Booting /efi\boot\bootsbox.efi
-> > EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
-> > info->device_handle = 0000000018f180e0
-> > loaded_image info for 0000000018f184e0: 0000000018f18470
-> >
-> > EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
-> > EFI: Call: efi_start_image(handle, &exit_data_size, &exit_data)
-> > Hello, world!
-> > Running on UEFI 2.10
-> > Have ACPI 2.0 table
-> > Have SMBIOS table
-> > 18f18470
-> > Load options: <none>
-> > finding
-> > - search 0000000018c931a0 ret=0
-> > File path: /efi\boot\bootsbox.efi
-> > Vendor: Das U-Boot
-> > Boot device: /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
-> > Exiting boot sevices
-> > EFI: 5 returned by efi_start_image(handle, &exit_data_size, &exit_data)
-> > Boot failed (err=-22)
-> >
-> > bad:
-> >
-> > rtv bootflow_efi
-> >
-> > ** Booting bootflow 'mmc7.bootdev.part_1' with efi
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> Should we have an ESP on the MMC image to persist UEFI variables?
+> I would prefer to keep helloworld.efi benign.
+>
+> Please, create a new EFI binary for testing ExitBootServices().
 
-That would be a good enhancement, but I would like to get the basics
-going first.
+Eek...isn't helloworld already used in tets?
+
+>
+> > ---
+> >
+> >   lib/efi_loader/helloworld.c | 36 +++++++++++++++++++++++++++++++++++-
+> >   1 file changed, 35 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
+> > index 1135d3a3c37e..1fb5fb5a62f2 100644
+> > --- a/lib/efi_loader/helloworld.c
+> > +++ b/lib/efi_loader/helloworld.c
+> > @@ -206,6 +206,26 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> >                       (con_out, u"Cannot open loaded image protocol\r\n");
+> >               goto out;
+> >       }
+> > +
+> > +     {
+> > +             ulong ptr = (ulong)loaded_image;
+> > +             u16 str[80];
+> > +             int i;
+> > +
+> > +             for (i = 0; i < 8; i++) {
+> > +                     uint digit = (ptr >> ((7 - i) * 4)) & 0xf;
+> > +
+> > +                     if (digit > 9)
+> > +                             digit = 'a' + digit - 10;
+> > +                     else
+> > +                             digit += '0';
+> > +                     str[i] = digit;
+> > +             }
+> > +             str[i] = 0;
+> > +             con_out->output_string(con_out, str);
+> > +             con_out->output_string(con_out, u"\n");
+> > +     }
+> > +
+> >       print_load_options(loaded_image);
+> >
+> >       /* Get the device path to text protocol */
+> > @@ -243,7 +263,21 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> >               goto out;
+> >
+> >   out:
+> > -     boottime->exit(handle, ret, 0, NULL);
+> > +     /*
+> > +      * TODO: Use vendor string to decide whether to call exit-boot-services
+> > +      */
+> > +     efi_uintn_t map_size = 0;
+> > +     efi_uintn_t map_key;
+> > +     efi_uintn_t desc_size;
+> > +     u32 desc_version;
+> > +
+> > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
+> > +                                    &desc_version);
+> > +     con_out->output_string(con_out, u"Exiting boot sevices\n");
+> > +
+> > +     boottime->exit_boot_services(handle, map_key);
+> > +
+> > +     ret = boottime->exit(handle, ret, 0, NULL);
+>
+> After ExitBootServices() you must not call boot services.
+>
+> Call runtime->reset_system(EFI_RESET_COLD, EFI_SUCCESS, 0, NULL) instead.
+
+OK, will do. That will be ignored by sandbox, right?
+
+For now this is just a hack to try to resolve the problem mentioned.
 
 Regards,
 Simon
