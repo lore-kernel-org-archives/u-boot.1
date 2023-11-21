@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8966C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015E3C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 327EC875B5;
+	by phobos.denx.de (Postfix) with ESMTP id 9DCAA87632;
 	Tue, 21 Nov 2023 18:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pMN6iEjR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W9+cUf4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B899487650; Tue, 21 Nov 2023 18:09:41 +0100 (CET)
+ id 3F53E8761F; Tue, 21 Nov 2023 18:09:43 +0100 (CET)
 Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
  [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90911875F9
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99D2287624
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
 Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5094cb3a036so8341818e87.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:35 -0800 (PST)
+ 2adb3069b0e04-50aabfa1b75so3668624e87.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586575; x=1701191375; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586576; x=1701191376; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=QiBmtbjZUgEcqLlXdvcmsZskO1Rn1r1FSdqFrkP2Nt0=;
- b=pMN6iEjRfVH3CtLoKhHxTQLjhc8TbZN9dVPr0uTjNGujBuQvJo2L92CkKhxuJKgURH
- 9aQXzvjkEWiZ/lUufHPxMFzNYm+0F4FQ56QDmzj0wqHM/f+6pdNDZRE/eQdbhjV5Ld5R
- g5/PM7LpNPoewov+0AW48eKO+TTDaZfrJnSbHKt7H6VtUORfNtqjitYqilD+ioY0NoXX
- 8jksRLf9jU4zA3tnWN+Buemu9YniU/XPHtYUR/e7kxwmjGqQ4DZMSSmcXyWfZdzTeLa1
- uI6NElohm6xG3CliEbGbbgmXwPpnLWuM3WPTVNBweCvogucaYExXyupls5y3jjrPPhOg
- N5ZA==
+ :reply-to; bh=u9aeloiXHTjsBzM14O5Gpf5BpwOpZ7BuQ1SD9ZKNIsw=;
+ b=W9+cUf4BctsJqMlRPGyUL4JuNkzFobGUX04tpTxN4hx9XfMkeEMzifaopN3vDCEzF7
+ LdQfhB3qoAKnh9udgWW/irCM+f6YWzqXnvnpo2GZ3mQZ5+iw/xPuZDOn9dDn7vgouJKH
+ xIaqC/UJ4eXkezBnQo8JkGmQeEYdOurTEMub/WcC6BPXGjTdMfQEs4Nkp11shkSdbKF/
+ LAD5LtgG5QAjtouzZkbTOAL1ycCh/uPhRcMUgLeSeyYrujOIoPY6DNITGTWJla3fbM2Z
+ XFAQFODwEmNR78pSBDPbuzyB4cyg7VUJnMqt5eDafnrBojudv/OkmfA5Gj/lvLoXQmk+
+ 03lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586575; x=1701191375;
+ d=1e100.net; s=20230601; t=1700586576; x=1701191376;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QiBmtbjZUgEcqLlXdvcmsZskO1Rn1r1FSdqFrkP2Nt0=;
- b=n45QoGMMlm4y4DW8oQCybHHytbBVTU3fw7MLWIuad5Zcym/RuKG5ANCo4bVJS3wdKE
- +mQJ69VRNXSS0L9Qgxcws5Rtd1mpLCEoxV3vbE1e+auDWAnOBbre1kRT+tU0MPMrXXpp
- 8yxOItGJ8VlhLcpM9dLz02/6BH3tVF/xZBcO1Nx7sbHL99svjtSGG4LSax8ChQfRBrFp
- na7eCjB9XE6tsWmuGFMH/ZTSlx6p9NWgYtD//UemxdP/YY5lh4g+3ZuNUsIkt0iE2hRj
- qgE5y/0xcQC/BmDKGr6yuf9ssT93em/pUQVqUWtNnMxLjYQ8F6BMJE/2OclPyo6wFByQ
- S5fw==
-X-Gm-Message-State: AOJu0Ywihu1uJy+Ww3RfFqspgtfa9BDVn7+3GUDuc2tVkjGFHMl6Noa6
- 4f/M+At0WXGoNN6N5MVlP99+Tw==
-X-Google-Smtp-Source: AGHT+IFNaHLcI3OWfFp9cPkaPSH0W6kQvHU+bCEnv8+i/CKaa9W7a9/qgFEO7gHJbMDlgjMsfB2kMA==
-X-Received: by 2002:a05:6512:991:b0:50a:a5ab:e393 with SMTP id
- w17-20020a056512099100b0050aa5abe393mr7358015lft.61.1700586574970; 
- Tue, 21 Nov 2023 09:09:34 -0800 (PST)
+ bh=u9aeloiXHTjsBzM14O5Gpf5BpwOpZ7BuQ1SD9ZKNIsw=;
+ b=ffmqTQKa5kdL7836xcUggmimT0VZ5UVWoXj3OPLaEmZI/8QognJARzsfs3lFfViiZz
+ f8GMA4MgU9Zs4poPnysYykGa+shZoiUKrLEAAIGYCYsf3zr2QLmGFFUEu6u6U6UDoiR1
+ BDAZOZ7SwytdMRuiJEL/36toWHvW6Hni1sc+ajL+n+J2t2fZZIxNy5Jm36qWibedcBn/
+ TMPs37E0c0WGU5c9ULuUoBwm0B9+CiCdRZor5WN4k3pWv90zP17PIZOP+JRDvWg1Qbms
+ bIvCwVnAy21SMPFMYdAh6NgkWKd0i6m7T2qohoZ2gaf8rQyrR4uNXLgIXvu00ix5Fzz+
+ G7sw==
+X-Gm-Message-State: AOJu0YxDm9hjU8s3Rq9jyoXCDEXmNL+r2qPEMp9YkK4y1M1bhkdAPX2l
+ fNY8YS1y4GFO4H8TI6IMXAKF3Q==
+X-Google-Smtp-Source: AGHT+IGc/5kd+bB+IsRzt9tx5PRgEL0p/eoqalcWIGs3W0hcRLRtDoLL9je/k8yUrJlckH0hCcmXgA==
+X-Received: by 2002:a05:6512:312a:b0:500:99a9:bc40 with SMTP id
+ p10-20020a056512312a00b0050099a9bc40mr7938917lfd.69.1700586575879; 
+ Tue, 21 Nov 2023 09:09:35 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.34
+ 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:34 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:35 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:29 +0000
-Subject: [PATCH 06/21] clk/qcom: use upstream compatible properties
+Date: Tue, 21 Nov 2023 17:09:30 +0000
+Subject: [PATCH 07/21] serial: msm: add debug UART
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-6-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-7-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1754;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2184;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=gKr87lVRqUOoN68BAsbJs8gqpiVUVEWCMjXxBq6PkmM=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ66T5V3PBV2ZY+56U7d5h2Xo5Nn22/k0BH89/HZ61
- hVxxcTNHSUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAik3kZvme8qLG5Ov2y26p1
- dT9tnOYdfe1VpyLZncP87I5f3ZIv1owM7eFy0jtLkvii5HbOYJN4qMJ81zf+w5o1LG++T1T8fXb
- rYgA=
+ bh=iZMX3WTQwWkftwxEO909KjKpMPyY+4JCE+jpVMlsoRs=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ26T3L9aGeZvTrlqet5Bu4p/SWVPW2Bl9iO9/FtCo
+ jJLb7V0lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIlskGX4H/z9qnKx90RLKa2J
+ ++R3b1xjeaxon0b69nqz1Xt6865YJzD8D9jRy/p5qcPNJK2zLI/jnAOZZEsipC5lMdoHpjbsOa8
+ pAQA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,55 +108,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the apq8016 and apq8096 drivers to use the upstream compatible
-properties, and adjust the associated dts files in U-Boot.
+Introduce support for early debugging.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/dragonboard410c.dts | 2 +-
- drivers/clk/qcom/clock-apq8016.c | 2 +-
- drivers/clk/qcom/clock-apq8096.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/serial/Kconfig      |  8 ++++++++
+ drivers/serial/serial_msm.c | 37 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 45 insertions(+)
 
-diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
-index 6a4e3ccf17b1..02c824d0226c 100644
---- a/arch/arm/dts/dragonboard410c.dts
-+++ b/arch/arm/dts/dragonboard410c.dts
-@@ -75,7 +75,7 @@
- 			};
- 		};
- 		clkc: qcom,gcc@1800000 {
--			compatible = "qcom,gcc-apq8016";
-+			compatible = "qcom,gcc-msm8916";
- 			reg = <0x1800000 0x80000>;
- 			#address-cells = <0x1>;
- 			#size-cells = <0x0>;
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index c0ce570edc79..0af7191cff52 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -145,7 +145,7 @@ static struct msm_clk_data apq8016_clk_data = {
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 81fdac047824..20713812c839 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -304,6 +304,14 @@ config DEBUG_UART_S5P
+ 	  will need to provide parameters to make this work. The driver will
+ 	  be available until the real driver-model serial is running.
  
- static const struct udevice_id gcc_apq8016_of_match[] = {
- 	{
--		.compatible = "qcom,gcc-apq8016",
-+		.compatible = "qcom,gcc-msm8916",
- 		.data = (ulong)&apq8016_clk_data,
- 	},
- 	{ }
-diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-index cf1a347309a5..1e6fdb5cd42d 100644
---- a/drivers/clk/qcom/clock-apq8096.c
-+++ b/drivers/clk/qcom/clock-apq8096.c
-@@ -123,7 +123,7 @@ static struct msm_clk_data apq8096_clk_data = {
- 
- static const struct udevice_id gcc_apq8096_of_match[] = {
- 	{
--		.compatible = "qcom,gcc-apq8096",
-+		.compatible = "qcom,gcc-msm8996",
- 		.data = (ulong)&apq8096_clk_data,
- 	},
- 	{ }
++config DEBUG_UART_MSM
++	bool "Qualcomm QUP UART debug"
++	depends on ARCH_SNAPDRAGON
++	help
++	  Select this to enable a debug UART using the serial_msm driver. You
++	  will need to provide parameters to make this work. The driver will
++	  be available until the real driver-model serial is running.
++
+ config DEBUG_UART_MSM_GENI
+ 	bool "Qualcomm snapdragon"
+ 	depends on ARCH_SNAPDRAGON
+diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+index a22623c316ed..6a4d6f1d96fd 100644
+--- a/drivers/serial/serial_msm.c
++++ b/drivers/serial/serial_msm.c
+@@ -253,3 +253,40 @@ U_BOOT_DRIVER(serial_msm) = {
+ 	.probe = msm_serial_probe,
+ 	.ops	= &msm_serial_ops,
+ };
++
++#ifdef CONFIG_DEBUG_UART_MSM
++
++static struct msm_serial_data init_serial_data = {
++	.base = CONFIG_VAL(DEBUG_UART_BASE),
++	.clk_bit_rate = UART_DM_CLK_RX_TX_BIT_RATE,
++};
++
++/* Serial dumb device, to reuse driver code */
++static struct udevice init_dev = {
++	.priv_ = &init_serial_data,
++};
++
++#include <debug_uart.h>
++
++static inline void _debug_uart_init(void)
++{
++	uart_dm_init(&init_serial_data);
++}
++
++static inline void _debug_uart_putc(int ch)
++{
++	struct msm_serial_data *priv = &init_serial_data;
++
++	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
++	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
++		;
++
++	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
++
++	writel(1, priv->base + UARTDM_NCF_TX);
++	writel(ch, priv->base + UARTDM_TF);
++}
++
++DEBUG_UART_FUNCS
++
++#endif
 
 -- 
 2.42.1
