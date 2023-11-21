@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128D7C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8966C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CD8687604;
-	Tue, 21 Nov 2023 18:09:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 327EC875B5;
+	Tue, 21 Nov 2023 18:09:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hLan0rWw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pMN6iEjR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D2587632; Tue, 21 Nov 2023 18:09:38 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id B899487650; Tue, 21 Nov 2023 18:09:41 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67E9387618
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90911875F9
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-40b2c9ee8ecso3370085e9.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:34 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5094cb3a036so8341818e87.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586574; x=1701191374; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586575; x=1701191375; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=2yMCPbZvHg5dQxeFWPPFiuNAoZLNlbdzcYsk9kLzoDE=;
- b=hLan0rWwomT19YdWlspP/9I43HGhta+nLwpY3kop1LZ88MPIcyy+vAtxy5X+HY/oEh
- ABojgbFf4oMWmtdLUK5NPnFrRPlQxgnjXgsxQTEkWSw/1vKPwrAmUeNNjL1zg3HsZ1Dx
- C+SUynWsmwod4H93+I4P3c2jFXmlysoHTp0Mh74xdRHkppc/jlAsKj7hHs45B85+Xe+Q
- Pxxr2Zzyo7s9dQYrNYy3gmBVIHnVuJBGshjkgXW2BSwQlmb+6Vs4hLrW9YNdS3uJSDPj
- h+Lh8trAI200vmfVhjwf+kw9FMAQNz79CpOJO88UMZ5QTn9jIJg4YEjbp/zHh4MJJHzc
- p4rw==
+ :reply-to; bh=QiBmtbjZUgEcqLlXdvcmsZskO1Rn1r1FSdqFrkP2Nt0=;
+ b=pMN6iEjRfVH3CtLoKhHxTQLjhc8TbZN9dVPr0uTjNGujBuQvJo2L92CkKhxuJKgURH
+ 9aQXzvjkEWiZ/lUufHPxMFzNYm+0F4FQ56QDmzj0wqHM/f+6pdNDZRE/eQdbhjV5Ld5R
+ g5/PM7LpNPoewov+0AW48eKO+TTDaZfrJnSbHKt7H6VtUORfNtqjitYqilD+ioY0NoXX
+ 8jksRLf9jU4zA3tnWN+Buemu9YniU/XPHtYUR/e7kxwmjGqQ4DZMSSmcXyWfZdzTeLa1
+ uI6NElohm6xG3CliEbGbbgmXwPpnLWuM3WPTVNBweCvogucaYExXyupls5y3jjrPPhOg
+ N5ZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586574; x=1701191374;
+ d=1e100.net; s=20230601; t=1700586575; x=1701191375;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2yMCPbZvHg5dQxeFWPPFiuNAoZLNlbdzcYsk9kLzoDE=;
- b=vRbGDo6yWwhPV665oGoIPtas85Q1Rr0XlYBPnJEHVL2QAmcRb4IAqPHTPtAFg3j4O1
- wAnflkUql10ahNUYbrb2e+5f2X/m8hjA2JNzKIukXGkd8jmMU+lmp8i0C3C3sMQGlXxQ
- Y3ZteVK/ewUNXd9RTSmzsr/9/lC/0hZANBpumY4qFqp/0G6SEpPaCbnSqqmnDlWizx2A
- fO8qMN8Pk+UmDVeMlrfoUTO8bR7HTsCEXjEJ4ajJtv/TA19F/LXiaBhnDDutqvx8lqMe
- H59H911wpyDF4FIDb/FDnxCnIN7DwUNNNsA/tW27OuJr1TYNmzJDGxqakbj5g9zMOZ6T
- DMPA==
-X-Gm-Message-State: AOJu0YzG0WJd7MOg7BMaGyYQNPm+3bYaisuurRLAAobilFD3G8s3l6Zl
- 8cdLP/Jo0vzF8k3CSWqURb4xLw==
-X-Google-Smtp-Source: AGHT+IF92NcbRUPUAmYkbRSK0QcIb6c4n09Fpt7iO2oN3fBnyOt/w7Hpvqwz+NZhh4VGf5jX4QrxdA==
-X-Received: by 2002:a05:600c:4f8a:b0:40a:5c71:2c3e with SMTP id
- n10-20020a05600c4f8a00b0040a5c712c3emr9155172wmq.19.1700586573934; 
- Tue, 21 Nov 2023 09:09:33 -0800 (PST)
+ bh=QiBmtbjZUgEcqLlXdvcmsZskO1Rn1r1FSdqFrkP2Nt0=;
+ b=n45QoGMMlm4y4DW8oQCybHHytbBVTU3fw7MLWIuad5Zcym/RuKG5ANCo4bVJS3wdKE
+ +mQJ69VRNXSS0L9Qgxcws5Rtd1mpLCEoxV3vbE1e+auDWAnOBbre1kRT+tU0MPMrXXpp
+ 8yxOItGJ8VlhLcpM9dLz02/6BH3tVF/xZBcO1Nx7sbHL99svjtSGG4LSax8ChQfRBrFp
+ na7eCjB9XE6tsWmuGFMH/ZTSlx6p9NWgYtD//UemxdP/YY5lh4g+3ZuNUsIkt0iE2hRj
+ qgE5y/0xcQC/BmDKGr6yuf9ssT93em/pUQVqUWtNnMxLjYQ8F6BMJE/2OclPyo6wFByQ
+ S5fw==
+X-Gm-Message-State: AOJu0Ywihu1uJy+Ww3RfFqspgtfa9BDVn7+3GUDuc2tVkjGFHMl6Noa6
+ 4f/M+At0WXGoNN6N5MVlP99+Tw==
+X-Google-Smtp-Source: AGHT+IFNaHLcI3OWfFp9cPkaPSH0W6kQvHU+bCEnv8+i/CKaa9W7a9/qgFEO7gHJbMDlgjMsfB2kMA==
+X-Received: by 2002:a05:6512:991:b0:50a:a5ab:e393 with SMTP id
+ w17-20020a056512099100b0050aa5abe393mr7358015lft.61.1700586574970; 
+ Tue, 21 Nov 2023 09:09:34 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.33
+ 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:33 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:34 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:28 +0000
-Subject: [PATCH 05/21] dt-bindings: drop msm_sdhci binding
+Date: Tue, 21 Nov 2023 17:09:29 +0000
+Subject: [PATCH 06/21] clk/qcom: use upstream compatible properties
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-5-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-6-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1257;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1754;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=QLv/i9nKDSKixmLjbz+tpo6tUL3ouZlsH6f2FdVmN8o=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ64PTxVPvr+Ta07V+UXm39eY9vWuOXwrZlmexYYd2
- vu/cjsKdJSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJ7Ndl+J/Enz91Q+67+TeN
- JPM2nWxtalVyl9q74t5mzvDnTCyv9zxj+J/AsvrwWuugW7MNSw8v/hjc9SXz3NVlG3/vmuXn9LQ
- ufUU+AA==
+ bh=gKr87lVRqUOoN68BAsbJs8gqpiVUVEWCMjXxBq6PkmM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ66T5V3PBV2ZY+56U7d5h2Xo5Nn22/k0BH89/HZ61
+ hVxxcTNHSUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAik3kZvme8qLG5Ov2y26p1
+ dT9tnOYdfe1VpyLZncP87I5f3ZIv1owM7eFy0jtLkvii5HbOYJN4qMJ81zf+w5o1LG++T1T8fXb
+ rYgA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,45 +108,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The upstream DT is supported here, so drop the U-Boot specific binding
-docs.
+Adjust the apq8016 and apq8096 drivers to use the upstream compatible
+properties, and adjust the associated dts files in U-Boot.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/device-tree-bindings/mmc/msm_sdhci.txt | 25 -------------------------
- 1 file changed, 25 deletions(-)
+ arch/arm/dts/dragonboard410c.dts | 2 +-
+ drivers/clk/qcom/clock-apq8016.c | 2 +-
+ drivers/clk/qcom/clock-apq8096.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/doc/device-tree-bindings/mmc/msm_sdhci.txt b/doc/device-tree-bindings/mmc/msm_sdhci.txt
-deleted file mode 100644
-index 08a290c66931..000000000000
---- a/doc/device-tree-bindings/mmc/msm_sdhci.txt
-+++ /dev/null
-@@ -1,25 +0,0 @@
--Qualcomm Snapdragon SDHCI controller
--
--Required properties:
--- compatible : "qcom,sdhci-msm-v4"
--- reg: Base address and length of registers:
--	- Host controller registers (SDHCI)
--	- SD Core registers
--- clock: interface clock (must accept SD bus clock as a frequency)
--
--Optional properties:
--- index: If there is more than one controller - controller index (required
--	by generic SDHCI code).
--- bus_width: Width of SD/eMMC bus (default 4)
--- clock-frequency: Frequency of SD/eMMC bus (default 400 kHz)
--
--Example:
--
--sdhci@07864000 {
--	compatible = "qcom,sdhci-msm-v4";
--	reg = <0x7864900 0x11c 0x7864000 0x800>;
--	index = <0x1>;
--	bus-width = <0x4>;
--	clock = <&clkc 1>;
--	clock-frequency = <200000000>;
--};
+diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
+index 6a4e3ccf17b1..02c824d0226c 100644
+--- a/arch/arm/dts/dragonboard410c.dts
++++ b/arch/arm/dts/dragonboard410c.dts
+@@ -75,7 +75,7 @@
+ 			};
+ 		};
+ 		clkc: qcom,gcc@1800000 {
+-			compatible = "qcom,gcc-apq8016";
++			compatible = "qcom,gcc-msm8916";
+ 			reg = <0x1800000 0x80000>;
+ 			#address-cells = <0x1>;
+ 			#size-cells = <0x0>;
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+index c0ce570edc79..0af7191cff52 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -145,7 +145,7 @@ static struct msm_clk_data apq8016_clk_data = {
+ 
+ static const struct udevice_id gcc_apq8016_of_match[] = {
+ 	{
+-		.compatible = "qcom,gcc-apq8016",
++		.compatible = "qcom,gcc-msm8916",
+ 		.data = (ulong)&apq8016_clk_data,
+ 	},
+ 	{ }
+diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+index cf1a347309a5..1e6fdb5cd42d 100644
+--- a/drivers/clk/qcom/clock-apq8096.c
++++ b/drivers/clk/qcom/clock-apq8096.c
+@@ -123,7 +123,7 @@ static struct msm_clk_data apq8096_clk_data = {
+ 
+ static const struct udevice_id gcc_apq8096_of_match[] = {
+ 	{
+-		.compatible = "qcom,gcc-apq8096",
++		.compatible = "qcom,gcc-msm8996",
+ 		.data = (ulong)&apq8096_clk_data,
+ 	},
+ 	{ }
 
 -- 
 2.42.1
