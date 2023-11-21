@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BFDC61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A19CC5AD4C
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EF0B875B6;
-	Tue, 21 Nov 2023 03:09:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DEB1A8759F;
+	Tue, 21 Nov 2023 03:09:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Th6RgXbh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VXyjMpSe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47F1787574; Tue, 21 Nov 2023 03:09:43 +0100 (CET)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 6323B875A1; Tue, 21 Nov 2023 03:09:43 +0100 (CET)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01ECC875AF
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:09:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B2B9875A8
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:09:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-1f5d34235dbso1176441fac.0
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-1f060e059a3so3046078fac.1
  for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:09:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700532577; x=1701137377; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pjQ/+NjgRXSNOGDR5CMWXGxUp5a4rdSej5cQZDLBezw=;
- b=Th6RgXbhCKnpbHQpjDQEtqv0Itq5LkPRxCsGOrodt00VhsRomAErxsUVSBuheoFuK/
- MGJdyEI+kGkBiJgXlBrYeFXT9WNi25iSNxH14jhg3T5aDSdgNxfNSXLuX36CpN5YFTnQ
- py1MePgtZxtwtn7o7chGB1vk/s5ZlDUesH3Jw=
+ bh=9Ol4uia7yqllH9E+4nwUgKNF5ERbk8N70f5/8xamcT4=;
+ b=VXyjMpSehtnf59BU2K0LFtfs9WriWfTeeo/J3NYKb/jrKz4y2SiX7rpg0XXohW57Nm
+ bUuKk0OoESLgsZgO6zNlH0XYz4hEbt/dicsBNdYPm1I293ynN1LNzzkXZtfrGs41p6f6
+ VQVdoCyspLHPfeNUG8bq8ng6y10y27bZl2Vko=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700532577; x=1701137377;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pjQ/+NjgRXSNOGDR5CMWXGxUp5a4rdSej5cQZDLBezw=;
- b=xIsOyBn342+elb4RUa3iKp7tr6FgShEfta39cDa5gANddgjZBNN4rarHAWXEk0b5Ne
- rYKes6Hky038bnMcMW0QOdKM9IL2L8khYA45MNPp+SGLHlQCHydapmxkqega6+7Vpra8
- nWKBTCMLm1uZ9OcC55I+4I8MuH+fXLrAnHtG5ZnYuueLG5k9VaZk4ZtwDuWBUflKWPCr
- UmjX+XHf6TxBQt1cOXRDaXsQEcDfbj4Fue+ZCnVAEtkNBQmHET3Qk1GRtojZpg096kXX
- s9HniCfjzUU2W74VqR+O0/hZbBU3gTzWGrzsfQsmco5vsfL92NsCv6SHRBBrX49I3u0l
- MyFg==
-X-Gm-Message-State: AOJu0YxO90vfnxobOKHhicuh6NwjbNieFuEgEUkcehVGSrzlbW0g7+Q3
- 05fnKo3HLqrQpLAQylSGTm0fAB+CwOyDN8q37f82kg==
-X-Google-Smtp-Source: AGHT+IHKICG3QneLTNtvDEvSxhouZ+pcMRyfwWHU70qclQaJ5vDbxBfYZBmtj4VZpN72rLnjQptaPw==
-X-Received: by 2002:a05:6871:750e:b0:1f9:453b:8234 with SMTP id
- ny14-20020a056871750e00b001f9453b8234mr681795oac.27.1700532577518; 
- Mon, 20 Nov 2023 18:09:37 -0800 (PST)
+ bh=9Ol4uia7yqllH9E+4nwUgKNF5ERbk8N70f5/8xamcT4=;
+ b=hpCGmDTzz7QncqAen2ag1r4swRYoS8Ujz3+gw1ONAacussFeVjAWhF8I0L6YBRckPD
+ DAAcqWoHZVOb34/2V9xBeTLZisZ5szqE/HZTPfCL5qHbfP5JNndPv+7beDfqCZiAnjvO
+ feVJ0WbFQ9L9ajxRsND2DHdvaTgAW5WAcvgHfG2nbwuqfn54BcKvSaJdXdYqcicEcXxv
+ fajnz++2y4mC21tzd4w1kC4x1EwYTJPBiSUVryi9UQvVKcImNcFQwPMZnWF+EtkFuJvs
+ /jlo0BbHs3gsoJ54MJfy7pfhqXUWHP+M5r4spql8Q1MNnh8A9aVC+E8PJCYt34c+Nb/n
+ M7cg==
+X-Gm-Message-State: AOJu0YxrHct6sVUf/ogwr/wC00w3NDWF4T5VjfxZjOg7QaODz4FGnw3g
+ e0/B8Qa5qkPw8AogvuSrQl3e8kLivt8WyNs9SxB0uA==
+X-Google-Smtp-Source: AGHT+IF9641CnWE/HufdJiA9cuUz01UvX9HSxowujohmeE47H1HUYtzrPgxtWtQGJ6lB74U9YO/T4w==
+X-Received: by 2002:a05:6870:724d:b0:1f0:5e1f:4518 with SMTP id
+ y13-20020a056870724d00b001f05e1f4518mr11253345oaf.37.1700532576641; 
+ Mon, 20 Nov 2023 18:09:36 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- du20-20020a0568716e1400b001e12f685592sm1542693oac.13.2023.11.20.18.09.37
+ du20-20020a0568716e1400b001e12f685592sm1542693oac.13.2023.11.20.18.09.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 18:09:37 -0800 (PST)
+ Mon, 20 Nov 2023 18:09:36 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 2/5] video: Move last_sync to private data
-Date: Mon, 20 Nov 2023 19:09:26 -0700
-Message-ID: <20231121020932.733405-3-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng@tinylab.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: [PATCH v2 1/5] cyclic: Add a symbol for SPL
+Date: Mon, 20 Nov 2023 19:09:25 -0700
+Message-ID: <20231121020932.733405-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
 In-Reply-To: <20231121020932.733405-1-sjg@chromium.org>
 References: <20231121020932.733405-1-sjg@chromium.org>
@@ -88,74 +95,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than using a static variable, use the video device's private
-data to remember when the last video sync was completed. This allows
-each display to have its own sync and avoids using static data in SPL.
+The cyclic subsystem is currently enabled either in all build phases
+or none. For tools this should not be enabled, but since lib/shc256.c
+and other files include watchdog.h in the host build, we must make
+sure that it is not enabled there.
+
+Add an SPL symbol so that there is more control of this.
+
+Add an include into cyclic.h so that tools can include this file.
+
+Also add the kconfig.h header so that CONFIG_IS_ENABLED() works. We
+could avoid this for now by moving the location of the watchdog.h
+inclusion to outside the USE_HOSTCC area. But at some point the #ifdefs
+from these files will likely be removed, so there is no benefit in
+going that way.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add an SPL_CYCLIC symbol
+- Add a lot more explanation about the header files
 
- drivers/video/video-uclass.c | 10 +++-------
- include/video.h              |  2 ++
- 2 files changed, 5 insertions(+), 7 deletions(-)
+ common/Kconfig                    | 8 ++++++++
+ common/Makefile                   | 2 +-
+ drivers/watchdog/Kconfig          | 1 +
+ include/asm-generic/global_data.h | 2 +-
+ include/cyclic.h                  | 6 ++++--
+ 5 files changed, 15 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index f743ed74c818..600e12b802d1 100644
---- a/drivers/video/video-uclass.c
-+++ b/drivers/video/video-uclass.c
-@@ -354,6 +354,7 @@ void video_set_default_colors(struct udevice *dev, bool invert)
- /* Flush video activity to the caches */
- int video_sync(struct udevice *vid, bool force)
- {
-+	struct video_priv *priv = dev_get_uclass_priv(vid);
- 	struct video_ops *ops = video_get_ops(vid);
- 	int ret;
+diff --git a/common/Kconfig b/common/Kconfig
+index 0283701f1d05..5906a4af7c33 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -626,6 +626,14 @@ config CYCLIC
  
-@@ -369,20 +370,15 @@ int video_sync(struct udevice *vid, bool force)
- 	 * out whether it exists? For now, ARM is safe.
+ if CYCLIC
+ 
++config SPL_CYCLIC
++	bool "General-purpose cyclic execution mechanism (SPL)"
++	help
++	  This enables a general-purpose cyclic execution infrastructure in SPL,
++	  to allow "small" (run-time wise) functions to be executed at
++	  a specified frequency. Things like LED blinking or watchdog
++	  triggering are examples for such tasks.
++
+ config CYCLIC_MAX_CPU_TIME_US
+ 	int "Sets the max allowed time for a cyclic function in us"
+ 	default 1000
+diff --git a/common/Makefile b/common/Makefile
+index 1495436d5d45..27443863bf9b 100644
+--- a/common/Makefile
++++ b/common/Makefile
+@@ -77,7 +77,7 @@ obj-$(CONFIG_CROS_EC) += cros_ec.o
+ obj-y += dlmalloc.o
+ obj-$(CONFIG_$(SPL_TPL_)SYS_MALLOC_F) += malloc_simple.o
+ 
+-obj-$(CONFIG_CYCLIC) += cyclic.o
++obj-$(CONFIG_$(SPL_TPL_)CYCLIC) += cyclic.o
+ obj-$(CONFIG_$(SPL_TPL_)EVENT) += event.o
+ 
+ obj-$(CONFIG_$(SPL_TPL_)HASH) += hash.o
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 07fc4940e918..378435c55cc7 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -395,6 +395,7 @@ config WDT_ARM_SMC
+ config SPL_WDT
+ 	bool "Enable driver model for watchdog timer drivers in SPL"
+ 	depends on SPL_DM
++	select SPL_CYCLIC if CYCLIC
+ 	help
+ 	  Enable driver model for watchdog timer in SPL.
+ 	  This is similar to CONFIG_WDT in U-Boot.
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index e8c6412e3f8d..77f11a4383c9 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -485,7 +485,7 @@ struct global_data {
  	 */
- #if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
--	struct video_priv *priv = dev_get_uclass_priv(vid);
--
- 	if (priv->flush_dcache) {
- 		flush_dcache_range((ulong)priv->fb,
- 				   ALIGN((ulong)priv->fb + priv->fb_size,
- 					 CONFIG_SYS_CACHELINE_SIZE));
- 	}
- #elif defined(CONFIG_VIDEO_SANDBOX_SDL)
--	struct video_priv *priv = dev_get_uclass_priv(vid);
--	static ulong last_sync;
--
--	if (force || get_timer(last_sync) > 100) {
-+	if (force || get_timer(priv->last_sync) > 100) {
- 		sandbox_sdl_sync(priv->fb);
--		last_sync = get_timer(0);
-+		priv->last_sync = get_timer(0);
- 	}
+ 	struct event_state event_state;
  #endif
- 	return 0;
-diff --git a/include/video.h b/include/video.h
-index 5048116a3d57..b9b8dc0f8f99 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -94,6 +94,7 @@ enum video_format {
-  *		the LCD is updated
-  * @fg_col_idx:	Foreground color code (bit 3 = bold, bit 0-2 = color)
-  * @bg_col_idx:	Background color code (bit 3 = bold, bit 0-2 = color)
-+ * @last_sync:	Monotonic time of last video sync
-  */
- struct video_priv {
- 	/* Things set up by the driver: */
-@@ -118,6 +119,7 @@ struct video_priv {
- 	bool flush_dcache;
- 	u8 fg_col_idx;
- 	u8 bg_col_idx;
-+	ulong last_sync;
- };
+-#ifdef CONFIG_CYCLIC
++#if CONFIG_IS_ENABLED(CYCLIC)
+ 	/**
+ 	 * @cyclic_list: list of registered cyclic functions
+ 	 */
+diff --git a/include/cyclic.h b/include/cyclic.h
+index 44ad3cb6b803..d3b368dd90df 100644
+--- a/include/cyclic.h
++++ b/include/cyclic.h
+@@ -11,6 +11,7 @@
+ #ifndef __cyclic_h
+ #define __cyclic_h
  
++#include <linux/kconfig.h>
+ #include <linux/list.h>
+ #include <asm/types.h>
+ 
+@@ -44,7 +45,8 @@ struct cyclic_info {
+ /** Function type for cyclic functions */
+ typedef void (*cyclic_func_t)(void *ctx);
+ 
+-#if defined(CONFIG_CYCLIC)
++#if CONFIG_IS_ENABLED(CYCLIC)
++
  /**
+  * cyclic_register - Register a new cyclic function
+  *
+@@ -122,6 +124,6 @@ static inline int cyclic_unregister_all(void)
+ {
+ 	return 0;
+ }
+-#endif
++#endif /* CYCLIC */
+ 
+ #endif
 -- 
 2.43.0.rc1.413.gea7ed67945-goog
 
