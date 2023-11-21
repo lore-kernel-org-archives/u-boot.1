@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A61D0C5ACB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 10:35:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6D4C5ACB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 10:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C25587596;
-	Tue, 21 Nov 2023 11:35:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BB64E8718E;
+	Tue, 21 Nov 2023 11:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rP6Rp19h";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="XLIg18ZW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69539875A8; Tue, 21 Nov 2023 11:35:44 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 19E78871CD; Tue, 21 Nov 2023 11:54:55 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 870228759C
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:35:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 584F086D38
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-32fa7d15f4eso4154525f8f.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 02:35:41 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40859dee28cso26616305e9.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 02:54:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1700562941; x=1701167741;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1700564091; x=1701168891;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=qoUVxbczSCve/rXcK62PWwfdVmvSFsgw7OmpAYy/afg=;
- b=rP6Rp19haUv0nQKD3zLPlLxjLvoBp3CIDBs1Qu78LgPGm555p+DlmYvQLmDXlsyvvV
- 5/GKLevgGuhSQ40pZbwrO/zRLDuhDc5w/crT00p5wIYm+1SpSgr4eKHk6wCjGTeGdnIW
- OSg7RVss35ZHGkXOHsv1Jh94tuhs8n2t95b8L1usIczp6O0biXrMNfXPkIPvlL8Ir6X3
- Rd9O4jWibAoVuCMochYaympNvFoj5aTXttMFybFfFRsRXHr8vpOSWQVCZEWYhabPLHwi
- mzu/clXyP0FhfPTX/QwKQJ/Zhjr6+Yo0IIn7U3MV6LqovZOU+aoXzLJz6C1koTbkTZVK
- NAeA==
+ bh=g9XOHiE3bwKQuNEsoZdDgX+nKVjdXvsyNCpDbyLxBFc=;
+ b=XLIg18ZWj2ymuojMfQr1DUhZnf02qUIDMEPtQ/Htm6RJXEgAJsMp4Wpis5BfZCm7dW
+ dSMfLNQfrpjL+2RjJsMugM6XXoR5KGKiDKbVhAP0WLn3pVemDNMLaOYCU4lbAeIHtAcd
+ FIQEfYZp1rbgFDznQ4OnMgVmQy/HbX8MyNWkjY3vOCC0zES/zgUOpZ48jr/g4GNCMiry
+ Smq1lptBENG3bm6BerhGJChWjj9JPkEIB+L+xSiFa9NIO/0lIggjBnF2UXemnYgoy0cV
+ 1SGC8MLUshVCgngdaPLR6ryJ293RSppWFPym01ckIz5vfey/S+47O2p38FcdBBBQVucU
+ jVKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700562941; x=1701167741;
+ d=1e100.net; s=20230601; t=1700564091; x=1701168891;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qoUVxbczSCve/rXcK62PWwfdVmvSFsgw7OmpAYy/afg=;
- b=puSCLunuyGTdhqhUQMemegKVME/C3bOJHxHkiEs3PViyGQxnBtM3N5c/TxQz+SFzLd
- tKU/PICCOfizDrl/a/b8j2hCFIuiXfMpA7xG4FNVsHH9Ei6CliqWm93GvBDPm40KXfdS
- mCaZnU42vyVeeHvBJ5LAY7c3gs4TTYsLo2yfA9VkLmEiLucXRlk/G5mJsyDG6+ReGj51
- PLyqJ1FbuYjdfk3/fR1pQDXVRELOyciAI5QmkV+MTHn5utgYyDN03jnzXM6NI7zZ/c8n
- V6F6mnSaw0aQX6wSwWY3uWbdcYNbcXzijdQV5ZC8umnL4ezER1olmCaC0iwVeEL7KFN1
- bc9A==
-X-Gm-Message-State: AOJu0YxBZUww1gBpe5IB4yb+R+KAd9+cyk0vqyVMgaN68NwRl3pxEKZF
- MWQXr8Lr6cwtJCQUIz01YdwxLA==
-X-Google-Smtp-Source: AGHT+IHdjvZnKLa9SC95do+VWaFmjUo0nv6HpAaEYuBHF+nddSF+yom6EQZqejN9wFg1hTHHw89Lsg==
-X-Received: by 2002:a5d:42cc:0:b0:32d:8872:aac8 with SMTP id
- t12-20020a5d42cc000000b0032d8872aac8mr6760943wrr.31.1700562940616; 
- Tue, 21 Nov 2023 02:35:40 -0800 (PST)
+ bh=g9XOHiE3bwKQuNEsoZdDgX+nKVjdXvsyNCpDbyLxBFc=;
+ b=mh+DHz/aU/uK31n+zwdMRIwazD1996Ryksdzso0PQeNh01Q+9EnVzp7Y9wvOO+K7jp
+ 4HRladG/eIj6t8Xrn2O0LZ/hip9fNAhyAK83BofWCG0vWXnsuBloF8zQKjRoC0eJLHfw
+ 5IjcTVGBOmgunocxM0eZRNJR3Ue4zzRLnbs8nprYuQ3mFen6TE1tucSBzyLemPWeZpmO
+ SNjCjFrnMIVwntMSoYYWRqIGXSoW7r/aYx2mRdHxnXNXP6AvpEM2zarnK2dNFhQfId2J
+ ngjcdlONcRUQpaVy6JmtkcYsjtEGj2DKqH8gVao2X5o7kA9wk3o2MFKnWUYE2jtNpmLl
+ YynQ==
+X-Gm-Message-State: AOJu0Yxadg97XstU3Bd0KJceXdM4Y5Jz4rEfU+OrxcARezdT7ZWP1uD/
+ y7XwBKw9thlH7DsHyYNeXU7y2w==
+X-Google-Smtp-Source: AGHT+IH711hRC53ignXrqgiloc65zwgREzdoJBf8DSrEXumskdGGLVnKUW56GaZrPpmz3/ieqaCVxQ==
+X-Received: by 2002:a05:600c:354f:b0:40b:2b86:c88a with SMTP id
+ i15-20020a05600c354f00b0040b2b86c88amr578847wmq.2.1700564090949; 
+ Tue, 21 Nov 2023 02:54:50 -0800 (PST)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- d12-20020a5d4f8c000000b0032da87e32e2sm14088098wru.4.2023.11.21.02.35.40
+ t14-20020a05600c450e00b003fee567235bsm21383758wmo.1.2023.11.21.02.54.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 02:35:40 -0800 (PST)
+ Tue, 21 Nov 2023 02:54:50 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Joe
- Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, Svyatoslav
- Ryhel <clamor95@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Harald Seiler <hws@denx.de>, Sean Anderson <sean.anderson@seco.com>, Heiko
- Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 5/5] fastboot: add oem console command support
-In-Reply-To: <20231115153836.16537-6-clamor95@gmail.com>
-References: <20231115153836.16537-1-clamor95@gmail.com>
- <20231115153836.16537-6-clamor95@gmail.com>
-Date: Tue, 21 Nov 2023 11:35:39 +0100
-Message-ID: <87y1erl7gk.fsf@baylibre.com>
+To: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>, Bryan Brattlof
+ <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra
+ <j-luthra@ti.com>, u-boot@lists.denx.de, Sjoerd Simons
+ <sjoerd@collabora.com>, Robert
+ Nelson <robertcnelson@gmail.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Dhruva Gole <d-gole@ti.com>, Nishanth
+ Menon <nm@ti.com>
+Subject: Re: [PATCH V2 0/4] arm: dts: k3-am625*: Upgrade kernel dts to v6.7-rc1
+In-Reply-To: <20231115032857.3071474-1-nm@ti.com>
+References: <20231115032857.3071474-1-nm@ti.com>
+Date: Tue, 21 Nov 2023 11:54:49 +0100
+Message-ID: <87v89vl6km.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -97,137 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
+Hi Nishanth,
 
-Thank you for your patch
+Thank you for the series.
 
-On mer., nov. 15, 2023 at 17:38, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On mar., nov. 14, 2023 at 21:28, Nishanth Menon <nm@ti.com> wrote:
 
-> From: Ion Agorria <ion@agorria.com>
+> Hi,
+> rev 2 of the series to sync am62 with v6.7-rc1.
 >
-> "oem console" serves to read console record buffer.
+> Changes:
+> - picked up reviews, tested tags.
+> - minor commit message correction in patch #4.
 >
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
->  doc/android/fastboot.rst      |  1 +
->  drivers/fastboot/Kconfig      |  7 +++++++
->  drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
->  include/fastboot.h            |  1 +
->  4 files changed, 48 insertions(+)
+> Boot logs:
+> https://gist.github.com/nmenon/d62c4795c6d3d40c83ba36d1cd047c42
 >
-> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-> index 1ad8a897c8..05d8f77759 100644
-> --- a/doc/android/fastboot.rst
-> +++ b/doc/android/fastboot.rst
-> @@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
->    with <arg> = boot_ack boot_partition
->  - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
->  - ``oem run`` - this executes an arbitrary U-Boot command
-> +- ``oem console`` - this dumps U-Boot console record buffer
->  
->  Support for both eMMC and NAND devices is included.
->  
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 837c6f1180..58b08120a4 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -241,6 +241,13 @@ config FASTBOOT_OEM_RUN
->  	  this feature if you are using verified boot, as it will allow an
->  	  attacker to bypass any restrictions you have in place.
->  
-> +config FASTBOOT_CMD_OEM_CONSOLE
-> +	bool "Enable the 'oem console' command"
-> +	depends on CONSOLE_RECORD
-> +	help
-> +	  Add support for the "oem console" command to input and read console
-> +	  record buffer.
-> +
->  endif # FASTBOOT
->  
->  endmenu
-> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-> index 6f621df074..f95f4e4ae1 100644
-> --- a/drivers/fastboot/fb_command.c
-> +++ b/drivers/fastboot/fb_command.c
-> @@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
->  static void oem_format(char *, char *);
->  static void oem_partconf(char *, char *);
->  static void oem_bootbus(char *, char *);
-> +static void oem_console(char *, char *);
->  static void run_ucmd(char *, char *);
->  static void run_acmd(char *, char *);
->  
-> @@ -108,6 +109,10 @@ static const struct {
->  		.command = "oem run",
->  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
->  	},
-> +	[FASTBOOT_COMMAND_OEM_CONSOLE] = {
-> +		.command = "oem console",
-> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_console), (NULL))
-> +	},
->  	[FASTBOOT_COMMAND_UCMD] = {
->  		.command = "UCmd",
->  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
-> @@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *response)
->  	case FASTBOOT_COMMAND_GETVAR:
->  		fastboot_getvar_all(response);
->  		break;
-> +	case FASTBOOT_COMMAND_OEM_CONSOLE:
-> +		if (CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)) {
-> +			char buf[FASTBOOT_RESPONSE_LEN] = { 0 };
-> +
-> +			if (console_record_isempty()) {
-> +				console_record_reset();
-> +				fastboot_okay(NULL, response);
-> +			} else {
-> +				int ret = console_record_readline(buf, sizeof(buf) - 5);
-> +
-> +				if (ret < 0)
-> +					fastboot_fail("Error reading console", response);
-> +				else
-> +					fastboot_response("INFO", response, "%s", buf);
-> +			}
-> +			break;
-> +		}
->  	default:
->  		fastboot_fail("Unknown multiresponse command", response);
->  		break;
-> @@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
->  	else
->  		fastboot_okay(NULL, response);
->  }
-> +
-> +/**
-> + * oem_console() - Execute the OEM console command
-> + *
-> + * @cmd_parameter: Pointer to command parameter
-> + * @response: Pointer to fastboot response buffer
-> + */
-> +static void __maybe_unused oem_console(char *cmd_parameter, char *response)
-> +{
-> +	if (cmd_parameter)
-> +		console_in_puts(cmd_parameter);
-> +
-> +	if (console_record_isempty())
-> +		fastboot_fail("Empty console", response);
-> +	else
-> +		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
-> +}
-> diff --git a/include/fastboot.h b/include/fastboot.h
-> index 59cbea61ec..1e7920eb91 100644
-> --- a/include/fastboot.h
-> +++ b/include/fastboot.h
-> @@ -47,6 +47,7 @@ enum {
->  	FASTBOOT_COMMAND_OEM_PARTCONF,
->  	FASTBOOT_COMMAND_OEM_BOOTBUS,
->  	FASTBOOT_COMMAND_OEM_RUN,
-> +	FASTBOOT_COMMAND_OEM_CONSOLE,
->  	FASTBOOT_COMMAND_ACMD,
->  	FASTBOOT_COMMAND_UCMD,
->  	FASTBOOT_COMMAND_COUNT
+> WARNING: This will have  a minor conflict (binman) with:
+> https://lore.kernel.org/u-boot/20231104080137.9628-1-nm@ti.com/
+>
+>
+> I haven't had a chance to test this out on verdin (only build tested)
+> - going to depend on any checks folks can provide.
+>
+> V1: https://lore.kernel.org/all/20231113145919.1928812-1-nm@ti.com/
+>
+> Nishanth Menon (4):
+>   arm: dts: k3-am625*: Sync with kernel v6.7-rc1
+>   arm: dts: k3-am625: Drop SoC provided bootph params from board
+>     u-boot/r5 dtsi
+>   arm: dts: k3-am625-beagleplay-u-boot: drop duplicate bootph-nodes
+>   arm: dts: k3-am625-sk-r5/u-boot: Drop duplicate bootph-nodes
+
+Boot tested eMMC boot on AM62 SK EVM.
+
+For the whole series:
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # am625 sk
+
+>
+>  arch/arm/dts/k3-am62-main.dtsi                |  12 +-
+>  arch/arm/dts/k3-am62-mcu.dtsi                 |   2 +
+>  arch/arm/dts/k3-am62-verdin-wifi.dtsi         |   6 +
+>  arch/arm/dts/k3-am62-verdin.dtsi              |   1 +
+>  arch/arm/dts/k3-am62-wakeup.dtsi              |   2 +
+>  arch/arm/dts/k3-am62.dtsi                     |   3 +
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 110 -------------
+>  arch/arm/dts/k3-am625-beagleplay.dts          |  34 +++-
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts       |   9 --
+>  arch/arm/dts/k3-am625-r5-sk.dts               |  21 +--
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi          | 145 ------------------
+>  arch/arm/dts/k3-am625-sk.dts                  |  27 ++++
+>  arch/arm/dts/k3-am625-verdin-r5.dts           |   9 --
+>  .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  |  55 +------
+>  arch/arm/dts/k3-am62x-sk-common.dtsi          | 109 ++++++++++++-
+>  15 files changed, 197 insertions(+), 348 deletions(-)
+>
 > -- 
-> 2.40.1
+> 2.40.0
