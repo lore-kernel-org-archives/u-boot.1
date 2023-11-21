@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F8FC61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B4EEC61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56A3887590;
-	Tue, 21 Nov 2023 19:40:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 348028758C;
+	Tue, 21 Nov 2023 20:00:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ahcIw0xX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IRDsE0V5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D65C78269F; Tue, 21 Nov 2023 19:40:31 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 14FD18758C; Tue, 21 Nov 2023 20:00:08 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E694487590
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:40:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FB2386FB2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:00:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-507a55302e0so8532981e87.0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:40:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-da41acaea52so5553750276.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:00:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700592027; x=1701196827; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sDrnhqZZKfOE5ciEnGXpA17Z4p5wGxqPBeElk2IKK2I=;
- b=ahcIw0xXBCb6X5QGKMH+M9+B2Jqik/IASYXvv0dmBQEe6JOaSmHUSYlGGLFmAvo/lc
- iNW+j6mgSSw+sLzQekji5jIK1ZjmVkJv1kbzbkEZBO/Az6+fi1BYRunBEyqZ5Elgkjt6
- 5yeFEYoI0HdOnfq84gEHdcGOaJdjfOaAaruQg=
+ d=konsulko.com; s=google; t=1700593204; x=1701198004; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=hp5GNIWd5wgGIyAjN52RoEAj+jfxWHEcS6DkBRCZT6M=;
+ b=IRDsE0V50WZOyxvUPK8PDC73xE7mk2U+teyQPQEz7YdXddobZY1o15fq3zD0fFaFt3
+ aSi34b+4lekJrMgnWIuAVPoTs9f4rKXwDqOfPEFWUw1dGJPZ80V1A/TM0l4IJO02Pemt
+ bukqC065BlF2V1n56pw3uIQUGpIvmYsNVipXw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700592027; x=1701196827;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sDrnhqZZKfOE5ciEnGXpA17Z4p5wGxqPBeElk2IKK2I=;
- b=HID7PkqE0UsBwIb7PkymY4OiFANzp8G9/QaO18buwDm46Pk5L9Ils4BBdW9qqQuAwc
- Y7ZLsdysPtCoFIHY6X14LuEyuJV8WedNCV63uEVCAtWo9EUpRmvPBwHlm9MH3PmbdXWD
- 9rzGQ9M8COANSPUgPRQHSP4Kd7X41dsp1NXXMGWa3eyLcfIL3il1fYzd2UynqUVCAR8Q
- ulW6R6GTHDrou4sbiBFGprAET9A7flMyE4XZx/TAcQsm76JrYcIMq4it+6LQVlAdw3xC
- a06oqkpKSG/c2E6GNaGAfgV2r5Y9akIyz+TO6ZZHK/ntS/G1zJv9XlVnaNHnPO44LdDc
- fb1g==
-X-Gm-Message-State: AOJu0YzkhZxuddNAHgI/lEwt6zGKxPPDYumEjpPzPZQsjKCLe+xFNmzq
- G0bm6Zl0t94WJ6MrXnU94wv05pt7yaNX/baqjy4e8A==
-X-Google-Smtp-Source: AGHT+IHGn32kjMnrIq1G/GNPvJ+pQnnEqxufuUHEAjFtEj20Z8q0GCq25w34qif9qC1FMdSHp+YdSkayvznKXJWKAgk=
-X-Received: by 2002:a19:5501:0:b0:50a:760f:dd29 with SMTP id
- n1-20020a195501000000b0050a760fdd29mr35301lfe.66.1700592026844; Tue, 21 Nov
- 2023 10:40:26 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700593204; x=1701198004;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hp5GNIWd5wgGIyAjN52RoEAj+jfxWHEcS6DkBRCZT6M=;
+ b=iJpvib0a97MNpBaKB3HhpBszOKcTsZnPW/hwUptLWB5GFjuIVOyIDaT9soFz5zTj4X
+ Qsf8YB5FfUndSs5DJa+rlJmIv8oYWyUyPJB5FCNYgCf3qSEWkwjzKGEa+v3B8Dyr176V
+ W+yU5BgvllzCkiVpbrxkXtB79NdWUaeX/cosFYAcSfCeC1wDuKyHcNeKHe1YgxwBir70
+ e+snynPwfk1p5HGMckMZCUgiv1Vw7HdpkmNXQS5wdb7QYMVG26rNBCKEU1ntmk0GtByz
+ TI4uVoKutX5Prja8/EXG3vQ+bXa5RidynVcveJpgpKMhN/+Om0S2Umx+M2ID8EiT16ct
+ HVPQ==
+X-Gm-Message-State: AOJu0YyYXmejEPlATsoyFiXPWw2PFeqKWkMKh8zDgSDkXcEWv15fskeN
+ pUnD2Fj8k4nbQgIzBqQgxUgsrOmvRZnfjmQqaF5wtQ==
+X-Google-Smtp-Source: AGHT+IGiefCsWL9Sx3epZxllPoG6D/mXy4VrGO3vb51BP29Ml7HmzRdJuYP3vXxZR1576QuOHZcIrw==
+X-Received: by 2002:a5b:5d2:0:b0:daf:7468:459 with SMTP id
+ w18-20020a5b05d2000000b00daf74680459mr11415922ybp.3.1700593203709; 
+ Tue, 21 Nov 2023 11:00:03 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
+ [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
+ by smtp.gmail.com with ESMTPSA id
+ e7-20020a056214110700b0066d32666a27sm4157809qvs.66.2023.11.21.11.00.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 11:00:03 -0800 (PST)
+Date: Tue, 21 Nov 2023 14:00:00 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Miao Yan <yanmiaobest@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/7] acpi: Kconfig symbol CONFIG_QFW_ACPI
+Message-ID: <20231121190000.GA2513409@bill-the-cat>
+References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
+ <20231121152740.24783-2-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20231121183510.6451-1-clamor95@gmail.com>
- <20231121183510.6451-5-clamor95@gmail.com>
-In-Reply-To: <20231121183510.6451-5-clamor95@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 11:40:08 -0700
-Message-ID: <CAPnjgZ14yKRz06=j5+_e7XE2G82PWRb2QijkYsCPXkpqSFtbaQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/5] lib: membuff: fix readline not returning line in
- case of overflow
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, 
- Heiko Schocher <hs@denx.de>, Dmitrii Merkurev <dimorinny@google.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xbo6GALluPqn6yZQ"
+Content-Disposition: inline
+In-Reply-To: <20231121152740.24783-2-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,94 +97,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
 
-On Tue, 21 Nov 2023 at 11:35, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
->
-> From: Ion Agorria <ion@agorria.com>
->
-> If line overflows readline it will not be returned, fix this behavior,
-> make it optional and documented properly.
->
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+--xbo6GALluPqn6yZQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 21, 2023 at 04:27:34PM +0100, Heinrich Schuchardt wrote:
+
+> We have two implementations of write_acpi_tables(). One for writing ACPI
+> tables based on ACPI_WRITER() entries another based on copying tables from
+> QEMU.
+>=20
+> Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
+> QEMU and use it consistently.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  boot/bootmeth_extlinux.c | 2 +-
->  common/console.c         | 2 +-
->  include/membuff.h        | 5 +++--
->  lib/membuff.c            | 4 ++--
->  4 files changed, 7 insertions(+), 6 deletions(-)
->
-> diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-> index aa2a4591eb..ae0ad1d53e 100644
-> --- a/boot/bootmeth_extlinux.c
-> +++ b/boot/bootmeth_extlinux.c
-> @@ -82,7 +82,7 @@ static int extlinux_fill_info(struct bootflow *bflow)
->         log_debug("parsing bflow file size %x\n", bflow->size);
->         membuff_init(&mb, bflow->buf, bflow->size);
->         membuff_putraw(&mb, bflow->size, true, &data);
-> -       while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' '), len) {
-> +       while (len = membuff_readline(&mb, line, sizeof(line) - 1, ' ', true), len) {
->                 char *tok, *p = line;
->
->                 tok = strsep(&p, " ");
-> diff --git a/common/console.c b/common/console.c
-> index 8a869b137e..cd56035171 100644
-> --- a/common/console.c
-> +++ b/common/console.c
-> @@ -846,7 +846,7 @@ bool console_record_overflow(void)
->  int console_record_readline(char *str, int maxlen)
->  {
->         return membuff_readline((struct membuff *)&gd->console_out, str,
-> -                               maxlen, '\0');
-> +                               maxlen, '\0', false);
->  }
->
->  int console_record_avail(void)
-> diff --git a/include/membuff.h b/include/membuff.h
-> index 21051b0c54..4eba626ce1 100644
-> --- a/include/membuff.h
-> +++ b/include/membuff.h
-> @@ -192,10 +192,11 @@ int membuff_free(struct membuff *mb);
->   * @mb: membuff to adjust
->   * @str: Place to put the line
->   * @maxlen: Maximum line length (excluding terminator)
-> + * @must_fit: If true then str is empty if line doesn't fit
->   * Return: number of bytes read (including terminator) if a line has been
-> - *        read, 0 if nothing was there
-> + *        read, 0 if nothing was there or line didn't fit when must_fit is set
->   */
-> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch);
-> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit);
->
->  /**
->   * membuff_extend_by() - expand a membuff
-> diff --git a/lib/membuff.c b/lib/membuff.c
-> index 36dc43a523..964e504d5b 100644
-> --- a/lib/membuff.c
-> +++ b/lib/membuff.c
-> @@ -288,7 +288,7 @@ int membuff_free(struct membuff *mb)
->                         (mb->end - mb->start) - 1 - membuff_avail(mb);
->  }
->
-> -int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
-> +int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch, bool must_fit)
+> v2:
+> 	new patch
+> ---
+>  drivers/misc/Kconfig   | 7 +++++++
+>  drivers/misc/qfw.c     | 4 ++--
+>  lib/acpi/Makefile      | 2 +-
+>  lib/acpi/acpi_writer.c | 4 ++--
+>  4 files changed, 12 insertions(+), 5 deletions(-)
 
-Shouldn't that be the normal case? I might have this wrong, but this
-looks like a bug fix to me.
+I still feel like this is a weird direction to go in and that:
+> diff --git a/lib/acpi/acpi_writer.c b/lib/acpi/acpi_writer.c
+> index 946f90e8e7..9b9fdc190b 100644
+> --- a/lib/acpi/acpi_writer.c
+> +++ b/lib/acpi/acpi_writer.c
+> @@ -48,7 +48,7 @@ int acpi_write_one(struct acpi_ctx *ctx, const struct a=
+cpi_writer *entry)
+>  	return 0;
+>  }
+> =20
+> -#ifndef CONFIG_QEMU
+> +#ifndef CONFIG_QFW_ACPI
+>  static int acpi_write_all(struct acpi_ctx *ctx)
 >  {
->         int len;  /* number of bytes read (!= string length) */
->         char *s, *end;
-> @@ -310,7 +310,7 @@ int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
->         }
->
->         /* couldn't get the whole string */
-> -       if (!ok) {
-> +       if (!ok && must_fit) {
->                 if (maxlen)
->                         *orig = '\0';
->                 return 0;
-> --
-> 2.40.1
->
+>  	const struct acpi_writer *writer =3D
+> @@ -115,7 +115,7 @@ ulong acpi_get_rsdp_addr(void)
+> =20
+>  	return map_to_sysmem(gd->acpi_ctx->rsdp);
+>  }
+> -#endif /* QEMU */
+> +#endif /* QFW_ACPI */
+> =20
+>  void acpi_setup_ctx(struct acpi_ctx *ctx, ulong start)
+>  {
+
+Will need to be tweaked later on still with some other symbol to denote
+"ACPI tables were passed along on real hardware by $mechanism". But we
+can cross that when we come to it.
+
+--=20
+Tom
+
+--xbo6GALluPqn6yZQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVc/i0ACgkQFHw5/5Y0
+tyx6Sgv+Iz5mpQqvJT8TwqjMV73MbQPFmBPW2UWmW2rb4I9XqLJHrLyDxiYK2Yle
+ExY2xh9dG3f70PEZDRzS0Ue7YccQTMjaJo2BRMl8KjcZBw/Gk2rjP5goTKePGxK5
+/eo2QDrXOWaBD0sdtcKp6OxU8FA77w4uXOW06QCa5nhOHjN5G3x/BaV29l6N8HOb
+rljKmrgVOa8OAUBXriZHPAQXdCh5y5AeVR2Ri5/PV+miSaQLO/Bj8Xr+DYJYTRB6
+igIwQtFXjfma11bBaTy6dZ8OHsOrO0m3GRi6WTXW0tiCKfMD0jp6OnDwIMChTrBg
+oraW0Zj/oYfNXjMtCtSLmEoODAgg2CHu8I3bw9h7ccY3ONYnck1ZpgEsxv1kj6F0
+3LD9fuRPIzZUg6drlFhubsLrmLliUR5ItbYFueEGl+MgHBL2xMTkEUmQMwKHJxIN
+MvRcZnTRuLpzp+O4pHC8bECq59x78dnweSFy3jeNeVj8TL2Xh/HG0WAdyblvUJMC
+Fan8e4kE
+=IAte
+-----END PGP SIGNATURE-----
+
+--xbo6GALluPqn6yZQ--
