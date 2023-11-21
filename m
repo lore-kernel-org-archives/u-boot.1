@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F20CBC5AD4C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:58:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE177C5ACB3
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 03:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A800A8755C;
-	Tue, 21 Nov 2023 03:58:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D554A871E7;
+	Tue, 21 Nov 2023 04:31:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KHDe8TpM";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="njLxYLWR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9D2F87582; Tue, 21 Nov 2023 03:58:25 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DD9F87574; Tue, 21 Nov 2023 04:31:45 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A26B7871F0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:58:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31A7886F34
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 04:31:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7a6774da682so233160639f.3
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:58:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700535501; x=1701140301; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GbabAeYcBJ4pDWhbeccv8ix3SI0zM5QRS+QVs/XaCH0=;
- b=KHDe8TpMMLjnbgsqDsWBrhIFBE6RR45YESlJTscn9eOSaX7/Lhiy7aFbhK6C0ANXqo
- YaQEeUzfvwyLhLfo79uVvn1RY7Svslp5ShDWvbLFqDe6BmhAwXIWvcR7YJaCmoAzwV//
- WhHzeQrbg0vULx09PFn//ksKfZYZjV/Wz/BsI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700535501; x=1701140301;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GbabAeYcBJ4pDWhbeccv8ix3SI0zM5QRS+QVs/XaCH0=;
- b=Ife4I4e7E1eVjCiS7B+vphC5S6IPZoS5NzGl7FIdSk7JKpEJe7VRZBRUT4uUHCdOzP
- 2crERW9iOgxDNMy1PNr6PwyXQ68h+MSU0cor9Gtnn72yvKYF1AKgAKgCEf1mjiXZ1ts6
- Ur7RD8NaVYpw2fSWf2t4Ou9jBMKLydBm4apn6Eh80bSAcVohBiIJPZbrY7PwjRwcAv8h
- 66OG+EZE07fAyt9zsATUOCwsIb5m4BCgLeWfnIqC/kgneD+oEKpyTW2c8iKc445yNt8U
- E4ZABq38EcrB47NXuVj+1RVfXXK0RHnORKDv5LSYOK1+lvOGfCnLXtYziARG+EB0ViW8
- xqMA==
-X-Gm-Message-State: AOJu0YztuXLXH4WFY2RxyhJMMcTA5EvBQVL4yOyeCvl/9nqHz2x43jFP
- 3s4Zh+giHaKAMOLiEasPyfYnn4ILVcjGQCwoIMx7hg==
-X-Google-Smtp-Source: AGHT+IHPShDKDwF+VFsFxkbZUEBis8JM8zzb309AIkTREslFOUvO8CaMnhakHFUj+uchhIO4t5QLgg==
-X-Received: by 2002:a92:ad0b:0:b0:35b:37a:52e5 with SMTP id
- w11-20020a92ad0b000000b0035b037a52e5mr5838477ilh.31.1700535501080; 
- Mon, 20 Nov 2023 18:58:21 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- ca18-20020a0566381c1200b00437a3c128dfsm2398826jab.108.2023.11.20.18.58.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 18:58:20 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Brandon Maier <brandon.maier@collins.com>,
- Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [PATCH v3] smbios: arm64: Ensure table is written at a good address
-Date: Mon, 20 Nov 2023 19:58:16 -0700
-Message-ID: <20231121025818.741258-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700537501; x=1701142301; i=xypron.glpk@gmx.de;
+ bh=xuvwGxJwpcIdIPhOaO2PYQ3BEY2JGJ1X+ucssHrylWU=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=njLxYLWR+oOeMR5TfbxSD6fOySQc1OzgCa+JJncd9fA1LtEp9VBdStaHjNSc17H8
+ aJxdblYlHVSR34vsKaE1oecG+396p2bFeD4Wu4rPxb1uSQM5MR5XtXj29XbzujxkC
+ r6uFareB4V5jYgj/BNbyxWsmoC5i2rFzOzexx7gJgRpemRm9eH8eVGc06k/GuI2tP
+ LQcuAFBms6V13rqHgx3UIJOK5UsDoq2GxiU3xCKO9pi9V1P/00fqfutxfW+zevSq5
+ L/5rUlK1UzuPV8YA+5U+feZf6BUsZoaqvSxBc/7u3EkWCxAM/jXpDwFgwu0hXX+/Z
+ mB5smqdsnxRCfHJUxg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mw9UE-1rLyvJ1d0m-00s4DC; Tue, 21
+ Nov 2023 04:31:41 +0100
+Message-ID: <26ddf551-dc01-4873-956d-322bb95ca981@gmx.de>
+Date: Tue, 21 Nov 2023 04:31:40 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 02/12] cmd: bootefi: re-organize do_bootefi()
+Content-Language: en-US
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ ilias.apalodimas@linaro.org
+References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
+ <20231121012950.156539-3-takahiro.akashi@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231121012950.156539-3-takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:FKtCbu99P6x6pj6AmSIsh2UFNsX8B6fdwPzapzN8PKl0zL8wlh7
+ OyCp6E11K9T5j6g5CfWFBJSip2CV3sttv77Cc86DXWb4BafSQT8apYBSq/zPp+UlvF5CAl8
+ phbILfN8blwb+NS+Hm4UWvsgxM2IDlLkpdaOzVNBnS9z6sdCXE3pXeBaGEQ24hFLgF90pT/
+ dbX7mNaeRVCuOYuhjqA5w==
+UI-OutboundReport: notjunk:1;M01:P0:wLjUdv7dZAQ=;dFoIXpuxswOAjfEjZOxc8Y0wiBm
+ xt8U7ketQ1cSQf7M8OZcM+xcbzOs6hLRNr9Keym8AkpdPM3ZCiFr7wBEPl3t1wv7VVqxMKSzB
+ nbDI3PIlv1fUsOcDbpBl/zKqa73uV2ZtZq2R3HiZCUStXnbRpndVL1SUbh1Za5fCBvAtIqF8P
+ 8WfRhrhe0dypLbYJVRaGd/oqivEsbps8JG+4fqmwgMVuegI0oQ990shoJEf0YXZJ+pfAp1mwH
+ tmAhmF+AcebOtfRfpT4nXP5p08XHkZy9phcmFGQL486nj1Da2Qij6eq+1H5jDkbem7bm3N3y2
+ ZSW34vdXMy809lErSs1GOZMPfeOtLgSI0z0LKvmC85WeDtBedMgFDSKnX5YdwgCyOpzmXWrPQ
+ uBlyqt4UOJ9FBpAOxtk7OBMr8938M1dqA8BWfwn34PF02/a5gnq9/+PmdF9/dO4nnauQJwAO9
+ ySW6GPetYCaJsd4IA2/1tPrhfnfg6/64h+TDqicNPWaME9eI8CgKmc3npcna/scDDDnMyQmXo
+ tU2/HD3hEn6QSiM7rYfNUIlBLLovaRraVMJVScpY67J3mQIrH5L93AN9Zz93BVAkQiR8VoSRJ
+ WG1VAKwsfcm+JeUtOUg/gfZYLyAFqGf6rauEFwXS/1h+zTJ3peUTCJSpXMF/QYwhJ8qB/3/IU
+ 17wdYNsYIzQmg9ZpNYksqk/2FKG4l4RzsZytX0HCyYLwVs0cqtTYiSggI6s+faBe+svZf6lxw
+ q8JVzEcQ93CMqDPSRwS/MWPzm5mMzEx6qUNtdA44Bdhbz4zvxMVIh3J9pS+TNOodtyhOFU/8C
+ RaG74gSydJecrn4R1iCgTKkicEIopthMAmItmMDICOZ33LBw0cDCtrKlPrtdCAAMOu3CdZ3FE
+ LOcqE0oB8tobZ8iU0FuONI9EJy2offx+VMIr0pLDg2iFLVZZzxgoiORggHDOHX/S0USROLdAM
+ LqcG3rRvJYxW0u+iwlSixmb0oL4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,139 +90,232 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot typically sets up its malloc() pool near the top of memory. On
-ARM64 systems this can result in an SMBIOS table above 4GB which is
-not supported by SMBIOSv2.
+On 11/21/23 02:29, AKASHI Takahiro wrote:
+> Replicate some code and re-organize do_bootefi() into three cases, which
+> will be carved out as independent functions in the next two commits.
+>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>   cmd/Kconfig          | 15 ++++++--
+>   cmd/bootefi.c        | 82 ++++++++++++++++++++++++++++++--------------
+>   include/efi_loader.h |  2 --
+>   3 files changed, 69 insertions(+), 30 deletions(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 6f636155e5b6..4cf9a210c4a1 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -362,9 +362,19 @@ config CMD_BOOTEFI
+>   	help
+>   	  Boot an EFI image from memory.
+>
+> +if CMD_BOOTEFI
+> +config CMD_BOOTEFI_BINARY
+> +	bool "Allow booting an EFI binary directly"
+> +	depends on BOOTEFI_BOOTMGR
 
-Work around this problem by automatically choosing an address below 4GB
-(but as high as possible), if needed.
+Why should booting a known binary depend on the boot manager?
 
-Tell efi_loader about the address in the same way as we do for ACPI
-tables.
+> +	default y
+> +	help
+> +	  Select this option to enable direct execution of binary at 'bootefi'=
+.
+> +	  This subcommand will allow you to load the UEFI binary using
+> +	  other U-Boot commands or external methods and then run it.
+> +
+>   config CMD_BOOTEFI_BOOTMGR
+>   	bool "UEFI Boot Manager command"
+> -	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
+> +	depends on BOOTEFI_BOOTMGR
+>   	default y
+>   	help
+>   	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
+> @@ -373,7 +383,7 @@ config CMD_BOOTEFI_BOOTMGR
+>
+>   config CMD_BOOTEFI_HELLO_COMPILE
+>   	bool "Compile a standard EFI hello world binary for testing"
+> -	depends on CMD_BOOTEFI && !CPU_V7M
+> +	depends on !CPU_V7M
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-Please see previous discussion here:
+Why do we have this dependency?
+EFI_LOADER cannot be selected for SYS_CPU=3Darmv7m.
 
-  https://patchwork.ozlabs.org/project/uboot/patch/
-  20231025123117.v2.1.I054cad60e00f8cfde39256c7c7d9c960987fb9be@changeid/
+>   	default y
+>   	help
+>   	  This compiles a standard EFI hello world application with U-Boot so
+> @@ -395,6 +405,7 @@ config CMD_BOOTEFI_HELLO
+>   	  up EFI support on a new architecture.
+>
+>   source lib/efi_selftest/Kconfig
+> +endif
+>
+>   config CMD_BOOTMENU
+>   	bool "bootmenu"
+> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> index 190ccba260e0..e9e5ab67a1f5 100644
+> --- a/cmd/bootefi.c
+> +++ b/cmd/bootefi.c
+> @@ -503,7 +503,6 @@ out:
+>   	return (ret !=3D EFI_SUCCESS) ? ret : ret2;
+>   }
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+>   static efi_status_t bootefi_run_prepare(const char *load_options_path,
+>   		struct efi_device_path *device_path,
+>   		struct efi_device_path *image_path,
+> @@ -593,7 +592,6 @@ static int do_efi_selftest(void)
+>
+>   	return ret !=3D EFI_SUCCESS;
+>   }
+> -#endif /* CONFIG_CMD_BOOTEFI_SELFTEST */
+>
+>   /**
+>    * do_bootefi() - execute `bootefi` command
+> @@ -615,14 +613,6 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int fl=
+ag, int argc,
+>   	if (argc < 2)
+>   		return CMD_RET_USAGE;
+>
+> -	/* Initialize EFI drivers */
+> -	ret =3D efi_init_obj_list();
+> -	if (ret !=3D EFI_SUCCESS) {
+> -		log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> -			ret & ~EFI_ERROR_MASK);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+>   	if (argc > 2) {
+>   		uintptr_t fdt_addr;
+>
+> @@ -631,29 +621,54 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int f=
+lag, int argc,
+>   	} else {
+>   		fdt =3D EFI_FDT_USE_INTERNAL;
+>   	}
+> -	ret =3D efi_install_fdt(fdt);
+> -	if (ret =3D=3D EFI_INVALID_PARAMETER)
+> -		return CMD_RET_USAGE;
+> -	else if (ret !=3D EFI_SUCCESS)
+> -		return CMD_RET_FAILURE;
+>
+> -	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
+> -		if (!strcmp(argv[1], "bootmgr"))
+> -			return do_efibootmgr();
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
+> +	    !strcmp(argv[1], "bootmgr")) {
 
-Changes in v3:
-- Add RISC-V to the condition, too
-- Update the commit message
 
-Changes in v2:
-- Update to search for a suitable area automatically, if enabled
+https://docs.u-boot.org/en/latest/develop/commands.html
+suggests to use U_BOOT_CMD_MKENT() to define sub-commands.
 
- lib/Kconfig                 | 13 ++++++++
- lib/efi_loader/efi_smbios.c | 63 ++++++++++++++++++++++++++++++++++++-
- 2 files changed, 75 insertions(+), 1 deletion(-)
+> +		/* Initialize EFI drivers */
+> +		ret =3D efi_init_obj_list();
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 19649517a39b..c70faeeebed5 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -998,6 +998,19 @@ config GENERATE_SMBIOS_TABLE
- 	  See also SMBIOS_SYSINFO which allows SMBIOS values to be provided in
- 	  the devicetree.
- 
-+config SMBIOS_TABLE_FIXED
-+	bool "Place the SMBIOS table at a special address"
-+	depends on GENERATE_SMBIOS_TABLE && SMBIOS && EFI_LOADER
-+	depends on ARM64 || RISCV
-+	default y
-+	help
-+	  Use this option to place the SMBIOS table at a special address.
-+
-+	  U-Boot typically sets up its malloc() pool near the top of memory. On
-+	  ARM64 systems this can result in an SMBIOS table above 4GB which is
-+	  not supported by SMBIOSv2. This option works around this problem by
-+	  chosing an address just below 4GB, if needed.
-+
- endmenu
- 
- config LIB_RATIONAL
-diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-index 48446f654d9b..566f206af5b6 100644
---- a/lib/efi_loader/efi_smbios.c
-+++ b/lib/efi_loader/efi_smbios.c
-@@ -47,6 +47,60 @@ efi_status_t efi_smbios_register(void)
- 					       map_sysmem(addr, 0));
- }
- 
-+/**
-+ * find_addr_below() - Find a usable region below the given max_addr
-+ *
-+ * Check if *addrp is suitable to define a memory region which finishes below
-+ * @max_addr + @req_size. If so, do nothing and return 0
-+ *
-+ * As a backup, if CONFIG_SMBIOS_TABLE_FIXED is enabled, search for a
-+ * 4KB-aligned DRAM region which is large enough. Make sure it is below U-Boot's
-+ * stack space, assumed to be 64KB.
-+ *
-+ * @max_addr: Maximum address that can be used (region must finish before here)
-+ * @req:size: Required size of region
-+ * @addrp: On entry: Current proposed address; on exit, holds the new address,
-+ *	on success
-+ * Return 0 if OK (existing region was OK, or a new one was found), -ENOSPC if
-+ * nothing suitable was found
-+ */
-+static int find_addr_below(ulong max_addr, ulong req_size, ulong *addrp)
-+{
-+	struct bd_info *bd = gd->bd;
-+	ulong max_base;
-+	int i;
-+
-+	max_base = max_addr - req_size;
-+	if (*addrp <= max_base)
-+		return 0;
-+
-+	if (!IS_ENABLED(CONFIG_SMBIOS_TABLE_FIXED))
-+		return -ENOSPC;
-+
-+	/* Make sure that the base is at least 64KB below the stack */
-+	max_base = min(max_base,
-+		       ALIGN(gd->start_addr_sp - SZ_64K - req_size, SZ_4K));
-+
-+	for (i = CONFIG_NR_DRAM_BANKS - 1; i >= 0; i--) {
-+		ulong start = bd->bi_dram[i].start;
-+		ulong size = bd->bi_dram[i].size;
-+		ulong addr;
-+
-+		/* chose an address at most req_size bytes before the end */
-+		addr = min(max_base, start - req_size + size);
-+
-+		/* check this is in the range */
-+		if (addr >= start && addr + req_size < start + size) {
-+			*addrp = addr;
-+			log_warning("Forcing SMBIOS table to address %lx\n",
-+				    addr);
-+			return 0;
-+		}
-+	}
-+
-+	return -ENOSPC;
-+}
-+
- static int install_smbios_table(void)
- {
- 	ulong addr;
-@@ -61,7 +115,14 @@ static int install_smbios_table(void)
- 		return log_msg_ret("mem", -ENOMEM);
- 
- 	addr = map_to_sysmem(buf);
--	if (!write_smbios_table(addr)) {
-+
-+	/*
-+	 * Deal with a fixed address if needed. For simplicity we assume that
-+	 * the SMBIOS-table size is <64KB. If a suitable address cannot be
-+	 * found, then write_smbios_table() returns an error.
-+	 */
-+	if (find_addr_below(SZ_4G - 1, SZ_64K, &addr) ||
-+	    !write_smbios_table(addr)) {
- 		log_err("Failed to write SMBIOS table\n");
- 		return log_msg_ret("smbios", -EINVAL);
- 	}
--- 
-2.43.0.rc1.413.gea7ed67945-goog
+We should not duplicate this call for each sub-command.
+
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +				ret & ~EFI_ERROR_MASK);
+> +			return CMD_RET_FAILURE;
+> +		}
+> +
+> +		ret =3D efi_install_fdt(fdt);
+> +		if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +			return CMD_RET_USAGE;
+> +		else if (ret !=3D EFI_SUCCESS)
+> +			return CMD_RET_FAILURE;
+
+These lines could be moved into do_efibootmgr.
+
+Should we move the translations of the return codes into efi_install_fdt?
+
+Best regards
+
+Heinrich
+
+> +
+> +		return do_efibootmgr();
+>   	}
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+> -	if (!strcmp(argv[1], "selftest"))
+> +
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
+> +	    !strcmp(argv[1], "selftest")) {
+> +		/* Initialize EFI drivers */
+> +		ret =3D efi_init_obj_list();
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +				ret & ~EFI_ERROR_MASK);
+> +			return CMD_RET_FAILURE;
+> +		}
+> +
+> +		ret =3D efi_install_fdt(fdt);
+> +		if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +			return CMD_RET_USAGE;
+> +		else if (ret !=3D EFI_SUCCESS)
+> +			return CMD_RET_FAILURE;
+> +
+>   		return do_efi_selftest();
+> -#endif
+> +	}
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_HELLO
+> -	if (!strcmp(argv[1], "hello")) {
+> +	if (!IS_ENABLED(CONFIG_CMD_BOOTEFI_BINARY))
+> +		return CMD_RET_SUCCESS;
+> +
+> +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_HELLO) &&
+> +	    !strcmp(argv[1], "hello")) {
+>   		image_buf =3D __efi_helloworld_begin;
+>   		size =3D __efi_helloworld_end - __efi_helloworld_begin;
+>   		efi_clear_bootdev();
+> -	} else
+> -#endif
+> -	{
+> +	} else {
+>   		addr =3D strtoul(argv[1], NULL, 16);
+>   		/* Check that a numeric value was passed */
+>   		if (!addr)
+> @@ -675,6 +690,21 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int fl=
+ag, int argc,
+>   			size =3D image_size;
+>   		}
+>   	}
+> +
+> +	/* Initialize EFI drivers */
+> +	ret =3D efi_init_obj_list();
+> +	if (ret !=3D EFI_SUCCESS) {
+> +		log_err("Error: Cannot initialize UEFI sub-system, r =3D %lu\n",
+> +			ret & ~EFI_ERROR_MASK);
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	ret =3D efi_install_fdt(fdt);
+> +	if (ret =3D=3D EFI_INVALID_PARAMETER)
+> +		return CMD_RET_USAGE;
+> +	else if (ret !=3D EFI_SUCCESS)
+> +		return CMD_RET_FAILURE;
+> +
+>   	ret =3D efi_run_image(image_buf, size);
+>
+>   	if (ret !=3D EFI_SUCCESS)
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 664dae28f882..44436d346286 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -879,14 +879,12 @@ efi_status_t __efi_runtime EFIAPI efi_get_time(
+>
+>   efi_status_t __efi_runtime EFIAPI efi_set_time(struct efi_time *time);
+>
+> -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
+>   /*
+>    * Entry point for the tests of the EFI API.
+>    * It is called by 'bootefi selftest'
+>    */
+>   efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
+>   				 struct efi_system_table *systab);
+> -#endif
+>
+>   efi_status_t EFIAPI efi_get_variable(u16 *variable_name,
+>   				     const efi_guid_t *vendor, u32 *attributes,
 
