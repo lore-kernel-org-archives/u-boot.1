@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACDAC61D97
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A322C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1CB987563;
-	Tue, 21 Nov 2023 23:11:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC27F87622;
+	Tue, 21 Nov 2023 23:11:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M09gzfBn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oYGRC8Ih";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56F5B875F4; Tue, 21 Nov 2023 23:11:02 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 7BAD987631; Tue, 21 Nov 2023 23:11:37 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9965F8760E
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79D2986538
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:11:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a02d12a2444so131754966b.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:59 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-da0cfcb9f40so5981043276.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:11:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700604659; x=1701209459; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PgriTN/aJC6pBrIzZPRoL8V97aG5NtB6BIuX1T3kwW8=;
- b=M09gzfBnNp2/O6f/O2mem8o14U7wXCsxz8HFeHLFnyjKUuKHntdmCrYzntG7ZTb6dC
- YzvYTn4IHs4Ch+WuzroESz/MdyMFmqdW3LdbxckXW/Hchu4F5k3hvDqfJS1IdfwlBh3O
- oVkLgRbj14N9d2negrLrc4pBeKYmbKf1GeRx4=
+ d=chromium.org; s=google; t=1700604694; x=1701209494; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pvBi6zp40wGeOvksZjl5UQryTbM38wdNVX9FQJZx/lk=;
+ b=oYGRC8IhHdtxnwEBZi6DsKgkOYnyhnNyI9ioJJDEGQ8PzuhsGeZgXpS9dn8q9RdpYW
+ FnENPEa2Y4TmkDyrtW6eVhskCQqtLdJ2Rscfm23oV/IkAp6zU7pLMqgOLNA+p3l5gPZj
+ wAjKp9e8Bh8v3+wcds4e4Ljbp1ZNEm6sLdJzE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700604659; x=1701209459;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PgriTN/aJC6pBrIzZPRoL8V97aG5NtB6BIuX1T3kwW8=;
- b=YEAN38Gye/3NEaD8sEQ6Et/UbykOxtLsmy4ivKfhcPuZt1VlvsuCV1PhnIqU+l1+4D
- xRycq4WDu80+L4vEBaEPWTTpZ1UrJ6Mf1GQdbP3135nzP3mJEyaSQHf6eidRdZ61A1Za
- pEYLefsf/3gzUXfLi4+Q8nBMikT64WDt9vljVSxk7Z5e/hEMVXp35Y8ajlWNG79kMYwk
- ZmUydBLTsYJpveVSfwgY4Uql0Ldr3X/f0Zo1Fw7aTpmxljdF/UCsegKuBbpNmK0F3uFj
- HJ6iVHVb5Tr16P81h+NFjqPEz3dlpvvBkUB5RGgloSvPaH2TA5ymoKA98xcj1GPYd72W
- QywQ==
-X-Gm-Message-State: AOJu0YxXdH7dum0+xYMskGgBht3dXKl7Ez6em6xfHTxvS2yRDmuFj1pV
- mponScBmR4EOzN4xoI4E88Kx6jdItc9cEqYpD7PlEw==
-X-Google-Smtp-Source: AGHT+IG4Or490W1snnZTmJOHbijn4Uu36wCIB695m7kAbYC6nw9OK6mv3m2bAxnsZgVii21batyzZPepZ79geoJMtOY=
-X-Received: by 2002:a17:907:a0d6:b0:9bf:6200:fe33 with SMTP id
- hw22-20020a170907a0d600b009bf6200fe33mr234861ejc.16.1700604659097; Tue, 21
- Nov 2023 14:10:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700604694; x=1701209494;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pvBi6zp40wGeOvksZjl5UQryTbM38wdNVX9FQJZx/lk=;
+ b=D1nfrbyGqngd4uqJ4G6/0BK0pipHtgdvC+qr/oHDVjtClMtQQr8dvYRfkTURlRCRng
+ Oiyf2UBOm/n1RlxLuQTi/ZHXB87Hc8fOIpYYA6sgCWUS/BMIvuaY8qJY+ODuImTkOG6O
+ YbjJ2Il4uVHeOmZVrsXJhMbxLhis3mPwKXxunhmAwIsumut5tXi9qjqDOFav73lwOEZ/
+ ILsph40OkCzZhvRUthcMNZudHvK6lWdykfdbNAs9+6AemQn8k0TddtG0OMhGCPy3Gva7
+ i5TwxMOa8O6cwY/ZjutzdNCPMUab1xsZluWKS423dZ/vMIQ1pve7oq3lDuyeo8GfzpOE
+ zpOw==
+X-Gm-Message-State: AOJu0YyRVF+IIKhdhUBH/o+bC36IMXQV/pEQ2RzgfhxNt6UlJpeLuM/9
+ yEATjG7e6vQvHeOWYkWTi5OuobyB3iNf14tCI3dMAg==
+X-Google-Smtp-Source: AGHT+IG2eH68MDsi6lDtXZ1F/UOBRGejA3HWOkUmHOhquhwWq3vMHOAHdyFuPqVpLzPR9xsApkEW2jEbi4tFGZbWGCA=
+X-Received: by 2002:a05:6902:46:b0:d9b:eb86:2b26 with SMTP id
+ m6-20020a056902004600b00d9beb862b26mr320247ybh.21.1700604694021; Tue, 21 Nov
+ 2023 14:11:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20231107190601.17151-1-semen.protsenko@linaro.org>
- <20231107190601.17151-3-semen.protsenko@linaro.org>
- <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
- <CAPLW+4mtbbEZmQtik_qEtmo0Ehr7R=-yZOO8xVL2Dp0rCCHZ4Q@mail.gmail.com>
- <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
- <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
-In-Reply-To: <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
+References: <ca3435b5-25de-727d-ca46-a88a234f9fc5@gmail.com>
+ <CAPnjgZ1eCwAg=i27Kkd0mk7PeR8Eu_955utAjBfkNrMvKZyUgw@mail.gmail.com>
+ <b99a114b-2715-2cba-cb0f-0dfafd32c29d@gmail.com>
+In-Reply-To: <b99a114b-2715-2cba-cb0f-0dfafd32c29d@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 15:10:47 -0700
-Message-ID: <CAPnjgZ1Tb4kJJxzBqgVceX4R4r_CF2SGXAEYf3SPFe_QqbUEBg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- u-boot@lists.denx.de
+Date: Tue, 21 Nov 2023 15:11:13 -0700
+Message-ID: <CAPnjgZ2t3RiCUjxknrPRqxEcEJtCcPOL=PGN6uuaVRJiWDQ3hA@mail.gmail.com>
+Subject: Re: U-Booters at LPC
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,83 +82,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Nov 2023 at 10:32, Sam Protsenko <semen.protsenko@linaro.org> wr=
-ote:
->
-> On Mon, Nov 13, 2023 at 12:01=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > The 'port_id' seems to be needed for ARCH_EXYNOS4 boards. Because
-> > > Exynos4 doesn't have proper DM clocks, it uses 'id' property to get
-> > > corresponding UART clock frequency from its mach code.
-> > >
-> > > Here is what's happening in the serial driver in case of Exynos4:
-> > >
-> > >   1. get_uart_clk(port_id) is called
-> > >   2. which in turn calls exynos4_get_uart_clk(port_id)
-> > >   3. which uses "port_id" value to read corresponding bits of of
-> > > CLK_SRC_PERIL0 register
-> > >   4. those bits are used to get corresponding PLL clock's frequency
-> > >   5. which is in turn used to calculate UART clock rate
-> > >   6. calculated rate is returned by get_uart_clk() to serial driver
-> > >
-> > > So I don't see any *easy* way we can get rid of that id property.
-> > >
-> > > The proper way of doing that would require converting Exynos4 clock
-> > > code to CCF (enabling CONFIG_CLK_EXYNOS). Which of course also means
-> > > implementing clocks in dts, akin to kernel's exynos4.dtsi. Then it'll
-> > > be possible to get rid of 'id' property.
-> >
-> > That sounds good!
-> >
-> > >
-> > > Maybe I'm missing something, please let me know.
-> >
-> > An easy way in the meantime would be to look at the compatible / reg
-> > property, e.g. here is a sketch:
-> >
-> > static int get_id(ofnode node)
-> > {
-> > ulong addr =3D (ulong)plat->reg;
-> > if (ofnode_device_is_compatible(node, "samsung,exynos4210-uart")) {
-> >     return (addr >> 16) & 0xf;
-> > ...
-> >
-> > reg =3D <0x13800000 0x3c>;
-> > id =3D <0>;
-> > };
-> >
-> > serail_1: serial@13810000 {
-> > compatible =3D "samsung,exynos4210-uart";
-> > reg =3D <0x13810000 0x3c>;
-> > id =3D <1>;
-> > };
-> >
-> > serial_2: serial@13820000 {
-> > compatible =3D "samsung,exynos4210-uart";
-> > reg =3D <0x13820000 0x3c>;
-> > id =3D <2>;
-> > };
-> >
-> > serial_3: serial@13830000 {
-> > compatible =3D "samsung,exynos4210-uart";
-> > reg =3D <0x13830000 0x3c>;
-> > id =3D <3>;
-> > };
-> >
-> > serial_4: serial@13840000 {
-> > compatible =3D "samsung,exynos4210-uart";
-> > reg =3D <0x13840000 0x3c>;
-> > id =3D <4>;
-> >
->
-> To be honest, I'm a bit of busy right now working on U-Boot port for a
-> new Exynos dev board, which I want to finalize and upstream ASAP. Do
-> you think it's possible to take this one as is for now? At least it
-> fixes one issue (fdtdec API and global data pointer).
->
-> Thanks!
+Hi Sean,
 
-Yes, OK with me.
+On Tue, 14 Nov 2023 at 06:30, Sean Anderson <seanga2@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> On 11/13/23 15:26, Simon Glass wrote:
+> > Hi Sean,
+> >
+> > On Mon, 13 Nov 2023 at 11:15, Sean Anderson <seanga2@gmail.com> wrote:
+> >>
+> >> Hi All,
+> >>
+> >> I'm at LPC this week, and I'd love to chat with anyone else who's there
+> >> in person.
+> >
+> > That would be good, but sadly I am not :-(
+>
+> Ah, well, there's always more conferences. Maybe EOSS next year?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+I hope...I might have a lot going on in April...when does the CFP open/close?
+
+Regards,
+Simon
