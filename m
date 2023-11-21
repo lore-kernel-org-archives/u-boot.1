@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE22AC5ACB3
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 04:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B44C54FB9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 05:00:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EEC98744B;
-	Tue, 21 Nov 2023 05:53:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EB2698720A;
+	Tue, 21 Nov 2023 06:00:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HJlHK3f3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QJI+6FcC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AF998744B; Tue, 21 Nov 2023 05:53:26 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 86867870F8; Tue, 21 Nov 2023 06:00:25 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B5568720A
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 05:53:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C017A8744B
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-280cd4e6f47so1132737a91.1
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 20:53:20 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1cc28719cb0so9120715ad.0
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 21:00:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700542399; x=1701147199; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700542821; x=1701147621; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dmEfQts0T6W+zgjRvMGJw9o9GmiTPxAUf+Bom2keARs=;
- b=HJlHK3f3/Gm2cGhojMdrKpMdGEcw53W5qmRIyu+xAwu5inLjENBY94rWr0+8+cFm0d
- TWfrqrQlhQreDyjbb4Vlk2XRuI56xv84PZ+p//x39NT+Kzw8VE3qsaiF/bTKiv4+kph/
- TtMJbaIUsthDZ2pTQXnIGjdDtTEXU9Az6/fhZ3r+Qvz4l1ezSttk/IMQoP5K3qGTwTGM
- 6EKCTeBKCjnB1M50VIHS0f7pVM2IQ7lb/1bwomA7uojFlRQUZOrNpM4pC1qkdCI4ma10
- Xj7XjGBaGA28OeVbIn4D/uDLwJZifMSpBrqZB0l5joUjZtc5mXX1FAdt8GnJTjvEEYjv
- Adkg==
+ bh=k+cpgU+aBGNJ3v4PH4Wp/jZVvawmxWsyemz3wTzFW8g=;
+ b=QJI+6FcC/315CiKL42xm0WDzcFaKhIIGTsQ9VNr1G2bjtKQZ48miUTdx85ug6j93S7
+ mM53kUzxkfRo3E41DbptX0GcjlDZoPgxpWWyJ47FWktSM8z0LIw6Te5RpbMvmyADvoKh
+ RHRAes3rJ1mGlUfj9qcvL2YfMDWNoM6NRX28Wj1wB4stivthtoEtKY1SuM6A3W1hcAaC
+ +LhyrL9i7vqgIMlG9iNmSlwn7HT1yhYEQMJf10JtpofC88G7PtRHhTeHUDfVOu+sR2Lr
+ t9dRCJNwgnZasNncYVIYkHNUEE2cxhD6ArFx6epj3Q9Cz3qSkNeD7SSG004ltK27IIQs
+ WXtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700542399; x=1701147199;
+ d=1e100.net; s=20230601; t=1700542821; x=1701147621;
  h=in-reply-to:content-disposition:mime-version:references
  :mail-followup-to:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dmEfQts0T6W+zgjRvMGJw9o9GmiTPxAUf+Bom2keARs=;
- b=b4e0pefbjau53Fz/RuJdZhRFqy372i+ARCiMsgwSV1/ZS6QtgnIHPungciupA5ePaH
- rPJLOJhoZBymUs7lVZ6FWrqdpbj5syza8uNfrTjr6iDc0hWb7/Fbl7e8KQ10ISHiSsNQ
- IL858ILYkJPv93CCixVakyEfvNUDd8tqkpxDiT+3Y90cSkV9/f7KNHDFBIp/yGEyHTOP
- Szx320jTsdVLyMz/k4qLtcJyePD247CY+PfegbK8bsXN97S3GSGiLtekAqlk9xQ7QUBl
- SuUi5RgJX81CXp4UilZFlJpCQMuCK04rY1LHXJbr56y/D2hCfwfV+oHUou7yDVz2m+5S
- C2xg==
-X-Gm-Message-State: AOJu0YxNqCyhkAGbetXc+HWpciUTvwu+wemcFjTkzv432k+tl1LAWDpb
- OxIea9MwLg55tW3rLW0gz2QqzQ==
-X-Google-Smtp-Source: AGHT+IEuPnxBVqZlLHENiOwL7VMzu9jaoQzLkzIpvIP3N8UeGYNXIZzp37ZB19CyEwXcTKmuVpX5MA==
-X-Received: by 2002:a05:6a20:da95:b0:185:a0eb:8574 with SMTP id
- iy21-20020a056a20da9500b00185a0eb8574mr14886781pzb.5.1700542398924; 
- Mon, 20 Nov 2023 20:53:18 -0800 (PST)
+ bh=k+cpgU+aBGNJ3v4PH4Wp/jZVvawmxWsyemz3wTzFW8g=;
+ b=LJvE5buX+P4HErLrg3/ElMOVrHfNml42w5s8tsXX7E/Mf5NFg148EQSHlSNu/iDE4R
+ AqHi8KBuaHZpY9wycRm6+o3Duq9+pjphzy8VCUBH/1/d/fUtf0nKqtl0lUxRVx7JieqM
+ wpkASqn5ncoFG31yMpLNjE0pKmJ99wBVQF5npzpWPxtm08MrH+PUH41qwhqCTjsB9OUl
+ Q8Dc7k4TP8Jgklt/bW2XWaHSM9tkZClxBP+nc5Y/ZtDyY/YCk5RPdikBhqYnXMJaIaQF
+ zW1j28E11U4pzRdNpuVoo/WfxEN66wilcax4sPT52OfSVLRYsKqowtuxVZ3G3SWDZKK7
+ DfhA==
+X-Gm-Message-State: AOJu0YziJBaZ7LWNF0i/kc6YeunGukuek8Z6oq9Mhhn/WZSvufcD7Cuc
+ 3oBqbLmxD9MiRBjZBcFX3Vos9A==
+X-Google-Smtp-Source: AGHT+IFvxmdHp5vHKVud0JmGo4fxAAn/4n8MhopevQqCQbcwlkduMFj1cCYWoK22Q4KUTjU08+sIig==
+X-Received: by 2002:a17:903:22c1:b0:1cf:5806:5634 with SMTP id
+ y1-20020a17090322c100b001cf58065634mr8630949plg.1.1700542820950; 
+ Mon, 20 Nov 2023 21:00:20 -0800 (PST)
 Received: from octopus ([2400:4050:c3e1:100:f6af:a59c:7ca:897f])
  by smtp.gmail.com with ESMTPSA id
- i6-20020a170902eb4600b001b898595be7sm6871935pli.291.2023.11.20.20.53.16
+ ij26-20020a170902ab5a00b001cc1f504082sm7120150plb.56.2023.11.20.21.00.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 20:53:18 -0800 (PST)
-Date: Tue, 21 Nov 2023 13:53:15 +0900
+ Mon, 20 Nov 2023 21:00:20 -0800 (PST)
+Date: Tue, 21 Nov 2023 14:00:16 +0900
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
  ilias.apalodimas@linaro.org
-Subject: Re: [PATCH v2 02/12] cmd: bootefi: re-organize do_bootefi()
-Message-ID: <ZVw3u6jgCKoFUKN2@octopus>
+Subject: Re: [PATCH v2 03/12] cmd: bootefi: carve out EFI boot manager
+ interface
+Message-ID: <ZVw5YCx83nn3RgHW@octopus>
 Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
  trini@konsulko.com, sjg@chromium.org, ilias.apalodimas@linaro.org
 References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
- <20231121012950.156539-3-takahiro.akashi@linaro.org>
- <26ddf551-dc01-4873-956d-322bb95ca981@gmx.de>
+ <20231121012950.156539-4-takahiro.akashi@linaro.org>
+ <fffc514b-a986-482c-a468-6d52598a046e@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <26ddf551-dc01-4873-956d-322bb95ca981@gmx.de>
+In-Reply-To: <fffc514b-a986-482c-a468-6d52598a046e@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,279 +98,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Tue, Nov 21, 2023 at 04:31:40AM +0100, Heinrich Schuchardt wrote:
+On Tue, Nov 21, 2023 at 04:38:12AM +0100, Heinrich Schuchardt wrote:
 > On 11/21/23 02:29, AKASHI Takahiro wrote:
-> > Replicate some code and re-organize do_bootefi() into three cases, which
-> > will be carved out as independent functions in the next two commits.
+> > Carve EFI boot manager related code out of do_bootefi_image() in order
+> > to move boot manager specific code into library directory in the later
+> > commit.
 > > 
 > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 > > ---
-> >   cmd/Kconfig          | 15 ++++++--
-> >   cmd/bootefi.c        | 82 ++++++++++++++++++++++++++++++--------------
-> >   include/efi_loader.h |  2 --
-> >   3 files changed, 69 insertions(+), 30 deletions(-)
+> >   cmd/bootefi.c | 43 ++++++++++++++++++++++++-------------------
+> >   1 file changed, 24 insertions(+), 19 deletions(-)
 > > 
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 6f636155e5b6..4cf9a210c4a1 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -362,9 +362,19 @@ config CMD_BOOTEFI
-> >   	help
-> >   	  Boot an EFI image from memory.
-> > 
-> > +if CMD_BOOTEFI
-> > +config CMD_BOOTEFI_BINARY
-> > +	bool "Allow booting an EFI binary directly"
-> > +	depends on BOOTEFI_BOOTMGR
-> 
-> Why should booting a known binary depend on the boot manager?
-
-Because I tried to maintain the meaning of CONFIG_BOOTEFI_BOOTMGR
-at this point of refactoring.
-This configuration will eventually be changed to
-config CMD_BOOTEFI_BINARY
-        bool "Allow booting an EFI binary directly"
-        depends on EFI_BINARY_EXEC
-        default y
-in patch#9.
-
-> > +	default y
-> > +	help
-> > +	  Select this option to enable direct execution of binary at 'bootefi'.
-> > +	  This subcommand will allow you to load the UEFI binary using
-> > +	  other U-Boot commands or external methods and then run it.
-> > +
-> >   config CMD_BOOTEFI_BOOTMGR
-> >   	bool "UEFI Boot Manager command"
-> > -	depends on BOOTEFI_BOOTMGR && CMD_BOOTEFI
-> > +	depends on BOOTEFI_BOOTMGR
-> >   	default y
-> >   	help
-> >   	  Select this option to enable the 'bootmgr' subcommand of 'bootefi'.
-> > @@ -373,7 +383,7 @@ config CMD_BOOTEFI_BOOTMGR
-> > 
-> >   config CMD_BOOTEFI_HELLO_COMPILE
-> >   	bool "Compile a standard EFI hello world binary for testing"
-> > -	depends on CMD_BOOTEFI && !CPU_V7M
-> > +	depends on !CPU_V7M
-> 
-> Why do we have this dependency?
-
-CPU_V7M?
-It was introduced in your commit:
----
-commit 0ea8741ff65e
-Author: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Date:   Sun Dec 30 10:11:14 2018 +0100
-
-    efi_loader: CMD_BOOTEFI_HELLO_COMPILE in configs
----
-
-> EFI_LOADER cannot be selected for SYS_CPU=armv7m.
-
-If not needed, you can delete it, but it is out of scope
-of this patch series.
-
-> >   	default y
-> >   	help
-> >   	  This compiles a standard EFI hello world application with U-Boot so
-> > @@ -395,6 +405,7 @@ config CMD_BOOTEFI_HELLO
-> >   	  up EFI support on a new architecture.
-> > 
-> >   source lib/efi_selftest/Kconfig
-> > +endif
-> > 
-> >   config CMD_BOOTMENU
-> >   	bool "bootmenu"
 > > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> > index 190ccba260e0..e9e5ab67a1f5 100644
+> > index e9e5ab67a1f5..87910c42333a 100644
 > > --- a/cmd/bootefi.c
 > > +++ b/cmd/bootefi.c
-> > @@ -503,7 +503,6 @@ out:
-> >   	return (ret != EFI_SUCCESS) ? ret : ret2;
+> > @@ -413,28 +413,40 @@ out:
 > >   }
-> > 
-> > -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
-> >   static efi_status_t bootefi_run_prepare(const char *load_options_path,
-> >   		struct efi_device_path *device_path,
-> >   		struct efi_device_path *image_path,
-> > @@ -593,7 +592,6 @@ static int do_efi_selftest(void)
-> > 
-> >   	return ret != EFI_SUCCESS;
-> >   }
-> > -#endif /* CONFIG_CMD_BOOTEFI_SELFTEST */
 > > 
 > >   /**
-> >    * do_bootefi() - execute `bootefi` command
-> > @@ -615,14 +613,6 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
-> >   	if (argc < 2)
-> >   		return CMD_RET_USAGE;
-> > 
-> > -	/* Initialize EFI drivers */
-> > -	ret = efi_init_obj_list();
-> > -	if (ret != EFI_SUCCESS) {
-> > -		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > -			ret & ~EFI_ERROR_MASK);
-> > -		return CMD_RET_FAILURE;
-> > -	}
-> > -
-> >   	if (argc > 2) {
-> >   		uintptr_t fdt_addr;
-> > 
-> > @@ -631,29 +621,54 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
-> >   	} else {
-> >   		fdt = EFI_FDT_USE_INTERNAL;
-> >   	}
-> > -	ret = efi_install_fdt(fdt);
-> > -	if (ret == EFI_INVALID_PARAMETER)
-> > -		return CMD_RET_USAGE;
-> > -	else if (ret != EFI_SUCCESS)
-> > -		return CMD_RET_FAILURE;
-> > 
-> > -	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
-> > -		if (!strcmp(argv[1], "bootmgr"))
-> > -			return do_efibootmgr();
-> > +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
-> > +	    !strcmp(argv[1], "bootmgr")) {
+> > - * do_efibootmgr() - execute EFI boot manager
+> > + * efi_bootmgr_run() - execute EFI boot manager
+> > + * fdt:	Flat device tree
+> > + *
+> > + * Invoke EFI boot manager and execute a binary depending on
+> > + * boot options. If @fdt is not NULL, it will be passed to
+> > + * the executed binary.
 > 
-> 
-> https://docs.u-boot.org/en/latest/develop/commands.html
-> suggests to use U_BOOT_CMD_MKENT() to define sub-commands.
+> How about the fallback to the control device-tree?
 
-As you know, these "if (!strcmp(argv[1], ...)" code exist since
-the early days when efi_selftest and bootmgr sub-commands were
-introduced in bootefi.
+efi_install_fdt() will take care of that if fdt == EFI_FDT_INTERNAL_USE.
+I didn't change any semantics.
+I will add some description here to clarify it.
 
-In my personal preference, I would move bootmgr to a new independent
-command, efi_selftest to efidebug, leaving only binary-execution
-syntax in bootefi.
-(So no sub-command.)
+> How about booting with ACPI?
 
-> 
-> > +		/* Initialize EFI drivers */
-> > +		ret = efi_init_obj_list();
-> 
-> We should not duplicate this call for each sub-command.
-
-Please also take a look at the succeeding commits.
-A call to efi_init_obj_list() will be included in independent
-library functions, either efi_bootmgr_run(), efi_binary_run()
-or do_bootefi() (for efi_selftest) so that a caller of these
-functions doesn't have to know/care much about detailed APIs.
-
-> 
-> > +		if (ret != EFI_SUCCESS) {
-> > +			log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > +				ret & ~EFI_ERROR_MASK);
-> > +			return CMD_RET_FAILURE;
-> > +		}
-> > +
-> > +		ret = efi_install_fdt(fdt);
-> > +		if (ret == EFI_INVALID_PARAMETER)
-> > +			return CMD_RET_USAGE;
-> > +		else if (ret != EFI_SUCCESS)
-> > +			return CMD_RET_FAILURE;
-> 
-> These lines could be moved into do_efibootmgr.
-
-It will be done in patch#3 when carving out bootmgr specific code.
-
-> Should we move the translations of the return codes into efi_install_fdt?
-
-No, I don't think so. efi_install_fdt() can be called not only from
-the command (bootefi) but also from other library code (at least,
-efi_bootmgr_run() and efi_binary_run()).
+Not sure what is your concern, but
+I didn't change any semantics in bootmgr use-case.
 
 -Takahiro Akashi
 
+> 
 > Best regards
 > 
 > Heinrich
 > 
-> > +
-> > +		return do_efibootmgr();
-> >   	}
-> > -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
-> > -	if (!strcmp(argv[1], "selftest"))
-> > +
-> > +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
-> > +	    !strcmp(argv[1], "selftest")) {
-> > +		/* Initialize EFI drivers */
-> > +		ret = efi_init_obj_list();
-> > +		if (ret != EFI_SUCCESS) {
-> > +			log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
-> > +				ret & ~EFI_ERROR_MASK);
-> > +			return CMD_RET_FAILURE;
-> > +		}
-> > +
-> > +		ret = efi_install_fdt(fdt);
-> > +		if (ret == EFI_INVALID_PARAMETER)
-> > +			return CMD_RET_USAGE;
-> > +		else if (ret != EFI_SUCCESS)
-> > +			return CMD_RET_FAILURE;
-> > +
-> >   		return do_efi_selftest();
-> > -#endif
-> > +	}
+> >    *
+> >    * Return:	status code
+> >    */
+> > -static int do_efibootmgr(void)
+> > +static efi_status_t efi_bootmgr_run(void *fdt)
+> >   {
+> >   	efi_handle_t handle;
+> > -	efi_status_t ret;
+> >   	void *load_options;
+> > +	efi_status_t ret;
 > > 
-> > -#ifdef CONFIG_CMD_BOOTEFI_HELLO
-> > -	if (!strcmp(argv[1], "hello")) {
-> > +	if (!IS_ENABLED(CONFIG_CMD_BOOTEFI_BINARY))
-> > +		return CMD_RET_SUCCESS;
-> > +
-> > +	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_HELLO) &&
-> > +	    !strcmp(argv[1], "hello")) {
-> >   		image_buf = __efi_helloworld_begin;
-> >   		size = __efi_helloworld_end - __efi_helloworld_begin;
-> >   		efi_clear_bootdev();
-> > -	} else
-> > -#endif
-> > -	{
-> > +	} else {
-> >   		addr = strtoul(argv[1], NULL, 16);
-> >   		/* Check that a numeric value was passed */
-> >   		if (!addr)
-> > @@ -675,6 +690,21 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
-> >   			size = image_size;
-> >   		}
-> >   	}
-> > +
+> > -	ret = efi_bootmgr_load(&handle, &load_options);
 > > +	/* Initialize EFI drivers */
 > > +	ret = efi_init_obj_list();
-> > +	if (ret != EFI_SUCCESS) {
+> >   	if (ret != EFI_SUCCESS) {
+> > -		log_notice("EFI boot manager: Cannot load any image\n");
 > > +		log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
 > > +			ret & ~EFI_ERROR_MASK);
-> > +		return CMD_RET_FAILURE;
+> >   		return CMD_RET_FAILURE;
+> >   	}
+> > 
+> > -	ret = do_bootefi_exec(handle, load_options);
+> > -
+> > +	ret = efi_install_fdt(fdt);
+> >   	if (ret != EFI_SUCCESS)
+> > -		return CMD_RET_FAILURE;
+> > +		return ret;
+> > 
+> > -	return CMD_RET_SUCCESS;
+> > +	ret = efi_bootmgr_load(&handle, &load_options);
+> > +	if (ret != EFI_SUCCESS) {
+> > +		log_notice("EFI boot manager: Cannot load any image\n");
+> > +		return ret;
 > > +	}
 > > +
-> > +	ret = efi_install_fdt(fdt);
-> > +	if (ret == EFI_INVALID_PARAMETER)
-> > +		return CMD_RET_USAGE;
-> > +	else if (ret != EFI_SUCCESS)
-> > +		return CMD_RET_FAILURE;
-> > +
-> >   	ret = efi_run_image(image_buf, size);
+> > +	return do_bootefi_exec(handle, load_options);
+> >   }
 > > 
-> >   	if (ret != EFI_SUCCESS)
-> > diff --git a/include/efi_loader.h b/include/efi_loader.h
-> > index 664dae28f882..44436d346286 100644
-> > --- a/include/efi_loader.h
-> > +++ b/include/efi_loader.h
-> > @@ -879,14 +879,12 @@ efi_status_t __efi_runtime EFIAPI efi_get_time(
+> >   /**
+> > @@ -624,21 +636,14 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
 > > 
-> >   efi_status_t __efi_runtime EFIAPI efi_set_time(struct efi_time *time);
+> >   	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
+> >   	    !strcmp(argv[1], "bootmgr")) {
+> > -		/* Initialize EFI drivers */
+> > -		ret = efi_init_obj_list();
+> > -		if (ret != EFI_SUCCESS) {
+> > -			log_err("Error: Cannot initialize UEFI sub-system, r = %lu\n",
+> > -				ret & ~EFI_ERROR_MASK);
+> > -			return CMD_RET_FAILURE;
+> > -		}
+> > +		ret = efi_bootmgr_run(fdt);
 > > 
-> > -#ifdef CONFIG_CMD_BOOTEFI_SELFTEST
-> >   /*
-> >    * Entry point for the tests of the EFI API.
-> >    * It is called by 'bootefi selftest'
-> >    */
-> >   efi_status_t EFIAPI efi_selftest(efi_handle_t image_handle,
-> >   				 struct efi_system_table *systab);
-> > -#endif
+> > -		ret = efi_install_fdt(fdt);
+> >   		if (ret == EFI_INVALID_PARAMETER)
+> >   			return CMD_RET_USAGE;
+> > -		else if (ret != EFI_SUCCESS)
+> > +		else if (ret)
+> >   			return CMD_RET_FAILURE;
 > > 
-> >   efi_status_t EFIAPI efi_get_variable(u16 *variable_name,
-> >   				     const efi_guid_t *vendor, u32 *attributes,
+> > -		return do_efibootmgr();
+> > +		return CMD_RET_SUCCESS;
+> >   	}
+> > 
+> >   	if (IS_ENABLED(CONFIG_CMD_BOOTEFI_SELFTEST) &&
 > 
