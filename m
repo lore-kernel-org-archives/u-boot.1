@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64E6EC54FB9
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C18C54FB9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:36:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3353987593;
-	Tue, 21 Nov 2023 12:36:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95733874FC;
+	Tue, 21 Nov 2023 12:36:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J9JQRcs9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CfYQV2gY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0039A87563; Tue, 21 Nov 2023 12:36:07 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 4CD4687438; Tue, 21 Nov 2023 12:36:08 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0166870BC
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BE3387438
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7afff3ea94dso196026339f.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:04 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-7b05e647c09so183692239f.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700566563; x=1701171363; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WzdIZHDW3HYtz8r0kjoEFMkxcB+rmqZEqk+bXR5hOv0=;
- b=J9JQRcs9WesY8kUNIgsvmQ4vPqC42aQxmhoBVfq3q5GSbMKLlt6QrDoGolRW1nT/Rj
- 2tqu5DWVDVMmcobxvSZS//g8PvO1Q+O1u27/O/W9LoTm+AuZwwtepcchgq5lamCjHowO
- YrCSLcUEy5KmBBY0Dg0u14h0M5xjRLtj+6mL4=
+ d=chromium.org; s=google; t=1700566564; x=1701171364; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9y5h/1c9Kh328O9+SckjW2urJLWbt1UFKR5X8ZqEDAo=;
+ b=CfYQV2gYOuCl5zUdD04jsj/bg/CwTTs3KAPptWs0og04V6bPnGMuhYpEHY7Lzrlgdy
+ IKikVDsKiXvkMTOiC625AlA5ONyIkv117rkwY3Oi3khxN8qEqOpX4CPfZXRZoW7/2BMO
+ dSxAIcNeRw5Yt8F/usmH+jXsm7Kg19Jh+0c7E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700566563; x=1701171363;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WzdIZHDW3HYtz8r0kjoEFMkxcB+rmqZEqk+bXR5hOv0=;
- b=btsh+Z+xWcCOe0dBCLeUs7ZLnHzWcbXBy+KdMQocJHsSlksXa8IP02dI2/wRO52dMh
- chUkiGg8nIg55RxqyUTJNXXGPX7/uDHdwXAEs2li7v98OzkgbPrgGdsP0tGnPud8Yu8d
- /W2sqis/Vk2K5pPMrdqTB4KV6Q3gJfWLkmUKLUB08FX6+fwSAogNP8UOm3MkiwLFlwmK
- 2RZW4W360Syu2X2jk22cPuPe/g3RDbzfxVNUr9Jay/Ztt7LUnCZ7TGwytBLw//w5rk/L
- 6Qnzq/p4CkuHEGnjLmwJf/u3eJoDKVh5fShk6SQpajfGvIwHY19czRqzCXfA4BGWEgyZ
- OmUw==
-X-Gm-Message-State: AOJu0YzIh2YnmXi1hTRrtMNYNMGwwfYcfHbq/wVgYuoGtS3wrVNfsVNh
- mPLtoDRI8AeASwp26co1rvs47PFKi7wDPQOJ6jY+CQ==
-X-Google-Smtp-Source: AGHT+IFeSm9aAFjeVBG4rIk9MRIMyprAr6b8tiXHbqnRaZ/Wl3IIwmaIb1XkpIhYIAYHGCONF4+c6A==
-X-Received: by 2002:a05:6602:2358:b0:7ab:ec1f:f486 with SMTP id
- r24-20020a056602235800b007abec1ff486mr12768383iot.4.1700566563263; 
- Tue, 21 Nov 2023 03:36:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700566564; x=1701171364;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9y5h/1c9Kh328O9+SckjW2urJLWbt1UFKR5X8ZqEDAo=;
+ b=JmBOl1pwwPv3OtK15vvkYwZlyRk1TKLmDVHlb7Ur9HcWycnly4QHP14vTGOj+fXhZj
+ uXuL++Elb7oWe5rBGpWLrMZYET3aM6IHKlUDFOssud4rKR/E5Xo17j5MksbXAmA0FWWk
+ y0pcB9tM0bDMGA5ts+ZlmzSkqL2QleyI9dO1HwxNxzuIvarQbfnBwhAz53tiGZngSAgc
+ Fvd/6jupjUcv4StiRDRh0mmWPa9yAyj75Kza5/hjaMZOXIDOIanEj5FF6AmUrRE7Swfs
+ fotLnCT7pe5/fV2j75x1XKj+3R1x6f1y2Txh5QqNUTGFZDi3ReBgfXlJ0MElScVH2cdh
+ qSIg==
+X-Gm-Message-State: AOJu0Yz8egZo6bC0eDbEYaftnHOG3l7wYrtAgZTSVVjc7vr3AOAPPQcP
+ 6ekQzXwyGpgzaGCOuEigygpgqicXRDk8+wowpZrnQA==
+X-Google-Smtp-Source: AGHT+IEFQQIZDavPugIlyBVd91lFUhZVqfls6oWOTcAi5WerK0WBEU64UXz4skm42/8mH6eMLgtHKw==
+X-Received: by 2002:a6b:d211:0:b0:7b0:aea8:2644 with SMTP id
+ q17-20020a6bd211000000b007b0aea82644mr7228586iob.8.1700566564111; 
+ Tue, 21 Nov 2023 03:36:04 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.02
+ h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 03:36:02 -0800 (PST)
+ Tue, 21 Nov 2023 03:36:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/7] efi: Partial attempt at a test for EFI bootmeth
-Date: Tue, 21 Nov 2023 04:35:46 -0700
-Message-ID: <20231121113557.800353-1-sjg@chromium.org>
+Subject: [PATCH 1/7] efi: Use puts() in cout so that console recording works
+Date: Tue, 21 Nov 2023 04:35:47 -0700
+Message-ID: <20231121113557.800353-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+In-Reply-To: <20231121113557.800353-1-sjg@chromium.org>
+References: <20231121113557.800353-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,40 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test coverage for the EFI bootmeth is incomplete since it does not
-actually boot the application.
+At present EFI output to the console use fputs() which bypasses the
+console-recording feature. This makes it impossible for tests to check
+the output of an EFI app.
 
-This series makes an attempt at this.
+There doesn't seem to be any need to do this bypass, so adjust it to
+simply use the puts() function.
 
-However there are at least two problems:
-1. The test does not set up the loaded image properly, so it isn't
-found by the app.
-2. The test needs to use USB instead of mmc, so that usb_stop() is
-called
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
+ lib/efi_loader/efi_console.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Simon Glass (7):
-  efi: Use puts() in cout so that console recording works
-  efi: Show the vendor in helloworld
-  efi: test: Create a disk image with and EFI app in it
-  WIP: efi: Disable ANSI output
-  WIP: efi: Add a test for the EFI bootmeth
-  WIP: efi: Allow helloworld to exit boot services
-  WIP: efi: debugging
-
- arch/sandbox/dts/test.dts     | 10 ++++++-
- boot/bootflow.c               |  2 ++
- boot/bootmeth_efi.c           |  1 +
- cmd/bootefi.c                 |  1 +
- include/efi_loader.h          | 14 +++++++--
- lib/efi_loader/efi_boottime.c |  5 ++++
- lib/efi_loader/efi_console.c  | 19 +++++-------
- lib/efi_loader/efi_setup.c    |  2 +-
- lib/efi_loader/helloworld.c   | 39 ++++++++++++++++++++++++-
- test/boot/bootflow.c          | 55 ++++++++++++++++++++++++++++++++++-
- test/py/tests/test_ut.py      | 32 ++++++++++++++++++++
- 11 files changed, 163 insertions(+), 17 deletions(-)
-
+diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+index a2d137d7a9e1..28087582e8d6 100644
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -182,7 +182,7 @@ static efi_status_t EFIAPI efi_cout_output_string(
+ 	}
+ 	pos = buf;
+ 	utf16_utf8_strcpy(&pos, string);
+-	fputs(stdout, buf);
++	puts(buf);
+ 	free(buf);
+ 
+ 	/*
 -- 
 2.43.0.rc1.413.gea7ed67945-goog
 
