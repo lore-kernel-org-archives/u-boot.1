@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87077C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACDAC61D97
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E565987585;
-	Tue, 21 Nov 2023 23:11:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1CB987563;
+	Tue, 21 Nov 2023 23:11:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V/gZz5uB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M09gzfBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E1728269F; Tue, 21 Nov 2023 23:11:00 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 56F5B875F4; Tue, 21 Nov 2023 23:11:02 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B3BD87563
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9965F8760E
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:10:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-548d60a4d60so3212637a12.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:58 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a02d12a2444so131754966b.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:10:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700604657; x=1701209457; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oJMDh5oFlDbQfLOyve1qbfQYailgPcqSoPiHs8KXsVw=;
- b=V/gZz5uBwVVyEWD9br7nUi9kdeFBGms6JNzjqNrHqvyUiVKOVKzBWIva47yVwRV+JE
- 0XujnPG9D2xFK5HDPLKtxKsaPdbQj/yDaWtdwaFzT4UiOHR1/0rZSnuvcOdxDrU38+sZ
- x/bYyTVIqdqBlAztwlsyW9QjuzDkNsrVhCgGc=
+ d=chromium.org; s=google; t=1700604659; x=1701209459; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PgriTN/aJC6pBrIzZPRoL8V97aG5NtB6BIuX1T3kwW8=;
+ b=M09gzfBnNp2/O6f/O2mem8o14U7wXCsxz8HFeHLFnyjKUuKHntdmCrYzntG7ZTb6dC
+ YzvYTn4IHs4Ch+WuzroESz/MdyMFmqdW3LdbxckXW/Hchu4F5k3hvDqfJS1IdfwlBh3O
+ oVkLgRbj14N9d2negrLrc4pBeKYmbKf1GeRx4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700604657; x=1701209457;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oJMDh5oFlDbQfLOyve1qbfQYailgPcqSoPiHs8KXsVw=;
- b=FvCGMPHmPFAIwamDHNxfUBC+YVY5RP6wXX5jYgs5emMrAyTQp3ZmNArooYYXESzAjx
- 8v+IOmLRx/xUbYrPpS+yOdDqdoJ3GaW89pxrsOERBtuBAI8x2qfAQA/M8t6iQaTsHcui
- qfE6zb+RGCDuJWy4MgdpxTbYoKBLfA4adu2DCEibyCMtXX1nOvrNhwES/3pyvN+uN+Hq
- u8+F+o1vp5kDA5nI6sVK53QSISPWk978lRAXhv9lRYKwyPl7CzP8vcfVVpAo+DAHoer7
- tTR32KiALiq9QrWkWGaQjsaL3J7Ar06ohTyNDc6BM3j8hyHkqxU8AseRj95hMVEVJqQF
- m8ZQ==
-X-Gm-Message-State: AOJu0YwB4aS1PUX2XobGy1dRavu9NQY5OtBDm4+d2sNy2YYl8GJjKczv
- 3yf9mjPrMJn1r0e88EZYGKP969lxBgKq8EyZwfNIzQ==
-X-Google-Smtp-Source: AGHT+IG8kEyQosGaifUO6rP4HisM8BNZB61jvIp7696VTMbwBkCB7Fozdl6k+ap4EQgdEedOfyF70AYLGV11Ieq858g=
-X-Received: by 2002:a17:906:198c:b0:9d0:51d4:4d87 with SMTP id
- g12-20020a170906198c00b009d051d44d87mr171650ejd.62.1700604657576; Tue, 21 Nov
- 2023 14:10:57 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700604659; x=1701209459;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PgriTN/aJC6pBrIzZPRoL8V97aG5NtB6BIuX1T3kwW8=;
+ b=YEAN38Gye/3NEaD8sEQ6Et/UbykOxtLsmy4ivKfhcPuZt1VlvsuCV1PhnIqU+l1+4D
+ xRycq4WDu80+L4vEBaEPWTTpZ1UrJ6Mf1GQdbP3135nzP3mJEyaSQHf6eidRdZ61A1Za
+ pEYLefsf/3gzUXfLi4+Q8nBMikT64WDt9vljVSxk7Z5e/hEMVXp35Y8ajlWNG79kMYwk
+ ZmUydBLTsYJpveVSfwgY4Uql0Ldr3X/f0Zo1Fw7aTpmxljdF/UCsegKuBbpNmK0F3uFj
+ HJ6iVHVb5Tr16P81h+NFjqPEz3dlpvvBkUB5RGgloSvPaH2TA5ymoKA98xcj1GPYd72W
+ QywQ==
+X-Gm-Message-State: AOJu0YxXdH7dum0+xYMskGgBht3dXKl7Ez6em6xfHTxvS2yRDmuFj1pV
+ mponScBmR4EOzN4xoI4E88Kx6jdItc9cEqYpD7PlEw==
+X-Google-Smtp-Source: AGHT+IG4Or490W1snnZTmJOHbijn4Uu36wCIB695m7kAbYC6nw9OK6mv3m2bAxnsZgVii21batyzZPepZ79geoJMtOY=
+X-Received: by 2002:a17:907:a0d6:b0:9bf:6200:fe33 with SMTP id
+ hw22-20020a170907a0d600b009bf6200fe33mr234861ejc.16.1700604659097; Tue, 21
+ Nov 2023 14:10:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-4-sjg@chromium.org>
- <539b4abc-be46-45c5-98d0-71f2b289540c@gmx.de>
-In-Reply-To: <539b4abc-be46-45c5-98d0-71f2b289540c@gmx.de>
+References: <20231107190601.17151-1-semen.protsenko@linaro.org>
+ <20231107190601.17151-3-semen.protsenko@linaro.org>
+ <CAPnjgZ2ae9UPanroXZLeNaB6bGN9hBczZcZSEEv=5t6Uz9WWQw@mail.gmail.com>
+ <CAPLW+4mtbbEZmQtik_qEtmo0Ehr7R=-yZOO8xVL2Dp0rCCHZ4Q@mail.gmail.com>
+ <CAPnjgZ2JCa0qB539w0WZ9Ur1mMuYON1_vk+kwSEraBLK8dpkaQ@mail.gmail.com>
+ <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
+In-Reply-To: <CAPLW+4nNpsVX3crBb7aYbLFdY-rigagCZgFX5Tft0KA7yVFhYg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 15:10:45 -0700
-Message-ID: <CAPnjgZ0SJFhEEHZBEBBcrgq-P_W7C6x810NENhOCh1ezevnnJQ@mail.gmail.com>
-Subject: Re: [PATCH 3/7] efi: test: Create a disk image with and EFI app in it
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 21 Nov 2023 15:10:47 -0700
+Message-ID: <CAPnjgZ1Tb4kJJxzBqgVceX4R4r_CF2SGXAEYf3SPFe_QqbUEBg@mail.gmail.com>
+Subject: Re: [PATCH 2/4] serial: s5p: Use livetree API to get "id" property
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,48 +88,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Tue, 21 Nov 2023 at 10:37, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 21 Nov 2023 at 10:32, Sam Protsenko <semen.protsenko@linaro.org> wr=
+ote:
 >
-> On 11/21/23 12:35, Simon Glass wrote:
-> > Create a new disk for use with test, which contains the sandbox
-> > helloworld app. This will be used to test the EFI boot bootmeth.
+> On Mon, Nov 13, 2023 at 12:01=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
+rote:
+> > >
+> > > The 'port_id' seems to be needed for ARCH_EXYNOS4 boards. Because
+> > > Exynos4 doesn't have proper DM clocks, it uses 'id' property to get
+> > > corresponding UART clock frequency from its mach code.
+> > >
+> > > Here is what's happening in the serial driver in case of Exynos4:
+> > >
+> > >   1. get_uart_clk(port_id) is called
+> > >   2. which in turn calls exynos4_get_uart_clk(port_id)
+> > >   3. which uses "port_id" value to read corresponding bits of of
+> > > CLK_SRC_PERIL0 register
+> > >   4. those bits are used to get corresponding PLL clock's frequency
+> > >   5. which is in turn used to calculate UART clock rate
+> > >   6. calculated rate is returned by get_uart_clk() to serial driver
+> > >
+> > > So I don't see any *easy* way we can get rid of that id property.
+> > >
+> > > The proper way of doing that would require converting Exynos4 clock
+> > > code to CCF (enabling CONFIG_CLK_EXYNOS). Which of course also means
+> > > implementing clocks in dts, akin to kernel's exynos4.dtsi. Then it'll
+> > > be possible to get rid of 'id' property.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
+> > That sounds good!
 > >
-> >   test/py/tests/test_ut.py | 32 ++++++++++++++++++++++++++++++++
-> >   1 file changed, 32 insertions(+)
+> > >
+> > > Maybe I'm missing something, please let me know.
 > >
-> > diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-> > index 1d9149a3f683..f6220c05238a 100644
-> > --- a/test/py/tests/test_ut.py
-> > +++ b/test/py/tests/test_ut.py
-> > @@ -468,6 +468,37 @@ def test_ut_dm_init(u_boot_console):
-> >       with open(fn, 'wb') as fh:
-> >           fh.write(data)
+> > An easy way in the meantime would be to look at the compatible / reg
+> > property, e.g. here is a sketch:
 > >
-> > +
-> > +def setup_efi_image(cons):
-> > +    """Create a 20MB disk image with an EFI app on it"""
-> > +    mmc_dev = 7
-> > +    fname, mnt = setup_image(cons, mmc_dev, 0xc, second_part=True)
+> > static int get_id(ofnode node)
+> > {
+> > ulong addr =3D (ulong)plat->reg;
+> > if (ofnode_device_is_compatible(node, "samsung,exynos4210-uart")) {
+> >     return (addr >> 16) & 0xf;
+> > ...
+> >
+> > reg =3D <0x13800000 0x3c>;
+> > id =3D <0>;
+> > };
+> >
+> > serail_1: serial@13810000 {
+> > compatible =3D "samsung,exynos4210-uart";
+> > reg =3D <0x13810000 0x3c>;
+> > id =3D <1>;
+> > };
+> >
+> > serial_2: serial@13820000 {
+> > compatible =3D "samsung,exynos4210-uart";
+> > reg =3D <0x13820000 0x3c>;
+> > id =3D <2>;
+> > };
+> >
+> > serial_3: serial@13830000 {
+> > compatible =3D "samsung,exynos4210-uart";
+> > reg =3D <0x13830000 0x3c>;
+> > id =3D <3>;
+> > };
+> >
+> > serial_4: serial@13840000 {
+> > compatible =3D "samsung,exynos4210-uart";
+> > reg =3D <0x13840000 0x3c>;
+> > id =3D <4>;
+> >
 >
-> If you would set the partition type GUID to ESP, U-Boot would stop to
-> complain about EFI variable that cannot be persisted.
-
-Doesn't that need a GPT partition type?
-
-We do use that for the ChromeOS bootmeth (in setup_cros_image) so we
-could use it here too.
-
+> To be honest, I'm a bit of busy right now working on U-Boot port for a
+> new Exynos dev board, which I want to finalize and upstream ASAP. Do
+> you think it's possible to take this one as is for now? At least it
+> fixes one issue (fdtdec API and global data pointer).
 >
-> There is a pending patch that wants to make the failure to persist EFI
-> variable fatal.
->
-> [RESEND,v2] efi_loader: Fix UEFI variable error handling
-> https://patchwork.ozlabs.org/project/uboot/patch/20231113161031.138304-1-o451686892@gmail.com/
+> Thanks!
 
-Regards,
-Simon
+Yes, OK with me.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
