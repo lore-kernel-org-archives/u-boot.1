@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951F9C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:06:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CC87C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:07:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7982871FC;
-	Tue, 21 Nov 2023 20:06:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DCB55871FC;
+	Tue, 21 Nov 2023 20:07:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gS57azk3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OYiWyzR1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C88987250; Tue, 21 Nov 2023 20:06:21 +0100 (CET)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 3801386FB2; Tue, 21 Nov 2023 20:07:28 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B965871CD
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:06:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E11E871FC
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:07:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-41cd4446cf5so36029861cf.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:06:18 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-778a6c440faso296744185a.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:07:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700593577; x=1701198377; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700593643; x=1701198443; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4C9rAVM4DIvb2rsjBxJhmj7Bx6z+Log8fFMY6QiBJJo=;
- b=gS57azk3jpVjJ8Cnn7MHhoQYunraQa0GYRMR++tG3aF4xHVxaFVKzzKE0bagGZnAiF
- pFALR0oiIRKyroqeIRmiCym/EbmusIS/TrZI7D0+BjtCsp2eHGFFIpzZzTfOLTUHE6kA
- Ih97agLiOWGUEcRCNMmX0gk8G1G+WYlCvbPXw=
+ bh=ix3JNel68a0Dvk75kNJO3KQAzLbCZH+r375Eg5PjIQ8=;
+ b=OYiWyzR1SnibozPQnuW4zdb/6z/rSv4cyX0+UjYJL350GfdXYsinnw6Mgu/WH1XNnS
+ m0W8AyOEvleIuGoEalkhqgemjxN0Uu4HY3vo7tcALgeZmdHYiCTpQbUNN69mZkcgMzIW
+ TVSWn8OORbkgGGDeKwkKdneZh6JW5nkYqL5Zk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700593577; x=1701198377;
+ d=1e100.net; s=20230601; t=1700593643; x=1701198443;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4C9rAVM4DIvb2rsjBxJhmj7Bx6z+Log8fFMY6QiBJJo=;
- b=pHwZv932WkZCdmHzQGNXWROs65Se0gWlVzzxdixNGpcV+Gz60oUpNSV80k7maDEsVX
- JL/b4RF0YkzpQDHakjNe4+aqowF2BP1bya7PW5wfaFpdHXST5SmUfvEBKZQB3X2pG+ow
- gBgcCy7HY7n5CvX/BJvRgTg6VsazyBqOjKqnt86g4qk81xwAP6lXaKGRXuf4C8HJUodQ
- ZmMbQdCXP1i7mJF2EKAKu0E+UpZyVvQ+LB3rBasl8OXn9zmlIsZu2pOw/A2k1v0/YQ4d
- /gqLazqSTHTmKmsgCyOnkPzRcDgL9sAYHkYviIFl4Zs8ssfShEZOV5zJP5CRKP2bQPN2
- oQTQ==
-X-Gm-Message-State: AOJu0YxenrwzTw3HX3/zWng7uA3GNqnW5COh87wN2BO5kOZxL25rIVh/
- cLXlaFEvOyBs4oBSeOTlmUnwWA==
-X-Google-Smtp-Source: AGHT+IFT1DdL0Rxp23hBUvS6L0XJSwTs63P4z5o1jOQYT7CnR6uLzrWZKbQvH9p3V1WQuGLpeZXgeQ==
-X-Received: by 2002:a05:622a:11c9:b0:418:f70:df1 with SMTP id
- n9-20020a05622a11c900b004180f700df1mr59236qtk.42.1700593577209; 
- Tue, 21 Nov 2023 11:06:17 -0800 (PST)
+ bh=ix3JNel68a0Dvk75kNJO3KQAzLbCZH+r375Eg5PjIQ8=;
+ b=CjOLVbpghRhg0U5z9iexcLIU9tTSqDPoalg2cSL3zUh9jqurlZSZarB9nMY4gicUNk
+ lnEOoKma8DOEjDyYKo9rikDjvhpORi+88ZPo9NnA+5AYaheID+yhqdkrucDtCUp4A62O
+ Ji9aK4JDNsyozTR7Nd0Rpe+Mfoof7mJXUIdb/4G7MZPs9CuRfBkEcxltxltvQkkZswqc
+ ijeBOwV0/VQR9bmLK0ubM4f9GEUdTAdF2J+y8r0bl79DOK1nYgQghTZnWLN/rfPZeSRY
+ cdHL9Yumg09U49m6tf52PPpUtw+DkIgaSC5/PE2Xj+SQGCZqZ0WPvWuqh1Ksn7CiyKH1
+ gRFg==
+X-Gm-Message-State: AOJu0YzYvnP4c0+R2m9sRUHApkBf0Wptimx2DjGe9F1543whNA76CAUh
+ iRxKZekOhYF8Esm9UErzB2nMWw==
+X-Google-Smtp-Source: AGHT+IEnjOjB1sgmpF+0K1fO1fWPD6Ak4SfDb4cyE+B2fKVL+eydhT8MFFEQb2x4cB8E9aB5Gzv5+A==
+X-Received: by 2002:a05:620a:1037:b0:773:c4c8:2d58 with SMTP id
+ a23-20020a05620a103700b00773c4c82d58mr9049950qkk.59.1700593643117; 
+ Tue, 21 Nov 2023 11:07:23 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
  [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
  by smtp.gmail.com with ESMTPSA id
- n5-20020ac86745000000b0041e9f3c3be8sm3806331qtp.23.2023.11.21.11.06.16
+ x10-20020ae9f80a000000b00767d8e12ce3sm3841828qkh.49.2023.11.21.11.07.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 11:06:16 -0800 (PST)
-Date: Tue, 21 Nov 2023 14:06:14 -0500
+ Tue, 21 Nov 2023 11:07:22 -0800 (PST)
+Date: Tue, 21 Nov 2023 14:07:20 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
@@ -74,15 +74,16 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
  Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 01/21] arm: init: export prev_bl_fdt_addr
-Message-ID: <20231121190614.GC2513409@bill-the-cat>
+Subject: Re: [PATCH 02/21] arm: allow CONFIG_LINUX_KERNEL_IMAGE_HEADER to be
+ set in defconfig
+Message-ID: <20231121190720.GD2513409@bill-the-cat>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <20231121-b4-qcom-common-target-v1-1-9492198e0c15@linaro.org>
+ <20231121-b4-qcom-common-target-v1-2-9492198e0c15@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d5DISj/wIZSt5c6x"
+ protocol="application/pgp-signature"; boundary="G0V+CtYyc4wIixcb"
 Content-Disposition: inline
-In-Reply-To: <20231121-b4-qcom-common-target-v1-1-9492198e0c15@linaro.org>
+In-Reply-To: <20231121-b4-qcom-common-target-v1-2-9492198e0c15@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,48 +102,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---d5DISj/wIZSt5c6x
+--G0V+CtYyc4wIixcb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 21, 2023 at 05:09:24PM +0000, Caleb Connolly wrote:
+On Tue, Nov 21, 2023 at 05:09:25PM +0000, Caleb Connolly wrote:
 
-> When booting U-Boot on board with a locked down first-stage bootloader,
-> we emulate the Linux boot header. By passing the U-Boot FDT through this
-> first-stage bootloader and retrieving it afterwards we can pre-populate
-> the memory nodes and other info like the KASLR address.
->=20
-> Add a function to export the FDT addr so that boards can use it over the
-> built-in FDT.
->=20
-> Don't check is_addr_accessible() here because we might not yet have a
-> valid mem_map if it's going to be populated from the FDT, let the board
-> do their own validation instead.
+> Let this option be enabled dynamically for boards that support multiple
+> mechanisms for booting U-Boot (e.g. as a first-stage or chainloaded
+> bootloader).
 >=20
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+> This patch has no dependencies
+>=20
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>  arch/arm/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index bd48131292e3..1add4282f336 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -81,7 +81,7 @@ config SPL_SYS_NO_VECTOR_TABLE
+> =20
+>  config LINUX_KERNEL_IMAGE_HEADER
+>  	depends on ARM64
+> -	bool
+> +	bool "Linux kernel binary header"
+>  	help
+>  	  Place a Linux kernel image header at the start of the U-Boot binary.
+>  	  The format of the header is described in the Linux kernel source at
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Why are we not select'ing this like the other platforms which need the
+same do?
 
 --=20
 Tom
 
---d5DISj/wIZSt5c6x
+--G0V+CtYyc4wIixcb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVc/6YACgkQFHw5/5Y0
-tyy06Av9GqUfDF5fOhSEfEQDzuR3u8LZ8YJKL18J5Pm3lmKttgce6MySBj2VwXSm
-eDOOetEjvV/iaXuKEQWLJpQgytFEmIlOrtfJO94kgmVWHYm0eVlYax1owODXcUlq
-nV43g5qhEOFGjZJdGRHylhLPnorQucOqw6Gg9uqAqQ1/zsRe8vM7ENY//OyzdwAE
-fwqtm/4eEpQqASeiTYFMSAKaARRcXoRvQWx7I+fHnAzJZgrn19b8bwv9TWa8h5VK
-Q8CmM6RxQu3rcDQBQfMV1Uf8njYkKzUD5xUtcCu29LCQqO2IMj3p4rkJ/qIavwgm
-Q1fiLGZcm4NgxFsQtmh550igkuEFGXgKYxS61zylj7Pc5OkSnq+VWBoYOCAdDoUk
-jb2ma0aJnhEuAe9RzheCepFqd654zS2hCFyWYfn6zzR5vG5ARLQ2ryZD8Lke13v7
-CaBo1Dpl+6duuIIgLZg0nXAabUgNIX9CVBROhXo6o4C4cjP30AUlEAeyv6MX7Wdh
-T+qQVqyX
-=1y/d
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVc/+gACgkQFHw5/5Y0
+tyyvKgv9HdON1nSaKQpoDiN+6i2tgZK36/+Q6smvRnLPdS6ZiuX7+KDv6Pqtv3IP
+tWmGIOejCcewBCRevzSC9OL+sc1dDc+sbku1XL/A5JsDp9HaTXcwW2OlgDFW4NCd
+M/cjaccw0K0Vm+reX41Rf3oaocCSvmb12gCI48x3qBWZm2it81iHJthT50dheJbL
+2FQWVJHljVN3a2H4P3ZKULbmjPIzBnC0WLQsXQdC1j5VV7/H9DKo62U13e9wZX4v
+Nmgg8cyk6gxsU5q7QDCFa0iE+20cx2hIYpepprhADX6RLU76H+R5rVTXxeGnJo1R
+oxMoAaa4PKfwisHBKDB3stWqQUqkKRVe9kF7//lrKTmgAL73TVO5Djb7mwgLhHqs
+PYyLizsezaAaIM8QFBONjpck0SUEMkrTJJS3BEpJUnWjULoLXsMW0maWkjtiPoyf
+LaYkxzNEnYx9R1QTK2tcgySJdyKzrGEfOWJmvKcsrfL1zpa2t2Gh1pmC42jgIgNB
+8W4rf97f
+=KY/C
 -----END PGP SIGNATURE-----
 
---d5DISj/wIZSt5c6x--
+--G0V+CtYyc4wIixcb--
