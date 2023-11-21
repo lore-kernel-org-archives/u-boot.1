@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AC0C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128D7C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 693748764C;
-	Tue, 21 Nov 2023 18:09:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CD8687604;
+	Tue, 21 Nov 2023 18:09:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nE894wEl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hLan0rWw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71FA98762E; Tue, 21 Nov 2023 18:09:37 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id B1D2587632; Tue, 21 Nov 2023 18:09:38 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8165875A7
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67E9387618
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-5094cb3a036so8341770e87.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:33 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40b2c9ee8ecso3370085e9.2
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586573; x=1701191373; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586574; x=1701191374; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=DPJhInPprtSGS01+kizPo2arar41qkzyaZzz7lBbaDo=;
- b=nE894wElzEjB5aPq2l1lR7PQnHMeCCnHnHfmW2vlmZETYor+wdTV5RMoNhVEXoFs90
- TppOq3B5vBdc71Sa0gdnXemmEwBSRWx7oQIz6tdj/rqkDOqThCRtTk7JHfEbOq4YXvqp
- fd7G+nfIsEX5zBQKQ1WOUqD7zxdxanNLhYREMJub1jR+sDZPQN5oEO3YvHHwjMaz15ey
- IhAMJ0rBx+Wn5XGTNQTIbvOB4hwX1DuWHVx0Nzk2dryecP0/R1ZQjowtf0QAhIltTrQs
- PKgewVTdGaRkXU3srvSwtp2Qln5GlZJCDM2JpxgeABwvsFmM5xxqXVPHUYVcTNZ2KPvY
- N+WQ==
+ :reply-to; bh=2yMCPbZvHg5dQxeFWPPFiuNAoZLNlbdzcYsk9kLzoDE=;
+ b=hLan0rWwomT19YdWlspP/9I43HGhta+nLwpY3kop1LZ88MPIcyy+vAtxy5X+HY/oEh
+ ABojgbFf4oMWmtdLUK5NPnFrRPlQxgnjXgsxQTEkWSw/1vKPwrAmUeNNjL1zg3HsZ1Dx
+ C+SUynWsmwod4H93+I4P3c2jFXmlysoHTp0Mh74xdRHkppc/jlAsKj7hHs45B85+Xe+Q
+ Pxxr2Zzyo7s9dQYrNYy3gmBVIHnVuJBGshjkgXW2BSwQlmb+6Vs4hLrW9YNdS3uJSDPj
+ h+Lh8trAI200vmfVhjwf+kw9FMAQNz79CpOJO88UMZ5QTn9jIJg4YEjbp/zHh4MJJHzc
+ p4rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586573; x=1701191373;
+ d=1e100.net; s=20230601; t=1700586574; x=1701191374;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DPJhInPprtSGS01+kizPo2arar41qkzyaZzz7lBbaDo=;
- b=wKXmodKgyb9z0PK6MiefF98oZcL62SBOkOnAh1a7Jzv4neXBank+4/9yWFvAeWsB8s
- WadBw3yXW0hgIdT99426Y70bx9ZjExXQkUkKLvI/jeE0Eb/mb1vm69oz6jih6Uj5Qi82
- rOptDuuFI3FiHKyymnjfF+sPc4QVF2thDyMVWWHFpXt/XNfHGqAhmBwM//+5JoaChnaY
- smhcXKZB01g6gDcgPecqOCyyXG6ywL7md8ZuCmuWhMzkmJF6Rq+UgGUtKw2wUFXMA2F5
- CwFzTaW2m2KxUFLf9EqqDyf3O88ZklJfPyY18jUkM5WOj8kAGplzbOg2pQ6fXjwH+IKz
- zo3g==
-X-Gm-Message-State: AOJu0YzJMa6KtJUjqmPq5m2jUhSen10m9WZ6RnXmP0WYRnKhDjA+J1ag
- oI2OLfKbikXVsARxFjnqgvQj/aRRGUQ8080sWaEGWA==
-X-Google-Smtp-Source: AGHT+IGwqy28mSm8E2fHssL8zOuigJnoMcADVHTzkQN00y7aWX8FacDNR9JkUn7nCRy0yQNF56MdhQ==
-X-Received: by 2002:ac2:4951:0:b0:503:3808:389a with SMTP id
- o17-20020ac24951000000b005033808389amr8337891lfi.11.1700586572999; 
- Tue, 21 Nov 2023 09:09:32 -0800 (PST)
+ bh=2yMCPbZvHg5dQxeFWPPFiuNAoZLNlbdzcYsk9kLzoDE=;
+ b=vRbGDo6yWwhPV665oGoIPtas85Q1Rr0XlYBPnJEHVL2QAmcRb4IAqPHTPtAFg3j4O1
+ wAnflkUql10ahNUYbrb2e+5f2X/m8hjA2JNzKIukXGkd8jmMU+lmp8i0C3C3sMQGlXxQ
+ Y3ZteVK/ewUNXd9RTSmzsr/9/lC/0hZANBpumY4qFqp/0G6SEpPaCbnSqqmnDlWizx2A
+ fO8qMN8Pk+UmDVeMlrfoUTO8bR7HTsCEXjEJ4ajJtv/TA19F/LXiaBhnDDutqvx8lqMe
+ H59H911wpyDF4FIDb/FDnxCnIN7DwUNNNsA/tW27OuJr1TYNmzJDGxqakbj5g9zMOZ6T
+ DMPA==
+X-Gm-Message-State: AOJu0YzG0WJd7MOg7BMaGyYQNPm+3bYaisuurRLAAobilFD3G8s3l6Zl
+ 8cdLP/Jo0vzF8k3CSWqURb4xLw==
+X-Google-Smtp-Source: AGHT+IF92NcbRUPUAmYkbRSK0QcIb6c4n09Fpt7iO2oN3fBnyOt/w7Hpvqwz+NZhh4VGf5jX4QrxdA==
+X-Received: by 2002:a05:600c:4f8a:b0:40a:5c71:2c3e with SMTP id
+ n10-20020a05600c4f8a00b0040a5c712c3emr9155172wmq.19.1700586573934; 
+ Tue, 21 Nov 2023 09:09:33 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.32
+ 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:32 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:33 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:27 +0000
-Subject: [PATCH 04/21] mmc: msm_sdhci: use modern clock handling
+Date: Tue, 21 Nov 2023 17:09:28 +0000
+Subject: [PATCH 05/21] dt-bindings: drop msm_sdhci binding
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-4-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-5-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3016;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1257;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=Ujb36j4MQVuf19gAZZ2EIB8TJJKZEN52OmMZLBaZVto=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ65afCt5L4ZcP+9ZWztj6seu5RUd3+vsj4urRJild
- DR6v7DsKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABNxu8fIsGGX5h9n07uzFkZM
- CInbKXk/RXTGNa7HakZ6kqa+p36zHmT4H2N2QfhiuXDND/eT3udDdRdw/vrb16q+p1n0UvD8J6Z
- FZwE=
+ bh=QLv/i9nKDSKixmLjbz+tpo6tUL3ouZlsH6f2FdVmN8o=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ64PTxVPvr+Ta07V+UXm39eY9vWuOXwrZlmexYYd2
+ vu/cjsKdJSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJ7Ndl+J/Enz91Q+67+TeN
+ JPM2nWxtalVyl9q74t5mzvDnTCyv9zxj+J/AsvrwWuugW7MNSw8v/hjc9SXz3NVlG3/vmuXn9LQ
+ ufUU+AA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,114 +108,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the clk_* helper functions and the correct property name for clocks.
+The upstream DT is supported here, so drop the U-Boot specific binding
+docs.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/mmc/msm_sdhci.c | 69 ++++++++++++++++++++++++++++++++-----------------
- 1 file changed, 46 insertions(+), 23 deletions(-)
+ doc/device-tree-bindings/mmc/msm_sdhci.txt | 25 -------------------------
+ 1 file changed, 25 deletions(-)
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 604f9c3ff99c..863e6007a905 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -44,6 +44,7 @@ struct msm_sdhc_plat {
- struct msm_sdhc {
- 	struct sdhci_host host;
- 	void *base;
-+	struct clk_bulk clks;
- };
- 
- struct msm_sdhc_variant_info {
-@@ -54,36 +55,56 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- static int msm_sdc_clk_init(struct udevice *dev)
- {
--	int node = dev_of_offset(dev);
--	uint clk_rate = fdtdec_get_uint(gd->fdt_blob, node, "clock-frequency",
--					400000);
--	uint clkd[2]; /* clk_id and clk_no */
--	int clk_offset;
--	struct udevice *clk_dev;
--	struct clk clk;
--	int ret;
-+	struct msm_sdhc *prv = dev_get_priv(dev);
-+	ofnode node = dev_ofnode(dev);
-+	uint clk_rate;
-+	int ret, i = 0, n_clks;
-+	const char *clk_name;
- 
--	ret = fdtdec_get_int_array(gd->fdt_blob, node, "clock", clkd, 2);
-+	ret = ofnode_read_u32(node, "clock-frequency", &clk_rate);
- 	if (ret)
--		return ret;
-+		clk_rate = 400000;
- 
--	clk_offset = fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
--	if (clk_offset < 0)
--		return clk_offset;
+diff --git a/doc/device-tree-bindings/mmc/msm_sdhci.txt b/doc/device-tree-bindings/mmc/msm_sdhci.txt
+deleted file mode 100644
+index 08a290c66931..000000000000
+--- a/doc/device-tree-bindings/mmc/msm_sdhci.txt
++++ /dev/null
+@@ -1,25 +0,0 @@
+-Qualcomm Snapdragon SDHCI controller
 -
--	ret = uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &clk_dev);
--	if (ret)
-+	ret = clk_get_bulk(dev, &prv->clks);
-+	if (ret) {
-+		debug("Couldn't get mmc clocks: %d\n", ret);
- 		return ret;
-+	}
- 
--	clk.id = clkd[1];
--	ret = clk_request(clk_dev, &clk);
--	if (ret < 0)
-+	ret = clk_enable_bulk(&prv->clks);
-+	if (ret) {
-+		debug("Couldn't enable mmc clocks: %d\n", ret);
- 		return ret;
-+	}
- 
--	ret = clk_set_rate(&clk, clk_rate);
--	clk_free(&clk);
--	if (ret < 0)
--		return ret;
-+	/* If clock-names is unspecified, then the first clock is the core clock */
-+	if (!ofnode_get_property(node, "clock-names", &n_clks)) {
-+		if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
-+			printf("Couldn't set core clock rate: %d\n", ret);
-+			return -EINVAL;
-+		}
-+	}
-+
-+	/* Find the index of the "core" clock */
-+	while (i < n_clks) {
-+		ofnode_read_string_index(node, "clock-names", i, &clk_name);
-+		if (!strcmp(clk_name, "core"))
-+			break;
-+		i++;
-+	}
-+
-+	if (i >= prv->clks.count) {
-+		printf("Couldn't find core clock (index %d but only have %d clocks)\n", i,
-+		       prv->clks.count);
-+		return -EINVAL;
-+	}
-+
-+	/* The clock is already enabled by the clk_bulk above */
-+	ret = clk_set_rate(&prv->clks.clks[i], clk_rate);
-+	if (!ret) {
-+		printf("Couldn't set core clock rate: %d\n", ret);
-+		return -EINVAL;
-+	}
- 
- 	return 0;
- }
-@@ -188,6 +209,8 @@ static int msm_sdc_remove(struct udevice *dev)
- 	if (!var_info->mci_removed)
- 		writel(0, priv->base + SDCC_MCI_HC_MODE);
- 
-+	clk_release_bulk(&priv->clks);
-+
- 	return 0;
- }
- 
+-Required properties:
+-- compatible : "qcom,sdhci-msm-v4"
+-- reg: Base address and length of registers:
+-	- Host controller registers (SDHCI)
+-	- SD Core registers
+-- clock: interface clock (must accept SD bus clock as a frequency)
+-
+-Optional properties:
+-- index: If there is more than one controller - controller index (required
+-	by generic SDHCI code).
+-- bus_width: Width of SD/eMMC bus (default 4)
+-- clock-frequency: Frequency of SD/eMMC bus (default 400 kHz)
+-
+-Example:
+-
+-sdhci@07864000 {
+-	compatible = "qcom,sdhci-msm-v4";
+-	reg = <0x7864900 0x11c 0x7864000 0x800>;
+-	index = <0x1>;
+-	bus-width = <0x4>;
+-	clock = <&clkc 1>;
+-	clock-frequency = <200000000>;
+-};
 
 -- 
 2.42.1
