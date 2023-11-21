@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 640E4C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:13:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 920B5C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8B7E875BC;
-	Tue, 21 Nov 2023 19:13:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D062E8759B;
+	Tue, 21 Nov 2023 19:18:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="A3ZQRoLE";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="i3aQPfgF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA6A8875E4; Tue, 21 Nov 2023 19:13:04 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id B4B158759B; Tue, 21 Nov 2023 19:18:03 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 059A78759B
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:13:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DF0087448
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:18:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700590382; x=1701195182; i=xypron.glpk@gmx.de;
- bh=TOl1+7KweHhXiZkHZHSMkpkwn8+1xXWwTTvBwmDdSnM=;
+ t=1700590680; x=1701195480; i=xypron.glpk@gmx.de;
+ bh=v0ViEAWv1sJKXK24POYdz49AZXl16bG1GGwhaEsv7qg=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=A3ZQRoLEe5zZyP35zPccdu1OQo8MTdtuHgJlR2I98Cs2XrFNtgJykiPWhqwki16i
- twQfEPmhhMD8E9nFTRvAUuFrhno0uoOvys0fGXy/pF9+q2j3V9CEFG41IQNuJ0ELz
- zI63v9rr+DGP0fp8+b3f7W2PpwZQPTxiP4DXAcxALy+8BjVwEVRcRlpg7WQhURVt8
- Dk+FbHeOfwnx6dE5AdnqyabWBquWB71htqfMj03Bqi7E/XkQicOgyfLrJUTxkYWXO
- BMH2pLdpOPE5JjuCVmViomJXtwGbGlDmNY9LQ/haKrirBFMvScHuZPhq7eClRA3wg
- b/wFf7ZBTvzn6lhIUg==
+ b=i3aQPfgFYudaYdJgg+MdCosjr7piiXVemSRhKQqjJNWIDJNDCNw2qdJ9RwoyHkM8
+ 2Tw3bVgb2DSiANND7/dwy/D2bfrE8ilYkqixLuilMd+y53B89HPUw+xO1JbSJ0aSh
+ SF5tAVr0sFdCjB0Rt89Ky+B7OnvT+EjrsepgQVqoZ/YHUL+EhbonGt+AAI8mY9R3T
+ NPz54S7jLWaNBDl85l6BijGFDOOnp/piQ2rXJ8yXEBY931xBULefQIfNVv5JRsfk5
+ zbyslYPHXWU8QbskH5dzDQXJi8vU/QKhZWQzpzqG0vNI9/jptVNuZscXf5o1Pc83c
+ 1tnPKH0EJPHl6P9U6Q==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MYvY2-1qsBRu0I8u-00UoBW; Tue, 21
- Nov 2023 19:13:02 +0100
-Message-ID: <5ee4719a-a45e-404e-89df-0a6740277f21@gmx.de>
-Date: Tue, 21 Nov 2023 19:13:01 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLzFr-1qo71l1iu9-00HwMS; Tue, 21
+ Nov 2023 19:18:00 +0100
+Message-ID: <75b45f55-9248-4821-b428-11ca3e8943a6@gmx.de>
+Date: Tue, 21 Nov 2023 19:17:59 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] efi: Use puts() in cout so that console recording
- works
+Subject: Re: [PATCH 2/7] efi: Show the vendor in helloworld
 Content-Language: en-US, de-DE
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-2-sjg@chromium.org>
+ <20231121113557.800353-3-sjg@chromium.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231121113557.800353-2-sjg@chromium.org>
+In-Reply-To: <20231121113557.800353-3-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:hFXRPYtFGCh9uYp+ANvf+ZnEdiLZ01QGFvhSjpjPKhBX/hqrNLZ
- bz3nb8SC0sUvNmDusz7NUTEyJ4bFvEoDctaop+Cv/yEQPRfdJL30e5cdkU9OJjL81scug29
- dPulh+6BoK7EqoGVWIDdPFRrpA8QxC2PXbn59AOPrAyDVwvz2sZOmhWds/mzwDGeWUi4U2y
- lzQiIUZSNgntm+KSHVFIQ==
-UI-OutboundReport: notjunk:1;M01:P0:p+un5no23IQ=;mQ3tpULyf0VKBlJKbflX4XHIvZ/
- Y2uC2IEKfC8h3jaHmeZnqNyzNmDZQk3vR2FbpmDbSP9mOppScJdUgyEg4PTMXlcP+XXIcl1XB
- BveZj+KDwzvO8LK5Il04A52bt5nDdbdiiHEIDXVuEpzezs9Ie0hltq/iVXYgk1HpFYxU8ZnJN
- twlmJB8iJXP7Qeb0lrAgihyzUCB1bMMuQzPqLtyfyp77RBRsCJQ5NeNr9FfofIxgEr/amov3E
- ZvmNMFtlTtUhTQ8TO5xET+wdOsHnIOZYhlVu9K5gposX7SjGrV0iP36PHsPqj8qcoq0Y3qeIm
- O9/u9YHdJYsrqOFq3zkP5dlIEM3SvaZh1Kk4QZqu2JuaeVb/DGKYKpPnigXALpREdg3uv1fIo
- zqn60QKzUkuSqpiMsme6f9DNKEWJ2AkAWoGAU0u5gZD6U2tYkfO7f849C2gVE9my2wgQkAODD
- fjCUTnsnQSj7GtKwS8lcH15ZQBZ0iBwDw9bF3mlQvoPJo5/bCAQJc9MZlFBBTwm+H4G0qCAiC
- FDYzUijREHqgXQ3l5hizeJRRcABmk7hTaD60i36knXS3EQ5df/kHUxqx3/HmlTub08wQ0vLpv
- 3bUbM8qYd6f2/aW1CwRyT+nwWPQBd+mpH4dcoDP/MKnskt3+xv9fx9TDX1tf2xR8fkf1cyzQf
- hS8YyavL3mb0lw13T/paqf9CDQIJItt9iH7gcP8vQmqIt2q/Om6jzB6ePv2AALIzBk4Sv12rN
- OJN9d92RI4HI/2FcbpEWE7H+tb2jhx9FrDrCpQPxM5HclB+eYEUnW2bT2Df+hIHxGTBGt3aOq
- bhjCe2m2d7mGjOnekbKQ1F31g6y8o31T9dOKefkYaGXTos+JAfOSupQwNbVhCNdyZ9dMKNK33
- t2qp47t3ggBW8maOy0pn4kicdn2asSkDc2YbRMFxQink6Ax9Q0lDu9+2JjhlrcYj07nWD+LP+
- pJPqvkgOa136dbBYNoapSsDn+zo=
+X-Provags-ID: V03:K1:PUj7aKbEVfecEQI2uc3BGHoNAOA6fTj8IkEZxCUrM4vAqsIBDso
+ 0XozCt/OgKmGruQAWlsT6jDl1VKhmLcmgXz2Kv4XdYOghzUs9NJcEdqgQ8giYw8xjKrBNdc
+ Q1Gd78y+jHsbRnpuzkE4o2lLPxMWkfObSYCtimOwCkksvgMYhZkZmgKzAy/PXv2b+9OdFVT
+ hn3cYBwfPCOQt7hZeSi0Q==
+UI-OutboundReport: notjunk:1;M01:P0:7PoMh0ybRYU=;dgwgjSOATZABUlUVT6bo8kPCseM
+ ceYReJhnzp8c9+gvk9P+6OpvLHIKy32PT0l3G50ZHEdORasE4tJg3xqdaB1y5bOhSINIQcxdo
+ EXV+KSdcmOHhAwydLobek7/CEoOOZ/1mmncjY4Ob7IZ2LFRCbLkq3NS/tx6lD9SkGOrOJsSjX
+ 1oIZ3NFL8DOHMu+JNm4c4DO5JvAD52P7vyKOt3hDxjbMxirlwjzxPxeH9w9e+b35oz1DvLd7w
+ 7XQKGN5jJOZReGmh8W8DAOgrdb5ZNOO+XmhDqxwUdqOSVRZzAagjVtMRsNJp8GJdp8Tkz6hFW
+ +99CIfA3b/K7Rii+5Y/vntR08weUb1/RpnVpD+cwRTwSioDCk59q5SQxyi3pMCLJP5e4g+m5G
+ TRhQf3+PgHeUdG3p2JaWdj6Nq74tAkit7ov2wuaU/5XX6/YCNyaCmeXrd4CMV5Of/O5fBYH9Q
+ 8dubMGu0cjZyd5IzwoPmHWCzqPVqxfTJgqLyQDFw8MKmSspRI/iGZkN+p3ZrNQJ8XIjya5pc8
+ vSyLWL3LcA1imw7+R084flAr2kRsNWjO18LmnlXFbIVmLrrxKyt2KX3TXqlIy4ddusCnhyaEa
+ I90S1Vdc/2gG+aSMP5Mgnj/G9ISJHIPQ5Ktn9spfMyvE1QY5hkDI6fz2Ae9PYZa6MueLwa2Ba
+ T/yB9ncIz75uGqITCZTvdS6zEsDnGFbl8PaAY9c+egTNgsZLhqmfRfoB42OLk3nojzle6vxi/
+ 1pmJrp8CPyyHqw79PwQRtXJiqJQUXdhAZBsHO4u5zoWEhL5GQ2Nq7jTSqqwJn/VfCCXN5Alwv
+ 6sJqW/begt3TqzQfo67P0Rd0DwcnF1lUx0KoahJwJLm7twxZoBLKfL33XZ1zO6x5yRZ4c+do/
+ jG9hGIjTUeclLscEt+uaRGUaOcqcTTGg8RRJsXjJYi+4LM7ONFkh1t1QtS7AnIN7LcMT4+EEJ
+ R0ulBgmFANrXuAxfvQXaZpZyMYw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,33 +91,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/21/23 12:35, Simon Glass wrote:
-> At present EFI output to the console use fputs() which bypasses the
-> console-recording feature. This makes it impossible for tests to check
-> the output of an EFI app.
->
-> There doesn't seem to be any need to do this bypass, so adjust it to
-> simply use the puts() function.
+> Show the vendor name since it useful to see that.
+
+With this commit message it remains unclear why displaying the constant
+value (u"Das U-Boot") is of any value.
+
+Best regards
+
+Heinrich
+
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
 > ---
 >
->   lib/efi_loader/efi_console.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   lib/efi_loader/helloworld.c | 3 +++
+>   1 file changed, 3 insertions(+)
 >
-> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-> index a2d137d7a9e1..28087582e8d6 100644
-> --- a/lib/efi_loader/efi_console.c
-> +++ b/lib/efi_loader/efi_console.c
-> @@ -182,7 +182,7 @@ static efi_status_t EFIAPI efi_cout_output_string(
+> diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
+> index bd72822c0b72..1135d3a3c37e 100644
+> --- a/lib/efi_loader/helloworld.c
+> +++ b/lib/efi_loader/helloworld.c
+> @@ -234,6 +234,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+>   			(con_out, u"Missing device path for device handle\r\n");
+>   		goto out;
 >   	}
->   	pos =3D buf;
->   	utf16_utf8_strcpy(&pos, string);
-> -	fputs(stdout, buf);
-> +	puts(buf);
->   	free(buf);
->
->   	/*
+> +	con_out->output_string(con_out, u"Vendor: ");
+> +	con_out->output_string(con_out, systab->fw_vendor);
+> +	con_out->output_string(con_out, u"\n");
+>   	con_out->output_string(con_out, u"Boot device: ");
+>   	ret =3D print_device_path(device_path, device_path_to_text);
+>   	if (ret !=3D EFI_SUCCESS)
 
