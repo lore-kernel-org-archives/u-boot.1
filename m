@@ -4,94 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DCD5C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0785C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6C9487666;
-	Tue, 21 Nov 2023 18:10:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 22AB1875EB;
+	Tue, 21 Nov 2023 18:17:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u49rLRw7";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jXTM78q9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10EA9875A9; Tue, 21 Nov 2023 18:10:24 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CAF40875FB; Tue, 21 Nov 2023 18:17:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 510BB87682
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DFE57875B5
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:17:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40b2ddab817so1828365e9.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586591; x=1701191391; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=U8wZyFeQqG0OpTdTamCTfdcnFDhyijFZxn2Z5PtQYKU=;
- b=u49rLRw7pmEuPkmAqZ91J86ZPSNEEGZz91p+kTzOBg0zCFMztDPXhAvt4Z7wyRCUQT
- h4bDXn4mhddK4MPf1SzwCySuy2ZkNPaBs1mQVP8HOwdjzEEtrvyJhLsm4Bavv7mN6JBx
- H833snSKFsawVYN6wp+aq2h4UPlPzjZ1yeeW46EWy4lqpuQZaYnRKB5hPKkKdpdhhx6R
- 9wo7prDylH0UckM6YMtDkhICyY16JfE3B64cw7jeqmXPMkuQy9jS/KQDrCCpkKxy6mbJ
- ZsKEOKhNkabFbE8ra6wpW96yKw0hFe8tV9Boz6r9OM09XEjn8T5eKdhU29eEXton0Ebx
- 75+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586591; x=1701191391;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U8wZyFeQqG0OpTdTamCTfdcnFDhyijFZxn2Z5PtQYKU=;
- b=lnw1SzjAgz1KI94sp9LmI1vGPq5tVgAPXcZxq0huvFlark6QHO2QRi7tBvePqUr62J
- 9QOqITRYsVw4QYdoWnScWi1dJ3kSzVy7c6emT2SK9Sj/0Vips6M+gvrSTjrW3vRYuCat
- lTNFeyi1jJYlApqxtLJYxJJe9IbX1Fw4DorKHUevbG5Iw4s+rLKMm0Npn348Gysu8uoH
- /QDo/ox4D5sScedOjoKZy9jdXFFFeLb+/GNmS18gnxkgJ5WoyTTZXw9ffMbh09tp7f5Q
- 34dIORbtF09u1z+7hcqXapXLovUMLidJUtkeDw6smOdy5OCWJq2BGlQLfBVfIz95q6RH
- M8Vw==
-X-Gm-Message-State: AOJu0YwxhGqsimDmz8TdaQnGLoLgG5ifKg/tdSOkno9Zmxz/Mrc21P1B
- rynwwSR5jJB9O9GhEELV2/LCUQ==
-X-Google-Smtp-Source: AGHT+IGvptXkUGapBeOyFx8A5Xnqs0zH2vGI41GhEstMFSqhCrxcB3EqNqdspHFdHrx8aXpc+44eGw==
-X-Received: by 2002:a05:600c:4f14:b0:406:f833:d853 with SMTP id
- l20-20020a05600c4f1400b00406f833d853mr7443206wmq.15.1700586590859; 
- Tue, 21 Nov 2023 09:09:50 -0800 (PST)
-Received: from lion.localdomain ([79.79.179.141])
- by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:50 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:44 +0000
-Subject: [PATCH 21/21] MAINTAINERS: Qualcomm: add some missing paths
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1700587037; x=1701191837; i=xypron.glpk@gmx.de;
+ bh=uyFoiAjaNvKYZeEWyX34gT6dwi6a2U1UUy2M8LTS1jM=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=jXTM78q92P1ADXjbQBgXz5zycC6RB+l5Ih7wHsQaLnXla4yyVAP1mbBQOdg/LQm9
+ OQ81FK6uy3qCIsRtRQD2jjBAKwxgr0jIYZcomlIokX6l+6sQ2gpK+lxn8dEvUGmqP
+ fDlYkXplgPzXpA684KPr2lcYkqzNPVHWE7gi6jyz0rGNmUw/79IHFW5tLXf978Oh2
+ UXyCUB4cFJZLkqCBVGVwdBUamkqecUXHd3y7VqpfgOYqaZezV1WvNClUQAt8HSBGU
+ OnvmwuZ0C71SnSis1L4Up9zPjlyf+zONJvdXsGuFY0utowJ7gfsR+wPLlDExeOPav
+ Yl/kJTChVD99Cdr95Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N9Mta-1rQA1Y400K-015HdN; Tue, 21
+ Nov 2023 18:17:17 +0100
+Message-ID: <07051882-8b13-4878-8f6f-1fe31fe97467@gmx.de>
+Date: Tue, 21 Nov 2023 18:17:16 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-21-9492198e0c15@linaro.org>
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
-In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1213;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=f07L4rYAmnX6+igOKiHQJoeM9WCNFN7iND7Ww5PjBwA=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ+4JZ57f8N17XVwrNYZ7lnfUrBty5YZGImrng8K/B
- 01+17Who5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyEYQLD/ypeLzvVQumVa+/X
- mXAzNlZOEL6sckxQylOEb3fxzieL7Rn+O/mbLD/HoFx08MOJ+3kSJRO4+Kta6iJaJ28S3Xppq+U
- nJwA=
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/7] WIP: efi: Allow helloworld to exit boot services
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231121113557.800353-1-sjg@chromium.org>
+ <20231121113557.800353-7-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231121113557.800353-7-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:vkBnrqwbli43GxMG3Tc+zh5yTd47obH9wVuhuLJ+PZB4v1ZDDnm
+ Dtlr5Nrixb16NEJM8m2CENxVJ2Fx8S+m4kJ5j/TL3hYSif9VZT4EAejAfpw/fUt6hU52l4X
+ awgM8zim3is8ATGgko9D7U7yM2rh5YvO7imvz67K3uULQ/fNRCiJxWoiV59a7HQtom5GTem
+ OVfiQRFqEngSJa9Na6q0A==
+UI-OutboundReport: notjunk:1;M01:P0:F7OaW7xXQJ4=;AwFmo4JenWYl/TQ9Q/N7vzHh8cd
+ TAgjdzvUga4gGbe9WRVBNP3ZzGlm3XnBZKxMIhFWTHl8+PavKiLnt7zn1j8d9BGC1/oqZq2I3
+ 73zKnaR5/ZeiPZFMj1N9y6dzl0xb8PnmKL2zMUtwpHAkUtk2rpe+BVRCzWtGfu5BP4CcrOTuh
+ NRCcd5DpIHTTRlxvDrKvWqSW593gFT0i8Xgt66IVhwVdt5ArOlvBD9vqV6erHGCSsKMkJzvfq
+ VB0PRvfNGDmkxovzoPRciqUmRusQhEJF1cSqFjSSyM9eP6wjmDxxqC0DFbFdUVCmbhrZrlwd1
+ KWU5cpk+Tz++IPuEJ73dXancaBF9Zb8KGRe19UlmED+pY7drDAlAKDAlB6hRq/1NDp8Chgkh7
+ hY4TAxWs3XBAwHIozvhZdEqTh0XkRlS4IO4AsqtzJJYxBMFuMTWHXer0N96AwUMoGecPJ9naF
+ Sv0po9CLUdj5iL7Bg6fTIRdZCOgN/f0FrJ5n05np8cPGwcObDTcLvFPnwRcp+23ol1ZXAlOcn
+ 7pro4ARwWBQY7XYZAyffvnPQVZmDjlBq1k3IYRgiv6MxZEB23TjIxodE7UYf5rARERB1rjo2m
+ 2QAMN7OsXbp2sl1kL0ptqa0n8PKjyNoAtWIfICnBOtFTeMSMKBMv4OCEtZn8afkWD1PSoGuLb
+ lGSxJeL4GWEd8fpnl8s9hIxt99nX90BMiSMUQvpagrkNf02VOGHjnT3xTWOfUF+qJvzDefNs0
+ 5W47PU5TgGgqvRYZK36mZU0n6PhHVZnLfH/cS2Vcthq+Mfykz1KmfIF9o02g08lIPi74CbQEh
+ XiTDRVQw30lvsaB2LiSvCnC9gHOC4UhaX3Mk1g5yYHCNN5Bm2J51DFN/9TyCRD5PRH3QuISMQ
+ VoGi67ZQbJPSS/1IuopiakslWS1soIiWHJIsRDNwTBzatv5R9UtwgLYBgHqIYpsJvBnl7AJ07
+ hd5b+g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,46 +90,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add board/qualcomm and the SoC/PMIC DTSI files.
-Adjust the driver paths to use globs rather than hardcoding every
-specific driver.
+On 11/21/23 12:35, Simon Glass wrote:
+> This allows testing of the exit_boot_services call, providing more
+> coverage of the EFI bootmeth.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- MAINTAINERS | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+I would prefer to keep helloworld.efi benign.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5a4bfbf550ca..4f87ebfcabee 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -571,15 +571,22 @@ M:	Caleb Connolly <caleb.connolly@linaro.org>
- M:	Neil Armstrong <neil.armstrong@linaro.org>
- R:	Sumit Garg <sumit.garg@linaro.org>
- S:	Maintained
-+F:	arch/arm/dts/msm8*.dtsi
-+F:	arch/arm/dts/pm8???.dtsi
-+F:	arch/arm/dts/pms405.dtsi
-+F:	arch/arm/dts/sdm845.dtsi
- F:	arch/arm/mach-snapdragon/
-+F:	board/qualcomm
- F:	configs/qcom_defconfig
- F:	doc/board/qualcomm
--F:	drivers/button/button-qcom-pmic.c
--F:	drivers/clk/qcom/
-+F:	drivers/*/*/pm8???-*
-+F:	drivers/*/*/qcom*
-+F:	drivers/*/*/qcom/
-+F:	drivers/*/*qcom*
-+F:	drivers/*/qcom/
- F:	drivers/gpio/msm_gpio.c
- F:	drivers/mmc/msm_sdhci.c
- F:	drivers/phy/msm8916-usbh-phy.c
--F:	drivers/pinctrl/qcom/
- F:	drivers/serial/serial_msm.c
- F:	drivers/serial/serial_msm_geni.c
- F:	drivers/smem/msm_smem.c
+Please, create a new EFI binary for testing ExitBootServices().
 
--- 
-2.42.1
+> ---
+>
+>   lib/efi_loader/helloworld.c | 36 +++++++++++++++++++++++++++++++++++-
+>   1 file changed, 35 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
+> index 1135d3a3c37e..1fb5fb5a62f2 100644
+> --- a/lib/efi_loader/helloworld.c
+> +++ b/lib/efi_loader/helloworld.c
+> @@ -206,6 +206,26 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+>   			(con_out, u"Cannot open loaded image protocol\r\n");
+>   		goto out;
+>   	}
+> +
+> +	{
+> +		ulong ptr =3D (ulong)loaded_image;
+> +		u16 str[80];
+> +		int i;
+> +
+> +		for (i =3D 0; i < 8; i++) {
+> +			uint digit =3D (ptr >> ((7 - i) * 4)) & 0xf;
+> +
+> +			if (digit > 9)
+> +				digit =3D 'a' + digit - 10;
+> +			else
+> +				digit +=3D '0';
+> +			str[i] =3D digit;
+> +		}
+> +		str[i] =3D 0;
+> +		con_out->output_string(con_out, str);
+> +		con_out->output_string(con_out, u"\n");
+> +	}
+> +
+>   	print_load_options(loaded_image);
+>
+>   	/* Get the device path to text protocol */
+> @@ -243,7 +263,21 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+>   		goto out;
+>
+>   out:
+> -	boottime->exit(handle, ret, 0, NULL);
+> +	/*
+> +	 * TODO: Use vendor string to decide whether to call exit-boot-service=
+s
+> +	 */
+> +	efi_uintn_t map_size =3D 0;
+> +	efi_uintn_t map_key;
+> +	efi_uintn_t desc_size;
+> +	u32 desc_version;
+> +
+> +	ret =3D boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size=
+,
+> +				       &desc_version);
+> +	con_out->output_string(con_out, u"Exiting boot sevices\n");
+> +
+> +	boottime->exit_boot_services(handle, map_key);
+> +
+> +	ret =3D boottime->exit(handle, ret, 0, NULL);
+
+After ExitBootServices() you must not call boot services.
+
+Call runtime->reset_system(EFI_RESET_COLD, EFI_SUCCESS, 0, NULL) instead.
+
+Best regards
+
+Heinrich
+
+>
+>   	/* We should never arrive here */
+>   	return ret;
 
