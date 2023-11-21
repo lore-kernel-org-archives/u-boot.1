@@ -4,68 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E93C61D98
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 846BAC61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 23:07:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9E0487631;
-	Tue, 21 Nov 2023 23:57:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
+	by phobos.denx.de (Postfix) with ESMTP id BD74B87250;
+	Wed, 22 Nov 2023 00:07:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="JG18W77W";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RDsx9jg5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58EF4870BC; Tue, 21 Nov 2023 23:55:07 +0100 (CET)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id 6F1FD8749C; Wed, 22 Nov 2023 00:07:52 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE2BE86784
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:55:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=bedrocksystems.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5AC0A86BFA
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 00:07:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5c2066accc5so2899703a12.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:55:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-1f060e059a3so3660506fac.1
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:07:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bedrocksystems.com; s=google; t=1700607303; x=1701212103; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=pTWisbXcwRmT71j6A/W3LvK+3NyLhRFLC/WMMi8iDn0=;
- b=JG18W77WNYY9CAYrP3j7CMYyyZw9XSSJwndynvTgHkDrkLCRGbk4KtiQueCujdwdcE
- YXmdNPSp9Wxk6hUvY2yjGlF00Xbhn5nkBVJ2KSvujwOTIKiMfMe0EDEYffkqMKkAeCI1
- lUCO+Km/Xgvi48l9TpmRzPy51cvreE8bzZpZX8+cxT4KayiH0hoty8mMj2VBSG0dRjDl
- zGnyywchjLIP06nmRuSn2o8GGhBdkqPzb0YH1AskpM4ndUCTty3hn1fVNBg8m/db90sm
- lfjb6/f4LPwxDkZG4Mn2re+F4Xr8twov6ehxldrXzcuj82FjcGoAJOjtKoDOukh2WFDK
- P5rQ==
+ d=konsulko.com; s=google; t=1700608069; x=1701212869; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=oMIAcYSrq4X+6P6OJVMd7Xy7sYeJIwz1qI8ujKGj0pk=;
+ b=RDsx9jg55OsVDchsCkU2kKELN3+NofhUMqLvAGOUZ47P37B9TXWOAEMiyWZrcvNOee
+ 8ATFLWYwWvNGVDzrPAHb6ccFlVY60+wP3xH5yDhTipyKaTDZGGaUP4OIGtrQhP73ls7E
+ Awj3PtQ+pH42B2qCra1WmEmmi1Ag6nuG+gRT8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700607303; x=1701212103;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pTWisbXcwRmT71j6A/W3LvK+3NyLhRFLC/WMMi8iDn0=;
- b=GfCDFjLB02wfAFBOyqpVjQ+ts9jNiMxgI70Em4VZAHtAxpIAUciCaxwAoMwutp0Pc5
- kHqdOAUSMiW62vAsXZbJDv8Of8UsFLkyZBm879JYNTSt4EeF9FA1g4zONhO7X4e6AfwW
- VWzkI7EOo5tnPsxAeLVCK6SszYoZBc6oaFyfH80i8akk5JTmoXo2pvTDVwuFClgPpUWO
- Z8bJ6Z1Sp/WpbW5hKDyC05Ju3WMnFKeXFV68mrK8PKa0xmpH6N42sK8Bsmw+lYn9IkP/
- ZFcJmfMYMdB3G1GFxM2XtcmKyI36hYJkP+yDWKaGQoDguKeo8pSRi3DdqN+mzi9iKBY0
- CseA==
-X-Gm-Message-State: AOJu0Yy9tkJU8Xuxz2km9SCxXT569ipHOdogU3Ztuh+xWpqLk5RcA5Gy
- lQ9FtgM75RntBqfrW25Ba3GzSNPcXLgetFm0lVKCN2zmkXwQ61C8C11m9w==
-X-Google-Smtp-Source: AGHT+IEe8jqyAAKcN16GcFLPVyITkeHE/tYPh63CqAM+v3718JzrXx3gAY69epalB4Aowt78u7Oi50ULmwokcG5dn9k=
-X-Received: by 2002:a17:90b:4ace:b0:27c:f80a:2c8a with SMTP id
- mh14-20020a17090b4ace00b0027cf80a2c8amr760276pjb.0.1700607302890; Tue, 21 Nov
- 2023 14:55:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700608069; x=1701212869;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oMIAcYSrq4X+6P6OJVMd7Xy7sYeJIwz1qI8ujKGj0pk=;
+ b=qZXC2IxKbP9MLB+PBaHG2YYxfY0/hKP/p7Ao1TK7x6SM7+k+14hIhiInWKGoxz3t5Y
+ qCu+xETxZ3PLMkKi8DAIqp0WdlNo7xtWUcMIHnFBoAZ+JJksJ8+9ni3HtSZnRcPjF11V
+ KN2FlWmqXYyP1EO5P2k9CSW/N3DwzA7lzxLnrNiB3mkxiiuF3qQr6OIezw5ayZ5KUzj7
+ +E4ZuQ7+Dikv+1nHpt6IinMxG2ofG0j+v2/DVk3pEJ/6asq7Zg5OqJECrZz0P4/xgAVE
+ lJPN7TqwuV4I/cF81szAqbLFyCiDsi2yeFmR2NEFntlcStnYswd0aTA07P8e/0l/hXP8
+ /osw==
+X-Gm-Message-State: AOJu0YwIEjo3+3dpZH0QdTvVCdKLJtZU7u2ALVbDmu2AosMRYVU3M8Ya
+ kiHMXIpf7WZ0xfPmFhpVyDu/4Q==
+X-Google-Smtp-Source: AGHT+IHCseouYMO5cGJ3V/z24x4xduJSCXxdX+1vtymIB/YEbvue+X7awRVNSkyo5Nu4Um1+RutKcQ==
+X-Received: by 2002:a05:6871:5c4d:b0:1e9:8780:a0e with SMTP id
+ os13-20020a0568715c4d00b001e987800a0emr852238oac.28.1700608069028; 
+ Tue, 21 Nov 2023 15:07:49 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-999e-39fe-b112-e0fa.res6.spectrum.com.
+ [2603:6081:7b00:6400:999e:39fe:b112:e0fa])
+ by smtp.gmail.com with ESMTPSA id
+ i3-20020ac860c3000000b004198f67acbesm3924779qtm.63.2023.11.21.15.07.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 15:07:48 -0800 (PST)
+Date: Tue, 21 Nov 2023 18:07:46 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH v2] test/py: i2c: Add tests for i2c command
+Message-ID: <20231121230746.GP2513409@bill-the-cat>
+References: <0d8e994ea619d3942ee215a8f5635627e89c3512.1700567875.git.love.kumar@amd.com>
 MIME-Version: 1.0
-From: Dmitry Malkin <dmitry@bedrocksystems.com>
-Date: Tue, 21 Nov 2023 23:54:52 +0100
-Message-ID: <CAKRNjQ3YjFQGDmGmowbtbFnpAn7k3nHfbwqpx0_BX-+v_kQkzw@mail.gmail.com>
-Subject: [PATCH v2 3/3] rpi5: initial support
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, mbrugger@suse.com, pbrobinson@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Tue, 21 Nov 2023 23:57:42 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="MqFvB2V1Lx+qMrUx"
+Content-Disposition: inline
+In-Reply-To: <0d8e994ea619d3942ee215a8f5635627e89c3512.1700567875.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,43 +91,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rpi5: get_board is no longer works. Print model name from
- FW FDT
 
-rpi5 deprecated some calls/tags for MBOX. Better to use FW FDT.
-However it does not give all information.
+--MqFvB2V1Lx+qMrUx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
----
-v2:
-      new patch
----
- board/raspberrypi/rpi/rpi.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+On Tue, Nov 21, 2023 at 05:28:43PM +0530, Love Kumar wrote:
 
-diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-index cd823ad746..6b678c5d23 100644
---- a/board/raspberrypi/rpi/rpi.c
-+++ b/board/raspberrypi/rpi/rpi.c
-@@ -429,6 +429,7 @@ static void get_board_revision(void)
-     int ret;
-     const struct rpi_model *models;
-     uint32_t models_count;
-+    const char *fdt_model;
+> Add below test cases for i2c commands:
+> i2c_bus - To show i2c bus info,
+> i2c_dev - To set or show the current bus,
+> i2c_probe - To probe the i2c device,
+> i2c_eeprom - To test i2c eeprom device,
+> i2c_probe_all_buses - To list down all the buses and probes it
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
 
-     BCM2835_MBOX_INIT_HDR(msg);
-     BCM2835_MBOX_INIT_TAG(&msg->get_board_rev, GET_BOARD_REV);
-@@ -437,6 +438,11 @@ static void get_board_revision(void)
-     if (ret) {
-         printf("bcm2835: Could not query board revision\n");
-         /* Ignore error; not critical */
-+        if (fdt_magic(fw_dtb_pointer) == FDT_MAGIC) {
-+            fdt_model = fdt_getprop((void *)fw_dtb_pointer, 0, "model", NULL);
-+            if (fdt_model != 0)
-+                printf("FW FDT model : %s\n", fdt_model);
-+        }
-         return;
-     }
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
--- 
-2.40.1
+--=20
+Tom
+
+--MqFvB2V1Lx+qMrUx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVdODwACgkQFHw5/5Y0
+tyySkAv/YAHe+no4tZlCxaYg/Xhy+TuY3LxgdeHCsUdFk9xv9n3cG61q2N0PdF1L
+kqhU9S1EuvgsNRFU/7/DtEE6j+DRf0kVYCCEAG1Ok/ExYNshFuInHWC+pXzSSNPH
+mcUxN3RPUwZu6TlBZCWlTyDacHQX7bIpJJ8UC1zEqIlGTtp+wG8y2PE6GtbzLP/f
+daEIdTOuyYIWLvlcrTTs9mEcn5BwjH4eb7eY+Do74MFjTxkKZ3WGUT/hdPuCKo7h
+GbEyBQgvSgz/W4RByScwRfcPNzdIiOF/zv2uTYQaWABf9/plrpypkSn7v+vD/Rqh
+jEJOjXYvYoF7Eovfz6i4916v1kb1yZ/h8aaCPo6Es92sT/3emGJaroja8wpxhc5g
+b2/kAI58R2jwek8fBLURcOkBSDfN+A/mEPpGkU2gxA6T0f39xnyDcW//qBDCL1RG
+olFYsPSKDEBHzOB6twz7isW0+fGNAaPBcd5m6ZYYplEwdvN2cMXTcvnUxRqcJ+4y
+KdaznHW+
+=J/lC
+-----END PGP SIGNATURE-----
+
+--MqFvB2V1Lx+qMrUx--
