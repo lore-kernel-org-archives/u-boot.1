@@ -4,80 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99234C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 568C1C61D92
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:06:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2B3087582;
-	Tue, 21 Nov 2023 15:03:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CB85871CD;
+	Tue, 21 Nov 2023 15:06:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MwA0PqdK";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="Ye/EVae8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D86587582; Tue, 21 Nov 2023 15:03:27 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 6A84E87264; Tue, 21 Nov 2023 15:06:54 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2795D875DE
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:03:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FC6E87197
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:06:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-677a12f1362so19202836d6.1
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:03:25 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a00a9d677fcso191985566b.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:06:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700575404; x=1701180204; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4/p02L//s7FYysLucvmRskw2doX42GNebb5pkPk93dQ=;
- b=MwA0PqdKz3Hf1wa/2Ip2Dg4gGHElV6S84VnHKte04eUGCwfOhtywl0IbyGYIYSV9Uo
- 4E0YDkVwQDR5cbtoFYo8raUtiK61Phb/Cb+qUaItLGhbX8pZcrGHbri3jXveK2l37xxl
- x5223ruzpKOm6+RUdYFTDTSuTIs47P9qac1XQ=
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1700575610; x=1701180410;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=T9N6woi2lBUF05JPuZStIrA4o5vXSWb4rGlGL3Bxtys=;
+ b=Ye/EVae8rGXHSCgj7P6KGSoJPjAbKflcuF7SslkGiKEq79Mrn7U+VKDRWSz4EQx+QF
+ GZ/XrF8KP4f8m13vJgnqVXyGOj4wsc7hrYuyCaICvozqSEi2gRaRTlCVNpN3NodGkBpt
+ tLKp1CQSnOMtRcvt68IhQJQ4wp1N9RikJFgUwa7FyKbKjLnMjHlFwin7YXJqMEtRnE+G
+ MPGgjUwlGpIaBRMZ9+OCPeEpmZ1scs1q7iFnnFts05TPtengOdl/MtsH7wlw+GBaXgc3
+ lbgoDn3a5Xz3EL6zDYQGb1oHyMO/L9Hf7+ZjncGlOfinHztjeuqSwn4Sf+V3yAOS1MY4
+ XEhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700575404; x=1701180204;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4/p02L//s7FYysLucvmRskw2doX42GNebb5pkPk93dQ=;
- b=IWkJuV+hFzcOQ7hU4Oa0jit+3A7wHO8x2RdhdJQTlDmER55Xq6Wii3dPsze8fY46fG
- 4Haspm58jUCtnTGQ9/zpEqd+hLVCcwrywsj6In8xW29WRiGyDElnHIhEGeo9c8Bz4FaX
- TuEmf6fotI3yjrDhEVmnI0CXDApn13rb3XPjQOu9TbFGE0brOHrhubK29I09sm/d1LUT
- oMFbbpCt046ET9gRO/k5Genkyb5A3XBhmeYzKplZ1EBfuCmqAqGIqr7GhBaxeGkHzmyw
- 35PIjwYcs3teR8sku8iT4Fi007KDN22Fvv2r/QPPRNF/emPpyODW1IY8FKvsTDxcvvfb
- BQrA==
-X-Gm-Message-State: AOJu0YygD01Gt0iMm5Ugv40+o9KsRS4TT7Wt6YmnzweXi4ZGmSsli5uL
- ScZOb6ljXSTdvCqCGKcJmczFHSeOPJsccu5i5r3GEw==
-X-Google-Smtp-Source: AGHT+IGxGD/a06TlsErIBGLZ7HlW/3lTWAs0HQVOv2Zy7Om2pvANKxu/89Z/NSvRF33z8Nal6vM0uQ==
-X-Received: by 2002:ad4:5c61:0:b0:66d:1d3f:17d7 with SMTP id
- i1-20020ad45c61000000b0066d1d3f17d7mr16508702qvh.8.1700575403781; 
- Tue, 21 Nov 2023 06:03:23 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
- [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
+ d=1e100.net; s=20230601; t=1700575610; x=1701180410;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=T9N6woi2lBUF05JPuZStIrA4o5vXSWb4rGlGL3Bxtys=;
+ b=gxjXXcdaH3BRMpKPLoKm/wEDWBNcfy8BZyKKjcJ2Frkr4AbF051LLE3mzcAHXfvJE/
+ UFURn1z/sM9geJ0/Is+6GgPdVB4Eb1sVW41jkJzCxSypEp+LEgevwSlBYd+fP845+vuP
+ K/gp20yh7dk6N/lgpoGVmXOHZbZNx6kLXBU2WpgWcXnrctsbxjB6MEeglhZo7eWHq1Xl
+ /KHRPUOhz46fyXXQF++JiqvpOxZhdNvgmOjkCUkcnViByxDMHGtKek3sd2cyli55BjKy
+ boyoMsuPSd8VYp9k4bQ6oKaIOwvSgLiwyYwsab0ScqXssG5pUTuMv2i/h1LOn8gbGr4P
+ 03rA==
+X-Gm-Message-State: AOJu0Yx37mj5fS6gYxnfXcJ+HFHzK15cS5/OPXTzw+D1xvtwpwFbv4R0
+ WlOBFtNewqPS+ZEXXJ3ShzkJdw==
+X-Google-Smtp-Source: AGHT+IEGNEPodRWWn/dhFgrllSXyO7gkWS6obPbGk9Ok4RDyXeCiwRRA5/CAXIofip7ycxDRMsQNsQ==
+X-Received: by 2002:a17:907:1c12:b0:a01:7745:467a with SMTP id
+ nc18-20020a1709071c1200b00a017745467amr2470265ejc.4.1700575610388; 
+ Tue, 21 Nov 2023 06:06:50 -0800 (PST)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
  by smtp.gmail.com with ESMTPSA id
- k4-20020ad44504000000b00678d010774bsm2817843qvu.104.2023.11.21.06.03.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 06:03:23 -0800 (PST)
-Date: Tue, 21 Nov 2023 09:03:21 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH 1/2] global: Clean up arch/*/dts/Makefile
-Message-ID: <20231121140321.GT2513409@bill-the-cat>
-References: <20231117225214.2144414-1-trini@konsulko.com>
- <CAPnjgZ23gJb6mu53Tmmy9OdaRLu9zCCLgJTGsTVjjKcCv63VqA@mail.gmail.com>
- <20231119202802.GF2513409@bill-the-cat>
- <CAPnjgZ3D_KRDYsA8u5K+kSKAe5n-w2vXMizPTxZphyeavQcbSg@mail.gmail.com>
+ gq16-20020a170906e25000b009fca9484a62sm3144410ejb.200.2023.11.21.06.06.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 21 Nov 2023 06:06:49 -0800 (PST)
+Message-ID: <02dae49c-a641-4182-9ebc-030948422055@monstr.eu>
+Date: Tue, 21 Nov 2023 15:06:47 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7pD6cJEkqVzd56GC"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3D_KRDYsA8u5K+kSKAe5n-w2vXMizPTxZphyeavQcbSg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 5/6] spi: zynqmp_gqspi: Add parallel memories support
+ in GQSPI driver
+Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
+ git@xilinx.com, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+References: <20231114045638.6463-1-venkatesh.abbarapu@amd.com>
+ <20231114045638.6463-6-venkatesh.abbarapu@amd.com>
+From: Michal Simek <monstr@monstr.eu>
+Autocrypt: addr=monstr@monstr.eu; keydata=
+ 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
+In-Reply-To: <20231114045638.6463-6-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,139 +140,136 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7pD6cJEkqVzd56GC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 20, 2023 at 07:16:12PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 19 Nov 2023 at 13:28, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Nov 19, 2023 at 12:09:07PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 17 Nov 2023 at 15:52, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > With commit 3609e1dc ("dts: automatically build necessary .dtb file=
-s")
-> > > > we now have logic that will ensure that all device trees needed in =
-the
-> > > > binary are built automatically. Any device tree that the developer =
-needs
-> > > > while working can still be built normally via make arch/.../foo.dtb=
- so
-> > > > we can simply drop the rest of this logic.
-> > > >
-> > > > Suggested-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > >  arch/arc/dts/Makefile        |    8 -
-> > > >  arch/arm/dts/Makefile        | 1436 +-----------------------------=
-----
-> > > >  arch/m68k/dts/Makefile       |   18 -
-> > > >  arch/microblaze/dts/Makefile |    2 -
-> > > >  arch/mips/dts/Makefile       |   37 -
-> > > >  arch/nios2/dts/Makefile      |    2 -
-> > > >  arch/powerpc/dts/Makefile    |   32 -
-> > > >  arch/riscv/dts/Makefile      |    9 -
-> > > >  arch/sandbox/dts/Makefile    |    5 -
-> > > >  arch/sh/dts/Makefile         |    2 +-
-> > > >  arch/x86/dts/Makefile        |   22 -
-> > > >  arch/xtensa/dts/Makefile     |    2 -
-> > > >  configs/iot2050_defconfig    |    1 +
-> > > >  13 files changed, 6 insertions(+), 1570 deletions(-)
-> > >
-> > > I can see the motivation for this, but it ends up moving us away from
-> > > driver model and devicetree, IMO. For example, rk3399 and other
-> > > rockchip boards use DT for their init so the same U-Boot can be used
-> > > for all, mostly. Ideally that is the way all boards would be, as they
-> > > are in Linux.
-> > >
-> > > But here I have to manually add all the rk3399 boards to OF_LIST for
-> > > each board and enable SPL_LOAD_FIT (and SPL_FRAMEWORK but that is
-> > > fine) to make this work.
-> >
-> > How are you doing this today on N rk3399 boards if you aren't tweaking a
-> > CONFIG option to get the correct dtb in to the final binary? That I
-> > think is where we go back-and-forth on stuff like this.
->=20
-> Basically without SPL_FIT_LOAD it works by stuffing the correct DT
-> into the final image just before it is flashed. But I do imagine in a
-> world where (say) TPL is different for each board but SPL, TF-A,
-> OP-TEE and U-Boot proper are the same for each board.
->=20
-> But really we need to encourage these complex SoCs to use runtime
-> configuration from go to whoa. Where DT cannot be used (e.g. TPL) we
-> can do the Zephyr trick or perhaps create a little SoC-specific config
-> block which is provided separately and tacked onto the generic TPL
-> image. Having said that, TPL images are small, so the impact of having
-> one per board is not great.
->=20
-> > If there's
-> > deconfigs that can support N boards, but only list a, or only a few, dtb
-> > files in the right CONFIG variable how do you get it to run on the
-> > others? I know you noted some Exynos platforms it's a simple concat to
-> > make another platform work instead. But I really don't know how common
-> > that is in theory, and even less so in practice. Picking up rk3399, you
-> > need bl31 and op-tee and you can only get those so generic too.
->=20
-> I understand that they are 100% generic for rk3399. E.g. for TF-A you
-> use PLAT=3Drk3399 and that is that.
->=20
-> >
-> > And part of the issue is that with Linux, the "do board specific things"
-> > just gets pushed down a layer, to us. We have to just know X/Y/Z at
-> > build time so that someone else can know it at run time.
->=20
-> Sure, and naturally that gets pushed down from U-Boot proper (which I
-> think is becoming quite generic) to SPL, TPL, etc.
->=20
-> If it would help, I could try out (say) rockpro64-rk3399 and
-> firefly-rk3399 to show how this works?
->=20
-> I know it is tempting to build everything individually, but it won't
-> be nice. Binman knows what is needed for each board and can be used
-> (one day) to create update files for an SoC without duplication. As
-> soon as you give up on the commonality, everything just explodes in
-> size, complexity and user confusion.
+On 11/14/23 05:56, Venkatesh Yadav Abbarapu wrote:
+> Add support for parallel memories in zynqmp_gqspi.c driver. In case of
+> parallel memories STRIPE bit is set and sent to the qspi ip, which will
+> send data bits to both the flashes in parallel. However for few commands
+> we should not use stripe, instead send same data to both the flashes.
+> Those commands are exclueded by using zynqmp_qspi_update_stripe().
+> 
+> Also update copyright info for this file.
+> 
+> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/spi/zynqmp_gqspi.c | 140 ++++++++++++++++++++++++++++++++-----
+>   include/spi.h              |  12 ++++
+>   2 files changed, 136 insertions(+), 16 deletions(-)
+> 
+> diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+> index a323994fb2..7e90a989dd 100644
+> --- a/drivers/spi/zynqmp_gqspi.c
+> +++ b/drivers/spi/zynqmp_gqspi.c
+> @@ -1,6 +1,7 @@
+>   // SPDX-License-Identifier: GPL-2.0+
+>   /*
+> - * (C) Copyright 2018 Xilinx
+> + * (C) Copyright 2013 - 2022, Xilinx, Inc.
+> + * (C) Copyright 2023, Advanced Micro Devices, Inc.
+>    *
+>    * Xilinx ZynqMP Generic Quad-SPI(QSPI) controller driver(master mode only)
+>    */
+> @@ -25,6 +26,8 @@
+>   #include <linux/bitops.h>
+>   #include <linux/err.h>
+>   #include <linux/sizes.h>
+> +#include <linux/mtd/spi-nor.h>
+> +#include "../mtd/spi/sf_internal.h"
+>   #include <zynqmp_firmware.h>
+>   
+>   #define GQSPI_GFIFO_STRT_MODE_MASK	BIT(29)
+> @@ -88,6 +91,9 @@
+>   #define SPI_XFER_ON_LOWER		1
+>   #define SPI_XFER_ON_UPPER		2
+>   
+> +#define GQSPI_SELECT_LOWER_CS          BIT(0)
+> +#define GQSPI_SELECT_UPPER_CS          BIT(1)
+> +
+>   #define GQSPI_DMA_ALIGN			0x4
+>   #define GQSPI_MAX_BAUD_RATE_VAL		7
+>   #define GQSPI_DFLT_BAUD_RATE_VAL	2
+> @@ -183,13 +189,14 @@ struct zynqmp_qspi_priv {
+>   	int bytes_to_transfer;
+>   	int bytes_to_receive;
+>   	const struct spi_mem_op *op;
+> +	unsigned int is_parallel;
+> +	unsigned int u_page;
+> +	unsigned int bus;
+> +	unsigned int stripe;
+> +	unsigned int flags;
+> +	u32 max_hz;
+>   };
+>   
+> -__weak int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value)
+> -{
+> -	return 0;
+> -}
+> -
+>   static int zynqmp_qspi_of_to_plat(struct udevice *bus)
+>   {
+>   	struct zynqmp_qspi_plat *plat = dev_get_plat(bus);
+> @@ -234,9 +241,30 @@ static u32 zynqmp_qspi_bus_select(struct zynqmp_qspi_priv *priv)
+>   {
+>   	u32 gqspi_fifo_reg = 0;
+>   
+> -	gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+> -			 GQSPI_GFIFO_CS_LOWER;
+> -
+> +	if (priv->is_parallel) {
+> +		if (priv->bus == SPI_XFER_ON_BOTH)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+> +					 GQSPI_GFIFO_UP_BUS |
+> +					 GQSPI_GFIFO_CS_UPPER |
+> +					 GQSPI_GFIFO_CS_LOWER;
+> +		else if (priv->bus == SPI_XFER_ON_LOWER)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+> +					 GQSPI_GFIFO_CS_UPPER |
+> +					 GQSPI_GFIFO_CS_LOWER;
+> +		else if (priv->bus == SPI_XFER_ON_UPPER)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
+> +					 GQSPI_GFIFO_CS_LOWER |
+> +					 GQSPI_GFIFO_CS_UPPER;
+> +		else
+> +			debug("Wrong Bus selection:0x%x\n", priv->bus);
+> +	} else {
+> +		if (priv->u_page)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+> +					 GQSPI_GFIFO_CS_UPPER;
+> +		else
+> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+> +					 GQSPI_GFIFO_CS_LOWER;
+> +	}
+>   	return gqspi_fifo_reg;
+>   }
+>   
+> @@ -295,8 +323,14 @@ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
+>   		gqspi_fifo_reg |= GQSPI_SPI_MODE_SPI |
+>   				  GQSPI_IMD_DATA_CS_ASSERT;
+>   	} else {
+> -		gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
+> -		gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
+> +		if (priv->is_parallel)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
+> +					 GQSPI_GFIFO_LOW_BUS;
+> +		else if (priv->u_page)
+> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS;
+> +		else
+> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
+> +			gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
 
-I guess with all of what you said I still don't understand why we need
-the sometimes wrong and not really used lists of dtb files in
-arch/*/dts/Makefile. A rockpro64-rk3399-tpl-only_defconfig still needs
-to say CONFIG_DEFAULT_DEVICETREE=3D"rk3399-rockpro64" so that you build
-the tree so that it's available to binman. We have configs today that
-build and support N boards, and so use SPL_LOAD_FIT and are as generic
-as they can be. The only thing that this patch here changes is that
-you're relying on an implicit CONFIG symbol to list whatever device
-trees you want to be built and this patch says that you need to use one
-of the explicit CONFIG symbols instead.
 
-If you want to try and demonstrate a more generic way of doing things,
-sunxi is probably the best bet for that because there's no TARGET
-configs there, everything is SoC + device tree. But it's not making any
-use of the lists that get removed here.
+Here you have bug. If it is the part of else there should be {} around.
 
---=20
-Tom
+If it is valid for all then indentation is not correct.
 
---7pD6cJEkqVzd56GC
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,
+Michal
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVcuKMACgkQFHw5/5Y0
-tyy7Ggv/aIeObZfeXmTzJ2VMrk6bYI8Q7gkTFgLqNHEUbty96kAqrQJ0WEpYSNnl
-AVhwq5fcLjntUpiARH7AAV0k3Ck9XoYx1vueG6LYpmhzTAbXZrIU/1JzyOUFjhxm
-U2Bj3gNmH5rmP/bnmeXxfTRkJfLt8kv/1h0PIJpwS/sfG4AzLbGw0iDZNY5ObSNW
-C2MMlK5JxY6kl5XZP9rxrizk+z44tgndQ4eXpBhuoxfZrQmyXFVP7pISqEx2Lfmo
-cScFHM6JQk/JAjGJ++PxEy2Uq1+eSwdzMQOgj9aA8y8RG0O7eDQwJ+ZVHRg2nmrd
-JEGP8cs2EGs5SlXlm9t+WPeBl705exAfhTuZ12SU9umKaGD+wnCoj7IHEEoI1Y4b
-2xL8v8TU/YdBNdjAqwUGGQvg/pyV/JBXEyaeEjlrKLw8K/sCZlJIZJ28dWOpKkf0
-l8zB0reBPuddy3KCs4iw1jCgN5zX464b0QnOq5BMUuAZdRNN1fG7dC6dsiq7l7kM
-MaMHbDpT
-=Dk2N
------END PGP SIGNATURE-----
-
---7pD6cJEkqVzd56GC--
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
