@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36D5C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:37:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F37FC54FB9
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 11:37:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8878875B9;
-	Tue, 21 Nov 2023 12:36:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 391F787438;
+	Tue, 21 Nov 2023 12:36:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NgWzKEoT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j3m0lQXb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B3C687596; Tue, 21 Nov 2023 12:36:13 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id F14DF875A7; Tue, 21 Nov 2023 12:36:13 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 195A987596
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2699787251
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 12:36:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-7a68b87b265so196168539f.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:09 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-7a6acc8e222so196874339f.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:36:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700566567; x=1701171367; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700566569; x=1701171369; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6ejrvF6ZG6rQRumd8WNeWzrbmgzoaTPpEgIi+vopkBo=;
- b=NgWzKEoTxv/1yejlUxpCjC7Jo6KjNmpEfUM8R/GoxtsJnsGWevLSfg4fuTem79wZPr
- Dyx5Rsw7BWur07QinuQ9c6g96bat2OSWTbDs++xUJ2oTvQQugPpeJNgzGIw/HlSz6fr/
- FbfLs3OmX09cPjry8Bv28+Ydm0Jtdp9VyYw0g=
+ bh=r47XcqkFZuYAnfencEDGtmt/7Hgak2gqzlP85DE5MJs=;
+ b=j3m0lQXbQJJDMdJYnF+/vn3UG4WtDl8rNKQo6GyiLmyNatH0x4y5L6blvdF3NWa+LR
+ Wgiiy2+VZ0+tEXnC7jinHDSVdCMgQ2bBbMFS9t06wC7vIGqDxX/RDCFDWlhBGQSPWRHP
+ vcm3s8cNIr/GEzN3RF1lI0ojqp5Y/1fnjqcJA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700566567; x=1701171367;
+ d=1e100.net; s=20230601; t=1700566569; x=1701171369;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6ejrvF6ZG6rQRumd8WNeWzrbmgzoaTPpEgIi+vopkBo=;
- b=iUvvh4LSOFoEmlQTO3LC/7HQQFsE94pWQA0W9AFEjHe2TOIX5CyDfOslm4wiP9hX2X
- UfArBRWf4pWVb9gYwOhL9Sajmz+Q71Wm9sV2IO56eS58WSvTHsJCe3H0LL37TQ4EcJbj
- tySuRTxJ2tmO24BhuanfnpZOveI/2QynoNqpr7tpZELrlLiR8e+wEyOJUb0Fgn00M36h
- rA7h9B3pb7Jfw7PqM/NycvN/WZTKKyWCfA2KTLDbYLwibE1wLip66u2mjaQLZFMyWDg7
- vqz2uZgoSWNNpdUkR1u/Ij6VewuUhvLju1HzG7YVGL1MjtDnK0fTMgEJPmUbaeiETj4d
- 8kTA==
-X-Gm-Message-State: AOJu0YyzLEYaMzT0WxzAzuziEUTLsbzVyv8q3P3NMr6tV7L8V0oqWJxL
- r1vH5CWR0dBZUKToMXpK0UwdZvrDtqBfD/isOVPvBQ==
-X-Google-Smtp-Source: AGHT+IFFVgW22IwEilsGJPKMdnIHIJUksDQOjJIXLK5ir4Mm2HayL9wU4xEmZwzS2DCCR3fLmdtJ7g==
-X-Received: by 2002:a6b:f817:0:b0:795:2274:1f3f with SMTP id
- o23-20020a6bf817000000b0079522741f3fmr11826872ioh.3.1700566567589; 
- Tue, 21 Nov 2023 03:36:07 -0800 (PST)
+ bh=r47XcqkFZuYAnfencEDGtmt/7Hgak2gqzlP85DE5MJs=;
+ b=cwPUG6SaoOor2oi2SpmsTLjiJpDmwgAQJ4iynttfdL5gY5hZqpKo48W7E6vSb6U+2c
+ VtsuJsXW1E4sHxVI5fc+/l854REPx90b6qv3Ylr11ILEw706cWkxnrlaZL0VLIOHR5x1
+ QdocnnLtOiZ3v3nzCGrS1TiZF2UYDJZ7bDHkqP0fRVB01GPpplycD92uanfCI3x+CLTk
+ xLttF8pknLDyO0xJwFPklNLxbefW9iwLUKfZpPq4pcvtSl4yGtYDAiS+/CLeLkiIh4um
+ QSs6BONrJ/Hv9wKKgShv/kuW8R8N+Y7u2Ni43w4U7TRDMD9MYsuo4eE4ij+S/Lu0STgw
+ qz4Q==
+X-Gm-Message-State: AOJu0Yz6A8cSxQxI89vmvN7bMi+SGUxLJKQ79j5H0DkolOW4OueLdnQy
+ X6cO2oHO/7jgOWd/zo6v0zm1vSxAXNUyRe3Xzyg8Mg==
+X-Google-Smtp-Source: AGHT+IFRHxqZQXco21fegs3R9rYz3K71OBrU/cwYs6PXffiJXSvRBvtaMPR+itWMVwjarKLcUBW7pg==
+X-Received: by 2002:a05:6602:6402:b0:790:ab53:ed16 with SMTP id
+ gn2-20020a056602640200b00790ab53ed16mr13691787iob.21.1700566569613; 
+ Tue, 21 Nov 2023 03:36:09 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.07
+ h10-20020a0566380f8a00b0045bb982a3d2sm2559190jal.60.2023.11.21.03.36.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 03:36:07 -0800 (PST)
+ Tue, 21 Nov 2023 03:36:09 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 5/7] WIP: efi: Add a test for the EFI bootmeth
-Date: Tue, 21 Nov 2023 04:35:51 -0700
-Message-ID: <20231121113557.800353-6-sjg@chromium.org>
+Subject: [PATCH 7/7] WIP: efi: debugging
+Date: Tue, 21 Nov 2023 04:35:53 -0700
+Message-ID: <20231121113557.800353-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
 In-Reply-To: <20231121113557.800353-1-sjg@chromium.org>
 References: <20231121113557.800353-1-sjg@chromium.org>
@@ -89,135 +89,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a simple test which checks that we can run an EFI app and that the
-call to exit boot services works OK.
+This works when run outside a test:
 
-This is intended to catch the recent bootflow bug fixed by:
+good:
 
-  https://patchwork.ozlabs.org/project/uboot/patch/
-  20231115183522.1.I4cbfd34d576c0ad66a74c6ec3e8024adabc73573@changeid/
+/tmp/b/sandbox/u-boot -T
+    -c "bootfl scan mmc; bootfl sel 1; bootfl list; bootfl b"
 
-TODO:
-- change it to use USB instead of mmc
-- drop the hacks in test.dts
+** Booting bootflow 'mmc7.bootdev.part_1' with efi
+desc = 0000000018c86ee0
+dev=mmc, devnr=7:1, path=efi/boot/bootsbox.efi, buffer=0000000011001000, size=1600
+- boot device /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
+- image /efi\boot\bootsbox.efi
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+EFI using ACPI tables at 8ef8000
+WARNING: Can't have ACPI table and device tree - ignoring DT.
+Loaded from disk
+Booting /efi\boot\bootsbox.efi
+EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+info->device_handle = 0000000018f180e0
+loaded_image info for 0000000018f184e0: 0000000018f18470
+
+EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+EFI: Call: efi_start_image(handle, &exit_data_size, &exit_data)
+Hello, world!
+Running on UEFI 2.10
+Have ACPI 2.0 table
+Have SMBIOS table
+18f18470
+Load options: <none>
+finding
+- search 0000000018c931a0 ret=0
+File path: /efi\boot\bootsbox.efi
+Vendor: Das U-Boot
+Boot device: /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
+Exiting boot sevices
+EFI: 5 returned by efi_start_image(handle, &exit_data_size, &exit_data)
+Boot failed (err=-22)
+
+bad:
+
+rtv bootflow_efi
+
+** Booting bootflow 'mmc7.bootdev.part_1' with efi
+desc = 0000000018c86ee0
+dev=mmc, devnr=8:1, path=efi/boot/bootsbox.efi, buffer=0000000011001000, size=1600
+- boot device /VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/SD(7)/SD(3)/HD(1,MBR,0x2f7d9756,0x800,0x9000)
+- image /efi\boot\bootsbox.efi
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+EFI using ACPI tables at 8ef8000
+WARNING: Can't have ACPI table and device tree - ignoring DT.
+Loaded from disk
+Booting /efi\boot\bootsbox.efi
+EFI: Call: efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+info->device_handle = 0000000000000000
+loaded_image info for 0000000018c924e0: 0000000018f15080
+
+EFI: 0 returned by efi_load_image(false, efi_root, file_path, source_buffer, source_size, &handle)
+EFI: Call: efi_start_image(handle, &exit_data_size, &exit_data)
+Hello, world!
+Running on UEFI 2.10
+Have ACPI 2.0 table
+Have SMBIOS table
+18f15080
+Load options: <none>
+finding
+- search 0000000018c931a0 ret=0
+File path: /efi\boot\bootsbox.efi
+Missing device handle
+Exiting boot sevices
+EFI: 5 returned by efi_start_image(handle, &exit_data_size, &exit_data)
+Boot failed (err=-22)
+test/boot/bootflow.c:1091, bootflow_efi(): console:
+Expected 'No EFI system partition',
+     got 'desc = 0000000018c86ee0'
+Test bootflow_efi failed 1 times
+Failures: 1
+
+(see 'Missing device handle')
+
+It seems that the device number is inconsistent between generation and
+decoding.
+
+function rt_get_suite_and_name() {
+	local arg
+	#echo arg $arg
+	suite=
+	name=
+
+	if [ "$1" = "-f" ]; then
+		force="-f"
+		shift
+	fi
+	arg="$1"
+	rest="$2"
+
+	# The symbol is something like this:
+	#	_u_boot_list_2_ut_bootstd_test_2_vbe_simple_test_base
+	# Split it into the suite name (bootstd) and test name
+	# (vbe_simple_test_base)
+	read suite name < \
+		<(nm /tmp/b/$exec/u-boot |grep "list_2_ut.*$arg.*" \
+			| cut -d' ' -f3 \
+			| head -1 \
+			| sed -n 's/_u_boot_list_2_ut_\(.*\)_test_2_/\1 /p')
+	#echo suite $suite
+	#echo name $name
+	#name=${1#dm_test_}
+	#name=${name#ut_dm_}
+}
+
+function rtv() {
+	local exec=sandbox
+	local suite name force rest
+	rt_get_suite_and_name $*
+
+	U_BOOT_PERSISTENT_DATA_DIR=/tmp/b/sandbox/persistent-data \
+	/tmp/b/$exec/u-boot -v -T $rest -c "ut $suite $force $name"
+}
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/dts/test.dts | 10 +++++++-
- test/boot/bootflow.c      | 53 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 62 insertions(+), 1 deletion(-)
+ boot/bootflow.c               | 2 ++
+ boot/bootmeth_efi.c           | 1 +
+ cmd/bootefi.c                 | 1 +
+ lib/efi_loader/efi_boottime.c | 5 +++++
+ test/boot/bootflow.c          | 2 +-
+ 5 files changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 6fd62fcdf8d7..559292cc2f7a 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -43,6 +43,7 @@
- 		mmc4 = "/mmc4";
- 		mmc5 = "/mmc5";
- 		mmc6 = "/mmc6";
-+		mmc7 = "/mmc7";
- 		pci0 = &pci0;
- 		pci1 = &pci1;
- 		pci2 = &pci2;
-@@ -108,7 +109,7 @@
- 		compatible = "u-boot,boot-std";
+diff --git a/boot/bootflow.c b/boot/bootflow.c
+index 6922e7e0c4e7..0513522a7ec4 100644
+--- a/boot/bootflow.c
++++ b/boot/bootflow.c
+@@ -464,6 +464,8 @@ void bootflow_init(struct bootflow *bflow, struct udevice *bootdev,
  
- 		filename-prefixes = "/", "/boot/";
--		bootdev-order = "mmc2", "mmc1";
-+		/*bootdev-order = "mmc2", "mmc1";*/
+ void bootflow_free(struct bootflow *bflow)
+ {
++	/* this is where we want to get to (will only happen with USB) */
++	printf("bootflow free\n");
+ 	free(bflow->name);
+ 	free(bflow->subdir);
+ 	free(bflow->fname);
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index ae936c8daa18..edee9e62a458 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -127,6 +127,7 @@ static void set_efi_bootdev(struct blk_desc *desc, struct bootflow *bflow)
+ 	 * this can go away.
+ 	 */
+ 	media_dev = dev_get_parent(bflow->dev);
++	printf("desc = %p\n", desc);
+ 	snprintf(devnum_str, sizeof(devnum_str), "%x:%x",
+ 		 desc ? desc->devnum : dev_seq(media_dev),
+ 		 bflow->part);
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index 20e5c94a33a4..3c014e5684aa 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -5,6 +5,7 @@
+  *  Copyright (c) 2016 Alexander Graf
+  */
  
- 		extlinux {
- 			compatible = "u-boot,extlinux";
-@@ -1127,6 +1128,13 @@
- 		filename = "mmc6.img";
- 	};
++#define LOG_DEBUG
+ #define LOG_CATEGORY LOGC_EFI
  
-+	/* This is used for EFI tests */
-+	mmc7 {
-+/*		status = "disabled";*/
-+		compatible = "sandbox,mmc";
-+		filename = "mmc7.img";
-+	};
-+
- 	pch {
- 		compatible = "sandbox,pch";
- 	};
+ #include <common.h>
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index 0b7579cb5af1..149da5798740 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -1820,6 +1820,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
+ 
+ 	if (device_path) {
+ 		info->device_handle = efi_dp_find_obj(device_path, NULL, NULL);
++		printf("info->device_handle = %p\n", info->device_handle);
+ 
+ 		dp = efi_dp_append(device_path, file_path);
+ 		if (!dp) {
+@@ -1828,6 +1829,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
+ 		}
+ 	} else {
+ 		dp = NULL;
++		printf("\nno device handle\n");
+ 	}
+ 	ret = efi_add_protocol(&obj->header,
+ 			       &efi_guid_loaded_image_device_path, dp);
+@@ -1842,6 +1844,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
+ 			       &efi_guid_loaded_image, info);
+ 	if (ret != EFI_SUCCESS)
+ 		goto failure;
++	printf("loaded_image info for %p: %p\n\n", &obj->header, info);
+ 
+ 	*info_ptr = info;
+ 	*handle_ptr = obj;
+@@ -2665,8 +2668,10 @@ static efi_status_t EFIAPI efi_locate_protocol(const efi_guid_t *protocol,
+ 		if (ret == EFI_SUCCESS)
+ 			goto found;
+ 	} else {
++		printf("finding\n");
+ 		list_for_each_entry(efiobj, &efi_obj_list, link) {
+ 			ret = efi_search_protocol(efiobj, protocol, &handler);
++			printf("- search %p ret=%lx\n", efiobj, ret);
+ 			if (ret == EFI_SUCCESS)
+ 				goto found;
+ 		}
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index b97c566f000b..ad54ef6eaabc 100644
+index ad54ef6eaabc..76c65c46cc01 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -13,6 +13,7 @@
- #include <bootstd.h>
- #include <cli.h>
- #include <dm.h>
-+#include <efi_loader.h>
- #include <expo.h>
- #ifdef CONFIG_SANDBOX
- #include <asm/test.h>
-@@ -30,6 +31,9 @@ DECLARE_GLOBAL_DATA_PTR;
- extern U_BOOT_DRIVER(bootmeth_cros);
- extern U_BOOT_DRIVER(bootmeth_2script);
+@@ -536,7 +536,7 @@ static int prep_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
  
-+/* Use this as the vendor for EFI to tell the app to exit boot services */
-+static u16 __efi_runtime_data test_vendor[] = u"U-Boot testing";
-+
- static int inject_response(struct unit_test_state *uts)
- {
- 	/*
-@@ -1059,3 +1063,52 @@ static int bootflow_cros(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootflow_cros, 0);
-+
-+/* Test EFI bootmeth */
-+static int bootflow_efi(struct unit_test_state *uts)
-+{
-+	ut_assertok(scan_mmc_bootdev(uts, "mmc7", true));
-+	ut_assertok(run_command("bootflow list", 0));
-+
-+	ut_assert_nextlinen("Showing all");
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextlinen("  0  extlinux");
-+	ut_assert_nextlinen("  1  efi          ready   mmc          1  mmc7.bootdev.part_1       efi/boot/bootsbox.efi");
-+	ut_assert_nextlinen("---");
-+	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("bootflow select 1", 0));
-+	ut_assert_console_end();
-+
-+	/* signal to helloworld to exit boot services */
-+	systab.fw_vendor = test_vendor;
-+
-+	ut_asserteq(1, run_command("bootflow boot", 0));
-+	ut_assert_nextline(
-+		"** Booting bootflow 'mmc7.bootdev.part_1' with efi");
-+	ut_assert_nextline("No EFI system partition");
-+	ut_assert_nextline("No EFI system partition");
-+	ut_assert_nextline("Failed to persist EFI variables");
-+	ut_assert_nextline("EFI using ACPI tables at 8ef8000");
-+	ut_assert_nextline("WARNING: Can't have ACPI table and device tree - ignoring DT.");
-+	ut_assert_nextline("Booting /efi\\boot\\bootsbox.efi");
-+
-+	/* TODO: Why the \r ? */
-+	ut_assert_nextline("Hello, world!\r");
-+	ut_assert_nextline("Running on UEFI 2.10\r");
-+	ut_assert_nextline("Have ACPI 2.0 table\r");
-+	ut_assert_nextline("Have SMBIOS table\r");
-+	ut_assert_nextline("Load options: <none>\r");
-+	ut_assert_nextline("File path: /efi\\boot\\bootsbox.efi\r");
-+	ut_assert_nextline("Missing device handle\r");
-+	ut_assert_nextline("Exiting boot sevices");
-+
-+	ut_assert_console_end();
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_efi, 0);
+ 	order[2] = mmc_dev;
+ 
+-	/* Enable the mmc4 node since we need a second bootflow */
++	/* Enable the requested mmc node since we need a second bootflow */
+ 	root = oftree_root(oftree_default());
+ 	node = ofnode_find_subnode(root, mmc_dev);
+ 	ut_assert(ofnode_valid(node));
 -- 
 2.43.0.rc1.413.gea7ed67945-goog
 
