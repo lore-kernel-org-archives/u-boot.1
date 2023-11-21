@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A322C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D697C61D97
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC27F87622;
-	Tue, 21 Nov 2023 23:11:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E5AF87635;
+	Tue, 21 Nov 2023 23:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oYGRC8Ih";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mBFvVd9I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BAD987631; Tue, 21 Nov 2023 23:11:37 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id C0F4D87622; Tue, 21 Nov 2023 23:11:37 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79D2986538
+ by phobos.denx.de (Postfix) with ESMTPS id 79C9C8269F
  for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:11:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-da0cfcb9f40so5981043276.2
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-dafe04717baso5620204276.1
  for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:11:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700604694; x=1701209494; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pvBi6zp40wGeOvksZjl5UQryTbM38wdNVX9FQJZx/lk=;
- b=oYGRC8IhHdtxnwEBZi6DsKgkOYnyhnNyI9ioJJDEGQ8PzuhsGeZgXpS9dn8q9RdpYW
- FnENPEa2Y4TmkDyrtW6eVhskCQqtLdJ2Rscfm23oV/IkAp6zU7pLMqgOLNA+p3l5gPZj
- wAjKp9e8Bh8v3+wcds4e4Ljbp1ZNEm6sLdJzE=
+ bh=6oMkYREIDiMfLUoTMulgYQ62E1ppub2PAY1s7VL1bF8=;
+ b=mBFvVd9IISL5WG/T5mQTbO4CxYbBnXWYWtHB7lWU4CAcNIrXvLgkIspH0Rq/rhn0p3
+ yTwGWJ8KvNvLeFJq2MRSncUKwISiBbF/WJDaLE5DxqWxnY20ffsRq1i3gQAdsHUhvpsj
+ BXcTG6ukLQTW5Kgt/pcw0ZOyFqk8hPMXvzBUc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700604694; x=1701209494;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pvBi6zp40wGeOvksZjl5UQryTbM38wdNVX9FQJZx/lk=;
- b=D1nfrbyGqngd4uqJ4G6/0BK0pipHtgdvC+qr/oHDVjtClMtQQr8dvYRfkTURlRCRng
- Oiyf2UBOm/n1RlxLuQTi/ZHXB87Hc8fOIpYYA6sgCWUS/BMIvuaY8qJY+ODuImTkOG6O
- YbjJ2Il4uVHeOmZVrsXJhMbxLhis3mPwKXxunhmAwIsumut5tXi9qjqDOFav73lwOEZ/
- ILsph40OkCzZhvRUthcMNZudHvK6lWdykfdbNAs9+6AemQn8k0TddtG0OMhGCPy3Gva7
- i5TwxMOa8O6cwY/ZjutzdNCPMUab1xsZluWKS423dZ/vMIQ1pve7oq3lDuyeo8GfzpOE
- zpOw==
-X-Gm-Message-State: AOJu0YyRVF+IIKhdhUBH/o+bC36IMXQV/pEQ2RzgfhxNt6UlJpeLuM/9
- yEATjG7e6vQvHeOWYkWTi5OuobyB3iNf14tCI3dMAg==
-X-Google-Smtp-Source: AGHT+IG2eH68MDsi6lDtXZ1F/UOBRGejA3HWOkUmHOhquhwWq3vMHOAHdyFuPqVpLzPR9xsApkEW2jEbi4tFGZbWGCA=
-X-Received: by 2002:a05:6902:46:b0:d9b:eb86:2b26 with SMTP id
- m6-20020a056902004600b00d9beb862b26mr320247ybh.21.1700604694021; Tue, 21 Nov
- 2023 14:11:34 -0800 (PST)
+ bh=6oMkYREIDiMfLUoTMulgYQ62E1ppub2PAY1s7VL1bF8=;
+ b=URnZukAPyedHs/2FpjIELEVrZiyQF7SmOqDgVgDMRP0NZ+Y7Fk2EiEhCdMOyqvpcgV
+ Jownpu7Y1dX6sfxpO1tfT/pClYvZmdOxaPFXgJtZ24zAejaaWvW+PPy22czbiP38UhE9
+ 84OwLDyqZbwGV3E0b7otVUdOMJ7zCFvpmAj4X//B2wz5nlAY+Skf+OWdGHVdZpQQxEYZ
+ f27HsmkE3uMY0jIUDeRYOx1EOc5XhpeY3FlYk5lbU1Hqq2p3keO3nJZA/j8dEEuryleg
+ EgcqU9hQx1lhlUdxCCK00fJRFKxmb5aCnJp4s1WuSxe5r6P1oxviFvGdWkBEcP9qNFS0
+ BrwQ==
+X-Gm-Message-State: AOJu0YyCCbL7XY7Lr2ltq/l6wh0gheS1VFMLDx59Nhhfua6nprQSDkmt
+ xyF1vDJ3PvWblfLWasphU7/uX1zZBa3nDXbwvyQKxQ==
+X-Google-Smtp-Source: AGHT+IFGZVYQQB1qahOQvbd//cylFWjRcHZUX39x6SDAviu0xPS5SV7d26HS5vbmcNKICWo+veOthe1vkCf0kVEOtgs=
+X-Received: by 2002:a25:512:0:b0:da0:97d3:4e2 with SMTP id
+ 18-20020a250512000000b00da097d304e2mr351038ybf.42.1700604694035; 
+ Tue, 21 Nov 2023 14:11:34 -0800 (PST)
 MIME-Version: 1.0
-References: <ca3435b5-25de-727d-ca46-a88a234f9fc5@gmail.com>
- <CAPnjgZ1eCwAg=i27Kkd0mk7PeR8Eu_955utAjBfkNrMvKZyUgw@mail.gmail.com>
- <b99a114b-2715-2cba-cb0f-0dfafd32c29d@gmail.com>
-In-Reply-To: <b99a114b-2715-2cba-cb0f-0dfafd32c29d@gmail.com>
+References: <bd09ee5c-5c73-4990-8b27-bca9bbe14881@canonical.com>
+In-Reply-To: <bd09ee5c-5c73-4990-8b27-bca9bbe14881@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 15:11:13 -0700
-Message-ID: <CAPnjgZ2t3RiCUjxknrPRqxEcEJtCcPOL=PGN6uuaVRJiWDQ3hA@mail.gmail.com>
-Subject: Re: U-Booters at LPC
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de
+Date: Tue, 21 Nov 2023 15:11:03 -0700
+Message-ID: <CAPnjgZ05=yibPQEfoyAXijrepjZ9Q9crQaPbB_jYaubuY+M9OQ@mail.gmail.com>
+Subject: Re: [BUG] Video does not work as expected on efi-x86_app64.defconfig
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,27 +81,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Heinrich,
 
-On Tue, 14 Nov 2023 at 06:30, Sean Anderson <seanga2@gmail.com> wrote:
+On Tue, 21 Nov 2023 at 04:58, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi Simon,
+> Hello Simon,
 >
-> On 11/13/23 15:26, Simon Glass wrote:
-> > Hi Sean,
-> >
-> > On Mon, 13 Nov 2023 at 11:15, Sean Anderson <seanga2@gmail.com> wrote:
-> >>
-> >> Hi All,
-> >>
-> >> I'm at LPC this week, and I'd love to chat with anyone else who's there
-> >> in person.
-> >
-> > That would be good, but sadly I am not :-(
+> I have built efi-x86_app64_defconfig on v2024.01-rc3.
 >
-> Ah, well, there's always more conferences. Maybe EOSS next year?
+> On my laptop the video output appears twice. See
+> https://gist.githubusercontent.com/xypron/24ceedb749a68031790864c3a35c5f30/raw/30068496f43e5b088300748d062d0ad64674bf46/screenshot_efi-x86_app64.jpg
+>
+> Are we accessing the video buffer directly instead of using the EFI API?
 
-I hope...I might have a lot going on in April...when does the CFP open/close?
+Yes...well we are using EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID
+(drivers/video/efi.c) but I suspect we are also writing to the serial
+port (drivers/serial/efi.c)
+
+If you adjust stdout does that help?
 
 Regards,
 Simon
