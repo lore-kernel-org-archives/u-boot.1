@@ -4,66 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9624BC5AD4C
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:17:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86326C61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:17:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FF10875E9;
-	Tue, 21 Nov 2023 03:17:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E437875D1;
+	Tue, 21 Nov 2023 03:17:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T2zo0Lgi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g2S7/FfW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FB17875E9; Tue, 21 Nov 2023 03:17:27 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id C0811875FA; Tue, 21 Nov 2023 03:17:30 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6252D87584
+ by phobos.denx.de (Postfix) with ESMTPS id 62121869F6
  for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:17:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5c9ea2ec8deso19723147b3.0
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5cb8440a23cso2635547b3.3
  for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:17:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1700533043; x=1701137843; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fv3mYhjDSzdmxJyMG5tjNXFES5UfYKl3ZJ3N4qfRjig=;
- b=T2zo0LgidCXNTIX3t+9rMQpoDz+brJjY3l3uK7rcSa0tuI3BWFJFWASt8qlP+g1vBh
- Ha6rg/A5lOjsIx4vREZPU05VpJ8cT76NRJad9jRDMLtVNzd0LqO9LV0d2QY6E2OPiesH
- L4sgxc5xMics5xs2DcJVTlAltuYMrdBWUVscE=
+ bh=p9jCbjBSD+Mzk35hIUv1mzA96HqU/7gK1Ja2Iesfifg=;
+ b=g2S7/FfWuSMDHGY+Bu+We8aTaOH272vjOGbsZXOvjQxXgY9kYNihSqlYuKu6+Snq5+
+ uoqvoh8/i5hwsQ/XmxKOFJscYj6mNvIZdjYDkN8bPPH3Q5jAw74M7E5ur8bzLeNSWNIc
+ Ks+zA8Q3pFMyKG78vfzdbGmolPRHl02ivUXGU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1700533043; x=1701137843;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fv3mYhjDSzdmxJyMG5tjNXFES5UfYKl3ZJ3N4qfRjig=;
- b=NEi4mSqb8K1Jio2fzt6+RSNshcZEK4kWPsMkvgnoci7DHg8J1Hnq8YW9rI+Q+CtM86
- w4KMhyflBwCYov9UMQhXM7z3n9XTLn15TISA3wkc5/7z8u79o+Ty88w0Ub8OigNNWxmL
- y6WQfF1wZghxXsp2wrxsp5hH7G5BuzF+ijGJG4OYdh8C4lQHgTY4NJO3J8K8ZKTUUHix
- uxa3I/NQYhnOke242uxXygzKv1U9FehssF/7+RkihAoWzSczfdhNKzUL1Zrxsh4woO5P
- Go7wVHb+uJzGFmEcXVJtv6aqV8YSEufQUH/QMkd3GIgZhE+r5PWD8NkxrA+AQFI4l48T
- FU6A==
-X-Gm-Message-State: AOJu0YzBHzHn83smhD+LQIijHFih9q4VRMSAqCcEEeK6UjbLhf4H02+p
- fd9CxtkF0X5+bMzKRAxIr4vc+gLf3pPp6kPl/XDgsQ==
-X-Google-Smtp-Source: AGHT+IF9VUCQUKCzXSUE1jNQnxhwhU/P4bnOBHvVoHAV+SDyb8YDUOPAInlX9yfnujDh/ot9dVpLEYMop7xejmHVZ0w=
-X-Received: by 2002:a81:bc4b:0:b0:5cb:23:d28f with SMTP id
- b11-20020a81bc4b000000b005cb0023d28fmr3232780ywl.14.1700533042946; 
- Mon, 20 Nov 2023 18:17:22 -0800 (PST)
+ bh=p9jCbjBSD+Mzk35hIUv1mzA96HqU/7gK1Ja2Iesfifg=;
+ b=SQBHIBHqow7ShDIjSn2FBBP7Mu8AkvqcsgJGnFTGzMVVhKMItQyVqY3POoLHLUJXHG
+ oksdhm784iB/lhv3Hu+9DVQelgIh2MdDp6OUcHe+KgurjWSauaJ8+FrFHawiAPPANIwd
+ 58IaRkb8mTlND+l2QRvURDgS7/zdy+vEoAFx7RVGAsoHehLlyXAlUk64QZO7DhHmja8H
+ Mj+c4NFSxNW8H78hzMT3Xk8IjViCnb5AaakfaIVeWfbGJecdcemN8E7Z0SZ+aL9Vu41d
+ TBy63HBtgHav/GZy8Hp2WeHbOI7cvLUxQnL8P0bS0RXmPrXewh0sHZ4MliU4iNwMbZl6
+ CkfA==
+X-Gm-Message-State: AOJu0YxCWK1JGoUjzO5tACcPg6kXr51l7VCqydQOE1J2htF0PeUWsOKL
+ nWOMbVrWo5FfkTcAk2B6FE5FAuZOivNRFVS7LzM8dbbVZub8rbOmMPU=
+X-Google-Smtp-Source: AGHT+IFXD1vgSVB0IJjygUZUZCUdGipGtKJXkL8OUOLXpTUmfsdXcWBPpAjc0Dm0On67+GlG8CdA4eXOLkksPt2ktxs=
+X-Received: by 2002:a81:6c16:0:b0:5b3:46f2:fbd3 with SMTP id
+ h22-20020a816c16000000b005b346f2fbd3mr9364214ywc.7.1700533042955; Mon, 20 Nov
+ 2023 18:17:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20231120201609.619598-1-trini@konsulko.com>
-In-Reply-To: <20231120201609.619598-1-trini@konsulko.com>
+References: <20231118210547.577026-1-sjg@chromium.org>
+ <20231118210547.577026-8-sjg@chromium.org>
+ <CAC_iWjKgDKb_S6+LySsK2AdzgLcSnSfEeBChTOO+4j8AdPuPLg@mail.gmail.com>
+In-Reply-To: <CAC_iWjKgDKb_S6+LySsK2AdzgLcSnSfEeBChTOO+4j8AdPuPLg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Nov 2023 19:16:06 -0700
-Message-ID: <CAPnjgZ3mHpFXEsEENT348SynV2FfZ3ckXHoyFQBfknPC6+HPCg@mail.gmail.com>
-Subject: Re: [PATCH] libretech-cc: Populate SMBIOS information
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>, 
- u-boot-amlogic@groups.io
+Date: Mon, 20 Nov 2023 19:16:11 -0700
+Message-ID: <CAPnjgZ0b0L9-RjamP2U15=8Rrx5NiZ=TmEG+zyAUarbTVop3CQ@mail.gmail.com>
+Subject: Re: [PATCH v3 07/32] bootm: Simplify arguments for bootm_pre_load()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Eddie James <eajames@linux.ibm.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,23 +86,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Nov 2023 at 13:16, Tom Rini <trini@konsulko.com> wrote:
->
-> Enable CONFIG_SYSINFO_SMBIOS and populate the nodes so that Linux can
-> eventually display this information
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Posting this as this was the easiest platform for me to test some SMBIOS
-> related patches on and I needed to populate the nodes so I could check
-> things in dmidecode once Linux was up.
->
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: u-boot-amlogic@groups.io
-> ---
->  .../meson-gxl-s905x-libretech-cc-u-boot.dtsi  | 23 +++++++++++++++++++
->  configs/libretech-cc_defconfig                |  2 ++
->  2 files changed, 25 insertions(+)
->
+Hi Ilias,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 20 Nov 2023 at 14:02, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Sat, 18 Nov 2023 at 23:06, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Move the argument decoding to the caller, to avoid needing to pass the
+> > command-line arguments.
+> >
+> > Add a function comment while we are here.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > ---
+> >
+> > (no changes since v1)
+>
+> [...]
+>
+> >
+> >         if (IS_ENABLED(CONFIG_CMD_BOOTM_PRE_LOAD))
+> > @@ -785,7 +794,7 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+> >                 ret = bootm_start();
+> >
+> >         if (!ret && (states & BOOTM_STATE_PRE_LOAD))
+> > -               ret = bootm_pre_load(cmdtp, flag, argc, argv);
+> > +               ret = bootm_pre_load(argv[0]);
+>
+> Is there a check for the validity of argv[0] before this call?
+
+It is always valid since argv is NULL-terminated. So at worst, arg[0] is NULL.
+
+>
+> Thanks
+> /Ilias
+> >
+> >         if (!ret && (states & BOOTM_STATE_FINDOS))
+> >                 ret = bootm_find_os(cmdtp, flag, argc, argv);
+> > --
+> > 2.43.0.rc0.421.g78406f8d94-goog
+> >
+
+Regards,
+Simon
