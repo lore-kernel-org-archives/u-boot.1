@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E01CEC61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 15:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CEFEC61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 15:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19FA286308;
-	Tue, 21 Nov 2023 16:28:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 93DFE87582;
+	Tue, 21 Nov 2023 16:28:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bC2sGeSc";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="FE02ywQZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80686875A4; Tue, 21 Nov 2023 16:28:01 +0100 (CET)
+ id A08B8875F1; Tue, 21 Nov 2023 16:28:02 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACE08071F
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 16:27:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCD2287582
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 16:28:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2B76C3FB5B; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id D8830423D3; 
  Tue, 21 Nov 2023 15:27:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1700580478;
- bh=rCCPULRubbunTT/svtBi46JitqclyO9YdTfSUUKQ7NY=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=bC2sGeScZBcaE+3HVWp3ukxbUHJbP3V/KBcjOx14DpNQkcsGBHx8a/rIAdqnDPwEr
- FH/j+zXVdZzp4/6Bo/22wTKJ1tqC1o4P6ZlcCXyl/vc+mB2eaciFXJMZjxo9tHwIdp
- AxRenWOEl0Hrrx7yZiyNzLBtEw7lD6Em0aWWzVqVQ6PMJmEegva3axhjF5YL4Tqsg+
- ag5lHKhed1R4RJuyHiQsg6A2+y0NBVyGG7di8QmgF9hv4UWaUjuslBvlUPEa+nw/L7
- aKVGO92Lr0QbIYLdhNi/v1PJcUtQMqiIa6XNF6prfYz4WVKjS45sTdJVHBveipwaNq
- PQPaNr6tdjflA==
+ s=20210705; t=1700580479;
+ bh=YtPbyBe9YFS+T8Qg5uHgprJqbnlqHJuTTO4hDa46Q6Q=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ MIME-Version;
+ b=FE02ywQZFoc2c0HOqih4y+k17jRNxXdhi1gRLhsgGHK/d9V9h+EEyMOd0yLkY5tP1
+ yC39kz4YbFz4VAuUXLBI8nFedpG34se7ek4N59CeyYg67VzjTOGwV1NnBEdjYJdDfv
+ hObziMxk3zL6Gi3r02jGWqQfoYLhDW2MK2L2Fc9ul0VdkFHpasUX+GYLHYeVsEskvH
+ OOU+cY3sdn2CNN933QFJSMv4ygujRjT/y/XPGuFi61g8nVDw4EwdpxnTlGYuPrPuNt
+ WwFcD+e9xO60utEzHJK/uYSTv+qP14SjLwCxb9LhMm6L/D2ULnngdBmUom2Cjoor9F
+ Sqm6ZxbBpSn6Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
@@ -51,10 +52,12 @@ Cc: Yu Chien Peter Lin <peterlin@andestech.com>,
  Miao Yan <yanmiaobest@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/7] risc-v: add ACPI support on QEMU
-Date: Tue, 21 Nov 2023 16:27:33 +0100
-Message-Id: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/7] acpi: Kconfig symbol CONFIG_QFW_ACPI
+Date: Tue, 21 Nov 2023 16:27:34 +0100
+Message-Id: <20231121152740.24783-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
+References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,49 +76,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QEMU 8.1.2 can create ACPI tables for the RISC-V architecture.
-Allow passing them through to the operating system.
-Provide a new defconfig that enables this.
+We have two implementations of write_acpi_tables(). One for writing ACPI
+tables based on ACPI_WRITER() entries another based on copying tables from
+QEMU.
 
-This series depends on
+Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
+QEMU and use it consistently.
 
-[PATCH] acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
-https://lore.kernel.org/u-boot/20231109172302.54324-1-heinrich.schuchardt@canonical.com/
-
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	provide a new Kconfig symbol CONFIG_QFW_ACPI
-	carve out qfw_acpi.c
-	use CONFIG_ACPI to select QFW support
-	provide a Kconfig fragment instead of a new defconfig
+	new patch
+---
+ drivers/misc/Kconfig   | 7 +++++++
+ drivers/misc/qfw.c     | 4 ++--
+ lib/acpi/Makefile      | 2 +-
+ lib/acpi/acpi_writer.c | 4 ++--
+ 4 files changed, 12 insertions(+), 5 deletions(-)
 
-Heinrich Schuchardt (7):
-  acpi: Kconfig symbol CONFIG_QFW_ACPI
-  acpi: carve out qfw_acpi.c
-  risc-v: add ACPI fields to global data
-  risc-v: add support for QEMU firmware tables
-  riscv: qemu: copy ACPI tables from QEMU
-  riscv: allow usage of ACPI
-  configs: qemu: add config fragment for ACPI
-
- MAINTAINERS                             |   1 +
- arch/Kconfig                            |   1 +
- arch/riscv/include/asm/global_data.h    |   4 +
- board/emulation/configs/acpi.config     |   3 +
- board/emulation/qemu-riscv/Kconfig      |   2 +
- board/emulation/qemu-riscv/qemu-riscv.c |  17 ++
- doc/board/emulation/acpi.rst            |  23 +++
- doc/board/emulation/index.rst           |   1 +
- drivers/misc/Kconfig                    |   7 +
- drivers/misc/Makefile                   |   1 +
- drivers/misc/qfw.c                      | 240 ----------------------
- drivers/misc/qfw_acpi.c                 | 256 ++++++++++++++++++++++++
- lib/acpi/Makefile                       |   2 +-
- lib/acpi/acpi_writer.c                  |   4 +-
- 14 files changed, 319 insertions(+), 243 deletions(-)
- create mode 100644 board/emulation/configs/acpi.config
- create mode 100644 doc/board/emulation/acpi.rst
- create mode 100644 drivers/misc/qfw_acpi.c
-
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 97057de8bf..86529efb2e 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -540,6 +540,13 @@ config QFW
+ 	  Hidden option to enable QEMU fw_cfg interface and uclass. This will
+ 	  be selected by either CONFIG_CMD_QFW or CONFIG_GENERATE_ACPI_TABLE.
+ 
++config QFW_ACPI
++	bool
++	default y
++	depends on QFW && GENERATE_ACPI_TABLE && !SANDBOX
++	help
++	  Hidden option to read ACPI tables from QEMU.
++
+ config QFW_PIO
+ 	bool
+ 	depends on QFW
+diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
+index e3b6b4cd74..307334faf4 100644
+--- a/drivers/misc/qfw.c
++++ b/drivers/misc/qfw.c
+@@ -21,7 +21,7 @@
+ #include <tables_csum.h>
+ #include <asm/acpi_table.h>
+ 
+-#if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
++#ifdef QFW_ACPI
+ /*
+  * This function allocates memory for ACPI tables
+  *
+@@ -259,7 +259,7 @@ ulong acpi_get_rsdp_addr(void)
+ 	file = qfw_find_file(dev, "etc/acpi/rsdp");
+ 	return file->addr;
+ }
+-#endif
++#endif /* QFW_ACPI */
+ 
+ static void qfw_read_entry_io(struct qfw_dev *qdev, u16 entry, u32 size,
+ 			      void *address)
+diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
+index c1c9675b5d..cc2868488a 100644
+--- a/lib/acpi/Makefile
++++ b/lib/acpi/Makefile
+@@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
+ obj-y += acpi_writer.o
+ 
+ # With QEMU the ACPI tables come from there, not from U-Boot
+-ifndef CONFIG_QEMU
++ifndef CONFIG_QFW_ACPI
+ obj-y += base.o
+ obj-y += csrt.o
+ obj-y += mcfg.o
+diff --git a/lib/acpi/acpi_writer.c b/lib/acpi/acpi_writer.c
+index 946f90e8e7..9b9fdc190b 100644
+--- a/lib/acpi/acpi_writer.c
++++ b/lib/acpi/acpi_writer.c
+@@ -48,7 +48,7 @@ int acpi_write_one(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	return 0;
+ }
+ 
+-#ifndef CONFIG_QEMU
++#ifndef CONFIG_QFW_ACPI
+ static int acpi_write_all(struct acpi_ctx *ctx)
+ {
+ 	const struct acpi_writer *writer =
+@@ -115,7 +115,7 @@ ulong acpi_get_rsdp_addr(void)
+ 
+ 	return map_to_sysmem(gd->acpi_ctx->rsdp);
+ }
+-#endif /* QEMU */
++#endif /* QFW_ACPI */
+ 
+ void acpi_setup_ctx(struct acpi_ctx *ctx, ulong start)
+ {
 -- 
 2.40.1
 
