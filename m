@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9C27C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:31:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57533C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 19:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C70CF875E5;
-	Tue, 21 Nov 2023 20:31:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C353B87156;
+	Tue, 21 Nov 2023 20:37:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LK4Yvrgr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e3nxcePO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E700586BFA; Tue, 21 Nov 2023 20:31:39 +0100 (CET)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id F35708758C; Tue, 21 Nov 2023 20:37:24 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3EF487616
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:31:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D499986BFA
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 20:37:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-77d631aab99so7758685a.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:31:36 -0800 (PST)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-677fb277b7cso21010766d6.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 11:37:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700595095; x=1701199895; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700595441; x=1701200241; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Tk08R67i33ZD+vttE38+RBxdRRr9Dtu4nj+CJcKuSQ0=;
- b=LK4YvrgrciUh0MksApN9nJqIo6ob9Fn+JbPUNEqGOYWLmXw31/diCOgM50AAzk1FEZ
- X37zeEtI5SbXZTBhA7LdghAH6LM4LTLKcGKKYaR9DRiJItbfEpCsTrXH/nGT5ykas64i
- KRw+naNmvHEY2d7uXcppjx2EYlv1h8PDayP9Y=
+ bh=FpeNsIhByEo7ae3seqMmznlo9HsRBXsaBiHza4mhrps=;
+ b=e3nxcePOoPCFD0EMPzCdfjUxqk21EgP++9QuhzLmUP4qjCCeaGRjnC/c35i/8zydmD
+ Oc5evS9wB9DUJsQKJzRtLcf3CABepM4k0J7wULBqvzC8GL33ULWYFwKpJ/QX+jlDj4q9
+ QLCBWhIxp21BIQa5EM2IVtV+6N4k9pVwcnKD0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700595095; x=1701199895;
+ d=1e100.net; s=20230601; t=1700595441; x=1701200241;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tk08R67i33ZD+vttE38+RBxdRRr9Dtu4nj+CJcKuSQ0=;
- b=Hvi2vorz9BcZRp0CJHG4ozE8tgEcVvTXM3BjtdYf7dkxx0qkvW84Sm4KkjlXSFtcar
- xBpIRlR6UFkUvbdxPXL11Yimj8O32AeCeiJC9AP8u03mclMvF1INK5196Lc9nMB83+k+
- pfOcJZwE7l8DGT51Lrhc6Pg65trXCKl4LGCeMjKw9b6MyODFWdg7UvBb0T2y1h6pYPEe
- cJXIhq7K9zS6YM6MBgwKQJ4yVv/im4/m3w60J7ZOwWl6K8+CsvUeEhknphYr9oXJ9r7x
- +SZg1zH8SVc5VpD6QZ55qGOiRwK6+h+jSJrcZHKChKXc62xDfs39isikHKw4CAeji1Ub
- OJyA==
-X-Gm-Message-State: AOJu0YxWMwVTASCXLforB5BygpfA17iM1MNwqK6W+SZH47tU5ZKsr34i
- tIki2hW6RKiVDwCXVEslo3fEVg==
-X-Google-Smtp-Source: AGHT+IGo6grL8iBYctkUe5iqzmGpkoZxI0NL6oXN3dKru/70OWcQ1A0w7qTwJXX0++QpwxxuE2wKMg==
-X-Received: by 2002:a05:622a:d3:b0:423:6e89:a540 with SMTP id
- p19-20020a05622a00d300b004236e89a540mr199264qtw.9.1700595095702; 
- Tue, 21 Nov 2023 11:31:35 -0800 (PST)
+ bh=FpeNsIhByEo7ae3seqMmznlo9HsRBXsaBiHza4mhrps=;
+ b=b7mwAsjsHrgXgx0TCGi5FIG5u5i3r+JaZAfvBjZvQtmzDhRkGxlEBH/jUhj1nzjG9u
+ U5gIh7XORqd9fNiehY+GC2xEIPeYLGRr83Z08jEa6STOnmUCKQfqbw1nGcx8OdFLJgnf
+ 0o4iTulwt3In0pyQcYdF/kLBaWTyPkj80bbgJR5PFy+SV7exw5lTRzvHvQBsWScBx4fx
+ 7DiQzPKufQw45G67qyT4m65kzbA0RshGNCE16bbQpUxrhHDPIucRhMTEM4nOyVFGGf6X
+ BfFnJ14Nz+P9V64LMTwO9jW91UlvKBkCitduDrPevx+r+UMKFun5IU6b/E/44PNbGzWv
+ onVw==
+X-Gm-Message-State: AOJu0YwRgSBBkT+aUTqJBK4iqbunVEO7ZTHPNBZGqElrHyxO4Ikogrsl
+ QpJ8VkVxTaaldpzc8MFeOIOXmrLL5Nxo1F9yjMloSA==
+X-Google-Smtp-Source: AGHT+IEh6EDP9OV6ukiNqw1volnDGUtT9Rzxhl9DxXrk6P4Q3tMNdSee680Fd7xZaoZI4hgt6L20xQ==
+X-Received: by 2002:a0c:9a8a:0:b0:677:f54d:b176 with SMTP id
+ y10-20020a0c9a8a000000b00677f54db176mr20281qvd.61.1700595441678; 
+ Tue, 21 Nov 2023 11:37:21 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
  [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
  by smtp.gmail.com with ESMTPSA id
- p2-20020ac84602000000b00419801b1094sm3836396qtn.13.2023.11.21.11.31.34
+ s16-20020a05621412d000b0065afcf19e23sm4149757qvv.62.2023.11.21.11.37.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 11:31:35 -0800 (PST)
-Date: Tue, 21 Nov 2023 14:31:33 -0500
+ Tue, 21 Nov 2023 11:37:21 -0800 (PST)
+Date: Tue, 21 Nov 2023 14:37:19 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 21/21] MAINTAINERS: Qualcomm: add some missing paths
-Message-ID: <20231121193133.GG2513409@bill-the-cat>
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <20231121-b4-qcom-common-target-v1-21-9492198e0c15@linaro.org>
+To: Vagrant Cascadian <vagrant@debian.org>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: Licensing discrepancies or ambiguities
+Message-ID: <20231121193719.GH2513409@bill-the-cat>
+References: <8734wyudku.fsf@contorta>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VxcEV98mjPIJG+n8"
+ protocol="application/pgp-signature"; boundary="dFemN873h+cBLGm9"
 Content-Disposition: inline
-In-Reply-To: <20231121-b4-qcom-common-target-v1-21-9492198e0c15@linaro.org>
+In-Reply-To: <8734wyudku.fsf@contorta>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,69 +92,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VxcEV98mjPIJG+n8
+--dFemN873h+cBLGm9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 21, 2023 at 05:09:44PM +0000, Caleb Connolly wrote:
+On Tue, Nov 21, 2023 at 11:10:57AM -0800, Vagrant Cascadian wrote:
 
-> Add board/qualcomm and the SoC/PMIC DTSI files.
-> Adjust the driver paths to use globs rather than hardcoding every
-> specific driver.
+> I've been reviewing the copyright and license information for Das U-Boot
+> in preparation for uploading to Debian, and found a few surprises.
 >=20
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-[snip]
-> +F:	arch/arm/dts/msm8*.dtsi
-> +F:	arch/arm/dts/pm8???.dtsi
-> +F:	arch/arm/dts/pms405.dtsi
-> +F:	arch/arm/dts/sdm845.dtsi
->  F:	arch/arm/mach-snapdragon/
-> +F:	board/qualcomm
+>  tools/libfdt/fdt_rw.c: /* SPDX-License-Identifier: GPL-2.0+ BSD-2-Clause=
+ */
 
-Maybe:
-N:	qualcomm
-N:	qcom
+This comes from the kernel and has been clarified there:
+// SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
 
->  F:	configs/qcom_defconfig
->  F:	doc/board/qualcomm
-> -F:	drivers/button/button-qcom-pmic.c
-> -F:	drivers/clk/qcom/
-> +F:	drivers/*/*/pm8???-*
-> +F:	drivers/*/*/qcom*
-> +F:	drivers/*/*/qcom/
-> +F:	drivers/*/*qcom*
-> +F:	drivers/*/qcom/
->  F:	drivers/gpio/msm_gpio.c
->  F:	drivers/mmc/msm_sdhci.c
->  F:	drivers/phy/msm8916-usbh-phy.c
-> -F:	drivers/pinctrl/qcom/
->  F:	drivers/serial/serial_msm.c
->  F:	drivers/serial/serial_msm_geni.c
->  F:	drivers/smem/msm_smem.c
+> I *think* according to the SPDX spec this needs an OR or an AND. I also
+> see no copyright declaration, although maybe there is a standard
+> interpretation for this.
+>=20
+> Similar issue with (though thankfully they include copyright
+> declarations):
+>=20
+>  include/bloblist.h:/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
+>  common/bloblist.c:// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
 
-What about drivers/usb/host/ehci-msm.c drivers/rng/msm_rng.c and
-drivers/phy/qcom/msm8916-usbh-phy.c ?
+Simon?
+
+>  doc/README.ubispl:# SPDX-License-Identifier: GPL 2.0+ BSD-3-Clause
+
+Should be an OR as well, yes, but it's also out of date and we could
+just delete if a problem.
+
+> This one has a non-existent license:
+>=20
+>   test/lib/strlcat.c: // SPDX-License-Identifier: GPL-2.1+
+>=20
+> No such license exists, though thankfully it references the exact file
+> in the original glibc sources it came from, which is listed as
+> LGPL-2.1+.
+
+Since you did the research would you mind sending the patch? Thanks.
 
 --=20
 Tom
 
---VxcEV98mjPIJG+n8
+--dFemN873h+cBLGm9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVdBZUACgkQFHw5/5Y0
-tyx4bQv/fs6EXw0nreq4+mlMXSUjceGj1ieIqS1KP0Q7F3+RgzZ+HrO/PIE/6uxZ
-V8jcFfnSXHao9HY+KcqGmEnVRsh4v0DztIt/bvuxaxyz4zri67TnsmQliQk2Br9o
-IzruZa1EiKgvkm+SEti1QHlRhD+lpnICWfKNN+6mreJW8DC4jyPAIKirneBlWVwe
-1igKWKWVOH9doS1rqSkzBRRikaSyFurS/g0UpQtZT08Fz8TjP5W23i2+pWHTSCMQ
-ogIoxVUWz77zqiSZ+qv8rvuM1RIsRHwH3W5YFHwXmZwHNeFfT7ev9ejlL2dqiwI2
-hg4UWUPQDb8/zKr92aqryzqcJ7UAUSsbSnVs0FpX9u1MgcR7obaFbWTL0PbxYoV5
-It9YrKKUDSoWX6HuoGkV11eGbrAZjVJ1NjJekE9dPHHx+zlvxSd7roZRjf1lTL6Q
-/NCkDDCfAhcs19C+ZXrqIIQ1igE2Si0spO8dapf5jZFu5xAMo8reB4+GWNjVpgK/
-uA+IrlP4
-=x/Q+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVdBu8ACgkQFHw5/5Y0
+tywlUAwApUoYgxBJPm2nguEBs7Ics2zL5laidZMMG+cr2j0x2SCUklMbWRdzw6sx
+ZAYrIwMHmU6jyflUi/ZsVGop306iRd+2jmXrMTvTjtC7poCkeIWF9rxVgIzGQGr3
+87bhgN9L6Ape9mMGWaHO0HJjOHWqwafHlXA3iCBUwnlhhreS1RVGBYA7VwR6cKUy
+fqTihLhigRrLkgdrLW3Uu1FlDgYwuyBcQG3GpvGGlG5qDqR0SIVntFenH/wNO1mA
++jS/lDdGT69gvFbeeRVGRDpYIfr3XvDY549bgxpwxjSQeF5cDV/5KKW6J+6PKll0
+t68+JadALqGJLlnh8iqrRK3/ONMoJ9Mhe7gDa/elsPFxVVLZNtbRdSlD3v7omtIA
+Rty26wigTVTJATXaMTCQixea4vVpmdodcRrKRGfqIlneCTx8K+cvsisyJ9x/baAx
+SIhMCcAv84YrZ1tk4xDAHRPRxIVA+Vo+8D0trsGaukH+E6WRYD2eKm8sRmod3mnK
+WDQ/gLkm
+=E6WY
 -----END PGP SIGNATURE-----
 
---VxcEV98mjPIJG+n8--
+--dFemN873h+cBLGm9--
