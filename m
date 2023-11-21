@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B531C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D26FC61D97
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 22:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61C7D87646;
-	Tue, 21 Nov 2023 23:12:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E8FA1875F4;
+	Tue, 21 Nov 2023 23:12:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xkb+Li5n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d8vCgDx8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4C148744F; Tue, 21 Nov 2023 23:12:18 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 53DEC8744F; Tue, 21 Nov 2023 23:12:19 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6753387629
+ by phobos.denx.de (Postfix) with ESMTPS id 674DA87628
  for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-daead9cde1eso5279735276.2
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5cb4ee00da1so2351447b3.0
  for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 14:12:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700604730; x=1701209530; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1700604731; x=1701209531; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/iBJ4JhO4a5emkJteQ/CKxayW7urtlDCg/kFlzubU+Y=;
- b=Xkb+Li5nJub/cCyX3DiTCXiTMXtbNpn6ajQ6Pbf6gRMbCk4yosBr7I2fQ7vpnwTmG9
- lfoqonGQ3HHOSr7vQoV0dOw4TptfHjEoIygNhMuPKSnKOi+I7hIaszE2BMvSRhI9Bqlq
- dRzYMZfpSqbLtBTZgwBOfosCUDdib+FBJVozc=
+ bh=+nm0EOTeAwbxPydtOh2fF3d5J9vm27Mg2EooFV+2RDI=;
+ b=d8vCgDx847OU6mQtugHZz/yCJBzvaPEzffDibOUzKs9z4rjJdkBfJxhb2WPzrT11MC
+ 5gV10GEJzxreG+1MzdQc2ljkdkm0we3wIOuea3015sKqyFCu7iyroV+Ees8rdCCEYjtS
+ 2zCoKO8LC8bhkiK0WL/7069Gb1ri4MpT3PXys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700604730; x=1701209530;
+ d=1e100.net; s=20230601; t=1700604731; x=1701209531;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/iBJ4JhO4a5emkJteQ/CKxayW7urtlDCg/kFlzubU+Y=;
- b=cGG0WULd9ZlqEkgTfOSOLTJvh2N0P1u6MrQTTv1G2NfwGnP9KBipzeVCg7IoHcACad
- 17BNqA7LOmeH57QWSyJRFU3tU+xoB0Vqd8YMvFeAJCAwJrm0hOezjNUlp7Rb0uOpnTeN
- vZhcc+ocTHeYrGOR2R7dlFm7ZdAd/K/ZwAH4BP+5m68xS+Tixnr9DpO87D4fSnZ6Lso1
- bqbnx9yykl8c7WufkqhtP7Zd5bM7jXOSi1B0qc1DQ27nXeo+e6NMOu6tcdhjodW+tZ1X
- QBVCFT50HcqNe1RH+C9qwx7dn0BtEHaJMbksA/4bO2Dl38w8j5UClnSJL4kJqbZy9DJL
- C6FA==
-X-Gm-Message-State: AOJu0Yx/Yr7Bv5NliJGCi8mAjYc0TR8dxmaWQ4DBQap6A23/gThX0Ajd
- t6Nfx51a6DVGD6eNnMNMUyX7Z+wTLY3XJ8uCY/+Tfq654QtPKDj6ZjY=
-X-Google-Smtp-Source: AGHT+IFKbv3KwdEqzR0lKquwAv3CaQNHVMfHF+nTFKKMW9GAE+SNySLyOBAEBH8IxrX5uv7OtzuORGC/uS+uXbvnAMQ=
-X-Received: by 2002:a25:73d1:0:b0:db0:4390:a51b with SMTP id
- o200-20020a2573d1000000b00db04390a51bmr316564ybc.19.1700604730508; Tue, 21
+ bh=+nm0EOTeAwbxPydtOh2fF3d5J9vm27Mg2EooFV+2RDI=;
+ b=MNeCO8I1irVmncygJnFqYD+PCs1zEAxA1Wc9aIlzLoAhQ/Utn+UKUz8LvRCoewmY1q
+ dlH+HWWR0MC5ITOs3Jps6V1Yc/CbIo6Rsfeo0D3lcACBalXa1vhA6Vb7EKPz3PLo1xGU
+ zemAXBBunuNb9AVkT4FQoYaELNOzT3R+TTeuZQLTwAp69mk8dbOCNAUlWZCJY96pmtSC
+ olmaCaiOmmC9snR5alDkdJJXjnDyKfl7QVdSlea0ZBDjC3EtOkgxfddJ9uRrTqkShduN
+ h3lLE8CaHSDRXYKOYFGdt1EdSDGW1FRp/mpWbawTQJY0diYL1LpEywndAINAVlZ6LPaK
+ ArBQ==
+X-Gm-Message-State: AOJu0YwmlQ7RaLor4WQ4Enrq7Fx2rBpjZhoLPJRqFirbIlolUkHpIwxb
+ VZ8KXsbt8c94Peq+BzMEGgj1Wy8K1fYrw/Zs3h2mWQ==
+X-Google-Smtp-Source: AGHT+IE5aw6rPQMEitWbt/o6L879e29JCZCSrjFRdmYodsd1gMxN+c/odBrPcV57s8oq3Hw3cYqwsHG8yGZ2jdISuhc=
+X-Received: by 2002:a0d:d50a:0:b0:5ca:dbdd:604e with SMTP id
+ x10-20020a0dd50a000000b005cadbdd604emr3514346ywd.21.1700604730477; Tue, 21
  Nov 2023 14:12:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
- <20231121152740.24783-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231121152740.24783-3-heinrich.schuchardt@canonical.com>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <20231121-b4-qcom-common-target-v1-9-9492198e0c15@linaro.org>
+ <20231121190851.GE2513409@bill-the-cat>
+ <498279aa-e7e7-4e06-925f-e104abf8d721@linaro.org>
+In-Reply-To: <498279aa-e7e7-4e06-925f-e104abf8d721@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Nov 2023 15:11:49 -0700
-Message-ID: <CAPnjgZ1ejTg=EZpz5WPMNoMSjFTcerY6Ju=btF6bvtvrev-j9Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/7] acpi: carve out qfw_acpi.c
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Yu Chien Peter Lin <peterlin@andestech.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Miao Yan <yanmiaobest@gmail.com>, 
- Asherah Connor <ashe@kivikakk.ee>, Tom Rini <trini@konsulko.com>,
+Date: Tue, 21 Nov 2023 15:11:51 -0700
+Message-ID: <CAPnjgZ2CO8xdfh2Vb_3Fxig90VLrehrm=LOrMpGEJc0aL8XzhA@mail.gmail.com>
+Subject: Re: [PATCH 09/21] configs: add dragonboard410c_chainloaded_defconfig
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -86,21 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Nov 2023 at 08:28, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Move the code related to copying tables from QEMU to a separate code
-> module.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         new patch
-> ---
->  drivers/misc/Makefile   |   1 +
->  drivers/misc/qfw.c      | 240 -------------------------------------
->  drivers/misc/qfw_acpi.c | 256 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 257 insertions(+), 240 deletions(-)
->  create mode 100644 drivers/misc/qfw_acpi.c
+Hi Caleb,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 21 Nov 2023 at 13:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 21/11/2023 19:08, Tom Rini wrote:
+> > On Tue, Nov 21, 2023 at 05:09:32PM +0000, Caleb Connolly wrote:
+> >
+> >> Revive support for booting db410c using the Linux kernel header, this
+> >> allows for testing the board more easily via `fastboot`.
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>  board/qualcomm/dragonboard410c/MAINTAINERS    |  1 +
+> >>  configs/dragonboard410c_chainloaded_defconfig | 75 +++++++++++++++++++++++++++
+> >>  2 files changed, 76 insertions(+)
+> >
+> > How different is this from the regular defconfig, and assuming this is
+> > also a partial answer to my question about "why not select?", why is
+> > this not just a config fragment instead of a whole new defconfig to keep
+> > in sync?
+>
+> Oh, I was totally unaware of the concept of board config fragments in
+> U-Boot. That's definitely a much cleaner solution.
+
+Can you make a single image that handles both?
+
+There is ll_boot_init()
+
+Regards,
+Simon
