@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F22C3C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6B8CC61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:35:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BE5C875BC;
-	Tue, 21 Nov 2023 19:35:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 126E187616;
+	Tue, 21 Nov 2023 19:35:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kPN5085d";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VKjLQkVZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ACFE87595; Tue, 21 Nov 2023 19:35:38 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 6FEE087253; Tue, 21 Nov 2023 19:35:38 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1E898759B
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:35:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D95987448
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:35:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-507bd644a96so8333127e87.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:35:34 -0800 (PST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-507962561adso8625700e87.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:35:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700591734; x=1701196534; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1700591735; x=1701196535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fTtzrTo407vYuDfSDgeiFPdb+IXn6tLtz62A3F3Tv+E=;
- b=kPN5085dujvOXlRTkZQLoWMLWwTNX0ElReIY48xnGVEwezJBgYWx+Y+IoG8nn8Wg07
- BcukQFEQ4Gbj3bsDisbcIwX3rrjpqTm69t3yKeztcTg7KXFJMp3hcqMa67+E+LDFA+PP
- k7hgh2W8LvO02njap0byCydQv2++Hp+EsT4ZXomvedfKZQrNw+a2c5bkvt7odSbQJoz9
- 8f/iDIKqDhIq2otmq0midEvMSC915+coq8HPGj1rMLaBHPyovlQEeZ+3hNxl7/ailcn3
- NRMgK4H47ZXd015zozSg4yScE2f19OFIdP+68HBYsNLgrq6ZFJ4jeNREmSNeHN9GgexF
- qArQ==
+ bh=pMEwMWXDCScaOa3K6EE4L+Xru4Rd4F3ZodzDeOg2oNQ=;
+ b=VKjLQkVZoal6W0vN1L3PoV+gtlMImsvp9B3actHDB0x2IKNFB+v1a4SrUi4GqM1cv0
+ BJKkYa+97wvpgKzjOYpQdZJrB2Vljimke19fnRr2WpeCaO4KfvaDPqXoeYNtoOczrygg
+ uURzt9uLsl4eZ9eLqfyQzuR4N/wJ4GYOiZ0ToaJEdnsGxUMkhCcZdNgdHbS/8T8RRXsW
+ dOWs0b6jBX+gU/E9YpCGJZrmr/5bm5uTV9AscWxJ8nGT9hlFD87ilyHvf+zMh11WetYf
+ d5gNEQd5al1OIIw5L5BohqSemrHkie/jGzCf7ZvDCYOuH7bp9Pf579L775NgdivPPbeS
+ QT5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700591734; x=1701196534;
+ d=1e100.net; s=20230601; t=1700591735; x=1701196535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fTtzrTo407vYuDfSDgeiFPdb+IXn6tLtz62A3F3Tv+E=;
- b=EHMamfwQYujM8mOpwktX2bZRx1enPGIcA9ML7ZIgHbptqt0DOtGU6WnVFo/JVu2TbM
- lkJbbzcDo9X7A+iokYd3+ZnKbv0Yaobgdhixa+zjfF/smc+ny6nm4xRVzYGyvtf1sueL
- 3G6n/yUrpcrWiTaLKZ1OPWyIyk0kNXC/xfpK2bLNQFNL8YIw0lxJ2Q+ZjDIKzbv5zztT
- URVk9Lq+cXBesjHTyBPvWFSjsYysx2bKZsigUPIxRn9bJh285bgffIcLLq9pq6wUJ78T
- e44y5rJ2wwGuwG8yO5uCDUYVziq3CUS4D6sRf34pY0sYpOqty+3roTsyh6amEyIijLqX
- M+OA==
-X-Gm-Message-State: AOJu0YxwrhBrYqp19pEbf6yGzlwydHSN0i77Abwfynv27PRYcI+VVN2G
- izp9iZJQyjDfCnfyM8ndo+U=
-X-Google-Smtp-Source: AGHT+IE3uO55NwFEImwd15GFHaEghfRUpg/J910K+8hu6tK00w9IqBDzPrSswqvlw3snXyA6LPQtkQ==
-X-Received: by 2002:a05:6512:41e:b0:4fb:9168:1fce with SMTP id
- u30-20020a056512041e00b004fb91681fcemr55298lfk.59.1700591733792; 
- Tue, 21 Nov 2023 10:35:33 -0800 (PST)
+ bh=pMEwMWXDCScaOa3K6EE4L+Xru4Rd4F3ZodzDeOg2oNQ=;
+ b=TcKxXrw9cS89R3co3Tma4XypFETe3NMIGIkmB94evxNVW5nQxlYk1/K+pNUcB1Owiq
+ Icmst4nkpY/CRFtjPpgGQhLOwynOWUabgWuIeOwOu7pY6ur0LpYLg7z4PVM/5Uv97qtN
+ og/go5WEqn48oVmDZ3liOHQqSpDD+HhnFeHju1tM7byUj9tBD32uHhe1UMAlxKE6ogIp
+ 9qsdbq3aZngVKD+hvTSflL4wubcTdA+D+OUPlQpgTXZiMPfLz+SmScfwwbt8mpLr/KzZ
+ +DXzxIpfHvZxw3R+k34PdmeFPIU79BJg/SpipPSiNHqaADqcbvmFnM77xII9F3qAgULm
+ ojMg==
+X-Gm-Message-State: AOJu0Ywa+fzhXH5bSIBdbdcRciq7GXNGe1+kkI7Oa9yOdOoLzTVugyU3
+ Nyi/XKGat/LAuzcwdQRQlkk=
+X-Google-Smtp-Source: AGHT+IGx32uLb9KJjmLVj1fcIuh0tEJ4aKwrzq22qHoSwerTvMiyxeDUxhS5K7ym1YrfdhehvveRfg==
+X-Received: by 2002:ac2:4469:0:b0:4fe:1681:9377 with SMTP id
+ y9-20020ac24469000000b004fe16819377mr58454lfl.44.1700591735319; 
+ Tue, 21 Nov 2023 10:35:35 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- a22-20020ac25e76000000b0050089b26ea1sm1592862lfr.276.2023.11.21.10.35.32
+ a22-20020ac25e76000000b0050089b26ea1sm1592862lfr.276.2023.11.21.10.35.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 10:35:33 -0800 (PST)
+ Tue, 21 Nov 2023 10:35:34 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,9 +75,9 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 1/5] fastboot: multiresponse support
-Date: Tue, 21 Nov 2023 20:35:06 +0200
-Message-Id: <20231121183510.6451-2-clamor95@gmail.com>
+Subject: [PATCH v3 2/5] fastboot: implement "getvar all"
+Date: Tue, 21 Nov 2023 20:35:07 +0200
+Message-Id: <20231121183510.6451-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231121183510.6451-1-clamor95@gmail.com>
 References: <20231121183510.6451-1-clamor95@gmail.com>
@@ -101,206 +101,202 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-Currently u-boot fastboot can only send one message back to host,
-so if there is a need to print more than one line messages must be
-kept sending until all the required data is obtained. This behavior
-can be adjusted using multiresponce ability (getting multiple lines
-of response) proposed in this patch.
+This commit implements "fastboot getvar all" listing
+by iterating the existing dispatchers that don't require
+parameters (as we pass NULL), uses fastboot multiresponse.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/fastboot/fb_command.c   | 10 ++++++++++
- drivers/usb/gadget/f_fastboot.c | 29 +++++++++++++++++++++++++++++
- include/fastboot.h              | 18 ++++++++++++++++++
- net/fastboot_udp.c              | 29 +++++++++++++++++++++++------
- 4 files changed, 80 insertions(+), 6 deletions(-)
+ doc/android/fastboot-protocol.rst |  3 ++
+ drivers/fastboot/fb_command.c     |  3 ++
+ drivers/fastboot/fb_getvar.c      | 77 +++++++++++++++++++++++++------
+ include/fastboot-internal.h       |  7 +++
+ 4 files changed, 77 insertions(+), 13 deletions(-)
 
+diff --git a/doc/android/fastboot-protocol.rst b/doc/android/fastboot-protocol.rst
+index e8cbd7f24e..8bd6d7168f 100644
+--- a/doc/android/fastboot-protocol.rst
++++ b/doc/android/fastboot-protocol.rst
+@@ -173,6 +173,9 @@ The various currently defined names are::
+                       bootloader requiring a signature before
+                       it will install or boot images.
+ 
++  all                 Provides all info from commands above as
++                      they were called one by one
++
+ Names starting with a lowercase character are reserved by this
+ specification.  OEM-specific names should not start with lowercase
+ characters.
 diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 5fcadcdf50..ab72d8c781 100644
+index ab72d8c781..6f621df074 100644
 --- a/drivers/fastboot/fb_command.c
 +++ b/drivers/fastboot/fb_command.c
-@@ -5,6 +5,7 @@
+@@ -156,6 +156,9 @@ int fastboot_handle_command(char *cmd_string, char *response)
+ void fastboot_multiresponse(int cmd, char *response)
+ {
+ 	switch (cmd) {
++	case FASTBOOT_COMMAND_GETVAR:
++		fastboot_getvar_all(response);
++		break;
+ 	default:
+ 		fastboot_fail("Unknown multiresponse command", response);
+ 		break;
+diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+index 8cb8ffa2c6..f65519c57b 100644
+--- a/drivers/fastboot/fb_getvar.c
++++ b/drivers/fastboot/fb_getvar.c
+@@ -29,53 +29,67 @@ static void getvar_is_userspace(char *var_parameter, char *response);
  
- #include <common.h>
- #include <command.h>
-+#include <console.h>
- #include <env.h>
- #include <fastboot.h>
- #include <fastboot-internal.h>
-@@ -152,6 +153,15 @@ int fastboot_handle_command(char *cmd_string, char *response)
- 	return -1;
+ static const struct {
+ 	const char *variable;
++	bool list;
+ 	void (*dispatch)(char *var_parameter, char *response);
+ } getvar_dispatch[] = {
+ 	{
+ 		.variable = "version",
+-		.dispatch = getvar_version
++		.dispatch = getvar_version,
++		.list = true,
+ 	}, {
+ 		.variable = "version-bootloader",
+-		.dispatch = getvar_version_bootloader
++		.dispatch = getvar_version_bootloader,
++		.list = true
+ 	}, {
+ 		.variable = "downloadsize",
+-		.dispatch = getvar_downloadsize
++		.dispatch = getvar_downloadsize,
++		.list = true
+ 	}, {
+ 		.variable = "max-download-size",
+-		.dispatch = getvar_downloadsize
++		.dispatch = getvar_downloadsize,
++		.list = true
+ 	}, {
+ 		.variable = "serialno",
+-		.dispatch = getvar_serialno
++		.dispatch = getvar_serialno,
++		.list = true
+ 	}, {
+ 		.variable = "version-baseband",
+-		.dispatch = getvar_version_baseband
++		.dispatch = getvar_version_baseband,
++		.list = true
+ 	}, {
+ 		.variable = "product",
+-		.dispatch = getvar_product
++		.dispatch = getvar_product,
++		.list = true
+ 	}, {
+ 		.variable = "platform",
+-		.dispatch = getvar_platform
++		.dispatch = getvar_platform,
++		.list = true
+ 	}, {
+ 		.variable = "current-slot",
+-		.dispatch = getvar_current_slot
++		.dispatch = getvar_current_slot,
++		.list = true
+ #if IS_ENABLED(CONFIG_FASTBOOT_FLASH)
+ 	}, {
+ 		.variable = "has-slot",
+-		.dispatch = getvar_has_slot
++		.dispatch = getvar_has_slot,
++		.list = false
+ #endif
+ #if IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)
+ 	}, {
+ 		.variable = "partition-type",
+-		.dispatch = getvar_partition_type
++		.dispatch = getvar_partition_type,
++		.list = false
+ #endif
+ #if IS_ENABLED(CONFIG_FASTBOOT_FLASH)
+ 	}, {
+ 		.variable = "partition-size",
+-		.dispatch = getvar_partition_size
++		.dispatch = getvar_partition_size,
++		.list = false
+ #endif
+ 	}, {
+ 		.variable = "is-userspace",
+-		.dispatch = getvar_is_userspace
++		.dispatch = getvar_is_userspace,
++		.list = true
+ 	}
+ };
+ 
+@@ -237,6 +251,40 @@ static void getvar_is_userspace(char *var_parameter, char *response)
+ 	fastboot_okay("no", response);
  }
  
-+void fastboot_multiresponse(int cmd, char *response)
++static int current_all_dispatch;
++void fastboot_getvar_all(char *response)
 +{
-+	switch (cmd) {
-+	default:
-+		fastboot_fail("Unknown multiresponse command", response);
-+		break;
++	/*
++	 * Find a dispatch getvar that can be listed and send
++	 * it as INFO until we reach the end.
++	 */
++	while (current_all_dispatch < ARRAY_SIZE(getvar_dispatch)) {
++		if (!getvar_dispatch[current_all_dispatch].list) {
++			current_all_dispatch++;
++			continue;
++		}
++
++		char envstr[FASTBOOT_RESPONSE_LEN] = { 0 };
++
++		getvar_dispatch[current_all_dispatch].dispatch(NULL, envstr);
++
++		char *envstr_start = envstr;
++
++		if (!strncmp("OKAY", envstr, 4) || !strncmp("FAIL", envstr, 4))
++			envstr_start += 4;
++
++		fastboot_response("INFO", response, "%s: %s",
++				  getvar_dispatch[current_all_dispatch].variable,
++				  envstr_start);
++
++		current_all_dispatch++;
++		return;
 +	}
++
++	fastboot_response("OKAY", response, NULL);
++	current_all_dispatch = 0;
 +}
 +
  /**
-  * okay() - Send bare OKAY response
+  * fastboot_getvar() - Writes variable indicated by cmd_parameter to response.
   *
-diff --git a/drivers/usb/gadget/f_fastboot.c b/drivers/usb/gadget/f_fastboot.c
-index 741775a7bc..0850350331 100644
---- a/drivers/usb/gadget/f_fastboot.c
-+++ b/drivers/usb/gadget/f_fastboot.c
-@@ -497,6 +497,25 @@ static void do_bootm_on_complete(struct usb_ep *ep, struct usb_request *req)
- 	do_exit_on_complete(ep, req);
- }
- 
-+static int multiresponse_cmd = -1;
-+static void multiresponse_on_complete(struct usb_ep *ep, struct usb_request *req)
-+{
-+	char response[FASTBOOT_RESPONSE_LEN] = {0};
-+
-+	if (multiresponse_cmd == -1)
-+		return;
-+
-+	/* Call handler to obtain next response */
-+	fastboot_multiresponse(multiresponse_cmd, response);
-+	fastboot_tx_write_str(response);
-+
-+	/* If response is final OKAY/FAIL response disconnect this handler and unset cmd */
-+	if (!strncmp("OKAY", response, 4) || !strncmp("FAIL", response, 4)) {
-+		multiresponse_cmd = -1;
-+		fastboot_func->in_req->complete = fastboot_complete;
-+	}
-+}
-+
- static void do_acmd_complete(struct usb_ep *ep, struct usb_request *req)
+@@ -254,6 +302,9 @@ void fastboot_getvar(char *cmd_parameter, char *response)
  {
- 	/* When usb dequeue complete will be called
-@@ -524,6 +543,16 @@ static void rx_handler_command(struct usb_ep *ep, struct usb_request *req)
- 		fastboot_fail("buffer overflow", response);
- 	}
- 
-+	if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
-+		multiresponse_cmd = cmd;
-+		fastboot_multiresponse(multiresponse_cmd, response);
-+
-+		/* Only add complete callback if first is not a final OKAY/FAIL response */
-+		if (strncmp("OKAY", response, 4) && strncmp("FAIL", response, 4)) {
-+			fastboot_func->in_req->complete = multiresponse_on_complete;
-+		}
-+	}
-+
- 	if (!strncmp("DATA", response, 4)) {
- 		req->complete = rx_handler_dl_image;
- 		req->length = rx_bytes_expected(ep);
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 296451f89d..59cbea61ec 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -14,6 +14,16 @@
- 
- #define FASTBOOT_VERSION	"0.4"
- 
-+/*
-+ * Signals u-boot fastboot code to send multiple responses by
-+ * calling response generating function repeatedly until a OKAY/FAIL
-+ * is generated as final response.
-+ *
-+ * This status code is only used internally to signal, must NOT
-+ * be sent to host.
-+ */
-+#define FASTBOOT_MULTIRESPONSE_START	("MORE")
-+
- /* The 64 defined bytes plus \0 */
- #define FASTBOOT_COMMAND_LEN	(64 + 1)
- #define FASTBOOT_RESPONSE_LEN	(64 + 1)
-@@ -172,5 +182,13 @@ void fastboot_data_download(const void *fastboot_data,
+ 	if (!cmd_parameter) {
+ 		fastboot_fail("missing var", response);
++	} else if (!strncmp("all", cmd_parameter, 3) && strlen(cmd_parameter) == 3) {
++		current_all_dispatch = 0;
++		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
+ 	} else {
+ #define FASTBOOT_ENV_PREFIX	"fastboot."
+ 		int i;
+diff --git a/include/fastboot-internal.h b/include/fastboot-internal.h
+index bf2f2b3c89..610d4f9141 100644
+--- a/include/fastboot-internal.h
++++ b/include/fastboot-internal.h
+@@ -18,6 +18,13 @@ extern u32 fastboot_buf_size;
   */
- void fastboot_data_complete(char *response);
+ extern void (*fastboot_progress_callback)(const char *msg);
  
 +/**
-+ * fastboot_handle_multiresponse() - Called for each response to send
++ * fastboot_getvar_all() - Writes current variable being listed from "all" to response.
 + *
-+ * @cmd: Command id that requested multiresponse
 + * @response: Pointer to fastboot response buffer
 + */
-+void fastboot_multiresponse(int cmd, char *response);
++void fastboot_getvar_all(char *response);
 +
- void fastboot_acmd_complete(void);
- #endif /* _FASTBOOT_H_ */
-diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
-index d690787478..6fee441ab3 100644
---- a/net/fastboot_udp.c
-+++ b/net/fastboot_udp.c
-@@ -42,16 +42,15 @@ static int fastboot_remote_port;
- static int fastboot_our_port;
- 
  /**
-- * fastboot_udp_send_info() - Send an INFO packet during long commands.
-+ * fastboot_udp_send_response() - Send an response into UDP
+  * fastboot_getvar() - Writes variable indicated by cmd_parameter to response.
   *
-- * @msg: String describing the reason for waiting
-+ * @response: Response to send
-  */
--static void fastboot_udp_send_info(const char *msg)
-+static void fastboot_udp_send_response(const char *response)
- {
- 	uchar *packet;
- 	uchar *packet_base;
- 	int len = 0;
--	char response[FASTBOOT_RESPONSE_LEN] = {0};
- 
- 	struct fastboot_header response_header = {
- 		.id = FASTBOOT_FASTBOOT,
-@@ -66,7 +65,6 @@ static void fastboot_udp_send_info(const char *msg)
- 	memcpy(packet, &response_header, sizeof(response_header));
- 	packet += sizeof(response_header);
- 	/* Write response */
--	fastboot_response("INFO", response, "%s", msg);
- 	memcpy(packet, response, strlen(response));
- 	packet += strlen(response);
- 
-@@ -91,6 +89,7 @@ static void fastboot_udp_send_info(const char *msg)
- static void fastboot_timed_send_info(const char *msg)
- {
- 	static ulong start;
-+	char response[FASTBOOT_RESPONSE_LEN] = {0};
- 
- 	/* Initialize timer */
- 	if (start == 0)
-@@ -99,7 +98,8 @@ static void fastboot_timed_send_info(const char *msg)
- 	/* Send INFO packet to host every 30 seconds */
- 	if (time >= 30000) {
- 		start = get_timer(0);
--		fastboot_udp_send_info(msg);
-+		fastboot_response("INFO", response, "%s", msg);
-+		fastboot_udp_send_response(response);
- 	}
- }
- 
-@@ -180,6 +180,23 @@ static void fastboot_send(struct fastboot_header header, char *fastboot_data,
- 		} else {
- 			cmd = fastboot_handle_command(command, response);
- 			pending_command = false;
-+
-+			if (!strncmp(FASTBOOT_MULTIRESPONSE_START, response, 4)) {
-+				while (1) {
-+					/* Call handler to obtain next response */
-+					fastboot_multiresponse(cmd, response);
-+
-+					/*
-+					 * Send more responses or break to send
-+					 * final OKAY/FAIL response
-+					 */
-+					if (strncmp("OKAY", response, 4) &&
-+					    strncmp("FAIL", response, 4))
-+						fastboot_udp_send_response(response);
-+					else
-+						break;
-+				}
-+			}
- 		}
- 		/*
- 		 * Sent some INFO packets, need to update sequence number in
 -- 
 2.40.1
 
