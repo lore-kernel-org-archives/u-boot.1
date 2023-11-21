@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B091BC61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:09:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BFDC61D85
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 02:10:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB8D875A1;
-	Tue, 21 Nov 2023 03:09:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7EF0B875B6;
+	Tue, 21 Nov 2023 03:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dIxGRQe0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Th6RgXbh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B245875C6; Tue, 21 Nov 2023 03:09:41 +0100 (CET)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 47F1787574; Tue, 21 Nov 2023 03:09:43 +0100 (CET)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1F2E87584
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:09:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01ECC875AF
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 03:09:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6d31f3e8ca8so3085005a34.0
- for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:09:36 -0800 (PST)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-1f5d34235dbso1176441fac.0
+ for <u-boot@lists.denx.de>; Mon, 20 Nov 2023 18:09:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1700532575; x=1701137375; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aABA81EXDdllEfHt5IKn28N5dynTsWEaK5lCsTLcsgE=;
- b=dIxGRQe0qWuninoafO+SmNYioMZVKQREALsQi1HYxqTzX75hkL8XmeXBNGdmyZuelK
- UEVwb59CuLd2v18aZcwZi/E1ucl42KAWNDL2oxFPdLOhpewMkQqGN5AaZ0shfDloZvtv
- QVxs0ele9J2vP5qbAZ2/vxkbVqbaPXCkzC0Cw=
+ d=chromium.org; s=google; t=1700532577; x=1701137377; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pjQ/+NjgRXSNOGDR5CMWXGxUp5a4rdSej5cQZDLBezw=;
+ b=Th6RgXbhCKnpbHQpjDQEtqv0Itq5LkPRxCsGOrodt00VhsRomAErxsUVSBuheoFuK/
+ MGJdyEI+kGkBiJgXlBrYeFXT9WNi25iSNxH14jhg3T5aDSdgNxfNSXLuX36CpN5YFTnQ
+ py1MePgtZxtwtn7o7chGB1vk/s5ZlDUesH3Jw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700532575; x=1701137375;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aABA81EXDdllEfHt5IKn28N5dynTsWEaK5lCsTLcsgE=;
- b=QJz4Gy0Lcg+A2ub7X2FVdISG4bfjRE4z74iQMjjpoXTH1uCCrSxBHz21GyQ0PpUZ1i
- 03AT1ssBqYADgZjGyV+Wv+q8QYit/a+BNi865/x/kkFfI6ClltVMrZDdfj4H0cIup6pe
- ESJmx6QxF6nNKnF5PspEvApBd1Mqr1AjcevwpuPkdeE8hjQZLpVs5RupPwjZEzDOlK8h
- OY6g+szzzDf7nZK9FWlozbD+jbJACOxyI9B3cenTVsX19/IxzQRIi2e0k7rHgE/GFN+7
- 24BgLGc4YMmfAss2fkDTQCdVpHx2vRmEjaBAs85ravWlvNAEKMPo2efMmHEsnvoZetqx
- xC3A==
-X-Gm-Message-State: AOJu0YwcXjvPsR+XWr/7Q/f+mQSF48lBQySyu4TOFa5AVVAKCZ3pUfKq
- 17ynLRTabmD/T9xbfku+qJ5s3PutjcuqZ55IT+3ouQ==
-X-Google-Smtp-Source: AGHT+IEv7Ylc+QWIsb4k0mTkk1nFE5zpXElr8gYuk1ArDuqmKrvqCdZJxcKYLg35IsGuOV5LPKsZlw==
-X-Received: by 2002:a05:6870:6b0a:b0:1f4:be52:b129 with SMTP id
- mt10-20020a0568706b0a00b001f4be52b129mr11566438oab.56.1700532575460; 
- Mon, 20 Nov 2023 18:09:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700532577; x=1701137377;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pjQ/+NjgRXSNOGDR5CMWXGxUp5a4rdSej5cQZDLBezw=;
+ b=xIsOyBn342+elb4RUa3iKp7tr6FgShEfta39cDa5gANddgjZBNN4rarHAWXEk0b5Ne
+ rYKes6Hky038bnMcMW0QOdKM9IL2L8khYA45MNPp+SGLHlQCHydapmxkqega6+7Vpra8
+ nWKBTCMLm1uZ9OcC55I+4I8MuH+fXLrAnHtG5ZnYuueLG5k9VaZk4ZtwDuWBUflKWPCr
+ UmjX+XHf6TxBQt1cOXRDaXsQEcDfbj4Fue+ZCnVAEtkNBQmHET3Qk1GRtojZpg096kXX
+ s9HniCfjzUU2W74VqR+O0/hZbBU3gTzWGrzsfQsmco5vsfL92NsCv6SHRBBrX49I3u0l
+ MyFg==
+X-Gm-Message-State: AOJu0YxO90vfnxobOKHhicuh6NwjbNieFuEgEUkcehVGSrzlbW0g7+Q3
+ 05fnKo3HLqrQpLAQylSGTm0fAB+CwOyDN8q37f82kg==
+X-Google-Smtp-Source: AGHT+IHKICG3QneLTNtvDEvSxhouZ+pcMRyfwWHU70qclQaJ5vDbxBfYZBmtj4VZpN72rLnjQptaPw==
+X-Received: by 2002:a05:6871:750e:b0:1f9:453b:8234 with SMTP id
+ ny14-20020a056871750e00b001f9453b8234mr681795oac.27.1700532577518; 
+ Mon, 20 Nov 2023 18:09:37 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- du20-20020a0568716e1400b001e12f685592sm1542693oac.13.2023.11.20.18.09.34
+ du20-20020a0568716e1400b001e12f685592sm1542693oac.13.2023.11.20.18.09.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Nov 2023 18:09:35 -0800 (PST)
+ Mon, 20 Nov 2023 18:09:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng@tinylab.org>, Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nikhil M Jain <n-jain1@ti.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
- Troy Kisky <troykiskyboundary@gmail.com>
-Subject: [PATCH v2 0/5] video: Improve syncing performance with cyclic
-Date: Mon, 20 Nov 2023 19:09:24 -0700
-Message-ID: <20231121020932.733405-1-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 2/5] video: Move last_sync to private data
+Date: Mon, 20 Nov 2023 19:09:26 -0700
+Message-ID: <20231121020932.733405-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+In-Reply-To: <20231121020932.733405-1-sjg@chromium.org>
+References: <20231121020932.733405-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,65 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that U-Boot has a background-processing feature, it is possible to
-reduce the amount of 'foreground' syncing of the display. At present
-this happens quite often.
+Rather than using a static variable, use the video device's private
+data to remember when the last video sync was completed. This allows
+each display to have its own sync and avoids using static data in SPL.
 
-Foreground syncing blocks all other processing, sometimes for 10ms or
-more. When pasting commands into U-Boot over the UART, this typically
-result in characters being dropped. For example, on rpi_4 it isn't
-possible to paste in more than 35 characters before things fail. This
-makes updating the environment or entering long commands very painful
-over the console, since text must be pasted in chunks, or the
-vidconsole device must be dropped from stdout.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-This series introduces background syncing, enabled by default for
-boards which use video. The sync rates for foreground and background
-are configurable.
+(no changes since v1)
 
-With this series it is possible to paste in any amount of text to the
-command line. Some sandbox-specific workarounds can now be removed and
-sandbox video (./u-boot -Dl) is significantly more responsive.
+ drivers/video/video-uclass.c | 10 +++-------
+ include/video.h              |  2 ++
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-This obviously increases code size, since it enables a subsystem not
-normally used by default. However it only applies to boards which have
-VIDEO enabled, which are presumably less worried about memory space
-since the video code is fairly large.
-
-Also it is possible to disable CMD_CYCLIC and reduce the growth to:
-
-   aarch64: (for 1/1 boards) all +1081.0 rodata +65.0 text +1016.0
-       arm: (for 1/1 boards) all +945.0 rodata +65.0 text +880.0
-
-Without that, the increase doubles.
-
-It is of course possible to disable CYCLIC and still use VIDEO but this
-reverts to the current behaviour
-
-Changes in v2:
-- Add an SPL_CYCLIC symbol
-- Add a lot more explanation about the header files
-- Expand help for CONFIG_VIDEO
-- Fix 'groth' and 'work-around' typos in cover letter
-
-Simon Glass (5):
-  cyclic: Add a symbol for SPL
-  video: Move last_sync to private data
-  video: Use cyclic to handle video sync
-  sandbox: Increase cyclic CPU-time limit
-  sandbox: Drop video-sync in serial driver
-
- common/Kconfig                    |  9 ++++++
- common/Makefile                   |  2 +-
- drivers/serial/sandbox.c          |  2 --
- drivers/video/Kconfig             | 35 +++++++++++++++++++++
- drivers/video/video-uclass.c      | 52 +++++++++++++++++++++++++------
- drivers/watchdog/Kconfig          |  1 +
- include/asm-generic/global_data.h |  2 +-
- include/cyclic.h                  |  6 ++--
- include/video.h                   |  2 ++
- 9 files changed, 96 insertions(+), 15 deletions(-)
-
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index f743ed74c818..600e12b802d1 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -354,6 +354,7 @@ void video_set_default_colors(struct udevice *dev, bool invert)
+ /* Flush video activity to the caches */
+ int video_sync(struct udevice *vid, bool force)
+ {
++	struct video_priv *priv = dev_get_uclass_priv(vid);
+ 	struct video_ops *ops = video_get_ops(vid);
+ 	int ret;
+ 
+@@ -369,20 +370,15 @@ int video_sync(struct udevice *vid, bool force)
+ 	 * out whether it exists? For now, ARM is safe.
+ 	 */
+ #if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
+-	struct video_priv *priv = dev_get_uclass_priv(vid);
+-
+ 	if (priv->flush_dcache) {
+ 		flush_dcache_range((ulong)priv->fb,
+ 				   ALIGN((ulong)priv->fb + priv->fb_size,
+ 					 CONFIG_SYS_CACHELINE_SIZE));
+ 	}
+ #elif defined(CONFIG_VIDEO_SANDBOX_SDL)
+-	struct video_priv *priv = dev_get_uclass_priv(vid);
+-	static ulong last_sync;
+-
+-	if (force || get_timer(last_sync) > 100) {
++	if (force || get_timer(priv->last_sync) > 100) {
+ 		sandbox_sdl_sync(priv->fb);
+-		last_sync = get_timer(0);
++		priv->last_sync = get_timer(0);
+ 	}
+ #endif
+ 	return 0;
+diff --git a/include/video.h b/include/video.h
+index 5048116a3d57..b9b8dc0f8f99 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -94,6 +94,7 @@ enum video_format {
+  *		the LCD is updated
+  * @fg_col_idx:	Foreground color code (bit 3 = bold, bit 0-2 = color)
+  * @bg_col_idx:	Background color code (bit 3 = bold, bit 0-2 = color)
++ * @last_sync:	Monotonic time of last video sync
+  */
+ struct video_priv {
+ 	/* Things set up by the driver: */
+@@ -118,6 +119,7 @@ struct video_priv {
+ 	bool flush_dcache;
+ 	u8 fg_col_idx;
+ 	u8 bg_col_idx;
++	ulong last_sync;
+ };
+ 
+ /**
 -- 
 2.43.0.rc1.413.gea7ed67945-goog
 
