@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6733C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46293C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:12:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A34708761D;
-	Tue, 21 Nov 2023 18:10:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4AA308765B;
+	Tue, 21 Nov 2023 18:10:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MuXXcg2C";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xmpy56zk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEB5587620; Tue, 21 Nov 2023 18:09:56 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id EF19A8761D; Tue, 21 Nov 2023 18:09:58 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6912787656
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ECB487572
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:09:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4084b0223ccso27274445e9.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:43 -0800 (PST)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2c8769edd9fso40275881fa.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 09:09:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700586583; x=1701191383; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700586584; x=1701191384; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5JwO7H0CO0rNSIM3J+Om/vnoVqJWoFMenFd2J31IEok=;
- b=MuXXcg2CznqkHQ5CJ1wcSLt+5szJDSlAnXL87ilu0aVGQ/oczk24zGm2YbYc7ICO8z
- T5UruuEC6mluzNka1QWkQkFe0fNSVcFLM6Q9VU88L/bJrSEMkbjcRCy5tEySEcbNlPc9
- Ges9EQbzVI94z7cnDiH0wGKuwguoHCWyxWIgzPUcOkKja+DNfk4yJpK4cYFENjcoC2Nc
- 6YIEXHEhba2iRDpfcUL2nXAbd4sA2h5fz9tthR90wooVS+akmIiissqgccGFsohJYQjH
- D/XiZ4uG8ZLqVM4+zm1CJ7dfh/3WLzhYxehO5c4ILvJ0aR95UQ6iMA8vLf7Ir1HgcZtf
- GxRg==
+ :reply-to; bh=vGJd1cv6Nb6YoYNzL3TjBhY+N6uF5bXW2/raoD3QwKA=;
+ b=Xmpy56zk6gJS6GihEO0nuYP3tSS+jmOM/Avr0BT1JgrLdTX6ND5lH3LuwMvmi4y3I8
+ gA7bKoA0Cf+U6Bu+65iWGrMOAPbuklIiOl8PpHXfd3WJGYMmXPvsCGwlYPa1phzWk8DC
+ 3uBTWEQGu7c0AhnABO3y5TgOWc95qNDpwR6f/meXu8y+5Byjs+5UbC0Md0REUqWjg2ZZ
+ bPQvU8/K6EHwOn4BrcpuEqMuPs9Vfh8dL+fYYnt7t5dVxKgC/vpSP2eyjiVmiUEr18yx
+ z5uxFYUuKCNXEFkibCWY8q1Aw3+Ej7tKLw0TLHGaNOXWCppS8qeBcZGIy0NZ+U+3mi7W
+ Y4uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700586583; x=1701191383;
+ d=1e100.net; s=20230601; t=1700586584; x=1701191384;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5JwO7H0CO0rNSIM3J+Om/vnoVqJWoFMenFd2J31IEok=;
- b=hpl1r+8tO91GgawOCN4CmHv7h9+MT+k1+HZpvz1WRr0dnfzZkp4gXRRwzYUQYfIgW0
- JRcH0laVFB2aqXFbuSx4f0ZH0wN4OyqiXF11RXkUccqHKfmnn1ZYS1eigSeXbB1rlC5o
- zh3/R9wfWhRv99Flya/79jW/q101WenRv06jkq1QxTPgrDdxBEoaruZF7whY1VAREB80
- 57AsFhC22PzAkf+nHuXHp7UqhzJ/q/J2RsjGv6zctgci7dLKNVxi4jaerUL9ILAlq00p
- t3m4jmCjvJaq3svYmgUJaPDdTigddr4k23wzPUgpvU+f1MmMAjL3CkY23gW6sNmQKrEe
- mqsA==
-X-Gm-Message-State: AOJu0YzxTZAbWYRLdcjI3KAOqsH0E6bH6S60jGYnmugZkxSRr6nhzs+V
- EnJw6xrPBYLi+qmCwV4akyzEQw==
-X-Google-Smtp-Source: AGHT+IE16W2SvvJRQghKs/kM1O4Z5zwZjp4ZL1CgdHez5F/Y0IlQyhEiuks9qDR9NiDsMoBVh/9CWQ==
-X-Received: by 2002:a05:600c:893:b0:409:773:cf62 with SMTP id
- l19-20020a05600c089300b004090773cf62mr8655115wmp.39.1700586582866; 
- Tue, 21 Nov 2023 09:09:42 -0800 (PST)
+ bh=vGJd1cv6Nb6YoYNzL3TjBhY+N6uF5bXW2/raoD3QwKA=;
+ b=RpDBUcPG1q/Vroq2sk39U1FS7Ovd+YUVsGT4w755rGNX5BXiH4YCPk7B4puaPBR0hv
+ AzVN+4RAZb+30MUlYfw7iXRmz+5ItSl0geghrv6/WFna6PM2Hrs/7GRmab3IQjQQkXJ0
+ 7QkrOgyvgT9mOATWELL2zIQXH59RTJuoXGdSGQKMRexBgwom+LwEL8fGNsywbbL85pU9
+ 0RjYtUtV3DJG2Qe/N1bETPddKpFOxRUKGnx5heUMLMsFHADGAxudpYBrXm2/Z545mjvb
+ +aacnimGta3NQdoC2U6dDqNQGmmpvG2UkzWykAZPq/Ter3/Ruo0Bj4hpjQ/Z+JRgMrbb
+ caXw==
+X-Gm-Message-State: AOJu0Yzry3rS5A0GhAiR7FZCTXQXMVTnRZkVt5MBR28IJuUpMhw+8dLi
+ 0QJjnVDa9oH3nTVVvGcLERcbLA==
+X-Google-Smtp-Source: AGHT+IHa43O4VBfgnIQZXG/LCo+4VBh8BSC9fICDcBGagvQ/jXy5vSokZMq2WD6IJ+a1LXZGHt/n6g==
+X-Received: by 2002:a2e:b748:0:b0:2c5:94a:ac96 with SMTP id
+ k8-20020a2eb748000000b002c5094aac96mr7872940ljo.9.1700586583804; 
+ Tue, 21 Nov 2023 09:09:43 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.41
+ 1-20020a05600c230100b003fefb94ccc9sm17345812wmo.11.2023.11.21.09.09.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 09:09:42 -0800 (PST)
+ Tue, 21 Nov 2023 09:09:43 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 21 Nov 2023 17:09:37 +0000
-Subject: [PATCH 14/21] mach-snapdragon: dynamic load addresses
+Date: Tue, 21 Nov 2023 17:09:38 +0000
+Subject: [PATCH 15/21] mach-snapdragon: generate fdtfile automatically
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231121-b4-qcom-common-target-v1-14-9492198e0c15@linaro.org>
+Message-Id: <20231121-b4-qcom-common-target-v1-15-9492198e0c15@linaro.org>
 References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 In-Reply-To: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -83,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2990;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4475;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=O8tWvtaJi1ZtA2reOV+LQWoIGYMz0k3Cazcsex8n7bg=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ26K7UEajer/WyTtP1zxv/XTJ0jYrOXBSrZ1hyReR
- a6aHX+3o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEzkdgfD/6KLDC3P9AuKhPKd
- mBT/nH06Serk1Y7zbLw8dUwNOxW1zjIyTPnAGRaa+ORK8K89L62vNUT+WrBZTS04PIT/Vds9lWs
- fAgA=
+ bh=8T6nHuYKBd+6xuzE5sB2fS+mVVK4w/bB5IH+jMUD+vE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSYJ2434r5U7v3w57xqR0mYzsGUl/euWjVlTmfbpN7II
+ mf7fLFhRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhIli3D/7A316TOf+6X5uiZ
+ lFc2VzMoUOv5wzomtdOsd6a0p26Y8oPhF9OL2W5ns7tn6r1ozPL7ZcKpwifIELWhdp5iw8p83lZ
+ RdwA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,99 +108,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heavily inspired by Apple board code. Use the LMB allocator to configure
-load addresses at runtime, and implement a lookup table for selecting a
-devicetree.
+With just a few basic rules, we can generate the $fdtfile environment
+variable to match the format used in Linux. This uses the root
+compatible property inside u-boot, with specific handling for the
+Dragonboard845c which is a special case, and for the qrb robotics
+boards.
 
-As some Qualcomm RBx boards have different RAM capacities and base
-addresses, it isn't possible to hardcode these regions.
+This is known to work on supported platforms, and lets us avoid having a
+big lookup table.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/Kconfig                                 |  1 +
- arch/arm/mach-snapdragon/board.c                 | 36 ++++++++++++++++++++++++
- board/qualcomm/dragonboard410c/dragonboard410c.c |  2 +-
- 3 files changed, 38 insertions(+), 1 deletion(-)
+ arch/arm/mach-snapdragon/board.c | 101 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 101 insertions(+)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 1faa70bb658d..ae44fabb1609 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1075,6 +1075,7 @@ config ARCH_SNAPDRAGON
- 	select OF_SEPARATE
- 	select SMEM
- 	select SPMI
-+	select BOARD_LATE_INIT
- 	select OF_BOARD
- 	select SAVE_PREV_BL_FDT_ADDR
- 	imply CMD_DM
 diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 521390ed6eed..765a2c2a95fc 100644
+index 765a2c2a95fc..d142f2fddf8e 100644
 --- a/arch/arm/mach-snapdragon/board.c
 +++ b/arch/arm/mach-snapdragon/board.c
-@@ -18,6 +18,7 @@
- #include <linux/bug.h>
- #include <linux/psci.h>
- #include <linux/sizes.h>
-+#include <lmb.h>
- #include <malloc.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -110,6 +111,41 @@ int board_init(void)
+@@ -111,6 +111,106 @@ int board_init(void)
  	return 0;
  }
  
-+void __weak qcom_late_init(void)
++/* Sets up the "board", and "soc" environment variables as well as constructing the devicetree
++ * path, with a few quirks to handle non-standard dtb filenames. This is not meant to be a
++ * comprehensive solution to automatically picking the DTB, but aims to be correct for the
++ * majority case. For most devices it should be possible to make this algorithm work by
++ * adjusting the root compatible property in the U-Boot DTS. Handling devices with multiple
++ * variants that are all supported by a single U-Boot image will require implementing device-
++ * specific detection.
++ */
++static void configure_env(void)
 +{
++	const char *first_compat, *last_compat;
++	char *tmp;
++	char buf[32] = { 0 };
++	/*
++	 * Most DTB filenames follow the scheme: qcom/<soc>-[vendor]-<board>.dtb
++	 * The vendor is skipped when it's a Qualcomm reference board, or the
++	 * db845c.
++	 */
++	char dt_path[64] = { 0 };
++	int compat_count, ret;
++	ofnode root;
++
++	root = ofnode_root();
++	/* This is almost always 2, but be explicit that we want the first and last compatibles
++	 * not the first and second.
++	 */
++	compat_count = ofnode_read_string_count(root, "compatible");
++	if (compat_count < 2) {
++		log_warning("%s: only one root compatible bailing!\n", __func__);
++		return;
++	}
++
++	/* The most specific device compatible (e.g. "thundercomm,db845c") */
++	ret = ofnode_read_string_index(root, "compatible", 0, &first_compat);
++	if (ret < 0) {
++		log_warning("Can't read first compatible\n");
++		return;
++	}
++
++	/* The last compatible is always the SoC compatible */
++	ret = ofnode_read_string_index(root, "compatible", compat_count - 1, &last_compat);
++	if (ret < 0) {
++		log_warning("Can't read second compatible\n");
++		return;
++	}
++
++	/* Copy the second compat (e.g. "qcom,sdm845") into buf */
++	strlcpy(buf, last_compat, sizeof(buf) - 1);
++	tmp = buf;
++
++	/* strsep() is destructive, it replaces the comma with a \0 */
++	if (!strsep(&tmp, ",")) {
++		log_warning("second compatible '%s' has no ','\n", buf);
++		return;
++	}
++
++	/* tmp now points to just the "sdm845" part of the string */
++	env_set("soc", tmp);
++
++	/* Now figure out the "board" part from the first compatible */
++	memset(buf, 0, sizeof(buf));
++	strlcpy(buf, first_compat, sizeof(buf) - 1);
++	tmp = buf;
++
++	/* The Qualcomm reference boards (RBx, HDK, etc)  */
++	if (!strncmp("qcom", buf, strlen("qcom"))) {
++		/*
++		 * They all have the first compatible as "qcom,<soc>-<board>"
++		 * (e.g. "qcom,qrb5165-rb5"). We extract just the part after
++		 * the dash.
++		 */
++		if (!strsep(&tmp, "-")) {
++			log_warning("compatible '%s' has no '-'\n", buf);
++			return;
++		}
++		/* tmp is now "rb5" */
++		env_set("board", tmp);
++	} else {
++		if (!strsep(&tmp, ",")) {
++			log_warning("compatible '%s' has no ','\n", buf);
++			return;
++		}
++		/* for thundercomm we just want the bit after the comma (e.g. "db845c"),
++		 * for all other boards we replace the comma with a '-' and take both
++		 * (e.g. "oneplus-enchilada")
++		 */
++		if (!strncmp("thundercomm", buf, strlen("thundercomm"))) {
++			env_set("board", tmp);
++		} else {
++			*(tmp - 1) = '-';
++			env_set("board", buf);
++		}
++	}
++
++	/* Now build the full path name */
++	snprintf(dt_path, sizeof(dt_path), "qcom/%s-%s.dtb",
++		 env_get("soc"), env_get("board"));
++	env_set("fdtfile", dt_path);
 +}
 +
-+#define KERNEL_COMP_SIZE	SZ_32M
-+#define SZ_96M			(SZ_64M + SZ_32M)
-+
-+#define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_2M)
-+
-+/* Stolen from arch/arm/mach-apple/board.c */
-+int board_late_init(void)
-+{
-+	struct lmb lmb;
-+	u32 status = 0;
-+
-+	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
-+
-+	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
-+	status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_96M));
-+	status |= env_set_hex("loadaddr", addr_alloc(&lmb, SZ_64M));
-+	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
-+	status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_96M));
-+	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, KERNEL_COMP_SIZE));
-+	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
-+	status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
-+	status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
-+
-+	if (status)
-+		log_warning("%s: Failed to set run time variables\n", __func__);
-+
-+	qcom_late_init();
-+
-+	return 0;
-+}
-+
- static void build_mem_map(void)
+ void __weak qcom_late_init(void)
  {
- 	int i;
-diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
-index bee8034ef92f..ab652e0a7c92 100644
---- a/board/qualcomm/dragonboard410c/dragonboard410c.c
-+++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
-@@ -113,7 +113,7 @@ int misc_init_r(void)
- 	return 0;
  }
+@@ -141,6 +241,7 @@ int board_late_init(void)
+ 	if (status)
+ 		log_warning("%s: Failed to set run time variables\n", __func__);
  
--int board_late_init(void)
-+int qcom_late_init(void)
- {
- 	char serial[16];
++	configure_env();
+ 	qcom_late_init();
  
+ 	return 0;
 
 -- 
 2.42.1
