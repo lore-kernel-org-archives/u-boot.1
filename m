@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32040C61D85
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 502ABC61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 17:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F7478749C;
-	Tue, 21 Nov 2023 18:27:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B813C875C9;
+	Tue, 21 Nov 2023 18:32:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U/vi/Mis";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NOtnCrH8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6779E875B1; Tue, 21 Nov 2023 18:27:17 +0100 (CET)
+ id DF78C87545; Tue, 21 Nov 2023 18:32:05 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 762C78749C
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:27:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 940F387250
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:32:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1700587634; x=1701192434; i=xypron.glpk@gmx.de;
- bh=fGXFfMquk5ClOPbN2EmmYcwHfn28+xFZZTq3uBJId0Y=;
+ t=1700587922; x=1701192722; i=xypron.glpk@gmx.de;
+ bh=YKdKPGf2NITUbkhUdUHu3XJaWzuqr9LRh5BDrb3hyE4=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=U/vi/Misd9vWvslxVhYRpXVDCxmkxwb3TltJE7Ef2cAxpo12GmhFNdzzit63Z4du
- ZQQpBAd6W2tTIMKZclyzo9EFp594lB2MjpnJRL6VHtO39I/kgg99++HTZRg0vjgtj
- m4/J7OlRRtMo6Q2Jx8xNmHsinMjmP7OPcspTcCOe30V0Aq/PGhxT6n34bDOQt7sdS
- IgJj/OVeEYQzFLHQM8SW08QW3mCkkAEePFuKJ2EgpHKO0YwHQzYP+DL8whskNiJn/
- P3RYfIOj8Qre83RxinWk+R9TBl8GG+45JvSyO9Oukp+Y36Syd41m+BPBSQZp6Lh/e
- +GViT8p4pC6VMD+trA==
+ b=NOtnCrH8VOAffWeBXFe7KLneR1r8gYzGlg86sy9VUnjBNwEHAPBZ9oz21bEz38Cx
+ aCOdXaJlcQyBDeMLUKHXyfvY1aOJtVzr1owSVvWUhKOFlvBFOVLHmGSokqAmegyia
+ 31lhRYZyGWUtA+VDc4DCPaUt3OEnAumpdiPH0eQUVdn97gSzVJsT0wkRcQvrykcCu
+ w395w4ZKDvq5J6uJL5odZ9Fc2relm5tUj76glnbpe1g1k4Jae1r8Zm1uvGHHujV0X
+ UnsKBrgedE2vFabUgDeyco6i8G93B/n1nOww0GjdqIRq52Z6O7iSR5MuRsX3DSu6C
+ qLA88xFSvs6Kd2Vuzw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MCKBc-1rEoBU1DKU-009RkL; Tue, 21
- Nov 2023 18:27:14 +0100
-Message-ID: <db7eeda1-5297-4331-8e5c-ec7e59a742f2@gmx.de>
-Date: Tue, 21 Nov 2023 18:27:13 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MaJ7v-1qrO0C42In-00WBIW; Tue, 21
+ Nov 2023 18:32:02 +0100
+Message-ID: <539b4abc-be46-45c5-98d0-71f2b289540c@gmx.de>
+Date: Tue, 21 Nov 2023 18:32:01 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] WIP: efi: Disable ANSI output
+Subject: Re: [PATCH 3/7] efi: test: Create a disk image with and EFI app in it
 Content-Language: en-US, de-DE
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-5-sjg@chromium.org>
+ <20231121113557.800353-4-sjg@chromium.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231121113557.800353-5-sjg@chromium.org>
+In-Reply-To: <20231121113557.800353-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yU2pIOn66DFmbl4iC+b2EpuC4chgzJbGWY/7iltbmwaok11Hshd
- 3nk2TVildH4Mn/3W6MVDeK2Q1Hr2D+xQoJrdabgfJ1C2uKdhuLwqooXpT2Pa4wCWMkeQP+X
- asmMV7Em3CYLC93nufWKSzDXT7R20ir7USUKOWNpKtmwZgXxhAgn1B+wLiiu84IfCWE+zOs
- dn8vw5or5+C4NjB4M6Z7A==
-UI-OutboundReport: notjunk:1;M01:P0:E+r5E969f9g=;XI9zQyo1xjGZ2vCgnReyxzmjrYq
- Ffpf8kYHUHPhxZkW5sIDqAcnY2hlWKz96cquMgBc80A5fD0DYkO8Vi/IDV9LOrngrqZxwluSg
- XoNaeTvAj3Xu+R+HwXUe3E7Z2xMYDBTfVfKl0e0Fw5pdXcfifxN5FJXU7j5KOawZlJ/xPeYBY
- smpz2PWSgo2eC+TfcgtCepstdn1lS/a6r7ghl/JfykP6JPPTv4QWKGEqBiXr931G1N0fK3cq2
- jJNT90B4Tn/El4yaJMM2UcT0qSnt/tqn2YXpKMIv12olEfH5Mr30rLCJyjsXWsNSeLmkEgXp2
- MzEpdqxu1snZIHoQyBKw5m360CQyJeStpQm6mYGafLQoUhKs4dUZmo7+3Lhwe462Ibl5o+EBO
- ZdR2i/pQ2qv5D1pygxTgV8zv6plgiYxqwx5TOuB0kg3LPhMIsyUrIioFSMngH5aVwz8tZbibL
- 6XgVP3VJaGHACitIV11BpQJqz/U9StxiUckkXks/6aqB67EaKgWItz0xB5EsvaKLfIiigbbXK
- BuUoTr9H+foiu3tqwQAbcaY6lIUALAnO5WmRZHU1vfKMu1nI+Hw7hpat2XbEUKPl+eNde60W7
- NGsVLrMcGicu6vIrcGRRmxcngTayYG2el3V1Q61JDjfJ0UdmrQDIAV5T5BypkwoTPVJZ7K9WG
- MtZTCNajwOkN9F/IJ0fDU+ODjkEUDYhdUV3FvFS5v09KX3SML3ypqNHPqYvbAv+tT/YhsveBd
- U6ycX0gh3FYZJ1xKCcRCkXcEVe2n1ORmtSTNufgxPD5WFOKmsdhl+b2C27XopjyaGil3B4ss1
- 5A4GtiZQoaXUrFsLK4vO7nIyTEpXuxnxGIcwd+7rbgtL4z0l8LqfWl24PJIJl+jrfIKQJd2NO
- SpELS8SOPjEGyXNooGTHSiUu//2Aqw3xmrg+Pvgw09iLMOisvpwWdOCmuHlVbax4MbU7bXIeH
- 69AkgIPWTve/H9XFFIm8L1/jdC4=
+X-Provags-ID: V03:K1:x5T93VPLjBjg8RNWLetMSpQEHaqXnUiKUUwEd7TkzhflmMPStau
+ knvEVebzQYhL4G+djlKWID/0xYKbebu4ZAB+3LKgcJjSFF5zWblU2+nL0QFBVC21KFxeLGE
+ ZSjGMnYTC/R2R+HU5jwH6KXWaUcRXOY06NBtn1x2CA7ClcaPWUkqSYoIomQMcxas64yok8r
+ EohxeBIzKrPIVefNKSgiQ==
+UI-OutboundReport: notjunk:1;M01:P0:rmtA0EGsJNo=;bGJAs4zg+fGZl6BxfF7CCUohqoc
+ QEiob4SEPfhzfyZSN2D3iJvt4qr+ci0qk2U8ODdDTEU/6tUjitgLJDl86dFKVWGt0QNZ4KWZ+
+ rE0nOYDedMIe08nHvlX5k4s69J5VnSW7qzCVQtTfnJvxA8xODeGL+HZYPSwy6FJq8QdjfCZoh
+ elLDBNaYE2u5pmhk7gqhI0b1W9Gs/50EEHDkcDHGqR1Im1jn2fIqsFlFbt7Ahg/E7X42VwrU1
+ YEK9sw0wIC6oDCQAuV0UzL7Rm2hFpwEq1h6q94IN+bDFdJCWkhvFdr4F2Trsu6923KbCvdzpr
+ Z7cl6BMxhEsGrAtitvurZBCdaeGkLZPLD+vl/fRd5gMjhdkXPreV1mRJE/ug3PbulQwusOUGa
+ l6tpEh9Pfn+ZjIZftGCxGIebXIjbtR0P/hP9ZzfZgU8YUOKRs8Bp1PMUv7gbyTAewaNV7Fg6U
+ TR2x60uy2Qefjbmi53sCmyh8CcAz5ju2wA3pVdeQJI2OlaR9JdmLfX7JTUVUFFHL15/JE8tQp
+ T65XVTmm/8bXSHlsA/3rzn0pzIassv16EbglqsRSxo6jyjmyuPEJRyLPFtoySltBJOEMUjeDj
+ czgu9L3lS/Dlld4in1qavB/nurl3SA+xBXydkbjIngBAy92o4RriDcXmOMZRzqiuV+LycmDfC
+ ff21UYAvW3lG/qqIrNl7CSGcMH73OMoqeRT51cuAHpP6nluiMh74K22VoDYL0P/9GLeSaGsUu
+ hGtZCW0CKjcOVP0UnvHzqxitEnLOW72J5I1R3zdHlC5dJn9c2qL0NMcZrWaWE+qYpVB0wvlwa
+ dQD2PM835gdTes48OZ/0y5t0evFhjO8rhVLk9c+hqBn49AVmhJkb9NPJaImsaxoA+MP/memNF
+ AzvgKEbOAAEiK+lE5ji1cOXgpGWhBG8Ej0BGF2gtHaj+cqEQ7ga9icnot8UmbRFb8KaKRh/eA
+ 7I3xmgltSrmL9u5uIsqHjKJ89Gs=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,113 +91,79 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11/21/23 12:35, Simon Glass wrote:
-> We don't want ANSI characters written in tests since it is a pain to
-> check the output.
-
-I never experienced such pain. The Gitlab output just renders things as
-expected.
-
->
-> For now, don't bother checking the console size.
->
-> A better solution is need, which allows ANSI output to be controlled
-> within EFI.
+> Create a new disk for use with test, which contains the sandbox
+> helloworld app. This will be used to test the EFI boot bootmeth.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->   include/efi_loader.h         | 14 ++++++++++++--
->   lib/efi_loader/efi_console.c | 17 +++++++----------
->   lib/efi_loader/efi_setup.c   |  2 +-
->   3 files changed, 20 insertions(+), 13 deletions(-)
+>   test/py/tests/test_ut.py | 32 ++++++++++++++++++++++++++++++++
+>   1 file changed, 32 insertions(+)
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 247be060e1c0..ebe951922791 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -527,8 +527,18 @@ efi_status_t efi_bootmgr_update_media_device_boot_o=
-ption(void);
->   efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
->   /* search the boot option index in BootOrder */
->   bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target,=
- u32 *index);
-> -/* Set up console modes */
-> -void efi_setup_console_size(void);
+> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+> index 1d9149a3f683..f6220c05238a 100644
+> --- a/test/py/tests/test_ut.py
+> +++ b/test/py/tests/test_ut.py
+> @@ -468,6 +468,37 @@ def test_ut_dm_init(u_boot_console):
+>       with open(fn, 'wb') as fh:
+>           fh.write(data)
+>
 > +
-> +/**
-> + * efi_setup_console_size() - update the mode table.
-> + *
-> + * @allow_ansi: Allow emitting ANSI characters
-> + *
-> + * By default the only mode available is 80x25. If the console has at l=
-east 50
-> + * lines, enable mode 80x50. If we can query the console size and it is=
- neither
-> + * 80x25 nor 80x50, set it as an additional mode.
-> + */
-> +void efi_setup_console_size(bool allow_ansi);
-> +
->   /* Install device tree */
->   efi_status_t efi_install_fdt(void *fdt);
->   /* Run loaded UEFI image */
-> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-> index 28087582e8d6..ea1608f8e6ec 100644
-> --- a/lib/efi_loader/efi_console.c
-> +++ b/lib/efi_loader/efi_console.c
-> @@ -349,22 +349,19 @@ static int __maybe_unused query_vidconsole(int *ro=
-ws, int *cols)
->   	return 0;
->   }
->
-> -/**
-> - * efi_setup_console_size() - update the mode table.
-> - *
-> - * By default the only mode available is 80x25. If the console has at l=
-east 50
-> - * lines, enable mode 80x50. If we can query the console size and it is=
- neither
-> - * 80x25 nor 80x50, set it as an additional mode.
-> - */
-> -void efi_setup_console_size(void)
-> +void efi_setup_console_size(bool allow_ansi)
->   {
->   	int rows =3D 25, cols =3D 80;
->   	int ret =3D -ENODEV;
->
->   	if (IS_ENABLED(CONFIG_VIDEO))
->   		ret =3D query_vidconsole(&rows, &cols);
-> -	if (ret)
-> -		ret =3D query_console_serial(&rows, &cols);
-> +	if (ret) {
-> +		if (allow_ansi)
-> +			ret =3D query_console_serial(&rows, &cols);
-> +		else
-> +			ret =3D 0;
-> +	}
->   	if (ret)
->   		return;
->
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index e6de685e8795..d4226a3011ac 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -230,7 +230,7 @@ efi_status_t efi_init_obj_list(void)
->   		return efi_obj_list_initialized;
->
->   	/* Set up console modes */
-> -	efi_setup_console_size();
-> +	efi_setup_console_size(false);
+> +def setup_efi_image(cons):
+> +    """Create a 20MB disk image with an EFI app on it"""
+> +    mmc_dev =3D 7
+> +    fname, mnt =3D setup_image(cons, mmc_dev, 0xc, second_part=3DTrue)
 
-This would render our console non-compliant. Please, keep it as is.
+If you would set the partition type GUID to ESP, U-Boot would stop to
+complain about EFI variable that cannot be persisted.
 
-Testing is not the primary task of U-Boot. If you need to filter test
-output, please, add a filter method to your test setup.
+There is a pending patch that wants to make the failure to persist EFI
+variable fatal.
+
+[RESEND,v2] efi_loader: Fix UEFI variable error handling
+https://patchwork.ozlabs.org/project/uboot/patch/20231113161031.138304-1-o=
+451686892@gmail.com/
 
 Best regards
 
 Heinrich
 
+> +
+> +    loop =3D None
+> +    mounted =3D False
+> +    try:
+> +        loop =3D mount_image(cons, fname, mnt, 'ext4')
+> +        mounted =3D True
+> +        efi_dir =3D os.path.join(mnt, 'efi')
+> +        mkdir_cond(efi_dir)
+> +        bootdir =3D os.path.join(efi_dir, 'boot')
+> +        mkdir_cond(bootdir)
+> +        efi_src =3D os.path.join(cons.config.build_dir,
+> +                               f'lib/efi_loader/helloworld.efi')
+> +        efi_dst =3D os.path.join(bootdir, 'bootsbox.efi')
+> +        with open(efi_src, 'rb') as inf:
+> +            with open(efi_dst, 'wb') as outf:
+> +                outf.write(inf.read())
+> +
+> +    finally:
+> +        if mounted:
+> +            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mn=
+t)
+> +        if loop:
+> +            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
+> +
+> +
+> +
+> +
+>   @pytest.mark.buildconfigspec('cmd_bootflow')
+>   def test_ut_dm_init_bootstd(u_boot_console):
+>       """Initialise data for bootflow tests"""
+> @@ -476,6 +507,7 @@ def test_ut_dm_init_bootstd(u_boot_console):
+>       setup_bootmenu_image(u_boot_console)
+>       setup_cedit_file(u_boot_console)
+>       setup_cros_image(u_boot_console)
+> +    setup_efi_image(u_boot_console)
 >
->   	/*
->   	 * Probe block devices to find the ESP.
+>       # Restart so that the new mmc1.img is picked up
+>       u_boot_console.restart_uboot()
 
