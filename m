@@ -4,125 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 568C1C61D92
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20103C61D92
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 14:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB85871CD;
-	Tue, 21 Nov 2023 15:06:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 780C4871CD;
+	Tue, 21 Nov 2023 15:09:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="Ye/EVae8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VZWyj2mj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A84E87264; Tue, 21 Nov 2023 15:06:54 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 37E7B87264; Tue, 21 Nov 2023 15:09:36 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FC6E87197
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:06:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFC2087197
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:09:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a00a9d677fcso191985566b.0
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:06:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-670e7ae4a2eso24867146d6.1
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 06:09:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1700575610; x=1701180410;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=T9N6woi2lBUF05JPuZStIrA4o5vXSWb4rGlGL3Bxtys=;
- b=Ye/EVae8rGXHSCgj7P6KGSoJPjAbKflcuF7SslkGiKEq79Mrn7U+VKDRWSz4EQx+QF
- GZ/XrF8KP4f8m13vJgnqVXyGOj4wsc7hrYuyCaICvozqSEi2gRaRTlCVNpN3NodGkBpt
- tLKp1CQSnOMtRcvt68IhQJQ4wp1N9RikJFgUwa7FyKbKjLnMjHlFwin7YXJqMEtRnE+G
- MPGgjUwlGpIaBRMZ9+OCPeEpmZ1scs1q7iFnnFts05TPtengOdl/MtsH7wlw+GBaXgc3
- lbgoDn3a5Xz3EL6zDYQGb1oHyMO/L9Hf7+ZjncGlOfinHztjeuqSwn4Sf+V3yAOS1MY4
- XEhQ==
+ d=konsulko.com; s=google; t=1700575772; x=1701180572; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NzHgzlpLVoZ5UkHF4NnwFsRGXxpsmY5b9XKQU6YTQkY=;
+ b=VZWyj2mjtQuA/z/zahQMEcZw7+wEWMyZDyxidosPF2fSVswHv/BFKwKpHMU2YSTHkw
+ uqTuVkiSfX6aI/8ZFSwecnXWABiNefxIHXL5qZJxtHNSNpF3lerj3xp4QIaR0e5BOSpQ
+ +xaivBSsHQBRhNlCBIK3YjLihA9kdaOSTwQFA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700575610; x=1701180410;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=T9N6woi2lBUF05JPuZStIrA4o5vXSWb4rGlGL3Bxtys=;
- b=gxjXXcdaH3BRMpKPLoKm/wEDWBNcfy8BZyKKjcJ2Frkr4AbF051LLE3mzcAHXfvJE/
- UFURn1z/sM9geJ0/Is+6GgPdVB4Eb1sVW41jkJzCxSypEp+LEgevwSlBYd+fP845+vuP
- K/gp20yh7dk6N/lgpoGVmXOHZbZNx6kLXBU2WpgWcXnrctsbxjB6MEeglhZo7eWHq1Xl
- /KHRPUOhz46fyXXQF++JiqvpOxZhdNvgmOjkCUkcnViByxDMHGtKek3sd2cyli55BjKy
- boyoMsuPSd8VYp9k4bQ6oKaIOwvSgLiwyYwsab0ScqXssG5pUTuMv2i/h1LOn8gbGr4P
- 03rA==
-X-Gm-Message-State: AOJu0Yx37mj5fS6gYxnfXcJ+HFHzK15cS5/OPXTzw+D1xvtwpwFbv4R0
- WlOBFtNewqPS+ZEXXJ3ShzkJdw==
-X-Google-Smtp-Source: AGHT+IEGNEPodRWWn/dhFgrllSXyO7gkWS6obPbGk9Ok4RDyXeCiwRRA5/CAXIofip7ycxDRMsQNsQ==
-X-Received: by 2002:a17:907:1c12:b0:a01:7745:467a with SMTP id
- nc18-20020a1709071c1200b00a017745467amr2470265ejc.4.1700575610388; 
- Tue, 21 Nov 2023 06:06:50 -0800 (PST)
-Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
+ d=1e100.net; s=20230601; t=1700575772; x=1701180572;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NzHgzlpLVoZ5UkHF4NnwFsRGXxpsmY5b9XKQU6YTQkY=;
+ b=cFbEwYWiuw5ivuJAK+9+0gDkHyehB4gOVN2T8h1nl9nhkR0IeR7L8+7kyTX2Q7GExj
+ VDlr4a/Op+cWEF+ucvbGbxrUhzgFUXozZ8UCLAND1DuQTQVVUhQ433NfRO0Fqu+pACk4
+ 8DLPnKlHt3oa2vgZAILd3D+bWGFdpfbPB1ZUlJl9bI2FXivXD1SXnMo5jduLGj8kEFvA
+ Sw57BaYt4ZijVTm7tTe5Cb0TWJ+CwAzgYPZmcgO40iOuOPxxkP6zw1xPb0BFv6q/2kuG
+ NyUm9UARcv7j2c3Th0LbnwC6PSCjPtA5yXNDv35sRNnO06rRc8cwSAMewWDDOHIrQQer
+ +Gig==
+X-Gm-Message-State: AOJu0Ywj5CiPAvylMF1HFeLKc6udCDtNClUjG1qv4hsQE6XBnwdzkELW
+ 11MGPJV8SdfeVb+twk0iBhbuyQ==
+X-Google-Smtp-Source: AGHT+IGWYtE8ZOo5MoTZ4gi4xRh/qOTVIKHDAUyyWHoH8xASsIfyS/CMSnz4VfvlcsoKexbh5wN6yw==
+X-Received: by 2002:ad4:5763:0:b0:679:d38e:3387 with SMTP id
+ r3-20020ad45763000000b00679d38e3387mr3931624qvx.11.1700575772377; 
+ Tue, 21 Nov 2023 06:09:32 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
+ [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
  by smtp.gmail.com with ESMTPSA id
- gq16-20020a170906e25000b009fca9484a62sm3144410ejb.200.2023.11.21.06.06.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Nov 2023 06:06:49 -0800 (PST)
-Message-ID: <02dae49c-a641-4182-9ebc-030948422055@monstr.eu>
-Date: Tue, 21 Nov 2023 15:06:47 +0100
+ m5-20020a0562141bc500b00679d90922c8sm2000163qvc.131.2023.11.21.06.09.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Nov 2023 06:09:31 -0800 (PST)
+Date: Tue, 21 Nov 2023 09:09:29 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] libretech-cc: Populate SMBIOS information
+Message-ID: <20231121140929.GV2513409@bill-the-cat>
+References: <20231120201609.619598-1-trini@konsulko.com>
+ <a653e096-cf28-4573-856f-d52dae233b46@linaro.org>
+ <20231121131551.GP2513409@bill-the-cat>
+ <d59de63c-4d4c-4141-9b4f-9a279da596d4@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/6] spi: zynqmp_gqspi: Add parallel memories support
- in GQSPI driver
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- git@xilinx.com, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-References: <20231114045638.6463-1-venkatesh.abbarapu@amd.com>
- <20231114045638.6463-6-venkatesh.abbarapu@amd.com>
-From: Michal Simek <monstr@monstr.eu>
-Autocrypt: addr=monstr@monstr.eu; keydata=
- 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
-In-Reply-To: <20231114045638.6463-6-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hNoQF73Icd3x5eaO"
+Content-Disposition: inline
+In-Reply-To: <d59de63c-4d4c-4141-9b4f-9a279da596d4@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,136 +97,102 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--hNoQF73Icd3x5eaO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 11/14/23 05:56, Venkatesh Yadav Abbarapu wrote:
-> Add support for parallel memories in zynqmp_gqspi.c driver. In case of
-> parallel memories STRIPE bit is set and sent to the qspi ip, which will
-> send data bits to both the flashes in parallel. However for few commands
-> we should not use stripe, instead send same data to both the flashes.
-> Those commands are exclueded by using zynqmp_qspi_update_stripe().
-> 
-> Also update copyright info for this file.
-> 
-> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   drivers/spi/zynqmp_gqspi.c | 140 ++++++++++++++++++++++++++++++++-----
->   include/spi.h              |  12 ++++
->   2 files changed, 136 insertions(+), 16 deletions(-)
-> 
-> diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
-> index a323994fb2..7e90a989dd 100644
-> --- a/drivers/spi/zynqmp_gqspi.c
-> +++ b/drivers/spi/zynqmp_gqspi.c
-> @@ -1,6 +1,7 @@
->   // SPDX-License-Identifier: GPL-2.0+
->   /*
-> - * (C) Copyright 2018 Xilinx
-> + * (C) Copyright 2013 - 2022, Xilinx, Inc.
-> + * (C) Copyright 2023, Advanced Micro Devices, Inc.
->    *
->    * Xilinx ZynqMP Generic Quad-SPI(QSPI) controller driver(master mode only)
->    */
-> @@ -25,6 +26,8 @@
->   #include <linux/bitops.h>
->   #include <linux/err.h>
->   #include <linux/sizes.h>
-> +#include <linux/mtd/spi-nor.h>
-> +#include "../mtd/spi/sf_internal.h"
->   #include <zynqmp_firmware.h>
->   
->   #define GQSPI_GFIFO_STRT_MODE_MASK	BIT(29)
-> @@ -88,6 +91,9 @@
->   #define SPI_XFER_ON_LOWER		1
->   #define SPI_XFER_ON_UPPER		2
->   
-> +#define GQSPI_SELECT_LOWER_CS          BIT(0)
-> +#define GQSPI_SELECT_UPPER_CS          BIT(1)
-> +
->   #define GQSPI_DMA_ALIGN			0x4
->   #define GQSPI_MAX_BAUD_RATE_VAL		7
->   #define GQSPI_DFLT_BAUD_RATE_VAL	2
-> @@ -183,13 +189,14 @@ struct zynqmp_qspi_priv {
->   	int bytes_to_transfer;
->   	int bytes_to_receive;
->   	const struct spi_mem_op *op;
-> +	unsigned int is_parallel;
-> +	unsigned int u_page;
-> +	unsigned int bus;
-> +	unsigned int stripe;
-> +	unsigned int flags;
-> +	u32 max_hz;
->   };
->   
-> -__weak int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value)
-> -{
-> -	return 0;
-> -}
-> -
->   static int zynqmp_qspi_of_to_plat(struct udevice *bus)
->   {
->   	struct zynqmp_qspi_plat *plat = dev_get_plat(bus);
-> @@ -234,9 +241,30 @@ static u32 zynqmp_qspi_bus_select(struct zynqmp_qspi_priv *priv)
->   {
->   	u32 gqspi_fifo_reg = 0;
->   
-> -	gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
-> -			 GQSPI_GFIFO_CS_LOWER;
-> -
-> +	if (priv->is_parallel) {
-> +		if (priv->bus == SPI_XFER_ON_BOTH)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
-> +					 GQSPI_GFIFO_UP_BUS |
-> +					 GQSPI_GFIFO_CS_UPPER |
-> +					 GQSPI_GFIFO_CS_LOWER;
-> +		else if (priv->bus == SPI_XFER_ON_LOWER)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
-> +					 GQSPI_GFIFO_CS_UPPER |
-> +					 GQSPI_GFIFO_CS_LOWER;
-> +		else if (priv->bus == SPI_XFER_ON_UPPER)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
-> +					 GQSPI_GFIFO_CS_LOWER |
-> +					 GQSPI_GFIFO_CS_UPPER;
-> +		else
-> +			debug("Wrong Bus selection:0x%x\n", priv->bus);
-> +	} else {
-> +		if (priv->u_page)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
-> +					 GQSPI_GFIFO_CS_UPPER;
-> +		else
-> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
-> +					 GQSPI_GFIFO_CS_LOWER;
-> +	}
->   	return gqspi_fifo_reg;
->   }
->   
-> @@ -295,8 +323,14 @@ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
->   		gqspi_fifo_reg |= GQSPI_SPI_MODE_SPI |
->   				  GQSPI_IMD_DATA_CS_ASSERT;
->   	} else {
-> -		gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
-> -		gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
-> +		if (priv->is_parallel)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
-> +					 GQSPI_GFIFO_LOW_BUS;
-> +		else if (priv->u_page)
-> +			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS;
-> +		else
-> +			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
-> +			gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
+On Tue, Nov 21, 2023 at 02:46:29PM +0100, Neil Armstrong wrote:
+> On 21/11/2023 14:15, Tom Rini wrote:
+> > On Tue, Nov 21, 2023 at 10:18:04AM +0100, Neil Armstrong wrote:
+> > > Hi Tom,
+> > >=20
+> > > On 20/11/2023 21:16, Tom Rini wrote:
+> > > > Enable CONFIG_SYSINFO_SMBIOS and populate the nodes so that Linux c=
+an
+> > > > eventually display this information
+> > > >=20
+> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > ---
+> > > > Posting this as this was the easiest platform for me to test some S=
+MBIOS
+> > > > related patches on and I needed to populate the nodes so I could ch=
+eck
+> > > > things in dmidecode once Linux was up.
+> > >=20
+> > > Sorry to be late a the party, but can't this be dynamically found fro=
+m DT's compatible & model ?
+> > > Since I'll probably need to add this to all boards, it seems like a d=
+uplicate of what's already in the DT.
+> >=20
+> > Part of the "fun" as to why we have the binding here is that while we
+> > could use the top-level model property, there's not a corresponding one
+> > for manufacturer. I'm fine ignoring the patch I posted here and having a
+> > longer discussion about populating SMBIOS more usefully, globally, as I
+> > think has been suggested a time or two.
+> >=20
+>=20
+> I'm ok landing it with the same data as from the vendor.
+> but couldn't we use the first top-level compatible as default smbios data=
+ ?
+>=20
+> compatible =3D "vendor1,board-name", "vendor1,soc-name";
+>=20
+> and translate to:
+>=20
+>=20
+> smbios {
+> 	system {
+> 		manufacturer =3D "vendor1";
+> 		product =3D "board-name";
+> 	};
+>=20
+> 	baseboard {
+> 		manufacturer =3D "vendor1";
+> 		product =3D "board-name";
+> 	};
+>=20
+> 	chassis {
+> 		manufacturer =3D "vendor1";
+> 		product =3D "board-name";
+> 	};
+> };
+>=20
+> since the vendor name should be already documented in the linux
+> bindings, same for the board name.
+> And we would be free to add some custom data in the DT if needed.
+>=20
+> Anyway, not sure it's the right place to discuss about that !
 
+That's essentially
+https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-2-ili=
+as.apalodimas@linaro.org/
+which had a bunch of comments on 1/2:
+https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-1-ili=
+as.apalodimas@linaro.org/
 
-Here you have bug. If it is the part of else there should be {} around.
+But I think that since then some thoughts on the subject have changed
+and that approach might be more welcome now than it was then.
 
-If it is valid for all then indentation is not correct.
+--=20
+Tom
 
-Thanks,
-Michal
+--hNoQF73Icd3x5eaO
+Content-Type: application/pgp-signature; name="signature.asc"
 
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVcuhkACgkQFHw5/5Y0
+tyw1HwwAiGhL5ytMB41hDUR0c1kOOvYWALEfr/vwFuTDmxz68yBe4E35by4Zj3gX
+5Gl6hRVBALrM/E7z3N0pD4Gr5sWZXiulPSno132ktGLYov7kPKuQiShJe19oRuKs
+SGA1DWJJxxXsY1EW4t16EIx/H7+sl4q88SOHUieu1d5OkZcVwYc/9Y2brGYABiYv
+BAENcJb1YE0VIEwRRz665r3dmpnXGTX4yUvODBB88hA8ILaUEgcq93gha9yGoOvt
+A0OmO1J0MXuc6s/Ui+V0bJBq/pjDTzJcOtlOfFQ59plaiFY5l0i+8NKnwjm1k8xd
+Ch+MZEeMDGxyJ7F0zeO0VPQ7LW7qpPIEaiGtvKA08v6xiwKlbKvXaxzDWi3Uz4TU
+i5bLY0sWH04pXTYShPhK5KmliGfessaM+y33jWW3XigBH/Hr1wRaQ1tRy40iWd0u
+HT47kTAhy4vRx/qjJQ160BAERk2r/vaN3/sO8KD/hNO7WIlsx6gCnZMCZXLEpEVb
+Q+efy3Ej
+=kboi
+-----END PGP SIGNATURE-----
+
+--hNoQF73Icd3x5eaO--
