@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFF1C61D90
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:19:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A67C61D90
+	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 18:35:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A23C875F5;
-	Tue, 21 Nov 2023 19:19:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91C38875F5;
+	Tue, 21 Nov 2023 19:35:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RnEo4rA1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m2XFf5lv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4425287605; Tue, 21 Nov 2023 19:19:47 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 582AC87253; Tue, 21 Nov 2023 19:35:35 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8900A875F5
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:19:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FE0D87258
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 19:35:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-77d58a21a0dso58113785a.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:19:44 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2c87acba73bso36960641fa.1
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 10:35:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700590783; x=1701195583; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dFR914ufj+plIDdIGJxaTk8tHIvXm84/ffGr4cfdm28=;
- b=RnEo4rA1r9vlX93Vc/dIYIm1O15a2S8M0agE+0VtrB8g2KRbehYMFPEMAUs6tcmDsQ
- 3cf0uE/4YkY6DGzHBCB9vnpU/WsaoWtjWrBVXz3+4GLDQuAZQdWy2PYwG2J0jz8nvDQ9
- ChM0ybUVDdy8Snc0ayCFBtCjO3SpunzcToX7w=
+ d=gmail.com; s=20230601; t=1700591733; x=1701196533; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+l4E+tLaHc2IALRZ9BEvgf5bUkeN343I9d0PK9ASpyw=;
+ b=m2XFf5lvoyOYoBUfcZSeuGWofRCtC+c06LFmaSeezEee8j6h/7opaYPK36YovynssZ
+ QT24Zi1Z3L2i29Q9PfXCTyt8nyHIvX3Lx9e6X5PAWQlyXfh5Zv2mV0QXBAyrZTF4ZEVd
+ j7Tg8yy7wM21WX7duPSWXzoa578h/6+K5JR92matcLWov2eEut2QEYjmT3DtPjEq2uVQ
+ lc0jIutyFtcu0Gg2oYTOfJp8HToPetiOfXinUhsq7opCt53ErTpnAqpFH1BGUD7VKO0A
+ lV7UJLsNJt4avoZ4P5IKb+5GkvptCjYHn4FfyVm3O1YR1P1fGkLkrHSwM12wUx3WzH+W
+ Z7eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700590783; x=1701195583;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dFR914ufj+plIDdIGJxaTk8tHIvXm84/ffGr4cfdm28=;
- b=czklz0C/91XAuuE+lmnCUr2QQQ1SMdLIf3dN1lymnTz+16TfK1TbjPnC2RFABhHHzE
- Gk8UVkWih7f+XXj/KOzdl9JRrgIoljrrQKHYPTuUIz1ZpeJJWaHIweLEyOsGCCrCakcY
- bZe//cRTb0Ju2Kz2mH0Kj/eo6Za3Zth0/DdHpxRDjp7GJgQ7mBsZpkYEif3Q3amcuCX5
- B+QRQv385gex6DxE8rPGigFgQP6wxUxAp8ERbjYWOmy4hQ6afuUYvBpNl/RMfUlNHvvZ
- 75d7nMMirIqZC++SmEMViwFYBY/Syt4hx3wPJt0KatrfxqIOL9EchLbFcGYWU0egB3Dr
- JfkA==
-X-Gm-Message-State: AOJu0YzKiM78lBuD8O2yYDLNd6NODjUsjNMcXqKarj84H/CJr05bhHfW
- SB4Cj8wfgk5tweLDKXfKAq2vuQBSQtW0+XEd0xmG9g==
-X-Google-Smtp-Source: AGHT+IGNhQ1RCHKjJP5oRNKhcn8pLnwnf7UV7EGv8o1+ypD8oHt7KMjZL9lugZfcdBQuZRq6BtBHZQ==
-X-Received: by 2002:a05:620a:11ab:b0:77a:29a:2758 with SMTP id
- c11-20020a05620a11ab00b0077a029a2758mr12997939qkk.73.1700590783336; 
- Tue, 21 Nov 2023 10:19:43 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-92fa-6f17-75b6-6213.res6.spectrum.com.
- [2603:6081:7b00:6400:92fa:6f17:75b6:6213])
- by smtp.gmail.com with ESMTPSA id
- s26-20020a05620a16ba00b0077a029b7bf1sm3805032qkj.28.2023.11.21.10.19.41
+ d=1e100.net; s=20230601; t=1700591733; x=1701196533;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+l4E+tLaHc2IALRZ9BEvgf5bUkeN343I9d0PK9ASpyw=;
+ b=QYquqJRTnPjTGh4RAglHpwbTnJTn2pFG3q6Ge4V0ff1wjiVI9FwPRcQxttbbT0L2rH
+ 2ajn/m0Szj08aMt+lNXY44MT6c1qOEXqxTgx3oOZ5wGZMiLXymLrZdiKMqwFQPYPX6Xd
+ 2eDW+DVfq1dKj/PFuFU/CUR/XBbntJog3xo+tpX5V4iui0Kd+bNKZuTpd7hCxnnq039C
+ r2K970+GxmQz4CKQT1kMxsmBympV8Y3mX3MB4O1wi+exq+3D39dBcZS6sS4UBNjR7coZ
+ Xtjz3XPqjAWLt8Gp17KGhTEWuQIzgcR52fVQztWXaA5A4hIi8w6kFXTQ2of3CuWZe1NK
+ pk3A==
+X-Gm-Message-State: AOJu0YxirvBnTl29OrRaeneRQqesK9JUIYPI6wEcuu7Kz26ej6cBee08
+ TfczgQHj5h3yHs4ZMLCaNa8=
+X-Google-Smtp-Source: AGHT+IH62WCG34V1BxxA2nuJ9ieMW/Ra1NqcRhAK9J1IMEVfsathiRsKfqH5+xbOLCVQdqGWmk7W3g==
+X-Received: by 2002:a05:6512:3e06:b0:50a:a327:a463 with SMTP id
+ i6-20020a0565123e0600b0050aa327a463mr90482lfv.13.1700591732295; 
+ Tue, 21 Nov 2023 10:35:32 -0800 (PST)
+Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
+ a22-20020ac25e76000000b0050089b26ea1sm1592862lfr.276.2023.11.21.10.35.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 10:19:42 -0800 (PST)
-Date: Tue, 21 Nov 2023 13:19:40 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng@tinylab.org>, Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nikhil M Jain <n-jain1@ti.com>,
+ Tue, 21 Nov 2023 10:35:32 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>,
+ Dmitrii Merkurev <dimorinny@google.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
- Troy Kisky <troykiskyboundary@gmail.com>
-Subject: Re: [PATCH v2 1/5] cyclic: Add a symbol for SPL
-Message-ID: <20231121181940.GZ2513409@bill-the-cat>
-References: <20231121020932.733405-1-sjg@chromium.org>
- <20231121020932.733405-2-sjg@chromium.org>
- <20231121130630.GM2513409@bill-the-cat>
- <CAPnjgZ02NZp6fcx+o=HJ0maGxSJQTkSzAoEtSCdgP4oqHdy3KA@mail.gmail.com>
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v3 0/5] Implement fastboot multiresponce
+Date: Tue, 21 Nov 2023 20:35:05 +0200
+Message-Id: <20231121183510.6451-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s3IxnwLop564Gui7"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ02NZp6fcx+o=HJ0maGxSJQTkSzAoEtSCdgP4oqHdy3KA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,81 +96,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Currently u-boot fastboot can only send one message back to host,
+so if there is a need to print more than one line messages must be
+kept sending until all the required data is obtained. This behavior
+can be adjusted using multiresponce ability (getting multiple lines
+of response) proposed in this patch set.
 
---s3IxnwLop564Gui7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Implementation of multiresponce leads to ability to dump content of
+console buffer which, with use of "oem run", allows to entirely avoid
+need in UART.
 
-On Tue, Nov 21, 2023 at 09:20:39AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 21 Nov 2023 at 06:06, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Nov 20, 2023 at 07:09:25PM -0700, Simon Glass wrote:
-> >
-> > > The cyclic subsystem is currently enabled either in all build phases
-> > > or none. For tools this should not be enabled, but since lib/shc256.c
-> > > and other files include watchdog.h in the host build, we must make
-> > > sure that it is not enabled there.
-> > >
-> > > Add an SPL symbol so that there is more control of this.
-> > >
-> > > Add an include into cyclic.h so that tools can include this file.
-> > >
-> > > Also add the kconfig.h header so that CONFIG_IS_ENABLED() works. We
-> > > could avoid this for now by moving the location of the watchdog.h
-> > > inclusion to outside the USE_HOSTCC area. But at some point the #ifde=
-fs
-> > > from these files will likely be removed, so there is no benefit in
-> > > going that way.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > [snip]
-> > > --- a/include/cyclic.h
-> > > +++ b/include/cyclic.h
-> > > @@ -11,6 +11,7 @@
-> > >  #ifndef __cyclic_h
-> > >  #define __cyclic_h
-> > >
-> > > +#include <linux/kconfig.h>
-> > >  #include <linux/list.h>
-> > >  #include <asm/types.h>
-> >
-> > As I said, we just need to fix lib/sha*.c so NAK. The only thing that
-> > stopped me from posting that patch last night was that I went and
-> > removed <common.h> from everything in lib/ as a follow-up and that's
-> > taken a few more iterations.
-> >
->=20
-> Yes I had the same thought the first time and mentioned it
-> specifically in this version.
->=20
-> If you are a doing a clean-up, perhaps you could drop the #idefs in
-> the sha files?
+---
+Changes from v2:
+ - fix missing function calls if CONFIG_CONSOLE_RECORD is not enabled
 
-Nope, they specifically need <cyclic.h> outside of tools builds for
-schedule().
+Changes from v1:
+ - changed variables to static
+ - fixed multiresponce for udp
+ - documented use of "MORE"
+ - converted #if to if (...)
+---
 
---=20
-Tom
+Ion Agorria (5):
+  fastboot: multiresponse support
+  fastboot: implement "getvar all"
+  common: console: introduce overflow and isempty calls
+  lib: membuff: fix readline not returning line in case of overflow
+  fastboot: add oem console command support
 
---s3IxnwLop564Gui7
-Content-Type: application/pgp-signature; name="signature.asc"
+ boot/bootmeth_extlinux.c          |  2 +-
+ common/console.c                  | 17 +++++--
+ doc/android/fastboot-protocol.rst |  3 ++
+ doc/android/fastboot.rst          |  1 +
+ drivers/fastboot/Kconfig          |  7 +++
+ drivers/fastboot/fb_command.c     | 52 +++++++++++++++++++++
+ drivers/fastboot/fb_getvar.c      | 77 +++++++++++++++++++++++++------
+ drivers/usb/gadget/f_fastboot.c   | 29 ++++++++++++
+ include/console.h                 | 26 +++++++++++
+ include/fastboot-internal.h       |  7 +++
+ include/fastboot.h                | 19 ++++++++
+ include/membuff.h                 |  5 +-
+ lib/membuff.c                     |  4 +-
+ net/fastboot_udp.c                | 29 +++++++++---
+ test/ut.c                         |  9 ++--
+ 15 files changed, 254 insertions(+), 33 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.40.1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVc9LwACgkQFHw5/5Y0
-tyzqcAwAk67Mu4VcfT+dEjOaTZ4zOpEugyjvlhYoIBZpNOoZHIMkAMNSFWvV7W/T
-fW8+/ojp4Xd1Lr0WgAaZ10jleED/xb616ZtWc9Ywq5814KIqgfP1uJlYkRL18xD6
-ZksikXg3NlqGquqyepUsi0aqtmDkTHTA1pDDcjJ5lZK7y2wkhcQtWbdNBWAj91uk
-LGM0bL9eY07xkNfmUeeOz9Z/CR/Tdd0NXAa5+eP3nTD/HOPNWjYj8u2wd67VNWtf
-S/D0mfdkqLhwOrm8NDRgZjKL1y9izQJeNlkeOJA+Brpq4DgJaEASflLp8kUj27Hj
-et/88q2xIwMH91pC3ZMMG4+Z2qgeq8qXA8XVoHdFQRmJjBwO2wimWUYTGBv+wk/f
-hUreswWPuAfe9hegmQifIb8V/e0TDaDNfMJT9Si/e1A1kJ2HzbBrfAezm+eVMa5m
-Y5O0Ob9R3THQxFhBFAcGjDyNtEIu1h3o+PFBBG5VrQFt5RxI+hRFO5VLD6kaKfRR
-x/v+Ebdm
-=UcoU
------END PGP SIGNATURE-----
-
---s3IxnwLop564Gui7--
