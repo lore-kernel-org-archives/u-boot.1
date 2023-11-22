@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDA09C61D97
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 15:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76122C61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 15:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC08E87253;
-	Wed, 22 Nov 2023 16:16:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E281E86EE1;
+	Wed, 22 Nov 2023 16:21:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nic.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fNwrZKsd";
+	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="VMoN7mGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4925686FB5; Wed, 22 Nov 2023 16:16:14 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C41AF8755A; Wed, 22 Nov 2023 16:03:12 +0100 (CET)
+Received: from mail.nic.cz (mail.nic.cz [217.31.204.67])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0021887608
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 16:16:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A53E3863FD
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 16:03:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AMFFwmq087743;
- Wed, 22 Nov 2023 09:15:58 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700666158;
- bh=PD0HfNRTOIC0jTUzwEjIFyX3jUEovJbEsNhaNCINVnc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=fNwrZKsdtw7B9QJajnjzoYzsN8MUnEpr4IjnpP6YcOY3C6IUotYMT8HCgBdi/z3pt
- Mg6goASzeV2YWDO7019mNIeBXJdZk5UeeKZW74zTH2oSLyqnxWcqUrrdqvOgtkuzvc
- DRphfAUZd8ISZRP0Da+/OK1VB+/EPuuljkQ2Kqew=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AMFFwvp067689
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Nov 2023 09:15:58 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Nov 2023 09:15:57 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Nov 2023 09:15:57 -0600
-Received: from [10.250.36.5] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AMFFuSd060622;
- Wed, 22 Nov 2023 09:15:56 -0600
-Message-ID: <6dd26c33-1ac9-455c-adfd-a2fdd9e2bf71@ti.com>
-Date: Wed, 22 Nov 2023 09:15:56 -0600
+ dmarc=pass (p=reject dis=none) header.from=nic.cz
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.mojik@nic.cz
+Received: from marcharch (unknown [IPv6:2001:1488:fffe:6:592e:6672:3345:e2e0])
+ by mail.nic.cz (Postfix) with ESMTPS id C0B9F1C1496;
+ Wed, 22 Nov 2023 16:03:08 +0100 (CET)
+Authentication-Results: mail.nic.cz;
+ dkim=pass header.d=nic.cz header.s=default header.b=VMoN7mGi;
+ spf=pass (mail.nic.cz: domain of marek.mojik@nic.cz designates
+ 2001:1488:fffe:6:592e:6672:3345:e2e0 as permitted sender)
+ smtp.mailfrom=marek.mojik@nic.cz; 
+ dmarc=pass (policy=reject) header.from=nic.cz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
+ t=1700665389; bh=iiLdbs+dwHQ+aCSoH6sllYOmu1QGa8/FI8f7VucNYyg=;
+ h=Date:From:To:Subject:From:Reply-To:Subject:To:Cc;
+ b=VMoN7mGizh0jFT6+pcHqfeNGKv33xhfT6kbhkJCo85Wnf6VsXE3tSk04dKNXGtrUK
+ Cr7DBFpdQvi8bsy7XNmjvw2biATYhrgkamSOPtfb+oHYcAUPdvAUyH9OKGEATapq6Z
+ b4bNahQHC5ubSfZ9mYH2IqHL1qtAKI1XCFavMR9A=
+Date: Wed, 22 Nov 2023 16:03:07 +0100
+From: Marek =?utf-8?B?TW9qw61r?= <marek.mojik@nic.cz>
+To: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ tharvey@gateworks.com, marek.behun@nic.cz
+Subject: [PATCH] net: mv88e6xxx: add missing SMI address init
+Message-ID: <4t2ccomf4epfozf2o5uzkp7c5lzzqhgkfpcfofojomssmzh5kw@76ljhmdjzla4>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/16] arm: mach-k3: Add basic support for J784S4 SoC
- definition
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>, Apurva Nandan <a-nandan@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Kamlesh
- Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, Manorit
- Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>, Bryan
- Brattlof <bb@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
- Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20231001165545.494212-1-a-nandan@ti.com>
- <20231001165545.494212-3-a-nandan@ti.com>
- <20231002160156.pacy7j53bbtx766e@reboot>
- <b5c48875-cca0-c62f-1254-ef50307553ec@ti.com>
- <20231004180655.gqe5gcnistjv2wlt@spiritual>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231004180655.gqe5gcnistjv2wlt@spiritual>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.00 / 20.00];
+ DWL_DNSWL_MED(-2.00)[nic.cz:dkim];
+ DMARC_POLICY_ALLOW(-0.50)[nic.cz,reject];
+ R_SPF_ALLOW(-0.20)[+ip6:2001:1488::/29:c];
+ R_DKIM_ALLOW(-0.20)[nic.cz:s=default];
+ MIME_GOOD(-0.10)[text/plain];
+ FREEMAIL_TO(0.00)[lists.denx.de,ni.com,gmail.com,gateworks.com,nic.cz];
+ ARC_NA(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; DKIM_TRACE(0.00)[nic.cz:+];
+ TAGGED_RCPT(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ MIME_TRACE(0.00)[0:+];
+ WHITELISTED_IP(0.00)[2001:1488:fffe:6:592e:6672:3345:e2e0];
+ FROM_HAS_DN(0.00)[];
+ ASN(0.00)[asn:25192, ipnet:2001:1488::/32, country:CZ]
+X-Rspamd-Server: mail
+X-Rspamd-Action: no action
+X-Rspamd-Pre-Result: action=no action; module=multimap;
+ Matched map: WHITELISTED_IP
+X-Rspamd-Queue-Id: C0B9F1C1496
+X-Mailman-Approved-At: Wed, 22 Nov 2023 16:21:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,29 +87,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/23 1:06 PM, Nishanth Menon wrote:
-> On 23:22-20231004, Apurva Nandan wrote:
-> [...]
-> 
->>>> +		.virt = 0x500000000UL,
->>>> +		.phys = 0x500000000UL,
->>>> +		.size = 0x400000000UL,
->>>> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->>>> +			 PTE_BLOCK_NON_SHARE |
->>>> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->>>> +	}, {
->>>> +		/* List terminator */
->>>> +		0,
->>>> +	}
->>>> +};
->>> Why not reuse CONFIG_SOC_K3_J721S2 or adopt it?
->> The mem_map regions are different for J784S4 from J721S2,
->> and on the hardware side also, i.e. J784S4 has 4x8G DDR slots,
->> so how can we bring it in same CONFIG as J721S2?
-> 
-> Is'nt that what device tree is for? what harm do we run into if
-> we define the common super set in the common file?
+Driver does not currently initialize the smi_addr field, but instead keeps
+the default value. This leads to issues on systems with different hardware
+configuration. We can fix this problem by reading the SMI address from
+device tree.
 
-Been wanting to fix that for a while now, posted RFC for it here:
+Signed-off-by: Marek Mojík <marek.mojik@nic.cz>
+---
+ drivers/net/mv88e6xxx.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-https://lore.kernel.org/u-boot/20231122151411.11268-1-afd@ti.com/
+diff --git a/drivers/net/mv88e6xxx.c b/drivers/net/mv88e6xxx.c
+index c073f81e72..4636dbf156 100644
+--- a/drivers/net/mv88e6xxx.c
++++ b/drivers/net/mv88e6xxx.c
+@@ -753,6 +753,12 @@ static int mv88e6xxx_probe(struct udevice *dev)
+ 		return -ENODEV;
+ 	}
+ 
++	priv->smi_addr = dev_read_addr(dev);
++	if (priv->smi_addr == FDT_ADDR_T_NONE) {
++		dev_err(dev, "Invalid or missing SMI address\n");
++		return -EINVAL;
++	}
++
+ 	/* probe internal mdio bus */
+ 	ret = mv88e6xxx_probe_mdio(dev);
+ 	if (ret)
+-- 
+2.42.1
+
