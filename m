@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C39C61D9B
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 13:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822B3C61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 13:13:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC2F87617;
+	by phobos.denx.de (Postfix) with ESMTP id E18F0875F2;
 	Wed, 22 Nov 2023 14:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tjrJ/myi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UZor0T3j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9135D86F42; Wed, 22 Nov 2023 14:12:06 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id DB6FB875B2; Wed, 22 Nov 2023 14:12:07 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FF5B87097
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 14:12:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B069E87463
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 14:12:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so6325889276.0
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:12:03 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-d9fe0a598d8so6165728276.2
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:12:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700658721; x=1701263521; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700658724; x=1701263524; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LmQl4T3hSNFLEDqQtaz6kiwsS9fwlqq7wH5Wez33+L8=;
- b=tjrJ/myiK8f6wWwrjO+IJi26XbRqX1Ay5BBlnX0ecNijklNrmOFG2VX/fH8xOkdzIe
- Fu3X2SASJ3BTXLNh8ExI76FcGJNZ2WJ1v8XCBTmThl1sr9AAkbk+NURLERHKDTdAvYmA
- K61Eq2O4EyWG9wI6OB7v8hMUFM8ezGLyv+ZeQ=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=lXfv1nqlvb5uQr+uPTdtXZDX2AZkw8g3Z8uEe+hKb74=;
+ b=UZor0T3jfMaAQo/PsOhzu/y3FXABcdQCmDGDZnBlup/Zv/oCLQ9vscRJzZpzl/RfkP
+ jxAC6q2SFzcHVOmOm+YiAruM3QurcltAttDV9aH8W35+bfyxURvEvp8DGj9a5+tAqONN
+ yQaWL0vlDmIgCHzRfoX2DObxHjm5PFipA2118=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700658721; x=1701263521;
+ d=1e100.net; s=20230601; t=1700658724; x=1701263524;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LmQl4T3hSNFLEDqQtaz6kiwsS9fwlqq7wH5Wez33+L8=;
- b=FAgUYl7+JWQ+n9gJfgtAvirUaH9lzuDApogxpuDqtEhId/84eDchtj1S2Ga1QGD5F0
- t9CKU/WSXcAm50bjCUa1086WacCpLAc90i5Tzj7xhGsYs62Tjgg53LdpBQruEYv/tGBO
- 4IVMgDoGuMwPXwKSC5UeV8Bs8d1jnaQAKoV3CMYQWyE1DL5jAXDha8Ft+stFO9AZmalK
- cv5k1gX5oJUO7wu2Nc/EvvyjIbeuJXzgkHveEP7c4OILVWrwfB8YtHWnyP6TE0DWsoJc
- R9o4skDpa1OcMDVjXob/Kfaa+Lzz2y8tPeOEBakgMbyDkNO1g8EdR4gd+W+Qt+tiXwzO
- x7Uw==
-X-Gm-Message-State: AOJu0YydX3bJ8RkPt5oSNQqKe6wHQgSBr8K11b/0azt19jJoh41M/Rgu
- SshkkNSuqA94Dfskqigw4nCjX3HPlDYlJobkjJLqzg==
-X-Google-Smtp-Source: AGHT+IFway0eevzLAN7cUFAPKKHOEfPGBsBAp4p8lCe//K49RrH6FPwTfwkkZPEw3k5vsGbfMEqrYQ==
-X-Received: by 2002:a25:aac1:0:b0:da0:514a:8f42 with SMTP id
- t59-20020a25aac1000000b00da0514a8f42mr2239026ybi.32.1700658721471; 
- Wed, 22 Nov 2023 05:12:01 -0800 (PST)
+ bh=lXfv1nqlvb5uQr+uPTdtXZDX2AZkw8g3Z8uEe+hKb74=;
+ b=fIrvsNKeGNXhVoDPlwwYSxJHmuMItGhIJVIMGYAeGiEINj26tURzM0RETbgJlNSxmZ
+ KvkWar4V5YIToAsJT+7mSFbbej1mAxX5wKFND9DvULG8LrWpsSY0lJkkmlnjTRTUGJp6
+ J6ZNY2DO8gCUqp5i/OdaaV5UX9zx5Hd3X0mL5IoH2DKQVrePbWjf1q1tlH4UvuCumrUN
+ ptUlmZmYj9McZSHjLV2LibZ0ZwXFQPRAwEGfMJ7E4mN/14MTBzBbJR504tWXaXhtHqvu
+ nXyxG9p0YyLLr0lP2hPyRLlpS51RT6qwjz5x9eLtmicXAv5YqRrO5nPk36ih2oTS7Pz6
+ F2sw==
+X-Gm-Message-State: AOJu0YyEVP1bY5yzc1wZ3oG5KDBIL+6IX0QhwuwhhtbT2S271rJCy2NQ
+ ev2gx0kerTR6/diL5RKI1Fup/I4OQteDENPo4x99Cg==
+X-Google-Smtp-Source: AGHT+IHqymRch0WfWeqhA7vo6dUOXp4nfS+m1iCPCxGRL/oAQ+ACW8QIDMni4Jhp/08J6wqaEntJjA==
+X-Received: by 2002:a25:5589:0:b0:da0:50f9:dc32 with SMTP id
+ j131-20020a255589000000b00da050f9dc32mr1703016ybb.33.1700658724110; 
+ Wed, 22 Nov 2023 05:12:04 -0800 (PST)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-999e-39fe-b112-e0fa.res6.spectrum.com.
  [2603:6081:7b00:6400:999e:39fe:b112:e0fa])
  by smtp.gmail.com with ESMTPSA id
- x63-20020a254a42000000b00c64533e4e20sm1367511yba.33.2023.11.22.05.12.00
+ x63-20020a254a42000000b00c64533e4e20sm1367511yba.33.2023.11.22.05.12.03
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Nov 2023 05:12:00 -0800 (PST)
+ Wed, 22 Nov 2023 05:12:03 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH 07/11] rmobile: Add <mach/rmobile.h> to cpu_info-rzg2l.c
-Date: Wed, 22 Nov 2023 08:11:50 -0500
-Message-Id: <20231122131154.2444690-7-trini@konsulko.com>
+Subject: [PATCH 10/11] include: Further cleanup includes
+Date: Wed, 22 Nov 2023 08:11:53 -0500
+Message-Id: <20231122131154.2444690-10-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231122131154.2444690-1-trini@konsulko.com>
 References: <20231122131154.2444690-1-trini@konsulko.com>
@@ -92,30 +89,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order for RMOBILE_CPU_TYPE_R9A07G044L to be defined we need to
-include <mach/rmobile.h> here.
+Add some missing headers such as <linux/errno.h> or <linux/types.h> or
+<linux/kernel.h> to header files that make direct usage of things
+provided by these headers.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
----
- arch/arm/mach-rmobile/cpu_info-rzg2l.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/atmel_lcd.h | 2 ++
+ include/getopt.h    | 2 ++
+ include/mapmem.h    | 2 ++
+ include/memalign.h  | 1 +
+ include/net6.h      | 1 +
+ include/rtc.h       | 1 +
+ 6 files changed, 9 insertions(+)
 
-diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-index f69649dc7eaf..bd3146fb011f 100644
---- a/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-+++ b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
-@@ -4,6 +4,7 @@
+diff --git a/include/atmel_lcd.h b/include/atmel_lcd.h
+index 66436b9b2772..a115d6c17014 100644
+--- a/include/atmel_lcd.h
++++ b/include/atmel_lcd.h
+@@ -9,6 +9,8 @@
+ #ifndef _ATMEL_LCD_H_
+ #define _ATMEL_LCD_H_
+ 
++#include <linux/types.h>
++
+ /**
+  * struct atmel_lcd_plat - platform data for Atmel LCDs with driver model
   *
+diff --git a/include/getopt.h b/include/getopt.h
+index 6f5811e64be9..8645082da2a7 100644
+--- a/include/getopt.h
++++ b/include/getopt.h
+@@ -9,6 +9,8 @@
+ #ifndef __GETOPT_H
+ #define __GETOPT_H
+ 
++#include <stdbool.h>
++
+ /**
+  * struct getopt_state - Saved state across getopt() calls
   */
- 
-+#include <mach/rmobile.h>
+diff --git a/include/mapmem.h b/include/mapmem.h
+index 2134c8004d94..bb68b4c11afd 100644
+--- a/include/mapmem.h
++++ b/include/mapmem.h
+@@ -13,6 +13,8 @@
+ # ifdef CONFIG_ARCH_MAP_SYSMEM
  #include <asm/io.h>
- #include <linux/libfdt.h>
+ # else
++#include <linux/types.h>
++
+ static inline void *map_sysmem(phys_addr_t paddr, unsigned long len)
+ {
+ 	return (void *)(uintptr_t)paddr;
+diff --git a/include/memalign.h b/include/memalign.h
+index f67f0a74f2e8..eaa9f6b5cbd6 100644
+--- a/include/memalign.h
++++ b/include/memalign.h
+@@ -11,6 +11,7 @@
+  * is used to align DMA buffers.
+  */
+ #ifndef __ASSEMBLY__
++#include <linux/kernel.h>
+ #include <asm/cache.h>
+ #include <malloc.h>
  
+diff --git a/include/net6.h b/include/net6.h
+index 1e766aa72092..1ed989e584ae 100644
+--- a/include/net6.h
++++ b/include/net6.h
+@@ -12,6 +12,7 @@
+ 
+ #include <net.h>
+ #include <linux/ctype.h>
++#include <linux/errno.h>
+ 
+ /* struct in6_addr - 128 bits long IPv6 address */
+ struct in6_addr {
+diff --git a/include/rtc.h b/include/rtc.h
+index b6fdbb60dc2b..22f6d3705917 100644
+--- a/include/rtc.h
++++ b/include/rtc.h
+@@ -16,6 +16,7 @@
+ #include <bcd.h>
+ #include <rtc_def.h>
+ #include <linux/errno.h>
++#include <linux/types.h>
+ 
+ typedef int64_t time64_t;
+ struct udevice;
 -- 
 2.34.1
 
