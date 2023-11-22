@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3A3CC61D97
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 20:51:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16381C61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 20:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BEAC87691;
-	Wed, 22 Nov 2023 21:50:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F33008768F;
+	Wed, 22 Nov 2023 21:50:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mj1+M5M5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s6A0W3yn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8498B8765E; Wed, 22 Nov 2023 21:50:11 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 7BFC487690; Wed, 22 Nov 2023 21:50:16 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65F768768E
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 21:50:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72D648768E
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 21:50:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5cc60973b4aso1880067b3.3
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 12:50:09 -0800 (PST)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5cb8440a23cso1879587b3.3
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 12:50:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700686208; x=1701291008; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700686213; x=1701291013; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MI3H9z3tW6GdviEr/2927QwbF3Ojxu/FbK8R84BjaCU=;
- b=mj1+M5M5XImIZZO1gUebiUssPg3RSJYWCBpWZshPL3cSGUJ8+1kcYI27Qvh0IRlmeT
- G2Nsszsi+D79AsA2kg7LWcjLinJLGf7w4iPHN/bFgZ0Z7BwzN4DZQ6Ao7adLK9/J1UGU
- RZBot2s9xZ+mc6rjWBjW5I8cNlTVq+8ONL9cM=
+ bh=ISm5klL5mS3eJ5DMQ4AvKTqOYCyeYNH0wmvI2ucf7gQ=;
+ b=s6A0W3yn4PQIXxxvLmyo2v45CbjLzXIUc0lSGjyqawKHdQNxkmBkeSy9RrnvgBLXqI
+ zOJheIbvKOp8/wldEKVZU+RCTswJpoDTzQCTlMb1VQa5AGPYY7YxlLBzYTFCiKynkrqO
+ 8pUp9MVs1t6Ep8yT4bSHLpqxixXBQVbpoM7xk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700686208; x=1701291008;
+ d=1e100.net; s=20230601; t=1700686213; x=1701291013;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MI3H9z3tW6GdviEr/2927QwbF3Ojxu/FbK8R84BjaCU=;
- b=tCMzUd3d6E+px7WGSIaZiCWSRdS30cx8zVkP875aGhVjj99/1sCvM+HGEMRQphQh5h
- 6JIYVhuV9ePOuinCVFpdqhOswNTOclhUMm4wKwUMS4uo+qofzzSTQk6pVWx51cn3LpHx
- Sq7pnIs829leC/YxHef8FeAyqFGuvzzcx6Nk5DHRwhbcUcEhpK6SYemYxPFaP33ETvYe
- fYT7rhNu/zOZcA5gLkLLCY/US+K9QQCil2C4r13PQ8ETyE9l7jCVK4vlMVpKQi/94K8B
- UQ6YxRztjw9zmB6VTl8pp2Sc1B/fIsY5zwxmGeDK+m4V1mY+psup8SanxQpQrsMeTYT4
- bClQ==
-X-Gm-Message-State: AOJu0YxfVsPehhx2YupCdhAGBsfRzrjJmHHvme41aPluXRVKGrJZFkjG
- P13yB0h7g+yIgDcwexkDEKSxaQ==
-X-Google-Smtp-Source: AGHT+IE+mHtY5zIpBtVVPhRbaeviTSazn+1YxlHLg6qTE0K1WgYaxLbTTFpkL8EQFK+52vue4NykpA==
-X-Received: by 2002:a05:6902:34f:b0:da0:4453:8f10 with SMTP id
- e15-20020a056902034f00b00da044538f10mr3282594ybs.43.1700686208150; 
- Wed, 22 Nov 2023 12:50:08 -0800 (PST)
+ bh=ISm5klL5mS3eJ5DMQ4AvKTqOYCyeYNH0wmvI2ucf7gQ=;
+ b=Mifj6O4zdKNLC+GRzFpPJYtViC8p428ULea7LK5Jh325kvZmBqpYKXwbPIOikXpI73
+ fU2IpE8Ajb60fUJteFMpQdh3/qwxS+57un0eFFMsHCnvTUyqP+ibO9jsT/0cus95dj5H
+ B1BSs9aGw3A89cm7gbIbgmecDVaTgHz2LrjVUW43wb/yhF0yyBZzX2QMix/627n1fSw8
+ rqA8Z3rVI0mUeSG8hKoxL+qvkHB4I3y8ikZofwIZILE4DUgQZfquiSWJOBcBhz3da9hs
+ haNkVKisyewFjQAruej9DIUUBi4s833UlkW9eK2p5pFZCnmHeId2/X69qgEfJp4O5Ww/
+ D/tw==
+X-Gm-Message-State: AOJu0Yw5SVgAGP/i7LSqjrS7dXsnQOYml+6WakoXri05pkL56U6W+RzT
+ UViCeOnHFsY+oTyN6utk1xmrsA==
+X-Google-Smtp-Source: AGHT+IHn/ZseQzKboA7BgNmD+4okREaJ/EQmzXVKtwIyCedNpPHXc6xExl/APVTVwRWSkmz9/qRX0g==
+X-Received: by 2002:a81:4a03:0:b0:5ca:11d3:4adb with SMTP id
+ x3-20020a814a03000000b005ca11d34adbmr3611978ywa.38.1700686213219; 
+ Wed, 22 Nov 2023 12:50:13 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-999e-39fe-b112-e0fa.res6.spectrum.com.
  [2603:6081:7b00:6400:999e:39fe:b112:e0fa])
  by smtp.gmail.com with ESMTPSA id
- k16-20020a056902025000b00d9a36ded1besm1538402ybs.6.2023.11.22.12.50.07
+ u2-20020a0dd202000000b00576c727498dsm87889ywd.92.2023.11.22.12.50.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Nov 2023 12:50:07 -0800 (PST)
-Date: Wed, 22 Nov 2023 15:50:05 -0500
+ Wed, 22 Nov 2023 12:50:12 -0800 (PST)
+Date: Wed, 22 Nov 2023 15:50:10 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: nm@ti.com, marcel.ziswiler@toradex.com, s-vadapalli@ti.com,
- r-gunasekaran@ti.com, vigneshr@ti.com, srk@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: dts: k3-am625-verdin-wifi-dev-u-boot.dtsi: Fix DMA
- with BCDMA
-Message-ID: <20231122205005.GK2513409@bill-the-cat>
-References: <20231114202856.39072-1-rogerq@kernel.org>
+To: Nishanth Menon <nm@ti.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Jai Luthra <j-luthra@ti.com>,
+ u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sjoerd Simons <sjoerd@collabora.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Dhruva Gole <d-gole@ti.com>
+Subject: Re: [PATCH V2 1/4] arm: dts: k3-am625*: Sync with kernel v6.7-rc1
+Message-ID: <20231122205010.GL2513409@bill-the-cat>
+References: <20231115032857.3071474-1-nm@ti.com>
+ <20231115032857.3071474-2-nm@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="55MWaw1rv+hfGk6q"
+ protocol="application/pgp-signature"; boundary="h5HDTCdS0Xh0fzDS"
 Content-Disposition: inline
-In-Reply-To: <20231114202856.39072-1-rogerq@kernel.org>
+In-Reply-To: <20231115032857.3071474-2-nm@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,44 +101,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---55MWaw1rv+hfGk6q
+--h5HDTCdS0Xh0fzDS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 14, 2023 at 10:28:56PM +0200, Roger Quadros wrote:
-> BCDMA can be used at SPL for OSPI boot and mem-to-mem DMA
+On Tue, Nov 14, 2023 at 09:28:54PM -0600, Nishanth Menon wrote:
 
-> so add "bootph-all" to BCDMA node.
+> Sync with kernel v6.7-rc1 and sync up the u-boot dts files accordingly.
 >=20
-> Suggested-by: Nishanth Menon <nm@ti.com>
-> Fixes: 9a3f2b6798b0 ("arm: dts: k3-am625-verdin-wifi-dev-u-boot.dtsi: Fix=
- DMA/Ethernet")
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> Reviewed-by: Nishanth Menon <nm@ti.com>
-> Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Tested-by: Dhruva Gole <d-gole@ti.com>
+> Signed-off-by: Nishanth Menon <nm@ti.com>
 
-Applied to u-boot/next, thanks!
+For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---55MWaw1rv+hfGk6q
+--h5HDTCdS0Xh0fzDS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVeaX0ACgkQFHw5/5Y0
-tyxilAv/ckI+wujiFw2Yvz1FIem8ud/SO6IIFUi1B6VTxR3lIvN5xMQg2a71Ygfv
-sEWixjry7gnhgTD/kBJi51eTB7i+uZ2cC6TMnWichUmobwXbpQPHBTnEk3ZO1hF/
-c/FiO/ZCcFuc+s8fFk0mzgj2j9xGgE+3X1LhQkKlQDWiaFBYVFRGgp6dPVeEqUyl
-7xhH1Q3GcpW0fT2JGOVPRiGg72CZoPPVKCIZeuHrXlsOFGvPeNleWDBilqGuX7H7
-R1AqtHksbFDF9/oh5r6c6R80tIAI9tHOWZeklbQR+uFXpeQVzBFCGmp0OlDQGlnh
-RrihnfuRooN6JW/SnkHpP2YQZ4RwdIARzLVnvkNYd9Lwvy7aqOIxVZJMfoYMwKlM
-6rO3cujza7+mEoe5xpvsDrRXQXUKu6IYt4uU8F0yh3ks6mOwGzVhTjmX4eGrqAmo
-VKSWkBRwTHodPSGxl3Jmlj/4gyjlWIhx7CNoCtfgmaiCrdjHYBsJwC9lY2d1IA//
-/D8w9fux
-=l3aE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVeaYIACgkQFHw5/5Y0
+tyxC7wv/V2acUJZ3hCgr4FFwtCC0UN73UlaAB9pJmvO6QN+oyhISJ/OcJvHTKzt7
+52lnHOQrAPz0+xu2xTHjJcm/XYRopotfHnrO0iNUpHoKkGv466FxXHGpHiZgxN34
+CaAd+Qss/WJm9y7v9haLeRTT2wDxSyWqR3hCzSbQzS76bvnnLjOv6hFj4+/6j7c7
+xnOXwtBkjt3Q3KVml2utYhtvqeWXMyCMvQfDeaPoDKLBjV/jtyvoyd78wccbxEBe
+mKNQDhCyIu/BHVOOlNDrj9QqJuQWO+81e0uetkdUsw3L3sAeAJ3Xt8QInEZOuWIm
+3AQ5tlzXe9Zyp1dQw0QnHmWSHQmclAc1RJ5bMrJaDgXIlZxCCGFGxAmuwxZtNA2q
+7PRp0bX4h0lYV1voqdBE41m3pCifgAuJMHyhf7Z2TOuQ7his3q/vLq1ZXMs6g0iF
+IgCz93PHx6JaaDG6n6fR2wjC+FkufGlxMFDBDWFKRSbf3y5vDVfOa1SxO1CqThhR
+r5Y+zsBL
+=OavR
 -----END PGP SIGNATURE-----
 
---55MWaw1rv+hfGk6q--
+--h5HDTCdS0Xh0fzDS--
