@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E16BC61D9B
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 18:54:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCABC61D9B
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 18:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D4CB86FA7;
-	Wed, 22 Nov 2023 19:54:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 007C587626;
+	Wed, 22 Nov 2023 19:56:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e/d2Wi1z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lRVmkaEx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D071586FB2; Wed, 22 Nov 2023 19:54:26 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id DEC2787616; Wed, 22 Nov 2023 19:56:53 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FCCF86DD1
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 19:54:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A34586DD1
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 19:56:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5431614d90eso149013a12.1
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 10:54:23 -0800 (PST)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-548d1f8b388so173677a12.0
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 10:56:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700679263; x=1701284063; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l+m1i8S+I3uwYUji1999YGKC7+eMRXd5iYgvfUz0alo=;
- b=e/d2Wi1z/X3ZRsy9MiaGQq/Ein8HLwGVjVbyFMRqcO2kTtrmRnplfzoYe381woMgCz
- TQ9G71bz625qjG9CAitF4+Op5h7W2M6mO0ksz/Km2m/oz1PemnGA3EC4FMMgfBKW2qkM
- 2AYoHawSrYlGJ7AfWas4182uGxzL/bgMS4bdGTqn4nh8CVLvXIkt3uvTf82ION04Z7mj
- DzQjDMh1GcjanYzjSFVKQyoDLy/QNZQZx2MxB/Cx7lbKP/7Yttc3n8TkswnG9bfixq5e
- aj62BIOulvjwfMOmpyStm77xhpePvj+nlJWPBa65kphz3ZhEzqmj/lT4vPlnLEDj4MPk
- YHmA==
+ d=gmail.com; s=20230601; t=1700679411; x=1701284211; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qI9n77HY678YV4rQbX5EWXlpGiPTJulu/yHLaEhWUFQ=;
+ b=lRVmkaExTaJK9rJVkPoGaJUxqlDIttVvRoxzmPcXttXekYVHXP/Vc2FZVEaWO1U6C9
+ wzEMZEvtmu937OhaRp3fXJ4ibomgJKlWEvZCsjVFO7cICs5z20VjsBHYOcE0DddqT3uA
+ EWEbclpz2RkLMx1fPLXVLH3zSmNIHrL7jHOZULbS0FWvgo+pZdYdi2DcviUrbWvZFjXC
+ tooAZYkCXrskHIao1J7rp62erjHtX9rDT1qAV02TA/P6bSLoYKAf29oMfEGj+N4mlZ/f
+ FY0dSHmVO2j/7aqHXxZebt6VE2NQDvxB5Z891daj2vCFjb9hY0QYC2vqLccjrA9zQ15t
+ gpOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700679263; x=1701284063;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l+m1i8S+I3uwYUji1999YGKC7+eMRXd5iYgvfUz0alo=;
- b=Ats8VcjSnvYez68NSwsxPtAccn0BtGtaReIvirY03z1qQnJ4SSsBHdzqkFIX1tQFaD
- fUJn4ZNmbF0NdNT58vZne3gFYBI60t8hWz/0DIt780Zr/RyZVwUGQdZjBsONla/pH8K9
- ItVhcahEfNp7+3oR3wAGFQcukr0889NDgI8TM2NETFcVC8jds9HBfOPT62297kji+dhQ
- h2J774/bFUeCaZIw9A2Hvvb3h8h/iQIf0vEEHW5CIOF14qwqLNkXSXd7qbmhibGBDZyU
- j83rrv5+1jxg0vfl96/kVbwLTDCq6xEJh25DGHg+3nJ4xt1NvI5Z3ydT0Au0fWhiU3wW
- WMSQ==
-X-Gm-Message-State: AOJu0YyDNO87OiyJCibg7ao5tfEAqu4G6mEI+XKLcMZvmkIlGMI+jYJD
- YolFlQteB4UgIxtoxT7xAfnelHKMLG2JCteY14o=
-X-Google-Smtp-Source: AGHT+IE/gjOs2oQVfNjBZMxV4ZFeiA4iAGjttpoYPDiWNNtmgSolnbSTw+kjqon+DEtXszNuyR67JfMmStnSMczyrQM=
-X-Received: by 2002:aa7:cd74:0:b0:543:5f7a:9e27 with SMTP id
- ca20-20020aa7cd74000000b005435f7a9e27mr2508713edb.12.1700679262921; Wed, 22
- Nov 2023 10:54:22 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700679411; x=1701284211;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qI9n77HY678YV4rQbX5EWXlpGiPTJulu/yHLaEhWUFQ=;
+ b=wdF9a1Ie4TCvdTr92I8725X/WniUbM9gkK3Sg0+jA7T66LE/cUZRt7mQRjmsmfOE4/
+ H/zxquMqQXt+A6NBZJd4FVAhx4Y8eK0TWqAyke6fDn6axzjSydiXl78AWhq6awHq+BsB
+ 0Jz1/eHyQrHBTdJIra0zPUCMdrPE84UjwsGLIIXGhiagGdJn8zH0+d1YXBH9rsrIm0EJ
+ +SvMRcX9J0wmC5ohErn5x9v7AnqFwHPqBvxthcovv7fnwTyauRQdphno6mgix28FxuFb
+ qoh5G5TuqEq/MxRrDbAA/3Z5ne90x+wPRXX9rqFrwnk7D76L13np2NLO9264vz71Av6U
+ tUMw==
+X-Gm-Message-State: AOJu0YxsssAmd9EVvzTPijXnfvFUzQuk7CQG7R4cNM3MSwup/rtB0+DI
+ cv31/V24q3hsT8WNLJUi9MA6LAGg2SzF9mIPkUw=
+X-Google-Smtp-Source: AGHT+IFIojYxNGt63wRHLEWWzOEoXkvq4TWhcIy3rlmm5yh8c+u88yBVPXtS1PNGgch4QC5S8zOgovA6jk3VUZNNmRs=
+X-Received: by 2002:a05:6402:64d:b0:548:9374:2928 with SMTP id
+ u13-20020a056402064d00b0054893742928mr2589355edx.34.1700679411340; Wed, 22
+ Nov 2023 10:56:51 -0800 (PST)
 MIME-Version: 1.0
-References: <CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com>
- <20231122135209.GR2513409@bill-the-cat>
-In-Reply-To: <20231122135209.GR2513409@bill-the-cat>
+References: <CAKRNjQ3nt3huy9Pt9eesxrKcirBR8aQH5Y8SKsGSbaXmny=_vA@mail.gmail.com>
+In-Reply-To: <CAKRNjQ3nt3huy9Pt9eesxrKcirBR8aQH5Y8SKsGSbaXmny=_vA@mail.gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 22 Nov 2023 18:54:11 +0000
-Message-ID: <CALeDE9NoDskjivzwWcHV10g5-bVP-5MkY7Vcp8PrXUoQ1oj_-g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] rpi5: initial support
-To: Tom Rini <trini@konsulko.com>
-Cc: Dmitry Malkin <dmitry@bedrocksystems.com>, u-boot@lists.denx.de,
- mbrugger@suse.com
+Date: Wed, 22 Nov 2023 18:56:40 +0000
+Message-ID: <CALeDE9N23A=YQfHMxB+oprqw5fjMK6xrAWag6z8-ssfUkpd6ZA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] rpi5: initial support
+To: Dmitry Malkin <dmitry@bedrocksystems.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, mbrugger@suse.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,69 +86,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > These patches bring initial boot support for RPI5. Without it the
-> > latest master fails with the message:
-> > > DRAM:  mbox: Timeout waiting for response
-> > > bcm2835: Could not query ARM memory size
-> >
-> > With those patches and rpi_arm64_defconfig (with disabled
-> > CONFIG_VIDEO_BCM2835) I'm able to get a working u-boot prompt (over
-> > serial). FDT comes from firmware (EEPROM).
-> >
-> > > U-Boot 2024.01-rc3-00003
-> > >
-> > > DRAM:  1016 MiB (effective 8 GiB)
-> > > mbox: Header response code invalid
-> > > bcm2835: Could not query board revision
-> > > FDT model : Raspberry Pi 5 Model B Rev 1.0
-> > > Core:  14 devices, 7 uclasses, devicetree: board
-> > > MMC:
-> > > Loading Environment from FAT... ** Bad device specification mmc 0 **
-> > > In:    serial,usbkbd
-> > > Out:   serial,vidconsole
-> > > Err:   serial,vidconsole
-> > > Net:   No ethernet found.
-> > > starting USB...
-> > > No working controllers found
-> > > Hit any key to stop autoboot:  0
-> > > No working controllers found
-> > > No ethernet found.
-> > > No ethernet found.
-> > > U-Boot>
-> >
-> > These patches are based on v2024.01-rc3 and tested with RPI5 8GB.
-> >
-> > Known issues:
-> > * CONFIG_VIDEO_BCM2835 doesn't work.
-> > * MBOX get board revision (0x10002) doesn't work (the response status
-> > is 0x8000_0001). Looks like a number of tags doesn't work anymore
-> > (board/serial/MAC) but could be fetched from FW FDT.
+On Tue, Nov 21, 2023 at 10:54=E2=80=AFPM Dmitry Malkin
+<dmitry@bedrocksystems.com> wrote:
 >
-> Nice. I think it's the MMC controller that we should be able to support
-> with just a little more work as it's shared with rockchip, and we just
-> need to match the compatible, and mirror whatever tweak is also in the
-> rpi kernel tree for it.
+> rpi5: add initial memory map for bcm2712
 
-Is it? According to the RPi DT the sdio1 interface is used to drive
-the mSD card (it's SD Express capable which I think is essentially
-PCIe/NVME) which has a "brcm,bcm2712-sdhci" compatible [2] which is
-added to the sdhci-brcmstb.c driver[3]. We do have a driver for this
-but it's not the rockchip driver, I think you may be confused with the
-sdhci interface in the RP1 chip which is a designware sdhci IP called
-dwcmshc [4].
+Could this be the title for the patch, "initial support" is fine for
+the cover letter, but doesn't really out line what this specific patch
+actually does.
 
-For the brcmstb sdhci driver we currently have I suspect it'll need at
-least a few patches to get the basics working, in the short term I'm
-not sure we need the extra bits to drive the SD Express side of things
-as I'm sure it can fall back to old modes, looking at the patch it
-maybe just enough to add the compatible for what we need, that's what
-I was going to start with as it looks like it's similar to other IP
-[5].
+> includes:
+> * 1GB of RAM (from 4GB or 8GB total)
+> * VPU memory interface
+> * SOC range (main peripherals)
 
-Peter
+Could you include details where this information came from as well please?
 
-[1] https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/bcm2712-rpi-5-b.dts#L354
-[2] https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/bcm2712.dtsi#L1164
-[3] https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841fdf4d4d7e9
-[4] https://github.com/raspberrypi/linux/commit/80dd8795ca631ac692fd3079487aea6d934a829c
-[5] https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841fdf4d4d7e9#diff-8c952b8cbbb6b3d89e1a401d558b4bd0ecbdf1679cbc5004a31039bc5235c020R172
+> Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
+> ---
+> v2:
+>       new patch
+> ---
+>  arch/arm/mach-bcm283x/init.c | 28 ++++++++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+>
+> diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
+> index 7265faf6ce..362838e9b9 100644
+> --- a/arch/arm/mach-bcm283x/init.c
+> +++ b/arch/arm/mach-bcm283x/init.c
+> @@ -68,6 +68,33 @@ static struct mm_region
+> bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] =3D {
+>      }
+>  };
+>
+> +static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] =3D {
+> +    {
+> +        .virt =3D 0x00000000UL,
+> +        .phys =3D 0x00000000UL,
+> +        .size =3D 0x3f800000UL,
+> +        .attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> +             PTE_BLOCK_INNER_SHARE
+> +    }, {
+> +        .virt =3D 0x3f800000UL,
+> +        .phys =3D 0x3f800000UL,
+> +        .size =3D 0x00800000UL,
+> +        .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +             PTE_BLOCK_NON_SHARE |
+> +             PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +    }, {
+> +        .virt =3D 0x107c000000UL,
+> +        .phys =3D 0x107c000000UL,
+> +        .size =3D 0x0004000000UL,
+> +        .attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +             PTE_BLOCK_NON_SHARE |
+> +             PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +    }, {
+> +        /* List terminator */
+> +        0,
+> +    }
+> +};
+> +
+>  struct mm_region *mem_map =3D bcm283x_mem_map;
+>
+>  /*
+> @@ -78,6 +105,7 @@ static const struct udevice_id board_ids[] =3D {
+>      { .compatible =3D "brcm,bcm2837", .data =3D (ulong)&bcm283x_mem_map}=
+,
+>      { .compatible =3D "brcm,bcm2838", .data =3D (ulong)&bcm2711_mem_map}=
+,
+>      { .compatible =3D "brcm,bcm2711", .data =3D (ulong)&bcm2711_mem_map}=
+,
+> +    { .compatible =3D "brcm,bcm2712", .data =3D (ulong)&bcm2712_mem_map}=
+,
+>      { },
+>  };
+>
+> --
+> 2.40.1
