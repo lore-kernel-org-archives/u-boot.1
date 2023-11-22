@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7601CC072A2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 05:23:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D71A3C61D92
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 05:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C90198747E;
-	Wed, 22 Nov 2023 06:23:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48CAF875A2;
+	Wed, 22 Nov 2023 06:24:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TkqE3CaV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YyDdyU+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29B738747E; Wed, 22 Nov 2023 06:23:49 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 4B35A87582; Wed, 22 Nov 2023 06:24:39 +0100 (CET)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B97B187563
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 06:23:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6842E87118
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 06:24:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5484ef5e3d2so6875057a12.3
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 21:23:46 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-548f35e6a4bso2551879a12.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 21:24:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700630626; x=1701235426; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700630677; x=1701235477; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vfitGJCZ/IRY7+o6LxW1nKvplffSzyp8eFX2Y1axCcg=;
- b=TkqE3CaVNcoCex3AAn660Srv79QikE9W6Z1nm27a9sm+88IYbwXuxmGeBA4mOeDU/m
- 3wpr1krXU8uG8me0OViuQl4t6PbwOCpkK7O/bKVYDlusN8rf86HnT/3rRHSEEhdz4w8T
- 0bbUE3TJjLFxLEOkH97Qkw7Blj9l3daDUafyJOWaOPW0KLz1p4y79F68eYYJBp9p37h9
- ONisic8mZ7c/CQfnzDvX6IrofR6aZ2dEct1VKOeZJVCIWtM6WVzpcefPC3exvQKi9sGM
- 2SqJhfZ97ZjAE7A+YzM2RbjsfhyUG0D2k5WiyHWnhoZKcn20utQQ2WI7MYNeZrhDbCsI
- L14g==
+ bh=ab/57ImaMKDlDZq200GHJyNqEu/1rvm5INzWKUmzoDk=;
+ b=YyDdyU+aquERbjhRvzFUa/AQ+W4px3WDCRrDczBPqWK3Wn/HYuBHnW24Q3/V1E/TGi
+ vb20mwKR3daiuuLsJ+85zN7FawvcJsxFzQGu0CjyE/r0OUnWTrxYorCE9VCjmveB0lG1
+ z+oDIvcUvclPKTqbi1DYMWP1+V48mySYh9GHN5X9NZ+JgrudfAVkI2i8t9tKXdAx3cKL
+ GB7UmVIg35Ha4IGDJV7C8hrD01UqkdByJGpqWvTiMlt2pDDTS9hQO79f/Dw+liC4A7XJ
+ vTBbYuEaKCCZQtDnWYVAyWSjOroNQGEDMyEUb7aH5h47SJEf/T+6ASK8F/u/KHwlE9w8
+ Pgyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700630626; x=1701235426;
+ d=1e100.net; s=20230601; t=1700630677; x=1701235477;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vfitGJCZ/IRY7+o6LxW1nKvplffSzyp8eFX2Y1axCcg=;
- b=fpHqXPAesbXAsmGLugv64f/cq/SuVYmCKPZwduinJS0M+N8qYIbTHQYiMbGVN5UWVh
- NCvMfT38VXWQgM4MDR4Yt00Ukw/1gFAlalNhei/Uwr45NiXtM2+YEqWIxrkHYN4n9o7d
- hfbdxD7a4wnOWj2I8GGZIECiUea9zon7DgwFFZiI8pLKeIsb3yhElI9YrZhyl0HZKhm9
- yeAY5O0Xc8GNEVmJDAOHJkMexqcOF/t899zQFM6oMZX41+jEmJSQ6BuBoh5jcu1qiV++
- zKRFTijFeRLUvEo91B3gOxMU4zChP6ZKHCBMrW8wrf/ILhNr6dFa83wQtkpMHdiFoGF1
- 3kiw==
-X-Gm-Message-State: AOJu0Yzu9nAmksTHw8FGUyscuBItwA05JQskdqfqTIkDfxGkZ+xVYNfs
- u+teNiNmHc+ne0mKkZlGVmehAWmWvSDH5iaOXDovu3FlnA+YjZiS1Lg=
-X-Google-Smtp-Source: AGHT+IEDdwaj638PfVAz05YQKn1Vp3EMwiShWyWYY4SxSicLv/aFSW6F8L3NFzHTko5DM9EJd2hAUZ+pJkKvPRGoznc=
-X-Received: by 2002:aa7:c1d5:0:b0:543:70c2:aa8d with SMTP id
- d21-20020aa7c1d5000000b0054370c2aa8dmr918699edp.15.1700630625998; Tue, 21 Nov
- 2023 21:23:45 -0800 (PST)
+ bh=ab/57ImaMKDlDZq200GHJyNqEu/1rvm5INzWKUmzoDk=;
+ b=TC1I7USnedKC9pbXffYsDk7IzcNk2lr8Z7BmwhBKweBPIzXi0kYrjdXIf6p80WCkAC
+ Yi6YJRno+7MjmPlILvhH8zhwKNQP9hifNopxKTFMq/QSBKK5SQLPgYOCBMWi5otSli8T
+ /mPyqgPI9N3mCf6LlwHcWykAcOxJqs/nJTmqOgrkAxxhTHCgLMDEIuzEw7g8yhanZJEA
+ ZMlqU4RiCljMOK3N5rauV/mNxmBvoG2xXciYeFfOkEsrUXB4iXsT6nML+aFgZDxEPCkq
+ zGfUCkHln8HByGFEq7ZxHIEMDnTsR7HszHOohUh9GFaTulOKdCG/wwe5z55/OczvfA97
+ jJKg==
+X-Gm-Message-State: AOJu0YxmFc3eh6vvbs8s9lWd+ePByTBRy5I2NnJ18TWqQ1RiHv6SxaZK
+ k7hAPZmMPQbEDU0rGgp67cFxjEl8h236h+u3fcD12Q==
+X-Google-Smtp-Source: AGHT+IFPJGVr/JMlZZxOZg8VeIjhAaTMlTvRwx1RiRGw7QahwPXC6fOKt+ZK76WUq7WmlCd9TZCF0UalS+/z02ggRgc=
+X-Received: by 2002:a50:ee94:0:b0:543:5cfa:ba41 with SMTP id
+ f20-20020a50ee94000000b005435cfaba41mr985572edr.25.1700630676902; Tue, 21 Nov
+ 2023 21:24:36 -0800 (PST)
 MIME-Version: 1.0
 References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
  <20231121070028.2614095-2-sughosh.ganu@linaro.org>
  <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
+ <20231121222440.GM2513409@bill-the-cat>
+In-Reply-To: <20231121222440.GM2513409@bill-the-cat>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 22 Nov 2023 10:53:34 +0530
-Message-ID: <CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com>
+Date: Wed, 22 Nov 2023 10:54:26 +0530
+Message-ID: <CADg8p96OaNr3gANYMXnOvey5dhkUrhK5AV_cHTXQ2GshWV8H7g@mail.gmail.com>
 Subject: Re: [PATCH 1/4] tools: mkeficapsule: Add support for parsing capsule
  params from config file
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Masahisa Kojima <masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -89,60 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
+hi Tom,
 
-On Wed, 22 Nov 2023 at 03:42, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 22 Nov 2023 at 03:54, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Sughosh,
->
-> On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Tue, Nov 21, 2023 at 03:11:50PM -0700, Simon Glass wrote:
+> > Hi Sughosh,
 > >
-> > Add support for specifying the parameters needed for capsule
-> > generation through a config file, instead of passing them through
-> > command-line. Parameters for more than a single capsule file can be
-> > specified, resulting in generation of multiple capsules through a
-> > single invocation of the command.
+> > On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > Add support for specifying the parameters needed for capsule
+> > > generation through a config file, instead of passing them through
+> > > command-line. Parameters for more than a single capsule file can be
+> > > specified, resulting in generation of multiple capsules through a
+> > > single invocation of the command.
+> > >
+> > > The config file can then be passed to the mkeficapsule tool in such
+> > > manner
+> > >
+> > >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > >  tools/Kconfig              |  15 ++
+> > >  tools/Makefile             |   1 +
+> > >  tools/eficapsule.h         | 114 ++++++++++++
+> > >  tools/mkeficapsule.c       |  87 +++++----
+> > >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
+> > >  5 files changed, 538 insertions(+), 31 deletions(-)
+> > >  create mode 100644 tools/mkeficapsule_parse.c
 > >
-> > The config file can then be passed to the mkeficapsule tool in such
-> > manner
+> > This patch keeps coming back :-)
 > >
-> >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
+> > Can we not add multiple capsules in the binman description? Why do we
+> > need a new file format? How can binman decode images produced in this
+> > way?
 > >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >  tools/Kconfig              |  15 ++
-> >  tools/Makefile             |   1 +
-> >  tools/eficapsule.h         | 114 ++++++++++++
-> >  tools/mkeficapsule.c       |  87 +++++----
-> >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
-> >  5 files changed, 538 insertions(+), 31 deletions(-)
-> >  create mode 100644 tools/mkeficapsule_parse.c
+> > Also, could we get sandbox to produce one EFI capsule as part of the
+> > normal build? I think that discussion trailed off.
 >
-> This patch keeps coming back :-)
->
-> Can we not add multiple capsules in the binman description? Why do we
-> need a new file format? How can binman decode images produced in this
-> way?
+> I believe part of the answer here is to support the config file format
+> that other capsule generators use. Do I recall this all right, Sughosh?
 
-So as Tom mentions, this brings parity with respect to the other
-capsule generation tool in EDKII that generates capsules. IIRC, this
-is something which even Xilix was interested in, and Michal had kind
-of gone through these patches earlier. Lastly, it would be good to
-have support in U-Boot's mkeficapsule tool for generating a single
-capsule file with multiple payloads, and having support for this
-functionality helps in that goal.
-
-Also, you might have noticed that, since your objection to the last
-series, I have removed putting this in binman. So now, this aspect of
-the capsule generation would only be supported through the
-command-line invocation of the tool.
-
->
-> Also, could we get sandbox to produce one EFI capsule as part of the
-> normal build? I think that discussion trailed off.
-
-Yes, apologies for missing out on this. Slipped my mind. Would you
-want, say, all the non-signed capsules to be generated as part of the
-sandbox build?
+Yes, that is correct. There are some other reasons as well, which I
+have mentioned in the reply to Simon's email.
 
 -sughosh
