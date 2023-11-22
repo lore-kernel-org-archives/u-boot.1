@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF6EC61D9B
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 13:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C39C61D9B
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 13:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0477587605;
+	by phobos.denx.de (Postfix) with ESMTP id 7AC2F87617;
 	Wed, 22 Nov 2023 14:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="suh6CiGH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tjrJ/myi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C71286F67; Wed, 22 Nov 2023 14:12:06 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 9135D86F42; Wed, 22 Nov 2023 14:12:06 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B63AB87250
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 14:11:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FF5B87097
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 14:12:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-db40898721fso485724276.3
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:11:59 -0800 (PST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d9caf5cc948so6325889276.0
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:12:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700658718; x=1701263518; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700658721; x=1701263521; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3IBH/fB3H0/3uZi2Chn+IjerEZBGBPrCa9MBcMvq9yw=;
- b=suh6CiGHTuuN/NKpV5EeqZa6WUtTvOuwuN8wd0F/dn496o1i3E0ilA8L5vr7ktijEw
- l81TkOamWCjm/2boEGsSZfKORPBUHJs/CLngEUKX+EHU/MjnyPPzWFOR40byL9pRZwaU
- a8coZm864Ez1iExT1sWBocWVu9m1u47f1zpNU=
+ bh=LmQl4T3hSNFLEDqQtaz6kiwsS9fwlqq7wH5Wez33+L8=;
+ b=tjrJ/myiK8f6wWwrjO+IJi26XbRqX1Ay5BBlnX0ecNijklNrmOFG2VX/fH8xOkdzIe
+ Fu3X2SASJ3BTXLNh8ExI76FcGJNZ2WJ1v8XCBTmThl1sr9AAkbk+NURLERHKDTdAvYmA
+ K61Eq2O4EyWG9wI6OB7v8hMUFM8ezGLyv+ZeQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700658718; x=1701263518;
+ d=1e100.net; s=20230601; t=1700658721; x=1701263521;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3IBH/fB3H0/3uZi2Chn+IjerEZBGBPrCa9MBcMvq9yw=;
- b=AtmnoRbYh+F3K2bLEUcKgfwvXzR9h4eQt4dsPeAQgxMX4eNZ1G+6kcc6I1G1GIVnzg
- j1sNEygga0Q+TTWHc95CKTfVq4D0hMlZ4joBjQutH1wXLoh0iVOax6N1tMidYSWcOVte
- 98GXRr1PkcN1MtlJYQgHKmoVY3+EBoJGUuZCjPiYmgNoLKF2VKsJhEb/qmvKpqALWgVS
- uFECfUQuDLfVegWjc7vOsI5c2VHbmDWbx9pCrInvyblTKCDjCa5j8XPyUr+eGMLc5kkH
- dnYjB36z1/DTyu4rbedV8x2eHBCejhvgFzzr0+aAYD3DAqV/ZU6yLQ9YNx1WJcxv+a9t
- p2gg==
-X-Gm-Message-State: AOJu0YxW5UAayl2aLQEG3dXDdxaqS+UzEwWtqU9lAFmDpypjgOuPaOQY
- al/eLor01IDgst/eIkCN2Q8QpO14Xd9l4zNTNhvnqg==
-X-Google-Smtp-Source: AGHT+IFYZXLh0kFFgqtOrZflJ4s5kowXQmoCgoP1bxCskd+OREDctxmUGMZ/mBE1Erf19uNmkkx8Ag==
-X-Received: by 2002:a25:ec0c:0:b0:d9a:45d7:4eae with SMTP id
- j12-20020a25ec0c000000b00d9a45d74eaemr1954793ybh.62.1700658717988; 
- Wed, 22 Nov 2023 05:11:57 -0800 (PST)
+ bh=LmQl4T3hSNFLEDqQtaz6kiwsS9fwlqq7wH5Wez33+L8=;
+ b=FAgUYl7+JWQ+n9gJfgtAvirUaH9lzuDApogxpuDqtEhId/84eDchtj1S2Ga1QGD5F0
+ t9CKU/WSXcAm50bjCUa1086WacCpLAc90i5Tzj7xhGsYs62Tjgg53LdpBQruEYv/tGBO
+ 4IVMgDoGuMwPXwKSC5UeV8Bs8d1jnaQAKoV3CMYQWyE1DL5jAXDha8Ft+stFO9AZmalK
+ cv5k1gX5oJUO7wu2Nc/EvvyjIbeuJXzgkHveEP7c4OILVWrwfB8YtHWnyP6TE0DWsoJc
+ R9o4skDpa1OcMDVjXob/Kfaa+Lzz2y8tPeOEBakgMbyDkNO1g8EdR4gd+W+Qt+tiXwzO
+ x7Uw==
+X-Gm-Message-State: AOJu0YydX3bJ8RkPt5oSNQqKe6wHQgSBr8K11b/0azt19jJoh41M/Rgu
+ SshkkNSuqA94Dfskqigw4nCjX3HPlDYlJobkjJLqzg==
+X-Google-Smtp-Source: AGHT+IFway0eevzLAN7cUFAPKKHOEfPGBsBAp4p8lCe//K49RrH6FPwTfwkkZPEw3k5vsGbfMEqrYQ==
+X-Received: by 2002:a25:aac1:0:b0:da0:514a:8f42 with SMTP id
+ t59-20020a25aac1000000b00da0514a8f42mr2239026ybi.32.1700658721471; 
+ Wed, 22 Nov 2023 05:12:01 -0800 (PST)
 Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-999e-39fe-b112-e0fa.res6.spectrum.com.
  [2603:6081:7b00:6400:999e:39fe:b112:e0fa])
  by smtp.gmail.com with ESMTPSA id
- x63-20020a254a42000000b00c64533e4e20sm1367511yba.33.2023.11.22.05.11.57
+ x63-20020a254a42000000b00c64533e4e20sm1367511yba.33.2023.11.22.05.12.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Nov 2023 05:11:57 -0800 (PST)
+ Wed, 22 Nov 2023 05:12:00 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH 03/11] sandbox: Add <linux/types.h> to asm/global_data.h and
- asm/io.h
-Date: Wed, 22 Nov 2023 08:11:46 -0500
-Message-Id: <20231122131154.2444690-3-trini@konsulko.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 07/11] rmobile: Add <mach/rmobile.h> to cpu_info-rzg2l.c
+Date: Wed, 22 Nov 2023 08:11:50 -0500
+Message-Id: <20231122131154.2444690-7-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231122131154.2444690-1-trini@konsulko.com>
 References: <20231122131154.2444690-1-trini@konsulko.com>
@@ -91,42 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We need <linux/types.h> in these files as we reference Linux types.
+In order for RMOBILE_CPU_TYPE_R9A07G044L to be defined we need to
+include <mach/rmobile.h> here.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- arch/sandbox/include/asm/global_data.h | 2 ++
- arch/sandbox/include/asm/io.h          | 2 ++
- 2 files changed, 4 insertions(+)
+ arch/arm/mach-rmobile/cpu_info-rzg2l.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/sandbox/include/asm/global_data.h b/arch/sandbox/include/asm/global_data.h
-index c6977735029d..001b2b53c1c8 100644
---- a/arch/sandbox/include/asm/global_data.h
-+++ b/arch/sandbox/include/asm/global_data.h
-@@ -9,6 +9,8 @@
- #ifndef	__ASM_GBL_DATA_H
- #define __ASM_GBL_DATA_H
+diff --git a/arch/arm/mach-rmobile/cpu_info-rzg2l.c b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
+index f69649dc7eaf..bd3146fb011f 100644
+--- a/arch/arm/mach-rmobile/cpu_info-rzg2l.c
++++ b/arch/arm/mach-rmobile/cpu_info-rzg2l.c
+@@ -4,6 +4,7 @@
+  *
+  */
  
-+#include <linux/types.h>
-+
- /* Architecture-specific global data */
- struct arch_global_data {
- 	uint8_t		*ram_buf;	/* emulated RAM buffer */
-diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
-index 31ab7289b4bd..1ccb25a0fe1e 100644
---- a/arch/sandbox/include/asm/io.h
-+++ b/arch/sandbox/include/asm/io.h
-@@ -6,6 +6,8 @@
- #ifndef __SANDBOX_ASM_IO_H
- #define __SANDBOX_ASM_IO_H
++#include <mach/rmobile.h>
+ #include <asm/io.h>
+ #include <linux/libfdt.h>
  
-+#include <linux/types.h>
-+
- enum sandboxio_size_t {
- 	SB_SIZE_8,
- 	SB_SIZE_16,
 -- 
 2.34.1
 
