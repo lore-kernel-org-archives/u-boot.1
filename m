@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6645C61D9B
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 19:51:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE033C61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 20:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 294E1875B5;
-	Wed, 22 Nov 2023 20:51:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2741D86F83;
+	Wed, 22 Nov 2023 21:02:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y1t+KPk1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ACkXXIx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DA4875AA; Wed, 22 Nov 2023 20:51:50 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id A4AF4870BC; Wed, 22 Nov 2023 21:02:37 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31F4E875D6
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 20:51:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58F4D86F67
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 21:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5401bab7525so206041a12.2
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 11:51:48 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-507a29c7eefso116224e87.1
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 12:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700682707; x=1701287507; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ivL12Vy/hzN9lr8ZJP48YwOT66uOr8MHU6DxOuI2OEE=;
- b=Y1t+KPk1GjRSNUYov+863pBWbgEXeOlkltmONzhUzLtUZtL7XRGxdWx9KAo2aS9tCi
- mJNsplqfC0aFxGbUWD2nd1n47bGwvUXsgcfq2D8cNCSEQlC2nDy+roNFQT1TEKHPcvtI
- XX859AKCy1EniE7c0SsfTcrDBExsTxuzpWRSKZAe8U/+lEioK9G84xUDNuMDHlNTbfHv
- AmR5puFfpQs1sk9I/M/BfYPtsALUBAiEow5Zq7auClBD8hp5dfdzK6lJfgV4P19HtVHn
- iH1eLmB6oCea4U2K+snIIKLylb76Cjzf1ys8PLufi5pei776Wq65qAvukmvXLT56T1x4
- MHPA==
+ d=gmail.com; s=20230601; t=1700683354; x=1701288154; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zOexmxQKxiAf9chOv+PhgG9cWkgZX/PAwbTyJnDhTrU=;
+ b=ACkXXIx2fxCbT1lnkGeKT3ZQKRA95hhL2LG3LyW7AA/nXE0MGukw3EX4YQh8O1dDw9
+ X5b06q2zGTTH8LdM+PrAvUzaO4PU03xbvyGVchQQNH7FdtsGz1mmqc9jMepe4uygajOZ
+ J6nkXpGLkaSyF/qpGPwTTZZads+LwAH2DJcYLvws6e8QrPvUp7B1ymUtJbqhAuMDLeNv
+ +I4o9ch3IMBnR9Vi7JSotQ3WrcafZ7BCmRJHKVczgbMzH2/thP7/MNL2qAJ8ppESym7d
+ WqSGvvLFMrpGrRs6JxtuHOn02m3RirsEhSU54LZpoLv3ADTEk4/kWkHXcOEIl3IHqSA8
+ o5eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700682707; x=1701287507;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ivL12Vy/hzN9lr8ZJP48YwOT66uOr8MHU6DxOuI2OEE=;
- b=jycn3ToGxqYisOndTD16WWcj/2x4gOFfZMEm6PJ97x3gqNH9+gT6/Q2adPLjosGPBs
- 6G6gbnmv9gBUoXk/hXDs20px1X8+IG7TTZaFe9cIR+Tb5Q5uwOR7nARzL8cWu2iSyv0x
- DjKIVutyQ38t3Waqel2HoMAqW7aJxKqIweEpZvtsp5dErIWmKqg7mvihQSWF24oL2g4n
- MeoTJ2/B/l5fwu+592BhMOKJPBpfGPcZsg0L1pY0i04pK73Y2doYOWiPadUD9x9qL0O7
- en5P8CMsLNCWden9WjHEPdYz3EhNFn19OnGQdbi5ArI4LIhj0wTb79bO3BqDreagMW9i
- V50A==
-X-Gm-Message-State: AOJu0Yy68j+Fg+WX7w6phur8N3KSfsHQZVmTWA1mMf5r5Dl6nW69whx6
- 04yRFu0QxN8KINlN16IFtLsTzk47Xzp468VOd4c=
-X-Google-Smtp-Source: AGHT+IH0Z/LQ8TEWjx7ja75P9NiwWhCyS5AF87EcMdNKC6z4XuTMVo6MDLkrF9NTVREmshJ+vBf61eP9/u0m/2aKjgo=
-X-Received: by 2002:aa7:cd4c:0:b0:548:587f:45a5 with SMTP id
- v12-20020aa7cd4c000000b00548587f45a5mr2888922edw.24.1700682707550; Wed, 22
- Nov 2023 11:51:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1700683354; x=1701288154;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zOexmxQKxiAf9chOv+PhgG9cWkgZX/PAwbTyJnDhTrU=;
+ b=eGwGPJhCuxjedPKuVuYU5rfAn8aVYQY501BnCu0xueZ7nPmiyNHwJuuOP4xdB0b9L/
+ pO+N+AGQglguqMj7paDXlgcm4XxsHNpxyzqRYrGg8+H6LcZfL0G0zDn4T0tW7jCS+sxn
+ DUNWxPSab8Ar0qvF5wKxIfUdLivndbThmpLxmYOu9yFYv78ftIznNIeKV3n0MG9eZyHu
+ EnjUBlAAtAElj1JqAJcLm8PA42qG9q7wUEdkG0jIWozL659hpCntevf7H0uq0ptBp+f0
+ PDHwjr4i4jEh+Nw9Dgj94xKDQldXmQCmtl5PG8zjA2maB4jUlSuB05hx769J+FASjQHC
+ VPNw==
+X-Gm-Message-State: AOJu0YyDVPuAlmxPwSpTGiu0nEHwFu8ZgxHcQKXdE8ziX4CXHN4wgBy7
+ Pwn9yUZtBclyQ+Ru8XdBLySGSLPKbz8PTDcgh3ucSYuH
+X-Google-Smtp-Source: AGHT+IHAz4nm6KgyLsc02wlODAY4tUpGfNXkPZXYEKAY0/jbWuEQTx9IsLbA5W9Qe8O6FCyWBYouKJx329iphLSVxcI=
+X-Received: by 2002:a19:f818:0:b0:509:8e22:ae5 with SMTP id
+ a24-20020a19f818000000b005098e220ae5mr2313454lff.60.1700683353875; Wed, 22
+ Nov 2023 12:02:33 -0800 (PST)
 MIME-Version: 1.0
-References: <CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com>
-In-Reply-To: <CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com>
+References: <20231120201609.619598-1-trini@konsulko.com>
+ <a653e096-cf28-4573-856f-d52dae233b46@linaro.org>
+ <20231121131551.GP2513409@bill-the-cat>
+ <d59de63c-4d4c-4141-9b4f-9a279da596d4@linaro.org>
+ <20231121140929.GV2513409@bill-the-cat>
+ <ec846ff6-a60b-4eb8-906c-0de6e11b5d9d@linaro.org>
+In-Reply-To: <ec846ff6-a60b-4eb8-906c-0de6e11b5d9d@linaro.org>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 22 Nov 2023 19:51:36 +0000
-Message-ID: <CALeDE9O13H+di7t62iFOFRzZytZKEoxmts8YzcjLxr8CuvRhdg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] rpi5: initial support
-To: Dmitry Malkin <dmitry@bedrocksystems.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, mbrugger@suse.com
+Date: Wed, 22 Nov 2023 20:02:22 +0000
+Message-ID: <CALeDE9PGErp+wDRR3VDvHNZc6_3ph=vDuvR-dk3TAWBrppayoA@mail.gmail.com>
+Subject: Re: [PATCH] libretech-cc: Populate SMBIOS information
+To: neil.armstrong@linaro.org
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,88 +93,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
-
-> These patches bring initial boot support for RPI5. Without it the
-
-I've given these a cursory look over, I have a system to test and will
-give them a whirl in the next few days, I was planning to start
-playing over the weekend so you've provided a great start :)
-
-> latest master fails with the message:
-> > DRAM:  mbox: Timeout waiting for response
-> > bcm2835: Could not query ARM memory size
+On Tue, Nov 21, 2023 at 2:50=E2=80=AFPM Neil Armstrong
+<neil.armstrong@linaro.org> wrote:
 >
-> With those patches and rpi_arm64_defconfig (with disabled
-> CONFIG_VIDEO_BCM2835) I'm able to get a working u-boot prompt (over
-> serial). FDT comes from firmware (EEPROM).
->
-> > U-Boot 2024.01-rc3-00003
+> On 21/11/2023 15:09, Tom Rini wrote:
+> > On Tue, Nov 21, 2023 at 02:46:29PM +0100, Neil Armstrong wrote:
+> >> On 21/11/2023 14:15, Tom Rini wrote:
+> >>> On Tue, Nov 21, 2023 at 10:18:04AM +0100, Neil Armstrong wrote:
+> >>>> Hi Tom,
+> >>>>
+> >>>> On 20/11/2023 21:16, Tom Rini wrote:
+> >>>>> Enable CONFIG_SYSINFO_SMBIOS and populate the nodes so that Linux c=
+an
+> >>>>> eventually display this information
+> >>>>>
+> >>>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+> >>>>> ---
+> >>>>> Posting this as this was the easiest platform for me to test some S=
+MBIOS
+> >>>>> related patches on and I needed to populate the nodes so I could ch=
+eck
+> >>>>> things in dmidecode once Linux was up.
+> >>>>
+> >>>> Sorry to be late a the party, but can't this be dynamically found fr=
+om DT's compatible & model ?
+> >>>> Since I'll probably need to add this to all boards, it seems like a =
+duplicate of what's already in the DT.
+> >>>
+> >>> Part of the "fun" as to why we have the binding here is that while we
+> >>> could use the top-level model property, there's not a corresponding o=
+ne
+> >>> for manufacturer. I'm fine ignoring the patch I posted here and havin=
+g a
+> >>> longer discussion about populating SMBIOS more usefully, globally, as=
+ I
+> >>> think has been suggested a time or two.
+> >>>
+> >>
+> >> I'm ok landing it with the same data as from the vendor.
+> >> but couldn't we use the first top-level compatible as default smbios d=
+ata ?
+> >>
+> >> compatible =3D "vendor1,board-name", "vendor1,soc-name";
+> >>
+> >> and translate to:
+> >>
+> >>
+> >> smbios {
+> >>      system {
+> >>              manufacturer =3D "vendor1";
+> >>              product =3D "board-name";
+> >>      };
+> >>
+> >>      baseboard {
+> >>              manufacturer =3D "vendor1";
+> >>              product =3D "board-name";
+> >>      };
+> >>
+> >>      chassis {
+> >>              manufacturer =3D "vendor1";
+> >>              product =3D "board-name";
+> >>      };
+> >> };
+> >>
+> >> since the vendor name should be already documented in the linux
+> >> bindings, same for the board name.
+> >> And we would be free to add some custom data in the DT if needed.
+> >>
+> >> Anyway, not sure it's the right place to discuss about that !
 > >
-> > DRAM:  1016 MiB (effective 8 GiB)
-> > mbox: Header response code invalid
-> > bcm2835: Could not query board revision
-> > FDT model : Raspberry Pi 5 Model B Rev 1.0
-> > Core:  14 devices, 7 uclasses, devicetree: board
-> > MMC:
-> > Loading Environment from FAT... ** Bad device specification mmc 0 **
-> > In:    serial,usbkbd
-> > Out:   serial,vidconsole
-> > Err:   serial,vidconsole
-> > Net:   No ethernet found.
-> > starting USB...
-> > No working controllers found
-> > Hit any key to stop autoboot:  0
-> > No working controllers found
-> > No ethernet found.
-> > No ethernet found.
-> > U-Boot>
+> > That's essentially
+> > https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-2=
+-ilias.apalodimas@linaro.org/
+> > which had a bunch of comments on 1/2:
+> > https://patchwork.ozlabs.org/project/uboot/patch/20220906134426.53748-1=
+-ilias.apalodimas@linaro.org/
+> >
+> > But I think that since then some thoughts on the subject have changed
+> > and that approach might be more welcome now than it was then.
+> >
 >
-> These patches are based on v2024.01-rc3 and tested with RPI5 8GB.
->
-> Known issues:
-> * CONFIG_VIDEO_BCM2835 doesn't work.
+> Thanks for the pointer, seems I had the exact same idea.
+> Hope this will be re-spinned, I don't want to add this to the 45 amlogic
+> boards when we have the necessary info already available and documented..=
+.
 
-When you say it doesn't work, does it just not output display or does
-the device lock up and you need to disable it?
+Fedora has carried this patch for some time for the same reason, a lot
+of the tools in distros around support use dmidecode for HW
+information and reporting "Unknown" meant there was lots of reports
+against tools all over the place. I'd been asking Ilias to upstream it
+for a while so I'm in full agreement here and he did mention he would
+resend it soon :)
 
-For the rpi4 it was as simple as adding a new compatible [1] for the
-rev6 of the IP block as for the bits that we use in U-Boot nothing
-changed, but the kernel changes for the rev7 that's in the RPi5 needed
-updating registers [2] so I'm not sure if we're going to need to do
-more for this or not.
-
-> * MBOX get board revision (0x10002) doesn't work (the response status
-> is 0x8000_0001). Looks like a number of tags doesn't work anymore
-> (board/serial/MAC) but could be fetched from FW FDT.
-
-Might be worth looking to see if there's changes in the kernel for
-this. In an initial look I didn't see any changes to their kernel
-here.
-
-We probably need a patch to the identifier too similar to the following:
-https://source.denx.de/u-boot/u-boot/-/commit/5e7e6619c85c090f6b62685a9d90f748f1729d12
-
-Also probably worth adding a note about reviewing support in bcmstb_sdhci.c
-
-Regards,
 Peter
-
-> v2:
->   explicitly set .data section for rpi_bcm283x_mbox_addr due to relocation issue
->   update memory map with VPU range
->   add a patch to get human readable model from FW FDT
->
-> Dmitry Malkin (3):
->   rpi5: add initial memory map for bcm2712
->   rpi5: add alternative way to get MBOX address via FDT node
->   rpi5: get_board is no longer works. Print model name from FW FDT
->
->  arch/arm/mach-bcm283x/include/mach/base.h |  1 +
->  arch/arm/mach-bcm283x/include/mach/mbox.h |  4 +--
->  arch/arm/mach-bcm283x/init.c              | 40 ++++++++++++++++++++++-
->  board/raspberrypi/rpi/rpi.c               |  6 ++++
->  4 files changed, 48 insertions(+), 3 deletions(-)
-
-[1] https://source.denx.de/u-boot/u-boot/-/commit/0059ef0be903a1f0a9afe5259fb2e0874f78a8ac
-[2] https://lists.freedesktop.org/archives/dri-devel/2023-October/428453.html
