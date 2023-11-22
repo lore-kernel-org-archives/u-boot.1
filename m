@@ -4,51 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BFC7C61D99
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5FC6C61D99
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3D9E87666;
-	Thu, 23 Nov 2023 00:51:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BDFF88767F;
+	Thu, 23 Nov 2023 00:52:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700697076;
-	bh=edY9BOYGauJ1gWmLEkCvcNNfMZ1kPB7ukS40z1LWlAQ=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Cw0UpN7mc4e436fmKj3h8mmxQxgKb7DTSEtJCYLlXHwjol6DQ9NSX35443lLgjFvY
-	 rreg0+MzmUwX5cfmUMq3Agq9xDg9yYDhXzN6QYxqFR/+T6PuIi8XWBOqm41zMFaZvx
-	 XtepGD0vrqCBOrXsfSI8cJbJUi+nmij0Wj6b/qo09Kz962AO08eW4StKhmY6GEFjYH
-	 jVPGwH887cSgjNdYzVTPS7Z1wDIvAF2wXeNnxZ0ewO0xDTnGqesBnGxABrpk2s3SDj
-	 C2dRkzkwj09mnFzLSAyY83yjY6wAru1S2h74leBb3wH+R4DIG9g+gYv0MKLGqqeNCi
-	 Q0YioJnjk5Zgw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Inqo1r+K";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 362D387671; Thu, 23 Nov 2023 00:52:22 +0100 (CET)
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com
+ [IPv6:2607:f8b0:4864:20::b4a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ED13886F68;
- Thu, 23 Nov 2023 00:51:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700697075;
- bh=edY9BOYGauJ1gWmLEkCvcNNfMZ1kPB7ukS40z1LWlAQ=;
- h=From:To:Cc:Subject:Date:From;
- b=P4Ha5v/f/BsbY70T2mg/gVruadqk/0dSrqlZiRJn67f6Mb0yfrowQWl1Cb1O5tuoj
- JGgS3AHiCmR3IihFvcy/r3WToJJBWYnajw3e2D7Fr68aS5pZcOi4uuQFe208moVrOF
- Owt6jYMwvP1CY4/qmDWkhLs2Bmjlu72Xft0kkHJfYIqrFaJntlUTHP7RHg+3Xetn57
- tDjK5UQqrw5jnVjRGJgmkxmXV8KIJcipM+/e1hPm8UBr3D8kNsUu3o4JyQtDINSOH6
- 7VJBHgfH8ioudLjTMMwAT+p5FeQBa1DxAYc1LV/fgidAOGPXW7sHmIMDy56qjPiy59
- 1K/PnMvSf5R9w==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Hector Martin <marcan@marcan.st>
-Subject: [PATCH] usb: xhci: Replace terrible formatting with different
- terrible formatting
-Date: Thu, 23 Nov 2023 00:50:52 +0100
-Message-ID: <20231122235056.78672-1-marex@denx.de>
-X-Mailer: git-send-email 2.42.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ by phobos.denx.de (Postfix) with ESMTPS id 61470875F5
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 00:52:17 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3MJReZQcKBgUrtwny4klttlqj.htrz-gttyqnxyx.ijs2.ij@flex--moritzf.bounces.google.com
+Received: by mail-yb1-xb4a.google.com with SMTP id
+ 3f1490d57ef6-d9ce4e0e2bdso282581276.3
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 15:52:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1700697136; x=1701301936; darn=lists.denx.de;
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=8Gu1JgAg7xh4M4Sj67PDrdLpqnH744OBKZ8qwSIvF4I=;
+ b=Inqo1r+KX0KTDO0AmeqG3OX13MX6HJj8R8Yq41EdWynZViGHIyipGV3CLfpVg4nUMr
+ slJwHjAAXfzwLWUFmPiQbb92MClanE5/wUQ6Q6kDwTIsr/SrrazSLEm8mIRN6K7T6YeF
+ F9I6Ts3KF8CEyxrGzvxdz2JQnpUS91Ea9u274TJ5LJansi4glBhYzc6WxrK4Il3ACDlK
+ YgBDbaUmYcJ8Vf10CVTD5XHbkHvp8rd0mFaihoAyVfZtUurjwaCn5m9Xt6K9ruT6a1yr
+ t5u4OjwihiDenuwsNyo71+35NCMHsAV2B0NWOc9awfOwbcUA8fQ5C2XMct0Q8Tghp0O5
+ c36w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700697136; x=1701301936;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8Gu1JgAg7xh4M4Sj67PDrdLpqnH744OBKZ8qwSIvF4I=;
+ b=G3Ce4w6eseSxlLtsXKg6UGFRpT4CNcNVus3Z+ayYnWiT+CKRugFK6t94KVlITKk2mQ
+ Lg5YNCl2ouvRDdJKtz75GOnhDqMieBTnxqWl2yID7bPQqJ+t73Wx2/4jrrJ0uyfch6Dx
+ i0sq5QMSCDIveoU9keJBhDAZkr+5g7sF9LvDnqkXEj1doQXgAGgj/jAqFjBXyuFJtuqi
+ +SJtGOcg/1+0XDv6sQ6Io0Ilg179r/R8BRk2c2a6LqlEDaFZ5BvASrJDBdfbZ+LnB1gz
+ xmDJiyMrPtTjl9Hm5poXLEXM26/7uogctrjU2GyIePi3ncehAQC8t+q/H5MvoxL1Hq7Y
+ XYdA==
+X-Gm-Message-State: AOJu0YzhcGD74vs91KcPkwQj9iTco6xhYY42H4SMk9P3u94dJJfk8duw
+ 5sJYHORQXihXMgr1s+7vNEj0DcxBIUux
+X-Google-Smtp-Source: AGHT+IG6iQcAwaTouepFHWlLnh0MEXv1KnJaMCgVKI1/bdZaQZSdIHmhZsfcIlDpIDBu2o1+dgO05T8zYYDn
+X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
+ (user=moritzf job=sendgmr) by 2002:a25:e908:0:b0:dae:b98c:6ffa
+ with SMTP id
+ n8-20020a25e908000000b00daeb98c6ffamr98473ybd.8.1700697136093; Wed, 22 Nov
+ 2023 15:52:16 -0800 (PST)
+Date: Wed, 22 Nov 2023 23:52:00 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+Message-ID: <20231122235202.630114-1-moritzf@google.com>
+Subject: [PATCH 1/2] nvme: Fix error code and log to indicate busy
+From: Moritz Fischer <moritzf@google.com>
+To: bmeng.cn@gmail.com
+Cc: zhikang.zhang@nxp.com, wenbin.song@nxp.com, u-boot@lists.denx.de, 
+ patrick@blueri.se, Moritz Fischer <moritzf@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,67 +85,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace one type of terrible code formatting with a different
-type of terrible code formatting. No functional change.
+Return -EBUSY if controller is found busy rather than -ENOMEM
+and update the error message accordingly.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
+Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
+Signed-off-by: Moritz Fischer <moritzf@google.com>
 ---
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Hector Martin <marcan@marcan.st>
----
- drivers/usb/host/xhci-ring.c | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ drivers/nvme/nvme.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index dabe6cf86af..be3e35102d6 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -543,9 +543,8 @@ static void reset_ep(struct usb_device *udev, int ep_index)
- 	if (!event)
- 		return;
- 
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
--		event->event_cmd.status)) != COMP_SUCCESS);
-+	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
-+	       GET_COMP_CODE(le32_to_cpu(event->event_cmd.status)) != COMP_SUCCESS);
- 	xhci_acknowledge_event(ctrl);
- }
- 
-@@ -578,8 +577,7 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 		field = le32_to_cpu(event->trans_event.flags);
- 		BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
- 		BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
--		BUG_ON(GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len
--			!= COMP_STOP)));
-+		BUG_ON(GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len != COMP_STOP)));
- 		xhci_acknowledge_event(ctrl);
- 
- 		event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
-@@ -593,9 +591,8 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 
- 	comp = GET_COMP_CODE(le32_to_cpu(event->event_cmd.status));
- 	BUG_ON(type != TRB_COMPLETION ||
--		TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || (comp != COMP_SUCCESS && comp
--		!= COMP_CTX_STATE));
-+		TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
-+		(comp != COMP_SUCCESS && comp != COMP_CTX_STATE));
- 	xhci_acknowledge_event(ctrl);
- 
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg,
-@@ -605,9 +602,8 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 	if (!event)
- 		return;
- 
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
--		event->event_cmd.status)) != COMP_SUCCESS);
-+	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
-+	       GET_COMP_CODE(le32_to_cpu(event->event_cmd.status)) != COMP_SUCCESS);
- 	xhci_acknowledge_event(ctrl);
- }
+diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
+index c39cd41aa3..ec45f831a3 100644
+--- a/drivers/nvme/nvme.c
++++ b/drivers/nvme/nvme.c
+@@ -835,8 +835,8 @@ int nvme_init(struct udevice *udev)
+ 	ndev->udev = udev;
+ 	INIT_LIST_HEAD(&ndev->namespaces);
+ 	if (readl(&ndev->bar->csts) == -1) {
+-		ret = -ENODEV;
+-		printf("Error: %s: Out of memory!\n", udev->name);
++		ret = -EBUSY;
++		printf("Error: %s: Controller not ready!\n", udev->name);
+ 		goto free_nvme;
+ 	}
  
 -- 
-2.42.0
+2.43.0.rc1.413.gea7ed67945-goog
 
