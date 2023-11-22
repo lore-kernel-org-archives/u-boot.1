@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EE72C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 20:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33ABFC61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 20:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4155187660;
-	Wed, 22 Nov 2023 21:49:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A78198766E;
+	Wed, 22 Nov 2023 21:49:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oZpTJYvw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aB4fSlAF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA8F87655; Wed, 22 Nov 2023 21:49:35 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 0A5868765C; Wed, 22 Nov 2023 21:49:40 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 294938765C
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 21:49:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE7D687655
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 21:49:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5c85e8fdd2dso1771227b3.2
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 12:49:33 -0800 (PST)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-db3fd3e971cso212015276.3
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 12:49:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700686172; x=1701290972; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1700686176; x=1701290976; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+hnJXIaXLQwUeCpMWsbpQvoGyWJdYmwaP+buW/kPy5I=;
- b=oZpTJYvwmvrFXaiduxEqGW7Nhe1G0cexVDR9SVcQT8H/7aTL/EGHU8q7NxgL9JoZNU
- DSsKzXohry2SIhJ1s3/kDBSmxsaFRCwZYZndrRedQx4QF86KWVXCu7MUtdolN8+VZBv0
- vfkxM0XGxWsgSKzX3Sllb99NpKEp2Lb/CbxmY=
+ bh=osWKaUbRxnQzzjsWlI5wAzdBg2Zdht7RSfSLMC0qrpI=;
+ b=aB4fSlAF+4KfSH7+J5mVxQbzOrLDZduezKhIIZZChJvqFwBcCvLrHJBpVjDKf/oPGE
+ X1+SdBizYsxKEpmmBH+UDvXOGCCXV7UL9kO/yfMTycZ72CiwtfpWlxeoAFc1DLoj7NuF
+ SwUedr2bvRJYC2719SbOmzPwkyghwX0F6WCQg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700686172; x=1701290972;
+ d=1e100.net; s=20230601; t=1700686176; x=1701290976;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+hnJXIaXLQwUeCpMWsbpQvoGyWJdYmwaP+buW/kPy5I=;
- b=VezWtJ4ZVS/UIIO+luoNQoLmYMEVESh311VLhmJY4YCDZbgthQtTXCTBusIjtuOCVg
- Hz2wUiDIbdyNxuL6LSaGc1UFNoYixjv+REpaceHFY2WDqIsE3kEDrc5/Ny8GjNQpI8mU
- BAjalOGWMTpvioSkx/IhFySdqaODI0fyV+dXHlWAO2XWMAsw96MfH14uFNuY8NchmlP4
- Jd0NXCmXdYmaloBsHs8rmVH3QcKKTghlLUVTrOaQjTcBS9YjZgvGn7M0P3ULREGhA1op
- b6KNvD54AkD48qX/cF61lqZIvfB1H1IaoPPIEjXRwsis5yuNc7YwyRBMtppz15A/HG7x
- RGXg==
-X-Gm-Message-State: AOJu0Yy0so1R8oxwRUtIQ8TMiod/RZFKlsuUkJ3CBdyj4qHYOrJDTuzv
- DdmtzsuYUw82KwFAocEwYiUxsw==
-X-Google-Smtp-Source: AGHT+IHXkAAfGF0Afhru9gDaOD0C0nGIUqCUNURtKF7+/yU5i8yC9n1P0TStzQ85UNskfxoY4VigtA==
-X-Received: by 2002:a81:ae06:0:b0:5cc:770e:b9a5 with SMTP id
- m6-20020a81ae06000000b005cc770eb9a5mr2913978ywh.11.1700686171948; 
- Wed, 22 Nov 2023 12:49:31 -0800 (PST)
+ bh=osWKaUbRxnQzzjsWlI5wAzdBg2Zdht7RSfSLMC0qrpI=;
+ b=YjrUNLI9ne49MWqRNB3zPdaKWr6QaZ1DefHg/iM/Tf3BkVJ4zEMxT33Lq5eu7MXfrv
+ o5HjI/x0uDBydpTCEaoQHS5SH/aZtS095xCOzurEW25GJsgUSl7rurzXy5FjUfajVI4O
+ 5gY9M3G+FhXOlk21s4xD+TWg/7V+3FGyUS0nhNBlfzHRD74NbLi3O7bYQUSsn0u/JOxo
+ 1PPhkAs9S9jjep/peLZKoX4W7pJ9KLcMbp02N3iBJK12bDHdveRP3rIpPALjSCdVyew3
+ dZAqmAiyBGD+gFf0TK+qQjyLs1RAgSVOrdvdQXkUsZdt4APOmmAUITzRf+GkciIAuo23
+ 1G+g==
+X-Gm-Message-State: AOJu0YwEYHiecCm9DR37aVGWKYM9ZP/PAgILRft+dDs42/SXa2AHG9u4
+ KwDhKyvcYu4QvRBV1M1c3jHb4A==
+X-Google-Smtp-Source: AGHT+IH1SPMTwNSGs9ThAamXRNVJAA5TZcWoodu94jk0h1fzSQlrzuyUhdOwDEl/jDCR5K/QUWMIDQ==
+X-Received: by 2002:a25:820d:0:b0:d9a:e815:38f6 with SMTP id
+ q13-20020a25820d000000b00d9ae81538f6mr3438428ybk.15.1700686176439; 
+ Wed, 22 Nov 2023 12:49:36 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-999e-39fe-b112-e0fa.res6.spectrum.com.
  [2603:6081:7b00:6400:999e:39fe:b112:e0fa])
  by smtp.gmail.com with ESMTPSA id
- i186-20020a0dc6c3000000b005777a2c356asm89094ywd.65.2023.11.22.12.49.31
+ a82-20020a254d55000000b00da3b52e3cf5sm1571656ybb.10.2023.11.22.12.49.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Nov 2023 12:49:31 -0800 (PST)
-Date: Wed, 22 Nov 2023 15:49:29 -0500
+ Wed, 22 Nov 2023 12:49:36 -0800 (PST)
+Date: Wed, 22 Nov 2023 15:49:34 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Nishanth Menon <nm@ti.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Sinthu Raja <sinthu.raja@ti.com>,
  Manorit Chawdhry <m-chawdhry@ti.com>, Reid Tonking <reidt@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
  Simon Glass <sjg@chromium.org>, Robert Nelson <robertcnelson@gmail.com>,
- Jason Kridner <jkridner@beagleboard.org>, u-boot@lists.denx.de,
- bb@ti.com, praneeth@ti.com
-Subject: Re: [PATCH 1/5] arm: dts: k3-am625-beagleplay-u-boot/r5: Just depend
- on k3-binman.dtsi
-Message-ID: <20231122204929.GD2513409@bill-the-cat>
-References: <20231104080137.9628-1-nm@ti.com> <20231104080137.9628-2-nm@ti.com>
+ Jason Kridner <jkridner@beagleboard.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH V2 1/4] arm: dts: Add k3-j721e-beagleboneai64
+Message-ID: <20231122204934.GE2513409@bill-the-cat>
+References: <20231104081103.10607-1-nm@ti.com>
+ <20231104081103.10607-2-nm@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+Fv8CYd1DskWxQH3"
+ protocol="application/pgp-signature"; boundary="iOOAR2IGbng+dfc9"
 Content-Disposition: inline
-In-Reply-To: <20231104080137.9628-2-nm@ti.com>
+In-Reply-To: <20231104081103.10607-2-nm@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,41 +97,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---+Fv8CYd1DskWxQH3
+--iOOAR2IGbng+dfc9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 04, 2023 at 03:01:33AM -0500, Nishanth Menon wrote:
+On Sat, Nov 04, 2023 at 03:11:00AM -0500, Nishanth Menon wrote:
 
-> With the upcoming folder separation, there is no further need to depend
-> on am625-binman.dtsi. Duplicate the existing definitions to u-boot.dtsi
-> and r5.dts as appropriate.
+> From: Robert Nelson <robertcnelson@gmail.com>
 >=20
+> BeagleBoard.org BeagleBone AI-64 is an open source hardware single
+> board computer based on the Texas Instruments TDA4VM SoC featuring
+> dual-core 2.0GHz Arm Cortex-A72 processor, C7x+MMA and 2 C66x
+> floating-point VLIW DSPs, 3x dual ARM Cortex-R5 co-processors,
+> 2x 6-core Programmable Real-Time Unit and Industrial Communication
+> SubSystem, PowerVR Rogue 8XE GE8430 3D GPU. The board features 4GB
+> DDR4, USB3.0 Type-C, 2x USB SS Type-A, miniDisplayPort, 2x 4-lane
+> CSI, DSI, 16GB eMMC flash, 1G Ethernet, M.2 E-key for WiFi/BT, and
+> BeagleBone expansion headers.
+>=20
+> This board family can be indentified by the BBONEAI-64-B0 in the
+> at24 eeprom:
+>=20
+> [aa 55 33 ee 01 37 00 10  2e 00 42 42 4f 4e 45 41 |.U3..7....BBONEA|]
+> [49 2d 36 34 2d 42 30 2d  00 00 42 30 30 30 37 38 |I-64-B0-..B00078|]
+>=20
+> Baseline of the devicetree is from v6.6-rc1
+>=20
+> https://beagleboard.org/ai-64
+> https://git.beagleboard.org/beagleboard/beaglebone-ai-64
+>=20
+> Signed-off-by: Robert Nelson <robertcnelson@gmail.com>
 > Signed-off-by: Nishanth Menon <nm@ti.com>
-> Reviewed-by: Bryan Brattlof <bb@ti.com>
 
 For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---+Fv8CYd1DskWxQH3
+--iOOAR2IGbng+dfc9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVeaVkACgkQFHw5/5Y0
-tyxdswv9H4rFfPiDxfSU7FR7qagIJ1PmmB4klYos8sjFnzlnewPUmgF9Iqzi6/Ul
-KLhaFgmaW2lcCTXPaP71h4YI9OWT5k5DEuCtpiwdyqHavISNpALOO/fFElcgg8vT
-lFWYxA6aOyKbLws0y7F0w6j7+ZwTmCwHql/Dltezh7qtB4huO4RT4t/0PWYBNQI3
-lEN8qjVk3PEFaAYGCjLS1encDzs4kABNaDYiMUh+0je+QTtXS+Z7B221txl45Us8
-Fx5L+vVD9+rKOT8cQNtSOlzDHUTv47ACBG1pFdyq/Fz8TCa9xt4JKIjRb0rrcvRu
-EB/e5tUIzObGHIL838UgHYDRpODAgnJfnvKwFPeHe+ENXbyqER73zs6QtYJ3SBYQ
-KVIgCyykYQGXhzlM6E+IpMahf1xemwUH1oEIO1mntbLPckky5hIip8SZLPlb2/P9
-sKK4ivtDAINDMWgfkYFwhVJltk9masz1/pqBe88CNI/bVfnPCCM28yLB83ktlIRn
-phfzzre5
-=YA2h
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVeaV4ACgkQFHw5/5Y0
+tyzf7Av7B8vUa3YZkvMQq2aQOBOsJIAoFE+YaDxQukIk5T31rOSNefnPhw+J/UTS
+K7dJq47CjBp3vWvwHPz7EGmj1jY1sHm6Q/y4rhvgNcbiZ1infgzE73sWBrkIKCy0
+Jl94JDey8/WMzAJ6KqFGRpsL9qBHy/I5hb9OrjzmTKSs3FOoeE8tpTOz2ykW0vhQ
+DLF0mbQJsIcRf+Cu5j0VmZJVQacCC+M/rriNb2/7hCkyRCuKBL3jcZl0/DSALCrs
+ytqF8XSBTbX3az9DBj7nbaQGI+JQmFUszLRnVscbwXQNf4kHSo1gxJEorX/kPT4o
+fgFsDuQlqv9IZj4VQySl7R+rX2dPxS5+Wyu560OxR0CK/zf1NJxpvEN5jcVmrJWd
+jeZHnsYGpKyLVyR7Lh8QkMAylmjjKGIVgp6oD+BV57des6iLKBufzZSgu74hmlvV
+StkCg4OmVbBgHYnUnnjkaCFeKLyZRtFBZ0JLuR+/kKncgdmjwS3qrH5jXSZvUnDy
+GqIo2BwB
+=g3ga
 -----END PGP SIGNATURE-----
 
---+Fv8CYd1DskWxQH3--
+--iOOAR2IGbng+dfc9--
