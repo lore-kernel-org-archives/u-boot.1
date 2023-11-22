@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98214C61D99
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 16:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E16BC61D9B
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 18:54:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E464887603;
-	Wed, 22 Nov 2023 17:21:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D4CB86FA7;
+	Wed, 22 Nov 2023 19:54:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="aNrLKAVr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e/d2Wi1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F2E5868AE; Wed, 22 Nov 2023 17:21:51 +0100 (CET)
-Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
- [IPv6:2607:f8b0:4864:20::b49])
+ id D071586FB2; Wed, 22 Nov 2023 19:54:26 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24462875F7
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 17:21:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FCCF86DD1
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 19:54:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3mypeZQcKBpoGILCNT9AIIAF8.6IGO-5IINFCMNM.78HR.78@flex--moritzf.bounces.google.com
-Received: by mail-yb1-xb49.google.com with SMTP id
- 3f1490d57ef6-daa2684f67eso884433276.0
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 08:21:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5431614d90eso149013a12.1
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 10:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1700670108; x=1701274908; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=sCQFVqoOYe0pnYi6rzRGC+yHUcbkkOhNiLSji6nTp7Y=;
- b=aNrLKAVrxO/6cHlva6YLihf+vQZPKRz8NJXmdMDQq6F+mtGGkcAJ1WhoAYe68DLTaS
- CneIvXcS9NAhMIQV/YUuPBGyOjgW0ckQPMPBId1tw0+gPr5RbJu7Roz8HasMOmvI8PJ6
- C6fEQJ+ovsSqvIBKC7I/jlvWmMQGP7esIq0u2wo9OAguenLtea+pKnpQEorM4Ec1KpRs
- iGP6mYIEnms1L6YV2nSL6J4fhtlOV/3qzA951XugXporx15pUiilfWPTCchmvLtAubXC
- GWl2xUiEx98m1Ljh8xVRr2z7Xp5BqSd3kxsI+i8GuL+9T9Tnn/Y61qhO5XKLFJs1wq0B
- HrIg==
+ d=gmail.com; s=20230601; t=1700679263; x=1701284063; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=l+m1i8S+I3uwYUji1999YGKC7+eMRXd5iYgvfUz0alo=;
+ b=e/d2Wi1z/X3ZRsy9MiaGQq/Ein8HLwGVjVbyFMRqcO2kTtrmRnplfzoYe381woMgCz
+ TQ9G71bz625qjG9CAitF4+Op5h7W2M6mO0ksz/Km2m/oz1PemnGA3EC4FMMgfBKW2qkM
+ 2AYoHawSrYlGJ7AfWas4182uGxzL/bgMS4bdGTqn4nh8CVLvXIkt3uvTf82ION04Z7mj
+ DzQjDMh1GcjanYzjSFVKQyoDLy/QNZQZx2MxB/Cx7lbKP/7Yttc3n8TkswnG9bfixq5e
+ aj62BIOulvjwfMOmpyStm77xhpePvj+nlJWPBa65kphz3ZhEzqmj/lT4vPlnLEDj4MPk
+ YHmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700670108; x=1701274908;
- h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sCQFVqoOYe0pnYi6rzRGC+yHUcbkkOhNiLSji6nTp7Y=;
- b=YrSObCd0/CIsITsTcpBnw+NUH5SXaq9WVuM0hnxE2V6jnt4yHMZys50Gl2dJNTtGfk
- MQb7PGfenWe6Eg1HO3rxAkXH15or6Jzk9RuP7tB3rcZi/QktDHyJXzdI3rPbhKi1SHZa
- OHccAYeoRbWk7endaNcyxwIJ62mCws71WBJCvntLIKE+F7Ns0q7ayHoJAJFAbZaV3HTV
- YGomsSo9432Nr+8sw4Rh80d34RO58qyNqMM5xcbnaaRR2IJHz44jpfVgONhjY+0HvS+E
- c/i4F34K+R/iAAggvT0cFOvQgvqPRpMDJKE8zz+1zB2TNpLAYRtL/SNtCkQCkqfFDshG
- UZNg==
-X-Gm-Message-State: AOJu0YwE+HHquRcXMGYjhW3fY8lJrUdzI9w9Fq5LsvF9IgF0I0wMsVzX
- i7KJNcZkCeIjs7dFKxVXTvHf+2Gq3gCPi70ZffOmG7//rWZPHshx8QT6BsRrsL0FyQc/mtELeJm
- FHv87kTkQm0mScZ9/7JgJfnFtX0aniDAcfWWBImAildp+RNu5tqBvT2NdXEpQEw==
-X-Google-Smtp-Source: AGHT+IEAP45Ax8N+4wfK4vTgNCPRi39euUP2BhkVhFsMshGMrgbFQFNhGKH5OxDmDRAjqLiWvQBR5Bgnn7tN
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a25:8a11:0:b0:daf:3e84:d016
- with SMTP id
- g17-20020a258a11000000b00daf3e84d016mr101805ybl.2.1700670107823; Wed, 22 Nov
- 2023 08:21:47 -0800 (PST)
-Date: Wed, 22 Nov 2023 16:21:14 +0000
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
-Message-ID: <20231122162115.508690-1-moritzf@google.com>
-Subject: [PATCH] MAINTAINERS: Fix ARCH_APPLE file paths
-From: Moritz Fischer <moritzf@google.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, kettenis@openbsd.org, 
- Moritz Fischer <moritzf@google.com>
+ d=1e100.net; s=20230601; t=1700679263; x=1701284063;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=l+m1i8S+I3uwYUji1999YGKC7+eMRXd5iYgvfUz0alo=;
+ b=Ats8VcjSnvYez68NSwsxPtAccn0BtGtaReIvirY03z1qQnJ4SSsBHdzqkFIX1tQFaD
+ fUJn4ZNmbF0NdNT58vZne3gFYBI60t8hWz/0DIt780Zr/RyZVwUGQdZjBsONla/pH8K9
+ ItVhcahEfNp7+3oR3wAGFQcukr0889NDgI8TM2NETFcVC8jds9HBfOPT62297kji+dhQ
+ h2J774/bFUeCaZIw9A2Hvvb3h8h/iQIf0vEEHW5CIOF14qwqLNkXSXd7qbmhibGBDZyU
+ j83rrv5+1jxg0vfl96/kVbwLTDCq6xEJh25DGHg+3nJ4xt1NvI5Z3ydT0Au0fWhiU3wW
+ WMSQ==
+X-Gm-Message-State: AOJu0YyDNO87OiyJCibg7ao5tfEAqu4G6mEI+XKLcMZvmkIlGMI+jYJD
+ YolFlQteB4UgIxtoxT7xAfnelHKMLG2JCteY14o=
+X-Google-Smtp-Source: AGHT+IE/gjOs2oQVfNjBZMxV4ZFeiA4iAGjttpoYPDiWNNtmgSolnbSTw+kjqon+DEtXszNuyR67JfMmStnSMczyrQM=
+X-Received: by 2002:aa7:cd74:0:b0:543:5f7a:9e27 with SMTP id
+ ca20-20020aa7cd74000000b005435f7a9e27mr2508713edb.12.1700679262921; Wed, 22
+ Nov 2023 10:54:22 -0800 (PST)
+MIME-Version: 1.0
+References: <CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com>
+ <20231122135209.GR2513409@bill-the-cat>
+In-Reply-To: <20231122135209.GR2513409@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 22 Nov 2023 18:54:11 +0000
+Message-ID: <CALeDE9NoDskjivzwWcHV10g5-bVP-5MkY7Vcp8PrXUoQ1oj_-g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] rpi5: initial support
+To: Tom Rini <trini@konsulko.com>
+Cc: Dmitry Malkin <dmitry@bedrocksystems.com>, u-boot@lists.denx.de,
+ mbrugger@suse.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,28 +86,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fixes a filepath in MAINTAINERS file that wasn't updated when
-renaming the files to match the new SoC name.
+> > These patches bring initial boot support for RPI5. Without it the
+> > latest master fails with the message:
+> > > DRAM:  mbox: Timeout waiting for response
+> > > bcm2835: Could not query ARM memory size
+> >
+> > With those patches and rpi_arm64_defconfig (with disabled
+> > CONFIG_VIDEO_BCM2835) I'm able to get a working u-boot prompt (over
+> > serial). FDT comes from firmware (EEPROM).
+> >
+> > > U-Boot 2024.01-rc3-00003
+> > >
+> > > DRAM:  1016 MiB (effective 8 GiB)
+> > > mbox: Header response code invalid
+> > > bcm2835: Could not query board revision
+> > > FDT model : Raspberry Pi 5 Model B Rev 1.0
+> > > Core:  14 devices, 7 uclasses, devicetree: board
+> > > MMC:
+> > > Loading Environment from FAT... ** Bad device specification mmc 0 **
+> > > In:    serial,usbkbd
+> > > Out:   serial,vidconsole
+> > > Err:   serial,vidconsole
+> > > Net:   No ethernet found.
+> > > starting USB...
+> > > No working controllers found
+> > > Hit any key to stop autoboot:  0
+> > > No working controllers found
+> > > No ethernet found.
+> > > No ethernet found.
+> > > U-Boot>
+> >
+> > These patches are based on v2024.01-rc3 and tested with RPI5 8GB.
+> >
+> > Known issues:
+> > * CONFIG_VIDEO_BCM2835 doesn't work.
+> > * MBOX get board revision (0x10002) doesn't work (the response status
+> > is 0x8000_0001). Looks like a number of tags doesn't work anymore
+> > (board/serial/MAC) but could be fetched from FW FDT.
+>
+> Nice. I think it's the MMC controller that we should be able to support
+> with just a little more work as it's shared with rockchip, and we just
+> need to match the compatible, and mirror whatever tweak is also in the
+> rpi kernel tree for it.
 
-Fixes: a4bd5e4120d6 ('arm: apple: Change SoC name from "m1" into "apple"')
-Signed-off-by: Moritz Fischer <moritzf@google.com>
----
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Is it? According to the RPi DT the sdio1 interface is used to drive
+the mSD card (it's SD Express capable which I think is essentially
+PCIe/NVME) which has a "brcm,bcm2712-sdhci" compatible [2] which is
+added to the sdhci-brcmstb.c driver[3]. We do have a driver for this
+but it's not the rockchip driver, I think you may be confused with the
+sdhci interface in the RP1 chip which is a designware sdhci IP called
+dwcmshc [4].
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7c1cb2dc4d..833f7beb9a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -117,7 +117,7 @@ F:	drivers/mmc/snps_dw_mmc.c
- APPLE M1 SOC SUPPORT
- M:	Mark Kettenis <kettenis@openbsd.org>
- S:	Maintained
--F:	arch/arm/include/asm/arch-m1/
-+F:	arch/arm/include/asm/arch-apple/
- F:	arch/arm/mach-apple/
- F:	configs/apple_m1_defconfig
- F:	drivers/iommu/apple_dart.c
--- 
-2.43.0.rc1.413.gea7ed67945-goog
+For the brcmstb sdhci driver we currently have I suspect it'll need at
+least a few patches to get the basics working, in the short term I'm
+not sure we need the extra bits to drive the SD Express side of things
+as I'm sure it can fall back to old modes, looking at the patch it
+maybe just enough to add the compatible for what we need, that's what
+I was going to start with as it looks like it's similar to other IP
+[5].
 
+Peter
+
+[1] https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/bcm2712-rpi-5-b.dts#L354
+[2] https://github.com/raspberrypi/linux/blob/rpi-6.1.y/arch/arm/boot/dts/bcm2712.dtsi#L1164
+[3] https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841fdf4d4d7e9
+[4] https://github.com/raspberrypi/linux/commit/80dd8795ca631ac692fd3079487aea6d934a829c
+[5] https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841fdf4d4d7e9#diff-8c952b8cbbb6b3d89e1a401d558b4bd0ecbdf1679cbc5004a31039bc5235c020R172
