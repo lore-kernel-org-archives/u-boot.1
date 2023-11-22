@@ -4,64 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306E5C27C40
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 21:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48273C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 21:22:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A4EB87620;
-	Wed, 22 Nov 2023 22:12:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 515D086501;
+	Wed, 22 Nov 2023 22:22:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="F4ko1vBv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T3WFjJqx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4352587620; Wed, 22 Nov 2023 22:12:26 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BFADC874BF; Wed, 22 Nov 2023 20:43:33 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD1387590
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 22:12:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC515869F7
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 20:43:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AMLCK4e054518;
- Wed, 22 Nov 2023 15:12:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700687540;
- bh=P9+1mD+xo0Fn9foScEQDBsDdCz4Yo2jLQDAS/FSvR4E=;
- h=From:To:CC:Subject:Date;
- b=F4ko1vBv+PE+Q4YOxmTxyzj7AcGbNMmuC0xlTv4RrSHP7HzTVA+Qeh6jpQf3pXHPl
- xBLVqtpcCBOKGbqCSlmRODsBpT3t91TyAGOzlw21RDaxt6VwNXT5ZSZxQLBFZrMtEd
- gOCUqmLwuOyDI5HvQE1Oa/gMlAf8s/scPmwZ5Aj0=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AMLCKih083076
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Nov 2023 15:12:20 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 22
- Nov 2023 15:12:20 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 22 Nov 2023 15:12:20 -0600
-Received: from lelv0327.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AMLCJXX117169; 
- Wed, 22 Nov 2023 15:12:20 -0600
-From: Andrew Davis <afd@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Nishanth Menon <nm@ti.com>
-CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
-Subject: [PATCH v2] arm: mach-k3: Let the compiler size the mem_map lists
-Date: Wed, 22 Nov 2023 15:12:18 -0600
-Message-ID: <20231122211218.607757-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stephen.graf@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-28014fed9efso182192a91.0
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 11:43:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1700682210; x=1701287010; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ihJ+rN/d6goyihJIaTxH+JGovLkjB48ooO09IS9XXY0=;
+ b=T3WFjJqxwxI5J8jjCt7tRMUXc5x9EodTjbmiiIuqZvnmyDuMQCf8luQvTHbwZxJZsF
+ mTRnlQq0CdtQ3NKEY0LL2NkRQc6JaZEZ/ktFE0dzlr3D9vfhK2P563pNxb6LwHFvU0e2
+ 8eZu7N+s5JyO98Dw+/5WRfKp9q8cgMDynfKfhUzs2Wqil9nqWwjQax1Db0W0ila1skMU
+ HcdJ2ug2gpqPCV22dHhurXz24e16x5hVnOGY9MFI8zW595enVMFYJijYC6EQFOFqWMCH
+ P1sHOM72WUr8Gwb/wgFnlwAUZCY5vYGht1urI2IBuji30mNo/90x3U+4o8qSlrv2/KhB
+ j53w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700682210; x=1701287010;
+ h=content-transfer-encoding:subject:from:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=ihJ+rN/d6goyihJIaTxH+JGovLkjB48ooO09IS9XXY0=;
+ b=H8rV/cWDuqFBJojuwLGG1IWnJXlsgNEEm8b/oK0rF8s3DWQMoVG2xvDcwrn16TLHc4
+ 3Gb0ym8GKFFZURzism4zeIRNu7xwCqGIq++KJZI7uHHzVervbaLYeLLzL3BOCq0WZnqj
+ qDuQSQ95WL12kgZwvHaGnc4scIODTTnbfawr2uCXr1qDPBhAWaMJ3GaL5vxCi8e+1QHR
+ NU80cH7eWzRDi1uTQQ9/GA1vCDjsUEoMrb9xxC3xNOtCvDC53W2HaqK2Iedrq6yIUBN9
+ C0DZ22gLOKTYe/MOstWl+fsTY7OZawT8Tce6VoGYLSPadzSSuti8nebCWE400FMbd+oB
+ a0Cw==
+X-Gm-Message-State: AOJu0YyCo13QjlXZD6zPTbb6KhjW8ypvglhniZZatqY3yxClybe5u8PH
+ C1kVnVlUC0S2bLC7GqSpCdQJ8+0GC4M=
+X-Google-Smtp-Source: AGHT+IEaBai7APoN23TPTHxB5tjKJRuo7pw5tWP/yy4fe6AAeq5fIw8oI9nUgn2NOgCvWHfJvYyTkw==
+X-Received: by 2002:a17:90b:1d92:b0:280:48d4:1eb3 with SMTP id
+ pf18-20020a17090b1d9200b0028048d41eb3mr3694350pjb.8.1700682209998; 
+ Wed, 22 Nov 2023 11:43:29 -0800 (PST)
+Received: from [192.168.1.3] (d23-16-72-139.bchsia.telus.net. [23.16.72.139])
+ by smtp.gmail.com with ESMTPSA id
+ j9-20020a17090276c900b001c5f7e06256sm50021plt.152.2023.11.22.11.43.29
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Nov 2023 11:43:29 -0800 (PST)
+Message-ID: <535b9d87-242f-402f-9d8e-febdf1fc0709@gmail.com>
+Date: Wed, 22 Nov 2023 11:43:29 -0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-CA
+To: u-boot@lists.denx.de
+From: Stephen Graf <stephen.graf@gmail.com>
+Subject: add orangepi zero3 to u-boot
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 22 Nov 2023 22:22:42 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,100 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-NR_MMU_REGIONS is a copy/paste from another platform that extends
-this list later. We do not do that, so let the list be the size
-of the initializer list.
+I have been able to build a working (tested on my orangepi zero3 1G) 
+u-boot for the orangepi zero3 with the following defconfig. Would it be 
+possible to add this config to the working boards.  I would test it 
+again with an official build. The dtb/dts is in linux 6.6 and in u-boot.
 
-Signed-off-by: Andrew Davis <afd@ti.com>
----
+The H618 processor is software compatible with the H616 and the zero3 
+board is very similar to the zero2 with the exception of DDR3 replaced 
+with LPDDR4 and the Realtek phy with Motorcomm.
 
-Changes for v2:
- - Made same change for plats now in -next
-
- arch/arm/mach-k3/arm64-mmu.c | 35 ++++++-----------------------------
- 1 file changed, 6 insertions(+), 29 deletions(-)
-
-diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
-index e8db5332ae0..d872ed714c4 100644
---- a/arch/arm/mach-k3/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64-mmu.c
-@@ -13,11 +13,7 @@
- #include <asm/armv8/mmu.h>
- 
- #ifdef CONFIG_SOC_K3_AM654
--/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
--
--/* ToDo: Add 64bit IO */
--struct mm_region am654_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region am654_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -68,10 +64,7 @@ struct mm_region *mem_map = am654_mem_map;
- #ifdef CONFIG_SOC_K3_J721E
- 
- #ifdef CONFIG_SOC_K3_J721E_J7200
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
--
--/* ToDo: Add 64bit IO */
--struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region j7200_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -119,12 +112,7 @@ struct mm_region j7200_mem_map[NR_MMU_REGIONS] = {
- struct mm_region *mem_map = j7200_mem_map;
- 
- #else /* CONFIG_SOC_K3_J721E_J7200 */
--
--/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 6)
--
--/* ToDo: Add 64bit IO */
--struct mm_region j721e_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region j721e_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -181,10 +169,7 @@ struct mm_region *mem_map = j721e_mem_map;
- #endif /* CONFIG_SOC_K3_J721E */
- 
- #ifdef CONFIG_SOC_K3_J721S2
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 3)
--
--/* ToDo: Add 64bit IO */
--struct mm_region j721s2_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region j721s2_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -223,11 +208,7 @@ struct mm_region *mem_map = j721s2_mem_map;
- 
- #if defined(CONFIG_SOC_K3_AM625) || defined(CONFIG_SOC_K3_AM62A7)
- 
--/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 4)
--
--/* ToDo: Add 64bit IO */
--struct mm_region am62_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region am62_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -272,11 +253,7 @@ struct mm_region *mem_map = am62_mem_map;
- 
- #ifdef CONFIG_SOC_K3_AM642
- 
--/* NR_DRAM_BANKS + 32bit IO + 64bit IO + terminator */
--#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 4)
--
--/* ToDo: Add 64bit IO */
--struct mm_region am64_mem_map[NR_MMU_REGIONS] = {
-+struct mm_region am64_mem_map[] = {
- 	{
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
--- 
-2.39.2
+CONFIG_ARM=y
+CONFIG_ARCH_SUNXI=y
+CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-orangepi-zero3"
+CONFIG_SPL=y
+CONFIG_DRAM_SUN50I_H616_DX_ODT=0x07070707
+CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
+CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
+CONFIG_DRAM_SUN50I_H616_ODT_EN=0xaaaaeeee
+CONFIG_DRAM_SUN50I_H616_TPR0=0x0
+CONFIG_DRAM_SUN50I_H616_TPR6=0x44000000
+CONFIG_DRAM_SUN50I_H616_TPR10=0x402f0663
+CONFIG_DRAM_SUN50I_H616_TPR11=0x24242323
+CONFIG_DRAM_SUN50I_H616_TPR12=0x0e0e0e0e
+CONFIG_MACH_SUN50I_H616=y
+CONFIG_SUNXI_DRAM_H616_LPDDR4=y
+CONFIG_DRAM_CLK=792
+CONFIG_R_I2C_ENABLE=y
+CONFIG_SPL_SPI_SUNXI=y
+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+CONFIG_SPL_I2C=y
+CONFIG_SPL_SYS_I2C_LEGACY=y
+CONFIG_SYS_I2C_MVTWSI=y
+CONFIG_SYS_I2C_SLAVE=0x7f
+CONFIG_SYS_I2C_SPEED=400000
+CONFIG_SPI_FLASH_MACRONIX=y
+CONFIG_PHY_MOTORCOMM=y
+CONFIG_SUN8I_EMAC=y
+CONFIG_SPI=y
+CONFIG_USB_EHCI_HCD=y
+CONFIG_USB_OHCI_HCD=y
+CONFIG_USB_MUSB_GADGET=y
+CONFIG_AXP313_POWER=y
+CONFIG_AXP_DCDC3_VOLT=1100
+CONFIG_CMD_BOOTZ=y
 
