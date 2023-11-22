@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369CEC61D99
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 16:15:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98214C61D99
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 16:21:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27BD687606;
-	Wed, 22 Nov 2023 17:15:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id E464887603;
+	Wed, 22 Nov 2023 17:21:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ovn2bzHV";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="IL6TLZia";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="aNrLKAVr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76D89863FD; Wed, 22 Nov 2023 17:15:54 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2F2E5868AE; Wed, 22 Nov 2023 17:21:51 +0100 (CET)
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
+ [IPv6:2607:f8b0:4864:20::b49])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92C3286F28
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 17:15:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24462875F7
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 17:21:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Sb5vX1g6fz9spZ;
- Wed, 22 Nov 2023 17:15:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700669752;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BmnGnEUcFmglUvMRr6HND4w4G74XXGGU6bDFfAn4oVI=;
- b=Ovn2bzHV7ShzBRpTHZNrI+Ds7tcOj9djY4T7zbzjjvZNPI3BZkotHSGHOclNfnxfG84A99
- SvtOaQpgwF++9FTbgGscp9xlJBV7z11wLsYb3SXNONeK9CZvRppr+act38ASRVhmg90COU
- 1K+QK+4gwQUcWCPniLcQO5TiY235UQ6lids93Ut1VZOzoOostnOeWlGLGC0+zeUhErU69E
- NzcFWDNcdSP/OZRfeHJhhz79w77iSCSXJtn64lpGRPBBHMuxJblf4OlBsbbZ/S9u2ba9JY
- 0TrhIPaPqJ1zceOfHhSnN/Mh0XHrbUdq5c/N10peAscgF6HE3zU6+QgiPX2WlQ==
-Message-ID: <88445be5-4d52-4995-91c2-e666fae47cb0@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1700669750;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=BmnGnEUcFmglUvMRr6HND4w4G74XXGGU6bDFfAn4oVI=;
- b=IL6TLZia8hwJ6V/iQ0XTwpOwtIsU2aeqXtC+0UVUTr/wi6O+oquxeMpcG+5SuP5XxgIM0p
- EnMxYewiWvy1KOpNLEnG1zDiHEnpwwuGJcwkg72VoxpWeso1yFk0+h+/rNCKGdAw0WAZG0
- Ia118qOZ1DLbgVJH0R0FaJeJY9dMcfd19U/TP4OBN8xGBNBpcBvM2gt0Fiz0TM6Httywob
- LeVbfSXsBg5eh/0JY4xbx6Cwne1bPRMfpuHF1euP/ZnANn1LQ3j7a/7JXjsFtmMClIthHN
- YIyWA60uhGHSgCDKOIX5YijVzq3qwL1ZNwScIwQY8XNwD98eSsJ7iyrs2odreQ==
-Date: Wed, 22 Nov 2023 17:15:48 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH 07/11] rmobile: Add <mach/rmobile.h> to cpu_info-rzg2l.c
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-References: <20231122131154.2444690-1-trini@konsulko.com>
- <20231122131154.2444690-7-trini@konsulko.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231122131154.2444690-7-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: afq7t7c5wf67epxjmrogcuojx8fb1och
-X-MBO-RS-ID: a6329ba6b0abaa08831
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3mypeZQcKBpoGILCNT9AIIAF8.6IGO-5IINFCMNM.78HR.78@flex--moritzf.bounces.google.com
+Received: by mail-yb1-xb49.google.com with SMTP id
+ 3f1490d57ef6-daa2684f67eso884433276.0
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 08:21:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1700670108; x=1701274908; darn=lists.denx.de;
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=sCQFVqoOYe0pnYi6rzRGC+yHUcbkkOhNiLSji6nTp7Y=;
+ b=aNrLKAVrxO/6cHlva6YLihf+vQZPKRz8NJXmdMDQq6F+mtGGkcAJ1WhoAYe68DLTaS
+ CneIvXcS9NAhMIQV/YUuPBGyOjgW0ckQPMPBId1tw0+gPr5RbJu7Roz8HasMOmvI8PJ6
+ C6fEQJ+ovsSqvIBKC7I/jlvWmMQGP7esIq0u2wo9OAguenLtea+pKnpQEorM4Ec1KpRs
+ iGP6mYIEnms1L6YV2nSL6J4fhtlOV/3qzA951XugXporx15pUiilfWPTCchmvLtAubXC
+ GWl2xUiEx98m1Ljh8xVRr2z7Xp5BqSd3kxsI+i8GuL+9T9Tnn/Y61qhO5XKLFJs1wq0B
+ HrIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700670108; x=1701274908;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=sCQFVqoOYe0pnYi6rzRGC+yHUcbkkOhNiLSji6nTp7Y=;
+ b=YrSObCd0/CIsITsTcpBnw+NUH5SXaq9WVuM0hnxE2V6jnt4yHMZys50Gl2dJNTtGfk
+ MQb7PGfenWe6Eg1HO3rxAkXH15or6Jzk9RuP7tB3rcZi/QktDHyJXzdI3rPbhKi1SHZa
+ OHccAYeoRbWk7endaNcyxwIJ62mCws71WBJCvntLIKE+F7Ns0q7ayHoJAJFAbZaV3HTV
+ YGomsSo9432Nr+8sw4Rh80d34RO58qyNqMM5xcbnaaRR2IJHz44jpfVgONhjY+0HvS+E
+ c/i4F34K+R/iAAggvT0cFOvQgvqPRpMDJKE8zz+1zB2TNpLAYRtL/SNtCkQCkqfFDshG
+ UZNg==
+X-Gm-Message-State: AOJu0YwE+HHquRcXMGYjhW3fY8lJrUdzI9w9Fq5LsvF9IgF0I0wMsVzX
+ i7KJNcZkCeIjs7dFKxVXTvHf+2Gq3gCPi70ZffOmG7//rWZPHshx8QT6BsRrsL0FyQc/mtELeJm
+ FHv87kTkQm0mScZ9/7JgJfnFtX0aniDAcfWWBImAildp+RNu5tqBvT2NdXEpQEw==
+X-Google-Smtp-Source: AGHT+IEAP45Ax8N+4wfK4vTgNCPRi39euUP2BhkVhFsMshGMrgbFQFNhGKH5OxDmDRAjqLiWvQBR5Bgnn7tN
+X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
+ (user=moritzf job=sendgmr) by 2002:a25:8a11:0:b0:daf:3e84:d016
+ with SMTP id
+ g17-20020a258a11000000b00daf3e84d016mr101805ybl.2.1700670107823; Wed, 22 Nov
+ 2023 08:21:47 -0800 (PST)
+Date: Wed, 22 Nov 2023 16:21:14 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+Message-ID: <20231122162115.508690-1-moritzf@google.com>
+Subject: [PATCH] MAINTAINERS: Fix ARCH_APPLE file paths
+From: Moritz Fischer <moritzf@google.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, kettenis@openbsd.org, 
+ Moritz Fischer <moritzf@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,14 +86,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/22/23 14:11, Tom Rini wrote:
-> In order for RMOBILE_CPU_TYPE_R9A07G044L to be defined we need to
-> include <mach/rmobile.h> here.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Fixes a filepath in MAINTAINERS file that wasn't updated when
+renaming the files to match the new SoC name.
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Fixes: a4bd5e4120d6 ('arm: apple: Change SoC name from "m1" into "apple"')
+Signed-off-by: Moritz Fischer <moritzf@google.com>
+---
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7c1cb2dc4d..833f7beb9a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -117,7 +117,7 @@ F:	drivers/mmc/snps_dw_mmc.c
+ APPLE M1 SOC SUPPORT
+ M:	Mark Kettenis <kettenis@openbsd.org>
+ S:	Maintained
+-F:	arch/arm/include/asm/arch-m1/
++F:	arch/arm/include/asm/arch-apple/
+ F:	arch/arm/mach-apple/
+ F:	configs/apple_m1_defconfig
+ F:	drivers/iommu/apple_dart.c
+-- 
+2.43.0.rc1.413.gea7ed67945-goog
+
