@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D63DAC61D92
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 07:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929FFC072A2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 07:40:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9BC0875C0;
-	Wed, 22 Nov 2023 08:39:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D395E875A1;
+	Wed, 22 Nov 2023 08:40:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SD46Cj2r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TKYfTlHK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B994B875C3; Wed, 22 Nov 2023 08:39:21 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 22CE3875C0; Wed, 22 Nov 2023 08:40:50 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4451875A1
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 08:39:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 491888718E
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 08:40:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50aa8c0af41so582624e87.1
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:39:19 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-548ce28fd23so3792887a12.3
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 23:40:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1700638759; x=1701243559; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1700638847; x=1701243647; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Xa7iJA27o273ic0lAwlSHjUHnuCESXpDkuG7OelPnvg=;
- b=SD46Cj2rc2o0F3Yavf07zTAsS3K21/qiz/hGBID1DDwvn5ZnQWb4+u2sLhVAuKj25s
- xDiPxiHMvAcHwSFQFdynRMupZnvlQwcas9E3FMts17H2r5tAAYBHGQhHnS5M/P6HtnOX
- XiSPmr4/nhWdNEQzTK79Igf3CpJcRZ3EU0ez5QY4KqSVWj2+7y9LMtjgodLUnRIpub+q
- AhAaGRt0qNp3JSfVLK2Q+NcZTCORRIGJGNAhIuqJc7+Tnfo6YwGrdII80VEAtqHQx+ve
- RQZnyni2JRjYZd4epH2MjFpa708g4SW/O207d9CdqpdrlypfObmScaUhTJL9BhjmkuK7
- hEOA==
+ bh=v8Vb2voMHEJJA7glSIAV2dkvgEZ9ltrmdgPjbwshBbw=;
+ b=TKYfTlHKdLtWNS20dPZo+UjSi1jKxd1CbpmO7CBoCbs2NDyS2+suSdGEgy7FeCQNo9
+ fZeyxRFUQyI6SMfPr9gYfKWifvYgguRH67kTFPUcTj/lOOl1zthkSPlggO2/yC7Apb1o
+ uvHHkwZiHGmzzjhgNUgq9ytsLfQ72sqypSnU5OCxFtCqR68H+U6zg97z5ZrUq1KVn9On
+ nHZRkH7k4kQIw6oysd+m3p2azu3ERAXwZlz++XSKtOQpYbEhy9meNltocmcXKCJMUGsz
+ HqtIgjFNlYA0heZjLuWRLGmW7WLRhTRjX7CR6hLVqcWYVBClefNpC5bQO9sK7fxr2/sV
+ 83zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700638759; x=1701243559;
+ d=1e100.net; s=20230601; t=1700638847; x=1701243647;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Xa7iJA27o273ic0lAwlSHjUHnuCESXpDkuG7OelPnvg=;
- b=ogcmTyqP8QUJVHyw2qOamrR6VG3OnEXA+W9s06Ge6jieVFqK6dbZCxzEEXFslKn2Tc
- 7Wnh+dVDNMFp3fw97LTjZZLPgkdMZvilomgzFuHMDvP+apVkO0D7KrPtqsxLmw+Mdx1x
- qlCw9bVm5jUGKzjAagrcPzjDtKT6S3/ow4YoaF/5f5b5wpg5B6FQt63RvS3SYL8sisO8
- 5d7eVG8MPdX31vXJlVK2wy0lAWfoPoabHkRVgHMrNqm7+yOp8/ZR2ZbXdstI5qMazhxH
- +LVhT37pdzEUbBC4DORWu2JNRPHHIHQLPoNzcRuuptmAPqmN4Wie5GPVB28v3kbJjWiE
- HQvw==
-X-Gm-Message-State: AOJu0YxkjaqNLHQbUA/NMNIhUNJlX4sh7Z6zaLnd1sL1Z9fbX2N/AiIx
- ktXorRZD/WQeZRiKbS4fjdpAJn34kxTRiIlrWW/rZg==
-X-Google-Smtp-Source: AGHT+IEfZT38gJZgwHMBMzHr+g4dCASXaht/9u/bucxQB8NfL0JvIlrf8WqAxxWckbf9dcKz80V+iTzqzWAZx/vKw9Q=
-X-Received: by 2002:a05:6512:3987:b0:50a:a3a7:488b with SMTP id
- j7-20020a056512398700b0050aa3a7488bmr1911732lfu.18.1700638758867; Tue, 21 Nov
- 2023 23:39:18 -0800 (PST)
+ bh=v8Vb2voMHEJJA7glSIAV2dkvgEZ9ltrmdgPjbwshBbw=;
+ b=oSG4KnvVMTdJMjrUVAQFPIjx76wk6+CMS+bdw2Bf9PEiYtt0NusjyqtlOPALIia7Yo
+ 6j66ge3N4VR+C69C8W/Zs/zrTuC+LPv2MLV6as9DEcz51qre+5WKyvHRc51fvWIsylh2
+ 06SSKuAOm/L/Xm8m2t4s8Pt2KOoGcxmbPGCHQQuZPHpsH0oeXoG+4aNALGUMlhM/v4Rd
+ 6p8QT3FL69tGFmb+d1WKq8z/1GAnhTGJ9k9kK8xU0c+bhnGUqGyeMudeTEM4/8hb0sLT
+ fSwuFzJMK0A2xoRpswYWAWTBRWPIx8jZDdis8C+49AWFY/jl4GxvO26Wj4WpoOfwGESt
+ DE4g==
+X-Gm-Message-State: AOJu0YxgNOf1HlNbj8aJW5n/ZLPQrW3yzJFJzs9/o4W5LNikan5/RugA
+ 2xcTrCSDY7lpgEtT0hj/tlfd0BZ/+l04TVH3xltL2g==
+X-Google-Smtp-Source: AGHT+IHwRDywHnTKfCyB19nABNCgeEwuzNaphomClxvFEICm9BhzGkNzU8XqaW9BspjrzCSpv8xkw+yfv9YJjnKRm9I=
+X-Received: by 2002:a05:6402:b29:b0:53e:775e:9761 with SMTP id
+ bo9-20020a0564020b2900b0053e775e9761mr1171028edb.36.1700638846733; Tue, 21
+ Nov 2023 23:40:46 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121113557.800353-1-sjg@chromium.org>
- <20231121113557.800353-7-sjg@chromium.org>
- <07051882-8b13-4878-8f6f-1fe31fe97467@gmx.de>
- <CAPnjgZ3fv_NgDOAA-GdQD084ZTkKi5ZfO2kpUoNDVi9=Ar1iFA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3fv_NgDOAA-GdQD084ZTkKi5ZfO2kpUoNDVi9=Ar1iFA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 22 Nov 2023 09:38:43 +0200
-Message-ID: <CAC_iWjJSU7sdkOWBdoqn90koNjj1HyxPL4VrDR10FPtPHGA-AQ@mail.gmail.com>
-Subject: Re: [PATCH 6/7] WIP: efi: Allow helloworld to exit boot services
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
+ <20231121070028.2614095-2-sughosh.ganu@linaro.org>
+ <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
+ <CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com>
+ <CAC_iWjKKas=zkMyJeNvLmcPWh2wjbE=aw_-Nugano3HYWX2+4Q@mail.gmail.com>
+In-Reply-To: <CAC_iWjKKas=zkMyJeNvLmcPWh2wjbE=aw_-Nugano3HYWX2+4Q@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 22 Nov 2023 13:10:35 +0530
+Message-ID: <CADg8p96mfEtCySQyXPLqKuwnYu7BPO5guoz9+0452aujgs-zsg@mail.gmail.com>
+Subject: Re: [PATCH 1/4] tools: mkeficapsule: Add support for parsing capsule
+ params from config file
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,100 +91,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+hi Ilias,
 
-On Wed, 22 Nov 2023 at 00:10, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 22 Nov 2023 at 13:06, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Hi Heinrich,
+> Hi all,
 >
-> On Tue, 21 Nov 2023 at 10:17, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> On Wed, 22 Nov 2023 at 07:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > On 11/21/23 12:35, Simon Glass wrote:
-> > > This allows testing of the exit_boot_services call, providing more
-> > > coverage of the EFI bootmeth.
+> > hi Simon,
+> >
+> > On Wed, 22 Nov 2023 at 03:42, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Hi Sughosh,
+> > >
+> > > On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > Add support for specifying the parameters needed for capsule
+> > > > generation through a config file, instead of passing them through
+> > > > command-line. Parameters for more than a single capsule file can be
+> > > > specified, resulting in generation of multiple capsules through a
+> > > > single invocation of the command.
+> > > >
+> > > > The config file can then be passed to the mkeficapsule tool in such
+> > > > manner
+> > > >
+> > > >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
+> > > >
+> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > ---
+> > > >  tools/Kconfig              |  15 ++
+> > > >  tools/Makefile             |   1 +
+> > > >  tools/eficapsule.h         | 114 ++++++++++++
+> > > >  tools/mkeficapsule.c       |  87 +++++----
+> > > >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
+> > > >  5 files changed, 538 insertions(+), 31 deletions(-)
+> > > >  create mode 100644 tools/mkeficapsule_parse.c
+> > >
+> > > This patch keeps coming back :-)
+> > >
+> > > Can we not add multiple capsules in the binman description? Why do we
+> > > need a new file format? How can binman decode images produced in this
+> > > way?
 > >
-> > I would prefer to keep helloworld.efi benign.
+> > So as Tom mentions, this brings parity with respect to the other
+> > capsule generation tool in EDKII that generates capsules. IIRC, this
+> > is something which even Xilix was interested in, and Michal had kind
+> > of gone through these patches earlier. Lastly, it would be good to
+> > have support in U-Boot's mkeficapsule tool for generating a single
+> > capsule file with multiple payloads, and having support for this
+> > functionality helps in that goal.
 > >
-> > Please, create a new EFI binary for testing ExitBootServices().
+> > Also, you might have noticed that, since your objection to the last
+> > series, I have removed putting this in binman. So now, this aspect of
+> > the capsule generation would only be supported through the
+> > command-line invocation of the tool.
 >
-> Eek...isn't helloworld already used in tets?\
+> I think that overall the approach is sane. mkeficapsule is currently
+> supported and compiled for distros, so the multiple payload support is
+> useful. If we want to add support to binman, instead of rewriting this
+> in python, we could just call that tool for parsing and creating
+> capsules
 
-Yes, but calling exitboot services from it means we need to be really
-careful when/how we call it, since once that app runs the boottime
-services along with any attached disks will disappear.
-Instead having a single EFI app that calls that and then tests for any
-runtime services is more scalable
+Given the amount of time these patches have been under review(also
+number of iterations), I would request that this series be reviewed
+and merged first. I think there is general consensus that there is
+value to have this functionality in the mkeficapsule tool. If it is
+deemed fit to support this through binman as well, that task can be
+taken up separately. Thanks.
 
-Thanks
-/Ilias
+-sughosh
+
 >
+> Thanks
+> /Ilias
 > >
-> > > ---
 > > >
-> > >   lib/efi_loader/helloworld.c | 36 +++++++++++++++++++++++++++++++++++-
-> > >   1 file changed, 35 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-> > > index 1135d3a3c37e..1fb5fb5a62f2 100644
-> > > --- a/lib/efi_loader/helloworld.c
-> > > +++ b/lib/efi_loader/helloworld.c
-> > > @@ -206,6 +206,26 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> > >                       (con_out, u"Cannot open loaded image protocol\r\n");
-> > >               goto out;
-> > >       }
-> > > +
-> > > +     {
-> > > +             ulong ptr = (ulong)loaded_image;
-> > > +             u16 str[80];
-> > > +             int i;
-> > > +
-> > > +             for (i = 0; i < 8; i++) {
-> > > +                     uint digit = (ptr >> ((7 - i) * 4)) & 0xf;
-> > > +
-> > > +                     if (digit > 9)
-> > > +                             digit = 'a' + digit - 10;
-> > > +                     else
-> > > +                             digit += '0';
-> > > +                     str[i] = digit;
-> > > +             }
-> > > +             str[i] = 0;
-> > > +             con_out->output_string(con_out, str);
-> > > +             con_out->output_string(con_out, u"\n");
-> > > +     }
-> > > +
-> > >       print_load_options(loaded_image);
-> > >
-> > >       /* Get the device path to text protocol */
-> > > @@ -243,7 +263,21 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
-> > >               goto out;
-> > >
-> > >   out:
-> > > -     boottime->exit(handle, ret, 0, NULL);
-> > > +     /*
-> > > +      * TODO: Use vendor string to decide whether to call exit-boot-services
-> > > +      */
-> > > +     efi_uintn_t map_size = 0;
-> > > +     efi_uintn_t map_key;
-> > > +     efi_uintn_t desc_size;
-> > > +     u32 desc_version;
-> > > +
-> > > +     ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
-> > > +                                    &desc_version);
-> > > +     con_out->output_string(con_out, u"Exiting boot sevices\n");
-> > > +
-> > > +     boottime->exit_boot_services(handle, map_key);
-> > > +
-> > > +     ret = boottime->exit(handle, ret, 0, NULL);
+> > > Also, could we get sandbox to produce one EFI capsule as part of the
+> > > normal build? I think that discussion trailed off.
 > >
-> > After ExitBootServices() you must not call boot services.
+> > Yes, apologies for missing out on this. Slipped my mind. Would you
+> > want, say, all the non-signed capsules to be generated as part of the
+> > sandbox build?
 > >
-> > Call runtime->reset_system(EFI_RESET_COLD, EFI_SUCCESS, 0, NULL) instead.
->
-> OK, will do. That will be ignored by sandbox, right?
->
-> For now this is just a hack to try to resolve the problem mentioned.
->
-> Regards,
-> Simon
+> > -sughosh
