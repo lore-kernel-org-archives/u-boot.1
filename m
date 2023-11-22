@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2D32C61D97
-	for <u-boot@archiver.kernel.org>; Tue, 21 Nov 2023 23:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99FBFC61D97
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 02:14:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E9F87635;
-	Wed, 22 Nov 2023 00:58:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id B7C7186ED6;
+	Wed, 22 Nov 2023 03:14:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="DHy0va+t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TD0doZK9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24C0D842D0; Wed, 22 Nov 2023 00:58:34 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 7F575864F3; Wed, 22 Nov 2023 03:14:27 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 020A38760F
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 00:58:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E60C875B5
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 03:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-32dff08bbdbso4668181f8f.2
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 15:58:31 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-6bbfb8f7ac4so1711431b3a.0
+ for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 18:14:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700611111; x=1701215911;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UvhsChdo98FReLSUWqDYmnUwXMi77JOWr8LL7oOHqSk=;
- b=DHy0va+tGpYgyJR1xGFCXE9k9MR7PA0NtNeQoQ9QKSz3htLorUyLokUE7gBDv5n/P9
- 3qZFUBLx18NW/F6WfrxD85j8Bd8V67uW1J5yXCLSAxxi2nHs/VoZgRaKWg8cZlI6tutU
- 2g5uXBTRC+xcAuTpsUL2JdyI2h34UpScOct6MvOMR5lvnacQm8ULTJYiM4GtuYGfrb5r
- 6srHKo1Q+eFwOwBbZj/Yl1CUyWSICUmAgchSCZYUkpecDo76Fco1OS+qhTY71QXT5gww
- Fv500Co4r7v7beffDcGiGf9HSXM4ywS94iwSFHeeXikAFlyewaCJwvS6xAAMIQMm1Fhd
- g2vA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700611111; x=1701215911;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=linaro.org; s=google; t=1700619236; x=1701224036; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UvhsChdo98FReLSUWqDYmnUwXMi77JOWr8LL7oOHqSk=;
- b=vvINrsG94O+f0NUFLTws+ELsvkXSb1egY2vVRHG6PvW4m8+5qfqPelDvZZZd+o9nni
- CWa1z2RGffNaxFZ5tB28wxPI3P6RGGJbBRbWpzLgCucWNPaVzrwC/3gXz80NYSOKmLng
- Carei2Vu++W5cKAkguUCkJCDv9Nd3YNwLYaDueWa62qtjTihZgdkvcfyJQk4Vo6XGk0Z
- mjeiqXkeZ+FIJ0CHsOEmoZupwmdWmVNY6OTTXPuY9cn6RxwkxXvqB3ITJE9OqW09qFq9
- yF0wT91s+/7gzIcJpfVzOPBOSbjAKDX0Kc81mwmbOdPWXMdHyw/tiyW9epgWqsFIMprI
- wgbw==
-X-Gm-Message-State: AOJu0YwiiNPCgjhBFnwM3kN+I8JpPqFfrPUZv69mm9svPg4cPNGtXn5Q
- 8qQpejmQvVXXfvJe5IY6bsC7nXw2ZFbsqffYGqH+MA==
-X-Google-Smtp-Source: AGHT+IELwKJuUiIB+aXHLQNa43JVsW4eWhRndL4yQH0lwTZ1bY3j4DxXbH5VvY35dZ9JrW52XjRgvw==
-X-Received: by 2002:a5d:4c4c:0:b0:32f:b419:6ec2 with SMTP id
- n12-20020a5d4c4c000000b0032fb4196ec2mr314616wrt.34.1700611111160; 
- Tue, 21 Nov 2023 15:58:31 -0800 (PST)
-Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
- [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- d1-20020a5d5381000000b0032f7f4d008dsm15625566wrv.20.2023.11.21.15.58.29
+ bh=+ZKqTn8BWRwBAfiVn5BQB93/j5jqAzZ0nSQDOuW4b7U=;
+ b=TD0doZK9sVdzNCSuwTDCFJD+MesRP5ibdJGAheiA2+znX38UNTfHBvAo+q4nybwOT8
+ lgpIZ3DpK6Fum1TanwpCJOfmUuRJYTnlerl1xiQi1U3SF9eQgRTTD1HnPA6IQY2KfFTF
+ 8gp+4mEV0Rrp4YrQ2MVgBd8fyCT4+D6yscH5Qgmg+bOZJcQGCfMijU/Is1i8qf7+CVpt
+ YI4tYmfmcDk14qw0H0qKYfNQT29v6TV9drsIgIFiKpieTaVGGdMg1tliMTqICJ2GYIau
+ O5ImmTSllXe8Cg58DrJC9BWdd+Z8udce2o0HCwB+/rjLtXzmOwqubZd/voHia3FvMX00
+ VbdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700619236; x=1701224036;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ZKqTn8BWRwBAfiVn5BQB93/j5jqAzZ0nSQDOuW4b7U=;
+ b=qnp/a9udZBBnsY4JxsZJRw7i7GGEfbRMSllwzJe4bwY/BtaHL0FvRgnoboLLQCjlQv
+ SG0J3arAGAxqnxEfmWEPyT1M9qDOYppHUuB2+7bsxHyVr1RmGEMRwWECzoLiD1lw74ef
+ OQEuUzcrZ1ZwQiB/QtpZettkRy0F+kIfKdMRieG/FYPfimkHaWGjZ2tl4bjVAGZvr3zX
+ UV2iXyn4dc8R/QjYWH/kr2xbGUF5sKHkhtpqt6a8PRGIYiZvdIfDKB4A3uKzUtYsEeBD
+ 1xYBZWM0f7cXdeOw5RA+vjtgmmlexqwzts56L9EbxuKyfG0huisietfi6ozvyyK1DJmD
+ lvng==
+X-Gm-Message-State: AOJu0YxAA963zaku8mAXH3yJamC0akkZ6jfAxhk6SZueeZhg5fF5uLvp
+ X79eAhjpXqbK/y6W1N3SvN4Psg==
+X-Google-Smtp-Source: AGHT+IFeew88Db2+jP6pNEAU5Jalfu7K+PwCCIQSIwcdnPvAhr65gq97htkNIe+LZoAqbQmMxtB/og==
+X-Received: by 2002:a05:6a00:796:b0:6bc:67ca:671d with SMTP id
+ g22-20020a056a00079600b006bc67ca671dmr1057826pfu.1.1700619235583; 
+ Tue, 21 Nov 2023 18:13:55 -0800 (PST)
+Received: from octopus ([2400:4050:c3e1:100:9d12:61d5:f68:d6f0])
+ by smtp.gmail.com with ESMTPSA id
+ c8-20020a056a000ac800b006cb5bf76772sm6492883pfl.136.2023.11.21.18.13.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Nov 2023 15:58:29 -0800 (PST)
-From: Shantur Rathore <i@shantur.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>,
- Akash Gajjar <akash@openedev.com>, Jagan Teki <jagan@amarulasolutions.com>
-Subject: [PATCH v1 3/3] defconfig: rockpro64: Enable SF EFI var store
-Date: Tue, 21 Nov 2023 23:57:13 +0000
-Message-Id: <20231121235614.v1.3.sf_efi_var_store@changeid>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231121235713.1530289-1-i@shantur.com>
+ Tue, 21 Nov 2023 18:13:55 -0800 (PST)
+Date: Wed, 22 Nov 2023 11:13:52 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Shantur Rathore <i@shantur.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH v1 1/3] efi: filestore: don't compile when config disabled
+Message-ID: <ZV1j4AQfWLD5K/OK@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 References: <20231121235713.1530289-1-i@shantur.com>
+ <20231121235713.1530289-2-i@shantur.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231121235713.1530289-2-i@shantur.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +99,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RockPro64 uses SPI Flash for storing env, also use it store
-EFI variables.
+On Tue, Nov 21, 2023 at 11:57:11PM +0000, Shantur Rathore wrote:
+> Compile out filestore functions when config isn't enabled.
+> 
+> Signed-off-by: Shantur Rathore <i@shantur.com>
+> ---
+> 
+>  include/efi_variable.h        | 21 ++++++++++++---------
+>  lib/efi_loader/efi_var_file.c | 13 +++++++------
+>  lib/efi_loader/efi_variable.c | 10 +++++++++-
+>  3 files changed, 28 insertions(+), 16 deletions(-)
+> 
+> diff --git a/include/efi_variable.h b/include/efi_variable.h
+> index 805e6c5f1e..ca7e19d514 100644
+> --- a/include/efi_variable.h
+> +++ b/include/efi_variable.h
+> @@ -136,15 +136,6 @@ struct efi_var_file {
+>  	struct efi_var_entry var[];
+>  };
+>  
+> -/**
+> - * efi_var_to_file() - save non-volatile variables as file
+> - *
+> - * File ubootefi.var is created on the EFI system partion.
+> - *
+> - * Return:	status code
+> - */
+> -efi_status_t efi_var_to_file(void);
+> -
+>  /**
+>   * efi_var_collect() - collect variables in buffer
+>   *
+> @@ -172,6 +163,16 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
+>   */
+>  efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe);
+>  
+> +#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
 
-Signed-off-by: Shantur Rathore <i@shantur.com>
----
+I don't think we need this guard because any function declaration
+in a header is harmless even if that function implementation is opted out.
 
- configs/rockpro64-rk3399_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+> +/**
+> + * efi_var_to_file() - save non-volatile variables as file
+> + *
+> + * File ubootefi.var is created on the EFI system parition.
+> + *
+> + * Return:	status code
+> + */
+> +efi_status_t efi_var_to_file(void);
+> +
+>  /**
+>   * efi_var_from_file() - read variables from file
+>   *
+> @@ -185,6 +186,8 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe);
+>   */
+>  efi_status_t efi_var_from_file(void);
+>  
+> +#endif // CONFIG_EFI_VARIABLE_FILE_STORE
+> +
+>  /**
+>   * efi_var_mem_init() - set-up variable list
+>   *
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> index 62e071bd83..7ceb7e3cf7 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -117,6 +117,8 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
+>  	return EFI_SUCCESS;
+>  }
+>  
+> +#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
 
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index affb6137e0..b9dededc9a 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -8,6 +8,8 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
-+CONFIG_EFI_VARIABLE_SF_STORE=y
-+CONFIG_EFI_VARIABLE_SF_OFFSET=0x7D0000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rockpro64"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
--- 
-2.40.1
+Can you refactor the code further to purge all "#ifdef" stuffs from this file?
 
+I mean:
+1) move efi_var_collect/restor() to a always-compiled file, say,
+   efi_var_common.c/efi_variable.c
+2) modify call sites of the other functions, for example, as follows:
+     if (CONFIG_IS_ENABLED(EFI_VARIABLE_STORE))
+         efi_var_to_file();
+   # I'm not sure why the return code is ignored everywhere.
+3) modify Makefile to compile efi_var_file.c only if EFI_VARIABLE_FILE_STORE
+   is enabled
+4) remove "#ifdef CONFIG_EFI_VARIABLE_FILE_STORE" from efi_var_file.c
+
+-Takahiro Akashi
+
+> +
+>  /**
+>   * efi_var_to_file() - save non-volatile variables as file
+>   *
+> @@ -126,7 +128,6 @@ efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *
+>   */
+>  efi_status_t efi_var_to_file(void)
+>  {
+> -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>  	efi_status_t ret;
+>  	struct efi_var_file *buf;
+>  	loff_t len;
+> @@ -150,11 +151,10 @@ error:
+>  		log_err("Failed to persist EFI variables\n");
+>  	free(buf);
+>  	return ret;
+> -#else
+> -	return EFI_SUCCESS;
+> -#endif
+>  }
+>  
+> +#endif // CONFIG_EFI_VARIABLE_FILE_STORE
+> +
+>  efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+>  {
+>  	struct efi_var_entry *var, *last_var;
+> @@ -198,6 +198,7 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+>  	return EFI_SUCCESS;
+>  }
+>  
+> +#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>  /**
+>   * efi_var_from_file() - read variables from file
+>   *
+> @@ -211,7 +212,6 @@ efi_status_t efi_var_restore(struct efi_var_file *buf, bool safe)
+>   */
+>  efi_status_t efi_var_from_file(void)
+>  {
+> -#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>  	struct efi_var_file *buf;
+>  	loff_t len;
+>  	efi_status_t ret;
+> @@ -236,6 +236,7 @@ efi_status_t efi_var_from_file(void)
+>  		log_err("Invalid EFI variables file\n");
+>  error:
+>  	free(buf);
+> -#endif
+>  	return EFI_SUCCESS;
+>  }
+> +
+> +#endif // CONFIG_EFI_VARIABLE_FILE_STORE
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> index be95ed44e6..7fa444451d 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -357,8 +357,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>  	 * Write non-volatile EFI variables to file
+>  	 * TODO: check if a value change has occured to avoid superfluous writes
+>  	 */
+> -	if (attributes & EFI_VARIABLE_NON_VOLATILE)
+> +	if (attributes & EFI_VARIABLE_NON_VOLATILE) {
+> +#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>  		efi_var_to_file();
+> +#endif
+> +	}
+>  
+>  	return EFI_SUCCESS;
+>  }
+> @@ -466,7 +469,12 @@ efi_status_t efi_init_variables(void)
+>  	if (ret != EFI_SUCCESS)
+>  		return ret;
+>  
+> +#ifdef CONFIG_EFI_VARIABLE_FILE_STORE
+>  	ret = efi_var_from_file();
+> +#else
+> +	ret = EFI_SUCCESS;
+> +#endif
+> +
+>  	if (ret != EFI_SUCCESS)
+>  		return ret;
+>  	if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
+> -- 
+> 2.40.1
+> 
