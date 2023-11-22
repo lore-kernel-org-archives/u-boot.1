@@ -4,57 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE47DC27C40
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202D1C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A90CF87698;
-	Thu, 23 Nov 2023 00:55:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8D43E87675;
+	Thu, 23 Nov 2023 00:55:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700697312;
-	bh=k8f/4PH8t86TVr1aQfApS6/XZFrOmcV+BKqYj9G/WbA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=XCKJFJ8JopngrITbbNaSgY5lwthh9Vo2iwcM4C/YXMfBV60hEdfVE1DqSmKCYJ0ld
-	 AYo1yyKyjjAdVznjuHaySXuBdhkp5N/sjUad0qd2UIqMXvLzWE5xpBFxkvKM6zOcTI
-	 8kNJz3JV8FxK1NfzgK3Iw5KFeMvw2JP5WWHMcvcY6BhXsml6Fjf5SCCmlyCmVf9429
-	 64BUPBA+TzMxT9wsflalZLThSQEdcM+tEICD9+4NAJAjv36Ea9sSFivZUC4lk9CtPR
-	 JtCCIKNBl5/KoCrmTptXyDgui1h4PQg8KurjiId1JK0R5b7T+lUSfJjR3ao4OmYyRk
-	 mmQN9ez2XbGIQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E237B87675;
- Thu, 23 Nov 2023 00:55:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700697311;
- bh=k8f/4PH8t86TVr1aQfApS6/XZFrOmcV+BKqYj9G/WbA=;
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="SlTPcA1W";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D003687675; Thu, 23 Nov 2023 00:55:25 +0100 (CET)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id 0BA198768A
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 00:55:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from [192.168.1.75] (d173-180-12-152.bchsia.telus.net
+ [173.180.12.152])
+ by linux.microsoft.com (Postfix) with ESMTPSA id 257D720B74C1;
+ Wed, 22 Nov 2023 15:55:21 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 257D720B74C1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1700697321;
+ bh=cNsRQks1tG0dK9cNVNcPZK0fGKDqwoABXgGiCTOHR8c=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=jNsVCJ1eRAnwOmNvhxQXu7woNns/ADhmqAgIOyhnFP9l8wB8z+sVL1eBqQS5VZrW4
- ad5PDSiTHOjuCn2UJhd0of+XVgfrb5EMnt9EUBsBxwCLXzgsfo7CQnwvek0dWgqlxH
- e+efnMc3AwCCUf+2v4fBHEy+JCIkAIvjfMxdguT19jdrz/d2GIabnTAmPqGpJOGLUq
- r72YICpvRhGc5WN+H4q8fjJbSNvXk1v7BNvTLpSkPkP8HyNtRw4tmKm5bEEgtrLiOz
- BKKhXAdiiE7kOthXCJsph/K2C9MpmyAQRl7naKcBNv99tfXX2lKNUR6gBkH5F+t/Ua
- wOYDrfET+zVXg==
-Message-ID: <37b4f93b-1fc7-4fcb-9ccf-507ffeed7afb@denx.de>
-Date: Thu, 23 Nov 2023 00:55:10 +0100
+ b=SlTPcA1WTbYOpV89UZde18xH+duGi30Y4fFsM5VcYnl5A8ybKQC/0oUBGflXiUK4c
+ bVRtfxl3r85UKwad5GRR7ID54ZqgywYnRNb2bN6I9sgkXqnLQdBAe1dhxCq8SQynAl
+ Jf9FAtMvJRn06o3S5SZ+ohqmzzQmgY9688JllSZk=
+Message-ID: <89277e39-5b72-4d39-8bac-d5a9f174cd72@linux.microsoft.com>
+Date: Wed, 22 Nov 2023 15:55:20 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3-generic: Use combined glue and ctrl node for
- RK3588
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20231112152527.1306793-1-jonas@kwiboo.se>
- <141ed34c-93e7-4ded-8697-3fa5501d4ee7@denx.de>
- <242c3d30-81ab-4132-b002-045df675ed2a@kwiboo.se>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <242c3d30-81ab-4132-b002-045df675ed2a@kwiboo.se>
+Subject: Re: [PATCH v5 2/5] fdt: kaslr seed from RNG device
+Content-Language: en-GB
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, trini@konsulko.com,
+ sjg@chromium.org
+References: <20231117020207.948636-1-seanedmond@linux.microsoft.com>
+ <20231117020207.948636-3-seanedmond@linux.microsoft.com>
+ <CAC_iWjJf87DM=J0aKUHbOMj8ZhMi=8UtDEEyHRSL3Vv0s+iarQ@mail.gmail.com>
+From: Sean Edmond <seanedmond@linux.microsoft.com>
+In-Reply-To: <CAC_iWjJf87DM=J0aKUHbOMj8ZhMi=8UtDEEyHRSL3Vv0s+iarQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,27 +68,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/18/23 00:30, Jonas Karlman wrote:
-> Hi Marek,
+Hi Ilias, Applogies, I'm fairly new to upstream contributions and I've 
+missed a few things on multi-version patch series such as this one. 
+Simon has elightened about patman though (I feel a bit sheepish that I 
+haven't been using this tool all along). Should I resubmit this as a new 
+series to ensure prior reviews and change logs are captured?
 
-Hi,
+Sean
 
-> On 2023-11-13 04:11, Marek Vasut wrote:
->> On 11/12/23 16:25, Jonas Karlman wrote:
->>> Like Rockchip RK3328 and RK3568, the RK3588 also have a single node to
->>> represent the glue and ctrl for USB 3.0.
->>>
->>> Use rk_ops as driver data to select correct ctrl node for RK3588 DWC3.
->>>
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On 2023-11-17 11:33 p.m., Ilias Apalodimas wrote:
+> Hi Sean
+> There are a few reviewed-by tags missing since v3/v4.  Any reason you
+> dropped those? The change log doesn't mention anything
+>
+> Thanks
+> /Ilias
+>
+> On Fri, 17 Nov 2023 at 04:02,<seanedmond@linux.microsoft.com>  wrote:
+>> From: Dhananjay Phadke<dphadke@linux.microsoft.com>
 >>
->> Reviewed-by: Marek Vasut <marex@denx.de>
+>> Add support for KASLR seed from the RNG device. Invokes dm_rng_read()
+>> API to read 8-bytes of random bytes.  Performs the FDT fixup using event
+>> spy.  To enable use CONFIG_KASLR_RNG_SEED
 >>
->> Do you still want this in 2024.01 ? The MW closed just a few days ago,
->> but this seems OKish to put in still .
-> 
-> It should not matter if this goes to master or next. Next linux DT sync
-> when this may be needed will probably not be until around v6.8-rc1.
-
-Applied to usb/master, thanks
+>> Signed-off-by: Dhananjay Phadke<dphadke@linux.microsoft.com>
+>> Signed-off-by: Drew Kluemke<ankluemk@microsoft.com>
+>> Signed-off-by: Sean Edmond<seanedmond@microsoft.com>
+>> ---
+>>   boot/fdt_support.c | 36 ++++++++++++++++++++++++++++++++++++
+>>   lib/Kconfig        |  7 +++++++
+>>   2 files changed, 43 insertions(+)
+>>
+>> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+>> index 49d14a949be..12defcf645c 100644
+>> --- a/boot/fdt_support.c
+>> +++ b/boot/fdt_support.c
+>> @@ -12,7 +12,10 @@
+>>   #include <log.h>
+>>   #include <mapmem.h>
+>>   #include <net.h>
+>> +#include <rng.h>
+>>   #include <stdio_dev.h>
+>> +#include <dm/device.h>
+>> +#include <dm/uclass.h>
+>>   #include <dm/ofnode.h>
+>>   #include <linux/ctype.h>
+>>   #include <linux/types.h>
+>> @@ -650,6 +653,39 @@ int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
+>>          return 0;
+>>   }
+>>
+>> +int fdt_rng_kaslr_seed(void *ctx, struct event *event)
+>> +{
+>> +       u8 rand[8] = {0};
+>> +       struct udevice *dev;
+>> +       int ret;
+>> +       oftree tree = event->data.ft_fixup.tree;
+>> +       ofnode root_node = oftree_root(tree);
+>> +
+>> +       ret = uclass_first_device_err(UCLASS_RNG, &dev);
+>> +       if (ret) {
+>> +               printf("ERROR: Failed to find RNG device\n");
+>> +               return ret;
+>> +       }
+>> +
+>> +       ret = dm_rng_read(dev, rand, sizeof(rand));
+>> +       if (ret) {
+>> +               printf("ERROR: RNG read failed, ret=%d\n", ret);
+>> +               return ret;
+>> +       }
+>> +
+>> +       ret = fdt_fixup_kaslr_seed(root_node, rand, sizeof(rand));
+>> +       if (ret) {
+>> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
+>> +               return ret;
+>> +       }
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +#if defined(CONFIG_KASLR_RNG_SEED)
+>> +EVENT_SPY(EVT_FT_FIXUP, fdt_rng_kaslr_seed);
+>> +#endif
+>> +
+>>   int fdt_record_loadable(void *blob, u32 index, const char *name,
+>>                          uintptr_t load_addr, u32 size, uintptr_t entry_point,
+>>                          const char *type, const char *os, const char *arch)
+>> diff --git a/lib/Kconfig b/lib/Kconfig
+>> index 19649517a39..4f5dfc00d6f 100644
+>> --- a/lib/Kconfig
+>> +++ b/lib/Kconfig
+>> @@ -477,6 +477,13 @@ config VPL_TPM
+>>            for the low-level TPM interface, but only one TPM is supported at
+>>            a time by the TPM library.
+>>
+>> +config KASLR_RNG_SEED
+>> +       bool "Use RNG driver for KASLR random seed"
+>> +       depends on DM_RNG
+>> +       help
+>> +         This enables support for using the RNG driver as entropy source for
+>> +         KASLR seed populated in kernel's device tree.
+>> +
+>>   endmenu
+>>
+>>   menu "Android Verified Boot"
+>> --
+>> 2.42.0
+>>
