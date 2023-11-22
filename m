@@ -4,73 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BCA0C61D99
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A01C27C40
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:53:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61AF087678;
-	Thu, 23 Nov 2023 00:52:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id EF52A87687;
+	Thu, 23 Nov 2023 00:52:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Riup/8D/";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F51587675; Thu, 23 Nov 2023 00:52:25 +0100 (CET)
-Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
- [IPv6:2607:f8b0:4864:20::114a])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700697165;
+	bh=MfMtXu9oCMCJQk9r9TxXb60YIWYQLiOl2RLjKSNovJc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=zyMOuKC+WcfMbFO3ceICzw4LMXi5/WnwsFoP7Dl+ooUrLd5+6jdJictSShFPcz4C4
+	 lDo6Ww2pA9RD4TQofvpvZ4jf4yO8B2ARfUjfTJW8rHN0E3a2FGBLXl/JjRlmoHPqGR
+	 rVgUOGibnHmwQ8v6zu8lE0K/BE4i4AR+k5AF352j+Hxyv7MV6V6gjvqnZFQXHKgKFY
+	 +RN+WMh/NacKAM3fIVe0+7BYrtuvFypc1w+/hiWVwW3pJoTdCkaUuR5vNU0Pmy4vDA
+	 ToqgtDIzJsU2rfUp+XIJ65BDC+qr3Gcot7a142iD3fOPteUDfKuakpUPm12rdwKh9w
+	 PPl2QgREbByRQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77D618765C
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 00:52:18 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3MZReZQcKBgYsuxoz5lmuumrk.ius0-huuzroyzy.jkt3.jk@flex--moritzf.bounces.google.com
-Received: by mail-yw1-x114a.google.com with SMTP id
- 00721157ae682-5ca61d84dc3so3859567b3.0
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 15:52:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1700697137; x=1701301937; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=MUzDhbS9UB/VjACWjNN+LRg72E8lkFA9p0toY9s00ZM=;
- b=Riup/8D/GqSs0kuuE2lLgMXSXr5VPNflUQmJuNQVZeIm2+2BygGZEMNCRgQ7q4B+kM
- aB8w2WNlPpCPyAz8ksRv2r9+3B9K3pzznnKrp3/EtRqPOciRCFgoboSefo/P3v3+xO8r
- Cgia4PhYX5oI6D0k/014nnVTNHrff3X7kSnkmMYl039lW0gVwriWDNITvykIQhu6gOwy
- Ig4abYZfBzWsICn3+Ne7I1/DEV+1lxZAVbhNPmmZmGmV2Kcvq5Ee74B8HuIz228rblad
- b4camOCqegrO8LCaL1Z3Dty3IApB6JVixOPgPoRCmibmeZIOsQgK7of4azlqtIdqClBI
- gBWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700697137; x=1701301937;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MUzDhbS9UB/VjACWjNN+LRg72E8lkFA9p0toY9s00ZM=;
- b=n8I0QsZODXFZ/3M7SIvpP9U1iKOK+GlQQowhXngU8SuR/7LJ7sgHT8DWxKlOBXeC+L
- r5XBXg9FUD+Y7MAzZeBsSJKr+k6335pOwU3hKO8HYWKEQ5jv4ZhEFcGWe2ov/RCQ8TuI
- sPQGsWPlHtwpMQ1qk5X/0LIHz0j5ufig5zVF4sP6APbaIfzXZ5kYazkHVHtszOOGCZU8
- XqjxHe+Vj3HpJiyfdCddxnvEEcSHZ3LPBZMfvN/uY6Gz7oN1uiZmNgcEN/kkIPHgg2Q8
- JvtaWNm9CCqt7XbejVzZT51sS9r7ADxlMkQQPxMj59FVS9NPEqpr49SShCnMRc9yNX/D
- idow==
-X-Gm-Message-State: AOJu0YwJX0Qp5QkAqDF+Ivu0OF8TvxhU/YSPzaVTjPy0CtsdztXtk3lf
- Q96ZvgOrSGltDrP0anZyD0WHiFYaV6N2
-X-Google-Smtp-Source: AGHT+IFiA/ZUM3QCJuxLKjkdSvBKa30NwvRbwTMCocmVc8j1Ykzh9X9ARXqOblVAxZTyoOcOIiWTdzE5vvcn
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a0d:e2d7:0:b0:5ca:936d:8991
- with SMTP id
- l206-20020a0de2d7000000b005ca936d8991mr113220ywe.6.1700697137123; Wed, 22 Nov
- 2023 15:52:17 -0800 (PST)
-Date: Wed, 22 Nov 2023 23:52:01 +0000
-In-Reply-To: <20231122235202.630114-1-moritzf@google.com>
-Mime-Version: 1.0
-References: <20231122235202.630114-1-moritzf@google.com>
-X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
-Message-ID: <20231122235202.630114-2-moritzf@google.com>
-Subject: [PATCH 2/2] nvme: Update scan namespace to keep trying on busy
-From: Moritz Fischer <moritzf@google.com>
-To: bmeng.cn@gmail.com
-Cc: zhikang.zhang@nxp.com, wenbin.song@nxp.com, u-boot@lists.denx.de, 
- patrick@blueri.se, Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5579887671;
+ Thu, 23 Nov 2023 00:52:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700697163;
+ bh=MfMtXu9oCMCJQk9r9TxXb60YIWYQLiOl2RLjKSNovJc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=EJhSA78A7QS5wcQTN8n/5kJPfQgaDAVv7DVq0s3W19k+alj8P0EHSrXDoocO8QWpX
+ NYuuMAsovbi3NMRbjaWVhVkLkHuclrM0h82v3ry6kVDaxk+3BwoNk1HWAkV4vhK0Jr
+ kdJD9p7KjAcJ/5ZjEANVkAdY2i8y38Oaq6YS3hWTchTYYIYOXKQwC1FeJJIM70mXPo
+ i6Oll5xZapoTrooP50wIwuByqDJwdAfkNRZctPmFXLIMmQniHJOnthoAXcAojbCR1A
+ rDrzwqtoYVKOpJc7psUE95fbpOeIZ6/rTcmxBmG63OZcDgEVnbx6DcOYoqxUJiH/bz
+ zqXGJk0xEY5vA==
+Message-ID: <e9675b13-41e8-442a-ac02-3a625c31ee22@denx.de>
+Date: Thu, 23 Nov 2023 00:52:40 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] USB fixes: xHCI error handling
+Content-Language: en-US
+To: Hector Martin <marcan@marcan.st>, Shantur Rathore <i@shantur.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Mark Kettenis <kettenis@openbsd.org>,
+ u-boot@lists.denx.de, asahi@lists.linux.dev
+References: <20231027-usb-fixes-1-v1-0-1c879bbcd928@marcan.st>
+ <fe844c63-0c44-469c-a4e0-f0e1f2ac63fc@denx.de>
+ <CAHc5_t2WFZH65MJENGvC6u21ETcRn47ceQd8jrHV9DVmmM10Vw@mail.gmail.com>
+ <3b662808-e047-4023-a00c-1b6728bd5c86@denx.de>
+ <cdb3df49-1ba3-4b87-bc2e-57c71a7ce725@marcan.st>
+ <51d7ba01-bb22-4246-b67b-675511ca0be2@denx.de>
+ <f6df901a-245a-494a-952a-c9bace244fdc@marcan.st>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <f6df901a-245a-494a-952a-c9bace244fdc@marcan.st>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,33 +75,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A busy controller shouldn't be game-over for all controllers,
-so keep trying on hitting -EBUSY.
+On 11/21/23 07:46, Hector Martin wrote:
+> 
+> 
+> On 2023/11/20 21:15, Marek Vasut wrote:
+>> On 11/20/23 11:45, Hector Martin wrote:
+>>>
+>>>
+>>> On 2023/11/20 11:09, Marek Vasut wrote:
+>>>> On 11/20/23 00:17, Shantur Rathore wrote:
+>>>>> On Sun, Nov 19, 2023 at 8:08 PM Marek Vasut <marex@denx.de> wrote:
+>>>>>>
+>>>>>> On 10/27/23 01:16, Hector Martin wrote:
+>>>>>>> This series is the first of a few bundles of USB fixes we have been
+>>>>>>> carrying downstream on the Asahi U-Boot branch for a few months.
+>>>>>>>
+>>>>>>> Most importantly, this related set of patches makes xHCI error/stall
+>>>>>>> recovery more robust (or work at all in some cases). There are also a
+>>>>>>> couple patches fixing other xHCI bugs and adding better debug logs.
+>>>>>>>
+>>>>>>> I believe this should fix this Fedora bug too:
+>>>>>>>
+>>>>>>> https://bugzilla.redhat.com/show_bug.cgi?id=2244305
+>>>>>>
+>>>>>> Was there ever a V2 of these patches I might've missed ?
+>>>>>
+>>>>> Is it this one?
+>>>>> https://patchwork.ozlabs.org/project/uboot/list/?series=379807
+>>>>
+>>>> I think so, thanks.
+>>>>
+>>>> And uh, my question therefore it, is there a V3 which addresses the 3/8
+>>>> and 8/8 comment ?
+>>>
+>>> Not yet, no. Sorry, I probably won't have time to work on this in a
+>>> while, currently busy with other stuff.
+>>
+>> I can probably fix the patches up myself if that is fine with you, I'd
+>> really like to get these fixes into the release soon. Would that be OK
+>> with you ?
+>>
+> 
+> Of course, I would appreciate that :)
 
-This change brings the actual behavior of the routine in line
-with what the descriptions says.
-
-Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-Signed-off-by: Moritz Fischer <moritzf@google.com>
----
- drivers/nvme/nvme.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index ec45f831a3..59a139baa0 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
- 		if (ret) {
- 			log_err("Failed to probe '%s': err=%dE\n", dev->name,
- 				ret);
--			return ret;
-+			/* Bail if we ran out of memory, else keep trying */
-+			if (ret != -EBUSY)
-+				return ret;
- 		}
- 	}
- 
--- 
-2.43.0.rc1.413.gea7ed67945-goog
-
+I picked a subset to usb/master and fixed a subset, for the rest I 
+really do need your input on those patches.
