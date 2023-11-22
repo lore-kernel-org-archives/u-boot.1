@@ -4,69 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EAEC072A2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 05:52:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9689C072A2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 06:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB7DD87582;
-	Wed, 22 Nov 2023 06:52:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 19BC5874C7;
+	Wed, 22 Nov 2023 07:01:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HkbB6j0A";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8952487574; Wed, 22 Nov 2023 06:52:21 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DD768725C
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 06:52:14 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AM5qBZw004439;
- Tue, 21 Nov 2023 23:52:11 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700632331;
- bh=ZKd+IrVlMjBDpdkajOcr7bnfc/uyrHNNQeRCGXxDevs=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=HkbB6j0A8eoz8niWB0ySEM2yzw7ylBJ/JDDeqJPLpxy8hGvQysWfhjskbwCXtpZmJ
- YQbbzp4DHYPtnukYwmd24iWma6X3XOItSSZzK3U4Sidzf+oriJQnBWNFJ/j4KcHhPJ
- a1HDx03vX33l56LwDRYY7c4487jVPhRMWY0VkCNU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AM5qBWI088363
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 21 Nov 2023 23:52:11 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
- Nov 2023 23:52:11 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 21 Nov 2023 23:52:11 -0600
-Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AM5q7XJ112976;
- Tue, 21 Nov 2023 23:52:08 -0600
-Message-ID: <d57ffe06-4f4a-4fa7-89ad-4527769a3389@ti.com>
-Date: Wed, 22 Nov 2023 11:22:07 +0530
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700632868;
+	bh=d0LtpE04LcvW35kdjF7Xpp0cCOmwj5eU1RNHPZk1w3I=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=Q/pLUKQw+BMlv/T6uZhMYQASVJwSyVyWnfQfO462w6xhQHNh19oQVlajCn6POM2p7
+	 42j+iiZ9l5FgZ65qh74uLumvdd6PMLoM0t7NaZtIEmq/7Rwl5Q4gRkh29amLNpj5mz
+	 poXjqe6rxKIAfH7Sm/UpPn5yY/ZfmfYAmA7MbHe0FKu+GwQkkonXzZsjGjVA6bZK18
+	 CCT4NfRi1725+5lpz6cKV1o5cu6fP12nopa3Bgc23LweiUCFuSw+TCbSgiFn1zz63M
+	 d+Z2goQDytOKO2uEBwIJCkJYLE4wi0I5NlKlk6JLPPFuMik8OuFmpc36HGHnYd3VrF
+	 N8WJ1xD02J5Lg==
+Received: from [192.168.1.107] (fibhost-66-250-214.fibernet.hu [85.66.250.214])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BAA9D8718E;
+ Wed, 22 Nov 2023 07:01:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700632865;
+ bh=d0LtpE04LcvW35kdjF7Xpp0cCOmwj5eU1RNHPZk1w3I=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=X3Lp88qL1cngWXkWlYdUDTNbfohhW59T7dUrhINW+4jHtf1IhfJMZUoB1UZK5KucO
+ onxZz0y4kgRAlCyCm7W20Ow5Q4aFq+3KcEKEUgHe1dLKR6wEaTVqMkLflXsETVQUEi
+ npobhJk6Rmy5BECnJvkyaZWRHbip3ZKtkAyDcUWXEGzSQbrseEAKBhgjyBpNDEWSGR
+ nNOUPo5yTkvadZ4hU9yDmLUTUpF9gZ5SXBiavaW/p8e+jDnWVvXCeQxg+ByAQdKNC5
+ KaGkUj2XxYUERFkZ8/PxlNFGRFddorZkMkjWMwElSpHcAgSXAbf7gqSMufM1WytxuJ
+ yksB2vDFrP5Ug==
+Subject: Re: [PATCH] mtd: rawnand: omap_gpmc: fix BCH8 HW based correction
+To: Roger Quadros <rogerq@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Enrico Leto <enrico.leto@siemens.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
+ "Bajjuri, Praneeth" <praneeth@ti.com>,
+ "Govindarajan, Sriramakrishnan" <srk@ti.com>
+References: <20231115054044.3937543-1-hs@denx.de>
+ <f21f052e-1b6d-45bc-8987-3b33eee7e09a@kernel.org>
+ <0d68e932-f631-4154-4d2a-6cd2508da4bb@denx.de>
+ <3d76daea-2f07-48f9-865b-81e01964704d@kernel.org>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <b9e43922-92bb-67a7-dab9-6d664d534661@denx.de>
+Date: Wed, 22 Nov 2023 07:00:44 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: k3-*-binman: Move to using templated FITs
+In-Reply-To: <3d76daea-2f07-48f9-865b-81e01964704d@kernel.org>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: <sjg@chromium.org>, <marcel.ziswiler@toradex.com>, <u-boot@lists.denx.de>, 
- <vigneshr@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, <kamlesh@ti.com>,
- <afd@ti.com>, <mkorpershoek@baylibre.com>
-References: <20231115101024.3441093-1-n-francis@ti.com>
- <20231115101024.3441093-3-n-francis@ti.com>
- <20231122052045.2hdlhvag6lz3t3pk@uda0497581>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231122052045.2hdlhvag6lz3t3pk@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,136 +72,145 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit
+Hello Roger,
 
-On 22/11/23 10:50, Manorit Chawdhry wrote:
-> Hi Neha,
+On 21.11.23 22:56, Roger Quadros wrote:
+> Hi,
 > 
-> On 15:40-20231115, Neha Malcom Francis wrote:
->> Reduce redundancy in code by using templates to generate the A72 boot
->> binaries (tispl.bin and u-boot.img) as well as R5 boot binary sysfw.itb
->> (for legacy boot following devices J721E and AM65x).
+> On 15/11/2023 13:36, Heiko Schocher wrote:
+>> Hello Roger,
 >>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
->>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
->>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
->>   arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
->>   arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
->>   arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
->>   arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
->>   arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
->>   8 files changed, 54 insertions(+), 1488 deletions(-)
+>> On 15.11.23 12:09, Roger Quadros wrote:
+>>>
+>>>
+>>> On 15/11/2023 07:40, Heiko Schocher wrote:
+>>>> commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+>>>>
+>>>> broke AM335x based boards booting from NAND with ECC BCH8 code.
+>>>>
+>>>> Use omap_enable_hwecc() instead of omap_enable_hwecc_bch()
+>>>> in SPL restores correct SPL nand_read_page functionality.
+>>>>
+>>>> Tested on draco thuban board.
+>>>>
+>>>> Signed-off-by: Heiko Schocher <hs@denx.de>
+>>>>
+>>>> ---
+>>>> fix NAND boot for BCH8 based TI AM335x boards
+>>>>
+>>>> Fix is based on series from Enrico:
+>>>>
+>>>> https://lists.denx.de/pipermail/u-boot/2023-November/536793.html
+>>>>
+>>>> and fixes NAND boot for the draco thuban board. But this patch
+>>>> apply also without the patches from above patchseries, see
+>>>> azure build:
+>>>>
+>>>> https://dev.azure.com/hs0298/hs/_build/results?buildId=111&view=results
+>>>>
+>>>> which is clean.
+>>>>
+>>>> Above commit seems to change only U-Boot code and did not
+>>>> adapt am335x_spl_bch.c, which breaks nand_read_page in SPL
+>>>> code for AM335x based boards. So use in SPL "old" hw setup
+>>>> and reading page from NAND in SPL works again.
+>>>>
+>>>>
+>>>>  drivers/mtd/nand/raw/omap_gpmc.c | 4 ++++
+>>>>  1 file changed, 4 insertions(+)
+>>>>
+>>>> diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
+>>>> index 1a5ed0de31..c9b66dadbd 100644
+>>>> --- a/drivers/mtd/nand/raw/omap_gpmc.c
+>>>> +++ b/drivers/mtd/nand/raw/omap_gpmc.c
+>>>> @@ -983,7 +983,11 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
+>>>>  		nand->ecc.strength	= 8;
+>>>>  		nand->ecc.size		= SECTOR_BYTES;
+>>>>  		nand->ecc.bytes		= 14;
+>>>> +#if defined(CONFIG_SPL_BUILD)
+>>>> +		nand->ecc.hwctl		= omap_enable_hwecc;
+>>>
+>>> I don't think this is correct. omap_enable_hwecc does not setup
+>>> the BCH settings and should be used only for 1-bit ECC i.e. OMAP_ECC_HAM1_CODE_*
+>>>
+>>> I'm sure it will break the boards not using
+>>> CONFIG_SPL_NAND_AM33XX_BCH which is
+>>> pretty much most TI boards that are not AM335x.
+>>>
+>>> Now, I need to identify why AM335x NAND is broken.
 >>
->> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
->> index 41277bf4bf..b7b5368886 100644
->> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
->> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
->> @@ -141,10 +141,7 @@
->>   
->>   #ifdef CONFIG_TARGET_AM625_A53_EVM
->>   
->> -#define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
->>   #define SPL_AM625_SK_DTB "spl/dts/k3-am625-sk.dtb"
->> -
->> -#define UBOOT_NODTB "u-boot-nodtb.bin"
->>   #define AM625_SK_DTB "u-boot.dtb"
->>   
->>   &binman {
->> @@ -155,55 +152,11 @@
->>   		};
->>   	};
->>   	ti-spl {
->> -		filename = "tispl.bin";
->> -		pad-byte = <0xff>;
->> +		insert-template = <&ti_spl_template>;
->>   
->>   		fit {
->> -			description = "Configuration to load ATF and SPL";
->> -			#address-cells = <1>;
->> -
->>   			images {
->> -
->> -				atf {
->> -					description = "ARM Trusted Firmware";
->> -					type = "firmware";
->> -					arch = "arm64";
->> -					compression = "none";
->> -					os = "arm-trusted-firmware";
->> -					load = <CONFIG_K3_ATF_LOAD_ADDR>;
->> -					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
->> -					ti-secure {
->> -						content = <&atf>;
->> -						keyfile = "custMpk.pem";
->> -					};
+>> Yes, I played with setting up stuff in drivers/mtd/nand/raw/am335x_spl_bch.c
+>> but failed ...
+>>
+>> If I can help you testing, feel free to ask!
 > 
-> For ATF/OP-TEE Firewalling, can you keep these nodes intact? Just keep
-> the ti-secure inside atf and tee nodes similar to how you have done that
-> for DM as all the ATF/OPTEE nodes in the tispl.bin would be different
-> for devices w.r.t certifications but we can still use templates for
-> other common stuff.
+> OK. So I did some tests and we are ending up in a different ECC config on AM335x.
+> The ecc.steps is not set at all by the driver (it is at 0) and so so nsectors gets
+> set to -1 and so 7 (0b111) which is wrong.
 > 
-
-I believe you will still be able to process firewalling by adding the extra 
-parameters in the board binman DTSI file. The reason for retaining DM was 
-different. For example, for J721E:
-
-diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-index 5ddb474e3a..647b5dc629 100644
---- a/arch/arm/dts/k3-j721e-binman.dtsi
-+++ b/arch/arm/dts/k3-j721e-binman.dtsi
-@@ -146,6 +146,27 @@
-
-  		fit {
-  			images {
-+				atf {
-+					ti-secure {
-+						auth-in-place = <0xa02>;
-+
-+						firewall-257-0 {
-+						/* cpu_0_cpu_0_msmc Background Firewall */
-+							id = <257>;
-+							region = <0>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_BG | FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD |
-+											FWPERM_NON_SECURE_PRIV_RWCD |
-+											FWPERM_NON_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x0>;
-+							end_address = <0xff 0xffffffff>;
-+						};
-+					};
-+				};
-+
-  				dm {
-  					ti-secure {
-  						content = <&dm>;
-
-
-I have only checked whether this builds fine without any errors. If you could 
-check whether the intended functionality also works, we should be good.
-
-> With this change,
+> static void __maybe_unused omap_enable_hwecc_bch(struct mtd_info *mtd,
+> 						 int mode)
+> {
+> ...
+> 	case OMAP_ECC_BCH8_CODE_HW:
+> 		bch_type = 1;
+> 		nsectors = chip->ecc.steps;
+> ...
+> 	/* BCH configuration */
+> 	val = ((1			<< 16) | /* enable BCH */
+> 	       (bch_type		<< 12) | /* BCH4/BCH8/BCH16 */
+> 	       (wr_mode			<<  8) | /* wrap mode */
+> 	       (dev_width		<<  7) | /* bus width */
+> -->	       (((nsectors - 1) & 0x7)	<<  4) | /* number of sectors */
+> 	       (info->cs		<<  1) | /* ECC CS */
+> 	       (0x1));	
+> ...
+> }
 > 
-> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> setting chip->ecc.steps needs to be fixed in original commit 
+> c3754e9cc23a ("omap_gpmc: BCH8 support (ELM based)")
 > 
-> Regards,
-> Manorit
->> -					atf: atf-bl31 {
->> -					};
->> -				};
->> -
+> But this will still not fix the issue for AM335x as am335x_spl_bch.c
+> expects 1 sector at a time ECC calculation.
 
-[...]
+Yep...
 
+> I also realized that the error correction logic (ELM) is not in page mode
+> and so is not suitable for multi-sector error correction.
+
+Okay!
+
+> This means we have to revert the commit
+> 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+> 
+> and go back to 1 sector BCH ECC generation and correction.
+
+Uff... I did exactly this to get it working (in first shot) but feared
+sending such a "drastic" patch, as I had the hope to fix "AM335x SPL code",
+as U-Boot part works on AM335x...
+
+What I wonder is that above commit introduced "omap_calculate_ecc_bch_multi"
+but did not use it in SPL! For U-Boot code omap_calculate_ecc_bch_multi is
+used in drivers/mtd/nand/raw/omap_gpmc.c omap_read_page_bch()
+
+but drivers/mtd/nand/raw/am335x_spl_bch.c has no adaption ... so I tried
+to adapt this file... but did not get it up working without digging
+very deep into it...
+
+
+> I will send a patch fix in a day or two after doing some tests at my end.
+
+Okay, thanks!
+
+bye,
+Heiko
 -- 
-Thanking You
-Neha Malcom Francis
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
