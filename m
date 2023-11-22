@@ -4,41 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3168C61D99
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83D8C61D99
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 23:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA45876AA;
-	Thu, 23 Nov 2023 00:31:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 68E03875F8;
+	Thu, 23 Nov 2023 00:38:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CEDFB8766D; Thu, 23 Nov 2023 00:29:32 +0100 (CET)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 0B13587653
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 00:29:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=microsoft.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=seanedmond@microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 431BA20B74C2;
- Wed, 22 Nov 2023 15:29:23 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 431BA20B74C2
-From: Sean Edmond <seanedmond@microsoft.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700696294;
+	bh=vGT+/Uy8IndJex+M9/j7ku0mY5Fq1rd2/CXDtUmHunE=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=gn0/8IyvwHhqvDAkOzJLrrSTV4Rer6JocKtBcMz3dwU5qqxTPvXlUIJKmMzjgd0rB
+	 Yomeae6xjYVIVC9zhSFUZg0kt1Hf4a0wWVt7y2Tap5FVt47inUVXmyo/Yn67/9Cldp
+	 3skGiThx/b1N6I9dCAR/K/dz1BdQDyzBdUjwNpbmy69Bdr68SqYy1epyNtPoLHrsjW
+	 jVKeF3FD7n2IALYpQ03bpy6ox+2LfgT8P/xDUNB0lyPckwNFMijk8PbY25XAZXJ32O
+	 CUCwR6Fz0eHg3XvAgV/6AyR+OWmU1v62FcyQzPxSFH2Jn+cIFDEN3CnxSMOdLEcQiv
+	 DU7yrA8HlwZRA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 911DB863F8;
+ Thu, 23 Nov 2023 00:38:13 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700696293;
+ bh=vGT+/Uy8IndJex+M9/j7ku0mY5Fq1rd2/CXDtUmHunE=;
+ h=From:To:Cc:Subject:Date:From;
+ b=e/O6rz50XKKe5VXCiqBbMIMaO8dYj6v+71ZtK5OUc/iQKm7NEPTID/t9n2cSVmBj/
+ WjyBze+gUO4uRMW6+XTTzMVPBfReb6xr3/o8u1hB2LDjd2cokYpamN6KUQFxNTN4P3
+ uoKDtPivTE58aBNaSUuRK0dO+kDGG3lUX5QBfkfBy3VwIIFlOybCHYP/wdMgbmIfEn
+ /H1lhkZBf4sALhrOJPdx1W8gDyfzhlYj58y8j1Q4LEw9NipPhJfI7uwHf0eUAKfeRG
+ Tky7jd88acTn06s6FhhvdCaeJAaU5+Zp8ANCgOCB5XcKuGI0DcKok4rlbhdpw5yWuI
+ YUezXrguSjKLQ==
+From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, Sean Edmond <seanedmond@microsoft.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Michal Simek <michal.simek@amd.com>, Ramon Fried <rfried.dev@gmail.com>,
- Roger Knecht <rknecht@pm.me>, Simon Glass <sjg@chromium.org>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH v6 3/3] net: bootp: add config option BOOTP_RANDOM_XID
-Date: Wed, 22 Nov 2023 15:27:46 -0800
-Message-ID: <20231122232812.823837-4-seanedmond@microsoft.com>
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH] arm64: imx8mp: Enable TCP, IPv6,
+ wget on Data Modul i.MX8M eDM SBC
+Date: Thu, 23 Nov 2023 00:37:38 +0100
+Message-ID: <20231122233753.64481-1-marex@denx.de>
 X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231122232812.823837-1-seanedmond@microsoft.com>
-References: <20231122232812.823837-1-seanedmond@microsoft.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -57,89 +65,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The new config option BOOTP_RANDOM_XID will randomize the transaction ID
-for each new BOOT/DHCPv4 exchange.
+Enable support for TCP protocol, wget, and IPv6 on this platform.
+The former two allow users download payload into the U-Boot from
+a web server, which may be more convenient or easier to set up
+than TFTP server. The later is enabled to future proof the IP
+stack on this platform.
 
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Stefano Babic <sbabic@denx.de>
+---
+ configs/imx8mm_data_modul_edm_sbc_defconfig | 5 +++++
+ configs/imx8mp_data_modul_edm_sbc_defconfig | 5 +++++
+ 2 files changed, 10 insertions(+)
 
-(no changes since v5)
-
-Changes in v5:
-- fix depends for BOOTP_RANDOM_XID:
-  "depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)"
-
-Changes in v3:
-- Add depends for BOOTP_RANDOM_XID
-
- cmd/Kconfig |  7 +++++++
- net/bootp.c | 31 +++++++++++++++++--------------
- 2 files changed, 24 insertions(+), 14 deletions(-)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 6b7c5e6d521..8204f72f6ac 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1853,6 +1853,13 @@ config BOOTP_VCI_STRING
- 	default "U-Boot.arm" if ARM
- 	default "U-Boot"
- 
-+config BOOTP_RANDOM_XID
-+	bool "Send random transaction ID to BOOTP/DHCP server"
-+	depends on CMD_BOOTP && (LIB_RAND || LIB_HW_RAND)
-+	help
-+	  Selecting this will allow for a random transaction ID to get
-+	  selected for each BOOTP/DHCPv4 exchange.
-+
- if CMD_DHCP6
- 
- config DHCP6_PXE_CLIENTARCH
-diff --git a/net/bootp.c b/net/bootp.c
-index 89425717328..49cd9064436 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -837,22 +837,25 @@ void bootp_request(void)
- 
- 	/* Only generate a new transaction ID for each new BOOTP request */
- 	if (bootp_try == 1) {
--		/*
--		 *	Bootp ID is the lower 4 bytes of our ethernet address
--		 *	plus the current time in ms.
--		 */
--		bootp_id = ((u32)net_ethaddr[2] << 24)
--			| ((u32)net_ethaddr[3] << 16)
--			| ((u32)net_ethaddr[4] << 8)
--			| (u32)net_ethaddr[5];
--		bootp_id += get_timer(0);
--		bootp_id = htonl(bootp_id);
--		bootp_add_id(bootp_id);
--		net_copy_u32(&bp->bp_id, &bootp_id);
--	} else {
--		net_copy_u32(&bp->bp_id, &bootp_id);
-+		if (IS_ENABLED(CONFIG_BOOTP_RANDOM_XID)) {
-+			srand(get_ticks() + rand());
-+			bootp_id = rand();
-+		} else {
-+			/*
-+			 *	Bootp ID is the lower 4 bytes of our ethernet address
-+			 *	plus the current time in ms.
-+			 */
-+			bootp_id = ((u32)net_ethaddr[2] << 24)
-+				| ((u32)net_ethaddr[3] << 16)
-+				| ((u32)net_ethaddr[4] << 8)
-+				| (u32)net_ethaddr[5];
-+			bootp_id += get_timer(0);
-+			bootp_id = htonl(bootp_id);
-+		}
- 	}
- 
-+	bootp_add_id(bootp_id);
-+	net_copy_u32(&bp->bp_id, &bootp_id);
- 	/*
- 	 * Calculate proper packet lengths taking into account the
- 	 * variable size of the options field
+diff --git a/configs/imx8mm_data_modul_edm_sbc_defconfig b/configs/imx8mm_data_modul_edm_sbc_defconfig
+index b015707ccec..3b76207227e 100644
+--- a/configs/imx8mm_data_modul_edm_sbc_defconfig
++++ b/configs/imx8mm_data_modul_edm_sbc_defconfig
+@@ -108,6 +108,9 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_SDP=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_DHCP=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_PXE=y
+@@ -148,6 +151,8 @@ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_SPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
+diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
+index ae1a48c6812..7ee454076c6 100644
+--- a/configs/imx8mp_data_modul_edm_sbc_defconfig
++++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
+@@ -114,6 +114,9 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_SDP=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_DHCP=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_PXE=y
+@@ -155,6 +158,8 @@ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_SPL_DM=y
+ CONFIG_REGMAP=y
+ CONFIG_SYSCON=y
 -- 
 2.42.0
 
