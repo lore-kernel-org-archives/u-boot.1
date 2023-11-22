@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CFEEC072A2
-	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 05:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EAEC072A2
+	for <u-boot@archiver.kernel.org>; Wed, 22 Nov 2023 05:52:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFD728749C;
-	Wed, 22 Nov 2023 06:31:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EB7DD87582;
+	Wed, 22 Nov 2023 06:52:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jxUkwYdg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HkbB6j0A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B02D5874C7; Wed, 22 Nov 2023 06:31:03 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8952487574; Wed, 22 Nov 2023 06:52:21 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E30E87156
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 06:31:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DD768725C
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 06:52:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ABA2661BD9
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:30:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57DA5C433C7
- for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 05:30:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1700631059;
- bh=LxgqrVsExp18X41sj9jZd0qVqv8p2H0pjBZVzDy55KE=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=jxUkwYdg3kdZ5KXh4SvcysIoWYZYZJLWSjXFQj4xu5Kiu/SAIXuW5QvGasMaC3ME0
- w1nefyg+krajFl9lPlTJCVjVSIxuIMGt4hIHEUeqhtFJyG61lvzBAEPwXg/ep5Uf1w
- FVXJVrhUlyLRoTP9KoTiIUrnFO/F/pTkq/m1I5XplwuTwzQwWHe8XNgaEpJCqFyUnx
- WSLJToOep18aMJi4WVDUVgIeHuWLwGA1wO96rrpgyeFmmSCcfnYS4Zk9UKXoFFZQ7e
- e0nJrHa51p0go92sCMWIJG8YGfxvNiDzqSzaCdP2iA1AsdBu1EPnGYwQXgBcL8/Eu+
- j2rdQAvpKZllw==
-Received: by mail-ot1-f42.google.com with SMTP id
- 46e09a7af769-6d7e51638e7so788300a34.1
- for <u-boot@lists.denx.de>; Tue, 21 Nov 2023 21:30:59 -0800 (PST)
-X-Gm-Message-State: AOJu0YzPH+RX8P98X+ctB8MUdJSl1Nc7HbljJJY/QsbCeQc/TYpquNzH
- tlJN9DX+bgPU6uYTAu5IPzj9QjBia5cJrXKVcbY=
-X-Google-Smtp-Source: AGHT+IHWrSTNFAHs6ffKq7KsequdWmSrsTRwhnDAtkAsnz08m90bcY6ZGzSd6zqLwWU4eDcbsP0u4twzBdviXy0n29Y=
-X-Received: by 2002:a05:6870:3d86:b0:1f9:5ef5:44df with SMTP id
- lm6-20020a0568703d8600b001f95ef544dfmr1889861oab.14.1700631058773; Tue, 21
- Nov 2023 21:30:58 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AM5qBZw004439;
+ Tue, 21 Nov 2023 23:52:11 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700632331;
+ bh=ZKd+IrVlMjBDpdkajOcr7bnfc/uyrHNNQeRCGXxDevs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=HkbB6j0A8eoz8niWB0ySEM2yzw7ylBJ/JDDeqJPLpxy8hGvQysWfhjskbwCXtpZmJ
+ YQbbzp4DHYPtnukYwmd24iWma6X3XOItSSZzK3U4Sidzf+oriJQnBWNFJ/j4KcHhPJ
+ a1HDx03vX33l56LwDRYY7c4487jVPhRMWY0VkCNU=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AM5qBWI088363
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 21 Nov 2023 23:52:11 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 21
+ Nov 2023 23:52:11 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 21 Nov 2023 23:52:11 -0600
+Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AM5q7XJ112976;
+ Tue, 21 Nov 2023 23:52:08 -0600
+Message-ID: <d57ffe06-4f4a-4fa7-89ad-4527769a3389@ti.com>
+Date: Wed, 22 Nov 2023 11:22:07 +0530
 MIME-Version: 1.0
-References: <20231119150229.634424-1-sjg@chromium.org>
- <20231119150229.634424-2-sjg@chromium.org>
-In-Reply-To: <20231119150229.634424-2-sjg@chromium.org>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Wed, 22 Nov 2023 14:30:22 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAR-4LbTWQ+V4Kq1FOevxxw=wfJ1OxHpqLyc1d+e54qjMw@mail.gmail.com>
-Message-ID: <CAK7LNAR-4LbTWQ+V4Kq1FOevxxw=wfJ1OxHpqLyc1d+e54qjMw@mail.gmail.com>
-Subject: Re: [PATCH v6 1/2] kbuild: arm64: Add BOOT_TARGETS variable
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] arm: dts: k3-*-binman: Move to using templated FITs
+Content-Language: en-US
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <sjg@chromium.org>, <marcel.ziswiler@toradex.com>, <u-boot@lists.denx.de>, 
+ <vigneshr@ti.com>, <nm@ti.com>, <u-kumar1@ti.com>, <kamlesh@ti.com>,
+ <afd@ti.com>, <mkorpershoek@baylibre.com>
+References: <20231115101024.3441093-1-n-francis@ti.com>
+ <20231115101024.3441093-3-n-francis@ti.com>
+ <20231122052045.2hdlhvag6lz3t3pk@uda0497581>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231122052045.2hdlhvag6lz3t3pk@uda0497581>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,75 +83,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 20, 2023 at 12:02=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> Add a new variable containing a list of possible targets. Mark them as
-> phony. This matches the approach taken for arch/arm
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Hi Manorit
+
+On 22/11/23 10:50, Manorit Chawdhry wrote:
+> Hi Neha,
+> 
+> On 15:40-20231115, Neha Malcom Francis wrote:
+>> Reduce redundancy in code by using templates to generate the A72 boot
+>> binaries (tispl.bin and u-boot.img) as well as R5 boot binary sysfw.itb
+>> (for legacy boot following devices J721E and AM65x).
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 157 +--------
+>>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 155 +-------
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 158 +--------
+>>   arch/arm/dts/k3-am64x-binman.dtsi             | 151 +-------
+>>   arch/arm/dts/k3-am65x-binman.dtsi             | 273 +-------------
+>>   arch/arm/dts/k3-j7200-binman.dtsi             | 159 +--------
+>>   arch/arm/dts/k3-j721e-binman.dtsi             | 332 +-----------------
+>>   arch/arm/dts/k3-j721s2-binman.dtsi            | 157 +--------
+>>   8 files changed, 54 insertions(+), 1488 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
+>> index 41277bf4bf..b7b5368886 100644
+>> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
+>> @@ -141,10 +141,7 @@
+>>   
+>>   #ifdef CONFIG_TARGET_AM625_A53_EVM
+>>   
+>> -#define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
+>>   #define SPL_AM625_SK_DTB "spl/dts/k3-am625-sk.dtb"
+>> -
+>> -#define UBOOT_NODTB "u-boot-nodtb.bin"
+>>   #define AM625_SK_DTB "u-boot.dtb"
+>>   
+>>   &binman {
+>> @@ -155,55 +152,11 @@
+>>   		};
+>>   	};
+>>   	ti-spl {
+>> -		filename = "tispl.bin";
+>> -		pad-byte = <0xff>;
+>> +		insert-template = <&ti_spl_template>;
+>>   
+>>   		fit {
+>> -			description = "Configuration to load ATF and SPL";
+>> -			#address-cells = <1>;
+>> -
+>>   			images {
+>> -
+>> -				atf {
+>> -					description = "ARM Trusted Firmware";
+>> -					type = "firmware";
+>> -					arch = "arm64";
+>> -					compression = "none";
+>> -					os = "arm-trusted-firmware";
+>> -					load = <CONFIG_K3_ATF_LOAD_ADDR>;
+>> -					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
+>> -					ti-secure {
+>> -						content = <&atf>;
+>> -						keyfile = "custMpk.pem";
+>> -					};
+> 
+> For ATF/OP-TEE Firewalling, can you keep these nodes intact? Just keep
+> the ti-secure inside atf and tee nodes similar to how you have done that
+> for DM as all the ATF/OPTEE nodes in the tispl.bin would be different
+> for devices w.r.t certifications but we can still use templates for
+> other common stuff.
+> 
+
+I believe you will still be able to process firewalling by adding the extra 
+parameters in the board binman DTSI file. The reason for retaining DM was 
+different. For example, for J721E:
+
+diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+index 5ddb474e3a..647b5dc629 100644
+--- a/arch/arm/dts/k3-j721e-binman.dtsi
++++ b/arch/arm/dts/k3-j721e-binman.dtsi
+@@ -146,6 +146,27 @@
+
+  		fit {
+  			images {
++				atf {
++					ti-secure {
++						auth-in-place = <0xa02>;
++
++						firewall-257-0 {
++						/* cpu_0_cpu_0_msmc Background Firewall */
++							id = <257>;
++							region = <0>;
++							control = <(FWCTRL_EN | FWCTRL_LOCK |
++										FWCTRL_BG | FWCTRL_CACHE)>;
++							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
++											FWPERM_SECURE_PRIV_RWCD |
++											FWPERM_SECURE_USER_RWCD |
++											FWPERM_NON_SECURE_PRIV_RWCD |
++											FWPERM_NON_SECURE_USER_RWCD)>;
++							start_address = <0x0 0x0>;
++							end_address = <0xff 0xffffffff>;
++						};
++					};
++				};
++
+  				dm {
+  					ti-secure {
+  						content = <&dm>;
 
 
+I have only checked whether this builds fine without any errors. If you could 
+check whether the intended functionality also works, we should be good.
 
-I encounter difficulty in understanding your subject prefix policy.
+> With this change,
+> 
+> Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> 
+> Regards,
+> Manorit
+>> -					atf: atf-bl31 {
+>> -					};
+>> -				};
+>> -
 
+[...]
 
-You used the "arm:" prefix for a patch irrelevant to arm:
-https://lore.kernel.org/linux-kbuild/CAK7LNAQN_qGYztWGDmQyfg+eZ5P7RkM47mpgp=
-0dQn_iuhvTSWg@mail.gmail.com/
-
-
-
-
-And, the one for this patch.
-
-"kbuild: arm64: Add BOOT_TARGETS variable"
-
-Please do not add "kbuild:" for a patch
-that modifies arch/arm64, and that was not even
-submitted to kbuild ML.
-
-
-
-
-> ---
->
-> Changes in v6:
-> - Drop the unwanted .gz suffix
->
->  arch/arm64/Makefile | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-> index 4bd85cc0d32b..ae0c5ee8c78b 100644
-> --- a/arch/arm64/Makefile
-> +++ b/arch/arm64/Makefile
-> @@ -150,6 +150,10 @@ libs-$(CONFIG_EFI_STUB) +=3D $(objtree)/drivers/firm=
-ware/efi/libstub/lib.a
->  # Default target when executing plain make
->  boot           :=3D arch/arm64/boot
->
-> +BOOT_TARGETS   :=3D Image vmlinuz.efi
-> +
-> +PHONY +=3D $(BOOT_TARGETS)
-> +
->  ifeq ($(CONFIG_EFI_ZBOOT),)
->  KBUILD_IMAGE   :=3D $(boot)/Image.gz
->  else
-> @@ -159,7 +163,7 @@ endif
->  all:   $(notdir $(KBUILD_IMAGE))
->
->
-> -Image vmlinuz.efi: vmlinux
-> +$(BOOT_TARGETS): vmlinux
->         $(Q)$(MAKE) $(build)=3D$(boot) $(boot)/$@
->
->  Image.%: Image
-> --
-> 2.43.0.rc0.421.g78406f8d94-goog
->
-
-
---
-Best Regards
-Masahiro Yamada
+-- 
+Thanking You
+Neha Malcom Francis
