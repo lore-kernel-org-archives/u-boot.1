@@ -4,87 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9008BC5AD4C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:24:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D58C5AD4C
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:36:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D31A4875F2;
-	Thu, 23 Nov 2023 12:24:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C00486DC3;
+	Thu, 23 Nov 2023 12:36:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="VTkVAehP";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="zMUyp2MZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BD608760C; Thu, 23 Nov 2023 12:24:55 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id BEB3C86D94; Thu, 23 Nov 2023 12:35:58 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18A1D86FB2
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:24:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6F3786E24
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:35:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-548a2c20f50so1015485a12.1
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:24:53 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9fd0059a967so360198266b.1
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:35:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700738692; x=1701343492;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700739356; x=1701344156;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zPw+bMY4E7Dpj/4cMaGBweh9u4HbozSb7cMBLhRBdo0=;
- b=VTkVAehPC/56rZeGYuKZ7mrO5HVJ4CVC3Gogry7STJ3ureocf1WAuAfI+0xrkBXzAX
- fDU3qreNZ0lLWZO9BUOigOJrmd+7+5SgvHavUxEMp6e709a4eD+Hty2h5jde+tSqDAOQ
- tkb+QzwdfbpwUXnUBW+D3VnG2+KUFVLT+zuVo3DJ1pNEc/ePtCeMJ+C7Hgb1WF6MvRII
- tTz7rSldbfhGYhzW6oG5ZNys9oDjxgCv2kX3NytBl2lcC/HgHSintPlkpU+96l9JTYll
- c9rBFzxxjEiDDTSnI2gKaP3VWFtnzdrzD0YEsR6EDdDJO30yi0ikyfvSzznSPHgGV1Aj
- BxSA==
+ bh=lBEp3qvgvln21EGbvmnicat0zLV4wSQ8Zdc8VZJfenc=;
+ b=zMUyp2MZqA2Yx0O0ew6x74vZ0CnWaonkwNIQSvVFKO5vuBNWRQbJh+sQ//koqoXVIX
+ b93zx360xPi3/bZ+LgahqPAH35+1OSuFzF3UdorUzd+SfTkLoAyGhafylglBT/4gaGf+
+ IJNXVR316BL97AGhvCj/AgDnxupEXhBnafSwY8sFbR3tndt3yY1KX1CkVb/7UBWL4Iur
+ zCnf4hOUjXpSoKyezbY1BTWrXH1YsEfx4tNbFH9cl3JZ0bhmltkNmlKkJMpq5q8LcueX
+ wzrSgZ6vClyelyM//5y5jzUd+l66Rvh8SQcbEfisusYR8J1+zLNZEddi0qTRygnuzQ1l
+ 5Mmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700738692; x=1701343492;
+ d=1e100.net; s=20230601; t=1700739356; x=1701344156;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zPw+bMY4E7Dpj/4cMaGBweh9u4HbozSb7cMBLhRBdo0=;
- b=UbK9hVwu6EV89Uv0zI2kGlAq62mz6NSIouHLU5qCsqWXtawt718KBE8UjfOAhKPqpk
- bO7jm3y649NgmrrIyu5OKYi6TUFg9v4de4lsY4ACkS/O2Ob2/JcHTY/rpKaCvLM9Rjs7
- mR+exvxoswsmxBrS3jenGFuehA54Y6fitP7aL9EX3A4/nF/Uw5jFs2bLfNFg2S07bX7d
- x1a0BGXB0rO3eOIbCmDjAypa2c7Y1lvC0B0VWiQg0MZC3xHUDsd1HL+zov6GRHHBTa8J
- +v9MH+alUjSzIlZvsxm5ezVphvDtHqZI5X3n02jvmZZ8UkLLGy/pJpafvp7Z95qewIPn
- ouTw==
-X-Gm-Message-State: AOJu0Yxwhg2usqm/3SMjA8VfNPI7I4EbASJI1pu4b8i/F9Dz7ahekWnH
- Vpe+Kk69htIZk+o70S73KhxZAyshNylo/M0n5yU=
-X-Google-Smtp-Source: AGHT+IGJ2JG++/xt4Dj3Kxsh1KiqbkwjKVVjWRGDR5SxEnvZ5HTgAffawSLx7jgoExKFqY5c1su12g==
-X-Received: by 2002:aa7:d8cb:0:b0:543:52be:e6ad with SMTP id
- k11-20020aa7d8cb000000b0054352bee6admr4591545eds.5.1700738692293; 
- Thu, 23 Nov 2023 03:24:52 -0800 (PST)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com.
- [209.85.208.43]) by smtp.gmail.com with ESMTPSA id
- e12-20020a50fb8c000000b0053e88c4d004sm521256edq.66.2023.11.23.03.24.51
+ bh=lBEp3qvgvln21EGbvmnicat0zLV4wSQ8Zdc8VZJfenc=;
+ b=cBkkn1ytCA0KlHplK1e8K6norHxc0XBRokcbSyFDLOOG3SdvSxmGKZk9qEIHQp5Lmn
+ QlwAHS+li4dsHe9nAclMvu36vAplDJCWD/t2KR4BQg7if/1W4BBvuVOtRUrGmzDNunEt
+ F3iQLH76kdf9pDhVFY3S5ZDQjNjwQAlEecqfcw2+RAat91RU0McRUoNidpIQucDWS1tb
+ f2en8OLf4xTKVZIe82hqQxKC7OqZsosjfV4XjH1Qp9mljLrJIKpHxtvxG0eLZCWkXSAC
+ cHZMmUaPHEJDIul1IYHJvRKuFyDFOeF3dt98iTDqFyuRkisGIz46cjNS0KZ2VynoQ5A1
+ jn7Q==
+X-Gm-Message-State: AOJu0YwHLdtThOcpK4PHmImRoITXrz6Kd7vYLdjM7MLGBlkmE4wkM0Wo
+ 97aVP+M5juc+0l4h9x6So9ArJ5rtFxG3yQBnMAAcrA==
+X-Google-Smtp-Source: AGHT+IGeRGLf7fv7SfUOxLAEPZQkEV09AbKAlGPCEcDv8GZywPXsuumwUqVRzAKpOHcL7b9Zf4JIJw==
+X-Received: by 2002:a17:907:c008:b0:a01:d701:2f1d with SMTP id
+ ss8-20020a170907c00800b00a01d7012f1dmr2734990ejc.14.1700739355985; 
+ Thu, 23 Nov 2023 03:35:55 -0800 (PST)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com.
+ [209.85.208.48]) by smtp.gmail.com with ESMTPSA id
+ n18-20020a17090625d200b009fe1d575365sm678453ejb.55.2023.11.23.03.35.52
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Nov 2023 03:24:51 -0800 (PST)
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-548a2c20f50so1015449a12.1
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:24:51 -0800 (PST)
-X-Received: by 2002:a17:907:371:b0:a02:9700:bf53 with SMTP id
- rs17-20020a170907037100b00a029700bf53mr3518855ejb.46.1700738691036; Thu, 23
- Nov 2023 03:24:51 -0800 (PST)
+ Thu, 23 Nov 2023 03:35:53 -0800 (PST)
+Received: by mail-ed1-f48.google.com with SMTP id
+ 4fb4d7f45d1cf-54a94e68fb1so1951639a12.0
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:35:52 -0800 (PST)
+X-Received: by 2002:a17:906:6c88:b0:a04:7de1:4dea with SMTP id
+ s8-20020a1709066c8800b00a047de14deamr1870497ejr.24.1700739351850; Thu, 23 Nov
+ 2023 03:35:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20231110141311.512334-1-i@shantur.com>
- <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
- <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
- <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
-In-Reply-To: <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
+References: <20231119191202.667180-1-sjg@chromium.org>
+ <20231119121144.v5.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+ <CAHc5_t0k+Kv9PoZuLiYaMpJAFOmz7OB_Q-eyKTCoa9LToceMNg@mail.gmail.com>
+ <CAPnjgZ0GrOTSFUaeUjhECS2Mm7=bs4+HYxLfmkPk_FkPdEeVXQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0GrOTSFUaeUjhECS2Mm7=bs4+HYxLfmkPk_FkPdEeVXQ@mail.gmail.com>
 From: Shantur Rathore <i@shantur.com>
-Date: Thu, 23 Nov 2023 11:24:39 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
-Message-ID: <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>
+Date: Thu, 23 Nov 2023 11:35:40 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t3yx3kjPG2qjmB46fbHoeqNOfuz6h_4W-W7TM4mU7psbA@mail.gmail.com>
+Message-ID: <CAHc5_t3yx3kjPG2qjmB46fbHoeqNOfuz6h_4W-W7TM4mU7psbA@mail.gmail.com>
+Subject: Re: [PATCH v5 05/12] usb: Avoid unbinding devices in use by bootflows
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Safae Ouajih <souajih@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -103,84 +109,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Simon,
 
-On Thu, Nov 23, 2023 at 12:06=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+On Tue, Nov 21, 2023 at 2:17=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> On 11/20/23 00:03, Shantur Rathore wrote:
-> > Hi Marek,
+> Hi Shantur,
 >
-> Hi,
->
-> > On Sun, Nov 19, 2023 at 8:53=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
-> >>
-> >> On 11/10/23 15:13, Shantur Rathore wrote:
-> >>> Currently when a hub is turned on, all the ports are powered on.
-> >>> This works well for hubs which have individual power control.
-> >>>
-> >>> For the hubs without individual power control this has no effect.
-> >>
-> >> OK
-> >>
-> >>> Mostly in these scenarios the hub port is powered before the USB
-> >>> controller is enabled, this can lead to some devices in unexpected
-> >>> state.
-> >>
-> >> This ^ part needs clarification.
-> >>
-> >> Which devices are in incorrect state, the ones connected to the hub
-> >> downstream facing ports ?
-> >>
+> On Sun, 19 Nov 2023 at 15:47, Shantur Rathore <i@shantur.com> wrote:
 > >
-> > In my case RockPro64, the power to usb ports onboard is controlled by
-> > a regulator.
-> > This regulator is enabled as part of init  as here
-> > https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3399-rockpr=
-o64.dtsi#L177
+> > Hi Simon,
 > >
-> > On init, the usb devices connected to the port are powered up, in my
-> > case AM8180 (a RTL9210 based ) NVMe to USB enclosure with UAS.
-> > But the usb controller is only enabled at 'usb start' and by this time
-> > the device is in some state that it doesn't get detected.
+> > On Sun, Nov 19, 2023 at 7:12=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > When a USB device is unbound, it causes any bootflows attached to it =
+to
+> > > be removed, via a call to bootdev_clear_bootflows() from
+> > > bootdev_pre_unbind(). This obviously makes it impossible to boot the
+> > > bootflow.
+> > >
+> > > However, when booting a bootflow that relies on USB, usb_stop() is
+> > > called, which unbinds the device. At that point any information
+> > > attached to the bootflow is dropped.
+> > >
+> > > This is quite risky since the contents of freed memory are not
+> > > guaranteed to remain unchanged. Depending on what other options are
+> > > done before boot, a hard-to-find bug may crop up.
+> > >
+> > > There is no need to unbind all the USB devices just to quiesce them.
+> > > Add a new usb_pause() call which removes them but leaves them bound.
+> > >
 > >
-> > One way to make sure the devices connected to the ports are in an
-> > initialising state is by issuing a port reset before scanning the
-> > port.
+> > I am no UEFI / bootloader expert and while trying to gather more info
+> > on EFI ExitBootServies I came across this
+> > https://github.com/tianocore-docs/edk2-UefiDriverWritersGuide/blob/mast=
+er/7_driver_entry_point/77_adding_the_exit_boot_services_feature.md
+> >
+> > If I understand this correctly, EFI ( U-boot in this case) should be
+> > halting all USB controllers like done in usb_stop()
+> > Is my understanding correct?
 >
-> Why not remove this regulator-always-on and let the PHY driver turn the
-> VBUS ON only when it is needed ?
+> Yes, that is correct. The dm_remove_devices_flags() call should do
+> that. The code in bootm_disable_interrupts() is a hangover from the
+> pre-driver model days, I suspect.
 >
-> Wouldn't that solve the problem too AND remove unnecessarily enabled
-> regulator ?
+> Perhaps we should also remove the eth_halt() and usb_pause() from
+> bootm_disable_interrupts() ?
 >
-> [...]
 
-Removing the regulator-always-on does make it work but there are few issues
+Apologies for delayed response.
+In this case, I think we should remove eth_halt() and
+usb_stop() (there is no usb_pause() ) from bootm_disable_interrupts().
 
-1. regulator is used to control power to multiple ports ( USB3.0 and
-USB2.0 in RockPro64 ),
-so this could lead to all ports turning off if a phy resets / turns off pow=
-er
-2. Even with regulator-always-on and without this reset port patch,
-linux was always
-able to detect the drive on the port, so there is something missing in u-bo=
-ot.
-3. Looking at usb hub code in Linux, I found that for USB3.0 it tries
-to reset the port before
-scanning. The comment says
-
-/* Is a USB 3.0 port in the Inactive or Compliance Mode state?
- * Port warm reset is required to recover
- */
-
-i. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L57=
-36
-ii. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2=
-836
-
-I believe this isn't implemented in u-boot and hence explicit reset of
-a port fixes the issue.
+No point stopping things twice.
 
 Kind regards,
 Shantur
