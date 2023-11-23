@@ -4,42 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D91C61D97
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 17:20:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9489AC61D97
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 17:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66A2486BAC;
-	Thu, 23 Nov 2023 18:20:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id F3FC68765E;
+	Thu, 23 Nov 2023 18:22:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SgJ61KtL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E18B8875AA; Thu, 23 Nov 2023 18:20:18 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 016FB8622B
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 18:20:17 +0100 (CET)
+ id A2BF886BDB; Thu, 23 Nov 2023 18:22:21 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EDC587620
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 18:22:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E82C11042;
- Thu, 23 Nov 2023 09:21:02 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 053953F7A6;
- Thu, 23 Nov 2023 09:20:15 -0800 (PST)
-Date: Thu, 23 Nov 2023 17:20:13 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Robert Catherall <robert.catherall@arm.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] arm: afs: Set the filesize env. var. on load
-Message-ID: <20231123172013.6558fbd3@donnerap.manchester.arm.com>
-In-Reply-To: <20231123141601.28056-1-robert.catherall@arm.com>
-References: <20231123141601.28056-1-robert.catherall@arm.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ANHMGIB006575;
+ Thu, 23 Nov 2023 11:22:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1700760136;
+ bh=0FcT+CcpQdok09y75hHFiZenRVQDoJac/K+4a6M4RuA=;
+ h=From:To:CC:Subject:Date;
+ b=SgJ61KtL3abTnnDceb5BP2AnTLwQRvHGFFLfaEbT/RSnIwNVIMv4AFpLcaxCcWc8i
+ IO7FJkimsRoPpgFS5OVZtWTaSM7qixi7jPzQe71uXb66S6Fw/vYs8glLlzPPVHt2Ue
+ WA4i7EIx5Z11fVUrOiDVuejFvU9EtOty3E4G1bA4=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ANHMGAn129381
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 23 Nov 2023 11:22:16 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
+ Nov 2023 11:22:16 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 23 Nov 2023 11:22:16 -0600
+Received: from lelv0326.itg.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ANHMFvW114031;
+ Thu, 23 Nov 2023 11:22:15 -0600
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Apurva Nandan
+ <a-nandan@ti.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH 0/3] Unify K3 initial memory map
+Date: Thu, 23 Nov 2023 11:22:11 -0600
+Message-ID: <20231123172214.653268-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,69 +79,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 23 Nov 2023 14:16:01 +0000
-Robert Catherall <robert.catherall@arm.com> wrote:
+Hello all,
 
-Hi Robert,
+This was an RFC as it might still break remoteproc loading, but
+posted now for merge as worst case this would expose the issue
+in remoteproc loading better and force someone to go fix it. :)
 
-> The `afs load` command copies data to RAM. Set the filesize
-> environment variable to record how much data was 'loaded'
+Changes for non-RFC:
+ - Included dependency patch from here[0] into this series
+ - Add Tested-bys
+ - Rebase on latest -next
 
-Thanks for sending this, I realised this was indeed missing just recently!
+Thanks,
+Andrew
 
-> Signed-off-by: Robert Catherall <robert.catherall@arm.com>
+[0] https://lore.kernel.org/all/20231122211218.607757-1-afd@ti.com/
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-Tested-by: Andre Przywara <andre.przywara@arm.com>
+Andrew Davis (3):
+  arm: mach-k3: Let the compiler size the mem_map lists
+  arm: mach-k3: Remove non-cached memory map areas
+  arm: mach-k3: Merge initial memory maps
 
-Cheers,
-Andre
+ arch/arm/mach-k3/arm64-mmu.c | 275 +----------------------------------
+ 1 file changed, 2 insertions(+), 273 deletions(-)
 
-> ---
->  cmd/armflash.c | 12 ++++++++++--
->  1 file changed, 10 insertions(+), 2 deletions(-)
-> 
-> diff --git a/cmd/armflash.c b/cmd/armflash.c
-> index d1466f73aa..fdaea5ad81 100644
-> --- a/cmd/armflash.c
-> +++ b/cmd/armflash.c
-> @@ -180,6 +180,7 @@ static int load_image(const char * const name, const ulong address)
->  {
->  	struct afs_image *afi = NULL;
->  	int i;
-> +	loff_t len_read = 0;
->  
->  	parse_flash();
->  	for (i = 0; i < num_afs_images; i++) {
-> @@ -197,6 +198,7 @@ static int load_image(const char * const name, const ulong address)
->  
->  	for (i = 0; i < afi->region_count; i++) {
->  		ulong from, to;
-> +		u32 size;
->  
->  		from = afi->flash_mem_start + afi->regions[i].offset;
->  		if (address) {
-> @@ -208,14 +210,20 @@ static int load_image(const char * const name, const ulong address)
->  			return CMD_RET_FAILURE;
->  		}
->  
-> -		memcpy((void *)to, (void *)from, afi->regions[i].size);
-> +		size = afi->regions[i].size;
-> +		memcpy((void *)to, (void *)from, size);
->  
->  		printf("loaded region %d from %08lX to %08lX, %08X bytes\n",
->  		       i,
->  		       from,
->  		       to,
-> -		       afi->regions[i].size);
-> +		       size);
-> +
-> +		len_read += size;
->  	}
-> +
-> +	env_set_hex("filesize", len_read);
-> +
->  	return CMD_RET_SUCCESS;
->  }
->  
+-- 
+2.39.2
 
