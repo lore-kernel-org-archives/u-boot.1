@@ -4,38 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B83C5AD4C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 18:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37E2C5AD4C
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 20:45:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9496087572;
-	Thu, 23 Nov 2023 19:23:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=foss.arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 0ADB886C83;
+	Thu, 23 Nov 2023 21:45:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="wEUPXV+A";
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="hezt6Yty";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EC6B87572; Thu, 23 Nov 2023 19:23:22 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id F2A0886FED
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 19:23:06 +0100 (CET)
+ id 2609C87499; Thu, 23 Nov 2023 21:45:33 +0100 (CET)
+Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CE1588622B
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 21:45:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=foss.arm.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=robert.catherall@foss.arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B38A61042;
- Thu, 23 Nov 2023 10:23:52 -0800 (PST)
-Received: from e123340-lin.cambridge.arm.com (e123340-lin.cambridge.arm.com
- [10.2.75.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E4FF3F7A6;
- Thu, 23 Nov 2023 10:23:05 -0800 (PST)
-From: robert.catherall@foss.arm.com
-To: robert.catherall@arm.com,
-	u-boot@lists.denx.de
-Cc: andre.przywara@arm.com,
-	liviu.dudau@foss.arm.com
-Subject: [PATCH] arm: vexpress64: juno: Allow boot from VirtIO
-Date: Thu, 23 Nov 2023 18:22:58 +0000
-Message-Id: <20231123182258.15928-1-robert.catherall@foss.arm.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id 741c3159;
+ Thu, 23 Nov 2023 20:45:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=jw
+ j8FPecdf928c/6bwPZ7OrB7ps=; b=wEUPXV+AAZGwowAUj2e+Qg2i+CqaUmCCWy
+ TSiSuJfCikRRKmL6DylWf4ot83TC8XhQSQkSwtHE+9uac9lNAPhYS4Ju8uXPFooP
+ eJMUWbnlpA1+8KCPFz8qVv7IlWldB3v6lUIFrCoMjC43hKcjibQAWr+Yg2LvVBD7
+ p8u8ExOr4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ zXmr3175oYKc1+sGcVTJFY9dQYPJ9nmEpUw78EDS2/AemoGTJqgdtCuSOZ8ZS4hs
+ vhV5XsPargCtBqLsJVa/56ScPWFSo8cp1ubAr5fEe2REa616mwlCDzSKLqwknKUV
+ jh8mmp52nEd1o3NLH7rILrVdR+hhdbDKPEkxu2B5q3k=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1700772324;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ftUhLfihG7BT8CUITeESFt1T08QYAk6Q0W9Qn9NkZPI=;
+ b=hezt6Ytys2kqTrG1yQc5/q0FT77LA+oOZOfKqt7LDTZovTEq9DLNdrdyUo1nLvXC4zvv+P
+ 4F/vBxkrXNXIWYvzoHmBW9T2n6UTyPSJ4F3be6n/Y5TmUEC/jaDavbB/m3ypqssg6ymk8C
+ d3aDv5Js1fiuibfC5ysjmDYoJWGyeDA=
+Received: from [192.168.0.2] (host-87-1-222-220.retail.telecomitalia.it
+ [87.1.222.220])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 9381caf5
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Thu, 23 Nov 2023 20:45:24 +0000 (UTC)
+Message-ID: <cf41bc6d-b27e-0ecc-35d6-43a36c602c46@kernel-space.org>
+Date: Thu, 23 Nov 2023 21:44:50 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Betterbird/102.11.0
+Subject: Re: [PATCH 04/11] m68k: Rework asm/global_data.h slightly
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Huan Wang <alison.wang@nxp.com>
+References: <20231122131154.2444690-1-trini@konsulko.com>
+ <20231122131154.2444690-4-trini@konsulko.com>
+ <8d7b5e58-031b-d3bd-7270-b19c8e2a13cd@kernel-space.org>
+ <20231122210903.GT2513409@bill-the-cat>
+Content-Language: en-US, it
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20231122210903.GT2513409@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,33 +90,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Robert Catherall <robert.catherall@arm.com>
+Hi Tom,
 
-The AEM and Juno FVPs (Fixed Virtual Platforms) support a VirtIO
-disc interface. Adding VIRTIO to the list of boot devices allows
-these FastModel platforms to boot from 'disc' in the same way
-the hardware counterpart can boot from SATA or USB.
+sorry, i have difficulties to get the full patchset,
+was also looking into patchwork, but seems not updated.
 
-This is a NOP if CONFIG_CMD_VIRTIO is not enabled, so no impact
-on Juno hardware (which is built with vexpress_aemv8a_juno_defconfig)
+Anyway, i applied patches one by one, all is ok.
 
-Signed-off-by: Robert Catherall <robert.catherall@arm.com>
----
- include/configs/vexpress_aemv8.h | 1 +
- 1 file changed, 1 insertion(+)
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-index 24d8ca0866..8020689e39 100644
---- a/include/configs/vexpress_aemv8.h
-+++ b/include/configs/vexpress_aemv8.h
-@@ -187,6 +187,7 @@
- 	func(USB, usb, 0)		\
- 	func(SATA, sata, 0)		\
- 	func(SATA, sata, 1)		\
-+	FUNC_VIRTIO(func)		\
- 	func(PXE, pxe, na)		\
- 	func(DHCP, dhcp, na)		\
- 	func(AFS, afs, na)
--- 
-2.17.1
-
+On 22/11/23 10:09 PM, Tom Rini wrote:
+> On Wed, Nov 22, 2023 at 10:04:38PM +0100, Angelo Dureghello wrote:
+>> Hi Tom,
+>>
+>> thanks,
+>>
+>> On 22/11/23 2:11 PM, Tom Rini wrote:
+>>> In the architecture global data, replace the one case of u32 with
+>>> unsigned long. Now, we can drop config.h here but then do need to add it
+>>> in two m68k-centric spaces.
+>>>
+>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>>> ---
+>>> Cc: Huan Wang <alison.wang@nxp.com>
+>>> Cc: Angelo Dureghello <angelo@kernel-space.org>
+>>> ---
+>>>    arch/m68k/include/asm/cache.h       | 2 ++
+>>>    arch/m68k/include/asm/global_data.h | 4 +---
+>>>    arch/m68k/lib/traps.c               | 1 +
+>>>    3 files changed, 4 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/arch/m68k/include/asm/cache.h b/arch/m68k/include/asm/cache.h
+>>> index 8ed2b4dbab47..6ef7f7be1af8 100644
+>>> --- a/arch/m68k/include/asm/cache.h
+>>> +++ b/arch/m68k/include/asm/cache.h
+>>> @@ -9,6 +9,8 @@
+>>>    #ifndef __CACHE_H
+>>>    #define __CACHE_H
+>>> +#include <config.h>
+>>> +
+>>>    #if defined(CONFIG_MCF520x) || defined(CONFIG_MCF523x) || \
+>>>        defined(CONFIG_MCF52x2)
+>>>    #define CFG_CF_V2
+>>> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+>>> index 5f576ba16f9a..c2ef5770a3df 100644
+>>> --- a/arch/m68k/include/asm/global_data.h
+>>> +++ b/arch/m68k/include/asm/global_data.h
+>>> @@ -7,8 +7,6 @@
+>>>    #ifndef	__ASM_GBL_DATA_H
+>>>    #define __ASM_GBL_DATA_H
+>>> -#include <config.h>
+>>> -
+>>>    /* Architecture-specific global data */
+>>>    struct arch_global_data {
+>>>    #ifdef CONFIG_SYS_I2C_FSL
+>>> @@ -24,7 +22,7 @@ struct arch_global_data {
+>>>    	unsigned long sdhc_clk;
+>>>    #endif
+>>>    #if defined(CONFIG_FSL_ESDHC)
+>>> -	u32 sdhc_per_clk;
+>>> +	unsigned long sdhc_per_clk;
+>>>    #endif
+>>>    };
+>>> diff --git a/arch/m68k/lib/traps.c b/arch/m68k/lib/traps.c
+>>> index c283351181d8..2a025c5a6e86 100644
+>>> --- a/arch/m68k/lib/traps.c
+>>> +++ b/arch/m68k/lib/traps.c
+>>> @@ -7,6 +7,7 @@
+>>>     * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>>>     */
+>>> +#include <config.h>
+>>>    #include <init.h>
+>>>    #include <watchdog.h>
+>>>    #include <command.h>
+>>
+>>
+>> testing this getting some errors
+>>
+>> +drivers/watchdog/mcf_wdt.c: In function 'mcf_watchdog_init':
+>> +drivers/watchdog/mcf_wdt.c:43:26: error: 'CFG_SYS_CLK' undeclared (first
+>> use in this function)
+>> +   43 |         cycles_per_sec = CFG_SYS_CLK / fixed_divider;
+>> +      |                          ^~~~~~~~~~~
+>>
+>>
+>> Seems solved by
+>>
+>> diff --git a/drivers/watchdog/mcf_wdt.c b/drivers/watchdog/mcf_wdt.c
+>> index b555bbeb68..f5ff221dd5 100644
+>> --- a/drivers/watchdog/mcf_wdt.c
+>> +++ b/drivers/watchdog/mcf_wdt.c
+>> @@ -11,6 +11,7 @@
+>>   #include <asm/io.h>
+>>   #include <wdt.h>
+>>   #include <linux/bitops.h>
+>> +#include <config.h>
+> 
+> Did you have the whole series applied? That is a reasonable solution,
+> but I didn't see a failure here, thanks for the report.
+> 
