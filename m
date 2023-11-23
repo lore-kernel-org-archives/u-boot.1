@@ -4,85 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C58BC5AD4C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9008BC5AD4C
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:24:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99B098763C;
-	Thu, 23 Nov 2023 12:02:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D31A4875F2;
+	Thu, 23 Nov 2023 12:24:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EAzQw8dh";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="VTkVAehP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12A3E8760D; Thu, 23 Nov 2023 12:02:53 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 6BD608760C; Thu, 23 Nov 2023 12:24:55 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DC3887626
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:02:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18A1D86FB2
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:24:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-507b9408c61so973577e87.0
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:02:51 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-548a2c20f50so1015485a12.1
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:24:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700737370; x=1701342170; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700738692; x=1701343492;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=D5OpGccGDk4G9w//TcyZ+0Hv7+AwqRi/8rkPNklvjE4=;
- b=EAzQw8dhZXxr0qO2FMESNRGIX7I887RHyuRsPZ0BlnbXCRDkT1zmjROFt7WtIfBjkb
- OQHP07W/BcGf++ucok76kXQESSRJfPIS6u4UAHF3ZjFxhS5suz9tekcH83dgd8eLA/Id
- KYHvQc4MxwyAEV1wUz02phY+2wMNXMBmZboMLXCE1P42H7GCLo2IRRSS3ao6u9gZ3yrV
- KRfXosRiBW1fX1nByfO1L3zlsp+2cG1Y6st/14fidFCVQeFNosPRJMtNIimGDXc9Kbrg
- 4udU7YCV366eX09IAkDFkJ6SfomiJct9Nyt9BvLln9hwDYFfa+uMU17HkqeSwaplNVhf
- 8FCw==
+ bh=zPw+bMY4E7Dpj/4cMaGBweh9u4HbozSb7cMBLhRBdo0=;
+ b=VTkVAehPC/56rZeGYuKZ7mrO5HVJ4CVC3Gogry7STJ3ureocf1WAuAfI+0xrkBXzAX
+ fDU3qreNZ0lLWZO9BUOigOJrmd+7+5SgvHavUxEMp6e709a4eD+Hty2h5jde+tSqDAOQ
+ tkb+QzwdfbpwUXnUBW+D3VnG2+KUFVLT+zuVo3DJ1pNEc/ePtCeMJ+C7Hgb1WF6MvRII
+ tTz7rSldbfhGYhzW6oG5ZNys9oDjxgCv2kX3NytBl2lcC/HgHSintPlkpU+96l9JTYll
+ c9rBFzxxjEiDDTSnI2gKaP3VWFtnzdrzD0YEsR6EDdDJO30yi0ikyfvSzznSPHgGV1Aj
+ BxSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700737370; x=1701342170;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1700738692; x=1701343492;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=D5OpGccGDk4G9w//TcyZ+0Hv7+AwqRi/8rkPNklvjE4=;
- b=DVse+/02qUCq9dAcftfecchaNZWjaVYKiGeYIyFe2j7XB289datJnfC+nJDAFJkLy8
- wHvTncLrH78g2jUV4yjCPFzo6MpNG146jZynhdA7lcb/U03bph59yK4mN+Q7lFl69DIn
- WkA6QW8K/XZKELvY3wkAI5g5Bn7BZmv9fLhKIw1T2kBCKeeeNznlhULokCQhrm2wIbuT
- xmeMzty59dJjPa5ERfo7ip3plmYJFdM/vMnJlc6RSFGjx5CGE+kNGhFmdUeexVECfyR6
- CcTJUuda/ekTfScrfdHSYHb4t/D1XEPiKzi13LNImtnHl9AiMJpu/qhULp4Ja9vDEzhp
- /HrQ==
-X-Gm-Message-State: AOJu0YypT8Hb0vZ02l1SSscUlX8mFA+TkKf9RR0/R3oZkBpcKP6Ds6c+
- G8LrWDguUaHL0kuH9j+omLA=
-X-Google-Smtp-Source: AGHT+IFWqU5YgFSwkwk1FqXHjYmBVyL+JS2NyuHzG1oy2sPmzMitWnBTHc383gVxMIvKeoBdlrRSbg==
-X-Received: by 2002:ac2:55bc:0:b0:509:1067:c20d with SMTP id
- y28-20020ac255bc000000b005091067c20dmr3428918lfg.39.1700737369951; 
- Thu, 23 Nov 2023 03:02:49 -0800 (PST)
-Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- w7-20020ac254a7000000b0050ab61a09f3sm156857lfk.104.2023.11.23.03.02.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Nov 2023 03:02:49 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- Ion Agorria <ion@agorria.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>,
- Dmitrii Merkurev <dimorinny@google.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 5/5] fastboot: add oem console command support
-Date: Thu, 23 Nov 2023 13:02:22 +0200
-Message-Id: <20231123110222.15116-6-clamor95@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231123110222.15116-1-clamor95@gmail.com>
-References: <20231123110222.15116-1-clamor95@gmail.com>
+ bh=zPw+bMY4E7Dpj/4cMaGBweh9u4HbozSb7cMBLhRBdo0=;
+ b=UbK9hVwu6EV89Uv0zI2kGlAq62mz6NSIouHLU5qCsqWXtawt718KBE8UjfOAhKPqpk
+ bO7jm3y649NgmrrIyu5OKYi6TUFg9v4de4lsY4ACkS/O2Ob2/JcHTY/rpKaCvLM9Rjs7
+ mR+exvxoswsmxBrS3jenGFuehA54Y6fitP7aL9EX3A4/nF/Uw5jFs2bLfNFg2S07bX7d
+ x1a0BGXB0rO3eOIbCmDjAypa2c7Y1lvC0B0VWiQg0MZC3xHUDsd1HL+zov6GRHHBTa8J
+ +v9MH+alUjSzIlZvsxm5ezVphvDtHqZI5X3n02jvmZZ8UkLLGy/pJpafvp7Z95qewIPn
+ ouTw==
+X-Gm-Message-State: AOJu0Yxwhg2usqm/3SMjA8VfNPI7I4EbASJI1pu4b8i/F9Dz7ahekWnH
+ Vpe+Kk69htIZk+o70S73KhxZAyshNylo/M0n5yU=
+X-Google-Smtp-Source: AGHT+IGJ2JG++/xt4Dj3Kxsh1KiqbkwjKVVjWRGDR5SxEnvZ5HTgAffawSLx7jgoExKFqY5c1su12g==
+X-Received: by 2002:aa7:d8cb:0:b0:543:52be:e6ad with SMTP id
+ k11-20020aa7d8cb000000b0054352bee6admr4591545eds.5.1700738692293; 
+ Thu, 23 Nov 2023 03:24:52 -0800 (PST)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com.
+ [209.85.208.43]) by smtp.gmail.com with ESMTPSA id
+ e12-20020a50fb8c000000b0053e88c4d004sm521256edq.66.2023.11.23.03.24.51
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Nov 2023 03:24:51 -0800 (PST)
+Received: by mail-ed1-f43.google.com with SMTP id
+ 4fb4d7f45d1cf-548a2c20f50so1015449a12.1
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:24:51 -0800 (PST)
+X-Received: by 2002:a17:907:371:b0:a02:9700:bf53 with SMTP id
+ rs17-20020a170907037100b00a029700bf53mr3518855ejb.46.1700738691036; Thu, 23
+ Nov 2023 03:24:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231110141311.512334-1-i@shantur.com>
+ <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
+ <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
+ <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
+In-Reply-To: <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
+From: Shantur Rathore <i@shantur.com>
+Date: Thu, 23 Nov 2023 11:24:39 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
+Message-ID: <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
+Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,130 +103,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ion Agorria <ion@agorria.com>
+Hi Marek,
 
-"oem console" serves to read console record buffer.
+On Thu, Nov 23, 2023 at 12:06=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> On 11/20/23 00:03, Shantur Rathore wrote:
+> > Hi Marek,
+>
+> Hi,
+>
+> > On Sun, Nov 19, 2023 at 8:53=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te:
+> >>
+> >> On 11/10/23 15:13, Shantur Rathore wrote:
+> >>> Currently when a hub is turned on, all the ports are powered on.
+> >>> This works well for hubs which have individual power control.
+> >>>
+> >>> For the hubs without individual power control this has no effect.
+> >>
+> >> OK
+> >>
+> >>> Mostly in these scenarios the hub port is powered before the USB
+> >>> controller is enabled, this can lead to some devices in unexpected
+> >>> state.
+> >>
+> >> This ^ part needs clarification.
+> >>
+> >> Which devices are in incorrect state, the ones connected to the hub
+> >> downstream facing ports ?
+> >>
+> >
+> > In my case RockPro64, the power to usb ports onboard is controlled by
+> > a regulator.
+> > This regulator is enabled as part of init  as here
+> > https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3399-rockpr=
+o64.dtsi#L177
+> >
+> > On init, the usb devices connected to the port are powered up, in my
+> > case AM8180 (a RTL9210 based ) NVMe to USB enclosure with UAS.
+> > But the usb controller is only enabled at 'usb start' and by this time
+> > the device is in some state that it doesn't get detected.
+> >
+> > One way to make sure the devices connected to the ports are in an
+> > initialising state is by issuing a port reset before scanning the
+> > port.
+>
+> Why not remove this regulator-always-on and let the PHY driver turn the
+> VBUS ON only when it is needed ?
+>
+> Wouldn't that solve the problem too AND remove unnecessarily enabled
+> regulator ?
+>
+> [...]
 
-Signed-off-by: Ion Agorria <ion@agorria.com>
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- doc/android/fastboot.rst      |  1 +
- drivers/fastboot/Kconfig      |  7 +++++++
- drivers/fastboot/fb_command.c | 39 +++++++++++++++++++++++++++++++++++
- include/fastboot.h            |  1 +
- 4 files changed, 48 insertions(+)
+Removing the regulator-always-on does make it work but there are few issues
 
-diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-index 1ad8a897c8..05d8f77759 100644
---- a/doc/android/fastboot.rst
-+++ b/doc/android/fastboot.rst
-@@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
-   with <arg> = boot_ack boot_partition
- - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
- - ``oem run`` - this executes an arbitrary U-Boot command
-+- ``oem console`` - this dumps U-Boot console record buffer
- 
- Support for both eMMC and NAND devices is included.
- 
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 837c6f1180..58b08120a4 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -241,6 +241,13 @@ config FASTBOOT_OEM_RUN
- 	  this feature if you are using verified boot, as it will allow an
- 	  attacker to bypass any restrictions you have in place.
- 
-+config FASTBOOT_CMD_OEM_CONSOLE
-+	bool "Enable the 'oem console' command"
-+	depends on CONSOLE_RECORD
-+	help
-+	  Add support for the "oem console" command to input and read console
-+	  record buffer.
-+
- endif # FASTBOOT
- 
- endmenu
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 6f621df074..f95f4e4ae1 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -41,6 +41,7 @@ static void reboot_recovery(char *, char *);
- static void oem_format(char *, char *);
- static void oem_partconf(char *, char *);
- static void oem_bootbus(char *, char *);
-+static void oem_console(char *, char *);
- static void run_ucmd(char *, char *);
- static void run_acmd(char *, char *);
- 
-@@ -108,6 +109,10 @@ static const struct {
- 		.command = "oem run",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_OEM_CONSOLE] = {
-+		.command = "oem console",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE, (oem_console), (NULL))
-+	},
- 	[FASTBOOT_COMMAND_UCMD] = {
- 		.command = "UCmd",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
-@@ -159,6 +164,23 @@ void fastboot_multiresponse(int cmd, char *response)
- 	case FASTBOOT_COMMAND_GETVAR:
- 		fastboot_getvar_all(response);
- 		break;
-+	case FASTBOOT_COMMAND_OEM_CONSOLE:
-+		if (CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_CONSOLE)) {
-+			char buf[FASTBOOT_RESPONSE_LEN] = { 0 };
-+
-+			if (console_record_isempty()) {
-+				console_record_reset();
-+				fastboot_okay(NULL, response);
-+			} else {
-+				int ret = console_record_readline(buf, sizeof(buf) - 5);
-+
-+				if (ret < 0)
-+					fastboot_fail("Error reading console", response);
-+				else
-+					fastboot_response("INFO", response, "%s", buf);
-+			}
-+			break;
-+		}
- 	default:
- 		fastboot_fail("Unknown multiresponse command", response);
- 		break;
-@@ -503,3 +525,20 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
- 	else
- 		fastboot_okay(NULL, response);
- }
-+
-+/**
-+ * oem_console() - Execute the OEM console command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void __maybe_unused oem_console(char *cmd_parameter, char *response)
-+{
-+	if (cmd_parameter)
-+		console_in_puts(cmd_parameter);
-+
-+	if (console_record_isempty())
-+		fastboot_fail("Empty console", response);
-+	else
-+		fastboot_response(FASTBOOT_MULTIRESPONSE_START, response, NULL);
-+}
-diff --git a/include/fastboot.h b/include/fastboot.h
-index 59cbea61ec..1e7920eb91 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -47,6 +47,7 @@ enum {
- 	FASTBOOT_COMMAND_OEM_PARTCONF,
- 	FASTBOOT_COMMAND_OEM_BOOTBUS,
- 	FASTBOOT_COMMAND_OEM_RUN,
-+	FASTBOOT_COMMAND_OEM_CONSOLE,
- 	FASTBOOT_COMMAND_ACMD,
- 	FASTBOOT_COMMAND_UCMD,
- 	FASTBOOT_COMMAND_COUNT
--- 
-2.40.1
+1. regulator is used to control power to multiple ports ( USB3.0 and
+USB2.0 in RockPro64 ),
+so this could lead to all ports turning off if a phy resets / turns off pow=
+er
+2. Even with regulator-always-on and without this reset port patch,
+linux was always
+able to detect the drive on the port, so there is something missing in u-bo=
+ot.
+3. Looking at usb hub code in Linux, I found that for USB3.0 it tries
+to reset the port before
+scanning. The comment says
 
+/* Is a USB 3.0 port in the Inactive or Compliance Mode state?
+ * Port warm reset is required to recover
+ */
+
+i. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L57=
+36
+ii. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2=
+836
+
+I believe this isn't implemented in u-boot and hence explicit reset of
+a port fixes the issue.
+
+Kind regards,
+Shantur
