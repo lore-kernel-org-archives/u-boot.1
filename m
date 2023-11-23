@@ -4,61 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F89DC5AD4C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 13:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3137FC61DF7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 13:09:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4324987600;
-	Thu, 23 Nov 2023 14:04:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 5630A87600;
+	Thu, 23 Nov 2023 14:09:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="iA4UCcpN";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MfJqqqUf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 506AB8760A; Thu, 23 Nov 2023 14:04:47 +0100 (CET)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8BBD687650; Thu, 23 Nov 2023 14:09:41 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59419875BE
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 14:04:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Markus.Niebel@ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id C5DDE875BE
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 14:09:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-547e7de7b6fso1705913a12.0
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 05:09:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
- t=1700744684; x=1732280684;
- h=message-id:subject:from:to:cc:date:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Nw6xZojMdCE43C9/HKHttiaOKJ1wSgynVhFGZ7rDJlE=;
- b=iA4UCcpNfASzwxQ3Cc3pJOw7HkNkNNbUskZwU5sDSwBJ/Yd1ucuCcAzv
- 3eezeMYqgyestBW2C7oqAT+cuvE0KTrgtC5JDKZgsH3n3G8piQg0ikMNW
- yIErZmI7fV/z5s0oCCkld1GfVh2GzHj/Cc8fjEp++6n0xyoTFs2XaiVUl
- v9uawAFtLpect6eoy/oXkUKIbIbw8/R4/EsaXMg5fQPaHvj/5Yxa9chNL
- gRgaajO/MlfxcK1NJeH4964oGYujEBxSuKTb7el5QlOuTuyXqpzwvdUTj
- Igd+3y9eyEKEIXKdFaP50DLvTWM+N/6OiiceR7AGItxky/lzjzSXThQ4t A==;
-X-IronPort-AV: E=Sophos;i="6.04,221,1695679200"; d="scan'208";a="34142793"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
- by mx1.tq-group.com with ESMTP; 23 Nov 2023 14:04:43 +0100
-Received: from NIEBEL-W3.tq-net.de (NIEBEL-W3.tq-net.de [10.123.53.155])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
- SHA256) (No client certificate requested)
- by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id 41F46280075;
- Thu, 23 Nov 2023 14:04:43 +0100 (CET)
-Message-ID: <b7f6a997414bd7b37e75dc29c14c6708fad8164c.camel@ew.tq-group.com>
-Subject: Re: [PATCH] tqma6: Fix DDR configuration
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-To: miquel.raynal@bootlin.com
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- thomas.petazzoni@bootlin.com, alexander.stein@ew.tq-group.com, 
- u-boot@ew.tq-group.com
-Date: Thu, 23 Nov 2023 14:04:43 +0100
-In-Reply-To: <mailman.3902.1700255720.703.u-boot@lists.denx.de>
-References: <mailman.3902.1700255720.703.u-boot@lists.denx.de>
-Organization: TQ Systems GmbH
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5-0ubuntu1 
+ d=amarulasolutions.com; s=google; t=1700744978; x=1701349778;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wvkzb/DCwAAAjuaCpVTB6kwtyJQ6jBqnXfhXHnQ/kKk=;
+ b=MfJqqqUf6oKadxanaolSQdHILxqgkeAVrHlG4K5+5AqADKZ5vOYRh+10qPEKV7qn/t
+ i8eMgTn03Ew6M7LEzoDXrZnzoRkQKG5FsmeP9L3CJLGEApoHj8KwjWsEMFFwxB2pEyZL
+ TVERBJpQd3OWE6ukOTlEPQdJDZBmFgvV9HmTI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700744978; x=1701349778;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wvkzb/DCwAAAjuaCpVTB6kwtyJQ6jBqnXfhXHnQ/kKk=;
+ b=MWbBM5tWUD3HlO/gP+e4yNQQs+u+/PZCxW9jaDq2HPiB8FuswQhY/pXNhQbrxoxM7n
+ SNqTHxCBXeL1To+nmmReUSYe2pbTcMkJr/RQfNUQnQDrYCiwAhGQInaQsBSlkNxOy1Qa
+ /t4Q2kr4ljT0KvNRf+TJMNr0vt1KQHFkug/87uC1jJ+z6C2PDB9LddbdQNAuN++z15rB
+ fQnGRaAEWPiLSID153PMqk7LV14wooDujk4ukRtJYnOF2iTL8a9+Bi+54MLiiS55kgcz
+ LjB3q6n5Pwd0bxnjCaLioJ5BkugYwhOo/z/wsZ1EOeQIKTjZ6YGHA7xpYo79GMg6CT38
+ JSlQ==
+X-Gm-Message-State: AOJu0YxAP04lgpv5KXiBGZO0DD8UuqNey3btpZ1r3bi9Zcl5FkV70Mrp
+ XxrCDN8DxJSdm0kAC2y542KXrGEhUCnJv0VfroXBUA==
+X-Google-Smtp-Source: AGHT+IGik+3QrSedKWKRU0NnF+9Ca6OG0Yg7bzwDIiGuZk1OKUwatsUInlefZuu431DyaTnb1epeQg==
+X-Received: by 2002:a50:9f87:0:b0:548:5ac3:5d91 with SMTP id
+ c7-20020a509f87000000b005485ac35d91mr2738811edf.11.1700744977877; 
+ Thu, 23 Nov 2023 05:09:37 -0800 (PST)
+Received: from localhost.localdomain ([2001:b07:6474:ebbf:a27e:f878:7504:438])
+ by smtp.gmail.com with ESMTPSA id
+ f7-20020a50ee87000000b00543597cd190sm643482edr.47.2023.11.23.05.08.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Nov 2023 05:09:15 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH] binman: doc: fix typo
+Date: Thu, 23 Nov 2023 14:08:20 +0100
+Message-ID: <20231123130829.237593-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,76 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Miquel,
+s/use set/set/
 
-> Initially investigating a Linux network issue causing a lot of drop and
-> poor network performances on a custom system based on a TQMA6A module
-> (based on an iMX6Q), [1st link below].
-> 
-> I eventually correlated my observations with a contention at the NIC
-> level when in concurrency with the graphics pipeline. Troubleshooting
-> this in the kernel lead to disabling DMA bursts accesses made by the IPU
-> in order to avoid triggering the QoS at the interconnect level, reducing
-> from 50 to 10% the drop rate on eth0, [2nd link below]. The solution
-> worked on my setup but not on others, which still suffered from
-> abnormally high drop rates even with this "fix".
-> 
-> After looking a while into TQ Systems BSP I figured out a number of
-> differences in recent U-Boot out-of-tree patches they had in their
-> repository [3rd link]. Parsing the differences one after the other lead
-> me to this final solution.
-> 
-> The reset pad of the DDR controller was apparently misconfigured, Bit
-> 18-19 picturing the "DDR select field". The current value b11 is
-> reserved. The only defined value as of version 6 of the iMX6Q manual was
-> b00 "DDR3 and LPDDR2 mode". In practice no register difference has been
-> spotted after changing this configuration but all issues tracked thus
-> far just vanished. All previous fixes have been proven irrelevant. Just
-> clearing this field solved all our network issues and the drop rate as
-> measured by iperf3 felt back to 0%.
-> 
-> Link: 
-> https://lore.kernel.org/netdev/20231012193410.3d1812cf@xps-13/
-> 
-> Link: 
-> https://lists.freedesktop.org/archives/dri-devel/2023-October/428251.html
-> 
-> Link: 
-> https://github.com/tq-systems/u-boot-tqmaxx/commit/15eb6abbefbf6916c28467b85485911dad3da6bc
-> 
-> Signed-off-by: Miquel Raynal <
-> miquel.raynal@bootlin.com
-> >
-> ---
->  board/tq/tqma6/tqma6q.cfg | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/board/tq/tqma6/tqma6q.cfg b/board/tq/tqma6/tqma6q.cfg
-> index a49489aed3f..a345c4de93d 100644
-> --- a/board/tq/tqma6/tqma6q.cfg
-> +++ b/board/tq/tqma6/tqma6q.cfg
-> @@ -36,7 +36,7 @@ DATA 4, MX6_IOM_DRAM_SDCLK_1, 0x00008030
->  DATA 4, MX6_IOM_DRAM_CAS, 0x00008030
->  DATA 4, MX6_IOM_DRAM_RAS, 0x00008030
->  DATA 4, MX6_IOM_GRP_ADDDS, 0x00000030
-> -DATA 4, MX6_IOM_DRAM_RESET, 0x000C3030
-> +DATA 4, MX6_IOM_DRAM_RESET, 0x00003030
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
 
-Thank you for pointing this out. Originally this error came from an
-older/ancient reference manual. Sorry that we missed to bring this
-upstream. We will send the changes for DCD data in the next days.
+ tools/binman/binman.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->  DATA 4, MX6_IOM_DRAM_SDCKE0, 0x00003000
->  DATA 4, MX6_IOM_DRAM_SDCKE1, 0x00000000
->  DATA 4, MX6_IOM_DRAM_SDBA2, 0x00000000
-> -- 
-> 2.34.1
-
-Markus
-
+diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+index 020988d955f0..230e055667f3 100644
+--- a/tools/binman/binman.rst
++++ b/tools/binman/binman.rst
+@@ -2060,7 +2060,7 @@ don't have access to the blobs.
+ If the blobs are in a different directory, you can specify this with the `-I`
+ option.
+ 
+-For U-Boot, you can use set the BINMAN_INDIRS environment variable to provide a
++For U-Boot, you can set the BINMAN_INDIRS environment variable to provide a
+ space-separated list of directories to search for binary blobs::
+ 
+    BINMAN_INDIRS="odroid-c4/fip/g12a \
 -- 
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
+2.42.0
 
