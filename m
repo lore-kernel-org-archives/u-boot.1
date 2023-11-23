@@ -4,42 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF7E4C61DF7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 14:16:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD25C624B4
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 15:10:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91D8987617;
-	Thu, 23 Nov 2023 15:16:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id D69838766E;
+	Thu, 23 Nov 2023 16:10:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF9687655; Thu, 23 Nov 2023 15:16:07 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9873587600
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 15:16:02 +0100 (CET)
+ id 987D387657; Thu, 23 Nov 2023 16:10:27 +0100 (CET)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [217.70.183.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CF6B8760A
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 16:10:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3BAD11063;
- Thu, 23 Nov 2023 06:16:48 -0800 (PST)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 71AB83F6C4;
- Thu, 23 Nov 2023 06:16:01 -0800 (PST)
-Date: Thu, 23 Nov 2023 14:15:51 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Stephen Graf <s_graf@telus.net>
-Cc: u-boot@lists.denx.de
-Subject: Re: orangepi zero3
-Message-ID: <20231123141551.799dc14f@donnerap.manchester.arm.com>
-In-Reply-To: <28efed32-ee19-4a89-9c84-defa95c3a963@telus.net>
-References: <28efed32-ee19-4a89-9c84-defa95c3a963@telus.net>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=none smtp.mailfrom=foss+uboot@0leil.net
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 89D3BE0006;
+ Thu, 23 Nov 2023 15:10:23 +0000 (UTC)
+From: Quentin Schulz <foss+uboot@0leil.net>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
+ Heiko Stuebner <heiko@sntech.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH next v2 0/6] rockchip: puma-rk3399/ringneck-px30: fix check
+ against value in default environment variable
+Date: Thu, 23 Nov 2023 16:10:04 +0100
+Message-ID: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: foss@0leil.net
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,78 +60,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Nov 2023 21:52:12 -0800
-Stephen Graf <s_graf@telus.net> wrote:
+For puma-rk3399 and ringneck-px30, U-Boot proper automatically modifies
+boot_targets to swap the order in which MMC storage media are used for
+standard boot based on which MMC storage medium was used to load U-Boot
+proper. This is however only done if the user has not changed it
+manually, therefore a check between the default and current value is
+done.
 
-Hi Stephen,
+This used to work fine until the migration to standard boot where
+boot_targets value size in the default environment went above the 32
+characters that env_get_default function can return, thus resulting in a
+truncated variable.
 
-> I have been able to build a working (on my orangepi zero3 1G) u-boot for=
-=20
-> the orangepi zero3 with the following defconfig. Would it be possible to=
-=20
+Therefore the check between default and current value would always fail.
 
-thanks for your interest in contributing and for reaching out!
-As Peter already mentioned, you would need to send a patch, as generated
-by "git format-patch". "git send-email" would help you with sending this
-out.
+By adding the env_get_default_into function, a buffer of the appropriate
+size can be allocated on the stack to get the whole value of
+boot_targets in the default environment and thus fixing the check.
 
-But actually I sent a small series already last week:
-https://lore.kernel.org/u-boot/20231114013106.31336-1-andre.przywara@arm.co=
-m/
+While at it, simplify maintenance by putting this logic in a common file
+and stop using hardcoded DT paths for MMC controllers and SPI flash
+memory.
 
-If you could apply these patches and test it on your board, I'd be
-grateful. If it works for you and you are happy, please reply to patch 3/3
-and add a "Tested-by: Your Name <your@email.com>" line.
-For instructions how to reply, check "Reply instructions" at the end of
-that mailing list archive web page above.
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+Changes in v2:
+- added board/theobroma-systems/common putting all storage medium logic
+  into a common file,
+- adapted the storage medium logic to be device-agnostic,
+- added Rbs
+- removed patches surrounding all code by an ifndef CONFIG_SPL_BUILD and
+  do this at the Makefile level of each board,
+- Link to v1: https://lore.kernel.org/r/20231108-env_default_theobroma-v1-0-cb493bfdeffd@theobroma-systems.com
 
-I was just waiting for confirmations by other people before merging it.
+---
+Quentin Schulz (6):
+      rockchip: ringneck-px30: do not hardcode MMC controller paths
+      rockchip: puma-rk3399: do not hardcode MMC controller paths
+      rockchip: ringneck-px30/puma-rk3399: factor out storage medium selection
+      env: allow to copy value from default environment into a buffer
+      env: migrate env_get_default to call env_get_default_into
+      rockchip: theobroma-systems: fix modified boot_targets detection
 
-Cheers,
-Andre
+ board/theobroma-systems/common/common.c            | 143 +++++++++++++++++++++
+ board/theobroma-systems/common/common.h            |  19 +++
+ board/theobroma-systems/puma_rk3399/MAINTAINERS    |   1 +
+ board/theobroma-systems/puma_rk3399/Makefile       |   3 +
+ board/theobroma-systems/puma_rk3399/puma-rk3399.c  | 143 +--------------------
+ board/theobroma-systems/ringneck_px30/MAINTAINERS  |   1 +
+ board/theobroma-systems/ringneck_px30/Makefile     |   3 +
+ .../ringneck_px30/ringneck-px30.c                  | 142 +-------------------
+ env/common.c                                       |  16 ++-
+ include/env.h                                      |  10 ++
+ 10 files changed, 195 insertions(+), 286 deletions(-)
+---
+base-commit: 9e53e45292ee2f1d9d2ccc59914b161bef9b10d7
+change-id: 20231108-env_default_theobroma-33774a337fe6
 
-
-> add this config to the working boards.=C2=A0 I would test it again with a=
-n=20
-> official build. The dtb/dts is in linux and in u-boot.
->=20
-> The H618 processor is software compatible with the H616 and the zero3=20
-> board is very similar to the zero2 with the exception of DDR3 replaced=20
-> with LPDDR4 and the Realtek phy with Motorcomm.
->=20
-> CONFIG_ARM=3Dy
-> CONFIG_ARCH_SUNXI=3Dy
-> CONFIG_DEFAULT_DEVICE_TREE=3D"sun50i-h618-orangepi-zero3"
-> CONFIG_SPL=3Dy
-> CONFIG_DRAM_SUN50I_H616_DX_ODT=3D0x07070707
-> CONFIG_DRAM_SUN50I_H616_DX_DRI=3D0x0e0e0e0e
-> CONFIG_DRAM_SUN50I_H616_CA_DRI=3D0x0e0e
-> CONFIG_DRAM_SUN50I_H616_ODT_EN=3D0xaaaaeeee
-> CONFIG_DRAM_SUN50I_H616_TPR0=3D0x0
-> CONFIG_DRAM_SUN50I_H616_TPR6=3D0x44000000
-> CONFIG_DRAM_SUN50I_H616_TPR10=3D0x402f0663
-> CONFIG_DRAM_SUN50I_H616_TPR11=3D0x24242323
-> CONFIG_DRAM_SUN50I_H616_TPR12=3D0x0e0e0e0e
-> CONFIG_MACH_SUN50I_H616=3Dy
-> CONFIG_SUNXI_DRAM_H616_LPDDR4=3Dy
-> CONFIG_DRAM_CLK=3D792
-> CONFIG_R_I2C_ENABLE=3Dy
-> CONFIG_SPL_SPI_SUNXI=3Dy
-> # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> CONFIG_SPL_I2C=3Dy
-> CONFIG_SPL_SYS_I2C_LEGACY=3Dy
-> CONFIG_SYS_I2C_MVTWSI=3Dy
-> CONFIG_SYS_I2C_SLAVE=3D0x7f
-> CONFIG_SYS_I2C_SPEED=3D400000
-> CONFIG_SPI_FLASH_MACRONIX=3Dy
-> CONFIG_PHY_MOTORCOMM=3Dy
-> CONFIG_SUN8I_EMAC=3Dy
-> CONFIG_SPI=3Dy
-> CONFIG_USB_EHCI_HCD=3Dy
-> CONFIG_USB_OHCI_HCD=3Dy
-> CONFIG_USB_MUSB_GADGET=3Dy
-> CONFIG_AXP313_POWER=3Dy
-> CONFIG_AXP_DCDC3_VOLT=3D1100
-> CONFIG_CMD_BOOTZ=3Dy
->=20
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
