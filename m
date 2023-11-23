@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFF0C61D97
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 16:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9757C5AD4C
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 17:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88F1A875E9;
-	Thu, 23 Nov 2023 17:29:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C6EE28760B;
+	Thu, 23 Nov 2023 18:04:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GDbksEme";
+	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="S5Nu0Ec/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F19887678; Thu, 23 Nov 2023 17:29:20 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 516E386784; Thu, 23 Nov 2023 14:44:05 +0100 (CET)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1441E86F99
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 17:29:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACB1C86784
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 14:44:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ANGTDgh020676;
- Thu, 23 Nov 2023 10:29:13 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700756953;
- bh=Lp1lrZ46Xkc/++QIXxyrgFvTWeIbD0WZ85Yx5jdxFag=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=GDbksEmesaIJw1WbDer6ULVePpTwVy2Ss+MzubTfSd6BiBRb2bEGk02Q8zIVFnety
- 6KwIwZ9cIZ6eCQVKtQAVT8c9WASMWy+kPV2jehYzLg/wQaF1L8bIxcFAfLa3MucVZe
- 1ZuhO4EXr5o3+2s3ooc7F4QfxlfwNeqKIKcZu2gs=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ANGTD2q030471
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 Nov 2023 10:29:13 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 23
- Nov 2023 10:29:13 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 23 Nov 2023 10:29:12 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ANGTClN092393;
- Thu, 23 Nov 2023 10:29:12 -0600
-Date: Thu, 23 Nov 2023 10:29:12 -0600
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Apurva Nandan <a-nandan@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH RFC 0/2] Unify K3 initial memory map
-Message-ID: <20231123162912.vobn72jiy5ntq4ha@wired>
-References: <20231122151411.11268-1-afd@ti.com>
+ spf=pass smtp.mailfrom=alexander.stein@ew.tq-group.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+ t=1700747042; x=1732283042;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=3s9CyxSWZTLYQYZIUbEKLEM1eoZ7k3bS//HCZnHB2kQ=;
+ b=S5Nu0Ec/nbZaXIOmFTZbmDc3TFt9z8enQxsYWj2AcBf5CEBtIzqZgDzr
+ miBlHzF7Gi0POU+nfT0Q6Wlg0fgxkpOPvqASBRu30YT1cU7oSbOdr7MPX
+ wBNdoBPfiwNt/Vzn69xtejHcG1qVDIEG/kVCAuQ7+K+7uVVop2f/bQHlh
+ OqAF6pQoQt+DXlI0RrG8U6yNZ8x2AMKbA6cUg96XS10tn9/OvvPziy+5q
+ 5DMiQLA5wYdv5OyB/vumUNuKob9753FSJuoJ8HfcLOmRQRCUt9MqiqaQb
+ h/eLZfPyBXa9TjaJG2NJnHEFvjPrSFbfAjU7hYeIngoiJKHyQHpG+GuOH w==;
+X-IronPort-AV: E=Sophos;i="6.04,221,1695679200"; d="scan'208";a="34143766"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+ by mx1.tq-group.com with ESMTP; 23 Nov 2023 14:44:01 +0100
+Received: from steina-w.localnet (steina-w.tq-net.de [10.123.53.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by vtuxmail01.tq-net.de (Postfix) with ESMTPSA id C4607280075;
+ Thu, 23 Nov 2023 14:44:01 +0100 (CET)
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+To: Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, thomas.petazzoni@bootlin.com,
+ u-boot@ew.tq-group.com
+Subject: Re: [PATCH] tqma6: Fix DDR configuration
+Date: Thu, 23 Nov 2023 14:44:01 +0100
+Message-ID: <12328531.O9o76ZdvQC@steina-w>
+Organization: TQ-Systems GmbH
+In-Reply-To: <20231123141233.3f37c1b7@xps-13>
+References: <mailman.3902.1700255720.703.u-boot@lists.denx.de>
+ <b7f6a997414bd7b37e75dc29c14c6708fad8164c.camel@ew.tq-group.com>
+ <20231123141233.3f37c1b7@xps-13>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231122151411.11268-1-afd@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
+X-Mailman-Approved-At: Thu, 23 Nov 2023 18:04:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,57 +79,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09:14-20231122, Andrew Davis wrote:
-> Hello all,
-> 
-> This is just an RFC as it probably breaks remoteproc loading.
-> I wanted to post anyway as the complexity of having a dedicated
-> memory map for each SoC came up in a different series.
-> 
-> Or maybe we can take this now and that will expose the issue in
-> remoteproc loading better and force someone to go fix it. :)
-> 
-> This series depends on this[0].
-> 
+Hi Miquel,
+
+Am Donnerstag, 23. November 2023, 14:12:33 CET schrieb Miquel Raynal:
+> Hi Markus,
+>=20
+> Markus.Niebel@ew.tq-group.com wrote on Thu, 23 Nov 2023 14:04:43 +0100:
+> > Hello Miquel,
+> >=20
+> > > Initially investigating a Linux network issue causing a lot of drop a=
+nd
+> > > poor network performances on a custom system based on a TQMA6A module
+> > > (based on an iMX6Q), [1st link below].
+> > >=20
+> > > I eventually correlated my observations with a contention at the NIC
+> > > level when in concurrency with the graphics pipeline. Troubleshooting
+> > > this in the kernel lead to disabling DMA bursts accesses made by the =
+IPU
+> > > in order to avoid triggering the QoS at the interconnect level, reduc=
+ing
+> > > from 50 to 10% the drop rate on eth0, [2nd link below]. The solution
+> > > worked on my setup but not on others, which still suffered from
+> > > abnormally high drop rates even with this "fix".
+> > >=20
+> > > After looking a while into TQ Systems BSP I figured out a number of
+> > > differences in recent U-Boot out-of-tree patches they had in their
+> > > repository [3rd link]. Parsing the differences one after the other le=
+ad
+> > > me to this final solution.
+> > >=20
+> > > The reset pad of the DDR controller was apparently misconfigured, Bit
+> > > 18-19 picturing the "DDR select field". The current value b11 is
+> > > reserved. The only defined value as of version 6 of the iMX6Q manual =
+was
+> > > b00 "DDR3 and LPDDR2 mode". In practice no register difference has be=
+en
+> > > spotted after changing this configuration but all issues tracked thus
+> > > far just vanished. All previous fixes have been proven irrelevant. Ju=
+st
+> > > clearing this field solved all our network issues and the drop rate as
+> > > measured by iperf3 felt back to 0%.
+> > >=20
+> > > Link:
+> > > https://lore.kernel.org/netdev/20231012193410.3d1812cf@xps-13/
+> > >=20
+> > > Link:
+> > > https://lists.freedesktop.org/archives/dri-devel/2023-October/428251.=
+htm
+> > > l
+> > >=20
+> > > Link:
+> > > https://github.com/tq-systems/u-boot-tqmaxx/commit/15eb6abbefbf6916c2=
+846
+> > > 7b85485911dad3da6bc
+> > >=20
+> > > Signed-off-by: Miquel Raynal <
+> > > miquel.raynal@bootlin.com
+> > >=20
+> > > ---
+> > >=20
+> > >  board/tq/tqma6/tqma6q.cfg | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/board/tq/tqma6/tqma6q.cfg b/board/tq/tqma6/tqma6q.cfg
+> > > index a49489aed3f..a345c4de93d 100644
+> > > --- a/board/tq/tqma6/tqma6q.cfg
+> > > +++ b/board/tq/tqma6/tqma6q.cfg
+> > > @@ -36,7 +36,7 @@ DATA 4, MX6_IOM_DRAM_SDCLK_1, 0x00008030
+> > >=20
+> > >  DATA 4, MX6_IOM_DRAM_CAS, 0x00008030
+> > >  DATA 4, MX6_IOM_DRAM_RAS, 0x00008030
+> > >  DATA 4, MX6_IOM_GRP_ADDDS, 0x00000030
+> > >=20
+> > > -DATA 4, MX6_IOM_DRAM_RESET, 0x000C3030
+> > > +DATA 4, MX6_IOM_DRAM_RESET, 0x00003030
+> >=20
+> > Thank you for pointing this out. Originally this error came from an
+> > older/ancient reference manual. Sorry that we missed to bring this
+> > upstream. We will send the changes for DCD data in the next days.
+>=20
+> No problem, I'm glad this can now be solved. By any chance, could you
+> point to the relevant location of the manual (ddr or imx6 ?) explaining
+> what this is actually about? Because I failed to bring any real
+> explanation to my observations so far.
+
+It's a bit hidden but the comment above that list indicates these settings =
+are=20
+iomuxc configurations. In this case the register=20
+IOMUXC_SW_PAD_CTL_PAD_DRAM_RESET. See i.MX6Q RM Rev.6 05/2020 section=20
+36.4.347.
+Your patch configures the field "DDR Select Field" from reserved3 to=20
+DDR3_LPDDR2. It seems this field has to be set to 0 in every case.
+
+Thanks again and best regards,
+Alexander
+
+
 > Thanks,
-> Andrew
-> 
-> [0] https://patchwork.ozlabs.org/project/uboot/patch/20231106165205.22066-1-afd@ti.com/
-> 
-> Andrew Davis (2):
->   arm: mach-k3: Remove non-cached memory map areas
->   arm: mach-k3: Merge initial memory maps
-> 
->  arch/arm/mach-k3/arm64-mmu.c | 253 +----------------------------------
->  1 file changed, 2 insertions(+), 251 deletions(-)
-> 
-> -- 
-> 2.39.2
-> 
-Could you rebase and submit as non-RFC? Please free to add:
+> Miqu=E8l
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
-Tested-by: Nishanth Menon <nm@ti.com>
 
-tested along with the v2 of dependency patch https://lore.kernel.org/all/20231122211218.607757-1-afd@ti.com/
-on top of:
-next 054222eb68f6 Merge branch '2023-11-22-TI-K3-cleanups' into next
+=2D-=20
+TQ-Systems GmbH | M=FChlstra=DFe 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht M=FCnchen, HRB 105018
+Gesch=E4ftsf=FChrer: Detlef Schneider, R=FCdiger Stahl, Stefan Schneider
+http://www.tq-group.com/
 
-platforms tested:
-beagleplay-gp-uart
-j721s2-evm
-am68_sk-fs
-j721e-sk
-j721e-idk-gw
-j7200-hsevm
-j7200-evm
-am64xx-hsevm
-am64xx_sk-fs
-am62xx_sk-fs
-am62xx-sk
-am62axx_sk-fs
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
