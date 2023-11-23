@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE41C61DF7
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 15:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFEBFC61DF7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 15:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 194D187687;
+	by phobos.denx.de (Postfix) with ESMTP id 7A19887686;
 	Thu, 23 Nov 2023 16:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79A0887680; Thu, 23 Nov 2023 16:10:29 +0100 (CET)
+ id 9E41A87677; Thu, 23 Nov 2023 16:10:29 +0100 (CET)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
  [IPv6:2001:4b98:dc4:8::224])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F21F87677
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 16:10:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FF0D8760A
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 16:10:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=foss+uboot@0leil.net
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 40B97E0008;
- Thu, 23 Nov 2023 15:10:25 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 62929E0004;
+ Thu, 23 Nov 2023 15:10:26 +0000 (UTC)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>,
@@ -33,10 +33,10 @@ To: Joe Hershberger <joe.hershberger@ni.com>,
 Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
  Heiko Stuebner <heiko@sntech.de>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: [PATCH next v2 1/6] rockchip: ringneck-px30: do not hardcode MMC
+Subject: [PATCH next v2 2/6] rockchip: puma-rk3399: do not hardcode MMC
  controller paths
-Date: Thu, 23 Nov 2023 16:10:05 +0100
-Message-ID: <20231123-env_default_theobroma-v2-1-a80914c2c114@theobroma-systems.com>
+Date: Thu, 23 Nov 2023 16:10:06 +0100
+Message-ID: <20231123-env_default_theobroma-v2-2-a80914c2c114@theobroma-systems.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
 References: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
@@ -71,18 +71,44 @@ full path.
 Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- .../ringneck_px30/ringneck-px30.c                  | 29 +++++++++++++---------
- 1 file changed, 17 insertions(+), 12 deletions(-)
+ board/theobroma-systems/puma_rk3399/puma-rk3399.c | 73 ++++++++++++-----------
+ 1 file changed, 38 insertions(+), 35 deletions(-)
 
-diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-index 537ce0d1d11..fb5570767db 100644
---- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-+++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
-@@ -68,11 +68,16 @@ static int setup_boottargets(void)
- 	 * Make the default boot medium between SD Card and eMMC, the one that
- 	 * was used to load U-Boot proper.
+diff --git a/board/theobroma-systems/puma_rk3399/puma-rk3399.c b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+index 614a60ee8f9..ac8ceedc7c9 100644
+--- a/board/theobroma-systems/puma_rk3399/puma-rk3399.c
++++ b/board/theobroma-systems/puma_rk3399/puma-rk3399.c
+@@ -82,33 +82,36 @@ static int setup_boottargets(void)
+ 	 * was used to load U-Boot proper. If SPI-NOR flash was used, keep
+ 	 * original default order.
  	 */
--	bool sd_booted = !strcmp(boot_device, "/mmc@ff370000");
+-	if (strcmp(boot_device, "/spi@ff1d0000/flash@0")) {
+-		bool sd_booted = !strcmp(boot_device, "/mmc@fe320000");
+-		char *mmc0, *mmc1;
+-
+-		debug("%s: booted from %s\n", __func__,
+-		      sd_booted ? "SD-Card" : "eMMC");
+-		mmc0 = strstr(env, "mmc0");
+-		mmc1 = strstr(env, "mmc1");
+-
+-		if (!mmc0 || !mmc1) {
+-			debug("%s: only one mmc boot_target found\n", __func__);
+-			return -1;
+-		}
+-
+-		/*
+-		 * If mmc0 comes first in the boot order and U-Boot proper was
+-		 * loaded from mmc1, swap mmc0 and mmc1 in the list.
+-		 * If mmc1 comes first in the boot order and U-Boot proper was
+-		 * loaded from mmc0, swap mmc0 and mmc1 in the list.
+-		 */
+-		if ((mmc0 < mmc1 && sd_booted) ||
+-		    (mmc0 > mmc1 && !sd_booted)) {
+-			mmc0[3] = '1';
+-			mmc1[3] = '0';
+-			debug("%s: set boot_targets to: %s\n", __func__, env);
+-			env_set("boot_targets", env);
+-		}
 +	struct udevice *devp;
 +
 +	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp)) {
@@ -91,25 +117,32 @@ index 537ce0d1d11..fb5570767db 100644
 +		return 0;
 +	}
 +
- 	char *mmc0, *mmc1;
- 
--	debug("%s: booted from %s\n", __func__,
--	      sd_booted ? "SD-Card" : "eMMC");
- 	mmc0 = strstr(env, "mmc0");
- 	mmc1 = strstr(env, "mmc1");
- 
-@@ -87,8 +92,8 @@ static int setup_boottargets(void)
- 	 * If mmc1 comes first in the boot order and U-Boot proper was
- 	 * loaded from mmc0, swap mmc0 and mmc1 in the list.
- 	 */
--	if ((mmc0 < mmc1 && sd_booted) ||
--	    (mmc0 > mmc1 && !sd_booted)) {
++	char *mmc0, *mmc1;
++
++	mmc0 = strstr(env, "mmc0");
++	mmc1 = strstr(env, "mmc1");
++
++	if (!mmc0 || !mmc1) {
++		debug("%s: only one mmc boot_target found\n", __func__);
++		return -1;
++	}
++
++	/*
++	 * If mmc0 comes first in the boot order and U-Boot proper was
++	 * loaded from mmc1, swap mmc0 and mmc1 in the list.
++	 * If mmc1 comes first in the boot order and U-Boot proper was
++	 * loaded from mmc0, swap mmc0 and mmc1 in the list.
++	 */
 +	if ((mmc0 < mmc1 && devp->seq_ == 1) ||
 +	    (mmc0 > mmc1 && devp->seq_ == 0)) {
- 		mmc0[3] = '1';
- 		mmc1[3] = '0';
- 		debug("%s: set boot_targets to: %s\n", __func__, env);
-@@ -102,6 +107,7 @@ int mmc_get_env_dev(void)
++		mmc0[3] = '1';
++		mmc1[3] = '0';
++		debug("%s: set boot_targets to: %s\n", __func__, env);
++		env_set("boot_targets", env);
+ 	}
+ 
+ 	return 0;
+@@ -118,6 +121,7 @@ int mmc_get_env_dev(void)
  {
  	const char *boot_device =
  		ofnode_read_chosen_string("u-boot,spl-boot-device");
@@ -117,16 +150,16 @@ index 537ce0d1d11..fb5570767db 100644
  
  	if (!boot_device) {
  		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
-@@ -111,19 +117,19 @@ int mmc_get_env_dev(void)
+@@ -127,19 +131,19 @@ int mmc_get_env_dev(void)
  
  	debug("%s: booted from %s\n", __func__, boot_device);
  
--	if (!strcmp(boot_device, "/mmc@ff370000"))
+-	if (!strcmp(boot_device, "/mmc@fe320000"))
 -		return 1;
 +	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
 +		return CONFIG_SYS_MMC_ENV_DEV;
  
--	if (!strcmp(boot_device, "/mmc@ff390000"))
+-	if (!strcmp(boot_device, "/mmc@fe330000"))
 -		return 0;
 +	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
  
@@ -142,12 +175,17 @@ index 537ce0d1d11..fb5570767db 100644
  
  	if (prio > 0)
  		return ENVL_UNKNOWN;
-@@ -137,8 +143,7 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
+@@ -153,12 +157,11 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
  	debug("%s: booted from %s\n", __func__, boot_device);
  
+ 	if (IS_ENABLED(CONFIG_ENV_IS_IN_SPI_FLASH) &&
+-	    !strcmp(boot_device, "/spi@ff1d0000/flash@0"))
++	    !uclass_find_device_by_ofnode(UCLASS_SPI_FLASH, ofnode_path(boot_device), &devp))
+ 		return ENVL_SPI_FLASH;
+ 
  	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC) &&
--	    (!strcmp(boot_device, "/mmc@ff370000") ||
--	     !strcmp(boot_device, "/mmc@ff390000")))
+-	    (!strcmp(boot_device, "/mmc@fe320000") ||
+-	     !strcmp(boot_device, "/mmc@fe330000")))
 +	    !uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
  		return ENVL_MMC;
  
