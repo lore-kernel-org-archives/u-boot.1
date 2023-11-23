@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8809C5AD4C
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 17:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61321C5AD4C
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 17:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 372DF8767F;
-	Thu, 23 Nov 2023 18:04:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id CF2FE87650;
+	Thu, 23 Nov 2023 18:15:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=foss.arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50FA687655; Thu, 23 Nov 2023 15:16:10 +0100 (CET)
+ id BA104874E0; Thu, 23 Nov 2023 18:15:32 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3E1D887600
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 15:16:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9640E874E0
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 18:15:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=foss.arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.catherall@arm.com
+ spf=none smtp.mailfrom=robert.catherall@foss.arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2FC631063;
- Thu, 23 Nov 2023 06:16:54 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 81A3BFEC;
+ Thu, 23 Nov 2023 09:16:16 -0800 (PST)
 Received: from e123340-lin.cambridge.arm.com (e123340-lin.cambridge.arm.com
  [10.2.75.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 36F6D3F6C4;
- Thu, 23 Nov 2023 06:16:07 -0800 (PST)
-From: Robert Catherall <robert.catherall@arm.com>
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 872853F7A6;
+ Thu, 23 Nov 2023 09:15:29 -0800 (PST)
+From: robert.catherall@foss.arm.com
 To: u-boot@lists.denx.de
 Cc: andre.przywara@arm.com
-Subject: [PATCH 1/1] arm: afs: Set the filesize env. var. on load
-Date: Thu, 23 Nov 2023 14:16:01 +0000
-Message-Id: <20231123141601.28056-1-robert.catherall@arm.com>
+Subject: [PATCH] arm: afs: Set the filesize env. var. on load
+Date: Thu, 23 Nov 2023 17:15:22 +0000
+Message-Id: <20231123171522.7302-1-robert.catherall@foss.arm.com>
 X-Mailer: git-send-email 2.17.1
-X-Mailman-Approved-At: Thu, 23 Nov 2023 18:04:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -50,6 +49,8 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
+
+From: Robert Catherall <robert.catherall@arm.com>
 
 The `afs load` command copies data to RAM. Set the filesize
 environment variable to record how much data was 'loaded'
