@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BA71C61D85
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A397C61D85
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 11:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D11C1875F2;
-	Thu, 23 Nov 2023 12:02:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 396568760D;
+	Thu, 23 Nov 2023 12:02:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KAVNbWnX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lcbAGG8S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41E118763D; Thu, 23 Nov 2023 12:02:50 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 15FE687633; Thu, 23 Nov 2023 12:02:52 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484058760D
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:02:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6039B87627
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 12:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2c83d37a492so9304651fa.3
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:02:48 -0800 (PST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-507b9408c61so973519e87.0
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 03:02:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700737367; x=1701342167; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1700737368; x=1701342168; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4rMAWzmusYUDsZk7ci6JrKCxjHNZYVX0mwEluINib7U=;
- b=KAVNbWnXh7KN/r7bh4HfZ/p0ptLIE3TZoOpdaXUHD0KOzV5RsDr60BlRumpA73Bb4M
- HnRKeqnRwGiL195PN7oOlHwO6fxkSUpNtVJU4etjbzPQTxplCWcbZoMnP3YOPK5CpPgJ
- w3W8IfjQzG/HgzCZf/IFfjb58xHfY+oy8PBQpJPlGADSbBUfbFqLIytoff1Si7TsWziB
- zJTmLhXyqAhHE91hAHQQlHXv4I2f2Yrc43YMib8j3mTD1ElMzT03SdDXS8WFZzhDb1Kp
- 5rvLOTTyAXRg7ZHNQfMg8UMdSJqDaii6rsCh749/1O1fz8FD8z4RnsQRWyBAtc0nfi/G
- Yukg==
+ bh=lv91sSXKs35P3x8woNZs+HbBMI4zxYxCmyNbLb4bINQ=;
+ b=lcbAGG8StDNalKSVJcdyfD2j68sMBFlxDqWgSymqeApHYXFCOXQB+f1jAX9nWTVQKs
+ MTjDhGA0+rZsu+Hz7ky4jdW2gi4m1kBuXRQC2fVnJoVfZCj1HCTWpWw/T83MiYX3B0qF
+ RqsbAJYu1R6dsqr1O8h0g0HO/kEM/Laj7i6i4rJmvyOAvlHLXYd+65se0ydQIbCgijXr
+ wht1UQnnbakFm/8YqfUXLTc8Nfx5ojWU+mGkBsy/OdwfG+3CN1aZQFRIlYClRDe+TeIT
+ bStxtKr5eXHYZSl5GvTIkLeEMkobTEDwfva0ra///ZwNIPqDjnGwXn13P6YI9dU4C3CF
+ j6ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700737367; x=1701342167;
+ d=1e100.net; s=20230601; t=1700737368; x=1701342168;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4rMAWzmusYUDsZk7ci6JrKCxjHNZYVX0mwEluINib7U=;
- b=f31fbW2zl9+pDLkzOON0V/H02hSulVpyDATfAsLoWCCnREG09UcMZVMazgW0LgiH4N
- 7rBhu3dCQ6LxAugGH6lBX6IdnsrPp90h5lrG10m/HhcgMsw48FgPrOnUPX0wcNftpv67
- Sh4raTUi9ZWZ9RJqS58ngD8bv5vFBzDhN0cveJ3mcHPHHEd1YWtjLOoHO/KHaXLAyw/m
- H3g8U+a5rryPOzYj+GF3vc9iw45KaVnYBVSflVZ4pP/2AeIt2X3St8cTlYdvzWheqW95
- 0hsoN4ned5XRfiKZzBiAcdmICQfTgjpXBxYeDwnO0ciFexSdbs4FvP0MgF0n9IX4itvY
- fjUQ==
-X-Gm-Message-State: AOJu0YxAMqPdxY36a5PQqqiCLn31SbRsLT+ZgrI+XeuBzE8qELPAOxLq
- QDAtAV/qutweFZtcM+atGSc=
-X-Google-Smtp-Source: AGHT+IGHvbP8vTL2YRydEAAZHJkrQARF2PEmybcpsy8QTuVACwGzcKqR+9R+5xRZvajKK20qJoPN8w==
-X-Received: by 2002:a19:4359:0:b0:508:11f5:8953 with SMTP id
- m25-20020a194359000000b0050811f58953mr3437295lfj.26.1700737367272; 
- Thu, 23 Nov 2023 03:02:47 -0800 (PST)
+ bh=lv91sSXKs35P3x8woNZs+HbBMI4zxYxCmyNbLb4bINQ=;
+ b=gqT5zJ7ZvQAs/TdQz/31ilRNIRHj9B/JWSy/Ei4gwt1/TmutMJDxMxKlmEzoNH7JSB
+ HrovB4z9YnbJyubRt11fqI3FJm4VhCTBVh1J8CeI1gUKWZ8jF6RzwedJjQvltNd2wSbk
+ Wi+W6TyWfj4ggiJGhdC/FhNP1cBV35hYKfZ/4NOnc0bEQaGAgdjBufy5mv7julc2XoeT
+ 3j+2CpW0WCTm3enL6Htel21OlSka34IPhj4zukg7NAe9h7Cwh5hoPLMD5ASIlmEDC2X/
+ uwTD5Vw0YwZMEWDl1eBZsenHd1OwimeOsSEvs+SMv1MXPgvKrmdqqxeJDwxvGryMkpvA
+ 40WA==
+X-Gm-Message-State: AOJu0YwyxwX/opfr65bRLI8Ey1u2Ql2Jj14JKZ9NtQUNMhby7gg9L3K8
+ HBFuEpVGDrOzsJWePL2AmhQ=
+X-Google-Smtp-Source: AGHT+IGXHQU13fEerqbf4PEgdqa4OzZWmtNDExtHe2tDewvU+nwrSG/c9DCp5Kf4MUGu0ejxjnosUA==
+X-Received: by 2002:ac2:4c1b:0:b0:509:45ed:1083 with SMTP id
+ t27-20020ac24c1b000000b0050945ed1083mr3117376lfq.40.1700737368572; 
+ Thu, 23 Nov 2023 03:02:48 -0800 (PST)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- w7-20020ac254a7000000b0050ab61a09f3sm156857lfk.104.2023.11.23.03.02.46
+ w7-20020ac254a7000000b0050ab61a09f3sm156857lfk.104.2023.11.23.03.02.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Nov 2023 03:02:47 -0800 (PST)
+ Thu, 23 Nov 2023 03:02:48 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -75,9 +75,10 @@ To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 3/5] common: console: introduce overflow and isempty calls
-Date: Thu, 23 Nov 2023 13:02:20 +0200
-Message-Id: <20231123110222.15116-4-clamor95@gmail.com>
+Subject: [PATCH v4 4/5] lib: membuff: fix readline not returning line in case
+ of overflow
+Date: Thu, 23 Nov 2023 13:02:21 +0200
+Message-Id: <20231123110222.15116-5-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231123110222.15116-1-clamor95@gmail.com>
 References: <20231123110222.15116-1-clamor95@gmail.com>
@@ -101,143 +102,51 @@ X-Virus-Status: Clean
 
 From: Ion Agorria <ion@agorria.com>
 
-Separate record overflow logic and add console_record_isempty
-as available calls don't serve to know output has been read
-fully with readline's.
+If a line overflows readline's maxlen it won't advance the membuffer
+and will return 0 as read amount which isn't even documented.
+Fix by removing this behavior alltogether.
 
 Signed-off-by: Ion Agorria <ion@agorria.com>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- common/console.c  | 15 ++++++++++++---
- include/console.h | 26 ++++++++++++++++++++++++++
- test/ut.c         |  9 ++++-----
- 3 files changed, 42 insertions(+), 8 deletions(-)
+ lib/membuff.c | 10 ----------
+ 1 file changed, 10 deletions(-)
 
-diff --git a/common/console.c b/common/console.c
-index 98c3ee6ca6..8a869b137e 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -818,6 +818,8 @@ int console_record_init(void)
- 	ret = membuff_new((struct membuff *)&gd->console_in,
- 			  CONFIG_CONSOLE_RECORD_IN_SIZE);
- 
-+	gd->flags |= GD_FLG_RECORD;
-+
- 	return ret;
- }
- 
-@@ -836,11 +838,13 @@ int console_record_reset_enable(void)
- 	return 0;
- }
- 
--int console_record_readline(char *str, int maxlen)
-+bool console_record_overflow(void)
+diff --git a/lib/membuff.c b/lib/membuff.c
+index 36dc43a523..f582193dcd 100644
+--- a/lib/membuff.c
++++ b/lib/membuff.c
+@@ -292,15 +292,12 @@ int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
  {
--	if (gd->flags & GD_FLG_RECORD_OVF)
--		return -ENOSPC;
-+	return gd->flags & GD_FLG_RECORD_OVF ? true : false;
-+}
+ 	int len;  /* number of bytes read (!= string length) */
+ 	char *s, *end;
+-	bool ok = false;
+-	char *orig = str;
  
-+int console_record_readline(char *str, int maxlen)
-+{
- 	return membuff_readline((struct membuff *)&gd->console_out, str,
- 				maxlen, '\0');
- }
-@@ -850,6 +854,11 @@ int console_record_avail(void)
- 	return membuff_avail((struct membuff *)&gd->console_out);
- }
- 
-+bool console_record_isempty(void)
-+{
-+	return membuff_isempty((struct membuff *)&gd->console_out);
-+}
-+
- int console_in_puts(const char *str)
- {
- 	return membuff_put((struct membuff *)&gd->console_in, str, strlen(str));
-diff --git a/include/console.h b/include/console.h
-index ceb733b5cb..d949d29c13 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -64,6 +64,13 @@ void console_record_reset(void);
-  */
- int console_record_reset_enable(void);
- 
-+/**
-+ * console_record_overflow() - returns state of buffers overflow
-+ *
-+ * Return: true if the console buffer was overflowed
-+ */
-+bool console_record_overflow(void);
-+
- /**
-  * console_record_readline() - Read a line from the console output
-  *
-@@ -84,6 +91,13 @@ int console_record_readline(char *str, int maxlen);
-  */
- int console_record_avail(void);
- 
-+/**
-+ * console_record_isempty() - Returns if console output is empty
-+ *
-+ * Return: true if empty
-+ */
-+bool console_record_isempty(void);
-+
- /**
-  * console_in_puts() - Write a string to the console input buffer
-  *
-@@ -113,6 +127,12 @@ static inline int console_record_reset_enable(void)
- 	return -ENOSYS;
- }
- 
-+static inline bool console_record_overflow(void)
-+{
-+	/* No overflow */
-+	return false;
-+}
-+
- static inline int console_record_readline(char *str, int maxlen)
- {
- 	/* Nothing to read */
-@@ -131,6 +151,12 @@ static inline int console_in_puts(const char *str)
- 	return 0;
- }
- 
-+static inline bool console_record_isempty(void)
-+{
-+	/* Always empty */
-+	return true;
-+}
-+
- #endif /* !CONFIG_CONSOLE_RECORD */
- 
- /**
-diff --git a/test/ut.c b/test/ut.c
-index 28da417686..d202644a15 100644
---- a/test/ut.c
-+++ b/test/ut.c
-@@ -53,15 +53,14 @@ long ut_check_delta(ulong last)
- 
- static int readline_check(struct unit_test_state *uts)
- {
--	int ret;
--
--	ret = console_record_readline(uts->actual_str, sizeof(uts->actual_str));
--	if (ret == -ENOSPC) {
-+	if (console_record_overflow()) {
- 		ut_fail(uts, __FILE__, __LINE__, __func__,
- 			"Console record buffer too small - increase CONFIG_CONSOLE_RECORD_OUT_SIZE");
--		return ret;
-+		return -ENOSPC;
+ 	end = mb->head >= mb->tail ? mb->head : mb->end;
+ 	for (len = 0, s = mb->tail; s < end && len < maxlen - 1; str++) {
+ 		*str = *s++;
+ 		len++;
+ 		if (*str == '\n' || *str < minch) {
+-			ok = true;
+ 			break;
+ 		}
+ 		if (s == end && mb->tail > mb->head) {
+@@ -309,13 +306,6 @@ int membuff_readline(struct membuff *mb, char *str, int maxlen, int minch)
+ 		}
  	}
  
-+	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
-+
- 	return 0;
- }
- 
+-	/* couldn't get the whole string */
+-	if (!ok) {
+-		if (maxlen)
+-			*orig = '\0';
+-		return 0;
+-	}
+-
+ 	/* terminate the string, update the membuff and return success */
+ 	*str = '\0';
+ 	mb->tail = s == mb->end ? mb->start : s;
 -- 
 2.40.1
 
