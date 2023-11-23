@@ -4,57 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 643FAC61D99
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 00:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845D2C27C40
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 00:53:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8C72875BE;
-	Thu, 23 Nov 2023 01:06:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 86DC286F99;
+	Thu, 23 Nov 2023 01:53:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700697972;
-	bh=3JNDPi+LC4yeyxiKMoD2tVNLWMQ4iaj6ALf/fjDMcEA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iYl99iV6tLedFoqecjEqhO6PA9rdaskiwh4Tj/L8QoEC89yDtjcV8Qj76/em6N0iB
-	 bZwnoJKpq8u1wv3WJ6sv5jRVW56UwY/BokdP/JeRvg6D+ZkAc/1j1e4YMJXLtiCF6U
-	 Y77SgVQLIUUJq09fb95pPVPwoILkaR6gD9TsCAmvmS/AkI4rHm2DEvl47+ZulRtN9H
-	 aJUUGtJkaovzcImEJ+D0WIFG9WVuImpmz165903dZX+XT+CwICLwq+sGj7HFpsXXZa
-	 fBQvCQ4RrSuqFjjDgM0PjMvZTfGdHv5xm4IY+PShaxwzEjJqTgD7sNiuiFtkPAAm2Q
-	 W9HJbCvz6c0+w==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uQSNj/6q";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 89642875F5; Thu, 23 Nov 2023 01:53:36 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D3628870BC;
- Thu, 23 Nov 2023 01:06:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700697970;
- bh=3JNDPi+LC4yeyxiKMoD2tVNLWMQ4iaj6ALf/fjDMcEA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=wKT4Tw77tD4Lkp+MBkm4wdKrCrcKuOBGal9l4NXW6fmalFPITU/INZs3Usn8G8ug4
- OS7ft/XlJ3oArIzYnSlF5db0mL+Gazm1hy9ur608lAPTG6Sq6PQPADC5HIPjfr3lUp
- 6SDkTeDQbajvEYe+EhMMG8K69mEMZty+8TQzQ5MIAzvCRrEo0jN+Yqr51nWxtvDR9P
- MxehjWVG3GVQmVSz6UydQmmp5naOshS1gtURXyszdssu8W1AgymQnfbMFwBgl46s6o
- zsCPDuG5fbvhMGROnoiUgesQIr+FfRmU8GFmeYwOjGD555cQ9TPcde2hMkpmB8AhfA
- ALLzz+i5/kqAQ==
-Message-ID: <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
-Date: Thu, 23 Nov 2023 01:06:08 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 4EDCF86DAF
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 01:53:34 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5cc589c0b90so3548237b3.2
+ for <u-boot@lists.denx.de>; Wed, 22 Nov 2023 16:53:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1700700813; x=1701305613; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=liniMg2LiPOsza13tTlBFonQcXe8/Lu5ZyDtd3Pdb5Y=;
+ b=uQSNj/6qxC9fj8ejyAcKA62hQvz7pHrHRso3Xnoa3Z37OAQE6ZDjZDG72E2J+YmZ1u
+ Iacc93yhodNtTe9aJiaqWYlKlP6BBhDPFDZ2fuGn5rEYMWaW6OVp1ZFFfDM8vGTGo1CO
+ 9KQFXH5pbFwIe6/a4+IgqXesgES4JeizjpdqY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700700813; x=1701305613;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=liniMg2LiPOsza13tTlBFonQcXe8/Lu5ZyDtd3Pdb5Y=;
+ b=wEOcc7y5oBmirGSbvvYv3jBbOiZXox8Kpx+1RBOx2J7Slzm/C0aAS+uzU3imkeEbmR
+ F83nEiwuzJbLo5Sw+UW4ysOIlwKfcYqNHzenWa4jxmOAoYomrw9j1Epc4afAEuSaFK1y
+ rts3ZL2aUbyDipxVpXYYfQ4CpxX0jA+7YjxcrG1oo4Ri9F86JuD4lFDfawYZ74vI0sB0
+ QcTXW7chO7uILjSH6FX3x1frdc+30aXAN7Gtt3gNv76M18oXURx5W/d9aZMBItg3ed2H
+ 3W2suJAHwsz/Cm98cKTqu8HT+//MHiYgBxuMr2K10XzQGSghDUkud6981vnRMYcJfqYz
+ QWoA==
+X-Gm-Message-State: AOJu0YwmDPe5K2PduDCifnZ0Fpbav3Q0hj1rwh0LNqkulvD1nrnKAmbt
+ FCsHaFs0iixPgQr6kV4jL+i+PJTxP3g1gVCYGxkblg==
+X-Google-Smtp-Source: AGHT+IHcUeyUYhNHY5t0yyA+7JvybIgJUAeqxtA+I3ao6Kl+85y9S/7Aatbd/hshf10grQicG2irrw==
+X-Received: by 2002:a81:6c07:0:b0:5a9:30c3:c664 with SMTP id
+ h7-20020a816c07000000b005a930c3c664mr4371764ywc.19.1700700813031; 
+ Wed, 22 Nov 2023 16:53:33 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-c98c-6625-156a-8c47.res6.spectrum.com.
+ [2603:6081:7b00:6400:c98c:6625:156a:8c47])
+ by smtp.gmail.com with ESMTPSA id
+ w124-20020a0dd482000000b005cb56eb0d8dsm78585ywd.39.2023.11.22.16.53.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Nov 2023 16:53:32 -0800 (PST)
+Date: Wed, 22 Nov 2023 19:53:30 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Naresh Solanki <naresh.solanki@9elements.com>
+Cc: u-boot@lists.denx.de, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] sbp1: Add support for IBM SBP1 board
+Message-ID: <20231123005330.GA3085390@bill-the-cat>
+References: <20231117105053.1109399-1-naresh.solanki@9elements.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-References: <20231110141311.512334-1-i@shantur.com>
- <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
- <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+2A2t4zKz1Et3jnx"
+Content-Disposition: inline
+In-Reply-To: <20231117105053.1109399-1-naresh.solanki@9elements.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,49 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/20/23 00:03, Shantur Rathore wrote:
-> Hi Marek,
 
-Hi,
+--+2A2t4zKz1Et3jnx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Sun, Nov 19, 2023 at 8:53 PM Marek Vasut <marex@denx.de> wrote:
->>
->> On 11/10/23 15:13, Shantur Rathore wrote:
->>> Currently when a hub is turned on, all the ports are powered on.
->>> This works well for hubs which have individual power control.
->>>
->>> For the hubs without individual power control this has no effect.
->>
->> OK
->>
->>> Mostly in these scenarios the hub port is powered before the USB
->>> controller is enabled, this can lead to some devices in unexpected
->>> state.
->>
->> This ^ part needs clarification.
->>
->> Which devices are in incorrect state, the ones connected to the hub
->> downstream facing ports ?
->>
-> 
-> In my case RockPro64, the power to usb ports onboard is controlled by
-> a regulator.
-> This regulator is enabled as part of init  as here
-> https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3399-rockpro64.dtsi#L177
-> 
-> On init, the usb devices connected to the port are powered up, in my
-> case AM8180 (a RTL9210 based ) NVMe to USB enclosure with UAS.
-> But the usb controller is only enabled at 'usb start' and by this time
-> the device is in some state that it doesn't get detected.
-> 
-> One way to make sure the devices connected to the ports are in an
-> initialising state is by issuing a port reset before scanning the
-> port.
+On Fri, Nov 17, 2023 at 04:20:38PM +0530, Naresh Solanki wrote:
 
-Why not remove this regulator-always-on and let the PHY driver turn the 
-VBUS ON only when it is needed ?
+> From: Patrick Rudolph <patrick.rudolph@9elements.com>
+>=20
+> Add defconfig & devicetree for IBM SBP1 board BMC based on AST2600 SoC.
+>=20
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+> Signed-off-by: Naresh Solanki <naresh.solanki@9elements.com>
+> ---
+>=20
+>  arch/arm/dts/Makefile         |   4 +-
+>  arch/arm/dts/ast2600-sbp1.dts |  96 ++++++++++++++++++++++++++
+>  configs/ibm-sbp1_defconfig    | 126 ++++++++++++++++++++++++++++++++++
+>  3 files changed, 225 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/ast2600-sbp1.dts
+>  create mode 100644 configs/ibm-sbp1_defconfig
 
-Wouldn't that solve the problem too AND remove unnecessarily enabled 
-regulator ?
+This new defconfig needs to be listed in one of the MAINTAINERS files,
+[snip]
+> @@ -0,0 +1,126 @@
+> +CONFIG_ARM=3Dy
+> +CONFIG_SYS_DCACHE_OFF=3Dy
+> +CONFIG_POSITION_INDEPENDENT=3Dy
+> +CONFIG_SPL_SYS_THUMB_BUILD=3Dy
+> +CONFIG_ARCH_ASPEED=3Dy
+> +CONFIG_TEXT_BASE=3D0x80000000
+> +CONFIG_SYS_MALLOC_LEN=3D0x2000000
+> +CONFIG_SYS_MALLOC_F_LEN=3D0x800
+> +CONFIG_ASPEED_AST2600=3Dy
+> +CONFIG_TARGET_EVB_AST2600=3Dy
 
-[...]
+Probably the same one that has CONFIG_TARGET_EVB_AST2600 board code.
+
+--=20
+Tom
+
+--+2A2t4zKz1Et3jnx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVeooQACgkQFHw5/5Y0
+tyzUzQv9GWBZwVfdzM665rJO6EB/oHMOT9CKNh9eBllRgjdnZ7yuVjZiK3QtCGvy
+G2/w3ULTXiHzO38UV0gDRbUCXH6c65ZXiSjOFI/Py5EcxtVA2mMQq8vlyIQQ5/q3
+CLUzqWESeKuboYq7o5qmoQofc+oPzaO8l+zhBUDrePDffKJsPoqkd6j3oI7HptLZ
++IeSABXdCz/oy+M6F8IM9kT01Oj7OB5LcecsbI7QOLALAn79r7XEe3z4cywYaMg4
+VCAQY3RihUrcqgVYfWqvMWZf7l0jVXgttzeoqjTstjxkRq/8FdbIUnAVynwILBqj
+YU9zoin7ii2N7vBSZE7hqiS+WNRT9tigU0QlyF4L2GFua1njGPlDqH/jD9C0M/LI
+5tEyShq6mRarsQ6Z+9h+jxBVzJ9EFZwr7wZdC/N1RCHE7gKRIw9klBh2PStQcL1M
+5W/VkLjYA9xHCw3pUzgdkFjmLrGBG5kzASqeZNCzJSoLtKte0uab4ZiGNuI6wFmc
+TBSLcgWu
+=rSLp
+-----END PGP SIGNATURE-----
+
+--+2A2t4zKz1Et3jnx--
