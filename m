@@ -4,27 +4,27 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD25C624B4
-	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 15:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE41C61DF7
+	for <u-boot@archiver.kernel.org>; Thu, 23 Nov 2023 15:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D69838766E;
-	Thu, 23 Nov 2023 16:10:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 194D187687;
+	Thu, 23 Nov 2023 16:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 987D387657; Thu, 23 Nov 2023 16:10:27 +0100 (CET)
+ id 79A0887680; Thu, 23 Nov 2023 16:10:29 +0100 (CET)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [217.70.183.196])
+ [IPv6:2001:4b98:dc4:8::224])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CF6B8760A
- for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 16:10:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F21F87677
+ for <u-boot@lists.denx.de>; Thu, 23 Nov 2023 16:10:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=foss+uboot@0leil.net
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 89D3BE0006;
- Thu, 23 Nov 2023 15:10:23 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 40B97E0008;
+ Thu, 23 Nov 2023 15:10:25 +0000 (UTC)
 From: Quentin Schulz <foss+uboot@0leil.net>
 To: Joe Hershberger <joe.hershberger@ni.com>,
  Klaus Goger <klaus.goger@theobroma-systems.com>,
@@ -32,13 +32,14 @@ To: Joe Hershberger <joe.hershberger@ni.com>,
  Kever Yang <kever.yang@rock-chips.com>
 Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de,
  Heiko Stuebner <heiko@sntech.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH next v2 0/6] rockchip: puma-rk3399/ringneck-px30: fix check
- against value in default environment variable
-Date: Thu, 23 Nov 2023 16:10:04 +0100
-Message-ID: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Subject: [PATCH next v2 1/6] rockchip: ringneck-px30: do not hardcode MMC
+ controller paths
+Date: Thu, 23 Nov 2023 16:10:05 +0100
+Message-ID: <20231123-env_default_theobroma-v2-1-a80914c2c114@theobroma-systems.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
+References: <20231123-env_default_theobroma-v2-0-a80914c2c114@theobroma-systems.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.12.4
@@ -60,64 +61,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For puma-rk3399 and ringneck-px30, U-Boot proper automatically modifies
-boot_targets to swap the order in which MMC storage media are used for
-standard boot based on which MMC storage medium was used to load U-Boot
-proper. This is however only done if the user has not changed it
-manually, therefore a check between the default and current value is
-done.
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-This used to work fine until the migration to standard boot where
-boot_targets value size in the default environment went above the 32
-characters that env_get_default function can return, thus resulting in a
-truncated variable.
+To prepare to put the similar logic around storage medium selection for
+Ringneck PX30 and Puma RK3399 in common, let's not use hardcoded paths
+but use uclass functions instead to find udevice based on their DT node
+full path.
 
-Therefore the check between default and current value would always fail.
-
-By adding the env_get_default_into function, a buffer of the appropriate
-size can be allocated on the stack to get the whole value of
-boot_targets in the default environment and thus fixing the check.
-
-While at it, simplify maintenance by putting this logic in a common file
-and stop using hardcoded DT paths for MMC controllers and SPI flash
-memory.
-
+Cc: Quentin Schulz <foss+uboot@0leil.net>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
-Changes in v2:
-- added board/theobroma-systems/common putting all storage medium logic
-  into a common file,
-- adapted the storage medium logic to be device-agnostic,
-- added Rbs
-- removed patches surrounding all code by an ifndef CONFIG_SPL_BUILD and
-  do this at the Makefile level of each board,
-- Link to v1: https://lore.kernel.org/r/20231108-env_default_theobroma-v1-0-cb493bfdeffd@theobroma-systems.com
+ .../ringneck_px30/ringneck-px30.c                  | 29 +++++++++++++---------
+ 1 file changed, 17 insertions(+), 12 deletions(-)
 
----
-Quentin Schulz (6):
-      rockchip: ringneck-px30: do not hardcode MMC controller paths
-      rockchip: puma-rk3399: do not hardcode MMC controller paths
-      rockchip: ringneck-px30/puma-rk3399: factor out storage medium selection
-      env: allow to copy value from default environment into a buffer
-      env: migrate env_get_default to call env_get_default_into
-      rockchip: theobroma-systems: fix modified boot_targets detection
+diff --git a/board/theobroma-systems/ringneck_px30/ringneck-px30.c b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+index 537ce0d1d11..fb5570767db 100644
+--- a/board/theobroma-systems/ringneck_px30/ringneck-px30.c
++++ b/board/theobroma-systems/ringneck_px30/ringneck-px30.c
+@@ -68,11 +68,16 @@ static int setup_boottargets(void)
+ 	 * Make the default boot medium between SD Card and eMMC, the one that
+ 	 * was used to load U-Boot proper.
+ 	 */
+-	bool sd_booted = !strcmp(boot_device, "/mmc@ff370000");
++	struct udevice *devp;
++
++	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp)) {
++		debug("%s: not reordering boot_targets, bootdev %s != MMC\n",
++		      __func__, boot_device);
++		return 0;
++	}
++
+ 	char *mmc0, *mmc1;
+ 
+-	debug("%s: booted from %s\n", __func__,
+-	      sd_booted ? "SD-Card" : "eMMC");
+ 	mmc0 = strstr(env, "mmc0");
+ 	mmc1 = strstr(env, "mmc1");
+ 
+@@ -87,8 +92,8 @@ static int setup_boottargets(void)
+ 	 * If mmc1 comes first in the boot order and U-Boot proper was
+ 	 * loaded from mmc0, swap mmc0 and mmc1 in the list.
+ 	 */
+-	if ((mmc0 < mmc1 && sd_booted) ||
+-	    (mmc0 > mmc1 && !sd_booted)) {
++	if ((mmc0 < mmc1 && devp->seq_ == 1) ||
++	    (mmc0 > mmc1 && devp->seq_ == 0)) {
+ 		mmc0[3] = '1';
+ 		mmc1[3] = '0';
+ 		debug("%s: set boot_targets to: %s\n", __func__, env);
+@@ -102,6 +107,7 @@ int mmc_get_env_dev(void)
+ {
+ 	const char *boot_device =
+ 		ofnode_read_chosen_string("u-boot,spl-boot-device");
++	struct udevice *devp;
+ 
+ 	if (!boot_device) {
+ 		debug("%s: /chosen/u-boot,spl-boot-device not set\n",
+@@ -111,19 +117,19 @@ int mmc_get_env_dev(void)
+ 
+ 	debug("%s: booted from %s\n", __func__, boot_device);
+ 
+-	if (!strcmp(boot_device, "/mmc@ff370000"))
+-		return 1;
++	if (uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
++		return CONFIG_SYS_MMC_ENV_DEV;
+ 
+-	if (!strcmp(boot_device, "/mmc@ff390000"))
+-		return 0;
++	debug("%s: get MMC ENV from mmc%d\n", __func__, devp->seq_);
+ 
+-	return CONFIG_SYS_MMC_ENV_DEV;
++	return devp->seq_;
+ }
+ 
+ enum env_location arch_env_get_location(enum env_operation op, int prio)
+ {
+ 	const char *boot_device =
+ 		ofnode_read_chosen_string("u-boot,spl-boot-device");
++	struct udevice *devp;
+ 
+ 	if (prio > 0)
+ 		return ENVL_UNKNOWN;
+@@ -137,8 +143,7 @@ enum env_location arch_env_get_location(enum env_operation op, int prio)
+ 	debug("%s: booted from %s\n", __func__, boot_device);
+ 
+ 	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC) &&
+-	    (!strcmp(boot_device, "/mmc@ff370000") ||
+-	     !strcmp(boot_device, "/mmc@ff390000")))
++	    !uclass_find_device_by_ofnode(UCLASS_MMC, ofnode_path(boot_device), &devp))
+ 		return ENVL_MMC;
+ 
+ 	printf("%s: No environment available: booted from %s but U-Boot "
 
- board/theobroma-systems/common/common.c            | 143 +++++++++++++++++++++
- board/theobroma-systems/common/common.h            |  19 +++
- board/theobroma-systems/puma_rk3399/MAINTAINERS    |   1 +
- board/theobroma-systems/puma_rk3399/Makefile       |   3 +
- board/theobroma-systems/puma_rk3399/puma-rk3399.c  | 143 +--------------------
- board/theobroma-systems/ringneck_px30/MAINTAINERS  |   1 +
- board/theobroma-systems/ringneck_px30/Makefile     |   3 +
- .../ringneck_px30/ringneck-px30.c                  | 142 +-------------------
- env/common.c                                       |  16 ++-
- include/env.h                                      |  10 ++
- 10 files changed, 195 insertions(+), 286 deletions(-)
----
-base-commit: 9e53e45292ee2f1d9d2ccc59914b161bef9b10d7
-change-id: 20231108-env_default_theobroma-33774a337fe6
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@theobroma-systems.com>
+2.42.0
 
