@@ -4,76 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66654C61DF4
-	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 12:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CDFFC61DF4
+	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 12:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 857C787478;
-	Fri, 24 Nov 2023 13:05:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id B198C871C7;
+	Fri, 24 Nov 2023 13:09:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="hTQTSyoA";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ED101875E3; Fri, 24 Nov 2023 13:05:42 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C1AC87008
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 13:05:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-332e40322f0so937162f8f.3
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 04:05:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700827540; x=1701432340;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=B9eUE8sWPSh399otQrFHGgubQ1e2nHgx4wIQZzpOxJI=;
- b=hTQTSyoAkhDSGvKj5X8YIWqc8SaInQ+x6n8IzOGYpE0icWGnKX52ufxls1zzUwDDI3
- k7jPvQzZ5A7UeofT9OYEzH+cfIzKs6fUp8thKSLyjqKnwMqJ/3ebyDD1nymk8sTJKtNp
- G9f4Bstgagg2k6Wv7VV+HW+h4AjNcWvLUT9wq0e7pC0zHX9cWKSN1JeDZ8ZsgOKzhB57
- f7VHjOBR1XjTc35v0VqvktTEaI2EIq9haZCTBiE4nud2uV/USVusmAG2d47rYRwusGyA
- f3V8MLuW8tqoFF9LIZNJJHj3Y8h6E2PUXkExd24pfdyrR3zBQfc7xYWqnOrZjp3eMZUi
- dL8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700827540; x=1701432340;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=B9eUE8sWPSh399otQrFHGgubQ1e2nHgx4wIQZzpOxJI=;
- b=iAB4FKszfW2C3LPQEfCAhlzDdgdiE9VdSqvNcFcrvHT5luIy+WPWHepBlN5tnvT/pc
- 5YFvSbsKnmRVzaydELfkt5ajIeqMusTCXhK6+u1c4PP4gZa7g7RwuPqEFsM8bZ9vGOlE
- HuwskZYnVdPQq4JBd6OuhYxXj7t8EK1ymCD4qIcWONZEblfw9wgtrGITEylVkXbF49ZQ
- BaXBSQybGepBLggO3Ix+y2ZaVmF/NlJsF3WfUF12Of14NGo5Orxj1v9Ss97UHQ7Yc2yi
- raho6SlgIEEUgvt0g7K9F0ks+ZTDgVlKuhJ5GwF6p5YWQ9b9THO1TnMTZNZ/zbc0/fQq
- ox7w==
-X-Gm-Message-State: AOJu0YyiK5wE5sHcgplI4sEuaNihWhCL53A4p/pOtlqaMk5upVTK/S0I
- HGiSmvKBrPoSUeuvXxNfwJBWYAizLR0I/IqWpdbetzbd
-X-Google-Smtp-Source: AGHT+IHEcB+1o7v6S9SOD9R3wr2RSqzCmBgL1st+OGd6GC+P9zXoDZaa/oegLs2BNt89m0lWidhlnA==
-X-Received: by 2002:a5d:630d:0:b0:32f:7bf6:db01 with SMTP id
- i13-20020a5d630d000000b0032f7bf6db01mr2096414wru.67.1700827540141; 
- Fri, 24 Nov 2023 04:05:40 -0800 (PST)
-Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
- [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- j14-20020adff54e000000b0032db8cccd3asm4223732wrp.114.2023.11.24.04.05.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 04:05:39 -0800 (PST)
-From: Shantur Rathore <i@shantur.com>
-To: u-boot@lists.denx.de
-Cc: Shantur Rathore <i@shantur.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH] maintainers: rk3399: remove maintainer
-Date: Fri, 24 Nov 2023 12:04:31 +0000
-Message-Id: <20231124120431.115717-1-i@shantur.com>
-X-Mailer: git-send-email 2.40.1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700827766;
+	bh=Zl2pRw3WflG4q1rgs/enaJiOSEuh2NrfmRXbDW8LFUo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=befI5SrTeHF1aOHH569jC+39OU1vap3rRP3BWECIa1g3+FgJoTo/f5sHN9fmtHZgD
+	 kH1sCOT1idCR+6fPglr8qQs+GKUoNkPR9NDCB5KImqpgsMZeiXMk/dg4AEOdLH5xMn
+	 ZDBIWdxcG743YlFCKaT2qJKENX0tUWC+XemXoFTY+IFQQSd5vVDP+UJ4YwEthv8X5i
+	 +Awqquv9SeE1qE4YP7RN3grzC/KvjXiL5OSBODgnBQIlVZ48HUCqDwRu33w0y4rUTp
+	 8MTlwg7ZVUVlrKRNVg9BnnDoEC8AYllcjJXwfbRyrz6pIl/pcHBgMuUCOItIN7VEp3
+	 9O+SfHSi7x/Cg==
+Received: from eryximachos (unknown
+ [IPv6:2a01:cb18:989:a700:90fa:3f82:fe6a:48f9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested) (Authenticated sender: pro@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 300788711D;
+ Fri, 24 Nov 2023 13:09:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700827764;
+ bh=Zl2pRw3WflG4q1rgs/enaJiOSEuh2NrfmRXbDW8LFUo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=MMB3kWhX0bg0U/VqxvhtcyYafJAcd5tk08WufTTMIM79PDy+695MgdLmmVL54Ql3J
+ juu5PH1bKo74EmoMXJ8LFWV5rzVGSPN6FRyE8q5LqDx/Px8tklo/U6R2eOlE3aKOw5
+ jWY2WM4Al6FKdBbgwZxo5UptGrbes7IXpOQPg+8qY/fZrISVJXi1KXUYw03i5SXQIl
+ 79hnvQ2oaAQ8tOot0MPj+atIpdvZKATmvgBOWmieqxmkL8Rzf0FyLTyowmfBApdeWu
+ T3NCccUKok9RQmaQxXnZqvsCKGwI3G/5cwtYTULW2uGGRQ9iqI2FbCCXIMHOS2vGnE
+ Dos0r5J+gLWGA==
+Date: Fri, 24 Nov 2023 13:09:22 +0100
+From: Philip Oberfichtner <pro@denx.de>
+To: Moritz Fischer <moritzf@google.com>
+Cc: sjg@chromium.org, u-boot@lists.denx.de, bmeng.cn@gmail.com,
+ marex@denx.de, xypron.glpk@gmx.de, stcarlso@linux.microsoft.com
+Subject: Re: [PATCH] pci: Enable dm_pci_map_bar() for 64-bit BARs
+Message-ID: <ZWCScp6HHX9gj9Ow@eryximachos>
+References: <20231124101520.1077082-1-moritzf@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231124101520.1077082-1-moritzf@google.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,38 +67,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove Akash Gajjar <akash@openedev.com> from
-MAINTAINERS as email is bouncing.
+Hi,
 
-Signed-off-by: Shantur Rathore <i@shantur.com>
----
+On Fri, Nov 24, 2023 at 10:15:20AM +0000, Moritz Fischer wrote:
+> Allow dm_pci_map_bar() usage on systems with CONFIG_PCI_SYS_64BIT.
+<snip>
+>  
+> +	/*
+> +	 * This assumes that dm_pciauto_setup_device() will allocate
+> +	 * a 64-bit address if CONFIG_SYS_PCI_64BIT is enabled and
+> +	 * the device advertises that it supports it.
+> +	 */
 
- board/pine64/rockpro64_rk3399/MAINTAINERS | 1 -
- board/rockchip/evb_rk3399/MAINTAINERS     | 1 -
- 2 files changed, 2 deletions(-)
+This patch is also useful if the previous bootstage, e.g. coreboot,
+allocated a 64-bit address. In fact I recently did something very
+similar (downstream), so
 
-diff --git a/board/pine64/rockpro64_rk3399/MAINTAINERS b/board/pine64/rockpro64_rk3399/MAINTAINERS
-index 303db144aa..220ee21f23 100644
---- a/board/pine64/rockpro64_rk3399/MAINTAINERS
-+++ b/board/pine64/rockpro64_rk3399/MAINTAINERS
-@@ -1,5 +1,4 @@
- ROCKPRO64
--M:	Akash Gajjar <akash@openedev.com>
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	board/pine64/rockpro64_rk3399
-diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
-index c7e412b54e..acdb840f20 100644
---- a/board/rockchip/evb_rk3399/MAINTAINERS
-+++ b/board/rockchip/evb_rk3399/MAINTAINERS
-@@ -93,7 +93,6 @@ F:	configs/rock-4se-rk3399_defconfig
- F:	arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
- 
- ROCK-PI-4
--M:	Akash Gajjar <akash@openedev.com>
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
- F:	configs/rock-pi-4-rk3399_defconfig
+Reviewed-by: Philip Oberfichtner <pro@denx.de>
+
+
 -- 
-2.40.1
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-22  Fax: +49-8142-66989-80   Email: pro@denx.de
+=====================================================================
 
+> +	if (IS_ENABLED(CONFIG_SYS_PCI_64BIT) &&
+> +	    (bar_response & PCI_BASE_ADDRESS_MEM_TYPE_64)) {
+> +		dm_pci_read_config32(udev, bar + 4, &bar_response);
+> +		pci_bus_addr |= (pci_addr_t)bar_response << 32;
+> +	}
+> +
+>  	if (~((pci_addr_t)0) - pci_bus_addr < offset)
+>  		return NULL;
+>  
+> diff --git a/include/pci.h b/include/pci.h
+> index 2f5eb30b83..0d1ac7b015 100644
+> --- a/include/pci.h
+> +++ b/include/pci.h
+> @@ -1350,8 +1350,8 @@ pci_addr_t dm_pci_phys_to_bus(struct udevice *dev, phys_addr_t addr, size_t len,
+>   *
+>   * Looks up a base address register and finds the physical memory address
+>   * that corresponds to it.
+> - * Can be used for 32b BARs 0-5 on type 0 functions and for 32b BARs 0-1 on
+> - * type 1 functions.
+> + * Can be used for 32b/64b BARs 0-5 on type 0 functions and for 32b BARs 0-1
+> + * on type 1 functions.
+>   * Can also be used on type 0 functions that support Enhanced Allocation for
+>   * 32b/64b BARs.  Note that duplicate BEI entries are not supported.
+>   *
+> -- 
+> 2.43.0.rc1.413.gea7ed67945-goog
+> 
