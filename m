@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 928A6C61D97
-	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 10:44:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F9FC61D97
+	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 11:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD31B86E81;
-	Fri, 24 Nov 2023 11:44:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A1096870FF;
+	Fri, 24 Nov 2023 12:37:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0y0Mwxjj";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="PlPdmqH/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83024869DA; Fri, 24 Nov 2023 11:44:19 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id A9045870FF; Fri, 24 Nov 2023 12:37:07 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76BCB86E81
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 11:44:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF42987008
+ for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 12:37:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-507bd64814fso2438445e87.1
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 02:44:16 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-332d2948170so1174905f8f.2
+ for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 03:37:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1700822656; x=1701427456;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700825825; x=1701430625;
  darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=kzPIW36QoiWx5NStxG2py/Q6AL2THyPcXdd0pI4w8RA=;
- b=0y0Mwxjj8CT4HxNBXZhkNbp9ZgVU0EidcMqpw5Xe7et3/IHRWSxv3ok4bpc7oKjFqX
- yppWaeO8uFj/+8gkJFHHJNZko0HYtQpUXv/mKZf/HLtL5zLeVg/seekx6C5b2ziR8VUY
- kY3grrqB6Q9TL9qEJ5gzoRILZKo3sPxT0HDGoDCcrPWAi0Tdf72AT6NsXqZe71OkghK/
- rUKqAnAC8LmkkGYgd5sUAq2r1t2DiQuVoVwLAVfVMxToXNCB7qwl4OLPR6+U6LPG2zO6
- oXvOx3whaR0wBOwTZJ8AHboq+fdcvMwvp2m6UMvx2gEdsqIz2/d+0p1SswQaGLdbmLwk
- nKsA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gWEkxmn5EHY0SoMdhCztEAs6D1sXq5lEaG83vA2MUlY=;
+ b=PlPdmqH/gqVrb/W0zydE107xR4lPRl5Q3vEHQGvKBB9lNcCBAOMgyK7lX2LcrztX5L
+ TNr6y6C3Z509IOEchRnpoiusWyQVH0eGBUT4DmduM8vyGhcAVMycLO3eyBpwmZ1YgM2M
+ TE9BQShY3WarvMimWqEUSducEsCGwmlKqsxVEtxPBIBEbcaWOQE5T1e6YhM03iB5i57A
+ LkUVNTMoZ/GoAr9SVjCYncfFPX2cRv8qISPaxlquoWxGGVJwY6rRQy0q95CrRnK7b6Yn
+ eZ69GTqdM3ek1FRvcfD8gfRTDAX6lb6n855KsA3hniRyHeEWlBgZIont2/OPVOfLFPxJ
+ /ZEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700822656; x=1701427456;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kzPIW36QoiWx5NStxG2py/Q6AL2THyPcXdd0pI4w8RA=;
- b=Et66OC2YuJbMmxqgnrTKv5pt7LGwbde1no19Jql1oWYD1XJokxdmoWx3DCQWpSkXP3
- QRrBj6hIK+aQfQyrsmedeDgx2OWmvyVwwQcNcOtKtRU8T1InfWkKPADN+aoyENOnNr3E
- VaaQ1OYa+NOMTS5IHFJOxY1mzdkpn+LBr8SUomaVkE9ctT+C38YkeM3iEk2LG/f+n6c6
- F1iS30lgxt2RC03dJdwojEUlwaTVHIqym6OxcXpUWXYemoOzu270wgzVwhSEa2FE6Gcu
- qRDzWUPluRMmi50+JRRG3miMlts0K1iUSOYr/HkVkmdcwjX10KOdULsNrsnDI/yAhmqF
- /u6Q==
-X-Gm-Message-State: AOJu0YyGb5/Ngah97NyWQMTyzDMpQ9OUwZI2QBK7TSWH6v6OPgRAc71U
- 9I1WLfXROMrtc4VyClF/WJq3VA==
-X-Google-Smtp-Source: AGHT+IGnauOAOSINfEigHc6lKWAZOaSk6OGZ+XCszXRQ7j78N416CJPlMgcVuvufKW7+USNfUAQ6Vg==
-X-Received: by 2002:ac2:5fc5:0:b0:500:daf6:3898 with SMTP id
- q5-20020ac25fc5000000b00500daf63898mr1248013lfg.26.1700822655683; 
- Fri, 24 Nov 2023 02:44:15 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- r8-20020a05600c320800b00405391f485fsm4559755wmp.41.2023.11.24.02.44.15
+ d=1e100.net; s=20230601; t=1700825825; x=1701430625;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gWEkxmn5EHY0SoMdhCztEAs6D1sXq5lEaG83vA2MUlY=;
+ b=BIinbaEz4J+jls5KZW31jL9MKTtDLvmdgf74aQ6cxjM0DSaLCH368KAOT4zWckpy36
+ mz52hI/rIjSadycY5QkBxlI28slMC4Bk4euWFGlI6d89DeZ2Q6FUUOFe5Dm2RtMZZRaI
+ JDOfMDBl/HbUWDyp6oQJltiVlGFSXVFA2tY88hJBEj93NFT5pxAh4P7oP6/UIOVrLuLY
+ ZgOn80Ea12MZxhS/a0qL5DF8zFA1dYYuvNnvLHEr8M1CeU/p8hBKdP7BrpgpLKbttuWJ
+ Ng2Snp5HKyQQFxSC3H/6s0j4t6EMYt1wZwkBsuC3ZuWK29kNHbAybf0sjEObxqPuz0nz
+ NsXw==
+X-Gm-Message-State: AOJu0YyG6ENeHEva50ZKwAQP+ea1NHYCMHTag+la3RjG201WummKIr00
+ AhzEKyY2GBU+FqXN3fYHSaXJyK272PMgXHebcH3NDAxK
+X-Google-Smtp-Source: AGHT+IFfWMLqGmh3UFnfNB22b8u7i+9JasAMTzvLHuQwEmzY5x584OPlvPRblkDSvaGLHJeeZ1TNpg==
+X-Received: by 2002:adf:edc7:0:b0:332:e61e:43c3 with SMTP id
+ v7-20020adfedc7000000b00332e61e43c3mr2024965wro.16.1700825824558; 
+ Fri, 24 Nov 2023 03:37:04 -0800 (PST)
+Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
+ [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
+ o8-20020a5d6848000000b0031980294e9fsm4052093wrw.116.2023.11.24.03.37.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Nov 2023 02:44:15 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-dfu-next-20231124
-Date: Fri, 24 Nov 2023 11:44:14 +0100
-Message-ID: <87fs0vbfcx.fsf@baylibre.com>
+ Fri, 24 Nov 2023 03:37:03 -0800 (PST)
+From: Shantur Rathore <i@shantur.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>,
+ Akash Gajjar <akash@openedev.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH v2 0/3] efi: vars: Implement SPI Flash storage
+Date: Fri, 24 Nov 2023 11:35:49 +0000
+Message-Id: <20231124113552.112243-1-i@shantur.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,58 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+With this patch series we implement SPI Flash storage for EFI
+variables.
 
-Here are some developments for next including:
+Changes in v2:
+- Refactored efi_var_file to move common parts out as requested
+- Changed ifdefs to use CONFIG_IS_DEFINED
+- Fixed typos
 
-- Make dfu entity name size configurable in KConfig
-- Implement start-stop for UMS (graceful shutdown via eject)
-- Improve help messages for cmd/bind
-- Improve help message for udc bind failures
+Shantur Rathore (3):
+  efi_var_file: refactor to move buffer functions
+  efi_vars: Implement SPI Flash store
+  defconfig: rockpro64: Enable SF EFI var store
 
-The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/18704
+ configs/rockpro64-rk3399_defconfig |   2 +
+ include/efi_variable.h             |  26 +++++++
+ lib/efi_loader/Kconfig             |  25 ++++++
+ lib/efi_loader/Makefile            |   3 +-
+ lib/efi_loader/efi_var_common.c    | 109 ++++++++++++++++++++++++++
+ lib/efi_loader/efi_var_file.c      | 121 -----------------------------
+ lib/efi_loader/efi_var_sf.c        |  91 ++++++++++++++++++++++
+ lib/efi_loader/efi_variable.c      |  17 +++-
+ 8 files changed, 270 insertions(+), 124 deletions(-)
+ create mode 100644 lib/efi_loader/efi_var_sf.c
 
-Thanks,
-Mattijs
-
-The following changes since commit dca7a8958f8d0dbd53072caa4353353e062d80ca:
-
-  Merge tag 'v2024.01-rc3' into next (2023-11-20 09:19:50 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-next-20231124
-
-for you to fetch changes up to 8a0d07807abb5370fe879321c7f1d22fdda3255f:
-
-  usb: udc: Try to clarify an error message (2023-11-21 15:48:38 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-next-20231124
-
-- Make dfu entity name size configurable in KConfig
-- Implement start-stop for UMS (graceful shutdown via eject)
-- Improve help messages for cmd/bind
-- Improve help message for udc bind failures
-
-----------------------------------------------------------------
-Jaehoon Chung (1):
-      dfu: add CONFIG_DFU_NAME_MAX_SIZE configuration
-
-Marek Vasut (1):
-      usb: gadget: f_mass_storage: Stop ums on START-STOP UNIT SCSI command
-
-Miquel Raynal (3):
-      cmd: Change the dependencies between CMD_BIND and USB_GADGET
-      cmd: bind: Try to improve the (un)bind help
-      usb: udc: Try to clarify an error message
-
- cmd/Kconfig                         |  2 +-
- cmd/bind.c                          |  4 ++++
- drivers/dfu/Kconfig                 |  9 +++++++++
- drivers/usb/gadget/Kconfig          |  1 +
- drivers/usb/gadget/f_mass_storage.c |  7 +++++++
- drivers/usb/gadget/udc/udc-core.c   | 13 ++++++++++++-
- include/dfu.h                       |  5 +++++
- 7 files changed, 39 insertions(+), 2 deletions(-)
+-- 
+2.40.1
 
