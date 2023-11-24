@@ -4,50 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78AB0C61DF4
-	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 14:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F47BC61DF4
+	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 16:51:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93310875EE;
-	Fri, 24 Nov 2023 15:04:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2E22986FD2;
+	Fri, 24 Nov 2023 17:51:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1700834695;
-	bh=5XtfQnX27as1C0+Yke6fWGh7Zvl9z2MTuVoZXGQkxAY=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=dQTjxptb2AU3j2o8pm9pl6Q/tGtkQMXKZEwNUslI8NMbJuQ9Sm50meHgErU83UMEs
-	 zxksOnjbP21E25/O7GtjgQ1iM+EhlXjyLdsTPVNsZTw6zpo2UJ0oC2KUNKnE0PcKpD
-	 0F/bCe+GN/GwcHxqNt/94ZjMRipJH8IJue+J3BS78r/RGkW4TDkzdMQylHeRKiHzrt
-	 Vu2UQFe4aL7KRTwywq9uKJ8o0heXhO/CyrUETnsB+fI8qCgGqkiXGEfbpMxXQDvo4G
-	 3GlrmN+nxHyPXRML5BJPcsUB8s6r67K+XkfQe+p+MVqbO5+Hf5lky3L/9cMkkLnw8N
-	 kUraW6OvmwZIQ==
-Received: from localhost (unknown
- [IPv6:2a01:cb18:989:a700:90fa:3f82:fe6a:48f9])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 731368711E;
- Fri, 24 Nov 2023 15:04:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1700834693;
- bh=5XtfQnX27as1C0+Yke6fWGh7Zvl9z2MTuVoZXGQkxAY=;
- h=From:To:Cc:Subject:Date:From;
- b=BU30aKP+Yu9w8lUKodFicpVAI+jG/hgIsZDB5ibVSxz7pakEGEUgyfZhBbOTDVXyt
- ZMTyS8nhksKFQtjcOLkSb4tk5ZKhHKHK33l3dJkEqbXZoLYWliSJPVI6DNXDK6Lqyz
- rtmmntPtoYTRs1RcXM2WTNIZzZPRlTAPvRZicx+9EKjqRoQRPd20fzLyH/rqqFp0SZ
- s7fzIFR0pW1KnWjIPakErSvVqZNx83kbUMv6DUmQYehzlrk/S/lil7HmdNTzryqOQz
- LMCljcXdELSuqfmVFfZnclXxGPmIKqCz72FZyz6zfmiF/rPYcDF9lQ76Y4yOi9A3Ce
- fLgJLKjZ6NToQ==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: hs@denx.de, sjg@chromium.org, trini@konsulko.com,
- Philip Oberfichtner <pro@denx.de>
-Subject: [PATCH 1/1] i2c: Bugfix in i2c_get_chip_by_phandle()
-Date: Fri, 24 Nov 2023 15:04:01 +0100
-Message-Id: <20231124140400.32027-1-pro@denx.de>
-X-Mailer: git-send-email 2.39.2
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="wxV2sBO2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 04C278762C; Fri, 24 Nov 2023 17:51:25 +0100 (CET)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AFF386ECA
+ for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 17:51:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7bb4b7eb808so574651241.3
+ for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 08:51:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1700844681; x=1701449481;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=ES1P5uzc8DR8LkBnX+OkusY7x8Pva8cNKMqEv6eBVaU=;
+ b=wxV2sBO29FhHOGwNzmU0J4TCNygWIUqq8EVyzc+MOrqYWaUxRC7np7MeOf1axlNfSP
+ 11CzUHhUAevP841gv8HzT6CCe/DfA+XjT3vfmgCnbHKSRBqeSEVmQdSvvQAh2KNMTKXP
+ OIxx/0bytnp951Vt8eRxYCk4LK0V/uJ77quSUOBEXxrmotAIqX4PwNgu1giyYlR7IvI9
+ oJi91qsua13uUUeA/ul1L8idGSaHMf1m7D09ooH/4MDEJ1caec+4bkyPn6V4nQIfxLBK
+ LzV8r/MxssjueUA3OTmjB3KMjDjAYKb92Nbzv7L9hpCLcWUP8FkVXaCYrxlpT/5L0Yn3
+ a78A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1700844681; x=1701449481;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ES1P5uzc8DR8LkBnX+OkusY7x8Pva8cNKMqEv6eBVaU=;
+ b=DSqGLrWtd3Lw8lAjhjMDRv7jGQVzphW4uV75pbl4IHs0by7NeDm7dF25VYve0O0pSg
+ 9aq6qW0tk9Y3FZ5tExKSQ3esvtlCYcMgcFkKT2AU9GQp7OFj6hR8/PotvYDrwMCvSnBj
+ YqZc9aUaiuKjyEXXFQ876Y789EGB9Ihd1pSuXBdZ+m4UqMxFgYT0S30gAI4QquMyFezr
+ ApgWqv9YI41AhE2/4iUizORSLfVi/eSVSE16oeNDBcjnuWf17/4uKEYa8hstOhGv9Zxg
+ ZwP5sa+rS4GW1PJhg2l+/jPhYvqfcFw5hJvzE6EcdZiu96RVBCn6r1nHoWaMWeij/mDB
+ aQyA==
+X-Gm-Message-State: AOJu0YzyX1BhM53xI9RZYeJiM0mdyJGmxxpXcHxKJUj8hQeV4n3aHM+N
+ 0humuU21L6wT767a+QRYXU7OeCAsh3dKrYX36ziYFQ==
+X-Google-Smtp-Source: AGHT+IEMmKzeyGWBUKQPf77vnTNJOz3wAB/HZlzTCkgAiz5l7gUftf1ENk9BLYWGhT/GNP1w8x6gEAX2BmwEVEW2VlE=
+X-Received: by 2002:a05:6122:da5:b0:496:248e:43fc with SMTP id
+ bc37-20020a0561220da500b00496248e43fcmr3620111vkb.8.1700844681000; Fri, 24
+ Nov 2023 08:51:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Shantur Rathore <i@shantur.com>
+Date: Fri, 24 Nov 2023 16:51:10 +0000
+Message-ID: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
+Subject: efi: Set Variable Runtime implementation
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, takahiro.akashi@linaro.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,30 +82,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The "i2cbcdev" sneaked in when implementing this function for the
-bootcounter use case. Obviously the intention was to use prop_name
-instead.
+Hi Heinrich,
 
-Fixes: b483552773 (i2c: Implement i2c_get_chip_by_phandle())
+I am trying to work out how to enable the SetVariableRT service in
+U-Boot and came across your patch [1] which initially had the
+SetVariable RT service enabled in EFI but in the final patch this was
+removed.
+I am hoping to implement it on top of the SPI Flash EFI store [2] to
+be able to set Boot order and boot items from Linux the UEFI way.
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
- drivers/i2c/i2c-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Can I pick your brain on why it was dropped in the patch?
+Is there any limitation in SetVariableRT service ?
 
-diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
-index d0db25dcc0..3cbd4a81a5 100644
---- a/drivers/i2c/i2c-uclass.c
-+++ b/drivers/i2c/i2c-uclass.c
-@@ -428,7 +428,7 @@ int i2c_get_chip_by_phandle(const struct udevice *parent, const char *prop_name,
- 		goto err_exit;
- 	}
- 
--	ret = dev_read_u32(parent, "i2cbcdev", &phandle);
-+	ret = dev_read_u32(parent, prop_name, &phandle);
- 	if (ret)
- 		goto err_exit;
- 
--- 
-2.39.2
+Kind regards,
+Shantur
 
+[1] : https://patches.linaro.org/project/u-boot/patch/20200331060541.4212-1-xypron.glpk@gmx.de/
+[2] : https://patchwork.ozlabs.org/project/uboot/list/?series=383699
