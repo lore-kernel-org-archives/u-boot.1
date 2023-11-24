@@ -4,75 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1ABC61DF4
-	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 13:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78AB0C61DF4
+	for <u-boot@archiver.kernel.org>; Fri, 24 Nov 2023 14:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2460487164;
-	Fri, 24 Nov 2023 14:43:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nic.cz
+	by phobos.denx.de (Postfix) with ESMTP id 93310875EE;
+	Fri, 24 Nov 2023 15:04:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="liTglk6A";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0069E875F5; Fri, 24 Nov 2023 14:43:23 +0100 (CET)
-Received: from mail.nic.cz (mail.nic.cz [IPv6:2001:1488:800:400::400])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1700834695;
+	bh=5XtfQnX27as1C0+Yke6fWGh7Zvl9z2MTuVoZXGQkxAY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=dQTjxptb2AU3j2o8pm9pl6Q/tGtkQMXKZEwNUslI8NMbJuQ9Sm50meHgErU83UMEs
+	 zxksOnjbP21E25/O7GtjgQ1iM+EhlXjyLdsTPVNsZTw6zpo2UJ0oC2KUNKnE0PcKpD
+	 0F/bCe+GN/GwcHxqNt/94ZjMRipJH8IJue+J3BS78r/RGkW4TDkzdMQylHeRKiHzrt
+	 Vu2UQFe4aL7KRTwywq9uKJ8o0heXhO/CyrUETnsB+fI8qCgGqkiXGEfbpMxXQDvo4G
+	 3GlrmN+nxHyPXRML5BJPcsUB8s6r67K+XkfQe+p+MVqbO5+Hf5lky3L/9cMkkLnw8N
+	 kUraW6OvmwZIQ==
+Received: from localhost (unknown
+ [IPv6:2a01:cb18:989:a700:90fa:3f82:fe6a:48f9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A29387616
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 14:43:19 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nic.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.mojik@nic.cz
-Received: from marcharch (unknown [IPv6:2001:1488:fffe:6:592e:6672:3345:e2e0])
- by mail.nic.cz (Postfix) with ESMTPS id 4DCFB1C181D;
- Fri, 24 Nov 2023 14:43:17 +0100 (CET)
-Authentication-Results: mail.nic.cz;
- dkim=pass header.d=nic.cz header.s=default header.b=liTglk6A;
- spf=pass (mail.nic.cz: domain of marek.mojik@nic.cz designates
- 2001:1488:fffe:6:592e:6672:3345:e2e0 as permitted sender)
- smtp.mailfrom=marek.mojik@nic.cz; 
- dmarc=pass (policy=reject) header.from=nic.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1700833397; bh=U/H+yzZwqi0fcwf/qZsQeM3ymGo0oobBgf4vs8C8CeY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From:Reply-To:
- Subject:To:Cc;
- b=liTglk6AydZHYjNrR5/h8dDhTRnwCDPiwun0eytkHcB2/VxHlw7VKIN5bBCBYaLu4
- LSmfUQHkYPfrXvLw+tDU1NW7Q2p4pgo1TsmN4Kf+zuFLbw5aePmJWuqsD8sBgx62/h
- dxHVyEcRBFLiUeQWIaIwWSpLBLgTSioJ6wVvDIaw=
-Date: Fri, 24 Nov 2023 14:43:16 +0100
-From: Marek =?utf-8?B?TW9qw61r?= <marek.mojik@nic.cz>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- tharvey@gateworks.com, marek.behun@nic.cz
-Subject: Re: [PATCH] net: mv88e6xxx: add missing SMI address init
-Message-ID: <25ix2yb4s6tkydcl6ollfckxxklmybz6sgvyvpfacrcrxemqpn@4cjkqymjfmpe>
-References: <4t2ccomf4epfozf2o5uzkp7c5lzzqhgkfpcfofojomssmzh5kw@76ljhmdjzla4>
- <20231122163841.09d1c6e8@wsk>
+ (No client certificate requested) (Authenticated sender: pro@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 731368711E;
+ Fri, 24 Nov 2023 15:04:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1700834693;
+ bh=5XtfQnX27as1C0+Yke6fWGh7Zvl9z2MTuVoZXGQkxAY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=BU30aKP+Yu9w8lUKodFicpVAI+jG/hgIsZDB5ibVSxz7pakEGEUgyfZhBbOTDVXyt
+ ZMTyS8nhksKFQtjcOLkSb4tk5ZKhHKHK33l3dJkEqbXZoLYWliSJPVI6DNXDK6Lqyz
+ rtmmntPtoYTRs1RcXM2WTNIZzZPRlTAPvRZicx+9EKjqRoQRPd20fzLyH/rqqFp0SZ
+ s7fzIFR0pW1KnWjIPakErSvVqZNx83kbUMv6DUmQYehzlrk/S/lil7HmdNTzryqOQz
+ LMCljcXdELSuqfmVFfZnclXxGPmIKqCz72FZyz6zfmiF/rPYcDF9lQ76Y4yOi9A3Ce
+ fLgJLKjZ6NToQ==
+From: Philip Oberfichtner <pro@denx.de>
+To: u-boot@lists.denx.de
+Cc: hs@denx.de, sjg@chromium.org, trini@konsulko.com,
+ Philip Oberfichtner <pro@denx.de>
+Subject: [PATCH 1/1] i2c: Bugfix in i2c_get_chip_by_phandle()
+Date: Fri, 24 Nov 2023 15:04:01 +0100
+Message-Id: <20231124140400.32027-1-pro@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231122163841.09d1c6e8@wsk>
-X-Spamd-Result: default: False [-3.00 / 20.00];
- DWL_DNSWL_MED(-2.00)[nic.cz:dkim];
- DMARC_POLICY_ALLOW(-0.50)[nic.cz,reject];
- R_DKIM_ALLOW(-0.20)[nic.cz:s=default];
- R_SPF_ALLOW(-0.20)[+ip6:2001:1488::/29:c];
- MIME_GOOD(-0.10)[text/plain]; FUZZY_BLOCKED(0.00)[rspamd.com];
- DKIM_TRACE(0.00)[nic.cz:+]; FROM_EQ_ENVFROM(0.00)[];
- ARC_NA(0.00)[]; TAGGED_RCPT(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; MIME_TRACE(0.00)[0:+];
- WHITELISTED_IP(0.00)[2001:1488:fffe:6:592e:6672:3345:e2e0];
- FROM_HAS_DN(0.00)[];
- ASN(0.00)[asn:25192, ipnet:2001:1488::/32, country:CZ]
-X-Rspamd-Action: no action
-X-Rspamd-Server: mail
-X-Rspamd-Pre-Result: action=no action; module=multimap;
- Matched map: WHITELISTED_IP
-X-Rspamd-Queue-Id: 4DCFB1C181D
-X-Spamd-Bar: ---
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,48 +64,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 22, 2023 at 04:38:41PM +0100, Lukasz Majewski wrote:
-> Hi Marek,
-> 
-> > Driver does not currently initialize the smi_addr field, but instead
-> > keeps the default value. This leads to issues on systems with
-> > different hardware configuration. We can fix this problem by reading
-> > the SMI address from device tree.
-> > 
-> > Signed-off-by: Marek Mojík <marek.mojik@nic.cz>
-> > ---
-> >  drivers/net/mv88e6xxx.c | 6 ++++++
-> >  1 file changed, 6 insertions(+)
-> > 
-> > diff --git a/drivers/net/mv88e6xxx.c b/drivers/net/mv88e6xxx.c
-> > index c073f81e72..4636dbf156 100644
-> > --- a/drivers/net/mv88e6xxx.c
-> > +++ b/drivers/net/mv88e6xxx.c
-> > @@ -753,6 +753,12 @@ static int mv88e6xxx_probe(struct udevice *dev)
-> >  		return -ENODEV;
-> >  	}
-> >  
-> > +	priv->smi_addr = dev_read_addr(dev);
-> > +	if (priv->smi_addr == FDT_ADDR_T_NONE) {
-> > +		dev_err(dev, "Invalid or missing SMI address\n");
-> > +		return -EINVAL;
-> > +	}
-> > +
-> >  	/* probe internal mdio bus */
-> >  	ret = mv88e6xxx_probe_mdio(dev);
-> >  	if (ret)
-> 
-> I've posted some time ago patches for this driver:
-> 
-> https://patchwork.ozlabs.org/project/uboot/cover/20230601100005.2216345-1-lukma@denx.de/
-> 
-> Unfortunately, those were not pulled...
-> 
-> Maybe you would find fix for your issue, or prepare new version of it?
+The "i2cbcdev" sneaked in when implementing this function for the
+bootcounter use case. Obviously the intention was to use prop_name
+instead.
 
-I looked at your patches, but they don't fix the issue with smi_addr
-initialization. But i may try preparing a new version for them in
-future.
+Fixes: b483552773 (i2c: Implement i2c_get_chip_by_phandle())
 
-Regards,
-Marek
+Signed-off-by: Philip Oberfichtner <pro@denx.de>
+---
+ drivers/i2c/i2c-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
+index d0db25dcc0..3cbd4a81a5 100644
+--- a/drivers/i2c/i2c-uclass.c
++++ b/drivers/i2c/i2c-uclass.c
+@@ -428,7 +428,7 @@ int i2c_get_chip_by_phandle(const struct udevice *parent, const char *prop_name,
+ 		goto err_exit;
+ 	}
+ 
+-	ret = dev_read_u32(parent, "i2cbcdev", &phandle);
++	ret = dev_read_u32(parent, prop_name, &phandle);
+ 	if (ret)
+ 		goto err_exit;
+ 
+-- 
+2.39.2
+
