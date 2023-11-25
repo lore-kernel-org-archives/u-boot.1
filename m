@@ -4,76 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 074E8C61D9D
-	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 06:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01999C61D9D
+	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 11:16:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD235870B5;
-	Sat, 25 Nov 2023 07:19:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4BAC587174;
+	Sat, 25 Nov 2023 12:16:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T5bJZ0v8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G2Pag/d5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97E7C87116; Sat, 25 Nov 2023 07:19:08 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F897870E7; Sat, 25 Nov 2023 12:16:24 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5808A86F80
- for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 07:19:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04D8F87174
+ for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 12:16:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-54af1daf6a9so2451627a12.1
- for <u-boot@lists.denx.de>; Fri, 24 Nov 2023 22:19:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1700893146; x=1701497946; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F4aW8jQOHjyANzui5wLtvRZ+1u2em29DR8aMb8PYe6s=;
- b=T5bJZ0v83wFYzxQBhqIMCSKpB8cfJHjjC1giLhd6GPNARpM8fRxwa+i4L6FHsx0gl6
- OqSz/iOQBHgxuP6EhWz2xoWt/p2o2DiK7Aen2ORiX2qTLV2JlTPEnTHUsQguOV9flORp
- mHyMOwtBk70pgO1L/WkpkVTrsprTx/ERkwZF+6B6aKVFy5FMfuLL9bcw9VmY2a1YaGHk
- 9F021ofio9O4U5GpRHNia9+aW6OtMDhsYiTPGOsyrYKBHa2obxk1nFyV1BLEaqkSpdQb
- wFEBW9pNkDPaYnkGii7gB0fY+kVY/ffcsywrTGRIODqw8oBn3KZR0uqJcGLf77B4JxPY
- urUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700893146; x=1701497946;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F4aW8jQOHjyANzui5wLtvRZ+1u2em29DR8aMb8PYe6s=;
- b=FWvUPophvHf7RnKe+tsT4q4qpL8mdF6/RMmS7lTTlnJ2f0Smxg7jhOz6nqwo9gakJg
- Pm6xw9xNboAUF01NAKWpblAJl1oGEFdIj5TRliOjqWx7Q5iikQtHZW6zMhftfA296Y9w
- CAWYFVzaPNMUOxyi5FHxNvFQzuq43cie3hb1CAwqswYprre7DcR65+tqiQOTzGaCOaEt
- JZdJ4k8r8G+JDE1Pn7znpyKrwou0i0dnfCs8l3R8kEWsz81SnvMev8amt9pAYLvn/FWP
- 6yJfmOqjpaf5WwH+JjAPMIQTSb4CoSuF0JlrTgmCibxwbEa2WQUKogkrfdNF9MxGy3Tj
- fBxQ==
-X-Gm-Message-State: AOJu0Yy+cSwkLoikJMuHrL8XkFQQLt+hF9ATfWorlJtOA7wtAu21SN7P
- L45Vt/UWsWjvxGcm5VYTeazmz7Ln1Hn/wdcgMEo=
-X-Google-Smtp-Source: AGHT+IHqPTjc9znF8/TX88txbUki5flsV93ynDt/UKBgJ7TSqDlycESsxlJrYpKhxI60gIp5uKLQmu60NZ2L4sCw5KU=
-X-Received: by 2002:aa7:da45:0:b0:54b:22a1:e704 with SMTP id
- w5-20020aa7da45000000b0054b22a1e704mr623688eds.18.1700893145602; Fri, 24 Nov
- 2023 22:19:05 -0800 (PST)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6840060B42;
+ Sat, 25 Nov 2023 11:16:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0F14C433C8;
+ Sat, 25 Nov 2023 11:16:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1700910972;
+ bh=nRYp9Vn98jhKk8ez0YHW7Q+9EoQqI7+xVsWpgCNX1E0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=G2Pag/d5lGSoYKFmJ89d3hSgZCEtW97V6kfj+syhtdCrV+MAcPfYKq3ePRG4P1qp5
+ Pvg/uR74AXT0T7wIO/Jctc5vJGjSSyGSvhHFqbu7NXM0lmqdkcIZYBcnO8o7l6xaKP
+ zVihxD6ZqHu0vAHFlmQZrwt9pxUJ3Mi8sJ8ursIKW5jQ6dsTxyHzX1K6tW7hZ+18mB
+ ona7Nekhx0auPl8UquY6g/CspSVCzSUtUGgZnl+6SrJBkBfY3CC1fVyYEYfnXb6D7f
+ 2TvqQ3xW2kqfTqqkhoPJ8WMCMRT9a3QpaJnjqprZbaO95uZMaflYTbcdblwYiWl7Hk
+ sm3ESjRWQ2YeA==
+From: Roger Quadros <rogerq@kernel.org>
+To: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ hs@denx.de
+Cc: enrico.leto@siemens.com, trini@konsulko.com, praneeth@ti.com, nm@ti.com,
+ vigneshr@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH] mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
+Date: Sat, 25 Nov 2023 13:16:05 +0200
+Message-Id: <20231125111605.47536-1-rogerq@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
- <CAC_iWjKNf6RxPoKzPjJiLV+UnQES344wb=sqS1wCnQzC+J-Hkw@mail.gmail.com>
- <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
-In-Reply-To: <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 25 Nov 2023 06:18:54 +0000
-Message-ID: <CALeDE9ONK7CMP6DXKRrjzqxm1r-afB7bgKSDhekrhOMUnhhktQ@mail.gmail.com>
-Subject: Re: efi: Set Variable Runtime implementation
-To: Shantur Rathore <i@shantur.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- takahiro.akashi@linaro.org, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,56 +68,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
+AM335x uses a special driver "am335x_spl_bch.c" as SPL
+NAND loader. This driver expects 1 sector at a time ECC
+and doesn't work well with multi-sector ECC that was implemented in
+commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
 
-On Fri, Nov 24, 2023 at 11:55=E2=80=AFPM Shantur Rathore <i@shantur.com> wr=
-ote:
->
-> Hi Ilias,
->
-> On Fri, Nov 24, 2023 at 10:50=E2=80=AFPM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Shantur
-> >
-> > On Fri, 24 Nov 2023 at 18:51, Shantur Rathore <i@shantur.com> wrote:
-> > >
-> > > Hi Heinrich,
-> > >
-> > > I am trying to work out how to enable the SetVariableRT service in
-> > > U-Boot and came across your patch [1] which initially had the
-> > > SetVariable RT service enabled in EFI but in the final patch this was
-> > > removed.
-> > > I am hoping to implement it on top of the SPI Flash EFI store [2] to
-> > > be able to set Boot order and boot items from Linux the UEFI way.
-> > >
-> > > Can I pick your brain on why it was dropped in the patch?
-> > > Is there any limitation in SetVariableRT service ?
-> >
-> > I recently had a talk about it in Plumbers [0]. Generally speaking, RT
-> > + hardware owned by the kernel is a very weird combination since you
-> > can't guarantee exclusive access to the flash or the bus and you have
-> > to preserve a *lot* of code alive in u-boot.
-> >
-> > I'll respond to your v1 patchset and we can discuss details there as we=
-ll.
-> >
-> > [0] https://lpc.events/event/17/contributions/1653/
->
-> Thanks for the background and helping me understand the problem.
-> Makes me wonder how things work in the PC world.
-> U-boot being only ~1MB, can we not leave it all in memory and maybe
-> just disable SPI access to Linux.
+Switch back to 1 sector at a time read/ECC.
 
-That's basically it, on x86 there's specific HW that's owned by
-firmware, I don't know the exact low level details of how that works.
+Fixes: 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+ drivers/mtd/nand/raw/omap_gpmc.c | 95 ++++++++++----------------------
+ 1 file changed, 29 insertions(+), 66 deletions(-)
 
-I think x86 devices generally use eSPI for this HW [1] but I don't
-know the low level details. The Arm SBSA (Server HW spec) and SBBR
-(Server Base Boot Requirements) specs that are key to ServerReady may
-go into some details too if you're curious.
+diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
+index 1a5ed0de31..2d2d2c2b6d 100644
+--- a/drivers/mtd/nand/raw/omap_gpmc.c
++++ b/drivers/mtd/nand/raw/omap_gpmc.c
+@@ -293,7 +293,7 @@ static void __maybe_unused omap_enable_hwecc_bch(struct mtd_info *mtd,
+ 		break;
+ 	case OMAP_ECC_BCH8_CODE_HW:
+ 		bch_type = 1;
+-		nsectors = chip->ecc.steps;
++		nsectors = 1;
+ 		if (mode == NAND_ECC_READ) {
+ 			wr_mode   = BCH_WRAPMODE_1;
+ 			ecc_size0 = BCH8R_ECC_SIZE0;
+@@ -306,7 +306,7 @@ static void __maybe_unused omap_enable_hwecc_bch(struct mtd_info *mtd,
+ 		break;
+ 	case OMAP_ECC_BCH16_CODE_HW:
+ 		bch_type = 0x2;
+-		nsectors = chip->ecc.steps;
++		nsectors = 1;
+ 		if (mode == NAND_ECC_READ) {
+ 			wr_mode   = 0x01;
+ 			ecc_size0 = 52; /* ECC bits in nibbles per sector */
+@@ -345,17 +345,16 @@ static void __maybe_unused omap_enable_hwecc_bch(struct mtd_info *mtd,
+ }
+ 
+ /**
+- * _omap_calculate_ecc_bch - Generate BCH ECC bytes for one sector
++ * omap_calculate_ecc_bch - Generate BCH ECC bytes for one sector
+  * @mtd:        MTD device structure
+  * @dat:        The pointer to data on which ecc is computed
+  * @ecc_code:   The ecc_code buffer
+- * @sector:     The sector number (for a multi sector page)
+  *
+  * Support calculating of BCH4/8/16 ECC vectors for one sector
+  * within a page. Sector number is in @sector.
+  */
+-static int _omap_calculate_ecc_bch(struct mtd_info *mtd, const u8 *dat,
+-				   u8 *ecc_code, int sector)
++static int omap_calculate_ecc_bch(struct mtd_info *mtd, const u8 *dat,
++				  u8 *ecc_code)
+ {
+ 	struct nand_chip *chip = mtd_to_nand(mtd);
+ 	struct omap_nand_info *info = nand_get_controller_data(chip);
+@@ -368,7 +367,7 @@ static int _omap_calculate_ecc_bch(struct mtd_info *mtd, const u8 *dat,
+ 	case OMAP_ECC_BCH8_CODE_HW_DETECTION_SW:
+ #endif
+ 	case OMAP_ECC_BCH8_CODE_HW:
+-		ptr = &gpmc_cfg->bch_result_0_3[sector].bch_result_x[3];
++		ptr = &gpmc_cfg->bch_result_0_3[0].bch_result_x[3];
+ 		val = readl(ptr);
+ 		ecc_code[i++] = (val >>  0) & 0xFF;
+ 		ptr--;
+@@ -383,21 +382,21 @@ static int _omap_calculate_ecc_bch(struct mtd_info *mtd, const u8 *dat,
+ 
+ 		break;
+ 	case OMAP_ECC_BCH16_CODE_HW:
+-		val = readl(&gpmc_cfg->bch_result_4_6[sector].bch_result_x[2]);
++		val = readl(&gpmc_cfg->bch_result_4_6[0].bch_result_x[2]);
+ 		ecc_code[i++] = (val >>  8) & 0xFF;
+ 		ecc_code[i++] = (val >>  0) & 0xFF;
+-		val = readl(&gpmc_cfg->bch_result_4_6[sector].bch_result_x[1]);
++		val = readl(&gpmc_cfg->bch_result_4_6[0].bch_result_x[1]);
+ 		ecc_code[i++] = (val >> 24) & 0xFF;
+ 		ecc_code[i++] = (val >> 16) & 0xFF;
+ 		ecc_code[i++] = (val >>  8) & 0xFF;
+ 		ecc_code[i++] = (val >>  0) & 0xFF;
+-		val = readl(&gpmc_cfg->bch_result_4_6[sector].bch_result_x[0]);
++		val = readl(&gpmc_cfg->bch_result_4_6[0].bch_result_x[0]);
+ 		ecc_code[i++] = (val >> 24) & 0xFF;
+ 		ecc_code[i++] = (val >> 16) & 0xFF;
+ 		ecc_code[i++] = (val >>  8) & 0xFF;
+ 		ecc_code[i++] = (val >>  0) & 0xFF;
+ 		for (j = 3; j >= 0; j--) {
+-			val = readl(&gpmc_cfg->bch_result_0_3[sector].bch_result_x[j]
++			val = readl(&gpmc_cfg->bch_result_0_3[0].bch_result_x[j]
+ 									);
+ 			ecc_code[i++] = (val >> 24) & 0xFF;
+ 			ecc_code[i++] = (val >> 16) & 0xFF;
+@@ -431,22 +430,6 @@ static int _omap_calculate_ecc_bch(struct mtd_info *mtd, const u8 *dat,
+ 	return 0;
+ }
+ 
+-/**
+- * omap_calculate_ecc_bch - ECC generator for 1 sector
+- * @mtd:        MTD device structure
+- * @dat:	The pointer to data on which ecc is computed
+- * @ecc_code:	The ecc_code buffer
+- *
+- * Support calculating of BCH4/8/16 ECC vectors for one sector. This is used
+- * when SW based correction is required as ECC is required for one sector
+- * at a time.
+- */
+-static int __maybe_unused omap_calculate_ecc_bch(struct mtd_info *mtd,
+-				  const u_char *dat, u_char *ecc_calc)
+-{
+-	return _omap_calculate_ecc_bch(mtd, dat, ecc_calc, 0);
+-}
+-
+ static inline void omap_nand_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
+ {
+ 	struct nand_chip *chip = mtd_to_nand(mtd);
+@@ -572,34 +555,6 @@ static void omap_nand_read_prefetch(struct mtd_info *mtd, uint8_t *buf, int len)
+ 
+ #ifdef CONFIG_NAND_OMAP_ELM
+ 
+-/**
+- * omap_calculate_ecc_bch_multi - Generate ECC for multiple sectors
+- * @mtd:	MTD device structure
+- * @dat:	The pointer to data on which ecc is computed
+- * @ecc_code:	The ecc_code buffer
+- *
+- * Support calculating of BCH4/8/16 ecc vectors for the entire page in one go.
+- */
+-static int omap_calculate_ecc_bch_multi(struct mtd_info *mtd,
+-					const u_char *dat, u_char *ecc_calc)
+-{
+-	struct nand_chip *chip = mtd_to_nand(mtd);
+-	int eccbytes = chip->ecc.bytes;
+-	unsigned long nsectors;
+-	int i, ret;
+-
+-	nsectors = ((readl(&gpmc_cfg->ecc_config) >> 4) & 0x7) + 1;
+-	for (i = 0; i < nsectors; i++) {
+-		ret = _omap_calculate_ecc_bch(mtd, dat, ecc_calc, i);
+-		if (ret)
+-			return ret;
+-
+-		ecc_calc += eccbytes;
+-	}
+-
+-	return 0;
+-}
+-
+ /*
+  * omap_reverse_list - re-orders list elements in reverse order [internal]
+  * @list:	pointer to start of list
+@@ -752,7 +707,6 @@ static int omap_read_page_bch(struct mtd_info *mtd, struct nand_chip *chip,
+ {
+ 	int i, eccsize = chip->ecc.size;
+ 	int eccbytes = chip->ecc.bytes;
+-	int ecctotal = chip->ecc.total;
+ 	int eccsteps = chip->ecc.steps;
+ 	uint8_t *p = buf;
+ 	uint8_t *ecc_calc = chip->buffers->ecccalc;
+@@ -760,24 +714,30 @@ static int omap_read_page_bch(struct mtd_info *mtd, struct nand_chip *chip,
+ 	uint32_t *eccpos = chip->ecc.layout->eccpos;
+ 	uint8_t *oob = chip->oob_poi;
+ 	uint32_t oob_pos;
++	u32 data_pos = 0;
+ 
+ 	/* oob area start */
+ 	oob_pos = (eccsize * eccsteps) + chip->ecc.layout->eccpos[0];
+ 	oob += chip->ecc.layout->eccpos[0];
+ 
+-	/* Enable ECC engine */
+-	chip->ecc.hwctl(mtd, NAND_ECC_READ);
++	for (i = 0; eccsteps; eccsteps--, i += eccbytes, p += eccsize,
++	     oob += eccbytes) {
++		/* Enable ECC engine */
++		chip->ecc.hwctl(mtd, NAND_ECC_READ);
+ 
+-	/* read entire page */
+-	chip->cmdfunc(mtd, NAND_CMD_RNDOUT, 0, -1);
+-	chip->read_buf(mtd, buf, mtd->writesize);
++		/* read data */
++		chip->cmdfunc(mtd, NAND_CMD_RNDOUT, data_pos, -1);
++		chip->read_buf(mtd, p, eccsize);
+ 
+-	/* read all ecc bytes from oob area */
+-	chip->cmdfunc(mtd, NAND_CMD_RNDOUT, oob_pos, -1);
+-	chip->read_buf(mtd, oob, ecctotal);
++		/* read respective ecc from oob area */
++		chip->cmdfunc(mtd, NAND_CMD_RNDOUT, oob_pos, -1);
++		chip->read_buf(mtd, oob, eccbytes);
++		/* read syndrome */
++		chip->ecc.calculate(mtd, p, &ecc_calc[i]);
+ 
+-	/* Calculate ecc bytes */
+-	omap_calculate_ecc_bch_multi(mtd, buf, ecc_calc);
++		data_pos += eccsize;
++		oob_pos += eccbytes;
++	}
+ 
+ 	for (i = 0; i < chip->ecc.total; i++)
+ 		ecc_code[i] = chip->oob_poi[eccpos[i]];
+@@ -945,6 +905,7 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
+ 		nand->ecc.hwctl		= omap_enable_hwecc_bch;
+ 		nand->ecc.correct	= omap_correct_data_bch_sw;
+ 		nand->ecc.calculate	= omap_calculate_ecc_bch;
++		nand->ecc.steps		= eccsteps;
+ 		/* define ecc-layout */
+ 		ecclayout->eccbytes	= nand->ecc.bytes * eccsteps;
+ 		ecclayout->eccpos[0]	= BADBLOCK_MARKER_LENGTH;
+@@ -987,6 +948,7 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
+ 		nand->ecc.correct	= omap_correct_data_bch;
+ 		nand->ecc.calculate	= omap_calculate_ecc_bch;
+ 		nand->ecc.read_page	= omap_read_page_bch;
++		nand->ecc.steps		= eccsteps;
+ 		/* define ecc-layout */
+ 		ecclayout->eccbytes	= nand->ecc.bytes * eccsteps;
+ 		for (i = 0; i < ecclayout->eccbytes; i++)
+@@ -1020,6 +982,7 @@ static int omap_select_ecc_scheme(struct nand_chip *nand,
+ 		nand->ecc.correct	= omap_correct_data_bch;
+ 		nand->ecc.calculate	= omap_calculate_ecc_bch;
+ 		nand->ecc.read_page	= omap_read_page_bch;
++		nand->ecc.steps		= eccsteps;
+ 		/* define ecc-layout */
+ 		ecclayout->eccbytes	= nand->ecc.bytes * eccsteps;
+ 		for (i = 0; i < ecclayout->eccbytes; i++)
 
-BTW I plan to test your other patches on the Pinebook Pro.
+base-commit: 9e53e45292ee2f1d9d2ccc59914b161bef9b10d7
+-- 
+2.34.1
 
-[1] https://www.totalphase.com/blog/2021/09/what-is-the-espi-protocol-and-h=
-ow-does-it-improve-upon-lpc/
