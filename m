@@ -4,63 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EEB1C4167B
-	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 16:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E13CC4167B
+	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 18:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 202B7874DE;
-	Sat, 25 Nov 2023 17:27:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 56615870D9;
+	Sat, 25 Nov 2023 19:29:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qxJND4Q6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Y57gtvBR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4312687174; Sat, 25 Nov 2023 17:27:24 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id CC8D687174; Sat, 25 Nov 2023 19:29:53 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 303D0870D9
- for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 17:27:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BE6E86FC6
+ for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 19:29:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3APGRIgT082171;
- Sat, 25 Nov 2023 10:27:18 -0600
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3APITlWG072358
+ for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 12:29:47 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1700929638;
- bh=cF8F3kxks7MOpRiuUrNMvUM6gntojY+xNj5iPzYqkZY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qxJND4Q6fEll/0i7V/DUIbG+ZuPEG00z7RFG6NZ+soitJnGPxlNvHllxVdjqI+ILX
- xr931Uzk7R53ChOehN+6m4VxYdX2JSbcarHN2qXYlJuJZ3anREHEELbjhNge6+60cl
- Ur2xY7dKziuKKTzE1r8nxxJDjbfDQx8mFDdYRTKU=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3APGRIKE031324
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 25 Nov 2023 10:27:18 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ s=ti-com-17Q1; t=1700936988;
+ bh=zGR885I3aomZopwQuxuMndyVFM/LkBjenQmlbx8HWVc=;
+ h=From:To:CC:Subject:Date;
+ b=Y57gtvBRaoAGQgQ2/87Slw5PoF2bwlnhVt6Cy01t/kCjAilUT3TUeDCO0m4Elgryu
+ OWtlH4ahhJQzgC8SawPwf0wE8MeSgbDXa2hr1vd4L72IK+mRY3qQWnC6ESjv/nl2k7
+ nEEYnngqcUC4cqXb2tFyreN/iscaUUUbcGQMMKXg=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3APITl1r100197
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL)
+ for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 12:29:47 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 25
- Nov 2023 10:27:17 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 12:29:47 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sat, 25 Nov 2023 10:27:17 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3APGRHov003154;
- Sat, 25 Nov 2023 10:27:17 -0600
-From: Devarsh Thakkar <devarsht@ti.com>
-To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
- <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
- <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
-CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
- <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v4 8/8] doc: spl: Add info regarding memory reservation
-Date: Sat, 25 Nov 2023 21:57:05 +0530
-Message-ID: <20231125162705.1383401-9-devarsht@ti.com>
+ Frontend Transport; Sat, 25 Nov 2023 12:29:47 -0600
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3APITjbI105293;
+ Sat, 25 Nov 2023 12:29:46 -0600
+From: Udit Kumar <u-kumar1@ti.com>
+To: <nm@ti.com>, <u-boot@lists.denx.de>, <hnagalla@ti.com>, <a-nandan@ti.com>
+CC: <vigneshr@ti.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v2] remoteproc: k3-dsp: Avoid reloading of firmware
+Date: Sat, 25 Nov 2023 23:59:39 +0530
+Message-ID: <20231125182939.1796956-1-u-kumar1@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231125162705.1383401-1-devarsht@ti.com>
-References: <20231125162705.1383401-1-devarsht@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,58 +77,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add details regarding scheme which need to be followed in SPL and
-further stages for those regions which need to be preserved across
-bootstages.
+DSP core is going into abnormal state when load callback is called
+after starting of DSP core.
+Reload of firmware needs core to be stopped first, followed by
+load.
+So avoid loading of firmware, when core is started.
 
-Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 ---
-V1->V3:
-No change.
+Change log:
+Changes in v2:
+- Added details for in_use variable in comment
+- Link to v1 
+https://lore.kernel.org/all/20231124063111.1744600-1-u-kumar1@ti.com/
 
-V4:
-Split this to separate patch and add more details regarding
-memory reservation scheme that needs to be followed at SPL.
----
- doc/develop/spl.rst | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ drivers/remoteproc/ti_k3_dsp_rproc.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/doc/develop/spl.rst b/doc/develop/spl.rst
-index 814530d348..0a3e572310 100644
---- a/doc/develop/spl.rst
-+++ b/doc/develop/spl.rst
-@@ -173,3 +173,31 @@ cflow will spit out a number of warnings as it does not parse
- the config files and picks functions based on #ifdef.  Parsing the '.i'
- files instead introduces another set of headaches.  These warnings are
- not usually important to understanding the flow, however.
+diff --git a/drivers/remoteproc/ti_k3_dsp_rproc.c b/drivers/remoteproc/ti_k3_dsp_rproc.c
+index 576de4bb26..1c6515f9ab 100644
+--- a/drivers/remoteproc/ti_k3_dsp_rproc.c
++++ b/drivers/remoteproc/ti_k3_dsp_rproc.c
+@@ -56,6 +56,7 @@ struct k3_dsp_boot_data {
+  * @data:		Pointer to DSP specific boot data structure
+  * @mem:		Array of available memories
+  * @num_mem:		Number of available memories
++ * @in_use: flag to tell if the core is already in use.
+  */
+ struct k3_dsp_privdata {
+ 	struct reset_ctl dsp_rst;
+@@ -63,6 +64,7 @@ struct k3_dsp_privdata {
+ 	struct k3_dsp_boot_data *data;
+ 	struct k3_dsp_mem *mem;
+ 	int num_mems;
++	bool in_use;
+ };
+ 
+ /*
+@@ -128,6 +130,13 @@ static int k3_dsp_load(struct udevice *dev, ulong addr, ulong size)
+ 	u32 boot_vector;
+ 	int ret;
+ 
++	if (dsp->in_use) {
++		dev_err(dev,
++			"Invalid op: Trying to load/start on already running core %d\n",
++			dsp->tsp.proc_id);
++		return -EINVAL;
++	}
 +
-+
-+Reserving memory in SPL
-+-----------------------
-+
-+If memory needs to be reserved in RAM during SPL stage with the requirement that
-+the SPL reserved memory remains preserved across further boot stages too
-+then it needs to be reserved mandatorily starting from end of RAM. This is to
-+ensure that further stages can simply skip this region before carrying out
-+further reservations or updating the relocation address.
-+
-+Also out of these regions which are to be preserved across further stages of
-+boot, video framebuffer memory region must be reserved first starting from
-+end of RAM for which helper function spl_reserve_video_from_ram_top is provided
-+which makes sure that video memory is placed at top of reservation area with
-+further reservations below it.
-+
-+The corresponding information of reservation for those regions can be passed to
-+further boot stages using a bloblist. For e.g. the information for
-+framebuffer area reserved by SPL can be passed onto U-boot using
-+BLOBLISTT_U_BOOT_VIDEO.
-+
-+The further boot stages need to parse each of the bloblist passed from SPL stage
-+starting from video bloblist and skip this whole SPL reserved memory area from
-+end of RAM as per the bloblists received, before carrying out further
-+reservations or updating the relocation address. For e.g, U-boot proper uses
-+function "setup_relocaddr_from_bloblist" to parse the bloblists passed from
-+previous stage and skip the memory reserved from previous stage accordingly.
+ 	dev_dbg(dev, "%s addr = 0x%lx, size = 0x%lx\n", __func__, addr, size);
+ 	ret = ti_sci_proc_request(&dsp->tsp);
+ 	if (ret)
+@@ -195,6 +204,7 @@ static int k3_dsp_start(struct udevice *dev)
+ 			ti_sci_proc_power_domain_off(&dsp->tsp);
+ 	}
+ 
++	dsp->in_use = true;
+ proc_release:
+ 	ti_sci_proc_release(&dsp->tsp);
+ 
+@@ -207,6 +217,7 @@ static int k3_dsp_stop(struct udevice *dev)
+ 
+ 	dev_dbg(dev, "%s\n", __func__);
+ 
++	dsp->in_use = false;
+ 	ti_sci_proc_request(&dsp->tsp);
+ 	reset_assert(&dsp->dsp_rst);
+ 	ti_sci_proc_power_domain_off(&dsp->tsp);
 -- 
 2.34.1
 
