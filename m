@@ -4,77 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB31C4167B
-	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 22:38:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3669EC4167B
+	for <u-boot@archiver.kernel.org>; Sat, 25 Nov 2023 22:40:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A731287243;
-	Sat, 25 Nov 2023 23:38:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id ABCC8870E7;
+	Sat, 25 Nov 2023 23:40:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KFOCZ/rU";
+	dkim=pass (2048-bit key; secure) header.d=debian.org header.i=@debian.org header.b="NObdsm+U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7056D87254; Sat, 25 Nov 2023 23:38:26 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83E78870E7; Sat, 25 Nov 2023 23:40:11 +0100 (CET)
+Received: from cascadia.aikidev.net (cascadia.aikidev.net
+ [IPv6:2600:3c01:e000:267:0:a171:de7:c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 131848708D
- for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 23:38:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DADF870A0
+ for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 23:40:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=debian.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-41c157bbd30so16105571cf.0
- for <u-boot@lists.denx.de>; Sat, 25 Nov 2023 14:38:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1700951903; x=1701556703; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=esJWGIrsd/zeTNQus8B5h+10jaBPAT1LT/agV1/VdkQ=;
- b=KFOCZ/rU/vhhNer6MK0EheCJEQguYXMIGbobNuSzwmG+dyd/tzXugBY0htIWlTHrqE
- OHdoVkVsB7uEVn93a54QzpDgLU9OtkBwhN3xDOb5M4tflKOigckUJs3/Uw77p2XYCttL
- 4AI9zXj6iG91h8CNAmrgtKe6gMpXZ7amxnh2k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1700951903; x=1701556703;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=esJWGIrsd/zeTNQus8B5h+10jaBPAT1LT/agV1/VdkQ=;
- b=cJGFPiKzuFbS9UpYx//rgPMWu1afCNgHsWTzRij2Wi2XAmHy0952O0eEPFbrM3Wlqy
- XOIfZnCNJdEqw2g2Y3eV7pGsS+y3sdOlqXSVWs5HMpuEQGQhoqgSzw7LM08qk4/N/yIW
- PV2RZPD/Rm9PUcQ7rmYWIKQGsPUW+bkEwGquLx/QbGP36zehCsXnO22Cfszwj26ZT2y2
- ExLlSaOVIqikPQupbKf2N958z+4DRs4NYs9avLz2U7BsHbCbIzQv7BDQCNpi5T5pBZil
- xQLcSo1JHXr5+HdvHckdLokCPxseqQ7c0WqsgjpseFY/+O4QXLy7xhpxa6qydU0qE+Zj
- dTTg==
-X-Gm-Message-State: AOJu0YzFlSdHRrHUgUV6vHg/mI5wg6HFxfIr8uyRGKTSpq+JKv985dJb
- dtT70Gat9vGvigZznsT/rac8tQ==
-X-Google-Smtp-Source: AGHT+IE2/nd/gAKqULnc7x9TcVN0+YH2XWKfjEWsh2UaTKhcgoV0aOPeLyfAQ6TI+GJfau4P6Hz30w==
-X-Received: by 2002:ac8:5c0e:0:b0:41c:bbd0:48c2 with SMTP id
- i14-20020ac85c0e000000b0041cbbd048c2mr7570458qti.59.1700951902862; 
- Sat, 25 Nov 2023 14:38:22 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-18aa-0515-8718-e379.res6.spectrum.com.
- [2603:6081:7b00:6400:18aa:515:8718:e379])
- by smtp.gmail.com with ESMTPSA id
- kr6-20020ac861c6000000b004180fb5c6adsm2515960qtb.25.2023.11.25.14.38.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Nov 2023 14:38:22 -0800 (PST)
-Date: Sat, 25 Nov 2023 17:38:20 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20231124
-Message-ID: <20231125223820.GY2513409@bill-the-cat>
-References: <87fs0vbfcx.fsf@baylibre.com>
+ spf=none smtp.mailfrom=vagrant@debian.org
+Received: from localhost (unknown [IPv6:2600:3c01:e000:21:7:77:0:20])
+ (Authenticated sender: vagrant@cascadia.debian.net)
+ by cascadia.aikidev.net (Postfix) with ESMTPSA id D59011AE3B;
+ Sat, 25 Nov 2023 14:40:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=debian.org;
+ s=1.vagrant.user; t=1700952003;
+ bh=3xGb9+rxnfpW+752nWaQifexAmD+BH8RDmBpvUAEzvI=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=NObdsm+UhKsYJNb06FWRmAfoQDlQLEhLdq1wnsXro91sbSr5aQLHe940zqzHtJe+E
+ 2p867oY+t1IL+pXNT756rlOFeTePn/opCYE/+Q6FlG1qlNlegk4KoseC2f682955/P
+ a4FBYgxayVpkyfR0hsz+NxuhW4ZlD9MOUFv219Axaw7YfdEhUnz/bghvjhvEWs3nZO
+ iJf7bTFfe10MYOajrJFE1ncbDRLUbmcuJKy4Zbj+U1/5aXtveFA0BVZ/6b1mWHyivJ
+ mncfxAYYmaDV3+KVcFZ+dabBa8yfpGi9uXY8BC3TlIMWuKdkU+UnwYkunw9S73T9Qw
+ 2HxY9arH8cFJg==
+From: Vagrant Cascadian <vagrant@debian.org>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: Licensing discrepancies or ambiguities
+In-Reply-To: <20231121193719.GH2513409@bill-the-cat>
+References: <8734wyudku.fsf@contorta> <20231121193719.GH2513409@bill-the-cat>
+Date: Sat, 25 Nov 2023 14:39:53 -0800
+Message-ID: <87bkbhwj7q.fsf@contorta>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nd45fldyMgHhzgii"
-Content-Disposition: inline
-In-Reply-To: <87fs0vbfcx.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: multipart/signed; boundary="=-=-=";
+ micalg=pgp-sha512; protocol="application/pgp-signature"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,65 +67,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---nd45fldyMgHhzgii
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--=-=-=
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 24, 2023 at 11:44:14AM +0100, Mattijs Korpershoek wrote:
+On 2023-11-21, Tom Rini wrote:
+> On Tue, Nov 21, 2023 at 11:10:57AM -0800, Vagrant Cascadian wrote:
+>
+>> I've been reviewing the copyright and license information for Das U-Boot
+>> in preparation for uploading to Debian, and found a few surprises.
+>>=20
+>>  tools/libfdt/fdt_rw.c: /* SPDX-License-Identifier: GPL-2.0+ BSD-2-Claus=
+e */
+>
+> This comes from the kernel and has been clarified there:
+> // SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause)
 
-> Hi Tom,
->=20
-> Here are some developments for next including:
->=20
-> - Make dfu entity name size configurable in KConfig
-> - Implement start-stop for UMS (graceful shutdown via eject)
-> - Improve help messages for cmd/bind
-> - Improve help message for udc bind failures
->=20
-> The CI job is at https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pi=
-pelines/18704
->=20
-> Thanks,
-> Mattijs
->=20
-> The following changes since commit dca7a8958f8d0dbd53072caa4353353e062d80=
-ca:
->=20
->   Merge tag 'v2024.01-rc3' into next (2023-11-20 09:19:50 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
--next-20231124
->=20
-> for you to fetch changes up to 8a0d07807abb5370fe879321c7f1d22fdda3255f:
->=20
->   usb: udc: Try to clarify an error message (2023-11-21 15:48:38 +0100)
->=20
+That's much better! Thanks for looking into it! I suspect there are
+quite a few that get pulled in from linux or elsewhere that might have
+similar issues.
 
-Applied to u-boot/next, thanks!
 
---=20
-Tom
+>> I *think* according to the SPDX spec this needs an OR or an AND. I also
+>> see no copyright declaration, although maybe there is a standard
+>> interpretation for this.
+>>=20
+>> Similar issue with (though thankfully they include copyright
+>> declarations):
+>>=20
+>>  include/bloblist.h:/* SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause */
+>>  common/bloblist.c:// SPDX-License-Identifier: GPL-2.0+ BSD-3-Clause
+>
+> Simon?
+>
+>>  doc/README.ubispl:# SPDX-License-Identifier: GPL 2.0+ BSD-3-Clause
+>
+> Should be an OR as well, yes, but it's also out of date and we could
+> just delete if a problem.
 
---nd45fldyMgHhzgii
+Ok.
+
+>> This one has a non-existent license:
+>>=20
+>>   test/lib/strlcat.c: // SPDX-License-Identifier: GPL-2.1+
+>>=20
+>> No such license exists, though thankfully it references the exact file
+>> in the original glibc sources it came from, which is listed as
+>> LGPL-2.1+.
+>
+> Since you did the research would you mind sending the patch? Thanks.
+
+Will do eventually!
+
+
+
+Also found some more ambiguous ones where the license text is in
+conflict with the SPDX identifiers:
+
+  arch/sandbox/cpu/u-boot-spl.lds-/* SPDX-License-Identifier: GPL-2.0+ */
+  arch/sandbox/cpu/u-boot-spl.lds-/*
+  arch/sandbox/cpu/u-boot-spl.lds- * Copyright (c) 2011-2012 The Chromium O=
+S Authors.
+  arch/sandbox/cpu/u-boot-spl.lds: * Use of this source code is governed by=
+ a BSD-style license that can be
+  arch/sandbox/cpu/u-boot-spl.lds- * found in the LICENSE file.
+  arch/sandbox/cpu/u-boot-spl.lds- */
+
+The referred to LICENSE file does not appear to exist in u-boot, and
+exactly what the text of this BSD-style license is ... a mystery.
+
+And lib/zstd includes many entries in a similar situation:
+
+  lib/zstd/Makefile-# Copyright (c) Facebook, Inc.
+  lib/zstd/Makefile-# All rights reserved.
+  lib/zstd/Makefile-#
+  lib/zstd/Makefile:# This source code is licensed under both the BSD-style=
+ license (found in the
+  lib/zstd/Makefile-# LICENSE file in the root directory of this source tre=
+e) and the GPLv2 (found
+  lib/zstd/Makefile-# in the COPYING file in the root directory of this sou=
+rce tree).
+  lib/zstd/Makefile-# You may select, at your option, one of the above-list=
+ed licenses.
+
+This seems like it would be "GPL-2.0 OR BSD-*something*", but it is unclear
+what BSD-style maps to, as the LICENSE file is not present where it
+claims.
+
+Many similar discrepancies can be found with:
+
+  git grep -B4 -A3 'BSD-style'
+
+
+I probably have mroe to dig up, but these are the ones that leapt out at
+me for now!
+
+live well,
+  vagrant
+
+--=-=-=
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVid1wACgkQFHw5/5Y0
-tyyZSAv/TBKGMz35lxyW3KvWpKdrJGolzs88d3oRw6zH91+vpyo9tXOVJykkv/cC
-QpktyglTcJO+LwZTdZq04fSixPQWUraNIyym4aE8dV6RYdAusjCS54T5OCu5OLg8
-gd3ONEbFHXu+dSOoCFup3Z52ntVGJHdByP2DbP85EgvZqpo75ZZlaKOoWTWvGWZz
-ff5/MsDTv8WzLO3JABSZ4ITlSeh83HQJP2DAla3LCHYISUBMnHgkIbw8hi2bbqMv
-fu6+ut+Mnr2lWK+VChYw3thxPjgdU4p8VyNVvQ+UqLT32HIj+6rMez37Lyld9kgv
-EXE000qrG11en4xxFerBgRhMWbgALANAfCfEUMX4Mlte6xo9nmpexH5LRaHGc/J1
-tHjQix3cBidobTnwPLR7bLJ4x6k+/YHKrAXLMklV2qYHEWN70wo30P0ss4923MMn
-f1eawHuQ7S0qjMYDMW0xnjyyy3rcyxvcTm4OdH+2ndV0sQClzhOIISlmriNmhHkK
-EadDSmGI
-=ji6U
+iHUEARYKAB0WIQRlgHNhO/zFx+LkXUXcUY/If5cWqgUCZWJ3ugAKCRDcUY/If5cW
+qhdBAP9DsY8DT4kO8jmIxXLg1lIhpPgXA1QrtOAqyOhGdKD27AEAhO8HKdi32KJN
+zO9hSkh+Ku4SFklRsV8kHXradhTltgo=
+=tPKs
 -----END PGP SIGNATURE-----
-
---nd45fldyMgHhzgii--
+--=-=-=--
