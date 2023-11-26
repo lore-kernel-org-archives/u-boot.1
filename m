@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD92C4167B
-	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 22:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93918C4167B
+	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 23:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93D29874E4;
-	Sun, 26 Nov 2023 23:09:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 91F4286DDC;
+	Mon, 27 Nov 2023 00:17:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="NmAGLWJg";
+	dkim=fail reason="length tag value exceeds body size" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="maYQi26E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E64887474; Sun, 26 Nov 2023 23:09:53 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C0A886DDC; Mon, 27 Nov 2023 00:17:09 +0100 (CET)
+Received: from web-out.onbox.hu (fmfe37.freemail.hu [46.107.16.242])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8218C874C3
- for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 23:09:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EA0986C67
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 00:17:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40b397793aaso13665155e9.0
- for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 14:09:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701036588; x=1701641388;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AbEHkc5D4+vXq0WV/czvuLKP20zxjbJLqpyEIdhbGMQ=;
- b=NmAGLWJgpyiVv1/mdk4+D8KKIHQ0SjQ8aOS6nIWKhESVFFzBRIVaTr1qREX0ZHYxsk
- yyV8uXtauXTegaMQBx0xYvZHVUwrr0tEJR7HsQ+E2ykMr9pPnPqt/+LLTGTbv86M3HIM
- qSr6VgYUiKp8ruObAViob0B+WNmCRcxsPdr25Mz8/6zdcY7g/pk3Q09o4NG7fkeYfgjv
- 7FwCGYdiK6lJjhW91G4dRfOLBHqbaePolY3J2FmWHWIbBMhdKMeBenZfEqjwJaxMjoAA
- 4B4Hff1QtHMXWE7cwbw9NFfXEqmyQ0zU7DkfsR8Dv3QTD60v0yNfUBNS0IvnE+KlGEYe
- W46w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701036588; x=1701641388;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AbEHkc5D4+vXq0WV/czvuLKP20zxjbJLqpyEIdhbGMQ=;
- b=VTEPdhCRFOhLG41sfA3KJBCbcmki9VCO3MHiDMy9jM5YfD1kRsjjBASjADHWOTDqBq
- VLxT3UW9yOoO5DJLb8OecsH0w28TxtidRV4zj8s713HfEgLhJOoibmeI1Ylbx4zlSjcf
- N6vghvdoit38hnrbaz/iJjyzaSWmOWwE7wK4wC6dqr22fD9w2h6cL553HqG8IhMxbz/P
- oItD54vRbJzT8dPfshdNV9OjANduZIEE82jYASNrcMHs7X1DgiLs0K0FpAtdWt89+LyG
- +HSM4yGVQUwSVrQFCK0RThjpBF1IcCpdDbhgrP/zp//Zid7Rzs1djaJOhGLNAVqgO3BG
- XMxg==
-X-Gm-Message-State: AOJu0YxbyGiQGTSlSn258pDPpVY5tiT1wdbMV1P7GPP0mLBdConSn8B8
- zGDiLGhjmO+OBUi0vu6Va4sq5fn1ErY7tv3WMVYApDMZ
-X-Google-Smtp-Source: AGHT+IGN3IPEV7k+ef4ln2lG75EGFCX4AWJ/Q5PlMvE393DK+y6sPLEm2THDWsMFOZdgpMYYTSXLbA==
-X-Received: by 2002:a05:600c:4695:b0:3ff:516b:5c4c with SMTP id
- p21-20020a05600c469500b003ff516b5c4cmr8303566wmo.18.1701036588637; 
- Sun, 26 Nov 2023 14:09:48 -0800 (PST)
-Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
- [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- p16-20020a05600c1d9000b0040b3e3eaad0sm6471126wms.41.2023.11.26.14.09.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Nov 2023 14:09:48 -0800 (PST)
-From: Shantur Rathore <i@shantur.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: [PATCH v3 3/3] defconfig: rockpro64: Enable SF EFI var store
-Date: Sun, 26 Nov 2023 22:08:36 +0000
-Message-Id: <20231126220836.374956-4-i@shantur.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231126220836.374956-1-i@shantur.com>
-References: <20231126220836.374956-1-i@shantur.com>
+ dmarc=none (p=none dis=none) header.from=freemail.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+X-fm-smtp-source: yes
+Received: from localhost (localhost [80.98.74.198])
+ by web-out.onbox.hu (Postfix) with SMTP id 4Sdl3f06J4zfpQ;
+ Mon, 27 Nov 2023 00:17:02 +0100 (CET)
+Date: Sun, 26 Nov 2023 23:17:01 +0000 (GMT)
+From: =?utf-8?Q?Sz=C5=91ke_K=C3=A1lm=C3=A1n_Benjamin?= <egyszeregy@freemail.hu>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "otavio@ossystems.com.br" <otavio@ossystems.com.br>,
+ "sbabic@denx.de" <sbabic@denx.de>
+Message-ID: <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
+In-Reply-To: <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
+References: <20231107221617.470-1-egyszeregy@freemail.hu>
+ <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+ <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
+ <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
+ <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
+ <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-AccountId: 2510275
+X-Originating-Ip: 80.98.74.198
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1701040622; 
+ s=20181004; d=freemail.hu;
+ h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type;
+ l=2566; bh=kpWUg0iDb2YEdq28oQYkjVYWPRZkKCtHhtwP3X23zxE=;
+ b=maYQi26EWK03n/MQup/u007pLy9g7Syqbd150KJDRKt4ujbb2AsIUZ01oiFa6pKb
+ uAXyapWxB4eUKWXM1WtbKLF4JAcdw+J5i29TLfaYvIhqxacV7MulLH3XOnYa9tku1xC
+ HBmw6Qwh5ptVDteqtBFP5EQ92BH0Kd1SPTj1tfxfkpwvFyxh6AhmhP4kykG0LFIV+fu
+ 6jKgOvMIylXoVPRfk/LFcnDYVtGHBGaV0zftuIKkgIL3rq4rWdbjc+fmzCUpZlOV697
+ 4AyTCTaYnvu+HDWlu/8o7J8VayIugzITR/8TXid6XF8GrYcrdUmlTnaU1lw0q9JB+ez
+ 83E2Wu0hkA==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,28 +76,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RockPro64 uses SPI Flash for storing env, also use it store
-EFI variables.
-
-Signed-off-by: Shantur Rathore <i@shantur.com>
----
-
- configs/rockpro64-rk3399_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 4cd6b76665..f550f2ae43 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -8,6 +8,8 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
-+CONFIG_EFI_VARIABLE_SF_STORE=y
-+CONFIG_EFI_VARIABLE_SF_OFFSET=0x7D0000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rockpro64"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
--- 
-2.40.1
-
+It can happen when will -Wall be enabled as in others SW projects. My patch=
+es are final, ready and works. I will not remove this "supression", it must=
+ be a part of it if the target is to provide code in good quality. If you h=
+ave any further whishes you can edit my patch and you can be a co-author.--=
+------ Eredeti lev=C3=A9l --------Felad=C3=B3: Fabio Estevam <festevam@gmai=
+l.com>D=C3=A1tum: 2023 november 20 01:18:24T=C3=A1rgy: Re: [PATCH 1/1] pico=
+-imx7d: add baseboard SD card boot detectC=C3=ADmzett: Sz=C5=91ke K=C3=A1lm=
+=C3=A1n Benjamin <egyszeregy@freemail.hu>On Sun, Nov 19, 2023 at 8:47=E2=80=
+=AFPM Sz=C5=91ke K=C3=A1lm=C3=A1n Benjamin <egyszeregy@freemail.hu> wrote: =
+> > It will warn, if warning levels is set correctly. I will do not remove =
+it.  How can it happen if U-Boot uses warning-1 :=3D -Wextra -Wunused -Wno-=
+unused-parameter ?=20
