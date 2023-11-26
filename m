@@ -4,53 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 954A5C4167B
-	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 19:47:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A0DC4167B
+	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 22:09:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE4EE87128;
-	Sun, 26 Nov 2023 20:47:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id DA0FB87496;
+	Sun, 26 Nov 2023 23:09:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Cn3cY8MY";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="qbQwSCxo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C9DB87128; Sun, 26 Nov 2023 20:47:03 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 60EC8874BB; Sun, 26 Nov 2023 23:09:50 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B42586ECA
- for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 20:47:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B30587495
+ for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 23:09:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=1af8=HI=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1701028013;
- bh=CK/x2bQz0KLJiN8CVWARZ+vV/ecdfRUIA8+i544COaI=;
- b=Cn3cY8MYXZ/UFLlcN4eUqcjnV5yhn5lV3hZkA3d6DxYLY3OvUZfal5w0x00uWJzY6Odeg6cs/
- R7dczeMtjEGK1uZNyPJN6CaZnVi0fHEpYmuBP/3/iXP2Kv2Al7OpoVvpjQSZ4253LM1mVdl9Z/c
- U194TtxbepuJrwMyirsJSZYTPhiWQ91fxVMTmJ5NByDZuTg3/PJup+DkGK+okKXezLz57LRkDHU
- fSLKUIB/sMSP/RUtfwH6lJw1XCglv73FJLA7/DfPYjuBb6+kjZjMxXgSNbAr7UJsE+Oqsv0o+f0
- bT3nnpzF36TZ2Bzxqn+7g6xSZ0Z07WFyUBqFWj9GROHQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
-Subject: [PATCH] rockchip: rk3328: Set efuse auto mode and timing control
-Date: Sun, 26 Nov 2023 19:46:46 +0000
-Message-ID: <20231126194647.2238775-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.42.0
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40b397793aaso13665055e9.0
+ for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 14:09:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701036586; x=1701641386;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eX93EeT4Y17h2exsUqzCs+S7f3imXQntwq0tb7Q72rg=;
+ b=qbQwSCxoLDbFRQcRGnT6K+bTBLy99lZj5DF1kdDcviLX/9JSLuWTj5RsATfCKXW7hy
+ czx16fhiboZxSxYzafnB2XYRj2upRWL5Wb1cPnMoMa2yyzhrRr7btPP4LfMAI0AuBNHy
+ 2DH2NENC9J7/qtDDAHziJgCA9VjlOuL1vggyNR+v5uKiSS27EXvaaR1jkJH2ikwMgMyG
+ 1p7yAkG10PaFT9XegQwEcH1XEWdPt9ur5am3Rl0UzJNQNWt1i/fDtYOxQ+Ur+9I7FeVW
+ 5k94Tq/nSYMYJOWMm7cPALoiHGaOGiKp7m4OFVgGiQYySjuusB7UP9tGXZIQm1lxGK9K
+ ggMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701036586; x=1701641386;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eX93EeT4Y17h2exsUqzCs+S7f3imXQntwq0tb7Q72rg=;
+ b=l/6N90jOcp0O/vsAEPM9YQqrGEMsO+qiajDPgkm9LGMNVs3lgmFwN2vrMIdSelMphq
+ bYyipiTq7fa1D+zf8BkT9hS7CMeqCxs7S7VX7J/1YzpyrZursgq3NKCIy8+OfktDzWho
+ 2+JIsprueYC8ILRbTC9UhKpRloUaHf5OPq5V+MCdO5tJyJ4VNJicvADit93eGCkIsRV4
+ vOJ6p8VHmHjoWcecfKc1p1xJeUGUe1J22bAQer/2apx3te9Py4Dc2GdunPR34VzoG065
+ axQajzPcMf+o1fNFV077IxouyNEJi6z5YRyzEwpltHBk3coGistA4sWWuH3333zXJyRm
+ bC2w==
+X-Gm-Message-State: AOJu0YwVo1jk1z4nrwTHkXtBQWYVB4gbLhLYqctdDmvaVy/yYtKDqoJm
+ RK5vYhZmI61pWWl91HwZhjHjBoLeouFRCUZxslSZMhao
+X-Google-Smtp-Source: AGHT+IH81/CeyzugOhtDQXRSNZ5/+6/pjwMC5FzmFWmsYskFW4QyeyTSPkNSqo5KEciOEbuzOppt8w==
+X-Received: by 2002:a05:600c:299:b0:400:5962:6aa9 with SMTP id
+ 25-20020a05600c029900b0040059626aa9mr11485197wmk.11.1701036585497; 
+ Sun, 26 Nov 2023 14:09:45 -0800 (PST)
+Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
+ [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
+ p16-20020a05600c1d9000b0040b3e3eaad0sm6471126wms.41.2023.11.26.14.09.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 26 Nov 2023 14:09:45 -0800 (PST)
+From: Shantur Rathore <i@shantur.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH v3 0/3] With this patch series we implement SPI Flash storage
+ for EFI
+Date: Sun, 26 Nov 2023 22:08:33 +0000
+Message-Id: <20231126220836.374956-1-i@shantur.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6563a0ad7d9e87de7a12630a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,94 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reading from efuse return zero when mainline TF-A is used.
+variables.
 
-  => dump_efuse
-  00000000: 00 00 00 00  ....
-  00000004: 00 00 00 00  ....
-  00000008: 00 00 00 00  ....
-  0000000c: 00 00 00 00  ....
-  00000010: 00 00 00 00  ....
-  00000014: 00 00 00 00  ....
-  00000018: 00 00 00 00  ....
-  0000001c: 00 00 00 00  ....
+Changes in v3:
+- Fixed compiler warnings.
 
-However, when vendor TF-A blobs is used reading from efuse works.
+Changes in v2:
+- Refactored efi_var_file to move common parts out as requested
+- Changed ifdefs to use CONFIG_IS_DEFINED
+- Fixed typos
 
-Change to use auto mode, enable finish and auto access err interrupts
-and set timing control using same values that vendor TF-A blob use to
-fix this.
+Shantur Rathore (3):
+  efi_var_file: refactor to move buffer functions
+  efi_vars: Implement SPI Flash store
+  defconfig: rockpro64: Enable SF EFI var store
 
-With this efuse can be read when either of mainline TF-A or vendor blob
-is used.
+ configs/rockpro64-rk3399_defconfig |   2 +
+ include/efi_variable.h             |  26 +++++++
+ lib/efi_loader/Kconfig             |  25 ++++++
+ lib/efi_loader/Makefile            |   3 +-
+ lib/efi_loader/efi_var_common.c    | 109 ++++++++++++++++++++++++++
+ lib/efi_loader/efi_var_file.c      | 121 -----------------------------
+ lib/efi_loader/efi_var_sf.c        |  91 ++++++++++++++++++++++
+ lib/efi_loader/efi_variable.c      |  17 +++-
+ 8 files changed, 270 insertions(+), 124 deletions(-)
+ create mode 100644 lib/efi_loader/efi_var_sf.c
 
-  => dump_efuse
-  00000000: 52 4b 33 82  RK3.
-  00000004: 00 fe 21 55  ..!U
-  00000008: 52 4b 57 34  RKW4
-  0000000c: 35 30 32 39  5029
-  00000010: 00 00 00 00  ....
-  00000014: 08 25 0c 0f  .%..
-  00000018: 02 0d 08 00  ....
-  0000001c: 00 00 f0 00  ....
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/rk3328/rk3328.c | 34 ++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
-
-diff --git a/arch/arm/mach-rockchip/rk3328/rk3328.c b/arch/arm/mach-rockchip/rk3328/rk3328.c
-index de17b8868273..edb22a58fc67 100644
---- a/arch/arm/mach-rockchip/rk3328/rk3328.c
-+++ b/arch/arm/mach-rockchip/rk3328/rk3328.c
-@@ -19,6 +19,22 @@ DECLARE_GLOBAL_DATA_PTR;
- #define GRF_BASE		0xFF100000
- #define UART2_BASE		0xFF130000
- #define FW_DDR_CON_REG		0xFF7C0040
-+#define EFUSE_NS_BASE		0xFF260000
-+
-+#define EFUSE_MOD		0x0000
-+#define EFUSE_INT_CON		0x0014
-+#define EFUSE_T_CSB_P		0x0028
-+#define EFUSE_T_PGENB_P		0x002C
-+#define EFUSE_T_LOAD_P		0x0030
-+#define EFUSE_T_ADDR_P		0x0034
-+#define EFUSE_T_STROBE_P	0x0038
-+#define EFUSE_T_CSB_R		0x003C
-+#define EFUSE_T_PGENB_R		0x0040
-+#define EFUSE_T_LOAD_R		0x0044
-+#define EFUSE_T_ADDR_R		0x0048
-+#define EFUSE_T_STROBE_R	0x004C
-+
-+#define EFUSE_TIMING(s, l)	(((s) << 16) | (l))
- 
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff520000",
-@@ -54,6 +70,24 @@ int arch_cpu_init(void)
- 
- 	/* Disable the ddr secure region setting to make it non-secure */
- 	rk_setreg(FW_DDR_CON_REG, 0x200);
-+
-+	/* Use efuse auto mode */
-+	writel(0x46, EFUSE_NS_BASE + EFUSE_MOD);
-+
-+	/* Enable efuse finish and auto access err interrupt */
-+	writel(0x07, EFUSE_NS_BASE + EFUSE_INT_CON);
-+
-+	/* Set efuse timing control */
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_CSB_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_PGENB_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_LOAD_P);
-+	writel(EFUSE_TIMING(1, 241), EFUSE_NS_BASE + EFUSE_T_ADDR_P);
-+	writel(EFUSE_TIMING(2, 240), EFUSE_NS_BASE + EFUSE_T_STROBE_P);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_CSB_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_PGENB_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_LOAD_R);
-+	writel(EFUSE_TIMING(1, 4), EFUSE_NS_BASE + EFUSE_T_ADDR_R);
-+	writel(EFUSE_TIMING(2, 3), EFUSE_NS_BASE + EFUSE_T_STROBE_R);
- #endif
- 	return 0;
- }
 -- 
-2.42.0
+2.40.1
 
