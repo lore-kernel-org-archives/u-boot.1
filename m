@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C4CC4167B
-	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 12:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E69FC4167B
+	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 12:35:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BE148723E;
-	Sun, 26 Nov 2023 13:25:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 781E587214;
+	Sun, 26 Nov 2023 13:35:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1F4187483; Sun, 26 Nov 2023 13:25:02 +0100 (CET)
+ id E99F786501; Sun, 26 Nov 2023 13:35:10 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9366086FBD
- for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 13:24:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 6831587252
+ for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 13:35:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 12D74DA7;
- Sun, 26 Nov 2023 04:25:45 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E9576DA7;
+ Sun, 26 Nov 2023 04:35:52 -0800 (PST)
 Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A4D9B3F6C4;
- Sun, 26 Nov 2023 04:24:56 -0800 (PST)
-Date: Sun, 26 Nov 2023 12:23:42 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D8B2E3F6C4;
+ Sun, 26 Nov 2023 04:35:04 -0800 (PST)
+Date: Sun, 26 Nov 2023 12:33:51 +0000
 From: Andre Przywara <andre.przywara@arm.com>
-To: Stephen Graf <stephen.graf@gmail.com>
-Cc: Mikhail Kalashnikov <iuncuim@gmail.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Piotr
- Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 3/3] sunxi: H616: Add OrangePi Zero 3 board support
-Message-ID: <20231126122342.3944cad5@slackpad.lan>
-In-Reply-To: <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
-References: <20231114013106.31336-1-andre.przywara@arm.com>
- <20231114013106.31336-4-andre.przywara@arm.com>
- <0eab5c21-4fdc-478e-9071-f43c12e01fb3@gmail.com>
- <20231126002349.55404e43@slackpad.lan>
- <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
+To: Bob McChesney <bob@electricworry.net>
+Cc: electricworry <worryelectric@gmail.com>, u-boot@lists.denx.de,
+ "linux-sunxi@lists.linux.dev" <linux-sunxi@lists.linux.dev>, Mikhail
+ Kalashnikov <iuncuim@gmail.com>, Jernej =?UTF-8?B?xaBrcmFiZWM=?=
+ <jernej.skrabec@gmail.com>
+Subject: Re: Adding support for Orange Pi Zero 3
+Message-ID: <20231126123351.7275f4c7@slackpad.lan>
+In-Reply-To: <ZWMs0z6ED1ukmRGU@BOB1>
+References: <CABZPTZSQHhcVuqLmg6nEiKBfF4p+R+y5sDCGaa19qztSEs54BA@mail.gmail.com>
+ <20231123151709.64002286@donnerap.manchester.arm.com>
+ <ZWMs0z6ED1ukmRGU@BOB1>
 Organization: Arm Ltd.
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,309 +60,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 25 Nov 2023 20:27:05 -0800
-Stephen Graf <stephen.graf@gmail.com> wrote:
+On Sun, 26 Nov 2023 11:32:35 +0000
+Bob McChesney <bob@electricworry.net> wrote:
 
-Hi Stephen,
+Hi Bob,
 
-> I built u-boot with the additional parameter for usb and it works, I thin=
-k.  There was one message that might be of concern "
-> Card did not respond to voltage select! : -110".
+thanks for the reply!
 
-This is a normal, though admittedly confusing message if no SD card is
-inserted. The code tries to (unconditionally) access the SD card, and
-sees that no card is there, the missing respond to the voltage select
-command is just the first real proof of this.
+CC:ing Jernej for the THS SRAM issue and the HDMI support mentioned
+below.
 
-> I am not sure of the details of the boot.cmd. The output below came from
-> the supplier image on an SD plugged into a USB card reader. The SD slot o=
-f the board was empty.
->=20
-> I was able to install u-boot to the SPI flash memory and there is a warni=
-ng message from that also: "
-> Loading Environment from SPIFlash... jedec_spi_nor flash@0: unrecognized =
-JEDEC id bytes: 5e, 40, 18
-> *** Warning - spi_flash_probe_bus_cs() failed, using default environment"
+> On Thu, Nov 23, 2023 at 03:17:09PM +0000, Andre Przywara wrote:
+> > On Sat, 4 Nov 2023 19:17:44 +0000
+> > electricworry <worryelectric@gmail.com> wrote:
+> > 
+> > Hi,
+> >   
+> > > I would like to contribute improvements u-boot to enable support for
+> > > the Orange Pi Zero 3 board. I have already gained a good understanding
+> > > of the project and the standards for changes, and so I have made
+> > > modifications and tested them on my board.  
+> > 
+> > thanks for your interest and for reaching out!
+> > 
+> > I will answer your questions below, but for this particular topic there
+> > are already support patches on the list (sorry for the disappointment!):
+> > https://lore.kernel.org/u-boot/20231114013106.31336-1-andre.przywara@arm.com/  
+> 
+> That's good. I'm happy that more experienced people have been working on
+> this. It's been a good learning experience nevertheless.
+> 
+> > Can you please apply those patches on top of mainline U-Boot and test
+> > them? Then reply to patch 3/3 above with a Tested-by: line, stating your
+> > name and email address?
+> > Having independent reports of that working would make me more confident in
+> > merging the series.  
+> 
+> I'm happy to do that and will be able to do it shortly. In this case
+> would I be applying the patches on top of the next branch?
 
-So for a start there is no environment on the SPI flash yet, so it
-wouldn't do anything. But the "unrecognised JEDEC id bytes" message
-doesn't sound right. Can you dig into this? Do you have patch 1/3
-applied, which tells U-Boot about 0x5e meaning zBIT?
+The normal master branch would be safer. I don't typically work on the
+next branch, and there might be changes in there which subtly break
+sunxi.
+ 
+> > As a general advice: try to reach out early, to avoid working in parallel
+> > on something, and also to avoid working in the wrong direction.
+> > There is the #linux-sunxi IRC channel on the OFTC IRC network[1] (you can
+> > join via any browser), also there is a mailing list for Allwinner related
+> > upstream work: linux-sunxi@lists.linux.dev [2]
+> > Another resource is our wiki: https://linux-sunxi.org
+> > 
+> > [1] https://www.oftc.net/WebChat/
+> >     https://oftc.irclog.whitequark.org/linux-sunxi
+> > [2] https://subspace.kernel.org/lists.linux.dev.html  
+> 
+> Thank you. I wasn't aware of this community and have been working alone.
+> It will be more productive to work and discuss with others so I'll join
+> that mailing list too.
 
-> Thank you for your advice on getting something to boot. None of the Debia=
-n installer images were suitable.  Even SID was at 6.1.
-> I built the latest Linux 6.6.2 and wrestled with the rootfs before I got =
-it running. I built the tested u-boot with this system,
-> as a test of system stability.
->=20
-> defconfig used + emac patches
->=20
-> CONFIG_ARM=3Dy
-> CONFIG_ARCH_SUNXI=3Dy
-> CONFIG_DEFAULT_DEVICE_TREE=3D"sun50i-h618-orangepi-zero3"
-> CONFIG_SPL=3Dy
-> CONFIG_DRAM_SUN50I_H616_DX_ODT=3D0x07070707
-> CONFIG_DRAM_SUN50I_H616_DX_DRI=3D0x0e0e0e0e
-> CONFIG_DRAM_SUN50I_H616_CA_DRI=3D0x0e0e
-> CONFIG_DRAM_SUN50I_H616_ODT_EN=3D0xaaaaeeee
-> CONFIG_DRAM_SUN50I_H616_TPR6=3D0x44000000
-> CONFIG_DRAM_SUN50I_H616_TPR10=3D0x402f6663
-> CONFIG_DRAM_SUN50I_H616_TPR11=3D0x24242624
-> CONFIG_DRAM_SUN50I_H616_TPR12=3D0x0f0f100f
-> CONFIG_MACH_SUN50I_H616=3Dy
-> CONFIG_SUNXI_DRAM_H616_LPDDR4=3Dy
-> #
-> CONFIG_DRAM_CLK=3D792
-> CONFIG_USB1_VBUS_PIN=3D"PC16"
-> #
-> CONFIG_R_I2C_ENABLE=3Dy
-> CONFIG_SPL_SPI_SUNXI=3Dy
-> # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> CONFIG_SPL_I2C=3Dy
-> CONFIG_SPL_SYS_I2C_LEGACY=3Dy
-> CONFIG_SYS_I2C_MVTWSI=3Dy
-> CONFIG_SYS_I2C_SLAVE=3D0x7f
-> CONFIG_SYS_I2C_SPEED=3D400000
-> CONFIG_SPI_FLASH_ZBIT=3Dy
-> CONFIG_PHY_MOTORCOMM=3Dy
-> CONFIG_SUN8I_EMAC=3Dy
-> CONFIG_AXP313_POWER=3Dy
-> CONFIG_SPI=3Dy
-> CONFIG_USB_EHCI_HCD=3Dy
-> CONFIG_USB_OHCI_HCD=3Dy
-> CONFIG_USB_MUSB_GADGET=3Dy
->=20
->=20
-> Console Output:
->=20
-> U-Boot 2024.01-rc3-00009-g9e53e45292-dirty (Nov 25 2023 - 18:32:16 -0800)=
- Allwinner Technology
->=20
-> CPU:   Allwinner H616 (SUN50I)
-> Model: OrangePi Zero3
-> DRAM:  1 GiB
-> Core:  57 devices, 25 uclasses, devicetree: separate
-> WDT:   Not starting watchdog@30090a0
-> MMC:   mmc@4020000: 0
-> Loading Environment from SPIFlash... jedec_spi_nor flash@0: unrecognized =
-JEDEC id bytes: 5e, 40, 18
-> *** Warning - spi_flash_probe_bus_cs() failed, using default environment
->=20
-> Loading Environment from FAT... Card did not respond to voltage select! :=
- -110
-> ** Bad device specification mmc 0 **
-> In:    serial@5000000
-> Out:   serial@5000000
-> Err:   serial@5000000
-> Allwinner mUSB OTG (Peripheral)
-> Net:   eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS =
-ep2in
-> MAC de:ad:be:ef:00:01
-> HOST MAC de:ad:be:ef:00:00
-> RNDIS ready
-> , eth1: usb_ether
-> starting USB...
-> Bus usb@5200000: USB EHCI 1.00
-> Bus usb@5200400: USB OHCI 1.0
-> scanning bus usb@5200000 for devices... Device NOT ready
->     Request Sense returned 02 3A 00
-> Device NOT ready
->     Request Sense returned 02 3A 00
-> Device NOT ready
->     Request Sense returned 02 3A 00
-> 2 USB Device(s) found
-> scanning bus usb@5200400 for devices... 1 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> Hit any key to stop autoboot:  0
-> Card did not respond to voltage select! : -110
->=20
-> Device 0: Vendor: Generic- Rev: 1.00 Prod: SD/MMC
->              Type: Removable Hard Disk
->              Capacity: 15193.5 MB =3D 14.8 GB (31116288 x 512)
-> ... is now current device
-> Scanning usb 0:1...
-> Found U-Boot script /boot/boot.scr
-> 3636 bytes read in 1 ms (3.5 MiB/s)
-> ## Executing script at 4fc00000
-> U-boot loaded from SD
-> Boot script loaded from usb
-> 205 bytes read in 1 ms (200.2 KiB/s)
-> Failed to load '/boot/dtb/allwinner/sun50i-h618-orangepi-zero3.dtb'
-> libfdt fdt_check_header(): FDT_ERR_BADMAGIC
-> No FDT memory address configured. Please configure
-> the FDT address via "fdt addr <address>" command.
-> Aborting!
-> 4203 bytes read in 4 ms (1 MiB/s)
-> Applying kernel provided DT fixup script (sun50i-h616-fixup.scr)
-> ## Executing script at 45000000
-> 7088139 bytes read in 325 ms (20.8 MiB/s)
-> 9419107 bytes read in 430 ms (20.9 MiB/s)
->     Uncompressing Kernel Image
-> Moving Image from 0x40080000 to 0x40200000, end=3D41800000
-> ## Loading init Ramdisk from Legacy Image at 4ff00000 ...
->     Image Name:   uInitrd
->     Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
->     Data Size:    7088075 Bytes =3D 6.8 MiB
->     Load Address: 00000000
->     Entry Point:  00000000
->     Verifying Checksum ... OK
-> ERROR: Did not find a cmdline Flattened Device Tree
+Yeah, the IRC chat is the most responsive and most helpful, I find, so
+try to join that.
 
-OK, so this is because you don't have the OPi Zero3 DTB on your image.
-And this is frankly not needed, because U-Boot carries this very DTB
-already.
-In general this is some old school boot sequence, with a uImage
-wrapped initrd and the DTB loaded from disk. The wrapped initrd is
-mostly an small annoyance from a developers point of view, so this is
-fine.
-But can you tweak the boot script to use "$fdtcontroladdr", instead of
-trying load a DTB from "disk"?
-So remove (or ignore) the "load .... $fdt_addr_r ..." line, and change
-the booti command to use "$fdtcontroladdr" instead of "$fdt_addr_r".
-That should be all you need.
+> 
+> > > Before submitting patches for review I've got a few questions I'd like
+> > > to discuss.
+> > > 
+> > > The board is an Allwinner H618. From what I can gather this is just an
+> > > H616 with minor changes. The changes are so minor that I've been able
+> > > to implement the support as changes to the existing files for H616.  
+> > 
+> > Just curious, what changes did you find in particular? So far we know
+> > about the increased L2 cache, which is irrelevant from a software support
+> > perspective, and the change of base address and layout of the CPUX_CFG
+> > block, which is already covered by:
+> > https://source.denx.de/u-boot/u-boot/-/commit/0a137ac5015933bf38ea2700abe70602ef63bbdd
+> > Did you find anything else?  
+> 
+> I am not what anyone could call a hardware expert so I've just been
+> working by diffing the codebase from the vendor against u-boot mainline.
 
-Good luck!
+Most of us are indeed curious software developers, and we typically do
+a mixture of looking at vendor code, checking manuals, and doing live
+experiments to figure things out.
+
+> Changes that I've created patches for include their full dtb, the LPDDR4
+> support, the AXP313A power, and - perhaps incorrectly - zeroing a
+> register so that the thermal driver in the kernel works properly and
+> doesn't get false high temperature readings.
+
+Ah, glad I am not the only one seeing this!
+I strangely haven't seen this all the time, but I indeed now need to do
+a "mw.l 0x3000000 0x7ffeffff" in U-Boot, otherwise I see the kernel
+screaming about +200C temperatures.
+
+> I say "perhaps incorrectly"
+> because I feel like the kernel driver should be doing that work itself
+> and the comment in the vendor u-boot code suggests it's a hack: "The
+> bit[16] of register reg[0x03000000] must be zero for the THS driver to
+> work properly in the kernel. The BSP u-boot is putting the whole
+> register to zero so we are doing the same."
+
+Very good, you are exactly on the same path as I am! I have a patch for
+the THS driver that tries to clear the bit, via using the regmap
+exported by syscon, but I need to test this further (was my plan for
+today). I think this was somehow not working properly the last time I
+checked.
+Another approach was trying to claim an SRAM region - as this is what
+this register does for the video engine (VE). I figured that apparently
+just bit 0 switches the SRAM to the VE, and flipping all 31 bits might
+be some anachronism from the olden A10 days.
+So we might claim that bit 16 switches the SRAM for THS, but then I am
+not sure it really has something to do with SRAM, or if it's just
+another Allwinner special of "oh, we have an unused bit in this
+register" ;-)
+We will see what the list has to say about this.
+
+> > Out of interest, how did you do this? Disassembled the vendor boot0?
+> > Dumping DRAM registers? We discussed and tested the LPDDR4 support already
+> > a while ago, and support for that was merged recently:
+> > https://source.denx.de/u-boot/u-boot/-/commit/4b02f0120a4bb2a5d7081aef8cef6a4ca57e9db2  
+> 
+> As above, I didn't do anything clever like probe hardware or
+> disassemble binaries; it was just a brute force loop of cherry-picking,
+> compiling and testing. And also doing it in a way that fitted the
+> incumbent style and practices of mainline. e.g. making use of configs
+> like CONFIG_DRAM_SUN50I_H616_DX_ODT for the board family rathern than
+> having board specific ifdefs. The work done is available if anyone wants
+> to see it, and I'd be happy to have it critiqued. Looking at the patches
+> proposed here I'm happy to see that we've come to the same conclusion on
+> some things (such as the above config) and others we diverge on, but as
+> I can see from the discussion in linux-sunxi the feeling is that some of
+> these difference don't matter.
+> 
+> > Hope that helps!
+> > 
+> > Cheers,
+> > Andre  
+> 
+> Thanks for all of that good advice. It's immensely appreciated. I'll
+> keep this as a guide for contibuting patches in the future.
+> 
+> Now that there's a working u-boot for the board - I've got two to choose
+> from now :) - I'm going to be concentrating on trying to get the Mali
+> graphics working as it's a requirement for my project. I've got a
+> working kernel (6.1.31 with patches) but I can also see that work's been
+> underway to bring the support to 6.7. I tested 6.7-rc2 today and can't
+> get any output at all on the console after u-boot starts the kernel.
+
+Yeah, that's because we don't have any video (HDMI) output support
+(something completely unrelated to Mali, which is just a 3D renderer!)
+yet in mainline. Jernej was sitting on *some* patches for a while, but
+didn't have the time to upstream them, and IIUC there is something odd
+to fix first before it's mainline ready.
+There are some rough bits in here, and in other repos floating around:
+https://github.com/jernejsk/linux-1/commits/h616-hdmi-v2
 
 Cheers,
 Andre
-=20
-> On 2023-11-25 4:23 p.m., Andre Przywara wrote:
-> > On Sat, 25 Nov 2023 20:43:12 +0300
-> > Mikhail Kalashnikov<iuncuim@gmail.com>  wrote:
-> >
-> > Hi Mikhail,
-> > =20
-> >> Hi Andre!
-> >> Thanks for your patches. I started checking and noticed that USB stora=
-ge
-> >> was not working:
-> >> =20
-> >> =3D> usb reset =20
-> >> resetting USB...
-> >> Bus usb@5200000: USB EHCI 1.00
-> >> Bus usb@5200400: USB OHCI 1.0
-> >> scanning bus usb@5200000 for devices... 1 USB Device(s) found
-> >> scanning bus usb@5200400 for devices... 1 USB Device(s) found
-> >>   =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 scanning usb for storage devices... 0=
- Storage Device(s) found =20
-> >> =3D> usb storage =20
-> >> No storage devices, perhaps not 'usb start'ed..? =20
-> > Ah, thanks for the report, seems I didn't even test this!
-> > So digging around I figured it's working in Linux, and it's the right
-> > USB port, but we are missing the VBUS power switch, which is a GPIO
-> > controlled regulator. There are pending patches to pick this from the
-> > devicetree[1], but we are not there yet, so we need:
-> > CONFIG_USB1_VBUS_PIN=3D"PC16"
-> > in the defconfig, for now. I will update the file. The same is
-> > actually missing from the OrangePi Zero2 defconfig, I will send a patch
-> > ASAP.
-> >    =20
-> >> Otherwise my OpiZero3 (4GB) board looks working.
-> >> Ethernet works with my 10 Mbps usb-dongle.
-> >>
-> >> sf probe detect spi nor flash: =20
-> >> =3D> sf probe =20
-> >> SF: Detected zb25vq128 with page size 256 Bytes, erase size 4 KiB, tot=
-al
-> >> 16 MiB
-> >>
-> >> Loading the kernel and running the operating system (from microsd) also
-> >> without problems.
-> >>
-> >> Tested-by: Mikhail Kalashnikov<iuncuim@gmail.com> =20
-> > Great, thanks for the tag!
-> >
-> > Cheers,
-> > Andre
-> > =20
-> >> On 14.11.2023 04:31, Andre Przywara wrote: =20
-> >>> The OrangePi Zero 3 is a small development board featuring the Allwin=
-ner
-> >>> H618 SoC, shipping with up to 4GB of DRAM, Gigabit Ethernet, a micro-=
-HDMI
-> >>> connector and two USB sockets.
-> >>> The board uses LPDDR4 DRAM and an X-Powers AXP313a PMIC, support for
-> >>> which was recently added to U-Boot.
-> >>>
-> >>> Add a defconfig file selecting the right drivers and DRAM options.
-> >>> Since the .dts file was synced from the Linux kernel repo already, we
-> >>> just need to add one line to the Makefile to actually build the .dtb.
-> >>>
-> >>> The DRAM parameters were derived from the values found in the BSP DRAM
-> >>> drivers on the SPI NOR flash.
-> >>>
-> >>> Signed-off-by: Andre Przywara<andre.przywara@arm.com>
-> >>> ---
-> >>>    arch/arm/dts/Makefile            |  1 +
-> >>>    board/sunxi/MAINTAINERS          |  5 +++++
-> >>>    configs/orangepi_zero3_defconfig | 30 ++++++++++++++++++++++++++++=
-++
-> >>>    3 files changed, 36 insertions(+)
-> >>>    create mode 100644 configs/orangepi_zero3_defconfig
-> >>>
-> >>> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> >>> index 1be08c5fdc2..5fc888680b3 100644
-> >>> --- a/arch/arm/dts/Makefile
-> >>> +++ b/arch/arm/dts/Makefile
-> >>> @@ -835,6 +835,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) +=3D \
-> >>>    	sun50i-h6-tanix-tx6-mini.dtb
-> >>>    dtb-$(CONFIG_MACH_SUN50I_H616) +=3D \
-> >>>    	sun50i-h616-orangepi-zero2.dtb \
-> >>> +	sun50i-h618-orangepi-zero3.dtb \
-> >>>    	sun50i-h616-x96-mate.dtb
-> >>>    dtb-$(CONFIG_MACH_SUN50I) +=3D \
-> >>>    	sun50i-a64-amarula-relic.dtb \
-> >>> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> >>> index 00614372119..f556857a391 100644
-> >>> --- a/board/sunxi/MAINTAINERS
-> >>> +++ b/board/sunxi/MAINTAINERS
-> >>> @@ -455,6 +455,11 @@ M:	Jernej Skrabec<jernej.skrabec@siol.net>
-> >>>    S:	Maintained
-> >>>    F:	configs/orangepi_zero2_defconfig
-> >>>   =20
-> >>> +ORANGEPI ZERO 3 BOARD
-> >>> +M:	Andre Przywara<andre.przywara@arm.com>
-> >>> +S:	Maintained
-> >>> +F:	configs/orangepi_zero3_defconfig
-> >>> +
-> >>>    ORANGEPI PC 2 BOARD
-> >>>    M:	Andre Przywara<andre.przywara@arm.com>
-> >>>    S:	Maintained
-> >>> diff --git a/configs/orangepi_zero3_defconfig b/configs/orangepi_zero=
-3_defconfig
-> >>> new file mode 100644
-> >>> index 00000000000..e59044f6639
-> >>> --- /dev/null
-> >>> +++ b/configs/orangepi_zero3_defconfig
-> >>> @@ -0,0 +1,30 @@
-> >>> +CONFIG_ARM=3Dy
-> >>> +CONFIG_ARCH_SUNXI=3Dy
-> >>> +CONFIG_DEFAULT_DEVICE_TREE=3D"sun50i-h618-orangepi-zero3"
-> >>> +CONFIG_SPL=3Dy
-> >>> +CONFIG_DRAM_SUN50I_H616_DX_ODT=3D0x07070707
-> >>> +CONFIG_DRAM_SUN50I_H616_DX_DRI=3D0x0e0e0e0e
-> >>> +CONFIG_DRAM_SUN50I_H616_CA_DRI=3D0x0e0e
-> >>> +CONFIG_DRAM_SUN50I_H616_ODT_EN=3D0xaaaaeeee
-> >>> +CONFIG_DRAM_SUN50I_H616_TPR6=3D0x44000000
-> >>> +CONFIG_DRAM_SUN50I_H616_TPR10=3D0x402f6663
-> >>> +CONFIG_DRAM_SUN50I_H616_TPR11=3D0x24242624
-> >>> +CONFIG_DRAM_SUN50I_H616_TPR12=3D0x0f0f100f
-> >>> +CONFIG_MACH_SUN50I_H616=3Dy
-> >>> +CONFIG_SUNXI_DRAM_H616_LPDDR4=3Dy
-> >>> +CONFIG_R_I2C_ENABLE=3Dy
-> >>> +CONFIG_SPL_SPI_SUNXI=3Dy
-> >>> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-> >>> +CONFIG_SPL_I2C=3Dy
-> >>> +CONFIG_SPL_SYS_I2C_LEGACY=3Dy
-> >>> +CONFIG_SYS_I2C_MVTWSI=3Dy
-> >>> +CONFIG_SYS_I2C_SLAVE=3D0x7f
-> >>> +CONFIG_SYS_I2C_SPEED=3D400000
-> >>> +CONFIG_SPI_FLASH_ZBIT=3Dy
-> >>> +CONFIG_PHY_MOTORCOMM=3Dy
-> >>> +CONFIG_SUN8I_EMAC=3Dy
-> >>> +CONFIG_AXP313_POWER=3Dy
-> >>> +CONFIG_SPI=3Dy
-> >>> +CONFIG_USB_EHCI_HCD=3Dy
-> >>> +CONFIG_USB_OHCI_HCD=3Dy
-> >>> +CONFIG_USB_MUSB_GADGET=3Dy =20
-
