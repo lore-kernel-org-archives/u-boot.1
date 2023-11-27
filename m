@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B63CAC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 19:56:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE6C5C07D5A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 19:56:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88B39877FB;
-	Mon, 27 Nov 2023 20:53:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 093F287813;
+	Mon, 27 Nov 2023 20:53:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qKMdTF83";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GebQ1cST";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAC3C87811; Mon, 27 Nov 2023 20:53:37 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id C73DE8781B; Mon, 27 Nov 2023 20:53:42 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F68D8780F
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 20:53:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4033877B0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 20:53:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-58d4968c362so1640734eaf.0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:53:35 -0800 (PST)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6d7fc4661faso2592563a34.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:53:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701114814; x=1701719614; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701114819; x=1701719619; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CBVDXuKsrzfIj7cbbHSPnzacQxJq7O9nr7ZFwYpRu40=;
- b=qKMdTF83E9PNb0SkcOzblB8z6SAMhIn+MckbYwYctlgU3JVbr8xeFjzqV+cybCpjGM
- 9sVQGAqX6Mr5jFrumzKkiN6uDk0RpnBO2dFvg6BDcN/K1/h06kwTdI3JmyHARWltM2s4
- 8vPE+jnUeLSgPPLnEOzMIR6ez+l6xMCPeHxfT2/C6WbONWzNlukDc9Zf4siwybhUVXZ+
- MTYC9uBBXolKh3Qy4+8Gg/TX2PQZp+BalYhdfFlT4HSkE1Kv6RqEHrTMFM+qVxPUzsjG
- uPx14bBsT/Cc527GCBhNkLj/nT9Eg/hYevS95bmw9BVqu9YPHfdfIcsKNY8A4lQx+aqj
- DJXA==
+ bh=r6RFMlShZeFgOHgdxCZA1nfAyopulPDAlKxhV4gGxkA=;
+ b=GebQ1cSTPkpBT07aB11JRn63lL+puat1pOdVumtT6kfnO78M2F3/xZOS2DgWziHfjb
+ nzCIXdOuhe4UXPR3iaUnFQ1rOkZUC6P5MbeRgAeJLPG+uX7j2EJU1nnm1HZ64eEfcUWd
+ m4vRjgBX2k9T5H2xnGV9KJECKQHB6WhpmBraPb8qBcc2Pmty5kWluXyYBCDWoeRmgU/a
+ uzl9DyILv0KBcllmLL2+HaqHkttoLjtLo90+NPDV1P4mIlI5ptluomM1xn4ZN74gyQvy
+ MKctOHOQu/WwpOUiFg39AkGRlsJnN9S+h1tS6RSJtJT7mlMiUDKfJPZmPvA0PxCMlbv8
+ Sz5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701114814; x=1701719614;
+ d=1e100.net; s=20230601; t=1701114819; x=1701719619;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CBVDXuKsrzfIj7cbbHSPnzacQxJq7O9nr7ZFwYpRu40=;
- b=sbd9UJj4nI2MsayWRCP2wSeeS+wCdDY4bnb+8W7sVUpV9TTlZc6OBEkg02So0RW9Yy
- e+NCzuXwiauqv0QFbKGq9FOeTaL19/8MupTr1Z5pKCb0/5GFYl4TS4zVzk9ScM7Y4pLe
- uqeVIk4WhYg8KUHqZ1SfXQAYkEf2m8HhQP6AoBEV6R+1Ohe+c/Ku1Jzoku2Y8Lawaj2s
- Y/DknkiiFNTX2b2xubWklywKgjGHswiJZerbzdpOZbKHy2MgjKt6KP0RqjMszuFfQRjT
- ZFkODXWTkgPBmsF6jOxu7IvEPvgelc/AmbSywAQe26dp3vxdhNazmuPi+OtQpRdqg89i
- cyVQ==
-X-Gm-Message-State: AOJu0YwA195II1Jq299mfnTeyqFQG9eu47Cwb9GW7I7blGhGWUMmNAR2
- uPYfzCM2rvQud1nB+UfH+39Dzg79IMR7k73jM2o=
-X-Google-Smtp-Source: AGHT+IEd/XvY2N1RsLb5oPLAQm/4wi1Q/2JSYweA2mjGuJXF2AhKgVANF2SEOKDv8yLkVhijPrNynw==
-X-Received: by 2002:a05:6359:2e17:b0:16e:29cf:4e57 with SMTP id
- ro23-20020a0563592e1700b0016e29cf4e57mr7534989rwb.29.1701114814026; 
- Mon, 27 Nov 2023 11:53:34 -0800 (PST)
+ bh=r6RFMlShZeFgOHgdxCZA1nfAyopulPDAlKxhV4gGxkA=;
+ b=vHOK1ShrnEO+JTUzK1jauAo3hAtaLVoNkMbpYLIaA+Q1hIu82kj91f8dC6op9MGj2G
+ 5jWNd/Ekpk3ISQs0YL81hu4ZUMjQF+TFvbtqGI4Nuqed1HRbD0iHUD4UwvKK359Iw2Ew
+ udV22J7llO5x9PxAy2uNp1rba8OZLKfr3B4nPPhc85YEoaoZB4TDiJ/9b1r59KVxUZK5
+ 82BoFhk2pDPDz2RlGHYXkdxVae1+jiFtUUbHUZvA9IzNpQeG/1l70YJBojWYzzQ+aZAn
+ 3vvVF8yFro/3g1h1S0goXrVGrNWi0RA/LVKmI04d7xvkDKvUj8R53SLfLdoz4oY7o0EG
+ Lm5A==
+X-Gm-Message-State: AOJu0Yz0pi7+aoJlxfHTuBlvUpO+AeS0Byq+wPa2sinj7+yXpsltCLRv
+ 4GCyiHekSXEXRk96vAP3eq5nGzwiVGyaJHWrVPE=
+X-Google-Smtp-Source: AGHT+IEOeZ7qYqS5Y7+BjBN+nS86+R8hkzuQsHtV6r9x/zM9q59Mwms3ClP/YAipsOuauMatJ2xShw==
+X-Received: by 2002:a05:6830:1d63:b0:6d8:1a9d:9a6f with SMTP id
+ l3-20020a0568301d6300b006d81a9d9a6fmr7090624oti.36.1701114818976; 
+ Mon, 27 Nov 2023 11:53:38 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- g6-20020ad45106000000b0067a2061fc21sm3087047qvp.101.2023.11.27.11.53.33
+ g6-20020ad45106000000b0067a2061fc21sm3087047qvp.101.2023.11.27.11.53.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 11:53:33 -0800 (PST)
+ Mon, 27 Nov 2023 11:53:38 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de,
 	ilias.apalodimas@linaro.org,
@@ -72,10 +72,11 @@ To: u-boot@lists.denx.de,
 Cc: Raymond Mao <raymond.mao@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>,
  Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 17/18] qemu-arm: Get bloblist from boot arguments
-Date: Mon, 27 Nov 2023 11:50:28 -0800
-Message-Id: <20231127195029.90951-18-raymond.mao@linaro.org>
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2 18/18] bloblist: Load the bloblist from the previous loader
+Date: Mon, 27 Nov 2023 11:50:29 -0800
+Message-Id: <20231127195029.90951-19-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231127195029.90951-1-raymond.mao@linaro.org>
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
@@ -97,159 +98,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add platform custom function to get bloblist from boot arguments.
-Check whether boot arguments aligns with the register conventions
-defined in FW Handoff spec v0.9.
-Add bloblist related options into qemu default config.
+During bloblist initialization, when CONFIG_OF_BOARD is defined,
+invoke the platform custom function to load the bloblist via boot
+arguments from the previous loader.
+If the bloblist exists, copy it into the fixed bloblist memory region.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
 - New patch file created for v2.
 
- board/emulation/qemu-arm/Makefile        |  1 +
- board/emulation/qemu-arm/lowlevel_init.S | 19 +++++++++
- board/emulation/qemu-arm/qemu-arm.c      | 54 ++++++++++++++++++++++++
- configs/qemu_arm64_defconfig             |  3 ++
- configs/qemu_arm_defconfig               |  3 ++
- 5 files changed, 80 insertions(+)
- create mode 100644 board/emulation/qemu-arm/lowlevel_init.S
+ common/bloblist.c  | 29 +++++++++++++----------------
+ include/bloblist.h | 14 ++++++++++++++
+ 2 files changed, 27 insertions(+), 16 deletions(-)
 
-diff --git a/board/emulation/qemu-arm/Makefile b/board/emulation/qemu-arm/Makefile
-index a22d1237ff..12821e7083 100644
---- a/board/emulation/qemu-arm/Makefile
-+++ b/board/emulation/qemu-arm/Makefile
-@@ -1,3 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
- obj-y	+= qemu-arm.o
-+obj-$(CONFIG_OF_BOARD)	+= lowlevel_init.o
-diff --git a/board/emulation/qemu-arm/lowlevel_init.S b/board/emulation/qemu-arm/lowlevel_init.S
-new file mode 100644
-index 0000000000..d72d7c938a
---- /dev/null
-+++ b/board/emulation/qemu-arm/lowlevel_init.S
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: BSD-2-Clause */
-+/*
-+ * Copyright (c) 2023, Linaro Limited
-+ */
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 91d69e9439..251093ecfa 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -477,15 +477,8 @@ int bloblist_init(void)
+ 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+ 	int ret = -ENOENT;
+ 	ulong addr, size;
+-	bool expected;
+-
+-	/**
+-	 * We don't expect to find an existing bloblist in the first phase of
+-	 * U-Boot that runs. Also we have no way to receive the address of an
+-	 * allocated bloblist from a previous stage, so it must be at a fixed
+-	 * address.
+-	 */
+-	expected = fixed && !u_boot_first_phase();
++	bool expected = fixed;
 +
-+#include <config.h>
+ 	if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+ 		expected = false;
+ 	if (fixed)
+@@ -493,14 +486,17 @@ int bloblist_init(void)
+ 				      CONFIG_BLOBLIST_ADDR);
+ 	size = CONFIG_BLOBLIST_SIZE;
+ 	if (expected) {
+-		ret = bloblist_check(addr, size);
+-		if (ret) {
+-			log_warning("Expected bloblist at %lx not found (err=%d)\n",
++		if (IS_ENABLED(CONFIG_OF_BOARD))
++			/* Get the bloblist from previous loader */
++			ret = board_bloblist_from_boot_arg(addr, size);
++		else
++			ret = bloblist_check(addr, size);
 +
-+.global save_boot_params
-+save_boot_params:
-+#ifdef CONFIG_ARM64
-+	adr x9, qemu_saved_args
-+	stp x0, x1, [x9]
-+	/* Increment the address by 16 bytes for the next pair of values */
-+	stp x2, x3, [x9, #16]
-+#else
-+	ldr r12, =qemu_saved_args
-+	stm r12, {r0, r1, r2, r3}
-+#endif
-+	b	save_boot_params_ret
-diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-index 942f1fff57..a3892630d8 100644
---- a/board/emulation/qemu-arm/qemu-arm.c
-+++ b/board/emulation/qemu-arm/qemu-arm.c
-@@ -4,6 +4,9 @@
++		if (ret)
++			log_warning("Bloblist at %lx not found, err=%d\n",
+ 				    addr, ret);
+-		} else {
+-			/* Get the real size, if it is not what we expected */
++		else
+ 			size = gd->bloblist->total_size;
+-		}
+ 	}
+ 	if (ret) {
+ 		if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+@@ -510,7 +506,8 @@ int bloblist_init(void)
+ 				return log_msg_ret("alloc", -ENOMEM);
+ 			addr = map_to_sysmem(ptr);
+ 		} else if (!fixed) {
+-			return log_msg_ret("!fixed", ret);
++			return log_msg_ret("BLOBLIST_FIXED is not enabled",
++					   ret);
+ 		}
+ 		log_debug("Creating new bloblist size %lx at %lx\n", size,
+ 			  addr);
+diff --git a/include/bloblist.h b/include/bloblist.h
+index 0f5afec9f4..e65cd27b90 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -438,6 +438,20 @@ void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
   */
+ int bloblist_init(void);
  
- #include <common.h>
-+#if IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST)
-+#include <bloblist.h>
-+#endif
- #include <cpu_func.h>
- #include <dm.h>
- #include <efi.h>
-@@ -102,6 +105,16 @@ static struct mm_region qemu_arm64_mem_map[] = {
- struct mm_region *mem_map = qemu_arm64_mem_map;
- #endif
- 
-+#if IS_ENABLED(CONFIG_OF_BOARD)
-+/* Boot parameters saved from lowlevel_init.S */
-+struct {
-+	unsigned long arg0;
-+	unsigned long arg1;
-+	unsigned long arg2;
-+	unsigned long arg3;
-+} qemu_saved_args __section(".data");
-+#endif
-+
- int board_init(void)
- {
- 	return 0;
-@@ -144,6 +157,47 @@ void *board_fdt_blob_setup(int *err)
- 	return (void *)CFG_SYS_SDRAM_BASE;
- }
- 
-+int board_bloblist_from_boot_arg(unsigned long __maybe_unused addr,
-+				 unsigned long __maybe_unused size)
++#if CONFIG_IS_ENABLED(ARCH_QEMU)
++int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size);
++#else
++/*
++ * A board need to implement this custom function if it needs to retrieve
++ * bloblist from a previous loader
++ */
++static inline int board_bloblist_from_boot_arg(unsigned long __always_unused addr,
++					       unsigned long __always_unused size)
 +{
-+	int ret = -ENOENT;
-+
-+#if IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST)
-+	unsigned long fdt;
-+
-+	ret = bloblist_check(qemu_saved_args.arg3, 0);
-+	if (ret)
-+		return ret;
-+
-+	bloblist_show_stats();
-+	bloblist_show_list();
-+	if (gd->bloblist->total_size > size) {
-+		gd->bloblist = NULL; /* Reset the gd bloblist pointer */
-+		log_err("Bloblist total size:%d, board reserved size:%ld\n",
-+			gd->bloblist->total_size, size);
-+		return -ENOSPC;
-+	}
-+
-+	/* Check the register conventions */
-+	fdt = (unsigned long)bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-+	if (IS_ENABLED(CONFIG_ARM64)) {
-+		if (fdt != qemu_saved_args.arg0 || qemu_saved_args.arg2 != 0)
-+			ret = -EIO;
-+	} else {
-+		if (fdt != qemu_saved_args.arg2 || qemu_saved_args.arg0 != 0)
-+			ret = -EIO;
-+	}
-+
-+	if (ret)
-+		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
-+	else
-+		memmove((void *)addr,  (void *)qemu_saved_args.arg3,
-+			gd->bloblist->total_size);
++	return -1;
++}
 +#endif
 +
-+	return ret;
-+}
-+
- void enable_caches(void)
- {
- 	 icache_enable();
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 5fdf496a45..60fabb5db7 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -71,3 +71,6 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_SEMIHOSTING=y
- CONFIG_TPM=y
-+CONFIG_BLOBLIST=y
-+CONFIG_BLOBLIST_ADDR=0x40004000
-+CONFIG_BLOBLIST_SIZE=0x4000
-diff --git a/configs/qemu_arm_defconfig b/configs/qemu_arm_defconfig
-index 1347b86f34..d8a94ad038 100644
---- a/configs/qemu_arm_defconfig
-+++ b/configs/qemu_arm_defconfig
-@@ -71,3 +71,6 @@ CONFIG_TPM2_MMIO=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_TPM=y
-+CONFIG_BLOBLIST=y
-+CONFIG_BLOBLIST_ADDR=0x40004000
-+CONFIG_BLOBLIST_SIZE=0x4000
+ #if CONFIG_IS_ENABLED(BLOBLIST)
+ /**
+  * bloblist_maybe_init() - Init the bloblist system if not already done
 -- 
 2.25.1
 
