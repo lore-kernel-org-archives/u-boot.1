@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE54C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 21:21:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7B6C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 22:27:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 347CC87618;
-	Mon, 27 Nov 2023 22:21:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id BB16687126;
+	Mon, 27 Nov 2023 23:27:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="N0nH1gmP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZTF5ZEy7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6D15877C8; Mon, 27 Nov 2023 22:20:59 +0100 (CET)
-Received: from mout.web.de (mout.web.de [212.227.15.3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E65C78749C; Mon, 27 Nov 2023 23:27:44 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB2F8744C
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 22:20:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D406586DB1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 23:27:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1701120055; x=1701724855; i=smoch@web.de;
- bh=7NoZwkE+zv2g/Po+ffAo6vnQafygPHpFrI54vXSQKlI=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=N0nH1gmP/Zla9tgwRz9lkqPd9LWP/wGbKR6WskY4Vn0OA9kp/ZCgpP/3oiqlkxHn
- vAkp/j1t9k9Plk8+w0iEBGIZ3ekkmQHxDRzjz5lsxGzcFH8vIOJ0sa1boibPNBVF7
- 7lfqykaD5KZAV6XX6uO0DLz0kT2yVT7phEF9FpV/esT1wZI2cXWGSeTb3XuWj1LeH
- x7bBDvt0wo3G4rzerW9DRMhP82gmHW0Om5TTU3wvh94jmL8xryKajEqZ7MYukvydE
- ww/xIa0LLWlIF7UzcaTQL6RQbJkajrJN7mcEbqu+WTyD2yVgrFEfFtqCFV1pu6JdA
- 8GYzxH64bw7JYsrDHA==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.1.40] ([78.54.67.122]) by smtp.web.de (mrweb006
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1N2BMA-1rIPij2lY6-013elj; Mon, 27
- Nov 2023 22:20:55 +0100
-Message-ID: <c7022ef3-ad0c-4f89-ad47-a0f7df2a24c6@web.de>
-Date: Mon, 27 Nov 2023 22:20:54 +0100
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5cca00db7f0so47928097b3.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:27:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1701124061; x=1701728861; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6lf4YIPweYFOkkEla44xxvDXoj+U6iWl1aRPEseAS/A=;
+ b=ZTF5ZEy7YfXw88uhb+5uOSX/wT4ikjFuUEVAm6TxdezIK9BEzJz7iWBoVL2DklIx3Y
+ TAReZ2icEeT4eY6mb8krT/gYUnSQRrs5tUPJqyAL7A6AXIaOO4bGAwd0nEgd38nxzijL
+ 7Z6LHlN/CVSVGN88j36rZ4WTVAz8cFQl9X1VU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701124061; x=1701728861;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6lf4YIPweYFOkkEla44xxvDXoj+U6iWl1aRPEseAS/A=;
+ b=wpnZJlbtEUBNlonO3A60U3As5EDUZlYGcz0szyFygm1ZWMNkbWmffR7x2MRqdCjddZ
+ l+WDnDVVb7ZPuvt69UzVpR+mlbB2kLi9oflIJQf9CkaFsX8MdhwSTdJHHZSrYy8HRD1Y
+ F+ozx1R05qP1uMgoX0KeeYkHQ7x+VTIS2YlOA1q1DExnOCTv2bJa3BSzDLyks8LomcX9
+ /97MByu9ofQ2os4ojf+9M1zULOSV5d5Mhf2AE8x51/lLDc2uyMjWRRjwCC/Opbwjw7Lq
+ 3vO/vOpZmOky9SXzqAHnyDy8047F+eDs9i8jffCybU/LCo3Y63y1vCBITipUMHipxJCE
+ D/tA==
+X-Gm-Message-State: AOJu0YwXmvs1Anje6vWjXNRQDNXujzIxW+8GPmFM+9Xihs6T0GQaWJSt
+ Xhq7zL+OCG5vVEd0LOukOzhB0qj2aEkxuvMCMbZ77Q==
+X-Google-Smtp-Source: AGHT+IHmxSdX71s9lwu9k0UOLB1X8+l1XMli0ERt7Dj4xxJPnHo2mVIyST2SDrn6oPYWxRif5bBVQA==
+X-Received: by 2002:a81:9195:0:b0:5ca:275:a94d with SMTP id
+ i143-20020a819195000000b005ca0275a94dmr8242713ywg.12.1701124061566; 
+ Mon, 27 Nov 2023 14:27:41 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-6400-4f9d-49d7-ae37-6b11.res6.spectrum.com.
+ [2603:6081:7b00:6400:4f9d:49d7:ae37:6b11])
+ by smtp.gmail.com with ESMTPSA id
+ v129-20020a818587000000b005777a2c356asm3516245ywf.65.2023.11.27.14.27.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Nov 2023 14:27:40 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Bin Meng <bmeng@tinylab.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+In-Reply-To: <20231011131552.14665-1-bmeng@tinylab.org>
+References: <20231011131552.14665-1-bmeng@tinylab.org>
+Subject: Re: [PATCH v2 0/9] ufs: Add a PCI UFS controller support
+Message-Id: <170112406049.91617.8958765702666807923.b4-ty@konsulko.com>
+Date: Mon, 27 Nov 2023 17:27:40 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATHv11 26/43] configs/tbs2910_defconfig inc limit
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- goldsimon@gmx.de
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-27-maxim.uvarov@linaro.org>
- <20231127131129.GD2513409@bill-the-cat>
-From: Soeren Moch <smoch@web.de>
-In-Reply-To: <20231127131129.GD2513409@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Q4EBIuYwI+RLhftc3u3OfrrSDbJw8S3hv7bPYj+tMjli5IqA8we
- z27l85LmxC/Jy0A38yFIkqVYiQag80WJRT9P0buE/7NKgPUcSvFDPOs3gPI0z+Y5xgDvqR6
- prfTJLe0GIdAQbSUpTmmz3x+BCu42EZR+xBRbn50ObAjkc1Q4T4gXGH8t7qRXI2+/1fS6k3
- d9wIoGX0IHTqDTgJzRSBg==
-UI-OutboundReport: notjunk:1;M01:P0:z8mZIxwo0II=;B5LGLeFc+cTAyJF4yL/ppmLFUaQ
- csW0EB2ZEji0k20g6YiREnRK8lVF0MZIGd5c/JNIvfGzgT2B0YI2eiMTvUdrD65Y6ZQExSD0o
- 49SGsQ/jgBP6hlyr/OOH2zOPeHk8Lcg0qG5n4i73tqs4YXypKysMd5ilc4+MGoUJYq1f2Qrw1
- vQQkO+ETN0RJ22uCiOj/is8UKRbsXs3mfcPx25bcnNytvLeHSyttxEkpOi1EyoSLSrbE5wJUU
- dZOZ+ZdfJNSQAA4a3HL8fkSvTsIwNPk+t21VjHFrCXGWzr5/13Gx7tPNNgvBhGOT6vdTVMRod
- 89/aa5NLqPhiC4nVUCUJu/PBCnQ9inEBQKRzXjdE+Z5kuyN74A1PqswjRKOuxVoXNMRsgB7KY
- veGkKYqT5s9DwH9gXRn12Irk3M6aQQa5C5gYg7fEd7PrE0NY3linWxmZlKN3Pem7gLNKi5L38
- 3b+y1doT/u1f/YEyuPTda8nYj7SzzrfIcNXNaBGnLBVjOs48FRPxQWwiX0VZPIg8L1WA3A6wX
- N2FyAymPkXJLSwUxxBpfDMFkys9lP2b3uYQdgbWtReBxc1glgoAzDMlUdYEv3Swm5KFyFLMyU
- CAU0R5qqMAqm3Iv9xEvVl8rRRxMzFwkhSsHjCdafjHhn3E2/xb40JBuC5h2aZuznddGaHAaNo
- koc59bXhdLw785d0UXJMP9AoXKQy+aOKmGpMA3UnG0feTzkzomK6hGPzntXQPkqgO0A2Vdxp+
- p0zW+IeHbUXQQdvfJkrKkZIf5KGG6815OPlm2mzJ8T7nY6lwvBg4FDfDMjsdjZhgPQ1PKY1/L
- oy/ffVGJc1tCsTFBe5KzVX4YsmNKtXfUu3b53F6f2DXhdrHgXvAMpAA7+dOHoBEv4iZ5zPCfR
- SmGrRgf3Fcxq7NnKh1h03dW+NN/ERjZ00I/iNmLmJ3nL1F68bp6hcnz4x+yU6Tm6aAu47X16z
- Zygh3w==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,66 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.11.23 14:11, Tom Rini wrote:
-> On Mon, Nov 27, 2023 at 06:57:09PM +0600, Maxim Uvarov wrote:
->
->> Increase allowed binary size to fit lwip code.
->>
->> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
->> ---
->>   configs/tbs2910_defconfig | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
->> index 8fbe84f1d2..ce40efa9ab 100644
->> --- a/configs/tbs2910_defconfig
->> +++ b/configs/tbs2910_defconfig
->> @@ -17,7 +17,7 @@ CONFIG_SYS_MEMTEST_START=3D0x10000000
->>   CONFIG_SYS_MEMTEST_END=3D0x2f400000
->>   CONFIG_LTO=3Dy
->>   CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
->> -CONFIG_BOARD_SIZE_LIMIT=3D392192
->> +CONFIG_BOARD_SIZE_LIMIT=3D417792
->>   # CONFIG_BOOTSTD is not set
->>   CONFIG_SUPPORT_RAW_INITRD=3Dy
->>   CONFIG_BOOTDELAY=3D3
-> This is another case where the binary size is a fairly hard limit. You
-> forgot to cc the board maintainer here (and I assume the rest of the
-> series too) for these config changes.
-ThanksTom for sending a notification to me.
+On Wed, 11 Oct 2023 21:15:43 +0800, Bin Meng wrote:
 
-Yes, the CONFIG_BOARD_SIZE_LIMIT is a hard limit and this patch in its
-current form will break tbs2910 support and even brick the board for
-some configurations. So NAK for this patch.
-> I think on this platform it's not
-> impossible (like it is on am335x where I just replied) but really
-> difficult. I'll let Soeren comment on if switching the network stack to
-> lwip is the kind of feature enhancement that warrants the pain of
-> dealing with the size change here or not.
-Network boot is no important feature for this board and not used in
-the default boot configuration. But network support always was part
-of the config, may be used by some users, and is at least required
-to communicate the ethernet address to linux.
+> This adds a PCI UFS controller support and enables the support on
+> QEMU RISC-V for testing.
+> 
+> Requiring QEMU v8.2+.
+> 
+> This series is avaiable at u-boot-x86/ufs for testing.
+> 
+> [...]
 
-So I'm not interested in a new network stack for this board, but
-also cannot disable network support completely. This seems to be a
-problem for this patch series, since networking support implies LWIP
-now.
+Applied to u-boot/next, thanks!
 
-The question for me is, why is the new network stack consuming so
-much space, with only a few enabled commands? Is the whole library
-linked in with some unused features (the cover letter mentions much
-more than what seems to be used in the converted commands). Or is
-the old network stack linked in in parallel to the new one? Can
-we save space here?
+-- 
+Tom
 
-NFS support in the old networking code is quite big, enabled by default,
-and probably still there in parallel to this new lwip library. If there
-is really no other option to save space, and lwip in general is agreed
-to be the way forward for U-Boot, and only tbs2910 is blocking that,
-then from my point of view disabling NFS for tbs2910 could be a way
-to stay within the size limit.
-
-Regards,
-Soeren
 
