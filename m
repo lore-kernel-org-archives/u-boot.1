@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F24C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:09:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC69CC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48AC18779C;
-	Mon, 27 Nov 2023 14:01:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CFA7187792;
+	Mon, 27 Nov 2023 14:01:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TV9HQbvw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NZD0IGFq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D81298779A; Mon, 27 Nov 2023 14:01:41 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 443D087797; Mon, 27 Nov 2023 14:01:46 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEC3A87788
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB5087792
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50baa3e5c00so2491190e87.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:39 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-507a29c7eefso5449313e87.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090099; x=1701694899; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090103; x=1701694903; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uVrJEggGQiWyhUZmh9VQRgAWKIQ1N3fTnwGAXaYlDHE=;
- b=TV9HQbvwE7lP1zBgPO+fprA7TU1dRijv39erkrk1fMQeuSxRda3C5X6coWgnK3lSlI
- 2+SboOvte4ZWiFOqxvxx/aLuodggcyR/nAbJYk0/TP/UymxkGYrE9AD2gzZUVGhJ5Raa
- HyY7xEPK1lmM5uIgS6jxRTET+/gX/KwNUJcQpnWZkH4M3uPBDEDyGakyaBW0xznX8eTh
- fUMyNn33XShjLNhxRL6zCaseTa/1bals1AsgiuYLlN6OVO6xweDUqV3z821uCuxv7zs0
- g5cTZQz2MMzX/HLqDYBtGg4tY5jVcfyoJ/vr5+h+6NvyWXc9yoPQYTGuviMOkIRkJavF
- qCzg==
+ bh=wyiR2jVJ4p1meeNGxOfrkmg2SjWDWAw0ref9nazVreE=;
+ b=NZD0IGFq0yxm3zK5/fRktzA/YTpGGbPUS/uJSoLV1k+tTvCGi9/7bh9HGgL8XOt3Qn
+ V0HHqPs3dQdxneiRKBAJBR3Icbp9V5Jc7wEi/dcGJPS2hM8Aho2mfUu1kB95XXYVJApI
+ C/ZVD2T9OzsII/aqFgXwyUbGyHcGg9aoepkMNkYBPzQ2CYZPwql7/SjOlLfxmn6/qX/Z
+ Zl9or0G+bS4iAqtALZXOqzSEsMCOqEdap4uS6DKKC6UFv+8qkWNq1B0Zq6rHTSv6b1UZ
+ ISdqpVkFAKqH8KxeRB8F6P6ItyHkB4Momn0QjmQeuhXA/EiuQol6xyIlPZHc/Cb8syXa
+ MiHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090099; x=1701694899;
+ d=1e100.net; s=20230601; t=1701090103; x=1701694903;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uVrJEggGQiWyhUZmh9VQRgAWKIQ1N3fTnwGAXaYlDHE=;
- b=gdktEyCdVIzXdqP1h6/g5sqAWe1JcAZEbaGOD7ck93LXgGKWvHrlZu4Uqiw7f/zsAq
- r7ecv54Rf+ew7b4JLWCdCmGNRPJZrYLc/nfXXS57EZSAwya8rMMU5IRJw03rqdebv+Zk
- Z+8MulcQPJs//SB6BAjspwt6hw2MqCdK7Uj/6XCNUqdhPz/PEH6V5MWcdM+wr09AIFBG
- 5YxHiY5USQJ+NrhuNspnEVAocd6XT/RSekq3sFIIqV+B7LvYJc7wB0Dux2ClWLRRe/tq
- fY3XBNPtZbWWV3eJPTxiye1HjzMMqzRpjfxO/wJI/ASkEtAoF+NPgrCogpvXmvQf3t71
- T9nQ==
-X-Gm-Message-State: AOJu0YxxFYlVi9Lyvwz5zlUwK07vFxDljtJGX7zdV0q/JcxG0doXbTEP
- ebIggoz6m8nvKWfBzh+4e688NNSph1gHjl50WCyU6A==
-X-Google-Smtp-Source: AGHT+IHVnM6molkynpWKh1sKPdlYFQcW7gvHq1/+Tc3zN/VA5RH6bLnFAESG7iIUM3rSQdx7dICP3g==
-X-Received: by 2002:a05:6512:1105:b0:50b:a69d:b8bb with SMTP id
- l5-20020a056512110500b0050ba69db8bbmr5512988lfg.49.1701090099048; 
- Mon, 27 Nov 2023 05:01:39 -0800 (PST)
+ bh=wyiR2jVJ4p1meeNGxOfrkmg2SjWDWAw0ref9nazVreE=;
+ b=uWph0J0Iks+9nBIS0fCjgR1lzMn98frnYFnHB5HHKiDdxBPH0S3WM2W4cqu7GCddYQ
+ FRT4hCFZ9LuRozbkqjuaEnLJCw49EIg63YjdbtmudvrC+xKlwb/Cu94fJOHZlPVdeX6E
+ py/PppBDjaL4W/2l1VDMSrpLohuLoaBduQFHn++t90UIwyPVpFYBv7vNzjQHMy9GIcy1
+ y4TmmjYG0rfk3gZ7nWOuCtREo8rlek+tWdFOquS0VqLFD9fOxa43PYom8RfvuyXb9/42
+ 9ni9ZOmtFCsdxPDkOB6UuqmYRBUFslNlLVjT1VHZ9Ex+jPijT2zHeTuA5hyw3dYqZEuz
+ Ac4g==
+X-Gm-Message-State: AOJu0YwVxHw4JO3WN1FzWtxhdj1HbYn8AcAIuM5GTclJrf8FFFYKzCfN
+ Pn3rsSgIDoxdo+aVF1z/5UyT28yX3HSY3lC8iK1Sgw==
+X-Google-Smtp-Source: AGHT+IF8rbUhHfYb2J7WYcwNxwDMrhjv9/LOk1/smXNYZLvhTQbkRoNMtT6E0acoJ7nwWSostzzV9g==
+X-Received: by 2002:ac2:5230:0:b0:4f9:5426:6622 with SMTP id
+ i16-20020ac25230000000b004f954266622mr7250299lfl.69.1701090101522; 
+ Mon, 27 Nov 2023 05:01:41 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.37
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:01:38 -0800 (PST)
+ Mon, 27 Nov 2023 05:01:41 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 39/43] Makefile: add dtbs to clean
-Date: Mon, 27 Nov 2023 18:57:22 +0600
-Message-Id: <20231127125726.3735-40-maxim.uvarov@linaro.org>
+Subject: [PATHv11 40/43] .azure-pipelines: init submodules
+Date: Mon, 27 Nov 2023 18:57:23 +0600
+Message-Id: <20231127125726.3735-41-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -92,27 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CI test checks that generated dtb has to be cleaned up.
+Azure CI does make testconfig then passes U-Boot sources
+to docker image. Inside docker image owner of U-Boot files
+is different, so user doesn't have permissions to update
+submodules. In this case we can do init before we run
+test docker image.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .azure-pipelines.yml | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 769111bf09..2fc04450c6 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2172,7 +2172,8 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
- 	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
- 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
--	       net/lwip/apps/ping/ping.c
-+	       net/lwip/apps/ping/ping.c \
-+	       ./*/*.dtb *.dtb
- 
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index d6f3fa423c..b6fa843e8c 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -113,6 +113,7 @@ stages:
+     steps:
+       - script: |
+           cat << "EOF" > build.sh
++          set -x
+           cd $(work_dir)
+           git config --global user.name "Azure Pipelines"
+           git config --global user.email bmeng.cn@gmail.com
+@@ -134,6 +135,7 @@ stages:
+           make O=${UBOOT_TRAVIS_BUILD_DIR} testconfig
+           EOF
+           cat build.sh
++          make initsubmodules
+           # We cannot use "container" like other jobs above, as buildman
+           # seems to hang forever with pre-configured "container" environment
+           docker run -v $PWD:$(work_dir) $(ci_runner_image) /bin/bash $(work_dir)/build.sh
+@@ -196,7 +198,9 @@ stages:
+           set -ex
+           # the below corresponds to .gitlab-ci.yml "before_script"
+           cd \${WORK_DIR}
+-          git config --global --add safe.directory \${WORK_DIR}
++          git clone \${WORK_DIR} /tmp/u-boot.git
++          WORK_DIR="/tmp/u-boot.git"
++          cd \${WORK_DIR}
+           git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
+           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+@@ -506,7 +510,9 @@ stages:
+           cd ${WORK_DIR}
+           # make environment variables available as tests are running inside a container
+           export BUILDMAN="${BUILDMAN}"
+-          git config --global --add safe.directory ${WORK_DIR}
++          git clone ${WORK_DIR} /tmp/u-boot.git
++          WORK_DIR="/tmp/u-boot.git"
++          cd \${WORK_DIR}
+           pip install -r tools/buildman/requirements.txt
+           EOF
+           cat << "EOF" >> build.sh
 -- 
 2.30.2
 
