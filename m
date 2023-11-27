@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18248C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 14:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C05C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 14:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531C68753F;
-	Mon, 27 Nov 2023 15:05:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 22AF587595;
+	Mon, 27 Nov 2023 15:06:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lznSdKGm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tncmK6bq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B426F87530; Mon, 27 Nov 2023 15:05:51 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 2B10E875DF; Mon, 27 Nov 2023 15:06:41 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAA27875A1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 15:05:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E249887530
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 15:06:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-54a945861c6so5935439a12.3
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 06:05:49 -0800 (PST)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a02d12a2444so622348366b.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 06:06:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701093949; x=1701698749; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JdSh9Wye6IQdDu6lmxyJbrkMd16UXAqXNuVuhSgLM3I=;
- b=lznSdKGmQLrStx7COFXs0lwcgXZeIv7MITYtm7ed+rjyP8MJvXjGEAt1OhpSOJN/ab
- RcrvdnSoGw1lR9KsbyBYGZZr01kOE9NT7+jI7iAuaqc14dcI0rMk0xlddLvFQaBysIs1
- F3RfSYnQtCemL12T/QxA1OvoIqKSiCOK8P9xAWMRoyr8lsZilOs31VNl4GZTdsEfUS0g
- oBJch2epxePT7KSSSzhMC9WFKbYL0DaNem/ivfx5WCfRpUuXB5b/PGwZhc/xtUBm9nus
- 01qMzio3sH4pfvFNW0b7RwF/sdeEQd78wve75JtaWCNZoby5ga3rohasE+GfIA7D+AaY
- 2P8Q==
+ d=linaro.org; s=google; t=1701093995; x=1701698795; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9cVpgXV03qn3ZbRKyd7TAFwHL4wDQt11B3zewIvxYZ0=;
+ b=tncmK6bqfyOx75yYB2su5FCsnKbV29R4VSLsImsMjJhIgwLV3HSBgCd093T121r0fz
+ xD0on4e6LrAFg3jSTTCHG0VP2Xhh7K39HFXUIWL9FdRgGtsDLFqZcKvtWCRGEYyqBgtI
+ xEJDpFqECIGrlIRRQEfDTV6hrNxSBjqtCPMRLYLLtrDn9/LKz+xkztMC0npI+yPzSSRJ
+ v93P25zP0tUkaehphyKF8WK2rzMAO/+jD42zwWGLl3ZQfq7Ip18ypmTOOkR5GBer8ZvN
+ z41o0cNPmv/koMCsqQ41AY13O7l/cPl0I2FYgim3CUiwnhJidXDQAqwZDiJfWAjk8G7q
+ CsMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701093949; x=1701698749;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JdSh9Wye6IQdDu6lmxyJbrkMd16UXAqXNuVuhSgLM3I=;
- b=mcxB3V6kMxNVBHwIiALGUAGcg0YdsX5dPOKMhhLHVh3Yvi1ROw4JQ3w9WrrlVvdf/M
- XTjJCmZ1/TiDHe6eDXBcZzJdegIdfiPRzh5O/jB7OqZ+fjQAmD+DEXy3Q65x6zE/9t5o
- meVN2+kEXV2g8QcPmLwkomBl75KdSoS21+wZ//unMcTy5Ix7jTvg2diOBpvPN4dN02yn
- g1rTLcj8kZVxzeeo9H7Rz9oYC0Em4WuvpUp6VoVbJCByQot32vIUonkkQ6LUkLoehrJT
- yAoHMsCAn+2SMU7/pB/caaxLs3+712swV1Aeq3ESMBd7huivV0UQxsj0bw+hpe16nhsD
- s3mA==
-X-Gm-Message-State: AOJu0Yxc6uX/Nuvc4BAMtYjN8Vi6bIJLW2b1SOfIbji/XqANnFDgPETs
- m5wtjIRmmD6MoARx4HXLUlnqsUPWfgNvxtdWJjU=
-X-Google-Smtp-Source: AGHT+IGmu8/kG6Vv+2vuTvgGKvYmKkJrcqvjE23ZUygTmisqdW8HGOs3QSV5Ok8Y7tCV9h38xM2s7dAnQ4WEphuR3ZY=
-X-Received: by 2002:a05:6402:b91:b0:54a:ff96:2cba with SMTP id
- cf17-20020a0564020b9100b0054aff962cbamr7295254edb.33.1701093948829; Mon, 27
- Nov 2023 06:05:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701093995; x=1701698795;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9cVpgXV03qn3ZbRKyd7TAFwHL4wDQt11B3zewIvxYZ0=;
+ b=Wbq27V4QruuyFUcTJ6cmVrufhZLDehYQSnPMUGZOfsR7pKL1GzHJVN2cO5QmFau8aG
+ lyLCtzmLKOoxzSvcK8CevvXRuJ5mMSfFQ/NwIlrQ6SUsekbIl66VYjoShfJz4V80/V1g
+ AKm2bynSIQFxIYfNHwBv0ohynaJQ2cA9/OBodnZY8NusMO02juPC2zI7XiZSZ+rsAvHT
+ s/9dvKOClkf1ujh0loRvcvpDsZLeboS7f5VKjOuUXyKvFXW9szk0Zqzh0Wx25pBRlqaj
+ JJt2Ja7lcqVxcilOoRhINZOdBSGNGVsj9loptmtgLAG32Jh6DzVB6oWn0pjHMcy7ZZxj
+ 7AHA==
+X-Gm-Message-State: AOJu0Yz06JiVB8/YscD/qV/Jh9XAWO/iT57ipmkHuKazV/p5qVNO7C/+
+ cMidsxcYucl+GKCIRGBfi/s+7sSfrCu1QvdGt6L+hg==
+X-Google-Smtp-Source: AGHT+IFU0CpOjryj0scl1iszAECYeWorQSMegequln/iOQDYa2Ux1K9i10wDR9FfxQIZOFcIs6zkJBgkj6I7w0REaYg=
+X-Received: by 2002:a17:906:756:b0:a01:f628:a07d with SMTP id
+ z22-20020a170906075600b00a01f628a07dmr9110630ejb.65.1701093995188; Mon, 27
+ Nov 2023 06:06:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117154757.777827-1-trini@konsulko.com>
- <20231125223809.GW2513409@bill-the-cat>
- <PAXPR10MB50858692C89D451A7A18F7E4D2BDA@PAXPR10MB5085.EURPRD10.PROD.OUTLOOK.COM>
- <CAEGM6axzOkySNu7uSmsWthiTQhTb_vMOY_Mjj_iFKKgg_Y=Vqg@mail.gmail.com>
-In-Reply-To: <CAEGM6axzOkySNu7uSmsWthiTQhTb_vMOY_Mjj_iFKKgg_Y=Vqg@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 27 Nov 2023 14:05:35 +0000
-Message-ID: <CALeDE9NO4UB2fBwAK+dD2J3_nN=+rSeKuitD7dMOcrt3J1U+cA@mail.gmail.com>
-Subject: Re: [PATCH] boards: Disable NET on platforms without NETDEVICES
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-34-maxim.uvarov@linaro.org>
+ <20231127130828.GC2513409@bill-the-cat>
+In-Reply-To: <20231127130828.GC2513409@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Mon, 27 Nov 2023 20:06:23 +0600
+Message-ID: <CAD8XO3buruEtFvVv32J-LW+Jj=+vFJk2Q+TgBKL130sL2qY0DQ@mail.gmail.com>
+Subject: Re: [PATHv11 33/43] configs/am335x_evm_defconfig: inc SPL size
 To: Tom Rini <trini@konsulko.com>
-Cc: "Winker Matthias (HC-CW/ENG-PJM)" <Matthias.Winker@de.bosch.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Philip Oberfichtner <pro@denx.de>,
- Minkyu Kang <mk7.kang@samsung.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sergey Temerkhanov <s.temerkhanov@gmail.com>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ goldsimon@gmx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +88,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 27, 2023 at 1:06=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Mon, Nov 27, 2023 at 5:45=E2=80=AFAM Winker Matthias (HC-CW/ENG-PJM)
-> <Matthias.Winker@de.bosch.com> wrote:
-> >
-> > Hello Tom,
-> >
-> > Just to be sure. In the past we had NET enabled such that the fused MAC=
- is taken over, although we don=E2=80=99t use NET CMD.
-> > With your changes, does I.mx6 evaluate the MAC fuses and forward it to =
-Linux?
-> >
-> > Our board: Bosch ACC.
->
-> I honestly don't know as I don't see how it's doing that today in
-> current master (which does not have this change) so you might
-> need to start by confirming behavior in the current tree and working
-> from there, thanks.
+On Mon, 27 Nov 2023 at 19:08, Tom Rini <trini@konsulko.com> wrote:
 
-It's usually reading from eFUSES and populates details via DT using
-alias bits, whether or not that uses/depends on code in net I'm not
-sure.
+> On Mon, Nov 27, 2023 at 06:57:16PM +0600, Maxim Uvarov wrote:
+>
+> > Increase allowed binary size to fit lwip code.
+> >
+> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > ---
+> >  configs/am335x_evm_defconfig | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
+> > index f048e60f7f..9fd608bd76 100644
+> > --- a/configs/am335x_evm_defconfig
+> > +++ b/configs/am335x_evm_defconfig
+> > @@ -124,3 +124,4 @@ CONFIG_WDT=y
+> >  CONFIG_DYNAMIC_CRC_TABLE=y
+> >  CONFIG_RSA=y
+> >  CONFIG_LZO=y
+> > +CONFIG_SPL_MAX_SIZE=0x29000
+>
+> As probably a problem for other platforms you made this change on too,
+> you can't do this. The link limit is here because that's the limit the
+> hardware (and ROM) imposes.
+>
+> You might need to either:
+> - Figure out how to make lwip even tinier for the SPL case
+> - Limit the old network stack to just for SPL, and a later task is to
+>   reduce what's in the old stack to just what's also needed within SPL.
+>
+>
+Thanks Tom. All these size changes need to be reviewed.  Some of them are
+ok, I think like for x86 or qemu virt, but some of them might not work.
+
+Question - Do we need networking inside SPL rather than in the main binary?
+Is it a real use case?
+
+BR,
+Maxim.
+
+
+> --
+> Tom
+>
