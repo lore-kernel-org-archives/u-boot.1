@@ -4,92 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12631C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 10:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96CD5C0755A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 10:29:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CEC7870AC;
-	Mon, 27 Nov 2023 11:12:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id DD35D8752F;
+	Mon, 27 Nov 2023 11:29:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="iL6J6Fa+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="n4m7Am17";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13BEA86F6D; Mon, 27 Nov 2023 11:12:54 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5D1E87539; Mon, 27 Nov 2023 11:29:23 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F5F87214
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:12:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8259F8752C
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:29:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a00ac0101d9so536846166b.0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 02:12:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701079970; x=1701684770;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UBd0ZxZ5rbOjzMXqcncgJBxr2q4O4/ReHJFF4WBCTjA=;
- b=iL6J6Fa+nr3TeB2OrGY9MsO9I/USUzMK1T5pd+fvEv2rVtkyqVgcxkjd2tg9BndGi7
- r3D7MVBMN7gPYRQ5Lqqx33RNeYHeFsWqCSgtC8l0gLC3OcOy55NMNDdiSteQcaZ6P5IF
- RhQ53m2jbRVkoMTPTqYcmWlaZPSGEez5hfhxaCwB4XJC3psdi/dHcHveUDUzUab+qlfr
- cJq57NboBQKJNu58g/05BEL/vZiYrnplMJoUIIPr1MhV+/EDZp5M4/kWpsvJrOAcz9sT
- GCP2Vh/GFQn6s2WMbPpgHGnhRZKJZNX1WVols4c+PAakY7YhvCz1sV4tUpJj25ib0fkM
- ZggQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701079970; x=1701684770;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UBd0ZxZ5rbOjzMXqcncgJBxr2q4O4/ReHJFF4WBCTjA=;
- b=l7xS+JAUbCgEdpVGMmm3So6CyMbB2EUmdhyKr9XUcjPT2pkZCHfGeyXysC6NN3aqxF
- wQ7iH1ROBkAhHYsjQb9z/3D3PfxZs7jIK3tnAApOMNVexp5l5ovjqWxo07BdaTdCqVrX
- /S0zIefyVhwYC/6wyGVx54pZ0HGjcUPi2YXIig7QBgWTXHrqO/SJueGoMzRtTRVu04ZW
- vyO/SDX00VnfCwWB1lof30a6IVbAixErICvXsNftJIpP/Gt9kQKrjQBX7v2oQogq0ZIF
- fQOIdUgOunQpuEIMVMoB1PnoXlRwYmusNDhkmEnnp5V9vCz0CDOUIdf6ur6gAUCm7g+W
- JxpQ==
-X-Gm-Message-State: AOJu0Yx7ze6qyM73EDtW/rKWJH4nliRW5koxXF/9i/sw9U8p+R/765qV
- jIHR68fGSNEJCcV5D8FAzptQiWfyun0HoaBzSrpjtA==
-X-Google-Smtp-Source: AGHT+IHda15IIGI1zVpne6umdr4wPt7VdKz3IUXpNA3DBMhZgbfDwR2LSFbRaMw7xfmbymzqt66QIw==
-X-Received: by 2002:a17:907:29c8:b0:a03:d3ff:1e14 with SMTP id
- ev8-20020a17090729c800b00a03d3ff1e14mr6897034ejc.28.1701079970344; 
- Mon, 27 Nov 2023 02:12:50 -0800 (PST)
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com.
- [209.85.208.42]) by smtp.gmail.com with ESMTPSA id
- bj25-20020a170906b05900b009fea232316bsm5515620ejb.193.2023.11.27.02.12.49
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Nov 2023 02:12:49 -0800 (PST)
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-54b0073d50fso3470142a12.2
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 02:12:49 -0800 (PST)
-X-Received: by 2002:a50:ccc9:0:b0:53f:9ced:e5b4 with SMTP id
- b9-20020a50ccc9000000b0053f9cede5b4mr8653606edj.13.1701079969533; Mon, 27 Nov
- 2023 02:12:49 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATGc2002143;
+ Mon, 27 Nov 2023 04:29:16 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701080956;
+ bh=igcA4e2IBd1QjMnEMyWYK3ZrMhkTGl/Q/ugoaFu2d20=;
+ h=From:Subject:Date:To:CC;
+ b=n4m7Am177RCChIjTivAvuOpNjse+epKuB7VJilBEXM1AcEqLcMsrPLPAt7HSRCg6E
+ DKOFNAqZwH0GB4X6HVIhlRCKEDDTnkaMuJe21NKwRQO0UcYdYN40HqeOE+UBdEdTG5
+ OXb/vAOr5Dia1NG4eZH+33vbAN7sM0UdXtIQfj7w=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ARATGEm095342
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 27 Nov 2023 04:29:16 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
+ Nov 2023 04:29:16 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 27 Nov 2023 04:29:16 -0600
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATDla089434;
+ Mon, 27 Nov 2023 04:29:14 -0600
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH v2 0/3] J721S2 Add remoteproc early boot support
+Date: Mon, 27 Nov 2023 15:59:11 +0530
+Message-ID: <20231127-b4-upstream-j721e-rproc-support-v2-0-22ee7c8ef53c@ti.com>
 MIME-Version: 1.0
-References: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
- <CAC_iWjKNf6RxPoKzPjJiLV+UnQES344wb=sqS1wCnQzC+J-Hkw@mail.gmail.com>
- <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
- <CALeDE9ONK7CMP6DXKRrjzqxm1r-afB7bgKSDhekrhOMUnhhktQ@mail.gmail.com>
- <CAHc5_t3QQUT=aid9NYRysPvtVG31Ohtvo=RxZkDPo9W9saQUdA@mail.gmail.com>
- <CAC_iWj+HV4dBqa4iG4NfJ9T=jwdqxLMi5Lunis7ZFezQ23VPag@mail.gmail.com>
-In-Reply-To: <CAC_iWj+HV4dBqa4iG4NfJ9T=jwdqxLMi5Lunis7ZFezQ23VPag@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Mon, 27 Nov 2023 10:12:38 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t3oa=Hho+WRSWN4UoE5zSLV-G_Pn6fbZKqzT0eP3ZAZcg@mail.gmail.com>
-Message-ID: <CAHc5_t3oa=Hho+WRSWN4UoE5zSLV-G_Pn6fbZKqzT0eP3ZAZcg@mail.gmail.com>
-Subject: Re: efi: Set Variable Runtime implementation
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, takahiro.akashi@linaro.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHdvZGUC/42NQQ6CMBAAv0J6dk23oE08+Q/DoZRF1gTabAvRE
+ P5u5QUeZw4zm0okTEndqk0JrZw4zAXMqVJ+dPOTgPvCymhTIxoLXQNLTFnITfCyBgkkSvCQlhi
+ DZMCLto3Fq2s0qlKJQgO/j8OjLTxyykE+x3DFn/2/vSJo0L0n3Tk9dKa+Zz77MKl23/cvz+b1C
+ csAAAA=
+To: Tom Rini <trini@konsulko.com>
+CC: Apurva Nandan <a-nandan@ti.com>, Udit Kumar <u-kumar1@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
+ Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Hari Nagalla <hnagalla@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1701080953; l=1248;
+ i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
+ bh=AYc2GuXOer3bQ8IE9EAy3bSRMIOnTcWDmKpgjNLVZ54=;
+ b=9sQZGH/a0VyieBR6Ovmj+02l1QVG5mbXkwOzGrNElCpfg9N0oitvp6DVHPk5idAOk2uihaj63
+ 3XbYdUEOE8cAT5VemK7oSTTottCVNw5cxiyjjMMEwHyp28RWBmHFnQm
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,134 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+The series adds the support to boot early remote cores from u-boot and
+changes the rproc_fw_binaries to be compatible with Linux DT Syncs.
 
-On Mon, Nov 27, 2023 at 7:16=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Shantur
->
-> On Sun, 26 Nov 2023 at 12:33, Shantur Rathore <i@shantur.com> wrote:
-> >
-> > Hi Peter,
-> >
-> > On Sat, Nov 25, 2023 at 6:19=E2=80=AFAM Peter Robinson <pbrobinson@gmai=
-l.com> wrote:
-> > >
-> > > Hi Shantur,
-> > >
-> > > On Fri, Nov 24, 2023 at 11:55=E2=80=AFPM Shantur Rathore <i@shantur.c=
-om> wrote:
-> > > >
-> > > > Hi Ilias,
-> > > >
-> > > > On Fri, Nov 24, 2023 at 10:50=E2=80=AFPM Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi Shantur
-> > > > >
-> > > > > On Fri, 24 Nov 2023 at 18:51, Shantur Rathore <i@shantur.com> wro=
-te:
-> > > > > >
-> > > > > > Hi Heinrich,
-> > > > > >
-> > > > > > I am trying to work out how to enable the SetVariableRT service=
- in
-> > > > > > U-Boot and came across your patch [1] which initially had the
-> > > > > > SetVariable RT service enabled in EFI but in the final patch th=
-is was
-> > > > > > removed.
-> > > > > > I am hoping to implement it on top of the SPI Flash EFI store [=
-2] to
-> > > > > > be able to set Boot order and boot items from Linux the UEFI wa=
-y.
-> > > > > >
-> > > > > > Can I pick your brain on why it was dropped in the patch?
-> > > > > > Is there any limitation in SetVariableRT service ?
-> > > > >
-> > > > > I recently had a talk about it in Plumbers [0]. Generally speakin=
-g, RT
-> > > > > + hardware owned by the kernel is a very weird combination since =
-you
-> > > > > can't guarantee exclusive access to the flash or the bus and you =
-have
-> > > > > to preserve a *lot* of code alive in u-boot.
-> > > > >
-> > > > > I'll respond to your v1 patchset and we can discuss details there=
- as well.
-> > > > >
-> > > > > [0] https://lpc.events/event/17/contributions/1653/
-> > > >
-> > > > Thanks for the background and helping me understand the problem.
-> > > > Makes me wonder how things work in the PC world.
-> > > > U-boot being only ~1MB, can we not leave it all in memory and maybe
-> > > > just disable SPI access to Linux.
->
-> That would work, but you cant guarantee Linux wont enable the SPI flash.
->
-> > >
-> > > That's basically it, on x86 there's specific HW that's owned by
-> > > firmware, I don't know the exact low level details of how that works.
-> > >
-> > > I think x86 devices generally use eSPI for this HW [1] but I don't
-> > > know the low level details. The Arm SBSA (Server HW spec) and SBBR
-> > > (Server Base Boot Requirements) specs that are key to ServerReady may
-> > > go into some details too if you're curious.
->
-> On X86 the SPI flash is handled entirely by the firmware and SMM. You
-> can find more details here [0]
+Logs: https://gist.github.com/manorit2001/2f2ef0699619e0b496367b400ff02d3c
 
-Thanks for more info.
+Cc: Apurva Nandan <a-nandan@ti.com>
+Cc: Udit Kumar <u-kumar1@ti.com>
+Cc: Vignesh Raghavendra <vigneshr@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>
+Cc: Nishanth Menon <nm@ti.com>
+Cc: Andrew Davis <afd@ti.com>
+Cc:  <u-boot@lists.denx.de>
+To: Tom Rini <trini@konsulko.com>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
->
-> >
-> > Thanks,
-> > I think the firmware is still accessible to PCs as one could update the=
- firmware
-> > in Windows so Windows has access to that device.
-> >
-> > I had some try myself and found that setting a variable to memory backe=
-d storage
-> > is doable with SetVariable call but we want to store it in any
-> > non-volatile storage
-> > things really don't look good.
-> >
-> > To be able to write SetVariable to any device, the whole u-boot driver
-> > model would need
-> > to be kept in memory, might as well just keep the whole u-boot in
-> > memory at this point, it's anyway small.
-> > I don't have much knowledge on how to or pros and cons of doing this.
->
-> The major problem here is who owns the hardware. With the SPI flash
-> implementation as well as the RPMB implementation Linux owns that
-> flash.
-> For the RPMB we've introduced a mechanism so the kernel replaces the
-> runtime calls with internal functions [1].  I think we should come up
-> with a similar architecture for SPI. In any case we should keep in
-> mind that setting authenticated EFI variables should be forbidden on
-> the file/SPI backends since they are not really secure.
->
+Changes in v2:
+- Update the signoff
 
-Thanks, I understand now that we can't use SPI flash for saving secure
-variables and stop Linux from accessing it.
-My requirement is to be able to save non-Secure boot related variables
-( BootOrder, BootNext and BootOptions ).
-For this purpose as we don't need secure channel and to be compatible
-with current Linux versions I started
-implementing SetVariable in runtime in [1]
-I was able to get it working until it's ready to write stuff into SPI Flash=
-.
-To be able to use SPI Flash, runtime call needs to access the drivers
-and this needs the whole driver-model to be in
-efi runtime memory makes me think would it make sense to keep the
-whole u-boot in efi runtime memory or just
-driver model and all SPI drivers for now and keep adding other drivers
-when needed like RPMB.
+---
+Hari Nagalla (2):
+      remoteproc: k3-r5: Extend support for R5F clusters on J721S2 SoCs
+      remoteproc: k3-dsp: Extend support for C71x DSPs on J721S2 SoCs
 
-I need some pointers to what would be the best approach accessing
-hardware from runtime.
+Manorit Chawdhry (1):
+      env: ti: j721s2.env: Remove the processors that are in lockstep
 
-[1] - https://github.com/shantur/u-boot/tree/spi-flash-runtime-setvariable
+ board/ti/j721s2/j721s2.env           | 2 +-
+ drivers/remoteproc/ti_k3_dsp_rproc.c | 4 +++-
+ drivers/remoteproc/ti_k3_r5f_rproc.c | 6 ++++--
+ 3 files changed, 8 insertions(+), 4 deletions(-)
+---
+base-commit: 054222eb68f6d7500e21dd1f01af8b9a59b89fd4
+change-id: 20231127-b4-upstream-j721e-rproc-support-15074716a401
 
-Kind regards,
-Shantur
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
