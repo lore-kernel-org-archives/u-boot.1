@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B74C7C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 01:45:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA96C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 05:57:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB95C8747A;
-	Mon, 27 Nov 2023 02:45:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id AA1D6874EC;
+	Mon, 27 Nov 2023 06:57:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=marcan.st
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EklDWABk";
+	dkim=pass (2048-bit key; unprotected) header.d=marcan.st header.i=@marcan.st header.b="ZAEHpRIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A1DD8747A; Mon, 27 Nov 2023 02:45:30 +0100 (CET)
-Received: from mail-m127229.xmail.ntesmail.com
- (mail-m127229.xmail.ntesmail.com [115.236.127.229])
+ id D363B86FB4; Mon, 27 Nov 2023 06:57:49 +0100 (CET)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDA9987474
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 02:45:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=EklDWABkPvU5XrOjsgiOpy1E/oNZFiFD099aEWjwVe1XEyQ35CCuJZ+VaCV8ImWIc9SYMjZ6Y2v9Xf1CGvy+zRWSqQmcXyiCINQuZH0pUAfnIgpQTOOyrks2UWZvlrHpNysGsAd9k2yxtYwwItIWEHoNuJscsdsb1QTwLn3Zfk8=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=xPf+wcgXhKU2GiAAZbZmJTMdABAb5SNXl19AQ4tlIVA=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11878.qiye.163.com (Hmail) with ESMTPA id 6D4247407AE;
- Mon, 27 Nov 2023 09:44:58 +0800 (CST)
-Message-ID: <d8d6cc79-bfa1-4c1e-934f-625941160078@rock-chips.com>
-Date: Mon, 27 Nov 2023 09:44:57 +0800
+ by phobos.denx.de (Postfix) with ESMTPS id 4613C874EC
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 06:57:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=marcan.st
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marcan@marcan.st
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: marcan@marcan.st)
+ by mail.marcansoft.com (Postfix) with ESMTPSA id F2F4242499;
+ Mon, 27 Nov 2023 05:57:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=marcan.st; s=default;
+ t=1701064664; bh=f6sRTeWV7ZtLqJ12N5Tz+hJlC+JbG1y4cq/rmpNK8FE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=ZAEHpRIaENrYjvKcqgG88kxsXukeZJBnIvEWp6OWn/G0ARIIgMXME0njLnrRX9489
+ ciCuXeaxn+It+bqp32TdWVNCDN6R0YavPF7K9Kq76+dkKAq3v7mOyd/OlEfhVUrGkt
+ sy3auooh7bFn1kdjWwNMg2u1AuTYyV2TrPZrvw4pUHLQtAoF4ucqyZ9pzaqYsY7mKx
+ mp9cIIxhrB7q3s7zj8bb3jWEC0mTlXkgzrtamO6XtBluaMExP3ZPiDjgQ1Ib3xhKWj
+ tSGA2cxTNIC29Hk+TOcyuDvuHZFW4lH0aRym4qNC47I4NbSG7ixOmuP4A+L4nH5buH
+ 6t6rtnSFUf/3w==
+Message-ID: <5df7617c-e8db-4067-83a3-a6601a72d334@marcan.st>
+Date: Mon, 27 Nov 2023 14:57:40 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] maintainers: rk3399: remove maintainer
-To: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-References: <20231124120431.115717-1-i@shantur.com>
+Subject: Re: [PATCH] usb: xhci: Replace terrible formatting with different
+ terrible formatting
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Bin Meng <bmeng.cn@gmail.com>
+References: <20231122235056.78672-1-marex@denx.de>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231124120431.115717-1-i@shantur.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Hector Martin <marcan@marcan.st>
+In-Reply-To: <20231122235056.78672-1-marex@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQkMdT1ZJGklPQx0dQkkZGR5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8c0e737c782eb4kusn6d4247407ae
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBg6Kyo4SDw#LCESFAgwTgkT
- DzowCRpVSlVKTEtKS09CT0JCT0hOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTktINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,41 +70,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2023/11/24 20:04, Shantur Rathore wrote:
-> Remove Akash Gajjar <akash@openedev.com> from
-> MAINTAINERS as email is bouncing.
->
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
+On 2023/11/23 8:50, Marek Vasut wrote:
+> Replace one type of terrible code formatting with a different
+> type of terrible code formatting. No functional change.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->
->   board/pine64/rockpro64_rk3399/MAINTAINERS | 1 -
->   board/rockchip/evb_rk3399/MAINTAINERS     | 1 -
->   2 files changed, 2 deletions(-)
->
-> diff --git a/board/pine64/rockpro64_rk3399/MAINTAINERS b/board/pine64/rockpro64_rk3399/MAINTAINERS
-> index 303db144aa..220ee21f23 100644
-> --- a/board/pine64/rockpro64_rk3399/MAINTAINERS
-> +++ b/board/pine64/rockpro64_rk3399/MAINTAINERS
-> @@ -1,5 +1,4 @@
->   ROCKPRO64
-> -M:	Akash Gajjar <akash@openedev.com>
->   M:	Jagan Teki <jagan@amarulasolutions.com>
->   S:	Maintained
->   F:	board/pine64/rockpro64_rk3399
-> diff --git a/board/rockchip/evb_rk3399/MAINTAINERS b/board/rockchip/evb_rk3399/MAINTAINERS
-> index c7e412b54e..acdb840f20 100644
-> --- a/board/rockchip/evb_rk3399/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3399/MAINTAINERS
-> @@ -93,7 +93,6 @@ F:	configs/rock-4se-rk3399_defconfig
->   F:	arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
->   
->   ROCK-PI-4
-> -M:	Akash Gajjar <akash@openedev.com>
->   M:	Jagan Teki <jagan@amarulasolutions.com>
->   S:	Maintained
->   F:	configs/rock-pi-4-rk3399_defconfig
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Hector Martin <marcan@marcan.st>
+> ---
+>  drivers/usb/host/xhci-ring.c | 18 +++++++-----------
+>  1 file changed, 7 insertions(+), 11 deletions(-)
+> 
+
+Lol.
+
+Reviewed-by: Hector Martin <marcan@marcan.st>
+
+> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+> index dabe6cf86af..be3e35102d6 100644
+> --- a/drivers/usb/host/xhci-ring.c
+> +++ b/drivers/usb/host/xhci-ring.c
+> @@ -543,9 +543,8 @@ static void reset_ep(struct usb_device *udev, int ep_index)
+>  	if (!event)
+>  		return;
+>  
+> -	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+> -		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
+> -		event->event_cmd.status)) != COMP_SUCCESS);
+> +	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
+> +	       GET_COMP_CODE(le32_to_cpu(event->event_cmd.status)) != COMP_SUCCESS);
+>  	xhci_acknowledge_event(ctrl);
+>  }
+>  
+> @@ -578,8 +577,7 @@ static void abort_td(struct usb_device *udev, int ep_index)
+>  		field = le32_to_cpu(event->trans_event.flags);
+>  		BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
+>  		BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
+> -		BUG_ON(GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len
+> -			!= COMP_STOP)));
+> +		BUG_ON(GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len != COMP_STOP)));
+>  		xhci_acknowledge_event(ctrl);
+>  
+>  		event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
+> @@ -593,9 +591,8 @@ static void abort_td(struct usb_device *udev, int ep_index)
+>  
+>  	comp = GET_COMP_CODE(le32_to_cpu(event->event_cmd.status));
+>  	BUG_ON(type != TRB_COMPLETION ||
+> -		TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+> -		!= udev->slot_id || (comp != COMP_SUCCESS && comp
+> -		!= COMP_CTX_STATE));
+> +		TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
+> +		(comp != COMP_SUCCESS && comp != COMP_CTX_STATE));
+>  	xhci_acknowledge_event(ctrl);
+>  
+>  	addr = xhci_trb_virt_to_dma(ring->enq_seg,
+> @@ -605,9 +602,8 @@ static void abort_td(struct usb_device *udev, int ep_index)
+>  	if (!event)
+>  		return;
+>  
+> -	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
+> -		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
+> -		event->event_cmd.status)) != COMP_SUCCESS);
+> +	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != udev->slot_id ||
+> +	       GET_COMP_CODE(le32_to_cpu(event->event_cmd.status)) != COMP_SUCCESS);
+>  	xhci_acknowledge_event(ctrl);
+>  }
+>  
+
+- Hector
