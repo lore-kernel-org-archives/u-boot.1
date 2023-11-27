@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05AEEC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 19:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB1BC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 19:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 311AF877D1;
-	Mon, 27 Nov 2023 20:52:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BABD5877BB;
+	Mon, 27 Nov 2023 20:52:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bAQokIcf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MSwefjKI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8C1E877D0; Mon, 27 Nov 2023 20:52:27 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 5A628877B6; Mon, 27 Nov 2023 20:52:34 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EE8D877D1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 20:52:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08A11877CE
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 20:52:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-67a4645fdc3so7587666d6.0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:52:24 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6d8029dae41so2213096a34.0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:52:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701114742; x=1701719542; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701114748; x=1701719548; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zwM5JEIQQQ9wVVTxLLOEmIJseg/lwNVcDSP2Rcen4yU=;
- b=bAQokIcf30haBWOkJEansJvf34N+ijEFS5Bb43l5dsM8ipsOh7CQp+rSHn2DTCPOuc
- viNlyzM3tx/rwsj6ZMV4bpCtALVJ4lcLuyWoStzejjZa9udTTZ61K/16iK+rsqmUjQVl
- SOH86N5gAvUFb8QGkbFkoGJNvcwmG0z5s3b5ycb/Wwj9M7P8xHC3qULoqg7AJ4ljsrZM
- FdRPRzsoFyap/OUZSoje3vD6SF0ObMWluHDzQwhKyiCeO1Dxf1dmlrsLJzdvs2BofD82
- OiP50vY7Y4jZzZvPp/02Ms87xn0WYd/KDzIf+oJBS/oyehYC0p9HgQUBtIMc5vv3O8yx
- CUcQ==
+ bh=nX6ZN+Gt3SRTsUM62vtsImzwiUCNqN4j44y3GDY/mOY=;
+ b=MSwefjKIJniNc/jyJSUIhSLFeWo7r0e4F2io7oyWi8Ye8T4w06wovNESK4L3WPGt/r
+ WSItoYGbSwoQvHJxEvXiK/WUrGbMzVCvUJyZ7bwKDSWyZvtHyhWG5/Opfu5uFgxObrsN
+ mruAAk2xdhtu0t07CxIBevyk/RP9g2/aZ55J1rOASwKh9rAB1yUbtWFvtbmgDD5UeFiD
+ 3Q0MSi2siIFveH+eoyHTP4LOjUg4/bHyxgnwB6DsTcxLRLNVcKuz4o9ezP/8QcUCdf5G
+ /PWcMDdZWJkO/J/hFvyMa+jkkNpVxnuMJxCfHpMRULRLvMv2iMFpGE20rnRPBH4dLd2G
+ 5KZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701114742; x=1701719542;
+ d=1e100.net; s=20230601; t=1701114748; x=1701719548;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zwM5JEIQQQ9wVVTxLLOEmIJseg/lwNVcDSP2Rcen4yU=;
- b=RkUh64GTynPdzMgW6MNmZu7EZ0XYnpTYZWPxtotV6WPF6D3+pgU1hny6DLNr3t3rA6
- +qMIVpv+pOHm9ol4m2aSd07O8QhQtis90DBE8/zZLkTEdRzBN5iXcqCO8p5rJ6aOYkTZ
- NyfTX+sqIEG1mQjPEKEsvBcAmY5VqhA7mCp9btLNHe2P2X9TUYG8tEvztRRqa986tA7E
- PviHH7ux9569DgwTrhrJ0aZONdoBvvxBtwFkOrQtjYkCwfnfop3hBwqEqI+VukPsxFyv
- kmhs00Ra6bQ2c+bp6+ossw9ULPb+15ri0O/B0CJGxWJYt9R4/SDEYbnJb7RI4L4KxV4G
- IENA==
-X-Gm-Message-State: AOJu0YyKm9qr73hz0OhoO6zWYvcpJ8ExrL4oNUDCvOZnB8S16YkMS0Ls
- F/WU+6WdYmFTt2nHxFaA94UzODarBLFfchP1Vxn7mg==
-X-Google-Smtp-Source: AGHT+IGdeHsreYIvPW9D7DKrEnx+QM0zrEGaMvIKq0tFEkEpOCb6s+8rzqRDrjk76iQiZ9BGmtqx6Q==
-X-Received: by 2002:a0c:e950:0:b0:67a:35f5:bdea with SMTP id
- n16-20020a0ce950000000b0067a35f5bdeamr7572456qvo.43.1701114742791; 
- Mon, 27 Nov 2023 11:52:22 -0800 (PST)
+ bh=nX6ZN+Gt3SRTsUM62vtsImzwiUCNqN4j44y3GDY/mOY=;
+ b=SIYDVggYFM27yWS8LwpXFJVNcPgPz0Vao4ArGYRL2JWAqNlCO4us8TFQelm2MSo/9H
+ 9QIwksXvQVrKEPS3Vvk+BSTKtGthSr/K8jZDblhjLcd2wS/L96SyWCjYjaDlmrFysMql
+ 4wI3I+HXJq1vjxeHshk3oK6L9MY/D1zuh43LyWxxvHXeEiXrkSaSt1CCoX6/v9ti0Pj/
+ f2aQyrws8o3BgXPfaQBzp2IrGctP0MFo9f5WXS+Icjx2e8iku4VOR6WJTJnyLTuvF9kl
+ hC+rrjGlgtOG5OdctZ/4h6E+XsfozJXCO0xFi0Kpzn5h+kpZles8IklP50mASAGARaa4
+ 3jfA==
+X-Gm-Message-State: AOJu0YxQtLU7OHLyMyHULCMnS9iZBTpTTKBeZ9+3aVejo90ij6FCjP9o
+ WWQbmAgpCa7RirhSa5bOL9yYh0zGzRx8jVVUOaC+/g==
+X-Google-Smtp-Source: AGHT+IGXhYo6Zti/8FKFmK+tk3dZ4aeklhrbbY4u54mwRv6uLdYHliyfbuQBoeoRkx8ORw1u7UPE7Q==
+X-Received: by 2002:a9d:6f90:0:b0:6ce:29cd:b663 with SMTP id
+ h16-20020a9d6f90000000b006ce29cdb663mr15608506otq.8.1701114748515; 
+ Mon, 27 Nov 2023 11:52:28 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- g6-20020ad45106000000b0067a2061fc21sm3087047qvp.101.2023.11.27.11.52.21
+ g6-20020ad45106000000b0067a2061fc21sm3087047qvp.101.2023.11.27.11.52.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 11:52:22 -0800 (PST)
+ Mon, 27 Nov 2023 11:52:28 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de,
 	ilias.apalodimas@linaro.org,
@@ -72,12 +72,13 @@ To: u-boot@lists.denx.de,
 Cc: Raymond Mao <raymond.mao@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>,
  Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 04/18] bloblist: Set version to 1
-Date: Mon, 27 Nov 2023 11:50:15 -0800
-Message-Id: <20231127195029.90951-5-raymond.mao@linaro.org>
+Subject: [PATCH v2 05/18] bloblist: Access record hdr_size and tag via a
+ function
+Date: Mon, 27 Nov 2023 11:50:16 -0800
+Message-Id: <20231127195029.90951-6-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231127195029.90951-1-raymond.mao@linaro.org>
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
@@ -101,31 +102,141 @@ X-Virus-Status: Clean
 
 From: Simon Glass <sjg@chromium.org>
 
-The new bloblist for v0.9 has version 1 so update this value.
+These values currently use a simple field. With spec v0.9 they have moved
+to a packed format. Convert most accesses to use functions, so this change
+can be accomodated.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
-Changes in v2
-- Update the bloblist alignment to align to FW handoff spec v0.9.
+ common/bloblist.c | 38 +++++++++++++++++++++++++-------------
+ 1 file changed, 25 insertions(+), 13 deletions(-)
 
- include/bloblist.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/include/bloblist.h b/include/bloblist.h
-index 30441f922b..d70a7bad2e 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -74,7 +74,7 @@
- #include <mapmem.h>
+diff --git a/common/bloblist.c b/common/bloblist.c
+index e744c2b0c0..f084a32cfc 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -82,13 +82,23 @@ static struct bloblist_rec *bloblist_first_blob(struct bloblist_hdr *hdr)
+ 	return (struct bloblist_rec *)((void *)hdr + hdr->hdr_size);
+ }
  
- enum {
--	BLOBLIST_VERSION	= 0,
-+	BLOBLIST_VERSION	= 1,
- 	BLOBLIST_MAGIC		= 0x6ed0ff,
++static inline uint rec_hdr_size(struct bloblist_rec *rec)
++{
++	return rec->hdr_size;
++}
++
++static inline uint rec_tag(struct bloblist_rec *rec)
++{
++	return rec->tag;
++}
++
+ static ulong bloblist_blob_end_ofs(struct bloblist_hdr *hdr,
+ 				   struct bloblist_rec *rec)
+ {
+ 	ulong offset;
  
- 	BLOBLIST_ALIGN_LOG2	= 3,
+ 	offset = (void *)rec - (void *)hdr;
+-	offset += rec->hdr_size + ALIGN(rec->size, BLOBLIST_ALIGN);
++	offset += rec_hdr_size(rec) + ALIGN(rec->size, BLOBLIST_ALIGN);
+ 
+ 	return offset;
+ }
+@@ -117,7 +127,7 @@ static struct bloblist_rec *bloblist_findrec(uint tag)
+ 		return NULL;
+ 
+ 	foreach_rec(rec, hdr) {
+-		if (rec->tag == tag)
++		if (rec_tag(rec) == tag)
+ 			return rec;
+ 	}
+ 
+@@ -156,7 +166,7 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+ 	rec->spare = 0;
+ 
+ 	/* Zero the record data */
+-	memset((void *)rec + rec->hdr_size, '\0', rec->size);
++	memset((void *)rec + rec_hdr_size(rec), '\0', rec->size);
+ 
+ 	hdr->alloced = new_alloced;
+ 	*recp = rec;
+@@ -197,7 +207,7 @@ void *bloblist_find(uint tag, int size)
+ 	if (size && size != rec->size)
+ 		return NULL;
+ 
+-	return (void *)rec + rec->hdr_size;
++	return (void *)rec + rec_hdr_size(rec);
+ }
+ 
+ void *bloblist_add(uint tag, int size, int align_log2)
+@@ -207,7 +217,7 @@ void *bloblist_add(uint tag, int size, int align_log2)
+ 	if (bloblist_addrec(tag, size, align_log2, &rec))
+ 		return NULL;
+ 
+-	return (void *)rec + rec->hdr_size;
++	return (void *)rec + rec_hdr_size(rec);
+ }
+ 
+ int bloblist_ensure_size(uint tag, int size, int align_log2, void **blobp)
+@@ -218,7 +228,7 @@ int bloblist_ensure_size(uint tag, int size, int align_log2, void **blobp)
+ 	ret = bloblist_ensurerec(tag, &rec, size, align_log2);
+ 	if (ret)
+ 		return ret;
+-	*blobp = (void *)rec + rec->hdr_size;
++	*blobp = (void *)rec + rec_hdr_size(rec);
+ 
+ 	return 0;
+ }
+@@ -230,7 +240,7 @@ void *bloblist_ensure(uint tag, int size)
+ 	if (bloblist_ensurerec(tag, &rec, size, 0))
+ 		return NULL;
+ 
+-	return (void *)rec + rec->hdr_size;
++	return (void *)rec + rec_hdr_size(rec);
+ }
+ 
+ int bloblist_ensure_size_ret(uint tag, int *sizep, void **blobp)
+@@ -243,7 +253,7 @@ int bloblist_ensure_size_ret(uint tag, int *sizep, void **blobp)
+ 		*sizep = rec->size;
+ 	else if (ret)
+ 		return ret;
+-	*blobp = (void *)rec + rec->hdr_size;
++	*blobp = (void *)rec + rec_hdr_size(rec);
+ 
+ 	return 0;
+ }
+@@ -279,7 +289,7 @@ static int bloblist_resize_rec(struct bloblist_hdr *hdr,
+ 
+ 	/* Zero the new part of the blob */
+ 	if (expand_by > 0) {
+-		memset((void *)rec + rec->hdr_size + rec->size, '\0',
++		memset((void *)rec + rec_hdr_size(rec) + rec->size, '\0',
+ 		       new_size - rec->size);
+ 	}
+ 
+@@ -313,8 +323,9 @@ static u32 bloblist_calc_chksum(struct bloblist_hdr *hdr)
+ 	chksum = crc32(0, (unsigned char *)hdr,
+ 		       offsetof(struct bloblist_hdr, chksum));
+ 	foreach_rec(rec, hdr) {
+-		chksum = crc32(chksum, (void *)rec, rec->hdr_size);
+-		chksum = crc32(chksum, (void *)rec + rec->hdr_size, rec->size);
++		chksum = crc32(chksum, (void *)rec, rec_hdr_size(rec));
++		chksum = crc32(chksum, (void *)rec + rec_hdr_size(rec),
++			       rec->size);
+ 	}
+ 
+ 	return chksum;
+@@ -422,8 +433,9 @@ void bloblist_show_list(void)
+ 	for (rec = bloblist_first_blob(hdr); rec;
+ 	     rec = bloblist_next_blob(hdr, rec)) {
+ 		printf("%08lx  %8x  %4x %s\n",
+-		       (ulong)map_to_sysmem((void *)rec + rec->hdr_size),
+-		       rec->size, rec->tag, bloblist_tag_name(rec->tag));
++		       (ulong)map_to_sysmem((void *)rec + rec_hdr_size(rec)),
++		       rec->size, rec_tag(rec),
++		       bloblist_tag_name(rec_tag(rec)));
+ 	}
+ }
+ 
 -- 
 2.25.1
 
