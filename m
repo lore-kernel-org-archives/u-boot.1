@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01A1C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC57CC07CB1
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:07:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1526086DB1;
-	Mon, 27 Nov 2023 14:01:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FFD487763;
+	Mon, 27 Nov 2023 14:01:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RTgXWZ5I";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jIUsB8u0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB21687768; Mon, 27 Nov 2023 14:01:21 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id CBA0C8776D; Mon, 27 Nov 2023 14:01:23 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0D2987762
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 10E918773A
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50babce6ff6so2129053e87.3
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:19 -0800 (PST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-507962561adso6360728e87.0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090079; x=1701694879; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090077; x=1701694877; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HRAlY0o1Z3yewjm+0wrKUc0H6nErL27nIXl54G7S/rQ=;
- b=RTgXWZ5IiX1EnAbiihd8H6a2nWUUG+TggVBEXl5GKvuHO8nXUvcywcpWHKI73HapWW
- 1T5riYG2aP/I8d8rKaDQqb0Mq2ANHTGJHluzNn1StLR3QVXWDlP6ZhWN5aBmW0/wzkux
- dMPNMkzLHFg1t3Ub+p+CkETcaIA7NmUxBwR75aY+jmf59C0paySKrsEysYbnZ7Vjrfze
- DlLj9NWRr8cMC6HdW4AGz5pdNOY+RM1QW8+wwdEfagnb5ppQMYWXlJVk5K/WD43OUDjy
- 0JRNcENXefoQIwfVoKVaOEtGUKYOSOuFPJ73Lwcw3g1pi+nT6deWc2evLGXJDjAeCm7K
- Eaeg==
+ bh=x4j6+qpoA6hnnQp3dMONk9xuQKO/Y7fQKEWvrs3eGzk=;
+ b=jIUsB8u0Q8NdmNBJAvSsfAuY5uZYHU26R3F+wjctWsuFwquU7p0JIWuucVpo5u8Fwg
+ 7duGuUmkeQAneECwGHsXuSiaGibNaZQKY5di1l9j4nhuGjOjYr0jMnWb4rAG/y1NZH4B
+ pEGAvT7awbOyTFDy5fAjQMEYcDdOFACjjUNWmNGiLSmyfc70NYTuLdrxEuTTayW8+0Dw
+ P/cTyeswD4WGPzIKSHpvEnipWtNAzW1gsLPkFra04mIb02ZNjibqMUxjQlSdGn8XrvBa
+ JoDCwo2Ut/PYg6b6fz14XtgAihBrtFMfmMZ4t5VxV8dG7umIPKJyILS49a0wSrd1U+ZB
+ 4EkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090079; x=1701694879;
+ d=1e100.net; s=20230601; t=1701090077; x=1701694877;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HRAlY0o1Z3yewjm+0wrKUc0H6nErL27nIXl54G7S/rQ=;
- b=UKqFDsSuKy2H4TQf2AoS+75d19nokNuXJJ+GOVnCYwPykCmAVajG0uA+EiEm3712+Q
- OlQJ/XrnWrKpStBevufb9Z5gm209ri2vw0emOk1dXCLAhqCrT0hLBjCfR9UWhoLkefj9
- Zk+99PPCw6dIlcgWHIRjZ2WOLcd2u4ESftMYkka3kKhCht/XnOJt3OgFHUkRUFUrKt/o
- jVnB/E2RGkGIyOOyDIj4pA6Zx7s0Em2rgmoOWpEDfUtsSqXSjjkrwNwKAnz7zOlTUSUS
- j06Kb6Ht7htK72zQMWuUm/9cU/sqzphM4mnQK54e3NPV3IEEGaJE70e82UaGQaPXzL0C
- C/zQ==
-X-Gm-Message-State: AOJu0YwUJQAM4YcW/5ZlfL5gUzbCicE1ZTlQmZpHJtl0HUdo4WSQOA3F
- CSuoHxg+xjZH2zoPWNGliH9nNUG2aWrrrNhiy+x5zg==
-X-Google-Smtp-Source: AGHT+IE6BECt3ZI7H0XCMIw6IEZsm97oBtlUv0gBxSbMsAyLbNVKOlbIBmM01GcLep1jLDaeUjRJmA==
-X-Received: by 2002:a19:ac03:0:b0:50b:aa2a:23e9 with SMTP id
- g3-20020a19ac03000000b0050baa2a23e9mr4348926lfc.17.1701090078948; 
- Mon, 27 Nov 2023 05:01:18 -0800 (PST)
+ bh=x4j6+qpoA6hnnQp3dMONk9xuQKO/Y7fQKEWvrs3eGzk=;
+ b=CHfLeo/qKVpJLEWP/CoigXp6NikU/HBZwZuvByLRfxq7AFNvUwjRaHanJDIeZ7jIgS
+ CzpWn/FSglb5yP0FlFKAQmVCtwv7SNJJiH89hB/1YxSZ7O3eHsVGawLXrWNhHI+3jWz2
+ soHhFsjgDrTmhJXr5xVw/AWqdPtKo/yF6ZfLdvjE8wStw2ow/FmkLY2eUAKR22hN7bqA
+ URaYLGo8gaUSho5iO4OgElTj+61FSiwOvFe0wIWb637xrfySB/QwK/MyHlMEwuDFXbSA
+ rj/lKSrkJrYplPBxo44hInvl+xcLeRcZ6BoxoVgOM3HwdLcQT4vFVVuHXf3ewhu3X/aL
+ 8bcA==
+X-Gm-Message-State: AOJu0YxLGYAET5Ai3xfcN9J10hT2RM06O9UzFZu3HpkPI8dtFzcYm5j3
+ RBcdLZ/gBYlXQibLA5hLF3D5l5ouA4fxoGvFCEz5CA==
+X-Google-Smtp-Source: AGHT+IFRhRV723LnyfvJLMzTTT46zisP5n4CIc2QYGQ5NNhf4J/2rmPRoFN2+dSMBGkR/AJmC8RJRw==
+X-Received: by 2002:a05:6512:2815:b0:50a:a61a:58cc with SMTP id
+ cf21-20020a056512281500b0050aa61a58ccmr9937126lfb.55.1701090076710; 
+ Mon, 27 Nov 2023 05:01:16 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.16
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:01:18 -0800 (PST)
+ Mon, 27 Nov 2023 05:01:16 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 30/43] configs/sheevaplug_defconfig: enable LTO and inc size
-Date: Mon, 27 Nov 2023 18:57:13 +0600
-Message-Id: <20231127125726.3735-31-maxim.uvarov@linaro.org>
+Subject: [PATHv11 29/43] configs/am335x_boneblack_vboot_defconfig: enable LTO
+ and increase SPL size
+Date: Mon, 27 Nov 2023 18:57:12 +0600
+Message-Id: <20231127125726.3735-30-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -96,27 +97,20 @@ Increase allowed binary size to fit lwip code.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- configs/sheevaplug_defconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ configs/am335x_boneblack_vboot_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
-index 2e4901b840..c0b256f3b0 100644
---- a/configs/sheevaplug_defconfig
-+++ b/configs/sheevaplug_defconfig
-@@ -17,7 +17,7 @@ CONFIG_DEFAULT_DEVICE_TREE="kirkwood-sheevaplug"
- CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
--CONFIG_BOARD_SIZE_LIMIT=524288
-+CONFIG_BOARD_SIZE_LIMIT=543744
- CONFIG_BOOTDELAY=3
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="${x_bootcmd_kernel}; setenv bootargs ${x_bootargs} ${x_bootargs_root}; bootm 0x6400000;"
-@@ -72,3 +72,4 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_STORAGE=y
- CONFIG_LZMA=y
- CONFIG_BZIP2=y
+diff --git a/configs/am335x_boneblack_vboot_defconfig b/configs/am335x_boneblack_vboot_defconfig
+index 531703010a..4f06ed1b76 100644
+--- a/configs/am335x_boneblack_vboot_defconfig
++++ b/configs/am335x_boneblack_vboot_defconfig
+@@ -94,3 +94,6 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+ CONFIG_USB_ETHER=y
+ CONFIG_SPL_USB_ETHER=y
+ CONFIG_LZO=y
 +CONFIG_LTO=y
++CONFIG_SPL_MAX_SIZE=0x1c000
++CONFIG_SPL_PAD_TO=0x1c000
 -- 
 2.30.2
 
