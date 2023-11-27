@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124B1C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 15:48:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E260C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 15:53:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F103F87555;
-	Mon, 27 Nov 2023 16:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BF5A875C5;
+	Mon, 27 Nov 2023 16:53:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="soHno37M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2CO+JsP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 432768753F; Mon, 27 Nov 2023 16:48:02 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 05EFC875EB; Mon, 27 Nov 2023 16:53:07 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E801875AB
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 16:47:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4E5087538
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 16:53:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ARFlu3i101849;
- Mon, 27 Nov 2023 09:47:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701100076;
- bh=3MUkli9m6S1qWzbKrqL99EJ4PKxc+cBEqlhF+130kJw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=soHno37M7lCaObH1h5KjL4JSzuP0vy1H+5CtgUM2LSJ0ISdCk2MAR34m0fwOeFpa+
- 37nuy5k6ipreG9JPgy2BVoYfl7auKpktKVKXnsoSVZsGapjcfLP18XPsnewPbCWYFx
- 582bvM5oZZ7plA+HnAUD/Pw4p9A78Q4w1L8Ua7Tc=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ARFluR7037406
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Nov 2023 09:47:56 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Nov 2023 09:47:56 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Nov 2023 09:47:55 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ARFltHq128835;
- Mon, 27 Nov 2023 09:47:55 -0600
-Date: Mon, 27 Nov 2023 09:47:55 -0600
-From: Nishanth Menon <nm@ti.com>
-To: "Raghavendra, Vignesh" <vigneshr@ti.com>
-CC: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Simon
- Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Apurva Nandan
- <a-nandan@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/3] arm: mach-k3: Remove non-cached memory map areas
-Message-ID: <20231127154755.duf5xciqrp5mg23j@reopen>
-References: <20231123172214.653268-1-afd@ti.com>
- <20231123172214.653268-3-afd@ti.com>
- <fdce61c7-6517-4965-94ba-90fc8dbd2bdd@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50ba78c7ee2so3291174e87.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 07:53:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701100383; x=1701705183; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yza8Vbud2eqGUJVcUFr7FD+4mXr4VtKJefULRUpcSpg=;
+ b=Y2CO+JsPMzpHLtCXNZ4BYqDAt+btqf6YiiU8Q9MlibZ++0U8zMWT57ZYwFbv5RC153
+ hLhflAhItlZUCqa8CW+dmPV9Nl+miD4ZUQgFcJ8C7vsmDWU2hhoawYlt+FpTeCqCp8k7
+ u4KDeBaWKOdOYQ3Lzp/ZXbtwBwsLr2i0cKwh2eFj+YHx/jMtlmzC+5YA2So+PJXo4ql6
+ KnXWwdpxmt7j6bWP4G1guy7PzO5V2C4raCOY8355WzwpmUPty5AVvVt18SXI/yj3HKmz
+ NQtm/iyUxZn/OCG7sgshY6wRny56jbM8B6JD8eAkgWl+ynP+muYAA3l2lQDn5rKt7H+h
+ VZvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701100383; x=1701705183;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yza8Vbud2eqGUJVcUFr7FD+4mXr4VtKJefULRUpcSpg=;
+ b=R6gHfYwMYRLSqnX+CFi5bogHkdyEMJjgbzlCzT7043d6ry9Z7/8ubqb/zrRcclyRZ8
+ /kjJaZrsVGEukEpe89IcN0ncYJFR8feyfvBT2uOSrfo5k+4G1sRt5eQzEkW13l7aUnSc
+ rIYJ1mmjWanT21UhxuNrldm5gjY8EuU3tvjfOWIezxTrp2O3lZNewH/mGNeGmDUPpDJT
+ RSi3MyikRTDisMAobvvPtu6eRO5HltY3nEPUpX++aSsLMF3NmLGxR1oKf93L0B+kwL9w
+ p1ETy0jGKV5atOgIXdfwbUJp8OHevgnhLeWQvh4gnKQeS++xtm5VxFS83nP+RPZztMTy
+ AVEA==
+X-Gm-Message-State: AOJu0Yw1Urg9SBgBs+efO39n70FeenvhTSYDcmwj6ZrPzcD5ti5fCuTx
+ VzbYj++G5fuZ9uo2qsZZ7GSTDaz/kGoisihoPFo=
+X-Google-Smtp-Source: AGHT+IEqajElOgDTIaAjXoAzutvmRRcADcFnIBo350SNiPlIYSM8wXR09PHg1GeC6PgvkMapeY4KLrEPHKJoc6pPj00=
+X-Received: by 2002:a19:5207:0:b0:503:3278:3221 with SMTP id
+ m7-20020a195207000000b0050332783221mr7794050lfb.69.1701100382985; Mon, 27 Nov
+ 2023 07:53:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <fdce61c7-6517-4965-94ba-90fc8dbd2bdd@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-34-maxim.uvarov@linaro.org>
+ <20231127130828.GC2513409@bill-the-cat>
+ <CAD8XO3buruEtFvVv32J-LW+Jj=+vFJk2Q+TgBKL130sL2qY0DQ@mail.gmail.com>
+ <20231127140813.GF2513409@bill-the-cat>
+ <CAD8XO3b-BijLJz0fbsLA-DdAzW_Yj0Z+JOWZtFUFr-3KgKesQA@mail.gmail.com>
+In-Reply-To: <CAD8XO3b-BijLJz0fbsLA-DdAzW_Yj0Z+JOWZtFUFr-3KgKesQA@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 27 Nov 2023 15:52:50 +0000
+Message-ID: <CALeDE9MMCPNtj9yaXdPwbppOsmUSvmuNWdicNLvqZmY2c=h9dw@mail.gmail.com>
+Subject: Re: [PATHv11 33/43] configs/am335x_evm_defconfig: inc SPL size
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ ilias.apalodimas@linaro.org, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,45 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23:04-20231123, Vignesh Raghavendra wrote:
-> 
-> 
-> On 11/23/2023 10:52 PM, Andrew Davis wrote:
-> > @@ -219,16 +177,9 @@ struct mm_region am62_mem_map[] = {
-> >  	}, {
-> >  		.virt = 0x80000000UL,
-> >  		.phys = 0x80000000UL,
-> > -		.size = 0x1E780000UL,
-> > -		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> > -			PTE_BLOCK_INNER_SHARE
-> > -	}, {
-> > -		.virt = 0xA0000000UL,
-> > -		.phys = 0xA0000000UL,
-> > -		.size = 0x60000000UL,
-> > +		.size = 0x80000000UL,
-> >  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> >  			 PTE_BLOCK_INNER_SHARE
-> > -
-> >  	}, {
-> >  		.virt = 0x880000000UL,
-> >  		.phys = 0x880000000UL,
-> 
-> 
-> This causes issues when TF-A region @0x9e780000 is firewalled off from
-> non-secure world. A53 does speculative accesses to this region from EL1
-> leading to FW exceptions being reported on TIFS log (although A53 itself
-> doesn't seem to abort)
+On Mon, Nov 27, 2023 at 3:32=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro.o=
+rg> wrote:
+>
+>
+>
+> On Mon, 27 Nov 2023 at 20:08, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Mon, Nov 27, 2023 at 08:06:23PM +0600, Maxim Uvarov wrote:
+>> > On Mon, 27 Nov 2023 at 19:08, Tom Rini <trini@konsulko.com> wrote:
+>> >
+>> > > On Mon, Nov 27, 2023 at 06:57:16PM +0600, Maxim Uvarov wrote:
+>> > >
+>> > > > Increase allowed binary size to fit lwip code.
+>> > > >
+>> > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+>> > > > ---
+>> > > >  configs/am335x_evm_defconfig | 1 +
+>> > > >  1 file changed, 1 insertion(+)
+>> > > >
+>> > > > diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_def=
+config
+>> > > > index f048e60f7f..9fd608bd76 100644
+>> > > > --- a/configs/am335x_evm_defconfig
+>> > > > +++ b/configs/am335x_evm_defconfig
+>> > > > @@ -124,3 +124,4 @@ CONFIG_WDT=3Dy
+>> > > >  CONFIG_DYNAMIC_CRC_TABLE=3Dy
+>> > > >  CONFIG_RSA=3Dy
+>> > > >  CONFIG_LZO=3Dy
+>> > > > +CONFIG_SPL_MAX_SIZE=3D0x29000
+>> > >
+>> > > As probably a problem for other platforms you made this change on to=
+o,
+>> > > you can't do this. The link limit is here because that's the limit t=
+he
+>> > > hardware (and ROM) imposes.
+>> > >
+>> > > You might need to either:
+>> > > - Figure out how to make lwip even tinier for the SPL case
+>> > > - Limit the old network stack to just for SPL, and a later task is t=
+o
+>> > >   reduce what's in the old stack to just what's also needed within S=
+PL.
+>> > >
+>> > >
+>> > Thanks Tom. All these size changes need to be reviewed.  Some of them =
+are
+>> > ok, I think like for x86 or qemu virt, but some of them might not work=
+.
+>> >
+>> > Question - Do we need networking inside SPL rather than in the main bi=
+nary?
+>> > Is it a real use case?
+>>
+>> Yes, the device supports loading SPL, and then SPL loading U-Boot both
+>> over USB RNDIS as well as regular physical ethernet.
+>>
+>> --
+>> Tom
+>
+>
+> That looks like not a production use case. USB + NET + drivers + EXT4 + N=
+AND + MTD and everything else and trying to fit into SPL.
+> With enabling LTO I still need 4k (without dropping current code). From o=
+ne point it's too synthetic use case here and might be a historical
+> limitation which we will not see on future boards. From the other point i=
+t will be good to not break it somehow....
 
-Hmm... Why not just manage the ones that use TFA in DDR seperately? I
-suppose OPTEE will come in the way?
+Does this still include the old network code?
 
-Looks like the no-map is not honored well.. as you were mentioning, a
-zephyr style generating the map from dts might be much better, but then
-we do support multiple dtbs as well..
+Also I wonder if we can have a paired down SPL_LWIP option that
+removes things like PXE and HTTP/wget because none of those would be
+used in the SPL use case as they're all brand new.
 
-OK - I guess we need to leave this cleanup for now.
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Peter
