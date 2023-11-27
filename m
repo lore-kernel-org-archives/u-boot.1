@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA00CC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22AAC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA07787622;
-	Mon, 27 Nov 2023 18:11:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CCF58773A;
+	Mon, 27 Nov 2023 18:11:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qsNQvzPQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bVxn3WMb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFB4D87634; Mon, 27 Nov 2023 18:11:09 +0100 (CET)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 124BA87547; Mon, 27 Nov 2023 18:11:10 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77D7787547
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:11:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E85187655
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:11:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2c72e275d96so59694541fa.2
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:11:04 -0800 (PST)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-332e40315bdso2805798f8f.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:11:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701105064; x=1701709864; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pCIAsPHbQnJgycpBLxVyqd2Hv4TNA2AXnw545LUnbLM=;
- b=qsNQvzPQsNttMUpb/9T07dBq6PVnzz1eYqx7hb/fh2ZZPCC6WiULsb3hoPWh+L6Y+/
- TjyEk0DbYOwlvBdBkpGdvj3ffavxL0FVGnCWGY0CRMnp0xBYeHV99iJ+dqmVeFTxDcXi
- GMrAuCMHqzz0cltyFm4CWDGhUIIDgsE1aEMJVFK7E24w+sO3+PvBscRxcbtJMpi0HqcI
- bxXuv/JeSISXK8HHlVNPaErsd/5gRt1Ktpqe/0+PJO8Dp+SIXTppGWWzSlRBw80uHcdO
- sJHqlBzkx1/stVR7LTznfEDiJ1YDIYFJ+0nOVfMDCYWix+s9nLynrPAlCIFuN1+O6aPm
- uwLw==
+ d=linaro.org; s=google; t=1701105065; x=1701709865; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wNRQg0s3PMAlvStfqc3rfrJhX2ihiUrWDGcFjnnfTfI=;
+ b=bVxn3WMb+D+pWEvkWlWg21CG3E5RB8PsmC3YXrABl+xnbIm/WgPbQmj1Zr8waWi3xi
+ Se9sa05WNBNK39r8Nq0e78tcWDQc89nNjkL+3ShYshXaNGu5I9mGtnYJ7dCgtmOPcgNS
+ GyxLQVoH/TSuXXBQVzDN0dMcVR7M/6/w/seOPQp3InuKIjWJj7DedJlVBOImbaoaXteh
+ Kfv7YYiHCwE3iY93KQP39GTtxr7onnE+PNTYBuBkh5EcEG54pKbTmIVa6ZsUAeyU8Yu/
+ mWWLbZAPhnwh6J0a9Xnr8Inu5bekWK5se7bG7Szuk/h+k3Gi/xyjr9dMUR3wTr7FAw20
+ H0JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701105064; x=1701709864;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pCIAsPHbQnJgycpBLxVyqd2Hv4TNA2AXnw545LUnbLM=;
- b=EI3TJMOrIGBSghCdcQIAJMurYRZlJD628VWOXr93ebpQ8bUGrw/0rCt5++kUC5E0GM
- wAwDcUFhsVqjzpeDOIiqs3QQXXeW2l1a2yLskMSutKYz93GRpnjyUGIE7MDdJGEX4Y9W
- 9tDIU9jhl2MPdKwgwSy3wj7nmWqOLtGkKxPOhKzr1NjkpiO2S37j1RNEX7esSRDSn4hF
- r8KSQ6davAQHUKRBZfdgHuj+93nBZhjFXVQ1wCUG6DbqAqJk9MCz0jvKAqsa6PxKrs6L
- uQEkreBGAsC8bFpxBbv5aiJvtG12TH9qHjK4qx1WNkj9YPfwFbRcEn5bFnGal7MnmXaS
- Wj+A==
-X-Gm-Message-State: AOJu0YwYIho+frS6LxtJOk4UzkQvIB26H+qVzL71jmNY+bJchudfLpJp
- 4cJw/dISEy+nHkh+6/VF5RX/jA==
-X-Google-Smtp-Source: AGHT+IFt1NPLPE50ei8tkH65R78dm0+ZmAz0kHogSIfAF4YueVlHV+vloJEaoZsDPDH25hlefD8TbA==
-X-Received: by 2002:a2e:8e6c:0:b0:2c9:a114:253c with SMTP id
- t12-20020a2e8e6c000000b002c9a114253cmr2724880ljk.15.1701105063621; 
- Mon, 27 Nov 2023 09:11:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701105065; x=1701709865;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wNRQg0s3PMAlvStfqc3rfrJhX2ihiUrWDGcFjnnfTfI=;
+ b=egxgA2CQWQOeaNpiS+MbJ1AQmw8nTJ7mRsY7u4Ivpu+8pCEGYPZt+FVuvO73XsWuBB
+ GDCtCBfficTBdHt+AlFLCvgOOOJ8hjqEePp8sQyDprI8oF1+UEBcKqagidHz59sp04OR
+ nV/PfVW8UiDWqqr095AHJd/YIf2oPETm1dSBfNcWytUTF5EtgV0uZJbjEcMGLdFfD2fr
+ yfHf6ojSrrSeFvF1jD2Mx8nm4zyD0WS0VUkUHEZhk8w4kjWqgKq+KKnBMMEL2y1i0hqY
+ sckntTlOlMGpbJvKgwFtPTntWutLYyLEgEhamE0d6wkWH1H+0jTia8lL62UZjgct4wyH
+ xZxg==
+X-Gm-Message-State: AOJu0YwcXG+jFAY9QH49uAKj7ByrdIS8PSOkJAbB71dG6FWh/IrYIIgg
+ g0BFvOmCe1v407SyLTjhirDzLg==
+X-Google-Smtp-Source: AGHT+IG9ll5ox2kyqn3SaCcD8+W+9YigLXGUsosrXl7HCCZQr1i5SeUtg0fUZ7f0HsSpPvoP41ethA==
+X-Received: by 2002:a5d:49c7:0:b0:332:d4a6:1143 with SMTP id
+ t7-20020a5d49c7000000b00332d4a61143mr8969855wrs.7.1701105065182; 
+ Mon, 27 Nov 2023 09:11:05 -0800 (PST)
 Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
  [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
- cp12-20020a056000400c00b00333040a4752sm2401198wrb.114.2023.11.27.09.11.02
+ cp12-20020a056000400c00b00333040a4752sm2401198wrb.114.2023.11.27.09.11.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 09:11:03 -0800 (PST)
+ Mon, 27 Nov 2023 09:11:04 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: sean.anderson@seco.com, sjg@chromium.org, neil.armstrong@linaro.org,
  heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 0/2 v2] Provide a fallback to smbios tables
-Date: Mon, 27 Nov 2023 19:10:56 +0200
-Message-Id: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
+Date: Mon, 27 Nov 2023 19:10:57 +0200
+Message-Id: <20231127171058.165777-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,24 +94,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-Tom asked me to clean up and resend [0].
-I've made some adjustments -- The DT nodes are tokenized and a single
-string is used. The DT node 'model' is used to fill the SMBIOS
-'Product Name' and 'compatible' is used for 'Manufacturer'.
+If a value is not valid during the DT or SYSINFO parsing,  we explicitly
+set that to "Unknown Product" and "Unknown" for the product and
+manufacturer respectively.  It's cleaner if we move the checks insisde
+smbios_add_string() and always report "Unknown" regardless of the missing
+field.
 
-The reason is explained in patch#2 but the tl;dr is that model doesn't
-always include the manufacturer despite the suggestions of the DT spec.
+pre-patch dmidecode
+<snip>
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+        Manufacturer: Unknown
+        Product Name: Unknown Product
+        Version: Not Specified
+        Serial Number: Not Specified
+        UUID: Not Settable
+        Wake-up Type: Reserved
+        SKU Number: Not Specified
+        Family: Not Specified
 
-[0] https://lore.kernel.org/u-boot/20220906134426.53748-1-ilias.apalodimas@linaro.org/
+[...]
 
-Ilias Apalodimas (2):
-  smbios: Simplify reporting of unknown values
-  smbios: Fallback to the default DT if sysinfo nodes are missing
+post-patch dmidecode:
 
- lib/smbios.c | 109 +++++++++++++++++++++++++++++++++++++++++++--------
- 1 file changed, 92 insertions(+), 17 deletions(-)
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+        Manufacturer: Unknown
+        Product Name: Unknown
+        Version: Unknown
+        Serial Number: Unknown
+        UUID: Not Settable
+        Wake-up Type: Reserved
+        SKU Number: Unknown
+        Family: Unknown
+[...]
 
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
+---
+Changes since v1:
+- None
+
+ lib/smbios.c | 17 +++--------------
+ 1 file changed, 3 insertions(+), 14 deletions(-)
+
+diff --git a/lib/smbios.c b/lib/smbios.c
+index d7f4999e8b2a..fcc8686993ef 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -102,7 +102,7 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
+ 	int i = 1;
+ 	char *p = ctx->eos;
+
+-	if (!*str)
++	if (!str || !*str)
+ 		str = "Unknown";
+
+ 	for (;;) {
+@@ -151,8 +151,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+ 		const char *str;
+
+ 		str = ofnode_read_string(ctx->node, prop);
+-		if (str)
+-			return smbios_add_string(ctx, str);
++		return smbios_add_string(ctx, str);
+ 	}
+
+ 	return 0;
+@@ -231,7 +230,7 @@ static int smbios_write_type0(ulong *current, int handle,
+ 	t->vendor = smbios_add_string(ctx, "U-Boot");
+
+ 	t->bios_ver = smbios_add_prop(ctx, "version");
+-	if (!t->bios_ver)
++	if (!strcmp(ctx->last_str, "Unknown"))
+ 		t->bios_ver = smbios_add_string(ctx, PLAIN_VERSION);
+ 	if (t->bios_ver)
+ 		gd->smbios_version = ctx->last_str;
+@@ -281,11 +280,7 @@ static int smbios_write_type1(ulong *current, int handle,
+ 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+ 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
+-	if (!t->manufacturer)
+-		t->manufacturer = smbios_add_string(ctx, "Unknown");
+ 	t->product_name = smbios_add_prop(ctx, "product");
+-	if (!t->product_name)
+-		t->product_name = smbios_add_string(ctx, "Unknown Product");
+ 	t->version = smbios_add_prop_si(ctx, "version",
+ 					SYSINFO_ID_SMBIOS_SYSTEM_VERSION);
+ 	if (serial_str) {
+@@ -315,11 +310,7 @@ static int smbios_write_type2(ulong *current, int handle,
+ 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+ 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
+-	if (!t->manufacturer)
+-		t->manufacturer = smbios_add_string(ctx, "Unknown");
+ 	t->product_name = smbios_add_prop(ctx, "product");
+-	if (!t->product_name)
+-		t->product_name = smbios_add_string(ctx, "Unknown Product");
+ 	t->version = smbios_add_prop_si(ctx, "version",
+ 					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION);
+ 	t->asset_tag_number = smbios_add_prop(ctx, "asset-tag");
+@@ -344,8 +335,6 @@ static int smbios_write_type3(ulong *current, int handle,
+ 	fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
+ 	smbios_set_eos(ctx, t->eos);
+ 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
+-	if (!t->manufacturer)
+-		t->manufacturer = smbios_add_string(ctx, "Unknown");
+ 	t->chassis_type = SMBIOS_ENCLOSURE_DESKTOP;
+ 	t->bootup_state = SMBIOS_STATE_SAFE;
+ 	t->power_supply_state = SMBIOS_STATE_SAFE;
 --
 2.40.1
 
