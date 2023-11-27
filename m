@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF3BC07CB1
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F579C07D59
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:03:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A1F687627;
-	Mon, 27 Nov 2023 14:00:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F1A98875C8;
+	Mon, 27 Nov 2023 14:00:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CT1kDOJn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QqDGZvd5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7658D875A1; Mon, 27 Nov 2023 14:00:42 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 87216875FC; Mon, 27 Nov 2023 14:00:46 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 979E5875A0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBEDE875DF
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-507c5249d55so6337783e87.3
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:39 -0800 (PST)
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-50aabfa1b75so5882210e87.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090038; x=1701694838; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090042; x=1701694842; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HXQZA2lweisW6lZDZljhC9dP9YlW/yMvHvEwcbIhoJk=;
- b=CT1kDOJnItPrIgkE8FrQcPZfjAyCZOhFTpm+fiKawL8rXZugXezEadsYtHjh9wYWqU
- xXruUF61V8frpXdIFMvXqj7YZaIST41ktHLGZWJqXyAJKHkmmVVi8cMe/WAOko62csCN
- Adpc1xA6eLBy2GuyWGMCg/+JYrsfs/Zj/xlPr0AAAGL3dhSJqlfoGgp+o8GiRX8zEG+A
- hAnRq6RZNN2W7tvtbqix4xXI/rRtmFyAvOLhI5/RFnfKjQiEPEKl78b9YdKwVJTwXOEQ
- 0LhJxlaHfuNbKvLP95lnZqTXbgFTaUKALYmWq4VFmH2Kugw90NyueTr4dWKiJzCEAvQv
- fZVQ==
+ bh=UVa+z8ZgfXxQSDWa2Nvtk/JjyLX2HbFM1q8u36pxb0w=;
+ b=QqDGZvd5sK1JjZ9lyUU8/DgaanrMNQ9LHHPGodqXrarsq4AHKEdoExEJAqmUDT+5Cv
+ tkBVFiq8MxvugBAWhM8YGgHWPZZQ2eD5S0DGerGZW1UoBrcwYKHHO5G18coagI7FPtzy
+ Jke2WdM7s7LeQdSngqvbawTFJkJB0IZGXAX8taJkNlvU8gX8UCTPTdJb2mPMI3zHBPJ5
+ MKXoiug8urO0Rb9nXsaKcXrn81byoDHRYaIQQrrxc4r8gg748z5P8RaVBQMPnzv+nzpz
+ fUkvbFh0/x+kbW1ALlGfAILgvPldIt1hfp39KEp/IPV66cG02UR+KeckRbiprGX40VO/
+ N37Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090038; x=1701694838;
+ d=1e100.net; s=20230601; t=1701090042; x=1701694842;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HXQZA2lweisW6lZDZljhC9dP9YlW/yMvHvEwcbIhoJk=;
- b=WhlERiVXXpBzAkHio1Z3bSUYZVu3n/9Zbjrou3xLGJro9oC2ZnnyVCIizLExN61W0x
- OYmRUJOsyXwfqGLwXlMFpwrsxEygN2Bl5IwWSQtSr0xVOA5fEAIQDBS7DNqgX3xHXBOV
- cTxXX7/E7DFll3DjQyRlk6W2y9V0k0XXzelvOr76e1+LUBGs73Y9hkpDSX4O5+eYDceb
- CdsGlB2st/RZ8Zf4DRHM8YxrOwvSHq0F3OcWFbTdhb+hOiorp/DmnM9F5Wpz/kyHSJZj
- macU4FlXg5nLkmYvZljQerwJpdtttLxwZtgc63UyDfXNkyVlPDlIsNpArmYPDybFtuuw
- s7XA==
-X-Gm-Message-State: AOJu0Yx7OFYM3wvtNY2sj3SitThE49EdTr5huJ+N/AFXMjZNDO3nhpYf
- +Wy2jlcDaIP+a3olwCmYPSu4m/Z0ujVba8C9VW+lDA==
-X-Google-Smtp-Source: AGHT+IEgtd9iLWSVvTusDhFxjsSFK8AyQZXdyV5JtUnFet8eYR5Uq+v5X5eVsTLBHVcheUxsFEz8Gw==
-X-Received: by 2002:ac2:5596:0:b0:50b:adb7:bad1 with SMTP id
- v22-20020ac25596000000b0050badb7bad1mr2948018lfg.11.1701090038621; 
- Mon, 27 Nov 2023 05:00:38 -0800 (PST)
+ bh=UVa+z8ZgfXxQSDWa2Nvtk/JjyLX2HbFM1q8u36pxb0w=;
+ b=FsjnGaMRPProCPd7r+vCaMc2J31lz4q25u2jANY1S+u++5kCTp3Rs8+NvzhNqW/b/T
+ dHWxuSQCKf/ndXKKUeqIuAwuB7BilOb2zbiwPvmyUi6LZVWDTYTQVlkjMHTj0rU0N6Ec
+ CGlzRwMqS0qCxcCznWkcfzlo7titJlWtdvjKWDGdmBWEpQQMSz0yfszrEi1+vvzqWYop
+ jcAmOqz+N2hzUsjjAxzvBXWOyWhy3MDnIraMWafR3HJ5xOi8UvGi92pjgb12yOqxGVIE
+ 4CswoG4Op27T/VNtIexz7rU+pxTRTFcHV8YL/gKlaprmHpS9bnLMsuAT7v37sf/wZ+cE
+ FIVQ==
+X-Gm-Message-State: AOJu0YzPFDGrTw2zSIVCxBpPN6pXyiaOqQgI1exn73yFBCuHpDrnoHTT
+ X/ROkWDMM5nMy6so6OAw9QW/2Ny0kiZJfGlHI8I3Ww==
+X-Google-Smtp-Source: AGHT+IGCIPzG0tPhvnWdj1q40gMOTl4kxrGRBJnQKUBNm/Q37rT/h749NHJ7x3mU6+qCofjrcY80KA==
+X-Received: by 2002:a19:7b02:0:b0:509:1067:c20d with SMTP id
+ w2-20020a197b02000000b005091067c20dmr6225742lfc.39.1701090040965; 
+ Mon, 27 Nov 2023 05:00:40 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.36
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:00:38 -0800 (PST)
+ Mon, 27 Nov 2023 05:00:40 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 13/43] net/lwip: replace original net commands with lwip
-Date: Mon, 27 Nov 2023 18:56:56 +0600
-Message-Id: <20231127125726.3735-14-maxim.uvarov@linaro.org>
+Subject: [PATHv11 14/43] net/lwip: split net.h to net.h, arp.h and eth.h
+Date: Mon, 27 Nov 2023 18:56:57 +0600
+Message-Id: <20231127125726.3735-15-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -92,406 +92,469 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace original commands: ping, tftp, dhcp and wget.
+current net.h has ethernet and protocol definitions. Protocol definitions
+overlap with lwIP protocol definitions and net.h can not be included from
+lwIP code. Splitting on logical blocks makes that work.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- boot/bootmeth_efi.c | 18 +++++++---
- boot/bootmeth_pxe.c | 21 ++++++-----
- cmd/net.c           | 86 +++++----------------------------------------
- cmd/pxe.c           | 19 +++++-----
- include/net.h       |  8 +++--
- include/net/ulwip.h | 67 +++++++++++++++++++++++++++++++++++
- 6 files changed, 116 insertions(+), 103 deletions(-)
- create mode 100644 include/net/ulwip.h
+ include/net.h     | 189 +-------------------------------------------
+ include/net/arp.h |   9 +++
+ include/net/eth.h | 194 ++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 207 insertions(+), 185 deletions(-)
+ create mode 100644 include/net/arp.h
+ create mode 100644 include/net/eth.h
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index ae936c8daa..52399d627c 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -20,6 +20,8 @@
- #include <mapmem.h>
- #include <mmc.h>
- #include <net.h>
-+#include <net/lwip.h>
-+#include <net/ulwip.h>
- #include <pxe_utils.h>
- #include <linux/sizes.h>
- 
-@@ -319,9 +321,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 
- static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- {
--	char file_addr[17], fname[256];
--	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
--	struct cmd_tbl cmdtp = {};	/* dummy */
-+	char fname[256];
- 	const char *addr_str, *fdt_addr_str;
- 	int ret, arch, size;
- 	ulong addr, fdt_addr;
-@@ -368,7 +368,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!fdt_addr_str)
- 		return log_msg_ret("fdt", -EINVAL);
- 	fdt_addr = hextoul(fdt_addr_str, NULL);
--	sprintf(file_addr, "%lx", fdt_addr);
- 
- 	/* We only allow the first prefix with PXE */
- 	ret = distro_efi_get_fdt_name(fname, sizeof(fname), 0);
-@@ -379,7 +378,16 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
- 	if (!bflow->fdt_fname)
- 		return log_msg_ret("fil", -ENOMEM);
- 
--	if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
-+	ret = ulwip_init();
-+	if (ret)
-+		return log_msg_ret("ulwip_init", ret);
-+
-+	ret = ulwip_tftp(fdt_addr, fname);
-+	if (ret)
-+		return log_msg_ret("ulwip_tftp", ret);
-+
-+	ret = ulwip_loop();
-+	if (!ret) {
- 		bflow->fdt_size = env_get_hex("filesize", 0);
- 		bflow->fdt_addr = fdt_addr;
- 	} else {
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 8d489a11aa..fc6aabaa18 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -21,6 +21,8 @@
- #include <mapmem.h>
- #include <mmc.h>
- #include <net.h>
-+#include <net/ulwip.h>
-+#include <net/lwip.h>
- #include <pxe_utils.h>
- 
- static int extlinux_pxe_getfile(struct pxe_context *ctx, const char *file_path,
-@@ -116,18 +118,21 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
- 				  const char *file_path, ulong addr,
- 				  ulong *sizep)
- {
--	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
--	struct pxe_context *ctx = dev_get_priv(dev);
--	char file_addr[17];
- 	ulong size;
- 	int ret;
- 
--	sprintf(file_addr, "%lx", addr);
--	tftp_argv[1] = file_addr;
--	tftp_argv[2] = (void *)file_path;
-+	ret = ulwip_init();
-+	if (ret)
-+		return log_msg_ret("ulwip_init", ret);
-+
-+	ret = ulwip_tftp(addr, file_path);
-+	if (ret)
-+		return log_msg_ret("ulwip_tftp", ret);
-+
-+	ret = ulwip_loop();
-+	if (ret)
-+		return log_msg_ret("ulwip_loop", ret);
- 
--	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
--		return -ENOENT;
- 	ret = pxe_get_file_size(&size);
- 	if (ret)
- 		return log_msg_ret("tftp", ret);
-diff --git a/cmd/net.c b/cmd/net.c
-index d407d8320a..dc5a114309 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -22,6 +22,7 @@
- #include <net/udp.h>
- #include <net/sntp.h>
- #include <net/ncsi.h>
-+#include <net/lwip.h>
- 
- static int netboot_common(enum proto_t, struct cmd_tbl *, int, char * const []);
- 
-@@ -40,19 +41,9 @@ U_BOOT_CMD(
- #endif
- 
- #ifdef CONFIG_CMD_TFTPBOOT
--int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	int ret;
--
--	bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
--	ret = netboot_common(TFTPGET, cmdtp, argc, argv);
--	bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
--	return ret;
--}
--
- #if IS_ENABLED(CONFIG_IPV6)
- U_BOOT_CMD(
--	tftpboot,	4,	1,	do_tftpb,
-+	tftpboot,	4,	1, do_lwip_tftp,
- 	"boot image via network using TFTP protocol\n"
- 	"To use IPv6 add -ipv6 parameter or use IPv6 hostIPaddr framed "
- 	"with [] brackets",
-@@ -60,7 +51,7 @@ U_BOOT_CMD(
- );
- #else
- U_BOOT_CMD(
--	tftpboot,	3,	1,	do_tftpb,
-+	tftpboot,	3,	1,  do_lwip_tftp,
- 	"load file via network using TFTP protocol",
- 	"[loadAddress] [[hostIPaddr:]bootfilename]"
- );
-@@ -139,7 +130,7 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
- static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
- {
--	return netboot_common(DHCP, cmdtp, argc, argv);
-+	return do_lwip_dhcp();
- }
- 
- U_BOOT_CMD(
-@@ -196,13 +187,11 @@ U_BOOT_CMD(
- #endif
- 
- #if defined(CONFIG_CMD_WGET)
--static int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
--{
--	return netboot_common(WGET, cmdtp, argc, argv);
--}
-+int do_lwip_wget(struct cmd_tbl *cmdtp, int flag, int argc,
-+		 char *const argv[]);
- 
- U_BOOT_CMD(
--	wget,   3,      1,      do_wget,
-+	wget,   3,      1, do_lwip_wget,
- 	"boot image via network using HTTP protocol",
- 	"[loadAddress] [[hostIPaddr:]path and image name]"
- );
-@@ -456,28 +445,8 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
- }
- 
- #if defined(CONFIG_CMD_PING)
--static int do_ping(struct cmd_tbl *cmdtp, int flag, int argc,
--		   char *const argv[])
--{
--	if (argc < 2)
--		return CMD_RET_USAGE;
--
--	net_ping_ip = string_to_ip(argv[1]);
--	if (net_ping_ip.s_addr == 0)
--		return CMD_RET_USAGE;
--
--	if (net_loop(PING) < 0) {
--		printf("ping failed; host %s is not alive\n", argv[1]);
--		return CMD_RET_FAILURE;
--	}
--
--	printf("host %s is alive\n", argv[1]);
--
--	return CMD_RET_SUCCESS;
--}
--
- U_BOOT_CMD(
--	ping,	2,	1,	do_ping,
-+	ping,	2,	1, do_lwip_ping,
- 	"send ICMP ECHO_REQUEST to network host",
- 	"pingAddress"
- );
-@@ -601,45 +570,8 @@ U_BOOT_CMD(
- #endif
- 
- #if defined(CONFIG_CMD_DNS)
--int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	if (argc == 1)
--		return CMD_RET_USAGE;
--
--	/*
--	 * We should check for a valid hostname:
--	 * - Each label must be between 1 and 63 characters long
--	 * - the entire hostname has a maximum of 255 characters
--	 * - only the ASCII letters 'a' through 'z' (case-insensitive),
--	 *   the digits '0' through '9', and the hyphen
--	 * - cannot begin or end with a hyphen
--	 * - no other symbols, punctuation characters, or blank spaces are
--	 *   permitted
--	 * but hey - this is a minimalist implmentation, so only check length
--	 * and let the name server deal with things.
--	 */
--	if (strlen(argv[1]) >= 255) {
--		printf("dns error: hostname too long\n");
--		return CMD_RET_FAILURE;
--	}
--
--	net_dns_resolve = argv[1];
--
--	if (argc == 3)
--		net_dns_env_var = argv[2];
--	else
--		net_dns_env_var = NULL;
--
--	if (net_loop(DNS) < 0) {
--		printf("dns lookup of %s failed, check setup\n", argv[1]);
--		return CMD_RET_FAILURE;
--	}
--
--	return CMD_RET_SUCCESS;
--}
--
- U_BOOT_CMD(
--	dns,	3,	1,	do_dns,
-+	dns,	3,	1,	do_lwip_dns,
- 	"lookup the IP of a hostname",
- 	"hostname [envvar]"
- );
-diff --git a/cmd/pxe.c b/cmd/pxe.c
-index 21134eb7a3..8145fbab64 100644
---- a/cmd/pxe.c
-+++ b/cmd/pxe.c
-@@ -8,6 +8,7 @@
- #include <command.h>
- #include <fs.h>
- #include <net.h>
-+#include <net/lwip.h>
- #include <net6.h>
- #include <malloc.h>
- 
-@@ -29,21 +30,19 @@ const char *pxe_default_paths[] = {
- static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
- 		       char *file_addr, ulong *sizep)
- {
--	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
-+	ulong addr;
-+	char *end;
- 	int ret;
--	int num_args;
- 
--	tftp_argv[1] = file_addr;
--	tftp_argv[2] = (void *)file_path;
-+	addr = hextoul(file_addr, &end);
-+
- 	if (ctx->use_ipv6) {
--		tftp_argv[3] = USE_IP6_CMD_PARAM;
--		num_args = 4;
--	} else {
--		num_args = 3;
-+		/* @todo: check and fix me, here */
- 	}
- 
--	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
--		return -ENOENT;
-+	ret = ulwip_tftp(addr, file_path);
-+	if (ret)
-+		return log_msg_ret("tftp", ret);
- 
- 	ret = pxe_get_file_size(sizep);
- 	if (ret)
 diff --git a/include/net.h b/include/net.h
-index e63a946002..ed15064fc1 100644
+index ed15064fc1..8efc4d7f3e 100644
 --- a/include/net.h
 +++ b/include/net.h
-@@ -56,8 +56,10 @@ struct in_addr {
+@@ -21,6 +21,7 @@
+ #include <time.h>
+ #include <linux/if_ether.h>
+ #include <rand.h>
++#include  <net/arp.h>
+ 
+ struct bd_info;
+ struct cmd_tbl;
+@@ -32,25 +33,6 @@ struct udevice;
+ #define DEBUG_INT_STATE 0	/* Internal network state changes */
+ #define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
+ 
+-/*
+- *	The number of receive packet buffers, and the required packet buffer
+- *	alignment in memory.
+- *
+- */
+-#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
+-#define PKTALIGN	ARCH_DMA_MINALIGN
+-
+-/* Number of packets processed together */
+-#define ETH_PACKETS_BATCH_RECV	32
+-
+-/* ARP hardware address length */
+-#define ARP_HLEN 6
+-/*
+- * The size of a MAC address in string form, each digit requires two chars
+- * and five separator characters to form '00:00:00:00:00:00'.
+- */
+-#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
+-
+ /* IPv4 addresses are always 32 bits in size */
+ struct in_addr {
  	__be32 s_addr;
- };
- 
-+int do_lwip_dhcp(void);
-+
- /**
-- * do_tftpb - Run the tftpboot command
-+ * do_lwip_tftp - Run the tftpboot command
-  *
-  * @cmdtp: Command information for tftpboot
-  * @flag: Command flags (CMD_FLAG_...)
-@@ -65,7 +67,7 @@ struct in_addr {
-  * @argv: List of arguments
-  * Return: result (see enum command_ret_t)
+@@ -114,150 +96,7 @@ typedef void rxhand_icmp_f(unsigned type, unsigned code, unsigned dport,
   */
--int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_lwip_tftp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ typedef void	thand_f(void);
  
- /**
-  * dhcp_run() - Run DHCP on the current ethernet device
-@@ -516,7 +518,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
- enum proto_t {
- 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
- 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
--	WOL, UDP, NCSI, WGET, RS
-+	WOL, UDP, NCSI, WGET, RS, LWIP
- };
+-enum eth_state_t {
+-	ETH_STATE_INIT,
+-	ETH_STATE_PASSIVE,
+-	ETH_STATE_ACTIVE
+-};
+-
+-/**
+- * struct eth_pdata - Platform data for Ethernet MAC controllers
+- *
+- * @iobase: The base address of the hardware registers
+- * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
+- * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
+- * @max_speed: Maximum speed of Ethernet connection supported by MAC
+- * @priv_pdata: device specific plat
+- */
+-struct eth_pdata {
+-	phys_addr_t iobase;
+-	unsigned char enetaddr[ARP_HLEN];
+-	int phy_interface;
+-	int max_speed;
+-	void *priv_pdata;
+-};
+-
+-enum eth_recv_flags {
+-	/*
+-	 * Check hardware device for new packets (otherwise only return those
+-	 * which are already in the memory buffer ready to process)
+-	 */
+-	ETH_RECV_CHECK_DEVICE		= 1 << 0,
+-};
+-
+-/**
+- * struct eth_ops - functions of Ethernet MAC controllers
+- *
+- * start: Prepare the hardware to send and receive packets
+- * send: Send the bytes passed in "packet" as a packet on the wire
+- * recv: Check if the hardware received a packet. If so, set the pointer to the
+- *	 packet buffer in the packetp parameter. If not, return an error or 0 to
+- *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
+- *	 network stack will not process the empty packet, but free_pkt() will be
+- *	 called if supplied
+- * free_pkt: Give the driver an opportunity to manage its packet buffer memory
+- *	     when the network stack is finished processing it. This will only be
+- *	     called when no error was returned from recv - optional
+- * stop: Stop the hardware from looking for packets - may be called even if
+- *	 state == PASSIVE
+- * mcast: Join or leave a multicast group (for TFTP) - optional
+- * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
+- *		 on some platforms like ARM). This function expects the
+- *		 eth_pdata::enetaddr field to be populated. The method can
+- *		 return -ENOSYS to indicate that this is not implemented for
+-		 this hardware - optional.
+- * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
+- *		    ROM on the board. This is how the driver should expose it
+- *		    to the network stack. This function should fill in the
+- *		    eth_pdata::enetaddr field - optional
+- * set_promisc: Enable or Disable promiscuous mode
+- * get_sset_count: Number of statistics counters
+- * get_string: Names of the statistic counters
+- * get_stats: The values of the statistic counters
+- */
+-struct eth_ops {
+-	int (*start)(struct udevice *dev);
+-	int (*send)(struct udevice *dev, void *packet, int length);
+-	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
+-	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
+-	void (*stop)(struct udevice *dev);
+-	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
+-	int (*write_hwaddr)(struct udevice *dev);
+-	int (*read_rom_hwaddr)(struct udevice *dev);
+-	int (*set_promisc)(struct udevice *dev, bool enable);
+-	int (*get_sset_count)(struct udevice *dev);
+-	void (*get_strings)(struct udevice *dev, u8 *data);
+-	void (*get_stats)(struct udevice *dev, u64 *data);
+-};
+-
+-#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
+-
+-struct udevice *eth_get_dev(void); /* get the current device */
+-/*
+- * The devname can be either an exact name given by the driver or device tree
+- * or it can be an alias of the form "eth%d"
+- */
+-struct udevice *eth_get_dev_by_name(const char *devname);
+-unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
+-
+-/* Used only when NetConsole is enabled */
+-int eth_is_active(struct udevice *dev); /* Test device for active state */
+-int eth_init_state_only(void); /* Set active state */
+-void eth_halt_state_only(void); /* Set passive state */
+-
+-int eth_initialize(void);		/* Initialize network subsystem */
+-void eth_try_another(int first_restart);	/* Change the device */
+-void eth_set_current(void);		/* set nterface to ethcur var */
+-
+-int eth_get_dev_index(void);		/* get the device index */
+-
+-/**
+- * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
+- *
+- * This sets up an environment variable with the given MAC address (@enetaddr).
+- * The environment variable to be set is defined by <@base_name><@index>addr.
+- * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
+- * eth1addr, etc.
+- *
+- * @base_name:  Base name for variable, typically "eth"
+- * @index:      Index of interface being updated (>=0)
+- * @enetaddr:   Pointer to MAC address to put into the variable
+- * Return: 0 if OK, other value on error
+- */
+-int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+-				 uchar *enetaddr);
+-
+-
+-/*
+- * Initialize USB ethernet device with CONFIG_DM_ETH
+- * Returns:
+- *	0 is success, non-zero is error status.
+- */
+-int usb_ether_init(void);
+-
+-/*
+- * Get the hardware address for an ethernet interface .
+- * Args:
+- *	base_name - base name for device (normally "eth")
+- *	index - device index number (0 for first)
+- *	enetaddr - returns 6 byte hardware address
+- * Returns:
+- *	Return true if the address is valid.
+- */
+-int eth_env_get_enetaddr_by_index(const char *base_name, int index,
+-				 uchar *enetaddr);
+-
+-int eth_init(void);			/* Initialize the device */
+-int eth_send(void *packet, int length);	   /* Send a packet */
+-
+-#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
+-int eth_receive(void *packet, int length); /* Receive a packet*/
+-extern void (*push_packet)(void *packet, int length);
+-#endif
+-int eth_rx(void);			/* Check for received packets */
+-void eth_halt(void);			/* stop SCC */
+-const char *eth_get_name(void);		/* get name of current device */
+-int eth_mcast_join(struct in_addr mcast_addr, int join);
++#include <net/eth.h>
  
- extern char	net_boot_file_name[1024];/* Boot File name */
-diff --git a/include/net/ulwip.h b/include/net/ulwip.h
+ /**********************************************************************/
+ /*
+@@ -497,16 +336,6 @@ extern char	net_root_path[CONFIG_BOOTP_MAX_ROOT_PATH_LEN];	/* Our root path */
+ /* Indicates whether the pxe path prefix / config file was specified in dhcp option */
+ extern char *pxelinux_configfile;
+ /** END OF BOOTP EXTENTIONS **/
+-extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
+-extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
+-extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
+-extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
+-extern uchar		*net_tx_packet;		/* THE transmit packet */
+-extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
+-extern uchar		*net_rx_packet;		/* Current receive packet */
+-extern int		net_rx_packet_len;	/* Current rx packet length */
+-extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
+-extern const u8		net_null_ethaddr[ARP_HLEN];
+ 
+ #define VLAN_NONE	4095			/* untagged */
+ #define VLAN_IDMASK	0x0fff			/* mask of valid vlan id */
+@@ -559,6 +388,8 @@ extern struct in_addr	net_ntp_server;		/* the ip address to NTP */
+ extern int net_ntp_time_offset;			/* offset time from UTC */
+ #endif
+ 
++int eth_mcast_join(struct in_addr mcast_addr, int join);
++
+ /* Initialize the network adapter */
+ int net_init(void);
+ int net_loop(enum proto_t);
+@@ -831,18 +662,6 @@ static inline void net_random_ethaddr(uchar *addr)
+ 	addr[0] |= 0x02;	/* set local assignment bit (IEEE802) */
+ }
+ 
+-/**
+- * string_to_enetaddr() - Parse a MAC address
+- *
+- * Convert a string MAC address
+- *
+- * Implemented in lib/net_utils.c (built unconditionally)
+- *
+- * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
+- *	hex value
+- * @enetaddr: Place to put MAC address (6 bytes)
+- */
+-void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
+ 
+ /* Convert an IP address to a string */
+ void ip_to_string(struct in_addr x, char *s);
+diff --git a/include/net/arp.h b/include/net/arp.h
 new file mode 100644
-index 0000000000..1747da8480
+index 0000000000..cbdc948e64
 --- /dev/null
-+++ b/include/net/ulwip.h
-@@ -0,0 +1,67 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
++++ b/include/net/arp.h
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* ARP hardware address length */
++#define ARP_HLEN 6
++/*
++ * The size of a MAC address in string form, each digit requires two chars
++ * and five separator characters to form '00:00:00:00:00:00'.
++ */
++#define ARP_HLEN_ASCII (ARP_HLEN * 2) + (ARP_HLEN - 1)
+diff --git a/include/net/eth.h b/include/net/eth.h
+new file mode 100644
+index 0000000000..d8ffdff2c0
+--- /dev/null
++++ b/include/net/eth.h
+@@ -0,0 +1,194 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#include <net/arp.h>
++
++struct udevice;
++
++enum eth_state_t {
++	ETH_STATE_INIT,
++	ETH_STATE_PASSIVE,
++	ETH_STATE_ACTIVE
++};
 +
 +/**
-+ * ulwip_init() - initialize lwIP network stack
++ * struct eth_pdata - Platform data for Ethernet MAC controllers
 + *
-+ * @return 0 if success, !0 if error
++ * @iobase: The base address of the hardware registers
++ * @enetaddr: The Ethernet MAC address that is loaded from EEPROM or env
++ * @phy_interface: PHY interface to use - see PHY_INTERFACE_MODE_...
++ * @max_speed: Maximum speed of Ethernet connection supported by MAC
++ * @priv_pdata: device specific plat
 + */
-+int ulwip_init(void);
++struct eth_pdata {
++	phys_addr_t iobase;
++	unsigned char enetaddr[ARP_HLEN];
++	int phy_interface;
++	int max_speed;
++	void *priv_pdata;
++};
++
++enum eth_recv_flags {
++	/*
++	 * Check hardware device for new packets (otherwise only return those
++	 * which are already in the memory buffer ready to process)
++	 */
++	ETH_RECV_CHECK_DEVICE		= 1 << 0,
++};
 +
 +/**
-+ * ulwip_active() - check if lwIP network stack was initialized
++ * struct eth_ops - functions of Ethernet MAC controllers
 + *
-+ * @return 1 lwip processing, 0 if not
++ * start: Prepare the hardware to send and receive packets
++ * send: Send the bytes passed in "packet" as a packet on the wire
++ * recv: Check if the hardware received a packet. If so, set the pointer to the
++ *	 packet buffer in the packetp parameter. If not, return an error or 0 to
++ *	 indicate that the hardware receive FIFO is empty. If 0 is returned, the
++ *	 network stack will not process the empty packet, but free_pkt() will be
++ *	 called if supplied
++ * free_pkt: Give the driver an opportunity to manage its packet buffer memory
++ *	     when the network stack is finished processing it. This will only be
++ *	     called when no error was returned from recv - optional
++ * stop: Stop the hardware from looking for packets - may be called even if
++ *	 state == PASSIVE
++ * mcast: Join or leave a multicast group (for TFTP) - optional
++ * write_hwaddr: Write a MAC address to the hardware (used to pass it to Linux
++ *		 on some platforms like ARM). This function expects the
++ *		 eth_pdata::enetaddr field to be populated. The method can
++ *		 return -ENOSYS to indicate that this is not implemented for
++		 this hardware - optional.
++ * read_rom_hwaddr: Some devices have a backup of the MAC address stored in a
++ *		    ROM on the board. This is how the driver should expose it
++ *		    to the network stack. This function should fill in the
++ *		    eth_pdata::enetaddr field - optional
++ * set_promisc: Enable or Disable promiscuous mode
++ * get_sset_count: Number of statistics counters
++ * get_string: Names of the statistic counters
++ * get_stats: The values of the statistic counters
 + */
-+int ulwip_active(void);
++struct eth_ops {
++	int (*start)(struct udevice *dev);
++	int (*send)(struct udevice *dev, void *packet, int length);
++	int (*recv)(struct udevice *dev, int flags, uchar **packetp);
++	int (*free_pkt)(struct udevice *dev, uchar *packet, int length);
++	void (*stop)(struct udevice *dev);
++	int (*mcast)(struct udevice *dev, const u8 *enetaddr, int join);
++	int (*write_hwaddr)(struct udevice *dev);
++	int (*read_rom_hwaddr)(struct udevice *dev);
++	int (*set_promisc)(struct udevice *dev, bool enable);
++	int (*get_sset_count)(struct udevice *dev);
++	void (*get_strings)(struct udevice *dev, u8 *data);
++	void (*get_stats)(struct udevice *dev, u64 *data);
++};
++
++#define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
++
++struct udevice *eth_get_dev(void); /* get the current device */
++/*
++ * The devname can be either an exact name given by the driver or device tree
++ * or it can be an alias of the form "eth%d"
++ */
++struct udevice *eth_get_dev_by_name(const char *devname);
++unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
++
++/* Used only when NetConsole is enabled */
++int eth_is_active(struct udevice *dev); /* Test device for active state */
++int eth_init_state_only(void); /* Set active state */
++void eth_halt_state_only(void); /* Set passive state */
++
++int eth_initialize(void);		/* Initialize network subsystem */
++void eth_try_another(int first_restart);	/* Change the device */
++void eth_set_current(void);		/* set nterface to ethcur var */
++
++int eth_get_dev_index(void);		/* get the device index */
 +
 +/**
-+ * ulwip_in_loop() - lwIP controls packet net loop
++ * eth_env_set_enetaddr_by_index() - set the MAC address environment variable
 + *
-+ * @return 1 lwIP owns packet loop, 0 lwip does not own packet loop
++ * This sets up an environment variable with the given MAC address (@enetaddr).
++ * The environment variable to be set is defined by <@base_name><@index>addr.
++ * If @index is 0 it is omitted. For common Ethernet this means ethaddr,
++ * eth1addr, etc.
++ *
++ * @base_name:  Base name for variable, typically "eth"
++ * @index:      Index of interface being updated (>=0)
++ * @enetaddr:   Pointer to MAC address to put into the variable
++ * Return: 0 if OK, other value on error
 + */
-+int ulwip_in_loop(void);
++int eth_env_set_enetaddr_by_index(const char *base_name, int index,
++				  uchar *enetaddr);
++
++/*
++ * Initialize USB ethernet device with CONFIG_DM_ETH
++ * Returns:
++ *	0 is success, non-zero is error status.
++ */
++int usb_ether_init(void);
++
++/*
++ * Get the hardware address for an ethernet interface .
++ * Args:
++ *	base_name - base name for device (normally "eth")
++ *	index - device index number (0 for first)
++ *	enetaddr - returns 6 byte hardware address
++ * Returns:
++ *	Return true if the address is valid.
++ */
++int eth_env_get_enetaddr_by_index(const char *base_name, int index,
++				  uchar *enetaddr);
++
++void eth_init_rings(void);	/* Initialize rings */
++int eth_init(void);			/* Initialize the device */
++int eth_send(void *packet, int length);	   /* Send a packet */
++
++#if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
++int eth_receive(void *packet, int length); /* Receive a packet*/
++extern void (*push_packet)(void *packet, int length);
++#endif
++int eth_rx(void);			/* Check for received packets */
++void eth_halt(void);			/* stop SCC */
++const char *eth_get_name(void);		/* get name of current device */
++
++/*
++ *	The number of receive packet buffers, and the required packet buffer
++ *	alignment in memory.
++ *
++ */
++#define PKTBUFSRX	CONFIG_SYS_RX_ETH_BUFFER
++#define PKTALIGN	ARCH_DMA_MINALIGN
++
++/* Number of packets processed together */
++#define ETH_PACKETS_BATCH_RECV	32
++
++extern u8		net_ethaddr[ARP_HLEN];		/* Our ethernet address */
++extern u8		net_server_ethaddr[ARP_HLEN];	/* Boot server enet address */
++extern struct in_addr	net_ip;		/* Our    IP addr (0 = unknown) */
++extern struct in_addr	net_server_ip;	/* Server IP addr (0 = unknown) */
++extern uchar		*net_tx_packet;		/* THE transmit packet */
++extern uchar		*net_rx_packets[PKTBUFSRX]; /* Receive packets */
++extern uchar		*net_rx_packet;		/* Current receive packet */
++extern int		net_rx_packet_len;	/* Current rx packet length */
++extern const u8		net_bcast_ethaddr[ARP_HLEN];	/* Ethernet broadcast address */
++extern const u8		net_null_ethaddr[ARP_HLEN];
 +
 +/**
-+ * ulwip_loop_set() - make loop to be used by lwIP
++ * string_to_enetaddr() - Parse a MAC address
 + *
-+ * Function is used to make lwIP control network pool.
++ * Convert a string MAC address
 + *
-+ * @loop: 1. Rx packets go to lwIP 2. Rx packets go to the original stack.
++ * Implemented in lib/net_utils.c (built unconditionally)
++ *
++ * @addr: MAC address in aa:bb:cc:dd:ee:ff format, where each part is a 2-digit
++ *	hex value
++ * @enetaddr: Place to put MAC address (6 bytes)
 + */
-+void ulwip_loop_set(int loop);
++void string_to_enetaddr(const char *addr, uint8_t *enetaddr);
 +
-+/**
-+ * ulwip_exit() - exit from lwIP with a return code
-+ *
-+ * Exit from lwIP application back to the U-Boot with specific error code.
-+ *
-+ * @err: Error code to return
-+ */
-+void ulwip_exit(int err);
++typedef struct ulwip {
++	bool loop; /* spin in lwip loop */
++	bool active; /* active lwip app processing*/
++	int err;
++	bool init_done;
 +
-+/**
-+ * ulwip_poll() - polling function to feed lwIP with ethernet packet
-+ *
-+ * Function takes network packet and passes it to lwIP network stack
-+ *
-+ * @in_packet:  Pointer to the network packet data
-+ * @len: Length of the network packet
-+ */
-+void ulwip_poll(uchar *in_packet, int len);
++} ulwip;
 +
-+/**
-+ * ulwip_app_get_err() - return error code from lwIP application
-+ *
-+ * @return error code
-+ */
-+int ulwip_app_get_err(void);
-+
-+/**
-+ * ulwip_loop() - enter to packet polling loop
-+ *
-+ * When lwIP application did it's initialization stage, then it needs to enter
-+ * to packet polling loop to grab rx packets.
-+ *
-+ * Returns:  0 if success, !0 if error
-+ */
-+int ulwip_loop(void);
++struct ulwip *eth_lwip_priv(struct udevice *current);
 -- 
 2.30.2
 
