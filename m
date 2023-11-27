@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7E9C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:05:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7196FC07CB1
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:05:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 341F58770A;
-	Mon, 27 Nov 2023 14:01:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 94645876D7;
+	Mon, 27 Nov 2023 14:01:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="joBekW7w";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WcihVUXQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1B93876D7; Mon, 27 Nov 2023 14:01:00 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 29D8C87633; Mon, 27 Nov 2023 14:01:04 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC4E087634
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A17C876D7
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50970c2115eso5645873e87.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:58 -0800 (PST)
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-507c5249d55so6338709e87.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090058; x=1701694858; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090060; x=1701694860; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=joBekW7wre4X2ODfdVkmVK88Qob7OLfRImlmLvoleDMhvElX2eBIPKsCxqJDwNvhM3
- FxMLSOT+3H8Nqt56BF5e4NWJwFqF6HCyRDMF3lWHKIz8bf95Zexi9s8dBcqTtN83QIHd
- cVtJX7UWlU5FB3BxARd7VgZiyag7wE4rQ0O8n5Zjm5I8ZtVN5blO1Bg3QYTyfjo7icQD
- OY1Ihe68BRMRDu1nTwI9Y96PRXItcRUdHDKcsnqmcyOcEAZzx6MX74ZWOwHQ5FNSAwuu
- iszoiJ32CttfXdcu2gsMm5ITk5Epz6A8+07zzGzS9Wqv5Pwcnm3OjAd+gUP8wnceuQyS
- sOug==
+ bh=7/ApHZZokfYNAhQkIrUJHXefSMXsGfI8Z1dkA9PV0nk=;
+ b=WcihVUXQ7Mqev/v3gs8epfn9cZ4qs94uSKdL8zCFgPYYlySrI5mH0spM3exr2kVu50
+ Djie+4k0yaZSlVsNC0CDp/TCCvGtGc0eWEFKyUeNcqLMp5uzezYXTfEtFBY1iHWxsfyC
+ 8GXiB/MB4omEJM150sSmXJigofThoiCAQ31aOoK5/x0mUvLD2/m5VaIPgAW/RhyPfunK
+ ZnecpSOAi0hs31zO9Px7Vzv4wU4UrnHnojdTeUnHSgQ+qLhBj/RHsaNdCjIQnFjS3nd6
+ MD7vtcZJlx9qdAq5HE2SdW5XnutO++9QiXEr8LStrICdErjK6gUGK5VNu2/QVYIOcczV
+ O9Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090058; x=1701694858;
+ d=1e100.net; s=20230601; t=1701090060; x=1701694860;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=nDhA/4Eq7Z8rtl1cUGzbIympSIZs1hJVeirc/2/tvEycAcrh9j30TBDFoE0FgpNygc
- l+GAeoiAbW1JNMODYU2SlzigvgQ7ToKS49PcQXDZi7ru9ntZfSZ674yAUYn5r5fn9JnK
- keGXxNf92rn97kRkqzXAhJiQya1cvh+VkjaEg3+CgKD+FSeQpXSh7apHGp4dW2rFH1u6
- LUlKHwLO5Qbt7cK/XOTMZXs+wkd7dQB92dm+eh9gj7joMlpaRHqagssBlkcJ7Xt2FYu2
- T/G6zqn+tuoxW0X4xPfUDNL8MBX71d+D5PXzcQsYsziBWRJcsgM3G2ppNkz25/5fw+hF
- z+Eg==
-X-Gm-Message-State: AOJu0YwoiD5aBwvgxZ3wA1g5kMLG60q/UvqVjEFH4hKTgW9ZwsT8T7V+
- ZnomAimzRPJ/BcOmrrkOhicZgoMNYOvSR2+vO8g3Dw==
-X-Google-Smtp-Source: AGHT+IFO/xLprvMx/c+Xnaysyla7Az9gE7OrikWrAxCNMQqahySdSuY5nXcZv5GHQdFn39D3o1Dcwg==
-X-Received: by 2002:a05:6512:923:b0:50a:71e1:e1c9 with SMTP id
- f3-20020a056512092300b0050a71e1e1c9mr5745992lft.42.1701090057984; 
- Mon, 27 Nov 2023 05:00:57 -0800 (PST)
+ bh=7/ApHZZokfYNAhQkIrUJHXefSMXsGfI8Z1dkA9PV0nk=;
+ b=UxTfEjxijRFEuNtLax6lpsfrDp1A5D+PtYf+A1B4LIG2Ln+o3wfBsKs2CaBm38BrWz
+ /HrHj2K5/B8PyiCTyPFE/bKlduJyYkzEp6JULm3YwWfJS+pifGyWd0+JEYOyxkWGk8an
+ weQHofwHfoegVP0MUIPoMKa2Zg1JtnfEaEjohy58TclKIkr6YrnGsksc14RGWLzsNTfU
+ 03TTR7a6FiMEgJvhdi7yr71+YxM5tdEQ9lww+m9rvcVM0y0wetddtNA0Hi4F0R9QeHjo
+ lYQCtIVAi2GhoVGAgOvCc5srBPbq7bBGzUDIqsSCdYHXktJ657GdTAwqwZ/mTpAWsNqk
+ 8gmw==
+X-Gm-Message-State: AOJu0YylLy58bFxZBPOpu3COjyXJF1kTONX8KvQoAaT/Flb0b6vTxvuB
+ ZASY+7EE6Nksi9ku6wPq05xg26l5Lk/zX6LF3x+mOQ==
+X-Google-Smtp-Source: AGHT+IHGa1gFNSuudBcyl7mzaQEGgiIfYHl0DrsZzPqNDoGp3v9/gjLywqHI9rHMa3y5uQseGL2c5Q==
+X-Received: by 2002:a05:6512:909:b0:50a:aa80:546e with SMTP id
+ e9-20020a056512090900b0050aaa80546emr7117109lft.59.1701090060204; 
+ Mon, 27 Nov 2023 05:01:00 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.55
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:00:57 -0800 (PST)
+ Mon, 27 Nov 2023 05:00:59 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 21/43] mach-socfpga: do not overlap defines with lwip
-Date: Mon, 27 Nov 2023 18:57:04 +0600
-Message-Id: <20231127125726.3735-22-maxim.uvarov@linaro.org>
+Subject: [PATHv11 22/43] bcm_ns3: fix overlap define with lwip
+Date: Mon, 27 Nov 2023 18:57:05 +0600
+Message-Id: <20231127125726.3735-23-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -92,51 +92,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix compilation issue with overlapping lwip and march defines.
+Rename declaration to not overlap with lwip.
+
+aarch64:  +   bcm_ns3
++In file included from net/lwip/lwip-external/src/include/lwip/etharp.h:53,
++                 from net/lwip/lwip-external/src/core/init.c:55:
++net/lwip/lwip-external/src/include/lwip/prot/ethernet.h:69:
+		  error: "ETH_ADDR" redefined [-Werror]
++   69 | #define ETH_ADDR(b0, b1, b2, b3, b4, b5) {{b0, b1, b2, b3, b4, b5}}
++      |
++In file included from include/config.h:3,
++                 from arch/arm/include/asm/string.h:4,
++                 from include/linux/string.h:21,
++                 from include/malloc.h:369,
++                 from include/stdlib.h:9,
++                 from net/lwip/lwip-external/src/include/lwip/arch.h:83,
++                 from net/lwip/lwip-external/src/include/lwip/debug.h:40,
++                 from net/lwip/lwipopts.h:93,
++                 from net/lwip/lwip-external/src/include/lwip/opt.h:51,
++                 from net/lwip/lwip-external/src/core/init.c:38:
++include/configs/bcm_ns3.h:52: note: this is the location of the previous definition
++   52 | #define ETH_ADDR
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
- arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
- 2 files changed, 9 insertions(+), 6 deletions(-)
+ include/configs/bcm_ns3.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-index 902fc6bfb5..9b85e5865b 100644
---- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-@@ -78,12 +78,6 @@
+diff --git a/include/configs/bcm_ns3.h b/include/configs/bcm_ns3.h
+index 47de4bc201..7c6e0725a6 100644
+--- a/include/configs/bcm_ns3.h
++++ b/include/configs/bcm_ns3.h
+@@ -45,11 +45,11 @@
+ #define PCIE_ARGS "pcie_args=pci=pcie_bus_safe pcie_ports=native vfio_pci.disable_idle_d3=1\0"
  
- #ifndef __ASSEMBLY__
- #include <asm/types.h>
--enum endianness {
--	LITTLE_ENDIAN = 0,
--	BIG_ENDIAN,
--	UNKNOWN_ENDIANNESS
--};
--
- int socfpga_get_handoff_size(void *handoff_address);
- int socfpga_handoff_read(void *handoff_address, void *table, u32 table_len);
+ #ifdef CONFIG_BCM_SF2_ETH
+-#define ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
++#define BCM_ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
+ #define NET_ARGS "bgmac_platform.ethaddr=${ethaddr} " \
+ 	"ip=${ipaddr}::${gatewayip}:${netmask}::${ethif}:off"
+ #else
+-#define ETH_ADDR
++#define BMC_ETH_ADDR
+ #define NET_ARGS
  #endif
-diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-index e7cb5ea89c..df0701ec85 100644
---- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-+++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-@@ -10,6 +10,15 @@
- #include <errno.h>
- #include "log.h"
  
-+#ifndef __ASSEMBLY__
-+#include <asm/types.h>
-+enum endianness {
-+	LITTLE_ENDIAN = 0,
-+	BIG_ENDIAN,
-+	UNKNOWN_ENDIANNESS
-+};
-+#endif
-+
- static enum endianness check_endianness(u32 handoff)
- {
- 	switch (handoff) {
+@@ -749,7 +749,7 @@
+ 	OS_LOG_LEVEL \
+ 	EXTRA_ARGS \
+ 	PCIE_ARGS \
+-	ETH_ADDR \
++	BMC_ETH_ADDR \
+ 	RESERVED_MEM \
+ 	SETBOOTARGS \
+ 	UPDATEME_FLASH_PARAMS \
 -- 
 2.30.2
 
