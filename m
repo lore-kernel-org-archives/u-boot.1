@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22AAC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE68C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:11:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CCF58773A;
+	by phobos.denx.de (Postfix) with ESMTP id C86EA8776E;
 	Mon, 27 Nov 2023 18:11:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bVxn3WMb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BDDol430";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 124BA87547; Mon, 27 Nov 2023 18:11:10 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 45D9687622; Mon, 27 Nov 2023 18:11:10 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E85187655
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:11:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5696D87788
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:11:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-332e40315bdso2805798f8f.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:11:06 -0800 (PST)
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-332ce50450dso2961822f8f.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:11:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701105065; x=1701709865; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701105067; x=1701709867; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wNRQg0s3PMAlvStfqc3rfrJhX2ihiUrWDGcFjnnfTfI=;
- b=bVxn3WMb+D+pWEvkWlWg21CG3E5RB8PsmC3YXrABl+xnbIm/WgPbQmj1Zr8waWi3xi
- Se9sa05WNBNK39r8Nq0e78tcWDQc89nNjkL+3ShYshXaNGu5I9mGtnYJ7dCgtmOPcgNS
- GyxLQVoH/TSuXXBQVzDN0dMcVR7M/6/w/seOPQp3InuKIjWJj7DedJlVBOImbaoaXteh
- Kfv7YYiHCwE3iY93KQP39GTtxr7onnE+PNTYBuBkh5EcEG54pKbTmIVa6ZsUAeyU8Yu/
- mWWLbZAPhnwh6J0a9Xnr8Inu5bekWK5se7bG7Szuk/h+k3Gi/xyjr9dMUR3wTr7FAw20
- H0JQ==
+ bh=grbWp2e5qMUgRarI/QxZWeiSGb4MaeGSZurZeYxV9CM=;
+ b=BDDol430aTw//7RbT5Y3lQvYkpHvFdlZUsRjBuGGh+hLkHpMNTp+k8AwKIq1+1o4rE
+ qvCtWjgSmFUb4/NpY+ifMzhP64IDyAEkAYw+qUCELxcLgP3hnoXbdcTY//w9p3sZ992C
+ oqKE0WDjlF9IOJM6+Ltp3gotCNLgsLt2zTRJel+4yaGyG3KCVs5zSb/06PqwfCOvie8k
+ 33rkcB/8M5gouyVcItKBBHVNstpDvlWmG4xMa7dKbZL7D8yT8ZD/l97rEk/vJk75KfsR
+ 7PO44JZV/Meolcp02P1/HXAXA13diB9gvP2lWhCT6RyQQZNhwFZvrrITo1d/XIhbiXGN
+ vVFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701105065; x=1701709865;
+ d=1e100.net; s=20230601; t=1701105067; x=1701709867;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wNRQg0s3PMAlvStfqc3rfrJhX2ihiUrWDGcFjnnfTfI=;
- b=egxgA2CQWQOeaNpiS+MbJ1AQmw8nTJ7mRsY7u4Ivpu+8pCEGYPZt+FVuvO73XsWuBB
- GDCtCBfficTBdHt+AlFLCvgOOOJ8hjqEePp8sQyDprI8oF1+UEBcKqagidHz59sp04OR
- nV/PfVW8UiDWqqr095AHJd/YIf2oPETm1dSBfNcWytUTF5EtgV0uZJbjEcMGLdFfD2fr
- yfHf6ojSrrSeFvF1jD2Mx8nm4zyD0WS0VUkUHEZhk8w4kjWqgKq+KKnBMMEL2y1i0hqY
- sckntTlOlMGpbJvKgwFtPTntWutLYyLEgEhamE0d6wkWH1H+0jTia8lL62UZjgct4wyH
- xZxg==
-X-Gm-Message-State: AOJu0YwcXG+jFAY9QH49uAKj7ByrdIS8PSOkJAbB71dG6FWh/IrYIIgg
- g0BFvOmCe1v407SyLTjhirDzLg==
-X-Google-Smtp-Source: AGHT+IG9ll5ox2kyqn3SaCcD8+W+9YigLXGUsosrXl7HCCZQr1i5SeUtg0fUZ7f0HsSpPvoP41ethA==
-X-Received: by 2002:a5d:49c7:0:b0:332:d4a6:1143 with SMTP id
- t7-20020a5d49c7000000b00332d4a61143mr8969855wrs.7.1701105065182; 
- Mon, 27 Nov 2023 09:11:05 -0800 (PST)
+ bh=grbWp2e5qMUgRarI/QxZWeiSGb4MaeGSZurZeYxV9CM=;
+ b=VANnvUMABc5TP+IaqLvfQdjbrSjPmFvvHfIc2Qu7wEw0S++xstUj+mDEh6K5DziYWw
+ 4pcHPDOEqXGUUUpF1doo1c5ooJj5DLNr5DNI4gh80syhlyqzV4V4V4oKDnhhhITy12zX
+ NFVf0MqhSKXa78aAjYPptPYC90KbSg5F85nIUTiYXd3X2LytDzz2R/xHEsUeVUqPQF/l
+ QGN7bxuG66NGxf5CnVVEEMI8cmnM6A/IaSIz1wfTBCmt5cC8HNhHNh/px56aMemxgeUK
+ 2TXq6incVHmhldDXKT2R45M/2bKtEaJ8mF1o1N3/EtB+7IhnAQclz6teC3E7b1BTfCBe
+ 4btg==
+X-Gm-Message-State: AOJu0YyqlVY9MdiPrB/VO28/f+OcD7V3V28uF4CMlyBM3jFX8k7aSKbL
+ aphKwCBocs0YVUweyzpC+mzJhQ==
+X-Google-Smtp-Source: AGHT+IHPRSKHLOeESCnMmaeEboDofRAJMWaKETfpNMCf1Wt1H4ZH+nyxG4sTJK4YH3v4ey2Z0dJ15w==
+X-Received: by 2002:a5d:530e:0:b0:332:e431:c73c with SMTP id
+ e14-20020a5d530e000000b00332e431c73cmr8575238wrv.7.1701105066749; 
+ Mon, 27 Nov 2023 09:11:06 -0800 (PST)
 Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
  [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
- cp12-20020a056000400c00b00333040a4752sm2401198wrb.114.2023.11.27.09.11.04
+ cp12-20020a056000400c00b00333040a4752sm2401198wrb.114.2023.11.27.09.11.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 09:11:04 -0800 (PST)
+ Mon, 27 Nov 2023 09:11:06 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: trini@konsulko.com
 Cc: sean.anderson@seco.com, sjg@chromium.org, neil.armstrong@linaro.org,
  heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
-Date: Mon, 27 Nov 2023 19:10:57 +0200
-Message-Id: <20231127171058.165777-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo nodes
+ are missing
+Date: Mon, 27 Nov 2023 19:10:58 +0200
+Message-Id: <20231127171058.165777-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
 References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
@@ -94,30 +95,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a value is not valid during the DT or SYSINFO parsing,  we explicitly
-set that to "Unknown Product" and "Unknown" for the product and
-manufacturer respectively.  It's cleaner if we move the checks insisde
-smbios_add_string() and always report "Unknown" regardless of the missing
-field.
+In order to fill in the SMBIOS tables U-Boot currently relies on a
+"u-boot,sysinfo-smbios" compatible node.  This is fine for the boards
+that already include such nodes.  However with some recent EFI changes,
+the majority of boards can boot up distros, which usually rely on
+things like dmidecode etc for their reporting.  For boards that
+lack this special node the SMBIOS output looks like:
 
-pre-patch dmidecode
-<snip>
-Handle 0x0001, DMI type 1, 27 bytes
-System Information
-        Manufacturer: Unknown
-        Product Name: Unknown Product
-        Version: Not Specified
-        Serial Number: Not Specified
-        UUID: Not Settable
-        Wake-up Type: Reserved
-        SKU Number: Not Specified
-        Family: Not Specified
-
-[...]
-
-post-patch dmidecode:
-
-Handle 0x0001, DMI type 1, 27 bytes
 System Information
         Manufacturer: Unknown
         Product Name: Unknown
@@ -127,83 +111,202 @@ System Information
         Wake-up Type: Reserved
         SKU Number: Unknown
         Family: Unknown
+
+This looks problematic since most of the info are "Unknown".  The DT spec
+specifies standard properties containing relevant information like
+'model' and 'compatible' for which the suggested format is
+<manufacturer,model>. Unfortunately the 'model' string found in DTs is
+usually lacking the manufacturer so we can't use it for both
+'Manufacturer' and 'Product Name' SMBIOS entries reliably.
+
+So let's add a last resort to our current smbios parsing.  If none of
+the sysinfo properties are found, scan for those information in the
+root node of the device tree. Use the 'model' to fill the 'Product
+Name' and the first value of 'compatible' for the 'Manufacturer', since
+that always contains one.
+
+pre-patch:
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+        Manufacturer: Unknown
+        Product Name: Unknown
+        Version: Unknown
+        Serial Number: 100000000bb24ceb
+        UUID: 30303031-3030-3030-3061-613234636435
+        Wake-up Type: Reserved
+        SKU Number: Unknown
+        Family: Unknown
+[...]
+
+and post patch:
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+        Manufacturer: raspberrypi
+        Product Name: Raspberry Pi 4 Model B Rev 1.1
+        Version: Unknown
+        Serial Number: 100000000bb24ceb
+        UUID: 30303031-3030-3030-3061-613234636435
+        Wake-up Type: Reserved
+        SKU Number: Unknown
+        Family: Unknown
 [...]
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
 ---
 Changes since v1:
-- None
-
- lib/smbios.c | 17 +++--------------
- 1 file changed, 3 insertions(+), 14 deletions(-)
+- Tokenize the DT node entry and use the appropriate value instead of
+  the entire string
+- Removed Peters tested/reviewed-by tags due to the above
+ lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 90 insertions(+), 4 deletions(-)
 
 diff --git a/lib/smbios.c b/lib/smbios.c
-index d7f4999e8b2a..fcc8686993ef 100644
+index fcc8686993ef..423893639ff0 100644
 --- a/lib/smbios.c
 +++ b/lib/smbios.c
-@@ -102,7 +102,7 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
- 	int i = 1;
- 	char *p = ctx->eos;
+@@ -9,11 +9,14 @@
+ #include <dm.h>
+ #include <env.h>
+ #include <linux/stringify.h>
++#include <linux/string.h>
+ #include <mapmem.h>
+ #include <smbios.h>
+ #include <sysinfo.h>
+ #include <tables_csum.h>
+ #include <version.h>
++#include <malloc.h>
++#include <dm/ofnode.h>
+ #ifdef CONFIG_CPU
+ #include <cpu.h>
+ #include <dm/uclass-internal.h>
+@@ -43,6 +46,25 @@
 
--	if (!*str)
-+	if (!str || !*str)
- 		str = "Unknown";
+ DECLARE_GLOBAL_DATA_PTR;
 
- 	for (;;) {
-@@ -151,8 +151,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
- 		const char *str;
++/**
++ * struct map_sysinfo - Mapping of sysinfo strings to DT
++ *
++ * @sysinfo_str: sysinfo string
++ * @dt_str: DT string
++ * @max: Max index of the tokenized string to pick. Counting starts from 0
++ *
++ */
++struct map_sysinfo {
++	const char *sysinfo_str;
++	const char *dt_str;
++	int max;
++};
++
++static const struct map_sysinfo sysinfo_to_dt[] = {
++	{ .sysinfo_str = "product", .dt_str = "model", 2 },
++	{ .sysinfo_str = "manufacturer", .dt_str = "compatible", 1 },
++};
++
+ /**
+  * struct smbios_ctx - context for writing SMBIOS tables
+  *
+@@ -87,6 +109,18 @@ struct smbios_write_method {
+ 	const char *subnode_name;
+ };
 
- 		str = ofnode_read_string(ctx->node, prop);
--		if (str)
--			return smbios_add_string(ctx, str);
-+		return smbios_add_string(ctx, str);
++static const struct map_sysinfo *convert_sysinfo_to_dt(const char *sysinfo_str)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(sysinfo_to_dt); i++) {
++		if (!strcmp(sysinfo_str, sysinfo_to_dt[i].sysinfo_str))
++			return &sysinfo_to_dt[i];
++	}
++
++	return NULL;
++}
++
+ /**
+  * smbios_add_string() - add a string to the string area
+  *
+@@ -127,6 +161,42 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
+ 	}
+ }
+
++/**
++ * get_str_from_dt - Get a substring from a DT property.
++ *                   After finding the property in the DT, the function
++ *                   will parse comma separted values and return the value.
++ *                   If nprop->max exceeds the number of comma separated
++ *                   elements the last non NULL value will be returned.
++ *                   Counting starts from zero.
++ *
++ * @nprop: sysinfo property to use
++ * @str: pointer to fill with data
++ * @size: str buffer length
++ */
++static
++void get_str_from_dt(const struct map_sysinfo *nprop, char *str, size_t size)
++{
++	const char *dt_str;
++	int cnt = 0;
++	char *token;
++
++	memset(str, 0, size);
++	if (!nprop || !nprop->max)
++		return;
++
++	dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
++	if (!dt_str)
++		return;
++
++	memcpy(str, dt_str, size);
++	token = strtok(str, ",");
++	while (token && cnt < nprop->max) {
++		strlcpy(str, token, strlen(token) + 1);
++		token = strtok(NULL, ",");
++		cnt++;
++	}
++}
++
+ /**
+  * smbios_add_prop_si() - Add a property from the devicetree or sysinfo
+  *
+@@ -139,19 +209,35 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
+ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+ 			      int sysinfo_id)
+ {
++	int ret = 0;
++
+ 	if (sysinfo_id && ctx->dev) {
+ 		char val[SMBIOS_STR_MAX];
+-		int ret;
+
+ 		ret = sysinfo_get_str(ctx->dev, sysinfo_id, sizeof(val), val);
+ 		if (!ret)
+ 			return smbios_add_string(ctx, val);
+ 	}
++
+ 	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
+-		const char *str;
++		const char *str = NULL;
++		char str_dt[128] = { 0 };
++		/*
++		 * If the node is not valid fallback and try the entire DT
++		 * so we can at least fill in maufacturer and board type
++		 */
++		if (ofnode_valid(ctx->node)) {
++			str = ofnode_read_string(ctx->node, prop);
++		} else {
++			const struct map_sysinfo *nprop;
++
++			nprop = convert_sysinfo_to_dt(prop);
++			get_str_from_dt(nprop, str_dt, sizeof(str_dt));
++		}
+
+-		str = ofnode_read_string(ctx->node, prop);
+-		return smbios_add_string(ctx, str);
++		ret = smbios_add_string(ctx, ofnode_valid(ctx->node) ?
++					str : (const char *)str_dt);
++		return ret;
  	}
 
  	return 0;
-@@ -231,7 +230,7 @@ static int smbios_write_type0(ulong *current, int handle,
- 	t->vendor = smbios_add_string(ctx, "U-Boot");
-
- 	t->bios_ver = smbios_add_prop(ctx, "version");
--	if (!t->bios_ver)
-+	if (!strcmp(ctx->last_str, "Unknown"))
- 		t->bios_ver = smbios_add_string(ctx, PLAIN_VERSION);
- 	if (t->bios_ver)
- 		gd->smbios_version = ctx->last_str;
-@@ -281,11 +280,7 @@ static int smbios_write_type1(ulong *current, int handle,
- 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
- 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
--	if (!t->manufacturer)
--		t->manufacturer = smbios_add_string(ctx, "Unknown");
- 	t->product_name = smbios_add_prop(ctx, "product");
--	if (!t->product_name)
--		t->product_name = smbios_add_string(ctx, "Unknown Product");
- 	t->version = smbios_add_prop_si(ctx, "version",
- 					SYSINFO_ID_SMBIOS_SYSTEM_VERSION);
- 	if (serial_str) {
-@@ -315,11 +310,7 @@ static int smbios_write_type2(ulong *current, int handle,
- 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
- 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
--	if (!t->manufacturer)
--		t->manufacturer = smbios_add_string(ctx, "Unknown");
- 	t->product_name = smbios_add_prop(ctx, "product");
--	if (!t->product_name)
--		t->product_name = smbios_add_string(ctx, "Unknown Product");
- 	t->version = smbios_add_prop_si(ctx, "version",
- 					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION);
- 	t->asset_tag_number = smbios_add_prop(ctx, "asset-tag");
-@@ -344,8 +335,6 @@ static int smbios_write_type3(ulong *current, int handle,
- 	fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
- 	smbios_set_eos(ctx, t->eos);
- 	t->manufacturer = smbios_add_prop(ctx, "manufacturer");
--	if (!t->manufacturer)
--		t->manufacturer = smbios_add_string(ctx, "Unknown");
- 	t->chassis_type = SMBIOS_ENCLOSURE_DESKTOP;
- 	t->bootup_state = SMBIOS_STATE_SAFE;
- 	t->power_supply_state = SMBIOS_STATE_SAFE;
 --
 2.40.1
 
