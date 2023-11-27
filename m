@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1D5C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:04:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED975C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4340A876C9;
-	Mon, 27 Nov 2023 14:00:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F07B5876ED;
+	Mon, 27 Nov 2023 14:01:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iXVAjwOj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CT7MMOSO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE5C876C5; Mon, 27 Nov 2023 14:00:56 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 9319D876ED; Mon, 27 Nov 2023 14:00:58 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8208887634
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EA8787690
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5094cb3a036so5639393e87.2
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:54 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50aaaf6e58fso6350579e87.2
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090053; x=1701694853; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090055; x=1701694855; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jFl5q83Dz7tD9zISSdke30i9kRO2ANQbPUYPT5Iezkk=;
- b=iXVAjwOjVcECfGkD47OMTwK+ywbfyioKS7QEgBxoOfGmzXGWl0l4u06iCmsGvSqNxk
- NkBoMaDJGQNk2fzT6PE36c0+Xpe/hMmQWsty8kFeS2ErEJG72uyW9fsRNYrSo9eH4wXp
- TFYOnZ6SPQ5nv9OhFO0YQT7/lFzbekHF34KaOsquJseb9DPwgNnql4L39IVa11csmIBz
- oQvP/G/ep9Y+A1EgXzpJl2pf/oAtlMIjJGNKpwqOnynbPJ/bAyXSFphlbZy3Sa+e+CLj
- vl6KseqqrFVff9COa0V4y8laTaugD/sMdx29u0GRAMlutxBYpKFyoy1gOBb5xCheZy/j
- R/rw==
+ bh=nUj9bNeOAFJnUgjAIYZdSaerdiXzEkAzNcyxyKkqUBs=;
+ b=CT7MMOSO5VOYC5vCfn8n8BTIGWXJOFG7UQhqPGrAN1XCg5JMw8LN0NntmaDtxJmipu
+ ZWNgKIqnT2/RuW2shd/Jf9aABXuvhqUbPCBcHQFXnp7fX4VRSciSxfzoscsQRzVEHAor
+ DGmujPh78G2buyzolzVwW7t+52Xux6VZdsyO3fAWMtYjHTS4hNBVwWnVvN0MXcY7d+kd
+ 5HMpHPX4Z4Bo3ZqGtlH989FqM/Vr47tFOZFJk8xwragjxd6Q5fN5pqDhI3dIYLpzSlzv
+ igeIGuwkttWNFcP8MVlvOqnXKm7+rLoO36BiwLhNQsOk3xB4WoVJqK7LltKDmBzlA3pS
+ JxVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090053; x=1701694853;
+ d=1e100.net; s=20230601; t=1701090055; x=1701694855;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jFl5q83Dz7tD9zISSdke30i9kRO2ANQbPUYPT5Iezkk=;
- b=P+SytdAwl9trw9kH8TTLZAHFe+9iEOpD/J6GDWk2QH0ZGdkfkMwjjAeAFN3Hrtzgpm
- NdjAdX541ZunD2wunBuHZJ2YJmp56VPKOr2UI4E0sxMcI8NNrJwzfHrXNuSPN0E2uahD
- nkSEBq4ordKcraiKaLCBVEogBeqSOq395Yl/CmI2oYrykOndlquGgK455K1pq/elVk7R
- ASIPXIr1pbLFDgt7dZGr94gYGMNBuXNR1UMXqpvUAlzdK7id2OqBL85yQ1hp1kkNiUWN
- ShkD8QLnM2NnnLH9HCl70mVKmagsYdHge8xhNE6M7r0R2PGZx12+q90TpE7qI6IDJ+vq
- 61ug==
-X-Gm-Message-State: AOJu0YwCnJq3E/EWENSFQWwoB8WPyg+WoZmcGct+RJ0UoKtkuSnHlYfm
- V48eBilw0KWm+STuWoM3kwlpE1rBrc3X8LVIDKNmAg==
-X-Google-Smtp-Source: AGHT+IEZVdvY7D2kFhl9jr29TbLnCoxnas4SP6wA/gyOrpBo9daCCLpjxNa+vOJlDyiNyz3oDzbGSQ==
-X-Received: by 2002:a19:f505:0:b0:507:9a49:3f23 with SMTP id
- j5-20020a19f505000000b005079a493f23mr7289889lfb.18.1701090053330; 
- Mon, 27 Nov 2023 05:00:53 -0800 (PST)
+ bh=nUj9bNeOAFJnUgjAIYZdSaerdiXzEkAzNcyxyKkqUBs=;
+ b=T2/oqqxtFsuqkc1cIOhr19SQjM2CK+9yZdKrdB2GPj9oQHZVa3nIai2yNmbN/n72Ti
+ QIm3OLtJnRjDuJMnUqNvXWKgOH6LEgKFrM5M5n/nTpywv1Dt6VWfqykMpRqw0QkI0zxX
+ OxZsjXa2K3wjgb7j78yskqz35m2aLowyYNLh0Uzob0NsM0j/1kKgBO5Xs5qXzpEZ77bX
+ uBZTLR+5lSJXFwrOc9rYJD5duoaDEV5RTjmQLNROsCUQ8i3WbiXbsQma8cJFKWK+Nfq+
+ hALLXZlKm9lKNAmbLm7OgPca2V6cQXaeuUHvNelSvi6qixO0wGXNHpk255AE1O6NVWuo
+ pO7Q==
+X-Gm-Message-State: AOJu0Yx/XaYFSL4W5yN/umHGEmaLRDYn+gN5E1QoEjXTPVkj6l7+ibqt
+ NaD87MsSC/hG1GxNecr/45+NMNKT9eKIszwz9u6VjQ==
+X-Google-Smtp-Source: AGHT+IFD+SzxFwtEZU+6m8vPx9bJ7iGELPtta0NUGV0LJcHOADqb4zDaFY+I9yOqD4WikLcFDWh7wA==
+X-Received: by 2002:a05:6512:104b:b0:50b:b5c0:fe8b with SMTP id
+ c11-20020a056512104b00b0050bb5c0fe8bmr343848lfb.28.1701090055739; 
+ Mon, 27 Nov 2023 05:00:55 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.50
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:00:52 -0800 (PST)
+ Mon, 27 Nov 2023 05:00:55 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 19/43] sandbox: eth-raw-os: successful return code is 0
-Date: Mon, 27 Nov 2023 18:57:02 +0600
-Message-Id: <20231127125726.3735-20-maxim.uvarov@linaro.org>
+Subject: [PATHv11 20/43] driver/net/rtl8139: remove debug print
+Date: Mon, 27 Nov 2023 18:57:03 +0600
+Message-Id: <20231127125726.3735-21-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -92,27 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-all network drivers return 0 on the successful
-transmission.
+debug print delays reset of the driver. Finally I see
+bunch of "rx error FFFF" errors in the screen. CI can
+not handle many prints. While network works fine there
+
+Reproduced with:
+make CROSS_COMPILE=sh2-linux- r2dplus_defconfig all
+qemu-system-sh4 -M r2d -nographic -serial null \
+-serial mon:stdio -net user,tftp=`pwd` \
+-net nic,model=rtl8139 -kernel ./u-boot.bin
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- arch/sandbox/cpu/eth-raw-os.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/rtl8139.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/sandbox/cpu/eth-raw-os.c b/arch/sandbox/cpu/eth-raw-os.c
-index e59b96be5f..92c35aed95 100644
---- a/arch/sandbox/cpu/eth-raw-os.c
-+++ b/arch/sandbox/cpu/eth-raw-os.c
-@@ -256,7 +256,7 @@ int sandbox_eth_raw_os_send(void *packet, int length,
- 		       strerror(errno));
- 		return -errno;
- 	}
--	return retval;
-+	return 0;
- }
- 
- int sandbox_eth_raw_os_recv(void *packet, int *length,
+diff --git a/drivers/net/rtl8139.c b/drivers/net/rtl8139.c
+index 106bc1c7ae..6003b88274 100644
+--- a/drivers/net/rtl8139.c
++++ b/drivers/net/rtl8139.c
+@@ -453,7 +453,6 @@ static int rtl8139_recv_common(struct rtl8139_priv *priv, unsigned char *rxdata,
+ 			  RTL_STS_RXBADALIGN)) ||
+ 	    (rx_size < ETH_ZLEN) ||
+ 	    (rx_size > ETH_FRAME_LEN + 4)) {
+-		printf("rx error %hX\n", rx_status);
+ 		/* this clears all interrupts still pending */
+ 		rtl8139_reset(priv);
+ 		return 0;
 -- 
 2.30.2
 
