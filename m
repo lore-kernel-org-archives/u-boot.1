@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98904C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D438BC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:10:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A886877AB;
-	Mon, 27 Nov 2023 14:01:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9247C87691;
+	Mon, 27 Nov 2023 14:08:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ij92W9+3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jnnM5O/k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8652B877A9; Mon, 27 Nov 2023 14:01:51 +0100 (CET)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id C8E3F877BE; Mon, 27 Nov 2023 14:08:33 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BFB9877A2
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2D5287565
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-507975d34e8so5777394e87.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:49 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5c08c47c055so40590597b3.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:08:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090108; x=1701694908; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=X1UsdTzKLZwJT2Y40jvQY7AJYbTwiczkKGIs51eMQgE=;
- b=Ij92W9+30xQRu1ugHEZRblxtSuYOjM/4LqmYQ24FepI+7ILHF/D0tK4ylwY0PLi/AG
- ftgzKGmabKhMkJvmv9oAQ4va0ENQBP9z2do27Xfimr7AqOMSXcXd5jn0VJd1wYOTJkaQ
- QaNN0I4pBzw0v6BQcWEJcEpaPKoSGwzOfKbKhFfo7cS07ezmo0z2ZGOELMCatC1BbWCC
- fulTL6i3BvRNL31vqcG3nmCRWyoYMph9wJR//NI+I1V1Q7pY5d6wsE6+boS5SlQA7ceQ
- qS17mMpewjnlpY10r7f3VLtkNOLwdC8bxWZGjmRS6f6NGB9UhykH6rbrmQFtOzqh9/GO
- dP+w==
+ d=konsulko.com; s=google; t=1701090510; x=1701695310; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sriu89eFcdKK2eTXqxG8JKihfvEi97DcpZoGK+x3O00=;
+ b=jnnM5O/k0u7FwlewDWpVegAvbDg/+i9EogFplxDZwh9d18VVu8ckhW+mXitYjtxTy/
+ YN/gJIbN9HZfL/+SaN27Unhu5WvImeMZBD1omVTJCsEbE9RRjHjgoJ0Eb6zHvB8zSwCK
+ 49NTqw0ktOw99cqV76+GiNLBVeV0JwY/mWlZE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090108; x=1701694908;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=X1UsdTzKLZwJT2Y40jvQY7AJYbTwiczkKGIs51eMQgE=;
- b=j9h5fZc0bcPQm4oPwa4M5n8yL4E+3r8I7yCF8z2QvkLK2IYbZ7He3Zm7dUI4g2w4Hr
- MhKV2v7Gdw9uFBp+JlgSTOVNC96gi4NHChzxYsutL24BC3Z3fEGu/4DaoQvfVXWSWkgP
- TeJZ0OnTCg+qIxRWLaiTIDuNV4mSFzJspMuAxlO1TGQZnNYcJlACvGmjqRb/raf7TtvP
- PM5NDrc4PJAng20mc3JZmvfI349KR0LhraqhK5mW2g4uCGFrg3AUYtpZ3PzlhbLcb7qx
- jh0truE6bdLstDT14U/VsaIwwHLwJaHfUD4oW76RXV5qLrohRz9swSllMlxsn8DCE33q
- HdIA==
-X-Gm-Message-State: AOJu0Yy4wVC0cZ9Q8LRX+hXujxmJpKaRVZifu9Xp7rFfId2qJGd+qSPF
- 79I6JWIT6NM7wMaf1BSCB6ZyXMq84bFBJzMob2yajw==
-X-Google-Smtp-Source: AGHT+IEmzaTJekvQlRlYkPyug9s1t0nBwLjvtW/h3smYdCxM6z/s6OG5fpNoYQvqhyFbrveCdy69Dg==
-X-Received: by 2002:ac2:5a1c:0:b0:50b:aa1f:595d with SMTP id
- q28-20020ac25a1c000000b0050baa1f595dmr4434221lfn.30.1701090108549; 
- Mon, 27 Nov 2023 05:01:48 -0800 (PST)
-Received: from localhost.localdomain ([45.82.14.220])
+ d=1e100.net; s=20230601; t=1701090510; x=1701695310;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Sriu89eFcdKK2eTXqxG8JKihfvEi97DcpZoGK+x3O00=;
+ b=rVjED4YjR8S4akoSqXG+HdjVPWRkbN+L/+AoNzZcIy0ui4FESu341kta/mYWXDb6Wf
+ wrUgn9OvC1lpwMKtEZ1HeGJOzi0Ll3PNqnnK5kRCu8Ys4oLViqHb7qJObNrMrh/XfObV
+ TLH84sC6ZJloerg94CDM28aALb4bUToE28LIR8m2ym/DCVe5fkeu7BxAErqzqPy+dnu+
+ AlECPTF6uU3ksd12IKcjsuqzgFjYnT29Uq/wv9yP4zDBpWjKF7Y625t8Wg4Z4LsMkR+7
+ vB5AZraPa1+aIQgOpVceVPbhH0vSQUS2ozTYdyaDUeImNavoL8+NBmAWeIffwudD6V5W
+ 4xWA==
+X-Gm-Message-State: AOJu0Yw6wTDs5hISP+Oo0/M7TOD7TQLuSHiPwi+mV5yOsEULOAXw+0VZ
+ eEIdYxnE3yJwKsV91qt9BYtWJqf9UNZL9PkM9N9NHA==
+X-Google-Smtp-Source: AGHT+IHCP/AW+vR9d5Q59l0yQ5oXNHhjPa/ULpfzDOm2sX3ZLdjCPJOZQpu/H1qsX69q928jdaZakA==
+X-Received: by 2002:a05:690c:2a93:b0:5ce:a930:d641 with SMTP id
+ ek19-20020a05690c2a9300b005cea930d641mr7819627ywb.4.1701090510415; 
+ Mon, 27 Nov 2023 05:08:30 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-add3-c5a6-8002-bb49.res6.spectrum.com.
+ [2603:6081:7b00:6400:add3:c5a6:8002:bb49])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.46
+ m14-20020a819e0e000000b005869ca8da8esm3164091ywj.146.2023.11.27.05.08.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:01:48 -0800 (PST)
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-To: u-boot@lists.denx.de
-Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
- goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 43/43] .gitlab-ci.yml: change ownership of the git files
-Date: Mon, 27 Nov 2023 18:57:26 +0600
-Message-Id: <20231127125726.3735-44-maxim.uvarov@linaro.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ Mon, 27 Nov 2023 05:08:29 -0800 (PST)
+Date: Mon, 27 Nov 2023 08:08:28 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ goldsimon@gmx.de
+Subject: Re: [PATHv11 33/43] configs/am335x_evm_defconfig: inc SPL size
+Message-ID: <20231127130828.GC2513409@bill-the-cat>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-34-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZXLqt/bvWdh2y8gy"
+Content-Disposition: inline
+In-Reply-To: <20231127125726.3735-34-maxim.uvarov@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,69 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Inside docker image owner of U-Boot files
-is different, so user doesn't have permissions to update
-submodules. Make the ower of git the same as current user.
 
-Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
----
- .gitlab-ci.yml | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+--ZXLqt/bvWdh2y8gy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index fee165198a..cb4f00e978 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -104,7 +104,8 @@ build all 32bit ARM platforms:
-   extends: .world_build
-   script:
-     - ret=0;
--      git config --global --add safe.directory "${CI_PROJECT_DIR}";
-+      git clone `pwd` /tmp/u-boot.git;
-+      cd /tmp/u-boot.git;
-       pip install -r tools/buildman/requirements.txt;
-       ./tools/buildman/buildman -o /tmp -PEWM arm -x aarch64 || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-@@ -118,7 +119,8 @@ build all 64bit ARM platforms:
-     - virtualenv -p /usr/bin/python3 /tmp/venv
-     - . /tmp/venv/bin/activate
-     - ret=0;
--      git config --global --add safe.directory "${CI_PROJECT_DIR}";
-+      git clone `pwd` /tmp/u-boot.git;
-+      cd /tmp/u-boot.git;
-       pip install -r tools/buildman/requirements.txt;
-       ./tools/buildman/buildman -o /tmp -PEWM aarch64 || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-@@ -130,7 +132,8 @@ build all PowerPC platforms:
-   extends: .world_build
-   script:
-     - ret=0;
--      git config --global --add safe.directory "${CI_PROJECT_DIR}";
-+      git clone `pwd` /tmp/u-boot.git;
-+      cd /tmp/u-boot.git;
-       ./tools/buildman/buildman -o /tmp -P -E -W powerpc || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-@@ -141,7 +144,8 @@ build all other platforms:
-   extends: .world_build
-   script:
-     - ret=0;
--      git config --global --add safe.directory "${CI_PROJECT_DIR}";
-+      git clone `pwd` /tmp/u-boot.git;
-+      cd /tmp/u-boot.git;
-       ./tools/buildman/buildman -o /tmp -PEWM -x arm,powerpc || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-@@ -192,7 +196,8 @@ Run binman, buildman, dtoc, Kconfig and patman testsuites:
-   script:
-     - git config --global user.name "GitLab CI Runner";
-       git config --global user.email trini@konsulko.com;
--      git config --global --add safe.directory "${CI_PROJECT_DIR}";
-+      git clone `pwd` /tmp/u-boot.git;
-+      cd /tmp/u-boot.git;
-       export USER=gitlab;
-       virtualenv -p /usr/bin/python3 /tmp/venv;
-       . /tmp/venv/bin/activate;
--- 
-2.30.2
+On Mon, Nov 27, 2023 at 06:57:16PM +0600, Maxim Uvarov wrote:
 
+> Increase allowed binary size to fit lwip code.
+>=20
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> ---
+>  configs/am335x_evm_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/configs/am335x_evm_defconfig b/configs/am335x_evm_defconfig
+> index f048e60f7f..9fd608bd76 100644
+> --- a/configs/am335x_evm_defconfig
+> +++ b/configs/am335x_evm_defconfig
+> @@ -124,3 +124,4 @@ CONFIG_WDT=3Dy
+>  CONFIG_DYNAMIC_CRC_TABLE=3Dy
+>  CONFIG_RSA=3Dy
+>  CONFIG_LZO=3Dy
+> +CONFIG_SPL_MAX_SIZE=3D0x29000
+
+As probably a problem for other platforms you made this change on too,
+you can't do this. The link limit is here because that's the limit the
+hardware (and ROM) imposes.
+
+You might need to either:
+- Figure out how to make lwip even tinier for the SPL case
+- Limit the old network stack to just for SPL, and a later task is to
+  reduce what's in the old stack to just what's also needed within SPL.
+
+--=20
+Tom
+
+--ZXLqt/bvWdh2y8gy
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVklMgACgkQFHw5/5Y0
+tyy29Qv+PDQwZi6kVthwys+rpsdViHPjVnEorV7VLsGaTsW+fg5npKtYyTGDCdRp
+tk4G/06c7jmB07mW4BgqAH7DrHcmXhMfPdUPhLaZdyVgxm0f7sdGlqo80sllTDG0
+TdMNfPXcFa/LFJ644EFO5mwZNdaDeG9fKdWEmSF6S3VB0/W788TGH9gA65B/stuS
++eb2ZNXm6TVZF99lsoCjS+pt0eMyrFbECgnflKDW9lyJ9gCBfmZltHvqdbaBcuCX
+CpLMiKHzZtmacCDYnsdGOrabUw71+vpLI2FLAGeHMQPAIIFw7urHJWv0yPyg7jFt
+jltpJCDNRV1w+1kvxMNXDsUTmGBaSgArE+Wqp5xEAPtdB4Qcd3dwCYO0SAtiw2R+
+L41Xeli8QVNwYvhjTUjcQmBcMyR1q6fIEBZQKnaz2inYYq9F3enXnBVE58Qum9Xz
+9YxrTQIek2ygbLL2iU++MDRK83hgdlrSXGf1ZbIE3WBc2Gn1Pq7aKzYLcBAF4HjX
+mpkGkXEC
+=belb
+-----END PGP SIGNATURE-----
+
+--ZXLqt/bvWdh2y8gy--
