@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C023C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 10:29:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5D2C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 10:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F71E8751F;
-	Mon, 27 Nov 2023 11:29:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 165AA8718E;
+	Mon, 27 Nov 2023 11:29:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M9UsphDT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bxoENEeb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDF0C87525; Mon, 27 Nov 2023 11:29:25 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 1BCB28753C; Mon, 27 Nov 2023 11:29:27 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14D1587515
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:29:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4C1F8718E
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:29:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATJLL002152;
- Mon, 27 Nov 2023 04:29:19 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATMFe017382;
+ Mon, 27 Nov 2023 04:29:22 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701080959;
- bh=zJLFg50Z64PDuXrjOPTs1BlY0Et2K8N+0pQFQ3cPNO8=;
+ s=ti-com-17Q1; t=1701080962;
+ bh=pmGDBi72rT+2auhasubW/eRFNYjlrHYJ48sMucyyzEA=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=M9UsphDTQluQVBwMnmbf9E45nLJL3m2rsuZ2nRG5P5qjiIl0wKlUUSptaaq5mDI0u
- tyZ3LnkelkDYOQ4NCID/BZFfJX03XHdsZVOzJIwClqyk7+/69BcCNy+Sj7BOVq5kiB
- DSWVCMEJpF9iw3RRLyDltVSxBZkZCHjSH49Uf0DQ=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ARATJY2005543
+ b=bxoENEebZtfsH92vkJ8QDtZa5xH4SaLAT+h6LdC8QYnIDvWAGXZYodR6ji2PvI1XU
+ w0U9dsczuHUgI65k8kZxPhEaxzRboE7W5m8rPFRft94cOU3ORN4q1ILYeq2UA2vcgB
+ 4QvsOq0nr8niX16WJ7Rnyew7TeOFWv1DuMt91GW4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ARATMR6043929
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Nov 2023 04:29:19 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 27 Nov 2023 04:29:22 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 27
- Nov 2023 04:29:19 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 04:29:22 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 27 Nov 2023 04:29:19 -0600
+ Frontend Transport; Mon, 27 Nov 2023 04:29:22 -0600
 Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATDlb089434;
- Mon, 27 Nov 2023 04:29:17 -0600
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ARATDlc089434;
+ Mon, 27 Nov 2023 04:29:20 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Mon, 27 Nov 2023 15:59:12 +0530
-Subject: [PATCH v2 1/3] remoteproc: k3-r5: Extend support for R5F clusters
- on J721S2 SoCs
+Date: Mon, 27 Nov 2023 15:59:13 +0530
+Subject: [PATCH v2 2/3] remoteproc: k3-dsp: Extend support for C71x DSPs on
+ J721S2 SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20231127-b4-upstream-j721e-rproc-support-v2-1-22ee7c8ef53c@ti.com>
+Message-ID: <20231127-b4-upstream-j721e-rproc-support-v2-2-22ee7c8ef53c@ti.com>
 References: <20231127-b4-upstream-j721e-rproc-support-v2-0-22ee7c8ef53c@ti.com>
 In-Reply-To: <20231127-b4-upstream-j721e-rproc-support-v2-0-22ee7c8ef53c@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -67,11 +67,11 @@ CC: Apurva Nandan <a-nandan@ti.com>, Udit Kumar <u-kumar1@ti.com>, Vignesh
  Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>,
  Manorit Chawdhry <m-chawdhry@ti.com>, Hari Nagalla <hnagalla@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1701080953; l=1685;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1701080953; l=1640;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=A3uIaHh9ghYb2iQMMxA+aaDHFAeyDD6Ms4ypis1F/cw=;
- b=6OJKZRSJuXpbpiSzct6ucUl46iQEs9hFLqK88TKk3ZS54TZ9wbHGDT692D4qSRru4LolVXut9
- yV6F4HZHjErAEsoUyqR35IIvI63kQL84Qp13NytXfgxa/DEqwjBacW3
+ bh=0BM5etci/NDiFbjmzAiuwnqYEZoJZ1XNHHmOi+0IEY8=;
+ b=eQ1u95kdvbH3oNKVbMGThqyaPkfZhO80dvQf72jl81/KBwgXp5eVj1UBMl+91y5WTLEVh8doL
+ wN6f0ZSOMsiB+SCLVUTJJOY/3AoHuuT8lgF9tb5jTC6hcEpD5cpLNOh
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -93,46 +93,39 @@ X-Virus-Status: Clean
 
 From: Hari Nagalla <hnagalla@ti.com>
 
-The K3 J721S2 SoCs have three dual-core R5F subsystems, one in MCU
-voltage domain and the other two in MAIN voltage domain. These R5F
-clusters are similar to the R5F clusters in J7200 SoCs.
+The K3 J721S2 SoCs have two C71x DSP subsystems in MAIN voltage domain,
+and there are no C66x DSP subsystems on these SoCs. The C71x DSP subsystem
+is a slighly updated version of the C71x DSP subsystem on J721e. The
+C71x DSPs are 64 bit machine with fixed and floating point DSP
+operations.
 
-Compatible Info is updated to support J721S2 SoCs.
+Extend support to the C71x DSPs with J721S2 compatible strings.
 
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- drivers/remoteproc/ti_k3_r5f_rproc.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ drivers/remoteproc/ti_k3_dsp_rproc.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
-index 6f3e12d915e6..631e548dccef 100644
---- a/drivers/remoteproc/ti_k3_r5f_rproc.c
-+++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
-@@ -855,7 +855,7 @@ static const struct k3_r5f_ip_data k3_data = {
- 	.tcm_ecc_autoinit = false,
- };
+diff --git a/drivers/remoteproc/ti_k3_dsp_rproc.c b/drivers/remoteproc/ti_k3_dsp_rproc.c
+index 576de4bb26e4..749ea2bd6187 100644
+--- a/drivers/remoteproc/ti_k3_dsp_rproc.c
++++ b/drivers/remoteproc/ti_k3_dsp_rproc.c
+@@ -327,7 +327,8 @@ static int k3_dsp_of_get_memories(struct udevice *dev)
  
--static const struct k3_r5f_ip_data j7200_data = {
-+static const struct k3_r5f_ip_data j7200_j721s2_data = {
- 	.tcm_is_double = true,
- 	.tcm_ecc_autoinit = true,
- };
-@@ -863,7 +863,8 @@ static const struct k3_r5f_ip_data j7200_data = {
- static const struct udevice_id k3_r5f_rproc_ids[] = {
- 	{ .compatible = "ti,am654-r5f", .data = (ulong)&k3_data, },
- 	{ .compatible = "ti,j721e-r5f", .data = (ulong)&k3_data, },
--	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_data, },
-+	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_j721s2_data, },
-+	{ .compatible = "ti,j721s2-r5f", .data = (ulong)&j7200_j721s2_data, },
- 	{}
- };
- 
-@@ -901,6 +902,7 @@ static const struct udevice_id k3_r5fss_ids[] = {
- 	{ .compatible = "ti,am654-r5fss"},
- 	{ .compatible = "ti,j721e-r5fss"},
- 	{ .compatible = "ti,j7200-r5fss"},
-+	{ .compatible = "ti,j721s2-r5fss"},
+ 	for (i = 0; i < dsp->num_mems; i++) {
+ 		/* C71 cores only have a L1P Cache, there are no L1P SRAMs */
+-		if (device_is_compatible(dev, "ti,j721e-c71-dsp") &&
++		if (((device_is_compatible(dev, "ti,j721e-c71-dsp")) ||
++		    (device_is_compatible(dev, "ti,j721s2-c71-dsp"))) &&
+ 		    !strcmp(mem_names[i], "l1pram")) {
+ 			dsp->mem[i].bus_addr = FDT_ADDR_T_NONE;
+ 			dsp->mem[i].dev_addr = FDT_ADDR_T_NONE;
+@@ -446,6 +447,7 @@ static const struct k3_dsp_boot_data c71_data = {
+ static const struct udevice_id k3_dsp_ids[] = {
+ 	{ .compatible = "ti,j721e-c66-dsp", .data = (ulong)&c66_data, },
+ 	{ .compatible = "ti,j721e-c71-dsp", .data = (ulong)&c71_data, },
++	{ .compatible = "ti,j721s2-c71-dsp", .data = (ulong)&c71_data, },
  	{}
  };
  
