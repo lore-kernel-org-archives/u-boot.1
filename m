@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9167FC07E97
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 23:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095D1C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 23:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80740875EB;
-	Tue, 28 Nov 2023 00:26:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id 8529F8756E;
+	Tue, 28 Nov 2023 00:55:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="length tag value exceeds body size" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="0t/lhwQY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bAo2qGTn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78204875BF; Tue, 28 Nov 2023 00:26:15 +0100 (CET)
-Received: from web-out.onbox.hu (fmfe37.freemail.hu [46.107.16.242])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 86AA8875A0; Tue, 28 Nov 2023 00:55:16 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 730CE8757D
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 00:26:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 295A88758C
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 00:55:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-X-fm-smtp-source: yes
-Received: from localhost (localhost [80.98.74.198])
- by web-out.onbox.hu (Postfix) with SMTP id 4SfMCh17bTzjSJ;
- Tue, 28 Nov 2023 00:26:08 +0100 (CET)
-Date: Mon, 27 Nov 2023 23:26:08 +0000 (GMT)
-From: =?utf-8?Q?Sz=C5=91ke_K=C3=A1lm=C3=A1n_Benjamin?= <egyszeregy@freemail.hu>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "otavio@ossystems.com.br" <otavio@ossystems.com.br>,
- "sbabic@denx.de" <sbabic@denx.de>
-Message-ID: <A2E88A.1BiPC1JJI4ID.2cqy6ZTmX2YXIGOSvxV@freemail.hu>
-In-Reply-To: <CAOMZO5AK3cxy_mOD_J9UPPCzFVfzoVw=OmACeh2+27k+4CkCnQ@mail.gmail.com>
-References: <20231107221617.470-1-egyszeregy@freemail.hu>
- <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
- <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
- <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
- <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
- <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
- <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
- <CAOMZO5ApoA7+o_XOz04OLWpW-+hwhW-M9cROSbV1vADmDnydJw@mail.gmail.com>
- <A2E7RA.WAMpX3ekvN7A.ZZTk9ZUF8rABr6qdjSu@freemail.hu>
- <CAOMZO5AK3cxy_mOD_J9UPPCzFVfzoVw=OmACeh2+27k+4CkCnQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-db49ab94768so2069142276.2
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 15:55:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1701129312; x=1701734112; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2qZUEmcFSAWlqM2HBhERV8LtZXUi+5jEsQs0wz69HhM=;
+ b=bAo2qGTn3D7PPXJNGskTGP6TgZVp8XD9Zvlexx8jBaV/PH0JvIjLKSoM8YyBORVsJu
+ fM2WYU9h6QPYO0y+QlWzqjZmDubircnjFXp1gMgy6QY5T7Jvn5eyz3VUDogjRFL2YZUf
+ XGqJZX4JsgsWtIwMEqKaYOlyMM8Qnl/2acqYw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701129312; x=1701734112;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2qZUEmcFSAWlqM2HBhERV8LtZXUi+5jEsQs0wz69HhM=;
+ b=m6QsgFvgdhMvUlsmKor09jyeGQZcnjW8Cp9D1EqvJi5jDnsuJ0+1tNPK6i5fcSXPoq
+ 9xfpce1UOmSn8gkSWLlcxL5WbRJlhJK9x5w1oUlrKAs0+be+z5HPyNiT1kkeCFnVhz9H
+ NYqETYVl+DxEYxQARw10Cq1Uso9qyScLruYQMsvI98LMq4/NcM9rbISehL7cPJVzP5s3
+ rUZb0WXRtvPEvxvE8fB9KvTblIO4zPlHF9kbJV5ItXpgrVdh1zpD9dwW/S0GUdlyWlt8
+ J5iojhhJB5H5fG1Ck0i2XFIR0dQxKo37U51HML5CkCZZtbI19AfajpXBWmMA539Kq1VR
+ m9+w==
+X-Gm-Message-State: AOJu0YydrfEvGjozUQ6fL2dxR0OwKVS5I2Oid/3zua/z4udLF5a1KIvF
+ fPsJlTYj9HnA/IFWTMVTK9AaOQ==
+X-Google-Smtp-Source: AGHT+IFZITYlr2rtMfkd6grDzPmAKtAw0XPKyJAYFfbi26pf54oENp3LJVbYkg2TZ4pSfVVq/zHDlA==
+X-Received: by 2002:a5b:d47:0:b0:d81:5d5a:25a3 with SMTP id
+ f7-20020a5b0d47000000b00d815d5a25a3mr12946749ybr.43.1701129311852; 
+ Mon, 27 Nov 2023 15:55:11 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-6400-4f9d-49d7-ae37-6b11.res6.spectrum.com.
+ [2603:6081:7b00:6400:4f9d:49d7:ae37:6b11])
+ by smtp.gmail.com with ESMTPSA id
+ 4-20020a251804000000b00d8679407796sm3340883yby.48.2023.11.27.15.55.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Nov 2023 15:55:11 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Philip Oberfichtner <pro@denx.de>
+Cc: hs@denx.de, sjg@chromium.org
+In-Reply-To: <20231124140400.32027-1-pro@denx.de>
+References: <20231124140400.32027-1-pro@denx.de>
+Subject: Re: [PATCH 1/1] i2c: Bugfix in i2c_get_chip_by_phandle()
+Message-Id: <170112931087.101474.12484186755916075396.b4-ty@konsulko.com>
+Date: Mon, 27 Nov 2023 18:55:10 -0500
 MIME-Version: 1.0
-X-AccountId: 2510275
-X-Originating-Ip: 80.98.74.198
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1701127569; 
- s=20181004; d=freemail.hu;
- h=Date:From:To:Cc:Message-ID:In-Reply-To:References:Subject:MIME-Version:Content-Type;
- l=3321; bh=/bh0lX6j8CXLw1CiOmlmhMlIIA6bkUjIb5BYf/HA5ts=;
- b=0t/lhwQYJhs0PcTJP71eTpURuEbmL9F6TKQARTK/Q7PN1k0gfNH/7Ck5e5F9nH4y
- Zk+6wLi+8gWF91d2AkxTXRRx7yg3D6JacS5P1yXH+L/HCcTDTI4yEDSX4uCz42AKoDh
- j0qxftP7B5Im341Ve01ZLuy9PS+RfeUOnfK8/wxz5oZvAConfStPWt7w2FI/Mb9Re1l
- RDoEQEmuTPxH88pCsV55oTkEtbrcENSQ820sE3URbJpTw5ntRJg4LK+bricOthCGCOt
- LHeNJ3Crfi6s+POrfMBn4hDc2BIr94QcYYozPnGK/fCIp39Cnhv7E/olxjpACN1FwEI
- zA6NglZ3VA==
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,19 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It was absolutely conform, i supressed the potentional warning. Once again =
-i say, i will not remove it, if you do not liket it you can remoce as a mai=
-ntainer. My patch is ready and final. Let's do something to improve i.MX fa=
-mily as a maintainer. I am realy sad to see in last 2-3 years there was no =
-any significats new features for boards since their initial commits.-------=
-- Eredeti lev=C3=A9l --------Felad=C3=B3: Fabio Estevam <festevam@gmail.com=
->D=C3=A1tum: 2023 november 27 21:39:19T=C3=A1rgy: Re: [PATCH 1/1] pico-imx7=
-d: add baseboard SD card boot detectC=C3=ADmzett: Sz=C5=91ke K=C3=A1lm=C3=
-=A1n Benjamin <egyszeregy@freemail.hu>On Mon, Nov 27, 2023 at 4:55=E2=80=AF=
-PM Sz=C5=91ke K=C3=A1lm=C3=A1n Benjamin <egyszeregy@freemail.hu> wrote: > >=
- Unused function parameters should be removed > https://rules.sonarsource.c=
-om/c/tag/based-on-misra/RSPEC-1172/  From this same URL:  "Exceptions There=
- are some cases when you want to have an unused parameter (usually because =
-the function has to conform to a fixed prototype"  which is the case here w=
-ith your patch, where you need to conform to: int board_mmc_get_env_dev(int=
- devno)=20
+On Fri, 24 Nov 2023 15:04:01 +0100, Philip Oberfichtner wrote:
+
+> The "i2cbcdev" sneaked in when implementing this function for the
+> bootcounter use case. Obviously the intention was to use prop_name
+> instead.
+> 
+> Fixes: b483552773 (i2c: Implement i2c_get_chip_by_phandle())
+> 
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
