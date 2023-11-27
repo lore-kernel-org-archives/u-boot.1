@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7196FC07CB1
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEC1C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:05:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94645876D7;
-	Mon, 27 Nov 2023 14:01:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1B3908772E;
+	Mon, 27 Nov 2023 14:01:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WcihVUXQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mlN8USNK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29D8C87633; Mon, 27 Nov 2023 14:01:04 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id C74C88772E; Mon, 27 Nov 2023 14:01:05 +0100 (CET)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A17C876D7
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 385B08772C
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:01:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-507c5249d55so6338709e87.3
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:01 -0800 (PST)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50aaaf6e58fso6350834e87.2
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:01:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090060; x=1701694860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090062; x=1701694862; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/ApHZZokfYNAhQkIrUJHXefSMXsGfI8Z1dkA9PV0nk=;
- b=WcihVUXQ7Mqev/v3gs8epfn9cZ4qs94uSKdL8zCFgPYYlySrI5mH0spM3exr2kVu50
- Djie+4k0yaZSlVsNC0CDp/TCCvGtGc0eWEFKyUeNcqLMp5uzezYXTfEtFBY1iHWxsfyC
- 8GXiB/MB4omEJM150sSmXJigofThoiCAQ31aOoK5/x0mUvLD2/m5VaIPgAW/RhyPfunK
- ZnecpSOAi0hs31zO9Px7Vzv4wU4UrnHnojdTeUnHSgQ+qLhBj/RHsaNdCjIQnFjS3nd6
- MD7vtcZJlx9qdAq5HE2SdW5XnutO++9QiXEr8LStrICdErjK6gUGK5VNu2/QVYIOcczV
- O9Bg==
+ bh=UeW1odG9hZuINbqUD6xKHKoC4MNjK1YXfaNFNoaxSpw=;
+ b=mlN8USNKSdapJQD9LgxHLOYJH0PL2kxmUETqagM4ONEc9rcBoBBeKq9fTtijURbUK3
+ pJFxi+5cpRwweR611EpdqqSjAIZpW/xIOQpwwVY8EsozygU+e3yVePKhVYgqS8VLXiis
+ mZ1lNyuAYxdT/f4xoiwoquBLxjjqIc2LjGW5lrZ1U6O1YaIk0v0tdm3ILnPVuuJvua/z
+ qd1enOZw2GVwjfdv1qmC766LvFMWVD3PnY2XheMPxAD3enYprExKLV3zgSYZa8DqLqaU
+ 5PDUho3gtDtVhpbA3Y+R8XxVQD/OSREgzqghUJppm/XdRviafO3Pc0ZNbo46b/1hh8aQ
+ ncng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090060; x=1701694860;
+ d=1e100.net; s=20230601; t=1701090062; x=1701694862;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/ApHZZokfYNAhQkIrUJHXefSMXsGfI8Z1dkA9PV0nk=;
- b=UxTfEjxijRFEuNtLax6lpsfrDp1A5D+PtYf+A1B4LIG2Ln+o3wfBsKs2CaBm38BrWz
- /HrHj2K5/B8PyiCTyPFE/bKlduJyYkzEp6JULm3YwWfJS+pifGyWd0+JEYOyxkWGk8an
- weQHofwHfoegVP0MUIPoMKa2Zg1JtnfEaEjohy58TclKIkr6YrnGsksc14RGWLzsNTfU
- 03TTR7a6FiMEgJvhdi7yr71+YxM5tdEQ9lww+m9rvcVM0y0wetddtNA0Hi4F0R9QeHjo
- lYQCtIVAi2GhoVGAgOvCc5srBPbq7bBGzUDIqsSCdYHXktJ657GdTAwqwZ/mTpAWsNqk
- 8gmw==
-X-Gm-Message-State: AOJu0YylLy58bFxZBPOpu3COjyXJF1kTONX8KvQoAaT/Flb0b6vTxvuB
- ZASY+7EE6Nksi9ku6wPq05xg26l5Lk/zX6LF3x+mOQ==
-X-Google-Smtp-Source: AGHT+IHGa1gFNSuudBcyl7mzaQEGgiIfYHl0DrsZzPqNDoGp3v9/gjLywqHI9rHMa3y5uQseGL2c5Q==
-X-Received: by 2002:a05:6512:909:b0:50a:aa80:546e with SMTP id
- e9-20020a056512090900b0050aaa80546emr7117109lft.59.1701090060204; 
- Mon, 27 Nov 2023 05:01:00 -0800 (PST)
+ bh=UeW1odG9hZuINbqUD6xKHKoC4MNjK1YXfaNFNoaxSpw=;
+ b=OvULDCc+Rab1xwKynjy8HTQc/clHSkb1Ml+j5JnOJvdm/1iAzDBqSRAdS7rQNw5gUA
+ Ryei8DDrfR9kPFjD7j3wpkM2fPJ42N8YdndbSae8gEINwD0EPlHUUeZuIaVQECmvyneM
+ JZqkasJ5Hk0E73MNlEqVX4RW3EwzdcYKYq9TDDvgRo9O8VUYp6OWyfXbU5rYi7Z3wULn
+ bFIzQdrbUs/AGntJ1uZeICWqRceKUCHUpIPV4fi0ngtdoyfDgBV8bazDGo3a82YKlOLg
+ 2H/9hNpYJchd7oaFW00HVZ6y/hr73CAw3j2gfukSVqkSsZ4kbPP0O4DcvTBvWB3cTuPJ
+ D8Ig==
+X-Gm-Message-State: AOJu0YwVerTUWC2tQGC771QqaCnIKl0cFneSdf0mQQRXFwMPW42hvHg4
+ WXgTZM52CJc2CTxrpmjkeFgS0tjywcX4eZtPoQIy6A==
+X-Google-Smtp-Source: AGHT+IG/DY0aUDSEoysLMtJ6WiqhLVBpdqwyaT8FfKG5G5k+KwQgccEObtiSv7LprG7je8U5nT0QHQ==
+X-Received: by 2002:a05:6512:32a7:b0:507:a5e2:7c57 with SMTP id
+ q7-20020a05651232a700b00507a5e27c57mr7363582lfe.18.1701090062376; 
+ Mon, 27 Nov 2023 05:01:02 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.58
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.01.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:00:59 -0800 (PST)
+ Mon, 27 Nov 2023 05:01:02 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 22/43] bcm_ns3: fix overlap define with lwip
-Date: Mon, 27 Nov 2023 18:57:05 +0600
-Message-Id: <20231127125726.3735-23-maxim.uvarov@linaro.org>
+Subject: [PATHv11 23/43] rcar3_salvator-x_defconfig: increase binary size limit
+Date: Mon, 27 Nov 2023 18:57:06 +0600
+Message-Id: <20231127125726.3735-24-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -92,60 +92,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename declaration to not overlap with lwip.
-
-aarch64:  +   bcm_ns3
-+In file included from net/lwip/lwip-external/src/include/lwip/etharp.h:53,
-+                 from net/lwip/lwip-external/src/core/init.c:55:
-+net/lwip/lwip-external/src/include/lwip/prot/ethernet.h:69:
-		  error: "ETH_ADDR" redefined [-Werror]
-+   69 | #define ETH_ADDR(b0, b1, b2, b3, b4, b5) {{b0, b1, b2, b3, b4, b5}}
-+      |
-+In file included from include/config.h:3,
-+                 from arch/arm/include/asm/string.h:4,
-+                 from include/linux/string.h:21,
-+                 from include/malloc.h:369,
-+                 from include/stdlib.h:9,
-+                 from net/lwip/lwip-external/src/include/lwip/arch.h:83,
-+                 from net/lwip/lwip-external/src/include/lwip/debug.h:40,
-+                 from net/lwip/lwipopts.h:93,
-+                 from net/lwip/lwip-external/src/include/lwip/opt.h:51,
-+                 from net/lwip/lwip-external/src/core/init.c:38:
-+include/configs/bcm_ns3.h:52: note: this is the location of the previous definition
-+   52 | #define ETH_ADDR
+   aarch64:  +   rcar3_salvator-x
+u-boot.img exceeds file size limit:
+  limit:  0x100000 bytes
+  actual: 0x106d6c bytes
+  excess: 0x6d6c bytes
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/configs/bcm_ns3.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ configs/rcar3_salvator-x_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/bcm_ns3.h b/include/configs/bcm_ns3.h
-index 47de4bc201..7c6e0725a6 100644
---- a/include/configs/bcm_ns3.h
-+++ b/include/configs/bcm_ns3.h
-@@ -45,11 +45,11 @@
- #define PCIE_ARGS "pcie_args=pci=pcie_bus_safe pcie_ports=native vfio_pci.disable_idle_d3=1\0"
- 
- #ifdef CONFIG_BCM_SF2_ETH
--#define ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
-+#define BCM_ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
- #define NET_ARGS "bgmac_platform.ethaddr=${ethaddr} " \
- 	"ip=${ipaddr}::${gatewayip}:${netmask}::${ethif}:off"
- #else
--#define ETH_ADDR
-+#define BMC_ETH_ADDR
- #define NET_ARGS
- #endif
- 
-@@ -749,7 +749,7 @@
- 	OS_LOG_LEVEL \
- 	EXTRA_ARGS \
- 	PCIE_ARGS \
--	ETH_ADDR \
-+	BMC_ETH_ADDR \
- 	RESERVED_MEM \
- 	SETBOOTARGS \
- 	UPDATEME_FLASH_PARAMS \
+diff --git a/configs/rcar3_salvator-x_defconfig b/configs/rcar3_salvator-x_defconfig
+index e045cf27d3..238d0b3940 100644
+--- a/configs/rcar3_salvator-x_defconfig
++++ b/configs/rcar3_salvator-x_defconfig
+@@ -10,12 +10,13 @@ CONFIG_DEFAULT_DEVICE_TREE="r8a77950-salvator-x-u-boot"
+ CONFIG_SPL_TEXT_BASE=0xe6338000
+ CONFIG_RCAR_GEN3=y
+ CONFIG_TARGET_SALVATOR_X=y
+-CONFIG_SYS_MONITOR_LEN=1048576
++CONFIG_SYS_MONITOR_LEN=1085440
+ CONFIG_SPL_STACK=0xe6304000
+ CONFIG_SYS_LOAD_ADDR=0x58000000
+ CONFIG_PCI=y
+ CONFIG_LTO=y
+ CONFIG_REMAKE_ELF=y
++CONFIG_BOARD_SIZE_LIMIT=1085440
+ CONFIG_SYS_MONITOR_BASE=0x00000000
+ CONFIG_FIT=y
+ # CONFIG_BOOTSTD is not set
 -- 
 2.30.2
 
