@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D384AC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 12:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E011C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29EAD8753C;
-	Mon, 27 Nov 2023 13:55:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9D89B874BD;
+	Mon, 27 Nov 2023 14:00:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kCIy6fIa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vikf0DyK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28DD087540; Mon, 27 Nov 2023 13:55:14 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 6607A8754A; Mon, 27 Nov 2023 14:00:13 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C50087515
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 13:55:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 996B987264
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-77a453eb01cso222975385a.0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 04:55:12 -0800 (PST)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50aaaf6e58fso6348738e87.2
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701089711; x=1701694511; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EGHOTmzWXn35FnoQclpHtFA9HXKSz6S+O6SBElhLyNg=;
- b=kCIy6fIaSvrXQqd4Z81j1Prot85K8Wuw0CH5M7j/a/IZykDutC6kFiRwYxEEldeOJr
- UsBwm2K+3DieWwnHjALooAe/Tmxftbm8xZTm64Ye6+ySwV+Ze6O3+qU1A/cEGKsicKcG
- nBij32srWWnmB3sN/0qXJzKxrn8OWAPguqUwE=
+ d=linaro.org; s=google; t=1701090008; x=1701694808; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TWiTGo1AgGyORFdrKfKp8IiGMHArakZ9XQmVlNQ0YC4=;
+ b=Vikf0DyKgshZPjTcl5FfkeB88VrquRqQybeRSK3dPMNcmS8V/Jf7cN+XITDde/qa3c
+ 4y2/eiH58sRrXtYT3aTW02N3qhfaWiojUAvFmWzxFtvLthzir1jgsGK6R0m7US3zhnJt
+ DN11c75omRU6ZUKHv9xXFJSG/bPBK9KtpJm5H8z+RvaXLtybqHT/fGeR1HSrCW2yfGLs
+ g9q0Ucepu0D5U+iuGszZxf/URBOqGCcd0IhoJ5pyF7ieFkK4Q21BohUkMLVJuQz5gxIj
+ hjgSmk7WlYKp5RG6jzfet8qSV3LRYBCT2qQNOp/Lf1/CicejAUMs4ywJVs/u5zH0AB5q
+ 9ZBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701089711; x=1701694511;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EGHOTmzWXn35FnoQclpHtFA9HXKSz6S+O6SBElhLyNg=;
- b=BYhMTLcQPFH7hYklvdS0iXNoRJm4BL/Y4CCvFjJFy3Sb7zUH7VOgMs3Ev12ARb7r4E
- 1/Pd2g33ESFPv8Scz7DfKyWwHQUxJAyeHdv3sRyd06OxwUmFKtptmm6F9HmLp0dRyujB
- Fv2c4L6OHit7oKQJOp8V0Jw3bkDHVL+PJRzrfu2sOmAzG/Cuu6rLP0zZlc3ezt1Kd6ja
- Zy3k4hpdUpOPzTt381RQ5Q0jE8B5OsWNsZuDsYH7Fd6c0Ps6VUFhNtzlQY35Um4TpMOX
- Khp5AWkR8RNeCU925cO+fvQA9bCbb6V7ixSCCeC4w25uzlYG9aA5m8/qi0PXXC4qaMTw
- ZNOg==
-X-Gm-Message-State: AOJu0YxNfd2Q5wMlaz1bCfZVG7/SOUG7e/HzzSm05YVEZit5v8UEKpWt
- ww0Trwrk53xQcuUHptiLlxs6fA==
-X-Google-Smtp-Source: AGHT+IEisdumt/zcPv/S4QqwvsPA9ZsCVskDvKgewB6IbeDyPj/1fq8C94+jXsoTEXIXt0Vq5XPm2A==
-X-Received: by 2002:a05:620a:4b4a:b0:77d:515e:e84 with SMTP id
- su10-20020a05620a4b4a00b0077d515e0e84mr10807216qkn.23.1701089710854; 
- Mon, 27 Nov 2023 04:55:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-add3-c5a6-8002-bb49.res6.spectrum.com.
- [2603:6081:7b00:6400:add3:c5a6:8002:bb49])
+ d=1e100.net; s=20230601; t=1701090008; x=1701694808;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TWiTGo1AgGyORFdrKfKp8IiGMHArakZ9XQmVlNQ0YC4=;
+ b=SEQ4EMU73U3qqnDnw0if/QXUeiN+hD9Y1kk93zndm+kYY+1DKHobf8pqDVkZaX12iJ
+ HKPeHKL/7/b4Exr8beOR//Sk0NUEc0bkY1NNBq/X8BoJTNGuHTeg4bimfeA+TazG+a1K
+ P0VXLPuOCsPdDEEOioswXSjY40sjNF4XHAnJmLWz4ZcUIt/hbJtJWIsw+iDXuTDqkD8Z
+ 7MvSyn4Y7IYAMFsh4nuzrarFnPFPk5Gn1X7oqeZc6vKz6MkgeKgESvg+UVBBAyHpBqDJ
+ 5cmqFz4r63aXYfd2xe4gg0SBiwiYEyXqcjSE6bPvysSOmigYlJtL0g1rihOGk/yHXmvs
+ 3w/A==
+X-Gm-Message-State: AOJu0YwBOf7PlBdnAsPiCIqNRK1RALONY4+yHb0BL3yCSBd83oQxoJWZ
+ cdozpP/GXU4zk/pv3jRhtItx8Xm7ctBAZvh0y1+2qw==
+X-Google-Smtp-Source: AGHT+IG9TLy1uEepGZceOXr1rp8RSfFf+3cvaOzQIv/e6NK8sMK2nt26pWOPe4muWL9WPTEjnE7plA==
+X-Received: by 2002:a05:6512:32a7:b0:507:a5e2:7c57 with SMTP id
+ q7-20020a05651232a700b00507a5e27c57mr7361406lfe.18.1701090008561; 
+ Mon, 27 Nov 2023 05:00:08 -0800 (PST)
+Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- c13-20020ae9e20d000000b0077890c8896bsm3632998qkc.134.2023.11.27.04.55.10
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 04:55:10 -0800 (PST)
-Date: Mon, 27 Nov 2023 07:55:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de, sjg@chromium.org
-Subject: Re: [PATCH 1/1] i2c: Bugfix in i2c_get_chip_by_phandle()
-Message-ID: <20231127125508.GB2513409@bill-the-cat>
-References: <20231124140400.32027-1-pro@denx.de>
- <27d8c4e1-3a5c-360a-a59f-31a38e2e34b8@denx.de>
+ Mon, 27 Nov 2023 05:00:08 -0800 (PST)
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+To: u-boot@lists.denx.de
+Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
+ goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
+Subject: [PATHv11 00/43] net/lwip: add lwip library for the network stack
+Date: Mon, 27 Nov 2023 18:56:43 +0600
+Message-Id: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h2QsIj/5S3M5WJkP"
-Content-Disposition: inline
-In-Reply-To: <27d8c4e1-3a5c-360a-a59f-31a38e2e34b8@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,54 +90,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---h2QsIj/5S3M5WJkP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please find updated version of lwip patches. Changes are in the
+changelog bellow.
 
-On Mon, Nov 27, 2023 at 07:12:35AM +0100, Heiko Schocher wrote:
-> Hello Philip,
->=20
-> On 24.11.23 15:04, Philip Oberfichtner wrote:
-> > The "i2cbcdev" sneaked in when implementing this function for the
-> > bootcounter use case. Obviously the intention was to use prop_name
-> > instead.
-> >=20
-> > Fixes: b483552773 (i2c: Implement i2c_get_chip_by_phandle())
-> >=20
-> > Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> > ---
-> >  drivers/i2c/i2c-uclass.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> Indeed!
->=20
-> Acked-by: Heiko Schocher <hs@denx.de>
->=20
-> @Tom: Do you want a pull request from me, or can you pick up this?
+Thank you,
+Maxim. 
 
-I can get just this, thanks.
+changelog:
+	v11: - v11 is mosly respin of v10 patches with CI error fixes.
+                Gitlab CI: 
+                https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/18368
+                Azure CI:
+                https://dev.azure.com/u-boot/u-boot/_build/results?buildId=7366&view=results
+                (Azure CI, which is connected to github. Sometime I can see
+                 tftp timeout after some part of download there, but that can not be
+                 reproduced locally. While Gitblab CI is stable. Because of num tries in
+                 CI I suspect this CI was not always reliable.)
+                Azure and Gitlab also have different toolchains and I 
+                would say Gitlab generates bigger code then Azure CI.
+                
+                Also many boards have a binary limit size of 800k (even
+                qemu has limits). And increased limits to fit all the code. Specially did it
+                patch by board config to show which boards are failing to build. There I have
+                a question if we really want to support new functionality for old boards (mips,
+                arm32 and etc...). I hope board owners can help me if
+                it's valid to increase these limits.
 
---=20
-Tom
+		In this version I used git submodules and friend CI with
+		submodules. But I don't mind if you decide to maintain it in a different
+		way.
 
---h2QsIj/5S3M5WJkP
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+	v10: - fix ping with following tftp command issue with incorrect
+		ping timeout clear.
+	     - Makefile on make will init submodules and if needed will
+	       do git clone.
+	     - wget - some minor code style changes.
+	v9: - added first patch describing git submodule for lwip. So
+	      the build procedure is:
+		git submodule init
+		git submodule update
+		make
+	    - reworked a little bit dhcp cmd state polling
+	    - fixed review comments for v8
+	v8: - comments for previous review
+	    - removed lwip timeout callback pointer
+	    - made lwip timeouts works, that also allowed to remove
+	      static vars.
+	    - setenv for filesize tftp and wget has to be in hex.
+	    - Makefile changes always compile it tftp,dns,wget,ping due
+	      to it can be used not only by CONFIG_CMD_.
+	    - Kconfig changes - simplify lwIP settings and support only
+	      one configuration.
+	    - tested with mini debian.iso load over http or tftp, mount
+	      and boot it (qemu, arm64).
+	v7: - more review fixes.
+	    - support of multiply eth devices, were "ethact" selects the
+	      active device.
+	v6: - fixed review comments for v5 (thanks Ilias and Simon).
+	v5: - fixed Iliases comments and split big patch on the small
+		ones.
+	v4: - tested with tests/py/ did some minor fixes (out of tree
+		build, variables set after downloads).
+	    - accounted review comments for documentation.
+	    - implemented dns command
+            - corrected wget command to not use serverip variable and use just
+		url string.
+	v3: - use lwip commands for ping,tftp,wget,dhcp if this patch
+	      applied. Drop CONFIG_LIB_LWIP_REPLACE_<COMMAND> option.
+	    - docs: use rst variant and drop references to RFC.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVkkakACgkQFHw5/5Y0
-tywzywv/ZVX+3OMb4NFcasEXH7y5tbhL/E9mgE6OfEygRXEGQs7ZkKbHBCdhmYqU
-kKTb0LISJ6PVtuKUaMH13bg3zaa2JB3VVhwvFZ7Va7Fw6vDRLbbRQv9Y8QPfXMpa
-MZMmuhtxOt8c5fAFVPi9xYsIUbJQfrn0pgj2OxG0/Eq4Yv7GJzpDJiy4fR+7sTio
-Y1wFzQwDR26N3upzSCdXEqSKpJPjTeBpRiBNMSLzT+vuANQByjwDTJ10UeV4DR8M
-yUeNedm9nmCNZCcUIIa3PZ7l4wg2zKGmgI/1/6pDHyIsSy/94PNyLmbrY4yGT/RQ
-2qBNHhYVOP3WpwjH4Hbg3J/zYrCwl2fWx/yZwP14ZilXlEQ0f8mEX0ao6gCEJDcB
-+tsypFmkuJwfayes4xrltFgUKwQnA7smmwQV9sYvA21wg0eUDzE0DxGEA4SSa7bM
-AKnYVKZB5VBrQQorRJmjYNlJKTW4Dfj+Ps2HXuC18B+O49+1GKlg+wgkXf1HLKLY
-8bYp9vr6
-=wIth
------END PGP SIGNATURE-----
+Maxim Uvarov (43):
+  submodule: add lwIP as git submodule
+  net/lwip: add doc/develop/net_lwip.rst
+  net/lwip: integrate lwIP library
+  net/lwip: implement dns cmd
+  net/lwip: implement dhcp cmd
+  net/lwip: implement tftp cmd
+  net/lwip: implement wget cmd
+  net/lwip: implement ping cmd
+  net/lwip: add lwIP configuration
+  net/lwip: implement lwIP port to U-Boot
+  net/lwip: update .gitignore with lwIP
+  net/lwip: connection between cmd and lwip apps
+  net/lwip: replace original net commands with lwip
+  net/lwip: split net.h to net.h, arp.h and eth.h
+  test_efi_loader.py: use $filesize var
+  test_net: print out net list
+  net: sandbox: fix NULL pointer derefences
+  net/smc911x: fix return from smc911x_send
+  sandbox: eth-raw-os: successful return code is 0
+  driver/net/rtl8139: remove debug print
+  mach-socfpga: do not overlap defines with lwip
+  bcm_ns3: fix overlap define with lwip
+  rcar3_salvator-x_defconfig: increase binary size limit
+  lwip: omap3: rename mem_init
+  configs/turris_omnia_defconfig set limit to 0xf6000
+  configs/tbs2910_defconfig inc limit
+  configs/socfpga_secu1_defconfig: enable LTO
+  configs/turris_omnia_defconfig: enable LTO
+  configs/am335x_boneblack_vboot_defconfig: enable LTO and increase SPL
+    size
+  configs/sheevaplug_defconfig: enable LTO and inc size
+  configs/lschlv2_defconfig: enable LTO and inc size
+  configs/lsxhl_defconfig: LTO + size
+  configs/am335x_evm_defconfig: inc SPL size
+  configs/bk4r1_defconfig: inc size
+  configs/linkit-smart-7688_defconfig: increse size
+  configs/gardena-smart-gateway-mt7688_defconfig: increase size
+  configs/rcar3_ulcb_defconfig: increase size
+  configs/qemu-x86_64_defconfig: increase ROM size
+  Makefile: add dtbs to clean
+  .azure-pipelines: init submodules
+  mach-mtmips: inc SPL size limit
+  configs/linkit-smart-7688_defconfig: increase board limit
+  .gitlab-ci.yml: change ownership of the git files
 
---h2QsIj/5S3M5WJkP--
+ .azure-pipelines.yml                          |  10 +-
+ .gitlab-ci.yml                                |  15 +-
+ .gitmodules                                   |   4 +
+ Makefile                                      |  12 +-
+ arch/arm/include/asm/arch-omap3/mem.h         |   2 +-
+ arch/arm/mach-omap2/omap3/board.c             |   2 +-
+ arch/arm/mach-omap2/omap3/emif4.c             |   4 +-
+ arch/arm/mach-omap2/omap3/sdrc.c              |   6 +-
+ .../mach-socfpga/include/mach/handoff_soc64.h |   6 -
+ arch/arm/mach-socfpga/wrap_handoff_soc64.c    |   9 +
+ arch/mips/mach-mtmips/Kconfig                 |   2 +-
+ arch/sandbox/cpu/eth-raw-os.c                 |   2 +-
+ boot/bootmeth_efi.c                           |  18 +-
+ boot/bootmeth_pxe.c                           |  21 +-
+ cmd/Makefile                                  |   1 +
+ cmd/net-lwip.c                                | 307 ++++++++++++++++
+ cmd/net.c                                     |  86 +----
+ cmd/pxe.c                                     |  19 +-
+ configs/am335x_boneblack_vboot_defconfig      |   3 +
+ configs/am335x_evm_defconfig                  |   1 +
+ configs/bk4r1_defconfig                       |   2 +-
+ .../gardena-smart-gateway-mt7688_defconfig    |   2 +-
+ configs/linkit-smart-7688_defconfig           |   2 +-
+ configs/lschlv2_defconfig                     |   3 +-
+ configs/lsxhl_defconfig                       |   3 +-
+ configs/qemu-x86_64_defconfig                 |   5 +-
+ configs/rcar3_salvator-x_defconfig            |   3 +-
+ configs/rcar3_ulcb_defconfig                  |   1 +
+ configs/sheevaplug_defconfig                  |   3 +-
+ configs/socfpga_secu1_defconfig               |   1 +
+ configs/tbs2910_defconfig                     |   2 +-
+ configs/turris_omnia_defconfig                |   3 +-
+ doc/develop/index.rst                         |   1 +
+ doc/develop/net_lwip.rst                      |  75 ++++
+ drivers/net/rtl8139.c                         |   1 -
+ drivers/net/sandbox.c                         |   5 +
+ drivers/net/smc911x.c                         |   2 +-
+ include/configs/bcm_ns3.h                     |   6 +-
+ include/net.h                                 | 197 +----------
+ include/net/arp.h                             |   9 +
+ include/net/eth.h                             | 194 +++++++++++
+ include/net/lwip.h                            |  73 ++++
+ include/net/ulwip.h                           |  67 ++++
+ lib/Kconfig                                   |   2 +-
+ net/Kconfig                                   |   3 +
+ net/Makefile                                  |   1 +
+ net/eth-uclass.c                              |  37 +-
+ net/lwip/.gitignore                           |   8 +
+ net/lwip/Kconfig                              |  34 ++
+ net/lwip/Makefile                             |  70 ++++
+ net/lwip/apps/dhcp/lwip-dhcp.c                |  86 +++++
+ net/lwip/apps/dns/lwip-dns.c                  |  63 ++++
+ net/lwip/apps/http/Makefile                   |   6 +
+ net/lwip/apps/http/lwip-wget.c                | 105 ++++++
+ net/lwip/apps/ping/Makefile                   |  12 +
+ net/lwip/apps/ping/lwip_ping.c                |  39 +++
+ net/lwip/apps/ping/lwip_ping.h                |  15 +
+ net/lwip/apps/ping/ping.h                     |  28 ++
+ net/lwip/apps/tftp/Makefile                   |   7 +
+ net/lwip/apps/tftp/lwip-tftp.c                | 132 +++++++
+ net/lwip/lwip-external                        |   1 +
+ net/lwip/lwipopts.h                           | 178 ++++++++++
+ net/lwip/port/if.c                            | 327 ++++++++++++++++++
+ net/lwip/port/include/arch/cc.h               |  44 +++
+ net/lwip/port/include/arch/sys_arch.h         |  10 +
+ net/lwip/port/include/limits.h                |   0
+ net/lwip/port/sys-arch.c                      |  13 +
+ net/net.c                                     |  44 ++-
+ test/py/tests/test_efi_loader.py              |   4 +-
+ test/py/tests/test_net.py                     |   2 +
+ 70 files changed, 2113 insertions(+), 348 deletions(-)
+ create mode 100644 .gitmodules
+ create mode 100644 cmd/net-lwip.c
+ create mode 100644 doc/develop/net_lwip.rst
+ create mode 100644 include/net/arp.h
+ create mode 100644 include/net/eth.h
+ create mode 100644 include/net/lwip.h
+ create mode 100644 include/net/ulwip.h
+ create mode 100644 net/lwip/.gitignore
+ create mode 100644 net/lwip/Kconfig
+ create mode 100644 net/lwip/Makefile
+ create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
+ create mode 100644 net/lwip/apps/dns/lwip-dns.c
+ create mode 100644 net/lwip/apps/http/Makefile
+ create mode 100644 net/lwip/apps/http/lwip-wget.c
+ create mode 100644 net/lwip/apps/ping/Makefile
+ create mode 100644 net/lwip/apps/ping/lwip_ping.c
+ create mode 100644 net/lwip/apps/ping/lwip_ping.h
+ create mode 100644 net/lwip/apps/ping/ping.h
+ create mode 100644 net/lwip/apps/tftp/Makefile
+ create mode 100644 net/lwip/apps/tftp/lwip-tftp.c
+ create mode 160000 net/lwip/lwip-external
+ create mode 100644 net/lwip/lwipopts.h
+ create mode 100644 net/lwip/port/if.c
+ create mode 100644 net/lwip/port/include/arch/cc.h
+ create mode 100644 net/lwip/port/include/arch/sys_arch.h
+ create mode 100644 net/lwip/port/include/limits.h
+ create mode 100644 net/lwip/port/sys-arch.c
+
+-- 
+2.30.2
+
