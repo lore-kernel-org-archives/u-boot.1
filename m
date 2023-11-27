@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC504C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 10:35:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8FBC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 11:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08F0D8752C;
-	Mon, 27 Nov 2023 11:35:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6AFAA87534;
+	Mon, 27 Nov 2023 12:58:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LNMwADwq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QWLAQ8Ns";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 558E48752F; Mon, 27 Nov 2023 11:35:49 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 1DAC18714A; Mon, 27 Nov 2023 12:58:33 +0100 (CET)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C33B287515
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 11:35:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2355B87539
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 12:58:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2c5071165d5so6847751fa.0
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 02:35:46 -0800 (PST)
+ spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-1fa0885e1c2so1538741fac.0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 03:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701081346; x=1701686146; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GjuDocDBDs0UWKjiGdUN+Qf5uJGsEIngG4aDa5fhiq4=;
- b=LNMwADwqmWdutIDSV5JTJjh91IELhxOfhkDI8r5xKWK6is8Lw041M8zpB8ZlUZf9Bu
- CBGokUO/45YrKXmcTHH47WcDbtyHDWec90lOcX47fzHoUcoqO4kN5G0mBz7bwkeNevLY
- CdyiLSPSUc8bB02asMRAulU1WE7VsK38UEGK+uIUIWg+/HYnz1OZfJIlOiW+l+C2CGHn
- 5xSXP8RaU0txdqcalVvim6AZ0dRJJs8kMOlgF/DqJk30FaMesvKl310z0snxNqtEoYs9
- PQVHxa8+4iU9asIiWg2lgnhPfI73l2CyBhT6Xx9v7O4e/GKfAwqHRKxalObkF4p+xGMU
- nTDw==
+ d=gmail.com; s=20230601; t=1701086307; x=1701691107; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xN/gPpoyIZWVoU9g4K/8XD72++LaJbLzPEnItw+gsOg=;
+ b=QWLAQ8NsOppkr2uwuIcVz+FSaJ3oIBTk+quV8YMEk1j6eMnH1sGCwS6PmT6th9bVXc
+ jvdHGboY6aLPZzqsHS7Vim9EmPBjXM/GzbEpEta7lQUIaYzefbsU2XKKWGjEELFEXfkb
+ CscxFqS2V7O9qdnc9U/Rr57mQulkEe0n+5XdoPQiDjCb3bhacC6HeDKSwtZ+Xt5UcvnB
+ ZIsUCxoOALCPduomT8s7TrNoVlQXwLIAEtTEhgBVNf4DkQyq/MKApPYSSdpownGAJ0kH
+ L8LYAvKLeUDYsSlKwW4eSNYOs3i4AA1/8aI3Rw85+0Cfg2qYmyH2THdkvN4Qhi51P7QN
+ ZQsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701081346; x=1701686146;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GjuDocDBDs0UWKjiGdUN+Qf5uJGsEIngG4aDa5fhiq4=;
- b=aSNfSujz1Oz4DaX2KuF36yySsrEb5Xg0EUWsu9gerAalFJS8MlEdKNX8v2XH6bW1cJ
- YfkFxXUIFnHFi2aClU3anCIx09spLppOICGT50YrOkbbXLuH8ZsSKZTSITD2vMY4pL8y
- sMTUQ9ycSAj6ZYD9W+9rwI9LOMRMEa3O7EEs6JZ3NRtdE7irxD/N56HBXsI7BU3UJQyL
- rrY5WV84PYltgU2n0m6/rGeNZV1Al5pgDR0tK4jc2vamOUgydeXKdY/rzWGKgCR0me74
- CDjCTqP6ItTtCD+7YS/wfCzhK0WvKm4jolGyDdVcbxYg38Fj+td3z81WOXXBGbLia5SD
- turQ==
-X-Gm-Message-State: AOJu0YxEPuPXsm2nZ5BtxsFf+JUxTVj7bV0Yk8rQnFDDwhc/fp1q2Bkg
- S5aQXpbtO6ofVKryGyHFt8EHtN8qY61Tvpn6dXlqVg==
-X-Google-Smtp-Source: AGHT+IHv2lroun5aVaRu+/Vo/i/3ybdr18SzSl1+iKKJqZJufsBpYdiSuLQz+LOkL7d0xkTZKgc+76SSSOT7j4aKVhk=
-X-Received: by 2002:a2e:a493:0:b0:2c9:a20b:c524 with SMTP id
- h19-20020a2ea493000000b002c9a20bc524mr1868451lji.39.1701081346067; Mon, 27
- Nov 2023 02:35:46 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701086307; x=1701691107;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xN/gPpoyIZWVoU9g4K/8XD72++LaJbLzPEnItw+gsOg=;
+ b=Tz2qmuhYff5XxXdcO8hBDtCPjR79lIz5KzW6mv78932EPFx4VCrBbOA79ogcR0mEof
+ mUqgg+lhKNoEko2f0F5ILjE4go9EVo/J9KMTKINU7YwmsNbQ42r/3fH1+zvH6B0MrxIU
+ nmqSfgacKws2dVXfNbcdmEPlIPwKyoujz4Q0+gRzEKXLwV7RB8Bue7yV3KBxpi5AK34M
+ 5QThBzQ26roj4tFHZctm6TiJQMmLRDEaStaoL72mJpj7mfZl7Y4lZWfwxpPvhYRS3oWr
+ i5Qcgnoptdm6TbMPGmYzs79AlX8k9IF1gqMetKTEWfrQ43i33gfmOovMiS98zpDb/5US
+ RyLA==
+X-Gm-Message-State: AOJu0Yw6FM1y93pWBSmPNT6dtlR9ZTJErXEPuFB6GjuErTAOWUCYYRwo
+ K9CHoiOAR4DmfnvLbwLm4Qte/4cfSe1Yobf0sWg=
+X-Google-Smtp-Source: AGHT+IGnux8fGVCJBpfkap5vAea6G0WgjTstyM8hBGdhw7mKuPH7XKT4FCdQSuWzZRsnYUUYbAmxjafIDHHXbWyqtRk=
+X-Received: by 2002:a05:6870:aa86:b0:1f5:ef27:9c0c with SMTP id
+ gr6-20020a056870aa8600b001f5ef279c0cmr16269845oab.36.1701086307639; Mon, 27
+ Nov 2023 03:58:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121235713.1530289-1-i@shantur.com>
- <20231121235713.1530289-3-i@shantur.com>
- <CAC_iWjKxyRWd+bf==mO0tLQEG843J631xNQRo0_ueGXpdNCokg@mail.gmail.com>
- <CAHc5_t3bfArFaiWGg_1EdnkhUeaLXc75SRo7TB8LfjGr1AzFJw@mail.gmail.com>
- <CAC_iWjJkQocU5T_wnM0kve1g1Fvu2vj4KQqyz+NBBKbsjcejBw@mail.gmail.com>
- <CAHc5_t1MDs6PYHu8q9zBLAa6Tv5tBOaqDYBMU=W+57t7pkpgOg@mail.gmail.com>
-In-Reply-To: <CAHc5_t1MDs6PYHu8q9zBLAa6Tv5tBOaqDYBMU=W+57t7pkpgOg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Nov 2023 12:35:09 +0200
-Message-ID: <CAC_iWjJJmm8nBtGGLJVCnA+=BS79Nuw2AV6fc=U7-axwLq_o-A@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] efi_vars: Implement SPI Flash store
-To: Shantur Rathore <i@shantur.com>
-Cc: takahiro.akashi@linaro.org, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
+ <20231117113811.149329-5-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231117113811.149329-5-rasmus.villemoes@prevas.dk>
+From: Christian Gmeiner <christian.gmeiner@gmail.com>
+Date: Mon, 27 Nov 2023 12:58:16 +0100
+Message-ID: <CAH9NwWdkG9LrTps38aZ+MRnn7VN=FAD3fqpWOA4F0KX935TwOw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] led: led_gpio: use led_bind_generic() helper
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Doug Zobel <douglas.zobel@climate.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,110 +87,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Nov 2023 at 11:31, Shantur Rathore <i@shantur.com> wrote:
 >
-> Hi Ilias,
+> Use the helper led_bind_generic() to reduce code duplication.
 >
-> On Mon, Nov 27, 2023 at 7:09=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Shantur
-> >
-> > Please don't send a v2 unless the v1 discussion has settled. It just
-> > makes life harder. I'll ignore v2 for now and respond here.
-> >
->
-> Sure, I'm still learning the ways around here.
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 
-No worries -- we've all been there.
+Reviewed-by: Christian Gmeiner <christian.gmeiner@gmail.com>
 
+> ---
+>  drivers/led/led_gpio.c | 15 +--------------
+>  1 file changed, 1 insertion(+), 14 deletions(-)
 >
-> > [...]
-> >
-> > >
-> > > >
-> > > > > +       if (ret)
-> > > > > +               goto error;
-> > > > > +
-> > > > > +       ret =3D spi_flash_erase_dm(sfdev, CONFIG_EFI_VARIABLE_SF_=
-OFFSET, EFI_VAR_BUF_SIZE);
-> > > > > +       debug("%s - Erased SPI Flash offset %lx\n", __func__, CON=
-FIG_EFI_VARIABLE_SF_OFFSET);
-> > > > > +       if (ret)
-> > > > > +               goto error;
-> > > > > +
-> > > > > +       ret =3D spi_flash_write_dm(sfdev, CONFIG_EFI_VARIABLE_SF_=
-OFFSET, len, buf);
-> > > > > +       debug("%s - Wrote buffer to SPI Flash : %ld\n", __func__,=
- ret);
-> > > > > +
-> > > > > +       if (ret)
-> > > > > +               goto error;
-> > > > > +
-> > > > > +       ret =3D EFI_SUCCESS;
-> > > > > +error:
-> > > > > +       if (ret)
-> > > > > +               log_err("Failed to persist EFI variables in SF\n"=
-);
-> > > > > +       free(buf);
-> > > > > +       return ret;
-> > > > > +}
-> > > > > +
-> > > > > +efi_status_t efi_var_from_sf(void)
-> > > > > +{
-> > > > > +       struct efi_var_file *buf;
-> > > > > +       efi_status_t ret;
-> > > > > +       struct udevice *sfdev;
-> > > > > +
-> > > > > +       buf =3D calloc(1, EFI_VAR_BUF_SIZE);
-> > > > > +       if (!buf) {
-> > > > > +               log_err("Out of memory\n");
-> > > > > +               return EFI_OUT_OF_RESOURCES;
-> > > > > +       }
-> > > >
-> > > > You don't want normal memory for the variables.  Instead, you want =
-EFI
-> > > > memory which is marked for EFI runtime services data. U-Boot alread=
-y
-> > > > has code to support Get/GetNextvariableRT, you just need to use
-> > > > efi_var_mem_init().
-> > > > If you need hints have a look at lib/efi_loader/efi_variable_tee.c
-> > > > which implements variables stored in an RPMB, but still uses the
-> > > > memory backend for runtime services.
-> > > >
-> > >
-> > > I believe EFI Runtime stuff is handled by efi_variable.c functions.
-> >
-> > Yes, they are, but there is a subtle difference here.
-> > efi_variable.c and efi_variable_tee.c have their own version of
-> > runtime service implementation. The functions that can be shared
-> > across the two are in efi_var_common.c.
-> > What your patch does is shoehorn an SPI backend storage to the
-> > existing implementation for storing variables to a file. Depending on
-> > what we decide for runtime calls that can end up being messy.
-> >
-> > efi_variable.c -> deals with variables on a file
-> > efi_variable_tee.c -> deals with variables hidden behind the secure wor=
-ld
-> >
-> > I think it would be cleaner to add efi_variable_sf.c and move the
-> > common functions you need from efi_variable.c -> efi_var_common.c
-> > Heinrich, do you have a preference for that?
+> diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
+> index fbed151b5d9..71421de628c 100644
+> --- a/drivers/led/led_gpio.c
+> +++ b/drivers/led/led_gpio.c
+> @@ -11,7 +11,6 @@
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <asm/gpio.h>
+> -#include <dm/lists.h>
 >
-> I agree, the v1 patch was not implementing it cleanly.
-> Based on Akashi's comments I made these changes for v2 ( v3 with some
-> compiler warning fixes )
+>  struct led_gpio_priv {
+>         struct gpio_desc gpio;
+> @@ -80,19 +79,7 @@ static int led_gpio_remove(struct udevice *dev)
 >
-> - Moved common stuff out of efi_var_file.c to efi_var_common.c
-> - Added efi_var_sf.c to handle writing vars to SPI Flash as
-> efi_var_file.c does for File
+>  static int led_gpio_bind(struct udevice *parent)
+>  {
+> -       struct udevice *dev;
+> -       ofnode node;
+> -       int ret;
+> -
+> -       dev_for_each_subnode(node, parent) {
+> -               ret = device_bind_driver_to_node(parent, "gpio_led",
+> -                                                ofnode_get_name(node),
+> -                                                node, &dev);
+> -               if (ret)
+> -                       return ret;
+> -       }
+> -
+> -       return 0;
+> +       return led_bind_generic(parent, "gpio_led");
+>  }
 >
-> Happy to change things if needed.
+>  static const struct led_ops gpio_led_ops = {
+> --
+> 2.40.1.1.g1c60b9335d
+>
 
-Great, I'll have a look at v3 then
 
-Thanks
-/Ilias
->
-> Kind regards,
-> Shantur
+-- 
+greets
+--
+Christian Gmeiner, MSc
+
+https://christian-gmeiner.info/privacypolicy
