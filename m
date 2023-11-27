@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49240C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA4BC0755A
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 13:01:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E33D8757D;
-	Mon, 27 Nov 2023 14:00:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13C878758C;
+	Mon, 27 Nov 2023 14:00:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KzoZiYzj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qCOyDr19";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C728757C; Mon, 27 Nov 2023 14:00:24 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 736C187515; Mon, 27 Nov 2023 14:00:26 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8FE987569
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DE84287570
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 14:00:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50ba71356ddso3382730e87.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:18 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5094727fa67so5972657e87.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 05:00:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701090018; x=1701694818; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701090020; x=1701694820; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LUWP4Vp2l/kcF70jt1z+yuWxjmiAQYDKKzCdYrFjBMU=;
- b=KzoZiYzjExJgGljbru+NQWEmeDZyMiFcXdE4AY1SoeuI0u/qv+YNw3F3XEofIfCBUi
- MDVbSKZru41K/VbN+J9FVBcl5mOxfHo3/B1rHK2SbXuqbFcvHMaSpy0IRpIDPii0HNlt
- m5oKOIamr5S5JnDdylQD/MMGZgTXkv/P/4voRCf8q0k3rJ8IupDNrTYdaoqbP6avKBbk
- N4VGR0z3CLyQH+5zxIkEVm4++uO+lcGvwHIMOAGZ1F8bhqOVxPIg1KRg1zFpJrR+LO2k
- Cuiu98n1wslaX55OHl5xiWRFGte+KanWAyiiZvJWtFwgBx2WdZar39cjmQiXW7ZKU5DL
- AG1A==
+ bh=7JT5v0igFMxgK43yQbnjgeHYXiWam/yzmig+d+0Kn2s=;
+ b=qCOyDr19OshgH5oD2/5g7xOVjp87BSAXao68VzQeF7FO+DG7IxX8R/uNkWR8Rn89U6
+ RenFoGwlMTnbMXyvyxfmSlAJWtwzWCvE2Jl+B83s7cf9xmxOBq5FILloDbNX7Qy3h5C1
+ xhjhRZxUo448Upf8HKyv4xLteF+IgJTVaGrFdXlHbXACLfWxRuzqozuZGuKZ6YSNkT4h
+ K6Do3Vjsry3+hm+fyItU7eu199h729grUmRoKFsDa5WwmZSif5h4P8EJ/Qz/MDTQn19K
+ vJKmnN9SkzXSj5mK8W6hzls7dAkUtBIcc2K8IjNiQPU4HAqRiw8SGVpCGx9L6nO2w4et
+ tpDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701090018; x=1701694818;
+ d=1e100.net; s=20230601; t=1701090020; x=1701694820;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LUWP4Vp2l/kcF70jt1z+yuWxjmiAQYDKKzCdYrFjBMU=;
- b=mcOcAp+u61J6VaMVVq4aVOS8RqiSlj82jXOOkb0Fvi3L3RR7wlFKO4dnBrhNil/nAZ
- Kk3YIkZwcnVCceKEj+IiDFC37ZQ+YdVdSkRa9+OIlgoA0/VI5P0VsZUJFT/YPAAVeK2k
- ZLq3kyzcLxfeO0V9I3ZCvI2uX0Vgm96Fuu6aaJ5xmz+DGSVZrrn93GMTwMSMnukeyRP9
- vefYq39SQJHUQzH7wj7gtr0JhrfOBnLQgLDBtuqVAZjPapCnUvcH4u8PG7vDwhpwnMOC
- HATMm6x8lFFqSqgg5/JALoOl0j1CRWWOLfb1IsPFrmSsknTvF9WB113yq6Jf+YPdw/Tz
- XTUQ==
-X-Gm-Message-State: AOJu0Yw6LVL+w7lWhEG7AJbwKr6xlbJiKUmvdBlmdcvel7ywcPQXwO4e
- UBA86ObQGgeSlyXIwOC+l+JczxN15AC70miDUZQ36A==
-X-Google-Smtp-Source: AGHT+IER0ZPmyF317zYUCjuB95UKZ7iSgP6ENPZyxS21qqCUi1gcA5Mb05ZLojIowhVcFEZJbhaYBA==
-X-Received: by 2002:a05:6512:b07:b0:4f8:7513:8cac with SMTP id
- w7-20020a0565120b0700b004f875138cacmr7553451lfu.48.1701090017933; 
- Mon, 27 Nov 2023 05:00:17 -0800 (PST)
+ bh=7JT5v0igFMxgK43yQbnjgeHYXiWam/yzmig+d+0Kn2s=;
+ b=LuRJUb9RJciKAxzVy7Dej1tykT0PAL1iOKDSrgXnoo5wRKVTxffjYzhLknbZ9uD/xu
+ DU6fgYNSRU3nUjF2sHUpKgJXET1Da4OM9//aHrUYKGbZT7RtzrDXBu7XgmrxmFnp53mx
+ UuQBV2JVxWgcZvh6NmcQoqPEfpxENvsAFamT+CJsMKQs267jiGWa+u2s8vL+lvyzWVCq
+ bjXu0C/imWaU/B5AmqGEcA7bY2COP7IjeYNpHPfsmQTmMRvsOFzqXj3Tj2i3nOTOlkRv
+ yz//0vJwNw5iKIGz5dpPGaB3xqUH9kNHhIfFu4Jfn7hMXNh84MfRa898ucTGV7bQ0bdM
+ L/jw==
+X-Gm-Message-State: AOJu0YwTAqrYzz7Gp4fhdFii1+4O8Nv9HUI6s/6/bZqyXLPPijw/obtR
+ /3rFXFw3sJr/raP6nksfCLaOycQ9WJdgzAUX+S6g7A==
+X-Google-Smtp-Source: AGHT+IE4WSr1QMmXjhGAxh6+pLT/K8xjaxn2EGN6cFVqFLrHjil0MYoTKEVH0RCwf3QxCVC+kYfdoA==
+X-Received: by 2002:ac2:532f:0:b0:505:6cc7:e0f7 with SMTP id
+ f15-20020ac2532f000000b005056cc7e0f7mr7457865lfh.44.1701090020061; 
+ Mon, 27 Nov 2023 05:00:20 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.15
+ f16-20020a19ae10000000b005092b887ba2sm1482489lfc.201.2023.11.27.05.00.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 05:00:17 -0800 (PST)
+ Mon, 27 Nov 2023 05:00:19 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
  goldsimon@gmx.de, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv11 04/43] net/lwip: implement dns cmd
-Date: Mon, 27 Nov 2023 18:56:47 +0600
-Message-Id: <20231127125726.3735-5-maxim.uvarov@linaro.org>
+Subject: [PATHv11 05/43] net/lwip: implement dhcp cmd
+Date: Mon, 27 Nov 2023 18:56:48 +0600
+Message-Id: <20231127125726.3735-6-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
@@ -93,59 +93,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 U-Boot recently got support for an alternative network stack using LWIP.
-Replace dns command with the LWIP variant while keeping the output and
+Replace dhcp command with the LWIP variant while keeping the output and
 error messages identical.
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/net/lwip.h           | 19 +++++++++++
- net/lwip/Makefile            |  2 ++
- net/lwip/apps/dns/lwip-dns.c | 63 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 84 insertions(+)
- create mode 100644 include/net/lwip.h
- create mode 100644 net/lwip/apps/dns/lwip-dns.c
+ include/net/lwip.h             | 12 +++++
+ net/lwip/Makefile              |  1 +
+ net/lwip/apps/dhcp/lwip-dhcp.c | 86 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 99 insertions(+)
+ create mode 100644 net/lwip/apps/dhcp/lwip-dhcp.c
 
 diff --git a/include/net/lwip.h b/include/net/lwip.h
-new file mode 100644
-index 0000000000..ab3db1a214
---- /dev/null
+index ab3db1a214..9941845f8c 100644
+--- a/include/net/lwip.h
 +++ b/include/net/lwip.h
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
-+		char *const argv[]);
+@@ -17,3 +17,15 @@ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
+  *          Other value < 0, if error
+  */
+ int ulwip_dns(char *name, char *varname);
 +
 +/**
-+ * ulwip_dns() - creates the DNS request to resolve a domain host name
++ * ulwip_dhcp() -  create the DHCP request to obtain IP address.
 + *
-+ * This function creates the DNS request to resolve a domain host name. Function
-+ * can return immediately if previous request was cached or it might require
-+ * entering the polling loop for a request to a remote server.
++ * This function creates the DHCP request to obtain IP address. If DHCP server
++ * returns file name, this file will be downloaded with tftp.  After this
++ * function you need to invoke the polling loop to process network communication.
 + *
-+ * @name:    dns name to resolve
-+ * @varname: (optional) U-Boot variable name to store the result
-+ * Returns: ERR_OK(0) for fetching entry from the cache
-+ *          -EINPROGRESS success, can go to the polling loop
-+ *          Other value < 0, if error
-+ */
-+int ulwip_dns(char *name, char *varname);
++ * Returns: 0 if success
++ *         Other value < 0, if error
++ **/
++int ulwip_dhcp(void);
 diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 3fd5d34564..5d8d5527c6 100644
+index 5d8d5527c6..a3a33b7f71 100644
 --- a/net/lwip/Makefile
 +++ b/net/lwip/Makefile
-@@ -62,3 +62,5 @@ obj-$(CONFIG_NET) += lwip-external/src/netif/ethernet.o
- 
+@@ -63,4 +63,5 @@ obj-$(CONFIG_NET) += lwip-external/src/netif/ethernet.o
  obj-$(CONFIG_NET) += port/if.o
  obj-$(CONFIG_NET) += port/sys-arch.o
-+
-+obj-y += apps/dns/lwip-dns.o
-diff --git a/net/lwip/apps/dns/lwip-dns.c b/net/lwip/apps/dns/lwip-dns.c
+ 
++obj-y += apps/dhcp/lwip-dhcp.o
+ obj-y += apps/dns/lwip-dns.o
+diff --git a/net/lwip/apps/dhcp/lwip-dhcp.c b/net/lwip/apps/dhcp/lwip-dhcp.c
 new file mode 100644
-index 0000000000..3ee6e24ef4
+index 0000000000..966b3991ee
 --- /dev/null
-+++ b/net/lwip/apps/dns/lwip-dns.c
-@@ -0,0 +1,63 @@
++++ b/net/lwip/apps/dhcp/lwip-dhcp.c
+@@ -0,0 +1,86 @@
 +// SPDX-License-Identifier: GPL-2.0
 +
 +/*
@@ -156,58 +150,81 @@ index 0000000000..3ee6e24ef4
 +#include <command.h>
 +#include <console.h>
 +
-+#include <lwip/dns.h>
-+#include <lwip/ip_addr.h>
++#include <lwip/dhcp.h>
++#include <lwip/prot/dhcp.h>
++#include "lwip/timeouts.h"
 +
++#include <net/eth.h>
 +#include <net/ulwip.h>
 +
-+static void dns_found_cb(const char *name, const ip_addr_t *ipaddr, void *callback_arg)
++#define DHCP_TMO_TIME 1000 /* poll for DHCP state change */
++#define DHCP_TMO_NUM  20  /* number of tries */
++
++typedef struct dhcp_priv {
++	int num_tries;
++	struct netif *netif;
++} dhcp_priv;
++
++static void dhcp_tmo(void *arg)
 +{
-+	char *varname = (char *)callback_arg;
-+	char *ipstr = ip4addr_ntoa(ipaddr);
++	struct dhcp_priv *dpriv = (struct dhcp_priv *)arg;
++	struct netif *netif = dpriv->netif;
++	struct dhcp *dhcp;
 +
-+	if (varname)
-+		env_set(varname, ipstr);
-+	log_info("resolved %s to %s\n",  name, ipstr);
-+	ulwip_exit(0);
-+}
++	log_err("%s %d/%d\n", __func__, dpriv->num_tries, DHCP_TMO_NUM);
++	dhcp = netif_get_client_data(netif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
++	if (!dhcp)
++		return;
 +
-+int ulwip_dns(char *name, char *varname)
-+{
-+	int err;
-+	ip_addr_t ipaddr; /* not used */
-+	ip_addr_t dns1;
-+	ip_addr_t dns2;
-+	char *dnsenv = env_get("dnsip");
-+	char *dns2env = env_get("dnsip2");
++	if (dhcp->state == DHCP_STATE_BOUND) {
++		int err = 0;
 +
-+	if (!dnsenv && !dns2env) {
-+		log_err("nameserver is not set with dnsip and dnsip2 vars\n");
-+		return -ENOENT;
++		err -= env_set("bootfile", dhcp->boot_file_name);
++		err -= env_set("ipaddr", ip4addr_ntoa(&dhcp->offered_ip_addr));
++		err -= env_set("netmask", ip4addr_ntoa(&dhcp->offered_sn_mask));
++		err -= env_set("serverip", ip4addr_ntoa(&dhcp->server_ip_addr));
++		if (err)
++			log_err("error update envs\n");
++		log_info("DHCP client bound to address %s\n", ip4addr_ntoa(&dhcp->offered_ip_addr));
++		free(dpriv);
++		ulwip_exit(err);
++		return;
 +	}
 +
-+	if (!dnsenv)
-+		log_warning("dnsip var is not set\n");
-+	if (!dns2env)
-+		log_warning("dnsip2 var is not set\n");
++	dpriv->num_tries--;
++	if (dpriv->num_tries < 0) {
++		log_err("DHCP client timeout\n");
++		free(dpriv);
++		ulwip_exit(-1);
++		return;
++	}
 +
-+	dns_init();
++	sys_timeout(DHCP_TMO_TIME, dhcp_tmo, dpriv);
++}
 +
-+	if (ipaddr_aton(dnsenv, &dns1))
-+		dns_setserver(0, &dns1);
++int ulwip_dhcp(void)
++{
++	struct netif *netif;
++	int eth_idx;
++	struct dhcp_priv *dpriv;
 +
-+	if (dns2env && ipaddr_aton(dns2env, &dns2))
-+		dns_setserver(1, &dns2);
++	dpriv = malloc(sizeof(struct dhcp_priv));
++	if (!dpriv)
++		return -EPERM;
 +
-+	err = dns_gethostbyname(name, &ipaddr, dns_found_cb, varname);
-+	if (err == ERR_OK)
-+		dns_found_cb(name, &ipaddr, varname);
++	eth_idx = eth_get_dev_index();
++	if (eth_idx < 0)
++		return -EPERM;
 +
-+	/* convert lwIP ERR_INPROGRESS to U-Boot -EINPROGRESS */
-+	if (err == ERR_INPROGRESS)
-+		err = -EINPROGRESS;
++	netif = netif_get_by_index(eth_idx + 1);
++	if (!netif)
++		return -ENOENT;
 +
-+	return err;
++	dpriv->num_tries = DHCP_TMO_NUM;
++	dpriv->netif = netif;
++	sys_timeout(DHCP_TMO_TIME, dhcp_tmo, dpriv);
++
++	return dhcp_start(netif) ? -EPERM : 0;
 +}
 -- 
 2.30.2
