@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE68C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0514C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 17:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C86EA8776E;
-	Mon, 27 Nov 2023 18:11:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F194586ED0;
+	Mon, 27 Nov 2023 18:27:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BDDol430";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="M0DzG43C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45D9687622; Mon, 27 Nov 2023 18:11:10 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 07E6E87150; Mon, 27 Nov 2023 18:27:33 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5696D87788
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:11:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 014CB86ED0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 18:27:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-332ce50450dso2961822f8f.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:11:07 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-54af0eca12dso4553672a12.3
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:27:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701105067; x=1701709867; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701106048; x=1701710848;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=grbWp2e5qMUgRarI/QxZWeiSGb4MaeGSZurZeYxV9CM=;
- b=BDDol430aTw//7RbT5Y3lQvYkpHvFdlZUsRjBuGGh+hLkHpMNTp+k8AwKIq1+1o4rE
- qvCtWjgSmFUb4/NpY+ifMzhP64IDyAEkAYw+qUCELxcLgP3hnoXbdcTY//w9p3sZ992C
- oqKE0WDjlF9IOJM6+Ltp3gotCNLgsLt2zTRJel+4yaGyG3KCVs5zSb/06PqwfCOvie8k
- 33rkcB/8M5gouyVcItKBBHVNstpDvlWmG4xMa7dKbZL7D8yT8ZD/l97rEk/vJk75KfsR
- 7PO44JZV/Meolcp02P1/HXAXA13diB9gvP2lWhCT6RyQQZNhwFZvrrITo1d/XIhbiXGN
- vVFQ==
+ bh=z3jjY9kKL6+AQrDuf/3YCDjCHEf4X59aJnnF63t1o3Q=;
+ b=M0DzG43CGJqcSP9x8h2TOVupN/pxkx2cTENfXu0u7lYZ4dcMA7ogDwfVJTz8dfAF2F
+ y8g9/sFgI/RRgiZ01qmJGRXZY2Q/n1jIkRxKyVG8D55vuoqYjEnpE+yV0aMWP/8Nj1/e
+ ptel8xCYIY+92W4heI5Kcy+ThZPw0bJLY5NffP1L8bBXQLr9llHOsXH9NfXhmVuCdkvE
+ Y/2MHJa226L9UFqGwANV0IQGUqfF+0ly6sB3a5gjbB7/wXPJ/Jhh4zZFbs1AjHiM4kdq
+ R1QcWsKKY2iJBpqcOL68GzHfuA8KggzcLkfxp0HwZD16Eq8zTzYgGiI2nsyg08LQ/7Ko
+ pOVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701105067; x=1701709867;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1701106048; x=1701710848;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=grbWp2e5qMUgRarI/QxZWeiSGb4MaeGSZurZeYxV9CM=;
- b=VANnvUMABc5TP+IaqLvfQdjbrSjPmFvvHfIc2Qu7wEw0S++xstUj+mDEh6K5DziYWw
- 4pcHPDOEqXGUUUpF1doo1c5ooJj5DLNr5DNI4gh80syhlyqzV4V4V4oKDnhhhITy12zX
- NFVf0MqhSKXa78aAjYPptPYC90KbSg5F85nIUTiYXd3X2LytDzz2R/xHEsUeVUqPQF/l
- QGN7bxuG66NGxf5CnVVEEMI8cmnM6A/IaSIz1wfTBCmt5cC8HNhHNh/px56aMemxgeUK
- 2TXq6incVHmhldDXKT2R45M/2bKtEaJ8mF1o1N3/EtB+7IhnAQclz6teC3E7b1BTfCBe
- 4btg==
-X-Gm-Message-State: AOJu0YyqlVY9MdiPrB/VO28/f+OcD7V3V28uF4CMlyBM3jFX8k7aSKbL
- aphKwCBocs0YVUweyzpC+mzJhQ==
-X-Google-Smtp-Source: AGHT+IHPRSKHLOeESCnMmaeEboDofRAJMWaKETfpNMCf1Wt1H4ZH+nyxG4sTJK4YH3v4ey2Z0dJ15w==
-X-Received: by 2002:a5d:530e:0:b0:332:e431:c73c with SMTP id
- e14-20020a5d530e000000b00332e431c73cmr8575238wrv.7.1701105066749; 
- Mon, 27 Nov 2023 09:11:06 -0800 (PST)
-Received: from localhost.localdomain (ppp046103219117.access.hol.gr.
- [46.103.219.117]) by smtp.gmail.com with ESMTPSA id
- cp12-20020a056000400c00b00333040a4752sm2401198wrb.114.2023.11.27.09.11.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 09:11:06 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: sean.anderson@seco.com, sjg@chromium.org, neil.armstrong@linaro.org,
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo nodes
- are missing
-Date: Mon, 27 Nov 2023 19:10:58 +0200
-Message-Id: <20231127171058.165777-3-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
-References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+ bh=z3jjY9kKL6+AQrDuf/3YCDjCHEf4X59aJnnF63t1o3Q=;
+ b=Qug6ixwdrGkai80Vw4vsWWGXUHLGGEjrnECW11rrvvcP3zaESGajPGOQfmeYLUgn8L
+ VEXEgSMLKNFvEuvV+CNnzpIsk0UyQCUp6YwhbiY1sSHa7D7sOnaVeAW2H4PA5wVyUcxo
+ pmbYFzHSwB0/c/9qocEue7x3D8VSlHA1XvX6J/xf31vPpfBZyQglkJaj7czNvn+rPmKw
+ 8StlbeIv3jtWgPHlirXHO1+N3J0lzxGTlAfje9HyQq6OEmWSpiUyu0puoKHujus2gaAO
+ kLG4Am86HLCfsyb2vYIzpLG1L/efegGP/fbchXM0nj7egY7ZJxGZu5jCElXGnXXzVL8E
+ ChYQ==
+X-Gm-Message-State: AOJu0Yz3gzqkCNvfjh5akD1oCoXoqTQhlZ0oWOnw24MWW3UHQ2KbuB/I
+ hzajgdgFPeCWCScK0k8YMGK4KTS8oaBvtjQgHOMnfA==
+X-Google-Smtp-Source: AGHT+IGR6JmKkST9CurHvcjiK7FmZqEQOoBm5rCKngkPK6pVyfGKeMmBOPtjSfUHd5gbf579a3uuOA==
+X-Received: by 2002:a17:906:4f:b0:a0d:3a13:b4a6 with SMTP id
+ 15-20020a170906004f00b00a0d3a13b4a6mr3655084ejg.72.1701106047684; 
+ Mon, 27 Nov 2023 09:27:27 -0800 (PST)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com.
+ [209.85.208.48]) by smtp.gmail.com with ESMTPSA id
+ t11-20020a170906a10b00b009ff8be60791sm5892774ejy.210.2023.11.27.09.27.27
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 27 Nov 2023 09:27:27 -0800 (PST)
+Received: by mail-ed1-f48.google.com with SMTP id
+ 4fb4d7f45d1cf-54b7ef7f4d5so1242029a12.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 09:27:27 -0800 (PST)
+X-Received: by 2002:a50:d593:0:b0:53e:1825:be81 with SMTP id
+ v19-20020a50d593000000b0053e1825be81mr9660327edi.21.1701106046771; Mon, 27
+ Nov 2023 09:27:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
+ <CAC_iWjKNf6RxPoKzPjJiLV+UnQES344wb=sqS1wCnQzC+J-Hkw@mail.gmail.com>
+ <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
+ <CALeDE9ONK7CMP6DXKRrjzqxm1r-afB7bgKSDhekrhOMUnhhktQ@mail.gmail.com>
+ <CAHc5_t3QQUT=aid9NYRysPvtVG31Ohtvo=RxZkDPo9W9saQUdA@mail.gmail.com>
+ <CAC_iWj+HV4dBqa4iG4NfJ9T=jwdqxLMi5Lunis7ZFezQ23VPag@mail.gmail.com>
+ <CAHc5_t3oa=Hho+WRSWN4UoE5zSLV-G_Pn6fbZKqzT0eP3ZAZcg@mail.gmail.com>
+In-Reply-To: <CAHc5_t3oa=Hho+WRSWN4UoE5zSLV-G_Pn6fbZKqzT0eP3ZAZcg@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Mon, 27 Nov 2023 17:27:15 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t2_V8huBnpBTQmn-B3assO5hDD0yZAZx=WRAf0jQB7kqw@mail.gmail.com>
+Message-ID: <CAHc5_t2_V8huBnpBTQmn-B3assO5hDD0yZAZx=WRAf0jQB7kqw@mail.gmail.com>
+Subject: Re: efi: Set Variable Runtime implementation
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, takahiro.akashi@linaro.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,218 +108,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to fill in the SMBIOS tables U-Boot currently relies on a
-"u-boot,sysinfo-smbios" compatible node.  This is fine for the boards
-that already include such nodes.  However with some recent EFI changes,
-the majority of boards can boot up distros, which usually rely on
-things like dmidecode etc for their reporting.  For boards that
-lack this special node the SMBIOS output looks like:
++ Simon as he seems to have done a lot of work in the driver model.
 
-System Information
-        Manufacturer: Unknown
-        Product Name: Unknown
-        Version: Unknown
-        Serial Number: Unknown
-        UUID: Not Settable
-        Wake-up Type: Reserved
-        SKU Number: Unknown
-        Family: Unknown
-
-This looks problematic since most of the info are "Unknown".  The DT spec
-specifies standard properties containing relevant information like
-'model' and 'compatible' for which the suggested format is
-<manufacturer,model>. Unfortunately the 'model' string found in DTs is
-usually lacking the manufacturer so we can't use it for both
-'Manufacturer' and 'Product Name' SMBIOS entries reliably.
-
-So let's add a last resort to our current smbios parsing.  If none of
-the sysinfo properties are found, scan for those information in the
-root node of the device tree. Use the 'model' to fill the 'Product
-Name' and the first value of 'compatible' for the 'Manufacturer', since
-that always contains one.
-
-pre-patch:
-Handle 0x0001, DMI type 1, 27 bytes
-System Information
-        Manufacturer: Unknown
-        Product Name: Unknown
-        Version: Unknown
-        Serial Number: 100000000bb24ceb
-        UUID: 30303031-3030-3030-3061-613234636435
-        Wake-up Type: Reserved
-        SKU Number: Unknown
-        Family: Unknown
-[...]
-
-and post patch:
-Handle 0x0001, DMI type 1, 27 bytes
-System Information
-        Manufacturer: raspberrypi
-        Product Name: Raspberry Pi 4 Model B Rev 1.1
-        Version: Unknown
-        Serial Number: 100000000bb24ceb
-        UUID: 30303031-3030-3030-3061-613234636435
-        Wake-up Type: Reserved
-        SKU Number: Unknown
-        Family: Unknown
-[...]
-
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since v1:
-- Tokenize the DT node entry and use the appropriate value instead of
-  the entire string
-- Removed Peters tested/reviewed-by tags due to the above
- lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 90 insertions(+), 4 deletions(-)
-
-diff --git a/lib/smbios.c b/lib/smbios.c
-index fcc8686993ef..423893639ff0 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -9,11 +9,14 @@
- #include <dm.h>
- #include <env.h>
- #include <linux/stringify.h>
-+#include <linux/string.h>
- #include <mapmem.h>
- #include <smbios.h>
- #include <sysinfo.h>
- #include <tables_csum.h>
- #include <version.h>
-+#include <malloc.h>
-+#include <dm/ofnode.h>
- #ifdef CONFIG_CPU
- #include <cpu.h>
- #include <dm/uclass-internal.h>
-@@ -43,6 +46,25 @@
-
- DECLARE_GLOBAL_DATA_PTR;
-
-+/**
-+ * struct map_sysinfo - Mapping of sysinfo strings to DT
-+ *
-+ * @sysinfo_str: sysinfo string
-+ * @dt_str: DT string
-+ * @max: Max index of the tokenized string to pick. Counting starts from 0
-+ *
-+ */
-+struct map_sysinfo {
-+	const char *sysinfo_str;
-+	const char *dt_str;
-+	int max;
-+};
-+
-+static const struct map_sysinfo sysinfo_to_dt[] = {
-+	{ .sysinfo_str = "product", .dt_str = "model", 2 },
-+	{ .sysinfo_str = "manufacturer", .dt_str = "compatible", 1 },
-+};
-+
- /**
-  * struct smbios_ctx - context for writing SMBIOS tables
-  *
-@@ -87,6 +109,18 @@ struct smbios_write_method {
- 	const char *subnode_name;
- };
-
-+static const struct map_sysinfo *convert_sysinfo_to_dt(const char *sysinfo_str)
-+{
-+	int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(sysinfo_to_dt); i++) {
-+		if (!strcmp(sysinfo_str, sysinfo_to_dt[i].sysinfo_str))
-+			return &sysinfo_to_dt[i];
-+	}
-+
-+	return NULL;
-+}
-+
- /**
-  * smbios_add_string() - add a string to the string area
-  *
-@@ -127,6 +161,42 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
- 	}
- }
-
-+/**
-+ * get_str_from_dt - Get a substring from a DT property.
-+ *                   After finding the property in the DT, the function
-+ *                   will parse comma separted values and return the value.
-+ *                   If nprop->max exceeds the number of comma separated
-+ *                   elements the last non NULL value will be returned.
-+ *                   Counting starts from zero.
-+ *
-+ * @nprop: sysinfo property to use
-+ * @str: pointer to fill with data
-+ * @size: str buffer length
-+ */
-+static
-+void get_str_from_dt(const struct map_sysinfo *nprop, char *str, size_t size)
-+{
-+	const char *dt_str;
-+	int cnt = 0;
-+	char *token;
-+
-+	memset(str, 0, size);
-+	if (!nprop || !nprop->max)
-+		return;
-+
-+	dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
-+	if (!dt_str)
-+		return;
-+
-+	memcpy(str, dt_str, size);
-+	token = strtok(str, ",");
-+	while (token && cnt < nprop->max) {
-+		strlcpy(str, token, strlen(token) + 1);
-+		token = strtok(NULL, ",");
-+		cnt++;
-+	}
-+}
-+
- /**
-  * smbios_add_prop_si() - Add a property from the devicetree or sysinfo
-  *
-@@ -139,19 +209,35 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
- static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
- 			      int sysinfo_id)
- {
-+	int ret = 0;
-+
- 	if (sysinfo_id && ctx->dev) {
- 		char val[SMBIOS_STR_MAX];
--		int ret;
-
- 		ret = sysinfo_get_str(ctx->dev, sysinfo_id, sizeof(val), val);
- 		if (!ret)
- 			return smbios_add_string(ctx, val);
- 	}
-+
- 	if (IS_ENABLED(CONFIG_OF_CONTROL)) {
--		const char *str;
-+		const char *str = NULL;
-+		char str_dt[128] = { 0 };
-+		/*
-+		 * If the node is not valid fallback and try the entire DT
-+		 * so we can at least fill in maufacturer and board type
-+		 */
-+		if (ofnode_valid(ctx->node)) {
-+			str = ofnode_read_string(ctx->node, prop);
-+		} else {
-+			const struct map_sysinfo *nprop;
-+
-+			nprop = convert_sysinfo_to_dt(prop);
-+			get_str_from_dt(nprop, str_dt, sizeof(str_dt));
-+		}
-
--		str = ofnode_read_string(ctx->node, prop);
--		return smbios_add_string(ctx, str);
-+		ret = smbios_add_string(ctx, ofnode_valid(ctx->node) ?
-+					str : (const char *)str_dt);
-+		return ret;
- 	}
-
- 	return 0;
---
-2.40.1
-
+On Mon, Nov 27, 2023 at 10:12=E2=80=AFAM Shantur Rathore <i@shantur.com> wr=
+ote:
+>
+> Hi Ilias,
+>
+> On Mon, Nov 27, 2023 at 7:16=E2=80=AFAM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Shantur
+> >
+> > On Sun, 26 Nov 2023 at 12:33, Shantur Rathore <i@shantur.com> wrote:
+> > >
+> > > Hi Peter,
+> > >
+> > > On Sat, Nov 25, 2023 at 6:19=E2=80=AFAM Peter Robinson <pbrobinson@gm=
+ail.com> wrote:
+> > > >
+> > > > Hi Shantur,
+> > > >
+> > > > On Fri, Nov 24, 2023 at 11:55=E2=80=AFPM Shantur Rathore <i@shantur=
+.com> wrote:
+> > > > >
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Fri, Nov 24, 2023 at 10:50=E2=80=AFPM Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > Hi Shantur
+> > > > > >
+> > > > > > On Fri, 24 Nov 2023 at 18:51, Shantur Rathore <i@shantur.com> w=
+rote:
+> > > > > > >
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > I am trying to work out how to enable the SetVariableRT servi=
+ce in
+> > > > > > > U-Boot and came across your patch [1] which initially had the
+> > > > > > > SetVariable RT service enabled in EFI but in the final patch =
+this was
+> > > > > > > removed.
+> > > > > > > I am hoping to implement it on top of the SPI Flash EFI store=
+ [2] to
+> > > > > > > be able to set Boot order and boot items from Linux the UEFI =
+way.
+> > > > > > >
+> > > > > > > Can I pick your brain on why it was dropped in the patch?
+> > > > > > > Is there any limitation in SetVariableRT service ?
+> > > > > >
+> > > > > > I recently had a talk about it in Plumbers [0]. Generally speak=
+ing, RT
+> > > > > > + hardware owned by the kernel is a very weird combination sinc=
+e you
+> > > > > > can't guarantee exclusive access to the flash or the bus and yo=
+u have
+> > > > > > to preserve a *lot* of code alive in u-boot.
+> > > > > >
+> > > > > > I'll respond to your v1 patchset and we can discuss details the=
+re as well.
+> > > > > >
+> > > > > > [0] https://lpc.events/event/17/contributions/1653/
+> > > > >
+> > > > > Thanks for the background and helping me understand the problem.
+> > > > > Makes me wonder how things work in the PC world.
+> > > > > U-boot being only ~1MB, can we not leave it all in memory and may=
+be
+> > > > > just disable SPI access to Linux.
+> >
+> > That would work, but you cant guarantee Linux wont enable the SPI flash=
+.
+> >
+> > > >
+> > > > That's basically it, on x86 there's specific HW that's owned by
+> > > > firmware, I don't know the exact low level details of how that work=
+s.
+> > > >
+> > > > I think x86 devices generally use eSPI for this HW [1] but I don't
+> > > > know the low level details. The Arm SBSA (Server HW spec) and SBBR
+> > > > (Server Base Boot Requirements) specs that are key to ServerReady m=
+ay
+> > > > go into some details too if you're curious.
+> >
+> > On X86 the SPI flash is handled entirely by the firmware and SMM. You
+> > can find more details here [0]
+>
+> Thanks for more info.
+>
+> >
+> > >
+> > > Thanks,
+> > > I think the firmware is still accessible to PCs as one could update t=
+he firmware
+> > > in Windows so Windows has access to that device.
+> > >
+> > > I had some try myself and found that setting a variable to memory bac=
+ked storage
+> > > is doable with SetVariable call but we want to store it in any
+> > > non-volatile storage
+> > > things really don't look good.
+> > >
+> > > To be able to write SetVariable to any device, the whole u-boot drive=
+r
+> > > model would need
+> > > to be kept in memory, might as well just keep the whole u-boot in
+> > > memory at this point, it's anyway small.
+> > > I don't have much knowledge on how to or pros and cons of doing this.
+> >
+> > The major problem here is who owns the hardware. With the SPI flash
+> > implementation as well as the RPMB implementation Linux owns that
+> > flash.
+> > For the RPMB we've introduced a mechanism so the kernel replaces the
+> > runtime calls with internal functions [1].  I think we should come up
+> > with a similar architecture for SPI. In any case we should keep in
+> > mind that setting authenticated EFI variables should be forbidden on
+> > the file/SPI backends since they are not really secure.
+> >
+>
+> Thanks, I understand now that we can't use SPI flash for saving secure
+> variables and stop Linux from accessing it.
+> My requirement is to be able to save non-Secure boot related variables
+> ( BootOrder, BootNext and BootOptions ).
+> For this purpose as we don't need secure channel and to be compatible
+> with current Linux versions I started
+> implementing SetVariable in runtime in [1]
+> I was able to get it working until it's ready to write stuff into SPI Fla=
+sh.
+> To be able to use SPI Flash, runtime call needs to access the drivers
+> and this needs the whole driver-model to be in
+> efi runtime memory makes me think would it make sense to keep the
+> whole u-boot in efi runtime memory or just
+> driver model and all SPI drivers for now and keep adding other drivers
+> when needed like RPMB.
+>
+> I need some pointers to what would be the best approach accessing
+> hardware from runtime.
+>
+> [1] - https://github.com/shantur/u-boot/tree/spi-flash-runtime-setvariabl=
+e
+>
+> Kind regards,
+> Shantur
