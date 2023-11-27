@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA61AC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 18:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4FFC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 18:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C6B387772;
-	Mon, 27 Nov 2023 19:36:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C0A88774A;
+	Mon, 27 Nov 2023 19:37:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lpa3PSZd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BxXMg6zD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FB9A8761B; Mon, 27 Nov 2023 19:36:25 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 516DF8774A; Mon, 27 Nov 2023 19:37:10 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9DF987772
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 19:36:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEFE08761B
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 19:37:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5d0572434afso11010007b3.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 10:36:22 -0800 (PST)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-dafe04717baso4041174276.1
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 10:37:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701110181; x=1701714981; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1701110226; x=1701715026; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JeUHyLydfFXzDdLtRr25hLSQs3dMbBX+KwH9Fw59Quw=;
- b=Lpa3PSZdnfM1BWF4R8ZZbBIpPdooGt9JMhp4MfY69CN05l0b4F0epvQHM53aWUZuix
- UqZuUiOmIP+lhypU8FbqxpGlfptWWoxt5uM3Ere8TT4dbS8+e+mY1/P5jicoXJfjMFkA
- lS+8hXCqPRv2BflVTcL5rUBThnnwEvnEUaQHM=
+ bh=m980Otq7AY87iON7e0fUmOlVmJt6+iHL7aka1AjC9rI=;
+ b=BxXMg6zDIUqUP+xV1M3Y7HEFxj2GMfdsdo4ljo4G4Xx5HAWY1JtKiy5Jg1oK3CfBBX
+ IVcCaKdr2ZvWly0kAvVBxOHe50AOIqI9WDzAVfKvwHVHl2rPNKfGvCBro6/7wQJi1on/
+ EopefUaW5eKgN616CU/BUCFidp0M5/86QHzwo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701110181; x=1701714981;
+ d=1e100.net; s=20230601; t=1701110226; x=1701715026;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JeUHyLydfFXzDdLtRr25hLSQs3dMbBX+KwH9Fw59Quw=;
- b=pP6OtzTHurS9s8vXNyi5zTY17U++tmixehy7OhekgxboYfDzH880Fxrc+s0tA2gScd
- 2QNb8VJXZw2FNOT2InzbW3Wv8Ms+7YRrPwt+RLgk4B8moxy7DlOEg2u2ACAChKd0rTKe
- 5ygbav8K2W1mQ6d5UBrcj1TeDuk4fzTaSvuBK9E4jZEuVkIDLEtuthQLY5ls6ZWO56Zc
- +KmR63kDwLr0y/XmSPGdKDylJIyRElP7E+oL+kd4zXuh8ZZagXlGPCPwQqH8thEQ83wO
- 9mKiRtgHWp7DWy2gl26T7exH9jWvY1AiOs6V1RdVK2qIyWWEEM3c99sKZ45K6hobZHEC
- Azpg==
-X-Gm-Message-State: AOJu0YyF/uBN/EuHAuecom6blLx63seF3DX5VQa2pHtrMwAC38ooH9/4
- JNuJIG2G61Z96mR/7fLsZJA+kw==
-X-Google-Smtp-Source: AGHT+IFVEZPqwoqhuYDZOVv2IN1vEdErGhQS+TuWXSDC8S5AJAINLxZI3+DD5UYX2q7B0+GUL0sbzw==
-X-Received: by 2002:a81:ae0a:0:b0:5d0:aa04:7b71 with SMTP id
- m10-20020a81ae0a000000b005d0aa047b71mr2825994ywh.24.1701110181479; 
- Mon, 27 Nov 2023 10:36:21 -0800 (PST)
+ bh=m980Otq7AY87iON7e0fUmOlVmJt6+iHL7aka1AjC9rI=;
+ b=eg3fKnICKiE274Ji7jfrvxWqbH4hPNjEj4045FVcJKoH5mrzMtCCSnIEFztuxetql9
+ UUZlPvf6dcJLPwNIbrGMvSsWIVLodysh6Js+aZ9lAwVPJCLd5zp/dRLMC6Ttf14wqQ4l
+ tszLP8KxMttlWz2sqMX9OFNcKHEjUzUgonLZIlHbdEcXeww7ZSZWl1b/Ueju7qNbVIR7
+ syryyzv9zPeMjdyQz7W5Ea8RYUp68vhpw1yBotvDQp1F722f36G4iq7xGeEXdjq1aTBl
+ 8RYK0L4/7/tUYAs/wGlKr5EzqYRGbgyybWzMJjPQ+evb+Co2ctKJBqEVeywX4b3ItvoN
+ bXAQ==
+X-Gm-Message-State: AOJu0Ywo2BhQ+12T+bfkRH5uEHmX2oHk31owtRuNDlgZbZu7NHuo+DqI
+ LGidq+N2f87XZfcBDTlSpSYIfw==
+X-Google-Smtp-Source: AGHT+IGpWnda2GHMEdBgPjQKlVq7up/4e/eTu5+JhabsySwp7jEcxgrmeU2RVgLLEYHYDsG6zFeXnw==
+X-Received: by 2002:a05:6902:309:b0:da3:ab41:2fc8 with SMTP id
+ b9-20020a056902030900b00da3ab412fc8mr10630386ybs.16.1701110226696; 
+ Mon, 27 Nov 2023 10:37:06 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-add3-c5a6-8002-bb49.res6.spectrum.com.
  [2603:6081:7b00:6400:add3:c5a6:8002:bb49])
  by smtp.gmail.com with ESMTPSA id
- t133-20020a815f8b000000b005a7c829dda2sm3449761ywb.84.2023.11.27.10.36.20
+ p2-20020a25f442000000b00d7360e0b240sm3198332ybe.31.2023.11.27.10.37.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Nov 2023 10:36:21 -0800 (PST)
-Date: Mon, 27 Nov 2023 13:36:19 -0500
+ Mon, 27 Nov 2023 10:37:06 -0800 (PST)
+Date: Mon, 27 Nov 2023 13:37:04 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Maxim Uvarov <maxim.uvarov@linaro.org>
 Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
  goldsimon@gmx.de
-Subject: Re: [PATHv11 22/43] bcm_ns3: fix overlap define with lwip
-Message-ID: <20231127183619.GU2513409@bill-the-cat>
+Subject: Re: [PATHv11 00/43] net/lwip: add lwip library for the network stack
+Message-ID: <20231127183704.GV2513409@bill-the-cat>
 References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-23-maxim.uvarov@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xqthDrJT531/aSNp"
+ protocol="application/pgp-signature"; boundary="R5EdD4TLg3bZWTK/"
 Content-Disposition: inline
-In-Reply-To: <20231127125726.3735-23-maxim.uvarov@linaro.org>
+In-Reply-To: <20231127125726.3735-1-maxim.uvarov@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,61 +93,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xqthDrJT531/aSNp
-Content-Type: text/plain; charset=us-ascii
+--R5EdD4TLg3bZWTK/
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 27, 2023 at 06:57:05PM +0600, Maxim Uvarov wrote:
+On Mon, Nov 27, 2023 at 06:56:43PM +0600, Maxim Uvarov wrote:
 
-> Rename declaration to not overlap with lwip.
+> Hello,
 >=20
-> aarch64:  +   bcm_ns3
-> +In file included from net/lwip/lwip-external/src/include/lwip/etharp.h:5=
-3,
-> +                 from net/lwip/lwip-external/src/core/init.c:55:
-> +net/lwip/lwip-external/src/include/lwip/prot/ethernet.h:69:
-> 		  error: "ETH_ADDR" redefined [-Werror]
-> +   69 | #define ETH_ADDR(b0, b1, b2, b3, b4, b5) {{b0, b1, b2, b3, b4, b=
-5}}
-> +      |
-> +In file included from include/config.h:3,
-> +                 from arch/arm/include/asm/string.h:4,
-> +                 from include/linux/string.h:21,
-> +                 from include/malloc.h:369,
-> +                 from include/stdlib.h:9,
-> +                 from net/lwip/lwip-external/src/include/lwip/arch.h:83,
-> +                 from net/lwip/lwip-external/src/include/lwip/debug.h:40,
-> +                 from net/lwip/lwipopts.h:93,
-> +                 from net/lwip/lwip-external/src/include/lwip/opt.h:51,
-> +                 from net/lwip/lwip-external/src/core/init.c:38:
-> +include/configs/bcm_ns3.h:52: note: this is the location of the previous=
- definition
-> +   52 | #define ETH_ADDR
+> Please find updated version of lwip patches. Changes are in the
+> changelog bellow.
 >=20
-> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> Thank you,
+> Maxim.=20
+>=20
+> changelog:
+> 	v11: - v11 is mosly respin of v10 patches with CI error fixes.
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 Gitlab CI:=20
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 https://source.denx.de/u-boot/custodians/=
+u-boot-tpm/-/pipelines/18368
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 Azure CI:
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 https://dev.azure.com/u-boot/u-boot/_buil=
+d/results?buildId=3D7366&view=3Dresults
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 (Azure CI, which is connected to github. =
+Sometime I can see
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0tftp timeout after some part of downlo=
+ad there, but that can not be
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0reproduced locally. While Gitblab CI i=
+s stable. Because of num tries in
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CI I suspect this CI was not always re=
+liable.)
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 Azure and Gitlab also have different tool=
+chains and I=20
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 would say Gitlab generates bigger code th=
+en Azure CI.
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=20
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 Also many boards have a binary limit size=
+ of 800k (even
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 qemu has limits). And increased limits to=
+ fit all the code. Specially did it
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 patch by board config to show which board=
+s are failing to build. There I have
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 a question if we really want to support n=
+ew functionality for old boards (mips,
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 arm32 and etc...). I hope board owners ca=
+n help me if
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 it's valid to increase these limits.
+>=20
+> 		In this version I used git submodules and friend CI with
+> 		submodules. But I don't mind if you decide to maintain it in a different
+> 		way.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+I just want to note that generally this is a good improvement on v10 and
+I'll give things a spin in my lab (am335x_evm excluded ;)).
 
 --=20
 Tom
 
---xqthDrJT531/aSNp
+--R5EdD4TLg3bZWTK/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVk4aMACgkQFHw5/5Y0
-tyx6aAwAmDQx4ZTV99lOK7VSA2BqQ3+a5UW46Hz9DyqiIxKohY0eL/IjQ89aA7Iw
-8b3Q1/Eursgm2L9fRe8FKAK9Woq+bFyhJTkJON9drHY8Pzo78EJt4GTxH+wP493E
-dGwOarYlcx0BUPaOLvUvGJyyR/qRWwAKmGOqlA2GFeqv+kNw+LWmwUNa7hTQM2V4
-B1uomwoeTuO1lRoE5w3xqNYPf/L32/5lyiV9r6mmnCMZNt2IePnQlaijC5lq+dMn
-e9tZYYuJTpanPEl4pQPbBBeWAGPhtospE0X7J47XsTzPeNdDCMdYPFjWG0vaNipM
-jy3Ap24iiB1uhseIAg0EMahgk+yOfPOxYHeFPCoVVJWmhJy/MWQGfGtKKr4LliEG
-vcClk/Sne3uaMVPPHjSIMgTH2t6vE/MDH6DbXFdhy6vDfbjm3rhFNk1+GJ8eeq7W
-VmPhppJtIPOlO+L83+pIpieIieJ20ISYmOz7X/hDsRbzL5BU2impikPsNZMII1za
-rfT1Pn+S
-=a7qx
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVk4dAACgkQFHw5/5Y0
+tyz4fAv/Qy+NTAhK5f3X6MLW3Qjrv2DTFScXlW/8wJ//ANM6hr7rW22W4NjLzN5U
+tlO+lx2x4x3irC0gE6hMEAAR8iNMH5GsOYcaIYcwaoRthdGg6WgUlWMDQu0Bb+Cz
+mJUknJU5phcDetoVzPtcOX20tzZkjHKx07Ds2Fu/NIdmQwWm8hdWJWkv2xvJaVpV
+0wwebrTUqY/4O77WScs7V5BakoPezhxE9WXdAd/M4C8ypj0nFGeQtelVEkMlGhbC
+oJo69cAn9V30WIKGHHmiFKv+F8RUFQm0eLJpXJNtOdZDe3ut0XY8CKSfpN3tcJt5
+YR/+FjP3jHMVa1EntqCx04OOoeaSfSXJ5tdgeP38xkwyQHUtjkHOrE+TXBnnTAPN
+HRxeGBwjnHtKSA6saKfJRC8fqJIhegcgKUxguA8b/gVCYzyebZA5ZAYQiWRds4dH
+wSyQN9M2xS7E1B2wR043jdo0w+krwZHtwAPBefGSjiuQ3bAtCCHETDjzClAEHrEk
+hqGyP24h
+=kixB
 -----END PGP SIGNATURE-----
 
---xqthDrJT531/aSNp--
+--R5EdD4TLg3bZWTK/--
