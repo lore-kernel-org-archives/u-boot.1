@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE00C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 07:09:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6FFC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 07:16:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FF218750C;
-	Mon, 27 Nov 2023 08:09:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 992508750C;
+	Mon, 27 Nov 2023 08:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HNUYqorM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KdTHX/cC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CB5987515; Mon, 27 Nov 2023 08:09:47 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 1E59187516; Mon, 27 Nov 2023 08:16:56 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BBFA87508
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 08:09:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5E68870F2
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 08:16:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50aab3bf71fso5233774e87.3
- for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 23:09:45 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50baa7cdf6dso2004936e87.0
+ for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 23:16:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701068984; x=1701673784; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F7rsfU4e5XushfxVX3v3KMicN7u2fya/dbkcoOKwRPQ=;
- b=HNUYqorMMVpKWE5QbJD9Qm2cN31w82MgylpFypbI/FUBhCu9kOb3hpuiQvxLUsGb4Y
- LtJCXxy3T5h38HAN0wK/uhARVFEj510irPQrWVZOJCH8DtPM6Zv8TQFBvzS+eOfu9CQU
- YmErjQe6Ua733BrQN992Vp0nOYTpORTvFhAMvuXsDdkfICrmzFKVCYuNl4YsbMRUXzpC
- ZVxuCmbBAc7JvM6SDnuvaAFjqofSm/NLNifa3/+q0lycm+vyLeJHdYk2ICQlHL/R7mDQ
- vLxU4Jh6Sz0YPxctsYKaiMkyGVED7igaHrfW/xpBOwtThhimOQ6cimMwMRvMDpWoqr5V
- edMw==
+ d=linaro.org; s=google; t=1701069413; x=1701674213; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RWBYNn5grjriWnCGcz8KlzvRAPCpBBCZ3iwW4N426rA=;
+ b=KdTHX/cC384uq8sUuknTtyTY0v5sELvAqHgHbhWeBASBqRhlvqwfqR19WBtlj8gqbb
+ VyUvcrheZIcjrXQD9ScQyxEa6f8FHj1hYAyQhwnv9KwMgmVKoY0ZAyV3kqtR3PvnwLVI
+ LUTSJhOdgiTW0YXJ7RGHsvDByQjqgro9Np/2Bge4aCGNJltRsqzbzXppZmgYLcQZTMKY
+ shAZa/g3wfaWNuQVXRYJA/mrKJ7tK/Fg0Mapy4RVBzdYC07XIMGXSkqp4t+QzmLYoca9
+ n01wV3l3P80RBgXM3wQipCidLR9V8gzAx1LdWMYodaMRZv1dGoJPwr6hW7w/hUcKrcIT
+ lSVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701068984; x=1701673784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=F7rsfU4e5XushfxVX3v3KMicN7u2fya/dbkcoOKwRPQ=;
- b=FzIDGsabCDkdRV1AXZfZHlPCUzMIgAjyD5RdvWFiPw4kuIKagIb4CJiIEEEBf+zCHT
- vAfTjknL/YdWbKgMjwIoJcUoog1wLzwzVkFA7E2E7UCi6eMvIMwUWgOAc/6+MtwQh+mq
- H8QKqZN6OqtpSKGL0oPPOEzXLOlu+eqyO+HFA7HbKWASfZn9PTlW43yDeetHUYIjOaQi
- 5whRbIA3f0BHfz4sZI506sQBWm4fZ1dkof8LVPTh/1k7MYstERc9UbDCRybho20wO00N
- cHHlGvekjHpihIrBicMdy8FbuaPmW4VpbslpGnVu1vsYmGnLGVsMc9oCiSG6WWf74Cnv
- xxIw==
-X-Gm-Message-State: AOJu0YxkGzjBBX4KbSAYvoNrAs1QH4rkTbQ03aHc7EEqHOIDGX+CUc4k
- S4+XHEOIwc2et5AONBEux21VBeIhCDw6+CXK2BGndQ==
-X-Google-Smtp-Source: AGHT+IEtbFjqeOX6P03G51jnGQ3WRnBIHPWG8zZMt8kG9bJBoR3Pq8klcoXFxmX7AgVH5WIyzd7ui0h1Woe0A3HuFzI=
-X-Received: by 2002:a05:6512:376a:b0:509:860e:debf with SMTP id
- z10-20020a056512376a00b00509860edebfmr5725724lft.27.1701068984566; Sun, 26
- Nov 2023 23:09:44 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701069413; x=1701674213;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RWBYNn5grjriWnCGcz8KlzvRAPCpBBCZ3iwW4N426rA=;
+ b=V6gTOWo5chtp9XWIEaw6ufAxPSv7PnjvmBC79vYnoupXAmqJ1064b8axMn908QBdCh
+ x44ero/C7dUVGyK/d9NC7JjhFQZr47mtmy684qVYD+/pAfeT5qHmM7nnOlEMhXksUOeC
+ +RiDjsyKxgnS9kuRh23O4GGKae5TiKlNTi8/MmilfcDeTbWzma6zPK47lvkOty6ogO0F
+ Sih2JQOGtyDOFcqAfmLNjab/ELoz5Mg33dojEX8QS4MCQ0OtK03J1eL5gp4gpNjIasTB
+ AUyJuo05Nqk3MZbmktEBOu34/M52t+kA6sCEWYaVOM82ddjVDhhbjr16izNYaA7sOAQ/
+ H9GA==
+X-Gm-Message-State: AOJu0YxWE3vR0Qbpa3/lduK5hvkpqWdacMZNHnw8GTnIOvO8r42l7Dlh
+ bjEE+L+dDhxqDAbxB/79A9wpkM1E3/yJocn/IDpjmx7z4rIw6mTYdlQ=
+X-Google-Smtp-Source: AGHT+IHfyyrDNVYQ+1f4Dh1cevyLvTMCEpO1uCuAVyAlRVZlgLeGPuF6+qlJZ38GFo6P77BWy2BFOzTRvM983xP6aZo=
+X-Received: by 2002:a05:6512:280d:b0:507:ba75:b016 with SMTP id
+ cf13-20020a056512280d00b00507ba75b016mr9494155lfb.3.1701069412795; Sun, 26
+ Nov 2023 23:16:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121235713.1530289-1-i@shantur.com>
- <20231121235713.1530289-3-i@shantur.com>
- <CAC_iWjKxyRWd+bf==mO0tLQEG843J631xNQRo0_ueGXpdNCokg@mail.gmail.com>
- <CAHc5_t3bfArFaiWGg_1EdnkhUeaLXc75SRo7TB8LfjGr1AzFJw@mail.gmail.com>
-In-Reply-To: <CAHc5_t3bfArFaiWGg_1EdnkhUeaLXc75SRo7TB8LfjGr1AzFJw@mail.gmail.com>
+References: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
+ <CAC_iWjKNf6RxPoKzPjJiLV+UnQES344wb=sqS1wCnQzC+J-Hkw@mail.gmail.com>
+ <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
+ <CALeDE9ONK7CMP6DXKRrjzqxm1r-afB7bgKSDhekrhOMUnhhktQ@mail.gmail.com>
+ <CAHc5_t3QQUT=aid9NYRysPvtVG31Ohtvo=RxZkDPo9W9saQUdA@mail.gmail.com>
+In-Reply-To: <CAHc5_t3QQUT=aid9NYRysPvtVG31Ohtvo=RxZkDPo9W9saQUdA@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 27 Nov 2023 09:09:08 +0200
-Message-ID: <CAC_iWjJkQocU5T_wnM0kve1g1Fvu2vj4KQqyz+NBBKbsjcejBw@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] efi_vars: Implement SPI Flash store
+Date: Mon, 27 Nov 2023 09:16:16 +0200
+Message-ID: <CAC_iWj+HV4dBqa4iG4NfJ9T=jwdqxLMi5Lunis7ZFezQ23VPag@mail.gmail.com>
+Subject: Re: efi: Set Variable Runtime implementation
 To: Shantur Rathore <i@shantur.com>
-Cc: takahiro.akashi@linaro.org, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, takahiro.akashi@linaro.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,84 +94,121 @@ X-Virus-Status: Clean
 
 Hi Shantur
 
-Please don't send a v2 unless the v1 discussion has settled. It just
-makes life harder. I'll ignore v2 for now and respond here.
+On Sun, 26 Nov 2023 at 12:33, Shantur Rathore <i@shantur.com> wrote:
+>
+> Hi Peter,
+>
+> On Sat, Nov 25, 2023 at 6:19=E2=80=AFAM Peter Robinson <pbrobinson@gmail.=
+com> wrote:
+> >
+> > Hi Shantur,
+> >
+> > On Fri, Nov 24, 2023 at 11:55=E2=80=AFPM Shantur Rathore <i@shantur.com=
+> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Fri, Nov 24, 2023 at 10:50=E2=80=AFPM Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Shantur
+> > > >
+> > > > On Fri, 24 Nov 2023 at 18:51, Shantur Rathore <i@shantur.com> wrote=
+:
+> > > > >
+> > > > > Hi Heinrich,
+> > > > >
+> > > > > I am trying to work out how to enable the SetVariableRT service i=
+n
+> > > > > U-Boot and came across your patch [1] which initially had the
+> > > > > SetVariable RT service enabled in EFI but in the final patch this=
+ was
+> > > > > removed.
+> > > > > I am hoping to implement it on top of the SPI Flash EFI store [2]=
+ to
+> > > > > be able to set Boot order and boot items from Linux the UEFI way.
+> > > > >
+> > > > > Can I pick your brain on why it was dropped in the patch?
+> > > > > Is there any limitation in SetVariableRT service ?
+> > > >
+> > > > I recently had a talk about it in Plumbers [0]. Generally speaking,=
+ RT
+> > > > + hardware owned by the kernel is a very weird combination since yo=
+u
+> > > > can't guarantee exclusive access to the flash or the bus and you ha=
+ve
+> > > > to preserve a *lot* of code alive in u-boot.
+> > > >
+> > > > I'll respond to your v1 patchset and we can discuss details there a=
+s well.
+> > > >
+> > > > [0] https://lpc.events/event/17/contributions/1653/
+> > >
+> > > Thanks for the background and helping me understand the problem.
+> > > Makes me wonder how things work in the PC world.
+> > > U-boot being only ~1MB, can we not leave it all in memory and maybe
+> > > just disable SPI access to Linux.
 
-[...]
+That would work, but you cant guarantee Linux wont enable the SPI flash.
+
+> >
+> > That's basically it, on x86 there's specific HW that's owned by
+> > firmware, I don't know the exact low level details of how that works.
+> >
+> > I think x86 devices generally use eSPI for this HW [1] but I don't
+> > know the low level details. The Arm SBSA (Server HW spec) and SBBR
+> > (Server Base Boot Requirements) specs that are key to ServerReady may
+> > go into some details too if you're curious.
+
+On X86 the SPI flash is handled entirely by the firmware and SMM. You
+can find more details here [0]
+
+>
+> Thanks,
+> I think the firmware is still accessible to PCs as one could update the f=
+irmware
+> in Windows so Windows has access to that device.
+>
+> I had some try myself and found that setting a variable to memory backed =
+storage
+> is doable with SetVariable call but we want to store it in any
+> non-volatile storage
+> things really don't look good.
+>
+> To be able to write SetVariable to any device, the whole u-boot driver
+> model would need
+> to be kept in memory, might as well just keep the whole u-boot in
+> memory at this point, it's anyway small.
+> I don't have much knowledge on how to or pros and cons of doing this.
+
+The major problem here is who owns the hardware. With the SPI flash
+implementation as well as the RPMB implementation Linux owns that
+flash.
+For the RPMB we've introduced a mechanism so the kernel replaces the
+runtime calls with internal functions [1].  I think we should come up
+with a similar architecture for SPI. In any case we should keep in
+mind that setting authenticated EFI variables should be forbidden on
+the file/SPI backends since they are not really secure.
 
 >
 > >
-> > > +       if (ret)
-> > > +               goto error;
-> > > +
-> > > +       ret = spi_flash_erase_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, EFI_VAR_BUF_SIZE);
-> > > +       debug("%s - Erased SPI Flash offset %lx\n", __func__, CONFIG_EFI_VARIABLE_SF_OFFSET);
-> > > +       if (ret)
-> > > +               goto error;
-> > > +
-> > > +       ret = spi_flash_write_dm(sfdev, CONFIG_EFI_VARIABLE_SF_OFFSET, len, buf);
-> > > +       debug("%s - Wrote buffer to SPI Flash : %ld\n", __func__, ret);
-> > > +
-> > > +       if (ret)
-> > > +               goto error;
-> > > +
-> > > +       ret = EFI_SUCCESS;
-> > > +error:
-> > > +       if (ret)
-> > > +               log_err("Failed to persist EFI variables in SF\n");
-> > > +       free(buf);
-> > > +       return ret;
-> > > +}
-> > > +
-> > > +efi_status_t efi_var_from_sf(void)
-> > > +{
-> > > +       struct efi_var_file *buf;
-> > > +       efi_status_t ret;
-> > > +       struct udevice *sfdev;
-> > > +
-> > > +       buf = calloc(1, EFI_VAR_BUF_SIZE);
-> > > +       if (!buf) {
-> > > +               log_err("Out of memory\n");
-> > > +               return EFI_OUT_OF_RESOURCES;
-> > > +       }
+> > BTW I plan to test your other patches on the Pinebook Pro.
 > >
-> > You don't want normal memory for the variables.  Instead, you want EFI
-> > memory which is marked for EFI runtime services data. U-Boot already
-> > has code to support Get/GetNextvariableRT, you just need to use
-> > efi_var_mem_init().
-> > If you need hints have a look at lib/efi_loader/efi_variable_tee.c
-> > which implements variables stored in an RPMB, but still uses the
-> > memory backend for runtime services.
-> >
+> > [1] https://www.totalphase.com/blog/2021/09/what-is-the-espi-protocol-a=
+nd-how-does-it-improve-upon-lpc/
 >
-> I believe EFI Runtime stuff is handled by efi_variable.c functions.
-
-Yes, they are, but there is a subtle difference here.
-efi_variable.c and efi_variable_tee.c have their own version of
-runtime service implementation. The functions that can be shared
-across the two are in efi_var_common.c.
-What your patch does is shoehorn an SPI backend storage to the
-existing implementation for storing variables to a file. Depending on
-what we decide for runtime calls that can end up being messy.
-
-efi_variable.c -> deals with variables on a file
-efi_variable_tee.c -> deals with variables hidden behind the secure world
-
-I think it would be cleaner to add efi_variable_sf.c and move the
-common functions you need from efi_variable.c -> efi_var_common.c
-Heinrich, do you have a preference for that?
-
-Thanks
-/Ilias
-> This code is run while we are still in U-boot to initialise the memory backed.
-> As of now, we don't have the SetVariableRT so I guess this won't be a problem.
-> I took the code from efi_var_file.c and just replaced file storage
-> with SPI Flash.
->
-> I will have to look deeper once I get to implement SetVariableRT which will
-> be a separate patch series once I get this in.
->
-> I have submitted V2 of the patch, can you kindly review them.
+> Thanks, that would be helpful.
+> I am particularly keen on the usb patch here
+> https://patchwork.ozlabs.org/project/uboot/patch/20231110141311.512334-1-=
+i@shantur.com/
 >
 > Kind regards,
 > Shantur
+
+Regards
+/Ilias
+[0] https://www.intel.com/content/www/us/en/content-details/671120/a-tour-b=
+eyond-bios-uefi-authenticated-variables-in-smm-with-edk-ii.html?wapkw=3Dvin=
+cent%20zimmer
+[1] https://lore.kernel.org/linux-efi/20231107054057.1893-2-masahisa.kojima=
+@linaro.org/
