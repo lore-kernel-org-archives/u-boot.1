@@ -4,44 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B227FC4167B
-	for <u-boot@archiver.kernel.org>; Sun, 26 Nov 2023 23:23:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8908FC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 27 Nov 2023 00:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F5B9874CA;
-	Mon, 27 Nov 2023 00:23:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 45F9087282;
+	Mon, 27 Nov 2023 01:44:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NJlUVxst";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 964FB874BD; Mon, 27 Nov 2023 00:23:28 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1160C86E81
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 00:23:24 +0100 (CET)
+ id 0364A874BB; Mon, 27 Nov 2023 01:44:18 +0100 (CET)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9296087282
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 01:44:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C25352F4;
- Sun, 26 Nov 2023 15:24:10 -0800 (PST)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B30873F5A1;
- Sun, 26 Nov 2023 15:23:22 -0800 (PST)
-Date: Sun, 26 Nov 2023 23:21:59 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Nils Le Roux <gilbsgilbert@gmail.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>
-Cc: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>
-Subject: Re: [PATCH] net: designware: Support high memory nodes
-Message-ID: <20231126232159.0627f20d@slackpad.lan>
-In-Reply-To: <9c28e1d8-6306-4630-9049-52023efd1af5@gmail.com>
-References: <20231111152619.95185-1-gilbsgilbert@gmail.com>
- <20231116232229.084127c9@slackpad.lan>
- <9c28e1d8-6306-4630-9049-52023efd1af5@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6cbccd8e35eso987652b3a.1
+ for <u-boot@lists.denx.de>; Sun, 26 Nov 2023 16:44:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701045854; x=1701650654; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8Wbycj6BZhJyxk8ckCqEd/CPNUUDDzPMrKbHvXDZF7U=;
+ b=NJlUVxstiZv4tWm9+CkL/Ob4fW0+VTEwYm6dE1N4Ze1dhjRUzfO6a/F2b7D9yxHLfT
+ DskxvqMjm45LeAgPxCHvNIUQIupLaUT0jAXY86vZRk/DQ+euipLyQH5fIahBwoRN1B2N
+ YSwQeB5laImbr6i+Mjw2zJCIhKGKIcCeyZnlnmJr/JnlpxsDvT5qcnR2fzEgyoAlO/Ax
+ DO2vWHyvPJ7n7f5p6CSaNCBhy/hp7YBWPf0vaXH/szIMOwKmCYXXr24hwbMtbuHscGCu
+ /9JnkQAwhrsR9K+p76LBER43oNT21svzpBYKBDuPJNYpKBLc78VcLQ2ZGUVK+jY7Bfwi
+ PxlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701045854; x=1701650654;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8Wbycj6BZhJyxk8ckCqEd/CPNUUDDzPMrKbHvXDZF7U=;
+ b=gubf3fM8eqsiGNU2gzmAw/iZDTw981SyCaJkE+TI3u7oyMmIs5GeGAWaVTPxcz7N0E
+ lNwYixD5DjDn7w1Gkcx6niGx5tabW7DeWGpYh3WdgGyXSgA7lCerCtWIa59cKFxt4h4J
+ aXzd/cZKzLQc/+Ib/lcRqHSH0Ql7RlX/vF2J0i05A8dlFntL0ZFIYIVMtIEicfe7dhZ5
+ 0ddvZA+yZPPry8GK7pR9my40va9R5sKftmyPl4dOwwi4UckEjggUFSHcii53PHZhO6IE
+ Gbfb54K/9UnN+sj/cnWo8eoTFoP/FCbzoWNT9WgPZH5jlY9233/IQbpiytSRyvndtV75
+ Phww==
+X-Gm-Message-State: AOJu0YzUJackgGEgdRDoQjZm/qpidQMlLAgKSM3+xNSaVkU/kaywRU0G
+ bnNUx1Lm+G26qKt7+4ItrWCPoa7J2S28JpH3wfpdvHxvTI8=
+X-Google-Smtp-Source: AGHT+IEnUyUm7WnEklafps5tQOzTptE93KxEKkmhDvl1GexJ5BPtpkdbP/gLCuZDSkHLDdxXpdi7KhsSSoIqA0dc9Vg=
+X-Received: by 2002:a05:6a21:a585:b0:187:df59:5c3c with SMTP id
+ gd5-20020a056a21a58500b00187df595c3cmr12083529pzc.3.1701045853817; Sun, 26
+ Nov 2023 16:44:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20231107221617.470-1-egyszeregy@freemail.hu>
+ <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+ <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
+ <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
+ <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
+ <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
+ <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
+In-Reply-To: <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 26 Nov 2023 21:44:01 -0300
+Message-ID: <CAOMZO5ApoA7+o_XOz04OLWpW-+hwhW-M9cROSbV1vADmDnydJw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
+To: =?UTF-8?B?U3rFkWtlIEvDoWxtw6FuIEJlbmphbWlu?= <egyszeregy@freemail.hu>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "otavio@ossystems.com.br" <otavio@ossystems.com.br>,
+ "sbabic@denx.de" <sbabic@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,137 +94,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 26 Nov 2023 16:58:52 +0100
-Nils Le Roux <gilbsgilbert@gmail.com> wrote:
+Hi Benjamin,
 
-Hi Nils,
+On Sun, Nov 26, 2023 at 8:17=E2=80=AFPM Sz=C5=91ke K=C3=A1lm=C3=A1n Benjami=
+n
+<egyszeregy@freemail.hu> wrote:
+>
+> It can happen when will -Wall be enabled as in others SW projects. My pat=
+ches are final, ready and works. I will not remove this "supression", it mu=
+st be a part of it if the target is to provide code in good quality. If you=
+ have any further whishes you can edit my patch and you can be a co-author.
 
-(adding back the list)
+Sorry, but this makes no sense.
 
-> Hi Andre,
-> 
-> Thank you for the code review and spot-on comments. I'll send a revised
-> patch soon. In the meantime, I have some silly questions regarding your
-> first point, please see below:
-> 
-> On 11/17/23 00:22, Andre Przywara wrote:
-> > On Sat, 11 Nov 2023 16:26:14 +0100
-> > Nils Le Roux <gilbsgilbert@gmail.com> wrote:
-> > 
-> > Hi Nils,
-> >   
-> >> Some platforms (such as the Lichee Pi 4A) have their dwmac device
-> >> addressable only in high memory space. Storing the node's base address
-> >> on 32 bits is not possible in such case.  
-> > 
-> > That's indeed true, so thanks for the patch.
-> > Some comments below.
-> >   
-> >> Use platform's physical address type to store the base address.
-> >>
-> >> Signed-off-by: Nils Le Roux <gilbsgilbert@gmail.com>
-> >> ---
-> >>
-> >>   drivers/net/designware.c | 8 ++++----
-> >>   1 file changed, 4 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-> >> index a174344b3e..327732fbf7 100644
-> >> --- a/drivers/net/designware.c
-> >> +++ b/drivers/net/designware.c
-> >> @@ -678,8 +678,8 @@ int designware_eth_probe(struct udevice *dev)
-> >>   {
-> >>   	struct eth_pdata *pdata = dev_get_plat(dev);
-> >>   	struct dw_eth_dev *priv = dev_get_priv(dev);
-> >> -	u32 iobase = pdata->iobase;
-> >> -	ulong ioaddr;
-> >> +	phys_addr_t iobase = pdata->iobase;
-> >> +	phys_addr_t ioaddr;  
-> > 
-> > So I agree that iobase should be a phys_addr_t, since pdata->iobase is
-> > of this type, but ioaddr seems to be a virtual address, not a physical
-> > one. So either we make this a void*, or keep it at ulong.
-> >   
-> 
-> How can you tell ioaddr is a virtual address?
+You are going in the opposite direction of good code quality.
 
-Because the value gets assigned to the mac_regs_p and dma_regs_p
-members of struct dw_eth_dev, and those are clearly pointers, and
-they are dereferenced at some point.
+Both U-Boot and kernel pass -Wno-unused-parameter.
 
-> As far as I can see, it is
-> only used as a temporary variable to hold iobase which is a physical
+It is common to write codes for stub functions like this:
 
-Well, this assignment is semantically problematic, but works in
-practice, see below.
+https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/inclu=
+de/linux/regulator/of_regulator.h?h=3Dv6.6.2#n29
 
-> address (that's how I inferred it should be the same type). Is virtual
-> addressing a thing in U-Boot anyways, or are you just speaking of
-> semantics? I feel like I'm missing something.
-
-So conceptually U-Boot has the notion of virtual and physical addresses
-being something different, but indeed most architectures only ever use
-a 1:1 mapping when using the MMU, so in practice this doesn't fail.
-There are exceptions, though, MIPS and some PowerPC builds on the
-hardware side, and more prominently the sandbox.
-So we have virt_to_phys() and phys_to_virt() to do conversions, even
-though they just do casts for most architectures. grep'ing the code for
-those functions might give you more hints.
-
-So you should change the assignment to:
-	ioaddr = phys_to_virt(iobase);
-That might make it clearer what types are actually required.
-
-> More directly: would it be wrong to remove the ioaddr variable and just
-> set the registers pointers to iobase directly? Aren't they pointers to
-> physical memory anyways?
-
-It would work, and if you have a hardware driver that never runs on MIPS
-or PPC you will get away with it. But it is of course much cleaner to
-use the conversion functions.
-
-Cheers,
-Andre
-
-> 
-> Thank you again,
-> Best regards,
-> Nils
-> 
-> >>   	int ret, err;
-> >>   	struct reset_ctl_bulk reset_bulk;
-> >>   #ifdef CONFIG_CLK
-> >> @@ -740,7 +740,7 @@ int designware_eth_probe(struct udevice *dev)
-> >>   	 * or via a PCI bridge, fill in plat before we probe the hardware.
-> >>   	 */
-> >>   	if (IS_ENABLED(CONFIG_PCI) && device_is_on_pci_bus(dev)) {
-> >> -		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &iobase);
-> >> +		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, (u32 *)&iobase);  
-> > 
-> > This looks sketchy, relies on little endian, and assumes that iobase
-> > has been initialised to 0 before. Since the read is explicitly 32 bits
-> > wide, I'd declare a new local u32 variable (inside this if-statement)
-> > and read it into there, then assign this to iobase.
-> >   
-> >>   		iobase &= PCI_BASE_ADDRESS_MEM_MASK;
-> >>   		iobase = dm_pci_mem_to_phys(dev, iobase);
-> >>   
-> >> @@ -748,7 +748,7 @@ int designware_eth_probe(struct udevice *dev)
-> >>   		pdata->phy_interface = PHY_INTERFACE_MODE_RMII;
-> >>   	}
-> >>   
-> >> -	debug("%s, iobase=%x, priv=%p\n", __func__, iobase, priv);
-> >> +	debug("%s, iobase=%llx, priv=%p\n", __func__, (u64)iobase, priv);  
-> > 
-> > This assumes that u64 is always %llx, which is not universally true.
-> > Fortunately we have %pa for that (see doc/develop/printf.rst), so you
-> > can just use this and drop the cast.
-> > 
-> > Cheers,
-> > Andre
-> >   
-> >>   	ioaddr = iobase;
-> >>   	priv->mac_regs_p = (struct eth_mac_regs *)ioaddr;
-> >>   	priv->dma_regs_p = (struct eth_dma_regs *)(ioaddr + DW_DMA_BASE_OFFSET);  
-> >   
-
+No (void)parameter is passed as you did in your patch. Like I said, it
+is unnecessary.
