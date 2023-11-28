@@ -4,54 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC30C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 10:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6606C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 11:05:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A49387017;
-	Tue, 28 Nov 2023 11:56:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id CBD7D86DAF;
+	Tue, 28 Nov 2023 12:05:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="P0RbCnjL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eUYAf/1z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C07D48757A; Tue, 28 Nov 2023 11:56:15 +0100 (CET)
-Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
- [217.70.183.201])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DD94486CBD; Tue, 28 Nov 2023 12:05:30 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83B6286FA7
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 11:56:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E7B286DAF
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 12:05:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 9E0911BF204;
- Tue, 28 Nov 2023 10:56:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1701168973;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=mCbB4Fs6ZrLxqYOjVzfmQKye5Vf8P15uguR0wwLm73c=;
- b=P0RbCnjLAt+D5OcX9TZdHkCb4arYQSEfCXYkvuFM0j4lEt2RV68+kbqqJDf360syrntLbU
- Ha0DuO9HRcIDPhiDvB4RGvlAN/wTQ/j7brRaHOpvlSJQbvklWsLdg08sztPfMePtaDpArA
- g4z2f3e3nX7NtOOHh/WVk8qKnAm2WZYaVaINNTFQyqdC8riPgIiuwMJyWSJ0ljJ59EcvIB
- hSeFtslwTCYNvfKTmL7+1A0PADJA04IpZgj/qqb2607b9L1kMmP0y7bJVxT8vzqb4daPzn
- ZiH/mykH17Y1EZotD10uXy0gylBmzt9u7mjUmWWRouJfDegkjNGpitkf0tvpnA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH] nand: Add a watch command
-Date: Tue, 28 Nov 2023 11:56:11 +0100
-Message-Id: <20231128105611.488906-1-miquel.raynal@bootlin.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2c9b5e50c1fso5015651fa.0
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 03:05:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701169528; x=1701774328; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=8aUu6JPaC+OWmb/+kFcf4yzuZSDVOz2aY0ryYLFs+Pg=;
+ b=eUYAf/1zksfR4hY0rZI4HXSr2KVaDooRO03AL0zhtCi0msa8cLE7Ml3CK4F6GU0YlD
+ F9Y4All6/fcGdl9czqsrmXkSjYbFzTuDxjtsjRAJxQcUpe8K2rb6ALxztGvfP4AIgZQQ
+ mY5DJiYXQgucpzX/ciGsJz5qccepeKg0UNnz5qxKw1OZpqYZ5iYFZCGM5oGo5YTMbc5d
+ njrQCp3Ex58j/mASFwM8827C5xOV7R1SkT4gvJIWzhExLsE67iKom7tpKCcrrWx9emkZ
+ eqaDnGlBRHUJLyMi5MqR0N+bGJxejVvZyBMquZ6uFvblftT1IMwI/ueOzHejqaEy7VPe
+ WqOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701169528; x=1701774328;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=8aUu6JPaC+OWmb/+kFcf4yzuZSDVOz2aY0ryYLFs+Pg=;
+ b=EovRua4EzFxRykafuKq/7sZiAmYelaQW9NcPlD6FTvotOhQHuxZ4bh80GvvnV/w/z9
+ dFNLW51OrHzQXAXflwxEBEfjW0ajZdlDe4df9IBJassuIjR7FEAfYoKmiu/2CviW1bhF
+ T81NtRfNSUMqmrINW6Q9rdw2lCXswKgJIQ9kBVKdSXUJZF83myZc4YHUrgb76MPVoY7O
+ 8BwYD3TfaKBoCOiKwVLMytyf/0wbjrjAqnbcamOXnQ60GF8q5VjEiIoMvWQrd4tNuHUZ
+ nkNwRsiKfDwyd7gWnMDTBIp2wKZvscnM40TS/Bq9bBntdvWNpYRkUWeSKaCGe0L4EED8
+ sbaQ==
+X-Gm-Message-State: AOJu0Ywovnp0TIgKtA7Uax6pj0Z1AYTNT04mmiXEyxDGqOg0lFEIrh6S
+ 0WARf1r+SWei/0qbH8S4DQYwjA==
+X-Google-Smtp-Source: AGHT+IHpTYD0aQTWehLu9IqKfqm8LTKrXeEO5bEHtEjQ+UCa2nEcstIfXTtBhfSlwc1Rqs8HR4Q50g==
+X-Received: by 2002:a2e:9557:0:b0:2c9:b623:ddf1 with SMTP id
+ t23-20020a2e9557000000b002c9b623ddf1mr771777ljh.51.1701169527780; 
+ Tue, 28 Nov 2023 03:05:27 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:eada:f40e:7ab3:2afe?
+ ([2a01:e0a:982:cbb0:eada:f40e:7ab3:2afe])
+ by smtp.gmail.com with ESMTPSA id
+ e15-20020a05600c4e4f00b0040b40e3f877sm10533979wmq.6.2023.11.28.03.05.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Nov 2023 03:05:27 -0800 (PST)
+Message-ID: <c8964e5d-b639-4585-9870-0832560b8999@linaro.org>
+Date: Tue, 28 Nov 2023 12:05:26 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: miquel.raynal@bootlin.com
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATHv11 15/43] test_efi_loader.py: use $filesize var
+Content-Language: en-US, fr
+To: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ goldsimon@gmx.de
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-16-maxim.uvarov@linaro.org>
+ <20231127181842.GN2513409@bill-the-cat>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231127181842.GN2513409@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,315 +118,33 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a debug command to monitor the retention state of the data on
-the array. The command needs a duplication of the mtd_read_oob()
-function to actually return the maximum number of bitflips encountered
-while reading the page. We could write a specific implementation for the
-Sunxi driver but this is probably enough.
+On 27/11/2023 19:18, Tom Rini wrote:
+> On Mon, Nov 27, 2023 at 06:56:58PM +0600, Maxim Uvarov wrote:
+> 
+>> bootefi code relays in internal variable then to filesize environment.
+>> lwip tftp do not update this variable. For not I update test to provide
+>> correct size.
+>>
+>> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> 
+> This is a lwip problem then, loading a "file" should update filesize and
+> there's use cases, not just tests, which rely on this behavior.
+> 
 
-    nand watch <off> <size> - check an area for bitflips
-    nand watch.part <part> - check a partition for bitflips
-    nand watch.chip - check the whole device for bitflips
+filesize is updated in tftp_close, but what's missing is a call to efi_set_bootdev
+when tftp transfer is finished:
 
-The output may be a bit verbose and could look like:
+https://elixir.bootlin.com/u-boot/latest/source/net/tftp.c#L305 :
+	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+		if (!tftp_put_active)
+			efi_set_bootdev("Net", "", tftp_filename,
+					map_sysmem(tftp_load_addr, 0),
+					net_boot_file_size);
 
-    => nand watch.chip
-    device 0 whole chip
-    size adjusted to 0xff60000 (5 bad blocks)
-
-    NAND watch for bitflips in area 0x0-0xff60000:
-    Page       0 (0x00000000) -> error -74
-    Page       1 (0x00000800) -> error -74
-    Page       2 (0x00001000) -> error -74
-    Page       3 (0x00001800) -> error -74
-    Page       4 (0x00002000) -> error -74
-    Page       5 (0x00002800) -> error -74
-    Page       6 (0x00003000) -> error -74
-    Page       7 (0x00003800) -> error -74
-    Page       8 (0x00004000) -> error -74
-    Page       9 (0x00004800) -> error -74
-    Page      10 (0x00005000) -> error -74
-    Page      11 (0x00005800) -> error -74
-    Page      12 (0x00006000) -> error -74
-    Page      13 (0x00006800) -> error -74
-    Page      14 (0x00007000) -> error -74
-    Page      15 (0x00007800) -> error -74
-    Page      16 (0x00008000) -> error -74
-    Page      17 (0x00008800) -> error -74
-    Page      18 (0x00009000) -> error -74
-    Page      19 (0x00009800) -> error -74
-    Page      20 (0x0000a000) -> error -74
-    Page      21 (0x0000a800) -> error -74
-    Page      22 (0x0000b000) -> error -74
-    Page      23 (0x0000b800) -> error -74
-    Page    1110 (0x0022b000) -> up to  1 bf/chunk
-    Page    1122 (0x00231000) -> up to  1 bf/chunk
-    Page    1132 (0x00236000) -> up to  1 bf/chunk
-    Page    1362 (0x002a9000) -> up to  1 bf/chunk
-    Page    4990 (0x009bf000) -> up to  1 bf/chunk
-    Page    5728 (0x00b30000) -> up to  1 bf/chunk
-    Page    7116 (0x00de6000) -> up to  1 bf/chunk
-    Page    7160 (0x00dfc000) -> up to  1 bf/chunk
-    Page    7494 (0x00ea3000) -> up to  1 bf/chunk
-    Page   10842 (0x0152d000) -> up to  1 bf/chunk
-    Page   11614 (0x016af000) -> up to  1 bf/chunk
-    Page   11970 (0x01761000) -> up to  1 bf/chunk
-    Page   12536 (0x0187c000) -> up to  1 bf/chunk
-    Page   12687 (0x018c7800) -> up to  1 bf/chunk
-    Page   14298 (0x01bed000) -> up to  1 bf/chunk
-    Page   18268 (0x023ae000) -> up to  1 bf/chunk
-    Page   18760 (0x024a4000) -> up to  1 bf/chunk
-    Page   21440 (0x029e0000) -> up to  1 bf/chunk
-    Page   22336 (0x02ba0000) -> up to  1 bf/chunk
-    Page   22592 (0x02c20000) -> up to  1 bf/chunk
-    Page   23872 (0x02ea0000) -> up to  1 bf/chunk
-    Page   27584 (0x035e0000) -> up to  1 bf/chunk
-    Page   35008 (0x04460000) -> up to  1 bf/chunk
-    Page   37184 (0x048a0000) -> up to  1 bf/chunk
-    Page   41728 (0x05180000) -> up to  1 bf/chunk
-    Page   42176 (0x05260000) -> up to  1 bf/chunk
-    Page   43200 (0x05460000) -> up to  1 bf/chunk
-    Page   43328 (0x054a0000) -> up to  1 bf/chunk
-    Page   45376 (0x058a0000) -> up to  1 bf/chunk
-    Page   47040 (0x05be0000) -> up to  1 bf/chunk
-    Page   47552 (0x05ce0000) -> up to  1 bf/chunk
-    Page   49344 (0x06060000) -> up to  1 bf/chunk
-    Page   49856 (0x06160000) -> up to  1 bf/chunk
-    Page   62784 (0x07aa0000) -> up to  1 bf/chunk
-    Page   65153 (0x07f40800) -> up to  1 bf/chunk
-    Page   65228 (0x07f66000) -> up to  1 bf/chunk
-    Page   65382 (0x07fb3000) -> up to  1 bf/chunk
-    Page   98624 (0x0c0a0000) -> up to  1 bf/chunk
-    Page  101952 (0x0c720000) -> up to  1 bf/chunk
-    Page  107584 (0x0d220000) -> up to  1 bf/chunk
-    Page  118208 (0x0e6e0000) -> up to  1 bf/chunk
-    Page  126656 (0x0f760000) -> up to  1 bf/chunk
-    Page  127680 (0x0f960000) -> up to  1 bf/chunk
-    Page  129920 (0x0fdc0000) -> up to  1 bf/chunk
-    Maximum number of bitflips: 1
-    Pages with bitflips: 44/130752
-
-It is also possible to reduce the output with the .quiet suffix in order
-to just show the summary.
-
-    => nand watch.chip
-    device 0 whole chip
-    size adjusted to 0xff60000 (5 bad blocks)
-
-    NAND watch for bitflips in area 0x0-0xff60000:
-    Maximum number of bitflips: 1
-    Pages with bitflips: 44/130752
-
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
----
-
-Hello, I recently came across a batch of NANDs with a lot of "natural"
-bitflips so in order to easily and objectively characterize how
-unstable these parts were, I wrote this little tool which was pretty
-handy to have in U-Boot. I believe it can be useful for others as well,
-so here is the patch.
-Cheers, Miquèl
-
- cmd/Kconfig             |   5 ++
- cmd/nand.c              | 103 ++++++++++++++++++++++++++++++++++++++++
- drivers/mtd/mtdcore.c   |  22 +++++++++
- include/linux/mtd/mtd.h |   1 +
- 4 files changed, 131 insertions(+)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 451baa3ecac..0524328d373 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1384,6 +1384,11 @@ config CMD_NAND_TORTURE
- 	help
- 	  NAND torture support.
- 
-+config CMD_NAND_WATCH
-+	bool "nand watch"
-+	help
-+	  NAND watch bitflip support.
-+
- endif # CMD_NAND
- 
- config CMD_NVME
-diff --git a/cmd/nand.c b/cmd/nand.c
-index 71b8f964429..3bf67f5b65e 100644
---- a/cmd/nand.c
-+++ b/cmd/nand.c
-@@ -231,6 +231,54 @@ free_dat:
- 	return ret;
- }
- 
-+#ifdef CONFIG_CMD_NAND_WATCH
-+static int nand_watch_bf(struct mtd_info *mtd, ulong off, ulong size, bool quiet)
-+{
-+	unsigned int max_bf = 0, pages_wbf = 0;
-+	unsigned int first_page, pages, i;
-+	struct mtd_oob_ops ops = {};
-+	u_char *buf;
-+	int ret;
-+
-+	buf = memalign(ARCH_DMA_MINALIGN, mtd->writesize);
-+	if (!buf) {
-+		puts("No memory for page buffer\n");
-+		return 1;
-+	}
-+
-+	first_page = off / mtd->writesize;
-+	pages = size / mtd->writesize;
-+
-+	ops.datbuf = buf;
-+	ops.len = mtd->writesize;
-+	for (i = first_page; i < first_page + pages; i++) {
-+		ulong addr = mtd->writesize * i;
-+		ret = mtd_read_oob_bf(mtd, addr, &ops);
-+		if (ret < 0) {
-+			if (quiet)
-+				continue;
-+
-+			printf("Page %7d (0x%08lx) -> error %d\n",
-+			       i, addr, ret);
-+		} else if (ret) {
-+			max_bf = max(max_bf, (unsigned int)ret);
-+			pages_wbf++;
-+			if (quiet)
-+				continue;
-+			printf("Page %7d (0x%08lx) -> up to %2d bf/chunk\n",
-+			       i, addr, ret);
-+		}
-+	}
-+
-+	printf("Maximum number of bitflips: %u\n", max_bf);
-+	printf("Pages with bitflips: %u/%u\n", pages_wbf, pages);
-+
-+	free(buf);
-+
-+	return 0;
-+}
-+#endif
-+
- /* ------------------------------------------------------------------------- */
- 
- static int set_dev(int dev)
-@@ -778,6 +826,55 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return ret == 0 ? 0 : 1;
- 	}
- 
-+#ifdef CONFIG_CMD_NAND_WATCH
-+	if (strncmp(cmd, "watch", 5) == 0) {
-+		int args = 2;
-+
-+		if (cmd[5]) {
-+			if (!strncmp(&cmd[5], ".part", 5)) {
-+				args = 1;
-+			} else if (!strncmp(&cmd[5], ".chip", 5)) {
-+				args = 0;
-+			} else {
-+				goto usage;
-+			}
-+		}
-+
-+		if (cmd[10])
-+			if (!strncmp(&cmd[10], ".quiet", 6))
-+				quiet = true;
-+
-+		if (argc != 2 + args)
-+			goto usage;
-+
-+		ret = mtd_arg_off_size(argc - 2, argv + 2, &dev, &off, &size,
-+				       &maxsize, MTD_DEV_TYPE_NAND, mtd->size);
-+		if (ret)
-+			return ret;
-+
-+		/* size is unspecified */
-+		if (argc < 4)
-+			adjust_size_for_badblocks(&size, off, dev);
-+
-+		if ((off & (mtd->writesize - 1)) ||
-+		    (size & (mtd->writesize - 1))) {
-+			printf("Attempt to read non page-aligned data\n");
-+			return -EINVAL;
-+		}
-+
-+		ret = set_dev(dev);
-+		if (ret)
-+			return ret;
-+
-+		mtd = get_nand_dev_by_index(dev);
-+
-+		printf("\nNAND watch for bitflips in area 0x%llx-0x%llx:\n",
-+		       off, off + size);
-+
-+		return nand_watch_bf(mtd, off, size, quiet);
-+	}
-+#endif
-+
- #ifdef CONFIG_CMD_NAND_TORTURE
- 	if (strcmp(cmd, "torture") == 0) {
- 		loff_t endoff;
-@@ -943,6 +1040,12 @@ U_BOOT_LONGHELP(nand,
- 	"nand erase.chip [clean] - erase entire chip'\n"
- 	"nand bad - show bad blocks\n"
- 	"nand dump[.oob] off - dump page\n"
-+#ifdef CONFIG_CMD_NAND_WATCH
-+	"nand watch <off> <size> - check an area for bitflips\n"
-+	"nand watch.part <part> - check a partition for bitflips\n"
-+	"nand watch.chip - check the whole device for bitflips\n"
-+	"\t\t.quiet - Query only the summary, not the details\n"
-+#endif
- #ifdef CONFIG_CMD_NAND_TORTURE
- 	"nand torture off - torture one block at offset\n"
- 	"nand torture off [size] - torture blocks from off to off+size\n"
-diff --git a/drivers/mtd/mtdcore.c b/drivers/mtd/mtdcore.c
-index aa78d41a55e..2baf92a9056 100644
---- a/drivers/mtd/mtdcore.c
-+++ b/drivers/mtd/mtdcore.c
-@@ -1126,6 +1126,28 @@ int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops)
- }
- EXPORT_SYMBOL_GPL(mtd_read_oob);
- 
-+/* This is a bare copy of mtd_read_oob returning the actual number of bitflips */
-+int mtd_read_oob_bf(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops)
-+{
-+	int ret_code;
-+	ops->retlen = ops->oobretlen = 0;
-+	if (!mtd->_read_oob)
-+		return -EOPNOTSUPP;
-+	/*
-+	 * In cases where ops->datbuf != NULL, mtd->_read_oob() has semantics
-+	 * similar to mtd->_read(), returning a non-negative integer
-+	 * representing max bitflips. In other cases, mtd->_read_oob() may
-+	 * return -EUCLEAN. In all cases, perform similar logic to mtd_read().
-+	 */
-+	ret_code = mtd->_read_oob(mtd, from, ops);
-+	if (unlikely(ret_code < 0))
-+		return ret_code;
-+	if (mtd->ecc_strength == 0)
-+		return 0;	/* device lacks ecc */
-+	return ret_code;
-+}
-+EXPORT_SYMBOL_GPL(mtd_read_oob_bf);
-+
- int mtd_write_oob(struct mtd_info *mtd, loff_t to,
- 				struct mtd_oob_ops *ops)
- {
-diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-index 09f52698877..28afbb86ea9 100644
---- a/include/linux/mtd/mtd.h
-+++ b/include/linux/mtd/mtd.h
-@@ -413,6 +413,7 @@ int mtd_panic_write(struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen,
- 		    const u_char *buf);
- 
- int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
-+int mtd_read_oob_bf(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
- int mtd_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops);
- 
- int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
--- 
-2.34.1
-
+Neil
