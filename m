@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2E0C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 18:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7128CC4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 18:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDBC687753;
-	Tue, 28 Nov 2023 19:08:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id CDF05877B5;
+	Tue, 28 Nov 2023 19:21:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XWiG9o0D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNr9E46W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EEE18776F; Tue, 28 Nov 2023 19:08:10 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC01787759; Tue, 28 Nov 2023 19:21:29 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49A2D86F67
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 19:08:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F017F877B5
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 19:21:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8449261874
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 18:08:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D76BEC43397
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 18:08:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701194883;
- bh=4DwB38wbaKFqe7hUkjoK0KTOX2HU0BmeTqXJcyORlu4=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=XWiG9o0Dtq787TusZ2eK1KJKrxDR6ZWsvWOUs1UhQwi/EqTGjSVzPy1M+BcivIXz8
- nKM4NnDzVmlPy4d56Q2UCesllUtMPZGL/0QkX7IMNeaphkjFm2UDe7x33QM08aSyNg
- HT+7MRyZ5Ty1ggpvUZ0/+5D4vejZIgr5QVPyS7fPyIAE7W8mxdCvLJL9bT57/U9ZSM
- 5KfMaTnpcjctst3YM+476nbFzErxYqznvVsXBJ+2Ovg6wsBotr7yBLXpwoWP9LvQci
- glX1WDuLypxtZc6NAtIkU+q16SZ7p4PwqSyOVYlSslQcaGx7xyqM26ZGNPB+3i2to5
- XGQqVb9QkNvWQ==
-Received: by mail-lj1-f169.google.com with SMTP id
- 38308e7fff4ca-2c87adce180so71569511fa.0
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:08:03 -0800 (PST)
-X-Gm-Message-State: AOJu0YytOIIizyiyjRYBOz8lxkdotiMJ8XGkd3qr2MptcBVR0d3wOyzE
- h32NF47ubZZBBiQXjP1+rCu1+S0xoDB1TXAozpc=
-X-Google-Smtp-Source: AGHT+IEMmvfyq0v5/2oBeBE/oqLc1Eu+CJpsjOxQOhU1mp+t/ys+FzWHNt4xUEoc92KVGBiOkt8B0IacbD0oqbAchGI=
-X-Received: by 2002:a2e:b0e1:0:b0:2c9:b9db:73 with SMTP id
- h1-20020a2eb0e1000000b002c9b9db0073mr988987ljl.20.1701194881929; 
- Tue, 28 Nov 2023 10:08:01 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5d226f51f71so1768077b3.3
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:21:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1701195679; x=1701800479; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WkH2wz0IKADiOfopvlIzPrhACAUVDApPJh1rrubWYxE=;
+ b=KNr9E46WLYQDnWrhOnjvnoCA3D/VRQt1ao/aZoeZsf1+KXhmjGAHlOnMhq5f+0oVk5
+ QtNVKRCQatgBfqtWiiqdGVgstnqaAJZzl2njT9HGRH1qL8r8Dhl+crwg+tDoPUuQqDzz
+ 1jKzqW97uklI6+3/p5iHesk+8Eei8BKsjZeo8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701195679; x=1701800479;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WkH2wz0IKADiOfopvlIzPrhACAUVDApPJh1rrubWYxE=;
+ b=hNU4pknOy7x77E/ArzR+ePObglAkZVnL0S1G/BxfxI4NM/Cy3BvHfVWIvQbfy4belc
+ i1fM/LkGh7t3/xugWf13MjLS67PO2Rh346Smaf0O87wjKXwtDzN/NO7mASuMqGwBSdK8
+ g3RCbBvEe82jfo2HMT08/PPPObbJ5DHgtLTLcpGlg61hb4fqGR2I1ofx2RMoCJ/Bmcmf
+ FbJiu1v6buuFZz/v/Sg7izLPUOpTFdO0n8Vzo7tWgZqBWxjAVUMD+kSWaW7Kq46rCn/c
+ 6SIXwfrEnXQoDhW/urRm1Z6wQl9ARO9qjxjScjnlTb76q4/f3/W1jZmHTwq4WaNegMcq
+ /eEw==
+X-Gm-Message-State: AOJu0Yzjl2KdrUUaWLCLDILAgQcvR/gHtaCwcfuQQCteAcHFEPBZwtp3
+ q3zW/7G+FyNcEBACe/Ono2Ih3Q==
+X-Google-Smtp-Source: AGHT+IHsORqh15t+acJ0YmgrNQXl/WkYkK+pEEMhiA5y+oTXW0wg+F2N7fM6BX3mlu9x7W6kXz7p1g==
+X-Received: by 2002:a0d:e5c7:0:b0:5c9:8366:33b2 with SMTP id
+ o190-20020a0de5c7000000b005c9836633b2mr17950504ywe.44.1701195679487; 
+ Tue, 28 Nov 2023 10:21:19 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-4f9d-49d7-ae37-6b11.res6.spectrum.com.
+ [2603:6081:7b00:6400:4f9d:49d7:ae37:6b11])
+ by smtp.gmail.com with ESMTPSA id
+ u64-20020a814743000000b00582b239674esm4074480ywa.129.2023.11.28.10.21.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Nov 2023 10:21:19 -0800 (PST)
+Date: Tue, 28 Nov 2023 13:21:17 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>
+Subject: Re: [PATCH v3 31/32] bootstd: Introduce programmatic boot
+Message-ID: <20231128182117.GA2513409@bill-the-cat>
+References: <20231118210547.577026-1-sjg@chromium.org>
+ <20231118210547.577026-32-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
- <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
- <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
- <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
-In-Reply-To: <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Tue, 28 Nov 2023 19:07:50 +0100
-X-Gmail-Original-Message-ID: <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
-Message-ID: <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: "Chiu, Chasel" <chasel.chiu@intel.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- "Brune, Maximilian" <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Vs053lj8MeJakqXz"
+Content-Disposition: inline
+In-Reply-To: <20231118210547.577026-32-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,220 +96,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-You are referring to a 2000 line patch so it is not 100% clear where
-to look tbh.
 
+--Vs053lj8MeJakqXz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> wrote:
->
->
-> In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line 268 is for related example code.
->
+On Sat, Nov 18, 2023 at 02:05:19PM -0700, Simon Glass wrote:
 
-That refers to a 'memory-allocation' node, right? How does that relate
-to the 'reserved-memory' node?
+> At present bootstd requires CONFIG_CMDLINE to operate. Add a new
+> 'programmatic' boot which can be used when no command line is available.
+> For now it does almost nothing, since most bootmeths require the
+> command line.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-And crucially, how does this clarify in which way "runtime-code" and
-"runtime-data" reservations are being used?
+Overall, this seems fine. The only ask I have really is, can we think
+about how to handle both this case and the case handled by
+cmd/bootmenu.c in a common fashion? To me, one is "show a menu of boot
+options, based on env variables" and one is "show a menu of boot
+options, based on C code" and the "show a menu of boot options" should
+have a lot in common.
 
-Since the very beginning of this discussion, I have been asking
-repeatedly for examples that describe the wider context in which these
-reservations are used. The "runtime" into runtime-code and
-runtime-data means that these regions have a special significance to
-the operating system, not just to the next bootloader stage. So I want
-to understand exactly why it is necessary to describe these regions in
-a way where the operating system might be expected to interpret this
-information and act upon it.
+--=20
+Tom
 
+--Vs053lj8MeJakqXz
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
-> > -----Original Message-----
-> > From: Chiu, Chasel
-> > Sent: Tuesday, November 21, 2023 10:34 AM
-> > To: Ard Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
-> > Cc: devicetree@vger.kernel.org; Mark Rutland <mark.rutland@arm.com>; Rob
-> > Herring <robh@kernel.org>; Tan, Lean Sheng <sheng.tan@9elements.com>; lkml
-> > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>; Brune,
-> > Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
-> > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
-> > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
-> > <gua.guo@intel.com>; linux-acpi@vger.kernel.org; U-Boot Mailing List <u-
-> > boot@lists.denx.de>; Chiu, Chasel <chasel.chiu@intel.com>
-> > Subject: RE: [PATCH v7 2/2] schemas: Add some common reserved-memory
-> > usages
-> >
-> >
-> > Hi Ard,
-> >
-> > Here is the POC PR for your reference:
-> > https://github.com/tianocore/edk2/pull/4969/files#diff-
-> > ccebabae5274b21634723a2111ee0de11bed6cfe8cb206ef9e263d9c5f926a9cR26
-> > 8
-> > Please note that this PR is still in early phase and expected to have significant
-> > changes.
-> >
-> > The idea is that payload entry will create gEfiMemoryTypeInformationGuid HOB
-> > with payload default memory types and allow FDT to override if correspond node
-> > present.
-> > Please let me know if you have questions or suggestions.
-> >
-> > Thanks,
-> > Chasel
-> >
-> >
-> > > -----Original Message-----
-> > > From: Ard Biesheuvel <ardb@kernel.org>
-> > > Sent: Tuesday, November 21, 2023 8:42 AM
-> > > To: Simon Glass <sjg@chromium.org>
-> > > Cc: Chiu, Chasel <chasel.chiu@intel.com>; devicetree@vger.kernel.org;
-> > > Mark Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>;
-> > > Tan, Lean Sheng <sheng.tan@9elements.com>; lkml
-> > > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>;
-> > > Brune, Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
-> > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
-> > > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
-> > > <gua.guo@intel.com>; linux- acpi@vger.kernel.org; U-Boot Mailing List
-> > > <u-boot@lists.denx.de>
-> > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
-> > > usages
-> > >
-> > > On Mon, 20 Nov 2023 at 21:12, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > On Mon, 13 Nov 2023 at 11:09, Chiu, Chasel <chasel.chiu@intel.com> wrote:
-> > > > >
-> > > > >
-> > > > > Hi Ard,
-> > > > >
-> > > > > Please see my reply below inline.
-> > > > >
-> > > > > Thanks,
-> > > > > Chasel
-> > > > >
-> > > > >
-> > > > > > -----Original Message-----
-> > > > > > From: Ard Biesheuvel <ardb@kernel.org>
-> > > > > > Sent: Saturday, November 11, 2023 3:04 AM
-> > > > > > To: Chiu, Chasel <chasel.chiu@intel.com>
-> > > > > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org;
-> > > > > > Mark Rutland <mark.rutland@arm.com>; Rob Herring
-> > > > > > <robh@kernel.org>; Tan, Lean Sheng <sheng.tan@9elements.com>;
-> > > > > > lkml <linux-kernel@vger.kernel.org>; Dhaval Sharma
-> > > > > > <dhaval@rivosinc.com>; Brune, Maximilian
-> > > > > > <maximilian.brune@9elements.com>; Yunhui Cui
-> > > > > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom
-> > > > > > Rini <trini@konsulko.com>; ron minnich <rminnich@gmail.com>;
-> > > > > > Guo, Gua <gua.guo@intel.com>; linux- acpi@vger.kernel.org;
-> > > > > > U-Boot Mailing List <u-boot@lists.denx.de>
-> > > > > > Subject: Re: [PATCH v7 2/2] schemas: Add some common
-> > > > > > reserved-memory usages
-> > > > > >
-> > > > > > On Sat, 11 Nov 2023 at 04:20, Chiu, Chasel <chasel.chiu@intel.com>
-> > wrote:
-> > > > > > >
-> > > > > > >
-> > > > > > > Just sharing some usage examples from UEFI/EDK2 scenario.
-> > > > > > > To support ACPI S4/Hibernation, memory map must be consistent
-> > > > > > > before entering and after resuming from S4, in this case
-> > > > > > > payload may need to know previous memory map from bootloader
-> > > > > > > (currently generic payload cannot access platform/bootloader
-> > > > > > > specific non-volatile data, thus could not save/restore memory
-> > > > > > > map
-> > > > > > > information)
-> > > > > >
-> > > > > > So how would EDK2 reconstruct the entire EFI memory map from
-> > > > > > just these unannotated /reserved-memory nodes? The EFI memory
-> > > > > > map contains much more information than that, and all of it has
-> > > > > > to match the pre-hibernate situation, right? Can you given an example?
-> > > > >
-> > > > >
-> > > > > Here we listed only typically memory types that may change cross
-> > > > > different
-> > > platforms.
-> > > > > Reserved memory type already can be handled by reserved-memory
-> > > > > node,
-> > > and rest of the types usually no need to change cross platforms thus
-> > > currently we could rely on default in generic payload.
-> > > > > In the future if we see a need to add new memory types we will
-> > > > > discuss and
-> > > add it to FDT schema.
-> > > > >
-> > > > >
-> > > > >
-> > > > > >
-> > > > > > > Another usage is to support binary model which generic payload
-> > > > > > > is a prebuilt
-> > > > > > binary compatible for all platforms/configurations, however the
-> > > > > > payload default memory map might not always work for all the
-> > > > > > configurations and we want to allow bootloader to override
-> > > > > > payload default
-> > > memory map without recompiling.
-> > > > > > >
-> > > > > >
-> > > > > > Agreed. But can you explain how a EDK2 payload might make
-> > > > > > meaningful use of 'runtime-code' regions provided via DT  by the
-> > > > > > non-EDK2 platform init? Can you give an example?
-> > > > >
-> > > > >
-> > > > > Runtime-code/data is used by UEFI payload for booting UEFI OS
-> > > > > which
-> > > required UEFI runtime services.
-> > > > > Platform Init will select some regions from the usable memory and
-> > > > > assign it to
-> > > runtime-code/data for UPL to consume. Or assign same runtime-code/data
-> > > from previous boot.
-> > > > > If UEFI OS is not supported, PlatformInit may not need to provide
-> > > > > runtime-code/data regions to payload. (always providing
-> > > > > runtime-code/data should be supported too)
-> > > > >
-> > > > >
-> > > > > >
-> > > > > > > Under below assumption:
-> > > > > > >         FDT OS impact has been evaluated and taken care by
-> > > > > > > relevant
-> > > > > > experts/stakeholders.
-> > > > > > > Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
-> > > > > > >
-> > > > > >
-> > > > > > I am sorry but I don't know what 'FDT OS impact' means. We are
-> > > > > > talking about a firmware-to-firmware abstraction that has the
-> > > > > > potential to leak into the OS visible interface.
-> > > > > >
-> > > > > > I am a maintainer in the Tianocore project myself, so it would
-> > > > > > help if you could explain who these relevant experts and
-> > > > > > stakeholders are. Was this discussed on the edk2-devel mailing
-> > > > > > list? If so, apologies for missing it but I may not have been cc'ed perhaps?
-> > > > >
-> > > > >
-> > > > >
-> > > > >
-> > > > > I'm not familiar with FDT OS, also I do not know if who from
-> > > > > edk2-devel were
-> > > supporting FDT OS, I think Simon might be able to connect FDT OS
-> > > experts/stakeholders.
-> > > > > We are mostly focusing on payload firmware phase implementation in
-> > > > > edk2 (and other payloads too), however, since we have aligned the
-> > > > > payload FDT and OS FDT months ago, I'm assuming FDT OS impact must
-> > > > > be there and we need (or already done?) FDT OS experts to support
-> > > > > it. (again, maybe Simon could share more information about FDT OS)
-> > > > >
-> > > > > In edk2 such FDT schema is UefiPayloadPkg internal usage only and
-> > > > > payload
-> > > entry will convert FDT into HOB thus we expected the most of the edk2
-> > > generic code are no-touch/no impact, that's why we only had small
-> > > group
-> > > (UefiPayloadPkg) discussion.
-> > > > > Ard, if you are aware of any edk2 code that's for supporting FDT
-> > > > > OS, please let
-> > > us know and we can discuss if those code were impacted or not.
-> > > >
-> > > > We discussed this and just to clarify, 'FDT OS' is not a special OS,
-> > > > it is just Linux.
-> > > >
-> > > > So, with the above, are we all on the same page? Can the patch be
-> > > > applied, perhaps? If not, what other discussion is needed?
-> > > >
-> > >
-> > > An example of how a platform-init/payload combination would make
-> > > meaningful use of such runtime-code/data regions.
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVmL5YACgkQFHw5/5Y0
+tyzwbQv/U3FD+HwSn7CfpYPuuaGCMpDyiRYQsZR2IuY1u3T8seJAHITwdCEAjcOD
+MvmD8N8sNKDKa50UOyRlP2IKAkpPbNoetImDlu5tgalNNfWxq3Cx5fWE5Oia1pOK
+BGWKT+8iZvNmtfwX1u9QEmdWGU7jw49KS8uhK2Rmc6w3buFsAwu/k21ObSUB0Ic0
+3KKuUejsOy0Ec2WBC8TC0MueHWWXfexnZNhcAnaxEH/ceBzbQAzkhcVb01odeT+Z
+SFIwDFJopaEr1yFVtXleTARO0084ya4PqWtpkPMcEkAnhF7hkcxtSj3T3Dpvy2UV
+gfnY4mNv/XQkxjZOqXMnFZK0ryx6sR08RMRISPD9Gy64NLzIkDxjBnPw4uOM8Rwh
+szgo50S4WXmo0o6pbZkdOYaCyQ2C2z6VavEiBxyGm9G2BEGTX9BeAgjdwWglZgJL
+qhQZNSWJ1VYDxeVEiMEqOHGmq/qRovLxNSIqVe2LGHxT29Ak0RvJhV0vBxqrBy4i
+DQp919N8
+=2ysU
+-----END PGP SIGNATURE-----
+
+--Vs053lj8MeJakqXz--
