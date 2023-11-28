@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B01DC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 09:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB3BC07E98
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 09:35:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7756A87569;
-	Tue, 28 Nov 2023 10:32:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9110787579;
+	Tue, 28 Nov 2023 10:35:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YcV9OYRI";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v7ZmoxeO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B6CA87569; Tue, 28 Nov 2023 10:32:12 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 494188769A; Tue, 28 Nov 2023 10:35:15 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 882798753B
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:32:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 316728753B
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:35:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AS9W1Yb068878;
- Tue, 28 Nov 2023 03:32:01 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701163921;
- bh=pjuHXGhEeF/5v+6FoRvpYEqU5QuDDshR6rOvWraw04s=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=YcV9OYRIxQm+by7wyokCfRBnZppVR7KOMY2DqKsyMea8/iG7B3OvVXvFqubTzYYe3
- 40gW3qeK1Ip5Dj2VY1/IAIB6Y+Lj47ZBmYXNehCOhBb2UOWZpwK6YsRafjR6XGy5XG
- 4YDBt6VBDHUaKbUavcOs6vYuICylTulbInDFZWqk=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AS9W13j017164
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 28 Nov 2023 03:32:01 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 28
- Nov 2023 03:32:00 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 28 Nov 2023 03:32:00 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AS9VxiG090228;
- Tue, 28 Nov 2023 03:31:59 -0600
-Date: Tue, 28 Nov 2023 15:01:58 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Nishanth
- Menon <nm@ti.com>, Roger Quadros <rogerq@kernel.org>,
- <vigneshr@ti.com>, <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>,
- <praneeth@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-Message-ID: <20231128093158.sjfmwxiizk22keem@uda0497581>
-References: <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
- <20231005163645.GS8465@bill-the-cat>
- <20231005171010.zvza7uqyn4mcgp5g@handsaw>
- <20231005171614.yiatmyczip2jnmf4@surround>
- <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
- <20231106055351.f2fny5ys6avi5qnk@ula0497581>
- <20231106153159.GH496310@bill-the-cat>
- <736c04ab-9c48-4957-b242-fcbde0ace68b@ti.com>
- <CAPnjgZ1JTcybX9sRFQtddcwefLum6_+ynQSWbQ=4NVdO6eAxhg@mail.gmail.com>
- <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9fcfd2a069aso717709766b.1
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 01:35:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701164112; x=1701768912; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=N3xnHrT4vg6d6SbP3/Lb6UUkw7GnG2oM8QBkJ8QdHZs=;
+ b=v7ZmoxeOXLpwaT6uB5I6pV9MXdTMg0rNt4w5v0hvRxPWb2taCYweklD+/1D62l0/Vl
+ Ig19q+y8TVrgx2/H340nVXa2jOIY34KlQ/buCG/kt6KFFA6IqxrpY81fizWByfx90MAa
+ HemrGuUfSYdN0xzJHOeX7JcIdVF8AiGugLe5Ihg05p69aCAwVUa35dLjFsZ2gUtEgvw8
+ 42hSVaEyy1X+1i55+Ta9I5bjuwyltO7hp5qDJT1PuGYgHdsTsJDsVugRzPI1Rbj1dgVr
+ lUhHztBF/qqngnlEU6b7/eyavSrrg4o9Fiz04aNzqxrsVALcS29HOsPulFRcvMrgICQP
+ hTWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701164112; x=1701768912;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N3xnHrT4vg6d6SbP3/Lb6UUkw7GnG2oM8QBkJ8QdHZs=;
+ b=Us2HMpKvKr/jj6cRQROTwg9siPOEZnXQTEt0QafRRXLEroCfN9+ytUZh6hw1gpqccp
+ TKqC+azDEI0Bjz8Og5oY/Tz+TuYmUCHcEzSGqG2NAchJMJwd6SXu9iRu9VKYgBETDJr9
+ 12Ps9TkfkQ37iJ4UuNWY8T4RfFY6mpj6dDXHjtVHsw/qcsSbGuspPmSPoszqZPT7dLfT
+ EjIHvcebgbRDWN0E9hg+2b/oILvlfMn4faIQ+L6CjlOEpLnETDk6/BbmS0HCfpVv8iDU
+ rGbrzBnuN5yCyZAl2sLX9cS8GF3WusmAxL3BiSaK/xZGSwQTflUyYypVbrmJ0wBqdMKB
+ tCHg==
+X-Gm-Message-State: AOJu0YxIaJ2Pt19vptHVSOMQjgmmcxXFLIVkv9oo1tg+tmXg83vm9ZsN
+ F09/IocYu84OCqoCWppaUbkwmDuBzyXBE9cYS+IZLg==
+X-Google-Smtp-Source: AGHT+IH5aaWOdRihjb+7z93oNBw4RX8KYPmHNKo+prRfVQhtMCyl4QmY4VlOtWDn9fG0/csO9f/YQMl1gNINCadp1yU=
+X-Received: by 2002:a17:906:3f88:b0:9ff:1dea:83b6 with SMTP id
+ b8-20020a1709063f8800b009ff1dea83b6mr9783771ejj.4.1701164112632; Tue, 28 Nov
+ 2023 01:35:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-34-maxim.uvarov@linaro.org>
+ <20231127130828.GC2513409@bill-the-cat>
+ <CAD8XO3buruEtFvVv32J-LW+Jj=+vFJk2Q+TgBKL130sL2qY0DQ@mail.gmail.com>
+ <20231127140813.GF2513409@bill-the-cat>
+ <CAD8XO3b-BijLJz0fbsLA-DdAzW_Yj0Z+JOWZtFUFr-3KgKesQA@mail.gmail.com>
+ <CALeDE9MMCPNtj9yaXdPwbppOsmUSvmuNWdicNLvqZmY2c=h9dw@mail.gmail.com>
+ <20231127163156.GJ2513409@bill-the-cat>
+In-Reply-To: <20231127163156.GJ2513409@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Tue, 28 Nov 2023 15:35:00 +0600
+Message-ID: <CAD8XO3YyzGz3MFPoBu1SZyC1rA7u2y_vB8Y9XCry5bTvwdjoiw@mail.gmail.com>
+Subject: Re: [PATHv11 33/43] configs/am335x_evm_defconfig: inc SPL size
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de,
+ ilias.apalodimas@linaro.org, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,152 +94,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Mon, 27 Nov 2023 at 22:31, Tom Rini <trini@konsulko.com> wrote:
 
-On 12:05-20231106, Andrew Davis wrote:
-> On 11/6/23 11:47 AM, Simon Glass wrote:
-> > Hi Andrew,
-> > 
-> > On Mon, 6 Nov 2023 at 10:27, Andrew Davis <afd@ti.com> wrote:
-> > > 
-> > > On 11/6/23 9:31 AM, Tom Rini wrote:
-> > > > On Mon, Nov 06, 2023 at 11:23:51AM +0530, Manorit Chawdhry wrote:
-> > > > > Hi Simon,
-> > > > > 
-> > > > > On 11:22-20231005, Simon Glass wrote:
-> > > > > > Hi Nishanth,
-> > > > > > 
-> > > > > > On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
-> > > > > > > 
-> > > > > > > On 12:10-20231005, Nishanth Menon wrote:
-> > > > > > > > On 12:36-20231005, Tom Rini wrote:
-> > > > > > > > > On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
-> > > > > > > > > > On 10/4/23 8:54 AM, Nishanth Menon wrote:
-> > > > > > > > > > > On 08:48-20231004, Andrew Davis wrote:
-> > > > > > > > > > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
-> > > > > > > > > > > > > ti_mmc is not a valid boot_target for standard boot flow so
-> > > > > > > > > > > > 
-> > > > > > > > > > > > Is there some way to make it into a valid boot_target? Otherwise
-> > > > > > > > > > > > how do we use uEnv.txt files, or boot from FIT images with overlays?
-> > > > > > > > > > > 
-> > > > > > > > > > > envboot takes care of uEnv.txt file (see
-> > > > > > > > > > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
-> > > > > > > > > > > 
-> > > > > > > > > > > Early remote proc loading and FIT image is a question for stdboot itself.
-> > > > > > > > > > > 
-> > > > > > > > > > 
-> > > > > > > > > > If stdboot is missing these features then we shouldn't switch until it
-> > > > > > > > > > has them. I'm all for switching to this, but only if it is complete.
-> > > > > > > > > 
-> > > > > > > > > Depends on what you mean?  Did you mean an option to run scripts
-> > > > > > > > > (exists) or an option to do what TI needs done, via
-> > > > > > > > > boot/bootmeth_something.c ?  If the latter, someone from TI needs to
-> > > > > > > > > figure out what that should be and do (but plumbing-wise everything it
-> > > > > > > > > needs should exist).
-> > > > > > > > 
-> > > > > > > > Andrew is generalizing here (on the wrong patch though).
-> > > > > > > > 
-> > > > > > > > On am62x platforms, there is nothing regressing with this series. The
-> > > > > > > > challenge is early remote_proc loading which is done for J7* platforms.
-> > > > > > > > 
-> > > > > > > > How that is initiated as part of bootmethods is something of a gap.
-> > > > > > > > 
-> > > > > > > > The other gap has been support for uEnv.txt -> which we can workaround
-> > > > > > > > at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
-> > > > > > > > -lb" in defconfig (This series from Roger already does that - hence I am
-> > > > > > > > saying that Andrew is complaining on the wrong series).
-> > > > > > > > 
-> > > > > > > > Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
-> > > > > > > > uEnv.txt remoteproc loads and the various standard bootmethods should
-> > > > > > > > "just work".
-> > > > > > > 
-> > > > > > > 
-> > > > > > > I forgot to add: FIT image authenticated boot flow. That is really what
-> > > > > > > ti_mmc distroboot method was trying to solve.
-> > > > > > > 
-> > > > > > > Maybe Simon or someone know how the stdboot flow handles authenticated
-> > > > > > > kernel image and dtb boot flow with FIT image?
-> > > > > > 
-> > > > > > Yes you can use FIT configuration verification and things should work as normal.
-> > > > > > 
-> > > > > 
-> > > > > Could you give any reference documentation for this?
-> > > > 
-> > > > I suspect you should start with doc/usage/fit/beaglebone_vboot.rst
-> > > > 
-> > > 
-> > >   From that doc:
-> > > 
-> > > ```
-> > > Boot the board using the commands below::
-> > > 
-> > >       setenv bootargs console=ttyO0,115200n8 quiet root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait
-> > >       ext2load mmc 0:2 82000000 /boot/image.fit
-> > >       bootm 82000000
-> > > ```
-> > > 
-> > > This is very much not stdboot :( This doc has some good and current info on building
-> > > a secure FIT image, but much of it is showing its age. Stdboot is still missing
-> > > 
-> > >    * ability to limit boot mode search to only one image (FIT)
-> > 
-> > What does this mean? Can you please be more specific or give an example?
-> > 
-> 
-> Sure, for instance with secure boot we only want to search for FIT images
-> and if for each media this fails we do not want to fall back to other
-> image types or boot modes (like UART boot or net boot which would bypass
-> the signature checks).
-> 
-> Something similar is needed for searching for EFI compatible boot across
-> each enabled boot media first, before trying other methods on each media.
-> Basically breadth-first search on each media type not depth-first.
-> 
-> > >    * fetching and applying FIT overlay/config strings
-> > 
-> > Re overlays, is this the 'extension' command? What are config strings?
-> > 
-> 
-> When we have DT overlays in our FIT image, we build a string to pass to
-> bootm to apply all the selected overlays[0]. If there is now another
-> mechanism for this please let me know (building this string today is messy).
-> 
-> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L18
-> 
-> > >    * remote proc loading
-> > 
-> > What command can do this?
-> > 
-> 
-> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L28
-> 
-> > >    * uEnv.txt processing
-> > 
-> > What command can do this?
-> > 
-> 
-> run envboot;
-> 
-> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/mmc.env?ref_type=heads#L20
-> 
-> > > 
-> > > Last two can be solved by adding to CONFIG_BOOTCOMMAND before calling `bootflow scan`
-> > > as suggested above. Until we figure out the first two I don't see us ready to switch.
-> > 
-> > I'm happy to help figure this out.
-> > 
-> 
-> Thanks, we are eager to standardize our boot flows and stdboot seems like the
-> right way forward, very happy to have your guidance on these last few items :)
-> 
-> Andrew
+> On Mon, Nov 27, 2023 at 03:52:50PM +0000, Peter Robinson wrote:
+> > On Mon, Nov 27, 2023 at 3:32=E2=80=AFPM Maxim Uvarov <maxim.uvarov@lina=
+ro.org>
+> wrote:
+> > >
+> > >
+> > >
+> > > On Mon, 27 Nov 2023 at 20:08, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> On Mon, Nov 27, 2023 at 08:06:23PM +0600, Maxim Uvarov wrote:
+> > >> > On Mon, 27 Nov 2023 at 19:08, Tom Rini <trini@konsulko.com> wrote:
+> > >> >
+> > >> > > On Mon, Nov 27, 2023 at 06:57:16PM +0600, Maxim Uvarov wrote:
+> > >> > >
+> > >> > > > Increase allowed binary size to fit lwip code.
+> > >> > > >
+> > >> > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > >> > > > ---
+> > >> > > >  configs/am335x_evm_defconfig | 1 +
+> > >> > > >  1 file changed, 1 insertion(+)
+> > >> > > >
+> > >> > > > diff --git a/configs/am335x_evm_defconfig
+> b/configs/am335x_evm_defconfig
+> > >> > > > index f048e60f7f..9fd608bd76 100644
+> > >> > > > --- a/configs/am335x_evm_defconfig
+> > >> > > > +++ b/configs/am335x_evm_defconfig
+> > >> > > > @@ -124,3 +124,4 @@ CONFIG_WDT=3Dy
+> > >> > > >  CONFIG_DYNAMIC_CRC_TABLE=3Dy
+> > >> > > >  CONFIG_RSA=3Dy
+> > >> > > >  CONFIG_LZO=3Dy
+> > >> > > > +CONFIG_SPL_MAX_SIZE=3D0x29000
+> > >> > >
+> > >> > > As probably a problem for other platforms you made this change o=
+n
+> too,
+> > >> > > you can't do this. The link limit is here because that's the
+> limit the
+> > >> > > hardware (and ROM) imposes.
+> > >> > >
+> > >> > > You might need to either:
+> > >> > > - Figure out how to make lwip even tinier for the SPL case
+> > >> > > - Limit the old network stack to just for SPL, and a later task
+> is to
+> > >> > >   reduce what's in the old stack to just what's also needed
+> within SPL.
+> > >> > >
+> > >> > >
+> > >> > Thanks Tom. All these size changes need to be reviewed.  Some of
+> them are
+> > >> > ok, I think like for x86 or qemu virt, but some of them might not
+> work.
+> > >> >
+> > >> > Question - Do we need networking inside SPL rather than in the mai=
+n
+> binary?
+> > >> > Is it a real use case?
+> > >>
+> > >> Yes, the device supports loading SPL, and then SPL loading U-Boot bo=
+th
+> > >> over USB RNDIS as well as regular physical ethernet.
+> > >>
+> > >> --
+> > >> Tom
+> > >
+> > >
+> > > That looks like not a production use case. USB + NET + drivers + EXT4
+> + NAND + MTD and everything else and trying to fit into SPL.
+> > > With enabling LTO I still need 4k (without dropping current code).
+> From one point it's too synthetic use case here and might be a historical
+> > > limitation which we will not see on future boards. From the other
+> point it will be good to not break it somehow....
+> >
+> > Does this still include the old network code?
+> >
+> > Also I wonder if we can have a paired down SPL_LWIP option that
+> > removes things like PXE and HTTP/wget because none of those would be
+> > used in the SPL use case as they're all brand new.
+>
+> To be clear, I am fine with either "old network stack only for SPL" or
+> "figure out how to pair down lwip to just SPL features". In fact having
+> said that, the first thing I would suggest is to turn off LTO as it
+> makes reading the linker map file harder, increase the size limit for
+> this platform, and take a look at what's being linked in and not
+> discarded in SPL, for networking, in spl/u-boot-spl.map. Maybe the
+> answer is that we just need to be more careful about using
+> IS_ENABLED/CONFIG_IS_ENABLED (and obj-$(CONFIG_$(SPL_)FOO)) in the lwip
+> series.
+>
+> --
+> Tom
+>
 
-Any nudges on the Andrew's response as to where we can look for all
-this or how can we maybe move towards all this?
+Yea. If I disable TCP then we get the right size for this board. So for SPL
+I think to build without TCP so that ping, dhcp and tftp will still work.
+For normal binary TCP will be enabled. For other boards with limits I think
+also to disable TCP for now.
 
-Regards,
-Manorit
-
-> 
-> > Regards,
-> > SImon
+BR,
+Maxim.
