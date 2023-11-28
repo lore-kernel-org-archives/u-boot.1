@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBBC0C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 03:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FEF1C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 03:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE4AC875C8;
-	Tue, 28 Nov 2023 04:00:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEE28875C8;
+	Tue, 28 Nov 2023 04:02:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IDKtg1SJ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SdBSAriu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E5E3875DF; Tue, 28 Nov 2023 04:00:50 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 7C5F2875DF; Tue, 28 Nov 2023 04:02:47 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1AD38757B
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 04:00:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DC0A8757B
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 04:02:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-58d439e3e15so1529193eaf.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 19:00:47 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3b861a3be3eso1616259b6e.0
+ for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 19:02:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701140446; x=1701745246; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1701140563; x=1701745363; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vrK3Qp/68+9j6zeb0NH2994Bafbtk2H9nNFKb3gIStY=;
- b=IDKtg1SJiSXqWA+PqQ3b7gju/DEvXbxVkj9vAo08hlexqqjumPLuWyEv5TvbCVZOFP
- CR3xV6Is0yovUcektP4kaZ//SJzOUTZhf0SlxSjY6xKG8bbZsthQx4SBO1EHcEnorLLc
- Z8ArV904D3VIg2r3VrmY4d+I4OWQNs1rU3YtWMNYiZCDlZC3naeBpn25emw/RWYH+oXN
- PVTmQLwDsw/DVmabuFDB/fB/1k38MsRN126BuFq+7WmqeMFMzMSRWzh7AitUsUEx2EJh
- zqK07FCBT3U4Ky7vHkMBAP+nzt3+MmVvu10ChwnbEmwum1riUlG4jkozmjxs3t3kspPO
- Aafw==
+ bh=YcRGcpWWlh7KAGPPgpDwbxBrWCzqzE1r9SmN0VqSy0A=;
+ b=SdBSAriuGw9HdP6vAs2NlbGG3bxONSWP1zG7re3sKjBRMI2+20bAQzMuLNdRRBVLeW
+ 1Dncii+chg0FGF17XzVSM9LXZj60PbqI14nedlmIrEAuuT66bMpcqsxfsYvsSAJ0Sn72
+ KAFzwzWYLOCbH0piW8Drp01KQyJJuOs+HsQlQGAJoFlzCIrq/MiyCKI1rEalsy/JO3fn
+ Ov9JzX+ZwkLL3FmeyzNiZdrhwn+lxAlON9QuILdwJ6DsgjXDvUm67pgyvlJPH1qY7PjC
+ gIQRj/yWKlVNlW6x++DDl1rS2lbxnioxLnhYX7tLGkMMjKgH0A2hBM7NzA7gGez9bRyT
+ /ULg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701140446; x=1701745246;
+ d=1e100.net; s=20230601; t=1701140563; x=1701745363;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vrK3Qp/68+9j6zeb0NH2994Bafbtk2H9nNFKb3gIStY=;
- b=t+L1ieZyUTHUK//rMul1+UGpqqmKwSoW8ZSDQtlyTmOWz9Lg5r/DLlf5ol5hdfxpfW
- sfzE0AUVoELvvkLd3YU1hhM/hcXHU6LVzSuCaM5HWHKQI9n7BOtDUQu30/ON2aA6TYcO
- 8Ux0N3ofkmX6x2TB+2xL4x7gIUGFhzqFkP16B3qqN6hjmqYzgF3pVC+c7/mjXzdqc5ZO
- +6fwTAVdRie1/Duciv3Pi1h5u/wq7Yw/kQVsHJLXoeleMJV5gluA5YyRz0puh+8dh2pR
- yl6dnc2Ecazuz7B7b/JBVB3ss1+Mu/Y+Lf0Yho8r6cWuCeLjBVXkz9HWxWQCO9VcE9+y
- XpQg==
-X-Gm-Message-State: AOJu0Yywq+gv1R3qX7UZPqL8YAW6q7H2g9zX1enSqdgsa6D6XPO197DS
- hYTv62qTi7U5bN2ALbnRchSBmF9cZME7Tp3eMzc=
-X-Google-Smtp-Source: AGHT+IGAqPmp1+H+vTvi6FfJSCs67SWhrdRqVEYaL5Zf8+sYHVQTeTB9ng9xCSJTaZwnzTvmSg3z7MC9Omu1eRyDESo=
-X-Received: by 2002:a05:6820:16a5:b0:58d:8f17:6606 with SMTP id
- bc37-20020a05682016a500b0058d8f176606mr2291154oob.4.1701140446378; Mon, 27
- Nov 2023 19:00:46 -0800 (PST)
+ bh=YcRGcpWWlh7KAGPPgpDwbxBrWCzqzE1r9SmN0VqSy0A=;
+ b=XS+Np097wdWdrgGMI4TtiqNCJU+6AhoWU2bz2KeuXi6aypy9gab/SonG7G3NM1UWfA
+ qiHq9UCjtpKcLgoc7h/YPr8eGkr0l+3uey+fFHVdXNxLbEOq8EadtUliK6s+2GkFdfN7
+ eJXcvgzLWguVAOl8LU4trqET7ecrMnHr08HLijEj4g2EOURL0ba5DPe0eDIU3nRA4Fpn
+ ETwWuaOqtXDoP5fb0SvGhzzHGqyejoWdM+btS3I/Mp+1TPfPK/y2ByDPvQHoq7APtxOW
+ JgT23w5zfTbi4eBSw2NRgu0RXFL1BQQEsefvOixl0F8gn03FCZMuIdxnJR9/41va0dv8
+ gLEw==
+X-Gm-Message-State: AOJu0YzYzfe+jDoyBx0DLVBGDJWwbokK0kkHwRA2+ZBsbOlJ1CkNR+EJ
+ c2fXnx47BtPYZBjLyx4gGM9/VeYMHUz+EUSUeHk=
+X-Google-Smtp-Source: AGHT+IGAam36YVll5eHnJbBBFyDhhkLU+bZmxDbYlKvotfD75pFyCY42MPdPhpKfDZ9mw/Nb4gPfYHN58UlGeKboPSg=
+X-Received: by 2002:a05:6808:16a2:b0:3b5:656b:f962 with SMTP id
+ bb34-20020a05680816a200b003b5656bf962mr18924864oib.5.1701140562999; Mon, 27
+ Nov 2023 19:02:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20231107201349.5775-1-semen.protsenko@linaro.org>
- <CAPnjgZ0HD41x+c4je61AkXr6c_QUu2-QJCdHrxLgDLrQL7B9Pw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0HD41x+c4je61AkXr6c_QUu2-QJCdHrxLgDLrQL7B9Pw@mail.gmail.com>
+References: <20231109201313.29791-1-semen.protsenko@linaro.org>
+ <CAPLW+4kFgeUP+bvbPcLbTiakF-SmcnNj7Fu-H12Vtm_xKVbS6g@mail.gmail.com>
+In-Reply-To: <CAPLW+4kFgeUP+bvbPcLbTiakF-SmcnNj7Fu-H12Vtm_xKVbS6g@mail.gmail.com>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 28 Nov 2023 12:00:34 +0900
-Message-ID: <CALrBrZ2y1zuZLwQrMDP3dnZnkcaZxy1Lx03C91Dv4-q1HZOyKw@mail.gmail.com>
-Subject: Re: [PATCH] serial: s5p: Use dev_read_addr_ptr() to get base address
-To: Simon Glass <sjg@chromium.org>
-Cc: Johan Jonker <jbx6244@gmail.com>, Mark Kettenis <kettenis@openbsd.org>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
+Date: Tue, 28 Nov 2023 12:02:31 +0900
+Message-ID: <CALrBrZ0Fgv-zV9dvBZ7LuOQTYE-jVch3i70AJ4oe6Q04WGEhnw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] board: samsung: Fix SYS_CONFIG_NAME configs in
+ axy17lte Kconfig
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -92,24 +92,137 @@ X-Virus-Status: Clean
 Hi!
 
 
-2023=EB=85=84 11=EC=9B=94 8=EC=9D=BC (=EC=88=98) 14:04, Simon Glass <sjg@ch=
-romium.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+2023=EB=85=84 11=EC=9B=94 22=EC=9D=BC (=EC=88=98) 02:38, Sam Protsenko <sem=
+en.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> On Tue, 7 Nov 2023 at 13:13, Sam Protsenko <semen.protsenko@linaro.org>
+> Hi Tom, Minkyu,
+>
+> On Thu, Nov 9, 2023 at 2:13=E2=80=AFPM Sam Protsenko <semen.protsenko@lin=
+aro.org>
 > wrote:
 > >
-> > As the address read from device tree is being cast to a pointer, it's
-> > better to use dev_read_addr_ptr() API for getting that address. The mor=
-e
-> > detailed explanation can be found in commit a12a73b66476 ("drivers: use
-> > dev_read_addr_ptr when cast to pointer").
+> > There is a couple of issues related to SYS_CONFIG_NAME config in
+> > axy17lte Kconfig.
+> >
+> > 1. The global SYS_CONFIG_NAME in axy17lte Kconfig overrides
+> >    SYS_CONFIG_NAME for all boards specified after this line in
+> >    arch/arm/mach-exynos/Kconfig:
+> >
+> >        source "board/samsung/axy17lte/Kconfig"
+> >
+> >    Right now it's the last 'source' line there, so the issue is not
+> >    reproducible. But once some board is moved or added after this line
+> >    the next build error will happen:
+> >
+> >        GEN     include/autoconf.mk.dep
+> >      In file included from ./include/common.h:16:
+> >      include/config.h:3:10: fatal error: configs/exynos78x0-common.h.h:
+> >                             No such file or directory
+> >          3 | #include <configs/exynos78x0-common.h.h>
+> >            |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> >      compilation terminated.
+> >
+> >    That's happening because axy17lte Kconfig defines SYS_CONFIG_NAME
+> >    option in global namespace (not guarded with any "if TARGET_..."), s=
+o
+> >    it basically rewrites the correct SYS_CONFIG_NAME defined in the
+> >    hypothetical boards which might appear after axy17lte in mach-exynos
+> >    Kconfig.
+> >
+> > 2. Another side of the issue is that SYS_CONFIG_NAME is defined
+> >    incorrectly in axy17lte Kconfig:
+> >
+> >        config SYS_CONFIG_NAME
+> >            default "exynos78x0-common.h"
+> >
+> >    The .h extension should not have been specified there. It's leading
+> >    to a build error, as the generated include file has a double '.h'
+> >    extension.
+> >
+> > 3. Each target in axy17lte/Kconfig defines its own SYS_CONFIG_NAME. But
+> >    all of those in fact incorrect, as corresponding
+> >    include/configs/<CONFIG_SYS_CONFIG_NAME>.h header files don't exist.
+> >
+> > 4. The global SYS_CONFIG_NAME pretty much repeats the help description
+> >    from arch/Kconfig and doc/README.kconfig.
+> >
+> > Corresponding defconfig files (a*y17lte_defconfig) fix above issues by
+> > overriding SYS_CONFIG_NAME and correctly setting it to
+> > "exynos78x0-common".
+> >
+> > Fix all mentioned issues by removing the incorrect global
+> > SYS_CONFIG_NAME and instead specifying it (correctly) in SYS_CONFIG_NAM=
+E
+> > options for each target instead.
 > >
 > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > Fixes: 3e2095e960b4 ("board: samsung: add support for Galaxy A series o=
+f
+> 2017 (a5y17lte)")
 > > ---
-> >  drivers/serial/serial_s5p.c | 6 ++----
-> >  1 file changed, 2 insertions(+), 4 deletions(-)
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> If this series (v2) looks good to you, can you please apply it? It's
+> needed for the new Exynos dev board port I'm working on right now, and
+> expect to submit the patches soon.
+>
+> Thanks!
+>
+> > Changes in v2:
+> >   - Don't just remove global SYS_CONFIG_NAME, also fix SYS_CONFIG_NAME
+> >     for each target in Kconfig
+> >
+> >  board/samsung/axy17lte/Kconfig | 14 +++-----------
+> >  1 file changed, 3 insertions(+), 11 deletions(-)
+> >
+> > diff --git a/board/samsung/axy17lte/Kconfig
+> b/board/samsung/axy17lte/Kconfig
+> > index a018547ff5d4..64a4ffa7e673 100644
+> > --- a/board/samsung/axy17lte/Kconfig
+> > +++ b/board/samsung/axy17lte/Kconfig
+> > @@ -1,11 +1,3 @@
+> > -config SYS_CONFIG_NAME
+> > -       string "Board configuration name"
+> > -       default "exynos78x0-common.h"
+> > -       help
+> > -         This option contains information about board configuration
+> name.
+> > -         Based on this option
+> include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+> > -         will be used for board configuration.
+> > -
+> >  if TARGET_A5Y17LTE
+> >  config SYS_BOARD
+> >         default "axy17lte"
+> > @@ -16,7 +8,7 @@ config SYS_VENDOR
+> >         default "samsung"
+> >
+> >  config SYS_CONFIG_NAME
+> > -       default "a5y17lte"
+> > +       default "exynos78x0-common"
+> >
+> >  config EXYNOS7880
+> >      bool "Exynos 7880 SOC support"
+> > @@ -33,7 +25,7 @@ config SYS_VENDOR
+> >         default "samsung"
+> >
+> >  config SYS_CONFIG_NAME
+> > -       default "a5y17lte"
+> > +       default "exynos78x0-common"
+> >
+> >  config EXYNOS7880
+> >      bool "Exynos 7880 SOC support"
+> > @@ -50,7 +42,7 @@ config SYS_VENDOR
+> >         default "samsung"
+> >
+> >  config SYS_CONFIG_NAME
+> > -       default "a3y17lte"
+> > +       default "exynos78x0-common"
+> >
+> >  config EXYNOS7870
+> >      bool "Exynos 7870 SOC support"
+> > --
+> > 2.39.2
+> >
 
 
 applied to u-boot-samsung.
