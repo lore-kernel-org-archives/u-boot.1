@@ -4,56 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4D98C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 15:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB87C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 15:45:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB49D8754D;
-	Tue, 28 Nov 2023 16:44:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 834458758C;
+	Tue, 28 Nov 2023 16:45:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1701186283;
-	bh=pqZDue1GtmyEI6xzZtip2iCdB6Xspau0C/O0uySIvH0=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=zHr+q6FOFLPmF7OOn9CmbWtQfAgFVDK/BwXqj2R8hK0m88FWAghdF6DCI8tIl9V3N
-	 UGtxQZ22axA8+6zlHWoFtERbtDmZe8c3nP4VsCABpf178PJ3CzEDsGbwNF5OHAnKXD
-	 lzv+BfQoCfcnYUTCq6XcSnGtL/qGdhXmaKgZm8EsbrEujE//ejwWFSyzgQqIqCnUL1
-	 IHpANcE5+hO6kgENXv98OVqpG5p4CQSRMQbnU2iPnbRQ7egtr/9xSumle+EboGa4E3
-	 PmG4W8TNjiPQ7h/4eniGfwKsZSTOoII1IKRGfUCqiBIR2/2/yfsq+92djhdaTVXo9u
-	 InVA6KP/20e3A==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B4F0C87630; Tue, 28 Nov 2023 16:44:42 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FD1F8754D
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 16:44:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S5338156";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 37118870D2; Tue, 28 Nov 2023 16:45:16 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Sfmwk2Dnjz9spb;
- Tue, 28 Nov 2023 16:44:38 +0100 (CET)
-Message-ID: <8b1005a0-3960-4f8d-8dfc-ad9e858a68f3@denx.de>
-Date: Tue, 28 Nov 2023 16:44:37 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 7C00A870D2
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 16:45:13 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40b399a6529so25295775e9.1
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 07:45:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701186313; x=1701791113; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HymwbPe2bft+ghh00VEorziNbD/acRLxYSQ0TW3O8EI=;
+ b=S53381567ZixegvIZihsF4T11aiy4vO9iTDzWlgxLZ8hVmeWyS/UQQ3IcIKYHjXLu9
+ NO/vnQ4gvkQcxolMEX48ASBRp8nKvndz7p9SyC6YuJjiKSGb+xF2WfxtElE1fD1DvWpj
+ xWAeTDgswOYInJkUC1d5Y2HmjrNBCjG8EHHMUQ+Agr5P4Z7+XjLIIXRPDbsrwsMEkTQI
+ lKoZRyy86AzlWnwJyxatFn3ChwokuTl4LqNl9NEXaj4hRTpJyFGnBqTkpxpBSrsloG6/
+ /eBZlK4LSK9o8WvArneq39/PCAAY5PU5ex2BPDuWztbV2MQPL+SlBJEyiLdvghF4DSC8
+ S6iA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701186313; x=1701791113;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HymwbPe2bft+ghh00VEorziNbD/acRLxYSQ0TW3O8EI=;
+ b=gW1M9Eicb90wmMURXqIgMlvrZew8oKvg+/UXfj1YsE96Er+RxK4bz6GcWTzwsEdjYt
+ gXJbrgrcayLhWnUdtB1ZL+fONWN/eIwP97zELX3otzDLLsVEl24yk//9l3odk1AQBf7n
+ GU3Vxtl6q0O0ClNPBJ4GJxfn1BP9q9bB2+GiRp2exn48LeAZCua+0G1+WhKWh+OZK780
+ QVRA0Zf3+1qOQXXjnWgsIVy5ZyYWk6fjFUHdsO/78RQS0IETLkPNRbHUG6dmSYiuCAtB
+ 9eHQY7Ki21lwbDszxfknGekH+9huTOUM35vLziNICcEtOlnv5BKdfA2s7kavCg164JxD
+ UJPA==
+X-Gm-Message-State: AOJu0Yyt6CoaUjBIaNvKVdLQOF05NeCgcPhgmjCb4kfCyqoMYHSnPdY+
+ JlqBppULETHIEZLB42LtSrg4Fg==
+X-Google-Smtp-Source: AGHT+IFWP9vL645MkLXUEGBiqVt0o9bskR8/TvfQJnUu2Lbnp8aI9F+XopixWHjGlV+Ol8K4wYWxkQ==
+X-Received: by 2002:a05:600c:138d:b0:40b:2afd:1a9 with SMTP id
+ u13-20020a05600c138d00b0040b2afd01a9mr16292903wmf.15.1701186312690; 
+ Tue, 28 Nov 2023 07:45:12 -0800 (PST)
+Received: from hades.. (ppp046103219117.access.hol.gr. [46.103.219.117])
+ by smtp.gmail.com with ESMTPSA id
+ o19-20020a05600c4fd300b0040b45356b72sm8474824wmq.33.2023.11.28.07.45.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Nov 2023 07:45:12 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: masahisa.kojima@linaro.org, ryosuke.saito@linaro.org,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Make DisconnectController follow the EFI spec
+Date: Tue, 28 Nov 2023 17:45:07 +0200
+Message-Id: <20231128154508.465171-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] arm: mvebu: Espressobin: move FDT fixup into a
- separate function
-To: Robert Marko <robert.marko@sartura.hr>, u-boot@lists.denx.de
-References: <20231020102117.1583572-1-robert.marko@sartura.hr>
- <CA+HBbNHa_a2hnU9HgxsYjAaUijsgmb0ndDMOVaBz7GLP4JOVUA@mail.gmail.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <CA+HBbNHa_a2hnU9HgxsYjAaUijsgmb0ndDMOVaBz7GLP4JOVUA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4Sfmwk2Dnjz9spb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,89 +89,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Robert,
+commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
+tried to fix the UninstallProtocol interface which must reconnect
+any controllers it disconnected by calling ConnectController()
+in case of failure. However, the reconnect functionality was wired in
+efi_disconnect_all_drivers() instead of efi_uninstall_protocol().
 
-On 11/28/23 11:19, Robert Marko wrote:
-> On Fri, Oct 20, 2023 at 12:21 PM Robert Marko <robert.marko@sartura.hr> wrote:
->>
->> Currently, Esspresobin FDT is being fixed up directly in ft_board_setup()
->> which makes it hard to add support for any other board to be fixed up.
->>
->> So, lets just move the FDT fixup code to a separate function and call it
->> if compatible matches, there should be no functional change.
->>
->> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
->> Reviewed-by: Stefan Roese <sr@denx.de>
-> 
-> Hi Stefan,
-> 
-> Is there anything I can do to get this series merged?
+As a result some SCT tests started failing.
+Specifically, BBTestOpenProtocolInterfaceTest333CheckPoint3() test
+ - Calls ConnectController for DriverImageHandle1
+ - Calls DisconnectController for DriverImageHandle1 which will
+   disconnect everything apart from TestProtocol4. That will remain
+   open on purpose.
+ - Calls ConnectController for DriverImageHandle2. TestProtocol4
+   which was explicitly preserved was installed wth BY_DRIVER attributes.
+   The new protocol will call DisconnectController since its attributes
+   are BY_DRIVER|EXCLUSIVE, but TestProtocol4 will not be removed. The
+   test expects EFI_ACCESS_DENIED which works fine.
 
-I just looked at it (again). My recollection was that something was
-missing here - so I was waiting for a new version. Does not seem to
-be the case though. So I guess I forgot to pull it (sorry for that)
-and now with rc3 out it seems a bit too late in the release cycle.
-I hope you don't mind that it's postponed to the next merge window.
+   The problem is that DisconnectController, will eventually call
+   EFI_DRIVER_BINDING_PROTOCOL.Stop(). But on the aforementioned test
+   this will call CloseProtocol -- the binding protocol is defined in
+   'DBindingDriver3.c' and the .Stop function uses CloseProtocol.
+   If that close protocol call fails with EFI_NOT_FOUND, the current code
+   will try to mistakenly reconnect all drivers and the subsequent tests
+   that rely on the device being disconnected will fail.
 
-Thanks,
-Stefan
+Move the reconnection in efi_uninstall_protocol() were it belongs.
 
-> Regards,
-> Robert
-> 
->> ---
->>   board/Marvell/mvebu_armada-37xx/board.c | 14 +++++++++-----
->>   1 file changed, 9 insertions(+), 5 deletions(-)
->>
->> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
->> index 04124d8014..1471caa9a6 100644
->> --- a/board/Marvell/mvebu_armada-37xx/board.c
->> +++ b/board/Marvell/mvebu_armada-37xx/board.c
->> @@ -363,18 +363,14 @@ EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
->>   #endif
->>
->>   #ifdef CONFIG_OF_BOARD_SETUP
->> -int ft_board_setup(void *blob, struct bd_info *bd)
->> +static int espressobin_fdt_setup(void *blob)
->>   {
->> -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
->>          int ret;
->>          int spi_off;
->>          int parts_off;
->>          int part_off;
->>
->>          /* Fill SPI MTD partitions for Linux kernel on Espressobin */
->> -       if (!of_machine_is_compatible("globalscale,espressobin"))
->> -               return 0;
->> -
->>          spi_off = fdt_node_offset_by_compatible(blob, -1, "jedec,spi-nor");
->>          if (spi_off < 0)
->>                  return 0;
->> @@ -459,6 +455,14 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->>                  return 0;
->>          }
->>
->> +       return 0;
->> +}
->> +
->> +int ft_board_setup(void *blob, struct bd_info *bd)
->> +{
->> +#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
->> +       if (of_machine_is_compatible("globalscale,espressobin"))
->> +               return espressobin_fdt_setup(blob);
->>   #endif
->>          return 0;
->>   }
->> --
->> 2.41.0
->>
-> 
-> 
+Fixes: commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Heinrich this is critical. Although it doesn't break anything on our normal
+use cases it does break the ACS testing for SystemReady-IR and I prefer
+landing it in -master before the 2024.01 release
 
-Viele Grüße,
-Stefan Roese
+ lib/efi_loader/efi_boottime.c | 23 +++++------------------
+ 1 file changed, 5 insertions(+), 18 deletions(-)
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+index 0b7579cb5af1..370eaee8ce1a 100644
+--- a/lib/efi_loader/efi_boottime.c
++++ b/lib/efi_loader/efi_boottime.c
+@@ -1339,7 +1339,7 @@ static efi_status_t efi_disconnect_all_drivers
+ 				 const efi_guid_t *protocol,
+ 				 efi_handle_t child_handle)
+ {
+-	efi_uintn_t number_of_drivers, tmp;
++	efi_uintn_t number_of_drivers;
+ 	efi_handle_t *driver_handle_buffer;
+ 	efi_status_t r, ret;
+
+@@ -1350,31 +1350,17 @@ static efi_status_t efi_disconnect_all_drivers
+ 	if (!number_of_drivers)
+ 		return EFI_SUCCESS;
+
+-	tmp = number_of_drivers;
+ 	while (number_of_drivers) {
+-		ret = EFI_CALL(efi_disconnect_controller(
++		r = EFI_CALL(efi_disconnect_controller(
+ 				handle,
+ 				driver_handle_buffer[--number_of_drivers],
+ 				child_handle));
+-		if (ret != EFI_SUCCESS)
+-			goto reconnect;
+-	}
+-
+-	free(driver_handle_buffer);
+-	return ret;
+-
+-reconnect:
+-	/* Reconnect all disconnected drivers */
+-	for (; number_of_drivers < tmp; number_of_drivers++) {
+-		r = EFI_CALL(efi_connect_controller(handle,
+-						    &driver_handle_buffer[number_of_drivers],
+-						    NULL, true));
+ 		if (r != EFI_SUCCESS)
+-			EFI_PRINT("Failed to reconnect controller\n");
++			ret = r;
+ 	}
+
+ 	free(driver_handle_buffer);
+-	return ret;
++	return (ret != EFI_SUCCESS ? ret : EFI_SUCCESS);
+ }
+
+ /**
+@@ -1409,6 +1395,7 @@ static efi_status_t efi_uninstall_protocol
+ 	r = efi_disconnect_all_drivers(handle, protocol, NULL);
+ 	if (r != EFI_SUCCESS) {
+ 		r = EFI_ACCESS_DENIED;
++		EFI_CALL(efi_connect_controller(handle, NULL, NULL, true));
+ 		goto out;
+ 	}
+ 	/* Close protocol */
+--
+2.37.2
+
