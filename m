@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE2DFC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 12:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5654DC4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 13:56:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C0ED86F67;
-	Tue, 28 Nov 2023 13:52:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 8202B875B2;
+	Tue, 28 Nov 2023 14:56:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="JyfUi7m9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U72yepZC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3C0186EE1; Tue, 28 Nov 2023 12:26:51 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 32A60875B5; Tue, 28 Nov 2023 14:56:22 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93AD586DAF
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 12:26:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id CC2298758C
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 14:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C4E27100013;
- Tue, 28 Nov 2023 14:26:48 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C4E27100013
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1701170808;
- bh=VBU1BwZyvB5jyGpFhxG10AO3T0fhMf4CmnHXmbeOHYM=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=JyfUi7m9cO3czhScuoCT0Trc2GLCLNLlbm0pM/S7sK+4mZ9m+5kE6PWrjZtj3IXc7
- hkZs49EZ24N7tLNg7L13ls1PBlqR6dkOaCblS+n7ZZKdkir6xFhnoirkAoMQ1SN1/C
- Hry1OSEsu2X3nGxkYhV4Mounrsm8Th4sPnazdB1wex+VJusHXgIsjW9e0E7OrfyGuo
- gqzInD1YruvyIvDi7KVMbsRq5tUuh+7mA1oeiK5Ni26TY4kj2dB75JbvZ5QQMx0Usk
- eZ77v3aHLYP+dyE9aP6Qk9mKu0HoVTc7YeSw/fWiB87ywUGB1oKz2ZDlJJh05i+taZ
- SPapUQQI6Py3A==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 28 Nov 2023 14:26:47 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Tue, 28 Nov 2023 14:26:47 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <jpewhacker@gmail.com>, <sjg@google.com>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, Alexey Romanov
- <avromanov@salutedevices.com>
-Subject: [PATCH v1] android_ab: don't ignore ab_control_store return code
-Date: Tue, 28 Nov 2023 14:26:34 +0300
-Message-ID: <20231128112636.26655-1-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-332e3664665so3306426f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 05:56:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701179776; x=1701784576; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kYf0mrAnvbWTpBe5+QuF8DYjtIyv+Zz7MPS3RlELR4w=;
+ b=U72yepZCDl7ljMu90EQSOt9UOjwBSFf+xCtIp07ggwwMTEXRRD44jk9VSsMsdPyHMo
+ vug3ORGmegAyeclSumYWoJ+97Vg1i/Ae0m9go787sltrYEOBxa3O30yZ0Ok3zNp+wUMl
+ zccUKDVHipowh6dPwnwHuWt0rac+S/kQD/jbbMg8/SYcVVZ/OSaKv7ABAlJHqVmgBh9+
+ odM4niS10YZSEwnos3+ceKaWjClPZYgzuR7U/LfD3z7+z4E1AaTZttiryXfIMnT6hnD9
+ GBeoGr8hYBm4A+lLvCp+t3bAI/hcicxIztSOURooWuRsu5LGIwvz0m7jMlyPkpU3DLZv
+ naKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701179776; x=1701784576;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kYf0mrAnvbWTpBe5+QuF8DYjtIyv+Zz7MPS3RlELR4w=;
+ b=DzyjFfZcvSx5UW+uUS/cRjDiznhUMFK+slSxtqw7fT+QcVBUI974Bg2G+7DHwKDsbE
+ erENz/GgdfnmU1N8Sem6RUyhTkSq4bj5gqs8XRw7hzHI4hza1mr13T7q9Yw2Q2xF+2UC
+ MJ/iUXx/YAGEe7J1Z23qVJCoDPI6HxZrKp9YoDyO2TZ+yFAV/3jd2YRqEtRHUSfpel4h
+ 3WnGKBzw5h+wklIItvaQnuGIq3LEk7x6vGrslGfWoZiTDT5MUBA3KtZYbRH580Wj2FzE
+ CcNg2uuwUYliSIe8OnJ0JGwSksPKQ7Dr1Tj2bO+FEJe2po8xxdU+KhAZ8pdpG4JkdLHW
+ vanA==
+X-Gm-Message-State: AOJu0YxI4hYmi2SK0tvSQzj4pZxK31TkUG9vdJKdz+RxUvUND5bwJV1j
+ lPnSDy6AND4jOS7hSgU73nmJ0A==
+X-Google-Smtp-Source: AGHT+IHQlj+Dof6bbqVYCDzbLxHa5qaIjPxGrPc2p5cT0zyg/4sH3E2/7WHWG1IvZ2lAddbdpul5Ew==
+X-Received: by 2002:a5d:4ac6:0:b0:332:e42e:6dee with SMTP id
+ y6-20020a5d4ac6000000b00332e42e6deemr10949536wrs.71.1701179776248; 
+ Tue, 28 Nov 2023 05:56:16 -0800 (PST)
+Received: from [192.168.1.7] ([79.79.179.141])
+ by smtp.gmail.com with ESMTPSA id
+ t10-20020adff60a000000b003316db2d48dsm1741630wrp.34.2023.11.28.05.56.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Nov 2023 05:56:15 -0800 (PST)
+Message-ID: <bd0c4ce1-c50b-4ea5-8527-d20db78359a5@linaro.org>
+Date: Tue, 28 Nov 2023 13:56:14 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181651 [Nov 28 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 5 0.3.5
- 98d108ddd984cca1d7e65e595eac546a62b0144b,
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/28 07:45:00 #22560584
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Tue, 28 Nov 2023 13:52:25 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/5] gpio: qcom_pmic: rework pwrkey driver into a
+ button driver
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, u-boot@lists.denx.de
+References: <20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org>
+ <20231114-b4-qcom-dt-compat-v3-2-88a92f8f00ba@linaro.org>
+ <CAFA6WYNXrknzFHNvuZxwx1st4NmM_vGr44yBsZoYrHX2kGGYqg@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYNXrknzFHNvuZxwx1st4NmM_vGr44yBsZoYrHX2kGGYqg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,51 +102,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ab_control_store() can return an error if writing to disk fails.
-In this case, we have to pass the error code to the caller.
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- boot/android_ab.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+>> +                                       pm8998_resin: resin {
+>> +                                               compatible = "qcom,pm8941-resin";
+>> +                                               debounce = <15625>;
+>> +                                               bias-pull-up;
+>> +                                               status = "disabled";
+> 
+> Is there a particular reason to keep the resin button disabled by default here?
 
-diff --git a/boot/android_ab.c b/boot/android_ab.c
-index 73b55c196c..5a3152dd53 100644
---- a/boot/android_ab.c
-+++ b/boot/android_ab.c
-@@ -337,7 +337,15 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
- 
- 	if (store_needed) {
- 		abc->crc32_le = ab_control_compute_crc(abc);
--		ab_control_store(dev_desc, part_info, abc, 0);
-+		ret = ab_control_store(dev_desc, part_info, abc, 0);
-+		if (ret < 0) {
-+#if ANDROID_AB_BACKUP_OFFSET
-+			free(backup_abc);
-+#endif
-+			free(abc);
-+			log_err("ANDROID: failed to store boot control block: %d\n", ret);
-+			return ret;
-+		}
- 	}
- 
- #if ANDROID_AB_BACKUP_OFFSET
-@@ -346,8 +354,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
- 	 * to the backup offset
- 	 */
- 	if (memcmp(backup_abc, abc, sizeof(*abc)) != 0) {
--		ab_control_store(dev_desc, part_info, abc,
-+		ret = ab_control_store(dev_desc, part_info, abc,
- 				 ANDROID_AB_BACKUP_OFFSET);
-+		if (ret < 0) {
-+			free(backup_abc);
-+			free(abc);
-+			log_err("ANDROID: failed to store boot control block: %d\n", ret);
-+			return ret;
-+		}
- 	}
- 	free(backup_abc);
- #endif
+Just following upstream, it's not used on all boards.
+> 
+> -Sumit
+> 
 -- 
-2.39.2
-
+// Caleb (they/them)
