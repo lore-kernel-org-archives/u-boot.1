@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD24C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 17:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2E0C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 18:08:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D78A687753;
-	Tue, 28 Nov 2023 18:57:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BDBC687753;
+	Tue, 28 Nov 2023 19:08:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="f/ZVLa7B";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XWiG9o0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82BBF87778; Tue, 28 Nov 2023 18:57:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 7EEE18776F; Tue, 28 Nov 2023 19:08:10 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6502787630
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 18:57:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 49A2D86F67
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 19:08:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1701194248; x=1701799048; i=xypron.glpk@gmx.de;
- bh=veRfib/PDlZJpVlcBrYgHX9Q0y4KkHWnNlwifg5Wz6Y=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=f/ZVLa7B90xg3IwEK9riTRZK0cpXOtfVRJu73TRM8D7zrXA92qEnWOdP+6TqdKM3
- z1hyZP3VnVHHVV2U6eFewwnZI7cnmUk6Fle2EfrRowAYVV7qu4dUPKTVV6ormA9xR
- 0NHDZjutJf5alX9i2m8AjNAbaV/xzeVOK1YjuPmaAACIw/eiYV0PBLSYjbMrcH+vP
- cZsscLM3AMedrjOIB/+a+juJo//rWV4ZOA8qbd08c/Qs0mjHnLQLtQXD93mju5KKQ
- mE+ZaapTcMiErMLKQB2lmY7C50o/n/Uch98FlH0r1hEhGrR9kHW7KoOe7ajLk4Wkd
- GAmA3W1OSmHAMYdReg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUosN-1qhwuf1hRp-00QiVG; Tue, 28
- Nov 2023 18:57:28 +0100
-Message-ID: <2f8920fc-e24e-42fc-8e88-46f6604495b2@gmx.de>
-Date: Tue, 28 Nov 2023 18:57:28 +0100
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 8449261874
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 18:08:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D76BEC43397
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 18:08:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701194883;
+ bh=4DwB38wbaKFqe7hUkjoK0KTOX2HU0BmeTqXJcyORlu4=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=XWiG9o0Dtq787TusZ2eK1KJKrxDR6ZWsvWOUs1UhQwi/EqTGjSVzPy1M+BcivIXz8
+ nKM4NnDzVmlPy4d56Q2UCesllUtMPZGL/0QkX7IMNeaphkjFm2UDe7x33QM08aSyNg
+ HT+7MRyZ5Ty1ggpvUZ0/+5D4vejZIgr5QVPyS7fPyIAE7W8mxdCvLJL9bT57/U9ZSM
+ 5KfMaTnpcjctst3YM+476nbFzErxYqznvVsXBJ+2Ovg6wsBotr7yBLXpwoWP9LvQci
+ glX1WDuLypxtZc6NAtIkU+q16SZ7p4PwqSyOVYlSslQcaGx7xyqM26ZGNPB+3i2to5
+ XGQqVb9QkNvWQ==
+Received: by mail-lj1-f169.google.com with SMTP id
+ 38308e7fff4ca-2c87adce180so71569511fa.0
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:08:03 -0800 (PST)
+X-Gm-Message-State: AOJu0YytOIIizyiyjRYBOz8lxkdotiMJ8XGkd3qr2MptcBVR0d3wOyzE
+ h32NF47ubZZBBiQXjP1+rCu1+S0xoDB1TXAozpc=
+X-Google-Smtp-Source: AGHT+IEMmvfyq0v5/2oBeBE/oqLc1Eu+CJpsjOxQOhU1mp+t/ys+FzWHNt4xUEoc92KVGBiOkt8B0IacbD0oqbAchGI=
+X-Received: by 2002:a2e:b0e1:0:b0:2c9:b9db:73 with SMTP id
+ h1-20020a2eb0e1000000b002c9b9db0073mr988987ljl.20.1701194881929; 
+ Tue, 28 Nov 2023 10:08:01 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Make DisconnectController follow the EFI spec
-Content-Language: en-US
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: masahisa.kojima@linaro.org, ryosuke.saito@linaro.org, u-boot@lists.denx.de
-References: <20231128154508.465171-1-ilias.apalodimas@linaro.org>
- <e27e8bc1-6d8e-4eeb-bc82-66bead193ae5@gmx.de>
- <CAC_iWjKBWOpLkLi=+nKAzUWzYzOG20VQ-Zyxhhhd6_568TZ0WA@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAC_iWjKBWOpLkLi=+nKAzUWzYzOG20VQ-Zyxhhhd6_568TZ0WA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:pbupwDg1IV96A5XsK87LURHm6OBo6BfZvk+80iur1ukdj0pCAE/
- iWfbnFD/mHYI4k/OusGvXLcQu6xw/hL4vg19qh8A04ygkqZiEFM3lPecrSnFvx4nMm0SELD
- pXPLTCToCLXy6uKlroczlXpZco0Zbw92H31hRUGFH7OUm/u15Djd0+M2f0P3iK87VX5SXTb
- RjCZiVgmpENPojF5lu5Cg==
-UI-OutboundReport: notjunk:1;M01:P0:/gA2XaDqw1c=;djRVzslY3Y6P1WwbVR0L4qgPRQi
- uC5R578SECuXTR7/5912BC26NjIgw9drWDOqepJGkQ3A3STPrnlEyBSLO114ySW5kp6jXZ3Cj
- BY7UDePLjdOAQfTdk3/55kZIrHSyeId3i+nVP7X8cimiVp9PworBYCmp7fBxYFnsK4xU+QF+e
- xa+KISRPfjsz/c2r+xZn3g/pdf3jCQkTvTlTKQYMjMOK4BfLAHCJBQhJSq4zF5dZKx62YSNv1
- 1PQHfQ/+CzRINzCW/viJzykJd6WEPRQ8dSAXXJ3GRkow9HPhdGeIBJEtNUbclzQH4JNgzX/a/
- j6rR599R+x8My+dSMKkyHJNB05hx9z50fEBaLl9fhAQUXZLz3dvjn+njGzsArrtHxg2hkb1Pj
- YmhJxhv0HWhCVmCwQeAn8GyyEL7QPQTOWipeOnZ0+4c0+28VphUNO0pj2B9m4BfFCxwnHjTk5
- Vjh0Lxvzbnwea+2pC4jUQvvoIrsYAfUmW+lYrmjcaBnmCu0nZuHnvS5GXZp+0nB4gEZMrr3jl
- CNUN4ntEE1J1g3Zk1MoXGMABO9jrFnVwXw9qaw0I6L6ZPkgYWGKlo202j3vfo1HqX1sESoK4P
- 56lVgIzwxsRMBvK1fC1UEoMZY0ryRnqOLcpWAz5J0/d7X8JP5+LGC0BcQwGw0RioZHnC98pKe
- BHFKZp7hQaYGALPD43xD7So2Ql1T0cnoUD0A+/L0wrFbpuueDg6gR4Zlhfms80kQLnqfae6Xg
- YRrfG6DEmyeP1fIkGf0lqu1FWVo30rHwov1+9AzIpjg+C83YqJ9us8U0IX7UopoysWuksH8XQ
- 0uxNzLliBX6vM8SzdGkoQ6qjCtxWmUWIbO6jSrZZ+iaMxS/fvMIF1oGHyDDRbIe/8gchlOsrR
- jxMiLf0W8ONEVjgWMFJIwiNjcDrWe92IfkiEnLyhSRECy3uO9Vtr0yGrWnSf+GwHaDPYXCcFg
- EpheiA==
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+ <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
+ <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
+ <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+In-Reply-To: <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Tue, 28 Nov 2023 19:07:50 +0100
+X-Gmail-Original-Message-ID: <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
+Message-ID: <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Simon Glass <sjg@chromium.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,182 +94,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.11.23 18:40, Ilias Apalodimas wrote:
-> Hi Heinrich
->
-> On Tue, 28 Nov 2023 at 18:30, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
-rote:
->>
->> On 28.11.23 16:45, Ilias Apalodimas wrote:
->>> commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
->>> tried to fix the UninstallProtocol interface which must reconnect
->>> any controllers it disconnected by calling ConnectController()
->>> in case of failure. However, the reconnect functionality was wired in
->>> efi_disconnect_all_drivers() instead of efi_uninstall_protocol().
->>>
->>> As a result some SCT tests started failing.
->>> Specifically, BBTestOpenProtocolInterfaceTest333CheckPoint3() test
->>>    - Calls ConnectController for DriverImageHandle1
->>>    - Calls DisconnectController for DriverImageHandle1 which will
->>>      disconnect everything apart from TestProtocol4. That will remain
->>>      open on purpose.
->>>    - Calls ConnectController for DriverImageHandle2. TestProtocol4
->>>      which was explicitly preserved was installed wth BY_DRIVER attrib=
-utes.
->>>      The new protocol will call DisconnectController since its attribu=
-tes
->>>      are BY_DRIVER|EXCLUSIVE, but TestProtocol4 will not be removed. T=
-he
->>>      test expects EFI_ACCESS_DENIED which works fine.
->>>
->>>      The problem is that DisconnectController, will eventually call
->>>      EFI_DRIVER_BINDING_PROTOCOL.Stop(). But on the aforementioned tes=
-t
->>>      this will call CloseProtocol -- the binding protocol is defined i=
-n
->>>      'DBindingDriver3.c' and the .Stop function uses CloseProtocol.
->>>      If that close protocol call fails with EFI_NOT_FOUND, the current=
- code
->>>      will try to mistakenly reconnect all drivers and the subsequent t=
-ests
->>>      that rely on the device being disconnected will fail.
->>
->>
->>
->>>
->>> Move the reconnection in efi_uninstall_protocol() were it belongs.
->>>
->>> Fixes: commit 239d59a65e20 ("efi_loader: reconnect drivers on failure"=
-)
->>> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> ---
->>> Heinrich this is critical. Although it doesn't break anything on our n=
-ormal
->>> use cases it does break the ACS testing for SystemReady-IR and I prefe=
-r
->>> landing it in -master before the 2024.01 release
->>
->> Ok
->>
->>>
->>>    lib/efi_loader/efi_boottime.c | 23 +++++------------------
->>>    1 file changed, 5 insertions(+), 18 deletions(-)
->>>
->>> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_bootti=
-me.c
->>> index 0b7579cb5af1..370eaee8ce1a 100644
->>> --- a/lib/efi_loader/efi_boottime.c
->>> +++ b/lib/efi_loader/efi_boottime.c
->>> @@ -1339,7 +1339,7 @@ static efi_status_t efi_disconnect_all_drivers
->>>                                 const efi_guid_t *protocol,
->>>                                 efi_handle_t child_handle)
->>>    {
->>> -     efi_uintn_t number_of_drivers, tmp;
->>> +     efi_uintn_t number_of_drivers;
->>>        efi_handle_t *driver_handle_buffer;
->>>        efi_status_t r, ret;
->>>
->>> @@ -1350,31 +1350,17 @@ static efi_status_t efi_disconnect_all_drivers
->>>        if (!number_of_drivers)
->>>                return EFI_SUCCESS;
->>>
->>> -     tmp =3D number_of_drivers;
->>>        while (number_of_drivers) {
->>> -             ret =3D EFI_CALL(efi_disconnect_controller(
->>> +             r =3D EFI_CALL(efi_disconnect_controller(
->>>                                handle,
->>>                                driver_handle_buffer[--number_of_driver=
-s],
->>>                                child_handle));
->>> -             if (ret !=3D EFI_SUCCESS)
->>> -                     goto reconnect;
->>> -     }
->>> -
->>> -     free(driver_handle_buffer);
->>> -     return ret;
->>> -
->>> -reconnect:
->>> -     /* Reconnect all disconnected drivers */
->>> -     for (; number_of_drivers < tmp; number_of_drivers++) {
->>> -             r =3D EFI_CALL(efi_connect_controller(handle,
->>> -                                                 &driver_handle_buffe=
-r[number_of_drivers],
+You are referring to a 2000 line patch so it is not 100% clear where
+to look tbh.
 
-DriverHandleBuffer must be a NULL terminated array of handles.
 
-Our implementation of ConnectController() is wrong as it does not
-implement this.
+On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+>
+>
+> In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line 268 is for related example code.
+>
 
-Best regards
+That refers to a 'memory-allocation' node, right? How does that relate
+to the 'reserved-memory' node?
 
-Heinrich
+And crucially, how does this clarify in which way "runtime-code" and
+"runtime-data" reservations are being used?
 
->>> -                                                 NULL, true));
->>>                if (r !=3D EFI_SUCCESS)
->>> -                     EFI_PRINT("Failed to reconnect controller\n");
->>> +                     ret =3D r;
->>>        }
->>>
->>>        free(driver_handle_buffer);
->>> -     return ret;
->>> +     return (ret !=3D EFI_SUCCESS ? ret : EFI_SUCCESS);
->>
->> This will always return ret. Did you want to return another value?
->
-> No just ret
->
->>>    }
->>>
->>>    /**
->>> @@ -1409,6 +1395,7 @@ static efi_status_t efi_uninstall_protocol
->>>        r =3D efi_disconnect_all_drivers(handle, protocol, NULL);
->>>        if (r !=3D EFI_SUCCESS) {
->>>                r =3D EFI_ACCESS_DENIED;
->>> +             EFI_CALL(efi_connect_controller(handle, NULL, NULL, true=
-));
->>
->> Chapter "EFI_BOOT_SERVICES.UninstallProtocolInterface()" of the EFI
->> specification says: " In addition, all of the drivers that were
->> disconnected with the boot service DisconnectController() earlier, are
->> reconnected with the boot service
->> EFI_BOOT_SERVICES.ConnectController()." What makes you think that
->> ConnectController() should be called with DriverImageHandle =3D NULL? I
->> cannot derive this from the specification.
->
-> EDK2 does this as well to reconnect all controllers. Don't  we have
-> the same functionality?
->
->>
->> EDK2's CoreDisconnectControllersUsingProtocolInterface() does so. But
->> shouldn't such behavior be defined in the specification?
->
-> This is what confused me in the first place and I added the reconnect
-> code in disconnect_controller. But if you look more closely they also
-> have CoreDisconnectController() which *is* the EFI protocol they
-> expose.
->
-> CoreDisconnectControllersUsingProtocolInterface is just a wrapper they
-> use on UninstallProtocol()
->
->>
->> We have 4 places where we use EFI_CALL to call efi_connect_controller.
->> Should we provide an internal function?
->
-> Sure, but not for 2024.01
->
->>
->> Best regards
->>
->> Heinrich
->
-> Thanks
-> /Ilias
->>
->>>                goto out;
->>>        }
->>>        /* Close protocol */
->>> --
->>> 2.37.2
->>>
->>
+Since the very beginning of this discussion, I have been asking
+repeatedly for examples that describe the wider context in which these
+reservations are used. The "runtime" into runtime-code and
+runtime-data means that these regions have a special significance to
+the operating system, not just to the next bootloader stage. So I want
+to understand exactly why it is necessary to describe these regions in
+a way where the operating system might be expected to interpret this
+information and act upon it.
 
+
+>
+> > -----Original Message-----
+> > From: Chiu, Chasel
+> > Sent: Tuesday, November 21, 2023 10:34 AM
+> > To: Ard Biesheuvel <ardb@kernel.org>; Simon Glass <sjg@chromium.org>
+> > Cc: devicetree@vger.kernel.org; Mark Rutland <mark.rutland@arm.com>; Rob
+> > Herring <robh@kernel.org>; Tan, Lean Sheng <sheng.tan@9elements.com>; lkml
+> > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>; Brune,
+> > Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
+> > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> > <gua.guo@intel.com>; linux-acpi@vger.kernel.org; U-Boot Mailing List <u-
+> > boot@lists.denx.de>; Chiu, Chasel <chasel.chiu@intel.com>
+> > Subject: RE: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > usages
+> >
+> >
+> > Hi Ard,
+> >
+> > Here is the POC PR for your reference:
+> > https://github.com/tianocore/edk2/pull/4969/files#diff-
+> > ccebabae5274b21634723a2111ee0de11bed6cfe8cb206ef9e263d9c5f926a9cR26
+> > 8
+> > Please note that this PR is still in early phase and expected to have significant
+> > changes.
+> >
+> > The idea is that payload entry will create gEfiMemoryTypeInformationGuid HOB
+> > with payload default memory types and allow FDT to override if correspond node
+> > present.
+> > Please let me know if you have questions or suggestions.
+> >
+> > Thanks,
+> > Chasel
+> >
+> >
+> > > -----Original Message-----
+> > > From: Ard Biesheuvel <ardb@kernel.org>
+> > > Sent: Tuesday, November 21, 2023 8:42 AM
+> > > To: Simon Glass <sjg@chromium.org>
+> > > Cc: Chiu, Chasel <chasel.chiu@intel.com>; devicetree@vger.kernel.org;
+> > > Mark Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>;
+> > > Tan, Lean Sheng <sheng.tan@9elements.com>; lkml
+> > > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>;
+> > > Brune, Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
+> > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
+> > > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
+> > > <gua.guo@intel.com>; linux- acpi@vger.kernel.org; U-Boot Mailing List
+> > > <u-boot@lists.denx.de>
+> > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > > usages
+> > >
+> > > On Mon, 20 Nov 2023 at 21:12, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi,
+> > > >
+> > > > On Mon, 13 Nov 2023 at 11:09, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> > > > >
+> > > > >
+> > > > > Hi Ard,
+> > > > >
+> > > > > Please see my reply below inline.
+> > > > >
+> > > > > Thanks,
+> > > > > Chasel
+> > > > >
+> > > > >
+> > > > > > -----Original Message-----
+> > > > > > From: Ard Biesheuvel <ardb@kernel.org>
+> > > > > > Sent: Saturday, November 11, 2023 3:04 AM
+> > > > > > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > > > > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org;
+> > > > > > Mark Rutland <mark.rutland@arm.com>; Rob Herring
+> > > > > > <robh@kernel.org>; Tan, Lean Sheng <sheng.tan@9elements.com>;
+> > > > > > lkml <linux-kernel@vger.kernel.org>; Dhaval Sharma
+> > > > > > <dhaval@rivosinc.com>; Brune, Maximilian
+> > > > > > <maximilian.brune@9elements.com>; Yunhui Cui
+> > > > > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom
+> > > > > > Rini <trini@konsulko.com>; ron minnich <rminnich@gmail.com>;
+> > > > > > Guo, Gua <gua.guo@intel.com>; linux- acpi@vger.kernel.org;
+> > > > > > U-Boot Mailing List <u-boot@lists.denx.de>
+> > > > > > Subject: Re: [PATCH v7 2/2] schemas: Add some common
+> > > > > > reserved-memory usages
+> > > > > >
+> > > > > > On Sat, 11 Nov 2023 at 04:20, Chiu, Chasel <chasel.chiu@intel.com>
+> > wrote:
+> > > > > > >
+> > > > > > >
+> > > > > > > Just sharing some usage examples from UEFI/EDK2 scenario.
+> > > > > > > To support ACPI S4/Hibernation, memory map must be consistent
+> > > > > > > before entering and after resuming from S4, in this case
+> > > > > > > payload may need to know previous memory map from bootloader
+> > > > > > > (currently generic payload cannot access platform/bootloader
+> > > > > > > specific non-volatile data, thus could not save/restore memory
+> > > > > > > map
+> > > > > > > information)
+> > > > > >
+> > > > > > So how would EDK2 reconstruct the entire EFI memory map from
+> > > > > > just these unannotated /reserved-memory nodes? The EFI memory
+> > > > > > map contains much more information than that, and all of it has
+> > > > > > to match the pre-hibernate situation, right? Can you given an example?
+> > > > >
+> > > > >
+> > > > > Here we listed only typically memory types that may change cross
+> > > > > different
+> > > platforms.
+> > > > > Reserved memory type already can be handled by reserved-memory
+> > > > > node,
+> > > and rest of the types usually no need to change cross platforms thus
+> > > currently we could rely on default in generic payload.
+> > > > > In the future if we see a need to add new memory types we will
+> > > > > discuss and
+> > > add it to FDT schema.
+> > > > >
+> > > > >
+> > > > >
+> > > > > >
+> > > > > > > Another usage is to support binary model which generic payload
+> > > > > > > is a prebuilt
+> > > > > > binary compatible for all platforms/configurations, however the
+> > > > > > payload default memory map might not always work for all the
+> > > > > > configurations and we want to allow bootloader to override
+> > > > > > payload default
+> > > memory map without recompiling.
+> > > > > > >
+> > > > > >
+> > > > > > Agreed. But can you explain how a EDK2 payload might make
+> > > > > > meaningful use of 'runtime-code' regions provided via DT  by the
+> > > > > > non-EDK2 platform init? Can you give an example?
+> > > > >
+> > > > >
+> > > > > Runtime-code/data is used by UEFI payload for booting UEFI OS
+> > > > > which
+> > > required UEFI runtime services.
+> > > > > Platform Init will select some regions from the usable memory and
+> > > > > assign it to
+> > > runtime-code/data for UPL to consume. Or assign same runtime-code/data
+> > > from previous boot.
+> > > > > If UEFI OS is not supported, PlatformInit may not need to provide
+> > > > > runtime-code/data regions to payload. (always providing
+> > > > > runtime-code/data should be supported too)
+> > > > >
+> > > > >
+> > > > > >
+> > > > > > > Under below assumption:
+> > > > > > >         FDT OS impact has been evaluated and taken care by
+> > > > > > > relevant
+> > > > > > experts/stakeholders.
+> > > > > > > Reviewed-by: Chasel Chiu <chasel.chiu@intel.com>
+> > > > > > >
+> > > > > >
+> > > > > > I am sorry but I don't know what 'FDT OS impact' means. We are
+> > > > > > talking about a firmware-to-firmware abstraction that has the
+> > > > > > potential to leak into the OS visible interface.
+> > > > > >
+> > > > > > I am a maintainer in the Tianocore project myself, so it would
+> > > > > > help if you could explain who these relevant experts and
+> > > > > > stakeholders are. Was this discussed on the edk2-devel mailing
+> > > > > > list? If so, apologies for missing it but I may not have been cc'ed perhaps?
+> > > > >
+> > > > >
+> > > > >
+> > > > >
+> > > > > I'm not familiar with FDT OS, also I do not know if who from
+> > > > > edk2-devel were
+> > > supporting FDT OS, I think Simon might be able to connect FDT OS
+> > > experts/stakeholders.
+> > > > > We are mostly focusing on payload firmware phase implementation in
+> > > > > edk2 (and other payloads too), however, since we have aligned the
+> > > > > payload FDT and OS FDT months ago, I'm assuming FDT OS impact must
+> > > > > be there and we need (or already done?) FDT OS experts to support
+> > > > > it. (again, maybe Simon could share more information about FDT OS)
+> > > > >
+> > > > > In edk2 such FDT schema is UefiPayloadPkg internal usage only and
+> > > > > payload
+> > > entry will convert FDT into HOB thus we expected the most of the edk2
+> > > generic code are no-touch/no impact, that's why we only had small
+> > > group
+> > > (UefiPayloadPkg) discussion.
+> > > > > Ard, if you are aware of any edk2 code that's for supporting FDT
+> > > > > OS, please let
+> > > us know and we can discuss if those code were impacted or not.
+> > > >
+> > > > We discussed this and just to clarify, 'FDT OS' is not a special OS,
+> > > > it is just Linux.
+> > > >
+> > > > So, with the above, are we all on the same page? Can the patch be
+> > > > applied, perhaps? If not, what other discussion is needed?
+> > > >
+> > >
+> > > An example of how a platform-init/payload combination would make
+> > > meaningful use of such runtime-code/data regions.
