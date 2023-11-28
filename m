@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7128CC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 18:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7502BC4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 19:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDF05877B5;
-	Tue, 28 Nov 2023 19:21:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 98F138754D;
+	Tue, 28 Nov 2023 20:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNr9E46W";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PgjIgfHL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC01787759; Tue, 28 Nov 2023 19:21:29 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id E514B86FA6; Tue, 28 Nov 2023 20:07:35 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F017F877B5
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 19:21:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 93ACD8758C
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 20:07:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d226f51f71so1768077b3.3
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 10:21:20 -0800 (PST)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a06e59384b6so753503566b.1
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 11:07:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701195679; x=1701800479; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WkH2wz0IKADiOfopvlIzPrhACAUVDApPJh1rrubWYxE=;
- b=KNr9E46WLYQDnWrhOnjvnoCA3D/VRQt1ao/aZoeZsf1+KXhmjGAHlOnMhq5f+0oVk5
- QtNVKRCQatgBfqtWiiqdGVgstnqaAJZzl2njT9HGRH1qL8r8Dhl+crwg+tDoPUuQqDzz
- 1jKzqW97uklI6+3/p5iHesk+8Eei8BKsjZeo8=
+ d=linaro.org; s=google; t=1701198453; x=1701803253; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+cE/kYAssNOsT90tIb1y4TkiKpgDj7v2Bd0jvFIJ/O0=;
+ b=PgjIgfHLuF0TDYQhvrbbbU7+r1itvIPOaiyBbDYbyDXOvbzAP4zM6Pk4Uzdx4/AHBe
+ tjf8wORNCAYByyiUcvixlMr0E/u74i/dUqEAHSlMs6xYNSYzzPgT++c9pM8iBvAmUGkE
+ 4b3CUmwK8ImwB2A904jHl7LMGGzniaLu+afS32nRUw25KE9sOqHd7jfhsiOCICEB8e8c
+ DfglXyBYsScviX2xdUuzoEptjwcCLB5EbnYbSjzXX+wrTQmVZanQ1yFAT/0rvIceRkms
+ IKSVWOKaij3YaaJcvvgQqkSip7Q8wpB6M1m1L4gcv7FrB3eRvhIJKD3GiN4iSgspvKGd
+ icew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701195679; x=1701800479;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WkH2wz0IKADiOfopvlIzPrhACAUVDApPJh1rrubWYxE=;
- b=hNU4pknOy7x77E/ArzR+ePObglAkZVnL0S1G/BxfxI4NM/Cy3BvHfVWIvQbfy4belc
- i1fM/LkGh7t3/xugWf13MjLS67PO2Rh346Smaf0O87wjKXwtDzN/NO7mASuMqGwBSdK8
- g3RCbBvEe82jfo2HMT08/PPPObbJ5DHgtLTLcpGlg61hb4fqGR2I1ofx2RMoCJ/Bmcmf
- FbJiu1v6buuFZz/v/Sg7izLPUOpTFdO0n8Vzo7tWgZqBWxjAVUMD+kSWaW7Kq46rCn/c
- 6SIXwfrEnXQoDhW/urRm1Z6wQl9ARO9qjxjScjnlTb76q4/f3/W1jZmHTwq4WaNegMcq
- /eEw==
-X-Gm-Message-State: AOJu0Yzjl2KdrUUaWLCLDILAgQcvR/gHtaCwcfuQQCteAcHFEPBZwtp3
- q3zW/7G+FyNcEBACe/Ono2Ih3Q==
-X-Google-Smtp-Source: AGHT+IHsORqh15t+acJ0YmgrNQXl/WkYkK+pEEMhiA5y+oTXW0wg+F2N7fM6BX3mlu9x7W6kXz7p1g==
-X-Received: by 2002:a0d:e5c7:0:b0:5c9:8366:33b2 with SMTP id
- o190-20020a0de5c7000000b005c9836633b2mr17950504ywe.44.1701195679487; 
- Tue, 28 Nov 2023 10:21:19 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4f9d-49d7-ae37-6b11.res6.spectrum.com.
- [2603:6081:7b00:6400:4f9d:49d7:ae37:6b11])
- by smtp.gmail.com with ESMTPSA id
- u64-20020a814743000000b00582b239674esm4074480ywa.129.2023.11.28.10.21.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 10:21:19 -0800 (PST)
-Date: Tue, 28 Nov 2023 13:21:17 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>
-Subject: Re: [PATCH v3 31/32] bootstd: Introduce programmatic boot
-Message-ID: <20231128182117.GA2513409@bill-the-cat>
-References: <20231118210547.577026-1-sjg@chromium.org>
- <20231118210547.577026-32-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1701198453; x=1701803253;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+cE/kYAssNOsT90tIb1y4TkiKpgDj7v2Bd0jvFIJ/O0=;
+ b=sNYe0VfnJzSpJcTrAyQVvkAZd2/KG08tg3UYmQjReXeF1K6XMDhu+alsi3y3w3BEAl
+ Tu0AtKvZ3cRLn+ARWk/O8xlockwxxQSGyQ6Q/typ++u8OUsWMzl1g5UPaQhwmFDsOFx+
+ dcdYskE2rSBfOcc1hE5S03zxeVmO5mQhQagbPJTyW6EHvAoaU/2ATWVsUz6kBv3hVBFa
+ 1mjF0hjX34l2/YHu+402L7E54XOOKVYaMPxiioG+3dteZfESwqrOQgmC/xdedJDrYSp8
+ cbZff1qRtNMxFfNJNiVT5+MBbdhPE6alLBWSfsYVbcRh2NMf3A/hCmfyJ82q6Vc/zz+L
+ RZPQ==
+X-Gm-Message-State: AOJu0Yz5yskIM+S6lB/ftkZkduEk69b/BySmI0DQV6EnKTr22Q/4/Xa8
+ dIhfCsBlT62WLZo15gx2Fr6YsvA4RK/XDIpYHyCcHQ==
+X-Google-Smtp-Source: AGHT+IFzb4NbN4xr2ZAh0aMAL6AFF0PHHkfWwgR+9s/fBddLLtRCN1qtM8BAalcyAuMIpJkZLSupVP4mDvbrqYP/Gr4=
+X-Received: by 2002:a17:906:73dd:b0:a16:7b19:a570 with SMTP id
+ n29-20020a17090673dd00b00a167b19a570mr1482265ejl.32.1701198453111; Tue, 28
+ Nov 2023 11:07:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Vs053lj8MeJakqXz"
-Content-Disposition: inline
-In-Reply-To: <20231118210547.577026-32-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-8-maxim.uvarov@linaro.org>
+ <CAOMZO5AdtdHDnpNUkUieHh7_jhxDOtXp5Mtv2ybkTVLamuxO5g@mail.gmail.com>
+In-Reply-To: <CAOMZO5AdtdHDnpNUkUieHh7_jhxDOtXp5Mtv2ybkTVLamuxO5g@mail.gmail.com>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Wed, 29 Nov 2023 01:07:21 +0600
+Message-ID: <CAD8XO3bLiTsgaYrYUSJgiwfYQGn6C9+=VN=UhxmZOo_c3ox3xg@mail.gmail.com>
+Subject: Re: [PATHv11 07/43] net/lwip: implement wget cmd
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,47 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, 28 Nov 2023 at 17:32, Fabio Estevam <festevam@gmail.com> wrote:
 
---Vs053lj8MeJakqXz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Hi Maxim,
+>
+> On Mon, Nov 27, 2023 at 5:46=E2=80=AFPM Maxim Uvarov <maxim.uvarov@linaro=
+.org>
+> wrote:
+> >
+> > U-Boot recently got support for an alternative network stack using LWIP=
+.
+> > Replace wget command with the LWIP variant while keeping the output and
+> > error messages identical.
+> >
+> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+>
+> Do you know whether this wget issue also happens when LWIP is used?
+>
+>
+> https://lore.kernel.org/u-boot/CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOp=
+df1CNaZBw@mail.gmail.com/
 
-On Sat, Nov 18, 2023 at 02:05:19PM -0700, Simon Glass wrote:
 
-> At present bootstd requires CONFIG_CMDLINE to operate. Add a new
-> 'programmatic' boot which can be used when no command line is available.
-> For now it does almost nothing, since most bootmeths require the
-> command line.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Overall, this seems fine. The only ask I have really is, can we think
-about how to handle both this case and the case handled by
-cmd/bootmenu.c in a common fashion? To me, one is "show a menu of boot
-options, based on env variables" and one is "show a menu of boot
-options, based on C code" and the "show a menu of boot options" should
-have a lot in common.
+From this log it's a little bit different wget output. My version prints
+"#"  for status. So I guess it's original wget. You can spend time on
+debugging it but this code will be replaced.
+With my code I tried big iso download and check crc. I did not see any
+issues.
 
---=20
-Tom
-
---Vs053lj8MeJakqXz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVmL5YACgkQFHw5/5Y0
-tyzwbQv/U3FD+HwSn7CfpYPuuaGCMpDyiRYQsZR2IuY1u3T8seJAHITwdCEAjcOD
-MvmD8N8sNKDKa50UOyRlP2IKAkpPbNoetImDlu5tgalNNfWxq3Cx5fWE5Oia1pOK
-BGWKT+8iZvNmtfwX1u9QEmdWGU7jw49KS8uhK2Rmc6w3buFsAwu/k21ObSUB0Ic0
-3KKuUejsOy0Ec2WBC8TC0MueHWWXfexnZNhcAnaxEH/ceBzbQAzkhcVb01odeT+Z
-SFIwDFJopaEr1yFVtXleTARO0084ya4PqWtpkPMcEkAnhF7hkcxtSj3T3Dpvy2UV
-gfnY4mNv/XQkxjZOqXMnFZK0ryx6sR08RMRISPD9Gy64NLzIkDxjBnPw4uOM8Rwh
-szgo50S4WXmo0o6pbZkdOYaCyQ2C2z6VavEiBxyGm9G2BEGTX9BeAgjdwWglZgJL
-qhQZNSWJ1VYDxeVEiMEqOHGmq/qRovLxNSIqVe2LGHxT29Ak0RvJhV0vBxqrBy4i
-DQp919N8
-=2ysU
------END PGP SIGNATURE-----
-
---Vs053lj8MeJakqXz--
+BR,
+Maxim.
