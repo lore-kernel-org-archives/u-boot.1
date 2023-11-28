@@ -4,74 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38B63C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 16:30:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE0AC4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 16:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A296087741;
-	Tue, 28 Nov 2023 17:30:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 896C887766;
+	Tue, 28 Nov 2023 17:30:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CDaWPTCb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eMqecLUE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 152F186F02; Tue, 28 Nov 2023 17:30:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E7EF587766; Tue, 28 Nov 2023 17:30:52 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA0D287741
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 17:30:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C91C87762
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 17:30:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1701189014; x=1701793814; i=xypron.glpk@gmx.de;
- bh=a89bHpvsnwDEzWHA9znwkEAYiL9hc9/iUHQ0/yfe1Lw=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=CDaWPTCbHBl8AomInncGtzVkukCDJiAvF8KybXYgz7f+tsearuvF9mEq7UBObXe3
- VHZwVPAPrycFm8h8hpfBRGJXxrhDSf0F/8Fpr+F0VoR3blLjSe+ZFvJzkQ9wiJdyX
- YS3zgg27Er52zdISFfTd76Hxqus9HUbjslb7i/uORddHRGj+NNFrwAt9RLWB12EVx
- yywdQyHmPCbZe2jxweV6dbtBohrEn6quQaUZaYS8+VFOsBhM+J6xKzxDNel22f3Gh
- 4SVDRszBldYEk1mhYr3HqOAO9OULkt12PDeyGD3TLNoIMpRHZpduN+qmErFDPYTDT
- vtdQ1S4iGNo22Aq0QA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUXpK-1qhihK3D9M-00QQhm; Tue, 28
- Nov 2023 17:30:14 +0100
-Message-ID: <e27e8bc1-6d8e-4eeb-bc82-66bead193ae5@gmx.de>
-Date: Tue, 28 Nov 2023 17:30:08 +0100
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-332fd81fc8dso1935258f8f.3
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 08:30:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701189049; x=1701793849; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ht+JkORDqDWHj182RBOBqn23tjSl5/TkWr4pn0wdvG0=;
+ b=eMqecLUEmmXDtq41ODR+5xSZ2fiUa9EdO68+D4vmaNqPSnC5LW8oZVtifbOwuQaukn
+ h9V980NveqdrxSZ/eoWqmOEijuu4yK6INfl90GnVAIVgu4/M2Ss9Ydl3KPBgqD24IrTJ
+ O7x9yqt3X16GS2luiuLUvPvsmKxYc9xuYNXQBSGXLkaLZyHjhaeSokYzp55xajHh6on5
+ TkLS2QMV8tx5xN9hA97d97LsiMcQMgjv9Q2RxaZc+cEYQpa3uxOouM8rgfzqbZIXWHvU
+ GMFEGMNYOEJvwq5+txFBhjMr1aD4sRoUgAhZeRSAj/2t4VbE4v/iNoENBRdaN5xMMH9k
+ VryA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701189049; x=1701793849;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ht+JkORDqDWHj182RBOBqn23tjSl5/TkWr4pn0wdvG0=;
+ b=jphmtNg10z6EkaiJNwdzjpYGK3lBBHvxkksM6glcaD73Z6CAiPjPjff7y9HqbAJrAk
+ mj4ZJUIPnkZjydXo0Y6GaNAJe40h15ddTlhfv3Vx40BkJjPg0TGTFqrP6GtN9aNPzfoo
+ G4slr2/xHOIdM8Llihpv2UTKm+K23QCGAe5Fh/HnU8BGEgUgjX3298GFoY66WNt3AP/U
+ FEDOasrwqosd8XZSHc8LUQ61qbcY8pETRZ3qVqdkqp1bS8sTwwFH3aRu8IDDGrF7fWbp
+ 0BI+B4w8MkouEcW2zGl02N8P4BWu1zMEEDl8Axhdh/eDtDWoIpj3vhEIBrVyiK/K2rJK
+ yaVQ==
+X-Gm-Message-State: AOJu0YzTKYrP3GpPiVseOjJ74Z05dH3uUr/kU7KjuRNoEM++BoXBeKNW
+ ifth2/gkN7WSeOdQ0v7LPzP4owZZoJq9QOjPTcOAhw==
+X-Google-Smtp-Source: AGHT+IF0sM1zqVlZewRNSluS1DsQLXjn1Fmjm7ZlHWZ3QSrMCCPiiCDSvMwhBKDMGpSmAlCYp3Yokg==
+X-Received: by 2002:a05:6000:c45:b0:332:fe7e:2a2a with SMTP id
+ do5-20020a0560000c4500b00332fe7e2a2amr5788689wrb.44.1701189049504; 
+ Tue, 28 Nov 2023 08:30:49 -0800 (PST)
+Received: from lion.localdomain ([79.79.179.141])
+ by smtp.gmail.com with ESMTPSA id
+ d21-20020adf9b95000000b003316debbde4sm15530041wrc.48.2023.11.28.08.30.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 28 Nov 2023 08:30:48 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v4 0/5] Qualcomm PMIC fixes
+Date: Tue, 28 Nov 2023 16:30:24 +0000
+Message-Id: <20231128-b4-qcom-dt-compat-v4-0-949d0982d1de@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Make DisconnectController follow the EFI spec
-Content-Language: en-US
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: masahisa.kojima@linaro.org, ryosuke.saito@linaro.org, u-boot@lists.denx.de
-References: <20231128154508.465171-1-ilias.apalodimas@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231128154508.465171-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yr6o9lwvEyG+8qe7Ee6Q9kGQbL6dk3MkpVzQqTiqQmnzG0Zr0tW
- et+U4Ym7cA5AyEe86U0IIRwPoUADfiyiyxCHz2xOWaz1WIKwe/I0cefUEeRJx0NRRzdkCxL
- D4+budolvc/KASnPuD3D69hxZK4CLBHXLpXDEE7o9u7eIS3n5w+aIbIYPWfbF2EKiMvB3lb
- eRfV+e7ipsXKclGYnoDpg==
-UI-OutboundReport: notjunk:1;M01:P0:fobhq2M2Yzk=;hWDP4faC7BP81w36JpMvMvXox5A
- rDXVZK3hLFxcfD51uj0RESY0R3oWRHfZSZ3kYJjMPWzklDafTSMXBZwbNQ93XqdjQ6F1EE0MX
- ofbrpKOJ+T/PR8OJLi35kMk5YkKvWnwXNmUzn3RCQ3MeWAgUfzyEB1bQzaQXbSjMtGk/YBW/u
- LWmVF1CSsF9U2dEB2PbhxKuCNGfe2LzSKs2OtsSaVQy+3DtkUEmTHtZupk+QSt8496U4ZdAcE
- OAWfzIEDpWEzLqdJs1r4okRuRyxMosc5UtCobSbiKxPMuE/H1NA85QKqkNV6hiZ/oB+9PNieU
- szWcj2u3cTav7tSKNG6UVYDwN1SUDgymEA5HjkMsYeVXQOjzr/5snSSjbVmh/9zwrpJ68jkCO
- YpqbjVDcn67i8UiB4rxVUMO6FUWlquyh4O5oVQyOk045OW4z9Kn2tfkmFs2rHYaEXUdrJIJjO
- 5bOWTRUoDWAPB+niEKyO39m1yU3Z6J1LCRWdFCIc2ye+oV6RhsjlT1xyXKhdQo9Xl+FsqFs/i
- DUpAFuAYe4c+9mh/lfha+5OGbH/d7pKnHw3xr7ZHgKEqY+mDT1nc2InyGp1XRAlv46GwTpAZS
- S5G0LqIXvaj18nEinEYyFz77XVvP07Aj8NE19jTNTmeezVDmMYGoMoSo0bx4OSlFwHn6+lyNS
- iACehDiq5dGbGiIcccmtW1lDq9CCib8rHMM8i4UzARfOqBdW9lGXZAT5TRtzylmKlknABRr+I
- u8e3Vti8OvOjMtqaXKUSCUhc6FMPvbD+Ynoa6jrqnyuOwdTHQ6WY6bzFEt5nHxWO2vqu9lhtr
- 8zBJPAM+tuWpjUtV/lorXqyBDs418MQEZnw3C4e+/RgQHaLG7ayk/xJ18MzhMZOrwOa/0n9dQ
- XlJj/qF2o3zkoWaYzS8Fa8ZRc5h4iN4imqCi551BzztVNP9VgKUoRVOLFWJm5pq0rasC7/wTW
- GunNXaCj/raad9yzW3TnIgohnBs=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKAVZmUC/33NSwrCMBCA4auUrI0kk2BSV95DXOTVNqBNTUpQS
+ u9u2lXF4mr4B+abCSUXvUvoXE0ouuyTD30JfqiQ6VTfOuxtaQQEGKXkhDXHTxMe2I64jEGN2Ck
+ mBCG2scBQuRuia/xrNa+30p1PY4jv9UWmy/aflikmmBijtZCcAqeXu+9VDMcQW7RwGbaE3COgE
+ IIyYMwIqLn8IdiGoHyPYIWQUtXQyIYQrb6IeZ4/AK4wrTkBAAA=
+To: Ramon Fried <rfried.dev@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de
+X-Mailer: b4 0.13-dev-4bd13
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3460;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=FPOLlTxMAyl3n/8TfNpKZoK5JZgwcvwwe7USY3HpOyI=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ00e3svX6CCXU6PK/ErvGevnP3g7V1wDK5qv0lv4um+
+ T7VapvVUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACaiq87wz9S01nBjjlauzMX9
+ 19ucHwjmldq8fDtV8P+pQ23XRYqyohkZNrOksaY9vsbgHlPTqtiwcm6i/YKrqz02z9r+QMFbaf2
+ sEwA=
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,135 +110,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.11.23 16:45, Ilias Apalodimas wrote:
-> commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
-> tried to fix the UninstallProtocol interface which must reconnect
-> any controllers it disconnected by calling ConnectController()
-> in case of failure. However, the reconnect functionality was wired in
-> efi_disconnect_all_drivers() instead of efi_uninstall_protocol().
->
-> As a result some SCT tests started failing.
-> Specifically, BBTestOpenProtocolInterfaceTest333CheckPoint3() test
->   - Calls ConnectController for DriverImageHandle1
->   - Calls DisconnectController for DriverImageHandle1 which will
->     disconnect everything apart from TestProtocol4. That will remain
->     open on purpose.
->   - Calls ConnectController for DriverImageHandle2. TestProtocol4
->     which was explicitly preserved was installed wth BY_DRIVER attribute=
-s.
->     The new protocol will call DisconnectController since its attributes
->     are BY_DRIVER|EXCLUSIVE, but TestProtocol4 will not be removed. The
->     test expects EFI_ACCESS_DENIED which works fine.
->
->     The problem is that DisconnectController, will eventually call
->     EFI_DRIVER_BINDING_PROTOCOL.Stop(). But on the aforementioned test
->     this will call CloseProtocol -- the binding protocol is defined in
->     'DBindingDriver3.c' and the .Stop function uses CloseProtocol.
->     If that close protocol call fails with EFI_NOT_FOUND, the current co=
-de
->     will try to mistakenly reconnect all drivers and the subsequent test=
-s
->     that rely on the device being disconnected will fail.
+This series addresses some long-standing issues with the SPMI arb
+driver, the PMIC, and the PMIC GPIO. It fixes compatibility with
+upstream Linux devicetrees, and simplifies pwrkey/resin support by
+rewriting the pon driver to be a button driver rather than a GPIO
+driver.
 
+Existing users are adjusted to use the new button driver in their
+oard init code.
 
+This series is based on the pinctrl [1] and clock [2] cleanup series.
+There may be some DTS conflicts applying it standalone.
 
->
-> Move the reconnection in efi_uninstall_protocol() were it belongs.
->
-> Fixes: commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Heinrich this is critical. Although it doesn't break anything on our nor=
-mal
-> use cases it does break the ACS testing for SystemReady-IR and I prefer
-> landing it in -master before the 2024.01 release
+[1]: https://lore.kernel.org/u-boot/20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org/
+[2]: https://lore.kernel.org/u-boot/20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org/
 
-Ok
+---
+Changes in v4:
+* Remove some now unsupported DT binding docs
+* Fix qcs404 SPMI arb dts
+* Link to v3: https://lore.kernel.org/r/20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org
 
->
->   lib/efi_loader/efi_boottime.c | 23 +++++------------------
->   1 file changed, 5 insertions(+), 18 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 0b7579cb5af1..370eaee8ce1a 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -1339,7 +1339,7 @@ static efi_status_t efi_disconnect_all_drivers
->   				 const efi_guid_t *protocol,
->   				 efi_handle_t child_handle)
->   {
-> -	efi_uintn_t number_of_drivers, tmp;
-> +	efi_uintn_t number_of_drivers;
->   	efi_handle_t *driver_handle_buffer;
->   	efi_status_t r, ret;
->
-> @@ -1350,31 +1350,17 @@ static efi_status_t efi_disconnect_all_drivers
->   	if (!number_of_drivers)
->   		return EFI_SUCCESS;
->
-> -	tmp =3D number_of_drivers;
->   	while (number_of_drivers) {
-> -		ret =3D EFI_CALL(efi_disconnect_controller(
-> +		r =3D EFI_CALL(efi_disconnect_controller(
->   				handle,
->   				driver_handle_buffer[--number_of_drivers],
->   				child_handle));
-> -		if (ret !=3D EFI_SUCCESS)
-> -			goto reconnect;
-> -	}
-> -
-> -	free(driver_handle_buffer);
-> -	return ret;
-> -
-> -reconnect:
-> -	/* Reconnect all disconnected drivers */
-> -	for (; number_of_drivers < tmp; number_of_drivers++) {
-> -		r =3D EFI_CALL(efi_connect_controller(handle,
-> -						    &driver_handle_buffer[number_of_drivers],
-> -						    NULL, true));
->   		if (r !=3D EFI_SUCCESS)
-> -			EFI_PRINT("Failed to reconnect controller\n");
-> +			ret =3D r;
->   	}
->
->   	free(driver_handle_buffer);
-> -	return ret;
-> +	return (ret !=3D EFI_SUCCESS ? ret : EFI_SUCCESS);
+Changes in v3:
+* Remove now-unneeded header includes in dragonboard{410,820}c-uboot.dtsi
+* Drop non-standard DTS support from PMIC GPIO driver
+* Also remove old gpio-keys nodes from starqltechn-uboot.dtsi
+* Link to v2: https://lore.kernel.org/r/20231108-b4-qcom-dt-compat-v2-0-713233c72948@linaro.org
 
-This will always return ret. Did you want to return another value?
+Changes in v2:
+* Avoid using non-standard "label" and "linux,code" properties for
+  buttons
+* Add missing sdm845 DTS parts
+* Put button driver in drivers/button
+* Link to v1: https://lore.kernel.org/r/20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org
 
->   }
->
->   /**
-> @@ -1409,6 +1395,7 @@ static efi_status_t efi_uninstall_protocol
->   	r =3D efi_disconnect_all_drivers(handle, protocol, NULL);
->   	if (r !=3D EFI_SUCCESS) {
->   		r =3D EFI_ACCESS_DENIED;
-> +		EFI_CALL(efi_connect_controller(handle, NULL, NULL, true));
+---
+Caleb Connolly (5):
+      gpio: qcom_pmic: fix silent dev_read_addr downcast
+      gpio: qcom_pmic: rework pwrkey driver into a button driver
+      gpio: qcom_pmic: fix support for upstream DT
+      spmi: msm: fix register range names
+      pmic: qcom: dont use dev_read_addr to get USID
 
-Chapter "EFI_BOOT_SERVICES.UninstallProtocolInterface()" of the EFI
-specification says: " In addition, all of the drivers that were
-disconnected with the boot service DisconnectController() earlier, are
-reconnected with the boot service
-EFI_BOOT_SERVICES.ConnectController()." What makes you think that
-ConnectController() should be called with DriverImageHandle =3D NULL? I
-cannot derive this from the specification.
+ MAINTAINERS                                      |   1 +
+ arch/arm/dts/dragonboard410c-uboot.dtsi          |  11 --
+ arch/arm/dts/dragonboard410c.dts                 |  25 +++-
+ arch/arm/dts/dragonboard820c-uboot.dtsi          |  12 --
+ arch/arm/dts/dragonboard820c.dts                 |  26 ++--
+ arch/arm/dts/dragonboard845c-uboot.dtsi          |  11 --
+ arch/arm/dts/dragonboard845c.dts                 |   4 +
+ arch/arm/dts/qcs404-evb.dts                      |   9 +-
+ arch/arm/dts/sdm845.dtsi                         |  28 ++--
+ arch/arm/dts/starqltechn-uboot.dtsi              |  10 --
+ arch/arm/dts/starqltechn.dts                     |  20 +--
+ arch/arm/mach-snapdragon/Kconfig                 |   3 +
+ arch/arm/mach-snapdragon/init_sdm845.c           |  45 ++-----
+ board/qualcomm/dragonboard410c/dragonboard410c.c |  31 ++---
+ board/qualcomm/dragonboard820c/dragonboard820c.c |  29 ++--
+ doc/device-tree-bindings/gpio/pm8916_gpio.txt    |  48 -------
+ doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt |  94 -------------
+ doc/device-tree-bindings/spmi/spmi-msm.txt       |  26 ----
+ drivers/button/Kconfig                           |   9 ++
+ drivers/button/Makefile                          |   1 +
+ drivers/button/button-qcom-pmic.c                | 165 +++++++++++++++++++++++
+ drivers/gpio/Kconfig                             |   3 +-
+ drivers/gpio/qcom_pmic_gpio.c                    | 146 +++++---------------
+ drivers/power/pmic/pmic_qcom.c                   |  13 +-
+ drivers/spmi/spmi-msm.c                          |  46 +++----
+ 25 files changed, 341 insertions(+), 475 deletions(-)
+---
+base-commit: d1efa48e205960b15656eb0c13227110895f1cc9
 
-EDK2's CoreDisconnectControllersUsingProtocolInterface() does so. But
-shouldn't such behavior be defined in the specification?
-
-We have 4 places where we use EFI_CALL to call efi_connect_controller.
-Should we provide an internal function?
-
-Best regards
-
-Heinrich
-
->   		goto out;
->   	}
->   	/* Close protocol */
-> --
-> 2.37.2
->
+// Caleb (they/them)
 
