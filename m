@@ -4,94 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0B89C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 16:32:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D70C7C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 16:35:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29BE887782;
-	Tue, 28 Nov 2023 17:31:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8017387771;
+	Tue, 28 Nov 2023 17:35:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jt0u7OK3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="alzcilOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 595EF86F02; Tue, 28 Nov 2023 17:30:58 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id F25E587771; Tue, 28 Nov 2023 17:34:59 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E8F7876DE
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 17:30:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ADD3876DE
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 17:34:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-332e3ad436cso3630577f8f.3
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 08:30:56 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-332ca7f95e1so3989326f8f.0
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 08:34:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701189055; x=1701793855; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gXQphteMBD3U0pnY+yrATKZ588HOaJO4A0kylMV0sOA=;
- b=jt0u7OK36Pg0dZFuIn9T/j9r6kJidoBeqz2F+aWBf4btKGzK5SxAwJazB4Vc+zSAo+
- XIETXn3ablv7i9cTvm0vgin345o04kEhCg6SlJ7yJF1BQwRay6FQ1Nj6mQQklnb6LI7I
- eFLjJOSAteS6R0e7Yk4V1WrXQ9XELySIw+lKBvNMWP90Yt1w/IJQkP4Ku0MOyhnOBZkU
- rtulO/TcU4cjpLWd9ojAWDOiMMe4V3p2Ac96QAWvaMrUl0hOwlT9ymmbhmPDBp5aod2J
- 5LC0kFHmiYQlCsrzDko+ij33RblXPZrtoDPV46YC2qIs6e7bqFUKheXuEwS7GZwDHEqO
- Ot+A==
+ d=linaro.org; s=google; t=1701189297; x=1701794097; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=vydeIe/4qFipjumZojThhXCa2zqmMnc6NmBPzpYfS2k=;
+ b=alzcilOvYLekLYT/8WR50d/TxXifyTqokcUK003LwSb7tDbaqazaegeeUrvCaKJJU3
+ gdu65mJ0BXRaCRia8ccaI/c5SUs7kUUAU69YqTzWhkspMcQ1rfyXD6FXKy9a3XaJuNlu
+ 9vOyTQyXs7ObvPKJYKPCuTaV0u5wsKhxLBVdCuno7yTn+3naoNvr937dWi7oUKXzQJfm
+ JVx+NLovKTMX46eTCllpdWx9FYPSMhIq3Nj0W+D0RVZn3g4DRGv/VfiBYMLwBs4fRbRL
+ mPhWC3ztsDskMat0gjALJ5X05grjqd3MiWTKRXTw39OtZjuvBjqfrQOhLDtlxNpdz0zd
+ xspg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701189055; x=1701793855;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gXQphteMBD3U0pnY+yrATKZ588HOaJO4A0kylMV0sOA=;
- b=SoWeG6zG0EE3O5HiYvGE1KTYpc8YwPcNX1MOVdVppd3nOtSg6SFVitJAma2YBOy7PL
- pTy1qiy9UzSSK7+siIvvkvHlrB/gDdDKSRhld2JKYpwyHuQwf2y3L3lMZ5UUN6BPqsnv
- +6mUiihSc8g2HLOiY1UR7RQkW/FJXyEa12GoHQwiSyripNPVn8YwKVVzGbc31ZgKeNlM
- 9s/QCaShwInJy4i7eTcQXx2fzS4pR+SE7NWs88/SFO/YvahRt/Kx62jbmTlwmLOuPYHL
- /73C6HjMZCBG5nOl0AKAIiedY85Y3BgThbQFLY4S7Wv6zSvnjgh8RALzVjwB4ZcebokN
- USHA==
-X-Gm-Message-State: AOJu0YznSqonKH1G8L30/VZdpRYkY7kSOsc9ymqCyRaotEACoafKis2m
- oogOa5WKd6vA/yX/7nqTWfvoGQcOR+YeRCsqtsAqbQ==
-X-Google-Smtp-Source: AGHT+IE2KtMDC4R/JPDR+GgL6oybuPJVKxkdqeAWPEYTXhasWraC94FI1WfO38aEviZE7ANGtZ0SqA==
-X-Received: by 2002:adf:fcd1:0:b0:333:129f:58a4 with SMTP id
- f17-20020adffcd1000000b00333129f58a4mr1038501wrs.59.1701189055406; 
- Tue, 28 Nov 2023 08:30:55 -0800 (PST)
-Received: from lion.localdomain ([79.79.179.141])
- by smtp.gmail.com with ESMTPSA id
- d21-20020adf9b95000000b003316debbde4sm15530041wrc.48.2023.11.28.08.30.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 08:30:54 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 28 Nov 2023 16:30:29 +0000
-Subject: [PATCH v4 5/5] pmic: qcom: dont use dev_read_addr to get USID
+ d=1e100.net; s=20230601; t=1701189297; x=1701794097;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=vydeIe/4qFipjumZojThhXCa2zqmMnc6NmBPzpYfS2k=;
+ b=lRToPSB1vJIT9mbIvK4rGqPeNt9pcUmwc41idGyaM4StgypwEB19UiLDEAqAayxr7Q
+ BwO8EPWwVfYtkTZQRN9F0RPnzsoNGWJbmck56Tt1Ray4XlbL1aiC2wbjUHTD0YG7s+0S
+ IndMRu3iE3PpPSNYRT0EYRl1gs4+LLad3qsERMrAFnxBmx7fCUFLV/seF2cSjvFBQaZp
+ xykZPSN4FB/ScllJNg4ClP+jxZipJ1f9oG+hpD+Ay8yitfhVl0FqJGkgec1t02UOllcb
+ tM76C3KBKN5jpF9WvfNy/Mj6n/vNG15B9wVk59Y1PX9xczKW2UM17cmLPqiXSBPolNZI
+ A/4g==
+X-Gm-Message-State: AOJu0YxxvrTEnUdvwF/4v7WkAtVBANmETRfj+wdfuKRVfGinGBusU9oF
+ qP1qJxb/AH6zaQgbZVKX20CrUg==
+X-Google-Smtp-Source: AGHT+IEJGp5uri9YL564txIXqil+9KRDWTgGXo9ETC0mi/AsmPmbfG64/RQa3xqIsb291ri+8k3frQ==
+X-Received: by 2002:a5d:6484:0:b0:333:145e:f529 with SMTP id
+ o4-20020a5d6484000000b00333145ef529mr111253wri.33.1701189296921; 
+ Tue, 28 Nov 2023 08:34:56 -0800 (PST)
+Received: from [10.10.51.254] (lmontsouris-659-1-84-229.w80-11.abo.wanadoo.fr.
+ [80.11.4.229]) by smtp.gmail.com with ESMTPSA id
+ z12-20020a5d640c000000b00332cc7c3aaasm15559955wru.21.2023.11.28.08.34.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 28 Nov 2023 08:34:56 -0800 (PST)
+Message-ID: <f5a9872a-0cff-45c6-b0e6-a8caec9d5755@linaro.org>
+Date: Tue, 28 Nov 2023 17:34:51 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATHv11 06/43] net/lwip: implement tftp cmd
+Content-Language: en-US, fr
+To: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de
+Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, trini@konsulko.com,
+ goldsimon@gmx.de
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-7-maxim.uvarov@linaro.org>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231127125726.3735-7-maxim.uvarov@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231128-b4-qcom-dt-compat-v4-5-949d0982d1de@linaro.org>
-References: <20231128-b4-qcom-dt-compat-v4-0-949d0982d1de@linaro.org>
-In-Reply-To: <20231128-b4-qcom-dt-compat-v4-0-949d0982d1de@linaro.org>
-To: Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, 
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Dzmitry Sankouski <dsankouski@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5331;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=GoC7TMy12LCcUreseBruRwwooFPfjXYG46ZgiFDMnn4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ00R2X11Re+XU9hFNiguGXqo6agMrczXWtT+e3K0VdX
- e37OjC0o5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEwkUI7hv4fzzurJO62Ubzzb
- /ztv6Xd7HY63L5niT2jaCMy2CfpvMoPhD+97jbk33nF/3nR10+r8mrD4h9NcWC/niTxMOVj3dMI
- tTQEA
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,153 +116,79 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux DTs stuff a value indicating if the USID is a USID or a GSID in the
-reg property, the Linux SPMI driver then reads the two address cells
-separately. U-boot's dev_read_addr() doesn't know how to handle this, so
-use ofnode_read_u32_index() to get just the USID.
+Hi Maxim,
 
-The Qcom pmic driver doesn't have support for GSID handling, so just
-ignore the second value for now.
+On 27/11/2023 13:56, Maxim Uvarov wrote:
+> U-Boot recently got support for an alternative network stack using LWIP.
+> Replace tftp command with the LWIP variant while keeping the output and
+> error messages identical.
+> 
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> ---
+>   include/net/lwip.h             |  13 ++++
+>   net/lwip/Makefile              |   1 +
+>   net/lwip/apps/tftp/Makefile    |   7 ++
+>   net/lwip/apps/tftp/lwip-tftp.c | 132 +++++++++++++++++++++++++++++++++
+>   4 files changed, 153 insertions(+)
+>   create mode 100644 net/lwip/apps/tftp/Makefile
+>   create mode 100644 net/lwip/apps/tftp/lwip-tftp.c
+> 
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt | 94 ------------------------
- drivers/power/pmic/pmic_qcom.c                   | 13 +++-
- 2 files changed, 10 insertions(+), 97 deletions(-)
+<snip>
 
-diff --git a/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt b/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt
-deleted file mode 100644
-index eb78e3ae7703..000000000000
---- a/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt
-+++ /dev/null
-@@ -1,94 +0,0 @@
--          Qualcomm SPMI PMICs multi-function device bindings
--
--The Qualcomm SPMI series presently includes PM8941, PM8841 and PMA8084
--PMICs.  These PMICs use a QPNP scheme through SPMI interface.
--QPNP is effectively a partitioning scheme for dividing the SPMI extended
--register space up into logical pieces, and set of fixed register
--locations/definitions within these regions, with some of these regions
--specifically used for interrupt handling.
--
--The QPNP PMICs are used with the Qualcomm Snapdragon series SoCs, and are
--interfaced to the chip via the SPMI (System Power Management Interface) bus.
--Support for multiple independent functions are implemented by splitting the
--16-bit SPMI slave address space into 256 smaller fixed-size regions, 256 bytes
--each. A function can consume one or more of these fixed-size register regions.
--
--Required properties:
--- compatible:      Should contain one of:
--                   "qcom,pm660",
--                   "qcom,pm660l",
--                   "qcom,pm7325",
--                   "qcom,pm8004",
--                   "qcom,pm8005",
--                   "qcom,pm8019",
--                   "qcom,pm8028",
--                   "qcom,pm8110",
--                   "qcom,pm8150",
--                   "qcom,pm8150b",
--                   "qcom,pm8150c",
--                   "qcom,pm8150l",
--                   "qcom,pm8226",
--                   "qcom,pm8350c",
--                   "qcom,pm8841",
--                   "qcom,pm8901",
--                   "qcom,pm8909",
--                   "qcom,pm8916",
--                   "qcom,pm8941",
--                   "qcom,pm8950",
--                   "qcom,pm8953",
--                   "qcom,pm8994",
--                   "qcom,pm8998",
--                   "qcom,pma8084",
--                   "qcom,pmd9635",
--                   "qcom,pmi8950",
--                   "qcom,pmi8962",
--                   "qcom,pmi8994",
--                   "qcom,pmi8998",
--                   "qcom,pmk8002",
--                   "qcom,pmk8350",
--                   "qcom,pmr735a",
--                   "qcom,smb2351",
--                   or generalized "qcom,spmi-pmic".
--- reg:             Specifies the SPMI USID slave address for this device.
--                   For more information see:
--                   Documentation/devicetree/bindings/spmi/spmi.yaml
--
--Required properties for peripheral child nodes:
--- compatible:      Should contain "qcom,xxx", where "xxx" is a peripheral name.
--
--Optional properties for peripheral child nodes:
--- interrupts:      Interrupts are specified as a 4-tuple. For more information
--                   see:
--                   Documentation/devicetree/bindings/spmi/qcom,spmi-pmic-arb.yaml
--- interrupt-names: Corresponding interrupt name to the interrupts property
--
--Each child node of SPMI slave id represents a function of the PMIC. In the
--example below the rtc device node represents a peripheral of pm8941
--SID = 0. The regulator device node represents a peripheral of pm8941 SID = 1.
--
--Example:
--
--	spmi {
--		compatible = "qcom,spmi-pmic-arb";
--
--		pm8941@0 {
--			compatible = "qcom,pm8941", "qcom,spmi-pmic";
--			reg = <0x0 SPMI_USID>;
--
--			rtc {
--				compatible = "qcom,rtc";
--				interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
--				interrupt-names = "alarm";
--			};
--		};
--
--		pm8941@1 {
--			compatible = "qcom,pm8941", "qcom,spmi-pmic";
--			reg = <0x1 SPMI_USID>;
--
--			regulator {
--				compatible = "qcom,regulator";
--				regulator-name = "8941_boost";
--			};
--		};
--	};
-diff --git a/drivers/power/pmic/pmic_qcom.c b/drivers/power/pmic/pmic_qcom.c
-index ad8daf43f06f..f2ac6494811d 100644
---- a/drivers/power/pmic/pmic_qcom.c
-+++ b/drivers/power/pmic/pmic_qcom.c
-@@ -66,12 +66,19 @@ static const struct udevice_id pmic_qcom_ids[] = {
- static int pmic_qcom_probe(struct udevice *dev)
- {
- 	struct pmic_qcom_priv *priv = dev_get_priv(dev);
-+	int ret;
- 
--	priv->usid = dev_read_addr(dev);
--
--	if (priv->usid == FDT_ADDR_T_NONE)
-+	/*
-+	 * dev_read_addr() can't be used here because the reg property actually
-+	 * contains two discrete values, not a single 64-bit address.
-+	 * The address is the first value.
-+	 */
-+	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &priv->usid);
-+	if (ret < 0)
- 		return -EINVAL;
- 
-+	debug("usid: %d\n", priv->usid);
+
+With:
+=======><==============================================
+diff --git a/net/lwip/apps/tftp/lwip-tftp.c b/net/lwip/apps/tftp/lwip-tftp.c
+index 7b384cecf8..1d1b7e8fa5 100644
+--- a/net/lwip/apps/tftp/lwip-tftp.c
++++ b/net/lwip/apps/tftp/lwip-tftp.c
+@@ -8,6 +8,8 @@
+  #include <command.h>
+  #include <console.h>
+  #include <bootstage.h>
++#include <efi_loader.h>
++#include <mapmem.h>
+
+  #include "tftp_client.h"
+  #include "tftp_server.h"
+@@ -17,6 +19,7 @@
+
+  #include <net/ulwip.h>
+
++static char *filename;
+  static ulong daddr;
+  static ulong size;
+  static unsigned int progress_print;
+@@ -38,6 +41,12 @@ static void tftp_close(void *handle)
+                 ulwip_exit(-1);
+                 return;
+         }
 +
- 	return 0;
- }
- 
++       if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
++               efi_set_bootdev("Net", "", filename,
++                               map_sysmem(daddr - size, 1),
++                               size);
++
+         ulwip_exit(0);
+  }
 
--- 
-2.42.1
+@@ -92,6 +101,7 @@ int ulwip_tftp(ulong addr, char *fname)
 
+         size = 0;
+         daddr = addr;
++       filename = fname;
+         server_ip = env_get("serverip");
+         if (!server_ip) {
+                 log_err("error: serverip variable has to be set\n");
+=================><======================================
+
+Loading EFI works again, and you can drop patch 15.
+
+Neil
