@@ -4,92 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC06FC4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 06:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E06C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 06:39:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCFDD875C5;
-	Tue, 28 Nov 2023 07:03:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3070C87569;
+	Tue, 28 Nov 2023 07:39:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kOVPA2wL";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BBD7875F0; Tue, 28 Nov 2023 07:03:37 +0100 (CET)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB57F870F2
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 07:03:34 +0100 (CET)
+ id F312F87579; Tue, 28 Nov 2023 07:39:24 +0100 (CET)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
+ [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id E214D8755D
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 07:39:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephen.graf@gmail.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3b83c4c5aefso3356648b6e.1
- for <u-boot@lists.denx.de>; Mon, 27 Nov 2023 22:03:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701151413; x=1701756213; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=csLS64+eI7GN6dTCIhzLKg4veI11cG+jyxOwg061tdQ=;
- b=kOVPA2wLwo+JFDy+Ow5sMU3gG7Ga0HNFRXTVW+rMnOIkGvaHzeFZuIYpyfPBlMNt4W
- TO3fYYyFiB8hweNc7XBcfYbcPIuVU3lkrk3wCLEDYBb0OyZNKovP2EN9TnMcl/IOa4z3
- Vbp9Xs3dRAjHzlcpcZyDmvlctdny4CypfLnGA7XMgIaMKivAgM3txx8PorgyWdn+IJWS
- vH2JDm6oMGJ3GKbqKOyFEKa8LkMFa5aD2uyyxoW7oMVC/QSXxR1injTc3OBgPPrzMeii
- 8RS3cJKjxp/iMjqwXCBktgPRpBb5RLDDDy+6wE5Joqn1BC9OmKw9Uu/GnWQB+ODoNmqG
- iEEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701151413; x=1701756213;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=csLS64+eI7GN6dTCIhzLKg4veI11cG+jyxOwg061tdQ=;
- b=MKaM650QAMJm9UicQEjUoNxCpXfSSkAbQiIyF5ofr4x8vekxpEmsHBbySWwegJlB2J
- pKGEN4AG1r5RSRT14aD0ypJDobfXT6tmUa7zjQnKd9l7ftc6Za4xraCCBYcaKphm/sNq
- WE25ukzm+Ja2yuodpZbo73moV+6jGq15B3i3riQEIaTxFkbL+N+8+6Z9XBxfZAisqFBV
- 9gUUXzgdfQRUgpenFbFtkBGRoGRyChMIkub6/5z6kF62Jm+jI/llMi1A50/T+7d/E8L3
- mK+XrO+gTWmyBVZqTCt9fmsYjBhwJOoNHn2RT7+/cCZ0cK8Xd1W/Z+r/XhnfIq1I4Sod
- Dxsg==
-X-Gm-Message-State: AOJu0YymcNsFiwv334K94YZOufwQLbkrn+9clE121QcTPqGDqPehptpu
- yHhfTkWRlwyyqAEnTGfdzd4=
-X-Google-Smtp-Source: AGHT+IFlMWUbEg/72ldhJnjxjuAfzS+5b73m0GCjdgzxC71pxh+Z8aAB0K0ARiAtdBYEHTbcrHSbGQ==
-X-Received: by 2002:a05:6870:ff4b:b0:1fa:1db4:46da with SMTP id
- qo11-20020a056870ff4b00b001fa1db446damr10802583oab.42.1701151413332; 
- Mon, 27 Nov 2023 22:03:33 -0800 (PST)
-Received: from [192.168.1.3] (d23-16-72-139.bchsia.telus.net. [23.16.72.139])
- by smtp.gmail.com with ESMTPSA id
- g8-20020a056a00078800b006cb574445efsm8231211pfu.88.2023.11.27.22.03.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Nov 2023 22:03:33 -0800 (PST)
-Message-ID: <5320e06e-8f0b-4d2c-9942-9e4c0a8b0c48@gmail.com>
-Date: Mon, 27 Nov 2023 22:03:32 -0800
+ spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+ (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+ by fd01.gateway.ufhost.com (Postfix) with ESMTP id 8717B24DB83;
+ Tue, 28 Nov 2023 14:39:17 +0800 (CST)
+Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 28 Nov
+ 2023 14:39:17 +0800
+Received: from localhost.localdomain (202.188.176.82) by EXMBX066.cuchost.com
+ (172.16.6.66) with Microsoft SMTP Server (TLS) id 15.0.1497.42;
+ Tue, 28 Nov 2023 14:39:15 +0800
+From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+To: <u-boot@lists.denx.de>
+CC: <jh80.chung@samsung.com>, <cheehong.ang@starfivetech.com>, Kuan Lim Lee
+ <kuanlim.lee@starfivetech.com>, Alex Soo <yuklin.soo@starfivetech.com>, "Wei
+ Liang Lim" <weiliang.lim@starfivetech.com>
+Subject: [PATCH v2] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+Date: Tue, 28 Nov 2023 14:38:30 +0800
+Message-ID: <20231128063859.615-1-kuanlim.lee@starfivetech.com>
+X-Mailer: git-send-email 2.42.0.windows.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] sunxi: H616: Add OrangePi Zero 3 board support
-Content-Language: en-CA
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Mikhail Kalashnikov <iuncuim@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-References: <20231114013106.31336-1-andre.przywara@arm.com>
- <20231114013106.31336-4-andre.przywara@arm.com>
- <0eab5c21-4fdc-478e-9071-f43c12e01fb3@gmail.com>
- <20231126002349.55404e43@slackpad.lan>
- <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
- <20231126122342.3944cad5@slackpad.lan>
- <d8862c87-072d-4f74-bb37-08f34c610cc8@gmail.com>
- <dae3bee5-e1c7-4154-959c-e41dabb5d844@gmail.com>
- <20231128013746.23648d39@slackpad.lan>
-From: Stephen Graf <stephen.graf@gmail.com>
-In-Reply-To: <20231128013746.23648d39@slackpad.lan>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [202.188.176.82]
+X-ClientProxiedBy: EXCAS066.cuchost.com (172.16.6.26) To EXMBX066.cuchost.com
+ (172.16.6.66)
+X-YovoleRuleAgent: yovoleflag
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,290 +63,542 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I did some digging into the orangepi SDK and it sort of looks like the 
-zero3 is set up for dram_clk = 792. I use their image as a fallback and 
-it has been stable (built linux kernel and set up debian rootfs).
+Cadence SDMMC v6 controller has a lot of changes on initialize
+compared to v4 controller. PHY is needed by v6 controller.
 
-from https://github.com/orangepi-xunlong/orangepi-build.git
+Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Co-developed-by: Alex Soo <yuklin.soo@starfivetech.com>
+Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+---
+Changes in v2
+- Rename file sdhci-cadence6-phy.c to sdhci-cadence6.c
+- Remove CONFIG_MMC_SDHCI_CADENCE_V6
+- Rewrite code of v6 configuration part
+- Add sdhci_cdns6_phy_init() function
+---
+ drivers/mmc/Makefile         |   1 +
+ drivers/mmc/sdhci-cadence.c  |  63 ++------
+ drivers/mmc/sdhci-cadence.h  |  69 ++++++++
+ drivers/mmc/sdhci-cadence6.c | 294 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 376 insertions(+), 51 deletions(-)
+ create mode 100644 drivers/mmc/sdhci-cadence.h
+ create mode 100644 drivers/mmc/sdhci-cadence6.c
 
-external/packages/pack-uboot/sun50iw9/bin/dts/orangepizero3-u-boot-legacy.dts: 
-                  dram_type = <0x8>;
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index 2c65c4765a..136f06600a 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -61,6 +61,7 @@ obj-$(CONFIG_MMC_SDHCI_ATMEL)		+=3D atmel_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_BCM2835)		+=3D bcm2835_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_BCMSTB)		+=3D bcmstb_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_CADENCE)		+=3D sdhci-cadence.o
++obj-$(CONFIG_MMC_SDHCI_CADENCE)		+=3D sdhci-cadence6.o
+ obj-$(CONFIG_MMC_SDHCI_AM654)		+=3D am654_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_IPROC)		+=3D iproc_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_KONA)		+=3D kona_sdhci.o
+diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+index 327a05ad11..a5533af045 100644
+--- a/drivers/mmc/sdhci-cadence.c
++++ b/drivers/mmc/sdhci-cadence.c
+@@ -17,56 +17,7 @@
+ #include <linux/libfdt.h>
+ #include <mmc.h>
+ #include <sdhci.h>
+-
+-/* HRS - Host Register Set (specific to Cadence) */
+-#define SDHCI_CDNS_HRS04		0x10		/* PHY access port */
+-#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
+-#define   SDHCI_CDNS_HRS04_RD			BIT(25)
+-#define   SDHCI_CDNS_HRS04_WR			BIT(24)
+-#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
+-#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
+-#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
+-
+-#define SDHCI_CDNS_HRS06		0x18		/* eMMC control */
+-#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
+-#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
+-#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
+-#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
+-
+-/* SRS - Slot Register Set (SDHCI-compatible) */
+-#define SDHCI_CDNS_SRS_BASE		0x200
+-
+-/* PHY */
+-#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
+-#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
+-#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
+-#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
+-#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
+-#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
+-#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
+-#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
+-#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
+-
+-/*
+- * The tuned val register is 6 bit-wide, but not the whole of the range =
+is
+- * available.  The range 0-42 seems to be available (then 43 wraps aroun=
+d to 0)
+- * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
+- */
+-#define SDHCI_CDNS_MAX_TUNING_LOOP	40
+-
+-struct sdhci_cdns_plat {
+-	struct mmc_config cfg;
+-	struct mmc mmc;
+-	void __iomem *hrs_addr;
+-};
++#include "sdhci-cadence.h"
+=20
+ struct sdhci_cdns_phy_cfg {
+ 	const char *property;
+@@ -163,6 +114,9 @@ static void sdhci_cdns_set_control_reg(struct sdhci_h=
+ost *host)
+ 	tmp &=3D ~SDHCI_CDNS_HRS06_MODE;
+ 	tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS06_MODE, mode);
+ 	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS06);
++
++	if (device_is_compatible(mmc->dev, "cdns,sd6hc"))
++		sdhci_cdns6_phy_adj(mmc->dev, plat, mode);
+ }
+=20
+ static const struct sdhci_ops sdhci_cdns_ops =3D {
+@@ -176,6 +130,9 @@ static int sdhci_cdns_set_tune_val(struct sdhci_cdns_=
+plat *plat,
+ 	u32 tmp;
+ 	int i, ret;
+=20
++	if (device_is_compatible(plat->mmc.dev, "cdns,sd6hc"))
++		return sdhci_cdns6_set_tune_val(plat, val);
++
+ 	if (WARN_ON(!FIELD_FIT(SDHCI_CDNS_HRS06_TUNE, val)))
+ 		return -EINVAL;
+=20
+@@ -282,7 +239,10 @@ static int sdhci_cdns_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+=20
+-	ret =3D sdhci_cdns_phy_init(plat, gd->fdt_blob, dev_of_offset(dev));
++	if (device_is_compatible(dev, "cdns,sd6hc"))
++		ret =3D sdhci_cdns6_phy_init(dev, plat);
++	else
++		ret =3D sdhci_cdns_phy_init(plat, gd->fdt_blob, dev_of_offset(dev));
+ 	if (ret)
+ 		return ret;
+=20
+@@ -301,6 +261,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
+ static const struct udevice_id sdhci_cdns_match[] =3D {
+ 	{ .compatible =3D "socionext,uniphier-sd4hc" },
+ 	{ .compatible =3D "cdns,sd4hc" },
++	{ .compatible =3D "cdns,sd6hc" },
+ 	{ /* sentinel */ }
+ };
+=20
+diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h
+new file mode 100644
+index 0000000000..c20efd899a
+--- /dev/null
++++ b/drivers/mmc/sdhci-cadence.h
+@@ -0,0 +1,69 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2016 Socionext Inc.
++ *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
++ */
++
++#ifndef SDHCI_CADENCE_H_
++#define SDHCI_CADENCE_H_
++
++/* HRS - Host Register Set (specific to Cadence) */
++/* PHY access port */
++#define SDHCI_CDNS_HRS04		0x10
++/* Cadence V4 HRS04 Description*/
++#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
++#define   SDHCI_CDNS_HRS04_RD			BIT(25)
++#define   SDHCI_CDNS_HRS04_WR			BIT(24)
++#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
++#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
++#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
++
++#define SDHCI_CDNS_HRS05		0x14
++
++/* eMMC control */
++#define SDHCI_CDNS_HRS06		0x18
++#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
++#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
++#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
++#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
++#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
++#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
++
++/* SRS - Slot Register Set (SDHCI-compatible) */
++#define SDHCI_CDNS_SRS_BASE		0x200
++
++/* Cadence V4 PHY Setting*/
++#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
++#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
++#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
++#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
++#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
++#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
++#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
++#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
++#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
++
++/*
++ * The tuned val register is 6 bit-wide, but not the whole of the range =
+is
++ * available.  The range 0-42 seems to be available (then 43 wraps aroun=
+d to 0)
++ * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
++ */
++#define SDHCI_CDNS_MAX_TUNING_LOOP	40
++
++struct sdhci_cdns_plat {
++	struct mmc_config cfg;
++	struct mmc mmc;
++	void __iomem *hrs_addr;
++};
++
++int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *pla=
+t, u32 mode);
++int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *pl=
+at);
++int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int =
+val);
++
++#endif
+diff --git a/drivers/mmc/sdhci-cadence6.c b/drivers/mmc/sdhci-cadence6.c
+new file mode 100644
+index 0000000000..ea0857e655
+--- /dev/null
++++ b/drivers/mmc/sdhci-cadence6.c
+@@ -0,0 +1,294 @@
++// SPDX-License-Identifier: GPL-2.0-or-platform_driver
++/*
++ * Copyright (C) 2023 Starfive.
++ *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
++ */
++
++#include <common.h>
++#include <dm.h>
++#include <asm/global_data.h>
++#include <dm/device_compat.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/bug.h>
++#include <linux/io.h>
++#include <linux/iopoll.h>
++#include <linux/sizes.h>
++#include <linux/libfdt.h>
++#include <mmc.h>
++#include <sdhci.h>
++#include "sdhci-cadence.h"
++
++/* IO Delay Information */
++#define SDHCI_CDNS_HRS07		0X1C
++#define   SDHCI_CDNS_HRS07_RW_COMPENSATE	GENMASK(20, 16)
++#define   SDHCI_CDNS_HRS07_IDELAY_VAL		GENMASK(4, 0)
++
++/* PHY Control and Status */
++#define SDHCI_CDNS_HRS09		0x24
++#define   SDHCI_CDNS_HRS09_RDDATA_EN		BIT(16)
++#define   SDHCI_CDNS_HRS09_RDCMD_EN		BIT(15)
++#define   SDHCI_CDNS_HRS09_EXTENDED_WR_MODE	BIT(3)
++#define   SDHCI_CDNS_HRS09_EXTENDED_RD_MODE	BIT(2)
++#define   SDHCI_CDNS_HRS09_PHY_INIT_COMPLETE	BIT(1)
++#define   SDHCI_CDNS_HRS09_PHY_SW_RESET		BIT(0)
++
++/* SDCLK adjustment */
++#define SDHCI_CDNS_HRS10		0x28
++#define   SDHCI_CDNS_HRS10_HCSDCLKADJ		GENMASK(19, 16)
++
++/* CMD/DAT output delay */
++#define SDHCI_CDNS_HRS16		0x40
++
++/* PHY Special Function Registers */
++/* register to control the DQ related timing */
++#define PHY_DQ_TIMING_REG_ADDR		0x2000
++
++/* register to control the DQS related timing */
++#define PHY_DQS_TIMING_REG_ADDR		0x2004
++
++/* register to control the gate and loopback control related timing */
++#define PHY_GATE_LPBK_CTRL_REG_ADDR	0x2008
++
++/* register to control the Master DLL logic */
++#define PHY_DLL_MASTER_CTRL_REG_ADDR	0x200C
++
++/* register to control the Slave DLL logic */
++#define PHY_DLL_SLAVE_CTRL_REG_ADDR	0x2010
++#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY	GENMASK(31, 24)
++#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY		GENMASK(7, 0)
++
++#define SDHCI_CDNS6_PHY_CFG_NUM		4
++#define SDHCI_CDNS6_CTRL_CFG_NUM	4
++
++struct sdhci_cdns6_phy_cfg {
++	const char *property;
++	u32 val;
++};
++
++struct sdhci_cdns6_ctrl_cfg {
++	const char *property;
++	u32 val;
++};
++
++static struct sdhci_cdns6_phy_cfg sd_ds_phy_cfgs[] =3D {
++	{ "cdns,phy-dqs-timing-delay-sd-ds", 0x00380004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-sd-ds", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-sd-ds", 0x00000000, },
++	{ "cdns,phy-dq-timing-delay-sd-ds", 0x00000001, },
++};
++
++static struct sdhci_cdns6_phy_cfg emmc_sdr_phy_cfgs[] =3D {
++	{ "cdns,phy-dqs-timing-delay-semmc-sdr", 0x00380004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-emmc-sdr", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-emmc-sdr", 0x00000000, },
++	{ "cdns,phy-dq-timing-delay-emmc-sdr", 0x00000001, },
++};
++
++static struct sdhci_cdns6_phy_cfg emmc_ddr_phy_cfgs[] =3D {
++	{ "cdns,phy-dqs-timing-delay-emmc-ddr", 0x00380004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-emmc-ddr", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-emmc-ddr", 0x00000000, },
++	{ "cdns,phy-dq-timing-delay-emmc-ddr", 0x10000001, },
++};
++
++static struct sdhci_cdns6_phy_cfg emmc_hs200_phy_cfgs[] =3D {
++	{ "cdns,phy-dqs-timing-delay-emmc-hs200", 0x00380004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-emmc-hs200", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-emmc-hs200", 0x00DADA00, },
++	{ "cdns,phy-dq-timing-delay-emmc-hs200", 0x00000001, },
++};
++
++static struct sdhci_cdns6_phy_cfg emmc_hs400_phy_cfgs[] =3D {
++	{ "cdns,phy-dqs-timing-delay-emmc-hs400", 0x00280004, },
++	{ "cdns,phy-gate-lpbk_ctrl-delay-emmc-hs400", 0x01A00040, },
++	{ "cdns,phy-dll-slave-ctrl-emmc-hs400", 0x00DAD800, },
++	{ "cdns,phy-dq-timing-delay-emmc-hs400", 0x00000001, },
++};
++
++static struct sdhci_cdns6_ctrl_cfg sd_ds_ctrl_cfgs[] =3D {
++	{ "cdns,ctrl-hrs09-timing-delay-sd-ds", 0x0001800C, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-sd-ds", 0x00020000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-sd-ds", 0x00000000, },
++	{ "cdns,ctrl-hrs07-timing-delay-sd-ds", 0x00080000, },
++};
++
++static struct sdhci_cdns6_ctrl_cfg emmc_sdr_ctrl_cfgs[] =3D {
++	{ "cdns,ctrl-hrs09-timing-delay-emmc-sdr", 0x0001800C, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-emmc-sdr", 0x00030000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-emmc-sdr", 0x00000000, },
++	{ "cdns,ctrl-hrs07-timing-delay-emmc-sdr", 0x00080000, },
++};
++
++static struct sdhci_cdns6_ctrl_cfg emmc_ddr_ctrl_cfgs[] =3D {
++	{ "cdns,ctrl-hrs09-timing-delay-emmc-ddr", 0x0001800C, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-emmc-ddr", 0x00020000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-emmc-ddr", 0x11000001, },
++	{ "cdns,ctrl-hrs07-timing-delay-emmc-ddr", 0x00090001, },
++};
++
++static struct sdhci_cdns6_ctrl_cfg emmc_hs200_ctrl_cfgs[] =3D {
++	{ "cdns,ctrl-hrs09-timing-delay-emmc-hs200", 0x00018000, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-emmc-hs200", 0x00080000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-emmc-hs200", 0x00000000, },
++	{ "cdns,ctrl-hrs07-timing-delay-emmc-hs200", 0x00090000, },
++};
++
++static struct sdhci_cdns6_ctrl_cfg emmc_hs400_ctrl_cfgs[] =3D {
++	{ "cdns,ctrl-hrs09-timing-delay-emmc-hs400", 0x00018000, },
++	{ "cdns,ctrl-hrs10-lpbk_ctrl-delay-emmc-hs400", 0x00080000, },
++	{ "cdns,ctrl-hrs16-slave-ctrl-emmc-hs400", 0x11000000, },
++	{ "cdns,ctrl-hrs07-timing-delay-emmc-hs400", 0x00080000, },
++};
++
++static u32 sdhci_cdns6_read_phy_reg(struct sdhci_cdns_plat *plat, u32 ad=
+dr)
++{
++	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
++	return readl(plat->hrs_addr + SDHCI_CDNS_HRS05);
++}
++
++static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat, u32 =
+addr, u32 val)
++{
++	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
++	writel(val, plat->hrs_addr + SDHCI_CDNS_HRS05);
++}
++
++static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat, bool =
+reset)
++{
++	void __iomem *reg =3D plat->hrs_addr + SDHCI_CDNS_HRS09;
++	u32 tmp;
++	int ret;
++
++	tmp =3D readl(reg);
++	tmp &=3D ~SDHCI_CDNS_HRS09_PHY_SW_RESET;
++
++	/* Switch On DLL Reset */
++	if (reset)
++		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 0);
++	else
++		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 1);
++
++	writel(tmp, reg);
++
++	/* After reset, wait until HRS09.PHY_INIT_COMPLETE is set to 1 within 3=
+000us*/
++	if (!reset) {
++		ret =3D readl_poll_timeout(reg, tmp, (tmp & SDHCI_CDNS_HRS09_PHY_INIT_=
+COMPLETE),
++					 3000);
++	}
++
++	return ret;
++}
++
++int sdhci_cdns6_phy_adj(struct udevice *dev, struct sdhci_cdns_plat *pla=
+t, u32 mode)
++{
++	DECLARE_GLOBAL_DATA_PTR;
++	struct sdhci_cdns6_phy_cfg *sdhci_cdns6_phy_cfgs;
++	struct sdhci_cdns6_ctrl_cfg *sdhci_cdns6_ctrl_cfgs;
++	const fdt32_t *prop;
++	u32 tmp;
++	int i, ret;
++
++	switch (mode) {
++	case SDHCI_CDNS_HRS06_MODE_SD:
++		sdhci_cdns6_phy_cfgs =3D sd_ds_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs =3D sd_ds_ctrl_cfgs;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_SDR:
++		sdhci_cdns6_phy_cfgs =3D emmc_sdr_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs =3D emmc_sdr_ctrl_cfgs;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_DDR:
++		sdhci_cdns6_phy_cfgs =3D emmc_ddr_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs =3D emmc_ddr_ctrl_cfgs;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_HS200:
++		sdhci_cdns6_phy_cfgs =3D emmc_hs200_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs =3D emmc_hs200_ctrl_cfgs;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_HS400:
++		sdhci_cdns6_phy_cfgs =3D emmc_hs400_phy_cfgs;
++		sdhci_cdns6_ctrl_cfgs =3D emmc_hs400_ctrl_cfgs;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	for (i =3D 0; i < SDHCI_CDNS6_PHY_CFG_NUM; i++) {
++		prop =3D fdt_getprop(gd->fdt_blob, dev_of_offset(dev),
++				   sdhci_cdns6_phy_cfgs[i].property, NULL);
++		if (prop)
++			sdhci_cdns6_phy_cfgs[i].val =3D *prop;
++	}
++
++	for (i =3D 0; i < SDHCI_CDNS6_CTRL_CFG_NUM; i++) {
++		prop =3D fdt_getprop(gd->fdt_blob, dev_of_offset(dev),
++				   sdhci_cdns6_ctrl_cfgs[i].property, NULL);
++		if (prop)
++			sdhci_cdns6_ctrl_cfgs[i].val =3D *prop;
++	}
++
++	/* Switch On the DLL Reset */
++	sdhci_cdns6_reset_phy_dll(plat, true);
++
++	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR, sdhci_cdns6_ph=
+y_cfgs[0].val);
++	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR, sdhci_cdns=
+6_phy_cfgs[1].val);
++	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, sdhci_cdns=
+6_phy_cfgs[2].val);
++
++	/* Switch Off the DLL Reset */
++	ret =3D sdhci_cdns6_reset_phy_dll(plat, false);
++	if (ret) {
++		printf("sdhci_cdns6_reset_phy is not completed\n");
++		return ret;
++	}
++
++	/* Set PHY DQ TIMING control register */
++	sdhci_cdns6_write_phy_reg(plat, PHY_DQ_TIMING_REG_ADDR, sdhci_cdns6_phy=
+_cfgs[3].val);
++
++	/* Set HRS09 register */
++	tmp =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS09);
++	tmp &=3D ~(SDHCI_CDNS_HRS09_EXTENDED_WR_MODE |
++		 SDHCI_CDNS_HRS09_EXTENDED_RD_MODE |
++		 SDHCI_CDNS_HRS09_RDDATA_EN |
++		 SDHCI_CDNS_HRS09_RDCMD_EN);
++	tmp |=3D sdhci_cdns6_ctrl_cfgs[0].val;
++	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS09);
++
++	/* Set HRS10 register */
++	tmp =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS10);
++	tmp &=3D ~SDHCI_CDNS_HRS10_HCSDCLKADJ;
++	tmp |=3D sdhci_cdns6_ctrl_cfgs[1].val;
++	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS10);
++
++	/* Set HRS16 register */
++	writel(sdhci_cdns6_ctrl_cfgs[2].val, plat->hrs_addr + SDHCI_CDNS_HRS16)=
+;
++
++	/* Set HRS07 register */
++	writel(sdhci_cdns6_ctrl_cfgs[3].val, plat->hrs_addr + SDHCI_CDNS_HRS07)=
+;
++
++	return 0;
++}
++
++int sdhci_cdns6_phy_init(struct udevice *dev, struct sdhci_cdns_plat *pl=
+at)
++{
++	return sdhci_cdns6_phy_adj(dev, plat, SDHCI_CDNS_HRS06_MODE_SD);
++}
++
++int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int =
+val)
++{
++	u32 tmp, tuneval;
++
++	tuneval =3D (val * 256) / SDHCI_CDNS_MAX_TUNING_LOOP;
++
++	tmp =3D sdhci_cdns6_read_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR);
++	tmp &=3D ~(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY |
++		 PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY);
++	tmp |=3D FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY, tuneval)=
+ |
++		FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY, tuneval);
++	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, tmp);
++
++	return 0;
++}
+--=20
+2.34.1
 
-
-external/packages/pack-uboot/sun50iw9/bin/sys_config/sys_config_orangepizero3.fex
-
-[dram_para]
-dram_clk = 792
-dram_type = 8
-dram_dx_odt = 0x07070707
-dram_dx_dri = 0x0e0e0e0e
-dram_ca_dri = 0x0e0e
-dram_odt_en = 0xaaaaeeee
-dram_para1 = 0x30fa
-dram_para2 = 0x0000
-dram_mr0 = 0x0
-dram_mr1 = 0x34
-dram_mr2 = 0x1b
-dram_mr3 = 0x33
-dram_mr4 = 0x3
-dram_mr5 = 0x0
-dram_mr6 = 0x0
-dram_mr11 = 0x4
-dram_mr12 = 0x72
-dram_mr13 = 0x0
-dram_mr14 = 0x9
-dram_mr16 = 0x0
-dram_mr17 = 0x0
-dram_mr22 = 0x24
-dram_tpr0 = 0x0
-dram_tpr1 = 0x0
-dram_tpr2 = 0x0
-dram_tpr3 = 0x0
-dram_tpr6 = 0x35808080
-dram_tpr10 = 0x402f6663
-dram_tpr11 = 0x36363535
-dram_tpr12 = 0x10101110
-dram_tpr13 = 0x2080C60
-
-
-[dram_para16]
-dram_clk = 792
-dram_type = 8
-dram_dx_odt = 0x07070707
-dram_dx_dri = 0x0e0e0e0e
-dram_ca_dri = 0x0e0e
-dram_odt_en = 0xaaaaeeee
-dram_para1 = 0x30fa
-dram_para2 = 0x0000
-dram_mr0 = 0x0
-dram_mr1 = 0x34
-dram_mr2 = 0x1b
-dram_mr3 = 0x33
-dram_mr4 = 0x3
-dram_mr5 = 0x0
-dram_mr6 = 0x0
-dram_mr11 = 0x4
-dram_mr12 = 0x72
-dram_mr13 = 0x0
-dram_mr14 = 0x9
-dram_mr16 = 0x0
-dram_mr17 = 0x0
-dram_mr22 = 0x24
-dram_tpr0 = 0x0
-dram_tpr1 = 0x0
-dram_tpr2 = 0x0
-dram_tpr3 = 0x0
-dram_tpr6 = 0x35808080
-dram_tpr10 = 0x402f6663
-dram_tpr11 = 0x36363535
-dram_tpr12 = 0x10101110
-dram_tpr13 = 0x2080C60
-
-On 2023-11-27 5:37 p.m., Andre Przywara wrote:
-> On Mon, 27 Nov 2023 14:31:19 -0800
-> Stephen Graf <stephen.graf@gmail.com> wrote:
-> 
-> Hi,
-> 
->> Since the last test I rebuilt u-boot without the
->> "CONFIG_DRAM_CLK=792" in the defconfig and got the wrong DRAM size
->> problem (showing 2G instead of 1G). I had to do a power down/up to see this.
->> Are you planning to add this parameter to your patch?
-> 
-> This symptom is pretty surely not directly related to the DRAM
-> frequency, it's caused by a missing barrier or delay *somewhere*.
-> People report that this is fixed by adding another "dsb();" at the
-> beginning of the mctl_mem_matches() function, but I don't have a good
-> explanation why exactly there, and would like to avoid submitting
-> patches that "just seem to work (TM)".
-> 
-> If I find some time, I will try to setup some automated environment
-> where I can run some experiments with different barrier locations.
-> I can offer some rationale for putting it at the end of the function(s)
-> that call mctl_mem_matches(), so hope that this fixes it.
-> 
-> Cheers,
-> Andre
-> 
->> U-Boot 2024.01-rc3-00012-g1fcf078f54-dirty (Nov 27 2023 - 12:25:33
->> -0800) Allwin                                                      ner
->> Technology
->>
->> CPU:   Allwinner H616 (SUN50I)
->> Model: OrangePi Zero3
->> DRAM:  2 GiB
->>
->>
->> On 2023-11-27 12:21 p.m., Stephen Graf wrote:
->>> Yes I forgot about the zBIT patch. With this patch also included I built
->>> and retested u-boot loaded from SPI flash.  The two warning/error
->>> messages disappeared and the flash worked properly and booted from a USB
->>> device.
->>>
->>> There was one message that I did not understand:
->>> "Loading Environment from SPIFlash... SF: Detected zb25vq128 with page
->>> size 256 Bytes, erase size 4 KiB, total 16 MiB
->>> *** Warning - bad CRC, using default environment"
->>>
->>> I tried to follow the u-boot documentation on writing the SPI flash but
->>> had problems with the write command.  When issued it returned
->>> immediately. The erase command took about 5 sec to execute. I researched
->>> use of mtd commands and got a suggestion to use cat instead, which worked.
->>>
->>> "root@orangepizero3:~# mtdinfo
->>> Count of MTD devices:           1
->>> Present MTD devices:            mtd0
->>> Sysfs interface supported:      yes
->>> root@orangepizero3:~# mtd_debug erase /dev/mtd0 0 0xf0000
->>> Erased 983040 bytes from address 0x00000000 in flash
->>> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000
->>> /home/sysadmin/u-boot-sunxi-with-spl.bin
->>> file_to_flash: fread, size 0xf0000, n 0xf0000
->>> fread(): Success
->>> root@orangepizero3:~# cat /home/sysadmin/u-boot-sunxi-with-spl.bin >
->>> /dev/mtd0
->>>
->>>
->>> Console log of boot:
->>>
->>> U-Boot SPL 2024.01-rc3-00012-g1fcf078f54-dirty (Nov 27 2023 - 10:17:46
->>> -0800)
->>> DRAM: 1024 MiB
->>> Trying to boot from sunxi SPI
->>> NOTICE:  BL31: v2.10.0  (debug):v2.10.0
->>> NOTICE:  BL31: Built : 18:07:18, Nov 23 2023
->>> NOTICE:  BL31: Detected Allwinner H616 SoC (1823)
->>> NOTICE:  BL31: Found U-Boot DTB at 0x4a0b2798, model: OrangePi Zero3
->>> INFO:    ARM GICv2 driver initialized
->>> INFO:    Configuring SPC Controller
->>> INFO:    PMIC: Probing AXP305 on RSB
->>> ERROR:   RSB: set run-time address: 0x10003
->>> INFO:    Could not init RSB: -65539
->>> INFO:    BL31: Platform setup done
->>> INFO:    BL31: Initializing runtime services
->>> INFO:    BL31: cortex_a53: CPU workaround for erratum 855873 was applied
->>> INFO:    BL31: cortex_a53: CPU workaround for erratum 1530924 was applied
->>> INFO:    PSCI: Suspend is unavailable
->>> INFO:    BL31: Preparing for EL3 exit to normal world
->>> INFO:    Entry point address = 0x4a000000
->>> INFO:    SPSR = 0x3c9
->>> INFO:    Changed devicetree.
->>>
->>>
->>> U-Boot 2024.01-rc3-00012-g1fcf078f54-dirty (Nov 27 2023 - 10:17:46
->>> -0800) Allwinner Technology
->>>
->>> CPU:   Allwinner H616 (SUN50I)
->>> Model: OrangePi Zero3
->>> DRAM:  1 GiB
->>> Core:  57 devices, 25 uclasses, devicetree: separate
->>> WDT:   Not starting watchdog@30090a0
->>> MMC:   mmc@4020000: 0
->>> Loading Environment from SPIFlash... SF: Detected zb25vq128 with page
->>> size 256 Bytes, erase size 4 KiB, total 16 MiB
->>> *** Warning - bad CRC, using default environment
->>>
->>> Loading Environment from FAT... Card did not respond to voltage select!
->>> : -110
->>> ** Bad device specification mmc 0 **
->>> In:    serial@5000000
->>> Out:   serial@5000000
->>> Err:   serial@5000000
->>> Allwinner mUSB OTG (Peripheral)
->>> Net:   eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS
->>> ep2in
->>> MAC de:ad:be:ef:00:01
->>> HOST MAC de:ad:be:ef:00:00
->>> RNDIS ready
->>> , eth1: usb_ether
->>> starting USB...
->>> Bus usb@5200000: USB EHCI 1.00
->>> Bus usb@5200400: USB OHCI 1.0
->>> scanning bus usb@5200000 for devices... Device NOT ready
->>>      Request Sense returned 02 3A 00
->>> Device NOT ready
->>>      Request Sense returned 02 3A 00
->>> Device NOT ready
->>>      Request Sense returned 02 3A 00
->>> 2 USB Device(s) found
->>> scanning bus usb@5200400 for devices... 1 USB Device(s) found
->>>          scanning usb for storage devices... 1 Storage Device(s) found
->>> Hit any key to stop autoboot:  0
->>> Card did not respond to voltage select! : -110
->>>
->>> Device 0: Vendor: Generic- Rev: 1.00 Prod: SD/MMC
->>>               Type: Removable Hard Disk
->>>               Capacity: 3828.0 MB = 3.7 GB (7839744 x 512)
->>> ... is now current device
->>> Scanning usb 0:1...
->>> Found U-Boot script /boot.scr
->>> 1575 bytes read in 1 ms (1.5 MiB/s)
->>> ## Executing script at 4fc00000
->>> Mainline u-boot / new-style environment detected.
->>> This installer medium does not contain a suitable device-tree file for
->>> this system (allwinner/sun50i-h618-orangepi-zero3.dtb). Aborting boot
->>> process.
->>> SCRIPT FAILED: continuing...
->>> Found U-Boot script /boot/boot.scr
->>> 621 bytes read in 2 ms (302.7 KiB/s)
->>> ## Executing script at 4fc00000
->>> 19472 bytes read in 3 ms (6.2 MiB/s)
->>> Working FDT set to 4fa00000
->>> 7088139 bytes read in 326 ms (20.7 MiB/s)
->>> 22491144 bytes read in 1031 ms (20.8 MiB/s)
->>> Moving Image from 0x40080000 to 0x40200000, end=41800000
->>> ## Loading init Ramdisk from Legacy Image at 4ff00000 ...
->>>      Image Name:   uInitrd
->>>      Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
->>>      Data Size:    7088075 Bytes = 6.8 MiB
->>>      Load Address: 00000000
->>>      Entry Point:  00000000
->>>      Verifying Checksum ... OK
->>> ## Flattened Device Tree blob at 4fa00000
->>>      Booting using the fdt blob at 0x4fa00000
->>> Working FDT set to 4fa00000
->>>      Loading Ramdisk to 4993d000, end 49fff7cb ... OK
->>>      Loading Device Tree to 00000000498cf000, end 000000004993cfff ... OK
->>> Working FDT set to 498cf000
->>>
->>> Starting kernel ...
->>>
->>> [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
->>> [    0.000000] Linux version 6.6.2 (orangepi@orangepizero3) (gcc (Debian
->>> 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40) #1 SMP Sat Nov
->>> 25 18:37:47 UTC 2023
->>>
->>>
->>> On 2023-11-26 4:23 a.m., Andre Przywara wrote:
->>>> On Sat, 25 Nov 2023 20:27:05 -0800
->>>> Stephen Graf <stephen.graf@gmail.com> wrote:
->>>>
->>>> Hi Stephen,
->>>>   
->>>>> I built u-boot with the additional parameter for usb and it works, I
->>>>> think.  There was one message that might be of concern "
->>>>> Card did not respond to voltage select! : -110".
->>>>
->>>> This is a normal, though admittedly confusing message if no SD card is
->>>> inserted. The code tries to (unconditionally) access the SD card, and
->>>> sees that no card is there, the missing respond to the voltage select
->>>> command is just the first real proof of this.
->>>>   
->>>>> I am not sure of the details of the boot.cmd. The output below came from
->>>>> the supplier image on an SD plugged into a USB card reader. The SD
->>>>> slot of the board was empty.
->>>>>
->>>>> I was able to install u-boot to the SPI flash memory and there is a
->>>>> warning message from that also: "
->>>>> Loading Environment from SPIFlash... jedec_spi_nor flash@0:
->>>>> unrecognized JEDEC id bytes: 5e, 40, 18
->>>>> *** Warning - spi_flash_probe_bus_cs() failed, using default
->>>>> environment"
->>>>
->>>> So for a start there is no environment on the SPI flash yet, so it
->>>> wouldn't do anything. But the "unrecognised JEDEC id bytes" message
->>>> doesn't sound right. Can you dig into this? Do you have patch 1/3
->>>> applied, which tells U-Boot about 0x5e meaning zBIT?
->>>>   
->>
-> 
