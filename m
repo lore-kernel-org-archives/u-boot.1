@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12BF6C4167B
-	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 23:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3BB0C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 28 Nov 2023 23:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16A0087753;
-	Wed, 29 Nov 2023 00:17:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id AECC287788;
+	Wed, 29 Nov 2023 00:21:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="MZeoNqE7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AGqs7TG6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 446DF875AF; Wed, 29 Nov 2023 00:17:51 +0100 (CET)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 032F887779; Wed, 29 Nov 2023 00:21:18 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE90A86BDB
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 00:17:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3F8386F7E
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 00:21:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:Mime-Version:Message-Id:Cc:To:From
- :Date:subject:date:message-id:reply-to;
- bh=S/eXjZPvACMU1aLL1DiWcX5iM5taUUsmiWWQifkcaIU=; b=MZeoNqE7CYAtVufH0uWNLSxA9G
- i7nAbdbA0hQ85GA9wXPwhuLWRXrZZNFocu5XZQaxDo9bzuCmYh/Uv/UBsquIjxzEE1R97VWMJfy+N
- 6S80xJxEbkP+I4jZGk4O5XlEJEI051t5Fp08sSniyJkUdhelFXDg8J8yJWSQOavQrVrc=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:55330
- helo=pettiford) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1r87Km-0008IT-GJ; Tue, 28 Nov 2023 18:17:42 -0500
-Date: Tue, 28 Nov 2023 18:17:40 -0500
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: =?UTF-8?B?U3rFkWtlIEvDoWxtw6Fu?= Benjamin <egyszeregy@freemail.hu>
-Cc: Fabio Estevam <festevam@gmail.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "otavio@ossystems.com.br"
- <otavio@ossystems.com.br>, "sbabic@denx.de" <sbabic@denx.de>
-Message-Id: <20231128181740.7fea242b489d9efa261904d4@hugovil.com>
-In-Reply-To: <A2E88A.1BiPC1JJI4ID.2cqy6ZTmX2YXIGOSvxV@freemail.hu>
-References: <20231107221617.470-1-egyszeregy@freemail.hu>
- <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
- <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
- <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
- <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
- <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
- <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
- <CAOMZO5ApoA7+o_XOz04OLWpW-+hwhW-M9cROSbV1vADmDnydJw@mail.gmail.com>
- <A2E7RA.WAMpX3ekvN7A.ZZTk9ZUF8rABr6qdjSu@freemail.hu>
- <CAOMZO5AK3cxy_mOD_J9UPPCzFVfzoVw=OmACeh2+27k+4CkCnQ@mail.gmail.com>
- <A2E88A.1BiPC1JJI4ID.2cqy6ZTmX2YXIGOSvxV@freemail.hu>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2858eda2919so1228430a91.0
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 15:21:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701213674; x=1701818474; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YTEizfZjcoLmjnIQRQtHoTsQb23fJN6wLS6I2FIxSAg=;
+ b=AGqs7TG6veHvwabVyaRJKqk+EKb9+c3uk/HAAAPgfyqBWFUlM1O4h696h0BLRKx2ZM
+ t1b+8USqp2Jvg3yFqRSnRyX8zgIB+QHGw8VP6zg/x1cIAsk7ZfmfsY1ehMnDvpcKiIHo
+ zpOJ8z7Snfa1y+gha8gjC7/HFXDMyRMwDvU8Oz1JUPWAdpez/5b1a9SdPYxdQGry3csb
+ x6IItQoEzHSyqVgYvbw+onTOlqhBxced211CuB5S8vWauQ3drcMlue1NXna23pOtEiEB
+ Qe2TbUiH/bLrjP85OsJ8/Qs1xD5opsN0LRpDjFICx3hNzlWUioa29TAs5TgX1k4X026k
+ NVHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701213674; x=1701818474;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YTEizfZjcoLmjnIQRQtHoTsQb23fJN6wLS6I2FIxSAg=;
+ b=Sy1Vgd7Ht8yywv93CLEBneGHYAGpXw9YKWE0UwN04GqBzmysIgn3kS5CX1su6qj9iY
+ VY+6y9leWMwYLDMRd6MTeSQTf716Av5sUAp0AZ1B+iRsKnS+QpcGNY+UHg95O/bWzDKp
+ YY5FtJ27DBNBzVwIvUpfv9mmmn5jcTn+479die+TZ7JrKkyvqxNMvdkJcRMAZvJafaio
+ nz+Sez7h3Bi1pzWCJB3YR1+awfWKRaHiSq3M11p6q+nkHEVxcA+XykU7/dPIdll5LX2T
+ Ui7ZHxDQXvbfnKT2W9lfw+VdE4RWjLVYBBlZqudhul05KtspTvUw8E3G0KgTGh8Pcw/m
+ 3QNA==
+X-Gm-Message-State: AOJu0YwE0WL2rNE1DAkCErrEmlVVb/3m2HgKtv5c8IX/11ugm6Ps1yVf
+ jsi6cYz5iiNyO27/E6rmy+0QxBElrjCFiLhKtgw=
+X-Google-Smtp-Source: AGHT+IH6r4nMdqHM/pIfR3uSPXq6O7Di0/uFnbt8RFEw/yXqDBOFNXzW7FFWuTfZ5OyAUMM/UnRvb39ukqZspq1TKLg=
+X-Received: by 2002:a17:90a:d258:b0:285:b6b1:a55e with SMTP id
+ o24-20020a17090ad25800b00285b6b1a55emr11594997pjw.3.1701213674111; Tue, 28
+ Nov 2023 15:21:14 -0800 (PST)
+MIME-Version: 1.0
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <CAJ+vNU3BRgqByLKGe0=D6omSb+p5zqwq2PCvOj0si7guZHsh+w@mail.gmail.com>
+In-Reply-To: <CAJ+vNU3BRgqByLKGe0=D6omSb+p5zqwq2PCvOj0si7guZHsh+w@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 28 Nov 2023 20:21:03 -0300
+Message-ID: <CAOMZO5Dj6RUB1ktE9Adp0UzwGev1Rub7KBPOVC=GOGb45feAbg@mail.gmail.com>
+Subject: Re: [PATHv11 00/43] net/lwip: add lwip library for the network stack
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, trini@konsulko.com, goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,16 +89,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Nov 2023 23:26:08 +0000 (GMT)
-Szőke Kálmán Benjamin <egyszeregy@freemail.hu> wrote:
+Hi Tim and Maxim,
 
-> It was absolutely conform, i supressed the potentional warning. Once again i say, i will not remove it, if you do not liket it you can remoce as a maintainer. My patch is ready and final. Let's do something to improve i.MX family as a maintainer. I am realy sad to see in last 2-3 years there was no any significats new features for boards since their initial commits.-------- Eredeti levél --------Feladó: Fabio Estevam <festevam@gmail.com>Dátum: 2023 november 27 21:39:19Tárgy: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detectCímzett: Szőke Kálmán Benjamin <egyszeregy@freemail.hu>On Mon, Nov 27, 2023 at 4:55 PM Szőke Kálmán Benjamin <egyszeregy@freemail.hu> wrote: > > Unused function parameters should be removed >
- https://rules.sonarsource.com/c/tag/based-on-misra/RSPEC-1172/  From
-this same URL:  "Exceptions There are some cases when you want to have
-an unused parameter (usually because the function has to conform to a
-fixed prototype"  which is the case here with your patch, where you need to conform to: int board_mmc_get_env_dev(int devno) 
+On Tue, Nov 28, 2023 at 8:05=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-Hi,
-please fix your mailer to wrap lines properly.
+> Hi Maxim,
+>
+> I've tried this series on my imx8mm-venice boards and find that basic
+> ping/dhcp/tftp breaks:
+> u-boot=3D> net list
+> eth0 : ethernet@30be0000 00:d0:12:78:f8:01 active
+> u-boot=3D> setenv ipaddr 192.168.1.1
+> u-boot=3D> ping 192.168.1.146
+> eth0: ethernet@30be0000 00:d0:12:78:f8:01 active
+> Using ethernet@30be0000 device
+> pinging addr: 192.168.1.146
+> ping_tmo: ping failed; host 192.168.1.146 is not alive
+> u-boot=3D> dhcp
+> init already done for ethernet@30be0000
+> dhcp_tmo 20/20
+> dhcp_tmo 19/20
+> dhcp_tmo 18/20
+> dhcp_tmo 17/20
+> dhcp_tmo 16/20
+> dhcp_tmo 15/20
+> dhcp_tmo 14/20
+> dhcp_tmo 13/20
+> dhcp_tmo 12/20
+> dhcp_tmo 11/20
+> dhcp_tmo 10/20
+> dhcp_tmo 9/20
+> dhcp_tmo 8/20
+> dhcp_tmo 7/20
+> dhcp_tmo 6/20
+> dhcp_tmo 5/20
+> dhcp_tmo 4/20
+> dhcp_tmo 3/20
+> dhcp_tmo 2/20
+> dhcp_tmo 1/20
+> dhcp_tmo 0/20
+> DHCP client timeout
 
-Hugo Villeneuve.
+I got the same result on a custom imx8mn-based board.
+
+> u-boot=3D> tftpboot $loadaddr venice/Image
+> init already done for ethernet@30be0000
+> TFTP from server 192.168.1.146; our IP address is 192.168.1.1
+> Filename 'venice/Image'.
+> Load address: 0x48200000
+> Loading:
+> ^ cntl-c after a minute or so of no output
+>
+> Is there some basic config here that I may have wrong?
+>
+> Also, while trying to see if I can determine where things broke I
+> noticed there is build breakage starting with 'net/lwip: integrate
+> lwIP library'
+> In file included from net/lwip/lwip-external/src/core/init.c:38:
+> ./net/lwip/lwip-external/src/include/lwip/opt.h:51:10: fatal error: lwipo=
+pts.h:
+> No such file or directory
+>    51 | #include "lwipopts.h"
+>       |          ^~~~~~~~~~~~
+> compilation terminated.
+> make[2]: *** [scripts/Makefile.build:256: net/lwip/lwip-external/src/core=
+/init.o
+> ] Error 1
+> make[1]: *** [scripts/Makefile.build:397: net/lwip] Error 2
+> make: *** [Makefile:1858: net] Error 2
+
+I haven't noticed this build error here though. I applied Maxim's
+series against master.
