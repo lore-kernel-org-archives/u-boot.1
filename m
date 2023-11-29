@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B7E0C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 15:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDDF2C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 15:23:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE7486D34;
-	Wed, 29 Nov 2023 16:23:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F1E5D87550;
+	Wed, 29 Nov 2023 16:23:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Dp2E9kFa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V836OCU+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7285386D4C; Wed, 29 Nov 2023 16:23:22 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E181D8642D; Wed, 29 Nov 2023 16:23:22 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A24EA86D34
+ by phobos.denx.de (Postfix) with ESMTPS id E0FD887550
  for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 16:23:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ATFND6D097636;
- Wed, 29 Nov 2023 09:23:13 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701271393;
- bh=jUdfV9jea2KpEXaSAvKmcWd8YVO0utSMHe0peC7VmeM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Dp2E9kFaGKejSHVIjBtl9+zZmqTKmaKW74OJCufRnWtJUde9vCjszsZ4c1mCRQDAW
- vTXCsgVlvpltD0oFvba/U6JPhyW5JewXGD6SjCqH4k+EM+YwcpyGP33XGBOK0GGiH2
- Q3Om3QUjXdSBvox0fmZQXfZf0k4Lmfz1ixqpRtCE=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ATFND9B012190
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 29 Nov 2023 09:23:13 -0600
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
- Nov 2023 09:23:12 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 29 Nov 2023 09:23:13 -0600
-Received: from [10.249.36.40] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ATFNCgu008606;
- Wed, 29 Nov 2023 09:23:12 -0600
-Message-ID: <0769310a-30c9-42f1-9bb6-c70ef606c1ae@ti.com>
-Date: Wed, 29 Nov 2023 09:23:12 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-da41acaea52so6240476276.3
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 07:23:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1701271395; x=1701876195; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bsDdZaTjPQbPTKiqXkuoTCyp0dBi3Zl5HI8EEQKgMAs=;
+ b=V836OCU+tvFq9j/MNGUdlR2dy7T7Mz+8Ld5/PG+Ra5zzciHW1ML75mR9+M46Cp4C89
+ lrnJF1hFq0OPipEWHZ3+9pVk9BmIQMi6QRgrUXTYBowU71vuKjqie6lV03xqWevLfNCO
+ qF4tm6SqPS3jMDrMdv5PW6nFg7vEL7b51fjSM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701271395; x=1701876195;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bsDdZaTjPQbPTKiqXkuoTCyp0dBi3Zl5HI8EEQKgMAs=;
+ b=unP8Ldni7L7Me/4C7rm/pJ57hufcy6e88Uzy/0k2A+nI+Bw2qie6ldfKObiupsoEVh
+ On88hDwOgz/uO2VKqygD/QBDIVWR01dd2B87qVyWKOAgSCO1QWefS9DuLyEb+/Vbbh9j
+ CsR5ZaOS12ecvirp0l4tdtMArkfJwZhwE+CbMxPdNECmIwVrPQTiXDDmX2ZFPT/cPubP
+ vDULCUaI0v5OYUe7dDUq8/Zabh9tsLUWDzZpJar03rb4pAp/EQcfIKSTspuAMm/k6y/M
+ O9wtgBJxYDrzlHYODTPLgoHelq+zr0eeHfskGdeFxK2m0PPuMd/MbJDJ+teZkM6IutoX
+ 8Ghg==
+X-Gm-Message-State: AOJu0YzKhNw90AHL2lhvQJ7g+RcXvcSY9wD1jKsbqUkN1nl9sW0yPeGS
+ 6jeMyVjnNDixGqk54neevBDK4w==
+X-Google-Smtp-Source: AGHT+IG2HgODyXiomRr35zVnpNMepCRdYMHJ1Rm3oIqhBkLnHpVODyA70eEon6dSIhEdg9bqNUcpUg==
+X-Received: by 2002:a81:5207:0:b0:5c9:8532:e865 with SMTP id
+ g7-20020a815207000000b005c98532e865mr20093084ywb.16.1701271393984; 
+ Wed, 29 Nov 2023 07:23:13 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-9fa4-b7c8-6a9a-173e.res6.spectrum.com.
+ [2603:6081:7b00:6400:9fa4:b7c8:6a9a:173e])
+ by smtp.gmail.com with ESMTPSA id
+ w204-20020a817bd5000000b005c98f9d2444sm4577147ywc.3.2023.11.29.07.23.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Nov 2023 07:23:13 -0800 (PST)
+Date: Wed, 29 Nov 2023 10:23:11 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>
+Subject: Re: [PATCH v2 6/6] led: add TI LP5562 LED driver
+Message-ID: <20231129152311.GA1004509@bill-the-cat>
+References: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
+ <20231117113811.149329-7-rasmus.villemoes@prevas.dk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] arm: mach-k3: Do not map ATF and OPTEE regions in
- MMU
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon
- <nm@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Apurva Nandan <a-nandan@ti.com>
-CC: <u-boot@lists.denx.de>
-References: <20231128170528.407707-1-afd@ti.com>
- <20231128170528.407707-3-afd@ti.com>
- <2c6f7369-ff74-455d-a3f3-d40abde033de@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <2c6f7369-ff74-455d-a3f3-d40abde033de@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="65mZLpyI8XQWBJ04"
+Content-Disposition: inline
+In-Reply-To: <20231117113811.149329-7-rasmus.villemoes@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,108 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/29/23 2:00 AM, Manorit Chawdhry wrote:
-> Hi Andrew,
-> 
-> On 28/11/23 22:35, Andrew Davis wrote:
->> ATF and OPTEE regions may be firewalled from non-secure entities. To
->> prevent access to this area we leave a hole there in the MMU map. This
->> is the same idea as [0] but we complete that patch by adding the same
->> for AM65, J721e, J7200, and J721s2 here.
->>
->> [0] commit 0688ff3ae23c ("arm: mach-k3: arm64-mmu: do not map ATF and OPTEE regions in A53 MMU")
->>
->> Signed-off-by: Andrew Davis <afd@ti.com>
->> ---
->>   arch/arm/mach-k3/arm64-mmu.c | 14 ++++++++++----
->>   1 file changed, 10 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
->> index d872ed714c4..5c858ae0f84 100644
->> --- a/arch/arm/mach-k3/arm64-mmu.c
->> +++ b/arch/arm/mach-k3/arm64-mmu.c
->> @@ -24,7 +24,7 @@ struct mm_region am654_mem_map[] = {
->>   	}, {
->>   		.virt = 0x80000000UL,
->>   		.phys = 0x80000000UL,
->> -		.size = 0x20000000UL,
->> +		.size = 0x1e780000UL,
->>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->>   			 PTE_BLOCK_INNER_SHARE
->>   	}, {
->> @@ -75,7 +75,7 @@ struct mm_region j7200_mem_map[] = {
->>   	}, {
->>   		.virt = 0x80000000UL,
->>   		.phys = 0x80000000UL,
->> -		.size = 0x20000000UL,
->> +		.size = 0x1e780000UL,
-> 
-> ATF lies 0x70000000 for j7 devices.
-> 
-> For reference.
-> 
-> configs/am62ax_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
->   
-> configs/verdin-am62_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
->   
-> configs/am64x_evm_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x701c0000  -> This
-> is also different
->                                                                                                                 
-> 
-> configs/am62x_beagleplay_a53_defconfig:9:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
-> configs/am62x_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
-> 
-> and rest all devices use 0x70000000
-> 
-> OP-TEE is consistent across all SoCs and lies at 9e800000 and I can see that
-> removing the map after 9e780000 does
-> handle that but am not sure if I see the ATF being unified with all this flow.
-> 
 
-We don't need to carve out ATF in our MMU map when it lives in SRAM as
-SRAM is already marked non-caching/device memory and so shouldn't be
-touched by U-Boot. Only when in DRAM do we do this carveout, and for all
-platforms that have ATF in DRAM it lies at 0x9e780000. So we make the
-MMU gap start at this location.
+--65mZLpyI8XQWBJ04
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-But as you have noticed, for platforms that keep ATF in SRAM this hole in
-DRAM is slightly larger than it needs to be (but that doesn't hurt anything,
-the OP-TEE hole is ~24MB and this just makes it just 128KB larger. This is
-DRAM so no one will care about 128KB).
+On Fri, Nov 17, 2023 at 12:38:11PM +0100, Rasmus Villemoes wrote:
 
-The benefit of unconditionally leaving the MMU gap in DRAM cover where ATF
-would have been, even on SRAM platforms, is it makes the memory map unified
-across all platforms allowing us to combine them as in patch [4/4].
+> From: Doug Zobel <douglas.zobel@climate.com>
+>=20
+> Driver for the TI LP5562 4 channel LED controller. Supports
+> independent on/off control of all 4 channels. Supports LED_BLINK on 3
+> independent channels: blue/green/red. The white channel can blink, but
+> shares the blue channel blink rate.
+>=20
+> Heavily based on patch originally from Doug Zobel [1].
+>=20
+> I have modified it so it matches the DT bindings in the linux tree,
+> and also follows the linux driver implementation more closely. This
+> should address Tom's concerns, and also matches my goal of making the
+> U-Boot driver work with our existing .dts which is known to work in
+> linux.
+>=20
+> As our boards only have the R,G,B outputs connected, I have not
+> actually tested how the white channel behaves, but the R,G,B work
+> exactly as expected.
+>=20
+> [1] https://lore.kernel.org/u-boot/1547150757-1561-1-git-send-email-dougl=
+as.zobel@climate.com/
+>=20
+> Cc: Doug Zobel <douglas.zobel@climate.com>
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> ---
+>  doc/device-tree-bindings/leds/leds-lp5562.txt |  63 ++
+>  drivers/led/Kconfig                           |   8 +
+>  drivers/led/Makefile                          |   1 +
+>  drivers/led/led_lp5562.c                      | 578 ++++++++++++++++++
+>  4 files changed, 650 insertions(+)
+>  create mode 100644 doc/device-tree-bindings/leds/leds-lp5562.txt
+>  create mode 100644 drivers/led/led_lp5562.c
 
-Andrew
+If there's no further comments, I'll update the MAINTAINERS file to list
+this driver under your name as well, OK?
 
-> Regards,
-> Manorit
-> 
->>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->>   			 PTE_BLOCK_INNER_SHARE
->>   	}, {
->> @@ -123,7 +123,7 @@ struct mm_region j721e_mem_map[] = {
->>   	}, {
->>   		.virt = 0x80000000UL,
->>   		.phys = 0x80000000UL,
->> -		.size = 0x20000000UL,
->> +		.size = 0x1e780000UL,
->>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->>   			 PTE_BLOCK_INNER_SHARE
->>   	}, {
->> @@ -180,7 +180,13 @@ struct mm_region j721s2_mem_map[] = {
->>   	}, {
->>   		.virt = 0x80000000UL,
->>   		.phys = 0x80000000UL,
->> -		.size = 0x80000000UL,
->> +		.size = 0x1e780000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->> +			 PTE_BLOCK_INNER_SHARE
->> +	}, {
->> +		.virt = 0xa0000000UL,
->> +		.phys = 0xa0000000UL,
->> +		.size = 0x60000000UL,
->>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->>   			 PTE_BLOCK_INNER_SHARE
->>   	}, {
+--=20
+Tom
+
+--65mZLpyI8XQWBJ04
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVnV1cACgkQFHw5/5Y0
+tywHnAv+OxRnGayBxx9xy1lykPsg4zeMNNmJtqObug7AiFziO39QooxbZvHg7pSx
+x6lvL4GbhGE2Hs2BfU0+GuPWAh4qo0ykz5iucE70TvEeVWxfY+MLU+SJBgmDOjm3
+BV+wYPSU+7wdmGA8TF8PeKx7jSCpZX7eSGc1A62+ius8fIyJLsrLEiqPqcPHt15R
+71vMXHW0z3CeXh8zyar7MQv6WGSdIzjJlg18SEFOVeruOpvjqDzOru5vBIu7sANR
+Eld9X/mZrb8XOvXyYw7ALQrdzSip7doC+OZ4NCVrCAPH2V8VeK5LnpLrVSyoROIz
+3Ti40fxh1TFH+DxQgfnZpYPIsYwTZsct08qUdEtoCBunhQZ864kzyhzJj+9fp7sn
+3gTnq7zwVBXA33n1dBzBPJv2Q5vL4hGcMmrwSxHJ0m2q5esoTUzUaUrP/CN2xDH3
+XocAatAoPNUCmuPsSWbpsq/J4IJ8bUzVayWWSax/P063Riuz9Gf6ugZXCu08ZVqM
+ubqhiBI4
+=2haK
+-----END PGP SIGNATURE-----
+
+--65mZLpyI8XQWBJ04--
