@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 073A1C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 16:59:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF898C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 17:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89E0487779;
-	Wed, 29 Nov 2023 17:58:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B9CC87691;
+	Wed, 29 Nov 2023 18:00:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dhsTNv4V";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lU25IKWR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 698B38777C; Wed, 29 Nov 2023 17:58:09 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 0095B86EA3; Wed, 29 Nov 2023 17:25:44 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 233FC87777
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 17:58:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAAFB875EE
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 17:25:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5cd3c4457a0so68351467b3.3
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 08:58:06 -0800 (PST)
+ spf=pass smtp.mailfrom=andy.shevchenko@gmail.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-67a22fb8ee0so22251916d6.2
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 08:25:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701277086; x=1701881886; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nHYYKf3vZZ4Zjnf03q45/WfZDC8eXnNivqzN6leikpI=;
- b=dhsTNv4VQdgiFTlQIAKF3Jm/DawTSWNUJOA3RxYdz3Xjr2TD3t2t2fzaCGYlzzhJSj
- +9PdbvNLgG/56bnF1UwacU0T2oxgZKgc7CkWIUF7F7Vny+AmPWOY1uTKzwdpB29tPK+E
- wYVPU0v5ZC5K0Wk1pxxM2TQ3YRjsPBQGJTdq0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701277086; x=1701881886;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1701275140; x=1701879940; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nHYYKf3vZZ4Zjnf03q45/WfZDC8eXnNivqzN6leikpI=;
- b=gfKvcHYLw0gZ1ACnZATyHpd/sls3l2GwlUdOZmzaVnCuqNNamSMQdpT5T/97AwMWbV
- xVue+BjWcapYQQVSxhzHgMVdL0SaGBBuxwP9a+k5X72BBXGmXUtXAyYc9tfZdgUyAqxo
- NC7hJIgUJhbTs1kRKP4+x4z4jr7zXisub3jALkE+2g6NE8RxRJ8XvWetdfPUgkHF7UZ5
- T3GSH8AacYEC/zO0LdHKQbHMrTlRCCD81r4g83zR3qQmUlEW6kvhHWrAl88/j0KDJwDi
- MHZSlBuVs1Q8Sqd2YV4r/6nnYwSOD6xQXurRW86T9PFAzxD3CHhmSiylBsN6Ckim/94s
- d9kA==
-X-Gm-Message-State: AOJu0YxrbakASEtXeD+fJOxN6N1wSN2S98To2N3RpbKlnxUOIJ65kOmZ
- fyLKhuNnEGqhRVVv/OrjVXr2cg==
-X-Google-Smtp-Source: AGHT+IEjbruDPBluyXzVVTXqFjjxFS20jjTJMWNRyRqdaDkHzSANaiCoOLzuChPmXIPPOsB+frDpRg==
-X-Received: by 2002:a0d:ef47:0:b0:5a7:b481:4dd2 with SMTP id
- y68-20020a0def47000000b005a7b4814dd2mr20122416ywe.47.1701277085768; 
- Wed, 29 Nov 2023 08:58:05 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-9fa4-b7c8-6a9a-173e.res6.spectrum.com.
- [2603:6081:7b00:6400:9fa4:b7c8:6a9a:173e])
- by smtp.gmail.com with ESMTPSA id
- v19-20020a814813000000b005cb331f463esm4663902ywa.8.2023.11.29.08.58.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Nov 2023 08:58:05 -0800 (PST)
-Date: Wed, 29 Nov 2023 11:58:03 -0500
-From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: vicooodin@gmail.com, oleksandr_andrushchenko@epam.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] xen: pvblock: fix the maximum io size in one operation
-Message-ID: <20231129165803.GM2513409@bill-the-cat>
-References: <20231115015345.490313-1-takahiro.akashi@linaro.org>
+ bh=dpRi6KZII8sZKLFgLpyHfxQCc9h3esV5KRyi51k5LiI=;
+ b=lU25IKWRqKWhqYtnRgqXQby2pQUEdfhr/lhrNaf4J414veogwv11tt/ZUuzqwXLycP
+ LF2WuR6H9/z4giLGqirDtdPGAR6mINawMjDqDiCWl2JWTYXcnjp1RV/CW+NILrpSRx1b
+ 1RRUIU81meB3UE6Og3qy6/eChOLidiZO+v+etMSiGdNCVR8kP44cZHtNa1TVswTB+KeY
+ FuBkHet2PQAXCAs9FaWKb1gh33Hz5h6SUC4tgpPSOOJNNBeQ7IBciUc3EV4i73w5tEIR
+ t9TRVz6hxSWfgZU6n/m5WOQaS6HYK91a+yzOAF9vEmr9ZghrkJ2vzwLVoj92PiQFc5WF
+ 0ZLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701275140; x=1701879940;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dpRi6KZII8sZKLFgLpyHfxQCc9h3esV5KRyi51k5LiI=;
+ b=X4nRLrkAsEtYyOLx5v/s5M1k6INqh/RgpMCTU9aFbZv8vXWox+muVSwYAKuscFGdJh
+ /vJDkSyEjabp+IuSyNWTOZ88MyUPhYr9zh24Q2/AzgGPYdDBjs41rEoN7hdvOxcaR8Mb
+ IZqwBPX4c//dC77GLex9451vw5Z87rxLa8L6xygEoMIEdEYo5zYC4BoxCYTqsE7u/091
+ ciGCwCUqSRqBF/rVbz2cDn9IMdX26hSZ+eZrWC9NOX/LPCD6jefDgHjYKJ/Y0vdC59XI
+ pPn7KxG8bzP2/VZBBxNvxvfOiJuTxZ/h2zTxOxhy0JyxBSINdEb3OOFrwQt45tP5cHM6
+ A8GA==
+X-Gm-Message-State: AOJu0YzhZxaYNmhuJSfNvY1OzGe3h99PVjK6DE5JCmQ9d3r6hU5btS0u
+ M1pIJT3+zNG/3Yk7+jvPmt4zSPvl+9nNufKVaXE=
+X-Google-Smtp-Source: AGHT+IHYx3F4GI5Ebr8N5rDife+wTQocWHCYhHulOraU6PuAjtkq2cRuRmTA04ewfhr1+yHeiohAexDtv3r1j6dz1Ps=
+X-Received: by 2002:a0c:ea50:0:b0:67a:3852:288b with SMTP id
+ u16-20020a0cea50000000b0067a3852288bmr11844129qvp.24.1701275140577; Wed, 29
+ Nov 2023 08:25:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RUByZqRmRooOcdby"
-Content-Disposition: inline
-In-Reply-To: <20231115015345.490313-1-takahiro.akashi@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+In-Reply-To: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Wed, 29 Nov 2023 18:25:04 +0200
+Message-ID: <CAHp75VeD9pE85aU5MMROJvbPiboOaoeWnLE752=0YXxS9-jnRw@mail.gmail.com>
+Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
+To: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 29 Nov 2023 18:00:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,58 +87,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Nov 29, 2023 at 5:29=E2=80=AFPM Ba Gia Bao Phan
+<phanbagiabao2001@gmail.com> wrote:
+>
+> Hello everyone,
+>
+> I am a trainee at STMicroelectronics France. I am working on a project "S=
+etting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex-A .=
+ The objective of my project is to add a way of booting (with ACPI) besides=
+ Device Tree available on STM32MPU.
+>
+> I found that ACPI was enabled on some x86 platforms
 
---RUByZqRmRooOcdby
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I believe you meant here the niche of the (x86) platforms that are not
+ACPI-enabled. By default 99% of the x86 platforms are ACPI enabled
+with the exceptions:
+- Intel MID (2010-2015, SFI based, enabled in U-Boot)
+- Tunnel Creek (2010, DT based)
+- A few SpreadTrum SoCs (2017, DT based)
 
-On Wed, Nov 15, 2023 at 10:53:45AM +0900, AKASHI Takahiro wrote:
+> but I don't know whether it was set up on ARM or not. I found a PATCH tha=
+t discussed Enabling ACPI booting on ARM with Raspberry Pi 4 but I don't kn=
+ow if it functioned or not. Did anyone here succeed in setting up ACPI on A=
+RM by U-boot?
+>
+> What are the differences between x86 and ARM platforms when enabling ACPI=
+? The architecture of my board STM32PMU is ARM so can I apply the technique=
+ used on platform x86 for my board?
 
-> The current implementation may cause BUG_ON() in blkfront_aio()
-> 	BUG_ON(n > BLKIF_MAX_SEGMENTS_PER_REQUEST);
->=20
-> In pvblock_iop(), a read/write operation will be split into smaller
-> chunks of data so that the size in one access (aio_nbytes) is limited
-> to, at the maximum,
-> 	BLKIF_MAX_SEGMENTS_PER_REQUEST * PAGE_SIZE
->=20
-> But this works only if when the *buffer* passed in to pvblock_io()
-> is page-aligned. If not, the given data region may stand across
-> (BLKIF_MAX_SEGMENTS_PER_REQUEST + 1) pages. See the logic in
-> blkfront_aio():
-> 	start =3D (uintptr_t)aiocbp->aio_buf & PAGE_MASK;
-> 	end =3D ((uintptr_t)aiocbp->aio_buf + aiocbp->aio_nbytes +
-> 	       PAGE_SIZE - 1) & PAGE_MASK;
-> Then this will lead to BUG_ON() above.
->=20
-> This can be fixed by decreasing the maximum size of aio_nbytes.
->=20
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Fixes: commit 3a739cc6c948 ("xen: pvblock: Implement front-back protocol =
-and do IO")
 
-Applied to u-boot/next, thanks!
 
 --=20
-Tom
-
---RUByZqRmRooOcdby
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVnbZsACgkQFHw5/5Y0
-tyx2dAwAutlXtKcxBW3gyuSJvXZfzKTvmYKgqd7wbB8OwbBJw4yzFhREHkjjq3Ey
-i49zedPpGYivs3fg4GVdBUrOwG5wPRZ+RvVobNHKKZ0tqupGIbfXD9MxBWLpP5cG
-ZmPNrVHrfC9tT4VPXWhQD1LcLwqWCIQQf5T/qSpSOn5LlL1CE8FMdyfUVm4UjfVJ
-K/9qUl6SGtEzh20MFMW0PHEArXZ/xqLdSoP48BL39bgM66cyNoq8PNCaEfcrzZd0
-Y3+WUWH+xHxT6lF0Csk54JL+QDVszMcOuAe4s7SnBIbvVs71YJEbiB0Xu9C1bZOq
-2iytGRm7cd9APrFDAvVdvT45QqVs/98FJR+9wnei9/YNRItCU8/xkhaeGLB+5Gue
-yLFhkTwWIHlwtE7EPKdz/X16XJrb2drEcHsmyyTWCRPJ6Cg8hoABy8UFxgKh7LoQ
-6OonrXwRWCdOUTI5IxLFnwzGO1tRNMid4fYGxJwdKOlMEuvSBqOy07Gg/nhHGhBF
-+N0XcNfD
-=K+Rc
------END PGP SIGNATURE-----
-
---RUByZqRmRooOcdby--
+With Best Regards,
+Andy Shevchenko
