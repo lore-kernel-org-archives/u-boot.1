@@ -4,78 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1625C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 10:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB7EC4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 11:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B4C686EA3;
-	Wed, 29 Nov 2023 11:11:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 72A4A874D0;
+	Wed, 29 Nov 2023 12:01:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="EkJH7VoH";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vO+gFSt3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 901A587669; Wed, 29 Nov 2023 11:11:25 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AFE8787467; Wed, 29 Nov 2023 12:01:58 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2062f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::62f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6113687142
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:11:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EBAB87619
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 12:01:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a178d491014so36947766b.3
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 02:11:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1701252683; x=1701857483; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gM12MWhADOHhUwBXZpVxo+rQNShKuKQcuBDN6a6sZ7I=;
- b=EkJH7VoHEvy81wpOmvTa+t4HiMo4omTGBypi3SLy7wyNUOQ3LMCfaEyQed4KN3MWjx
- j7M0YWG7tlelTa7PB0JnMa/ysrZKmGiarElrf4Eywz9US6W78WwTMAi1EEb820eSVgsb
- LMFJmGSEDS/FKt04gM6zYAcNr829OlkFf7JPOlk4CzyGVifH+0LkqYu7Zu8GpKpNOSot
- 9qFgDH8Io6bYoahn50649W+jCFibtvQR7gZXmOip7SJTr4DCbJ8WErHUY5Js8crnZF1G
- 1wJJUByzVCkpajM+nZzNoihShJ0/WXlaI6Xoks8mgpjE1HIazFNDAOlcHpaf8U/M0C7B
- QBXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701252683; x=1701857483;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gM12MWhADOHhUwBXZpVxo+rQNShKuKQcuBDN6a6sZ7I=;
- b=ZpWLNHNuFiMhGEwH5PO+vh9w+R7Vhd5MLfOGmaQzf6Oe41UcxQldyfL9ms23fonWDj
- thwzUgujupPmhQBM1HUxEixBDzVuy7XuCnBKv+YOTEn6j8gOnp6LLfZWgMHl7DCU2gF6
- RrAfBIYo6N+etzZb1jLoev/MzHzpZKSG/jyGd1IvdfMzEZkcjzMpwMd7lJv7uVfKwy0v
- fgXRupCdgKXE2W9pzBaIaCjEle7SgVxeEdcfm/9sE1T1bdd1zX1bNKjejCLbzZxx46ZD
- cwY/I7K3OpNzkhbXtGG6Mo0RQ7bTPj/Jn4qTk2BYQrdWYJYcsMOtLBuRxO0kOVXOXO/o
- U7fg==
-X-Gm-Message-State: AOJu0YysqZ1baKZcWj0o/oaFkspjiTCC9NOytz94Qi1AkukMmFXUH1T5
- 7y4864+X14dv8PpYdb+zUyFR0u8TO5+IId90jps=
-X-Google-Smtp-Source: AGHT+IFZhkrZ/8S4kz6sGu5kWNgyuxIx6VJcuyaulHU4x7KzBBLSkAa/rm+5/I13d2CSD0B0fFedEA==
-X-Received: by 2002:a17:906:2511:b0:9c2:2d0a:320c with SMTP id
- i17-20020a170906251100b009c22d0a320cmr13002150ejb.46.1701252682771; 
- Wed, 29 Nov 2023 02:11:22 -0800 (PST)
-Received: from fedora.. ([213.149.38.84])
- by smtp.googlemail.com with ESMTPSA id
- t17-20020a170906a11100b00a015eac52dcsm7691384ejy.108.2023.11.29.02.11.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Nov 2023 02:11:21 -0800 (PST)
-From: Robert Marko <robert.marko@sartura.hr>
-To: sr@denx.de,
-	u-boot@lists.denx.de
-Cc: Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v3 3/3] arm: mvebu: eDPU: support new board revision
-Date: Wed, 29 Nov 2023 11:11:08 +0100
-Message-ID: <20231129101117.60177-3-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231129101117.60177-1-robert.marko@sartura.hr>
-References: <20231129101117.60177-1-robert.marko@sartura.hr>
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TlSTNMyg49r4IHNSL85XNl5TdNBTBNjlp1SaOmVyIhW0I5YBJ2VnzjpM4KL2TG/sf4I08ZZG8wL2iBYve0P00roBp26Th+g0Gi9e7VvFbayCMSbVpreb3Ql32Bx/dw93SkwyJZYlQx1NahcL2MCFjXy4VxzY9Au9r7+VOys61/vWp+PttC0TWVjNLib0Q6eVpI1em7s1iiogAchf9LMPfmgtT1Smdr9iV1kwjIeZnVTEsUOc8k4poL4Bf2i7/OHe44hBnziJmFGQX6MjwVH7h2QPbfdkL5WsZjY1RN44UUP0WNKXQKES461V0tTjpKtANtQz4goEOgUtYWOmbVClSw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fDDlS5VBhgx/kmU6vq8wvEPjZehU+o3FKtPUyhIAgxc=;
+ b=O40877KsKd5BgRgqn5iVoWytbXh2vC601k+V6lOFvcGjVDF5/D8cLPpbcNGJGI8NnKcbDfepujbKFfu9zImG9MuO9aJ5b+kmVE/nYNKEPqEakKbxmg9LeQGxSDEP1W1afnK4BiNu3LjYpSA91nd8qhksHSHzySn5/5kmNsPD3h+Zk46uwNwvJivlGfimIAzTmbWTJ+WJWP5FfoXUt5LHen324A3Z4hpLqXBz01dDHYpfkomf5Ml2VQLV8v+Alg3imaCjyhs6hmoOJF47yWGYG85cYU8X9QH0ACj5MEIdEeIoQejf90ioGNvR0/UipghLUt0GEVsjPKb9hGQFasU18g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fDDlS5VBhgx/kmU6vq8wvEPjZehU+o3FKtPUyhIAgxc=;
+ b=vO+gFSt3JUfuKlM69Ltnuj8ES258lUws0DMWPaIF9th5SsMUFf3UbEIFzSyFpKCk4r55MBHmb0Er+bkk/X4Me8443ZTNle56ZGcZ/Z7GTFFaJt2N3viihU6klUmb27YtdU7LJA6epHD/kF1fXIBVLoO1N6Nxr5brhbg07mA+fl8=
+Received: from SA0PR12MB4461.namprd12.prod.outlook.com (2603:10b6:806:9c::22)
+ by IA1PR12MB7685.namprd12.prod.outlook.com (2603:10b6:208:423::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.23; Wed, 29 Nov
+ 2023 11:01:50 +0000
+Received: from SA0PR12MB4461.namprd12.prod.outlook.com
+ ([fe80::b0e8:702a:bb63:c606]) by SA0PR12MB4461.namprd12.prod.outlook.com
+ ([fe80::b0e8:702a:bb63:c606%7]) with mapi id 15.20.7046.015; Wed, 29 Nov 2023
+ 11:01:50 +0000
+From: "Kumar, Love" <love.kumar@amd.com>
+To: "Simek, Michal" <michal.simek@amd.com>, Mayuresh Chitale
+ <mchitale@ventanamicro.com>, Jagan Teki <jagan@amarulasolutions.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: RE: [PATCH v2 0/3] Xilinx SPI driver enhancements
+Thread-Topic: [PATCH v2 0/3] Xilinx SPI driver enhancements
+Thread-Index: AQHaIp2Cj57m5uCcPEyqZIzf64U8VrCRIZTg
+Date: Wed, 29 Nov 2023 11:01:49 +0000
+Message-ID: <SA0PR12MB446146960798ECB16ECD5B698383A@SA0PR12MB4461.namprd12.prod.outlook.com>
+References: <20231116164336.140171-1-mchitale@ventanamicro.com>
+ <3a926efa-2246-43d1-bb3d-e7d028f8d529@amd.com>
+In-Reply-To: <3a926efa-2246-43d1-bb3d-e7d028f8d529@amd.com>
+Accept-Language: en-IN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SA0PR12MB4461:EE_|IA1PR12MB7685:EE_
+x-ms-office365-filtering-correlation-id: 6aa3b586-4f19-40ba-5ced-08dbf0ca9660
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: jKeMOl9gWn0oyO/Wlytze7QR8H7Gu0GcH4KpdhGCvzRH8UZ0LKxftj+b2HJrW5tczTnGt8mduLEqWULxsnRgypIutukwyWuxnDHZU/lDbSWOZU2z7DtHRWWElbABn2LyGaBs1m1T+uOAJXWF2fvtaUfSH5XnnlfU5Th9ckLdN77W4FUXPjlrJm9rjpID2VJaEZMp1O4Ts3mPNcqyV/21+Va0aKDZ6ublKRbSi8D+vDzoCwvvy1l7av9KNKCr2e5yOMzO+17uz9pqBYW2lTjeLdL0NZCTyJJm3hv5AHMKQYXFTJOapI68rpgv9pWVF7xcfRogsUGPj1fxAiAzH5yIKbvZrSDrFnq//7EMAr17OKCTW6kegyH3eqVaLwaqpN47L5vC9xHh2SXFPRo+HRf6pXnZXq9qKE0QRHBaZnuXFF+P/kmWbR6FNLWM0WA129hqFHyKeKZvU2Vc9EuQ1sdCJgwpnkFXRX06+qzY1otOIFDgS7fzP+VchdZyzfq5hsF6obFnlDvVuamD+90JXmV/0nM3bLZMoJ8Iyij1kNoxwQRtn/6+JN/6DdgG60gninUF3Xm7UMzwDlmWzLt4j+NT0MkXBbgAdgIAK9vMpdcRZ3I=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SA0PR12MB4461.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(366004)(346002)(396003)(136003)(39860400002)(230922051799003)(186009)(451199024)(64100799003)(1800799012)(83380400001)(38070700009)(26005)(54906003)(66446008)(66476007)(66946007)(66556008)(316002)(76116006)(64756008)(4744005)(110136005)(2906002)(4326008)(8676002)(52536014)(8936002)(5660300002)(86362001)(7696005)(41300700001)(6506007)(71200400001)(9686003)(53546011)(33656002)(478600001)(122000001)(55016003)(38100700002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NXNRWDBOYUhuRFZUTzJTTWJHMXRPZHdibXg5UXRubFdxVmNsYXdSbzVrZDJV?=
+ =?utf-8?B?ZEtKUmFLdEdrL2lsbVBXMG0xSGVTSlFONndSeDVwVXN3THhpNGsxUnY3NkF2?=
+ =?utf-8?B?VnllVFNRb3hwa1Awa0FVMWxzVXU3aGxnWXdkakp6OCs2L1ZUbGtseWxLdlUw?=
+ =?utf-8?B?aTdNbnpJdVZ5OEFlQ3FJeVRFR0dWRmE2NzloTFV0N3dZYkUyN3doNkxTaVJy?=
+ =?utf-8?B?S253Nnd3eXVFZGdBN1VMRnlUWEdYTTlaUFIyUkNoK2RTVjNTbkRpanF5WlMy?=
+ =?utf-8?B?a1I1bE9NOGpqamVvK1QrdTVRdDUyZFFxeDdjOXVQNmMxR2U5eTZOZkprMk9H?=
+ =?utf-8?B?VFlMcGR1TUN3U0wwbkk4UC9DdFYvVmlyejNRVDFEOTBVcCtURHVGUDJaVHps?=
+ =?utf-8?B?VTZrdlFvWG96UWw3OFc5WWdnMitsOHM2VGpYZ1dyNjhYUWF0OFF2SzBIeXY3?=
+ =?utf-8?B?Q0pwQ2NlQmttMkM3QkU0dTE5cXRLL3ZmZEVaWm13SHUvdTRDOElHSTlvaXd6?=
+ =?utf-8?B?a3hpaEVVRDNKbzVqQWsrcHNIS0ZDTlhFMXl0aE9TbldqVlh4UjhoRmdrNng2?=
+ =?utf-8?B?ZmlBMEVtRkJYc0N6TDFLa0hmdVRiN0JMS0MzVU5UM1FadFVZclNuMUxJS2N0?=
+ =?utf-8?B?ZjlkMHoxTUZvK20yRkVCR2VxSGhKK1JYZ3RLODcreGhpRTdrWlB4MDVCY0dU?=
+ =?utf-8?B?Q0ZUdytJaWJpUnczU2FQQXlZb2N2cU9taVBiY21MSjlTeFhuK3R4WE1lMXNF?=
+ =?utf-8?B?TXBVRTZnZkdUMFJrc1k4K01VQ2tSaVhQYnh1N3FlQzRSeUw1Y0M5R1c2QlpT?=
+ =?utf-8?B?Tm9FZTFpWDhHOFh2NlQrRG9sV2NzME9tVHlJQlN1YmEzWUw5Rm5MbVhVekF2?=
+ =?utf-8?B?WUJPWkx6a2tMbXIyM29zZWJpRzVUd0U3VjUweFN0UTRSUWlLSlNNM0h6YVZR?=
+ =?utf-8?B?SUhneGNzcFgzK3VxSHp2THdsQTBuU1dpTDFLeWFDU1ZOQnR5YStMbUE1c1Rx?=
+ =?utf-8?B?TkNIb1VQR2VPNS82UERVSDBNckV6WC9wVUtKc2NrN2s4WkxFZGVQbG1OTVl4?=
+ =?utf-8?B?THdJZlRSVktVbmR0QUZySHV6WkhZU0pzeUhBTC9RMDh1VDY3czg0RkpKYnZy?=
+ =?utf-8?B?RUlIbnhvVnJjTXpRMWlRV0pSWmticjAyKzZCRUpsZE80b3gwZGIzRVRTWGt2?=
+ =?utf-8?B?U3l1bmJyR01jNnUxbXN2TzN5bkZyaGlRV0g4Vk4rOWhhUll4dm5SQVZ1YnRp?=
+ =?utf-8?B?TVhoVjIwN3FxSk5vcWZuaHFndTZtT0F1R2Y0TjFsTmlsVTNtODlXdTlqcE4v?=
+ =?utf-8?B?YkF6dHFMT0Rta2xaZHU4Y3J0OGNIUkJtVlE1b2FsalJPQjMvMDYzYldJcUFk?=
+ =?utf-8?B?L250LzM4SldTWnhLb0RRUkhlZG9qcUkxY3VJT1hKVE9lY1JRWkw5QzcxSktH?=
+ =?utf-8?B?Z3BSTkZOM283M2xYeGFzNU1ZU1RBOVROcEJaazI2U1gyTFRaZkVsNXFUUFFa?=
+ =?utf-8?B?blBidHgzN1ppVVZnV0FOb1hlNS9wWmhVaXNhaVV2SHRRVFR2ZHZVY0dweWNh?=
+ =?utf-8?B?RHpmc1k2cVhiOHpySlRqVkhsd1d1Q1VqSGN4SGQzRU5ITG0ySkdzajVyUU95?=
+ =?utf-8?B?eVpwbEwvSFdRUjRONFFna3dwenRvK1pCZWxZZ2xJS08zb21hR052T0tiMmtx?=
+ =?utf-8?B?Y3RYZkFBWlVvMzZpQjFpTmJsZXNtK2VqeVZSWCtKUlpBVGVYTnFsYzhOdTdF?=
+ =?utf-8?B?NU9BMU5jSHNLMmlobzlncDJ0SHdMTnZ5LzY5WHUxNjR5dStWTnhYczl0QnhN?=
+ =?utf-8?B?S2lDbGpEcmRkZGpPcHJCanRTR2ZkNzllSlRRVklINGxOYVlSSHNmZzlvYU5j?=
+ =?utf-8?B?bERmYm00UC9QL2EvdGUwMFY5NGtGUm84UTdJN3pkbW1KaVFCZ21jNjVEQno1?=
+ =?utf-8?B?UHA3Qkp5WDZoM3J4d1lWcUZvWmcrTjhSdGhxczBQMTVQZzF0bXJ4eVdtUGd0?=
+ =?utf-8?B?S2U4TklBRElib3NaSUFNZXhEb1pZY1FQaStMMDFNWHAwa3k5R1dkY3dpcU5C?=
+ =?utf-8?B?YW4zK25FS0wrYmFJMjlJQ3YwUUE0eXp2aWdnNGxST0RRdE9RNlhSdmgydDcy?=
+ =?utf-8?Q?Kops=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB4461.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6aa3b586-4f19-40ba-5ced-08dbf0ca9660
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Nov 2023 11:01:49.9770 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: /aTsasWK51nc0wYj/nOGcLoKF4zOcrt67y/DWqvgMKViA5qgrHSlNgok4KaCD+f6
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB7685
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,306 +146,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a new eDPU revision that uses Marvell 88E6361 switch onboard.
-We can rely on detecting the switch to enable and fixup the Linux DTS
-so a single DTS can be used.
-
-There is currently no support for the 88E6361 switch and thus no working
-networking in U-Boot, so we disable both ports.
-
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-Reviewed-by: Stefan Roese <sr@denx.de>
----
-Changes in v3:
-* Add check for DM_MDIO
-
- arch/arm/dts/armada-3720-eDPU-u-boot.dtsi |  13 ++-
- arch/arm/dts/armada-3720-eDPU.dts         |  47 ++++++++
- board/Marvell/mvebu_armada-37xx/board.c   | 128 ++++++++++++++++++++++
- configs/eDPU_defconfig                    |   1 +
- 4 files changed, 184 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi b/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-index cb02b70e54..c3d450dd83 100644
---- a/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-+++ b/arch/arm/dts/armada-3720-eDPU-u-boot.dtsi
-@@ -32,14 +32,17 @@
- 	bootph-all;
- };
- 
--&eth0 {
--	/* G.hn does not work without additional configuration */
--	status = "disabled";
--};
--
- &eth1 {
- 	fixed-link {
- 		speed = <1000>;
- 		full-duplex;
- 	};
- };
-+
-+/*
-+ * eDPU v2 has a MV88E6361 switch on the MDIO bus and U-boot is used
-+ * to patch the Linux DTS if its found so enable MDIO by default.
-+ */
-+&mdio {
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/armada-3720-eDPU.dts b/arch/arm/dts/armada-3720-eDPU.dts
-index 57fc698e55..d6d37a1f6f 100644
---- a/arch/arm/dts/armada-3720-eDPU.dts
-+++ b/arch/arm/dts/armada-3720-eDPU.dts
-@@ -12,3 +12,50 @@
- &eth0 {
- 	phy-mode = "2500base-x";
- };
-+
-+/*
-+ * External MV88E6361 switch is only available on v2 of the board.
-+ * U-Boot will enable the MDIO bus and switch nodes.
-+ */
-+&mdio {
-+	status = "disabled";
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&smi_pins>;
-+
-+	/* Actual device is MV88E6361 */
-+	switch: switch@0 {
-+		compatible = "marvell,mv88e6190";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		reg = <0>;
-+		status = "disabled";
-+
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				label = "cpu";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+				ethernet = <&eth0>;
-+			};
-+
-+			port@9 {
-+				reg = <9>;
-+				label = "downlink";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+			};
-+
-+			port@a {
-+				reg = <10>;
-+				label = "uplink";
-+				phy-mode = "2500base-x";
-+				managed = "in-band-status";
-+				sfp = <&sfp_eth1>;
-+			};
-+		};
-+	};
-+};
-diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mvebu_armada-37xx/board.c
-index f532486b70..1685b12b84 100644
---- a/board/Marvell/mvebu_armada-37xx/board.c
-+++ b/board/Marvell/mvebu_armada-37xx/board.c
-@@ -14,6 +14,7 @@
- #include <mmc.h>
- #include <miiphy.h>
- #include <phy.h>
-+#include <fdt_support.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/arch/cpu.h>
-@@ -50,6 +51,7 @@ DECLARE_GLOBAL_DATA_PTR;
- /* Single-chip mode */
- /* Switch Port Registers */
- #define MVEBU_SW_LINK_CTRL_REG		(1)
-+#define MVEBU_SW_PORT_SWITCH_ID		(3)
- #define MVEBU_SW_PORT_CTRL_REG		(4)
- #define MVEBU_SW_PORT_BASE_VLAN		(6)
- 
-@@ -57,6 +59,8 @@ DECLARE_GLOBAL_DATA_PTR;
- #define MVEBU_G2_SMI_PHY_CMD_REG	(24)
- #define MVEBU_G2_SMI_PHY_DATA_REG	(25)
- 
-+#define SWITCH_88E6361_PRODUCT_NUMBER	0x2610
-+
- /*
-  * Memory Controller Registers
-  *
-@@ -73,6 +77,30 @@ DECLARE_GLOBAL_DATA_PTR;
- #define A3700_MC_CTRL2_SDRAM_TYPE_DDR3	2
- #define A3700_MC_CTRL2_SDRAM_TYPE_DDR4	3
- 
-+static bool is_edpu_plus(void)
-+{
-+	struct udevice *bus;
-+	ofnode node;
-+	int val;
-+
-+	if (!CONFIG_IS_ENABLED(DM_MDIO))
-+		return false;
-+
-+	node = ofnode_by_compatible(ofnode_null(), "marvell,orion-mdio");
-+	if (!ofnode_valid(node) ||
-+	    uclass_get_device_by_ofnode(UCLASS_MDIO, node, &bus) ||
-+	    device_probe(bus)) {
-+		printf("Cannot find MDIO bus\n");
-+		return -ENODEV;
-+	}
-+
-+	val = dm_mdio_read(bus, 0x0, MDIO_DEVAD_NONE, MVEBU_SW_PORT_SWITCH_ID);
-+	if (val == SWITCH_88E6361_PRODUCT_NUMBER)
-+		return true;
-+	else
-+		return false;
-+}
-+
- int board_early_init_f(void)
- {
- 	return 0;
-@@ -357,6 +385,41 @@ static int espressobin_last_stage_init(void)
- 	return 0;
- }
- 
-+static int edpu_plus_last_stage_init(void)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	if (is_edpu_plus()) {
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@40000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+
-+		/* Currently no networking support on the eDPU+ board */
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@30000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+	} else {
-+		ret = uclass_get_device_by_name(UCLASS_ETH,
-+						"ethernet@30000",
-+						&dev);
-+		if (!ret) {
-+			device_remove(dev, DM_REMOVE_NORMAL);
-+			device_unbind(dev);
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- /* Bring-up board-specific network stuff */
- static int last_stage_init(void)
- {
-@@ -364,6 +427,9 @@ static int last_stage_init(void)
- 	if (of_machine_is_compatible("globalscale,espressobin"))
- 		return espressobin_last_stage_init();
- 
-+	if (of_machine_is_compatible("methode,edpu"))
-+		return edpu_plus_last_stage_init();
-+
- 	return 0;
- }
- EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
-@@ -465,12 +531,74 @@ static int espressobin_fdt_setup(void *blob)
- 	return 0;
- }
- 
-+static int edpu_plus_fdt_setup(void *blob)
-+{
-+	const char *ports[] = { "downlink", "uplink" };
-+	uint8_t mac[ETH_ALEN];
-+	const char *path;
-+	int i, ret;
-+
-+	if (is_edpu_plus()) {
-+		ret = fdt_set_status_by_compatible(blob,
-+						   "marvell,orion-mdio",
-+						   FDT_STATUS_OKAY);
-+		if (ret)
-+			printf("Failed to enable MDIO!\n");
-+
-+		ret = fdt_set_status_by_alias(blob,
-+					      "ethernet1",
-+					      FDT_STATUS_DISABLED);
-+		if (ret)
-+			printf("Failed to disable ethernet1!\n");
-+
-+		path = fdt_get_alias(blob, "ethernet0");
-+		if (path)
-+			do_fixup_by_path_string(blob, path, "phy-mode", "2500base-x");
-+		else
-+			printf("Failed to update ethernet0 phy-mode to 2500base-x!\n");
-+
-+		ret = fdt_set_status_by_compatible(blob,
-+						   "marvell,mv88e6190",
-+						   FDT_STATUS_OKAY);
-+		if (ret)
-+			printf("Failed to enable MV88E6361!\n");
-+
-+		/*
-+		 * MAC-s for Uplink and Downlink ports are stored under
-+		 * non standard variable names, so lets manually fixup the
-+		 * switch port nodes to have the desired MAC-s.
-+		 */
-+		for (i = 0; i < 2; i++) {
-+			if (eth_env_get_enetaddr(ports[i], mac)) {
-+				do_fixup_by_prop(blob,
-+						 "label",
-+						 ports[i],
-+						 strlen(ports[i]) + 1,
-+						 "mac-address",
-+						 mac, ARP_HLEN, 1);
-+
-+				do_fixup_by_prop(blob,
-+						 "label",
-+						 ports[i],
-+						 strlen(ports[i]) + 1,
-+						 "local-mac-address",
-+						 mac, ARP_HLEN, 1);
-+			}
-+		}
-+	}
-+
-+	return 0;
-+}
-+
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
- #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
- 	if (of_machine_is_compatible("globalscale,espressobin"))
- 		return espressobin_fdt_setup(blob);
- #endif
-+	if (of_machine_is_compatible("methode,edpu"))
-+		return edpu_plus_fdt_setup(blob);
-+
- 	return 0;
- }
- #endif
-diff --git a/configs/eDPU_defconfig b/configs/eDPU_defconfig
-index 238f91cf6b..34c302485b 100644
---- a/configs/eDPU_defconfig
-+++ b/configs/eDPU_defconfig
-@@ -17,6 +17,7 @@ CONFIG_DEBUG_UART=y
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
--- 
-2.43.0
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogU2ltZWssIE1pY2hhbCA8
+bWljaGFsLnNpbWVrQGFtZC5jb20+DQo+IFNlbnQ6IDI5IE5vdmVtYmVyIDIwMjMgMTM6NTUNCj4g
+VG86IE1heXVyZXNoIENoaXRhbGUgPG1jaGl0YWxlQHZlbnRhbmFtaWNyby5jb20+OyBKYWdhbiBU
+ZWtpDQo+IDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT47IEt1bWFyLCBMb3ZlIDxsb3ZlLmt1
+bWFyQGFtZC5jb20+DQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgU2ltb24gR2xhc3MgPHNq
+Z0BjaHJvbWl1bS5vcmc+OyBUb20gUmluaQ0KPiA8dHJpbmlAa29uc3Vsa28uY29tPg0KPiBTdWJq
+ZWN0OiBSZTogW1BBVENIIHYyIDAvM10gWGlsaW54IFNQSSBkcml2ZXIgZW5oYW5jZW1lbnRzDQo+
+IA0KPiArTG92ZQ0KPiANCj4gT24gMTEvMTYvMjMgMTc6NDMsIE1heXVyZXNoIENoaXRhbGUgd3Jv
+dGU6DQo+ID4gVGhpcyBzZXJpZXMgbWFrZXMgdGhlIFhpbGlueCBYUFMgU1BJIGRyaXZlciBjb21w
+YXRpYmxlIHdpdGggdGhlIE1NQ19TUEkNCj4gPiBkcml2ZXIgYW5kIGFsc28gaW5jbHVkZXMgYW4g
+ZW5oYWNlbWVudCBmcm9tIHRoZSBjb3JyZXNwb25kaW5nIExpbnV4DQo+IGRyaXZlci4NCj4gPg0K
+PiA+IENoYW5nZXMgaW4gdjI6DQo+ID4gLSBJbXByb3ZlIGNvbW1lbnQgYW5kIGFkZCByZXZpZXdl
+ZC1ieSB0YWcgaW4gcGF0Y2ggMw0KPiA+DQo+ID4gTWF5dXJlc2ggQ2hpdGFsZSAoMyk6DQo+ID4g
+ICAgZHJpdmVyczogeGlsaW54X3NwaTogVXNlIHVkZXZpY2UgaW4gc3RhcnRfdHJhbmZlcg0KPiA+
+ICAgIGRyaXZlcnM6IHhpbGlueF9zcGk6IEFkZCB4ZmVyIGNhbGxiYWNrDQo+ID4gICAgZHJpdmVy
+czogeGlsaW54X3NwaTogUHJvYmUgZmlmb19kZXB0aCBhdCBydW50aW1lDQo+ID4NCj4gPiAgIGRy
+aXZlcnMvc3BpL3hpbGlueF9zcGkuYyB8IDY4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+Ky0tLS0tLS0tLQ0KPiAtDQo+ID4gICAxIGZpbGUgY2hhbmdlZCwgNTIgaW5zZXJ0aW9ucygrKSwg
+MTYgZGVsZXRpb25zKC0pDQo+ID4NCg0KVGVzdGVkLWJ5OiBMb3ZlIEt1bWFyIDxsb3ZlLmt1bWFy
+QGFtZC5jb20+DQoNCg==
