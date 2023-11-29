@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF2B4C10DAA
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 14:24:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B7E0C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 15:23:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF64F8701C;
-	Wed, 29 Nov 2023 15:24:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9CE7486D34;
+	Wed, 29 Nov 2023 16:23:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="owKebTtp";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Dp2E9kFa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00AF6870FF; Wed, 29 Nov 2023 15:24:42 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7285386D4C; Wed, 29 Nov 2023 16:23:22 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F09E86F38
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 15:24:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A24EA86D34
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 16:23:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5cfc3a48ab2so37029527b3.0
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 06:24:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701267878; x=1701872678; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HgqbJHFefPmUNb9l57V9tGPlA2WAlZ5h5Rvm+iofMi4=;
- b=owKebTtpNN/g3SZNpRjH788/HF+Hy4YjnU9VToTh8jPWLcq7LFL+AKJoIeAk/00PXq
- Xvrmt443T1LlHCyB6eiCqRLE2/N+rtAwzCWGM3r+h2zwyPetXbVpzHAp/zvKDoMj6MI2
- G/FDmlRouaDZRBaGMiw18QntIOSktFp+4SsWk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701267878; x=1701872678;
- h=content-disposition:mime-version:message-id:subject:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HgqbJHFefPmUNb9l57V9tGPlA2WAlZ5h5Rvm+iofMi4=;
- b=Z2K6YeAomxr3WIbiJusbma2JvX48XJT/eis6ZbcaNHtrXTC3Ku1jpZ5VpE9QIiNCWl
- ItnC6BXTQiNyGSQRvVSh9oGeN0wVZNRYFjLdHVFTgayvPhEnZaV4hCs8DDtVKjaMv0lo
- LUMUuK+daE6S+qZ98vppaPgIGXR1+nAj2HU16DDiKrhk2Div42TCehdPkAoBu3Z1cYhB
- WJNYpzOWugcaQB640sTH/FxKjo7eXaM5hPj1Tp5DHH1Js8ERxo5+ySvsVz5EtX588FA2
- LGzcUc54ZN9iL19hexWpOexxqi0svL079F5FDZWzIqQRUt3DRkVzvjC9PJYbvJh00TUN
- M9jg==
-X-Gm-Message-State: AOJu0YwjgSjZ3UynTvlPKAAZWYWAop6fho7o6vqBMrv49yUKpdFIvEdH
- nOkn9BDDWGU6yLUiHFzd9cebSU9IPuWJr6izSm+wIA==
-X-Google-Smtp-Source: AGHT+IGIaTEtG3GSuhqIG7JyPzIO+VTKbKQlF7YPFlL/ZOURl8j0qaoETrjv2M5PvZc22z/8wkgHZA==
-X-Received: by 2002:a05:690c:c18:b0:5cf:9ee8:87dd with SMTP id
- cl24-20020a05690c0c1800b005cf9ee887ddmr13065859ywb.1.1701267877869; 
- Wed, 29 Nov 2023 06:24:37 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-9fa4-b7c8-6a9a-173e.res6.spectrum.com.
- [2603:6081:7b00:6400:9fa4:b7c8:6a9a:173e])
- by smtp.gmail.com with ESMTPSA id
- h125-20020a815383000000b005a7f676f305sm4518642ywb.106.2023.11.29.06.24.36
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Nov 2023 06:24:37 -0800 (PST)
-Date: Wed, 29 Nov 2023 09:24:35 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Intermitten Azure CI failures
-Message-ID: <20231129142435.GE2513409@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3ATFND6D097636;
+ Wed, 29 Nov 2023 09:23:13 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701271393;
+ bh=jUdfV9jea2KpEXaSAvKmcWd8YVO0utSMHe0peC7VmeM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Dp2E9kFaGKejSHVIjBtl9+zZmqTKmaKW74OJCufRnWtJUde9vCjszsZ4c1mCRQDAW
+ vTXCsgVlvpltD0oFvba/U6JPhyW5JewXGD6SjCqH4k+EM+YwcpyGP33XGBOK0GGiH2
+ Q3Om3QUjXdSBvox0fmZQXfZf0k4Lmfz1ixqpRtCE=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3ATFND9B012190
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 29 Nov 2023 09:23:13 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
+ Nov 2023 09:23:12 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 29 Nov 2023 09:23:13 -0600
+Received: from [10.249.36.40] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3ATFNCgu008606;
+ Wed, 29 Nov 2023 09:23:12 -0600
+Message-ID: <0769310a-30c9-42f1-9bb6-c70ef606c1ae@ti.com>
+Date: Wed, 29 Nov 2023 09:23:12 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gnDpd3iLKX8xqKc5"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/4] arm: mach-k3: Do not map ATF and OPTEE regions in
+ MMU
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon
+ <nm@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Apurva Nandan <a-nandan@ti.com>
+CC: <u-boot@lists.denx.de>
+References: <20231128170528.407707-1-afd@ti.com>
+ <20231128170528.407707-3-afd@ti.com>
+ <2c6f7369-ff74-455d-a3f3-d40abde033de@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <2c6f7369-ff74-455d-a3f3-d40abde033de@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,44 +85,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 11/29/23 2:00 AM, Manorit Chawdhry wrote:
+> Hi Andrew,
+> 
+> On 28/11/23 22:35, Andrew Davis wrote:
+>> ATF and OPTEE regions may be firewalled from non-secure entities. To
+>> prevent access to this area we leave a hole there in the MMU map. This
+>> is the same idea as [0] but we complete that patch by adding the same
+>> for AM65, J721e, J7200, and J721s2 here.
+>>
+>> [0] commit 0688ff3ae23c ("arm: mach-k3: arm64-mmu: do not map ATF and OPTEE regions in A53 MMU")
+>>
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+>> ---
+>>   arch/arm/mach-k3/arm64-mmu.c | 14 ++++++++++----
+>>   1 file changed, 10 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+>> index d872ed714c4..5c858ae0f84 100644
+>> --- a/arch/arm/mach-k3/arm64-mmu.c
+>> +++ b/arch/arm/mach-k3/arm64-mmu.c
+>> @@ -24,7 +24,7 @@ struct mm_region am654_mem_map[] = {
+>>   	}, {
+>>   		.virt = 0x80000000UL,
+>>   		.phys = 0x80000000UL,
+>> -		.size = 0x20000000UL,
+>> +		.size = 0x1e780000UL,
+>>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>>   			 PTE_BLOCK_INNER_SHARE
+>>   	}, {
+>> @@ -75,7 +75,7 @@ struct mm_region j7200_mem_map[] = {
+>>   	}, {
+>>   		.virt = 0x80000000UL,
+>>   		.phys = 0x80000000UL,
+>> -		.size = 0x20000000UL,
+>> +		.size = 0x1e780000UL,
+> 
+> ATF lies 0x70000000 for j7 devices.
+> 
+> For reference.
+> 
+> configs/am62ax_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   
+> configs/verdin-am62_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+>   
+> configs/am64x_evm_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x701c0000  -> This
+> is also different
+>                                                                                                                 
+> 
+> configs/am62x_beagleplay_a53_defconfig:9:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+> configs/am62x_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+> 
+> and rest all devices use 0x70000000
+> 
+> OP-TEE is consistent across all SoCs and lies at 9e800000 and I can see that
+> removing the map after 9e780000 does
+> handle that but am not sure if I see the ATF being unified with all this flow.
+> 
 
---gnDpd3iLKX8xqKc5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+We don't need to carve out ATF in our MMU map when it lives in SRAM as
+SRAM is already marked non-caching/device memory and so shouldn't be
+touched by U-Boot. Only when in DRAM do we do this carveout, and for all
+platforms that have ATF in DRAM it lies at 0x9e780000. So we make the
+MMU gap start at this location.
 
-Hey all,
+But as you have noticed, for platforms that keep ATF in SRAM this hole in
+DRAM is slightly larger than it needs to be (but that doesn't hurt anything,
+the OP-TEE hole is ~24MB and this just makes it just 128KB larger. This is
+DRAM so no one will care about 128KB).
 
-If you see a failure in CI that looks like the one in:
-filenamehttps://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D7436&v=
-iew=3Dlogs&j=3D6ebe5bb0-481f-5026-b4e6-2d4192a94e80&t=3D66c5926e-2461-580f-=
-927d-c0d0a6120549&l=3D524
-Which is:
-"FAT: illegal filename (.)" being printed instead of "Unable to write",
-just hit the re-run job until it passes. I guess Azure changed something
-under the hood that's causing something to go wrong somewhere else as
-it's neither consistently failing nor is the test itself failing (we
-continue to not write an illegal file).
+The benefit of unconditionally leaving the MMU gap in DRAM cover where ATF
+would have been, even on SRAM platforms, is it makes the memory map unified
+across all platforms allowing us to combine them as in patch [4/4].
 
---=20
-Tom
+Andrew
 
---gnDpd3iLKX8xqKc5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVnSaAACgkQFHw5/5Y0
-tyzsHgwAlKh8IqMQ8nNbovpCQOSSNsXKCbDhu829NY552A5P6G+FXyaxoM825bsI
-8TiXBW7t+KRYYGjE5pZfSlrMmRsvswoh56SpMexj4P9vDdsVdx5O5nj26HzrANvq
-5xwQ+ufGjx64EO0wFhjIhXfjpgI0Sz/vbko2WZEGqHqCOOb00QKRMsb7APJJkLQh
-S4PfoZjhBUzV4xyOS+0Tvmzv0/+B0qQIuJ/WXHittJI06z2MyrhUIbanynWUIE1e
-ge9WujXyUQ7g5niVQ3ZMdpxjGqpWq1gpZe/psgY4Hc0df8s12fB02uUmEnki9wgT
-gN/Eaz++pxTbmEJzTfCcaoGVT4Sfah5Zp5dNrX3rf2qA+ckkrJErQbzYwM+tBWKP
-UCGzuwBa7qx/k9L1BSp06DODPg11GPdI6Hov5DEflAkHGBhIBA2YhGN/tNIpj9+9
-IEpAL4cuJDM7VRRXzwMmDdibV44dGFfi1j98IZAwDIxZrsBfiQ8cNSbqPMy6pcXo
-R3JC/Vrj
-=xs6r
------END PGP SIGNATURE-----
-
---gnDpd3iLKX8xqKc5--
+> Regards,
+> Manorit
+> 
+>>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>>   			 PTE_BLOCK_INNER_SHARE
+>>   	}, {
+>> @@ -123,7 +123,7 @@ struct mm_region j721e_mem_map[] = {
+>>   	}, {
+>>   		.virt = 0x80000000UL,
+>>   		.phys = 0x80000000UL,
+>> -		.size = 0x20000000UL,
+>> +		.size = 0x1e780000UL,
+>>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>>   			 PTE_BLOCK_INNER_SHARE
+>>   	}, {
+>> @@ -180,7 +180,13 @@ struct mm_region j721s2_mem_map[] = {
+>>   	}, {
+>>   		.virt = 0x80000000UL,
+>>   		.phys = 0x80000000UL,
+>> -		.size = 0x80000000UL,
+>> +		.size = 0x1e780000UL,
+>> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>> +			 PTE_BLOCK_INNER_SHARE
+>> +	}, {
+>> +		.virt = 0xa0000000UL,
+>> +		.phys = 0xa0000000UL,
+>> +		.size = 0x60000000UL,
+>>   		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>>   			 PTE_BLOCK_INNER_SHARE
+>>   	}, {
