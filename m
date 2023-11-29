@@ -4,75 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D1DC07E97
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ACFBC07E97
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:54:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DBCA87239;
-	Wed, 29 Nov 2023 20:45:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id E7D968641F;
+	Wed, 29 Nov 2023 20:54:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="sl+ThhXn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 854B987613; Wed, 29 Nov 2023 20:45:06 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3C77F86487; Wed, 29 Nov 2023 20:54:06 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51AAA86E88
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:45:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1BA7863F8
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:54:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1cfd9ce0745so23835ad.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:45:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1701287102; x=1701891902; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LsOV8hYGBYKCnaU1Lv7RHjfNeS74iNy9oBb+fHC1xxQ=;
- b=sl+ThhXnsCnNFvurvUFqgDDEvoCkjVxSRfKlTHOfrJCJnOTocQdhN/tH+loxE8Ca+p
- unMdqXLuwp3QATUtba3F4DwQkDnaToiz/iE+xkN27D1mNlKMVsJycSfNc3CGrqlXJB31
- fN/q5DGmX57FWWebyLUHutXPZa96mUnOn3zwy3yg+BSmW8h+Ly6EaIktKPo8mCYb+u3/
- h/Sf/sJOSf1j0Hf7pSe7DrXKKNRjYkmF7fFArZAQOjiCMf9MRvZu1rat+s1twg51bwYt
- mlZftEt/quvUFRvYSsANIIikPv+fMjF3OVY55+wn1ac1iRso5y0btfyLkO78ptHa35Nf
- MNiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701287102; x=1701891902;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LsOV8hYGBYKCnaU1Lv7RHjfNeS74iNy9oBb+fHC1xxQ=;
- b=BQ/Sz+ch0ooY4+aIL3/YV44ZrnwiNXlb9PkMU2r42PVKJk2v7MlGXJYQXGZTYJYsG5
- eiA3hYwFspO4wT66iCAX5KQoA9KWOrfVsYJlsz+ncaJW+KyCgVhVYaNibafffkRWbQl8
- f6ZtKXKn7J8T53C+qG8Rf4We4idIiK+JkhmB5zDV3O5jEQCYv3EB7EQlkZE/5wiOsfKX
- vYhXZ5v1hY5h8OlpH2ncpbnmAsqjTkJhz9e0xFVhzUgCRyQYZYBrJH0Bo+PV+o7Ez/sp
- NUUbfZxv/Jd3jG7k8aP03NJHXvopYmqlkT6sp78W3r0yjelanuGGNfBM4nsJV6RDHimt
- xc5w==
-X-Gm-Message-State: AOJu0YztkYjmlzm7CmfD5aHQxcuKguPHt7+FatCBG3s0m7b520YGBc8w
- Ku+EZp+Rk0mg8h+Al8fUEmWlx+QY0m556o4vEpMDWw==
-X-Google-Smtp-Source: AGHT+IHlr5agoWPa3Zi56NEWvFL7z0wrvx61Oj+T5Y8PNFo5t6XTqO5dUMniKCBME9EM+pGKtACDwfCM2nEsVkdnFdc=
-X-Received: by 2002:a17:902:f685:b0:1cf:acbf:d0b5 with SMTP id
- l5-20020a170902f68500b001cfacbfd0b5mr17587plg.1.1701287101652; Wed, 29 Nov
- 2023 11:45:01 -0800 (PST)
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1r8QdA-0000kK-Iq; Wed, 29 Nov 2023 20:53:56 +0100
+Message-ID: <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
+Date: Wed, 29 Nov 2023 20:53:52 +0100
 MIME-Version: 1.0
-References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
- <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
-From: Moritz Fischer <moritzf@google.com>
-Date: Wed, 29 Nov 2023 11:44:49 -0800
-Message-ID: <CAFyOScryXf_J7ya7aFgQPQA6qLKt74EOuADw0LL1CP2nTopypA@mail.gmail.com>
-Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
+Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>
-Cc: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- andy.shevchenko@gmail.com, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: linux-arm-kernel@lists.infradead.org,
+ Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
+ lkml <linux-kernel@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
+ linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
+References: <20231129172200.430674-1-sjg@chromium.org>
+ <20231129172200.430674-3-sjg@chromium.org>
+ <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
+ <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
+ <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
+ <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
+ <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
+ <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,52 +76,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello Simon,
 
-On Wed, Nov 29, 2023 at 11:28=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> +Heinrich Schuchardt
->
-> Hi,
->
-> On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
-> <phanbagiabao2001@gmail.com> wrote:
-> >
-> > Hello everyone,
-> >
-> > I am a trainee at STMicroelectronics France. I am working on a project =
-"Setting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex-A=
- . The objective of my project is to add a way of booting (with ACPI) besid=
-es Device Tree available on STM32MPU.
-> >
-> > I found that ACPI was enabled on some x86 platforms but I don't know wh=
-ether it was set up on ARM or not. I found a PATCH that discussed Enabling =
-ACPI booting on ARM with Raspberry Pi 4 but I don't know if it functioned o=
-r not. Did anyone here succeed in setting up ACPI on ARM by U-boot?
->
-> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
-> but I don't think any U-Boot board uses this.
->
-> >
-> > What are the differences between x86 and ARM platforms when enabling AC=
-PI? The architecture of my board STM32PMU is ARM so can I apply the techniq=
-ue used on platform x86 for my board?
->
-> Firstly I wonder why you want ACPI?
+On 29.11.23 20:44, Simon Glass wrote:
+> Hi Ahmad,
+> 
+> On Wed, 29 Nov 2023 at 12:33, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>
+>> On 29.11.23 20:27, Simon Glass wrote:
+>>> On Wed, 29 Nov 2023 at 12:15, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>> On 29.11.23 20:02, Simon Glass wrote:
+>>>>> On Wed, 29 Nov 2023 at 11:59, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>>>> The specification says that this is the root U-Boot compatible,
+>>>>>> which I presume to mean the top-level compatible, which makes sense to me.
+>>>>>>
+>>>>>> The code here though adds all compatible strings from the device tree though,
+>>>>>> is this intended?
+>>>>>
+>>>>> Yes, since it saves needing to read in each DT just to get the
+>>>>> compatible stringlist.
+>>>>
+>>>> The spec reads as if only one string (root) is supposed to be in the list.
+>>>> The script adds all compatibles though. This is not really useful as a bootloader
+>>>> that's compatible with e.g. fsl,imx8mm would just take the first device tree
+>>>> with that SoC, which is most likely to be wrong. It would be better to just
+>>>> specify the top-level compatible, so the bootloader fails instead of taking
+>>>> the first DT it finds.
+>>>
+>>> We do need to have a list, since we have to support different board revs, etc.
+>>
+>> Can you give me an example? The way I see it, a bootloader with
+>> compatible "vendor,board" and a FIT with configuration with compatibles:
+>>
+>>   "vendor,board-rev-a", "vendor,board"
+>>   "vendor,board-rev-b", "vendor,board"
+>>
+>> would just result in the bootloader booting the first configuration, even if
+>> the device is actually rev-b.
+> 
+> You need to find the best match, not just any match. This is
+> documented in the function comment for fit_conf_find_compat().
 
-I think STM32MPU is as good as any platform to get the pipe flushed
-with enabling ACPI on ARM platforms.
+In my above example, both configuration are equally good.
+Can you give me an example where it makes sense to have multiple
+compatibles automatically extracted from the device tree compatible?
 
-Overall I think it's a worthwhile endeavour to get this sorted for at
-least one ARM platform as a starting point.
+The way I see it having more than one compatible here just has
+downsides.
 
-> Secondly, if you have the tables somewhere it should be easy enough to
-> build them, building on the series you pointed to. Heinrich is
-> interested in this, I think. I can help with advice. I have been
-> toying with going back to that rpi series but have not done so yet.
+>> The configuration already has a compatible entry. What extra use is the compatible
+>> entry in the FDT node?
+> 
+> It allows seeing the compatible stringlist without having to read the
+> FDT itself. I don't believe it is necessary though, so long as we are
+> scanning the configurations and not the FDT nodes.
 
-I've started to mess around with this over the holidays. Feel free to
-CC me on future work in that direction.
+I think it's better to drop this if it has no use.
 
-- Moritz
+Cheers,
+Ahmad
+
+> 
+> Regards,
+> Simon
+> 
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+
