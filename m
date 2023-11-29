@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95691C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 00:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9140C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 00:49:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7F0686E7E;
-	Wed, 29 Nov 2023 01:16:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 05C2A86940;
+	Wed, 29 Nov 2023 01:49:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QHE/dBLo";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="t7aehK4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB516875FA; Wed, 29 Nov 2023 01:16:16 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 82E228753A; Wed, 29 Nov 2023 01:49:05 +0100 (CET)
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com
+ [IPv6:2607:f8b0:4864:20::b49])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC01E86D93
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 01:16:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79AE58772E
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 01:49:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1cf876eab03so10764025ad.0
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 16:16:13 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3fIpmZQcKBl0HJMDOUABJJBG9.7JHP-6JJOGDNON.89IS.89@flex--moritzf.bounces.google.com
+Received: by mail-yb1-xb49.google.com with SMTP id
+ 3f1490d57ef6-dae71322ed4so7963659276.1
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 16:49:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701216972; x=1701821772; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eXCSjL2Cmg/dpMf/0odLxmhcsAH5kgluhtWId1hAzR8=;
- b=QHE/dBLot7IbgzrnhyEr0c1RACvXZZwti7EgFuRkxsghKgs8BHhydVZy9j3xNDasgL
- 9t2WtTBmBnJr2uUA7QzxCijTE7srdYC+OvZOtXD/hTdGzjCo9fFd+9o2TTagg331Ip65
- njkLWCRaUTeg/S0vGis+wGr/cDmpH0/iz6DHx/yopiMjfHNdxymsds5tdqZPDRdkoxRu
- tCFDiQWJif6Az794NKrp5a45BA1ExALdzEYRH9Ye/MkJwio0V7vScCfqd9qrrJAT9cSs
- BMeqpxGMw91/jZ9HhQIEUIeZ//jjG1RyJ5i1HiFLK/n6ytENVG7rGaqZUVBIDCSxkZqq
- yIqQ==
+ d=google.com; s=20230601; t=1701218940; x=1701823740; darn=lists.denx.de;
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=Bm/fnJOFMvGm+wGRwdjIkKPjjfPgkGkFyORGIcsd9g8=;
+ b=t7aehK4BL6LQUs55JepSxwpUOSGbL/hFFm85GE00PIXcUjADS8viDzLgIIOUhQnbfl
+ r2br9fErS+DarVzLEsZ4HNxg39F4gEUDBFOznyJCJ/9fTZ11ROZ9tZp/+/vaiFCk4Zy+
+ sbEzl9FLAmNXsrPKrJypl2qmVN4u6ywxvd4FW16CZWm2QmA9vaMBzTXFwe9dnArnAgqm
+ HA26nCR7K0s6w1ppghQE3acJ0juML4G5E+WSa93vHYDiVFUEhUKfjcVn2IRnvG3j2qLF
+ 6nqXlVYzDXEUbXS7oU2HGdzoN9GNc1MQjTQ6+ut8q6azHqJ+X/Z9OaPoTr2NAAtP2ZPk
+ 1OHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701216972; x=1701821772;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eXCSjL2Cmg/dpMf/0odLxmhcsAH5kgluhtWId1hAzR8=;
- b=Z7pl1Ug0UF7sUHWbJLpm+cclmc7CXf6oiFdAHoKEbpsdJ+7uY0iRu6N5BgvpZtkE62
- XNzjEGR7NTCBuIf6a7a2U14ObQJoEiwG34hfIurB2wMA5ArfIqB3lavi8tu1HanQFjRc
- r4JYEz/8fCpyyx8BBX4FMTDBgyCcLugwQ/KiZ7YalejJU7JNEwtUMG/J+64XQK5StLg8
- 9Vp2RA9z3NDnWBAsSluBM/FvXOj/k3fBr3CSvYSVPRj8Gek+PV8t5l3Nzx8E8fLBsCF7
- 9SIz7aQYNAP472kEDzw9qqal/VXTEc12PfkuZ6LbVDYebjKGFhtNc3jR4D+zJ7Ct0Jch
- svqQ==
-X-Gm-Message-State: AOJu0YxfiJ9nQZrsZgVMBo1DRg7uN0nRnGf6gXgDfNl7QF6EBxGXRmTF
- djKgTf9zrDHMV7/mPGrlnB9wVdWPLIDclptu4rY=
-X-Google-Smtp-Source: AGHT+IHL0D/pRnFrRI+WBM7KdYSA6KtzOusqS1G8h6mPFXlAHdvotD1uTQ8oYjbc6h93KADNwD/NOThjcq/ZJmPrWMU=
-X-Received: by 2002:a17:90b:2315:b0:283:9d45:a815 with SMTP id
- mt21-20020a17090b231500b002839d45a815mr17250197pjb.3.1701216972083; Tue, 28
- Nov 2023 16:16:12 -0800 (PST)
-MIME-Version: 1.0
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <CAJ+vNU3BRgqByLKGe0=D6omSb+p5zqwq2PCvOj0si7guZHsh+w@mail.gmail.com>
- <CAOMZO5Dj6RUB1ktE9Adp0UzwGev1Rub7KBPOVC=GOGb45feAbg@mail.gmail.com>
- <CAJ+vNU3Nun6WWGq-1+ZNUwsEkQXuE4NE+AUiU_ttr+Y+AbXDhA@mail.gmail.com>
-In-Reply-To: <CAJ+vNU3Nun6WWGq-1+ZNUwsEkQXuE4NE+AUiU_ttr+Y+AbXDhA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 28 Nov 2023 21:16:01 -0300
-Message-ID: <CAOMZO5ACEd9q4QPmdeSsKWdsN5Gu9smH-VAowpSRhBaxA3pT-g@mail.gmail.com>
-Subject: Re: [PATHv11 00/43] net/lwip: add lwip library for the network stack
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de,
- pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, trini@konsulko.com, goldsimon@gmx.de
+ d=1e100.net; s=20230601; t=1701218940; x=1701823740;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Bm/fnJOFMvGm+wGRwdjIkKPjjfPgkGkFyORGIcsd9g8=;
+ b=qDIxH+fWd6diO9h/w2Rvh/RWc4ehY8YC4L10wPqd2aU3R9n4LVLBU5UFlhjdjPurXg
+ T5a9aeSTxaCJH0wI0Reg3Gt0ZNz6afVRQn5BAOytS7nOxvcIo9Stp8Jfied5XttIm6ug
+ fgEKoiw6ZPDJPbsfAA06Um+UrVcXjVYJLLg2+JZ/JVySLBW11Ud417uCwcaGlxP9UGlP
+ 9ZPgX/Bi8VENfC0ShodM+ORygpumc1fDCKVZiknBgDYo2p0oJAHz6ZQ7l8GGnwczXawz
+ Hv9k8gG8mR3tdhYLG6yh8MbGr1fZboWOadCvDIsh8C+F221ePwobi/Y9+VchJFHUd6BN
+ FpgQ==
+X-Gm-Message-State: AOJu0YydbGx+ktTJvIhYUMfs/o1an5Ir6X22M3a3Qz5uUVXlCl2mVwo+
+ pHDhXKR218kMp1UG4Kp5t0v4+SziECyS
+X-Google-Smtp-Source: AGHT+IEthVcGkg+2PY6eXyq2KhVTpoQ5yEcb8fYxHJt4l6XJkG5rIeHVhweotMPZ3Y4B2nLq0Nr4iM2AoH+/
+X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
+ (user=moritzf job=sendgmr) by 2002:a25:1ed4:0:b0:db4:5edd:3c77
+ with SMTP id
+ e203-20020a251ed4000000b00db45edd3c77mr463643ybe.4.1701218940200; Tue, 28 Nov
+ 2023 16:49:00 -0800 (PST)
+Date: Wed, 29 Nov 2023 00:48:50 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.rc1.413.gea7ed67945-goog
+Message-ID: <20231129004850.2542811-1-moritzf@google.com>
+Subject: [PATCH v2] pci: Enable dm_pci_map_bar() for 64-bit BARs
+From: Moritz Fischer <moritzf@google.com>
+To: sjg@chromium.org, u-boot@lists.denx.de, trini@konsulko.com
+Cc: bmeng.cn@gmail.com, marex@denx.de, xypron.glpk@gmx.de, 
+ stcarlso@linux.microsoft.com, Moritz Fischer <moritzf@google.com>, 
+ Philip Oberfichtner <pro@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,27 +86,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
 
-On Tue, Nov 28, 2023 at 9:10=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+Reviewed-by: Philip Oberfichtner <pro@denx.de>
+Signed-off-by: Moritz Fischer <moritzf@google.com>
+---
+Changes from v1:
+- Fixed commit message
+---
+ drivers/pci/pci-uclass.c | 11 +++++++++++
+ include/pci.h            |  4 ++--
+ 2 files changed, 13 insertions(+), 2 deletions(-)
 
-> Fabio,
->
-> You won't see this build issue with the entire series applied... only
-> with the patches up to and including 'net/lwip: integrate lwIP
-> library'. My point was there are points in the series where
-> compilation fails which is not ok.
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index e0d01f6a85..82308c7477 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -1611,6 +1611,17 @@ void *dm_pci_map_bar(struct udevice *dev, int bar, size_t offset, size_t len,
+ 	dm_pci_read_config32(udev, bar, &bar_response);
+ 	pci_bus_addr = (pci_addr_t)(bar_response & ~0xf);
+ 
++	/*
++	 * This assumes that dm_pciauto_setup_device() will allocate
++	 * a 64-bit address if CONFIG_SYS_PCI_64BIT is enabled and
++	 * the device advertises that it supports it.
++	 */
++	if (IS_ENABLED(CONFIG_SYS_PCI_64BIT) &&
++	    (bar_response & PCI_BASE_ADDRESS_MEM_TYPE_64)) {
++		dm_pci_read_config32(udev, bar + 4, &bar_response);
++		pci_bus_addr |= (pci_addr_t)bar_response << 32;
++	}
++
+ 	if (~((pci_addr_t)0) - pci_bus_addr < offset)
+ 		return NULL;
+ 
+diff --git a/include/pci.h b/include/pci.h
+index 2f5eb30b83..0d1ac7b015 100644
+--- a/include/pci.h
++++ b/include/pci.h
+@@ -1350,8 +1350,8 @@ pci_addr_t dm_pci_phys_to_bus(struct udevice *dev, phys_addr_t addr, size_t len,
+  *
+  * Looks up a base address register and finds the physical memory address
+  * that corresponds to it.
+- * Can be used for 32b BARs 0-5 on type 0 functions and for 32b BARs 0-1 on
+- * type 1 functions.
++ * Can be used for 32b/64b BARs 0-5 on type 0 functions and for 32b BARs 0-1
++ * on type 1 functions.
+  * Can also be used on type 0 functions that support Enhanced Allocation for
+  * 32b/64b BARs.  Note that duplicate BEI entries are not supported.
+  *
+-- 
+2.43.0.rc1.413.gea7ed67945-goog
 
-You are right and I agree with your point.
-
-I am able to reproduce the build failure at 'net/lwip: integrate lwIP libra=
-ry':
-
-In file included from net/lwip/lwip-external/src/core/init.c:38:
-./net/lwip/lwip-external/src/include/lwip/opt.h:51:10: fatal error:
-lwipopts.h: No such file or directory
-   51 | #include "lwipopts.h"
-      |          ^~~~~~~~~~~~
-
-Thanks
