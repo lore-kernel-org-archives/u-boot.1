@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F5DC4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 07:19:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92490C07CB1
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 08:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BEE78037B;
-	Wed, 29 Nov 2023 08:18:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C4D9586DB1;
+	Wed, 29 Nov 2023 09:00:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ied5A88u";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Oc6TYm94";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CC5886F95; Wed, 29 Nov 2023 08:18:58 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A5D486F7E; Wed, 29 Nov 2023 09:00:27 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92FAB80310
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 08:18:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F11586D34
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 09:00:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9fffa4c4f43so867020266b.3
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 23:18:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701242335; x=1701847135; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y/wABk+8WeDk+SzR7re2YBUhUeH5NbRBQLAW4rJmPnI=;
- b=ied5A88u55BzRfvD9dSt7+sv6JUmr7zMPlIBLuhb3/qLFld1FcxG6tgl7zT/yRPTSP
- uHNuwZFoM+TUzdjrilbzRM8dfMmsYBbQ5aAdaBiqaZOuhYZp92Ptxu4CN+ZoSbJYffRO
- GIkfQLSIkoxBMSvwXDQOyNUX3rQIyo7ZWoZRU+KgJUANWCEddWWt2waWGNUOQ69/xQ//
- icRPxluMC3N82N7BiknB/ddz+W/YG6muwz4EQnkk+qNQL9Ul6kKKbLNrS1pfaRbAIlnT
- o49xjKi/jywfmnwiRa6yuawbOCALpUgb0weXEt+4yn8M/prh0xUuaBT5nsE/IF7yooeP
- noWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701242335; x=1701847135;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y/wABk+8WeDk+SzR7re2YBUhUeH5NbRBQLAW4rJmPnI=;
- b=BpQTck3HH+3pRQXmLqjd0iqRLjM58pKzDSWfvXrqJX3Y6Q1Bg0eQIUFMCOQAQi7Tk/
- GDeuUWFcw+rCLnMbJH4fQAfZHNydofm9VmTf02O4Z8yBo0ZgGajp++ou+8FkEzZy+VIY
- VNS1hQdyxMLIPNfRf4nDPvRZN/WXbiTQ/tCl69UrfHVjDa6ScN+y2hVcASJPv7YXT8AX
- Movu0UCPc/Yl9CSirjl3XjygfSnn/3TwioFQ0H4H84p4QjLUgfbCaoF33AbTThGzVVKW
- /WyLZx9VqKzlGhoH7k156lGH0x+Yc6ZX2j3qVphSjempQ2i7nCy4+zaGT2IrRRbacc23
- yPyQ==
-X-Gm-Message-State: AOJu0YyXYlc7DQ4s40vrzjk55iPRERbIf4+poNxZ3NVxwTpfKEZrwTBe
- lS0wq9HU19p49+8wmhAxyoKl+eZbOtH/7Ypn2Op29Q==
-X-Google-Smtp-Source: AGHT+IGAK+M/+eBbfC+1yvDgGXSk2uSxKx9jJNGzxN9NPF6evbwU8uLwPWBCdS9lx619e+ASwgZq5EYXGxKAsmAZFKU=
-X-Received: by 2002:a17:907:9496:b0:9d3:f436:6809 with SMTP id
- dm22-20020a170907949600b009d3f4366809mr13769320ejc.39.1701242334888; Tue, 28
- Nov 2023 23:18:54 -0800 (PST)
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AT80JGN097699;
+ Wed, 29 Nov 2023 02:00:19 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701244819;
+ bh=AFTV6urka/MQqr2sU0rNamXPv8nfxRP0xxxbsZ5SGJg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Oc6TYm94EQmQTrpo9W3qP7Ubc9f9H2TqaOUmUCnIDjfSbz9EGAvVLsXTgMsPkhUrR
+ hbmqVxkh7F/A6126pfZlpVfqM4DwKY/l2i+21VrKdMZxzwUHbZ3UxPNP3nbCAUm+iR
+ pp7GsX4m6oKkF9NyULNzJl8m3cPg2kJWKLZMaTac=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AT80JiF120064
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 29 Nov 2023 02:00:19 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 29
+ Nov 2023 02:00:18 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 29 Nov 2023 02:00:18 -0600
+Received: from [172.24.227.49] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AT80FnS037546;
+ Wed, 29 Nov 2023 02:00:16 -0600
+Message-ID: <2c6f7369-ff74-455d-a3f3-d40abde033de@ti.com>
+Date: Wed, 29 Nov 2023 13:30:15 +0530
 MIME-Version: 1.0
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-8-maxim.uvarov@linaro.org>
- <CAOMZO5AdtdHDnpNUkUieHh7_jhxDOtXp5Mtv2ybkTVLamuxO5g@mail.gmail.com>
- <CAD8XO3bLiTsgaYrYUSJgiwfYQGn6C9+=VN=UhxmZOo_c3ox3xg@mail.gmail.com>
- <CAOMZO5BkNQaMxg1b=Rryrvwfbfe5-0sDLiMe8=D9=NFbdZK-+A@mail.gmail.com>
- <CAJ+vNU0-kB_aW-T_prj-9463+uqGsfsudrX0iQRsW-KQuXC66w@mail.gmail.com>
- <20231128204322.GB2513409@bill-the-cat>
-In-Reply-To: <20231128204322.GB2513409@bill-the-cat>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Wed, 29 Nov 2023 13:18:42 +0600
-Message-ID: <CAD8XO3b0__L_LUNJDOGPTvum87V7s0eK5rg2Fqj3H=0BTVoZhA@mail.gmail.com>
-Subject: Re: [PATHv11 07/43] net/lwip: implement wget cmd
-To: Tom Rini <trini@konsulko.com>
-Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, goldsimon@gmx.de, 
- Fabio Estevam <festevam@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/4] arm: mach-k3: Do not map ATF and OPTEE regions in
+ MMU
+To: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Apurva Nandan
+ <a-nandan@ti.com>
+CC: <u-boot@lists.denx.de>
+References: <20231128170528.407707-1-afd@ti.com>
+ <20231128170528.407707-3-afd@ti.com>
+Content-Language: en-US
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+In-Reply-To: <20231128170528.407707-3-afd@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,52 +85,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tim,
+Hi Andrew,
 
-https://github.com/muvarov/u-boot/tree/master_lwip_test_v10
-(branch master_lwip_test_v10)
-
-Commit 8617b290e79e526119ccef0b0090cb220c78dd34
-All later commits are experimental and I'm testing them in the CI.
-
-And yes, this series has to apply to the current master without rejects.
-
-BR,
-Maxim.
-
-
-On Wed, 29 Nov 2023 at 02:43, Tom Rini <trini@konsulko.com> wrote:
-
-> On Tue, Nov 28, 2023 at 12:41:44PM -0800, Tim Harvey wrote:
-> > On Tue, Nov 28, 2023 at 11:12=E2=80=AFAM Fabio Estevam <festevam@gmail.=
-com>
-> wrote:
-> > >
-> > > Hi Maxim,
-> > >
-> > > On Tue, Nov 28, 2023 at 4:07=E2=80=AFPM Maxim Uvarov <maxim.uvarov@li=
-naro.org>
-> wrote:
-> > >
-> > > > From this log it's a little bit different wget output. My version
-> prints "#"  for status. So I guess it's original wget. You can spend time
-> on debugging it but this code will be replaced.
-> > > > With my code I tried big iso download and check crc. I did not see
-> any issues.
-> > >
-> > > Thanks for your feedback.
-> > >
-> > > I will test wget again after your series gets merged.
-> > >
-> >
-> > Hi Maxim,
-> >
-> > Do you have a git repo that we can pull from to test for the wget
-> failure?
+On 28/11/23 22:35, Andrew Davis wrote:
+> ATF and OPTEE regions may be firewalled from non-secure entities. To
+> prevent access to this area we leave a hole there in the MMU map. This
+> is the same idea as [0] but we complete that patch by adding the same
+> for AM65, J721e, J7200, and J721s2 here.
 >
-> Note that "b4 am" for this series works currently on top of master, and
-> getting more general testing on real hardware would be very nice.
+> [0] commit 0688ff3ae23c ("arm: mach-k3: arm64-mmu: do not map ATF and OPTEE regions in A53 MMU")
 >
-> --
-> Tom
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  arch/arm/mach-k3/arm64-mmu.c | 14 ++++++++++----
+>  1 file changed, 10 insertions(+), 4 deletions(-)
 >
+> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
+> index d872ed714c4..5c858ae0f84 100644
+> --- a/arch/arm/mach-k3/arm64-mmu.c
+> +++ b/arch/arm/mach-k3/arm64-mmu.c
+> @@ -24,7 +24,7 @@ struct mm_region am654_mem_map[] = {
+>  	}, {
+>  		.virt = 0x80000000UL,
+>  		.phys = 0x80000000UL,
+> -		.size = 0x20000000UL,
+> +		.size = 0x1e780000UL,
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>  			 PTE_BLOCK_INNER_SHARE
+>  	}, {
+> @@ -75,7 +75,7 @@ struct mm_region j7200_mem_map[] = {
+>  	}, {
+>  		.virt = 0x80000000UL,
+>  		.phys = 0x80000000UL,
+> -		.size = 0x20000000UL,
+> +		.size = 0x1e780000UL,
+
+ATF lies 0x70000000 for j7 devices.
+
+For reference.
+
+configs/am62ax_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000                                                                                                                 
+ 
+configs/verdin-am62_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000                                                                                                               
+ 
+configs/am64x_evm_a53_defconfig:11:8:CONFIG_K3_ATF_LOAD_ADDR=0x701c0000  -> This
+is also different
+                                                                                                               
+
+configs/am62x_beagleplay_a53_defconfig:9:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000                                                                                                            
+configs/am62x_evm_a53_defconfig:8:8:CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
+
+and rest all devices use 0x70000000
+
+OP-TEE is consistent across all SoCs and lies at 9e800000 and I can see that
+removing the map after 9e780000 does
+handle that but am not sure if I see the ATF being unified with all this flow.
+
+Regards,
+Manorit
+
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>  			 PTE_BLOCK_INNER_SHARE
+>  	}, {
+> @@ -123,7 +123,7 @@ struct mm_region j721e_mem_map[] = {
+>  	}, {
+>  		.virt = 0x80000000UL,
+>  		.phys = 0x80000000UL,
+> -		.size = 0x20000000UL,
+> +		.size = 0x1e780000UL,
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>  			 PTE_BLOCK_INNER_SHARE
+>  	}, {
+> @@ -180,7 +180,13 @@ struct mm_region j721s2_mem_map[] = {
+>  	}, {
+>  		.virt = 0x80000000UL,
+>  		.phys = 0x80000000UL,
+> -		.size = 0x80000000UL,
+> +		.size = 0x1e780000UL,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+> +			 PTE_BLOCK_INNER_SHARE
+> +	}, {
+> +		.virt = 0xa0000000UL,
+> +		.phys = 0xa0000000UL,
+> +		.size = 0x60000000UL,
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+>  			 PTE_BLOCK_INNER_SHARE
+>  	}, {
