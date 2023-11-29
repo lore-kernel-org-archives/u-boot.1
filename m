@@ -4,72 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA762C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 06:46:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F5DC4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 07:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D0C2875C6;
-	Wed, 29 Nov 2023 07:46:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2BEE78037B;
+	Wed, 29 Nov 2023 08:18:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ODLzmQqv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ied5A88u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D3EA875C6; Wed, 29 Nov 2023 07:46:02 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 4CC5886F95; Wed, 29 Nov 2023 08:18:58 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A54A2870A2
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 07:45:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92FAB80310
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 08:18:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2c887d1fb8fso79354101fa.0
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 22:45:59 -0800 (PST)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9fffa4c4f43so867020266b.3
+ for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 23:18:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701240359; x=1701845159; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701242335; x=1701847135; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1aH3obipbU9eopAbfcOGR86BoBgE2LBUYeFqbG/E02s=;
- b=ODLzmQqvhada39nzKLxcNs+cDqXQ46zxSWk+ShDQaKXuGECPuWxaAnTyxAaq5f8r8D
- jsZ5WZZiuSHT60cawNkeDPnYic50wCzgXzfxW4wGxKpgdSzTdCIp2jrTxVMO5AF75YoV
- ZvdmATDvDXi1yDPfDxF/mQtkujgFQRP1MHtP5QsUAV5kBi+qDZlegovMIhOUyZiwCOix
- b2AqAOGlh0WLqoIaYJwaCIredxPqD1n7ks6BDclJd0wYl3VvUMCXtbTbqYkTy/dgygXp
- CBTcRsFCxCvjsJPFH3Sdhd87AVnsRDsS6hJAQRJbyg8W1KrP/adWagVF19qR1TJBWCyQ
- nRHA==
+ bh=Y/wABk+8WeDk+SzR7re2YBUhUeH5NbRBQLAW4rJmPnI=;
+ b=ied5A88u55BzRfvD9dSt7+sv6JUmr7zMPlIBLuhb3/qLFld1FcxG6tgl7zT/yRPTSP
+ uHNuwZFoM+TUzdjrilbzRM8dfMmsYBbQ5aAdaBiqaZOuhYZp92Ptxu4CN+ZoSbJYffRO
+ GIkfQLSIkoxBMSvwXDQOyNUX3rQIyo7ZWoZRU+KgJUANWCEddWWt2waWGNUOQ69/xQ//
+ icRPxluMC3N82N7BiknB/ddz+W/YG6muwz4EQnkk+qNQL9Ul6kKKbLNrS1pfaRbAIlnT
+ o49xjKi/jywfmnwiRa6yuawbOCALpUgb0weXEt+4yn8M/prh0xUuaBT5nsE/IF7yooeP
+ noWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701240359; x=1701845159;
+ d=1e100.net; s=20230601; t=1701242335; x=1701847135;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1aH3obipbU9eopAbfcOGR86BoBgE2LBUYeFqbG/E02s=;
- b=cHb4srlmX57OoBPc2z9u7lbeu7lsm6faVPrROCokOPoyuq+47fCKnW9B4qMFUIKcKV
- s2EiAcKLX5vstcAaTKVpHodwQ9uIt/Sat9VXdJwBDDMTPG4QQdZ2eXLc9mvHgZFpeLWj
- fektw0M+27fq4jkssiypbSYkOPGeNuy7Vl2DHb22mwiqhSKJ21F5MTOCTftUlvhktJCX
- SC72LnLnZ72a1ExCrRVqvtepK57xrLwxXAQPottj5aUjeASL0TdMK/mqTbZyQVk4l35x
- RZEtxym//IYxsIJM331OQd4xNlgxBx/e8Lv3LemZ5iuQz5sRGFvSBWtwomioIjbH3bqB
- YC2g==
-X-Gm-Message-State: AOJu0YzotI/7NCJtK3ji9W5AqGuWry/l3h2Ga0pHSpLb7G+69ldIvvhn
- jjsG93ddI8s9xs4BM9rfVPcCDRIOZ5YrHZSGpVO1mw==
-X-Google-Smtp-Source: AGHT+IG5avF0PsrCsOTdF80OFHzcGQWi4fAyhbIC5fHM2NjxaBKtzciI9peJrKWwl/i5DUb2ot62Bj2I9IOeXWkzM/A=
-X-Received: by 2002:a2e:9610:0:b0:2c9:b809:5890 with SMTP id
- v16-20020a2e9610000000b002c9b8095890mr2291900ljh.35.1701240358705; Tue, 28
- Nov 2023 22:45:58 -0800 (PST)
+ bh=Y/wABk+8WeDk+SzR7re2YBUhUeH5NbRBQLAW4rJmPnI=;
+ b=BpQTck3HH+3pRQXmLqjd0iqRLjM58pKzDSWfvXrqJX3Y6Q1Bg0eQIUFMCOQAQi7Tk/
+ GDeuUWFcw+rCLnMbJH4fQAfZHNydofm9VmTf02O4Z8yBo0ZgGajp++ou+8FkEzZy+VIY
+ VNS1hQdyxMLIPNfRf4nDPvRZN/WXbiTQ/tCl69UrfHVjDa6ScN+y2hVcASJPv7YXT8AX
+ Movu0UCPc/Yl9CSirjl3XjygfSnn/3TwioFQ0H4H84p4QjLUgfbCaoF33AbTThGzVVKW
+ /WyLZx9VqKzlGhoH7k156lGH0x+Yc6ZX2j3qVphSjempQ2i7nCy4+zaGT2IrRRbacc23
+ yPyQ==
+X-Gm-Message-State: AOJu0YyXYlc7DQ4s40vrzjk55iPRERbIf4+poNxZ3NVxwTpfKEZrwTBe
+ lS0wq9HU19p49+8wmhAxyoKl+eZbOtH/7Ypn2Op29Q==
+X-Google-Smtp-Source: AGHT+IGAK+M/+eBbfC+1yvDgGXSk2uSxKx9jJNGzxN9NPF6evbwU8uLwPWBCdS9lx619e+ASwgZq5EYXGxKAsmAZFKU=
+X-Received: by 2002:a17:907:9496:b0:9d3:f436:6809 with SMTP id
+ dm22-20020a170907949600b009d3f4366809mr13769320ejc.39.1701242334888; Tue, 28
+ Nov 2023 23:18:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20231128191031.467222-1-ilias.apalodimas@linaro.org>
- <e68eab24-0927-4d8b-9bed-6f1278dc3292@gmx.de>
-In-Reply-To: <e68eab24-0927-4d8b-9bed-6f1278dc3292@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 29 Nov 2023 08:45:22 +0200
-Message-ID: <CAC_iWjKVTWYRz6EG062F=f2Vwi3o=tw6dErd1YgON20mnMNXWg@mail.gmail.com>
-Subject: Re: [PATCH v2] efi_loader: Make DisconnectController follow the EFI
- spec
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: masahisa.kojima@linaro.org, ryosuke.saito@linaro.org, u-boot@lists.denx.de
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-8-maxim.uvarov@linaro.org>
+ <CAOMZO5AdtdHDnpNUkUieHh7_jhxDOtXp5Mtv2ybkTVLamuxO5g@mail.gmail.com>
+ <CAD8XO3bLiTsgaYrYUSJgiwfYQGn6C9+=VN=UhxmZOo_c3ox3xg@mail.gmail.com>
+ <CAOMZO5BkNQaMxg1b=Rryrvwfbfe5-0sDLiMe8=D9=NFbdZK-+A@mail.gmail.com>
+ <CAJ+vNU0-kB_aW-T_prj-9463+uqGsfsudrX0iQRsW-KQuXC66w@mail.gmail.com>
+ <20231128204322.GB2513409@bill-the-cat>
+In-Reply-To: <20231128204322.GB2513409@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Wed, 29 Nov 2023 13:18:42 +0600
+Message-ID: <CAD8XO3b0__L_LUNJDOGPTvum87V7s0eK5rg2Fqj3H=0BTVoZhA@mail.gmail.com>
+Subject: Re: [PATHv11 07/43] net/lwip: implement wget cmd
+To: Tom Rini <trini@konsulko.com>
+Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, goldsimon@gmx.de, 
+ Fabio Estevam <festevam@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,135 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Tim,
 
-On Wed, 29 Nov 2023 at 03:26, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 11/28/23 20:10, Ilias Apalodimas wrote:
-> > commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
-> > tried to fix the UninstallProtocol interface which must reconnect
-> > any controllers it disconnected by calling ConnectController()
-> > in case of failure. However, the reconnect functionality was wired in
-> > efi_disconnect_all_drivers() instead of efi_uninstall_protocol().
-> >
-> > As a result some SCT tests started failing.
-> > Specifically, BBTestOpenProtocolInterfaceTest333CheckPoint3() test
-> >   - Calls ConnectController for DriverImageHandle1
-> >   - Calls DisconnectController for DriverImageHandle1 which will
-> >     disconnect everything apart from TestProtocol4. That will remain
-> >     open on purpose.
-> >   - Calls ConnectController for DriverImageHandle2. TestProtocol4
-> >     which was explicitly preserved was installed wth BY_DRIVER attributes.
-> >     The new protocol will call DisconnectController since its attributes
-> >     are BY_DRIVER|EXCLUSIVE, but TestProtocol4 will not be removed. The
-> >     test expects EFI_ACCESS_DENIED which works fine.
-> >
-> >     The problem is that DisconnectController, will eventually call
-> >     EFI_DRIVER_BINDING_PROTOCOL.Stop(). But on the aforementioned test
-> >     this will call CloseProtocol -- the binding protocol is defined in
-> >     'DBindingDriver3.c' and the .Stop function uses CloseProtocol.
-> >     If that close protocol call fails with EFI_NOT_FOUND, the current code
-> >     will try to mistakenly reconnect all drivers and the subsequent tests
-> >     that rely on the device being disconnected will fail.
-> >
-> > Move the reconnection in efi_uninstall_protocol() were it belongs.
-> >
-> > Fixes: commit 239d59a65e20 ("efi_loader: reconnect drivers on failure")
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> > Apologies for the fast resend, but since Heinrich reviewed it and
-> > we want it in 2024.01 resending
-> > Changes since v1:
-> > - return ret instead of (ret != EFI_SUCCESS ? ret : EFI_SUCCESS) which does the
-> >    same thing...
-> > - Add a comment about reconnecting all controllers
-> >   lib/efi_loader/efi_boottime.c | 27 ++++++++++-----------------
-> >   1 file changed, 10 insertions(+), 17 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> > index 0b7579cb5af1..ea711919630b 100644
-> > --- a/lib/efi_loader/efi_boottime.c
-> > +++ b/lib/efi_loader/efi_boottime.c
-> > @@ -1339,7 +1339,7 @@ static efi_status_t efi_disconnect_all_drivers
-> >                                const efi_guid_t *protocol,
-> >                                efi_handle_t child_handle)
-> >   {
-> > -     efi_uintn_t number_of_drivers, tmp;
-> > +     efi_uintn_t number_of_drivers;
-> >       efi_handle_t *driver_handle_buffer;
-> >       efi_status_t r, ret;
-> >
-> > @@ -1350,27 +1350,13 @@ static efi_status_t efi_disconnect_all_drivers
-> >       if (!number_of_drivers)
-> >               return EFI_SUCCESS;
-> >
-> > -     tmp = number_of_drivers;
-> >       while (number_of_drivers) {
->
-> You assume here that drivers can be removed in reverse order.
->
-> Please, have a look at CoreDisconnectControllersUsingProtocolInterface()
-> in EDK II.
->
-> Here the code continues iterating over all connected controllers while
-> at least one controller can be removed in each round.
->
-> Reverse order is more promising than forward order. But maybe we should
-> combine this with retrying like in EDK II.
+https://github.com/muvarov/u-boot/tree/master_lwip_test_v10
+(branch master_lwip_test_v10)
 
-There are some SCT tests that fail on ConnectController and I was
-going to have a look.
-But the current patch basically reverts this function as it was prior
-to commit 239d59a65e20.
-Do we have time to rewrite this before the release? Or should we merge
-this and plan to refactor it for 2024.04?
+Commit 8617b290e79e526119ccef0b0090cb220c78dd34
+All later commits are experimental and I'm testing them in the CI.
 
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
-> > -             ret = EFI_CALL(efi_disconnect_controller(
-> > +             r = EFI_CALL(efi_disconnect_controller(
-> >                               handle,
-> >                               driver_handle_buffer[--number_of_drivers],
-> >                               child_handle));
-> > -             if (ret != EFI_SUCCESS)
-> > -                     goto reconnect;
-> > -     }
-> > -
-> > -     free(driver_handle_buffer);
-> > -     return ret;
-> > -
-> > -reconnect:
-> > -     /* Reconnect all disconnected drivers */
-> > -     for (; number_of_drivers < tmp; number_of_drivers++) {
-> > -             r = EFI_CALL(efi_connect_controller(handle,
-> > -                                                 &driver_handle_buffer[number_of_drivers],
-> > -                                                 NULL, true));
-> >               if (r != EFI_SUCCESS)
-> > -                     EFI_PRINT("Failed to reconnect controller\n");
-> > +                     ret = r;
-> >       }
+And yes, this series has to apply to the current master without rejects.
+
+BR,
+Maxim.
+
+
+On Wed, 29 Nov 2023 at 02:43, Tom Rini <trini@konsulko.com> wrote:
+
+> On Tue, Nov 28, 2023 at 12:41:44PM -0800, Tim Harvey wrote:
+> > On Tue, Nov 28, 2023 at 11:12=E2=80=AFAM Fabio Estevam <festevam@gmail.=
+com>
+> wrote:
+> > >
+> > > Hi Maxim,
+> > >
+> > > On Tue, Nov 28, 2023 at 4:07=E2=80=AFPM Maxim Uvarov <maxim.uvarov@li=
+naro.org>
+> wrote:
+> > >
+> > > > From this log it's a little bit different wget output. My version
+> prints "#"  for status. So I guess it's original wget. You can spend time
+> on debugging it but this code will be replaced.
+> > > > With my code I tried big iso download and check crc. I did not see
+> any issues.
+> > >
+> > > Thanks for your feedback.
+> > >
+> > > I will test wget again after your series gets merged.
+> > >
 > >
-> >       free(driver_handle_buffer);
-> > @@ -1409,6 +1395,13 @@ static efi_status_t efi_uninstall_protocol
-> >       r = efi_disconnect_all_drivers(handle, protocol, NULL);
-> >       if (r != EFI_SUCCESS) {
-> >               r = EFI_ACCESS_DENIED;
-> > +             /*
-> > +              * This will reconnect all controllers of the handle, even ones
-> > +              * that were not connected before. This can be done better
-> > +              * but we are following the EDKII implementation on this for
-> > +              * now
-> > +              */
-> > +             EFI_CALL(efi_connect_controller(handle, NULL, NULL, true));
-> >               goto out;
-> >       }
-> >       /* Close protocol */
-> > --
-> > 2.37.2
+> > Hi Maxim,
 > >
+> > Do you have a git repo that we can pull from to test for the wget
+> failure?
+>
+> Note that "b4 am" for this series works currently on top of master, and
+> getting more general testing on real hardware would be very nice.
+>
+> --
+> Tom
 >
