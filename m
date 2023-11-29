@@ -4,58 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DBCC4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 20:35:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42608C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 20:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE02986E42;
-	Wed, 29 Nov 2023 21:35:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 5F7AB87239;
+	Wed, 29 Nov 2023 21:35:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D67C686D33; Wed, 29 Nov 2023 21:35:16 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16A9E86B9A
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 21:35:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1r8RH1-0006ZB-Pk; Wed, 29 Nov 2023 21:35:07 +0100
-Message-ID: <2746082e-4357-4608-8fd9-ffbd1ecd6ac2@pengutronix.de>
-Date: Wed, 29 Nov 2023 21:35:05 +0100
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GMdK/Sf9";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A178286A26; Wed, 29 Nov 2023 21:22:51 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AB90C868AE
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 21:22:49 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=phanbagiabao2001@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-54bec1d3854so301146a12.2
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 12:22:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701289369; x=1701894169; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/nz0iCtgk4S0Tw2+OnNUsZi84bl+qMg7g3QHKdhYZcY=;
+ b=GMdK/Sf9DOdxaFNQuf5s9y0ax4Z2EWUc5SWBLPwh8uqhUgzPVKnzXxFH6MumzESlZf
+ spb3evz0Q5z/xQjSiuhGiDFPMpYwrFEC9uG5km/kubGQ9Y0ICEp6RzNhqgjmOq0iQi5i
+ Zx6P3paNGzRP89bpx82iR1aQck/DAxNk4fEFpIC/oEt0oQwwDB6R9YcmI13K5Ktp67Iy
+ kt2mOC8XnTF+aXrLiuGnMETkQnDXYVJgEuFbRDXT+IiDYTTo7Qi5t7145RSLRhsahQoG
+ tEbSHFYDA0w91MRTVFHHPFoqTGJnzqFpOQWEqaaxJAx3XiWKhsSgGfLSPUfFSSzdXBAt
+ 3Jag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701289369; x=1701894169;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/nz0iCtgk4S0Tw2+OnNUsZi84bl+qMg7g3QHKdhYZcY=;
+ b=DK3BgO3C3MqKMfiZfrjLUxnxPygoRGwJ8XPVkjf9pkc/I+jXWqajgNlVRETIFxSNad
+ 2yPFn5t8hIqQ+3/f6ytfbz+edTiKq5T8rSnCCEv6EYl8Kg31mOphPUTKyCXpur/Du+vX
+ cZtGrNJjnShs4bV12JzpCqfYbyR8bWbCztc4DhUPRC6iyH9O/Y/ujpIIVoI4eVi5zJ6t
+ +bkAATvzRDyPSfVL/5dYoRg8a5Y314Zw3MJ1JqAwg6Qag+CAH6jdzOjuCuEEr3Wz1mkR
+ GzwGfLQQAKcNaxvAsHx6QDjS2B5xRn5bsymxlIP73cwNXMqfwa0HPIJHPEuYWTHEIPLc
+ Uhdw==
+X-Gm-Message-State: AOJu0Yy3kztvzZxYBZtdQRcTBcX08K/DL9Vl21m/vf77Et5nsmT0iW0w
+ mnZI6sknFxQ0Lavi4L5s5ITt+PNOqRz1CA69fes=
+X-Google-Smtp-Source: AGHT+IGgAG5YzFLvHwEAfbql4AMwJV8Kfy8BW902Z+79INGQCd+vqZOxzzj59ZnFyiL9pKyTPlMD4zFiOJehKuOnZQs=
+X-Received: by 2002:aa7:d3d5:0:b0:54a:f72d:38b7 with SMTP id
+ o21-20020aa7d3d5000000b0054af72d38b7mr13942192edr.1.1701289368913; Wed, 29
+ Nov 2023 12:22:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org,
- Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
- lkml <linux-kernel@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
- linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
-References: <20231129172200.430674-1-sjg@chromium.org>
- <20231129172200.430674-3-sjg@chromium.org>
- <03595817-4698-46d3-b2d8-3bc40c7e723e@pengutronix.de>
- <CAPnjgZ1e4cryN=Q8XufrdEcJoHfW5n-aN-F3pr2mTWA_0c5-Gg@mail.gmail.com>
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <CAPnjgZ1e4cryN=Q8XufrdEcJoHfW5n-aN-F3pr2mTWA_0c5-Gg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+ <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
+ <CAFyOScryXf_J7ya7aFgQPQA6qLKt74EOuADw0LL1CP2nTopypA@mail.gmail.com>
+In-Reply-To: <CAFyOScryXf_J7ya7aFgQPQA6qLKt74EOuADw0LL1CP2nTopypA@mail.gmail.com>
+From: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>
+Date: Wed, 29 Nov 2023 21:22:38 +0100
+Message-ID: <CAK9R8u9E9Rgewi=sOmzPFdoARexnUB9dTvYONssrpyAsNdYWDQ@mail.gmail.com>
+Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
+To: Moritz Fischer <moritzf@google.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ andy.shevchenko@gmail.com, trini@konsulko.com
+X-Mailman-Approved-At: Wed, 29 Nov 2023 21:35:25 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,71 +90,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi,
+>
+> Overall I think it's a worthwhile endeavour to get this sorted for at
+> least one ARM platform as a starting point.
 
-On 29.11.23 20:00, Simon Glass wrote:
-> On Wed, 29 Nov 2023 at 11:35, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->> Doesn't hardcoding a load address and entry address here defeat the point
->> of having FIT as generic portable image format?
->>
->> At least barebox will try to place the kernel image at physical address 0 and
->> will exit with an error message if no SDRAM is located at that address.
->> The recommendation in that case is to omit load and entry address altogether
->> to have barebox find a suitable location, but I see now that the FIT specification
->> requires a load and entry address. What would happen if U-Boot tries to load this
->> FIT image on a board that has no DRAM at address 0?
-> 
-> The 'kernel_noload' type indicates that the load/exec address are ignored.
+So, do you know are there any ARM platforms having ACPI enabled?
 
-Can the script not insert load/exec addresses with dummy values to avoid confusion?
 
->> Please Cc me on subsequent revisions. I am interested in testing that this works for barebox
->> too.
-> 
-> There has been some discussion about this recently in U-Boot too,
-> along with a series [1] which you could try if you like.
+Le mer. 29 nov. 2023 =C3=A0 20:45, Moritz Fischer <moritzf@google.com> a =
+=C3=A9crit :
 
-Thanks for the pointer. I have just sent out a first patch to add support
-for kernel_noload to the barebox mailing list[1]. With that change applied,
-barebox can boot the FIT images generated by this series.
+> Hi,
+>
+> On Wed, Nov 29, 2023 at 11:28=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
+> > +Heinrich Schuchardt
+> >
+> > Hi,
+> >
+> > On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
+> > <phanbagiabao2001@gmail.com> wrote:
+> > >
+> > > Hello everyone,
+> > >
+> > > I am a trainee at STMicroelectronics France. I am working on a projec=
+t
+> "Setting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex=
+-A
+> . The objective of my project is to add a way of booting (with ACPI)
+> besides Device Tree available on STM32MPU.
+> > >
+> > > I found that ACPI was enabled on some x86 platforms but I don't know
+> whether it was set up on ARM or not. I found a PATCH that discussed
+> Enabling ACPI booting on ARM with Raspberry Pi 4 but I don't know if it
+> functioned or not. Did anyone here succeed in setting up ACPI on ARM by
+> U-boot?
+> >
+> > Sort-of...the refactoring to allow ACPI tables on ARM is completed,
+> > but I don't think any U-Boot board uses this.
+> >
+> > >
+> > > What are the differences between x86 and ARM platforms when enabling
+> ACPI? The architecture of my board STM32PMU is ARM so can I apply the
+> technique used on platform x86 for my board?
+> >
+> > Firstly I wonder why you want ACPI?
+>
+> I think STM32MPU is as good as any platform to get the pipe flushed
+> with enabling ACPI on ARM platforms.
+>
+> Overall I think it's a worthwhile endeavour to get this sorted for at
+> least one ARM platform as a starting point.
+>
+> > Secondly, if you have the tables somewhere it should be easy enough to
+> > build them, building on the series you pointed to. Heinrich is
+> > interested in this, I think. I can help with advice. I have been
+> > toying with going back to that rpi series but have not done so yet.
+>
+> I've started to mess around with this over the holidays. Feel free to
+> CC me on future work in that direction.
+>
+> - Moritz
+>
 
-Once that's accepted, I'll reply with a Tested-by.
 
-[1]: https://lore.barebox.org/barebox/20231129203106.2417486-1-a.fatoum@pengutronix.de/T/#u
-
-> The FIT spec[2] does not provide enough detail on exactly what
-> kernel_noload means and we should improve this at some point.
-
-Yes, that would be nice. Also straight references to e.g. U-Boot configuration
-symbols could use some rewording.
-
-Thanks,
-Ahmad
-
-> 
-> Regards,
-> Simon
-> 
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=382849
-> [2] https://github.com/open-source-firmware/flat-image-tree
-> 
-> 
-> 
->>
->> Thanks,
->> Ahmad
->>
->> --
->> Pengutronix e.K.                           |                             |
->> Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
->> 31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
->> Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
->>
-> 
-
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
-
+--=20
+PHAN Ba Gia Bao
+Etudiant en 5A STI - INSA Centre Val de Loire
