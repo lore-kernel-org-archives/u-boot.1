@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A258C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:08:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F595C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:09:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78A9587773;
-	Wed, 29 Nov 2023 19:08:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9340B8779D;
+	Wed, 29 Nov 2023 19:09:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HLqNz/x6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AHxQO+2Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FD8086BA8; Wed, 29 Nov 2023 19:08:26 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id C12EB8779D; Wed, 29 Nov 2023 19:09:10 +0100 (CET)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 813C787773
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:08:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D0ED86BA8
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:09:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-280b06206f7so10508a91.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:08:23 -0800 (PST)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-51f64817809so2915a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:09:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701281302; x=1701886102; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1701281342; x=1701886142; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
  bh=/WrgTYNgURL+j+aoP2hhMoiG3RxSlT19qhXSttyf0N4=;
- b=HLqNz/x6nbpqf4jRaDpSBG6riwhuzB+YUlDA3XhEOy6mD6ImsKZMuF79KueYNKQqvB
- 7nc1MixJYCuRpAHYnYzpu1KgodNkus1xH456WegbQ8AQcy1LPmm18ggcUmZKI2b1d9a1
- fBTJo2o14KhOH/5iVJ3y7Yb9/O5nZTBIxGxk/QqR1+deNe8aQ8TYF5fiyQgIMxKCbtUj
- sidAvxPy00ZRc5HVkbAc2KNQxb39VA5owNOILUWNMfylzuAjcQDmRX0mG9EIPJEQrQmZ
- +6Ga/GVqzjtcoTGXguF0RzL3Hm2QvlqK4zGwoxf+g38rlS/GyfpHTLXQKoQ5fTXqt1dj
- uFEQ==
+ b=AHxQO+2ZAdr2g6r1Rhi0uEfScbSinHlpgvDDwzBANJ2Mn995cr8JeZ7KMqlfl0MrnB
+ AkRiTW3woNI+vOYKNyXtTUjt+U/YdVnPZh+YxtHRyUlCXom2ZzKuVkydRaUPqZfcwuxo
+ Fz9RtoVBTW/kzCavRvR4HOxpnmHiOIZxrH1TDayQ55jaTHJOO6/WkaqNlN09cqNwQIAz
+ ZSo9JtfVFwkcwOq2A9WDjCJV7DsX1BL1IfTfuMI8+f9/Fx8yPKIRgjAZ0wYWuREzoy7T
+ 0sdHgdR7DZiyShutxVV+4n7ao0+3aDp7tvYah+az8mei/8q7HqDpY1T3GPZ3rTSrgUKx
+ DeZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701281302; x=1701886102;
+ d=1e100.net; s=20230601; t=1701281342; x=1701886142;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=/WrgTYNgURL+j+aoP2hhMoiG3RxSlT19qhXSttyf0N4=;
- b=njTUQ7jBFyTy4G1XuEFz768saoCOaPqGf0ZfOzpHOloEWSBpYy+PWjC5oTSZrdcCOl
- rUPn2xXGfw9tXZ6b9BB64qsqFcDESQX6TCv+4r8yc2LdQoaWOhdOAZMSsbvOsKmyYFmq
- lGv6MuxfbSUwJZTm3BCfywXjlWX6oooEUyasCN+lEQ3Go02IVQrQSjGxl57QriOX1/mp
- p03qTTPwyNsoSVV6phaMN3XfuTQz+hiqAWArlLEzcAYZD6ZtA22Fu41i+lB62ULX04FU
- O6MwLmiXFtQNbWjMGElJUu3Erw/Yd3Kmpn64rs28eMTLjmEUKmNvEszg5Q55Q6wiolSe
- 0mRw==
-X-Gm-Message-State: AOJu0YwrzuQ1NyBb0V8jCfcLMz6gTPVtfTueScNjOhsnhEWrEm+vRZXm
- wYSPhcUIlaAyytodaBqvlyG+XYBj/fOBK5K4i7ykCUtOPjs=
-X-Google-Smtp-Source: AGHT+IFRu1j5Ygi9C8nXUfsALOf82lQGqnoX8V8FJKFzKUHrKF1WxPySexSOroEQwdFwS0wf2/gCOUjmUVIMmbCTfvk=
-X-Received: by 2002:a17:90a:f695:b0:27d:2762:2728 with SMTP id
- cl21-20020a17090af69500b0027d27622728mr19314609pjb.0.1701281301794; Wed, 29
- Nov 2023 10:08:21 -0800 (PST)
+ b=tWCrU3US3f8qjX7fA87WVTTrq7bfCqCUHyrreN/C/3X1pJG6Xg1SZyJ44F3hhXsicu
+ IX2v5k5snezs0WLi3XXw0XFOmEpBvtAv6Y2aY989FKwGcSBv71VDeC48hQIQPl68+QBH
+ Pgv2s6jNUSS7LD7Ld+e0IXL/mO44bic8mAMDGLQb6/Ri6HLf4YbBKnJb3PSg/RJ/olwT
+ ZLCMnu64+/QBfq1+QXG+lfdsRz3OQqaN2qTV7RQhKvBkl/geUeQsS1KD0wXj+qLe6n6g
+ NZCe9u4htRXgWc1bbkCPEaZzILLf9LwamLJuYKbFCFpStIVnKdD1mTXvRWo6+bvRgvVa
+ ztmg==
+X-Gm-Message-State: AOJu0Yyz7iirOfVLi3kbZnjiDnbJ7RDFzQxdD5UHHBL23U84EEkcw2bH
+ v+HJ4Lal1XGCBBGZpH/r5tSOpUoNHopBDEGC7j0=
+X-Google-Smtp-Source: AGHT+IGEgJTiBy/8zIxVvg2ebK8xek1bEBtLMGDKftDRsI4AjBxFPkMvLMkM65uHa0rNf6M+94Zaby33xikPuDbM9qE=
+X-Received: by 2002:a05:6a20:4328:b0:18b:feaf:36da with SMTP id
+ h40-20020a056a20432800b0018bfeaf36damr22212967pzk.2.1701281342473; Wed, 29
+ Nov 2023 10:09:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20231018183338.2168118-1-tharvey@gateworks.com>
-In-Reply-To: <20231018183338.2168118-1-tharvey@gateworks.com>
+References: <20231018183352.2168191-1-tharvey@gateworks.com>
+In-Reply-To: <20231018183352.2168191-1-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 29 Nov 2023 15:08:11 -0300
-Message-ID: <CAOMZO5CH_kddcH8=9abcBQN6s5__GadOEv0WxB-s006BABXuow@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: imx8mm-venice-gw73xx: add TPM device
+Date: Wed, 29 Nov 2023 15:08:52 -0300
+Message-ID: <CAOMZO5B3-ua96CMAVzc5TYoe3Sq=DwVNjcq41VA96VJecNGrPA@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: imx8mp-venice-gw73xx: add TPM device
 To: Tim Harvey <tharvey@gateworks.com>
 Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
