@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8BFC10DAA
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08F80C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:14:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B522B8773A;
-	Wed, 29 Nov 2023 19:11:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FE37877AC;
+	Wed, 29 Nov 2023 19:14:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P+OlIHUS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mujRdAiq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EFA1877B1; Wed, 29 Nov 2023 19:11:26 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 340598773A; Wed, 29 Nov 2023 19:14:10 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 613EB86BA8
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:11:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8E3D877A1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:14:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1cc13149621so124415ad.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:11:24 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1cc13149621so131725ad.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:14:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701281482; x=1701886282; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1701281646; x=1701886446; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6j95PQ3ruibwt860UmJgR+Vd1s6VDFDVUYBMjkb98Tc=;
- b=P+OlIHUSGQxZnKA310Y+YCaOloHw6wLVRswXMZkbiS0EmQj3Fg1bSnMBvqkYLbFExr
- +fLAMv/7ARlAAP8DXQLCDR848ZkXaGPxO7I2fh9a5kRkcEloWZ5f7/g3U6kzwYx7vGhI
- KPzHAZE+g07MTyqdVfArPJN19N0/bHpph4tv0Wupcodko7gjEjWzZIBo1UVp/mYUupwX
- SX1FTJzKf//vtuqTmlaUmJsxQKhj/fNxPNfQVf4rfKVjn6JIcYig4xr0XS9fJwN/LZYn
- 5Fe58yhUiGrSNGHYINhCJYBDSOyi7i13vXx5/C4zCMw94zi+yKDqlh9ecio74bbp5+E7
- NXMA==
+ bh=9BDYfv8XsnvE9UAveWxfzWB8ZW5RisIUZwB19725bcI=;
+ b=mujRdAiqYNsPew6I7LRxv+ZVuSqbJeFAukNvfmPw9TynHA4YomisXB0HkACLxIGDhh
+ +KLs02BpU+RmCR7oQmPNWVQOm4KuUw0Lu3Ks2aj62YT6v0vOJ73Nbqb80w4vV5VOKQ3N
+ AbcQXScBxT5EfOsrP5+gvM/Dwjq3joIVSKRpn8lvxQqyyZvUc3YaVNzdQdJev8L03RAV
+ njinyDJMG3YfWUKoNsOgd0jK4sqfBgHHfJbn0kGxHzre6sjRz0HOE3dkRDrW5SPQ9G3n
+ iEjyJrV/d8RuPFse0saov1hQQ9MjNEETSV7AqALIFD/POT6la3IjEDht8hY6vJPglkqU
+ T8nQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701281482; x=1701886282;
+ d=1e100.net; s=20230601; t=1701281646; x=1701886446;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6j95PQ3ruibwt860UmJgR+Vd1s6VDFDVUYBMjkb98Tc=;
- b=AN0HSwcSexIpN88t1d6+UelLTDXrLD7mXVa1cfSL8X1Mu8goVtB9iIPYTPBD4ryTof
- dvqHBkEJq7QKAs9Ia9DwVK91EemgeSEMgKUTX6++7etULR94PLBu2U1BJk3uFmRLt7qQ
- Y1tAELnOlzIBbAhhvCnOE2r9qdIL3unzVBr5c1MWBePYDYJsLB5MXIthomCSIKXzT5Nr
- ONjUnNvITrg/5B6MZ9j1ZFXnKwmK1C5LZdb5eKh/qd2KPZsLSUuuU73I4f04duQbpM2D
- tl/oTXh8GHsjkpr4XQbeyolDE7zw2uOHVXppzbrC8tTkKeE169h4AfNqKUPprJ3msPNr
- 62fg==
-X-Gm-Message-State: AOJu0YzfOJ5j/wxoaoWt0yr/dIkCS3mu57ocUO1PStdOUgaTq2vEq2jq
- Ii0wMRrhwXk8akBM5kQHa4Pi6lqI2J7cV7LdICg=
-X-Google-Smtp-Source: AGHT+IEIhqUZf7lHmXYI5Rb9aqSR1+nhCPfB2UIM+0z2HF5AamF5ZW2uYHrd/ne86/dqQBLYmgBZazyHX7QLTOkzRP4=
-X-Received: by 2002:a17:90a:7408:b0:285:6f2b:4e82 with SMTP id
- a8-20020a17090a740800b002856f2b4e82mr19226939pjg.1.1701281482430; Wed, 29 Nov
- 2023 10:11:22 -0800 (PST)
+ bh=9BDYfv8XsnvE9UAveWxfzWB8ZW5RisIUZwB19725bcI=;
+ b=kJtXb6c0BT65N1VrWtkbHfEiqYcXRfKfqBTQrKCjTaj9Yn54EPv71jkgjJyhazyPoT
+ xKtYk/I/sMYxt857neOpuzROjbVmdeZzQ9Xk3Mm0mpAgGcNE2ey/l9tkem3OIDR++XAl
+ kQEL/P0osL5yN8N65YA1TpP8eHi11Y10UlFCxB8LWttXjNvvDb1peE3XJifw/FOXj6L/
+ AQrU9pGHHsV4/mvbBRqzUgDj0B2mAggOJUTdoJarlBi7ufvQEHL5+LqGT71TjRQC0Mzx
+ MpiI8vGCcJyBAcr2S094ULpQIHnarynaX4QYAMA6fmbOpanh/Spoe5+LG0oP9ZAWIudK
+ lwWg==
+X-Gm-Message-State: AOJu0YzUPlqppb0GtHaJUl9Yx3DjtFzYWHeDIW/1pHXqkeNxt/w5ebjg
+ bIkGVRCz4VoJCbswl+RpD1RrzU+VD6EWt6jBrNQKWxF3s88=
+X-Google-Smtp-Source: AGHT+IH24crhBPVpChWJCt+KRDqMeii1B1LNRj2kecppIX2WyZuZObuPSySghkzQ76pUAT4vvhFDekdK3YBP/dD/yT8=
+X-Received: by 2002:a17:90b:713:b0:283:5405:9e90 with SMTP id
+ s19-20020a17090b071300b0028354059e90mr19242382pjz.3.1701281646027; Wed, 29
+ Nov 2023 10:14:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20231019194241.2207814-1-hugo@hugovil.com>
-In-Reply-To: <20231019194241.2207814-1-hugo@hugovil.com>
+References: <20231027134127.201699-1-arnaud.ferraris@collabora.com>
+In-Reply-To: <20231027134127.201699-1-arnaud.ferraris@collabora.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 29 Nov 2023 15:11:12 -0300
-Message-ID: <CAOMZO5CgqQHeb1mG8yGyLbqfV5OKqtZUiNExDTFgSATAWJ-nLA@mail.gmail.com>
-Subject: Re: [PATCH] imx8mn_var_som: Add myself to MAINTAINERS
-To: Hugo Villeneuve <hugo@hugovil.com>
-Cc: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
+Date: Wed, 29 Nov 2023 15:13:55 -0300
+Message-ID: <CAOMZO5CykviJfDFV25iv8YvVVP57eoHiA3zmXcDiQL7hdatdQQ@mail.gmail.com>
+Subject: Re: [PATCH 0/2] librem5: allow using distroboot w/ extlinux files
+To: Arnaud Ferraris <arnaud.ferraris@collabora.com>
+Cc: Angus Ainslie <angus@akkea.ca>, kernel@puri.sm, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,15 +86,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 19, 2023 at 4:42=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
-wrote:
+On Fri, Oct 27, 2023 at 10:41=E2=80=AFAM Arnaud Ferraris
+<arnaud.ferraris@collabora.com> wrote:
 >
-> From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> The Librem 5 currently can't boot from `extlinux.conf` files due to
+> undefined environment variables:
+> * `fdtfile` is missing, preventing the kernel from selecting the
+>   appropriate device-tree
+> * the lack of `kernel_comp_addr_r` and `kernel_comp_size` forbids using
+>   compressed kernels
 >
-> I would like to help maintaining the imx8mn_var_som symphony board.
+> This series ensures those environment variables are defined and have
+> usable values with regard to the board revision.
 >
-> Add myself to MAINTAINERS.
->
-> Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+> Arnaud Ferraris (2):
+>   librem5: properly set the `fdtfile` env variable
+>   librem5: Add addresses for compressed kernel load
+
+For the series:
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
+
+Angus,
+
+Are you happy with this series?
