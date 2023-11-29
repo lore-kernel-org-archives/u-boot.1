@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAD8C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11360C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 075108768B;
-	Wed, 29 Nov 2023 20:28:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id AA99387646;
+	Wed, 29 Nov 2023 20:28:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="ZtZ65s07";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oOdlY+WW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5649887646; Wed, 29 Nov 2023 20:27:59 +0100 (CET)
+ id C65E8877A4; Wed, 29 Nov 2023 20:28:03 +0100 (CET)
 Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
  [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51A4587646
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:27:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 349C3870AB
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:28:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-54a94e68fb1so2483732a12.0
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:27:57 -0800 (PST)
+ 4fb4d7f45d1cf-54b18dbf148so223889a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:28:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1701286077; x=1701890877; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=06H8gnAWeBbV1U0UsQ+9v9mQ4IJq9bueFvFcx0L3Zpw=;
- b=ZtZ65s07mFn5nwLK4JiBjJEEIOQ3QX7mz86smA+CxxDopSAvvxWmxtCAItjxDfPveS
- l5uT/sXfty6d9rULAO+DehXPx3ZXMhtNqFLLGHCT+0OukiN6J/dfpAGZjqbM/WMAMhkY
- zbmulxybjxYPY1vi1tyYoanxBkj7eplFcrZ/dpWiIoz5zdhYKttzluRf1ycQqpQLPV4T
- dVNVW6aqSnDMpUXVg0G4lSvroYss6gdHFyEazpwwT3YQNtcwlCopukmu1nzwUNekbjbI
- i+eaHEdX0Y1ao3wg+IeivjjoQo1Zn9yuI7tVlOd8sZ/+NHG3eH3KxRhGsTXYHPKtDVh9
- TouQ==
+ d=chromium.org; s=google; t=1701286080; x=1701890880; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3AuWnpOKn6/LOs6gN/1onSqqVkwgRi2QX2eXlxAuW2I=;
+ b=oOdlY+WWFkrUMBo5lM9PMKOBtHZz2F8G6yaBglxzkPSrfehorFarE43f3zVIHriw+u
+ bzi3XxGtJ34Oe7cgwKTVSYYkD9IuvtcAmekm14Zx5ro/HJjA/qLpOtdY/7e4kIj1e4bh
+ 2+rOl8T5hOEz8XMsaQWrfWDgoKviYfMJm+Qzk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701286077; x=1701890877;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=06H8gnAWeBbV1U0UsQ+9v9mQ4IJq9bueFvFcx0L3Zpw=;
- b=rDLHRpm//ft+3bFCiJHHeoF/qq9Xf+8T532xaMMYXl3cZQ8YkCnM7dU7nCOQmxX9nD
- ehhHZQBuxaP6pT36bUPDEr11nXt9KO/OcDP7F8/qyi2o6EbE8dkw/Bw1EZWko+C9VER5
- Pr0lArPCF9AZJYX2db0yENxb7KQHzsd+QKPa7AFFZKdP0Kq42TXFuW4lw+Y42OtLiv5v
- c2Yu3S9mOovYMZ1sVGJ+FrxHswLE2rMP2poHRPAtrpJ1WPPG6mJDhkq6n99dgxwNuHq9
- EnkyBDeydCNL88XZ6AtwIiXXVVq/Uu2zYqieJrrKR14DsCap1b+RY6o0kVqlVJiv3NUV
- mg0g==
-X-Gm-Message-State: AOJu0YwApGr2tsalwOAE8Hg8sfwHlfvZBmsByNgV6JfV5MrAYSAL9L6l
- sGJg+/yQjwqyCKJrPIwFXkRVbIYBMpPTixnoBjYC5w==
-X-Google-Smtp-Source: AGHT+IEuS9Grx3w7TonDZ5akkj55aLQTTN9XgxxNosZc8g4t0F6uKTrb0GxSmURL0psDSPFQZY/hkVXPYwd6fJIeMnQ=
-X-Received: by 2002:a17:906:b810:b0:a04:eac3:2812 with SMTP id
- dv16-20020a170906b81000b00a04eac32812mr20214435ejb.26.1701286076553; Wed, 29
- Nov 2023 11:27:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701286080; x=1701890880;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3AuWnpOKn6/LOs6gN/1onSqqVkwgRi2QX2eXlxAuW2I=;
+ b=Zau6/Bp4KaKD46lDqa9yec7gFw04Z0vMt8AC76qXlX4OBquPDR+rRwMo9lanvn9+0Z
+ XwaRUc8C0Wh2VuVNc56vZKB7oD8YS0m7rNjcCSsRFRiGQLIXnYCbeOjWVKEruMIf2a9G
+ c7hiezaarJ3EOjwdyQkCWqhhCBl9xrul5dluojK6gbCnrJHRD2GTlonMYMWvAvXXJ/v2
+ Hh/yuxo0QW3ZXoXBxpAvhNRVZq8KZw/rj7WcaB73LVIQPbmOaNhMP/TD0ATU+o4odqoz
+ x3uRnBN8WYM5rqukdBBE9OrR8nik1cOf/NipwvlZ66Uly+BgR9rabqZdgBPrQSxdjupg
+ W42Q==
+X-Gm-Message-State: AOJu0YyTdt0GmMyb5SWChVveR59L+eXgBt0S2OienI/6oN8bc9XwNkGX
+ +CNfZZrEewAhn9RIe8uX1kSDAcd9NI4+eeomFrf39Q==
+X-Google-Smtp-Source: AGHT+IFmYameW0CYgEPlsImQwgdWcG4hnumiGXF0r14PE3qagwmhY8/VsXK2HU1xr2OLOxeIOU2zBpo3qa9BLuwQVQg=
+X-Received: by 2002:a17:906:6ad9:b0:9e6:4923:680a with SMTP id
+ q25-20020a1709066ad900b009e64923680amr11731908ejs.3.1701286080464; Wed, 29
+ Nov 2023 11:28:00 -0800 (PST)
 MIME-Version: 1.0
-References: <AS8PR08MB6806D08B61DB1A97ABF68BBDEBD5A@AS8PR08MB6806.eurprd08.prod.outlook.com>
- <cover.1700843096.git.piotr.kubik@iopsys.eu>
- <01aeaae2b87933e8a33a575ec0d23e2d464d6699.1700843096.git.piotr.kubik@iopsys.eu>
-In-Reply-To: <01aeaae2b87933e8a33a575ec0d23e2d464d6699.1700843096.git.piotr.kubik@iopsys.eu>
-From: Simon Glass <sjg@google.com>
-Date: Wed, 29 Nov 2023 12:27:45 -0700
-Message-ID: <CAPnjgZ0wjR7dosOqVPJAgvGzF-RfV0pTiP9g3TC0uyUZLS7ejA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] bootm: Fix flags used for bootargs string
- substitution
-To: Piotr Kubik <piotr.kubik@iopsys.eu>
-Cc: u-boot@lists.denx.de, trini@konsulko.com
+References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+In-Reply-To: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 29 Nov 2023 12:27:49 -0700
+Message-ID: <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
+Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
+To: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, andy.shevchenko@gmail.com, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,24 +83,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 24 Nov 2023 at 09:35, Piotr Kubik <piotr.kubik@iopsys.eu> wrote:
->
-> Commit 51bb33846ad2 ("bootm: Support string substitution in
-> bootargs") introduced a feature of bootargs string substitution
-> and changed a flag used in bootm_process_cmdline_env() call
-> to be either true or false. With this flag value,
-> condition in bootm_process_cmdline()
-> `if (flags & BOOTM_CL_SUBST)` is never true
-> and process_subst() is never called.
->
-> Add a simple test to verify if substitution works OK.
->
-> Signed-off-by: Piotr Kubik <piotr.kubik@iopsys.eu>
-> ---
->  boot/bootm.c              | 6 +++++-
->  test/py/tests/test_fit.py | 8 ++++++++
->  2 files changed, 13 insertions(+), 1 deletion(-)
++Heinrich Schuchardt
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Hi,
 
-Thank you
+On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
+<phanbagiabao2001@gmail.com> wrote:
+>
+> Hello everyone,
+>
+> I am a trainee at STMicroelectronics France. I am working on a project "S=
+etting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex-A .=
+ The objective of my project is to add a way of booting (with ACPI) besides=
+ Device Tree available on STM32MPU.
+>
+> I found that ACPI was enabled on some x86 platforms but I don't know whet=
+her it was set up on ARM or not. I found a PATCH that discussed Enabling AC=
+PI booting on ARM with Raspberry Pi 4 but I don't know if it functioned or =
+not. Did anyone here succeed in setting up ACPI on ARM by U-boot?
+
+Sort-of...the refactoring to allow ACPI tables on ARM is completed,
+but I don't think any U-Boot board uses this.
+
+>
+> What are the differences between x86 and ARM platforms when enabling ACPI=
+? The architecture of my board STM32PMU is ARM so can I apply the technique=
+ used on platform x86 for my board?
+
+Firstly I wonder why you want ACPI?
+
+Secondly, if you have the tables somewhere it should be easy enough to
+build them, building on the series you pointed to. Heinrich is
+interested in this, I think. I can help with advice. I have been
+toying with going back to that rpi series but have not done so yet.
+
+Regards,
+Simon
