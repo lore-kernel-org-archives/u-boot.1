@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70CA8C07CB1
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 03:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7C1C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 04:47:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 635868747E;
-	Wed, 29 Nov 2023 04:25:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BA60387045;
+	Wed, 29 Nov 2023 05:47:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bqcAkaJy";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="cfYyeAI6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAA528749C; Wed, 29 Nov 2023 04:25:56 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C76F28747E; Wed, 29 Nov 2023 05:47:51 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C81A4870D2
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 04:25:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F69487045
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 05:47:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-db4422fff15so5276413276.1
- for <u-boot@lists.denx.de>; Tue, 28 Nov 2023 19:25:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701228353; x=1701833153; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GIxVJV0smC9PfnFplzTJyagp6p6qJsTFri8Fp6AULls=;
- b=bqcAkaJy/C2CeGX2ADT+mGmR69nFzrYTUHYvCNB3bE9dtgaSx0yTNdoBvxTwyDU5an
- ZjP1UvjEVE0GAGeLgnM8ABJKLjDbufXS+gZUrZKjDLZ+GHCwsR752wOA3X/dcMR6OR+E
- Dp7YTtA8BVzQ6pSe5AaJ2I1+PQUfMIRVp3lZ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701228353; x=1701833153;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GIxVJV0smC9PfnFplzTJyagp6p6qJsTFri8Fp6AULls=;
- b=iOfXNCsMY2LKI4lhrLEphLS8TY3gwKlP8bkiSPfURARxqr+HpqKg02tfK8F5U2M9Td
- ZrLwDOfEK9zsLSClJmySH0TKjA7CsLEuiB8qjSpeGQRsxfgEiRIIy3IyD6ffvtdOKKCr
- JZbIkmSKyROypXCM3ctQnSJEjugDZEwtCGCbflr+pkHe1kjN7xyLw0P/aGMFujn05VOD
- KZK4jjD/D3gAawMKJRI2/6nqiFzgvN32JmGv3d83juYO2ilP6ICGJb9J0hSdlW4ep53x
- UBLFHecd95hMM5imcEj7Lb86VyEiHXxI/tD+QHs6r3Sc7otyWLQFWzAKRmN73EanV2H9
- 6DKw==
-X-Gm-Message-State: AOJu0YyNBQwiM5TuvXeqYP0Hf4iGmrxRlk54lYvwg5jeP+nxUoLGic7y
- dKvqjn/kYOAwxtFDB1JK/y/eqw==
-X-Google-Smtp-Source: AGHT+IFph1yZXZ8WySLNYNxNDr+xF/A4ivPQ76ksLN/aSNNkXvjPV1Bjms5rQUTH+FZNaY+BKIDnxw==
-X-Received: by 2002:a25:8407:0:b0:d84:e7a6:fc09 with SMTP id
- u7-20020a258407000000b00d84e7a6fc09mr17554170ybk.17.1701228353481; 
- Tue, 28 Nov 2023 19:25:53 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-6400-9fa4-b7c8-6a9a-173e.res6.spectrum.com.
- [2603:6081:7b00:6400:9fa4:b7c8:6a9a:173e])
- by smtp.gmail.com with ESMTPSA id
- 79-20020a250d52000000b00d7ba4c5e31fsm4000128ybn.39.2023.11.28.19.25.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Nov 2023 19:25:51 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, christian.taedcke-oss@weidmueller.com
-Cc: Christian Taedcke <christian.taedcke@weidmueller.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Qu Wenruo <wqu@suse.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Stefan Roese <sr@denx.de>
-In-Reply-To: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
-References: <20231115124424.125823-1-christian.taedcke-oss@weidmueller.com>
-Subject: Re: [PATCH v3 0/9] fs: fat: calculate FAT type based on cluster count
-Message-Id: <170122835109.772379.10049440097124366790.b4-ty@konsulko.com>
-Date: Tue, 28 Nov 2023 22:25:51 -0500
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1701233267;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bkh0nIBhkgKPtbeehdsa1/3AojSgoYR71PetMJ5acus=;
+ b=cfYyeAI6D4ZjBZoXbImRsob/+A4Vv+IiqrnvvPE86GYY9vt0JJJMWTnhDnhXArNIvZbQnD
+ lAYjPPr7+KBmVFeFWVvYayg4f+Oal7l/68rJJBIDEld6Nv9K4JB26XH6dEx18N6FiZCYjZ
+ W/zjrT7PnbidKUztO3H3Hck1+LTGaF3c1gCuSZLua1+7jYiyUSoKQ8LNZ+v5+SkY8CtX9I
+ LvIizUbkJHjZaf+BkuED0DmJkQXKHap3a1KrksUsjgeHakdzCY7E2dWpKuB8sGxBMmvusR
+ Zexuw/zfK39WRN79qHTwPaDhOksym0k48W63IyB16tHumze59iQJ3SfbNieHsA==
+Date: Wed, 29 Nov 2023 05:47:47 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Sz=C5=91ke_K=C3=A1lm=C3=A1n_Benjamin?= <egyszeregy@freemail.hu>
+Cc: Hugo Villeneuve <hugo@hugovil.com>, u-boot@lists.denx.de,
+ otavio@ossystems.com.br, sbabic@denx.de, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
+In-Reply-To: <A2FIQQ.2wIe6QeN9LRi.hPrNsyrmbwYjoHVf1fCB@freemail.hu>
+References: <20231107221617.470-1-egyszeregy@freemail.hu>
+ <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+ <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
+ <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
+ <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
+ <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
+ <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
+ <CAOMZO5ApoA7+o_XOz04OLWpW-+hwhW-M9cROSbV1vADmDnydJw@mail.gmail.com>
+ <A2E7RA.WAMpX3ekvN7A.ZZTk9ZUF8rABr6qdjSu@freemail.hu>
+ <CAOMZO5AK3cxy_mOD_J9UPPCzFVfzoVw=OmACeh2+27k+4CkCnQ@mail.gmail.com>
+ <A2E88A.1BiPC1JJI4ID.2cqy6ZTmX2YXIGOSvxV@freemail.hu>
+ <20231128181740.7fea242b489d9efa261904d4@hugovil.com>
+ <A2FIQQ.2wIe6QeN9LRi.hPrNsyrmbwYjoHVf1fCB@freemail.hu>
+Message-ID: <46e75feb54d11721d09209ac00036dc3@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,20 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 Nov 2023 13:44:15 +0100, christian.taedcke-oss@weidmueller.com wrote:
+On 2023-11-29 00:35, Szőke Kálmán Benjamin wrote:
+> Sorry i can not fix it, this is an average e-mail service provider
+> that provides the expected tech level in 2023.Please upgrade your
+> u-boot list website engine to able to support e-mail
+> formats/technologies from 2020s ages. I suggest to use similar what
+> Yocto project has: https://lists.yoctoproject.org/g/main--------
 
-> From: Christian Taedcke <christian.taedcke@weidmueller.com>
-> 
-> 
-> This series fixes an issue where the FAT type (FAT12, FAT16) is not
-> correctly detected, e.g. when the BPB field BS_FilSysType contains the
-> valid value "FAT     ".
-> 
-> [...]
+Well, it makes me wonder what are those modern email technologies?  Is 
+it HTML?  Also, I'm getting "group does not exist" on the link above.
 
-Applied to u-boot/next, thanks!
-
--- 
-Tom
-
-
+> Eredeti levél --------Feladó: Hugo Villeneuve <hugo@hugovil.com>Dátum:
+> 2023 november 29 00:17:51Tárgy: Re: [PATCH 1/1] pico-imx7d: add
+> baseboard SD card boot detectCímzett: Szőke Kálmán Benjamin
+> <egyszeregy@freemail.hu>On Mon, 27 Nov 2023 23:26:08 +0000 (GMT) Szőke
+> Kálmán Benjamin <egyszeregy@freemail.hu> wrote:  > It was absolutely
+> conform, i supressed the potentional warning. Once again i say, i will
+> not remove it, if you do not liket it you can remoce as a maintainer.
+> My patch is ready and final. Let's do something to improve i.MX family
+> as a maintainer. I am realy sad to see in last 2-3 years there was no
+> any significats new features for boards since their initial
+> commits.-------- Eredeti levél --------Feladó: Fabio Estevam
+> <festevam@gmail.com>Dátum: 2023 november 27 21:39:19Tárgy: Re: [PATCH
+> 1/1] pico-imx7d: add baseboard SD card boot detectCímzett: Szőke
+> Kálmán Benjamin <egyszeregy@freemail.hu>On Mon, Nov 27, 2023 at
+> 4:55 PM Szőke Kálmán Benjamin <egyszeregy@freemail.hu> wrote: > >
+> Unused function parameters should be removed >
+> https://rules.sonarsource.com/c/tag/based-on-misra/RSPEC-1172/  From
+> this same URL:  "Exceptions There are some cases when you want to have
+> an unused parameter (usually because the function has to conform to a
+> fixed prototype"  which is the case here with your patch, where you
+> need to conform to: int board_mmc_get_env_dev(int devno)  Hi, please
+> fix your mailer to wrap lines properly.  Hugo Villeneuve.
