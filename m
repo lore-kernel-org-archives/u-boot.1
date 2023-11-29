@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08F80C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:14:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD8F7C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FE37877AC;
-	Wed, 29 Nov 2023 19:14:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25E768773A;
+	Wed, 29 Nov 2023 19:14:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mujRdAiq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CzkXqTTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 340598773A; Wed, 29 Nov 2023 19:14:10 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id B96B1870AB; Wed, 29 Nov 2023 19:14:45 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8E3D877A1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:14:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97F7B877A1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:14:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1cc13149621so131725ad.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:14:07 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-280b06206f7so11775a91.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:14:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701281646; x=1701886446; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1701281682; x=1701886482; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9BDYfv8XsnvE9UAveWxfzWB8ZW5RisIUZwB19725bcI=;
- b=mujRdAiqYNsPew6I7LRxv+ZVuSqbJeFAukNvfmPw9TynHA4YomisXB0HkACLxIGDhh
- +KLs02BpU+RmCR7oQmPNWVQOm4KuUw0Lu3Ks2aj62YT6v0vOJ73Nbqb80w4vV5VOKQ3N
- AbcQXScBxT5EfOsrP5+gvM/Dwjq3joIVSKRpn8lvxQqyyZvUc3YaVNzdQdJev8L03RAV
- njinyDJMG3YfWUKoNsOgd0jK4sqfBgHHfJbn0kGxHzre6sjRz0HOE3dkRDrW5SPQ9G3n
- iEjyJrV/d8RuPFse0saov1hQQ9MjNEETSV7AqALIFD/POT6la3IjEDht8hY6vJPglkqU
- T8nQ==
+ bh=bwA3A7dHOxpmXkB+oCDpmKPuHT1sQ+2Ye0H16n54pN4=;
+ b=CzkXqTTXXeSInoWxyCXhEwGqZhaTWt4m02rOGXfA4sPGQZulVkPfEJiWGAPx8OaQwK
+ Qxy/9mXKUr7DNnyKUYs/2RT0OubL32xpbVi++BG+VL5kB/vuhVfSqmOlsm+XcCTnKsgc
+ z6pCYDpjjRx7kUtYnIvQ1Joq+viy1zYlvWNewpnUFvyuTt5e+WyiwWuOMKW64oD/dWIZ
+ RUK2rmJMROWOtGqcrsBTvy015xsinl5nIBjztQloUSuZHsWwivMqoyXEF85npQo+kP+8
+ yHG8tpFe2m2sIlyxku6KGGAGAlfovqe0C2uC8PgUFGI7eOcJ4spz/If64Mt3x4QtY77R
+ icvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701281646; x=1701886446;
+ d=1e100.net; s=20230601; t=1701281682; x=1701886482;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9BDYfv8XsnvE9UAveWxfzWB8ZW5RisIUZwB19725bcI=;
- b=kJtXb6c0BT65N1VrWtkbHfEiqYcXRfKfqBTQrKCjTaj9Yn54EPv71jkgjJyhazyPoT
- xKtYk/I/sMYxt857neOpuzROjbVmdeZzQ9Xk3Mm0mpAgGcNE2ey/l9tkem3OIDR++XAl
- kQEL/P0osL5yN8N65YA1TpP8eHi11Y10UlFCxB8LWttXjNvvDb1peE3XJifw/FOXj6L/
- AQrU9pGHHsV4/mvbBRqzUgDj0B2mAggOJUTdoJarlBi7ufvQEHL5+LqGT71TjRQC0Mzx
- MpiI8vGCcJyBAcr2S094ULpQIHnarynaX4QYAMA6fmbOpanh/Spoe5+LG0oP9ZAWIudK
- lwWg==
-X-Gm-Message-State: AOJu0YzUPlqppb0GtHaJUl9Yx3DjtFzYWHeDIW/1pHXqkeNxt/w5ebjg
- bIkGVRCz4VoJCbswl+RpD1RrzU+VD6EWt6jBrNQKWxF3s88=
-X-Google-Smtp-Source: AGHT+IH24crhBPVpChWJCt+KRDqMeii1B1LNRj2kecppIX2WyZuZObuPSySghkzQ76pUAT4vvhFDekdK3YBP/dD/yT8=
+ bh=bwA3A7dHOxpmXkB+oCDpmKPuHT1sQ+2Ye0H16n54pN4=;
+ b=QzwmvZvqhoP0Wwa1Z8+w6Ee4dWDd2Bk3C4iXwo6XQdlZKCvb4DW0N+h4TDJDdjZl7T
+ rXQN3bxcpkpJ+ZeSR8cjQriQBoOnwohvdrgn9J0h9aV0QD48sQq0Y++YuhKG/3XtfEy+
+ OyutG2Gb0/p3WsdvJs2AL+jHcTr5jXyVRDA2RnDCv7MBaIaDs9ejeTLn6P7erzQ1Dm8/
+ bt/KTzliZ/bpaijtTg9g90xE5wIPwYxHs5C8cvL9kPiWYy2YuNubZfZHbHNW3s7BBnbc
+ t+UX7+554tgIq41zxxhNGylg+FKeDARw/P3xQQUBmBLMyt5mWpqyqftPMXK6vMDmgNkS
+ Pcog==
+X-Gm-Message-State: AOJu0YykMoy0mcrr6e82k8kU9SJzJnB4tAX+yxYK3YsRQSZ6qoNJt0/n
+ owr1kpvoIFJ982ofVdMITiJdQAuy8obJEIGoM0ycn/f6+3w=
+X-Google-Smtp-Source: AGHT+IF+yU8R3JuLBJUPeG77f/zEByViAfK/uwn0bUIXOC/sBrzQ9jzdP/aHSbPsEZAYuopEa7L45AaAdnW9MC8gVNk=
 X-Received: by 2002:a17:90b:713:b0:283:5405:9e90 with SMTP id
- s19-20020a17090b071300b0028354059e90mr19242382pjz.3.1701281646027; Wed, 29
- Nov 2023 10:14:06 -0800 (PST)
+ s19-20020a17090b071300b0028354059e90mr19244005pjz.3.1701281681662; Wed, 29
+ Nov 2023 10:14:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20231027134127.201699-1-arnaud.ferraris@collabora.com>
-In-Reply-To: <20231027134127.201699-1-arnaud.ferraris@collabora.com>
+References: <20231104163243.117404-1-marex@denx.de>
+In-Reply-To: <20231104163243.117404-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 29 Nov 2023 15:13:55 -0300
-Message-ID: <CAOMZO5CykviJfDFV25iv8YvVVP57eoHiA3zmXcDiQL7hdatdQQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] librem5: allow using distroboot w/ extlinux files
-To: Arnaud Ferraris <arnaud.ferraris@collabora.com>
-Cc: Angus Ainslie <angus@akkea.ca>, kernel@puri.sm, u-boot@lists.denx.de
+Date: Wed, 29 Nov 2023 15:14:31 -0300
+Message-ID: <CAOMZO5C8LPM9naPFOy_LU-cCfxAT6vRrekVk3EuUiECYDHYVvQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm: imx6: Enable TCP, IPv6, wget on DH i.MX6 DHCOM
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,27 +89,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 27, 2023 at 10:41=E2=80=AFAM Arnaud Ferraris
-<arnaud.ferraris@collabora.com> wrote:
+On Sat, Nov 4, 2023 at 1:32=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> The Librem 5 currently can't boot from `extlinux.conf` files due to
-> undefined environment variables:
-> * `fdtfile` is missing, preventing the kernel from selecting the
->   appropriate device-tree
-> * the lack of `kernel_comp_addr_r` and `kernel_comp_size` forbids using
->   compressed kernels
+> Enable support for TCP protocol, wget, and IPv6 on this platform.
+> The former two allow users download payload into the U-Boot from
+> a web server, which may be more convenient or easier to set up
+> than TFTP server. The later is enabled to future proof the IP
+> stack on this platform.
 >
-> This series ensures those environment variables are defined and have
-> usable values with regard to the board revision.
->
-> Arnaud Ferraris (2):
->   librem5: properly set the `fdtfile` env variable
->   librem5: Add addresses for compressed kernel load
-
-For the series:
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
-
-Angus,
-
-Are you happy with this series?
