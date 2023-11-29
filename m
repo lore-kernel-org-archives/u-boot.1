@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A35CC4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C7BC4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 18:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DB438758F;
-	Wed, 29 Nov 2023 19:18:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B9B438779C;
+	Wed, 29 Nov 2023 19:21:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="duQ/iLO6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EfvHx5lQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7D1D87550; Wed, 29 Nov 2023 19:18:37 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id 4151B87550; Wed, 29 Nov 2023 19:21:20 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6242E8761C
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:18:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF6FF877AB
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 19:21:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6cddc5a7b35so8790b3a.0
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:18:35 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-280cd4e6f47so9527a91.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 10:21:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701281914; x=1701886714; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1701282076; x=1701886876; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JGGnlYiYfmmvRK+bcgkqo7ik5XtfDQ1wq5Gga3nIorQ=;
- b=duQ/iLO6REmJfKmNxzgGEh6aPjPp4jRRyglArplY9CaNTqdAlAQ3anidUE7PFQ5yUL
- 4TCDv5KcJg7iOAcPjxMQlueGB+sttLyz9+51/LTULNHxX2EjD2SGtk5nZW4rW4qSLALb
- aPvkUl5xVFowb+6jNcGn03qVZYiKzdil1tzMsqRyygzRFpPO7YLm4uCM4o58GbN4ZHon
- EORV3qpWpM+NjFnfaVEiB/D3OdtL2yoKFc6tk1v4qGWyjDk9KsR711ON6GhJ1aC/6RM4
- q5NV4aZqcU/x4Cw/rOno0h8qKvFjvh6UbmFPgS3+lTFjBuF8vnkK8aynT1l5aWExzDkz
- pEFA==
+ bh=Z9Y8FnDD6vcnA+HUQboNthpkgTFwKbuOchcS9q2zfV8=;
+ b=EfvHx5lQ/m2rSUym17bSXzMPwxO9EDOOG90eIilojNQ8Q+c8SySWTSXeAcWa1qoVdh
+ /VNfFXZlaidWZWKt4wwgtqBkowzFMY/ZcQ8R8UBwHIhQvVEMV/7l3nBjCy8BWftuhoY0
+ bK9hPUCuw8tRBKaCa1FckliWL8EH5DOZOgGK6o3EFYezkhVEuTlhk2iHzbUi0TYzvpoW
+ HLRMgDoMg1OZNgcJ5cH3+ebhyM/kagINepWjM5HJraerfQBJBhpWj9iddiYER+uDlrVU
+ WavCocZkhZwF/O7iYYLr0DKOjFUa7fdou5pebWJtP9KqgIG+RUpUaZ5PkUMFHhhqe2q7
+ laOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701281914; x=1701886714;
+ d=1e100.net; s=20230601; t=1701282076; x=1701886876;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JGGnlYiYfmmvRK+bcgkqo7ik5XtfDQ1wq5Gga3nIorQ=;
- b=GAU5WkqkKcyC0l6/cYCoX8csaS7zVA7Z/gJ8DY4zy2o/84sZ32ccH/5yHYLdqjzcMz
- Wage/3lv9W6WVeETFAYntgHOXRdOFglK+KKgxPXK7/jY5UX5kaGuBckds/FPtjsFwCh8
- +HDexoaiugYYNs8JF0HlVRqlhv86EI0FJhExZn837GfhQEUzKtuMlk2Rbe5OAr/ZF6lP
- riWM2fFD7IvaaYX3T4OidKJUTdMajvZtMP/Tc+etdClNvvjErCkli6VhaepX64BYtW/v
- GjokhKVH8fJ82U/4jnbgpCxk1X2fHdFYCyWWTVqycRQQCgh7+nkn2bfwL6YngvtsBvgb
- nxDw==
-X-Gm-Message-State: AOJu0YwQfoI9mHTypGnEHnkBiTSVHSKSjplgT7pYq5RikKwo1FQwIS5W
- HohHwkPL8PpuesGkkSG0KTX/suHOqQSuwvD/cEU=
-X-Google-Smtp-Source: AGHT+IGOpPZeGeWrRLgvfR87bebW2jdnTjSpxQL97qn437xHpJ5qbhfYWvQZN5MwZ5N0RY6JBVTV+HVZsXelgtBBC4k=
-X-Received: by 2002:a05:6a21:7896:b0:188:67f:ff2c with SMTP id
- bf22-20020a056a21789600b00188067fff2cmr26059760pzc.0.1701281913776; Wed, 29
- Nov 2023 10:18:33 -0800 (PST)
+ bh=Z9Y8FnDD6vcnA+HUQboNthpkgTFwKbuOchcS9q2zfV8=;
+ b=MysfnCXitGU8HeS0ZXg3lmdIHu+grIzgmDuDrw3r2JO+9jwgjQ1fGw83KcAY9y+a4/
+ R7ai5rYOTn/XHQfMRxcBsmIQyTDjcSCk2rBoIgJ1O70JhaW25ERpkIRmHjPw77NeF4D0
+ orr0Wmy/B83K7Ov5KLEp02S+mCvuYeHKYeiUOi821+NmjsIZ3FSTJpaG8c2ePoq28kR7
+ 60JnvHXRUafaLbXs2HmC+2VQcaI1K1e0xZoqRcJ9amzMVcrjCnyIU0ew/oxqNFpODcNg
+ FvBI9RqBz82lVnC41xb2U45oXABmV4UEqHwDDDOG6v2SBXp5gXiFdDKCQMe9b1bpS31U
+ diAQ==
+X-Gm-Message-State: AOJu0YyLxia53NXpQesG5ut7GVHDHIbBTmfE2y9eJ+9JAU396qY/Tsqa
+ mmi0rEvKl2p+aJkkSxcsIJ5TTIP7RRODSIVU9sQ=
+X-Google-Smtp-Source: AGHT+IEVSmhmyiHenLnC+ejxkl6zR5WDtDo0NCccV8mO9xnUxYKtQMzZ6GAYbKGnrvkBMM3yVIDSu0A0M7eQaIGAoNg=
+X-Received: by 2002:a17:90a:e516:b0:283:2fc3:b8ad with SMTP id
+ t22-20020a17090ae51600b002832fc3b8admr19923352pjy.2.1701282075687; Wed, 29
+ Nov 2023 10:21:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231109162401.38941-1-hiago.franco@toradex.com>
- <20231109162401.38941-3-hiago.franco@toradex.com>
-In-Reply-To: <20231109162401.38941-3-hiago.franco@toradex.com>
+References: <20231117150044.1792080-1-miquel.raynal@bootlin.com>
+In-Reply-To: <20231117150044.1792080-1-miquel.raynal@bootlin.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 29 Nov 2023 15:18:23 -0300
-Message-ID: <CAOMZO5D7f-6dqd+PG1bhwFWxESD4Z0ZLTkzdVQJ4GrRpE3+ESQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] board: apalis/colibri imx6/imx6ull/imx7: Add fastboot
- bootcmd support
-To: Hiago De Franco <hiagofranco@gmail.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de, 
- Hiago De Franco <hiago.franco@toradex.com>
+Date: Wed, 29 Nov 2023 15:21:05 -0300
+Message-ID: <CAOMZO5C9GH3rqrxpf_jMZO6QxGS+Led5RRb+ejSR9Gox7BTz4Q@mail.gmail.com>
+Subject: Re: [PATCH] tqma6: Fix DDR configuration
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Markus Niebel <Markus.Niebel@tq-group.com>, u-boot@lists.denx.de, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Alexander Stein <alexander.stein@ew.tq-group.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,21 +88,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 9, 2023 at 1:44=E2=80=AFPM Hiago De Franco <hiagofranco@gmail.c=
-om> wrote:
+On Fri, Nov 17, 2023 at 1:50=E2=80=AFPM Miquel Raynal <miquel.raynal@bootli=
+n.com> wrote:
 >
-> This commit adds support for Fastboot boot commands by checking both
+> Initially investigating a Linux network issue causing a lot of drop and
+> poor network performances on a custom system based on a TQMA6A module
+> (based on an iMX6Q), [1st link below].
+>
+> I eventually correlated my observations with a contention at the NIC
+> level when in concurrency with the graphics pipeline. Troubleshooting
+> this in the kernel lead to disabling DMA bursts accesses made by the IPU
+> in order to avoid triggering the QoS at the interconnect level, reducing
+> from 50 to 10% the drop rate on eth0, [2nd link below]. The solution
+> worked on my setup but not on others, which still suffered from
+> abnormally high drop rates even with this "fix".
+>
+> After looking a while into TQ Systems BSP I figured out a number of
+> differences in recent U-Boot out-of-tree patches they had in their
+> repository [3rd link]. Parsing the differences one after the other lead
+> me to this final solution.
+>
+> The reset pad of the DDR controller was apparently misconfigured, Bit
+> 18-19 picturing the "DDR select field". The current value b11 is
+> reserved. The only defined value as of version 6 of the iMX6Q manual was
+> b00 "DDR3 and LPDDR2 mode". In practice no register difference has been
+> spotted after changing this configuration but all issues tracked thus
+> far just vanished. All previous fixes have been proven irrelevant. Just
+> clearing this field solved all our network issues and the drop rate as
+> measured by iperf3 felt back to 0%.
+>
+> Link: https://lore.kernel.org/netdev/20231012193410.3d1812cf@xps-13/
+> Link: https://lists.freedesktop.org/archives/dri-devel/2023-October/42825=
+1.html
+> Link: https://github.com/tq-systems/u-boot-tqmaxx/commit/15eb6abbefbf6916=
+c28467b85485911dad3da6bc
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
-Just a nit: use imperative mood - "Add support for Fastboot....".
-
-> CONFIG_CMD_USB_SDP and CONFIG_USB_FUNCTION_FASTBOOT. If either of these
-> configurations is set, it indicates that the board is in recovery mode
-> and can use either SDP or Fastboot.
->
-> The default option remains the SDP command, but if
-> CONFIG_CMD_FASTBOOT is set, it changes to 'fastboot usb 0' as
-> the boot command.
->
-> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+Yes, better not to write to reserved fields:
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
