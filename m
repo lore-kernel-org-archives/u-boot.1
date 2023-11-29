@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4F38C07E97
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:27:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BAD8C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 19:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FC708749C;
-	Wed, 29 Nov 2023 20:27:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 075108768B;
+	Wed, 29 Nov 2023 20:28:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BUhNG0ZJ";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="ZtZ65s07";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B545A87626; Wed, 29 Nov 2023 20:27:53 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 5649887646; Wed, 29 Nov 2023 20:27:59 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25CB5870AB
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:27:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51A4587646
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 20:27:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9fa45e75ed9so17731666b.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:27:51 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-54a94e68fb1so2483732a12.0
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 11:27:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701286070; x=1701890870; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1701286077; x=1701890877; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6gR6QlSoTlyq04eRwNKCnLLqDlXv6VkMGmXKmkbAaQ0=;
- b=BUhNG0ZJRgmm1Df+siHM08CUDcKQXSjoKjAE+JKBDGNVvMwYXO8VqR53Urt+JGP2KW
- PfIZNZ9IQvBBWWEBoIKBb83Gsu11ISsfZBcVL4l5M+1eOyw7F2ovuzHzlbwenCJePzVS
- WNwMpSAXO2yur6TrUL2FPNUd7BAZKVf/zdFWY=
+ bh=06H8gnAWeBbV1U0UsQ+9v9mQ4IJq9bueFvFcx0L3Zpw=;
+ b=ZtZ65s07mFn5nwLK4JiBjJEEIOQ3QX7mz86smA+CxxDopSAvvxWmxtCAItjxDfPveS
+ l5uT/sXfty6d9rULAO+DehXPx3ZXMhtNqFLLGHCT+0OukiN6J/dfpAGZjqbM/WMAMhkY
+ zbmulxybjxYPY1vi1tyYoanxBkj7eplFcrZ/dpWiIoz5zdhYKttzluRf1ycQqpQLPV4T
+ dVNVW6aqSnDMpUXVg0G4lSvroYss6gdHFyEazpwwT3YQNtcwlCopukmu1nzwUNekbjbI
+ i+eaHEdX0Y1ao3wg+IeivjjoQo1Zn9yuI7tVlOd8sZ/+NHG3eH3KxRhGsTXYHPKtDVh9
+ TouQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701286070; x=1701890870;
+ d=1e100.net; s=20230601; t=1701286077; x=1701890877;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6gR6QlSoTlyq04eRwNKCnLLqDlXv6VkMGmXKmkbAaQ0=;
- b=Ine2Hi9ZCdXSa+O72GpPFg9/+fDqtRGD8B/lP9kjiFhurRgQ9P2Y/wctDhm2q2VByL
- nbeOScH69lTZzF/2xRitdp6sLF+c5K22BPZ1zMhQb8aEdDiD+2OEd17mwX0dkVtoU1+m
- oeHS5hltWpCa4k3AAJo1BBW54ZFyTD3upZ8Eb4xoLX4yCFz82pA4/hVDdazW7sTqvblv
- U0CJzMjwhC+LhyXSYgGCVIAqaSA0gcM4V/tCQFxSKw2o4K01wzQSUlWE9n5f9b+rgHGW
- 0gtaRrOHtzYxvVGWS2R0RvU06aoJHzicdD6ewgZlZNlSJFaRCdrYyLv+wZ95rLKYXvFr
- lzfQ==
-X-Gm-Message-State: AOJu0YypFL+ydGNl/OpOa33iG2DC7HIMIC9YtuhElLne6ElYv3c2dXEN
- 3J8+awarkZji0G15+BG5Q7qM/mxHwperYlnK4rnSIw==
-X-Google-Smtp-Source: AGHT+IFHd0lnsDfy+Z0LdFjR7oopIOyEOsVSQwIRDwzAaCAHJiPxmbCa0ilD2wIXfA2WW2IAWhTwgbrifbGP3/TbFI4=
-X-Received: by 2002:a17:906:ccc5:b0:a11:d323:c1bc with SMTP id
- ot5-20020a170906ccc500b00a11d323c1bcmr5061259ejb.19.1701286070318; Wed, 29
- Nov 2023 11:27:50 -0800 (PST)
+ bh=06H8gnAWeBbV1U0UsQ+9v9mQ4IJq9bueFvFcx0L3Zpw=;
+ b=rDLHRpm//ft+3bFCiJHHeoF/qq9Xf+8T532xaMMYXl3cZQ8YkCnM7dU7nCOQmxX9nD
+ ehhHZQBuxaP6pT36bUPDEr11nXt9KO/OcDP7F8/qyi2o6EbE8dkw/Bw1EZWko+C9VER5
+ Pr0lArPCF9AZJYX2db0yENxb7KQHzsd+QKPa7AFFZKdP0Kq42TXFuW4lw+Y42OtLiv5v
+ c2Yu3S9mOovYMZ1sVGJ+FrxHswLE2rMP2poHRPAtrpJ1WPPG6mJDhkq6n99dgxwNuHq9
+ EnkyBDeydCNL88XZ6AtwIiXXVVq/Uu2zYqieJrrKR14DsCap1b+RY6o0kVqlVJiv3NUV
+ mg0g==
+X-Gm-Message-State: AOJu0YwApGr2tsalwOAE8Hg8sfwHlfvZBmsByNgV6JfV5MrAYSAL9L6l
+ sGJg+/yQjwqyCKJrPIwFXkRVbIYBMpPTixnoBjYC5w==
+X-Google-Smtp-Source: AGHT+IEuS9Grx3w7TonDZ5akkj55aLQTTN9XgxxNosZc8g4t0F6uKTrb0GxSmURL0psDSPFQZY/hkVXPYwd6fJIeMnQ=
+X-Received: by 2002:a17:906:b810:b0:a04:eac3:2812 with SMTP id
+ dv16-20020a170906b81000b00a04eac32812mr20214435ejb.26.1701286076553; Wed, 29
+ Nov 2023 11:27:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20231129172200.430674-1-sjg@chromium.org>
- <20231129172200.430674-3-sjg@chromium.org>
- <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
- <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
- <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
-In-Reply-To: <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 12:27:38 -0700
-Message-ID: <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: linux-arm-kernel@lists.infradead.org, 
- Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>, 
- lkml <linux-kernel@vger.kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>, 
- Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
- Will Deacon <will@kernel.org>, 
- linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
+References: <AS8PR08MB6806D08B61DB1A97ABF68BBDEBD5A@AS8PR08MB6806.eurprd08.prod.outlook.com>
+ <cover.1700843096.git.piotr.kubik@iopsys.eu>
+ <01aeaae2b87933e8a33a575ec0d23e2d464d6699.1700843096.git.piotr.kubik@iopsys.eu>
+In-Reply-To: <01aeaae2b87933e8a33a575ec0d23e2d464d6699.1700843096.git.piotr.kubik@iopsys.eu>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 29 Nov 2023 12:27:45 -0700
+Message-ID: <CAPnjgZ0wjR7dosOqVPJAgvGzF-RfV0pTiP9g3TC0uyUZLS7ejA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] bootm: Fix flags used for bootargs string
+ substitution
+To: Piotr Kubik <piotr.kubik@iopsys.eu>
+Cc: u-boot@lists.denx.de, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,102 +86,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+On Fri, 24 Nov 2023 at 09:35, Piotr Kubik <piotr.kubik@iopsys.eu> wrote:
+>
+> Commit 51bb33846ad2 ("bootm: Support string substitution in
+> bootargs") introduced a feature of bootargs string substitution
+> and changed a flag used in bootm_process_cmdline_env() call
+> to be either true or false. With this flag value,
+> condition in bootm_process_cmdline()
+> `if (flags & BOOTM_CL_SUBST)` is never true
+> and process_subst() is never called.
+>
+> Add a simple test to verify if substitution works OK.
+>
+> Signed-off-by: Piotr Kubik <piotr.kubik@iopsys.eu>
+> ---
+>  boot/bootm.c              | 6 +++++-
+>  test/py/tests/test_fit.py | 8 ++++++++
+>  2 files changed, 13 insertions(+), 1 deletion(-)
 
-On Wed, 29 Nov 2023 at 12:15, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->
-> Hello Simon,
->
-> On 29.11.23 20:02, Simon Glass wrote:
-> > Hi Ahmad,
-> >
-> > On Wed, 29 Nov 2023 at 11:59, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
-> >>
-> >> Hi,
-> >>
-> >> a few more comments after decompiling the FIT image:
-> >>
-> >> On 29.11.23 18:21, Simon Glass wrote:
-> >>> +    with fsw.add_node('kernel'):
-> >>> +        fsw.property_string('description', args.name)
-> >>> +        fsw.property_string('type', 'kernel_noload')
-> >>
-> >> The specification only says no loading done, but doesn't explain what it
-> >> means for a bootloader to _not_ load an image. Looking into the U-Boot commit
-> >> b9b50e89d317 ("image: Implement IH_TYPE_KERNEL_NOLOAD") that introduces this,
-> >> apparently no loading means ignoring load and entry address?
-> >>
-> >> I presume missing load and entry is something older U-Boot versions
-> >> were unhappy about? Please let me know if the semantics are as I understood,
-> >> so I can prepare a barebox patch supporting it.
-> >
-> > Oh, see my previous email.
->
-> Thanks.
->
-> >
-> >>
-> >>> +        fsw.property_string('arch', args.arch)
-> >>> +        fsw.property_string('os', args.os)
-> >>> +        fsw.property_string('compression', args.compress)
-> >>> +        fsw.property('data', data)
-> >>> +        fsw.property_u32('load', 0)
-> >>> +        fsw.property_u32('entry', 0)
-> >>> +
-> >>> +
-> >>> +def finish_fit(fsw, entries):
-> >>> +    """Finish the FIT ready for use
-> >>> +
-> >>> +    Writes the /configurations node and subnodes
-> >>> +
-> >>> +    Args:
-> >>> +        fsw (libfdt.FdtSw): Object to use for writing
-> >>> +        entries (list of tuple): List of configurations:
-> >>> +            str: Description of model
-> >>> +            str: Compatible stringlist
-> >>> +    """
-> >>> +    fsw.end_node()
-> >>> +    seq = 0
-> >>> +    with fsw.add_node('configurations'):
-> >>> +        for model, compat in entries:
-> >>> +            seq += 1
-> >>> +            with fsw.add_node(f'conf-{seq}'):
-> >>> +                fsw.property('compatible', bytes(compat))
-> >>
-> >> The specification says that this is the root U-Boot compatible,
-> >> which I presume to mean the top-level compatible, which makes sense to me.
-> >>
-> >> The code here though adds all compatible strings from the device tree though,
-> >> is this intended?
-> >
-> > Yes, since it saves needing to read in each DT just to get the
-> > compatible stringlist.
->
-> The spec reads as if only one string (root) is supposed to be in the list.
-> The script adds all compatibles though. This is not really useful as a bootloader
-> that's compatible with e.g. fsl,imx8mm would just take the first device tree
-> with that SoC, which is most likely to be wrong. It would be better to just
-> specify the top-level compatible, so the bootloader fails instead of taking
-> the first DT it finds.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-We do need to have a list, since we have to support different board revs, etc.
-
->
-> >>> +        fsw.property_string('description', model)
-> >>> +        fsw.property_string('type', 'flat_dt')
-> >>> +        fsw.property_string('arch', arch)
-> >>> +        fsw.property_string('compression', compress)
-> >>> +        fsw.property('compatible', bytes(compat))
-> >>
-> >> I think I've never seen a compatible for a fdt node before.
-> >> What use does this serve?
-> >
-> > It indicates the machine that the DT is for.
->
-> Who makes use of this information?
-
-U-Boot uses it, I believe. There is an optimisation to use this
-instead of reading the DT itself.
-
-Regards,
-Simon
+Thank you
