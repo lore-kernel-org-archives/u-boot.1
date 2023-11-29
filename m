@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C961C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 17:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D18C4167B
+	for <u-boot@archiver.kernel.org>; Wed, 29 Nov 2023 17:49:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD7EC8779C;
-	Wed, 29 Nov 2023 18:47:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8C50A8778F;
+	Wed, 29 Nov 2023 18:48:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c3WrbDqb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V0p8ISc8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 877798778C; Wed, 29 Nov 2023 18:47:49 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 69EAB8772E; Wed, 29 Nov 2023 18:48:04 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97AC78772E
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:47:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 135038779E
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:47:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a08e4352992so4280066b.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 09:47:45 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-db3fd3e971cso6739683276.3
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 09:47:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701280065; x=1701884865; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701280078; x=1701884878; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kKuFjGBujDwyqxpWgWPbelTkEhd4b1BkNVLkBFENxjI=;
- b=c3WrbDqbCMvTtEDFJc1UF2YOpvKk+nuPZIv48TCdzfdKNwnQpeEB1JDOt5LNX5GogG
- Fl88f0m5XjI0/CCjdja0Ngg7Ym95HHBZjgahsD1pn6TeYRcAq+5OGRvSp//iNhecRIFW
- boEmxmdxDnkzWcVs9rnzAMoV7J44SLZ+FoDgs=
+ bh=ruISmGArzGcsBccqUUu1AYZG+a4+IBq9ZueHG2cV7Ag=;
+ b=V0p8ISc85+CvdpcQ0AOezctkq6zwv63ZSKj1EgEMTR3U7MpkTErAUkfYIsfMUv50en
+ QNBme8NE+Y3+ll+U7j+EqyuKnwfuluhirF63qs9gfjYzurfurjg5m8b9tU/U8NiW5zFp
+ xqQ1P+H1M5TvdlwUk9X+Q/XOAl5j2IrMyUPe0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701280065; x=1701884865;
+ d=1e100.net; s=20230601; t=1701280078; x=1701884878;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kKuFjGBujDwyqxpWgWPbelTkEhd4b1BkNVLkBFENxjI=;
- b=M4CCLA5r1vh+rNIaB1O7xd7X/Y0LNbnu4jpPwUUByFp3i9Vne7o7fteFsvjFxL9Ivs
- 1P06KLIID+4HyiSugOUJUvychOUUUUbAuFfzO80sbSt3WZAM4IHAmf3wExO7twDJLkYl
- lIIR/A2BXsTFoQgIo7CE4GfNAW8+9Bd4kXSL7pCwhkSA7vvTRAFb7kMe3iHZAINXBix1
- Qn3AOzN3kujRi1Re+iYvFHYrCGVwfQ3/4pn3DNFCQtY4aerv8QCOt6ZM2hypbzHUUDoQ
- w2fWyMnk05sqVuLnFhSMOkKfgUifoFXIQZ041qF42hRxxs2yk4OCNfuo+ipP2lGCNrUG
- 2bHg==
-X-Gm-Message-State: AOJu0Ywj2wfAXi52TA8vn8KgddR5rJ28P1xFKr+TY8Lrddz7/whIISYo
- IqkCDKU/kFNTn9S2tOE8ghXXHcYQtDwz4gNklts3ZQ==
-X-Google-Smtp-Source: AGHT+IGE+dXLSnkr/g01eCyPdAS6z8Z4kmMZHnxcjvte3itVajFW4KgO8REFMJKm68S1SOLalxjuK0zGTPAZoR8bH0A=
-X-Received: by 2002:a17:906:1da:b0:9be:466c:1824 with SMTP id
- 26-20020a17090601da00b009be466c1824mr13965779ejj.11.1701280064981; Wed, 29
- Nov 2023 09:47:44 -0800 (PST)
+ bh=ruISmGArzGcsBccqUUu1AYZG+a4+IBq9ZueHG2cV7Ag=;
+ b=aHN1MQiayBZc2JS84vupm1FoXIwJOY8BHJzZFcL3jEQ6Fo0w3f7FhjO2Fvf5kFcuPv
+ 07qq4AEE21q6I1MhluQ5mqgzKV+9+UBbQQhuaszo4owui46MARdhfYs7twEVrvSSSOB3
+ ZqQY4ZisaotPFS9p70MA8NaBrqxg2LKmNzjqhgyYcCIccAdJONKSkDTQmxdqgq9CDNE1
+ YCR8XPkbiF8RSF3DHNUKA7DwrHE3h7VkscDCyQ6FNWYU5ET1DTNZ4akB5BwGnhW8Rv+i
+ DF1YewbAFXeOj4TcLjPf40EstQUro+uWRqs0jzAwvDWSG+qoi2O8a1gxXGj+jf3qzUvU
+ Pdsg==
+X-Gm-Message-State: AOJu0YwuONJANL60jJdlWYI1g5FGnV3KhKajYWH3HTgWO6wiQXlGKS1t
+ APJPbJlp7uuA1IFOImyVnDyjEgzX3kxYGQnlOttgoQ==
+X-Google-Smtp-Source: AGHT+IGIMp85TIoKV2QbrboDqBkC1V/H5AowIFhzLMaxCFUm2wkUF3kVQMihFxy0SFf/xb5rIZ20wT16rHvFCs1l9P0=
+X-Received: by 2002:a25:2653:0:b0:d9c:707f:1f4f with SMTP id
+ m80-20020a252653000000b00d9c707f1f4fmr17964984ybm.3.1701280077500; Wed, 29
+ Nov 2023 09:47:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117020207.948636-1-seanedmond@linux.microsoft.com>
- <20231117020207.948636-4-seanedmond@linux.microsoft.com>
-In-Reply-To: <20231117020207.948636-4-seanedmond@linux.microsoft.com>
+References: <20231129004850.2542811-1-moritzf@google.com>
+In-Reply-To: <20231129004850.2542811-1-moritzf@google.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 10:47:30 -0700
-Message-ID: <CAPnjgZ0tj-MU9kaD-Q1E53dvH4mZ-PE9g51J59m=PPywEViebA@mail.gmail.com>
-Subject: Re: [PATCH v5 3/5] cmd: kaslrseed: Use common API to fixup FDT
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, 
- ilias.apalodimas@linaro.org, trini@konsulko.com
+Date: Wed, 29 Nov 2023 10:47:33 -0700
+Message-ID: <CAPnjgZ0a8BnVvT_XPW_ATZV52F2_JjUYynoKb3O4vMMm=MSPUg@mail.gmail.com>
+Subject: Re: [PATCH v2] pci: Enable dm_pci_map_bar() for 64-bit BARs
+To: Moritz Fischer <moritzf@google.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, bmeng.cn@gmail.com, 
+ marex@denx.de, xypron.glpk@gmx.de, stcarlso@linux.microsoft.com, 
+ Philip Oberfichtner <pro@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,66 +82,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Nov 2023 at 19:02, <seanedmond@linux.microsoft.com> wrote:
+On Tue, 28 Nov 2023 at 17:49, Moritz Fischer <moritzf@google.com> wrote:
 >
-> From: Sean Edmond <seanedmond@microsoft.com>
+> Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
 >
-> Use the newly introduced common API fdt_fixup_kaslr_seed() in the
-> kaslrseed command.
->
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> Reviewed-by: Philip Oberfichtner <pro@denx.de>
+> Signed-off-by: Moritz Fischer <moritzf@google.com>
 > ---
->  cmd/kaslrseed.c | 22 ++++++++--------------
->  1 file changed, 8 insertions(+), 14 deletions(-)
->
+> Changes from v1:
+> - Fixed commit message
+> ---
+>  drivers/pci/pci-uclass.c | 11 +++++++++++
+>  include/pci.h            |  4 ++--
+>  2 files changed, 13 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-As a follow-up, you could add a test for this command
-
-
-> diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-> index 9acb8e16386..23ed7c066aa 100644
-> --- a/cmd/kaslrseed.c
-> +++ b/cmd/kaslrseed.c
-> @@ -19,7 +19,7 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->         size_t n = 0x8;
->         struct udevice *dev;
->         u64 *buf;
-> -       int nodeoffset;
-> +       ofnode root;
->         int ret = CMD_RET_SUCCESS;
->
->         if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> @@ -45,21 +45,15 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
->                 return CMD_RET_FAILURE;
->         }
->
-> -       ret = fdt_check_header(working_fdt);
-> -       if (ret < 0) {
-> -               printf("fdt_chosen: %s\n", fdt_strerror(ret));
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       nodeoffset = fdt_find_or_add_subnode(working_fdt, 0, "chosen");
-> -       if (nodeoffset < 0) {
-> -               printf("Reading chosen node failed\n");
-> -               return CMD_RET_FAILURE;
-> +       ret = root_ofnode_from_fdt(working_fdt, &root);
-> +       if (ret) {
-> +               printf("ERROR: Unable to get root ofnode\n");
-> +               goto CMD_RET_FAILURE;
->         }
->
-> -       ret = fdt_setprop(working_fdt, nodeoffset, "kaslr-seed", buf, sizeof(buf));
-> -       if (ret < 0) {
-> -               printf("Unable to set kaslr-seed on chosen node: %s\n", fdt_strerror(ret));
-> +       ret = fdt_fixup_kaslr_seed(root, (u8 *)buf, sizeof(buf));
-> +       if (ret) {
-> +               printf("ERROR: failed to add kaslr-seed to fdt\n");
->                 return CMD_RET_FAILURE;
->         }
->
-> --
-> 2.42.0
->
