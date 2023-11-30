@@ -4,64 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2AF0C10DC1
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:30:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1888C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 365E187713;
+	by phobos.denx.de (Postfix) with ESMTP id A4B8187730;
 	Thu, 30 Nov 2023 21:30:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fsJBjo2a";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VpQOoFdS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0C32876F6; Thu, 30 Nov 2023 21:30:41 +0100 (CET)
+ id D11E08771B; Thu, 30 Nov 2023 21:30:41 +0100 (CET)
 Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
  [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D730B8771B
+ by phobos.denx.de (Postfix) with ESMTPS id C683787713
  for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:30:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a00b01955acso201567966b.1
+ a640c23a62f3a-a185fb3aa18so223082666b.1
  for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:30:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701376239; x=1701981039; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j1kEoDVz8FmA118BIct7BasaUqEKiq39maAWu6XgfrY=;
- b=fsJBjo2aurve9XlNyyz0As/FX4v2UHxiU4j8X1hjy6fbQ5jH/CVqdQ2x+ANpAc7cAz
- O4k3fiZYItZR+ZQqG+oFyx2EQd5QxIQdySYCtaK8H4wp0I/+BUoxPFKmAaknTV8vmWJS
- kIiZw0fO0g9MhD4Z5dwkMi1M+XSzGGaLJUVcg=
+ bh=0ze3g+KbzqGj36cXK4KXcn2SJ1PO+nJAvkG+kKo7vKI=;
+ b=VpQOoFdSRPVUx3sqNFijt5JW/fbyl/Zs0mkegEq8OnPohN9sAXus+giE7ElLEZN4/Q
+ iG88YutPEkpz3YKj78RpOOJn9ulhacI8paUUFoHuUjzMMwfmZJJyfYcJ71eAqj9Ka10p
+ MwbvonEWFzP3zL/5TybGgfVUkE8vlS8/nzvKs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701376239; x=1701981039;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=j1kEoDVz8FmA118BIct7BasaUqEKiq39maAWu6XgfrY=;
- b=qTcsXrBrBsoFtZ/z1uz19NQ5/PH/RVMQWui8bI6JaMQ940ZcNDfy60gwNVMFBDAauU
- BpnVZ0BdxYSDxmMKazlDxXKQ7T90mTMiUnL57rwQ46r4p0fBWr7NpzkVM9Z1myUD218r
- ZwAxc3P55oC/zAny/vImVTC6QdzR/inCdvj5xUfD1giv5hpf+wTwstUyIVzcSD+8NlzO
- 9C7IYR10WLVYK2FMYkpIWclt/7K+vR9koTtc+/jc5TP73YCL1+jYYpj8jfnbHxb5GqIP
- WbfLWcVquPtxgCzcBwB78hXi23wKqsQ17t9Tg0qQBr8pLK6MTEhTm6Y4cLzBfhrQ1jn5
- X9YA==
-X-Gm-Message-State: AOJu0YwFrKo1dShTB9cbVsh6GnmSnVog//3ZFLzN4fkJPqoCIoND8gBR
- c8nosVjEvDKKzdjo1xzuSdfsAQ5Zl0erTo/fDggJHQ==
-X-Google-Smtp-Source: AGHT+IFIp7jl3Xe9SuGYh3OvQzZO3AxM5rdMcalwjeJ+luXeVJXVWymrXe3jpNkDnguFqELGcbxrl9p2GVcMiT0/cuQ=
-X-Received: by 2002:a17:907:509d:b0:a0d:31:b455 with SMTP id
- fv29-20020a170907509d00b00a0d0031b455mr69707ejc.20.1701376238985; Thu, 30 Nov
+ bh=0ze3g+KbzqGj36cXK4KXcn2SJ1PO+nJAvkG+kKo7vKI=;
+ b=qskr+4fkUFw5T+N37C0ygYqGTZtWSce0iz2cPhMuLQFwk+8yY/VR4HFgfzg4UIWTgB
+ AVq7wREg+5Ubdh3Nsz84MEV7JHGdGyKZIGLovXEyRCXNZPtQIYjkIf2uKEdrjNfjNS7M
+ mOHZO8G0ZeWucm8DJjQ/UAk1gsoXNcfV3QmJe7cy7Z2rztr5DvlzVK/RK8KdtBa+mxOw
+ VZ3skeL4ZNSiv49uxGK4aoi8MXUo62bYqHoJCELVq1MP1XVBxvwTMS4zl3ppeIHNaxmj
+ B5gtKkMAFaBsa4syvR7O5XEJIR+AbtMtdf5h9mhFJHTFJ5Tk2EdjlZGhXK9ez8CQAmG/
+ NRyw==
+X-Gm-Message-State: AOJu0Yyz+otsKIzwkr+Bz2GSK/Wtk9pFm/3nbOI1f7pD+4isLgl4MjHx
+ 0JXMuei84PegXvFPS8YF8R3sU+P7YodSvoLZeZHI9Q==
+X-Google-Smtp-Source: AGHT+IF7hBJgyxS2nGwZC6cEyBKE+/ypnjV3+LlsjScXh8z5XtFWXqn22t4Iova8UzN/R3amZDfO6UlKdgPktSBI1UI=
+X-Received: by 2002:a17:906:20d7:b0:a19:a409:37e3 with SMTP id
+ c23-20020a17090620d700b00a19a40937e3mr151524ejc.60.1701376238996; Thu, 30 Nov
  2023 12:30:38 -0800 (PST)
 MIME-Version: 1.0
 References: <20231129172200.430674-1-sjg@chromium.org>
  <20231129172200.430674-3-sjg@chromium.org>
- <03595817-4698-46d3-b2d8-3bc40c7e723e@pengutronix.de>
-In-Reply-To: <03595817-4698-46d3-b2d8-3bc40c7e723e@pengutronix.de>
+ <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
+ <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
+ <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
+ <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
+ <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
+ <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
+ <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
+In-Reply-To: <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Nov 2023 13:30:25 -0700
-Message-ID: <CAPnjgZ0G5DAFZj+nxVxMvNOg_wQKxwu06NAarUdVjurPYZ+tcw@mail.gmail.com>
+Date: Thu, 30 Nov 2023 13:30:21 -0700
+Message-ID: <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
 Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
 To: Ahmad Fatoum <a.fatoum@pengutronix.de>
 Cc: linux-arm-kernel@lists.infradead.org, 
@@ -91,65 +97,71 @@ X-Virus-Status: Clean
 
 Hi Ahmad,
 
-On Wed, 29 Nov 2023 at 11:35, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+On Wed, 29 Nov 2023 at 12:54, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
 >
 > Hello Simon,
 >
-> On 29.11.23 18:21, Simon Glass wrote:
-> > Add a script which produces a Flat Image Tree (FIT), a single file
-> > containing the built kernel and associated devicetree files.
-> > Compression defaults to gzip which gives a good balance of size and
-> > performance.
->
-> Thanks for working on this. I think it's useful to have the kernel
-> generate a FIT image out of the box. More complex use cases are always
-> free to call mkimage with a custom ITS.
->
->
-> > The files compress from about 86MB to 24MB using this approach.
+> On 29.11.23 20:44, Simon Glass wrote:
+> > Hi Ahmad,
 > >
-> > The FIT can be used by bootloaders which support it, such as U-Boot
-> > and Linuxboot. It permits automatic selection of the correct
-> > devicetree, matching the compatible string of the running board with
-> > the closest compatible string in the FIT. There is no need for
-> > filenames or other workarounds.
+> > On Wed, 29 Nov 2023 at 12:33, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+> >>
+> >> On 29.11.23 20:27, Simon Glass wrote:
+> >>> On Wed, 29 Nov 2023 at 12:15, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+> >>>> On 29.11.23 20:02, Simon Glass wrote:
+> >>>>> On Wed, 29 Nov 2023 at 11:59, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+> >>>>>> The specification says that this is the root U-Boot compatible,
+> >>>>>> which I presume to mean the top-level compatible, which makes sense to me.
+> >>>>>>
+> >>>>>> The code here though adds all compatible strings from the device tree though,
+> >>>>>> is this intended?
+> >>>>>
+> >>>>> Yes, since it saves needing to read in each DT just to get the
+> >>>>> compatible stringlist.
+> >>>>
+> >>>> The spec reads as if only one string (root) is supposed to be in the list.
+> >>>> The script adds all compatibles though. This is not really useful as a bootloader
+> >>>> that's compatible with e.g. fsl,imx8mm would just take the first device tree
+> >>>> with that SoC, which is most likely to be wrong. It would be better to just
+> >>>> specify the top-level compatible, so the bootloader fails instead of taking
+> >>>> the first DT it finds.
+> >>>
+> >>> We do need to have a list, since we have to support different board revs, etc.
+> >>
+> >> Can you give me an example? The way I see it, a bootloader with
+> >> compatible "vendor,board" and a FIT with configuration with compatibles:
+> >>
+> >>   "vendor,board-rev-a", "vendor,board"
+> >>   "vendor,board-rev-b", "vendor,board"
+> >>
+> >> would just result in the bootloader booting the first configuration, even if
+> >> the device is actually rev-b.
 > >
-> > Add a 'make image.fit' build target for arm64, as well.
+> > You need to find the best match, not just any match. This is
+> > documented in the function comment for fit_conf_find_compat().
 >
-> not that it matters much, but should this maybe called Image.fit
-> as the other Image types are capitalized too?
+> In my above example, both configuration are equally good.
+> Can you give me an example where it makes sense to have multiple
+> compatibles automatically extracted from the device tree compatible?
+>
+> The way I see it having more than one compatible here just has
+> downsides.
 
-I missed this comment earlier. I believe Image is intended to refer to
-a raw image, with the other extensions being compressed versions of
-these. So I believe it would be confusing for the FIT version to have
-a capital I.
+I don't have an example to hand, but this is the required mechanism of
+FIT. This feature has been in place for many years and is used by
+ChromeOS, at least.
 
 >
-> >  EFI_ZBOOT_PAYLOAD    := Image
-> >  EFI_ZBOOT_BFD_TARGET := elf64-littleaarch64
-> >  EFI_ZBOOT_MACH_TYPE  := ARM64
-> > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > index 1a965fe68e01..e1c06ca3c847 100644
-> > --- a/scripts/Makefile.lib
-> > +++ b/scripts/Makefile.lib
-> > @@ -496,6 +496,19 @@ quiet_cmd_uimage = UIMAGE  $@
-> >                       -a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
-> >                       -n '$(UIMAGE_NAME)' -d $< $@
+> >> The configuration already has a compatible entry. What extra use is the compatible
+> >> entry in the FDT node?
+> >
+> > It allows seeing the compatible stringlist without having to read the
+> > FDT itself. I don't believe it is necessary though, so long as we are
+> > scanning the configurations and not the FDT nodes.
 >
-> Doesn't hardcoding a load address and entry address here defeat the point
-> of having FIT as generic portable image format?
->
-> At least barebox will try to place the kernel image at physical address 0 and
-> will exit with an error message if no SDRAM is located at that address.
-> The recommendation in that case is to omit load and entry address altogether
-> to have barebox find a suitable location, but I see now that the FIT specification
-> requires a load and entry address. What would happen if U-Boot tries to load this
-> FIT image on a board that has no DRAM at address 0?
->
-> Please Cc me on subsequent revisions. I am interested in testing that this works for barebox
-> too.
+> I think it's better to drop this if it has no use.
 
-I have added you.
+OK. I cannot think of a use for it.
 
 Regards,
 Simon
