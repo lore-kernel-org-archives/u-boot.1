@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68894C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 12:24:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 095BEC07CA9
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 12:24:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2921E875EE;
-	Thu, 30 Nov 2023 13:24:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9308387650;
+	Thu, 30 Nov 2023 13:24:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="QbKat+SX";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="FKt/Zycp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CB3A87605; Thu, 30 Nov 2023 13:24:33 +0100 (CET)
-Received: from mta-65-225.siemens.flowmailer.net
- (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ id 794E587680; Thu, 30 Nov 2023 13:24:33 +0100 (CET)
+Received: from mta-65-228.siemens.flowmailer.net
+ (mta-65-228.siemens.flowmailer.net [185.136.65.228])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D0DE8713D
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 13:24:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74BAC875EE
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 13:24:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=enrico.leto@siemens.com
-Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
- 202311301224246f6319e1bbfc02498c for <u-boot@lists.denx.de>;
- Thu, 30 Nov 2023 13:24:24 +0100
+Received: by mta-65-228.siemens.flowmailer.net with ESMTPSA id
+ 202311301224255d4b7fd0d3f861d4ef for <u-boot@lists.denx.de>;
+ Thu, 30 Nov 2023 13:24:25 +0100
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=enrico.leto@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=wTUi+1KMYVC/J96Wr7XVx3OtP6Gjd3TOoDAGvzzTb64=;
- b=QbKat+SX/6FcSi1KySK/ULK7Ag6qP8Az6OgF+ac4heyWYCXb4Ln2y+zcBW15m8ASmwRfC7
- +DfAOZY8vnxsmyfmSylYL2cjXAQ9Jhla8UAyfmqNP5X6pghG80UN/XQI3LUAd0sSaMaYqEWL
- DC8tuYfRiy19Up+y56xD6rkdOYHwc=;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=bC7wBfLe8mPOA+BO3uHLU+FStdvnqCVrZiEtzIHSWKM=;
+ b=FKt/Zycp9cF6EkaBWWP/Pgo+HOGKjw9L5uTboN7a5ax46fRvF8UAHJlE3ZXEgP/auFtphH
+ U4U+EImXm5mpt4XUhxIOsWY0dOyUnPSI0y7esYNUA7dfqdLm3Go+GjjuwFoLOswZa0adwLtu
+ aqxmG4q6q+LQLi2DPhmb4j5GV/CoY=;
 From: Enrico Leto <enrico.leto@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Enrico Leto <enrico.leto@siemens.com>
-Subject: [PATCH v2 0/6]  board: siemens: clean up subfolders
-Date: Thu, 30 Nov 2023 13:23:18 +0100
-Message-Id: <20231130122324.658502-1-enrico.leto@siemens.com>
+Cc: Enrico Leto <enrico.leto@siemens.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Subject: [PATCH v2 3/6] siemens draco: i2c: use driver model for u-boot
+Date: Thu, 30 Nov 2023 13:23:21 +0100
+Message-Id: <20231130122324.658502-4-enrico.leto@siemens.com>
+In-Reply-To: <20231130122324.658502-1-enrico.leto@siemens.com>
+References: <20231130122324.658502-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -62,69 +65,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-    This serie depends on the serie:
-    [PATCH 0/6] siemens,am335x: clean up the draco board family
+Add support for driver model where EEPROM data are read in draco board.
 
-    The common folder was initialially created for the common parts of
-    the products based on draco-am355x board family. We have the
-    product lines 'pxm2', 'rut' and the base line unfortunately named
-    'draco'! Adding the new capricorn-imx8 board family, the files
-    were enhanced without cleanup.
-
-    Simplify first EEPROM probe and access that implements both i2c
-    with & without driver model. Use abstraction functions for this.
-    
-    Move all am355x specifics to a new file 'board_am335x'.
-    
-    Clean-up includes, config checks, maintainer.
-
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
-Changes for v2:
-- fix wrong value in CONFIG_IS_ENABLED
+ configs/draco-etamin_defconfig   | 4 +++-
+ configs/draco-rastaban_defconfig | 4 +++-
+ configs/draco-thuban_defconfig   | 4 +++-
+ 3 files changed, 9 insertions(+), 3 deletions(-)
 
-Enrico Leto (6):
-  siemens: eeprom: clean up definitions
-  siemens: eeprom: simplify setup & read
-  siemens draco: i2c: use driver model for u-boot
-  siemens: board: clean up draco products vs common
-  siemens: board: clean up includes
-  siemens: factoryset: use correct config for soc specific
-    implementation
-
- board/siemens/capricorn/board.c     |   5 +-
- board/siemens/common/board.c        | 110 ++++++++++++----------------
- board/siemens/common/board.h        |  24 ++++++
- board/siemens/common/board_am335x.c |  58 +++++++++++++++
- board/siemens/common/board_am335x.h |  38 ++++++++++
- board/siemens/common/factoryset.c   |  82 ++++-----------------
- board/siemens/draco/Makefile        |   2 +
- board/siemens/draco/board.c         |  59 ++++-----------
- board/siemens/draco/board.h         |  32 ++------
- board/siemens/draco/mux.c           |   6 +-
- board/siemens/pxm2/MAINTAINERS      |   2 +-
- board/siemens/pxm2/Makefile         |   2 +
- board/siemens/pxm2/board.c          |  34 +++------
- board/siemens/pxm2/board.h          |  21 ------
- board/siemens/pxm2/mux.c            |   6 +-
- board/siemens/rut/MAINTAINERS       |   2 +-
- board/siemens/rut/Makefile          |   2 +
- board/siemens/rut/board.c           |  33 ++-------
- board/siemens/rut/board.h           |  21 ------
- board/siemens/rut/mux.c             |   5 +-
- configs/draco-etamin_defconfig      |   4 +-
- configs/draco-rastaban_defconfig    |   4 +-
- configs/draco-thuban_defconfig      |   4 +-
- include/configs/draco-etamin.h      |   3 -
- include/configs/draco-rastaban.h    |   3 -
- include/configs/draco-thuban.h      |   3 -
- 26 files changed, 245 insertions(+), 320 deletions(-)
- create mode 100644 board/siemens/common/board.h
- create mode 100644 board/siemens/common/board_am335x.c
- create mode 100644 board/siemens/common/board_am335x.h
- delete mode 100644 board/siemens/pxm2/board.h
- delete mode 100644 board/siemens/rut/board.h
-
+diff --git a/configs/draco-etamin_defconfig b/configs/draco-etamin_defconfig
+index eade2297229..8a860a73aab 100644
+--- a/configs/draco-etamin_defconfig
++++ b/configs/draco-etamin_defconfig
+@@ -86,8 +86,10 @@ CONFIG_CLK=y
+ CONFIG_CLK_TI_CTRL=y
+ CONFIG_DFU_NAND=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++# CONFIG_SPL_DM_I2C is not set
+ CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ # CONFIG_SPL_DM_MMC is not set
+ CONFIG_MMC_OMAP_HS=y
+ CONFIG_MTD=y
+diff --git a/configs/draco-rastaban_defconfig b/configs/draco-rastaban_defconfig
+index 252cbe3d78e..c95e54be2ee 100644
+--- a/configs/draco-rastaban_defconfig
++++ b/configs/draco-rastaban_defconfig
+@@ -84,8 +84,10 @@ CONFIG_CLK=y
+ CONFIG_CLK_TI_CTRL=y
+ CONFIG_DFU_NAND=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++# CONFIG_SPL_DM_I2C is not set
+ CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_MTD_RAW_NAND=y
+diff --git a/configs/draco-thuban_defconfig b/configs/draco-thuban_defconfig
+index d8b80b83f10..0b6b488d0fe 100644
+--- a/configs/draco-thuban_defconfig
++++ b/configs/draco-thuban_defconfig
+@@ -84,8 +84,10 @@ CONFIG_CLK=y
+ CONFIG_CLK_TI_CTRL=y
+ CONFIG_DFU_NAND=y
+ CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
++# CONFIG_SPL_DM_I2C is not set
+ CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_MTD_RAW_NAND=y
 -- 
 2.30.2
 
