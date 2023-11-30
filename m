@@ -4,35 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E9FFC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 00:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AFE3C10DC1
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 00:20:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62D8887073;
-	Thu, 30 Nov 2023 01:11:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id CF2F487073;
+	Thu, 30 Nov 2023 01:20:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Caw/NIR1";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAFE387073; Thu, 30 Nov 2023 01:11:00 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 84B6B86940
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 01:10:57 +0100 (CET)
+ id DE523870B3; Thu, 30 Nov 2023 01:20:38 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AD22786D33
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 01:20:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9215F1042;
- Wed, 29 Nov 2023 16:11:43 -0800 (PST)
-Received: from [192.168.1.247] (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E5F8D3F73F;
- Wed, 29 Nov 2023 16:10:54 -0800 (PST)
-Message-ID: <3c5b7d67-f8e5-41a3-a34b-8f59f9adb117@arm.com>
-Date: Thu, 30 Nov 2023 00:10:52 +0000
+ spf=pass smtp.mailfrom=stephen.graf@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d00689f5c8so4003675ad.3
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 16:20:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701303635; x=1701908435; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bpJduYuROYEa7GlONa/imIaOhaPtws/KthA5P0/Y0do=;
+ b=Caw/NIR1W9UI7Dp5rf5XLMICvurnW0d41+vXbrL7h4t09fwJ3PYekrMVE0weS82PJ6
+ zWM8EdhwKkzITo1yyfTh6bEbIqiXNZ1E2MVT/O6SqjBvBpFDWCibpfxFT1NxAtqsKCNO
+ XsHuyc9dQKvBdhsb6XK6bEbxrXOsuZsyekqMo2quSnRz7E5jczF5FpOuKrtJSB7tNGf5
+ cfkn+E4AU6iAO7+ZA8Hhv4xp4g+RT8p5bhFwfkGzsW/gjCbgmdBY9TOvClXvJN6M3oiR
+ 5Hhlb7Iy8+iWwL5an7G8dkNcnJqsOFlOdm5nCv5CGPedCy1h6wn5QSyQClLYUSVaZfvi
+ mdwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701303635; x=1701908435;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bpJduYuROYEa7GlONa/imIaOhaPtws/KthA5P0/Y0do=;
+ b=AUPBaBVVu2ub1ISE8w5P3fmtbgsYi+rrtyL4fbqC/4wbWvquqQrlW31QDurd6RZn21
+ ljakUTqFcGEtAXovb6NnDma1ygJJ7/JdT1nY7rnFvS0FuQkI4NWWCORVUgwORXibbgMB
+ cIYsLjyO/eMP7d3Z/93uVDeGnzpUOAA+mrzZL2OHVnY52ceM4r+Ewwep6xjYXJnc5aCs
+ b5JTESPPVF03MCWz2psyEuil9ZQoZokByyyg5DWvemUPw9Y6uv6pezYZ+YxlT42Z26TL
+ eOXnzyENlikpJRzFThimQWopuJfMTIGszaV8+fuuIRXyifIAURO8dNY7O6KLjy3znJwh
+ 5fkw==
+X-Gm-Message-State: AOJu0YzrGQjqHXYvwjdbg1JZyVh7+WNEgpNappHSVe7gtz3TWEENk2lG
+ Vr2nobbWWpDCzekvGR84osg=
+X-Google-Smtp-Source: AGHT+IGGyCcUq2xQjNrW9L1yMPDfpnoUlFv5iZtC9TBlRTPaxJJ1c97PEYFMHgxIaJTLAnInk68qeg==
+X-Received: by 2002:a17:902:c3c6:b0:1d0:3090:9584 with SMTP id
+ j6-20020a170902c3c600b001d030909584mr455213plj.41.1701303634914; 
+ Wed, 29 Nov 2023 16:20:34 -0800 (PST)
+Received: from [192.168.1.3] (d23-16-72-139.bchsia.telus.net. [23.16.72.139])
+ by smtp.gmail.com with ESMTPSA id
+ i1-20020a170902c28100b001cf658f20ecsm12992036pld.96.2023.11.29.16.20.34
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 29 Nov 2023 16:20:34 -0800 (PST)
+Message-ID: <a2e62d55-8209-432e-b01f-253e05c11186@gmail.com>
+Date: Wed, 29 Nov 2023 16:20:33 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: OrangePI Zero3 memory timing testing
-Content-Language: en-US
-To: Stephen Graf <stephen.graf@gmail.com>
+Subject: Re: mdt_debug write
+Content-Language: en-CA
+To: Andre Przywara <andre.przywara@arm.com>
 Cc: Mikhail Kalashnikov <iuncuim@gmail.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -48,11 +86,12 @@ References: <20231114013106.31336-1-andre.przywara@arm.com>
  <d8862c87-072d-4f74-bb37-08f34c610cc8@gmail.com>
  <dae3bee5-e1c7-4154-959c-e41dabb5d844@gmail.com>
  <20231128013746.23648d39@slackpad.lan>
- <0560924e-119b-4122-ad5b-bd563554eb10@gmail.com>
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <0560924e-119b-4122-ad5b-bd563554eb10@gmail.com>
+ <5d7ea381-2a57-46f7-85c6-2bcad339d1db@gmail.com>
+ <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
+From: Stephen Graf <stephen.graf@gmail.com>
+In-Reply-To: <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,176 +108,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stephen,
+Thank you for the update Andre.
 
-On 29/11/2023 18:45, Stephen Graf wrote:
-> Some testing results:
-> 
-> With the default DRAM timing of 30x24=720, most often when my system 
-> boots it comes up with DRAM 2G, but I have a 1G system. Once in a while 
-> the boot shows 1G.  When it shows 2G the linux OS also shows 2G and 
-> continuing does not make much sense.
-> 
-> On one boot where u-boot reported 1G the OS agreed and I ran memtester 
-> successfully.
-> 
-> If I build u-boot with CONFIG_DRAM_CLK=792 (33*24=792) I have never seen 
-> my system boot with anything other than DRAM 1G showing in u-boot. I ran 
+The flashcp worked.  I rebooted without an SD card and the new u-boot 
+started properly.
 
-Interesting, many thanks for the elaborate experiments!
-To be fair, the timing parameters were from Xunlong's setup, so with 792 
-MHz, but I remember that in my early testing this failed more often than 
-not, so I reverted back to 720MHz. But I had different parameters back 
-then, I believe. I will try to arrange some boot loop, to see how it 
-fares with the 792 MHz, though I believe you that it's more stable.
-If that works, I will send a v2 with the USB and the DRAM clock fixed.
+Now as to making a patch file, I will give it a try.  Keep in mind that 
+when I started my working career the concept of patching was to shuffle 
+a deck of IBM 80 column punched cards.
 
-Thanks again for testing and the report!
+Console output:
 
-Cheers,
-Andre
+root@orangepizero3:~# flashcp -v 
+/home/sysadmin/u-boot-sunxi-with-spl.bin_with_792_clk /dev/mtd0
+Erasing blocks: 206/206 (100%)
+Writing data: 822k/822k (100%)
+Verifying data: 822k/822k (100%)
+root@orangepizero3:~#
 
-> memtester successfully and this system has been stable running linux 6.6.2.
+
+
+
+On 2023-11-29 3:57 p.m., Andre Przywara wrote:
+> Hi Stephen,
 > 
-> Andre, if you can put together a few patches I can test them to see 
-> which works.
-> 
-> If anyone else with different variations of the Zero3 would test with 
-> the two DRAM timings and report results.
-> 
-> I also use the Zunlong image on occasion and it consistently shows 1G 
-> and from my poking around I think it runs at a 792 clk.
-> 
-> 
-> Console output with DRAM default:
-> 
-> U-Boot 2024.01-rc3-00028-g43f2873fa9-dirty (Nov 28 2023 - 22:46:39 
-> -0800) Allwinner Technology
-> 
-> CPU:   Allwinner H616 (SUN50I)
-> Model: OrangePi Zero3
-> DRAM:  2 GiB
-> 
-> Last login: Wed Nov 29 09:35:15 PST 2023 on ttyS0
-> root@orangepizero3:~# free -h
->                 total        used        free      shared  buff/cache 
-> available
-> Mem:           1.9Gi       139Mi       1.7Gi       360Ki        82Mi   
-> 1.7Gi
-> Swap:             0B          0B          0B
-> 
-> 
-> U-Boot 2024.01-rc3-00028-g43f2873fa9-dirty (Nov 28 2023 - 22:46:39 
-> -0800) Allwinner Technology
-> 
-> CPU:   Allwinner H616 (SUN50I)
-> Model: OrangePi Zero3
-> DRAM:  1 GiB
-> 
-> root@orangepizero3:~# free -h
->                 total        used        free      shared  buff/cache 
-> available
-> Mem:           917Mi       137Mi       766Mi       360Ki        79Mi   
-> 780Mi
-> Swap:             0B          0B          0B
-> 
-> 
-> root@orangepizero3:~# memtester 700M 1
-> memtester version 4.6.0 (64-bit)
-> Copyright (C) 2001-2020 Charles Cazabon.
-> Licensed under the GNU General Public License version 2 (only).
-> 
-> pagesize is 4096
-> pagesizemask is 0xfffffffffffff000
-> want 700MB (734003200 bytes)
-> got  700MB (734003200 bytes), trying mlock ...locked.
-> Loop 1/1:
->    Stuck Address       : ok
->    Random Value        : ok
->    Compare XOR         : ok
->    Compare SUB         : ok
->    Compare MUL         : ok
->    Compare DIV         : ok
->    Compare OR          : ok
->    Compare AND         : ok
->    Sequential Increment: ok
->    Solid Bits          : ok
->    Block Sequential    : ok
->    Checkerboard        : ok
->    Bit Spread          : ok
->    Bit Flip            : ok
->    Walking Ones        : ok
->    Walking Zeroes      : ok
->    8-bit Writes        : ok
->    16-bit Writes       : ok
-> 
-> Done.
-> 
-> Console output with DRAM clk 792:
-> 
-> 
-> U-Boot 2024.01-rc3-00028-g43f2873fa9-dirty (Nov 28 2023 - 21:34:46 
-> -0800) Allwinner Technology
-> 
-> CPU:   Allwinner H616 (SUN50I)
-> Model: OrangePi Zero3
-> DRAM:  1 GiB
-> 
-> root@orangepizero3:~# free -h
->                 total        used        free      shared  buff/cache 
-> available
-> Mem:           917Mi       134Mi       768Mi       360Ki        79Mi   
-> 782Mi
-> Swap:             0B          0B          0B
-> 
-> 
-> root@orangepizero3:~# memtester 700M 1
-> memtester version 4.6.0 (64-bit)
-> Copyright (C) 2001-2020 Charles Cazabon.
-> Licensed under the GNU General Public License version 2 (only).
-> 
-> pagesize is 4096
-> pagesizemask is 0xfffffffffffff000
-> want 700MB (734003200 bytes)
-> got  700MB (734003200 bytes), trying mlock ...locked.
-> Loop 1/1:
->    Stuck Address       : ok
->    Random Value        : ok
->    Compare XOR         : ok
->    Compare SUB         : ok
->    Compare MUL         : ok
->    Compare DIV         : ok
->    Compare OR          : ok
->    Compare AND         : ok
->    Sequential Increment: ok
->    Solid Bits          : ok
->    Block Sequential    : ok
->    Checkerboard        : ok
->    Bit Spread          : ok
->    Bit Flip            : ok
->    Walking Ones        : ok
->    Walking Zeroes      : ok
->    8-bit Writes        : ok
->    16-bit Writes       : ok
-> 
-> Done.
-> 
-> 
-> On 2023-11-27 5:37 p.m., Andre Przywara wrote:
-> 
+> On 28/11/2023 20:07, Stephen Graf wrote:
+>> Below is the consol log from trying to use mtd_debug write. It 
+>> returned immediately with a strange success message.
 >>
->> This symptom is pretty surely not directly related to the DRAM
->> frequency, it's caused by a missing barrier or delay *somewhere*.
->> People report that this is fixed by adding another "dsb();" at the
->> beginning of the mctl_mem_matches() function, but I don't have a good
->> explanation why exactly there, and would like to avoid submitting
->> patches that "just seem to work (TM)".
->>
->> If I find some time, I will try to setup some automated environment
->> where I can run some experiments with different barrier locations.
->> I can offer some rationale for putting it at the end of the function(s)
->> that call mctl_mem_matches(), so hope that this fixes it.
->>
->> Cheers,
->> Andre
->>
+>> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000 
+>> /home/sysadmin/u-boot-sunxi-with-spl.bin
+>> file_to_flash: fread, size 0xf0000, n 0xf0000
+>> fread(): Success
+> 
+> interesting, I was under the impression that "mtd_debug write" would be 
+> the way to write to flash. In hindsight, the "debug" in that name should 
+> have probably put me off. Anyway, "cat" is probably not a good choice, 
+> "dd" is better, but it looks like "flashcp" (also part of mtdutils) is 
+> the go-to tool, since it does the required erasing automatically and 
+> also reportedly does some error detection. Can you please test this?
+> # flashcp u-boot-sunxi-with-spl.bin /dev/mtd0
+> I would test this on my end ASAP as well.
+> 
+> Do you feel like sending a patch to the U-Boot documentation to get this 
+> changed then?
+> 
+> Thanks,
+> Andre
+> 
