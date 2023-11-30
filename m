@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13192C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10F4FC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:47:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F294C87632;
-	Thu, 30 Nov 2023 03:45:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 785638764D;
+	Thu, 30 Nov 2023 03:45:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BVddVUHQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mXERyHya";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E27EA86C47; Thu, 30 Nov 2023 03:45:54 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id BB63587600; Thu, 30 Nov 2023 03:45:55 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D2D98715C
+ by phobos.denx.de (Postfix) with ESMTPS id CEC2E870EB
  for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9fffa4c4f43so55539966b.3
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a049d19b63bso56437466b.2
  for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:45:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701312350; x=1701917150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EuF3JrvZi+FZoOTQuYUu5HFx8INO4MdQD11iTRUjlbg=;
- b=BVddVUHQpYzmcRclYbt2ixYFw/DWuZBzUborSYpRXgK0ZibEbazZaFvD23tEjIFbtc
- 8EOy3ZSCfdroAZA0bywT+JOlAUcDDn6nekJKrNgDBYe81b0sbtWM5lJqph0jrot00Pdu
- x0ghgfFVRhEgOzotFg8d1sA8sHJeI+KNT3CdQ=
+ bh=hwE2fzIaxM2Y6+h6gtwfr3Oq6cmU8PHkld2PA/b+J9Y=;
+ b=mXERyHyaw47BlGlciiSQHbMy60Rfp4MhkI5yJm1xDYCZEYv3fXODzrBj3nVO3QFzzm
+ FGBSah97MyM8FWt8T8pYcZZZXz5ecnWQWQRTenz8UuUCpAQ9binqLWzaibrigjsNcjvc
+ sE+p9jWldM65aT65hOjJBI4ooEHmfUZLM9W28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701312350; x=1701917150;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EuF3JrvZi+FZoOTQuYUu5HFx8INO4MdQD11iTRUjlbg=;
- b=KiNbcS5rYU6cew8lKeRLCQ8on83j1VbONogSHjhU/xSgg0/sSBUpZXDfLlKVsjSGZV
- TEdeS1qtgj4nnw/8QSLMODh0pFlmjhcRUllJme7TrW+o5FQzuUd/7mXhlX3tQgHxXI3P
- HNzOK8rDdnOgwGtwTqP93ovFS01KJTsRY4tVNtspLutZglJAFjbvQW8qYTE8t+tgq/of
- f2QveCM8tCSlxgAUhupDjvt6Zh62Ca9TLjROWCJFL3HI8GeUQUH3tZBx9/Nlcfs6Cf7P
- TRp57k5j10DeBy/5xXiwDa7PT/PtLNQ09kuoqnkY7G00B4ODpUzATMeshpmH7CqYoaWz
- oE8w==
-X-Gm-Message-State: AOJu0Yw2UToHHwRfSp5jBZ+2CsseDwgsQBok1j1wGQcby0S6TBvjFAYS
- 5Ojx1rYMBS8GkFuMSBhH0X+AD6VubvOjub4wUqb6Gg==
-X-Google-Smtp-Source: AGHT+IGMCn9m3UjeL7/nRrdTBcUz+b52LwJKnV6U7bN2/K07lh8FY9yAfUscg6OsS3ANUQNFaAokWb8W9tjyN2dD5Xw=
-X-Received: by 2002:a17:907:2da9:b0:9fe:38b7:4278 with SMTP id
- gt41-20020a1709072da900b009fe38b74278mr19898303ejc.16.1701312349886; Wed, 29
- Nov 2023 18:45:49 -0800 (PST)
+ bh=hwE2fzIaxM2Y6+h6gtwfr3Oq6cmU8PHkld2PA/b+J9Y=;
+ b=tuhVnW+sL8Z4nHmvY36gVTMoF7pY+Z9tMq55gQ2Dx46ywtPMTYqQE/AvBzCqXhNliW
+ XPzF+bd0i6ljiwucBDi4sz7LfRIRSzxmWYUUhniX/iWGRtJOv14YlNRFlLqwoWmSJfeN
+ Q8T0FhFN1uqqhjQDOCuwGMCr02YzT6PbqYnbOswVuNvPEtW3mPOa5vC1I2Z8Q5tOJnX6
+ +EGb3nZ7VSzWm47R8A+Yct5IDKI3quBh4+xdGo23gk2zTno7cZBxPe92xVG9vQWCzogf
+ MuXOnNG/37cvdaMjfhfDBR6A/EwcnwTdGBZtNYUbeS7/u9M0yMsEw6JKNKwfgo1tGRcb
+ jS4A==
+X-Gm-Message-State: AOJu0YyH5G61pXrfH7Jd3IzzlIptP9zorMaLBntnaq1TqxxPSa/wHfcl
+ yrZzHunEV9CTlGBAN/P013c7NHo8yPvNhZku3s3L4g==
+X-Google-Smtp-Source: AGHT+IFSZrlvAJskZ5zhhsuHk4urXh4L7Zl66yiUY6lG3QwCqW0BQ6+tcnCTBsXJUFd5gvjynkRwQdpmlU8nw9Lgbgs=
+X-Received: by 2002:a17:906:7493:b0:a18:5f93:d53e with SMTP id
+ e19-20020a170906749300b00a185f93d53emr531244ejl.14.1701312350115; Wed, 29 Nov
+ 2023 18:45:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20231122131154.2444690-1-trini@konsulko.com>
- <20231122131154.2444690-9-trini@konsulko.com>
-In-Reply-To: <20231122131154.2444690-9-trini@konsulko.com>
+References: <CGME20231127010544epcas2p195e888cab27c0cbabd2f4b596404f5d8@epcas2p1.samsung.com>
+ <20231127010520.3170033-1-chanho61.park@samsung.com>
+In-Reply-To: <20231127010520.3170033-1-chanho61.park@samsung.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 19:45:34 -0700
-Message-ID: <CAPnjgZ2gWQm_bNDqWviVBpDy8da9RsQDUcLHBdw=FM76O9eYkQ@mail.gmail.com>
-Subject: Re: [PATCH 09/11] display_options: Clean up headers
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Wed, 29 Nov 2023 19:45:32 -0700
+Message-ID: <CAPnjgZ29dUuD1uZMWAH-Eqx7RsGgy27ixHROAvMB8=Hm-TdT2A@mail.gmail.com>
+Subject: Re: [PATCH] watchdog: Correct watchdog timeout print message
+To: Chanho Park <chanho61.park@samsung.com>
+Cc: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,16 +81,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 22 Nov 2023 at 06:14, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 26 Nov 2023 at 18:06, Chanho Park <chanho61.park@samsung.com> wrote:
 >
-> In include/display_options.h we cannot include ourself, but do need
-> <linux/types.h> directly. Then in lib/display_options.c we further clean
-> the list to remove common.h.
+> The wdt_start function takes timeout_ms as a parameter and starts the
+> watchdog with this value. However, when you output the message, it shows
+> the default timeout value for the watchdog device.
+> So this patch fixes that part to output the correct timeout value.
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Before -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (60s timeout)
+>
+> After -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (3s timeout)
+>
+> Fixes: c2fd0ca1a822 ("watchdog: Integrate watchdog triggering into the cyclic framework")
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 > ---
->  include/display_options.h | 3 ++-
->  lib/display_options.c     | 3 ++-
->  2 files changed, 4 insertions(+), 2 deletions(-)
+>  drivers/watchdog/wdt-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
