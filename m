@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21800C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 06:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807A6C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 06:53:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59AF4870AB;
-	Thu, 30 Nov 2023 07:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E7EC7870AB;
+	Thu, 30 Nov 2023 07:53:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vQSK9Ivz";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="r6Vin0C0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F20A2870EA; Thu, 30 Nov 2023 07:50:04 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C49FC875C3; Thu, 30 Nov 2023 07:53:07 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5595F87049
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 07:50:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E04E870AB
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 07:53:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2c9b8aa4fc7so7711501fa.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 22:50:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701327000; x=1701931800; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zUtHTEw1lkpaeL20XZHA2RVVaeVWjf9zVT7afkKtzzo=;
- b=vQSK9IvzXA8zb2Nwtw6/olPn4Q3Wyx68Kp958MLSj7R9sle8Gawc0dhi7keLkLbcTK
- +MqGS8lEE8UmzXAogzJKtj1XtPUz+oM9LJMYyOIN+mQMw6CwAy9smSSbvjTgXPcb8Shu
- 7YOX9IGy/hJWGuWrL3R9J+2ACidEwFwz/ChBMhuxRCHh1RrPJpXQ15lpDTFXugAtSji+
- khHlc9r/S9whCQv1XGwksXp0Qxd+GZ2ef/UTaR36LhN+nAMo5OqB1ZoAggea2f3ZTM1o
- 1s7c8U7HYMJnFSjf9vXqppSCqd65NR8JEfD8CsMQBI5OFXBv64yRaCbdfJlIAHYyiFX3
- Ayww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701327000; x=1701931800;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zUtHTEw1lkpaeL20XZHA2RVVaeVWjf9zVT7afkKtzzo=;
- b=vc/YPSdmk4S/SRVtExvzqzoL89MZxla8mu+HsXWKxzyofWziASudYuTiuFiKS7QgQu
- W7VXLts9QHnUZ/tlKejSA12cZW3oO3JiWUw2ajAzvDikdqrCQsBY7An824XFFLE8DL/u
- T+pz2/wB9MA4Qkx6wPVd87XcsO6m7neJVoExIMVQiWDQMQmTDtGoasYG0vi2paJkBMw7
- M3Pi04tpE3Rs96nMOfrmlr5VIVYcNLKvit6wJ9NB7MT+kTmLH3IUH9qBFbHLWslblWqB
- iqieYEpy017LQMpJIVCaXCCJElnJoZ+49XtL4CsVqKOxTqkN+xdv4Ek6C2y51UMtggFq
- NeKA==
-X-Gm-Message-State: AOJu0Ywsi4w0fIsDqooWiS/yhDC+ZYV1tNY9rmt9mhbUDBQlnW46n9xI
- 5rqcs99yOmMCAfsV3WdX5FcsHpGyLI98sDbxK7dSXA==
-X-Google-Smtp-Source: AGHT+IFBAYl1TSPnc/a4rSkPZaclIj/JU8IlnczgWr2l/053k4hhgqrCokho3E2LjWAM/49NhQuXLXBnF3/m42Lqpco=
-X-Received: by 2002:a2e:93cf:0:b0:2c6:ed74:4058 with SMTP id
- p15-20020a2e93cf000000b002c6ed744058mr12963656ljh.42.1701327000536; Wed, 29
- Nov 2023 22:50:00 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
- <20231127171058.165777-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 30 Nov 2023 08:49:24 +0200
-Message-ID: <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, sean.anderson@seco.com, neil.armstrong@linaro.org, 
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1701327183;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=87pzsSc46JMMPzAleFkZ5qEpWGRTXGoCZ7QrxLQmwZQ=;
+ b=r6Vin0C0ESe3BmMtrqFmMubr6+2VVC39SBD9HuAb1eZhLH8yPuZIrDbSt2Erd+9r2cWY2a
+ ut/1YMwzfY6b4ZHR0kZWkKZXWgLFf6jkZ0I1Kwvm6cPpjA2mX5+W83Jpb8pdWfr5f9rJZn
+ KJwKbZqNLQbQOGZpvN/erTZ2IY97g7CD5zgAkQe5wEGMw9TyP7M4OEIAxHUXjWwn4DqTtt
+ 1u1n4Ww6YKGuoHRsIhCxc9FxtjhBqqkzK3LmDEKRgbrDcZxklU+EB0w5O/8HF7WA5jwlRm
+ ev3f7Sq1bMBCkav3od+2DXL8xUkM+aBquZMokNK+jSlvhn0IewpBStTdr8TDTg==
+Date: Thu, 30 Nov 2023 07:53:01 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Sz=C5=91ke_K=C3=A1lm=C3=A1n_Benjamin?= <egyszeregy@freemail.hu>
+Cc: u-boot@lists.denx.de, otavio@ossystems.com.br, Hugo Villeneuve
+ <hugo@hugovil.com>, sbabic@denx.de, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot detect
+In-Reply-To: <A2FS4g.GFF4EBsw8Al.pbUwSFwrL4BSLzAdMWk@freemail.hu>
+References: <20231107221617.470-1-egyszeregy@freemail.hu>
+ <CAOMZO5CkU7onGbWrMxHZGG66pqrnH+VZC1qJofm_kvJkkVHaeA@mail.gmail.com>
+ <A2DhwQ.Xeo2UIDvnEkI.pVoDCCvBPts07YOet4CT@freemail.hu>
+ <CAOMZO5Aret8v0cEVcgSwLfPgsDzrLgXjiWXj5ue+SRPmJsTieg@mail.gmail.com>
+ <A2DjDg.wGjnlX0ebNwK.yufbtwx5fVnuqjyPJYK@freemail.hu>
+ <CAOMZO5BHkjOC54dc7ciL7y-tYPux2KKXQ8mOv+uObZsin1fmNQ@mail.gmail.com>
+ <A2Exnw.dlngtJ5tNi9C.BApoDl5aKB1m6k9BCYZC@freemail.hu>
+ <CAOMZO5ApoA7+o_XOz04OLWpW-+hwhW-M9cROSbV1vADmDnydJw@mail.gmail.com>
+ <A2E7RA.WAMpX3ekvN7A.ZZTk9ZUF8rABr6qdjSu@freemail.hu>
+ <CAOMZO5AK3cxy_mOD_J9UPPCzFVfzoVw=OmACeh2+27k+4CkCnQ@mail.gmail.com>
+ <A2E88A.1BiPC1JJI4ID.2cqy6ZTmX2YXIGOSvxV@freemail.hu>
+ <20231128181740.7fea242b489d9efa261904d4@hugovil.com>
+ <A2FIQQ.2wIe6QeN9LRi.hPrNsyrmbwYjoHVf1fCB@freemail.hu>
+ <46e75feb54d11721d09209ac00036dc3@manjaro.org>
+ <A2FScA.MW9nwmW6LUOs.KplLbQiNaxiTRzhfA2eM@freemail.hu>
+ <722ca2b11c9ed6939fc0ee309cea01f4@manjaro.org>
+ <A2FS4g.GFF4EBsw8Al.pbUwSFwrL4BSLzAdMWk@freemail.hu>
+Message-ID: <0a53c03831c61dc4dc05eaeac95c4152@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,49 +85,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 2023-11-29 23:13, Szőke Kálmán Benjamin wrote:
+> https://wiki.yoctoproject.org/wiki/GroupsMigration
+> 
+> It seems to me, you should take little more time to understand the
+> benefits. In Yocto wiki site there is an overview about why was they
+> migrate mailing list to Groups.io some years ago from legacy and
+> outdated Mailman.
 
-[...]
+I do understand your position, but please understand that many people, 
+myself included, simply avoid using a web browser, and live in the CLI 
+instead, so to speak.  For example, Groups.io offers integration with 
+GitHub, Slack, and Trello, but I simply don't like using any of these 
+services, especially the web- or app-based chats, because clicking 
+around much simply isn't my thing.
 
-> Changes since v1:
-> > - Tokenize the DT node entry and use the appropriate value instead of
-> >   the entire string
-> > - Removed Peters tested/reviewed-by tags due to the above
-> >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
-> >  1 file changed, 90 insertions(+), 4 deletions(-)
-> >
->
-> Can this be put behind a Kconfig? It adds quite a bit of code which
-> punishes those boards which do the right thing.
->
+Groups.io also offers muting threads, which is admittedly a rather neat 
+feature, but the same functionality can already be achieved with 
+procmail, [1][2] even with much greater flexibility, so that's actually 
+nothing new.  We also already have searchable archives of the mailing 
+list, and even better, we have a public inbox. [3][4]
 
-Sure but OTOH the code increase should be really minimal. But I don't mind
-I can add a Kconfig
-
-
-> > +
-> > +       dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
->
-> Could this use ofnode_read_string_index() ?
->
-
-Maybe, I'll have a look and change it if that works
-
-[...]
+[1] https://linux.die.net/man/1/procmail
+[2] https://linux.die.net/man/5/procmailex
+[3] https://lore.kernel.org/u-boot/_/text/help/
+[4] https://lore.kernel.org/u-boot/
 
 
-> Any chance of a test for this code?
->
-
-Sure, but any suggestions on where to add the test?
-SMBIOS tables are populated on OS booting, do we have a test somewhere that
-boots an OS?
-Any other ideas?
-
-Thanks
-/Ilias
-
->
-> Regards,
-> Simon
->
+>> -------- Eredeti levél --------
+>> 
+>> Feladó: Dragan Simic <dsimic@manjaro.org>
+>> 
+>> Dátum: 2023 november 29 22:34:25
+>> 
+>> Tárgy: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot
+>> detect
+>> 
+>> Címzett: Szőke Kálmán Benjamin <egyszeregy@freemail.hu>
+>> 
+>> On 2023-11-29 22:12, Szőke Kálmán Benjamin wrote:
+>> 
+>>> https://lists.yoctoproject.org/g/main
+>> 
+>> Ah, I already used the same mailing list system. I saw no benefits,
+>> 
+>> though.
+>> 
+>>>> -------- Eredeti levél --------
+>> 
+>>>> 
+>> 
+>>>> Feladó: Dragan Simic <dsimic@manjaro.org>
+>> 
+>>>> 
+>> 
+>>>> Dátum: 2023 november 29 05:47:55
+>> 
+>>>> 
+>> 
+>>>> Tárgy: Re: [PATCH 1/1] pico-imx7d: add baseboard SD card boot
+>> 
+>>>> detect
+>> 
+>>>> 
+>> 
+>>>> Címzett: Szőke Kálmán Benjamin <egyszeregy@freemail.hu>
+>> 
+>>>> 
+>> 
+>>>> On 2023-11-29 00:35, Szőke Kálmán Benjamin wrote:
+>> 
+>>>> 
+>> 
+>>>>> Sorry i can not fix it, this is an average e-mail service
+>> provider
+>> 
+>>>> 
+>> 
+>>>> 
+>> 
+>>>>> that provides the expected tech level in 2023.Please upgrade
+>> your
+>> 
+>>>> 
+>> 
+>>>>> u-boot list website engine to able to support e-mail
+>> 
+>>>> 
+>> 
+>>>>> formats/technologies from 2020s ages. I suggest to use similar
+>> 
+>>>> what
+>> 
+>>>> 
+>> 
+>>>>> Yocto project has: https://lists.yoctoproject.org/g/main--------
+>> 
+>> 
+>>>> 
+>> 
+>>>> Well, it makes me wonder what are those modern email
+>> technologies?
+>> 
+>>>> Is
+>> 
+>>>> 
+>> 
+>>>> it HTML? Also, I'm getting "group does not exist" on the link
+>> above.
+>> 
+>>>> 
+>> 
+>>>> 
+>> 
+>>>>> Eredeti levél --------Feladó: Hugo Villeneuve
+>> 
+>>>> <hugo@hugovil.com>Dátum:
+>> 
+>>>> 
+>> 
+>>>>> 2023 november 29 00:17:51Tárgy: Re: [PATCH 1/1] pico-imx7d: add
+>> 
+>> 
+>>>> 
+>> 
+>>>>> baseboard SD card boot detectCímzett: Szőke Kálmán Benjamin
+>> 
+>>>> 
+>> 
+>>>>> <egyszeregy@freemail.hu>On Mon, 27 Nov 2023 23:26:08 +0000 (GMT)
+>> 
+>> 
+>>>> Szőke
+>> 
+>>>> 
+>> 
+>>>>> Kálmán Benjamin <egyszeregy@freemail.hu> wrote: > It was
+>> 
+>>>> absolutely
+>> 
+>>>> 
+>> 
+>>>>> conform, i supressed the potentional warning. Once again i say,
+>> i
+>> 
+>>>> will
+>> 
+>>>> 
+>> 
+>>>>> not remove it, if you do not liket it you can remoce as a
+>> 
+>>>> maintainer.
+>> 
+>>>> 
+>> 
+>>>>> My patch is ready and final. Let's do something to improve i.MX
+>> 
+>>>> family
+>> 
+>>>> 
+>> 
+>>>>> as a maintainer. I am realy sad to see in last 2-3 years there
+>> was
+>> 
+>>>> no
+>> 
+>>>> 
+>> 
+>>>>> any significats new features for boards since their initial
+>> 
+>>>> 
+>> 
+>>>>> commits.-------- Eredeti levél --------Feladó: Fabio Estevam
+>> 
+>>>> 
+>> 
+>>>>> <festevam@gmail.com>Dátum: 2023 november 27 21:39:19Tárgy: Re:
+>> 
+>> 
+>>>> [PATCH
+>> 
+>>>> 
+>> 
+>>>>> 1/1] pico-imx7d: add baseboard SD card boot detectCímzett:
+>> Szőke
