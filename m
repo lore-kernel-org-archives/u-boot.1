@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04890C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 22:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DA9C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 22:40:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 506CA86406;
-	Thu, 30 Nov 2023 23:10:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7670E87707;
+	Thu, 30 Nov 2023 23:40:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mD4xLZza";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Z3J6oPqm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 184FB87656; Thu, 30 Nov 2023 23:10:15 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 42F2D87707; Thu, 30 Nov 2023 23:39:59 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C19F28615A
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 23:10:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B5A4876B2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 23:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50bc21821a1so2067321e87.0
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 14:10:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701382212; x=1701987012; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bLkD+oq6vreH0lZthqdHUyJlpavLDxgNJqdHzAC+abc=;
- b=mD4xLZza5tPWgb2LL+cZ6kDiZkgUbucvSOatM8U5+OjLNGzJeszGUUMDxUw8eJmrl0
- mhDVEITDxbvt/A2faHqnY4Hd67UvUHW3f1CzvjfwOP62I1huLZSBwPivHJquTkz5qZBi
- FA9z/OqPEm0AWnsMpTK1UT5hoMJFnyxD7DYbDR6fSz6h3ezSIGpnDXf1FL5MGS/M41JV
- Z5PApMsp1X9I5TJSorOwPGe7IHykZ5iofmjVA3UkzHq6wK++GuaqvKsUAbNHY28IYrJU
- y6yIbrwRvrYkqHkcYiZ3iypP5FeZz+3JVzwmMrcxTxE2f5DQkBdcdkSioO1scaaXvXmJ
- jyqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701382212; x=1701987012;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bLkD+oq6vreH0lZthqdHUyJlpavLDxgNJqdHzAC+abc=;
- b=csrt35NsSAxXGd708bbsf1TVXTF/AnduqdyeGhTPtGjoed6qLtpbqjoZ5cs3B9AJxQ
- orgl+02U+pp0b2vO0EOP3jnfJe6iSfG5NKFUkZyBhtN0pYW+hl7pvSDpasqfsBcOLQIA
- JKEzynSJiisScGKRlQAZE64t6/eEQvHokl2jiUM0DT5eP+nST5VfNBkicWQOC/tp8Hwm
- 4AS0O8RiIiBQzm3ajN792eM+dQGR7eywHrcTWaKPZ3h0SlVoSofo8LIMRzTxlNu05+Re
- 4+mrKYWWnMsm/bevD61TBDQtKnZ6DOUCTYl9LQ8TGYOdXGR6M/kYF2+i44HFLxA8+NCD
- FUOA==
-X-Gm-Message-State: AOJu0YzZb1uDZLGsWnVBNAA7mH2CqtmjwPb9FQOuonTSotsuLRsmIU5u
- ayy27P2FflSvEddNrz8j8iZk+wvjeuMZBDHs/Y7uU17ucAXwRxWny1M=
-X-Google-Smtp-Source: AGHT+IEzgWQw2g8to+8fx+WxI6RpA0Y6h+wQUV8u/8sz8pofdAPMEYNBNfx7ZWBqqypNsR3DeDuEjVhu6wcn1E34u0o=
-X-Received: by 2002:a05:6512:348b:b0:50b:c2aa:af2f with SMTP id
- v11-20020a056512348b00b0050bc2aaaf2fmr130610lfr.34.1701382211998; Thu, 30 Nov
- 2023 14:10:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20231126220836.374956-1-i@shantur.com>
- <20231126220836.374956-3-i@shantur.com>
-In-Reply-To: <20231126220836.374956-3-i@shantur.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 1 Dec 2023 00:09:35 +0200
-Message-ID: <CAC_iWjKyyo2mri1706wB0XmGGDQqocvaNkYRpWNxeH_tvXUh_g@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] efi_vars: Implement SPI Flash store
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 6036e971-8fd1-11ee-91e7-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 6036e971-8fd1-11ee-91e7-005056994fde;
+ Thu, 30 Nov 2023 23:39:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=2OivNAWDJ/fDOL7LZYDg+lojuKIM5Agl15aqduX2omQ=;
+ b=Z3J6oPqmokJeXABIxy4d00Th3Z3YJMTeX5mwa7TkiIl3kYnzwbfSZzsVI8qX7kPb+0zyOce50Ucyf
+ UYL3+e+OthfVBS9yT6KqPG8dnt6Huf7GdoIEBSgsae03hP+yIDm9dTp0cZnTgNGgzcZV1A+TUe4YSy
+ mFODDVqHDYfZ6ilnPyq3VHzc/fgdEDrAcpXGao6nQ+q1hEz/a+DyzFURBM+thqJm9I60Q0qt/l9Yuh
+ 6EowAyh9MEw55UcNlGf6LVO6GvZIMSxnNpQ2JbU88Rpm/J4WZuH41Cq0+HyNMD4MFrU7YSEudqwAAC
+ n0fSErgYRcyR0d00alMibfopO20LLXA==
+X-KPN-MID: 33|BqJ8hhLV5FdQ9krl4wlZCN+SkRxZnBl9BK89JJZ7ejubqVqr7Yg0k5RIN/gi1QP
+ EoAnNtLYdX6/5GTALVEuMx/MeVYVioA9vf4dtw8jD+WQ=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|UxTze5NWJ0PikZvZnzhDqMXEy1pVUr/sb/MpyIwkk9ikWg/ld70m/xvOfgowfW1
+ gB14CTIysFJrgIm2YVzfWSQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 620779ca-8fd1-11ee-9dc8-00505699772e;
+ Thu, 30 Nov 2023 23:39:55 +0100 (CET)
+Date: Thu, 30 Nov 2023 23:39:55 +0100
+Message-Id: <87h6l227d0.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: "Janne Grunau" <j@jannau.net>
+Cc: kettenis@openbsd.org, trini@konsulko.com, u-boot@lists.denx.de,
+ asahi@lists.linux.dev
+In-Reply-To: <6ff006e0-941d-477a-b3d9-01986d317a04@app.fastmail.com>
+ (j@jannau.net)
+Subject: Re: [PATCH] arm: apple: t602x: Add missing MMIO regions to memmap
+References: <20231130-apple_t602x_extend_memmap-v1-1-cd96b251d2dc@jannau.net>
+ <87jzpz0y34.fsf@bloch.sibelius.xs4all.nl>
+ <6ff006e0-941d-477a-b3d9-01986d317a04@app.fastmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,81 +76,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur
+> Date: Thu, 30 Nov 2023 23:04:36 +0100
+> From: "Janne Grunau" <j@jannau.net>
+> 
+> Hej Mark,
+> 
+> On Thu, Nov 30, 2023, at 21:45, Mark Kettenis wrote:
+> >> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+> >> Date: Thu, 30 Nov 2023 13:42:22 +0100
+> >> 
+> >> From: Janne Grunau <j@jannau.net>
+> >> 
+> >> The memory maps for Apple's M2 Pro/Max/Ultra left MMIO space out which
+> >> was not used by any driver at the time. The display out exposed as
+> >> simple-framebuffer use a power-domain controlled by a device in an
+> >> unmapped region.
+> >> Add a map covering this region as well as another MMIO region in the
+> >> range 0x4'0000'0000 - 0x5'0000'0000. The added regions cover all MMIO
+> >> annotated in Apple's device tree in this range.
+> >> 
+> >> Signed-off-by: Janne Grunau <j@jannau.net>
+> >> ---
+> >>  arch/arm/mach-apple/board.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
+> >>  1 file changed, 48 insertions(+)
+> >
+> > Hi Janne,
+> >
+> > Is there a reason why you can't use a SZ_1G mapping for the blocks
+> > where you're using a SZ_512M mapping?  With SZ_1G the mapping code
+> > will use a 1G block descriptor which avoids another level of page
+> > tables.
+> 
+> no reason except that SZ_512M was sufficient to cover all devices in
+> Apple DT.  Shall I resend the patch?
 
-I have a few remarks on the architecture.
-Up to now, we are supporting
-1. Variables on a file
-2. Variables on an RPMB
-
-The reason those two are in different files is that we generally
-expect to use different bootime services and few differences in
-efi_variables_boot_exit_notify() and efi_init_variables().
-Whatever is common, for example the runtime functions are common
-across those two since they both implement variable runtime service
-via the memory backend, goes into efi_var_common.c, the memory backend
-operations should go in efi_var_mem.c.
-
-Since the SPI and file storage are similar -- and probably any storage
-medium controlled by the non-secure world, I am fine treating treat
-efi_variable.c as the variable management for the non-secure world and
-see if that needs changing in the future.
-
-As Heinrich pointed out the functions you are moving are better off
-moved into efi_var_mem.c.
-
-[...]
-
-> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> index adc5ac6a80..f73fb40061 100644
-> --- a/lib/efi_loader/efi_variable.c
-> +++ b/lib/efi_loader/efi_variable.c
-> @@ -354,14 +354,16 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
->                 ret = EFI_SUCCESS;
->
->         /*
-> -        * Write non-volatile EFI variables to file
-> +        * Write non-volatile EFI variables to file or SPI Flash
->          * TODO: check if a value change has occured to avoid superfluous writes
->          */
-> -#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
->         if (attributes & EFI_VARIABLE_NON_VOLATILE) {
-> +#if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
->                 efi_var_to_file();
-> -       }
-> +#elif CONFIG_IS_ENABLED(EFI_VARIABLE_SF_STORE)
-> +               efi_var_to_sf();
->  #endif
-> +       }
->
->         return EFI_SUCCESS;
->  }
-> @@ -471,9 +473,14 @@ efi_status_t efi_init_variables(void)
->
->  #if CONFIG_IS_ENABLED(EFI_VARIABLE_FILE_STORE)
->         ret = efi_var_from_file();
-> +#elif CONFIG_IS_ENABLED(EFI_VARIABLE_SF_STORE)
-> +       ret = efi_var_from_sf();
-> +#else
-> +       ret = EFI_SUCCESS;
-> +#endif
-
-Instead of those ifdefs can we do something different?
-Define a structure with two function callbacks for read/write(). Add
-the same function in both efi_var_file.c and efi_var_sp.c which fills
-in those callbacks and have an efi_init_variable() call to that
-function (obviously the SPI and file will be mutually exclusive)
-
-Thanks
-/Ilias
-
-> +
->         if (ret != EFI_SUCCESS)
->                 return ret;
-> -#endif
->
->         if (IS_ENABLED(CONFIG_EFI_VARIABLES_PRESEED)) {
->                 ret = efi_var_restore((struct efi_var_file *)
-> --
-> 2.40.1
->
+Yes please!
