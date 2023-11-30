@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A31CC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:14:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54248C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A88F5876C7;
-	Thu, 30 Nov 2023 21:14:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 242A5875FE;
+	Thu, 30 Nov 2023 21:14:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="akJOvQpM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tlm8eNwv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA22087660; Thu, 30 Nov 2023 21:13:58 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 4DC50876C2; Thu, 30 Nov 2023 21:14:00 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89959875FE
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:13:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D34AA8757B
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:13:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6d8029dae41so809658a34.0
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:13:56 -0800 (PST)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-58a7d13b00bso776110eaf.1
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:13:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701375235; x=1701980035; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701375236; x=1701980036; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1dQ+OJ+v+4GaZBrUVXfZxpg4MaQ0769sAE8M5OwE8rI=;
- b=akJOvQpMIyPRdCtafpQfhfYITQlsi/FLO9hDR9ulXeXn7tRPJYu0QlMRhlAW4pRqLp
- vnSZct+FNorh68VOleU6zCEYiftk2iF9VV4k5I1Jf9cmBRHMmuWxW13RrDK3vQ25sPPk
- 6bwNTUmLt4ybXqhIjP3aKhbXRGEzmRboZXCSMjZ+rlwirENDgpXkR73TgQVoJdqcx00K
- 46+3tb9keIKCTb4C4QW+3o4Uy0q/Y28wfD7CFk0+0QFHEaSdtol6nq7cPdxE4I+EoXTA
- SccZRHq7FzNActZhbFiVqKQF/1M2QJ4OrrChHQXTItjODgEArG53PAz1Hw+kZ/oLu6aq
- e5/g==
+ bh=kvk1SlQL6OnKuY6/TY15o9HNW/wvtBYCQKSY7DZLrhs=;
+ b=tlm8eNwvZVltOO5I+YzTgcZq8F6bLwFRLdT7jNzTZJ1Do8IlSJ+Wu+NzKVAzJPDP60
+ C4UfdAJz2UXiVKF4OorM3ooAMA/TPV2fP32AdlOZRcKo6RtZdG92+HIqkfilcw3flHqi
+ ILrx3PudDuNf4WdfNPMuCjRe0EsoFM2J4Q3ICigUdJbqhyp9DDimTFxqZBQEYKeArglf
+ ntPh+/Tau9BOHN0hXZQU6+HjuRP47jsm2AtvUTQ8oRitMWQhw6syuYi4kxmyllNJ85ft
+ Ppqinr1qhKdOKSI+XebOiBKGqou79Qi8dSIHOOkOfz+NSBMngfURdwZYZGFM63JucXaZ
+ FsyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701375235; x=1701980035;
+ d=1e100.net; s=20230601; t=1701375236; x=1701980036;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1dQ+OJ+v+4GaZBrUVXfZxpg4MaQ0769sAE8M5OwE8rI=;
- b=Rf3CkXgNly6LVdJjCV+3BrIFyK1UNJsFByCSdaeNQIqqvh67mQcDCTp/+MvQfsF09s
- bbJ0QObAbG+LKP7luF+qHkkPdAtCNwfOjeXafQCEGtpGq4VvghAUoFZZjOOkDiCIyJIy
- KWWOMDhI2c552tl4szCSBVLmGYcrxXv0QcSCT2rKJJE2Mb/PgiIt2y/jCOB+EFnuCWiM
- QmieKKyo1l2JwZJ2YlSYT+Q0sghY+KafIwClwFmoM+FW2YuQqqz5Bx/pJPl8WjM6dkC1
- wHf59FNGm7+zubeyXHo9/csWO9fMVc28svJtppEz8RT+SgBDEmFWJeGhq/hPEo2w0X3n
- 9xCw==
-X-Gm-Message-State: AOJu0Yx4r9X6t/sIpOcpxX8hvTRaDrh619Oyy7nD+XSTDqYGR3rbf/YQ
- b+knJSENz4lz4aoW2DwncWIWeg==
-X-Google-Smtp-Source: AGHT+IESVC4cfPSk9Um/MsWQ47GU2B4C339kcPFNOciKt7f+Jys4rKf2l8gmgXjNjY/uI2wzJbcBzg==
-X-Received: by 2002:a05:6808:c3:b0:3b8:4021:2b51 with SMTP id
- t3-20020a05680800c300b003b840212b51mr668590oic.17.1701375235218; 
- Thu, 30 Nov 2023 12:13:55 -0800 (PST)
+ bh=kvk1SlQL6OnKuY6/TY15o9HNW/wvtBYCQKSY7DZLrhs=;
+ b=WkwSXfcmLSxLksKqa798n14GwtxMfqS7726pruKGRhBgSvkx7LfZOAOASIFKJuX8BP
+ EUW5gXTFBXCV0SgwSw6/bmITe64mgxfCCSU+BkpEuUF40pO4Rl4LGq1sdueE0xicDWGT
+ 3mOlvmjhrtROnzAPUTOO6BkBDWaY6BT6MLP8eQUtavG088FZRLF/0ekzit2VCiwhawp4
+ SaQMBE0OqLioza8SE2Oeu8JELIouf6fwcqtbGCLGimlVxL8DjvXCFDy5Po85ffv2kU0z
+ SZ/FT/FUqf8LwykcTlwZr5LrrAUt8udvmU3spvavAbDD4rUx+S/3wpIUmsWIf789vmGA
+ 2XtA==
+X-Gm-Message-State: AOJu0YxrH84C5fF9Zaa0us+Fbpy+COxqjONZBtQDAT9WXH/9O6Qp7fBx
+ ePGzdDK5oyfLPleNPKEFD746XQ==
+X-Google-Smtp-Source: AGHT+IGv8BRlxmJiDwVFo+X//AgSqeUwfGiBRDWpYLibES9HnMuAs/Z4dMiDjgKc54yvlqxv45Z2LQ==
+X-Received: by 2002:a4a:761d:0:b0:57b:6c85:972 with SMTP id
+ t29-20020a4a761d000000b0057b6c850972mr655636ooc.0.1701375236216; 
+ Thu, 30 Nov 2023 12:13:56 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- dj16-20020a056808419000b003b2e7231faasm289822oib.28.2023.11.30.12.13.54
+ k29-20020a4a851d000000b0058cbbf9b4e4sm295456ooh.48.2023.11.30.12.13.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 12:13:54 -0800 (PST)
+ Thu, 30 Nov 2023 12:13:55 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <promsoft@gmail.com>,
 	Tom Rini <trini@konsulko.com>
 Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de
-Subject: [PATCH 3/7] pinctrl: exynos: Rework pin_to_bank_base() to obtain data
- by name
-Date: Thu, 30 Nov 2023 14:13:48 -0600
-Message-Id: <20231130201352.6379-4-semen.protsenko@linaro.org>
+Subject: [PATCH 4/7] pinctrl: exynos: Support different register types in pin
+ banks
+Date: Thu, 30 Nov 2023 14:13:49 -0600
+Message-Id: <20231130201352.6379-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231130201352.6379-1-semen.protsenko@linaro.org>
 References: <20231130201352.6379-1-semen.protsenko@linaro.org>
@@ -93,90 +93,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rework pin_to_bank_base() function to obtain bank data structure by bank
-name instead of getting bank base address by pin name, and rename it to
-get_bank() to reflect this change. This in turn leads to the extraction
-of parse_pin(), so the caller has to use it before calling get_bank().
+Get rid of hard-coded register offsets and widths. Instead provide a way
+for pinctrl drivers to specify different pin bank register offsets and
+widths. This in turn makes it possible to add support for new SoCs that
+have registers with offset/width values different than generic ones
+already available in pinctrl-exynos driver.
 
-No functional change. This is a refactoring commit which prepares
-pinctrl driver code for handling different sizes of register fields,
-which will be added next.
+Offset constants (now unused in pinctrl-exynos.c) are moved to
+pinctrl-exynos7420 driver, which is the single user of those constants.
+
+The design of this patch follows Linux kernel pinctrl-exynos driver
+design, in terms of added data structures and types. This patch doesn't
+add support for any new SoCs and shouldn't introduce any functional
+changes.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/pinctrl/exynos/pinctrl-exynos.c | 27 +++++++++++++------------
- 1 file changed, 14 insertions(+), 13 deletions(-)
+ drivers/pinctrl/exynos/pinctrl-exynos.c     | 42 ++++++++++++++-------
+ drivers/pinctrl/exynos/pinctrl-exynos.h     | 34 +++++++++++++++--
+ drivers/pinctrl/exynos/pinctrl-exynos7420.c |  2 +
+ 3 files changed, 61 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.c b/drivers/pinctrl/exynos/pinctrl-exynos.c
-index 2d194ba0a4b5..d908927135b6 100644
+index d908927135b6..9a51653be864 100644
 --- a/drivers/pinctrl/exynos/pinctrl-exynos.c
 +++ b/drivers/pinctrl/exynos/pinctrl-exynos.c
-@@ -50,17 +50,14 @@ static void parse_pin(const char *pin_name, u32 *pin, char *bank_name)
- 	*pin = pin_name[++idx] - '0';
- }
+@@ -15,6 +15,12 @@
  
--/* given a pin-name, return the address of pin config registers */
--static unsigned long pin_to_bank_base(struct udevice *dev, const char *pin_name,
--						u32 *pin)
-+/* given a bank name, find out the pin bank structure */
-+static const struct samsung_pin_bank_data *get_bank(struct udevice *dev,
-+						    const char *bank_name)
- {
- 	struct exynos_pinctrl_priv *priv = dev_get_priv(dev);
- 	const struct samsung_pin_ctrl *pin_ctrl_array = priv->pin_ctrl;
- 	const struct samsung_pin_bank_data *bank_data;
--	u32 nr_banks, pin_ctrl_idx = 0, idx = 0, bank_base;
--	char bank[10];
--
--	parse_pin(pin_name, pin, bank);
-+	u32 nr_banks, pin_ctrl_idx = 0, idx = 0;
+ DECLARE_GLOBAL_DATA_PTR;
  
- 	/* lookup the pin bank data using the pin bank name */
- 	while (true) {
-@@ -75,15 +72,13 @@ static unsigned long pin_to_bank_base(struct udevice *dev, const char *pin_name,
- 		for (idx = 0; idx < nr_banks; idx++) {
- 			debug("pinctrl[%d] bank_data[%d] name is: %s\n",
- 					pin_ctrl_idx, idx, bank_data[idx].name);
--			if (!strcmp(bank, bank_data[idx].name)) {
--				bank_base = priv->base + bank_data[idx].offset;
--				break;
--			}
-+			if (!strcmp(bank_name, bank_data[idx].name))
-+				return &bank_data[idx];
- 		}
- 		pin_ctrl_idx++;
- 	}
- 
--	return bank_base;
-+	return NULL;
- }
- 
++/* CON, DAT, PUD, DRV */
++const struct samsung_pin_bank_type bank_type_alive = {
++	.fld_width = { 4, 1, 2, 2, },
++	.reg_offset = { 0x00, 0x04, 0x08, 0x0c, },
++};
++
  /**
-@@ -93,6 +88,7 @@ static unsigned long pin_to_bank_base(struct udevice *dev, const char *pin_name,
-  */
- int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
- {
-+	struct exynos_pinctrl_priv *priv = dev_get_priv(dev);
- 	const void *fdt = gd->fdt_blob;
+  * exynos_pinctrl_setup_peri: setup pinctrl for a peripheral.
+  * conf: soc specific pin configuration data array
+@@ -81,6 +87,22 @@ static const struct samsung_pin_bank_data *get_bank(struct udevice *dev,
+ 	return NULL;
+ }
+ 
++static void exynos_pinctrl_set_pincfg(unsigned long reg_base, u32 pin_num,
++				      u32 val, enum pincfg_type pincfg,
++				      const struct samsung_pin_bank_type *type)
++{
++	u32 width = type->fld_width[pincfg];
++	u32 reg_offset = type->reg_offset[pincfg];
++	u32 mask = (1 << width) - 1;
++	u32 shift = pin_num * width;
++	u32 data;
++
++	data = readl(reg_base + reg_offset);
++	data &= ~(mask << shift);
++	data |= val << shift;
++	writel(data, reg_base + reg_offset);
++}
++
+ /**
+  * exynos_pinctrl_set_state: configure a pin state.
+  * dev: the pinctrl device to be configured.
+@@ -93,7 +115,7 @@ int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
  	int node = dev_of_offset(config);
  	unsigned int count, idx, pin_num;
-@@ -113,10 +109,15 @@ int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
- 	pindrv = fdtdec_get_int(fdt, node, "samsung,pin-drv", -1);
+ 	unsigned int pinfunc, pinpud, pindrv;
+-	unsigned long reg, value;
++	unsigned long reg;
+ 	const char *name;
  
- 	for (idx = 0; idx < count; idx++) {
-+		const struct samsung_pin_bank_data *bank;
-+		char bank_name[10];
-+
- 		name = fdt_stringlist_get(fdt, node, "samsung,pins", idx, NULL);
- 		if (!name)
- 			continue;
--		reg = pin_to_bank_base(dev, name, &pin_num);
-+		parse_pin(name, &pin_num, bank_name);
-+		bank = get_bank(dev, bank_name);
-+		reg = priv->base + bank->offset;
+ 	/*
+@@ -120,24 +142,18 @@ int exynos_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ 		reg = priv->base + bank->offset;
  
  		if (pinfunc != -1) {
- 			value = readl(reg + PIN_CON);
+-			value = readl(reg + PIN_CON);
+-			value &= ~(0xf << (pin_num << 2));
+-			value |= (pinfunc << (pin_num << 2));
+-			writel(value, reg + PIN_CON);
++			exynos_pinctrl_set_pincfg(reg, pin_num, pinfunc,
++						  PINCFG_TYPE_FUNC, bank->type);
+ 		}
+ 
+ 		if (pinpud != -1) {
+-			value = readl(reg + PIN_PUD);
+-			value &= ~(0x3 << (pin_num << 1));
+-			value |= (pinpud << (pin_num << 1));
+-			writel(value, reg + PIN_PUD);
++			exynos_pinctrl_set_pincfg(reg, pin_num, pinpud,
++						  PINCFG_TYPE_PUD, bank->type);
+ 		}
+ 
+ 		if (pindrv != -1) {
+-			value = readl(reg + PIN_DRV);
+-			value &= ~(0x3 << (pin_num << 1));
+-			value |= (pindrv << (pin_num << 1));
+-			writel(value, reg + PIN_DRV);
++			exynos_pinctrl_set_pincfg(reg, pin_num, pindrv,
++						  PINCFG_TYPE_DRV, bank->type);
+ 		}
+ 	}
+ 
+diff --git a/drivers/pinctrl/exynos/pinctrl-exynos.h b/drivers/pinctrl/exynos/pinctrl-exynos.h
+index 6b19f196bc3a..743bb5573091 100644
+--- a/drivers/pinctrl/exynos/pinctrl-exynos.h
++++ b/drivers/pinctrl/exynos/pinctrl-exynos.h
+@@ -8,25 +8,51 @@
+ #ifndef __PINCTRL_EXYNOS_H_
+ #define __PINCTRL_EXYNOS_H_
+ 
+-#define PIN_CON		0x00	/* Offset of pin function register */
+-#define PIN_DAT		0x04	/* Offset of pin data register */
+-#define PIN_PUD		0x08	/* Offset of pin pull up/down config register */
+-#define PIN_DRV		0x0C	/* Offset of pin drive strength register */
++/**
++ * enum pincfg_type - possible pin configuration types supported.
++ * @PINCFG_TYPE_FUNC: Function configuration.
++ * @PINCFG_TYPE_DAT: Pin value configuration.
++ * @PINCFG_TYPE_PUD: Pull up/down configuration.
++ * @PINCFG_TYPE_DRV: Drive strength configuration.
++ */
++enum pincfg_type {
++	PINCFG_TYPE_FUNC,
++	PINCFG_TYPE_DAT,
++	PINCFG_TYPE_PUD,
++	PINCFG_TYPE_DRV,
++
++	PINCFG_TYPE_NUM
++};
++
++/**
++ * struct samsung_pin_bank_type: pin bank type description
++ * @fld_width: widths of configuration bitfields (0 if unavailable)
++ * @reg_offset: offsets of configuration registers (don't care of width is 0)
++ */
++struct samsung_pin_bank_type {
++	u8 fld_width[PINCFG_TYPE_NUM];
++	u8 reg_offset[PINCFG_TYPE_NUM];
++};
+ 
+ /**
+  * struct samsung_pin_bank_data: represent a controller pin-bank data.
++ * @type: type of the bank (register offsets and bitfield widths)
+  * @offset: starting offset of the pin-bank registers.
+  * @nr_pins: number of pins included in this bank.
+  * @name: name to be prefixed for each pin in this pin bank.
+  */
+ struct samsung_pin_bank_data {
++	const struct samsung_pin_bank_type *type;
+ 	u32		offset;
+ 	u8		nr_pins;
+ 	const char	*name;
+ };
+ 
++extern const struct samsung_pin_bank_type bank_type_alive;
++
+ #define EXYNOS_PIN_BANK(pins, reg, id)			\
+ 	{						\
++		.type		= &bank_type_alive,	\
+ 		.offset		= reg,			\
+ 		.nr_pins	= pins,			\
+ 		.name		= id			\
+diff --git a/drivers/pinctrl/exynos/pinctrl-exynos7420.c b/drivers/pinctrl/exynos/pinctrl-exynos7420.c
+index 07870b7f51a5..77d510d8f600 100644
+--- a/drivers/pinctrl/exynos/pinctrl-exynos7420.c
++++ b/drivers/pinctrl/exynos/pinctrl-exynos7420.c
+@@ -16,6 +16,8 @@
+ #include "pinctrl-exynos.h"
+ 
+ #define	GPD1_OFFSET	0xc0
++#define PIN_CON		0x00	/* Offset of pin function register */
++#define PIN_PUD		0x08	/* Offset of pin pull up/down config register */
+ 
+ static struct exynos_pinctrl_config_data serial2_conf[] = {
+ 	{
 -- 
 2.39.2
 
