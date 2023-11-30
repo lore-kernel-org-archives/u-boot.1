@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B0FC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 11:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32FE3C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 11:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 112C287116;
-	Thu, 30 Nov 2023 12:44:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 53350870E4;
+	Thu, 30 Nov 2023 12:56:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="maT7JfK7";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="J2kMD9sw";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="k8MVrZzS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 907F2870AF; Thu, 30 Nov 2023 12:44:35 +0100 (CET)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF670875FE; Thu, 30 Nov 2023 12:56:17 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9433186B9A
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:44:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A06E8870AF
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:56:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=msuchanek@suse.de
-Received: from kitsune.suse.cz (unknown [10.100.12.127])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id BEBE51F855;
- Thu, 30 Nov 2023 11:44:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1701344670; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=lACsUfp1qs+QL8ULEb/Lg/hKEnjESq6uwEPGM4lHlwc=;
- b=maT7JfK7SyVt/1/7QFZqQ+cY+ezfU+G7hr0KPzsqm94/MprUWn9wrZ17Avf1FU+tSXlSQb
- jTiZFBDVBC0bd+NUJN+qcMoUxD3lr/3J+WNy1b0fgwClQDZoFUCD7kpa3/U2fiDlM218fH
- 38nxBUBPOTr6vr0xrKBx2riSE70TLrs=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1701344670;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=lACsUfp1qs+QL8ULEb/Lg/hKEnjESq6uwEPGM4lHlwc=;
- b=J2kMD9swR4zJN28Qmwwg6KF43DHfwR09VTaZytusVE4WB1xL0HbqR1J2tx+LEQTs3ZM92M
- 3Dp14FEEb+9skNCA==
-Date: Thu, 30 Nov 2023 12:43:52 +0100
-From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>,
- u-boot@lists.denx.de, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, goldsimon@gmx.de
-Subject: Re: [PATHv11 01/43] submodule: add lwIP as git submodule
-Message-ID: <20231130114352.GN9696@kitsune.suse.cz>
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-2-maxim.uvarov@linaro.org>
- <20231127181607.GL2513409@bill-the-cat>
- <CAPnjgZ2CGQpCkBbHtSUAjGosiNv8XPs7P5MrO_gtjPzQ5QWoOQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1701345375; x=1703937375;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=uLvxRAVDh8fPwrEZy0TvzVpl2F/vWYnPNIJz0DB0IvQ=;
+ b=k8MVrZzSUQIdxLWZGllUHJVVKQkPRkkeTTXsal80+F4OABA37GdtJOC7fP9x6If2
+ cr1oJhK6UNcE/20/iT6TsTRG0UaJopZNikkrCp6qsAyN0gelML6HjaJAB7o9MoWh
+ qQGlLCxsltiKEW9vFPp/pf2wAtcgMG2+asOutswTGbQ=;
+X-AuditID: ac14000a-fadff7000000290d-5e-6568785ff27e
+Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 9B.88.10509.F5878656;
+ Thu, 30 Nov 2023 12:56:15 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 30 Nov
+ 2023 12:56:14 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, <nm@ti.com>
+Subject: [PATCH v2 0/2] *** Add support for phyCORE-AM62x ***
+Date: Thu, 30 Nov 2023 12:56:05 +0100
+Message-ID: <20231130115607.2150349-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2CGQpCkBbHtSUAjGosiNv8XPs7P5MrO_gtjPzQ5QWoOQ@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Authentication-Results: smtp-out2.suse.de;
-	none
-X-Spamd-Result: default: False [-1.10 / 50.00]; ARC_NA(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
- MIME_GOOD(-0.10)[text/plain]; NEURAL_HAM_LONG(-1.00)[-1.000];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RCPT_COUNT_SEVEN(0.00)[7];
- DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,konsulko.com:email];
- FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_COUNT_ZERO(0.00)[0];
- FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
- FREEMAIL_CC(0.00)[konsulko.com,linaro.org,lists.denx.de,gmail.com,gmx.de];
- BAYES_HAM(-0.00)[16.98%]
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Florix.phytec.de
+ (172.25.0.13)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrLLMWRmVeSWpSXmKPExsWyRpKBVze+IiPVYO5JKYs3P84yWbzd28lu
+ 0f1O3YHZ4+ydHYwe/d0trB7Hb2xnCmCO4rJJSc3JLEst0rdL4Mo40P+bseCKXMXS6WuYGhiP
+ SXQxcnJICJhIbD7zj7mLkYtDSGAxk0TL562MEM5jRolzS7YygVSxCahL3NnwjRXEFhGQknjZ
+ uZEZxGYW0JY4e2MnWI2wgK3EiunLwGwWAVWJZevPsoHYvAKWEu1NV5ggtslLzLz0nR0iLihx
+ cuYTFog58hLNW2dDzZSQOPjiBZgtBBR/cWk5C0zvtHOvmSHsUInOP/dZJjAKzEIyahaSUbOQ
+ jFrAyLyKUSg3Mzk7tSgzW68go7IkNVkvJXUTIyhIRRi4djD2zfE4xMjEwXiIUYKDWUmE9/rT
+ 9FQh3pTEyqrUovz4otKc1OJDjNIcLErivKs7glOFBNITS1KzU1MLUotgskwcnFINjB4FW7OU
+ T3mZruByWfTqsMuFGZf6fwtYfZ2kIfhP8VkR57qIE9GG5lfZwnpuSKksj9QNXLPl5sf2eYuX
+ 2J12aSjv2CuVan595sIdXLMPd7qzaJlXyTDuEFndM3XTtmWbggXMi7dLFPSymJ8wCn0qmLZ2
+ VSiXRvyUd6xNk55cU08zj0vQy/VZo8RSnJFoqMVcVJwIADrF/3pAAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,39 +84,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+As requested by Dhruva, this patch set comes now with a cover-letter :).
+This is a rebase on top of -next to address recent K3 updates.
 
-On Wed, Nov 29, 2023 at 07:45:28PM -0700, Simon Glass wrote:
-> Hi Tom,
-> 
-> On Mon, 27 Nov 2023 at 11:16, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Nov 27, 2023 at 06:56:44PM +0600, Maxim Uvarov wrote:
-> >
-> > > add external lwIP library as a git submodule.
-> > > Use STABLE-2_2_0_RELEASE tag.
-> > >
-> > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> >
-> > And just for the record, we'll re-visit submodule/subtree/whatever later
-> > on, this (and the final parts for CI to be happy about it) are a means
-> > to an end.
-> 
-> While I understand this, I would still like to see a patch containing
-> the actual code. We are at v11 here.
+It should be noted that the huge files are generated or copy pasted from
+TI's evm. So I do not think they need big attention in the review process.
 
-This is why submodules are evil.
+  - All yaml files are identical to TI's evm
+  - k3-am62-phycore-som-ddr4-2gb.dtsi generated with TI's SysConfig DDR Tool
+  - k3-am62-phycore-som.dtsi & k3-am625-phyboard-lyra-rdk.dts are 1:1 copies
+    from Linux v6.7-rc3
 
-You *can* produce a patch that contains the code but you have to
-*remember* to pass the argument.
+v2:
+  - Add cover-letter & mention Linux version I took the DTs from
+  - Move board selection to mach-k3
+  - Add missing SPL_LDSCRIPT definition
+  - Refactore binman file for templated FITs & drop key overrides
+  - Drop SoC provided bootph params from dt files
+    Note: Later we can drop more bootph params after we added them to Linux
+  - Drop CONFIG_TI_SECURE_DEVICE as it is set as default for K3
+  - Drop cpsw3g custom DT property 'mac_efuse' and custom DT node cpsw-phy-sel
+    as driver picks these from standard property/node (-u-boot.dtsi)
+  - Add a53 cluster power to control from the rproc driver (a53 dt node)
 
-And if the patch does contains the code it is likely not applicable
-because then it does not contain the revision to which the submodule
-should be updated.
+v1: https://lists.denx.de/pipermail/u-boot/2023-October/535750.html
 
-Submoudules may be a generally good idea but they are not well
-implemented in git.
+Wadim Egorov (2):
+  board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
+  doc: board: phytec: Add phyCORE-AM62x
 
-Thanks
+ arch/arm/dts/Makefile                         |    4 +-
+ .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
+ arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
+ .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  166 ++
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  380 +++
+ arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  118 +
+ arch/arm/mach-k3/am62x/Kconfig                |   17 +
+ board/phytec/phycore_am62x/Kconfig            |   33 +
+ board/phytec/phycore_am62x/MAINTAINERS        |   15 +
+ board/phytec/phycore_am62x/Makefile           |    8 +
+ board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
+ board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
+ board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
+ board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
+ board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
+ board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
+ configs/phycore_am62x_a53_defconfig           |  115 +
+ configs/phycore_am62x_r5_defconfig            |  130 +
+ doc/board/phytec/index.rst                    |    1 +
+ doc/board/phytec/phycore-am62x.rst            |  125 +
+ doc/board/ti/k3.rst                           |    1 +
+ include/configs/phycore_am62x.h               |   15 +
+ 23 files changed, 5504 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
+ create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
+ create mode 100644 board/phytec/phycore_am62x/Kconfig
+ create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
+ create mode 100644 board/phytec/phycore_am62x/Makefile
+ create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
+ create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
+ create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
+ create mode 100644 configs/phycore_am62x_a53_defconfig
+ create mode 100644 configs/phycore_am62x_r5_defconfig
+ create mode 100644 doc/board/phytec/phycore-am62x.rst
+ create mode 100644 include/configs/phycore_am62x.h
 
-Michal
+-- 
+2.34.1
+
