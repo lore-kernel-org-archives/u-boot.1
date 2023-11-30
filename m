@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AFE3C10DC1
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 00:20:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4435BC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 01:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF2F487073;
-	Thu, 30 Nov 2023 01:20:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5913287083;
+	Thu, 30 Nov 2023 02:13:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Caw/NIR1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AG6MF97o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE523870B3; Thu, 30 Nov 2023 01:20:38 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id E871A87083; Thu, 30 Nov 2023 02:13:47 +0100 (CET)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD22786D33
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 01:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA07E86F64
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 02:13:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephen.graf@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d00689f5c8so4003675ad.3
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 16:20:36 -0800 (PST)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6cb55001124so1260623b3a.0
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 17:13:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701303635; x=1701908435; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bpJduYuROYEa7GlONa/imIaOhaPtws/KthA5P0/Y0do=;
- b=Caw/NIR1W9UI7Dp5rf5XLMICvurnW0d41+vXbrL7h4t09fwJ3PYekrMVE0weS82PJ6
- zWM8EdhwKkzITo1yyfTh6bEbIqiXNZ1E2MVT/O6SqjBvBpFDWCibpfxFT1NxAtqsKCNO
- XsHuyc9dQKvBdhsb6XK6bEbxrXOsuZsyekqMo2quSnRz7E5jczF5FpOuKrtJSB7tNGf5
- cfkn+E4AU6iAO7+ZA8Hhv4xp4g+RT8p5bhFwfkGzsW/gjCbgmdBY9TOvClXvJN6M3oiR
- 5Hhlb7Iy8+iWwL5an7G8dkNcnJqsOFlOdm5nCv5CGPedCy1h6wn5QSyQClLYUSVaZfvi
- mdwQ==
+ d=gmail.com; s=20230601; t=1701306824; x=1701911624; darn=lists.denx.de;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GRlvrK07ME/swY1WtbkSFR7EDZxwvHnw2DwPwO6LavQ=;
+ b=AG6MF97oHnksUu28zP4E1FHLZfnGQNXHVnp5LrsRNIK5EqP0DDBPGahcVQ8o8i35hf
+ tJK3ZvlGoHBYvwAG0SuIIe6LYbhNRDZ32aqoFMVld3ELAz5mqNbjDXWj016KTqiadLKG
+ 8zkemY6Fq8resJdlwrocFbO4GPw8YDwDKs0968ePOaLOe64yehHiVRjgxg5c/nGfAbso
+ jqOUqYWuJlb0mtmmaXm9Ay/LhglG/hltla1IcBGCmjlcyoHHHney5XXV/C5lUWbqg6r8
+ tcJu1FK4rXPjcUoqs0UEylR700FRuZitZ+lh6LnUK3BmGgWkZHjECQrySnxrm9m6ad6p
+ q+xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701303635; x=1701908435;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bpJduYuROYEa7GlONa/imIaOhaPtws/KthA5P0/Y0do=;
- b=AUPBaBVVu2ub1ISE8w5P3fmtbgsYi+rrtyL4fbqC/4wbWvquqQrlW31QDurd6RZn21
- ljakUTqFcGEtAXovb6NnDma1ygJJ7/JdT1nY7rnFvS0FuQkI4NWWCORVUgwORXibbgMB
- cIYsLjyO/eMP7d3Z/93uVDeGnzpUOAA+mrzZL2OHVnY52ceM4r+Ewwep6xjYXJnc5aCs
- b5JTESPPVF03MCWz2psyEuil9ZQoZokByyyg5DWvemUPw9Y6uv6pezYZ+YxlT42Z26TL
- eOXnzyENlikpJRzFThimQWopuJfMTIGszaV8+fuuIRXyifIAURO8dNY7O6KLjy3znJwh
- 5fkw==
-X-Gm-Message-State: AOJu0YzrGQjqHXYvwjdbg1JZyVh7+WNEgpNappHSVe7gtz3TWEENk2lG
- Vr2nobbWWpDCzekvGR84osg=
-X-Google-Smtp-Source: AGHT+IGGyCcUq2xQjNrW9L1yMPDfpnoUlFv5iZtC9TBlRTPaxJJ1c97PEYFMHgxIaJTLAnInk68qeg==
-X-Received: by 2002:a17:902:c3c6:b0:1d0:3090:9584 with SMTP id
- j6-20020a170902c3c600b001d030909584mr455213plj.41.1701303634914; 
- Wed, 29 Nov 2023 16:20:34 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701306824; x=1701911624;
+ h=in-reply-to:from:references:cc:to:content-language:subject
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=GRlvrK07ME/swY1WtbkSFR7EDZxwvHnw2DwPwO6LavQ=;
+ b=ecYVpQDLF7k3IDvrxp6sXVCg9k57NTecwVTcZZh2kVjzp2lmxfgsgm26IebJ8FeO+c
+ z3aMg71W2Gg+1AkW6Kt7xCtLV6OOBSzcglspdgoNSbY3o1u3acE3CnGmhHMgSk2Tc8KF
+ NtzY29SfJ8qBlFfi70EwlIgiZtz8U+iPhuvzLIjsVr/DZKAaG/Ys6Grih41F/Wnj7T40
+ 38NoSPn+0FdvOczP9TfndJ2yjf0gFdOQqWXVWhHkQVUXIAVr4SJW1vPkNyJlneHJq7pL
+ l4Sqy81MjGx8VpBEfF4wxFt1P2LM4stPLr93h55kXeFYKclQn1XQgFD4jG9n/RpC9Ye8
+ 9ExQ==
+X-Gm-Message-State: AOJu0Yxs08GZ8rBPkoY2DbgKsH23O0QUMu5Mh4V1MAWmQcm7iTGPL2XJ
+ 2t9DMUAMSgVqQC12Q12eAKUCSkVpSfNdIg==
+X-Google-Smtp-Source: AGHT+IHWXFPf3pnitxvRRVnIq53o2oX4t0dZ7xmS/i8c9uaIbLku3rIFWerU43/CaJw+lmtOSxH0EA==
+X-Received: by 2002:a05:6a00:1252:b0:6cb:8abd:39b5 with SMTP id
+ u18-20020a056a00125200b006cb8abd39b5mr30053248pfi.1.1701306823895; 
+ Wed, 29 Nov 2023 17:13:43 -0800 (PST)
 Received: from [192.168.1.3] (d23-16-72-139.bchsia.telus.net. [23.16.72.139])
  by smtp.gmail.com with ESMTPSA id
- i1-20020a170902c28100b001cf658f20ecsm12992036pld.96.2023.11.29.16.20.34
+ i5-20020aa787c5000000b006cb7e61cfa7sm25736pfo.36.2023.11.29.17.13.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 29 Nov 2023 16:20:34 -0800 (PST)
-Message-ID: <a2e62d55-8209-432e-b01f-253e05c11186@gmail.com>
-Date: Wed, 29 Nov 2023 16:20:33 -0800
+ Wed, 29 Nov 2023 17:13:43 -0800 (PST)
+Content-Type: multipart/mixed; boundary="------------souDGRPkyc90BWFO9uidqPL5"
+Message-ID: <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
+Date: Wed, 29 Nov 2023 17:13:42 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: mdt_debug write
@@ -90,8 +91,6 @@ References: <20231114013106.31336-1-andre.przywara@arm.com>
  <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
 From: Stephen Graf <stephen.graf@gmail.com>
 In-Reply-To: <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,32 +107,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you for the update Andre.
+This is a multi-part message in MIME format.
+--------------souDGRPkyc90BWFO9uidqPL5
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The flashcp worked.  I rebooted without an SD card and the new u-boot 
-started properly.
-
-Now as to making a patch file, I will give it a try.  Keep in mind that 
-when I started my working career the concept of patching was to shuffle 
-a deck of IBM 80 column punched cards.
-
-Console output:
-
-root@orangepizero3:~# flashcp -v 
-/home/sysadmin/u-boot-sunxi-with-spl.bin_with_792_clk /dev/mtd0
-Erasing blocks: 206/206 (100%)
-Writing data: 822k/822k (100%)
-Verifying data: 822k/822k (100%)
-root@orangepizero3:~#
-
-
-
+Is the attached patch file going in the right direction?
 
 On 2023-11-29 3:57 p.m., Andre Przywara wrote:
 > Hi Stephen,
 > 
 > On 28/11/2023 20:07, Stephen Graf wrote:
->> Below is the consol log from trying to use mtd_debug write. It 
+>> Below is the console log from trying to use mtd_debug write. It 
 >> returned immediately with a strange success message.
 >>
 >> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000 
@@ -156,3 +141,22 @@ On 2023-11-29 3:57 p.m., Andre Przywara wrote:
 > Thanks,
 > Andre
 > 
+--------------souDGRPkyc90BWFO9uidqPL5
+Content-Type: text/plain; charset=UTF-8; name="--- docboardallwinnersunxi.rst
+ .txt"
+Content-Disposition: attachment; filename="--- docboardallwinnersunxi.rst
+ .txt"
+Content-Transfer-Encoding: base64
+
+LS0tIGRvYy9ib2FyZC9hbGx3aW5uZXIvc3VueGkucnN0ICAgICAgIDIwMjMtMTEtMjggMjE6
+MzE6MDYuODQ0NjA3NDAzIC0wODAwDQorKysgZG9jL2JvYXJkL2FsbHdpbm5lci9zdW54aS5y
+c3RfdXBkYXRlZCAgICAgICAyMDIzLTExLTI5IDE2OjQ4OjAzLjY4MjM1MjMyOCAtMDgwMA0K
+QEAgLTI1MSw4ICsyNTEsNyBAQA0KDQogICAgICMgYXB0LWdldCBpbnN0YWxsIG10ZC11dGls
+cw0KICAgICAjIG10ZGluZm8NCi0gICAgIyBtdGRfZGVidWcgZXJhc2UgL2Rldi9tdGRYIDAg
+MHhmMDAwMA0KLSAgICAjIG10ZF9kZWJ1ZyB3cml0ZSAvZGV2L210ZFggMCAweGYwMDAwIHUt
+Ym9vdC1zdW54aS13aXRoLXNwbC5iaW4NCisgICAgIyBmbGFzaGNwIC12IHUtYm9vdC1zdW54
+aS13aXRoLXNwbC5iaW4gL2Rldi9tdGRYDQoNCiBgYC9kZXYvbXRkWGBgIG5lZWRzIHRvIGJl
+IHJlcGxhY2VkIHdpdGggdGhlIHJlc3BlY3RpdmUgZGV2aWNlIG5hbWUsIGFzIGxpc3RlZA0K
+IGluIHRoZSBvdXRwdXQgb2YgYGBtdGRpbmZvYGAuDQo=
+
+--------------souDGRPkyc90BWFO9uidqPL5--
