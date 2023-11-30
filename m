@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DA3C07CA9
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 11:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B48DC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 11:59:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2520876A2;
-	Thu, 30 Nov 2023 12:57:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 381A287695;
+	Thu, 30 Nov 2023 12:57:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="deM8JCIf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Sg/y7zkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1647876A2; Thu, 30 Nov 2023 12:57:44 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 17B34876A7; Thu, 30 Nov 2023 12:57:51 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9142B87698
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:57:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D0C1875CC
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:57:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AUBvY66021427;
- Thu, 30 Nov 2023 05:57:34 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AUBvelZ027206;
+ Thu, 30 Nov 2023 05:57:40 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701345454;
- bh=U9xRKlk3s2MChLs2q0BDjN34ehU+pMrBn7x4OBLtRS8=;
+ s=ti-com-17Q1; t=1701345460;
+ bh=qbdzRP/VdAICvHetmJ1T+O8YhU1T9yxSH4M7zhpxz04=;
  h=From:To:Subject:Date:In-Reply-To:References;
- b=deM8JCIfNbhj0XMIU+DVg77PvM2w/iIvqCiGaQts0gnSA4y5e294xlsGjyrqR34B0
- jj0Wk04WawedouYV+Mna5zrSB4RYKVHroFj3PE4jTf2o7LKW94/THZT8Yyq5EwiRqX
- gJ8StYy3FIpg6W5qw8MMSKoR0e2hOs5GSfN1SZrs=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AUBvYWI024731
+ b=Sg/y7zkXtits2HJhPaONEgQFeqreZmTfuqA3SQGZgYWs6PQyUE5jSMxd6yzl4cy9I
+ XBRWGJzcgjThUIWkWRTmtNU0Hp5SDjBWx5eOq8JgI0vS+qgKEEKZhla1QMJ8zT67+2
+ TotFv+6LT7C9J7vDPpQ/jZsknjcY4MFUKyziCSYU=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AUBveRa090445
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 30 Nov 2023 05:57:34 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 30 Nov 2023 05:57:40 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- Nov 2023 05:57:33 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Nov 2023 05:57:40 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 Nov 2023 05:57:33 -0600
+ Frontend Transport; Thu, 30 Nov 2023 05:57:40 -0600
 Received: from TI.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AUBtq7R017236;
- Thu, 30 Nov 2023 05:57:27 -0600
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AUBtq7S017236;
+ Thu, 30 Nov 2023 05:57:34 -0600
 From: Apurva Nandan <a-nandan@ti.com>
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
@@ -65,10 +65,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
  <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v5 14/17] configs: j784s4_evm: Add defconfig for j784s4 evm
- board
-Date: Thu, 30 Nov 2023 17:25:49 +0530
-Message-ID: <20231130115552.3580995-15-a-nandan@ti.com>
+Subject: [PATCH v5 15/17] configs: Add am69_sk_* defconfig fragments
+Date: Thu, 30 Nov 2023 17:25:50 +0530
+Message-ID: <20231130115552.3580995-16-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231130115552.3580995-1-a-nandan@ti.com>
 References: <20231130115552.3580995-1-a-nandan@ti.com>
@@ -92,372 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add defconfigs for building R5 U-Boot SPL and A72 U-Boot.
+From: Dasnavis Sabiya <sabiya.d@ti.com>
 
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Add config fragments for am69_sk A72 and R5 configuration.
+
+This applies on to:
+j784s4_evm_a72_defconfig -> am69_sk_a72.config
+j784s4_evm_r5_defconfig -> am69_sk_r5.config
+
+The usage model (with the fragment) would be:
+make j784s4_evm_a72_defconfig am69_sk_a72.config
+make
+
+OR
+
+make j784s4_evm_r5_defconfig am69_sk_r5.config
+make
+
+Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
 Signed-off-by: Apurva Nandan <a-nandan@ti.com>
 ---
- configs/j784s4_evm_a72_defconfig | 180 +++++++++++++++++++++++++++++++
- configs/j784s4_evm_r5_defconfig  | 163 ++++++++++++++++++++++++++++
- 2 files changed, 343 insertions(+)
- create mode 100644 configs/j784s4_evm_a72_defconfig
- create mode 100644 configs/j784s4_evm_r5_defconfig
+ configs/am69_sk_a72.config | 3 +++
+ configs/am69_sk_r5.config  | 3 +++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 configs/am69_sk_a72.config
+ create mode 100644 configs/am69_sk_r5.config
 
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+diff --git a/configs/am69_sk_a72.config b/configs/am69_sk_a72.config
 new file mode 100644
-index 0000000000..ae392f51cd
+index 0000000000..5668e23b37
 --- /dev/null
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -0,0 +1,180 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_TI_SECURE_DEVICE=y
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_SOC_K3_J784S4=y
-+CONFIG_TARGET_J784S4_A72_EVM=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
-+CONFIG_SF_DEFAULT_SPEED=25000000
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_DM_GPIO=y
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_DEFAULT_DEVICE_TREE="k3-j784s4-evm"
-+CONFIG_SPL_TEXT_BASE=0x80080000
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_FS_FAT=y
-+CONFIG_SPL_LIBDISK_SUPPORT=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+# CONFIG_PSCI_RESET is not set
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
-+CONFIG_LOGLEVEL=7
-+CONFIG_SPL_MAX_SIZE=0xc0000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x80a00000
-+CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SYS_SPL_MALLOC=y
-+CONFIG_SYS_SPL_MALLOC_SIZE=0x800000
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_DM_MAILBOX=y
-+CONFIG_SPL_MTD_SUPPORT=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
-+CONFIG_SPL_THERMAL=y
-+CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_DFU=y
-+# CONFIG_CMD_FLASH is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_UFS=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_UBI=y
-+# CONFIG_ISO_PARTITION is not set
-+# CONFIG_SPL_EFI_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_MULTI_DTB_FIT=y
-+CONFIG_OF_LIST="k3-j784s4-evm k3-am69-sk"
-+CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_REGMAP=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_RAM=y
-+CONFIG_DFU_SF=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_TI_SCI_PROTOCOL=y
-+CONFIG_DA8XX_GPIO=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_DM_I2C_GPIO=y
-+CONFIG_SYS_I2C_OMAP24XX=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_K3_SEC_PROXY=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_AM654=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_CFI_FLASH=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_FLASH_CFI_MTD=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_MULTIPLEXER=y
-+CONFIG_MUX_MMIO=y
-+CONFIG_PHY_TI_DP83867=y
-+CONFIG_PHY_FIXED=y
-+CONFIG_TI_AM65_CPSW_NUSS=y
-+CONFIG_PHY=y
-+CONFIG_SPL_PHY=y
-+CONFIG_PHY_CADENCE_TORRENT=y
-+CONFIG_PHY_J721E_WIZ=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_SPL_PINCTRL=y
-+# CONFIG_SPL_PINCTRL_GENERIC is not set
-+CONFIG_PINCTRL_SINGLE=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_SCI_POWER_DOMAIN=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_RAM=y
-+CONFIG_SPL_RAM=y
-+CONFIG_REMOTEPROC_TI_K3_DSP=y
-+CONFIG_REMOTEPROC_TI_K3_R5F=y
-+CONFIG_RESET_TI_SCI=y
-+CONFIG_SCSI=y
-+CONFIG_DM_SCSI=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SOC_DEVICE=y
-+CONFIG_SOC_DEVICE_TI_K3=y
-+CONFIG_SOC_TI=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_TI_SCI=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_UFS=y
-+CONFIG_CADENCE_UFS=y
-+CONFIG_TI_J721E_UFS=y
-diff --git a/configs/j784s4_evm_r5_defconfig b/configs/j784s4_evm_r5_defconfig
++++ b/configs/am69_sk_a72.config
+@@ -0,0 +1,3 @@
++# Defconfig fragment to apply on top of j784s4_evm_a72_defconfig
++
++CONFIG_DEFAULT_DEVICE_TREE="k3-am69-sk"
+diff --git a/configs/am69_sk_r5.config b/configs/am69_sk_r5.config
 new file mode 100644
-index 0000000000..b0ffadd499
+index 0000000000..9194694393
 --- /dev/null
-+++ b/configs/j784s4_evm_r5_defconfig
-@@ -0,0 +1,163 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_TI_SECURE_DEVICE=y
-+CONFIG_SYS_MALLOC_F_LEN=0x10000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SOC_K3_J784S4=y
-+CONFIG_K3_EARLY_CONS=y
-+CONFIG_TARGET_J784S4_R5_EVM=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41c76000
-+CONFIG_SF_DEFAULT_SPEED=25000000
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_DM_GPIO=y
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_DEFAULT_DEVICE_TREE="k3-j784s4-r5-evm"
-+CONFIG_SPL_TEXT_BASE=0x41c00000
-+CONFIG_DM_RESET=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_SIZE_LIMIT=0x80000
-+CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x4000
-+CONFIG_SPL_FS_FAT=y
-+CONFIG_SPL_LIBDISK_SUPPORT=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
-+CONFIG_USE_BOOTCOMMAND=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
-+CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
-+CONFIG_SPL_MAX_SIZE=0xc0000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x41c76000
-+CONFIG_SPL_BSS_MAX_SIZE=0xa000
-+CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x140000
-+CONFIG_SPL_SEPARATE_BSS=y
-+CONFIG_SYS_SPL_MALLOC=y
-+CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
-+CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
-+CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
-+CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_FS_EXT4=y
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_DM_MAILBOX=y
-+CONFIG_SPL_MTD_SUPPORT=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_REMOTEPROC=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-+CONFIG_SPL_THERMAL=y
-+CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_CMD_DFU=y
-+# CONFIG_CMD_FLASH is not set
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_REMOTEPROC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_FAT=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_MULTI_DTB_FIT=y
-+CONFIG_SPL_OF_LIST="k3-j784s4-r5-evm k3-am69-r5-sk"
-+CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_REGMAP=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SYSCON=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_CLK_CCF=y
-+CONFIG_SPL_CLK_K3_PLL=y
-+CONFIG_SPL_CLK_K3=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_TI_SCI_PROTOCOL=y
-+CONFIG_DA8XX_GPIO=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
-+CONFIG_SYS_I2C_OMAP24XX=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_K3_SEC_PROXY=y
-+CONFIG_FS_LOADER=y
-+CONFIG_SPL_FS_LOADER=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_AM654=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_CFI_FLASH=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_FLASH_CFI_MTD=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_MT35XU=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_SPL_PINCTRL=y
-+# CONFIG_SPL_PINCTRL_GENERIC is not set
-+CONFIG_PINCTRL_SINGLE=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_K3_SYSTEM_CONTROLLER=y
-+CONFIG_REMOTEPROC_TI_K3_ARM64=y
-+CONFIG_RESET_TI_SCI=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SOC_DEVICE=y
-+CONFIG_SOC_DEVICE_TI_K3=y
-+CONFIG_SOC_TI=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_TI_SCI=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_TIMER=y
-+CONFIG_SPL_TIMER=y
-+CONFIG_OMAP_TIMER=y
-+CONFIG_FS_EXT4=y
-+CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-+CONFIG_PANIC_HANG=y
-+CONFIG_LIB_RATIONAL=y
-+CONFIG_SPL_LIB_RATIONAL=y
++++ b/configs/am69_sk_r5.config
+@@ -0,0 +1,3 @@
++# Defconfig fragment to apply on top of j784s4_evm_r5_defconfig
++
++CONFIG_DEFAULT_DEVICE_TREE="k3-am69-r5-sk"
 -- 
 2.34.1
 
