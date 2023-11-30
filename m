@@ -4,101 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97DBBC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 16:38:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63764C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:14:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7DC0876E4;
-	Thu, 30 Nov 2023 17:38:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 592D38763D;
+	Thu, 30 Nov 2023 21:13:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="n8lnVsf5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ljch7vCf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69EA876E2; Thu, 30 Nov 2023 17:38:39 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5381D87656; Thu, 30 Nov 2023 21:13:56 +0100 (CET)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE8B87631
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 17:38:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3B8C0875FE
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:13:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 35A44100004;
- Thu, 30 Nov 2023 19:38:32 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 35A44100004
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1701362312;
- bh=faLJc34R7BSwlAHOiHZInKrPzUYkFGR9VihOXqUciRM=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=n8lnVsf5kQrXDC/spz48S6VDlzoTrS36R2qH1bSxAy0LoAHJya6OFSAEI5FpdGUq6
- P4dcQTeyKJ/A+hF2fY2uAISH5spBgP2Ft1MAmQlGDLqCG8fDBIzOqjhTmXfxUD7QOl
- ETudkw7x04XsTQNByC94/CkJHwbHcLjdCBwj0rRE/T5wcsNuJ+UQurwILhdALNUXAe
- f/r8ZwDziw16JdCViskn+28zfc5L4sFEQEvEnjycw8acj2nIEXYe1wTwBFxV2p3fLk
- MjmNsoghSgYDFC0N+hlWqswoFvmtddlHCD6A25rUs+JV+KXdcp+3VBRShiFtROTs6p
- 1W/pnQVu9iI3g==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 30 Nov 2023 19:38:30 +0300 (MSK)
-Received: from [192.168.0.106] (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 30 Nov 2023 19:38:30 +0300
-Message-ID: <844cac45-c28f-bd1e-5dd9-cf316ebb878d@salutedevices.com>
-Date: Thu, 30 Nov 2023 19:30:31 +0300
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-1fad7d0575bso341306fac.2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:13:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701375233; x=1701980033; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nPmQfIrJ4bT4l+z9Oyv1Yv4cGuGx7g4UZJRkiAt10YY=;
+ b=ljch7vCfnyhQJWZLBfn9ibyY8bs/Rwced8B5AySLoUObfWR6Abzf86xjB1dHw0ZDaX
+ sLBrQ0SC0w3ejwge7oQzYCQVKfeWO/oNdoq2h3yBHnl0bmnzCD7KP9B5RD5pkI7Iz7vu
+ PqMo0hLi1rv/WtkD4pAvJ3CI/L4ECdiiokJV6ONb6cIyFyPTK3bg/DQVIeIvFJLbCYWI
+ Jqmx07e+nigYH0tpz4H0JBb9J5N/AASXcQO/hHj26bUyhVSqNfovKJV0inyYrGy6ecG+
+ QuUhBWc98N+yV4UoYuj2g1k7hadLgkfcNMgeD2aaJhVXxnnDr2T4ox04PEnXgxvdoFXE
+ 461w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701375233; x=1701980033;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nPmQfIrJ4bT4l+z9Oyv1Yv4cGuGx7g4UZJRkiAt10YY=;
+ b=TkXiTX0+YItA7Bue2bC6TQ/5EOTmN2ugdg96eQmvsmORD4dkxEDcZKfLgE6ntFtGgq
+ QKSDcXAkNSzPYRptjlrMSGa9F5GlGMNlj4rXMNrnC9tY6nQ5s5FjCnqgxlx68SYciK1d
+ iSFX5yHisCRB5BqA3cvXY9ikdDK1oh7DBKeFxyxLA3MkJ24+num3hJuZw0s79QngeAtd
+ T3Ee4uw7qv5c5L4Mc6sP/4gn0PulubiXP06g06VKXzqQFy4SUq6uYuumYty7E3ZLbEE0
+ bKtnQ/LAcPTdjHyRMjV4TdsSGkaNnzoXr1P/GSqlJXeAra0o3Lkh/ONuj+MEBzITd1Bw
+ 7TZw==
+X-Gm-Message-State: AOJu0YzCTL3GIiU8xr+R6CgFVf7d/nCynNhs4p07K2sQnGC+/g0+m7M1
+ Q3Sw7ul8AOxBleim4tZH3xuzVQ==
+X-Google-Smtp-Source: AGHT+IFGIoGAB2luNMnwM8FtrEbh3uOqMEPPKPBG8IFp5ycW4HnAFhjFmAhhbEXGZb2js2daYzS4Qw==
+X-Received: by 2002:a05:6870:d88d:b0:1fa:25df:4031 with SMTP id
+ oe13-20020a056870d88d00b001fa25df4031mr24867628oac.4.1701375232833; 
+ Thu, 30 Nov 2023 12:13:52 -0800 (PST)
+Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
+ gr12-20020a056870aa8c00b001f9e0871eafsm424672oab.21.2023.11.30.12.13.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 12:13:52 -0800 (PST)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Minkyu Kang <promsoft@gmail.com>,
+	Tom Rini <trini@konsulko.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH 0/7] pinctrl: exynos: Prepare for other SoCs support
+Date: Thu, 30 Nov 2023 14:13:45 -0600
+Message-Id: <20231130201352.6379-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v1] cmd: mtd: OTP access support
-Content-Language: en-US
-To: Michael Walle <michael@walle.cc>
-CC: Simon Glass <sjg@chromium.org>, Alexey Romanov <avromanov@sberdevices.ru>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>, 
- Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Sean Edmond <seanedmond@microsoft.com>, Tobias
- Waldekranz <tobias@waldekranz.com>, Stephen Carlson
- <stcarlso@linux.microsoft.com>, Peter Robinson <pbrobinson@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, Michael Trimarchi
- <michael@amarulasolutions.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
-References: <20231130112817.98827-1-avkrasnov@salutedevices.com>
- <060f979ddfd1e257bbb3fe225d9af0c5@walle.cc>
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-In-Reply-To: <060f979ddfd1e257bbb3fe225d9af0c5@walle.cc>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 181744 [Nov 30 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 5 0.3.5
- 98d108ddd984cca1d7e65e595eac546a62b0144b, {Tracking_arrow_text},
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2; salutedevices.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/11/30 13:53:00 #22585260
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,24 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Some Exynos SoCs (not supported by pinctrl-exynos driver yet) have
+different offsets and widths of pin bank registers (i.e. PIN_CON,
+PIN_PUD and PIN_DRV registers). Rework pinctrl-exynos driver so it
+allows for different offsets and widths of those registers by adding
+the corresponding API. That makes it possible to add the support for
+new Exynos SoCs in pinctrl-exynos driver.
 
+The main patch in this series is:
 
-On 30.11.2023 16:35, Michael Walle wrote:
->> +static int do_mtd_otp_write(struct cmd_tbl *cmdtp, int flag, int argc,
->> +                char *const argv[])
->> +{
-> ..
-> 
->> +    printf("Caution! OTP data bits can't be erased! Continue (y/n)?\n");
-> 
-> Please note, that with current SPI-NOR flashes this is not true and
-> there is usually some kind of erase command for the OTP bits. Only
-> the region lock is permanent and with that set, no more write or erase
-> is possible.
+  pinctrl: exynos: Support different register types in pin banks
 
-I see, so may be just rephrase this message, like just "Continue? (y/n)?"
+Other patches are just related cleanups and refactoring commits,
+required for the clean implementation of the main patch.
 
-Thanks, Arseniy
+Sam Protsenko (7):
+  pinctrl: exynos: Improve coding style
+  pinctrl: exynos: Extract pin parsing code into a separate function
+  pinctrl: exynos: Rework pin_to_bank_base() to obtain data by name
+  pinctrl: exynos: Support different register types in pin banks
+  pinctrl: exynos: Refactor handling the pin related dt properties
+  pinctrl: exynos: Reduce variables scope
+  pinctrl: exynos: Convert to use livetree API for fdt access
 
-> 
-> -michael
+ drivers/pinctrl/exynos/pinctrl-exynos.c     | 125 ++++++++++++--------
+ drivers/pinctrl/exynos/pinctrl-exynos.h     |  36 +++++-
+ drivers/pinctrl/exynos/pinctrl-exynos7420.c |   2 +
+ 3 files changed, 108 insertions(+), 55 deletions(-)
+
+-- 
+2.39.2
+
