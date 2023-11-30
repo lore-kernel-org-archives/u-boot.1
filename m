@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1888C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:30:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1EBEC46CA0
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:32:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4B8187730;
-	Thu, 30 Nov 2023 21:30:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BED2876E4;
+	Thu, 30 Nov 2023 21:32:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VpQOoFdS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CxCG6YAx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D11E08771B; Thu, 30 Nov 2023 21:30:41 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id ADBE0876F6; Thu, 30 Nov 2023 21:32:31 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C683787713
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:30:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A9F6B876C2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:32:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a185fb3aa18so223082666b.1
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:30:39 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a02ba1f500fso203618366b.0
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:32:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701376239; x=1701981039; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0ze3g+KbzqGj36cXK4KXcn2SJ1PO+nJAvkG+kKo7vKI=;
- b=VpQOoFdSRPVUx3sqNFijt5JW/fbyl/Zs0mkegEq8OnPohN9sAXus+giE7ElLEZN4/Q
- iG88YutPEkpz3YKj78RpOOJn9ulhacI8paUUFoHuUjzMMwfmZJJyfYcJ71eAqj9Ka10p
- MwbvonEWFzP3zL/5TybGgfVUkE8vlS8/nzvKs=
+ d=chromium.org; s=google; t=1701376349; x=1701981149; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eyV2gGCTHlRr6FFC1cUH0SLaifrXymYajx2/Ty5GB1w=;
+ b=CxCG6YAxnqu62997zpDJd87ETDoQk3/FuwJLBeiRUpRk1+9gZNtmfPKTqQgMivbqZY
+ ZxVdZle3aYjV7voWf90B1ATnW737lWMSU02XLtVDm9dA6m5ZPjyRJkO3jiewkc0Qs0qe
+ IOrxXuezZRBj12dhM8L5A8+zgu7PbZGsMeNIA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701376239; x=1701981039;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0ze3g+KbzqGj36cXK4KXcn2SJ1PO+nJAvkG+kKo7vKI=;
- b=qskr+4fkUFw5T+N37C0ygYqGTZtWSce0iz2cPhMuLQFwk+8yY/VR4HFgfzg4UIWTgB
- AVq7wREg+5Ubdh3Nsz84MEV7JHGdGyKZIGLovXEyRCXNZPtQIYjkIf2uKEdrjNfjNS7M
- mOHZO8G0ZeWucm8DJjQ/UAk1gsoXNcfV3QmJe7cy7Z2rztr5DvlzVK/RK8KdtBa+mxOw
- VZ3skeL4ZNSiv49uxGK4aoi8MXUo62bYqHoJCELVq1MP1XVBxvwTMS4zl3ppeIHNaxmj
- B5gtKkMAFaBsa4syvR7O5XEJIR+AbtMtdf5h9mhFJHTFJ5Tk2EdjlZGhXK9ez8CQAmG/
- NRyw==
-X-Gm-Message-State: AOJu0Yyz+otsKIzwkr+Bz2GSK/Wtk9pFm/3nbOI1f7pD+4isLgl4MjHx
- 0JXMuei84PegXvFPS8YF8R3sU+P7YodSvoLZeZHI9Q==
-X-Google-Smtp-Source: AGHT+IF7hBJgyxS2nGwZC6cEyBKE+/ypnjV3+LlsjScXh8z5XtFWXqn22t4Iova8UzN/R3amZDfO6UlKdgPktSBI1UI=
-X-Received: by 2002:a17:906:20d7:b0:a19:a409:37e3 with SMTP id
- c23-20020a17090620d700b00a19a40937e3mr151524ejc.60.1701376238996; Thu, 30 Nov
- 2023 12:30:38 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701376349; x=1701981149;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eyV2gGCTHlRr6FFC1cUH0SLaifrXymYajx2/Ty5GB1w=;
+ b=BfvPiJqKzWdUbIN39zaCiquAxDLmckLoUbXLHIeva4TRsFtOwMZcep//KAB1+pVbzE
+ baKRnIA9iFdxDT10Ez7zT/3CFJ1qbBJuhQIqa1p8HL743LfrxfZQLHcMuSUJdEVxN09a
+ sgVpdNlDsywSBfvwvEL8YPND2msHpRVNa+8Q7Nk0Aqmu2I7kVvZ1cx0DVHCREq6dNn3B
+ grRvmt09dBAvmHRYRilZFglM86CEOgSqOAhuNn1wVirhq2bDQ6jYEVYn9PHIoxvDJLcd
+ 5K3dKZuwTdteXpKVQo4HVNWqrFE7jeosuiT+tIfBBXajZ2scq639GSi7e4ZfCcRlFmPn
+ L+Tw==
+X-Gm-Message-State: AOJu0YwCepiv8Hmvxfd4O7171uzUHWg4bmTkTJs1Xyk8wapMV3RovK41
+ 2L+I7PqA0IRou5RQH3s6yXGK/iPAp8UMu/W8KScTjA==
+X-Google-Smtp-Source: AGHT+IHch7YUz9AbRflkh8eyE87tR9bbxlt1KhgjFd/Th7L8HVFlQINXZUmMZzuBhflV8YKfOIRD582CZAmHBaA7wGo=
+X-Received: by 2002:a17:907:9148:b0:a19:a19b:7890 with SMTP id
+ l8-20020a170907914800b00a19a19b7890mr79310ejs.83.1701376348966; Thu, 30 Nov
+ 2023 12:32:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20231129172200.430674-1-sjg@chromium.org>
  <20231129172200.430674-3-sjg@chromium.org>
- <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
- <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
- <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
- <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
- <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
- <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
- <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
-In-Reply-To: <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
+ <CAK7LNARRYWhFyTXRXPC_z6RL=KUW6pO-Lsz1mgGd1jxPiHxe+w@mail.gmail.com>
+In-Reply-To: <CAK7LNARRYWhFyTXRXPC_z6RL=KUW6pO-Lsz1mgGd1jxPiHxe+w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 30 Nov 2023 13:30:21 -0700
-Message-ID: <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
+Date: Thu, 30 Nov 2023 13:32:17 -0700
+Message-ID: <CAPnjgZ2y=EONroCbCA7AqVaaax1Sdujy1A3NwFugwxiug490tA@mail.gmail.com>
 Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Cc: linux-arm-kernel@lists.infradead.org, 
- Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>, 
+To: Masahiro Yamada <masahiroy@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
  lkml <linux-kernel@vger.kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
  Catalin Marinas <catalin.marinas@arm.com>,
  Nathan Chancellor <nathan@kernel.org>, 
  Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
- Will Deacon <will@kernel.org>, 
- linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
+ Will Deacon <will@kernel.org>, linux-kbuild@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,73 +89,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+Hi Masahiro,
 
-On Wed, 29 Nov 2023 at 12:54, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+On Thu, 30 Nov 2023 at 08:39, Masahiro Yamada <masahiroy@kernel.org> wrote:
 >
-> Hello Simon,
->
-> On 29.11.23 20:44, Simon Glass wrote:
-> > Hi Ahmad,
+> On Thu, Nov 30, 2023 at 2:22=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+ote:
 > >
-> > On Wed, 29 Nov 2023 at 12:33, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
-> >>
-> >> On 29.11.23 20:27, Simon Glass wrote:
-> >>> On Wed, 29 Nov 2023 at 12:15, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
-> >>>> On 29.11.23 20:02, Simon Glass wrote:
-> >>>>> On Wed, 29 Nov 2023 at 11:59, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
-> >>>>>> The specification says that this is the root U-Boot compatible,
-> >>>>>> which I presume to mean the top-level compatible, which makes sense to me.
-> >>>>>>
-> >>>>>> The code here though adds all compatible strings from the device tree though,
-> >>>>>> is this intended?
-> >>>>>
-> >>>>> Yes, since it saves needing to read in each DT just to get the
-> >>>>> compatible stringlist.
-> >>>>
-> >>>> The spec reads as if only one string (root) is supposed to be in the list.
-> >>>> The script adds all compatibles though. This is not really useful as a bootloader
-> >>>> that's compatible with e.g. fsl,imx8mm would just take the first device tree
-> >>>> with that SoC, which is most likely to be wrong. It would be better to just
-> >>>> specify the top-level compatible, so the bootloader fails instead of taking
-> >>>> the first DT it finds.
-> >>>
-> >>> We do need to have a list, since we have to support different board revs, etc.
-> >>
-> >> Can you give me an example? The way I see it, a bootloader with
-> >> compatible "vendor,board" and a FIT with configuration with compatibles:
-> >>
-> >>   "vendor,board-rev-a", "vendor,board"
-> >>   "vendor,board-rev-b", "vendor,board"
-> >>
-> >> would just result in the bootloader booting the first configuration, even if
-> >> the device is actually rev-b.
+> > Add a script which produces a Flat Image Tree (FIT), a single file
+> > containing the built kernel and associated devicetree files.
+> > Compression defaults to gzip which gives a good balance of size and
+> > performance.
 > >
-> > You need to find the best match, not just any match. This is
-> > documented in the function comment for fit_conf_find_compat().
->
-> In my above example, both configuration are equally good.
-> Can you give me an example where it makes sense to have multiple
-> compatibles automatically extracted from the device tree compatible?
->
-> The way I see it having more than one compatible here just has
-> downsides.
-
-I don't have an example to hand, but this is the required mechanism of
-FIT. This feature has been in place for many years and is used by
-ChromeOS, at least.
-
->
-> >> The configuration already has a compatible entry. What extra use is the compatible
-> >> entry in the FDT node?
+> > The files compress from about 86MB to 24MB using this approach.
 > >
-> > It allows seeing the compatible stringlist without having to read the
-> > FDT itself. I don't believe it is necessary though, so long as we are
-> > scanning the configurations and not the FDT nodes.
+> > The FIT can be used by bootloaders which support it, such as U-Boot
+> > and Linuxboot. It permits automatic selection of the correct
+> > devicetree, matching the compatible string of the running board with
+> > the closest compatible string in the FIT. There is no need for
+> > filenames or other workarounds.
+> >
+> > Add a 'make image.fit' build target for arm64, as well.
+> >
+> > The FIT can be examined using 'dumpimage -l'.
+> >
+> > This features requires pylibfdt (use 'pip install libfdt'). It also
+> > requires compression utilities for the algorithm being used. Supported
+> > compression options are the same as the Image.xxx files. For now there
+> > is no way to change the compression other than by editing the rule for
+> > $(obj)/image.fit
+> >
+> > While FIT supports a ramdisk / initrd, no attempt is made to support
+> > this here, since it must be built separately from the Linux build.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v7:
+> > - Add Image as a dependency of image.fit
+> > - Drop kbuild tag
+> > - Add dependency on dtbs
+> > - Drop unnecessary path separator for dtbs
+> > - Rebase to -next
+> >
+> > Changes in v5:
+> > - Drop patch previously applied
+> > - Correct compression rule which was broken in v4
+> >
+> > Changes in v4:
+> > - Use single quotes for UIMAGE_NAME
+> >
+> > Changes in v3:
+> > - Drop temporary file image.itk
+> > - Drop patch 'Use double quotes for image name'
+> > - Drop double quotes in use of UIMAGE_NAME
+> > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
+> > - Avoid hard-coding "arm64" for the DT architecture
+> >
+> > Changes in v2:
+> > - Drop patch previously applied
+> > - Add .gitignore file
+> > - Move fit rule to Makefile.lib using an intermediate file
+> > - Drop dependency on CONFIG_EFI_ZBOOT
+> > - Pick up .dtb files separately from the kernel
+> > - Correct pylint too-many-args warning for write_kernel()
+> > - Include the kernel image in the file count
+> > - Add a pointer to the FIT spec and mention of its wide industry usage
+> > - Mention the kernel version in the FIT description
+> >
+> >  MAINTAINERS                |   7 +
+> >  arch/arm64/Makefile        |   9 +-
+> >  arch/arm64/boot/.gitignore |   1 +
+> >  arch/arm64/boot/Makefile   |   6 +-
+> >  scripts/Makefile.lib       |  13 ++
+> >  scripts/make_fit.py        | 289 +++++++++++++++++++++++++++++++++++++
+> >  6 files changed, 322 insertions(+), 3 deletions(-)
+> >  create mode 100755 scripts/make_fit.py
+> >
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 14587be87a33..d609f0e8deb3 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -1585,6 +1585,13 @@ F:       Documentation/process/maintainer-soc*.r=
+st
+> >  F:     arch/arm/boot/dts/Makefile
+> >  F:     arch/arm64/boot/dts/Makefile
+> >
+> > +ARM64 FIT SUPPORT
+> > +M:     Simon Glass <sjg@chromium.org>
+> > +L:     linux-arm-kernel@lists.infradead.org (moderated for non-subscri=
+bers)
+> > +S:     Maintained
+> > +F:     arch/arm64/boot/Makefile
+> > +F:     scripts/make_fit.py
+> > +
+> >  ARM ARCHITECTED TIMER DRIVER
+> >  M:     Mark Rutland <mark.rutland@arm.com>
+> >  M:     Marc Zyngier <maz@kernel.org>
+> > diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+> > index 1bd4fae6e806..18e092de7cdb 100644
+> > --- a/arch/arm64/Makefile
+> > +++ b/arch/arm64/Makefile
+> > @@ -36,6 +36,8 @@ ifeq ($(CONFIG_BROKEN_GAS_INST),y)
+> >  $(warning Detected assembler with broken .inst; disassembly will be un=
+reliable)
+> >  endif
+> >
+> > +KBUILD_DTBS      :=3D dtbs
 >
-> I think it's better to drop this if it has no use.
+>
+> Please remove this, and hard-code
+>
+>  image.fit: dtbs
 
-OK. I cannot think of a use for it.
+OK
+
+>
+>
+>
+> >
+> >  $(obj)/Image: vmlinux FORCE
+> >         $(call if_changed,objcopy)
+> > @@ -39,6 +40,9 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
+> >  $(obj)/Image.zst: $(obj)/Image FORCE
+> >         $(call if_changed,zstd)
+> >
+> > +$(obj)/image.fit: $(obj)/Image FORCE
+> > +       $(call cmd,fit,gzip)
+>
+>
+> The gzip parameter is not used.
+> Please do
+>
+>      $(call cmd,fit)
+
+I do want to be able to control the compression algo. I added a
+FIT_COMPRESS for that, so that this arg is used.
+>
+> In the python script, functions are separated with two blank lines,
+> but there is only one blank line between parse_args() and setup_fit().
+>
+>
+> I do not mind either way because it does not contain any class,
+> but please keep consistency.
+
+OK
 
 Regards,
 Simon
