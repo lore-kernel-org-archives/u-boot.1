@@ -4,72 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 450AFC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 06:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D2BEC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 07:32:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE696875F5;
-	Thu, 30 Nov 2023 07:54:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lessconfused.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E87C870AB;
+	Thu, 30 Nov 2023 08:32:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=lessconfused.com header.i=@lessconfused.com header.b="Tx6760W+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JV75t97z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA1D3875CC; Thu, 30 Nov 2023 07:54:13 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id D87FD8758F; Thu, 30 Nov 2023 08:32:40 +0100 (CET)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03C1387605
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 07:54:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=lessconfused.com
+ by phobos.denx.de (Postfix) with ESMTPS id 90E3A870AB
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 08:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=da@lessconfused.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2859bde1d62so674120a91.2
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 22:54:10 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7c4a41372d3so209545241.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 23:32:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=lessconfused.com; s=lessconfused; t=1701327249; x=1701932049;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KiOVCOUrw0mNPOXjHdGbXoYWvXgdSF5m4RB+FeANl1w=;
- b=Tx6760W+mqEVN1H45qwt7cxc1l/183hdWszxFoZkF/muObKM/bUBgeBoi/Sy0zK2oS
- gtMjvALHPjHAhm2LvvezK00qdukTjUKDAGTbKeoKwQuqIjF2D20iTCYCHr3LIPcqjOYt
- p5Ej1XGS2CVATzjh1Srh0c0rK+zC+z8Nc/ksc=
+ d=linaro.org; s=google; t=1701329557; x=1701934357; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=w/Ec7+JMjhjaUnD61nyC4k/qzIAYJu/lC3xeXaEB9k8=;
+ b=JV75t97zexE+Cfu/dbXFKFcpWp2HzDOqXm8pGiEX2xTbOe1Y3ci8O0EW4r38ON/Q5x
+ 8KqpgFcgvmDATwmr4kSX0iIHZFMY2NwwB6E+yGkq14cY+IQErNHGZ4donbS0w4jY7nQ1
+ VGheDO2P4PpcF24HANd8TkTvEbsYvBeQ0q69lDjDxcj26uQzbpSjs2GIb/MHgeEfAsNA
+ DhtF7tAeIrBvW1znlpJ3UFWIWNzIrRsoh+YeFmVq0ydRY+d6THvgkzLjY9n9YYbyrbqm
+ Q8RgtnlWf4PxEPn3SOfrlJCPDbdsQjxj6j0hof9IbxvWWwZu7WKgvb/mbY22jmzG3euN
+ GmDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701327249; x=1701932049;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KiOVCOUrw0mNPOXjHdGbXoYWvXgdSF5m4RB+FeANl1w=;
- b=DDQjf8321Xv0AyHT8wESzE75XfftUxg0PbH9aT5SAGsnHsTanUsypzaL0rimzJRSc2
- I1KbIi2xMGahGAuVv8wexg3RKycDpldHzXoqjJlYZTaE71fvF2gfLEkEIIVEQI3d/I5j
- 2tmzyHGC/pF4A4j3q1X8NbiBbbYFuu9Io7Q2Oh/YqABjGNLkl9Arh5yZdk12KpeM1drv
- SR6qDNDwzF3ci/WRpHnQ+G8cdzNaFtYOMxEV0rsvFsdcDx79hRigZndvN52CmbhicI/d
- fP4Ut925F6X9uO/20/j0AeVoy/bltpkXjIjTFzQRzWx4zaDfGCc6GbZBUAALnPqfPpO2
- qA5g==
-X-Gm-Message-State: AOJu0YxJUP+AlgBo10yd4KnVB/gqgnG220fDDmQgDw6qx+pv/4+xomq2
- A2iMnuK+Nmt7BpwwbbObyxgA/aFVRgmL7TqMJPZjjA==
-X-Google-Smtp-Source: AGHT+IFn8Ab+aa+aTWFPkIy6u8Rl0f1LSjMrCQBsLslzyw8pxU1dE3jMZALSYjmFh+uFgkLFOP2XwEwhyN/kRwJbiVQ=
-X-Received: by 2002:a17:90b:4b0f:b0:281:8e9:7b86 with SMTP id
- lx15-20020a17090b4b0f00b0028108e97b86mr20273403pjb.23.1701327249278; Wed, 29
- Nov 2023 22:54:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701329557; x=1701934357;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=w/Ec7+JMjhjaUnD61nyC4k/qzIAYJu/lC3xeXaEB9k8=;
+ b=exV83i49ATNGRTZwv6PNZFWj1Jcn0Ivz5DSBkCguhZorHOA6+qRAZ/l/R2CThZdWuF
+ huos7w9RqtBVCEcaMoMdQiD0G4KteqC9TD9JYfO8FpBRXlaGd1c/7mNeIlX63lPZksWD
+ UPRg4zvzAvMtkWSWs4GBAyHU4w18fg2U54a0OoObIAlxKHHskwJhPrSY0REC/wI9079+
+ je/45cbzFfKY3CBFO4BZg6CY8KH+jKvCUm/RdiKTe1cuXZJlNU+OBORPuELgHNaWmaot
+ 8BmZPSEa/hVekEbIoOzQTPoCkGdewhk4qCY6rIckJC8S0BHQKy13aX48de9/OhHHUwC1
+ 6GaA==
+X-Gm-Message-State: AOJu0Yz9JUtmE+GLKWOcgL1u10EM2z3XqoqutW5b6zUg7c2CpMeySzGK
+ C8hy9autYKiRhKZFacvspN+LaiTUDGJ0SsvaXBNyGg==
+X-Google-Smtp-Source: AGHT+IFQfOCD8WAd0IMcnHjd0NeJZWxHp/7IoSQQ7azGmsuBdpb0bAW7MlIVhTDh4KVUA94k7b+3n+qFbbT/6tsw27o=
+X-Received: by 2002:a1f:c581:0:b0:4b2:9abd:75cb with SMTP id
+ v123-20020a1fc581000000b004b29abd75cbmr1609861vkf.14.1701329557151; Wed, 29
+ Nov 2023 23:32:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20230915160130.352099-1-jbrunet@baylibre.com>
- <c7704004-3ce5-44da-8010-99157eb7b0a1@linaro.org>
-In-Reply-To: <c7704004-3ce5-44da-8010-99157eb7b0a1@linaro.org>
-From: Da Xue <da@lessconfused.com>
-Date: Thu, 30 Nov 2023 01:53:57 -0500
-Message-ID: <CACdvmAgD5geSQ_EpBgX226v4CrFt26wEBxLjz00-abSkCGfnKg@mail.gmail.com>
-Subject: Re: [RFT PATCH 0/2] mmc: meson-gx: improve MMC reliabilty
-To: u-boot-amlogic@groups.io, neil.armstrong@linaro.org
-Cc: Jerome Brunet <jbrunet@baylibre.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+In-Reply-To: <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 30 Nov 2023 13:02:25 +0530
+Message-ID: <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+To: Caleb Connolly <caleb.connolly@linaro.org>, neil.armstrong@linaro.org
+Cc: Tom Rini <trini@konsulko.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,135 +99,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 23, 2023 at 8:54=E2=80=AFAM Neil Armstrong
-<neil.armstrong@linaro.org> wrote:
+On Wed, 29 Nov 2023 at 22:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 >
-> On 15/09/2023 18:01, Jerome Brunet wrote:
-> > Amlogic MMC on the GX (and later) SoCs has been problematic for years,
-> > especially with u-boot.
+> On 29/11/2023 16:34, Caleb Connolly wrote:
 > >
-> > Linux has been fairly stable for a few years. It is using a fixed phase
-> > setting with Core =3D 180, Tx =3D 0 and Rx =3D 0 (the latter cannot be =
-set
-> > starting from the v3 MMC IPs)
 > >
-> > Still the results were not good with those settings with u-boot, on som=
-e
-> > sm1 based platforms. U-boot then started using a 270 core phase for sm1
-> > only.  This worked for most sm1 platforms but problems persist on other=
-s.
+> > On 23/11/2023 07:04, Sumit Garg wrote:
+> >> On Wed, 22 Nov 2023 at 21:34, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>>
+> >>>
+> >>>
+> >>> On 22/11/2023 14:27, Tom Rini wrote:
+> >>>> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
+> >>>>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote:
+> >>>>>>
+> >>>>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
+> >>>>>>> Hi Caleb,
+> >>>>>>>
+> >>>>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>>>>> [snip]
+> >>>>>>>> == DT loading ==
+> >>>>>>>>
+> >>>>>>>> Previously, boards used the FDT blob embedded into U-Boot (via
+> >>>>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
+> >>>>>>>> bootloader, so we can instead rely on the first-stage bootloader to
+> >>>>>>>> populate some useful FDT properties for us (notably the /memory node and
+> >>>>>>>> KASLR seed) and fetch the DTB that it provides. Combined with the memory
+> >>>>>>>> map changes above, this let's us entirely avoid configuring the memory
+> >>>>>>>> map explicitly.
+> >>>>>>>
+> >>>>>>> Since with this change, we don't need to embed FDT blob in the u-boot
+> >>>>>>> binary, so I was thinking if we really need to import DTs from Linux
+> >>>>>>> for different platforms and then play a catchup game?
+> >>>
+> >>> For now, yes.
+> >>
+> >> But why? Is there any value added by larger u-boot specific DT (most
+> >> of the nodes being unused by u-boot) than what currently u-boot
+> >> supports? The more important part is to get alignment with Linux DT
+> >> bindings. If you need to have memory/reserved-memory nodes in u-boot
+> >> DT for generalization purposes then you should import those particular
+> >> nodes only.
 > >
-> > The proposal with this patchset is to use 270 for the ID phase, 180
-> > otherwise.  This works well on the platforms I have tested (Libretech's
-> > boards and VIM3L)
+> > I've been thinking about and hacking on this for the last week or so,
+> > sorry for the delayed reply here.
 > >
-> > It would be great if others could test this and report whether this wor=
-k
-> > for them or not.
-> >
-> > If the results are good, this might be ported to Linux as well (... but=
- the
-> > situation is less critical there)
-> >
-> > Jerome Brunet (2):
-> >    mmc: meson-gx: clean up and align on Linux settings
-> >    mmc: meson-gx: set 270 core phase during the identification
-> >
-> >   drivers/mmc/meson_gx_mmc.c | 50 ++++++++++++++++++-------------------=
--
-> >   drivers/mmc/meson_gx_mmc.h |  9 +++++--
-> >   2 files changed, 31 insertions(+), 28 deletions(-)
-> >
->
-> I got a regression with this patchset on the BPI M5 (SM1) SDCard, u-boot =
-pytest results:
-> - https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/jobs/56039368=
-84
-> - full HTML log: https://amlogic-foss.gitlab.io/-/amlogic-u-boot-autotest=
-/-/jobs/5603936884/artifacts/test-log.html
-> Same device but without the patch:
-> - https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/jobs/56018995=
-56
-> - full HTML log: https://amlogic-foss.gitlab.io/-/amlogic-u-boot-autotest=
-/-/jobs/5601899556/artifacts/test-log.html
-> Same branch but on A311D gives expected results:
-> - https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/jobs/56039327=
-46
-> - full HTML log: https://amlogic-foss.gitlab.io/-/amlogic-u-boot-autotest=
-/-/jobs/5603932746/artifacts/test-log.html
->
->
-> eMMC devices gets 26MHz speed instead of 52MHz, and SD reads and writes g=
-ives random errors:
->
-> =3D> mmc info
-> Device: mmc@ffe07000
-> Manufacturer ID: 15
-> OEM: 0
-> Name: AJTD4R
-> Bus Speed: 26000000
-> Mode: MMC High Speed (26MHz)
-> Rd Block Len: 512
-> MMC version 5.1
-> High Capacity: Yes
-> Capacity: 4 MiB
-> Bus Width: 8-bit
-> Erase Group Size: 512 KiB
-> HC WP Group Size: 8 MiB
-> User Capacity: 14.6 GiB WRREL
-> Boot Capacity: 4 MiB ENH
-> RPMB Capacity: 4 MiB ENH
-> Boot area 0 is not write protected
-> Boot area 1 is not write protected
->
-> =3D> mmc dev 0
->   ** fs_devread read error - block
-> switch to partitions #0, OK
-> mmc0 is current device
-> =3D> mmc read 0x00200000 0 1000
-> MMC read: dev # 0, block # 0, count 4096 ... 0 blocks read: ERROR
-> =3D> mmc write 0x00200000 200000 3e8
-> MMC write: dev # 0, block # 2097152, count 1000 ... 0 blocks written: ERR=
-OR
->
->
-> I ran the test twice to be sure.
+> > The value is in preventing any of the existing bindings from regressing,
 
-I experienced some issues with certain SD cards as well on
-AML-S905D3-CC-V02. I have a bunch of SD cards and will go through
-testing them later this week.
+That is actually best addressed in Linux by checking the DTS against
+yaml DT bindings. We don't have that testing available in u-boot and
+only depend on careful reviews.
 
-=3D> mmc dev 1
-switch to partitions #0, OK
-mmc1 is current device
-=3D> mmc info
-Device: mmc@ffe05000
-Manufacturer ID: df
-OEM: 2104
-Name: SDBus Speed: 25000000
-Mode: MMC legacy
-Rd Block Len: 512
-SD version 3.0
-High Capacity: Yes
-Capacity: 58.2 GiB
-Bus Width: 1-bit
-Erase Group Size: 512 Bytes
-=3D> mmc read $kernel_addr_r 0 10000
+> > and simplifying the bringup process for new platforms (just copy
+> > SoC/PMIC DTSI and write a minimal board DTS to enable the needed hardware).
+> >>
+> >>> There are quite a few features which aren't handled by
+> >>> U-Boot that it shouldn't need to handle (rpm/h resources for example).
+> >>> Also the fixed-regulator / regulator-gpio binding differences.
+> >>
+> >> IMO, we should fix them first and then use Linux DT as it is.
+> >
+> > The biggest blocker here is USB, on sdm845 and the 4 new platforms I
+> > have working, I only support USB high speed, this requires removing the
+> > superspeed phy and adding a DTS property.
+> >
+> > I tried using OF_BOARD_SETUP to make this changes during boot but this
+> > approach really isn't scalable (and I couldn't find a way to make it
+> > work anyway).
 
-MMC read: dev # 1, block # 0, count 65536 ... 0 blocks read: ERROR
+Okay so let's try an alternative intermediate step then. We import the
+Linux DT files *as it is* and then keep the u-boot specific custom
+changes in <soc>-u-boot.dtsi file which is included by the board DTS
+file. This has been the approach that other u-boot platforms follow
+and allow us to easily sync them with Linux while reducing custom
+u-boot specific bits. Eventually we should target at dropping u-boot
+specific custom bits and then directly pick up DTB from Linux and boot
+it.
+
+> >
+> >>
+> >>>
+> >>> I would definitely like to move towards supporting Linux DT directly,
+> >>> but this approach gives us a nice middleground of minimising the U-Boot
+> >>> specific DT parts.
+> >>
+> >> I don't see any real benefits here apart from the maintenance burden.
+> >> If it had been an actual Linux DT then that can be passed to Linux as
+> >> it is. However, the current modified import you are trying to do
+> >> doesn't solve that purpose as well.
+> >
+> > Ensuring that we don't introduce non-standard bindings (by using Linux
+> > DTSI) is one benefit, simplifying new platform bringup is another.
+> >
+> > The amount of work required to switch to upstream DT is too much to
+> > block this series on. We can work on improving the situation there once
+> > we have these Qualcomm improvements upstream and new boards added. I do
+> > admit that this is quite an awkward middle-ground, and I would not like
+> > it to last for too long.
+>
+> I'm a real supporter of targeting support of unmodified (or very slighly)
+> Linux DT, having a reduced version of the Linux DT will be a pain at each
+> sync, and you'll need to do this manually.
+
+We have to choose the middle-ground carefully here. It shouldn't give
+the impression that it is an actual Linux DT that you can pass
+directly to Linux via EFI. As otherwise users will hit problems due to
+the partially modified DTs in u-boot.
+
+>
+> Simply having to copy the Linux DT without any changes will make sure you
+> are in sync with Linux's bindings, and will help making sure you'll boot
+> unchanged Linux DTBs you get from previous loaders.
+
+Once we have the previous loaders (ABL or LK) providing u-boot fully
+fledged DTB then we don't need to maintain Linux DT copy in u-boot
+which is always a pain to keep in sync.
+
+>
+> And in bonus, you'll be able to chain it to the next loader like EFI.
+>
+> So I don't see why any work toward this goal is useless, and if an
+> intermediate step is needed, let's do it.
+
+See the side effects of an intermediate step mentioned above. Having
+<soc>-u-boot.dtsi clearly separates the changes we have to make for
+u-boot.
+
+-Sumit
 
 >
 > Neil
 >
->
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
-> Groups.io Links: You receive all messages sent to this group.
-> View/Reply Online (#1889): https://groups.io/g/u-boot-amlogic/message/188=
-9
-> Mute This Topic: https://groups.io/mt/102766907/1922544
-> Group Owner: u-boot-amlogic+owner@groups.io
-> Unsubscribe: https://groups.io/g/u-boot-amlogic/leave/4137477/1922544/118=
-3329822/xyzzy [da@lessconfused.com]
-> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
->
+> >
+> >>
+> >> -Sumit
+> >>
+> >>>>>>>
+> >>>>>>> IMO, the build command would look like following if we import
+> >>>>>>> pre-built FDT blob from Linux:
+> >>>>>>>
+> >>>>>>> - Build u-boot::
+> >>>>>>>
+> >>>>>>>          $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+> >>>>>>>          $ make qcom_defconfig
+> >>>>>>>          $ make
+> >>>>>>>
+> >>>>>>> - gzip u-boot::
+> >>>>>>>
+> >>>>>>>          gzip u-boot-nodtb.bin
+> >>>>>>>
+> >>>>>>> - Append dtb to gzipped u-boot::
+> >>>>>>>
+> >>>>>>>           cat u-boot-nodtb.bin.gz
+> >>>>>>> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
+> >>>>>>> u-boot-nodtb.bin.gz-dtb
+> >>>>>>>
+> >>>>>>> This would avoid the maintenance burden to keep DT in sync with that
+> >>>>>>> of Linux. And since DT bindings in Linux are backwards compatible, we
+> >>>>>>> can say u-boot should work with DTB picked up from any Linux kernel
+> >>>>>>> stable release.
+> >>>>>>
+> >>>>>> I guess one question I have is, are we being passed the device tree
+> >>>>>> (since we're acting like the Linux Kernel)
+> >>>>>
+> >>>>> Yeah that is the case here, see patch #1 in this series regarding how
+> >>>>> FDT address is being retrieved from previous stage bootloader (ABL on
+> >>>>> sdm845 and qcs404 SoCs).
+> >>>>
+> >>>> That's what I thought.
+> >>>>
+> >>>>>> or knowing that we have the
+> >>>>>> dtb attached to the end of us and making use of the old kernel appended
+> >>>>>> dtb option? We're fine in for example the rpi_arm64 case of just being
+> >>>>>> given a device tree from the previous stage and not needing one in-tree.
+> >>>>>
+> >>>>> That's good to know and we can replicate that for Qcom platforms which
+> >>>>> are chainloaded and don't need an embedded DT.
+> >>>>
+> >>>> So yes, moving these towards the direction of rpi_arm64 and specifically
+> >>>> using imply OF_HAS_PRIOR_STAGE or select OF_HAS_PRIOR_STAGE (force that
+> >>>> the dtb must be provided to us) sounds like the right direction to take
+> >>>> these platforms
+> >>>>
+> >>>
+> >>> --
+> >>> // Caleb (they/them)
+> >
 >
