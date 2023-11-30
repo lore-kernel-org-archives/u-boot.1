@@ -4,83 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0423C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 14:48:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09155C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 14:49:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39D9B876C7;
-	Thu, 30 Nov 2023 15:48:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 271A5876CB;
+	Thu, 30 Nov 2023 15:49:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kd46C8JW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a7XMuplj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DFB6876CB; Thu, 30 Nov 2023 15:48:35 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0396C876CB; Thu, 30 Nov 2023 15:49:34 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4F958767C
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:48:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB236876E8
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:49:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-67a545a9462so5302796d6.0
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 06:48:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701355711; x=1701960511; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DaKAvvZBmZfswzRBX3tWT4k2C6OgtOotW5JiObT6UXg=;
- b=Kd46C8JWd6jEiP/UCB6/nRXmamOdvTLM4j0RXx9bFNvs7AGseINRPo7rZTrmKn03iF
- jqIX77kTlX2JQq+h92TZHq32rbPOBDRHp6O7jc5uGj+denO1jVqTGlhjj8Qn37TD704X
- /LiqLwl8SK3gBstFvkMZpTNL6uq/9EPFKh5g7tumvmaQtX3p10ZyZYfdCBvO/Pykswmr
- duuWbjX9UzJ9JnKgw6d4gdABmxH6kub134ZnuDviNBjhUK9AbexIOcyIOXh7uSEtfIhu
- 8xQ3KBx95+PrbihR1Q59GIq7QfRJj0pxIrKzyJMdEwMWuVEv4dkeeNq+Oe3uovCYmnSr
- g6+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701355711; x=1701960511;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DaKAvvZBmZfswzRBX3tWT4k2C6OgtOotW5JiObT6UXg=;
- b=plABDe/PaFxOlWa/j2XKARxnHZoT43DzKirEh+jxx6A0hx2ObouODFZ7AZs0z8wts1
- a3ENHeMxp6xduzB1sqb8Hri9xiaIF1WMTCSF8hOqLHl+XfN4FQvjlOmyQpDU48rSvUPw
- 4jKfnHRlz1im7gNnFqoZQcxn2FGHiPT51eWwlra0RgvNVMd76FK/iC5aypvYD1KctFQw
- DznengErGMkqEGOKrVzhqsaOx+mFjp1JCPMwzEEEzPhVLj6mXntJKMw2NOkiHRg8InJj
- U+1idyb4GIcbk5g1O6OBBtf49zbRTeMRpyQsOpgaXcqBSFaM1v0Iy2WAlpXEPSW0EtF5
- nWXQ==
-X-Gm-Message-State: AOJu0YyEuWFZzEUFz2nuE9rb2cSBROcCOMy4O44gpUh7A0taodiUynY2
- Lq0PfQpoCx5WI47ejPwxE3o=
-X-Google-Smtp-Source: AGHT+IHPoS0wPCNMK5Qy+3h/1TQi5B8RlYiC+BCx9uHmFDze4CcDsoDtELOVqAQKfvZTwj6mMZlLKg==
-X-Received: by 2002:a0c:ea52:0:b0:67a:4b63:ca63 with SMTP id
- u18-20020a0cea52000000b0067a4b63ca63mr12840869qvp.53.1701355711386; 
- Thu, 30 Nov 2023 06:48:31 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- h17-20020a0cab11000000b0067a359ffd82sm567355qvb.35.2023.11.30.06.48.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 30 Nov 2023 06:48:31 -0800 (PST)
-Message-ID: <f6bc6c2f-d9d4-0d33-48f2-c7b70288aaa5@gmail.com>
-Date: Thu, 30 Nov 2023 09:48:30 -0500
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AUEnDvh068559;
+ Thu, 30 Nov 2023 08:49:13 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701355753;
+ bh=se2j4iOa7tWS+eR/wZ1e2rlqHnyVtuFq7ND2aSLKayc=;
+ h=From:To:CC:Subject:Date;
+ b=a7XMupljGhgWVWW6ismUU9WFaLSiHW+QN1Ah5vS/DdRr/tW8kcl+CluSHuMtORocW
+ 4OOyq6XaDGn5yM/83HQRnO+01kqa+PgsRe+XaHKceYpLjv/CxskauUwgi6fr4ofM99
+ Auu9J0Nnimo504Lil/ZNyFZxyhn+vgkCcVYgwQRE=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AUEnDjj069580
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 30 Nov 2023 08:49:13 -0600
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
+ Nov 2023 08:49:13 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 30 Nov 2023 08:49:13 -0600
+Received: from fllv0039.itg.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AUEnCig097259; 
+ Thu, 30 Nov 2023 08:49:12 -0600
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Apurva Nandan
+ <a-nandan@ti.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH] board: ti: k3: Remove need for CFG_SYS_SDRAM_BASE
+Date: Thu, 30 Nov 2023 08:49:11 -0600
+Message-ID: <20231130144911.254889-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: TPM SPI issue
-Content-Language: en-US
-To: "niek.nooijens@omron.com" <niek.nooijens@omron.com>,
- Fabio Estevam <festevam@gmail.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <OS3P286MB1495F9E99D2BD002B94D4174F683A@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
- <CAOMZO5CasNqMJ28QcLX-asaLPd+LuPR3B4d=8zqGD1XS=pxD5g@mail.gmail.com>
- <OS3P286MB14957A0AA37C837969AB16A5F683A@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <OS3P286MB14957A0AA37C837969AB16A5F683A@OS3P286MB1495.JPNP286.PROD.OUTLOOK.COM>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,66 +79,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTmllaywNCg0KT24gMTEvMjkvMjMgMTg6NTgsIG5pZWsubm9vaWplbnNAb21yb24uY29t
-IHdyb3RlOg0KPiBIaSBGYWJpbw0KPiANCj4gSSdtIHVzaW5nIHRoZSBzb2NmcGdhX2N5Y2xv
-bmU1IHdpdGggdGhlIGRlc2lnbndpcmVfc3BpIGRyaXZlci4NCj4gSSBhZGRlZCB0aGUgVFBN
-IHRvIHRoZSBkZXZpY2V0cmVlIGFzIHNvOg0KPiAmc3BpMCB7DQo+IOKAguKAguKAguKAguKA
-guKAgnN0YXR1cyA9ICJva2F5IjsNCj4g4oCC4oCC4oCC4oCC4oCC4oCCbnVtLWNzID0gPDI+
-Ow0KPiDigILigILigILigILigILigIJtcmFtMEAwIHsNCj4g4oCC4oCC4oCC4oCC4oCC4oCC
-4oCC4oCC4oCC4oCC4oCC4oCCY29tcGF0aWJsZSA9ICJzcGktZGV2IjsNCj4g4oCC4oCC4oCC
-4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCCcmVnID0gPDA+Ow0KPiDigILigILigILigILi
-gILigILigILigILigILigILigILigIJzcGktbWF4LWZyZXF1ZW5jeSA9IDwxMDAwMDAwPjsN
-Cj4g4oCC4oCC4oCC4oCC4oCC4oCCfTsNCj4g4oCC4oCC4oCC4oCC4oCC4oCCdHBtQDEgeyAv
-LyBzbG05NjcwIC0gVTE0NA0KPiDigILigILigILigILigILigILigILigILigILigILigILi
-gIJjb21wYXRpYmxlID0gImluZmluZW9uLHNsYjk2NzAiLCAidGNnLHRwbV90aXMtc3BpIjsN
-Cj4g4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCC4oCCcmVnID0gPDE+Ow0KPiDi
-gILigILigILigILigILigILigILigILigILigILigILigIJzcGktbWF4LWZyZXF1ZW5jeSA9
-IDwxMDAwMDAwPjsNCj4g4oCC4oCC4oCC4oCC4oCC4oCCfTsNCj4gfTsNCg0KVGhlIERXIFNQ
-SSBkZXZpY2UgZG9lcyBub3Qgc3VwcG9ydCBob2xkaW5nIHRoZSBDUyBsb3cgYmV0d2VlbiBz
-ZXBhcmF0ZSByZWFkcy93cml0ZXMuDQpUaGUgZWFzaWVzdCBmaXggaXMgdG8gdXNlIGEgR1BJ
-TyBDUy4gSG93ZXZlciwgeW91IGNhbiBhbHNvIHJld3JpdGUgdGhlIFNQSSBzbGF2ZQ0KZHJp
-dmVyIHRvIHVzZSBtZW1fb3BzLCB3aGljaCB3aWxsIGVuc3VyZSB0aGF0IHRoZSBDUyBzdGF5
-cyBoaWdoIGZvciBhIHRyYW5zYWN0aW9uLg0KSG93ZXZlciwgdGhpcyBtYXkgbm90IGJlIHBv
-c3NpYmxlIGZvciBhbGwgc2xhdmVzLiBGb3IgbW9yZSBpbmZvLCBoYXZlIGEgbG9vayBhdA0K
-Y29tbWl0IGZlYzdiZjA0NjBkICgic3BpOiBkdzogQWRkIG1lbV9vcHMiKS4NCg0KLS1TZWFu
-DQoNCj4gTkllaw0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiDlt67l
-h7rkuro6IEZhYmlvIEVzdGV2YW0gPGZlc3RldmFtQGdtYWlsLmNvbT4NCj4g6YCB5L+h5pel
-5pmCOiAyMDIz5bm0MTHmnIgyOeaXpSAyMjoxNw0KPiDlrpvlhYg6IE5pZWsgTm9vaWplbnMg
-LyBPQy1JQUIgUEJELUMgREVWRUwgMS0xIDxuaWVrLm5vb2lqZW5zQG9tcm9uLmNvbT4NCj4g
-Q0M6IHUtYm9vdEBsaXN0cy5kZW54LmRlIDx1LWJvb3RAbGlzdHMuZGVueC5kZT4NCj4g5Lu2
-5ZCNOiBSZTogVFBNIFNQSSBpc3N1ZQ0KPiANCj4gW2Zlc3RldmFtQGdtYWlsLmNvbSDjgYvj
-gonjga7jg6Hjg7zjg6vjgpLlj5fjgZHlj5bjgovpoLvluqbjga/pq5jjgY/jgYLjgorjgb7j
-gZvjgpPjgILjgZPjgozjgYzllY/poYzjgafjgYLjgovlj6/og73mgKfjga7nkIbnlLHjgavj
-gaTjgYTjgabjga/jgIFodHRwczovL2FrYS5tcy9MZWFybkFib3V0U2VuZGVySWRlbnRpZmlj
-YXRpb24g44KS44GU6Kan44GP44Gg44GV44GE44CCXQ0KPiANCj4gSGkgTmllaywNCj4gDQo+
-IE9uIFdlZCwgTm92IDI5LCAyMDIzIGF0IDk6NTHigK9BTSBuaWVrLm5vb2lqZW5zQG9tcm9u
-LmNvbQ0KPiA8bmllay5ub29pamVuc0BvbXJvbi5jb20+IHdyb3RlOg0KPj4NCj4+IEhpIHRo
-ZXJlDQo+Pg0KPj4gSSBoYXZlIHRoZSBzYW1lIGlzc3VlIGFzIGhlcmU6DQo+PiBodHRwczov
-L2pwbjAxLnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0cHMlM0El
-MkYlMkZjb21tdW5pdHkuaW5maW5lb24uY29tJTJGdDUlMkZPUFRJR0EtVFBNJTJGSS1NWDgt
-VFBNLVNMQjk2NzAtU1BJLUNvbS1FcnJvciUyRnRkLXAlMkY0NzI1MzMmZGF0YT0wNSU3QzAx
-JTdDbmllay5ub29pamVucyU0MG9tcm9uLmNvbSU3QzBlZDkzNDJjNmY0ZTRkMTRkYmJlMDhk
-YmYwZGQ4MGI1JTdDMGVjZmY1YTk0YmVmNGE3Yjk2ZWNhOTY1NzliNGFjMzclN0MwJTdDMCU3
-QzYzODM2ODYwNjM1NDQ1MTQwOSU3Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpXSWpvaU1D
-NHdMakF3TURBaUxDSlFJam9pVjJsdU16SWlMQ0pCVGlJNklrMWhhV3dpTENKWFZDSTZNbjAl
-M0QlN0MzMDAwJTdDJTdDJTdDJnNkYXRhPUQzZjA5UlVYNGkwRWNnUWlVQzRydjN5MVZQM0E1
-S2Ezb3pBUjhkWGRlbjglM0QmcmVzZXJ2ZWQ9MDxodHRwczovL2NvbW11bml0eS5pbmZpbmVv
-bi5jb20vdDUvT1BUSUdBLVRQTS9JLU1YOC1UUE0tU0xCOTY3MC1TUEktQ29tLUVycm9yL3Rk
-LXAvNDcyNTMzPg0KPj4NCj4+IGFwcGFyZW50bHkgdGhlIENTIGlzIHJlbGVhc2VkIGluIGJl
-dHdlZW4gcmVzcG9uc2VzLiBDYW4geW91IGhlbHAgbWUgc29sdmUgdGhpcz8NCj4gDQo+IFdo
-aWNoIFNvQyBhcmUgeW91IHVzaW5nPw0KPiANCj4gSW4gY2FzZSB5b3UgYXJlIHVzaW5nIGRy
-aXZlcnMvc3BpL214Y19zcGkuYywgdGhlcmUgd2FzIGEgY29tbWl0IGluIHRoZQ0KPiBrZXJu
-ZWwgZHJpdmVyIHRoYXQNCj4gYWxsb3dlZCB0byBwdXQgdGhlIENTIGxpbmUgaW4gbG93IHdo
-ZW4gaWRsZToNCj4gDQo+IGh0dHBzOi8vanBuMDEuc2FmZWxpbmtzLnByb3RlY3Rpb24ub3V0
-bG9vay5jb20vP3VybD1odHRwcyUzQSUyRiUyRmdpdC5rZXJuZWwub3JnJTJGcHViJTJGc2Nt
-JTJGbGludXglMkZrZXJuZWwlMkZnaXQlMkZzdGFibGUlMkZsaW51eC5naXQlMkZjb21taXQl
-MkYlM0ZoJTNEdjYuNi4zJTI2aWQlM0Q2YTk4M2ZmNTEwMmZmMGQ4NTlkZjA1Y2EzZjVjZjJm
-NmExN2MwZmFkJmRhdGE9MDUlN0MwMSU3Q25pZWsubm9vaWplbnMlNDBvbXJvbi5jb20lN0Mw
-ZWQ5MzQyYzZmNGU0ZDE0ZGJiZTA4ZGJmMGRkODBiNSU3QzBlY2ZmNWE5NGJlZjRhN2I5NmVj
-YTk2NTc5YjRhYzM3JTdDMCU3QzAlN0M2MzgzNjg2MDYzNTQ0NTg4OTAlN0NVbmtub3duJTdD
-VFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRp
-STZJazFoYVd3aUxDSlhWQ0k2TW4wJTNEJTdDMzAwMCU3QyU3QyU3QyZzZGF0YT1RM2ZlUWpE
-Y3lBcnhod29laEdCM0QlMkZ3bnEwcGhQUHMzcGI4amRta2RhU2clM0QmcmVzZXJ2ZWQ9MDxo
-dHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC9zdGFibGUv
-bGludXguZ2l0L2NvbW1pdC8/aD12Ni42LjMmaWQ9NmE5ODNmZjUxMDJmZjBkODU5ZGYwNWNh
-M2Y1Y2YyZjZhMTdjMGZhZD4NCg0K
+The base address of extended DDR does not change across the K3 family.
+Setting this per SoC is not needed. Remove this definition to help
+remove the last bits from K3 include/configs/*.h files.
+
+Signed-off-by: Andrew Davis <afd@ti.com>
+---
+ board/ti/am65x/evm.c         | 4 ++--
+ board/ti/j721e/evm.c         | 4 ++--
+ board/ti/j721s2/evm.c        | 4 ++--
+ include/configs/am62ax_evm.h | 4 ----
+ include/configs/am65x_evm.h  | 3 ---
+ include/configs/j721e_evm.h  | 2 --
+ include/configs/j721s2_evm.h | 3 ---
+ 7 files changed, 6 insertions(+), 18 deletions(-)
+
+diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
+index 975eb17946f..df209021c1b 100644
+--- a/board/ti/am65x/evm.c
++++ b/board/ti/am65x/evm.c
+@@ -73,13 +73,13 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ int dram_init_banksize(void)
+ {
+ 	/* Bank 0 declares the memory available in the DDR low region */
+-	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
++	gd->bd->bi_dram[0].start = 0x80000000;
+ 	gd->bd->bi_dram[0].size = 0x80000000;
+ 	gd->ram_size = 0x80000000;
+ 
+ #ifdef CONFIG_PHYS_64BIT
+ 	/* Bank 1 declares the memory available in the DDR high region */
+-	gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
++	gd->bd->bi_dram[1].start = 0x880000000;
+ 	gd->bd->bi_dram[1].size = 0x80000000;
+ 	gd->ram_size = 0x100000000;
+ #endif
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index 0768385f40c..c541880107e 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -61,13 +61,13 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ int dram_init_banksize(void)
+ {
+ 	/* Bank 0 declares the memory available in the DDR low region */
+-	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
++	gd->bd->bi_dram[0].start = 0x80000000;
+ 	gd->bd->bi_dram[0].size = 0x80000000;
+ 	gd->ram_size = 0x80000000;
+ 
+ #ifdef CONFIG_PHYS_64BIT
+ 	/* Bank 1 declares the memory available in the DDR high region */
+-	gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
++	gd->bd->bi_dram[1].start = 0x880000000;
+ 	gd->bd->bi_dram[1].size = 0x80000000;
+ 	gd->ram_size = 0x100000000;
+ #endif
+diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
+index db717390771..1220cd84519 100644
+--- a/board/ti/j721s2/evm.c
++++ b/board/ti/j721s2/evm.c
+@@ -56,13 +56,13 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ int dram_init_banksize(void)
+ {
+ 	/* Bank 0 declares the memory available in the DDR low region */
+-	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
++	gd->bd->bi_dram[0].start = 0x80000000;
+ 	gd->bd->bi_dram[0].size = 0x7fffffff;
+ 	gd->ram_size = 0x80000000;
+ 
+ #ifdef CONFIG_PHYS_64BIT
+ 	/* Bank 1 declares the memory available in the DDR high region */
+-	gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
++	gd->bd->bi_dram[1].start = 0x880000000;
+ 	gd->bd->bi_dram[1].size = 0x37fffffff;
+ 	gd->ram_size = 0x400000000;
+ #endif
+diff --git a/include/configs/am62ax_evm.h b/include/configs/am62ax_evm.h
+index 57003f120f9..496d1c2348f 100644
+--- a/include/configs/am62ax_evm.h
++++ b/include/configs/am62ax_evm.h
+@@ -12,10 +12,6 @@
+ #include <env/ti/mmc.h>
+ #include <env/ti/k3_dfu.h>
+ 
+-/* DDR Configuration */
+-#define CFG_SYS_SDRAM_BASE1		0x880000000
+-
+-
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
+ 
+diff --git a/include/configs/am65x_evm.h b/include/configs/am65x_evm.h
+index 811dc0ff1a8..64458ebb4b8 100644
+--- a/include/configs/am65x_evm.h
++++ b/include/configs/am65x_evm.h
+@@ -14,9 +14,6 @@
+ #include <env/ti/k3_rproc.h>
+ #include <env/ti/k3_dfu.h>
+ 
+-/* DDR Configuration */
+-#define CFG_SYS_SDRAM_BASE1		0x880000000
+-
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
+ 
+diff --git a/include/configs/j721e_evm.h b/include/configs/j721e_evm.h
+index ea39d1bf824..c26438c8684 100644
+--- a/include/configs/j721e_evm.h
++++ b/include/configs/j721e_evm.h
+@@ -11,8 +11,6 @@
+ 
+ #include <linux/sizes.h>
+ 
+-/* DDR Configuration */
+-#define CFG_SYS_SDRAM_BASE1		0x880000000
+ /* FLASH Configuration */
+ #define CFG_SYS_FLASH_BASE		0x000000000
+ 
+diff --git a/include/configs/j721s2_evm.h b/include/configs/j721s2_evm.h
+index 692c6bb5e42..846cfa7531c 100644
+--- a/include/configs/j721s2_evm.h
++++ b/include/configs/j721s2_evm.h
+@@ -12,9 +12,6 @@
+ #include <linux/sizes.h>
+ #include <config_distro_bootcmd.h>
+ 
+-/* DDR Configuration */
+-#define CFG_SYS_SDRAM_BASE1		0x880000000
+-
+ /* SPL Loader Configuration */
+ #if defined(CONFIG_TARGET_J721S2_A72_EVM)
+ #define CFG_SYS_UBOOT_BASE		0x50280000
+-- 
+2.39.2
+
