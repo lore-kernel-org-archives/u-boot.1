@@ -4,94 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 510BAC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 14:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8714AC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 14:40:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC89F875FE;
-	Thu, 30 Nov 2023 15:35:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D18A5876A5;
+	Thu, 30 Nov 2023 15:40:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YN4zgDjy";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="S+COLjgf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D861875EE; Thu, 30 Nov 2023 15:35:20 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id B196387698; Thu, 30 Nov 2023 15:40:43 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B71F87646
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:35:16 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-59b5484fbe6so10685517b3.1
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 06:35:16 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04A07875EE
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:40:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50bd4fcbde1so246225e87.1
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 06:40:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1701354915; x=1701959715; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yuUiHg1gNEuQuIP0VDVxyBBvxGeO5GULNSt+cGVGPCc=;
- b=YN4zgDjyWf9u6YLZDVHAqkvsxRA9LZKd0TZCAhNCh1993ezTmK+I9L7KXdEZXHA90V
- c3wRYZzBpoxo8PNEYz8dxGzVkuV3liezYIICdSfOTanHfidkjZ3za3b/48C4zjGa5eUk
- irL351EHWvrDNDK15SLeTKQfmC7WfYESv7Yog=
+ d=amarulasolutions.com; s=google; t=1701355239; x=1701960039;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nl7qKs0xMYqVNDHH9WM4FezV7LHdF3ESnzYoyQ/wiNc=;
+ b=S+COLjgfgBwKTjec7UFEKUmmmK9NfnPqCGiXTT3JpA0XaaVGenlunbYPt6eHztrdON
+ DIy2Gy2Hg/oOBRSgTvYBHWEkmprxdkO7W5vtGcO2G1Fu9TV2laoJ27zg97HlrustAiWB
+ ILH2LN6FjAqvs4ymDmPC9MRmNYcHAbnKrOqr8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701354915; x=1701959715;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yuUiHg1gNEuQuIP0VDVxyBBvxGeO5GULNSt+cGVGPCc=;
- b=pffRF6hFu1NgM+HTdKk1Rm6JA1vOBcXPqQPwznGWZV4nP+tYUC3QAYAD8Q0xmAHjuK
- CAiL/mtowoVK7wQoXIzCcMAVvUkZ56o8OWRj2SoHo1grxsp1/9N1zvpn0ToJTBVCllhm
- jgQvZPsIEy0HCEdk239TTq8QXmQPWdW+OZfX6Rx0gUEkrQUAR/KUInR7osJhu3Rnf0H2
- PoO5vwn48s3XyAgNDSjp/BxIZ5Xs5iEXKJttsnPTURXEU/Q6Npgb0hzebVdH5CvcpNMj
- BKh+uSFeI8rdFi4SRCiI0+crEVvtUzlMBepLjCZ3qC5E6U0frbqx+oOTj/S6NlktFAfp
- tUzg==
-X-Gm-Message-State: AOJu0YxdEZJIeL22N1Ic4brhMGh3hp7lRvWGe/uSd9b2Qqr2Z9fwXVgZ
- 7XCqqRFAmcS1JW1XOe0Lt1CpTQ==
-X-Google-Smtp-Source: AGHT+IGM7jfC2v0GCGON9ASO35Gnsvqme3rwTfoiB20evVs6NECd9skVProCtcFf++/ZlAH5Sk5Brw==
-X-Received: by 2002:a05:690c:3107:b0:5d0:b3b3:a3c6 with SMTP id
- fb7-20020a05690c310700b005d0b3b3a3c6mr10704779ywb.39.1701354914804; 
- Thu, 30 Nov 2023 06:35:14 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-61c1-9eeb-7219-1742.res6.spectrum.com.
- [2603:6081:7b00:6400:61c1:9eeb:7219:1742])
+ d=1e100.net; s=20230601; t=1701355239; x=1701960039;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nl7qKs0xMYqVNDHH9WM4FezV7LHdF3ESnzYoyQ/wiNc=;
+ b=c21lUFTlBlBULjqox7g+ucBFr3/TwXObQCLdYVyQ0vi59N9QVOKRQSaJqCHaeyMCk/
+ ybKBH3plUAJ97XRAjBAbiXjt81yROASI8rVPe/LXwZBoMwNz+jWJjJmBtXyNkwaCjcMU
+ Xg54v9w21wvO99lupgkBrDxeYFQtid58q2sODaUsgvEgEhSGqJMFaLf8rZvjmE5kBsab
+ yMlXzEo9tlVCzVlCc3noKHhr3t2vwsVW3m1ZPfB0joInnHpVuGIMqnbl7ptUxj1z+GZB
+ layxajGpgut8+q4ww1E7zfsT1gk5Cof9hlQtmPLrXopxyjNYjdE5FKWVcAZczYMhc5Jf
+ jV5A==
+X-Gm-Message-State: AOJu0YybLcQNlKXq5InSs/oNP3iHrVbzxunExV1Zoff1BPF1hmdE2EuU
+ G2uu26bf5J6fHGBkZuH/X/ZoKkmER1jaNuyG7NwD+A==
+X-Google-Smtp-Source: AGHT+IFPLJIZ00kzHbdg1p5ZlWgoE+kuhys/QRV3xPtAJLJdTEjAvMQjDoGy8cth2tfgswu4IlzDJQ==
+X-Received: by 2002:ac2:510a:0:b0:50b:d177:d9d9 with SMTP id
+ q10-20020ac2510a000000b0050bd177d9d9mr1035944lfb.46.1701355238985; 
+ Thu, 30 Nov 2023 06:40:38 -0800 (PST)
+Received: from localhost.localdomain ([2001:b07:6474:ebbf:d1eb:b106:516d:db0a])
  by smtp.gmail.com with ESMTPSA id
- t6-20020a81c246000000b005845e6f9b50sm385703ywg.113.2023.11.30.06.35.13
+ x21-20020a1709064a9500b00a18399ff790sm733470eju.215.2023.11.30.06.40.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 06:35:14 -0800 (PST)
-Date: Thu, 30 Nov 2023 09:35:12 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, neil.armstrong@linaro.org,
- Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-Message-ID: <20231130143512.GQ2513409@bill-the-cat>
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <20231122140100.GT2513409@bill-the-cat>
- <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
- <20231122142758.GU2513409@bill-the-cat>
- <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
- <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
- <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
- <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
- <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ Thu, 30 Nov 2023 06:40:38 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [RESEND RFC PATCH v2 0/5] Support display on stm32f469-disco board
+Date: Thu, 30 Nov 2023 15:40:01 +0100
+Message-ID: <20231130144033.1850298-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CXccClC/ze6VCEzy"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,98 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The series adds support for the Orise Tech OTM8009A display on the
+stm32f469-disco board. Substantial differences in the drivers for clock
+management, LTDC and DSI compared to Linux, made it necessary to modify
+the device tree. These changes were made in stm32f469-disco-uboot.dtsi to
+avoid altering the Linux device tree. It is therefore desirable, as soon
+as possible, to add these drivers the functionalities so that they do not
+require device tree properties that deviate from those present in the Linux
+version.
 
---CXccClC/ze6VCEzy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+- Add Patrice Chotard's Reviewed-by tag to patches 1, 2 and 3 of the series.
+- Fix frame buffer allocation for stm32f469 discovery board.
 
-On Thu, Nov 30, 2023 at 01:02:25PM +0530, Sumit Garg wrote:
-> On Wed, 29 Nov 2023 at 22:06, Neil Armstrong <neil.armstrong@linaro.org> =
-wrote:
-> >
-> > On 29/11/2023 16:34, Caleb Connolly wrote:
-> > >
-> > >
-> > > On 23/11/2023 07:04, Sumit Garg wrote:
-> > >> On Wed, 22 Nov 2023 at 21:34, Caleb Connolly <caleb.connolly@linaro.=
-org> wrote:
-> > >>>
-> > >>>
-> > >>>
-> > >>> On 22/11/2023 14:27, Tom Rini wrote:
-> > >>>> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
-> > >>>>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote:
-> > >>>>>>
-> > >>>>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
-> > >>>>>>> Hi Caleb,
-> > >>>>>>>
-> > >>>>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@li=
-naro.org> wrote:
-> > >>>>>> [snip]
-> > >>>>>>>> =3D=3D DT loading =3D=3D
-> > >>>>>>>>
-> > >>>>>>>> Previously, boards used the FDT blob embedded into U-Boot (via
-> > >>>>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a se=
-condary
-> > >>>>>>>> bootloader, so we can instead rely on the first-stage bootload=
-er to
-> > >>>>>>>> populate some useful FDT properties for us (notably the /memor=
-y node and
-> > >>>>>>>> KASLR seed) and fetch the DTB that it provides. Combined with =
-the memory
-> > >>>>>>>> map changes above, this let's us entirely avoid configuring th=
-e memory
-> > >>>>>>>> map explicitly.
-> > >>>>>>>
-> > >>>>>>> Since with this change, we don't need to embed FDT blob in the =
-u-boot
-> > >>>>>>> binary, so I was thinking if we really need to import DTs from =
-Linux
-> > >>>>>>> for different platforms and then play a catchup game?
-> > >>>
-> > >>> For now, yes.
-> > >>
-> > >> But why? Is there any value added by larger u-boot specific DT (most
-> > >> of the nodes being unused by u-boot) than what currently u-boot
-> > >> supports? The more important part is to get alignment with Linux DT
-> > >> bindings. If you need to have memory/reserved-memory nodes in u-boot
-> > >> DT for generalization purposes then you should import those particul=
-ar
-> > >> nodes only.
-> > >
-> > > I've been thinking about and hacking on this for the last week or so,
-> > > sorry for the delayed reply here.
-> > >
-> > > The value is in preventing any of the existing bindings from regressi=
-ng,
->=20
-> That is actually best addressed in Linux by checking the DTS against
-> yaml DT bindings. We don't have that testing available in u-boot and
-> only depend on careful reviews.
+Dario Binacchi (5):
+  ARM: dts: stm32f469-disco: sync with Linux 6.5
+  ARM: dts: stm32: make the LTDC clock usable by the clock driver
+  ARM: dts: stm32: make the DSI clock usable by the clock driver
+  ARM: dts: stm32: support display on stm32f469-disco board
+  board: stm32f469-disco: add splash screen with stmicroelectronics logo
 
-I would absolutely love for someone to make another attempt at updating
-our kbuild infrastucture so that we can run the validation targets.
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 ++++++++++
+ arch/arm/dts/stm32f469-disco.dts         |   4 +--
+ configs/stm32f469-discovery_defconfig    |  16 ++++++++++++
+ drivers/video/stm32/stm32_ltdc.c         |  31 +++++++++++++++++++++++
+ include/configs/stm32f469-discovery.h    |   2 ++
+ tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
+ 6 files changed, 64 insertions(+), 2 deletions(-)
+ create mode 100644 tools/logos/stm32f469-discovery.bmp
 
---=20
-Tom
+-- 
+2.43.0
 
---CXccClC/ze6VCEzy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVonZkACgkQFHw5/5Y0
-tywciAwAqjxh6ehUhBa7KChLUyCepKWcGv64Hvzj0jjMhVjkx82OsNTbmmJzx89i
-3wJiFCHaP02/vany1+ajR3WoENKAfnvd8lNj5dtB07oB8cqrFhi0D51qq6bR4RxM
-1u1z36fFI8Ic7OGqWU5o1FeFPBefSEReIiV+ijN1MTe+p/klvEBCQl72GZAM6Osl
-PBMC6vXO9+HqhST5w/yP/JianAP//Bv6JO8vtUIzDVZ9lAocAx/UBTuXXCId7I9H
-EGXJDquYTLuwTaPytpSn5fNKdtOCAmcDAI2NQWXOWgyXZWr/CGZ3msDINp+Q/hk2
-32d5nYwkmwKe1s8kB6RicxyYFLUh7doMuQtkiWaSgCccRIyAZ42yVIPwK2du2ons
-ZSBLRcU1a2ItN6ZSib/qS3CudQ540TA4ThZnDXy1SfRTxCs0MdPMGgxXk4+lNsU3
-xmvrrAu1VEnZglrthTvCoS21DZRIiFBGpgjT/V3LzwhEWD8blVXErTM4h0UxWzYn
-eTrcmpVw
-=sh0D
------END PGP SIGNATURE-----
-
---CXccClC/ze6VCEzy--
