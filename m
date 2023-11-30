@@ -4,89 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82464C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 07:41:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B54FFC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 07:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DCF8870AB;
-	Thu, 30 Nov 2023 08:41:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F0767871DE;
+	Thu, 30 Nov 2023 08:51:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="II+QUX8u";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QflhBF0u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74814870AB; Thu, 30 Nov 2023 08:41:02 +0100 (CET)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
+ id DF1AE86DD1; Thu, 30 Nov 2023 08:51:07 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B53F86FB6
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 08:40:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6716E87595
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 08:51:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-4b28f8ca7b6so193349e0c.3
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 23:40:59 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-54bfd4546fbso539762a12.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 23:51:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701330058; x=1701934858; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N6nC0Nu2BKzRK3W76nFDyud/BDhkw8+hF1sJrrJBjek=;
- b=II+QUX8u9CjcI9jvYFK7+oZDeVvT7CO4t0Ivx7Qrr1JFqGNKrafNEsF7P1Y3C+0nWQ
- H/7ThG/IT2HwzOoetcJWoMmO5EZxbVrqmth5pysDSTqt4fZTTPTAM6pw6RklmfwWJjsV
- gF+x7iEjQ1DG0ntFdNSB4avKP09lfpvAj4Qdoh5UQDTMNuQLpISO6o4exWuyzWf74vyb
- o1phNjpUnrWtaTrO568RRUtRdfd+LwWUJIO6HwpEAtzok8tHfHPpdkSyVBuHsswPmHVJ
- sgGPsOP+LDal8/taJwgMajb/t5RgvMUwrWjCSBk4AZbhQKrB2N5/XBrYFrNH4KrvvRbF
- s8Qg==
+ d=gmail.com; s=20230601; t=1701330665; x=1701935465; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o8F8Cuz1QUAkKbwhyPC1ne8Z41LwMjGBdXfFIy/qtEw=;
+ b=QflhBF0uC/28AngCo1+5JuFvXEbRmuftX8n04QxBJlySKgOM85rjnlev37Lqos7U62
+ Uf6uOmKM7yTfzVvVPGBJazKjc/Lfz0wSsnJnN7Y/duUDvLXPTtP7aX1yP890DPGvrNmG
+ YCPUbtm4m3RIORzt8YVqHy9xHFJ8TbzXbmt0JuvJyjNTrtG2Rn/jTjzXppiWxHBhTkpp
+ jSRCq5/sXHbYgYekcQwIyKmh/skhLiIQYXukw+nzKaLiXw71fAl6be96dy53E9l4MUM7
+ 75GDXH4fjXvMlsTxuTdWLZE0UB4zjnQmA87vNU6YNlua6O0zRLk3PFApdsIxmIARvW86
+ 4XfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701330058; x=1701934858;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N6nC0Nu2BKzRK3W76nFDyud/BDhkw8+hF1sJrrJBjek=;
- b=TREHGVAw1qcaq07r5/WI2I0QDo29p9rdNOOFrT3SO3QcBz0oVyNGPRtJEeSqTv/nzu
- d35fHy8npdwhwFg7fUpMZLd9yFgtTh6MWvHd8upoytWyhsEbiNNFk+QO7jnzRRMPAgSL
- hGnMwn+BPSaR81Lh8o7vePlsVjw4snCHzxrrNXaNwNK6wohPfzMM0asAc1LbfOoXSUmA
- uvq15my6TuFBS0wtiK6920ptOIjdpjGDoj2oLvzdRiR2l6kfWkPVx3mXRtEsbHe9Bnsr
- krGvtb7WRaHumFX7GchM8Wmc40+lsW66XXAk2z5zUJwl/5U1O8/T41E73aHEsZ6pk0G1
- wttg==
-X-Gm-Message-State: AOJu0YyW6yUQ7ISGo4fcBpa9Kq9J9kfVq0xnG+kvbKsi4xjmlbBJ+vbz
- ZmGwr38wcbeOxTiTeBdpmEdaRkANDIPBYbCMX/JWDw==
-X-Google-Smtp-Source: AGHT+IFOsMnVY7NMAbSnQ6TKczaErODJ/1nA3o/6WEZ4Ve71GG3d4CV/f92NnCJDkq2Va5Olpg+1kwhse+z9JNCR1W8=
-X-Received: by 2002:a1f:c743:0:b0:4ab:cf9d:b305 with SMTP id
- x64-20020a1fc743000000b004abcf9db305mr18114463vkf.0.1701330058067; Wed, 29
- Nov 2023 23:40:58 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701330665; x=1701935465;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o8F8Cuz1QUAkKbwhyPC1ne8Z41LwMjGBdXfFIy/qtEw=;
+ b=XO81uQITR0PG+kNpBqy4GEp7x7ys6Z2h5xcHTnAqcbOILWkgNwIKLlMzaD2PdJP4le
+ HswN7bITY0XKID/9cO967jahosTZeW+mQkNspz2ma5l/KEIg/1UauIBEJt3PqLxSvsa3
+ IutY2Y/T8RFT2yguCoY0PMP9LUxKyvbiiIeqJXlDSJifMFNEmaG3p9eCZQ+2QKdG8bL7
+ osE2i55KVYVQmt3LobEm8phT/nef4Mki7G72ixtBD0zMKvhzJnjaFEhBJpT+haMbkGyG
+ c5dCkvJGNrN72mRq17U+H8t3VDWHnRMSvyAurZHPtwbYQ6695xi0Zc8IZKiDKoCvJ0fS
+ nwgg==
+X-Gm-Message-State: AOJu0YxhFJaw5pU9tCbhWDwEKUWYmr6KwA4yUVvE4fJuLscaO70N6SfV
+ +5Xuge9/CI5Fl5JGyvfHkHtF9xrmvKk=
+X-Google-Smtp-Source: AGHT+IF3vV3A0uVRiVJVtStFJ4jeNLE11OQ3fD82jQhDge8EISBvS7Qi+dj7Q0X4RVjffq4iCSD22g==
+X-Received: by 2002:a05:6402:520c:b0:54b:4429:5270 with SMTP id
+ s12-20020a056402520c00b0054b44295270mr12912282edd.7.1701330664637; 
+ Wed, 29 Nov 2023 23:51:04 -0800 (PST)
+Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
+ g14-20020a50ee0e000000b0054bca15bf7bsm291440eds.3.2023.11.29.23.51.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Nov 2023 23:51:04 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Please pull u-boot-tegra staging
+Date: Thu, 30 Nov 2023 09:50:36 +0200
+Message-Id: <20231130075036.5336-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <20231122140100.GT2513409@bill-the-cat>
- <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
- <20231122142758.GU2513409@bill-the-cat>
- <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
- <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
- <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
- <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
- <CAABkxwsMjTQt3uZhdui91RoswHxS=i49AuXP1Cmjb4nF7_oaOQ@mail.gmail.com>
-In-Reply-To: <CAABkxwsMjTQt3uZhdui91RoswHxS=i49AuXP1Cmjb4nF7_oaOQ@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 30 Nov 2023 13:10:47 +0530
-Message-ID: <CAFA6WYO7r1-X=66MDpMJooM8MrovVOeY8P=7LGcDPM+KdnwfAA@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-To: Dennis Gilmore <dgilmore@fedoraproject.org>
-Cc: neil.armstrong@linaro.org, Peter Robinson <pbrobinson@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,219 +87,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dennis,
+Dear Tom,
 
-On Wed, 29 Nov 2023 at 22:32, Dennis Gilmore <dgilmore@fedoraproject.org> w=
-rote:
->
-> A big benefit of using the full dtb in u-boot means it can be used to
-> boot the system without the need to load a replacement file from disk
-> or elsewhere, which, AFAIK is required for the System Ready standards
-> and it definitely helps in cases like EFI booting.
+The following changes since commit acae7eb5fe063dcfe2dbdb1e1804cf3e12cc2f3f:
 
-The discussion here is all focussed on how to reach a point where
-u-boot uses unmodified DTB. This would allow the system to be
-compliant with System Ready standards with DT being directly passed
-from u-boot via EFI config table to Linux.
+  i2c: Bugfix in i2c_get_chip_by_phandle() (2023-11-27 18:54:56 -0500)
 
--Sumit
+are available in the Git repository at:
 
->
-> Dennis
->
-> On Wed, Nov 29, 2023 at 10:37=E2=80=AFAM Neil Armstrong
-> <neil.armstrong@linaro.org> wrote:
-> >
-> > On 29/11/2023 16:34, Caleb Connolly wrote:
-> > >
-> > >
-> > > On 23/11/2023 07:04, Sumit Garg wrote:
-> > >> On Wed, 22 Nov 2023 at 21:34, Caleb Connolly <caleb.connolly@linaro.=
-org> wrote:
-> > >>>
-> > >>>
-> > >>>
-> > >>> On 22/11/2023 14:27, Tom Rini wrote:
-> > >>>> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
-> > >>>>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote=
-:
-> > >>>>>>
-> > >>>>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
-> > >>>>>>> Hi Caleb,
-> > >>>>>>>
-> > >>>>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@li=
-naro.org> wrote:
-> > >>>>>> [snip]
-> > >>>>>>>> =3D=3D DT loading =3D=3D
-> > >>>>>>>>
-> > >>>>>>>> Previously, boards used the FDT blob embedded into U-Boot (via
-> > >>>>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a se=
-condary
-> > >>>>>>>> bootloader, so we can instead rely on the first-stage bootload=
-er to
-> > >>>>>>>> populate some useful FDT properties for us (notably the /memor=
-y node and
-> > >>>>>>>> KASLR seed) and fetch the DTB that it provides. Combined with =
-the memory
-> > >>>>>>>> map changes above, this let's us entirely avoid configuring th=
-e memory
-> > >>>>>>>> map explicitly.
-> > >>>>>>>
-> > >>>>>>> Since with this change, we don't need to embed FDT blob in the =
-u-boot
-> > >>>>>>> binary, so I was thinking if we really need to import DTs from =
-Linux
-> > >>>>>>> for different platforms and then play a catchup game?
-> > >>>
-> > >>> For now, yes.
-> > >>
-> > >> But why? Is there any value added by larger u-boot specific DT (most
-> > >> of the nodes being unused by u-boot) than what currently u-boot
-> > >> supports? The more important part is to get alignment with Linux DT
-> > >> bindings. If you need to have memory/reserved-memory nodes in u-boot
-> > >> DT for generalization purposes then you should import those particul=
-ar
-> > >> nodes only.
-> > >
-> > > I've been thinking about and hacking on this for the last week or so,
-> > > sorry for the delayed reply here.
-> > >
-> > > The value is in preventing any of the existing bindings from regressi=
-ng,
-> > > and simplifying the bringup process for new platforms (just copy
-> > > SoC/PMIC DTSI and write a minimal board DTS to enable the needed hard=
-ware).
-> > >>
-> > >>> There are quite a few features which aren't handled by
-> > >>> U-Boot that it shouldn't need to handle (rpm/h resources for exampl=
-e).
-> > >>> Also the fixed-regulator / regulator-gpio binding differences.
-> > >>
-> > >> IMO, we should fix them first and then use Linux DT as it is.
-> > >
-> > > The biggest blocker here is USB, on sdm845 and the 4 new platforms I
-> > > have working, I only support USB high speed, this requires removing t=
-he
-> > > superspeed phy and adding a DTS property.
-> > >
-> > > I tried using OF_BOARD_SETUP to make this changes during boot but thi=
-s
-> > > approach really isn't scalable (and I couldn't find a way to make it
-> > > work anyway).
-> > >
-> > >>
-> > >>>
-> > >>> I would definitely like to move towards supporting Linux DT directl=
-y,
-> > >>> but this approach gives us a nice middleground of minimising the U-=
-Boot
-> > >>> specific DT parts.
-> > >>
-> > >> I don't see any real benefits here apart from the maintenance burden=
-.
-> > >> If it had been an actual Linux DT then that can be passed to Linux a=
-s
-> > >> it is. However, the current modified import you are trying to do
-> > >> doesn't solve that purpose as well.
-> > >
-> > > Ensuring that we don't introduce non-standard bindings (by using Linu=
-x
-> > > DTSI) is one benefit, simplifying new platform bringup is another.
-> > >
-> > > The amount of work required to switch to upstream DT is too much to
-> > > block this series on. We can work on improving the situation there on=
-ce
-> > > we have these Qualcomm improvements upstream and new boards added. I =
-do
-> > > admit that this is quite an awkward middle-ground, and I would not li=
-ke
-> > > it to last for too long.
-> >
-> > I'm a real supporter of targeting support of unmodified (or very slighl=
-y)
-> > Linux DT, having a reduced version of the Linux DT will be a pain at ea=
-ch
-> > sync, and you'll need to do this manually.
-> >
-> > Simply having to copy the Linux DT without any changes will make sure y=
-ou
-> > are in sync with Linux's bindings, and will help making sure you'll boo=
-t
-> > unchanged Linux DTBs you get from previous loaders.
-> >
-> > And in bonus, you'll be able to chain it to the next loader like EFI.
-> >
-> > So I don't see why any work toward this goal is useless, and if an
-> > intermediate step is needed, let's do it.
-> >
-> > Neil
-> >
-> > >
-> > >>
-> > >> -Sumit
-> > >>
-> > >>>>>>>
-> > >>>>>>> IMO, the build command would look like following if we import
-> > >>>>>>> pre-built FDT blob from Linux:
-> > >>>>>>>
-> > >>>>>>> - Build u-boot::
-> > >>>>>>>
-> > >>>>>>>          $ export CROSS_COMPILE=3D<aarch64 toolchain prefix>
-> > >>>>>>>          $ make qcom_defconfig
-> > >>>>>>>          $ make
-> > >>>>>>>
-> > >>>>>>> - gzip u-boot::
-> > >>>>>>>
-> > >>>>>>>          gzip u-boot-nodtb.bin
-> > >>>>>>>
-> > >>>>>>> - Append dtb to gzipped u-boot::
-> > >>>>>>>
-> > >>>>>>>           cat u-boot-nodtb.bin.gz
-> > >>>>>>> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
-> > >>>>>>> u-boot-nodtb.bin.gz-dtb
-> > >>>>>>>
-> > >>>>>>> This would avoid the maintenance burden to keep DT in sync with=
- that
-> > >>>>>>> of Linux. And since DT bindings in Linux are backwards compatib=
-le, we
-> > >>>>>>> can say u-boot should work with DTB picked up from any Linux ke=
-rnel
-> > >>>>>>> stable release.
-> > >>>>>>
-> > >>>>>> I guess one question I have is, are we being passed the device t=
-ree
-> > >>>>>> (since we're acting like the Linux Kernel)
-> > >>>>>
-> > >>>>> Yeah that is the case here, see patch #1 in this series regarding=
- how
-> > >>>>> FDT address is being retrieved from previous stage bootloader (AB=
-L on
-> > >>>>> sdm845 and qcs404 SoCs).
-> > >>>>
-> > >>>> That's what I thought.
-> > >>>>
-> > >>>>>> or knowing that we have the
-> > >>>>>> dtb attached to the end of us and making use of the old kernel a=
-ppended
-> > >>>>>> dtb option? We're fine in for example the rpi_arm64 case of just=
- being
-> > >>>>>> given a device tree from the previous stage and not needing one =
-in-tree.
-> > >>>>>
-> > >>>>> That's good to know and we can replicate that for Qcom platforms =
-which
-> > >>>>> are chainloaded and don't need an embedded DT.
-> > >>>>
-> > >>>> So yes, moving these towards the direction of rpi_arm64 and specif=
-ically
-> > >>>> using imply OF_HAS_PRIOR_STAGE or select OF_HAS_PRIOR_STAGE (force=
- that
-> > >>>> the dtb must be provided to us) sounds like the right direction to=
- take
-> > >>>> these platforms
-> > >>>>
-> > >>>
-> > >>> --
-> > >>> // Caleb (they/them)
-> > >
-> >
+  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+
+for you to fetch changes up to e22d5799dc86298ad8388ddcb3b759e166c142b7:
+
+  ARM: dts: tegra30: enable USB PHY node on some devices (2023-11-28 09:17:18 +0200)
+
+----------------------------------------------------------------
+Svyatoslav Ryhel (6):
+      ARM: tegra: call regulators_enable_boot_on on board init
+      board: lg-x3: convert LG Optimus 4X and Vu to use DM PMIC
+      board: endeavoru: convert HTC One X to use DM PMIC
+      board: transformer-t30: convert ASUS Transformers to use DM PMIC
+      board: grouper: convert ASUS Google Nexus 7 (2012) to use DM PMIC
+      ARM: dts: tegra30: enable USB PHY node on some devices
+
+Thierry Reding (1):
+      ARM: dts: Reuse I2C3 for NVEC
+
+ arch/arm/dts/tegra20-paz00.dts                     |  19 ++++----
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi      |   7 +++
+ arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts |   1 +
+ arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts |   1 +
+ arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts |   1 +
+ arch/arm/dts/tegra30-asus-p1801-t.dts              |  17 +++++++
+ arch/arm/dts/tegra30-asus-tf600t.dts               |  15 ++++++
+ arch/arm/dts/tegra30-asus-transformer.dtsi         |   9 ++++
+ arch/arm/dts/tegra30-htc-endeavoru.dts             |   8 ++++
+ arch/arm/dts/tegra30-lg-x3.dtsi                    |   9 ++++
+ arch/arm/mach-tegra/board2.c                       |   5 ++
+ board/asus/grouper/Kconfig                         |   8 ----
+ board/asus/grouper/Makefile                        |   4 +-
+ board/asus/grouper/configs/grouper_E1565.config    |   6 ++-
+ board/asus/grouper/configs/grouper_PM269.config    |   6 ++-
+ board/asus/grouper/configs/tilapia.config          |   6 ++-
+ board/asus/grouper/grouper-spl-max.c               |   2 +-
+ board/asus/grouper/grouper-spl-ti.c                |   2 +-
+ board/asus/grouper/grouper.c                       | 153 +----------------------------------------------------------
+ board/asus/transformer-t30/Kconfig                 |  10 ----
+ board/asus/transformer-t30/configs/tf600t.config   |   2 +-
+ board/asus/transformer-t30/transformer-t30-spl.c   |   2 +-
+ board/asus/transformer-t30/transformer-t30.c       | 120 +---------------------------------------------
+ board/htc/endeavoru/endeavoru-spl.c                |   2 +-
+ board/htc/endeavoru/endeavoru.c                    |  71 +--------------------------
+ board/lg/x3-t30/x3-t30-spl.c                       |   2 +-
+ board/lg/x3-t30/x3-t30.c                           |  93 +-----------------------------------
+ configs/endeavoru_defconfig                        |   4 ++
+ configs/grouper_common_defconfig                   |   1 +
+ configs/transformer_t30_defconfig                  |   5 ++
+ configs/x3_t30_defconfig                           |   4 ++
+ 31 files changed, 123 insertions(+), 472 deletions(-)
+
+Branch contains device tree improvents for Paz00 and DM PMIC convertion
+of recently merged Tegra boards.
+
+Thanks,
+Svyatoslav Ryhel.
