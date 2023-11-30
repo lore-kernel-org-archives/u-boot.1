@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 554DAC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 15:12:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202BCC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 15:13:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9904D86BA8;
-	Thu, 30 Nov 2023 16:12:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 634D187613;
+	Thu, 30 Nov 2023 16:13:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KhInOq6U";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aw1cA1vb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD56286F64; Thu, 30 Nov 2023 16:12:09 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 54CBB87613; Thu, 30 Nov 2023 16:13:25 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBD3286BA2
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 16:12:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0194786BA2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 16:13:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3AUFBuxD081699;
- Thu, 30 Nov 2023 09:11:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701357116;
- bh=xNvdxB6XukVGCuy1Z/Pteznz1vQOZx18TQxUEtfQH9o=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=KhInOq6UcDbsdXW1yzYM8p32Y5hMYv/pEBI9Yyj0UHFArbsZBiuV5VN93VXDWcqf4
- +A6+XPhLrh46gnGgrPpuulqbLl6HARyaZUzwCA9q/ibVQH412mjhqQHMvZbyE1llFN
- AVaXUbqk1SMm9GS+d9Ya9g6YJx2ESJ344nHm72vI=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3AUFBurc084299
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 30 Nov 2023 09:11:56 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 30
- Nov 2023 09:11:56 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 30 Nov 2023 09:11:56 -0600
-Received: from [10.249.32.108] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3AUFBt2f070637;
- Thu, 30 Nov 2023 09:11:55 -0600
-Message-ID: <26046a5c-561b-4f10-a752-f3a0a011989c@ti.com>
-Date: Thu, 30 Nov 2023 09:11:55 -0600
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 70FB161F34
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:13:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E3B2C433CB
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:13:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701357195;
+ bh=myWQia6fhUNAoIbKogEMdzyxJa5+F95VagADayo2ZsE=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=aw1cA1vb3s+YGPMjLLGTcPkhkPJzDfK6PQHSlnjkBgX/H8l0Cu2Yd5L4RrxObLSVW
+ wiH9uM2j/XLxV5L/Ezarwau3hcjXSCSIiTrbozsT9wjnXjZSP0POJU5YjkCtv77Nvn
+ wBoI4NHJDWr9s8rsgXyIdchBgNpTbN7m46vrdKJD1MR91NKMEj6DFw129JHdavELsF
+ /kX7+2m/daWVKHq9QQhQ1sZtBmSqQ39vgB/q+MtsSGUs3lFWsVen03iOd/vP05d3iX
+ S0+kVhiwlfR2FZeGgCwodkrwrO/1VQ8UHHzJOVoklverYp7JNx5FBdzp4eT5W7bLBY
+ pHRRdeLd1S9Ug==
+Received: by mail-oa1-f47.google.com with SMTP id
+ 586e51a60fabf-1fa618c0e61so494113fac.1
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 07:13:15 -0800 (PST)
+X-Gm-Message-State: AOJu0Yzo+bT56RZsrJQHoJhCQ8xOPyMdA7v0OwjUh3RiN6BT+1LDaK8n
+ FcCJO3xYrvdZX/novIKWe7ScSaGHt9+Ia8woY+U=
+X-Google-Smtp-Source: AGHT+IEW+K2lD/B2JE4Lr0+Sk7l1d6EqA4tooaxvtrrBERAYgC8JMsuQkDEI5Uq9Bu24CYAB0+6UiX9/c42YFJFFSuA=
+X-Received: by 2002:a05:6870:3452:b0:1fa:dd5f:77b9 with SMTP id
+ i18-20020a056870345200b001fadd5f77b9mr138085oah.19.1701357194465; Thu, 30 Nov
+ 2023 07:13:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 12/17] arm: dts: Introduce j784s4 u-boot dts files
-Content-Language: en-US
-To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Dasnavis Sabiya <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20231130115552.3580995-1-a-nandan@ti.com>
- <20231130115552.3580995-13-a-nandan@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231130115552.3580995-13-a-nandan@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231129172200.430674-1-sjg@chromium.org>
+ <20231129172200.430674-3-sjg@chromium.org>
+ <ZWhFtcrZV2FYQ_D6@bergen.fjasle.eu>
+In-Reply-To: <ZWhFtcrZV2FYQ_D6@bergen.fjasle.eu>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Fri, 1 Dec 2023 00:12:37 +0900
+X-Gmail-Original-Message-ID: <CAK7LNARNw0czgf-YE5mvA__tCGi=6wi-03p9LfJVEBfJZ_EYqg@mail.gmail.com>
+Message-ID: <CAK7LNARNw0czgf-YE5mvA__tCGi=6wi-03p9LfJVEBfJZ_EYqg@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
+To: Nicolas Schier <nicolas@fjasle.eu>
+Cc: Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org, 
+ Tom Rini <trini@konsulko.com>, lkml <linux-kernel@vger.kernel.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>, 
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Will Deacon <will@kernel.org>, linux-kbuild@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,225 +85,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/30/23 5:55 AM, Apurva Nandan wrote:
-> Introduce the base dts files needed for u-boot or to augment the linux
-> dtbs for use in the u-boot-spl and u-boot binaries.
-> 
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> [ add binman and ddr dtsi files ]
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> ---
->   arch/arm/dts/Makefile                        |    3 +-
->   arch/arm/dts/k3-j784s4-binman.dtsi           |  346 +
->   arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi | 8757 +++++++++++++++++
->   arch/arm/dts/k3-j784s4-ddr.dtsi              | 8858 ++++++++++++++++++
->   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi       |   25 +
->   arch/arm/dts/k3-j784s4-r5-evm.dts            |  105 +
->   6 files changed, 18093 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/k3-j784s4-binman.dtsi
->   create mode 100644 arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->   create mode 100644 arch/arm/dts/k3-j784s4-ddr.dtsi
->   create mode 100644 arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
->   create mode 100644 arch/arm/dts/k3-j784s4-r5-evm.dts
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 1a63ccba8e..b73f8a9230 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -1409,7 +1409,8 @@ dtb-$(CONFIG_SOC_K3_J721S2) += k3-am68-sk-base-board.dtb\
->   			       k3-j721s2-common-proc-board.dtb\
->   			       k3-j721s2-r5-common-proc-board.dtb
->   dtb-$(CONFIG_SOC_K3_J784S4) += k3-am69-sk.dtb\
-> -			       k3-j784s4-evm.dtb
-> +			       k3-j784s4-evm.dtb\
-> +			       k3-j784s4-r5-evm.dtb
->   dtb-$(CONFIG_SOC_K3_AM642) += k3-am642-evm.dtb \
->   			      k3-am642-r5-evm.dtb \
->   			      k3-am642-sk.dtb \
-> diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
-> new file mode 100644
-> index 0000000000..7349c2ba38
-> --- /dev/null
-> +++ b/arch/arm/dts/k3-j784s4-binman.dtsi
-> @@ -0,0 +1,346 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-> + */
-> +
-> +#include "k3-binman.dtsi"
-> +
-> +#ifdef CONFIG_TARGET_J784S4_R5_EVM
-> +
-> +&rcfg_yaml_tifs {
-> +	config = "tifs-rm-cfg.yaml";
-> +};
-> +
-> +&binman {
-> +	tiboot3-j784s4-hs-evm.bin {
-> +		filename = "tiboot3-j784s4-hs-evm.bin";
-> +
-> +		ti-secure-rom {
-> +			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
-> +				<&combined_dm_cfg>, <&sysfw_inner_cert>;
-> +			combined;
-> +			dm-data;
-> +			sysfw-inner-cert;
-> +			keyfile = "custMpk.pem";
-> +			sw-rev = <1>;
-> +			content-sbl = <&u_boot_spl>;
-> +			content-sysfw = <&ti_fs_enc>;
-> +			content-sysfw-data = <&combined_tifs_cfg>;
-> +			content-sysfw-inner-cert = <&sysfw_inner_cert>;
-> +			content-dm-data = <&combined_dm_cfg>;
-> +			load = <0x41c00000>;
-> +			load-sysfw = <0x40000>;
-> +			load-sysfw-data = <0x66800>;
-> +			load-dm-data = <0x41c80000>;
-> +		};
-> +
-> +		u_boot_spl: u-boot-spl {
-> +			no-expanded;
-> +		};
-> +
-> +		ti_fs_enc: ti-fs-enc.bin {
-> +			filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-enc.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +		combined_tifs_cfg: combined-tifs-cfg.bin {
-> +			filename = "combined-tifs-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +
-> +		sysfw_inner_cert: sysfw-inner-cert {
-> +			filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-cert.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +		combined_dm_cfg: combined-dm-cfg.bin {
-> +			filename = "combined-dm-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +	};
-> +};
-> +
-> +&binman {
-> +	tiboot3-j784s4-hs-fs-evm.bin {
-> +		filename = "tiboot3-j784s4-hs-fs-evm.bin";
-> +
-> +		ti-secure-rom {
-> +			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
-> +				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-> +			combined;
-> +			dm-data;
-> +			sysfw-inner-cert;
-> +			keyfile = "custMpk.pem";
-> +			sw-rev = <1>;
-> +			content-sbl = <&u_boot_spl_fs>;
-> +			content-sysfw = <&ti_fs_enc_fs>;
-> +			content-sysfw-data = <&combined_tifs_cfg_fs>;
-> +			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
-> +			content-dm-data = <&combined_dm_cfg_fs>;
-> +			load = <0x41c00000>;
-> +			load-sysfw = <0x40000>;
-> +			load-sysfw-data = <0x66800>;
-> +			load-dm-data = <0x41c80000>;
-> +		};
-> +
-> +		u_boot_spl_fs: u-boot-spl {
-> +			no-expanded;
-> +		};
-> +
-> +		ti_fs_enc_fs: ti-fs-enc.bin {
-> +			filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-fs-enc.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
-> +			filename = "combined-tifs-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +
-> +		sysfw_inner_cert_fs: sysfw-inner-cert {
-> +			filename = "ti-sysfw/ti-fs-firmware-j784s4-hs-fs-cert.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +		combined_dm_cfg_fs: combined-dm-cfg.bin {
-> +			filename = "combined-dm-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +	};
-> +};
-> +
-> +&binman {
-> +	tiboot3-j784s4-gp-evm.bin {
-> +		filename = "tiboot3-j784s4-gp-evm.bin";
-> +		symlink = "tiboot3.bin";
-> +
-> +		ti-secure-rom {
-> +			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
-> +				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-> +			combined;
-> +			dm-data;
-> +			content-sbl = <&u_boot_spl_unsigned>;
-> +			load = <0x41c00000>;
-> +			content-sysfw = <&ti_fs_gp>;
-> +			load-sysfw = <0x40000>;
-> +			content-sysfw-data = <&combined_tifs_cfg_gp>;
-> +			load-sysfw-data = < 0x66800>;
-> +			content-dm-data = <&combined_dm_cfg_gp>;
-> +			load-dm-data = <0x41c80000>;
-> +			sw-rev = <1>;
-> +			keyfile = "ti-degenerate-key.pem";
-> +		};
-> +
-> +		u_boot_spl_unsigned: u-boot-spl {
-> +			no-expanded;
-> +		};
-> +
-> +		ti_fs_gp: ti-fs-gp.bin {
-> +			filename = "ti-sysfw/ti-fs-firmware-j784s4-gp.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
-> +			filename = "combined-tifs-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +
-> +		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
-> +			filename = "combined-dm-cfg.bin";
-> +			type = "blob-ext";
-> +		};
-> +
-> +	};
-> +};
-> +#endif
-> +
-> +#ifdef CONFIG_TARGET_J784S4_A72_EVM
-> +
-> +#define SPL_J784S4_EVM_DTB "spl/dts/k3-j784s4-evm.dtb"
-> +
-> +#define J784S4_EVM_DTB "u-boot.dtb"
-> +
+On Thu, Nov 30, 2023 at 5:26=E2=80=AFPM Nicolas Schier <nicolas@fjasle.eu> =
+wrote:
+>
+> Simon,
+>
+> thanks for the patch!  Below are some nitpicks and bike-shedding
+> questions.
+>
+> On Wed 29 Nov 2023 10:21:53 GMT, Simon Glass wrote:
+> > Add a script which produces a Flat Image Tree (FIT), a single file
+> > containing the built kernel and associated devicetree files.
+> > Compression defaults to gzip which gives a good balance of size and
+> > performance.
+> >
+> > The files compress from about 86MB to 24MB using this approach.
+> >
+> > The FIT can be used by bootloaders which support it, such as U-Boot
+> > and Linuxboot. It permits automatic selection of the correct
+> > devicetree, matching the compatible string of the running board with
+> > the closest compatible string in the FIT. There is no need for
+> > filenames or other workarounds.
+>
+> Have you thought about updating the arch/mips ITB rules to also use the
+> new scripts/make_fit.py?  Or is the FIT/ITB format for mips different
+> from the one for arm64?
 
-Why not define this as "arch/arm/dts/k3-j784s4-evm.dtb"? Seems we use this
-as a hacky way to change this item based on CONFIG_DEFAULT_DEVICE_TREE as
-that DT will be renamed "u-boot.dtb". But I'm not sure what that gains us.
-And why only do it for U-Boot and not SPL_? If runtime selection is not
-working then we still have the wrong DTB for SPL just the same.
 
-It also means we have in some builds we have a node named "j784s4_evm_dtb"
-that contains the SK DTB, and the node called "am69_sk_dtb" *also* contains
-the SK DTB..
 
-Andrew
+I recommend not touching MIPS at this moment
+because this tool simply picks up *.dtb files
+that exist under arch/*/boot/dts/, some of which
+may be stale files.
+
+
+
+
+Think of this scenario:
+
+
+[1] Enable CONFIG_ARCH_FOO and build
+
+   foo.dtb
+
+will be created.
+
+
+[2] Next, disable CONFIG_ARCH_FOO and
+    enable CONFIG_ARCH_BAR, and build.
+
+   bar.dtb
+
+will be created.
+
+
+This script will pick up both foo.dtb and bar.dtb
+although foo.dtb is a left-over from the previous build.
+
+
+
+Without cleaning, stale *.dtb will accumulate
+and unwanted files will be included in image.fit.
+
+
+
+Currently, MIPS hard-codes its files.
+It always works in a deterministic way.
+
+
+
+
+I do not request Simon to implement everything perfectly
+because I know that would require much more effort.
+
+We could do something like modules.order to list out the
+dtb files from the current build, but I am not asking for it
+in this patchset.
+
+
+
+But, you are right. This tool is not arm64-specific at all
+(and that is the reason why I think the MAINTAINERS
+entry is a little odd)
+Perhaps it can be applicable to MIPS after everything
+works correctly.
+
+
+
+
+
+
+
+> >  ARM ARCHITECTED TIMER DRIVER
+> >  M:   Mark Rutland <mark.rutland@arm.com>
+> >  M:   Marc Zyngier <maz@kernel.org>
+> > diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+> > index 1bd4fae6e806..18e092de7cdb 100644
+> > --- a/arch/arm64/Makefile
+> > +++ b/arch/arm64/Makefile
+> > @@ -36,6 +36,8 @@ ifeq ($(CONFIG_BROKEN_GAS_INST),y)
+> >  $(warning Detected assembler with broken .inst; disassembly will be un=
+reliable)
+> >  endif
+> >
+> > +KBUILD_DTBS      :=3D dtbs
+>
+> Might you want to use tabs here as in the lines below?
+
+
+
+This should not exist in the first place.
+
+
+  image.fit: dtbs
+
+
+is better.
+
+
+
+
+
+
+
+
+
+--
+Best Regards
+Masahiro Yamada
