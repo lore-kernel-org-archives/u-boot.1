@@ -4,77 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB4ACC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:40:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369A8C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:45:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 366328709A;
-	Thu, 30 Nov 2023 21:40:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
+	by phobos.denx.de (Postfix) with ESMTP id 2312587663;
+	Thu, 30 Nov 2023 21:45:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="fsX/5Ikp";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="FjaGKIGn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD0FA87631; Thu, 30 Nov 2023 21:40:00 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 218B187116; Thu, 30 Nov 2023 21:45:39 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D02F080245
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:39:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=conclusive.pl
+ by phobos.denx.de (Postfix) with ESMTPS id 1865D8770B
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:45:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a02ba1f500fso204682166b.0
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:39:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=conclusive.pl; s=google; t=1701376798; x=1701981598; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JWl9SLM6FofBz5rNo9LeVvAXU6Fd4RJA3cyuAHSgLL8=;
- b=fsX/5IkpkNwepqF4Xcozk3caVxTnM99Hk0rhi4FhaGBtJBGIPssHEaKY/l8krwa58h
- reT0TWtpTPf7cPM2SHXHwVlAs/lIB+y3RtmINQIQLGRFzlpWvZoJtBC8veekE17NEGkP
- uPKoI8abga5u1KGzjCh3yBrDdLRUn8osO2RtURMpHYJ4lvaljjCFkBnTjwZt0WcuymS9
- Fa45qA7VQP7KEudoRi/jnx3zVPrk03OKoROKTQcGMVzawg4Qgdl8BkrrccYYraaQRG2C
- XIKrFA972kFbvPNKboemBuXE03ygWIe30fVfyyRRiCTjTW/LycwjO05bHX2J2blqB2XD
- Sxhg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701376798; x=1701981598;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JWl9SLM6FofBz5rNo9LeVvAXU6Fd4RJA3cyuAHSgLL8=;
- b=Nf5XhHahpapk+iYG4rThhTX5VTN9E7VtpmRLsTCM2HFY2Gf6kPBAv93EzL9WCiwUKO
- aIWnwzdOPRDugNDbFTC429pqDQERqRcP9kGv04gZ6IY+VYUtHDpr2YOmAbNFw6MwV6xZ
- 70GKBbBO1fqY/TC1wUT37f00Qnug3QhlQkm865BiyIoO+6HymC9g806r5GNeaHAvr7iQ
- E8pXIu3U/hKFw6sUDkcevaOOaiMSTsfj0LNl00rwTr5cietEMaBRhp3Htc68VsoTSPid
- Ln4cM4jaXwON/4CRf49oxfWJTcaiN+42uvysA//XP3jM9O0lTBbIt+r3dupUJBvW7jlR
- 5+5g==
-X-Gm-Message-State: AOJu0YxNuRDR/3kcVo7tkEIA7mo2pvPckSnTpeygUDDxxi8j/aqcejSR
- QXOJFiqJQdM08CYNfFq+1rR6+A==
-X-Google-Smtp-Source: AGHT+IG+Ch5tuczlExq+VnIiCA7RTuRqUUveeUgx8DiuWiivJS2QrhGcKUx2amlm1ia8Yg14fcfstg==
-X-Received: by 2002:a17:906:1848:b0:a18:ad93:460d with SMTP id
- w8-20020a170906184800b00a18ad93460dmr91477eje.69.1701376798116; 
- Thu, 30 Nov 2023 12:39:58 -0800 (PST)
-Received: from localhost.localdomain (83.22.185.31.ipv4.supernova.orange.pl.
- [83.22.185.31]) by smtp.gmail.com with ESMTPSA id
- j21-20020a170906279500b009dddec5a96fsm1073268ejc.170.2023.11.30.12.39.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 12:39:57 -0800 (PST)
-From: Artur Rojek <artur@conclusive.pl>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Jakub Klama <jakub@conclusive.pl>
-Cc: Wojciech Kloska <wojciech@conclusive.pl>,
- =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
- u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH] net: phy: realtek: Add support for LED configuration
-Date: Thu, 30 Nov 2023 21:39:19 +0100
-Message-ID: <20231130203919.757-1-artur@conclusive.pl>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 66024aa6-8fc1-11ee-90ec-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 66024aa6-8fc1-11ee-90ec-00505699b430;
+ Thu, 30 Nov 2023 21:45:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=wRBnsSMpxk47NJ9LiZMl2l9xDx5Ziq6j0PVG+dHYc8E=;
+ b=FjaGKIGnL1kmmFtqU119hjr2sC41M0kRKWSkc8AoMpUarPVjUVcM5vnZihxBM/w+mfPRoL4tzlWK7
+ JhcIDfWC8MKD61Iof+svt2GH3w4xI4lhc9O3B0PL9UPRzO3ZlOO00/liaAabqa/ovzrQ2qDOQQmANn
+ daQycUkWZtIUpT7fn+brF2ZqzMvQsIrtwUqMheMM0xr0mAW6VHkuhFXOpw61pjlXXf+TswJ4v+/sY8
+ J7sDUTKvj+EG1/QQtiku9ePjYyNALknYsRAn87MXyDGZ0DBrjSV6S4w+b1jHA5xsb6mhgNqI6ABeFS
+ O87MOBpRqoclCe/tsRmn1GLUi0s9w1Q==
+X-KPN-MID: 33|wlX5AGLjZlt2jPjJLv3etq/dRXWbwi9deqQDFBCGGGqLuy3NlZzNo3yQyljvBG8
+ Gb4AosDeod+nJTy/1LhSUn0b1gshynD7WHrErsY19uFg=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|f+xYDDl8aMRj13hriGoQmFLoHCZSjtNrJZZGvkJ4GRomUqiBggRrbqJAYQtyxzG
+ UwK5xMJLuTRDscwbOVdI36w==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 6965e7d2-8fc1-11ee-ac85-00505699b758;
+ Thu, 30 Nov 2023 21:45:36 +0100 (CET)
+Date: Thu, 30 Nov 2023 21:45:35 +0100
+Message-Id: <87jzpz0y34.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: j@jannau.net
+Cc: kettenis@openbsd.org, trini@konsulko.com, u-boot@lists.denx.de,
+ asahi@lists.linux.dev
+In-Reply-To: <20231130-apple_t602x_extend_memmap-v1-1-cd96b251d2dc@jannau.net>
+ (message from Janne Grunau via B4 Relay on Thu, 30 Nov 2023 13:42:22
+ +0100)
+Subject: Re: [PATCH] arm: apple: t602x: Add missing MMIO regions to memmap
+References: <20231130-apple_t602x_extend_memmap-v1-1-cd96b251d2dc@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +75,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jakub Klama <jakub@conclusive.pl>
+> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+> Date: Thu, 30 Nov 2023 13:42:22 +0100
+> 
+> From: Janne Grunau <j@jannau.net>
+> 
+> The memory maps for Apple's M2 Pro/Max/Ultra left MMIO space out which
+> was not used by any driver at the time. The display out exposed as
+> simple-framebuffer use a power-domain controlled by a device in an
+> unmapped region.
+> Add a map covering this region as well as another MMIO region in the
+> range 0x4'0000'0000 - 0x5'0000'0000. The added regions cover all MMIO
+> annotated in Apple's device tree in this range.
+> 
+> Signed-off-by: Janne Grunau <j@jannau.net>
+> ---
+>  arch/arm/mach-apple/board.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 48 insertions(+)
 
-Introduce an ability to configure LED and Fiber LEDs found in RTL8211F
-PHYs. This is achieved through two optional Device Tree properties:
-* rtl,lcr  for LED control
-* rtl,flcr for Fiber LED control
+Hi Janne,
 
-Signed-off-by: Jakub Klama <jakub@conclusive.pl>
-Signed-off-by: Artur Rojek <artur@conclusive.pl>
----
- drivers/net/phy/realtek.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+Is there a reason why you can't use a SZ_1G mapping for the blocks
+where you're using a SZ_512M mapping?  With SZ_1G the mapping code
+will use a 1G block descriptor which avoids another level of page
+tables.
 
-diff --git a/drivers/net/phy/realtek.c b/drivers/net/phy/realtek.c
-index 396cac76d6..d078f41bee 100644
---- a/drivers/net/phy/realtek.c
-+++ b/drivers/net/phy/realtek.c
-@@ -59,6 +59,7 @@
- #define MIIM_RTL8211F_TX_DELAY		0x100
- #define MIIM_RTL8211F_RX_DELAY		0x8
- #define MIIM_RTL8211F_LCR		0x10
-+#define MIIM_RTL8211F_FLCR		0x12
- 
- #define RTL8201F_RMSR			0x10
- 
-@@ -220,6 +221,8 @@ default_delay:
- 
- static int rtl8211f_config(struct phy_device *phydev)
- {
-+	ofnode node = phy_get_ofnode(phydev);
-+	u32 lcr, flcr;
- 	u16 reg;
- 
- 	if (phydev->flags & PHY_RTL8211F_FORCE_EEE_RXC_ON) {
-@@ -254,14 +257,17 @@ static int rtl8211f_config(struct phy_device *phydev)
- 		reg &= ~MIIM_RTL8211F_RX_DELAY;
- 	phy_write(phydev, MDIO_DEVAD_NONE, 0x15, reg);
- 
--	/* restore to default page 0 */
--	phy_write(phydev, MDIO_DEVAD_NONE,
--		  MIIM_RTL8211F_PAGE_SELECT, 0x0);
--
--	/* Set green LED for Link, yellow LED for Active */
- 	phy_write(phydev, MDIO_DEVAD_NONE,
- 		  MIIM_RTL8211F_PAGE_SELECT, 0xd04);
--	phy_write(phydev, MDIO_DEVAD_NONE, 0x10, 0x617f);
-+
-+	if (ofnode_valid(node) && !ofnode_read_u32(node, "rtl,lcr", &lcr))
-+		phy_write(phydev, MDIO_DEVAD_NONE, MIIM_RTL8211F_LCR, lcr);
-+	else /* Set green LED for Link, yellow LED for Active */
-+		phy_write(phydev, MDIO_DEVAD_NONE, MIIM_RTL8211F_LCR, 0x617f);
-+
-+	if (ofnode_valid(node) && !ofnode_read_u32(node, "rtl,flcr", &flcr))
-+		phy_write(phydev, MDIO_DEVAD_NONE, MIIM_RTL8211F_FLCR, flcr);
-+
- 	phy_write(phydev, MDIO_DEVAD_NONE,
- 		  MIIM_RTL8211F_PAGE_SELECT, 0x0);
- 
--- 
-2.34.1
 
+> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> index 47393babbc..e05ec431bc 100644
+> --- a/arch/arm/mach-apple/board.c
+> +++ b/arch/arm/mach-apple/board.c
+> @@ -370,6 +370,22 @@ static struct mm_region t6020_mem_map[] = {
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>  			 PTE_BLOCK_NON_SHARE |
+>  			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x400000000,
+> +		.phys = 0x400000000,
+> +		.size = SZ_512M,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x480000000,
+> +		.phys = 0x480000000,
+> +		.size = SZ_1G,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>  	}, {
+>  		/* I/O */
+>  		.virt = 0x580000000,
+> @@ -471,6 +487,22 @@ static struct mm_region t6022_mem_map[] = {
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>  			 PTE_BLOCK_NON_SHARE |
+>  			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x400000000,
+> +		.phys = 0x400000000,
+> +		.size = SZ_512M,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x480000000,
+> +		.phys = 0x480000000,
+> +		.size = SZ_1G,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>  	}, {
+>  		/* I/O */
+>  		.virt = 0x580000000,
+> @@ -551,6 +583,22 @@ static struct mm_region t6022_mem_map[] = {
+>  		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+>  			 PTE_BLOCK_NON_SHARE |
+>  			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x2400000000,
+> +		.phys = 0x2400000000,
+> +		.size = SZ_512M,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+> +	}, {
+> +		/* I/O */
+> +		.virt = 0x2480000000,
+> +		.phys = 0x2480000000,
+> +		.size = SZ_1G,
+> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+> +			PTE_BLOCK_NON_SHARE |
+> +			PTE_BLOCK_PXN | PTE_BLOCK_UXN
+>  	}, {
+>  		/* I/O */
+>  		.virt = 0x2580000000,
+> 
+> ---
+> base-commit: 43f2873fa98b1da6eb56d756315c7bd7db63db27
+> change-id: 20231130-apple_t602x_extend_memmap-c82c522ca8c0
+> 
+> Best regards,
+> -- 
+> Janne Grunau <j@jannau.net>
+> 
+> 
