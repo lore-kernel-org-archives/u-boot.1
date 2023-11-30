@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6DD0C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC520C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2307E87671;
+	by phobos.denx.de (Postfix) with ESMTP id B118787680;
 	Thu, 30 Nov 2023 03:46:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RpFzA5nM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TyyxygqO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 463D787638; Thu, 30 Nov 2023 03:46:26 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 45A9287652; Thu, 30 Nov 2023 03:46:26 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5584787660
+ by phobos.denx.de (Postfix) with ESMTPS id 6013087665
  for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:46:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5cfc3a48ab2so4828027b3.0
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-da30fd994fdso1324917276.1
  for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:46:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701312381; x=1701917181; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lHmyVVBvU0s8JR4Ira3eLCfCpRgbYA5WyfD0twPlW/Y=;
- b=RpFzA5nMOWRmrf8oaWFG5ByWBgMrCqE8030GyZLIsnTRUcHnyJxV64iBDeI6xcLK9b
- k3IOeTpTseD0WIGHZjbicC7+Q6iAnDlZcXRG70v1UTMTxWju5fTyI1oMDdvgrg2LAGpI
- 1k+ApKZZ3dUZB/ZdNcDfoFJhx8XFBQwBxLqwU=
+ bh=R6eA8mHg0n/C0k76Xy0egRt3oukjNpiIJs6E9O0mhAU=;
+ b=TyyxygqO5TmxoI/Wr+JlyRBrgiarrgg1UXZcq8DGQyUqlufYO6E/80NGo45e0GOYwG
+ q7MXUGait3dkVYWknThgCC66RqPOaEgik3XgcxdllZuYKBTnADWpKiVr6s7FgdHhA6aZ
+ YM7iHan4r5ZQtekCRMGT9byVTQJUpZ3TiO2Lk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701312381; x=1701917181;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lHmyVVBvU0s8JR4Ira3eLCfCpRgbYA5WyfD0twPlW/Y=;
- b=FJzNXaLoIjaHWwfmYsXA6Ux941oQrHfRS1isNV3fMaz0PNOabIy/DKUJRs3o9G1Wzd
- j3CPZSYUoR0QMrCsFDQcW5zuwgIf0tltsgxQO6vqUkzUqJbFOGoUecdcLIlgdrccUPM4
- 3TtgSk5Z13xeYL+edtukYdEu0v6H95bH2jBWTI4i+LbA+aypsT64y6cKl2YdbuA9m9/M
- jL68r2vX0fqopzJs46WErh9OsD6k3wzj8N0cqOTyQx1JpK7MS2CbpwkkjoYgzoKEV9Ew
- XzbkQ47ucHKUU6CGcvi30Zh84NDci4thEMhxPsWJFZHV16sesID9ZGz/utGX6Cm5EPE3
- +9yA==
-X-Gm-Message-State: AOJu0YyiWBYfkg6D9ZBxSRnKWYldZOn9wLf77Qxu1xmFyA0cPD48IyjJ
- rKKOQ/atJrA9DD0J248yKJRz2lJA4jaO9gDtJGZfGw==
-X-Google-Smtp-Source: AGHT+IFbMiWB7AYlpJjg8nQ+zmCv6rfZ+UNG/egFSuLz4o4hbMHSlcN69pgT1+jOt3RXpvYpb/zdV1/b+0cFW1N2nQw=
-X-Received: by 2002:a05:690c:448d:b0:5d1:4412:1866 with SMTP id
- gr13-20020a05690c448d00b005d144121866mr7877943ywb.26.1701312380814; Wed, 29
+ bh=R6eA8mHg0n/C0k76Xy0egRt3oukjNpiIJs6E9O0mhAU=;
+ b=rwP0pyI1M3z/2MbvYgnswX4a22one5lVCdc8afkau9LZFYeliC/tjx6TFKekUSJDVC
+ Q5nHcvtI2TF5Yh8WNZ/rqURa+ROUeYpru9PjRcRxB3kqU2O2r85NpRsCL1AT27Mv/Uke
+ KBEzYs9NRhU7dll1SFhsYhuTkIIiJbkBTAdxhKk6vxztIFUpXLWqUW8kRhcT2pBSoMxt
+ L9RlG8hWpv0S4Wn2j4wcs2yp0pJRW0Zv0umIvS2JCLtigRxDKdl2SJ7XFV1PEL7LvhD+
+ kHNOqhB0UHzIweUjcNOvIWrApVk+PqAKZd/0B22AiKfaFKTHGOdG0T+daJmAU5H07UCb
+ W3og==
+X-Gm-Message-State: AOJu0YwFS1OqF2StE4t77rBe0aYEDh1sUe5uCEA+gN7IUdtQalOTpyvn
+ CJDg/jLDc4NqyCOn3Oo4raA1srrGhitCWJkeT6Ztgw==
+X-Google-Smtp-Source: AGHT+IEA1S1ai91MJu58t5Kj+iEfi/SvXdPD9TyCwzpv6ycorZG7cKnxEtRbTaY/ESlJFOU1d2f4BXzzayZ8xYD1dGI=
+X-Received: by 2002:a25:ac43:0:b0:d9a:c0af:9da with SMTP id
+ r3-20020a25ac43000000b00d9ac0af09damr15257916ybd.28.1701312380797; Wed, 29
  Nov 2023 18:46:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
- <20231121070028.2614095-2-sughosh.ganu@linaro.org>
- <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
- <CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com>
- <CAC_iWjKKas=zkMyJeNvLmcPWh2wjbE=aw_-Nugano3HYWX2+4Q@mail.gmail.com>
- <CADg8p96mfEtCySQyXPLqKuwnYu7BPO5guoz9+0452aujgs-zsg@mail.gmail.com>
-In-Reply-To: <CADg8p96mfEtCySQyXPLqKuwnYu7BPO5guoz9+0452aujgs-zsg@mail.gmail.com>
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+ <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+ <20231004135436.ihofrxutzcdefica@audacious>
+ <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
+ <20231005163645.GS8465@bill-the-cat>
+ <20231005171010.zvza7uqyn4mcgp5g@handsaw>
+ <20231005171614.yiatmyczip2jnmf4@surround>
+ <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
+ <20231106055351.f2fny5ys6avi5qnk@ula0497581>
+ <20231106153159.GH496310@bill-the-cat>
+ <736c04ab-9c48-4957-b242-fcbde0ace68b@ti.com>
+ <CAPnjgZ1JTcybX9sRFQtddcwefLum6_+ynQSWbQ=4NVdO6eAxhg@mail.gmail.com>
+ <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
+In-Reply-To: <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 19:45:40 -0700
-Message-ID: <CAPnjgZ09vvyhBTUW03armbz_sevRr0qQeqL2vaQ3BNq+Wo9_dA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] tools: mkeficapsule: Add support for parsing capsule
- params from config file
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Wed, 29 Nov 2023 19:45:30 -0700
+Message-ID: <CAPnjgZ06tDBGko7RxO_ec1hKYqOhfhY9D7FdPiaVcDxaomeUDA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+To: Andrew Davis <afd@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Nishanth Menon <nm@ti.com>, 
+ Roger Quadros <rogerq@kernel.org>, vigneshr@ti.com, jonas@kwiboo.se, srk@ti.com,
+ bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,113 +96,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Andrew,
 
-On Wed, 22 Nov 2023 at 00:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 6 Nov 2023 at 11:05, Andrew Davis <afd@ti.com> wrote:
 >
-> hi Ilias,
->
-> On Wed, 22 Nov 2023 at 13:06, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On 11/6/23 11:47 AM, Simon Glass wrote:
+> > Hi Andrew,
 > >
-> > Hi all,
+> > On Mon, 6 Nov 2023 at 10:27, Andrew Davis <afd@ti.com> wrote:
+> >>
+> >> On 11/6/23 9:31 AM, Tom Rini wrote:
+> >>> On Mon, Nov 06, 2023 at 11:23:51AM +0530, Manorit Chawdhry wrote:
+> >>>> Hi Simon,
+> >>>>
+> >>>> On 11:22-20231005, Simon Glass wrote:
+> >>>>> Hi Nishanth,
+> >>>>>
+> >>>>> On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
+> >>>>>>
+> >>>>>> On 12:10-20231005, Nishanth Menon wrote:
+> >>>>>>> On 12:36-20231005, Tom Rini wrote:
+> >>>>>>>> On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
+> >>>>>>>>> On 10/4/23 8:54 AM, Nishanth Menon wrote:
+> >>>>>>>>>> On 08:48-20231004, Andrew Davis wrote:
+> >>>>>>>>>>> On 10/4/23 8:23 AM, Roger Quadros wrote:
+> >>>>>>>>>>>> ti_mmc is not a valid boot_target for standard boot flow so
+> >>>>>>>>>>>
+> >>>>>>>>>>> Is there some way to make it into a valid boot_target? Otherwise
+> >>>>>>>>>>> how do we use uEnv.txt files, or boot from FIT images with overlays?
+> >>>>>>>>>>
+> >>>>>>>>>> envboot takes care of uEnv.txt file (see
+> >>>>>>>>>> https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
+> >>>>>>>>>>
+> >>>>>>>>>> Early remote proc loading and FIT image is a question for stdboot itself.
+> >>>>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>> If stdboot is missing these features then we shouldn't switch until it
+> >>>>>>>>> has them. I'm all for switching to this, but only if it is complete.
+> >>>>>>>>
+> >>>>>>>> Depends on what you mean?  Did you mean an option to run scripts
+> >>>>>>>> (exists) or an option to do what TI needs done, via
+> >>>>>>>> boot/bootmeth_something.c ?  If the latter, someone from TI needs to
+> >>>>>>>> figure out what that should be and do (but plumbing-wise everything it
+> >>>>>>>> needs should exist).
+> >>>>>>>
+> >>>>>>> Andrew is generalizing here (on the wrong patch though).
+> >>>>>>>
+> >>>>>>> On am62x platforms, there is nothing regressing with this series. The
+> >>>>>>> challenge is early remote_proc loading which is done for J7* platforms.
+> >>>>>>>
+> >>>>>>> How that is initiated as part of bootmethods is something of a gap.
+> >>>>>>>
+> >>>>>>> The other gap has been support for uEnv.txt -> which we can workaround
+> >>>>>>> at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
+> >>>>>>> -lb" in defconfig (This series from Roger already does that - hence I am
+> >>>>>>> saying that Andrew is complaining on the wrong series).
+> >>>>>>>
+> >>>>>>> Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
+> >>>>>>> uEnv.txt remoteproc loads and the various standard bootmethods should
+> >>>>>>> "just work".
+> >>>>>>
+> >>>>>>
+> >>>>>> I forgot to add: FIT image authenticated boot flow. That is really what
+> >>>>>> ti_mmc distroboot method was trying to solve.
+> >>>>>>
+> >>>>>> Maybe Simon or someone know how the stdboot flow handles authenticated
+> >>>>>> kernel image and dtb boot flow with FIT image?
+> >>>>>
+> >>>>> Yes you can use FIT configuration verification and things should work as normal.
+> >>>>>
+> >>>>
+> >>>> Could you give any reference documentation for this?
+> >>>
+> >>> I suspect you should start with doc/usage/fit/beaglebone_vboot.rst
+> >>>
+> >>
+> >>   From that doc:
+> >>
+> >> ```
+> >> Boot the board using the commands below::
+> >>
+> >>       setenv bootargs console=ttyO0,115200n8 quiet root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait
+> >>       ext2load mmc 0:2 82000000 /boot/image.fit
+> >>       bootm 82000000
+> >> ```
+> >>
+> >> This is very much not stdboot :( This doc has some good and current info on building
+> >> a secure FIT image, but much of it is showing its age. Stdboot is still missing
+> >>
+> >>    * ability to limit boot mode search to only one image (FIT)
 > >
-> > On Wed, 22 Nov 2023 at 07:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > hi Simon,
-> > >
-> > > On Wed, 22 Nov 2023 at 03:42, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Sughosh,
-> > > >
-> > > > On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > Add support for specifying the parameters needed for capsule
-> > > > > generation through a config file, instead of passing them through
-> > > > > command-line. Parameters for more than a single capsule file can be
-> > > > > specified, resulting in generation of multiple capsules through a
-> > > > > single invocation of the command.
-> > > > >
-> > > > > The config file can then be passed to the mkeficapsule tool in such
-> > > > > manner
-> > > > >
-> > > > >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
-> > > > >
-> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > ---
-> > > > >  tools/Kconfig              |  15 ++
-> > > > >  tools/Makefile             |   1 +
-> > > > >  tools/eficapsule.h         | 114 ++++++++++++
-> > > > >  tools/mkeficapsule.c       |  87 +++++----
-> > > > >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
-> > > > >  5 files changed, 538 insertions(+), 31 deletions(-)
-> > > > >  create mode 100644 tools/mkeficapsule_parse.c
-> > > >
-> > > > This patch keeps coming back :-)
-> > > >
-> > > > Can we not add multiple capsules in the binman description? Why do we
-> > > > need a new file format? How can binman decode images produced in this
-> > > > way?
-> > >
-> > > So as Tom mentions, this brings parity with respect to the other
-> > > capsule generation tool in EDKII that generates capsules. IIRC, this
-> > > is something which even Xilix was interested in, and Michal had kind
-> > > of gone through these patches earlier. Lastly, it would be good to
-> > > have support in U-Boot's mkeficapsule tool for generating a single
-> > > capsule file with multiple payloads, and having support for this
-> > > functionality helps in that goal.
-> > >
-> > > Also, you might have noticed that, since your objection to the last
-> > > series, I have removed putting this in binman. So now, this aspect of
-> > > the capsule generation would only be supported through the
-> > > command-line invocation of the tool.
+> > What does this mean? Can you please be more specific or give an example?
 > >
-> > I think that overall the approach is sane. mkeficapsule is currently
-> > supported and compiled for distros, so the multiple payload support is
-> > useful. If we want to add support to binman, instead of rewriting this
-> > in python, we could just call that tool for parsing and creating
-> > capsules
 >
-> Given the amount of time these patches have been under review(also
-> number of iterations), I would request that this series be reviewed
-> and merged first. I think there is general consensus that there is
-> value to have this functionality in the mkeficapsule tool. If it is
-> deemed fit to support this through binman as well, that task can be
-> taken up separately. Thanks.
+> Sure, for instance with secure boot we only want to search for FIT images
+> and if for each media this fails we do not want to fall back to other
+> image types or boot modes (like UART boot or net boot which would bypass
+> the signature checks).
 
-The point you are missing is that it is the entire goal of 'skirting
-around' binman which is suspect.
+We could have something like:
 
-If there is a need to generate an output file from the build, we
-should support it in binman. If people start creating configuration
-files all over the place, then they are not using binman, right?
+bootstd {
+   image-types = "fit", "uimage";
+}
 
-I understand that there are pre-existing vendor-specific config files,
-etc. that the EFI thing is a grey area, but I cannot imagine that this
-patch would lead to a good outcome.
-
-The goal of binman is to bring order to the chaos of firmware
-packaging...we cannot do that if it is not actually used.
-
-So let's figure out what is missing from binman's capsule generation
-(multiple capsules? accept/reject capsules?) and how best to add it.
+to limit the supported types.
 
 >
-> -sughosh
+> Something similar is needed for searching for EFI compatible boot across
+> each enabled boot media first, before trying other methods on each media.
+> Basically breadth-first search on each media type not depth-first.
+
+How about:
+
+bootstd {
+   scan-order = "bootmeth,bootdev";   // instead of default "bootdev,bootmeth";
+};
+
+
 >
+> >>    * fetching and applying FIT overlay/config strings
 > >
-> > Thanks
-> > /Ilias
-> > >
-> > > >
-> > > > Also, could we get sandbox to produce one EFI capsule as part of the
-> > > > normal build? I think that discussion trailed off.
-> > >
-> > > Yes, apologies for missing out on this. Slipped my mind. Would you
-> > > want, say, all the non-signed capsules to be generated as part of the
-> > > sandbox build?
-> > >
-> > > -sughosh
+> > Re overlays, is this the 'extension' command? What are config strings?
+> >
+>
+> When we have DT overlays in our FIT image, we build a string to pass to
+> bootm to apply all the selected overlays[0]. If there is now another
+> mechanism for this please let me know (building this string today is messy).
+>
+> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L18
+
+My proposal for this is to implement extensions in FIT. This would
+have a new extensions nodes, so you can specify what extensions are
+available for each FIT configuration.
+
+configurations {
+   conf-1 {
+      compatible = ...
+      extensions = "ext1", "ext-2";
+   };
+
+extensions {
+   ext-1 {
+      fdto = "fdt-1";   // fdt overlay for this 'cape'
+      compatible = "vendor,combined-device1";
+      extensions = "ext3";
+   };
+
+   ext-2 {
+      fdto = "fdto-2";   // fdt overlay for this 'cape'
+      compatible = "vendor,device2";
+   };
+
+   ext-3 {
+      fdto = "fdto-3";
+      compatible = "vendor,device3";
+   };
+
+So FIT configurations now have a list of supported extensions. The
+extensions are hierarchical so that you can have ext1 which can
+optionally have ext-2 as well. This allows boards which share a lot of
+'capes' to be specified only ones.
+
+Extensions actually present are declared by a sysinfo driver for the
+board, with new methods:
+
+get_compat() - determine the compatible strings for the current platform
+get_ext() - get a list of compatible strings for extensions which are
+actually present
+
+The extension compatible strings are used to select the correct things
+from the FIT, apply the overlays and produce the final DT.
+
+>
+> >>    * remote proc loading
+> >
+> > What command can do this?
+> >
+>
+> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L28
+
+This could be a new property in bootstd:
+
+bootstd: {
+   probe-before = <&phandle of remoteproc>, ...
+};
+
+>
+> >>    * uEnv.txt processing
+> >
+> > What command can do this?
+> >
+>
+> run envboot;
+>
+> https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/mmc.env?ref_type=heads#L20
+
+This could be a new bootmeth which looks for uenv.txt on available
+devices. It might be better to put the env in a FIT or something with
+a checksum.
+
+>
+> >>
+> >> Last two can be solved by adding to CONFIG_BOOTCOMMAND before calling `bootflow scan`
+> >> as suggested above. Until we figure out the first two I don't see us ready to switch.
+> >
+> > I'm happy to help figure this out.
+> >
+>
+> Thanks, we are eager to standardize our boot flows and stdboot seems like the
+> right way forward, very happy to have your guidance on these last few items :)
 
 Regards,
 Simon
