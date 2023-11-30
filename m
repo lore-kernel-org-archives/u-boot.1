@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D242DC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:48:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82FBBC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:48:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5309A87688;
+	by phobos.denx.de (Postfix) with ESMTP id EB39287698;
 	Thu, 30 Nov 2023 03:46:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JBT12zPT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Leudqziq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C5B8082A; Thu, 30 Nov 2023 03:46:29 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id 193138758F; Thu, 30 Nov 2023 03:46:29 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0A728765E
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:46:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDBAC87671
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:46:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-db538b07865so185119276.2
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:46:24 -0800 (PST)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-db49aa82c89so408199276.1
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:46:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701312381; x=1701917181; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701312382; x=1701917182; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9b/wyl0BmhyikQ/DV/Sf+io1oXYWdyFB6FA7Qd7Pk8c=;
- b=JBT12zPTcGebQ+JtmTAAZ4HnWcl309/DxYIe23ip+zMwn6XQ08SSwAxmKYa1CFjqep
- aDlB0FjJG9VIpbgFkTCYenohaTsn77bTKPmzMff2/Mdoklt5gWDnGqnTGhKdI+/ug4xe
- QqLp6Lj4uHgmtNazr++Y65cPV9ylwhgGuowIE=
+ bh=J4vxWhM1z2DPATjnX9cfF6ymJFBOFC+vMgYRey/SEME=;
+ b=LeudqziqoHTIwOGi2mSlBGk6LH9KrW1o0KOvCXieKDqQHx4qbuYQgN2aEHJv0ILqVk
+ Q7GXDdo0GMJziBbqxQhTOHszpTtcFPCZAMeEjdoj43nWz9SgW5/1yL3PggHeI6yY1S46
+ Dnt/qf3ypWhKEeZAnsFI11m25heLEp0w3bWOo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701312381; x=1701917181;
+ d=1e100.net; s=20230601; t=1701312382; x=1701917182;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9b/wyl0BmhyikQ/DV/Sf+io1oXYWdyFB6FA7Qd7Pk8c=;
- b=Nvr2f3U/29gKVliU0TfrUEMK78I4hUwznEC7TnWEYnElpfZOlI119UGhtAaQ5pMfOO
- LKsrsO2UTmx5+Dx6PyR2SRRX3JmfYn/TkaoYs8vXRhRC+ZkGXhaZaSYJfv9uwTRvpAhF
- DNlUAjDg5dMDwyHkmqdKFrjI/frJLGKdthMkV2SF7dEKpPV1uEJgHRHorJ7whUFgvnSR
- P0dh5M1eZG6A3/+2HB9lajBA8zJh3gxsaFyepS6Op0rB/aMho9Q+PBJT7/zNF40ouX0a
- EQtoE2c8PIfB8bjAsklE9+5yAev2WCdn4hkDmpi2yu6x3ZNsP5t3aWzzT01UL9ttEdvI
- QMRg==
-X-Gm-Message-State: AOJu0Yw6bg0loeKNuhb22ptk8TXmNxJXDHbvvu38ajeI5zYQst+uUfUH
- h79tBoW0Xv7mN+ErceUZ947dmOJkgvSgf9jS94vcNj0XHGiNjlkuvgc=
-X-Google-Smtp-Source: AGHT+IEP+WKpg1FSsE+JxiWyjj9n2xpH6+8xf3Z5Sft9mgxw74EXiHBE/Uc4vDSdiUsZX5TDTaxaukweV+97VvfcynY=
-X-Received: by 2002:a25:fb04:0:b0:da0:38c8:2e66 with SMTP id
- j4-20020a25fb04000000b00da038c82e66mr19070091ybe.3.1701312380801; Wed, 29 Nov
- 2023 18:46:20 -0800 (PST)
+ bh=J4vxWhM1z2DPATjnX9cfF6ymJFBOFC+vMgYRey/SEME=;
+ b=vaKJDtfa4mnd6IValCIH9jEUgotMtDjwdUFbh8pXKeD57BKUfO86gKhN7k1Bb4tuMF
+ JO72x4DSunWUmpL/u5Pvwwe9TX+2et0UvgHQiUKUexk7SU1/aT8VrwQiiW0juy4iBbom
+ HYz0iFObs4t88p71q11LX1nbZR6RpJALUQIOzNJDsIDHYWil3AR5V80YON9F7iVVuMo9
+ GsnMF728X9zTAGXUPRzemrYo0b714pgT6YHCggaOr/Gx7EyR59HeiQHqPSTR2u328N0T
+ CR2OWi1U3ZnwC4dLwBJPO5gqOPFxM16wJnoM/aDMguig6mQiLsSegKWGlVtDBDkyOmB1
+ w0kQ==
+X-Gm-Message-State: AOJu0Ywo3TE/2fxUqE1yVMogi71pbumz96TlyuyINB50rqlrT2+Z2GwL
+ UhMCnWQXdZCY3ACKJhGf1Kl3lS1zFVN8Wk8kBR4IDw==
+X-Google-Smtp-Source: AGHT+IE2mXabI9103ArNgApjG7gmlSbHK3JrO+6/LCmqwldWMv5yT5p6qyQlAVwNnt1AIFx3/F4TB1aKCmqxG/+Lnb8=
+X-Received: by 2002:a25:aa51:0:b0:db3:fbef:3e37 with SMTP id
+ s75-20020a25aa51000000b00db3fbef3e37mr19227348ybi.8.1701312382254; Wed, 29
+ Nov 2023 18:46:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121113557.800353-1-sjg@chromium.org>
-In-Reply-To: <20231121113557.800353-1-sjg@chromium.org>
+References: <20211020123742.31098-1-andriy.shevchenko@linux.intel.com>
+ <3a272671-7c96-4644-a4ee-05257c7efb30@canonical.com>
+In-Reply-To: <3a272671-7c96-4644-a4ee-05257c7efb30@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 19:45:42 -0700
-Message-ID: <CAPnjgZ2i4ivjUHSQGQyvyTR1dJ-sKJZOu+iWYWZj4wyVA0NJLg@mail.gmail.com>
-Subject: Re: [PATCH 0/7] efi: Partial attempt at a test for EFI bootmeth
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 29 Nov 2023 19:45:43 -0700
+Message-ID: <CAPnjgZ3X9hC_n3pqgsDcAuoAfP6yEwQCG0h=PXq-oDj_cwpozQ@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] Makefile.lib: Always rebuild DSDT
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,52 +84,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On Tue, 21 Nov 2023 at 04:36, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 29 Nov 2023 at 10:17, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> The test coverage for the EFI bootmeth is incomplete since it does not
-> actually boot the application.
+> On 20.10.21 14:37, Andy Shevchenko wrote:
+> > The dsdt.asl is usually combined out of several files that are included
+> > in the main one. Whenever we change the content of any of such files,
+> > build system is not able to recognize them. Hence the easiest way is to
+> > force DSDT rebuild each time we run make.
+> >
+> > Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 >
-> This series makes an attempt at this.
+> The build process that you describe is not in our documentation.
 >
-> However there are at least two problems:
-> 1. The test does not set up the loaded image properly, so it isn't
-> found by the app.
-> 2. The test needs to use USB instead of mmc, so that usb_stop() is
-> called
+> By which defconfig is $(src)/dsdt.asl consumed? Where does it come from?
+> Please, provide a reproducible example.
+>
+> Would you be able to provide a documentation patch explaining how to use
+> a user provided dsdt.asl file?
+>
+> Best regards
+>
+> Heinrich
+>
+>
+> > ---
+> >   scripts/Makefile.lib | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > index 07696e86bb54..8c3c893b398a 100644
+> > --- a/scripts/Makefile.lib
+> > +++ b/scripts/Makefile.lib
+> > @@ -441,7 +441,7 @@ cmd_acpi_c_asl=         \
+> >       iasl -p $@ -tc $(ASL_TMP) $(if $(KBUILD_VERBOSE:1=), >/dev/null) && \
+> >       mv $(patsubst %.c,%.hex,$@) $@
+> >
+> > -$(obj)/dsdt.c:    $(src)/dsdt.asl
+> > +$(obj)/dsdt.c:    $(src)/dsdt.asl FORCE
+> >       $(call cmd,acpi_c_asl)
+> >       $(Q)sed -i -e "s,dsdt_aml_code,AmlCode," $@
+> >
+>
 
-I think you may have missed the point of this series. I am not sure
-how to fix problem #1 above. Do you know what is going on, or could
-you help figure it out, please?
-
->
->
-> Simon Glass (7):
->   efi: Use puts() in cout so that console recording works
->   efi: Show the vendor in helloworld
->   efi: test: Create a disk image with and EFI app in it
->   WIP: efi: Disable ANSI output
->   WIP: efi: Add a test for the EFI bootmeth
->   WIP: efi: Allow helloworld to exit boot services
->   WIP: efi: debugging
->
->  arch/sandbox/dts/test.dts     | 10 ++++++-
->  boot/bootflow.c               |  2 ++
->  boot/bootmeth_efi.c           |  1 +
->  cmd/bootefi.c                 |  1 +
->  include/efi_loader.h          | 14 +++++++--
->  lib/efi_loader/efi_boottime.c |  5 ++++
->  lib/efi_loader/efi_console.c  | 19 +++++-------
->  lib/efi_loader/efi_setup.c    |  2 +-
->  lib/efi_loader/helloworld.c   | 39 ++++++++++++++++++++++++-
->  test/boot/bootflow.c          | 55 ++++++++++++++++++++++++++++++++++-
->  test/py/tests/test_ut.py      | 32 ++++++++++++++++++++
->  11 files changed, 163 insertions(+), 17 deletions(-)
->
-> --
-> 2.43.0.rc1.413.gea7ed67945-goog
->
+I agree that this patch is better than having the bug. But yes the
+docs could really use some notes here, for the person who does come
+along and clean up the dependency bug.
 
 Regards,
 Simon
