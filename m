@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852E5C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37DADC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 20:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA2C3876DC;
-	Thu, 30 Nov 2023 21:22:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B9778770A;
+	Thu, 30 Nov 2023 21:22:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hczmwX59";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FKCZ6/Lu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5A3387675; Thu, 30 Nov 2023 21:22:50 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id AE26B87707; Thu, 30 Nov 2023 21:22:52 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22B0A87675
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:22:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CD60876C2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 21:22:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-409299277bbso12361675e9.2
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:22:48 -0800 (PST)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50bc36725bbso1978822e87.2
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 12:22:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701375767; x=1701980567; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=+wdHp8PWUglJTUe9dEjxojTHpZm5iZyaCXyPd0MZ0Fs=;
- b=hczmwX59Oa4A0ZWtObeTm3ErdR5r5hCFHDrRTXuKtEZVjAiEZyGNPgAy+MX56WDrD7
- IzYIU+jld+fjmDTxWMN6i75UySeFhwcS7261veEixrhAN9Sw7JizSZxPswuMpg7e9zRb
- 9UbahwrSLrhz0a3ihwNbiqOOpeB9B2ElxRGrlbIxZauZYLDUVelXtRFaL4kBtov/a0rP
- uyfrEkiOhl656YwVDq2g5rr1yku7RPk32PLP3DuYkcOF2Mt5t8zhFlbBkMErmhNZZ3/y
- /jhW88faU5vcAc6f9f+p845F7IZN6jObfmUxcFMkBbYusmxe10TWfdCdHhiEctzVuGcY
- EKDA==
+ d=linaro.org; s=google; t=1701375769; x=1701980569; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=zgcoUT+Zc4QgmXmNW9cHlA6q8iu1ITaaahJMciZTmO0=;
+ b=FKCZ6/Lu8ZIAjdE6dmMISinzm+A12zIqqovaHJqb7/dXMLuyiWuUqs5IkAh45yAEwd
+ GTuX4rXo+HedkiHKx06W48bVLhTaAiINTyDBclFnjYGqELoInsn6grDG/lgWAOVQuO4y
+ 1NMg4WpHVJ5x/u1Se1nEbiAhR711B4oWqIO+hmW2z49GbsCr/rEtF7joUzMqchTxBUMR
+ X9NgVrReO2hw14buyo7WCDVcWrSzfDTmYBdrIp5se+0/x0z+76xenHRWIvZ2za+wH0/Q
+ TvcqGlqJUVOT5J6muEn35nOl11LCjcDLp2Jik6gKVb8SYHP83+7j/TKvuD0V6ccxEWoG
+ 7Sgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701375767; x=1701980567;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+wdHp8PWUglJTUe9dEjxojTHpZm5iZyaCXyPd0MZ0Fs=;
- b=ouZJq+X5P3wKHNP79ZXMzMRfQIqRL+pWXk+RuPB8cj8YJZ9I8J1pOQYJUW1iA+Sfm3
- IgkAhJS2J7VkXSvPv/H+wjbcM+mZTvBqBPU2TxCZvKBy+AcVb2kl7hRGqwfCIk7/dAon
- 6eGMn9ABdeigD88niVNoUNhWp98ZhNY4fngirzNlQAbU6rLBOHrvqEOgws/A1FLEaWMg
- mbB3Sahalg3bTYvJDsWKO8+KQMhahAmfaWevCJo0+ajWfz54RscfahyTOy4VlqiZ+5Ax
- Ofec/lbPoEydpoQVoQ5wUxpbNEUOxoKny1W8bugC258/EAKzBvuhcVHPJnWmo1LXhnf0
- Ku+w==
-X-Gm-Message-State: AOJu0Yx+uCxJH5nKF+8YwijiGMwClTKwDMUrdqW7TbBYKDjZ5G1McOzt
- 3SYFSc/Q7Dh85Vk87uwt3v4daA==
-X-Google-Smtp-Source: AGHT+IGo+4AFII3YT8tJCX0ZSUbhY9+g8ygH81DiRZCiw5vVp8jPyWpBxxLrmbE2GaSwr+3V0pwbKA==
-X-Received: by 2002:a1c:4b0e:0:b0:40b:5e59:e9e9 with SMTP id
- y14-20020a1c4b0e000000b0040b5e59e9e9mr34847wma.136.1701375767458; 
- Thu, 30 Nov 2023 12:22:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701375769; x=1701980569;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zgcoUT+Zc4QgmXmNW9cHlA6q8iu1ITaaahJMciZTmO0=;
+ b=INkFLnYHDzk5upvl6tHxWHr2Uljlj2uhGm+E/AX1/H9xob8T1JiZqqdUd5yR+Z4WSP
+ GMLDWaEPg9T9DPpukuNBuoX77mv8dof1rbtZI6p1WwPWnxYsu6jHBchXKR8Zobchyyk2
+ sRWgDN+Zw0Fpud/u+o8ryIIHqdvXKUVy/Bi8N7O98n7SX3xNn7ISQevwvkwkr8taNN0z
+ O7t8MIGmpbvKNjJHNIkeTbbr81N+5TYhAAfTnPyBOHOpcSe/2qLhttdjzmofbZ9PLpoF
+ iXukdaChy2NxC1SQIcU9lLtkCI/+GdISVgVzbocNN3OseBN+zOtCTJEC0DTo5Wtc9NqX
+ SUIg==
+X-Gm-Message-State: AOJu0Yzvq2EQpriccvWyLCrHWQBz3HaZBVhFIJAAKTUqqjtjlkEpsPRn
+ BLa21AKSfO8nPbF8Zmnkg1/PVg==
+X-Google-Smtp-Source: AGHT+IGUzCKyhuyCIOy0cmKy9f4xdyvH75txh/havclhmqVykqrxiASRLLPdKE2M5/N1Y167F6G15A==
+X-Received: by 2002:ac2:54a7:0:b0:50b:d763:fe50 with SMTP id
+ w7-20020ac254a7000000b0050bd763fe50mr76406lfk.107.1701375769251; 
+ Thu, 30 Nov 2023 12:22:49 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- fa23-20020a05600c519700b003fee6e170f9sm3028900wmb.45.2023.11.30.12.22.46
+ fa23-20020a05600c519700b003fee6e170f9sm3028900wmb.45.2023.11.30.12.22.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 30 Nov 2023 12:22:47 -0800 (PST)
+ Thu, 30 Nov 2023 12:22:48 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v5 0/9] Qualcomm PMIC fixes
-Date: Thu, 30 Nov 2023 20:22:24 +0000
-Message-Id: <20231130-b4-qcom-dt-compat-v5-0-41500e237ad0@linaro.org>
+Date: Thu, 30 Nov 2023 20:22:26 +0000
+Subject: [PATCH v5 2/9] button: qcom-pmic: introduce Qualcomm PMIC button
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAADvaGUC/33OwQ7CIAwG4FcxnMW0BQU8+R7GAwM2SXQoWxaN2
- buLnma2eGr+Jv/XvlgXcgwd269eLIchdjG1JWzXK+bOtm0Cj75kRkACEXa8kvzu0pX7npdxsz0
- PVigF4GtPgpXeLYc6Pr7m8VTyOXZ9ys/viQE/23/agBw4OFdVSkskiYdLbG1Om5Qb9uEGmhJ6i
- aBCKBQkhFNkpJ4RYkKgXCJEIbS2hmpdA1R2RsgJQYtfyEIYaTwYTR59+CHGcXwDJL4AgHwBAAA
- =
+Message-Id: <20231130-b4-qcom-dt-compat-v5-2-41500e237ad0@linaro.org>
+References: <20231130-b4-qcom-dt-compat-v5-0-41500e237ad0@linaro.org>
+In-Reply-To: <20231130-b4-qcom-dt-compat-v5-0-41500e237ad0@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
  Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +84,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3922;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6578;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=wjyhHFY7EwSk1yRQLVOhIoklOmZKzu1b2BemTt9KMlM=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSM96IZC2NfSplWR618ve/AIh/ThOq3uUFhAoeaTK7fP
- FGSpXawo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyE6TAjw0r2IG6xoITJp0w+
- zepgter5ucJ1Ws21nNVc8mGHHK1czjL8d/9ZFFM1g4vTTlbszVa3d437rkVJn//OrpUhzSewymC
- mDgA=
+ bh=MBLaL/Ij2NF87CUXfrcUkkQ4TJVPsOTTWwizWJlKvX4=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSM96KTp6w/NmWZ78xHc/fP987ouBDtFuTlLnK181SF7
+ slCw4/LO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEZu1n+MP568qdjecSrn/a
+ fnDrpeW7Jy+65fLH+Yb7t63L/Otkjml3Mvwv8rm39tavBiGbaYsvsk0o1fup6Tj5n6J19QnzgOs
+ 8O00KAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,86 +109,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series addresses some long-standing issues with the SPMI arb
-driver, the PMIC, and the PMIC GPIO. It fixes compatibility with
-upstream Linux devicetrees, and simplifies pwrkey/resin support by
-rewriting the pon driver to be a button driver rather than a GPIO
-driver.
+Qualcomm PMICs include a "pon" function which handles two buttons, the
+power button and "resin" button (usually volume down). Introduce a new
+driver following upstream Linux DT to enable these and map them to Enter
+and Down respectively to enable use in boot menus.
 
-Existing users are adjusted to use the new button driver in their
-oard init code.
-
-This series is based on the pinctrl [1] and clock [2] cleanup series.
-There may be some DTS conflicts applying it standalone.
-
-[1]: https://lore.kernel.org/u-boot/20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org/
-[2]: https://lore.kernel.org/u-boot/20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org/
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Changes in v5:
-- Split "rework pwrkey driver into a button driver" into multiple
-  commits
-- Split "qcom_pmic: fix support for upstream DT" into multiple commits
-- Link to v4: https://lore.kernel.org/r/20231128-b4-qcom-dt-compat-v4-0-949d0982d1de@linaro.org
+ MAINTAINERS                       |   1 +
+ drivers/button/Kconfig            |   9 +++
+ drivers/button/Makefile           |   1 +
+ drivers/button/button-qcom-pmic.c | 165 ++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 176 insertions(+)
 
-Changes in v4:
-* Remove some now unsupported DT binding docs
-* Fix qcs404 SPMI arb dts
-* Link to v3: https://lore.kernel.org/r/20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f6d63c8ab563..8cd102eaa070 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -572,6 +572,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ R:	Sumit Garg <sumit.garg@linaro.org>
+ S:	Maintained
+ F:	arch/arm/mach-snapdragon/
++F:	drivers/button/button-qcom-pmic.c
+ F:	drivers/clk/qcom/
+ F:	drivers/gpio/msm_gpio.c
+ F:	drivers/mmc/msm_sdhci.c
+diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+index 8ce2de37d62a..097b05f822e7 100644
+--- a/drivers/button/Kconfig
++++ b/drivers/button/Kconfig
+@@ -27,4 +27,13 @@ config BUTTON_GPIO
+ 	  The GPIO driver must used driver model. Buttons are configured using
+ 	  the device tree.
+ 
++config BUTTON_QCOM_PMIC
++	bool "Qualcomm power button"
++	depends on BUTTON
++	depends on PMIC_QCOM
++	help
++	  Enable support for the power and "resin" (usually volume down) buttons
++	  on Qualcomm SoCs. These will be configured as the Enter and Down keys
++	  respectively, allowing navigation of bootmenu with buttons on device.
++
+ endmenu
+diff --git a/drivers/button/Makefile b/drivers/button/Makefile
+index bbd18af14940..68555081a47a 100644
+--- a/drivers/button/Makefile
++++ b/drivers/button/Makefile
+@@ -5,3 +5,4 @@
+ obj-$(CONFIG_BUTTON) += button-uclass.o
+ obj-$(CONFIG_BUTTON_ADC) += button-adc.o
+ obj-$(CONFIG_BUTTON_GPIO) += button-gpio.o
++obj-$(CONFIG_BUTTON_QCOM_PMIC) += button-qcom-pmic.o
+\ No newline at end of file
+diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+new file mode 100644
+index 000000000000..34a976d1e6c6
+--- /dev/null
++++ b/drivers/button/button-qcom-pmic.c
+@@ -0,0 +1,165 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Qualcomm generic pmic gpio driver
++ *
++ * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
++ * (C) Copyright 2023 Linaro Ltd.
++ */
++
++#include <button.h>
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dm.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <log.h>
++#include <power/pmic.h>
++#include <spmi/spmi.h>
++#include <linux/bitops.h>
++
++#define REG_TYPE		0x4
++#define REG_SUBTYPE		0x5
++
++struct qcom_pmic_btn_priv {
++	u32 base;
++	u32 status_bit;
++	int code;
++	struct udevice *pmic;
++};
++
++#define PON_INT_RT_STS                        0x10
++#define KPDPWR_ON_INT_BIT                     0
++#define RESIN_ON_INT_BIT                      1
++
++#define NODE_IS_PWRKEY(node) (!strncmp(ofnode_get_name(node), "pwrkey", strlen("pwrkey")))
++#define NODE_IS_RESIN(node) (!strncmp(ofnode_get_name(node), "resin", strlen("resin")))
++
++static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
++{
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++
++	int reg = pmic_reg_read(priv->pmic, priv->base + PON_INT_RT_STS);
++
++	if (reg < 0)
++		return 0;
++
++	return (reg & BIT(priv->status_bit)) != 0;
++}
++
++static int qcom_pwrkey_get_code(struct udevice *dev)
++{
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++
++	return priv->code;
++}
++
++static int qcom_pwrkey_probe(struct udevice *dev)
++{
++	struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++	ofnode node = dev_ofnode(dev);
++	int ret;
++	u64 base;
++
++	/* Ignore the top-level pon node */
++	if (!uc_plat->label)
++		return 0;
++
++	/* the pwrkey and resin nodes are children of the "pon" node, get the
++	 * PMIC device to use in pmic_reg_* calls.
++	 */
++	priv->pmic = dev->parent->parent;
++
++	/* Get the address of the parent pon node */
++	base = dev_read_addr(dev->parent);
++	if (base == FDT_ADDR_T_NONE) {
++		printf("%s: Can't find address\n", dev->name);
++		return -EINVAL;
++	}
++
++	priv->base = base;
++
++	/* Do a sanity check */
++	ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
++	if (ret != 0x1 && ret != 0xb) {
++		printf("%s: unexpected PMIC function type %d\n", dev->name, ret);
++		return -ENXIO;
++	}
++
++	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
++	if ((ret & 0x7) == 0) {
++		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
++		return -ENXIO;
++	}
++
++	if (NODE_IS_PWRKEY(node)) {
++		priv->status_bit = 0;
++		priv->code = KEY_ENTER;
++	} else if (NODE_IS_RESIN(node)) {
++		priv->status_bit = 1;
++		priv->code = KEY_DOWN;
++	} else {
++		/* Should not get here! */
++		printf("Invalid pon node '%s' should be 'pwrkey' or 'resin'\n",
++		       ofnode_get_name(node));
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int button_qcom_pmic_bind(struct udevice *parent)
++{
++	struct udevice *dev;
++	ofnode node;
++	int ret;
++
++	dev_for_each_subnode(node, parent) {
++		struct button_uc_plat *uc_plat;
++		const char *label;
++
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
++						 ofnode_get_name(node),
++						 node, &dev);
++		if (ret) {
++			printf("Failed to bind %s! %d\n", label, ret);
++			return ret;
++		}
++		uc_plat = dev_get_uclass_plat(dev);
++		if (NODE_IS_PWRKEY(node)) {
++			uc_plat->label = "pwrkey";
++		} else if (NODE_IS_RESIN(node)) {
++			uc_plat->label = "vol_down";
++		} else {
++			printf("Unknown button node '%s' should be 'pwrkey' or 'resin'\n",
++			       ofnode_get_name(node));
++			device_unbind(dev);
++		}
++	}
++
++	return 0;
++}
++
++static const struct button_ops button_qcom_pmic_ops = {
++	.get_state	= qcom_pwrkey_get_state,
++	.get_code	= qcom_pwrkey_get_code,
++};
++
++static const struct udevice_id qcom_pwrkey_ids[] = {
++	{ .compatible = "qcom,pm8916-pon" },
++	{ .compatible = "qcom,pm8941-pon" },
++	{ .compatible = "qcom,pm8998-pon" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_pwrkey) = {
++	.name = "qcom_pwrkey",
++	.id = UCLASS_BUTTON,
++	.of_match = qcom_pwrkey_ids,
++	.bind = button_qcom_pmic_bind,
++	.probe = qcom_pwrkey_probe,
++	.ops = &button_qcom_pmic_ops,
++	.priv_auto = sizeof(struct qcom_pmic_btn_priv),
++};
 
-Changes in v3:
-* Remove now-unneeded header includes in dragonboard{410,820}c-uboot.dtsi
-* Drop non-standard DTS support from PMIC GPIO driver
-* Also remove old gpio-keys nodes from starqltechn-uboot.dtsi
-* Link to v2: https://lore.kernel.org/r/20231108-b4-qcom-dt-compat-v2-0-713233c72948@linaro.org
-
-Changes in v2:
-* Avoid using non-standard "label" and "linux,code" properties for
-  buttons
-* Add missing sdm845 DTS parts
-* Put button driver in drivers/button
-* Link to v1: https://lore.kernel.org/r/20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org
-
----
-Caleb Connolly (9):
-      gpio: qcom_pmic: fix silent dev_read_addr downcast
-      button: qcom-pmic: introduce Qualcomm PMIC button driver
-      mach-snapdragon: switch to PMIC button driver
-      gpio: qcom_pmic: drop pon GPIO driver
-      gpio: qcom_pmic: support upstream DT
-      dts: qcom: adjust pmic gpio to use upstream bindings
-      gpio: qcom_pmic: drop gpio-count property
-      spmi: msm: fix register range names
-      pmic: qcom: dont use dev_read_addr to get USID
-
- MAINTAINERS                                      |   1 +
- arch/arm/dts/dragonboard410c-uboot.dtsi          |  11 --
- arch/arm/dts/dragonboard410c.dts                 |  25 +++-
- arch/arm/dts/dragonboard820c-uboot.dtsi          |  12 --
- arch/arm/dts/dragonboard820c.dts                 |  26 ++--
- arch/arm/dts/dragonboard845c-uboot.dtsi          |  11 --
- arch/arm/dts/dragonboard845c.dts                 |   4 +
- arch/arm/dts/qcs404-evb.dts                      |   9 +-
- arch/arm/dts/sdm845.dtsi                         |  28 ++--
- arch/arm/dts/starqltechn-uboot.dtsi              |  10 --
- arch/arm/dts/starqltechn.dts                     |  20 +--
- arch/arm/mach-snapdragon/Kconfig                 |   3 +
- arch/arm/mach-snapdragon/init_sdm845.c           |  45 ++-----
- board/qualcomm/dragonboard410c/dragonboard410c.c |  31 ++---
- board/qualcomm/dragonboard820c/dragonboard820c.c |  29 ++--
- doc/device-tree-bindings/gpio/pm8916_gpio.txt    |  48 -------
- doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt |  94 -------------
- doc/device-tree-bindings/spmi/spmi-msm.txt       |  26 ----
- drivers/button/Kconfig                           |   9 ++
- drivers/button/Makefile                          |   1 +
- drivers/button/button-qcom-pmic.c                | 165 +++++++++++++++++++++++
- drivers/gpio/Kconfig                             |   3 +-
- drivers/gpio/qcom_pmic_gpio.c                    | 146 +++++---------------
- drivers/power/pmic/pmic_qcom.c                   |  13 +-
- drivers/spmi/spmi-msm.c                          |  46 +++----
- 25 files changed, 341 insertions(+), 475 deletions(-)
----
-base-commit: 4d5dd7090b5ad770974a377f704907893469ebb3
-
-// Caleb (they/them)
+-- 
+2.42.1
 
