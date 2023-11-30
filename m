@@ -4,78 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69619C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780C1C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 02:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95DDF86EF6;
-	Thu, 30 Nov 2023 03:16:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 95FA58758F;
+	Thu, 30 Nov 2023 03:45:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dgng/dug";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EfsFSdOS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE9687076; Thu, 30 Nov 2023 03:16:51 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id DEE94875CC; Thu, 30 Nov 2023 03:45:52 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF4AD80EEB
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:16:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 978C287076
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 03:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2c9b9191722so6073101fa.1
- for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:16:48 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a0064353af8so312064566b.0
+ for <u-boot@lists.denx.de>; Wed, 29 Nov 2023 18:45:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701310608; x=1701915408; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701312350; x=1701917150; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DtWmR2mdB7x2HaK4YSxgvPQWiB9nA7We3TEo134X0ys=;
- b=dgng/dugjMk4AZsf5Ys1kmNvoPkY/hAPKTyHmZqKGlenvlj6sh6GJ57e3wIsMsdKN9
- iniucQV0MhbQ9/2OMfyvA+9OW5E3QLfQr2V+iJV8QQS9GfaWSkRGrqaSr2u48uyzV6vq
- XnVtvu4XAuPAvF0GVQxxGasWJ3eSUE9bNsgLg=
+ bh=SAsM3ek5fpEHQ7zFUqd8MkfDJ0vPeQQN2cSohVIgsQY=;
+ b=EfsFSdOS9HP3LHA0bia0NAFqMGXwYjdxIeWg7zxIW3ZUIS0Tbty5ZINNBSN7dK0mDO
+ 4xnVYOGKhCpF2VLy9RL5LRRARkjR9laRTSFOkHRNhVvXd+WoPuyWunewB9LoOSWJSdQD
+ p7v02fIHGDYQh7LQoWDPVLqErbVqessaOYQTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701310608; x=1701915408;
+ d=1e100.net; s=20230601; t=1701312350; x=1701917150;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DtWmR2mdB7x2HaK4YSxgvPQWiB9nA7We3TEo134X0ys=;
- b=BHxJBg7alacr0RG3BRo3wwQ9OyuTK4iN+0ab29JDykLZDcJaKRn8tyZgewPB8EsGaN
- vZ5bm8pD+L/1xwYi4oNlATT5VnR7fcHNJW/M7M/iEOyjMUpjjRVw8pd7yskpXdtldTMq
- ezMD2uCZUjycb5bGYiz8/rH2h/nazoe1HIYcnRDifn+XImyzql9nOU3M1s+st9kGZuIt
- 4QZioRbE1N4P6E9w1fZOZNTF5Go1lGDA8j4xf3NKCbqqa7/jyDKyPm62OHMxhEM4M0kH
- VAYzfBl9hbLyAxoScbrZeiguTfr6NmOUzlfb4R0J/OEiYSoVcQU0qbXOc84wSvwFnolD
- PmZw==
-X-Gm-Message-State: AOJu0YywVVu1oYfc4hQlbh0WlvuBNI8BqhLcCBzrcqweBIyYtrVocxnb
- yDMfFcI38o6M8y+bnCwvrJRSLfaaVCrtu9ZtVH3NJQ==
-X-Google-Smtp-Source: AGHT+IED1hQWuYgn6I/qqJMD4KYPXNP+kuo6lLtcrZbavoxDKEW2W0Qpf2o7fqlDQf1ZEiuCHzbcRmiz2MRPNhFsVuk=
-X-Received: by 2002:a05:651c:210f:b0:2c9:98b5:c285 with SMTP id
- a15-20020a05651c210f00b002c998b5c285mr10976239ljq.19.1701310607871; Wed, 29
- Nov 2023 18:16:47 -0800 (PST)
+ bh=SAsM3ek5fpEHQ7zFUqd8MkfDJ0vPeQQN2cSohVIgsQY=;
+ b=PRFutCSUQmgZRgB1Za7vJplIPAGiaG38nMjcAqggIaNvfdjY0YLPpxxsGjxrxBg56b
+ E5+lGUn24KDNKPBtSWbykomQhENoUwGiIuYCVMA9xXkXVn8giEmtlYxKaqBj0kGxMTbM
+ 7vet2KgWVNAlb5fyETKuqImQMRwN9zz1oXWzWeEhUea5Jui3EeSslZgnkfCKGcOJTmc+
+ DVNdgmlJ3fgybxRNuU8nRLeXBVSSH3Z30NL/5MVRKyO+pXlVi73OUOP6ytjaYeWVKok6
+ GGlYoUIbOBXff0auVaiNOaPxS29mAwQYIoExnzDnACemiB4R6SsO0xrkGR8XlNWpVz6y
+ ihYw==
+X-Gm-Message-State: AOJu0YxgNHf4tPt4eo0BDEn7ffehnXX+Vn6bbW2sbHV6PV5XT0UMhRQK
+ n3930KNekCNG6WpT0H4QHGJSypsQXXt2Q3TV7pPmgg==
+X-Google-Smtp-Source: AGHT+IGDlwXRkSGqkwpS14qzedsnrUjbL23zl+OH4OTp0V3C1RWhdOH1UVgSLAklzssp9VmM6qiqXKwOMFrVik4YIoA=
+X-Received: by 2002:a17:906:e97:b0:9ee:e5f1:fef2 with SMTP id
+ p23-20020a1709060e9700b009eee5f1fef2mr20733399ejf.11.1701312349890; Wed, 29
+ Nov 2023 18:45:49 -0800 (PST)
 MIME-Version: 1.0
-References: <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
- <20231005163645.GS8465@bill-the-cat>
- <20231005171010.zvza7uqyn4mcgp5g@handsaw>
- <20231005171614.yiatmyczip2jnmf4@surround>
- <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
- <20231106055351.f2fny5ys6avi5qnk@ula0497581>
- <20231106153159.GH496310@bill-the-cat>
- <736c04ab-9c48-4957-b242-fcbde0ace68b@ti.com>
- <CAPnjgZ1JTcybX9sRFQtddcwefLum6_+ynQSWbQ=4NVdO6eAxhg@mail.gmail.com>
- <7df59596-ac84-4e26-844f-3f3ad4bb0b7f@ti.com>
- <20231128093158.sjfmwxiizk22keem@uda0497581>
-In-Reply-To: <20231128093158.sjfmwxiizk22keem@uda0497581>
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-20-maxim.uvarov@linaro.org>
+In-Reply-To: <20231127125726.3735-20-maxim.uvarov@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Nov 2023 19:16:30 -0700
-Message-ID: <CAPnjgZ09EfFMCAKNN947BrXD6C0Jn60GEPXU0-aWOLhoWfLxLQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Andrew Davis <afd@ti.com>, Tom Rini <trini@konsulko.com>,
- Nishanth Menon <nm@ti.com>, 
- Roger Quadros <rogerq@kernel.org>, vigneshr@ti.com, jonas@kwiboo.se, srk@ti.com,
- bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+Date: Wed, 29 Nov 2023 19:45:29 -0700
+Message-ID: <CAPnjgZ1PxrSu=R9g+Yn=dFPAsftvTJOb3MsR4y8bqL+P9zV4Yw@mail.gmail.com>
+Subject: Re: [PATHv11 19/43] sandbox: eth-raw-os: successful return code is 0
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ trini@konsulko.com, goldsimon@gmx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,154 +82,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
-
-On Tue, 28 Nov 2023 at 02:32, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+On Mon, 27 Nov 2023 at 06:05, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
 >
-> Hi Simon,
+> all network drivers return 0 on the successful
+> transmission.
 >
-> On 12:05-20231106, Andrew Davis wrote:
-> > On 11/6/23 11:47 AM, Simon Glass wrote:
-> > > Hi Andrew,
-> > >
-> > > On Mon, 6 Nov 2023 at 10:27, Andrew Davis <afd@ti.com> wrote:
-> > > >
-> > > > On 11/6/23 9:31 AM, Tom Rini wrote:
-> > > > > On Mon, Nov 06, 2023 at 11:23:51AM +0530, Manorit Chawdhry wrote:
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On 11:22-20231005, Simon Glass wrote:
-> > > > > > > Hi Nishanth,
-> > > > > > >
-> > > > > > > On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
-> > > > > > > >
-> > > > > > > > On 12:10-20231005, Nishanth Menon wrote:
-> > > > > > > > > On 12:36-20231005, Tom Rini wrote:
-> > > > > > > > > > On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
-> > > > > > > > > > > On 10/4/23 8:54 AM, Nishanth Menon wrote:
-> > > > > > > > > > > > On 08:48-20231004, Andrew Davis wrote:
-> > > > > > > > > > > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
-> > > > > > > > > > > > > > ti_mmc is not a valid boot_target for standard boot flow so
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Is there some way to make it into a valid boot_target? Otherwise
-> > > > > > > > > > > > > how do we use uEnv.txt files, or boot from FIT images with overlays?
-> > > > > > > > > > > >
-> > > > > > > > > > > > envboot takes care of uEnv.txt file (see
-> > > > > > > > > > > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
-> > > > > > > > > > > >
-> > > > > > > > > > > > Early remote proc loading and FIT image is a question for stdboot itself.
-> > > > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > If stdboot is missing these features then we shouldn't switch until it
-> > > > > > > > > > > has them. I'm all for switching to this, but only if it is complete.
-> > > > > > > > > >
-> > > > > > > > > > Depends on what you mean?  Did you mean an option to run scripts
-> > > > > > > > > > (exists) or an option to do what TI needs done, via
-> > > > > > > > > > boot/bootmeth_something.c ?  If the latter, someone from TI needs to
-> > > > > > > > > > figure out what that should be and do (but plumbing-wise everything it
-> > > > > > > > > > needs should exist).
-> > > > > > > > >
-> > > > > > > > > Andrew is generalizing here (on the wrong patch though).
-> > > > > > > > >
-> > > > > > > > > On am62x platforms, there is nothing regressing with this series. The
-> > > > > > > > > challenge is early remote_proc loading which is done for J7* platforms.
-> > > > > > > > >
-> > > > > > > > > How that is initiated as part of bootmethods is something of a gap.
-> > > > > > > > >
-> > > > > > > > > The other gap has been support for uEnv.txt -> which we can workaround
-> > > > > > > > > at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
-> > > > > > > > > -lb" in defconfig (This series from Roger already does that - hence I am
-> > > > > > > > > saying that Andrew is complaining on the wrong series).
-> > > > > > > > >
-> > > > > > > > > Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
-> > > > > > > > > uEnv.txt remoteproc loads and the various standard bootmethods should
-> > > > > > > > > "just work".
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > I forgot to add: FIT image authenticated boot flow. That is really what
-> > > > > > > > ti_mmc distroboot method was trying to solve.
-> > > > > > > >
-> > > > > > > > Maybe Simon or someone know how the stdboot flow handles authenticated
-> > > > > > > > kernel image and dtb boot flow with FIT image?
-> > > > > > >
-> > > > > > > Yes you can use FIT configuration verification and things should work as normal.
-> > > > > > >
-> > > > > >
-> > > > > > Could you give any reference documentation for this?
-> > > > >
-> > > > > I suspect you should start with doc/usage/fit/beaglebone_vboot.rst
-> > > > >
-> > > >
-> > > >   From that doc:
-> > > >
-> > > > ```
-> > > > Boot the board using the commands below::
-> > > >
-> > > >       setenv bootargs console=ttyO0,115200n8 quiet root=/dev/mmcblk0p2 ro rootfstype=ext4 rootwait
-> > > >       ext2load mmc 0:2 82000000 /boot/image.fit
-> > > >       bootm 82000000
-> > > > ```
-> > > >
-> > > > This is very much not stdboot :( This doc has some good and current info on building
-> > > > a secure FIT image, but much of it is showing its age. Stdboot is still missing
-> > > >
-> > > >    * ability to limit boot mode search to only one image (FIT)
-> > >
-> > > What does this mean? Can you please be more specific or give an example?
-> > >
-> >
-> > Sure, for instance with secure boot we only want to search for FIT images
-> > and if for each media this fails we do not want to fall back to other
-> > image types or boot modes (like UART boot or net boot which would bypass
-> > the signature checks).
-> >
-> > Something similar is needed for searching for EFI compatible boot across
-> > each enabled boot media first, before trying other methods on each media.
-> > Basically breadth-first search on each media type not depth-first.
-> >
-> > > >    * fetching and applying FIT overlay/config strings
-> > >
-> > > Re overlays, is this the 'extension' command? What are config strings?
-> > >
-> >
-> > When we have DT overlays in our FIT image, we build a string to pass to
-> > bootm to apply all the selected overlays[0]. If there is now another
-> > mechanism for this please let me know (building this string today is messy).
-> >
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L18
-> >
-> > > >    * remote proc loading
-> > >
-> > > What command can do this?
-> > >
-> >
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/ti_common.env?ref_type=heads#L28
-> >
-> > > >    * uEnv.txt processing
-> > >
-> > > What command can do this?
-> > >
-> >
-> > run envboot;
-> >
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/include/env/ti/mmc.env?ref_type=heads#L20
-> >
-> > > >
-> > > > Last two can be solved by adding to CONFIG_BOOTCOMMAND before calling `bootflow scan`
-> > > > as suggested above. Until we figure out the first two I don't see us ready to switch.
-> > >
-> > > I'm happy to help figure this out.
-> > >
-> >
-> > Thanks, we are eager to standardize our boot flows and stdboot seems like the
-> > right way forward, very happy to have your guidance on these last few items :)
-> >
-> > Andrew
->
-> Any nudges on the Andrew's response as to where we can look for all
-> this or how can we maybe move towards all this?
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> ---
+>  arch/sandbox/cpu/eth-raw-os.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes I have taken a look at a possible design...I will reply soon.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
