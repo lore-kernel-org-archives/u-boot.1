@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51417C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 12:08:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68894C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 12:24:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DE95870B7;
-	Thu, 30 Nov 2023 13:07:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 2921E875EE;
+	Thu, 30 Nov 2023 13:24:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AF2E3875FE; Thu, 30 Nov 2023 13:07:54 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5847586B9A
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 13:07:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3AUC7jF4039700;
- Thu, 30 Nov 2023 20:07:45 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 30 Nov 2023
- 20:07:40 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- Randolph <randolph@andestech.com>, CL Wang <cl634@andestech.com>
-Subject: [PATCH V2 2/2] configs: andes: add watchdog support fot andes ae350
-Date: Thu, 30 Nov 2023 20:07:29 +0800
-Message-ID: <20231130120729.1362747-2-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231130120729.1362747-1-randolph@andestech.com>
-References: <20231130120729.1362747-1-randolph@andestech.com>
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=enrico.leto@siemens.com header.b="QbKat+SX";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6CB3A87605; Thu, 30 Nov 2023 13:24:33 +0100 (CET)
+Received: from mta-65-225.siemens.flowmailer.net
+ (mta-65-225.siemens.flowmailer.net [185.136.65.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D0DE8713D
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 13:24:25 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=enrico.leto@siemens.com
+Received: by mta-65-225.siemens.flowmailer.net with ESMTPSA id
+ 202311301224246f6319e1bbfc02498c for <u-boot@lists.denx.de>;
+ Thu, 30 Nov 2023 13:24:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=enrico.leto@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=wTUi+1KMYVC/J96Wr7XVx3OtP6Gjd3TOoDAGvzzTb64=;
+ b=QbKat+SX/6FcSi1KySK/ULK7Ag6qP8Az6OgF+ac4heyWYCXb4Ln2y+zcBW15m8ASmwRfC7
+ +DfAOZY8vnxsmyfmSylYL2cjXAQ9Jhla8UAyfmqNP5X6pghG80UN/XQI3LUAd0sSaMaYqEWL
+ DC8tuYfRiy19Up+y56xD6rkdOYHwc=;
+From: Enrico Leto <enrico.leto@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Enrico Leto <enrico.leto@siemens.com>
+Subject: [PATCH v2 0/6]  board: siemens: clean up subfolders
+Date: Thu, 30 Nov 2023 13:23:18 +0100
+Message-Id: <20231130122324.658502-1-enrico.leto@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.173]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3AUC7jF4039700
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-1320603:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,174 +62,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It adds the ATCWDT200 support for Andes AE350 platform.
-It also enables wdt command support.
+    This serie depends on the serie:
+    [PATCH 0/6] siemens,am335x: clean up the draco board family
 
-Signed-off-by: CL Wang <cl634@andestech.com>
-Signed-off-by: Randolph <randolph@andestech.com>
+    The common folder was initialially created for the common parts of
+    the products based on draco-am355x board family. We have the
+    product lines 'pxm2', 'rut' and the base line unfortunately named
+    'draco'! Adding the new capricorn-imx8 board family, the files
+    were enhanced without cleanup.
+
+    Simplify first EEPROM probe and access that implements both i2c
+    with & without driver model. Use abstraction functions for this.
+    
+    Move all am355x specifics to a new file 'board_am335x'.
+    
+    Clean-up includes, config checks, maintainer.
+
+Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
 ---
- configs/ae350_rv32_defconfig         | 4 ++++
- configs/ae350_rv32_spl_defconfig     | 4 ++++
- configs/ae350_rv32_spl_xip_defconfig | 4 ++++
- configs/ae350_rv32_xip_defconfig     | 4 ++++
- configs/ae350_rv64_defconfig         | 4 ++++
- configs/ae350_rv64_spl_defconfig     | 4 ++++
- configs/ae350_rv64_spl_xip_defconfig | 4 ++++
- configs/ae350_rv64_xip_defconfig     | 4 ++++
- 8 files changed, 32 insertions(+)
+Changes for v2:
+- fix wrong value in CONFIG_IS_ENABLED
 
-diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-index 06cd972a0d..eb4dd90311 100644
---- a/configs/ae350_rv32_defconfig
-+++ b/configs/ae350_rv32_defconfig
-@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index f469d5bb2b..e09f878329 100644
---- a/configs/ae350_rv32_spl_defconfig
-+++ b/configs/ae350_rv32_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index 9672a19c23..850e67a0d9 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-index b90200a97e..fa0b52f686 100644
---- a/configs/ae350_rv32_xip_defconfig
-+++ b/configs/ae350_rv32_xip_defconfig
-@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-index a4b9ad6162..e67c9cbf93 100644
---- a/configs/ae350_rv64_defconfig
-+++ b/configs/ae350_rv64_defconfig
-@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index 834a0fbbdd..1a3c294b16 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index b52b8d78d7..f8db0a1a85 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-index cc5e751c9b..51509e76c5 100644
---- a/configs/ae350_rv64_xip_defconfig
-+++ b/configs/ae350_rv64_xip_defconfig
-@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
+Enrico Leto (6):
+  siemens: eeprom: clean up definitions
+  siemens: eeprom: simplify setup & read
+  siemens draco: i2c: use driver model for u-boot
+  siemens: board: clean up draco products vs common
+  siemens: board: clean up includes
+  siemens: factoryset: use correct config for soc specific
+    implementation
+
+ board/siemens/capricorn/board.c     |   5 +-
+ board/siemens/common/board.c        | 110 ++++++++++++----------------
+ board/siemens/common/board.h        |  24 ++++++
+ board/siemens/common/board_am335x.c |  58 +++++++++++++++
+ board/siemens/common/board_am335x.h |  38 ++++++++++
+ board/siemens/common/factoryset.c   |  82 ++++-----------------
+ board/siemens/draco/Makefile        |   2 +
+ board/siemens/draco/board.c         |  59 ++++-----------
+ board/siemens/draco/board.h         |  32 ++------
+ board/siemens/draco/mux.c           |   6 +-
+ board/siemens/pxm2/MAINTAINERS      |   2 +-
+ board/siemens/pxm2/Makefile         |   2 +
+ board/siemens/pxm2/board.c          |  34 +++------
+ board/siemens/pxm2/board.h          |  21 ------
+ board/siemens/pxm2/mux.c            |   6 +-
+ board/siemens/rut/MAINTAINERS       |   2 +-
+ board/siemens/rut/Makefile          |   2 +
+ board/siemens/rut/board.c           |  33 ++-------
+ board/siemens/rut/board.h           |  21 ------
+ board/siemens/rut/mux.c             |   5 +-
+ configs/draco-etamin_defconfig      |   4 +-
+ configs/draco-rastaban_defconfig    |   4 +-
+ configs/draco-thuban_defconfig      |   4 +-
+ include/configs/draco-etamin.h      |   3 -
+ include/configs/draco-rastaban.h    |   3 -
+ include/configs/draco-thuban.h      |   3 -
+ 26 files changed, 245 insertions(+), 320 deletions(-)
+ create mode 100644 board/siemens/common/board.h
+ create mode 100644 board/siemens/common/board_am335x.c
+ create mode 100644 board/siemens/common/board_am335x.h
+ delete mode 100644 board/siemens/pxm2/board.h
+ delete mode 100644 board/siemens/rut/board.h
+
 -- 
-2.34.1
+2.30.2
 
