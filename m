@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34465C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 15:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E7ECC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 16:12:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9258A86F64;
-	Thu, 30 Nov 2023 16:39:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 17313863F8;
+	Thu, 30 Nov 2023 17:11:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DlnyvfF6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bFZ5m0cp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A340D87595; Thu, 30 Nov 2023 16:39:14 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 61631870D5; Thu, 30 Nov 2023 17:11:57 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AEF28641F
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 16:39:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A8A38269F
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 17:11:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id CD02461F3B
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:39:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E016C433CB
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 15:39:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701358749;
- bh=Wh8M9AbYS0w9KCv3VF1Tv2DWqWthaRO2rj6ZmBsIJsI=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=DlnyvfF6CmJRhAtNk/H7ubOi63Inp3I+Ndnrkns2azVUSILIJ6L51Woc55qdQ1V2S
- 7xDPx3+GdB30XkV7qSTYrPAQ91ymS1AA1IvfaLeIuS2ctP0fPLRHLrw8UnVH52vO95
- PFhri+dSD36p/paXayQsP4cVYT/P4F3s+BR/kX/45OymE46CL23HDdNZYxxJkXo7Ro
- qm4y845YGEaCj5FRcP8ICWxI7uKxTyBNpAlCutSSSTSNQoYczvLjkg+pGGlBSs8sZ6
- ILFHmpp53BBbUPs/TifmHy6BI+bVxPHK1IZUQk+qhoSZESMZfsqzbTbEC+1rzBzVmG
- yX23srCYuEYUQ==
-Received: by mail-oa1-f53.google.com with SMTP id
- 586e51a60fabf-1fa37df6da8so493816fac.2
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 07:39:09 -0800 (PST)
-X-Gm-Message-State: AOJu0YwmhDgJEOYnP1J737XpKDOjqfzYG3YxOEQ8fDi6QeM8c1mPDaY0
- t0VgJRuCe1Kf6KW6O0V2Ma5sOarXXeSJAsjzWWM=
-X-Google-Smtp-Source: AGHT+IEHYOxyvb4m5QA2NEaJMK/Wdn+gFq/hDSgRir7oZnJs+E+lDi4Y/OyDG/qkgceUyiIAKpaQ/mXu0xc3wgPaftQ=
-X-Received: by 2002:a05:6871:58a1:b0:1f9:e123:4fb with SMTP id
- ok33-20020a05687158a100b001f9e12304fbmr25407502oac.55.1701358748892; Thu, 30
- Nov 2023 07:39:08 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5d35a952943so7528547b3.3
+ for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 08:11:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1701360711; x=1701965511; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UlENqdL6aYbt1oP4XeUL6efUTYXkGBs8TDWBIIxmsuE=;
+ b=bFZ5m0cpMRgk0Volou402xpdAgOYnU+0z9JlqCa3n7BpkAqjp7vBkehY0EXIPjWg5e
+ DerDcntcnOZKBIT3skiq79BUKkRGsjc/hrJqqto5DtwfU6dhYt3IuI08wC3btFma3JAS
+ tIZGpwSyZ38+Wd9nBQDbGtCbnL5d779QrLic4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701360711; x=1701965511;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UlENqdL6aYbt1oP4XeUL6efUTYXkGBs8TDWBIIxmsuE=;
+ b=kNa7Axq7kQR6ic4V8+i2l3PQV5GmQHPst+oOKF3N1RZoiYv2NalyF9lhfCGgoop5ro
+ LRhV2fOOm6u7RrQ14Qdu7u/DKUwkRyzgDWMTFQVQ+HOKgE9h2sQBrK8xdR/N2Hc0w206
+ 2ILCrz/G3j33Djp0SQ4mGo+Spv31EyQ4dBPgYZLfFVb5hgmhbpeLuQoXLJWmn5k69Prv
+ XvnXA5/iDpRCUH6Iw9emBA5dI60J/66TrTvPoMk2kPuTtuWcozB2kiPJb9CsjncIkyT8
+ z0Z8CiDTTMsgyA/iS7acAkTkqN5m9c/Fm4P4N9t1FuTnBKX+/j4/Q+pCmPcewaqKjVw6
+ UosQ==
+X-Gm-Message-State: AOJu0YwN/Frh7MRWk64emu4H4dRn5cZQwmU9vXnHdgaouLQTqv68O2JM
+ SaYwD3emBKb3m2ojH2ZG3Lbn+g==
+X-Google-Smtp-Source: AGHT+IGp3WBAyUwuQ1AZ7/9lxbYDEdObkskSOVSAlZJ1nDuEsfO2xf1ndp91VSZ5uRHfOwWHtkQJYQ==
+X-Received: by 2002:a0d:c584:0:b0:5a1:fb1d:740a with SMTP id
+ h126-20020a0dc584000000b005a1fb1d740amr21187058ywd.51.1701360711648; 
+ Thu, 30 Nov 2023 08:11:51 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-61c1-9eeb-7219-1742.res6.spectrum.com.
+ [2603:6081:7b00:6400:61c1:9eeb:7219:1742])
+ by smtp.gmail.com with ESMTPSA id
+ r20-20020a0de814000000b005d39c874019sm209434ywe.66.2023.11.30.08.11.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 08:11:50 -0800 (PST)
+Date: Thu, 30 Nov 2023 11:11:49 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Please pull u-boot-tegra staging
+Message-ID: <20231130161149.GR2513409@bill-the-cat>
+References: <20231130075036.5336-1-clamor95@gmail.com>
 MIME-Version: 1.0
-References: <20231129172200.430674-1-sjg@chromium.org>
- <20231129172200.430674-3-sjg@chromium.org>
-In-Reply-To: <20231129172200.430674-3-sjg@chromium.org>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 1 Dec 2023 00:38:32 +0900
-X-Gmail-Original-Message-ID: <CAK7LNARRYWhFyTXRXPC_z6RL=KUW6pO-Lsz1mgGd1jxPiHxe+w@mail.gmail.com>
-Message-ID: <CAK7LNARRYWhFyTXRXPC_z6RL=KUW6pO-Lsz1mgGd1jxPiHxe+w@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- lkml <linux-kernel@vger.kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>, 
- Nick Terrell <terrelln@fb.com>, Nicolas Schier <nicolas@fjasle.eu>,
- Will Deacon <will@kernel.org>, linux-kbuild@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OBFursw1+FOIdgqE"
+Content-Disposition: inline
+In-Reply-To: <20231130075036.5336-1-clamor95@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,149 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 30, 2023 at 2:22=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Add a script which produces a Flat Image Tree (FIT), a single file
-> containing the built kernel and associated devicetree files.
-> Compression defaults to gzip which gives a good balance of size and
-> performance.
->
-> The files compress from about 86MB to 24MB using this approach.
->
-> The FIT can be used by bootloaders which support it, such as U-Boot
-> and Linuxboot. It permits automatic selection of the correct
-> devicetree, matching the compatible string of the running board with
-> the closest compatible string in the FIT. There is no need for
-> filenames or other workarounds.
->
-> Add a 'make image.fit' build target for arm64, as well.
->
-> The FIT can be examined using 'dumpimage -l'.
->
-> This features requires pylibfdt (use 'pip install libfdt'). It also
-> requires compression utilities for the algorithm being used. Supported
-> compression options are the same as the Image.xxx files. For now there
-> is no way to change the compression other than by editing the rule for
-> $(obj)/image.fit
->
-> While FIT supports a ramdisk / initrd, no attempt is made to support
-> this here, since it must be built separately from the Linux build.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v7:
-> - Add Image as a dependency of image.fit
-> - Drop kbuild tag
-> - Add dependency on dtbs
-> - Drop unnecessary path separator for dtbs
-> - Rebase to -next
->
-> Changes in v5:
-> - Drop patch previously applied
-> - Correct compression rule which was broken in v4
->
-> Changes in v4:
-> - Use single quotes for UIMAGE_NAME
->
-> Changes in v3:
-> - Drop temporary file image.itk
-> - Drop patch 'Use double quotes for image name'
-> - Drop double quotes in use of UIMAGE_NAME
-> - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> - Avoid hard-coding "arm64" for the DT architecture
->
-> Changes in v2:
-> - Drop patch previously applied
-> - Add .gitignore file
-> - Move fit rule to Makefile.lib using an intermediate file
-> - Drop dependency on CONFIG_EFI_ZBOOT
-> - Pick up .dtb files separately from the kernel
-> - Correct pylint too-many-args warning for write_kernel()
-> - Include the kernel image in the file count
-> - Add a pointer to the FIT spec and mention of its wide industry usage
-> - Mention the kernel version in the FIT description
->
->  MAINTAINERS                |   7 +
->  arch/arm64/Makefile        |   9 +-
->  arch/arm64/boot/.gitignore |   1 +
->  arch/arm64/boot/Makefile   |   6 +-
->  scripts/Makefile.lib       |  13 ++
->  scripts/make_fit.py        | 289 +++++++++++++++++++++++++++++++++++++
->  6 files changed, 322 insertions(+), 3 deletions(-)
->  create mode 100755 scripts/make_fit.py
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 14587be87a33..d609f0e8deb3 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1585,6 +1585,13 @@ F:       Documentation/process/maintainer-soc*.rst
->  F:     arch/arm/boot/dts/Makefile
->  F:     arch/arm64/boot/dts/Makefile
->
-> +ARM64 FIT SUPPORT
-> +M:     Simon Glass <sjg@chromium.org>
-> +L:     linux-arm-kernel@lists.infradead.org (moderated for non-subscribe=
-rs)
-> +S:     Maintained
-> +F:     arch/arm64/boot/Makefile
-> +F:     scripts/make_fit.py
-> +
->  ARM ARCHITECTED TIMER DRIVER
->  M:     Mark Rutland <mark.rutland@arm.com>
->  M:     Marc Zyngier <maz@kernel.org>
-> diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-> index 1bd4fae6e806..18e092de7cdb 100644
-> --- a/arch/arm64/Makefile
-> +++ b/arch/arm64/Makefile
-> @@ -36,6 +36,8 @@ ifeq ($(CONFIG_BROKEN_GAS_INST),y)
->  $(warning Detected assembler with broken .inst; disassembly will be unre=
-liable)
->  endif
->
-> +KBUILD_DTBS      :=3D dtbs
 
+--OBFursw1+FOIdgqE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please remove this, and hard-code
+On Thu, Nov 30, 2023 at 09:50:36AM +0200, Svyatoslav Ryhel wrote:
 
- image.fit: dtbs
+> Dear Tom,
+>=20
+> The following changes since commit acae7eb5fe063dcfe2dbdb1e1804cf3e12cc2f=
+3f:
+>=20
+>   i2c: Bugfix in i2c_get_chip_by_phandle() (2023-11-27 18:54:56 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+>=20
+> for you to fetch changes up to e22d5799dc86298ad8388ddcb3b759e166c142b7:
+>=20
+>   ARM: dts: tegra30: enable USB PHY node on some devices (2023-11-28 09:1=
+7:18 +0200)
+>=20
 
+Applied to u-boot/next, thanks!
 
+--=20
+Tom
 
->
->  $(obj)/Image: vmlinux FORCE
->         $(call if_changed,objcopy)
-> @@ -39,6 +40,9 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
->  $(obj)/Image.zst: $(obj)/Image FORCE
->         $(call if_changed,zstd)
->
-> +$(obj)/image.fit: $(obj)/Image FORCE
-> +       $(call cmd,fit,gzip)
+--OBFursw1+FOIdgqE
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-The gzip parameter is not used.
-Please do
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVotDwACgkQFHw5/5Y0
+tyyi/wv/fdv7WhFIMrv9zLTxNIX6ZFYQPQl9ITMU+qXUCK+6c2Bf5A8LDbqw3608
+exO6DsHH/U8ST51cQVUGvQvpGCuO9o+ZMUBNy+xy/cu0E2PNlvwPARt24TBlepCA
+Z+KEGljDXwafd+RlHwV5owsvVcuiWrIacrBVssCWOtazu67QHiyvZSOEgYbA8tUh
+HG9K27fhBZ01KEPtjzZr/KUMvrDf/JYjUMop5xYppea2QBl+mVssIMhshKGHgkZx
+b74em49LVV3ytTgyzT6wDbisVJJRjGuKxWDX31pVgYE9T6dSBiQt/iFGLWdb8RyR
+9f0mZnCvt8TtOH6H5/psgFP5V534bxGqmeQLezZcYzWOE0lQYU2fBkZLe+JZqqFH
+1/6VsVAwWN24CdxStpCufGOQhR973p3ENnMhc0mpc8KnqJE57B7Ux5eoq/5te1Eh
+kOD9WuPIWD3HzO4Y3N5dGzxp1QSWW567kWPaGcKbZnA2NpIhr2+np2RO+HAn6JHh
+mhLzm8QC
+=Ykav
+-----END PGP SIGNATURE-----
 
-     $(call cmd,fit)
-
-
-
-
-
-In the python script, functions are separated with two blank lines,
-but there is only one blank line between parse_args() and setup_fit().
-
-
-I do not mind either way because it does not contain any class,
-but please keep consistency.
-
-
-
-
-
-
-
---
-Best Regards
-Masahiro Yamada
+--OBFursw1+FOIdgqE--
