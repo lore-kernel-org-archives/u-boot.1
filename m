@@ -4,71 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A587C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 07:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30D4C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 07:37:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A55B787691;
-	Fri,  1 Dec 2023 08:12:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DD14887677;
+	Fri,  1 Dec 2023 08:37:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="lxXSHwV6";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1701416273;
+	bh=d1TsOjuJzWOOUm4lpFdMfJ+mhyTqa126u1YcvY4FfUY=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=R28jMSLLzy9r5kH5zJAvNUs4VINECW2oyMdapGkNvzeCtnjA2uyeqYu6huMT2Vz8h
+	 UjTdwleQmrgH5VzeB1O2AjBsqDyC3bQcxrgLvYsvxnLbrGAg99BRx7ZsZv570W49+U
+	 BBhkzmS254ruqlHsQlIe3pFNzwkqGhUPi1SMlea0IKuazo9iqSS3A4aKN2yi2wvV4e
+	 3ATuwUbg1VjqY6hwDoq0HeJoU6llmk7mIBbPFySR1DGzUcks4x3ZFNTF8G/0pMru09
+	 cTA/IyegIy7RqSh7OOtHziknLoECjg5jwMjwFCqzvRyBX2nsPdF/fHHklWchoP5npt
+	 g3Dk6oVn54Opg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40286876AF; Fri,  1 Dec 2023 08:12:44 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id 3A63487686; Fri,  1 Dec 2023 08:37:53 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080898765A
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 08:12:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AB6787632
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 08:37:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 95406B8068F;
- Fri,  1 Dec 2023 07:12:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id ECAD7C433C7;
- Fri,  1 Dec 2023 07:12:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701414761;
- bh=8N1J3QWe6AzjnB1qNd2Ibpl8hQoVr/uqtIOKzKOJ1dw=;
- h=From:Date:Subject:To:Cc:Reply-To:From;
- b=lxXSHwV6EBOg5MEdIDthqDSp26XFZxuQOerNbvvL6vt3vPnVet4086qZBF53ZiI7p
- +nEqcsNmOVN396+XEUNea2eVuIma+LTM32tWiOKdFVcJa/rd6qqAClBfiM0G3Hj2vo
- HBrbnYdOKvWR233DxP3QMuEQzOfAxG23TBEbPKhlxzmuWh0gxVjRvmUJEDom5mVpE7
- 1o02ZsPu9F8xF2lvvn1PXhqbE8YGdkYSjdQnwoW4v+7GVZnArEVAJ/D8F4mVefjelV
- 9I+fQY7ZS/yX0uQLJZnhC2ML2tiHWzNiWB5S+nyR5DBv5Xq9BMW7Inbo+a26Jiew72
- DSScIKfqvpGeA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id CDA27C4167B;
- Fri,  1 Dec 2023 07:12:40 +0000 (UTC)
-From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Fri, 01 Dec 2023 08:12:33 +0100
-Subject: [PATCH v2] arm: apple: t602x: Add missing MMIO regions to memmap
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4ShPzc5xL7z9sm9;
+ Fri,  1 Dec 2023 08:37:48 +0100 (CET)
+Message-ID: <9f5c0ad9-6e7c-4451-a06c-3d9989358057@denx.de>
+Date: Fri, 1 Dec 2023 08:37:47 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231201-apple_t602x_extend_memmap-v2-1-a3831a0f3105@jannau.net>
-X-B4-Tracking: v=1; b=H4sIAGCHaWUC/42NQQ6CMBBFr0JmbU07BIKuvIchTZ2OUiOlaSvBE
- O5u5QQu30v++yskjo4TnKsVIs8uuckXwEMFNBj/YOFsYUCJtVK1FCaEF+vcSlw0L5m91SOPowm
- COqQGkUxHEso+RL67ZW9f+8KDS3mKn/1qVj/7T3VWQgmyp/aGjbJo6fI03pv30XOGftu2L7vGO
- cnDAAAA
-To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev
-X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3003; i=j@jannau.net;
- h=from:subject:message-id; bh=4FSp+FL6oA+RNFZSKEu4rSlOBmR9+tDcRmnu9XGpMIo=;
- b=owGbwMvMwCG2UNrmdq9+ahrjabUkhtTM9vQlP0Jy9i5Rmv9Ut3ej37U5TVuZxJd//3VGLHvTo
- 62O930/d5SyMIhxMMiKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZgI13JGhquG6VNnbZds9mO9
- c2pmn/y5tXukleYGcnIpX2s4ZbhbQ5uR4a9V6MHdD1aofJ3dzckkssptLu/yDIW2gBjXdhGhCLM
- ZLAA=
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
-X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
-X-Original-From: Janne Grunau <j@jannau.net>
+Subject: Re: [PATCH] watchdog: Correct watchdog timeout print message
+To: Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
+References: <CGME20231127010544epcas2p195e888cab27c0cbabd2f4b596404f5d8@epcas2p1.samsung.com>
+ <20231127010520.3170033-1-chanho61.park@samsung.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20231127010520.3170033-1-chanho61.park@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4ShPzc5xL7z9sm9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,110 +65,55 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+On 11/27/23 02:05, Chanho Park wrote:
+> The wdt_start function takes timeout_ms as a parameter and starts the
+> watchdog with this value. However, when you output the message, it shows
+> the default timeout value for the watchdog device.
+> So this patch fixes that part to output the correct timeout value.
+> 
+> Before -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (60s timeout)
+> 
+> After -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (3s timeout)
+> 
+> Fixes: c2fd0ca1a822 ("watchdog: Integrate watchdog triggering into the cyclic framework")
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 
-The memory maps for Apple's M2 Pro/Max/Ultra left MMIO space out which
-was not used by any driver at the time. The display out exposed as
-simple-framebuffer use a power-domain controlled by a device in an
-unmapped region.
-Add a map covering this region as well as another MMIO region in the
-range 0x4'0000'0000 - 0x5'0000'0000. The added regions cover all MMIO
-annotated in Apple's device tree in this range.
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-Signed-off-by: Janne Grunau <j@jannau.net>
----
-Changes in v2:
-- use SZ_1G as block size
-- Link to v1: https://lore.kernel.org/r/20231130-apple_t602x_extend_memmap-v1-1-cd96b251d2dc@jannau.net
----
- arch/arm/mach-apple/board.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
+Thanks,
+Stefan
 
-diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-index 47393babbc..7a6151a972 100644
---- a/arch/arm/mach-apple/board.c
-+++ b/arch/arm/mach-apple/board.c
-@@ -370,6 +370,22 @@ static struct mm_region t6020_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x400000000,
-+		.phys = 0x400000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x480000000,
-+		.phys = 0x480000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	}, {
- 		/* I/O */
- 		.virt = 0x580000000,
-@@ -471,6 +487,22 @@ static struct mm_region t6022_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x400000000,
-+		.phys = 0x400000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x480000000,
-+		.phys = 0x480000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	}, {
- 		/* I/O */
- 		.virt = 0x580000000,
-@@ -551,6 +583,22 @@ static struct mm_region t6022_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x2400000000,
-+		.phys = 0x2400000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* I/O */
-+		.virt = 0x2480000000,
-+		.phys = 0x2480000000,
-+		.size = SZ_1G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			PTE_BLOCK_NON_SHARE |
-+			PTE_BLOCK_PXN | PTE_BLOCK_UXN
- 	}, {
- 		/* I/O */
- 		.virt = 0x2580000000,
+> ---
+>   drivers/watchdog/wdt-uclass.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
+> index ed329284decb..65a4bc1f90ed 100644
+> --- a/drivers/watchdog/wdt-uclass.c
+> +++ b/drivers/watchdog/wdt-uclass.c
+> @@ -141,7 +141,7 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>   
+>   		printf("WDT:   Started %s with%s servicing %s (%ds timeout)\n",
+>   		       dev->name, IS_ENABLED(CONFIG_WATCHDOG) ? "" : "out",
+> -		       str, priv->timeout);
+> +		       str, (u32)(timeout_ms / 1000));
+>   	}
+>   
+>   	return ret;
 
----
-base-commit: 43f2873fa98b1da6eb56d756315c7bd7db63db27
-change-id: 20231130-apple_t602x_extend_memmap-c82c522ca8c0
+Viele Grüße,
+Stefan Roese
 
-Best regards,
 -- 
-Janne Grunau <j@jannau.net>
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
