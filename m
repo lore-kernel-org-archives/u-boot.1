@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F39C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 18:09:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 929E5C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 18:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D1BD87678;
-	Fri,  1 Dec 2023 19:09:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 04F6F871A4;
+	Fri,  1 Dec 2023 19:32:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D9BgtFPX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Irbc6DJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E8A487669; Fri,  1 Dec 2023 19:09:11 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id ED2BE8749E; Fri,  1 Dec 2023 19:32:16 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00D5887613
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 19:09:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8142586F95
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 19:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a0029289b1bso327792266b.1
- for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 10:09:07 -0800 (PST)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2c9caf896b7so29083521fa.0
+ for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 10:32:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701454147; x=1702058947; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UEIQEfvYkVjuDggg7B/9PPN2YOzTUfNPW/xSLvt+K4s=;
- b=D9BgtFPXJ+A/1pEH0OPW9rcCOgPXDtovlarkWGzN6fBI4WmUB/VctD12VUVbHYjEoi
- FErsw1FM/Ai5MbmQafAoyRYnVpD/pF2c6PFpIbx3j6/xPAzkVcfhqrFU8h8+UB7TnjO0
- seLMYN5pm95dRLWoMLK0Ql5H9siCWIbJl2lcA=
+ d=chromium.org; s=google; t=1701455533; x=1702060333; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VY/vj64t+3isstSSfMxoWVPmQI6/kqCaRheXsVj5UeY=;
+ b=Irbc6DJzMLAPMHWzzHgM0ReokPZj358s6RHnTPI25P7SIHAqZ4IYLtmbGdN2CICNz7
+ K6Xo/g9EDyd8lFFy5WRwioXHr607x+kTsv24eZJKsOPaPHxehTGkyR9jYh2ysXLDPnFz
+ HKtOU6J723jDt1eUddlVR17mRhGr/KklsHfTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701454147; x=1702058947;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UEIQEfvYkVjuDggg7B/9PPN2YOzTUfNPW/xSLvt+K4s=;
- b=c1GAr2x/1LEyfV4tC2x6svM/w5SW0u8hOhKbKtZBQIA+3fM7BTTxA0qrn1YE94jDkB
- YTyfkMhwKgQ6dg0tSBQswxT6Is6pwIBLFEonI4dN0DWlJ45X0geWWJXzL1veEyEv1aea
- pHqO/SeoJ2EgdBFlmGkrIzksHZrR8VJhrb9Fr1teYz/NF+F+AVQmqKrrG45LntxihRrC
- Vqab7xVpeyuRb+YBZcT5WtMjaA5+PpDm3Jy+8NqcTAitszbHYdaJxngbW3n3xeCO2GZN
- k3k2J+ljTQelSII/AgeDIQz2T06+vykY9EJ3eLYFJfnyYZFlR4crJ42bet6SocDGwDU1
- xVbQ==
-X-Gm-Message-State: AOJu0YwCS9dd+le0c75z0WI9Qr5weDgIaBupIqTenXQ1ODLewc4tB2VW
- iBEJTSWXsK4GgMMjUvjOgqx1JMQ7qxK5ypjoIMzNUw==
-X-Google-Smtp-Source: AGHT+IFZTKuH9PdUyL0gQprrafos6u3NTUlb/BhkZKnfCp3f1IpmtoqU828/90jTHuGL3HSwlPcLDoACchDP0koolhc=
-X-Received: by 2002:a17:906:5349:b0:a1a:55cd:350d with SMTP id
- j9-20020a170906534900b00a1a55cd350dmr107852ejo.104.1701454147105; Fri, 01 Dec
- 2023 10:09:07 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701455533; x=1702060333;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VY/vj64t+3isstSSfMxoWVPmQI6/kqCaRheXsVj5UeY=;
+ b=QHAGv3k5SkjAzuD/CC9i8YXKA/kmrrxbn4TxeoEAQeJuJX/fdTwDKxvLNNzX7YNbOy
+ W1C563VyfgVZF5wOO/Q6JAFCdnkZUD6nY38vU5GjCCsju0+y2yLP7wO0bQ0N8MZilheI
+ YwHDhNE2SUk2ZlnWyO13EezrMd79QVaI/ygrMSVzyXeyA90m7/46QvzjV6sa1K4qJ8Q4
+ J9vQg3gx4qt0kb2A0Bgx57EenpenwuUWZr7widDaF+67XtPMUADC6OpxmW1x6K47fRvO
+ 2cBdKJh6irFSeL3DlaI0kkB5U2vWF1pbl0/tkj1B3kgor5l0Tk7GXeUL1FHjx/gzYlf5
+ oN0g==
+X-Gm-Message-State: AOJu0YxbQi3XIsevStXCjn28PUOhFoMymyU8FQ7duaJ1kn43//i6zj5W
+ z0x9sjOZhfOoyBIK5tdkWw342iBqxieBlCQLf/Bq5g==
+X-Google-Smtp-Source: AGHT+IFKGk4vILIl9cP+bCRlkwRlXoivz4eoXRSDG3p+P4pApqrd61d0GEjEALoajhJsBwOB76XZNksgwmBqyU8rCaA=
+X-Received: by 2002:a2e:96d5:0:b0:2c9:d872:e7a9 with SMTP id
+ d21-20020a2e96d5000000b002c9d872e7a9mr1087941ljj.96.1701455533244; Fri, 01
+ Dec 2023 10:32:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20231130203358.879796-1-sjg@chromium.org>
- <20231130203358.879796-3-sjg@chromium.org>
- <CAK7LNARABFKSqY=f1uDGem2UqkTwGUQ9q3rDZ4NbXyuEAtsLdw@mail.gmail.com>
-In-Reply-To: <CAK7LNARABFKSqY=f1uDGem2UqkTwGUQ9q3rDZ4NbXyuEAtsLdw@mail.gmail.com>
+References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
+ <20231121070028.2614095-2-sughosh.ganu@linaro.org>
+ <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
+ <CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com>
+ <CAC_iWjKKas=zkMyJeNvLmcPWh2wjbE=aw_-Nugano3HYWX2+4Q@mail.gmail.com>
+ <CADg8p96mfEtCySQyXPLqKuwnYu7BPO5guoz9+0452aujgs-zsg@mail.gmail.com>
+ <CAPnjgZ09vvyhBTUW03armbz_sevRr0qQeqL2vaQ3BNq+Wo9_dA@mail.gmail.com>
+ <CADg8p96yHf7gSzHX4H6zaV-nx-BQ7qwmnBn6n5+xn969FCZKnQ@mail.gmail.com>
+In-Reply-To: <CADg8p96yHf7gSzHX4H6zaV-nx-BQ7qwmnBn6n5+xn969FCZKnQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Dec 2023 11:08:47 -0700
-Message-ID: <CAPnjgZ0SaoyCMiZHZ8Hs6iE8pqGz0RMYwv1XQQFZOHe1cpn7YQ@mail.gmail.com>
-Subject: Re: [PATCH v8 2/2] arm64: boot: Support Flat Image Tree
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: linux-arm-kernel@lists.infradead.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, lkml <linux-kernel@vger.kernel.org>,
- Ahmad Fatoum <a.fatoum@pengutronix.de>, Nicolas Schier <nicolas@fjasle.eu>, 
- Tom Rini <trini@konsulko.com>, Catalin Marinas <catalin.marinas@arm.com>, 
- Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
- Nick Terrell <terrelln@fb.com>, 
- Will Deacon <will@kernel.org>, linux-doc@vger.kernel.org,
- linux-kbuild@vger.kernel.org, workflows@vger.kernel.org
+Date: Fri, 1 Dec 2023 11:32:01 -0700
+Message-ID: <CAPnjgZ2Ryvp9WWmMCBPSANThYPVVda2dqXerwH0QiWn4wvdtiA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] tools: mkeficapsule: Add support for parsing capsule
+ params from config file
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,255 +90,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Masahiro,
+Hi Sughosh,
 
-On Fri, 1 Dec 2023 at 10:30, Masahiro Yamada <masahiroy@kernel.org> wrote:
+On Thu, 30 Nov 2023 at 23:39, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Fri, Dec 1, 2023 at 5:34=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
-> >
-> > Add a script which produces a Flat Image Tree (FIT), a single file
-> > containing the built kernel and associated devicetree files.
-> > Compression defaults to gzip which gives a good balance of size and
-> > performance.
-> >
-> > The files compress from about 86MB to 24MB using this approach.
-> >
-> > The FIT can be used by bootloaders which support it, such as U-Boot
-> > and Linuxboot. It permits automatic selection of the correct
-> > devicetree, matching the compatible string of the running board with
-> > the closest compatible string in the FIT. There is no need for
-> > filenames or other workarounds.
-> >
-> > Add a 'make image.fit' build target for arm64, as well.
-> >
-> > The FIT can be examined using 'dumpimage -l'.
-> >
-> > This features requires pylibfdt (use 'pip install libfdt'). It also
-> > requires compression utilities for the algorithm being used. Supported
-> > compression options are the same as the Image.xxx files. For now there
-> > is no way to change the compression other than by editing the rule for
-> > $(obj)/image.fit
-> >
-> > While FIT supports a ramdisk / initrd, no attempt is made to support
-> > this here, since it must be built separately from the Linux build.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v8:
-> > - Drop compatible string in FDT node
-> > - Correct sorting of MAINTAINERS to before ARM64 PORT
-> > - Turn compress part of the make_fit.py comment in to a sentence
-> > - Add two blank lines before parse_args() and setup_fit()
-> > - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> > - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> > - Add 'mkimage' details Documentation/process/changes.rst
-> > - Allow changing the compression used
-> > - Tweak cover letter since there is only one clean-up patch
-> >
-> > Changes in v7:
-> > - Add Image as a dependency of image.fit
-> > - Drop kbuild tag
-> > - Add dependency on dtbs
-> > - Drop unnecessary path separator for dtbs
-> > - Rebase to -next
-> >
-> > Changes in v5:
-> > - Drop patch previously applied
-> > - Correct compression rule which was broken in v4
-> >
-> > Changes in v4:
-> > - Use single quotes for UIMAGE_NAME
-> >
-> > Changes in v3:
-> > - Drop temporary file image.itk
-> > - Drop patch 'Use double quotes for image name'
-> > - Drop double quotes in use of UIMAGE_NAME
-> > - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> > - Avoid hard-coding "arm64" for the DT architecture
-> >
-> > Changes in v2:
-> > - Drop patch previously applied
-> > - Add .gitignore file
-> > - Move fit rule to Makefile.lib using an intermediate file
-> > - Drop dependency on CONFIG_EFI_ZBOOT
-> > - Pick up .dtb files separately from the kernel
-> > - Correct pylint too-many-args warning for write_kernel()
-> > - Include the kernel image in the file count
-> > - Add a pointer to the FIT spec and mention of its wide industry usage
-> > - Mention the kernel version in the FIT description
-> >
-> >  Documentation/process/changes.rst |   9 +
-> >  MAINTAINERS                       |   7 +
-> >  arch/arm64/Makefile               |   7 +-
-> >  arch/arm64/boot/.gitignore        |   1 +
-> >  arch/arm64/boot/Makefile          |   9 +-
-> >  scripts/Makefile.lib              |  13 ++
-> >  scripts/make_fit.py               | 291 ++++++++++++++++++++++++++++++
-> >  7 files changed, 334 insertions(+), 3 deletions(-)
-> >  create mode 100755 scripts/make_fit.py
-> >
-> > diff --git a/Documentation/process/changes.rst b/Documentation/process/=
-changes.rst
-> > index bb96ca0f774b..cad51bd5bd62 100644
-> > --- a/Documentation/process/changes.rst
-> > +++ b/Documentation/process/changes.rst
-> > @@ -62,6 +62,7 @@ Sphinx\ [#f1]_         1.7              sphinx-build =
---version
-> >  cpio                   any              cpio --version
-> >  GNU tar                1.28             tar --version
-> >  gtags (optional)       6.6.5            gtags --version
-> > +mkimage (optional)     2017.01          mkimage --version
-> >  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> >
-> >  .. [#f1] Sphinx is needed only to build the Kernel documentation
-> > @@ -189,6 +190,14 @@ The kernel build requires GNU GLOBAL version 6.6.5=
- or later to generate
-> >  tag files through ``make gtags``.  This is due to its use of the gtags
-> >  ``-C (--directory)`` flag.
-> >
-> > +mkimage
-> > +-------
-> > +
-> > +This tool is used when building a Flat Image Tree (FIT), commonly used=
- on ARM
-> > +platforms. The tool is available via the ``u-boot-tools`` package or c=
-an be
-> > +built from the U-Boot source code. See the instructions at
-> > +https://docs.u-boot.org/en/latest/build/tools.html#building-tools-for-=
-linux
-> > +
-> >  System utilities
-> >  ****************
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 14587be87a33..9f3eb476ece4 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -3037,6 +3037,13 @@ F:       drivers/mmc/host/sdhci-of-arasan.c
-> >  N:     zynq
-> >  N:     xilinx
-> >
-> > +ARM64 FIT SUPPORT
-> > +M:     Simon Glass <sjg@chromium.org>
-> > +L:     linux-arm-kernel@lists.infradead.org (moderated for non-subscri=
-bers)
-> > +S:     Maintained
-> > +F:     arch/arm64/boot/Makefile
-> > +F:     scripts/make_fit.py
-> > +
-> >  ARM64 PORT (AARCH64 ARCHITECTURE)
-> >  M:     Catalin Marinas <catalin.marinas@arm.com>
-> >  M:     Will Deacon <will@kernel.org>
-> > diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-> > index 1bd4fae6e806..6b893dc454b7 100644
-> > --- a/arch/arm64/Makefile
-> > +++ b/arch/arm64/Makefile
-> > @@ -150,7 +150,7 @@ libs-$(CONFIG_EFI_STUB) +=3D $(objtree)/drivers/fir=
-mware/efi/libstub/lib.a
-> >  # Default target when executing plain make
-> >  boot           :=3D arch/arm64/boot
-> >
-> > -BOOT_TARGETS   :=3D Image vmlinuz.efi
-> > +BOOT_TARGETS   :=3D Image vmlinuz.efi image.fit
-> >
-> >  PHONY +=3D $(BOOT_TARGETS)
-> >
-> > @@ -162,7 +162,9 @@ endif
-> >
-> >  all:   $(notdir $(KBUILD_IMAGE))
-> >
-> > -vmlinuz.efi: Image
-> > +image.fit: dtbs
-> > +
-> > +vmlinuz.efi image.fit: Image
-> >  $(BOOT_TARGETS): vmlinux
-> >         $(Q)$(MAKE) $(build)=3D$(boot) $(boot)/$@
-> >
-> > @@ -215,6 +217,7 @@ virtconfig:
-> >  define archhelp
-> >    echo  '* Image.gz      - Compressed kernel image (arch/$(ARCH)/boot/=
-Image.gz)'
-> >    echo  '  Image         - Uncompressed kernel image (arch/$(ARCH)/boo=
-t/Image)'
-> > +  echo  '  image.fit     - Flat Image Tree (arch/$(ARCH)/boot/image.fi=
-t)'
-> >    echo  '  install       - Install uncompressed kernel'
-> >    echo  '  zinstall      - Install compressed kernel'
-> >    echo  '                  Install using (your) ~/bin/installkernel or=
-'
-> > diff --git a/arch/arm64/boot/.gitignore b/arch/arm64/boot/.gitignore
-> > index af5dc61f8b43..abaae9de1bdd 100644
-> > --- a/arch/arm64/boot/.gitignore
-> > +++ b/arch/arm64/boot/.gitignore
-> > @@ -2,3 +2,4 @@
-> >  Image
-> >  Image.gz
-> >  vmlinuz*
-> > +image.fit
-> > diff --git a/arch/arm64/boot/Makefile b/arch/arm64/boot/Makefile
-> > index 1761f5972443..62efb533a9bc 100644
-> > --- a/arch/arm64/boot/Makefile
-> > +++ b/arch/arm64/boot/Makefile
-> > @@ -16,7 +16,8 @@
-> >
-> >  OBJCOPYFLAGS_Image :=3D-O binary -R .note -R .note.gnu.build-id -R .co=
-mment -S
-> >
-> > -targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo I=
-mage.zst
-> > +targets :=3D Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo \
-> > +       Image.zst image.fit
-> >
-> >  $(obj)/Image: vmlinux FORCE
-> >         $(call if_changed,objcopy)
-> > @@ -39,6 +40,12 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
-> >  $(obj)/Image.zst: $(obj)/Image FORCE
-> >         $(call if_changed,zstd)
-> >
-> > +# Use this to override the compression algorithm
-> > +FIT_COMPRESS ?=3D gzip
-> > +
-> > +$(obj)/image.fit: $(obj)/Image FORCE
-> > +       $(call cmd,fit,$(FIT_COMPRESS))
+> hi Simon,
 >
+> On Thu, 30 Nov 2023 at 08:16, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > On Wed, 22 Nov 2023 at 00:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > hi Ilias,
+> > >
+> > > On Wed, 22 Nov 2023 at 13:06, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi all,
+> > > >
+> > > > On Wed, 22 Nov 2023 at 07:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > hi Simon,
+> > > > >
+> > > > > On Wed, 22 Nov 2023 at 03:42, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Sughosh,
+> > > > > >
+> > > > > > On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Add support for specifying the parameters needed for capsule
+> > > > > > > generation through a config file, instead of passing them through
+> > > > > > > command-line. Parameters for more than a single capsule file can be
+> > > > > > > specified, resulting in generation of multiple capsules through a
+> > > > > > > single invocation of the command.
+> > > > > > >
+> > > > > > > The config file can then be passed to the mkeficapsule tool in such
+> > > > > > > manner
+> > > > > > >
+> > > > > > >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
+> > > > > > >
+> > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > ---
+> > > > > > >  tools/Kconfig              |  15 ++
+> > > > > > >  tools/Makefile             |   1 +
+> > > > > > >  tools/eficapsule.h         | 114 ++++++++++++
+> > > > > > >  tools/mkeficapsule.c       |  87 +++++----
+> > > > > > >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
+> > > > > > >  5 files changed, 538 insertions(+), 31 deletions(-)
+> > > > > > >  create mode 100644 tools/mkeficapsule_parse.c
+> > > > > >
+> > > > > > This patch keeps coming back :-)
+> > > > > >
+> > > > > > Can we not add multiple capsules in the binman description? Why do we
+> > > > > > need a new file format? How can binman decode images produced in this
+> > > > > > way?
+> > > > >
+> > > > > So as Tom mentions, this brings parity with respect to the other
+> > > > > capsule generation tool in EDKII that generates capsules. IIRC, this
+> > > > > is something which even Xilix was interested in, and Michal had kind
+> > > > > of gone through these patches earlier. Lastly, it would be good to
+> > > > > have support in U-Boot's mkeficapsule tool for generating a single
+> > > > > capsule file with multiple payloads, and having support for this
+> > > > > functionality helps in that goal.
+> > > > >
+> > > > > Also, you might have noticed that, since your objection to the last
+> > > > > series, I have removed putting this in binman. So now, this aspect of
+> > > > > the capsule generation would only be supported through the
+> > > > > command-line invocation of the tool.
+> > > >
+> > > > I think that overall the approach is sane. mkeficapsule is currently
+> > > > supported and compiled for distros, so the multiple payload support is
+> > > > useful. If we want to add support to binman, instead of rewriting this
+> > > > in python, we could just call that tool for parsing and creating
+> > > > capsules
+> > >
+> > > Given the amount of time these patches have been under review(also
+> > > number of iterations), I would request that this series be reviewed
+> > > and merged first. I think there is general consensus that there is
+> > > value to have this functionality in the mkeficapsule tool. If it is
+> > > deemed fit to support this through binman as well, that task can be
+> > > taken up separately. Thanks.
+> >
+> > The point you are missing is that it is the entire goal of 'skirting
+> > around' binman which is suspect.
+> >
+> > If there is a need to generate an output file from the build, we
+> > should support it in binman. If people start creating configuration
+> > files all over the place, then they are not using binman, right?
+> >
+> > I understand that there are pre-existing vendor-specific config files,
+> > etc. that the EFI thing is a grey area, but I cannot imagine that this
+> > patch would lead to a good outcome.
+> >
+> > The goal of binman is to bring order to the chaos of firmware
+> > packaging...we cannot do that if it is not actually used.
+> >
+> > So let's figure out what is missing from binman's capsule generation
+> > (multiple capsules? accept/reject capsules?) and how best to add it.
 >
+> I think I need to jog your memory back a bit. For context, I have
+> jotted down the points.
 >
-> Again, $(FIT_COMPRESS) is not used anywhere.
->
->
-> Please fix it to
->
->       $(call cmd,fit)
->
->
->
->
-> See your code.
->
->
->    cmd_fit =3D $(MAKE_FIT) -f $@ --arch $(UIMAGE_ARCH) --os linux \
->                      --name '$(UIMAGE_NAME)' \
->                      --compress $(UIMAGE_COMPRESSION) -k $< \
->                      $(<D)/dts
->
->
-> cmd_fit does not take any argument.
->
->
-> The compression is determined by $(UIMAGE_COMPRESSION).
+> * The mkeficapsule tool generates capsules in U-Boot.
+> * Currently, when the tool is invoked from the command-line, the
+> capsules are generated by passing the capsule parameters as cmd-line
+> options.
+> * I had earlier added support for generating the capsules as part of
+> U-Boot build, through binman. This support has been merged.
+> * I had followed these patches up with another series [1] which
+> generates capsules by parsing the capsule parameters through a config
+> file instead of cmd-line options.
+> * This series also had patches which were attempting to integrate this
+> functionality into binman [2].
+> * As part of reviewing the patch series, you had objected to adding
+> this support in binman, primarily because this way of specifying the
+> capsule parameters goes against the normal way of image description in
+> binman [3].
+> * I have described in this mail thread about why we need to have
+> support for generating capsules through config files [4].
 
-This references argument 2, which is how it works. I have tested this,
-for example:
+Thanks for that. Yes this fits with my memory, such as it is.
 
-ARCH=3Darm64 CROSS_COMPILE=3D... make FIT_COMPRESS=3Dlzma image.fit
+I regard the tool as a binman tool, though, in the sense that binman
+is responsible for generating the images. For example, binman calls
+mkimage to handle FIT images. People are free to write a script to
+call mkimage manually, but the in-tree use of mkimage is supposed to
+be with binman.
 
-I do want to support different algorithms, if possible. Is there a
-better way to do this?
+>
+> So, in essence, this functionality is needed to be added to the tool.
+> I have earlier tried integrating this in binman, but that was
+> rejected. So, the way I see this moving ahead is to first add support
+> for this feature in the tool, and then see if this can also be added
+> in binman. As I mentioned earlier, I am fine with this functionality
+> not getting integrated with binman, if this contravenes the idea of
+> describing images in binman, and if no exceptions can be made on that
+> regard. But please do understand that no attempt is being made at
+> 'skirting around binman'. In fact, I had worked on your earlier
+> objection of using absolute paths in testing this functionality in
+> binman. But then you had put the other objection of how this does not
+> follow the idea or concept of image description in binman. Hence this
+> approach.
+
+It would be easier to talk this through f2f, but I will make an attempt here.
+
+The goal here is for people to be able to create an EFI capsule (or
+more than one?) automatically as part of the build. Since the config
+is in the binman description, putting it somewhere else doesn't help
+anyone. It will lead to .cfg files in U-Boot and Binman will just be a
+side show. That is my concern.
+
+I would really like to see a capsule generated for sandbox so I can
+understand this better.
+
+Anyway, I hope that makes sense? If not, I think we should discuss it
+f2f or VC or somehow.
 
 Regards,
 Simon
+
+>
+> -sughosh
+>
+> [1] - https://lore.kernel.org/u-boot/20230908120002.29851-1-sughosh.ganu@linaro.org/
+> [2] - https://lore.kernel.org/u-boot/20230908120002.29851-4-sughosh.ganu@linaro.org/
+> [3] - https://lore.kernel.org/u-boot/CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com/
+> [4] - https://lore.kernel.org/u-boot/CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com/
+>
+> >
+> > >
+> > > -sughosh
+> > >
+> > > >
+> > > > Thanks
+> > > > /Ilias
+> > > > >
+> > > > > >
+> > > > > > Also, could we get sandbox to produce one EFI capsule as part of the
+> > > > > > normal build? I think that discussion trailed off.
+> > > > >
+> > > > > Yes, apologies for missing out on this. Slipped my mind. Would you
+> > > > > want, say, all the non-signed capsules to be generated as part of the
+> > > > > sandbox build?
+> > > > >
+> > > > > -sughosh
+> >
+> > Regards,
+> > Simon
