@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4211EC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 18:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0B4C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 18:44:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D47D98764D;
-	Fri,  1 Dec 2023 19:32:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44DFC87623;
+	Fri,  1 Dec 2023 19:44:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZwceFHuB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dwhf7KKP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31EA876FC; Fri,  1 Dec 2023 19:32:30 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 751088764D; Fri,  1 Dec 2023 19:44:19 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFA178764D
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 19:32:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3E438749E
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 19:44:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2c9d0d327d6so26261041fa.1
- for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 10:32:28 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a18ebac19efso365751566b.0
+ for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 10:44:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701455548; x=1702060348; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=46cp2t0VxD+ryS2W3W+K1VqaUv37Njqpmiz8i3zsIRU=;
- b=ZwceFHuBG1yE4r4bVIL9OVXEcKtH5SzuZi+PgqsyXGwsfjPGouTL44VzHLngb+Q5Ke
- Uz1QkYQYilzg6wqPya3lDDFqywJ/3V1s83mhQxYrMDSig2qkmVs6okz9WgWG+kcAy/mL
- EwkdHP3WBm+OIIYdTeDaHLnUuK6FK7zvYDe9o=
+ d=chromium.org; s=google; t=1701456256; x=1702061056; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oee+tnQbFNT4jG9RGdlslHy1GhTkA0g021sFeRt2zqw=;
+ b=Dwhf7KKPqAqDkrDyAwdMep9G8lvhJxuJQTwiyWqoSYNmhe7PsqxwxXAI0PUvtRicGk
+ sqSWbKiRLIxKx9SAB93iBtzOLh+nIoKgt8UKJ5w8PMb92el91xK4MlC2QCTnfux9Sgna
+ x8tK0Px6SqMx34pwF2OOHSMKyIEeijvh84djY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701455548; x=1702060348;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=46cp2t0VxD+ryS2W3W+K1VqaUv37Njqpmiz8i3zsIRU=;
- b=lq0pjaOczqZUoLGKw2sBfYhMkxXcjecMeqXhruUZiYxhyNbJkGz1eNDXLm8/jduC7b
- DjZyltEIOcLxz5JmBFDpezzZxrfmjMZv9z2RdwLZacICj496yLTn15VrkDhTwM8iYH6t
- AGIKhK/NOoXlvCamKI2gRDGcXq1fmgSpOG03ukSYvh5VxU3YISqBUwask7xg4sFw9vrS
- L+Y9FZiAJLYA8iurJ3V1u1oKEVTKtxAg0wwoJ1oS249yfLIfPVlYP/A6cOxdyGRPeQ0v
- zCEMd41DOamW5N357bDWcNcFwpgJtrCdcMumBwpib3TetZr3LeVw0Dg0ts22nnumk1zc
- x/gw==
-X-Gm-Message-State: AOJu0YzuIeXC2OIjY0z98k2Tb4URXxQ8atkP7pIS5H62BNp0n2wK52Nj
- sQdMCjstw5PAoqqPURLfmUzI5/snlo00sgd+rp0ds3t7LlmbELO8jVU=
-X-Google-Smtp-Source: AGHT+IFPet8SMMbMee2R4C1IY6N2nefERxP/FZbdapcWQDZEXfR7WClsV48MNzAA01zhLQ30xD0FxObNuWb+Xk44rpw=
-X-Received: by 2002:a2e:780f:0:b0:2c9:d384:b0ce with SMTP id
- t15-20020a2e780f000000b002c9d384b0cemr1233366ljc.34.1701455547908; Fri, 01
- Dec 2023 10:32:27 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701456256; x=1702061056;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oee+tnQbFNT4jG9RGdlslHy1GhTkA0g021sFeRt2zqw=;
+ b=LuEpAKAzOMe6ZdOCQegbRxXGJAZSAhMTD95wWZJJem3iWZEGh/+xHBl8I2U/5wYisp
+ eYRsYkFgPMIYNBjEIfvxkMp9vUyhq50R+snabrq7D0qFyr+qw5sMSnQ5Lr6kWL+vSlKW
+ yPCkaD/DeOjg2Pk+7X2OM6pyfkgFyGlLOPT7IgUp/MmblzCNBrzqP0wCeI1AZsuS58Lk
+ okfd/L2MBAJWUXwz4m/MCRhLaumWpEMJ6e4b2fUk9p2pSaPR4qLPGpKCBY/qMsWIfwha
+ QOMWEoVqApIoHRhujqeVySV8mCpIw/g3tNlhrDYXKsg+sHpZTFNLsvVO9JYtkD0i3P6r
+ hIPw==
+X-Gm-Message-State: AOJu0YxAAl6cLGv7tRfPqrwvxOdnX9HRGsyd6Kl1fsc5Ob7zOg6eLvho
+ KVGCxquhdWBDMAkoIGZhcEULMr1w92ht5xbRMjjWSA==
+X-Google-Smtp-Source: AGHT+IH8KeUeJwLQljtW0PiLGS6+jI8gzwuQNSbhc0Un/wjCBJWYd0CUU4K2buB4nbS/rNrC8v6aDeHNIqRR1Qy5OBE=
+X-Received: by 2002:a17:906:51d1:b0:9fd:fdae:a9d0 with SMTP id
+ v17-20020a17090651d100b009fdfdaea9d0mr2257967ejk.5.1701456256138; Fri, 01 Dec
+ 2023 10:44:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
- <20230912094731.51413-2-seanedmond@linux.microsoft.com>
-In-Reply-To: <20230912094731.51413-2-seanedmond@linux.microsoft.com>
+References: <CABEcMwVkWqwKVGCUTJw366rM7qk1NGGpJ_Aw8cX4wRCSvJMwPw@mail.gmail.com>
+ <CAC_iWjKNf6RxPoKzPjJiLV+UnQES344wb=sqS1wCnQzC+J-Hkw@mail.gmail.com>
+ <CAHc5_t0UNC5PPxJ3ji4ToOqzHpcSovYRUJbb2ZJ64qTTOZ+1Bw@mail.gmail.com>
+ <CALeDE9ONK7CMP6DXKRrjzqxm1r-afB7bgKSDhekrhOMUnhhktQ@mail.gmail.com>
+ <CAHc5_t3QQUT=aid9NYRysPvtVG31Ohtvo=RxZkDPo9W9saQUdA@mail.gmail.com>
+ <CAC_iWj+HV4dBqa4iG4NfJ9T=jwdqxLMi5Lunis7ZFezQ23VPag@mail.gmail.com>
+ <CAHc5_t3oa=Hho+WRSWN4UoE5zSLV-G_Pn6fbZKqzT0eP3ZAZcg@mail.gmail.com>
+ <CAHc5_t2_V8huBnpBTQmn-B3assO5hDD0yZAZx=WRAf0jQB7kqw@mail.gmail.com>
+In-Reply-To: <CAHc5_t2_V8huBnpBTQmn-B3assO5hDD0yZAZx=WRAf0jQB7kqw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 1 Dec 2023 11:32:14 -0700
-Message-ID: <CAPnjgZ2FrxdU6ksB0nbUBhLngWpxoDi6q_drBmdGgBYfFjtkRQ@mail.gmail.com>
-Subject: Re: [PATCH 1/8] drivers: rollback: Add rollback devices to driver
- model
-To: seanedmond@linux.microsoft.com
-Cc: u-boot@lists.denx.de, stcarlso@linux.microsoft.com, 
- ilias.apalodimas@linaro.org
+Date: Fri, 1 Dec 2023 11:43:57 -0700
+Message-ID: <CAPnjgZ21qLnSFcCJ9rPQXEfQf-NjMBF3kYUDBBOc6WUQXQtDEA@mail.gmail.com>
+Subject: Re: efi: Set Variable Runtime implementation
+To: Shantur Rathore <i@shantur.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, takahiro.akashi@linaro.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,324 +92,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Shantur,
 
-On Tue, 12 Sept 2023 at 03:47, <seanedmond@linux.microsoft.com> wrote:
+On Mon, 27 Nov 2023 at 10:27, Shantur Rathore <i@shantur.com> wrote:
 >
-> From: Stephen Carlson <stcarlso@linux.microsoft.com>
+> + Simon as he seems to have done a lot of work in the driver model.
 >
-> Rollback devices currently implement operations to store an OS
-> anti-rollback monotonic counter. Existing devices such as the Trusted
-> Platform Module (TPM) already support this operation, but this uclass
-> provides abstraction for current and future devices that may support
-> different features.
->
-> - New Driver Model uclass UCLASS_ROLLBACK.
-> - New config CONFIG_DM_ROLLBACK to enable security device support.
-> - New driver rollback-sandbox matching "rollback,sandbox", enabled with
->   new config CONFIG_ROLLBACK_SANDBOX.
->
-> Signed-off-by: Stephen Carlson <stcarlso@linux.microsoft.com>
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->  MAINTAINERS                         |  9 ++++
->  drivers/Kconfig                     |  2 +
->  drivers/Makefile                    |  1 +
->  drivers/rollback/Kconfig            | 25 +++++++++++
->  drivers/rollback/Makefile           |  6 +++
->  drivers/rollback/rollback-sandbox.c | 65 +++++++++++++++++++++++++++++
->  drivers/rollback/rollback-uclass.c  | 30 +++++++++++++
->  include/dm/uclass-id.h              |  1 +
->  include/rollback.h                  | 42 +++++++++++++++++++
->  9 files changed, 181 insertions(+)
->  create mode 100644 drivers/rollback/Kconfig
->  create mode 100644 drivers/rollback/Makefile
->  create mode 100644 drivers/rollback/rollback-sandbox.c
->  create mode 100644 drivers/rollback/rollback-uclass.c
->  create mode 100644 include/rollback.h
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index bf851cffd6..de14724c27 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1438,6 +1438,15 @@ F:       cmd/seama.c
->  F:     doc/usage/cmd/seama.rst
->  F:     test/cmd/seama.c
->
-> +ROLLBACK
-> +M:     Stephen Carlson <stcarlso@linux.microsoft.com>
-> +M:     Sean Edmond <seanedmond@microsoft.com>
-> +S:     Maintained
-> +F:     drivers/rollback/Kconfig
-> +F:     drivers/rollback/Makefile
-> +F:     drivers/rollback/rollback-sandbox.c
-> +F:     drivers/rollback/rollback-uclass.c
-> +
->  SEMIHOSTING
->  R:     Sean Anderson <sean.anderson@seco.com>
->  S:     Orphaned
-> diff --git a/drivers/Kconfig b/drivers/Kconfig
-> index a25f6ae02f..faa7cbb72b 100644
-> --- a/drivers/Kconfig
-> +++ b/drivers/Kconfig
-> @@ -116,6 +116,8 @@ source "drivers/rtc/Kconfig"
->
->  source "drivers/scsi/Kconfig"
->
-> +source "drivers/rollback/Kconfig"
-> +
->  source "drivers/serial/Kconfig"
->
->  source "drivers/smem/Kconfig"
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index efc2a4afb2..f6cfb48cb6 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -98,6 +98,7 @@ obj-$(CONFIG_PCH) += pch/
->  obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode/
->  obj-y += rtc/
->  obj-y += scsi/
-> +obj-y += rollback/
->  obj-y += sound/
->  obj-y += spmi/
->  obj-y += watchdog/
-> diff --git a/drivers/rollback/Kconfig b/drivers/rollback/Kconfig
-> new file mode 100644
-> index 0000000000..31f5a3f56d
-> --- /dev/null
-> +++ b/drivers/rollback/Kconfig
-> @@ -0,0 +1,25 @@
-> +config DM_ROLLBACK
+> On Mon, Nov 27, 2023 at 10:12=E2=80=AFAM Shantur Rathore <i@shantur.com> =
+wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Mon, Nov 27, 2023 at 7:16=E2=80=AFAM Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Shantur
+> > >
+> > > On Sun, 26 Nov 2023 at 12:33, Shantur Rathore <i@shantur.com> wrote:
+> > > >
+> > > > Hi Peter,
+> > > >
+> > > > On Sat, Nov 25, 2023 at 6:19=E2=80=AFAM Peter Robinson <pbrobinson@=
+gmail.com> wrote:
+> > > > >
+> > > > > Hi Shantur,
+> > > > >
+> > > > > On Fri, Nov 24, 2023 at 11:55=E2=80=AFPM Shantur Rathore <i@shant=
+ur.com> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Fri, Nov 24, 2023 at 10:50=E2=80=AFPM Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Hi Shantur
+> > > > > > >
+> > > > > > > On Fri, 24 Nov 2023 at 18:51, Shantur Rathore <i@shantur.com>=
+ wrote:
+> > > > > > > >
+> > > > > > > > Hi Heinrich,
+> > > > > > > >
+> > > > > > > > I am trying to work out how to enable the SetVariableRT ser=
+vice in
+> > > > > > > > U-Boot and came across your patch [1] which initially had t=
+he
+> > > > > > > > SetVariable RT service enabled in EFI but in the final patc=
+h this was
+> > > > > > > > removed.
+> > > > > > > > I am hoping to implement it on top of the SPI Flash EFI sto=
+re [2] to
+> > > > > > > > be able to set Boot order and boot items from Linux the UEF=
+I way.
+> > > > > > > >
+> > > > > > > > Can I pick your brain on why it was dropped in the patch?
+> > > > > > > > Is there any limitation in SetVariableRT service ?
+> > > > > > >
+> > > > > > > I recently had a talk about it in Plumbers [0]. Generally spe=
+aking, RT
+> > > > > > > + hardware owned by the kernel is a very weird combination si=
+nce you
+> > > > > > > can't guarantee exclusive access to the flash or the bus and =
+you have
+> > > > > > > to preserve a *lot* of code alive in u-boot.
+> > > > > > >
+> > > > > > > I'll respond to your v1 patchset and we can discuss details t=
+here as well.
+> > > > > > >
+> > > > > > > [0] https://lpc.events/event/17/contributions/1653/
+> > > > > >
+> > > > > > Thanks for the background and helping me understand the problem=
+.
+> > > > > > Makes me wonder how things work in the PC world.
+> > > > > > U-boot being only ~1MB, can we not leave it all in memory and m=
+aybe
+> > > > > > just disable SPI access to Linux.
+> > >
+> > > That would work, but you cant guarantee Linux wont enable the SPI fla=
+sh.
+> > >
+> > > > >
+> > > > > That's basically it, on x86 there's specific HW that's owned by
+> > > > > firmware, I don't know the exact low level details of how that wo=
+rks.
+> > > > >
+> > > > > I think x86 devices generally use eSPI for this HW [1] but I don'=
+t
+> > > > > know the low level details. The Arm SBSA (Server HW spec) and SBB=
+R
+> > > > > (Server Base Boot Requirements) specs that are key to ServerReady=
+ may
+> > > > > go into some details too if you're curious.
+> > >
+> > > On X86 the SPI flash is handled entirely by the firmware and SMM. You
+> > > can find more details here [0]
+> >
+> > Thanks for more info.
+> >
+> > >
+> > > >
+> > > > Thanks,
+> > > > I think the firmware is still accessible to PCs as one could update=
+ the firmware
+> > > > in Windows so Windows has access to that device.
+> > > >
+> > > > I had some try myself and found that setting a variable to memory b=
+acked storage
+> > > > is doable with SetVariable call but we want to store it in any
+> > > > non-volatile storage
+> > > > things really don't look good.
+> > > >
+> > > > To be able to write SetVariable to any device, the whole u-boot dri=
+ver
+> > > > model would need
+> > > > to be kept in memory, might as well just keep the whole u-boot in
+> > > > memory at this point, it's anyway small.
+> > > > I don't have much knowledge on how to or pros and cons of doing thi=
+s.
+> > >
+> > > The major problem here is who owns the hardware. With the SPI flash
+> > > implementation as well as the RPMB implementation Linux owns that
+> > > flash.
+> > > For the RPMB we've introduced a mechanism so the kernel replaces the
+> > > runtime calls with internal functions [1].  I think we should come up
+> > > with a similar architecture for SPI. In any case we should keep in
+> > > mind that setting authenticated EFI variables should be forbidden on
+> > > the file/SPI backends since they are not really secure.
+> > >
+> >
+> > Thanks, I understand now that we can't use SPI flash for saving secure
+> > variables and stop Linux from accessing it.
+> > My requirement is to be able to save non-Secure boot related variables
+> > ( BootOrder, BootNext and BootOptions ).
+> > For this purpose as we don't need secure channel and to be compatible
+> > with current Linux versions I started
+> > implementing SetVariable in runtime in [1]
+> > I was able to get it working until it's ready to write stuff into SPI F=
+lash.
 
-Could this be ROLLBACK ? We try to use DM_ only for migrations.
+Yes, this makes sense to me and we don't need secure vars for these
+features. They are really just hints from the OS or user.
 
-> +       bool "Support rollback devices with driver model"
-> +       depends on DM
-> +       help
-> +         This option enables support for the rollback uclass which supports
-> +         devices intended to provide the anti-rollback feature during
-> +         boot. These devices might encapsulate existing features of TPM
-> +         or TEE devices, but can also be dedicated security processors
-> +         implemented in specific hardware.
-> +
-> +config ROLLBACK_SANDBOX
-> +       bool "Enable sandbox rollback driver"
-> +       depends on DM_ROLLBACK
-> +       help
-> +         This driver supports a simulated rollback device that uses volatile
-> +         memory to store secure data and begins uninitialized. This
-> +         implementation allows OS images with security requirements to be
-> +         loaded in the sandbox environment.
-> +
-> +config ROLLBACK_TPM
-> +       bool "Enable TPM rollback driver"
-> +       depends on TPM && TPM_V2 && DM_ROLLBACK
-> +       help
-> +         This driver supports a rollback device based on existing TPM
-> +         functionality.
-> diff --git a/drivers/rollback/Makefile b/drivers/rollback/Makefile
-> new file mode 100644
-> index 0000000000..4e7fa46041
-> --- /dev/null
-> +++ b/drivers/rollback/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# (C) Copyright 2021 Microsoft, Inc.
-> +
-> +obj-$(CONFIG_DM_ROLLBACK) += rollback-uclass.o
-> +obj-$(CONFIG_ROLLBACK_SANDBOX) += rollback-sandbox.o
-> diff --git a/drivers/rollback/rollback-sandbox.c b/drivers/rollback/rollback-sandbox.c
-> new file mode 100644
-> index 0000000000..acbe6d2303
-> --- /dev/null
-> +++ b/drivers/rollback/rollback-sandbox.c
-> @@ -0,0 +1,65 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2021 Microsoft, Inc
-> + * Written by Stephen Carlson <stcarlso@microsoft.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <fdtdec.h>
+> > To be able to use SPI Flash, runtime call needs to access the drivers
+> > and this needs the whole driver-model to be in
+> > efi runtime memory makes me think would it make sense to keep the
+> > whole u-boot in efi runtime memory or just
+> > driver model and all SPI drivers for now and keep adding other drivers
+> > when needed like RPMB.
 
-Is that needed?
+I don't fully agree with this. The OS is well able to access SPI flash
+or any other device. There is no need to ask the firmware to do it,
+unless there is some other reason. I can understand calling into a
+secure OS, or using a TPM, but for SPI flash this doesn't make much
+sense to me.
 
-> +#include <rollback.h>
-> +
-> +static struct rollback_state {
-> +       u64 rollback_idx;
-> +};
-> +
-> +static int sb_rollback_idx_get(struct udevice *dev, u64 *rollback_idx)
-> +{
-> +       struct rollback_state *priv = dev_get_priv(dev);
-> +
-> +       if (!rollback_idx)
-> +               return -EINVAL;
-> +
-> +       *rollback_idx = priv->rollback_idx;
-> +       return 0;
-> +}
-> +
-> +static int sb_rollback_idx_set(struct udevice *dev, u64 rollback_idx)
-> +{
-> +       struct rollback_state *priv = dev_get_priv(dev);
-> +       u64 old_rollback_idx;
-> +
-> +       old_rollback_idx = priv->rollback_idx;
-> +       if (rollback_idx < old_rollback_idx)
-> +               return -EPERM;
-> +
-> +       priv->rollback_idx = rollback_idx;
-> +       return 0;
-> +}
-> +
-> +static const struct rollback_ops rollback_sandbox_ops = {
-> +       .rollback_idx_get               = sb_rollback_idx_get,
-> +       .rollback_idx_set               = sb_rollback_idx_set,
-> +};
-> +
-> +static int rollback_sandbox_probe(struct udevice *dev)
-> +{
-> +       struct rollback_state *priv = dev_get_priv(dev);
-> +
-> +       priv->rollback_idx = 0ULL;
+> >
+> > I need some pointers to what would be the best approach accessing
+> > hardware from runtime.
 
-Driver model sets private data to zeroes, so you can drop this.
+We would need to publish a runtime interface with access to the driver
+API. I did ask for this when the EFI runtime support was added, but it
+wasn't done.
 
-> +       return 0;
-> +}
-> +
-> +static const struct udevice_id rollback_sandbox_ids[] = {
-> +       { .compatible = "sandbox,rollback" },
-> +       { }
-> +};
-> +
-> +U_BOOT_DRIVER(rollback_sandbox) = {
-> +       .name   = "rollback_sandbox",
-> +       .id     = UCLASS_ROLLBACK,
-> +       .priv_auto = sizeof(struct rollback_state),
-> +       .of_match = rollback_sandbox_ids,
-> +       .probe  = rollback_sandbox_probe,
-> +       .ops    = &rollback_sandbox_ops,
-> +};
-> diff --git a/drivers/rollback/rollback-uclass.c b/drivers/rollback/rollback-uclass.c
-> new file mode 100644
-> index 0000000000..1fc5486b0d
-> --- /dev/null
-> +++ b/drivers/rollback/rollback-uclass.c
-> @@ -0,0 +1,30 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2021 Microsoft, Inc
-> + * Written by Stephen Carlson <stcarlso@microsoft.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <rollback.h>
-> +
-> +int rollback_idx_get(struct udevice *dev, uint64_t *rollback_idx)
-> +{
-> +       if (!dev || !rollback_idx)
-> +               return -EINVAL;
+It would be possible to create a new 'runtime' phase of U-Boot (RPL?),
+separate from the others. That will be much easier once we get the XPL
+stuff sorted out., since adding new [hase would be fairly trivial  CPL
+died as another contributor had a series which went in first...then I
+never got back to it.
 
-We don't normally do this sort of checking, due to code size. It isn't
-valid to pass NULL here.
+So for now having the entire U-Boot in runtime space seems reasonable to me=
+.
 
-> +
-> +       return rollback_get_ops(dev)->rollback_idx_get(dev, rollback_idx);
-> +}
-> +
-> +int rollback_idx_set(struct udevice *dev, uint64_t rollback_idx)
-> +{
-> +       if (!dev)
-> +               return -EINVAL;
-> +
-> +       return rollback_get_ops(dev)->rollback_idx_set(dev, rollback_idx);
-> +}
-> +
-> +UCLASS_DRIVER(rollback) = {
-> +       .id             = UCLASS_ROLLBACK,
-> +       .name           = "rollback",
-> +};
-> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-> index 0432c95c9e..4b8b730d87 100644
-> --- a/include/dm/uclass-id.h
-> +++ b/include/dm/uclass-id.h
-> @@ -124,6 +124,7 @@ enum uclass_id {
->         UCLASS_RTC,             /* Real time clock device */
->         UCLASS_SCMI_AGENT,      /* Interface with an SCMI server */
->         UCLASS_SCSI,            /* SCSI device */
-> +       UCLASS_ROLLBACK,        /* Rollback device */
->         UCLASS_SERIAL,          /* Serial UART */
->         UCLASS_SIMPLE_BUS,      /* Bus with child devices */
->         UCLASS_SMEM,            /* Shared memory interface */
-> diff --git a/include/rollback.h b/include/rollback.h
-> new file mode 100644
-> index 0000000000..60dfd62dea
-> --- /dev/null
-> +++ b/include/rollback.h
-> @@ -0,0 +1,42 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2021 Microsoft, Inc.
-> + */
-> +
-> +#ifndef _ROLLBACK_H_
-> +#define _ROLLBACK_H_
-> +
-> +#include <stdint.h>
-> +
-> +/* Access the rollback operations for a device */
-> +#define rollback_get_ops(dev)  ((struct rollback_ops *)(dev)->driver->ops)
-> +
-> +/**
-> + * rollback_idx_get() Gets the OS anti-rollback version number
-> + *
-> + * @dev:     Device to check
-> + * @rollback_idx:   The retrieved anti-rollback version
-> + * @return   0 if OK, -ve on error
+I'll also mention that it would be nice to have s new-style API
+(replacing the old API U-Boot currently has) which uses more of a
+module approach. E.g. we could declare that uclass_first_device() is
+exported and can be called from outside U-Boot.
 
-Can you document -EPERM as well?
-
-> + */
-> +int rollback_idx_get(struct udevice *dev, uint64_t *rollback_idx);
-> +
-> +/**
-> + * rollback_idx_set() Sets the OS anti-rollback version number.
-
-How do we lock it so that it cannot be set? That would be needed
-before booting the OS, wouldn't it?
-
-> + *
-> + * @dev:     Device to modify
-> + * @rollback_idx:   The new anti-rollback version to set
-> + * @return   0 if OK, -ve on error
-> + */
-> +int rollback_idx_set(struct udevice *dev, uint64_t rollback_idx);
-> +
-> +/**
-> + * struct rollback_ops - Driver model rollback operations
-> + *
-> + * Refer to the functions above for the description of each operation.
-> + */
-> +struct rollback_ops {
-> +       int (*rollback_idx_get)(struct udevice *dev, uint64_t *rollback_idx);
-> +       int (*rollback_idx_set)(struct udevice *dev, uint64_t rollback_idx);
-
-Please do duplicate the comments here. Also these methods should not
-have a rollback_ prefix.
-
-> +};
-> +
-> +#endif
-> --
-> 2.40.0
->
+> >
+> > [1] - https://github.com/shantur/u-boot/tree/spi-flash-runtime-setvaria=
+ble
+> >
+> > Kind regards,
+> > Shantur
 
 Regards,
 Simon
