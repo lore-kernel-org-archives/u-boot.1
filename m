@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A523C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:56:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27470C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBC5287754;
-	Fri,  1 Dec 2023 01:55:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 25C4687758;
+	Fri,  1 Dec 2023 01:55:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94C3E87738; Fri,  1 Dec 2023 01:55:26 +0100 (CET)
+ id 130B887758; Fri,  1 Dec 2023 01:55:28 +0100 (CET)
 Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 9514B87660
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:55:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 1D35C87719
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:55:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=microsoft.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=seanedmond@microsoft.com
 Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id DE61A20B74C1;
- Thu, 30 Nov 2023 16:55:23 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com DE61A20B74C1
+ by linux.microsoft.com (Postfix) with ESMTPSA id 44E4D20B74C1;
+ Thu, 30 Nov 2023 16:55:25 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 44E4D20B74C1
 From: Sean Edmond <seanedmond@microsoft.com>
 To: u-boot@lists.denx.de
 Cc: Sean Edmond <seanedmond@microsoft.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v6 4/5] dm: core: Modify default for OFNODE_MULTI_TREE
-Date: Thu, 30 Nov 2023 16:54:43 -0800
-Message-ID: <20231201005507.2080396-5-seanedmond@microsoft.com>
+Subject: [PATCH v6 5/5] fdt: Fix compile error for !OFNODE_MULTI_TREE
+Date: Thu, 30 Nov 2023 16:54:44 -0800
+Message-ID: <20231201005507.2080396-6-seanedmond@microsoft.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231201005507.2080396-1-seanedmond@microsoft.com>
 References: <20231201005507.2080396-1-seanedmond@microsoft.com>
@@ -52,48 +52,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a preference to use the "ofnode" API for FDT fixups
-moving forward.  The FDT fixup will usually be for the kernel FDT.  To
-fixup the kernel FDT with the ofnode API, it's required to set the
-OFNODE_MULTI_TREE option.
-
-To ensure existing users of kaslr fdt fixup are not impacted, Let's modify
-the default value for OFNODE_MULTI_TREE to ensure it's always set.
-This will cause a 1007 byte increase in the code size.
+Required to fix the following compile error when building sandbox:
+/tmp/cci9ibby.ltrans21.ltrans.o: In function `do_cedit_load':
+<artificial>:(.text+0x601d): undefined reference to `oftree_dispose'
 
 Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 ---
 
-(no changes since v5)
+(no changes since v3)
 
-Changes in v5:
-- Always enable OFNODE_MULTI_TREE
+Changes in v3:
+- fix compile error for sandbox for !OFNODE_MULTI_TREE
 
-Changes in v4:
-- Fix compile issue when CONFIG_OF_CONTROL not set
+ drivers/core/ofnode.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Changes in v2:
-- Change default config for OFNODE_MULTI_TREE (y if !OF_LIVE)
-
- drivers/core/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index 737d4590d5b..c01a8dc7e0a 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -423,7 +423,8 @@ config DM_DEV_READ_INLINE
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 557a4a1b969..f4af184a476 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -135,12 +135,6 @@ int oftree_new(oftree *treep)
+ 	return 0;
+ }
  
- config OFNODE_MULTI_TREE
- 	bool "Allow the ofnode interface to access any tree"
--	default y if EVENT && !DM_DEV_READ_INLINE && !DM_INLINE_OFNODE
-+	depends on OF_CONTROL
-+	default y
- 	help
- 	  Normally U-Boot makes use of its control FDT, the one used to bind
- 	  devices and provide options. In some cases, U-Boot must also process
+-void oftree_dispose(oftree tree)
+-{
+-	if (of_live_active())
+-		of_live_free(tree.np);
+-}
+-
+ void *ofnode_lookup_fdt(ofnode node)
+ {
+ 	if (gd->flags & GD_FLG_RELOC) {
+@@ -243,6 +237,12 @@ int oftree_new(oftree *treep)
+ 
+ #endif /* OFNODE_MULTI_TREE */
+ 
++void oftree_dispose(oftree tree)
++{
++	if (of_live_active())
++		of_live_free(tree.np);
++}
++
+ int oftree_to_fdt(oftree tree, struct abuf *buf)
+ {
+ 	int ret;
 -- 
 2.42.0
 
