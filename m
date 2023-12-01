@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C8EC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 14:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39A1CC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 14:52:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1617D86F9F;
-	Fri,  1 Dec 2023 15:16:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1297B876AA;
+	Fri,  1 Dec 2023 15:52:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SsjyzRGE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NJvTiOsh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5319886516; Fri,  1 Dec 2023 15:16:34 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id AF827876A7; Fri,  1 Dec 2023 15:52:51 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2B5D87006
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 15:16:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E19C58764D
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 15:52:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-54bfd4546fbso2517543a12.1
- for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 06:16:31 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a0029289b1bso298527366b.1
+ for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 06:52:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701440191; x=1702044991; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701442368; x=1702047168; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VoZ3kcvUGXjVJ3bmTVawqDUZ/QHbwjaWs/yFlMG/qLw=;
- b=SsjyzRGEFazAEEtanxdh4WaIHCvY+rGDMeJH7ZAsr97kblIMxBuAY6xSXq3ypVFZtL
- 0zFdnrOBv4V9c8Fkrat6p2fieCa2MwH/nKagklMLnD+7sJDF+yv5Fdb2kBoSbP3viQvG
- DcPaxup5DS9afA/lXLuX1nwtfhBtWemjzS4R2z1fm9PcOpB9hWQSRVUtLZZ0x9xL4CME
- BVEjZCj4lEnBAz58tC8Q4aOzXv72X1dqS7gmds6O+XUYIJTRC/LurQUXZWVDLxhtSrIB
- RB00A7nSV0QNU+jtx73rLkzIlh35hl/N8prH5nf3LTkVl4lS+PDCM+upAR/WeOXSIMp3
- 3UOA==
+ bh=3sd7wZ3Y3r3zbl4/X5PAdSa2a1gfrbxofFzOR/zZyPY=;
+ b=NJvTiOshprlmSjJ2SDFDvkVcDeC57aHDMV0EXPDuRqOLIhp5/Uyh1t+OpJdZKgc3CW
+ J3QaX+tyXZUIFFwzaFFepKoky5nkXBeHHtUR9hZxafWVFFEjyLBigZ3avs7uOMwffcS/
+ fQfkoYbWO39HU15RxXM27IyNagpd/hXauhCKmJauh6Kz8F3vVZ6FspMFhbv3eyM+NWWw
+ aaZFDkZPjU5wz+ed/kmJJlu2jOtxkSoNdwUjmy9rFhUq/LqTX35TrL+msPYNkqQgPeVm
+ TyxfcYz5vlThuCzQGYCtp71pAwMD29l3mtvJowqNVest6yswgPA92ERoE5xg20BuMXb9
+ oYQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701440191; x=1702044991;
+ d=1e100.net; s=20230601; t=1701442368; x=1702047168;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VoZ3kcvUGXjVJ3bmTVawqDUZ/QHbwjaWs/yFlMG/qLw=;
- b=tsTcJwswM7vxoP25o5drIJI5uEajVoLnG7Yc4rbAk2BMfstKdJXlDxyBhGOeMZ7oao
- mUh2J9M22Mag9kBkDRxw19FWZeR2gFsvm8etsQ6RBkKNYl/6T5/4rQ3NZCXGrdoKDAfQ
- txeRuzk9nuetE3wNjRw4oaIlZ655tnCXPM3m7aBVwFXR2mAdZKX57mAoJSDRDMyyiK1E
- ebYk5YWsLto5fYfjNJemozF5LAfsLRhqCWsW7+TnQ3hDX746edf+I7b9B5NxFS5QHqC9
- OW8ZnF++n+JYudV+bKYZmo9/mKfiQVUKrzEaCDmP4GGa/tVMl8nnGcKphlweG/hacsNE
- TouQ==
-X-Gm-Message-State: AOJu0YxefpeuoqpEBe4OaRm8Uzlv3kIaXYNTdlMDwGvHuQpo496Y1RxT
- vbfDc47KKB+0CHP3SZmXSP5R0Q==
-X-Google-Smtp-Source: AGHT+IH8OrOLFbb3RN/KOpacnF0SAHQq+/hW/yT3paYAQ3IuGCdQjZnvlNL7IYa0cvpyEuG4V5bnfg==
-X-Received: by 2002:a50:99c3:0:b0:54b:cb6d:48ad with SMTP id
- n3-20020a5099c3000000b0054bcb6d48admr1059850edb.18.1701440190813; 
- Fri, 01 Dec 2023 06:16:30 -0800 (PST)
+ bh=3sd7wZ3Y3r3zbl4/X5PAdSa2a1gfrbxofFzOR/zZyPY=;
+ b=f1cEcGlT+cmoGePp23AeZN/anEp/DEz82z6p7vuNVqkq56dUAp/cK0IeC19ism6m2h
+ 2lF54ASEMXj+vVUI0RSELe3htnKrW06TWBdiWMSqXD7ne7rtC6j5zcv3DmqLYr5CN45i
+ jTkfuspWZiQ23hSP0rWxdI4ih+EF9SK1lurCOgGXxw+Bjt+TWISM/xxEsDLX0/CYHAEX
+ wwLFYOTdAgp2375I8j09K/WQS+VzQ0n8jwV0YxHU1p0NtLhQOGFgIAxbP4eE99qwwjeq
+ 5g+rj3QooLBbAVpZVhGxWSvSfogzGqL3vTs2+ogp4PswJxZqRnvz+uL13DqsE26Nf3ya
+ tf4Q==
+X-Gm-Message-State: AOJu0YyzJZb8W9zu+9m81vkDHvUyNA8VUOcRA86zkPEQUip8EXGVVspS
+ gmd6WJae+XMPdBQvoYCl1r8GUCKiVdrfiLFgLts=
+X-Google-Smtp-Source: AGHT+IHs2ryyhsbGJWExdFpniN6NiR2SFvHSgDVL2UlQDfeNnnFA9U0XDy0Wt/D8BoM5aEOPzyIRhw==
+X-Received: by 2002:a17:907:76d7:b0:a19:a1ba:8ce9 with SMTP id
+ kf23-20020a17090776d700b00a19a1ba8ce9mr764987ejc.135.1701442368335; 
+ Fri, 01 Dec 2023 06:52:48 -0800 (PST)
 Received: from hades (ppp046103111243.access.hol.gr. [46.103.111.243])
  by smtp.gmail.com with ESMTPSA id
- cm26-20020a0564020c9a00b0054c6b50df3asm188734edb.92.2023.12.01.06.16.29
+ m12-20020a1709062acc00b009a193a5acffsm1969660eje.121.2023.12.01.06.52.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 01 Dec 2023 06:16:30 -0800 (PST)
-Date: Fri, 1 Dec 2023 16:16:28 +0200
+ Fri, 01 Dec 2023 06:52:47 -0800 (PST)
+Date: Fri, 1 Dec 2023 16:52:45 +0200
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: seanedmond@linux.microsoft.com
 Cc: u-boot@lists.denx.de, sjg@chromium.org, stcarlso@linux.microsoft.com
-Subject: Re: [PATCH 1/8] drivers: rollback: Add rollback devices to driver
- model
-Message-ID: <ZWnqvGO5POT7PIXC@hades>
+Subject: Re: [PATCH 2/8] drivers: rollback: Add TPM2 implementation of
+ rollback devices
+Message-ID: <ZWnzPUVAPjk4heAM@hades>
 References: <20230912094731.51413-1-seanedmond@linux.microsoft.com>
- <20230912094731.51413-2-seanedmond@linux.microsoft.com>
+ <20230912094731.51413-3-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230912094731.51413-2-seanedmond@linux.microsoft.com>
+In-Reply-To: <20230912094731.51413-3-seanedmond@linux.microsoft.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,139 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean, 
+Hi Sean,
 
-Apologies for the very late reply.
-Simon, can you have a look since this is mostly the DM part?
-
-On Tue, Sep 12, 2023 at 02:47:24AM -0700, seanedmond@linux.microsoft.com wrote:
+On Tue, Sep 12, 2023 at 02:47:25AM -0700, seanedmond@linux.microsoft.com wrote:
 > From: Stephen Carlson <stcarlso@linux.microsoft.com>
 > 
-> Rollback devices currently implement operations to store an OS
-> anti-rollback monotonic counter. Existing devices such as the Trusted
-> Platform Module (TPM) already support this operation, but this uclass
-> provides abstraction for current and future devices that may support
-> different features.
+> This implementation of the rollback uclass driver allows existing TPM2
+> devices declared in the device tree to be referenced for storing the OS
+> anti-rollback counter, using the TPM2 non-volatile storage API.  The
+> rollback device must be a child of the TPM device.  For example:
 > 
-> - New Driver Model uclass UCLASS_ROLLBACK.
-> - New config CONFIG_DM_ROLLBACK to enable security device support.
-> - New driver rollback-sandbox matching "rollback,sandbox", enabled with
->   new config CONFIG_ROLLBACK_SANDBOX.
+> 	tpm2 {
+> 		compatible = "sandbox,tpm2";
 > 
-> Signed-off-by: Stephen Carlson <stcarlso@linux.microsoft.com>
-> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-> ---
->  MAINTAINERS                         |  9 ++++
->  drivers/Kconfig                     |  2 +
->  drivers/Makefile                    |  1 +
->  drivers/rollback/Kconfig            | 25 +++++++++++
->  drivers/rollback/Makefile           |  6 +++
->  drivers/rollback/rollback-sandbox.c | 65 +++++++++++++++++++++++++++++
->  drivers/rollback/rollback-uclass.c  | 30 +++++++++++++
->  include/dm/uclass-id.h              |  1 +
->  include/rollback.h                  | 42 +++++++++++++++++++
->  9 files changed, 181 insertions(+)
->  create mode 100644 drivers/rollback/Kconfig
->  create mode 100644 drivers/rollback/Makefile
->  create mode 100644 drivers/rollback/rollback-sandbox.c
->  create mode 100644 drivers/rollback/rollback-uclass.c
->  create mode 100644 include/rollback.h
+> 		rollback@1 {
+> 			compatible = "tpm,rollback";
+> 			rollback-nv-index = <0x1001007>;
+> 		};
+> 	};
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index bf851cffd6..de14724c27 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1438,6 +1438,15 @@ F:	cmd/seama.c
->  F:	doc/usage/cmd/seama.rst
->  F:	test/cmd/seama.c
->  
-> +ROLLBACK
-> +M:	Stephen Carlson <stcarlso@linux.microsoft.com>
-> +M:	Sean Edmond <seanedmond@microsoft.com>
-> +S:	Maintained
-> +F:	drivers/rollback/Kconfig
-> +F:	drivers/rollback/Makefile
-> +F:	drivers/rollback/rollback-sandbox.c
-> +F:	drivers/rollback/rollback-uclass.c
-> +
->  SEMIHOSTING
->  R:	Sean Anderson <sean.anderson@seco.com>
->  S:	Orphaned
-> diff --git a/drivers/Kconfig b/drivers/Kconfig
-> index a25f6ae02f..faa7cbb72b 100644
-> --- a/drivers/Kconfig
-> +++ b/drivers/Kconfig
-> @@ -116,6 +116,8 @@ source "drivers/rtc/Kconfig"
->  
->  source "drivers/scsi/Kconfig"
->  
-> +source "drivers/rollback/Kconfig"
-> +
->  source "drivers/serial/Kconfig"
->  
->  source "drivers/smem/Kconfig"
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index efc2a4afb2..f6cfb48cb6 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -98,6 +98,7 @@ obj-$(CONFIG_PCH) += pch/
->  obj-$(CONFIG_DM_REBOOT_MODE) += reboot-mode/
->  obj-y += rtc/
->  obj-y += scsi/
-> +obj-y += rollback/
->  obj-y += sound/
->  obj-y += spmi/
->  obj-y += watchdog/
-> diff --git a/drivers/rollback/Kconfig b/drivers/rollback/Kconfig
-> new file mode 100644
-> index 0000000000..31f5a3f56d
-> --- /dev/null
-> +++ b/drivers/rollback/Kconfig
-> @@ -0,0 +1,25 @@
-> +config DM_ROLLBACK
-> +	bool "Support rollback devices with driver model"
-> +	depends on DM
-> +	help
-> +	  This option enables support for the rollback uclass which supports
-> +	  devices intended to provide the anti-rollback feature during
-> +	  boot. These devices might encapsulate existing features of TPM
-> +	  or TEE devices, but can also be dedicated security processors
-> +	  implemented in specific hardware.
-> +
-> +config ROLLBACK_SANDBOX
-> +	bool "Enable sandbox rollback driver"
-> +	depends on DM_ROLLBACK
-> +	help
-> +	  This driver supports a simulated rollback device that uses volatile
-> +	  memory to store secure data and begins uninitialized. This
-> +	  implementation allows OS images with security requirements to be
-> +	  loaded in the sandbox environment.
-> +
-> +config ROLLBACK_TPM
-> +	bool "Enable TPM rollback driver"
-> +	depends on TPM && TPM_V2 && DM_ROLLBACK
-> +	help
-> +	  This driver supports a rollback device based on existing TPM
-> +	  functionality.
-> diff --git a/drivers/rollback/Makefile b/drivers/rollback/Makefile
-> new file mode 100644
-> index 0000000000..4e7fa46041
-> --- /dev/null
-> +++ b/drivers/rollback/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# (C) Copyright 2021 Microsoft, Inc.
-> +
-> +obj-$(CONFIG_DM_ROLLBACK) += rollback-uclass.o
-> +obj-$(CONFIG_ROLLBACK_SANDBOX) += rollback-sandbox.o
-> diff --git a/drivers/rollback/rollback-sandbox.c b/drivers/rollback/rollback-sandbox.c
-> new file mode 100644
-> index 0000000000..acbe6d2303
-> --- /dev/null
-> +++ b/drivers/rollback/rollback-sandbox.c
-> @@ -0,0 +1,65 @@
-> +// SPDX-License-Identifier: GPL-2.0+
+This node is part of the DT specification right? If we accept this, we
+should figure out if we can add that to the specification.
+
+[...]
+
 > +/*
 > + * Copyright (c) 2021 Microsoft, Inc
 > + * Written by Stephen Carlson <stcarlso@microsoft.com>
@@ -234,75 +125,145 @@ On Tue, Sep 12, 2023 at 02:47:24AM -0700, seanedmond@linux.microsoft.com wrote:
 > +#include <dm.h>
 > +#include <fdtdec.h>
 > +#include <rollback.h>
+> +#include <tpm_api.h>
 > +
-> +static struct rollback_state {
-> +	u64 rollback_idx;
+> +struct rollback_state {
+> +	u32 nv_index;
+> +	struct udevice *tpm_dev;
 > +};
 > +
-> +static int sb_rollback_idx_get(struct udevice *dev, u64 *rollback_idx)
+> +static int tpm_rollback_idx_get(struct udevice *dev, u64 *rollback_idx)
 > +{
 > +	struct rollback_state *priv = dev_get_priv(dev);
+> +	int ret;
 > +
 > +	if (!rollback_idx)
 > +		return -EINVAL;
 > +
-> +	*rollback_idx = priv->rollback_idx;
-> +	return 0;
+> +	ret = tpm2_nv_read_value(priv->tpm_dev, priv->nv_index, rollback_idx, sizeof(u64));
+> +	if (ret) {
+> +		log(UCLASS_ROLLBACK, LOGL_ERR,
+
+Wouldn't the init function below make sure the index is created? IOW
+shouldn't this be a log_err()?
+
+> +		    "Unable to read rollback number from TPM (ret=%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return ret;
 > +}
 > +
-> +static int sb_rollback_idx_set(struct udevice *dev, u64 rollback_idx)
+> +static int tpm_rollback_idx_set(struct udevice *dev, u64 rollback_idx)
 > +{
-> +	struct rollback_state *priv = dev_get_priv(dev);
-> +	u64 old_rollback_idx;
-> +
-> +	old_rollback_idx = priv->rollback_idx;
-
-Skip the assignment, if (rollback_idx < priv->rollback_idx) is pretty
-straight forward to read 
-
-> +	if (rollback_idx < old_rollback_idx)
-> +		return -EPERM;
-> +
-> +	priv->rollback_idx = rollback_idx;
-> +	return 0;
-> +}
-> +
-> +static const struct rollback_ops rollback_sandbox_ops = {
-> +	.rollback_idx_get		= sb_rollback_idx_get,
-> +	.rollback_idx_set		= sb_rollback_idx_set,
-> +};
-
-nit, but I prefer 
-.rollback_idx_get = sb_rollback_idx_get, etc
-makes grepping a lot easier
-
-> +
-> +static int rollback_sandbox_probe(struct udevice *dev)
-> +{
+> +	int ret;
 > +	struct rollback_state *priv = dev_get_priv(dev);
 > +
-> +	priv->rollback_idx = 0ULL;
+> +	ret = tpm2_nv_write_value(priv->tpm_dev, priv->nv_index, &rollback_idx, sizeof(u64));
+> +	if (ret) {
+> +		log(UCLASS_ROLLBACK, LOGL_ERR,
+> +		    "Unable to write anti-rollback version to TPM (ret=%d)\n", ret);
 
-Why do you need the integer constant here?
+log_err()
 
+> +		return ret;
+> +	}
+> +
 > +	return 0;
 > +}
 > +
-> +static const struct udevice_id rollback_sandbox_ids[] = {
-> +	{ .compatible = "sandbox,rollback" },
-> +	{ }
+> +static const struct rollback_ops tpm_rollback_ops = {
+> +	.rollback_idx_get		= tpm_rollback_idx_get,
+> +	.rollback_idx_set		= tpm_rollback_idx_set,
 > +};
 > +
-> +U_BOOT_DRIVER(rollback_sandbox) = {
-> +	.name	= "rollback_sandbox",
-> +	.id	= UCLASS_ROLLBACK,
-> +	.priv_auto = sizeof(struct rollback_state),
-> +	.of_match = rollback_sandbox_ids,
-> +	.probe	= rollback_sandbox_probe,
-> +	.ops	= &rollback_sandbox_ops,
-> +};
- 
+> +static int tpm_rollback_probe(struct udevice *dev)
+> +{
+> +	struct rollback_state *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	/* initialize the TPM rollback counter NV index
+> +	 * and initial to 0.  Note, this driver provides
+> +	 * a NULL policy.
+> +	 */
+> +	ret = tpm_rollback_counter_init(priv->tpm_dev, priv->nv_index,
+> +					NULL, 0);
+> +	if (ret) {
+> +		log(UCLASS_ROLLBACK, LOGL_ERR,
+> +		    "TPM rollback init failed (ret=%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int tpm_rollback_remove(struct udevice *dev)
+> +{
+> +	struct rollback_state *priv = dev_get_priv(dev);
+> +
+> +	return tpm_close(priv->tpm_dev);
+
+I am not sure what this function is supposed to be doing. Why is it called
+remove but only closes the tpm?
+
 [...]
+
+> +int tpm_rollback_counter_init(struct udevice *dev, u32 nv_index,
+> +			      const u8 *nv_policy, size_t nv_policy_size)
+> +{
+> +	int ret;
+> +	u64 data;
+> +	u64 data0 = 0;
+> +
+> +	ret = tpm_open(dev);
+> +	if (ret == -EBUSY) {
+> +		log(UCLASS_ROLLBACK, LOGL_DEBUG,
+> +		    "Existing TPM session found, reusing\n");
+> +	} else {
+> +		if (ret) {
+> +			log(UCLASS_ROLLBACK, LOGL_ERR,
+> +			    "TPM initialization failed (ret=%d)\n", ret);
+> +			return ret;
+> +		}
+> +
+> +		ret = tpm2_auto_start(dev);
+> +		if (ret) {
+> +			log(UCLASS_ROLLBACK, LOGL_ERR,
+> +			    "TPM startup failed (ret=%d)\n", ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	if (ret) {
+> +		log_err("TPM startup failed\n");
+> +		return ret;
+> +	}
+> +
+> +	/* test reading NV index from TPM */
+> +	ret = tpm2_nv_read_value(dev, nv_index, &data, sizeof(u64));
+> +
+> +	if (ret) {
+> +		/*read failed.  Assume the NV index hasn't been defined yet */
+> +		ret = tpm2_nv_define_space(dev, nv_index, sizeof(u64), TPMA_NV_PPREAD |
+> +					   TPMA_NV_PPWRITE | TPMA_NV_PLATFORMCREATE,
+> +					   nv_policy, nv_policy_size);
+> +
+
+Since the policy is NULL and no password is provided how do we trust this counter? 
+
+The TPMs allow the creation of an 'NV Counter Index' which would be better
+for what you are trying to do here.
+
+> +		/* initialize the rollback counter to 0 */
+> +		if (ret == TPM2_RC_NV_DEFINED || !ret)
+> +			ret = tpm2_nv_write_value(dev, nv_index, &data0, sizeof(u64));
+> +	}
+> +
+> +	return ret;
+> +}
+> -- 
+> 2.40.0
+> 
 
 Thanks
 /Ilias
