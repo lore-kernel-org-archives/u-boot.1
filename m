@@ -4,38 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27470C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C9BC10DCE
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 02:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C4687758;
-	Fri,  1 Dec 2023 01:55:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D79487595;
+	Fri,  1 Dec 2023 03:04:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 130B887758; Fri,  1 Dec 2023 01:55:28 +0100 (CET)
-Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
- by phobos.denx.de (Postfix) with ESMTP id 1D35C87719
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:55:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=microsoft.com
+ id 1617286A81; Fri,  1 Dec 2023 03:04:14 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 82B8E876C4
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 03:04:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=seanedmond@microsoft.com
-Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
- by linux.microsoft.com (Postfix) with ESMTPSA id 44E4D20B74C1;
- Thu, 30 Nov 2023 16:55:25 -0800 (PST)
-DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com 44E4D20B74C1
-From: Sean Edmond <seanedmond@microsoft.com>
-To: u-boot@lists.denx.de
-Cc: Sean Edmond <seanedmond@microsoft.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v6 5/5] fdt: Fix compile error for !OFNODE_MULTI_TREE
-Date: Thu, 30 Nov 2023 16:54:44 -0800
-Message-ID: <20231201005507.2080396-6-seanedmond@microsoft.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231201005507.2080396-1-seanedmond@microsoft.com>
-References: <20231201005507.2080396-1-seanedmond@microsoft.com>
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1r8ssr-0002h2-N1; Fri, 01 Dec 2023 03:04:01 +0100
+Message-ID: <5e8f42f8-2b03-4033-b6d2-9b3139f081d5@pengutronix.de>
+Date: Fri, 1 Dec 2023 03:03:58 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: linux-arm-kernel@lists.infradead.org,
+ Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
+ lkml <linux-kernel@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
+ linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
+References: <20231129172200.430674-1-sjg@chromium.org>
+ <20231129172200.430674-3-sjg@chromium.org>
+ <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
+ <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
+ <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
+ <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
+ <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
+ <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
+ <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
+ <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,53 +78,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Required to fix the following compile error when building sandbox:
-/tmp/cci9ibby.ltrans21.ltrans.o: In function `do_cedit_load':
-<artificial>:(.text+0x601d): undefined reference to `oftree_dispose'
+Hello Simon,
 
-Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On 30.11.23 21:30, Simon Glass wrote:
+> On Wed, 29 Nov 2023 at 12:54, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>> On 29.11.23 20:44, Simon Glass wrote:
+>>> On Wed, 29 Nov 2023 at 12:33, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>>
+>>>> On 29.11.23 20:27, Simon Glass wrote:
+>>>>> On Wed, 29 Nov 2023 at 12:15, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>>>> On 29.11.23 20:02, Simon Glass wrote:
+>>>>>>> On Wed, 29 Nov 2023 at 11:59, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>>>>>> The specification says that this is the root U-Boot compatible,
+>>>>>>>> which I presume to mean the top-level compatible, which makes sense to me.
+>>>>>>>>
+>>>>>>>> The code here though adds all compatible strings from the device tree though,
+>>>>>>>> is this intended?
+>>>>>>>
+>>>>>>> Yes, since it saves needing to read in each DT just to get the
+>>>>>>> compatible stringlist.
+>>>>>>
+>>>>>> The spec reads as if only one string (root) is supposed to be in the list.
+>>>>>> The script adds all compatibles though. This is not really useful as a bootloader
+>>>>>> that's compatible with e.g. fsl,imx8mm would just take the first device tree
+>>>>>> with that SoC, which is most likely to be wrong. It would be better to just
+>>>>>> specify the top-level compatible, so the bootloader fails instead of taking
+>>>>>> the first DT it finds.
+>>>>>
+>>>>> We do need to have a list, since we have to support different board revs, etc.
+>>>>
+>>>> Can you give me an example? The way I see it, a bootloader with
+>>>> compatible "vendor,board" and a FIT with configuration with compatibles:
+>>>>
+>>>>   "vendor,board-rev-a", "vendor,board"
+>>>>   "vendor,board-rev-b", "vendor,board"
+>>>>
+>>>> would just result in the bootloader booting the first configuration, even if
+>>>> the device is actually rev-b.
+>>>
+>>> You need to find the best match, not just any match. This is
+>>> documented in the function comment for fit_conf_find_compat().
+>>
+>> In my above example, both configuration are equally good.
+>> Can you give me an example where it makes sense to have multiple
+>> compatibles automatically extracted from the device tree compatible?
+>>
+>> The way I see it having more than one compatible here just has
+>> downsides.
+> 
+> I don't have an example to hand, but this is the required mechanism of
+> FIT. This feature has been in place for many years and is used by
+> ChromeOS, at least.
 
----
+I see the utility of a FIT configuration with
 
-(no changes since v3)
+    compatible = "vendor,board-rev-a", "vendor,board-rev-b";
 
-Changes in v3:
-- fix compile error for sandbox for !OFNODE_MULTI_TREE
+I fail to see a utility for a configuration with
 
- drivers/core/ofnode.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+    compatible = "vendor,board", "vendor,SoM", "vendor,SoC";
 
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 557a4a1b969..f4af184a476 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -135,12 +135,6 @@ int oftree_new(oftree *treep)
- 	return 0;
- }
- 
--void oftree_dispose(oftree tree)
--{
--	if (of_live_active())
--		of_live_free(tree.np);
--}
--
- void *ofnode_lookup_fdt(ofnode node)
- {
- 	if (gd->flags & GD_FLG_RELOC) {
-@@ -243,6 +237,12 @@ int oftree_new(oftree *treep)
- 
- #endif /* OFNODE_MULTI_TREE */
- 
-+void oftree_dispose(oftree tree)
-+{
-+	if (of_live_active())
-+		of_live_free(tree.np);
-+}
-+
- int oftree_to_fdt(oftree tree, struct abuf *buf)
- {
- 	int ret;
+Any configuration that ends up being booted because "vendor,SoC" was matched is
+most likely doomed to fail. Therefore, I would suggest that only the top level
+configuration is written into the FIT configurations automatically.
+
+Cheers,
+Ahmad
+
 -- 
-2.42.0
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
