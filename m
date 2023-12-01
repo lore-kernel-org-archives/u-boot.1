@@ -4,62 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DA9C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 30 Nov 2023 22:40:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58273C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7670E87707;
-	Thu, 30 Nov 2023 23:40:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 7B8FF87483;
+	Fri,  1 Dec 2023 01:27:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="Z3J6oPqm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42F2D87707; Thu, 30 Nov 2023 23:39:59 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B5A4876B2
- for <u-boot@lists.denx.de>; Thu, 30 Nov 2023 23:39:56 +0100 (CET)
+ id 64C3F8758F; Fri,  1 Dec 2023 01:27:12 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 3D03D870E2
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:27:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 6036e971-8fd1-11ee-91e7-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 6036e971-8fd1-11ee-91e7-005056994fde;
- Thu, 30 Nov 2023 23:39:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=2OivNAWDJ/fDOL7LZYDg+lojuKIM5Agl15aqduX2omQ=;
- b=Z3J6oPqmokJeXABIxy4d00Th3Z3YJMTeX5mwa7TkiIl3kYnzwbfSZzsVI8qX7kPb+0zyOce50Ucyf
- UYL3+e+OthfVBS9yT6KqPG8dnt6Huf7GdoIEBSgsae03hP+yIDm9dTp0cZnTgNGgzcZV1A+TUe4YSy
- mFODDVqHDYfZ6ilnPyq3VHzc/fgdEDrAcpXGao6nQ+q1hEz/a+DyzFURBM+thqJm9I60Q0qt/l9Yuh
- 6EowAyh9MEw55UcNlGf6LVO6GvZIMSxnNpQ2JbU88Rpm/J4WZuH41Cq0+HyNMD4MFrU7YSEudqwAAC
- n0fSErgYRcyR0d00alMibfopO20LLXA==
-X-KPN-MID: 33|BqJ8hhLV5FdQ9krl4wlZCN+SkRxZnBl9BK89JJZ7ejubqVqr7Yg0k5RIN/gi1QP
- EoAnNtLYdX6/5GTALVEuMx/MeVYVioA9vf4dtw8jD+WQ=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|UxTze5NWJ0PikZvZnzhDqMXEy1pVUr/sb/MpyIwkk9ikWg/ld70m/xvOfgowfW1
- gB14CTIysFJrgIm2YVzfWSQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 620779ca-8fd1-11ee-9dc8-00505699772e;
- Thu, 30 Nov 2023 23:39:55 +0100 (CET)
-Date: Thu, 30 Nov 2023 23:39:55 +0100
-Message-Id: <87h6l227d0.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: "Janne Grunau" <j@jannau.net>
-Cc: kettenis@openbsd.org, trini@konsulko.com, u-boot@lists.denx.de,
- asahi@lists.linux.dev
-In-Reply-To: <6ff006e0-941d-477a-b3d9-01986d317a04@app.fastmail.com>
- (j@jannau.net)
-Subject: Re: [PATCH] arm: apple: t602x: Add missing MMIO regions to memmap
-References: <20231130-apple_t602x_extend_memmap-v1-1-cd96b251d2dc@jannau.net>
- <87jzpz0y34.fsf@bloch.sibelius.xs4all.nl>
- <6ff006e0-941d-477a-b3d9-01986d317a04@app.fastmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 15E871042;
+ Thu, 30 Nov 2023 16:27:56 -0800 (PST)
+Received: from [10.57.82.74] (unknown [10.57.82.74])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C859D3F6C4;
+ Thu, 30 Nov 2023 16:27:07 -0800 (PST)
+Message-ID: <345d9916-6ae6-4dbe-99a2-33aafeebcb60@arm.com>
+Date: Fri, 1 Dec 2023 00:27:05 +0000
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: mdt_debug write
+Content-Language: en-US
+To: Stephen Graf <stephen.graf@gmail.com>
+Cc: Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+References: <20231114013106.31336-1-andre.przywara@arm.com>
+ <20231114013106.31336-4-andre.przywara@arm.com>
+ <0eab5c21-4fdc-478e-9071-f43c12e01fb3@gmail.com>
+ <20231126002349.55404e43@slackpad.lan>
+ <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
+ <20231126122342.3944cad5@slackpad.lan>
+ <d8862c87-072d-4f74-bb37-08f34c610cc8@gmail.com>
+ <dae3bee5-e1c7-4154-959c-e41dabb5d844@gmail.com>
+ <20231128013746.23648d39@slackpad.lan>
+ <5d7ea381-2a57-46f7-85c6-2bcad339d1db@gmail.com>
+ <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
+ <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
+From: Andre Przywara <andre.przywara@arm.com>
+In-Reply-To: <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,38 +71,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Thu, 30 Nov 2023 23:04:36 +0100
-> From: "Janne Grunau" <j@jannau.net>
-> 
-> Hej Mark,
-> 
-> On Thu, Nov 30, 2023, at 21:45, Mark Kettenis wrote:
-> >> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-> >> Date: Thu, 30 Nov 2023 13:42:22 +0100
-> >> 
-> >> From: Janne Grunau <j@jannau.net>
-> >> 
-> >> The memory maps for Apple's M2 Pro/Max/Ultra left MMIO space out which
-> >> was not used by any driver at the time. The display out exposed as
-> >> simple-framebuffer use a power-domain controlled by a device in an
-> >> unmapped region.
-> >> Add a map covering this region as well as another MMIO region in the
-> >> range 0x4'0000'0000 - 0x5'0000'0000. The added regions cover all MMIO
-> >> annotated in Apple's device tree in this range.
-> >> 
-> >> Signed-off-by: Janne Grunau <j@jannau.net>
-> >> ---
-> >>  arch/arm/mach-apple/board.c | 48 +++++++++++++++++++++++++++++++++++++++++++++
-> >>  1 file changed, 48 insertions(+)
-> >
-> > Hi Janne,
-> >
-> > Is there a reason why you can't use a SZ_1G mapping for the blocks
-> > where you're using a SZ_512M mapping?  With SZ_1G the mapping code
-> > will use a 1G block descriptor which avoids another level of page
-> > tables.
-> 
-> no reason except that SZ_512M was sufficient to cover all devices in
-> Apple DT.  Shall I resend the patch?
+Hi Stephen,
 
-Yes please!
+On 30/11/2023 01:13, Stephen Graf wrote:
+> Is the attached patch file going in the right direction?
+
+yes, thanks, the change itself looks alright, but it needs to be:
+- in a separate email, with a descriptive subject, prefixed by [PATCH]
+- have the diff inline, not as an attachment (to allow easy commenting 
+in an email thread)
+- have a Signed-off-by: tag with your name and email address. This is to 
+signify that the change is an original one made by you and you are happy 
+to submit this under the (GPL) license conditions.
+- an explanation *why* this change is required (mtd_debug write being 
+not reliable, etc)
+- sent to the U-Boot list and the maintainer (me)
+
+Look at the U-Boot mailing list (archive) for examples.
+"git format-patch" creates everything in the right format (mbox), and 
+"git send-email" will send this via an SMTP server you point it to. Or 
+you import this into your client.
+
+If you could try this (with the Signed-off-by being the most important 
+change), I am happy to submit this with the next push.
+
+Thanks,
+Andre
+
+> 
+> On 2023-11-29 3:57 p.m., Andre Przywara wrote:
+>> Hi Stephen,
+>>
+>> On 28/11/2023 20:07, Stephen Graf wrote:
+>>> Below is the console log from trying to use mtd_debug write. It 
+>>> returned immediately with a strange success message.
+>>>
+>>> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000 
+>>> /home/sysadmin/u-boot-sunxi-with-spl.bin
+>>> file_to_flash: fread, size 0xf0000, n 0xf0000
+>>> fread(): Success
+>>
+>> interesting, I was under the impression that "mtd_debug write" would 
+>> be the way to write to flash. In hindsight, the "debug" in that name 
+>> should have probably put me off. Anyway, "cat" is probably not a good 
+>> choice, "dd" is better, but it looks like "flashcp" (also part of 
+>> mtdutils) is the go-to tool, since it does the required erasing 
+>> automatically and also reportedly does some error detection. Can you 
+>> please test this?
+>> # flashcp u-boot-sunxi-with-spl.bin /dev/mtd0
+>> I would test this on my end ASAP as well.
+>>
+>> Do you feel like sending a patch to the U-Boot documentation to get 
+>> this changed then?
+>>
+>> Thanks,
+>> Andre
+>>
