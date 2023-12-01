@@ -4,150 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5CB3C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 08:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 144C8C07E97
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 09:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E355876B6;
-	Fri,  1 Dec 2023 09:44:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id F277386F50;
+	Fri,  1 Dec 2023 10:25:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="GSbjCd0X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IxBKttVW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BD45876DE; Fri,  1 Dec 2023 09:43:59 +0100 (CET)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 06F56870FC; Fri,  1 Dec 2023 10:25:54 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 141FE8760A
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 09:43:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id BE37386314
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 10:25:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1701420234;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=riIdBNFcuxkhZe0NIBZfwo+aAR9Cfy299DG9xrJ4dbI=;
- b=GSbjCd0XQJVRfq3jiECVhUS0inlllf1+Kk4UtUHGniHL73AZX9XMiMZK6AzaOX011Eou4K
- c0375gvNUHq/6Ql6kTJcL5iNwxGx7Fr9MOG9r2TPLElGDb3SlV/2zcqOjiwXbEkMMZXEO/
- MtRs8b3rIMqnz5mBiZJ8MZlI4n9f740=
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01lp2105.outbound.protection.outlook.com [104.47.22.105]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-16-BfdSs1UePn6si-iTU1WPRg-1; Fri, 01 Dec 2023 09:43:52 +0100
-X-MC-Unique: BfdSs1UePn6si-iTU1WPRg-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- GV0P278MB0083.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:1d::10) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7046.22; Fri, 1 Dec 2023 08:43:50 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::cdd5:e0c0:e3f7:dd1]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::cdd5:e0c0:e3f7:dd1%4]) with mapi id 15.20.7046.027; Fri, 1 Dec 2023
- 08:43:50 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
- "ralph.siemsen@linaro.org" <ralph.siemsen@linaro.org>, "nm@ti.com"
- <nm@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "n-francis@ti.com" <n-francis@ti.com>,
- "kamlesh@ti.com" <kamlesh@ti.com>, "afd@ti.com" <afd@ti.com>,
- "a-nandan@ti.com" <a-nandan@ti.com>, "seanga2@gmail.com" <seanga2@gmail.com>, 
- "lukma@denx.de" <lukma@denx.de>, "hnagalla@ti.com" <hnagalla@ti.com>,
- "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "m-chawdhry@ti.com"
- <m-chawdhry@ti.com>, "j-choudhary@ti.com" <j-choudhary@ti.com>,
- "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
- "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "sinthu.raja@mistralsolutions.com" <sinthu.raja@mistralsolutions.com>,
- "sabiya.d@ti.com" <sabiya.d@ti.com>, "sjg@chromium.org" <sjg@chromium.org>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, "bb@ti.com" <bb@ti.com>,
- "rogerq@kernel.org" <rogerq@kernel.org>
-Subject: Re: [PATCH v5 09/17] board: ti: j784s4: Add board support for J784S4
- EVM
-Thread-Topic: [PATCH v5 09/17] board: ti: j784s4: Add board support for J784S4
- EVM
-Thread-Index: AQHaI4R91s1YHnkmmU2kZgAn8krLWLCUHiAA
-Date: Fri, 1 Dec 2023 08:43:50 +0000
-Message-ID: <bfec8d32af29525118437eeed32ac9e2c8cbc554.camel@toradex.com>
-References: <20231130115552.3580995-1-a-nandan@ti.com>
- <20231130115552.3580995-10-a-nandan@ti.com>
-In-Reply-To: <20231130115552.3580995-10-a-nandan@ti.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|GV0P278MB0083:EE_
-x-ms-office365-filtering-correlation-id: 7a5e810e-acbb-439e-7f9d-08dbf249a429
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: nTT89mQ1EzNJZ+pZxUSrPxmNa0rUU7ZJbiu7FIWIslJHsWAe6ddmepZQZZze/g4j5wqgrlf/9He/GGlETgiaoxaD17uAiQWCJhIbIA/1Qx6LAyGQSH+XZqjRW03/us/D6mG2mjqAXjO8E4O/htb/pnKhDHAGdAzb8qIlh70mCIHATLXEMiMourQ5dcRnXH7TzHtphLLmm7W3bm9T3lDKIAaqzWB7iS3YpZPKlJMM8LOE5rzbXD8cru0rjdZ8qhhNnlax0tNHWMjjrYNxwIaNn7LiDhSRpavGUTH6g9Y7V38QixD4oGOIWkGhje4qQA1SfvWFiNxXXR6k0t9mp1DwDTSpLVGqTFySyKc3Zz8zkzESRIUMRgLU9HseOihkDl/8P7rTxrJfAyuapprGpUPq8PYzyDfYSNg+9UOiORrUlUN3MKG8NIyX+iGknBCwuwZE0V6MGf8b3XqpZ7K5PS6AAi3cELAXkneBPmSXwWzGBtrlBREpjswizcyM6pNBh5SdGUGA1OODXzZ+k61cx/mJx2t6hlWs9iNWHC+2ewyvfHfP8Z+OkbDy1pQuDrrxa53kEwNWfdw2LRupCX+DTcQGgId4KfpZTLVztklccGZ/1fpr5s4Ukh0/40fKIgSVUCre
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(39850400004)(376002)(346002)(136003)(396003)(366004)(230922051799003)(186009)(1800799012)(451199024)(64100799003)(83380400001)(26005)(38100700002)(2616005)(8936002)(8676002)(86362001)(6506007)(6512007)(122000001)(6486002)(966005)(76116006)(316002)(66476007)(66556008)(110136005)(71200400001)(66946007)(66446008)(64756008)(478600001)(2906002)(38070700009)(41300700001)(921008)(36756003)(44832011)(4001150100001)(5660300002)(7416002);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VjR6MlljUmIwM3dEajRva1l5ZXdCbTJpdlg4UGo1WE5pNjdxbUx3RWN3NFZ1?=
- =?utf-8?B?MElVY2MyQlhsSlBKUGwyTHE3NlJ4b1pHdG5vdldTRkdxeVNUcy9sSlFsK3Bh?=
- =?utf-8?B?LzJoMkJxY2Y5Q0xIZ1g1am9DbFBydWwyeHJTQmtvU1o3ZkNtQXFEWFhNZGVx?=
- =?utf-8?B?c1dMNEF4TG9UcXF0MjBwUEpTTC9wTjEzekpiUzdiVE9kc1YvbTdXOGNRTjl0?=
- =?utf-8?B?VzRlRzBacWdHdUVNUEZPT0hheE4xUDhvaGd5UVRwMFI4bjhjcmtSN01IUVRm?=
- =?utf-8?B?alZWMEcva2VpZ21pem1PeHdleXpRVlQwa2E0Mld2ZmtrOTJ0Nmx1QUN3N1J2?=
- =?utf-8?B?d3NlMERnMXl6UDErTzRITnl6Y1dBRHRuTEs2czhEOHNUNWU2NHQ5Z1ZwSC81?=
- =?utf-8?B?Z3VIS2p5eGhEWHBYUjI2VmxLQ2tnc0lOWk5Ldk56TUtSMXlmZVVWY3ozaVBx?=
- =?utf-8?B?dkJFOHFST0RtZ0RWQk54L2NVWFRCaFM0OHo3R216ZTdUT1I0dTJQRGNNeFBs?=
- =?utf-8?B?NGFvUHBOUEFsQmNwNG1ZN0V3MkkxN0cvclBraXprSDZuMEVOVW9oREoyVU5Z?=
- =?utf-8?B?d05QYzZhSGhqblI4dlVGdTFaTnBSSW9DSHBWY1c4UWdibmV1ZFZ4ckp6dWdO?=
- =?utf-8?B?bFdiZGQ4UnlMdTBMSi9mUW5MQXNJWXptVE5Bd0ZUSnFUSERwSnlMdUJjcGJL?=
- =?utf-8?B?QzgwN0pzUmZQSHNDTnJ6UU50c29VS2JJN0I2V0tIUEtnOFpMWjRLSkVkZ3px?=
- =?utf-8?B?TVFoRHBJbWRLOEFVTUdZUzRwaDRrMFRvQ1IxZEZVSXZDMWVTcmIrRmYrOGVq?=
- =?utf-8?B?UjlrZG5GYkczbTJaTUQ3N3BSUTk2bWladkk0eGRyT2ErQXB0dXZ3b2drYmIx?=
- =?utf-8?B?azgrdGp5akhWTnFqZHBINjE4S3RKQ2Z1NWNGSG93ejhKdDBUNVUvYW4ydGM0?=
- =?utf-8?B?L2dZbHdwTHBCa2piYStPZktMSUdJK2VKQ2laZmIzelpRZ1FsTGk4Mk1NMHE0?=
- =?utf-8?B?OVNRN0lSZmlyRmVRZ3IrTm80T2VhUk9TRGRrZWlWWW8zd3hKcHhpK0UwaklG?=
- =?utf-8?B?VldhcmJMcElibGNaODJXM2hBOGpaSVJXbFZoSGUwNmh3OWxaNEhraURxNllW?=
- =?utf-8?B?MU93eHJZZzhpOE5pSjVyZVRUZWxQUEQ1NXFSWis2Q2pYdGRFWHdBUVNNL1Fv?=
- =?utf-8?B?cXJSSjYzby9ac2RRTU5teTZQTW4vTnNjTHlyL1VLbUw4aURHUGRSTFdDcXAw?=
- =?utf-8?B?bUVRNmlVdmg4aVQ1RDlrT3NUZy9Iay82eDNmaS9VTlVtbDZmUmZKMFBWRGg4?=
- =?utf-8?B?cElCWnVOQjYwTUdjTmlwbnZaQjNaVlJPOWl1YmUvOXQ0cWlzV1QwM3A3bEFG?=
- =?utf-8?B?NjNyUUtzNlhCUFluWTRUYVIrRkUrQkZnWjZOVnphTzNpRW5teWUyaWpybTBV?=
- =?utf-8?B?MnZkYmxkVEZvdWdzditmVnkrVTN0Sk90eFVKc1dJT2VOV1FkYVJUN3EveStB?=
- =?utf-8?B?KzVUNzRzRGF0ME5uUkxjcEJBVVFiM1doN1RoUGk3ak5hQ0tCdnI2cDFSN0J2?=
- =?utf-8?B?SmRSU0gyMlNwVFEyQkFacGtJNmI1SnovZEhmaTF6ZmplVXlZcCtUejJSc3VQ?=
- =?utf-8?B?SGZWdVF1RGlrNUh1cnp2SDMraHFLSmJVUHpQbXEwTTJTZ2tvMTU0VGswQnBB?=
- =?utf-8?B?YlN3cTkrYk5GN3lUUmxpMjA4RExhQmFuLzZoL1JMeEgxSkJGSG5GV1VJMDFS?=
- =?utf-8?B?Smt2dmlTVEQxa0NlZ3FidGJpWkJFUFNtWTMrc1FXL2J0WnB3K1lYN0xLVUtU?=
- =?utf-8?B?ZmUrZDZvVDF6ZVdtV0dlbzhQYldITzZmV1FRdHF3VVVTOUYvVG81YTMzL2d3?=
- =?utf-8?B?MERvRmxpK0JBaVhXS0dTUU1abS8ySzAvOFdYODd2ZXFna3BzL2piMmJMKzdF?=
- =?utf-8?B?RUhwbElFVThJajczNjFRL2xhYzBwYWdFd0RUY2Q4VHhnRTZMNnU1Q2ZnN1JO?=
- =?utf-8?B?YjdGd0lDdDFtRGtRT0Z6Mmt5ekpLaEJjRlRYSkFpZ2xPbCtXdXFscCtkb2E1?=
- =?utf-8?B?K25qWENJTGNZamdzOTFsREZOMWFDbTg4SlM1ZEZWMUpJL0ZNS0Y3cFNmRlVl?=
- =?utf-8?B?RlJFaG9UdW0rcS9ocm5YUTRocC90L0NjWTBYTk92THdRTGRodVJNMWpWb01G?=
- =?utf-8?B?dlE9PQ==?=
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-3316d3d11e1so1208537f8f.0
+ for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 01:25:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701422751; x=1702027551; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=AruCqHsQI304Nr68QtDiwsIJO6ymBwuw9OHM+wcq6HQ=;
+ b=IxBKttVWgF/api2e1R1+gtxYWg1qjCyMULYPVPnuN87pcpi9wpoQubOTq/XpVod/M3
+ +8PYH3lluVysxJYXCmifkvF56z2DxH5rGL/4tPVuCl3a4BZ38ktwd4mDxmxO55gLvWaX
+ 37rAWO3uFT68LiVt51Ma/fmTWdSU5fJfNbTNV4xzVcD5NlTOBnQ2KtL2pBT0DEv1jsXO
+ GK/VX5fd7k+wFd4/xF2yqB4078Sw3QiYvBN/lD8soz5t78RKiD3FpJ+sfNJ9jX22MB+r
+ 7aU80clMv9qEOw19geevTcpxSJ4citiH5VPYHIbNwC5DnS1EhuTxOlHVkP9QyuraaEVm
+ WbYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701422751; x=1702027551;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=AruCqHsQI304Nr68QtDiwsIJO6ymBwuw9OHM+wcq6HQ=;
+ b=vdT5VMRmpy2wWttk2DUqpwJ7zvnhw3BbFeklCvwINjnuNCyD7rI3hnjOHDBMujQl2A
+ w/1CDU1j/eLszR+e6o6+KdbIL1LN9Ktm+UYeV7ip/J/Bxq/d3W4c2A4OQtu1UT+0nF4b
+ kLk/wkzEvTSe9eBm1VCUrRv6npD/bG3eij6j4p77naCKjYjx/k1qt300BuJjYsM/+dkt
+ CYd6WpGl6SAAGiWrRnSaLmo5jV4Eil8k0LGKhdfu+JDSqoNUowiNMZGdQGSPYtsLeLKK
+ DTWRekR9Lr1ZwCmTbaOhBnujEEu+qYPo6pxUovErz03zVveF+51CZHSwfdzES90TGKRj
+ I3SA==
+X-Gm-Message-State: AOJu0Yy2MU+WO1sh1DQF0lQ0dz5sjty+M69Xb/wsMY8AyQjLoc2NYMvp
+ yczA0trowMSu/osNGteD+WwKdQ==
+X-Google-Smtp-Source: AGHT+IGNxKKSnTfR6tPaE9PfuC7UUTf8L3dkhSsIm/GtPMXX2czFZdzFunjrDGxxYMbwr+Y5YDwtsg==
+X-Received: by 2002:a05:6000:137a:b0:333:1bc8:40f7 with SMTP id
+ q26-20020a056000137a00b003331bc840f7mr483269wrz.14.1701422751097; 
+ Fri, 01 Dec 2023 01:25:51 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:46dc:1c67:6d66:e21?
+ ([2a01:e0a:982:cbb0:46dc:1c67:6d66:e21])
+ by smtp.gmail.com with ESMTPSA id
+ dd16-20020a0560001e9000b00332cc24a59bsm3647361wrb.109.2023.12.01.01.25.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 01 Dec 2023 01:25:50 -0800 (PST)
+Message-ID: <693d85b5-0cec-42cf-898e-1e747606fe1d@linaro.org>
+Date: Fri, 1 Dec 2023 10:25:49 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a5e810e-acbb-439e-7f9d-08dbf249a429
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Dec 2023 08:43:50.3658 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Zi3EN1tqX+7lKIac4JfoMkSRLrEYJ+CRPKBi6kW7EVKpnexEcgQ4LAN+S73iLI4LYsveTKepu2vFwSh3QsaztbonR0rNaI50G631wTKw+5Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV0P278MB0083
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <9651326099E9C346B76354928FDFE061@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v5 2/9] button: qcom-pmic: introduce Qualcomm PMIC button
+ driver
+Content-Language: en-US, fr
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>
+Cc: u-boot@lists.denx.de
+References: <20231130-b4-qcom-dt-compat-v5-0-41500e237ad0@linaro.org>
+ <20231130-b4-qcom-dt-compat-v5-2-41500e237ad0@linaro.org>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231130-b4-qcom-dt-compat-v5-2-41500e237ad0@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,100 +124,243 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQXB1cnZhIA0KDQpUaGFua3MgZm9yIHRoZSB1cGRhdGUsIGhvd2V2ZXIsIGl0IGRvZXMgbm90
-IHNlZW0gdG8gY29tcGlsZS4gU2VlIGJlbG93Li4uDQoNCk9uIFRodSwgMjAyMy0xMS0zMCBhdCAx
-NzoyNSArMDUzMCwgQXB1cnZhIE5hbmRhbiB3cm90ZToNCj4gQWRkIGJvYXJkIGZpbGVzIGZvciBK
-Nzg0UzQgRVZNLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogSGFyaSBOYWdhbGxhIDxobmFnYWxsYUB0
-aS5jb20+DQo+IFsgYWRkIGVudiBhbmQgYm9hcmQgc3BlY2lmaWMgeWFtbCBmaWxlcyBmb3IgYmlu
-bWFuIF0NCj4gU2lnbmVkLW9mZi1ieTogTmVoYSBNYWxjb20gRnJhbmNpcyA8bi1mcmFuY2lzQHRp
-LmNvbT4NCj4gWyBjbGVhbmVkIHVwIHRoZSBlbnYgZmlsZXMgXQ0KPiBTaWduZWQtb2ZmLWJ5OiBN
-YW5vcml0IENoYXdkaHJ5IDxtLWNoYXdkaHJ5QHRpLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogRGFz
-bmF2aXMgU2FiaXlhIDxzYWJpeWEuZEB0aS5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IEFwdXJ2YSBO
-YW5kYW4gPGEtbmFuZGFuQHRpLmNvbT4NCj4gLS0tDQo+IMKgYXJjaC9hcm0vbWFjaC1rMy9LY29u
-ZmlnwqDCoMKgwqDCoMKgwqAgfMKgIDEgKw0KPiDCoGFyY2gvYXJtL21hY2gtazMvajc4NHM0L0tj
-b25maWcgfCAzNSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gwqBib2FyZC90aS9q
-Nzg0czQvTWFrZWZpbGXCoMKgwqDCoMKgwqDCoCB8wqAgNyArKysrKysNCj4gwqBib2FyZC90aS9q
-Nzg0czQvZXZtLmPCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDM4ICsrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKw0KPiDCoGluY2x1ZGUvY29uZmlncy9qNzg0czRfZXZtLmjCoMKgwqAgfCAy
-MCArKysrKysrKysrKysrKysrKw0KPiDCoDUgZmlsZXMgY2hhbmdlZCwgMTAxIGluc2VydGlvbnMo
-KykNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgYXJjaC9hcm0vbWFjaC1rMy9qNzg0czQvS2NvbmZp
-Zw0KPiDCoGNyZWF0ZSBtb2RlIDEwMDY0NCBib2FyZC90aS9qNzg0czQvTWFrZWZpbGUNCj4gwqBj
-cmVhdGUgbW9kZSAxMDA2NDQgYm9hcmQvdGkvajc4NHM0L2V2bS5jDQo+IMKgY3JlYXRlIG1vZGUg
-MTAwNjQ0IGluY2x1ZGUvY29uZmlncy9qNzg0czRfZXZtLmgNCj4gDQo+IGRpZmYgLS1naXQgYS9h
-cmNoL2FybS9tYWNoLWszL0tjb25maWcgYi9hcmNoL2FybS9tYWNoLWszL0tjb25maWcNCj4gaW5k
-ZXggMTUwZDBiZmExNC4uNDQ1YjQ5ZTI0NSAxMDA2NDQNCj4gLS0tIGEvYXJjaC9hcm0vbWFjaC1r
-My9LY29uZmlnDQo+ICsrKyBiL2FyY2gvYXJtL21hY2gtazMvS2NvbmZpZw0KPiBAQCAtMTU3LDUg
-KzE1Nyw2IEBAIHNvdXJjZSAiYXJjaC9hcm0vbWFjaC1rMy9hbTYyeC9LY29uZmlnIg0KPiDCoHNv
-dXJjZSAiYXJjaC9hcm0vbWFjaC1rMy9hbTYyYXgvS2NvbmZpZyINCj4gwqBzb3VyY2UgImFyY2gv
-YXJtL21hY2gtazMvajcyMWUvS2NvbmZpZyINCj4gwqBzb3VyY2UgImFyY2gvYXJtL21hY2gtazMv
-ajcyMXMyL0tjb25maWciDQo+ICtzb3VyY2UgImFyY2gvYXJtL21hY2gtazMvajc4NHM0L0tjb25m
-aWciDQo+IMKgDQo+IMKgZW5kaWYNCj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL21hY2gtazMvajc4
-NHM0L0tjb25maWcgYi9hcmNoL2FybS9tYWNoLWszL2o3ODRzNC9LY29uZmlnDQo+IG5ldyBmaWxl
-IG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAwMDAuLjAzZDNmOTEzNzENCj4gLS0tIC9kZXYv
-bnVsbA0KPiArKysgYi9hcmNoL2FybS9tYWNoLWszL2o3ODRzNC9LY29uZmlnDQo+IEBAIC0wLDAg
-KzEsMzUgQEANCj4gKyMgU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAtb3ItbGF0ZXIN
-Cj4gKyMNCj4gKyMgQ29weXJpZ2h0IChDKSAyMDIzIFRleGFzIEluc3RydW1lbnRzIEluY29ycG9y
-YXRlZCAtIGh0dHBzOi8vd3d3LnRpLmNvbS8NCj4gKyMJSGFyaSBOYWdhbGxhIDxobmFnYWxsYUB0
-aS5jb20+DQo+ICsNCj4gK2lmIFNPQ19LM19KNzg0UzQNCj4gKw0KPiArY2hvaWNlDQo+ICsJcHJv
-bXB0ICJLMyBKNzg0UzQgYm9hcmQiDQo+ICsJb3B0aW9uYWwNCj4gKw0KPiArY29uZmlnIFRBUkdF
-VF9KNzg0UzRfQTcyX0VWTQ0KPiArCWJvb2wgIlRJIEszIGJhc2VkIEo3ODRTNCBFVk0gcnVubmlu
-ZyBvbiBBNzIiDQo+ICsJc2VsZWN0IEFSTTY0DQo+ICsJc2VsZWN0IEJPQVJEX0xBVEVfSU5JVA0K
-PiArCXNlbGVjdCBTWVNfRElTQUJMRV9EQ0FDSEVfT1BTDQo+ICsJc2VsZWN0IEJJTk1BTg0KPiAr
-DQo+ICtjb25maWcgVEFSR0VUX0o3ODRTNF9SNV9FVk0NCj4gKwlib29sICJUSSBLMyBiYXNlZCBK
-Nzg0UzQgRVZNIHJ1bm5pbmcgb24gUjUiDQo+ICsJc2VsZWN0IENQVV9WN1INCj4gKwlzZWxlY3Qg
-U1lTX1RIVU1CX0JVSUxEDQo+ICsJc2VsZWN0IEszX0xPQURfU1lTRlcNCj4gKwlzZWxlY3QgUkFN
-DQo+ICsJc2VsZWN0IFNQTF9SQU0NCj4gKwlzZWxlY3QgSzNfRERSU1MNCj4gKwlzZWxlY3QgQklO
-TUFODQo+ICsJaW1wbHkgU1lTX0szX1NQTF9BVEYNCj4gKw0KPiArZW5kY2hvaWNlDQo+ICsNCj4g
-K3NvdXJjZSAiYm9hcmQvdGkvajc4NHM0L0tjb25maWciDQoNCldoZXJlIGV4YWN0bHkgd291bGQg
-dGhhdCBvbmUgY29tZSBmcm9tPw0KDQrirKJbemltQHRvb2xib3ggdS1ib290LmdpdF0kIG1ha2Ug
-ajc4NHM0X2V2bV9yNV9kZWZjb25maWcNCiAgSE9TVENDICBzY3JpcHRzL2Jhc2ljL2ZpeGRlcA0K
-ICBIT1NUQ0MgIHNjcmlwdHMva2NvbmZpZy9jb25mLm8NCiAgWUFDQyAgICBzY3JpcHRzL2tjb25m
-aWcvemNvbmYudGFiLmMNCiAgTEVYICAgICBzY3JpcHRzL2tjb25maWcvemNvbmYubGV4LmMNCiAg
-SE9TVENDICBzY3JpcHRzL2tjb25maWcvemNvbmYudGFiLm8NCiAgSE9TVExEICBzY3JpcHRzL2tj
-b25maWcvY29uZg0KYXJjaC9hcm0vbWFjaC1rMy9qNzg0czQvS2NvbmZpZzozMjogY2FuJ3Qgb3Bl
-biBmaWxlICJib2FyZC90aS9qNzg0czQvS2NvbmZpZyINCm1ha2VbMV06ICoqKiBbc2NyaXB0cy9r
-Y29uZmlnL01ha2VmaWxlOjk2OiBqNzg0czRfZXZtX3I1X2RlZmNvbmZpZ10gRXJyb3IgMQ0KbWFr
-ZTogKioqIFtNYWtlZmlsZTo1ODY6IGo3ODRzNF9ldm1fcjVfZGVmY29uZmlnXSBFcnJvciAyDQoN
-Cj4gKw0KPiArZW5kaWYNCj4gKw0KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvdGkvajc4NHM0L01ha2Vm
-aWxlIGIvYm9hcmQvdGkvajc4NHM0L01ha2VmaWxlDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
-IGluZGV4IDAwMDAwMDAwMDAuLjNmYzcwZWI4ZmINCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9i
-b2FyZC90aS9qNzg0czQvTWFrZWZpbGUNCj4gQEAgLTAsMCArMSw3IEBADQo+ICsjIFNQRFgtTGlj
-ZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wLW9yLWxhdGVyDQo+ICsjDQo+ICsjIENvcHlyaWdodCAo
-QykgMjAyMyBUZXhhcyBJbnN0cnVtZW50cyBJbmNvcnBvcmF0ZWQgLSBodHRwczovL3d3dy50aS5j
-b20vDQo+ICsjCUhhcmkgTmFnYWxsYSA8aG5hZ2FsbGFAdGkuY29tPg0KPiArIw0KPiArDQo+ICtv
-YmoteSArPSBldm0ubw0KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvdGkvajc4NHM0L2V2bS5jIGIvYm9h
-cmQvdGkvajc4NHM0L2V2bS5jDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAw
-MDAwMDAuLjQ4NTdjOWQyZjYNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9ib2FyZC90aS9qNzg0
-czQvZXZtLmMNCj4gQEAgLTAsMCArMSwzOCBAQA0KPiArLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZp
-ZXI6IEdQTC0yLjAtb3ItbGF0ZXINCj4gKy8qDQo+ICsgKiBCb2FyZCBzcGVjaWZpYyBpbml0aWFs
-aXphdGlvbiBmb3IgSjc4NFM0IEVWTQ0KPiArICoNCj4gKyAqIENvcHlyaWdodCAoQykgMjAyMyBU
-ZXhhcyBJbnN0cnVtZW50cyBJbmNvcnBvcmF0ZWQgLSBodHRwczovL3d3dy50aS5jb20vDQo+ICsg
-KglIYXJpIE5hZ2FsbGEgPGhuYWdhbGxhQHRpLmNvbT4NCj4gKyAqDQo+ICsgKi8NCj4gKw0KPiAr
-I2luY2x1ZGUgPGltYWdlLmg+DQo+ICsjaW5jbHVkZSA8aW5pdC5oPg0KPiArI2luY2x1ZGUgPHNw
-bC5oPg0KPiArDQo+ICtERUNMQVJFX0dMT0JBTF9EQVRBX1BUUjsNCj4gKw0KPiAraW50IGJvYXJk
-X2luaXQodm9pZCkNCj4gK3sNCj4gKwlyZXR1cm4gMDsNCj4gK30NCj4gKw0KPiAraW50IGRyYW1f
-aW5pdCh2b2lkKQ0KPiArew0KPiArCXJldHVybiBmZHRkZWNfc2V0dXBfbWVtX3NpemVfYmFzZSgp
-Ow0KPiArfQ0KPiArDQo+ICtpbnQgZHJhbV9pbml0X2JhbmtzaXplKHZvaWQpDQo+ICt7DQo+ICsJ
-cmV0dXJuIGZkdGRlY19zZXR1cF9tZW1vcnlfYmFua3NpemUoKTsNCj4gK30NCj4gKw0KPiAraW50
-IGJvYXJkX2xhdGVfaW5pdCh2b2lkKQ0KPiArew0KPiArCXJldHVybiAwOw0KPiArfQ0KPiArDQo+
-ICt2b2lkIHNwbF9ib2FyZF9pbml0KHZvaWQpDQo+ICt7DQo+ICt9DQo+IGRpZmYgLS1naXQgYS9p
-bmNsdWRlL2NvbmZpZ3Mvajc4NHM0X2V2bS5oIGIvaW5jbHVkZS9jb25maWdzL2o3ODRzNF9ldm0u
-aA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwLi4xYjc4MDEzNGNh
-DQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvaW5jbHVkZS9jb25maWdzL2o3ODRzNF9ldm0uaA0K
-PiBAQCAtMCwwICsxLDIwIEBADQo+ICsvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIu
-MC1vci1sYXRlciAqLw0KPiArLyoNCj4gKyAqIENvbmZpZ3VyYXRpb24gaGVhZGVyIGZpbGUgZm9y
-IEszIEo3ODRTNCBFVk0NCj4gKyAqDQo+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjMgVGV4YXMgSW5z
-dHJ1bWVudHMgSW5jb3Jwb3JhdGVkIC0gaHR0cHM6Ly93d3cudGkuY29tLw0KPiArICoJSGFyaSBO
-YWdhbGxhIDxobmFnYWxsYUB0aS5jb20+DQo+ICsgKi8NCj4gKw0KPiArI2lmbmRlZiBfX0NPTkZJ
-R19KNzg0UzRfRVZNX0gNCj4gKyNkZWZpbmUgX19DT05GSUdfSjc4NFM0X0VWTV9IDQo+ICsNCj4g
-KyNpbmNsdWRlIDxsaW51eC9zaXplcy5oPg0KPiArDQo+ICsvKiBERFIgQ29uZmlndXJhdGlvbiAq
-Lw0KPiArI2RlZmluZSBDRkdfU1lTX1NEUkFNX0JBU0UxCQkweDg4MDAwMDAwMA0KPiArDQo+ICsv
-KiBOb3cgZm9yIHRoZSByZW1haW5pbmcgY29tbW9uIGRlZmluZXMgKi8NCj4gKyNpbmNsdWRlIDxj
-b25maWdzL3RpX2FybXY3X2NvbW1vbi5oPg0KPiArDQo+ICsjZW5kaWYgLyogX19DT05GSUdfSjc4
-NFM0X0VWTV9IICovDQoNCkNoZWVycw0KDQpNYXJjZWwNCg==
+On 30/11/2023 21:22, Caleb Connolly wrote:
+> Qualcomm PMICs include a "pon" function which handles two buttons, the
+> power button and "resin" button (usually volume down). Introduce a new
+> driver following upstream Linux DT to enable these and map them to Enter
+> and Down respectively to enable use in boot menus.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   MAINTAINERS                       |   1 +
+>   drivers/button/Kconfig            |   9 +++
+>   drivers/button/Makefile           |   1 +
+>   drivers/button/button-qcom-pmic.c | 165 ++++++++++++++++++++++++++++++++++++++
+>   4 files changed, 176 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index f6d63c8ab563..8cd102eaa070 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -572,6 +572,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+>   R:	Sumit Garg <sumit.garg@linaro.org>
+>   S:	Maintained
+>   F:	arch/arm/mach-snapdragon/
+> +F:	drivers/button/button-qcom-pmic.c
+>   F:	drivers/clk/qcom/
+>   F:	drivers/gpio/msm_gpio.c
+>   F:	drivers/mmc/msm_sdhci.c
+> diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+> index 8ce2de37d62a..097b05f822e7 100644
+> --- a/drivers/button/Kconfig
+> +++ b/drivers/button/Kconfig
+> @@ -27,4 +27,13 @@ config BUTTON_GPIO
+>   	  The GPIO driver must used driver model. Buttons are configured using
+>   	  the device tree.
+>   
+> +config BUTTON_QCOM_PMIC
+> +	bool "Qualcomm power button"
+> +	depends on BUTTON
+> +	depends on PMIC_QCOM
+> +	help
+> +	  Enable support for the power and "resin" (usually volume down) buttons
+> +	  on Qualcomm SoCs. These will be configured as the Enter and Down keys
+> +	  respectively, allowing navigation of bootmenu with buttons on device.
+> +
+>   endmenu
+> diff --git a/drivers/button/Makefile b/drivers/button/Makefile
+> index bbd18af14940..68555081a47a 100644
+> --- a/drivers/button/Makefile
+> +++ b/drivers/button/Makefile
+> @@ -5,3 +5,4 @@
+>   obj-$(CONFIG_BUTTON) += button-uclass.o
+>   obj-$(CONFIG_BUTTON_ADC) += button-adc.o
+>   obj-$(CONFIG_BUTTON_GPIO) += button-gpio.o
+> +obj-$(CONFIG_BUTTON_QCOM_PMIC) += button-qcom-pmic.o
+> \ No newline at end of file
+> diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+> new file mode 100644
+> index 000000000000..34a976d1e6c6
+> --- /dev/null
+> +++ b/drivers/button/button-qcom-pmic.c
+> @@ -0,0 +1,165 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Qualcomm generic pmic gpio driver
+> + *
+> + * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+> + * (C) Copyright 2023 Linaro Ltd.
+> + */
+> +
+> +#include <button.h>
+> +#include <dt-bindings/input/linux-event-codes.h>
+> +#include <dm.h>
+> +#include <dm/device-internal.h>
+> +#include <dm/lists.h>
+> +#include <log.h>
+> +#include <power/pmic.h>
+> +#include <spmi/spmi.h>
+> +#include <linux/bitops.h>
+> +
+> +#define REG_TYPE		0x4
+> +#define REG_SUBTYPE		0x5
+> +
+> +struct qcom_pmic_btn_priv {
+> +	u32 base;
+> +	u32 status_bit;
+> +	int code;
+> +	struct udevice *pmic;
+> +};
+> +
+> +#define PON_INT_RT_STS                        0x10
+> +#define KPDPWR_ON_INT_BIT                     0
+> +#define RESIN_ON_INT_BIT                      1
+> +
+> +#define NODE_IS_PWRKEY(node) (!strncmp(ofnode_get_name(node), "pwrkey", strlen("pwrkey")))
+> +#define NODE_IS_RESIN(node) (!strncmp(ofnode_get_name(node), "resin", strlen("resin")))
 
+This is not very pretty, but I don't see better alternative except perhaps
+defining a struct with the node name and the properties and simply
+match over it, but since there's only 2 buttons it makes it generic for nothing.
+
+> +
+> +static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
+> +{
+> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
+> +
+> +	int reg = pmic_reg_read(priv->pmic, priv->base + PON_INT_RT_STS);
+> +
+> +	if (reg < 0)
+> +		return 0;
+> +
+> +	return (reg & BIT(priv->status_bit)) != 0;
+> +}
+> +
+> +static int qcom_pwrkey_get_code(struct udevice *dev)
+> +{
+> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
+> +
+> +	return priv->code;
+> +}
+> +
+> +static int qcom_pwrkey_probe(struct udevice *dev)
+> +{
+> +	struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+> +	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
+> +	ofnode node = dev_ofnode(dev);
+> +	int ret;
+> +	u64 base;
+> +
+> +	/* Ignore the top-level pon node */
+> +	if (!uc_plat->label)
+> +		return 0;
+> +
+> +	/* the pwrkey and resin nodes are children of the "pon" node, get the
+> +	 * PMIC device to use in pmic_reg_* calls.
+> +	 */ > +	priv->pmic = dev->parent->parent;
+> +
+> +	/* Get the address of the parent pon node */
+> +	base = dev_read_addr(dev->parent);
+> +	if (base == FDT_ADDR_T_NONE) {
+> +		printf("%s: Can't find address\n", dev->name);
+> +		return -EINVAL;
+> +	}
+> +
+> +	priv->base = base;
+> +
+> +	/* Do a sanity check */
+> +	ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
+> +	if (ret != 0x1 && ret != 0xb) {
+> +		printf("%s: unexpected PMIC function type %d\n", dev->name, ret);
+> +		return -ENXIO;
+> +	}
+> +
+> +	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
+> +	if ((ret & 0x7) == 0) {
+> +		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
+> +		return -ENXIO;
+> +	}
+> +
+> +	if (NODE_IS_PWRKEY(node)) {
+> +		priv->status_bit = 0;
+> +		priv->code = KEY_ENTER;
+> +	} else if (NODE_IS_RESIN(node)) {
+> +		priv->status_bit = 1;
+> +		priv->code = KEY_DOWN;
+> +	} else {
+> +		/* Should not get here! */
+> +		printf("Invalid pon node '%s' should be 'pwrkey' or 'resin'\n",
+> +		       ofnode_get_name(node));
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int button_qcom_pmic_bind(struct udevice *parent)
+> +{
+> +	struct udevice *dev;
+> +	ofnode node;
+> +	int ret;
+> +
+> +	dev_for_each_subnode(node, parent) {
+> +		struct button_uc_plat *uc_plat;
+> +		const char *label;
+> +
+> +		if (!ofnode_is_enabled(node))
+> +			continue;
+> +
+> +		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
+> +						 ofnode_get_name(node),
+> +						 node, &dev);
+> +		if (ret) {
+> +			printf("Failed to bind %s! %d\n", label, ret);
+> +			return ret;
+> +		}
+> +		uc_plat = dev_get_uclass_plat(dev);
+> +		if (NODE_IS_PWRKEY(node)) {
+> +			uc_plat->label = "pwrkey";
+> +		} else if (NODE_IS_RESIN(node)) {
+> +			uc_plat->label = "vol_down";
+> +		} else {
+> +			printf("Unknown button node '%s' should be 'pwrkey' or 'resin'\n",
+> +			       ofnode_get_name(node));
+> +			device_unbind(dev);
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct button_ops button_qcom_pmic_ops = {
+> +	.get_state	= qcom_pwrkey_get_state,
+> +	.get_code	= qcom_pwrkey_get_code,
+> +};
+> +
+> +static const struct udevice_id qcom_pwrkey_ids[] = {
+> +	{ .compatible = "qcom,pm8916-pon" },
+> +	{ .compatible = "qcom,pm8941-pon" },
+> +	{ .compatible = "qcom,pm8998-pon" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(qcom_pwrkey) = {
+> +	.name = "qcom_pwrkey",
+> +	.id = UCLASS_BUTTON,
+> +	.of_match = qcom_pwrkey_ids,
+> +	.bind = button_qcom_pmic_bind,
+> +	.probe = qcom_pwrkey_probe,
+> +	.ops = &button_qcom_pmic_ops,
+> +	.priv_auto = sizeof(struct qcom_pmic_btn_priv),
+> +};
+> 
+
+Apart that it looks good:
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
