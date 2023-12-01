@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332F9C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 03:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD6CC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 03:04:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2079086FC9;
+	by phobos.denx.de (Postfix) with ESMTP id ACE548758A;
 	Sat,  2 Dec 2023 04:03:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.es
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmx.es header.i=j.viguera@gmx.es header.b="UQI8xeWb";
+	dkim=pass (2048-bit key; unprotected) header.d=bedrocksystems.com header.i=@bedrocksystems.com header.b="UvhcEgMy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31E9A87664; Fri,  1 Dec 2023 15:34:55 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B94DC8721C; Fri,  1 Dec 2023 20:41:53 +0100 (CET)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3955D875A7
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 15:34:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 037B687083
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 20:41:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=bedrocksystems.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.es
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j.viguera@gmx.es
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.es; s=s31663417;
- t=1701441286; x=1702046086; i=j.viguera@gmx.es;
- bh=AdY15veniyjuwLJis4t8f/mWtA5O/luL3VN+HfTv0b0=;
- h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:
- In-Reply-To;
- b=UQI8xeWbqD9J60GpNGxx3dkrhmsQ+4QZQ/1B5VnV3eMFRA/qN/EIhtOlMfCeWFI1
- HnkM1iMhBTZ6Miqo+vUtCm+wN+tAj+H4O7TqSZWR0aR9zpoevXCMA05B4sMZ0BqI3
- kj9h8nG8dNoB/qtIDxDhlY3l15y+pLw2ky8szQQvAM803iWgze0CwiyAObnxP2Itn
- Ybaw+/xR+x1Hhs9PL+J+QpCSKq+8WzZblzlRE16/Ya4xkyV1WgB023olmJIEA/5WH
- DB/5jNfrkRIfPclxLLCg3krpKHYYzHmC4dNewNByiyLNrig2roLb+64KpRUugt9AV
- iFngyiD2+bZG/LRLew==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.2.10] ([95.127.30.95]) by mail.gmx.net (mrgmx105
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1Mirng-1rne9S1Q4y-00ev7g; Fri, 01
- Dec 2023 15:34:46 +0100
-Message-ID: <3c90b54d-8e22-4db7-8534-bba5e5451e87@gmx.es>
-Date: Fri, 1 Dec 2023 15:34:40 +0100
+ spf=pass smtp.mailfrom=dmitry@bedrocksystems.com
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5ab94fc098cso688625a12.1
+ for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 11:41:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bedrocksystems.com; s=google; t=1701459708; x=1702064508; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=M6VSvUsLncSzVC3wCOtiVRYUBuaZlPj4JgN9cCiU4v4=;
+ b=UvhcEgMythFPE5o9NKHtlAMiPQSIz7jSXfpA/zg3x56gWK0ow3sWX53V0Gup7wloRV
+ cJtI9xHlTbqWRzsUdFPQGgcBuCm1OmAhvbl0Yi+NiEOBpuNMRd7MWAwt6ptRoVFzKPqt
+ GgfhbIXPXt45aTkHm8NnpHEIR34qdflv1ocCgdGkwUNQ3y8ywgkQ6cPP5VK2MpO8RESY
+ yliXWSQ8/MoIxXmKypDCzi+5vGJ0cqHh0BkTZdNDh0bn/DJm4bTj7tNfSNgFogW42ESC
+ Xa1Upjx3Ywo52YYRX5vfOGC+9qMWmDpQHTXgVnnxgyyZoEQj9S3AkA3UEsvj7BvptCEI
+ ueKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701459708; x=1702064508;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=M6VSvUsLncSzVC3wCOtiVRYUBuaZlPj4JgN9cCiU4v4=;
+ b=DLUtt2yx9B7gFUVRvVVjoPjDC4J+vRrxgeKIsqEXsmJ7E1TO59+7IgjnmEBoYEyjvZ
+ lII++bpraX/SmmEGR37PisEC9srrjAG6qvIMC6w8B6cPtcFPzbqBbZzo3gG9lkyucwWu
+ /4Rkova32/LGOUsKyQ+tWFMrGnMdKPGaufi/P8l+P0bnAPvNi4lOPk2iq2J6NzNMOagL
+ GnGs+dVEu+yBwc6Ik2/3wg6ewT36WAL2/4DZlwAQW6i+SQFW2EkoRMejuPnw/UmtL8A0
+ fgORbgS4InjPLdWcAYtndRYMWxcq1vRVLgfD9vHJJT47zwskveDJMtWKpxPvDHbqYD7D
+ aYTg==
+X-Gm-Message-State: AOJu0YwdUGa7AxoHyA9KchnJBvRxdHuOmlxQpjLzcWzxqGI8KJVPewyG
+ LoR8iShH+nXN0av6Fk48NFHX1ddo8n/uCgalznqgwA==
+X-Google-Smtp-Source: AGHT+IEVgA5Uzj4dyF2B2uXh4ZlvNmhg8iup4fmPDgRE7og74q+lWzPyInlhb8I8KPhSi63wjcrP4lm0a2v8p/cQ5pQ=
+X-Received: by 2002:a17:90b:3848:b0:27c:fafd:f785 with SMTP id
+ nl8-20020a17090b384800b0027cfafdf785mr42480pjb.47.1701459708530; Fri, 01 Dec
+ 2023 11:41:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] env: mmc: fix environment on hw boot partition 2
-From: Javier Viguera <j.viguera@gmx.es>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, Javier Viguera <javier.viguera@digi.com>
-References: <20231201110929.1758518-1-javier.viguera@digi.com>
-Content-Language: en-US
-In-Reply-To: <20231201110929.1758518-1-javier.viguera@digi.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Zn8wfUqH7vmz5NzmIw3Ajr3nAVN1ILJKUg8QE5v2j7goWFZ2s4H
- HyOTFSAnJXtHtbapsu9KEV6WJw9j2pepVctm5IO1dwkFCeioI4PmzgNWZmS2StVQN+9+61V
- Q9F4AROavEwe9ueO731FwpCdlEPDTD3twKiRsbuUk1WBbAJViTXoA9ZgSXFwvFSThNI9QhQ
- gDmYHewD5ygYqJ6XRBIxg==
-UI-OutboundReport: notjunk:1;M01:P0:gVtZ01sYzs8=;fXWwFHyf1z+6FFkuTjCA1uVg2of
- QFGOQmqsQSjdrseDzvLA8JtsbBLIpvg2q0o4P46uGya0VZCb62YNS5Nkbm5FBg8cneZ6SvxpS
- b7ZIXrVM7GWJB/gEAgpI1pOxavOSj11CNov3MyEB7Vyx2yCNX1kaJOALsMTaLKuVxMvctW8eT
- 0qU+OSd79Vk1RxGnyueXfLIyPgTX06R9cdLYQp1FTgyMJ8/WdoSkVo1L+kR6BD32zkSTru84Q
- usXmRbpQGHPRvPTRlM2naQPyNYsAuDbnfRldak5cnVQBwCEtooNoX4g1Yz4SLPVIpCVFyTWOr
- Q+edmka9xliNJviZQpQpg8Uq8VsEKzxDWdP2h6vLIzCmraVoZFxHbYQ7cJQnkXnVttXebJb3j
- ahHLNeCF3pALXMPc8Cmj7jkrmGO5JSdZLJb0TqWcVZgffxnbVyu8s9pVUkA272V2zr9DX15Dy
- hzi9cyn+H+nt2AOjKkk9aQW3eqNuKp6VyU5lppL099xPzBuUz5alLDCwYmAeh9qJV3n9emEao
- s5wnMpI4kkW6Nzrz6IPUjnyz3NcVnlSPs7pEPBKQ6C1lZ1cZIR3NOUywMRg5+qOJWhcywOAwI
- NIGAHnxodKvJ9A0lrrx2vN4TRMScOGjgvceFyMG3y3dIRrYSCIUtIAQ6kmC9tmFxvpjA73AUA
- immNXS/aFjeCIuktovrMVfINNZ2NSdZsGMcxjj2s2GW5Ksb86NiapXyjE5OjcWDwV90mwiQBO
- 9K2buPbC/w3YWdV2dNFF8On50oSd0ppG3hnv+EspOlmJOHDTQvQzZ2NYafZiiwx8aus5047RQ
- QPgQMFF7md6zClHDbMwcXYTzM7tBgmhQzQBNVPJmQq9GTz9j5ZHa6q+k8ONU0WQaXrBT+ypRD
- jYfaKGRDFKzq9mbnefrYrArNbnew1ysYxPJnj3aNpkWtLrz+OpMCTmwRvI14a1Oeey4KK4yLk
- TaFa8QQSZ+7B31OTrrWEmpfQlpU=
+References: <CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com>
+ <CALeDE9O13H+di7t62iFOFRzZytZKEoxmts8YzcjLxr8CuvRhdg@mail.gmail.com>
+ <CAKRNjQ0Eq6Nov=jSg_JpDsJ3Gpxtc=xngP=qzgqw7Umm339BtA@mail.gmail.com>
+In-Reply-To: <CAKRNjQ0Eq6Nov=jSg_JpDsJ3Gpxtc=xngP=qzgqw7Umm339BtA@mail.gmail.com>
+From: Dmitry Malkin <dmitry@bedrocksystems.com>
+Date: Fri, 1 Dec 2023 20:41:37 +0100
+Message-ID: <CAKRNjQ3uQC8GufgDrn0PacqGU00HmnhUAfy4rq2hppcXVi8CYQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] rpi5: initial support
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, mbrugger@suse.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sat, 02 Dec 2023 04:03:55 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,48 +87,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Peter,
 
-Please disregard this patch. I'm not sure if CONFIG_VAL is the correct
-macro when there are no SPL_,TPL_ versions for SYS_MMC_ENV_PART option.
+> I've given these a cursory look over, I have a system to test and will
+> give them a whirl in the next few days, I was planning to start
+> playing over the weekend so you've provided a great start :)
 
-So back on square one.
-
-How do we solve this to support SYS_MMC_ENV_PART =3D 2?
-
-We have a configuration where we want the environment on "mmcblk0boot1"
-(which is the **second** boot partition) and the IS_ENABLED evaluates to
-**0** which prevents the "hwpart =3D mmc_get_env_part(mmc);" to even run.
-
-Thanks for your help.
-
-=2D-
-Javier Viguera
+Did you have any chance to test my patches?
 
 
-On 1/12/23 12:09, Javier Viguera wrote:
-> SYS_MMC_ENV_PART is an integer option. If it is set to 2 to use the
-> second hardware boot partition, the IS_ENABLED check fails as it expects
-> a boolean, and then it does not get the correct hwpart.
+
 >
-> Signed-off-by: Javier Viguera <javier.viguera@digi.com>
-> ---
->   env/mmc.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Hi guys,
 >
-> diff --git a/env/mmc.c b/env/mmc.c
-> index cb14bbb58f13..df82969d4231 100644
-> --- a/env/mmc.c
-> +++ b/env/mmc.c
-> @@ -111,7 +111,7 @@ static inline s64 mmc_offset(struct mmc *mmc, int co=
-py)
->   	int hwpart =3D 0;
->   	int err;
+> First of all, thank you for all your reviews. I hope I can answer all
+> your questions here. If I forget something please let me know.
 >
-> -	if (IS_ENABLED(CONFIG_SYS_MMC_ENV_PART))
-> +	if (CONFIG_VAL(SYS_MMC_ENV_PART))
->   		hwpart =3D mmc_get_env_part(mmc);
+> I don't have much experience with arm/arm64 and I don't have previous
+> experience with u-boot and contributing to it. So please guide me for
+> next steps.
 >
->   #if defined(CONFIG_ENV_MMC_PARTITION)
+> Also I don't think it makes sense to expect all devices or any device
+> may/should work after initial boot support. I would suggest going with
+> small steps and talking about gfx/usb/net/mmc in dedicated patchsets
+> after initial support is being merged.
 >
+> > Could this be the title for the patch, "initial support" is fine for
+> > the cover letter, but doesn't really out line what this specific patch
+> > actually does.
+> Can confirm. My bad. Will fix it in the next patchset.
+>
+> >> includes:
+> >> * 1GB of RAM (from 4GB or 8GB total)
+> >> * VPU memory interface
+> >> * SOC range (main peripherals)
+>
+> > Could you include details where this information came from as well please?
+> By looking into FDT for memory, framebuffer, and soc nodes. I can add
+> this info in v3.
+>
+>
+> > When you say it doesn't work, does it just not output display or does
+> > the device lock up and you need to disable it?
+> There are artifacts on the screen and the system locks up.
+>
+>
+> > For the rpi4 it was as simple as adding a new compatible [1] for the
+> > rev6 of the IP block as for the bits that we use in U-Boot nothing
+> > changed, but the kernel changes for the rev7 that's in the RPi5 needed
+> > updating registers [2] so I'm not sure if we're going to need to do
+> > more for this or not.
+> I've tried it by playing with "simple-fb" and with "bcm2712-hdmi0".
+> And no luck. Still visible artifacts on the screen. I see valid debug
+> output from bcm2835_video_probe() so the mailbox for set/get
+> base/resolution/pitch/stride works. But still observe the same issue
+> with artifacts and lock up. FYI by default the probing starts due to
+> "bcm2708-fb".
+>
+>
+> > Might be worth looking to see if there's changes in the kernel for
+> > this. In an initial look I didn't see any changes to their kernel
+> > here.
+> I don't see any changes either. I'm not able to find any official
+> confirmation. But most of 'tags' work except two or three. And all of
+> them have response code 0x8000_0001. And FDT contains new info
+> compared to old versions (for these tags). Which leads to the
+> conclusion they are deprecated.
+>
+>
+> > We probably need a patch to the identifier too similar to the following:
+> > https://source.denx.de/u-boot/u-boot/-/commit/5e7e6619c85c090f6b62685a9d90f748f1729d12
+> Honestly I didn't get the reason/goal besides old/new scheme except
+> there is a final print:
+> > printf("RPI %s (0x%x)\n", model->name, revision);
+> which is kind of simular to my:
+> > printf("FW FDT model : %s\n", fdt_model);
+>
+> Besides parsing the "Raspberry Pi 5 Model B Rev 1.0" string to get
+> revision from it? Format is unknown and nobody knows what will be
+> changed. Will it be "Raspberry Pi 5 Model B Rev 1.0a" or Raspberry Pi
+> 5 Model B Rev 1.01"? I don't know. If it's really needed then I would
+> suggest parsing OTP to get precise info with known format.
+>
+> P.S.: Please let me know if I answered all the questions so I can send v3.
+>
+> Regards,
+> Dmitry
 
+I haven't heard any updates. Should I send v3?
