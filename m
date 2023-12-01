@@ -4,57 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58273C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC302C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 00:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B8FF87483;
-	Fri,  1 Dec 2023 01:27:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 18315876B2;
+	Fri,  1 Dec 2023 01:55:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64C3F8758F; Fri,  1 Dec 2023 01:27:12 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3D03D870E2
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:27:10 +0100 (CET)
+ id 43CA487729; Fri,  1 Dec 2023 01:55:23 +0100 (CET)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id DCE4087608
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 01:55:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 15E871042;
- Thu, 30 Nov 2023 16:27:56 -0800 (PST)
-Received: from [10.57.82.74] (unknown [10.57.82.74])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C859D3F6C4;
- Thu, 30 Nov 2023 16:27:07 -0800 (PST)
-Message-ID: <345d9916-6ae6-4dbe-99a2-33aafeebcb60@arm.com>
-Date: Fri, 1 Dec 2023 00:27:05 +0000
+ spf=fail smtp.mailfrom=seanedmond@microsoft.com
+Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
+ by linux.microsoft.com (Postfix) with ESMTPSA id DD1A720B74C1;
+ Thu, 30 Nov 2023 16:55:19 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com DD1A720B74C1
+From: Sean Edmond <seanedmond@microsoft.com>
+To: u-boot@lists.denx.de
+Cc: Dhananjay Phadke <dphadke@linux.microsoft.com>,
+ Sean Edmond <senaedmond@microsoft.com>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v6 1/5] fdt: common API to populate kaslr seed
+Date: Thu, 30 Nov 2023 16:54:40 -0800
+Message-ID: <20231201005507.2080396-2-seanedmond@microsoft.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231201005507.2080396-1-seanedmond@microsoft.com>
+References: <20231201005507.2080396-1-seanedmond@microsoft.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: mdt_debug write
-Content-Language: en-US
-To: Stephen Graf <stephen.graf@gmail.com>
-Cc: Mikhail Kalashnikov <iuncuim@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-References: <20231114013106.31336-1-andre.przywara@arm.com>
- <20231114013106.31336-4-andre.przywara@arm.com>
- <0eab5c21-4fdc-478e-9071-f43c12e01fb3@gmail.com>
- <20231126002349.55404e43@slackpad.lan>
- <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
- <20231126122342.3944cad5@slackpad.lan>
- <d8862c87-072d-4f74-bb37-08f34c610cc8@gmail.com>
- <dae3bee5-e1c7-4154-959c-e41dabb5d844@gmail.com>
- <20231128013746.23648d39@slackpad.lan>
- <5d7ea381-2a57-46f7-85c6-2bcad339d1db@gmail.com>
- <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
- <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,59 +57,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stephen,
+From: Dhananjay Phadke <dphadke@linux.microsoft.com>
 
-On 30/11/2023 01:13, Stephen Graf wrote:
-> Is the attached patch file going in the right direction?
+fdt_fixup_kaslr_seed() will update given ofnode with random seed value.
+Source for random seed can be TPM or RNG driver in u-boot or sec
+firmware (ARM).
 
-yes, thanks, the change itself looks alright, but it needs to be:
-- in a separate email, with a descriptive subject, prefixed by [PATCH]
-- have the diff inline, not as an attachment (to allow easy commenting 
-in an email thread)
-- have a Signed-off-by: tag with your name and email address. This is to 
-signify that the change is an original one made by you and you are happy 
-to submit this under the (GPL) license conditions.
-- an explanation *why* this change is required (mtd_debug write being 
-not reliable, etc)
-- sent to the U-Boot list and the maintainer (me)
+Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
+Signed-off-by: Sean Edmond <senaedmond@microsoft.com>
 
-Look at the U-Boot mailing list (archive) for examples.
-"git format-patch" creates everything in the right format (mbox), and 
-"git send-email" will send this via an SMTP server you point it to. Or 
-you import this into your client.
+Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+---
 
-If you could try this (with the Signed-off-by being the most important 
-change), I am happy to submit this with the next push.
+Changes in v6:
+- root_ofnode_from_fdt()->ofnode_root_from_fdt()
 
-Thanks,
-Andre
+Changes in v5:
+- include dm/ofnode-decl.h instead of dm/ofnode.h
 
-> 
-> On 2023-11-29 3:57 p.m., Andre Przywara wrote:
->> Hi Stephen,
->>
->> On 28/11/2023 20:07, Stephen Graf wrote:
->>> Below is the console log from trying to use mtd_debug write. It 
->>> returned immediately with a strange success message.
->>>
->>> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000 
->>> /home/sysadmin/u-boot-sunxi-with-spl.bin
->>> file_to_flash: fread, size 0xf0000, n 0xf0000
->>> fread(): Success
->>
->> interesting, I was under the impression that "mtd_debug write" would 
->> be the way to write to flash. In hindsight, the "debug" in that name 
->> should have probably put me off. Anyway, "cat" is probably not a good 
->> choice, "dd" is better, but it looks like "flashcp" (also part of 
->> mtdutils) is the go-to tool, since it does the required erasing 
->> automatically and also reportedly does some error detection. Can you 
->> please test this?
->> # flashcp u-boot-sunxi-with-spl.bin /dev/mtd0
->> I would test this on my end ASAP as well.
->>
->> Do you feel like sending a patch to the U-Boot documentation to get 
->> this changed then?
->>
->> Thanks,
->> Andre
->>
+Changes in v3:
+- Use event spy to do the FDT fixup
+
+Changes in v2:
+- fdt_fixup_kaslr_seed() uses the ofnode API
+- Add root_ofnode_from_fdt() to get the root node from an FDT and
+  perform error checking on the oftree
+- add comments to exported functions
+
+ arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++++--------------------
+ boot/fdt_support.c                | 19 +++++++++++++++
+ drivers/core/ofnode.c             | 17 ++++++++++++++
+ include/dm/ofnode.h               | 12 ++++++++++
+ include/fdt_support.h             |  9 +++++++
+ 5 files changed, 71 insertions(+), 25 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/sec_firmware.c b/arch/arm/cpu/armv8/sec_firmware.c
+index c0e8726346f..5f256939277 100644
+--- a/arch/arm/cpu/armv8/sec_firmware.c
++++ b/arch/arm/cpu/armv8/sec_firmware.c
+@@ -411,46 +411,35 @@ int sec_firmware_init(const void *sec_firmware_img,
+ /*
+  * fdt_fix_kaslr - Add kalsr-seed node in Device tree
+  * @fdt:		Device tree
+- * @eret:		0 in case of error, 1 for success
++ * @eret:		0 for success
+  */
+ int fdt_fixup_kaslr(void *fdt)
+ {
+-	int nodeoffset;
+-	int err, ret = 0;
+-	u8 rand[8];
++	int ret = 0;
+ 
+ #if defined(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT)
++	u8 rand[8];
++	ofnode root;
++
+ 	/* Check if random seed generation is  supported */
+ 	if (sec_firmware_support_hwrng() == false) {
+ 		printf("WARNING: SEC firmware not running, no kaslr-seed\n");
+-		return 0;
++		return -EOPNOTSUPP;
+ 	}
+ 
+-	err = sec_firmware_get_random(rand, 8);
+-	if (err < 0) {
++	ret = sec_firmware_get_random(rand, 8);
++	if (ret < 0) {
+ 		printf("WARNING: No random number to set kaslr-seed\n");
+-		return 0;
++		return ret;
+ 	}
+ 
+-	err = fdt_check_header(fdt);
+-	if (err < 0) {
+-		printf("fdt_chosen: %s\n", fdt_strerror(err));
+-		return 0;
++	ret = ofnode_root_from_fdt(fdt, &root);
++	if (ret < 0) {
++		printf("WARNING: Unable to get root ofnode\n");
++		return ret;
+ 	}
+ 
+-	/* find or create "/chosen" node. */
+-	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
+-	if (nodeoffset < 0)
+-		return 0;
+-
+-	err = fdt_setprop(fdt, nodeoffset, "kaslr-seed", rand,
+-				  sizeof(rand));
+-	if (err < 0) {
+-		printf("WARNING: can't set kaslr-seed %s.\n",
+-		       fdt_strerror(err));
+-		return 0;
+-	}
+-	ret = 1;
++	ret = fdt_fixup_kaslr_seed(root, rand, sizeof(rand));
+ #endif
+ 
+ 	return ret;
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index b15d07765fe..49d14a949be 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -631,6 +631,25 @@ void fdt_fixup_ethernet(void *fdt)
+ 	}
+ }
+ 
++int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len)
++{
++	ofnode chosen;
++	int ret;
++
++	/* find or create "/chosen" node. */
++	ret = ofnode_add_subnode(node, "chosen", &chosen);
++	if (ret && ret != -EEXIST)
++		return -ENOENT;
++
++	ret = ofnode_write_prop(chosen, "kaslr-seed", seed, len, true);
++	if (ret) {
++		printf("WARNING: can't set kaslr-seed\n");
++		return ret;
++	}
++
++	return 0;
++}
++
+ int fdt_record_loadable(void *blob, u32 index, const char *name,
+ 			uintptr_t load_addr, u32 size, uintptr_t entry_point,
+ 			const char *type, const char *os, const char *arch)
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index f72ea416cf1..557a4a1b969 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -966,6 +966,23 @@ ofnode oftree_path(oftree tree, const char *path)
+ 	}
+ }
+ 
++int ofnode_root_from_fdt(void *fdt, ofnode *root_node)
++{
++	oftree tree;
++	/* If OFNODE_MULTI_TREE is not set, and if fdt is not the control FDT,
++	 *  oftree_from_fdt() will return NULL
++	 */
++	tree = oftree_from_fdt(fdt);
++
++	if (!oftree_valid(tree)) {
++		printf("Cannot create oftree\n");
++		return -EINVAL;
++	}
++	*root_node = oftree_root(tree);
++
++	return 0;
++}
++
+ const void *ofnode_read_chosen_prop(const char *propname, int *sizep)
+ {
+ 	ofnode chosen_node;
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 5795115c490..b3bb133df19 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -936,6 +936,18 @@ ofnode oftree_path(oftree tree, const char *path);
+  */
+ ofnode oftree_root(oftree tree);
+ 
++/**
++ * ofnode_root_from_fdt() - Gets the root ofnode given an FDT blob.
++ *                          Note, this will fail if OFNODE_MULTI_TREE
++ *                          is not set.
++ *
++ * @fdt: Device tree to use
++ * @root_node : Root ofnode
++ *
++ * Return: 0 if OK, -ve on error
++ */
++int ofnode_root_from_fdt(void *fdt, ofnode *root_node);
++
+ /**
+  * ofnode_read_chosen_prop() - get the value of a chosen property
+  *
+diff --git a/include/fdt_support.h b/include/fdt_support.h
+index 2cd83668982..0624650dcee 100644
+--- a/include/fdt_support.h
++++ b/include/fdt_support.h
+@@ -11,6 +11,7 @@
+ 	!defined(USE_HOSTCC)
+ 
+ #include <asm/u-boot.h>
++#include <dm/ofnode_decl.h>
+ #include <linux/libfdt.h>
+ #include <abuf.h>
+ 
+@@ -121,6 +122,14 @@ static inline int fdt_fixup_memory_banks(void *blob, u64 start[], u64 size[],
+ #endif
+ 
+ void fdt_fixup_ethernet(void *fdt);
++
++/*
++ * fdt_fixup_kaslr_seed - Add kaslr-seed node in Device tree
++ * @node:		ofnode
++ * @eret:		0 for success
++ */
++int fdt_fixup_kaslr_seed(ofnode node, const u8 *seed, int len);
++
+ int fdt_find_and_setprop(void *fdt, const char *node, const char *prop,
+ 			 const void *val, int len, int create);
+ void fdt_fixup_qe_firmware(void *fdt);
+-- 
+2.42.0
+
