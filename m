@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8307C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 10:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512FAC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  1 Dec 2023 10:06:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08A3B875FE;
-	Fri,  1 Dec 2023 11:05:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C39A871CC;
+	Fri,  1 Dec 2023 11:06:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="PFAz6n33";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NMXnGW3A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1610687623; Fri,  1 Dec 2023 11:05:23 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 9D130875FE; Fri,  1 Dec 2023 11:05:59 +0100 (CET)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB05C8718C
- for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 11:05:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B76E5871CC
+ for <u-boot@lists.denx.de>; Fri,  1 Dec 2023 11:05:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0699fcb2c2=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3B14pjlM005262; Fri, 1 Dec 2023 11:05:18 +0100
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3B170Ako006209; Fri, 1 Dec 2023 11:05:56 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=gpouJDjg5FYpjImXqqZaB07eNjKHDK3TwGy3h7gChG0=; b=PF
- Az6n33r7Vk9+sp56zOuesjRJ5a19TZ1Ch4ywz/u6Gm+EyXB4cF0P6xmduKDlkV+0
- s/RZ+8cHczRBXsgdvzR3Vp76yxuZ05+7qgTr+apNv91LlOyKzykqn7LhpMyJDW2n
- U1skAmQT9frbTmRvZCXf3lt3fKulJ9ksxNtufDcthrl7hXudOWzK0/Tu+d6dP/3c
- /MVnbaWZafV4VvUc59L+mfEkZFNVyh4Fsv8qHK7NSGqP1xDVlwqUATOebxONy/gq
- 1Ub+lnuU5IroLmTKyHGVQWxCe/NluH12oevrjzhSzRR8U9qxiDxh1+HoUSAPJzBt
- Nkf/utkKHPIqpBqnROPw==
+ selector1; bh=sa9baaoEFFB2DDCxrLAawjeDUt0oi/8TScTDjHRK2dM=; b=NM
+ XnGW3Au5YQpCxPfbXxcq3YYkmVgPAiEJa3aYgYmk4C3qI9RryHC9UNjQsBMktamk
+ UVeZEtBGB5BH+VQ//wnZrSp2uFAycFyX4jRlBFdZgP9UBiDqtIkXqKy73N5t7ntS
+ gzTu9/coXF9Qvd9o+wjz/edv/S+uD6lEu3PF70UxvDl795EaayFP+kH6Iefwduyj
+ CJbXU61Mp7Xne/RDGSKVWGp/DVaQ9/w5qG8tCBEnd6On2OTpks4fiDNBuq/qKyFZ
+ 3odVZI4xJ+blWGzhoj384cyo235y7bfPq7jXKdxUlCkgGYdoHRFPuxssWdpuU8zI
+ YLMDnXs+jMbIQYru40og==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3unffe6jpn-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3unffbekcr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 01 Dec 2023 11:05:18 +0100 (CET)
+ Fri, 01 Dec 2023 11:05:56 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 62D11100079;
- Fri,  1 Dec 2023 11:05:18 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 46998100079;
+ Fri,  1 Dec 2023 11:05:55 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 16D0D214D04;
- Fri,  1 Dec 2023 11:05:18 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3F54D214D14;
+ Fri,  1 Dec 2023 11:05:55 +0100 (CET)
 Received: from [10.252.6.183] (10.252.6.183) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 1 Dec
- 2023 11:05:17 +0100
-Message-ID: <9fce2a8a-9305-4080-806d-cf1e80c58f24@foss.st.com>
-Date: Fri, 1 Dec 2023 11:05:03 +0100
+ 2023 11:05:54 +0100
+Message-ID: <4e22ffe4-c275-43de-a8be-3a1dc9f931ac@foss.st.com>
+Date: Fri, 1 Dec 2023 11:05:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] tee: optee: don't fail on services enumeration failure
+Subject: Re: [PATCH 2/2] tee: optee: don't enumerate services if there ain't
+ any
+Content-Language: en-US
 To: Etienne Carriere <etienne.carriere@foss.st.com>, <u-boot@lists.denx.de>
 CC: Jens Wiklander <jens.wiklander@linaro.org>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>
 References: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
-Content-Language: en-US
+ <20231129123753.1906956-2-etienne.carriere@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
+In-Reply-To: <20231129123753.1906956-2-etienne.carriere@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.6.183]
@@ -92,31 +94,56 @@ X-Virus-Status: Clean
 
 
 On 11/29/23 13:37, Etienne Carriere wrote:
-> Change optee probe function to only warn when service enumeration
-> sequence fails instead of reporting an optee driver probe failure.
-> Indeed U-Boot can still use OP-TEE even if some OP-TEE services are
-> not discovered.
+> Change optee driver service enumeration to not enumerate (and
+> allocate a zero sized shared memory buffer) when OP-TEE
+> reports that there is no service to enumerate.
+> 
+> This change fixes an existing issue that occurs when the such zero
+> sized shared memory buffer allocated from malloc() has a physical
+> address of offset 0 of a physical 4kB page. In such case, OP-TEE
+> secure world refuses to register the zero-sized shared memory
+> area and makes U-Boot optee service enumeration to fail.
 > 
 > Fixes: 94ccfb78a4d6 ("drivers: tee: optee: discover OP-TEE services")
 > Signed-off-by: Etienne Carriere <etienne.carriere@foss.st.com>
 > ---
->  drivers/tee/optee/core.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/tee/optee/core.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
 > 
 > diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
-> index 9a9b697e91..5308dd58ce 100644
+> index 5308dd58ce..47f845cffe 100644
 > --- a/drivers/tee/optee/core.c
 > +++ b/drivers/tee/optee/core.c
-> @@ -841,7 +841,7 @@ static int optee_probe(struct udevice *dev)
->  	if (IS_ENABLED(CONFIG_OPTEE_SERVICE_DISCOVERY)) {
->  		ret = bind_service_drivers(dev);
->  		if (ret)
-> -			return ret;
-> +			dev_warn(dev, "optee service enumeration failed: %d\n", ret);
->  	} else if (IS_ENABLED(CONFIG_RNG_OPTEE)) {
->  		/*
->  		 * Discovery of TAs on the TEE bus is not supported in U-Boot:
-
+> @@ -139,6 +139,11 @@ static int enum_services(struct udevice *dev, struct tee_shm **shm, size_t *coun
+>  	if (ret)
+>  		return ret;
+>  
+> +	if (!shm_size) {
+> +		*count = 0;
+> +		return 0;
+> +	}
+> +
+>  	ret = tee_shm_alloc(dev, shm_size, 0, shm);
+>  	if (ret) {
+>  		dev_err(dev, "Failed to allocated shared memory: %d\n", ret);
+> @@ -185,14 +190,15 @@ static int bind_service_drivers(struct udevice *dev)
+>  
+>  	ret = enum_services(dev, &service_list, &service_count, tee_sess,
+>  			    PTA_CMD_GET_DEVICES);
+> -	if (!ret)
+> +	if (!ret && service_count)
+>  		ret = bind_service_list(dev, service_list, service_count);
+>  
+>  	tee_shm_free(service_list);
+> +	service_list = NULL;
+>  
+>  	ret2 = enum_services(dev, &service_list, &service_count, tee_sess,
+>  			     PTA_CMD_GET_DEVICES_SUPP);
+> -	if (!ret2)
+> +	if (!ret2 && service_count)
+>  		ret2 = bind_service_list(dev, service_list, service_count);
+>  
+>  	tee_shm_free(service_list);
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
