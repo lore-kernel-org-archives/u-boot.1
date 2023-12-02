@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84FEC10DC1
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3140C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:26:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F6AC87702;
-	Sat,  2 Dec 2023 19:24:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 404F9876DE;
+	Sat,  2 Dec 2023 19:24:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WdHdyGuQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iu2tm4QC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9811B87702; Sat,  2 Dec 2023 19:24:27 +0100 (CET)
+ id 7B1F687713; Sat,  2 Dec 2023 19:24:38 +0100 (CET)
 Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
  [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E42E87642
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:24:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27A5D87642
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:24:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5d33574f64eso33730597b3.3
- for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:24:25 -0800 (PST)
+ 00721157ae682-5d7692542beso4072887b3.3
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:24:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701541464; x=1702146264; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701541474; x=1702146274; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=adV1n00/sXXqCXvgsDtqWjpC19NNP/zECM1AxbR5JCY=;
- b=WdHdyGuQAzpvMRdFYT62VdLE7KK52xi0YwrjqlXiFMf3v6BIZK9lE6TDEsxcC2xVQn
- m3L9kbJ40AWpkvFqACA6BbL5PldHMwMwaaZvMVTJ0HUAAv6R+IrtaljK6WJYqEGBOYp6
- TfCxvoIi+wTXQgwFMX9BM3o25zNnp2maHrRSI=
+ bh=ZnAvep1ScZ9SLduaRWrebor0/9pU9a3qx7A7RxxBOik=;
+ b=iu2tm4QCtbiY+zSOIVGd+MKj23ePziETtXVLXzNTMRimSBJHPNrX7lNkCoxKJEAob6
+ MJzzznv8kxTDskM7IEqhQSroFkpJsEIxSMVUU/eK4qZ7qNSq2Z/D5Kfw1E09fJLk6LE6
+ ZFm/X9ld4d13CNSeOU8mTAkYYdxt3QnPtu9oY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701541464; x=1702146264;
+ d=1e100.net; s=20230601; t=1701541474; x=1702146274;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=adV1n00/sXXqCXvgsDtqWjpC19NNP/zECM1AxbR5JCY=;
- b=A/WXZdVkpMcW0IjAo3Bhr+Q9N77ARHR1QMEposcsyFDCW9eJyYH78oNgDyxfnYEYwq
- d12pq0II1Y9zh0LoX9TKf3Q7GluyNNfdyljov6FtRyM4gI7E6YTr65gjVfmfRJbfyJgV
- PQMu+NmvTGnY35iEVyz5ZxznFZxklO5dly8MVmfYZtQuzflkT7z7vnNsPk9sRpM25hcP
- wPaF1Uz1Uy6aa2x1sJJhX/HifAJEvcBtL/D6Yg+5VDbWWsZp2hKe3dTOyYUYtElSCThw
- GDhvYmvk1mT0Lz2DUxlCu+h51M8ojAjkDoyuo0KGq+rLM2BD4Ayzqfl+Y+miJh/PPqZ5
- mllg==
-X-Gm-Message-State: AOJu0Yw+Xe3SDn3zYEsv7zvLMC5WiBj/sqavuFa/6TDF/xep6djjec7v
- ymAKjvYSsAr0/9C0nap5rBp1LPHu1V5JhbpvK6TWPg==
-X-Google-Smtp-Source: AGHT+IHhQhQHCiWMRYycLxDq+4ELzRuvcqpaQEcDrGmNseJHSbR5lZNeADByqjVU8/rxeKWshv1wwR44A/TDsETo1h8=
-X-Received: by 2002:a05:690c:d0e:b0:5d7:1940:b38b with SMTP id
- cn14-20020a05690c0d0e00b005d71940b38bmr1455554ywb.87.1701541464152; Sat, 02
- Dec 2023 10:24:24 -0800 (PST)
+ bh=ZnAvep1ScZ9SLduaRWrebor0/9pU9a3qx7A7RxxBOik=;
+ b=wGx/hubIYBFSp7RR99Lrb65cVMInKblrugq0cT+s+y/QWL4gv5rhnqHpNUPbonPz03
+ PJIOoIn8i2nix9NARWsMwuqhNSLOz24ezsC+5LuQsLaUWao76r4CxKaJmuZPFejJljuN
+ +4t/gMAPsjbTi6kOWu7VGSTk/nFdFDAQmT9pe8dzf5Z0pQFzI4jsnQ9oYXMTl8sf++ue
+ aIgUF6FZsT8PpbMRC+bkHQruFmGtqZeOLQgkYeP1021HXHoNlWaHLGz8jyTx1PLQXa8E
+ 8gO8Cvuz7/M13hjx6Y0aCqDfKZr3acQoviucBPh6G/iQoAIAJhxAuhLTDkRBXZ7ZA3TJ
+ wt3Q==
+X-Gm-Message-State: AOJu0Yyx0DDnwpUP+eZznQQvjKtC/qbm6ifIlKwa4IWo3lnsQlNURJDP
+ 4i95R9qzsg5lE+s2gXjMBggYZFrCyrAg4zfFQDOuRg==
+X-Google-Smtp-Source: AGHT+IHBwhsXqm1Tz4blNoz39RvG0infoAtEu6BSeEi3FmzOa3R6S0IplYMAMNEPE92xlYhD0gz8WanVoYffeFkj9Jo=
+X-Received: by 2002:a0d:e656:0:b0:5d7:1940:53db with SMTP id
+ p83-20020a0de656000000b005d7194053dbmr949131ywe.83.1701541473563; Sat, 02 Dec
+ 2023 10:24:33 -0800 (PST)
 MIME-Version: 1.0
 References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
- <20231121152740.24783-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231121152740.24783-5-heinrich.schuchardt@canonical.com>
+ <20231121152740.24783-7-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231121152740.24783-7-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:23:17 -0700
-Message-ID: <CAPnjgZ1j67f+mx7jGgBuoJJH4oEUgBNsgS-KUfBsnbwsehOCZA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] risc-v: add support for QEMU firmware tables
+Date: Sat, 2 Dec 2023 11:23:18 -0700
+Message-ID: <CAPnjgZ07bCZ8jOLyLHO-iLGPof9-KJ3OTThhLojEPSh02cBQEg@mail.gmail.com>
+Subject: Re: [PATCH v2 6/7] riscv: allow usage of ACPI
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Yu Chien Peter Lin <peterlin@andestech.com>, 
@@ -89,18 +89,16 @@ X-Virus-Status: Clean
 On Tue, 21 Nov 2023 at 08:28, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Enable the QEMU firmware interface if ACPI tables are to be supported on
-> the QEMU platform.
->
-> Enable the QFW MMIO interface if the QEMU firmware interface is enabled.
+> Select CONFIG_SUPPORT_ACPI to allow usage of ACPI tables with RISC-V.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
 > v2:
->         depend on CONFIG_ACPI instead of CONFIG_GENERATE_ACPI_TABLES
+>         no change
 > ---
->  board/emulation/qemu-riscv/Kconfig | 2 ++
->  1 file changed, 2 insertions(+)
->
+>  arch/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Oh dear, first ARM and now RISC-V
