@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2BEC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:24:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B0DC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F11087714;
+	by phobos.denx.de (Postfix) with ESMTP id B084C8771B;
 	Sat,  2 Dec 2023 19:24:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ob0wi7ea";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MNbjZUDd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 640D687702; Sat,  2 Dec 2023 19:24:16 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 5568387642; Sat,  2 Dec 2023 19:24:15 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FA64876CC
+ by phobos.denx.de (Postfix) with ESMTPS id 404D387702
  for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:24:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5d35a952943so29928887b3.3
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5cece20f006so36832857b3.3
  for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:24:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701541452; x=1702146252; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mUtkV+5HiThTFoCK9kxwtUkHTS70OwGFGKBybt3T7z4=;
- b=Ob0wi7eaOl1cjFJOT9ghnCqMn/4IQLza7hLcY3+CL+B3vrbIupe/asKfnJW33a1WcU
- VLyXUWoP7LhIxjZM8/NzkPJm8NObg8QgwWugJ3scnf02CZkuuTw8RUgDEPxZ3SztppMy
- tp+o0JaVe77cwlI6xnBdvSAB5Vhk57F9+e4XI=
+ bh=pSampsbLmxbl3+HjengSlsb9T2MppNy96zc0bADlh+Y=;
+ b=MNbjZUDdf4spulzBHsiYdraFOQ9WDOgWucakPujj5f8RiaRpDewayfAofh42a1L0s6
+ QC2x39RRRq9hN1G+kaEaDHF6LC9glST8hlqUmMIlHMEqjQIqJub/k/SGeNhWZ3i1UOub
+ /gvZxQZVMra+HOr/mWOJVgBZYSOIaftKKCrW4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701541452; x=1702146252;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mUtkV+5HiThTFoCK9kxwtUkHTS70OwGFGKBybt3T7z4=;
- b=TdjRp3CG6NWbeyyCkgHBC31UDQSOrieJeKaIwnNYYaMJ7mc3eqlWg9oI04OYU5UUxF
- QFAeUa4QEXPhg0/uE7cAuYXUoJ6i6eTGpysIgCT6H/NdcICZCyKJlI0InH23wkPrG+iD
- tcNpzkwxMlaT9gZwBIZseKzffFqhYcmVuzhqfqn2iVqS4NFEqkez+F6ralCQxT28u3DG
- atIeuGR5PLkcD13lrjNMpHMm+PuJzY9dUXZVEjEEcOLOXSiTsy2m5qjTe0DYpKZ3tUey
- XoEhwysOrWIIbz74Tl4AKUwOZmEXEZZPmMEJUPPPOejyeVC3ZiqAUxIDAcSPTlY09jKt
- tjMA==
-X-Gm-Message-State: AOJu0YwKoI8THohj9q4hPOioHVP3tk5bsTXPB2OKPx8XT9rTYLWMN9Rt
- MkQ2fP3FWuTI20E/oIoB+6A9tWmdSn8EZH8ZszKmC725jCecyZJhCUt4ug==
-X-Google-Smtp-Source: AGHT+IElXfBbY1sTSvO76+a9W+fcbPYrrVwPEEnypCmBLXQApYCoZLHe5XOxwgMaChu82Q4wONwfd7KsVcc3GwglWE8=
-X-Received: by 2002:a05:690c:368f:b0:5cf:9a35:d406 with SMTP id
- fu15-20020a05690c368f00b005cf9a35d406mr1606347ywb.34.1701541451781; Sat, 02
+ bh=pSampsbLmxbl3+HjengSlsb9T2MppNy96zc0bADlh+Y=;
+ b=qncV5MfDdq+rzuCxkiNOaX/uK5o+s0F+TWukzRKydssCdtzm63z0KLTj2SKjd1oBmO
+ nu//s/CP+0lBnSA0SdB5BqJ9pH5khw7HSePNN7S+cjn7WLrPvnKYNZGePb4FJlHYJLBQ
+ sEvZ/aDMBITGgyIRb3L3P1MiZs0GvQreSjLLHGeCZc7fYjnbK7IVc/0UGY5CWIGZrpBQ
+ vbcgNETCrEEMSwMa8QdYU5z2boUW2Cfp8vTENiyYUM3F8LENYQ3oQvgrgtEv4Kx/jsob
+ DUt9ychIqML58qruusixlIWg1l0EZOhIx5YHXZ7Tctx8sevUaY/Ix2374XJ3i+A7tdL1
+ 8DWA==
+X-Gm-Message-State: AOJu0YyQa8bVP7SxmfQ61e3ZDlGOPU0AuQ7DHzD0Xd1nCGCE3r0ElIZ0
+ 2SeCk+w+6Hrwpd2kq3GkSTSrAbBiAGxaZTuDQkjv0RWLtmkzlbl2zLARYA==
+X-Google-Smtp-Source: AGHT+IG3srbGZxx9S3RnxrLyYiN0dvQt3OMXwOP9reyqSl1uSQUJgnJS3or3dmpEmy6xjcmU3yJdOrz+vKxeNfSulX4=
+X-Received: by 2002:a0d:cb48:0:b0:5ca:4b49:48a7 with SMTP id
+ n69-20020a0dcb48000000b005ca4b4948a7mr1523973ywd.43.1701541451715; Sat, 02
  Dec 2023 10:24:11 -0800 (PST)
 MIME-Version: 1.0
 References: <20231122131154.2444690-1-trini@konsulko.com>
- <20231122131154.2444690-6-trini@konsulko.com>
-In-Reply-To: <20231122131154.2444690-6-trini@konsulko.com>
+In-Reply-To: <20231122131154.2444690-1-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:23:13 -0700
-Message-ID: <CAPnjgZ0_U0-9y9o_FZ3-snLmBauuhUW1uoL5ghC=dTRdy3xcKw@mail.gmail.com>
-Subject: Re: [PATCH 06/11] lib/sha*.c: Update header list
+Date: Sat, 2 Dec 2023 11:23:09 -0700
+Message-ID: <CAPnjgZ2b00ZfQKRgXw71Tta9-TwRUGLu-h4usi3+xgOeFYFPzw@mail.gmail.com>
+Subject: Re: [PATCH 01/11] global: Remove duplicate common.h inclusions
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -81,30 +80,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
 On Wed, 22 Nov 2023 at 06:12, Tom Rini <trini@konsulko.com> wrote:
 >
-> Cleanup the list of headers we include here. For the tools build we only
-> need to exclude <cyclic.h> as that's used by the target build for the
-> prototype for schedule(), and we don't need to get that via
-> <watchdog.h>. We can also make use of our <string.h> intentionally
-> existing as a redirection to <linux/string.h> to reduce ifdef'd lines.
+> These files include <common.h> twice. Start by removing the second
+> inclusion of the file.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->  lib/sha1.c   | 7 ++-----
->  lib/sha256.c | 7 ++-----
->  lib/sha512.c | 6 +-----
->  3 files changed, 5 insertions(+), 15 deletions(-)
+>  board/data_modul/common/common.c          | 1 -
+>  board/grinn/liteboard/board.c             | 1 -
+>  board/toradex/colibri_imx7/colibri_imx7.c | 1 -
+>  board/wandboard/wandboard.c               | 1 -
+>  drivers/gpio/gpio-aspeed.c                | 1 -
+>  drivers/spi/fsl_dspi.c                    | 1 -
+>  drivers/video/exynos/exynos_dp.c          | 1 -
+>  7 files changed, 7 deletions(-)
+>
 
-As mentioned in my series this will prevent dropping the #ifdefs in this file:
-
-#if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
-
-Actually I see that I didn't send the v2 so I just did that now[1].
-
-Regards,
-Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20231202153400.537050-2-sjg@chromium.org/
+Reviewed-by: Simon Glass <sjg@chromium.org>
