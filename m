@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A75C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 06:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C33C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 09:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45DBB874BA;
-	Sat,  2 Dec 2023 07:56:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 7F1BE86538;
+	Sat,  2 Dec 2023 10:39:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="U1JIcXJv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UnILTxM+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD85286F40; Sat,  2 Dec 2023 07:56:52 +0100 (CET)
-Received: from mail-yw1-x1149.google.com (mail-yw1-x1149.google.com
- [IPv6:2607:f8b0:4864:20::1149])
+ id B8ABC86E82; Sat,  2 Dec 2023 10:39:58 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D678187158
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 07:56:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB3E686516
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 10:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3MdVqZQcKBrgkmpgrxdemmejc.amks-Zmmrjgqrq.bclv.bc@flex--moritzf.bounces.google.com
-Received: by mail-yw1-x1149.google.com with SMTP id
- 00721157ae682-5d3a1e5f8d6so39248647b3.3
- for <u-boot@lists.denx.de>; Fri, 01 Dec 2023 22:56:50 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gilbsgilbert@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3333073c93cso355566f8f.0
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 01:39:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1701500209; x=1702105009; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=y+HUbXdKs+1/01U+vGeJvuqct5wxaVNkFRe+9VvwgKk=;
- b=U1JIcXJve7F1kIrmoyekaPg0qWui+iUC+8uRFyodf3OSkBQVEVtYXgcME2A8YXCq1t
- ltm12V48jBx78YpYx9K/JIAzuGejcDywSg0UyzU4zKkIzARSoyDiXnAqAGeH5YO3V1ws
- gG8ln6qMdarvnEoNrt1ryZLYIdc6u3aYBmYQPEih+ctmJCRWKIOOkiawesxyxxMq2SLK
- JWUVUki9qd0mbcN33wDRYYCkjHAMEBduUKtPcbnRTD3eZW6Gks4o4OUSc53z/QNXgl1N
- GenU9ZhqXrzy9tFhEgRaH276omd4kTntwR4XoRRy4BBPCEmGtW8J6HWeovyH8qr2maDk
- DEWg==
+ d=gmail.com; s=20230601; t=1701509996; x=1702114796; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CaM8EgSWS/HVQq+gMBHKNB0NaIEwzauVSisoezCQp2o=;
+ b=UnILTxM+X6LGmsWkQaLykWhvWvodyZokFL/JoDfJFgYvTJIp+9oLTBiEEZTLJnlNBN
+ nkCAdPH5Wyji2crjl7oe+QvTv2tJQDtDGI0CmzLeKaMjg+bHFwjMBBqQMuhodmHQvav2
+ p7NZJvB+hpDQIRkBADVVXEeq8kEkxj8XzcbNp5WxkLNDC5kWn4ZnTv1vRUw2i2wtq9h3
+ QxAiE3vOBffZDBOJCGI/KsB2Hwhi+cdtBPPtG90TsB/enUasqQRB3HkzcIQCcF/6C0N7
+ cDNhgrufgTyjN54n/wLkknyHMRXu78nUaW/VsrnX5wvvCnAAosrKLz+5z/k2qaoP9tpu
+ GKCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701500209; x=1702105009;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y+HUbXdKs+1/01U+vGeJvuqct5wxaVNkFRe+9VvwgKk=;
- b=D+E2iifI6MLx6Qu8WEVR8u1obB/PmV/yCDFAgAXmzpIHEDsiWVnACWZ8V++3uX0QLP
- Qopm3VOa6KRr9KsGP7K7EYf1xUHLoD1TzZ52BoPZQIDTgacFTW4JKab3wj4KBBSGZtpo
- UDQlwqFAktlTXZfVmdlpmuzb/YCGqrcey88uugrqhpo/n5TSbekinhnrtb+beKPiFAiN
- Z7fJqMRLFBh2PrsUeIF7ZNDozdgQH28UdB7zqh67XcYvhC6s0BKT7Uw0DIlufAljVO14
- 1aCj97QmZ37wpQZbg8TIT8cmfAXq6lngth5M6eOjaCH0yJMwTxCoIZzEwAxY4soGjDF9
- 9OzQ==
-X-Gm-Message-State: AOJu0Yz5Ic4eDh7SVCj2U0Kp4FdZlRYPGzUVw9E78CMkNLHOWVcMBVhg
- oBCd+nSZkCjvTU2Ve762C47uj3NO5gDM
-X-Google-Smtp-Source: AGHT+IFUSNRrGstpd2gNeOE88QIT53lPHHdjTqyML314kvumm0A6SuwYMz0/c0NFUaP7Nnvi82vL249QK6gt
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a81:8344:0:b0:5d5:6a4c:b0b3
- with SMTP id
- t65-20020a818344000000b005d56a4cb0b3mr135515ywf.8.1701500209644; Fri, 01 Dec
- 2023 22:56:49 -0800 (PST)
-Date: Sat,  2 Dec 2023 06:56:34 +0000
-In-Reply-To: <20231202065634.3641171-1-moritzf@google.com>
-Mime-Version: 1.0
-References: <20231202065634.3641171-1-moritzf@google.com>
-X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
-Message-ID: <20231202065634.3641171-2-moritzf@google.com>
-Subject: [PATCH RESEND 2/2] nvme: Update nvme_scan_namespace to keep trying on
- busy
-From: Moritz Fischer <moritzf@google.com>
-To: bmeng.cn@gmail.com, sjg@chromium.org, wenbin.song@nxp.com, 
- u-boot@lists.denx.de
-Cc: mdf@kernel.org, Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
+ d=1e100.net; s=20230601; t=1701509996; x=1702114796;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CaM8EgSWS/HVQq+gMBHKNB0NaIEwzauVSisoezCQp2o=;
+ b=vEUFVtGWZVgyLltYcJxUHGv/pn+UrGKoh+Vl4k1JScuUzKc8/0W9gb+3tnQwCkTSP4
+ gxhOuaeDqz0FRH+qhoY1WGlGiesqC8byUwHIjVPeOMDTv1VcLMVbu8/0EJeCsCXTym7X
+ Sax1AuAXJKiMbL1oXegyxLdS/bBlb+hwJQtP7+1KmHnPl12keMduwZXzAZHOyyF82Owl
+ sltcVgEhoBFHiSI1IQ0+XqnSzcbS/Tgwi/I4KuHCFwtIaj3CFJPgh556spdd0bZMwMJ0
+ M61JfC1RZos6u/4CJuvY12eJdVRVOIQW2/F2fkUG1Jut5BlfYSs68OKynZaJdmaCEnIn
+ Litg==
+X-Gm-Message-State: AOJu0YyynY55sxMX8+G7WRiDFwxIcThk4udeXAf7uO3hwpl6s5Qsgre2
+ R1w4s7cUnOkdxlhYJbg+yo7vE0IFQZJFnb7T
+X-Google-Smtp-Source: AGHT+IGhyYrTfeg4ukZPgi9e1fGplVNqwjImeagy6M3eFR1JCsc/TQE/CbdRAfDaxKjtg3RP7DM1Gw==
+X-Received: by 2002:a05:6000:1569:b0:333:2e28:5e1e with SMTP id
+ 9-20020a056000156900b003332e285e1emr4713823wrz.0.1701509995916; 
+ Sat, 02 Dec 2023 01:39:55 -0800 (PST)
+Received: from localhost.localdomain ([2a01:e0a:233:d260:8a7:51f2:4ba8:885])
+ by smtp.gmail.com with ESMTPSA id
+ e5-20020a5d4e85000000b0033333bee379sm3011094wru.107.2023.12.02.01.39.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Dec 2023 01:39:55 -0800 (PST)
+From: Nils Le Roux <gilbsgilbert@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Nils Le Roux <gilbsgilbert@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v2] net: designware: Support high memory nodes
+Date: Sat,  2 Dec 2023 10:39:49 +0100
+Message-ID: <20231202093952.33256-1-gilbsgilbert@gmail.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,33 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A busy controller shouldn't be game-over for all controllers,
-so keep trying on hitting -EBUSY.
+Some platforms (such as the Lichee Pi 4A) have their dwmac device
+addressable only in high memory space. Storing the node's base address
+on 32 bits is not possible in such case.
 
-This change brings the actual behavior of the routine in line
-with what the descriptions says.
+Use platform's physical address type to store the base address.
 
-Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-Signed-off-by: Moritz Fischer <moritzf@google.com>
+Signed-off-by: Nils Le Roux <gilbsgilbert@gmail.com>
+Cc: Andre Przywara <andre.przywara@arm.com>
 ---
- drivers/nvme/nvme.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index ec45f831a3..59a139baa0 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
- 		if (ret) {
- 			log_err("Failed to probe '%s': err=%dE\n", dev->name,
- 				ret);
--			return ret;
-+			/* Bail if we ran out of memory, else keep trying */
-+			if (ret != -EBUSY)
-+				return ret;
- 		}
+Changes in v2:
+- explicitly define and handle ioaddr as a virtual address
+- use an intermediate variable to assign the PCI base address
+- use appropriate placeholder to print physical addresses
+---
+ drivers/net/designware.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index a174344b3e..78bfce07f6 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -678,8 +678,8 @@ int designware_eth_probe(struct udevice *dev)
+ {
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct dw_eth_dev *priv = dev_get_priv(dev);
+-	u32 iobase = pdata->iobase;
+-	ulong ioaddr;
++	phys_addr_t iobase = pdata->iobase;
++	void *ioaddr;
+ 	int ret, err;
+ 	struct reset_ctl_bulk reset_bulk;
+ #ifdef CONFIG_CLK
+@@ -740,16 +740,18 @@ int designware_eth_probe(struct udevice *dev)
+ 	 * or via a PCI bridge, fill in plat before we probe the hardware.
+ 	 */
+ 	if (IS_ENABLED(CONFIG_PCI) && device_is_on_pci_bus(dev)) {
+-		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &iobase);
+-		iobase &= PCI_BASE_ADDRESS_MEM_MASK;
+-		iobase = dm_pci_mem_to_phys(dev, iobase);
++		u32 pcibase;
+ 
++		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &pcibase);
++		pcibase &= PCI_BASE_ADDRESS_MEM_MASK;
++
++		iobase = dm_pci_mem_to_phys(dev, pcibase);
+ 		pdata->iobase = iobase;
+ 		pdata->phy_interface = PHY_INTERFACE_MODE_RMII;
  	}
  
+-	debug("%s, iobase=%x, priv=%p\n", __func__, iobase, priv);
+-	ioaddr = iobase;
++	debug("%s, iobase=%pa, priv=%p\n", __func__, &iobase, priv);
++	ioaddr = phys_to_virt(iobase);
+ 	priv->mac_regs_p = (struct eth_mac_regs *)ioaddr;
+ 	priv->dma_regs_p = (struct eth_dma_regs *)(ioaddr + DW_DMA_BASE_OFFSET);
+ 	priv->interface = pdata->phy_interface;
 -- 
-2.43.0.rc2.451.g8631bc7472-goog
+2.43.0
 
