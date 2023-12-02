@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19229C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C53EAC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95CF8877C2;
-	Sat,  2 Dec 2023 19:32:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 136FB877CC;
+	Sat,  2 Dec 2023 19:32:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EhoBWRZ6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CJX0qy0c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D83F877B5; Sat,  2 Dec 2023 19:32:18 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id A09C187768; Sat,  2 Dec 2023 19:32:18 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39FD7877B9
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:32:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B263F8770B
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2c9f8faf57bso2249141fa.3
- for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:32:15 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a00a9c6f1e9so485565266b.3
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:32:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701541934; x=1702146734; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FTkai7hx9Oj7uzjfmeU7QJjYWM2yEvlkC4rLdGK5/IU=;
- b=EhoBWRZ6ZAQ+zWb64RyQHyu/BwOgAb9NQbHLvuUyDKPV4BJsQ1GvePbEHkUecNtxWv
- FKb71i1IDn+LG5OvK7NiXryWc68sZ0OnAvlj6ec7HUkK6zXxafGfqO4hcjTwrN+g6W9F
- HwIC65pCVCZ5DuqhXLTuPeAM6tP8iH72EaaP4=
+ bh=lnnoDopwlgWnQg9iQmgqPPqpxbeNu/kXbDLXowoLfVk=;
+ b=CJX0qy0cNTzQn/Nl3RwEBmBhLINpSh20Nr3rIX74XOYgH07EG0aFzqNyhWA8Ob1veb
+ CHJnH2chPNOVNb+VfrQZ+3UMmUFRkds6v7350iJOIdnChpnmPhdPtLKu51uayXq2jkHu
+ Om/u4wYbQSxVPJDFwA7w6CEdEvppTT6IcIhuQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701541934; x=1702146734;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FTkai7hx9Oj7uzjfmeU7QJjYWM2yEvlkC4rLdGK5/IU=;
- b=M2NmOINx1tBKLP6YEqW8rpMhnVmHaBr5kJlAS8PaSRkCWNCm0VwpJf0vPlFCHd16al
- Ww0HYukWoH+ZfYKngw024d0bdcKgRqMFR2KuFzyfMiGSGHJNFlkTfH7kQfrSQ+UZz1nn
- hAozxjkftMx6Misjgtv1Nq7MoOJT6EYt5eKmck3gJBAKeLYLAFGRfobgGDGxSIEwPOql
- My0qiQkFsq3hgdq/QkNdX/yJWtKF0tca9AESNJpcgEGfEOniEfFYtqcS7gESX3PtJ1Vs
- XMsHNnwgaE9/qphiPVBQMDuzKS1bPmonB4Ujtp8V+sPPwXHa9w5V7r2ndvGWr/Wz/cuC
- QAxw==
-X-Gm-Message-State: AOJu0YzpHcLLqmklM4VKeHY9fQmD6vYrQMAuKNsu9RQI1iH19ybIBXab
- wWiVa+qxruqUw2xrnkSdspzkfD4Jn6Na0t4n75ua4A==
-X-Google-Smtp-Source: AGHT+IEY9WSBKX9Lbd80D0R/6b2SkGeId1RJFluP9/NzqtM9cUm3FoiEohjTuz1fMHb6ExUw+rsg581BAuaInNMZrFA=
-X-Received: by 2002:a2e:9248:0:b0:2c9:ba12:63e with SMTP id
- v8-20020a2e9248000000b002c9ba12063emr1574558ljg.21.1701541934203; Sat, 02 Dec
- 2023 10:32:14 -0800 (PST)
+ bh=lnnoDopwlgWnQg9iQmgqPPqpxbeNu/kXbDLXowoLfVk=;
+ b=lPv0raMqP48MvI+MFe3YYXlI4M0qdQf1QY+Mow2BgjPwLKYk7ZB0wq0hGA5s0L+pjf
+ +HFQF8jnrSjflVmNnOS8oDtAJliJcuxWhwf2vfWy83pJznd1+Yx7WlS4BPt44nSUxfPj
+ U/OOIwgEiiTy+ibhvXWcgD/7h+W/wavL9UN/ccMQzXdoEhlOaPyVEW3hAFhb3teTtp9d
+ aZB5/6noAfdpbsE2Vef4Bv/ZCyg18H4NoSBmmG1hqG7dZ93IIgMQsieE2O13OoXdTihC
+ bCV/wdnvM86ogc3k9F+Tc5o5JEU4R9hLTBpq2U1rEyElFkC41pp4F8i/l9XEMQBr847m
+ hkaA==
+X-Gm-Message-State: AOJu0YznwH5TeRMHdnMO4GzUFHPGVtk6X0fG9cVATYZHdMY1fSD8YxzD
+ drzJ/dVs2ob4uaUsxFn00K/hfTrF+ichoao5KYOIMA==
+X-Google-Smtp-Source: AGHT+IFhna9q5aNdl/iOfNSO0hFbuaZyYloVUC95qBwNMCl6uDb3s7umSXsmfwV37c3fwypW6/iRksCk1QfUntcbhsA=
+X-Received: by 2002:a17:907:7e82:b0:a19:a19b:78ba with SMTP id
+ qb2-20020a1709077e8200b00a19a19b78bamr2517457ejc.125.1701541934174; Sat, 02
+ Dec 2023 10:32:14 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-12-raymond.mao@linaro.org>
-In-Reply-To: <20231127195029.90951-12-raymond.mao@linaro.org>
+ <20231127195029.90951-13-raymond.mao@linaro.org>
+In-Reply-To: <20231127195029.90951-13-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:31:36 -0700
-Message-ID: <CAPnjgZ2pXLJrXEQ0-RmXR4XP4FQOZAt7qdsE+JpPMJKtVdJmKg@mail.gmail.com>
-Subject: Re: [PATCH v2 11/18] bloblist: Reduce blob-header size
+Date: Sat, 2 Dec 2023 11:31:37 -0700
+Message-ID: <CAPnjgZ2uo8RvUwb7C3YEzOAKuPOacwXi70UPqoq+m5PAYdM8Wg@mail.gmail.com>
+Subject: Re: [PATCH v2 12/18] bloblist: Reduce bloblist header size
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, 
  Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -90,25 +91,21 @@ On Mon, 27 Nov 2023 at 12:53, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
 > From: Simon Glass <sjg@chromium.org>
 >
-> The v0.9 spec provides for an 8-byte header for each blob, with fewer
-> fields.
-> The blob start address should be aligned to the alignment specified
-> by the bloblist header.
-> Update the implementation to match this.
+> The v0.9 spec provides for a 16-byte header with fewer fields. Update
+> the implementation to match this.
+>
+> This also adds an alignment field.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
-> Changes in v2
-> - Update the blob start address to align to the alignment required by
->   the bloblist header.
-> - Define the macros of bloblist header size and bloblist record header
->   size as the size of their structures.
->
->  common/bloblist.c  | 17 +++++++++--------
->  include/bloblist.h | 33 ++++++++++++++++++++++-----------
->  test/bloblist.c    | 16 ++++++++--------
->  3 files changed, 39 insertions(+), 27 deletions(-)
+>  include/bloblist.h | 26 +++++++++++++-------------
+>  test/bloblist.c    |  6 +++---
+>  2 files changed, 16 insertions(+), 16 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Sadly this will need a later patch to deal with [1]
+
+
+[1] https://github.com/FirmwareHandoff/firmware_handoff/pull/17/commits/331822f1985d70a7903f422789eab03f24355cfb
