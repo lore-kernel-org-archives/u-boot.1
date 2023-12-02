@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B565DC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:30:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D60C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:31:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B51787787;
-	Sat,  2 Dec 2023 19:30:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DEA88779B;
+	Sat,  2 Dec 2023 19:31:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DgtsqRQI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fGSCxdWu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF34787782; Sat,  2 Dec 2023 19:30:14 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id EB95A86E82; Sat,  2 Dec 2023 19:31:50 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 657C487778
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:30:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F57F87554
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:31:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40b4744d603so33361585e9.2
- for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:30:10 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-54c967010b2so695487a12.0
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:31:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701541809; x=1702146609; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701541908; x=1702146708; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wPA0goTU+fUOWl2uQdXJ+wjgLIp/yD/VOulNr9t66Fo=;
- b=DgtsqRQIYohkjoYNhlPw3JQl8K0+zBfcOshWTt6t/Ue57UO5IQZ43f/BImQNPt9riO
- 2gAJjUkUaALNo07BuCv1iBYj2CxMljeQvjZa20p9+pGId+FqUMF4/y0TS9VWVvZDIHDX
- hKKSF65wkRL6sJEpNa1P3OvQ0TKyIWKkVSOGY=
+ bh=MEUrdSP1OICUcxxphrmSJJRppNWXEqI4xr62SYD7ySE=;
+ b=fGSCxdWuAQDUEuAOFLtixNXdGrbEK+ybOep7Ad6zVlUGxvJCw+H2pxY9mPe8+KBRRq
+ Tlr69aPzBeEyE9kD1mmXBZP1ZzTgJWBh1g/VNxRdp0Snfn5QCFmDBzjdQ0oFyX0h3kqM
+ WI4Ty5UMGDvY5z3ICJpbYD6vof1qfABnfty88=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701541809; x=1702146609;
+ d=1e100.net; s=20230601; t=1701541908; x=1702146708;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wPA0goTU+fUOWl2uQdXJ+wjgLIp/yD/VOulNr9t66Fo=;
- b=FWSAKEJCvB3g0921q+DomtY5nZHqrpfmbXldGyNiwKQLEZ69F8NI1SoSLB07Hpo8ew
- Yhp2f36r3KPRGzznDGXGQa8ZuHFJ3ngKnzKnOkB9ED7EaApkiljz3F+CMXOOyrxeop0T
- I6/fP8uLuSiJ9GOn4SCyC/JrwA6pB63lpb4/8aQV7W9zGnrVZRNqciMatb5SyJIx150b
- MGRYEnVT/UArQOv4szCxEy7vvXDvN9Bc1HmPPDq3XLN0+m3lMynHJkecgdRFElFk4MXx
- R4ugaf9YagZueh7PLbBcK1oGRnp/QTwNyCc8bi4xOvFGKrgxoKLDuRdk180lyhHYpqGQ
- ePoQ==
-X-Gm-Message-State: AOJu0YwyPhibfXHe+dLe2llr8Fnvtf9awFXrwYE+hFtHd4qvKGTN5XLP
- fmZt106bbl2Ns3Ux948beTDBmsgwgycRQxKlk3TPHRF7exR32ORF0jJ77w==
-X-Google-Smtp-Source: AGHT+IF1JH0nOR841ObfCrRlUVvi3wptxSL6yTB/TeJma7KY2yW7Zl7AT4l9BH6P1JNXImQzH8sNqkI+4Kx4GkKbB6g=
-X-Received: by 2002:a7b:cbd8:0:b0:40b:5f03:b432 with SMTP id
- n24-20020a7bcbd8000000b0040b5f03b432mr534408wmi.340.1701541808672; Sat, 02
- Dec 2023 10:30:08 -0800 (PST)
+ bh=MEUrdSP1OICUcxxphrmSJJRppNWXEqI4xr62SYD7ySE=;
+ b=rJZaoJWaS9/H6w4AExi4efNx1HBz8q1QHdN0Px3c94ERmta13aTnAZWmiTIoUedga+
+ nR530j0Du28kHckxhde5XZm2t+FUIfubrRBu94fh1hbqAkAin9huldbCZABrVx704cN0
+ fie6P/UXmQicMES4zGNb8tyAgqcQkDON9TlXJ5CU1IXnQbudPK4wvkD9clMj1Y2UW7pN
+ 6C/DLlCPAUzDuC+1g1h4Oib5ivd3zINZ/xkJLptvgGQ/eqT+QKBt7uedyPXzhoJITwMh
+ sa3xtuBvlIN9AU2lW+twle9hRaQcYDJ6DnHtquxBtUjkOkz/VXiGsq9CksAZyiKw/5CI
+ FuBQ==
+X-Gm-Message-State: AOJu0YxezNh9dV3Xss3Wn9iz1M52smoCTUjLyAheJPiPIRkMDvxv9OGk
+ s1leN1AuOPGynmDVKX/YitPLYbQOG+AXcxZy+OauRg==
+X-Google-Smtp-Source: AGHT+IEx+n4q/oQPVjeTCK3hzdeAD9Kb1gSnl9ia3KpE86f/IkQVirVuiGWaL065bDCcZJVSeOjgNd7XpiHsvA3oaYc=
+X-Received: by 2002:a17:906:19ca:b0:9fa:d1df:c2c4 with SMTP id
+ h10-20020a17090619ca00b009fad1dfc2c4mr3424598ejd.36.1701541908411; Sat, 02
+ Dec 2023 10:31:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20231117225313.2144665-1-trini@konsulko.com>
- <20231117225313.2144665-4-trini@konsulko.com>
- <CAPnjgZ2N__uy8qdhJfwzrk088dyG8fFGXbsh4-Z4yWa6rkDFNA@mail.gmail.com>
- <20231118174550.GI170968@bill-the-cat>
- <CAPnjgZ2vYJbk_pU9DgnQTfr_DavFM970v4PfWdEpUtjEx441cw@mail.gmail.com>
- <20231118180413.GJ170968@bill-the-cat>
-In-Reply-To: <20231118180413.GJ170968@bill-the-cat>
+References: <20231127195029.90951-1-raymond.mao@linaro.org>
+ <20231127195029.90951-11-raymond.mao@linaro.org>
+In-Reply-To: <20231127195029.90951-11-raymond.mao@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:29:43 -0700
-Message-ID: <CAPnjgZ0DoKe+s3qWNcOSZVcNbSbbkW6jYBHY_-iYKgmMhY2Fvw@mail.gmail.com>
-Subject: Re: [PATCH 4/5] sandbox: Audit config.h and common.h usage
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Sat, 2 Dec 2023 11:31:33 -0700
+Message-ID: <CAPnjgZ1XrD71N-fPxB9uetT5ociUdKzt5Ht9Ltp-_dvbL36Jyw@mail.gmail.com>
+Subject: Re: [PATCH v2 10/18] bloblist: Handle alignment with a void entry
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,66 +86,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, 27 Nov 2023 at 12:52, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> From: Simon Glass <sjg@chromium.org>
+>
+> Rather than setting the alignment using the header size, add an entirely
+> new entry to cover the gap left by the alignment.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  common/bloblist.c | 23 +++++++++++++++++++----
+>  1 file changed, 19 insertions(+), 4 deletions(-)
+>
 
-On Sat, 18 Nov 2023 at 11:04, Tom Rini <trini@konsulko.com> wrote:
->
-> Splitting this in to two different threads..
->
-> On Sat, Nov 18, 2023 at 10:58:50AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 18 Nov 2023 at 10:45, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Nov 18, 2023 at 10:09:55AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 17 Nov 2023 at 15:54, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > Remove and replace common.h and config.h in sandbox when it's not needed
-> > > > > and add some explicit includes where needed.
-> > > > >
-> > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > > ---
-> > > > >  arch/sandbox/cpu/cache.c         | 1 -
-> > > > >  arch/sandbox/cpu/cpu.c           | 1 -
-> > > > >  arch/sandbox/cpu/sdl.c           | 2 +-
-> > > > >  arch/sandbox/cpu/spl.c           | 1 -
-> > > > >  arch/sandbox/cpu/start.c         | 2 +-
-> > > > >  arch/sandbox/cpu/state.c         | 2 +-
-> > > > >  arch/sandbox/include/asm/io.h    | 2 ++
-> > > > >  arch/sandbox/include/asm/state.h | 1 -
-> > > > >  arch/sandbox/lib/bootm.c         | 1 -
-> > > > >  arch/sandbox/lib/fdt_fixup.c     | 1 -
-> > > > >  arch/sandbox/lib/interrupts.c    | 1 -
-> > > > >  arch/sandbox/lib/pci_io.c        | 1 -
-> > > > >  board/sandbox/sandbox.c          | 2 +-
-> > > > >  13 files changed, 6 insertions(+), 12 deletions(-)
-> > > >
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > Is it possible to move CFG_SYS_SDRAM_BASE/SIZE to Kconfig?
-> > >
-> > > Possible? Sure. But I think it would end up being fairly horrible. What
-> > > would be nice I think is some Zephyr-style "convert
-> > > CONFIG_DEFAULT_DEVICE_TREE to some defines" because we could parse out
-> > > /memory to CFG_SYS_SDRAM_BASE/SIZE and that's something we _need_ at
-> > > build time.
-> >
-> > That would be pretty easy to do. But I would prefer to have it create
-> > CONFIG_SYS_SDRAM_BASE/SIZE so that it fits in with Kconfig, just that
-> > the value is set for you.
->
-> I _think_ we need it to be non-CONFIG namespace or we'll run in to other
-> problems? We could get the new autogenerated header to be included along
-> with generated/autoconf.h but since we couldn't use it within Kconfig
-> logic it would be confusing.
->
-> > If you like you could create an issue for it.
->
-> Please, thanks.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-https://source.denx.de/u-boot/u-boot/-/issues/27
-
-Regards,
-Simon
+I am not comfortable with this approach as it makes it more
+complicated to reused unused areas, but it is what we have ended up
+with.
