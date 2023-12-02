@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7581C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 20:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C344C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 21:16:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3883F8785F;
-	Sat,  2 Dec 2023 21:53:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 85E2D8784C;
+	Sat,  2 Dec 2023 22:16:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZKFga87P";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nA2foI+P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kln8ExyM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8556876FC; Sat,  2 Dec 2023 21:53:18 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2D352877FE; Sat,  2 Dec 2023 22:16:35 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 142D4876A2
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 21:53:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D745877FE
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 22:16:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SjMZz42yNz9sZ7;
- Sat,  2 Dec 2023 21:53:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701550395;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=zNTYXWGH8yP6gOTH3bFXjq2BARIh/cQScsL8NaZVIF0=;
- b=ZKFga87PSr+onQ65Ctbkg3Jyqin3JvFkN9E5xBWSdGZSZVvyJAPoG3F3y6V/T+CqqXL3KA
- J2aHfK1J6xqHnoLKIpyx0A+TnMjxKjmS1QuJaH02FTguiA0zy6chRzBvB0Q6ayg69TnKsz
- P1bQu5iF2AIDBVaKEueCeWojddEt4o966vv8G/vhrmVyQfpQ3W14D29avrO3Jbvx3k9p8O
- a6ZTPScmu40Qy2ua871ApTXTw/TbOL5dlGToEaQ3PskFsB2DzkVF0iSxtrZlR3mDWsKh7E
- ZdD+WsTzHbClngBrd0epjMILoJCh2cqfMSmli89LN3fa0IrHGDS9RHLVwErLTQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701550393;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=zNTYXWGH8yP6gOTH3bFXjq2BARIh/cQScsL8NaZVIF0=;
- b=nA2foI+P57Lm8SYHuah2szFN9D4npjbA9fBfaME09uLrK2CMWjXXEvFkTyAHSEksEn0fjy
- 5AMTR1aSdtQBSU3WWZleKs6D/H74IwHVAK+yI7uKHyQ7v7Z1+7D0vzMEFH+TZb89m2LHgN
- sj39/wCK98z3TmqT6MAZ+O/rQhBLs/c/tfWb+3DABwv3ceUeUmM0LgjNNduTfuErk8ARKP
- rogdIRoNsu4M6NAztNFr4bBF8C4+j6PU3b0zXBznmrxGoQcnWFrG88d7d7XN87PiEMiDtm
- URuyD0bnABq9+5BfP8J2B8j0Tn6/yoE7BK+BXrEtay5yI2vAOlj1cJUyaxGxZQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/2] command: Allocate history buffer using calloc()
-Date: Sat,  2 Dec 2023 21:52:30 +0100
-Message-ID: <20231202205255.169670-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-9fa45e75ed9so471037966b.1
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 13:16:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1701551792; x=1702156592; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qxmIes+S9sQem2wxP5dhup3M57eMnihl3HRgKKeLVyY=;
+ b=Kln8ExyMA9xlWYXDvKEUzRFYWYHBuHzHHToA1KY3EHRqShHph7g2rEEg4YN7LtQclz
+ 3aXVP1/hY7RLlIuAl5clH2s7jx8RD1j9sb6UFz3EykE6W0zWernBwg6fxqUw3TICqkJ3
+ mYQjFM7g0A+VpsmOjP65T6fsLKH6kwq9ums8E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701551792; x=1702156592;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qxmIes+S9sQem2wxP5dhup3M57eMnihl3HRgKKeLVyY=;
+ b=TwzBy1NFe6yqawCs3flbW2slsyX4MyKwcYw/urBbCPJAMM6gSABKi4dzUUnyUvslEG
+ eUUA7eKtyVImaVEOSaGMp71SDRtD9pmG+wqstt35oTYSqwesgZOS5eAfB8RnpaF212EN
+ BDHLD54FPxxS/MrKRWyf0XMCCgEOX6wCDOQyuFsaFsu9ZePHNV2qZx7k0LNH/En9VE/8
+ 93AH0+eAhSWo0NiKZMFOAaltkWrcVMSXrirBNLxu5SGTVqAG6oHY6REVdr2NfHI902jQ
+ lCP0lcFIsCPsWRkZKuQdcNvBoGX15iiQiZIWO4H3LoIdfVITvNf66P0/EcJT9sxBMweG
+ OYDw==
+X-Gm-Message-State: AOJu0Ywi5Uw+82JJYPXHBcpYkmn9lVPaoSanG5+Hw6qqw0ZkJpzJgY2Z
+ Jb3UVhTf4ty/6PshyarS5wuk5+wyYHOkNotjG++nzg==
+X-Google-Smtp-Source: AGHT+IFtxWMVExh56z9IACCRCgV0kZo7iccSR49JhXaAQm6+W1KLwQXNmzbFJHzkNWtCHGmyHJUk7uiDbBdVf4xcmII=
+X-Received: by 2002:a17:906:bcdc:b0:a17:781f:20bb with SMTP id
+ lw28-20020a170906bcdc00b00a17781f20bbmr2122632ejb.1.1701551792397; Sat, 02
+ Dec 2023 13:16:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 40c6c4c209e0ae50861
-X-MBO-RS-META: qp7p4897gco9cm3ibt31k7xbo96zs74e
-X-Rspamd-Queue-Id: 4SjMZz42yNz9sZ7
+References: <20231127195029.90951-1-raymond.mao@linaro.org>
+ <20231127195029.90951-17-raymond.mao@linaro.org>
+In-Reply-To: <20231127195029.90951-17-raymond.mao@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 2 Dec 2023 14:16:19 -0700
+Message-ID: <CAPnjgZ3F7QNJPr=+atQf4afvgRp6TO_t=s9ww5ZQ06QxPrj1qw@mail.gmail.com>
+Subject: Re: [PATCH v2 16/18] bloblist: Align bloblist used_size and
+ total_size to spec
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Nikhil M Jain <n-jain1@ti.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,92 +86,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The history buffer is currently a static array which can be some
-10-40 kiB depending on configuration, and so adds considerably to
-the U-Boot binary size. Allocate it dynamically instead to reduce
-the U-Boot binary size.
+On Mon, 27 Nov 2023 at 12:53, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Align used_size and total_size of the bloblist header to the definition
+> of the FW Handoff spec v0.9.
+> Update the related bloblist APIs and UT testcases.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2
+> - New patch file created for v2.
+>
+>  common/bloblist.c  | 86 +++++++++++++++++++++++++++-------------------
+>  include/bloblist.h | 26 ++++++++------
+>  test/bloblist.c    | 35 ++++++++++---------
+>  3 files changed, 84 insertions(+), 63 deletions(-)
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Simon Glass <sjg@chromium.org>
----
- common/cli_readline.c | 26 +++++++++++++++++---------
- 1 file changed, 17 insertions(+), 9 deletions(-)
-
-diff --git a/common/cli_readline.c b/common/cli_readline.c
-index 06b8d465044..85453beed76 100644
---- a/common/cli_readline.c
-+++ b/common/cli_readline.c
-@@ -12,6 +12,8 @@
- #include <bootretry.h>
- #include <cli.h>
- #include <command.h>
-+#include <hang.h>
-+#include <malloc.h>
- #include <time.h>
- #include <watchdog.h>
- #include <asm/global_data.h>
-@@ -85,7 +87,6 @@ static int hist_cur = -1;
- static unsigned hist_num;
- 
- static char *hist_list[HIST_MAX];
--static char hist_lines[HIST_MAX][HIST_SIZE + 1];	/* Save room for NULL */
- 
- #define add_idx_minus_one() ((hist_add_idx == 0) ? hist_max : hist_add_idx-1)
- 
-@@ -97,8 +98,9 @@ static void getcmd_putchars(int count, int ch)
- 		getcmd_putch(ch);
- }
- 
--static void hist_init(void)
-+static int hist_init(void)
- {
-+	unsigned char *hist;
- 	int i;
- 
- 	hist_max = 0;
-@@ -106,10 +108,14 @@ static void hist_init(void)
- 	hist_cur = -1;
- 	hist_num = 0;
- 
--	for (i = 0; i < HIST_MAX; i++) {
--		hist_list[i] = hist_lines[i];
--		hist_list[i][0] = '\0';
--	}
-+	hist = calloc(HIST_MAX, HIST_SIZE + 1);
-+	if (!hist)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < HIST_MAX; i++)
-+		hist_list[i] = hist + (i * (HIST_SIZE + 1));
-+
-+	return 0;
- }
- 
- static void cread_add_to_hist(char *line)
-@@ -493,8 +499,9 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 
- #else /* !CONFIG_CMDLINE_EDITING */
- 
--static inline void hist_init(void)
-+static inline int hist_init(void)
- {
-+	return 0;
- }
- 
- static int cread_line(const char *const prompt, char *buf, unsigned int *len,
-@@ -643,8 +650,9 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 	 */
- 	if (IS_ENABLED(CONFIG_CMDLINE_EDITING) && (gd->flags & GD_FLG_RELOC)) {
- 		if (!initted) {
--			hist_init();
--			initted = 1;
-+			rc = hist_init();
-+			if (rc == 0)
-+				initted = 1;
- 		}
- 
- 		if (prompt)
--- 
-2.42.0
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
