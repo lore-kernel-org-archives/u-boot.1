@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A106C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 23:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B9CC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 23:41:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1386587735;
-	Sun,  3 Dec 2023 00:40:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1787E87735;
+	Sun,  3 Dec 2023 00:41:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MLH3dzh+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="u2kmQ9ZM";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GbavhNT+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hc7fvTFh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBDF7876B2; Sun,  3 Dec 2023 00:40:28 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 47725877E9; Sun,  3 Dec 2023 00:41:21 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 069ED877C4
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 00:40:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69FD7876B2
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 00:41:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4SjRHr4PLVz9sQ6;
- Sun,  3 Dec 2023 00:40:24 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SjRJv0LfCz9smg;
+ Sun,  3 Dec 2023 00:41:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701560424;
+ s=mail20150812; t=1701560479;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=G4D/Ga86u1i0vRdLDq6rFZx/y2mkJrrE+3XuESXGjfU=;
- b=MLH3dzh+NY1cZYQ5LO8xCZvvjy64PPfXp6GrQ4mvMY97BnD+pe6/G6IttPOFIwXSkg8bsj
- NSuuwELsAw2Y1UrDel50CgBE+vdBrDmzozzSgNLjb6GeX7l6a1FLO5gnX+5hV5FUtUAMVG
- WNTs8x9VzRf7p3f2avlC/Q6gE4+oe+ZOZA6AUJRpFUsWbpEg7N6uSpHBH+XKdyttSww75s
- TghzbUZkE4PQjlM47IUn2CfVRMBM4kIVD4PtKL6b+vipx2v5e3qRjL9ysXXl+GhBz52IGb
- wEiyaI0UaG1I21vK5vQoH+1+bBB83g+XSgBGzYVXm0ti8juv8aSBkYpZRzxRRA==
+ bh=c0TFJuDr42aJ65Zbd6MnRyhCiBxWYVLRID1J9pngqE0=;
+ b=GbavhNT+shsu6Ct3DcUI6TGt8zAslhMCla5WMOiLl7xaatvsKHQ2M7Kwqe8p0Gl7NwwKC+
+ u37gWJ7P41YBG90yQIbtNqYZb1zMEZ9cEZqK0mQ32NQj5RkZj3rqRhymlIQ5c3TzqKvHKj
+ VcGq/bj+Ub66WmzTWoZANmXicvZtKXh33pBIcZQnvhgbTtG2F7Cglf0t54A7pySNVirAYu
+ BpCVGs0uXT2Nay7QN66OpvCEFc4woE1CHvsVHH9N8vCiTdRAVlAVZ7iw3iXSs6Yh9q0E0P
+ +xZv3PfG5KodVyk06epoqbcqyBYnmLPhr87oJAjtxQpvrD3X13vYmDGQTQUIcQ==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701560422;
+ s=mail20150812; t=1701560477;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=G4D/Ga86u1i0vRdLDq6rFZx/y2mkJrrE+3XuESXGjfU=;
- b=u2kmQ9ZM2YYHsdpDDlB6ZCe+qS+W2yqW9KB1wEhou00SZ5gvumDOLh7x/EMARwkaaJK5J+
- WjIrd7eG1tVyglEsp44K3f1Hn10cRdyKUCP/gRu03muRqAxduHLfC3+HET/HgP1LFZjeDy
- U4kg5WxXYQ4Ou91fx0Dr6D8w0foeTIwJqs8kKo/aJLlHeYrT+HlvUMD0uUGos0YluCOJTc
- kdp1+C6mLPhzCSo+Y+yrV+dEdaa7HJ9rUEo7TMuCpRMwUylI1eVZMjH0xRSb95rbMYkpin
- lZgw/ZmZ3gBvWu+DIK1FQw4y/IoXDQ26gLcvIpihrH+Vu+L7JIfa99bQSqrRbg==
+ bh=c0TFJuDr42aJ65Zbd6MnRyhCiBxWYVLRID1J9pngqE0=;
+ b=hc7fvTFhWqmFzbftCUlTjCA+4FWmYzQp18IBmGL9Xy+UDe83gJwJmBcutItEUlwC+jT7Gw
+ Stm7VRsjnpeCjaYy0vnKbV+OEt0yFzzVoiOZcuGypEiXeNzHZb6qmrYJkEcoVb6uRAILVs
+ 8/aCBht9qtYFKu7ZXmUlQcd0vMRv1tpCprZkZD2AYPO0VBGzlNpadzbu3FBCmAWwusY0h3
+ g+UI3Lj6Ed9cJdaDUUUxUWlT3gfyK19vt+amQ5o42J7I9vXgvHLnPZW+8IAHg/tKQxl5Iq
+ plWM137VpQ0ix1gB+8jOdU+Tf9caw2IH6hDCQ3G1FyXy1FyzIT4mM9AGS5MQmw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mmc: Unconditionally call mmc_deinit()
-Date: Sun,  3 Dec 2023 00:39:45 +0100
-Message-ID: <20231202234011.208212-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] mmc: Poll CD in case cyclic framework is enabled
+Date: Sun,  3 Dec 2023 00:40:26 +0100
+Message-ID: <20231202234109.208243-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 3088cc0ce6847c81ad5
-X-MBO-RS-META: 9jmrnwqtaw9xyn8dbb5cji7pycr65o6d
+X-MBO-RS-ID: c7eb02ce5d85c5527c2
+X-MBO-RS-META: ebrb5y78a1p1oqzpnwdsuxwdmkodc5s3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,97 +81,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Place the SDR104/HS200/HS400 checks into the mmc_deinit() and always
-call it. This simplifies the code and removes ifdeffery. No functional
-change is expected.
+In case the cyclic framework is enabled, poll the card detect of already
+initialized cards and deinitialize them in case they are removed. Since
+the card initialization is a longer process and card initialization is
+done on first access to an uninitialized card anyway, avoid initializing
+newly detected uninitialized cards in the cyclic callback.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/mmc/mmc-uclass.c | 13 +------------
- drivers/mmc/mmc.c        |  9 +++++----
- 2 files changed, 6 insertions(+), 16 deletions(-)
+ drivers/mmc/mmc-uclass.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
 diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index 328456831dd..cdead044177 100644
+index cdead044177..c4c9881c40b 100644
 --- a/drivers/mmc/mmc-uclass.c
 +++ b/drivers/mmc/mmc-uclass.c
-@@ -494,10 +494,7 @@ static int mmc_blk_probe(struct udevice *dev)
- 	if (ret) {
- 		debug("Probing %s failed (err=%d)\n", dev->name, ret);
+@@ -8,6 +8,7 @@
+ #define LOG_CATEGORY UCLASS_MMC
  
--		if (CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) ||
--		    CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) ||
--		    CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
--			mmc_deinit(mmc);
-+		mmc_deinit(mmc);
- 
- 		return ret;
- 	}
-@@ -505,9 +502,6 @@ static int mmc_blk_probe(struct udevice *dev)
- 	return 0;
+ #include <common.h>
++#include <cyclic.h>
+ #include <bootdev.h>
+ #include <log.h>
+ #include <mmc.h>
+@@ -343,8 +344,23 @@ struct blk_desc *mmc_get_blk_desc(struct mmc *mmc)
+ 	return desc;
  }
  
--#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
- static int mmc_blk_remove(struct udevice *dev)
- {
- 	struct udevice *mmc_dev = dev_get_parent(dev);
-@@ -516,7 +510,6 @@ static int mmc_blk_remove(struct udevice *dev)
- 
- 	return mmc_deinit(mmc);
- }
--#endif
- 
- static const struct blk_ops mmc_blk_ops = {
- 	.read	= mmc_bread,
-@@ -532,12 +525,8 @@ U_BOOT_DRIVER(mmc_blk) = {
- 	.id		= UCLASS_BLK,
- 	.ops		= &mmc_blk_ops,
- 	.probe		= mmc_blk_probe,
--#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
- 	.remove		= mmc_blk_remove,
- 	.flags		= DM_FLAG_OS_PREPARE,
--#endif
- };
- #endif /* CONFIG_BLK */
- 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index d96db7a0f83..eb5010c1465 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -3010,13 +3010,15 @@ int mmc_init(struct mmc *mmc)
- 	return err;
- }
- 
--#if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
--    CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
- int mmc_deinit(struct mmc *mmc)
- {
- 	u32 caps_filtered;
- 
-+	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
-+	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
-+	    !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
-+		return 0;
++static void mmc_cyclic_cd_poll(void *ctx)
++{
++	struct mmc *m = ctx;
 +
- 	if (!mmc->has_init)
- 		return 0;
++	if (!m->has_init)
++		return;
++
++	if (mmc_getcd(m))
++		return;
++
++	mmc_deinit(m);
++	m->has_init = 0;
++}
++
+ void mmc_do_preinit(void)
+ {
++	struct cyclic_info *cyclic;
+ 	struct udevice *dev;
+ 	struct uclass *uc;
+ 	int ret;
+@@ -362,6 +378,17 @@ void mmc_do_preinit(void)
  
-@@ -3034,7 +3036,6 @@ int mmc_deinit(struct mmc *mmc)
- 		return mmc_select_mode_and_width(mmc, caps_filtered);
+ 		if (m->preinit)
+ 			mmc_start_init(m);
++
++		if (!CONFIG_IS_ENABLED(CYCLIC))
++			continue;
++
++		/* Register cyclic function for card detect polling */
++		cyclic = cyclic_register(mmc_cyclic_cd_poll, 100 * 1000,
++					 m->cfg->name, m);
++		if (cyclic)
++			continue;
++
++		printf("Failed to register %s CD poll function\n", m->cfg->name);
  	}
  }
--#endif
  
- int mmc_set_dsr(struct mmc *mmc, u16 val)
- {
 -- 
 2.42.0
 
