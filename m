@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AD80C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B565DC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:30:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5491B87759;
-	Sat,  2 Dec 2023 19:30:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7B51787787;
+	Sat,  2 Dec 2023 19:30:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bUsABvG8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DgtsqRQI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F8E387754; Sat,  2 Dec 2023 19:30:12 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id CF34787782; Sat,  2 Dec 2023 19:30:14 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20CB787759
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:30:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 657C487778
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:30:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9fa45e75ed9so462293366b.1
- for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:30:09 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40b4744d603so33361585e9.2
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:30:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701541807; x=1702146607; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701541809; x=1702146609; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=x4NE+ITNZNedbYKrWqwPzsFZ/y6GVHgQxjy93pvRqEc=;
- b=bUsABvG8VqYu1yW/Pvu6AFyLZt4qS0Yj/XUFumcKCb6vXlVmjgvchVS+/7D+J6wDRF
- gNDVXFdkCWFQ3KsyFfHORxDhi0wq0r5Cq4Y6PG4SWfLsu/ka53e/HhJw7FcU1oljGDHb
- 8ZN82ZHnwGTrMeghn6s8ZohhICZzJSMSzyrZg=
+ bh=wPA0goTU+fUOWl2uQdXJ+wjgLIp/yD/VOulNr9t66Fo=;
+ b=DgtsqRQIYohkjoYNhlPw3JQl8K0+zBfcOshWTt6t/Ue57UO5IQZ43f/BImQNPt9riO
+ 2gAJjUkUaALNo07BuCv1iBYj2CxMljeQvjZa20p9+pGId+FqUMF4/y0TS9VWVvZDIHDX
+ hKKSF65wkRL6sJEpNa1P3OvQ0TKyIWKkVSOGY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701541807; x=1702146607;
+ d=1e100.net; s=20230601; t=1701541809; x=1702146609;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=x4NE+ITNZNedbYKrWqwPzsFZ/y6GVHgQxjy93pvRqEc=;
- b=VoqcgpKA2l1cLExnmG2fEz7iPCTE7HYKu7CC5cz3Ex9MskhZurhSoe5B02AIAf2p3Z
- Ta6ALCEz84iK3RI5UmENAQeGXW/p6opQLcckfG3hy7I3h3Zdjc3e/8FMNWD2n3T9CnYC
- a50vWgTgVhUMCXzsPKvK3zVGlqMj8OZf+TJIjJ8gfYVYQypcDxZFxgV4dUnvVgvtuFo3
- dSL/Qbjgj6dwf9JW0s4HdJV/5KUwlMeCczxzmW2wYSEtlOjFPmU0NJM+h5c6qcOqeTyP
- I3rCOMf7vO3IIp4TgdzUt9zg+NW4LuC6i7qnbKT+l0iwGWGJOM76YTG+mXfpp7TlWNij
- t9og==
-X-Gm-Message-State: AOJu0Yyqo6bUrClv2dn2kRyhBthg31qv1r+fFWS07FGLgFXuSTw1vxWa
- YkW7NVYUCqkK1WB6ruRiZ+k7fiDDqXMNEIwSpXyDKQ==
-X-Google-Smtp-Source: AGHT+IFf13Q8dj4KONXtxPYXsm1dlLQ9aFeGOG7/XmoMaSQuAioSnNdWGoHy5jauOf9ocMMUIWKZwoK6/1TGtZ+MKJw=
-X-Received: by 2002:a17:906:3f0a:b0:a19:a39d:8f6a with SMTP id
- c10-20020a1709063f0a00b00a19a39d8f6amr2045696ejj.8.1701541806821; Sat, 02 Dec
- 2023 10:30:06 -0800 (PST)
+ bh=wPA0goTU+fUOWl2uQdXJ+wjgLIp/yD/VOulNr9t66Fo=;
+ b=FWSAKEJCvB3g0921q+DomtY5nZHqrpfmbXldGyNiwKQLEZ69F8NI1SoSLB07Hpo8ew
+ Yhp2f36r3KPRGzznDGXGQa8ZuHFJ3ngKnzKnOkB9ED7EaApkiljz3F+CMXOOyrxeop0T
+ I6/fP8uLuSiJ9GOn4SCyC/JrwA6pB63lpb4/8aQV7W9zGnrVZRNqciMatb5SyJIx150b
+ MGRYEnVT/UArQOv4szCxEy7vvXDvN9Bc1HmPPDq3XLN0+m3lMynHJkecgdRFElFk4MXx
+ R4ugaf9YagZueh7PLbBcK1oGRnp/QTwNyCc8bi4xOvFGKrgxoKLDuRdk180lyhHYpqGQ
+ ePoQ==
+X-Gm-Message-State: AOJu0YwyPhibfXHe+dLe2llr8Fnvtf9awFXrwYE+hFtHd4qvKGTN5XLP
+ fmZt106bbl2Ns3Ux948beTDBmsgwgycRQxKlk3TPHRF7exR32ORF0jJ77w==
+X-Google-Smtp-Source: AGHT+IF1JH0nOR841ObfCrRlUVvi3wptxSL6yTB/TeJma7KY2yW7Zl7AT4l9BH6P1JNXImQzH8sNqkI+4Kx4GkKbB6g=
+X-Received: by 2002:a7b:cbd8:0:b0:40b:5f03:b432 with SMTP id
+ n24-20020a7bcbd8000000b0040b5f03b432mr534408wmi.340.1701541808672; Sat, 02
+ Dec 2023 10:30:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20231125162705.1383401-1-devarsht@ti.com>
- <20231125162705.1383401-8-devarsht@ti.com>
-In-Reply-To: <20231125162705.1383401-8-devarsht@ti.com>
+References: <20231117225313.2144665-1-trini@konsulko.com>
+ <20231117225313.2144665-4-trini@konsulko.com>
+ <CAPnjgZ2N__uy8qdhJfwzrk088dyG8fFGXbsh4-Z4yWa6rkDFNA@mail.gmail.com>
+ <20231118174550.GI170968@bill-the-cat>
+ <CAPnjgZ2vYJbk_pU9DgnQTfr_DavFM970v4PfWdEpUtjEx441cw@mail.gmail.com>
+ <20231118180413.GJ170968@bill-the-cat>
+In-Reply-To: <20231118180413.GJ170968@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:28:24 -0700
-Message-ID: <CAPnjgZ0gS1MVER3=mi0QfQE+pj_TqqFg6RKW_+5QicHsdbXFtw@mail.gmail.com>
-Subject: Re: [PATCH v4 7/8] doc: spl: Add info for missing Kconfigs
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
- bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
- yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
- a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
+Date: Sat, 2 Dec 2023 11:29:43 -0700
+Message-ID: <CAPnjgZ0DoKe+s3qWNcOSZVcNbSbbkW6jYBHY_-iYKgmMhY2Fvw@mail.gmail.com>
+Subject: Re: [PATCH 4/5] sandbox: Audit config.h and common.h usage
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,18 +85,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 25 Nov 2023 at 09:27, Devarsh Thakkar <devarsht@ti.com> wrote:
->
-> Add info regarding splash screen, video, bloblist and GPIO related
-> Kconfigs which were missing in the documentation.
->
-> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
-> ---
-> V2: No change
-> V3: No change
-> V4: Patch split from parent
-> ---
->  doc/develop/spl.rst | 9 +++++++++
->  1 file changed, 9 insertions(+)
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sat, 18 Nov 2023 at 11:04, Tom Rini <trini@konsulko.com> wrote:
+>
+> Splitting this in to two different threads..
+>
+> On Sat, Nov 18, 2023 at 10:58:50AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Sat, 18 Nov 2023 at 10:45, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Nov 18, 2023 at 10:09:55AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 17 Nov 2023 at 15:54, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > Remove and replace common.h and config.h in sandbox when it's not needed
+> > > > > and add some explicit includes where needed.
+> > > > >
+> > > > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > > > ---
+> > > > >  arch/sandbox/cpu/cache.c         | 1 -
+> > > > >  arch/sandbox/cpu/cpu.c           | 1 -
+> > > > >  arch/sandbox/cpu/sdl.c           | 2 +-
+> > > > >  arch/sandbox/cpu/spl.c           | 1 -
+> > > > >  arch/sandbox/cpu/start.c         | 2 +-
+> > > > >  arch/sandbox/cpu/state.c         | 2 +-
+> > > > >  arch/sandbox/include/asm/io.h    | 2 ++
+> > > > >  arch/sandbox/include/asm/state.h | 1 -
+> > > > >  arch/sandbox/lib/bootm.c         | 1 -
+> > > > >  arch/sandbox/lib/fdt_fixup.c     | 1 -
+> > > > >  arch/sandbox/lib/interrupts.c    | 1 -
+> > > > >  arch/sandbox/lib/pci_io.c        | 1 -
+> > > > >  board/sandbox/sandbox.c          | 2 +-
+> > > > >  13 files changed, 6 insertions(+), 12 deletions(-)
+> > > >
+> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > Is it possible to move CFG_SYS_SDRAM_BASE/SIZE to Kconfig?
+> > >
+> > > Possible? Sure. But I think it would end up being fairly horrible. What
+> > > would be nice I think is some Zephyr-style "convert
+> > > CONFIG_DEFAULT_DEVICE_TREE to some defines" because we could parse out
+> > > /memory to CFG_SYS_SDRAM_BASE/SIZE and that's something we _need_ at
+> > > build time.
+> >
+> > That would be pretty easy to do. But I would prefer to have it create
+> > CONFIG_SYS_SDRAM_BASE/SIZE so that it fits in with Kconfig, just that
+> > the value is set for you.
+>
+> I _think_ we need it to be non-CONFIG namespace or we'll run in to other
+> problems? We could get the new autogenerated header to be included along
+> with generated/autoconf.h but since we couldn't use it within Kconfig
+> logic it would be confusing.
+>
+> > If you like you could create an issue for it.
+>
+> Please, thanks.
+
+https://source.denx.de/u-boot/u-boot/-/issues/27
+
+Regards,
+Simon
