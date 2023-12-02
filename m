@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC69EC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:27:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C528DC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B0128773E;
-	Sat,  2 Dec 2023 19:27:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4302A875FC;
+	Sat,  2 Dec 2023 19:28:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F7S1KxQ4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lH/QvDZy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58D5887706; Sat,  2 Dec 2023 19:27:19 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 0B0E98774F; Sat,  2 Dec 2023 19:28:31 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 470818770C
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:27:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBBE6875FC
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:28:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d7346442d4so5225197b3.2
- for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:27:15 -0800 (PST)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5d77a1163faso2643187b3.0
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 10:28:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701541634; x=1702146434; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701541707; x=1702146507; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y1TmYEUC0jDFAmIU5wcqn+uanHo7hCMFS48o7KYJf4Q=;
- b=F7S1KxQ4SvUmI0nAhpZ0+b1NUgo2YkRIbKO5dgip27uAACJnheSQYlzMM2UmoNCe4e
- uAvC1djNQbJzIkZ0i3rDTCDEj3xew3TfeCq/mycsW2HXZQPCP8rPhBdUYyUu2BqeCEof
- Y8Vqu/gcNh8Yzujm1NWG65LDQsoxQv6v8P3zk=
+ bh=5uH8ck+6AfcJO5md6J8gDvNbCce+wrw6rMwLmiWpaQQ=;
+ b=lH/QvDZyIZRDBTOm4Un0woXpW2vgtdkGKQd2bdITicfDjDnQ1Qk/jSKqWVBKSe1yMh
+ QsO3e3p26KYOf8AOcHzLGAO0Gd7vanaU7mfMUHEybpCwQy3YmwZERLsGmLqhga1edKF6
+ mCbtMzYy4S4ZItFEA4ptFn0ZzN8pobXGVozXQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701541634; x=1702146434;
+ d=1e100.net; s=20230601; t=1701541707; x=1702146507;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y1TmYEUC0jDFAmIU5wcqn+uanHo7hCMFS48o7KYJf4Q=;
- b=JBtYY5PEwEQK3wj1c3YRH8I4FxvLw0Lcfx4BcOtKIBRBQk3iuVl5TeyII2VQeh79xW
- EbX8wFyLIKLrcTMgJ8GTnQnhNrKFCSjaoF0ddOWQMFjW3H6SaGGiNGW5GSHa4P+yRZw7
- 3h2nqvK2NTFdovqdZgdBKdm7GrnmIlVsIIIWmhCIeIYqeerV+EOUII5xxXjIbz6rHlFB
- E7qv0L3Z/emb9+oTlT2fOYrSuTjtZB+E8EkRKW8o6WaaiINYNW+vPUjAkKPtUbmRTs1N
- MPxO33RSxMaEWgg9BD5GiY/SiOOWOfI0A7dpVMvjByxk9DXIj7KLsW9jFf8RRIpqN2Mk
- K2Og==
-X-Gm-Message-State: AOJu0Yxg1B890blp/wXf1SGj9jEFKMfz/zJvM81M66M4x/T6AU7VeVdr
- hWIzF3LPeNY1mpIoTD90x5gFcFXzPl4u7tQ2gIziTA==
-X-Google-Smtp-Source: AGHT+IGZ11YUh9S8bAIBx7K3BvAeoe5XizKK4rEJGDD5YM6B92o1vi0FMHTrP64weYSn9qSpTTAZDG88koaQsGiRuKw=
-X-Received: by 2002:a0d:dbd0:0:b0:5d4:2c63:a2c3 with SMTP id
- d199-20020a0ddbd0000000b005d42c63a2c3mr1035281ywe.15.1701541633589; Sat, 02
- Dec 2023 10:27:13 -0800 (PST)
+ bh=5uH8ck+6AfcJO5md6J8gDvNbCce+wrw6rMwLmiWpaQQ=;
+ b=BCthqkmud0moJfB6eFO2lgYK/ZDsmJn+Iuh86VD85I4zBIZ8i4uJI6+Ueza7oozewQ
+ A6LlM2XIWxHnDWpLxtqMjcZcNSNQK81c7B4uOj91xuoGs96eBIbcqhEqvcD/8SCLVvOR
+ DTpaoUxMZVqR6SRXao/RaId5i0FXVaEaYfZy25OyZbCsr07o0QSproLX94Ctg9D+m7Jv
+ hJL/c0VAoDGJvvsKsaUpTkE52Iqlg0MEdoQWYzs6v9HW7aI38VdvFcCQ8WIpnwJwMM1l
+ FoWO2TUih9mHICFBNjtsgowQwue8HowKx+ZuiEY0ApxaylH/xgEyxbCbfdcNRlm5S69A
+ Mxrg==
+X-Gm-Message-State: AOJu0YwSn1Ovpoz/5y2gyS+rtjKpn8j78rO0mxh2d+0B5so3A2rqyClE
+ dJDS/rl1ugUljh6a2qg5+dbS9SCWmiyUXIZR7cdzlg==
+X-Google-Smtp-Source: AGHT+IF9e3JBiGbvsDJsiNrAnbTczoClfjcpQxlzrwkuykYx5EB1mv5Kv71TNg4b82/eTCjfWo2HZE/et/PU4LiKd0k=
+X-Received: by 2002:a05:690c:f86:b0:5d3:c59d:ccaa with SMTP id
+ df6-20020a05690c0f8600b005d3c59dccaamr945925ywb.26.1701541707458; Sat, 02 Dec
+ 2023 10:28:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20231125162705.1383401-1-devarsht@ti.com>
- <20231125162705.1383401-6-devarsht@ti.com>
-In-Reply-To: <20231125162705.1383401-6-devarsht@ti.com>
+References: <20231122235202.630114-1-moritzf@google.com>
+ <20231122235202.630114-2-moritzf@google.com>
+In-Reply-To: <20231122235202.630114-2-moritzf@google.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 2 Dec 2023 11:26:38 -0700
-Message-ID: <CAPnjgZ1LxPY4kbwaiz448xP6WoUohB3sL_+j3A4n-f6Uz2-79A@mail.gmail.com>
-Subject: Re: [PATCH v4 5/8] video: Skip framebuffer reservation if already
- reserved
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: u-boot@lists.denx.de, agust@denx.de, trini@konsulko.com, 
- bmeng.cn@gmail.com, msuchanek@suse.de, rasmus.villemoes@prevas.dk, 
- yangshiji66@outlook.com, praneeth@ti.com, nm@ti.com, vigneshr@ti.com, 
- a-bhatia1@ti.com, j-luthra@ti.com, nsekhar@ti.com, n-jain1@ti.com
+Date: Sat, 2 Dec 2023 11:27:24 -0700
+Message-ID: <CAPnjgZ3GQ++-nn4GuUdEHFH2D15P2sPzoZH4O1oBYUAmt0bsSA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] nvme: Update scan namespace to keep trying on busy
+To: Moritz Fischer <moritzf@google.com>
+Cc: bmeng.cn@gmail.com, zhikang.zhang@nxp.com, wenbin.song@nxp.com, 
+ u-boot@lists.denx.de, patrick@blueri.se
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,68 +82,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 25 Nov 2023 at 09:27, Devarsh Thakkar <devarsht@ti.com> wrote:
+On Wed, 22 Nov 2023 at 16:53, Moritz Fischer <moritzf@google.com> wrote:
 >
-> Skip framebufer reservation if it was already reserved from previous
-> stage and whose information was passed using a bloblist.
+> A busy controller shouldn't be game-over for all controllers,
+> so keep trying on hitting -EBUSY.
 >
-> Return error in case framebuffer information received from bloblist is
-> invalid i.e NULL or empty.
+> This change brings the actual behavior of the routine in line
+> with what the descriptions says.
 >
-> While at it, improve the debug message to make it more clear that
-> address in discussion is of framebuffer and not bloblist and also match
-> it with printing scheme followed in video_reserve function.
->
-> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
+> Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
+> Signed-off-by: Moritz Fischer <moritzf@google.com>
 > ---
-> V2:
-> - Add debug prints
-> - Fix commenting style
-> V3:
-> - Fix commenting style
-> V4:
-> - Remove extra checks on gd for video data in video_reserve
-> - Add check and return error if video handoff provided info is invalid
-> - Improve debug message
-> - Remove Reviewed-by due to additional changes per review comments
-> ---
->  common/board_f.c             |  8 ++++++--
->  drivers/video/video-uclass.c | 10 ++++++++--
->  2 files changed, 14 insertions(+), 4 deletions(-)
+>  drivers/nvme/nvme.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-with nit below
-
->
-> diff --git a/common/board_f.c b/common/board_f.c
-> index acf802c9cb..442b8349d0 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -407,11 +407,15 @@ static int reserve_video_from_videoblob(void)
->  {
->         if (IS_ENABLED(CONFIG_SPL_VIDEO_HANDOFF) && spl_phase() > PHASE_SPL) {
-
-This is board_f.c so the SPL phase will always be PHASE_BOARD_F so can
-you please drop that second condition? It will confuse people.
-
->                 struct video_handoff *ho;
-> +               int ret = 0;
->
->                 ho = bloblist_find(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho));
->                 if (!ho)
-> -                       return log_msg_ret("blf", -ENOENT);
-> -               video_reserve_from_bloblist(ho);
-> +                       return log_msg_ret("Missing video bloblist", -ENOENT);
-> +
-> +               ret = video_reserve_from_bloblist(ho);
-> +               if (ret)
-> +                       return log_msg_ret("Invalid Video handoff info", ret);
->
->                 /* Sanity check fb from blob is before current relocaddr */
->                 if (likely(gd->relocaddr > (unsigned long)ho->fb))
-
-[..]
-
-Regards,
-Simon
