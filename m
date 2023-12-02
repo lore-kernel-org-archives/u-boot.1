@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94067C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:18:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A1DC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 18:20:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA8F487651;
-	Sat,  2 Dec 2023 19:18:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AFCE876B8;
+	Sat,  2 Dec 2023 19:20:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qhxThmyV";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Lpt36zij";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FXx6Xtdc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EnQGJN0+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20FD987616; Sat,  2 Dec 2023 19:18:32 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 65EA6876A7; Sat,  2 Dec 2023 19:20:20 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 861FF87616
- for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:18:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D2FA876C4
+ for <u-boot@lists.denx.de>; Sat,  2 Dec 2023 19:20:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4SjJ8L6wCsz9sv1;
- Sat,  2 Dec 2023 19:18:26 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SjJBT5sjDz9snv;
+ Sat,  2 Dec 2023 19:20:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701541106;
+ s=mail20150812; t=1701541217;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cq0dUm0gr+PiUuZ7kmJNxLLW90S6VMzErbpZrtz8la8=;
- b=qhxThmyVJNMrZyrW16MMRDuUBXNwZt5lLhclYMyM8vE/6Tj+C5wK+JA+BKD08XLK46UjIe
- sKbqlPDRlLL1UEugmU2NX8YfgnuYqSCZg0AzzoNu2FS7FGS1yTq/6D3mxruoxKQUzJeBOR
- k7QNlQJZydpoPlI7pggzjbDcYKox9emWC3dotTVVK1KJvEbIZ47bcVXdTpcapq/6yu4DVZ
- nZrkeXmgeF5/jK7emcECWNxBT+iYIWeq5+QzC2k36O0sYmdMsG9uibWgpb/3KxKdJuqYrS
- xhm0PYoX9K2Zk9yKYhtodcCxbWh7PjUJEWGowWWtG1t+rrGqB4dmQPkoso0riA==
-Message-ID: <faee5984-fb92-46f0-a9b7-17f57eddbee5@mailbox.org>
+ bh=JCS+4CpN0taqsUahua2PMHvRfLWT5bZ84l5eyTkp0Hw=;
+ b=FXx6Xtdc8GdzAarwjc/6AUcbVZ3dFOAfR+7T9DwRjSh0b0pdNG/SOLyMxgI9fERyyAxE+L
+ n7qEesZdcyhOvNgtarfmb20hFTRlnl91vx7/PaT5zJb2tTeHzxuYNoynP9/JjCRQ/KqS53
+ l0X8Cvw0vtiB3iSe+3nKim9pM/7JhtmfUhUHgjGoeyx7D7i5bZ1Y0v5P6EZg3XGkn65QLp
+ MFmIB7QevMOSSv+r1fzhAqYDDQEvA/PwNm/S99PqmIVWnKELXv0Oq7ZW+bVYTm5l1nu+8u
+ TLFLv1qvimu9EYKJO1R9FxtsSunEZ+m70neMx75Vh8djxKL+cztZD5MqT7P9sA==
+Message-ID: <0150d0a2-75dc-41a3-93a9-e2c294b17e1f@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701541104;
+ s=mail20150812; t=1701541216;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cq0dUm0gr+PiUuZ7kmJNxLLW90S6VMzErbpZrtz8la8=;
- b=Lpt36zijHEbT9DBH+OcswGO8vrgP7Fe/3gbeHggdOyAxGdy2NVdVlI1eVEElROlPBiCFN+
- czESByIDO9NJq2ajzsxcPFL3T0M8DZiJc2qC+UM+UPDCD0/KazguknWmG1/L6y04rO9aaS
- kBOb1x2B3mr08VCK7Y5BTuWc2O5V86IKNT/44aoPrY42n42UC0hm7+f5WppG+CHUFH3MbT
- WSyPo72dq37zSgcWIt5UpoMqzqf9kgKZShIlPcia+CUbMmAzJMiJzf/6q4q839o6XEYTcS
- om8xQySRe1nuHZJJiOfH+JxPXp16uuURa4Tb2ZA3B+TJBVpEJhe1cnJ8shaWnw==
-Date: Sat, 2 Dec 2023 19:18:22 +0100
+ bh=JCS+4CpN0taqsUahua2PMHvRfLWT5bZ84l5eyTkp0Hw=;
+ b=EnQGJN0+47N3/goxZctypJUhKnmvwsN5yp4zqM4xyXISTUIkhIYognIMB5JfDE0/AaIikr
+ 1VBG/+/tI8LqLZIYbvZNRtGO/POJ4AoYgsW6pwOWw+ktOebZuSJNao9NXd27rk3EOlS/BB
+ qaMfR/gqezTgM9Cl2i0qH4QZOARIV+ltrVEtqUbUkSFT2KPazvLquhKn8zsw3tDNUoxLCu
+ TMxNBZpckJBDc+yxsuRgErsO6JmD24SYQF3Ie5rl45ElS8G5U5dlooFy/a88bZlNN8WUch
+ 373EEGE9LwPUbuBG5XoM2IVqc8vkzN+w9Zk/uiGglmJskYaymZNEz0R2FRaB0g==
+Date: Sat, 2 Dec 2023 19:20:13 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/5] i2c: rzg2l: Add I2C driver for RZ/G2L family
+Subject: Re: [PATCH 5/5] sysreset: Support reset via Renesas RAA215300 PMIC
+Content-Language: en-US
 To: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Heiko Schocher <hs@denx.de>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
 References: <20231115174025.12974-1-paul.barker.ct@bp.renesas.com>
- <20231115174025.12974-4-paul.barker.ct@bp.renesas.com>
- <90feb671-d939-4dbf-9a49-418fc9a56b23@mailbox.org>
- <20231119204853.bmg4ghuo625c3zkm@GBR-5CG2373LKG.adwin.renesas.com>
-Content-Language: en-US
+ <20231115174025.12974-6-paul.barker.ct@bp.renesas.com>
+ <6d47aaa8-543a-4420-973d-7a28941b475e@mailbox.org>
+ <20231119205213.xyyuwvaluhmm2454@GBR-5CG2373LKG.adwin.renesas.com>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231119204853.bmg4ghuo625c3zkm@GBR-5CG2373LKG.adwin.renesas.com>
+In-Reply-To: <20231119205213.xyyuwvaluhmm2454@GBR-5CG2373LKG.adwin.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 33828660a05056ae16a
-X-MBO-RS-META: f5n6dbooeswxka4f3ahfjiyhznacf81q
+X-MBO-RS-ID: dbc470ef9f40b487c7d
+X-MBO-RS-META: m133dhutrmr7o9e6kooyesm66kt9a979
+X-Rspamd-Queue-Id: 4SjJBT5sjDz9snv
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,47 +94,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/19/23 21:48, Paul Barker wrote:
-> On Sun, Nov 19, 2023 at 09:15:36PM +0100, Marek Vasut wrote:
+On 11/19/23 21:52, Paul Barker wrote:
+> On Sun, Nov 19, 2023 at 09:17:40PM +0100, Marek Vasut wrote:
 >> On 11/15/23 18:40, Paul Barker wrote:
->>> This driver supports the I2C module on the Renesas RZ/G2L (R9A07G044)
->>> SoC, also known as the RIIC module.
+>>> This patch allows us to reset the RZ/G2L board via the RAA215300 PMIC.
 >>>
->>> This patch is based on both the u-boot driver in the Renesas RZ BSP
->>> 3.0.5 release [1] (commit 7fcc1fdc2534), and the Linux v6.6 driver
->>> (commit ffc253263a13).
+>>> Note that the RAA215300 documentation names the available reset types
+>>> differently to u-boot:
 >>>
->>> Support for deblocking the I2C bus is included as this may be needed
->>> after triggering a reset via the Power Management IC (PMIC) over I2C
->>> (the PMIC asserts the reset line before the SoC completes the I2C write
->>> transaction with obvious bus locking effects). If the SDA line is
->>> observed to be low during initialisation, we automatically attempt to
->>> deblock.
+>>>     - A "warm" reset via the RAA215300 PMIC will fully reset the SoC
+>>>       (CPU & GPIOs), so this corresponds to SYSRESET_COLD.
 >>>
->>> [1]: https://github.com/renesas-rz/renesas-u-boot-cip
+>>>     - A "cold" reset via the RAA215300 PMIC will cycle all power supply
+>>>       rails, so this corresponds to SYSRESET_POWER.
 >>>
 >>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> ---
+>>>    board/renesas/rzg2l/rzg2l.c           |  8 ----
+>>>    configs/renesas_rzg2l_smarc_defconfig |  2 +
+>>>    drivers/power/pmic/raa215300.c        | 17 ++++++++
+>>>    drivers/sysreset/Kconfig              |  6 +++
+>>>    drivers/sysreset/Makefile             |  1 +
+>>>    drivers/sysreset/sysreset_raa215300.c | 58 +++++++++++++++++++++++++++
+>>>    6 files changed, 84 insertions(+), 8 deletions(-)
+>>>    create mode 100644 drivers/sysreset/sysreset_raa215300.c
+>>>
+>>> diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
+>>> index 73201a8c69e5..0f6d6e7f514f 100644
+>>> --- a/board/renesas/rzg2l/rzg2l.c
+>>> +++ b/board/renesas/rzg2l/rzg2l.c
+>>> @@ -56,11 +56,3 @@ int board_init(void)
+>>>    {
+>>>    	return 0;
+>>>    }
+>>> -
+>>> -void reset_cpu(void)
+>>> -{
+>>> -	/*
+>>> -	 * TODO: Implement reset support once TrustedFirmware supports
+>>> -	 * the appropriate call.
+>>> -	 */
+>>> -}
 >>
->> The driver seems very similar to drivers/i2c/rcar_iic.c , can there be some
->> code reuse ?
+>> Board change -- separate patch please.
 > 
-> My initial idea was to extend the R-Car iic driver but I quickly saw
-> that would be very messy. All the registers and bits are in different
-> places, the calculations are different (particularly in regard to
-> setting bus speed) and the read/write process has more edge cases for
-> the RZ/G2L. The bus recovery mechanism we use also doesn't exist on
-> previous R-Car SoCs.
+> Ok, this makes sense. I'll move this and the defconfig change into a
+> separate patch.
 > 
-> The Linux drivers for these modules are also separate, see
-> drivers/i2c/busses/i2c-sh_mobile.c (for R-Car and earlier SoCs) and
-> drivers/i2c/busses/i2c-riic.c (for RZ/G2L) in the Linux kernel.
+>>
+>>> diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
+>>> index b62eae4ee0a4..ba96e746df9e 100644
+>>> --- a/configs/renesas_rzg2l_smarc_defconfig
+>>> +++ b/configs/renesas_rzg2l_smarc_defconfig
+>>> @@ -55,3 +55,5 @@ CONFIG_PMIC_RAA215300=y
+>>>    CONFIG_DM_REGULATOR=y
+>>>    CONFIG_DM_REGULATOR_FIXED=y
+>>>    CONFIG_DM_REGULATOR_GPIO=y
+>>> +CONFIG_SYSRESET=y
+>>> +CONFIG_SYSRESET_RAA215300=y
+>>> diff --git a/drivers/power/pmic/raa215300.c b/drivers/power/pmic/raa215300.c
+>>> index 9c0b720994b2..7f68f95f25cf 100644
+>>> --- a/drivers/power/pmic/raa215300.c
+>>> +++ b/drivers/power/pmic/raa215300.c
+>>> @@ -27,9 +27,26 @@ static const struct udevice_id raa215300_ids[] = {
+>>>    	{ /* sentinel */ }
+>>>    };
+>>> +static int raa215300_bind(struct udevice *dev)
+>>> +{
+>>> +	struct driver *drv;
+>>> +
+>>> +	if (IS_ENABLED(CONFIG_SYSRESET_RAA215300)) {
+>>> +		drv = lists_driver_lookup_name("raa215300_sysreset");
+>>> +		if (!drv)
+>>> +			return -ENOENT;
+>>> +
+>>> +		return device_bind(dev, drv, dev->name, NULL, dev_ofnode(dev),
+>>> +				   NULL);
+>>> +	}
+>>> +
+>>> +	return 0;
+>>> +}
+>>
+>> Driver change should be squashed in 4/5.
+> 
+> Moving this to the previous patch doesn't make sense to me - the
+> sysreset driver needs to exist for this check to be meaningful.
+> Conversely, adding the sysreset driver first then the pmic driver
+> wouldn't make sense since the sysreset driver depends on the pmic
+> driver. This seemed the neatest way to do things to me.
 
-Ah, I thought some of the registers were the same, but indeed the RZG 
-core is much more extensive.
-
-You should either use devm_clk_*() in probe() or implement .remove 
-callback. With that fixed:
-
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-And sorry for the delayed reply.
+Can't you split this into 4 or so patches , add the bind() callbacks in 
+first two, then the if (IS_ENABLED(...)) in next two ?
