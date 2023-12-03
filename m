@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01930C4167B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 13:17:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A978CC4167B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 13:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 152FF8759C;
+	by phobos.denx.de (Postfix) with ESMTP id 89DEB87622;
 	Sun,  3 Dec 2023 14:17:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="G9KwITY0";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cFPMey0t";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HPL6HieV";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iIkOBkGO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E47387618; Sun,  3 Dec 2023 14:17:13 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id CD24A875FC; Sun,  3 Dec 2023 14:17:13 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49AE4875DF
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 14:17:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E033875C9
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 14:17:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,7 +30,7 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SjnQF6kNzz9sTR;
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4SjnQF1Sq9z9shP;
  Sun,  3 Dec 2023 14:17:09 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1701609429;
@@ -38,38 +38,38 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pYRII/ZOQ4/CL2rBv62gNUAfhcFN9EhvueLl7VKjtEs=;
- b=G9KwITY0NEcArp2imV6IzC8q6l958L1UsMtAU/bFcDSmY0mNlDrscPaOdlwue/D92kV/26
- x2k5Uu7uYOdrW641wk9uEYSt9bJ8JbzC+zpNSocc5zDdNYD1bLksGjqCM7NDv53fV5m98t
- Bi/V0frs6rD6iZZVoPtmOM0Tnp12/sxXDiyuXSja8KmQ4CmUyvSTzP1orpMb8iATltExxK
- jjKMllO6D7BZ3y0NVypqUV/pJ22jnqDqX/7AqFFcqslZb/3nDzonJ/iSqC0IayG03OIxhl
- KWY6mKF1c7Cth6DoDBUsJ5Bq8MsCp/A/aCS92nl3Cd78zaXVtrhffxOA/BbHBw==
+ bh=rqJWNH7pDE6LBe+anE6Fb1tL1Bv/pH8uLi7iaPLixSQ=;
+ b=HPL6HieV1vO/8pb/mn4WY2N//7fS1rmJAop/WSNFRjIQRDdjPqMTTS3+iFvBFf15voxcUE
+ UwhPSyfJfmdQuy2Cqji2MeREWdbpR42kdtiwFpBd+DgvJkKAjBafeuFBEoG2vZANBj5hwW
+ l6pFTfadAts+Zd51KvgL6IFA2ZsG8gytfJ4iA+qYpRXZNcJma4S+sfzuUoZpfAKbYVYxAA
+ 33DTL6EbrR/kRxknPmiCVB7Tl2DX04ZBjXIr9/kYbmkSF+HIJY5OXYvcFER3ipx5kZWAm5
+ XSskYp/dZTtnuF45dmOL1c4ZqkjfqhrgnENOPMMK40QD4UmnAwRaeY/bnf4ojw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701609428;
+ s=mail20150812; t=1701609427;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pYRII/ZOQ4/CL2rBv62gNUAfhcFN9EhvueLl7VKjtEs=;
- b=cFPMey0tI0wIoaBAlqi7JL54olnyMemcXobUzSCjjZdQLNVi01OO2DfQy5TY/OLGL7nWTH
- jaEJg+n9rPB4+4AK4qUAkMcPJTzplb2uh57AvR62nLSJxxmpJkcvz7OhZQsvWq/4JK8HSn
- sm2MI1APeceJ17wEm8P7uGLZEWtUlvi9PGlHc71DGBtsgfJ54kmsRV18XozopAaW+gViyX
- GPjxd8vygbjvdgPgp25gqOM2rfWcKBxROsNOKXEZU/Nsj7iBFRqWcMheM7KNh3mSkMhGZJ
- lHCqVro4E31e+jVAqQ+Dxg+hlbFqmfD33O88AmBNv7LCwPoNbBONYVXYicVjhQ==
+ bh=rqJWNH7pDE6LBe+anE6Fb1tL1Bv/pH8uLi7iaPLixSQ=;
+ b=iIkOBkGO6bRqlFl0BdEc/EMpqXV98ZyzrZAoPEdBT8YV89Kfdr+aQWAY467Bcc2vAUnjKH
+ poAWWQdrrgXmYqcNHkhkFJhwF9PYBrMXM6X6tgu95tEPrmoAjDFMVvM2FBteLk0Sx+biaV
+ MCOKMdwNOQu75ht0aN/K7DKCCI9BKSu7RZqYo3zPpOJc8+ksjEP+LRuc8lu0wO9UUhWXbN
+ pWK2GB3IGPEVeaJBmaMFkyfpz5FaLkES/SR0XhI7pJjZR0H5pu58fWNamVWSJdtRa1GNLX
+ LAkrYDucKFMIBi8+fq996n9sqDQEVg/ZgaXJIfxkPBzU4oqxpm6CSesJnlUklQ==
 To: u-boot@lists.denx.de
 Cc: aford173@gmail.com, paul.barker.ct@bp.renesas.com,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 03/12] clk: renesas: Synchronize R-Car R8A77990 E3 clock
+Subject: [PATCH 02/12] clk: renesas: Synchronize R-Car R8A77965 M3-N clock
  tables with Linux 6.6.3
-Date: Sun,  3 Dec 2023 14:15:15 +0100
-Message-ID: <20231203131635.119191-3-marek.vasut+renesas@mailbox.org>
+Date: Sun,  3 Dec 2023 14:15:14 +0100
+Message-ID: <20231203131635.119191-2-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20231203131635.119191-1-marek.vasut+renesas@mailbox.org>
 References: <20231203131635.119191-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: cfffb356a61cbc2fa9b
-X-MBO-RS-META: cirsxmx9864xp8bik1wfkbzm453wkc5k
+X-MBO-RS-ID: 4cb2e851e48ee31dadf
+X-MBO-RS-META: gotokm8dgq1ma178iuc7xw7q3g6uyw85
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,26 +86,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synchronize R-Car R8A77990 E3 clock tables with Linux 6.6.3,
+Synchronize R-Car R8A77965 M3-N clock tables with Linux 6.6.3,
 commit bd3a9e5771a8b332f466d06f7c130a69cab0d526 .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/clk/renesas/r8a77990-cpg-mssr.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/clk/renesas/r8a77965-cpg-mssr.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/clk/renesas/r8a77990-cpg-mssr.c b/drivers/clk/renesas/r8a77990-cpg-mssr.c
-index e5710b05933..87b06666c8b 100644
---- a/drivers/clk/renesas/r8a77990-cpg-mssr.c
-+++ b/drivers/clk/renesas/r8a77990-cpg-mssr.c
-@@ -224,6 +224,7 @@ static const struct mssr_mod_clk r8a77990_mod_clks[] __initconst = {
- 	DEF_MOD("rpc-if",		 917,	R8A77990_CLK_RPCD2),
- 	DEF_MOD("i2c6",			 918,	R8A77990_CLK_S3D2),
- 	DEF_MOD("i2c5",			 919,	R8A77990_CLK_S3D2),
-+	DEF_MOD("adg",			 922,	R8A77990_CLK_ZA2),
- 	DEF_MOD("i2c-dvfs",		 926,	R8A77990_CLK_CP),
- 	DEF_MOD("i2c4",			 927,	R8A77990_CLK_S3D2),
- 	DEF_MOD("i2c3",			 928,	R8A77990_CLK_S3D2),
+diff --git a/drivers/clk/renesas/r8a77965-cpg-mssr.c b/drivers/clk/renesas/r8a77965-cpg-mssr.c
+index 8a5c1525ece..cf4503803d0 100644
+--- a/drivers/clk/renesas/r8a77965-cpg-mssr.c
++++ b/drivers/clk/renesas/r8a77965-cpg-mssr.c
+@@ -76,6 +76,7 @@ static const struct cpg_core_clk r8a77965_core_clks[] __initconst = {
+ 
+ 	/* Core Clock Outputs */
+ 	DEF_GEN3_Z("z",		R8A77965_CLK_Z,		CLK_TYPE_GEN3_Z,  CLK_PLL0, 2, 8),
++	DEF_GEN3_Z("zg",	R8A77965_CLK_ZG,	CLK_TYPE_GEN3_ZG, CLK_PLL4, 4, 24),
+ 	DEF_FIXED("ztr",	R8A77965_CLK_ZTR,	CLK_PLL1_DIV2,	6, 1),
+ 	DEF_FIXED("ztrd2",	R8A77965_CLK_ZTRD2,	CLK_PLL1_DIV2,	12, 1),
+ 	DEF_FIXED("zt",		R8A77965_CLK_ZT,	CLK_PLL1_DIV2,	4, 1),
+@@ -125,6 +126,7 @@ static const struct cpg_core_clk r8a77965_core_clks[] __initconst = {
+ };
+ 
+ static const struct mssr_mod_clk r8a77965_mod_clks[] __initconst = {
++	DEF_MOD("3dge",			112,	R8A77965_CLK_ZG),
+ 	DEF_MOD("fdp1-0",		119,	R8A77965_CLK_S0D1),
+ 	DEF_MOD("tmu4",			121,	R8A77965_CLK_S0D6),
+ 	DEF_MOD("tmu3",			122,	R8A77965_CLK_S3D2),
+@@ -236,6 +238,7 @@ static const struct mssr_mod_clk r8a77965_mod_clks[] __initconst = {
+ 	DEF_MOD("rpc-if",		917,	R8A77965_CLK_RPCD2),
+ 	DEF_MOD("i2c6",			918,	R8A77965_CLK_S0D6),
+ 	DEF_MOD("i2c5",			919,	R8A77965_CLK_S0D6),
++	DEF_MOD("adg",			922,	R8A77965_CLK_S0D4),
+ 	DEF_MOD("i2c-dvfs",		926,	R8A77965_CLK_CP),
+ 	DEF_MOD("i2c4",			927,	R8A77965_CLK_S0D6),
+ 	DEF_MOD("i2c3",			928,	R8A77965_CLK_S0D6),
 -- 
 2.42.0
 
