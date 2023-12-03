@@ -4,60 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9614EC4167B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 15:34:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ACD5C4167B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 16:45:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2F9886ED0;
-	Sun,  3 Dec 2023 16:33:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
+	by phobos.denx.de (Postfix) with ESMTP id 657188759C;
+	Sun,  3 Dec 2023 17:45:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="wjoxpOpT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TfAGE76L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D02B987243; Sun,  3 Dec 2023 16:33:58 +0100 (CET)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ED28D8758F; Sun,  3 Dec 2023 17:45:37 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04578869B6
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 16:33:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ideasonboard.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=laurent.pinchart@ideasonboard.com
-Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi
- [213.243.189.158])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 423A975A;
- Sun,  3 Dec 2023 16:33:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1701617596;
- bh=sXD1x7l8ZsFQcyiLnJeNgq7HsyWjiKF+MG8pIWTT40E=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=wjoxpOpTHQFgviHPe90pLs1dZV/m8teb8YvV7q38daBejKqcXqG/l1LKtnj/qyxZa
- FM+qFo3lr2AJw/jWhBciUymed52R/SyWJosBYqRRc7aWOnNSUUk6UgkCwG9YxSCOSo
- NFmfMB6e+wVcBma0qS2K4WvhY1zzF+cysRRw02YI=
-Date: Sun, 3 Dec 2023 17:34:01 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org,
- Masahiro Yamada <masahiroy@kernel.org>,
- Ahmad Fatoum <a.fatoum@pengutronix.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
- Nick Terrell <terrelln@fb.com>, Will Deacon <will@kernel.org>,
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
- linux-kernel@vger.kernel.org, workflows@vger.kernel.org
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-Message-ID: <20231203153401.GV8402@pendragon.ideasonboard.com>
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 458E28758F
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 17:45:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-54c7744a93fso1734354a12.2
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 08:45:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701621935; x=1702226735; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V0jXt3ZXStMvlTAsxZ74Njvbe84BVd4wjl1I/OaZG5U=;
+ b=TfAGE76Lcxt0gzr/h7gDpDlC8fQFsH/ypvt2T0fjYz+rVtBVJAXEq5q3X1cAourls2
+ vPRVGOCFvLa62kS89PA0bY7kTYXUfOksUIy3yywS19M9uMQk1majFWgyoFXScAHMZXsR
+ V9sbJw2Y4XRt+4y0aQb1X0XKPvy69HPaO7ZDjEg0ji6OIM77P8sEmF5jjDzLCAreITG2
+ BhRkrurWechiM+V8zcz64DCPYFACs6fzXGPG+pZKk0jI5hnIM+nZuaXz5xEQeRwkKdcr
+ LhxGgMX3WhmZdq4oYV6k/A3prvT1REr+aBi74yMSezN+zSkRLtmuDouw2lFlGlln/Bu3
+ TRZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701621935; x=1702226735;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=V0jXt3ZXStMvlTAsxZ74Njvbe84BVd4wjl1I/OaZG5U=;
+ b=wnL5jbg5l+bOsl6ssE0ldx98ctI2FPeafPzgfkyYV8oOKpjy7A7u5oeBieBj3caUuQ
+ i5ViFp4Dro98N/cVqq1QcAWmnHCDhuLrXr/ZAmn6BZhIhCsbSKFJDtBw3EPMLbDnrc8D
+ Rf5h+TNMIJlElxd1vHETCQ0lgawLQA+TWGq1xl4f/+TA5JzSqJgYiO9qtRn4Lb4oDE7+
+ f5GIsSh+Q2DvhgyGChDk9fiFIVxh/01yWyVHX7n7T/ZP6hNiQ2bk5vyuiAimgrU+L3JR
+ EWFNsTZN6JXj1FlqYcklTfoH/v13Jp3olyTsJSTYPx4IIr88G9s2JRHTKdcWKcgHq3wC
+ oCJg==
+X-Gm-Message-State: AOJu0YyyLbVE4UFOqYOxCwUlLWLcD+mg5KTzgeJDAQR75cPxnjLSILWd
+ lNXvAbJGYavi92m+05WkhIl7CDpwp5XEsVbMt8l3U+pzwF0=
+X-Google-Smtp-Source: AGHT+IG2NCZauBEtuCWaZMrSK0YwrqPqgVZIFjTb4zJqnu2D2Zc7gZ/cTAnJw+EBxiklWDHKqI2VSuFe/TGVj2LkGfE=
+X-Received: by 2002:a50:9f4e:0:b0:54b:fea4:c57d with SMTP id
+ b72-20020a509f4e000000b0054bfea4c57dmr2471944edf.33.1701621933873; Sun, 03
+ Dec 2023 08:45:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20231202035511.487946-3-sjg@chromium.org>
+References: <20231202193314.1513224-1-seanga2@gmail.com>
+In-Reply-To: <20231202193314.1513224-1-seanga2@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sun, 3 Dec 2023 16:45:22 +0000
+Message-ID: <CALeDE9OPB69EyJU_DMpfxA2S8GkumtWYYrTiguiGu--U2kgnVA@mail.gmail.com>
+Subject: Re: [PATCH] doc: Replace examples of MD5 and SHA1 with SHA256
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,554 +87,966 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-Thank you for the patch.
-
-On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> Add a script which produces a Flat Image Tree (FIT), a single file
-> containing the built kernel and associated devicetree files.
-> Compression defaults to gzip which gives a good balance of size and
-> performance.
-> 
-> The files compress from about 86MB to 24MB using this approach.
-> 
-> The FIT can be used by bootloaders which support it, such as U-Boot
-> and Linuxboot. It permits automatic selection of the correct
-> devicetree, matching the compatible string of the running board with
-> the closest compatible string in the FIT. There is no need for
-> filenames or other workarounds.
-> 
-> Add a 'make image.fit' build target for arm64, as well. Use
-> FIT_COMPRESSION to select a different algorithm.
-> 
-> The FIT can be examined using 'dumpimage -l'.
-> 
-> This features requires pylibfdt (use 'pip install libfdt'). It also
-> requires compression utilities for the algorithm being used. Supported
-> compression options are the same as the Image.xxx files. For now there
-> is no way to change the compression other than by editing the rule for
-> $(obj)/image.fit
-> 
-> While FIT supports a ramdisk / initrd, no attempt is made to support
-> this here, since it must be built separately from the Linux build.
-
-FIT images are very useful, so I think this is a very welcome addition
-to the kernel build system. It can get tricky though: given the
-versatile nature of FIT images, there can't be any
-one-size-fits-them-all solution to build them, and striking the right
-balance between what makes sense for the kernel and the features that
-users may request will probably lead to bikeshedding. As we all love
-bikeshedding, I thought I would start selfishly, with a personal use
-case :-) This isn't a yak-shaving request though, I don't see any reason
-to delay merging this series.
-
-Have you envisioned building FIT images with a subset of DTBs, or adding
-DTBOs ? Both would be fairly trivial extensions to this script by
-extending the supported command line arguments. It would perhaps be more
-difficult to integrate in the kernel build system though. This leads me
-to a second question: would you consider merging extensions to this
-script if they are not used by the kernel build system, but meant for
-users who manually invoke the script ? More generally, is the script
-meant to be used stand-alone as well, in which case its command line
-arguments need to remain backward-compatible, or do you see it as being
-internal to the kernel ?
-
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+On Sat, Dec 2, 2023 at 7:33=E2=80=AFPM Sean Anderson <seanga2@gmail.com> wr=
+ote:
+>
+> Both SHA1 and (especially) MD5 are no longer as safe as they once were fo=
+r
+> cryptographic use. Replaces examples which use them with examples using
+> SHA256 instead. This will provide more-secure defaults for users who use
+> documentation examples as a base for their own use. This is not too
+> necessary for non-verified-boot scenarios (since someone could just repla=
+ce
+> the checksum), but I wanted to be complete.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
-> 
-> Changes in v9:
-> - Move the compression control into Makefile.lib
-> 
-> Changes in v8:
-> - Drop compatible string in FDT node
-> - Correct sorting of MAINTAINERS to before ARM64 PORT
-> - Turn compress part of the make_fit.py comment in to a sentence
-> - Add two blank lines before parse_args() and setup_fit()
-> - Use 'image.fit: dtbs' instead of BUILD_DTBS var
-> - Use '$(<D)/dts' instead of '$(dir $<)dts'
-> - Add 'mkimage' details Documentation/process/changes.rst
-> - Allow changing the compression used
-> - Tweak cover letter since there is only one clean-up patch
-> 
-> Changes in v7:
-> - Add Image as a dependency of image.fit
-> - Drop kbuild tag
-> - Add dependency on dtbs
-> - Drop unnecessary path separator for dtbs
-> - Rebase to -next
-> 
-> Changes in v5:
-> - Drop patch previously applied
-> - Correct compression rule which was broken in v4
-> 
-> Changes in v4:
-> - Use single quotes for UIMAGE_NAME
-> 
-> Changes in v3:
-> - Drop temporary file image.itk
-> - Drop patch 'Use double quotes for image name'
-> - Drop double quotes in use of UIMAGE_NAME
-> - Drop unnecessary CONFIG_EFI_ZBOOT condition for help
-> - Avoid hard-coding "arm64" for the DT architecture
-> 
-> Changes in v2:
-> - Drop patch previously applied
-> - Add .gitignore file
-> - Move fit rule to Makefile.lib using an intermediate file
-> - Drop dependency on CONFIG_EFI_ZBOOT
-> - Pick up .dtb files separately from the kernel
-> - Correct pylint too-many-args warning for write_kernel()
-> - Include the kernel image in the file count
-> - Add a pointer to the FIT spec and mention of its wide industry usage
-> - Mention the kernel version in the FIT description
-> 
->  Documentation/process/changes.rst |   9 +
->  MAINTAINERS                       |   7 +
->  arch/arm64/Makefile               |   7 +-
->  arch/arm64/boot/.gitignore        |   1 +
->  arch/arm64/boot/Makefile          |   6 +-
->  scripts/Makefile.lib              |  16 ++
->  scripts/make_fit.py               | 291 ++++++++++++++++++++++++++++++
->  7 files changed, 334 insertions(+), 3 deletions(-)
->  create mode 100755 scripts/make_fit.py
-> 
-> diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-> index bb96ca0f774b..cad51bd5bd62 100644
-> --- a/Documentation/process/changes.rst
-> +++ b/Documentation/process/changes.rst
-> @@ -62,6 +62,7 @@ Sphinx\ [#f1]_         1.7              sphinx-build --version
->  cpio                   any              cpio --version
->  GNU tar                1.28             tar --version
->  gtags (optional)       6.6.5            gtags --version
-> +mkimage (optional)     2017.01          mkimage --version
->  ====================== ===============  ========================================
->  
->  .. [#f1] Sphinx is needed only to build the Kernel documentation
-> @@ -189,6 +190,14 @@ The kernel build requires GNU GLOBAL version 6.6.5 or later to generate
->  tag files through ``make gtags``.  This is due to its use of the gtags
->  ``-C (--directory)`` flag.
->  
-> +mkimage
-> +-------
-> +
-> +This tool is used when building a Flat Image Tree (FIT), commonly used on ARM
-> +platforms. The tool is available via the ``u-boot-tools`` package or can be
-> +built from the U-Boot source code. See the instructions at
-> +https://docs.u-boot.org/en/latest/build/tools.html#building-tools-for-linux
-> +
->  System utilities
->  ****************
->  
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 9d46229fe21b..d2d17f0d6e64 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -3037,6 +3037,13 @@ F:	drivers/mmc/host/sdhci-of-arasan.c
->  N:	zynq
->  N:	xilinx
->  
-> +ARM64 FIT SUPPORT
-> +M:	Simon Glass <sjg@chromium.org>
-> +L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
-> +S:	Maintained
-> +F:	arch/arm64/boot/Makefile
-> +F:	scripts/make_fit.py
-> +
->  ARM64 PORT (AARCH64 ARCHITECTURE)
->  M:	Catalin Marinas <catalin.marinas@arm.com>
->  M:	Will Deacon <will@kernel.org>
-> diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
-> index 1bd4fae6e806..6b893dc454b7 100644
-> --- a/arch/arm64/Makefile
-> +++ b/arch/arm64/Makefile
-> @@ -150,7 +150,7 @@ libs-$(CONFIG_EFI_STUB) += $(objtree)/drivers/firmware/efi/libstub/lib.a
->  # Default target when executing plain make
->  boot		:= arch/arm64/boot
->  
-> -BOOT_TARGETS	:= Image vmlinuz.efi
-> +BOOT_TARGETS	:= Image vmlinuz.efi image.fit
->  
->  PHONY += $(BOOT_TARGETS)
->  
-> @@ -162,7 +162,9 @@ endif
->  
->  all:	$(notdir $(KBUILD_IMAGE))
->  
-> -vmlinuz.efi: Image
-> +image.fit: dtbs
-> +
-> +vmlinuz.efi image.fit: Image
->  $(BOOT_TARGETS): vmlinux
->  	$(Q)$(MAKE) $(build)=$(boot) $(boot)/$@
->  
-> @@ -215,6 +217,7 @@ virtconfig:
->  define archhelp
->    echo  '* Image.gz      - Compressed kernel image (arch/$(ARCH)/boot/Image.gz)'
->    echo  '  Image         - Uncompressed kernel image (arch/$(ARCH)/boot/Image)'
-> +  echo  '  image.fit     - Flat Image Tree (arch/$(ARCH)/boot/image.fit)'
->    echo  '  install       - Install uncompressed kernel'
->    echo  '  zinstall      - Install compressed kernel'
->    echo  '                  Install using (your) ~/bin/installkernel or'
-> diff --git a/arch/arm64/boot/.gitignore b/arch/arm64/boot/.gitignore
-> index af5dc61f8b43..abaae9de1bdd 100644
-> --- a/arch/arm64/boot/.gitignore
-> +++ b/arch/arm64/boot/.gitignore
-> @@ -2,3 +2,4 @@
->  Image
->  Image.gz
->  vmlinuz*
-> +image.fit
-> diff --git a/arch/arm64/boot/Makefile b/arch/arm64/boot/Makefile
-> index 1761f5972443..b835c0880d1c 100644
-> --- a/arch/arm64/boot/Makefile
-> +++ b/arch/arm64/boot/Makefile
-> @@ -16,7 +16,8 @@
->  
->  OBJCOPYFLAGS_Image :=-O binary -R .note -R .note.gnu.build-id -R .comment -S
->  
-> -targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo Image.zst
-> +targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo \
-> +	Image.zst image.fit
->  
->  $(obj)/Image: vmlinux FORCE
->  	$(call if_changed,objcopy)
-> @@ -39,6 +40,9 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
->  $(obj)/Image.zst: $(obj)/Image FORCE
->  	$(call if_changed,zstd)
->  
-> +$(obj)/image.fit: $(obj)/Image FORCE
-> +	$(call cmd,fit)
-> +
->  EFI_ZBOOT_PAYLOAD	:= Image
->  EFI_ZBOOT_BFD_TARGET	:= elf64-littleaarch64
->  EFI_ZBOOT_MACH_TYPE	:= ARM64
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 1a965fe68e01..1c60d594932c 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -496,6 +496,22 @@ quiet_cmd_uimage = UIMAGE  $@
->  			-a $(UIMAGE_LOADADDR) -e $(UIMAGE_ENTRYADDR) \
->  			-n '$(UIMAGE_NAME)' -d $< $@
->  
-> +# Flat Image Tree (FIT)
-> +# This allows for packaging of a kernel and all devicetrees files, using
-> +# compression.
-> +# ---------------------------------------------------------------------------
-> +
-> +MAKE_FIT := $(srctree)/scripts/make_fit.py
-> +
-> +# Use this to override the compression algorithm
-> +FIT_COMPRESSION ?= gzip
-> +
-> +quiet_cmd_fit = FIT     $@
-> +      cmd_fit = $(MAKE_FIT) -f $@ --arch $(UIMAGE_ARCH) --os linux \
-> +			--name '$(UIMAGE_NAME)' \
-> +			--compress $(FIT_COMPRESSION) -k $< \
-> +			$(<D)/dts
-> +
->  # XZ
->  # ---------------------------------------------------------------------------
->  # Use xzkern to compress the kernel image and xzmisc to compress other things.
-> diff --git a/scripts/make_fit.py b/scripts/make_fit.py
-> new file mode 100755
-> index 000000000000..e616b0d7a84a
-> --- /dev/null
-> +++ b/scripts/make_fit.py
-> @@ -0,0 +1,291 @@
-> +#!/usr/bin/env python3
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright 2023 Google LLC
-> +# Written by Simon Glass <sjg@chromium.org>
-> +#
-> +
-> +"""Build a FIT containing a lot of devicetree files
-> +
-> +Usage:
-> +    make_fit.py -A arm64 -n 'Linux-6.6' -O linux
-> +        -f arch/arm64/boot/image.fit -k /tmp/kern/arch/arm64/boot/image.itk
-> +        /tmp/kern/arch/arm64/boot/dts/ -E -c gzip
-> +
-> +Creates a FIT containing the supplied kernel and a directory containing the
-> +devicetree files.
-> +
-> +Use -E to generate an external FIT (where the data is placed after the
-> +FIT data structure). This allows parsing of the data without loading
-> +the entire FIT.
-> +
-> +Use -c to compress the data, using bzip2, gzip, lz4, lzma, lzo and
-> +zstd algorithms.
-> +
-> +The resulting FIT can be booted by bootloaders which support FIT, such
-> +as U-Boot, Linuxboot, Tianocore, etc.
-> +
-> +Note that this tool does not yet support adding a ramdisk / initrd.
-> +"""
-> +
-> +import argparse
-> +import collections
-> +import os
-> +import subprocess
-> +import sys
-> +import tempfile
-> +import time
-> +
-> +import libfdt
-> +
-> +
-> +# Tool extension and the name of the command-line tools
-> +CompTool = collections.namedtuple('CompTool', 'ext,tools')
-> +
-> +COMP_TOOLS = {
-> +    'bzip2': CompTool('.bz2', 'bzip2'),
-> +    'gzip': CompTool('.gz', 'pigz,gzip'),
-> +    'lz4': CompTool('.lz4', 'lz4'),
-> +    'lzma': CompTool('.lzma', 'lzma'),
-> +    'lzo': CompTool('.lzo', 'lzop'),
-> +    'zstd': CompTool('.zstd', 'zstd'),
-> +}
-> +
-> +
-> +def parse_args():
-> +    """Parse the program ArgumentParser
-> +
-> +    Returns:
-> +        Namespace object containing the arguments
-> +    """
-> +    epilog = 'Build a FIT from a directory tree containing .dtb files'
-> +    parser = argparse.ArgumentParser(epilog=epilog)
-> +    parser.add_argument('-A', '--arch', type=str, required=True,
-> +          help='Specifies the architecture')
-> +    parser.add_argument('-c', '--compress', type=str, default='none',
-> +          help='Specifies the compression')
-> +    parser.add_argument('-E', '--external', action='store_true',
-> +          help='Convert the FIT to use external data')
-> +    parser.add_argument('-n', '--name', type=str, required=True,
-> +          help='Specifies the name')
-> +    parser.add_argument('-O', '--os', type=str, required=True,
-> +          help='Specifies the operating system')
-> +    parser.add_argument('-f', '--fit', type=str, required=True,
-> +          help='Specifies the output file (.fit)')
-> +    parser.add_argument('-k', '--kernel', type=str, required=True,
-> +          help='Specifies the (uncompressed) kernel input file (.itk)')
-> +    parser.add_argument('srcdir', type=str, nargs='*',
-> +          help='Specifies the directory tree that contains .dtb files')
-> +
-> +    return parser.parse_args()
-> +
-> +
-> +def setup_fit(fsw, name):
-> +    """Make a start on writing the FIT
-> +
-> +    Outputs the root properties and the 'images' node
-> +
-> +    Args:
-> +        fsw (libfdt.FdtSw): Object to use for writing
-> +        name (str): Name of kernel image
-> +    """
-> +    fsw.INC_SIZE = 65536
-> +    fsw.finish_reservemap()
-> +    fsw.begin_node('')
-> +    fsw.property_string('description', f'{name} with devicetree set')
-> +    fsw.property_u32('#address-cells', 1)
-> +
-> +    fsw.property_u32('timestamp', int(time.time()))
-> +    fsw.begin_node('images')
-> +
-> +
-> +def write_kernel(fsw, data, args):
-> +    """Write out the kernel image
-> +
-> +    Writes a kernel node along with the required properties
-> +
-> +    Args:
-> +        fsw (libfdt.FdtSw): Object to use for writing
-> +        data (bytes): Data to write (possibly compressed)
-> +        args (Namespace): Contains necessary strings:
-> +            arch: FIT architecture, e.g. 'arm64'
-> +            fit_os: Operating Systems, e.g. 'linux'
-> +            name: Name of OS, e.g. 'Linux-6.6.0-rc7'
-> +            compress: Compression algorithm to use, e.g. 'gzip'
-> +    """
-> +    with fsw.add_node('kernel'):
-> +        fsw.property_string('description', args.name)
-> +        fsw.property_string('type', 'kernel_noload')
-> +        fsw.property_string('arch', args.arch)
-> +        fsw.property_string('os', args.os)
-> +        fsw.property_string('compression', args.compress)
-> +        fsw.property('data', data)
-> +        fsw.property_u32('load', 0)
-> +        fsw.property_u32('entry', 0)
-> +
-> +
-> +def finish_fit(fsw, entries):
-> +    """Finish the FIT ready for use
-> +
-> +    Writes the /configurations node and subnodes
-> +
-> +    Args:
-> +        fsw (libfdt.FdtSw): Object to use for writing
-> +        entries (list of tuple): List of configurations:
-> +            str: Description of model
-> +            str: Compatible stringlist
-> +    """
-> +    fsw.end_node()
-> +    seq = 0
-> +    with fsw.add_node('configurations'):
-> +        for model, compat in entries:
-> +            seq += 1
-> +            with fsw.add_node(f'conf-{seq}'):
-> +                fsw.property('compatible', bytes(compat))
-> +                fsw.property_string('description', model)
-> +                fsw.property_string('fdt', f'fdt-{seq}')
-> +                fsw.property_string('kernel', 'kernel')
-> +    fsw.end_node()
-> +
-> +
-> +def compress_data(inf, compress):
-> +    """Compress data using a selected algorithm
-> +
-> +    Args:
-> +        inf (IOBase): Filename containing the data to compress
-> +        compress (str): Compression algorithm, e.g. 'gzip'
-> +
-> +    Return:
-> +        bytes: Compressed data
-> +    """
-> +    if compress == 'none':
-> +        return inf.read()
-> +
-> +    comp = COMP_TOOLS.get(compress)
-> +    if not comp:
-> +        raise ValueError(f"Unknown compression algorithm '{compress}'")
-> +
-> +    with tempfile.NamedTemporaryFile() as comp_fname:
-> +        with open(comp_fname.name, 'wb') as outf:
-> +            done = False
-> +            for tool in comp.tools.split(','):
-> +                try:
-> +                    subprocess.call([tool, '-c'], stdin=inf, stdout=outf)
-> +                    done = True
-> +                    break
-> +                except FileNotFoundError:
-> +                    pass
-> +            if not done:
-> +                raise ValueError(f'Missing tool(s): {comp.tools}\n')
-> +            with open(comp_fname.name, 'rb') as compf:
-> +                comp_data = compf.read()
-> +    return comp_data
-> +
-> +
-> +def output_dtb(fsw, seq, fname, arch, compress):
-> +    """Write out a single devicetree to the FIT
-> +
-> +    Args:
-> +        fsw (libfdt.FdtSw): Object to use for writing
-> +        seq (int): Sequence number (1 for first)
-> +        fmame (str): Filename containing the DTB
-> +        arch: FIT architecture, e.g. 'arm64'
-> +        compress (str): Compressed algorithm, e.g. 'gzip'
-> +
-> +    Returns:
-> +        tuple:
-> +            str: Model name
-> +            bytes: Compatible stringlist
-> +    """
-> +    with fsw.add_node(f'fdt-{seq}'):
-> +        # Get the compatible / model information
-> +        with open(fname, 'rb') as inf:
-> +            data = inf.read()
-> +        fdt = libfdt.FdtRo(data)
-> +        model = fdt.getprop(0, 'model').as_str()
-> +        compat = fdt.getprop(0, 'compatible')
-> +
-> +        fsw.property_string('description', model)
-> +        fsw.property_string('type', 'flat_dt')
-> +        fsw.property_string('arch', arch)
-> +        fsw.property_string('compression', compress)
-> +        fsw.property('compatible', bytes(compat))
-> +
-> +        with open(fname, 'rb') as inf:
-> +            compressed = compress_data(inf, compress)
-> +        fsw.property('data', compressed)
-> +    return model, compat
-> +
-> +
-> +def build_fit(args):
-> +    """Build the FIT from the provided files and arguments
-> +
-> +    Args:
-> +        args (Namespace): Program arguments
-> +
-> +    Returns:
-> +        tuple:
-> +            bytes: FIT data
-> +            int: Number of configurations generated
-> +            size: Total uncompressed size of data
-> +    """
-> +    fsw = libfdt.FdtSw()
-> +    setup_fit(fsw, args.name)
-> +    seq = 0
-> +    size = 0
-> +    entries = []
-> +
-> +    # Handle the kernel
-> +    with open(args.kernel, 'rb') as inf:
-> +        comp_data = compress_data(inf, args.compress)
-> +    size += os.path.getsize(args.kernel)
-> +    write_kernel(fsw, comp_data, args)
-> +
-> +    for path in args.srcdir:
-> +        # Handle devicetree files
-> +        if os.path.isdir(path):
-> +            for dirpath, _, fnames in os.walk(path):
-> +                for fname in fnames:
-> +                    if os.path.splitext(fname)[1] != '.dtb':
-> +                        continue
-> +                    pathname = os.path.join(dirpath, fname)
-> +                    seq += 1
-> +                    size += os.path.getsize(pathname)
-> +                    model, compat = output_dtb(fsw, seq, pathname,
-> +                                               args.arch, args.compress)
-> +                    entries.append([model, compat])
-> +
-> +    finish_fit(fsw, entries)
-> +
-> +    # Include the kernel itself in the returned file count
-> +    return fsw.as_fdt().as_bytearray(), seq + 1, size
-> +
-> +
-> +def run_make_fit():
-> +    """Run the tool's main logic"""
-> +    args = parse_args()
-> +
-> +    out_data, count, size = build_fit(args)
-> +    with open(args.fit, 'wb') as outf:
-> +        outf.write(out_data)
-> +
-> +    ext_fit_size = None
-> +    if args.external:
-> +        mkimage = os.environ.get('MKIMAGE', 'mkimage')
-> +        subprocess.check_call([mkimage, '-E', '-F', args.fit],
-> +                              stdout=subprocess.DEVNULL)
-> +
-> +        with open(args.fit, 'rb') as inf:
-> +            data = inf.read()
-> +        ext_fit = libfdt.FdtRo(data)
-> +        ext_fit_size = ext_fit.totalsize()
-> +
-> +    comp_size = len(out_data)
-> +    print(f'FIT size {comp_size:#x}/{comp_size / 1024 / 1024:.1f} MB', end='')
-> +    if ext_fit_size:
-> +        print(f', header {ext_fit_size:#x}/{ext_fit_size / 1024:.1f} KB', end='')
-> +    print(f', {count} files, uncompressed {size / 1024 / 1024:.1f} MB')
-> +
-> +
-> +if __name__ == "__main__":
-> +    sys.exit(run_make_fit())
+>
+>  doc/chromium/files/chromebook_jerry.its  |  4 +-
+>  doc/chromium/files/nyan-big.its          |  4 +-
+>  doc/usage/cmd/imxtract.rst               |  6 +-
+>  doc/usage/fit/beaglebone_vboot.rst       | 74 ++++++++++++------------
+>  doc/usage/fit/howto.rst                  | 40 ++++++-------
+>  doc/usage/fit/kernel.rst                 |  6 +-
+>  doc/usage/fit/kernel_fdt.rst             |  4 +-
+>  doc/usage/fit/kernel_fdts_compressed.rst |  6 +-
+>  doc/usage/fit/multi-with-fpga.rst        |  6 +-
+>  doc/usage/fit/multi-with-loadables.rst   |  8 +--
+>  doc/usage/fit/multi.rst                  | 12 ++--
+>  doc/usage/fit/sign-configs.rst           |  6 +-
+>  doc/usage/fit/sign-images.rst            |  4 +-
+>  doc/usage/fit/signature.rst              | 22 +++----
+>  doc/usage/fit/update3.rst                |  6 +-
+>  doc/usage/fit/update_uboot.rst           |  2 +-
+>  doc/usage/fit/x86-fit-boot.rst           |  8 +--
+>  17 files changed, 109 insertions(+), 109 deletions(-)
+>
+> diff --git a/doc/chromium/files/chromebook_jerry.its b/doc/chromium/files=
+/chromebook_jerry.its
+> index 7505a20535b..02e5e1340f3 100644
+> --- a/doc/chromium/files/chromebook_jerry.its
+> +++ b/doc/chromium/files/chromebook_jerry.its
+> @@ -15,7 +15,7 @@
+>                         load =3D <0>;
+>                         entry =3D <0>;
+>                         hash-2 {
+> -                               algo =3D "sha1";
+> +                               algo =3D "sha256";
+>                         };
+>                 };
+>
+> @@ -26,7 +26,7 @@
+>                         arch =3D "arm";
+>                         compression =3D "none";
+>                         hash-1{
+> -                               algo =3D "sha1";
+> +                               algo =3D "sha256";
+>                         };
+>                 };
+>         };
+> diff --git a/doc/chromium/files/nyan-big.its b/doc/chromium/files/nyan-bi=
+g.its
+> index bd412915e95..60bdffbb829 100644
+> --- a/doc/chromium/files/nyan-big.its
+> +++ b/doc/chromium/files/nyan-big.its
+> @@ -15,7 +15,7 @@
+>                         load =3D <0>;
+>                         entry =3D <0>;
+>                         hash-2 {
+> -                               algo =3D "sha1";
+> +                               algo =3D "sha256";
+>                         };
+>                 };
+>
+> @@ -26,7 +26,7 @@
+>                         arch =3D "arm";
+>                         compression =3D "none";
+>                         hash-1{
+> -                               algo =3D "sha1";
+> +                               algo =3D "sha256";
+>                         };
+>                 };
+>         };
+> diff --git a/doc/usage/cmd/imxtract.rst b/doc/usage/cmd/imxtract.rst
+> index eb64b1cefab..16be60b4aab 100644
+> --- a/doc/usage/cmd/imxtract.rst
+> +++ b/doc/usage/cmd/imxtract.rst
+> @@ -45,14 +45,14 @@ Examples
+>
+>  With verify=3Dno incorrect hashes, signatures, or check sums don't stop =
+the
+>  extraction. But correct hashes are still indicated in the output
+> -(here: md5, sha1).
+> +(here: sha256, sha512).
+>
+>  .. code-block:: console
+>
+>      =3D> setenv verify no
+>      =3D> imxtract $loadaddr kernel-1 $kernel_addr_r
+>      ## Copying 'kernel-1' subimage from FIT image at 40200000 ...
+> -    md5+ sha1+    Loading part 0 ... OK
+> +    sha256+ sha512+    Loading part 0 ... OK
+>      =3D>
+>
+>  With verify=3Dyes incorrect hashes, signatures, or check sums stop the e=
+xtraction.
+> @@ -62,7 +62,7 @@ With verify=3Dyes incorrect hashes, signatures, or chec=
+k sums stop the extraction.
+>      =3D> setenv verify yes
+>      =3D> imxtract $loadaddr kernel-1 $kernel_addr_r
+>      ## Copying 'kernel-1' subimage from FIT image at 40200000 ...
+> -    md5 error!
+> +    sha256 error!
+>      Bad hash value for 'hash-1' hash node in 'kernel-1' image node
+>      Bad Data Hash
+>      =3D>
+> diff --git a/doc/usage/fit/beaglebone_vboot.rst b/doc/usage/fit/beaglebon=
+e_vboot.rst
+> index a102be187bd..cd6bb141910 100644
+> --- a/doc/usage/fit/beaglebone_vboot.rst
+> +++ b/doc/usage/fit/beaglebone_vboot.rst
+> @@ -145,7 +145,7 @@ Put this into a file in that directory called sign.it=
+s::
+>                  load =3D <0x80008000>;
+>                  entry =3D <0x80008000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              fdt-1 {
+> @@ -155,7 +155,7 @@ Put this into a file in that directory called sign.it=
+s::
+>                  arch =3D "arm";
+>                  compression =3D "none";
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> @@ -165,7 +165,7 @@ Put this into a file in that directory called sign.it=
+s::
+>                  kernel =3D "kernel";
+>                  fdt =3D "fdt-1";
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      key-name-hint =3D "dev";
+>                      sign-images =3D "fdt", "kernel";
+>                  };
+> @@ -227,8 +227,8 @@ You should see something like this::
+>        OS:           Linux
+>        Load Address: 0x80008000
+>        Entry Point:  0x80008000
+> -      Hash algo:    sha1
+> -      Hash value:   c94364646427e10f423837e559898ef02c97b988
+> +      Hash algo:    sha256
+> +      Hash value:   51b2adf9c1016ed46f424d85dcc6c34c46a20b9bee7227e06a6b=
+6320ca5d35c1
+>       Image 1 (fdt-1)
+>        Description:  beaglebone-black
+>        Created:      Sun Jun  1 12:50:30 2014
+> @@ -236,8 +236,8 @@ You should see something like this::
+>        Compression:  uncompressed
+>        Data Size:    31547 Bytes =3D 30.81 kB =3D 0.03 MB
+>        Architecture: ARM
+> -      Hash algo:    sha1
+> -      Hash value:   cb09202f889d824f23b8e4404b781be5ad38a68d
+> +      Hash algo:    sha256
+> +      Hash value:   807d5842a04132261ba092373bd40c78991bc7ce173d1175cd97=
+6ec37858e7cd
+>       Default Configuration: 'conf-1'
+>       Configuration 0 (conf-1)
+>        Description:  unavailable
+> @@ -255,11 +255,11 @@ You can also run fit_check_sign to check it::
+>
+>  which results in::
+>
+> -    Verifying Hash Integrity ... sha1,rsa2048:dev+
+> +    Verifying Hash Integrity ... sha256,rsa2048:dev+
+>      ## Loading kernel from FIT Image at 7fc6ee469000 ...
+>         Using 'conf-1' configuration
+>         Verifying Hash Integrity ...
+> -    sha1,rsa2048:dev+
+> +    sha256,rsa2048:dev+
+>      OK
+>
+>         Trying 'kernel' kernel subimage
+> @@ -272,10 +272,10 @@ which results in::
+>           OS:           Linux
+>           Load Address: 0x80008000
+>           Entry Point:  0x80008000
+> -         Hash algo:    sha1
+> -         Hash value:   c94364646427e10f423837e559898ef02c97b988
+> +         Hash algo:    sha256
+> +         Hash value:   51b2adf9c1016ed46f424d85dcc6c34c46a20b9bee7227e06=
+a6b6320ca5d35c1
+>         Verifying Hash Integrity ...
+> -    sha1+
+> +    sha256+
+>      OK
+>
+>      Unimplemented compression type 4
+> @@ -288,10 +288,10 @@ which results in::
+>           Compression:  uncompressed
+>           Data Size:    31547 Bytes =3D 30.81 kB =3D 0.03 MB
+>           Architecture: ARM
+> -         Hash algo:    sha1
+> -         Hash value:   cb09202f889d824f23b8e4404b781be5ad38a68d
+> +         Hash algo:    sha256
+> +         Hash value:   807d5842a04132261ba092373bd40c78991bc7ce173d1175c=
+d976ec37858e7cd
+>         Verifying Hash Integrity ...
+> -    sha1+
+> +    sha256+
+>      OK
+>
+>         Loading Flat Device Tree ... OK
+> @@ -303,14 +303,14 @@ which results in::
+>      Signature check OK
+>
+>
+> -At the top, you see "sha1,rsa2048:dev+". This means that it checked an R=
+SA key
+> -of size 2048 bits using SHA1 as the hash algorithm. The key name checked=
+ was
+> +At the top, you see "sha256,rsa2048:dev+". This means that it checked an=
+ RSA key
+> +of size 2048 bits using SHA256 as the hash algorithm. The key name check=
+ed was
+>  'dev' and the '+' means that it verified. If it showed '-' that would be=
+ bad.
+>
+>  Once the configuration is verified it is then possible to rely on the ha=
+shes
+>  in each image referenced by that configuration. So fit_check_sign goes o=
+n to
+>  load each of the images. We have a kernel and an FDT but no ramkdisk. In=
+ each
+> -case fit_check_sign checks the hash and prints sha1+ meaning that the SH=
+A1
+> +case fit_check_sign checks the hash and prints sha256+ meaning that the =
+SHA256
+>  hash verified. This means that none of the images has been tampered with=
+.
+>
+>  There is a test in test/vboot which uses U-Boot's sandbox build to verif=
+y that
+> @@ -328,11 +328,11 @@ This tells us that the kernel starts at byte offset=
+ 168 (decimal) in image.fit
+>  and extends for about 7MB. Try changing a byte at 0x2000 (say) and run
+>  fit_check_sign again. You should see something like::
+>
+> -    Verifying Hash Integrity ... sha1,rsa2048:dev+
+> +    Verifying Hash Integrity ... sha256,rsa2048:dev+
+>      ## Loading kernel from FIT Image at 7f5a39571000 ...
+>         Using 'conf-1' configuration
+>         Verifying Hash Integrity ...
+> -    sha1,rsa2048:dev+
+> +    sha256,rsa2048:dev+
+>      OK
+>
+>         Trying 'kernel' kernel subimage
+> @@ -345,10 +345,10 @@ fit_check_sign again. You should see something like=
+::
+>           OS:           Linux
+>           Load Address: 0x80008000
+>           Entry Point:  0x80008000
+> -         Hash algo:    sha1
+> -         Hash value:   c94364646427e10f423837e559898ef02c97b988
+> +         Hash algo:    sha256
+> +         Hash value:   51b2adf9c1016ed46f424d85dcc6c34c46a20b9bee7227e06=
+a6b6320ca5d35c1
+>         Verifying Hash Integrity ...
+> -    sha1 error
+> +    sha256 error
+>      Bad hash value for 'hash-1' hash node in 'kernel' image node
+>      Bad Data Hash
+>
+> @@ -361,10 +361,10 @@ fit_check_sign again. You should see something like=
+::
+>           Compression:  uncompressed
+>           Data Size:    31547 Bytes =3D 30.81 kB =3D 0.03 MB
+>           Architecture: ARM
+> -         Hash algo:    sha1
+> -         Hash value:   cb09202f889d824f23b8e4404b781be5ad38a68d
+> +         Hash algo:    sha256
+> +         Hash value:   807d5842a04132261ba092373bd40c78991bc7ce173d1175c=
+d976ec37858e7cd
+>         Verifying Hash Integrity ...
+> -    sha1+
+> +    sha256+
+>      OK
+>
+>         Loading Flat Device Tree ... OK
+> @@ -419,13 +419,13 @@ need to change the hash to match. Let's simulate th=
+at by changing a byte of
+>  the hash::
+>
+>      fdtget -tx image.fit /images/kernel/hash-1 value
+> -    c9436464 6427e10f 423837e5 59898ef0 2c97b988
+> -    fdtput -tx image.fit /images/kernel/hash-1 value c9436464 6427e10f 4=
+23837e5 59898ef0 2c97b981
+> +    51b2adf9 c1016ed4 6f424d85 dcc6c34c 46a20b9b ee7227e0 6a6b6320 ca5d3=
+5c1
+> +    fdtput -tx image.fit /images/kernel/hash-1 value 51b2adf9 c1016ed4 6=
+f424d85 dcc6c34c 46a20b9b ee7227e0 6a6b6320 ca5d35c8
+>
+>  Now check it again::
+>
+>      $UOUT/tools/fit_check_sign -f image.fit -k am335x-boneblack-pubkey.d=
+tb
+> -    Verifying Hash Integrity ... sha1,rsa2048:devrsa_verify_with_keynode=
+: RSA failed to verify: -13
+> +    Verifying Hash Integrity ... sha256,rsa2048:devrsa_verify_with_keyno=
+de: RSA failed to verify: -13
+>      rsa_verify_with_keynode: RSA failed to verify: -13
+>      -
+>      Failed to verify required signature 'key-dev'
+> @@ -446,7 +446,7 @@ running the mkimage link again. Then::
+>      fdtput -p image.fit /configurations/conf-1/signature-1 value fred
+>      $UOUT/tools/fit_check_sign -f image.fit -k am335x-boneblack-pubkey.d=
+tb
+>      Verifying Hash Integrity ... -
+> -    sha1,rsa2048:devrsa_verify_with_keynode: RSA failed to verify: -13
+> +    sha256,rsa2048:devrsa_verify_with_keynode: RSA failed to verify: -13
+>      rsa_verify_with_keynode: RSA failed to verify: -13
+>      -
+>      Failed to verify required signature 'key-dev'
+> @@ -528,7 +528,7 @@ You should then see something like this::
+>      U-Boot# bootm 82000000
+>      ## Loading kernel from FIT Image at 82000000 ...
+>         Using 'conf-1' configuration
+> -       Verifying Hash Integrity ... sha1,rsa2048:dev+ OK
+> +       Verifying Hash Integrity ... sha256,rsa2048:dev+ OK
+>         Trying 'kernel' kernel subimage
+>           Description:  unavailable
+>           Created:      2014-06-01  19:32:54 UTC
+> @@ -540,9 +540,9 @@ You should then see something like this::
+>           OS:           Linux
+>           Load Address: 0x80008000
+>           Entry Point:  0x80008000
+> -         Hash algo:    sha1
+> -         Hash value:   c94364646427e10f423837e559898ef02c97b988
+> -       Verifying Hash Integrity ... sha1+ OK
+> +         Hash algo:    sha256
+> +         Hash value:   51b2adf9c1016ed46f424d85dcc6c34c46a20b9bee7227e06=
+a6b6320ca5d35c1
+> +       Verifying Hash Integrity ... sha256+ OK
+>      ## Loading fdt from FIT Image at 82000000 ...
+>         Using 'conf-1' configuration
+>         Trying 'fdt-1' fdt subimage
+> @@ -553,9 +553,9 @@ You should then see something like this::
+>           Data Start:   0x8276e2ec
+>           Data Size:    31547 Bytes =3D 30.8 KiB
+>           Architecture: ARM
+> -         Hash algo:    sha1
+> -         Hash value:   cb09202f889d824f23b8e4404b781be5ad38a68d
+> -       Verifying Hash Integrity ... sha1+ OK
+> +         Hash algo:    sha256
+> +         Hash value:   807d5842a04132261ba092373bd40c78991bc7ce173d1175c=
+d976ec37858e7cd
+> +       Verifying Hash Integrity ... sha256+ OK
+>         Booting using the fdt blob at 0x8276e2ec
+>         Uncompressing Kernel Image ... OK
+>         Loading Device Tree to 8fff5000, end 8ffffb3a ... OK
+> diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
+> index def12a70f7b..b5097d4460b 100644
+> --- a/doc/usage/fit/howto.rst
+> +++ b/doc/usage/fit/howto.rst
+> @@ -8,7 +8,7 @@ Overview
+>
+>  The new uImage format allows more flexibility in handling images of vari=
+ous
+>  types (kernel, ramdisk, etc.), it also enhances integrity protection of =
+images
+> -with sha1 and md5 checksums.
+> +with cryptographic checksums.
+>
+>  Two auxiliary tools are needed on the development host system in order t=
+o
+>  create an uImage in the new format: mkimage and dtc, although only one
+> @@ -99,7 +99,7 @@ started by ATF where SPL is loading U-Boot (as loadable=
+s) and ATF (as firmware).
+>                  load =3D <0x8 0x8000000>;
+>                  entry =3D <0x8 0x8000000>;
+>                  hash {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              atf {
+> @@ -112,7 +112,7 @@ started by ATF where SPL is loading U-Boot (as loadab=
+les) and ATF (as firmware).
+>                  load =3D <0xfffea000>;
+>                  entry =3D <0xfffea000>;
+>                  hash {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              fdt_1 {
+> @@ -123,7 +123,7 @@ started by ATF where SPL is loading U-Boot (as loadab=
+les) and ATF (as firmware).
+>                  compression =3D "none";
+>                  load =3D <0x100000>;
+>                  hash {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> @@ -190,8 +190,8 @@ its contents:
+>        Entry Point:    0x00000000
+>        Hash algo:    crc32
+>        Hash value:    2ae2bb40
+> -      Hash algo:    sha1
+> -      Hash value:    3c200f34e2c226ddc789240cca0c59fc54a67cf4
+> +      Hash algo:    sha256
+> +      Hash value:    c22f6bb5a3f96942507a37e7d6a9333ebdc7da57971bc4c0821=
+13fe082fdc40f
+>       Default Configuration: 'config-1'
+>       Configuration 0 (config-1)
+>        Description:    Boot Linux kernel
+> @@ -236,8 +236,8 @@ specific to the new image format).
+>           Entry Point:  0x00000000
+>           Hash algo:    crc32
+>           Hash value:   2ae2bb40
+> -         Hash algo:    sha1
+> -         Hash value:   3c200f34e2c226ddc789240cca0c59fc54a67cf4
+> +         Hash algo:    sha256
+> +         Hash value:   c22f6bb5a3f96942507a37e7d6a9333ebdc7da57971bc4c08=
+2113fe082fdc40f
+>          Default Configuration: 'config-1'
+>          Configuration 0 (config-1)
+>           Description:  Boot Linux kernel
+> @@ -258,8 +258,8 @@ specific to the new image format).
+>           Entry Point:  0x00000000
+>           Hash algo:    crc32
+>           Hash value:   2ae2bb40
+> -         Hash algo:    sha1
+> -         Hash value:   3c200f34e2c226ddc789240cca0c59fc54a67cf4
+> +         Hash algo:    sha256
+> +         Hash value:   c22f6bb5a3f96942507a37e7d6a9333ebdc7da57971bc4c08=
+2113fe082fdc40f
+>         Verifying Hash Integrity ... crc32+ sha1+ OK
+>         Uncompressing Kernel Image ... OK
+>      Memory BAT mapping: BAT2=3D256Mb, BAT3=3D0Mb, residual: 0Mb
+> @@ -302,8 +302,8 @@ modified to take the files from some other location i=
+f needed):
+>        Entry Point:    0x00000000
+>        Hash algo:    crc32
+>        Hash value:    2c0cc807
+> -      Hash algo:    sha1
+> -      Hash value:    264b59935470e42c418744f83935d44cdf59a3bb
+> +      Hash algo:    sha256
+> +      Hash value:    a3e9e18b793873827d27c97edfbca67c404a1972d9f36cf48e7=
+3ff85d69a422c
+>       Image 1 (fdt-1)
+>        Description:    Flattened Device Tree blob
+>        Type:        Flat Device Tree
+> @@ -312,8 +312,8 @@ modified to take the files from some other location i=
+f needed):
+>        Architecture: PowerPC
+>        Hash algo:    crc32
+>        Hash value:    0d655d71
+> -      Hash algo:    sha1
+> -      Hash value:    25ab4e15cd4b8a5144610394560d9c318ce52def
+> +      Hash algo:    sha256
+> +      Hash value:    e9b9a40c5e2e12213ac819e7ccad7271ef43eb5edf9b421f0fa=
+0b4b51bfdb214
+>       Default Configuration: 'conf-1'
+>       Configuration 0 (conf-1)
+>        Description:    Boot Linux kernel with FDT blob
+> @@ -353,8 +353,8 @@ inspected and booted:
+>           Entry Point:  0x00000000
+>           Hash algo:    crc32
+>           Hash value:   2c0cc807
+> -         Hash algo:    sha1
+> -         Hash value:   264b59935470e42c418744f83935d44cdf59a3bb
+> +         Hash algo:    sha256
+> +         Hash value:   a3e9e18b793873827d27c97edfbca67c404a1972d9f36cf48=
+e73ff85d69a422c
+>          Image 1 (fdt-1)
+>           Description:  Flattened Device Tree blob
+>           Type:       Flat Device Tree
+> @@ -364,8 +364,8 @@ inspected and booted:
+>           Architecture: PowerPC
+>           Hash algo:    crc32
+>           Hash value:   0d655d71
+> -         Hash algo:    sha1
+> -         Hash value:   25ab4e15cd4b8a5144610394560d9c318ce52def
+> +         Hash algo:    sha256
+> +         Hash value:   e9b9a40c5e2e12213ac819e7ccad7271ef43eb5edf9b421f0=
+fa0b4b51bfdb214
+>          Default Configuration: 'conf-1'
+>          Configuration 0 (conf-1)
+>           Description:  Boot Linux kernel with FDT blob
+> @@ -387,7 +387,7 @@ inspected and booted:
+>           Hash algo:    crc32
+>           Hash value:   2c0cc807
+>           Hash algo:    sha1
+> -         Hash value:   264b59935470e42c418744f83935d44cdf59a3bb
+> +         Hash value:   a3e9e18b793873827d27c97edfbca67c404a1972d9f36cf48=
+e73ff85d69a422c
+>         Verifying Hash Integrity ... crc32+ sha1+ OK
+>         Uncompressing Kernel Image ... OK
+>      ## Flattened Device Tree from FIT Image at 00900000
+> @@ -402,7 +402,7 @@ inspected and booted:
+>           Hash algo:    crc32
+>           Hash value:   0d655d71
+>           Hash algo:    sha1
+> -         Hash value:   25ab4e15cd4b8a5144610394560d9c318ce52def
+> +         Hash value:   e9b9a40c5e2e12213ac819e7ccad7271ef43eb5edf9b421f0=
+fa0b4b51bfdb214
+>         Verifying Hash Integrity ... crc32+ sha1+ OK
+>         Booting using the fdt blob at 0xa0abdc
+>         Loading Device Tree to 007fc000, end 007fffff ... OK
+> diff --git a/doc/usage/fit/kernel.rst b/doc/usage/fit/kernel.rst
+> index 012a81efead..e56017985b2 100644
+> --- a/doc/usage/fit/kernel.rst
+> +++ b/doc/usage/fit/kernel.rst
+> @@ -25,7 +25,7 @@ Single kernel
+>                      algo =3D "crc32";
+>                  };
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> @@ -59,7 +59,7 @@ For x86 a setup node is also required: see x86-fit-boot=
+::
+>                  load =3D <0x01000000>;
+>                  entry =3D <0x00000000>;
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -73,7 +73,7 @@ For x86 a setup node is also required: see x86-fit-boot=
+::
+>                  load =3D <0x00090000>;
+>                  entry =3D <0x00090000>;
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/kernel_fdt.rst b/doc/usage/fit/kernel_fdt.rst
+> index 8eee13af780..9cc26fb7831 100644
+> --- a/doc/usage/fit/kernel_fdt.rst
+> +++ b/doc/usage/fit/kernel_fdt.rst
+> @@ -25,7 +25,7 @@ Single kernel and FDT blob
+>                         algo =3D "crc32";
+>                 };
+>                 hash-2 {
+> -                       algo =3D "sha1";
+> +                       algo =3D "sha256";
+>                 };
+>                 };
+>                 fdt-1 {
+> @@ -38,7 +38,7 @@ Single kernel and FDT blob
+>                         algo =3D "crc32";
+>                 };
+>                 hash-2 {
+> -                       algo =3D "sha1";
+> +                       algo =3D "sha256";
+>                 };
+>                 };
+>         };
+> diff --git a/doc/usage/fit/kernel_fdts_compressed.rst b/doc/usage/fit/ker=
+nel_fdts_compressed.rst
+> index 0b169c7c27c..b57871da58b 100644
+> --- a/doc/usage/fit/kernel_fdts_compressed.rst
+> +++ b/doc/usage/fit/kernel_fdts_compressed.rst
+> @@ -28,7 +28,7 @@ string to match directly.
+>                      algo =3D "crc32";
+>                  };
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              fdt@1 {
+> @@ -41,7 +41,7 @@ string to match directly.
+>                      algo =3D "crc32";
+>                  };
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              fdt@2 {
+> @@ -54,7 +54,7 @@ string to match directly.
+>                      algo =3D "crc32";
+>                  };
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/multi-with-fpga.rst b/doc/usage/fit/multi-with=
+-fpga.rst
+> index 28d7d5d2626..4c7f1bebd5a 100644
+> --- a/doc/usage/fit/multi-with-fpga.rst
+> +++ b/doc/usage/fit/multi-with-fpga.rst
+> @@ -20,7 +20,7 @@ This example makes use of the 'loadables' field::
+>                  compression =3D "none";
+>                  load =3D <0x10000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -33,7 +33,7 @@ This example makes use of the 'loadables' field::
+>                  load =3D <0x30000000>;
+>                  compatible =3D "u-boot,fpga-legacy"
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -47,7 +47,7 @@ This example makes use of the 'loadables' field::
+>                  load =3D <0x8000>;
+>                  entry =3D <0x8000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/multi-with-loadables.rst b/doc/usage/fit/multi=
+-with-loadables.rst
+> index a0241df96ca..7849cb544f1 100644
+> --- a/doc/usage/fit/multi-with-loadables.rst
+> +++ b/doc/usage/fit/multi-with-loadables.rst
+> @@ -22,7 +22,7 @@ This example makes use of the 'loadables' field::
+>                  load =3D <0xa0000000>;
+>                  entry =3D <0xa0000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -34,7 +34,7 @@ This example makes use of the 'loadables' field::
+>                  compression =3D "none";
+>                  load =3D <0xb0000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -46,7 +46,7 @@ This example makes use of the 'loadables' field::
+>                  compression =3D "none";
+>                  load =3D <0xb0400000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -60,7 +60,7 @@ This example makes use of the 'loadables' field::
+>                  load =3D <0xa0000000>;
+>                  entry =3D <0xa0000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/multi.rst b/doc/usage/fit/multi.rst
+> index 2e6ae58c409..e68752b2ad0 100644
+> --- a/doc/usage/fit/multi.rst
+> +++ b/doc/usage/fit/multi.rst
+> @@ -22,10 +22,10 @@ Multiple kernels, ramdisks and FDT blobs
+>                  load =3D <00000000>;
+>                  entry =3D <00000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>                  hash-2 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha512";
+>                  };
+>              };
+>
+> @@ -39,7 +39,7 @@ Multiple kernels, ramdisks and FDT blobs
+>                  load =3D <00000000>;
+>                  entry =3D <00000000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -53,7 +53,7 @@ Multiple kernels, ramdisks and FDT blobs
+>                  load =3D <00000000>;
+>                  entry =3D <00000000>;
+>                  hash-1 {
+> -                    algo =3D "md5";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -67,7 +67,7 @@ Multiple kernels, ramdisks and FDT blobs
+>                  load =3D <00000000>;
+>                  entry =3D <00000000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -104,7 +104,7 @@ Multiple kernels, ramdisks and FDT blobs
+>                  compression =3D "none";
+>                  load =3D <00700000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> diff --git a/doc/usage/fit/sign-configs.rst b/doc/usage/fit/sign-configs.=
+rst
+> index 6a3df8f2c5b..6d98d44430c 100644
+> --- a/doc/usage/fit/sign-configs.rst
+> +++ b/doc/usage/fit/sign-configs.rst
+> @@ -22,7 +22,7 @@ Signed configurations
+>                  entry =3D <0x8>;
+>                  kernel-version =3D <1>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              fdt-1 {
+> @@ -33,7 +33,7 @@ Signed configurations
+>                  compression =3D "none";
+>                  fdt-version =3D <1>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> @@ -43,7 +43,7 @@ Signed configurations
+>                  kernel =3D "kernel";
+>                  fdt =3D "fdt-1";
+>                  signature {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      key-name-hint =3D "dev";
+>                      sign-images =3D "fdt", "kernel";
+>                  };
+> diff --git a/doc/usage/fit/sign-images.rst b/doc/usage/fit/sign-images.rs=
+t
+> index 7d54d702c97..ca7d10fab83 100644
+> --- a/doc/usage/fit/sign-images.rst
+> +++ b/doc/usage/fit/sign-images.rst
+> @@ -22,7 +22,7 @@ Signed Images
+>                  entry =3D <0x8>;
+>                  kernel-version =3D <1>;
+>                  signature {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      key-name-hint =3D "dev";
+>                  };
+>              };
+> @@ -34,7 +34,7 @@ Signed Images
+>                  compression =3D "none";
+>                  fdt-version =3D <1>;
+>                  signature {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      key-name-hint =3D "dev";
+>                  };
+>              };
+> diff --git a/doc/usage/fit/signature.rst b/doc/usage/fit/signature.rst
+> index 0804bffd1ed..39edba14630 100644
+> --- a/doc/usage/fit/signature.rst
+> +++ b/doc/usage/fit/signature.rst
+> @@ -93,7 +93,7 @@ Public keys should be stored as sub-nodes in a /signatu=
+re node. Required
+>  properties are:
+>
+>  algo
+> -    Algorithm name (e.g. "sha1,rsa2048" or "sha256,ecdsa256")
+> +    Algorithm name (e.g. "sha256,rsa2048" or "sha512,ecdsa256")
+>
+>  Optional properties are:
+>
+> @@ -219,28 +219,28 @@ As an example, consider this FIT::
+>              kernel-1 {
+>                  data =3D <data for kernel1>
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...kernel signature 1...>
+>                  };
+>              };
+>              kernel-2 {
+>                  data =3D <data for kernel2>
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...kernel signature 2...>
+>                  };
+>              };
+>              fdt-1 {
+>                  data =3D <data for fdt1>;
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...fdt signature 1...>
+>                  };
+>              };
+>              fdt-2 {
+>                  data =3D <data for fdt2>;
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...fdt signature 2...>
+>                  };
+>              };
+> @@ -291,28 +291,28 @@ So the above example is adjusted to look like this:=
+:
+>              kernel-1 {
+>                  data =3D <data for kernel1>
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                      value =3D <...kernel hash 1...>
+>                  };
+>              };
+>              kernel-2 {
+>                  data =3D <data for kernel2>
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                      value =3D <...kernel hash 2...>
+>                  };
+>              };
+>              fdt-1 {
+>                  data =3D <data for fdt1>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                      value =3D <...fdt hash 1...>
+>                  };
+>              };
+>              fdt-2 {
+>                  data =3D <data for fdt2>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                      value =3D <...fdt hash 2...>
+>                  };
+>              };
+> @@ -323,7 +323,7 @@ So the above example is adjusted to look like this::
+>                  kernel =3D "kernel-1";
+>                  fdt =3D "fdt-1";
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...conf 1 signature...>;
+>                  };
+>              };
+> @@ -331,7 +331,7 @@ So the above example is adjusted to look like this::
+>                  kernel =3D "kernel-2";
+>                  fdt =3D "fdt-2";
+>                  signature-1 {
+> -                    algo =3D "sha1,rsa2048";
+> +                    algo =3D "sha256,rsa2048";
+>                      value =3D <...conf 1 signature...>;
+>                  };
+>              };
+> diff --git a/doc/usage/fit/update3.rst b/doc/usage/fit/update3.rst
+> index 4ff3950c01e..24235801470 100644
+> --- a/doc/usage/fit/update3.rst
+> +++ b/doc/usage/fit/update3.rst
+> @@ -19,7 +19,7 @@ Automatic software update: multiple files
+>                  type =3D "firmware";
+>                  load =3D <FF700000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>              update-2 {
+> @@ -29,7 +29,7 @@ Automatic software update: multiple files
+>                  type =3D "firmware";
+>                  load =3D <FF8E0000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>
+> @@ -40,7 +40,7 @@ Automatic software update: multiple files
+>                  type =3D "firmware";
+>                  load =3D <FFAC0000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/update_uboot.rst b/doc/usage/fit/update_uboot.=
+rst
+> index a9288ee6367..811d008d13d 100644
+> --- a/doc/usage/fit/update_uboot.rst
+> +++ b/doc/usage/fit/update_uboot.rst
+> @@ -21,7 +21,7 @@ Make sure the flashing addresses ('load' prop) is corre=
+ct for your board!
+>                  type =3D "firmware";
+>                  load =3D <0xFFFC0000>;
+>                  hash-1 {
+> -                    algo =3D "sha1";
+> +                    algo =3D "sha256";
+>                  };
+>              };
+>          };
+> diff --git a/doc/usage/fit/x86-fit-boot.rst b/doc/usage/fit/x86-fit-boot.=
+rst
+> index 93b73bb9019..9e3e32204d5 100644
+> --- a/doc/usage/fit/x86-fit-boot.rst
+> +++ b/doc/usage/fit/x86-fit-boot.rst
+> @@ -207,16 +207,16 @@ You can take a look at the resulting fit file if yo=
+u like::
+>        OS:           Linux
+>        Load Address: 0x01000000
+>        Entry Point:  0x00000000
+> -      Hash algo:    sha1
+> -      Hash value:   446b5163ebfe0fb6ee20cbb7a8501b263cd92392
+> +      Hash algo:    sha256
+> +      Hash value:   4bbf49981ade163ed089f8525236fedfe44508e9b02a21a48294=
+a96a1518107b
+>       Image 1 (setup)
+>        Description:  Linux setup.bin
+>        Created:      Tue Oct  7 10:57:24 2014
+>        Type:         x86 setup.bin
+>        Compression:  uncompressed
+>        Data Size:    12912 Bytes =3D 12.61 kB =3D 0.01 MB
+> -      Hash algo:    sha1
+> -      Hash value:   a1f2099cf47ff9816236cd534c77af86e713faad
+> +      Hash algo:    sha256
+> +      Hash value:   6aa50c2e0392cb119cdf0971dce8339f100608ed3757c8200b0e=
+39e889e432d2
+>       Default Configuration: 'config-1'
+>       Configuration 0 (config-1)
+>        Description:  Boot Linux kernel
 
--- 
-Regards,
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-Laurent Pinchart
+Looks good to me. Do we know if we need to update any sample configs
+with the options for those checksums?
