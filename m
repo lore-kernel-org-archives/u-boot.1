@@ -4,67 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B9CC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  2 Dec 2023 23:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF33C4167B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 04:47:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1787E87735;
-	Sun,  3 Dec 2023 00:41:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C823E87716;
+	Sun,  3 Dec 2023 05:47:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GbavhNT+";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hc7fvTFh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WTJcfGDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47725877E9; Sun,  3 Dec 2023 00:41:21 +0100 (CET)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 22CF287706; Sun,  3 Dec 2023 05:47:30 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69FD7876B2
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 00:41:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1FC08759F
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 05:47:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4SjRJv0LfCz9smg;
- Sun,  3 Dec 2023 00:41:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701560479;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=c0TFJuDr42aJ65Zbd6MnRyhCiBxWYVLRID1J9pngqE0=;
- b=GbavhNT+shsu6Ct3DcUI6TGt8zAslhMCla5WMOiLl7xaatvsKHQ2M7Kwqe8p0Gl7NwwKC+
- u37gWJ7P41YBG90yQIbtNqYZb1zMEZ9cEZqK0mQ32NQj5RkZj3rqRhymlIQ5c3TzqKvHKj
- VcGq/bj+Ub66WmzTWoZANmXicvZtKXh33pBIcZQnvhgbTtG2F7Cglf0t54A7pySNVirAYu
- BpCVGs0uXT2Nay7QN66OpvCEFc4woE1CHvsVHH9N8vCiTdRAVlAVZ7iw3iXSs6Yh9q0E0P
- +xZv3PfG5KodVyk06epoqbcqyBYnmLPhr87oJAjtxQpvrD3X13vYmDGQTQUIcQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701560477;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=c0TFJuDr42aJ65Zbd6MnRyhCiBxWYVLRID1J9pngqE0=;
- b=hc7fvTFhWqmFzbftCUlTjCA+4FWmYzQp18IBmGL9Xy+UDe83gJwJmBcutItEUlwC+jT7Gw
- Stm7VRsjnpeCjaYy0vnKbV+OEt0yFzzVoiOZcuGypEiXeNzHZb6qmrYJkEcoVb6uRAILVs
- 8/aCBht9qtYFKu7ZXmUlQcd0vMRv1tpCprZkZD2AYPO0VBGzlNpadzbu3FBCmAWwusY0h3
- g+UI3Lj6Ed9cJdaDUUUxUWlT3gfyK19vt+amQ5o42J7I9vXgvHLnPZW+8IAHg/tKQxl5Iq
- plWM137VpQ0ix1gB+8jOdU+Tf9caw2IH6hDCQ3G1FyXy1FyzIT4mM9AGS5MQmw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mmc: Poll CD in case cyclic framework is enabled
-Date: Sun,  3 Dec 2023 00:40:26 +0100
-Message-ID: <20231202234109.208243-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6cb55001124so3466846b3a.0
+ for <u-boot@lists.denx.de>; Sat, 02 Dec 2023 20:47:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1701578846; x=1702183646; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IEOYkIWxn19O59g7NbDrCHr3w21qrFPUzKKjjMYLCB4=;
+ b=WTJcfGDF4f8MuK2mOwRSlBivZpdek4UOWTTJBRYHKJIIUWRmZ8Y9hfzR0VhwNSImEr
+ kCwx79eM5tYYWhkbUz4bkBuAQf1sTOuwBTiEOnFoVrJ5qL2MQLuxe8F24AXFU57XNZcq
+ P363vVubb4/8w7MbCiNu9NjvnUrPSWVVnGMRY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701578846; x=1702183646;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IEOYkIWxn19O59g7NbDrCHr3w21qrFPUzKKjjMYLCB4=;
+ b=k/ADTIiLcz/Y/WSwB6QFY/BrMtVTr92vWnQ9lIQpa6xpjgCNWVJFRrSEHpI80ywvq6
+ fpq3qiZMKHGPM/DZHuSE9fb6FBmtKZcZQQlZcPzwr8HcY4PrM+SK2uIrbPQDOi2fYyqT
+ uV+B2bau5WZA5vi4LnqBEQaq0ILhjAyP8bS9HvRAK4qiudaDffbmpIFaI/oHLwpscaNP
+ tgb6zVOjjrwPvj/HOHmxHQkZTnEhsFEuwZCxXBr22EwepTSSzQB8r0A3repNyNVdWBa3
+ wNzJoLri/4GiooqE28avDSf0xpIKIwLvMePUtbAYxnOwbpdq1ddt4leGfgE1ALG/McXc
+ xcJw==
+X-Gm-Message-State: AOJu0YxphoV/XrKpCrPnmMLqM1c8m1glxjgmIfBy0qJRUKTi0nQd0ouu
+ iqMflH3Gxc+hbDz3OHt0ENU51KnsgO43wi+Giun/5g==
+X-Google-Smtp-Source: AGHT+IE5P11DL5uhVbSIAb3M+scnJ+26HxRW9RDvzl+irSKylfrWaKc07ZJcq65wy3DNFSCbUBHayg==
+X-Received: by 2002:a17:90a:4964:b0:286:7c14:6d0a with SMTP id
+ c91-20020a17090a496400b002867c146d0amr1242897pjh.10.1701578845096; 
+ Sat, 02 Dec 2023 20:47:25 -0800 (PST)
+Received: from sjg1.roam.corp.google.com ([202.144.206.254])
+ by smtp.gmail.com with ESMTPSA id
+ 5-20020a17090a018500b00283991e2b8esm6023919pjc.57.2023.12.02.20.47.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 02 Dec 2023 20:47:24 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [u-boot-gitdm PATCH 1/2] Use Google LLC for Google
+Date: Sat,  2 Dec 2023 21:46:57 -0700
+Message-ID: <20231203044719.667116-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: c7eb02ce5d85c5527c2
-X-MBO-RS-META: ebrb5y78a1p1oqzpnwdsuxwdmkodc5s3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,74 +86,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case the cyclic framework is enabled, poll the card detect of already
-initialized cards and deinitialize them in case they are removed. Since
-the card initialization is a longer process and card initialization is
-done on first access to an uninitialized card anyway, avoid initializing
-newly detected uninitialized cards in the cyclic callback.
+The name changed a few years ago, so update it.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>
----
- drivers/mmc/mmc-uclass.c | 27 +++++++++++++++++++++++++++
- 1 file changed, 27 insertions(+)
 
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index cdead044177..c4c9881c40b 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -8,6 +8,7 @@
- #define LOG_CATEGORY UCLASS_MMC
+ u-boot-config/domain-map | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
+
+diff --git a/u-boot-config/domain-map b/u-boot-config/domain-map
+index f64147e..63cb60f 100644
+--- a/u-boot-config/domain-map
++++ b/u-boot-config/domain-map
+@@ -17,7 +17,7 @@ amcc.com		AMCC
+ amd.com			AMD
+ anagramm.de		Anagramm GmbH
+ analog.com		Analog Devices
+-android.com		Google, Inc.
++android.com		Google LLC
+ arastra.com		Arastra Inc
+ areca.com.tw		Areca
+ argos-messtechnik.de	Argos Meßtechnik GmbH
+@@ -129,7 +129,7 @@ ge.com			General Electric
+ gefanuc.com		GE Fanuc
+ gentoo.org		Gentoo
+ geomatys.fr		Geomatys
+-google.com		Google, Inc.
++google.com		Google LLC
+ gvs.co.yu		GVS
+ hanscan.com		Hanscan
+ hansenpartnership.com	Hansen Partnership
+@@ -421,22 +421,22 @@ beckyb@kernel.crashing.org	NXP
+ bflinux@yumbrad.com		Radiient Technologies
  
- #include <common.h>
-+#include <cyclic.h>
- #include <bootdev.h>
- #include <log.h>
- #include <mmc.h>
-@@ -343,8 +344,23 @@ struct blk_desc *mmc_get_blk_desc(struct mmc *mmc)
- 	return desc;
- }
+ # Bernie Thompson <bhthompson@chromium.org>
+-bhthompson@google.com		Google, Inc.
++bhthompson@google.com		Google LLC
  
-+static void mmc_cyclic_cd_poll(void *ctx)
-+{
-+	struct mmc *m = ctx;
-+
-+	if (!m->has_init)
-+		return;
-+
-+	if (mmc_getcd(m))
-+		return;
-+
-+	mmc_deinit(m);
-+	m->has_init = 0;
-+}
-+
- void mmc_do_preinit(void)
- {
-+	struct cyclic_info *cyclic;
- 	struct udevice *dev;
- 	struct uclass *uc;
- 	int ret;
-@@ -362,6 +378,17 @@ void mmc_do_preinit(void)
+ # Che-liang Chiou <clchiou@chromium.org>
+-clchiou@chromium.org		Google, Inc.
++clchiou@chromium.org		Google LLC
  
- 		if (m->preinit)
- 			mmc_start_init(m);
-+
-+		if (!CONFIG_IS_ENABLED(CYCLIC))
-+			continue;
-+
-+		/* Register cyclic function for card detect polling */
-+		cyclic = cyclic_register(mmc_cyclic_cd_poll, 100 * 1000,
-+					 m->cfg->name, m);
-+		if (cyclic)
-+			continue;
-+
-+		printf("Failed to register %s CD poll function\n", m->cfg->name);
- 	}
- }
+ # Doug Anderson <dianders@chromium.org>
+-dianders@google.com		Google, Inc.
++dianders@google.com		Google LLC
  
+ # Dirk Behme <dirk.behme@googlemail.com>
+ dirk.behme@googlemail.com	Dirk Behme
+ 
+ # Duncan Laurie <dlaurie@chromium.org>
+-dlaurie@google.com		Google, Inc.
++dlaurie@google.com		Google LLC
+ 
+ # Gabe Black <gabeblack@google.com>
+-gabeblack@chromium.org		Google, Inc.
++gabeblack@chromium.org		Google LLC
+ 
+ galak@kernel.crashing.org	NXP
+ 
+@@ -450,7 +450,7 @@ gvb.uboot@gmail.com		Custom IDEAS
+ # => explicitly wants to be listed as "unknown"
+ 
+ # Hung-Te Lin <hungte@chromium.org>
+-hungte@google.com		Google, Inc.
++hungte@google.com		Google LLC
+ 
+ # Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+ iwamatsu@nigauri.org		Nobuhiro Iwamatsu
+@@ -476,7 +476,7 @@ menon.nishanth@gmail.com	Texas Instruments
+ notasas@gmail.com		Grazvydas Ignotas
+ 
+ # Stefan Reinauer <reinauer@google.com>
+-reinauer@google.com		Google, Inc.
++reinauer@google.com		Google LLC
+ 
+ reinhard.thies@web.de		Cameron
+ 
+@@ -484,22 +484,22 @@ reinhard.thies@web.de		Cameron
+ rgetz@blackfin.uclinux.org	Analog Devices
+ 
+ # Anton Staaf
+-robotboy@chromium.org		Google, Inc.
++robotboy@chromium.org		Google LLC
+ 
+ # Ron Madrid <ron_madrid@sbcglobal.net>
+ ron_madrid@sbcglobal.net	Sheldon Instruments
+ 
+ # Sean Paul <seanpaul@chromium.org>
+-seanpaul@chromium.org		Google, Inc.
++seanpaul@chromium.org		Google LLC
+ 
+ # Luigi Semenzato <semenzato@chromium.org>
+-semenzato@google.com		Google, Inc.
++semenzato@google.com		Google LLC
+ 
+ # Shinya Kuribayashi <skuribay@ruby.dti.ne.jp>
+ # => explicitly wants to be listed as "unknown"
+ 
+ # Sonny Rao <sonnyrao@chromium.org>
+-sonnyrao@chromium.org		Google, Inc.
++sonnyrao@chromium.org		Google LLC
+ 
+ # Stelian Pop <stelian@popies.net>
+ stelian@popies.net		Stelian Pop
+@@ -517,22 +517,22 @@ smichak.uv@gmail.com		Micha Kalfon
+ vapier@gentoo.org		Analog Devices
+ 
+ # Vadim Bendebury <vbendeb@chromium.org>
+-vbendeb@chromium.org		Google, Inc.
++vbendeb@chromium.org		Google LLC
+ 
+ # Vincent Palatin <vpalatin@chromium.org>
+-vpalatin@chromium.org		Google, Inc.
++vpalatin@chromium.org		Google LLC
+ 
+ # Tom Wai-Hong Tam <waihong@chromiumng@chromium.org>
+-waihong@chromium.org		Google, Inc.
++waihong@chromium.org		Google LLC
+ 
+ # Bill Richardson <wfrichar@chromium.org>
+-wfrichar@google.com		Google, Inc.
++wfrichar@google.com		Google LLC
+ 
+ # Wolfgang Grandegger
+ wg@grandegger.com		DENX Software Engineering
+ 
+ # Simon Glass
+-sjg@chromium.org		Google, Inc.
++sjg@chromium.org		Google LLC
+ 
+ # Louis Yung-Chieh Lo <yjlou@chromium.org>
+-# yjlou@google.com		Google, Inc.
++# yjlou@google.com		Google LLC
 -- 
-2.42.0
+2.43.0.rc2.451.g8631bc7472-goog
 
