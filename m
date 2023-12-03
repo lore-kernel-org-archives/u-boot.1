@@ -4,64 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 218CFC4167B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 22:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69096C4167B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 23:41:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6027187708;
-	Sun,  3 Dec 2023 23:37:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8DF9F875BD;
+	Mon,  4 Dec 2023 00:41:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1701643050;
-	bh=qV7n7+mcaUOFbaIzfkxKww8Hz7mNIPrBn+g/Gx9kQhA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Dk+JmvABwWSMOYWVoY21+5jWe3hmFSnyWSmOLeeuTKqplaavlSV9VTcSHhZyZOmd0
-	 qo++s6nsgfGMvpopBD3x4ECy5C0MH418Xah5FtEvBhT/mZE4PPFZyWnsirzAqIkxxJ
-	 IRccduqRi8y+KUTRrTHhhXeP6fnZEFlYjZT+qTeHqvdScySPcOKx+qGemEhgRIijd+
-	 TgiNHjQNOP9/zIK4kzdD1smdLmaF1QwMFKt2wRBKESDydeMfH4T2h60Zbh0XVQ7++0
-	 +qHFaLvYuvxcKy2hDQ3dMnGhwXbTEUuGVGaxrCSTcmG+vFKib8kfLNfejHhkOPLCp0
-	 /UXEWYPu4kr1Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4EB7C87669;
- Sun,  3 Dec 2023 23:37:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1701643048;
- bh=qV7n7+mcaUOFbaIzfkxKww8Hz7mNIPrBn+g/Gx9kQhA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FM+gquiD+AU4lRiGc4Mpd52FzxSQoDxLCYjPcwmxUo4W/b43idAUhqTEwh4sfsjIK
- SGQVlA2eb3F2N+5dyET05/+m8CS5f41GSe+MgkWM8xe0B+gG/3cxJ0PJfAaxDzhgvj
- JRhfty42aMrZbJDsVwjbFMvElOH9iky9fngY1v3gYioSxWSAlLK8RvlR5c9GVeKTJW
- uvNKXuynAhk8jX0pvPTosqUzT3v5oMz4XTBc2k0YHpq+aK2BobN55qj1XIaAoaHQCi
- 5uzvFafAPFpgY8ZteJqESlTQkKPhwImSkjghxu0RgbxUdR2QV4gHnhOn+upFATAR7M
- CDYXnXVMaJBVA==
-Message-ID: <093a6f33-7ce3-4cbf-b1f5-9aba9f85c615@denx.de>
-Date: Sun, 3 Dec 2023 23:37:27 +0100
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 18590875C8; Mon,  4 Dec 2023 00:41:36 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 975B1875B6
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 00:41:33 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0C9FC1684;
+ Sun,  3 Dec 2023 15:42:20 -0800 (PST)
+Received: from slackpad.lan (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id ABE963F762;
+ Sun,  3 Dec 2023 15:41:31 -0800 (PST)
+Date: Sun, 3 Dec 2023 23:40:14 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Stephen Graf <stephen.graf@gmail.com>
+Cc: Mikhail Kalashnikov <iuncuim@gmail.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Piotr
+ Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH 1/1] correct documentation for SPI flashing
+Message-ID: <20231203234014.5dc4cbe7@slackpad.lan>
+In-Reply-To: <ef003512-e433-4d83-87a4-5ae3341f6399@gmail.com>
+References: <20231114013106.31336-1-andre.przywara@arm.com>
+ <20231114013106.31336-4-andre.przywara@arm.com>
+ <0eab5c21-4fdc-478e-9071-f43c12e01fb3@gmail.com>
+ <20231126002349.55404e43@slackpad.lan>
+ <465a5608-89f7-4691-a2e0-ebec9b85d994@gmail.com>
+ <20231126122342.3944cad5@slackpad.lan>
+ <d8862c87-072d-4f74-bb37-08f34c610cc8@gmail.com>
+ <dae3bee5-e1c7-4154-959c-e41dabb5d844@gmail.com>
+ <20231128013746.23648d39@slackpad.lan>
+ <5d7ea381-2a57-46f7-85c6-2bcad339d1db@gmail.com>
+ <0d46cc83-8820-4bf2-95bd-a0c12b6f7aff@arm.com>
+ <d410fbe1-bf0f-4cb5-99cf-3353b952985b@gmail.com>
+ <345d9916-6ae6-4dbe-99a2-33aafeebcb60@arm.com>
+ <ef003512-e433-4d83-87a4-5ae3341f6399@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-Content-Language: en-US
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
-References: <20231110141311.512334-1-i@shantur.com>
- <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
- <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
- <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
- <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
- <3284f652-49dd-409f-9130-ad7cbce64b32@denx.de>
- <CAHc5_t3t7E+qZrv_KvNNwMDmD9+o+SX3jwv-wq-4gP3d17yBwg@mail.gmail.com>
- <2fe93269-7373-46cb-95e0-383270ea67ac@denx.de>
- <CAHc5_t1Gw7TyxaoEdCcZ1Avh+hjMx+po=2Bh86V=ykt65qPqKg@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAHc5_t1Gw7TyxaoEdCcZ1Avh+hjMx+po=2Bh86V=ykt65qPqKg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,105 +72,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/3/23 22:42, Shantur Rathore wrote:
-> Hi Marek,
-> 
-> On Sun, Dec 3, 2023 at 8:42 PM Marek Vasut <marex@denx.de> wrote:
->>
->> On 11/24/23 01:37, Shantur Rathore wrote:
->>> Hi Marek,
->>
->> Hi,
->>
->> sorry for the late reply.
->>
->>>>>>> In my case RockPro64, the power to usb ports onboard is controlled by
->>>>>>> a regulator.
->>>>>>> This regulator is enabled as part of init  as here
->>>>>>> https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3399-rockpro64.dtsi#L177
->>>>>>>
->>>>>>> On init, the usb devices connected to the port are powered up, in my
->>>>>>> case AM8180 (a RTL9210 based ) NVMe to USB enclosure with UAS.
->>>>>>> But the usb controller is only enabled at 'usb start' and by this time
->>>>>>> the device is in some state that it doesn't get detected.
->>>>>>>
->>>>>>> One way to make sure the devices connected to the ports are in an
->>>>>>> initialising state is by issuing a port reset before scanning the
->>>>>>> port.
->>>>>>
->>>>>> Why not remove this regulator-always-on and let the PHY driver turn the
->>>>>> VBUS ON only when it is needed ?
->>>>>>
->>>>>> Wouldn't that solve the problem too AND remove unnecessarily enabled
->>>>>> regulator ?
->>>>>>
->>>>>> [...]
->>>>>
->>>>> Removing the regulator-always-on does make it work but there are few issues
->>>>>
->>>>> 1. regulator is used to control power to multiple ports ( USB3.0 and
->>>>> USB2.0 in RockPro64 ),
->>>>> so this could lead to all ports turning off if a phy resets / turns off power
->>>>
->>>> I vaguely recall seeing some refcounting patch for regulator subsystem,
->>>> would that help ?
->>>
->>> I don't think this would be a problem for u-boot, but linux maybe.
->>
->> How so ?
-> 
-> Actually, I am wrong. I wasn't sure if there is refcounting for the
-> regulator subsystem
-> in linux. just found it has so this is null and void.
-> 
->>
->>>>> 2. Even with regulator-always-on and without this reset port patch,
->>>>> linux was always
->>>>> able to detect the drive on the port, so there is something missing in u-boot.
->>>>> 3. Looking at usb hub code in Linux, I found that for USB3.0 it tries
->>>>> to reset the port before
->>>>> scanning. The comment says
->>>>>
->>>>> /* Is a USB 3.0 port in the Inactive or Compliance Mode state?
->>>>>     * Port warm reset is required to recover
->>>>>     */
->>>>>
->>>>> i. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L5736
->>>>> ii. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub.c#L2836
->>>>>
->>>>> I believe this isn't implemented in u-boot and hence explicit reset of
->>>>> a port fixes the issue.
->>>>
->>>> I feel this is separate issue and what needs to be fixed first is the
->>>> hard-wired VBus control.
->>>
->>> I beg to differ on this, couple of reasons for this
->>>
->>> 1. The same drive works fine without being reset on the USB2.0 ports - this
->>> confirms that the issue is related to USB3.0 only.
->>
->> This is a separate issue from the hard-wired VBus control. I agree the
->> issue does exist, I would simply like to avoid conflating the hard-wired
->> VBus control with device reset.
->>
->>> 2. Linux is able to detect the same drive on USB3.0 when u-boot fails - this
->>> confirms issue doesn't lie with regulator-always-on
->>
->> See above
->>
->>> 3. The links I pasted earlier mentions that in USB3.0 the ports need reset
->>> and this is done before the port is scanned. Adding the similar reset in u-boot
->>> fixes all with the same regulator-always-on. AFAIK u-boot doesn't handle
->>> this special USB3.0 case and maybe this is why I was finding a few posts
->>> around the drive not being detected in the USB3.0 port in u-boot but works in
->>> a USB2.0 port.
->>
->> I am not disputing the need for USB 3.0 device reset, I believe there
->> are two issues here -- one is the hard-wired VBus regulator -- the other
->> is this USB 3.0 reset. They should both be fixed.
-> 
-> Sure, agreed 100%.
-> Do we need to fix both at the same time?
-> Both patches seem to be independent.
+On Fri, 1 Dec 2023 10:50:39 -0800
+Stephen Graf <stephen.graf@gmail.com> wrote:
 
-Separate patch for the regulator please .
+Hi Stephen,
+
+thanks for the patch, and you almost nailed it, some little things:
+
+- The patch should start a new thread on the list, so do not reply to
+  an existing discussion or (un)related patch. This avoids the patch
+  getting buried in longish threads and helps tools like patchworks to
+  find and process it. Also please just send the patch, and avoid any
+  quoted text from previous discussions outside of the commit message.
+- Please prefix your commit message with some context tags, in this
+  case "sunxi: ", so that people scanning the list can ignore it if
+  it's outside their scope of interest.
+- Please limit commit messages to 75 characters per line.
+  $ scripts/checkpatch.pl
+  0001-correct_documentation_for_SPI_flashing.patch
+  will do some checks on the patch and would report this.
+
+Anyway, those are minor things, I will just fix them while committing.
+
+> The mtd_debug write does not work in this context. The flashcp command does work, provides
+> both the erase and write functions and with the verbose option gives good feedback.
+> 
+> Signed-off-by: Stephen Graf <stephen.graf@gmail.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>   doc/board/allwinner/sunxi.rst | 3 +--
+>   1 file changed, 1 insertions(+), 2 deletions(-)
+> 
+> diff --git a/doc/board/allwinner/sunxi.rst b/doc/board/allwinner/sunxi.rst
+> index 797222d8d3..d0c89b956b 100644
+> --- a/doc/board/allwinner/sunxi.rst
+> +++ b/doc/board/allwinner/sunxi.rst
+> @@ -251,8 +251,7 @@ the SPI flash content from Linux, using the `MTD utils`_::
+> 
+>       # apt-get install mtd-utils
+>       # mtdinfo
+> -    # mtd_debug erase /dev/mtdX 0 0xf0000
+> -    # mtd_debug write /dev/mtdX 0 0xf0000 u-boot-sunxi-with-spl.bin
+> +    # flashcp -v u-boot-sunxi-with-spl.bin /dev/mtdX
+> 
+>   ``/dev/mtdX`` needs to be replaced with the respective device name, as listed
+>   in the output of ``mtdinfo``.
+> ---
+> 
+> On 2023-11-30 4:27 p.m., Andre Przywara wrote:
+> > Hi Stephen,
+> > 
+> > On 30/11/2023 01:13, Stephen Graf wrote:  
+> >> Is the attached patch file going in the right direction?  
+> > 
+> > yes, thanks, the change itself looks alright, but it needs to be:
+> > - in a separate email, with a descriptive subject, prefixed by [PATCH]
+> > - have the diff inline, not as an attachment (to allow easy commenting in an email thread)
+> > - have a Signed-off-by: tag with your name and email address. This is to signify that the change is an original one made by you and you are happy to submit this under the (GPL) license conditions.
+> > - an explanation *why* this change is required (mtd_debug write being not reliable, etc)
+> > - sent to the U-Boot list and the maintainer (me)
+> > 
+> > Look at the U-Boot mailing list (archive) for examples.
+> > "git format-patch" creates everything in the right format (mbox), and "git send-email" will send this via an SMTP server you point it to. Or you import this into your client.
+> > 
+> > If you could try this (with the Signed-off-by being the most important change), I am happy to submit this with the next push.
+> > 
+> > Thanks,
+> > Andre
+> >   
+> >>
+> >> On 2023-11-29 3:57 p.m., Andre Przywara wrote:  
+> >>> Hi Stephen,
+> >>>
+> >>> On 28/11/2023 20:07, Stephen Graf wrote:  
+> >>>> Below is the console log from trying to use mtd_debug write. It returned immediately with a strange success message.
+> >>>>
+> >>>> root@orangepizero3:~# mtd_debug write /dev/mtd0 0 0xf0000 /home/sysadmin/u-boot-sunxi-with-spl.bin
+> >>>> file_to_flash: fread, size 0xf0000, n 0xf0000
+> >>>> fread(): Success  
+> >>>
+> >>> interesting, I was under the impression that "mtd_debug write" would be the way to write to flash. In hindsight, the "debug" in that name should have probably put me off. Anyway, "cat" is probably not a good choice, "dd" is better, but it looks like "flashcp" (also part of mtdutils) is the go-to tool, since it does the required erasing automatically and also reportedly does some error detection. Can you please test this?
+> >>> # flashcp u-boot-sunxi-with-spl.bin /dev/mtd0
+> >>> I would test this on my end ASAP as well.
+> >>>
+> >>> Do you feel like sending a patch to the U-Boot documentation to get this changed then?
+> >>>
+> >>> Thanks,
+> >>> Andre
+> >>>  
+> 
+
