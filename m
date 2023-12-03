@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6900EC4167B
-	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 21:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 731C8C4167B
+	for <u-boot@archiver.kernel.org>; Sun,  3 Dec 2023 21:50:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA45F876E0;
-	Sun,  3 Dec 2023 22:43:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1D6E87646;
+	Sun,  3 Dec 2023 22:49:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="EF1rLRzQ";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="ou0RYZuE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C0EE87763; Sun,  3 Dec 2023 22:43:13 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 2BD5487646; Sun,  3 Dec 2023 22:49:59 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D11387646
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 22:43:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB18187622
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 22:49:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a196f84d217so366433966b.3
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 13:43:10 -0800 (PST)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2c9f166581dso15248901fa.2
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 13:49:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701639790; x=1702244590;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701640195; x=1702244995;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TEk3ijy963YoMTdqF6zgEexfq8989oQN0ZbcMRYP3cc=;
- b=EF1rLRzQfhE7ckcXGbNw1mvit/jgl3ugqyBKoc/oE0F6eb3WgX/sdpaSjugP3kBCUJ
- PJizhOr6E26nljG2M5PyyOX/0q9IF6GitryCwOtnstoW+jV5MhxhQLMPw6DlJv6587qu
- wUnaF59L/Q11k+XRBs+E/ICoaeSAvQr+ATcAvqzow7IEVq6g5A5ke6n1a5sly3VPnn//
- QvEuc0eG26mdMwxWGks31tXaGR4WSxI5smXnFhekSY1jIgHaq7YFF3SNV2uJxpJy/ERC
- TRydsUVrgtCo2y60aWIbG9LhJKFVefgDpZ83JRQrWg+DwUYeTMPqZAf3uv5xpDKBASUh
- a4iw==
+ bh=wOWRMT9Wom2rCZvtVJ3G50s9Dz2cWMlzHMRlXl0E0Tk=;
+ b=ou0RYZuECl1reiRRqPncEBXpoIuw3lhPN3z5NiW3iQ7KI57sXKmDPbGGxi4msDpV3J
+ oeZW6HBQj3tenaOUiwo8p1RmyNwhy0eF30Ew2hey7xWSpE2U9c4n1HzyDEU79IKPHJ2T
+ WqRdULwr1pYhS51N90PA1M77O+dEpLXJvSjuQ1k8NJmCJ6q6jTLHgm2iqvw3pAHG3eN4
+ eOme7w3jd/5Ydthq3WRYLJkLfLw7GfX3ETcZVKEEB1vwBr8NBFecBNrj4d0AdX3IsYPj
+ LNdCetGxZCCrUo4/U9cmyrhuT51NV79an/GcFzrTY+rM4k/zcRx6K07KHAsUGKYnDlMG
+ /60A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701639790; x=1702244590;
+ d=1e100.net; s=20230601; t=1701640195; x=1702244995;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TEk3ijy963YoMTdqF6zgEexfq8989oQN0ZbcMRYP3cc=;
- b=PQ9KsC6E4Z2n9Md4AcKHWZW0pvql/pWta57eBCPJFZwAp0YLYCrdFvrT4KS4Lb1NTj
- 41RHTYf1E+XNB7nFg02iZ5cc48TVCfDl3QQR53lIk5D6CuHHYIiP7Pjy2lr+Wppd8yRK
- kVxtPlMwAuyJyp6TMkSscjbKBpUd3Y42D4q21BsNvi1zOWRYs9Ax7GINscRFylGXOq3/
- yvekvXZZlSm+rG3jdQDrW7siYePYOBTMXJxsqecsXNBZyAH69C4xGX1PFKGKUcHUs8Yt
- dDAoyf4pBx4w4DGtL94cR6uMKZ76OULmkcPKNWzH0LO9iaANaxKbeGc6A4TmPav8ofTb
- upAA==
-X-Gm-Message-State: AOJu0YxmzLoI1LSZUoUP0O5ME5PDsD9qxNVT2nZvpMDdyDWxk42AzU9t
- x/LU3th2/soRK55fLVaKVLj9LB5JMSIWSvIAD9NyxY6m
-X-Google-Smtp-Source: AGHT+IHOnIjXRffZMQTpBe7NKuYfsqM5Vb89L6+cbREJWRxiIloDhtVYETm0hxOura+V9zLotZi51Q==
-X-Received: by 2002:a17:906:3f01:b0:a19:7144:6bf4 with SMTP id
- c1-20020a1709063f0100b00a1971446bf4mr2619508ejj.59.1701639789660; 
- Sun, 03 Dec 2023 13:43:09 -0800 (PST)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com.
- [209.85.208.46]) by smtp.gmail.com with ESMTPSA id
- oz11-20020a170906cd0b00b009fc990d9edbsm4513614ejb.192.2023.12.03.13.43.09
+ bh=wOWRMT9Wom2rCZvtVJ3G50s9Dz2cWMlzHMRlXl0E0Tk=;
+ b=EJnzloiwVLAcIFPNozNEM1t1YzQ9jBogIO+bz4QMdwEeUo/teDuMm3uIMBxHTuXy8I
+ MXDX0Pd5JLpoCvPGyX2LsYp6m+OUmbygYAmaBpxvid1xVFNp6AXw+4kgydLU6nhkJF/I
+ 6s5lYqeyTM33cKJqH4uQTlJVMzkw+eXhmY8+RIB94tNAIU+CahM2kE8H7p/yAOFy9F96
+ zDix8ZoqK7nTQR1e0utVyFGZzOvb72/NBuoXK2isft5e0LGAYkUEO3Nflyex5WhwKCqd
+ AtUS2NHNdOTMan+TA83099ZmKLyvuIXjp1hRrwdFzIgBB8Klu5gnyilhC5FrqvkZNgZE
+ 2Xhg==
+X-Gm-Message-State: AOJu0YzmvI66Rw71wZ8fLt8ZGLwqnuSDZk1p62/bb4mxyOXOHeOOHiqT
+ WPtIIe41tYzqP1JNAZEIFWvMQsQ20Rb4iduj1yGwishp
+X-Google-Smtp-Source: AGHT+IEuNvCHTOJMPvJdoYhNuBhcjNLoyJ2B03Q9MBLqWVCTfusXrxUIZDKv93vpB4sceU5aPhoYjA==
+X-Received: by 2002:a2e:87d9:0:b0:2ca:3ea:fe05 with SMTP id
+ v25-20020a2e87d9000000b002ca03eafe05mr157566ljj.98.1701640195546; 
+ Sun, 03 Dec 2023 13:49:55 -0800 (PST)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com.
+ [209.85.208.51]) by smtp.gmail.com with ESMTPSA id
+ my18-20020a1709065a5200b009f28db2b702sm4514596ejc.209.2023.12.03.13.49.55
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 03 Dec 2023 13:43:09 -0800 (PST)
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-54bfa9b3ffaso4946130a12.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 13:43:09 -0800 (PST)
-X-Received: by 2002:a50:c08a:0:b0:54a:fb41:14c with SMTP id
- k10-20020a50c08a000000b0054afb41014cmr2469629edf.36.1701639788856; Sun, 03
- Dec 2023 13:43:08 -0800 (PST)
+ Sun, 03 Dec 2023 13:49:55 -0800 (PST)
+Received: by mail-ed1-f51.google.com with SMTP id
+ 4fb4d7f45d1cf-54c7744a93fso1913328a12.2
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 13:49:55 -0800 (PST)
+X-Received: by 2002:a50:d5c3:0:b0:54a:8e8c:80ac with SMTP id
+ g3-20020a50d5c3000000b0054a8e8c80acmr3074567edj.30.1701640194803; Sun, 03 Dec
+ 2023 13:49:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20231110141311.512334-1-i@shantur.com>
- <a911092c-78e7-469b-abd8-2aeb9f7e28b7@denx.de>
- <CAHc5_t3ddCnKMBNbe8Cc=dZBXvxyke2p5ydU2dbt8Gt8RH43_w@mail.gmail.com>
- <14da0009-8819-4355-8a38-c9fe926ab3f7@denx.de>
- <CAHc5_t0-Mt+-9aBXnD0457YKRyJXHj3oYunq2c35ZaMbmQnqAw@mail.gmail.com>
- <3284f652-49dd-409f-9130-ad7cbce64b32@denx.de>
- <CAHc5_t3t7E+qZrv_KvNNwMDmD9+o+SX3jwv-wq-4gP3d17yBwg@mail.gmail.com>
- <2fe93269-7373-46cb-95e0-383270ea67ac@denx.de>
-In-Reply-To: <2fe93269-7373-46cb-95e0-383270ea67ac@denx.de>
+References: <20231126220836.374956-1-i@shantur.com>
+ <20231126220836.374956-4-i@shantur.com>
+ <CAPnjgZ2W2maVN14usKHHdyTKyzriP_=iJYpYBvycRxR5zDZW2g@mail.gmail.com>
+ <CAHc5_t3fMFntuQ+VLOb9RQ7CBCy7mtsEFEKZ1bWzDAu3mCVEHw@mail.gmail.com>
+ <CAPnjgZ3YQb5Tva44HOv+SLx58XBJqqZwhFMxrfxrMY71bjpMLg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3YQb5Tva44HOv+SLx58XBJqqZwhFMxrfxrMY71bjpMLg@mail.gmail.com>
 From: Shantur Rathore <i@shantur.com>
-Date: Sun, 3 Dec 2023 21:42:57 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t1Gw7TyxaoEdCcZ1Avh+hjMx+po=2Bh86V=ykt65qPqKg@mail.gmail.com>
-Message-ID: <CAHc5_t1Gw7TyxaoEdCcZ1Avh+hjMx+po=2Bh86V=ykt65qPqKg@mail.gmail.com>
-Subject: Re: [PATCH] common: usb-hub: Reset hub port before scanning
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+Date: Sun, 3 Dec 2023 21:49:43 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t2pEzVLH7aD_md5PVkpj_LC_U70EK-Q-1Yrc+P45NqVcw@mail.gmail.com>
+Message-ID: <CAHc5_t2pEzVLH7aD_md5PVkpj_LC_U70EK-Q-1Yrc+P45NqVcw@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] defconfig: rockpro64: Enable SF EFI var store
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -108,124 +103,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Simon,
 
-On Sun, Dec 3, 2023 at 8:42=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Sun, Dec 3, 2023 at 5:44=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
+:
 >
-> On 11/24/23 01:37, Shantur Rathore wrote:
-> > Hi Marek,
+> Hi Shantur,
 >
-> Hi,
->
-> sorry for the late reply.
->
-> >>>>> In my case RockPro64, the power to usb ports onboard is controlled =
-by
-> >>>>> a regulator.
-> >>>>> This regulator is enabled as part of init  as here
-> >>>>> https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3399-ro=
-ckpro64.dtsi#L177
-> >>>>>
-> >>>>> On init, the usb devices connected to the port are powered up, in m=
-y
-> >>>>> case AM8180 (a RTL9210 based ) NVMe to USB enclosure with UAS.
-> >>>>> But the usb controller is only enabled at 'usb start' and by this t=
-ime
-> >>>>> the device is in some state that it doesn't get detected.
-> >>>>>
-> >>>>> One way to make sure the devices connected to the ports are in an
-> >>>>> initialising state is by issuing a port reset before scanning the
-> >>>>> port.
-> >>>>
-> >>>> Why not remove this regulator-always-on and let the PHY driver turn =
-the
-> >>>> VBUS ON only when it is needed ?
-> >>>>
-> >>>> Wouldn't that solve the problem too AND remove unnecessarily enabled
-> >>>> regulator ?
-> >>>>
-> >>>> [...]
-> >>>
-> >>> Removing the regulator-always-on does make it work but there are few =
-issues
-> >>>
-> >>> 1. regulator is used to control power to multiple ports ( USB3.0 and
-> >>> USB2.0 in RockPro64 ),
-> >>> so this could lead to all ports turning off if a phy resets / turns o=
-ff power
-> >>
-> >> I vaguely recall seeing some refcounting patch for regulator subsystem=
-,
-> >> would that help ?
+> On Sat, 2 Dec 2023 at 16:12, Shantur Rathore <i@shantur.com> wrote:
 > >
-> > I don't think this would be a problem for u-boot, but linux maybe.
->
-> How so ?
-
-Actually, I am wrong. I wasn't sure if there is refcounting for the
-regulator subsystem
-in linux. just found it has so this is null and void.
-
->
-> >>> 2. Even with regulator-always-on and without this reset port patch,
-> >>> linux was always
-> >>> able to detect the drive on the port, so there is something missing i=
-n u-boot.
-> >>> 3. Looking at usb hub code in Linux, I found that for USB3.0 it tries
-> >>> to reset the port before
-> >>> scanning. The comment says
-> >>>
-> >>> /* Is a USB 3.0 port in the Inactive or Compliance Mode state?
-> >>>    * Port warm reset is required to recover
-> >>>    */
-> >>>
-> >>> i. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hub=
-.c#L5736
-> >>> ii. https://github.com/torvalds/linux/blob/master/drivers/usb/core/hu=
-b.c#L2836
-> >>>
-> >>> I believe this isn't implemented in u-boot and hence explicit reset o=
-f
-> >>> a port fixes the issue.
-> >>
-> >> I feel this is separate issue and what needs to be fixed first is the
-> >> hard-wired VBus control.
+> > Hi Simon,
 > >
-> > I beg to differ on this, couple of reasons for this
+> > On Fri, Dec 1, 2023 at 6:44=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
+rote:
+> > >
+> > > Hi Shantur,
+> > >
+> > > On Sun, 26 Nov 2023 at 15:09, Shantur Rathore <i@shantur.com> wrote:
+> > > >
+> > > > RockPro64 uses SPI Flash for storing env, also use it store
+> > > > EFI variables.
+> > > >
+> > > > Signed-off-by: Shantur Rathore <i@shantur.com>
+> > > > ---
+> > > >
+> > > >  configs/rockpro64-rk3399_defconfig | 2 ++
+> > > >  1 file changed, 2 insertions(+)
+> > > >
+> > > > diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64=
+-rk3399_defconfig
+> > > > index 4cd6b76665..f550f2ae43 100644
+> > > > --- a/configs/rockpro64-rk3399_defconfig
+> > > > +++ b/configs/rockpro64-rk3399_defconfig
+> > > > @@ -8,6 +8,8 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+> > > >  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x300000
+> > > >  CONFIG_ENV_SIZE=3D0x8000
+> > > >  CONFIG_ENV_OFFSET=3D0x3F8000
+> > > > +CONFIG_EFI_VARIABLE_SF_STORE=3Dy
+> > > > +CONFIG_EFI_VARIABLE_SF_OFFSET=3D0x7D0000
+> > >
+> > > Can we use this offset in binman when creating the SPI-flash image?
 > >
-> > 1. The same drive works fine without being reset on the USB2.0 ports - =
-this
-> > confirms that the issue is related to USB3.0 only.
+> > Unless I missed something, binman is used when something is bundled
+> > with a u-boot image.
+> > This is similar to ENV_OFFSET letting u-boot know where it can write
+> > the EFI variables.
+> > I didn't see ENV_OFFSET referred in rk3399-u-boot.dtsi or
+> > rk3399-rockpro64-u-boot.dtsi
+> >
+> > Please correct me if I am wrong.
 >
-> This is a separate issue from the hard-wired VBus control. I agree the
-> issue does exist, I would simply like to avoid conflating the hard-wired
-> VBus control with device reset.
+> Well, this is what I see in arch/arm/dts/rk3399-u-boot.dtsi :
 >
-> > 2. Linux is able to detect the same drive on USB3.0 when u-boot fails -=
- this
-> > confirms issue doesn't lie with regulator-always-on
+> #if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
+> &binman {
+>    multiple-images;
+>    rom {
+>       filename =3D "u-boot.rom";
+>       size =3D <0x400000>;
+>       pad-byte =3D <0xff>;
 >
-> See above
+>       mkimage {
+>          args =3D "-n rk3399 -T rkspi";
+>          u-boot-spl {
+>          };
+>       };
+>       u-boot-img {
+>          offset =3D <0x40000>;
+>       };
+>       u-boot {
+>          offset =3D <0x300000>;
+>       };
+>       fdtmap {
+>       };
+>    };
+> };
+> #endif /* CONFIG_ROCKCHIP_SPI_IMAGE && CONFIG_HAS_ROM */
 >
-> > 3. The links I pasted earlier mentions that in USB3.0 the ports need re=
-set
-> > and this is done before the port is scanned. Adding the similar reset i=
-n u-boot
-> > fixes all with the same regulator-always-on. AFAIK u-boot doesn't handl=
-e
-> > this special USB3.0 case and maybe this is why I was finding a few post=
-s
-> > around the drive not being detected in the USB3.0 port in u-boot but wo=
-rks in
-> > a USB2.0 port.
+> So it looks like 0x3f8000 fits in there somewhere.
 >
-> I am not disputing the need for USB 3.0 device reset, I believe there
-> are two issues here -- one is the hard-wired VBus regulator -- the other
-> is this USB 3.0 reset. They should both be fixed.
 
-Sure, agreed 100%.
-Do we need to fix both at the same time?
-Both patches seem to be independent.
+Thanks for clarifying. Now I see how ENV space is declared as used by u-boo=
+t.
 
-Kind regards,
-Shantur
+
+> In fact, I wonder if we should add something like:
+>
+> u-boot-env {
+>    offset =3D <CONFIG_ENV_OFFSET>;
+> };
+>
+> so the environment gets filled into the SPI flash when we write the image=
+?
+>
+
+Do we want to reset the environment to default on every u-boot update?
+I believe this would overwrite the environment space isn't it.
+
+> I suppose we could also add the EFI variable store, although that
+> would require adding a new entry type to binman.
+>
+
+I am not sure about this but surely EFI vars can be moved to a location
+just after the u-boot environment and increase the u-boot image size.
+
+Would you still need an entry in dts?
