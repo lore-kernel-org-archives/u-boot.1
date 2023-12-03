@@ -4,36 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91604C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:24:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3379C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:24:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCE898757C;
-	Mon,  4 Dec 2023 01:24:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gnudd.com
+	by phobos.denx.de (Postfix) with ESMTP id 83723875F5;
+	Mon,  4 Dec 2023 01:24:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="OELGIaOK";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B12B7875EB; Sun,  3 Dec 2023 18:08:29 +0100 (CET)
-Received: from mail.gnudd.com (mail.gnudd.com [93.91.132.248])
+ id 6E9C1875DF; Sun,  3 Dec 2023 18:27:50 +0100 (CET)
+Received: from mail-4318.protonmail.ch (mail-4318.protonmail.ch [185.70.43.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC7A1875B9
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 18:08:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA0EB8759C
+ for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 18:27:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=proton.me
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gnudd.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=rubini@arcana.gnudd.com
-Received: from rubini by mail.gnudd.com with local (Exim 4.94.2)
- (envelope-from <rubini@arcana.gnudd.com>) id 1r9pxC-0002Ev-QZ
- for u-boot@lists.denx.de; Sun, 03 Dec 2023 18:08:26 +0100
-Date: Sun, 3 Dec 2023 18:08:26 +0100
-From: Alessandro Rubini <rubini@gnudd.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] tools: mxsboot: pre-fill buffer with 0xff, not 0
-Message-ID: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+ spf=pass smtp.mailfrom=ubroot37@proton.me
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+ s=vu5pnrxudfbithdk4myvupp3je.protonmail; t=1701624467; x=1701883667;
+ bh=fQx4DgIO8WRjPcizlZH505d+10TgtJA35QkJoNI99r0=;
+ h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=OELGIaOK3ddENsQX3P353TJ/o13OZm8koDS682b8SRg2Gr6Ww4FParbjpOADDzSVA
+ Kky1HSqTDTKygQxuwAkO0MsF2cs4Vr30dnIFio6/tl/i07n2ruCxAudaDYtslrCbiJ
+ yanZAmPjmkPE3dFWhyam2FktgPfFjH8UOT2cnEe0xAG3DT1FvR2+raLHK4kkG8L7Fy
+ ZuzECRYJcD58daqYfXYJ1TUKXTm3f+xK5qgqw0rp3rLieQ61ePHOyjAYPH6XIremur
+ OQjXMY7gzwmSwQ5Galfk38pvnF430mElgjumSt6G/o/0WxKIqlvYAKX+fRGzhxRQT3
+ A21Swwdj3mGRQ==
+Date: Sun, 03 Dec 2023 17:27:31 +0000
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: ubroot37 <ubroot37@proton.me>
+Subject: rk3328 gmac does U-Boot erroneously not set RSF?
+Message-ID: <b1aNNi5jB7PW_exaGts62-LnkNoYW9xrdFW0SxIPsrStzzzC6TFAIEeCUpGDhrLKUBGHRnAkrF01qXQegDTHN7LsFr6IDmmWpBbA8GGfT8M=@proton.me>
+Feedback-ID: 94133723:user:proton
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Organization: GnuDD, Device Drivers, Embedded Systems, Courses
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 04 Dec 2023 01:24:45 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -51,32 +62,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The tool works for me, with imx28 and NAND memory, but the resulting
-blocks are reported as bad, both by u-boot and the kernel.
+Hi all,
 
-This makes it impossible to erase from Linux (for an upgrade without
-console access, for example -- u-boot can "nand scrub" but linux can't).
+I suspect U-Boot is not setting the RSF bit in GMAC_OP_MODE register. This =
+can result in allowing to receive frames with bad CRC. I suspect the Linux =
+driver may be similarly affected, but I have not checked it out.
 
-pre-filling with 0xff creates a proper boot loader image, but no
-bad-block marker is there when written to flash.
+Unfortunately all my spare time is taken up by development on my own OS, so=
+ I do not have the time to investigate fully and/or provide a patch. I am j=
+ust reporting this potential issue as a good Samaritan, but please understa=
+nd that I am not willing to apply any patches or recompile U-Boot or conduc=
+t any tests or anything of that nature.
 
-Signed-off-by: Alessandro Rubini <rubini@gnudd.com>
----
- tools/mxsboot.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks all.
 
-diff --git a/tools/mxsboot.c b/tools/mxsboot.c
-index 04d86f87a8..8f4018aa56 100644
---- a/tools/mxsboot.c
-+++ b/tools/mxsboot.c
-@@ -478,7 +478,7 @@ static int mx28_create_nand_image(int infd, int outfd)
- 		goto err0;
- 	}
- 
--	memset(buf, 0, size);
-+	memset(buf, 0xff, size);
- 
- 	fcb = mx28_nand_get_fcb(MAX_BOOTSTREAM_SIZE);
- 	if (!fcb) {
--- 
-2.30.2
