@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCBA3C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 16:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E1C6C10DC1
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 17:01:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85F4587717;
-	Mon,  4 Dec 2023 17:39:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 62A88870F4;
+	Mon,  4 Dec 2023 18:01:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uq/hIqM8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="A5xYf9fI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD1FE876DA; Mon,  4 Dec 2023 17:39:06 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BDD63870F2; Mon,  4 Dec 2023 18:01:54 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57943874F2
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 17:39:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CFAB86D37
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 18:01:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1d0bb7ff86cso3302505ad.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 08:39:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701707942; x=1702312742; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y3a+oML8v5w7ub68ksQPRxY8AGXaDxqfr/8YKFITedY=;
- b=uq/hIqM8QIFSHcNv08/oTfAFTJXHqNO3pAKtPBLln9Pp7TcbIWFvkYw2iosONw5Z6Q
- MRHa8WpT9S6Ae7F1W37FqWZnT4qiY3TCfrijMQwxFFnk0Ko/HZeMD6wMoSy88RGQeexa
- u9OUfWSFB44YpJFd0nCliBszw2uki1ItelqAxnRmA1WnaYQO2tono4a98pcpkjtS7UFN
- 2vp6fydzuO1IrBV3Cg1zqKturvdwGZNgwbFNi85z3rnUyJwEAwcqdWCCud4P0TdZna0n
- LfqH+fis0LXLmfxd9U5nsVM5lLPBGrTI+ZsyZlEykU+BfrdQF55kgVoT3nQmzTmd++7N
- 5b/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701707942; x=1702312742;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Y3a+oML8v5w7ub68ksQPRxY8AGXaDxqfr/8YKFITedY=;
- b=ENdgSfX6flK/liLFR/hBCHkz3DNKLPJHbM9OIMpzXnVpbUcPXwB/1H+Y5uRBc2NEN0
- MKRuxFUzalmjaU8Uctw5UDY3qv8GmaeEDt7l+9RdHhl9FT/zKW3J3eEBU1H2B8Ov0IqK
- yHpqJ2JqKFgb/m2IQxCkaE7GLhbGx50Vv57QXchBl1VTMwc7SkY6tTVhhgRchxKyGhjn
- 9/wg1JoU/2DRAUDtn1SgaBwpsTlHjVE+ZMqb67mqdN+oosdB4AQpZgwb+Jtlp4o6z80y
- EVn08Pf6SEeFr9DHRroV4tS0ve2SXtMpFXucHyTAx+zPLTYpm/HmQoyFTQ1GE1d4QJkE
- upsQ==
-X-Gm-Message-State: AOJu0YxKSz+7qDrRqgNiwflrAAzut+w6dxstdHcF9sNE0ZiNf4q59tgJ
- dygDSoNt7j5O6lm4laFdb0HmllQLI/PcR13nx4JkCA==
-X-Google-Smtp-Source: AGHT+IEjT8aVYZEYUTa0UYtV9TT/voA5DQSZzN1cnq02hyqlgzISKio+uPJKawN3v54w6kmTWmWBpVjqS2Dek8Xkv0I=
-X-Received: by 2002:a17:90b:1a91:b0:286:9b50:b98 with SMTP id
- ng17-20020a17090b1a9100b002869b500b98mr2857099pjb.5.1701707942545; Mon, 04
- Dec 2023 08:39:02 -0800 (PST)
+ spf=pass smtp.mailfrom=robh+dt@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 0E023B81076
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 17:01:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9425C433CC
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 17:01:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701709310;
+ bh=HouZitkEa3BlZ1+iedR46jeMbKp0nskkQObZLwF3fhE=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=A5xYf9fIyeYugM4bzJ7V7c6EsGCmyGMbCx70ZzUhOg7SO5uruyoT+deQUCCBy2eYA
+ apLlW8x9EauiZgHwj5hMNvre9Pp6fReLgXh2s3+9f4RBuYUtqAPUdNSk3tY/7j2SfM
+ KTFS2NYQkIyon+TLOhvWNNGelcufhLoIGjvKvQc1x1OBkaxD6z0NbkiZn4hq3DF0eT
+ FxLdXw1b5gw1ruDHM8KBBuSfltbCvqKh/plsSRfoR+AZHsAmwq67MzWMSR4Hp5yRpe
+ meoBBipv62UU56GiXjsoJXg1LPly+rffkXqxagqW4ZvYSXSUX2Ckn7KBVWMmL8L3Xa
+ N/T/Tfffdy4bw==
+Received: by mail-lf1-f44.google.com with SMTP id
+ 2adb3069b0e04-50bc22c836bso6276478e87.0
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 09:01:50 -0800 (PST)
+X-Gm-Message-State: AOJu0YxM7GWt2TO5pZJJJ4tOZsjQmor95meU9op/azj+YsNeOLPyBIle
+ 1915rVUGxarGCnSqXU3Mt0ZNh6GJkZIuwV5b7A==
+X-Google-Smtp-Source: AGHT+IGRO6s7f1oPcENESyOug3YsUnbDD8pWvujj7N3gIwoJP67HqHjdeVpb9VI8zpYHBkE7D7ZfLfqDSxgFLr+5OEg=
+X-Received: by 2002:ac2:5f6c:0:b0:50b:f648:e17a with SMTP id
+ c12-20020ac25f6c000000b0050bf648e17amr971752lfc.108.1701709308770; Mon, 04
+ Dec 2023 09:01:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-6-raymond.mao@linaro.org>
- <CAC_iWjJyKkp2TAq3H=h0z0sC6S0tSZgvgusAiA9sYOzp_7cx=A@mail.gmail.com>
-In-Reply-To: <CAC_iWjJyKkp2TAq3H=h0z0sC6S0tSZgvgusAiA9sYOzp_7cx=A@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 4 Dec 2023 11:38:52 -0500
-Message-ID: <CAEfUkUKN0KkfNae7s=vWWi=O8o4DV0VhX=iLU=cSrR_7iq392Q@mail.gmail.com>
-Subject: Re: [PATCH v2 05/18] bloblist: Access record hdr_size and tag via a
- function
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, Bin Meng <bmeng.cn@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>, 
- Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sean Anderson <seanga2@gmail.com>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+In-Reply-To: <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+From: Rob Herring <robh+dt@kernel.org>
+Date: Mon, 4 Dec 2023 11:01:34 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqL4dKbziAgwaCDz7sw-evuX7LZ3E-H6h=xQ9cXiyThY1Q@mail.gmail.com>
+Message-ID: <CAL_JsqL4dKbziAgwaCDz7sw-evuX7LZ3E-H6h=xQ9cXiyThY1Q@mail.gmail.com>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, conor+dt@kernel.org, 
+ Caleb Connolly <caleb.connolly@linaro.org>, neil.armstrong@linaro.org, 
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Boot Architecture Mailman List <boot-architecture@lists.linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,176 +98,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
-
-This patch is for later grouping the tag and hdr_size in
-'0011-bloblist-Reduce-blob-header-size.patch'.
-I can update the commit message.
-
-Thanks and regards,
-Raymond
-
-On Mon, 4 Dec 2023 at 03:31, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Sun, Dec 3, 2023 at 11:33=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org> =
 wrote:
+>
+> + Linux kernel DT bindings maintainers, EBBR ML
+>
+> On Thu, 30 Nov 2023 at 20:05, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Nov 30, 2023 at 01:02:25PM +0530, Sumit Garg wrote:
+> > > On Wed, 29 Nov 2023 at 22:06, Neil Armstrong <neil.armstrong@linaro.o=
+rg> wrote:
+> > > >
+> > > > On 29/11/2023 16:34, Caleb Connolly wrote:
+> > > > >
+> > > > >
+> > > > > On 23/11/2023 07:04, Sumit Garg wrote:
+> > > > >> On Wed, 22 Nov 2023 at 21:34, Caleb Connolly <caleb.connolly@lin=
+aro.org> wrote:
+> > > > >>>
+> > > > >>>
+> > > > >>>
+> > > > >>> On 22/11/2023 14:27, Tom Rini wrote:
+> > > > >>>> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
+> > > > >>>>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > >>>>>>
+> > > > >>>>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
+> > > > >>>>>>> Hi Caleb,
+> > > > >>>>>>>
+> > > > >>>>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connoll=
+y@linaro.org> wrote:
+> > > > >>>>>> [snip]
+> > > > >>>>>>>> =3D=3D DT loading =3D=3D
+> > > > >>>>>>>>
+> > > > >>>>>>>> Previously, boards used the FDT blob embedded into U-Boot =
+(via
+> > > > >>>>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as =
+a secondary
+> > > > >>>>>>>> bootloader, so we can instead rely on the first-stage boot=
+loader to
+> > > > >>>>>>>> populate some useful FDT properties for us (notably the /m=
+emory node and
+> > > > >>>>>>>> KASLR seed) and fetch the DTB that it provides. Combined w=
+ith the memory
+> > > > >>>>>>>> map changes above, this let's us entirely avoid configurin=
+g the memory
+> > > > >>>>>>>> map explicitly.
+> > > > >>>>>>>
+> > > > >>>>>>> Since with this change, we don't need to embed FDT blob in =
+the u-boot
+> > > > >>>>>>> binary, so I was thinking if we really need to import DTs f=
+rom Linux
+> > > > >>>>>>> for different platforms and then play a catchup game?
+> > > > >>>
+> > > > >>> For now, yes.
+> > > > >>
+> > > > >> But why? Is there any value added by larger u-boot specific DT (=
+most
+> > > > >> of the nodes being unused by u-boot) than what currently u-boot
+> > > > >> supports? The more important part is to get alignment with Linux=
+ DT
+> > > > >> bindings. If you need to have memory/reserved-memory nodes in u-=
+boot
+> > > > >> DT for generalization purposes then you should import those part=
+icular
+> > > > >> nodes only.
+> > > > >
+> > > > > I've been thinking about and hacking on this for the last week or=
+ so,
+> > > > > sorry for the delayed reply here.
+> > > > >
+> > > > > The value is in preventing any of the existing bindings from regr=
+essing,
+> > >
+> > > That is actually best addressed in Linux by checking the DTS against
+> > > yaml DT bindings. We don't have that testing available in u-boot and
+> > > only depend on careful reviews.
+> >
+> > I would absolutely love for someone to make another attempt at updating
+> > our kbuild infrastucture so that we can run the validation targets.
+> >
+>
+> Given that EBBR requires [1] the platform (firmware/bootloader) and
+> not OS to supply the devicetree, it becomes evident that
+> firmware/bootloaders import DTS from Linux kernel (where it is
+> maintained).
+>
+> But currently u-boot doesn't have a proper way to validate those DTS
+> against DT bindings (maintained in Linux kernel). Although there are
+> Devicetree schema tools available here [2], there isn't a versioned
+> release package of DT bindings which one should use to validate DTS
+> files.
+>
+> @DT bindings maintainers,
+>
+> Given the ease of maintenance of DT bindings within Linux kernel
+> source tree, I don't have a specific objection there. But can we ease
+> DTS testing for firmware/bootloader projects by providing a versioned
+> release package for DT bindings? Or if someone else has a better idea
+> here please feel free to chime in.
 
-> On Mon, 27 Nov 2023 at 21:52, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > From: Simon Glass <sjg@chromium.org>
-> >
-> > These values currently use a simple field. With spec v0.9 they have moved
-> > to a packed format. Convert most accesses to use functions, so this
-> change
-> > can be accommodated.
->
-> I don't really understand how the commit message is related to the changes.
-> What did the packed format affect that we need a function?
->
-> Thanks
-> /Ilias
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  common/bloblist.c | 38 +++++++++++++++++++++++++-------------
-> >  1 file changed, 25 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index e744c2b0c0..f084a32cfc 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -82,13 +82,23 @@ static struct bloblist_rec
-> *bloblist_first_blob(struct bloblist_hdr *hdr)
-> >         return (struct bloblist_rec *)((void *)hdr + hdr->hdr_size);
-> >  }
-> >
-> > +static inline uint rec_hdr_size(struct bloblist_rec *rec)
-> > +{
-> > +       return rec->hdr_size;
-> > +}
-> > +
-> > +static inline uint rec_tag(struct bloblist_rec *rec)
-> > +{
-> > +       return rec->tag;
-> > +}
-> > +
-> >  static ulong bloblist_blob_end_ofs(struct bloblist_hdr *hdr,
-> >                                    struct bloblist_rec *rec)
-> >  {
-> >         ulong offset;
-> >
-> >         offset = (void *)rec - (void *)hdr;
-> > -       offset += rec->hdr_size + ALIGN(rec->size, BLOBLIST_ALIGN);
-> > +       offset += rec_hdr_size(rec) + ALIGN(rec->size, BLOBLIST_ALIGN);
-> >
-> >         return offset;
-> >  }
-> > @@ -117,7 +127,7 @@ static struct bloblist_rec *bloblist_findrec(uint
-> tag)
-> >                 return NULL;
-> >
-> >         foreach_rec(rec, hdr) {
-> > -               if (rec->tag == tag)
-> > +               if (rec_tag(rec) == tag)
-> >                         return rec;
-> >         }
-> >
-> > @@ -156,7 +166,7 @@ static int bloblist_addrec(uint tag, int size, int
-> align_log2,
-> >         rec->spare = 0;
-> >
-> >         /* Zero the record data */
-> > -       memset((void *)rec + rec->hdr_size, '\0', rec->size);
-> > +       memset((void *)rec + rec_hdr_size(rec), '\0', rec->size);
-> >
-> >         hdr->alloced = new_alloced;
-> >         *recp = rec;
-> > @@ -197,7 +207,7 @@ void *bloblist_find(uint tag, int size)
-> >         if (size && size != rec->size)
-> >                 return NULL;
-> >
-> > -       return (void *)rec + rec->hdr_size;
-> > +       return (void *)rec + rec_hdr_size(rec);
-> >  }
-> >
-> >  void *bloblist_add(uint tag, int size, int align_log2)
-> > @@ -207,7 +217,7 @@ void *bloblist_add(uint tag, int size, int
-> align_log2)
-> >         if (bloblist_addrec(tag, size, align_log2, &rec))
-> >                 return NULL;
-> >
-> > -       return (void *)rec + rec->hdr_size;
-> > +       return (void *)rec + rec_hdr_size(rec);
-> >  }
-> >
-> >  int bloblist_ensure_size(uint tag, int size, int align_log2, void
-> **blobp)
-> > @@ -218,7 +228,7 @@ int bloblist_ensure_size(uint tag, int size, int
-> align_log2, void **blobp)
-> >         ret = bloblist_ensurerec(tag, &rec, size, align_log2);
-> >         if (ret)
-> >                 return ret;
-> > -       *blobp = (void *)rec + rec->hdr_size;
-> > +       *blobp = (void *)rec + rec_hdr_size(rec);
-> >
-> >         return 0;
-> >  }
-> > @@ -230,7 +240,7 @@ void *bloblist_ensure(uint tag, int size)
-> >         if (bloblist_ensurerec(tag, &rec, size, 0))
-> >                 return NULL;
-> >
-> > -       return (void *)rec + rec->hdr_size;
-> > +       return (void *)rec + rec_hdr_size(rec);
-> >  }
-> >
-> >  int bloblist_ensure_size_ret(uint tag, int *sizep, void **blobp)
-> > @@ -243,7 +253,7 @@ int bloblist_ensure_size_ret(uint tag, int *sizep,
-> void **blobp)
-> >                 *sizep = rec->size;
-> >         else if (ret)
-> >                 return ret;
-> > -       *blobp = (void *)rec + rec->hdr_size;
-> > +       *blobp = (void *)rec + rec_hdr_size(rec);
-> >
-> >         return 0;
-> >  }
-> > @@ -279,7 +289,7 @@ static int bloblist_resize_rec(struct bloblist_hdr
-> *hdr,
-> >
-> >         /* Zero the new part of the blob */
-> >         if (expand_by > 0) {
-> > -               memset((void *)rec + rec->hdr_size + rec->size, '\0',
-> > +               memset((void *)rec + rec_hdr_size(rec) + rec->size, '\0',
-> >                        new_size - rec->size);
-> >         }
-> >
-> > @@ -313,8 +323,9 @@ static u32 bloblist_calc_chksum(struct bloblist_hdr
-> *hdr)
-> >         chksum = crc32(0, (unsigned char *)hdr,
-> >                        offsetof(struct bloblist_hdr, chksum));
-> >         foreach_rec(rec, hdr) {
-> > -               chksum = crc32(chksum, (void *)rec, rec->hdr_size);
-> > -               chksum = crc32(chksum, (void *)rec + rec->hdr_size,
-> rec->size);
-> > +               chksum = crc32(chksum, (void *)rec, rec_hdr_size(rec));
-> > +               chksum = crc32(chksum, (void *)rec + rec_hdr_size(rec),
-> > +                              rec->size);
-> >         }
-> >
-> >         return chksum;
-> > @@ -422,8 +433,9 @@ void bloblist_show_list(void)
-> >         for (rec = bloblist_first_blob(hdr); rec;
-> >              rec = bloblist_next_blob(hdr, rec)) {
-> >                 printf("%08lx  %8x  %4x %s\n",
-> > -                      (ulong)map_to_sysmem((void *)rec + rec->hdr_size),
-> > -                      rec->size, rec->tag, bloblist_tag_name(rec->tag));
-> > +                      (ulong)map_to_sysmem((void *)rec +
-> rec_hdr_size(rec)),
-> > +                      rec->size, rec_tag(rec),
-> > +                      bloblist_tag_name(rec_tag(rec)));
-> >         }
-> >  }
-> >
-> > --
-> > 2.25.1
-> >
->
+This doesn't work for you?:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebas=
+ing.git/
+
+Note that I would like to revamp this repo to use some modern CI job,
+use git_filter_repo python module rather than git-filter-branch, and
+move to devicetree.org GH, but if projects aren't relying on this
+repo, I'm not motivated to do that work.
+
+Rob
