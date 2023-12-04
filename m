@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32048C10F04
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 11:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C959CC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CBA58709C;
-	Mon,  4 Dec 2023 12:38:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0A0C487026;
+	Mon,  4 Dec 2023 13:05:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yUdwfyG2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kOraqevj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 504C1870A0; Mon,  4 Dec 2023 12:38:57 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 3FB3587078; Mon,  4 Dec 2023 13:05:17 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F73587032
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 12:38:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9BE386F1C
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:05:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2c9f099cf3aso25230841fa.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 03:38:55 -0800 (PST)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2c9bd3ec4f6so53243381fa.2
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 04:05:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701689934; x=1702294734; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701691514; x=1702296314; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JJvSTHWuTq1Ke0y1mUX6UfNhJdfCVZMaKWEDCRFcHZw=;
- b=yUdwfyG2tIn7LnJEXBTJZG8dxd/a3USSqK28Jo7Lpis7OGJV0G0dWRwE6IG3l42Jva
- b6G3paAJCShcwTpN4f0/+5X/i3WQ96BKVXHfRbhAoRDHqaDDK5bjS68R32WCkdw+TXJs
- vLgw4jG8qry1+k3kywhyTfyZ1UmYRylHeLbuxivosN7t8RmpHSiiujqfJhBCdc1JYdoy
- HViK0ao5qqUnBb/nvYxDJpLPA3roKPwdpXxQDZhsUjH9YH0IA7d2nlKoMRX9HgeimxC6
- GfQTA+5+V7qT7RjO+RcCKuzldq3IqfPZJIf8AdxaFMCdqHrVnoNQ4xXN2keSope3Qu7i
- EJgA==
+ bh=dE5w6oxaIFbQPohWMRdfyXByNo55p69HHR/2JVLAw4I=;
+ b=kOraqevjyERUXFwOgbN3nLZlcyiyG8VATfy7Op2wxVBItqHEhvuWSsxxl6jjV5FIs6
+ ikIQJ546rr8zSK2JIlU3wNt2Jff1uV8FJ1i3ixUvCZCXgvV0/77eqVIM8pera5ZWV4be
+ /CYJ2pFFXKmd2TB4zXtTGK/i2+QtypjVjKZEz2zbb9YjZZPUB748sabalB+aJaslgHPc
+ VOhJ46FZPtY0itxOUi03DrScVleN9W9apN6FDAiLFqa35tXLXCNVwidLM0x/Y+poTyXZ
+ UzDNW8jO64uF+lQcKA+bpX6ODYgs4OiBvoBs+9v1VdG+sLETEjVLPPmSW1tTHY58zbQW
+ 53XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701689934; x=1702294734;
+ d=1e100.net; s=20230601; t=1701691514; x=1702296314;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JJvSTHWuTq1Ke0y1mUX6UfNhJdfCVZMaKWEDCRFcHZw=;
- b=PeRStR022bA66CWOgLdYnyzv5aeA41v2gbtOY3DSiShbADZIuDdFMzTxed19aTwygc
- GT865lqFKeoIVK1hZitN5MZERRqqC3NBvF/jeB0yJiMF2Hn/wASZwy85Yb04809D7EDC
- cQ2lrgB6LugvvxiITLuEF+XWBzQJjezMAWWbPi9lB63Q2mZUPspiwvpKpC/LBTajDUUW
- 3x7Ao6Z50UCVUPJNnGlabMuI1PUHySMupJ1JC+i56zah6yRmJvR+YwVUjBTBkjjICRwW
- a4m0e7BjdrzVGD5Y3LtxJxptGNGA0XEFZ4fg+y/6R9r06z/qjMnW+177InWTVEsXNbgZ
- Vt5A==
-X-Gm-Message-State: AOJu0Yyrb0WwpCmMSITBQRX9QuJ/TyNQNmhTIwg7Nkxfzlh8Ubqwx2aT
- mmzQnTny9f9KOrCp/A4mpg4FRYkRA+3GbL3DHFsu+g==
-X-Google-Smtp-Source: AGHT+IGuMA69qV0ILZT7+b1iZF+Z+vVyEdkRiCAJpE/nVpmByubZa3UtuOxb1Qap9QraxKTBbWGeeR+LX9H1sDElcJU=
-X-Received: by 2002:a2e:8747:0:b0:2c9:f643:d6c8 with SMTP id
- q7-20020a2e8747000000b002c9f643d6c8mr1181922ljj.95.1701689934434; Mon, 04 Dec
- 2023 03:38:54 -0800 (PST)
+ bh=dE5w6oxaIFbQPohWMRdfyXByNo55p69HHR/2JVLAw4I=;
+ b=B2oir+9Ocp01bxTz5rvHrIQCcqn1j8vSbMdibKv6pH7D3bHziSjfVzoLYBiGuzrVD0
+ 4sVtLzbgp7fShzoJze1MVrHBhcovcfUiA6C4UlMP9LVZ255uL2JzxYY/gl+JELVqmb/N
+ tOxW3gIi98BQ+J/1+Ck1m164v9rS7r8r5YYg5n2t6Fh6UyvRsS18GiftE5pBgaRlrOrS
+ QKMwv0M22GV+KjH+W62NkZ2fdAhWgBv3UpaJWZGLWFHeZ4aAKVi/JrWQsvMuPboQrIjS
+ Pq4VCGwn2S9xtO0+30siVF3AXetsFn7VMaoCqKwyQOAhIgl05WVA7I/Uhsn08jqno7yo
+ vl4w==
+X-Gm-Message-State: AOJu0Ywk2leoqcq4ybKmm6A7W6nW3Xs+O84U1tnod3xxNgDd5PYCspJz
+ Ui0GHm8P2Z5JBxgO6Z4RNdL195DzGJEpFd9wJpR1WQ==
+X-Google-Smtp-Source: AGHT+IE0TYcAZAimp+MF7IOnwcMjmYwIcE2TeR1Nd8kLm0ju8YsL/ts2YhShYrkhBJOl/hYlpKlY/JvtCeBU3OQu/m4=
+X-Received: by 2002:a2e:7e0c:0:b0:2c9:ffdf:f6ef with SMTP id
+ z12-20020a2e7e0c000000b002c9ffdff6efmr481992ljc.27.1701691513863; Mon, 04 Dec
+ 2023 04:05:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20231204043014.122793-1-masahisa.kojima@linaro.org>
-In-Reply-To: <20231204043014.122793-1-masahisa.kojima@linaro.org>
+References: <CAPnjgZ2Os+zLWnwc03AZc69p3FCiUuJ4thncvMy8wrOeEh52_A@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2Os+zLWnwc03AZc69p3FCiUuJ4thncvMy8wrOeEh52_A@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Dec 2023 13:38:17 +0200
-Message-ID: <CAC_iWj+giW2Wyagi2eH9668G2HtU=BXuhjUvTpPWHFH5sA23rA@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: use event callback for initrd deregistration
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Mon, 4 Dec 2023 14:04:37 +0200
+Message-ID: <CAC_iWj+fZMNFkDBOLNYKh1c9oRPrg5WQrFv6nVA9NmtFcAtz2g@mail.gmail.com>
+Subject: Re: EFI memory allocation
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,155 +86,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for cleaning this up!
+Hi Simon
 
-On Mon, 4 Dec 2023 at 06:31, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+On Sun, 3 Dec 2023 at 19:44, Simon Glass <sjg@chromium.org> wrote:
 >
-> Currently efi_initrd_deregister() is called in bootefi.c
-> when the image started from bootefi command returns.
-> Since efi_guid_event_group_return_to_efibootmgr event is
-> implemented, so let's use this event for invoking
-> initrd deregistration.
+> Hi Heinrich, Ilias,
 >
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
-> Note that this patch can be applied to u-boot/next.
-> This patch requires the patch e0d1a1ea68("efi_loader: add return to efibootmgr event group")
+> I had a bit of a look at how memory is allocated in EFI.
 >
->  cmd/bootefi.c                    |  5 --
->  lib/efi_loader/efi_load_initrd.c | 82 +++++++++++++++++++++-----------
->  2 files changed, 55 insertions(+), 32 deletions(-)
+> I see that efi_memory_init() is called quite early in U-Boot. It
+> sometimes allocates memory for a bounce buffer, placing it somewhere
+> in memory. How do we know that that memory is free and not being used
+> by U-Boot?
+>
+> To answer my own question, it excludes U-Boot's malloc() region from
+> the map, so that it cannot overwrite that.
+>
+> But then, what if we use lmb and start loading images into memory.
+> Won't that conflict with EFI?
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Yes, Heinrich tried to fix parts of this with commit 06d514d77c37 and
+we have a 'todo' in the efi subsystem for a few years now [0]
+Michal (+cc'ed) has also pinged me for similar issues in the past.
 
 >
-> diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> index 4d74969ad6..e52bd3f743 100644
-> --- a/cmd/bootefi.c
-> +++ b/cmd/bootefi.c
-> @@ -390,11 +390,6 @@ static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
->  out:
->         free(load_options);
+> I also see that efi_allocate_pages() is called to allocate memory in
+> the EFI code. But this just grabs memory from 'anywhere'...it doesn't
+> respect the U-Boot malloc region.
 >
-> -       if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> -               if (efi_initrd_deregister() != EFI_SUCCESS)
-> -                       log_err("Failed to remove loadfile2 for initrd\n");
-> -       }
-> -
->         /* Notify EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR event group. */
->         list_for_each_entry(evt, &efi_events, link) {
->                 if (evt->group &&
-> diff --git a/lib/efi_loader/efi_load_initrd.c b/lib/efi_loader/efi_load_initrd.c
-> index 193433782c..7ca7785c04 100644
-> --- a/lib/efi_loader/efi_load_initrd.c
-> +++ b/lib/efi_loader/efi_load_initrd.c
-> @@ -184,6 +184,50 @@ out:
->         return ret;
->  }
+> It seems to me that most of the memory allocation in EFI should be
+> done using malloc(). Of course the boot services need to
+> efi_allocate_pages(), etc., but I am not sure that the internal tables
+> should be skipping malloc()?
 >
-> +/**
-> + * efi_initrd_deregister() - delete the handle for loading initial RAM disk
-> + *
-> + * This will delete the handle containing the Linux specific vendor device
-> + * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
-> + *
-> + * Return:     status code
-> + */
-> +efi_status_t efi_initrd_deregister(void)
-> +{
-> +       efi_status_t ret;
-> +
-> +       if (!efi_initrd_handle)
-> +               return EFI_SUCCESS;
-> +
-> +       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
-> +                                                        /* initramfs */
-> +                                                        &efi_guid_device_path,
-> +                                                        &dp_lf2_handle,
-> +                                                        /* LOAD_FILE2 */
-> +                                                        &efi_guid_load_file2_protocol,
-> +                                                        &efi_lf2_protocol,
-> +                                                        NULL);
-> +       efi_initrd_handle = NULL;
-> +
-> +       return ret;
-> +}
-> +
-> +/**
-> + * efi_initrd_return_notify() - return to efibootmgr callback
-> + *
-> + * @event:     the event for which this notification function is registered
-> + * @context:   event context
-> + */
-> +static void EFIAPI efi_initrd_return_notify(struct efi_event *event,
-> +                                                 void *context)
-> +{
-> +       efi_status_t ret;
-> +
-> +       EFI_ENTRY("%p, %p", event, context);
-> +       ret = efi_initrd_deregister();
-> +       EFI_EXIT(ret);
-> +}
-> +
->  /**
->   * efi_initrd_register() - create handle for loading initial RAM disk
->   *
-> @@ -197,6 +241,7 @@ out:
->  efi_status_t efi_initrd_register(void)
->  {
->         efi_status_t ret;
-> +       struct efi_event *event;
+> What do you think?
+
+I think that LMB, EFI and the whole memory reservations is a bit of a
+mess. Tom and I discussed this a bit in the past but I'll start
+working on it.
+It needs fixing, but without looking at the code first, I can't
+provide any useful feedback
+
+[0] https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/2
+
+Thanks
+/Ilias
 >
->         /*
->          * Allow the user to continue if Boot#### file path is not set for
-> @@ -215,34 +260,17 @@ efi_status_t efi_initrd_register(void)
->                                                        &efi_guid_load_file2_protocol,
->                                                        &efi_lf2_protocol,
->                                                        NULL);
-> +       if (ret != EFI_SUCCESS) {
-> +               log_err("installing EFI_LOAD_FILE2_PROTOCOL failed\n");
-> +               return ret;
-> +       }
->
-> -       return ret;
-> -}
-> -
-> -/**
-> - * efi_initrd_deregister() - delete the handle for loading initial RAM disk
-> - *
-> - * This will delete the handle containing the Linux specific vendor device
-> - * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
-> - *
-> - * Return:     status code
-> - */
-> -efi_status_t efi_initrd_deregister(void)
-> -{
-> -       efi_status_t ret;
-> -
-> -       if (!efi_initrd_handle)
-> -               return EFI_SUCCESS;
-> -
-> -       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
-> -                                                        /* initramfs */
-> -                                                        &efi_guid_device_path,
-> -                                                        &dp_lf2_handle,
-> -                                                        /* LOAD_FILE2 */
-> -                                                        &efi_guid_load_file2_protocol,
-> -                                                        &efi_lf2_protocol,
-> -                                                        NULL);
-> -       efi_initrd_handle = NULL;
-> +       ret = efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
-> +                              efi_initrd_return_notify, NULL,
-> +                              &efi_guid_event_group_return_to_efibootmgr,
-> +                              &event);
-> +       if (ret != EFI_SUCCESS)
-> +               log_err("Creating event failed\n");
->
->         return ret;
->  }
->
-> base-commit: 4a363dd516856344558034027e40d903868f67b4
-> --
-> 2.34.1
->
+> Regards,
+> Simon
