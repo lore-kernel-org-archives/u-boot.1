@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBED3C07E97
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:33:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E133C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 354B3876E0;
-	Mon,  4 Dec 2023 01:30:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 920ED878B2;
+	Mon,  4 Dec 2023 01:30:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MRD66SIE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fZwAbTT4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B181878B0; Mon,  4 Dec 2023 01:30:24 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 7DAAD877E5; Mon,  4 Dec 2023 01:30:27 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 311C987655
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:30:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C99B878B2
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:30:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3b84e328327so2008996b6e.2
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:30:22 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6ce52ff23dfso191460b3a.0
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:30:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701649820; x=1702254620; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701649823; x=1702254623; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WBKfOX0oyCgS8sh3X9QbYgMz5Msp1TjdFWgouRmMUQY=;
- b=MRD66SIEe635XMfJ9bCYgyv2VB4Qo32BvFdyt4I12oe7a5LblzO50ID3BEzM5gLC87
- DuGu32WD37enil+dyaiWhx89ZqrIMUgSenuVQGex1Z0jSAJCjq0gLAs56jCLH6qXcB8E
- L2DTRXhsZVD5j8NfkF/HHot7cRSsxqpidJPmU=
+ bh=KUOCT8ybq9pHLqhKxMSDLw11MF8MgwaafozyRc/YsKk=;
+ b=fZwAbTT4f16K15db3RuAOZfIbm2VuHdL1t3f452Rzz9dcUHv/YfzXh2Rzw/Pbwasdz
+ NQnFcTa59zq8IJHHo8E6rHYYVsKgLbKLzbSPdWnfb6YBV4XRKfY3ugl9dJvuPMphWwII
+ lw3EAYV2X+TZp1EEeLV4XlSMVtk7NlgZ2Lv7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701649820; x=1702254620;
+ d=1e100.net; s=20230601; t=1701649823; x=1702254623;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WBKfOX0oyCgS8sh3X9QbYgMz5Msp1TjdFWgouRmMUQY=;
- b=ky+/3mtVAdJDXjv1hRC4/eyDYU5zywPh6R8tq7lqNbdRQsXuL5KYs6z1qyZ+IhL4ht
- MeJY/ui4eImfDCry/hRnM378R/2QW32G/rA+ILheUIyYYz8SbjxuZVGAF1Lx3/I1kKo6
- CK8UFikKMACsuN/rp2QBGwZvfRJlman5p0DZliMgiWT2FPNiRVlX6KddSSLJxWDmsLja
- rnbKFE+1/lE2MR6deeDUZ+eDXafm2kEFszB0TzxmSXr2r9bqvjX6DINRuFAcKKfxUJeC
- /Q8ruRkZEbT+0rHuY1TK31ke7H0ppaV5A4s55T0GwkyBV+wsquGrsP+Wxhi9RQZC1AXb
- qckw==
-X-Gm-Message-State: AOJu0Yw4YMAj1qEIwN+Pbw/uaAmQCWx2FAlsq+hfLkH/dsQDih2UV5tb
- m/t629kAH/Ri6gXteH1rKHeD9aBtqnq+ZFAyk7/JUQ==
-X-Google-Smtp-Source: AGHT+IEwPVB7zEcgXqjcuTO9xC3f5hRqfnprA2i0iUQt/7JHGIFhrPxmzH0apQU0YBEvDaAl6sp4mw==
-X-Received: by 2002:a05:6808:221c:b0:3b8:b063:6b96 with SMTP id
- bd28-20020a056808221c00b003b8b0636b96mr4010948oib.69.1701649820836; 
- Sun, 03 Dec 2023 16:30:20 -0800 (PST)
+ bh=KUOCT8ybq9pHLqhKxMSDLw11MF8MgwaafozyRc/YsKk=;
+ b=ekSIvGlsf724lElBD/rcMnUWBiu6Bmw2EOY2Ag8BsryryLrV1NbJQQf8n469GWCxk9
+ sZmhhVkLUbH2QWJlSDKWOdrxElhWZRMeZqwQaTG1TPi8sdptvo48+vTMGZ7+NLl8UQWb
+ LrHh0YHh8qx0qYrz8c4aSK4heF1OSUOn478DySgOj5XY3di9ydhDyqutGLh0UWX9pdPT
+ GP4Zp7BreNICdGU9sZm9TntYjMbt5/7FAJXXc7L3ea7O3GzM9jpK5PIpuvZWPXHWtpXF
+ KfpbQcecut2XSbWBWvXahKZt4AIUfNdIejWQhBz2sSu3SSXo/kdvkcqpFUxpeRRsE5Q6
+ aEeQ==
+X-Gm-Message-State: AOJu0YwHetmkQANh3wIyyZp0agnvJauiICk1HZ+MGQxDpdPbHwypmDXF
+ XJ7H0hO5G4SFaRYtJnd54IG9r2sfrhDBsImJundEEg==
+X-Google-Smtp-Source: AGHT+IHzJx3WePCXNElhQAiDYebS/Kw1AOyoO+0FfthUaAgLgOZtEmdOijgk2wVH2R8dbGG7/Z2uNA==
+X-Received: by 2002:a05:6a00:188b:b0:6cd:fa78:db9c with SMTP id
+ x11-20020a056a00188b00b006cdfa78db9cmr3908853pfh.12.1701649823636; 
+ Sun, 03 Dec 2023 16:30:23 -0800 (PST)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.30.18
+ o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.30.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 16:30:20 -0800 (PST)
+ Sun, 03 Dec 2023 16:30:23 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 07/13] x86: zboot: Drop intermediate zboot_setup() function
-Date: Sun,  3 Dec 2023 17:29:32 -0700
-Message-ID: <20231204002944.897949-8-sjg@chromium.org>
+Subject: [PATCH 08/13] x86: zboot: Drop intermediate zboot_go() function
+Date: Sun,  3 Dec 2023 17:29:33 -0700
+Message-ID: <20231203172933.8.Iaa270a7231e610258d361f35f5da324db9ef69c8@changeid>
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
 In-Reply-To: <20231204002944.897949-1-sjg@chromium.org>
 References: <20231204002944.897949-1-sjg@chromium.org>
@@ -88,51 +88,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move error checking into the caller so that do_zboot_setup() can call
-zboot_setup() directly.
+This function only calls zboot_go() so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/x86/zboot.c | 16 ++++++----------
- 1 file changed, 6 insertions(+), 10 deletions(-)
+ cmd/x86/zboot.c | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
 
 diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
-index d39ab6a9698f..f392b6b3e493 100644
+index f392b6b3e493..f49cdd91a1f8 100644
 --- a/cmd/x86/zboot.c
 +++ b/cmd/x86/zboot.c
-@@ -74,11 +74,10 @@ static int do_zboot_load(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -106,21 +106,12 @@ static int do_zboot_info(struct cmd_tbl *cmdtp, int flag, int argc,
  	return 0;
  }
  
--static int _zboot_setup(void)
-+static int do_zboot_setup(struct cmd_tbl *cmdtp, int flag, int argc,
-+			  char *const argv[])
- {
--	struct boot_params *base_ptr = state.base_ptr;
--
--	if (!base_ptr) {
-+	if (!state.base_ptr) {
- 		printf("base is not set: use 'zboot load' first\n");
- 		return CMD_RET_FAILURE;
- 	}
-@@ -87,13 +86,10 @@ static int _zboot_setup(void)
- 		return CMD_RET_FAILURE;
- 	}
- 
--	return 0;
--}
-+	if (zboot_setup())
-+		return CMD_RET_FAILURE;
- 
--static int do_zboot_setup(struct cmd_tbl *cmdtp, int flag, int argc,
--			  char *const argv[])
+-static int _zboot_go(void)
 -{
--	return _zboot_setup();
-+	return 0;
- }
+-	int ret;
+-
+-	ret = zboot_go();
+-
+-	return ret;
+-}
+-
+ static int do_zboot_go(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		       char *const argv[])
+ {
+ 	int ret;
  
- static void zboot_info(void)
+-	ret = _zboot_go();
++	ret = zboot_go();
+ 	if (ret) {
+ 		printf("Kernel returned! (err=%d)\n", ret);
+ 		return CMD_RET_FAILURE;
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
 
