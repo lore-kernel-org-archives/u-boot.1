@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951B5C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CCC1C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 13:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D482886F87;
-	Mon,  4 Dec 2023 13:53:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E860886FB5;
+	Mon,  4 Dec 2023 14:00:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F078180090; Mon,  4 Dec 2023 13:53:29 +0100 (CET)
+ id B7E5486FB5; Mon,  4 Dec 2023 14:00:50 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F37FA874CA
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:53:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B554286F1F
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 14:00:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3B4CrLxf015886;
- Mon, 4 Dec 2023 20:53:21 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3B4D0gJG019597;
+ Mon, 4 Dec 2023 21:00:43 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Mon, 4 Dec 2023 20:53:18 +0800
-Date: Mon, 4 Dec 2023 20:53:16 +0800
+ Mon, 4 Dec 2023 21:00:42 +0800
+Date: Mon, 4 Dec 2023 21:00:40 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: John Clark <inindev@gmail.com>
-CC: Yanhong Wang <yanhong.wang@starfivetech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] starfive: visionfive2: add device tree overlay support
-Message-ID: <ZW3LvLo3B7UtIBli@swlinux02>
-References: <20231120023549.13902-1-inindev@gmail.com>
+To: Randolph <randolph@andestech.com>
+CC: <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>, <dylan@andestech.com>, 
+ <tim609@andestech.com>, <peterlin@andestech.com>
+Subject: Re: [PATCH V3 1/3] doc: falcon: riscv: Falcon Mode boot on RISC-V
+Message-ID: <ZW3NeBLQVtogQavE@swlinux02>
+References: <20231116130136.2796918-1-randolph@andestech.com>
+ <20231116130136.2796918-2-randolph@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231120023549.13902-1-inindev@gmail.com>
+In-Reply-To: <20231116130136.2796918-2-randolph@andestech.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3B4CrLxf015886
+X-MAIL: Atcsqr.andestech.com 3B4D0gJG019597
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,21 +63,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 20, 2023 at 02:35:31AM +0000, John Clark wrote:
-> device tree overlay support requires fdtoverlay_addr_r to be set
+On Thu, Nov 16, 2023 at 09:01:34PM +0800, Randolph wrote:
+> Add documentation to introduce the Falcon Mode on RISC-V.
+> In this mode, the boot sequence is SPL -> OpenSBI -> Linux kernel.
 > 
-> before
-> ~~~~~~
-> Invalid fdtoverlay_addr_r for loading overlays
-> 
-> after
-> ~~~~~
-> Retrieving file: /boot/overlay/rtc-ds3231.dtbo
-> 
-> Signed-off-by: John Clark <inindev@gmail.com>
+> Signed-off-by: Randolph <randolph@andestech.com>
 > ---
-> 
->  include/configs/starfive-visionfive2.h | 1 +
->  1 file changed, 1 insertion(+)
+>  doc/develop/falcon.rst | 171 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 171 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
