@@ -4,46 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240FDC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 01:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF75C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 01:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E901878B0;
-	Mon,  4 Dec 2023 02:01:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F2AF8789F;
+	Mon,  4 Dec 2023 02:06:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ACq2kkBc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="RERZgzc8";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C83BA87076; Mon,  4 Dec 2023 02:01:31 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A2C88878E5
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 02:01:29 +0100 (CET)
+ id 52F35878B0; Mon,  4 Dec 2023 02:06:03 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C919877B5
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 02:05:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 14E47106F;
- Sun,  3 Dec 2023 17:02:06 -0800 (PST)
-Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5AB8B3F6C4;
- Sun,  3 Dec 2023 17:01:17 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Vignesh R <vigneshr@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>,
- Bob McChesney <bob@electricworry.net>,
- Stephen Graf <stephen.graf@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: [PATCH v2 3/3] sunxi: H616: Add OrangePi Zero 3 board support
-Date: Mon,  4 Dec 2023 00:59:54 +0000
-Message-Id: <20231204005954.13201-4-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
-In-Reply-To: <20231204005954.13201-1-andre.przywara@arm.com>
-References: <20231204005954.13201-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Sk5844Rgtz9sXg;
+ Mon,  4 Dec 2023 02:05:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1701651956;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xmOkNfTfAJxzARdtXTlCz+2mFw8VRVLl3B8s7ChDHTc=;
+ b=ACq2kkBch1D1Sf5XTf5FvTBe6tM2Ej49Efrw/s+dyzO6yMppcB2FNjflaHjLceni42SdEn
+ j6kY4vj265Q/rR1eQctfAjQy8ed9xQ5l8sPGxwCD1lZUm9A6okkCjpvKoz4nqI/TOuQ3uL
+ TGwb5epydzryhvaInK9BuYKdjV8C73GXwKqpa4YWQ8cD/XtPXCPhRq5P88OL6kL55cpnCX
+ vSRxDWbjc8+1G6mjmQ02qv7rfHlSBVyFKmhLKYpENyxaTI95sNN1VY9fTBbYeNX2WRjIyJ
+ fHnasZrgWPBweER9jetQLDJCBRbEJp1xyWyadAbaic8fdjRNefQXI1rgkxwZGw==
+Message-ID: <e703f6ba-3e93-46ea-9228-c05dd603c0c9@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1701651954;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xmOkNfTfAJxzARdtXTlCz+2mFw8VRVLl3B8s7ChDHTc=;
+ b=RERZgzc8ZRY9fMbqdHvGKUgUBdcWrKhPfqWCxVsJStiYaGntAGUX3qkqdkfC3k2hKaQxGJ
+ NpfqmwHAIpunrK6UnX97RW0iD3zvz9YlaBAWB7c8JeHbYWmjX18sFp3ItpCYKen+KAi1jh
+ 7YIr7Fqsun6m5D4PLOp+kmCSIxe9n8IBCboy/4YGBfVAK73mWEoLpGgj+QJNXEiRiX1Xgm
+ B1S7WoZN+EKkSrzuI5vqSNaFEzKo4xj4Y1U7Kt4T01ncgA9+lC3Gi9zaGMOmChu5uN+an+
+ jhTY6FUb3Jowj+qlYVb5Kzvo5N+bLkndg65gTIJcZCYcTRPmksPkNAvih6vrhw==
+Date: Mon, 4 Dec 2023 02:05:52 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] mmc: Poll CD in case cyclic framework is enabled
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+References: <20231202234109.208243-1-marek.vasut+renesas@mailbox.org>
+ <CAPnjgZ1__QvjN2C8Gc_GCvB++HFv6Ni73nC6wDuN7dJq+wDwGA@mail.gmail.com>
+ <9dbad2ea-2439-4974-930f-ca80c6551615@mailbox.org>
+ <CAPnjgZ3FcKAAMqB=nZ24ritOwucWxQXmTtZCrDnBp_9qHWm-wA@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAPnjgZ3FcKAAMqB=nZ24ritOwucWxQXmTtZCrDnBp_9qHWm-wA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: a70c7abc33cf8a72c0b
+X-MBO-RS-META: dhzfjr6udjggu793y166m9jwinobm19s
+X-Rspamd-Queue-Id: 4Sk5844Rgtz9sXg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,95 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The OrangePi Zero 3 is a small development board featuring the Allwinner
-H618 SoC, shipping with up to 4GB of DRAM, Gigabit Ethernet, a micro-HDMI
-connector and two USB sockets.
-The board uses LPDDR4 DRAM and an X-Powers AXP313a PMIC, support for
-which was recently added to U-Boot.
+On 12/4/23 01:44, Simon Glass wrote:
+> Hi Marek,
+> 
+> On Sun, 3 Dec 2023 at 14:01, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 12/3/23 18:44, Simon Glass wrote:
+>>> Hi Marek,
+>>>
+>>> On Sat, 2 Dec 2023 at 16:41, Marek Vasut
+>>> <marek.vasut+renesas@mailbox.org> wrote:
+>>>>
+>>>> In case the cyclic framework is enabled, poll the card detect of already
+>>>> initialized cards and deinitialize them in case they are removed. Since
+>>>> the card initialization is a longer process and card initialization is
+>>>> done on first access to an uninitialized card anyway, avoid initializing
+>>>> newly detected uninitialized cards in the cyclic callback.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> ---
+>>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>>>> Cc: Peng Fan <peng.fan@nxp.com>
+>>>> ---
+>>>>    drivers/mmc/mmc-uclass.c | 27 +++++++++++++++++++++++++++
+>>>>    1 file changed, 27 insertions(+)
+>>>
+>>> This is really nice!
+>>
+>> I wonder whether we can use this cyclic stuff for USB , that's on my
+>> roadmap to look at . We could auto-detect new devices in the background,
+>> which would be tidy. And maybe do block transfers in the background ?
+> 
+> Just the detect would be amazing!!
+> 
+> One thing on my mind is that we could have a console buffer, so that
+> output from background tasks can be collected and written just before
+> displaying the U-Boot prompt. I am itching to implement that part of
+> it :-)
 
-Add a defconfig file selecting the right drivers and DRAM options.
-Since the .dts file was synced from the Linux kernel repo already, we
-just need to add one line to the Makefile to actually build the .dtb.
+And a 'dmesg' command to go along with it ?
 
-The DRAM parameters were derived from the values found in the BSP DRAM
-drivers on the SPI NOR flash.
-
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-Tested-by: Mikhail Kalashnikov <iuncuim@gmail.com>
-Tested-by: Bob McChesney <bob@electricworry.net>
----
- arch/arm/dts/Makefile            |  1 +
- board/sunxi/MAINTAINERS          |  5 +++++
- configs/orangepi_zero3_defconfig | 32 ++++++++++++++++++++++++++++++++
- 3 files changed, 38 insertions(+)
- create mode 100644 configs/orangepi_zero3_defconfig
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 1be08c5fdc2..5fc888680b3 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -835,6 +835,7 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
- 	sun50i-h6-tanix-tx6-mini.dtb
- dtb-$(CONFIG_MACH_SUN50I_H616) += \
- 	sun50i-h616-orangepi-zero2.dtb \
-+	sun50i-h618-orangepi-zero3.dtb \
- 	sun50i-h616-x96-mate.dtb
- dtb-$(CONFIG_MACH_SUN50I) += \
- 	sun50i-a64-amarula-relic.dtb \
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index 00614372119..f556857a391 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -455,6 +455,11 @@ M:	Jernej Skrabec <jernej.skrabec@siol.net>
- S:	Maintained
- F:	configs/orangepi_zero2_defconfig
- 
-+ORANGEPI ZERO 3 BOARD
-+M:	Andre Przywara <andre.przywara@arm.com>
-+S:	Maintained
-+F:	configs/orangepi_zero3_defconfig
-+
- ORANGEPI PC 2 BOARD
- M:	Andre Przywara <andre.przywara@arm.com>
- S:	Maintained
-diff --git a/configs/orangepi_zero3_defconfig b/configs/orangepi_zero3_defconfig
-new file mode 100644
-index 00000000000..5a019fed84b
---- /dev/null
-+++ b/configs/orangepi_zero3_defconfig
-@@ -0,0 +1,32 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="sun50i-h618-orangepi-zero3"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUN50I_H616_DX_ODT=0x07070707
-+CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUN50I_H616_ODT_EN=0xaaaaeeee
-+CONFIG_DRAM_SUN50I_H616_TPR6=0x44000000
-+CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6663
-+CONFIG_DRAM_SUN50I_H616_TPR11=0x24242624
-+CONFIG_DRAM_SUN50I_H616_TPR12=0x0f0f100f
-+CONFIG_MACH_SUN50I_H616=y
-+CONFIG_SUNXI_DRAM_H616_LPDDR4=y
-+CONFIG_DRAM_CLK=792
-+CONFIG_USB1_VBUS_PIN="PC16"
-+CONFIG_R_I2C_ENABLE=y
-+CONFIG_SPL_SPI_SUNXI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_SPI_FLASH_ZBIT=y
-+CONFIG_PHY_MOTORCOMM=y
-+CONFIG_SUN8I_EMAC=y
-+CONFIG_AXP313_POWER=y
-+CONFIG_SPI=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_MUSB_GADGET=y
--- 
-2.35.8
-
+Go for it.
