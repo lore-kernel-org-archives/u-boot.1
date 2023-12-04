@@ -4,78 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF8EC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 10:28:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 625A1C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 10:48:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D52487538;
-	Mon,  4 Dec 2023 11:28:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9955187716;
+	Mon,  4 Dec 2023 11:48:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VB5sGWB8";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="bA+2v4Q0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 088068771F; Mon,  4 Dec 2023 11:28:08 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C2DE87716; Mon,  4 Dec 2023 11:48:20 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E72FE870D4
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 11:28:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0EA187225
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 11:48:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alex.kiernan@gmail.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-35d67599613so11335135ab.3
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 02:28:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701685684; x=1702290484; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=E0LjNOpXQY1XWp/CQagg9GYQgTfMGAd4dWwl2Wu06dg=;
- b=VB5sGWB8fP9qtQ7P+UMi34VLRJXUEJmL2zGo1YJswiGEvW/xfFI/IUnMOWW7YEHNO9
- SmFp9UTsDK74qrq5JnmIzDOMOhThK1jBooxumN8gKC0sZdBx5ZvUdjdlTghi68Eeqn7s
- KoQALKi+jimnbMOWG7Obi5mdUs56KLsVDNH0cOpdT5kHmH0Qhz2k/vUAvBNTM2e3NikU
- rNuROpmP3HesUgEZAF2C1sE5wUdBIoZm+nWBkODrBvYodfKYXGw8+NssO8VD8cTj/YRL
- Z40/tg11xe0q1PUq9Vf6drKGN05qNGjpKu5mkWjRNSu4ReXvmuCyzMTAjFjZaB/KPpMI
- SJsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701685684; x=1702290484;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=E0LjNOpXQY1XWp/CQagg9GYQgTfMGAd4dWwl2Wu06dg=;
- b=agCdVyXpZMgQ2/jYC+6nJC2uW9I4cxXtx5IsMl9lvWG+XYRXqXOgeFhD4XLjWzjgEN
- cGrtdYkQp1+uXVraY9Jy37flOM55O4fwqV/g+sofCAPEQxxMS2KSMDOQCLbDuebS6fLx
- viyg/osDAMS2R4FFXXAy6mAGcLCF/GBG3dFwCHPDTkpmBEHWL7fzu9upFc7/KyLX7vAu
- xOgZzD8VtvvWOu6kdePFDC5TT2/KjgqCNggVe3W+m1lB+kz4EtLGrUqf4d4D2yy/pniH
- 1BWj2uPiG5P6X8OdBYLiqfjsatIUoFeUMnD/7IZYy/HSFiDdZIbjCz0xjyIEIjOWVKji
- EYGw==
-X-Gm-Message-State: AOJu0YzXnbt+KiAHxOGgFiGetXIshE8ePK013pnaB0Ivp7I8ENP3PpJN
- Gk9tviUiE6IJ/I+FvGQguXaM7gY3pgtdaTA29T4=
-X-Google-Smtp-Source: AGHT+IEXF5KaquNuUs8Gq6GzJnNr+BgABMhKQlxdHS1ZwFe4d60y/i7QEiR80JHx5j80PPLd8X117+MC9YvJ+3AJd6E=
-X-Received: by 2002:a92:d489:0:b0:35d:72ba:8bff with SMTP id
- p9-20020a92d489000000b0035d72ba8bffmr938687ilg.69.1701685684590; Mon, 04 Dec
- 2023 02:28:04 -0800 (PST)
-MIME-Version: 1.0
-References: <20231204003144.899097-1-sjg@chromium.org>
- <20231204003144.899097-8-sjg@chromium.org>
-In-Reply-To: <20231204003144.899097-8-sjg@chromium.org>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Mon, 4 Dec 2023 10:27:53 +0000
-Message-ID: <CAO5Uq5Tow3D1THezrX5bFhM+0n+Dd8=ESQA5owHLLERMCjKkRQ@mail.gmail.com>
-Subject: Re: [PATCH 08/14] fastboot: Remove dependencies on CMDLINE
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 9af5e040-9292-11ee-abd3-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 9af5e040-9292-11ee-abd3-005056999439;
+ Mon, 04 Dec 2023 11:48:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=tpWnXWAgdJCSDUxqsLweBeBMJLbWotFFc8iFn5lHRL0=;
+ b=bA+2v4Q0b2kWWxG+2R+rwECFnbXaJ9mlIGlcHvpvV6ztucxjsrHpPHbpe04CzlInsmFaO0WVUZ7bN
+ 01NokKOU/KWWNG5vlZ9w8B+3CNnRZ4LbeC0pSyiLuK9wXzhtrGgn0Lt2MY2TZyb40PexB4rJMqdEdg
+ ksTFXAo0EV/gOYw6KB35eDO1/m4WCcpMzonKH5DFn66W1Ipw22kA0fLqK89kBKWQad8kb6CatNQehB
+ NYm/1n/LZixOI+cmVBmmRDjeAxJ+SEwNrXHJ6oHBaUgJsDBXOLUA32TpeH+Zy9hUo964b8l+KTpMNk
+ szhWHoyErPU/2f0rACH7KeIY8F+dUpw==
+X-KPN-MID: 33|xWKGDAbP1JVk3xftCt/r8VgrwswwdiDunC8opyxpRx48Ki56c3KYRRHsfmo+8GO
+ 5GU4oxCGBhhlRuywlCzRjHQ==
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|jKnWX+aCyf0QU1D0nbabGUwnGl9fvXFgLxg5lU/I8KmJ5GzCACc6PsWEzu1kpot
+ MU6HA/Omh4Lm/81AiDoc1Ug==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id a1b569e6-9292-11ee-9dc8-00505699772e;
+ Mon, 04 Dec 2023 11:48:17 +0100 (CET)
+Date: Mon, 04 Dec 2023 11:48:17 +0100
+Message-Id: <87edg2b5vy.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Dmitrii Merkurev <dimorinny@google.com>, Heiko Schocher <hs@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Samuel Holland <samuel@sholland.org>, 
- Sean Anderson <sean.anderson@seco.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ marek.vasut+renesas@mailbox.org, sean.anderson@seco.com
+In-Reply-To: <20231204002642.895926-2-sjg@chromium.org> (message from Simon
+ Glass on Sun, 3 Dec 2023 17:26:17 -0700)
+Subject: Re: [PATCH 01/18] bootm: netbds: Drop passing of arguments
+References: <20231204002642.895926-1-sjg@chromium.org>
+ <20231204002642.895926-2-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,82 +75,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 4, 2023 at 1:31=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> It is possible to boot a kernel without CMDLINE being enabled. Update
-> the implementation to handle this, and drop the condition from the
-> FASTBOOT config.
->
+> From: Simon Glass <sjg@chromium.org>
+> Date: Sun,  3 Dec 2023 17:26:17 -0700
+
+Hi Simon,
+
+There is a typo in first line of the commit message: s/netbds/netbsd/.
+
+> It isn't clear how useful it is to pass the arguments of bootm to the
+> OS. For example, if "bootm 1000 2000 3000" is used, the three arguments
+> at the end are passed to the OS. This seems like a strange approach,
+> since the argument have already been parsed by U-Boot and processed.
+> 
+> Rely instead on the "bootargs" mechanism, which is the standard
+> approach.
+
+It is a very Linuxy approach though.
+
+I suspect this feature was added to pass kernel arguments for
+"one-off" boots.  For example
+
+    bootm -s
+
+could be used to boot NetBSD in single-user mode and is quite a bit
+more convenient than:
+
+    setenv bootargs -s
+    bootm
+
+That said, I'm not sure to what extent the bootm command is used to
+boot NetBSD these days.  So this may not really matter.
+
+Cheers,
+
+Mark
+
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->
->  drivers/fastboot/Kconfig     |  1 -
->  drivers/fastboot/fb_common.c | 26 ++++++++++++--------------
->  2 files changed, 12 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 11fc0fe1c800..837c6f1180da 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -1,5 +1,4 @@
->  menu "Fastboot support"
-> -       depends on CMDLINE
->
->  config FASTBOOT
->         bool
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> index 07f5946d9ed1..85935380e79d 100644
-> --- a/drivers/fastboot/fb_common.c
-> +++ b/drivers/fastboot/fb_common.c
-> @@ -11,6 +11,7 @@
->   */
->
->  #include <bcb.h>
-> +#include <bootm.h>
->  #include <common.h>
->  #include <command.h>
->  #include <env.h>
-> @@ -144,20 +145,17 @@ void fastboot_boot(void)
->  {
->         char *s;
->
-> -       s =3D env_get("fastboot_bootcmd");
-> -       if (s) {
-> -               run_command(s, CMD_FLAG_ENV);
-> -       } else if (IS_ENABLED(CONFIG_CMD_BOOTM)) {
-> -               static char boot_addr_start[20];
-> -               static char *const bootm_args[] =3D {
-> -                       "bootm", boot_addr_start, NULL
-> -               };
+> 
+>  boot/bootm_os.c | 16 +++-------------
+>  1 file changed, 3 insertions(+), 13 deletions(-)
+> 
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index b92422171a84..b5055d78706c 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -102,19 +102,9 @@ static int do_bootm_netbsd(int flag, int argc, char *const argv[],
+>  			os_hdr = hdr;
+>  	}
+>  
+> -	if (argc > 0) {
+> -		ulong len;
+> -		int   i;
 > -
-> -               snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
-> -                        "%lx", fastboot_buf_addr);
-> -               printf("Booting kernel at %s...\n\n\n", boot_addr_start);
-> -
-> -               do_bootm(NULL, 0, 2, bootm_args);
-> +       if (IS_ENABLED(CONFIG_CMDLINE)) {
-> +               s =3D env_get("fastboot_bootcmd");
-> +               if (s) {
-> +                       run_command(s, CMD_FLAG_ENV);
-> +                       return;
-> +               }
-> +       } else if (IS_ENABLED(CONFIG_BOOTM)) {
-> +               int ret;
-> +
-> +               printf("Booting kernel at %lx...\n\n\n", fastboot_buf_add=
-r);
-> +               ret =3D bootm_boot_start(fastboot_buf_addr, NULL);
->
->                 /*
->                  * This only happens if image is somehow faulty so we sta=
-rt
-> --
-
-Doesn't this change the logic? Previously if you didn't set
-fastboot_bootcmd you'd fall into the bootm path (if CONFIG_BOOTM was
-enabled), with this, if CONFIG_CMDLINE is enabled then you will never
-hit the bootm path.
-
---=20
-Alex Kiernan
+> -		for (i = 0, len = 0; i < argc; i += 1)
+> -			len += strlen(argv[i]) + 1;
+> -		cmdline = malloc(len);
+> -		copy_args(cmdline, argc, argv, ' ');
+> -	} else {
+> -		cmdline = env_get("bootargs");
+> -		if (cmdline == NULL)
+> -			cmdline = "";
+> -	}
+> +	cmdline = env_get("bootargs");
+> +	if (!cmdline)
+> +		cmdline = "";
+>  
+>  	loader = (void (*)(struct bd_info *, struct legacy_img_hdr *, char *, char *))images->ep;
+>  
+> -- 
+> 2.43.0.rc2.451.g8631bc7472-goog
+> 
+> 
