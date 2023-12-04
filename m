@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1769CC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:34:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2934CC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:34:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C438C878C6;
-	Mon,  4 Dec 2023 01:30:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF4408786E;
+	Mon,  4 Dec 2023 01:32:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eFkeGAqr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rtk87a3S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CB4D87873; Mon,  4 Dec 2023 01:30:43 +0100 (CET)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id C869887717; Mon,  4 Dec 2023 01:32:26 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 756BF878C6
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:30:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 924038771E
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:32:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-6d855efb920so2093619a34.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:30:40 -0800 (PST)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so2012960a12.1
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:32:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701649839; x=1702254639; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701649943; x=1702254743; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CBpWzzEe+mW1xxQC8Sb2jd+13nzscUzeqr3Aoi58Bz0=;
- b=eFkeGAqrdlou95UIDIRNEr6EuxcHTpuuV5d7Unb992nNLU2WfEVcaggXY2SYcyRKho
- gNC84gPDcMqh1nCVGb6Pl7E2s3+wusSIFxyLheCdPTpobAHIi2fyNyLKhvPCiTGty9P1
- wdyazy8XFpolkM9bJEjl+MDGlP0eCLFEy1g9g=
+ bh=kQtT5sSBogbuxA4cvFqZrEpDFm2UAbSz6pwfQhjapXA=;
+ b=Rtk87a3SCoYmwJAFNa8iY9TRdb0C5hB3ya0NlBx+kwnrNijfQour5wVSgVKSsfXXEX
+ tpr3Knm3JiJ2c42OtY1mnpUp7LbBaNz23Cmko4FF/1XXXKqXLUlYskz6Dj+ME4AeYkBR
+ 4zOi5iCwM8zMczo3871TduUeZjRgsZPHweLKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701649839; x=1702254639;
+ d=1e100.net; s=20230601; t=1701649943; x=1702254743;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CBpWzzEe+mW1xxQC8Sb2jd+13nzscUzeqr3Aoi58Bz0=;
- b=aMGQaXkT7AVYYhBXJRXgZrrt2Q45AgUs4PINybC9dpK92f7LAz5WduJoF98cPFAAVK
- U91qHxVbvzgxQO/wDo3pljoz/bSUpEa1PiT2QaHoaUJMfqiYoMSRAiPS8eL3o+BaS9qL
- 6peAb34FNdoYkhLqhutv0pdg/Ul1667dZ/hyd08+2Nh3JV+afk6RCiTjYZqhQ1H6JFjC
- fjJ+o5/iVHQgnU6NkotrRLeWIAoLnohduXm5nNcl1nCI1eMqUpjQnyNd45yZxkQY/cK+
- mv6GAMcCAJY65Iaz1LQ4ISEfIcHKZ0nqC4P+GK5yTcysOgOthV1nAvAQwHnJn2NDsKKt
- BezA==
-X-Gm-Message-State: AOJu0YwVqURNPJy5A1NlOQv5bz728IXcTiXkOk1a/IlYtPciDQIwuheK
- TGpBeAc8rAuRdy3WDqRmFIG5K2t9hv5K5AKzahfsTw==
-X-Google-Smtp-Source: AGHT+IEFOCbYyiJj5HJyrohXbv4uUDY8v6rIjDxrzYzKnRK0llnReQuQUj/kQWiZ+Aff3ITDPZe6FA==
-X-Received: by 2002:a05:6830:390e:b0:6d8:5ab6:6544 with SMTP id
- br14-20020a056830390e00b006d85ab66544mr4515293otb.36.1701649839025; 
- Sun, 03 Dec 2023 16:30:39 -0800 (PST)
+ bh=kQtT5sSBogbuxA4cvFqZrEpDFm2UAbSz6pwfQhjapXA=;
+ b=YIUbREFNkj8gcD/n0/XVt1A4m4TcYtcVbOiVCwuYdpxEnxGK5nMv/kqJ6SpE9mUBjc
+ VGMpJImc5GDseFXy/cxXbZ/pli70Tl2jyQxEI1S86st41DPAGuBa5vMDx46eoSWU1v+d
+ hfsXVYE9tsHH3d0S31LOyGumxL5bZ0CEiV9oz6Txja/mencFqmTVDhKIH9kfukvtYWP2
+ NAYcrekGO7HZHWfhEGD05c7x/RN/DSwdsDEuWcvjxV5oXJ70Qs8rTM52vncMvrBtbhQC
+ QIAKh5WoVgbmBvusgaCqBYV0bVx5lHh8UQ2rUO9wtO8e4nN10WePinUkxrHpIlIIYtRP
+ vUDw==
+X-Gm-Message-State: AOJu0YznxRmFTvIubGtzSTP89HCi/s7O9OB1V8/if0J2mCF2qhqOHrrO
+ F2F65rMaQxXvEmyrlwoof+gUUhcXSb2YzcV+St+5vQ==
+X-Google-Smtp-Source: AGHT+IHAfD/ewmKNjd/GgbiJMr1Cw8blUIQdMhvFpOktiei6txrwp5CwWWY3JAxrhkY0er9gn6OYJQ==
+X-Received: by 2002:a05:6a21:1c86:b0:18c:28e8:d55f with SMTP id
+ sf6-20020a056a211c8600b0018c28e8d55fmr3264642pzb.8.1701649942751; 
+ Sun, 03 Dec 2023 16:32:22 -0800 (PST)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.30.36
+ x13-20020aa79a4d000000b006cb9f436232sm6337525pfj.114.2023.12.03.16.32.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 16:30:38 -0800 (PST)
+ Sun, 03 Dec 2023 16:32:22 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 13/13] x86: zboot: Tidy up the comment for zboot_run()
-Date: Sun,  3 Dec 2023 17:29:38 -0700
-Message-ID: <20231203172933.13.Ie349ceed16b88ecd28511cd4678c867fbeb0d8bc@changeid>
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH 01/14] boot: Reorder FIT and BOOTSTD to be first
+Date: Sun,  3 Dec 2023 17:31:25 -0700
+Message-ID: <20231204003144.899097-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
-In-Reply-To: <20231204002944.897949-1-sjg@chromium.org>
-References: <20231204002944.897949-1-sjg@chromium.org>
+In-Reply-To: <20231204003144.899097-1-sjg@chromium.org>
+References: <20231204003144.899097-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,37 +88,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current use case (ChromeOS) is the uncommon case. Document how this
-function is more normally used, where base is 0 and cmdline is NULL
+The boot menu shows Android first and then a timestamp option. Move
+these later since they are less commonly used.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/bootm.h | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ boot/Kconfig | 36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
 
-diff --git a/include/bootm.h b/include/bootm.h
-index c815c40e3c4d..1800ca32c264 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -248,11 +248,14 @@ int bootm_process_cmdline_env(int flags);
-  *
-  * @addr: Address where the bzImage is moved before booting, either
-  *	BZIMAGE_LOAD_ADDR or ZIMAGE_LOAD_ADDR
-- * @base: Pointer to the boot parameters, typically at address
-- *	DEFAULT_SETUP_BASE
-+ * @size: Size of bzImage, or 0 to detect this
-  * @initrd: Address of the initial ramdisk, or 0 if none
-  * @initrd_size: Size of the initial ramdisk, or 0 if none
-- * @cmdline: Command line to use for booting
-+ * @base_addr: If non-zero, this indicates that the boot parameters have already
-+ *	been loaded by the caller to this address, so the load_zimage() call
-+ *	in zboot_load() will be skipped when booting
-+ * @cmdline: If non-NULL, the environment variable containing the command line
-+ *	to use for booting
-  * Return: -EFAULT on error (normally it does not return)
-  */
- int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
+diff --git a/boot/Kconfig b/boot/Kconfig
+index b438002059c3..e0098b3f31d7 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -2,24 +2,6 @@ menu "Boot options"
+ 
+ menu "Boot images"
+ 
+-config ANDROID_BOOT_IMAGE
+-	bool "Android Boot Images"
+-	default y if FASTBOOT
+-	help
+-	  This enables support for booting images which use the Android
+-	  image format header.
+-
+-config TIMESTAMP
+-	bool "Show image date and time when displaying image information"
+-	default y if CMD_DATE
+-	help
+-	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
+-	  an image is printed by image commands like bootm or iminfo. This
+-	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
+-	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
+-	  loaded that does not, the message 'Wrong FIT format: no timestamp'
+-	  is shown.
+-
+ menuconfig FIT
+ 	bool "Flattened Image Tree (FIT)"
+ 	select HASH
+@@ -695,6 +677,24 @@ config BOOTMETH_SCRIPT
+ 
+ endif # BOOTSTD
+ 
++config ANDROID_BOOT_IMAGE
++	bool "Android Boot Images"
++	default y if FASTBOOT
++	help
++	  This enables support for booting images which use the Android
++	  image format header.
++
++config TIMESTAMP
++	bool "Show image date and time when displaying image information"
++	default y if CMD_DATE
++	help
++	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
++	  an image is printed by image commands like bootm or iminfo. This
++	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
++	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
++	  loaded that does not, the message 'Wrong FIT format: no timestamp'
++	  is shown.
++
+ config LEGACY_IMAGE_FORMAT
+ 	bool "Enable support for the legacy image format"
+ 	default y if !FIT_SIGNATURE && !TI_SECURE_DEVICE
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
 
