@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBDA7C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 20:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2E9FC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 20:58:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DB02871B1;
-	Mon,  4 Dec 2023 21:21:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F93D876DA;
+	Mon,  4 Dec 2023 21:58:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shokubai.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sY9rsXD5";
+	dkim=pass (2048-bit key; unprotected) header.d=shokubai.tech header.i=@shokubai.tech header.b="S3B7JIh5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4A31877D6; Mon,  4 Dec 2023 21:21:44 +0100 (CET)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B940875DB; Mon,  4 Dec 2023 16:01:45 +0100 (CET)
+Received: from smtpout13.mo541.mail-out.ovh.net
+ (smtpout13.mo541.mail-out.ovh.net [146.59.177.44])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9446E871B1
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 21:21:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0936787603
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 16:01:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6cde104293fso3823405b3a.0
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 12:21:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701721300; x=1702326100; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mjWg7Mxh3mJ2ZqoILJ3RGoUxts7+om1s4a8ko+fI6go=;
- b=sY9rsXD54IYV7vovi5T3IQvK5QqNSkWGxaM7YAaOpGORvnyBmvpIf91pOY7MDHuyc0
- Wxa6hsZiSeTmp8BehhFft78p7GKBNgJ8SfTV55ERSvXs5pV8qMd5Lk1JCSLk1QlsVZ+e
- /xSaFejM1VoNhUGDNri8D9sVV2RJhQCcoyTlwOHQ8nF8XuIKKu56W3xSLUriL1/Z/Xgz
- CZB8RvNIrM3NqZpH6nKClctYafImDHiLFsNuV7A8ztCs8vKFlUhRfy4D4GmhT7s5QRUS
- E7MEe2RC9klP+O6QYZtSbuWlJvTKPqC6txAsTnIg7BWKXe0LAElYbbe95BnRmkPlnZdr
- B0cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701721300; x=1702326100;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mjWg7Mxh3mJ2ZqoILJ3RGoUxts7+om1s4a8ko+fI6go=;
- b=j14c+IdrVOUgKa2DcOEU25p9FDVpJyTxgWDZKRj0pddjRiD6CTB/fdqIxsjpqcAlph
- /hlLi2mA4mPWsgTGTCZAqEAZwYdTEgfuuGJqGWponp9nEFiOHu9PZtNYv4jXYzdcW+g0
- KrXuY0rsU799b0Wcxk054RzFecBOJ/gajUQ7w1j4VVJ9dssESg3QQXsenYP/b3t/RrRS
- 5PFAwbSxNZkAUOidAVQCZLI97fgcBtgjq+CmwfA+Nlbvmqf2X6z7BeHPrCSAfibT0PAF
- jG7s3hMiWSzTWz2+CsPqaff0fWno0lxpeR+UryvzFbtcxLTLIdQq20yAbk2TeCj9rVd6
- dFeA==
-X-Gm-Message-State: AOJu0YzPQEzDpXiICGMpi5On/2a02e3ndDARdlWICFLfF2XGshxg1uVe
- lAYxckvowdmo22UVNZjoxd3VQCUgxeb0b1+qH1axyw==
-X-Google-Smtp-Source: AGHT+IGraxFEqGBhsBJxc7AA2VjB5RyeuFFgJykHaJrlxZkxKZfexRy8e1ORldtKF+OBvmqojqaawsauZDVYmzTmcRU=
-X-Received: by 2002:aa7:9a8a:0:b0:6cd:d4b1:cd09 with SMTP id
- x10-20020aa79a8a000000b006cdd4b1cd09mr140225pfi.5.1701721299851; Mon, 04 Dec
- 2023 12:21:39 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shokubai.tech
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ff@shokubai.tech
+Received: from DAG2EX2.indiv5.local (unknown [10.111.172.35])
+ by mo541.mail-out.ovh.net (Postfix) with ESMTPS id 165B52410E;
+ Mon,  4 Dec 2023 15:01:40 +0000 (UTC)
+Received: from DAG2EX1.indiv5.local (172.16.2.21) by DAG2EX2.indiv5.local
+ (172.16.2.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Mon, 4 Dec
+ 2023 16:01:39 +0100
+Received: from DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b]) by
+ DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b%6]) with mapi id
+ 15.01.2507.035; Mon, 4 Dec 2023 16:01:39 +0100
+From: ff <ff@shokubai.tech>
+To: Sumit Garg <sumit.garg@linaro.org>
+CC: Daniel Thompson <daniel.thompson@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, "conor+dt@kernel.org"
+ <conor+dt@kernel.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, "Rayagonda
+ Kokatanur" <rayagonda.kokatanur@broadcom.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jorge Ramirez-Ortiz
+ <jorge.ramirez.ortiz@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
+ "Marek Vasut" <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "Simon Glass" <sjg@chromium.org>, Boot Architecture Mailman List
+ <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Thread-Topic: [PATCH 00/21] Qualcomm generic board support
+Thread-Index: AQHaJnNnhdt4kVlXP0S2F0B2DoM1cbCY5ICAgAAoUACAABVhgA==
+Date: Mon, 4 Dec 2023 15:01:38 +0000
+Message-ID: <1E72D0CC-E4DA-40FF-B321-9CEA4B9A1B75@shokubai.tech>
+References: <CAFA6WYPYfKU9hHh5CCbgcb6FEDX7ivGO=tGv4N2dAX6_gAGuUw@mail.gmail.com>
+In-Reply-To: <CAFA6WYPYfKU9hHh5CCbgcb6FEDX7ivGO=tGv4N2dAX6_gAGuUw@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <1485E88F7BB3A64A887490FBE3AF2AD0@indiv5.local>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-19-raymond.mao@linaro.org>
- <CAPnjgZ0yJNrpSV7dxmJky_QynEmPQQv5mTXT9MRTdn8rhVxpEg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0yJNrpSV7dxmJky_QynEmPQQv5mTXT9MRTdn8rhVxpEg@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 4 Dec 2023 15:21:29 -0500
-Message-ID: <CAEfUkULhw2SBEgWmijHtorKvQRmhV0q2Mf4MBd+vLyzJnW0fmw@mail.gmail.com>
-Subject: Re: [PATCH v2 18/18] bloblist: Load the bloblist from the previous
- loader
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
- Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Baruch Siach <baruch@tkos.co.il>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+DKIM-Signature: v=1; a=rsa-sha256; d=shokubai.tech; s=ovhex1078890-selector1; 
+ c=relaxed/relaxed; t=1701702099; h=from:to:subject:date;
+ bh=ohVUtRmh8mr6bPz7Wd0y3FT/cDtr3VjG2cog0qr5xwY=;
+ b=S3B7JIh5ItTdn0MxA+lanrrbq0dV2+RxUVYYwO9/GaEvdJwFykBHTsjoWGar2n42W3WR6dOCku/u7nCCJX9PLyKP7uLRmCdGq9/+qi2sIsMiT526uulDLUEVh5rtUTDn9uBLAkNBrbUHWFNibJMRjsQIqpf/EUWlo89+VGfGmDEbT1N9cIb3aA2zGMdyVJKj7l9NO2hOUxow2/cWvEPWTXdVHIcfHbAAFgF9XX7zNVzOtnitQYhh/fPDnpZng6Me8kA9rO36ecB5qbxxvj72OYEiMi8+ZhhewKtMPTPcWTbes3I7vpPKgeu/n7vSJ2aEShyfstSjxPKGPqJj9yZgjw==
+X-Ovh-Tracer-Id: 16849373581219774129
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudejiedgjeefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefuthffkfhfjggtgfggsehtsghmtddttdejnecuhfhrohhmpehffhcuoehffhesshhhohhkuhgsrghirdhtvggthheqnecuggftrfgrthhtvghrnhepgfelleekvdejtdefteettdekfeejkeegvdejtdelheeutefhffehffeggfejvedvnecukfhppeduvdejrddtrddtrddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeofhhfsehshhhokhhusggrihdrthgvtghhqedpnhgspghrtghpthhtohepuddprhgtphhtthhopegurghnihgvlhdrthhhohhmphhsohhnsehlihhnrghrohdrohhrghdpthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrohgshhdoughtsehkvghrnhgvlhdrohhrghdpkhhriiihshiithhofhdrkhhoiihlohifshhkihdoughtsehlihhnrghrohdrohhrghdptghonhhorhdoughtsehkvghrnhgvlhdrohhrghdptggrlhgvsgdrtghonhhnohhllhihsehlihhnrghrohdrohhrghdpnhgvihhlrdgrrhhmshhtrhhonhhgsehlihhnrghrohdrohhrghdprhhfrhhivggurdguvghvsehgmhgrihhlrdgtohhmpdgushgrnhhkohhushhkih
+ esghhmrghilhdrtghomhdpphgvnhhgrdhfrghnsehngihprdgtohhmpdhjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgrhigrghhonhgurgdrkhhokhgrthgrnhhurhessghrohgruggtohhmrdgtohhmpdhluhhkmhgrseguvghngidruggvpdhsvggrnhhgrgdvsehgmhgrihhlrdgtohhmpdhjohhrghgvrdhrrghmihhrvgiirdhorhhtihiisehgmhgrihhlrdgtohhmpdhsthgvphhhrghnsehgvghrhhholhgurdhnvghtpdhmrghrvgigseguvghngidruggvpdhuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpshhjghestghhrhhomhhiuhhmrdhorhhgpdgsohhothdqrghrtghhihhtvggtthhurhgvsehlihhsthhsrdhlihhnrghrohdrohhrghdpshhumhhithdrghgrrhhgsehlihhnrghrohdrohhrghdpoffvtefjohhsthepmhhoheeguddpmhhouggvpehsmhhtphhouhht
+X-Mailman-Approved-At: Mon, 04 Dec 2023 21:58:11 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +92,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On Sat, 2 Dec 2023 at 13:32, Simon Glass <sjg@chromium.org> wrote:
-
-> Hi Raymond,
->
-> On Mon, 27 Nov 2023 at 12:53, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > During bloblist initialization, when CONFIG_OF_BOARD is defined,
-> > invoke the platform custom function to load the bloblist via boot
-> > arguments from the previous loader.
-> > If the bloblist exists, copy it into the fixed bloblist memory region.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - New patch file created for v2.
-> >
-> >  common/bloblist.c  | 29 +++++++++++++----------------
-> >  include/bloblist.h | 14 ++++++++++++++
-> >  2 files changed, 27 insertions(+), 16 deletions(-)
-> >
->
-> This should already work so I am hoping that this patch is not
-> needed...these changes seem to break sandbox_spl
->
-By "already work", do you mean any existing patches already done for
-loading the
-bloblist from the boot args?
-
-Thanks and regards,
-Raymond
+DQoNCj4gTGUgNCBkw6ljLiAyMDIzIMOgIDE0OjI1LCBTdW1pdCBHYXJnIDxzdW1pdC5nYXJnQGxp
+bmFyby5vcmc+IGEgw6ljcml0IDoNCj4gDQo+IO+7v09uIE1vbiwgNCBEZWMgMjAyMyBhdCAxNjoz
+MCwgRGFuaWVsIFRob21wc29uIDxkYW5pZWwudGhvbXBzb25AbGluYXJvLm9yZz4gd3JvdGU6DQo+
+PiANCj4+PiBPbiBNb24sIERlYyAwNCwgMjAyMyBhdCAxMTowMjo1N0FNICswNTMwLCBTdW1pdCBH
+YXJnIHdyb3RlOg0KPj4+ICsgTGludXgga2VybmVsIERUIGJpbmRpbmdzIG1haW50YWluZXJzLCBF
+QkJSIE1MDQo+Pj4gDQo+Pj4gT24gVGh1LCAzMCBOb3YgMjAyMyBhdCAyMDowNSwgVG9tIFJpbmkg
+PHRyaW5pQGtvbnN1bGtvLmNvbT4gd3JvdGU6DQo+Pj4+IE9uIFRodSwgTm92IDMwLCAyMDIzIGF0
+IDAxOjAyOjI1UE0gKzA1MzAsIFN1bWl0IEdhcmcgd3JvdGU6DQo+Pj4+PiBPbiBXZWQsIDI5IE5v
+diAyMDIzIGF0IDIyOjA2LCBOZWlsIEFybXN0cm9uZyA8bmVpbC5hcm1zdHJvbmdAbGluYXJvLm9y
+Zz4gd3JvdGU6DQo+Pj4+Pj4+IEkndmUgYmVlbiB0aGlua2luZyBhYm91dCBhbmQgaGFja2luZyBv
+biB0aGlzIGZvciB0aGUgbGFzdCB3ZWVrIG9yIHNvLA0KPj4+Pj4+PiBzb3JyeSBmb3IgdGhlIGRl
+bGF5ZWQgcmVwbHkgaGVyZS4NCj4+Pj4+Pj4gDQo+Pj4+Pj4+IFRoZSB2YWx1ZSBpcyBpbiBwcmV2
+ZW50aW5nIGFueSBvZiB0aGUgZXhpc3RpbmcgYmluZGluZ3MgZnJvbSByZWdyZXNzaW5nLA0KPj4+
+Pj4gDQo+Pj4+PiBUaGF0IGlzIGFjdHVhbGx5IGJlc3QgYWRkcmVzc2VkIGluIExpbnV4IGJ5IGNo
+ZWNraW5nIHRoZSBEVFMgYWdhaW5zdA0KPj4+Pj4geWFtbCBEVCBiaW5kaW5ncy4gV2UgZG9uJ3Qg
+aGF2ZSB0aGF0IHRlc3RpbmcgYXZhaWxhYmxlIGluIHUtYm9vdCBhbmQNCj4+Pj4+IG9ubHkgZGVw
+ZW5kIG9uIGNhcmVmdWwgcmV2aWV3cy4NCj4+Pj4gDQo+Pj4+IEkgd291bGQgYWJzb2x1dGVseSBs
+b3ZlIGZvciBzb21lb25lIHRvIG1ha2UgYW5vdGhlciBhdHRlbXB0IGF0IHVwZGF0aW5nDQo+Pj4+
+IG91ciBrYnVpbGQgaW5mcmFzdHVjdHVyZSBzbyB0aGF0IHdlIGNhbiBydW4gdGhlIHZhbGlkYXRp
+b24gdGFyZ2V0cy4NCj4+Pj4gDQo+Pj4gDQo+Pj4gR2l2ZW4gdGhhdCBFQkJSIHJlcXVpcmVzIFsx
+XSB0aGUgcGxhdGZvcm0gKGZpcm13YXJlL2Jvb3Rsb2FkZXIpIGFuZA0KPj4+IG5vdCBPUyB0byBz
+dXBwbHkgdGhlIGRldmljZXRyZWUsIGl0IGJlY29tZXMgZXZpZGVudCB0aGF0DQo+Pj4gZmlybXdh
+cmUvYm9vdGxvYWRlcnMgaW1wb3J0IERUUyBmcm9tIExpbnV4IGtlcm5lbCAod2hlcmUgaXQgaXMN
+Cj4+PiBtYWludGFpbmVkKS4NCj4+PiANCj4+PiBCdXQgY3VycmVudGx5IHUtYm9vdCBkb2Vzbid0
+IGhhdmUgYSBwcm9wZXIgd2F5IHRvIHZhbGlkYXRlIHRob3NlIERUUw0KPj4+IGFnYWluc3QgRFQg
+YmluZGluZ3MgKG1haW50YWluZWQgaW4gTGludXgga2VybmVsKS4gQWx0aG91Z2ggdGhlcmUgYXJl
+DQo+Pj4gRGV2aWNldHJlZSBzY2hlbWEgdG9vbHMgYXZhaWxhYmxlIGhlcmUgWzJdLCB0aGVyZSBp
+c24ndCBhIHZlcnNpb25lZA0KPj4+IHJlbGVhc2UgcGFja2FnZSBvZiBEVCBiaW5kaW5ncyB3aGlj
+aCBvbmUgc2hvdWxkIHVzZSB0byB2YWxpZGF0ZSBEVFMNCj4+PiBmaWxlcy4NCj4+IA0KPj4gVGhl
+IGtlcm5lbCBpcyByZWd1bGFybHkgcmVsZWFzZWQgaW4gbXVsdGlwbGUgZm9ybXMgKGluY2x1ZGlu
+ZyBnaXQNCj4+IHRhZ3MgYW5kIHRhcmJhbGwpLiBXaHkgaXNuJ3QgdGhlIGtlcm5lbCBpdHNlbGYg
+c3VmZmljaWVudCB0byBiZSBhDQo+PiB2ZXJzaW9uZWQgcmVsZWFzZSBvZiB0aGUgRFQgYmluZGlu
+Z3MgZGlyZWN0b3J5Pw0KPj4gDQo+IA0KPiBUaGUgTGludXgga2VybmVsIG1heSBjb21lIGluIHZh
+cmlvdXMgZm9ybXMgKHVwc3RyZWFtIHZzIHN0YWJsZSB2cw0KPiB2ZW5kb3IpLiBJdCdzIGRpZmZp
+Y3VsdCB0byBkZWNpZGUgZnJvbSB3aGVyZSB0aGUgRFQgYmluZGluZ3Mgc2hvdWxkDQo+IGNvbWUg
+ZnJvbS4gU2hvdWxkIHRoZXkgY29tZSBmcm9tIHVwc3RyZWFtIG9yIHNob3VsZCB0aGV5IGNvbWUg
+ZnJvbSB0aGUNCj4ga2VybmVsIHdoaWNoIGlzIGFjdHVhbGx5IGJvb3RlZCBvbnRvIGEgcGFydGlj
+dWxhciBkZXZpY2U/DQo+IA0KTG9va3MgYmFkIGZyb20gb3JnYW5pemluZyBmb3J3YXJkIHBvcnRh
+YmlsaXR5IHN0YW5kcG9pbnQgLg0KDQo+IElPVywgYXMgb2Ygbm93IHdoaWNoIGtlcm5lbCB2ZXJz
+aW9uIHNob3VsZCB1LWJvb3QgcGljayB1cCBmb3IgRFQNCj4gdmFsaWRhdGlvbiBjaGVja3M/DQo+
+IA0KPiBJZiB3ZSBjYW4gaGF2ZSBhIHNlcGFyYXRlIHJlbGVhc2UgY2FkZW5jZSBmb3IgRFQgYmlu
+ZGluZ3MgdGhlbiB0aGUNCj4gcGxhdGZvcm0gKGZpcm13YXJlL2Jvb3Rsb2FkZXIpIGNhbiBhdHRl
+c3QgdGhlIERUQiBhZ2FpbnN0IHRoYXQuIExhdGVyDQo+IG9uZSBzaG91bGQgYmUgYWJsZSB0byBi
+b290IGFueSBrZXJuZWwgd2l0aCB0aGUgRFRCIHByb3ZpZGVkIGJ5DQo+IHBsYXRmb3JtLg0KPiAN
+ClRoYXQgc2VlbXMgYSB2ZXJ5IGdvb2Qgc3RlcCENCj4gLVN1bWl0DQo+IA0KPj4gDQo+PiBEYW5p
+ZWwuDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+
+IGJvb3QtYXJjaGl0ZWN0dXJlIG1haWxpbmcgbGlzdCAtLSBib290LWFyY2hpdGVjdHVyZUBsaXN0
+cy5saW5hcm8ub3JnDQo+IFRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gYm9vdC1hcmNo
+aXRlY3R1cmUtbGVhdmVAbGlzdHMubGluYXJvLm9yZw0K
