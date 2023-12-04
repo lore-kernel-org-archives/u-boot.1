@@ -4,48 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3379C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDA1BC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83723875F5;
-	Mon,  4 Dec 2023 01:24:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+	by phobos.denx.de (Postfix) with ESMTP id 54EFA8761C;
+	Mon,  4 Dec 2023 01:27:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=proton.me header.i=@proton.me header.b="OELGIaOK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jyXFebfc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E9C1875DF; Sun,  3 Dec 2023 18:27:50 +0100 (CET)
-Received: from mail-4318.protonmail.ch (mail-4318.protonmail.ch [185.70.43.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8500A875F5; Mon,  4 Dec 2023 01:27:07 +0100 (CET)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA0EB8759C
- for <u-boot@lists.denx.de>; Sun,  3 Dec 2023 18:27:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=proton.me
+ by phobos.denx.de (Postfix) with ESMTPS id 7347787499
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:27:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ubroot37@proton.me
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=vu5pnrxudfbithdk4myvupp3je.protonmail; t=1701624467; x=1701883667;
- bh=fQx4DgIO8WRjPcizlZH505d+10TgtJA35QkJoNI99r0=;
- h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=OELGIaOK3ddENsQX3P353TJ/o13OZm8koDS682b8SRg2Gr6Ww4FParbjpOADDzSVA
- Kky1HSqTDTKygQxuwAkO0MsF2cs4Vr30dnIFio6/tl/i07n2ruCxAudaDYtslrCbiJ
- yanZAmPjmkPE3dFWhyam2FktgPfFjH8UOT2cnEe0xAG3DT1FvR2+raLHK4kkG8L7Fy
- ZuzECRYJcD58daqYfXYJ1TUKXTm3f+xK5qgqw0rp3rLieQ61ePHOyjAYPH6XIremur
- OQjXMY7gzwmSwQ5Galfk38pvnF430mElgjumSt6G/o/0WxKIqlvYAKX+fRGzhxRQT3
- A21Swwdj3mGRQ==
-Date: Sun, 03 Dec 2023 17:27:31 +0000
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-From: ubroot37 <ubroot37@proton.me>
-Subject: rk3328 gmac does U-Boot erroneously not set RSF?
-Message-ID: <b1aNNi5jB7PW_exaGts62-LnkNoYW9xrdFW0SxIPsrStzzzC6TFAIEeCUpGDhrLKUBGHRnAkrF01qXQegDTHN7LsFr6IDmmWpBbA8GGfT8M=@proton.me>
-Feedback-ID: 94133723:user:proton
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-35d67599613so9993815ab.3
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:27:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1701649624; x=1702254424; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9fDo6z31sJX+v7DwuT9LBCy7LXin1aNP5NRQz8CR/wU=;
+ b=jyXFebfcAgc/63COgqzEgiq55X00j6pGSVsPPh0VS9wCwcylMJ3vyFFb4FD0M4RUsL
+ r6W/vfn3W4qYZtll3/OS/tvK6mbHHDbALsY7tNz7JfvVe2mFe04DsJbu/rlDKYmJFnj2
+ Nxsx9U7N8ZBldSKRMhNtOg+5BMOHcmKFbvwBs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701649624; x=1702254424;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9fDo6z31sJX+v7DwuT9LBCy7LXin1aNP5NRQz8CR/wU=;
+ b=W9glx12J0Plqw9kXXpOqYwc2B+SEAs7pB+m9wW4ch6ID0UInCMkF+y9SUWgmJKYra/
+ Hgwr2vdR4E49pi6dTUFsBSfP5U0SCC2kwNS774b4oEVm5Wo9WJhkmO8vevJV2JPRhJhF
+ /86XFvjg/chyvNKZIMNgcIXoMdVSaLe1Rsxb3GT2eN1YpZbZtxND6dYznpg9+3SWsbs1
+ RiBm8xZmN8LJZuLFJEmmgPVr/dsoUBnzOB5x6jHG2An7bbz1xGdxOcOFcLaEMR2f15JB
+ LOU3ILJsBRyLSg8iavAgfyjAIEAF/y2uJGkV1hLW0AVle3Yogto4Mc+r/xynZGzHRZoa
+ sf3g==
+X-Gm-Message-State: AOJu0YxjvGq02Wa3M6HLIU/a/CXDPJQGsGCyFX3chivpzCoZ7dMmsLES
+ ZM0nrlVawRVv1VIqW44Mh75BZYv4DNEbWqQkzJJaTA==
+X-Google-Smtp-Source: AGHT+IFpn0SdHmWNtFTDL87xhqVWoBvgUjmitnq0RjPgdjRMtwuFWky8uakD3NNKkLv0A8B0lfRtog==
+X-Received: by 2002:a92:d7c8:0:b0:35d:59a2:2b7 with SMTP id
+ g8-20020a92d7c8000000b0035d59a202b7mr4683128ilq.87.1701649623986; 
+ Sun, 03 Dec 2023 16:27:03 -0800 (PST)
+Received: from sjg1.roam.corp.google.com ([202.144.206.254])
+ by smtp.gmail.com with ESMTPSA id
+ w5-20020a170902904500b001cfb971edfasm7097227plz.205.2023.12.03.16.27.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 03 Dec 2023 16:27:03 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: [PATCH 01/18] bootm: netbds: Drop passing of arguments
+Date: Sun,  3 Dec 2023 17:26:17 -0700
+Message-ID: <20231204002642.895926-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
+In-Reply-To: <20231204002642.895926-1-sjg@chromium.org>
+References: <20231204002642.895926-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 04 Dec 2023 01:24:45 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,17 +89,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+It isn't clear how useful it is to pass the arguments of bootm to the
+OS. For example, if "bootm 1000 2000 3000" is used, the three arguments
+at the end are passed to the OS. This seems like a strange approach,
+since the argument have already been parsed by U-Boot and processed.
 
-I suspect U-Boot is not setting the RSF bit in GMAC_OP_MODE register. This =
-can result in allowing to receive frames with bad CRC. I suspect the Linux =
-driver may be similarly affected, but I have not checked it out.
+Rely instead on the "bootargs" mechanism, which is the standard
+approach.
 
-Unfortunately all my spare time is taken up by development on my own OS, so=
- I do not have the time to investigate fully and/or provide a patch. I am j=
-ust reporting this potential issue as a good Samaritan, but please understa=
-nd that I am not willing to apply any patches or recompile U-Boot or conduc=
-t any tests or anything of that nature.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Thanks all.
+ boot/bootm_os.c | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
+
+diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+index b92422171a84..b5055d78706c 100644
+--- a/boot/bootm_os.c
++++ b/boot/bootm_os.c
+@@ -102,19 +102,9 @@ static int do_bootm_netbsd(int flag, int argc, char *const argv[],
+ 			os_hdr = hdr;
+ 	}
+ 
+-	if (argc > 0) {
+-		ulong len;
+-		int   i;
+-
+-		for (i = 0, len = 0; i < argc; i += 1)
+-			len += strlen(argv[i]) + 1;
+-		cmdline = malloc(len);
+-		copy_args(cmdline, argc, argv, ' ');
+-	} else {
+-		cmdline = env_get("bootargs");
+-		if (cmdline == NULL)
+-			cmdline = "";
+-	}
++	cmdline = env_get("bootargs");
++	if (!cmdline)
++		cmdline = "";
+ 
+ 	loader = (void (*)(struct bd_info *, struct legacy_img_hdr *, char *, char *))images->ep;
+ 
+-- 
+2.43.0.rc2.451.g8631bc7472-goog
 
