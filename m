@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85400C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227E7C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16B0E876AE;
-	Mon,  4 Dec 2023 13:07:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 739BE876D7;
+	Mon,  4 Dec 2023 13:07:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="z3yNfq/D";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QclteVqN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 234DB8754D; Mon,  4 Dec 2023 13:07:27 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 8F771876FB; Mon,  4 Dec 2023 13:07:31 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EFAA876AE
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:07:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0848876D7
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50be58a751cso2277490e87.2
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 04:07:25 -0800 (PST)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50be24167efso2497344e87.3
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 04:07:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701691644; x=1702296444; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701691649; x=1702296449; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=z3yNfq/DY3HjuMbj9NqOhs1DwyV0sf1OVJLSfqj3RVAa/bvL4nmG9b1gGFm+Sk4V6o
- /pdXXGNfTh2NGypQVXhuK2jCGVSxQQyrLW/3PlDf/i68FpDSLsNb2UU+v/cvBJ5T1VEB
- 39gbJK+n5whB0uwUcM+5tEqxc5Oef5Vl1tt0dahiHtKM+LhhGFE58XsCKABilyWvCnXn
- syp6jdeXLK1JBB//UKyNYSyMa9J/nzP1zf5VadQZTWLYxQq6tgjuDR5qF4t043O9TJnP
- kZtDtt0vaXBplpfG4OickF3bJJ81RPwkEQddE3+hodZUXwF8Rkf+VLdqN2Wtfcegak97
- adHA==
+ bh=vD97G0JJPrjstx9DxxLj3RhYbyE5f2FSKSx/K3ncJMM=;
+ b=QclteVqNaDvZAnTvnEUw9mzHMcaLT99lR1P566li1NL7PCIcFGus+8MdL8hPsqS288
+ t2q5fVGyC1iHZ5+gnQ3VmDk72psHIQD4u+Pfo5MQrZj1yMwBqLXzBaC6+K2w2v1yO3ss
+ p3uoYtWtnxuZduSAqxsdafzGzFL8bEoz9SAx9bRChp/L/RZxvVw+LIOD4yUYtVeesH2n
+ /J0nTFESLUnIqwfscxrzrGT3gaesOj9IFRIw1bwarHZxj4b0J+tcTe4h0oJfANdn7VXB
+ P8afC0AMOuwaJIbmbea9UasIk383DuDumD/IoXjYxb9sFS7P7AZzXhuL3mA4RgbPKYjC
+ BzXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701691644; x=1702296444;
+ d=1e100.net; s=20230601; t=1701691649; x=1702296449;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MxFJwKL5zDs8b5aiVb6q3SDjOsJLBc/cfLiOxsIC9AE=;
- b=tXPJGolJ9fpc3mvTKnP2Gi88L8NcL0wIQ2QDA97MlsbiJyfayPVWq5NI8W2A/3dyC/
- +MUpkxwfIrA0W+tX9/5rPGnjQSl8B06e8HalkxzrjayQJw3oKzVeZw+KeKhuHukYlZU0
- bF6sAn++sJw6AxpO2zfgJJaYKZKIvfNOuRY+WtTj3DGUqHIAEHAM39p8df2TAXvVbPpB
- ol8VrAjnmK6n6bPdEePLmAPIsw0Thj2KBz4Zt9xuYVP/poRnrEtlkIYOZqnJL+uL4xjU
- qfAyQWaLqo6LPjSAI+Vtk4mDeQWjoL8RxoGb8CRlsmcdz2JCh2ayllCZ7IRSRlcwdk1i
- NXKg==
-X-Gm-Message-State: AOJu0YzXghseMYg9z9CTWAjD/z/8t3cmsC/3TB0MWdW1CPFBJu6g+FkF
- cxa/Mfmq0BfwW4z0xcsMi2dbK1xKoduh1i938Qv/YQ==
-X-Google-Smtp-Source: AGHT+IHhQXPXqDt2zBllxlUs+JdkscM7IXBlWWcufFVbuTPbjPvmnjqs3IJwG7KFeLsFxQqYHtPAxw==
-X-Received: by 2002:ac2:57c1:0:b0:50b:fd6f:1e2b with SMTP id
- k1-20020ac257c1000000b0050bfd6f1e2bmr286236lfo.3.1701691644065; 
- Mon, 04 Dec 2023 04:07:24 -0800 (PST)
+ bh=vD97G0JJPrjstx9DxxLj3RhYbyE5f2FSKSx/K3ncJMM=;
+ b=vJzHcuNnIv6FxXk6KBIqIpWX1DJIzzzECGInPo6Lit64jNazwW+65hQsYuJxcH0xYl
+ A0Xdvz4gTdCYWIp0dRuURn3gaKwNBj2S1F9Y/3m5JqI45FGfzV9pcxIcwKmuJVT+GP8A
+ zRVUJq+pPz4fvi3t1gvkM/5iFe96vV4uobjVYGWrhwrDjI2F92JEEGKMztXczobNVXrc
+ 0tMTLE1qsizCgtkCt0BQEjeCGjp6PeGUPmKiTDFcnm89pCqLLgVjVQpdIfhVwpZ0Lose
+ Z2IiKDGKbj7oyWlYeSE/oB1w2KxEh4E0q+5yR4YPc2quEzcuCESp6PomKQbXeHdiJ+nk
+ LJVg==
+X-Gm-Message-State: AOJu0YzSlkgVAgmSMT+GbR3YJOowjwMjkZ9QySKJXBQ6q57CgYKY1l/J
+ KBHbhY5ReFvP0fKtfKU+6VDR1uw1E8VIrytEagTcdA==
+X-Google-Smtp-Source: AGHT+IHsOYhaKefDNXQTAgA99No/qjdTxqlZzOACy5Ubw56TXrAiMJKRYrp2o9ZFDFoDWJ/48tn7Dg==
+X-Received: by 2002:a05:6512:1388:b0:50b:f304:3bed with SMTP id
+ fc8-20020a056512138800b0050bf3043bedmr518647lfb.49.1701691648830; 
+ Mon, 04 Dec 2023 04:07:28 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- g33-20020a0565123ba100b0050befebf0ccsm541675lfv.292.2023.12.04.04.07.20
+ g33-20020a0565123ba100b0050befebf0ccsm541675lfv.292.2023.12.04.04.07.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Dec 2023 04:07:23 -0800 (PST)
+ Mon, 04 Dec 2023 04:07:28 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
  trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv1 6/9] mach-socfpga: do not overlap defines with lwip
-Date: Mon,  4 Dec 2023 18:04:43 +0600
-Message-Id: <20231204120446.3277-7-maxim.uvarov@linaro.org>
+Subject: [PATHv1 7/9] bcm_ns3: fix overlap define with lwip
+Date: Mon,  4 Dec 2023 18:04:44 +0600
+Message-Id: <20231204120446.3277-8-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231204120446.3277-1-maxim.uvarov@linaro.org>
 References: <20231204120446.3277-1-maxim.uvarov@linaro.org>
@@ -94,51 +94,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix compilation issue with overlapping lwip and march defines.
+Rename declaration to not overlap with lwip.
+
+aarch64:  +   bcm_ns3
++In file included from net/lwip/lwip-external/src/include/lwip/etharp.h:53,
++                 from net/lwip/lwip-external/src/core/init.c:55:
++net/lwip/lwip-external/src/include/lwip/prot/ethernet.h:69:
+		  error: "ETH_ADDR" redefined [-Werror]
++   69 | #define ETH_ADDR(b0, b1, b2, b3, b4, b5) {{b0, b1, b2, b3, b4, b5}}
++      |
++In file included from include/config.h:3,
++                 from arch/arm/include/asm/string.h:4,
++                 from include/linux/string.h:21,
++                 from include/malloc.h:369,
++                 from include/stdlib.h:9,
++                 from net/lwip/lwip-external/src/include/lwip/arch.h:83,
++                 from net/lwip/lwip-external/src/include/lwip/debug.h:40,
++                 from net/lwip/lwipopts.h:93,
++                 from net/lwip/lwip-external/src/include/lwip/opt.h:51,
++                 from net/lwip/lwip-external/src/core/init.c:38:
++include/configs/bcm_ns3.h:52: note: this is the location of the previous definition
++   52 | #define ETH_ADDR
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 6 ------
- arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 +++++++++
- 2 files changed, 9 insertions(+), 6 deletions(-)
+ include/configs/bcm_ns3.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-index 902fc6bfb5..9b85e5865b 100644
---- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-@@ -78,12 +78,6 @@
+diff --git a/include/configs/bcm_ns3.h b/include/configs/bcm_ns3.h
+index 47de4bc201..7c6e0725a6 100644
+--- a/include/configs/bcm_ns3.h
++++ b/include/configs/bcm_ns3.h
+@@ -45,11 +45,11 @@
+ #define PCIE_ARGS "pcie_args=pci=pcie_bus_safe pcie_ports=native vfio_pci.disable_idle_d3=1\0"
  
- #ifndef __ASSEMBLY__
- #include <asm/types.h>
--enum endianness {
--	LITTLE_ENDIAN = 0,
--	BIG_ENDIAN,
--	UNKNOWN_ENDIANNESS
--};
--
- int socfpga_get_handoff_size(void *handoff_address);
- int socfpga_handoff_read(void *handoff_address, void *table, u32 table_len);
+ #ifdef CONFIG_BCM_SF2_ETH
+-#define ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
++#define BCM_ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
+ #define NET_ARGS "bgmac_platform.ethaddr=${ethaddr} " \
+ 	"ip=${ipaddr}::${gatewayip}:${netmask}::${ethif}:off"
+ #else
+-#define ETH_ADDR
++#define BMC_ETH_ADDR
+ #define NET_ARGS
  #endif
-diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-index e7cb5ea89c..df0701ec85 100644
---- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-+++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-@@ -10,6 +10,15 @@
- #include <errno.h>
- #include "log.h"
  
-+#ifndef __ASSEMBLY__
-+#include <asm/types.h>
-+enum endianness {
-+	LITTLE_ENDIAN = 0,
-+	BIG_ENDIAN,
-+	UNKNOWN_ENDIANNESS
-+};
-+#endif
-+
- static enum endianness check_endianness(u32 handoff)
- {
- 	switch (handoff) {
+@@ -749,7 +749,7 @@
+ 	OS_LOG_LEVEL \
+ 	EXTRA_ARGS \
+ 	PCIE_ARGS \
+-	ETH_ADDR \
++	BMC_ETH_ADDR \
+ 	RESERVED_MEM \
+ 	SETBOOTARGS \
+ 	UPDATEME_FLASH_PARAMS \
 -- 
 2.30.2
 
