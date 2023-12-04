@@ -4,81 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8380EC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 07:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C97C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 07:27:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E3A875BF;
-	Mon,  4 Dec 2023 08:16:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6851B8755D;
+	Mon,  4 Dec 2023 08:27:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NakzTMGE";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1701674837;
+	bh=CLBUdKsZjVda47AKm+Agy0t+NKA1TexPhAwvJ3l320w=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FQDnjseCz0nqXPYA+aN348FcDOhRD1X6Za1IHnyIGcuf/KU4CMmE8DKbwzRI4oPaL
+	 aJ4KzYvlnQDSf5B5KDeJaSJUQhxprgcqgTLfhDn04OkguligQ16Ce187DYt/c1JACT
+	 Og3eOmUbr6htnUfLO6aPdBDARIMwg1Oj0o6rgokSvncHxEOhkaAetBpmlAdFxSXrtZ
+	 HS/tdnO48UwY1HsxHsnDi2n7YJW/InEYtEVah+dvAmNhSiMd1zwKGq3gbvdtgrAR7b
+	 YauJdPXOW0K3H9A+DhgI4ZYcqUBenVlrdWxVSLeEd0sMY/O64grEzCZIg9yISecooY
+	 guRFKvbB+EE4g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7F60875F5; Mon,  4 Dec 2023 08:15:59 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 958948759E; Mon,  4 Dec 2023 08:27:16 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 643E2875B6
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 08:15:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A8F6D87496
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 08:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50bc22c836bso5496529e87.0
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 23:15:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701674155; x=1702278955; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GTs1FVRzxXfLVBFB/PTQ9qnz5YZGhthVjF8t45pPBVc=;
- b=NakzTMGEkBqo8zxqgU/gerVfzmR+9E/l/OAI+lwU/mHqRTGdIT3iLkt6zaV2OvbCYa
- l6trIh+SmkCaK5GXAAy2R8dIMux/ZDWm6Qwp5GIeJ1ldoz27MH1SBd37p/Ja/Acq+EVo
- g6GSyvsJyaZljsuZw3cp8nlKXHA0AnqJNtkk/zRrumS5S27yPKMvacnrXvwXPS4pDyPd
- PCYP44EDd4w4YckrpHhC0D/qMwZj0PnYZSja25NSQa6vcxGthoRIpLRJxkNCbBlOAHZj
- C6G61kxH0obfuayw/qDCMvc4CGlfyP1PkODHndzpX7oZnGH0BuO9T1hQ1W+9JvxuvmyK
- sDrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701674155; x=1702278955;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GTs1FVRzxXfLVBFB/PTQ9qnz5YZGhthVjF8t45pPBVc=;
- b=QnVTHRD3ln5PFiuuOWub8qOgb91cvobsk4sPF/73lbBiEMBaafqhbxFW5O1/GA0BLi
- fre0LrnX1T2MPjcYfSO4bfUQrYZV8zbd4J0yzE8WMuM0AilCqHDAejmiimjfVUlMMLOf
- hFU4J7RfiGnjZQ2jyFcYFoMrVOT2K8r+bPRbXy0QG2VJIJIN77eVSqHkqMDqQqxG9EYM
- pxvGGs4K2o8j5oVZSjN61RaH0iONpgTFlox0swfL0aVVBqr8FLxBs/3xPv8i0mRjzFWY
- 6N0tiyudxcoWt46mKQzIzzdbog5E+4LrQ5NsikTDKCOtm1CwHWr4iBxkMvCPMBYUjNv+
- zN2g==
-X-Gm-Message-State: AOJu0YwbGwhvjKSRLW+p+7Gb6thX2HuMtu70Zt23nHQGToAMTejt3Do9
- Hi23UVf+pBrxTJOhR7PSDiYa4yqOPEmTFlm+/zZr0A==
-X-Google-Smtp-Source: AGHT+IG56w3imbf/OfdSgi3geiI+PvaMNXMvdx5+KDE9CuZIXYx7vCs1Ug62OUq6cNP/6m00g/RXRIzfe1tZzfDtSx4=
-X-Received: by 2002:a05:6512:39cc:b0:50b:e4a7:7986 with SMTP id
- k12-20020a05651239cc00b0050be4a77986mr2093432lfu.124.1701674155360; Sun, 03
- Dec 2023 23:15:55 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SkFc20VLcz9sc2;
+ Mon,  4 Dec 2023 08:27:14 +0100 (CET)
+Message-ID: <f557a3f7-a292-4c7e-b2ad-b5f7cf412b82@denx.de>
+Date: Mon, 4 Dec 2023 08:27:10 +0100
 MIME-Version: 1.0
-References: <20231121070028.2614095-1-sughosh.ganu@linaro.org>
- <20231121070028.2614095-2-sughosh.ganu@linaro.org>
- <CAPnjgZ1croWnY9nYYEjiJZB1kO4SB_+aQOb6_yhYJcj-McfuAA@mail.gmail.com>
- <CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com>
- <CAC_iWjKKas=zkMyJeNvLmcPWh2wjbE=aw_-Nugano3HYWX2+4Q@mail.gmail.com>
- <CADg8p96mfEtCySQyXPLqKuwnYu7BPO5guoz9+0452aujgs-zsg@mail.gmail.com>
- <CAPnjgZ09vvyhBTUW03armbz_sevRr0qQeqL2vaQ3BNq+Wo9_dA@mail.gmail.com>
- <CADg8p96yHf7gSzHX4H6zaV-nx-BQ7qwmnBn6n5+xn969FCZKnQ@mail.gmail.com>
- <CAPnjgZ2Ryvp9WWmMCBPSANThYPVVda2dqXerwH0QiWn4wvdtiA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2Ryvp9WWmMCBPSANThYPVVda2dqXerwH0QiWn4wvdtiA@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 4 Dec 2023 12:45:44 +0530
-Message-ID: <CADg8p96ev-myFW7EQJeOXBR_31Scz9QpPmMWCqJAsVXKdFdrqw@mail.gmail.com>
-Subject: Re: [PATCH 1/4] tools: mkeficapsule: Add support for parsing capsule
- params from config file
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] mmc: Poll CD in case cyclic framework is enabled
+Content-Language: en-US
+To: Marek Vasut <marek.vasut@mailbox.org>, Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+References: <20231202234109.208243-1-marek.vasut+renesas@mailbox.org>
+ <CAPnjgZ1__QvjN2C8Gc_GCvB++HFv6Ni73nC6wDuN7dJq+wDwGA@mail.gmail.com>
+ <9dbad2ea-2439-4974-930f-ca80c6551615@mailbox.org>
+ <CAPnjgZ3FcKAAMqB=nZ24ritOwucWxQXmTtZCrDnBp_9qHWm-wA@mail.gmail.com>
+ <e703f6ba-3e93-46ea-9228-c05dd603c0c9@mailbox.org>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <e703f6ba-3e93-46ea-9228-c05dd603c0c9@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,234 +73,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
+On 12/4/23 02:05, Marek Vasut wrote:
+> On 12/4/23 01:44, Simon Glass wrote:
+>> Hi Marek,
+>>
+>> On Sun, 3 Dec 2023 at 14:01, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>>
+>>> On 12/3/23 18:44, Simon Glass wrote:
+>>>> Hi Marek,
+>>>>
+>>>> On Sat, 2 Dec 2023 at 16:41, Marek Vasut
+>>>> <marek.vasut+renesas@mailbox.org> wrote:
+>>>>>
+>>>>> In case the cyclic framework is enabled, poll the card detect of 
+>>>>> already
+>>>>> initialized cards and deinitialize them in case they are removed. 
+>>>>> Since
+>>>>> the card initialization is a longer process and card initialization is
+>>>>> done on first access to an uninitialized card anyway, avoid 
+>>>>> initializing
+>>>>> newly detected uninitialized cards in the cyclic callback.
+>>>>>
+>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>> ---
+>>>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>>>>> Cc: Peng Fan <peng.fan@nxp.com>
+>>>>> ---
+>>>>>    drivers/mmc/mmc-uclass.c | 27 +++++++++++++++++++++++++++
+>>>>>    1 file changed, 27 insertions(+)
+>>>>
+>>>> This is really nice!
+>>>
+>>> I wonder whether we can use this cyclic stuff for USB , that's on my
+>>> roadmap to look at . We could auto-detect new devices in the background,
+>>> which would be tidy. And maybe do block transfers in the background ?
+>>
+>> Just the detect would be amazing!!
+>>
+>> One thing on my mind is that we could have a console buffer, so that
+>> output from background tasks can be collected and written just before
+>> displaying the U-Boot prompt. I am itching to implement that part of
+>> it :-)
+> 
+> And a 'dmesg' command to go along with it ?
+> 
+> Go for it.
 
-On Sat, 2 Dec 2023 at 00:02, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Thu, 30 Nov 2023 at 23:39, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > hi Simon,
-> >
-> > On Thu, 30 Nov 2023 at 08:16, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Wed, 22 Nov 2023 at 00:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > hi Ilias,
-> > > >
-> > > > On Wed, 22 Nov 2023 at 13:06, Ilias Apalodimas
-> > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > >
-> > > > > Hi all,
-> > > > >
-> > > > > On Wed, 22 Nov 2023 at 07:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > >
-> > > > > > hi Simon,
-> > > > > >
-> > > > > > On Wed, 22 Nov 2023 at 03:42, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > >
-> > > > > > > Hi Sughosh,
-> > > > > > >
-> > > > > > > On Tue, 21 Nov 2023 at 00:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Add support for specifying the parameters needed for capsule
-> > > > > > > > generation through a config file, instead of passing them through
-> > > > > > > > command-line. Parameters for more than a single capsule file can be
-> > > > > > > > specified, resulting in generation of multiple capsules through a
-> > > > > > > > single invocation of the command.
-> > > > > > > >
-> > > > > > > > The config file can then be passed to the mkeficapsule tool in such
-> > > > > > > > manner
-> > > > > > > >
-> > > > > > > >  $ ./tools/mkeficapsule -f <path/to/the/config/file>
-> > > > > > > >
-> > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > > > ---
-> > > > > > > >  tools/Kconfig              |  15 ++
-> > > > > > > >  tools/Makefile             |   1 +
-> > > > > > > >  tools/eficapsule.h         | 114 ++++++++++++
-> > > > > > > >  tools/mkeficapsule.c       |  87 +++++----
-> > > > > > > >  tools/mkeficapsule_parse.c | 352 +++++++++++++++++++++++++++++++++++++
-> > > > > > > >  5 files changed, 538 insertions(+), 31 deletions(-)
-> > > > > > > >  create mode 100644 tools/mkeficapsule_parse.c
-> > > > > > >
-> > > > > > > This patch keeps coming back :-)
-> > > > > > >
-> > > > > > > Can we not add multiple capsules in the binman description? Why do we
-> > > > > > > need a new file format? How can binman decode images produced in this
-> > > > > > > way?
-> > > > > >
-> > > > > > So as Tom mentions, this brings parity with respect to the other
-> > > > > > capsule generation tool in EDKII that generates capsules. IIRC, this
-> > > > > > is something which even Xilix was interested in, and Michal had kind
-> > > > > > of gone through these patches earlier. Lastly, it would be good to
-> > > > > > have support in U-Boot's mkeficapsule tool for generating a single
-> > > > > > capsule file with multiple payloads, and having support for this
-> > > > > > functionality helps in that goal.
-> > > > > >
-> > > > > > Also, you might have noticed that, since your objection to the last
-> > > > > > series, I have removed putting this in binman. So now, this aspect of
-> > > > > > the capsule generation would only be supported through the
-> > > > > > command-line invocation of the tool.
-> > > > >
-> > > > > I think that overall the approach is sane. mkeficapsule is currently
-> > > > > supported and compiled for distros, so the multiple payload support is
-> > > > > useful. If we want to add support to binman, instead of rewriting this
-> > > > > in python, we could just call that tool for parsing and creating
-> > > > > capsules
-> > > >
-> > > > Given the amount of time these patches have been under review(also
-> > > > number of iterations), I would request that this series be reviewed
-> > > > and merged first. I think there is general consensus that there is
-> > > > value to have this functionality in the mkeficapsule tool. If it is
-> > > > deemed fit to support this through binman as well, that task can be
-> > > > taken up separately. Thanks.
-> > >
-> > > The point you are missing is that it is the entire goal of 'skirting
-> > > around' binman which is suspect.
-> > >
-> > > If there is a need to generate an output file from the build, we
-> > > should support it in binman. If people start creating configuration
-> > > files all over the place, then they are not using binman, right?
-> > >
-> > > I understand that there are pre-existing vendor-specific config files,
-> > > etc. that the EFI thing is a grey area, but I cannot imagine that this
-> > > patch would lead to a good outcome.
-> > >
-> > > The goal of binman is to bring order to the chaos of firmware
-> > > packaging...we cannot do that if it is not actually used.
-> > >
-> > > So let's figure out what is missing from binman's capsule generation
-> > > (multiple capsules? accept/reject capsules?) and how best to add it.
-> >
-> > I think I need to jog your memory back a bit. For context, I have
-> > jotted down the points.
-> >
-> > * The mkeficapsule tool generates capsules in U-Boot.
-> > * Currently, when the tool is invoked from the command-line, the
-> > capsules are generated by passing the capsule parameters as cmd-line
-> > options.
-> > * I had earlier added support for generating the capsules as part of
-> > U-Boot build, through binman. This support has been merged.
-> > * I had followed these patches up with another series [1] which
-> > generates capsules by parsing the capsule parameters through a config
-> > file instead of cmd-line options.
-> > * This series also had patches which were attempting to integrate this
-> > functionality into binman [2].
-> > * As part of reviewing the patch series, you had objected to adding
-> > this support in binman, primarily because this way of specifying the
-> > capsule parameters goes against the normal way of image description in
-> > binman [3].
-> > * I have described in this mail thread about why we need to have
-> > support for generating capsules through config files [4].
->
-> Thanks for that. Yes this fits with my memory, such as it is.
->
-> I regard the tool as a binman tool, though, in the sense that binman
-> is responsible for generating the images. For example, binman calls
-> mkimage to handle FIT images. People are free to write a script to
-> call mkimage manually, but the in-tree use of mkimage is supposed to
-> be with binman.
+It's very nice to see, that the cyclic infrastructure is finally getting
+used by other interfaces / devices etc. Really interesting. I assume
+there are many more potential use cases where it may be helpful.
 
-No issues with supporting the functionality through binman. However, I
-think that if binman is to be used as the encompassing packaging tool
-which in turn calls other tools like mkimage or mkeficapsule, it
-should make allowances for accepting formats, or ways of describing
-payloads that might not sit with it's core design of "each image is a
-DT node".
-
->
-> >
-> > So, in essence, this functionality is needed to be added to the tool.
-> > I have earlier tried integrating this in binman, but that was
-> > rejected. So, the way I see this moving ahead is to first add support
-> > for this feature in the tool, and then see if this can also be added
-> > in binman. As I mentioned earlier, I am fine with this functionality
-> > not getting integrated with binman, if this contravenes the idea of
-> > describing images in binman, and if no exceptions can be made on that
-> > regard. But please do understand that no attempt is being made at
-> > 'skirting around binman'. In fact, I had worked on your earlier
-> > objection of using absolute paths in testing this functionality in
-> > binman. But then you had put the other objection of how this does not
-> > follow the idea or concept of image description in binman. Hence this
-> > approach.
->
-> It would be easier to talk this through f2f, but I will make an attempt here.
->
-> The goal here is for people to be able to create an EFI capsule (or
-> more than one?) automatically as part of the build.
-
-That is one of the goals, yes. But the other goal is also to add
-functionality to the base capsule generation tool which extends the
-tool to support generating capsules through the config file. I would
-be more than happy if this can be plumbed in as part of the build.
-
-
->  Since the config
-> is in the binman description, putting it somewhere else doesn't help
-> anyone. It will lead to .cfg files in U-Boot and Binman will just be a
-> side show. That is my concern.
-
-Okay. But I don't think that is the main issue here. For example, we
-can require the .cfg files to be placed in the board dir, similar to
-how the capsule keys are placed. The issue here is that can binman
-make allowances(IMO it should) to have the capsule payloads be
-specified through a .cfg file parameter, instead of the usual way of
-specifying it as a DT node. I think if this allowance can be made, it
-solves all the issues here.
-
->
-> I would really like to see a capsule generated for sandbox so I can
-> understand this better.
-
-I will work on the capsule generation for sandbox. I will generate
-signed capsules, as you suggested in this mail thread as part of the
-sandbox U-Boot build. However, this will be using the currently merged
-capsule generation logic, where all the capsule parameters, it's
-payload included, are specified in binman nodes. I suspect this won't
-give you a picture of capsule generation through config files.
-
->
-> Anyway, I hope that makes sense? If not, I think we should discuss it
-> f2f or VC or somehow.
-
-Sure. I will be happy to have a VC anytime if you think that would
-help. Let me know and we can sync up over IRC. Thanks.
-
--sughosh
-
->
-> Regards,
-> Simon
->
-> >
-> > -sughosh
-> >
-> > [1] - https://lore.kernel.org/u-boot/20230908120002.29851-1-sughosh.ganu@linaro.org/
-> > [2] - https://lore.kernel.org/u-boot/20230908120002.29851-4-sughosh.ganu@linaro.org/
-> > [3] - https://lore.kernel.org/u-boot/CAPnjgZ3Zi3hmQg7d5+0461hRK+5O_V89PY=QxMwQarhhqUW6VQ@mail.gmail.com/
-> > [4] - https://lore.kernel.org/u-boot/CADg8p94EvJc6HNKvk2_XWaDb97u28vGfZasnv2je4yJw1k860Q@mail.gmail.com/
-> >
-> > >
-> > > >
-> > > > -sughosh
-> > > >
-> > > > >
-> > > > > Thanks
-> > > > > /Ilias
-> > > > > >
-> > > > > > >
-> > > > > > > Also, could we get sandbox to produce one EFI capsule as part of the
-> > > > > > > normal build? I think that discussion trailed off.
-> > > > > >
-> > > > > > Yes, apologies for missing out on this. Slipped my mind. Would you
-> > > > > > want, say, all the non-signed capsules to be generated as part of the
-> > > > > > sandbox build?
-> > > > > >
-> > > > > > -sughosh
-> > >
-> > > Regards,
-> > > Simon
+Thanks for all your work on this,
+Stefan
