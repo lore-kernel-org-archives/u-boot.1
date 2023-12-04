@@ -4,81 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D184C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 01:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 290EDC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 03:13:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84F288721A;
-	Mon,  4 Dec 2023 02:58:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6DE6487708;
+	Mon,  4 Dec 2023 04:13:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KVq627O4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="OCKxccGM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F8A8875C8; Mon,  4 Dec 2023 02:58:49 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D54F1875BD; Mon,  4 Dec 2023 04:13:24 +0100 (CET)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::608])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B068870A0
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 02:58:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C78787708
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 04:13:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-51f64817809so707129a12.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 17:58:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701655124; x=1702259924; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=swWdlh68zfgl9ZitkQmdeI/Nurl0AsVp8VWDHYx2+JU=;
- b=KVq627O4C6Je23kSYo6h7jqqCQe+C+bx71LTpxLg0oyUU8Sn7uIoLBu4ikIeRjkCwq
- qm0zV6G+5Nru2qRhYgKQ1jZ5I0LrJGAk6aaHf4OytUeTPyOmG1cJIqYxAfio0FNaKNZk
- 8EpP6Qc/iqUjdYxCbXLDje9FKuv2NKbQd0EDNmq0EKPEq/C7/Opsz6YL67qvPRT3cyfb
- wlmPZUBnbKNOaQW6UyqZnY69OUFbn/5vkIHe+ckmgJfpw272tyKOb3OJN70jWxDkC4wi
- vjRLX6t8AMOeVSe7ivNodg4Wzg84d8xaD6oYgQm0a0RKyLipgapdsEq9kyk8X3hPWzio
- DEIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701655124; x=1702259924;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=swWdlh68zfgl9ZitkQmdeI/Nurl0AsVp8VWDHYx2+JU=;
- b=pSq7/7LC4k2feaRu3Foc/ql55+2ztHPiZ9FqE85Wkb30z7J39f6wRN47NFNEq9LOjg
- ufbdcSJ2a2KDl/bPQAv4tY76k6XtwuSH0ZvTtqBvxWyqPRjevJuC74pyEThHqdCpkKSF
- q9YSZV+/WuIClK2Gv7iCf85T7vz8l3H5dvn23gugSAK0JziDEqsUwJkmohOwgfeRTTiJ
- LfKYIp44iEmLE3n34vSqruK/HvSie7Ht5iIhC4qKdgGAQvHqixUaDnirYsTk6DwbRi4A
- qVvHkYqotfFi7BLON8fyCVWGWEbhIBIIDKH3KSVtZll3H0PgWl6mMcPLUE4I2UIvGH+a
- iexA==
-X-Gm-Message-State: AOJu0Yzxzl5RvHC4rkxnyTnkIhVMyB6Iv2QKxdmL580TkMLcjFQb11HA
- W6UTy1Le3Wkw6geBFfBkXhx/Bw==
-X-Google-Smtp-Source: AGHT+IGRV2LV1WtZuE6ZZvBXXtd+dzys6Bu5ShMQJUUzDwKpeh7eWvZ1abZOKTil9YIVnHFOh5pzsg==
-X-Received: by 2002:a05:6a21:78aa:b0:189:f553:6cd2 with SMTP id
- bf42-20020a056a2178aa00b00189f5536cd2mr15655678pzc.3.1701655124130; 
- Sun, 03 Dec 2023 17:58:44 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:bdd5:713b:14e0:aaa6])
- by smtp.gmail.com with ESMTPSA id
- h5-20020aa786c5000000b006ce4965fdbdsm1276733pfo.116.2023.12.03.17.58.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 17:58:43 -0800 (PST)
-Date: Mon, 4 Dec 2023 10:58:40 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 00/12] cmd: bootefi: refactor the code for bootmgr
-Message-ID: <ZW0yUHaTiPA8xxpD@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nnaAtly3UyX9wQAwhQUmxpcrwtNU8Phzum9gFVUGj852+f/odLQ9s6azXhwNhO2ua71W2VSOXw+8+YgU8ude/DgsX9c3ezjIFVSl4P4NKAv5fwPxistd5D6y5kl+F5J3lNdW8pEVbD8PXuSUQ8gCJQBBjfCy1IQNfszZ3vpWY26OMNQPS5ijTqweoKVmjYqRNf5/To0g8YI5FpmrubX0+NifbaQhxw/LgfYWJh0zm2wl//5GUgskj7iYAuJ1MySzuQa4T/95Ox5+ER3133MkLblFDk8PCOdUXmXwyivkRkw1m/vhY6ulQ37Vb374JT19ili7RXc0nKZMNYt7eiadig==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=01Eix/JUVl0oECZRkRp5C1G/GE7EA+YOti3JH/gQrXs=;
+ b=GHPjg5GOFXiml14wln0R1sVckazfEehFAHrKDX4U7rcnpiRhb/P2V7ZB23z8ptQhWYuZQxhj/CnvcnS0Cyl0VePnk7Xk9c5GzyX2xUJKZtl6lzHM8+8kTKXldkdwofn/0s1myiu2E0gcUyGWYCsjwZndZQwi88Z9vrVLkn385ydIauNgFup/qNRatdjCI/SfJ/C2FD7xgosuFy5kS5Tq9Wt38E5Hfh1fhysDAEvvukvkTHYbWj/QSqn9SehijoDYAYIQCftZhwDX2m1EXAJYzMxSEkzif38xtYp1CuF5UvLojWuRtmBPnOHvZRQI2lvWnP166NRYQsO02geykfJXEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=01Eix/JUVl0oECZRkRp5C1G/GE7EA+YOti3JH/gQrXs=;
+ b=OCKxccGMCbbfrg0SdVweb+q4JcFix+dr8hiGCoP0hi7dB2vWNAlBvW5vxOM3u8O+Jnq44ykzqu8bm13kadsYaWXX4kQF+qHM5+H8zHqwxvS0PfeFvIMGu253GqvBBQlwzTU6ODORWdUuvIqELALx/3FkQQExXnagdWg3xcuPF4I=
+Received: from CYZPR19CA0007.namprd19.prod.outlook.com (2603:10b6:930:8e::19)
+ by SJ0PR12MB6734.namprd12.prod.outlook.com (2603:10b6:a03:478::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33; Mon, 4 Dec
+ 2023 03:13:17 +0000
+Received: from CY4PEPF0000EE37.namprd05.prod.outlook.com
+ (2603:10b6:930:8e:cafe::ae) by CYZPR19CA0007.outlook.office365.com
+ (2603:10b6:930:8e::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.33 via Frontend
+ Transport; Mon, 4 Dec 2023 03:13:17 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE37.mail.protection.outlook.com (10.167.242.43) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7068.20 via Frontend Transport; Mon, 4 Dec 2023 03:13:17 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sun, 3 Dec
+ 2023 21:13:11 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sun, 3 Dec
+ 2023 21:13:01 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
+ Transport; Sun, 3 Dec 2023 21:13:00 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <lukma@denx.de>, <seanga2@gmail.com>,
+ <git@xilinx.com>, sreekanth sunnam <sreekanth.sunnam@amd.com>
+Subject: [PATCH] clk: zynqmp: enable topsw_lsbus clock
+Date: Mon, 4 Dec 2023 08:42:48 +0530
+Message-ID: <20231204031248.6938-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231121012950.156539-1-takahiro.akashi@linaro.org>
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE37:EE_|SJ0PR12MB6734:EE_
+X-MS-Office365-Filtering-Correlation-Id: 088a059d-85e0-429b-9cb0-08dbf476f5f1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ++eRGB7QeuZZ0wJwD99QfgbKFKisUAaeiHx+cnB+Ms4hftqIRxQ+jkgK8Np939mBMiO8FNI1eJY5d/smhMWCUHcMLLCkuRrSECmaLdeX/eL9JiyiboljMcjOzlP7OYfk+RweARvXP6odf7/k8Wmk5wqBJP6WrbldVkVzSVbMQWFLLtlsTaqL+cTuXoyDm9C+6drgNcDXggrYIDAumQSR69ygxqY6Gts8Mixzo4vimQHRdmxENB1Mu02NveEededb3f3fRFy7eXH55t/nPW7FlPTfIQ61lhzycKOSYTPhAsnnwy9POMuC079/u/cacTf9QxKBWVgfY8XPMs3QuKjUDj/h4RmmHtNjzPrjhJBdMpUwXbMc/E22YWe+4WMY1ibaKa8+NNvQdKHQRHAYYNcHjmxV5Wf3RDqFKTYQLCy9Y/uysswr9bFa+HAzpdkeuWrF/BgNkn3ilrQ4txZ7iKHF+wWUTXayHmZv3k15FTNszoiONABNm27elLYP30/C89K11p4EdyXP4Xi079Td5tHOAKEA5KHR5ato8eAwSFXlHDbdTLZU4MezoP9qogCrc2mUYfaqOnCSvSJ+hILTfhBAG+WpzQ3zoXTTP6eQDXhTBuNj7SUryGpCFzsg+VJ1xBLT0f3MbLSyHE4pP1KiSjfDt1kJBQukeAzuGjAUMTNT1ETTvMd88MGSePHcmKbTcEEHzGwfs++zDt5nA9/4nLFuEx4b1pHWVdXjDw9NgpHA7uE2SiFyYjk2grCELlynWkt8cbpnXuORtrqZ3ENCCtNahg==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(346002)(39860400002)(396003)(136003)(230922051799003)(64100799003)(82310400011)(186009)(451199024)(1800799012)(36840700001)(46966006)(40470700004)(70586007)(70206006)(54906003)(316002)(6916009)(478600001)(40460700003)(6666004)(4744005)(5660300002)(41300700001)(36756003)(2906002)(86362001)(4326008)(8676002)(8936002)(1076003)(2616005)(36860700001)(83380400001)(40480700001)(47076005)(356005)(81166007)(26005)(336012)(426003)(82740400003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Dec 2023 03:13:17.1533 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 088a059d-85e0-429b-9cb0-08dbf476f5f1
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE37.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6734
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,96 +122,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich, Ilias
+Display port is using topsw_lsbus clock, it is failing
+while enabling the clock, so enable the topsw_lsbus clock.
 
-On Tue, Nov 21, 2023 at 10:29:38AM +0900, AKASHI Takahiro wrote:
-> This patch set is motivated by the discussion[1] regarding
-> CONFIG_BOOTEFI_BOOTMGR option.
-> 
-> At the end, bootefi.c will be decomposed into two parts, one for
-> providing the command itself and one for implementing helper functions.
-> EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
-> CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
-> 
-> Then, EFI_LOADER library side will be further split into two options
-> for fine-grain control:
-> CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
->     loaded by U-Boot's load commands/functions or other methods
->     (like a jtag debugger?)
->     It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"?).
-> 
-> CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
->     It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
-> 
-> As such, We will no longer need CONFIG_EFI_BINARY_EXEC if we want to only
-> make use of the UEFI boot manger for booting a next stage OS.
+Signed-off-by: sreekanth sunnam <sreekanth.sunnam@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/clk/clk_zynqmp.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Any other comments?
-I think the changes are no doubt trivial.
+diff --git a/drivers/clk/clk_zynqmp.c b/drivers/clk/clk_zynqmp.c
+index 1cfe0e25b1..c059b9e8e6 100644
+--- a/drivers/clk/clk_zynqmp.c
++++ b/drivers/clk/clk_zynqmp.c
+@@ -844,6 +844,7 @@ static int zynqmp_clk_enable(struct clk *clk)
+ 		break;
+ 	case qspi_ref ... can1_ref:
+ 	case lpd_lsbus:
++	case topsw_lsbus:
+ 		clkact_shift = 24;
+ 		mask = 0x1;
+ 		break;
+-- 
+2.17.1
 
--Takahiro Akashi
-
-
-> Prerequisite
-> ============
-> This patch set is based on top of Tom's "next" branch.
-> 
-> Patches
-> =======
-> Patch#1-#12: I hope that those commits show step-by-step refactoring
->     without introducing degradation.
-> 
-> Tests
-> =====
-> * run UT efi_selftest on sandbox locally
-> * run test_efi_bootmgr on sandbox locally
-> 
-> Unfortunately, I could not submit a pull request for CI test.
-> 
-> Changes
-> =======
-> v2 (Nov 21, 2023)
-> * rebased onto Tom's next branch
-> * remove already merged commits
-> * revise commit messages
-> * add patch #5 which was split from ex-patch#5
-> RFC (Oct 26, 2023)
-> 
-> [1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
-> 
-> AKASHI Takahiro (12):
->   cmd: bootefi: unfold do_bootefi_image()
->   cmd: bootefi: re-organize do_bootefi()
->   cmd: bootefi: carve out EFI boot manager interface
->   cmd: bootefi: carve out binary execution interface
->   cmd: bootefi: localize global device paths for efi_selftest
->   cmd: bootefi: move library interfaces under lib/efi_loader
->   cmd: efidebug: ease efi configuration dependency
->   bootmeth: use efi_loader interfaces instead of bootefi command
->   efi_loader: split unrelated code from efi_bootmgr.c
->   efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
->   net: tftp: remove explicit efi configuration dependency
->   fs: remove explicit efi configuration dependency
-> 
->  boot/Kconfig                     |   4 +-
->  boot/Makefile                    |   2 +-
->  boot/bootm_os.c                  |  31 +-
->  boot/bootmeth_efi.c              |   8 +-
->  boot/bootmeth_efi_mgr.c          |   2 +-
->  cmd/Kconfig                      |  21 +-
->  cmd/bootefi.c                    | 670 +++++--------------------------
->  cmd/efidebug.c                   |   4 +-
->  fs/fs.c                          |   7 +-
->  include/efi_loader.h             |  34 +-
->  lib/efi_loader/Kconfig           |  11 +-
->  lib/efi_loader/Makefile          |   2 +-
->  lib/efi_loader/efi_bootmgr.c     |  37 ++
->  lib/efi_loader/efi_device_path.c |   3 +-
->  lib/efi_loader/efi_helper.c      | 498 ++++++++++++++++++++++-
->  net/tftp.c                       |  10 +-
->  test/boot/bootflow.c             |   2 +-
->  17 files changed, 700 insertions(+), 646 deletions(-)
-> 
-> -- 
-> 2.34.1
-> 
