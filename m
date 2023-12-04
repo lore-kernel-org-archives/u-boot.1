@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0280C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 15:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D966C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 16:25:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E5E98755D;
-	Mon,  4 Dec 2023 16:54:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 827A9875BF;
+	Mon,  4 Dec 2023 17:25:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aBWKLSBg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ht3hsXHM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB98B8719C; Mon,  4 Dec 2023 16:54:18 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 8C476876DA; Mon,  4 Dec 2023 17:25:26 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0313F8719C
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 16:54:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DCDE875BF
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 17:25:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40859dee28cso46117605e9.0
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 07:54:16 -0800 (PST)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1cfc2bcffc7so19118195ad.1
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 08:25:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701705256; x=1702310056; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WoBLP3TcQFzmfczrHfgPA+b5xSwmAnDgCGceIepFN/Q=;
- b=aBWKLSBgf46WLm9XglIqwN/iac76aYI9RJVRV7DL9kC3odj0nQ63jgUSBoo8hGx0ke
- Jb1Iiklpxe1PVm/X4JhIMWM9EtdEOXMIj3HfMJGizpeDLcoHzbEVJX9zACs0cFrp981G
- TC13csR5OTVhewcammyD81ZIXJVLteChNcIxj5A9434FmHQ18j0zA3pS4Jl5AGGsGiXO
- Rub/J+6SS6x502SOCpTwey4+qu6KSCf5o6NCFiA/YUR8uuWQ0/AqPxj4f3zWShROWjqI
- 5JiZaYpJXTvq5KnmYSYkRD4nmPrhLb2lUono5m2wvmRnFgU+vhYnCzocbbHPv8dPtSWv
- qZKA==
+ d=linaro.org; s=google; t=1701707122; x=1702311922; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/YDNA1HrEWv/6nyfhEesPCBgf3ZxWXu/gk1o1/U/fw4=;
+ b=ht3hsXHMmQcRQypirJ7uBhkooZcwvvzuy9k6J5RkwdVYZkvTf5LxOmktcsKNJSTR1B
+ dqgctk9suJPTBFwRjDfDBDQT4JUdc3EKK1Esv7+6ojoxZXshrcnle1zR/Yq6IiZhCW6F
+ cb5KFb3OsuDC+K0BITAgWPWSpTVz8m7v3pLBH2f+s1zZLZwVkZbWtdyVSKkwttFS3rqq
+ 0xUdPqdIOyCajpMzKK9//5+CsHujSGfJ0UySfIkWObY9kS9LCwuXzyXd/yKaUws9Qra8
+ +xOh9hBeBJL2Z8fb8yNq0I5XZu58KAlCyLW5m6fys3mT4QUUwBerLg+0X5C+HCCYDk59
+ Mdsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701705256; x=1702310056;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WoBLP3TcQFzmfczrHfgPA+b5xSwmAnDgCGceIepFN/Q=;
- b=qM5nrKoKjlKReO2aH3j5U0bOP6NBkjrFCKAYo8CTuWmgOgrhAnahoZ5Uedn9PcLXAB
- MczlEyjvLVGCAbTTRJsxUb0wDh3MvZcMhL5gVsSwG1GEgp5uOOkr3M3VqgUqO8V4qCQs
- BEwNLcW0/ZF1JVHaG8kwt46V/QLxO5ewacwL6vzRkU6Dfjp1JKrJsQfYZQS5bleth65F
- bROPY6hFDGRqS1D8rOo/C3NhA1eo/AbffZ3M4efxrl+ry5EKbkXKGyGhAmZBiEKsRZ/5
- G3JD4VQS09tvM50AaGeLNG4GbNbNFmBG/7WEIOXX3u/gGWwnqeLHekMtkprEJmseMb4H
- AYEw==
-X-Gm-Message-State: AOJu0YzsqsSuo7KGjqunaRflxb+aLyJvOgqD5OgK9MneSKOnPgclK2Rq
- f1h+LaA7rzomFBzJBSdX6ZEe8w==
-X-Google-Smtp-Source: AGHT+IGBH86ScbqZn6GjWlgZZuY10BL3+F1jqZN4la0Dehsb74OYgWC2frLjNN3Hlr+nK7LKsHZpFg==
-X-Received: by 2002:a05:600c:3584:b0:40b:5e22:954 with SMTP id
- p4-20020a05600c358400b0040b5e220954mr3122134wmq.67.1701705256304; 
- Mon, 04 Dec 2023 07:54:16 -0800 (PST)
-Received: from lion.caleb.rex.connolly.tech ([79.79.179.141])
- by smtp.gmail.com with ESMTPSA id
- ay10-20020a05600c1e0a00b0040b397787d3sm19249356wmb.24.2023.12.04.07.54.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Dec 2023 07:54:15 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/2] serial: msm-geni: rework oversampling and fix clk API
- bug
-Date: Mon,  4 Dec 2023 15:53:53 +0000
-Message-ID: <170170522351.224390.8746214675614893917.b4-ty@linaro.org>
-X-Mailer: git-send-email 2.42.1
-In-Reply-To: <20231114-b4-geni-uart-v1-0-48c8ba9dda36@linaro.org>
-References: <20231114-b4-geni-uart-v1-0-48c8ba9dda36@linaro.org>
+ d=1e100.net; s=20230601; t=1701707122; x=1702311922;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/YDNA1HrEWv/6nyfhEesPCBgf3ZxWXu/gk1o1/U/fw4=;
+ b=Yqv9sliREENSLCiARPR/jIfsZ20z+AN+ggRcEFE6xvzeqHTMZm8pF8Zk6g8glDaefm
+ JYoGceD8lKbCIaCA2QZO5b9pNlON4DItlR3ifx9mP7245QyfyE3gq/d/oZqXip0A+/v0
+ NIpWE1BEz2IzHLiSnFJXZAgWi9r31I2KG1oUBMqll1NQrG3lU6jp9LzmPBk92isRixX4
+ xK5sjuiS8HoQy4MtVzlJuQjm13WER1zt1/nw1eY1w8sswvfwt2LUpSv0YraFcst8gfCl
+ XFVSWAzulEbRhzBqm2bI0fL1GamIL+pv/ZBmY+UopEJuRxOviZtWMnRUP3dwQVCfi4hb
+ ehCQ==
+X-Gm-Message-State: AOJu0YyJ5EXedPXYoWFMtRr4HK29GxmeaT43eu0BDJtmzIwabEyY1T/k
+ HMa887J8169qhKWJPvvgeB0AqPF5ZG0hYLCAo47Ahw==
+X-Google-Smtp-Source: AGHT+IEr9Pj770EbOAPGYxE6iYhsa3grih5HTmU1e1ubJYFv/NohyDgdi6EjVs0RJaZrQxhghVurBrxbONmLJ5feSqo=
+X-Received: by 2002:a17:90a:c385:b0:285:a426:5913 with SMTP id
+ h5-20020a17090ac38500b00285a4265913mr2046834pjt.41.1701707121779; Mon, 04 Dec
+ 2023 08:25:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+References: <20231127195029.90951-1-raymond.mao@linaro.org>
+ <20231127195029.90951-2-raymond.mao@linaro.org>
+ <CAC_iWjJ8qkOGVVqDa-_vg4x2W2rocb=ysQDPJhEgE0rOnwox6w@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ8qkOGVVqDa-_vg4x2W2rocb=ysQDPJhEgE0rOnwox6w@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 4 Dec 2023 11:25:11 -0500
+Message-ID: <CAEfUkUK0nwVwKkh6E9fHu9oRRX67bQdzVTsLuWeB16vYkv+2Pg@mail.gmail.com>
+Subject: Re: [PATCH v2 01/18] bloblist: Update the tag numbering
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, Bin Meng <bmeng.cn@gmail.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +91,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
-On Tue, 14 Nov 2023 12:51:10 +0000, Caleb Connolly wrote:
-> These patches improve GENI UART support during init by implementing the
-> parent property read directly rather than via a misc device, and fixing
-> the error path when the clock can't be found.
-> 
-> In my testing, the first few lines of UART output on platforms with
-> non-default oversampling values is often garbled, this is because the
-> parent misc device hasn't yet probed and so the clock rate is incorrect.
-> 
+BLOBLISTT_AREA_ARM is now holding the ones we already defined in the FW
+Handoff spec for TF-A project only.
+The TPM eventlog related ones are undefined in the spec yet, they stay in
+the group BLOBLISTT_AREA_FIRMWARE.
+
+>  /* BLOBLISTT_AREA_FIRMWARE */
+>- { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+>- { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+>  { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+>  { BLOBLISTT_TCPA_LOG, "TPM log space" },
+>- { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>+ { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+
+Thanks and regards,
+Raymond
+
+On Mon, 4 Dec 2023 at 03:25, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
+
+> Hi all,
+>
 > [...]
-
-Applied, thanks!
-
-[1/2] serial: msm-geni: don't rely on parent misc device
-      commit: 393825c304411c6483dbfbc45ea09c577365ddb9
-[2/2] serial: msm-geni: handle devm_clk_get() errors
-      commit: afd9dcf23cb232dd5f352336c6b389691682be47
-
-Best regards,
--- 
-// Caleb (they/them)
-
+>
+> >  common/bloblist.c  | 16 +++++++++---
+> >  include/bloblist.h | 65 ++++++++++++++++++++++++----------------------
+> >  test/bloblist.c    |  4 +--
+> >  3 files changed, 48 insertions(+), 37 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index a22f6c12b0..349ceddea5 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -36,16 +36,24 @@ static struct tag_name {
+> >         enum bloblist_tag_t tag;
+> >         const char *name;
+> >  } tag_name[] = {
+> > -       { BLOBLISTT_NONE, "(none)" },
+> > +       { BLOBLISTT_VOID, "(void)" },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE_TOP */
+> > +       { BLOBLISTT_CONTROL_FDT, "Control FDT" },
+> > +       { BLOBLISTT_HOB_BLOCK, "HOB block" },
+> > +       { BLOBLISTT_HOB_LIST, "HOB list" },
+> > +       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> >
+> >         /* BLOBLISTT_AREA_FIRMWARE */
+> > -       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > -       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> >         { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+> >         { BLOBLISTT_TCPA_LOG, "TPM log space" },
+> > -       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>
+> There are some TPM Eventlog related entries that are missing here.
+> Can we add them?
+>
+> > +       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+> > +
+> > +       /* BLOBLISTT_AREA_ARM */
+> > +       { BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
+> > +
+> > +       /* BLOBLISTT_AREA_OTHER */
+> > +       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+> [...]
+>
+> Thanks
+> /Ilias
+>
