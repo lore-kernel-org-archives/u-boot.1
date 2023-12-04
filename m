@@ -4,57 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDF9C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 14:40:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A7EBC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 14:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11FCD87751;
-	Mon,  4 Dec 2023 15:39:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shokubai.tech
+	by phobos.denx.de (Postfix) with ESMTP id AE66587516;
+	Mon,  4 Dec 2023 15:45:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shokubai.tech header.i=@shokubai.tech header.b="TSZNeiEn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XApMleSC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59A00875BF; Mon,  4 Dec 2023 15:38:20 +0100 (CET)
-Received: from 10.mo546.mail-out.ovh.net (10.mo546.mail-out.ovh.net
- [46.105.76.192])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4960B875BF; Mon,  4 Dec 2023 15:45:20 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09961874CA
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 15:38:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2338B8769A
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 15:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shokubai.tech
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ff@shokubai.tech
-Received: from DAG2EX3.indiv5.local (unknown [10.111.172.45])
- by mo546.mail-out.ovh.net (Postfix) with ESMTPS id C510B26445;
- Mon,  4 Dec 2023 14:38:15 +0000 (UTC)
-Received: from DAG2EX1.indiv5.local (172.16.2.21) by DAG2EX3.indiv5.local
- (172.16.2.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Mon, 4 Dec
- 2023 15:38:14 +0100
-Received: from DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b]) by
- DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b%6]) with mapi id
- 15.01.2507.035; Mon, 4 Dec 2023 15:38:13 +0100
-From: ff <ff@shokubai.tech>
-To: Daniel Thompson <daniel.thompson@linaro.org>
-CC: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, "Rob
- Herring" <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, "conor+dt@kernel.org"
- <conor+dt@kernel.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>, Ramon Fried
- <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan
- <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, "Rayagonda
- Kokatanur" <rayagonda.kokatanur@broadcom.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jorge Ramirez-Ortiz
- <jorge.ramirez.ortiz@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
- "Marek Vasut" <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "Simon Glass" <sjg@chromium.org>, Boot Architecture Mailman List
- <boot-architecture@lists.linaro.org>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-54917ef6c05so5708999a12.1
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 06:45:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701701116; x=1702305916; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LhkCVL4AhXfPOxiudcDOJz64SMZnYC7d0hvSrMULIcY=;
+ b=XApMleSC+V6fO2vLXiOEC2sh/ctfvqB/9XODFUY1j7Z+Xzx/Aa6K3ZMAyy6WY7zWgG
+ lIM1ZWS5BKmZSj7zR3QgsFTHMxi4P/LpHMRZZDP5U9xXq5IfuyG1Qb2UShx00dOojR5K
+ E7ZfeRdO4yWdad+hcxyyl23mKk/WY0dIkvmiw+mV/eq/D03xV5pqPc87xSHZzyFjiA1/
+ qnGVcjkrRdF87Q7QWkqgXkWPPJQdCUhdYqTlXxZwjqnWADWC+d0xaCAMN9rB22RQbd5y
+ UzEuKrRckRRSceMxDdfxZGHZaOL/f5wgGL3eWTDwhq2xXjT0QeH/eINdt4Gc3ilfFw81
+ EMGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701701116; x=1702305916;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LhkCVL4AhXfPOxiudcDOJz64SMZnYC7d0hvSrMULIcY=;
+ b=Kf0lVBfIpT2rp2vg7wQCK84wsLOYl5MgHG0oxnet6/5pP9eICcwjCE8BjCzQuCwOUw
+ e5EzG2NiDXbRyJeKXyvKQmeA0k6g4Rz5wjmFZg5K32PlqLu/syHOMLioxYf9dvhAW7SM
+ 7KDiWMqklx1BmqSSE89OHOAp7OjCoHdzNN1KYGcJAcReu04rmydW4yPiz/jDrb0ilaIi
+ rVqRXOtgSABux15k1C6+CNAVgAgJ/LddpCuyeY3KbPFKoEkx7JA0CXoJC0eggtC8ypS7
+ y+nmakxAzBJ8Fn6JqdEZtWwP1hNFELVDp5evZY74chQXmtpxe+aXtLcyWDJWM1FIDZFY
+ lKjA==
+X-Gm-Message-State: AOJu0YxwlXTB0slDqYA6V+g6pXIwTut0/WFqEo0StjnTaf5cK7ssb5uO
+ zHrP6GnCAWYkPLP4qUgqFc4voA==
+X-Google-Smtp-Source: AGHT+IGWOeU1gxNwyJVgdcYJ199N/Zr7wrxDQewzH8dFgK3z6Pb5r9vszZL1loBMVThjwCDl7NfwsA==
+X-Received: by 2002:a17:906:2499:b0:a19:9b79:8b4c with SMTP id
+ e25-20020a170906249900b00a199b798b4cmr2154274ejb.93.1701701116505; 
+ Mon, 04 Dec 2023 06:45:16 -0800 (PST)
+Received: from [192.168.1.20] ([178.197.223.109])
+ by smtp.gmail.com with ESMTPSA id
+ qc22-20020a170906d8b600b0099ddc81903asm5380137ejb.221.2023.12.04.06.45.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 04 Dec 2023 06:45:15 -0800 (PST)
+Message-ID: <f88f7882-c247-41f8-8ed6-4a2edafc846f@linaro.org>
+Date: Mon, 4 Dec 2023 15:45:12 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 00/21] Qualcomm generic board support
-Thread-Topic: [PATCH 00/21] Qualcomm generic board support
-Thread-Index: AQHaJnNnhdt4kVlXP0S2F0B2DoM1cbCY5ICAgABNn/Y=
-Date: Mon, 4 Dec 2023 14:38:13 +0000
-Message-ID: <8A726F05-79DF-4DA2-AC25-FC91948F6BB6@shokubai.tech>
+Content-Language: en-US
+To: ff <ff@shokubai.tech>, Daniel Thompson <daniel.thompson@linaro.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ "conor+dt@kernel.org" <conor+dt@kernel.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
+ <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass
+ <sjg@chromium.org>,
+ Boot Architecture Mailman List <boot-architecture@lists.linaro.org>
 References: <20231122140100.GT2513409@bill-the-cat>
  <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
  <20231122142758.GU2513409@bill-the-cat>
@@ -64,26 +96,57 @@ References: <20231122140100.GT2513409@bill-the-cat>
  <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
  <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
  <20231130143512.GQ2513409@bill-the-cat>
- <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>,
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
  <20231204110025.GA27965@aspen.lan>
-In-Reply-To: <20231204110025.GA27965@aspen.lan>
-Accept-Language: fr-FR, en-US
-Content-Language: fr-FR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; d=shokubai.tech; s=ovhex1078890-selector1; 
- c=relaxed/relaxed; t=1701700695; h=from:to:subject:date;
- bh=AfssgUtQULTRBX+Rob/NP56xthUm+DzEM3tnUg1RR4A=;
- b=TSZNeiEnX5XVjR03RvT30Pyef5oG5pFKUefhqFO9Zq49iUfUpih80ca08uBZoSrJLVY/ZD52zpnJySIyg+BbLJaygWYOgyy0DtXyeSE+Kzr/5IqIDnrALRf3fQ8OnhqsOMJCdqoQDkM+nbcc6G3HMSi92oDJqr3wd2U8WqE0mrNUbnKMFj99FNBroGnIm6NblSCUStGf+VF+rMD2VX5BwanF5BuFvuN2DnGGJJ9EeueDwPNFIm+6UCoGVK9avygXJqkpdSUpuriTz6HVi1fwSujIKsPsYHaaGYXtmKnJUx1Zw4ByLCvGhwEiu4FFNXJXOjpNHkbuydb+v7chrSf8Zg==
-X-Ovh-Tracer-Id: 16453901241613663832
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudejiedgieekucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefuthffkfhfjggtgfggsehtsghmtddttdejnecuhfhrohhmpehffhcuoehffhesshhhohhkuhgsrghirdhtvggthheqnecuggftrfgrthhtvghrnhepgfelleekvdejtdefteettdekfeejkeegvdejtdelheeutefhffehffeggfejvedvnecukfhppeduvdejrddtrddtrddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeofhhfsehshhhokhhusggrihdrthgvtghhqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehsuhhmihhtrdhgrghrgheslhhinhgrrhhordhorhhgpdhtrhhinhhisehkohhnshhulhhkohdrtghomhdprhhosghhodgutheskhgvrhhnvghlrdhorhhgpdhkrhiihihsiihtohhfrdhkohiilhhofihskhhiodgutheslhhinhgrrhhordhorhhgpdgtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdgtrghlvggsrdgtohhnnhholhhlhieslhhinhgrrhhordhorhhgpdhnvghilhdrrghrmhhsthhrohhngheslhhinhgrrhhordhorhhgpdhrfhhrihgvugdruggvvhesghhmrghilhdrtghomhdpughsrghnkhhouhhskhhisehgmhgrih
- hlrdgtohhmpdhpvghnghdrfhgrnhesnhigphdrtghomhdpjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrrgihrghgohhnuggrrdhkohhkrghtrghnuhhrsegsrhhorggutghomhdrtghomhdplhhukhhmrgesuggvnhigrdguvgdpshgvrghnghgrvdesghhmrghilhdrtghomhdpjhhorhhgvgdrrhgrmhhirhgviidrohhrthhiiiesghhmrghilhdrtghomhdpshhtvghphhgrnhesghgvrhhhohhlugdrnhgvthdpmhgrrhgvgiesuggvnhigrdguvgdpuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhsjhhgsegthhhrohhmihhumhdrohhrghdpsghoohhtqdgrrhgthhhithgvtghtuhhrvgeslhhishhtshdrlhhinhgrrhhordhorhhgpdgurghnihgvlhdrthhhohhmphhsohhnsehlihhnrghrohdrohhrghdpoffvtefjohhsthepmhhoheegiedpmhhouggvpehsmhhtphhouhht
-X-Mailman-Approved-At: Mon, 04 Dec 2023 15:39:38 +0100
+ <8A726F05-79DF-4DA2-AC25-FC91948F6BB6@shokubai.tech>
+From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzTRLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnp5c3p0b2Yua296bG93c2tpQGxpbmFyby5vcmc+wsGUBBMBCgA+FiEE
+ m9B+DgxR+NWWd7dUG5NDfTtBYpsFAmI+BxMCGwMFCRRfreEFCwkIBwIGFQoJCAsCBBYCAwEC
+ HgECF4AACgkQG5NDfTtBYptgbhAAjAGunRoOTduBeC7V6GGOQMYIT5n3OuDSzG1oZyM4kyvO
+ XeodvvYv49/ng473E8ZFhXfrre+c1olbr1A8pnz9vKVQs9JGVa6wwr/6ddH7/yvcaCQnHRPK
+ mnXyP2BViBlyDWQ71UC3N12YCoHE2cVmfrn4JeyK/gHCvcW3hUW4i5rMd5M5WZAeiJj3rvYh
+ v8WMKDJOtZFXxwaYGbvFJNDdvdTHc2x2fGaWwmXMJn2xs1ZyFAeHQvrp49mS6PBQZzcx0XL5
+ cU9ZjhzOZDn6Apv45/C/lUJvPc3lo/pr5cmlOvPq1AsP6/xRXsEFX/SdvdxJ8w9KtGaxdJuf
+ rpzLQ8Ht+H0lY2On1duYhmro8WglOypHy+TusYrDEry2qDNlc/bApQKtd9uqyDZ+rx8bGxyY
+ qBP6bvsQx5YACI4p8R0J43tSqWwJTP/R5oPRQW2O1Ye1DEcdeyzZfifrQz58aoZrVQq+innR
+ aDwu8qDB5UgmMQ7cjDSeAQABdghq7pqrA4P8lkA7qTG+aw8Z21OoAyZdUNm8NWJoQy8m4nUP
+ gmeeQPRc0vjp5JkYPgTqwf08cluqO6vQuYL2YmwVBIbO7cE7LNGkPDA3RYMu+zPY9UUi/ln5
+ dcKuEStFZ5eqVyqVoZ9eu3RTCGIXAHe1NcfcMT9HT0DPp3+ieTxFx6RjY3kYTGLOwU0EVUNc
+ NAEQAM2StBhJERQvgPcbCzjokShn0cRA4q2SvCOvOXD+0KapXMRFE+/PZeDyfv4dEKuCqeh0
+ hihSHlaxTzg3TcqUu54w2xYskG8Fq5tg3gm4kh1Gvh1LijIXX99ABA8eHxOGmLPRIBkXHqJY
+ oHtCvPc6sYKNM9xbp6I4yF56xVLmHGJ61KaWKf5KKWYgA9kfHufbja7qR0c6H79LIsiYqf92
+ H1HNq1WlQpu/fh4/XAAaV1axHFt/dY/2kU05tLMj8GjeQDz1fHas7augL4argt4e+jum3Nwt
+ yupodQBxncKAUbzwKcDrPqUFmfRbJ7ARw8491xQHZDsP82JRj4cOJX32sBg8nO2N5OsFJOcd
+ 5IE9v6qfllkZDAh1Rb1h6DFYq9dcdPAHl4zOj9EHq99/CpyccOh7SrtWDNFFknCmLpowhct9
+ 5ZnlavBrDbOV0W47gO33WkXMFI4il4y1+Bv89979rVYn8aBohEgET41SpyQz7fMkcaZU+ok/
+ +HYjC/qfDxT7tjKXqBQEscVODaFicsUkjheOD4BfWEcVUqa+XdUEciwG/SgNyxBZepj41oVq
+ FPSVE+Ni2tNrW/e16b8mgXNngHSnbsr6pAIXZH3qFW+4TKPMGZ2rZ6zITrMip+12jgw4mGjy
+ 5y06JZvA02rZT2k9aa7i9dUUFggaanI09jNGbRA/ABEBAAHCwXwEGAEKACYCGwwWIQSb0H4O
+ DFH41ZZ3t1Qbk0N9O0FimwUCYDzvagUJFF+UtgAKCRAbk0N9O0Fim9JzD/0auoGtUu4mgnna
+ oEEpQEOjgT7l9TVuO3Qa/SeH+E0m55y5Fjpp6ZToc481za3xAcxK/BtIX5Wn1mQ6+szfrJQ6
+ 59y2io437BeuWIRjQniSxHz1kgtFECiV30yHRgOoQlzUea7FgsnuWdstgfWi6LxstswEzxLZ
+ Sj1EqpXYZE4uLjh6dW292sO+j4LEqPYr53hyV4I2LPmptPE9Rb9yCTAbSUlzgjiyyjuXhcwM
+ qf3lzsm02y7Ooq+ERVKiJzlvLd9tSe4jRx6Z6LMXhB21fa5DGs/tHAcUF35hSJrvMJzPT/+u
+ /oVmYDFZkbLlqs2XpWaVCo2jv8+iHxZZ9FL7F6AHFzqEFdqGnJQqmEApiRqH6b4jRBOgJ+cY
+ qc+rJggwMQcJL9F+oDm3wX47nr6jIsEB5ZftdybIzpMZ5V9v45lUwmdnMrSzZVgC4jRGXzsU
+ EViBQt2CopXtHtYfPAO5nAkIvKSNp3jmGxZw4aTc5xoAZBLo0OV+Ezo71pg3AYvq0a3/oGRG
+ KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
+ fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
+ D2GYIS41Kv4Isx2dEFh+/Q==
+In-Reply-To: <8A726F05-79DF-4DA2-AC25-FC91948F6BB6@shokubai.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,45 +163,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQoNCj4gTGUgNCBkw6ljLiAyMDIzIMOgIDEyOjAwLCBEYW5pZWwgVGhvbXBzb24gPGRhbmllbC50
-aG9tcHNvbkBsaW5hcm8ub3JnPiBhIMOpY3JpdCA6DQo+IA0KPiDvu79PbiBNb24sIERlYyAwNCwg
-MjAyMyBhdCAxMTowMjo1N0FNICswNTMwLCBTdW1pdCBHYXJnIHdyb3RlOg0KPj4gKyBMaW51eCBr
-ZXJuZWwgRFQgYmluZGluZ3MgbWFpbnRhaW5lcnMsIEVCQlIgTUwNCj4+IA0KPj4+IE9uIFRodSwg
-MzAgTm92IDIwMjMgYXQgMjA6MDUsIFRvbSBSaW5pIDx0cmluaUBrb25zdWxrby5jb20+IHdyb3Rl
-Og0KPj4+IE9uIFRodSwgTm92IDMwLCAyMDIzIGF0IDAxOjAyOjI1UE0gKzA1MzAsIFN1bWl0IEdh
-cmcgd3JvdGU6DQo+Pj4+IE9uIFdlZCwgMjkgTm92IDIwMjMgYXQgMjI6MDYsIE5laWwgQXJtc3Ry
-b25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPiB3cm90ZToNCj4+Pj4+PiBJJ3ZlIGJlZW4g
-dGhpbmtpbmcgYWJvdXQgYW5kIGhhY2tpbmcgb24gdGhpcyBmb3IgdGhlIGxhc3Qgd2VlayBvciBz
-bywNCj4+Pj4+PiBzb3JyeSBmb3IgdGhlIGRlbGF5ZWQgcmVwbHkgaGVyZS4NCj4+Pj4+PiANCj4+
-Pj4+PiBUaGUgdmFsdWUgaXMgaW4gcHJldmVudGluZyBhbnkgb2YgdGhlIGV4aXN0aW5nIGJpbmRp
-bmdzIGZyb20gcmVncmVzc2luZywNCj4+Pj4gDQo+Pj4+IFRoYXQgaXMgYWN0dWFsbHkgYmVzdCBh
-ZGRyZXNzZWQgaW4gTGludXggYnkgY2hlY2tpbmcgdGhlIERUUyBhZ2FpbnN0DQo+Pj4+IHlhbWwg
-RFQgYmluZGluZ3MuIFdlIGRvbid0IGhhdmUgdGhhdCB0ZXN0aW5nIGF2YWlsYWJsZSBpbiB1LWJv
-b3QgYW5kDQo+Pj4+IG9ubHkgZGVwZW5kIG9uIGNhcmVmdWwgcmV2aWV3cy4NCj4+PiANCj4+PiBJ
-IHdvdWxkIGFic29sdXRlbHkgbG92ZSBmb3Igc29tZW9uZSB0byBtYWtlIGFub3RoZXIgYXR0ZW1w
-dCBhdCB1cGRhdGluZw0KPj4+IG91ciBrYnVpbGQgaW5mcmFzdHVjdHVyZSBzbyB0aGF0IHdlIGNh
-biBydW4gdGhlIHZhbGlkYXRpb24gdGFyZ2V0cy4NCj4+PiANCj4+IA0KPj4gR2l2ZW4gdGhhdCBF
-QkJSIHJlcXVpcmVzIFsxXSB0aGUgcGxhdGZvcm0gKGZpcm13YXJlL2Jvb3Rsb2FkZXIpIGFuZA0K
-Pj4gbm90IE9TIHRvIHN1cHBseSB0aGUgZGV2aWNldHJlZSwgaXQgYmVjb21lcyBldmlkZW50IHRo
-YXQNCj4+IGZpcm13YXJlL2Jvb3Rsb2FkZXJzIGltcG9ydCBEVFMgZnJvbSBMaW51eCBrZXJuZWwg
-KHdoZXJlIGl0IGlzDQo+PiBtYWludGFpbmVkKS4NCj4+IA0KPj4gQnV0IGN1cnJlbnRseSB1LWJv
-b3QgZG9lc24ndCBoYXZlIGEgcHJvcGVyIHdheSB0byB2YWxpZGF0ZSB0aG9zZSBEVFMNCj4+IGFn
-YWluc3QgRFQgYmluZGluZ3MgKG1haW50YWluZWQgaW4gTGludXgga2VybmVsKS4gQWx0aG91Z2gg
-dGhlcmUgYXJlDQo+PiBEZXZpY2V0cmVlIHNjaGVtYSB0b29scyBhdmFpbGFibGUgaGVyZSBbMl0s
-IHRoZXJlIGlzbid0IGEgdmVyc2lvbmVkDQo+PiByZWxlYXNlIHBhY2thZ2Ugb2YgRFQgYmluZGlu
-Z3Mgd2hpY2ggb25lIHNob3VsZCB1c2UgdG8gdmFsaWRhdGUgRFRTDQo+PiBmaWxlcy4NCj4gDQo+
-IFRoZSBrZXJuZWwgaXMgcmVndWxhcmx5IHJlbGVhc2VkIGluIG11bHRpcGxlIGZvcm1zIChpbmNs
-dWRpbmcgZ2l0DQo+IHRhZ3MgYW5kIHRhcmJhbGwpLiBXaHkgaXNuJ3QgdGhlIGtlcm5lbCBpdHNl
-bGYgc3VmZmljaWVudCB0byBiZSBhDQo+IHZlcnNpb25lZCByZWxlYXNlIG9mIHRoZSBEVCBiaW5k
-aW5ncyBkaXJlY3Rvcnk/DQo+IA0KVGhlIExpbnV4IGtlcm5lbCBtYXkgbm90IHNlZSBhbGwgZGV2
-aWNlcy4gRm9yIGluc3RhbmNlIGl0IGNvdWxkIHNlZSBhIFBDSSBwb3J0IHdoaWxlIHRoZSBmaXJt
-d2FyZSBzZWVzIGEgU0VSREVTIHRoYXQgaXMgY29uZmlndXJlZCB0byBtYXRjaCB0aGUgYm9hcmQg
-aW1wbGVtZW50YXRpb24gYW5kIHRvdXRpbmcuIFRoZSBmaXJtd2FyZSBzaGFsbCBiZSByZXNwb25z
-aWJsZSB0bywgc3RhdGljYWxseSBvciBkeW5hbWljYWxseSBtYWtlIHRob3NlIHRoaW5ncyBhdmFp
-bGFibGUgdG8gdGhlIGtlcm5lbC4gDQpBbiBPUyBkaXN0cmlidXRpb24gIChub3QgbmVjZXNzYXJp
-bHkgTGludXgpIHNob3VsZCBub3QgZW1iZWRkZWQgYWxsIHBvc3NpYmxlIGNvbWJpbmF0aW9ucyBh
-bmQga25vdyBhbGwgZGVyaXZlZCBib2FyZHMuIA0KDQoNCj4gDQo+IERhbmllbC4NCj4gX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gYm9vdC1hcmNoaXRl
-Y3R1cmUgbWFpbGluZyBsaXN0IC0tIGJvb3QtYXJjaGl0ZWN0dXJlQGxpc3RzLmxpbmFyby5vcmcN
-Cj4gVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBib290LWFyY2hpdGVjdHVyZS1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnDQo=
+On 04/12/2023 15:38, ff wrote:
+> 
+> 
+>> Le 4 déc. 2023 à 12:00, Daniel Thompson <daniel.thompson@linaro.org> a écrit :
+>>
+>> ﻿On Mon, Dec 04, 2023 at 11:02:57AM +0530, Sumit Garg wrote:
+>>> + Linux kernel DT bindings maintainers, EBBR ML
+>>>
+>>>> On Thu, 30 Nov 2023 at 20:05, Tom Rini <trini@konsulko.com> wrote:
+>>>> On Thu, Nov 30, 2023 at 01:02:25PM +0530, Sumit Garg wrote:
+>>>>> On Wed, 29 Nov 2023 at 22:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>>>>>>> I've been thinking about and hacking on this for the last week or so,
+>>>>>>> sorry for the delayed reply here.
+>>>>>>>
+>>>>>>> The value is in preventing any of the existing bindings from regressing,
+>>>>>
+>>>>> That is actually best addressed in Linux by checking the DTS against
+>>>>> yaml DT bindings. We don't have that testing available in u-boot and
+>>>>> only depend on careful reviews.
+>>>>
+>>>> I would absolutely love for someone to make another attempt at updating
+>>>> our kbuild infrastucture so that we can run the validation targets.
+>>>>
+>>>
+>>> Given that EBBR requires [1] the platform (firmware/bootloader) and
+>>> not OS to supply the devicetree, it becomes evident that
+>>> firmware/bootloaders import DTS from Linux kernel (where it is
+>>> maintained).
+>>>
+>>> But currently u-boot doesn't have a proper way to validate those DTS
+>>> against DT bindings (maintained in Linux kernel). Although there are
+>>> Devicetree schema tools available here [2], there isn't a versioned
+>>> release package of DT bindings which one should use to validate DTS
+>>> files.
+>>
+>> The kernel is regularly released in multiple forms (including git
+>> tags and tarball). Why isn't the kernel itself sufficient to be a
+>> versioned release of the DT bindings directory?
+>>
+> The Linux kernel may not see all devices. For instance it could see a PCI port while the firmware sees a SERDES that is configured to match the board implementation and touting. The firmware shall be responsible to, statically or dynamically make those things available to the kernel. 
+> An OS distribution  (not necessarily Linux) should not embedded all possible combinations and know all derived boards. 
+
+Which is nothing related to the discussion here: bindings. The bindings
+*MUST* cover PCI port and serdes.
+
+P.S. Please wrap your replies to match mailing list style / netiquette.
+
+Best regards,
+Krzysztof
+
