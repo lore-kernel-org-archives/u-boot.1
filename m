@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABD1EC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:34:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A4BBC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:34:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85464878B3;
-	Mon,  4 Dec 2023 01:30:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07E3C878C2;
+	Mon,  4 Dec 2023 01:30:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nuXbuqgg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SE15ti6e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AB08878BD; Mon,  4 Dec 2023 01:30:33 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id E3DF487655; Mon,  4 Dec 2023 01:30:36 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68ED6878B3
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:30:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94B0F878BD
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:30:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6d855efb920so2093426a34.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:30:31 -0800 (PST)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6cbd24d9557so3121723b3a.1
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:30:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701649830; x=1702254630; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701649833; x=1702254633; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h47xfYy/I7WdlqDRjfa5GLDYkyDZ0PZVJ6fX2z4AhQY=;
- b=nuXbuqggGheu6crNsTKY+RGc1f6BTgiJj0Y7FiOni7dDLrez8pQQxfxBL7/hDSbZYi
- 5EErkPW2L6c+cynSihgSQbpna5UPatatlKpmxbkY8HRIALnVQcKDhCiqEwbml+5enVIp
- v9NAgFTBwBFHED37GXSY4kHgZGw4V+pagg/Jg=
+ bh=Ji7TTR5kO3D/u5xiCPwhYQKs9sSkNkVzOtKKpXyLuaE=;
+ b=SE15ti6eq8PeR4k4C+YELR7TAVEBna5+5clYeaHBzD8R84WSqMpQ2aGPlozxkc0QB7
+ asiL0it8mvI8Q7iUI9dvTVDUcg5vt+QFGGugHxZjJjFRqeBxS9OiwTH90Ps0i7BCTiQ8
+ lYr9XW3YXzKzdJOXjjUCFgUe/Ds7DvgVatxHk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701649830; x=1702254630;
+ d=1e100.net; s=20230601; t=1701649833; x=1702254633;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h47xfYy/I7WdlqDRjfa5GLDYkyDZ0PZVJ6fX2z4AhQY=;
- b=RdZXNLOJaEjWMQVH+PMN2Oc6ZYD2BDrwOSp7UAY27zgaBuzjLnVZSXbZhqGhnIZyHX
- M7XtvNXo1UjWAyI+BI7DhreIjLh2e2WC8m5M5a88XUg8vT6uZX1AzjnmHc9Mq4fPoaaM
- ZrmngdOYt4QkmyHQ2/Rw0vKdl6AWeQBgmhc88hGbtNkL4QcfZFJIp4RZOKooX1iO6NO2
- vAZps8LiWB8uoiGHoTFpQX4/ZiK1sgbBZLSO8uIzkfGos2eV7Lb2VZ+UMrd0tD15J10l
- /x90rv53PD8f1xKsarLeqT4cEbmfeoqCT3FWG12mSK7vXcy0ekAOfFGr3bCSmp9eV8EF
- ozdw==
-X-Gm-Message-State: AOJu0Ywk7tJEqIQ5m/7IklBHYSREVoMx+GL0qJQSJkjkNnyLJ+TK21Gq
- 6uRq7Jqsh52shtWRjRGoNDgq6Yo3sYxaSBbCpwHCJg==
-X-Google-Smtp-Source: AGHT+IH5Dvl9FWCdo7qN/8pSKoCKN9w5XEM3iB189d17AReYch2I3BKTjN0/cg9GBPWUk8WEIxQYqQ==
-X-Received: by 2002:a05:6830:91b:b0:6d8:7820:aaf8 with SMTP id
- v27-20020a056830091b00b006d87820aaf8mr2815543ott.21.1701649830001; 
- Sun, 03 Dec 2023 16:30:30 -0800 (PST)
+ bh=Ji7TTR5kO3D/u5xiCPwhYQKs9sSkNkVzOtKKpXyLuaE=;
+ b=rZ+xXQrOHmINb1ARseVdaCj0BEFcY+I3FcbLJC1X6twZ7abLeVspx1GfwNi9f6iILZ
+ iyahAr/VdykAcLUDjpT8Ydl9lUfe4DkYH3YRQs60gGNSg40+mRBNKMRuTOuBEODOcSjF
+ cK680Y753P4UpTCM738wKI07eK6snYMXcCHpm3MqGmsEAsXa7kJWM5V3Ppy9EQdM0R3E
+ XohpxOzjTS7Cg0XTss6mpMjhIxEZm7nyBABxoMEdMJJ6LLqa1dvQzP7+Z7WsxFe39eI1
+ e5uiFnhqBKoLtWRSWMkh3zhYqIhewp5spPOXdZEJHQnnO9+t8m93otXWVwss13FQXSiL
+ qM5Q==
+X-Gm-Message-State: AOJu0YwPANyh+FN2nG9Xa6Fs9TosEcMFO/Km1/1pvVJCLWo6BZHdB69G
+ jPV3O3qgVoDjLuUu90XU0q/Kz0L9Vj904ERh7L0/Ig==
+X-Google-Smtp-Source: AGHT+IFNqljtpKOBFiFFXuHfhKXap7lb0QsLUzzPOQBxIJNTlAABMXJKsqW+C3qHGWOfkRyRvxCVyw==
+X-Received: by 2002:a05:6a00:23c4:b0:6cb:cd66:2102 with SMTP id
+ g4-20020a056a0023c400b006cbcd662102mr3672512pfc.4.1701649832880; 
+ Sun, 03 Dec 2023 16:30:32 -0800 (PST)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.30.27
+ o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.30.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 16:30:29 -0800 (PST)
+ Sun, 03 Dec 2023 16:30:32 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 10/13] x86: zboot: Rename zboot_start() to zboot_run()
-Date: Sun,  3 Dec 2023 17:29:35 -0700
-Message-ID: <20231204002944.897949-10-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH 11/13] x86: zboot: Separate logic functions from commands
+Date: Sun,  3 Dec 2023 17:29:36 -0700
+Message-ID: <20231204002944.897949-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
 In-Reply-To: <20231204002944.897949-1-sjg@chromium.org>
 References: <20231204002944.897949-1-sjg@chromium.org>
@@ -89,87 +88,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The term 'start' is used withint bootm and zboot to indicate the first
-phase of booting an image.
-
-Since zboot_start() does the whole boot, rename it to zboot_run() to
-align with bootm_run() etc.
-
-Fix a log message while we are here.
+Move zboot_start() and zboot_info() in with the other logic functions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/x86/lib/zimage.c | 6 +++---
- boot/bootmeth_cros.c  | 6 +++---
- include/bootm.h       | 6 +++---
- 3 files changed, 9 insertions(+), 9 deletions(-)
+ arch/x86/include/asm/zimage.h | 25 +++++++++++++++++++++++++
+ arch/x86/lib/zimage.c         | 23 +++++++++++++++++++++++
+ cmd/x86/zboot.c               | 32 ++++----------------------------
+ 3 files changed, 52 insertions(+), 28 deletions(-)
 
+diff --git a/arch/x86/include/asm/zimage.h b/arch/x86/include/asm/zimage.h
+index ac6683ea9ef3..8b5426051701 100644
+--- a/arch/x86/include/asm/zimage.h
++++ b/arch/x86/include/asm/zimage.h
+@@ -134,4 +134,29 @@ struct boot_params *load_zimage(char *image, unsigned long kernel_size,
+ int setup_zimage(struct boot_params *setup_base, char *cmd_line, int auto_boot,
+ 		 ulong initrd_addr, ulong initrd_size, ulong cmdline_force);
+ 
++/**
++ * zboot_start() - Prepare to boot a zimage
++ *
++ * Record information about a zimage so it can be booted
++ *
++ * @bzimage_addr: Address of the bzImage to boot
++ * @bzimage_size: Size of the bzImage, or 0 to detect this
++ * @initrd_addr: Address of the initial ramdisk, or 0 if none
++ * @initrd_size: Size of the initial ramdisk, or 0 if none
++ * @base_addr: If non-zero, this indicates that the boot parameters have already
++ *	been loaded by the caller to this address, so the load_zimage() call
++ *	in zboot_load() will be skipped when booting
++ * @cmdline: Environment variable containing the 'override' command line, or
++ *	NULL to use the one in the setup block
++ */
++void zboot_start(ulong bzimage_addr, ulong bzimage_size, ulong initrd_addr,
++		 ulong initrd_size, ulong base_addr, const char *cmdline);
++
++/**
++ * zboot_info() - Show simple info about a zimage
++ *
++ * Shows wherer the kernel was loaded and also the setup base
++ */
++void zboot_info(void);
++
+ #endif
 diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index b72e2f01bd57..e8a1849947e6 100644
+index e8a1849947e6..f2d4f3b50162 100644
 --- a/arch/x86/lib/zimage.c
 +++ b/arch/x86/lib/zimage.c
-@@ -437,8 +437,8 @@ int zboot_go(void)
- 	return ret;
+@@ -652,3 +652,26 @@ void zimage_dump(struct boot_params *base_ptr, bool show_cmdline)
+ 	if (get_boot_protocol(hdr, false) >= 0x215)
+ 		print_num("Kernel info offset", hdr->kernel_info_offset);
  }
++
++void zboot_start(ulong bzimage_addr, ulong bzimage_size, ulong initrd_addr,
++		 ulong initrd_size, ulong base_addr, const char *cmdline)
++{
++	memset(&state, '\0', sizeof(state));
++
++	state.bzimage_size = bzimage_size;
++	state.initrd_addr = initrd_addr;
++	state.initrd_size = initrd_size;
++	if (base_addr) {
++		state.base_ptr = map_sysmem(base_addr, 0);
++		state.load_address = bzimage_addr;
++	} else {
++		state.bzimage_addr = bzimage_addr;
++	}
++	state.cmdline = cmdline;
++}
++
++void zboot_info(void)
++{
++	printf("Kernel loaded at %08lx, setup_base=%p\n",
++	       state.load_address, state.base_ptr);
++}
+diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
+index 572b58a5537d..addf28cb4aae 100644
+--- a/cmd/x86/zboot.c
++++ b/cmd/x86/zboot.c
+@@ -10,26 +10,6 @@
+ #include <vsprintf.h>
+ #include <asm/zimage.h>
  
--int zboot_start(ulong addr, ulong size, ulong initrd, ulong initrd_size,
--		ulong base, char *cmdline)
-+int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
-+	      ulong base, char *cmdline)
+-static int zboot_start(ulong bzimage_addr, ulong bzimage_size,
+-		       ulong initrd_addr, ulong initrd_size, ulong base_addr,
+-		       const char *cmdline)
+-{
+-	memset(&state, '\0', sizeof(state));
+-
+-	state.bzimage_size = bzimage_size;
+-	state.initrd_addr = initrd_addr;
+-	state.initrd_size = initrd_size;
+-	if (base_addr) {
+-		state.base_ptr = map_sysmem(base_addr, 0);
+-		state.load_address = bzimage_addr;
+-	} else {
+-		state.bzimage_addr = bzimage_addr;
+-	}
+-	state.cmdline = cmdline;
+-
+-	return 0;
+-}
+-
+ static int do_zboot_start(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			  char *const argv[])
  {
- 	int ret;
+@@ -47,8 +27,10 @@ static int do_zboot_start(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	base_addr = argc > 5 ? hextoul(argv[5], NULL) : 0;
+ 	cmdline = argc > 6 ? env_get(argv[6]) : NULL;
  
-@@ -463,7 +463,7 @@ int zboot_start(ulong addr, ulong size, ulong initrd, ulong initrd_size,
- 		return log_msg_ret("set", ret);
- 	ret = zboot_go();
- 	if (ret)
--		return log_msg_ret("set", ret);
-+		return log_msg_ret("go", ret);
- 
- 	return -EFAULT;
+-	return zboot_start(bzimage_addr, bzimage_size, initrd_addr, initrd_size,
+-			   base_addr, cmdline);
++	zboot_start(bzimage_addr, bzimage_size, initrd_addr, initrd_size,
++		    base_addr, cmdline);
++
++	return 0;
  }
-diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
-index cd72db8250ce..f015f2e1c75f 100644
---- a/boot/bootmeth_cros.c
-+++ b/boot/bootmeth_cros.c
-@@ -432,9 +432,9 @@ static int cros_boot(struct udevice *dev, struct bootflow *bflow)
- 	}
  
- 	if (IS_ENABLED(CONFIG_X86)) {
--		ret = zboot_start(map_to_sysmem(bflow->buf), bflow->size, 0, 0,
--				  map_to_sysmem(bflow->x86_setup),
--				  bflow->cmdline);
-+		ret = zboot_run(map_to_sysmem(bflow->buf), bflow->size, 0, 0,
-+				map_to_sysmem(bflow->x86_setup),
-+				bflow->cmdline);
- 	} else {
- 		ret = bootm_boot_start(map_to_sysmem(bflow->buf),
- 				       bflow->cmdline);
-diff --git a/include/bootm.h b/include/bootm.h
-index ce5298e4ed97..c815c40e3c4d 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -242,7 +242,7 @@ int bootm_process_cmdline(char *buf, int maxlen, int flags);
- int bootm_process_cmdline_env(int flags);
+ static int do_zboot_load(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -81,12 +63,6 @@ static int do_zboot_setup(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	return 0;
+ }
  
- /**
-- * zboot_start() - Boot a zimage
-+ * zboot_run() - Run through the various steps to boot a zimage
-  *
-  * Boot a zimage, given the component parts
-  *
-@@ -255,8 +255,8 @@ int bootm_process_cmdline_env(int flags);
-  * @cmdline: Command line to use for booting
-  * Return: -EFAULT on error (normally it does not return)
-  */
--int zboot_start(ulong addr, ulong size, ulong initrd, ulong initrd_size,
--		ulong base, char *cmdline);
-+int zboot_run(ulong addr, ulong size, ulong initrd, ulong initrd_size,
-+	      ulong base, char *cmdline);
- 
- /*
-  * zimage_get_kernel_version() - Get the version string from a kernel
+-static void zboot_info(void)
+-{
+-	printf("Kernel loaded at %08lx, setup_base=%p\n",
+-	       state.load_address, state.base_ptr);
+-}
+-
+ static int do_zboot_info(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+ {
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
 
