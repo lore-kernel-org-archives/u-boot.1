@@ -4,74 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DA7C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 14:40:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E11AC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 14:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 031D4876C9;
+	by phobos.denx.de (Postfix) with ESMTP id 9F29D87717;
 	Mon,  4 Dec 2023 15:39:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shokubai.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EZrmOA+5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=shokubai.tech header.i=@shokubai.tech header.b="E9VFv94+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F411875D6; Mon,  4 Dec 2023 10:47:34 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 60A3586D9A; Mon,  4 Dec 2023 11:06:48 +0100 (CET)
+Received: from smtpout8.r2.mail-out.ovh.net (smtpout8.r2.mail-out.ovh.net
+ [54.36.141.8])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE6D287499
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 10:47:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B65E88771F
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 11:06:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=phanbagiabao2001@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-548f0b7ab11so5336951a12.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 01:47:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701683252; x=1702288052; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8leu+SuQjkbNs9q7zh3lxM2XK1S53AXUplHVvmPWVE8=;
- b=EZrmOA+5BC26Vma80TnutTwJPh7I6+XFjC1II5JhekBcxQUUw83B4Eyz9+IYb3AQPp
- Weybuv6amfhrL+B99N/09JlwXA6wcA+yizyB9a3mQk3bXDIPWihm8rLpXJhiUVo9JrKJ
- OOdxMCt29ObIMgNwz0yVR0H84sjxOc/qWjfKHvJgDjIFhgUeENGm2NvhycKnYRAAOcjw
- 1//gv3y45X5EVfl15olXt7SetH182/RWwTlVETLMF/y66ZcfLIDqbIWQ53K6a1uSEqGq
- Mk69BAeg71zHhfajJ1itSYEJAZcef5MBiHTrvdUVwM9toT/tALiWU3GWS6Q6UDe4j+Zm
- 9ShQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701683252; x=1702288052;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8leu+SuQjkbNs9q7zh3lxM2XK1S53AXUplHVvmPWVE8=;
- b=wTDoZJ5KzbPKSyoq4yw+x8NNatn+DK86v6guAqYaSsZeXv0Hpij2mbD8q5zk5Ws0uF
- F6Ro431gQRc77TQk5fbT1uCafTV0OW8Notsjq1r+KoaWYAqVrLI1TxUrRTpchlAeEMxA
- bhd65F6eJU9TbOe6zAGsIcjxYnTfMi9AxhmL3xMEPj6Wl9MYIulOpKE5F6vEZuL1mzq9
- vOZE5FqEMxZOpvBFSMERbt8SkbgvOHKyoQNGNyec4viTVAEQeXAxZOvhD6W1Z9aQVrW4
- aA+3xsLp10dg6ux4Z/sghQY19GsmdIwnwv8/pRbpO0cDJ2UPD1iLnHDkH2FSHDGfQ7MA
- FL/Q==
-X-Gm-Message-State: AOJu0Yy7CihVLm9s0MWNaMOYS/0ruFAyZ9RSjtRrLRVuXaQix43AH8eH
- mLeR+3wpAkAY1swJ4xpYTymmPOIoeB5KLXBa8z8=
-X-Google-Smtp-Source: AGHT+IHyElfZ4SVP0tCcNrf6Pb0ioG1OjMCERJvza5s7u/N3ioGIbpPjsQ24gYmqlfgwCufx1kSEN6R+4qTkmVlri08=
-X-Received: by 2002:aa7:cd6e:0:b0:54c:4837:a650 with SMTP id
- ca14-20020aa7cd6e000000b0054c4837a650mr3190404edb.61.1701683251713; Mon, 04
- Dec 2023 01:47:31 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shokubai.tech
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ff@shokubai.tech
+Received: from DAG2EX1.indiv5.local (unknown [10.111.208.63])
+ by mo512.mail-out.ovh.net (Postfix) with ESMTPS id CF86F2522E;
+ Mon,  4 Dec 2023 10:06:42 +0000 (UTC)
+Received: from DAG2EX1.indiv5.local (172.16.2.21) by DAG2EX1.indiv5.local
+ (172.16.2.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Mon, 4 Dec
+ 2023 11:06:41 +0100
+Received: from DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b]) by
+ DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b%6]) with mapi id
+ 15.01.2507.035; Mon, 4 Dec 2023 11:06:41 +0100
+From: ff <ff@shokubai.tech>
+To: Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@redhat.com>
+CC: Tom Rini <trini@konsulko.com>, Rob Herring <robh+dt@kernel.org>,
+ "Krzysztof Kozlowski" <krzysztof.kozlowski+dt@linaro.org>,
+ "conor+dt@kernel.org" <conor+dt@kernel.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, "neil.armstrong@linaro.org"
+ <neil.armstrong@linaro.org>, Ramon Fried <rfried.dev@gmail.com>, Dzmitry
+ Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, "Rayagonda Kokatanur"
+ <rayagonda.kokatanur@broadcom.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jorge Ramirez-Ortiz
+ <jorge.ramirez.ortiz@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
+ "Marek Vasut" <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "Simon Glass" <sjg@chromium.org>, "boot-architecture@lists.linaro.org"
+ <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Thread-Topic: [PATCH 00/21] Qualcomm generic board support
+Thread-Index: AQHaJnNnhdt4kVlXP0S2F0B2DoM1cbCY1W8A
+Date: Mon, 4 Dec 2023 10:06:41 +0000
+Message-ID: <356AB600-D424-4441-B574-55C084DBFC0B@shokubai.tech>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+In-Reply-To: <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [176.145.220.134]
 MIME-Version: 1.0
-References: <CAK9R8u_QmcHLv6KbNm8+8EDvnmgehFZfoPNVCVn8n5P17ArErw@mail.gmail.com>
- <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2JUCWjr35yL6pb2XSEs7659A1Sjh4CgQ6B=vXCLhRvtA@mail.gmail.com>
-From: Ba Gia Bao Phan <phanbagiabao2001@gmail.com>
-Date: Mon, 4 Dec 2023 10:47:20 +0100
-Message-ID: <CAK9R8u_MQtmYcPwiYwXmqse+1yfPaE1ZEHZVtrgHAP-KgPAT+g@mail.gmail.com>
-Subject: Re: Setting up boot chain ACPI on ARM with STM32MPU
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: andy.shevchenko@gmail.com, trini@konsulko.com
+DKIM-Signature: v=1; a=rsa-sha256; d=shokubai.tech; s=ovhex1078890-selector1; 
+ c=relaxed/relaxed; t=1701684402; h=from:to:subject:date;
+ bh=srTA9vR/1y818Ht4xnx7+xnhJlqWIoSugfzkIUTTC8k=;
+ b=E9VFv94+SNGciaaTRhJgoxTW79wB+r/oR1c4fNpXYjlvB5quZirlOOGAAVF1w4JUa4oYQx96etp7Wgx7BJAdt7IMe8JO8ikfMO4cNDZd2YSZMWFnii97hGwo81HuY8vlPwC+8NMQ5H1IBkHAFiHOqmmlx5IRkGrjzorp7c79eIJtERwiL/MFGFP29jrpYLWn1+SwV3Dk4YiuozvnVtp05QnHxNu36jESq5ZJobOCtK2IhnEc+PtvtcWMQAaGM/6BhWk/n3PyAYWt/chyTNVAxdZStd/XwiMuzMi79hTeq64FUwnMx3mMeShOKA8IsoZAGkb/o5X97hVw2yUeIp/KFg==
+X-Ovh-Tracer-Id: 11867829444924784368
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -51
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudejiedguddvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnegoufhushhpvggtthffohhmrghinhculdegledmnecujfgurhephffvvefuthffkfhfjghitgggsegrtdhmredttdejnecuhfhrohhmpehffhcuoehffhesshhhohhkuhgsrghirdhtvggthheqnecuggftrfgrthhtvghrnhepffehudffffefgedvieekgedvgfffudejteehuedtteefkeejleeugfeiuedthfegnecuffhomhgrihhnpehgihhthhhusgdrihhopdhgihhthhhusgdrtghomhenucfkphepuddvjedrtddrtddruddpudejiedrudeghedrvddvtddrudefgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehffhesshhhohhkuhgsrghirdhtvggthheqpdhnsggprhgtphhtthhopedupdhrtghpthhtohepshhumhhithdrghgrrhhgsehlihhnrghrohdrohhrghdpphgsrhhosghinhhsohhnsehrvgguhhgrthdrtghomhdpthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrohgshhdoughtsehkvghrnhgvlhdrohhrghdpkhhriiihshiithhofhdrkhhoiihlohifshhkihdoughtsehlihhnrghrohdrohhrghdptghonhhorhdoughtsehkvghrnhgvlhdrohhrghdptg
+ grlhgvsgdrtghonhhnohhllhihsehlihhnrghrohdrohhrghdpnhgvihhlrdgrrhhmshhtrhhonhhgsehlihhnrghrohdrohhrghdprhhfrhhivggurdguvghvsehgmhgrihhlrdgtohhmpdgushgrnhhkohhushhkihesghhmrghilhdrtghomhdpphgvnhhgrdhfrghnsehngihprdgtohhmpdhjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgrhigrghhonhgurgdrkhhokhgrthgrnhhurhessghrohgruggtohhmrdgtohhmpdhluhhkmhgrseguvghngidruggvpdhsvggrnhhgrgdvsehgmhgrihhlrdgtohhmpdhjohhrghgvrdhrrghmihhrvgiirdhorhhtihiisehgmhgrihhlrdgtohhmpdhsthgvphhhrghnsehgvghrhhholhgurdhnvghtpdhmrghrvgigseguvghngidruggvpdhuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpshhjghestghhrhhomhhiuhhmrdhorhhgpdgsohhothdqrghrtghhihhtvggtthhurhgvsehlihhsthhsrdhlihhnrghrohdrohhrghdpoffvtefjohhsthepmhhoheduvddpmhhouggvpehsmhhtphhouhht
 X-Mailman-Approved-At: Mon, 04 Dec 2023 15:39:38 +0100
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,57 +103,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
->
-> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
-> but I don't think any U-Boot board uses this.
-
-Hello, could you tell me more details about this topic? Which platform ARM
-are ACPI tables enabled for?
-
-Le mer. 29 nov. 2023 =C3=A0 20:28, Simon Glass <sjg@chromium.org> a =C3=A9c=
-rit :
-
-> +Heinrich Schuchardt
->
-> Hi,
->
-> On Wed, 29 Nov 2023 at 08:29, Ba Gia Bao Phan
-> <phanbagiabao2001@gmail.com> wrote:
-> >
-> > Hello everyone,
-> >
-> > I am a trainee at STMicroelectronics France. I am working on a project
-> "Setting up a boot chain ACPI" for STM32MPU, which is based on ARM Cortex=
--A
-> . The objective of my project is to add a way of booting (with ACPI)
-> besides Device Tree available on STM32MPU.
-> >
-> > I found that ACPI was enabled on some x86 platforms but I don't know
-> whether it was set up on ARM or not. I found a PATCH that discussed
-> Enabling ACPI booting on ARM with Raspberry Pi 4 but I don't know if it
-> functioned or not. Did anyone here succeed in setting up ACPI on ARM by
-> U-boot?
->
-> Sort-of...the refactoring to allow ACPI tables on ARM is completed,
-> but I don't think any U-Boot board uses this.
->
-> >
-> > What are the differences between x86 and ARM platforms when enabling
-> ACPI? The architecture of my board STM32PMU is ARM so can I apply the
-> technique used on platform x86 for my board?
->
-> Firstly I wonder why you want ACPI?
->
-> Secondly, if you have the tables somewhere it should be easy enough to
-> build them, building on the series you pointed to. Heinrich is
-> interested in this, I think. I can help with advice. I have been
-> toying with going back to that rpi series but have not done so yet.
->
-> Regards,
-> Simon
->
-
-
---=20
-PHAN Ba Gia Bao
-Etudiant en 5A STI - INSA Centre Val de Loire
+SGkgU3VtbWl0LA0KDQpIZXJlIGFyZSBhZGRpdGlvbmFsIGVsZW1lbnRzIHRoYXQgeW91IG1heSB3
+YW50IHRvIGNvbnNpZGVyLg0KDQpUaGlzIHRvcGljIHNob3VsZCBiZSB0aG91Z2h0IG9mIHdpdGgg
+wqsgd2hvIHByb3ZpZGVzIHdoYXQgwrsgcXVlc3Rpb24gaW4gbWluZC4NCg0KRm9yIHF1aXRlIGEg
+bG9uZyB0aW1lLCBvbmUgc2luZ2xlIGVudGl0eSB3YXMgcHJvdmlkaW5nIHNlY3VyZSBmaXJtd2Fy
+ZSwgZmlybXdhcmUsIGJvb3QgbG9hZGVyIChJIHRoaW5rIG9mIEdydWIgd2hlbiBJIHVzZSB0aGlz
+IG92ZXJsb2FkZWQgdGVybSksIGFuZCBPUy4NClRoaXMgZXhwbGFpbnMgd2h5IHRoZSBMaW51eCBr
+ZXJuZWwgY29tbXVuaXR5IGhhcyBiZWVuIG1haW50YWluaW5nIERUIChub3QganVzdGlmeWluZyBp
+dCBpcyBub3cgc3RpbGwgYSBnb29kIG1vZGVsKS4NCg0KRm9yIFNvZnR3YXJlIERlZmluZWQgVmVo
+aWNsZSBhbmQgbWFueSBvdGhlciBzY2VuYXJpb3MgdGhpcyBzdXBwbHkgY2hhaW4gaXMgbm90IHdv
+cmtpbmcuDQpJbiB0aGUgY29udGV4dCBvZiB0aGlzIHNlcGFyYXRpb24sIE9TL0h5cGVydmlzb3Ig
+c3VwcGx5aW5nIGFueSBEVEIgaXMgYSBub24tc2Vuc2UuDQooVHJhbnNsYXRlZCBpbiByZWFsIGxp
+ZmU6IGFzIGEgRnJlbmNoIGRyaXZlciwgbXkgRFRCIGRlc2NyaXB0aW9uIG9mIGEgY2FyIGlzIHRo
+YXQgdGhlIHN0ZWVyaW5nIHdoZWVsIGlzIG9uIHRoZSBsZWZ0IGhhbmQgc2lkZS4gSWYgSSBnZXQg
+b24gYSBVSyBjYXIsIEkgd2lsbCBjb21wbGFpbiB0aGF0IG15IGhhcmR3YXJlIGRlc2NyaXB0aW9u
+IGRvZXMgbm90IG1hdGNoIHJlYWxpdHkuIENvbmNsdXNpb246IGJldHRlciB1c2UgRFRCIGdpdmVu
+IGZyb20gdGhlIHBsYXRmb3JtISkuDQpJZiBJIGFtIG5vdCBtaXN0YWtlbiBGZWRvcmEgSU9UIDM5
+IGRvZXMgbm90IGNvbWUgd2l0aCBhbnkgRFRCczogdGhhdCB3YXMgYSB0aGVtZSBoaW50ZWQgYnkg
+UGV0ZXIgUm9iaW5zb24gYSB3aGlsZSBhZ28gKFBldGVyIHlvdSBtYXkgd2FudCB0byBjb21tZW50
+IG9uIHRoaXMpLg0KDQpNeSB1bmRlcnN0YW5kaW5nIGlzIHRoYXQgU3lzdGVtUmVhZHkgd2FzIHBy
+b3Bvc2VkIGFuZCBkZXZlbG9wZWQgdG8gYWRkcmVzcyBzdWNoIGEgZGlmZmVyZW50IHN1cHBseSBj
+aGFpbiB3aGVyZToNCi0gdGhlIE9TIG1heSBiZSBzdXBwbGllZCBieSBhIHBhcnR5IG5vdCBjb250
+cm9sbGluZyB0aGUgdW5kZXJseWluZyBsYXllcnMNCi0gaGF2ZSBzdGFuZGFyZCBjb250cmFjdCBi
+ZXR3ZWVuIE9TIGFuZCBwcmV2aW91cyBlbnRpdGllcw0KLSBUaGUgZW50aXR5IGNvbnRyb2xsaW5n
+IHRoZSBoYXJkd2FyZSBpcyBub3QgYW4gT1MgYnV0IGEgdHlwZS0xIGh5cGVydmlzb3INCg0KSW4g
+YWxsIHRoaXMgY29udGV4dCwgdGhlIERUIHNob3VsZCBiZSBjb25zdW1lZCBieSBPU2VzIChMaW51
+eCwgWmVwaHlyLCBFY2xpcHNlIFRocmVhZFggKGRvbmF0ZWQgYnkgTWljcm9zb2Z0KSwgY29tbWVy
+Y2lhbCBvbmVz4oCmKSBhbmQgaHlwZXJ2aXNvcnMuDQpUaGUgIkRUIMK7IHBhc3NlZCB0byBhIExp
+bnV4IChiZSBpdCBlcXVpdmFsZW50IHRvIERvbTApIG1heSBub3QgYmUgdGhlIGRlZmluaXRpdmUg
+dmlzaW9uIG9mIHRoZSB3aG9sZSBwbGF0Zm9ybS4gWW91IG1heSB3YW50IHRvIHRhbGsgd2l0aCB0
+aGUgU3lzdGVtIERldmljZSBUcmVlIGZvbGtzLg0KU28gdGhlcmUgaXMgbm8gc3VjaCBhIHRoaW5n
+IGFzIMKrIFRIRSDCuyBkZXZpY2UgdHJlZSBvZiB0aGUgcGxhdGZvcm0uDQpUaGVyZSBjYW4gYmUg
+YSBEVCBmb3IgQkwzMyBmaXJtd2FyZSwgYSBEVCBmb3IgT1MvSHlwZXJ2aXNvciwgYSBEVCBmb3Ig
+VHJ1c3Rab25lIChoaWdobHkgZGVjb3JhdGVkIHdpdGggY2xvY2tzIGFuZCBwb3dlciBub2RlcyB0
+aGF0IGFyZSBvZnRlbiBpcnJlbGV2YW50IHRvIEJMMzMgYW5kIE9TL0h5cGVydmlzb3IpLg0KDQpU
+aGUgQkwzMyBhbmQgT1MvSHlwZXJ2aXNvciBEVHMgbG9jYXRpb24gaXMgbm90IGRlZmluZWQgYnkg
+RUJCUiBidXQgbXkgdmlldyBpcyB0aGF0IHRoZSBPUy9IeXBlcnZpc29yIERUIGNhbiBiZSBsb2Nh
+dGVkIGluIHRoZSBIV19DT05GSUcgc2VjdGlvbiBvZiBhIEZJUCAodGhpcyBzZWN0aW9uIGlzIG1h
+ZGUgZm9yIGhvbGRpbmcgdGhlIE9TIERUKS4NClRoZSBGSVAgY2FuIGNvbWUgZnJvbSB0aGUgU29D
+IHZlbmRvciwgbGF0ZXIgdXBkYXRlZCBieSB0aGUgQm9hcmQgdmVuZG9yOg0KDQpmaXB0b29sIC0t
+aHctY29uZmlnIDxPUy1EVEI+DQoNCldpdGggYSBzZXBhcmF0ZSBzaWduaW5nIGtleS4NCg0KU28s
+IHlvdSBzaG91bGQgdGFrZSBpbnRvIGFjY291bnQgd2hpY2ggbWFya2V0cyBhcmUgdGFyZ2V0ZWQg
+YnkgdGhlIFNvQyBmb3Igd2hpY2ggeW91IHBvc3RlZCB5b3VyIG1lc3NhZ2UuDQpJZiBpdCBpcyB0
+cmFkaXRpb25hbCBlbWJlZGRlZCwgb25lLWVudGl0eSBwcm92aWRlcyBhbGwuIFlvdSBjYW4gc3Vy
+ZWx5IGNob29zZSBhbnkgc2NoZW1lIHlvdSB3YW50Lg0KSWYgaXQgaXMgYXV0b21vdGl2ZSBhbmQg
+b3RoZXIgbWFya2V0cyB3aGVyZSB0aGVyZSB3aWxsIGJlIHNlcGFyYXRpb24gaW4gdGhlIGZpcm13
+YXJlL09TL0h5cGVydmlzb3Igc3VwcGx5IGNoYWluLCB0aGVuIHlvdSBzaG91bGQgY2xlYXJseSBh
+dHRhY2ggdGhlIERUIHRvIFNlY3VyZSBGaXJtd2FyZS4NCg0KDQpDaGVlcnMNCg0KRkYNCg0KUFMx
+OiBJIHNlZSBhbiBhbmFsb2d5IHdpdGggR29vZ2xlIHByb2plY3QgVHJlYmJsZSB3aGljaCBzZXQg
+Y2xlYXIgcmVzcG9uc2liaWxpdGllcyBpbiB3aG8gY2FuIHByb3ZpZGUvbW9kaWZ5IHdoYXQuIEJl
+Zm9yZSBpdCwgaXQgd2FzIHRoZSBqdW5nbGUgYW5kIHB1c2hpbmcgYSBzZWN1cml0eSBmaXggcmVx
+dWlyZWQgbW9udGhzIG9mIGRlbGF5cy4gTm93IGEgR29vZ2xlIHNlY3VyaXR5IGZpeCBjYW4gbWFr
+ZSBpdHMgd2F5IHRvIHNtYXJ0cGhvbmVzIGluIG1hdHRlciBvZiBkYXlzLiBDb25zdHJhaW5pbmcg
+YSBsaXR0bGUgYml0IHRoZSBMaW51eCBkcml2ZXIgZGV2ZWxvcGVycyB0byB3aGF0IHNob3VsZCB0
+aGV5IGZvY3VzIG9uIChuaWNlIGRyaXZlcnMgYW5kIG5vdCBoYXJkd2FyZSBkZXNjcmlwdGlvbikg
+d2lsbCBqdXN0IG1ha2UgdGhpbmdzIGJldHRlci4gRmFpbHVyZSB0byBkbyBzbyB3aWxsIGp1c3Qg
+cHVzaCBmb3IgQUNQSSBhbmQgaXRzIGhvcnJpYmxlIGNvbXBsZXgsIGZyYWdpbGUgdmlydHVhbCBt
+YWNoaW5lIHRvIHB1c2ggb3V0IERUIGZyb20gdGhvc2UgbWFya2V0cy4uLg0KUFMyOiBCeSDCqyBu
+aWNlIiBkcml2ZXJzIEkgbWVhbiwgZm9yIGluc3RhbmNlLCAgZHJpdmVycyB0aGF0IGRvIG5vdCBh
+c3N1bWUgdGhleSBhcmUgYWxvbmUgaW4gdGhlIHdvcmxkIGFuZCBjYW4gZG8gd2hhdGV2ZXIgdGhl
+eSB3YW50IHdpdGggY2xvY2tzIHRoYXQgZmVlZCB0aGUgZGV2aWNlOiB0aGV5IHNob3VsZCB1c2Ug
+cHJvcGVyIGNsb2NrIGNvbnRyb2wgc3VjaCBhcyBTQ01JICh0cm91YmxlIGZvciBkZXZpY2UgYXNz
+aWdubWVudCB0byBhIFZNIGZvciBpbnN0YW5jZSkuDQoNCg0KTGUgNCBkw6ljLiAyMDIzIMOgIDA2
+OjMyLCBTdW1pdCBHYXJnIDxzdW1pdC5nYXJnQGxpbmFyby5vcmc+IGEgw6ljcml0IDoNCg0KKyBM
+aW51eCBrZXJuZWwgRFQgYmluZGluZ3MgbWFpbnRhaW5lcnMsIEVCQlIgTUwNCg0KT24gVGh1LCAz
+MCBOb3YgMjAyMyBhdCAyMDowNSwgVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4gd3JvdGU6
+DQoNCk9uIFRodSwgTm92IDMwLCAyMDIzIGF0IDAxOjAyOjI1UE0gKzA1MzAsIFN1bWl0IEdhcmcg
+d3JvdGU6DQpPbiBXZWQsIDI5IE5vdiAyMDIzIGF0IDIyOjA2LCBOZWlsIEFybXN0cm9uZyA8bmVp
+bC5hcm1zdHJvbmdAbGluYXJvLm9yZz4gd3JvdGU6DQoNCk9uIDI5LzExLzIwMjMgMTY6MzQsIENh
+bGViIENvbm5vbGx5IHdyb3RlOg0KDQoNCk9uIDIzLzExLzIwMjMgMDc6MDQsIFN1bWl0IEdhcmcg
+d3JvdGU6DQpPbiBXZWQsIDIyIE5vdiAyMDIzIGF0IDIxOjM0LCBDYWxlYiBDb25ub2xseSA8Y2Fs
+ZWIuY29ubm9sbHlAbGluYXJvLm9yZz4gd3JvdGU6DQoNCg0KDQpPbiAyMi8xMS8yMDIzIDE0OjI3
+LCBUb20gUmluaSB3cm90ZToNCk9uIFdlZCwgTm92IDIyLCAyMDIzIGF0IDA3OjQ0OjA5UE0gKzA1
+MzAsIFN1bWl0IEdhcmcgd3JvdGU6DQpPbiBXZWQsIDIyIE5vdiAyMDIzIGF0IDE5OjMxLCBUb20g
+UmluaSA8dHJpbmlAa29uc3Vsa28uY29tPiB3cm90ZToNCg0KT24gV2VkLCBOb3YgMjIsIDIwMjMg
+YXQgMTE6NTE6MjlBTSArMDUzMCwgU3VtaXQgR2FyZyB3cm90ZToNCkhpIENhbGViLA0KDQpPbiBU
+dWUsIDIxIE5vdiAyMDIzIGF0IDIyOjM5LCBDYWxlYiBDb25ub2xseSA8Y2FsZWIuY29ubm9sbHlA
+bGluYXJvLm9yZz4gd3JvdGU6DQpbc25pcF0NCj09IERUIGxvYWRpbmcgPT0NCg0KUHJldmlvdXNs
+eSwgYm9hcmRzIHVzZWQgdGhlIEZEVCBibG9iIGVtYmVkZGVkIGludG8gVS1Cb290ICh2aWENCk9G
+X1NFUEFSQVRFKS4gSG93ZXZlciwgbW9zdCBRdWFsY29tbSBib2FyZHMgcnVuIFUtQm9vdCBhcyBh
+IHNlY29uZGFyeQ0KYm9vdGxvYWRlciwgc28gd2UgY2FuIGluc3RlYWQgcmVseSBvbiB0aGUgZmly
+c3Qtc3RhZ2UgYm9vdGxvYWRlciB0bw0KcG9wdWxhdGUgc29tZSB1c2VmdWwgRkRUIHByb3BlcnRp
+ZXMgZm9yIHVzIChub3RhYmx5IHRoZSAvbWVtb3J5IG5vZGUgYW5kDQpLQVNMUiBzZWVkKSBhbmQg
+ZmV0Y2ggdGhlIERUQiB0aGF0IGl0IHByb3ZpZGVzLiBDb21iaW5lZCB3aXRoIHRoZSBtZW1vcnkN
+Cm1hcCBjaGFuZ2VzIGFib3ZlLCB0aGlzIGxldCdzIHVzIGVudGlyZWx5IGF2b2lkIGNvbmZpZ3Vy
+aW5nIHRoZSBtZW1vcnkNCm1hcCBleHBsaWNpdGx5Lg0KDQpTaW5jZSB3aXRoIHRoaXMgY2hhbmdl
+LCB3ZSBkb24ndCBuZWVkIHRvIGVtYmVkIEZEVCBibG9iIGluIHRoZSB1LWJvb3QNCmJpbmFyeSwg
+c28gSSB3YXMgdGhpbmtpbmcgaWYgd2UgcmVhbGx5IG5lZWQgdG8gaW1wb3J0IERUcyBmcm9tIExp
+bnV4DQpmb3IgZGlmZmVyZW50IHBsYXRmb3JtcyBhbmQgdGhlbiBwbGF5IGEgY2F0Y2h1cCBnYW1l
+Pw0KDQpGb3Igbm93LCB5ZXMuDQoNCkJ1dCB3aHk/IElzIHRoZXJlIGFueSB2YWx1ZSBhZGRlZCBi
+eSBsYXJnZXIgdS1ib290IHNwZWNpZmljIERUIChtb3N0DQpvZiB0aGUgbm9kZXMgYmVpbmcgdW51
+c2VkIGJ5IHUtYm9vdCkgdGhhbiB3aGF0IGN1cnJlbnRseSB1LWJvb3QNCnN1cHBvcnRzPyBUaGUg
+bW9yZSBpbXBvcnRhbnQgcGFydCBpcyB0byBnZXQgYWxpZ25tZW50IHdpdGggTGludXggRFQNCmJp
+bmRpbmdzLiBJZiB5b3UgbmVlZCB0byBoYXZlIG1lbW9yeS9yZXNlcnZlZC1tZW1vcnkgbm9kZXMg
+aW4gdS1ib290DQpEVCBmb3IgZ2VuZXJhbGl6YXRpb24gcHVycG9zZXMgdGhlbiB5b3Ugc2hvdWxk
+IGltcG9ydCB0aG9zZSBwYXJ0aWN1bGFyDQpub2RlcyBvbmx5Lg0KDQpJJ3ZlIGJlZW4gdGhpbmtp
+bmcgYWJvdXQgYW5kIGhhY2tpbmcgb24gdGhpcyBmb3IgdGhlIGxhc3Qgd2VlayBvciBzbywNCnNv
+cnJ5IGZvciB0aGUgZGVsYXllZCByZXBseSBoZXJlLg0KDQpUaGUgdmFsdWUgaXMgaW4gcHJldmVu
+dGluZyBhbnkgb2YgdGhlIGV4aXN0aW5nIGJpbmRpbmdzIGZyb20gcmVncmVzc2luZywNCg0KVGhh
+dCBpcyBhY3R1YWxseSBiZXN0IGFkZHJlc3NlZCBpbiBMaW51eCBieSBjaGVja2luZyB0aGUgRFRT
+IGFnYWluc3QNCnlhbWwgRFQgYmluZGluZ3MuIFdlIGRvbid0IGhhdmUgdGhhdCB0ZXN0aW5nIGF2
+YWlsYWJsZSBpbiB1LWJvb3QgYW5kDQpvbmx5IGRlcGVuZCBvbiBjYXJlZnVsIHJldmlld3MuDQoN
+Ckkgd291bGQgYWJzb2x1dGVseSBsb3ZlIGZvciBzb21lb25lIHRvIG1ha2UgYW5vdGhlciBhdHRl
+bXB0IGF0IHVwZGF0aW5nDQpvdXIga2J1aWxkIGluZnJhc3R1Y3R1cmUgc28gdGhhdCB3ZSBjYW4g
+cnVuIHRoZSB2YWxpZGF0aW9uIHRhcmdldHMuDQoNCg0KR2l2ZW4gdGhhdCBFQkJSIHJlcXVpcmVz
+IFsxXSB0aGUgcGxhdGZvcm0gKGZpcm13YXJlL2Jvb3Rsb2FkZXIpIGFuZA0Kbm90IE9TIHRvIHN1
+cHBseSB0aGUgZGV2aWNldHJlZSwgaXQgYmVjb21lcyBldmlkZW50IHRoYXQNCmZpcm13YXJlL2Jv
+b3Rsb2FkZXJzIGltcG9ydCBEVFMgZnJvbSBMaW51eCBrZXJuZWwgKHdoZXJlIGl0IGlzDQptYWlu
+dGFpbmVkKS4NCg0KQnV0IGN1cnJlbnRseSB1LWJvb3QgZG9lc24ndCBoYXZlIGEgcHJvcGVyIHdh
+eSB0byB2YWxpZGF0ZSB0aG9zZSBEVFMNCmFnYWluc3QgRFQgYmluZGluZ3MgKG1haW50YWluZWQg
+aW4gTGludXgga2VybmVsKS4gQWx0aG91Z2ggdGhlcmUgYXJlDQpEZXZpY2V0cmVlIHNjaGVtYSB0
+b29scyBhdmFpbGFibGUgaGVyZSBbMl0sIHRoZXJlIGlzbid0IGEgdmVyc2lvbmVkDQpyZWxlYXNl
+IHBhY2thZ2Ugb2YgRFQgYmluZGluZ3Mgd2hpY2ggb25lIHNob3VsZCB1c2UgdG8gdmFsaWRhdGUg
+RFRTDQpmaWxlcy4NCg0KQERUIGJpbmRpbmdzIG1haW50YWluZXJzLA0KDQpHaXZlbiB0aGUgZWFz
+ZSBvZiBtYWludGVuYW5jZSBvZiBEVCBiaW5kaW5ncyB3aXRoaW4gTGludXgga2VybmVsDQpzb3Vy
+Y2UgdHJlZSwgSSBkb24ndCBoYXZlIGEgc3BlY2lmaWMgb2JqZWN0aW9uIHRoZXJlLiBCdXQgY2Fu
+IHdlIGVhc2UNCkRUUyB0ZXN0aW5nIGZvciBmaXJtd2FyZS9ib290bG9hZGVyIHByb2plY3RzIGJ5
+IHByb3ZpZGluZyBhIHZlcnNpb25lZA0KcmVsZWFzZSBwYWNrYWdlIGZvciBEVCBiaW5kaW5ncz8g
+T3IgaWYgc29tZW9uZSBlbHNlIGhhcyBhIGJldHRlciBpZGVhDQpoZXJlIHBsZWFzZSBmZWVsIGZy
+ZWUgdG8gY2hpbWUgaW4uDQoNClsxXSBodHRwczovL2FybS1zb2Z0d2FyZS5naXRodWIuaW8vZWJi
+ci8jZ3VpZGluZy1wcmluY2lwbGVzDQpbMl0gaHR0cHM6Ly9naXRodWIuY29tL2RldmljZXRyZWUt
+b3JnL2R0LXNjaGVtYQ0KDQotU3VtaXQNCg0KLS0NClRvbQ0KX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18NCmJvb3QtYXJjaGl0ZWN0dXJlIG1haWxpbmcgbGlz
+dCAtLSBib290LWFyY2hpdGVjdHVyZUBsaXN0cy5saW5hcm8ub3JnDQpUbyB1bnN1YnNjcmliZSBz
+ZW5kIGFuIGVtYWlsIHRvIGJvb3QtYXJjaGl0ZWN0dXJlLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcN
+Cg0K
