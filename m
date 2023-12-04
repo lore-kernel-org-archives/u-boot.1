@@ -4,56 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE51C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 13:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1039AC10F04
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 13:25:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81F386F5E;
-	Mon,  4 Dec 2023 14:15:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2971E87538;
+	Mon,  4 Dec 2023 14:25:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1701695751;
-	bh=kdGhJqZsT+16mqTbb0kNJWilfsB2j7cHXdGWiol7i8s=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=G5crOK4YImvizCgvjD4kLd6vYfSqX27+geKgWjIt3vb6VT3mVu+f+ERy0sSeCyuQo
-	 zxvsowt8pVdWs8yulEmu12UZOiyV63gO5vxms6wSwVFuejj7sP8D/71lSLpi5h9Xx4
-	 LKTojbVZecsyqrANvVR+oT+B4m/HB8Pi3u8FaNQOJzZDll7JDD6nz9K7naxQVDJ16z
-	 GBZQy2SLN9UtTaKBt2YLbns1Vug8Eb7Fc1cKacynHuga+OZ9ZeDR1Ju1akOpXfFa7z
-	 oozwkygLrw1gshktcvVi5qK+5B8Y3sHQE/8tZGtfQAHZn8XUw3NmKNG9CI335SwPoF
-	 NlrotfWr5NJ9w==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8753986F6F; Mon,  4 Dec 2023 14:15:50 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69C5C86EF1
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 14:15:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YRXBYayl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DC38186FC9; Mon,  4 Dec 2023 14:24:59 +0100 (CET)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4SkPLB1Vs9z9sSc;
- Mon,  4 Dec 2023 14:15:46 +0100 (CET)
-Message-ID: <026596fc-2eb0-4934-8053-a6627d0b4cef@denx.de>
-Date: Mon, 4 Dec 2023 14:15:43 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id C495487554
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 14:24:55 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7c5d16a4bc6so177784241.3
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 05:24:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701696294; x=1702301094; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=20uymVJmL+HUvcOn2G+iEmWMkjAMhK8O1mtsucMRtYE=;
+ b=YRXBYayltSWeWTwHm74MnbsuX8VIlFPkpGUdvZjDeJ9riDLZxyjr8Eqg/9d7Wrdo+o
+ oY9auHIVYBHMRv7Odq8D0DDlrW60juJGw99qM7EcJRcCgVNQQoVCgwWeEOtx08rULtBB
+ LpNdXI8ArlD8QHGzIEkJnZ9MV7lx0NZApVNDk+WFCNLqqWyUGpsQ75LiMVKEtj3erxvf
+ ZmttywodiNFmp4mKHA+nM0jtBtuEr/LlxATA1jrjKNmRY2yL4D9ZRWMiEMZ/ZZk2Qyti
+ 3FR5yM2KzeecG1OaEYR6dMXsSY5b/jxDQjjUHPTCtjavNqCmOyHN2dtaN2f2eMD/ExsG
+ 7D7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701696294; x=1702301094;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=20uymVJmL+HUvcOn2G+iEmWMkjAMhK8O1mtsucMRtYE=;
+ b=Ga/Ro4Ds++duYrigS9dpzr/agKnnJchL3uwMRdTaskOE2uto1UaKRzMFxHd+OnNy04
+ ucXt+m0UYP44eMCVJBOz7rHJiKG8ukLsXqajVyK6DdMFwt/KM0ZH/q3sy37XPq3dlgQb
+ EGL+Ue42hc7v6JaQvRM6XYhQHO00weS26jogAPHgagdFIuLgJB9W0dKqujpcSyU+0OZ0
+ m+LC7urCg9smzh96D8yo8i5vOFAZGNoC/k4gsc+b5Wm25YdCKxK2DT3P2UmirLUs06DL
+ ZsDNNfCjKi+fCw0Vh9eC0izX9ok0AAqZ4TXig0eG2vjMDCr42mb2JZ8sGneTjLKrAHKS
+ GSMg==
+X-Gm-Message-State: AOJu0YyB8UWo9Xae5gCnlk9NesPswMlAhM8cagGizF8MIYcVQ/TCoRKg
+ L1JwQITSRqLA9MI/Z2I5xirCVyBiESr66m/Rvky6gg==
+X-Google-Smtp-Source: AGHT+IGsMtzSbHDbNjb2bmr+0iC4tjuRcaIYzy0Sr4HkQm+nd+1ViCbbh/DECzlsbLIgMGeYKfn07J8GSTRykEdjk10=
+X-Received: by 2002:a1f:4c05:0:b0:4b2:da3b:a71f with SMTP id
+ z5-20020a1f4c05000000b004b2da3ba71fmr1429224vka.25.1701696294485; Mon, 04 Dec
+ 2023 05:24:54 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/4] watchdog: Add StarFive Watchdog driver
-Content-Language: en-US
-To: Chanho Park <chanho61.park@samsung.com>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Xingyu Wu <xingyu.wu@starfivetech.com>, u-boot@lists.denx.de
-References: <20231105231318.992857-1-chanho61.park@samsung.com>
- <CGME20231105231340epcas2p3622ab40737b5c1974435caa88e6a87b2@epcas2p3.samsung.com>
- <20231105231318.992857-3-chanho61.park@samsung.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231105231318.992857-3-chanho61.park@samsung.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+ <20231204110025.GA27965@aspen.lan>
+In-Reply-To: <20231204110025.GA27965@aspen.lan>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Mon, 4 Dec 2023 18:54:42 +0530
+Message-ID: <CAFA6WYPYfKU9hHh5CCbgcb6FEDX7ivGO=tGv4N2dAX6_gAGuUw@mail.gmail.com>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+To: Daniel Thompson <daniel.thompson@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Rob Herring <robh+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, conor+dt@kernel.org, 
+ Caleb Connolly <caleb.connolly@linaro.org>, neil.armstrong@linaro.org, 
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Boot Architecture Mailman List <boot-architecture@lists.linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,397 +104,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/6/23 00:13, Chanho Park wrote:
-> Add to support StarFive watchdog driver. The driver is imported from
-> linux kernel's drivers/watchdog/starfive-wdt.c without jh7100 support
-> because there is no support of jh7100 SoC in u-boot yet.
-> Howver, this patch has been kept the variant coding style because JH7100
-> can be added later and have a consistency with the linux driver.
-> 
-> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
+On Mon, 4 Dec 2023 at 16:30, Daniel Thompson <daniel.thompson@linaro.org> wrote:
+>
+> On Mon, Dec 04, 2023 at 11:02:57AM +0530, Sumit Garg wrote:
+> > + Linux kernel DT bindings maintainers, EBBR ML
+> >
+> > On Thu, 30 Nov 2023 at 20:05, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, Nov 30, 2023 at 01:02:25PM +0530, Sumit Garg wrote:
+> > > > On Wed, 29 Nov 2023 at 22:06, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> > > > > > I've been thinking about and hacking on this for the last week or so,
+> > > > > > sorry for the delayed reply here.
+> > > > > >
+> > > > > > The value is in preventing any of the existing bindings from regressing,
+> > > >
+> > > > That is actually best addressed in Linux by checking the DTS against
+> > > > yaml DT bindings. We don't have that testing available in u-boot and
+> > > > only depend on careful reviews.
+> > >
+> > > I would absolutely love for someone to make another attempt at updating
+> > > our kbuild infrastucture so that we can run the validation targets.
+> > >
+> >
+> > Given that EBBR requires [1] the platform (firmware/bootloader) and
+> > not OS to supply the devicetree, it becomes evident that
+> > firmware/bootloaders import DTS from Linux kernel (where it is
+> > maintained).
+> >
+> > But currently u-boot doesn't have a proper way to validate those DTS
+> > against DT bindings (maintained in Linux kernel). Although there are
+> > Devicetree schema tools available here [2], there isn't a versioned
+> > release package of DT bindings which one should use to validate DTS
+> > files.
+>
+> The kernel is regularly released in multiple forms (including git
+> tags and tarball). Why isn't the kernel itself sufficient to be a
+> versioned release of the DT bindings directory?
+>
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+The Linux kernel may come in various forms (upstream vs stable vs
+vendor). It's difficult to decide from where the DT bindings should
+come from. Should they come from upstream or should they come from the
+kernel which is actually booted onto a particular device?
 
-Thanks,
-Stefan
+IOW, as of now which kernel version should u-boot pick up for DT
+validation checks?
 
-> ---
->   drivers/watchdog/Kconfig        |   7 +
->   drivers/watchdog/Makefile       |   1 +
->   drivers/watchdog/starfive_wdt.c | 329 ++++++++++++++++++++++++++++++++
->   3 files changed, 337 insertions(+)
->   create mode 100644 drivers/watchdog/starfive_wdt.c
-> 
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 07fc4940e918..569726119ca1 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -344,6 +344,13 @@ config WDT_STM32MP
->   	  Enable the STM32 watchdog (IWDG) driver. Enable support to
->   	  configure STM32's on-SoC watchdog.
->   
-> +config WDT_STARFIVE
-> +	bool "StarFive watchdog timer support"
-> +	depends on WDT
-> +	imply WATCHDOG
-> +	help
-> +	  Enable support for the watchdog timer of StarFive JH7110 SoC.
-> +
->   config WDT_SUNXI
->   	bool "Allwinner sunxi watchdog timer support"
->   	depends on WDT && ARCH_SUNXI
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index eef786f5e74e..5520d3d9ae8a 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -44,6 +44,7 @@ obj-$(CONFIG_WDT_SBSA) += sbsa_gwdt.o
->   obj-$(CONFIG_WDT_K3_RTI) += rti_wdt.o
->   obj-$(CONFIG_WDT_SL28CPLD) += sl28cpld-wdt.o
->   obj-$(CONFIG_WDT_SP805) += sp805_wdt.o
-> +obj-$(CONFIG_WDT_STARFIVE) += starfive_wdt.o
->   obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
->   obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
->   obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
-> diff --git a/drivers/watchdog/starfive_wdt.c b/drivers/watchdog/starfive_wdt.c
-> new file mode 100644
-> index 000000000000..ee9ec4cdc3a4
-> --- /dev/null
-> +++ b/drivers/watchdog/starfive_wdt.c
-> @@ -0,0 +1,329 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Starfive Watchdog driver
-> + *
-> + * Copyright (C) 2022 StarFive Technology Co., Ltd.
-> + */
-> +
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <reset.h>
-> +#include <wdt.h>
-> +#include <linux/iopoll.h>
-> +
-> +/* JH7110 Watchdog register define */
-> +#define STARFIVE_WDT_JH7110_LOAD	0x000
-> +#define STARFIVE_WDT_JH7110_VALUE	0x004
-> +#define STARFIVE_WDT_JH7110_CONTROL	0x008	/*
-> +						 * [0]: reset enable;
-> +						 * [1]: interrupt enable && watchdog enable
-> +						 * [31:2]: reserved.
-> +						 */
-> +#define STARFIVE_WDT_JH7110_INTCLR	0x00c	/* clear intterupt and reload the counter */
-> +#define STARFIVE_WDT_JH7110_IMS		0x014
-> +#define STARFIVE_WDT_JH7110_LOCK	0xc00	/* write 0x1ACCE551 to unlock */
-> +
-> +/* WDOGCONTROL */
-> +#define STARFIVE_WDT_ENABLE			0x1
-> +#define STARFIVE_WDT_EN_SHIFT			0
-> +#define STARFIVE_WDT_RESET_EN			0x1
-> +#define STARFIVE_WDT_JH7110_RST_EN_SHIFT	1
-> +
-> +/* WDOGLOCK */
-> +#define STARFIVE_WDT_JH7110_UNLOCK_KEY		0x1acce551
-> +
-> +/* WDOGINTCLR */
-> +#define STARFIVE_WDT_INTCLR			0x1
-> +#define STARFIVE_WDT_JH7100_INTCLR_AVA_SHIFT	1	/* Watchdog can clear interrupt when 0 */
-> +
-> +#define STARFIVE_WDT_MAXCNT			0xffffffff
-> +#define STARFIVE_WDT_DEFAULT_TIME		(15)
-> +#define STARFIVE_WDT_DELAY_US			0
-> +#define STARFIVE_WDT_TIMEOUT_US			10000
-> +
-> +/* module parameter */
-> +#define STARFIVE_WDT_EARLY_ENA			0
-> +
-> +struct starfive_wdt_variant {
-> +	unsigned int control;		/* Watchdog Control Resgister for reset enable */
-> +	unsigned int load;		/* Watchdog Load register */
-> +	unsigned int reload;		/* Watchdog Reload Control register */
-> +	unsigned int enable;		/* Watchdog Enable Register */
-> +	unsigned int value;		/* Watchdog Counter Value Register */
-> +	unsigned int int_clr;		/* Watchdog Interrupt Clear Register */
-> +	unsigned int unlock;		/* Watchdog Lock Register */
-> +	unsigned int int_status;	/* Watchdog Interrupt Status Register */
-> +
-> +	u32 unlock_key;
-> +	char enrst_shift;
-> +	char en_shift;
-> +	bool intclr_check;		/*  whether need to check it before clearing interrupt */
-> +	char intclr_ava_shift;
-> +	bool double_timeout;		/* The watchdog need twice timeout to reboot */
-> +};
-> +
-> +struct starfive_wdt_priv {
-> +	void __iomem *base;
-> +	struct clk *core_clk;
-> +	struct clk *apb_clk;
-> +	struct reset_ctl_bulk *rst;
-> +	const struct starfive_wdt_variant *variant;
-> +	unsigned long freq;
-> +	u32 count;			/* count of timeout */
-> +	u32 reload;			/* restore the count */
-> +};
-> +
-> +/* Register layout and configuration for the JH7110 */
-> +static const struct starfive_wdt_variant starfive_wdt_jh7110_variant = {
-> +	.control = STARFIVE_WDT_JH7110_CONTROL,
-> +	.load = STARFIVE_WDT_JH7110_LOAD,
-> +	.enable = STARFIVE_WDT_JH7110_CONTROL,
-> +	.value = STARFIVE_WDT_JH7110_VALUE,
-> +	.int_clr = STARFIVE_WDT_JH7110_INTCLR,
-> +	.unlock = STARFIVE_WDT_JH7110_LOCK,
-> +	.unlock_key = STARFIVE_WDT_JH7110_UNLOCK_KEY,
-> +	.int_status = STARFIVE_WDT_JH7110_IMS,
-> +	.enrst_shift = STARFIVE_WDT_JH7110_RST_EN_SHIFT,
-> +	.en_shift = STARFIVE_WDT_EN_SHIFT,
-> +	.intclr_check = false,
-> +	.double_timeout = true,
-> +};
-> +
-> +static int starfive_wdt_enable_clock(struct starfive_wdt_priv *wdt)
-> +{
-> +	int ret;
-> +
-> +	ret = clk_enable(wdt->apb_clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_enable(wdt->core_clk);
-> +	if (ret) {
-> +		clk_disable(wdt->apb_clk);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static void starfive_wdt_disable_clock(struct starfive_wdt_priv *wdt)
-> +{
-> +	clk_disable(wdt->core_clk);
-> +	clk_disable(wdt->apb_clk);
-> +}
-> +
-> +/* Write unlock-key to unlock. Write other value to lock. */
-> +static void starfive_wdt_unlock(struct starfive_wdt_priv *wdt)
-> +{
-> +	writel(wdt->variant->unlock_key, wdt->base + wdt->variant->unlock);
-> +}
-> +
-> +static void starfive_wdt_lock(struct starfive_wdt_priv *wdt)
-> +{
-> +	writel(~wdt->variant->unlock_key, wdt->base + wdt->variant->unlock);
-> +}
-> +
-> +/* enable watchdog interrupt to reset/reboot */
-> +static void starfive_wdt_enable_reset(struct starfive_wdt_priv *wdt)
-> +{
-> +	u32 val;
-> +
-> +	val = readl(wdt->base + wdt->variant->control);
-> +	val |= STARFIVE_WDT_RESET_EN << wdt->variant->enrst_shift;
-> +	writel(val, wdt->base + wdt->variant->control);
-> +}
-> +
-> +/* waiting interrupt can be free to clear */
-> +static int starfive_wdt_wait_int_free(struct starfive_wdt_priv *wdt)
-> +{
-> +	u32 value;
-> +
-> +	return readl_poll_timeout(wdt->base + wdt->variant->int_clr, value,
-> +				  !(value & BIT(wdt->variant->intclr_ava_shift)),
-> +				  STARFIVE_WDT_TIMEOUT_US);
-> +}
-> +
-> +/* clear interrupt signal before initialization or reload */
-> +static int starfive_wdt_int_clr(struct starfive_wdt_priv *wdt)
-> +{
-> +	int ret;
-> +
-> +	if (wdt->variant->intclr_check) {
-> +		ret = starfive_wdt_wait_int_free(wdt);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +	writel(STARFIVE_WDT_INTCLR, wdt->base + wdt->variant->int_clr);
-> +
-> +	return 0;
-> +}
-> +
-> +static inline void starfive_wdt_set_count(struct starfive_wdt_priv *wdt,
-> +					  u32 val)
-> +{
-> +	writel(val, wdt->base + wdt->variant->load);
-> +}
-> +
-> +/* enable watchdog */
-> +static inline void starfive_wdt_enable(struct starfive_wdt_priv *wdt)
-> +{
-> +	u32 val;
-> +
-> +	val = readl(wdt->base + wdt->variant->enable);
-> +	val |= STARFIVE_WDT_ENABLE << wdt->variant->en_shift;
-> +	writel(val, wdt->base + wdt->variant->enable);
-> +}
-> +
-> +/* disable watchdog */
-> +static inline void starfive_wdt_disable(struct starfive_wdt_priv *wdt)
-> +{
-> +	u32 val;
-> +
-> +	val = readl(wdt->base + wdt->variant->enable);
-> +	val &= ~(STARFIVE_WDT_ENABLE << wdt->variant->en_shift);
-> +	writel(val, wdt->base + wdt->variant->enable);
-> +}
-> +
-> +static inline void starfive_wdt_set_reload_count(struct starfive_wdt_priv *wdt,
-> +						 u32 count)
-> +{
-> +	starfive_wdt_set_count(wdt, count);
-> +
-> +	/* 7100 need set any value to reload register and could reload value to counter */
-> +	if (wdt->variant->reload)
-> +		writel(0x1, wdt->base + wdt->variant->reload);
-> +}
-> +
-> +static int starfive_wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-> +{
-> +	int ret;
-> +	struct starfive_wdt_priv *wdt = dev_get_priv(dev);
-> +
-> +	starfive_wdt_unlock(wdt);
-> +	/* disable watchdog, to be safe */
-> +	starfive_wdt_disable(wdt);
-> +
-> +	starfive_wdt_enable_reset(wdt);
-> +	ret = starfive_wdt_int_clr(wdt);
-> +	if (ret)
-> +		goto exit;
-> +
-> +	wdt->count = (timeout_ms / 1000) * wdt->freq;
-> +	if (wdt->variant->double_timeout)
-> +		wdt->count /= 2;
-> +
-> +	starfive_wdt_set_count(wdt, wdt->count);
-> +	starfive_wdt_enable(wdt);
-> +
-> +exit:
-> +	starfive_wdt_lock(wdt);
-> +	return ret;
-> +}
-> +
-> +static int starfive_wdt_stop(struct udevice *dev)
-> +{
-> +	struct starfive_wdt_priv *wdt = dev_get_priv(dev);
-> +
-> +	starfive_wdt_unlock(wdt);
-> +	starfive_wdt_disable(wdt);
-> +	starfive_wdt_lock(wdt);
-> +
-> +	return 0;
-> +}
-> +
-> +static int starfive_wdt_reset(struct udevice *dev)
-> +{
-> +	int ret;
-> +	struct starfive_wdt_priv *wdt = dev_get_priv(dev);
-> +
-> +	starfive_wdt_unlock(wdt);
-> +	ret = starfive_wdt_int_clr(wdt);
-> +	if (ret)
-> +		goto exit;
-> +
-> +	starfive_wdt_set_reload_count(wdt, wdt->count);
-> +
-> +exit:
-> +	starfive_wdt_lock(wdt);
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct wdt_ops starfive_wdt_ops = {
-> +	.start = starfive_wdt_start,
-> +	.stop = starfive_wdt_stop,
-> +	.reset = starfive_wdt_reset,
-> +};
-> +
-> +static int starfive_wdt_probe(struct udevice *dev)
-> +{
-> +	struct starfive_wdt_priv *wdt = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	ret = starfive_wdt_enable_clock(wdt);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = reset_deassert_bulk(wdt->rst);
-> +	if (ret)
-> +		goto err_reset;
-> +
-> +	wdt->variant = (const struct starfive_wdt_variant *)dev_get_driver_data(dev);
-> +
-> +	wdt->freq = clk_get_rate(wdt->core_clk);
-> +	if (!wdt->freq) {
-> +		ret = -EINVAL;
-> +		goto err_get_freq;
-> +	}
-> +
-> +	return 0;
-> +
-> +err_get_freq:
-> +	reset_assert_bulk(wdt->rst);
-> +err_reset:
-> +	starfive_wdt_disable_clock(wdt);
-> +
-> +	return ret;
-> +}
-> +
-> +static int starfive_wdt_of_to_plat(struct udevice *dev)
-> +{
-> +	struct starfive_wdt_priv *wdt = dev_get_priv(dev);
-> +
-> +	wdt->base = (void *)dev_read_addr(dev);
-> +	if (!wdt->base)
-> +		return -ENODEV;
-> +
-> +	wdt->apb_clk = devm_clk_get(dev, "apb");
-> +	if (IS_ERR(wdt->apb_clk))
-> +		return -ENODEV;
-> +
-> +	wdt->core_clk = devm_clk_get(dev, "core");
-> +	if (IS_ERR(wdt->core_clk))
-> +		return -ENODEV;
-> +
-> +	wdt->rst = devm_reset_bulk_get(dev);
-> +	if (IS_ERR(wdt->rst))
-> +		return -ENODEV;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct udevice_id starfive_wdt_ids[] = {
-> +	{
-> +		.compatible = "starfive,jh7110-wdt",
-> +		.data = (ulong)&starfive_wdt_jh7110_variant
-> +	}, {
-> +		/* sentinel */
-> +	}
-> +};
-> +
-> +U_BOOT_DRIVER(starfive_wdt) = {
-> +	.name = "starfive_wdt",
-> +	.id = UCLASS_WDT,
-> +	.of_match = starfive_wdt_ids,
-> +	.priv_auto = sizeof(struct starfive_wdt_priv),
-> +	.probe = starfive_wdt_probe,
-> +	.of_to_plat = starfive_wdt_of_to_plat,
-> +	.ops = &starfive_wdt_ops,
-> +};
+If we can have a separate release cadence for DT bindings then the
+platform (firmware/bootloader) can attest the DTB against that. Later
+one should be able to boot any kernel with the DTB provided by
+platform.
 
-Viele Grüße,
-Stefan Roese
+-Sumit
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+>
+> Daniel.
