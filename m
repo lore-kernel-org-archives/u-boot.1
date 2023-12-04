@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFD3C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7897C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:02:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2B1D8775C;
-	Mon,  4 Dec 2023 09:01:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E7A687896;
+	Mon,  4 Dec 2023 09:02:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i36+bMvC";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="l/LqRnag";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fItr0Cr7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D0FE876E0; Mon,  4 Dec 2023 09:01:28 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EB8C4878AC; Mon,  4 Dec 2023 09:02:48 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EECF48775C
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:01:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB19E87896
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:02:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4SkGMJ2lGgz9snJ;
- Mon,  4 Dec 2023 09:01:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701676876;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QZ3H762Hm2+O03mClkAvlURWaMDtqAZ/0LNSrtiIXHU=;
- b=i36+bMvCEtjNQG7xk08j8+a4TVzAVOc6+gpcGWlN0zdvXCJTMCclvvgFDhdm+T6NNhbYN3
- 9a4CYjr6xLfV9+ufKuXaLVqFKrluZOJ/LQUCj74RJD89nxSUnXclubcJ64of3mFTG2OmLD
- vKuKxod74NrIDpAgdyD++j/U3FS8EgauN93MfVjrZ4fO8JZTbhsAvzk+z9sRamZrjNxL6m
- nvxWf2d7d3KVTJl+1b/26/c2DBbkWeMwScFNYjJpvRJWx6/URqV9ugM6eQtKwbuq16FAzR
- 02G3DBm5L3LFMj/1eq/0Y9ZrSoYS043jmA4piNqwJJJHUGdH+zAL72/LE4Y8SA==
-Message-ID: <3de60655-bf3f-48a4-b1a8-afa613865c14@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1701676874;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QZ3H762Hm2+O03mClkAvlURWaMDtqAZ/0LNSrtiIXHU=;
- b=l/LqRnagfjyVpJ20OFmC9ETkPEE+EthJXEbEFzMJTJniuD6FZTwvw3F85KFEw6X6JbCrDZ
- zUjMdpZ2VLAF6/OYTxK4fy9f1iVypXwluoXkij3q6hcnFPUv+XISI2m6rqjdP1XiMVyCRt
- PN1iq01c9NQTE86i/6mJyL+tR7VzHd/tW2fugJzinMshlW2URawoOT+n3BD0rUOqDwgPWa
- NJ7NvMlCDzeHAF1jseKMni5gAWD3pKx73BRyN2SaGjdwIkC/BPjiHbChbSUHeDsyisLn/z
- kiemns8WWb8FL4+8sHqWJZWPzbd0p3nO62vnp6nVEEJIOZvvsvG8+LQsi/J8xw==
-Date: Mon, 4 Dec 2023 09:01:12 +0100
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c9f9db9567so11096501fa.3
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:02:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701676966; x=1702281766; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ln3KgPpp1NYN+iVWQh3XxcDMGlOeA3EogC0M2DyRCxM=;
+ b=fItr0Cr7+nnc+/F0bqbpYMacHvUeDTs+RcbTNKdRIVtiCMgcX/Ndtj0/sF0N4wABSh
+ zcSbuvtl23udUp42Ayrz/iGi9M65kED5DPgUvTaZfn/Bq9zyPJZozUxxNHONEWhHUWxT
+ 009LW4DKAAdGPXQ+fne8K15KcRltg2u/ftsgywzJkiAIoLqOfxk+xCG9q3ZCo8rfl9Ht
+ qEClG1GifwyyYbkS+Kzy8N3gtvxuHKIcBCCvzG+ZWrwjmWABYFKiFFYUW8Tya2tDp6Nr
+ Gdbrv06GTkeKok0VrA7ve63PIt7lD/7KSjQh7VyUxg6mcuBm6ytE9CLoqDsMJFGX0TLV
+ KYxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701676966; x=1702281766;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ln3KgPpp1NYN+iVWQh3XxcDMGlOeA3EogC0M2DyRCxM=;
+ b=XWMdMm9ghG6vG9Raj8LbtmtTBeexzlf/+BC07SwR2vE/ImpxA1AeKd/uYQmKeb+NTI
+ WM1epS3E14tZBmo29ycoVKhxAcbPy1uIh+NYTEUwKZmBzTXrIuwNbH9Vsufr2FNSvm5J
+ KCQhgR06OInfhp4/B4+jHuHXHgrqS7GzWvmo60eVlM1IbVZAqV18VlQJ7aVbd+fDZRGv
+ jsLoXS/szLaZIwU0p654/ES1SH7TtQPj8txRCG/HgSERTJAlPKe3JvCYdFXYMGTLWFjv
+ liDmQ5+Jc/9Hi2MQpuX99jTtlvCUX82oFP7sQkKvYFsaWsXGY7KKWuGTRbBTc1a0uDxY
+ t9/w==
+X-Gm-Message-State: AOJu0YyFTtNteQ9geJEwYgRf1h0Bztg1px63n+94NOf1yNzQ9GF1AS+C
+ W9/aV854r2UXHValMnhGdMA=
+X-Google-Smtp-Source: AGHT+IGe4Xn6WioKuZxJ/OdmGbO+tJwxUmNRKVfWT7ATIFVE4V8ZZRGutjLDQN6imwgXu9q4Ahppfw==
+X-Received: by 2002:a05:6512:118f:b0:50b:d763:fe4b with SMTP id
+ g15-20020a056512118f00b0050bd763fe4bmr3116843lfr.102.1701676965876; 
+ Mon, 04 Dec 2023 00:02:45 -0800 (PST)
+Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
+ v6-20020ac25606000000b0050572fcf1a2sm1183048lfd.283.2023.12.04.00.02.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Dec 2023 00:02:45 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Stefan Bosch <stefan_b@posteo.net>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/3] Add T114 video support
+Date: Mon,  4 Dec 2023 10:02:28 +0200
+Message-Id: <20231204080231.4316-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Subject: Re: [PATCH] mmc: Poll CD in case cyclic framework is enabled
-Content-Language: en-US
-To: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-References: <20231202234109.208243-1-marek.vasut+renesas@mailbox.org>
- <CAPnjgZ1__QvjN2C8Gc_GCvB++HFv6Ni73nC6wDuN7dJq+wDwGA@mail.gmail.com>
- <9dbad2ea-2439-4974-930f-ca80c6551615@mailbox.org>
- <CAPnjgZ3FcKAAMqB=nZ24ritOwucWxQXmTtZCrDnBp_9qHWm-wA@mail.gmail.com>
- <e703f6ba-3e93-46ea-9228-c05dd603c0c9@mailbox.org>
- <f557a3f7-a292-4c7e-b2ad-b5f7cf412b82@denx.de>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <f557a3f7-a292-4c7e-b2ad-b5f7cf412b82@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e07cd51ff19bc790746
-X-MBO-RS-META: qpjoih4ese6uusxrj1dzqu7pjho1xa34
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +93,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/4/23 08:27, Stefan Roese wrote:
-> On 12/4/23 02:05, Marek Vasut wrote:
->> On 12/4/23 01:44, Simon Glass wrote:
->>> Hi Marek,
->>>
->>> On Sun, 3 Dec 2023 at 14:01, Marek Vasut <marek.vasut@mailbox.org> 
->>> wrote:
->>>>
->>>> On 12/3/23 18:44, Simon Glass wrote:
->>>>> Hi Marek,
->>>>>
->>>>> On Sat, 2 Dec 2023 at 16:41, Marek Vasut
->>>>> <marek.vasut+renesas@mailbox.org> wrote:
->>>>>>
->>>>>> In case the cyclic framework is enabled, poll the card detect of 
->>>>>> already
->>>>>> initialized cards and deinitialize them in case they are removed. 
->>>>>> Since
->>>>>> the card initialization is a longer process and card 
->>>>>> initialization is
->>>>>> done on first access to an uninitialized card anyway, avoid 
->>>>>> initializing
->>>>>> newly detected uninitialized cards in the cyclic callback.
->>>>>>
->>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>>> ---
->>>>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
->>>>>> Cc: Peng Fan <peng.fan@nxp.com>
->>>>>> ---
->>>>>>    drivers/mmc/mmc-uclass.c | 27 +++++++++++++++++++++++++++
->>>>>>    1 file changed, 27 insertions(+)
->>>>>
->>>>> This is really nice!
->>>>
->>>> I wonder whether we can use this cyclic stuff for USB , that's on my
->>>> roadmap to look at . We could auto-detect new devices in the 
->>>> background,
->>>> which would be tidy. And maybe do block transfers in the background ?
->>>
->>> Just the detect would be amazing!!
->>>
->>> One thing on my mind is that we could have a console buffer, so that
->>> output from background tasks can be collected and written just before
->>> displaying the U-Boot prompt. I am itching to implement that part of
->>> it :-)
->>
->> And a 'dmesg' command to go along with it ?
->>
->> Go for it.
-> 
-> It's very nice to see, that the cyclic infrastructure is finally getting
-> used by other interfaces / devices etc. Really interesting. I assume
-> there are many more potential use cases where it may be helpful.
+T114 is not that different from T30 and all T30 drivers will work
+on T114 as well with some minor adjustments.
 
-Yes, many indeed.
+Commits pass buildman for tegra and U-Boot tests.
+
+Svyatoslav Ryhel (3):
+  video: tegra20: dc: add T114 support
+  video: tegra20: add MIPI calibration driver
+  video: tegra20: dsi: add T114 support
+
+ arch/arm/dts/tegra114-u-boot.dtsi            |   9 +
+ arch/arm/include/asm/arch-tegra/dsi.h        | 235 +++++++++++++++++++
+ arch/arm/include/asm/arch-tegra114/display.h |  28 +++
+ arch/arm/include/asm/arch-tegra114/pwm.h     |  13 +
+ arch/arm/include/asm/arch-tegra30/dsi.h      | 211 +----------------
+ drivers/video/tegra20/Makefile               |   2 +-
+ drivers/video/tegra20/tegra-dc.c             |   1 +
+ drivers/video/tegra20/tegra-dsi.c            |  78 +++++-
+ drivers/video/tegra20/tegra-mipi.c           | 185 +++++++++++++++
+ 9 files changed, 550 insertions(+), 212 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-tegra/dsi.h
+ create mode 100644 arch/arm/include/asm/arch-tegra114/display.h
+ create mode 100644 arch/arm/include/asm/arch-tegra114/pwm.h
+ create mode 100644 drivers/video/tegra20/tegra-mipi.c
+
+-- 
+2.40.1
+
