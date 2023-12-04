@@ -4,71 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B8CC10F13
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 06:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2207CC10F13
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 07:07:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2645B87264;
-	Mon,  4 Dec 2023 07:16:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 83A62875B5;
+	Mon,  4 Dec 2023 08:07:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x8amHzWJ";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1701673645;
+	bh=nlWNFbzE5CdISzfrvzzaqJZ0DhVOZ30hgz0gKjnwNcQ=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ITV6fwhscRR7GdsniYF1TiIMD625Y8qGodpCiXY2J5JzF4c5jbIpJVyvNgWy+5dR5
+	 zCTB6yHEcGmSgAGrFZ6+ADr5DQSHUD7WZqGhSHgzZ0aivxJHpxWFYX4T+i8tqxpl3e
+	 6PmkJ7SyCvMn8Y8D2X8GFEYKu0Pp5GAcR48qR1/8t0aAR9D5bKYpHZRVcQopBpLX2j
+	 LefiAs0FoyR9NWIH8PSrwq6swcgvrB8AMBX3Hes0P2ZUXkOgRzw6dkF5w1/ytxFThq
+	 5fAv1aaOvCnZcEveoZpPv3y1A3uXvcX75aKfmpah0r5IGz/C3ONGMfZtLZppF5R1rM
+	 Uj9nTXcYmppJA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52BCC8744C; Mon,  4 Dec 2023 07:16:52 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 834F7875B5; Mon,  4 Dec 2023 08:07:23 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E32870B8
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 07:16:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F5C487128
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 08:07:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c9f42ccb55so16627821fa.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 22:16:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701670609; x=1702275409; darn=lists.denx.de;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EZVQKBKfY0Nwiaid5kOtOJYqFY3RnsqbivvFepTDX5Q=;
- b=x8amHzWJsc3PeEsxNvgmUAPXe7M1u/hVQ7eejJIMapA8/M3NP7T8sY4bgK8VhBvZ5s
- HeZ7G229I8bM9zr8k/jk/pJYzSUhWrUmqpAxP9haA2eKxT7WbX7iWnNKMwR/cyt8/4FQ
- Ng3dD5TGVe3Q4VRo+IwuSywmzqo0jaW4Q/QEPxp8qfQ7BIf3cvfHXiYW5jHE22l4bxwQ
- lxrnT7fGx9AxCaZpJAziycRwPN7KorwsZwqQnkiPX7FTi4XCbPAp7WR/zySVDAloYqVI
- 3hWQ0pJPbUkkNgRKY/cNXwlXwH9ia1nkh5zSUhH+Ts/bCU8bDyzKY2zHexnrh/LJRyxV
- Y6Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701670609; x=1702275409;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EZVQKBKfY0Nwiaid5kOtOJYqFY3RnsqbivvFepTDX5Q=;
- b=ib1Qmq/5+hoE1y7aAXF1bsr0PMIGjYqQp3CTI3EdeMoYefSI4qV9JcM52Vk5JT/Vra
- M/KjdWuA4rDi2z45gkVBgIDKskFBw2siY5gKE+9zskwyArfJZ9e0CyGhUAaaY8CCABXI
- d8IIpfwHFhU8JY+2GAIYDw+JkarbTVQ1xzMb6o0acHRmxN4ip/hDf2KAA0aLsBmUA2hM
- A/ofugxQQiurKaEl4bHo6WkKK//AKyEDexpOLO3rrF18pYAYegHb6Lt5kjK8FVbnI4sK
- JobmM6XYAnWWvxYAwxAPngoctNBGyLm603i3C00nEyhtQFwfykjM+QGBfRpMZNpSdA6b
- ncmQ==
-X-Gm-Message-State: AOJu0YxTHdDBKGWL4oRbwqKOZjymbrZXoH2U7sdX4YDBPREzMjpW+lIF
- 7Fwc8lBQlLEPKyauxb8ehf1grWnDtV8bc/zJYwrNPw==
-X-Google-Smtp-Source: AGHT+IFRyoel0RsqrkqGlkPJe3wxcBmRzE09OuQbaPjF0e47L6UAiyFXzCpGw6wQ1Cq1zGEoUguho6xhGQ3gC5U2fIU=
-X-Received: by 2002:a2e:82d6:0:b0:2ca:2ce:36a3 with SMTP id
- n22-20020a2e82d6000000b002ca02ce36a3mr378686ljh.52.1701670609173; Sun, 03 Dec
- 2023 22:16:49 -0800 (PST)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4SkF930z1Vz9sRj;
+ Mon,  4 Dec 2023 08:07:19 +0100 (CET)
+Message-ID: <80698cfc-6a34-4981-8b53-90b24521da23@denx.de>
+Date: Mon, 4 Dec 2023 08:07:17 +0100
 MIME-Version: 1.0
-References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
- <ZW0yUHaTiPA8xxpD@octopus>
-In-Reply-To: <ZW0yUHaTiPA8xxpD@octopus>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Dec 2023 08:16:13 +0200
-Message-ID: <CAC_iWjKYG_4o67=SW1fgbr-pPtd-bYyGRzD9QqaQU2Z24GjtnA@mail.gmail.com>
-Subject: Re: [PATCH v2 00/12] cmd: bootefi: refactor the code for bootmgr
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, trini@konsulko.com,
- sjg@chromium.org, 
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH v2] watchdog: Correct watchdog timeout print message
+To: Chanho Park <chanho61.park@samsung.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <CGME20231203083110epcas2p334ced52c055603ce66b4452fe4cd5586@epcas2p3.samsung.com>
+ <20231203083040.3113114-1-chanho61.park@samsung.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20231203083040.3113114-1-chanho61.park@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,105 +68,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Akashi-san
+On 12/3/23 09:30, Chanho Park wrote:
+> The wdt_start function takes timeout_ms as a parameter and starts the
+> watchdog with this value. However, when you output the message, it shows
+> the default timeout value for the watchdog device.
+> So this patch fixes that part to output the correct timeout value.
+> 
+> Before -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (60s timeout)
+> 
+> After -->
+> StarFive # wdt start 3000
+> WDT:   Started watchdog@13070000 without servicing  (3s timeout)
+> 
+> Fixes: c2fd0ca1a822 ("watchdog: Integrate watchdog triggering into the cyclic framework")
+> Signed-off-by: Chanho Park <chanho61.park@samsung.com>
 
-On Mon, 4 Dec 2023 at 03:58, AKASHI Takahiro <takahiro.akashi@linaro.org> wrote:
->
-> Hi Heinrich, Ilias
->
-> On Tue, Nov 21, 2023 at 10:29:38AM +0900, AKASHI Takahiro wrote:
-> > This patch set is motivated by the discussion[1] regarding
-> > CONFIG_BOOTEFI_BOOTMGR option.
-> >
-> > At the end, bootefi.c will be decomposed into two parts, one for
-> > providing the command itself and one for implementing helper functions.
-> > EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
-> > CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
-> >
-> > Then, EFI_LOADER library side will be further split into two options
-> > for fine-grain control:
-> > CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
-> >     loaded by U-Boot's load commands/functions or other methods
-> >     (like a jtag debugger?)
-> >     It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"?).
-> >
-> > CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
-> >     It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
-> >
-> > As such, We will no longer need CONFIG_EFI_BINARY_EXEC if we want to only
-> > make use of the UEFI boot manger for booting a next stage OS.
->
-> Any other comments?
-> I think the changes are no doubt trivial.
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-I had other patches down the queue, I'll have a look within the week!
+Thanks,
+Stefan
 
-Thanks
-/Ilias
->
-> -Takahiro Akashi
->
->
-> > Prerequisite
-> > ============
-> > This patch set is based on top of Tom's "next" branch.
-> >
-> > Patches
-> > =======
-> > Patch#1-#12: I hope that those commits show step-by-step refactoring
-> >     without introducing degradation.
-> >
-> > Tests
-> > =====
-> > * run UT efi_selftest on sandbox locally
-> > * run test_efi_bootmgr on sandbox locally
-> >
-> > Unfortunately, I could not submit a pull request for CI test.
-> >
-> > Changes
-> > =======
-> > v2 (Nov 21, 2023)
-> > * rebased onto Tom's next branch
-> > * remove already merged commits
-> > * revise commit messages
-> > * add patch #5 which was split from ex-patch#5
-> > RFC (Oct 26, 2023)
-> >
-> > [1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
-> >
-> > AKASHI Takahiro (12):
-> >   cmd: bootefi: unfold do_bootefi_image()
-> >   cmd: bootefi: re-organize do_bootefi()
-> >   cmd: bootefi: carve out EFI boot manager interface
-> >   cmd: bootefi: carve out binary execution interface
-> >   cmd: bootefi: localize global device paths for efi_selftest
-> >   cmd: bootefi: move library interfaces under lib/efi_loader
-> >   cmd: efidebug: ease efi configuration dependency
-> >   bootmeth: use efi_loader interfaces instead of bootefi command
-> >   efi_loader: split unrelated code from efi_bootmgr.c
-> >   efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
-> >   net: tftp: remove explicit efi configuration dependency
-> >   fs: remove explicit efi configuration dependency
-> >
-> >  boot/Kconfig                     |   4 +-
-> >  boot/Makefile                    |   2 +-
-> >  boot/bootm_os.c                  |  31 +-
-> >  boot/bootmeth_efi.c              |   8 +-
-> >  boot/bootmeth_efi_mgr.c          |   2 +-
-> >  cmd/Kconfig                      |  21 +-
-> >  cmd/bootefi.c                    | 670 +++++--------------------------
-> >  cmd/efidebug.c                   |   4 +-
-> >  fs/fs.c                          |   7 +-
-> >  include/efi_loader.h             |  34 +-
-> >  lib/efi_loader/Kconfig           |  11 +-
-> >  lib/efi_loader/Makefile          |   2 +-
-> >  lib/efi_loader/efi_bootmgr.c     |  37 ++
-> >  lib/efi_loader/efi_device_path.c |   3 +-
-> >  lib/efi_loader/efi_helper.c      | 498 ++++++++++++++++++++++-
-> >  net/tftp.c                       |  10 +-
-> >  test/boot/bootflow.c             |   2 +-
-> >  17 files changed, 700 insertions(+), 646 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
+> ---
+> Change from v1:
+> - Use lldiv to fix a build error of m68k arch
+> 
+>   drivers/watchdog/wdt-uclass.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
+> index ed329284decb..417e8d7eef95 100644
+> --- a/drivers/watchdog/wdt-uclass.c
+> +++ b/drivers/watchdog/wdt-uclass.c
+> @@ -7,6 +7,7 @@
+>   
+>   #include <common.h>
+>   #include <cyclic.h>
+> +#include <div64.h>
+>   #include <dm.h>
+>   #include <errno.h>
+>   #include <hang.h>
+> @@ -141,7 +142,7 @@ int wdt_start(struct udevice *dev, u64 timeout_ms, ulong flags)
+>   
+>   		printf("WDT:   Started %s with%s servicing %s (%ds timeout)\n",
+>   		       dev->name, IS_ENABLED(CONFIG_WATCHDOG) ? "" : "out",
+> -		       str, priv->timeout);
+> +		       str, (u32)lldiv(timeout_ms, 1000));
+>   	}
+>   
+>   	return ret;
+
+Viele Grüße,
+Stefan Roese
+
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
