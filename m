@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E46BC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 20:06:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBDA7C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 20:21:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B2C6875DB;
-	Mon,  4 Dec 2023 21:06:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DB02871B1;
+	Mon,  4 Dec 2023 21:21:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tCap0C1z";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sY9rsXD5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8CFC86F42; Mon,  4 Dec 2023 21:06:48 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id B4A31877D6; Mon,  4 Dec 2023 21:21:44 +0100 (CET)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 299FE87015
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 21:06:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9446E871B1
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 21:21:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-286b45c5a8dso1136715a91.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 12:06:46 -0800 (PST)
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6cde104293fso3823405b3a.0
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 12:21:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701720404; x=1702325204; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701721300; x=1702326100; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NxxX/XIuGA+8DmTRh3gRUIMzqxfww7eoVX4QZJj0jUY=;
- b=tCap0C1z08mWZ/saUSxkIokYG9hDy0dSfYJUgkiKUUnba5SBPnQ/sohtZa2+MCkrHi
- B9jIpx838fHlDnE8N10PFzTk97OKK6xZy2y7jolNp9qCyHDYRerckXiAA2sbIlalZGaS
- AM9LpQzlRwF9V7PPhKyPBkOql84rYP0vsF2CxG8wXC13MdS4BhtgKFLG9mcPIF0t+F0a
- B5UqPnwEZA84QP1P07eYNt/Qe+xtBgAjQAfXb1/ov7VcaExi7uQ0r5Nl3ft/9aM3pD44
- gvLgk1WpyPRYBeW66hjLMoaH6h6UimWw61f2nRi/kU/Y5kKO82kDYaq1ITX39HUUTrWf
- B0RA==
+ bh=mjWg7Mxh3mJ2ZqoILJ3RGoUxts7+om1s4a8ko+fI6go=;
+ b=sY9rsXD54IYV7vovi5T3IQvK5QqNSkWGxaM7YAaOpGORvnyBmvpIf91pOY7MDHuyc0
+ Wxa6hsZiSeTmp8BehhFft78p7GKBNgJ8SfTV55ERSvXs5pV8qMd5Lk1JCSLk1QlsVZ+e
+ /xSaFejM1VoNhUGDNri8D9sVV2RJhQCcoyTlwOHQ8nF8XuIKKu56W3xSLUriL1/Z/Xgz
+ CZB8RvNIrM3NqZpH6nKClctYafImDHiLFsNuV7A8ztCs8vKFlUhRfy4D4GmhT7s5QRUS
+ E7MEe2RC9klP+O6QYZtSbuWlJvTKPqC6txAsTnIg7BWKXe0LAElYbbe95BnRmkPlnZdr
+ B0cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701720404; x=1702325204;
+ d=1e100.net; s=20230601; t=1701721300; x=1702326100;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NxxX/XIuGA+8DmTRh3gRUIMzqxfww7eoVX4QZJj0jUY=;
- b=q/jbltZUExgGKfRIMHbjD2Sj12fvo1dx8uiRh0ycoOkeaNJki6Rc15yfyqDSV5Z3gF
- c9sz6nrkW27M+dcGZkWigYtSWIqnYdP8/wGoa2FS+b4YiB+v9ASA5S52/GevoT6Thee6
- DBq2Y/m/BNPfVNmEctpujcjCRwoZC3Bzn8W4PtOSKbR/bHfw1hx7WhASrxOElSi20Jo3
- gd9+iq1LpS3zoPnLsUJ5iueHofA24T+7rfFrK47g4JvF4x+jdqtVDZMsIgMWqhR8USKd
- qyHZWI+fkAjzj/f4/HxsZrt3ZRqTX14GKQt1Sc0e1tOLDjlUlrjSlxwR9wuhKne/2K57
- OptQ==
-X-Gm-Message-State: AOJu0YyjxNBmaSXFXns0yW0gpdLFSI3DJaOpo3mI+CqPX/HwWBC2CTgY
- Yw14uKgfhKqcZcR9YNE2PClaxHbqFhZD6fKmONnBPw==
-X-Google-Smtp-Source: AGHT+IE5jQx7XHtE4bfR4dg96bPZGsDYE+GTA9hv8zjrRT5RISvsA7BVvPgObchZVr0J5V5c2UeayDViofuiRhhBDlE=
-X-Received: by 2002:a17:90a:fe01:b0:286:6cc1:77ff with SMTP id
- ck1-20020a17090afe0100b002866cc177ffmr110487pjb.66.1701720404457; Mon, 04 Dec
- 2023 12:06:44 -0800 (PST)
+ bh=mjWg7Mxh3mJ2ZqoILJ3RGoUxts7+om1s4a8ko+fI6go=;
+ b=j14c+IdrVOUgKa2DcOEU25p9FDVpJyTxgWDZKRj0pddjRiD6CTB/fdqIxsjpqcAlph
+ /hlLi2mA4mPWsgTGTCZAqEAZwYdTEgfuuGJqGWponp9nEFiOHu9PZtNYv4jXYzdcW+g0
+ KrXuY0rsU799b0Wcxk054RzFecBOJ/gajUQ7w1j4VVJ9dssESg3QQXsenYP/b3t/RrRS
+ 5PFAwbSxNZkAUOidAVQCZLI97fgcBtgjq+CmwfA+Nlbvmqf2X6z7BeHPrCSAfibT0PAF
+ jG7s3hMiWSzTWz2+CsPqaff0fWno0lxpeR+UryvzFbtcxLTLIdQq20yAbk2TeCj9rVd6
+ dFeA==
+X-Gm-Message-State: AOJu0YzPQEzDpXiICGMpi5On/2a02e3ndDARdlWICFLfF2XGshxg1uVe
+ lAYxckvowdmo22UVNZjoxd3VQCUgxeb0b1+qH1axyw==
+X-Google-Smtp-Source: AGHT+IGraxFEqGBhsBJxc7AA2VjB5RyeuFFgJykHaJrlxZkxKZfexRy8e1ORldtKF+OBvmqojqaawsauZDVYmzTmcRU=
+X-Received: by 2002:aa7:9a8a:0:b0:6cd:d4b1:cd09 with SMTP id
+ x10-20020aa79a8a000000b006cdd4b1cd09mr140225pfi.5.1701721299851; Mon, 04 Dec
+ 2023 12:21:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-18-raymond.mao@linaro.org>
- <CAPnjgZ16Cv5r6GB0j_WXTPTsASGj=Hi5Cdytyo-K7a-c73AeoA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ16Cv5r6GB0j_WXTPTsASGj=Hi5Cdytyo-K7a-c73AeoA@mail.gmail.com>
+ <20231127195029.90951-19-raymond.mao@linaro.org>
+ <CAPnjgZ0yJNrpSV7dxmJky_QynEmPQQv5mTXT9MRTdn8rhVxpEg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0yJNrpSV7dxmJky_QynEmPQQv5mTXT9MRTdn8rhVxpEg@mail.gmail.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 4 Dec 2023 15:06:34 -0500
-Message-ID: <CAEfUkULfyrxaVhmcWrQEitWAiJHCA_WPZPbQ_5HyQArZonCE0g@mail.gmail.com>
-Subject: Re: [PATCH v2 17/18] qemu-arm: Get bloblist from boot arguments
+Date: Mon, 4 Dec 2023 15:21:29 -0500
+Message-ID: <CAEfUkULhw2SBEgWmijHtorKvQRmhV0q2Mf4MBd+vLyzJnW0fmw@mail.gmail.com>
+Subject: Re: [PATCH v2 18/18] bloblist: Load the bloblist from the previous
+ loader
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Nikhil M Jain <n-jain1@ti.com>, Baruch Siach <baruch@tkos.co.il>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
- Sean Anderson <seanga2@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -91,75 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+Hi Simon,
 
-On Sat, 2 Dec 2023 at 16:16, Simon Glass <sjg@chromium.org> wrote:
+On Sat, 2 Dec 2023 at 13:32, Simon Glass <sjg@chromium.org> wrote:
 
 > Hi Raymond,
 >
 > On Mon, 27 Nov 2023 at 12:53, Raymond Mao <raymond.mao@linaro.org> wrote:
 > >
-> > Add platform custom function to get bloblist from boot arguments.
->
-> This should be the same for all ARM platforms. The ultimate goal is
-> something like [1]
->
-Yes, I agree. The current series just focuses on Qemu but ultimately
-should be adapted
-to all Arm platforms.
-
->  #include <common.h>
-> > +#if IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST)
-> > +#include <bloblist.h>
-> > +#endif
-> >  #include <cpu_func.h>
-> >  #include <dm.h>
-> >  #include <efi.h>
-> > @@ -102,6 +105,16 @@ static struct mm_region qemu_arm64_mem_map[] = {
-> >  struct mm_region *mem_map = qemu_arm64_mem_map;
-> >  #endif
+> > During bloblist initialization, when CONFIG_OF_BOARD is defined,
+> > invoke the platform custom function to load the bloblist via boot
+> > arguments from the previous loader.
+> > If the bloblist exists, copy it into the fixed bloblist memory region.
 > >
-> > +#if IS_ENABLED(CONFIG_OF_BOARD)
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - New patch file created for v2.
+> >
+> >  common/bloblist.c  | 29 +++++++++++++----------------
+> >  include/bloblist.h | 14 ++++++++++++++
+> >  2 files changed, 27 insertions(+), 16 deletions(-)
+> >
 >
-> OF_BLOBLIST and please avoid #if
+> This should already work so I am hoping that this patch is not
+> needed...these changes seem to break sandbox_spl
 >
-I will remove the build option for argument copying, as they don't
-really depend on OF_BOARD
-or _BLOBLIST.
+By "already work", do you mean any existing patches already done for
+loading the
+bloblist from the boot args?
 
-
-> > +       /* Check the register conventions */
-> > +       fdt = (unsigned long)bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
->
-> This should happen in fdtdec.c automatically. See [2]
->
-The reason I have to call `bloblist_find()` here is to get the fdt address
-and compare with
-arg0 and arg2 (see below few lines of code) to check if it is compliant to
-the register conventions
-for AARCH64/32 defined by the FW Handoff spec.
-This is better to be placed here instead of fdtdec.c
-
-> +       if (IS_ENABLED(CONFIG_ARM64)) {
-> > +               if (fdt != qemu_saved_args.arg0 || qemu_saved_args.arg2
-> != 0)
-> > +                       ret = -EIO;
-> > +       } else {
-> > +               if (fdt != qemu_saved_args.arg2 || qemu_saved_args.arg0
-> != 0)
-> > +                       ret = -EIO;
-> > +       }
-> > +
-> > +       if (ret)
-> > +               gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
-> > +       else
-> > +               memmove((void *)addr,  (void *)qemu_saved_args.arg3,
-> > +                       gd->bloblist->total_size);
-> > +#endif
-> > +
-> > +       return ret;
-> > +}
-> > +
->
-> Thanks and regards,
+Thanks and regards,
 Raymond
