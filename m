@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80F2EC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0D7EC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:29:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C30E87825;
-	Mon,  4 Dec 2023 01:27:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6EA078784C;
+	Mon,  4 Dec 2023 01:27:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cdmlq8Fu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ii/T1Bgr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C779877E5; Mon,  4 Dec 2023 01:27:51 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 8DDE7875EB; Mon,  4 Dec 2023 01:27:53 +0100 (CET)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21E49877FF
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:27:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 76CF7877E5
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:27:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ce5a0c384fso1432b3a.1
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:27:48 -0800 (PST)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-5be30d543c4so953593a12.2
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:27:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701649666; x=1702254466; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701649669; x=1702254469; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9mi99BaMLKb3RVrf2lgh4OjKqw4XaWKLQK2cJ7jxmSw=;
- b=Cdmlq8FuKyvCU2N2MtFvJ0Qk+6iVKWJccdBRNolJwws1hwDt58sOQ9DQcPlzxMIjSX
- t1beAHxjMBWFgblqx/oDxjeYVuVhgYTKAyOTPJM6DTyqcNBH0j87uv3kTu/Iv1y8ikKJ
- Ycr1bsEQbYvnUVHbQ7sFTMjv7gfYCoT6SCwaw=
+ bh=W5AEYtkcu32nrTXRxtgkEjOU6Nsox0PSbFzsnACs1ic=;
+ b=Ii/T1Bgr5uzOpctUdAMVBwSKOS5bO9934DmkYbZwEvaS8KrxwboVnS7fnEBatjHiSY
+ Wm4ZoHTVKFXQhDZAv0KiJcVRj+tAP0MUCUUQexJwuo4HAcEPsJ1gCxG2VLPRrMT9mZJf
+ nIRsZK5wUu3/wSyW4PclmElXw1BuvrXoNsLWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701649666; x=1702254466;
+ d=1e100.net; s=20230601; t=1701649669; x=1702254469;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9mi99BaMLKb3RVrf2lgh4OjKqw4XaWKLQK2cJ7jxmSw=;
- b=LwSTOzopHrdKYGNYQqnpGdeUxmpm8vg3b5916c5zDc4UZtmUFLRvamdoaHErv5tBwc
- 3q7pMfuiRnYAWH0mg4wbp7CeNAcH/Ddc2FwoBaEKeo4ugct8Ke3CEc9LoCHOxbGR531q
- NlLRz47cCip63piNmSY3rXbbQCRJcxMpMKtdr8CP5MZMovNg9zPUlCxF5dJqU/Ap/U7x
- e7vqgWtmr1SbjxmkhdKdjrFpRZZxi8iNoYrCjS2A1w971+/jIYxD0LiTCaZwW/bWvoYT
- r/7Dg3M0Z4DKmUoUugcEgUJM4Hpu13RoZ+AST/uCXcGS6HLNZv+101g9JGNe3JgjeOcQ
- BHtw==
-X-Gm-Message-State: AOJu0Yythk/qoF4X3dst/QvSLmHMBACW2ZT4yepmpclUTMaUO6p+0D+V
- CyMRKu3w0wEIyPGo64H1AbSF2auYEuNTVMAtfyuT0Q==
-X-Google-Smtp-Source: AGHT+IH3ai5v5yXMuwDpeSmkCzpbkunFjP+xF97/rw9iKNLl1BBeAxsGKm6MdeXcWk8+b/I6Abu/Sw==
-X-Received: by 2002:a05:6a20:c5a9:b0:18f:97c:ba10 with SMTP id
- gn41-20020a056a20c5a900b0018f097cba10mr1156699pzb.106.1701649666353; 
- Sun, 03 Dec 2023 16:27:46 -0800 (PST)
+ bh=W5AEYtkcu32nrTXRxtgkEjOU6Nsox0PSbFzsnACs1ic=;
+ b=sTVcQvSjZfPaW9q4L+FvvJT0DGznE+jnppXg1tHE5NidnOWTNcTadmqX+TKtRL7EdU
+ qayjWNi6yl98li/u2MRMSXT+RcAzpRKI1hwOHrBEVoc1XhdYZIjGQ5sztBycFkxCCmU0
+ 3SzOUgW/EqMgtKrPxY+Q9HLATO3gpVGVLu2Bnk1GAZ1VMgXuqZGZRfTOYTEFm9uoW23W
+ Qrowu1G6UGN+UTZFA3u/xsCiPsX0k8kkrHb1BhQdmfRmozHvFJ8+Njr0JJg0q3Mp8Ia6
+ 2Q9xgNKgrAz/+MD1fJYtEKtUL9M/9CiLX37R4xgfz0UNRqN6UZTuoFT6Df4Le5UkapRi
+ tRXg==
+X-Gm-Message-State: AOJu0Yzo+KWUwq8eS8tv39eD+oCCp4crOtUDLaY+E2892o49J+KJz28g
+ xb/LiizOxXmcHHL2B0MYp1yB+/ElWCrJXwJSPaRdaw==
+X-Google-Smtp-Source: AGHT+IFQdk4uGLftTQskTzSK23uUyiKnbuouCG03XeisPNVlzJs5Gg47Ppkr/VKeLLsEh4Kqp5sKUQ==
+X-Received: by 2002:a17:902:9a41:b0:1cf:88d9:c3b1 with SMTP id
+ x1-20020a1709029a4100b001cf88d9c3b1mr1128836plv.62.1701649669771; 
+ Sun, 03 Dec 2023 16:27:49 -0800 (PST)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- w5-20020a170902904500b001cfb971edfasm7097227plz.205.2023.12.03.16.27.42
+ w5-20020a170902904500b001cfb971edfasm7097227plz.205.2023.12.03.16.27.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 16:27:45 -0800 (PST)
+ Sun, 03 Dec 2023 16:27:49 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Chanho Park <chanho61.park@samsung.com>,
- Leo <ycliang@andestech.com>, Nikita Shubin <n.shubin@yadro.com>,
- Rick Chen <rick@andestech.com>
-Subject: [PATCH 11/18] riscv: Add a reset_cpu() function
-Date: Sun,  3 Dec 2023 17:26:27 -0700
-Message-ID: <20231203172622.11.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
+ Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH 12/18] bootm: Adjust how the board is reset
+Date: Sun,  3 Dec 2023 17:26:28 -0700
+Message-ID: <20231204002642.895926-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
 In-Reply-To: <20231204002642.895926-1-sjg@chromium.org>
 References: <20231204002642.895926-1-sjg@chromium.org>
@@ -90,72 +90,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current do_reset() is called from a command context. Add a function
-which can be used from anywhere, as is done on ARM. Adjust do_reset()
-to call it.
-
-Note that reset_cpu() is normally provided by SYSRESET so make this
-declaration conditional on that being disabled.
+Use reset_cpu() to reset the board, copying the logic from the 'reset'
+command. This makes more sense than directly calling the do_reset()
+function with the arguments passsed to the bootm command.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/riscv/cpu/cpu.c   | 13 +++++++++++++
- arch/riscv/lib/reset.c |  7 ++-----
- 2 files changed, 15 insertions(+), 5 deletions(-)
+ boot/bootm.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/arch/riscv/cpu/cpu.c b/arch/riscv/cpu/cpu.c
-index ebd39cb41a60..8445c5823e17 100644
---- a/arch/riscv/cpu/cpu.c
-+++ b/arch/riscv/cpu/cpu.c
-@@ -3,10 +3,13 @@
-  * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
-  */
+diff --git a/boot/bootm.c b/boot/bootm.c
+index d2448f6306dc..de5c32099ceb 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1138,10 +1138,12 @@ err:
+ 	if (iflag)
+ 		enable_interrupts();
  
-+#include <command.h>
- #include <cpu.h>
-+#include <cpu_func.h>
- #include <dm.h>
- #include <dm/lists.h>
- #include <event.h>
-+#include <hang.h>
- #include <init.h>
- #include <log.h>
- #include <asm/encoding.h>
-@@ -162,3 +165,13 @@ int arch_early_init_r(void)
- __weak void harts_early_init(void)
- {
- }
-+
-+#if !CONFIG_IS_ENABLED(SYSRESET)
-+void reset_cpu(void)
-+{
-+	printf("resetting ...\n");
-+
-+	printf("reset not supported yet\n");
-+	hang();
-+}
-+#endif
-diff --git a/arch/riscv/lib/reset.c b/arch/riscv/lib/reset.c
-index 712e1bdb8e1d..c4153c9e6e02 100644
---- a/arch/riscv/lib/reset.c
-+++ b/arch/riscv/lib/reset.c
-@@ -4,14 +4,11 @@
-  */
+-	if (ret == BOOTM_ERR_UNIMPLEMENTED)
++	if (ret == BOOTM_ERR_UNIMPLEMENTED) {
+ 		bootstage_error(BOOTSTAGE_ID_DECOMP_UNIMPL);
+-	else if (ret == BOOTM_ERR_RESET)
+-		do_reset(cmdtp, flag, argc, argv);
++	} else if (ret == BOOTM_ERR_RESET) {
++		printf("Resetting the board...\n");
++		reset_cpu();
++	}
  
- #include <command.h>
--#include <hang.h>
-+#include <cpu_func.h>
- 
- int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
--	printf("resetting ...\n");
--
--	printf("reset not supported yet\n");
--	hang();
-+	reset_cpu();
- 
- 	return 0;
+ 	return ret;
  }
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
