@@ -4,42 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25C7C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 01:10:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9161BC4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 01:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17A098789A;
-	Mon,  4 Dec 2023 02:10:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A79E98774E;
+	Mon,  4 Dec 2023 02:36:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eRycRkaj";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A081D8789F; Mon,  4 Dec 2023 02:10:46 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 668DD875B6
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 02:10:44 +0100 (CET)
+ id 955B98774E; Mon,  4 Dec 2023 02:36:11 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D69D876E0
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 02:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D87FB152B;
- Sun,  3 Dec 2023 17:11:30 -0800 (PST)
-Received: from slackpad.lan (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2F2AE3F6C4;
- Sun,  3 Dec 2023 17:10:43 -0800 (PST)
-Date: Mon, 4 Dec 2023 01:09:30 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Nils Le Roux <gilbsgilbert@gmail.com>
-Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>, Ramon
- Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH v2] net: designware: Support high memory nodes
-Message-ID: <20231204010930.071a5ba7@slackpad.lan>
-In-Reply-To: <20231202093952.33256-1-gilbsgilbert@gmail.com>
-References: <20231202093952.33256-1-gilbsgilbert@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d03f90b0cbso7438395ad.1
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 17:36:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1701653767; x=1702258567; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=opvjqL6YlYNbGPtNxP6+IPJKYjqBwzCl4dINfH70WmQ=;
+ b=eRycRkajvDmx9Xm0OZUgkzfs000ogiUPTxrl1m/2+z7gBfhEbshPXm7DCsmi4GKSiV
+ H4HogQ8Bc9APxaT6KJFeJSEixtitu8CW8NO4xXFs6bdDUnidN3wLo1aeWDxsk7NsXsQL
+ Z6L9D0lLjfloh9RVBfMYJv79w7mIl1nuL5DsgKQW5UcWmEHldb52vUISCY9u7SitXaHH
+ FNYhjPn6kXf68wbMlnEOakmIxopThFDMLHXQZPy8LOAT64tpuwPPDfE9Bfm3NYH73Ccp
+ 9W/8WXD7xBMDZg22HWzA2WKEpCgenFZCTN4geYW92GzFHsP3KorrheSJHuueZ1dc+waN
+ /3sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701653767; x=1702258567;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=opvjqL6YlYNbGPtNxP6+IPJKYjqBwzCl4dINfH70WmQ=;
+ b=Lxfk2xgXULFztECa7cYCRuigZC6j00gNGMRNrqxWA1If/2bxIa4h6FEs0H5ubo7ZXM
+ 0KbqIwYhfN3P821V9I60wpKvV9pVjxHkeYgN3/5/34C3gLYcW576K7Y4t3iBtzj0xVeq
+ TvKYwnHfO/bgSNwudgMQS9NZHADr1Oseyo+H6DLuBFsKRoE+zXjfG73DRq+sZ0/8WmVY
+ b82rHuQZRvEQgMk3nyiH7yCa8pt2fXAB1iltzgM1yZ4KDQcUDiBmbljssoJalClt17mc
+ lq5/2OgVPActmYBJRHA93WA9eSkgm+qmylXF4oWlbshGtk3/NgKD33Pstbn0Mz+x+Eon
+ v7SQ==
+X-Gm-Message-State: AOJu0YzSF8/UVeyKfHw8tPL4ozx1IeBVAUrSdSXGekgGIO7Pyvtp/GJV
+ iIaher/QU6Al9rMKL2/q7y2ZcHf0XtKQ9XH/CK0=
+X-Google-Smtp-Source: AGHT+IH4gFugTqFMsL/g+xUBfGKrfHzzF0a7nIUs3x+BjByBEMWYPeTwm5kUTESnmcdBPS0or2B7ty4OuOjFTIH+OiQ=
+X-Received: by 2002:a17:90b:2d86:b0:286:abd5:e061 with SMTP id
+ sj6-20020a17090b2d8600b00286abd5e061mr1609324pjb.4.1701653767470; Sun, 03 Dec
+ 2023 17:36:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+In-Reply-To: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 3 Dec 2023 22:35:56 -0300
+Message-ID: <CAOMZO5Ajq2L9-pNLqq0JGUmWdn5Lw=SeQsoZZ1YNYJbC1gJZQQ@mail.gmail.com>
+Subject: Re: [PATCH] tools: mxsboot: pre-fill buffer with 0xff, not 0
+To: Alessandro Rubini <rubini@gnudd.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Rogan Dawes <rogan@dawes.za.net>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,75 +87,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat,  2 Dec 2023 10:39:49 +0100
-Nils Le Roux <gilbsgilbert@gmail.com> wrote:
+Hi Alessandro,
 
-Hi Nils,
+[Adding Marek and Rogan]
 
-> Some platforms (such as the Lichee Pi 4A) have their dwmac device
-> addressable only in high memory space. Storing the node's base address
-> on 32 bits is not possible in such case.
-> 
-> Use platform's physical address type to store the base address.
-> 
-> Signed-off-by: Nils Le Roux <gilbsgilbert@gmail.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-
-many thanks for the changes, that looks good to me now. I have
-compile-tested that for arm64 and arm.
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Cheers,
-Andre
-
+On Sun, Dec 3, 2023 at 9:24=E2=80=AFPM Alessandro Rubini <rubini@gnudd.com>=
+ wrote:
+>
+> The tool works for me, with imx28 and NAND memory, but the resulting
+> blocks are reported as bad, both by u-boot and the kernel.
+>
+> This makes it impossible to erase from Linux (for an upgrade without
+> console access, for example -- u-boot can "nand scrub" but linux can't).
+>
+> pre-filling with 0xff creates a proper boot loader image, but no
+> bad-block marker is there when written to flash.
+>
+> Signed-off-by: Alessandro Rubini <rubini@gnudd.com>
 > ---
-> 
-> Changes in v2:
-> - explicitly define and handle ioaddr as a virtual address
-> - use an intermediate variable to assign the PCI base address
-> - use appropriate placeholder to print physical addresses
-> ---
->  drivers/net/designware.c | 16 +++++++++-------
->  1 file changed, 9 insertions(+), 7 deletions(-)
-> 
-> diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-> index a174344b3e..78bfce07f6 100644
-> --- a/drivers/net/designware.c
-> +++ b/drivers/net/designware.c
-> @@ -678,8 +678,8 @@ int designware_eth_probe(struct udevice *dev)
->  {
->  	struct eth_pdata *pdata = dev_get_plat(dev);
->  	struct dw_eth_dev *priv = dev_get_priv(dev);
-> -	u32 iobase = pdata->iobase;
-> -	ulong ioaddr;
-> +	phys_addr_t iobase = pdata->iobase;
-> +	void *ioaddr;
->  	int ret, err;
->  	struct reset_ctl_bulk reset_bulk;
->  #ifdef CONFIG_CLK
-> @@ -740,16 +740,18 @@ int designware_eth_probe(struct udevice *dev)
->  	 * or via a PCI bridge, fill in plat before we probe the hardware.
->  	 */
->  	if (IS_ENABLED(CONFIG_PCI) && device_is_on_pci_bus(dev)) {
-> -		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &iobase);
-> -		iobase &= PCI_BASE_ADDRESS_MEM_MASK;
-> -		iobase = dm_pci_mem_to_phys(dev, iobase);
-> +		u32 pcibase;
->  
-> +		dm_pci_read_config32(dev, PCI_BASE_ADDRESS_0, &pcibase);
-> +		pcibase &= PCI_BASE_ADDRESS_MEM_MASK;
-> +
-> +		iobase = dm_pci_mem_to_phys(dev, pcibase);
->  		pdata->iobase = iobase;
->  		pdata->phy_interface = PHY_INTERFACE_MODE_RMII;
->  	}
->  
-> -	debug("%s, iobase=%x, priv=%p\n", __func__, iobase, priv);
-> -	ioaddr = iobase;
-> +	debug("%s, iobase=%pa, priv=%p\n", __func__, &iobase, priv);
-> +	ioaddr = phys_to_virt(iobase);
->  	priv->mac_regs_p = (struct eth_mac_regs *)ioaddr;
->  	priv->dma_regs_p = (struct eth_dma_regs *)(ioaddr + DW_DMA_BASE_OFFSET);
->  	priv->interface = pdata->phy_interface;
+>  tools/mxsboot.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/tools/mxsboot.c b/tools/mxsboot.c
+> index 04d86f87a8..8f4018aa56 100644
+> --- a/tools/mxsboot.c
+> +++ b/tools/mxsboot.c
+> @@ -478,7 +478,7 @@ static int mx28_create_nand_image(int infd, int outfd=
+)
+>                 goto err0;
+>         }
+>
+> -       memset(buf, 0, size);
+> +       memset(buf, 0xff, size);
 
+This makes sense:
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
+
+Thanks
