@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 227E7C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:08:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23502C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 12:08:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 739BE876D7;
-	Mon,  4 Dec 2023 13:07:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D20E087714;
+	Mon,  4 Dec 2023 13:07:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QclteVqN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kc3eT2OW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F771876FB; Mon,  4 Dec 2023 13:07:31 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 5C23987716; Mon,  4 Dec 2023 13:07:36 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0848876D7
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:07:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D01486D37
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 13:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-50be24167efso2497344e87.3
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 04:07:29 -0800 (PST)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-50be58a751cso2277688e87.2
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 04:07:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701691649; x=1702296449; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701691653; x=1702296453; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vD97G0JJPrjstx9DxxLj3RhYbyE5f2FSKSx/K3ncJMM=;
- b=QclteVqNaDvZAnTvnEUw9mzHMcaLT99lR1P566li1NL7PCIcFGus+8MdL8hPsqS288
- t2q5fVGyC1iHZ5+gnQ3VmDk72psHIQD4u+Pfo5MQrZj1yMwBqLXzBaC6+K2w2v1yO3ss
- p3uoYtWtnxuZduSAqxsdafzGzFL8bEoz9SAx9bRChp/L/RZxvVw+LIOD4yUYtVeesH2n
- /J0nTFESLUnIqwfscxrzrGT3gaesOj9IFRIw1bwarHZxj4b0J+tcTe4h0oJfANdn7VXB
- P8afC0AMOuwaJIbmbea9UasIk383DuDumD/IoXjYxb9sFS7P7AZzXhuL3mA4RgbPKYjC
- BzXw==
+ bh=oENsUKBTA2cWXv9ImzF/gS8Oz06lReZEVUapldDZpOg=;
+ b=kc3eT2OWbZ7H0Xop8/B1AH+PB5lGek+C920ZK/Frv6i44efuRosuqT+UckrHemUaFk
+ YcvqDzkgwHfEmZqtwdQEissIyJB8ftpuVqY0zGPnEeaA/PvM3c1SeJ0SVIr/Bw3QzmvQ
+ +AtQJylAlYYPrP9LFfmQKfBIM9+SBDwzSKJAf/xM2sXWhaKdnLw2S7IT6NBxsqru9ZD1
+ Nvf7uaKCykxbm+5NZZNaaHZlcjwnle3cB/U8oX4AbnZg9AaM/eSGFGCV7J9pkuXfeavz
+ 0BrA0hWMlTHZQe0MewRk8shcdg2U1P651AnhMYIUgN+TwInZ53Ppb58QVIsrFUCgIYZL
+ icdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701691649; x=1702296449;
+ d=1e100.net; s=20230601; t=1701691653; x=1702296453;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vD97G0JJPrjstx9DxxLj3RhYbyE5f2FSKSx/K3ncJMM=;
- b=vJzHcuNnIv6FxXk6KBIqIpWX1DJIzzzECGInPo6Lit64jNazwW+65hQsYuJxcH0xYl
- A0Xdvz4gTdCYWIp0dRuURn3gaKwNBj2S1F9Y/3m5JqI45FGfzV9pcxIcwKmuJVT+GP8A
- zRVUJq+pPz4fvi3t1gvkM/5iFe96vV4uobjVYGWrhwrDjI2F92JEEGKMztXczobNVXrc
- 0tMTLE1qsizCgtkCt0BQEjeCGjp6PeGUPmKiTDFcnm89pCqLLgVjVQpdIfhVwpZ0Lose
- Z2IiKDGKbj7oyWlYeSE/oB1w2KxEh4E0q+5yR4YPc2quEzcuCESp6PomKQbXeHdiJ+nk
- LJVg==
-X-Gm-Message-State: AOJu0YzSlkgVAgmSMT+GbR3YJOowjwMjkZ9QySKJXBQ6q57CgYKY1l/J
- KBHbhY5ReFvP0fKtfKU+6VDR1uw1E8VIrytEagTcdA==
-X-Google-Smtp-Source: AGHT+IHsOYhaKefDNXQTAgA99No/qjdTxqlZzOACy5Ubw56TXrAiMJKRYrp2o9ZFDFoDWJ/48tn7Dg==
-X-Received: by 2002:a05:6512:1388:b0:50b:f304:3bed with SMTP id
- fc8-20020a056512138800b0050bf3043bedmr518647lfb.49.1701691648830; 
- Mon, 04 Dec 2023 04:07:28 -0800 (PST)
+ bh=oENsUKBTA2cWXv9ImzF/gS8Oz06lReZEVUapldDZpOg=;
+ b=tdKWoKJIVofhXKMQJlo2jRTy8ebuz5CCq6roukmEydTepm44m8pNUjp107wGkwRB9S
+ i47E/jRuyRjS66aR3wc9G1949EBsHLnlJlX6TIxxPGbtHHvVqcq/loZsmFl/ctDyvxK3
+ 4VBn36h7aVqWXtBw0CaD17PLmL5GRkDC5hSfotBB5keVVlmKL4SBqpxh+8ZqSmziohJK
+ f/xc7xeCYbjhqDvT4LThZ/xl5alUbPSO6nBnInMSpVNWeoFoOusE2pMvOdqLuuybOUoL
+ zn7aV97yOixv3vSKwMgtLtUuJ0uFfB4mlu2KmYnBeEBakLxO1IzWTDwAv0pk8xPER5c0
+ 5cbA==
+X-Gm-Message-State: AOJu0Yy3l5Y3dr6O1JzRbJClifiBoXqPkraSg1aEz13lVLSn5iLucXIF
+ FiZ1QdVXIXDza+FPEZDdpijCMQWROr2hkeWPKh2vNQ==
+X-Google-Smtp-Source: AGHT+IFUZrdE7eJEq+zgapOrnN0PziwyAvtpkya3fEp8D/7+Vw6AvmHZPO3F+8H7NYizO5eGj0FtoQ==
+X-Received: by 2002:a19:7015:0:b0:50b:e750:dd94 with SMTP id
+ h21-20020a197015000000b0050be750dd94mr1297050lfc.1.1701691652814; 
+ Mon, 04 Dec 2023 04:07:32 -0800 (PST)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- g33-20020a0565123ba100b0050befebf0ccsm541675lfv.292.2023.12.04.04.07.24
+ g33-20020a0565123ba100b0050befebf0ccsm541675lfv.292.2023.12.04.04.07.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Dec 2023 04:07:28 -0800 (PST)
+ Mon, 04 Dec 2023 04:07:32 -0800 (PST)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: simon.k.r.goldschmidt@gmail.com, tien.fong.chee@intel.com,
  sjg@chromium.org, joe.hershberger@ni.com, rfried.dev@gmail.com,
  bharat.gooty@broadcom.com, rayagonda.kokatanur@broadcom.com,
  trini@konsulko.com, Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATHv1 7/9] bcm_ns3: fix overlap define with lwip
-Date: Mon,  4 Dec 2023 18:04:44 +0600
-Message-Id: <20231204120446.3277-8-maxim.uvarov@linaro.org>
+Subject: [PATHv1 8/9] omap3: rename mem_init
+Date: Mon,  4 Dec 2023 18:04:45 +0600
+Message-Id: <20231204120446.3277-9-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20231204120446.3277-1-maxim.uvarov@linaro.org>
 References: <20231204120446.3277-1-maxim.uvarov@linaro.org>
@@ -94,61 +94,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename declaration to not overlap with lwip.
-
-aarch64:  +   bcm_ns3
-+In file included from net/lwip/lwip-external/src/include/lwip/etharp.h:53,
-+                 from net/lwip/lwip-external/src/core/init.c:55:
-+net/lwip/lwip-external/src/include/lwip/prot/ethernet.h:69:
-		  error: "ETH_ADDR" redefined [-Werror]
-+   69 | #define ETH_ADDR(b0, b1, b2, b3, b4, b5) {{b0, b1, b2, b3, b4, b5}}
-+      |
-+In file included from include/config.h:3,
-+                 from arch/arm/include/asm/string.h:4,
-+                 from include/linux/string.h:21,
-+                 from include/malloc.h:369,
-+                 from include/stdlib.h:9,
-+                 from net/lwip/lwip-external/src/include/lwip/arch.h:83,
-+                 from net/lwip/lwip-external/src/include/lwip/debug.h:40,
-+                 from net/lwip/lwipopts.h:93,
-+                 from net/lwip/lwip-external/src/include/lwip/opt.h:51,
-+                 from net/lwip/lwip-external/src/core/init.c:38:
-+include/configs/bcm_ns3.h:52: note: this is the location of the previous definition
-+   52 | #define ETH_ADDR
+Rename mem_init to solve following compilation error with lwip
+integrated code:
++arm-linux-gnueabi-ld.bfd: net/lwip/lwip-external/src/core/mem.o: in
+  function `mem_init':
++net/lwip/lwip-external/src/core/mem.c:162: multiple definition
+  of `mem_init';
+  arch/arm/mach-omap2/omap3/sdrc.o:arch/arm/mach-omap2/omap3/
+  sdrc.c:240: first defined here
++make[1]: *** [Makefile:1764: u-boot] Error 1
++/opt/gcc-13.1.0-nolibc/arm-linux-gnueabi/bin/../lib/gcc/arm-linux-
+  gnueabi/13.1.0/../../
+../../arm-linux-gnueabi/bin/ld: net/lwip/lwip-external/src/core/
+  mem.o (symbol from
+  plugin): in function `mem_init':
++(.text+0x0): multiple definition of `mem_init'; arch/arm/mach-omap2/
+  omap3/emif4.o
+  (symbol from plugin):(.text+0x0): first defined here
++collect2: error: ld returned 1 exit status
++(.text+0x0): multiple definition of `mem_init'; arch/arm/mach-omap2/
+  omap3/sdrc.o
+  (symbol from plugin):(.text+0x0): first defined here
++Image 'simple-bin' is missing external blobs and is non-functional:
+   tee-os
++/binman/simple-bin/fit/images/op-tee/tee-os (tee-os):
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- include/configs/bcm_ns3.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/include/asm/arch-omap3/mem.h | 2 +-
+ arch/arm/mach-omap2/omap3/board.c     | 2 +-
+ arch/arm/mach-omap2/omap3/emif4.c     | 4 ++--
+ arch/arm/mach-omap2/omap3/sdrc.c      | 6 +++---
+ 4 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/include/configs/bcm_ns3.h b/include/configs/bcm_ns3.h
-index 47de4bc201..7c6e0725a6 100644
---- a/include/configs/bcm_ns3.h
-+++ b/include/configs/bcm_ns3.h
-@@ -45,11 +45,11 @@
- #define PCIE_ARGS "pcie_args=pci=pcie_bus_safe pcie_ports=native vfio_pci.disable_idle_d3=1\0"
+diff --git a/arch/arm/include/asm/arch-omap3/mem.h b/arch/arm/include/asm/arch-omap3/mem.h
+index 569779c55e..fce3568eca 100644
+--- a/arch/arm/include/asm/arch-omap3/mem.h
++++ b/arch/arm/include/asm/arch-omap3/mem.h
+@@ -475,7 +475,7 @@ enum {
+ #ifndef __ASSEMBLY__
  
- #ifdef CONFIG_BCM_SF2_ETH
--#define ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
-+#define BCM_ETH_ADDR "ethaddr=00:0A:F7:95:65:A4\0"
- #define NET_ARGS "bgmac_platform.ethaddr=${ethaddr} " \
- 	"ip=${ipaddr}::${gatewayip}:${netmask}::${ethif}:off"
- #else
--#define ETH_ADDR
-+#define BMC_ETH_ADDR
- #define NET_ARGS
- #endif
+ /* Function prototypes */
+-void mem_init(void);
++void omap3_mem_init(void);
  
-@@ -749,7 +749,7 @@
- 	OS_LOG_LEVEL \
- 	EXTRA_ARGS \
- 	PCIE_ARGS \
--	ETH_ADDR \
-+	BMC_ETH_ADDR \
- 	RESERVED_MEM \
- 	SETBOOTARGS \
- 	UPDATEME_FLASH_PARAMS \
+ u32 is_mem_sdr(void);
+ u32 mem_ok(u32 cs);
+diff --git a/arch/arm/mach-omap2/omap3/board.c b/arch/arm/mach-omap2/omap3/board.c
+index 8b70251457..c76a95dd5d 100644
+--- a/arch/arm/mach-omap2/omap3/board.c
++++ b/arch/arm/mach-omap2/omap3/board.c
+@@ -216,7 +216,7 @@ void s_init(void)
+ void board_init_f(ulong dummy)
+ {
+ 	early_system_init();
+-	mem_init();
++	omap3_mem_init();
+ 	/*
+ 	* Save the boot parameters passed from romcode.
+ 	* We cannot delay the saving further than this,
+diff --git a/arch/arm/mach-omap2/omap3/emif4.c b/arch/arm/mach-omap2/omap3/emif4.c
+index 7e5a281922..4fbfb387ab 100644
+--- a/arch/arm/mach-omap2/omap3/emif4.c
++++ b/arch/arm/mach-omap2/omap3/emif4.c
+@@ -159,10 +159,10 @@ int dram_init_banksize(void)
+ }
+ 
+ /*
+- * mem_init() -
++ * omap3_mem_init() -
+  *  - Initialize memory subsystem
+  */
+-void mem_init(void)
++void omap3_mem_init(void)
+ {
+ 	do_emif4_init();
+ }
+diff --git a/arch/arm/mach-omap2/omap3/sdrc.c b/arch/arm/mach-omap2/omap3/sdrc.c
+index 5d43e7c9cf..f2a0769b9d 100644
+--- a/arch/arm/mach-omap2/omap3/sdrc.c
++++ b/arch/arm/mach-omap2/omap3/sdrc.c
+@@ -4,7 +4,7 @@
+  *
+  * This file has been created after exctracting and consolidating
+  * the SDRC related content from mem.c and board.c, also created
+- * generic init function (mem_init).
++ * generic init function (omap3_mem_init).
+  *
+  * Copyright (C) 2004-2010
+  * Texas Instruments Incorporated - https://www.ti.com/
+@@ -232,11 +232,11 @@ int dram_init_banksize(void)
+ }
+ 
+ /*
+- * mem_init -
++ * map3_mem_init -
+  *  - Init the sdrc chip,
+  *  - Selects CS0 and CS1,
+  */
+-void mem_init(void)
++void omap3_mem_init(void)
+ {
+ 	/* only init up first bank here */
+ 	do_sdrc_init(CS0, EARLY_INIT);
 -- 
 2.30.2
 
