@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DDCEC4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:31:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C8F8C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 00:31:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C4088787F;
-	Mon,  4 Dec 2023 01:28:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A0AF87717;
+	Mon,  4 Dec 2023 01:30:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GMJHUYgD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V5pdvBcB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D6C187655; Mon,  4 Dec 2023 01:28:17 +0100 (CET)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 5EABB87717; Mon,  4 Dec 2023 01:30:00 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 584CE8788F
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:28:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39D9687655
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 01:29:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-53fbf2c42bfso1997897a12.3
- for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:28:15 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6ce49d9d874so588349b3a.2
+ for <u-boot@lists.denx.de>; Sun, 03 Dec 2023 16:29:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701649693; x=1702254493; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tskEZ9IhWCs6nsVHSL/hNFEW+B2h3ZE2AyrXo8ygh/k=;
- b=GMJHUYgD1Hnm3VT597lm6JsoHjcMulSMDaXq0EhmlHGVKY8OcLk3xIoLbvOmzWFiSF
- dBWeMWtwr5UcmPor/edJHPeoQ9fQLgKtsBQ3Om8BGI8ydFVWlHKxZHTBptGPVmF2Uian
- LMlLH+ATLyZ95rOLtgXm5cJnozIyyWxuhX/uc=
+ d=chromium.org; s=google; t=1701649796; x=1702254596; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AtwmYbrLGrEt2B/WHdaN8bpZRCxePCxwGEDrnT5AUqc=;
+ b=V5pdvBcBSMlo6KTNtvaKZHxCXxcwz995BmwAwKn8SusHjM8a5bGgc+Wb29qx0nOFeG
+ HkJumBaR4iwS+rex5RefIKBr3djOe7wEDIQ1VCjFpaHNNErRSkjbchAgzLMoL+xhH420
+ nyzPp5UGtRSqBn5BOUg3Nz5EbRJ4fYbKBq0so=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701649693; x=1702254493;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tskEZ9IhWCs6nsVHSL/hNFEW+B2h3ZE2AyrXo8ygh/k=;
- b=wydP16Pv4sqFYwqREvLEZb7Ztnm8FY3CsZBQsJP61jN3/X9f5lS1UgbFivTkrAAQDb
- B7wrlJZ17e5IMrGeFvAjrFxdYso0zq8MyMAw/0xGUXYN5B8z8Uu2pae5t0NpDmMBZCM9
- kWS7So4hVv17ekRyqT2IAuK+kXTDnhDkZqhoJqhquRygSbl6QuxATLin8bWIF+weD+Ny
- i2REwEpi/LSvhg3rzEdpcnvaPoRAPKDlhNS8Ac4EBegPIxOCin2Wa/Q7liTmp1BeFTCD
- aZhS+T5YjiNPI2XCEI0Iz6exA3+7ek0KxRKG6i5azjJXLDsQ3GtbVk4U7xo/vceACgbF
- D60A==
-X-Gm-Message-State: AOJu0YybWpTMjQlD2U6muE0aPS8DH89fJz9ZDNqrQdDJLEo8cGqgRR8u
- t7/Ap+W6w82q8lkfmJ4NJ9ypuAde5dcEcw542Pd52A==
-X-Google-Smtp-Source: AGHT+IHhNMJ+je0LosnsbfKzV81G3DD0iIWTniiZ+aHM8yZAOK9IHYKEpCwvGkFYtthgrG2n6odjig==
-X-Received: by 2002:a17:902:ed42:b0:1cf:e9b5:90ea with SMTP id
- y2-20020a170902ed4200b001cfe9b590eamr3207031plb.36.1701649693490; 
- Sun, 03 Dec 2023 16:28:13 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701649796; x=1702254596;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AtwmYbrLGrEt2B/WHdaN8bpZRCxePCxwGEDrnT5AUqc=;
+ b=B0VnHS5/AIUW2Izu7LkFg+HEnh7MUR/x24d+smu3/7DBP1PTfGOwiysdyxgyvZilLp
+ am0zi43CoRBt1jZPkH4ohur6NUX3fRN/l3RUxkRN9fM6XnTYRM779OGmoCrw3UC/xdts
+ tdGjn6jr6nyKnhfWMcCDb16lYm3nmUG8a4qAkQaegHY3eMHs37l48hsitwwZFtm80VFG
+ 6THck01aZ5ZMVDHS6+ie3hTh5wuNDO8HS2rkbt0tVMJY5AnGwvpjx9d7N3wXljhHlbT4
+ 5bKo4WMs8wQuSN411z/oMBOz5B3oiGIPSI1RdqtO+riiuhP4tWnBCY+uFJYikHDtY7u8
+ aNnQ==
+X-Gm-Message-State: AOJu0YzrXswCU+40+DTJsTPFJp9/ExaDAjWzxOUc2xcEatuc6I6pnPpa
+ hFwutObWsLswU/sm/C5uZpZKwr6ywyTA+qHNMD0IHg==
+X-Google-Smtp-Source: AGHT+IGE9J/ZrCUf8DpC7Ker19p1TueTiCP3Qw8kQdulyEk6jtG1ehQ4OSwe0B2ujTSGF0qTr28/hA==
+X-Received: by 2002:a05:6a20:429a:b0:18f:97c:9760 with SMTP id
+ o26-20020a056a20429a00b0018f097c9760mr4764119pzj.72.1701649796073; 
+ Sun, 03 Dec 2023 16:29:56 -0800 (PST)
 Received: from sjg1.roam.corp.google.com ([202.144.206.254])
  by smtp.gmail.com with ESMTPSA id
- w5-20020a170902904500b001cfb971edfasm7097227plz.205.2023.12.03.16.28.10
+ o24-20020a056a001b5800b006ce3a0b4bfasm2346433pfv.24.2023.12.03.16.29.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Dec 2023 16:28:13 -0800 (PST)
+ Sun, 03 Dec 2023 16:29:55 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
  Eddie James <eajames@linux.ibm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH 18/18] bootm: Create a function to run through the booti states
-Date: Sun,  3 Dec 2023 17:26:34 -0700
-Message-ID: <20231203172622.18.I95fe77f4a7f3d6c3dba3ecb3aec30a48739198f9@changeid>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rick Chen <rick@andestech.com>, Roger Knecht <rknecht@pm.me>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Zong Li <zong.li@sifive.com>
+Subject: [PATCH 00/13] Complete decoupling of zboot logic from commands
+Date: Sun,  3 Dec 2023 17:29:25 -0700
+Message-ID: <20231204002944.897949-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.rc2.451.g8631bc7472-goog
-In-Reply-To: <20231204002642.895926-1-sjg@chromium.org>
-References: <20231204002642.895926-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,67 +95,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In a few places, the booti command is used to handle a boot. We want
-these to be done without needing CONFIG_CMDLINE, so add a new
-booti_run() function to handle this.
+This series refactors the zboot code to allow it to be used with
+CONFIG_COMMAND disabled.
 
-So far this is not used.
+A new zboot_run() function is used to boot a zimage.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This is cmde (part e of CMDLINE refactoring)
+It depends on dm/cmdd-working
+which depends on dm/bootstda-working
+which depends on dm/cmdc-working
 
- boot/bootm.c    | 13 +++++++++++++
- include/bootm.h | 13 +++++++++++++
- 2 files changed, 26 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 22c6d1604176..f630b8c1a9c3 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -1155,6 +1155,19 @@ int bootz_run(struct bootm_info *bmi)
- 	return bootm_run_states(bmi, states);
- }
- 
-+int booti_run(struct bootm_info *bmi)
-+{
-+	int states;
-+
-+	bmi->cmd_name = "booti";
-+	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
-+		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
-+	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
-+		states |= BOOTM_STATE_RAMDISK;
-+
-+	return bootm_run_states(bmi, states);
-+}
-+
- int bootm_boot_start(ulong addr, const char *cmdline)
- {
- 	char addr_str[30];
-diff --git a/include/bootm.h b/include/bootm.h
-index d7c9486553e4..ce5298e4ed97 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -163,6 +163,19 @@ int bootm_run(struct bootm_info *bmi);
-  */
- int bootz_run(struct bootm_info *bmi);
- 
-+/**
-+ * booti_run() - Run the entire booti process
-+ *
-+ * This runs through the booti process from start to finish, using the default
-+ * set of states.
-+ *
-+ * This uses bootm_run_states().
-+ *
-+ * @bmi: bootm information
-+ * Return: 0 if ok, something else on error
-+ */
-+int booti_run(struct bootm_info *bmi);
-+
- void arch_preboot_os(void);
- 
- /*
+Simon Glass (13):
+  x86: zboot: Move zimage definitions to the header file
+  x86: zboot: Move command code into its own file
+  x86: zboot: Create a separate ZBOOT option for zboot logic
+  x86: zboot: Avoid iteration in do_zboot_states()
+  x86: zboot: Create separate functions for the logic
+  x86: zboot: Move environment setting into zboot_load()
+  x86: zboot: Drop intermediate zboot_setup() function
+  x86: zboot: Drop intermediate zboot_go() function
+  x86: zboot: Move argument processing outside zboot_start()
+  x86: zboot: Rename zboot_start() to zboot_run()
+  x86: zboot: Separate logic functions from commands
+  x86: zboot: Use zboot_start() in zboot_run()
+  x86: zboot: Tidy up the comment for zboot_run()
+
+ arch/Kconfig                  |   1 -
+ arch/x86/Kconfig              |   8 +
+ arch/x86/include/asm/zimage.h |  97 ++++++++++++
+ arch/x86/lib/Makefile         |   2 +-
+ arch/x86/lib/zimage.c         | 267 ++++------------------------------
+ boot/bootmeth_cros.c          |   6 +-
+ cmd/Kconfig                   |   2 +
+ cmd/x86/Makefile              |   1 +
+ cmd/x86/zboot.c               | 182 +++++++++++++++++++++++
+ include/bootm.h               |  15 +-
+ 10 files changed, 333 insertions(+), 248 deletions(-)
+ create mode 100644 cmd/x86/zboot.c
+
 -- 
 2.43.0.rc2.451.g8631bc7472-goog
 
