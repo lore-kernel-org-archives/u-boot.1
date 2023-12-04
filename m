@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C467C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 18:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82F4C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 18:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA9A87712;
-	Mon,  4 Dec 2023 18:59:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B08AC8766C;
+	Mon,  4 Dec 2023 19:44:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W27SNadO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U/dPRg8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 092A98774C; Mon,  4 Dec 2023 18:59:59 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 7E478876AE; Mon,  4 Dec 2023 19:44:09 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD2E874B1
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 18:59:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AA028760C
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 19:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40b538d5c4eso43032985e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 09:59:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5d719a2004fso14176827b3.3
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 10:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701712796; x=1702317596; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8KOWg0c793AA36Q8QFZqHeT1AW9T8lmslgvjW44SEH4=;
- b=W27SNadOdRHxwGCj9hxe2ozpICu8rRDhI0iMJxvoUeiuBDIpgd7FTES+vHGFQ4vPFo
- 91Ux+34d2mPhSeHNwz0EOLvpbF9mJt1PxrM0UqzGGB9cXRSBjAEeS/juk4CspRmaUOxA
- PtT/nsJs6+pgnEFhWK/naK8D/WpiVZ8V9OvrU=
+ d=konsulko.com; s=google; t=1701715446; x=1702320246; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Sfd0XyoVAz/pM/itO7k2kP/Twl4aePd4XqlU5y7g9lM=;
+ b=U/dPRg8cL61LI77YgMw5W+eAYg+SSp8OQrohtQ++cwl/Ew/Ag4+m5u5Mc3PrJWmlRz
+ Cx3Kf4HSXcglheAWU4UxKzagpUCXqmjlhIoXO5ta/Nb0aUiXFlH2F/Iju9ASNpGs5j5K
+ e/9qTnt+4RDz9CJ+IQmtMJjE8eQXX8cErEe+o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701712796; x=1702317596;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8KOWg0c793AA36Q8QFZqHeT1AW9T8lmslgvjW44SEH4=;
- b=lD4zXzAmW6riLOKHN94xcv0NNlBBZMtjvf6eVAWinVPgjgIvreFrqOoWpNVTtk2IkO
- +4Voz0kJeEDkVquWxJbaysRJmbz8oEN7i1v1hiNawxEZQcUokSuadr3bRXlCtq55ARui
- d/C/x/jD44zhWCU4YTr/cqoGLaq1+BAZnwCW+GIpzc5khOIUiXC4BHADwVJtp8uab5TQ
- vyxWxOry3loKeX24kYC2n19Xww0/r5WwssisLyZSQy/RiTQcWHxcOvS7hyOKOvNepd3L
- mWm0mu5/YTaBu1rIYiTsYy1qYxlxc7/F3As0d6b8ykbakEHhVWL/RB+hfnC3W6+l3QnE
- l0WQ==
-X-Gm-Message-State: AOJu0YxXdruY3SYK3KgmyK/H9mbnBHTXW6Hgk2m+vHCRE9om1liCA8cL
- G9O0jVj70jOHfbiJtRUcjy7T8BIZHC6inaDrmiNObQ==
-X-Google-Smtp-Source: AGHT+IG9y2b3x3EFIttbTqFTC6lUNsW8T3erQgdzs+sKqO3l/YGV3YoWT8m4QD4w16gCT+utJ7qEYnOT1+OHrjImBF4=
-X-Received: by 2002:a7b:ce0f:0:b0:40c:8ad:1ae5 with SMTP id
- m15-20020a7bce0f000000b0040c08ad1ae5mr1453493wmc.106.1701712796064; Mon, 04
- Dec 2023 09:59:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701715446; x=1702320246;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Sfd0XyoVAz/pM/itO7k2kP/Twl4aePd4XqlU5y7g9lM=;
+ b=oG2WiG1PpIjSuhNRTLRQ/YBOebkQOlehqc2D371HJVi6GZ5m8tt5LOqHnaJsyfbod6
+ wihWBGGbAyM6EncgKTShjnUszHH1dftIdc+EeZ19ZRqn+A/l0EltxZffpi2Jjy+37EWo
+ kei5Ti4HRH4kNJP+Xzyu0L1v2c35f5bFfubfLOEf5NGz26qhidSYk+xTk34udS620D0B
+ mhgaTPMaYu7Ly6TKeBAzmhKaI3sfi3NmZ4lLrviz5gC81EFLzFWvjfe0YU4hRn12sQPi
+ yTVP58LlTZbd29009sYU83LzzfgvreHnGzqTGalNbIOLHu2UHpgtnf1hXNQktrseX3w+
+ wSWQ==
+X-Gm-Message-State: AOJu0Yy3MtJ8GFXny+2CZV/TuOU04fMeuY5g5falqtKcvFxjF3wjBaUi
+ 0qlGpNF5XaurswxEz4C5+raNdGvBAw6LUWKjglmGu2th
+X-Google-Smtp-Source: AGHT+IHhS+bpn3pcCJCi3ahjDLzZECydsINQMTRN798EJVb7cUJZ8D9PpnUQdXO3cjOq455LWpxxMg==
+X-Received: by 2002:a81:9b48:0:b0:5d2:bb18:5837 with SMTP id
+ s69-20020a819b48000000b005d2bb185837mr1909813ywg.16.1701715445871; 
+ Mon, 04 Dec 2023 10:44:05 -0800 (PST)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-38a8-7605-2d5e-44b8.res6.spectrum.com.
+ [2603:6081:7b00:6400:38a8:7605:2d5e:44b8])
+ by smtp.gmail.com with ESMTPSA id
+ l6-20020a0dc906000000b005add997ae53sm2556777ywd.81.2023.12.04.10.44.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Dec 2023 10:44:04 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/1] efi_loader: generated SMBIOS table below 4 GiB
+Date: Mon,  4 Dec 2023 13:44:03 -0500
+Message-Id: <170171539121.2051356.1572059742264968174.b4-ty@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231120222558.32014-1-heinrich.schuchardt@canonical.com>
+References: <20231120222558.32014-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231203153401.GV8402@pendragon.ideasonboard.com>
-In-Reply-To: <20231203153401.GV8402@pendragon.ideasonboard.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Dec 2023 10:59:44 -0700
-Message-ID: <CAPnjgZ0XWDO90cq_h6V_EoOX+kmGLBRZwgT5RURCwQBQFONDYg@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: linux-arm-kernel@lists.infradead.org, 
- Masahiro Yamada <masahiroy@kernel.org>, Ahmad Fatoum <a.fatoum@pengutronix.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Tom Rini <trini@konsulko.com>, 
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- Will Deacon <will@kernel.org>, 
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, 
- linux-kernel@vger.kernel.org, workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,72 +92,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Laurent,
+On Mon, 20 Nov 2023 23:25:58 +0100, Heinrich Schuchardt wrote:
 
-On Sun, 3 Dec 2023 at 08:33, Laurent Pinchart
-<laurent.pinchart@ideasonboard.com> wrote:
->
-> Hi Simon,
->
-> Thank you for the patch.
->
-> On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> > Add a script which produces a Flat Image Tree (FIT), a single file
-> > containing the built kernel and associated devicetree files.
-> > Compression defaults to gzip which gives a good balance of size and
-> > performance.
-> >
-> > The files compress from about 86MB to 24MB using this approach.
-> >
-> > The FIT can be used by bootloaders which support it, such as U-Boot
-> > and Linuxboot. It permits automatic selection of the correct
-> > devicetree, matching the compatible string of the running board with
-> > the closest compatible string in the FIT. There is no need for
-> > filenames or other workarounds.
-> >
-> > Add a 'make image.fit' build target for arm64, as well. Use
-> > FIT_COMPRESSION to select a different algorithm.
-> >
-> > The FIT can be examined using 'dumpimage -l'.
-> >
-> > This features requires pylibfdt (use 'pip install libfdt'). It also
-> > requires compression utilities for the algorithm being used. Supported
-> > compression options are the same as the Image.xxx files. For now there
-> > is no way to change the compression other than by editing the rule for
-> > $(obj)/image.fit
-> >
-> > While FIT supports a ramdisk / initrd, no attempt is made to support
-> > this here, since it must be built separately from the Linux build.
->
-> FIT images are very useful, so I think this is a very welcome addition
-> to the kernel build system. It can get tricky though: given the
-> versatile nature of FIT images, there can't be any
-> one-size-fits-them-all solution to build them, and striking the right
-> balance between what makes sense for the kernel and the features that
-> users may request will probably lead to bikeshedding. As we all love
-> bikeshedding, I thought I would start selfishly, with a personal use
-> case :-) This isn't a yak-shaving request though, I don't see any reason
-> to delay merging this series.
+> We currently use an outdated format 32-bit format for SMBIOS tables.
+> So we must allocate SMBIOS tables below 4 GiB.
+> 
+> 
 
-OK, sounds good!
+As this is reflects what has been done the longest, applied to u-boot/master,
+thanks! And we shall revisit all of these topics for v2024.04 or later.
 
->
-> Have you envisioned building FIT images with a subset of DTBs, or adding
-> DTBOs ? Both would be fairly trivial extensions to this script by
-> extending the supported command line arguments. It would perhaps be more
-> difficult to integrate in the kernel build system though. This leads me
-> to a second question: would you consider merging extensions to this
-> script if they are not used by the kernel build system, but meant for
-> users who manually invoke the script ? More generally, is the script
-> meant to be used stand-alone as well, in which case its command line
-> arguments need to remain backward-compatible, or do you see it as being
-> internal to the kernel ?
+-- 
+Tom
 
-The script as written is internal to the kernel, but I am sure it
-could be expanded in some ways. I am waiting to see it merged before
-worrying too much about what might happen in the future!
-
-[..]
-
-Regards,
-Simon
