@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D153C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:25:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 619D7C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:28:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BF8F8788D;
-	Mon,  4 Dec 2023 09:25:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D2676878AB;
+	Mon,  4 Dec 2023 09:28:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vN/HxQ2k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fRH12ssA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E001C8788D; Mon,  4 Dec 2023 09:25:29 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 97CF58788D; Mon,  4 Dec 2023 09:28:04 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69BDF8787A
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:25:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AD3A878AB
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:27:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2c9fbb846b7so9792011fa.2
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:25:26 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-50bf1e32571so1107984e87.2
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701678326; x=1702283126; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701678478; x=1702283278; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BpGCES18AOJ/bAgUXZ7dwcoQgA7Vk5Oe0Ix+GDC8qjI=;
- b=vN/HxQ2kdqHr0N4qh7+OMiJHZQPLi/y7iLrUMk30InDr9leiXNefw4e++jygmdQYBC
- 2T5nZHpfQty2hxqfWCnOdcAj5L2l1oA9bi/CemSRuoNzcGn7pLlwABRWnyXVTwrgoADW
- F6Y5aervLJSPXPRDnbDk06PdfGQOPfHGzko15l8Cm3eCuIVc9teSDTawTZJDkuyadeKP
- uakpzFJKR8Pp6eSJf61IS20k9FzQ/21g8AqacljX6TEaQdTDae4MhxVzUOcqGh+jfaMp
- WKNne4d3o9vX9544VbU+CiFitzdUD7DhTuhvHZLqSVEOqS+6Dl9Dy1l475CGmJj7ty/L
- wRmQ==
+ bh=ol/6IkQAs2SvaatQI7mjIj0SLpZLbBcKrQB1qUhK1BY=;
+ b=fRH12ssA4pUqR7o+/uDgzegKJGiS97Gr1CPNFk0PQk8TUtvAvnDM/LT+w1ZNo4YtoG
+ rl7Ub/T8TS748adOz327Wgla5XjOktt0fpfOkzUa84JeKauHKQ9Iga37Uvsixz8zQoqn
+ LfmWP4xCXyb9kZkacByDvOg6RoJ6ZpZ670tn9j+uvns6l2I2aYdxfXp+AUdHc+83d7Jl
+ DMpK9DOiy8tP4y2drfzAMvqxu+4GjoTMPzBSSMqEaGBUCKS/XtYtGVXHAilfX3eP4SfO
+ BmJQC5HKHutJ1RW6n0nmpOLTTzG8F6NC/kzmI3LGJY7zlwKtltaj2CGWup3+UVqO7nqN
+ pvYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701678326; x=1702283126;
+ d=1e100.net; s=20230601; t=1701678478; x=1702283278;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BpGCES18AOJ/bAgUXZ7dwcoQgA7Vk5Oe0Ix+GDC8qjI=;
- b=bahsJ1boYt+YHcGRq1NAX9TKfmCgaM9sKbtNcjKTwtLX4JFbeL4O0KlhcVAuxEyJ/H
- ESe9eed+UQyVfCoHjLsk20M5U2oND72FvyyZYNKgi05oTuplyCDSufTGSBIcNl28ZuIx
- MNNURWxe2cfr6oLcwZUE1fhG8rP/Q2gahIuoK0MLdaR+xDwRUueRDBcNQF3FVfMX7wJQ
- kMXdDfUVRCJuO/CCgvVjwytU/O7AE+Kbz6QYLrhIRb2ABJ5lNVtp9uAtjdSJVPSqccHh
- Yq6V8QRVZGsYA9EOuTMurBA+OHag2Tkcl9Fll4KQne0RQCpQWat5jc41GTOyzBicsfJa
- wnDg==
-X-Gm-Message-State: AOJu0YzvHmze1lcO1nuOz9Zme3VGOKskeAAKngC7UG7sphhgVGqBZEOR
- DRDSVIZTqKBptV3mDz8dncDgs9UFjE3mE5Co+VGIfL+8F1oYAqX6
-X-Google-Smtp-Source: AGHT+IFLXkmY4w9jZx7kga2Qb4QJyGHjzIT03fl+q7Hhc8PBgqRmqV7LLbY/2cbC8GahuHXCafpmncy89MtIR0quBUk=
-X-Received: by 2002:a2e:9055:0:b0:2ca:61c:d0d5 with SMTP id
- n21-20020a2e9055000000b002ca061cd0d5mr289356ljg.102.1701678325739; Mon, 04
- Dec 2023 00:25:25 -0800 (PST)
+ bh=ol/6IkQAs2SvaatQI7mjIj0SLpZLbBcKrQB1qUhK1BY=;
+ b=KCIL7qXl7yLQmDa8uo3mc3MFgsrzaeTl+T8E7VOeps5o7soc5ncrniqL2iYRPDrnD9
+ pCmduIgdBGotJ/CYseuZA9I+9cQ14xZuEDTnMkUCTFQqB4ynHlKMw5vWkrvNgrmrlRX7
+ +0KO4YZCmi1SztOxzyyn1NJPCUciWSe15fN8X1xgLjF94BQyyr5tfZDdmHpH6Bfmb7YZ
+ CWESmnUMFNoT7VQSpjoh2ULhsq2yObPA65Z1JVhkDoQzb78g0X9P+6VW0gLb0YKcvyHc
+ RupU8t4SVb2EIpdgemJ5k8Z46+gUNX2adMNtj2OeszTRe7tPqu5QuagbrawmXkqPUEAu
+ QsKA==
+X-Gm-Message-State: AOJu0Yxt3y8vTY6F6Iz0TZOH1RnXvP4m8fhvvEMUIOlTH5ibtcgInFGX
+ SmjCVi4czB0fi4l74gfO+AenLRfvrux1xqZFY3aBvw==
+X-Google-Smtp-Source: AGHT+IFFidNrUwTgECcCyayJTnpdda4DcP3EtaDHcWh9vEPJPv7ZI3tQFadE+QKEQw4+0BqbjxHjjnkAH3v3egEMscA=
+X-Received: by 2002:a05:6512:1089:b0:50b:fd41:85e with SMTP id
+ j9-20020a056512108900b0050bfd41085emr253148lfg.109.1701678477805; Mon, 04 Dec
+ 2023 00:27:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-2-raymond.mao@linaro.org>
-In-Reply-To: <20231127195029.90951-2-raymond.mao@linaro.org>
+ <20231127195029.90951-4-raymond.mao@linaro.org>
+ <CAPnjgZ0Y+unk18YHXJALs-pBNOb3dU6WwrM_vsmBT_RBCq4UvQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0Y+unk18YHXJALs-pBNOb3dU6WwrM_vsmBT_RBCq4UvQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Dec 2023 10:24:49 +0200
-Message-ID: <CAC_iWjJ8qkOGVVqDa-_vg4x2W2rocb=ysQDPJhEgE0rOnwox6w@mail.gmail.com>
-Subject: Re: [PATCH v2 01/18] bloblist: Update the tag numbering
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, Bin Meng <bmeng.cn@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>, 
- Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
+Date: Mon, 4 Dec 2023 10:27:21 +0200
+Message-ID: <CAC_iWjLzUuzyH3+uUbU3bqnTSxB0fyDwhc4pB4bRQtzA9Us76Q@mail.gmail.com>
+Subject: Re: [PATCH v2 03/18] bloblist: Change the magic value
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
+ Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,50 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
-
-[...]
-
->  common/bloblist.c  | 16 +++++++++---
->  include/bloblist.h | 65 ++++++++++++++++++++++++----------------------
->  test/bloblist.c    |  4 +--
->  3 files changed, 48 insertions(+), 37 deletions(-)
+On Sat, 2 Dec 2023 at 20:33, Simon Glass <sjg@chromium.org> wrote:
 >
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index a22f6c12b0..349ceddea5 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -36,16 +36,24 @@ static struct tag_name {
->         enum bloblist_tag_t tag;
->         const char *name;
->  } tag_name[] = {
-> -       { BLOBLISTT_NONE, "(none)" },
-> +       { BLOBLISTT_VOID, "(void)" },
+> On Mon, 27 Nov 2023 at 12:52, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > From: Simon Glass <sjg@chromium.org>
+> >
+> > This uses a new value with spec v0.9 so change it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Update the bloblist alignment to align to FW handoff spec v0.9.
+> >
+> >  include/bloblist.h | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
->         /* BLOBLISTT_AREA_FIRMWARE_TOP */
-> +       { BLOBLISTT_CONTROL_FDT, "Control FDT" },
-> +       { BLOBLISTT_HOB_BLOCK, "HOB block" },
-> +       { BLOBLISTT_HOB_LIST, "HOB list" },
-> +       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
->         /* BLOBLISTT_AREA_FIRMWARE */
-> -       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
-> -       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
->         { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
->         { BLOBLISTT_TCPA_LOG, "TPM log space" },
-> -       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
-
-There are some TPM Eventlog related entries that are missing here.
-Can we add them?
-
-> +       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
-> +
-> +       /* BLOBLISTT_AREA_ARM */
-> +       { BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
-> +
-> +       /* BLOBLISTT_AREA_OTHER */
-> +       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
-[...]
-
-Thanks
-/Ilias
+> But you will need a later patch (or update this one) due to [1]
+>
+> >
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index 1e4f1a6342..30441f922b 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -75,7 +75,7 @@
+> >
+> >  enum {
+> >         BLOBLIST_VERSION        = 0,
+> > -       BLOBLIST_MAGIC          = 0xb00757a3,
+> > +       BLOBLIST_MAGIC          = 0x6ed0ff,
+> >
+> >         BLOBLIST_ALIGN_LOG2     = 3,
+> >         BLOBLIST_ALIGN          = 1 << BLOBLIST_ALIGN_LOG2,
+> > --
+> > 2.25.1
+> >
+>
+> Regards,
+> Simon
+>
+> [1] https://github.com/FirmwareHandoff/firmware_handoff/pull/24
+With this change
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
