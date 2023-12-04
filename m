@@ -4,75 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8D6C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:37:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0D60C4167B
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4F8E878AB;
-	Mon,  4 Dec 2023 09:37:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6A9938791A;
+	Mon,  4 Dec 2023 09:37:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s+izHPee";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 63AAF878AB; Mon,  4 Dec 2023 09:37:02 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1701679046;
+	bh=gvvuhB81ghwj+7j2Q0WrvIkHXDK2JKBJtB6s2xnCZ9A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=EcS6aqxEwPRJjp0+JJQvQhu6HeraUnyjyJtI8RUUzW/kZfGYC7k2Pp/WBx6Tp0CRH
+	 4bdSfL5MEr/5sSyYhEk6zKtCWcA317Wn5Q+FU1GDlj2nBkoYy/z4DoZHwkyk+5a8DV
+	 aZgDBrmPgt6KaE3xV1cRsAAefRodpS0hP6hS48E82tRyjcVLLycQfFTHGrt86DMZpk
+	 tgYdkhbhNCCgLW+7svOKAHd4z5Zh1a6wJQzGBHCGQ/f41ZtfG5tHhRCiWYwb1/8xoQ
+	 B1fO8aCXn723CG1Mp1BNa6CfhDscvv7Nbf53rf2T5yytTVsGitUXEKHEUnsLZIKCFE
+	 BZRZVh1PraLSQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BBCE8771F
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:37:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2c9ee6fed3eso23999851fa.0
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:37:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701679019; x=1702283819; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W0uQcPVVG4BMTfBJh+1HHYVPeodNWpzaOmXsRErzIWo=;
- b=s+izHPeeEqyMoREewXvYYnTRPdzVD2h7qRRIzMtsqzdvR3ObcahMttq7zjLjW3vSFA
- qYPrNMsao9MmrNqa0eITFm5RcT8dYQWJvNJGzthhorFrTU6nom8JSjEZsunBQ9MtSV/7
- p7DP1+YioU1itWUatAV5cnIG9Aw8RmYElG6LadxdMnkscaJB93DrA01WPWOexlkUDgUE
- B5ac84P2tUaDSYlgQQYAegNITxYDyRC09ke5t21QrJfvjYmrMLbhShTKai6r8wmQrWDK
- j0yrBnZIU5XpP4dL1ri9I6RddK2fs5sGwucPUp3+lNTJB6xmj8e0Fl6uhf/UEjWjfDzX
- fm9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701679019; x=1702283819;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=W0uQcPVVG4BMTfBJh+1HHYVPeodNWpzaOmXsRErzIWo=;
- b=U/mvN50ly2V2vht5NKPHE6jj5hp92KNc5N9lP/mnWJOCtDISzP2T43A8vPzuUVuQyE
- LVAuxBb1lewtIHH2CSDc/byM6HUr8gzXcPhl2Sot84bODLSFE8RcN5bN5mAYq66PQLSp
- IR3Da+wsXbtab2gA2hmP4MfWia5Kz6V7SqxeoCynIsQYxr7htAwtBozju0xiuh7iAZ7H
- bsm+Um6QGAQvRWzAAGWvsdnOoABCLnLIaDlMs71WOQ/I6tutubQ5wbL8FC3wpLcGS4LV
- ciJbu7FhaEdP4Nq0mqZQdLCOc0RH45XAn0eKpmUaqFgdxTV89CjEGYLPjvGmQWq4h3dq
- QW9w==
-X-Gm-Message-State: AOJu0YwlZnZHKWlJVsBeRCDTC3Q9UY0TtHrmFZ6irmwutxl4+qNkbylB
- QNG4ULlylBMwyKIfiLg5D9EG2X4VQE46WW0GpqdhkA==
-X-Google-Smtp-Source: AGHT+IHx50ZqzQ3L9g3JHh5G/Ef+f6/roPMd58Q0g4a7W5CyWTOu/Es5uB+oTQV9wkLhr0ENVNlH1OcOwI3r3Vya+Ns=
-X-Received: by 2002:a2e:9c0e:0:b0:2ca:14b:b19 with SMTP id
- s14-20020a2e9c0e000000b002ca014b0b19mr633358lji.61.1701679019359; 
- Mon, 04 Dec 2023 00:36:59 -0800 (PST)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 605EA8788D;
+ Mon,  4 Dec 2023 09:37:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1701679044;
+ bh=gvvuhB81ghwj+7j2Q0WrvIkHXDK2JKBJtB6s2xnCZ9A=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Djj9zeDU2MRIjuc+IsYhmaqK9NCUQTti6vukt4DuJa7uuGNpQQ1LNv71KZuaY4eDM
+ tr0Ku3WUwmgzfL91K9KTDZ2dsN1qIHIuAEelov6LcEz2wbrZYE+YWSR8Jbz15qu4Cf
+ gggbiqe59HDxshbVi5mwpLJTnAkAN+VK33SGzsrLtEoeErRVcJGjsqOU2utTDHF4qD
+ drT4iHn1Lqy3yKsaQ1wz7J0Gkc4Ed5NF1K/nLbpidGYVNkLf81DUopOBBsD1FSPx+t
+ edwmCZ7G9BwsW660yHIVxqVa56B65dEbij1bUt/UmBFcOKih9k3QCqed7jwTKO+M8R
+ CNS0XzfcsdLiw==
+Message-ID: <a9f1fbe8-d604-4df0-b390-2be147bdd965@denx.de>
+Date: Mon, 4 Dec 2023 09:37:23 +0100
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-7-raymond.mao@linaro.org>
-In-Reply-To: <20231127195029.90951-7-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 4 Dec 2023 10:36:23 +0200
-Message-ID: <CAC_iWjLD3c+Z3cW9z-mKV1bXLEcu2L6Zmm9RMt1s6rV6i+AiJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 06/18] bloblist: Drop the flags value
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, Bin Meng <bmeng.cn@gmail.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Qu Wenruo <wqu@suse.com>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] tools: mxsboot: pre-fill buffer with 0xff, not 0
+Content-Language: en-US
+To: Alessandro Rubini <rubini@gnudd.com>
+Cc: festevam@gmail.com, u-boot@lists.denx.de, rogan@dawes.za.net
+References: <e7b025bd-3498-4899-a73e-c55ff7a81f7a@denx.de>
+ <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+ <CAOMZO5Ajq2L9-pNLqq0JGUmWdn5Lw=SeQsoZZ1YNYJbC1gJZQQ@mail.gmail.com>
+ <ZW2JNHXCeO+Szif6@arcana.i.gnudd.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <ZW2JNHXCeO+Szif6@arcana.i.gnudd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,266 +71,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 27 Nov 2023 at 21:52, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> From: Simon Glass <sjg@chromium.org>
->
-> There is no flags value in spec v0.9 so drop it.
->
-> For now it is still present in the header, with an underscore, so that
-> tests continue to pass.
+On 12/4/23 09:09, Alessandro Rubini wrote:
+> Hello.
+> 
+>>>> pre-filling with 0xff creates a proper boot loader image, but no
+>>>> bad-block marker is there when written to flash.
+> 
+>> Isn't there some kobs-ng or whatever tool it was to properly initialize
+>> the NAND on MXS ?
+> 
+> I didn't know. I used what u-boot offers, which works for me without
+> vendor tools -- and dare I say I trust u-boot tools more than vendor
+> tools?.
+> 
+> The default environment even has the rule to reflash from any
+> u-boot.nand you manage to put into RAM. The only issue is that
+> u-boot.nand, as created, marks good blocks as bad by prefilling with
+> zeores.
 
-Why? Can't we drop it overall?
+But what about the bad block markers , do they get erased when you write 
+this U-Boot image into the NAND ?
 
-Thanks
-/Ilias
-
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  common/bloblist.c  |  5 ++---
->  include/bloblist.h |  6 ++----
->  test/bloblist.c    | 45 +++++++++++++++++++--------------------------
->  3 files changed, 23 insertions(+), 33 deletions(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index f084a32cfc..4d01772c3b 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -331,7 +331,7 @@ static u32 bloblist_calc_chksum(struct bloblist_hdr *hdr)
->         return chksum;
->  }
->
-> -int bloblist_new(ulong addr, uint size, uint flags)
-> +int bloblist_new(ulong addr, uint size)
->  {
->         struct bloblist_hdr *hdr;
->
-> @@ -343,7 +343,6 @@ int bloblist_new(ulong addr, uint size, uint flags)
->         memset(hdr, '\0', sizeof(*hdr));
->         hdr->version = BLOBLIST_VERSION;
->         hdr->hdr_size = sizeof(*hdr);
-> -       hdr->flags = flags;
->         hdr->magic = BLOBLIST_MAGIC;
->         hdr->size = size;
->         hdr->alloced = hdr->hdr_size;
-> @@ -490,7 +489,7 @@ int bloblist_init(void)
->                 }
->                 log_debug("Creating new bloblist size %lx at %lx\n", size,
->                           addr);
-> -               ret = bloblist_new(addr, size, 0);
-> +               ret = bloblist_new(addr, size);
->         } else {
->                 log_debug("Found existing bloblist size %lx at %lx\n", size,
->                           addr);
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index d70a7bad2e..2b898d0c55 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -164,7 +164,6 @@ enum bloblist_tag_t {
->   * @version: BLOBLIST_VERSION
->   * @hdr_size: Size of this header, normally sizeof(struct bloblist_hdr). The
->   *     first bloblist_rec starts at this offset from the start of the header
-> - * @flags: Space for BLOBLISTF... flags (none yet)
->   * @size: Total size of the bloblist (non-zero if valid) including this header.
->   *     The bloblist extends for this many bytes from the start of this header.
->   *     When adding new records, the bloblist can grow up to this size.
-> @@ -182,7 +181,7 @@ struct bloblist_hdr {
->         u32 magic;
->         u32 version;
->         u32 hdr_size;
-> -       u32 flags;
-> +       u32 _flags;
->
->         u32 size;
->         u32 alloced;
-> @@ -317,11 +316,10 @@ int bloblist_resize(uint tag, int new_size);
->   *
->   * @addr: Address of bloblist
->   * @size: Initial size for bloblist
-> - * @flags: Flags to use for bloblist
->   * Return: 0 if OK, -EFAULT if addr is not aligned correctly, -ENOSPC is the
->   * area is not large enough
->   */
-> -int bloblist_new(ulong addr, uint size, uint flags);
-> +int bloblist_new(ulong addr, uint size);
->
->  /**
->   * bloblist_check() - Check if a bloblist exists
-> diff --git a/test/bloblist.c b/test/bloblist.c
-> index 8b435e27ca..36994c3dd4 100644
-> --- a/test/bloblist.c
-> +++ b/test/bloblist.c
-> @@ -72,15 +72,15 @@ static int bloblist_test_init(struct unit_test_state *uts)
->         hdr = clear_bloblist();
->         ut_asserteq(-ENOENT, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_asserteq_ptr(NULL, bloblist_check_magic(TEST_ADDR));
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_asserteq_ptr(hdr, bloblist_check_magic(TEST_ADDR));
->         hdr->version++;
->         ut_asserteq(-EPROTONOSUPPORT, bloblist_check(TEST_ADDR,
->                                                      TEST_BLOBLIST_SIZE));
->
-> -       ut_asserteq(-ENOSPC, bloblist_new(TEST_ADDR, 0x10, 0));
-> -       ut_asserteq(-EFAULT, bloblist_new(1, TEST_BLOBLIST_SIZE, 0));
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_asserteq(-ENOSPC, bloblist_new(TEST_ADDR, 0x10));
-> +       ut_asserteq(-EFAULT, bloblist_new(1, TEST_BLOBLIST_SIZE));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->
->         ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_assertok(bloblist_finish());
-> @@ -90,9 +90,6 @@ static int bloblist_test_init(struct unit_test_state *uts)
->         ut_asserteq_ptr(NULL, bloblist_check_magic(TEST_ADDR));
->         hdr->magic--;
->
-> -       hdr->flags++;
-> -       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
-> -
->         return 1;
->  }
->  BLOBLIST_TEST(bloblist_test_init, 0);
-> @@ -106,7 +103,7 @@ static int bloblist_test_blob(struct unit_test_state *uts)
->         /* At the start there should be no records */
->         hdr = clear_bloblist();
->         ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_asserteq(TEST_BLOBLIST_SIZE, bloblist_get_size());
->         ut_asserteq(TEST_ADDR, bloblist_get_base());
->         ut_asserteq(map_to_sysmem(hdr), TEST_ADDR);
-> @@ -144,7 +141,7 @@ static int bloblist_test_blob_ensure(struct unit_test_state *uts)
->
->         /* At the start there should be no records */
->         clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->
->         /* Test with an empty bloblist */
->         size = TEST_SIZE;
-> @@ -176,7 +173,7 @@ static int bloblist_test_bad_blob(struct unit_test_state *uts)
->         void *data;
->
->         hdr = clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         data = hdr + 1;
->         data += sizeof(struct bloblist_rec);
->         ut_asserteq_addr(data, bloblist_ensure(TEST_TAG, TEST_SIZE));
-> @@ -192,7 +189,7 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
->         char *data, *data2;
->
->         hdr = clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_assertok(bloblist_finish());
->         ut_assertok(bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
->
-> @@ -201,10 +198,6 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
->          * change the size or alloced fields, since that will crash the code.
->          * It has to rely on these being correct.
->          */
-> -       hdr->flags--;
-> -       ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
-> -       hdr->flags++;
-> -
->         hdr->size--;
->         ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         hdr->size++;
-> @@ -256,7 +249,7 @@ static int bloblist_test_cmd_info(struct unit_test_state *uts)
->         char *data, *data2;
->
->         hdr = clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         data = bloblist_ensure(TEST_TAG, TEST_SIZE);
->         data2 = bloblist_ensure(TEST_TAG2, TEST_SIZE2);
->
-> @@ -282,7 +275,7 @@ static int bloblist_test_cmd_list(struct unit_test_state *uts)
->         char *data, *data2;
->
->         hdr = clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         data = bloblist_ensure(TEST_TAG, TEST_SIZE);
->         data2 = bloblist_ensure(TEST_TAG2, TEST_SIZE2);
->
-> @@ -312,7 +305,7 @@ static int bloblist_test_align(struct unit_test_state *uts)
->
->         /* At the start there should be no records */
->         hdr = clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         ut_assertnull(bloblist_find(TEST_TAG, TEST_BLOBLIST_SIZE));
->
->         /* Check the default alignment */
-> @@ -348,8 +341,8 @@ static int bloblist_test_align(struct unit_test_state *uts)
->         hdr = map_sysmem(TEST_ADDR + BLOBLIST_ALIGN, TEST_BLOBLIST_SIZE);
->         memset(hdr, ERASE_BYTE, TEST_BLOBLIST_SIZE);
->         memset(hdr, '\0', sizeof(*hdr));
-> -       ut_assertok(bloblist_new(TEST_ADDR + BLOBLIST_ALIGN, TEST_BLOBLIST_SIZE,
-> -                                0));
-> +       ut_assertok(bloblist_new(TEST_ADDR + BLOBLIST_ALIGN,
-> +                                TEST_BLOBLIST_SIZE));
->
->         data = bloblist_add(1, 5, BLOBLIST_ALIGN_LOG2 + 1);
->         ut_assertnonnull(data);
-> @@ -370,7 +363,7 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
->         ulong new_addr;
->         ulong new_size;
->
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         old_ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
->
->         /* Add one blob and then one that won't fit */
-> @@ -409,7 +402,7 @@ static int bloblist_test_grow(struct unit_test_state *uts)
->         memset(hdr, ERASE_BYTE, TEST_BLOBLIST_SIZE);
->
->         /* Create two blobs */
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         blob1 = bloblist_add(TEST_TAG, small_size, 0);
->         ut_assertnonnull(blob1);
->         ut_assertok(check_zero(blob1, small_size));
-> @@ -461,7 +454,7 @@ static int bloblist_test_shrink(struct unit_test_state *uts)
->         ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
->
->         /* Create two blobs */
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         blob1 = bloblist_add(TEST_TAG, small_size, 0);
->         ut_assertnonnull(blob1);
->         strcpy(blob1, test1_str);
-> @@ -511,7 +504,7 @@ static int bloblist_test_resize_fail(struct unit_test_state *uts)
->         ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
->
->         /* Create two blobs */
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         blob1 = bloblist_add(TEST_TAG, small_size, 0);
->         ut_assertnonnull(blob1);
->
-> @@ -548,7 +541,7 @@ static int bloblist_test_resize_last(struct unit_test_state *uts)
->         hdr = ptr;
->
->         /* Create two blobs */
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->         blob1 = bloblist_add(TEST_TAG, small_size, 0);
->         ut_assertnonnull(blob1);
->
-> @@ -593,7 +586,7 @@ static int bloblist_test_blob_maxsize(struct unit_test_state *uts)
->
->         /* At the start there should be no records */
->         clear_bloblist();
-> -       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0));
-> +       ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE));
->
->         /* Add a blob that takes up all space */
->         size = TEST_BLOBLIST_SIZE - sizeof(struct bloblist_hdr) -
-> --
-> 2.25.1
->
+I think the vendor tool somehow dealt with it (but it might have 
+depended on some weird stuff in GPMI NAND), I don't think I ever used 
+that tool myself.
