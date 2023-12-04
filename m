@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C201C4167B
-	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC94FC46CA3
+	for <u-boot@archiver.kernel.org>; Mon,  4 Dec 2023 08:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 874AC8784C;
-	Mon,  4 Dec 2023 09:07:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 01FD5877FF;
+	Mon,  4 Dec 2023 09:21:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S/Q2WSYZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fbyYVHH/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D20876A3; Mon,  4 Dec 2023 09:07:13 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 8C89687812; Mon,  4 Dec 2023 09:21:08 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BFB387716
- for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:07:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F61687561
+ for <u-boot@lists.denx.de>; Mon,  4 Dec 2023 09:21:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-32f8441dfb5so3375078f8f.0
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:07:11 -0800 (PST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-50be3eed85aso2362921e87.2
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 00:21:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1701677230; x=1702282030; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YhBSbzVUOCFZ5r3U5+QJgg7hWkG9vh0zASLGsEtXd98=;
- b=S/Q2WSYZM6agvBWdqca9LiKMtgOn6PjSj6LnR1lqlFmraU0Mfk3/GYbVCx3j+QUJZE
- kPBMkTnSOrgRLtjCnynvnpE+/0yq86CyJ0K92FOGtY/6NLhh5kqk206EG93xEL2tUApm
- qbdQpl3J/rKBlV0WOCFT6keBYZp4Hd0Fvzh4j9L9DKzhq1XRAZNljBNg4S9c+WeiJrxA
- Gzq5Osm9ZkhmePg8Y8RWfpQTXfGyC/0yTempiq38yijwXcqJwupTY4XI0ukx5fejhHCH
- s+T06zaz8/u10aNIyEJtmp7sP9f2WM9VuhJUXJ9DV9YbUqgXGcJt8/7S051SjFtoxhBD
- 0y2w==
+ d=gmail.com; s=20230601; t=1701678065; x=1702282865; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Yd/gvuADHKkSYhqiTvYTIgyJEQCcW6AJKR1Th0pRVYA=;
+ b=fbyYVHH/Ek9AYjTmjrBZWM/Qpqn06RxRAMkK/EUts9RGDgWEmvv9cbassUcHxnfWbX
+ hEwhJoN4vrV+zyyw6x2FWfKlBp6xXYmZFNuXSSFt0mS0DeLhnpTwAHjcRwNxMB8u1RRA
+ 6kITm6/hcrSMpptHPHcGngWx7FCpAnHfU58zofu8YjBEKkkZcmqqfDpUUOm8ZwZOTx6W
+ G9hucUGINyddoXYiNbtukHMjByqZ59m4nvSBij9ftjUWDZmhsNwa9z3+lvAgnwTAFvDF
+ ExCSl7M6kL8fZ/0ZY0vDBJ1xpmhTuAYHilScLG/A96Votbz/YCap+JopmgBKHr6N0cx5
+ M6tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701677230; x=1702282030;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YhBSbzVUOCFZ5r3U5+QJgg7hWkG9vh0zASLGsEtXd98=;
- b=P891UsFOyUnds1MEbv54eeGt6G/qhQa9QPOpZv/9ARf+4VVbyA5Qt2ejSDx00X5Zre
- qKwQBaWzEO9LT6gUppgAE85c83BHD9JmCjaaFFC/TgiLMawHhPqRJCKciRjWsSTAZdH0
- RiEFxJYgN0xSxMuD0n5MMscO0r2oqrwLlUQVKPHU6LwNeRH5heeMKB1y8WDy5tsFpPDp
- s3uyPV1nFhB+48lLluAGux86dm2Y4TPIXyuRQRNJZdTTCWQtCodxD6i1wixjtwb67VZ9
- q/8spr3KFM/TiHCCaIb0SccK98zj3e4xI+UOUylwx4ug8W1P/YY7AxDrPBb4Zgkh2HKN
- AlXA==
-X-Gm-Message-State: AOJu0YyH8hDx8jciTfKJwz9a0yyuE9xaonHzHkPRgIxslcQZc7pJ58Ui
- W//GM0A/A6r7q6OaWNpeMK8oWAf1XippOaXpp+c=
-X-Google-Smtp-Source: AGHT+IF3eMW/f+Jy9VGKFsiPFf9rbfF5mHLbGZyLvq0WWTzwdPYtfiYFN8PIvD0Hq+5EI5DaGqh6iI2L7ZGP3LGXaAw=
-X-Received: by 2002:a5d:460b:0:b0:333:2fd2:6f7e with SMTP id
- t11-20020a5d460b000000b003332fd26f7emr3161409wrq.136.1701677230329; Mon, 04
- Dec 2023 00:07:10 -0800 (PST)
-MIME-Version: 1.0
-References: <20231123110222.15116-1-clamor95@gmail.com>
- <20231123110222.15116-5-clamor95@gmail.com>
-In-Reply-To: <20231123110222.15116-5-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1701678065; x=1702282865;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Yd/gvuADHKkSYhqiTvYTIgyJEQCcW6AJKR1Th0pRVYA=;
+ b=k04rf1Al5YKU09rmD06DcywgC8hKKVOs5aL8gfSRGjmTzggOhNI/Yk0evrT1f3vqEj
+ PZx+RFW1tnPFFXVyRbEPfGfztlVLLMbI63QWz3TH6ide3dwRCcUpkXK0R6iV/x+8AXXG
+ 5tgYdHt6j+VAE0w/VDA0DxTgeL1zzyVSV7Ozrx3LNWz2G1Yv+khXS9sYVNVzjvl6pfIR
+ RfTCYgWG3GW87OQ9RWFd2nytHbiTEx2GMgp5Fd22DLbwTmLBJAunzTss/yQlNFHUsN7e
+ 7ZSFrro9vaeEG8Qe+CBuPRo/hXSiS8YicFWfuQ9nvFX+auwkr31IzIDdgkdWoDkolm3Y
+ bZuQ==
+X-Gm-Message-State: AOJu0YyL6OiVRlptgzUIt3/IRMTq+fy34Wq2wn64t432xhLvtaNPSEP/
+ 9mvflsdPsxzgqCm2jGcAVFY=
+X-Google-Smtp-Source: AGHT+IHHlNHpaJdDYpMzxzNECerpFUz4xDwuIDcXXO5zrJ176ctmVYPCQC4u9+WzefABwQ1J/ZvNsg==
+X-Received: by 2002:a05:6512:2c95:b0:50b:ccc1:2028 with SMTP id
+ dw21-20020a0565122c9500b0050bccc12028mr3166461lfb.51.1701678065449; 
+ Mon, 04 Dec 2023 00:21:05 -0800 (PST)
+Received: from xeon.. ([188.163.112.52]) by smtp.gmail.com with ESMTPSA id
+ q16-20020a19a410000000b0050bfe62b073sm3655lfc.170.2023.12.04.00.21.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Dec 2023 00:21:05 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 4 Dec 2023 10:06:59 +0200
-Message-ID: <CAPVz0n29nSiJb6oV_dVDtPLuKgm0-g=ZT3jiiQWuZQp-pub-Mg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/5] lib: membuff: fix readline not returning line in
- case of overflow
-To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Ion Agorria <ion@agorria.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Harald Seiler <hws@denx.de>, 
- Sean Anderson <sean.anderson@seco.com>, Heiko Schocher <hs@denx.de>, 
- Dmitrii Merkurev <dimorinny@google.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ramin Khonsari <raminterex@yahoo.com>,
+ Jianlong Huang <jianlong.huang@starfivetech.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Emil Renner Berthing <kernel@esmil.dk>,
+ Kuan Lim Lee <kuanlim.lee@linux.starfivetech.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: [PATCH v1 0/8] Convert Tegra pinctrl to DM
+Date: Mon,  4 Dec 2023 10:20:46 +0200
+Message-Id: <20231204082054.4943-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,68 +95,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon!
+Create a DM supported wrapper arround existing Tegra pinmux logic.
+This implementation is backwards compatible with all existing board
+setups and early stages of setup. All new boards must be device tree
+based. Linux dts pinmux nodes are fully compatible with this driver.
 
-This is the latest iteration of commit, one you have checked is
-already outdated.
-Sorry for misunderstanding.
+As an example I have converted recently merged T30 boards to this
+layout (I have those devices and was able to test them properly) and
+Paz00 T20 board which was tested as well by owner.
 
-Best regards,
-Svyatoslav R.
+Svyatoslav Ryhel (8):
+  ARM: mach-tegra: rearrange SPL configs
+  drivers: pinctrl: create Tegra DM pinctrl driver
+  drivers: pinctrl: tegra: incorporate existing code
+  board: asus: grouper: switch to DM pinmux
+  board: lg: x3-t30: switch to DM pinmux
+  board: asus: transformer: switch to DM pinmux
+  board: htc: endeavoru: switch to DM pinmux
+  board: compal: paz00: clean up the board
 
-=D1=87=D1=82, 23 =D0=BB=D0=B8=D1=81=D1=82. 2023=E2=80=AF=D1=80. =D0=BE 13:0=
-2 Svyatoslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> From: Ion Agorria <ion@agorria.com>
->
-> If a line overflows readline's maxlen it won't advance the membuffer
-> and will return 0 as read amount which isn't even documented.
-> Fix by removing this behavior alltogether.
->
-> Signed-off-by: Ion Agorria <ion@agorria.com>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->  lib/membuff.c | 10 ----------
->  1 file changed, 10 deletions(-)
->
-> diff --git a/lib/membuff.c b/lib/membuff.c
-> index 36dc43a523..f582193dcd 100644
-> --- a/lib/membuff.c
-> +++ b/lib/membuff.c
-> @@ -292,15 +292,12 @@ int membuff_readline(struct membuff *mb, char *str,=
- int maxlen, int minch)
->  {
->         int len;  /* number of bytes read (!=3D string length) */
->         char *s, *end;
-> -       bool ok =3D false;
-> -       char *orig =3D str;
->
->         end =3D mb->head >=3D mb->tail ? mb->head : mb->end;
->         for (len =3D 0, s =3D mb->tail; s < end && len < maxlen - 1; str+=
-+) {
->                 *str =3D *s++;
->                 len++;
->                 if (*str =3D=3D '\n' || *str < minch) {
-> -                       ok =3D true;
->                         break;
->                 }
->                 if (s =3D=3D end && mb->tail > mb->head) {
-> @@ -309,13 +306,6 @@ int membuff_readline(struct membuff *mb, char *str, =
-int maxlen, int minch)
->                 }
->         }
->
-> -       /* couldn't get the whole string */
-> -       if (!ok) {
-> -               if (maxlen)
-> -                       *orig =3D '\0';
-> -               return 0;
-> -       }
-> -
->         /* terminate the string, update the membuff and return success */
->         *str =3D '\0';
->         mb->tail =3D s =3D=3D mb->end ? mb->start : s;
-> --
-> 2.40.1
->
+ arch/arm/dts/tegra20-paz00.dts                |    4 +-
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi |  712 ++++++++++
+ .../dts/tegra30-asus-nexus7-grouper-E1565.dts |  113 ++
+ .../dts/tegra30-asus-nexus7-grouper-PM269.dts |  113 ++
+ .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |  149 +++
+ arch/arm/dts/tegra30-asus-p1801-t.dts         |  982 ++++++++++++++
+ arch/arm/dts/tegra30-asus-tf201.dts           |   45 +
+ arch/arm/dts/tegra30-asus-tf300t.dts          |   45 +
+ arch/arm/dts/tegra30-asus-tf300tg.dts         |  128 ++
+ arch/arm/dts/tegra30-asus-tf300tl.dts         |  163 +++
+ arch/arm/dts/tegra30-asus-tf600t.dts          |  889 +++++++++++++
+ arch/arm/dts/tegra30-asus-tf700t.dts          |   53 +
+ arch/arm/dts/tegra30-asus-transformer.dtsi    |  984 ++++++++++++++
+ arch/arm/dts/tegra30-htc-endeavoru.dts        | 1147 +++++++++++++++++
+ arch/arm/dts/tegra30-lg-p880.dts              |   90 ++
+ arch/arm/dts/tegra30-lg-p895.dts              |   93 ++
+ arch/arm/dts/tegra30-lg-x3.dtsi               |  845 ++++++++++++
+ arch/arm/include/asm/arch-tegra114/pinmux.h   |  303 +++++
+ arch/arm/include/asm/arch-tegra124/pinmux.h   |  327 +++++
+ arch/arm/include/asm/arch-tegra20/pinmux.h    |  291 +++++
+ arch/arm/include/asm/arch-tegra210/pinmux.h   |  394 ++++++
+ arch/arm/include/asm/arch-tegra30/pinmux.h    |  381 ++++++
+ arch/arm/mach-tegra/Kconfig                   |   16 +-
+ arch/arm/mach-tegra/Makefile                  |    1 -
+ arch/arm/mach-tegra/board.c                   |    6 +-
+ arch/arm/mach-tegra/board2.c                  |    2 +-
+ arch/arm/mach-tegra/tegra114/Makefile         |    2 +-
+ arch/arm/mach-tegra/tegra124/Makefile         |    2 -
+ arch/arm/mach-tegra/tegra20/Makefile          |    2 +-
+ arch/arm/mach-tegra/tegra210/Makefile         |    1 -
+ arch/arm/mach-tegra/tegra30/Makefile          |    2 +-
+ board/asus/grouper/grouper.c                  |   18 -
+ board/asus/grouper/pinmux-config-grouper.h    |  362 ------
+ .../pinmux-config-transformer.h               |  365 ------
+ board/asus/transformer-t30/transformer-t30.c  |   23 -
+ board/compal/paz00/Makefile                   |    8 -
+ board/compal/paz00/paz00.c                    |   53 -
+ board/htc/endeavoru/endeavoru.c               |   14 -
+ board/htc/endeavoru/pinmux-config-endeavoru.h |  362 ------
+ board/lg/x3-t30/Kconfig                       |   12 -
+ board/lg/x3-t30/configs/p880.config           |    1 -
+ board/lg/x3-t30/configs/p895.config           |    1 -
+ board/lg/x3-t30/pinmux-config-x3.h            |  449 -------
+ board/lg/x3-t30/x3-t30.c                      |   23 -
+ configs/paz00_defconfig                       |    3 +
+ drivers/pinctrl/Kconfig                       |    1 +
+ drivers/pinctrl/Makefile                      |    1 +
+ drivers/pinctrl/tegra/Kconfig                 |   18 +
+ drivers/pinctrl/tegra/Makefile                |   16 +
+ .../pinctrl/tegra/funcmux-tegra114.c          |    0
+ .../pinctrl/tegra/funcmux-tegra124.c          |    0
+ .../pinctrl/tegra/funcmux-tegra20.c           |    0
+ .../pinctrl/tegra/funcmux-tegra210.c          |    0
+ .../pinctrl/tegra/funcmux-tegra30.c           |    0
+ drivers/pinctrl/tegra/pinctrl-tegra.c         |  248 ++++
+ drivers/pinctrl/tegra/pinctrl-tegra20.c       |  177 +++
+ .../pinctrl/tegra}/pinmux-common.c            |    0
+ .../pinctrl/tegra/pinmux-tegra114.c           |    0
+ .../pinctrl/tegra/pinmux-tegra124.c           |    0
+ .../pinctrl/tegra/pinmux-tegra20.c            |    0
+ drivers/pinctrl/tegra/pinmux-tegra210.c       |  190 +++
+ .../pinctrl/tegra/pinmux-tegra30.c            |    0
+ include/configs/x3-t30.h                      |   13 +-
+ 63 files changed, 8920 insertions(+), 1723 deletions(-)
+ delete mode 100644 board/asus/grouper/pinmux-config-grouper.h
+ delete mode 100644 board/asus/transformer-t30/pinmux-config-transformer.h
+ delete mode 100644 board/compal/paz00/Makefile
+ delete mode 100644 board/compal/paz00/paz00.c
+ delete mode 100644 board/htc/endeavoru/pinmux-config-endeavoru.h
+ delete mode 100644 board/lg/x3-t30/pinmux-config-x3.h
+ create mode 100644 drivers/pinctrl/tegra/Kconfig
+ create mode 100644 drivers/pinctrl/tegra/Makefile
+ rename arch/arm/mach-tegra/tegra114/funcmux.c => drivers/pinctrl/tegra/funcmux-tegra114.c (100%)
+ rename arch/arm/mach-tegra/tegra124/funcmux.c => drivers/pinctrl/tegra/funcmux-tegra124.c (100%)
+ rename arch/arm/mach-tegra/tegra20/funcmux.c => drivers/pinctrl/tegra/funcmux-tegra20.c (100%)
+ rename arch/arm/mach-tegra/tegra210/funcmux.c => drivers/pinctrl/tegra/funcmux-tegra210.c (100%)
+ rename arch/arm/mach-tegra/tegra30/funcmux.c => drivers/pinctrl/tegra/funcmux-tegra30.c (100%)
+ create mode 100644 drivers/pinctrl/tegra/pinctrl-tegra.c
+ create mode 100644 drivers/pinctrl/tegra/pinctrl-tegra20.c
+ rename {arch/arm/mach-tegra => drivers/pinctrl/tegra}/pinmux-common.c (100%)
+ rename arch/arm/mach-tegra/tegra114/pinmux.c => drivers/pinctrl/tegra/pinmux-tegra114.c (100%)
+ rename arch/arm/mach-tegra/tegra124/pinmux.c => drivers/pinctrl/tegra/pinmux-tegra124.c (100%)
+ rename arch/arm/mach-tegra/tegra20/pinmux.c => drivers/pinctrl/tegra/pinmux-tegra20.c (100%)
+ create mode 100644 drivers/pinctrl/tegra/pinmux-tegra210.c
+ rename arch/arm/mach-tegra/tegra30/pinmux.c => drivers/pinctrl/tegra/pinmux-tegra30.c (100%)
+
+-- 
+2.40.1
+
