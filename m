@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F22C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E49F4C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7125B86DD1;
-	Tue,  5 Dec 2023 12:13:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 30608878BD;
+	Tue,  5 Dec 2023 12:16:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="1G4VuBHo";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75E4B8772E; Tue,  5 Dec 2023 12:13:40 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED6D8878B1; Tue,  5 Dec 2023 12:16:12 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF85F86D12
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:13:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A457386D12
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:16:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-548f853fc9eso7060966a12.1
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:13:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701774817; x=1702379617;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PPmcKMnN9cNPp+saV71SwCmnUuy9G7pzygPtAIGnYcw=;
- b=1G4VuBHoLjk4OHlyCcEslFlSJtPZ+T4jkFYDX+/3UTJWDMdCShVtjD8XHHlXQIKGUR
- x3PY+nHlBy33sYz5dFMF/wQC+pZj0EsRLIqMcljEz0wgWN/U1U3mgDJHu3k96A6CekkL
- qNYs/oLEzfeu1nV+bitpB2M5ZzPE05RXnUWJxcqDgUCqTm2aEByC+ygv+YYRT9m/6Cli
- yN4bhYKSmIp+FdtBm9NpEdBUwFYzwSfUOKcpgNor2fdygP20PTBq4GTBEd5uL7ZhY3mj
- 143HooyQc6viaT9MzX/Us6v8QwrTSTficMtOWJptMgZ8rgeGKvgOtqPDwJqsfoFQ8fAk
- 4xbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701774817; x=1702379617;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PPmcKMnN9cNPp+saV71SwCmnUuy9G7pzygPtAIGnYcw=;
- b=sYtCl1OxJtNYRGfKOcMKLbsjrB6A4h75lyYjuycoEqrzf61NIQBm5aARyct3w2M8yQ
- uYb1FmyJ6/tZZpCMbc75gqguHT1xWRFaSZmkMeDE5rTwZEdJJPdPprInxTo1xqjgXapa
- CIYrL3tq0RgYspVDl4BTmj9y1U9PKPOyu7KvxmHcxZnuKyHDRQqXL+m5lKQ3fFEVpM3s
- XR8lbzY8+FjQaLAAtLgLxjaXuwSMYNvplVAQe/5eXmCa66tYKGATV6Qex7zgLs2+A/Ez
- WlHQ/Azm1ESd+MVOEr9tsyznRI4DERk7bEllSmBL0CwNND1OWeg3l/xTUKi8nRy31mFx
- r/8w==
-X-Gm-Message-State: AOJu0YwwaGEWM+Zi48fZ6Yqny3x6IeBp8Fg76UDfbl2kLxmA3DLUQYBX
- Vwo5P4bc5oHslWtEIysn9V357swHtUd4+S63SwauAw==
-X-Google-Smtp-Source: AGHT+IG8t6xWc5LLJP9Xera4a/nM/TmCggvWQzJEAi0fbSaNTLNapWnqT2Gd3WBwpGEVf3gjJLHYsQ==
-X-Received: by 2002:a17:906:fcba:b0:a16:88e8:2de7 with SMTP id
- qw26-20020a170906fcba00b00a1688e82de7mr2045849ejb.23.1701774816707; 
- Tue, 05 Dec 2023 03:13:36 -0800 (PST)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com.
- [209.85.218.52]) by smtp.gmail.com with ESMTPSA id
- lo23-20020a170906fa1700b00a1cf0d8d514sm111889ejb.79.2023.12.05.03.13.36
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Dec 2023 03:13:36 -0800 (PST)
-Received: by mail-ej1-f52.google.com with SMTP id
- a640c23a62f3a-a1b75f59a12so250952366b.3
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:13:36 -0800 (PST)
-X-Received: by 2002:a17:906:dd7:b0:a19:d40a:d257 with SMTP id
- p23-20020a1709060dd700b00a19d40ad257mr2154111eji.291.1701774815959; Tue, 05
- Dec 2023 03:13:35 -0800 (PST)
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1rATPF-0002Xs-96; Tue, 05 Dec 2023 12:16:01 +0100
+Message-ID: <653b592b-bd6a-48f8-acca-c617c5c8c1a3@pengutronix.de>
+Date: Tue, 5 Dec 2023 12:15:58 +0100
 MIME-Version: 1.0
-References: <20231119165501.1305136-1-i@shantur.com>
- <CAHc5_t3MwUvFdQQaZGeONxS-JNuB4mYXyU9YSexN8bCbQUTRYQ@mail.gmail.com>
- <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Tue, 5 Dec 2023 11:13:24 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t0+o5FvgpLUDAWLq6932fapzVDy=+47LQUcsAPT-3arWQ@mail.gmail.com>
-Message-ID: <CAHc5_t0+o5FvgpLUDAWLq6932fapzVDy=+47LQUcsAPT-3arWQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] bootflow: bootmeth_efi: Fix network efi boot.
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
+Content-Language: en-US
+To: Doug Anderson <dianders@chromium.org>, Simon Glass <sjg@chromium.org>
+Cc: linux-arm-kernel@lists.infradead.org,
+ Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
+ lkml <linux-kernel@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
+ linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
+References: <20231129172200.430674-1-sjg@chromium.org>
+ <20231129172200.430674-3-sjg@chromium.org>
+ <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
+ <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
+ <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
+ <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
+ <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
+ <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
+ <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
+ <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
+ <5e8f42f8-2b03-4033-b6d2-9b3139f081d5@pengutronix.de>
+ <CAPnjgZ2RjNzqJTRZSWvuscQhs+f8CG=fDcEO=qKXNeQLP53LnQ@mail.gmail.com>
+ <CAD=FV=WXQrbnjeVOLp--vmLzScvW9VLFRu+apSY4WnL9JFk-AQ@mail.gmail.com>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <CAD=FV=WXQrbnjeVOLp--vmLzScvW9VLFRu+apSY4WnL9JFk-AQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,32 +81,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hello,
 
-On Tue, Dec 5, 2023 at 12:52=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Shantur,
->
-> On Mon, 4 Dec 2023 at 05:38, Shantur Rathore <i@shantur.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Sun, Nov 19, 2023 at 4:56=E2=80=AFPM Shantur Rathore <i@shantur.com>=
- wrote:
-> > >
-> > >
-> > > Currently bootmeth_efi crashes while doing a network (dhcp) boot.
-> > > This patch series fixes issues and both network and disk boot works.
-> > >
-> > How can I help to get this patch series merged in?
->
-> You can check patchwork [1] to see who it is assigned to. I don't see
-> it in my queue though.
->
-It's with Tom Rini I believe but with status Needs Review / ACK.
+On 04.12.23 18:52, Doug Anderson wrote:> On Sat, Dec 2, 2023 at 8:37 AM Simon Glass <sjg@chromium.org> wrote:
+>> On Thu, 30 Nov 2023 at 19:04, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>> On 30.11.23 21:30, Simon Glass wrote:
+>>>> On Wed, 29 Nov 2023 at 12:54, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
+>>>>> On 29.11.23 20:44, Simon Glass wrote:
+>>>> I don't have an example to hand, but this is the required mechanism of
+>>>> FIT. This feature has been in place for many years and is used by
+>>>> ChromeOS, at least.
+>>>
+>>> I see the utility of a FIT configuration with
+>>>
+>>>     compatible = "vendor,board-rev-a", "vendor,board-rev-b";
+>>>
+>>> I fail to see a utility for a configuration with
+>>>
+>>>     compatible = "vendor,board", "vendor,SoM", "vendor,SoC";
+>>>
+>>> Any configuration that ends up being booted because "vendor,SoC" was matched is
+>>> most likely doomed to fail. Therefore, I would suggest that only the top level
+>>> configuration is written into the FIT configurations automatically.
+>>
+>> Firstly, I am not an expert on this.
+>>
+>> Say you have a board with variants. The compatible string in U-Boot
+>> may be something like:
+>>
+>> "google,veyron-brain-rev1", "google,veyron-brain", "google,veyron",
+>> "rockchip,rk3288";
+>>
+>> If you then have several FIT configurations, they may be something like:
+>>
+>> "google,veyron-brain-rev0", "google,veyron-brain", "google,veyron",
+>> "rockchip,rk3288";
+>> "google,veyron-brain-rev1", "google,veyron-brain", "google,veyron",
+>> "rockchip,rk3288";
+>> "google,veyron-brain-rev2", "google,veyron-brain", "google,veyron",
+>> "rockchip,rk3288";
+>>
+>> You want to choose the second one, since it is a better match than the others.
 
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D382855
+Now imagine, you are building a kernel that has no DT support for the Veyron,
+but instead has support for the Phytec RK3288 PCM-947:
 
-Kind Regards,
-Shantur
+  phytec,rk3288-pcm-947", "phytec,rk3288-phycore-som", "rockchip,rk3288
+
+As far as I understand U-Boot code, A veyron U-Boot would boot the Phytec DT
+if CONFIG_FIT_BEST_MATCH is set, although it's a bad match and a boot failure
+should rather have occurred.
+
+>> +Doug Anderson who knows a lot more about this than me.
+> 
+> Hopefully this is all explained by:
+> 
+> https://docs.kernel.org/arch/arm/google/chromebook-boot-flow.html
+
+Thanks Doug, this was helpful. The missing information to me was that
+depthcharge only compares the top-level board compatible in addition
+to runtime generated board compatibles, unlike what U-Boot seems to do.
+
+barebox only compares its top-level compatible against the FIT configuration
+compatibles, so adding a full compatible list to the configuration nodes as done
+by this series should be ok there as well. I think U-Boot could run into
+issues though as described above.
+
+Out of curiosity: I only heard about Depthcharge before as exploitation toolkit
+for U-Boot. Can you point me at some documentation on what the Depthcharge bootloader
+does what U-Boot (which was presumably used before?) doesn't?
+
+Thanks,
+Ahmad
+
+> 
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+
