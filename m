@@ -4,78 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01002C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 03:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D78C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 04:17:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD676870D2;
-	Tue,  5 Dec 2023 04:00:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id DD4F2870DE;
+	Tue,  5 Dec 2023 05:17:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cQ6NojpF";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tWn7QeLi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C38A6870A0; Tue,  5 Dec 2023 04:00:41 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 289B28715C; Tue,  5 Dec 2023 05:17:48 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F7A5870DE
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 04:00:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7E81870D2
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 05:17:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dimorinny@google.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40b51e26a7aso19395e9.1
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 19:00:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1701745235; x=1702350035; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yL8Sjflz26gYuFQ5n9zBYajO6Gk9Zra0B3VCSsLmxC8=;
- b=cQ6NojpF5J3uUaAfCd/aCI+0V3Qb7j66fh3OdS95GtN7AdH6yS1pcLx36o37biayrc
- it8pwHNUBRrPid6axasYuH0wIiOJv0+N08+2YEKxcXIFB7qS3o4MBwdsRcjB+Akhd3Q+
- +BDph6oplyP5G8lSMsdjMdDprZXm32U7vsUCBT/bO3fQN3ViLoMjkN/DzATraADS0KYx
- zjPVQEYxyOe6esQ0Sr3tyYRXKpREw7d473EvPTrL1qTQjOoAaWcoAyIuBak38CvyECVK
- uYL9MqoT0RQzoXpCY7JIFlLd5o2ucvdt/XERin9QCFTt1FVikSLrZNM3ErMu6bsx/YGf
- ZJ0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701745235; x=1702350035;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yL8Sjflz26gYuFQ5n9zBYajO6Gk9Zra0B3VCSsLmxC8=;
- b=dwg+EzBnfF+Szi/mdT8ek16foypXCwhqJ0GU/PgRCFIN5Dxj40IREVuckBOlCdc1Lj
- yYSOcv+X7wnGuamjMzYM4wqAWG9s1277ERRJfauA3/56NJS43L8Uhl+M3Ye7yK6iN0b5
- /MIt9NJPwtWxHrpN38xGveYxS2Fv/jydFu1BivhTsHd1/VFPb+/Oif0kgIA9gV3Dwi7G
- wcZdFMkEUxJcVTJO95iQGVmTDNoPfAz3GKGDIHoWGTInC8siVO7MvfHCrl47I1BhQBUf
- dQOiUC3TwZNe2BF10ke0ZuSu/7eZxFroT3qVtxV47eGF68OgfYnQ4PCQkKADIf7lbJt+
- dWXQ==
-X-Gm-Message-State: AOJu0Ywsv8oWez4FahqWHy6SPbgMJlOtFdhW4XpSpVZAIMhE9f6I+7h9
- Wzvpk/smT1qOGdBLA5fZSFwdHvG1zgRnbLpK4QNtJw==
-X-Google-Smtp-Source: AGHT+IF/PpoG8hlYLQ6bYo81ivP2fdEWHnhA9ZcitmVvuh2VVQcaGYyFcL+RjZfd4h0zI88CAeHzXeOwiHdkddzUndM=
-X-Received: by 2002:a05:600c:6014:b0:40b:33aa:a2b9 with SMTP id
- az20-20020a05600c601400b0040b33aaa2b9mr516934wmb.4.1701745234768; Mon, 04 Dec
- 2023 19:00:34 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B54HgsH082937;
+ Mon, 4 Dec 2023 22:17:42 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701749862;
+ bh=gauy0L3YQtc+aZkaL8Mq++JCnZOfqV7QLpfyNzXh/oU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=tWn7QeLi2v0hy+vvHfHWLzItcSbdP6JcrW7FiyPfntqKJt4yV8FEiQwtoQbZsd2Yb
+ X9mydy+lEBfXZB20sNqyDhS1w1Fx16rbVyUSG+7VC4TmRRa/MbcBh6oCbiylhbHXs0
+ 35Ux4T7ew7WVw1gH+epsSI/p6qVrsdj2fOErUAHU=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B54HgPm062405
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 4 Dec 2023 22:17:42 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
+ Dec 2023 22:17:42 -0600
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 4 Dec 2023 22:17:42 -0600
+Received: from [172.24.20.156] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B54HdlZ057509;
+ Mon, 4 Dec 2023 22:17:40 -0600
+Message-ID: <aa7c9ee7-4643-4d2e-a553-8623f85c2ddc@ti.com>
+Date: Tue, 5 Dec 2023 09:47:38 +0530
 MIME-Version: 1.0
-References: <20231204003144.899097-1-sjg@chromium.org>
- <20231204003144.899097-6-sjg@chromium.org>
-In-Reply-To: <20231204003144.899097-6-sjg@chromium.org>
-From: Dmitrii Merkurev <dimorinny@google.com>
-Date: Tue, 5 Dec 2023 03:00:23 +0000
-Message-ID: <CAOWkq4kr4xo-swYej0LyCsrsPEQDu2=QEdtpCtzsdwVr3WHeEA@mail.gmail.com>
-Subject: Re: [PATCH 06/14] fastboot: Change fastboot_buf_addr to an address
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Heiko Schocher <hs@denx.de>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Samuel Holland <samuel@sholland.org>, 
- Sean Anderson <sean.anderson@seco.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] arm: mach-k3: j72xx: add new 'virtual' mux
+To: Reid Tonking <reidt@ti.com>, <trini@konsulko.com>
+CC: <nm@ti.com>, <u-boot@lists.denx.de>, <m-chawdhry@ti.com>, <bb@ti.com>,
+ <a-nandan@ti.com>, <vishalm@ti.com>
+References: <20231201213320.1876892-1-reidt@ti.com>
+ <20231201213320.1876892-2-reidt@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20231201213320.1876892-2-reidt@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,166 +81,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Verified this change with AOSP u-boot fastboot flashing tests and it works
-as expected.
 
-Reviewed-by: Dmitrii Merkurev <dimorinny@google.com>
-
-On Mon, Dec 4, 2023 at 12:32=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
-
-> Given the name of this variable, it should be an address, not a
-> pointer. Update this, to make it easier to use with sandbox.
+On 12/2/2023 3:03 AM, Reid Tonking wrote:
+> From: Bryan Brattlof <bb@ti.com>
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> In order for the Cortex-A72s to operate at different frequencies other
+> than the default 2GHz, add in a new 'virtual' mux (a mux that does not
+> physically exist in the clock tree) that can be selected.
+>
+> CC: Vishal Mahaveer <vishalm@ti.com>
+> Signed-off-by: Bryan Brattlof <bb@ti.com>
+> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> Signed-off-by: Reid Tonking <reidt@ti.com>
 > ---
+>   arch/arm/mach-k3/j7200/clk-data.c | 13 +++++++++++--
+>   1 file changed, 11 insertions(+), 2 deletions(-)
 >
->  cmd/fastboot.c                |  2 +-
->  drivers/fastboot/fb_command.c | 13 ++++++++-----
->  drivers/fastboot/fb_common.c  | 15 ++++-----------
->  include/fastboot-internal.h   |  2 +-
->  include/fastboot.h            |  6 +++---
->  5 files changed, 17 insertions(+), 21 deletions(-)
->
-> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-> index c3c19231c988..792e83d372c3 100644
-> --- a/cmd/fastboot.c
-> +++ b/cmd/fastboot.c
-> @@ -159,7 +159,7 @@ NXTARG:
->                 return CMD_RET_USAGE;
->         }
->
-> -       fastboot_init((void *)buf_addr, buf_size);
-> +       fastboot_init(buf_addr, buf_size);
->
->         if (!strcmp(argv[1], "udp"))
->                 return do_fastboot_udp(argc, argv, buf_addr, buf_size);
-> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.=
-c
-> index 5fcadcdf503d..ec030886dbb8 100644
-> --- a/drivers/fastboot/fb_command.c
-> +++ b/drivers/fastboot/fb_command.c
-> @@ -10,6 +10,7 @@
->  #include <fastboot-internal.h>
->  #include <fb_mmc.h>
->  #include <fb_nand.h>
-> +#include <mapmem.h>
->  #include <part.h>
->  #include <stdlib.h>
->  #include <linux/printk.h>
-> @@ -252,7 +253,7 @@ void fastboot_data_download(const void *fastboot_data=
-,
->                 return;
->         }
->         /* Download data to fastboot_buf_addr */
-> -       memcpy(fastboot_buf_addr + fastboot_bytes_received,
-> +       memcpy(map_sysmem(fastboot_buf_addr, 0) + fastboot_bytes_received=
-,
->                fastboot_data, fastboot_data_len);
->
->         pre_dot_num =3D fastboot_bytes_received / BYTES_PER_DOT;
-> @@ -296,13 +297,15 @@ void fastboot_data_complete(char *response)
->   */
->  static void __maybe_unused flash(char *cmd_parameter, char *response)
->  {
-> +       void *buf =3D map_sysmem(fastboot_buf_addr, 0);
+> diff --git a/arch/arm/mach-k3/j7200/clk-data.c b/arch/arm/mach-k3/j7200/clk-data.c
+> index 9b45786a2d4..126627fff47 100644
+> --- a/arch/arm/mach-k3/j7200/clk-data.c
+> +++ b/arch/arm/mach-k3/j7200/clk-data.c
+> @@ -141,6 +141,11 @@ static const char * const k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
+>   	"hsdiv4_16fft_main_0_hsdivout0_clk",
+>   };
+>   
+> +static const char * const main_pll8_sel_extwave_out0_parents[] = {
+> +	"pllfracf_ssmod_16fft_main_8_foutvcop_clk",
+> +	"hsdiv0_16fft_main_8_hsdivout0_clk",
+> +};
 > +
->         if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
-> -               fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr=
-,
-> -                                        image_size, response);
-> +               fastboot_mmc_flash_write(cmd_parameter, buf, image_size,
-> +                                        response);
->
->         if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
-> -               fastboot_nand_flash_write(cmd_parameter, fastboot_buf_add=
-r,
-> -                                         image_size, response);
-> +               fastboot_nand_flash_write(cmd_parameter, buf, image_size,
-> +                                         response);
->  }
->
->  /**
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> index 3576b0677299..07f5946d9ed1 100644
-> --- a/drivers/fastboot/fb_common.c
-> +++ b/drivers/fastboot/fb_common.c
-> @@ -20,7 +20,7 @@
->  /**
->   * fastboot_buf_addr - base address of the fastboot download buffer
->   */
-> -void *fastboot_buf_addr;
-> +ulong fastboot_buf_addr;
->
->  /**
->   * fastboot_buf_size - size of the fastboot download buffer
-> @@ -154,7 +154,7 @@ void fastboot_boot(void)
->                 };
->
->                 snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
-> -                        "0x%p", fastboot_buf_addr);
-> +                        "%lx", fastboot_buf_addr);
->                 printf("Booting kernel at %s...\n\n\n", boot_addr_start);
->
->                 do_bootm(NULL, 0, 2, bootm_args);
-> @@ -214,16 +214,9 @@ void fastboot_set_progress_callback(void
-> (*progress)(const char *msg))
->         fastboot_progress_callback =3D progress;
->  }
->
-> -/*
-> - * fastboot_init() - initialise new fastboot protocol session
-> - *
-> - * @buf_addr: Pointer to download buffer, or NULL for default
-> - * @buf_size: Size of download buffer, or zero for default
-> - */
-> -void fastboot_init(void *buf_addr, u32 buf_size)
-> +void fastboot_init(ulong buf_addr, u32 buf_size)
->  {
-> -       fastboot_buf_addr =3D buf_addr ? buf_addr :
-> -                                      (void *)CONFIG_FASTBOOT_BUF_ADDR;
-> +       fastboot_buf_addr =3D buf_addr ? buf_addr : CONFIG_FASTBOOT_BUF_A=
-DDR;
->         fastboot_buf_size =3D buf_size ? buf_size : CONFIG_FASTBOOT_BUF_S=
-IZE;
->         fastboot_set_progress_callback(NULL);
->  }
-> diff --git a/include/fastboot-internal.h b/include/fastboot-internal.h
-> index bf2f2b3c8914..d3e1c106e23f 100644
-> --- a/include/fastboot-internal.h
-> +++ b/include/fastboot-internal.h
-> @@ -6,7 +6,7 @@
->  /**
->   * fastboot_buf_addr - base address of the fastboot download buffer
->   */
-> -extern void *fastboot_buf_addr;
-> +extern ulong fastboot_buf_addr;
->
->  /**
->   * fastboot_buf_size - size of the fastboot download buffer
-> diff --git a/include/fastboot.h b/include/fastboot.h
-> index 296451f89d44..744ab61cc18a 100644
-> --- a/include/fastboot.h
-> +++ b/include/fastboot.h
-> @@ -103,13 +103,13 @@ int fastboot_set_reboot_flag(enum
-> fastboot_reboot_reason reason);
->   */
->  void fastboot_set_progress_callback(void (*progress)(const char *msg));
->
-> -/*
-> +/**
->   * fastboot_init() - initialise new fastboot protocol session
->   *
-> - * @buf_addr: Pointer to download buffer, or NULL for default
-> + * @buf_addr: Address of download buffer, or 0 for default
->   * @buf_size: Size of download buffer, or zero for default
->   */
-> -void fastboot_init(void *buf_addr, u32 buf_size);
-> +void fastboot_init(ulong buf_addr, u32 buf_size);
->
->  /**
->   * fastboot_boot() - Execute fastboot boot command
-> --
-> 2.43.0.rc2.451.g8631bc7472-goog
->
->
+>   static const char * const mcu_obsclk_outmux_out0_parents[] = {
+>   	"mcu_obsclk_div_out0",
+>   	"gluelogic_hfosc0_clkout",
+> @@ -396,6 +401,7 @@ static const struct clk_data clk_list[] = {
+>   	CLK_DIV("hsdiv4_16fft_main_3_hsdivout2_clk", "pllfracf_ssmod_16fft_main_3_foutvcop_clk", 0x683088, 0, 7, 0, 0),
+>   	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_main_0_sysclkout_clk", k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
+>   	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
+> +	CLK_MUX("main_pll8_sel_extwave_out0", main_pll8_sel_extwave_out0_parents, 2, 0x688040, 0, 1, 0),
+>   	CLK_DIV("mcu_obsclk_div_out0", "wkup_obsclk_mux_out0", 0x43008000, 8, 4, 0, 0),
+>   	CLK_MUX("mcu_obsclk_outmux_out0", mcu_obsclk_outmux_out0_parents, 2, 0x43008000, 24, 1, 0),
+>   	CLK_PLL("pllfracf_ssmod_16fft_main_4_foutvcop_clk", "main_pll4_xref_sel_out0", 0x684000, 0),
+> @@ -545,11 +551,14 @@ static const struct dev_clk soc_dev_clk_data[] = {
+>   	DEV_CLK(288, 14, "board_0_hfosc1_clk_out"),
+>   	DEV_CLK(288, 15, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+>   	DEV_CLK(288, 17, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+> +	DEV_CLK(323, 0, "main_pll8_sel_extwave_out0"),
+> +	DEV_CLK(323, 1, "pllfracf_ssmod_16fft_main_8_foutvcop_clk"),
+> +	DEV_CLK(323, 2, "hsdiv0_16fft_main_8_hsdivout0_clk"),
+>   };
+>   
+>   const struct ti_k3_clk_platdata j7200_clk_platdata = {
+>   	.clk_list = clk_list,
+> -	.clk_list_cnt = 109,
+> +	.clk_list_cnt = 110,
+>   	.soc_dev_clk_data = soc_dev_clk_data,
+> -	.soc_dev_clk_data_cnt = 129,
+> +	.soc_dev_clk_data_cnt = 132,
+Can we think of using ARRAY_SIZE for these number clk_list_cnt and 
+soc_dev_clk_data_cnt
+>   };
