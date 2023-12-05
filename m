@@ -4,73 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19197C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 10:11:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443F0C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 10:21:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17520878A0;
-	Tue,  5 Dec 2023 11:11:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6D7A28789D;
+	Tue,  5 Dec 2023 11:21:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pAW4EyYV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VO8tInkh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79425878A2; Tue,  5 Dec 2023 11:11:46 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 7DBB9878A0; Tue,  5 Dec 2023 11:21:06 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15EC38789D
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 11:11:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 790C2870DF
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 11:21:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5ABcGk048785;
- Tue, 5 Dec 2023 04:11:38 -0600
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5AKvbT073121;
+ Tue, 5 Dec 2023 04:20:57 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701771098;
- bh=hWKYr7CG8hYMoRKPHOcQ051oSxotEEZrFSjaLfit7BE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pAW4EyYVPLpY0REJ+qNVAFurwwWc0U9VJm6sM5SVgSpJlL0IvqKLLJWC2ckzmBT/i
- M3FnEmtTOQ05SxG1wyj5jfHtdI8wG+MelhveYqxcodR05Y43t1LM0DVPUhWoa1XNoF
- 3nNl46OvBVu9XhbM3WzGqOczVTyKcBIRRzvQ4HhM=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5ABcFN112022
+ s=ti-com-17Q1; t=1701771657;
+ bh=XBqJ+HpxwAjpB40RpNxtrWn5TlsSpQYZ2bTXAHJB8b4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=VO8tInkh0zSBgd55Em5cv+PG8yN1zaW1tEYHhd2tHtEEvcqlH0CJF3i+0qXpZbsCy
+ nRSoVvT1csauJHbllPxurDrw0jHQnduSWIJqsNMk642Z5ySYjyA9CRfOBzkzq6tu3q
+ 0YxvtRw2wIfKi9gvR8rarObybwyitvgnn+mrJGQk=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5AKvNt012739
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 04:11:38 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 5 Dec 2023 04:20:57 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 04:11:37 -0600
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:20:57 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 04:11:37 -0600
-Received: from [172.24.227.6] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5ABWTP000592;
- Tue, 5 Dec 2023 04:11:33 -0600
-Message-ID: <cd25577d-71f0-013a-737e-3f407a0898c7@ti.com>
-Date: Tue, 5 Dec 2023 15:41:32 +0530
+ Frontend Transport; Tue, 5 Dec 2023 04:20:57 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5AKuTX012920;
+ Tue, 5 Dec 2023 04:20:56 -0600
+Date: Tue, 5 Dec 2023 15:50:56 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: <marcel.ziswiler@toradex.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, <hs@denx.de>,
+ <christophe.leroy@csgroup.eu>, <mr.bossman075@gmail.com>, <afd@ti.com>,
+ <kamlesh@ti.com>, <nm@ti.com>, <c-shilwant@ti.com>, <u-kumar1@ti.com>
+Subject: Re: [PATCH v2 3/3] doc: board: ti: k3: Mention TI_DM argument
+Message-ID: <20231205102056.dmkh4fntzs4thpdv@uda0497581>
+References: <20231205094220.2301360-1-n-francis@ti.com>
+ <20231205094220.2301360-4-n-francis@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v2 5/6] video: Fill video handoff in video post probe
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <agust@denx.de>, <trini@konsulko.com>,
- <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
- <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>,
- <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
- <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>
-References: <20231110152944.647535-1-devarsht@ti.com>
- <20231110152944.647535-6-devarsht@ti.com>
- <CAPnjgZ1TWnMrKDDbNDdg9TB8bhfW5ga2E7Lpy8HdyvsO46FDsw@mail.gmail.com>
- <c97b9ccd-8dd6-6fab-ebb6-b5b6cb2a1c08@ti.com>
- <CAPnjgZ1VpjsrmPnKcBHXwiqpcGZ63LZPaehS5TC45Gh0xRzbSw@mail.gmail.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <CAPnjgZ1VpjsrmPnKcBHXwiqpcGZ63LZPaehS5TC45Gh0xRzbSw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231205094220.2301360-4-n-francis@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,141 +82,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Neha,
 
-Thanks for the review.
-
-On 02/12/23 23:53, Simon Glass wrote:
-> Hi Devarsh,
+On 15:12-20231205, Neha Malcom Francis wrote:
+> Mention TI_DM argument can be used to fetch a custom DM binary in the
+> A72 build instructions for K3 devices.
 > 
-> On Sat, 25 Nov 2023 at 07:27, Devarsh Thakkar <devarsht@ti.com> wrote:
->>
->> Hi Simon,
->>
->> Thanks for the review.
->>
->> On 13/11/23 01:31, Simon Glass wrote:
->>> Hi Devarsh,
->>>
->>> On Fri, 10 Nov 2023 at 08:29, Devarsh Thakkar <devarsht@ti.com> wrote:
->>>>
->>>> Fill video handoff fields in video_post_probe
->>>> as at this point we have full framebuffer-related
->>>> information.
->>>>
->>>> Also fill all the fields available in video hand-off
->>>> struct as those were missing earlier and U-boot
->>>
->>> U-Boot
->>>
->>>> framework expects them to be filled for some of the
->>>> functionalities.
->>>
->>> Can you wrap your commit messages to closer to 72 chars?
->>>
->>>>
->>>> Reported-by: Simon Glass <sjg@chromium.org>
->>>> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
->>>> ---
->>>> V2:
->>>> - No change
->>>>
->>>> V3:
->>>> - Fix commit message per review comment
->>>> - Add a note explaining assumption of single framebuffer
->>>> ---
->>>>  drivers/video/video-uclass.c | 29 +++++++++++++++++++----------
->>>>  1 file changed, 19 insertions(+), 10 deletions(-)
->>>>
->>>> diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
->>>> index f619b5ae56..edc3376b46 100644
->>>> --- a/drivers/video/video-uclass.c
->>>> +++ b/drivers/video/video-uclass.c
->>>> @@ -154,16 +154,6 @@ int video_reserve(ulong *addrp)
->>>>         debug("Video frame buffers from %lx to %lx\n", gd->video_bottom,
->>>>               gd->video_top);
->>>>
->>>> -       if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(VIDEO_HANDOFF)) {
->>>> -               struct video_handoff *ho;
->>>> -
->>>> -               ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
->>>> -               if (!ho)
->>>> -                       return log_msg_ret("blf", -ENOENT);
->>>> -               ho->fb = *addrp;
->>>> -               ho->size = size;
->>>> -       }
->>>> -
->>>>         return 0;
->>>>  }
->>>>
->>>> @@ -559,6 +549,25 @@ static int video_post_probe(struct udevice *dev)
->>>>
->>>>         priv->fb_size = priv->line_length * priv->ysize;
->>>>
->>>> +       /*
->>>> +        * Set up video handoff fields for passing video blob to next stage
->>>> +        * NOTE:
->>>> +        * This assumes that reserved video memory only uses a single framebuffer
->>>> +        */
->>>> +       if (spl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST)) {
->>>> +               struct video_handoff *ho;
->>>> +
->>>> +               ho = bloblist_add(BLOBLISTT_U_BOOT_VIDEO, sizeof(*ho), 0);
->>>> +               if (!ho)
->>>> +                       return log_msg_ret("blf", -ENOENT);
->>>> +               ho->fb = gd->video_bottom;
->>>> +               ho->size = gd->video_top - gd->video_bottom;
->>>
->>> should be plat->base and plat->size
->>>
->>
->> plat->size contains the unaligned size actually. While reserving video memory,
->> the size of allocation is updated [0] as per default alignment (1 MiB) or
->> alignment requested by driver. So I thought it is better to pass actual
->> allocated size calculated using gd as the next stage receiving hand-off can
->> directly skip the region as per passed size. And since I used gd for
->> calculating size, I thought to stick to using gd for ho->fb too for consistency.
->>
->> Kindly let me know if any queries.
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Reviewed-by: Andrew Davis <afd@ti.com>
+> ---
+>  doc/board/ti/k3.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
 > 
-> This sort of thing would have been useful to put in a comment in the
-> code, or commit message.
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index a127215ce5..f19ee56f29 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -320,6 +320,13 @@ use the `lite` option.
+>   make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
+>          BL31=$TFA_PATH/build/k3/$TFA_BOARD/release/bl31.bin \
+>          TEE=$OPTEE_PATH/out/arm-plat-k3/core/tee-raw.bin
+> +
+> +.. note::
+> +   It is also possible to pick up a custom DM binary by adding TI_DM argument
+> +   pointing to the file. If not provided, it defaults to picking up the DM
+> +   binary from BINMAN_INDIRS. This is only applicable to devices that utilize
+> +   split firmware.
+> +
+>  .. k3_rst_include_end_build_steps_uboot
+>  
+>  At this point you should have every binary needed initialize both the
+> -- 
+> 2.34.1
 > 
 
-Thanks, will add it in comment and commit message.
+For the series
+Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
-> I still don't really see why the 'aligned' size isn't already in plat,
-> after alloc_fb() is called.
-> 
-
-alloc_fb doesn't update plat->size as it is kept intact (unaligned)
-
-Regards
-Devarsh
-
-> Anyway I will leave this to Anatolij
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
->>
->> [0]:
->> https://source.denx.de/u-boot/u-boot/-/blob/u-boot-2023.07.y/drivers/video/video-uclass.c?ref_type=heads#L88
->>
->> Regards
->> Devarsh
->>
->>>> +               ho->xsize = priv->xsize;
->>>> +               ho->ysize = priv->ysize;
->>>> +               ho->line_length = priv->line_length;
->>>> +               ho->bpix = priv->bpix;
->>>> +       }
->>>> +
->>>>         if (IS_ENABLED(CONFIG_VIDEO_COPY) && plat->copy_base)
->>>>                 priv->copy_fb = map_sysmem(plat->copy_base, plat->size);
->>>>
->>>> --
->>>> 2.34.1
->>>>
->>>
->>> Regards,
->>> Simon
+Regards,
+Manorit
