@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2657C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AB6DC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C3E88782F;
-	Tue,  5 Dec 2023 14:47:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F67F878D1;
+	Tue,  5 Dec 2023 14:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dsbf5Cdk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OncJr0aO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B7B9878D1; Tue,  5 Dec 2023 14:47:10 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id A8857878C5; Tue,  5 Dec 2023 14:47:11 +0100 (CET)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 465A6870F4
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:47:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D5A38756E
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2c9ea37ac87so48259551fa.3
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:47:08 -0800 (PST)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2c9ef682264so41355901fa.3
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:47:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701784027; x=1702388827; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701784029; x=1702388829; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=oSVKwPCpUfU+pNF0Xc6YbmXdtGmRtY0Wqn9ElJEQEfU=;
- b=Dsbf5Cdk1Ht23NV9ap2ZHaS/4Fmr+DLbGEdp+CKVH3tKDFJN0XmE/L5h8E5xuQ7szg
- TdQjWMs5xBCq6wQMTffNsud2gDth1w26M7PXZDkjMXIiE4KLn7I9KxONJEauoQCiQGiw
- Ipm43SaDE+jl3MMA0QnfO7I7WldJdQDoboQ++vKxrhA2n3kosrrYRrRJbffUplUfemZ3
- cSzu8SomOfC4UwF6sGZ+19uVxLXfDtI2OUUdfGWp0MfOJKwCwOVXZB6yC+uO4rcNfq1J
- YRj1aMzN6X0sR7ETwVNOeNJfJD6gLdOamugUXn1UFQNwsft1F5J7P3GEpu3BcSkvwaGV
- jdVw==
+ :reply-to; bh=0IM0fW9uXqSMV1BCpMmBKS79BQtYouW0qlOzkB5YEhQ=;
+ b=OncJr0aOlFpodjKChdZz7rnZSPatgueFQYKcbn3mr3U9VtGc+vbZNa/TiBkmVR3ma8
+ l6ENix57aYUC4EwabAK3kXqbZqQrkQrkPiB4ut+8mtQfWIv+oJOHIZ8OS9BS+Vg/dScH
+ HIWEP7iOtoRiCx96bShIPWHtkC6ZVFqLc4ewAU5lOdFqmNw/pw3weEiaxIyyphblK/II
+ I33I/e/D82jP8NzRqs/zaYi1j2r9yIXNvdnL4RJuwYXIoPAGMI1HwqZac9+BIfklxcaS
+ k8hRrBBypHsbuHk7/jf2y2YswmK+/4pzEJYNYwZLEGm8zlCEDko1eid7pUTUNyoB/V65
+ j4Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701784027; x=1702388827;
+ d=1e100.net; s=20230601; t=1701784029; x=1702388829;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oSVKwPCpUfU+pNF0Xc6YbmXdtGmRtY0Wqn9ElJEQEfU=;
- b=b27cwRXu3LmEqAucIv2LBNyU9jGLN1XvK4vjdVkJDoZ1PxJJ2gt796Djg/53o2UZi1
- 0+vZqyZMENLAbOawvQvnAIvzQYwJyROY7m4/OqNXnzAtbl3oFyTfdhatc0uLSFfLHn5x
- 1Aq4sVfOzsO7EWjPYnzEpSVVAP6LlNZ3j/LvDS5kdb2pjh8DxJPuqOIFh21OODWSwqGQ
- Jrp4QTyQbapdt/PZVm1cbv+KtkJuQKSod7Jt/gOolH070mcqYxqT1gEdBRWN93BgQGIN
- 05yVjPs/UaQ+Jwp5Cjq1TQSpD+cYWR6+e1Dq6yWxDAGw/lOUgeMuVyUGMSo5tLmdombx
- 2GSw==
-X-Gm-Message-State: AOJu0YyggMTAfkpfORt55ULfeLEyudieJTlDxc9Nb21qUYImqJPJnTmQ
- RXZvS5KwdoTuM1vkPRmZ7+Zpdw==
-X-Google-Smtp-Source: AGHT+IE1Eur/kxpotn1+MRcCg8X7mPPWGIaPqJbwwv3bxH9m2GZKjxrn2/JvaijQ5AgVAyF8nVZO0w==
-X-Received: by 2002:a2e:9d0c:0:b0:2ca:2bd:3cf1 with SMTP id
- t12-20020a2e9d0c000000b002ca02bd3cf1mr1587962lji.8.1701784027649; 
- Tue, 05 Dec 2023 05:47:07 -0800 (PST)
+ bh=0IM0fW9uXqSMV1BCpMmBKS79BQtYouW0qlOzkB5YEhQ=;
+ b=jmexKIGk1qvsJ84viDZvSViqR+WP0duM3Bu9gg2Uvt1ecxeWr/+Q7VnlvbZ4GJ7ICS
+ 1XmmmCPF/C1T2Uvyr40W/ZaiqQiwuinUaRzVOyhxZ9000cfF2IQ/W9T/uDV62bo2b8JK
+ VM9S1b5r4SRoDcTxypTILj0S2Gkz/yyFrAePrfFatOZ5qRR8EFMp94QQGuH5urCFxE81
+ dwGiuKl2i3LmlqN82Ep8DaUx8xH/hZHgPGcVUOOzI7lF0oGisFhDVROezArtqj7t2AE7
+ 6OiXROS9wuueGwcLZqqZ8CAwox+0+t0OcvJPThoT+bo2eKivlMUcCs01gbRyp5fFrJHO
+ fAiA==
+X-Gm-Message-State: AOJu0Yy8GldFGYnPSADP+CxkkhKrqE7t0M12Bt9SRr9n5uNxHROQTzb9
+ e170flncv+TOt0OdjIlu4c2TtQ==
+X-Google-Smtp-Source: AGHT+IGTyD9ucxhWmZUDM+/jx4v1mmAl6wpPmYFykhDbF1E/esyv6y8PvwW+gLv3MUDrD/jqTNNjBg==
+X-Received: by 2002:a2e:94c1:0:b0:2ca:733:2edd with SMTP id
+ r1-20020a2e94c1000000b002ca07332eddmr1277090ljh.29.1701784029037; 
+ Tue, 05 Dec 2023 05:47:09 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.47.06
+ d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.47.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 05:47:07 -0800 (PST)
+ Tue, 05 Dec 2023 05:47:08 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 05 Dec 2023 13:46:53 +0000
-Subject: [PATCH v6 8/9] spmi: msm: fix register range names
+Date: Tue, 05 Dec 2023 13:46:54 +0000
+Subject: [PATCH v6 9/9] pmic: qcom: dont use dev_read_addr to get USID
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231205-b4-qcom-dt-compat-v6-8-61d104a8f920@linaro.org>
+Message-Id: <20231205-b4-qcom-dt-compat-v6-9-61d104a8f920@linaro.org>
 References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 In-Reply-To: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
@@ -83,13 +83,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6866;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5484;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=T9w4U36ymjfw6HJqQmOKxMGleoY2Y7gEQwltDdAA430=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zXMzX+9nDz5T+3y16oWgu+Zn/Y3y/+bsFkq7tUHAL
- XIGX+PSjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRn1sYGSap1siEv2yezn/k
- 2NF7m/Ytve1mN++4j4zPs0mXhEqbpWIZ/uc/fP980ZV/9zabJXUeqj5z/AjrQd4Di3mqGBekFJ2
- LN7IEAA==
+ bh=9ytif4x9U94M7vgDvzmautDnQYaOj5aF7f1BUfpALPg=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zXOv9nGVx1+7rX7x8I/2rMx5l6xPB6Y9uWw17Tt3V
+ HPf9N8RHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiB9Yx/I/ViPqldDJxTruR
+ pTZLZu+9ayEFvN8KjHjWsWXv2HnXRIeRYcH/qX6NrZPz513KeH7n943vtWxWmzZ27uh2UxY+wf9
+ wMSsA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,187 +108,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The core and chnl register ranges were swapped on SDM845. Fix it, and
-fetch the register ranges by name instead of by index.
+Linux DTs stuff a value indicating if the USID is a USID or a GSID in the
+reg property, the Linux SPMI driver then reads the two address cells
+separately. U-boot's dev_read_addr() doesn't know how to handle this, so
+use ofnode_read_u32_index() to get just the USID.
 
-Drop the cosmetic "version" variable and clean up the debug logging.
+The Qcom pmic driver doesn't have support for GSID handling, so just
+ignore the second value for now.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/qcs404-evb.dts                |  7 +++--
- arch/arm/dts/sdm845.dtsi                   |  2 +-
- doc/device-tree-bindings/spmi/spmi-msm.txt | 26 -----------------
- drivers/spmi/spmi-msm.c                    | 46 ++++++++++++------------------
- 4 files changed, 23 insertions(+), 58 deletions(-)
+ doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt | 94 ------------------------
+ drivers/power/pmic/pmic_qcom.c                   | 13 +++-
+ 2 files changed, 10 insertions(+), 97 deletions(-)
 
-diff --git a/arch/arm/dts/qcs404-evb.dts b/arch/arm/dts/qcs404-evb.dts
-index bd2e303e10f4..07bf7dd0b32f 100644
---- a/arch/arm/dts/qcs404-evb.dts
-+++ b/arch/arm/dts/qcs404-evb.dts
-@@ -362,9 +362,10 @@
- 
- 		spmi@200f000 {
- 			compatible = "qcom,spmi-pmic-arb";
--			reg = <0x200f000 0x1000
--			       0x2400000 0x400000
--			       0x2c00000 0x400000>;
-+			reg = <0x200f000 0x001000>,
-+			      <0x2400000 0x800000>,
-+			      <0x2c00000 0x800000>;
-+			reg-names = "core", "chnls", "obsrvr";
- 			#address-cells = <0x1>;
- 			#size-cells = <0x1>;
- 
-diff --git a/arch/arm/dts/sdm845.dtsi b/arch/arm/dts/sdm845.dtsi
-index a26e9f411ee0..96c9749a52c0 100644
---- a/arch/arm/dts/sdm845.dtsi
-+++ b/arch/arm/dts/sdm845.dtsi
-@@ -63,7 +63,7 @@
- 			reg = <0xc440000 0x1100>,
- 			      <0xc600000 0x2000000>,
- 			      <0xe600000 0x100000>;
--			reg-names = "cnfg", "core", "obsrvr";
-+			reg-names = "core", "chnls", "obsrvr";
- 			#address-cells = <0x1>;
- 			#size-cells = <0x1>;
- 
-diff --git a/doc/device-tree-bindings/spmi/spmi-msm.txt b/doc/device-tree-bindings/spmi/spmi-msm.txt
+diff --git a/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt b/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt
 deleted file mode 100644
-index ae47673b768b..000000000000
---- a/doc/device-tree-bindings/spmi/spmi-msm.txt
+index eb78e3ae7703..000000000000
+--- a/doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt
 +++ /dev/null
-@@ -1,26 +0,0 @@
--Qualcomm SPMI arbiter/bus driver
+@@ -1,94 +0,0 @@
+-          Qualcomm SPMI PMICs multi-function device bindings
 -
--This is bus driver for Qualcomm chips that use SPMI to communicate with PMICs.
+-The Qualcomm SPMI series presently includes PM8941, PM8841 and PMA8084
+-PMICs.  These PMICs use a QPNP scheme through SPMI interface.
+-QPNP is effectively a partitioning scheme for dividing the SPMI extended
+-register space up into logical pieces, and set of fixed register
+-locations/definitions within these regions, with some of these regions
+-specifically used for interrupt handling.
+-
+-The QPNP PMICs are used with the Qualcomm Snapdragon series SoCs, and are
+-interfaced to the chip via the SPMI (System Power Management Interface) bus.
+-Support for multiple independent functions are implemented by splitting the
+-16-bit SPMI slave address space into 256 smaller fixed-size regions, 256 bytes
+-each. A function can consume one or more of these fixed-size register regions.
 -
 -Required properties:
--- compatible: "qcom,spmi-pmic-arb"
--- reg: Register block adresses and sizes for various parts of device:
--   1) PMIC arbiter channel mapping base (PMIC_ARB_REG_CHNLn)
--   2) SPMI write command (master) registers (PMIC_ARB_CORE_SW_DEC_CHANNELS)
--   3) SPMI read command (observer) registers (PMIC_ARB_CORE_REGISTERS_OBS)
+-- compatible:      Should contain one of:
+-                   "qcom,pm660",
+-                   "qcom,pm660l",
+-                   "qcom,pm7325",
+-                   "qcom,pm8004",
+-                   "qcom,pm8005",
+-                   "qcom,pm8019",
+-                   "qcom,pm8028",
+-                   "qcom,pm8110",
+-                   "qcom,pm8150",
+-                   "qcom,pm8150b",
+-                   "qcom,pm8150c",
+-                   "qcom,pm8150l",
+-                   "qcom,pm8226",
+-                   "qcom,pm8350c",
+-                   "qcom,pm8841",
+-                   "qcom,pm8901",
+-                   "qcom,pm8909",
+-                   "qcom,pm8916",
+-                   "qcom,pm8941",
+-                   "qcom,pm8950",
+-                   "qcom,pm8953",
+-                   "qcom,pm8994",
+-                   "qcom,pm8998",
+-                   "qcom,pma8084",
+-                   "qcom,pmd9635",
+-                   "qcom,pmi8950",
+-                   "qcom,pmi8962",
+-                   "qcom,pmi8994",
+-                   "qcom,pmi8998",
+-                   "qcom,pmk8002",
+-                   "qcom,pmk8350",
+-                   "qcom,pmr735a",
+-                   "qcom,smb2351",
+-                   or generalized "qcom,spmi-pmic".
+-- reg:             Specifies the SPMI USID slave address for this device.
+-                   For more information see:
+-                   Documentation/devicetree/bindings/spmi/spmi.yaml
 -
--Optional properties (if not set by parent):
--- #address-cells: 0x1 - childs slave ID address
--- #size-cells: 0x1
+-Required properties for peripheral child nodes:
+-- compatible:      Should contain "qcom,xxx", where "xxx" is a peripheral name.
 -
--All PMICs should be placed as a child nodes of bus arbiter.
--Automatic detection of childs is currently not supported.
+-Optional properties for peripheral child nodes:
+-- interrupts:      Interrupts are specified as a 4-tuple. For more information
+-                   see:
+-                   Documentation/devicetree/bindings/spmi/qcom,spmi-pmic-arb.yaml
+-- interrupt-names: Corresponding interrupt name to the interrupts property
+-
+-Each child node of SPMI slave id represents a function of the PMIC. In the
+-example below the rtc device node represents a peripheral of pm8941
+-SID = 0. The regulator device node represents a peripheral of pm8941 SID = 1.
 -
 -Example:
 -
--spmi@200f000 {
--	compatible = "qcom,spmi-pmic-arb";
--	reg = <0x200f800 0x200 0x2400000 0x400000 0x2c00000 0x400000>;
--	#address-cells = <0x1>;
--	#size-cells = <0x1>;
--};
-diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-index 27a035c0a595..5fe8a70abca7 100644
---- a/drivers/spmi/spmi-msm.c
-+++ b/drivers/spmi/spmi-msm.c
-@@ -70,7 +70,7 @@ enum pmic_arb_channel {
- 
- struct msm_spmi_priv {
- 	phys_addr_t arb_chnl;  /* ARB channel mapping base */
--	phys_addr_t spmi_core; /* SPMI core */
-+	phys_addr_t spmi_chnls; /* SPMI channels */
- 	phys_addr_t spmi_obs;  /* SPMI observer */
- 	/* SPMI channel map */
- 	uint8_t channel_map[SPMI_MAX_SLAVES][SPMI_MAX_PERIPH];
-@@ -95,10 +95,10 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
- 
- 	/* Disable IRQ mode for the current channel*/
- 	writel(0x0,
--	       priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
-+	       priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
- 
- 	/* Write single byte */
--	writel(val, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
-+	writel(val, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
- 
- 	/* Prepare write command */
- 	reg |= SPMI_CMD_EXT_REG_WRITE_LONG << SPMI_CMD_OPCODE_SHIFT;
-@@ -113,12 +113,12 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
- 		ch_offset = SPMI_CH_OFFSET(channel);
- 
- 	/* Send write command */
--	writel(reg, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
-+	writel(reg, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
- 
- 	/* Wait till CMD DONE status */
- 	reg = 0;
- 	while (!reg) {
--		reg = readl(priv->spmi_core + SPMI_CH_OFFSET(channel) +
-+		reg = readl(priv->spmi_chnls + SPMI_CH_OFFSET(channel) +
- 			    SPMI_REG_STATUS);
- 	}
- 
-@@ -186,47 +186,37 @@ static struct dm_spmi_ops msm_spmi_ops = {
- static int msm_spmi_probe(struct udevice *dev)
- {
- 	struct msm_spmi_priv *priv = dev_get_priv(dev);
--	phys_addr_t config_addr;
-+	phys_addr_t core_addr;
- 	u32 hw_ver;
--	u32 version;
- 	int i;
--	int err;
- 
--	config_addr = dev_read_addr_index(dev, 0);
--	priv->spmi_core = dev_read_addr_index(dev, 1);
--	priv->spmi_obs = dev_read_addr_index(dev, 2);
-+	core_addr = dev_read_addr_name(dev, "core");
-+	priv->spmi_chnls = dev_read_addr_name(dev, "chnls");
-+	priv->spmi_obs = dev_read_addr_name(dev, "obsrvr");
- 
--	hw_ver = readl(config_addr + PMIC_ARB_VERSION);
-+	hw_ver = readl(core_addr + PMIC_ARB_VERSION);
- 
- 	if (hw_ver < PMIC_ARB_VERSION_V3_MIN) {
- 		priv->arb_ver = V2;
--		version = 2;
--		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
-+		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
- 	} else if (hw_ver < PMIC_ARB_VERSION_V5_MIN) {
- 		priv->arb_ver = V3;
--		version = 3;
--		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
-+		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
- 	} else {
- 		priv->arb_ver = V5;
--		version = 5;
--		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V5;
+-	spmi {
+-		compatible = "qcom,spmi-pmic-arb";
 -
--		if (err) {
--			dev_err(dev, "could not read APID->PPID mapping table, rc= %d\n", err);
--			return -1;
--		}
-+		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V5;
- 	}
+-		pm8941@0 {
+-			compatible = "qcom,pm8941", "qcom,spmi-pmic";
+-			reg = <0x0 SPMI_USID>;
+-
+-			rtc {
+-				compatible = "qcom,rtc";
+-				interrupts = <0x0 0x61 0x1 IRQ_TYPE_EDGE_RISING>;
+-				interrupt-names = "alarm";
+-			};
+-		};
+-
+-		pm8941@1 {
+-			compatible = "qcom,pm8941", "qcom,spmi-pmic";
+-			reg = <0x1 SPMI_USID>;
+-
+-			regulator {
+-				compatible = "qcom,regulator";
+-				regulator-name = "8941_boost";
+-			};
+-		};
+-	};
+diff --git a/drivers/power/pmic/pmic_qcom.c b/drivers/power/pmic/pmic_qcom.c
+index ad8daf43f06f..f2ac6494811d 100644
+--- a/drivers/power/pmic/pmic_qcom.c
++++ b/drivers/power/pmic/pmic_qcom.c
+@@ -66,12 +66,19 @@ static const struct udevice_id pmic_qcom_ids[] = {
+ static int pmic_qcom_probe(struct udevice *dev)
+ {
+ 	struct pmic_qcom_priv *priv = dev_get_priv(dev);
++	int ret;
  
--	dev_dbg(dev, "PMIC Arb Version-%d (0x%x)\n", version, hw_ver);
-+	dev_dbg(dev, "PMIC Arb Version-%d (%#x)\n", hw_ver >> 28, hw_ver);
- 
- 	if (priv->arb_chnl == FDT_ADDR_T_NONE ||
--	    priv->spmi_core == FDT_ADDR_T_NONE ||
-+	    priv->spmi_chnls == FDT_ADDR_T_NONE ||
- 	    priv->spmi_obs == FDT_ADDR_T_NONE)
+-	priv->usid = dev_read_addr(dev);
+-
+-	if (priv->usid == FDT_ADDR_T_NONE)
++	/*
++	 * dev_read_addr() can't be used here because the reg property actually
++	 * contains two discrete values, not a single 64-bit address.
++	 * The address is the first value.
++	 */
++	ret = ofnode_read_u32_index(dev_ofnode(dev), "reg", 0, &priv->usid);
++	if (ret < 0)
  		return -EINVAL;
  
--	dev_dbg(dev, "priv->arb_chnl address (%llu)\n", priv->arb_chnl);
--	dev_dbg(dev, "priv->spmi_core address (%llu)\n", priv->spmi_core);
--	dev_dbg(dev, "priv->spmi_obs address (%llu)\n", priv->spmi_obs);
-+	dev_dbg(dev, "priv->arb_chnl address (%#08llx)\n", priv->arb_chnl);
-+	dev_dbg(dev, "priv->spmi_chnls address (%#08llx)\n", priv->spmi_chnls);
-+	dev_dbg(dev, "priv->spmi_obs address (%#08llx)\n", priv->spmi_obs);
- 	/* Scan peripherals connected to each SPMI channel */
- 	for (i = 0; i < SPMI_MAX_PERIPH; i++) {
- 		uint32_t periph = readl(priv->arb_chnl + ARB_CHANNEL_OFFSET(i));
++	debug("usid: %d\n", priv->usid);
++
+ 	return 0;
+ }
+ 
 
 -- 
 2.42.1
