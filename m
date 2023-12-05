@@ -4,76 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 850E1C46CA3
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F22C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC30586DD1;
-	Tue,  5 Dec 2023 12:10:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
+	by phobos.denx.de (Postfix) with ESMTP id 7125B86DD1;
+	Tue,  5 Dec 2023 12:13:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="EWbUgyJf";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="1G4VuBHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8BD0876FB; Tue,  5 Dec 2023 12:10:09 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 75E4B8772E; Tue,  5 Dec 2023 12:13:40 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B18F86CF7
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:10:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF85F86D12
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:13:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sifive.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yongxuan.wang@sifive.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1cfc9c4acb6so24342005ad.0
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:10:07 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-548f853fc9eso7060966a12.1
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:13:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1701774606; x=1702379406; darn=lists.denx.de;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701774817; x=1702379617;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ls9Brl2M49UsAVdtykWJCHQaVqvL0tjwqaIFJzjxaCY=;
- b=EWbUgyJfVF/Snf//j4c9ULu2IY/NWvZvYhSC4uCBD5/HNXFjun4+tBglfnda1czRf1
- wlmMYj1QfvNpPLWAbF+z8mE81CAHJuQP3CgKqJmxfYDgGzUk//hYKWdjo+fWTaBoLc0O
- 0ye1oL/R8L0ltpEAfI7m22mGwRg0uvkWKhgRnh4DlL+r0l6Z2DECBrku4tzvrTaQ/oHS
- 3+Tkbp7PtMshka9aMqSSE/JBchi9KpWjv4+8Mra/V/scXGAShrXg5b2eEveqj3QN5x+b
- +p4rZZmyfbySI6iow7RHHjMqp7gviTiQawPh+MDo1Dfjom4Vixmecyn14GMAawVUUyx/
- u9Tg==
+ bh=PPmcKMnN9cNPp+saV71SwCmnUuy9G7pzygPtAIGnYcw=;
+ b=1G4VuBHoLjk4OHlyCcEslFlSJtPZ+T4jkFYDX+/3UTJWDMdCShVtjD8XHHlXQIKGUR
+ x3PY+nHlBy33sYz5dFMF/wQC+pZj0EsRLIqMcljEz0wgWN/U1U3mgDJHu3k96A6CekkL
+ qNYs/oLEzfeu1nV+bitpB2M5ZzPE05RXnUWJxcqDgUCqTm2aEByC+ygv+YYRT9m/6Cli
+ yN4bhYKSmIp+FdtBm9NpEdBUwFYzwSfUOKcpgNor2fdygP20PTBq4GTBEd5uL7ZhY3mj
+ 143HooyQc6viaT9MzX/Us6v8QwrTSTficMtOWJptMgZ8rgeGKvgOtqPDwJqsfoFQ8fAk
+ 4xbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701774606; x=1702379406;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1701774817; x=1702379617;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ls9Brl2M49UsAVdtykWJCHQaVqvL0tjwqaIFJzjxaCY=;
- b=JUJ41voZ+Lupi/nUmkTyHsa+jxGcje0movy8xBM/7n95OorIYGeNjz/YjX981FXPxX
- mxX/QCAQM4x//5CtUwojXyf+43cdbxZYEDebItEY6x5UdN05UrRxyR4L2CMIPb4W3WSo
- WxGrZRb4H1WLiRzxRO7Qk8XN0QZ6LlPHIrKKrLrODSdka/9S5X4pP7lvbm5tc/NMD+zO
- BO2MykaMFYR0cspG4kq+SLJX8rdhWxyylJZrz5Qaa3ZOquEHNJB+0p+gkWByEJEt9lt+
- vPpNCe1Bsb0LPBtp6ZnuG0FQ6lbtswucEjD/sDZOo0pTCkxI9lNn9NVSjAh3J/Nk4hSW
- VksQ==
-X-Gm-Message-State: AOJu0Yyy9d7eJNbmhzxTKk9oTQFyj5L3xKiiekm/5PAc44SZ7zBj1S96
- zDkIKiMYR7IoeMA9USnahBuqkyQDUe+3zsR5EMAjBDvjmdnituuNZeWQgEINIOQ1QgsHd+oIOCU
- SL9Fg397Qd3hQDVM2MO3AMUQj05pwwbfwjkKV7EaJWdtPNLQodbbqMRL1RjNPo3zbuXvW5srDvo
- nxCckV45ye
-X-Google-Smtp-Source: AGHT+IEstykp242EZwViby10J40WUVLGI5J+6frAF4J4WPkjb8Dx22CTWgneMXx0TSHaUB7+HH1mxw==
-X-Received: by 2002:a17:902:e809:b0:1d0:6ffd:6e6e with SMTP id
- u9-20020a170902e80900b001d06ffd6e6emr3917755plg.102.1701774605573; 
- Tue, 05 Dec 2023 03:10:05 -0800 (PST)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- x4-20020a170902ec8400b001d08bbcf78bsm4498601plg.74.2023.12.05.03.10.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 03:10:04 -0800 (PST)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: u-boot@lists.denx.de
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, trini@konsulko.com,
- Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
-Subject: [PATCH] riscv: sifive: unmatched: migrate to text environment
-Date: Tue,  5 Dec 2023 11:09:55 +0000
-Message-Id: <20231205110958.30180-1-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
+ bh=PPmcKMnN9cNPp+saV71SwCmnUuy9G7pzygPtAIGnYcw=;
+ b=sYtCl1OxJtNYRGfKOcMKLbsjrB6A4h75lyYjuycoEqrzf61NIQBm5aARyct3w2M8yQ
+ uYb1FmyJ6/tZZpCMbc75gqguHT1xWRFaSZmkMeDE5rTwZEdJJPdPprInxTo1xqjgXapa
+ CIYrL3tq0RgYspVDl4BTmj9y1U9PKPOyu7KvxmHcxZnuKyHDRQqXL+m5lKQ3fFEVpM3s
+ XR8lbzY8+FjQaLAAtLgLxjaXuwSMYNvplVAQe/5eXmCa66tYKGATV6Qex7zgLs2+A/Ez
+ WlHQ/Azm1ESd+MVOEr9tsyznRI4DERk7bEllSmBL0CwNND1OWeg3l/xTUKi8nRy31mFx
+ r/8w==
+X-Gm-Message-State: AOJu0YwwaGEWM+Zi48fZ6Yqny3x6IeBp8Fg76UDfbl2kLxmA3DLUQYBX
+ Vwo5P4bc5oHslWtEIysn9V357swHtUd4+S63SwauAw==
+X-Google-Smtp-Source: AGHT+IG8t6xWc5LLJP9Xera4a/nM/TmCggvWQzJEAi0fbSaNTLNapWnqT2Gd3WBwpGEVf3gjJLHYsQ==
+X-Received: by 2002:a17:906:fcba:b0:a16:88e8:2de7 with SMTP id
+ qw26-20020a170906fcba00b00a1688e82de7mr2045849ejb.23.1701774816707; 
+ Tue, 05 Dec 2023 03:13:36 -0800 (PST)
+Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com.
+ [209.85.218.52]) by smtp.gmail.com with ESMTPSA id
+ lo23-20020a170906fa1700b00a1cf0d8d514sm111889ejb.79.2023.12.05.03.13.36
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Dec 2023 03:13:36 -0800 (PST)
+Received: by mail-ej1-f52.google.com with SMTP id
+ a640c23a62f3a-a1b75f59a12so250952366b.3
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:13:36 -0800 (PST)
+X-Received: by 2002:a17:906:dd7:b0:a19:d40a:d257 with SMTP id
+ p23-20020a1709060dd700b00a19d40ad257mr2154111eji.291.1701774815959; Tue, 05
+ Dec 2023 03:13:35 -0800 (PST)
+MIME-Version: 1.0
+References: <20231119165501.1305136-1-i@shantur.com>
+ <CAHc5_t3MwUvFdQQaZGeONxS-JNuB4mYXyU9YSexN8bCbQUTRYQ@mail.gmail.com>
+ <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Tue, 5 Dec 2023 11:13:24 +0000
+X-Gmail-Original-Message-ID: <CAHc5_t0+o5FvgpLUDAWLq6932fapzVDy=+47LQUcsAPT-3arWQ@mail.gmail.com>
+Message-ID: <CAHc5_t0+o5FvgpLUDAWLq6932fapzVDy=+47LQUcsAPT-3arWQ@mail.gmail.com>
+Subject: Re: [PATCH v4 0/4] bootflow: bootmeth_efi: Fix network efi boot.
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,100 +101,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate to the new environment format and drop most of the config.h.
+Hi Simon,
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
- board/sifive/unmatched/unmatched.env | 19 ++++++++++++++
- configs/sifive_unmatched_defconfig   |  2 +-
- include/configs/sifive-unmatched.h   | 37 ----------------------------
- 3 files changed, 20 insertions(+), 38 deletions(-)
- create mode 100644 board/sifive/unmatched/unmatched.env
+On Tue, Dec 5, 2023 at 12:52=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Shantur,
+>
+> On Mon, 4 Dec 2023 at 05:38, Shantur Rathore <i@shantur.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Sun, Nov 19, 2023 at 4:56=E2=80=AFPM Shantur Rathore <i@shantur.com>=
+ wrote:
+> > >
+> > >
+> > > Currently bootmeth_efi crashes while doing a network (dhcp) boot.
+> > > This patch series fixes issues and both network and disk boot works.
+> > >
+> > How can I help to get this patch series merged in?
+>
+> You can check patchwork [1] to see who it is assigned to. I don't see
+> it in my queue though.
+>
+It's with Tom Rini I believe but with status Needs Review / ACK.
 
-diff --git a/board/sifive/unmatched/unmatched.env b/board/sifive/unmatched/unmatched.env
-new file mode 100644
-index 0000000000..0f1e5a7174
---- /dev/null
-+++ b/board/sifive/unmatched/unmatched.env
-@@ -0,0 +1,19 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+/* environment for HiFive Unmatched boards */
-+
-+kernel_addr_r=0x80200000
-+kernel_comp_addr_r=0x88000000
-+kernel_comp_size=0x4000000
-+fdt_addr_r=0x8c000000
-+scriptaddr=0x8c100000
-+pxefile_addr_r=0x8c200000
-+ramdisk_addr_r=0x8c300000
-+type_guid_gpt_loader1=5B193300-FC78-40CD-8002-E86C45580B47
-+type_guid_gpt_loader2=2E54B353-1271-4842-806F-E436D6AF6985
-+type_guid_gpt_system=0FC63DAF-8483-4772-8E79-3D69D8477DE4
-+partitions=
-+    name=loader1,start=17K,size=1M,type=${type_guid_gpt_loader1};
-+    name=loader2,size=4MB,type=${type_guid_gpt_loader2};
-+    name=system,size=-,bootable,type=${type_guid_gpt_system};
-+fdtfile= CONFIG_DEFAULT_FDT_FILE
-diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
-index 6a95ab3977..43fc87d3ce 100644
---- a/configs/sifive_unmatched_defconfig
-+++ b/configs/sifive_unmatched_defconfig
-@@ -23,7 +23,7 @@ CONFIG_ARCH_RV64I=y
- CONFIG_RISCV_SMODE=y
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x84000000
--CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTSTD_DEFAULTS=y
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};"
- CONFIG_DEFAULT_FDT_FILE="sifive/hifive-unmatched-a00.dtb"
-diff --git a/include/configs/sifive-unmatched.h b/include/configs/sifive-unmatched.h
-index de8bfc1123..27e0912665 100644
---- a/include/configs/sifive-unmatched.h
-+++ b/include/configs/sifive-unmatched.h
-@@ -13,41 +13,4 @@
- 
- #define CFG_SYS_SDRAM_BASE		0x80000000
- 
--/* Environment options */
--
--#define BOOT_TARGET_DEVICES(func) \
--	func(NVME, nvme, 0) \
--	func(NVME, nvme, 1) \
--	func(USB, usb, 0) \
--	func(MMC, mmc, 0) \
--	func(SCSI, scsi, 0) \
--	func(PXE, pxe, na) \
--	func(DHCP, dhcp, na)
--
--#include <config_distro_bootcmd.h>
--
--#define TYPE_GUID_LOADER1	"5B193300-FC78-40CD-8002-E86C45580B47"
--#define TYPE_GUID_LOADER2	"2E54B353-1271-4842-806F-E436D6AF6985"
--#define TYPE_GUID_SYSTEM	"0FC63DAF-8483-4772-8E79-3D69D8477DE4"
--
--#define PARTS_DEFAULT \
--	"name=loader1,start=17K,size=1M,type=${type_guid_gpt_loader1};" \
--	"name=loader2,size=4MB,type=${type_guid_gpt_loader2};" \
--	"name=system,size=-,bootable,type=${type_guid_gpt_system};"
--
--#define CFG_EXTRA_ENV_SETTINGS \
--	"kernel_addr_r=0x80200000\0" \
--	"kernel_comp_addr_r=0x88000000\0" \
--	"kernel_comp_size=0x4000000\0" \
--	"fdt_addr_r=0x8c000000\0" \
--	"scriptaddr=0x8c100000\0" \
--	"pxefile_addr_r=0x8c200000\0" \
--	"ramdisk_addr_r=0x8c300000\0" \
--	"type_guid_gpt_loader1=" TYPE_GUID_LOADER1 "\0" \
--	"type_guid_gpt_loader2=" TYPE_GUID_LOADER2 "\0" \
--	"type_guid_gpt_system=" TYPE_GUID_SYSTEM "\0" \
--	"partitions=" PARTS_DEFAULT "\0" \
--	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
--	BOOTENV
--
- #endif /* __SIFIVE_UNMATCHED_H */
--- 
-2.17.1
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D382855
 
+Kind Regards,
+Shantur
