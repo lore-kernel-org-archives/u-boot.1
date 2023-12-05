@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B177DC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 15:56:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA073C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 15:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9719878DF;
-	Tue,  5 Dec 2023 16:55:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48F31878E5;
+	Tue,  5 Dec 2023 16:55:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fTyY7pmn";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SYTPEyGs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB51A86E42; Tue,  5 Dec 2023 16:55:36 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id DE475871A0; Tue,  5 Dec 2023 16:55:37 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B34CF871A0
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 16:55:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD4CC878A9
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 16:55:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5FtT2G006622;
- Tue, 5 Dec 2023 09:55:29 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5FtVCX126333;
+ Tue, 5 Dec 2023 09:55:31 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701791729;
- bh=N4NWZLLafa6f6uTx+ppIWPOfNR72tLQ5HmgZ9/f1Olg=;
+ s=ti-com-17Q1; t=1701791731;
+ bh=sdiuDVtUbFh0T6w2Ov/br62UZanl++3jOjASzSQvPac=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=fTyY7pmnKl8XA7AWUzMESBtwpCwHIQSyPIOAD6DQref5lBeRjUPWvRwQSrhTVUXy+
- oHCgdHqxj8T8M6MrybWlHCnwR+CQjR23NAgy1W7I3NXtmjpm5qwHCy+YVpdI6mU+Ld
- y8Q8V0/vh3kPoCBEX+HAvTox1H38i97xnKfdZrtU=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5FtT3P001128
+ b=SYTPEyGsaQxf/JKdUycrL0anS8dMqkx2uNECA5J1xiRzDX6ThQn10LoEEXucy0Vfe
+ OS1J/wb91fAbwcXuA11hEEXG4iYtSYuu7WLa3iTvYlW0q6NPoDR1QUp1dFuEzrGSPJ
+ PO3MDMYv64Co+a017v4EoWm4BTz1NzhZaXFtS6iE=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5FtUNU024710
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 09:55:29 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 5 Dec 2023 09:55:31 -0600
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 09:55:29 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 09:55:30 -0600
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 09:55:29 -0600
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5FtSPH130736;
- Tue, 5 Dec 2023 09:55:29 -0600
+ Frontend Transport; Tue, 5 Dec 2023 09:55:30 -0600
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5FtT51003693;
+ Tue, 5 Dec 2023 09:55:30 -0600
 From: Devarsh Thakkar <devarsht@ti.com>
 To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
  <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
  <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
 CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
  <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>, <devarsht@ti.com>
-Subject: [PATCH v5 3/8] board: ti: am62x: evm: Remove video_setup from
- spl_board_init
-Date: Tue, 5 Dec 2023 21:25:18 +0530
-Message-ID: <20231205155523.721784-4-devarsht@ti.com>
+Subject: [PATCH v5 4/8] common/board_f: Catch bloblist before starting
+ reservations
+Date: Tue, 5 Dec 2023 21:25:19 +0530
+Message-ID: <20231205155523.721784-5-devarsht@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231205155523.721784-1-devarsht@ti.com>
 References: <20231205155523.721784-1-devarsht@ti.com>
@@ -82,54 +82,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove video_setup from evm_init sequence since video memory is getting
-called at an earlier place to make sure video memory is reserved at
-the end of RAM.
+Start reservations needed for init sequence only after catching
+bloblists from previous stage.
 
-Suggested-by: Simon Glass <sjg@chromium.org>
+This is to avoid catching bloblists in the middle causing gaps while
+u-boot is reserving.
+
+Adjust the relocaddr as per video hand-off information received from
+previous stage so that further reservations start only after regions
+reserved for previous stages
+
+Skip reservation for video memory if it was already filled by a
+bloblist.
+
 Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-V2: No change
+V2: Fix typo in commit title and checkpatch warnings/checks
 V3: No change
 V4: Add Reviewed-by
 V5: No change
 ---
- board/ti/am62x/evm.c | 18 ------------------
- 1 file changed, 18 deletions(-)
+ common/board_f.c | 33 ++++++++++++++++++++++++++++++---
+ 1 file changed, 30 insertions(+), 3 deletions(-)
 
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index ad93908840..88e02155ee 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -60,27 +60,9 @@ int dram_init_banksize(void)
+diff --git a/common/board_f.c b/common/board_f.c
+index d4d7d01f8f..acf802c9cb 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -403,7 +403,7 @@ __weak int arch_reserve_mmu(void)
+ 	return 0;
  }
  
- #if defined(CONFIG_SPL_BUILD)
--static int video_setup(void)
--{
--	if (CONFIG_IS_ENABLED(VIDEO)) {
--		ulong addr;
--		int ret;
--
--		addr = gd->relocaddr;
--		ret = video_reserve(&addr);
--		if (ret)
--			return ret;
--		debug("Reserving %luk for video at: %08lx\n",
--		      ((unsigned long)gd->relocaddr - addr) >> 10, addr);
--		gd->relocaddr = addr;
--	}
--
--	return 0;
--}
- 
- void spl_board_init(void)
+-static int reserve_video(void)
++static int reserve_video_from_videoblob(void)
  {
--	video_setup();
- 	enable_caches();
- 	if (IS_ENABLED(CONFIG_SPL_SPLASH_SCREEN) && IS_ENABLED(CONFIG_SPL_BMP))
- 		splash_display();
+ 	if (IS_ENABLED(CONFIG_SPL_VIDEO_HANDOFF) && spl_phase() > PHASE_SPL) {
+ 		struct video_handoff *ho;
+@@ -412,8 +412,34 @@ static int reserve_video(void)
+ 		if (!ho)
+ 			return log_msg_ret("blf", -ENOENT);
+ 		video_reserve_from_bloblist(ho);
+-		gd->relocaddr = ho->fb;
+-	} else if (CONFIG_IS_ENABLED(VIDEO)) {
++
++		/* Sanity check fb from blob is before current relocaddr */
++		if (likely(gd->relocaddr > (unsigned long)ho->fb))
++			gd->relocaddr = ho->fb;
++	}
++
++	return 0;
++}
++
++/*
++ * Check if any bloblist received specifying reserved areas from previous stage and adjust
++ * gd->relocaddr accordingly, so that we start reserving after pre-reserved areas
++ * from previous stage.
++ *
++ * NOTE:
++ * IT is recommended that all bloblists from previous stage are reserved from ram_top
++ * as next stage will simply start reserving further regions after them.
++ */
++static int setup_relocaddr_from_bloblist(void)
++{
++	reserve_video_from_videoblob();
++
++	return 0;
++}
++
++static int reserve_video(void)
++{
++	if (CONFIG_IS_ENABLED(VIDEO)) {
+ 		ulong addr;
+ 		int ret;
+ 
+@@ -923,6 +949,7 @@ static const init_fnc_t init_sequence_f[] = {
+ 	reserve_pram,
+ #endif
+ 	reserve_round_4k,
++	setup_relocaddr_from_bloblist,
+ 	arch_reserve_mmu,
+ 	reserve_video,
+ 	reserve_trace,
 -- 
 2.34.1
 
