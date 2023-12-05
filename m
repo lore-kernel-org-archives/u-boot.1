@@ -4,105 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7B95C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 18:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A351AC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 20:00:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B5ED86EA6;
-	Tue,  5 Dec 2023 19:36:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id C9B0C870B5;
+	Tue,  5 Dec 2023 21:00:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="xECA7q65";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DLO5sKsG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80C1E86F28; Tue,  5 Dec 2023 19:36:25 +0100 (CET)
+ id C3F15870F2; Tue,  5 Dec 2023 21:00:34 +0100 (CET)
 Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
  [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B479F865D0
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 19:36:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9366187015
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 21:00:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
 Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a00f67f120aso788697366b.2
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 10:36:22 -0800 (PST)
+ a640c23a62f3a-a1a496a73ceso4705866b.2
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 12:00:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1701801381; x=1702406181;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jN4188zsXM1aIsvGg2Ot4HXU8p+X1V5LOFXeQlp8YMQ=;
- b=xECA7q65jNM2+NupXole1p8i+7bxsWy61wqMoafPzSkY+wPaQ+cyJYuUiRLmfnJFCf
- QV6XKRgEigX6AUv9PkqVZmO3MVqyB8AjojN+/7+NZGBfeZo1QlYZW1Kk0c0fKpQRCKXy
- wmjIMKzUF5JbbevZ2youPbkLISP+UgCA82ZuwX+ZwfaearFrWAuWVFCAWI+ur0ADI0dw
- B9tE90YcwUsGia6gbQnG5GdZRaJuIgNNzc27wXM/upZkSJFLKBIA5cooZppS70ANjK9k
- iB67B2URLRm/o3ghQDdphH1vvVLwcoj/CwkBNPPXrDq0ZCe+alhXxviW+ILv3pgc4Z+i
- GiiA==
+ d=linaro.org; s=google; t=1701806431; x=1702411231; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ma6JrezXsG6NNcFKpzEQDLb5x+aqXRaCHVl0X5lfmwo=;
+ b=DLO5sKsGw9serBGDZWO3AhJ/maGt5koV2ZffrqlEZa4oD6fj/Xt4BQV8J3lSBvVQeK
+ 1LN18YQguy3WeX+djJaMKbwEgMxz5D8gMX+zCstUL59pkB5V25xdI+GBmi8GSe+Umgz4
+ LGecUzG+tL37458oH15UJzv2wrXAy7zTzHHYHHLzez/9KSu4jfPCPzKAGFhz46Vikwmn
+ Mz1pVanc6MuBcR5yhCRFUTsxEdYH27SmV9rXwcDCXDbBUqMNHv5CI4zKweXIbUhQFv/O
+ cx6dwelgWHDnX1btEL88pdfClR8/hC8GXw1g6qbexh3atLq7VP8aTar8Fu/D/DRR/CaX
+ zNlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701801381; x=1702406181;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jN4188zsXM1aIsvGg2Ot4HXU8p+X1V5LOFXeQlp8YMQ=;
- b=NgzZ+uZQpSgbqo5YfXZzwJndSpCob9SvaGJYSylqJMXg2kdUYGh4PtjwcLNKfNAv70
- +o8L1Aa0kL9oBPzFa1RhbWpmkNCZxJQCI3srR3nbR4p3hglZa7FNL6uFj+YJ6rZML83V
- Xt66jMOKDDlAErgNdU9bODbwTCjJfFTFXGqLDWFTdyvGNAkN8dwDSV2x700YR+bCVJI6
- 3/YG4wQvgsgqT1++lCLS1u5oWnzhygNStpwGsJbNqCfH6KxqoK9I4vGKayxzFBQOff3Q
- bJ2G6QaNHPLr4QHiGIHnVWw3VBQ2pSoIBVI7qcc6srlR8V2tBEscbMZsgZ9CU+nDvLYi
- meqw==
-X-Gm-Message-State: AOJu0Yw3S5Bb2AFzIUgVFWuvZugnG7/OOcW5YggFofLMpqNBuErrFWg5
- EpiNqiLBx6+yH+Cd656pFTOzzqFPzzYniFED77Ex2Q==
-X-Google-Smtp-Source: AGHT+IHHoiVO3bB/FA2mxxrBPo2sN94XxYApydE/LMlKG8Xni+rQ9vr+yUfJirGJVYpa0tuhKiY36Q==
-X-Received: by 2002:a17:907:8c8:b0:a10:172b:4cfe with SMTP id
- zu8-20020a17090708c800b00a10172b4cfemr738534ejb.11.1701801381213; 
- Tue, 05 Dec 2023 10:36:21 -0800 (PST)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com.
- [209.85.208.45]) by smtp.gmail.com with ESMTPSA id
- lb24-20020a170907785800b00a1d61183006sm20555ejc.83.2023.12.05.10.36.20
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Dec 2023 10:36:20 -0800 (PST)
-Received: by mail-ed1-f45.google.com with SMTP id
- 4fb4d7f45d1cf-54c67b0da54so5766153a12.0
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 10:36:20 -0800 (PST)
-X-Received: by 2002:a50:ab5c:0:b0:54c:4837:81f7 with SMTP id
- t28-20020a50ab5c000000b0054c483781f7mr4357587edc.72.1701801379990; Tue, 05
- Dec 2023 10:36:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701806431; x=1702411231;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ma6JrezXsG6NNcFKpzEQDLb5x+aqXRaCHVl0X5lfmwo=;
+ b=ZYOo50cg3TyCsJyLQYaRh0uNrclgrBsv7j09Tm2f6dQxuDVcYZmjo8koQ4Mw0WhUUW
+ rHNsHt0dFzLiwXqvajToD3SHxfBLTR+zqBTylB9sbOfLPkZLmqxUFhdCyinn0AoMha3O
+ IUO/jHyAwkb6xQbNA00j+yvk4GGyTOlOnLUb1oB1yAMx+PKWcwmXj2CChU9exSovLxxP
+ WtMgcZE1beJ5yFSN40I8JUzWuaQ87thVIp+vN4MiNFKbCmFGoBly3n1Crkua1FPOpRqp
+ gnemJjGKBTalqirEnwI3PpdHkUsHUNdCvkB978P5FMxFune25bURN4Oc5RC4ReJdezd8
+ pOnw==
+X-Gm-Message-State: AOJu0YwXRh66k1+ZTYQNoYF0wM1ORIOhn8/pN0ZsGiXhc9HGq81ROurp
+ nuN4KQpST0Eabdr7pbZOl8Mktj4hoSxLjwGoUwznuQ==
+X-Google-Smtp-Source: AGHT+IHgvbwVSHwk6J8WDwqbfXwctoBNwze0JVzg3t7WHvszV6EsWQOiVCe7r947qYiHH2mla64R5zoU3u0iBMfqiVE=
+X-Received: by 2002:a17:907:1582:b0:a19:a19b:789f with SMTP id
+ cf2-20020a170907158200b00a19a19b789fmr927710ejc.98.1701806430870; Tue, 05 Dec
+ 2023 12:00:30 -0800 (PST)
 MIME-Version: 1.0
-References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
- <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
- <CAHc5_t33K1J=mDteE8jTLoLpFonPSKWBgs43Ak748q1WJ4Uv8A@mail.gmail.com>
- <493b645c-1bf2-4bd9-9457-30e98aa17040@canonical.com>
- <CAHc5_t3_soy2Je+CMazMMW+1Dhx15704SMuXZwnYhToxdb8vnw@mail.gmail.com>
- <adf71fc6-9323-4c56-9f26-f12c09fa7275@canonical.com>
- <87fs11tzhy.fsf@bloch.sibelius.xs4all.nl>
- <CAC_iWjJWgTS6Os7fp4jP=u1+osBccndoR+CBgFUt2nb04RWwWA@mail.gmail.com>
- <CAPnjgZ04C=_MoCjKBYUdmBXyQn-zviAMQJxMHQAfj1MwvqOMzw@mail.gmail.com>
- <CAHc5_t2mQGQ4WLSXjh105QXnxMTeF3=x69N28dDiSdRMBHq3kg@mail.gmail.com>
- <1e2bad87-3372-452d-ae27-01c100378ecf@canonical.com>
- <CAPnjgZ05pDOATqw9wha-pOZsgjCF-4dgLL7-a4r-JPUjtMospg@mail.gmail.com>
- <671228f5-8a11-4be9-b8fe-1331232e7498@canonical.com>
- <CAPnjgZ1dghg2T8D8fSpHUgstgipwv+jRQssimpAGqTaPjvvQTA@mail.gmail.com>
- <638c9f48-693c-466e-a510-6004896a466c@canonical.com>
- <CAPnjgZ2=zCJbmA4CAjgRFUhGfojq6cOJMUeC4jB3Dm+u8UNG+A@mail.gmail.com>
- <c1ff4723-18f6-4fc4-bbba-8cc7490ca480@canonical.com>
- <CAPnjgZ3+dEFYazXKaGMfrLKAS5aKBhN-+HnH_3xy3qWaLNCtzg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3+dEFYazXKaGMfrLKAS5aKBhN-+HnH_3xy3qWaLNCtzg@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Tue, 5 Dec 2023 18:36:08 +0000
-X-Gmail-Original-Message-ID: <CAHc5_t30UFOdpqDVtrC3kCKayMTF3oRovkxA1wrVkr+beKpoyw@mail.gmail.com>
-Message-ID: <CAHc5_t30UFOdpqDVtrC3kCKayMTF3oRovkxA1wrVkr+beKpoyw@mail.gmail.com>
-Subject: Re: bootstd: Support for distro specific EFI folders
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, 
- u-boot@lists.denx.de, trini@konsulko.com
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-27-maxim.uvarov@linaro.org>
+ <20231127131129.GD2513409@bill-the-cat>
+ <c7022ef3-ad0c-4f89-ad47-a0f7df2a24c6@web.de>
+ <CAD8XO3aVLzpqV=MDVO2mJBP=sLzSieXhrV8GUPYPpu76mRKjeQ@mail.gmail.com>
+ <CAD8XO3Y4_=8wDQcFNJW1MT1yiyDmbQxP3UCRWWWPZzuJkZp88g@mail.gmail.com>
+ <1402b942-9ce9-4bc3-9fac-0eb438b23e77@web.de>
+ <CAD8XO3bYyfDVnVQdcqDji39Y=i1Q2jdG-SQ6KUWsBPo0umoZnQ@mail.gmail.com>
+ <b47859ca-36d3-4eee-88fb-f7859e69ff2d@web.de>
+In-Reply-To: <b47859ca-36d3-4eee-88fb-f7859e69ff2d@web.de>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Wed, 6 Dec 2023 02:00:18 +0600
+Message-ID: <CAD8XO3Zqt1SN6t4MWXozJ4R-FjQ1324Vn5=h6xCe13gwxb9qSA@mail.gmail.com>
+Subject: Re: [PATHv11 26/43] configs/tbs2910_defconfig inc limit
+To: Soeren Moch <smoch@web.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, goldsimon@gmx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,492 +94,254 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon and Heinrich,
-
-On Sun, Dec 3, 2023 at 8:38=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Heinrich,
->
-> On Sun, 3 Dec 2023 at 13:00, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 12/3/23 20:50, Simon Glass wrote:
-> > > Hi Heinrich,
-> > >
-> > > On Sun, 3 Dec 2023 at 11:33, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > >>
-> > >> On 12/3/23 19:22, Simon Glass wrote:
-> > >>> Hi Heinrich,
-> > >>>
-> > >>> On Sun, 3 Dec 2023 at 10:53, Heinrich Schuchardt
-> > >>> <heinrich.schuchardt@canonical.com> wrote:
-> > >>>>
-> > >>>> On 12/3/23 18:44, Simon Glass wrote:
-> > >>>>> Hi Heinrich,
-> > >>>>>
-> > >>>>> On Sun, 3 Dec 2023 at 03:55, Heinrich Schuchardt
-> > >>>>> <heinrich.schuchardt@canonical.com> wrote:
-> > >>>>>>
-> > >>>>>> On 12/3/23 00:38, Shantur Rathore wrote:
-> > >>>>>>> Hi Simon,
-> > >>>>>>>
-> > >>>>>>> On Sat, Dec 2, 2023 at 6:33=E2=80=AFPM Simon Glass <sjg@chromiu=
-m.org> wrote:
-> > >>>>>>>>
-> > >>>>>>>> Hi,
-> > >>>>>>>>
-> > >>>>>>>> On Mon, 20 Nov 2023 at 00:02, Ilias Apalodimas
-> > >>>>>>>> <ilias.apalodimas@linaro.org> wrote:
-> > >>>>>>>>>
-> > >>>>>>>>> Hi Mark,
-> > >>>>>>>>>
-> > >>>>>>>>> On Sun, 19 Nov 2023 at 19:38, Mark Kettenis <mark.kettenis@xs=
-4all.nl> wrote:
-> > >>>>>>>>>>
-> > >>>>>>>>>>> Date: Sat, 18 Nov 2023 23:52:11 +0100
-> > >>>>>>>>>>> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.co=
-m>
-> > >>>>>>>>>>
-> > >>>>>>>>>> Hi Heinrich,
-> > >>>>>>>>>>
-> > >>>>>>>>>>> On 11/18/23 22:28, Shantur Rathore wrote:
-> > >>>>>>>>>>>> Hi Heinrich,
-> > >>>>>>>>>>>>
-> > >>>>>>>>>>>> On Fri, Nov 17, 2023 at 3:12=E2=80=AFPM Heinrich Schuchard=
-t
-> > >>>>>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
-> > >>>>>>>>>>>>>
-> > >>>>>>>>>>>>> On 11/16/23 19:45, Shantur Rathore wrote:
-> > >>>>>>>>>>>>>> On Thu, Nov 16, 2023 at 6:15=E2=80=AFPM Heinrich Schucha=
-rdt
-> > >>>>>>>>>>>>>> <heinrich.schuchardt@canonical.com> wrote:
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> On 11/16/23 17:52, Shantur Rathore wrote:
-> > >>>>>>>>>>>>>>>> Hi Simon,
-> > >>>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>> Currently bootstd - bootmethod_efi only looks for the =
-default
-> > >>>>>>>>>>>>>>>> bootxx64.efi in /EFI/boot folder only.
-> > >>>>>>>>>>>>>>>> Generally many distros end up putting their bootloader=
-s in
-> > >>>>>>>>>>>>>>>> EFI/<distro> folders like EFI/ubuntu and EFI/debian et=
-c.
-> > >>>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>> In x86 worlds, the NVRAM is modified and new boot entr=
-ies are added to
-> > >>>>>>>>>>>>>>>> support these but in the U-boot world the NVRAM variab=
-les are
-> > >>>>>>>>>>>>>>>> read-only.
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> I guess you are referring to UEFI boot options. These t=
-ypically are not
-> > >>>>>>>>>>>>>>> stored in non-volatile RAM but on a SPI flash device.
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>> Thanks for correcting me.
-> > >>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>> What would be the best way to implement this?
-> > >>>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>> I was thinking of having a "efi_prefixes" environment =
-variable which
-> > >>>>>>>>>>>>>>>> can be set to "ubuntu debian centos" etc and bootmetho=
-d_efi can try
-> > >>>>>>>>>>>>>>>> all of them. Will bootmethod_efi be able to support mu=
-ltiple entries (
-> > >>>>>>>>>>>>>>>> thinking of multiboot ) ?
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> On my laptop I have:
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> EFI/Microsoft/Boot/bootmgr.efi
-> > >>>>>>>>>>>>>>> EFI/Microsoft/Boot/memtest.efi
-> > >>>>>>>>>>>>>>> EFI/Boot/bootx64.efi
-> > >>>>>>>>>>>>>>> EFI/Boot/fbx64.efi
-> > >>>>>>>>>>>>>>> EFI/Boot/mmx64.efi
-> > >>>>>>>>>>>>>>> EFI/debian/shimx64.efi
-> > >>>>>>>>>>>>>>> EFI/debian/grubx64.efi
-> > >>>>>>>>>>>>>>> EFI/debian/mmx64.efi
-> > >>>>>>>>>>>>>>> EFI/debian/fbx64.efi
-> > >>>>>>>>>>>>>>> EFI/ubuntu/grubx64.efi
-> > >>>>>>>>>>>>>>> EFI/ubuntu/shimx64.efi
-> > >>>>>>>>>>>>>>> EFI/ubuntu/mmx64.efi
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> Obviously each installed operating system provides mult=
-iple EFI binaries
-> > >>>>>>>>>>>>>>> and non uses the fallback file name BOOT<ARCH>.EFI. A v=
-alue "ubuntu
-> > >>>>>>>>>>>>>>> debian centos" would not be able to describe which file=
- you are looking
-> > >>>>>>>>>>>>>>> for.
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> We already have the U-Boot command line eficonfig and e=
-fidebug commands
-> > >>>>>>>>>>>>>>> to set up UEFI boot options which can describe which EF=
-I binary to load
-> > >>>>>>>>>>>>>>> and which command line to pass to it. These are conside=
-red by the
-> > >>>>>>>>>>>>>>> existing boot flows.
-> > >>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>> So, I am building a new RockPro64 based cluster and usin=
-g Canonical
-> > >>>>>>>>>>>>>> MAAS to set them up automatically, booting them up using=
- DHCP and
-> > >>>>>>>>>>>>>> installing them over the network.
-> > >>>>>>>>>>>>>> I configured an Armbian image using Packer to be compati=
-ble with MAAS
-> > >>>>>>>>>>>>>> and it happily installs it. As part of installation proc=
-ess, a
-> > >>>>>>>>>>>>>> grub-install is run which installs the grub efi,
-> > >>>>>>>>>>>>>> this EFI ends up in EFI/debian instead of expected EFI/b=
-oot.
-> > >>>>>>>>>>>>>> To be able to make it boot, I have to add commands to mo=
-ve it to
-> > >>>>>>>>>>>>>> EFI/boot. I am trying to find a way in U-Boot that would=
- allow me to
-> > >>>>>>>>>>>>>> skip this step.
-> > >>>>>>>>>>>>>> With eficonfig if I understand correctly, it would need =
-manual
-> > >>>>>>>>>>>>>> intervention to create boot entries.
-> > >>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> If you are installing the shim-signed package on Ubuntu=
-, the EFI boot
-> > >>>>>>>>>>>>>>> option for Ubuntu is set up by EFI/BOOT/BOOT<ARCH>.EFI =
-using the content
-> > >>>>>>>>>>>>>>> of EFI/ubuntu/BOOT<ARCH>.CSV. This is done before ExitB=
-ootServices() and
-> > >>>>>>>>>>>>>>> therefore should work with current U-Boot.
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> Patches are pending upstream to make EFI variables writ=
-able from Linux
-> > >>>>>>>>>>>>>>> if they are stored in the RPMB partition in the eMMC. S=
-ee this series:
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>> https://lore.kernel.org/linux-efi/20231107054057.1893-2=
--masahisa.kojima@linaro.org/
-> > >>>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>>
-> > >>>>>>>>>>>>>> Would it be possible to save it in SPI Flash as the U-Bo=
-ot environment ?
-> > >>>>>>>>>>>>>
-> > >>>>>>>>>>>>> Currently this is not supported by U-Boot.
-> > >>>>>>>>>>>>>
-> > >>>>>>>>>>>>> The U-Boot environment variables can be stored in lots of=
- different
-> > >>>>>>>>>>>>> places SPI flash is only one of these. But none of these =
-locations is
-> > >>>>>>>>>>>>> protected from OS access which would be preferable for UE=
-FI variables
-> > >>>>>>>>>>>>> for security reasons.
-> > >>>>>>>>>>>>>
-> > >>>>>>>>>>>>> To support boards without eMMC the right way forward woul=
-d be writing a
-> > >>>>>>>>>>>>> new implementation of the OP-TEE standalone MM which writ=
-es the
-> > >>>>>>>>>>>>> variables to SPI flash instead of the RPMB partition and =
-ensures that
-> > >>>>>>>>>>>>> the SPI flash' MMIO registers are protected against acces=
-s from the
-> > >>>>>>>>>>>>> non-secure world.
-> > >>>>>>>>>>>>
-> > >>>>>>>>>>>> Thanks for explaining this to me.
-> > >>>>>>>>>>>> This seems like a long way to go, for now what would be an=
- acceptable
-> > >>>>>>>>>>>> solution, some options are
-> > >>>>>>>>>>>>
-> > >>>>>>>>>>>> 1. Allow to set a space separated efi_prefixes (e.g. "boot=
- ubuntu
-> > >>>>>>>>>>>> debian") variable which is ready by bootmeth_efi and used =
-as
-> > >>>>>>>>>>>> efi/<efi_prefix> instead of efi/boot.
-> > >>>>>>>>>>>> 2. Improve bootmeth_efi to find all bootxxxx.efi in efi/ f=
-older and
-> > >>>>>>>>>>>> present all them as bootflows to bootstd.
-> > >>>>>>>>>>>
-> > >>>>>>>>>>> As mentioned in a prior mail ubuntu/bootxxxx.efi and debian=
-/bootxxxx.efi
-> > >>>>>>>>>>> don't exist. I would prefer not to add any distro specific =
-stuff in
-> > >>>>>>>>>>> upstream U-Boot. Instead we will continue to drive what Lin=
-aro has
-> > >>>>>>>>>>> suggested to improve U-Boot EFI variables support in Linux.
-> > >>>>>>>>>>
-> > >>>>>>>>>> I agree that adding hacks like this is not a good idea.
-> > >>>>>>>>>
-> > >>>>>>>>> + 1
-> > >>>>>>>>>
-> > >>>>>>>>>>
-> > >>>>>>>>>> The Linaro approach that involves OP-TEE makes for a fairly =
-complex
-> > >>>>>>>>>> solution.  And there are plenty of boards that have neither =
-eMMC nor
-> > >>>>>>>>>> SPI flash.  If Secure Boot is not a requirement (and I'd arg=
-ue that
-> > >>>>>>>>>> for most "hobbyist" boards it isn't) storing the EFI variabl=
-es in a
-> > >>>>>>>>>> file on the ESP (as implemented by the CONFIG_EFI_VARIABLE_F=
-ILE_STORE
-> > >>>>>>>>>> Kconfig option) is a workable alternative.  And this is actu=
-ally what
-> > >>>>>>>>>> the rockpro64-rk3399_defconfig enables.
-> > >>>>>>>>>
-> > >>>>>>>>> Even in that case, preseeding the variables can enable uefi s=
-ecure
-> > >>>>>>>>> boot. But you have to establish a chain of trust since the
-> > >>>>>>>>> authenticated EFI variables are part of  the u-boot binary.
-> > >>>>>>>>>
-> > >>>>>>>>>>
-> > >>>>>>>>>> I noticed that the latest EBBR attempts to standardize this:
-> > >>>>>>>>>>
-> > >>>>>>>>>>       https://arm-software.github.io/ebbr/index.html#documen=
-t-chapter5-variable-storage
-> > >>>>>>>>>>
-> > >>>>>>>>>> Not sure what the status here is.
-> > >>>>>>>>>
-> > >>>>>>>>> Heinrich and I were the ones who proposed the standardization=
-. The
-> > >>>>>>>>> idea is to eventually fix it for all boards and we are workin=
-g on it,
-> > >>>>>>>>>
-> > >>>>>>>>>> But if the Linux kernel folks
-> > >>>>>>>>>> accept that alternative implementations for runtime EFI vari=
-able
-> > >>>>>>>>>> access are a thing, then a method that modifies the file wou=
-ld be
-> > >>>>>>>>>> possible as well.  Or maybe it is good enough to implement s=
-upport for
-> > >>>>>>>>>> this in the efivar library.
-> > >>>>>>>>>
-> > >>>>>>>>> Yes to both. I discussed the idea during Linux Plumbers. All
-> > >>>>>>>>> approaches have some pros and cons, you can find some details=
- here
-> > >>>>>>>>> [0].
-> > >>>>>>>>> Implementing support to efitool is straightforward, but a bit=
- too
-> > >>>>>>>>> hacky for my taste. An obvious disadvantage is that it's hard=
- to sync
-> > >>>>>>>>> the kernel/file view after an update.
-> > >>>>>>>>> The plan right now is to investigate overwriting RT functions=
- and use
-> > >>>>>>>>> kernel-provided ones that modify the file (which is probably =
-going to
-> > >>>>>>>>> be passed in a config table)
-> > >>>>>>>>>
-> > >>>>>>>>> [0] https://lpc.events/event/17/contributions/1653/
-> > >>>>>>>>
-> > >>>>>>>> I don't know much about this area, but it strikes me that thin=
-gs are
-> > >>>>>>>> getting a little too complicated.
-> > >>>>>>>>
-> > >>>>>>>> U-Boot wants to show a menu of available Operating Systems. Wi=
-th UEFI
-> > >>>>>>>> it isn't even possible to know what is being booted. We just h=
-ave to
-> > >>>>>>>> jump into the .efi file and hope.
-> > >>>>>>>>
-> > >>>>>>>> Can we work together on adding a new, separate file which list=
-s the
-> > >>>>>>>> .efi files and what they are for? Then the user can select one=
-.
-> > >>>>>>>>
-> > >>>>>>> To add - EFI/BOOT/BOOTXXXX.efi is optional [0] and isn't instal=
-led by
-> > >>>>>>> generic ARM
-> > >>>>>>> distros (debian, armbian.. maybe more)
-> > >>>>>>>
-> > >>>>>>> +1 for this. This can be implemented as part of bootmeth_efi (i=
-n blk
-> > >>>>>>> mode) where instead
-> > >>>>>>> of checking hardcoded EFI/BOOT/BOOTXXXX.efi, it can follow one =
-of the
-> > >>>>>>> following options
-> > >>>>>>>
-> > >>>>>>> 1. Scan and list all available .efi files - EFI/**/*.efi
-> > >>>>>>> Pros - Allows all the possible boot options to be shown to user
-> > >>>>>>> Cons - A 'bootflow scan -b' might not boot the system by defaul=
-t as it
-> > >>>>>>> might depend on
-> > >>>>>>> which efi file is scanned first. Some installs have mmaa64.efi
-> > >>>>>>>
-> > >>>>>>> 2. Scan and list all available .efi files that match the
-> > >>>>>>> "bootmeth_efi_regex" variable if available.
-> > >>>>>>> This variable can be configured to allow valid names example
-> > >>>>>>> "EFI\/.*\/(boot|grub|fb|shim).*efi"
-> > >>>>>>> Pros - Allows to control only efi files that can boot the syste=
-m by default.
-> > >>>>>>> Cons - Might be an issue in environments without CONFIG_REGEX
-> > >>>>>>>
-> > >>>>>>> 3. Scan all the folders EFI/* for EFI file prefixes controlled =
-by
-> > >>>>>>> "bootmeth_efi_name_prefixes" variable
-> > >>>>>>> This variable can be a space separated list of all valid prefix=
-es the
-> > >>>>>>> user is interested in. e.g. "boot grub fb shim"
-> > >>>>>>> Pros - This allows control on what EFI files to look for withou=
-t being
-> > >>>>>>> depended on CONFIG_REGEX
-> > >>>>>>> Cons - I can't think of, please do tell.
-> > >>>>>>>
-> > >>>>>>> After this, bootmeth_efi can set up more than 1 bootflows that =
-are bootable.
-> > >>>>>>>
-> > >>>>>>> [0] - https://www.rodsbooks.com/efi-bootloaders/principles.html
-> > >>>>>>>
-> > >>>>>>> Kind regards,
-> > >>>>>>> Shantur
-> > >>>>>>
-> > >>>>>> U-Boot should remain be a compliant UEFI implementation. We shal=
-l not
-> > >>>>>> scan any other directories than those described in the UEFI spec=
-ification.
-> > >>>>>
-
-As per UEFI spec v2.10, Link - [0], Section  3.4.3 Boot Option
-Variables Default Boot Behavior
-It explains what is expected behaviour when none of the variables are
-present (or after Bios reset).
-
-It says -
-"It is expected that this default boot will load an operating system
-or a maintenance utility. If this is an
-operating system setup program it is then responsible for setting the
-requisite environment variables for
-subsequent boots. The platform firmware may also decide to recover or
-set to a known set of boot options."
-
-So as per the spec, the firmware is allowed to set up some known set
-of boot options which in our case can
-be done with bootflow scan. I don't think it breaks the spec, please
-correct me if I am wrong.
-
-Even in EDK2, while creating new Boot variables first time, it states that
-Link [1]
-
-"      //
-      // Try best to add the boot options so continue upon failure.
-      //
-"
-
-All in all, spec allows firmware developers to handle cases that would
-allow OS to boot in exceptional
-circumstances. With u-boot and lack of SetVariables from OS we always
-land in Default Boot behaviour
-and only use EFI/BOOT/BOOTXXXX.EFI as fallback which is supposed to be
-used for removable
-boot media - Section 3.5.1.1 Removable Media Boot Behavior
-
-> > >>>>> For the efi bootmeth we can actually do what we like, can't we? I=
-ts
-> > >>>>> behaviour isn't defined by the spec as I understand it.
-> > >>>>>
-> > >>>>> I wonder how this works, if the user installs both Debian and Ubu=
-ntu
-> > >>>>> on the machine? I suppose each one separately updates its grub.cf=
-g
-> > >>>>> with all the OSes it can find on the machine? Then just one of th=
-em
-> > >>>>> gets to be the initial .efi app?
-> > >>>>>
-> > >>>>> Can we work together on adding a new, separate file which lists t=
-he
-> > >>>>> .efi files and what they are for?
-> > >>>>
-> > >>>> There is already a place defined by the UEFI specification where t=
-o put
-> > >>>> that information: the UEFI boot options defined in variables BOOT#=
-###.
-> > >>>> And this is exactly what all operating system use. The information=
- what
-> > >>>> the entries are for are in the label part of the boot options. The
-> > >>>> sequence in which to try loading is in variable BootOrder.
-> > >>>>
-> > >>>> There is no point in reinventing the wheel and making it square.
-> > >>>
-> > >>> You have not addressed my question, or I don't understand your answ=
-er.
-> > >>>
-> > >>> I am not worried about what the computer does. I am worried about w=
-hat
-> > >>> the user sees.
-> > >>>
-> > >>> So far as I can tell there is currently no way to know what you are
-> > >>> booting (Ubuntu, Debian) until you boot it
-> > >>
-> > >> Of course I know. These are some of the boot options on my laptop:
-> > >>
-> > >> Boot0000* Windows Boot Manager
-> > >> HD(2,GPT,54e58a37-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)/File=
-(\EFI\Microsoft\Boot\bootmgfw.efi)WINDOWS.........x...B.C.D.O.B.J.E.C.T.=3D=
-.{.9.d.e.a.8.6.2.c.-.5.c.d.d.-.4.e.7.0.-.a.c.c.1.-.f.3.2.b.3.4.4.d.5.3.7.2.=
-}...M................
-> > >> Boot0001* debian
-> > >> HD(2,GPT,54e58a14-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)/File=
-(\EFI\debian\shimx64.efi)
-> > >> Boot0002* ubuntu
-> > >> HD(2,GPT,54e58a14-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)/File=
-(\EFI\ubuntu\shimx64.efi)
-> > >> Boot0063* EFI Shell
-> > >> HD(2,GPT,54e58a14-c1db-4c6b-afda-24340c39cda5,0x109000,0x32000)/File=
-(Shell.efi)
-> > >>
-> > >> If I open the boot menu (F12 key on a Lenovo laptop, F8 key on an AS=
-US
-> > >> mainboards), I see a menu which allows me to choose which of Windows=
-,
-> > >> Debian, Ubuntu, or the EFI Shell I want to boot.
-> > >>
-> > >> In U-Boot we already have the same. Please, have a look at the secti=
-on
-> > >> 'UEFI boot variable enumeration' in doc/usage/cmd/bootmenu.rst.
-> > >
-> > > OK thank you. So what sets that up? When you install Ubuntu does it
-> > > add a new Boot0002 variable? Then you install Debian and it adds some
-> > > other one??
-> >
-> > Yes, the OS installation process sets up the boot variables. For Debian
-> > or Ubuntu this happens when shim or GRUB is installed. If Debian or
-> > Ubuntu shim is started as /efi/boot/boot<arch>.efi, it also adds the
-> > missing entry based on a CSV file.
-> >
-> > E.g. on my laptop I find /EFI/ubuntu/BOOTX64.CSV with content
-> >
-> >    shimx64.efi,ubuntu,,This is the boot entry for ubuntu
-> >
-> > and file /boot/efi/EFI/debian/BOOTX64.CSV with content
-> >
-> >    shimx64.efi,debian,,This is the boot entry for debian
->
-> OK, thank you. That explains the link to the boot order. But what
-> creates these CSV files? It is the os prober, or is it Ubuntu/Debian?
-
-AFAIK, these are created by the OS installer programme by running
-grub-install.
+On Wed, 6 Dec 2023 at 00:25, Soeren Moch <smoch@web.de> wrote:
 
 >
-> >
-> > >
-> > > Also the information is very limited, e.g. it does not show the Ubunt=
-u
-> > > version, kernel version, etc.
-> >
-> > The length of the labels is only limited by available storage. It is th=
-e
-> > OS'es choice to opt for a such a short label.
 >
-> Yes, really I am looking for metadata that includes more detail at
-> different leaves, not just a label.
+> On 05.12.23 17:25, Maxim Uvarov wrote:
+>
+>
+>
+> On Tue, 5 Dec 2023 at 21:49, Soeren Moch <smoch@web.de> wrote:
+>
+>> On 05.12.23 14:15, Maxim Uvarov wrote:
+>>
+>> I think I solved the size issue on all the boards.
+>>
+>> Key changes:
+>> 1. remove compilation of original ping.c and tftp.c (tftp had also server
+>> code, so I will partially bring it back.)
+>>
+>> Interesting.
+>> @Tom: Is there other server code in u-boot, that is enabled by default
+>> (and can be used to reclaim code space)?
+>> Fur sure I do not need u-boot to act as server for tftp (maye nfs,
+>> others).
+>>
+>
+> Maybe I need to be more clear about this. reference to code from tftp.c
+> and ping.c exist in net.c, test/image/spl_load_net.c, test.dm/dsa.c,
+> test/dm/eth.c.
+> And even if that code is not used (replaced with lwip calls to the same
+> commands in my case) it adds additional size. Even enabled LTO does not see
+> direct difference.
+>
+> So 'server code' does not mean u-boot acting as network server, you mean
+> this code is referenced by something else? And things in test do increase
+> image size?
+>
+>
+>
+>
+>> 2. LTO=y
+>> 3. CONFIG_LOGLEVEL=3 instead of 4.
+>> 4. CONFIG_CMD_DATE is not set
+>> 5. CONFIG_CMD_LICENSE is not set
+>> 6. CONFIG_CMD_PING (if 1-6 did not help).
+>>
+>> And these changes were enough for CI tagrets to build.
+>> I also tested that Raspberry PI 4B works fine (dhcp, ping). Looking for
+>> other boards to test.
+>>
+>> For example for this tbs2910 board changes are:
+>>
+>> Disabling CMD_DATE is unfortunate. This can help to debug RTC problems
+>> (already used it for this purpose).
+>> And, if we are that close to the size limit, than maybe we can get away
+>> for this series, but for sure will run into trouble for every other small
+>> change to u-boot core/driver code.
+>>
+>> Regards,
+>> Soeren
+>>
+>
+> The problem is that for many targets the limit is 1MB.
+>
+> For tbs2910 it is 383kBytes. And there was plenty of free space when I
+> introduced mainline u-boot support. But yes, space got tighter over time.
 >
 
-The job of these EFI is to load grub bootloader and rest all details
-(kernel version,
-OS, etc) is supposed to be handled by Grub.
+Hm,
+orig:
+-rw-r--r-- 1 uboot uboot 371K Dec  5 19:54 u-boot.bin
+lwip:
+-rw-r--r-- 1 uboot uboot 380K Dec  5 19:55 u-boot.bin
 
-[0] - https://uefi.org/sites/default/files/resources/UEFI_Spec_2_10_Aug29.p=
-df
-[1] - https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/Ue=
-fiBootManagerLib/BmBoot.c#L2471
+Then if I just enable CMD_DATE:
+u-boot.imx exceeds file size limit:
+  limit:  0x5fc00 bytes
+  actual: 0x60c00 bytes
+  excess: 0x1000 bytes
+make: *** [Makefile:1240: u-boot.imx] Error 1
+make: *** Deleting file 'u-boot.imx'
+uboot@3eebd85985c8:~/uboot-size$ ls -lh u-boot.bin
+-rw-r--r-- 1 uboot uboot 382K Dec  5 19:58 u-boot.bin
 
-Kind Regards,
-Shantur
+So limit for your board is:
+(gdb) p 0x5fc00/1024
+$1 = 383
+
+383k. Where do you see the space?
+
+BR,
+Maxim.
+
+
+
+> U-Boot in some minimal configuration is about 500kb. But U-boot with EFI,
+> USB, Eth drivers,  MMC, RTC, and all the commands is 900+ kb and very close
+> to 1MB. Most of the new features are enabled by default.
+>
+> No. Tom does a very good job to ensure that there is no (not much)
+> additional space required for unrelated boards that do not need new
+> features.
+>
+> I.e. they do not exist in _defconfig and appear in the resulting .config
+> automatically.  I would say that for some small targets things like EFI,
+> Secure boot, TPM, Updates and many others are not needed. But if new
+> features will appear by default very soon we will see limits.
+>
+> New features will not be enabled for old space constrained boards. In your
+> series you did not offer to keep the old implementation instead, this is
+> different and the reason why we discuss image size constraints.
+>
+> Regards,
+> Soeren
+>
+>
+> BR,
+> Maxim.
+>
+>>
+>> --- a/configs/tbs2910_defconfig
+>> +++ b/configs/tbs2910_defconfig
+>> @@ -18,6 +18,7 @@ CONFIG_SYS_MEMTEST_END=0x2f400000
+>>  CONFIG_LTO=y
+>>  CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>>  CONFIG_BOARD_SIZE_LIMIT=392192
+>> +CONFIG_TIMESTAMP=y (this was added by savedefconfig)
+>>  # CONFIG_BOOTSTD is not set
+>>  CONFIG_SUPPORT_RAW_INITRD=y
+>>  CONFIG_BOOTDELAY=3
+>> @@ -26,6 +27,7 @@ CONFIG_BOOTCOMMAND="mmc rescan; if run bootcmd_up1;
+>> then run bootcmd_up2; else r
+>>  CONFIG_USE_PREBOOT=y
+>>  CONFIG_PREBOOT="echo PCI:; pci enum; pci 1; usb start"
+>>  CONFIG_DEFAULT_FDT_FILE="imx6q-tbs2910.dtb"
+>> +CONFIG_LOGLEVEL=3
+>>  CONFIG_PRE_CONSOLE_BUFFER=y
+>>  CONFIG_HUSH_PARSER=y
+>>  CONFIG_SYS_PROMPT="Matrix U-Boot> "
+>> @@ -52,7 +54,7 @@ CONFIG_CMD_DHCP=y
+>>  CONFIG_CMD_MII=y
+>>  CONFIG_CMD_PING=y
+>>  CONFIG_CMD_CACHE=y
+>> -CONFIG_CMD_TIME=y
+>> +# CONFIG_CMD_DATE is not set
+>>  CONFIG_CMD_SYSBOOT=y
+>>  # CONFIG_CMD_VIDCONSOLE is not set
+>>  CONFIG_CMD_EXT2=y
+>>
+>> BR,
+>> Maxim.
+>>
+>>
+>> On Tue, 28 Nov 2023 at 13:09, Maxim Uvarov <maxim.uvarov@linaro.org>
+>> wrote:
+>>
+>>>
+>>>
+>>> On Tue, 28 Nov 2023 at 03:20, Soeren Moch <smoch@web.de> wrote:
+>>>
+>>>> On 27.11.23 14:11, Tom Rini wrote:
+>>>> > On Mon, Nov 27, 2023 at 06:57:09PM +0600, Maxim Uvarov wrote:
+>>>> >
+>>>> >> Increase allowed binary size to fit lwip code.
+>>>> >>
+>>>> >> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+>>>> >> ---
+>>>> >>   configs/tbs2910_defconfig | 2 +-
+>>>> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>> >>
+>>>> >> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
+>>>> >> index 8fbe84f1d2..ce40efa9ab 100644
+>>>> >> --- a/configs/tbs2910_defconfig
+>>>> >> +++ b/configs/tbs2910_defconfig
+>>>> >> @@ -17,7 +17,7 @@ CONFIG_SYS_MEMTEST_START=0x10000000
+>>>> >>   CONFIG_SYS_MEMTEST_END=0x2f400000
+>>>> >>   CONFIG_LTO=y
+>>>> >>   CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>>>> >> -CONFIG_BOARD_SIZE_LIMIT=392192
+>>>> >> +CONFIG_BOARD_SIZE_LIMIT=417792
+>>>> >>   # CONFIG_BOOTSTD is not set
+>>>> >>   CONFIG_SUPPORT_RAW_INITRD=y
+>>>> >>   CONFIG_BOOTDELAY=3
+>>>> > This is another case where the binary size is a fairly hard limit. You
+>>>> > forgot to cc the board maintainer here (and I assume the rest of the
+>>>> > series too) for these config changes.
+>>>> ThanksTom for sending a notification to me.
+>>>>
+>>>> Yes, the CONFIG_BOARD_SIZE_LIMIT is a hard limit and this patch in its
+>>>> current form will break tbs2910 support and even brick the board for
+>>>> some configurations. So NAK for this patch.
+>>>> > I think on this platform it's not
+>>>> > impossible (like it is on am335x where I just replied) but really
+>>>> > difficult. I'll let Soeren comment on if switching the network stack
+>>>> to
+>>>> > lwip is the kind of feature enhancement that warrants the pain of
+>>>> > dealing with the size change here or not.
+>>>> Network boot is no important feature for this board and not used in
+>>>> the default boot configuration. But network support always was part
+>>>> of the config, may be used by some users, and is at least required
+>>>> to communicate the ethernet address to linux.
+>>>>
+>>>> So I'm not interested in a new network stack for this board, but
+>>>> also cannot disable network support completely. This seems to be a
+>>>> problem for this patch series, since networking support implies LWIP
+>>>> now.
+>>>>
+>>>>
+>>> Thanks Soeren for the explanation. Then yes, something more advanced is
+>>> needed
+>>> to be done here.
+>>>
+>>>
+>>>
+>>>> The question for me is, why is the new network stack consuming so
+>>>> much space, with only a few enabled commands? Is the whole library
+>>>> linked in with some unused features (the cover letter mentions much
+>>>> more than what seems to be used in the converted commands). Or is
+>>>> the old network stack linked in in parallel to the new one? Can
+>>>> we save space here?
+>>>>
+>>>
+>>> Yes, the old code is still there. I decided to not touch it for the
+>>> first integration (arp.o, bootp.o, ping.o and
+>>> mostly all from net/Makefile).  Those files also have reference code in
+>>> net/net.c. Not compiling
+>>> and not linking this code will save some space, but It's larger than the
+>>> current version.
+>>> Like for EVM SPL code with usb+net+ext4 and etc have very minimal space
+>>> for network stack.
+>>> I will take a look at this more closely...
+>>>
+>>>
+>>>>
+>>>> NFS support in the old networking code is quite big, enabled by default,
+>>>> and probably still there in parallel to this new lwip library. If there
+>>>> is really no other option to save space, and lwip in general is agreed
+>>>> to be the way forward for U-Boot, and only tbs2910 is blocking that,
+>>>> then from my point of view disabling NFS for tbs2910 could be a way
+>>>> to stay within the size limit.
+>>>>
+>>>> ok. I think that by default we need something very minimal (dhcp,
+>>> tftp),  probably ping is even not needed.
+>>>
+>>>
+>>>
+>>>> Regards,
+>>>> Soeren
+>>>>
+>>>>
+>>
+>
