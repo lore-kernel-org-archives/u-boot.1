@@ -4,82 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B43C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 18:25:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D12B5C10DCE
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 18:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A538C86DD1;
-	Tue,  5 Dec 2023 19:25:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id 32CA486EF6;
+	Tue,  5 Dec 2023 19:31:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="HBsa1J6q";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 431D486E82; Tue,  5 Dec 2023 19:25:22 +0100 (CET)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B401286538
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 19:25:19 +0100 (CET)
+ id 9C44A86F42; Tue,  5 Dec 2023 19:30:58 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4DD8E86DD1
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 19:30:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
- t=1701800717; x=1702405517; i=smoch@web.de;
- bh=kWlRX08TQgrk+9BbNGcEnr3C8ipSctYzqUlQICJYwVc=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=HBsa1J6qHTY9F49AqUoUBRUzzUKceQPl5csot7mtidQ+DnW6sYHIVbnSuqxsF5yV
- ezJt2w08JaU5IGGBdQyuuTv1ixumqWAFyovhs4UQnpfJ+53SInb3RToFt1lMrLXBy
- W8fhsFM2fifkYzVK9fXKmZ/mShIoaMJKQembWvMu2keRzg/qiC2bTKZWdyTURtaJX
- i3bLvghOZIluDAFKHpQRZY9p6Ojl5B5x59nR5gkWJ2x4GmWwDL9FtG3vYYWQYncsW
- TFhXL7g874Wc2bECeSNOt37SiIux3us9+bZtdt591PNCYkoRBiMZnQMuf/Zi/XwOP
- s/qT4mjk24RDGq/APA==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [10.9.8.2] ([93.241.254.39]) by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1N6sG3-1rJhVi0b9z-017ugs; Tue, 05
- Dec 2023 19:25:17 +0100
-Message-ID: <b47859ca-36d3-4eee-88fb-f7859e69ff2d@web.de>
-Date: Tue, 5 Dec 2023 19:25:15 +0100
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 19E5B139F;
+ Tue,  5 Dec 2023 10:31:42 -0800 (PST)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 242E63F762;
+ Tue,  5 Dec 2023 10:30:54 -0800 (PST)
+Date: Tue, 5 Dec 2023 18:30:47 +0000
+From: Andre Przywara <andre.przywara@arm.com>
+To: Stephen Graf <stephen.graf@gmail.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, Mikhail
+ Kalashnikov <iuncuim@gmail.com>, Piotr Oniszczuk
+ <piotr.oniszczuk@gmail.com>, Bob McChesney <bob@electricworry.net>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 0/3] sunxi: add OrangePi Zero 3 board support
+Message-ID: <20231205183047.467aa14c@donnerap.manchester.arm.com>
+In-Reply-To: <1f373e2d-c71a-412f-819a-27b82fc254f4@gmail.com>
+References: <20231204005954.13201-1-andre.przywara@arm.com>
+ <1f373e2d-c71a-412f-819a-27b82fc254f4@gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATHv11 26/43] configs/tbs2910_defconfig inc limit
-Content-Language: en-US
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, goldsimon@gmx.de
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-27-maxim.uvarov@linaro.org>
- <20231127131129.GD2513409@bill-the-cat>
- <c7022ef3-ad0c-4f89-ad47-a0f7df2a24c6@web.de>
- <CAD8XO3aVLzpqV=MDVO2mJBP=sLzSieXhrV8GUPYPpu76mRKjeQ@mail.gmail.com>
- <CAD8XO3Y4_=8wDQcFNJW1MT1yiyDmbQxP3UCRWWWPZzuJkZp88g@mail.gmail.com>
- <1402b942-9ce9-4bc3-9fac-0eb438b23e77@web.de>
- <CAD8XO3bYyfDVnVQdcqDji39Y=i1Q2jdG-SQ6KUWsBPo0umoZnQ@mail.gmail.com>
-From: Soeren Moch <smoch@web.de>
-In-Reply-To: <CAD8XO3bYyfDVnVQdcqDji39Y=i1Q2jdG-SQ6KUWsBPo0umoZnQ@mail.gmail.com>
-X-Provags-ID: V03:K1:fcobb7fuBMj6TWO7OiIkwZWwlw2SLp5xv1XwsI4GQjdKpXrhgPK
- AfuYMYx4fX/wcxHqWuGaYMCmJP+sPJjnU7AIfZG9j28IDKdSyqKTUN3dFGZUB97Fs6GDp8Y
- aC7gQG6jLdR3EZ/aOTL30jtBes5gePo4Y4B7UJNkLP2qH67GSGExCvJyojXFfYxKhlApxpB
- WTzt3s6TB3MxC8RzikMag==
-UI-OutboundReport: notjunk:1;M01:P0:Fz7FRqv2++8=;7wQzddkj9Urxll0XxkOL5Zfe1qm
- /TEPYzvvey+lF/yXUiDNzllW3BoTHWHK3aE+kCNs7MqbfxxlwwtDcJb8kGeTJZcYDefqybFDO
- QSfhofHa4wRKOqjWqzOFerzfdB3C4Cs/vmntSvSYptSzj7c2rA1ShiMYE0iAEc9F8DzgQ8eB1
- P3rP1xs9t6RdeJcgW/Adk7CWZxWq85e6C92Sd7TSKnELU/S3BoGU7sD9wnnr37kr5oo5YmgBp
- cRaVJ2h8hbQSXerdgVaNbT9+x2GRP6lxo16Lr5EW0HYJbqsYWO5DVhmF8KJkrC/n8GJmo7Mn0
- BV8XEwbaFlGlWqlbiHAEHEtkJ5FF0Wy9EP+zTL274ufhiPbFcipoYQNywA/Ef2mzej9DVVeeH
- 3xconioR0QdUXWS1DHIIoGBGtRSa1V461FTfBcz+735hYqh1LxW/Ah27H5k5HhJ3uEiOH0rZD
- pBZcPkDdaQulEaBzgR0kVxPZcQDGuDEcMiZ6R6XNekwmYqGqVHAg8BaoWnXTDbJTLMfGxHBjx
- GenKQF5tCSRbQ4Hg1x4SlvCfDPWG69ugpJpJ7Mo++0koFYMlZF5AAkplsIb2sW00ZQ+TInvMg
- lflDgZ8jHxkUYa+VVMTng+2R9IluuuCtC0MzIfv0GqbCpjfouiAR97Wtu1g8Ig2c18QcZIQ2C
- AXeWyD1vLGtSp3jDQT+tEihfZod6LZXXEl7Vc74ZaQkQ0gNC6ct4vDI444akMtPct2LBFNhRv
- 3ARHiDyUDhDdB1wHEjWXQ+9TS3Q7Wff7MSWXZ2rK6lCSL705iGXdVy4doVmtY8CU/87oa1ar0
- Cz0w+MzFj/D6N3PoI9dUHKZYPweJ6F734KoCFlj4PqHaDjcU+CwSMXhFmWBREcAFHaNhyK7aY
- cqueSjtAy7pRQP+8U6xZlawpRH6lRAXRuRC34PyRUEf8BRwy3Jtz2tZdEcahe0dHTvPNC8giP
- aqKTGgC5EObMZjLDYp76u80OR0Y=
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,231 +62,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 3 Dec 2023 21:57:51 -0800
+Stephen Graf <stephen.graf@gmail.com> wrote:
+
+Hi Stephen,
+
+> I have tested a newly built u-boot with the patches you provided and it works well.
+> It is the same configuration as what I have been testing with for the last few weeks.
+> 
+> I loaded the U-boot to SPI flash and tested with the SD card removed from the system
+> and put in a USB card reader. The output for that test is below.
+
+thanks for your testing efforts! Is it OK if I convert this statement into
+a "Tested-by:" tag with your email, to become part of the commit?
+
+Cheers,
+Andre
 
 
-On 05.12.23 17:25, Maxim Uvarov wrote:
->
->
-> On Tue, 5 Dec 2023 at 21:49, Soeren Moch <smoch@web.de> wrote:
->
->     On 05.12.23 14:15, Maxim Uvarov wrote:
->>     I think I solved the size issue on all the boards.
->>
->>     Key changes:
->>     1. remove compilation of original ping.c and tftp.c (tftp had
->>     also server code, so I will partially bring it back.)
->     Interesting.
->     @Tom: Is there other server code in u-boot, that is enabled by
->     default (and can be used to reclaim code space)?
->     Fur sure I do not need u-boot to act as server for tftp (maye nfs,
->     others).
->
->
-> Maybe I need to be more clear about this. reference to code from
-> tftp.c and ping.c exist in net.c, test/image/spl_load_net.c,
-> test.dm/dsa.c <http://test.dm/dsa.c>, test/dm/eth.c.
-> And even if that code is not used (replaced with lwip calls to the
-> same commands in my case) it adds additional size. Even enabled LTO
-> does not see
-> direct difference.
-So 'server code' does not mean u-boot acting as network server, you mean
-this code is referenced by something else? And things in test do
-increase image size?
->
->>     2. LTO=3Dy
->>     3. CONFIG_LOGLEVEL=3D3 instead of 4.
->>     4. CONFIG_CMD_DATE is not set
->>     5. CONFIG_CMD_LICENSE is not set
->>     6. CONFIG_CMD_PING (if 1-6 did not help).
->>
->>     And these changes were enough for CI tagrets to build.
->>     I also tested that Raspberry PI 4B works fine (dhcp, ping).
->>     Looking for other boards to test.
->>
->>     For example for this tbs2910 board changes are:
->     Disabling CMD_DATE is unfortunate. This can help to debug RTC
->     problems (already used it for this purpose).
->     And, if we are that close to the size limit, than maybe we can get
->     away for this series, but for sure will run into trouble for every
->     other small change to u-boot core/driver code.
->
->     Regards,
->     Soeren
->
->
-> The problem is that for many targets the limit is 1MB.
-For tbs2910 it is 383kBytes. And there was plenty of free space when I
-introduced mainline u-boot support. But yes, space got tighter over time.
-> U-Boot in some minimal configuration is about 500kb. But U-boot with
-> EFI, USB, Eth drivers,=C2=A0 MMC, RTC, and all the commands is 900+ kb a=
-nd
-> very close to 1MB. Most of the new features are enabled by default.
-No. Tom does a very good job to ensure that there is no (not much)
-additional space required for unrelated boards that do not need new
-features.
-> I.e. they do not exist in _defconfig and appear in the resulting
-> .config automatically.=C2=A0 I would say that for some small targets thi=
-ngs
-> like EFI, Secure boot, TPM, Updates and many others are not needed.
-> But if new features will appear by default very soon we will see limits.
-New features will not be enabled for old space constrained boards. In
-your series you did not offer to keep the old implementation instead,
-this is different and the reason why we discuss image size constraints.
+> For completeness you might want to mention that another difference between the zero2
+> and zero3 is the emac phy going from Realtek to Motorcomm.
+> 
+> Thank you for fixing my patch attempt. It is the first one I have ever done.
+> Thank you also for your patience with my fumbling attempts. I have learned a lot
+> from you in the last two weeks.
+> 
+> U-Boot SPL 2024.01-rc3-00043-g5c4e9d0c74-dirty (Dec 03 2023 - 18:21:41 -0800)
+> DRAM: 1024 MiB
+> Trying to boot from sunxi SPI
+> NOTICE:  BL31: v2.10.0  (debug):v2.10.0
+> NOTICE:  BL31: Built : 18:07:18, Nov 23 2023
+> NOTICE:  BL31: Detected Allwinner H616 SoC (1823)
+> NOTICE:  BL31: Found U-Boot DTB at 0x4a0b2828, model: OrangePi Zero3
+> INFO:    ARM GICv2 driver initialized
+> INFO:    Configuring SPC Controller
+> INFO:    PMIC: Probing AXP305 on RSB
+> ERROR:   RSB: set run-time address: 0x10003
+> INFO:    Could not init RSB: -65539
+> INFO:    BL31: Platform setup done
+> INFO:    BL31: Initializing runtime services
+> INFO:    BL31: cortex_a53: CPU workaround for erratum 855873 was applied
+> INFO:    BL31: cortex_a53: CPU workaround for erratum 1530924 was applied
+> INFO:    PSCI: Suspend is unavailable
+> INFO:    BL31: Preparing for EL3 exit to normal world
+> INFO:    Entry point address = 0x4a000000
+> INFO:    SPSR = 0x3c9
+> INFO:    Changed devicetree.
+> 
+> 
+> U-Boot 2024.01-rc3-00043-g5c4e9d0c74-dirty (Dec 03 2023 - 18:21:41 -0800) Allwinner Technology
+> 
+> CPU:   Allwinner H616 (SUN50I)
+> Model: OrangePi Zero3
+> DRAM:  1 GiB
+> Core:  57 devices, 25 uclasses, devicetree: separate
+> WDT:   Not starting watchdog@30090a0
+> MMC:   mmc@4020000: 0
+> Loading Environment from SPIFlash... SF: Detected zb25vq128 with page size 256 Bytes, erase size 4 KiB, total 16 MiB
+> OK
+> In:    serial@5000000
+> Out:   serial@5000000
+> Err:   serial@5000000
+> Allwinner mUSB OTG (Peripheral)
+> Net:   eth0: ethernet@5020000using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
+> MAC de:ad:be:ef:00:01
+> HOST MAC de:ad:be:ef:00:00
+> RNDIS ready
+> , eth1: usb_ether
+> starting USB...
+> Bus usb@5200000: USB EHCI 1.00
+> Bus usb@5200400: USB OHCI 1.0
+> scanning bus usb@5200000 for devices... Device NOT ready
+>     Request Sense returned 02 3A 00
+> Device NOT ready
+>     Request Sense returned 02 3A 00
+> Device NOT ready
+>     Request Sense returned 02 3A 00
+> 2 USB Device(s) found
+> scanning bus usb@5200400 for devices... 1 USB Device(s) found
+>         scanning usb for storage devices... 1 Storage Device(s) found
+> Hit any key to stop autoboot:  0
+> Card did not respond to voltage select! : -110
+> 
+> Device 0: Vendor: Generic- Rev: 1.00 Prod: SD/MMC
+>              Type: Removable Hard Disk
+>              Capacity: 15193.5 MB = 14.8 GB (31116288 x 512)
+> ... is now current device
+> Scanning usb 0:1...
+> Found U-Boot script /boot/boot.scr
+> 1052 bytes read in 1 ms (1 MiB/s)
+> ## Executing script at 4fc00000
+> Card did not respond to voltage select! : -110
+> ** Bad device specification mmc 0 **
+> 19472 bytes read in 3 ms (6.2 MiB/s)
+> No FDT memory address configured. Please configure
+> the FDT address via "fdt addr <address>" command.
+> Aborting!
+> 7088139 bytes read in 324 ms (20.9 MiB/s)
+> 22491144 bytes read in 1025 ms (20.9 MiB/s)
+> Moving Image from 0x40080000 to 0x40200000, end=41800000
+> ## Loading init Ramdisk from Legacy Image at 4ff00000 ...
+>     Image Name:   uInitrd
+>     Image Type:   AArch64 Linux RAMDisk Image (gzip compressed)
+>     Data Size:    7088075 Bytes = 6.8 MiB
+>     Load Address: 00000000
+>     Entry Point:  00000000
+>     Verifying Checksum ... OK
+> ## Flattened Device Tree blob at 4fa00000
+>     Booting using the fdt blob at 0x4fa00000
+> Working FDT set to 4fa00000
+>     Loading Ramdisk to 4993d000, end 49fff7cb ... OK
+>     Loading Device Tree to 0000000049935000, end 000000004993cc0f ... OK
+> Working FDT set to 49935000
+> 
+> Starting kernel ...
+> 
+> 
+> Welcome to Debian GNU/Linux 12 (bookworm)!
+> 
+> 
+> 
+> On 2023-12-03 4:59 p.m., Andre Przywara wrote:
+> > A small update for the OrangePi Zero 3 support series. This fixes
+> > USB support, and upgrades the DRAM clock to 792, for better stability
+> > (as the other DRAM parameters were tailored to that frequency). I added
+> > the tags on the way.
+> > Please test!
+> > 
+> > =================
+> > The OrangePi Zero 3 is a small development board featuring the Allwinner
+> > H618 SoC. Compared to its predecessor OrangePi Zero 2, the new board uses
+> > LPDDR4 DRAM instead of DDR3 DRAM, and an X-Powers AXP313 PMIC instead of
+> > the AXP305.
+> > U-Boot gained support for both LPDDR4 DRAM and the new PMIC just
+> > recently, so add a user for those features by adding a defconfig for the
+> > new board.
+> > To make this work, patch 1/3 introduces support for zBIT SPI NOR flash
+> > chip, and patch 2/3 removes the default AXP305 PMIC selection when
+> > compiling for H616 SoCs.
+> > Patch 3/3 then adds the defconfig. The DT was already synced from the
+> > Linux kernel repo a few weeks ago.
+> > 
+> > Cheers,
+> > Andre
+> > 
+> > Changelog v1 .. v2:
+> > - add tags
+> > - set DRAM clock to 792 MHz (from the default 720 MHz)
+> > - fix USB support by supplying USB VBUS enable GPIO
+> > 
+> > Andre Przywara (3):
+> >    mtd: spi-nor: Add support for zBIT ZB25VQ128
+> >    sunxi: H616: remove default AXP305 selection
+> >    sunxi: H616: Add OrangePi Zero 3 board support
+> > 
+> >   arch/arm/dts/Makefile            |  1 +
+> >   board/sunxi/MAINTAINERS          |  5 +++++
+> >   configs/orangepi_zero2_defconfig |  1 +
+> >   configs/orangepi_zero3_defconfig | 32 ++++++++++++++++++++++++++++++++
+> >   configs/x96_mate_defconfig       |  1 +
+> >   drivers/mtd/spi/Kconfig          |  5 +++++
+> >   drivers/mtd/spi/spi-nor-ids.c    |  5 +++++
+> >   drivers/power/Kconfig            |  1 -
+> >   8 files changed, 50 insertions(+), 1 deletion(-)
+> >   create mode 100644 configs/orangepi_zero3_defconfig
+> >   
 
-Regards,
-Soeren
->
-> BR,
-> Maxim.
->
->>
->>     --- a/configs/tbs2910_defconfig
->>     +++ b/configs/tbs2910_defconfig
->>     @@ -18,6 +18,7 @@ CONFIG_SYS_MEMTEST_END=3D0x2f400000
->>     =C2=A0CONFIG_LTO=3Dy
->>     =C2=A0CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
->>     =C2=A0CONFIG_BOARD_SIZE_LIMIT=3D392192
->>     +CONFIG_TIMESTAMP=3Dy (this was added by savedefconfig)
->>     =C2=A0# CONFIG_BOOTSTD is not set
->>     =C2=A0CONFIG_SUPPORT_RAW_INITRD=3Dy
->>     =C2=A0CONFIG_BOOTDELAY=3D3
->>     @@ -26,6 +27,7 @@ CONFIG_BOOTCOMMAND=3D"mmc rescan; if run
->>     bootcmd_up1; then run bootcmd_up2; else r
->>     =C2=A0CONFIG_USE_PREBOOT=3Dy
->>     =C2=A0CONFIG_PREBOOT=3D"echo PCI:; pci enum; pci 1; usb start"
->>     =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"imx6q-tbs2910.dtb"
->>     +CONFIG_LOGLEVEL=3D3
->>     =C2=A0CONFIG_PRE_CONSOLE_BUFFER=3Dy
->>     =C2=A0CONFIG_HUSH_PARSER=3Dy
->>     =C2=A0CONFIG_SYS_PROMPT=3D"Matrix U-Boot> "
->>     @@ -52,7 +54,7 @@ CONFIG_CMD_DHCP=3Dy
->>     =C2=A0CONFIG_CMD_MII=3Dy
->>     =C2=A0CONFIG_CMD_PING=3Dy
->>     =C2=A0CONFIG_CMD_CACHE=3Dy
->>     -CONFIG_CMD_TIME=3Dy
->>     +# CONFIG_CMD_DATE is not set
->>     =C2=A0CONFIG_CMD_SYSBOOT=3Dy
->>     =C2=A0# CONFIG_CMD_VIDCONSOLE is not set
->>     =C2=A0CONFIG_CMD_EXT2=3Dy
->>
->>     BR,
->>     Maxim.
->>
->>
->>     On Tue, 28 Nov 2023 at 13:09, Maxim Uvarov
->>     <maxim.uvarov@linaro.org> wrote:
->>
->>
->>
->>         On Tue, 28 Nov 2023 at 03:20, Soeren Moch <smoch@web.de> wrote:
->>
->>             On 27.11.23 14:11, Tom Rini wrote:
->>             > On Mon, Nov 27, 2023 at 06:57:09PM +0600, Maxim Uvarov
->>             wrote:
->>             >
->>             >> Increase allowed binary size to fit lwip code.
->>             >>
->>             >> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
->>             >> ---
->>             >>=C2=A0 =C2=A0configs/tbs2910_defconfig | 2 +-
->>             >>=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 deletion(-=
-)
->>             >>
->>             >> diff --git a/configs/tbs2910_defconfig
->>             b/configs/tbs2910_defconfig
->>             >> index 8fbe84f1d2..ce40efa9ab 100644
->>             >> --- a/configs/tbs2910_defconfig
->>             >> +++ b/configs/tbs2910_defconfig
->>             >> @@ -17,7 +17,7 @@ CONFIG_SYS_MEMTEST_START=3D0x10000000
->>             >>=C2=A0 =C2=A0CONFIG_SYS_MEMTEST_END=3D0x2f400000
->>             >>=C2=A0 =C2=A0CONFIG_LTO=3Dy
->>             >>=C2=A0 =C2=A0CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
->>             >> -CONFIG_BOARD_SIZE_LIMIT=3D392192
->>             >> +CONFIG_BOARD_SIZE_LIMIT=3D417792
->>             >>=C2=A0 =C2=A0# CONFIG_BOOTSTD is not set
->>             >>=C2=A0 =C2=A0CONFIG_SUPPORT_RAW_INITRD=3Dy
->>             >>=C2=A0 =C2=A0CONFIG_BOOTDELAY=3D3
->>             > This is another case where the binary size is a fairly
->>             hard limit. You
->>             > forgot to cc the board maintainer here (and I assume
->>             the rest of the
->>             > series too) for these config changes.
->>             ThanksTom for sending a notification to me.
->>
->>             Yes, the CONFIG_BOARD_SIZE_LIMIT is a hard limit and this
->>             patch in its
->>             current form will break tbs2910 support and even brick
->>             the board for
->>             some configurations. So NAK for this patch.
->>             > I think on this platform it's not
->>             > impossible (like it is on am335x where I just replied)
->>             but really
->>             > difficult. I'll let Soeren comment on if switching the
->>             network stack to
->>             > lwip is the kind of feature enhancement that warrants
->>             the pain of
->>             > dealing with the size change here or not.
->>             Network boot is no important feature for this board and
->>             not used in
->>             the default boot configuration. But network support
->>             always was part
->>             of the config, may be used by some users, and is at least
->>             required
->>             to communicate the ethernet address to linux.
->>
->>             So I'm not interested in a new network stack for this
->>             board, but
->>             also cannot disable network support completely. This
->>             seems to be a
->>             problem for this patch series, since networking support
->>             implies LWIP
->>             now.
->>
->>
->>         Thanks Soeren for the explanation. Then yes, something more
->>         advanced is needed
->>         to be done here.
->>
->>             The question for me is, why is the new network stack
->>             consuming so
->>             much space, with only a few enabled commands? Is the
->>             whole library
->>             linked in with some unused features (the cover letter
->>             mentions much
->>             more than what seems to be used in the converted
->>             commands). Or is
->>             the old network stack linked in in parallel to the new
->>             one? Can
->>             we save space here?
->>
->>
->>         Yes, the old code is still there. I decided to not touch it
->>         for the first integration (arp.o, bootp.o, ping.o and
->>         mostly all from net/Makefile).=C2=A0 Those files also have
->>         reference code in net/net.c. Not compiling
->>         and not linking this code will save some space, but It's
->>         larger than the current version.
->>         Like for EVM SPL code with usb+net+ext4 and etc have very
->>         minimal space for network stack.
->>         I will take a look at this more closely...
->>
->>
->>             NFS support in the old networking code is quite big,
->>             enabled by default,
->>             and probably still there in parallel to this new lwip
->>             library. If there
->>             is really no other option to save space, and lwip in
->>             general is agreed
->>             to be the way forward for U-Boot, and only tbs2910 is
->>             blocking that,
->>             then from my point of view disabling NFS for tbs2910
->>             could be a way
->>             to stay within the size limit.
->>
->>         ok. I think that by default we need something very minimal
->>         (dhcp, tftp),=C2=A0 probably ping is even not needed.
->>
->>             Regards,
->>             Soeren
->>
->
