@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7224C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:47:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDBD6C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:47:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B84CF8757E;
-	Tue,  5 Dec 2023 14:47:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B7C187860;
+	Tue,  5 Dec 2023 14:47:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFFiD3V1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gpX9I38C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA70F8772E; Tue,  5 Dec 2023 14:47:00 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 24FCB8782F; Tue,  5 Dec 2023 14:47:02 +0100 (CET)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A66B58753E
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:46:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B00587447
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:47:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2c9f413d6b2so36217981fa.1
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:46:58 -0800 (PST)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2ca09601127so24566941fa.1
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:47:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701784017; x=1702388817; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701784019; x=1702388819; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cJvrPaAaFSzZAMsWc01sNx5dzJpVx3P9bhLC6r+6rtw=;
- b=LFFiD3V1O+RecvQIllLf46lyugPuMBRPoVbODZKV0s5jWnDkUaL5MfsmIVkJGFJxn9
- WCCh3sxpFricqfuxjbY5ioJ3IjTdWUzSbWrWkAxTtKwRU8fJmF8wovSPCDQYgMQNjoSN
- W23We152iJc1Z43bTQc7SGNb83DgLTZePtMpyZl0YNZzyXeu5H8H6ZkOvxu/GmIIaHW+
- Wg12ektKDH4LHHhHwKg0vvAN707/e8d9F7PrCEtOtRSwWNdkjj/YohBNa8ae9QaVqrPG
- gL5XGboU1n4gg7Qox+iK9RmvoFqOs4wI8NLXzt0n3hynpLzYIh949jxBfjo65Yy5LP9l
- XdZw==
+ :reply-to; bh=9iWXp1j6Zn5yn85tl3X1/LhNwDy3tZsfmK4PgeIrUo8=;
+ b=gpX9I38CtK74GzdeKbmolXdHAmSTcTr52UffowgY9Dy0NxRjw00wup7We7/vKUChm1
+ gVF4EFPxRZ34fO2hyKjWLzUdukDMLJNCZXWBGQRC3nr2jSVvyptHvDcMdRz517pQJ7i6
+ 38VodtavrEFK1/0AY5U+kRZXhKsEyHwVjZJHmeRHAZrFvP6MZZMk8YoHN5FhZgj/1LCr
+ aHZy/yHRbtb59n8fin4cwP3Z6i4s5jxBKKA/8bFDNCYnzLZ2jRaa+HzQtt5A2yp6EA6I
+ rGeTqLWC9M+Fh66V9ngASJ1z6V1HxkO4qePOrxVxGbno3YP1Mwg71ofZcZpA3vYg6MxY
+ 0oWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701784017; x=1702388817;
+ d=1e100.net; s=20230601; t=1701784019; x=1702388819;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cJvrPaAaFSzZAMsWc01sNx5dzJpVx3P9bhLC6r+6rtw=;
- b=YfRGioxhCAWbk1bJYdFj842Cin9d7Pt+KOowzTLZ7sfHUleqoDqI5suZUvzFxXO1Px
- OduI0tjkIkrQR2mwhNdAHHOpvZNTgI6CppxLDPpqBh2dAhI2NbLS0O7T3SxOcR6K/Uc1
- g7iljGHFxTQ6LpDZt1sfA4IwRSBqsn98vgOZMs0s9T+e/jUR5HPxsFEQfinEiK5/6f9T
- Wk6wdSVgS/33DlreuyrWjnCCiv9o2oKuvjQMOsiN8lqjPUPJpzLbJQDE58rMoNp/zGW4
- CJ+8mEpkoIPK/5xgL0+zcS9gGC4YWqWrYA2wCMWDQOcYj1hGny5uG6H24YZUEvRm9hK7
- OUFw==
-X-Gm-Message-State: AOJu0YwWr8yfi3fyTqbc4BR3/Q1A1sC2NcxbTVFu0oLqf+EvMcKiSLZe
- UmyP4U2j1k7Eg0IhKS+kBMSq+w==
-X-Google-Smtp-Source: AGHT+IHbU3BuwUibEt2omfswJKWGIx753+74FDfBQhKjYXV3f8AOVPVnFi8mwveLf0uf8tpo4OqWnw==
-X-Received: by 2002:a2e:8341:0:b0:2ca:5d4:c16d with SMTP id
- l1-20020a2e8341000000b002ca05d4c16dmr925143ljh.54.1701784017628; 
- Tue, 05 Dec 2023 05:46:57 -0800 (PST)
+ bh=9iWXp1j6Zn5yn85tl3X1/LhNwDy3tZsfmK4PgeIrUo8=;
+ b=lJOFKLWWUmS8CnoboDOsONirMA4dN7/5O5NXyrkREjSftRpbbn3A9UdhWNS2o6yZuk
+ gDLT3s0poziEPMx3fzJfymQGurpJSb6CTzDI1qFU2bC7UPK2pdhlWgiW1MHv3SymMFlT
+ GQU+JBrZUd/DqcB/olNJkMitZldTtyTXy5McdKvCdHVkEXVEG9G4W1caaXecLgbZWavw
+ VAewM4T8YqTQruGx02lf7IJQYLvtl7Cc2ASeqhnhqaOESwwem5w1KDqV2z8zI8bHBiCR
+ mRaprov3u/CnuF8HFz9USOIrxrPm2x3OKyk7gE/H3I2y3hdR9w1ss3rk26p1Wqtt4Oos
+ EFdQ==
+X-Gm-Message-State: AOJu0YwpdGT7qTJMiJb1JLq/y0yLHmUufSl/Iw2hhB56wvriKq/KiDcO
+ xD2hxTAG967QtrK5WDIbC2zE7w==
+X-Google-Smtp-Source: AGHT+IETCrGudsswCtUPq9PA5GMibNCBCecTS77x2fZHLFkJ/nf3BzIyhOd/oX2Vl9879z2V7RVJSw==
+X-Received: by 2002:a2e:9803:0:b0:2ca:c96:f4b with SMTP id
+ a3-20020a2e9803000000b002ca0c960f4bmr1242301ljj.51.1701784019389; 
+ Tue, 05 Dec 2023 05:46:59 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.46.56
+ d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.46.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 05:46:57 -0800 (PST)
+ Tue, 05 Dec 2023 05:46:58 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 05 Dec 2023 13:46:46 +0000
-Subject: [PATCH v6 1/9] gpio: qcom_pmic: fix silent dev_read_addr downcast
+Date: Tue, 05 Dec 2023 13:46:47 +0000
+Subject: [PATCH v6 2/9] button: qcom-pmic: introduce Qualcomm PMIC button
+ driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231205-b4-qcom-dt-compat-v6-1-61d104a8f920@linaro.org>
+Message-Id: <20231205-b4-qcom-dt-compat-v6-2-61d104a8f920@linaro.org>
 References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 In-Reply-To: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
@@ -83,13 +84,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1680;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6731;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=mkl4qdGXiwrGXE9Al51l5zCtDJYGuwmoU6dNcPnevbE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zbMRvUlftyqs18vbLLhJ8tGVs1n7sqYyFXALHnYOS
- T6Suqqro5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExE9TnDP6NJXE5yh13Yow2+
- XDBosd35Z9ebD7e/vH34+t3ax+de31Bh+Gc80fHz+bJw3Uv/jqd2JbOesrA4u3eNSF/YtrOn9n2
- LMdkAAA==
+ bh=XC2aVmHfeLDBs5m9O4Y8n3fofD3xhmDRMJW4d1VDMUk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zbNzHol9uXzn8o5PoRc/va97bPjxft6sc79eupiHR
+ fxfyaba3lHKwiDIwSArpsgifmKZZdPay/Ya2xdcgJnDygQyhIGLUwAmInad4X+adM8f1/oHt48c
+ Xrvm+PlWh8IfySeSVvBtPhLxpljVh4ufkWEymx6L7Nuoqc+VVp44XyY0226FGe//U5z7yi54XFH
+ by+0BAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,56 +109,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-priv->pid is uint32_t, but dev_read_addr() returns a uint64_t on arm64,
-with the upper bits being used for error codes. Do error checking before
-downcasting to u32 to prevent errors being silently ignored.
+Qualcomm PMICs include a "pon" function which handles two buttons, the
+power button and "resin" button (usually volume down). Introduce a new
+driver following upstream Linux DT to enable these and map them to Enter
+and Down respectively to enable use in boot menus.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ MAINTAINERS                       |   1 +
+ drivers/button/Kconfig            |   9 +++
+ drivers/button/Makefile           |   1 +
+ drivers/button/button-qcom-pmic.c | 165 ++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 176 insertions(+)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 65feb453ebc3..e5841f502953 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -221,11 +221,14 @@ static int qcom_gpio_probe(struct udevice *dev)
- {
- 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
- 	int reg;
-+	u64 pid;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index f6d63c8ab563..8cd102eaa070 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -572,6 +572,7 @@ M:	Neil Armstrong <neil.armstrong@linaro.org>
+ R:	Sumit Garg <sumit.garg@linaro.org>
+ S:	Maintained
+ F:	arch/arm/mach-snapdragon/
++F:	drivers/button/button-qcom-pmic.c
+ F:	drivers/clk/qcom/
+ F:	drivers/gpio/msm_gpio.c
+ F:	drivers/mmc/msm_sdhci.c
+diff --git a/drivers/button/Kconfig b/drivers/button/Kconfig
+index 8ce2de37d62a..097b05f822e7 100644
+--- a/drivers/button/Kconfig
++++ b/drivers/button/Kconfig
+@@ -27,4 +27,13 @@ config BUTTON_GPIO
+ 	  The GPIO driver must used driver model. Buttons are configured using
+ 	  the device tree.
  
--	priv->pid = dev_read_addr(dev);
--	if (priv->pid == FDT_ADDR_T_NONE)
-+	pid = dev_read_addr(dev);
-+	if (pid == FDT_ADDR_T_NONE)
- 		return log_msg_ret("bad address", -EINVAL);
- 
-+	priv->pid = pid;
++config BUTTON_QCOM_PMIC
++	bool "Qualcomm power button"
++	depends on BUTTON
++	depends on PMIC_QCOM
++	help
++	  Enable support for the power and "resin" (usually volume down) buttons
++	  on Qualcomm SoCs. These will be configured as the Enter and Down keys
++	  respectively, allowing navigation of bootmenu with buttons on device.
 +
- 	/* Do a sanity check */
- 	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
- 	if (reg != REG_TYPE_VAL)
-@@ -328,11 +331,14 @@ static int qcom_pwrkey_probe(struct udevice *dev)
- {
- 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
- 	int reg;
-+	u64 pid;
- 
--	priv->pid = dev_read_addr(dev);
--	if (priv->pid == FDT_ADDR_T_NONE)
-+	pid = dev_read_addr(dev);
-+	if (pid == FDT_ADDR_T_NONE)
- 		return log_msg_ret("bad address", -EINVAL);
- 
-+	priv->pid = pid;
+ endmenu
+diff --git a/drivers/button/Makefile b/drivers/button/Makefile
+index bbd18af14940..68555081a47a 100644
+--- a/drivers/button/Makefile
++++ b/drivers/button/Makefile
+@@ -5,3 +5,4 @@
+ obj-$(CONFIG_BUTTON) += button-uclass.o
+ obj-$(CONFIG_BUTTON_ADC) += button-adc.o
+ obj-$(CONFIG_BUTTON_GPIO) += button-gpio.o
++obj-$(CONFIG_BUTTON_QCOM_PMIC) += button-qcom-pmic.o
+\ No newline at end of file
+diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+new file mode 100644
+index 000000000000..34a976d1e6c6
+--- /dev/null
++++ b/drivers/button/button-qcom-pmic.c
+@@ -0,0 +1,165 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Qualcomm generic pmic gpio driver
++ *
++ * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
++ * (C) Copyright 2023 Linaro Ltd.
++ */
 +
- 	/* Do a sanity check */
- 	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
- 	if (reg != 0x1)
++#include <button.h>
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dm.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
++#include <log.h>
++#include <power/pmic.h>
++#include <spmi/spmi.h>
++#include <linux/bitops.h>
++
++#define REG_TYPE		0x4
++#define REG_SUBTYPE		0x5
++
++struct qcom_pmic_btn_priv {
++	u32 base;
++	u32 status_bit;
++	int code;
++	struct udevice *pmic;
++};
++
++#define PON_INT_RT_STS                        0x10
++#define KPDPWR_ON_INT_BIT                     0
++#define RESIN_ON_INT_BIT                      1
++
++#define NODE_IS_PWRKEY(node) (!strncmp(ofnode_get_name(node), "pwrkey", strlen("pwrkey")))
++#define NODE_IS_RESIN(node) (!strncmp(ofnode_get_name(node), "resin", strlen("resin")))
++
++static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
++{
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++
++	int reg = pmic_reg_read(priv->pmic, priv->base + PON_INT_RT_STS);
++
++	if (reg < 0)
++		return 0;
++
++	return (reg & BIT(priv->status_bit)) != 0;
++}
++
++static int qcom_pwrkey_get_code(struct udevice *dev)
++{
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++
++	return priv->code;
++}
++
++static int qcom_pwrkey_probe(struct udevice *dev)
++{
++	struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
++	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++	ofnode node = dev_ofnode(dev);
++	int ret;
++	u64 base;
++
++	/* Ignore the top-level pon node */
++	if (!uc_plat->label)
++		return 0;
++
++	/* the pwrkey and resin nodes are children of the "pon" node, get the
++	 * PMIC device to use in pmic_reg_* calls.
++	 */
++	priv->pmic = dev->parent->parent;
++
++	/* Get the address of the parent pon node */
++	base = dev_read_addr(dev->parent);
++	if (base == FDT_ADDR_T_NONE) {
++		printf("%s: Can't find address\n", dev->name);
++		return -EINVAL;
++	}
++
++	priv->base = base;
++
++	/* Do a sanity check */
++	ret = pmic_reg_read(priv->pmic, priv->base + REG_TYPE);
++	if (ret != 0x1 && ret != 0xb) {
++		printf("%s: unexpected PMIC function type %d\n", dev->name, ret);
++		return -ENXIO;
++	}
++
++	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
++	if ((ret & 0x7) == 0) {
++		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
++		return -ENXIO;
++	}
++
++	if (NODE_IS_PWRKEY(node)) {
++		priv->status_bit = 0;
++		priv->code = KEY_ENTER;
++	} else if (NODE_IS_RESIN(node)) {
++		priv->status_bit = 1;
++		priv->code = KEY_DOWN;
++	} else {
++		/* Should not get here! */
++		printf("Invalid pon node '%s' should be 'pwrkey' or 'resin'\n",
++		       ofnode_get_name(node));
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int button_qcom_pmic_bind(struct udevice *parent)
++{
++	struct udevice *dev;
++	ofnode node;
++	int ret;
++
++	dev_for_each_subnode(node, parent) {
++		struct button_uc_plat *uc_plat;
++		const char *label;
++
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
++						 ofnode_get_name(node),
++						 node, &dev);
++		if (ret) {
++			printf("Failed to bind %s! %d\n", label, ret);
++			return ret;
++		}
++		uc_plat = dev_get_uclass_plat(dev);
++		if (NODE_IS_PWRKEY(node)) {
++			uc_plat->label = "pwrkey";
++		} else if (NODE_IS_RESIN(node)) {
++			uc_plat->label = "vol_down";
++		} else {
++			printf("Unknown button node '%s' should be 'pwrkey' or 'resin'\n",
++			       ofnode_get_name(node));
++			device_unbind(dev);
++		}
++	}
++
++	return 0;
++}
++
++static const struct button_ops button_qcom_pmic_ops = {
++	.get_state	= qcom_pwrkey_get_state,
++	.get_code	= qcom_pwrkey_get_code,
++};
++
++static const struct udevice_id qcom_pwrkey_ids[] = {
++	{ .compatible = "qcom,pm8916-pon" },
++	{ .compatible = "qcom,pm8941-pon" },
++	{ .compatible = "qcom,pm8998-pon" },
++	{ }
++};
++
++U_BOOT_DRIVER(qcom_pwrkey) = {
++	.name = "qcom_pwrkey",
++	.id = UCLASS_BUTTON,
++	.of_match = qcom_pwrkey_ids,
++	.bind = button_qcom_pmic_bind,
++	.probe = qcom_pwrkey_probe,
++	.ops = &button_qcom_pmic_ops,
++	.priv_auto = sizeof(struct qcom_pmic_btn_priv),
++};
 
 -- 
 2.42.1
