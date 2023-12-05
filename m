@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA5DC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 23:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D16C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 23:24:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DBA1871AA;
-	Wed,  6 Dec 2023 00:24:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B65B1870EA;
+	Wed,  6 Dec 2023 00:24:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="i5DvDBPO";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="P5VImus5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98E008747E; Wed,  6 Dec 2023 00:24:00 +0100 (CET)
+ id B038D86F64; Wed,  6 Dec 2023 00:24:04 +0100 (CET)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CCE5870B5
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 00:23:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD63F870EA
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 00:23:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 344D312005B;
- Wed,  6 Dec 2023 02:23:56 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 344D312005B
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 6078B12005B;
+ Wed,  6 Dec 2023 02:23:59 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6078B12005B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1701818636;
- bh=VLub8vGDRuW6rAcE81OESbPn1L3zqfkpMoSUzLIaKR8=;
+ s=mail; t=1701818639;
+ bh=nd4FkQgypQTqOCD4+zgeFtXUSEum8soJP4JgIyFBnNc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=i5DvDBPOYJ0sbSKgL/WwX4aIZGGT9zAEEnMOM4qrHIvyB5jbxmW/0+vssUEFiFiBo
- uniecNwUuKLVJFYIwH0kViDamCAINoVL4DL3qd5nGDYeBC+Ek99piLnnXvDan42iRm
- 5kYF8sJYnyHAb/gbKHVv0AHoCKwylqDqGPung6T0suQit/fTD3HGMvbcpr79owQIgA
- tl66HQWs4DTA9+69ufLZtefakb+uPH+Fg5lWEDHHN8LuBd/AdzyCAR/s8x/cKlAEbs
- CM8Hr++WOV9cbH7XqFlnVvehlyXBSvCiJWBhCID+oY3FXaipeTWfFMkHvQG4lSHD35
- OhQkwN8aMeSdQ==
+ b=P5VImus57bx020bjF2/wGI9/9Xob/Sld0QeKRPBXdzTawo0YwxzRI0OhJfu26uPv9
+ WojuvWZRdIuZD81CN8mwCeR2Wku3l158xeIDfufraCR+6a/TVcQTX42b2bMjUmOldG
+ IvUmMFgp5b2nAbnXC4deJLYsb7gjYviuykwG7KaFREdXcij2WfcmEgH3aJn6IBigEE
+ HG+ksbgkzfsmCHMo9EPsqC6nbiDid13vvdFAolJPqzS2BTX65P8WHn7uokrBHu+USw
+ /pNunGDzG8Mndz3iEuGI5tAHh52grEEauONyr5Rj5iYAsQlBU/rtxRtr00gCSxdaOW
+ 4Mh0TPhDYW3ug==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed,  6 Dec 2023 02:23:55 +0300 (MSK)
+ Wed,  6 Dec 2023 02:23:59 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 6 Dec 2023 02:23:55 +0300
+ 15.2.1118.40; Wed, 6 Dec 2023 02:23:59 +0300
 From: Igor Prusov <ivprusov@salutedevices.com>
 To: <u-boot@lists.denx.de>
 CC: <kernel@salutedevices.com>, <prusovigor@gmail.com>, Igor Prusov
- <ivprusov@salutedevices.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/2] Fix NULL dereference in clk_composite_set_rate()
-Date: Wed, 6 Dec 2023 02:23:32 +0300
-Message-ID: <20231205232334.2931-1-ivprusov@salutedevices.com>
+ <ivprusov@salutedevices.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH 2/2] dm: test: clk: Add test for ccf clk_set_rate()
+Date: Wed, 6 Dec 2023 02:23:34 +0300
+Message-ID: <20231205232334.2931-3-ivprusov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231205232334.2931-1-ivprusov@salutedevices.com>
+References: <20231205232334.2931-1-ivprusov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -103,20 +104,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On sandbox it's possible to trigger NULL dereference when setting rate
-of a composite clock. It happens because sandbox composite divider does
-not implement set_rate() operation. This series adds NULL check and a
-test cases for clk_set_rate().
+Add a simple test case which sets clock rate to its current value.
 
+Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+---
 
-Igor Prusov (2):
-  clk: Check that composite clock's div has set_rate()
-  dm: test: clk: Add test for ccf clk_set_rate()
+ test/dm/clk_ccf.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
- drivers/clk/clk-composite.c | 2 +-
- test/dm/clk_ccf.c           | 9 +++++++++
- 2 files changed, 10 insertions(+), 1 deletion(-)
-
+diff --git a/test/dm/clk_ccf.c b/test/dm/clk_ccf.c
+index e4ebb93cda..3b23982541 100644
+--- a/test/dm/clk_ccf.c
++++ b/test/dm/clk_ccf.c
+@@ -63,6 +63,9 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+ 	rate = clk_get_parent_rate(clk);
+ 	ut_asserteq(rate, 60000000);
+ 
++	rate = clk_set_rate(clk, 60000000);
++	ut_asserteq(rate, -ENOSYS);
++
+ 	rate = clk_get_rate(clk);
+ 	ut_asserteq(rate, 60000000);
+ 
+@@ -87,6 +90,9 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+ 	ut_asserteq_str("pll3_80m", pclk->dev->name);
+ 	ut_asserteq(CLK_SET_RATE_PARENT, pclk->flags);
+ 
++	rate = clk_set_rate(clk, 80000000);
++	ut_asserteq(rate, -ENOSYS);
++
+ 	rate = clk_get_rate(clk);
+ 	ut_asserteq(rate, 80000000);
+ 
+@@ -108,6 +114,9 @@ static int dm_test_clk_ccf(struct unit_test_state *uts)
+ 	rate = clk_get_rate(clk);
+ 	ut_asserteq(rate, 60000000);
+ 
++	rate = clk_set_rate(clk, 60000000);
++	ut_asserteq(rate, 60000000);
++
+ #if CONFIG_IS_ENABLED(CLK_CCF)
+ 	/* Test clk tree enable/disable */
+ 	ret = clk_get_by_id(SANDBOX_CLK_I2C_ROOT, &clk);
 -- 
 2.34.1
 
