@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CD51C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694C6C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55D8287832;
-	Tue,  5 Dec 2023 01:52:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B7B4287763;
+	Tue,  5 Dec 2023 01:53:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B42CFe9c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c6Y3939p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14E2E878AA; Tue,  5 Dec 2023 01:52:59 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 41064876AE; Tue,  5 Dec 2023 01:53:01 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 080B087635
+ by phobos.denx.de (Postfix) with ESMTPS id 1872387899
  for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 01:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5d2d0661a8dso58032527b3.2
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:56 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5d8a772157fso15191767b3.3
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701737576; x=1702342376; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E/t1Uz5M2bkFIpWyQQ1dqnlbmNNKAaf0saEtg8SRlUI=;
- b=B42CFe9cahOiD3GNxChodVMoaHhjl96FpqE8jx79wH/Ngw6rePM+Q1cD4ls87QeF7D
- O68k4ePqIcXWjyjg0RsOlJJKFCiovaHuEB4Vy6Ejye5UdtQvzCiLVHt/WnvbUBuGHPkC
- ixCy5BQHHm5x1Sqn3S26WCV6LBNR8A46UdwgA=
+ bh=IH4q5EtfiaRRiCj7uaqq03G+Tp9MauySL94U/Xq30Yw=;
+ b=c6Y3939ptGiSqazWaHaPOyj7+wShOIslaxYggXxwLolJ31yasy34Fn8Pr3zHUdCdmT
+ Jt/8hvWJfxSdZvxpP779pOPxRMdeqpYK87qHCt7KJeIYFG0g0rFEmXF6u/JN0xvyeo74
+ 2BXhsFNhHQCs2SXKCh9axHNF4ldXOh4voDcEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701737576; x=1702342376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E/t1Uz5M2bkFIpWyQQ1dqnlbmNNKAaf0saEtg8SRlUI=;
- b=iJ5CA2/aO3F2E7gFr7f1JqpBRih+CZT2vg02ByQpWBDtB1XXNBRZeerkrClS0tsT/0
- hts7TgMkPc1TwweRG4uCN23sXcEeiegNQYMC6ij3TK7TWqUgAk7wuX6fLrzuIelIB3j4
- hulSbYW2G7qRsPbIqu0uF2Z9tu8OoRvN3M2j+zAR0UQs+CVy4dtjsaUHOUFrNEIwG0Hv
- TrgGwQ4s61trygQamG3bQCoF14fHmcl3FLZLhPB+Oen8SJ6Xh2ZEYWW+ArmbYhwPWGjh
- yiEK7lsqHZv4J/C6+HslFebtc5OfeYrMYislWa9yA8S2tttjAAVqd5P2reR6zG7gHMIL
- qb0A==
-X-Gm-Message-State: AOJu0Yw/4LdM5jOCt4ijQRevYS80JgggXOzM9H0qMsiaTzvzdlDzPfXE
- 8BtXwRSr0L/yC0WaHZPdvwPYvTPxpHb9YsDc4+yZjA==
-X-Google-Smtp-Source: AGHT+IE0UUECVZBxhPoBGsBwmXsCwFZujAMBSD32sluT27V4V53vItSkXJPX/UwbY4Qe3hFgOPrqG+D+fuN/fEgtuvw=
-X-Received: by 2002:a05:690c:c82:b0:5d7:9b1c:a779 with SMTP id
- cm2-20020a05690c0c8200b005d79b1ca779mr3765847ywb.9.1701737575582; Mon, 04 Dec
- 2023 16:52:55 -0800 (PST)
+ bh=IH4q5EtfiaRRiCj7uaqq03G+Tp9MauySL94U/Xq30Yw=;
+ b=WqzEE9ZkG8bClJFYlWWZcNpJNhk4nxl7oYXUdxcIyOO/DwAzf2fAwHvYeSBl/nHYRW
+ lNZSWTf8S1kFE0qDsU70najIOol6zKLc2LY7CuZc8S29JynTX77ZbOhaZ+wWCcV2L+ZD
+ MQDFcJ0Dlay65mUtsxsowEzjroELqeGYgJr5UaSdcPtZiUcACOUbPf8X48Zip/OGj7kI
+ ycUDVNiG90osxpAJI67tqTfxIOOjegcLpGtV3m1Fjh6+ZqL+BB1yruLEoib9RT9dEB4O
+ sIbUfFsZeJU7kwuWkBwOnvsBhafENbDBL+sDqXW4K08SdQypKWT3Fri24m48xc4jTHR5
+ vm5Q==
+X-Gm-Message-State: AOJu0YyZa23YSuH4+4LbWrhVNMisg3rJJ2gWw9jExFZvZTke9pvJBvHC
+ 7s9afri0mv99XfAX85gysx/dxlFGOdRMV6tBdmvfEQ==
+X-Google-Smtp-Source: AGHT+IHj/1wO1imWiRrDhy7NvWExFdV+kQLy95/4ODYG9L/6CkCYK5m5QXYW0kFm+YzyvdiNGurvwrX+FFgs9TNTUNk=
+X-Received: by 2002:a05:690c:338a:b0:5d7:1941:ab4 with SMTP id
+ fl10-20020a05690c338a00b005d719410ab4mr3935784ywb.79.1701737575583; Mon, 04
+ Dec 2023 16:52:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-16-raymond.mao@linaro.org>
- <CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com>
- <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
-In-Reply-To: <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+In-Reply-To: <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Dec 2023 17:52:07 -0700
-Message-ID: <CAPnjgZ0Hxsbv7EHbcnvLtmRSrPgMDfOFS+KmvYBcZgVC1Je4Ng@mail.gmail.com>
-Subject: Re: [PATCH v2 15/18] fdt: Allow the devicetree to come from a bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
- Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
+Date: Mon, 4 Dec 2023 17:52:19 -0700
+Message-ID: <CAPnjgZ03MEK_PeuaXcR1VuC-_tBmQmrzq3bo-jS3Jd22+rSgww@mail.gmail.com>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,36 +89,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+Hi Sumit,
 
-On Mon, 4 Dec 2023 at 12:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Tue, 21 Nov 2023 at 23:21, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> Hi Simon,
+> Hi Caleb,
 >
-> When `OF_BOARD` is defined, the FDT should be from one of  the board-specific mechanisms:
-> 1. FDT from a bloblist via boot args
-> 2. FDT in memory
-> I don't think we need a new build option to distinguish these two, since it can be done in runtime by checking whether the boot args follow the FW Handoff spec conventions and the FDT exists in the bloblist.
+> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >
+> > Historically, Qualcomm boards in U-Boot have all had their own
+> > board/qualcomm/xyz directory, their own CONFIG_TARGET_XYZ option, their
+> > own hardcoded sysmap-xyz.c file, and their own U-Boot specific
+> > devicetree with little/no compatibility with upstream DT.
+> >
+> > This series makes a few final prepatory changes, and then replaces
+> > almost all of the board specific code with generic alternatives. The end
+> > result is that all Qualcomm boards both current and future (with the
+> > exception of the db410c and db820c) can be supported by a single U-Boot
+> > binary by just providing the correct DT. New boards can be added without
+> > introducing any addition mach/ or board/ code or config options.
+> >
+> > Due to the nature of this change, the patch ("mach-snapdragon:
+> > generalise board support") has become pretty big, I tried a few
+> > different ways to represent this in git history, but the other methods
+> > (e.g. adding a stub "generic" target and removing it again) were more
+> > confusing and made for much messier git history. The current patch is
+> > mostly atomic, but requires regenerating the config.
+> >
+> > The QCS404 EVB board had some code to enable the USB VBUS regulator,
+> > this is dropped in favour of a adding a new vbus-supply property to the
+> > dwc3-generic driver. This will also be used by the dragonboard845c in a
+> > future patch. This handles the common case of a board requiring some
+> > regulator be enabled for USB host mode.
+> >
+>
+> Thanks for your work. It is a good step towards a generalized u-boot
+> on Qcom platforms. Although I would like to give it an in-depth
+> review, I have a common discussion point about DT, see below.
+>
+> > A more detailed description of the changes is below.
+> >
+> > == Memory map ==
+> >
+> > The memory map was historically hardcoded into U-Boot, this meant that
+> > U-Boot had to be built for a specific variant of a device. This is
+> > changed to instead read the memory map from the DT /memory node.
+> >
+> > Additionally, most boards mapped addresss 0x0 as valid, as a result if a
+> > null pointer access happens then it will cause a bus stall (and board
+> > hang). This is fixed so that null pointer accesses will now correctly
+> > throw an exception.
+> >
+> > == DT loading ==
+> >
+> > Previously, boards used the FDT blob embedded into U-Boot (via
+> > OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
+> > bootloader, so we can instead rely on the first-stage bootloader to
+> > populate some useful FDT properties for us (notably the /memory node and
+> > KASLR seed) and fetch the DTB that it provides. Combined with the memory
+> > map changes above, this let's us entirely avoid configuring the memory
+> > map explicitly.
+>
+> Since with this change, we don't need to embed FDT blob in the u-boot
+> binary, so I was thinking if we really need to import DTs from Linux
+> for different platforms and then play a catchup game?
+>
+> IMO, the build command would look like following if we import
+> pre-built FDT blob from Linux:
+>
+> - Build u-boot::
+>
+>        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+>        $ make qcom_defconfig
+>        $ make
+>
+> - gzip u-boot::
+>
+>        gzip u-boot-nodtb.bin
+>
+> - Append dtb to gzipped u-boot::
+>
+>         cat u-boot-nodtb.bin.gz
+> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
+> u-boot-nodtb.bin.gz-dtb
 
-No, I would really like this to be deterministic, so we can fail if
-something goes wrong. The bloblist should be 'declared' as the way to
-boot, for a board.
+What is this?? Who or what uses a gzipped image with a single DT attached?
 
-If in the future all boards a reusing bloblist for this feature, then
-sure, we can drop it. But we have things like rpi which do their own
-thing.
+>
+> This would avoid the maintenance burden to keep DT in sync with that
+> of Linux. And since DT bindings in Linux are backwards compatible, we
+> can say u-boot should work with DTB picked up from any Linux kernel
+> stable release.
 
-> If it fulfills the above conditions, we can take the FDT from bloblist, otherwise from the predefined memory address.
-> This is fully backward compatible without adding a new build option.
+That is not the current situation, unfortunately.
 
-Again, we need to obtain the FDT from the bloblist if and only if the
-board requires it. It creates a lot of confusion to have it as an
-optional feature, when we know which way it should be.
+U-Boot is moving to using Binman to package the firmware. There needs
+to be a description of the firmware image for each U-Boot boot. To my
+way of thinking, rpi is a degenerate form, not something to be copied,
+due to the closed-source nature of the firmware and its inability to
+be changed. We do have (in the works) a way to pass a DT using a
+standard firmware handoff. Perhaps that can be adopted by these
+closed-source projects?
 
-Ultimately OF_BOARD should go away. We just need to push bloblist to
-other projects and closed-source firmware as the correct way to pass a
-DT.
+BTW I am very pleased to see this series and I hope that Qualcomm (via
+Linaro) can continue to improve its U-Boot support.
+
+[..]
 
 Regards,
 Simon
-[.]
