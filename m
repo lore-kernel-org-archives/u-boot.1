@@ -4,77 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A91BC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:47:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7224C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:47:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A8D87655;
-	Tue,  5 Dec 2023 14:47:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B84CF8757E;
+	Tue,  5 Dec 2023 14:47:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pugKpXDx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFFiD3V1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F26D87618; Tue,  5 Dec 2023 14:46:59 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id AA70F8772E; Tue,  5 Dec 2023 14:47:00 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 049FC870F4
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:46:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A66B58753E
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:46:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2c9efa1ab7fso39291131fa.0
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:46:56 -0800 (PST)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2c9f413d6b2so36217981fa.1
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:46:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701784016; x=1702388816; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YpHa9jPWWb/80nwbouz7sDRkhUDDEwUlvgTNZu9CFvM=;
- b=pugKpXDxM5BoAAJIzM6LZlIxzluOgNLzPFc2mObch1g+3MZVrR0W0MS3eLMprUL6ov
- CgrXE1hUoBWkVpPDMddK4YVyPLP0hI/A3kPyv2ZtZqv6suaDMTTIbcWL1B6Sa3XQt6T/
- vDJ7+sLtJIJ9736rzZmAZp41peJ4+Hg0v3jkwvd8K7V1fj8KriZJToD3guLLxph0zTRC
- XToQE564oyvEJkOSmiPuSCsZ6X7pNDpxfGuR5kXQl+zDoxgvAi1qiG2zZ4dnrepeyybX
- 9e2h0ipa0/5sL6VF/vjQbYczX+h/m7lQdT5raoT1AIxZ2j0ijSfMrcmmXSyzc3Jl+0HV
- qKyA==
+ d=linaro.org; s=google; t=1701784017; x=1702388817; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=cJvrPaAaFSzZAMsWc01sNx5dzJpVx3P9bhLC6r+6rtw=;
+ b=LFFiD3V1O+RecvQIllLf46lyugPuMBRPoVbODZKV0s5jWnDkUaL5MfsmIVkJGFJxn9
+ WCCh3sxpFricqfuxjbY5ioJ3IjTdWUzSbWrWkAxTtKwRU8fJmF8wovSPCDQYgMQNjoSN
+ W23We152iJc1Z43bTQc7SGNb83DgLTZePtMpyZl0YNZzyXeu5H8H6ZkOvxu/GmIIaHW+
+ Wg12ektKDH4LHHhHwKg0vvAN707/e8d9F7PrCEtOtRSwWNdkjj/YohBNa8ae9QaVqrPG
+ gL5XGboU1n4gg7Qox+iK9RmvoFqOs4wI8NLXzt0n3hynpLzYIh949jxBfjo65Yy5LP9l
+ XdZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701784016; x=1702388816;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YpHa9jPWWb/80nwbouz7sDRkhUDDEwUlvgTNZu9CFvM=;
- b=UCBcCjteDY5UkhbT+73u3nqxWiLAP6j8Ast1fIVYeIDVP5LbDP3RjjsfZ4yjglQTu0
- aupRf7fkOE1bvjgrsHCGol60lbxxrkxLxQh6YsIVWKCMV0hxIikMQA7cGCuRaPDg15ST
- dtxjT/HxIZgIj8JW9qC8ErFPoeO1vcDJkeOI9l77/pQBKUnRsa7QccwJcMH1RtvM71jN
- e20dVYQydZLdf+bPtkKhYGaRjCV9chP7LjEmpcsBanvSr7JRgEJyt/nY8DArs7Ks7YYm
- sMVy69Mz2WMvuMGKtb6Wsf6mT3WVsA2hLvsEafZJIRq4SZuaZSCUNc6hUTT0aJ0+KRR4
- HkCw==
-X-Gm-Message-State: AOJu0YwshxdiOtO3E8JM8VEb+LULA76BKX+IJ+zkIW7e/hVM+kcv4IrW
- 1eBncpsNwt0t7WAhAXambM88dQ==
-X-Google-Smtp-Source: AGHT+IHm6bM5C6u68OGRVOlQ2F3GXQwMmMEaAywhLkmm2cf4ssJel4FBfhs+hcMz2pRh6pm0LgDi/w==
-X-Received: by 2002:a2e:9286:0:b0:2c9:c523:2e13 with SMTP id
- d6-20020a2e9286000000b002c9c5232e13mr1362901ljh.45.1701784016257; 
- Tue, 05 Dec 2023 05:46:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701784017; x=1702388817;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cJvrPaAaFSzZAMsWc01sNx5dzJpVx3P9bhLC6r+6rtw=;
+ b=YfRGioxhCAWbk1bJYdFj842Cin9d7Pt+KOowzTLZ7sfHUleqoDqI5suZUvzFxXO1Px
+ OduI0tjkIkrQR2mwhNdAHHOpvZNTgI6CppxLDPpqBh2dAhI2NbLS0O7T3SxOcR6K/Uc1
+ g7iljGHFxTQ6LpDZt1sfA4IwRSBqsn98vgOZMs0s9T+e/jUR5HPxsFEQfinEiK5/6f9T
+ Wk6wdSVgS/33DlreuyrWjnCCiv9o2oKuvjQMOsiN8lqjPUPJpzLbJQDE58rMoNp/zGW4
+ CJ+8mEpkoIPK/5xgL0+zcS9gGC4YWqWrYA2wCMWDQOcYj1hGny5uG6H24YZUEvRm9hK7
+ OUFw==
+X-Gm-Message-State: AOJu0YwWr8yfi3fyTqbc4BR3/Q1A1sC2NcxbTVFu0oLqf+EvMcKiSLZe
+ UmyP4U2j1k7Eg0IhKS+kBMSq+w==
+X-Google-Smtp-Source: AGHT+IHbU3BuwUibEt2omfswJKWGIx753+74FDfBQhKjYXV3f8AOVPVnFi8mwveLf0uf8tpo4OqWnw==
+X-Received: by 2002:a2e:8341:0:b0:2ca:5d4:c16d with SMTP id
+ l1-20020a2e8341000000b002ca05d4c16dmr925143ljh.54.1701784017628; 
+ Tue, 05 Dec 2023 05:46:57 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.46.54
+ d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.46.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 05:46:55 -0800 (PST)
+ Tue, 05 Dec 2023 05:46:57 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v6 0/9] Qualcomm PMIC fixes
-Date: Tue, 05 Dec 2023 13:46:45 +0000
-Message-Id: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
+Date: Tue, 05 Dec 2023 13:46:46 +0000
+Subject: [PATCH v6 1/9] gpio: qcom_pmic: fix silent dev_read_addr downcast
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAMUpb2UC/33OTW7CMBAF4KsgrzGaHwfbXfUeFQvHdsBSiakTR
- VQod69hFZSoq9Eb6X0zDzHEkuIgPnYPUeKUhpT7Go77nfAX15+jTKFmQUCMCEfZKvnj81WGUdZ
- xc6OMjrUGCF0gFrV3K7FL95f5dar5koYxl9/XiQmf2/+0CSVI8L5ttVFICj+/U+9KPuRyFk9uo
- iVhtgiqhEYmZq/JKrMieEGg2iK4EsY4S53pAFq3ItSCoM0vVCWssgGsoYAhrohmQTBsEU0lFDY
- AkVi7AG/EPM9/f2ER378BAAA=
+Message-Id: <20231205-b4-qcom-dt-compat-v6-1-61d104a8f920@linaro.org>
+References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
+In-Reply-To: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
  Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -86,13 +83,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4200;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1680;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=/+MSPKGjTULuNdf/cLPOwC9hXqNMuOuPVoNQZn49s5s=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zbNLpvkXz1ebsEDisLrErLknflnLpGsHL38u963o7
- 7yJTXtedpSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJvFrOyLAsdNNlHS/9stdL
- c3/pGrerlFVfefci81JQEMuMlV+dZ5gz/DNVufF/6eEAaZl55ou2SGSs4A66y9b0Zd1JJw7dk9P
- z5XgB
+ bh=mkl4qdGXiwrGXE9Al51l5zCtDJYGuwmoU6dNcPnevbE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zbMRvUlftyqs18vbLLhJ8tGVs1n7sqYyFXALHnYOS
+ T6Suqqro5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAExE9TnDP6NJXE5yh13Yow2+
+ XDBosd35Z9ebD7e/vH34+t3ax+de31Bh+Gc80fHz+bJw3Uv/jqd2JbOesrA4u3eNSF/YtrOn9n2
+ LMdkAAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -111,92 +108,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series addresses some long-standing issues with the SPMI arb
-driver, the PMIC, and the PMIC GPIO. It fixes compatibility with
-upstream Linux devicetrees, and simplifies pwrkey/resin support by
-rewriting the pon driver to be a button driver rather than a GPIO
-driver.
+priv->pid is uint32_t, but dev_read_addr() returns a uint64_t on arm64,
+with the upper bits being used for error codes. Do error checking before
+downcasting to u32 to prevent errors being silently ignored.
 
-Existing users are adjusted to use the new button driver in their
-oard init code.
-
-This series is based on the pinctrl [1] and clock [2] cleanup series.
-There may be some DTS conflicts applying it standalone.
-
-[1]: https://lore.kernel.org/u-boot/20231106-b4-qcom-pinctrl-v2-0-406e8d8689ca@linaro.org/
-[2]: https://lore.kernel.org/u-boot/20231103-b4-qcom-clk-v3-0-8d2d460ece84@linaro.org/
-
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Tested-by: Sumit Garg <sumit.garg@linaro.org>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Changes in v6:
-- Drop spurious change to qcom_pmic_gpio udevice_id table that was left
-  in by mistake
-- Drop bank-name property from qcs404-evb.dts that was missed previously
-- Link to v5: https://lore.kernel.org/r/20231130-b4-qcom-dt-compat-v5-0-41500e237ad0@linaro.org
+ drivers/gpio/qcom_pmic_gpio.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-Changes in v5:
-- Split "rework pwrkey driver into a button driver" into multiple
-  commits
-- Split "qcom_pmic: fix support for upstream DT" into multiple commits
-- Link to v4: https://lore.kernel.org/r/20231128-b4-qcom-dt-compat-v4-0-949d0982d1de@linaro.org
+diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
+index 65feb453ebc3..e5841f502953 100644
+--- a/drivers/gpio/qcom_pmic_gpio.c
++++ b/drivers/gpio/qcom_pmic_gpio.c
+@@ -221,11 +221,14 @@ static int qcom_gpio_probe(struct udevice *dev)
+ {
+ 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
+ 	int reg;
++	u64 pid;
+ 
+-	priv->pid = dev_read_addr(dev);
+-	if (priv->pid == FDT_ADDR_T_NONE)
++	pid = dev_read_addr(dev);
++	if (pid == FDT_ADDR_T_NONE)
+ 		return log_msg_ret("bad address", -EINVAL);
+ 
++	priv->pid = pid;
++
+ 	/* Do a sanity check */
+ 	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
+ 	if (reg != REG_TYPE_VAL)
+@@ -328,11 +331,14 @@ static int qcom_pwrkey_probe(struct udevice *dev)
+ {
+ 	struct qcom_gpio_bank *priv = dev_get_priv(dev);
+ 	int reg;
++	u64 pid;
+ 
+-	priv->pid = dev_read_addr(dev);
+-	if (priv->pid == FDT_ADDR_T_NONE)
++	pid = dev_read_addr(dev);
++	if (pid == FDT_ADDR_T_NONE)
+ 		return log_msg_ret("bad address", -EINVAL);
+ 
++	priv->pid = pid;
++
+ 	/* Do a sanity check */
+ 	reg = pmic_reg_read(dev->parent, priv->pid + REG_TYPE);
+ 	if (reg != 0x1)
 
-Changes in v4:
-* Remove some now unsupported DT binding docs
-* Fix qcs404 SPMI arb dts
-* Link to v3: https://lore.kernel.org/r/20231114-b4-qcom-dt-compat-v3-0-88a92f8f00ba@linaro.org
-
-Changes in v3:
-* Remove now-unneeded header includes in dragonboard{410,820}c-uboot.dtsi
-* Drop non-standard DTS support from PMIC GPIO driver
-* Also remove old gpio-keys nodes from starqltechn-uboot.dtsi
-* Link to v2: https://lore.kernel.org/r/20231108-b4-qcom-dt-compat-v2-0-713233c72948@linaro.org
-
-Changes in v2:
-* Avoid using non-standard "label" and "linux,code" properties for
-  buttons
-* Add missing sdm845 DTS parts
-* Put button driver in drivers/button
-* Link to v1: https://lore.kernel.org/r/20231106-b4-qcom-dt-compat-v1-0-0ccbb7841241@linaro.org
-
----
-Caleb Connolly (9):
-      gpio: qcom_pmic: fix silent dev_read_addr downcast
-      button: qcom-pmic: introduce Qualcomm PMIC button driver
-      mach-snapdragon: switch to PMIC button driver
-      gpio: qcom_pmic: drop pon GPIO driver
-      gpio: qcom_pmic: support upstream DT
-      dts: qcom: adjust pmic gpio to use upstream bindings
-      gpio: qcom_pmic: drop gpio-count property
-      spmi: msm: fix register range names
-      pmic: qcom: dont use dev_read_addr to get USID
-
- MAINTAINERS                                      |   1 +
- arch/arm/dts/dragonboard410c-uboot.dtsi          |  11 --
- arch/arm/dts/dragonboard410c.dts                 |  25 +++-
- arch/arm/dts/dragonboard820c-uboot.dtsi          |  12 --
- arch/arm/dts/dragonboard820c.dts                 |  26 ++--
- arch/arm/dts/dragonboard845c-uboot.dtsi          |  11 --
- arch/arm/dts/dragonboard845c.dts                 |   4 +
- arch/arm/dts/qcs404-evb.dts                      |  10 +-
- arch/arm/dts/sdm845.dtsi                         |  28 ++--
- arch/arm/dts/starqltechn-uboot.dtsi              |  10 --
- arch/arm/dts/starqltechn.dts                     |  20 +--
- arch/arm/mach-snapdragon/Kconfig                 |   3 +
- arch/arm/mach-snapdragon/init_sdm845.c           |  45 ++-----
- board/qualcomm/dragonboard410c/dragonboard410c.c |  31 ++---
- board/qualcomm/dragonboard820c/dragonboard820c.c |  29 ++--
- doc/device-tree-bindings/gpio/pm8916_gpio.txt    |  48 -------
- doc/device-tree-bindings/pmic/qcom,spmi-pmic.txt |  94 -------------
- doc/device-tree-bindings/spmi/spmi-msm.txt       |  26 ----
- drivers/button/Kconfig                           |   9 ++
- drivers/button/Makefile                          |   1 +
- drivers/button/button-qcom-pmic.c                | 165 +++++++++++++++++++++++
- drivers/gpio/Kconfig                             |   5 +-
- drivers/gpio/qcom_pmic_gpio.c                    | 138 +++++--------------
- drivers/power/pmic/pmic_qcom.c                   |  13 +-
- drivers/spmi/spmi-msm.c                          |  46 +++----
- 25 files changed, 337 insertions(+), 474 deletions(-)
----
-base-commit: 11b868d152760a49895e051c285926a0461abcef
-
-// Caleb (they/them)
+-- 
+2.42.1
 
