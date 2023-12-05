@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF0AC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 09:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CACC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 09:42:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAC2E87061;
-	Tue,  5 Dec 2023 10:42:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 44B988788E;
+	Tue,  5 Dec 2023 10:42:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VuoQdody";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bqpX/i7b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2841870F4; Tue,  5 Dec 2023 10:42:34 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id D37028787F; Tue,  5 Dec 2023 10:42:38 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54B9D87061
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 10:42:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75D6687745
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 10:42:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gPKr038064;
- Tue, 5 Dec 2023 03:42:25 -0600
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gTtN040438;
+ Tue, 5 Dec 2023 03:42:29 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701769345;
- bh=3XES0djjuy11a3ZYI1hNydNnV2L3rxJuSo8FcJD7WXA=;
- h=From:To:CC:Subject:Date;
- b=VuoQdodyEWzXb2kguzlhwA3rNSlOyJ4pUakQU2NiqMi97oncRlVPIZLlIzCO/SBBe
- yjNPB2w90SoZny6a2mJ4TeQGGLRAuQBsmL0gAPkFnL0ASx7IfaQpUvy8dbuqRhaeQy
- ADRMfqZPSbn6LKdf0baprb0FH7qZ+h4ZEF8L2d94=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B59gPd4014035
+ s=ti-com-17Q1; t=1701769349;
+ bh=Fky/qvASVW9C3LwQlT5jy95rUZCd8qOcO4QnhzKke0U=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=bqpX/i7bXMPmVWiHFPW3xQzB44XvQE4tOnZ7sYluzlNUB3HAYI45nLFXjzGimX9bA
+ fnwaiWtgmhIzKScPsLwtY34lFj9Dc45g84taRPn3KobI3bZd7raeB6AimRzRJwEIjj
+ zR4YYoC74sUu1yNYv34OaqMnA6TOOkqFKPZe3ePU=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B59gTAZ014092
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 03:42:25 -0600
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 5 Dec 2023 03:42:29 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 03:42:25 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 03:42:29 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 03:42:25 -0600
+ Frontend Transport; Tue, 5 Dec 2023 03:42:29 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gKlD018180;
- Tue, 5 Dec 2023 03:42:21 -0600
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gKlE018180;
+ Tue, 5 Dec 2023 03:42:25 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <marcel.ziswiler@toradex.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>
@@ -57,10 +57,12 @@ CC: <u-boot@lists.denx.de>, <hs@denx.de>, <christophe.leroy@csgroup.eu>,
  <mr.bossman075@gmail.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
  <kamlesh@ti.com>, <nm@ti.com>, <c-shilwant@ti.com>, <u-kumar1@ti.com>,
  <n-francis@ti.com>
-Subject: [PATCH v2 0/3] binman: Add support for TI_DM entry
-Date: Tue, 5 Dec 2023 15:12:17 +0530
-Message-ID: <20231205094220.2301360-1-n-francis@ti.com>
+Subject: [PATCH v2 1/3] binman: etype: dm: Add entry type for TI DM
+Date: Tue, 5 Dec 2023 15:12:18 +0530
+Message-ID: <20231205094220.2301360-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231205094220.2301360-1-n-francis@ti.com>
+References: <20231205094220.2301360-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,42 +83,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for the TI_DM entry and moves all K3 platforms
-to using the same. With this feature introduced, if TI_DM argument is
-provided binman picks the pathname it provides; else, it defaults to
-picking up the ti-dm.bin file. This makes it flexible for users to build
-tispl.bin with custom DM binaries.
+K3 devices introduces the concept of centralized power, resource and
+security management to System Firmware. This is to overcome challenges
+by the traditional approach that implements system control functions on
+each of the processing units.
 
-Boot logs:
-https://gist.github.com/nehamalcom/37ce8a32e37ddf3e1afcc4c8bd941159
+The software interface for System Firmware is split into TIFS and DM. DM
+(Device Manager) is responsible for resource and power management from
+secure and non-secure hosts. This additional binary is necessary for
+specific platforms' ROM boot images and is to be packaged into tispl.bin
 
+Add an entry for DM. The entry can be used for the packaging of
+tispl.bin by binman along with ATF and TEE.
+
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Andrew Davis <afd@ti.com>
 ---
-Changes from v1:
-https://lore.kernel.org/all/20231204112141.2036907-1-n-francis@ti.com/
-- s/ti-linux-firmware/BINMAN_INDIRS in documentation (Andrew)
-- No change to boot logs since only doc change
-
-Neha Malcom Francis (3):
-  binman: etype: dm: Add entry type for TI DM
-  arm: dts: k3-*-binman: Move to using ti-dm entry type
-  doc: board: ti: k3: Mention TI_DM argument
-
- Makefile                                      |  1 +
- arch/arm/dts/k3-am625-sk-binman.dtsi          |  4 ++--
- .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  |  4 ++--
- arch/arm/dts/k3-am62a-sk-binman.dtsi          |  4 ++--
- arch/arm/dts/k3-j7200-binman.dtsi             |  4 ++--
- arch/arm/dts/k3-j721e-binman.dtsi             |  4 ++--
- arch/arm/dts/k3-j721s2-binman.dtsi            |  4 ++--
- doc/board/ti/k3.rst                           |  7 ++++++
- tools/binman/entries.rst                      | 14 ++++++++++++
- tools/binman/etype/ti_dm.py                   | 22 +++++++++++++++++++
- tools/binman/ftest.py                         |  7 ++++++
- tools/binman/test/225_ti_dm.dts               | 13 +++++++++++
- 12 files changed, 76 insertions(+), 12 deletions(-)
+ Makefile                        |  1 +
+ tools/binman/entries.rst        | 14 ++++++++++++++
+ tools/binman/etype/ti_dm.py     | 22 ++++++++++++++++++++++
+ tools/binman/ftest.py           |  7 +++++++
+ tools/binman/test/225_ti_dm.dts | 13 +++++++++++++
+ 5 files changed, 57 insertions(+)
  create mode 100644 tools/binman/etype/ti_dm.py
  create mode 100644 tools/binman/test/225_ti_dm.dts
 
+diff --git a/Makefile b/Makefile
+index 43998da6c0..243494f464 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1349,6 +1349,7 @@ cmd_binman = $(srctree)/tools/binman/binman $(if $(BINMAN_DEBUG),-D) \
+ 		$(foreach f,$(BINMAN_INDIRS),-I $(f)) \
+ 		-a atf-bl31-path=${BL31} \
+ 		-a tee-os-path=${TEE} \
++		-a ti-dm-path=${TI_DM} \
+ 		-a opensbi-path=${OPENSBI} \
+ 		-a default-dt=$(default_dt) \
+ 		-a scp-path=$(SCP) \
+diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+index 61de7f1f4a..254afe7607 100644
+--- a/tools/binman/entries.rst
++++ b/tools/binman/entries.rst
+@@ -1906,6 +1906,20 @@ the included board config binaries. Example::
+ 
+ 
+ 
++.. _etype_ti_dm:
++
++Entry: ti-dm: TI Device Manager (DM) blob
++-----------------------------------------
++
++Properties / Entry arguments:
++    - ti-dm-path: Filename of file to read into the entry, typically ti-dm.bin
++
++This entry holds the device manager responsible for resource and power management
++in K3 devices. See https://software-dl.ti.com/tisci/esd/latest/ for more information
++about TI DM.
++
++
++
+ .. _etype_ti_secure:
+ 
+ Entry: ti-secure: Entry containing a TI x509 certificate binary
+diff --git a/tools/binman/etype/ti_dm.py b/tools/binman/etype/ti_dm.py
+new file mode 100644
+index 0000000000..0faa0bf0ca
+--- /dev/null
++++ b/tools/binman/etype/ti_dm.py
+@@ -0,0 +1,22 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++# Written by Neha Malcom Francis <n-francis@ti.com>
++#
++# Entry-type module for TI Device Manager (DM)
++#
++
++from binman.etype.blob_named_by_arg import Entry_blob_named_by_arg
++
++class Entry_ti_dm(Entry_blob_named_by_arg):
++    """TI Device Manager (DM) blob
++
++    Properties / Entry arguments:
++        - ti-dm-path: Filename of file to read into the entry, typically ti-dm.bin
++
++    This entry holds the device manager responsible for resource and power management
++    in K3 devices. See https://software-dl.ti.com/tisci/esd/latest/ for more information
++    about TI DM.
++    """
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node, 'ti-dm')
++        self.external = True
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 5ace2a825d..a273120d9f 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -88,6 +88,7 @@ FSP_S_DATA            = b'fsp_s'
+ FSP_T_DATA            = b'fsp_t'
+ ATF_BL31_DATA         = b'bl31'
+ TEE_OS_DATA           = b'this is some tee OS data'
++TI_DM_DATA            = b'tidmtidm'
+ ATF_BL2U_DATA         = b'bl2u'
+ OPENSBI_DATA          = b'opensbi'
+ SCP_DATA              = b'scp'
+@@ -221,6 +222,7 @@ class TestFunctional(unittest.TestCase):
+         TestFunctional._MakeInputFile('compress_big', COMPRESS_DATA_BIG)
+         TestFunctional._MakeInputFile('bl31.bin', ATF_BL31_DATA)
+         TestFunctional._MakeInputFile('tee-pager.bin', TEE_OS_DATA)
++        TestFunctional._MakeInputFile('dm.bin', TI_DM_DATA)
+         TestFunctional._MakeInputFile('bl2u.bin', ATF_BL2U_DATA)
+         TestFunctional._MakeInputFile('fw_dynamic.bin', OPENSBI_DATA)
+         TestFunctional._MakeInputFile('scp.bin', SCP_DATA)
+@@ -5455,6 +5457,11 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = self._DoReadFile('222_tee_os.dts')
+         self.assertEqual(TEE_OS_DATA, data[:len(TEE_OS_DATA)])
+ 
++    def testPackTiDm(self):
++        """Test that an image with a TI DM binary can be created"""
++        data = self._DoReadFile('225_ti_dm.dts')
++        self.assertEqual(TI_DM_DATA, data[:len(TI_DM_DATA)])
++
+     def testFitFdtOper(self):
+         """Check handling of a specified FIT operation"""
+         entry_args = {
+diff --git a/tools/binman/test/225_ti_dm.dts b/tools/binman/test/225_ti_dm.dts
+new file mode 100644
+index 0000000000..3ab754131e
+--- /dev/null
++++ b/tools/binman/test/225_ti_dm.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++	binman {
++		ti-dm {
++			filename = "dm.bin";
++		};
++	};
++};
 -- 
 2.34.1
 
