@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D6B7C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5872C10DCE
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 447468789B;
+	by phobos.denx.de (Postfix) with ESMTP id A46A2878A9;
 	Tue,  5 Dec 2023 01:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHb95bFI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mo8KWUct";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43C3987885; Tue,  5 Dec 2023 01:53:01 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 441E387888; Tue,  5 Dec 2023 01:53:01 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1629B87897
+ by phobos.denx.de (Postfix) with ESMTPS id 12A3587888
  for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 01:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5d400779f16so30284467b3.0
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5cfc3a48ab2so53904297b3.0
  for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701737576; x=1702342376; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UqOM0tLRdatnZ1JwXKXX1JNZ213nU7YHgvwN7kUNZFk=;
- b=EHb95bFIYCuPJ+Q/j2pfQxSAxuKRAprDgxb5btYquA+bVdF4FBeQWMLFGJV3FadTdk
- Nw69XivD0S1SEN1yhWMhn0cTHkmUDzTZEHYaA+l9Mw3utIV3Asif27FxKxXu2fu7feMY
- z/SD2+NblSErS9I6wCxcrG99Re7siwQYRETTY=
+ bh=bqV5UPtBSaYiz228Uto9Vw4zeWUZv/cN8hiN4gdjEdA=;
+ b=Mo8KWUctrgkYNaJFoBhIrwr2PSWSk6prh+hPkF/pX45yPSw72suFvffduHmiOaY03b
+ ZN1iqqTpaG47Y0ap4hh0/w1218a3Q1NIIgXO2fh0IrpwFCiW5xCUQ0DRUx35/iRwe7Ps
+ crnZs7Mqi5/2Gshj91z3f1J/Jd15ZpsdvmTo0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701737576; x=1702342376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UqOM0tLRdatnZ1JwXKXX1JNZ213nU7YHgvwN7kUNZFk=;
- b=pzQasjZYYv8dD44Z4c0hIkzo3tuonc84rUE5G3o55XRbOzr/4jLU2ADc6aV3VitR4C
- L2XTGsXt6xVa161B3uq7gwjsKL19h0WZKzwOKjwTGYJAzJpsQbEpnadkFtuiBAynDYF+
- 8f1IguWNspuYk3RJfzspirT04QAmStPh7eK+wklsnf6XJ7A25fXdVgGM4RXGwB1pUpD3
- x9gYku1wbIJSr2Y0JhJ/BZuTPTpDfbwXCrN45HPvEa1LwxB294ghuneVGcVW21JOKqkX
- 9FfoDlcQ72/dYDBr8x7eq07ka+7Un202mMjQ94Rl1EZjYu8hngQU9HPptfMPNbsOEf2L
- MalA==
-X-Gm-Message-State: AOJu0YwWj74BMmzVezcwjjVIfot3JlO+dZVDKdWM9wQCAUPtkH22i9eg
- YV9ttSOyqKKuITITzrWDOIqbSUMTrd6q1SBkv25d7Q==
-X-Google-Smtp-Source: AGHT+IGpZK5JNBxxzVsnqiBg7Aqf/yGkGO7fdx3gZTJIXlQpKhnv5MWS0TnrycfBJ30tj+1/on9KQLNYOmMABlNSF4k=
-X-Received: by 2002:a0d:d8c8:0:b0:5d7:f34a:28e3 with SMTP id
- a191-20020a0dd8c8000000b005d7f34a28e3mr540363ywe.7.1701737575577; Mon, 04 Dec
- 2023 16:52:55 -0800 (PST)
+ bh=bqV5UPtBSaYiz228Uto9Vw4zeWUZv/cN8hiN4gdjEdA=;
+ b=a4wPH+inRj2Y6Ir4eZNBvCHO0RSwZowCZP1CXDO1UpGlp41H/HXhJMF3phVz2mbBfW
+ FA38Hpw7PbP0PYp4mfhK9sRy30nkAm5/q33+6DqWHGHAWSaysdb+QdRto70vxFSmedZf
+ dz1qDIIXuygpfDNDk2teGA6rU/8vrUdxy7Wuo+qDfR6foYhWZ7lZoPdgwSGo9IMhC1WF
+ wcRyGDmxODXaOpnYn5lOByDHEnbDK/gDlQP07yJ6PFkLQFKl+M72nNCYs7r3ZKQXg7R+
+ nfspTQPf/qL2ds1k2zhEt4MfLj5z9EpP+8LK3wI8YoEhcLzt7ttZqJKcL633ePL+VHZQ
+ cmoQ==
+X-Gm-Message-State: AOJu0YzGybBfqnTS99vV5K5aHSb0i/QJ4pGIv8kczekUYsdvJ1OUR+pN
+ 8PpTrS6FMDOT1J2cdaF6APUVwlq3m1/FeuYElA08Pw==
+X-Google-Smtp-Source: AGHT+IG1rtPn2Hto2Hpfht3DrkFdO7RBq5gwkZfIjNyG7sAc+OMqjqkPQKnD7eoKziwu9runptRqnvzpAH68eZTnwRA=
+X-Received: by 2002:a81:a009:0:b0:5d7:1941:ace with SMTP id
+ x9-20020a81a009000000b005d719410acemr3861292ywg.105.1701737575583; Mon, 04
+ Dec 2023 16:52:55 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPnjgZ2Os+zLWnwc03AZc69p3FCiUuJ4thncvMy8wrOeEh52_A@mail.gmail.com>
- <CAC_iWj+fZMNFkDBOLNYKh1c9oRPrg5WQrFv6nVA9NmtFcAtz2g@mail.gmail.com>
-In-Reply-To: <CAC_iWj+fZMNFkDBOLNYKh1c9oRPrg5WQrFv6nVA9NmtFcAtz2g@mail.gmail.com>
+References: <20231127195029.90951-1-raymond.mao@linaro.org>
+ <20231127195029.90951-19-raymond.mao@linaro.org>
+ <CAPnjgZ0yJNrpSV7dxmJky_QynEmPQQv5mTXT9MRTdn8rhVxpEg@mail.gmail.com>
+ <CAEfUkULhw2SBEgWmijHtorKvQRmhV0q2Mf4MBd+vLyzJnW0fmw@mail.gmail.com>
+In-Reply-To: <CAEfUkULhw2SBEgWmijHtorKvQRmhV0q2Mf4MBd+vLyzJnW0fmw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Dec 2023 17:52:13 -0700
-Message-ID: <CAPnjgZ0Dbcox7Gjkkt69jKgBQcBLPk4yC=Yctu=Xjmj20gF8OQ@mail.gmail.com>
-Subject: Re: EFI memory allocation
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
+Date: Mon, 4 Dec 2023 17:52:11 -0700
+Message-ID: <CAPnjgZ1kwSSsQB8nBs5qPzQtvvVqb8vj02zif6CXY0N36VB0cg@mail.gmail.com>
+Subject: Re: [PATCH v2 18/18] bloblist: Load the bloblist from the previous
+ loader
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
+ Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Nikhil M Jain <n-jain1@ti.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,58 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Raymond,
 
-On Mon, 4 Dec 2023 at 05:05, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Mon, 4 Dec 2023 at 13:21, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Hi Simon
+> Hi Simon,
 >
-> On Sun, 3 Dec 2023 at 19:44, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Heinrich, Ilias,
-> >
-> > I had a bit of a look at how memory is allocated in EFI.
-> >
-> > I see that efi_memory_init() is called quite early in U-Boot. It
-> > sometimes allocates memory for a bounce buffer, placing it somewhere
-> > in memory. How do we know that that memory is free and not being used
-> > by U-Boot?
-> >
-> > To answer my own question, it excludes U-Boot's malloc() region from
-> > the map, so that it cannot overwrite that.
-> >
-> > But then, what if we use lmb and start loading images into memory.
-> > Won't that conflict with EFI?
+> On Sat, 2 Dec 2023 at 13:32, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Mon, 27 Nov 2023 at 12:53, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > During bloblist initialization, when CONFIG_OF_BOARD is defined,
+>> > invoke the platform custom function to load the bloblist via boot
+>> > arguments from the previous loader.
+>> > If the bloblist exists, copy it into the fixed bloblist memory region.
+>> >
+>> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> > ---
+>> > Changes in v2
+>> > - New patch file created for v2.
+>> >
+>> >  common/bloblist.c  | 29 +++++++++++++----------------
+>> >  include/bloblist.h | 14 ++++++++++++++
+>> >  2 files changed, 27 insertions(+), 16 deletions(-)
+>> >
+>>
+>> This should already work so I am hoping that this patch is not
+>> needed...these changes seem to break sandbox_spl
 >
-> Yes, Heinrich tried to fix parts of this with commit 06d514d77c37 and
+> By "already work", do you mean any existing patches already done for loading the
+> bloblist from the boot args?
 
-OK, that looks very odd to me.
-
-> we have a 'todo' in the efi subsystem for a few years now [0]
-> Michal (+cc'ed) has also pinged me for similar issues in the past.
->
-> >
-> > I also see that efi_allocate_pages() is called to allocate memory in
-> > the EFI code. But this just grabs memory from 'anywhere'...it doesn't
-> > respect the U-Boot malloc region.
-> >
-> > It seems to me that most of the memory allocation in EFI should be
-> > done using malloc(). Of course the boot services need to
-> > efi_allocate_pages(), etc., but I am not sure that the internal tables
-> > should be skipping malloc()?
-> >
-> > What do you think?
->
-> I think that LMB, EFI and the whole memory reservations is a bit of a
-> mess. Tom and I discussed this a bit in the past but I'll start
-> working on it.
-> It needs fixing, but without looking at the code first, I can't
-> provide any useful feedback
->
-> [0] https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/2
-
-OK I mad a comment there. We should figure out a design before going ahead.
+No it doesn't have that. But we need to figure out [1]. I have marked
+in 'new' in patchwork.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20230926141514.2101787-40-sjg@chromium.org/
