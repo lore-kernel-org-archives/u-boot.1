@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFBDCC07E97
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 09:42:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 056ADC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 09:43:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2CD487745;
-	Tue,  5 Dec 2023 10:42:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E97687075;
+	Tue,  5 Dec 2023 10:42:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D0ekHeU1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UYE0GZ1t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 276398779E; Tue,  5 Dec 2023 10:42:42 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 7EF788788C; Tue,  5 Dec 2023 10:42:45 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A82487885
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 10:42:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CEE086FF7
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 10:42:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gXMU038167;
- Tue, 5 Dec 2023 03:42:33 -0600
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gb3l065253;
+ Tue, 5 Dec 2023 03:42:37 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701769353;
- bh=BD0I/0pqg413rkAeHTLr3x5Z9mS2UMxRi+ajXXHcwbw=;
+ s=ti-com-17Q1; t=1701769357;
+ bh=sdJcpV18IKFu7NUcQA9TnRzMpcrLiwFyjSoZ/vOd9H8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=D0ekHeU1QaDgzaGolxveG4QEvNi54ukuHFytFeiVI4Y9I/R1wdwILIly8AFKQZYye
- WG5iGjFgzx2ZYOf0DpXYjOiIjueav76Mfmhpx8I9OB/w7Q+xWmAvjzOCeczL0f6dQR
- 3Q9g5m4jnf4MV3XD3BLTTLAk+goj6S3MNDnESSYI=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B59gXBF087470
+ b=UYE0GZ1tNpDxG3Nl8gTlhAuQ9sf95wsU2ZRjDznM+J1nOiiPRhmM74angWsmYs8RJ
+ +eUGJTIxl0xJWhvggG2NV3VRVyv2rbiAsXD3asNdozuiipVnP8+X/LMw5Z/e4hGnPm
+ /x3C5A+C26NCItg2oO4vosKXcKJli6K3mTWzlrd0=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B59gb2E087498
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 03:42:33 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 5 Dec 2023 03:42:37 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 03:42:33 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 03:42:37 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 03:42:33 -0600
+ Frontend Transport; Tue, 5 Dec 2023 03:42:37 -0600
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gKlF018180;
- Tue, 5 Dec 2023 03:42:29 -0600
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B59gKlG018180;
+ Tue, 5 Dec 2023 03:42:33 -0600
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <marcel.ziswiler@toradex.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>
@@ -57,9 +57,9 @@ CC: <u-boot@lists.denx.de>, <hs@denx.de>, <christophe.leroy@csgroup.eu>,
  <mr.bossman075@gmail.com>, <afd@ti.com>, <m-chawdhry@ti.com>,
  <kamlesh@ti.com>, <nm@ti.com>, <c-shilwant@ti.com>, <u-kumar1@ti.com>,
  <n-francis@ti.com>
-Subject: [PATCH v2 2/3] arm: dts: k3-*-binman: Move to using ti-dm entry type
-Date: Tue, 5 Dec 2023 15:12:19 +0530
-Message-ID: <20231205094220.2301360-3-n-francis@ti.com>
+Subject: [PATCH v2 3/3] doc: board: ti: k3: Mention TI_DM argument
+Date: Tue, 5 Dec 2023 15:12:20 +0530
+Message-ID: <20231205094220.2301360-4-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231205094220.2301360-1-n-francis@ti.com>
 References: <20231205094220.2301360-1-n-francis@ti.com>
@@ -83,154 +83,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the DM entry in tispl.bin FIT image from default fetching an
-external blob entry to fetching using ti-dm entry type. This way, the
-DM entry will be populated by the TI_DM pathname if provided. Else it
-will resort to the ti-dm.bin file.
+Mention TI_DM argument can be used to fetch a custom DM binary in the
+A72 build instructions for K3 devices.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 Reviewed-by: Andrew Davis <afd@ti.com>
 ---
- arch/arm/dts/k3-am625-sk-binman.dtsi              | 4 ++--
- arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi | 4 ++--
- arch/arm/dts/k3-am62a-sk-binman.dtsi              | 4 ++--
- arch/arm/dts/k3-j7200-binman.dtsi                 | 4 ++--
- arch/arm/dts/k3-j721e-binman.dtsi                 | 4 ++--
- arch/arm/dts/k3-j721s2-binman.dtsi                | 4 ++--
- 6 files changed, 12 insertions(+), 12 deletions(-)
+ doc/board/ti/k3.rst | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index b7b5368886..5b058bd03a 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -161,7 +161,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -248,7 +248,7 @@
- 			images {
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index a127215ce5..f19ee56f29 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -320,6 +320,13 @@ use the `lite` option.
+  make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
+         BL31=$TFA_PATH/build/k3/$TFA_BOARD/release/bl31.bin \
+         TEE=$OPTEE_PATH/out/arm-plat-k3/core/tee-raw.bin
++
++.. note::
++   It is also possible to pick up a custom DM binary by adding TI_DM argument
++   pointing to the file. If not provided, it defaults to picking up the DM
++   binary from BINMAN_INDIRS. This is only applicable to devices that utilize
++   split firmware.
++
+ .. k3_rst_include_end_build_steps_uboot
  
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-index ed2c4482ef..78c371529a 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-@@ -227,7 +227,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -310,7 +310,7 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-index c5e027d44d..ec3bf7ce91 100644
---- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-@@ -164,7 +164,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -250,7 +250,7 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 10c9d6cba7..38cccabaa7 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -200,7 +200,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -285,7 +285,7 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-index 5ddb474e3a..dbc385a852 100644
---- a/arch/arm/dts/k3-j721e-binman.dtsi
-+++ b/arch/arm/dts/k3-j721e-binman.dtsi
-@@ -151,7 +151,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -282,7 +282,7 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
-index 3922007b3b..f17dd8e04c 100644
---- a/arch/arm/dts/k3-j721s2-binman.dtsi
-+++ b/arch/arm/dts/k3-j721s2-binman.dtsi
-@@ -164,7 +164,7 @@
- 						content = <&dm>;
- 						keyfile = "custMpk.pem";
- 					};
--					dm: blob-ext {
-+					dm: ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
-@@ -296,7 +296,7 @@
- 		fit {
- 			images {
- 				dm {
--					blob-ext {
-+					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
+ At this point you should have every binary needed initialize both the
 -- 
 2.34.1
 
