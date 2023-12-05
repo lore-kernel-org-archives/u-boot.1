@@ -4,89 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0055EC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 02:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01002C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 03:00:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C36869F7;
-	Tue,  5 Dec 2023 03:43:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id DD676870D2;
+	Tue,  5 Dec 2023 04:00:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lm/EfTU4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cQ6NojpF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2E8986C68; Tue,  5 Dec 2023 03:43:42 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C38A6870A0; Tue,  5 Dec 2023 04:00:41 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 382FF865D0
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 03:43:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F7A5870DE
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 04:00:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A7CF43F65A
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 02:43:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1701744217;
- bh=FQYrvZyd80LKSAvoo+Vz+csyA5kO4SapuB9L5bFHPzE=;
- h=Content-Type:Message-ID:Date:MIME-Version:To:Cc:From:Subject;
- b=lm/EfTU4q/Vf5IHUrVtOog8Yu0r9ajBFhIBDHkRTex8Y02MT8TjSiNv9ab0MPCvkD
- xO3oMgpy+J6fr8WF4wQLPVmcy5eFOnyoavszH+bA0IJSqOcXbxdN4iESpT/JWnt+Jk
- fuN1Fled9OThwIYpeADXhaj85kKVsmal3ZhXraFsY1VC66NggAy734oCxp6Ax36W0y
- gBgptRZz/9qRC2lUZ8EhHukn68P66HCO5p3hncOfhvHAhiFJv30TaqaNcRUXY+tlcV
- 6q8wETVsfXztecMMOa1bgWaT4Er6dvMOygJRY80114M8Ow7SlbbxDPgI0WJnDcwpOi
- 4SthKSF9+5bTQ==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-33342e25313so1803776f8f.3
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 18:43:37 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dimorinny@google.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40b51e26a7aso19395e9.1
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 19:00:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1701745235; x=1702350035; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yL8Sjflz26gYuFQ5n9zBYajO6Gk9Zra0B3VCSsLmxC8=;
+ b=cQ6NojpF5J3uUaAfCd/aCI+0V3Qb7j66fh3OdS95GtN7AdH6yS1pcLx36o37biayrc
+ it8pwHNUBRrPid6axasYuH0wIiOJv0+N08+2YEKxcXIFB7qS3o4MBwdsRcjB+Akhd3Q+
+ +BDph6oplyP5G8lSMsdjMdDprZXm32U7vsUCBT/bO3fQN3ViLoMjkN/DzATraADS0KYx
+ zjPVQEYxyOe6esQ0Sr3tyYRXKpREw7d473EvPTrL1qTQjOoAaWcoAyIuBak38CvyECVK
+ uYL9MqoT0RQzoXpCY7JIFlLd5o2ucvdt/XERin9QCFTt1FVikSLrZNM3ErMu6bsx/YGf
+ ZJ0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701744217; x=1702349017;
- h=subject:from:cc:to:content-language:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1701745235; x=1702350035;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FQYrvZyd80LKSAvoo+Vz+csyA5kO4SapuB9L5bFHPzE=;
- b=n91nNOmS0xm90xt1Dprvj2Ip6KLEvtiGMjH0gxGpUDH9sEnBkzEgbB6mGYeBd+Tvda
- fGM+xtc2au1p8v3G42/KFYoXXdw6tfNHY2VY3vEvtMTz2o/KYKhyhe3V7HVWbuzOcKjd
- 9nqoJgJCZRPiXSP17Kr0t9NxMLIWCKUCKlTaVzvTB+cEC6V/OpG/Phf+RxughcCGaepk
- +0hzfRed8aj/8thyxoJ+bs4jrb3n2Mq0fsWk4xgEf9fWws7x2gPgkCs5/n6giAFqLHcy
- sYg2vPZg6dkGqPx2xB8U9iUSULotA6hvbiMbvN9FtfJ1jQ/W7jMYfsACtdfVI2/CRTgP
- qxmg==
-X-Gm-Message-State: AOJu0YwVquvAcpapM6SlwoRQOiMU4nVQ4A+02iYYpw2lOo8uT2y5J2U1
- dA4jKB6M4J0ByuRcVbAE/nsVmEnZg1p1x+3E24qToKNPtfALTLngGhit0VhQrNLZsEWvwdSAo/M
- l2tWrLD6r0guS/kDxJrMShHCAO9hS/9M=
-X-Received: by 2002:a5d:5504:0:b0:333:3be1:84f7 with SMTP id
- b4-20020a5d5504000000b003333be184f7mr2117728wrv.92.1701744217020; 
- Mon, 04 Dec 2023 18:43:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGcsLW+yBJa0IkDVAyXBRP4hhmgHVvHro3YSMsNKsOzzTIqRJfZV6UzfmFJCX3En+zZRo8FLw==
-X-Received: by 2002:a5d:5504:0:b0:333:3be1:84f7 with SMTP id
- b4-20020a5d5504000000b003333be184f7mr2117720wrv.92.1701744216689; 
- Mon, 04 Dec 2023 18:43:36 -0800 (PST)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- u13-20020a5d514d000000b0033343bb21a0sm5445891wrt.93.2023.12.04.18.43.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Dec 2023 18:43:36 -0800 (PST)
-Content-Type: multipart/mixed; boundary="------------lgq0zOVtJxGSzRhygT9zZdLL"
-Message-ID: <90412dba-5f89-4cfd-aee4-05092a81e394@canonical.com>
-Date: Tue, 5 Dec 2023 03:43:34 +0100
+ bh=yL8Sjflz26gYuFQ5n9zBYajO6Gk9Zra0B3VCSsLmxC8=;
+ b=dwg+EzBnfF+Szi/mdT8ek16foypXCwhqJ0GU/PgRCFIN5Dxj40IREVuckBOlCdc1Lj
+ yYSOcv+X7wnGuamjMzYM4wqAWG9s1277ERRJfauA3/56NJS43L8Uhl+M3Ye7yK6iN0b5
+ /MIt9NJPwtWxHrpN38xGveYxS2Fv/jydFu1BivhTsHd1/VFPb+/Oif0kgIA9gV3Dwi7G
+ wcZdFMkEUxJcVTJO95iQGVmTDNoPfAz3GKGDIHoWGTInC8siVO7MvfHCrl47I1BhQBUf
+ dQOiUC3TwZNe2BF10ke0ZuSu/7eZxFroT3qVtxV47eGF68OgfYnQ4PCQkKADIf7lbJt+
+ dWXQ==
+X-Gm-Message-State: AOJu0Ywsv8oWez4FahqWHy6SPbgMJlOtFdhW4XpSpVZAIMhE9f6I+7h9
+ Wzvpk/smT1qOGdBLA5fZSFwdHvG1zgRnbLpK4QNtJw==
+X-Google-Smtp-Source: AGHT+IF/PpoG8hlYLQ6bYo81ivP2fdEWHnhA9ZcitmVvuh2VVQcaGYyFcL+RjZfd4h0zI88CAeHzXeOwiHdkddzUndM=
+X-Received: by 2002:a05:600c:6014:b0:40b:33aa:a2b9 with SMTP id
+ az20-20020a05600c601400b0040b33aaa2b9mr516934wmb.4.1701745234768; Mon, 04 Dec
+ 2023 19:00:34 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
+References: <20231204003144.899097-1-sjg@chromium.org>
+ <20231204003144.899097-6-sjg@chromium.org>
+In-Reply-To: <20231204003144.899097-6-sjg@chromium.org>
+From: Dmitrii Merkurev <dimorinny@google.com>
+Date: Tue, 5 Dec 2023 03:00:23 +0000
+Message-ID: <CAOWkq4kr4xo-swYej0LyCsrsPEQDu2=QEdtpCtzsdwVr3WHeEA@mail.gmail.com>
+Subject: Re: [PATCH 06/14] fastboot: Change fastboot_buf_addr to an address
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heiko Schocher <hs@denx.de>, Marek Vasut <marex@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Pull request efi-2024-01-rc5
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+ Sean Anderson <sean.anderson@seco.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,118 +92,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a multi-part message in MIME format.
---------------lgq0zOVtJxGSzRhygT9zZdLL
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Verified this change with AOSP u-boot fastboot flashing tests and it works
+as expected.
 
-Dear Tom,
+Reviewed-by: Dmitrii Merkurev <dimorinny@google.com>
 
-The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b63:
+On Mon, Dec 4, 2023 at 12:32=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 
-   Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
-tags/efi-2024-01-rc5
-
-for you to fetch changes up to 6805b4dbad72a6e9180426c50f6db6e2681430c0:
-
-   efi_loader: Make DisconnectController follow the EFI spec (2023-12-05 
-01:38:56 +0100)
-
-Gitlab CI did now show any issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18800
-
-----------------------------------------------------------------
-Pull request efi-2024-01-rc5
-
-Documentation:
-
-* Update and correct support notes on clang
-* sandbox: Fix VPL instructions
-
-UEFI:
-
-* Fix a bug in DisconnectController
-* Provide better error messages for missing CONFIG_EFI_CAPSULE_ESL_FILE
-* Create EFI memory reservations when booting via ACPI
-* Make ACPI tables accessible in EFI app
-
-----------------------------------------------------------------
-Heinrich Schuchardt (1):
-       efi_loader: create memory reservations in ACPI case
-
-Ilias Apalodimas (1):
-       efi_loader: Make DisconnectController follow the EFI spec
-
-Masahisa Kojima (1):
-       scripts/Makefile.lib: print error when no public key is specified
-
-Mattijs Korpershoek (1):
-       doc: sending_patches.rst: s/Superseeded/Superseded
-
-Simon Glass (3):
-       sandbox: Fix VPL instructions
-       efi: Collect the ACPI tables in the app
-       efi: Correct display of table GUIDs
-
-Tom Rini (1):
-       doc: clang: Update and correct support notes
-
-  cmd/bootefi.c                   | 25 +++++++++------------
-  cmd/efi_common.c                |  4 +---
-  doc/arch/sandbox/sandbox.rst    | 50 
-++++++++++++++++++++++++++++++++++++++---
-  doc/build/clang.rst             | 22 +++++++++---------
-  doc/develop/sending_patches.rst |  4 ++--
-  lib/efi/efi_app.c               | 24 +++++++++++++++++---
-  lib/efi_loader/Makefile         |  2 --
-  lib/efi_loader/efi_boottime.c   | 27 +++++++++-------------
-  scripts/Makefile.lib            |  5 +++++
-  9 files changed, 106 insertions(+), 57 deletions(-)
---------------lgq0zOVtJxGSzRhygT9zZdLL
-Content-Type: text/plain; charset=UTF-8; name="test.txt"
-Content-Disposition: attachment; filename="test.txt"
-Content-Transfer-Encoding: base64
-
-VGhlIGZvbGxvd2luZyBjaGFuZ2VzIHNpbmNlIGNvbW1pdCAyZjAyODI5MjJiMmM0NThlZWE3
-Zjg1YzUwMGE5NDhhNTg3NDM3YjYzOgoKICBQcmVwYXJlIHYyMDI0LjAxLXJjNCAoMjAyMy0x
-Mi0wNCAxMzo0Njo1NiAtMDUwMCkKCmFyZSBhdmFpbGFibGUgaW4gdGhlIEdpdCByZXBvc2l0
-b3J5IGF0OgoKICBodHRwczovL3NvdXJjZS5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3Ut
-Ym9vdC1lZmkuZ2l0IHRhZ3MvZWZpLTIwMjQtMDEtcmM1Cgpmb3IgeW91IHRvIGZldGNoIGNo
-YW5nZXMgdXAgdG8gNjgwNWI0ZGJhZDcyYTZlOTE4MDQyNmM1MGY2ZGI2ZTI2ODE0MzBjMDoK
-CiAgZWZpX2xvYWRlcjogTWFrZSBEaXNjb25uZWN0Q29udHJvbGxlciBmb2xsb3cgdGhlIEVG
-SSBzcGVjICgyMDIzLTEyLTA1IDAxOjM4OjU2ICswMTAwKQoKLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQdWxsIHJl
-cXVlc3QgZWZpLTIwMjQtMDEtcmM1CgpEb2N1bWVudGF0aW9uOgoKKiBVcGRhdGUgYW5kIGNv
-cnJlY3Qgc3VwcG9ydCBub3RlcyBvbiBjbGFuZwoqIHNhbmRib3g6IEZpeCBWUEwgaW5zdHJ1
-Y3Rpb25zCgpVRUZJOgoKKiBGaXggYSBidWcgaW4gRGlzY29ubmVjdENvbnRyb2xsZXIKKiBQ
-cm92aWRlIGJldHRlciBlcnJvciBtZXNzYWdlcyBmb3IgbWlzc2luZyBDT05GSUdfRUZJX0NB
-UFNVTEVfRVNMX0ZJTEUKKiBDcmVhdGUgRUZJIG1lbW9yeSByZXNlcnZhdGlvbnMgd2hlbiBi
-b290aW5nIHZpYSBBQ1BJCiogTWFrZSBBQ1BJIHRhYmxlcyBhY2Nlc3NpYmxlIGluIEVGSSBh
-cHAKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0KSGVpbnJpY2ggU2NodWNoYXJkdCAoMSk6CiAgICAgIGVmaV9sb2Fk
-ZXI6IGNyZWF0ZSBtZW1vcnkgcmVzZXJ2YXRpb25zIGluIEFDUEkgY2FzZQoKSWxpYXMgQXBh
-bG9kaW1hcyAoMSk6CiAgICAgIGVmaV9sb2FkZXI6IE1ha2UgRGlzY29ubmVjdENvbnRyb2xs
-ZXIgZm9sbG93IHRoZSBFRkkgc3BlYwoKTWFzYWhpc2EgS29qaW1hICgxKToKICAgICAgc2Ny
-aXB0cy9NYWtlZmlsZS5saWI6IHByaW50IGVycm9yIHdoZW4gbm8gcHVibGljIGtleSBpcyBz
-cGVjaWZpZWQKCk1hdHRpanMgS29ycGVyc2hvZWsgKDEpOgogICAgICBkb2M6IHNlbmRpbmdf
-cGF0Y2hlcy5yc3Q6IHMvU3VwZXJzZWVkZWQvU3VwZXJzZWRlZAoKU2ltb24gR2xhc3MgKDMp
-OgogICAgICBzYW5kYm94OiBGaXggVlBMIGluc3RydWN0aW9ucwogICAgICBlZmk6IENvbGxl
-Y3QgdGhlIEFDUEkgdGFibGVzIGluIHRoZSBhcHAKICAgICAgZWZpOiBDb3JyZWN0IGRpc3Bs
-YXkgb2YgdGFibGUgR1VJRHMKClRvbSBSaW5pICgxKToKICAgICAgZG9jOiBjbGFuZzogVXBk
-YXRlIGFuZCBjb3JyZWN0IHN1cHBvcnQgbm90ZXMKCiBjbWQvYm9vdGVmaS5jICAgICAgICAg
-ICAgICAgICAgIHwgMjUgKysrKysrKysrLS0tLS0tLS0tLS0tCiBjbWQvZWZpX2NvbW1vbi5j
-ICAgICAgICAgICAgICAgIHwgIDQgKy0tLQogZG9jL2FyY2gvc2FuZGJveC9zYW5kYm94LnJz
-dCAgICB8IDUwICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tCiBk
-b2MvYnVpbGQvY2xhbmcucnN0ICAgICAgICAgICAgIHwgMjIgKysrKysrKysrLS0tLS0tLS0t
-CiBkb2MvZGV2ZWxvcC9zZW5kaW5nX3BhdGNoZXMucnN0IHwgIDQgKystLQogbGliL2VmaS9l
-ZmlfYXBwLmMgICAgICAgICAgICAgICB8IDI0ICsrKysrKysrKysrKysrKysrLS0tCiBsaWIv
-ZWZpX2xvYWRlci9NYWtlZmlsZSAgICAgICAgIHwgIDIgLS0KIGxpYi9lZmlfbG9hZGVyL2Vm
-aV9ib290dGltZS5jICAgfCAyNyArKysrKysrKystLS0tLS0tLS0tLS0tCiBzY3JpcHRzL01h
-a2VmaWxlLmxpYiAgICAgICAgICAgIHwgIDUgKysrKysKIDkgZmlsZXMgY2hhbmdlZCwgMTA2
-IGluc2VydGlvbnMoKyksIDU3IGRlbGV0aW9ucygtKQo=
-
---------------lgq0zOVtJxGSzRhygT9zZdLL--
+> Given the name of this variable, it should be an address, not a
+> pointer. Update this, to make it easier to use with sandbox.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  cmd/fastboot.c                |  2 +-
+>  drivers/fastboot/fb_command.c | 13 ++++++++-----
+>  drivers/fastboot/fb_common.c  | 15 ++++-----------
+>  include/fastboot-internal.h   |  2 +-
+>  include/fastboot.h            |  6 +++---
+>  5 files changed, 17 insertions(+), 21 deletions(-)
+>
+> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+> index c3c19231c988..792e83d372c3 100644
+> --- a/cmd/fastboot.c
+> +++ b/cmd/fastboot.c
+> @@ -159,7 +159,7 @@ NXTARG:
+>                 return CMD_RET_USAGE;
+>         }
+>
+> -       fastboot_init((void *)buf_addr, buf_size);
+> +       fastboot_init(buf_addr, buf_size);
+>
+>         if (!strcmp(argv[1], "udp"))
+>                 return do_fastboot_udp(argc, argv, buf_addr, buf_size);
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.=
+c
+> index 5fcadcdf503d..ec030886dbb8 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -10,6 +10,7 @@
+>  #include <fastboot-internal.h>
+>  #include <fb_mmc.h>
+>  #include <fb_nand.h>
+> +#include <mapmem.h>
+>  #include <part.h>
+>  #include <stdlib.h>
+>  #include <linux/printk.h>
+> @@ -252,7 +253,7 @@ void fastboot_data_download(const void *fastboot_data=
+,
+>                 return;
+>         }
+>         /* Download data to fastboot_buf_addr */
+> -       memcpy(fastboot_buf_addr + fastboot_bytes_received,
+> +       memcpy(map_sysmem(fastboot_buf_addr, 0) + fastboot_bytes_received=
+,
+>                fastboot_data, fastboot_data_len);
+>
+>         pre_dot_num =3D fastboot_bytes_received / BYTES_PER_DOT;
+> @@ -296,13 +297,15 @@ void fastboot_data_complete(char *response)
+>   */
+>  static void __maybe_unused flash(char *cmd_parameter, char *response)
+>  {
+> +       void *buf =3D map_sysmem(fastboot_buf_addr, 0);
+> +
+>         if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+> -               fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr=
+,
+> -                                        image_size, response);
+> +               fastboot_mmc_flash_write(cmd_parameter, buf, image_size,
+> +                                        response);
+>
+>         if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_NAND))
+> -               fastboot_nand_flash_write(cmd_parameter, fastboot_buf_add=
+r,
+> -                                         image_size, response);
+> +               fastboot_nand_flash_write(cmd_parameter, buf, image_size,
+> +                                         response);
+>  }
+>
+>  /**
+> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+> index 3576b0677299..07f5946d9ed1 100644
+> --- a/drivers/fastboot/fb_common.c
+> +++ b/drivers/fastboot/fb_common.c
+> @@ -20,7 +20,7 @@
+>  /**
+>   * fastboot_buf_addr - base address of the fastboot download buffer
+>   */
+> -void *fastboot_buf_addr;
+> +ulong fastboot_buf_addr;
+>
+>  /**
+>   * fastboot_buf_size - size of the fastboot download buffer
+> @@ -154,7 +154,7 @@ void fastboot_boot(void)
+>                 };
+>
+>                 snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
+> -                        "0x%p", fastboot_buf_addr);
+> +                        "%lx", fastboot_buf_addr);
+>                 printf("Booting kernel at %s...\n\n\n", boot_addr_start);
+>
+>                 do_bootm(NULL, 0, 2, bootm_args);
+> @@ -214,16 +214,9 @@ void fastboot_set_progress_callback(void
+> (*progress)(const char *msg))
+>         fastboot_progress_callback =3D progress;
+>  }
+>
+> -/*
+> - * fastboot_init() - initialise new fastboot protocol session
+> - *
+> - * @buf_addr: Pointer to download buffer, or NULL for default
+> - * @buf_size: Size of download buffer, or zero for default
+> - */
+> -void fastboot_init(void *buf_addr, u32 buf_size)
+> +void fastboot_init(ulong buf_addr, u32 buf_size)
+>  {
+> -       fastboot_buf_addr =3D buf_addr ? buf_addr :
+> -                                      (void *)CONFIG_FASTBOOT_BUF_ADDR;
+> +       fastboot_buf_addr =3D buf_addr ? buf_addr : CONFIG_FASTBOOT_BUF_A=
+DDR;
+>         fastboot_buf_size =3D buf_size ? buf_size : CONFIG_FASTBOOT_BUF_S=
+IZE;
+>         fastboot_set_progress_callback(NULL);
+>  }
+> diff --git a/include/fastboot-internal.h b/include/fastboot-internal.h
+> index bf2f2b3c8914..d3e1c106e23f 100644
+> --- a/include/fastboot-internal.h
+> +++ b/include/fastboot-internal.h
+> @@ -6,7 +6,7 @@
+>  /**
+>   * fastboot_buf_addr - base address of the fastboot download buffer
+>   */
+> -extern void *fastboot_buf_addr;
+> +extern ulong fastboot_buf_addr;
+>
+>  /**
+>   * fastboot_buf_size - size of the fastboot download buffer
+> diff --git a/include/fastboot.h b/include/fastboot.h
+> index 296451f89d44..744ab61cc18a 100644
+> --- a/include/fastboot.h
+> +++ b/include/fastboot.h
+> @@ -103,13 +103,13 @@ int fastboot_set_reboot_flag(enum
+> fastboot_reboot_reason reason);
+>   */
+>  void fastboot_set_progress_callback(void (*progress)(const char *msg));
+>
+> -/*
+> +/**
+>   * fastboot_init() - initialise new fastboot protocol session
+>   *
+> - * @buf_addr: Pointer to download buffer, or NULL for default
+> + * @buf_addr: Address of download buffer, or 0 for default
+>   * @buf_size: Size of download buffer, or zero for default
+>   */
+> -void fastboot_init(void *buf_addr, u32 buf_size);
+> +void fastboot_init(ulong buf_addr, u32 buf_size);
+>
+>  /**
+>   * fastboot_boot() - Execute fastboot boot command
+> --
+> 2.43.0.rc2.451.g8631bc7472-goog
+>
+>
