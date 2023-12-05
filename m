@@ -4,68 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443F0C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 10:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF4AC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 10:24:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D7A28789D;
-	Tue,  5 Dec 2023 11:21:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C10B1871AA;
+	Tue,  5 Dec 2023 11:24:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VO8tInkh";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mcOhcOW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DBB9878A0; Tue,  5 Dec 2023 11:21:06 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5DB4D87879; Tue,  5 Dec 2023 11:24:24 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 790C2870DF
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 11:21:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 279B3871AA
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 11:24:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5AKvbT073121;
- Tue, 5 Dec 2023 04:20:57 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701771657;
- bh=XBqJ+HpxwAjpB40RpNxtrWn5TlsSpQYZ2bTXAHJB8b4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=VO8tInkh0zSBgd55Em5cv+PG8yN1zaW1tEYHhd2tHtEEvcqlH0CJF3i+0qXpZbsCy
- nRSoVvT1csauJHbllPxurDrw0jHQnduSWIJqsNMk642Z5ySYjyA9CRfOBzkzq6tu3q
- 0YxvtRw2wIfKi9gvR8rarObybwyitvgnn+mrJGQk=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5AKvNt012739
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 04:20:57 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 04:20:57 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 04:20:57 -0600
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5AKuTX012920;
- Tue, 5 Dec 2023 04:20:56 -0600
-Date: Tue, 5 Dec 2023 15:50:56 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <marcel.ziswiler@toradex.com>, <sjg@chromium.org>,
- <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, <hs@denx.de>,
- <christophe.leroy@csgroup.eu>, <mr.bossman075@gmail.com>, <afd@ti.com>,
- <kamlesh@ti.com>, <nm@ti.com>, <c-shilwant@ti.com>, <u-kumar1@ti.com>
-Subject: Re: [PATCH v2 3/3] doc: board: ti: k3: Mention TI_DM argument
-Message-ID: <20231205102056.dmkh4fntzs4thpdv@uda0497581>
-References: <20231205094220.2301360-1-n-francis@ti.com>
- <20231205094220.2301360-4-n-francis@ti.com>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-40c0fc1cf3dso9660395e9.0
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 02:24:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1701771861; x=1702376661;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=gnS38VrvS9qSeJP3PlZKbfBYyfyoUPBxNqO3mr2HXxU=;
+ b=mcOhcOW+JCkgfyHZpPiGf8X4F+ZU9nBflYStyNh4qds8xfn3zi4zQbQi6H4HM8hrpZ
+ b4i5wy3VxaSSOuRBIdW0UPVosi5XopYFkEuDV1bqSY9vmS1LgZrfpdBJmkHY0l2xzPLU
+ qMphhIMnxsO/7HKnGpFyjAVZJxRZoCN94H8KWK9hv9YU9D6QRnbqeQncp9s/kf8KaysD
+ xszolQgN5+lG5M68JW6ZLCa0GES3wG3HIXGmyR1OkfQT5JL4HM/cdw+9wXqtcGCCUY8G
+ 5JUzFHYViFaJPgU8+qMGiF0B+EehbG+r18OIVNetgV0vmbopM0o7G8RVshuC6W2naHaM
+ F5ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701771861; x=1702376661;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gnS38VrvS9qSeJP3PlZKbfBYyfyoUPBxNqO3mr2HXxU=;
+ b=Vwrv8VUKtLYvuDJh3NAk7QDylk0KG5DcIvq0cAbRpS+Jv80xW5X8pQsbLqQuL8mXA9
+ Fpvncd4gjgjWw2h6TNKAquMInl/guHkLJM+X8PbwfWQGq3kCTLpONaw0S+zNPCujFD9/
+ 8r6gzwUPMuN8QNlAAMfodmHZMGjebUUOCquUF4KDDKvz1zXLgRWAYWnJHeZZimAQ0qtw
+ FM6+5gp8GSXW6k6TvV8aLd+zKyqjNWcwxqTeXaBTehtvb8xnUIiNUNpdX2k1+qZ6M7v2
+ byP/ox4Zgga3DuxYbWHs4Ngl+aTwRS4FjGntKRgWKhawCojIEgPf19nF1U5mbNpznSFF
+ 93PA==
+X-Gm-Message-State: AOJu0Yy5bne1utewxKF25bCn1gtSc/ELBBmp99fu6VkZ+HTjXba69X7b
+ LrFfdArPrwi2ugzpvTfs5qeSDg==
+X-Google-Smtp-Source: AGHT+IG3y2lEgIblH37Vyy2JSaCVWIgCyRDAO3jQmquryK7xJ1YC0G40dJwD59v4LFj7ZdlvYsQ2pQ==
+X-Received: by 2002:a1c:4b12:0:b0:40c:982:4968 with SMTP id
+ y18-20020a1c4b12000000b0040c09824968mr323292wma.136.1701771860821; 
+ Tue, 05 Dec 2023 02:24:20 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ iv11-20020a05600c548b00b0040b4cb14d40sm21904224wmb.19.2023.12.05.02.24.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Dec 2023 02:24:20 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Chunfeng
+ Yun <chunfeng.yun@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Sean Anderson <seanga2@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Vitor Sato Eschholz <vsatoes@baylibre.com>
+Subject: Re: [PATCH 1/6] dt-bindings: clock: add Mediatek MT8365 SoC clock
+ bindings
+In-Reply-To: <87o7f6450s.fsf@baylibre.com>
+References: <87plzm450u.fsf@baylibre.com> <87o7f6450s.fsf@baylibre.com>
+Date: Tue, 05 Dec 2023 11:24:19 +0100
+Message-ID: <87il5dymjw.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231205094220.2301360-4-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,42 +94,426 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
+Hi Julien,
 
-On 15:12-20231205, Neha Malcom Francis wrote:
-> Mention TI_DM argument can be used to fetch a custom DM binary in the
-> A72 build instructions for K3 devices.
-> 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Reviewed-by: Andrew Davis <afd@ti.com>
+Thank you for your patch.
+
+On lun., d=C3=A9c. 04, 2023 at 11:48, Julien Masson <jmasson@baylibre.com> =
+wrote:
+
+> This adds the clock bindings for Mediatek MT8365 SoC based on the
+> dt-bindings in Linux tag v6.7-rc2.
+> (commit c61978175ac1337f028ac1f956666f16db84f4e5)
+>
+> Signed-off-by: Julien Masson <jmasson@baylibre.com>
 > ---
->  doc/board/ti/k3.rst | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> index a127215ce5..f19ee56f29 100644
-> --- a/doc/board/ti/k3.rst
-> +++ b/doc/board/ti/k3.rst
-> @@ -320,6 +320,13 @@ use the `lite` option.
->   make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
->          BL31=$TFA_PATH/build/k3/$TFA_BOARD/release/bl31.bin \
->          TEE=$OPTEE_PATH/out/arm-plat-k3/core/tee-raw.bin
+>  MAINTAINERS                                   |   1 +
+>  .../dt-bindings/clock/mediatek,mt8365-clk.h   | 375 ++++++++++++++++++
+>  2 files changed, 376 insertions(+)
+>  create mode 100644 include/dt-bindings/clock/mediatek,mt8365-clk.h
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 9f74c0aaca..ec5311c8a2 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -411,6 +411,7 @@ F:	drivers/watchdog/mtk_wdt.c
+>  F:	drivers/net/mtk_eth.c
+>  F:	drivers/net/mtk_eth.h
+>  F:	drivers/reset/reset-mediatek.c
+> +F:	include/dt-bindings/clock/mediatek,*
+>  F:	tools/mtk_image.c
+>  F:	tools/mtk_image.h
+>  F:	tools/mtk_nand_headers.c
+> diff --git a/include/dt-bindings/clock/mediatek,mt8365-clk.h b/include/dt=
+-bindings/clock/mediatek,mt8365-clk.h
+> new file mode 100644
+> index 0000000000..e5cb8a19ab
+> --- /dev/null
+> +++ b/include/dt-bindings/clock/mediatek,mt8365-clk.h
+> @@ -0,0 +1,375 @@
+> +/* SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> + *
+> + * Copyright (c) 2022 MediaTek Inc.
+> + */
 > +
-> +.. note::
-> +   It is also possible to pick up a custom DM binary by adding TI_DM argument
-> +   pointing to the file. If not provided, it defaults to picking up the DM
-> +   binary from BINMAN_INDIRS. This is only applicable to devices that utilize
-> +   split firmware.
+> +#ifndef _DT_BINDINGS_CLK_MT8365_H
+> +#define _DT_BINDINGS_CLK_MT8365_H
 > +
->  .. k3_rst_include_end_build_steps_uboot
->  
->  At this point you should have every binary needed initialize both the
-> -- 
-> 2.34.1
-> 
+> +/* TOPCKGEN */
+> +#define CLK_TOP_CLK_NULL		0
+> +#define CLK_TOP_I2S0_BCK		1
+> +#define CLK_TOP_DSI0_LNTC_DSICK		2
+> +#define CLK_TOP_VPLL_DPIX		3
+> +#define CLK_TOP_LVDSTX_CLKDIG_CTS	4
+> +#define CLK_TOP_MFGPLL			5
+> +#define CLK_TOP_SYSPLL_D2		6
+> +#define CLK_TOP_SYSPLL1_D2		7
+> +#define CLK_TOP_SYSPLL1_D4		8
+> +#define CLK_TOP_SYSPLL1_D8		9
+> +#define CLK_TOP_SYSPLL1_D16		10
+> +#define CLK_TOP_SYSPLL_D3		11
+> +#define CLK_TOP_SYSPLL2_D2		12
+> +#define CLK_TOP_SYSPLL2_D4		13
+> +#define CLK_TOP_SYSPLL2_D8		14
+> +#define CLK_TOP_SYSPLL_D5		15
+> +#define CLK_TOP_SYSPLL3_D2		16
+> +#define CLK_TOP_SYSPLL3_D4		17
+> +#define CLK_TOP_SYSPLL_D7		18
+> +#define CLK_TOP_SYSPLL4_D2		19
+> +#define CLK_TOP_SYSPLL4_D4		20
+> +#define CLK_TOP_UNIVPLL			21
+> +#define CLK_TOP_UNIVPLL_D2		22
+> +#define CLK_TOP_UNIVPLL1_D2		23
+> +#define CLK_TOP_UNIVPLL1_D4		24
+> +#define CLK_TOP_UNIVPLL_D3		25
+> +#define CLK_TOP_UNIVPLL2_D2		26
+> +#define CLK_TOP_UNIVPLL2_D4		27
+> +#define CLK_TOP_UNIVPLL2_D8		28
+> +#define CLK_TOP_UNIVPLL2_D32		29
+> +#define CLK_TOP_UNIVPLL_D5		30
+> +#define CLK_TOP_UNIVPLL3_D2		31
+> +#define CLK_TOP_UNIVPLL3_D4		32
+> +#define CLK_TOP_MMPLL			33
+> +#define CLK_TOP_MMPLL_D2		34
+> +#define CLK_TOP_LVDSPLL_D2		35
+> +#define CLK_TOP_LVDSPLL_D4		36
+> +#define CLK_TOP_LVDSPLL_D8		37
+> +#define CLK_TOP_LVDSPLL_D16		38
+> +#define CLK_TOP_USB20_192M		39
+> +#define CLK_TOP_USB20_192M_D4		40
+> +#define CLK_TOP_USB20_192M_D8		41
+> +#define CLK_TOP_USB20_192M_D16		42
+> +#define CLK_TOP_USB20_192M_D32		43
+> +#define CLK_TOP_APLL1			44
+> +#define CLK_TOP_APLL1_D2		45
+> +#define CLK_TOP_APLL1_D4		46
+> +#define CLK_TOP_APLL1_D8		47
+> +#define CLK_TOP_APLL2			48
+> +#define CLK_TOP_APLL2_D2		49
+> +#define CLK_TOP_APLL2_D4		50
+> +#define CLK_TOP_APLL2_D8		51
+> +#define CLK_TOP_SYS_26M_D2		52
+> +#define CLK_TOP_MSDCPLL			53
+> +#define CLK_TOP_MSDCPLL_D2		54
+> +#define CLK_TOP_DSPPLL			55
+> +#define CLK_TOP_DSPPLL_D2		56
+> +#define CLK_TOP_DSPPLL_D4		57
+> +#define CLK_TOP_DSPPLL_D8		58
+> +#define CLK_TOP_APUPLL			59
+> +#define CLK_TOP_CLK26M_D52		60
+> +#define CLK_TOP_AXI_SEL			61
+> +#define CLK_TOP_MEM_SEL			62
+> +#define CLK_TOP_MM_SEL			63
+> +#define CLK_TOP_SCP_SEL			64
+> +#define CLK_TOP_MFG_SEL			65
+> +#define CLK_TOP_ATB_SEL			66
+> +#define CLK_TOP_CAMTG_SEL		67
+> +#define CLK_TOP_CAMTG1_SEL		68
+> +#define CLK_TOP_UART_SEL		69
+> +#define CLK_TOP_SPI_SEL			70
+> +#define CLK_TOP_MSDC50_0_HC_SEL		71
+> +#define CLK_TOP_MSDC2_2_HC_SEL		72
+> +#define CLK_TOP_MSDC50_0_SEL		73
+> +#define CLK_TOP_MSDC50_2_SEL		74
+> +#define CLK_TOP_MSDC30_1_SEL		75
+> +#define CLK_TOP_AUDIO_SEL		76
+> +#define CLK_TOP_AUD_INTBUS_SEL		77
+> +#define CLK_TOP_AUD_1_SEL		78
+> +#define CLK_TOP_AUD_2_SEL		79
+> +#define CLK_TOP_AUD_ENGEN1_SEL		80
+> +#define CLK_TOP_AUD_ENGEN2_SEL		81
+> +#define CLK_TOP_AUD_SPDIF_SEL		82
+> +#define CLK_TOP_DISP_PWM_SEL		83
+> +#define CLK_TOP_DXCC_SEL		84
+> +#define CLK_TOP_SSUSB_SYS_SEL		85
+> +#define CLK_TOP_SSUSB_XHCI_SEL		86
+> +#define CLK_TOP_SPM_SEL			87
+> +#define CLK_TOP_I2C_SEL			88
+> +#define CLK_TOP_PWM_SEL			89
+> +#define CLK_TOP_SENIF_SEL		90
+> +#define CLK_TOP_AES_FDE_SEL		91
+> +#define CLK_TOP_CAMTM_SEL		92
+> +#define CLK_TOP_DPI0_SEL		93
+> +#define CLK_TOP_DPI1_SEL		94
+> +#define CLK_TOP_DSP_SEL			95
+> +#define CLK_TOP_NFI2X_SEL		96
+> +#define CLK_TOP_NFIECC_SEL		97
+> +#define CLK_TOP_ECC_SEL			98
+> +#define CLK_TOP_ETH_SEL			99
+> +#define CLK_TOP_GCPU_SEL		100
+> +#define CLK_TOP_GCPU_CPM_SEL		101
+> +#define CLK_TOP_APU_SEL			102
+> +#define CLK_TOP_APU_IF_SEL		103
+> +#define CLK_TOP_MBIST_DIAG_SEL		104
+> +#define CLK_TOP_APLL_I2S0_SEL		105
+> +#define CLK_TOP_APLL_I2S1_SEL		106
+> +#define CLK_TOP_APLL_I2S2_SEL		107
+> +#define CLK_TOP_APLL_I2S3_SEL		108
+> +#define CLK_TOP_APLL_TDMOUT_SEL		109
+> +#define CLK_TOP_APLL_TDMIN_SEL		110
+> +#define CLK_TOP_APLL_SPDIF_SEL		111
+> +#define CLK_TOP_APLL12_CK_DIV0		112
+> +#define CLK_TOP_APLL12_CK_DIV1		113
+> +#define CLK_TOP_APLL12_CK_DIV2		114
+> +#define CLK_TOP_APLL12_CK_DIV3		115
+> +#define CLK_TOP_APLL12_CK_DIV4		116
+> +#define CLK_TOP_APLL12_CK_DIV4B		117
+> +#define CLK_TOP_APLL12_CK_DIV5		118
+> +#define CLK_TOP_APLL12_CK_DIV5B		119
+> +#define CLK_TOP_APLL12_CK_DIV6		120
+> +#define CLK_TOP_AUD_I2S0_M		121
+> +#define CLK_TOP_AUD_I2S1_M		122
+> +#define CLK_TOP_AUD_I2S2_M		123
+> +#define CLK_TOP_AUD_I2S3_M		124
+> +#define CLK_TOP_AUD_TDMOUT_M		125
+> +#define CLK_TOP_AUD_TDMOUT_B		126
+> +#define CLK_TOP_AUD_TDMIN_M		127
+> +#define CLK_TOP_AUD_TDMIN_B		128
+> +#define CLK_TOP_AUD_SPDIF_M		129
+> +#define CLK_TOP_USB20_48M_EN		130
+> +#define CLK_TOP_UNIVPLL_48M_EN		131
+> +#define CLK_TOP_LVDSTX_CLKDIG_EN	132
+> +#define CLK_TOP_VPLL_DPIX_EN		133
+> +#define CLK_TOP_SSUSB_TOP_CK_EN		134
+> +#define CLK_TOP_SSUSB_PHY_CK_EN		135
+> +#define CLK_TOP_CONN_32K		136
+> +#define CLK_TOP_CONN_26M		137
+> +#define CLK_TOP_DSP_32K			138
+> +#define CLK_TOP_DSP_26M			139
+> +#define CLK_TOP_NR_CLK			140
+> +#define CLK_TOP_CLK26M			141
+> +#define CLK_TOP_CLK32K			142
 
-For the series
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
+These 2 clocks (CLK26M and CLK32K) are not part of the linux bindings.
+Can we please add a line in the commit message to explain why these are
+needed here?
 
-Regards,
-Manorit
+With that, please add:
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> +
+> +/* INFRACFG */
+> +#define CLK_IFR_PMIC_TMR		0
+> +#define CLK_IFR_PMIC_AP			1
+> +#define CLK_IFR_PMIC_MD			2
+> +#define CLK_IFR_PMIC_CONN		3
+> +#define CLK_IFR_ICUSB			4
+> +#define CLK_IFR_GCE			5
+> +#define CLK_IFR_THERM			6
+> +#define CLK_IFR_PWM_HCLK		7
+> +#define CLK_IFR_PWM1			8
+> +#define CLK_IFR_PWM2			9
+> +#define CLK_IFR_PWM3			10
+> +#define CLK_IFR_PWM4			11
+> +#define CLK_IFR_PWM5			12
+> +#define CLK_IFR_PWM			13
+> +#define CLK_IFR_UART0			14
+> +#define CLK_IFR_UART1			15
+> +#define CLK_IFR_UART2			16
+> +#define CLK_IFR_DSP_UART		17
+> +#define CLK_IFR_GCE_26M			18
+> +#define CLK_IFR_CQ_DMA_FPC		19
+> +#define CLK_IFR_BTIF			20
+> +#define CLK_IFR_SPI0			21
+> +#define CLK_IFR_MSDC0_HCLK		22
+> +#define CLK_IFR_MSDC2_HCLK		23
+> +#define CLK_IFR_MSDC1_HCLK		24
+> +#define CLK_IFR_DVFSRC			25
+> +#define CLK_IFR_GCPU			26
+> +#define CLK_IFR_TRNG			27
+> +#define CLK_IFR_AUXADC			28
+> +#define CLK_IFR_CPUM			29
+> +#define CLK_IFR_AUXADC_MD		30
+> +#define CLK_IFR_AP_DMA			31
+> +#define CLK_IFR_DEBUGSYS		32
+> +#define CLK_IFR_AUDIO			33
+> +#define CLK_IFR_PWM_FBCLK6		34
+> +#define CLK_IFR_DISP_PWM		35
+> +#define CLK_IFR_AUD_26M_BK		36
+> +#define CLK_IFR_CQ_DMA			37
+> +#define CLK_IFR_MSDC0_SF		38
+> +#define CLK_IFR_MSDC1_SF		39
+> +#define CLK_IFR_MSDC2_SF		40
+> +#define CLK_IFR_AP_MSDC0		41
+> +#define CLK_IFR_MD_MSDC0		42
+> +#define CLK_IFR_MSDC0_SRC		43
+> +#define CLK_IFR_MSDC1_SRC		44
+> +#define CLK_IFR_MSDC2_SRC		45
+> +#define CLK_IFR_PWRAP_TMR		46
+> +#define CLK_IFR_PWRAP_SPI		47
+> +#define CLK_IFR_PWRAP_SYS		48
+> +#define CLK_IFR_MCU_PM_BK		49
+> +#define CLK_IFR_IRRX_26M		50
+> +#define CLK_IFR_IRRX_32K		51
+> +#define CLK_IFR_I2C0_AXI		52
+> +#define CLK_IFR_I2C1_AXI		53
+> +#define CLK_IFR_I2C2_AXI		54
+> +#define CLK_IFR_I2C3_AXI		55
+> +#define CLK_IFR_NIC_AXI			56
+> +#define CLK_IFR_NIC_SLV_AXI		57
+> +#define CLK_IFR_APU_AXI			58
+> +#define CLK_IFR_NFIECC			59
+> +#define CLK_IFR_NFIECC_BK		60
+> +#define CLK_IFR_NFI1X_BK		61
+> +#define CLK_IFR_NFI_BK			62
+> +#define CLK_IFR_MSDC2_AP_BK		63
+> +#define CLK_IFR_MSDC2_MD_BK		64
+> +#define CLK_IFR_MSDC2_BK		65
+> +#define CLK_IFR_SUSB_133_BK		66
+> +#define CLK_IFR_SUSB_66_BK		67
+> +#define CLK_IFR_SSUSB_SYS		68
+> +#define CLK_IFR_SSUSB_REF		69
+> +#define CLK_IFR_SSUSB_XHCI		70
+> +#define CLK_IFR_NR_CLK			71
+> +
+> +/* PERICFG */
+> +#define CLK_PERIAXI			0
+> +#define CLK_PERI_NR_CLK			1
+> +
+> +/* APMIXEDSYS */
+> +#define CLK_APMIXED_ARMPLL		0
+> +#define CLK_APMIXED_MAINPLL		1
+> +#define CLK_APMIXED_UNIVPLL		2
+> +#define CLK_APMIXED_MFGPLL		3
+> +#define CLK_APMIXED_MSDCPLL		4
+> +#define CLK_APMIXED_MMPLL		5
+> +#define CLK_APMIXED_APLL1		6
+> +#define CLK_APMIXED_APLL2		7
+> +#define CLK_APMIXED_LVDSPLL		8
+> +#define CLK_APMIXED_DSPPLL		9
+> +#define CLK_APMIXED_APUPLL		10
+> +#define CLK_APMIXED_UNIV_EN		11
+> +#define CLK_APMIXED_USB20_EN		12
+> +#define CLK_APMIXED_NR_CLK		13
+> +
+> +/* GCE */
+> +#define CLK_GCE_FAXI			0
+> +#define CLK_GCE_NR_CLK			1
+> +
+> +/* AUDIOTOP */
+> +#define CLK_AUD_AFE			0
+> +#define CLK_AUD_I2S			1
+> +#define CLK_AUD_22M			2
+> +#define CLK_AUD_24M			3
+> +#define CLK_AUD_INTDIR			4
+> +#define CLK_AUD_APLL2_TUNER		5
+> +#define CLK_AUD_APLL_TUNER		6
+> +#define CLK_AUD_SPDF			7
+> +#define CLK_AUD_HDMI			8
+> +#define CLK_AUD_HDMI_IN			9
+> +#define CLK_AUD_ADC			10
+> +#define CLK_AUD_DAC			11
+> +#define CLK_AUD_DAC_PREDIS		12
+> +#define CLK_AUD_TML			13
+> +#define CLK_AUD_I2S1_BK			14
+> +#define CLK_AUD_I2S2_BK			15
+> +#define CLK_AUD_I2S3_BK			16
+> +#define CLK_AUD_I2S4_BK			17
+> +#define CLK_AUD_NR_CLK			18
+> +
+> +/* MIPI_CSI0A */
+> +#define CLK_MIPI0A_CSR_CSI_EN_0A	0
+> +#define CLK_MIPI_RX_ANA_CSI0A_NR_CLK	1
+> +
+> +/* MIPI_CSI0B */
+> +#define CLK_MIPI0B_CSR_CSI_EN_0B	0
+> +#define CLK_MIPI_RX_ANA_CSI0B_NR_CLK	1
+> +
+> +/* MIPI_CSI1A */
+> +#define CLK_MIPI1A_CSR_CSI_EN_1A	0
+> +#define CLK_MIPI_RX_ANA_CSI1A_NR_CLK	1
+> +
+> +/* MIPI_CSI1B */
+> +#define CLK_MIPI1B_CSR_CSI_EN_1B	0
+> +#define CLK_MIPI_RX_ANA_CSI1B_NR_CLK	1
+> +
+> +/* MIPI_CSI2A */
+> +#define CLK_MIPI2A_CSR_CSI_EN_2A	0
+> +#define CLK_MIPI_RX_ANA_CSI2A_NR_CLK	1
+> +
+> +/* MIPI_CSI2B */
+> +#define CLK_MIPI2B_CSR_CSI_EN_2B	0
+> +#define CLK_MIPI_RX_ANA_CSI2B_NR_CLK	1
+> +
+> +/* MCUCFG */
+> +#define CLK_MCU_BUS_SEL			0
+> +#define CLK_MCU_NR_CLK			1
+> +
+> +/* MFGCFG */
+> +#define CLK_MFG_BG3D			0
+> +#define CLK_MFG_MBIST_DIAG		1
+> +#define CLK_MFG_NR_CLK			2
+> +
+> +/* MMSYS */
+> +#define CLK_MM_MM_MDP_RDMA0		0
+> +#define CLK_MM_MM_MDP_CCORR0		1
+> +#define CLK_MM_MM_MDP_RSZ0		2
+> +#define CLK_MM_MM_MDP_RSZ1		3
+> +#define CLK_MM_MM_MDP_TDSHP0		4
+> +#define CLK_MM_MM_MDP_WROT0		5
+> +#define CLK_MM_MM_MDP_WDMA0		6
+> +#define CLK_MM_MM_DISP_OVL0		7
+> +#define CLK_MM_MM_DISP_OVL0_2L		8
+> +#define CLK_MM_MM_DISP_RSZ0		9
+> +#define CLK_MM_MM_DISP_RDMA0		10
+> +#define CLK_MM_MM_DISP_WDMA0		11
+> +#define CLK_MM_MM_DISP_COLOR0		12
+> +#define CLK_MM_MM_DISP_CCORR0		13
+> +#define CLK_MM_MM_DISP_AAL0		14
+> +#define CLK_MM_MM_DISP_GAMMA0		15
+> +#define CLK_MM_MM_DISP_DITHER0		16
+> +#define CLK_MM_MM_DSI0			17
+> +#define CLK_MM_MM_DISP_RDMA1		18
+> +#define CLK_MM_MM_MDP_RDMA1		19
+> +#define CLK_MM_DPI0_DPI0		20
+> +#define CLK_MM_MM_FAKE			21
+> +#define CLK_MM_MM_SMI_COMMON		22
+> +#define CLK_MM_MM_SMI_LARB0		23
+> +#define CLK_MM_MM_SMI_COMM0		24
+> +#define CLK_MM_MM_SMI_COMM1		25
+> +#define CLK_MM_MM_CAM_MDP		26
+> +#define CLK_MM_MM_SMI_IMG		27
+> +#define CLK_MM_MM_SMI_CAM		28
+> +#define CLK_MM_IMG_IMG_DL_RELAY		29
+> +#define CLK_MM_IMG_IMG_DL_ASYNC_TOP	30
+> +#define CLK_MM_DSI0_DIG_DSI		31
+> +#define CLK_MM_26M_HRTWT		32
+> +#define CLK_MM_MM_DPI0			33
+> +#define CLK_MM_LVDSTX_PXL		34
+> +#define CLK_MM_LVDSTX_CTS		35
+> +#define CLK_MM_NR_CLK			36
+> +
+> +/* IMGSYS */
+> +#define CLK_CAM_LARB2			0
+> +#define CLK_CAM				1
+> +#define CLK_CAMTG			2
+> +#define CLK_CAM_SENIF			3
+> +#define CLK_CAMSV0			4
+> +#define CLK_CAMSV1			5
+> +#define CLK_CAM_FDVT			6
+> +#define CLK_CAM_WPE			7
+> +#define CLK_CAM_NR_CLK			8
+> +
+> +/* VDECSYS */
+> +#define CLK_VDEC_VDEC			0
+> +#define CLK_VDEC_LARB1			1
+> +#define CLK_VDEC_NR_CLK			2
+> +
+> +/* VENCSYS */
+> +#define CLK_VENC			0
+> +#define CLK_VENC_JPGENC			1
+> +#define CLK_VENC_NR_CLK			2
+> +
+> +/* APUSYS */
+> +#define CLK_APU_IPU_CK			0
+> +#define CLK_APU_AXI			1
+> +#define CLK_APU_JTAG			2
+> +#define CLK_APU_IF_CK			3
+> +#define CLK_APU_EDMA			4
+> +#define CLK_APU_AHB			5
+> +#define CLK_APU_NR_CLK			6
+> +
+> +#endif /* _DT_BINDINGS_CLK_MT8365_H */
+> --=20
+> 2.43.0
