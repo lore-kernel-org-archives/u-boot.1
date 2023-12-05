@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A94B1C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 14:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99EDC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 15:14:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4CE0870F8;
-	Tue,  5 Dec 2023 15:46:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id DC7E0869F7;
+	Tue,  5 Dec 2023 16:14:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dfXi6A8e";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FBNY0TCL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 670B9870F8; Tue,  5 Dec 2023 15:46:54 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5BF3486E42; Tue,  5 Dec 2023 16:14:53 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FFEF86DD1
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 15:46:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 346C6869F6
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 16:14:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5EknGM104668;
- Tue, 5 Dec 2023 08:46:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701787609;
- bh=d/m6qB+JOjGtjtEmQ73FbWuYCt3QyLCbAi4hzSuBK84=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=dfXi6A8eAWOdlLYkwfUicqFbjrKUTp5KbTw5lmw67S6bR3n+5x8Awj7y4l/Ws9sEU
- jotuwI0DLQMY3tLMAQ6Z63yasM4hTwX0HK8DmOz0QICLY3E506Rx+ERwvFvC3JJQRw
- u+SEK7hKwm7O/az12+FNT7o6GHyuSMVd+mZloYYE=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5EknBi076500
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 5 Dec 2023 08:46:49 -0600
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
- Dec 2023 08:46:49 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 5 Dec 2023 08:46:48 -0600
-Received: from [10.249.36.163] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5Ekm6p011536;
- Tue, 5 Dec 2023 08:46:48 -0600
-Message-ID: <9bed6378-56f9-4a76-98a4-3516687a6033@ti.com>
-Date: Tue, 5 Dec 2023 08:46:48 -0600
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-67acdcb3ccdso11152046d6.1
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 07:14:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1701789290; x=1702394090; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eA/tVCnFsygjwn9WA4Jnez9PPm5nrpD/FOocXsJB6js=;
+ b=FBNY0TCL3dW61b3Ge8Gk6T0gWv/TlVmryPXkznVcUlW617rNrflgd1AFYdulNtgpzZ
+ nsfP3CCmuMouBewL2C4OmgT2O/mEiRX+Lm9eMRIFWCMdDuT3OaaP+J04wgaYEQqS0qoA
+ 98ZUVBAr+II/IdnvUmPHiA9sCGX8lxeFXaig4VeiBwYgunvIp2yPAsPfm3Hxas/mYvfP
+ 5bAy+nN/GT3zfMHXEyZSUKQJzS2AAaYoOAo146UiVon0NDcq02ZYtRwhI/FM/rMWWI1b
+ +EmnKhn4HdMLKYufAotEWtKvgxbkxcysK3XN+vzmeLhcXRhZKBOY6z7tshQLNrh0pHvM
+ Rw+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701789290; x=1702394090;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eA/tVCnFsygjwn9WA4Jnez9PPm5nrpD/FOocXsJB6js=;
+ b=kFtIcTNEKQ6r2+iCsdZsSs/mWrOxbz3dvis2nCy1cs6OgUFY7cJ9MhkWprToR6LAkq
+ NOIfpQJnXWjPlhtJu4fJ2XxlY6uckEO8/85oJYaalrhdBdKR1iL9M6HSLeosHRniSgMB
+ ZT9MP4m64bMYCo+CTNxc/nSh34LhJDYA9WTefaQ0hcdmTXxofJkhl8m7BqDbunyg2/dv
+ y7zr0Z4vZ8ZOB2I/WxLO6qCTrlHqK1kMkXlrZvhzhUbClun/1IK5FXcSXJkt27WfmT4h
+ /lakbEt+692Lp22e58C2sTZ68N9uLY9gBJuL+/J6RKes2dzyU8JWG5ECPfIb9R6EDngS
+ WE8w==
+X-Gm-Message-State: AOJu0YyiXtNf+3VFzdKXe3RNoTT9yQ2+hx/rT/WsuuJDrW236R/AsF8I
+ q4MO5+CSyOD/hpvXsIIjV+nA3FGSHKICcz+7USSCgmqehjtlO4Xx84Q=
+X-Google-Smtp-Source: AGHT+IF5ZQ5YOFlH9UpQDy4D2rJhNFZvLPiNLSLORShSqTYMXa+80Qh5e+emhl5/388BTTyMLRuYdkdsmzps5U73PWQ=
+X-Received: by 2002:a05:6214:5e81:b0:67a:c268:22db with SMTP id
+ mm1-20020a0562145e8100b0067ac26822dbmr1517705qvb.40.1701789289939; Tue, 05
+ Dec 2023 07:14:49 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] doc: board: beagle: am62x_beagleplay: Delete SW_PRNG
- flag for OPTEE
-To: Nishanth Menon <nm@ti.com>, Dhruva Gole <d-gole@ti.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
- <vigneshr@ti.com>
-References: <20231201102954.47582-1-d-gole@ti.com>
- <20231201102954.47582-2-d-gole@ti.com>
- <20231204192940.yfeqv7fewj6izrpk@tightly>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231204192940.yfeqv7fewj6izrpk@tightly>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
+In-Reply-To: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Tue, 5 Dec 2023 16:14:38 +0100
+Message-ID: <CAHUa44F=i2nz0VbuFhSY+wBzX7QrXUL5aaqeULnUrzVRHThQjw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] tee: optee: don't fail on services enumeration failure
+To: Etienne Carriere <etienne.carriere@foss.st.com>
+Cc: u-boot@lists.denx.de, Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,34 +87,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/4/23 1:29 PM, Nishanth Menon wrote:
-> On 15:59-20231201, Dhruva Gole wrote:
->> Delete the flag CFG_WITH_SOFTWARE_PRNG as it's not necessary/ boot
->> requirement for this SoC
->>
->> Signed-off-by: Dhruva Gole <d-gole@ti.com>
->> ---
->>   doc/board/beagle/am62x_beagleplay.rst | 1 -
->>   1 file changed, 1 deletion(-)
->>
->> diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
->> index 7784e62b0b71..50d7d3c620d7 100644
->> --- a/doc/board/beagle/am62x_beagleplay.rst
->> +++ b/doc/board/beagle/am62x_beagleplay.rst
->> @@ -63,7 +63,6 @@ Set the variables corresponding to this platform:
->>     # we dont use any extra TFA parameters
->>     unset TFA_EXTRA_ARGS
->>     export OPTEE_PLATFORM=k3-am62x
->> -  export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
->>   
->>   .. include::  ../ti/am62x_sk.rst
->>       :start-after: .. am62x_evm_rst_include_start_build_steps
->> -- 
->> 2.34.1
->>
-> NAK. RNG is needed to seed standard distros.
+On Wed, Nov 29, 2023 at 1:37=E2=80=AFPM Etienne Carriere
+<etienne.carriere@foss.st.com> wrote:
+>
+> Change optee probe function to only warn when service enumeration
+> sequence fails instead of reporting an optee driver probe failure.
+> Indeed U-Boot can still use OP-TEE even if some OP-TEE services are
+> not discovered.
+>
+> Fixes: 94ccfb78a4d6 ("drivers: tee: optee: discover OP-TEE services")
+> Signed-off-by: Etienne Carriere <etienne.carriere@foss.st.com>
+> ---
+>  drivers/tee/optee/core.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+> index 9a9b697e91..5308dd58ce 100644
+> --- a/drivers/tee/optee/core.c
+> +++ b/drivers/tee/optee/core.c
+> @@ -841,7 +841,7 @@ static int optee_probe(struct udevice *dev)
+>         if (IS_ENABLED(CONFIG_OPTEE_SERVICE_DISCOVERY)) {
+>                 ret =3D bind_service_drivers(dev);
+>                 if (ret)
+> -                       return ret;
+> +                       dev_warn(dev, "optee service enumeration failed: =
+%d\n", ret);
+>         } else if (IS_ENABLED(CONFIG_RNG_OPTEE)) {
+>                 /*
+>                  * Discovery of TAs on the TEE bus is not supported in U-=
+Boot:
+> --
+> 2.25.1
+>
 
-You have this backwards, setting WITH_SOFTWARE_PRNG=y forces the SW
-RNG, disabling the HW RNG. Without this line the HW RNG is the default.
+Looks good.
+Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 
-Andrew
+Thanks,
+Jens
