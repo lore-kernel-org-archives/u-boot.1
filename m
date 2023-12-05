@@ -4,90 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE87C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 10:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 850E1C46CA3
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39D33878BD;
-	Tue,  5 Dec 2023 11:55:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DC30586DD1;
+	Tue,  5 Dec 2023 12:10:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QUjK2y6o";
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="EWbUgyJf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A84B878C6; Tue,  5 Dec 2023 11:55:22 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id C8BD0876FB; Tue,  5 Dec 2023 12:10:09 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F9BA877AC
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 11:55:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B18F86CF7
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:10:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-40c09d0b045so26327175e9.0
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 02:55:20 -0800 (PST)
+ spf=pass smtp.mailfrom=yongxuan.wang@sifive.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1cfc9c4acb6so24342005ad.0
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 03:10:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701773719; x=1702378519; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UjknMmjbYSGOEE2GxC161Z37A/uinLKGEBQCsXWyc9U=;
- b=QUjK2y6ocmdIlZcuac8ljfVQyABqI42419MZQUYCtoxedJ5FMCikaqmXgzJ2WZxh8y
- 0c8TdKJGiF+dUE3/MdJ+fo8cgYKxJsXM2htPJZxgPAlAPdxOr17HuCmuakde6zU4gn72
- tyfjKLMz1GI7tElJateaDfQf/ieczrzph0PDAOL1UX6R+URhRzTh1Fe1aijVQ8k3O6JE
- TzMBRFNhA7ca+VIiQ0E3OV1gSviL3KRBb12xvhb4GPkijfUsoAo5vekakJkQr0/VJimo
- iiS5Z4gSPI57SZNNQ05Apj+TMs+2Wu/WPdLWYgWudu8sPdgNV56Vj8wYA19dorT1n3Qu
- K1Nw==
+ d=sifive.com; s=google; t=1701774606; x=1702379406; darn=lists.denx.de;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ls9Brl2M49UsAVdtykWJCHQaVqvL0tjwqaIFJzjxaCY=;
+ b=EWbUgyJfVF/Snf//j4c9ULu2IY/NWvZvYhSC4uCBD5/HNXFjun4+tBglfnda1czRf1
+ wlmMYj1QfvNpPLWAbF+z8mE81CAHJuQP3CgKqJmxfYDgGzUk//hYKWdjo+fWTaBoLc0O
+ 0ye1oL/R8L0ltpEAfI7m22mGwRg0uvkWKhgRnh4DlL+r0l6Z2DECBrku4tzvrTaQ/oHS
+ 3+Tkbp7PtMshka9aMqSSE/JBchi9KpWjv4+8Mra/V/scXGAShrXg5b2eEveqj3QN5x+b
+ +p4rZZmyfbySI6iow7RHHjMqp7gviTiQawPh+MDo1Dfjom4Vixmecyn14GMAawVUUyx/
+ u9Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701773719; x=1702378519;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UjknMmjbYSGOEE2GxC161Z37A/uinLKGEBQCsXWyc9U=;
- b=TGpM3NFzbNTxStDnx6rmzo1FTRDzsJAPPd91SPZ8WIbS31SRVCAgAFDb2UTi+abHmr
- RNu9meNCtgM2I+AsChI2yyRSJxt7XLZOBKgIPIV4V5LfXeJgmEaVkvL4iwh3F0cqqv8U
- oVyR251L+ALio2QhT6v48hUU5xcwD9HYMC4LhJi2Qa6rrheDuMUxBQ0ZZscR8U9EwBIK
- x+eQyYVBB3Y7n/MH+E/9D3CtH9FB3EDIvOAB43g6YRH4aNT/c8F2ghmaKKNngUiOWO5e
- iwNtjnQa2jQdXBQ3MSCBdNVs+nU4m5WDX1DbfhAmSLIg2g7cOL60EJGok2L6i7BjaWXe
- jITg==
-X-Gm-Message-State: AOJu0YwBaxPmoaA6pPHvMJEwc5fl95PT951SX+WPtiQfOKJlN2S6eP/2
- tV+oOMri1qJiLCGsSKtkStkW8A==
-X-Google-Smtp-Source: AGHT+IHqJbTC29gBx8Jlu0GSRRgImVMZCHadczBYu1hB7sNCBiO97FJx8o21BWb3FVNr6N/B2xVwSQ==
-X-Received: by 2002:a05:600c:54d0:b0:40c:c98:3de9 with SMTP id
- iw16-20020a05600c54d000b0040c0c983de9mr237647wmb.251.1701773719483; 
- Tue, 05 Dec 2023 02:55:19 -0800 (PST)
-Received: from [192.168.1.15] ([79.79.179.141])
+ d=1e100.net; s=20230601; t=1701774606; x=1702379406;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ls9Brl2M49UsAVdtykWJCHQaVqvL0tjwqaIFJzjxaCY=;
+ b=JUJ41voZ+Lupi/nUmkTyHsa+jxGcje0movy8xBM/7n95OorIYGeNjz/YjX981FXPxX
+ mxX/QCAQM4x//5CtUwojXyf+43cdbxZYEDebItEY6x5UdN05UrRxyR4L2CMIPb4W3WSo
+ WxGrZRb4H1WLiRzxRO7Qk8XN0QZ6LlPHIrKKrLrODSdka/9S5X4pP7lvbm5tc/NMD+zO
+ BO2MykaMFYR0cspG4kq+SLJX8rdhWxyylJZrz5Qaa3ZOquEHNJB+0p+gkWByEJEt9lt+
+ vPpNCe1Bsb0LPBtp6ZnuG0FQ6lbtswucEjD/sDZOo0pTCkxI9lNn9NVSjAh3J/Nk4hSW
+ VksQ==
+X-Gm-Message-State: AOJu0Yyy9d7eJNbmhzxTKk9oTQFyj5L3xKiiekm/5PAc44SZ7zBj1S96
+ zDkIKiMYR7IoeMA9USnahBuqkyQDUe+3zsR5EMAjBDvjmdnituuNZeWQgEINIOQ1QgsHd+oIOCU
+ SL9Fg397Qd3hQDVM2MO3AMUQj05pwwbfwjkKV7EaJWdtPNLQodbbqMRL1RjNPo3zbuXvW5srDvo
+ nxCckV45ye
+X-Google-Smtp-Source: AGHT+IEstykp242EZwViby10J40WUVLGI5J+6frAF4J4WPkjb8Dx22CTWgneMXx0TSHaUB7+HH1mxw==
+X-Received: by 2002:a17:902:e809:b0:1d0:6ffd:6e6e with SMTP id
+ u9-20020a170902e80900b001d06ffd6e6emr3917755plg.102.1701774605573; 
+ Tue, 05 Dec 2023 03:10:05 -0800 (PST)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- bh12-20020a05600c3d0c00b0040b2976eb02sm18338572wmb.10.2023.12.05.02.55.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Dec 2023 02:55:19 -0800 (PST)
-Message-ID: <b93994f4-40a7-4e1c-9e15-1dcaa16d900f@linaro.org>
-Date: Tue, 5 Dec 2023 10:55:18 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
- <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <CAPnjgZ03MEK_PeuaXcR1VuC-_tBmQmrzq3bo-jS3Jd22+rSgww@mail.gmail.com>
- <CAFA6WYOQX64jArOAV1W-8=174pru78SotGNVhjYth8qu=Swa=Q@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYOQX64jArOAV1W-8=174pru78SotGNVhjYth8qu=Swa=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ x4-20020a170902ec8400b001d08bbcf78bsm4498601plg.74.2023.12.05.03.10.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 05 Dec 2023 03:10:04 -0800 (PST)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: u-boot@lists.denx.de
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, trini@konsulko.com,
+ Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>
+Subject: [PATCH] riscv: sifive: unmatched: migrate to text environment
+Date: Tue,  5 Dec 2023 11:09:55 +0000
+Message-Id: <20231205110958.30180-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,117 +90,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Migrate to the new environment format and drop most of the config.h.
 
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+---
+ board/sifive/unmatched/unmatched.env | 19 ++++++++++++++
+ configs/sifive_unmatched_defconfig   |  2 +-
+ include/configs/sifive-unmatched.h   | 37 ----------------------------
+ 3 files changed, 20 insertions(+), 38 deletions(-)
+ create mode 100644 board/sifive/unmatched/unmatched.env
 
-On 05/12/2023 07:44, Sumit Garg wrote:
-> Hi Simon,
-> 
-> On Tue, 5 Dec 2023 at 06:22, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Sumit,
->>
->> On Tue, 21 Nov 2023 at 23:21, Sumit Garg <sumit.garg@linaro.org> wrote:
->>>
->>> Hi Caleb,
->>>
->>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-[...]
->>>> == DT loading ==
->>>>
->>>> Previously, boards used the FDT blob embedded into U-Boot (via
->>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
->>>> bootloader, so we can instead rely on the first-stage bootloader to
->>>> populate some useful FDT properties for us (notably the /memory node and
->>>> KASLR seed) and fetch the DTB that it provides. Combined with the memory
->>>> map changes above, this let's us entirely avoid configuring the memory
->>>> map explicitly.
->>>
->>> Since with this change, we don't need to embed FDT blob in the u-boot
->>> binary, so I was thinking if we really need to import DTs from Linux
->>> for different platforms and then play a catchup game?
->>>
->>> IMO, the build command would look like following if we import
->>> pre-built FDT blob from Linux:
->>>
->>> - Build u-boot::
->>>
->>>        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
->>>        $ make qcom_defconfig
->>>        $ make
->>>
->>> - gzip u-boot::
->>>
->>>        gzip u-boot-nodtb.bin
->>>
->>> - Append dtb to gzipped u-boot::
->>>
->>>         cat u-boot-nodtb.bin.gz
->>> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
->>> u-boot-nodtb.bin.gz-dtb
->>
->> What is this?? Who or what uses a gzipped image with a single DT attached?
-> 
-> The gzipped image is loaded by Qcom proprietary bootloaders (ABL or
-> LK). It is the usual way Linux is booted on these platforms. U-boot is
-> being brought into this chain to leverage standardized EFI boot
-> processes.
-
-Yes, just to clarify, this is the state that _all_ non-WoA Qualcomm
-boards/devices are in right now (with the exception of db410c), with
-production devices we can't modify the bootloader without vendors
-releasing their signing keys.
-
-For devices that haven't been locked with vendor keys ("Secureboot off"
-in Qualcomm terminology, note that this has nothing to do with UEFI
-secureboot) we can work towards replacing the bootloader entirely with
-U-Boot, I have done a PoC of this on SDM845. In that case, we have to
-embed the DTB into U-Boot.
-> 
->>
->>>
->>> This would avoid the maintenance burden to keep DT in sync with that
->>> of Linux. And since DT bindings in Linux are backwards compatible, we
->>> can say u-boot should work with DTB picked up from any Linux kernel
->>> stable release.
->>
->> That is not the current situation, unfortunately.
->>
-> 
-> Hopefully with efforts from Caleb and team we can reach that point soon.
-> 
->> U-Boot is moving to using Binman to package the firmware. There needs
->> to be a description of the firmware image for each U-Boot boot. To my
->> way of thinking, rpi is a degenerate form, not something to be copied,
->> due to the closed-source nature of the firmware and its inability to
->> be changed. We do have (in the works) a way to pass a DT using a
->> standard firmware handoff. Perhaps that can be adopted by these
->> closed-source projects?
-> 
-> Why should we really need firmware handoff if the DT can be passed in
-> one of the u-boot boot arguments? Linux kernel does support this
-> method to retrieve DT as well.
-
-Unfortunately the chances of Qualcomm releasing bootloader updates to
-adopt a standard for chainloading U-Boot on their wholely deprecated
-platforms of 5/6/7 years ago, and then having OEMs/ODMs (who have no
-reason to care, and may not even be around anymore) apply these patches
-to their own hacked up fork of the bootloader and ship it to end-users
-is honestly even less likely than OEMs releasing the signing keys for
-devices they don't support anymore.
-> 
->>
->> BTW I am very pleased to see this series and I hope that Qualcomm (via
->> Linaro) can continue to improve its U-Boot support.
-> 
-> It's good to know, thanks.
-> 
-> -Sumit
-> 
->>
->> [..]
->>
->> Regards,
->> Simon
-
+diff --git a/board/sifive/unmatched/unmatched.env b/board/sifive/unmatched/unmatched.env
+new file mode 100644
+index 0000000000..0f1e5a7174
+--- /dev/null
++++ b/board/sifive/unmatched/unmatched.env
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* environment for HiFive Unmatched boards */
++
++kernel_addr_r=0x80200000
++kernel_comp_addr_r=0x88000000
++kernel_comp_size=0x4000000
++fdt_addr_r=0x8c000000
++scriptaddr=0x8c100000
++pxefile_addr_r=0x8c200000
++ramdisk_addr_r=0x8c300000
++type_guid_gpt_loader1=5B193300-FC78-40CD-8002-E86C45580B47
++type_guid_gpt_loader2=2E54B353-1271-4842-806F-E436D6AF6985
++type_guid_gpt_system=0FC63DAF-8483-4772-8E79-3D69D8477DE4
++partitions=
++    name=loader1,start=17K,size=1M,type=${type_guid_gpt_loader1};
++    name=loader2,size=4MB,type=${type_guid_gpt_loader2};
++    name=system,size=-,bootable,type=${type_guid_gpt_system};
++fdtfile= CONFIG_DEFAULT_FDT_FILE
+diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
+index 6a95ab3977..43fc87d3ce 100644
+--- a/configs/sifive_unmatched_defconfig
++++ b/configs/sifive_unmatched_defconfig
+@@ -23,7 +23,7 @@ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_FIT=y
+ CONFIG_SPL_LOAD_FIT_ADDRESS=0x84000000
+-CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTSTD_DEFAULTS=y
+ CONFIG_USE_PREBOOT=y
+ CONFIG_PREBOOT="setenv fdt_addr ${fdtcontroladdr};fdt addr ${fdtcontroladdr};"
+ CONFIG_DEFAULT_FDT_FILE="sifive/hifive-unmatched-a00.dtb"
+diff --git a/include/configs/sifive-unmatched.h b/include/configs/sifive-unmatched.h
+index de8bfc1123..27e0912665 100644
+--- a/include/configs/sifive-unmatched.h
++++ b/include/configs/sifive-unmatched.h
+@@ -13,41 +13,4 @@
+ 
+ #define CFG_SYS_SDRAM_BASE		0x80000000
+ 
+-/* Environment options */
+-
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(NVME, nvme, 0) \
+-	func(NVME, nvme, 1) \
+-	func(USB, usb, 0) \
+-	func(MMC, mmc, 0) \
+-	func(SCSI, scsi, 0) \
+-	func(PXE, pxe, na) \
+-	func(DHCP, dhcp, na)
+-
+-#include <config_distro_bootcmd.h>
+-
+-#define TYPE_GUID_LOADER1	"5B193300-FC78-40CD-8002-E86C45580B47"
+-#define TYPE_GUID_LOADER2	"2E54B353-1271-4842-806F-E436D6AF6985"
+-#define TYPE_GUID_SYSTEM	"0FC63DAF-8483-4772-8E79-3D69D8477DE4"
+-
+-#define PARTS_DEFAULT \
+-	"name=loader1,start=17K,size=1M,type=${type_guid_gpt_loader1};" \
+-	"name=loader2,size=4MB,type=${type_guid_gpt_loader2};" \
+-	"name=system,size=-,bootable,type=${type_guid_gpt_system};"
+-
+-#define CFG_EXTRA_ENV_SETTINGS \
+-	"kernel_addr_r=0x80200000\0" \
+-	"kernel_comp_addr_r=0x88000000\0" \
+-	"kernel_comp_size=0x4000000\0" \
+-	"fdt_addr_r=0x8c000000\0" \
+-	"scriptaddr=0x8c100000\0" \
+-	"pxefile_addr_r=0x8c200000\0" \
+-	"ramdisk_addr_r=0x8c300000\0" \
+-	"type_guid_gpt_loader1=" TYPE_GUID_LOADER1 "\0" \
+-	"type_guid_gpt_loader2=" TYPE_GUID_LOADER2 "\0" \
+-	"type_guid_gpt_system=" TYPE_GUID_SYSTEM "\0" \
+-	"partitions=" PARTS_DEFAULT "\0" \
+-	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+-	BOOTENV
+-
+ #endif /* __SIFIVE_UNMATCHED_H */
 -- 
-// Caleb (they/them)
+2.17.1
+
