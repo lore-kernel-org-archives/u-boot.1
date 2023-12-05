@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E49F4C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EAF4C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 11:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30608878BD;
-	Tue,  5 Dec 2023 12:16:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 92637876AC;
+	Tue,  5 Dec 2023 12:33:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id ED6D8878B1; Tue,  5 Dec 2023 12:16:12 +0100 (CET)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A457386D12
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:16:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1rATPF-0002Xs-96; Tue, 05 Dec 2023 12:16:01 +0100
-Message-ID: <653b592b-bd6a-48f8-acca-c617c5c8c1a3@pengutronix.de>
-Date: Tue, 5 Dec 2023 12:15:58 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UMQZRBCR";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7277A87767; Tue,  5 Dec 2023 12:33:12 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5648386E88
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 12:33:10 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-jain1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B5BX5oG042877;
+ Tue, 5 Dec 2023 05:33:05 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701775985;
+ bh=zl3nQvwjChldxXKyv1/M0tHC/oao5Ia+Tnvryw9tvoA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UMQZRBCRLGzC5ONn4UtGlNL7hy55dnug5CkNRuJTwTFZ+exU0XXEvnw+faWsc1Zie
+ dpeJ7zUP1sWv1euyZC7ZafHuZa3qIpHtwTJtq/UblG+TMQguq2UZun9QlwlrRtj5o5
+ 9rLREVdCRfAkT8FQk23f7FC182K4eD7e24SFIG20=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5BX50r030203
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 5 Dec 2023 05:33:05 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 5
+ Dec 2023 05:33:05 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 5 Dec 2023 05:33:05 -0600
+Received: from [172.24.227.70] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5BX0aY122440;
+ Tue, 5 Dec 2023 05:33:01 -0600
+Message-ID: <d7519811-ec90-4003-8cc8-4739b8675aa5@ti.com>
+Date: Tue, 5 Dec 2023 17:03:00 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/2] arm64: boot: Support Flat Image Tree
+Subject: Re: [PATCH v2 1/6] arm: mach-k3: common: Reserve video memory from
+ end of the RAM
 Content-Language: en-US
-To: Doug Anderson <dianders@chromium.org>, Simon Glass <sjg@chromium.org>
-Cc: linux-arm-kernel@lists.infradead.org,
- Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
- lkml <linux-kernel@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- Nicolas Schier <nicolas@fjasle.eu>, Will Deacon <will@kernel.org>,
- linux-kbuild@vger.kernel.org, Pengutronix Kernel Team <kernel@pengutronix.de>
-References: <20231129172200.430674-1-sjg@chromium.org>
- <20231129172200.430674-3-sjg@chromium.org>
- <30f32467-51ea-47de-a272-38e074f4060b@pengutronix.de>
- <CAPnjgZ25xoXsi74XYY0E8ucQiowQqPdZgUHrfVNAYWKZEYODHg@mail.gmail.com>
- <875f0dbc-1d78-4901-91b2-6ad152bcea5a@pengutronix.de>
- <CAPnjgZ0UCkm5QCx+JXe1ggSshozPnOLB6cN=UoJyMn6S4wfFkg@mail.gmail.com>
- <06281f7c-e0f2-405c-95a9-0f7e9e84a7f6@pengutronix.de>
- <CAPnjgZ2TT+0BvbjwfnGLQ3EPEXnLW6f1epiFdaBHRYaSAn5xsA@mail.gmail.com>
- <8fbc81b1-31ab-46b0-87f4-b8bd8e8e2b47@pengutronix.de>
- <CAPnjgZ1iyxk0bb56QR10N5aSphRYhLsw7Ly=z2i6rQCxP_AYPw@mail.gmail.com>
- <5e8f42f8-2b03-4033-b6d2-9b3139f081d5@pengutronix.de>
- <CAPnjgZ2RjNzqJTRZSWvuscQhs+f8CG=fDcEO=qKXNeQLP53LnQ@mail.gmail.com>
- <CAD=FV=WXQrbnjeVOLp--vmLzScvW9VLFRu+apSY4WnL9JFk-AQ@mail.gmail.com>
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <CAD=FV=WXQrbnjeVOLp--vmLzScvW9VLFRu+apSY4WnL9JFk-AQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+To: Devarsh Thakkar <devarsht@ti.com>, <u-boot@lists.denx.de>,
+ <sjg@chromium.org>, <agust@denx.de>, <trini@konsulko.com>,
+ <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
+ <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
+CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <nsekhar@ti.com>
+References: <20231110152944.647535-1-devarsht@ti.com>
+ <20231110152944.647535-2-devarsht@ti.com>
+From: Nikhil Jain <n-jain1@ti.com>
+In-Reply-To: <20231110152944.647535-2-devarsht@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,84 +85,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hi Devarsh,
 
-On 04.12.23 18:52, Doug Anderson wrote:> On Sat, Dec 2, 2023 at 8:37 AM Simon Glass <sjg@chromium.org> wrote:
->> On Thu, 30 Nov 2023 at 19:04, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->>> On 30.11.23 21:30, Simon Glass wrote:
->>>> On Wed, 29 Nov 2023 at 12:54, Ahmad Fatoum <a.fatoum@pengutronix.de> wrote:
->>>>> On 29.11.23 20:44, Simon Glass wrote:
->>>> I don't have an example to hand, but this is the required mechanism of
->>>> FIT. This feature has been in place for many years and is used by
->>>> ChromeOS, at least.
->>>
->>> I see the utility of a FIT configuration with
->>>
->>>     compatible = "vendor,board-rev-a", "vendor,board-rev-b";
->>>
->>> I fail to see a utility for a configuration with
->>>
->>>     compatible = "vendor,board", "vendor,SoM", "vendor,SoC";
->>>
->>> Any configuration that ends up being booted because "vendor,SoC" was matched is
->>> most likely doomed to fail. Therefore, I would suggest that only the top level
->>> configuration is written into the FIT configurations automatically.
->>
->> Firstly, I am not an expert on this.
->>
->> Say you have a board with variants. The compatible string in U-Boot
->> may be something like:
->>
->> "google,veyron-brain-rev1", "google,veyron-brain", "google,veyron",
->> "rockchip,rk3288";
->>
->> If you then have several FIT configurations, they may be something like:
->>
->> "google,veyron-brain-rev0", "google,veyron-brain", "google,veyron",
->> "rockchip,rk3288";
->> "google,veyron-brain-rev1", "google,veyron-brain", "google,veyron",
->> "rockchip,rk3288";
->> "google,veyron-brain-rev2", "google,veyron-brain", "google,veyron",
->> "rockchip,rk3288";
->>
->> You want to choose the second one, since it is a better match than the others.
+On 10/11/23 20:59, Devarsh Thakkar wrote:
+> Add function spl_reserve_video which is a wrapper
+> around video_reserve to setup video memory and update
+> the relocation address pointer.
+>
+> Setup video memory before page table reservation so that
+> framebuffer memory gets reserved from the end of RAM.
+>
+> This is as per the new policy being discussed for passing
+> blobs where each of the reserved areas for bloblists
+> to be passed need to be reserved at the end of RAM.
+>
+> This is done to enable the next stage to directly skip
+> the pre-reserved area from previous stage right from the end of RAM
+> without having to make any gaps/holes to accommodate those
+> regions which was the case before as previous stage
+> reserved region not from the end of RAM.
+>
+> Suggested-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Devarsh Thakkar <devarsht@ti.com>
 
-Now imagine, you are building a kernel that has no DT support for the Veyron,
-but instead has support for the Phytec RK3288 PCM-947:
+Reviewed-By: Nikhil M Jain <n-jain1@ti.com>
 
-  phytec,rk3288-pcm-947", "phytec,rk3288-phycore-som", "rockchip,rk3288
-
-As far as I understand U-Boot code, A veyron U-Boot would boot the Phytec DT
-if CONFIG_FIT_BEST_MATCH is set, although it's a bad match and a boot failure
-should rather have occurred.
-
->> +Doug Anderson who knows a lot more about this than me.
-> 
-> Hopefully this is all explained by:
-> 
-> https://docs.kernel.org/arch/arm/google/chromebook-boot-flow.html
-
-Thanks Doug, this was helpful. The missing information to me was that
-depthcharge only compares the top-level board compatible in addition
-to runtime generated board compatibles, unlike what U-Boot seems to do.
-
-barebox only compares its top-level compatible against the FIT configuration
-compatibles, so adding a full compatible list to the configuration nodes as done
-by this series should be ok there as well. I think U-Boot could run into
-issues though as described above.
-
-Out of curiosity: I only heard about Depthcharge before as exploitation toolkit
-for U-Boot. Can you point me at some documentation on what the Depthcharge bootloader
-does what U-Boot (which was presumably used before?) doesn't?
-
-Thanks,
-Ahmad
-
-> 
-
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
-
+Regards,
+Nikhil
+> ---
+> V2:
+> - Make a generic function "spl_reserve_video" under
+>   common/spl which can be re-used by other platforms too
+>   for reserving video memory from spl.
+>
+> V3:
+> - Change spl_reserve_video to spl_reserve_video_from_ram_top
+>   which enforce framebuffer reservation from end of RAM
+> - Use gd->ram_top instead of local ram_top and update
+>   gd->reloc_addr after each reservation
+> - Print error message on framebuffer reservation
+> ---
+>  arch/arm/mach-k3/common.c | 17 ++++++++++++-----
+>  common/spl/spl.c          | 27 +++++++++++++++++++++++++++
+>  include/spl.h             |  6 ++++++
+>  3 files changed, 45 insertions(+), 5 deletions(-)
+>
+> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> index c3006ba387..6590045140 100644
+> --- a/arch/arm/mach-k3/common.c
+> +++ b/arch/arm/mach-k3/common.c
+> @@ -525,19 +525,26 @@ void remove_fwl_configs(struct fwl_data *fwl_data, size_t fwl_data_size)
+>  void spl_enable_dcache(void)
+>  {
+>  #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
+> -	phys_addr_t ram_top = CFG_SYS_SDRAM_BASE;
+> +	gd->ram_top = CFG_SYS_SDRAM_BASE;
+> +	int ret = 0;
+>  
+>  	dram_init();
+>  
+>  	/* reserve TLB table */
+>  	gd->arch.tlb_size = PGTABLE_SIZE;
+>  
+> -	ram_top += get_effective_memsize();
+> +	gd->ram_top += get_effective_memsize();
+>  	/* keep ram_top in the 32-bit address space */
+> -	if (ram_top >= 0x100000000)
+> -		ram_top = (phys_addr_t) 0x100000000;
+> +	if (gd->ram_top >= 0x100000000)
+> +		gd->ram_top = (phys_addr_t)0x100000000;
+>  
+> -	gd->arch.tlb_addr = ram_top - gd->arch.tlb_size;
+> +	gd->relocaddr = gd->ram_top;
+> +
+> +	ret = spl_reserve_video_from_ram_top();
+> +	if (ret)
+> +		pr_err("ERROR: Failed to framebuffer memory in SPL\n");
+> +
+> +	gd->arch.tlb_addr = gd->relocaddr - gd->arch.tlb_size;
+>  	gd->arch.tlb_addr &= ~(0x10000 - 1);
+>  	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
+>  	      gd->arch.tlb_addr + gd->arch.tlb_size);
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 732d90d39e..452bf303de 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -41,6 +41,7 @@
+>  #include <fdt_support.h>
+>  #include <bootcount.h>
+>  #include <wdt.h>
+> +#include <video.h>
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+>  DECLARE_BINMAN_MAGIC_SYM;
+> @@ -151,6 +152,32 @@ void spl_fixup_fdt(void *fdt_blob)
+>  #endif
+>  }
+>  
+> +/*
+> + * Reserve video memory for SPL splash screen from
+> + * end of RAM
+> + *
+> + * RETURN
+> + * 0 : On success
+> + * Non-zero : On failure
+> + */
+> +int spl_reserve_video_from_ram_top(void)
+> +{
+> +	if (CONFIG_IS_ENABLED(VIDEO)) {
+> +		ulong addr;
+> +		int ret;
+> +
+> +		addr = gd->ram_top;
+> +		ret = video_reserve(&addr);
+> +		if (ret)
+> +			return ret;
+> +		debug("Reserving %luk for video at: %08lx\n",
+> +		      ((unsigned long)gd->relocaddr - addr) >> 10, addr);
+> +		gd->relocaddr = addr;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  ulong spl_get_image_pos(void)
+>  {
+>  	if (!CONFIG_IS_ENABLED(BINMAN_UBOOT_SYMBOLS))
+> diff --git a/include/spl.h b/include/spl.h
+> index 0d49e4a454..39f2a7581d 100644
+> --- a/include/spl.h
+> +++ b/include/spl.h
+> @@ -825,6 +825,12 @@ int spl_usb_load(struct spl_image_info *spl_image,
+>  
+>  int spl_ymodem_load_image(struct spl_image_info *spl_image,
+>  			  struct spl_boot_device *bootdev);
+> +/**
+> + * spl_reserve_video_from_ram_top() - Reserve framebuffer memory from end of RAM
+> + *
+> + * Return: 0 on success, otherwise error code
+> + */
+> +int spl_reserve_video_from_ram_top(void);
+>  
+>  /**
+>   * spl_invoke_atf - boot using an ARM trusted firmware image
