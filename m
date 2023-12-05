@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB3A7C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D7EC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:52:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7B5987763;
-	Tue,  5 Dec 2023 01:52:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2BCBE875F5;
+	Tue,  5 Dec 2023 01:52:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EGaly1sa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OeB8hcxT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2C8B86FB5; Tue,  5 Dec 2023 01:52:15 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id DB9D28788C; Tue,  5 Dec 2023 01:52:18 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E9787763
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 01:52:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94C2B86FB5
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 01:52:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40c09ba723eso21793785e9.2
- for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:11 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-54b8276361cso6231675a12.0
+ for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701737531; x=1702342331; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701737536; x=1702342336; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x165/TM3Dp6pElR/9fEYoVid9PhQqg9CIXFORbGjSno=;
- b=EGaly1saQ3ew8T511HrNcq+H7eVq2sQ9jnEUND7VU+edIzFQRQ45xvFynjKo6u/0dB
- LTH+BiQhec2imUdzFuai9c/KbfVVot8kMqspNSkFK4u1J2n34YyM0sHIQH5yRZ1c5lGw
- twQyNFbr1ln9/ts/S0V/0Tj3xBpeBaYH3HhHc=
+ bh=desNvrZYjc9YcgCgGrl4d/4q1+NqWWd1PbgZeFovR5k=;
+ b=OeB8hcxTf3semtrDVtpjyHkza1/YCKauCt6yVWunj0vokhYPHvQTCmZyf13UYmij/p
+ dGZXQn1SefEriXGXICs+w/MSA7q4fx12XMKEtmV6bcAJtSDTEvzs3n6xNGGD7VPKTHLb
+ LGP4u8rZpwj9DPMVm7QQla6ZgVpMYYtdanEqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701737531; x=1702342331;
+ d=1e100.net; s=20230601; t=1701737536; x=1702342336;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x165/TM3Dp6pElR/9fEYoVid9PhQqg9CIXFORbGjSno=;
- b=EVSL8wKXHqZTYgDn46W1C8H6N+BRm1HNitNY63puntK3fFQbYqIkplRs6kgIQlBQVM
- yNcP8rYYjauQ/2QTXiIlrLhvyGsVB2yZiaqhaeUU2WTImhW8YQzFUuxzK0K7hC5cBKKo
- IkZ+sn9DXgXCA/IxmTeo47VUaIn8VlH6R60odnJOVFifDWbeAUpZ+n6H4p5eU4GMeZTc
- vUrEandf567e2M9CrDMb4MCgsJNd2vR1Spr5j44Ic2dbXXIhdWgOvzEOmQi6Xu73QQzM
- LZDeJpoNqpZuyccX7Nz938+cHMDt6KFfpqfcwJeAMjSVFZAjoVHpEkRPFWc4ROK15zCv
- AK5Q==
-X-Gm-Message-State: AOJu0YyI2x0gQA0phrw+Ubt1+pzRdC2HoldH2KrQ4IZe5y020FQyzh3Y
- CCptMuollzTNkK6j8va1GHMMFsLKsfI68Vp1fnP7ReRv1iHCPhW5VdAikXES
-X-Google-Smtp-Source: AGHT+IGo0oZcPYtSw7GlFzZWIEFJEL41LKpucHp2PH9e6hkxbRunHnGXaNUruB3WD7ex9yUiQ5M6IPlTSm7Iw1eXrAQ=
-X-Received: by 2002:a05:600c:1f95:b0:40b:5e1f:6fdf with SMTP id
- je21-20020a05600c1f9500b0040b5e1f6fdfmr3530wmb.52.1701737530757; Mon, 04 Dec
- 2023 16:52:10 -0800 (PST)
+ bh=desNvrZYjc9YcgCgGrl4d/4q1+NqWWd1PbgZeFovR5k=;
+ b=cBZfB9V3gE0idArJZ14LsV04/neEyDcyep1RRGmRItvKaE4xmL/K9i7YubCnnpJ4my
+ kIbBprjLruPz0nQ3tnp+SfYoEPEG2yJygdw7sBXuNuWvevEXaTj0SZ648xvwViHSsWx4
+ MlmjY7IqzxV4PBsYeOTkeEFiJ4paPS8CkwyQ4NceW0RbjGt2hCyjyLrjnKvfldkU52+R
+ N36ZawHxoprfyVbuPdBetdR7qqus5Pee9C50jlho7vip5bKrqpZaL5nhc+v2raO3nrnf
+ 8mhR6lt/OPs556kBldfhW88dg7kckDcr1A38z49Y7nTk4+3WXraL8UrSmjeOhBhvIW1q
+ lIzw==
+X-Gm-Message-State: AOJu0YxS8mINFy2mF52oHg8XNcigDwCPTZBpdCEjJhLsxyqYq0n842gk
+ ks1N7KhB8NFJofoelKGrevlLUOWmw/sJuhHRB5j8HU9kAG4zsyFG7u1GazOS
+X-Google-Smtp-Source: AGHT+IE/QjMhnhmbs0EGOsEjBfO2soIHrBWe5rqVElMM4EuDjHXpTcFuvTzvIwTJlA1JDC7Bjq2BHjNxfqEiaISakoU=
+X-Received: by 2002:a17:907:9391:b0:a04:7d85:2a7c with SMTP id
+ cm17-20020a170907939100b00a047d852a7cmr3912ejc.59.1701737535952; Mon, 04 Dec
+ 2023 16:52:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231119165501.1305136-1-i@shantur.com>
- <CAHc5_t3MwUvFdQQaZGeONxS-JNuB4mYXyU9YSexN8bCbQUTRYQ@mail.gmail.com>
-In-Reply-To: <CAHc5_t3MwUvFdQQaZGeONxS-JNuB4mYXyU9YSexN8bCbQUTRYQ@mail.gmail.com>
+References: <20231204002642.895926-1-sjg@chromium.org>
+ <20231203172622.5.Id5671bc2d663f968a6f9da1c7d248525a794a4ba@changeid>
+ <1ea1bd8e-d0e4-5f35-aaa0-5a95c37222fb@kernel-space.org>
+In-Reply-To: <1ea1bd8e-d0e4-5f35-aaa0-5a95c37222fb@kernel-space.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Dec 2023 17:51:55 -0700
-Message-ID: <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] bootflow: bootmeth_efi: Fix network efi boot.
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de
+Date: Mon, 4 Dec 2023 17:52:02 -0700
+Message-ID: <CAPnjgZ2AfK5cCE6j17OKUT8x1Rn7_K85a1RNo_N_-v_Y0V28bg@mail.gmail.com>
+Subject: Re: [PATCH 05/18] treewide: bootm: Drop command-line args to
+ boot_os_fn
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -83,25 +85,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
+Hi Angelo,
 
-On Mon, 4 Dec 2023 at 05:38, Shantur Rathore <i@shantur.com> wrote:
+On Tue, 5 Dec 2023 at 08:01, Angelo Dureghello <angelo@kernel-space.org> wr=
+ote:
 >
 > Hi Simon,
 >
-> On Sun, Nov 19, 2023 at 4:56=E2=80=AFPM Shantur Rathore <i@shantur.com> w=
-rote:
-> >
-> >
-> > Currently bootmeth_efi crashes while doing a network (dhcp) boot.
-> > This patch series fixes issues and both network and disk boot works.
-> >
-> How can I help to get this patch series merged in?
+> looks like i cannot apply this patch:
+>
+>   =EF=8C=83 =EE=82=B0 =EF=81=BC ~/dev-k/u-boot-coldfire =EE=82=B0 on =EF=
+=87=93 =EF=84=A6 master *2 =EE=82=B0 git am
+> Complete-decoupling-of-bootm-logic-from-commands.patch
+> Applying: bootm: netbds: Drop passing of arguments
+> Applying: bootm: plan: Drop passing of arguments
+> Applying: bootm: qnxelf: Drop passing of arguments
+> Applying: nios2: Drop separate parsing of bootm args
+> Applying: treewide: bootm: Drop command-line args to boot_os_fn
+> error: patch failed: boot/bootm_os.c:441
+> error: boot/bootm_os.c: patch does not apply
+> Patch failed at 0005 treewide: bootm: Drop command-line args to boot_os_f=
+n
+> hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+> When you have resolved this problem, run "git am --continue".
+> If you prefer to skip this patch, run "git am --skip" instead.
+> To restore the original branch and stop patching, run "git am --abort".
+>
+>
+> And getting similar issues for the "pxe: Allow extlinux booting without
+> CMDLINE enabled"
+>
+> Am i doing something wrong ?
 
-You can check patchwork [1] to see who it is assigned to. I don't see
-it in my queue though.
+Could you please check the cover letter? There are several series here
+and I put the -dm tree links in as well.
+
+I was keeping these to send in sequence, but it would likely take
+several releases that way, so I elected to send everything at once and
+get feedback.
 
 Regards,
-Simon
-
-[1]
+SmIon
