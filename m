@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86360C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 04:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF29BC4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 05:09:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E191D870D2;
-	Tue,  5 Dec 2023 05:24:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E63228759E;
+	Tue,  5 Dec 2023 06:09:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="u0GggTQ2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B468KQ1J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 808E9876A3; Tue,  5 Dec 2023 05:24:57 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id DD13D876DA; Tue,  5 Dec 2023 06:09:19 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D745870D2
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 05:24:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D0F33875EB
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 06:09:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B54OrDN084205;
- Mon, 4 Dec 2023 22:24:53 -0600
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B55947m061724;
+ Mon, 4 Dec 2023 23:09:04 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701750293;
- bh=ZMwZ7vqy0rc2GY96CHNP5HiBbSvm/qxY0mwlkdqrCJo=;
+ s=ti-com-17Q1; t=1701752944;
+ bh=WWZQll3OPRak3b7+6CpInpz2mcAPYIFuzq/5byXhIcc=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=u0GggTQ2fNi4QubYTmFkeKCvTzHoAYOnY1sXprliW/XLCFctm/byqm6VXfi6MJcQ2
- sxvGBHobNnPIqYp8yduA6wFYEcjZJRj1RCJrd2AKBKL1m+0i3YdZcm90aj7cZeeTbH
- ntPmo24LIT+XWx/h9uPJonhRZZBdNacI9NM/9N6E=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B54OrBc011814
+ b=B468KQ1JVGPrluSq7E/oux2/SodmV3i71yx1V308XxKs0uVSjLNnp5MHws/tMJIuK
+ ZE+mLsi1Oal4MNuDF0/tujPk6Qa1Qlbp1k6lmDqzLCb9yIzRMqBfClktNfiJI/1vq8
+ XVmr63j0uQQIola+YZfmMbBwfNc7AI63o648g8B4=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B5594g7090542
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 4 Dec 2023 22:24:53 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 4 Dec 2023 23:09:04 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 4
- Dec 2023 22:24:53 -0600
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE112.ent.ti.com
+ Dec 2023 23:09:04 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 4 Dec 2023 22:24:53 -0600
-Received: from [172.24.20.156] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B54Oo49022049;
- Mon, 4 Dec 2023 22:24:50 -0600
-Message-ID: <cd79d1ea-86ba-4c67-8132-40b067bb31f1@ti.com>
-Date: Tue, 5 Dec 2023 09:54:49 +0530
+ Frontend Transport; Mon, 4 Dec 2023 23:09:04 -0600
+Received: from [172.24.227.36] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B5590aC030032;
+ Mon, 4 Dec 2023 23:09:00 -0600
+Message-ID: <b41b26d4-ee9b-4c40-ae03-8f754f408ac6@ti.com>
+Date: Tue, 5 Dec 2023 10:38:59 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: k3-j7200-r5-common-proc-board: Set parent
- clock for clock ID 323
+Subject: Re: [PATCH 3/3] doc: board: ti: k3: Mention TI_DM argument
+To: Andrew Davis <afd@ti.com>, <marcel.ziswiler@toradex.com>,
+ <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <hs@denx.de>, <christophe.leroy@csgroup.eu>,
+ <mr.bossman075@gmail.com>, <m-chawdhry@ti.com>, <kamlesh@ti.com>,
+ <nm@ti.com>, <c-shilwant@ti.com>, <u-kumar1@ti.com>
+References: <20231204112141.2036907-1-n-francis@ti.com>
+ <20231204112141.2036907-4-n-francis@ti.com>
+ <5e41ee08-a632-4cb4-a568-5f0cd65a299d@ti.com>
 Content-Language: en-US
-To: Reid Tonking <reidt@ti.com>, <trini@konsulko.com>
-CC: <nm@ti.com>, <u-boot@lists.denx.de>, <m-chawdhry@ti.com>, <bb@ti.com>,
- <a-nandan@ti.com>, <vishalm@ti.com>, <u-kumar1@ti.com>
-References: <20231201213320.1876892-1-reidt@ti.com>
- <20231201213320.1876892-3-reidt@ti.com>
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20231201213320.1876892-3-reidt@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <5e41ee08-a632-4cb4-a568-5f0cd65a299d@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,35 +84,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andrew
 
-On 12/2/2023 3:03 AM, Reid Tonking wrote:
-> From: Apurva Nandan <a-nandan@ti.com>
->
-> This virtual clock mux configuration enables the use of dynamic frequency
-> scaling on A72 clock ID 202 by setting up the required register.
+On 04/12/23 20:36, Andrew Davis wrote:
+> On 12/4/23 5:21 AM, Neha Malcom Francis wrote:
+>> Mention TI_DM argument can be used to fetch a custom DM binary in the
+>> A72 build instructions for K3 devices.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   doc/board/ti/k3.rst | 7 +++++++
+>>   1 file changed, 7 insertions(+)
+>>
+>> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+>> index a127215ce5..15916b088f 100644
+>> --- a/doc/board/ti/k3.rst
+>> +++ b/doc/board/ti/k3.rst
+>> @@ -320,6 +320,13 @@ use the `lite` option.
+>>    make CROSS_COMPILE=$CC64 BINMAN_INDIRS=$LNX_FW_PATH \
+>>           BL31=$TFA_PATH/build/k3/$TFA_BOARD/release/bl31.bin \
+>>           TEE=$OPTEE_PATH/out/arm-plat-k3/core/tee-raw.bin
+>> +
+>> +.. note::
+>> +   It is also possible to pick up a custom DM binary by adding TI_DM argument
+>> +   pointing to the file. If not provided, it defaults to picking up the DM
+>> +   binary from ti-linux-firmware. This is only applicable to devices that
+> 
+> It would only be "ti-linux-firmware" if that is what you had set as BINMAN_INDIRS.
+> 
+> s/ti-linux-firmware/BINMAN_INDIRS
+> 
 
-IMO, dynamic frequency scaling should be supported without this patch.
-But this patch allows to set freq at different rates other than fixed division.
-I request to update commit message.
-Rest LGTM
+Thanks for catching that, will make the change.
 
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Signed-off-by: Reid Tonking <reidt@ti.com>
-> ---
->   arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> index f0a73605020..018faaa13b6 100644
-> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> @@ -24,7 +24,8 @@
->   				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
->   		resets = <&k3_reset 202 0>;
->   		clocks = <&k3_clks 61 1>;
-> -		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
-> +		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
-> +		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
->   		assigned-clock-rates = <2000000000>, <200000000>;
->   		ti,sci = <&dmsc>;
->   		ti,sci-proc-id = <32>;
+> Otherwise whole series LGTM,
+> 
+> Reviewed-by: Andrew Davis <afd@ti.com>
+> 
+>> +   utilize split firmware.
+>> +
+>>   .. k3_rst_include_end_build_steps_uboot
+>>   At this point you should have every binary needed initialize both the
+
+-- 
+Thanking You
+Neha Malcom Francis
