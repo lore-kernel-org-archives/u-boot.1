@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCBE0C07E97
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2657C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 13:48:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38C04878CF;
-	Tue,  5 Dec 2023 14:47:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C3E88782F;
+	Tue,  5 Dec 2023 14:47:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GZEuZ+Gx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dsbf5Cdk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D512E87626; Tue,  5 Dec 2023 14:47:08 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 5B7B9878D1; Tue,  5 Dec 2023 14:47:10 +0100 (CET)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5E188756E
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:47:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 465A6870F4
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 14:47:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2c9f9db9567so30390211fa.3
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:47:06 -0800 (PST)
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2c9ea37ac87so48259551fa.3
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 05:47:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701784026; x=1702388826; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701784027; x=1702388827; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=pNzDeS4jLfZs8jyIubeuNekC0RpWcM0qlQMwk11zzE4=;
- b=GZEuZ+GxyRYH83z3TFcLZ6gHwioOxet3O+ZZzRAYkLVy1tZ1XllQzNKyFU4d5/5RBt
- 6VNYaZP2N/PXya7y7mPJqO1KqGG9c1pvZO3ueA7IRpePDcTsxV4Z5HbpDwq9s/+eX6An
- 3S/PtwB3NFi2AIRbsmac9kZiKZqlN+zh6ZL7tINRV7DGnYLe0RpQ9eUCQjfduNcRTNZX
- NsA7BR4L9Qe2EAsnFRxpWS54YLsbljYhSRLNkPE51zuRtNUIEHO/Zwg12mPlr1VfQtvQ
- UVvHQsKTf8fO0fPxYJOA+g3zELc2uK2QGHmDwd0QmRzEDxeiZaA07ZQUuZ8WxN67HBxX
- +XoQ==
+ :reply-to; bh=oSVKwPCpUfU+pNF0Xc6YbmXdtGmRtY0Wqn9ElJEQEfU=;
+ b=Dsbf5Cdk1Ht23NV9ap2ZHaS/4Fmr+DLbGEdp+CKVH3tKDFJN0XmE/L5h8E5xuQ7szg
+ TdQjWMs5xBCq6wQMTffNsud2gDth1w26M7PXZDkjMXIiE4KLn7I9KxONJEauoQCiQGiw
+ Ipm43SaDE+jl3MMA0QnfO7I7WldJdQDoboQ++vKxrhA2n3kosrrYRrRJbffUplUfemZ3
+ cSzu8SomOfC4UwF6sGZ+19uVxLXfDtI2OUUdfGWp0MfOJKwCwOVXZB6yC+uO4rcNfq1J
+ YRj1aMzN6X0sR7ETwVNOeNJfJD6gLdOamugUXn1UFQNwsft1F5J7P3GEpu3BcSkvwaGV
+ jdVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701784026; x=1702388826;
+ d=1e100.net; s=20230601; t=1701784027; x=1702388827;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pNzDeS4jLfZs8jyIubeuNekC0RpWcM0qlQMwk11zzE4=;
- b=X2WG05HXdOHn0XPIVoSc8CExlvSWYdQouaebE2e04IIyqVx3oTwSysxc4IuT36p6tR
- UMDU2wPxngPNY0LcymoAMQr1DU4Cy5Qg+lkvYFkSTHwDm1SNSyxFUo33cBRT3qTWxn4j
- 4KCwkE6Ku1cR/+4+wwSp/P7dgNplYIkZFQPTiEUsRQTd5zbMwruI8V/uPczMl7LL6CFS
- l5esch+QnpWEEGku0v++iivgG1EHqOxDRrm2P3oM7k3O/z96o/CMppvt45IhlM7jr8Kv
- iU79rNJ2giTUmJ1FlUXLZAjd46qI44naPc6mPs0YEcG5wba02qdpWZ+1QAkAGnPekYGZ
- cJeg==
-X-Gm-Message-State: AOJu0YxJXY4z+NKc/+iYuBKtgDuudDw7WGVBhK7FXXDxMBTJ56a8wfIL
- H5l1BeNv1gwlTW2TG7obkNkKsQ==
-X-Google-Smtp-Source: AGHT+IG+xgrTJkH5OUtmD+/DR9hDdL+TJURI/Pnp/lV30wMCWonJs8wlGaWl6KIjSveJ2Z9qQ2UgxA==
-X-Received: by 2002:a2e:9b97:0:b0:2c9:eb97:b76c with SMTP id
- z23-20020a2e9b97000000b002c9eb97b76cmr2872717lji.88.1701784026358; 
- Tue, 05 Dec 2023 05:47:06 -0800 (PST)
+ bh=oSVKwPCpUfU+pNF0Xc6YbmXdtGmRtY0Wqn9ElJEQEfU=;
+ b=b27cwRXu3LmEqAucIv2LBNyU9jGLN1XvK4vjdVkJDoZ1PxJJ2gt796Djg/53o2UZi1
+ 0+vZqyZMENLAbOawvQvnAIvzQYwJyROY7m4/OqNXnzAtbl3oFyTfdhatc0uLSFfLHn5x
+ 1Aq4sVfOzsO7EWjPYnzEpSVVAP6LlNZ3j/LvDS5kdb2pjh8DxJPuqOIFh21OODWSwqGQ
+ Jrp4QTyQbapdt/PZVm1cbv+KtkJuQKSod7Jt/gOolH070mcqYxqT1gEdBRWN93BgQGIN
+ 05yVjPs/UaQ+Jwp5Cjq1TQSpD+cYWR6+e1Dq6yWxDAGw/lOUgeMuVyUGMSo5tLmdombx
+ 2GSw==
+X-Gm-Message-State: AOJu0YyggMTAfkpfORt55ULfeLEyudieJTlDxc9Nb21qUYImqJPJnTmQ
+ RXZvS5KwdoTuM1vkPRmZ7+Zpdw==
+X-Google-Smtp-Source: AGHT+IE1Eur/kxpotn1+MRcCg8X7mPPWGIaPqJbwwv3bxH9m2GZKjxrn2/JvaijQ5AgVAyF8nVZO0w==
+X-Received: by 2002:a2e:9d0c:0:b0:2ca:2bd:3cf1 with SMTP id
+ t12-20020a2e9d0c000000b002ca02bd3cf1mr1587962lji.8.1701784027649; 
+ Tue, 05 Dec 2023 05:47:07 -0800 (PST)
 Received: from lion.localdomain ([79.79.179.141])
  by smtp.gmail.com with ESMTPSA id
- d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.47.05
+ d10-20020a2e928a000000b002ca0e0c837asm369688ljh.100.2023.12.05.05.47.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Dec 2023 05:47:05 -0800 (PST)
+ Tue, 05 Dec 2023 05:47:07 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 05 Dec 2023 13:46:52 +0000
-Subject: [PATCH v6 7/9] gpio: qcom_pmic: drop gpio-count property
+Date: Tue, 05 Dec 2023 13:46:53 +0000
+Subject: [PATCH v6 8/9] spmi: msm: fix register range names
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231205-b4-qcom-dt-compat-v6-7-61d104a8f920@linaro.org>
+Message-Id: <20231205-b4-qcom-dt-compat-v6-8-61d104a8f920@linaro.org>
 References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 In-Reply-To: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
 To: Ramon Fried <rfried.dev@gmail.com>, 
@@ -83,13 +83,13 @@ To: Ramon Fried <rfried.dev@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2548;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6866;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=KIbcCNwhjqBjvG3k7+wa2fqlrubCe/j4Q+RD3LW3KPE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zXN1S22fbi3u3uHTV7Ttl5nao7LOnL1FIRtW7/z59
- +4qXRvLjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRAGGG/0Ev1378E2V902m7
- Jle3xP8W24tdh/hEG9c8OdOyTrqoPZLhn5Kp3cUTXguqVc6sM7AQ0GPXDHbt/Fnx5bRYWw3Tzwf
- yzQA=
+ bh=T9w4U36ymjfw6HJqQmOKxMGleoY2Y7gEQwltDdAA430=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtR8zXMzX+9nDz5T+3y16oWgu+Zn/Y3y/+bsFkq7tUHAL
+ XIGX+PSjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRn1sYGSap1siEv2yezn/k
+ 2NF7m/Ytve1mN++4j4zPs0mXhEqbpWIZ/uc/fP980ZV/9zabJXUeqj5z/AjrQd4Di3mqGBekFJ2
+ LN7IEAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,96 +108,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This property is not part of the dt bindings and all boards use the new
-gpio-ranges property instead. Drop support for this.
+The core and chnl register ranges were swapped on SDM845. Fix it, and
+fetch the register ranges by name instead of by index.
+
+Drop the cosmetic "version" variable and clean up the debug logging.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Tested-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/device-tree-bindings/gpio/pm8916_gpio.txt | 48 ---------------------------
- drivers/gpio/qcom_pmic_gpio.c                 | 13 +++-----
- 2 files changed, 5 insertions(+), 56 deletions(-)
+ arch/arm/dts/qcs404-evb.dts                |  7 +++--
+ arch/arm/dts/sdm845.dtsi                   |  2 +-
+ doc/device-tree-bindings/spmi/spmi-msm.txt | 26 -----------------
+ drivers/spmi/spmi-msm.c                    | 46 ++++++++++++------------------
+ 4 files changed, 23 insertions(+), 58 deletions(-)
 
-diff --git a/doc/device-tree-bindings/gpio/pm8916_gpio.txt b/doc/device-tree-bindings/gpio/pm8916_gpio.txt
+diff --git a/arch/arm/dts/qcs404-evb.dts b/arch/arm/dts/qcs404-evb.dts
+index bd2e303e10f4..07bf7dd0b32f 100644
+--- a/arch/arm/dts/qcs404-evb.dts
++++ b/arch/arm/dts/qcs404-evb.dts
+@@ -362,9 +362,10 @@
+ 
+ 		spmi@200f000 {
+ 			compatible = "qcom,spmi-pmic-arb";
+-			reg = <0x200f000 0x1000
+-			       0x2400000 0x400000
+-			       0x2c00000 0x400000>;
++			reg = <0x200f000 0x001000>,
++			      <0x2400000 0x800000>,
++			      <0x2c00000 0x800000>;
++			reg-names = "core", "chnls", "obsrvr";
+ 			#address-cells = <0x1>;
+ 			#size-cells = <0x1>;
+ 
+diff --git a/arch/arm/dts/sdm845.dtsi b/arch/arm/dts/sdm845.dtsi
+index a26e9f411ee0..96c9749a52c0 100644
+--- a/arch/arm/dts/sdm845.dtsi
++++ b/arch/arm/dts/sdm845.dtsi
+@@ -63,7 +63,7 @@
+ 			reg = <0xc440000 0x1100>,
+ 			      <0xc600000 0x2000000>,
+ 			      <0xe600000 0x100000>;
+-			reg-names = "cnfg", "core", "obsrvr";
++			reg-names = "core", "chnls", "obsrvr";
+ 			#address-cells = <0x1>;
+ 			#size-cells = <0x1>;
+ 
+diff --git a/doc/device-tree-bindings/spmi/spmi-msm.txt b/doc/device-tree-bindings/spmi/spmi-msm.txt
 deleted file mode 100644
-index 58185b833524..000000000000
---- a/doc/device-tree-bindings/gpio/pm8916_gpio.txt
+index ae47673b768b..000000000000
+--- a/doc/device-tree-bindings/spmi/spmi-msm.txt
 +++ /dev/null
-@@ -1,48 +0,0 @@
--Driver for part of pm8916 PMIC - gpio and power/reset keys
+@@ -1,26 +0,0 @@
+-Qualcomm SPMI arbiter/bus driver
 -
--This device should be child of SPMI pmic.
--
--1) GPIO driver
+-This is bus driver for Qualcomm chips that use SPMI to communicate with PMICs.
 -
 -Required properties:
--- compatible: "qcom,pm8916-gpio"
--- reg: peripheral ID, size of register block
--- gpio-controller
--- gpio-count: number of GPIOs
--- #gpio-cells: 2
+-- compatible: "qcom,spmi-pmic-arb"
+-- reg: Register block adresses and sizes for various parts of device:
+-   1) PMIC arbiter channel mapping base (PMIC_ARB_REG_CHNLn)
+-   2) SPMI write command (master) registers (PMIC_ARB_CORE_SW_DEC_CHANNELS)
+-   3) SPMI read command (observer) registers (PMIC_ARB_CORE_REGISTERS_OBS)
 -
--Optional properties:
--- gpio-bank-name: name of bank (as default "pm8916" is used)
+-Optional properties (if not set by parent):
+-- #address-cells: 0x1 - childs slave ID address
+-- #size-cells: 0x1
+-
+-All PMICs should be placed as a child nodes of bus arbiter.
+-Automatic detection of childs is currently not supported.
 -
 -Example:
 -
--pmic_gpios: gpios@c000 {
--	compatible = "qcom,pm8916-gpio";
--	reg = <0xc000 0x400>;
--	gpio-controller;
--	gpio-count = <4>;
--	#gpio-cells = <2>;
--	gpio-bank-name="pmic";
+-spmi@200f000 {
+-	compatible = "qcom,spmi-pmic-arb";
+-	reg = <0x200f800 0x200 0x2400000 0x400000 0x2c00000 0x400000>;
+-	#address-cells = <0x1>;
+-	#size-cells = <0x1>;
 -};
--
--
--2) Power/Reset key driver
--
--Required properties:
--- compatible: "qcom,pm8916-pwrkey"
--- reg: peripheral ID, size of register block
--- gpio-controller
--- #gpio-cells: 2
--
--Optional properties:
--- gpio-bank-name: name of bank (as default "pm8916_key" is used)
--
--
--Example:
--
--pmic_pon: pon@800 {
--	compatible = "qcom,pm8916-pwrkey";
--	reg = <0x800 0x96>;
--	#gpio-cells = <2>;
--	gpio-controller;
--};
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 5221bd27825e..6167c8411678 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -268,14 +268,11 @@ static int qcom_gpio_of_to_plat(struct udevice *dev)
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	int ret;
+diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
+index 27a035c0a595..5fe8a70abca7 100644
+--- a/drivers/spmi/spmi-msm.c
++++ b/drivers/spmi/spmi-msm.c
+@@ -70,7 +70,7 @@ enum pmic_arb_channel {
  
--	uc_priv->gpio_count = dev_read_u32_default(dev, "gpio-count", 0);
--	if (!uc_priv->gpio_count) {
--		ret = qcom_gpio_of_parse_ranges(dev);
--		if (ret > 0)
--			uc_priv->gpio_count = ret;
--		else
--			return ret;
--	}
-+	ret = qcom_gpio_of_parse_ranges(dev);
-+	if (ret > 0)
-+		uc_priv->gpio_count = ret;
-+	else
-+		return ret;
+ struct msm_spmi_priv {
+ 	phys_addr_t arb_chnl;  /* ARB channel mapping base */
+-	phys_addr_t spmi_core; /* SPMI core */
++	phys_addr_t spmi_chnls; /* SPMI channels */
+ 	phys_addr_t spmi_obs;  /* SPMI observer */
+ 	/* SPMI channel map */
+ 	uint8_t channel_map[SPMI_MAX_SLAVES][SPMI_MAX_PERIPH];
+@@ -95,10 +95,10 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
  
- 	uc_priv->bank_name = "pmic";
+ 	/* Disable IRQ mode for the current channel*/
+ 	writel(0x0,
+-	       priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
++	       priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CONFIG);
  
+ 	/* Write single byte */
+-	writel(val, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
++	writel(val, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_WDATA);
+ 
+ 	/* Prepare write command */
+ 	reg |= SPMI_CMD_EXT_REG_WRITE_LONG << SPMI_CMD_OPCODE_SHIFT;
+@@ -113,12 +113,12 @@ static int msm_spmi_write(struct udevice *dev, int usid, int pid, int off,
+ 		ch_offset = SPMI_CH_OFFSET(channel);
+ 
+ 	/* Send write command */
+-	writel(reg, priv->spmi_core + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
++	writel(reg, priv->spmi_chnls + SPMI_CH_OFFSET(channel) + SPMI_REG_CMD0);
+ 
+ 	/* Wait till CMD DONE status */
+ 	reg = 0;
+ 	while (!reg) {
+-		reg = readl(priv->spmi_core + SPMI_CH_OFFSET(channel) +
++		reg = readl(priv->spmi_chnls + SPMI_CH_OFFSET(channel) +
+ 			    SPMI_REG_STATUS);
+ 	}
+ 
+@@ -186,47 +186,37 @@ static struct dm_spmi_ops msm_spmi_ops = {
+ static int msm_spmi_probe(struct udevice *dev)
+ {
+ 	struct msm_spmi_priv *priv = dev_get_priv(dev);
+-	phys_addr_t config_addr;
++	phys_addr_t core_addr;
+ 	u32 hw_ver;
+-	u32 version;
+ 	int i;
+-	int err;
+ 
+-	config_addr = dev_read_addr_index(dev, 0);
+-	priv->spmi_core = dev_read_addr_index(dev, 1);
+-	priv->spmi_obs = dev_read_addr_index(dev, 2);
++	core_addr = dev_read_addr_name(dev, "core");
++	priv->spmi_chnls = dev_read_addr_name(dev, "chnls");
++	priv->spmi_obs = dev_read_addr_name(dev, "obsrvr");
+ 
+-	hw_ver = readl(config_addr + PMIC_ARB_VERSION);
++	hw_ver = readl(core_addr + PMIC_ARB_VERSION);
+ 
+ 	if (hw_ver < PMIC_ARB_VERSION_V3_MIN) {
+ 		priv->arb_ver = V2;
+-		version = 2;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
+ 	} else if (hw_ver < PMIC_ARB_VERSION_V5_MIN) {
+ 		priv->arb_ver = V3;
+-		version = 3;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V1_V2_V3;
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V1_V2_V3;
+ 	} else {
+ 		priv->arb_ver = V5;
+-		version = 5;
+-		priv->arb_chnl = config_addr + APID_MAP_OFFSET_V5;
+-
+-		if (err) {
+-			dev_err(dev, "could not read APID->PPID mapping table, rc= %d\n", err);
+-			return -1;
+-		}
++		priv->arb_chnl = core_addr + APID_MAP_OFFSET_V5;
+ 	}
+ 
+-	dev_dbg(dev, "PMIC Arb Version-%d (0x%x)\n", version, hw_ver);
++	dev_dbg(dev, "PMIC Arb Version-%d (%#x)\n", hw_ver >> 28, hw_ver);
+ 
+ 	if (priv->arb_chnl == FDT_ADDR_T_NONE ||
+-	    priv->spmi_core == FDT_ADDR_T_NONE ||
++	    priv->spmi_chnls == FDT_ADDR_T_NONE ||
+ 	    priv->spmi_obs == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+ 
+-	dev_dbg(dev, "priv->arb_chnl address (%llu)\n", priv->arb_chnl);
+-	dev_dbg(dev, "priv->spmi_core address (%llu)\n", priv->spmi_core);
+-	dev_dbg(dev, "priv->spmi_obs address (%llu)\n", priv->spmi_obs);
++	dev_dbg(dev, "priv->arb_chnl address (%#08llx)\n", priv->arb_chnl);
++	dev_dbg(dev, "priv->spmi_chnls address (%#08llx)\n", priv->spmi_chnls);
++	dev_dbg(dev, "priv->spmi_obs address (%#08llx)\n", priv->spmi_obs);
+ 	/* Scan peripherals connected to each SPMI channel */
+ 	for (i = 0; i < SPMI_MAX_PERIPH; i++) {
+ 		uint32_t periph = readl(priv->arb_chnl + ARB_CHANNEL_OFFSET(i));
 
 -- 
 2.42.1
