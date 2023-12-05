@@ -4,36 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D806AC4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 01:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2316C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 02:38:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 245DA87635;
-	Tue,  5 Dec 2023 02:24:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1663C875F5;
+	Tue,  5 Dec 2023 03:38:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="fuRjhgSI";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1E7C87640; Tue,  5 Dec 2023 02:24:04 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C7C84875F5
- for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 02:24:00 +0100 (CET)
+ id 5264E875FC; Tue,  5 Dec 2023 03:38:01 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 419A787554
+ for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 03:37:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F29071474;
- Mon,  4 Dec 2023 17:24:46 -0800 (PST)
-Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 201583F5A1;
- Mon,  4 Dec 2023 17:23:59 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
- linux-sunxi@lists.linux.dev, Chukun Pan <amadeus@jmu.edu.cn>
-Subject: [PATCH] sunxi: dts: arm64: update emac for Orange Pi Zero 3
-Date: Tue,  5 Dec 2023 01:22:28 +0000
-Message-Id: <20231205012228.4256-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 733F240261; 
+ Tue,  5 Dec 2023 02:37:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1701743878;
+ bh=0/HYfxuQ+4KFxlLwHD1OWtTL4/yAc04ZrVWDHfRokyY=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=fuRjhgSIkMhR9QptXS3hgK5LBuq2//nj/NJZBnOEXQahlcYWes+M3pbhq/fT5vo7p
+ sTCSLbvRIdpIx4K+VG2HgTGy3duakotKSpC4prcZgH7t0rJDSKGtTZ1GKprgNqqic7
+ hZIzOdt4RLS+spQhvUBXuNEdCabkSaq+mOWeqDLXQ2pNmRTUbaKmWKph9S2XXLkWQF
+ 6xqQge244kdBFhGhRmfoVypFQEdVWEeUG6JY68HPhhAQDiaDGzDnrhEx+x2I9EAPFj
+ 2cmcXSgjIcX2qiKf3ZS8xiI29vAx6SwkGfSawWR3lOwDeUJT1n0YVJmTs6ZXzl1Nn1
+ o+36MD58KHK5Q==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: boot options should relate to the ESP
+Date: Tue,  5 Dec 2023 03:37:51 +0100
+Message-Id: <20231205023751.61679-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -52,74 +69,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chukun Pan <amadeus@jmu.edu.cn>
+* Only generate removable media entries for EFI system partitions.
+* Only offer EFI system partitions for boot options in the eficonfig
+  command.
 
-The current emac setting is not suitable for Orange Pi Zero 3,
-move it back to Orange Pi Zero 2 DT. Also update phy mode and
-delay values for emac on Orange Pi Zero 3.
-With these changes, Ethernet now looks stable.
-
-Fixes: 95c3b0635ea4 ("sunxi: dts: arm64: update devicetree files from Linux-v6.6-rc6")
-Signed-off-by: Chukun Pan <amadeus@jmu.edu.cn>
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Fixes: c416f1c0bcab ("bootmenu: add removable media entries")
+Fixes: 87d791423ac6 ("eficonfig: menu-driven addition of UEFI boot option")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
-Hi,
+ cmd/eficonfig.c              | 6 ++++--
+ lib/efi_loader/efi_bootmgr.c | 3 ++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-this is a port of the corresponding Linux patch, that fixes Ethernet
-on that board. The patch is in Linux' sunxi/fixes-for-6.7 queue,
-awaiting a merge anytime soon.
-For me this indeed fixes Ethernet operation in U-Boot on that board.
-
-Cheers,
-Andre
-
- arch/arm/dts/sun50i-h616-orangepi-zero.dtsi | 3 ---
- arch/arm/dts/sun50i-h616-orangepi-zero2.dts | 3 +++
- arch/arm/dts/sun50i-h618-orangepi-zero3.dts | 2 ++
- 3 files changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi b/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
-index 15290e6892f..fc7315b9440 100644
---- a/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
-+++ b/arch/arm/dts/sun50i-h616-orangepi-zero.dtsi
-@@ -68,10 +68,7 @@
- &emac0 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&ext_rgmii_pins>;
--	phy-mode = "rgmii";
- 	phy-handle = <&ext_rgmii_phy>;
--	allwinner,rx-delay-ps = <3100>;
--	allwinner,tx-delay-ps = <700>;
- 	status = "okay";
- };
+diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+index 34a59cb15d..c066b28b6b 100644
+--- a/cmd/eficonfig.c
++++ b/cmd/eficonfig.c
+@@ -626,8 +626,10 @@ static efi_status_t eficonfig_select_volume(struct eficonfig_select_file_info *f
+ 	efi_handle_t *volume_handles = NULL;
+ 	struct efi_simple_file_system_protocol *v;
  
-diff --git a/arch/arm/dts/sun50i-h616-orangepi-zero2.dts b/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
-index d83852e72f0..b5d713926a3 100644
---- a/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
-+++ b/arch/arm/dts/sun50i-h616-orangepi-zero2.dts
-@@ -13,6 +13,9 @@
- };
+-	ret = efi_locate_handle_buffer_int(BY_PROTOCOL, &efi_simple_file_system_protocol_guid,
+-					   NULL, &count, (efi_handle_t **)&volume_handles);
++	/* Find all EFI system partitions */
++	ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
++					   &efi_system_partition_guid,
++					   NULL, &count, &volume_handles);
+ 	if (ret != EFI_SUCCESS) {
+ 		eficonfig_print_msg("No block device found!");
+ 		return ret;
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 48153bd5ff..9e84391186 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1047,8 +1047,9 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+ 	efi_handle_t *volume_handles = NULL;
+ 	struct eficonfig_media_boot_option *opt = NULL;
  
- &emac0 {
-+	allwinner,rx-delay-ps = <3100>;
-+	allwinner,tx-delay-ps = <700>;
-+	phy-mode = "rgmii";
- 	phy-supply = <&reg_dcdce>;
- };
- 
-diff --git a/arch/arm/dts/sun50i-h618-orangepi-zero3.dts b/arch/arm/dts/sun50i-h618-orangepi-zero3.dts
-index 00fe28caac9..b3b1b869212 100644
---- a/arch/arm/dts/sun50i-h618-orangepi-zero3.dts
-+++ b/arch/arm/dts/sun50i-h618-orangepi-zero3.dts
-@@ -13,6 +13,8 @@
- };
- 
- &emac0 {
-+	allwinner,tx-delay-ps = <700>;
-+	phy-mode = "rgmii-rxid";
- 	phy-supply = <&reg_dldo1>;
- };
- 
++	/* Find all EFI system partitions */
+ 	ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
+-					   &efi_simple_file_system_protocol_guid,
++					   &efi_system_partition_guid,
+ 					   NULL, &count,
+ 					   (efi_handle_t **)&volume_handles);
+ 	if (ret != EFI_SUCCESS)
 -- 
-2.35.8
+2.40.1
 
