@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694C6C4167B
-	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D6B7C4167B
+	for <u-boot@archiver.kernel.org>; Tue,  5 Dec 2023 00:53:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7B4287763;
-	Tue,  5 Dec 2023 01:53:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 447468789B;
+	Tue,  5 Dec 2023 01:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c6Y3939p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHb95bFI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41064876AE; Tue,  5 Dec 2023 01:53:01 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 43C3987885; Tue,  5 Dec 2023 01:53:01 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1872387899
+ by phobos.denx.de (Postfix) with ESMTPS id 1629B87897
  for <u-boot@lists.denx.de>; Tue,  5 Dec 2023 01:52:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d8a772157fso15191767b3.3
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5d400779f16so30284467b3.0
  for <u-boot@lists.denx.de>; Mon, 04 Dec 2023 16:52:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701737576; x=1702342376; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IH4q5EtfiaRRiCj7uaqq03G+Tp9MauySL94U/Xq30Yw=;
- b=c6Y3939ptGiSqazWaHaPOyj7+wShOIslaxYggXxwLolJ31yasy34Fn8Pr3zHUdCdmT
- Jt/8hvWJfxSdZvxpP779pOPxRMdeqpYK87qHCt7KJeIYFG0g0rFEmXF6u/JN0xvyeo74
- 2BXhsFNhHQCs2SXKCh9axHNF4ldXOh4voDcEA=
+ bh=UqOM0tLRdatnZ1JwXKXX1JNZ213nU7YHgvwN7kUNZFk=;
+ b=EHb95bFIYCuPJ+Q/j2pfQxSAxuKRAprDgxb5btYquA+bVdF4FBeQWMLFGJV3FadTdk
+ Nw69XivD0S1SEN1yhWMhn0cTHkmUDzTZEHYaA+l9Mw3utIV3Asif27FxKxXu2fu7feMY
+ z/SD2+NblSErS9I6wCxcrG99Re7siwQYRETTY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701737576; x=1702342376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IH4q5EtfiaRRiCj7uaqq03G+Tp9MauySL94U/Xq30Yw=;
- b=WqzEE9ZkG8bClJFYlWWZcNpJNhk4nxl7oYXUdxcIyOO/DwAzf2fAwHvYeSBl/nHYRW
- lNZSWTf8S1kFE0qDsU70najIOol6zKLc2LY7CuZc8S29JynTX77ZbOhaZ+wWCcV2L+ZD
- MQDFcJ0Dlay65mUtsxsowEzjroELqeGYgJr5UaSdcPtZiUcACOUbPf8X48Zip/OGj7kI
- ycUDVNiG90osxpAJI67tqTfxIOOjegcLpGtV3m1Fjh6+ZqL+BB1yruLEoib9RT9dEB4O
- sIbUfFsZeJU7kwuWkBwOnvsBhafENbDBL+sDqXW4K08SdQypKWT3Fri24m48xc4jTHR5
- vm5Q==
-X-Gm-Message-State: AOJu0YyZa23YSuH4+4LbWrhVNMisg3rJJ2gWw9jExFZvZTke9pvJBvHC
- 7s9afri0mv99XfAX85gysx/dxlFGOdRMV6tBdmvfEQ==
-X-Google-Smtp-Source: AGHT+IHj/1wO1imWiRrDhy7NvWExFdV+kQLy95/4ODYG9L/6CkCYK5m5QXYW0kFm+YzyvdiNGurvwrX+FFgs9TNTUNk=
-X-Received: by 2002:a05:690c:338a:b0:5d7:1941:ab4 with SMTP id
- fl10-20020a05690c338a00b005d719410ab4mr3935784ywb.79.1701737575583; Mon, 04
- Dec 2023 16:52:55 -0800 (PST)
+ bh=UqOM0tLRdatnZ1JwXKXX1JNZ213nU7YHgvwN7kUNZFk=;
+ b=pzQasjZYYv8dD44Z4c0hIkzo3tuonc84rUE5G3o55XRbOzr/4jLU2ADc6aV3VitR4C
+ L2XTGsXt6xVa161B3uq7gwjsKL19h0WZKzwOKjwTGYJAzJpsQbEpnadkFtuiBAynDYF+
+ 8f1IguWNspuYk3RJfzspirT04QAmStPh7eK+wklsnf6XJ7A25fXdVgGM4RXGwB1pUpD3
+ x9gYku1wbIJSr2Y0JhJ/BZuTPTpDfbwXCrN45HPvEa1LwxB294ghuneVGcVW21JOKqkX
+ 9FfoDlcQ72/dYDBr8x7eq07ka+7Un202mMjQ94Rl1EZjYu8hngQU9HPptfMPNbsOEf2L
+ MalA==
+X-Gm-Message-State: AOJu0YwWj74BMmzVezcwjjVIfot3JlO+dZVDKdWM9wQCAUPtkH22i9eg
+ YV9ttSOyqKKuITITzrWDOIqbSUMTrd6q1SBkv25d7Q==
+X-Google-Smtp-Source: AGHT+IGpZK5JNBxxzVsnqiBg7Aqf/yGkGO7fdx3gZTJIXlQpKhnv5MWS0TnrycfBJ30tj+1/on9KQLNYOmMABlNSF4k=
+X-Received: by 2002:a0d:d8c8:0:b0:5d7:f34a:28e3 with SMTP id
+ a191-20020a0dd8c8000000b005d7f34a28e3mr540363ywe.7.1701737575577; Mon, 04 Dec
+ 2023 16:52:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
-In-Reply-To: <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+References: <CAPnjgZ2Os+zLWnwc03AZc69p3FCiUuJ4thncvMy8wrOeEh52_A@mail.gmail.com>
+ <CAC_iWj+fZMNFkDBOLNYKh1c9oRPrg5WQrFv6nVA9NmtFcAtz2g@mail.gmail.com>
+In-Reply-To: <CAC_iWj+fZMNFkDBOLNYKh1c9oRPrg5WQrFv6nVA9NmtFcAtz2g@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 4 Dec 2023 17:52:19 -0700
-Message-ID: <CAPnjgZ03MEK_PeuaXcR1VuC-_tBmQmrzq3bo-jS3Jd22+rSgww@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
+Date: Mon, 4 Dec 2023 17:52:13 -0700
+Message-ID: <CAPnjgZ0Dbcox7Gjkkt69jKgBQcBLPk4yC=Yctu=Xjmj20gF8OQ@mail.gmail.com>
+Subject: Re: EFI memory allocation
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Michal Simek <michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,112 +83,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Ilias,
 
-On Tue, 21 Nov 2023 at 23:21, Sumit Garg <sumit.garg@linaro.org> wrote:
+On Mon, 4 Dec 2023 at 05:05, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> Hi Caleb,
+> Hi Simon
 >
-> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> On Sun, 3 Dec 2023 at 19:44, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Historically, Qualcomm boards in U-Boot have all had their own
-> > board/qualcomm/xyz directory, their own CONFIG_TARGET_XYZ option, their
-> > own hardcoded sysmap-xyz.c file, and their own U-Boot specific
-> > devicetree with little/no compatibility with upstream DT.
+> > Hi Heinrich, Ilias,
 > >
-> > This series makes a few final prepatory changes, and then replaces
-> > almost all of the board specific code with generic alternatives. The end
-> > result is that all Qualcomm boards both current and future (with the
-> > exception of the db410c and db820c) can be supported by a single U-Boot
-> > binary by just providing the correct DT. New boards can be added without
-> > introducing any addition mach/ or board/ code or config options.
+> > I had a bit of a look at how memory is allocated in EFI.
 > >
-> > Due to the nature of this change, the patch ("mach-snapdragon:
-> > generalise board support") has become pretty big, I tried a few
-> > different ways to represent this in git history, but the other methods
-> > (e.g. adding a stub "generic" target and removing it again) were more
-> > confusing and made for much messier git history. The current patch is
-> > mostly atomic, but requires regenerating the config.
+> > I see that efi_memory_init() is called quite early in U-Boot. It
+> > sometimes allocates memory for a bounce buffer, placing it somewhere
+> > in memory. How do we know that that memory is free and not being used
+> > by U-Boot?
 > >
-> > The QCS404 EVB board had some code to enable the USB VBUS regulator,
-> > this is dropped in favour of a adding a new vbus-supply property to the
-> > dwc3-generic driver. This will also be used by the dragonboard845c in a
-> > future patch. This handles the common case of a board requiring some
-> > regulator be enabled for USB host mode.
+> > To answer my own question, it excludes U-Boot's malloc() region from
+> > the map, so that it cannot overwrite that.
 > >
+> > But then, what if we use lmb and start loading images into memory.
+> > Won't that conflict with EFI?
 >
-> Thanks for your work. It is a good step towards a generalized u-boot
-> on Qcom platforms. Although I would like to give it an in-depth
-> review, I have a common discussion point about DT, see below.
->
-> > A more detailed description of the changes is below.
-> >
-> > == Memory map ==
-> >
-> > The memory map was historically hardcoded into U-Boot, this meant that
-> > U-Boot had to be built for a specific variant of a device. This is
-> > changed to instead read the memory map from the DT /memory node.
-> >
-> > Additionally, most boards mapped addresss 0x0 as valid, as a result if a
-> > null pointer access happens then it will cause a bus stall (and board
-> > hang). This is fixed so that null pointer accesses will now correctly
-> > throw an exception.
-> >
-> > == DT loading ==
-> >
-> > Previously, boards used the FDT blob embedded into U-Boot (via
-> > OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
-> > bootloader, so we can instead rely on the first-stage bootloader to
-> > populate some useful FDT properties for us (notably the /memory node and
-> > KASLR seed) and fetch the DTB that it provides. Combined with the memory
-> > map changes above, this let's us entirely avoid configuring the memory
-> > map explicitly.
->
-> Since with this change, we don't need to embed FDT blob in the u-boot
-> binary, so I was thinking if we really need to import DTs from Linux
-> for different platforms and then play a catchup game?
->
-> IMO, the build command would look like following if we import
-> pre-built FDT blob from Linux:
->
-> - Build u-boot::
->
->        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
->        $ make qcom_defconfig
->        $ make
->
-> - gzip u-boot::
->
->        gzip u-boot-nodtb.bin
->
-> - Append dtb to gzipped u-boot::
->
->         cat u-boot-nodtb.bin.gz
-> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
-> u-boot-nodtb.bin.gz-dtb
+> Yes, Heinrich tried to fix parts of this with commit 06d514d77c37 and
 
-What is this?? Who or what uses a gzipped image with a single DT attached?
+OK, that looks very odd to me.
 
+> we have a 'todo' in the efi subsystem for a few years now [0]
+> Michal (+cc'ed) has also pinged me for similar issues in the past.
 >
-> This would avoid the maintenance burden to keep DT in sync with that
-> of Linux. And since DT bindings in Linux are backwards compatible, we
-> can say u-boot should work with DTB picked up from any Linux kernel
-> stable release.
+> >
+> > I also see that efi_allocate_pages() is called to allocate memory in
+> > the EFI code. But this just grabs memory from 'anywhere'...it doesn't
+> > respect the U-Boot malloc region.
+> >
+> > It seems to me that most of the memory allocation in EFI should be
+> > done using malloc(). Of course the boot services need to
+> > efi_allocate_pages(), etc., but I am not sure that the internal tables
+> > should be skipping malloc()?
+> >
+> > What do you think?
+>
+> I think that LMB, EFI and the whole memory reservations is a bit of a
+> mess. Tom and I discussed this a bit in the past but I'll start
+> working on it.
+> It needs fixing, but without looking at the code first, I can't
+> provide any useful feedback
+>
+> [0] https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/2
 
-That is not the current situation, unfortunately.
-
-U-Boot is moving to using Binman to package the firmware. There needs
-to be a description of the firmware image for each U-Boot boot. To my
-way of thinking, rpi is a degenerate form, not something to be copied,
-due to the closed-source nature of the firmware and its inability to
-be changed. We do have (in the works) a way to pass a DT using a
-standard firmware handoff. Perhaps that can be adopted by these
-closed-source projects?
-
-BTW I am very pleased to see this series and I hope that Qualcomm (via
-Linaro) can continue to improve its U-Boot support.
-
-[..]
+OK I mad a comment there. We should figure out a design before going ahead.
 
 Regards,
 Simon
