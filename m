@@ -4,95 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04487C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 09:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D463C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 09:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 596488756E;
-	Wed,  6 Dec 2023 10:04:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BABF086314;
+	Wed,  6 Dec 2023 10:23:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFTAbp7w";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Fy/okkhr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3444B8756E; Wed,  6 Dec 2023 10:04:28 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 20EE586EEE; Wed,  6 Dec 2023 10:23:25 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C58A86EEE
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 10:04:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DF37807D9
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 10:23:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3334254cfa3so262314f8f.1
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 01:04:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701853465; x=1702458265; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P+1/0oUjz5rluJhR9RmqMC8xOdhAin3fsn5Iyog2y8c=;
- b=uFTAbp7wAZdD4N/m7V9ee5UOtKPn7LPYt+Bl5JDqXkJGak7Uxt1j79HTelGVBqv54G
- XmCOhHrEDl1GCQd6T9qTLzxXV2qFKfn86vixDH7N6+KKaZAuII5IqZyWJY7oZjgGHjG7
- wbwn+O/XT1uV+eSG45TS3bWwDAmjrJyB5ERXE7ux2oV8kJ6PiGq65d7KABvmmXOyvbDG
- mARNR5Jj9i5qVW3qqGVW+A5fGa14qg8p30qshiLrproXyUVHsMFuR2wF+wDfKWf072QF
- 3v4P0A4rUX+ta1OUTxomwDqsZXBZxsSze9rBzOXMaQwi9xIn/z7ieHngvJf2ZT2amIk0
- S46w==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4EF683F65A
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 09:23:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1701854599;
+ bh=VMnL00gUe+vQisfDC7XCxAeEGL3fLcp1DUMYkyc8IQo=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Fy/okkhrOsamWWMSTv3Xjub3Spv46hRNTpBuStoqU711AapcDwtI0kECgrAxk5ajP
+ XTrEIvtTbzO1zyFqD7JDMvFEX0tAhJSd4QZtem/yGpnvQBgH+OKu9UjaebwPo2EDcE
+ R8l+keTDyGO5XD5lUZtqw4cfLX5jih3G9HG2EJaGphc7UUt6eLj6S7C/C0gGns8h/k
+ UyEAfQ9Fwy+aGsd29S+RJ/wUctjylVVkNcNCQ9knsHrlLH4O9kTSjXnR8rUGHh/yZp
+ Hhq0KJQ+JZlKrVCvWUaU/Vl1xkTUiNl1YBYZlaild5oxT5LRVK7oOkV7nSQlyFwkVo
+ c98/N/EMsqghQ==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-40c032abab6so33842405e9.3
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 01:23:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701853465; x=1702458265;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P+1/0oUjz5rluJhR9RmqMC8xOdhAin3fsn5Iyog2y8c=;
- b=J4cc75kOxFAiF0vVoVFSHFuJvg0+jcZyep6QxA5MMSwJv0BpBPR/K8SCFH1FQCG1FY
- VKHsJw3ZAh7HuRvJJrbc811epMfP0Kp62+d+4wvz0jNN3vl0avgHbPjCjcRENhCDXte8
- gn2poNEGiKPdsoVL0ta/u68tpi078hk2uVFZKtlcCZ7SfKHbFy6SY9UJnS+uIUmkdWu9
- qb2SjsPtEWCHpArlgQzUNIMmd3pn8vGbRVJv931cVOGL6X826dHo6INehhNPMh+UA0Mu
- e/BULnGHt9/Uj3N00JSSmDJef7m/yAD0vketatlw6Xv2tVEyKHV/ZHdJQF/Uk+SHiIgb
- 4BDA==
-X-Gm-Message-State: AOJu0YwGtZ52jIZ9P8akXaMUQtw8IgGD+rkwzBHbDeZJHLQTYYV8AboB
- TUZP8BMLvaQEZ6eIj8/JwQkhjQ==
-X-Google-Smtp-Source: AGHT+IH6UZ6fmBx3WT/fEHQpSNnffMtr8r3z85mCMC6cjF8XVc2xQiy24DScww8nDJycO89IPZ4CFQ==
-X-Received: by 2002:adf:f250:0:b0:333:2fd7:9602 with SMTP id
- b16-20020adff250000000b003332fd79602mr279648wrp.61.1701853465615; 
- Wed, 06 Dec 2023 01:04:25 -0800 (PST)
-Received: from [127.0.1.1] ([2a01:e0a:982:cbb0:f855:6075:9365:8b70])
- by smtp.gmail.com with ESMTPSA id
- f9-20020adff8c9000000b003333d2c6420sm10682031wrq.74.2023.12.06.01.04.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 06 Dec 2023 01:04:25 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 06 Dec 2023 10:04:21 +0100
-Subject: [PATCH] configs: meson: enable missing DM_USB_GADGET
+ d=1e100.net; s=20230601; t=1701854599; x=1702459399;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VMnL00gUe+vQisfDC7XCxAeEGL3fLcp1DUMYkyc8IQo=;
+ b=wIKJOm55TgAOQtN29zZcRl6hUsBb/2kZxnug4g0jAhZTpyT9o1Beixy1Fa5wCsgHAv
+ DNUXbu8TpRA8qGFoJzBeuJpANHFUeZYgKhwqUQxECBlZdNQG520FMmdEn2f7GM2n0SV8
+ 32XxAFJrIiGhR+7CQI+KSp6RkJNbOdb+f1KXgUr+AqAHJyP/Jf/kBzyZaUXEuq9L/kzY
+ YrtRiGeyyjbi9Z/XMFFTo4EQNJnq2IqbVtoQchrffGQVcUJeLpxElGgwx4cGQJkVBZIj
+ 1X0asmggG5qDaKVSDlqRX7UqK90++pKBqmqNrZ+qgQJzto7TTGp1Kic7MnAz5TWCeoQH
+ hq5g==
+X-Gm-Message-State: AOJu0YwrTuxpx0xQsDpNkJAXYWhqrjF4+dQUKn4yOcfpTNRj95tKo9xN
+ WBUCEn6sVjM7Krw/5JGgfco2hrk4EkjVODvyj4fnI6eHkFu/9WE5WDEiYmD+rszT8o0MYFEHf6z
+ xgvjcAdr7RZfYEDpd/YOSezakVsBdKl4=
+X-Received: by 2002:a05:600c:474a:b0:40c:837:480f with SMTP id
+ w10-20020a05600c474a00b0040c0837480fmr301091wmo.24.1701854598855; 
+ Wed, 06 Dec 2023 01:23:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHsXnghlXBOZpuB5hj2wpdLkGQj0RHPrHrVX9YGm852kQhYI3HlKqyWAXs9GFveMKZbpDgt2Q==
+X-Received: by 2002:a05:600c:474a:b0:40c:837:480f with SMTP id
+ w10-20020a05600c474a00b0040c0837480fmr301086wmo.24.1701854598383; 
+ Wed, 06 Dec 2023 01:23:18 -0800 (PST)
+Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ o18-20020a05600c4fd200b0040b45282f88sm24748753wmq.36.2023.12.06.01.23.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 06 Dec 2023 01:23:17 -0800 (PST)
+Message-ID: <35373146-3e24-461f-88b7-58eb01be1c45@canonical.com>
+Date: Wed, 6 Dec 2023 10:23:17 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] efi_loader: boot options should relate to the ESP
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231205023751.61679-1-heinrich.schuchardt@canonical.com>
+ <CADQ0-X9Euv7UwVS49N=DvQxN+O_+6fq_jJw=Jiqauau6TyLpUg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CADQ0-X9Euv7UwVS49N=DvQxN+O_+6fq_jJw=Jiqauau6TyLpUg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231206-u-boot-m2s-fix-usb-gadget-v1-1-1c4c66cd10f3@linaro.org>
-X-B4-Tracking: v=1; b=H4sIABQ5cGUC/x2MQQqAMAzAviI9W9g6EPEr4mFqnT3oZFURhn93e
- AwkyaCchBW6KkPiW1TiXsDWFUyr3wOjzIWBDDlLpsELxxhP3EhxkQcvHTH4OfCJk3emZWsdUQu
- lPxIX43/3w/t+SBi3VGsAAAA=
-To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2987;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=ORIDsnMm4F8KEoPrXWijjF8CkW7NnOxxAsMmhYyoUOg=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBlcDkWvt2bDJou8o/2uAP9JbfYjo5d3c0S+5XkO
- LvNxOG9RV6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZXA5FgAKCRB33NvayMhJ
- 0XTxD/0WoDTtAoX4kn7qcPmi7W9kx7jG6rAeC95VtfZASss1si1XEIUegPmzFbteHl5RznWbbiD
- 62pRHYJnf+rIcNVPP0F9M5KiVWENJgUazjkjhVuqs4soAIa254IKf+In5htnrscHywkGGB/bLLj
- q3PCCLI97N6HYfqvJBhG16kmJVE21/zg/FOFB4AWAA4lqxs65aCKN/JygCZn1o0Eph0O8yH3mqd
- yei2/NVxGkmDWvkq9QQ/O7CBzWmFd6/2CLU154LxMIOJqfqM1OnR6MaCdhFAtExZsOv+1hYN2HF
- ahAuZClCuQ9znLX7++wohTaNiv19pfH/rWdFGhGjs8yEOyd8Fzy5LrrQavIfhFxJgVpmvp5Hbn8
- eveoHcNI5VD5oIyg+OsKs73ockza/XiKY+q3gGR0OHZi4ZFNzUUq8iw80NKeFYtGQ1dcdoEdsbq
- bXZvdtINFZJTDu6hdcUv5FZznX1CK9ChYUGGE285WtsxbmMYeaYoMhFVwqENLtizLURrfr5mRLh
- Rzr3oHl6wZEepQIwIwqLSyIlt3ROtySIAPIbaMWzDTPF33aMfuYQgLLrgRDFwvLTriyeXVRsFDT
- WzuDtGRSUCzkoZlEzslCxwyoajbO30u+tcGqMviDPLute7MdLZ6FsGix0eruh24DYYYdEOvKPSs
- iFFZiTEpdF3W1VA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,90 +104,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit b96640cbfb ("ARM: meson: g12a: switch dwc2 otg to DM")
-and commit e327e2affd ("ARM: meson: switch AXG & GX dwc2 otg to DM")
-Amlogic boards now requires DM_USB_GADGET to have USB Gadget to work.
+On 05.12.23 07:23, Masahisa Kojima wrote:
+> Hi Heinrich,
+> 
+> On Tue, 5 Dec 2023 at 11:38, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> * Only generate removable media entries for EFI system partitions.
+>> * Only offer EFI system partitions for boot options in the eficonfig
+>>    command.
+>>
+>> Fixes: c416f1c0bcab ("bootmenu: add removable media entries")
+>> Fixes: 87d791423ac6 ("eficonfig: menu-driven addition of UEFI boot option")
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   cmd/eficonfig.c              | 6 ++++--
+>>   lib/efi_loader/efi_bootmgr.c | 3 ++-
+>>   2 files changed, 6 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+>> index 34a59cb15d..c066b28b6b 100644
+>> --- a/cmd/eficonfig.c
+>> +++ b/cmd/eficonfig.c
+>> @@ -626,8 +626,10 @@ static efi_status_t eficonfig_select_volume(struct eficonfig_select_file_info *f
+>>          efi_handle_t *volume_handles = NULL;
+>>          struct efi_simple_file_system_protocol *v;
+>>
+>> -       ret = efi_locate_handle_buffer_int(BY_PROTOCOL, &efi_simple_file_system_protocol_guid,
+>> -                                          NULL, &count, (efi_handle_t **)&volume_handles);
+>> +       /* Find all EFI system partitions */
+>> +       ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
+>> +                                          &efi_system_partition_guid,
+>> +                                          NULL, &count, &volume_handles);
+> 
+> UEFI specification v2.10 section '3.5 Boot Mechanisms' says
+> "EFI can boot from a device using the EFI_SIMPLE_FILE_SYSTEM_PROTOCOL or the
+> EFI_LOAD_FILE_PROTOCOL."
+> 
+> So in my understanding of the UEFI spec, I think
+> efi_simple_file_system_protocol_guid
+> is correct here.
+> 
+>>          if (ret != EFI_SUCCESS) {
+>>                  eficonfig_print_msg("No block device found!");
+>>                  return ret;
+>> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+>> index 48153bd5ff..9e84391186 100644
+>> --- a/lib/efi_loader/efi_bootmgr.c
+>> +++ b/lib/efi_loader/efi_bootmgr.c
+>> @@ -1047,8 +1047,9 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+>>          efi_handle_t *volume_handles = NULL;
+>>          struct eficonfig_media_boot_option *opt = NULL;
+>>
+>> +       /* Find all EFI system partitions */
+>>          ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
+>> -                                          &efi_simple_file_system_protocol_guid,
+>> +                                          &efi_system_partition_guid,
+> 
+> In EDK II reference implementation[0], it enumerates all
+> block_io_protocol devices
+> and eliminates logical partitions.
+> Should we do the same? If yes, I can prepare the patch on this.
 
-Add it to the boards configs as returned by:
-$ grep -L DM_USB_GADGET $(grep -l CONFIG_USB_GADGET $(grep -l MESON configs/*))
+This is what the boot options look like on an EDK II system:
 
-Fixes: b96640cbfb ("ARM: meson: g12a: switch dwc2 otg to DM")
-Fixes: e327e2affd ("ARM: meson: switch AXG & GX dwc2 otg to DM")
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/bananapi-m2-pro_defconfig | 1 +
- configs/bananapi-m2s_defconfig    | 1 +
- configs/libretech-cc_v2_defconfig | 1 +
- configs/odroid-go-ultra_defconfig | 1 +
- configs/radxa-zero2_defconfig     | 1 +
- 5 files changed, 5 insertions(+)
+$ efibootmgr -v
+BootCurrent: 000D
+Timeout: 3 seconds
+BootOrder: 
+000D,000B,000C,0003,0004,0005,0006,0007,0008,0009,000A,0000,0001,0002
+Boot0000* UiApp 
+FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(462caa21-7614-4503-836e-8ab6f4662331)
+Boot0001* helloworld 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,65535,0)/HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c9f,0x2000,0x200000)/File(\helloworld.efi)h.e.l.l.o. 
+.w.o.r.l.d...
+Boot0002* UEFI Crucial_CT128M550SSD1 14270C7CFEFE 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,65535,0)N.....YM....R,Y.
+Boot0003* UEFI eMMC Device 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x0)N.....YM....R,Y.
+Boot0004* UEFI eMMC Device 2 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x1)N.....YM....R,Y.
+Boot0005* UEFI eMMC Device 3 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x2)N.....YM....R,Y.
+Boot0006* UEFI PXEv4 (MAC:000000000001) 
+MAC(000000000001,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+Boot0007* UEFI PXEv4 (MAC:000000000002) 
+MAC(000000000002,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+Boot0008* UEFI PXEv4 (MAC:000000000003) 
+MAC(000000000003,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+Boot0009* UEFI PXEv4 (MAC:000000000004) 
+MAC(000000000004,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+Boot000A* UEFI Shell 
+FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(7c04a583-9e3e-4f1c-ad65-e05268d0b4d1)
+Boot000B* UEFI HL-DT-ST DVDRAM GTC0N 
+VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f40000000000)/Sata(1,65535,0)N.....YM....R,Y.
+Boot000C* ubuntu 
+HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\ubuntu\grubaa64.efi)
+Boot000D* grub 
+HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\grub\shimaa64.efi)
+Boot1001* helloworld 
+HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c8f,0x2000,0x200000)/File(helloworld.efi)
 
-diff --git a/configs/bananapi-m2-pro_defconfig b/configs/bananapi-m2-pro_defconfig
-index 2a3958b0fd..755bccb4a7 100644
---- a/configs/bananapi-m2-pro_defconfig
-+++ b/configs/bananapi-m2-pro_defconfig
-@@ -56,6 +56,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/bananapi-m2s_defconfig b/configs/bananapi-m2s_defconfig
-index 405ce3a93a..af8daced62 100644
---- a/configs/bananapi-m2s_defconfig
-+++ b/configs/bananapi-m2s_defconfig
-@@ -61,6 +61,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/libretech-cc_v2_defconfig b/configs/libretech-cc_v2_defconfig
-index ba74b241ab..b1c267a791 100644
---- a/configs/libretech-cc_v2_defconfig
-+++ b/configs/libretech-cc_v2_defconfig
-@@ -66,6 +66,7 @@ CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_MESON_SPIFC=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
-diff --git a/configs/odroid-go-ultra_defconfig b/configs/odroid-go-ultra_defconfig
-index bc0bf9b896..49d628b76a 100644
---- a/configs/odroid-go-ultra_defconfig
-+++ b/configs/odroid-go-ultra_defconfig
-@@ -63,6 +63,7 @@ CONFIG_MESON_SERIAL=y
- CONFIG_SYSINFO=y
- CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-diff --git a/configs/radxa-zero2_defconfig b/configs/radxa-zero2_defconfig
-index e9415762ff..b795681b3f 100644
---- a/configs/radxa-zero2_defconfig
-+++ b/configs/radxa-zero2_defconfig
-@@ -52,6 +52,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
- CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
+As you described autogenerated boot options are on block device level 
+irrespective of the existence of an ESP.
 
----
-base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
-change-id: 20231206-u-boot-m2s-fix-usb-gadget-ca308e113228
+EDK II does not to care if /EFI/BOOT/BOOT<ARCH>.EFI is on a partition 
+with the ESP partition type.
 
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
+We should try to mimic the EDK II behavior.
+
+Best regards
+
+Heinrich
+
+> 
+> [0] https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2220
+> 
+> Regards,
+> Masahisa Kojima
+> 
+>>                                             NULL, &count,
+>>                                             (efi_handle_t **)&volume_handles);
+>>          if (ret != EFI_SUCCESS)
+>> --
+>> 2.40.1
+>>
 
