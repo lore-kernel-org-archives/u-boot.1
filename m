@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9644C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 12:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F4AC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 12:39:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5382C8788D;
-	Wed,  6 Dec 2023 13:38:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B39E6877C5;
+	Wed,  6 Dec 2023 13:38:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x8M0LVSq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vXmMAdS3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52544877C5; Wed,  6 Dec 2023 13:38:54 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 2FF0C878A2; Wed,  6 Dec 2023 13:38:58 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 124EC87887
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 13:38:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF6987775
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 13:38:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B6CceLa100008;
- Wed, 6 Dec 2023 06:38:40 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B6CclhA025397;
+ Wed, 6 Dec 2023 06:38:47 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701866320;
- bh=W6WKtsrbLqRKwTEFAzn4Y+p+qJjMCLupiWHIGafbQSY=;
+ s=ti-com-17Q1; t=1701866327;
+ bh=E2zxblvTp38P53NpQsjzB+2OvdwDwPMJne15VJl1Dto=;
  h=From:To:Subject:Date:In-Reply-To:References;
- b=x8M0LVSq62+KIs1KeCjwS4HEyVedOSbPs5fdSYhtDofbVZIY8UmbY25QHRj5jlf/7
- PUURRmufN6SzNr6J/9uU55mK2RH6nkooWHNYtFQtGJUnY6Kk7KMIgc9xZSoOBptHMU
- I2CUfKh4dPNro3x+d1zfeuf8P1Rqcl+i6im7RTKI=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B6Cce5I028557
+ b=vXmMAdS3hgNOPJk+McdapvNaNZndl3zrKyUIqP/4mQPPYyQe5qeVs2M2UW0trmjuy
+ So9qmMk4Q42HDuo8U6qvsQ8hjxz7+8aIENnyrlboo7wllkcwPuO44pn6qwBP7I3lV8
+ 2PQUq9IKUjWTCFa+tBeG7Ks6pM7PROxw+6YZQm2E=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B6CclfI041675
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Dec 2023 06:38:40 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 6 Dec 2023 06:38:47 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Dec 2023 06:38:40 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 06:38:47 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Dec 2023 06:38:40 -0600
+ Frontend Transport; Wed, 6 Dec 2023 06:38:47 -0600
 Received: from TI.dhcp.ti.com (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B6Cbrqh096939;
- Wed, 6 Dec 2023 06:38:34 -0600
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B6Cbrqi096939;
+ Wed, 6 Dec 2023 06:38:40 -0600
 From: Apurva Nandan <a-nandan@ti.com>
 To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
@@ -64,9 +64,9 @@ To: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
  <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v6 06/17] arm: mach-k3: j784s4: Add clk and power support
-Date: Wed, 6 Dec 2023 18:07:42 +0530
-Message-ID: <20231206123753.1486031-7-a-nandan@ti.com>
+Subject: [PATCH v6 07/17] drivers: dma: Add support for J784S4 SoC
+Date: Wed, 6 Dec 2023 18:07:43 +0530
+Message-ID: <20231206123753.1486031-8-a-nandan@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231206123753.1486031-1-a-nandan@ti.com>
 References: <20231206123753.1486031-1-a-nandan@ti.com>
@@ -90,633 +90,284 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clk and device data which can be used by respective drivers
-to configure clocks and PSC.
+Add support for DMA in J784S4 SoC.
 
+Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Apurva Nandan <a-nandan@ti.com>
 ---
- arch/arm/mach-k3/r5/j784s4/Makefile    |   7 +
- arch/arm/mach-k3/r5/j784s4/clk-data.c  | 428 +++++++++++++++++++++++++
- arch/arm/mach-k3/r5/j784s4/dev-data.c  |  98 ++++++
- drivers/clk/ti/clk-k3.c                |   6 +
- drivers/power/domain/ti-power-domain.c |   6 +
- include/k3-clk.h                       |   1 +
- include/k3-dev.h                       |   1 +
- 7 files changed, 547 insertions(+)
- create mode 100644 arch/arm/mach-k3/r5/j784s4/Makefile
- create mode 100644 arch/arm/mach-k3/r5/j784s4/clk-data.c
- create mode 100644 arch/arm/mach-k3/r5/j784s4/dev-data.c
+ drivers/dma/ti/Makefile               |   1 +
+ drivers/dma/ti/k3-psil-j784s4.c       | 166 ++++++++++++++++++++++++++
+ drivers/dma/ti/k3-psil-priv.h         |   1 +
+ drivers/dma/ti/k3-psil.c              |   2 +
+ drivers/firmware/ti_sci_static_data.h |  34 ++++++
+ drivers/ram/Kconfig                   |   2 +-
+ 6 files changed, 205 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
 
-diff --git a/arch/arm/mach-k3/r5/j784s4/Makefile b/arch/arm/mach-k3/r5/j784s4/Makefile
+diff --git a/drivers/dma/ti/Makefile b/drivers/dma/ti/Makefile
+index f4e0271efb..9e0b13e8c0 100644
+--- a/drivers/dma/ti/Makefile
++++ b/drivers/dma/ti/Makefile
+@@ -9,3 +9,4 @@ k3-psil-data-$(CONFIG_SOC_K3_J721S2) += k3-psil-j721s2.o
+ k3-psil-data-$(CONFIG_SOC_K3_AM642) += k3-psil-am64.o
+ k3-psil-data-$(CONFIG_SOC_K3_AM625) += k3-psil-am62.o
+ k3-psil-data-$(CONFIG_SOC_K3_AM62A7) += k3-psil-am62a.o
++k3-psil-data-$(CONFIG_SOC_K3_J784S4) += k3-psil-j784s4.o
+diff --git a/drivers/dma/ti/k3-psil-j784s4.c b/drivers/dma/ti/k3-psil-j784s4.c
 new file mode 100644
-index 0000000000..23e1ce51ac
+index 0000000000..7f06a1f307
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/j784s4/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+obj-y += clk-data.o
-+obj-y += dev-data.o
-diff --git a/arch/arm/mach-k3/r5/j784s4/clk-data.c b/arch/arm/mach-k3/r5/j784s4/clk-data.c
-new file mode 100644
-index 0000000000..d3fac38dd6
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/j784s4/clk-data.c
-@@ -0,0 +1,428 @@
++++ b/drivers/dma/ti/k3-psil-j784s4.c
+@@ -0,0 +1,166 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * J784S4 specific clock platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
-+ *
-+ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
++ *  Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com
 + */
++#include <linux/kernel.h>
 +
-+#include <linux/clk-provider.h>
-+#include "k3-clk.h"
++#include "k3-psil-priv.h"
 +
-+static const char * const gluelogic_hfosc0_clkout_parents[] = {
-+	"osc_19_2_mhz",
-+	"osc_20_mhz",
-+	"osc_24_mhz",
-+	"osc_25_mhz",
-+	"osc_26_mhz",
-+	"osc_27_mhz",
++#define PSIL_PDMA_XY_TR(x)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_PDMA_XY,	\
++		},					\
++	}
++
++#define PSIL_PDMA_XY_PKT(x)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_PDMA_XY,	\
++			.pkt_mode = 1,			\
++		},					\
++	}
++
++#define PSIL_PDMA_MCASP(x)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_PDMA_XY,	\
++			.pdma_acc32 = 1,		\
++			.pdma_burst = 1,		\
++		},					\
++	}
++
++#define PSIL_ETHERNET(x)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_NATIVE,	\
++			.pkt_mode = 1,			\
++			.needs_epib = 1,		\
++			.psd_size = 16,			\
++		},					\
++	}
++
++#define PSIL_SA2UL(x, tx)				\
++	{						\
++		.thread_id = x,				\
++		.ep_config = {				\
++			.ep_type = PSIL_EP_NATIVE,	\
++			.pkt_mode = 1,			\
++			.needs_epib = 1,		\
++			.psd_size = 64,			\
++			.notdpkt = tx,			\
++		},					\
++	}
++
++/* PSI-L source thread IDs, used for RX (DMA_DEV_TO_MEM) */
++static struct psil_ep j784s4_src_ep_map[] = {
++	/* PDMA_MCASP - McASP0-4 */
++	PSIL_PDMA_MCASP(0x4400),
++	PSIL_PDMA_MCASP(0x4401),
++	PSIL_PDMA_MCASP(0x4402),
++	PSIL_PDMA_MCASP(0x4403),
++	PSIL_PDMA_MCASP(0x4404),
++	/* PDMA_SPI_G0 - SPI0-3 */
++	PSIL_PDMA_XY_PKT(0x4600),
++	PSIL_PDMA_XY_PKT(0x4601),
++	PSIL_PDMA_XY_PKT(0x4602),
++	PSIL_PDMA_XY_PKT(0x4603),
++	PSIL_PDMA_XY_PKT(0x4604),
++	PSIL_PDMA_XY_PKT(0x4605),
++	PSIL_PDMA_XY_PKT(0x4606),
++	PSIL_PDMA_XY_PKT(0x4607),
++	PSIL_PDMA_XY_PKT(0x4608),
++	PSIL_PDMA_XY_PKT(0x4609),
++	PSIL_PDMA_XY_PKT(0x460a),
++	PSIL_PDMA_XY_PKT(0x460b),
++	PSIL_PDMA_XY_PKT(0x460c),
++	PSIL_PDMA_XY_PKT(0x460d),
++	PSIL_PDMA_XY_PKT(0x460e),
++	PSIL_PDMA_XY_PKT(0x460f),
++	/* PDMA_SPI_G1 - SPI4-7 */
++	PSIL_PDMA_XY_PKT(0x4610),
++	PSIL_PDMA_XY_PKT(0x4611),
++	PSIL_PDMA_XY_PKT(0x4612),
++	PSIL_PDMA_XY_PKT(0x4613),
++	PSIL_PDMA_XY_PKT(0x4614),
++	PSIL_PDMA_XY_PKT(0x4615),
++	PSIL_PDMA_XY_PKT(0x4616),
++	PSIL_PDMA_XY_PKT(0x4617),
++	PSIL_PDMA_XY_PKT(0x4618),
++	PSIL_PDMA_XY_PKT(0x4619),
++	PSIL_PDMA_XY_PKT(0x461a),
++	PSIL_PDMA_XY_PKT(0x461b),
++	PSIL_PDMA_XY_PKT(0x461c),
++	PSIL_PDMA_XY_PKT(0x461d),
++	PSIL_PDMA_XY_PKT(0x461e),
++	PSIL_PDMA_XY_PKT(0x461f),
++	/* PDMA_USART_G0 - UART0-1 */
++	PSIL_PDMA_XY_PKT(0x4700),
++	PSIL_PDMA_XY_PKT(0x4701),
++	/* PDMA_USART_G1 - UART2-3 */
++	PSIL_PDMA_XY_PKT(0x4702),
++	PSIL_PDMA_XY_PKT(0x4703),
++	/* PDMA_USART_G2 - UART4-9 */
++	PSIL_PDMA_XY_PKT(0x4704),
++	PSIL_PDMA_XY_PKT(0x4705),
++	PSIL_PDMA_XY_PKT(0x4706),
++	PSIL_PDMA_XY_PKT(0x4707),
++	PSIL_PDMA_XY_PKT(0x4708),
++	PSIL_PDMA_XY_PKT(0x4709),
++	/* CPSW0 */
++	PSIL_ETHERNET(0x7000),
++	/* MCU_PDMA0 (MCU_PDMA_MISC_G0) - SPI0 */
++	PSIL_PDMA_XY_PKT(0x7100),
++	PSIL_PDMA_XY_PKT(0x7101),
++	PSIL_PDMA_XY_PKT(0x7102),
++	PSIL_PDMA_XY_PKT(0x7103),
++	/* MCU_PDMA1 (MCU_PDMA_MISC_G1) - SPI1-2 */
++	PSIL_PDMA_XY_PKT(0x7200),
++	PSIL_PDMA_XY_PKT(0x7201),
++	PSIL_PDMA_XY_PKT(0x7202),
++	PSIL_PDMA_XY_PKT(0x7203),
++	PSIL_PDMA_XY_PKT(0x7204),
++	PSIL_PDMA_XY_PKT(0x7205),
++	PSIL_PDMA_XY_PKT(0x7206),
++	PSIL_PDMA_XY_PKT(0x7207),
++	/* MCU_PDMA2 (MCU_PDMA_MISC_G2) - UART0 */
++	PSIL_PDMA_XY_PKT(0x7300),
++	/* MCU_PDMA_ADC - ADC0-1 */
++	PSIL_PDMA_XY_TR(0x7400),
++	PSIL_PDMA_XY_TR(0x7401),
++	PSIL_PDMA_XY_TR(0x7402),
++	PSIL_PDMA_XY_TR(0x7403),
++	/* SA2UL */
++	PSIL_SA2UL(0x7500, 0),
++	PSIL_SA2UL(0x7501, 0),
++	PSIL_SA2UL(0x7502, 0),
++	PSIL_SA2UL(0x7503, 0),
 +};
 +
-+static const char * const mcu_ospi0_iclk_sel_out0_parents[] = {
-+	"board_0_mcu_ospi0_dqs_out",
-+	"fss_mcu_0_ospi_0_ospi_oclk_clk",
++/* PSI-L destination thread IDs, used for TX (DMA_MEM_TO_DEV) */
++static struct psil_ep j784s4_dst_ep_map[] = {
++	/* CPSW0 */
++	PSIL_ETHERNET(0xf000),
++	PSIL_ETHERNET(0xf001),
++	PSIL_ETHERNET(0xf002),
++	PSIL_ETHERNET(0xf003),
++	PSIL_ETHERNET(0xf004),
++	PSIL_ETHERNET(0xf005),
++	PSIL_ETHERNET(0xf006),
++	PSIL_ETHERNET(0xf007),
++	/* SA2UL */
++	PSIL_SA2UL(0xf500, 1),
++	PSIL_SA2UL(0xf501, 1),
 +};
 +
-+static const char * const mcu_ospi1_iclk_sel_out0_parents[] = {
-+	"board_0_mcu_ospi1_dqs_out",
-+	"fss_mcu_0_ospi_1_ospi_oclk_clk",
++struct psil_ep_map j784s4_ep_map = {
++	.name = "j784s4",
++	.src = j784s4_src_ep_map,
++	.src_count = ARRAY_SIZE(j784s4_src_ep_map),
++	.dst = j784s4_dst_ep_map,
++	.dst_count = ARRAY_SIZE(j784s4_dst_ep_map),
 +};
-+
-+static const char * const wkup_fref_clksel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk",
-+};
-+
-+static const char * const k3_pll_ctrl_wrap_wkup_0_sysclkout_clk_parents[] = {
-+	"wkup_fref_clksel_out0",
-+	"hsdiv1_16fft_mcu_0_hsdivout0_clk",
-+};
-+
-+static const char * const mcu_ospi_ref_clk_sel_out0_parents[] = {
-+	"hsdiv4_16fft_mcu_1_hsdivout4_clk",
-+	"hsdiv4_16fft_mcu_2_hsdivout4_clk",
-+};
-+
-+static const char * const mcu_ospi_ref_clk_sel_out1_parents[] = {
-+	"hsdiv4_16fft_mcu_1_hsdivout4_clk",
-+	"hsdiv4_16fft_mcu_2_hsdivout4_clk",
-+};
-+
-+static const char * const wkup_gpio0_clksel_out0_parents[] = {
-+	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-+	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-+	"j7am_wakeup_16ff_wkup_0_wkup_rcosc_32k_clk",
-+	"j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk",
-+};
-+
-+static const char * const mcu_usart_clksel_out0_parents[] = {
-+	"hsdiv4_16fft_mcu_1_hsdivout3_clk",
-+	"postdiv3_16fft_main_1_hsdivout5_clk",
-+};
-+
-+static const char * const wkup_i2c_mcupll_bypass_out0_parents[] = {
-+	"hsdiv4_16fft_mcu_1_hsdivout3_clk",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out1_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out12_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out19_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out2_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out26_0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out27_0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out28_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out3_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out7_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const main_pll_hfosc_sel_out8_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const usb0_refclk_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"board_0_hfosc1_clk_out",
-+};
-+
-+static const char * const emmcsd1_lb_clksel_out0_parents[] = {
-+	"board_0_mmc1_clklb_out",
-+	"board_0_mmc1_clk_out",
-+};
-+
-+static const char * const mcu_clkout_mux_out0_parents[] = {
-+	"hsdiv4_16fft_mcu_2_hsdivout0_clk",
-+	"hsdiv4_16fft_mcu_2_hsdivout0_clk",
-+};
-+
-+static const char * const k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
-+	"main_pll_hfosc_sel_out0",
-+	"hsdiv4_16fft_main_0_hsdivout0_clk",
-+};
-+
-+static const char * const dpi0_ext_clksel_out0_parents[] = {
-+	"hsdiv1_16fft_main_19_hsdivout0_clk",
-+	"board_0_vout0_extpclkin_out",
-+};
-+
-+static const char * const emmcsd_refclk_sel_out0_parents[] = {
-+	"hsdiv4_16fft_main_0_hsdivout2_clk",
-+	"hsdiv4_16fft_main_1_hsdivout2_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+	"hsdiv4_16fft_main_3_hsdivout2_clk",
-+};
-+
-+static const char * const emmcsd_refclk_sel_out1_parents[] = {
-+	"hsdiv4_16fft_main_0_hsdivout2_clk",
-+	"hsdiv4_16fft_main_1_hsdivout2_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+	"hsdiv4_16fft_main_3_hsdivout2_clk",
-+};
-+
-+static const char * const gtc_clk_mux_out0_parents[] = {
-+	"hsdiv4_16fft_main_3_hsdivout1_clk",
-+	"postdiv3_16fft_main_0_hsdivout6_clk",
-+	"board_0_mcu_cpts0_rft_clk_out",
-+	"board_0_cpts0_rft_clk_out",
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	"hsdiv4_16fft_mcu_2_hsdivout1_clk",
-+	"k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
-+};
-+
-+static const struct clk_data clk_list[] = {
-+	CLK_FIXED_RATE("osc_27_mhz", 27000000, 0),
-+	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
-+	CLK_FIXED_RATE("osc_25_mhz", 25000000, 0),
-+	CLK_FIXED_RATE("osc_24_mhz", 24000000, 0),
-+	CLK_FIXED_RATE("osc_20_mhz", 20000000, 0),
-+	CLK_FIXED_RATE("osc_19_2_mhz", 19200000, 0),
-+	CLK_MUX("gluelogic_hfosc0_clkout", gluelogic_hfosc0_clkout_parents, 6, 0x43000030, 0, 3, 0),
-+	CLK_FIXED_RATE("board_0_hfosc1_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_ospi0_dqs_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_ospi1_dqs_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_wkup_i2c0_scl_out", 0, 0),
-+	CLK_FIXED_RATE("fss_mcu_0_hyperbus1p0_0_hpb_out_clk_n", 0, 0),
-+	CLK_FIXED_RATE("fss_mcu_0_hyperbus1p0_0_hpb_out_clk_p", 0, 0),
-+	CLK_FIXED_RATE("fss_mcu_0_ospi_0_ospi_oclk_clk", 0, 0),
-+	CLK_FIXED_RATE("fss_mcu_0_ospi_1_ospi_oclk_clk", 0, 0),
-+	CLK_FIXED_RATE("j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk", 12500000, 0),
-+	CLK_FIXED_RATE("j7am_wakeup_16ff_wkup_0_wkup_rcosc_32k_clk", 32000, 0),
-+	CLK_MUX("mcu_ospi0_iclk_sel_out0", mcu_ospi0_iclk_sel_out0_parents, 2, 0x40f08030, 4, 1, 0),
-+	CLK_MUX("mcu_ospi1_iclk_sel_out0", mcu_ospi1_iclk_sel_out0_parents, 2, 0x40f08034, 4, 1, 0),
-+	CLK_FIXED_RATE("mshsi2c_wkup_0_porscl", 0, 0),
-+	CLK_MUX("wkup_fref_clksel_out0", wkup_fref_clksel_out0_parents, 2, 0x43008050, 8, 1, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", "wkup_fref_clksel_out0", 0x40d00000, 0),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_mcu_1_foutvcop_clk", "wkup_fref_clksel_out0", 0x40d01000, 0, 2400000000),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", "wkup_fref_clksel_out0", 0x40d02000, 0, 2000000000),
-+	CLK_DIV("hsdiv1_16fft_mcu_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x40d00080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_1_hsdivout3_clk", "pllfracf2_ssmod_16fft_mcu_1_foutvcop_clk", 0x40d0108c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_1_hsdivout4_clk", "pllfracf2_ssmod_16fft_mcu_1_foutvcop_clk", 0x40d01090, 0, 7, 0, 0),
-+	CLK_DIV_DEFFREQ("hsdiv4_16fft_mcu_2_hsdivout4_clk", "pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", 0x40d02090, 0, 7, 0, 0, 166666666),
-+	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_wkup_0_sysclkout_clk", k3_pll_ctrl_wrap_wkup_0_sysclkout_clk_parents, 2, 0x42010000, 0),
-+	CLK_DIV("k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_wkup_0_sysclkout_clk", 0x42010118, 0, 5, 0, 0),
-+	CLK_MUX("mcu_ospi_ref_clk_sel_out0", mcu_ospi_ref_clk_sel_out0_parents, 2, 0x40f08030, 0, 1, 0),
-+	CLK_MUX("mcu_ospi_ref_clk_sel_out1", mcu_ospi_ref_clk_sel_out1_parents, 2, 0x40f08034, 0, 1, 0),
-+	CLK_MUX("wkup_gpio0_clksel_out0", wkup_gpio0_clksel_out0_parents, 4, 0x43008070, 0, 2, 0),
-+	CLK_MUX("mcu_usart_clksel_out0", mcu_usart_clksel_out0_parents, 2, 0x40f081c0, 0, 1, 0),
-+	CLK_MUX("wkup_i2c_mcupll_bypass_out0", wkup_i2c_mcupll_bypass_out0_parents, 2, 0x43008060, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out0", main_pll_hfosc_sel_out0_parents, 2, 0x43008080, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out1", main_pll_hfosc_sel_out1_parents, 2, 0x43008084, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out12", main_pll_hfosc_sel_out12_parents, 2, 0x430080b0, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out19", main_pll_hfosc_sel_out19_parents, 2, 0x430080cc, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out2", main_pll_hfosc_sel_out2_parents, 2, 0x43008088, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out26_0", main_pll_hfosc_sel_out26_0_parents, 2, 0x430080e8, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out27_0", main_pll_hfosc_sel_out27_0_parents, 2, 0x430080ec, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out28", main_pll_hfosc_sel_out28_parents, 2, 0x430080f0, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out3", main_pll_hfosc_sel_out3_parents, 2, 0x4300808c, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out7", main_pll_hfosc_sel_out7_parents, 2, 0x4300809c, 0, 1, 0),
-+	CLK_MUX("main_pll_hfosc_sel_out8", main_pll_hfosc_sel_out8_parents, 2, 0x430080a0, 0, 1, 0),
-+	CLK_MUX("usb0_refclk_sel_out0", usb0_refclk_sel_out0_parents, 2, 0x1080e0, 0, 1, 0),
-+	CLK_FIXED_RATE("board_0_cpts0_rft_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ext_refclk1_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_cpts0_rft_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_ext_refclk0_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clklb_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_vout0_extpclkin_out", 0, 0),
-+	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_2_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", 0x40d02080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_mcu_2_foutvcop_clk", 0x40d02084, 0, 7, 0, 0),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "main_pll_hfosc_sel_out0", 0x680000, 0, 2000000000),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_1_foutvcop_clk", "main_pll_hfosc_sel_out1", 0x681000, 0, 1920000000),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_12_foutvcop_clk", "main_pll_hfosc_sel_out12", 0x68c000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_19_foutvcop_clk", "main_pll_hfosc_sel_out19", 0x693000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_2_foutvcop_clk", "main_pll_hfosc_sel_out2", 0x682000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_26_foutvcop_clk", "main_pll_hfosc_sel_out26_0", 0x69a000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_27_foutvcop_clk", "main_pll_hfosc_sel_out27_0", 0x69b000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_28_foutvcop_clk", "main_pll_hfosc_sel_out28", 0x69c000, 0),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_3_foutvcop_clk", "main_pll_hfosc_sel_out3", 0x683000, 0, 2000000000),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_7_foutvcop_clk", "main_pll_hfosc_sel_out7", 0x687000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_8_foutvcop_clk", "main_pll_hfosc_sel_out8", 0x688000, 0),
-+	CLK_DIV("postdiv3_16fft_main_0_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
-+	CLK_DIV("postdiv3_16fft_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
-+	CLK_DIV("postdiv3_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv3_16fft_main_1_hsdivout7_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x68109c, 0, 7, 0, 0),
-+	CLK_MUX("emmcsd1_lb_clksel_out0", emmcsd1_lb_clksel_out0_parents, 2, 0x1080b4, 16, 1, 0),
-+	CLK_MUX("mcu_clkout_mux_out0", mcu_clkout_mux_out0_parents, 2, 0x40f08010, 0, 1, 0),
-+	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_26_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_26_foutvcop_clk", 0x69a080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_27_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_27_foutvcop_clk", 0x69b080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_28_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_28_foutvcop_clk", 0x69c080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_7_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_7_foutvcop_clk", 0x687080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv1_16fft_main_19_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_19_foutvcop_clk", 0x693080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
-+	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_3_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_3_foutvcop_clk", 0x683084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_3_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_3_foutvcop_clk", 0x683088, 0, 7, 0, 0),
-+	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_main_0_sysclkout_clk", k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
-+	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
-+	CLK_MUX("dpi0_ext_clksel_out0", dpi0_ext_clksel_out0_parents, 2, 0x108300, 0, 1, 0),
-+	CLK_MUX("emmcsd_refclk_sel_out0", emmcsd_refclk_sel_out0_parents, 4, 0x1080b0, 0, 2, 0),
-+	CLK_MUX("emmcsd_refclk_sel_out1", emmcsd_refclk_sel_out1_parents, 4, 0x1080b4, 0, 2, 0),
-+	CLK_MUX("gtc_clk_mux_out0", gtc_clk_mux_out0_parents, 16, 0x108030, 0, 4, 0),
-+	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081c0, 0, 2, 0, 0, 48000000),
-+	CLK_DIV("usart_programmable_clock_divider_out5", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081d4, 0, 2, 0, 0),
-+	CLK_DIV("usart_programmable_clock_divider_out8", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x1081e0, 0, 2, 0, 0),
-+	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
-+	CLK_DIV("k3_pll_ctrl_wrap_wkup_0_chip_div24_clk_clk", "k3_pll_ctrl_wrap_wkup_0_sysclkout_clk", 0x4201011c, 0, 5, 0, 0),
-+};
-+
-+static const struct dev_clk soc_dev_clk_data[] = {
-+	DEV_CLK(198, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(198, 3, "hsdiv0_16fft_main_7_hsdivout0_clk"),
-+	DEV_CLK(198, 4, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(202, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(203, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(61, 0, "gtc_clk_mux_out0"),
-+	DEV_CLK(61, 1, "hsdiv4_16fft_main_3_hsdivout1_clk"),
-+	DEV_CLK(61, 2, "postdiv3_16fft_main_0_hsdivout6_clk"),
-+	DEV_CLK(61, 3, "board_0_mcu_cpts0_rft_clk_out"),
-+	DEV_CLK(61, 4, "board_0_cpts0_rft_clk_out"),
-+	DEV_CLK(61, 5, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(61, 6, "board_0_ext_refclk1_out"),
-+	DEV_CLK(61, 15, "hsdiv4_16fft_mcu_2_hsdivout1_clk"),
-+	DEV_CLK(61, 16, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(61, 17, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(78, 0, "postdiv3_16fft_main_0_hsdivout8_clk"),
-+	DEV_CLK(78, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
-+	DEV_CLK(78, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
-+	DEV_CLK(78, 3, "hsdiv4_16fft_main_0_hsdivout4_clk"),
-+	DEV_CLK(78, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(78, 5, "board_0_hfosc1_clk_out"),
-+	DEV_CLK(78, 6, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(78, 8, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(78, 9, "board_0_hfosc1_clk_out"),
-+	DEV_CLK(78, 10, "j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk"),
-+	DEV_CLK(78, 11, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(78, 12, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(140, 1, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(140, 2, "emmcsd_refclk_sel_out0"),
-+	DEV_CLK(140, 3, "hsdiv4_16fft_main_0_hsdivout2_clk"),
-+	DEV_CLK(140, 4, "hsdiv4_16fft_main_1_hsdivout2_clk"),
-+	DEV_CLK(140, 5, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(140, 6, "hsdiv4_16fft_main_3_hsdivout2_clk"),
-+	DEV_CLK(141, 0, "emmcsd1_lb_clksel_out0"),
-+	DEV_CLK(141, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(141, 4, "emmcsd_refclk_sel_out1"),
-+	DEV_CLK(141, 5, "hsdiv4_16fft_main_0_hsdivout2_clk"),
-+	DEV_CLK(141, 6, "hsdiv4_16fft_main_1_hsdivout2_clk"),
-+	DEV_CLK(141, 7, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(141, 8, "hsdiv4_16fft_main_3_hsdivout2_clk"),
-+	DEV_CLK(146, 0, "usart_programmable_clock_divider_out0"),
-+	DEV_CLK(146, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(149, 0, "mcu_usart_clksel_out0"),
-+	DEV_CLK(149, 1, "hsdiv4_16fft_mcu_1_hsdivout3_clk"),
-+	DEV_CLK(149, 2, "postdiv3_16fft_main_1_hsdivout5_clk"),
-+	DEV_CLK(149, 5, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 174, "mcu_clkout_mux_out0"),
-+	DEV_CLK(157, 175, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-+	DEV_CLK(157, 176, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-+	DEV_CLK(157, 179, "fss_mcu_0_hyperbus1p0_0_hpb_out_clk_p"),
-+	DEV_CLK(157, 180, "fss_mcu_0_hyperbus1p0_0_hpb_out_clk_n"),
-+	DEV_CLK(157, 224, "fss_mcu_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 226, "fss_mcu_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 228, "fss_mcu_0_ospi_1_ospi_oclk_clk"),
-+	DEV_CLK(157, 230, "fss_mcu_0_ospi_1_ospi_oclk_clk"),
-+	DEV_CLK(157, 239, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 243, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 245, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 354, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 359, "dpi0_ext_clksel_out0"),
-+	DEV_CLK(157, 360, "mshsi2c_wkup_0_porscl"),
-+	DEV_CLK(160, 0, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(160, 2, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(160, 4, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(160, 6, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(160, 8, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(161, 0, "board_0_mcu_ospi0_dqs_out"),
-+	DEV_CLK(161, 1, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 2, "mcu_ospi0_iclk_sel_out0"),
-+	DEV_CLK(161, 3, "board_0_mcu_ospi0_dqs_out"),
-+	DEV_CLK(161, 4, "fss_mcu_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(161, 6, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 7, "mcu_ospi_ref_clk_sel_out0"),
-+	DEV_CLK(161, 8, "hsdiv4_16fft_mcu_1_hsdivout4_clk"),
-+	DEV_CLK(161, 9, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(162, 0, "board_0_mcu_ospi1_dqs_out"),
-+	DEV_CLK(162, 1, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(162, 2, "mcu_ospi1_iclk_sel_out0"),
-+	DEV_CLK(162, 3, "board_0_mcu_ospi1_dqs_out"),
-+	DEV_CLK(162, 4, "fss_mcu_0_ospi_1_ospi_oclk_clk"),
-+	DEV_CLK(162, 6, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(162, 7, "mcu_ospi_ref_clk_sel_out1"),
-+	DEV_CLK(162, 8, "hsdiv4_16fft_mcu_1_hsdivout4_clk"),
-+	DEV_CLK(162, 9, "hsdiv4_16fft_mcu_2_hsdivout4_clk"),
-+	DEV_CLK(167, 0, "wkup_gpio0_clksel_out0"),
-+	DEV_CLK(178, 0, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(178, 1, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(188, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(188, 1, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(191, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(191, 1, "hsdiv0_16fft_main_12_hsdivout0_clk"),
-+	DEV_CLK(191, 4, "hsdiv0_16fft_main_7_hsdivout0_clk"),
-+	DEV_CLK(191, 5, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(192, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(192, 1, "hsdiv0_16fft_main_26_hsdivout0_clk"),
-+	DEV_CLK(192, 4, "hsdiv0_16fft_main_7_hsdivout0_clk"),
-+	DEV_CLK(192, 5, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(193, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(193, 1, "hsdiv0_16fft_main_27_hsdivout0_clk"),
-+	DEV_CLK(193, 4, "hsdiv0_16fft_main_7_hsdivout0_clk"),
-+	DEV_CLK(193, 5, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(194, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(194, 1, "hsdiv0_16fft_main_28_hsdivout0_clk"),
-+	DEV_CLK(194, 4, "hsdiv0_16fft_main_7_hsdivout0_clk"),
-+	DEV_CLK(194, 5, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(201, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(201, 1, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(243, 0, "j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk"),
-+	DEV_CLK(243, 1, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(243, 2, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(279, 0, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-+	DEV_CLK(279, 1, "board_0_wkup_i2c0_scl_out"),
-+	DEV_CLK(279, 2, "wkup_i2c_mcupll_bypass_out0"),
-+	DEV_CLK(279, 3, "hsdiv4_16fft_mcu_1_hsdivout3_clk"),
-+	DEV_CLK(279, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(392, 0, "usart_programmable_clock_divider_out5"),
-+	DEV_CLK(392, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(395, 0, "usart_programmable_clock_divider_out8"),
-+	DEV_CLK(395, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 0, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 1, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 2, "postdiv3_16fft_main_1_hsdivout7_clk"),
-+	DEV_CLK(398, 3, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 20, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(398, 21, "usb0_refclk_sel_out0"),
-+	DEV_CLK(398, 22, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(398, 23, "board_0_hfosc1_clk_out"),
-+	DEV_CLK(398, 28, "board_0_tck_out"),
-+};
-+
-+const struct ti_k3_clk_platdata j784s4_clk_platdata = {
-+	.clk_list = clk_list,
-+	.clk_list_cnt = 106,
-+	.soc_dev_clk_data = soc_dev_clk_data,
-+	.soc_dev_clk_data_cnt = 128,
-+};
-diff --git a/arch/arm/mach-k3/r5/j784s4/dev-data.c b/arch/arm/mach-k3/r5/j784s4/dev-data.c
-new file mode 100644
-index 0000000000..a9b77d0f49
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/j784s4/dev-data.c
-@@ -0,0 +1,98 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * J784S4 specific device platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
-+ *
-+ * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
-+ */
-+
-+#include "k3-dev.h"
-+
-+static struct ti_psc soc_psc_list[] = {
-+	[0] = PSC(0, 0x42000000),
-+	[1] = PSC(1, 0x00420000),
-+	[2] = PSC(2, 0x00400000),
-+};
-+
-+static struct ti_pd soc_pd_list[] = {
-+	[0] = PSC_PD(0, &soc_psc_list[0], NULL),
-+	[1] = PSC_PD(3, &soc_psc_list[1], NULL),
-+	[2] = PSC_PD(0, &soc_psc_list[2], NULL),
-+	[3] = PSC_PD(1, &soc_psc_list[2], &soc_pd_list[2]),
-+	[4] = PSC_PD(14, &soc_psc_list[2], NULL),
-+	[5] = PSC_PD(15, &soc_psc_list[2], &soc_pd_list[4]),
-+	[6] = PSC_PD(16, &soc_psc_list[2], &soc_pd_list[4]),
-+	[7] = PSC_PD(38, &soc_psc_list[2], NULL),
-+};
-+
-+static struct ti_lpsc soc_lpsc_list[] = {
-+	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[1] = PSC_LPSC(3, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[2] = PSC_LPSC(10, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[3] = PSC_LPSC(11, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[4] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[5] = PSC_LPSC(12, &soc_psc_list[1], &soc_pd_list[1], &soc_lpsc_list[6]),
-+	[6] = PSC_LPSC(13, &soc_psc_list[1], &soc_pd_list[1], NULL),
-+	[7] = PSC_LPSC(0, &soc_psc_list[2], &soc_pd_list[2], NULL),
-+	[8] = PSC_LPSC(9, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[2]),
-+	[9] = PSC_LPSC(14, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[10]),
-+	[10] = PSC_LPSC(15, &soc_psc_list[2], &soc_pd_list[2], NULL),
-+	[11] = PSC_LPSC(16, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[12]),
-+	[12] = PSC_LPSC(17, &soc_psc_list[2], &soc_pd_list[2], NULL),
-+	[13] = PSC_LPSC(20, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
-+	[14] = PSC_LPSC(23, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
-+	[15] = PSC_LPSC(25, &soc_psc_list[2], &soc_pd_list[2], &soc_lpsc_list[5]),
-+	[16] = PSC_LPSC(43, &soc_psc_list[2], &soc_pd_list[3], NULL),
-+	[17] = PSC_LPSC(45, &soc_psc_list[2], &soc_pd_list[3], NULL),
-+	[18] = PSC_LPSC(78, &soc_psc_list[2], &soc_pd_list[4], NULL),
-+	[19] = PSC_LPSC(80, &soc_psc_list[2], &soc_pd_list[5], &soc_lpsc_list[18]),
-+	[20] = PSC_LPSC(81, &soc_psc_list[2], &soc_pd_list[6], &soc_lpsc_list[18]),
-+	[21] = PSC_LPSC(120, &soc_psc_list[2], &soc_pd_list[7], &soc_lpsc_list[22]),
-+	[22] = PSC_LPSC(121, &soc_psc_list[2], &soc_pd_list[7], NULL),
-+};
-+
-+static struct ti_dev soc_dev_list[] = {
-+	PSC_DEV(35, &soc_lpsc_list[0]),
-+	PSC_DEV(160, &soc_lpsc_list[0]),
-+	PSC_DEV(161, &soc_lpsc_list[0]),
-+	PSC_DEV(162, &soc_lpsc_list[0]),
-+	PSC_DEV(243, &soc_lpsc_list[0]),
-+	PSC_DEV(149, &soc_lpsc_list[0]),
-+	PSC_DEV(167, &soc_lpsc_list[1]),
-+	PSC_DEV(279, &soc_lpsc_list[1]),
-+	PSC_DEV(161, &soc_lpsc_list[2]),
-+	PSC_DEV(162, &soc_lpsc_list[3]),
-+	PSC_DEV(160, &soc_lpsc_list[4]),
-+	PSC_DEV(139, &soc_lpsc_list[5]),
-+	PSC_DEV(194, &soc_lpsc_list[6]),
-+	PSC_DEV(78, &soc_lpsc_list[7]),
-+	PSC_DEV(61, &soc_lpsc_list[8]),
-+	PSC_DEV(131, &soc_lpsc_list[9]),
-+	PSC_DEV(191, &soc_lpsc_list[10]),
-+	PSC_DEV(132, &soc_lpsc_list[11]),
-+	PSC_DEV(192, &soc_lpsc_list[12]),
-+	PSC_DEV(398, &soc_lpsc_list[13]),
-+	PSC_DEV(141, &soc_lpsc_list[14]),
-+	PSC_DEV(140, &soc_lpsc_list[15]),
-+	PSC_DEV(146, &soc_lpsc_list[16]),
-+	PSC_DEV(392, &soc_lpsc_list[17]),
-+	PSC_DEV(395, &soc_lpsc_list[17]),
-+	PSC_DEV(198, &soc_lpsc_list[18]),
-+	PSC_DEV(202, &soc_lpsc_list[19]),
-+	PSC_DEV(203, &soc_lpsc_list[20]),
-+	PSC_DEV(133, &soc_lpsc_list[21]),
-+	PSC_DEV(193, &soc_lpsc_list[22]),
-+};
-+
-+const struct ti_k3_pd_platdata j784s4_pd_platdata = {
-+	.psc = soc_psc_list,
-+	.pd = soc_pd_list,
-+	.lpsc = soc_lpsc_list,
-+	.devs = soc_dev_list,
-+	.num_psc = 3,
-+	.num_pd = 8,
-+	.num_lpsc = 23,
-+	.num_devs = 30,
-+};
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index eb76195bd7..10f6049797 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -86,6 +86,12 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
- 		.family = "AM62AX",
- 		.data = &am62ax_clk_platdata,
- 	},
-+#endif
-+#ifdef CONFIG_SOC_K3_J784S4
-+	{
-+		.family = "J784S4",
-+		.data = &j784s4_clk_platdata,
-+	},
- #endif
- 	{ /* sentinel */ }
- };
-diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-index b34c982f4f..fb4ca2dd6b 100644
---- a/drivers/power/domain/ti-power-domain.c
-+++ b/drivers/power/domain/ti-power-domain.c
-@@ -98,6 +98,12 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
- 		.family = "AM62AX",
- 		.data = &am62ax_pd_platdata,
- 	},
-+#endif
-+#ifdef CONFIG_SOC_K3_J784S4
-+	{
-+		.family = "J784S4",
-+		.data = &j784s4_pd_platdata,
-+	},
- #endif
- 	{ /* sentinel */ }
- };
-diff --git a/include/k3-clk.h b/include/k3-clk.h
-index 1b6ab8fe65..e161f09c0f 100644
---- a/include/k3-clk.h
-+++ b/include/k3-clk.h
-@@ -176,6 +176,7 @@ extern const struct ti_k3_clk_platdata j7200_clk_platdata;
- extern const struct ti_k3_clk_platdata j721s2_clk_platdata;
- extern const struct ti_k3_clk_platdata am62x_clk_platdata;
- extern const struct ti_k3_clk_platdata am62ax_clk_platdata;
-+extern const struct ti_k3_clk_platdata j784s4_clk_platdata;
+diff --git a/drivers/dma/ti/k3-psil-priv.h b/drivers/dma/ti/k3-psil-priv.h
+index 83f873b84c..02ea1e9ed3 100644
+--- a/drivers/dma/ti/k3-psil-priv.h
++++ b/drivers/dma/ti/k3-psil-priv.h
+@@ -43,5 +43,6 @@ extern struct psil_ep_map j721s2_ep_map;
+ extern struct psil_ep_map am64_ep_map;
+ extern struct psil_ep_map am62_ep_map;
+ extern struct psil_ep_map am62a_ep_map;
++extern struct psil_ep_map j784s4_ep_map;
  
- struct clk *clk_register_ti_pll(const char *name, const char *parent_name,
- 				void __iomem *reg);
-diff --git a/include/k3-dev.h b/include/k3-dev.h
-index 072e10ba63..a9d1ada804 100644
---- a/include/k3-dev.h
-+++ b/include/k3-dev.h
-@@ -80,6 +80,7 @@ extern const struct ti_k3_pd_platdata j7200_pd_platdata;
- extern const struct ti_k3_pd_platdata j721s2_pd_platdata;
- extern const struct ti_k3_pd_platdata am62x_pd_platdata;
- extern const struct ti_k3_pd_platdata am62ax_pd_platdata;
-+extern const struct ti_k3_pd_platdata j784s4_pd_platdata;
+ #endif /* K3_PSIL_PRIV_H_ */
+diff --git a/drivers/dma/ti/k3-psil.c b/drivers/dma/ti/k3-psil.c
+index d4d4fede8f..d21ef193e8 100644
+--- a/drivers/dma/ti/k3-psil.c
++++ b/drivers/dma/ti/k3-psil.c
+@@ -28,6 +28,8 @@ struct psil_endpoint_config *psil_get_ep_config(u32 thread_id)
+ 			soc_ep_map = &am62_ep_map;
+ 		else if (IS_ENABLED(CONFIG_SOC_K3_AM62A7))
+ 			soc_ep_map = &am62a_ep_map;
++		else if (IS_ENABLED(CONFIG_SOC_K3_J784S4))
++			soc_ep_map = &j784s4_ep_map;
+ 	}
  
- u8 ti_pd_state(struct ti_pd *pd);
- u8 lpsc_get_state(struct ti_lpsc *lpsc);
+ 	if (thread_id & K3_PSIL_DST_THREAD_ID_OFFSET && soc_ep_map->dst) {
+diff --git a/drivers/firmware/ti_sci_static_data.h b/drivers/firmware/ti_sci_static_data.h
+index 567ce8911a..789f0c6b2d 100644
+--- a/drivers/firmware/ti_sci_static_data.h
++++ b/drivers/firmware/ti_sci_static_data.h
+@@ -97,6 +97,40 @@ static struct ti_sci_resource_static_data rm_static_data[] = {
+ };
+ #endif /* CONFIG_SOC_K3_AM625 || CONFIG_SOC_K3_AM62A7 */
+ 
++#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
++static struct ti_sci_resource_static_data rm_static_data[] = {
++	/* Free rings */
++	{
++		.dev_id = 328,
++		.subtype = 1,
++		.range_start = 208,
++		.range_num = 32,
++	},
++	/* TX channels */
++	{
++		.dev_id = 329,
++		.subtype = 13,
++		.range_start = 40,
++		.range_num = 3,
++	},
++	/* RX channels */
++	{
++		.dev_id = 329,
++		.subtype = 10,
++		.range_start = 40,
++		.range_num = 3,
++	},
++	/* RX Free flows */
++	{
++		.dev_id = 329,
++		.subtype = 0,
++		.range_start = 84,
++		.range_num = 8,
++	},
++	{ },
++};
++#endif /* CONFIG_SOC_K3_J784S4 */
++
+ #else
+ static struct ti_sci_resource_static_data rm_static_data[] = {
+ 	{ },
+diff --git a/drivers/ram/Kconfig b/drivers/ram/Kconfig
+index 5b07e92030..8e9e53cbb0 100644
+--- a/drivers/ram/Kconfig
++++ b/drivers/ram/Kconfig
+@@ -62,7 +62,7 @@ choice
+ 	depends on K3_DDRSS
+ 	prompt "K3 DDRSS Arch Support"
+ 
+-	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2
++	default K3_J721E_DDRSS if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
+ 	default K3_AM64_DDRSS if SOC_K3_AM642
+ 	default K3_AM64_DDRSS if SOC_K3_AM625
+ 	default K3_AM62A_DDRSS if SOC_K3_AM62A7
 -- 
 2.34.1
 
