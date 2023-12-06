@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72CCC4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 12:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D830C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 12:31:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDB80868BF;
-	Wed,  6 Dec 2023 13:24:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE2F687168;
+	Wed,  6 Dec 2023 13:31:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Yb/fry/l";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HG5019cr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B1D687708; Wed,  6 Dec 2023 13:24:15 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id CFB2887168; Wed,  6 Dec 2023 13:31:29 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C21980788
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 13:24:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1194869B6
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 13:31:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5d4f71f7e9fso56860967b3.0
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 04:24:12 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5d96efd26f8so24621447b3.2
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 04:31:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1701865451; x=1702470251;
+ d=amarulasolutions.com; s=google; t=1701865886; x=1702470686;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sixgFnuIb/tg4kurf3OcXPktwU3kUTMOE3HCwg9fsdQ=;
- b=Yb/fry/lT2WV6u8bdUlRgntoy9xr4qQ3wigADp845IhXg+kYSQc/d/R4LvItR6so0u
- XGfeRr5npz3DMvNVqJv14piZDuoenyLiNP2K/4rm4Vl/jNUaFTGh1ALKQ1JqDOj1nckS
- 9xCarCjrrsQWrIEo7xnOQl3jWmHorG1kq+xzI=
+ bh=KhlAHh+0kwtBQrrvGkpCsY40H06HdgHoxZlBapYb6NE=;
+ b=HG5019crNnfe52TYldkLDKxZD1obuoofGDBnZhh2JsJLdvsg7CT3Y1fboR0B/xkqEz
+ 8X51n9FAuzfsUIhXn5lMAORg/TRBx5oky6sQcCul9Ra+r+830ZDb8qOIJ3bZS/FY7kzJ
+ ZkH4DRuw6F3sOTdbSKiwvcPzCOcIB0onzP8vE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701865451; x=1702470251;
+ d=1e100.net; s=20230601; t=1701865886; x=1702470686;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sixgFnuIb/tg4kurf3OcXPktwU3kUTMOE3HCwg9fsdQ=;
- b=EX5fHd7qkNcb1zHD+6kD0Pp0BuvuZPSMhcsG5Hg4/MQIKCJ9uQvx8AvviA4+Bd8mDt
- kfz1e2ca5ChFf9blFTArkze5wC5wm5c/4AGa/+BiTyRHVyU+djRNzZKaHh0mIPo0Ak9L
- IjegKiw6x2a9FzHbLidRHCnfEBVO2NTQ34ol5aaSJeoO4ZW4hsi4dWQdGWNiFGFQWn7X
- egmaqEJHjayb8eM5vohUwkG+kpWjmviARwEGs5PdGwQVwKI3tQzTAJ8ZstVsr06123s6
- kesh4vdxB6nGZOy1R1475OpQ918LPDv967dAgiOjt7LzA657zyYi2PpXe8Q/V3jWqiUZ
- rwvQ==
-X-Gm-Message-State: AOJu0YyOpTGDyElcjPU7ZIhXU38ZLT23ik/QscdgxDqZ9fj2fCURKS9o
- lM5H0V6WGRswIhUpvFV/TdC75qVow2U2asyMbeJs/Q==
-X-Google-Smtp-Source: AGHT+IHk8woDdxA/KSAlOoY6iJotPZQmeR2HQR3gkkJ2Qb9MpwVl9r79R0Ze2DPFCF6SqI1E0M6bKq79VccOKBrTJmM=
-X-Received: by 2002:a81:8b42:0:b0:5d6:9814:c87 with SMTP id
- e2-20020a818b42000000b005d698140c87mr536129ywk.1.1701865451667; Wed, 06 Dec
- 2023 04:24:11 -0800 (PST)
+ bh=KhlAHh+0kwtBQrrvGkpCsY40H06HdgHoxZlBapYb6NE=;
+ b=kCfmetTCR8KyebTynXEOAEr1+tE3Danh22jHTu9ey2nbZejkJXioP8Vo4rwoi0j1Fa
+ t+ptO9Jjxypn4sRMjFl3yS5EAJZ/AWC6zh3eNFgtadjZfZeMOyJEFABrQJfDTJejaxuQ
+ wXQO1bE/8xpzQSDN3nZ/AY/AYPx55fOvFBJtnVSuymX0+vCvvc/R2rhH9h0GDNFsMlBP
+ FO4ao1vYu2VhY2pU1FpItHixJctwW7Ql0PckPf4+3QXLh7jvRTT4fCIp9vnUywDa4LGu
+ nmf+aTMV6dR4m60QA9V6PPQeasZ38/l8cu4kv7R7t7aXtkRpoUkni7RTyv0l8zm3Bq3U
+ APlg==
+X-Gm-Message-State: AOJu0YzCEk8kLlZPHdUEbIFvzLwThjGPdVT7y4OsOAnMNNHaPNj2WfQp
+ 98IO3ibRUEXNnyQLja/nwo7soLD0mYlxu5pTDy24Iw==
+X-Google-Smtp-Source: AGHT+IG+g8L82ihKmle4TRyajqWcd2I9UMRWWutIx7FxX5cISsPqf0pjhrbd6n0xj9VAsj8bUAtJxGFOD30+tNu20WI=
+X-Received: by 2002:a81:4515:0:b0:5d3:f707:1b84 with SMTP id
+ s21-20020a814515000000b005d3f7071b84mr603146ywa.5.1701865886271; Wed, 06 Dec
+ 2023 04:31:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
-In-Reply-To: <20230818042119.25722-1-ashok.reddy.soma@amd.com>
+References: <20230812020319.56580-1-william.zhang@broadcom.com>
+In-Reply-To: <20230812020319.56580-1-william.zhang@broadcom.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Wed, 6 Dec 2023 17:54:00 +0530
-Message-ID: <CAMty3ZDF4aGNmrQe1FBJQs3AZo+8kWVBPFwUMJFCrrbcXBot7Q@mail.gmail.com>
-Subject: Re: [PATCH 0/7] spi-nor: Add parallel and stacked memories support
-To: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, michal.simek@amd.com, 
- sjg@chromium.org, git@amd.com
+Date: Wed, 6 Dec 2023 18:01:15 +0530
+Message-ID: <CAMty3ZAhpauhwqR=ZT7zDWggnibjW+Dz5_OFDmouH0g3cLOUeA@mail.gmail.com>
+Subject: Re: [PATCH] spi: bcm63xx-hsspi: Fix compiler warning
+To: William Zhang <william.zhang@broadcom.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, anand.gore@broadcom.com,
+ kursad.oney@broadcom.com, 
+ noltari@gmail.com, philippe.reynes@softathome.com, tomer.yacoby@broadcom.com, 
+ dregan@mail.com, joel.peshkin@broadcom.com, dan.beygelman@broadcom.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,49 +87,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 18, 2023 at 9:51=E2=80=AFAM Ashok Reddy Soma
-<ashok.reddy.soma@amd.com> wrote:
+On Sat, Aug 12, 2023 at 7:34=E2=80=AFAM William Zhang
+<william.zhang@broadcom.com> wrote:
 >
-> This series adds support for Xilinx qspi parallel and stacked memeories.
+> When build for arm64 target, comipler reports the following warning:
+> drivers/spi/bcm63xx_hsspi.c: In function =E2=80=98bcm63xx_hsspi_xfer_dumm=
+y_cs=E2=80=99:
+> include/linux/kernel.h:184:17: warning: comparison of distinct pointer
+> types lacks a cast
+>   184 |  (void) (&_min1 =3D=3D &_min2);  \
+>       |                 ^~
+> drivers/spi/bcm63xx_hsspi.c:298:22: note: in expansion of macro =E2=80=98=
+min=E2=80=99
+>   298 |   size_t curr_step =3D min(step_size, data_bytes);
 >
-> In parallel mode, the current implementation assumes that a maximum of
-> two flashes are connected. The QSPI controller splits the data evenly
-> between both the flashes so, both the flashes that are connected in
-> parallel mode should be identical.
-> During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
-> nor->flags.
+> This change fix this warning by casting the data_bytes to size_t.
 >
-> In stacked mode the current implementation assumes that a maximum of two
-> flashes are connected and both the flashes are of same make but can
-> differ in sizes. So, except the sizes all other flash parameters of both
-> the flashes are identical
->
-> Spi-nor will pass on the appropriate flash select flag to low level
-> driver, and it will select pass all the data to that particular flash.
->
-> Write operation in parallel mode are performed in page size * 2 chunks as
-> each write operation results in writing both the flashes. For doubling
-> the address space each operation is performed at addr/2 flash offset,
-> where addr is the address specified by the user.
->
-> Similarly for read and erase operations it will read from both flashes,
-> so size and offset are divided by 2 and send to flash.
->
->
->
-> Ashok Reddy Soma (7):
->   dm: core: support reading a single indexed u64 value
->   mtd: spi-nor: Add parallel and stacked memories support
->   mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
->   mtd: spi-nor: Add parallel and stacked memories support in read_bar
->     and write_bar
->   spi: spi-uclass: Read chipselect and restrict capabilities
->   spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
->   spi: zynq_qspi: Add parallel memories support in QSPI driver
+> Fixes: 0e144ec38cbb ("spi: bcm63xx-hsspi: Add prepend mode support")
+> Signed-off-by: William Zhang <william.zhang@broadcom.com>
+> ---
 
-This set is a bit hard to go. We need to Sync the Linux SPI-NOR tree
-and let Linux approve the parallel and stacked otherwise it is very
-difficult to maintain.
-
-Thanks,
-Jagan,
+Applied u-boot-spi/master
