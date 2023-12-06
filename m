@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F00C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 03:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9FF1C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 03:54:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0C6A87608;
-	Wed,  6 Dec 2023 04:54:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C5C28754A;
+	Wed,  6 Dec 2023 04:54:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WKbV8wRg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CgtYjRhI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B7B28753C; Wed,  6 Dec 2023 04:54:26 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 06AA587630; Wed,  6 Dec 2023 04:54:28 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53B748753E
+ by phobos.denx.de (Postfix) with ESMTPS id 5785E8754A
  for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 04:54:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9fa45e75ed9so39592966b.1
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a1a496a73ceso41271766b.2
  for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 19:54:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1701834864; x=1702439664; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=m4Pmgr7/qnjNSUutwjQgZ5OJUOSUHk7G3zEbRnJRTe4=;
- b=WKbV8wRgJ40L36H4dPLoEtMzbykgXDmgBwv5OHPnbpCbVfgs5+xh8y86tdzWKnBF4x
- 3wwHIAHyhkL/k40PuVkDR5V6oyxSkIrOXAzOz8xAvWKIdTyt6FvLlLby1u6yBw3V3dVM
- +8w1JG0Xeuv08AZ4lEv7DAq3/o6ZYufy7jXlA=
+ bh=xX0J4Ze6N/R0sPVs6QdgiQ78rg1p19mikJU2goGezDE=;
+ b=CgtYjRhI0/1EtUoSRbuSLdSfxSacnbyVYElF//8HHiHkBtio1xRwjHqGGIzKyEp7ou
+ /Vb9x/xnfNA0nV1dDWjoWxdxbIPGUqUx1w32jYaF8x0YoZ/lEU/QCzy488yHvsblEbWz
+ 2tgwkhIlSUXWPV9DdnOOgtllqaBwGNFZ/Yz+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1701834864; x=1702439664;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=m4Pmgr7/qnjNSUutwjQgZ5OJUOSUHk7G3zEbRnJRTe4=;
- b=D5s2KyXLX2u+XiFNfLm4m9rIlp0aZD4DdM2+yNzLhFQ2zpoPIMhS/kMNdI69GC2zzs
- akv9yWv9kUIOc15787kf4l0mECe74eaKrrk3v4sjyIHrZ9M3lSEwDGsPgqOp+nk9u5CQ
- jkNuUCZJm/PVpixCW/C/GCDiqK6BT/gh+RF/Tmg6O98XSezwqIEI8AAyUNWiw5m3ckC0
- LaMSBRr0NWZtdPJma0R5Z0wGvLe2JcY82PDxUjiLYBi3RnWdY1Jew5bipBsQJorrd6Oz
- G3W+G82UHuMB5m5LMqCrC415ubu948ddULsXvrHkZyX3camqJcwgyj41McWG7O+ePod6
- 9eWQ==
-X-Gm-Message-State: AOJu0YxM913qjFPoYQPZiXpJNZbsgtBP7NHA7EC9uRG1U6EQ2o9OJeiL
- lDEz4W5H/zL3Q9yUhmLp5wc86S01vwL4A4FA9d2i6g==
-X-Google-Smtp-Source: AGHT+IEX03Q22mQ6hE0V2j6LvntImz4DkVziYATq9KvX1de3ajJUoKW4rrlv8/ozPJWzwvygyC36H3X2rAGS6EcjN5I=
-X-Received: by 2002:a17:906:4a8d:b0:a04:837e:87af with SMTP id
- x13-20020a1709064a8d00b00a04837e87afmr133961eju.33.1701834863704; Tue, 05 Dec
+ bh=xX0J4Ze6N/R0sPVs6QdgiQ78rg1p19mikJU2goGezDE=;
+ b=jRRVQ/V33F64BjhTq3XyGJDtzqrHK14bpV5r/9CUjFAVjZyAyQME7TJaYf97G6pmvE
+ Bdhsrti+fyloBm9cHF8ItfxnlliybPM/lHDEb7e+b2eH8vGEMpS7v5c4aUv4GpKmg08K
+ dDbQFS9X0yLDLGSB5mfZzBbkAZym8FRBnM34tD1FNWc3nxIASLkDyW1jbPUWLlnP6Ezl
+ zT5QrsyrpXSZLbYz8tv7TszGgCc1YNa7/NnwsiJMtt4T2XZFDBH3/E+72K6yTcb4WRMC
+ vXxg9lMPPWfs5kaKpAEdK7+6tljmfSNhgnxuGYrVy4PPLOqAU7rTy31IaEpYZCeumnCE
+ FM6Q==
+X-Gm-Message-State: AOJu0YxkpZBjC73IBf+qHeTdjzmw22SYk+dEDz2awVmjAfEB4ag8qe0N
+ 09HARU9di+Mz5TBCEo1HDvdfjqwubgw88SUsaPUbrw==
+X-Google-Smtp-Source: AGHT+IEPMklcrygqMl6L9BahbaRxSkTiqqL32KgjgBgHWxH8mdy9mm9/ANpNyeoyAD0FDiwjbfPNzQCPMyHfUbyCxWU=
+X-Received: by 2002:a17:906:51d0:b0:a19:a19b:7893 with SMTP id
+ v16-20020a17090651d000b00a19a19b7893mr131065ejk.86.1701834863692; Tue, 05 Dec
  2023 19:54:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
- <20231205-b4-qcom-dt-compat-v6-6-61d104a8f920@linaro.org>
-In-Reply-To: <20231205-b4-qcom-dt-compat-v6-6-61d104a8f920@linaro.org>
+References: <20231205094220.2301360-1-n-francis@ti.com>
+ <20231205094220.2301360-2-n-francis@ti.com>
+In-Reply-To: <20231205094220.2301360-2-n-francis@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Dec 2023 20:54:06 -0700
-Message-ID: <CAPnjgZ0gC2nhpX=fA=s3b+LiABN4E-cHqY-qH5+4LuVfBwp1Gg@mail.gmail.com>
-Subject: Re: [PATCH v6 6/9] dts: qcom: adjust pmic gpio to use upstream
- bindings
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, u-boot@lists.denx.de
+Date: Tue, 5 Dec 2023 20:54:08 -0700
+Message-ID: <CAPnjgZ0J2GLhVEdfPR78kP6d=T8Yk3wMCTTODc4x+7jzf5N-sw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] binman: etype: dm: Add entry type for TI DM
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: marcel.ziswiler@toradex.com, alpernebiyasak@gmail.com, 
+ u-boot@lists.denx.de, hs@denx.de, christophe.leroy@csgroup.eu, 
+ mr.bossman075@gmail.com, afd@ti.com, m-chawdhry@ti.com, kamlesh@ti.com, 
+ nm@ti.com, c-shilwant@ti.com, u-kumar1@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,26 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
-
-On Tue, 5 Dec 2023 at 06:48, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Tue, 5 Dec 2023 at 02:42, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> Use the upstream gpio-ranges property instead of gpio-count, and drop
-> the bank-name property for Qualcomm boards.
+> K3 devices introduces the concept of centralized power, resource and
+> security management to System Firmware. This is to overcome challenges
+> by the traditional approach that implements system control functions on
+> each of the processing units.
 >
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
-> Tested-by: Sumit Garg <sumit.garg@linaro.org>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> The software interface for System Firmware is split into TIFS and DM. DM
+> (Device Manager) is responsible for resource and power management from
+> secure and non-secure hosts. This additional binary is necessary for
+> specific platforms' ROM boot images and is to be packaged into tispl.bin
+>
+> Add an entry for DM. The entry can be used for the packaging of
+> tispl.bin by binman along with ATF and TEE.
+>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Reviewed-by: Andrew Davis <afd@ti.com>
 > ---
->  arch/arm/dts/dragonboard410c.dts | 3 +--
->  arch/arm/dts/dragonboard820c.dts | 3 +--
->  arch/arm/dts/qcs404-evb.dts      | 3 +--
->  arch/arm/dts/sdm845.dtsi         | 3 +--
->  4 files changed, 4 insertions(+), 8 deletions(-)
+>  Makefile                        |  1 +
+>  tools/binman/entries.rst        | 14 ++++++++++++++
+>  tools/binman/etype/ti_dm.py     | 22 ++++++++++++++++++++++
+>  tools/binman/ftest.py           |  7 +++++++
+>  tools/binman/test/225_ti_dm.dts | 13 +++++++++++++
+>  5 files changed, 57 insertions(+)
+>  create mode 100644 tools/binman/etype/ti_dm.py
+>  create mode 100644 tools/binman/test/225_ti_dm.dts
 >
 
-What is the replacement for the GPIO bank name?
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Is there a doc/ update somewhere about TI_DM ?
 
 Regards,
 Simon
