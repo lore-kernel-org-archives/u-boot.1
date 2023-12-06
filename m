@@ -4,87 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16146C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 11:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA04C10DC1
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 11:50:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70A52876FA;
-	Wed,  6 Dec 2023 12:39:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9796D86E73;
+	Wed,  6 Dec 2023 12:50:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r/g8dJt8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1U+CEo4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B04DE8770C; Wed,  6 Dec 2023 12:39:49 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 31D3586D10; Wed,  6 Dec 2023 12:50:25 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF7AB87706
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 12:39:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 193B78768A
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 12:50:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40c1e3ea2f2so4000945e9.2
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 03:39:47 -0800 (PST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3332efd75c9so608724f8f.2
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 03:50:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701862786; x=1702467586; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701863421; x=1702468221; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=0KUuRt+KdWKhemTUAv9wA+Xgs4RA8rDFLi5npaes9qA=;
- b=r/g8dJt8o/ja24B8M2iZeqrwcNuy9huJ0opCgcIVroqyhFf+UzHXtGGNeZV30fWo99
- v9ne0DHhOHva0wfXgNu+ZfHxLGlZYUJ9gGyPFnmsEgfHOgBYAqx7v+Gwg4LnP3VbCKTl
- ZSdwSBrpTSzTir4hFp0p1K3wXP2JKibs8GnsBq6NBbx1imjYFgKI+cJqo5t8LU1OgN9J
- N8qLRtsOD2qrLtCIGcE8lM9JRWUnRCO/Wb+m2GPMqpxvcvChWOldCsnbO7f+Hrswa/T+
- I054vNaRdhDo1lyIXo+EVz6P6SFUz3qcfBSkKWYOURWsRyZzuUX51oDt5IWwMw5w86qR
- uXAg==
+ bh=HjT3YSpB+bQ48xP0RN0rIDrXAC2LKSCg6yvo6qHcIqE=;
+ b=J1U+CEo4bj3jPZIaSIYyxb2yxxRYxEfdFutbxe/qeRFWpg2MgYPjeR6yKW9uOyETsl
+ r1C/Q6RXPl0VXsLKXcTGVxc/M1ZhM7Zg0rCUNvxdWFZcuBqxur6fmrAuxT8PIsPC7Gdl
+ 9rk1yYTm0c11UItZp5YkwmgkJ/fuCzy834tpN4cF6hT8GESMaF3nXuAy+24klQpDHVll
+ gYCyVsXp/8y8s+beLDR0YrvWIH9WD5I6mcnCyXYoUlw7HdYByFf2BNJGyPpacq/HL0BG
+ 6m9pJwhTQaWa/5A3G+1TUwAOVqQ3kqwzvu1/CnPdyg4FPJ4ra1iWqC5WCNbA7ph5R/6c
+ 71Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701862786; x=1702467586;
+ d=1e100.net; s=20230601; t=1701863421; x=1702468221;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0KUuRt+KdWKhemTUAv9wA+Xgs4RA8rDFLi5npaes9qA=;
- b=ca1K1Y2ZXEqfNxl1KeTRRxrm2oLakMlrMiPVMuspElw0w6lNGcXClo+uyiwnGTFD8D
- Y52xDEjvNBoSSBXIAOrq33oYs91AO9YY8ik6pzKi0JtykUond25Yw3TuHglzdLYkMfDU
- WEme7ShG3QS1SK35gKhyEnURMtCSdDa5vowouz6hYkQc0QhnYLeKXBVAJ2haM5f5W4Kl
- pdUkuG2Qjmq3hobgZgfcYEmMynh4bxpB4b3A8t2cuALb2jGYRLrQR/LIwK2G9Jnm1x7n
- TBxfGKgsRUt+JW0B4E8hT2ASvyf2RsXMuHZYm+D0ZRdrPKbE22dgn9uMAXCbhi1G9RbW
- UqBw==
-X-Gm-Message-State: AOJu0Yzt4eQ4jaHkz7A+zWlH9zh6LRQObYMo0moq+d5r8DX8pQ7/XmbZ
- CRyqNtArA9PQoEJBRL9a95Njjw==
-X-Google-Smtp-Source: AGHT+IHnohjosdHFyzAyDRI1LMg98z3m/motiw+26VI+4IYqkwAyXQ6DFm4fIWz2NNne+yPyVJpQaQ==
-X-Received: by 2002:a05:600c:470c:b0:40c:b0d:398b with SMTP id
- v12-20020a05600c470c00b0040c0b0d398bmr557933wmo.16.1701862786543; 
- Wed, 06 Dec 2023 03:39:46 -0800 (PST)
+ bh=HjT3YSpB+bQ48xP0RN0rIDrXAC2LKSCg6yvo6qHcIqE=;
+ b=gbV1WpxNnRy+sQ+ypL1TdqzX0RtJGq37oed84HVYGhqpjCbJjSEoRByvYWb53pYCbs
+ shPivGweEkL4fIzc6uThNHwSEQw0jjEn6GXGzobcLaymY5GkFgjisgRTOQdIF9gi3d6I
+ lyZOv7C8xivDXW+YvDSZugzrDne20fgHtNkQiOevgGKGiBbE1q8bR1NqKnRxD5p1MSFx
+ wpOdZq6k8XYF4nfq8RakQHU8K3I6YqmegpmG9xgB1ZiKIq7cSS2ULsLGgyAljVAzV9fS
+ ZczqXyjM/0nLhZNSxZo9RvPkbPOQEqIHlV8wX+Vu8O7tAi7vlu+fZ4lr+dyasFmHxkIB
+ Mnyg==
+X-Gm-Message-State: AOJu0YxA0f5Qw5n9xF+S124vko/B8yoW3nOpZe2V7NW0z1GBJNq88BZQ
+ IYNJpSdAngE2Acb3IjQP2QoB0w==
+X-Google-Smtp-Source: AGHT+IE1Whc1GDOKoeBGhUjxvIXg8hJ4nyQeHT4jXEBy/oE+T0DNG7GNibw3yZj0U1Q1J3K1QCjGoA==
+X-Received: by 2002:a5d:42cf:0:b0:333:3bd6:5280 with SMTP id
+ t15-20020a5d42cf000000b003333bd65280mr212640wrr.166.1701863421446; 
+ Wed, 06 Dec 2023 03:50:21 -0800 (PST)
 Received: from [192.168.1.15] (host-92-17-96-230.as13285.net. [92.17.96.230])
  by smtp.gmail.com with ESMTPSA id
- o18-20020a05600c4fd200b0040b45282f88sm25113009wmq.36.2023.12.06.03.39.45
+ j5-20020a5d5645000000b0033335644478sm3237891wrw.114.2023.12.06.03.50.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Dec 2023 03:39:46 -0800 (PST)
-Message-ID: <bda2b648-a481-47a9-891b-9d1b81727706@linaro.org>
-Date: Wed, 6 Dec 2023 11:39:45 +0000
+ Wed, 06 Dec 2023 03:50:21 -0800 (PST)
+Message-ID: <b343d717-857d-4624-a6e5-1aecea56a808@linaro.org>
+Date: Wed, 6 Dec 2023 11:50:20 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 6/9] dts: qcom: adjust pmic gpio to use upstream
- bindings
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Ramon Fried <rfried.dev@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
+ <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, u-boot@lists.denx.de
-References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
- <20231205-b4-qcom-dt-compat-v6-6-61d104a8f920@linaro.org>
- <CAPnjgZ0gC2nhpX=fA=s3b+LiABN4E-cHqY-qH5+4LuVfBwp1Gg@mail.gmail.com>
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <CAC_iWjJ6KKJH=oBcXD7gb6f8KcK+OQV4Qo=B=UNeEUk-w2q61A@mail.gmail.com>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAPnjgZ0gC2nhpX=fA=s3b+LiABN4E-cHqY-qH5+4LuVfBwp1Gg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ6KKJH=oBcXD7gb6f8KcK+OQV4Qo=B=UNeEUk-w2q61A@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,36 +108,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 06/12/2023 03:54, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Tue, 5 Dec 2023 at 06:48, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Use the upstream gpio-ranges property instead of gpio-count, and drop
->> the bank-name property for Qualcomm boards.
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
->> Tested-by: Sumit Garg <sumit.garg@linaro.org>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  arch/arm/dts/dragonboard410c.dts | 3 +--
->>  arch/arm/dts/dragonboard820c.dts | 3 +--
->>  arch/arm/dts/qcs404-evb.dts      | 3 +--
->>  arch/arm/dts/sdm845.dtsi         | 3 +--
->>  4 files changed, 4 insertions(+), 8 deletions(-)
->>
-> 
-> What is the replacement for the GPIO bank name?
 
-The bank name is hardcoded to "pmic". In previous revisions of this
-patch I tried to keep the specific PMIC model, but after some discussion
-we decided that there was no benefit to this over just "pmic".
+On 06/12/2023 10:44, Ilias Apalodimas wrote:
+> Hi Tom,
 > 
-> Regards,
-> Simon
+> On Wed, 22 Nov 2023 at 16:28, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
+>>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
+>>>>> Hi Caleb,
+>>>>>
+>>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>>> [snip]
+>>>>>> == DT loading ==
+>>>>>>
+>>>>>> Previously, boards used the FDT blob embedded into U-Boot (via
+>>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
+>>>>>> bootloader, so we can instead rely on the first-stage bootloader to
+>>>>>> populate some useful FDT properties for us (notably the /memory node and
+>>>>>> KASLR seed) and fetch the DTB that it provides. Combined with the memory
+>>>>>> map changes above, this let's us entirely avoid configuring the memory
+>>>>>> map explicitly.
+>>>>>
+>>>>> Since with this change, we don't need to embed FDT blob in the u-boot
+>>>>> binary, so I was thinking if we really need to import DTs from Linux
+>>>>> for different platforms and then play a catchup game?
+>>>>>
+>>>>> IMO, the build command would look like following if we import
+>>>>> pre-built FDT blob from Linux:
+>>>>>
+>>>>> - Build u-boot::
+>>>>>
+>>>>>        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+>>>>>        $ make qcom_defconfig
+>>>>>        $ make
+>>>>>
+>>>>> - gzip u-boot::
+>>>>>
+>>>>>        gzip u-boot-nodtb.bin
+>>>>>
+>>>>> - Append dtb to gzipped u-boot::
+>>>>>
+>>>>>         cat u-boot-nodtb.bin.gz
+>>>>> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
+>>>>> u-boot-nodtb.bin.gz-dtb
+>>>>>
+>>>>> This would avoid the maintenance burden to keep DT in sync with that
+>>>>> of Linux. And since DT bindings in Linux are backwards compatible, we
+>>>>> can say u-boot should work with DTB picked up from any Linux kernel
+>>>>> stable release.
+>>>>
+>>>> I guess one question I have is, are we being passed the device tree
+>>>> (since we're acting like the Linux Kernel)
+>>>
+>>> Yeah that is the case here, see patch #1 in this series regarding how
+>>> FDT address is being retrieved from previous stage bootloader (ABL on
+>>> sdm845 and qcs404 SoCs).
+>>
+>> That's what I thought.
+>>
+>>>> or knowing that we have the
+>>>> dtb attached to the end of us and making use of the old kernel appended
+>>>> dtb option? We're fine in for example the rpi_arm64 case of just being
+>>>> given a device tree from the previous stage and not needing one in-tree.
+>>>
+>>> That's good to know and we can replicate that for Qcom platforms which
+>>> are chainloaded and don't need an embedded DT.
+>>
+>> So yes, moving these towards the direction of rpi_arm64 and specifically
+>> using imply OF_HAS_PRIOR_STAGE or select OF_HAS_PRIOR_STAGE (force that
+>> the dtb must be provided to us) sounds like the right direction to take
+>> these platforms.
+
+This is implicitly enforced by the bootloader on Qualcomm platforms. It
+will only even boot U-Boot if we gzip u-boot-nodtb.bin, then append some
+valid DTB to it, and then shove it in an Android boot image. If there is
+no DTB then the bootloader won't run U-Boot. If we somehow did run
+U-Boot without a valid DTB then we wouldn't be able to print anything
+anyway (unless debug UART is enabled).
+
+
+>>
+> 
+> IMHO that option isn't that useful.  Grepping for OF_HAS_PRIOR_STAGE
+> shows that we use it to print where the DT came from unless I am
+> missing something...
+> On top of that having implies in the Kconfig to control those prints
+> makes little sense to me and it's a half-baked solution anyway,
+> because may boards don't fill this properly.  This thing was cleaned
+> up in 2e8d2f88439d, 2ea63271e522f, and d6f8ab30a2af46 but then got
+> reintroduced in 275b4832f6bf91 without anyone acking or reviewing. I
+> am fine with Caleb suggests here, but I think we can do way better.
+> 
+> Instead of having that imply we can get rid of it and only have
+> OF_BOARD(and perhaps rename it). So a general cleanup I have in mind
+> is
+> 
+> CONFIG_OF_SEPARATE -> rename it to CONFIG_OF_APPEND because it is
+> actually appended at the end of the binary.
+> CONFIG_OF_EMBED -> Leave it as is, it's there for debugging mostly.
+> CONFIG_OF_BOARD perhaps rename it to something more useful, but the
+> semantics are 'The DT comes from an *external* source. A bloblist,
+> some EEPROM location, CPU registers etc'
+> CONFIG_OF_HAS_PRIOR_STAGE -> Get rid of it again. gd already has
+> gd->fdt_src, just add a FDTSRC_UNKNOWN as default and delegate the
+> responsibility of filling this properly at fdtdec_setup(). The boards
+> that use OF_BOARD can fill this in properly, instead of relying on
+> Kconfig imply options and we can even be more explicit on where the DT
+> came from.
+
+This sounds good to me, although I guess I'm mostly unaffected anyways.
+> 
+> I can send an RFC if anyone thinks this is a cleaner approach>
+> Thanks
+> /Ilias
+> 
+> 
+> 
+>> --
+>> Tom
 
 -- 
 // Caleb (they/them)
