@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21828C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 03:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F20BC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 03:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 780FC870F4;
-	Wed,  6 Dec 2023 04:54:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E0B6A8744C;
+	Wed,  6 Dec 2023 04:54:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PkaRxFVg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IzihtDuK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 472F586D37; Wed,  6 Dec 2023 04:54:08 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 6F1C586D37; Wed,  6 Dec 2023 04:54:12 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 342E1871CE
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 04:54:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 778038744C
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 04:54:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a1d2f89ddabso42765566b.1
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 19:54:04 -0800 (PST)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-33338c67d20so328473f8f.0
+ for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 19:54:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1701834843; x=1702439643; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1701834850; x=1702439650; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r6suksuPzaZznt3p/M45woiBZYvjxAGxoekJ7+ThXMA=;
- b=PkaRxFVg8o5hh4ZhDGnxacjiz0CLhcaAiw9GR4X9CwwXAr3yoetJky6TMOKtbK/7uZ
- 4BKXE8WK7FCstM41PAt+31YaTi6DiRUQvNFpw/aFv8svxKrY8p1GMGAF0xUX6oFxbsiN
- b4trx+DWOq2NM2/sm8/RTIzds5ok2kc1uS5zY=
+ bh=QdaYoJ1GDa29f5YsXr65k6bOZXFjfiCdd6Pwlv57Oms=;
+ b=IzihtDuKe6lacGDTyYY6KvQz9BjX+JoAqTAIcHukgDHbuyBi5TdRb5eYDCWg9XevXz
+ L50S6X7peqNCgEg3dGTGngyyhOSxVuMVCxPfbW3GydfWz549LEkLSOLcsrxpbRToOZgx
+ gNIeOnFs9LiO9ZrqOGOPe6hoz6XRsWqnwFya4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701834843; x=1702439643;
+ d=1e100.net; s=20230601; t=1701834850; x=1702439650;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r6suksuPzaZznt3p/M45woiBZYvjxAGxoekJ7+ThXMA=;
- b=LHUQd6vT1Z9cIhKa1/t/tkGWz0yLBdRtijTP9YHzfZ9/yG7nWlnOgKwoWU8lClDAGx
- saKkYwtw+oL0nho4MaikrXw2TBOHs+n6TWbVfDWhdtsB+wjK4yoEcZ8sBDet7SQ3BqPS
- jXzPZ4TXJR2FuGNIT97I7wUIT6xEw4hy9F/0DqPChke7f3prLACDIye/nLTsj7MeFHcn
- GgOWj8/QER4wSN/wg3wlQzgdWvBA6dT6Nw/CW7B9FVdvY/Ri5ZNtD92ccj7zRJHRWsJ2
- Jp1uOaW879ITDopQ9e5pn4BZI8CAj/0RIKs5MqSHRP84BKcq2A0f6yl8yULkiyi7ya7d
- eDtg==
-X-Gm-Message-State: AOJu0YwEMfKIVDHbyGU0JPPRha5agR4pTLuUbVQFxdObD7/FH73f8+fC
- gCjCa7SD+8sc7N12Lsdvjr8ExmC+WvSZipv0+jPvjg==
-X-Google-Smtp-Source: AGHT+IHdpC6PWRxJZKflIKI1X7QmuYOoxaO3xlsHrlMm8pJlVsY8RBuSO63bEsuv+QTe5xApXuZAGR2/wIWGK9Yjjy0=
-X-Received: by 2002:a17:906:7497:b0:a19:a19b:788b with SMTP id
- e23-20020a170906749700b00a19a19b788bmr143987ejl.78.1701834843483; Tue, 05 Dec
- 2023 19:54:03 -0800 (PST)
+ bh=QdaYoJ1GDa29f5YsXr65k6bOZXFjfiCdd6Pwlv57Oms=;
+ b=ZD/v8ezLTzonZGo21wg5BtdpuqLW3W2XIUmOX7TVf4pgvU3DN85nRAXaIqHV2Q8Tjn
+ MP72UI4SeFZ14yHkQZagCVZpxOrQpkYCKWvMx7XZxiQhx0RMa3LELtX/3plkhH9FXkIw
+ ZLu5a2+NfAXGdRuh1iV/dlpwjn2lcTnfwaZaRZMtRYBB1hnL0pMh6b+jRdYlfXMz7kAe
+ HdzjJxUzHMLjrHnqvry1a8ZN9W3ObbX4tBW2+lp0H9+vYYQALsVdEEP301b4wbkPu5O7
+ 6AlE2QNCTxIgItP6NQe5QmaIiMbsBZYL+1x4ehDlZ5/Z+qC3p9B+t2Grqr+EpjeNLb/d
+ oQfA==
+X-Gm-Message-State: AOJu0Yz53G9atuB5VLa9fRMkQnsdwypvrpGFQvwgVIIA9FAYbTAzt2Lp
+ 9Q1bsNfBiquVqwOKYZ2pvc3/jpobsliD7pOVHAK3iQ==
+X-Google-Smtp-Source: AGHT+IHbj8FPpzQaFe7VryFv5kbxcsZHpOncQQv8747/cBGPJsoKFhju+smxPZlVMwW4uKtFMixVShYcfdvcizlvi8w=
+X-Received: by 2002:adf:b35a:0:b0:332:ee1e:1993 with SMTP id
+ k26-20020adfb35a000000b00332ee1e1993mr99434wrd.20.1701834849806; Tue, 05 Dec
+ 2023 19:54:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <CAPnjgZ03MEK_PeuaXcR1VuC-_tBmQmrzq3bo-jS3Jd22+rSgww@mail.gmail.com>
- <CAFA6WYOQX64jArOAV1W-8=174pru78SotGNVhjYth8qu=Swa=Q@mail.gmail.com>
-In-Reply-To: <CAFA6WYOQX64jArOAV1W-8=174pru78SotGNVhjYth8qu=Swa=Q@mail.gmail.com>
+References: <20231204002642.895926-1-sjg@chromium.org>
+ <20231204002642.895926-2-sjg@chromium.org>
+ <87edg2b5vy.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87edg2b5vy.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 5 Dec 2023 20:53:51 -0700
-Message-ID: <CAPnjgZ0y9VF5Mpx2VVtDnR6NFhs7mi=aAaByV4jqgDvUwZH60g@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
+Date: Tue, 5 Dec 2023 20:53:58 -0700
+Message-ID: <CAPnjgZ05y__ReH0giGGsLaScfz+4=x1pZOy8LT35-X5EJUJtnA@mail.gmail.com>
+Subject: Re: [PATCH 01/18] bootm: netbds: Drop passing of arguments
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, marek.vasut+renesas@mailbox.org, 
+ sean.anderson@seco.com, Martin Husemann <martin@netbsd.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,160 +83,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi,
 
-On Tue, 5 Dec 2023 at 00:44, Sumit Garg <sumit.garg@linaro.org> wrote:
+I am replying to this email since it still has the context below.
+
+On Mon, 4 Dec 2023 at 03:48, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Sun,  3 Dec 2023 17:26:17 -0700
 >
 > Hi Simon,
 >
-> On Tue, 5 Dec 2023 at 06:22, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sumit,
-> >
-> > On Tue, 21 Nov 2023 at 23:21, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > >
-> > > Hi Caleb,
-> > >
-> > > On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> > > >
-> > > > Historically, Qualcomm boards in U-Boot have all had their own
-> > > > board/qualcomm/xyz directory, their own CONFIG_TARGET_XYZ option, their
-> > > > own hardcoded sysmap-xyz.c file, and their own U-Boot specific
-> > > > devicetree with little/no compatibility with upstream DT.
-> > > >
-> > > > This series makes a few final prepatory changes, and then replaces
-> > > > almost all of the board specific code with generic alternatives. The end
-> > > > result is that all Qualcomm boards both current and future (with the
-> > > > exception of the db410c and db820c) can be supported by a single U-Boot
-> > > > binary by just providing the correct DT. New boards can be added without
-> > > > introducing any addition mach/ or board/ code or config options.
-> > > >
-> > > > Due to the nature of this change, the patch ("mach-snapdragon:
-> > > > generalise board support") has become pretty big, I tried a few
-> > > > different ways to represent this in git history, but the other methods
-> > > > (e.g. adding a stub "generic" target and removing it again) were more
-> > > > confusing and made for much messier git history. The current patch is
-> > > > mostly atomic, but requires regenerating the config.
-> > > >
-> > > > The QCS404 EVB board had some code to enable the USB VBUS regulator,
-> > > > this is dropped in favour of a adding a new vbus-supply property to the
-> > > > dwc3-generic driver. This will also be used by the dragonboard845c in a
-> > > > future patch. This handles the common case of a board requiring some
-> > > > regulator be enabled for USB host mode.
-> > > >
-> > >
-> > > Thanks for your work. It is a good step towards a generalized u-boot
-> > > on Qcom platforms. Although I would like to give it an in-depth
-> > > review, I have a common discussion point about DT, see below.
-> > >
-> > > > A more detailed description of the changes is below.
-> > > >
-> > > > == Memory map ==
-> > > >
-> > > > The memory map was historically hardcoded into U-Boot, this meant that
-> > > > U-Boot had to be built for a specific variant of a device. This is
-> > > > changed to instead read the memory map from the DT /memory node.
-> > > >
-> > > > Additionally, most boards mapped addresss 0x0 as valid, as a result if a
-> > > > null pointer access happens then it will cause a bus stall (and board
-> > > > hang). This is fixed so that null pointer accesses will now correctly
-> > > > throw an exception.
-> > > >
-> > > > == DT loading ==
-> > > >
-> > > > Previously, boards used the FDT blob embedded into U-Boot (via
-> > > > OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
-> > > > bootloader, so we can instead rely on the first-stage bootloader to
-> > > > populate some useful FDT properties for us (notably the /memory node and
-> > > > KASLR seed) and fetch the DTB that it provides. Combined with the memory
-> > > > map changes above, this let's us entirely avoid configuring the memory
-> > > > map explicitly.
-> > >
-> > > Since with this change, we don't need to embed FDT blob in the u-boot
-> > > binary, so I was thinking if we really need to import DTs from Linux
-> > > for different platforms and then play a catchup game?
-> > >
-> > > IMO, the build command would look like following if we import
-> > > pre-built FDT blob from Linux:
-> > >
-> > > - Build u-boot::
-> > >
-> > >        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> > >        $ make qcom_defconfig
-> > >        $ make
-> > >
-> > > - gzip u-boot::
-> > >
-> > >        gzip u-boot-nodtb.bin
-> > >
-> > > - Append dtb to gzipped u-boot::
-> > >
-> > >         cat u-boot-nodtb.bin.gz
-> > > <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
-> > > u-boot-nodtb.bin.gz-dtb
-> >
-> > What is this?? Who or what uses a gzipped image with a single DT attached?
+> There is a typo in first line of the commit message: s/netbds/netbsd/.
 >
-> The gzipped image is loaded by Qcom proprietary bootloaders (ABL or
-> LK). It is the usual way Linux is booted on these platforms. U-boot is
-> being brought into this chain to leverage standardized EFI boot
-> processes.
+> > It isn't clear how useful it is to pass the arguments of bootm to the
+> > OS. For example, if "bootm 1000 2000 3000" is used, the three arguments
+> > at the end are passed to the OS. This seems like a strange approach,
+> > since the argument have already been parsed by U-Boot and processed.
+> >
+> > Rely instead on the "bootargs" mechanism, which is the standard
+> > approach.
+>
+> It is a very Linuxy approach though.
+>
+> I suspect this feature was added to pass kernel arguments for
+> "one-off" boots.  For example
+>
+>     bootm -s
 
-LK is Little kernel, I believe. That is an open source project, right?
-But I suppose it is BSD licensed so in fact the code is not available?
-Is ABL obsolete?
+Martin says that this is used with NetBSD. So do we rely on U-Boot
+parsing the '-s' as 0 and then using loadaddr as the default?
 
-I'm not sure that it matters in any case. We should be able to
-standardise the U-Boot part and let the private projects implement
-that, for a seamless boot.
+I wonder if we could come up with another mechanism? Perhaps 'bootm --
+args go here' ? Or define that if the first arg starts with '-' then
+the args are not parsed?
 
-What you have written above is not a good way for U-Boot to be
-packaged or invoked.
+Martin, would it be possible to send a patch to doc/ describing how to
+boot NetBSD?
+
 
 >
+> could be used to boot NetBSD in single-user mode and is quite a bit
+> more convenient than:
+>
+>     setenv bootargs -s
+>     bootm
+>
+> That said, I'm not sure to what extent the bootm command is used to
+> boot NetBSD these days.  So this may not really matter.
+>
+> Cheers,
+>
+> Mark
+>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > >
-> > > This would avoid the maintenance burden to keep DT in sync with that
-> > > of Linux. And since DT bindings in Linux are backwards compatible, we
-> > > can say u-boot should work with DTB picked up from any Linux kernel
-> > > stable release.
+> >  boot/bootm_os.c | 16 +++-------------
+> >  1 file changed, 3 insertions(+), 13 deletions(-)
 > >
-> > That is not the current situation, unfortunately.
+> > diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> > index b92422171a84..b5055d78706c 100644
+> > --- a/boot/bootm_os.c
+> > +++ b/boot/bootm_os.c
+> > @@ -102,19 +102,9 @@ static int do_bootm_netbsd(int flag, int argc, char *const argv[],
+> >                       os_hdr = hdr;
+> >       }
 > >
->
-> Hopefully with efforts from Caleb and team we can reach that point soon.
->
-> > U-Boot is moving to using Binman to package the firmware. There needs
-> > to be a description of the firmware image for each U-Boot boot. To my
-> > way of thinking, rpi is a degenerate form, not something to be copied,
-> > due to the closed-source nature of the firmware and its inability to
-> > be changed. We do have (in the works) a way to pass a DT using a
-> > standard firmware handoff. Perhaps that can be adopted by these
-> > closed-source projects?
->
-> Why should we really need firmware handoff if the DT can be passed in
-> one of the u-boot boot arguments? Linux kernel does support this
-> method to retrieve DT as well.
-
-Here I am not referring to Linux, but to the firmware stages. We need
-firmware handoff so all these nutty binaries around the place can
-communicate with the open source (firmware) projects in a sensible
-fashion.
-
-For Linux we can pass the DT using existing mechanisms.
-
->
+> > -     if (argc > 0) {
+> > -             ulong len;
+> > -             int   i;
+> > -
+> > -             for (i = 0, len = 0; i < argc; i += 1)
+> > -                     len += strlen(argv[i]) + 1;
+> > -             cmdline = malloc(len);
+> > -             copy_args(cmdline, argc, argv, ' ');
+> > -     } else {
+> > -             cmdline = env_get("bootargs");
+> > -             if (cmdline == NULL)
+> > -                     cmdline = "";
+> > -     }
+> > +     cmdline = env_get("bootargs");
+> > +     if (!cmdline)
+> > +             cmdline = "";
 > >
-> > BTW I am very pleased to see this series and I hope that Qualcomm (via
-> > Linaro) can continue to improve its U-Boot support.
->
-> It's good to know, thanks.
-
-It is the hiding of the DT that I object to. I would like to see these
-files in U-Boot, so we can build U-Boot for the platform and boot it
-with its local DT. Otherwise many of the innovations U-Boot provides,
-such as firmware packaging, become impossible. My feeling on this
-might change if the bindings process were easier.
-
-Regards,
-Simon
+> >       loader = (void (*)(struct bd_info *, struct legacy_img_hdr *, char *, char *))images->ep;
+> >
+> > --
+> > 2.43.0.rc2.451.g8631bc7472-goog
+> >
+> >
