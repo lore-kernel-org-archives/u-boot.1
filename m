@@ -4,94 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA04C10DC1
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 11:50:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49153C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 12:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9796D86E73;
-	Wed,  6 Dec 2023 12:50:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 729C78764D;
+	Wed,  6 Dec 2023 13:01:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J1U+CEo4";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="GxpVTpTJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31D3586D10; Wed,  6 Dec 2023 12:50:25 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A31BA876E9; Wed,  6 Dec 2023 13:01:00 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 193B78768A
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 12:50:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82EAC86D10
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 13:00:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3332efd75c9so608724f8f.2
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 03:50:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701863421; x=1702468221; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=HjT3YSpB+bQ48xP0RN0rIDrXAC2LKSCg6yvo6qHcIqE=;
- b=J1U+CEo4bj3jPZIaSIYyxb2yxxRYxEfdFutbxe/qeRFWpg2MgYPjeR6yKW9uOyETsl
- r1C/Q6RXPl0VXsLKXcTGVxc/M1ZhM7Zg0rCUNvxdWFZcuBqxur6fmrAuxT8PIsPC7Gdl
- 9rk1yYTm0c11UItZp5YkwmgkJ/fuCzy834tpN4cF6hT8GESMaF3nXuAy+24klQpDHVll
- gYCyVsXp/8y8s+beLDR0YrvWIH9WD5I6mcnCyXYoUlw7HdYByFf2BNJGyPpacq/HL0BG
- 6m9pJwhTQaWa/5A3G+1TUwAOVqQ3kqwzvu1/CnPdyg4FPJ4ra1iWqC5WCNbA7ph5R/6c
- 71Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701863421; x=1702468221;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HjT3YSpB+bQ48xP0RN0rIDrXAC2LKSCg6yvo6qHcIqE=;
- b=gbV1WpxNnRy+sQ+ypL1TdqzX0RtJGq37oed84HVYGhqpjCbJjSEoRByvYWb53pYCbs
- shPivGweEkL4fIzc6uThNHwSEQw0jjEn6GXGzobcLaymY5GkFgjisgRTOQdIF9gi3d6I
- lyZOv7C8xivDXW+YvDSZugzrDne20fgHtNkQiOevgGKGiBbE1q8bR1NqKnRxD5p1MSFx
- wpOdZq6k8XYF4nfq8RakQHU8K3I6YqmegpmG9xgB1ZiKIq7cSS2ULsLGgyAljVAzV9fS
- ZczqXyjM/0nLhZNSxZo9RvPkbPOQEqIHlV8wX+Vu8O7tAi7vlu+fZ4lr+dyasFmHxkIB
- Mnyg==
-X-Gm-Message-State: AOJu0YxA0f5Qw5n9xF+S124vko/B8yoW3nOpZe2V7NW0z1GBJNq88BZQ
- IYNJpSdAngE2Acb3IjQP2QoB0w==
-X-Google-Smtp-Source: AGHT+IE1Whc1GDOKoeBGhUjxvIXg8hJ4nyQeHT4jXEBy/oE+T0DNG7GNibw3yZj0U1Q1J3K1QCjGoA==
-X-Received: by 2002:a5d:42cf:0:b0:333:3bd6:5280 with SMTP id
- t15-20020a5d42cf000000b003333bd65280mr212640wrr.166.1701863421446; 
- Wed, 06 Dec 2023 03:50:21 -0800 (PST)
-Received: from [192.168.1.15] (host-92-17-96-230.as13285.net. [92.17.96.230])
- by smtp.gmail.com with ESMTPSA id
- j5-20020a5d5645000000b0033335644478sm3237891wrw.114.2023.12.06.03.50.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Dec 2023 03:50:21 -0800 (PST)
-Message-ID: <b343d717-857d-4624-a6e5-1aecea56a808@linaro.org>
-Date: Wed, 6 Dec 2023 11:50:20 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-Content-Language: en-US
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski
- <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <20231122140100.GT2513409@bill-the-cat>
- <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
- <20231122142758.GU2513409@bill-the-cat>
- <CAC_iWjJ6KKJH=oBcXD7gb6f8KcK+OQV4Qo=B=UNeEUk-w2q61A@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAC_iWjJ6KKJH=oBcXD7gb6f8KcK+OQV4Qo=B=UNeEUk-w2q61A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 1561701c-942f-11ee-abd3-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 1561701c-942f-11ee-abd3-005056999439;
+ Wed, 06 Dec 2023 13:00:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=content-type:mime-version:subject:to:from:message-id:date;
+ bh=nZDv99rf/o17aX+xufUWD04ugbZN/Z7nvv1/OtDKrRY=;
+ b=GxpVTpTJ9osYTRx9ZDSzns3uY5S1pMl7uopivPy0uvE7E6ttHXVqk7jYCfv/i1lcB3omVuAhU+1cg
+ QLns6PyMc1nzKaIfJPY55hmRUU2+kxzGOStOkbHM+d3l1YPZTmvaEw1MQLm7vbRTypr4ma+vwOYGnZ
+ OxyFLMW2UAMfumjRrRMJq2uJSzbmyu7QJTUAgU7w0N/BkAdpXHHmHUHRcpgbo/qirTnzmpgYVbO8bY
+ D5/ZBZPA698ShxOnSj2NgJs0Xh8OdFwPrviEzCQCJin1dmzixDMoVvgn68/Hbw3yjbegjNsd0DUT9e
+ 8OtLquWMHIbuZj8CI3zFFjSFOkYMwJA==
+X-KPN-MID: 33|BmZZllsbR763YTr8ADXjp3oinAr24+JfIlOoWOsxbdkRBWUXNJn9UFjfox/32tP
+ 3w//7CyYx1lR66YuIT74R1A5CmqgttHKlZUdBCom3K2A=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|fbKvAiHXtuNT1W0kQvkbJFmIgz5Q0fEPJbmbs5TedXt5lI/zRtuNAhx2v1cxELb
+ shY8Rs3ZS7vWX3tThojrFxw==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 1cf7b6b6-942f-11ee-acaa-00505699d6e5;
+ Wed, 06 Dec 2023 13:00:57 +0100 (CET)
+Date: Wed, 06 Dec 2023 13:00:56 +0100
+Message-Id: <878r678rrb.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: heinrich.schuchardt@canonical.com, masahisa.kojima@linaro.org,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+In-Reply-To: <CALeDE9O_7ndGQeEoErVQQcpvSWVVpw5dg+tygvyYi_s4Ta5Wtg@mail.gmail.com>
+ (message from Peter Robinson on Wed, 6 Dec 2023 10:44:59 +0000)
+Subject: Re: [PATCH 1/1] efi_loader: boot options should relate to the ESP
+References: <20231205023751.61679-1-heinrich.schuchardt@canonical.com>
+ <CADQ0-X9Euv7UwVS49N=DvQxN+O_+6fq_jJw=Jiqauau6TyLpUg@mail.gmail.com>
+ <35373146-3e24-461f-88b7-58eb01be1c45@canonical.com>
+ <CALeDE9O_7ndGQeEoErVQQcpvSWVVpw5dg+tygvyYi_s4Ta5Wtg@mail.gmail.com>
+MIME-version: 1.0
+Content-type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,128 +80,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> From: Peter Robinson <pbrobinson@gmail.com>
+> Date: Wed, 6 Dec 2023 10:44:59 +0000
+> 
+> On Wed, Dec 6, 2023 at 9:31 AM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > On 05.12.23 07:23, Masahisa Kojima wrote:
+> > > Hi Heinrich,
+> > >
+> > > On Tue, 5 Dec 2023 at 11:38, Heinrich Schuchardt
+> > > <heinrich.schuchardt@canonical.com> wrote:
+> > >>
+> > >> * Only generate removable media entries for EFI system partitions.
+> > >> * Only offer EFI system partitions for boot options in the eficonfig
+> > >>    command.
+> > >>
+> > >> Fixes: c416f1c0bcab ("bootmenu: add removable media entries")
+> > >> Fixes: 87d791423ac6 ("eficonfig: menu-driven addition of UEFI boot option")
+> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > >> ---
+> > >>   cmd/eficonfig.c              | 6 ++++--
+> > >>   lib/efi_loader/efi_bootmgr.c | 3 ++-
+> > >>   2 files changed, 6 insertions(+), 3 deletions(-)
+> > >>
+> > >> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> > >> index 34a59cb15d..c066b28b6b 100644
+> > >> --- a/cmd/eficonfig.c
+> > >> +++ b/cmd/eficonfig.c
+> > >> @@ -626,8 +626,10 @@ static efi_status_t eficonfig_select_volume(struct eficonfig_select_file_info *f
+> > >>          efi_handle_t *volume_handles = NULL;
+> > >>          struct efi_simple_file_system_protocol *v;
+> > >>
+> > >> -       ret = efi_locate_handle_buffer_int(BY_PROTOCOL, &efi_simple_file_system_protocol_guid,
+> > >> -                                          NULL, &count, (efi_handle_t **)&volume_handles);
+> > >> +       /* Find all EFI system partitions */
+> > >> +       ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
+> > >> +                                          &efi_system_partition_guid,
+> > >> +                                          NULL, &count, &volume_handles);
+> > >
+> > > UEFI specification v2.10 section '3.5 Boot Mechanisms' says
+> > > "EFI can boot from a device using the EFI_SIMPLE_FILE_SYSTEM_PROTOCOL or the
+> > > EFI_LOAD_FILE_PROTOCOL."
+> > >
+> > > So in my understanding of the UEFI spec, I think
+> > > efi_simple_file_system_protocol_guid
+> > > is correct here.
+> > >
+> > >>          if (ret != EFI_SUCCESS) {
+> > >>                  eficonfig_print_msg("No block device found!");
+> > >>                  return ret;
+> > >> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > >> index 48153bd5ff..9e84391186 100644
+> > >> --- a/lib/efi_loader/efi_bootmgr.c
+> > >> +++ b/lib/efi_loader/efi_bootmgr.c
+> > >> @@ -1047,8 +1047,9 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+> > >>          efi_handle_t *volume_handles = NULL;
+> > >>          struct eficonfig_media_boot_option *opt = NULL;
+> > >>
+> > >> +       /* Find all EFI system partitions */
+> > >>          ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
+> > >> -                                          &efi_simple_file_system_protocol_guid,
+> > >> +                                          &efi_system_partition_guid,
+> > >
+> > > In EDK II reference implementation[0], it enumerates all
+> > > block_io_protocol devices
+> > > and eliminates logical partitions.
+> > > Should we do the same? If yes, I can prepare the patch on this.
+> >
+> > This is what the boot options look like on an EDK II system:
+> >
+> > $ efibootmgr -v
+> > BootCurrent: 000D
+> > Timeout: 3 seconds
+> > BootOrder:
+> > 000D,000B,000C,0003,0004,0005,0006,0007,0008,0009,000A,0000,0001,0002
+> > Boot0000* UiApp
+> > FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(462caa21-7614-4503-836e-8ab6f4662331)
+> > Boot0001* helloworld
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,65535,0)/HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c9f,0x2000,0x200000)/File(\helloworld.efi)h.e.l.l.o.
+> > .w.o.r.l.d...
+> > Boot0002* UEFI Crucial_CT128M550SSD1 14270C7CFEFE
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,65535,0)N.....YM....R,Y.
+> > Boot0003* UEFI eMMC Device
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x0)N.....YM....R,Y.
+> > Boot0004* UEFI eMMC Device 2
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x1)N.....YM....R,Y.
+> > Boot0005* UEFI eMMC Device 3
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ctrl(0x2)N.....YM....R,Y.
+> > Boot0006* UEFI PXEv4 (MAC:000000000001)
+> > MAC(000000000001,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> > Boot0007* UEFI PXEv4 (MAC:000000000002)
+> > MAC(000000000002,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> > Boot0008* UEFI PXEv4 (MAC:000000000003)
+> > MAC(000000000003,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> > Boot0009* UEFI PXEv4 (MAC:000000000004)
+> > MAC(000000000004,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> > Boot000A* UEFI Shell
+> > FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(7c04a583-9e3e-4f1c-ad65-e05268d0b4d1)
+> > Boot000B* UEFI HL-DT-ST DVDRAM GTC0N
+> > VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f40000000000)/Sata(1,65535,0)N.....YM....R,Y.
+> > Boot000C* ubuntu
+> > HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\ubuntu\grubaa64.efi)
+> > Boot000D* grub
+> > HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\grub\shimaa64.efi)
+> > Boot1001* helloworld
+> > HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c8f,0x2000,0x200000)/File(helloworld.efi)
+> >
+> > As you described autogenerated boot options are on block device level
+> > irrespective of the existence of an ESP.
+> >
+> > EDK II does not to care if /EFI/BOOT/BOOT<ARCH>.EFI is on a partition
+> > with the ESP partition type.
+> >
+> > We should try to mimic the EDK II behavior.
+> 
+> I believe the UEFI spec allows VFAT partition type as well ESP
+> partition type. For example a lot of Raspberry Pis won't load their
+> firmware of a ESP partition type but will off VFAT even though they
+> are essentially the same thing.
 
-
-On 06/12/2023 10:44, Ilias Apalodimas wrote:
-> Hi Tom,
-> 
-> On Wed, 22 Nov 2023 at 16:28, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
->>> On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>> On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
->>>>> Hi Caleb,
->>>>>
->>>>> On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>> [snip]
->>>>>> == DT loading ==
->>>>>>
->>>>>> Previously, boards used the FDT blob embedded into U-Boot (via
->>>>>> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
->>>>>> bootloader, so we can instead rely on the first-stage bootloader to
->>>>>> populate some useful FDT properties for us (notably the /memory node and
->>>>>> KASLR seed) and fetch the DTB that it provides. Combined with the memory
->>>>>> map changes above, this let's us entirely avoid configuring the memory
->>>>>> map explicitly.
->>>>>
->>>>> Since with this change, we don't need to embed FDT blob in the u-boot
->>>>> binary, so I was thinking if we really need to import DTs from Linux
->>>>> for different platforms and then play a catchup game?
->>>>>
->>>>> IMO, the build command would look like following if we import
->>>>> pre-built FDT blob from Linux:
->>>>>
->>>>> - Build u-boot::
->>>>>
->>>>>        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
->>>>>        $ make qcom_defconfig
->>>>>        $ make
->>>>>
->>>>> - gzip u-boot::
->>>>>
->>>>>        gzip u-boot-nodtb.bin
->>>>>
->>>>> - Append dtb to gzipped u-boot::
->>>>>
->>>>>         cat u-boot-nodtb.bin.gz
->>>>> <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
->>>>> u-boot-nodtb.bin.gz-dtb
->>>>>
->>>>> This would avoid the maintenance burden to keep DT in sync with that
->>>>> of Linux. And since DT bindings in Linux are backwards compatible, we
->>>>> can say u-boot should work with DTB picked up from any Linux kernel
->>>>> stable release.
->>>>
->>>> I guess one question I have is, are we being passed the device tree
->>>> (since we're acting like the Linux Kernel)
->>>
->>> Yeah that is the case here, see patch #1 in this series regarding how
->>> FDT address is being retrieved from previous stage bootloader (ABL on
->>> sdm845 and qcs404 SoCs).
->>
->> That's what I thought.
->>
->>>> or knowing that we have the
->>>> dtb attached to the end of us and making use of the old kernel appended
->>>> dtb option? We're fine in for example the rpi_arm64 case of just being
->>>> given a device tree from the previous stage and not needing one in-tree.
->>>
->>> That's good to know and we can replicate that for Qcom platforms which
->>> are chainloaded and don't need an embedded DT.
->>
->> So yes, moving these towards the direction of rpi_arm64 and specifically
->> using imply OF_HAS_PRIOR_STAGE or select OF_HAS_PRIOR_STAGE (force that
->> the dtb must be provided to us) sounds like the right direction to take
->> these platforms.
-
-This is implicitly enforced by the bootloader on Qualcomm platforms. It
-will only even boot U-Boot if we gzip u-boot-nodtb.bin, then append some
-valid DTB to it, and then shove it in an Android boot image. If there is
-no DTB then the bootloader won't run U-Boot. If we somehow did run
-U-Boot without a valid DTB then we wouldn't be able to print anything
-anyway (unless debug UART is enabled).
-
-
->>
-> 
-> IMHO that option isn't that useful.  Grepping for OF_HAS_PRIOR_STAGE
-> shows that we use it to print where the DT came from unless I am
-> missing something...
-> On top of that having implies in the Kconfig to control those prints
-> makes little sense to me and it's a half-baked solution anyway,
-> because may boards don't fill this properly.  This thing was cleaned
-> up in 2e8d2f88439d, 2ea63271e522f, and d6f8ab30a2af46 but then got
-> reintroduced in 275b4832f6bf91 without anyone acking or reviewing. I
-> am fine with Caleb suggests here, but I think we can do way better.
-> 
-> Instead of having that imply we can get rid of it and only have
-> OF_BOARD(and perhaps rename it). So a general cleanup I have in mind
-> is
-> 
-> CONFIG_OF_SEPARATE -> rename it to CONFIG_OF_APPEND because it is
-> actually appended at the end of the binary.
-> CONFIG_OF_EMBED -> Leave it as is, it's there for debugging mostly.
-> CONFIG_OF_BOARD perhaps rename it to something more useful, but the
-> semantics are 'The DT comes from an *external* source. A bloblist,
-> some EEPROM location, CPU registers etc'
-> CONFIG_OF_HAS_PRIOR_STAGE -> Get rid of it again. gd already has
-> gd->fdt_src, just add a FDTSRC_UNKNOWN as default and delegate the
-> responsibility of filling this properly at fdtdec_setup(). The boards
-> that use OF_BOARD can fill this in properly, instead of relying on
-> Kconfig imply options and we can even be more explicit on where the DT
-> came from.
-
-This sounds good to me, although I guess I'm mostly unaffected anyways.
-> 
-> I can send an RFC if anyone thinks this is a cleaner approach>
-> Thanks
-> /Ilias
-> 
-> 
-> 
->> --
->> Tom
-
--- 
-// Caleb (they/them)
+Right.  And therefore OpenBSD/arm64 uses partition type 0x0C; this
+works with all EFI implementations that we have tested so far
+(including EDK II and some proprietary implementations).
