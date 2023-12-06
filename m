@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD883C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 16:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 750B9C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 16:23:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDCC686CF7;
-	Wed,  6 Dec 2023 17:03:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 99A8987640;
+	Wed,  6 Dec 2023 17:23:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m73kPTvB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sgJ9hzif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30D9286C72; Wed,  6 Dec 2023 17:03:53 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8C1BD8763C; Wed,  6 Dec 2023 17:23:35 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13EFF870F8
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 17:03:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11CBD87688
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 17:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2c9c18e7990so98511591fa.2
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 08:03:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701878630; x=1702483430; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=27QkL0Qlhem16i+05liv9a56kuG9xai4sy8ElItT79A=;
- b=m73kPTvBr40fmCF5qDs54IzgxxC4VaTi5TYcb4Cq01VQ/N0MK85ND8mtNU/EIfqlja
- 31J+9wc5FIt4mgQF6UR0hhyW1vsjaqPa7Ih1rgj4FZdw8DNeS+V04BNFYecdLRDJkMPv
- qggIemdfDNhdLC0zJQsQl/IWRZ9BCiuQ4gs5Pz5ig536XCTz5eBrPiNo1hTE0x0YjEE4
- eU4bbKSVXwQy53ln5ziVxFdQMseuf6ZqMcDAHuZ/80AiitifuSoRHqOdX9sMUkiWfaey
- PVgZXBb2sRfenrGfODJZCjyqeTJErIy/ZrQXdnYfFlcnTC9gr25Nk8XndiDcL+iKf7kJ
- C0mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701878630; x=1702483430;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=27QkL0Qlhem16i+05liv9a56kuG9xai4sy8ElItT79A=;
- b=rWiWeV8v/ici5O7NzGi8YlMiXFIXqzGU0zK7s7TqSD9XX6ZNn98SESsI/Igj3nKcJ8
- NOjMmdjPbe9H288Ggk322Ldg0IRkeMI9tgrLz3vhjd1Bzh2vXVWHzIqPXW3irH+w7DNC
- P+ymmUYlWXwAOWWkvXQe+TxyS/xY9299JkC91Hss0vqDLs6Km5gb1/2v4FDnirBgJXBI
- Yl4nzdBndLJEoqGNv9RM/MCxNJQ3Uf9UqbzihCe3RExXDkrzVnssACoZyKZZDoN4L31O
- EO+4YETfxdOeomHIC4qTw1Y6lgD4WF5HBtStFRSmNGV/CWAtllDbol+tFaH03ZTpi4cZ
- HC/g==
-X-Gm-Message-State: AOJu0YxW9Iv0J/kjmPbFxtTI96YTgrq1FH6nT/ycYBkbRL2VGLBtLTjn
- 6OWXeyyVv8YurokG286PbMkigW2wzUSURvDv97xf26MuiFCBd1z1D0g=
-X-Google-Smtp-Source: AGHT+IEqRXcjBsdWYlNZbU2ClH8gtQPa8aleQqiMUc1+Vy60LodOkhyu7O5wpN9xRnX+iN0E9nfnhMIY/TSq7mw/JNU=
-X-Received: by 2002:a05:651c:204:b0:2ca:d4c:14d4 with SMTP id
- y4-20020a05651c020400b002ca0d4c14d4mr755967ljn.97.1701878630162; Wed, 06 Dec
- 2023 08:03:50 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B6GNSph012700;
+ Wed, 6 Dec 2023 10:23:28 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701879808;
+ bh=GrmNkTB109sZ7yKhZWnYXTl4xQ/T0rA/BhwG23EK54I=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=sgJ9hzifJLaR6gN4AiIaMF/SJycpPyNMPOc7mHwTVbZ/u0tVYPdmJZ9vJPvKQwb47
+ aHd/A/jhTQs/avgb8dcW4gU2mMKv2no/nnR5Fc7PzFTs1EWCtwPdQyCuC9frF4jbj4
+ skxAprPF4WOeG6FEDmtaKY0C4Zki2DsVt8S3rcMM=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B6GNSTt028045
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 6 Dec 2023 10:23:28 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
+ Dec 2023 10:23:27 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 6 Dec 2023 10:23:27 -0600
+Received: from [10.249.36.163] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B6GNLfY044099;
+ Wed, 6 Dec 2023 10:23:21 -0600
+Message-ID: <b1a71eef-1464-4b33-8f43-f72f11ed59f7@ti.com>
+Date: Wed, 6 Dec 2023 10:23:21 -0600
 MIME-Version: 1.0
-References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
- <20231127171058.165777-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
- <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
- <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 6 Dec 2023 18:03:14 +0200
-Message-ID: <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, sean.anderson@seco.com, neil.armstrong@linaro.org, 
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 4/8] binman: j721e: Add firewall configurations
+Content-Language: en-US
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
+ <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
+ <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, Gregory CLEMENT
+ <gregory.clement@bootlin.com>
+References: <20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com>
+ <20231206-binman-firewalling-v6-4-e7fce13a6dc1@ti.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20231206-binman-firewalling-v6-4-e7fce13a6dc1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,79 +85,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 12/6/23 3:51 AM, Manorit Chawdhry wrote:
+> The following commits adds the configuration of firewalls required to
+> protect ATF and OP-TEE memory region from non-secure reads and
+> writes using master and slave firewalls present in our K3 SOCs.
+> 
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>   arch/arm/dts/k3-j721e-binman.dtsi | 196 ++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 196 insertions(+)
+> 
+> diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+> index 5ddb474e3a41..f428aa81a6c1 100644
+> --- a/arch/arm/dts/k3-j721e-binman.dtsi
+> +++ b/arch/arm/dts/k3-j721e-binman.dtsi
+> @@ -146,6 +146,202 @@
+>   
+>   		fit {
+>   			images {
+> +				atf {
+> +					ti-secure {
+> +						auth-in-place = <0xa02>;
+> +
+> +						firewall-257-0 {
+> +							/* cpu_0_cpu_0_msmc Background Firewall */
+> +							id = <257>;
+> +							region = <0>;
+> +							control = <(FWCTRL_EN | FWCTRL_LOCK |
+> +										FWCTRL_BG | FWCTRL_CACHE)>;
+> +							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
+> +											FWPERM_SECURE_PRIV_RWCD |
+> +											FWPERM_SECURE_USER_RWCD |
+> +											FWPERM_NON_SECURE_PRIV_RWCD |
+> +											FWPERM_NON_SECURE_USER_RWCD)>;
+> +							start_address = <0x0 0x0>;
+> +							end_address = <0xff 0xffffffff>;
+> +						};
+> +
+> +						firewall-257-1 {
+> +							/* cpu_0_cpu_0_msmc Foreground Firewall */
+> +							id = <257>;
+> +							region = <1>;
+> +							control = <(FWCTRL_EN | FWCTRL_LOCK |
+> +										FWCTRL_CACHE)>;
+> +							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
+> +											FWPERM_SECURE_PRIV_RWCD |
+> +											FWPERM_SECURE_USER_RWCD)>;
+> +							start_address = <0x0 0x70000000>;
 
-On Sat, 2 Dec 2023 at 20:28, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Wed, 29 Nov 2023 at 23:50, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > [...]
-> >
-> >> > Changes since v1:
-> >> > - Tokenize the DT node entry and use the appropriate value instead of
-> >> >   the entire string
-> >> > - Removed Peters tested/reviewed-by tags due to the above
-> >> >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
-> >> >  1 file changed, 90 insertions(+), 4 deletions(-)
-> >> >
-> >>
-> >> Can this be put behind a Kconfig? It adds quite a bit of code which
-> >> punishes those boards which do the right thing.
-> >
-> >
-> > Sure but OTOH the code increase should be really minimal. But I don't mind I can add a Kconfig
-> >
-> >>
-> >> > +
-> >> > +       dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
-> >>
-> >> Could this use ofnode_read_string_index() ?
-> >
-> >
-> > Maybe, I'll have a look and change it if that works
+7 levels of indentation, impressive :)
 
-Unless I am missing something this doesn't work.
-This is designed to return a string index from a DT property that's defined as
-foo_property = "value1", "value2" isn't it?
+This start address should always match CONFIG_K3_ATF_LOAD_ADDR, any way
+you can just use that here?
 
-The code above is trying to read an existing property (e.g compatible)
-and get the string after the comma delimiter.
-Perhaps I should add this in drivers/core/ofnode.c instead?
+Also this seems like a lot to add for each SoC, and much of it looks similar
+(at least for Jacinto class devices), could be an opportunity for templating.
 
-> >
-> > [...]
-> >
-> >>
-> >> Any chance of a test for this code?
-> >
-> >
-> > Sure, but any suggestions on where to add the test?
-> > SMBIOS tables are populated on OS booting, do we have a test somewhere that boots an OS?
->
-> They are written on startup, right? They should certainly be in place
-> before U-Boot enters the command line.
+Andrew
 
-Not always.  I am not sure if x86 does that, but on the rest of the
-architectures, they are only initialized when the efi smbios code
-runs. Wasn't this something you were trying to change?
-
->
-> > Any other ideas?
->
-> Probably a test in test/lib/ would work. We actually have
-> smbios-parser.c which might help?
-
-That doesn't seem too helpful either. But I can add a test in
-test/dm/ofnode.c if we move the parsing function to ofnode.c. The
-generic SMBIOS tests can be added when the SMBIOS code is refactored.
-
-Regards
-/Ilias
->
-> Regards,
-> Simon
+> +							end_address = <0x0 0x7001ffff>;
+> +						};
