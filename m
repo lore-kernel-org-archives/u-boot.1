@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B94C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 20:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52BBEC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 20:42:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30367874F3;
-	Wed,  6 Dec 2023 21:35:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B9F80870FC;
+	Wed,  6 Dec 2023 21:42:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vz39qNjI";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kHyohIk+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB72C87158; Wed,  6 Dec 2023 21:35:53 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B78938721C; Wed,  6 Dec 2023 21:42:44 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C765F87015
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 21:35:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C07D7870F4;
+ Wed,  6 Dec 2023 21:42:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6cb55001124so1003069b3a.0
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 12:35:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701894949; x=1702499749; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lZnoUCjEvCfh0KTUqbDoRBqTXegCIrbCcjO2ZIBWHZk=;
- b=Vz39qNjIKod+AUOGL9/LQBYinFkALhg9al28OCQU51rPS/YrAdSoMDibK7TbrRzgpb
- 2a9aEIYCAM5BD9qnR6aDyoCn7L99QF+pAXXrah+KHZPAkIqBhf8wUKSz3f1cscrLTn+N
- 16ttHPVFE33THwm80uTwXA4ll6fYJDzHIaFuSClyp6kdW9NBBHqXtc4epuIs9ga7S+YK
- SVB9u9ptjHBva9AoE5S0z4rvycNVERlgfiTsRpfETw2F6g2hKrTvT6l94SYo46KGtb4I
- dc0UAC60pQzr+Z3P+LyeXTcl1cPvMcma2E90x0Gd3THPNEuL5slEJN/Z9Jt/J2V52EUB
- xjzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701894949; x=1702499749;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lZnoUCjEvCfh0KTUqbDoRBqTXegCIrbCcjO2ZIBWHZk=;
- b=a1f44iH6PjF5sAfZaSAfHIj6zjZDea9UsczlcTkYeVxfgtXlxevsfrf3MxphhvfCK/
- 2tmm3uFuBhanOTK7Wja6VEjFpJd2EFpiSenTBJTQKshxGVMW7v3bKbBEQFutIe9QYE1Q
- 5XvmVEOjBt+71JeemFFaOmE4E6MJcrVrOxsc5W7J49XKfTgx6QUiZlTRPqACsmYKCJ//
- aI0Pw6OQRY5tRbhY6MWXu3L7CgMXdOQ/o7NNIvrF3uqR3eMe72S9GjaZVn62vNSeWy+e
- MxJADM1egXsXNbgv5Nrzwqovf3Rg4NVVbY9wicYixsgFA4gKJTmxkzMvOYFLcuMF6vwu
- w/vg==
-X-Gm-Message-State: AOJu0YzaJuM1XMAbMSppkpWFh7Oqrs36K5B+1RKgMttcsxy7vLCRLr2/
- 3UrqfYIFmQzH20RUHyQdZomvL07icsFyrOmnzMzziA==
-X-Google-Smtp-Source: AGHT+IG5jOx2pOyBGV9vKJPm9YKHb+OaIeSLbntxNBVnLyzlJvDez00vst75th8OgbC8GqZPmUAr9jYoeHijWCST7d8=
-X-Received: by 2002:a05:6a00:198c:b0:6ce:4efe:4db2 with SMTP id
- d12-20020a056a00198c00b006ce4efe4db2mr4239651pfl.17.1701894948934; Wed, 06
- Dec 2023 12:35:48 -0800 (PST)
+ spf=pass smtp.mailfrom=robh+dt@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2148261E8F;
+ Wed,  6 Dec 2023 20:42:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CEAD5C433AB;
+ Wed,  6 Dec 2023 20:42:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701895358;
+ bh=ggp+XIPhO15WDgS3W3AX7qL3knO3YvVJR7Lw8eHACIM=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=kHyohIk+rBIdXzzScBOfIXUC1gl9W/ecAiUBmcCIOFuXU9cFx3lVenPHA4D07kriL
+ xb3ZeyhgeYeiKIVM+fSnefg1luGwD0nDeeOc/Zcb4uJxNbzbOheko5wuD+/FYwIUVf
+ VUbgsqgbIHLT2ycURDNtTEVYFOasztzyphMpwP5i0/sDBIFv98FIH3ZniTBeEcY9ML
+ xVqcl53IkKuHy9Xygs6ypekWDyrVRXs1U0jnr4yUQT4hqVwLWl0tl+DH6yOzBiOaXo
+ MV8BNasCVJ3Lm9/ND/CBpVCePTSbSbmFDiL763LyH0zlm1yTaAiJxMeQg5AKxDt5kK
+ /No4qomTFAPVw==
+Received: by mail-lf1-f53.google.com with SMTP id
+ 2adb3069b0e04-50c05ea5805so292702e87.0; 
+ Wed, 06 Dec 2023 12:42:38 -0800 (PST)
+X-Gm-Message-State: AOJu0YyUPk/CxUYm0LxfBk1yQh61DJAE9h/ryFhOe/ovD4+XSPQUefNT
+ BabdXS74Gu+1UPOoZpgIAvUZANDexoAm3W6+og==
+X-Google-Smtp-Source: AGHT+IEQ7RrVcCA72/WaghhgxNwD4T/QPbAudBDeTdDkteHD8bcIpHP3xQzOgWALwQ0/8k6LooilxO3RNmizW9hbwFQ=
+X-Received: by 2002:a05:6512:3c90:b0:50b:e4a7:7986 with SMTP id
+ h16-20020a0565123c9000b0050be4a77986mr1089421lfv.124.1701895356929; Wed, 06
+ Dec 2023 12:42:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-16-raymond.mao@linaro.org>
- <CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com>
- <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
- <CAPnjgZ0Hxsbv7EHbcnvLtmRSrPgMDfOFS+KmvYBcZgVC1Je4Ng@mail.gmail.com>
- <CAC_iWjKhmJ4BrH73-5sg8XGjMfJbsx8oWLsz3sGKdP8jdoHBDg@mail.gmail.com>
- <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 6 Dec 2023 15:35:38 -0500
-Message-ID: <CAEfUkU+hXKDxcWpeMqOfuc2jyUOALwcG2a9pP2=0wKLFTscP7A@mail.gmail.com>
-Subject: Re: [PATCH v2 15/18] fdt: Allow the devicetree to come from a bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+ <CAL_JsqL4dKbziAgwaCDz7sw-evuX7LZ3E-H6h=xQ9cXiyThY1Q@mail.gmail.com>
+ <CAFA6WYPnobZ+eTGuOs+yTYNnuBu6i37Db9ZS2gr36heH1mFV5Q@mail.gmail.com>
+ <f72c772b-7fd7-4558-96d3-086f8ab7515a@linaro.org>
+ <CAFA6WYOPh6UBt3FDm-c0tfp3YvWtRHkaxy2CJNg8ORKOwPwq0w@mail.gmail.com>
+ <34334add-4017-46f6-873a-d9233e29f640@linaro.org>
+ <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
+In-Reply-To: <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
+From: Rob Herring <robh+dt@kernel.org>
+Date: Wed, 6 Dec 2023 14:42:24 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
+Message-ID: <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ u-boot-custodians@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, conor+dt@kernel.org, 
+ Caleb Connolly <caleb.connolly@linaro.org>, neil.armstrong@linaro.org, 
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Boot Architecture Mailman List <boot-architecture@lists.linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,177 +105,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Tue, Dec 5, 2023 at 11:05=E2=80=AFPM Sumit Garg <sumit.garg@linaro.org> =
+wrote:
+>
+> On Tue, 5 Dec 2023 at 15:39, Krzysztof Kozlowski
+> <krzysztof.kozlowski@linaro.org> wrote:
+> >
+> > On 05/12/2023 10:45, Sumit Garg wrote:
+> > > + U-boot custodians list
+> > >
+> > > On Tue, 5 Dec 2023 at 12:58, Krzysztof Kozlowski
+> > > <krzysztof.kozlowski@linaro.org> wrote:
+> > >>
+> > >> On 05/12/2023 08:13, Sumit Garg wrote:
+> > >>>>> @DT bindings maintainers,
+> > >>>>>
+> > >>>>> Given the ease of maintenance of DT bindings within Linux kernel
+> > >>>>> source tree, I don't have a specific objection there. But can we =
+ease
+> > >>>>> DTS testing for firmware/bootloader projects by providing a versi=
+oned
+> > >>>>> release package for DT bindings? Or if someone else has a better =
+idea
+> > >>>>> here please feel free to chime in.
+> > >>>>
+> > >>>> This doesn't work for you?:
+> > >>>>
+> > >>>> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicet=
+ree-rebasing.git/
+> > >>>
+> > >>> Thanks, this is certainly a good step which I wasn't aware of. Furt=
+her
+> > >>> simplification can be done to decouple devicetree source files from=
+ DT
+> > >>> bindings.
+> > >>
+> > >> Why?
+> > >
+> > > I suppose you are already aware that Linux DTS files are a subset of
+> > > what could be supported by devicetree schemas. There can be
+> > > firmware/bootloader specific properties (one example being [1]) which
+> > > Linux kernel can simply ignore. Will you be willing to add all of
+> > > those DT properties to Linux DTS files and maintain them?
+> >
+> > We already added them and we already maintain them. DTS describes the
+> > hardware, not the OS-subset of the hardware.
+>
+> Let look at some numbers if your statement is justified or not for the
+> example I gave:
+>
+> u-boot$ git grep -nr bootph-* arch/arm* | wc -l
+> 4079
+>
+> linux$ git grep -nr bootph-* arch/arm* | wc -l
+> 267
 
-> The other thing missing here is SPL. The bloblist is designed such
-> that it can be set up in any phase of U-Boot, then is passed to
-> following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
-> need. As I noted, it breaks sandbox_spl. What happens if a board wants
-> to use bloblist in SPL but doesn't want the SPL DT to come from a
-> prior stage? What happens if SPL wants doesn't want to pass the U-Boot
-> DT through to U-Boot in the bloblist? It is all just horribly
-> confusing.
-I think the logic to decide whether to take the DT from bloblist really
-depends
-on the board vendor.
-I will move this kind of logics into board specific functions from fdtdec.c
-in the
-next revision.
-Board vendors can decide the behaviors they want. This can answer the
-question
-above and for example whether they want a fallback when no DT exists in the
-bloblist or the DT from bloblis is corrupted, or just print a warning
-message.
-For Qemu-arm, as an example of design reference, I prefer to take the DT
-from the
-bloblist automatically when (BLOBLIST && OF_BOARD) and keep the fallback
-compatibility to load from `CFG_SYS_SDRAM_BASE` when DT from bloblist is
-corrupted.
-I will take a look into the sandbox_spl failures you mentioned.
+I have no control over whether anyone has submitted the other 3812 instance=
+s.
 
-Thanks and regards,
-Raymond
+> It looks like there is always going to be a catch up game regarding DT
+> properties which either Linux kernel or u-boot or any other
+> firmware/bootloader project don't care about.
 
+As long as dts files in u-boot are manually sync'ed, yes. That is the
+problem and it doesn't matter if we have a standalone repository or
+not.
 
-On Tue, 5 Dec 2023 at 22:57, Simon Glass <sjg@chromium.org> wrote:
+If you want to move in that direction, start automating what u-boot
+imports. You need to do that for bindings if you want to run
+validation, so why not dts files too?
 
-> Hi Ilias,
->
-> On Mon, 4 Dec 2023 at 23:22, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> > > However, DT bindings are something which should be common, the
+> > > hardware description of a device should be universal. IMO, splitting
 > >
-> > Hi Simon,
-> >
-> > We did discuss this in OSFC but perhaps you forgot.  The discussion
-> > was based on the mail here [0].
+> > Both DT bindings and DTS should be common. I don't see the difference.
 >
-> Perhaps I did? Or perhaps we had a different understanding of it?
->
-> >
-> > On Tue, 5 Dec 2023 at 02:52, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Raymond,
-> > >
-> > > On Mon, 4 Dec 2023 at 12:25, Raymond Mao <raymond.mao@linaro.org>
-> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > When `OF_BOARD` is defined, the FDT should be from one of  the
-> board-specific mechanisms:
-> > > > 1. FDT from a bloblist via boot args
-> > > > 2. FDT in memory
-> > > > I don't think we need a new build option to distinguish these two,
-> since it can be done in runtime by checking whether the boot args follow
-> the FW Handoff spec conventions and the FDT exists in the bloblist.
-> > >
-> > > No, I would really like this to be deterministic, so we can fail if
-> > > something goes wrong. The bloblist should be 'declared' as the way to
-> > > boot, for a board.
-> >
-> > We *are* deterministic. I am just going to repeat what we discussed in
-> > OSFC for completeness.
-> > OF_BLOBLIST makes little sense because we are not going to add a
-> > Kconfig per blolblist entry.
-> > I haven't looked at what the patch does yet but the idea was really
-> simple.
-> > - Under OF_BOARD (which can arguably be renamed to OF_PREVIOUS_STAGE
-> > or something like that)  if CONFIG_BLOB is enabled we scan for a
-> > bloblist
-> > - If CONFIG_BLOB is enabled but no bloblist is provided we fail the boot
-> > - If CONFIG_BLOB is not enabled we do what we did up to now, maybe
-> > with a message that this is going to be obsoleted once enough boards
-> > migrate to a bloblist
-> >
-> > IOW if support for a bloblist is enabled we expect to find one from
-> > the previous bootloader. I've lost count of how many times I repeated
-> > this, but here it goes again
-> > The device tree can come
-> > - From u-boot
-> > - From a previous stage loader *somehow* (eg. passed on a bloblist,
-> > passed on a register, read from an EEPROM etc)
-> >
-> > We should keep that distinction and create subcategories for the
-> > 'comes from a previous stage loader', rather than adding arbitrary
-> > config options which only confuse people
->
-> I don't know why you are so frustrated about this. This patch does not
-> even do what you have listed above, so far as I can tell.
->
-> We have:
-> - OF_HAS_PRIOR_STAGE which indicates that U-Boot is not the first phase
-> - OF_BOARD which indicates that the board can do anything it likes
-> - BLOBLIST which indicates that there is a bloblist
->
-> I proposed adding:
-> - OF_BLOBLIST which indicates that U-Boot gets the DT from the bloblist
->
-> I understood that your intention OF_BOARD would go away since there
-> are almost no cases that need it. I was skeptical it could be done but
-> I definitely agreed (and still do) that it would be great if that
-> could go away, as we would not need OF_BLOBLIST since OF_BOARD would
-> effectively mean the same thing.
->
-> But when I look at this patch, that is not what is happening. In fact,
-> there is no indication that the DT came from the bloblist. U-Boot will
-> just report 'devicetree: board'. We must say where it came from.
->
-> The other thing missing here is SPL. The bloblist is designed such
-> that it can be set up in any phase of U-Boot, then is passed to
-> following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
-> need. As I noted, it breaks sandbox_spl. What happens if a board wants
-> to use bloblist in SPL but doesn't want the SPL DT to come from a
-> prior stage? What happens if SPL wants doesn't want to pass the U-Boot
-> DT through to U-Boot in the bloblist? It is all just horribly
-> confusing.
->
-> So I believe, in fact, that we cannot get rid of OF_BOARD now, and
-> perhaps for quite a long time. There is another discussion about
-> Qualcomm where they want a gzipped DT attached to the end of U-Boot,
-> for example. Perhaps the key problem with this patch is that it would
-> ensure that OF_BOARD sticks around, since it means both a) Get the DT
-> from bloblist if BLOBLIST; b) Get the DT from a board-specific
-> mechanism if !BLOBLIST. That is not what we discussed.
->
-> Why not just take my original patch and work from there? It will save
-> a lot of time. We can then progressively migrate boards from OF_BOARD
-> to OF_BLOBLIST and then perhaps one day remove OF_BOARD (I remain
-> skeptical, but hopeful). The whole 'standard passage' thing [1] was
-> carefully thought out *two years ago* and (I believe) dealt with all
-> of the issues above.
->
-> For now, we should apply the patches which bring in the spec changes,
-> so we can figure out the rest of it. I have added my review tag for
-> those.
->
-> Regards,
-> SImon
-> >
-> > Regards
-> > /Ilias
-> > >
-> > > If in the future all boards a reusing bloblist for this feature, then
-> > > sure, we can drop it. But we have things like rpi which do their own
-> > > thing.
-> > >
-> > > > If it fulfills the above conditions, we can take the FDT from
-> bloblist, otherwise from the predefined memory address.
-> > > > This is fully backward compatible without adding a new build option.
-> > >
-> > > Again, we need to obtain the FDT from the bloblist if and only if the
-> > > board requires it. It creates a lot of confusion to have it as an
-> > > optional feature, when we know which way it should be.
-> > >
-> > > Ultimately OF_BOARD should go away. We just need to push bloblist to
-> > > other projects and closed-source firmware as the correct way to pass a
-> > > DT.
-> > >
-> > > Regards,
-> > > Simon
-> > > [.]
-> >
-> > [0]
-> https://lore.kernel.org/u-boot/CAPnjgZ0SqVyj_drLEQrP21zPYCco3HOP-rYD+nKJMa0BVYpMDA@mail.gmail.com/
->
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
->
+> If we really care about DTS to be common then the contribution model
+> has to change where there is a single repo hosting DT bindings and
+> DTS. All other projects whether it is Linux kernel or u-boot or any
+> other OS/firmware/bootloader are just consuming DTS files from that
+> single repo.
+
+Really, only the kernel and u-boot matter. No, I don't mean I don't
+care about other projects, but those are the 2 with the widest h/w
+support by far and which have a major effort to sync copies of dts
+files in both projects. The rest are just noise in terms of this
+problem.
+
+> I suppose this is something that Linux DT maintainers
+> have objected to in the past for ease of maintenance. I am not sure if
+> you folks are willing to change that stance.
+
+The issue is no one steps up to help maintain such a repository while
+there is lots of review and maintainer work on what goes into the
+kernel tree. I'm happy to direct my binding review attention to
+wherever the majority of the bindings go. But the work on the DTS side
+is mostly SoC tree maintainers and sub-maintainers.
+
+Assume for a minute we have this standalone repo. What happens next?
+We start with an empty repo and then merge and move platforms 1 by 1?
+How many years will that take? What do we do with platforms no one is
+interested in moving? Or do we start with devicetree-rebasing instead
+(That was the plan at one time) and sync u-boot back to that?
+
+All the work needed to get u-boot and kernel dts files in sync has
+virtually no dependency on a standalone repo. If the dts files aren't
+already kept in sync, someone has to figure the differences and
+eliminate them. Maybe some platforms are in good shape, but it is
+still a manual process. Fix that part, because a standalone repo does
+nothing for you until you do.
+
+> > > DT bindings alone would ease the compliance process for u-boot driver=
+s
+> > > in quite similar manner to Linux drivers.
+
+There's no compliance of drivers really beyond checking if compatible
+strings used by drivers have a schema.
+
+Why is extracting the bindings out a problem? SystemReady has no issue
+doing just that for its compliance test.
+
+Rob
