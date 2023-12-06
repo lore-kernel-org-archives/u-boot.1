@@ -4,130 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9886C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 08:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04487C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 09:04:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C411870DE;
-	Wed,  6 Dec 2023 09:33:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 596488756E;
+	Wed,  6 Dec 2023 10:04:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="TV2cQSQJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uFTAbp7w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F12E28768F; Wed,  6 Dec 2023 09:33:32 +0100 (CET)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on0605.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::605])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3444B8756E; Wed,  6 Dec 2023 10:04:28 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C613C807A8
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 09:33:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=weidmueller.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=stefan.herbrechtsmeier-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OfHSeBZ+WPzNWNtMERLULEWCmHlfh9aSIdZwmq+Nr+PEPcT90jAyCs+q117pFJ0I6ZREl/7bE+lFxQmV0a/GfB5pS6Zg34lMrE4nKGu6T7WKHxpgrdhsHcTTEJlRgR7qTaVouybZ2A05IBds/WdkqpzhB7h5MJhqYlozmlky+47vZ8JETGuSzAS7WnXkeEYku2HzryDu4iVbkUPUXDQ0fPu/HyYKgoHC2mWTwnSokN5qfcZrCyHlwm0K+EAbf51LA7Y9UH7ftbiJsLD+eqPgYifPHWBnuekMCEu5TyAm6fmbVSkG9V6bvzN2hqeFJmg+jKSslcSH+KoWeXWvI3n+KA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BOs6Vj//SMA79Y4bb8I+ed9D0ds6eC7W7fYXeEv24ks=;
- b=P99Vo3dyR5tsapdxK9y07WbFN6+IJOEFanh/Q5pHfUQ+vzM/SgmNQJrjLZLYVXzpFILO5swStaFgbbWuGsvX/0Qu+nbYr3rWwyJxoMO/iMw1qLqPZgcuDyIAkXBjD53VCtrZBtpOjjj0Qr7Rohn3SZHbk1vqQssyU1wkngij3nz5jWvdzW0SBIf7f+7whpyr6RXbKfc0W+bz7OhT06cnTKCF6sh+VdCrwv1DC/BtSY9PAzWnqIilGySWGDjjm+Dc93Za0CIZJBlSz6xwMlr7P9sJf5x48cF7ejTqpqsUzh/04ZEApWp1lWgoegqitvyhjKIxnH05WI1Rq+Yz+qjNYg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+ by phobos.denx.de (Postfix) with ESMTPS id 1C58A86EEE
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 10:04:26 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3334254cfa3so262314f8f.1
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 01:04:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BOs6Vj//SMA79Y4bb8I+ed9D0ds6eC7W7fYXeEv24ks=;
- b=TV2cQSQJhUhT2an2KQl1mnT5J7dgzEWbDsX/RJY9bVM2kMZfpX+C7gii51bm7KgxXAwfNy1eejRatFEFZ7CUAZPJ/3pW5r+y6z0PBMj2JvNf3UsfPpvapnVupkkePsQP4o2vS+LNFucrrRfrKCq2y3L1N2yA94VfkQagGZEFkDY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from PAXPR08MB6969.eurprd08.prod.outlook.com (2603:10a6:102:1d8::23)
- by DU2PR08MB10088.eurprd08.prod.outlook.com (2603:10a6:10:49b::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34; Wed, 6 Dec
- 2023 08:33:29 +0000
-Received: from PAXPR08MB6969.eurprd08.prod.outlook.com
- ([fe80::170a:86f7:52ad:28e7]) by PAXPR08MB6969.eurprd08.prod.outlook.com
- ([fe80::170a:86f7:52ad:28e7%7]) with mapi id 15.20.7046.034; Wed, 6 Dec 2023
- 08:33:29 +0000
-Message-ID: <edf38e3c-2172-40c3-9331-3cf663bf5514@weidmueller.com>
-Date: Wed, 6 Dec 2023 09:33:27 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/30] mtd: spi-nor-core: Set dummy buswidth equal to data
- buswidth
-To: u-boot@lists.denx.de
-References: <20231206053024.3744447-1-tejas.arvind.bhumkar@amd.com>
-Content-Language: en-US
-From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>
-In-Reply-To: <20231206053024.3744447-1-tejas.arvind.bhumkar@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0145.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:95::8) To PAXPR08MB6969.eurprd08.prod.outlook.com
- (2603:10a6:102:1d8::23)
+ d=linaro.org; s=google; t=1701853465; x=1702458265; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P+1/0oUjz5rluJhR9RmqMC8xOdhAin3fsn5Iyog2y8c=;
+ b=uFTAbp7wAZdD4N/m7V9ee5UOtKPn7LPYt+Bl5JDqXkJGak7Uxt1j79HTelGVBqv54G
+ XmCOhHrEDl1GCQd6T9qTLzxXV2qFKfn86vixDH7N6+KKaZAuII5IqZyWJY7oZjgGHjG7
+ wbwn+O/XT1uV+eSG45TS3bWwDAmjrJyB5ERXE7ux2oV8kJ6PiGq65d7KABvmmXOyvbDG
+ mARNR5Jj9i5qVW3qqGVW+A5fGa14qg8p30qshiLrproXyUVHsMFuR2wF+wDfKWf072QF
+ 3v4P0A4rUX+ta1OUTxomwDqsZXBZxsSze9rBzOXMaQwi9xIn/z7ieHngvJf2ZT2amIk0
+ S46w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701853465; x=1702458265;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P+1/0oUjz5rluJhR9RmqMC8xOdhAin3fsn5Iyog2y8c=;
+ b=J4cc75kOxFAiF0vVoVFSHFuJvg0+jcZyep6QxA5MMSwJv0BpBPR/K8SCFH1FQCG1FY
+ VKHsJw3ZAh7HuRvJJrbc811epMfP0Kp62+d+4wvz0jNN3vl0avgHbPjCjcRENhCDXte8
+ gn2poNEGiKPdsoVL0ta/u68tpi078hk2uVFZKtlcCZ7SfKHbFy6SY9UJnS+uIUmkdWu9
+ qb2SjsPtEWCHpArlgQzUNIMmd3pn8vGbRVJv931cVOGL6X826dHo6INehhNPMh+UA0Mu
+ e/BULnGHt9/Uj3N00JSSmDJef7m/yAD0vketatlw6Xv2tVEyKHV/ZHdJQF/Uk+SHiIgb
+ 4BDA==
+X-Gm-Message-State: AOJu0YwGtZ52jIZ9P8akXaMUQtw8IgGD+rkwzBHbDeZJHLQTYYV8AboB
+ TUZP8BMLvaQEZ6eIj8/JwQkhjQ==
+X-Google-Smtp-Source: AGHT+IH6UZ6fmBx3WT/fEHQpSNnffMtr8r3z85mCMC6cjF8XVc2xQiy24DScww8nDJycO89IPZ4CFQ==
+X-Received: by 2002:adf:f250:0:b0:333:2fd7:9602 with SMTP id
+ b16-20020adff250000000b003332fd79602mr279648wrp.61.1701853465615; 
+ Wed, 06 Dec 2023 01:04:25 -0800 (PST)
+Received: from [127.0.1.1] ([2a01:e0a:982:cbb0:f855:6075:9365:8b70])
+ by smtp.gmail.com with ESMTPSA id
+ f9-20020adff8c9000000b003333d2c6420sm10682031wrq.74.2023.12.06.01.04.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Dec 2023 01:04:25 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 06 Dec 2023 10:04:21 +0100
+Subject: [PATCH] configs: meson: enable missing DM_USB_GADGET
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR08MB6969:EE_|DU2PR08MB10088:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4556bd08-3b79-4478-c494-08dbf63605dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: P9hT01iQljknQLmiXuty7V/u8EMr9jaeEdaDaFKjWqnGEY/bcHQsZZBRiquFyF0rPqKLcu3+5ZaV8FZfHg9ivk9xuakWpPZ9fXn9EylARarIuMVucfPrTydtZQREregSMhVWofRswqZQfg0XtqbX5wRjgRPmr9Q8n7yZj6Hn+6grZ0HyQwied7Vu+Bho6Uz0B/2VbVMyKQnoBx8oaohaMjYoG0q2AjhWOml9NQXbpURkZ6l31m3RIePgpkqMRvvgtB/m5BwyJqd+sGxd4f77N0v7p1rAH+PvDuFIlFA1JmUv2kNo0A9cXxh7EZJcLKHpkqVJ5vc0+1rXJS5kh7jpUue+7Xka/k+nBvNl9EyJX79Eg+7p/8VDd0SLwd3we8SQl3eQGwTCmV/nu5VXLt/UZHC7XthoKpkYNLvzys63her4Sieom4KbTzZYb+AOYWXrexXG6vivK6SXdjR+a0u0Ef7sYfCIFvf5gFXKXnQDlzBpzkiyxVsrXLpNwgRL4mnqeJVdI1qsT1e8vZbzxJvOGHjkfC1RJ80v2EMRNOZ7pO+YTloVJk0MCLTpcJ2gWuOvGQYeVZIDOhsLBQiPHhRF3cpoKK0evu2fQL5uexRQpNxjJCgSi8LP4SGa0uYNp7coGS5Rh5QnEFcz1DEL5TxZ5Q==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR08MB6969.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(346002)(39850400004)(136003)(376002)(396003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(31686004)(26005)(2616005)(36756003)(38100700002)(31696002)(86362001)(83380400001)(5660300002)(66946007)(6512007)(6506007)(66556008)(8936002)(66476007)(8676002)(6486002)(6916009)(316002)(41300700001)(2906002)(478600001)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cXVnMFFMSVFqUTN2czA0dzN3cHVkK2FjRXhlUFhGb1NMQ3d0SVdXNGV6WmND?=
- =?utf-8?B?STJFbnAwQ2EvOVlWdW5BYzZxQzAyR0ZSVFBmeGQ0NFg4aXBKQjhLTzVXN3BB?=
- =?utf-8?B?b01LdTJ1eDQ0NXRnVXNpTFhVa2trTlovS2pUYjgwb3dkWlhRU1VyQlVUTXdm?=
- =?utf-8?B?TFMxR2pqZjdYSzVtL1Njb3RIc20zbWExVE5WazJyUHBMQ0Zna1RXV01rbzN4?=
- =?utf-8?B?NjlJMUp4QklPRmx1Sndjb3BoOWs0ZFdpSkVIVUUweE1MTGF3MjZnZXZSaTJ1?=
- =?utf-8?B?UHZ0ZzJqcXcrelNSNWdYNDdxb1MzOEJiNG1IanNVSlpnTGZ2TktLdS9iSkNS?=
- =?utf-8?B?NmdWWFBpQU9qcWc4bjl4VU83SHlaeE1qdWRBcm9CYWNCbUwva0JsWjEyaVdq?=
- =?utf-8?B?YmQreWlHSUozYzdCVVA5YWZBSllJekhNWThjY1NnT215ZzNSbVU1RllJdEZD?=
- =?utf-8?B?VVZoYzNCUGtqZ21YUlRpU202cVhoNndGUzRXd1BkQWNOanZkUW9mcjNyTmw0?=
- =?utf-8?B?Q3lGMnJxUGV2cm1MLzhMellWdk5mOXd5OU1mb1Jnd1BqWndVanlXdXVqV1Nv?=
- =?utf-8?B?Uy9NRzV5YjlObGp3RTk1OEVLWU5vQmxCWjBIdjRVOWxxdkI0aFRoL0xiVjhU?=
- =?utf-8?B?Tm1GaHJiTWRPbEZUcWh3RXNzZXVpUURIdnhvMmlFZUNJNTVXVUNVd2pUM256?=
- =?utf-8?B?ano5Ym0wSHVCTHF6WXVQUGg1YUoyUkN6QzZZQVNTcHcxK3hrdHdwelk0QVNC?=
- =?utf-8?B?UzZGdDUzZkUyU1RrbEM0T0tRVDdLczdOQlNtZURreTUzdDhEekwzb2QxaFNr?=
- =?utf-8?B?a1BDVlFsZnFxWjRhWitTOHFHOERYSU5vYmNlMUdyOGptUUlIeEF0VTk1WU9z?=
- =?utf-8?B?ZGFkWmEzN1hTNWZLb1hBWURHV0Z3c1orOTJFdkVoOGRVZmJ5UTFhQ3V0SEdr?=
- =?utf-8?B?SE5ySlFPKzlPM2s1b0twSmtsei9oNGV0RlZUOUhmMkRwTWo2YURRdElhbko1?=
- =?utf-8?B?bTU1WitWcm5Fd0VRVGtVcHBhRXpBMGxtSktDbWJveXo4RXRORjZuamwvMTFm?=
- =?utf-8?B?dkNmV1VnMkZDbDJJQ1g0bUtvUnhWemdRTEo5NitSUG9ySDBuOE42bnlpTWJC?=
- =?utf-8?B?eFBJaFJQOHNZVjlwREI5K08vdlA4OTl0b2x4dSsya2MwWGFoTmpDUzBhL3lJ?=
- =?utf-8?B?c3g2UEZ2Tm5iQnpDRmhlZDVzeklQdXU1SjA3bE9nYmd5UE1NaUtZM3lpdGNz?=
- =?utf-8?B?ancrSFZiNHl6enQ5QjI0Q0x3RkJJOFB5TFBrcFlDK0VWc0hhbEthVG9YSEJC?=
- =?utf-8?B?ZXNLb2pFWFFsR29ZckgyL1NENjZVSWYwQWh5elVaNXZlNkhXdmU5TDIyWHRJ?=
- =?utf-8?B?UWl3VHRZUjl1RllhTjQrSzJSbEVjVTRrRFNvaXlNa3Z3VTk4RmhWR2lPR0d5?=
- =?utf-8?B?VTNkYW9MWkdHSmtSOUpEcW9MVDhpUllMNFlWZG1YZmsvdUhQRjhlSVpRLzZJ?=
- =?utf-8?B?OGNwWjY5WXpscUZGQ0dHY0dkazFPb21RMFFxVy90NTlQTjVudUltcUtEZGZa?=
- =?utf-8?B?clAxZ0lHK3V0UFVkYmdyQVdidytoNW5XeXZoVVllcC9NS0NyNnhKZU0wMGIx?=
- =?utf-8?B?K0hvblNHcy9Cd25DNVlVZ1dTa2srVndHWks0RXp1bUVSMnI5SXR6WkZYUUdW?=
- =?utf-8?B?NWs0QVo4Ukd0ZGRlbklKWHdGZDR3QUY2amFRVEVGZUV5UU4zTFcvWXRLOXZV?=
- =?utf-8?B?QjRxY051czdMMXdPUG9SajgyK0FMdWVhMFowSTJLVFFPbUxLcHpqTENJWWYz?=
- =?utf-8?B?amZ2ekFZYVc2K0h1T2QvN2Rwb1QwN2lDbStwVHpOQnFJQUpnaDZkSHpGZ2p4?=
- =?utf-8?B?WTVJZjFXU1p3Q3F6c0VrMnhRbkNtVTh6elJKaU4xdStvOGhOQVBRZVlGTlBK?=
- =?utf-8?B?YTJXd2ltVEtlOVBqcERhQnNjNGhvTVQ3WW8xdEZmeXdyeVJrQ0pNaXZKVmE1?=
- =?utf-8?B?L1JtZndBaXlhZ2pLQ0s5bUVJMFpkK2IvL3NCK1o1TjdXaWY3dG1aWE9vNlp0?=
- =?utf-8?B?N3NlYkdaaldFMFRxSHlrVFBNTGlUc0QwNGtQOEw0TGw0N3huUjREd3Z3SGF2?=
- =?utf-8?B?MzJwZWt3SElFVmVNcTNldWZlY3dGZ2k3Yk9hQXVrMUJqV3kvYUh1ZmJ2WThP?=
- =?utf-8?B?SWc9PQ==?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4556bd08-3b79-4478-c494-08dbf63605dc
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR08MB6969.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 08:33:29.1124 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SA9bJUs3O83DpmhrpfKZJWmOt4eyjdGNNIotuVBAj4N43lW7e7jEBfRhU2KSVuCxXcCnhCUgZx2et9PJu6LtSQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB10088
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20231206-u-boot-m2s-fix-usb-gadget-v1-1-1c4c66cd10f3@linaro.org>
+X-B4-Tracking: v=1; b=H4sIABQ5cGUC/x2MQQqAMAzAviI9W9g6EPEr4mFqnT3oZFURhn93e
+ AwkyaCchBW6KkPiW1TiXsDWFUyr3wOjzIWBDDlLpsELxxhP3EhxkQcvHTH4OfCJk3emZWsdUQu
+ lPxIX43/3w/t+SBi3VGsAAAA=
+To: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2987;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=ORIDsnMm4F8KEoPrXWijjF8CkW7NnOxxAsMmhYyoUOg=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBlcDkWvt2bDJou8o/2uAP9JbfYjo5d3c0S+5XkO
+ LvNxOG9RV6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZXA5FgAKCRB33NvayMhJ
+ 0XTxD/0WoDTtAoX4kn7qcPmi7W9kx7jG6rAeC95VtfZASss1si1XEIUegPmzFbteHl5RznWbbiD
+ 62pRHYJnf+rIcNVPP0F9M5KiVWENJgUazjkjhVuqs4soAIa254IKf+In5htnrscHywkGGB/bLLj
+ q3PCCLI97N6HYfqvJBhG16kmJVE21/zg/FOFB4AWAA4lqxs65aCKN/JygCZn1o0Eph0O8yH3mqd
+ yei2/NVxGkmDWvkq9QQ/O7CBzWmFd6/2CLU154LxMIOJqfqM1OnR6MaCdhFAtExZsOv+1hYN2HF
+ ahAuZClCuQ9znLX7++wohTaNiv19pfH/rWdFGhGjs8yEOyd8Fzy5LrrQavIfhFxJgVpmvp5Hbn8
+ eveoHcNI5VD5oIyg+OsKs73ockza/XiKY+q3gGR0OHZi4ZFNzUUq8iw80NKeFYtGQ1dcdoEdsbq
+ bXZvdtINFZJTDu6hdcUv5FZznX1CK9ChYUGGE285WtsxbmMYeaYoMhFVwqENLtizLURrfr5mRLh
+ Rzr3oHl6wZEepQIwIwqLSyIlt3ROtySIAPIbaMWzDTPF33aMfuYQgLLrgRDFwvLTriyeXVRsFDT
+ WzuDtGRSUCzkoZlEzslCxwyoajbO30u+tcGqMviDPLute7MdLZ6FsGix0eruh24DYYYdEOvKPSs
+ iFFZiTEpdF3W1VA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,52 +109,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tejas Bhumkar,
+Since commit b96640cbfb ("ARM: meson: g12a: switch dwc2 otg to DM")
+and commit e327e2affd ("ARM: meson: switch AXG & GX dwc2 otg to DM")
+Amlogic boards now requires DM_USB_GADGET to have USB Gadget to work.
 
-Am 06.12.2023 um 06:30 schrieb Tejas Bhumkar:
-> From: T Karthik Reddy <t.karthik.reddy@xilinx.com>
->
-> In current implementation dummy buswidth is set equal to address
-> buswidth. In case of quad spi (mode 1-1-4), where address width is 1
-> the dummy bytes will be calculated to 1(8 dummy cycles) and dummy
-> buswidth is set to 1. Due to this, the controller driver will introduce
-> 8 dummy cycles on data line(D0) during read operation.
->
-> But since we are using 4 data lines in case of qspi, we need to change
-> this dummy bus width to 4. This will make dummy bytes to 4 inplace of 1.
-> This will be taken care in controller driver by dividing with dummy
-> buswidth again as in below code, which makes dummy cycles to 8 as
-> earlier.
+Add it to the boards configs as returned by:
+$ grep -L DM_USB_GADGET $(grep -l CONFIG_USB_GADGET $(grep -l MESON configs/*))
 
-Do you have any specification that states that the dummy lines use the 
-data and not the address width?
+Fixes: b96640cbfb ("ARM: meson: g12a: switch dwc2 otg to DM")
+Fixes: e327e2affd ("ARM: meson: switch AXG & GX dwc2 otg to DM")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ configs/bananapi-m2-pro_defconfig | 1 +
+ configs/bananapi-m2s_defconfig    | 1 +
+ configs/libretech-cc_v2_defconfig | 1 +
+ configs/odroid-go-ultra_defconfig | 1 +
+ configs/radxa-zero2_defconfig     | 1 +
+ 5 files changed, 5 insertions(+)
 
-Both u-boot and the Linux kernel use the address width for the 
-calculation of the dummy bytes until now.
+diff --git a/configs/bananapi-m2-pro_defconfig b/configs/bananapi-m2-pro_defconfig
+index 2a3958b0fd..755bccb4a7 100644
+--- a/configs/bananapi-m2-pro_defconfig
++++ b/configs/bananapi-m2-pro_defconfig
+@@ -56,6 +56,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
+ CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+diff --git a/configs/bananapi-m2s_defconfig b/configs/bananapi-m2s_defconfig
+index 405ce3a93a..af8daced62 100644
+--- a/configs/bananapi-m2s_defconfig
++++ b/configs/bananapi-m2s_defconfig
+@@ -61,6 +61,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
+ CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+diff --git a/configs/libretech-cc_v2_defconfig b/configs/libretech-cc_v2_defconfig
+index ba74b241ab..b1c267a791 100644
+--- a/configs/libretech-cc_v2_defconfig
++++ b/configs/libretech-cc_v2_defconfig
+@@ -66,6 +66,7 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_MESON_SPIFC=y
+ CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
+diff --git a/configs/odroid-go-ultra_defconfig b/configs/odroid-go-ultra_defconfig
+index bc0bf9b896..49d628b76a 100644
+--- a/configs/odroid-go-ultra_defconfig
++++ b/configs/odroid-go-ultra_defconfig
+@@ -63,6 +63,7 @@ CONFIG_MESON_SERIAL=y
+ CONFIG_SYSINFO=y
+ CONFIG_SYSINFO_SMBIOS=y
+ CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
+diff --git a/configs/radxa-zero2_defconfig b/configs/radxa-zero2_defconfig
+index e9415762ff..b795681b3f 100644
+--- a/configs/radxa-zero2_defconfig
++++ b/configs/radxa-zero2_defconfig
+@@ -52,6 +52,7 @@ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
+ CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
 
+---
+base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
+change-id: 20231206-u-boot-m2s-fix-usb-gadget-ca308e113228
 
-> dummy_cycles = op->dummy.nbytes * 8 / op->dummy.buswidth;
->
-> So with this change dummy cycles will be on all data lines(D0-D3) and it
-> is taken care for all the configurations(single, dual, quad and octal).
->
-> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>
-> Signed-off-by: T Karthik Reddy <t.karthik.reddy@xilinx.com>
-> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-> ---
->   drivers/mtd/spi/spi-nor-core.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> index 473d9f41f3..8949dab548 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -260,7 +260,7 @@ void spi_nor_setup_op(const struct spi_nor *nor,
->   		op->addr.buswidth = spi_nor_get_protocol_addr_nbits(proto);
->   
->   	if (op->dummy.nbytes)
-> -		op->dummy.buswidth = spi_nor_get_protocol_addr_nbits(proto);
-> +		op->dummy.buswidth = spi_nor_get_protocol_data_nbits(proto);
->   
->   	if (op->data.nbytes)
->   		op->data.buswidth = spi_nor_get_protocol_data_nbits(proto);
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
