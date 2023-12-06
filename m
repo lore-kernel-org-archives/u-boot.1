@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19693C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 07:05:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B02C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 07:06:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 206EF87032;
-	Wed,  6 Dec 2023 08:05:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C4B687032;
+	Wed,  6 Dec 2023 08:06:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XS6/tHvV";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="eeTaRdS3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D1A487015; Wed,  6 Dec 2023 08:05:48 +0100 (CET)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E432A87032; Wed,  6 Dec 2023 08:06:24 +0100 (CET)
+Received: from mout.web.de (mout.web.de [212.227.15.3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7A728706F
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 08:05:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E0FE87015
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 08:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4b2ede7754cso703151e0c.1
- for <u-boot@lists.denx.de>; Tue, 05 Dec 2023 23:05:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701846342; x=1702451142; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MgKLeghP/L9AG2DIJp+MavarKqNWuLlYNL11Buis+MY=;
- b=XS6/tHvVUENVwFaHaIpcOf+O5qqGxhACuid5ddtXB+xhq/Xii82ywM9b9lRpIV2ate
- Dwh3S/aFhirH6grWfCy0KRh6YWjkUWGpfOub+8BeR2VFLvfzRC76+XKMZSYvPKTB57ng
- KxdwB+sZZ2FWRCK0NJeMKzUR0ENFGnz3m2qH4sQRoaQhOSe52RdW4ogUMijutOTLs+SN
- kcv91Fh2X9DpSnT0VbPuIUNGdqzTaxnMNpW1xvFqT2UaayE3jLf0msOFBvDNSsPz4Q39
- b08zpFaRSj+8gtpDpVyBwP/5e5xsGAC0KJZ+sRN1TFinEIuN0cZCPTMAISQ6PnJouEGY
- K/HA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701846342; x=1702451142;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MgKLeghP/L9AG2DIJp+MavarKqNWuLlYNL11Buis+MY=;
- b=hjlCGwHah/GZ5UORs5F1Jn0MxcpD6lztuKjFEz8VwbG3XZUGlGznFoTYQUnC1cQIWr
- saFW9vrxv2tD1QawnCpoSYMnsqI+mODdU3ZRnnvS1hwI9m+pxkasgXEfQzZLicUTcq4z
- lgDmcahCClpyCNspkQTdaYH1OZBH+aC0FcntSFYNZnyiEmZvQRj2Q7A5HGWBme92aSfQ
- 73EgnC2rumRdQyNvVtuQ6bBRqMqkpmAtXmOR8d1k1eAXHjaBlHj+z6NznrfbjUSvr7Cw
- boBCD1xlQcu45l1bxiGDbOntCDj2hQiP3NbWBD9zJapejkI4VxnkZjaLdgQWmsH4tTd6
- vWbw==
-X-Gm-Message-State: AOJu0YyeKx5L9bGGXU9b6rfbR53yyXzzF1t96LwqQniKoNTMg8YdoMNt
- nBvoObJyQ0UZjyFVDpx4ugd57QVPiWcvdGwCBzuosQ==
-X-Google-Smtp-Source: AGHT+IFfALvtVT/5vkcKVCNImofiqXP/9F4sQXBPFQtQyL7/zDswmWmmjO8iaron+Co7+s7wUDdmTPAkyyrpcIqzhi4=
-X-Received: by 2002:a1f:4ec5:0:b0:4b2:d5d9:d451 with SMTP id
- c188-20020a1f4ec5000000b004b2d5d9d451mr379544vkb.31.1701846342452; Tue, 05
- Dec 2023 23:05:42 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de; s=s29768273;
+ t=1701846380; x=1702451180; i=smoch@web.de;
+ bh=kdVeGS5fEUjKRPc0ejh/Iu7SNeCwcZXh2XJ8HeAmzt8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=eeTaRdS3Ts3j4jmwB3iyTaVfWWCJBgTUHINWh/QCfBL1ZNZm0XVry54DxGTpBnQ4
+ kAL/ckDxuGF/PqjnPu00OMK0UIp2SewVaDmRoACi/Mdf0tkpIksZTA7H6oVYJuCzd
+ c+T/acXFqs6+JTsMmoK349PbJTqISruFlNY/JEGsTU74jGeDF+ErSVJzy0fcvapgJ
+ tbhGUBJmJpYQjhocEEcZp7htKKbOyiyPr4TV7iXMWXfb8fJ07UutYMvsAC6jz0QUE
+ 45oALZXPVpb7kBOSYKaE0S5j3nReAJ0S1+KcFiyAmYWbw07VlbJFedc/uxDALtCVZ
+ vXJvCFWKPqzp9lfdgQ==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [10.9.8.2] ([93.241.254.39]) by smtp.web.de (mrweb006
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1M604t-1r9ND62RiN-007TaW; Wed, 06
+ Dec 2023 08:06:20 +0100
+Message-ID: <5f54c9b0-921b-46c2-9e5c-eb657b4f1ef3@web.de>
+Date: Wed, 6 Dec 2023 08:06:18 +0100
 MIME-Version: 1.0
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <CAPnjgZ03MEK_PeuaXcR1VuC-_tBmQmrzq3bo-jS3Jd22+rSgww@mail.gmail.com>
- <CAFA6WYOQX64jArOAV1W-8=174pru78SotGNVhjYth8qu=Swa=Q@mail.gmail.com>
- <CAPnjgZ0y9VF5Mpx2VVtDnR6NFhs7mi=aAaByV4jqgDvUwZH60g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0y9VF5Mpx2VVtDnR6NFhs7mi=aAaByV4jqgDvUwZH60g@mail.gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 6 Dec 2023 12:35:30 +0530
-Message-ID: <CAFA6WYOxUm9SE9g7-ycp-ZyYn=JgABWJktbj4kaqEKiZGNq2CA@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-To: Simon Glass <sjg@chromium.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATHv11 26/43] configs/tbs2910_defconfig inc limit
+Content-Language: en-US
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, goldsimon@gmx.de
+References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
+ <20231127125726.3735-27-maxim.uvarov@linaro.org>
+ <20231127131129.GD2513409@bill-the-cat>
+ <c7022ef3-ad0c-4f89-ad47-a0f7df2a24c6@web.de>
+ <CAD8XO3aVLzpqV=MDVO2mJBP=sLzSieXhrV8GUPYPpu76mRKjeQ@mail.gmail.com>
+ <CAD8XO3Y4_=8wDQcFNJW1MT1yiyDmbQxP3UCRWWWPZzuJkZp88g@mail.gmail.com>
+ <1402b942-9ce9-4bc3-9fac-0eb438b23e77@web.de>
+ <CAD8XO3bYyfDVnVQdcqDji39Y=i1Q2jdG-SQ6KUWsBPo0umoZnQ@mail.gmail.com>
+ <b47859ca-36d3-4eee-88fb-f7859e69ff2d@web.de>
+ <CAD8XO3Zqt1SN6t4MWXozJ4R-FjQ1324Vn5=h6xCe13gwxb9qSA@mail.gmail.com>
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <CAD8XO3Zqt1SN6t4MWXozJ4R-FjQ1324Vn5=h6xCe13gwxb9qSA@mail.gmail.com>
+X-Provags-ID: V03:K1:YNoKevQteu1w34q76uCG+wCJMspMwYCCMN/Ozbl04dfCdouYimJ
+ nq+NWVMtEMgN752wl9TXb4zVPtz0cG0U00j8CV/r/cjn3pxK+lr1mqbXYxhNBpQG+b53Qxw
+ S34OVVi7bkkP27cOkzRdl+XoJ6D8OnADFUFAQkM5nQ/ROPhfO4WBaS/EbOmeshS41uLm8kP
+ 3JRnVXewkefUEpCRWK0yA==
+UI-OutboundReport: notjunk:1;M01:P0:LVZc9Q2SS/M=;jSAT+WynSmRhi88H0Tvrlhutl0Q
+ MbadK2poChZiaHsg67bmYSMqz5uFnRjAmIFwkrX1v3C4SCldcDcWOpG1ZNvhr+zpy+GNgTd25
+ 7HZphpsRoDIK4ntVj2sdXLvaGUTDJsYo0Xq9at7HyAYb/GmJe+aXLy9p5MeJpCU0BK98UwUiw
+ Wjyb0iq1lR3qp/tugRVO7qVj//kjXKtjffx14PaEVZnnE/7Bf+WLXS0Bo5JvFzeslyoq719IA
+ E1ZdJlou/cBHI3gQGDIUUy0rlCtv9ZupSZHEm68vY1zB59KC4Z3+LjLoHRQ4OMu5E05gD27TN
+ PzW0K5maexKthQwFwiUyrNNWCthZR1M8WKqPmML15TagWZ+9fl65scFSQccH9iRO5zJ72LKmv
+ 7OFqmz1StBZuu5KSRbebs8Fe4j2ytFHLX5+fgmZrvQJO0oOm+tSL8qRtVT1Ea54sk8dWva3Gn
+ j4hDjWh8htJXbVwxrbobPVPCYXorGG1t4GpC5tu6Jp0RN3OXrPc9tbKQCeZ8QFlDpyJXzqrcA
+ IsXM6p83lefQ3oXT+PkKigcOq7TQXVwPzklvtl2xvmnrNRJWTWfwtc/T0b12I+ph6YbVaNc5O
+ TEW6WWPWQrTnK7ij4sW2VRfTASYUyM3DQEao6i9e2Gz0j6ADd8eYvSl+amgj2jJRguPcRiFTz
+ gTaneFmCDwT1oXkawdqv/67USyQgJE5siMlaYRcR/YPwPvgXxU05OLiXGlr7wfuMnXwf0pjvb
+ S4yrX2S2Qyb5k+hZBLEXc2ffK2V8MytHW1PVq8tOEdhMs1wuQ48NXpG5JpTgmKOdGuqkkXT1V
+ UJpW3OiHZgB7PWMx0zmegVETT1kdlRTTB5sBmtX6t1VSrRE8IgYW9o6CTfNBT9Tycl4MffNko
+ ACn6bTiL0H9vBjpd5DMAnyn/T4HC9KTCbTwj+dke67RAOKQ2yRmBi+wFEqjulAqPbsRn1u5eV
+ JeTavBB5NZ6zufJHmin3pOCqTUA=
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,189 +98,282 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Dec 2023 at 09:24, Simon Glass <sjg@chromium.org> wrote:
+On 05.12.23 21:00, Maxim Uvarov wrote:
+> On Wed, 6 Dec 2023 at 00:25, Soeren Moch <smoch@web.de> wrote:
 >
-> Hi Sumit,
+>     On 05.12.23 17:25, Maxim Uvarov wrote:
+>>     On Tue, 5 Dec 2023 at 21:49, Soeren Moch <smoch@web.de> wrote:
+>>
+>>         On 05.12.23 14:15, Maxim Uvarov wrote:
+>>>         I think I solved the size issue on all the boards.
+>>>
+>>>         Key changes:
+>>>         1. remove compilation of original ping.c and tftp.c (tftp
+>>>         had also server code, so I will partially bring it back.)
+>>         Interesting.
+>>         @Tom: Is there other server code in u-boot, that is enabled
+>>         by default (and can be used to reclaim code space)?
+>>         Fur sure I do not need u-boot to act as server for tftp (maye
+>>         nfs, others).
+>>
+>>
+>>     Maybe I need to be more clear about this. reference to code from
+>>     tftp.c and ping.c exist in net.c, test/image/spl_load_net.c,
+>>     test.dm/dsa.c <http://test.dm/dsa.c>, test/dm/eth.c.
+>>     And even if that code is not used (replaced with lwip calls to
+>>     the same commands in my case) it adds additional size. Even
+>>     enabled LTO does not see
+>>     direct difference.
+>     So 'server code' does not mean u-boot acting as network server,
+>     you mean this code is referenced by something else? And things in
+>     test do increase image size?
 >
-> On Tue, 5 Dec 2023 at 00:44, Sumit Garg <sumit.garg@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Tue, 5 Dec 2023 at 06:22, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sumit,
-> > >
-> > > On Tue, 21 Nov 2023 at 23:21, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > > >
-> > > > Hi Caleb,
-> > > >
-> > > > On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> > > > >
-> > > > > Historically, Qualcomm boards in U-Boot have all had their own
-> > > > > board/qualcomm/xyz directory, their own CONFIG_TARGET_XYZ option, their
-> > > > > own hardcoded sysmap-xyz.c file, and their own U-Boot specific
-> > > > > devicetree with little/no compatibility with upstream DT.
-> > > > >
-> > > > > This series makes a few final prepatory changes, and then replaces
-> > > > > almost all of the board specific code with generic alternatives. The end
-> > > > > result is that all Qualcomm boards both current and future (with the
-> > > > > exception of the db410c and db820c) can be supported by a single U-Boot
-> > > > > binary by just providing the correct DT. New boards can be added without
-> > > > > introducing any addition mach/ or board/ code or config options.
-> > > > >
-> > > > > Due to the nature of this change, the patch ("mach-snapdragon:
-> > > > > generalise board support") has become pretty big, I tried a few
-> > > > > different ways to represent this in git history, but the other methods
-> > > > > (e.g. adding a stub "generic" target and removing it again) were more
-> > > > > confusing and made for much messier git history. The current patch is
-> > > > > mostly atomic, but requires regenerating the config.
-> > > > >
-> > > > > The QCS404 EVB board had some code to enable the USB VBUS regulator,
-> > > > > this is dropped in favour of a adding a new vbus-supply property to the
-> > > > > dwc3-generic driver. This will also be used by the dragonboard845c in a
-> > > > > future patch. This handles the common case of a board requiring some
-> > > > > regulator be enabled for USB host mode.
-> > > > >
-> > > >
-> > > > Thanks for your work. It is a good step towards a generalized u-boot
-> > > > on Qcom platforms. Although I would like to give it an in-depth
-> > > > review, I have a common discussion point about DT, see below.
-> > > >
-> > > > > A more detailed description of the changes is below.
-> > > > >
-> > > > > == Memory map ==
-> > > > >
-> > > > > The memory map was historically hardcoded into U-Boot, this meant that
-> > > > > U-Boot had to be built for a specific variant of a device. This is
-> > > > > changed to instead read the memory map from the DT /memory node.
-> > > > >
-> > > > > Additionally, most boards mapped addresss 0x0 as valid, as a result if a
-> > > > > null pointer access happens then it will cause a bus stall (and board
-> > > > > hang). This is fixed so that null pointer accesses will now correctly
-> > > > > throw an exception.
-> > > > >
-> > > > > == DT loading ==
-> > > > >
-> > > > > Previously, boards used the FDT blob embedded into U-Boot (via
-> > > > > OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
-> > > > > bootloader, so we can instead rely on the first-stage bootloader to
-> > > > > populate some useful FDT properties for us (notably the /memory node and
-> > > > > KASLR seed) and fetch the DTB that it provides. Combined with the memory
-> > > > > map changes above, this let's us entirely avoid configuring the memory
-> > > > > map explicitly.
-> > > >
-> > > > Since with this change, we don't need to embed FDT blob in the u-boot
-> > > > binary, so I was thinking if we really need to import DTs from Linux
-> > > > for different platforms and then play a catchup game?
-> > > >
-> > > > IMO, the build command would look like following if we import
-> > > > pre-built FDT blob from Linux:
-> > > >
-> > > > - Build u-boot::
-> > > >
-> > > >        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> > > >        $ make qcom_defconfig
-> > > >        $ make
-> > > >
-> > > > - gzip u-boot::
-> > > >
-> > > >        gzip u-boot-nodtb.bin
-> > > >
-> > > > - Append dtb to gzipped u-boot::
-> > > >
-> > > >         cat u-boot-nodtb.bin.gz
-> > > > <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
-> > > > u-boot-nodtb.bin.gz-dtb
-> > >
-> > > What is this?? Who or what uses a gzipped image with a single DT attached?
-> >
-> > The gzipped image is loaded by Qcom proprietary bootloaders (ABL or
-> > LK). It is the usual way Linux is booted on these platforms. U-boot is
-> > being brought into this chain to leverage standardized EFI boot
-> > processes.
+This was my question to understand possible options to save space.
 >
-> LK is Little kernel, I believe. That is an open source project, right?
-> But I suppose it is BSD licensed so in fact the code is not available?
-> Is ABL obsolete?
+>>
+>>>         2. LTO=3Dy
+>>>         3. CONFIG_LOGLEVEL=3D3 instead of 4.
+>>>         4. CONFIG_CMD_DATE is not set
+>>>         5. CONFIG_CMD_LICENSE is not set
+>>>         6. CONFIG_CMD_PING (if 1-6 did not help).
+>>>
+>>>         And these changes were enough for CI tagrets to build.
+>>>         I also tested that Raspberry PI 4B works fine (dhcp, ping).
+>>>         Looking for other boards to test.
+>>>
+>>>         For example for this tbs2910 board changes are:
+>>         Disabling CMD_DATE is unfortunate. This can help to debug RTC
+>>         problems (already used it for this purpose).
+>>         And, if we are that close to the size limit, than maybe we
+>>         can get away for this series, but for sure will run into
+>>         trouble for every other small change to u-boot core/driver code=
+.
+>>
+>>         Regards,
+>>         Soeren
+>>
+>>
+>>     The problem is that for many targets the limit is 1MB.
+>     For tbs2910 it is 383kBytes. And there was plenty of free space
+>     when I introduced mainline u-boot support. But yes, space got
+>     tighter over time.
+>
+>
+> Hm,
+> orig:
+> -rw-r--r-- 1 uboot uboot 371K Dec =C2=A05 19:54 u-boot.bin
+> lwip:
+> -rw-r--r-- 1 uboot uboot 380K Dec =C2=A05 19:55 u-boot.bin
+>
+> Then if I just enable CMD_DATE:
+> u-boot.imx exceeds file size limit:
+> =C2=A0 limit: =C2=A00x5fc00 bytes
+> =C2=A0 actual: 0x60c00 bytes
+> =C2=A0 excess: 0x1000 bytes
+> make: *** [Makefile:1240: u-boot.imx] Error 1
+> make: *** Deleting file 'u-boot.imx'
+> uboot@3eebd85985c8:~/uboot-size$ ls -lh u-boot.bin
+> -rw-r--r-- 1 uboot uboot 382K Dec =C2=A05 19:58 u-boot.bin
+>
+> So limit for your board is:
+> (gdb) p 0x5fc00/1024
+> $1 =3D 383
+>
+> 383k. Where do you see the space?
+Here I do not understand what you want to ask.
 
-ABL: Android Boot Loader. I suppose it is somewhat derived from edk2
-ABL EFI application. It's not obsolete but rather the one widely used
-proprietary bootloader on recent SoCs (qcs404, sdm845 and all later
-SoCs). Infact LK is somewhat obsolete which supports db410c, db820c
-etc.
+As I wrote earlier, yes, tbs2910 limit is 383k, for u-boot.imx, the
+number you tried to change in this patch to 408k, but this change is not
+possible.
 
->
-> I'm not sure that it matters in any case. We should be able to
-> standardise the U-Boot part and let the private projects implement
-> that, for a seamless boot.
->
-> What you have written above is not a good way for U-Boot to be
-> packaged or invoked.
+Without your changes there is some space left (not as much as 2014 when
+I introduced tbs2910 support in u-boot), but enough to make further
+u-boot development with unavoidable small image size increases possible.
+(size of v2024.01-rc4 u-boot.imx for tbs2910 is 375k).
 
-I agree but we have to live with that given the challenges Caleb
-mentioned in the other thread.
-
+Regards,
+Soeren
 >
-> >
-> > >
-> > > >
-> > > > This would avoid the maintenance burden to keep DT in sync with that
-> > > > of Linux. And since DT bindings in Linux are backwards compatible, we
-> > > > can say u-boot should work with DTB picked up from any Linux kernel
-> > > > stable release.
-> > >
-> > > That is not the current situation, unfortunately.
-> > >
-> >
-> > Hopefully with efforts from Caleb and team we can reach that point soon.
-> >
-> > > U-Boot is moving to using Binman to package the firmware. There needs
-> > > to be a description of the firmware image for each U-Boot boot. To my
-> > > way of thinking, rpi is a degenerate form, not something to be copied,
-> > > due to the closed-source nature of the firmware and its inability to
-> > > be changed. We do have (in the works) a way to pass a DT using a
-> > > standard firmware handoff. Perhaps that can be adopted by these
-> > > closed-source projects?
-> >
-> > Why should we really need firmware handoff if the DT can be passed in
-> > one of the u-boot boot arguments? Linux kernel does support this
-> > method to retrieve DT as well.
+> BR,
+> Maxim.
 >
-> Here I am not referring to Linux, but to the firmware stages. We need
-> firmware handoff so all these nutty binaries around the place can
-> communicate with the open source (firmware) projects in a sensible
-> fashion.
-
-AFAIK, firmware handoff is an alternative way alongside DT to
-communicate among firmware images if each firmware image can't support
-a DT parser. Qcom proprietary bootloaders support DT parser and hence
-they can communicate information (memory/reserved memory nodes etc)
-via DT. Don't you consider DT as a sensible way to pass information to
-u-boot?
-
+>>     U-Boot in some minimal configuration is about 500kb. But U-boot
+>>     with EFI, USB, Eth drivers, MMC, RTC, and all the commands is
+>>     900+ kb and very close to 1MB. Most of the new features are
+>>     enabled by default.
+>     No. Tom does a very good job to ensure that there is no (not much)
+>     additional space required for unrelated boards that do not need
+>     new features.
+>>     I.e. they do not exist in _defconfig and appear in the resulting
+>>     .config automatically.=C2=A0 I would say that for some small target=
+s
+>>     things like EFI, Secure boot, TPM, Updates and many others are
+>>     not needed. But if new features will appear by default very soon
+>>     we will see limits.
+>     New features will not be enabled for old space constrained boards.
+>     In your series you did not offer to keep the old implementation
+>     instead, this is different and the reason why we discuss image
+>     size constraints.
 >
-> For Linux we can pass the DT using existing mechanisms.
+>     Regards,
+>     Soeren
+>>
+>>     BR,
+>>     Maxim.
+>>
+>>>
+>>>         --- a/configs/tbs2910_defconfig
+>>>         +++ b/configs/tbs2910_defconfig
+>>>         @@ -18,6 +18,7 @@ CONFIG_SYS_MEMTEST_END=3D0x2f400000
+>>>         =C2=A0CONFIG_LTO=3Dy
+>>>         =C2=A0CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
+>>>         =C2=A0CONFIG_BOARD_SIZE_LIMIT=3D392192
+>>>         +CONFIG_TIMESTAMP=3Dy (this was added by savedefconfig)
+>>>         =C2=A0# CONFIG_BOOTSTD is not set
+>>>         =C2=A0CONFIG_SUPPORT_RAW_INITRD=3Dy
+>>>         =C2=A0CONFIG_BOOTDELAY=3D3
+>>>         @@ -26,6 +27,7 @@ CONFIG_BOOTCOMMAND=3D"mmc rescan; if run
+>>>         bootcmd_up1; then run bootcmd_up2; else r
+>>>         =C2=A0CONFIG_USE_PREBOOT=3Dy
+>>>         =C2=A0CONFIG_PREBOOT=3D"echo PCI:; pci enum; pci 1; usb start"
+>>>         =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"imx6q-tbs2910.dtb"
+>>>         +CONFIG_LOGLEVEL=3D3
+>>>         =C2=A0CONFIG_PRE_CONSOLE_BUFFER=3Dy
+>>>         =C2=A0CONFIG_HUSH_PARSER=3Dy
+>>>         =C2=A0CONFIG_SYS_PROMPT=3D"Matrix U-Boot> "
+>>>         @@ -52,7 +54,7 @@ CONFIG_CMD_DHCP=3Dy
+>>>         =C2=A0CONFIG_CMD_MII=3Dy
+>>>         =C2=A0CONFIG_CMD_PING=3Dy
+>>>         =C2=A0CONFIG_CMD_CACHE=3Dy
+>>>         -CONFIG_CMD_TIME=3Dy
+>>>         +# CONFIG_CMD_DATE is not set
+>>>         =C2=A0CONFIG_CMD_SYSBOOT=3Dy
+>>>         =C2=A0# CONFIG_CMD_VIDCONSOLE is not set
+>>>         =C2=A0CONFIG_CMD_EXT2=3Dy
+>>>
+>>>         BR,
+>>>         Maxim.
+>>>
+>>>
+>>>         On Tue, 28 Nov 2023 at 13:09, Maxim Uvarov
+>>>         <maxim.uvarov@linaro.org> wrote:
+>>>
+>>>
+>>>
+>>>             On Tue, 28 Nov 2023 at 03:20, Soeren Moch <smoch@web.de>
+>>>             wrote:
+>>>
+>>>                 On 27.11.23 14:11, Tom Rini wrote:
+>>>                 > On Mon, Nov 27, 2023 at 06:57:09PM +0600, Maxim
+>>>                 Uvarov wrote:
+>>>                 >
+>>>                 >> Increase allowed binary size to fit lwip code.
+>>>                 >>
+>>>                 >> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.or=
+g>
+>>>                 >> ---
+>>>                 >>=C2=A0 =C2=A0configs/tbs2910_defconfig | 2 +-
+>>>                 >>=C2=A0 =C2=A01 file changed, 1 insertion(+), 1 delet=
+ion(-)
+>>>                 >>
+>>>                 >> diff --git a/configs/tbs2910_defconfig
+>>>                 b/configs/tbs2910_defconfig
+>>>                 >> index 8fbe84f1d2..ce40efa9ab 100644
+>>>                 >> --- a/configs/tbs2910_defconfig
+>>>                 >> +++ b/configs/tbs2910_defconfig
+>>>                 >> @@ -17,7 +17,7 @@ CONFIG_SYS_MEMTEST_START=3D0x1000=
+0000
+>>>                 >> =C2=A0CONFIG_SYS_MEMTEST_END=3D0x2f400000
+>>>                 >>=C2=A0 =C2=A0CONFIG_LTO=3Dy
+>>>                 >> =C2=A0CONFIG_HAS_BOARD_SIZE_LIMIT=3Dy
+>>>                 >> -CONFIG_BOARD_SIZE_LIMIT=3D392192
+>>>                 >> +CONFIG_BOARD_SIZE_LIMIT=3D417792
+>>>                 >>=C2=A0 =C2=A0# CONFIG_BOOTSTD is not set
+>>>                 >> =C2=A0CONFIG_SUPPORT_RAW_INITRD=3Dy
+>>>                 >>=C2=A0 =C2=A0CONFIG_BOOTDELAY=3D3
+>>>                 > This is another case where the binary size is a
+>>>                 fairly hard limit. You
+>>>                 > forgot to cc the board maintainer here (and I
+>>>                 assume the rest of the
+>>>                 > series too) for these config changes.
+>>>                 ThanksTom for sending a notification to me.
+>>>
+>>>                 Yes, the CONFIG_BOARD_SIZE_LIMIT is a hard limit and
+>>>                 this patch in its
+>>>                 current form will break tbs2910 support and even
+>>>                 brick the board for
+>>>                 some configurations. So NAK for this patch.
+>>>                 > I think on this platform it's not
+>>>                 > impossible (like it is on am335x where I just
+>>>                 replied) but really
+>>>                 > difficult. I'll let Soeren comment on if switching
+>>>                 the network stack to
+>>>                 > lwip is the kind of feature enhancement that
+>>>                 warrants the pain of
+>>>                 > dealing with the size change here or not.
+>>>                 Network boot is no important feature for this board
+>>>                 and not used in
+>>>                 the default boot configuration. But network support
+>>>                 always was part
+>>>                 of the config, may be used by some users, and is at
+>>>                 least required
+>>>                 to communicate the ethernet address to linux.
+>>>
+>>>                 So I'm not interested in a new network stack for
+>>>                 this board, but
+>>>                 also cannot disable network support completely. This
+>>>                 seems to be a
+>>>                 problem for this patch series, since networking
+>>>                 support implies LWIP
+>>>                 now.
+>>>
+>>>
+>>>             Thanks Soeren for the explanation. Then yes, something
+>>>             more advanced is needed
+>>>             to be done here.
+>>>
+>>>                 The question for me is, why is the new network stack
+>>>                 consuming so
+>>>                 much space, with only a few enabled commands? Is the
+>>>                 whole library
+>>>                 linked in with some unused features (the cover
+>>>                 letter mentions much
+>>>                 more than what seems to be used in the converted
+>>>                 commands). Or is
+>>>                 the old network stack linked in in parallel to the
+>>>                 new one? Can
+>>>                 we save space here?
+>>>
+>>>
+>>>             Yes, the old code is still there. I decided to not touch
+>>>             it for the first integration (arp.o, bootp.o, ping.o and
+>>>             mostly all from net/Makefile). Those files also have
+>>>             reference code in net/net.c. Not compiling
+>>>             and not linking this code will save some space, but It's
+>>>             larger than the current version.
+>>>             Like for EVM SPL code with usb+net+ext4 and etc have
+>>>             very minimal space for network stack.
+>>>             I will take a look at this more closely...
+>>>
+>>>
+>>>                 NFS support in the old networking code is quite big,
+>>>                 enabled by default,
+>>>                 and probably still there in parallel to this new
+>>>                 lwip library. If there
+>>>                 is really no other option to save space, and lwip in
+>>>                 general is agreed
+>>>                 to be the way forward for U-Boot, and only tbs2910
+>>>                 is blocking that,
+>>>                 then from my point of view disabling NFS for tbs2910
+>>>                 could be a way
+>>>                 to stay within the size limit.
+>>>
+>>>             ok. I think that by default we need something very
+>>>             minimal (dhcp, tftp),=C2=A0 probably ping is even not need=
+ed.
+>>>
+>>>                 Regards,
+>>>                 Soeren
+>>>
+>>
 >
-> >
-> > >
-> > > BTW I am very pleased to see this series and I hope that Qualcomm (via
-> > > Linaro) can continue to improve its U-Boot support.
-> >
-> > It's good to know, thanks.
->
-> It is the hiding of the DT that I object to. I would like to see these
-> files in U-Boot, so we can build U-Boot for the platform and boot it
-> with its local DT. Otherwise many of the innovations U-Boot provides,
-> such as firmware packaging, become impossible. My feeling on this
-> might change if the bindings process were easier.
-
-I agree with your current perspective about DT bindings. As you can
-see from my conversations with DT bindings maintainers, it is
-difficult to maintain local u-boot DT copy unless you can easily
-validate them.
-
--Sumit
-
->
-> Regards,
-> Simon
