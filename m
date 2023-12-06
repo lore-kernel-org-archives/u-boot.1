@@ -4,71 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13DBC4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 16:41:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AFDAC4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 17:38:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C16F1870F6;
-	Wed,  6 Dec 2023 17:41:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E57B8709A;
+	Wed,  6 Dec 2023 18:38:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m4vTMffE";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="anqxPzK7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D618F876C0; Wed,  6 Dec 2023 17:41:38 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 99F1587654; Wed,  6 Dec 2023 18:38:42 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 074E286EF1
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 17:41:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E4D48725F
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 18:38:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B6GfTML035778;
- Wed, 6 Dec 2023 10:41:30 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701880890;
- bh=ksyuHDgt3m4rd50WD3JbPMcrUjJKz6Z2WOSv6BPN/nA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=m4vTMffEAKltsneSReTTTK0Eye46YoS1KvsYoGB+EVETATK8Zr7U1vWgLqDPhOGLF
- mn403sl3jibk2ww9RjgodAeC2IULL3rlghqOzm84eC8MVOlK8LcyGlpaRlMRJXO7+w
- Ck6W7npZP6nQZHkvIWbli6WjXCAls+Lo6AmTfzIk=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B6GfTEp107479
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Dec 2023 10:41:29 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Dec 2023 10:41:29 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Dec 2023 10:41:29 -0600
-Received: from [10.249.36.163] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B6GfTch066653;
- Wed, 6 Dec 2023 10:41:29 -0600
-Message-ID: <23ba39ff-87e9-4e19-944f-64939297abd4@ti.com>
-Date: Wed, 6 Dec 2023 10:41:29 -0600
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 8/8] docs: k3: Add secure booting documentation
-Content-Language: en-US
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Neha Malcom Francis
- <n-francis@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
- <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, Gregory CLEMENT
- <gregory.clement@bootlin.com>
-References: <20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com>
- <20231206-binman-firewalling-v6-8-e7fce13a6dc1@ti.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231206-binman-firewalling-v6-8-e7fce13a6dc1@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1701884319;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AIFIE9irPiHpBCzaEsGhlzQmk7KDpAPd1R8xcuraGyg=;
+ b=anqxPzK7T0g7Ce9J4JfkGwm8VSlatS1V/LUy1tDHIvjvQY898LDmpuvAxx6UUcpvuNjxrz
+ rHgjv0X/CPEoBcyenByW7SWf4c0BOJReVW6y9H7KBB/luOs1Bx141R+ULA+uhU6bdtsxnR
+ vfGT+KuN9LbkfBc0Q6PrP2oWcTk3+L5J/Jpue27rpJd9cKV0S5mcmEHpZCWAhUek4k+Iug
+ pz4JnMR/gwRM1Fg++rurvf6HpcOCISINKTsVPOFoKRZmBW6VE+rNPVHWa2KXlX9Gq18TYD
+ s6H8dJWN7siHX6dxILff6Y4wlWs/1qWBd80GVkA5p7JNkJ3P0WnCBCEGcN5yVg==
+Date: Wed, 06 Dec 2023 18:38:38 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Vignesh R <vigneshr@ti.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel
+ Holland <samuel@sholland.org>, Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, Bob McChesney
+ <bob@electricworry.net>, Stephen Graf <stephen.graf@gmail.com>,
+ u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 1/3] mtd: spi-nor: Add support for zBIT ZB25VQ128
+In-Reply-To: <20231206162443.7f0692d7@donnerap.manchester.arm.com>
+References: <20231204005954.13201-1-andre.przywara@arm.com>
+ <20231204005954.13201-2-andre.przywara@arm.com>
+ <20231206162443.7f0692d7@donnerap.manchester.arm.com>
+Message-ID: <2a2db42c20704a600b726b1ee807f1c0@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,121 +76,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/6/23 3:51 AM, Manorit Chawdhry wrote:
-> This commit adds a general flow to explain the usage of firewalls and
-> the chain of trust in K3 devices.
+Hello Andre,
+
+On 2023-12-06 17:24, Andre Przywara wrote:
+> On Mon,  4 Dec 2023 00:59:52 +0000 Andre Przywara 
+> <andre.przywara@arm.com> wrote:
+>> Add support for the zBIT ZB25VQ128 (128M-bit) SPI NOR flash memory 
+>> chip,
+>> as used on the Xunlong Orange Pi Zero 3 board.
 > 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->   doc/board/ti/k3.rst | 45 +++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 45 insertions(+)
-> 
-> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-> index 947b86ba8292..60d04c5708be 100644
-> --- a/doc/board/ti/k3.rst
-> +++ b/doc/board/ti/k3.rst
-> @@ -104,6 +104,51 @@ firmware can be loaded on the now free core in the wakeup domain.
->   For more information on the bootup process of your SoC, consult the
->   device specific boot flow documentation.
->   
-> +Secure Boot
-> +^^^^^^^^^^^
-> +
-> +K3 HS-SE devices are used for authenticated boot flow with secure boot.
+> does anyone have any objections against this patch? I wanted to take 
+> this
+> via the sunxi tree, as this blocks some board support patches.
 
-How about:
+The patch looks perfectly fine to me.  Thus,
 
-K3 HS-SE devices enforce an authenticated boot flow for secure boot.
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
-> +HS-FS devices have optional authentication in the flow and doesn't "require"
-> +authentication unless converted to HS-SE devices.
+> IIUC Linux gave up on adding rather generic entries up for each and 
+> every
+> SPI NOR chip, if there is nothing special about them:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=773bbe1044
+> Should we follow suit here?
 
-HS-FS is the state of a K3 device before it has been eFused with
-customer security keys. In the HS-FS state the authentication still
-can function as in HS-SE but as there are no customer keys to verify
-the signatures against the authentication will pass for certificates
-signed with any key.
+I think it would be good to employ the same approach, to make it easier 
+to support more chips and more boards in the future.  Also, at least a 
+few already existing chip definitions could be dropped, after testing, 
+of course.  Simplifying the things is almost always a good choice.
 
-> +
-> +Chain of trust
-> +""""""""""""""
-> +
-> +1) SMS starts up and loads the authenticated ROM code in Wakeup Domain
-> +2) ROM code starts up and loads the authenticated tiboot3.bin in Wakeup
-> +   Domain
-> +3) Wakeup SPL (tiboot3.bin) would authenticate the next set of binaries
-> +   (ATF,OP-TEE,DM,SPL,etc.)
-> +4) After ATF and OP-TEE load, ARMV8 U-boot authenticates the next set of
-> +   binaries (Linux and DTBs) if using FIT Image authentication and having a
-> +   signature node in U-boot.
+As visible in [1] and [2], the Linux kernel no longer accepts entries 
+for the chips that can be detected automatically and don't require some 
+specific fixes.
 
+[1] 
+https://lore.kernel.org/linux-mtd/542998283b464d19fa5f354898de79df@walle.cc/T/#t
+[2] 
+https://lore.kernel.org/linux-mtd/20231123160721.64561-2-tudor.ambarus@linaro.org/
 
-This might be better said like this:
-
-1) Public ROM loads the tiboot3.bin (R5 SPL, TIFS)
-2) R5 SPL loads tispl.bin (ATF, OP-TEE, DM, SPL)
-3) SPL loads u-boot.img (U-Boot)
-4) U-Boot loads fitImage (Linux and DTBs)
-
-Each stage authenticating (and optionally decrypting) while loading is
-implied by the following sentences below, no need to repeat each time.
-
-Plus the use of "ROM" is confusing, we have two ROMs in K3 (Secure ROM
-and Public ROM), you should always be specific.
-
-> +
-> +Steps 1-3 are all authenticated by either the ROM code or TIFS as the
-
-s/ROM code/Secure ROM
-
-> +authenticating entity and step 4 uses U-boot standard mechanism for
-> +authenticating.
-> +
-> +All the authentication that are done for ROM/TIFS are done through x509
-> +certificates that are signed.
-> +
-> +Firewalls
-> +"""""""""
-> +
-> +1) ROM comes up and sets up firewalls that are needed by itself
-
-Secure ROM
-
-> +2) TIFS (in multicertificate will setup it's own firewalls)
-
-TIFS sets up it's own firewalls in either case.
-
-> +3) R5 SPL comes along and opens up other firewalls ( that are not owned by
-> +   anyone - essentially firewalls that were setup by ROM but are not needed
-> +   anymore)
-
-How about:
-
-3) R5 SPL will remove any firewalls that are leftover from the Secure ROM stage
-that are no longer required.
-
-> +4) Each stage beyond this: such as tispl.bin containing TFA/OPTEE uses OIDs to
-> +   set up firewalls to protect themselves (enforced by TIFS)
-> +5) TFA/OP-TEE can configure other firewalls at runtime if required as they
-> +   are already authenticated and firewalled off from illegal access.
-> +6) A53 SPL and U-boot itself startups but has no ability to change the
-> +   protection firewalls enforced by x509 OIDs or any other firewalls
-> +   configured by ROM/TIFS in the beginning.
-
-6) All later stages can setup or remove firewalls that have not been already
-configured by previous stages, such as those created by TIFS, TFA, and OP-TEE.
-
-> +
-> +Futhur, firewalls have a lockdown bit in hardware that enforces the setting
-> +(and cannot be over-ridden) till the full system is resetted.
-
-s/till/until
-s/resetted/reset
-
-Andrew
-
-> +
->   Software Sources
->   ----------------
->   
-> 
+>> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+>> ---
+>>  drivers/mtd/spi/Kconfig       | 5 +++++
+>>  drivers/mtd/spi/spi-nor-ids.c | 5 +++++
+>>  2 files changed, 10 insertions(+)
+>> 
+>> diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
+>> index 732b0760452..abed392c28d 100644
+>> --- a/drivers/mtd/spi/Kconfig
+>> +++ b/drivers/mtd/spi/Kconfig
+>> @@ -224,6 +224,11 @@ config SPI_FLASH_XTX
+>>  	  Add support for various XTX (XTX Technology Limited)
+>>  	  SPI flash chips (XT25xxx).
+>> 
+>> +config SPI_FLASH_ZBIT
+>> +	bool "ZBIT SPI flash support"
+>> +	help
+>> +	  Add support for Zbit Semiconductor Inc. SPI flash chips (ZB25xxx).
+>> +
+>>  endif
+>> 
+>>  config SPI_FLASH_USE_4K_SECTORS
+>> diff --git a/drivers/mtd/spi/spi-nor-ids.c 
+>> b/drivers/mtd/spi/spi-nor-ids.c
+>> index 3cb132dcffc..f86e7ff8e58 100644
+>> --- a/drivers/mtd/spi/spi-nor-ids.c
+>> +++ b/drivers/mtd/spi/spi-nor-ids.c
+>> @@ -571,6 +571,11 @@ const struct flash_info spi_nor_ids[] = {
+>>  	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | 
+>> SPI_NOR_4B_OPCODES) },
+>>  	{ INFO("xt25w01g", 0x0b651B, 0, 64 * 1024, 2048,
+>>  	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | 
+>> SPI_NOR_4B_OPCODES) },
+>> +#endif
+>> +#ifdef CONFIG_SPI_FLASH_ZBIT
+>> +	/* Zbit Semiconductor Inc. */
+>> +	{ INFO("zb25vq128", 0x5e4018, 0, 64 * 1024, 256,
+>> +	       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>>  #endif
+>>  	{ },
+>>  };
