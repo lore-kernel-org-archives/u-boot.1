@@ -4,80 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 146BBC4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 08:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9886C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 08:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 453568752F;
-	Wed,  6 Dec 2023 09:21:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C411870DE;
+	Wed,  6 Dec 2023 09:33:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UIvS9W/O";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="TV2cQSQJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 323D487556; Wed,  6 Dec 2023 09:21:30 +0100 (CET)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F12E28768F; Wed,  6 Dec 2023 09:33:32 +0100 (CET)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on0605.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe02::605])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6973486D85
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 09:21:27 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2ca0d14976aso34037051fa.2
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 00:21:27 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id C613C807A8
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 09:33:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=stefan.herbrechtsmeier-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OfHSeBZ+WPzNWNtMERLULEWCmHlfh9aSIdZwmq+Nr+PEPcT90jAyCs+q117pFJ0I6ZREl/7bE+lFxQmV0a/GfB5pS6Zg34lMrE4nKGu6T7WKHxpgrdhsHcTTEJlRgR7qTaVouybZ2A05IBds/WdkqpzhB7h5MJhqYlozmlky+47vZ8JETGuSzAS7WnXkeEYku2HzryDu4iVbkUPUXDQ0fPu/HyYKgoHC2mWTwnSokN5qfcZrCyHlwm0K+EAbf51LA7Y9UH7ftbiJsLD+eqPgYifPHWBnuekMCEu5TyAm6fmbVSkG9V6bvzN2hqeFJmg+jKSslcSH+KoWeXWvI3n+KA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=BOs6Vj//SMA79Y4bb8I+ed9D0ds6eC7W7fYXeEv24ks=;
+ b=P99Vo3dyR5tsapdxK9y07WbFN6+IJOEFanh/Q5pHfUQ+vzM/SgmNQJrjLZLYVXzpFILO5swStaFgbbWuGsvX/0Qu+nbYr3rWwyJxoMO/iMw1qLqPZgcuDyIAkXBjD53VCtrZBtpOjjj0Qr7Rohn3SZHbk1vqQssyU1wkngij3nz5jWvdzW0SBIf7f+7whpyr6RXbKfc0W+bz7OhT06cnTKCF6sh+VdCrwv1DC/BtSY9PAzWnqIilGySWGDjjm+Dc93Za0CIZJBlSz6xwMlr7P9sJf5x48cF7ejTqpqsUzh/04ZEApWp1lWgoegqitvyhjKIxnH05WI1Rq+Yz+qjNYg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701850886; x=1702455686; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JUjCVjhia8Vpn2/AJEnwmTfVQ35xelhy79b7SsRcb9g=;
- b=UIvS9W/OM3/vwbE4Qc3tXY6npWMkEbNeWLHhPOGEESlcuv+c3FnIjlrdGRf9lRg4JU
- QI8jDy3X1TXI93h+lEGibfaADP+fHkvF41KOqNUTTU2Gyhjq1wUib6hx47xYtiAqV49n
- k6OUM2/QFpDBKGJ0b7mpIOEKVvIh0T83DM9Xx83PYGTrohkuLKKI0eCfw7kDIkZjwuE9
- fUROdu2ldYf/ukCACxSZUmJj0aNRhNgcjCP1JOMpomXzzM/geNIeSIEewtzlW2BddtUj
- jFLnVSKm5SOklU/5ID/sCl5wXW3+T0HBnB5DugG5xFszA5kNvUHHkGIUbJ5Mfh/PnfwD
- fy3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701850886; x=1702455686;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JUjCVjhia8Vpn2/AJEnwmTfVQ35xelhy79b7SsRcb9g=;
- b=qtYx35Ss2bfYXs497pP9Pqt9sXaP1KewqNbbkOuiJCL7RoI23UUVA9uDeDC7xrqTT7
- NGE+nNKlRsoqFWNg0z0RcpY5LHAPXQejlmLO4h8IsxtNwfrkyvwP8l+gx0lnp1zaHCrG
- ThkBXNJ6uNXzZHs3S4gCWFTu1e4sHTYo4pS0sm0WPGUje77Bbu/Rei/q4XnthIPqcZMb
- PGlB40ZoXG0L3geWz01Y+Vv4AHZTZwQQ04+qI8dgAzwj6N1mN7MgYuK6AYv8a2RrQn41
- IcDel9ia2nKW6653+MBP9jslORGNl632r+WBV9G6HedgqCVEc5xDFlpa1NXvSdPut/wn
- YW8Q==
-X-Gm-Message-State: AOJu0YzaoYxOQjspf5CnN4APj16WQl78iV/+eyhVbynSm3J+4+ccKN25
- p52wmlVyhhTdUzXlAwuKW4RwSE7PVc7aiq2UkphnzA==
-X-Google-Smtp-Source: AGHT+IGyJaS0nIhoezaFXC/tozOwmBfAM8VJRMHgCDB+W4M4fGIgDbunEufOm3bRrFiogLCxXFRu/8C0lEp1PvqhVqQ=
-X-Received: by 2002:a05:651c:2125:b0:2ca:2462:538b with SMTP id
- a37-20020a05651c212500b002ca2462538bmr278270ljq.102.1701850885769; Wed, 06
- Dec 2023 00:21:25 -0800 (PST)
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=BOs6Vj//SMA79Y4bb8I+ed9D0ds6eC7W7fYXeEv24ks=;
+ b=TV2cQSQJhUhT2an2KQl1mnT5J7dgzEWbDsX/RJY9bVM2kMZfpX+C7gii51bm7KgxXAwfNy1eejRatFEFZ7CUAZPJ/3pW5r+y6z0PBMj2JvNf3UsfPpvapnVupkkePsQP4o2vS+LNFucrrRfrKCq2y3L1N2yA94VfkQagGZEFkDY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from PAXPR08MB6969.eurprd08.prod.outlook.com (2603:10a6:102:1d8::23)
+ by DU2PR08MB10088.eurprd08.prod.outlook.com (2603:10a6:10:49b::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34; Wed, 6 Dec
+ 2023 08:33:29 +0000
+Received: from PAXPR08MB6969.eurprd08.prod.outlook.com
+ ([fe80::170a:86f7:52ad:28e7]) by PAXPR08MB6969.eurprd08.prod.outlook.com
+ ([fe80::170a:86f7:52ad:28e7%7]) with mapi id 15.20.7046.034; Wed, 6 Dec 2023
+ 08:33:29 +0000
+Message-ID: <edf38e3c-2172-40c3-9331-3cf663bf5514@weidmueller.com>
+Date: Wed, 6 Dec 2023 09:33:27 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/30] mtd: spi-nor-core: Set dummy buswidth equal to data
+ buswidth
+To: u-boot@lists.denx.de
+References: <20231206053024.3744447-1-tejas.arvind.bhumkar@amd.com>
+Content-Language: en-US
+From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier-oss@weidmueller.com>
+In-Reply-To: <20231206053024.3744447-1-tejas.arvind.bhumkar@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0145.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:95::8) To PAXPR08MB6969.eurprd08.prod.outlook.com
+ (2603:10a6:102:1d8::23)
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-16-raymond.mao@linaro.org>
- <CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com>
- <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
- <CAPnjgZ0Hxsbv7EHbcnvLtmRSrPgMDfOFS+KmvYBcZgVC1Je4Ng@mail.gmail.com>
- <CAC_iWjKhmJ4BrH73-5sg8XGjMfJbsx8oWLsz3sGKdP8jdoHBDg@mail.gmail.com>
- <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 6 Dec 2023 10:20:49 +0200
-Message-ID: <CAC_iWjKrkTM4spyXpoDDartJ41a553VDE+XM5gz3+jsNTFqtbg@mail.gmail.com>
-Subject: Re: [PATCH v2 15/18] fdt: Allow the devicetree to come from a bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
- Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR08MB6969:EE_|DU2PR08MB10088:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4556bd08-3b79-4478-c494-08dbf63605dc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: P9hT01iQljknQLmiXuty7V/u8EMr9jaeEdaDaFKjWqnGEY/bcHQsZZBRiquFyF0rPqKLcu3+5ZaV8FZfHg9ivk9xuakWpPZ9fXn9EylARarIuMVucfPrTydtZQREregSMhVWofRswqZQfg0XtqbX5wRjgRPmr9Q8n7yZj6Hn+6grZ0HyQwied7Vu+Bho6Uz0B/2VbVMyKQnoBx8oaohaMjYoG0q2AjhWOml9NQXbpURkZ6l31m3RIePgpkqMRvvgtB/m5BwyJqd+sGxd4f77N0v7p1rAH+PvDuFIlFA1JmUv2kNo0A9cXxh7EZJcLKHpkqVJ5vc0+1rXJS5kh7jpUue+7Xka/k+nBvNl9EyJX79Eg+7p/8VDd0SLwd3we8SQl3eQGwTCmV/nu5VXLt/UZHC7XthoKpkYNLvzys63her4Sieom4KbTzZYb+AOYWXrexXG6vivK6SXdjR+a0u0Ef7sYfCIFvf5gFXKXnQDlzBpzkiyxVsrXLpNwgRL4mnqeJVdI1qsT1e8vZbzxJvOGHjkfC1RJ80v2EMRNOZ7pO+YTloVJk0MCLTpcJ2gWuOvGQYeVZIDOhsLBQiPHhRF3cpoKK0evu2fQL5uexRQpNxjJCgSi8LP4SGa0uYNp7coGS5Rh5QnEFcz1DEL5TxZ5Q==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR08MB6969.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(346002)(39850400004)(136003)(376002)(396003)(230922051799003)(1800799012)(451199024)(186009)(64100799003)(31686004)(26005)(2616005)(36756003)(38100700002)(31696002)(86362001)(83380400001)(5660300002)(66946007)(6512007)(6506007)(66556008)(8936002)(66476007)(8676002)(6486002)(6916009)(316002)(41300700001)(2906002)(478600001)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cXVnMFFMSVFqUTN2czA0dzN3cHVkK2FjRXhlUFhGb1NMQ3d0SVdXNGV6WmND?=
+ =?utf-8?B?STJFbnAwQ2EvOVlWdW5BYzZxQzAyR0ZSVFBmeGQ0NFg4aXBKQjhLTzVXN3BB?=
+ =?utf-8?B?b01LdTJ1eDQ0NXRnVXNpTFhVa2trTlovS2pUYjgwb3dkWlhRU1VyQlVUTXdm?=
+ =?utf-8?B?TFMxR2pqZjdYSzVtL1Njb3RIc20zbWExVE5WazJyUHBMQ0Zna1RXV01rbzN4?=
+ =?utf-8?B?NjlJMUp4QklPRmx1Sndjb3BoOWs0ZFdpSkVIVUUweE1MTGF3MjZnZXZSaTJ1?=
+ =?utf-8?B?UHZ0ZzJqcXcrelNSNWdYNDdxb1MzOEJiNG1IanNVSlpnTGZ2TktLdS9iSkNS?=
+ =?utf-8?B?NmdWWFBpQU9qcWc4bjl4VU83SHlaeE1qdWRBcm9CYWNCbUwva0JsWjEyaVdq?=
+ =?utf-8?B?YmQreWlHSUozYzdCVVA5YWZBSllJekhNWThjY1NnT215ZzNSbVU1RllJdEZD?=
+ =?utf-8?B?VVZoYzNCUGtqZ21YUlRpU202cVhoNndGUzRXd1BkQWNOanZkUW9mcjNyTmw0?=
+ =?utf-8?B?Q3lGMnJxUGV2cm1MLzhMellWdk5mOXd5OU1mb1Jnd1BqWndVanlXdXVqV1Nv?=
+ =?utf-8?B?Uy9NRzV5YjlObGp3RTk1OEVLWU5vQmxCWjBIdjRVOWxxdkI0aFRoL0xiVjhU?=
+ =?utf-8?B?Tm1GaHJiTWRPbEZUcWh3RXNzZXVpUURIdnhvMmlFZUNJNTVXVUNVd2pUM256?=
+ =?utf-8?B?ano5Ym0wSHVCTHF6WXVQUGg1YUoyUkN6QzZZQVNTcHcxK3hrdHdwelk0QVNC?=
+ =?utf-8?B?UzZGdDUzZkUyU1RrbEM0T0tRVDdLczdOQlNtZURreTUzdDhEekwzb2QxaFNr?=
+ =?utf-8?B?a1BDVlFsZnFxWjRhWitTOHFHOERYSU5vYmNlMUdyOGptUUlIeEF0VTk1WU9z?=
+ =?utf-8?B?ZGFkWmEzN1hTNWZLb1hBWURHV0Z3c1orOTJFdkVoOGRVZmJ5UTFhQ3V0SEdr?=
+ =?utf-8?B?SE5ySlFPKzlPM2s1b0twSmtsei9oNGV0RlZUOUhmMkRwTWo2YURRdElhbko1?=
+ =?utf-8?B?bTU1WitWcm5Fd0VRVGtVcHBhRXpBMGxtSktDbWJveXo4RXRORjZuamwvMTFm?=
+ =?utf-8?B?dkNmV1VnMkZDbDJJQ1g0bUtvUnhWemdRTEo5NitSUG9ySDBuOE42bnlpTWJC?=
+ =?utf-8?B?eFBJaFJQOHNZVjlwREI5K08vdlA4OTl0b2x4dSsya2MwWGFoTmpDUzBhL3lJ?=
+ =?utf-8?B?c3g2UEZ2Tm5iQnpDRmhlZDVzeklQdXU1SjA3bE9nYmd5UE1NaUtZM3lpdGNz?=
+ =?utf-8?B?ancrSFZiNHl6enQ5QjI0Q0x3RkJJOFB5TFBrcFlDK0VWc0hhbEthVG9YSEJC?=
+ =?utf-8?B?ZXNLb2pFWFFsR29ZckgyL1NENjZVSWYwQWh5elVaNXZlNkhXdmU5TDIyWHRJ?=
+ =?utf-8?B?UWl3VHRZUjl1RllhTjQrSzJSbEVjVTRrRFNvaXlNa3Z3VTk4RmhWR2lPR0d5?=
+ =?utf-8?B?VTNkYW9MWkdHSmtSOUpEcW9MVDhpUllMNFlWZG1YZmsvdUhQRjhlSVpRLzZJ?=
+ =?utf-8?B?OGNwWjY5WXpscUZGQ0dHY0dkazFPb21RMFFxVy90NTlQTjVudUltcUtEZGZa?=
+ =?utf-8?B?clAxZ0lHK3V0UFVkYmdyQVdidytoNW5XeXZoVVllcC9NS0NyNnhKZU0wMGIx?=
+ =?utf-8?B?K0hvblNHcy9Cd25DNVlVZ1dTa2srVndHWks0RXp1bUVSMnI5SXR6WkZYUUdW?=
+ =?utf-8?B?NWs0QVo4Ukd0ZGRlbklKWHdGZDR3QUY2amFRVEVGZUV5UU4zTFcvWXRLOXZV?=
+ =?utf-8?B?QjRxY051czdMMXdPUG9SajgyK0FMdWVhMFowSTJLVFFPbUxLcHpqTENJWWYz?=
+ =?utf-8?B?amZ2ekFZYVc2K0h1T2QvN2Rwb1QwN2lDbStwVHpOQnFJQUpnaDZkSHpGZ2p4?=
+ =?utf-8?B?WTVJZjFXU1p3Q3F6c0VrMnhRbkNtVTh6elJKaU4xdStvOGhOQVBRZVlGTlBK?=
+ =?utf-8?B?YTJXd2ltVEtlOVBqcERhQnNjNGhvTVQ3WW8xdEZmeXdyeVJrQ0pNaXZKVmE1?=
+ =?utf-8?B?L1JtZndBaXlhZ2pLQ0s5bUVJMFpkK2IvL3NCK1o1TjdXaWY3dG1aWE9vNlp0?=
+ =?utf-8?B?N3NlYkdaaldFMFRxSHlrVFBNTGlUc0QwNGtQOEw0TGw0N3huUjREd3Z3SGF2?=
+ =?utf-8?B?MzJwZWt3SElFVmVNcTNldWZlY3dGZ2k3Yk9hQXVrMUJqV3kvYUh1ZmJ2WThP?=
+ =?utf-8?B?SWc9PQ==?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4556bd08-3b79-4478-c494-08dbf63605dc
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR08MB6969.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 08:33:29.1124 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SA9bJUs3O83DpmhrpfKZJWmOt4eyjdGNNIotuVBAj4N43lW7e7jEBfRhU2KSVuCxXcCnhCUgZx2et9PJu6LtSQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR08MB10088
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,213 +144,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Tejas Bhumkar,
 
-On Wed, 6 Dec 2023 at 05:57, Simon Glass <sjg@chromium.org> wrote:
+Am 06.12.2023 um 06:30 schrieb Tejas Bhumkar:
+> From: T Karthik Reddy <t.karthik.reddy@xilinx.com>
 >
-> Hi Ilias,
+> In current implementation dummy buswidth is set equal to address
+> buswidth. In case of quad spi (mode 1-1-4), where address width is 1
+> the dummy bytes will be calculated to 1(8 dummy cycles) and dummy
+> buswidth is set to 1. Due to this, the controller driver will introduce
+> 8 dummy cycles on data line(D0) during read operation.
 >
-> On Mon, 4 Dec 2023 at 23:22, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > We did discuss this in OSFC but perhaps you forgot.  The discussion
-> > was based on the mail here [0].
+> But since we are using 4 data lines in case of qspi, we need to change
+> this dummy bus width to 4. This will make dummy bytes to 4 inplace of 1.
+> This will be taken care in controller driver by dividing with dummy
+> buswidth again as in below code, which makes dummy cycles to 8 as
+> earlier.
+
+Do you have any specification that states that the dummy lines use the 
+data and not the address width?
+
+Both u-boot and the Linux kernel use the address width for the 
+calculation of the dummy bytes until now.
+
+
+> dummy_cycles = op->dummy.nbytes * 8 / op->dummy.buswidth;
 >
-> Perhaps I did? Or perhaps we had a different understanding of it?
+> So with this change dummy cycles will be on all data lines(D0-D3) and it
+> is taken care for all the configurations(single, dual, quad and octal).
 >
-> >
-> > On Tue, 5 Dec 2023 at 02:52, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Raymond,
-> > >
-> > > On Mon, 4 Dec 2023 at 12:25, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > When `OF_BOARD` is defined, the FDT should be from one of  the board-specific mechanisms:
-> > > > 1. FDT from a bloblist via boot args
-> > > > 2. FDT in memory
-> > > > I don't think we need a new build option to distinguish these two, since it can be done in runtime by checking whether the boot args follow the FW Handoff spec conventions and the FDT exists in the bloblist.
-> > >
-> > > No, I would really like this to be deterministic, so we can fail if
-> > > something goes wrong. The bloblist should be 'declared' as the way to
-> > > boot, for a board.
-> >
-> > We *are* deterministic. I am just going to repeat what we discussed in
-> > OSFC for completeness.
-> > OF_BLOBLIST makes little sense because we are not going to add a
-> > Kconfig per blolblist entry.
-> > I haven't looked at what the patch does yet but the idea was really simple.
-> > - Under OF_BOARD (which can arguably be renamed to OF_PREVIOUS_STAGE
-> > or something like that)  if CONFIG_BLOB is enabled we scan for a
-> > bloblist
-> > - If CONFIG_BLOB is enabled but no bloblist is provided we fail the boot
-> > - If CONFIG_BLOB is not enabled we do what we did up to now, maybe
-> > with a message that this is going to be obsoleted once enough boards
-> > migrate to a bloblist
-> >
-> > IOW if support for a bloblist is enabled we expect to find one from
-> > the previous bootloader. I've lost count of how many times I repeated
-> > this, but here it goes again
-> > The device tree can come
-> > - From u-boot
-> > - From a previous stage loader *somehow* (eg. passed on a bloblist,
-> > passed on a register, read from an EEPROM etc)
-> >
-> > We should keep that distinction and create subcategories for the
-> > 'comes from a previous stage loader', rather than adding arbitrary
-> > config options which only confuse people
+> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>
+> Signed-off-by: T Karthik Reddy <t.karthik.reddy@xilinx.com>
+> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> ---
+>   drivers/mtd/spi/spi-nor-core.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> I don't know why you are so frustrated about this.
-
-Because I cleaned this up in 2e8d2f88439d, 2ea63271e522f, and
-d6f8ab30a2af46. HAS_OF_PRIOR_STAGE then magically reappeared in
-275b4832f6bf91 without anyone acking or reviewing that patch and at
-the same time it does nothing useful apart from a few prints. Also
-because we keep going in circles. We've spent more time discussing
-this than coding it.
-Instead of cleaning this up now that we have the chance, we prefer
-adding more DT options until we end up with a complete mess again.
-
-> This patch does not even do what you have listed above, so far as I can tell.
-
-Why? It scans for a bloblist if CONFIG_BLOBLIST is turned on,
-otherwise, it falls back to board_fdt_blob_setup(). Another thing we
-can do is add an 'imply OF_BLOBLIST' if BLOBLIST && OF_BOARD are
-selected and use that in our if cases.
-
-We can also change this in the future and prevent the board from
-booting if (IS_ENABLED(OF_BLOBLIST)) fails to discover a DT. But I
-think that should be done once we have some boards implementing a
-bloblist. I had the same suggestion here [0].
-
->
-> We have:
-> - OF_HAS_PRIOR_STAGE which indicates that U-Boot is not the first phase
-> - OF_BOARD which indicates that the board can do anything it likes
-> - BLOBLIST which indicates that there is a bloblist
-
-We also have OF_EMBED and OF_SEPARATE. Funnily OF_EMBED says 'not
-recommended' yet we have a ton of devices using it. On top of that, we
-have CONFIG_OF_BOARD_SETUP and CONFIG_OF_BOARD_FIXUP that people just
-use in random ways. CONFIG_OF_BOARD_FIXUP is obviously the right
-option (and properly documented) to fixup DTs
-
->
-> I proposed adding:
-> - OF_BLOBLIST which indicates that U-Boot gets the DT from the bloblist
->
-> I understood that your intention OF_BOARD would go away since there
-> are almost no cases that need it.
-
-My suggestion was to rename and clean stuff if OF_BOARD is confusing,
-not remove it.  It certainly can't go away, because you will still
-have boards reading it of an EEPROM or similar.[1]
-
->  I was skeptical it could be done but
-> I definitely agreed (and still do) that it would be great if that
-> could go away, as we would not need OF_BLOBLIST since OF_BOARD would
-> effectively mean the same thing.
->
-> But when I look at this patch, that is not what is happening. In fact,
-> there is no indication that the DT came from the bloblist. U-Boot will
-> just report 'devicetree: board'. We must say where it came from.
-
-Yes, but we are confusing 2 things here. What do we need to print vs
-what the user needs to configure. The answer to this problem is not to
-add more Kconfig options just to be able to print stuff. An enum to
-the DT struct which would be set to whatever option we need to print
-during the DT init phase is cleaner and keeps the Kconfig options
-sane.
-
->
-> The other thing missing here is SPL. The bloblist is designed such
-> that it can be set up in any phase of U-Boot, then is passed to
-> following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
-> need.
-> As I noted, it breaks sandbox_spl. What happens if a board wants
-> to use bloblist in SPL but doesn't want the SPL DT to come from a
-> prior stage?
-
-Can you explain 'bloblist in SPL'? Do you mean SPL gets the DT somehow
-but then wants to add it in a bloblist for U-Boot?
-I don't think we should be allowing things like that. You either use a
-bloblist or you don't.
-
->  What happens if SPL wants doesn't want to pass the U-Boot
-> DT through to U-Boot in the bloblist? It is all just horribly
-> confusing.
-
-I am not sure I understand this. Do you mean that the SPL wouldn't
-want to pass the DT in a bloblist to U-Boot proper? If that's the
-case, that's a design decision we have to make and I prefer
-prohibiting that if BLOBLIST is enabled.
-
->
-> So I believe, in fact, that we cannot get rid of OF_BOARD now, and
-> perhaps for quite a long time.
-
-We can't. Ever.
-
->  There is another discussion about
-> Qualcomm where they want a gzipped DT attached to the end of U-Boot,
-> for example. Perhaps the key problem with this patch is that it would
-> ensure that OF_BOARD sticks around, since it means both a) Get the DT
-> from bloblist if BLOBLIST; b) Get the DT from a board-specific
-> mechanism if !BLOBLIST. That is not what we discussed.
-
-I haven't gone through that patch again, but I will today. OTOH I
-don't see a problem with this. This does exactly what you asked, a
-discrete way of getting the DT from a bloblist. Instead of adding yet
-another option it relies on  if(BLOBLIST && OF_BOARD) (== OF_BLOBLIST)
-Vendors need time to implement standards and prohibiting their boards
-from working until they do make little sense to me. I am fine with the
-fallback scenario for now.
-
-> Why not just take my original patch and work from there? It will save
-> a lot of time. We can then progressively migrate boards from OF_BOARD
-> to OF_BLOBLIST and then perhaps one day remove OF_BOARD (I remain
-> skeptical, but hopeful). The whole 'standard passage' thing [1] was
-> carefully thought out *two years ago* and (I believe) dealt with all
-> of the issues above.
->
-> For now, we should apply the patches which bring in the spec changes,
-> so we can figure out the rest of it. I have added my review tag for
-> those.
-
-I think I prefer this iteration (with the imply OF_BLOBLIST perhaps)
-with a future cleanup in mind which I tried to explain in the past
-[1]. A few extra suggestions...
-
-- Get rid of OF_PRIOR_STAGE which is only used in a few prints.
-Instead add an enum with the options you want to print, which we set
-during the DT setup.
-- Rename OF_BOARD to OF_EXTERNAL or something similar if it's still
-confusing. If (OF_EXTERNAL && BLOBLIST) you have your OF_BLOBLIST
-equivalent, without having people to have to explicitly configure it.
-- Once the above is implemented fail to boot boards that have
-(OF_EXTERNAL && BLOBLIST) enabled, but don't provide a DT in a
-bloblist (we can even do that now, but I don't see the point till we
-get users)
-- See if we can get rid of CONFIG_OF_BOARD_SETUP or repurpose it to do
-something board-specific if needed.  Looking at it we can probably
-replace all the callsites with CONFIG_OF_BOARD_FIXUP
-
-Then *the user* ends up with
-- OF_EMBED which shouldn't really be used
-- OF_SEPARATE which means the DT is appended to the U-Boot binary, but
-comes from U-Boot.
-- OF_EXTERNAL which means we can get the DT in a number of external
-ways (EEPROM, BLOBLIST, CPU registers etc).
-
-[...]
-
-[0] https://lore.kernel.org/u-boot/CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com/
-[1] https://lore.kernel.org/u-boot/CAC_iWj+hkVjftjfVfRFd27uF59=cpsJ0r+6jCg++EYFqZjBZyQ@mail.gmail.com/
-
-Thanks
-/Ilias
-
-/Ilias
+> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+> index 473d9f41f3..8949dab548 100644
+> --- a/drivers/mtd/spi/spi-nor-core.c
+> +++ b/drivers/mtd/spi/spi-nor-core.c
+> @@ -260,7 +260,7 @@ void spi_nor_setup_op(const struct spi_nor *nor,
+>   		op->addr.buswidth = spi_nor_get_protocol_addr_nbits(proto);
+>   
+>   	if (op->dummy.nbytes)
+> -		op->dummy.buswidth = spi_nor_get_protocol_addr_nbits(proto);
+> +		op->dummy.buswidth = spi_nor_get_protocol_data_nbits(proto);
+>   
+>   	if (op->data.nbytes)
+>   		op->data.buswidth = spi_nor_get_protocol_data_nbits(proto);
