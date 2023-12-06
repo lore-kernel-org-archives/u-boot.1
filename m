@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF65C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 05:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B54C5C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 05:32:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B148187683;
-	Wed,  6 Dec 2023 06:32:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4049687682;
+	Wed,  6 Dec 2023 06:32:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="w57n3jD7";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qup1jPHb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E74F87683; Wed,  6 Dec 2023 06:32:10 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::611])
+ id 21F6E876A8; Wed,  6 Dec 2023 06:32:25 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2061d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::61d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E66C9875F5
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 06:32:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E71D4876AC
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 06:32:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UBvpzet3YZKKL8U6RUxQw5LcS6IZGG7DgPw9o1ITXCvrufyMH/G6MENL1QqBrmjlvLklUwwepluJaQKS8XJI0VyWacXwaspywd39f6aeUF8nNkB83IBLU1ORe9rSqunZq0z4C69hCqDqpcj14ej2zqT1UAUqxPbZYXOJUzIgBadCvAfk1lVXyriZ2sd971fbmrSo/Kkl2vuveA/n7OPeY7uenT7q2tOEKYW2qt9Pm+iuMc28WItpwlXeRGIUvH+n6YBzIvmBcQxLOqtjP9XBebsWFEnYet4tGwHZjjECBzKW5buWW+3Q7rn/0FWxgLnxJkXPi/RvyOzJLzbRgHvZlA==
+ b=k3gMkfjmaeeYPa4yp1Z/8zzg6PkOOBxg0Z8ZppgymnOr997msfI/VYKzbdVCQJUzz9ND0cqnlNowTKBcRvn+AAqjLZj6HAMsp6ua56lVubAzX942dMXqwVqoi7ozC+EjFOCLcBA4+Drqq3z3jQkpkKIIG5DVoTdAlj/x1hW1xeramATQrSlRa5LHhe1JP1IeAWAegQnOen++ki1NHTtPb4lLWsf7M/+svcortB9Ud6BuZEWXfFqs5PGJYjwQjdibFx78gjj6LoUm9V5l/IP9nmvhDDPUVnKgADAALxOYdkfvNZiqRdpKfgry1sq94lBa9vPhZPJxqzBSX7xeW/W9mA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4oPu4QdFFbrQ6wLibqYplciXx9ZJAiJ9KGQEtt6qPS8=;
- b=HMa0a9OqPNQMbZ2TXf4IfvST2tgLVUcDc8J6p/6silMs3I/qEoKp8jvFT5eM7FbzYFUhrjQ6cmBf2Rm98K4xvtZONIbrNleBHuJerAmPjtHV5755jsT6yuEEIUy12XUZEk8P8fDdxUVAPBT4gRaP0BZFkAuCBN8goBvtWk6LsSXh9+MyKxzsTbAQBe59DM1QEDNnolEGUFPqLPLNFoX46yqtxbVZ+c6+Fp5BpU/OdNSpI0FqTb2M1Fp9MwjPytY4TBQKAiAHOfIeVp24eLkxH6XZCHmi5FziJMLAi4oa9zEQXwgCQfhI5sqoe6eBsJV+q7vdlvzIAH8+4wb0IGbm+w==
+ bh=bG+VRGfKAl45USZcFAExKOVlH9sDLFZFmNk/+xUbsBI=;
+ b=csEDarvuTQSkBCTmjLY3RX+8ysMeiy6svSgPfC1ThLNI8dpMRyH64XqF950rCukipJ72ww3EviMnGg0e+9sKuBdmP+iCQpW55OQo2ACaHJ6vmWZrsFILtEDqC8kCWXbru8sVhkOb2mlI1VRVFN/+8JawLErDrtjHy8k/wY2VZSodfd+Ie3VQPVcJ6ldhfQGT/33OGqbDPZVPTlxcIq74LodqwDrMEDz0jg3nthKBzTJztGuBdtpfstrVNUt7YRDqQpKSyS3zxKiW1Aq//gqtVs3vc/mikud8pL0dRqgDIVwrRTmE+PxeK+sPhpBTklTD0JvmG7GM62qVA1SwHqIxCA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4oPu4QdFFbrQ6wLibqYplciXx9ZJAiJ9KGQEtt6qPS8=;
- b=w57n3jD7n/16iuveSWdzCFIrIzl0fyD0fFiPH1KfGJNUyhsYcjRr/AMuBlrM3aUir2ua4RGZw+LmpCYHjVozh/RGSS3UwA/V5DQvZZCRN/E0eVwfw3D4gsFl+ExNq4lgWNIdKylGl9GptgzzXe2uoJ2XepQ27XKCG8+/ppo5mrY=
-Received: from DM6PR07CA0114.namprd07.prod.outlook.com (2603:10b6:5:330::29)
- by MN2PR12MB4254.namprd12.prod.outlook.com (2603:10b6:208:1d0::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34; Wed, 6 Dec
- 2023 05:32:04 +0000
-Received: from CY4PEPF0000FCC1.namprd03.prod.outlook.com
- (2603:10b6:5:330:cafe::25) by DM6PR07CA0114.outlook.office365.com
- (2603:10b6:5:330::29) with Microsoft SMTP Server (version=TLS1_2,
+ bh=bG+VRGfKAl45USZcFAExKOVlH9sDLFZFmNk/+xUbsBI=;
+ b=qup1jPHbYAA4mEL5ptgylyarkKpmYj8loMv0O/FhMk2iGzmahrQH8+9ipqWTfiIyVd1jD6ATPBy7swKinzzsOu6aFv9DRy4yvP7awdyCZ8naw2k6+yoYz93WEp6MmS/VvSIfE9U0DRFmVMiDCIZTaKtCLBzh1x3xhsM4Dw54EUE=
+Received: from DM6PR01CA0022.prod.exchangelabs.com (2603:10b6:5:296::27) by
+ DM4PR12MB5961.namprd12.prod.outlook.com (2603:10b6:8:68::21) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7068.25; Wed, 6 Dec 2023 05:32:19 +0000
+Received: from CY4PEPF0000FCC3.namprd03.prod.outlook.com
+ (2603:10b6:5:296:cafe::f7) by DM6PR01CA0022.outlook.office365.com
+ (2603:10b6:5:296::27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.34 via Frontend
- Transport; Wed, 6 Dec 2023 05:32:03 +0000
+ Transport; Wed, 6 Dec 2023 05:32:19 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,52 +58,53 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000FCC1.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ CY4PEPF0000FCC3.mail.protection.outlook.com (10.167.242.105) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7068.20 via Frontend Transport; Wed, 6 Dec 2023 05:32:03 +0000
+ 15.20.7068.20 via Frontend Transport; Wed, 6 Dec 2023 05:32:19 +0000
 Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 5 Dec
- 2023 23:32:00 -0600
+ 2023 23:32:18 -0600
 Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Tue, 5 Dec 2023 23:31:58 -0600
+ Transport; Tue, 5 Dec 2023 23:32:15 -0600
 From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <michal.simek@amd.com>, 
  <jagan@amarulasolutions.com>, <vigneshr@ti.com>, <git@xilinx.com>, "Ashok
- Reddy Soma" <ashok.reddy.soma@amd.com>
-Subject: [PATCH 04/30] mtd: spi-nor: Enable mt35xu512aba_fixups for all mt35xx
- flashes
-Date: Wed, 6 Dec 2023 11:01:51 +0530
-Message-ID: <20231206053151.3745010-1-tejas.arvind.bhumkar@amd.com>
+ Reddy Soma" <ashok.reddy.soma@xilinx.com>, Michal Simek
+ <michal.simek@xilinx.com>
+Subject: [PATCH 05/30] mtd: spi-nor: Add support for cross die read in dual
+ flash configuration
+Date: Wed, 6 Dec 2023 11:02:09 +0530
+Message-ID: <20231206053209.3745148-1-tejas.arvind.bhumkar@amd.com>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC1:EE_|MN2PR12MB4254:EE_
-X-MS-Office365-Filtering-Correlation-Id: 62c8fb58-eff9-4c9c-af7d-08dbf61cadaa
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000FCC3:EE_|DM4PR12MB5961:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8ef3c58c-1fb7-4abe-7624-08dbf61cb6ee
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2r0MlLcHq4ZM0angnFbMY3AX6Dg4o+a9D6FnxmGm5Jsx/CnzL2Y+/b6R2FNqgP09ddpDKtA6mVCLa0d/ii+Vhx/dMHTn+vKFY1ydEbRCdNUuWfZfrl7AeiivaSep8Jisd0wK4ihpo1DXKSs013IoL7Mr9JHXYPr5GQPV3h6pSpkFX2khj8RnWbGJp22TKNiEnVsC+qqcYeTL78y2OJsRq1HCCW4tW6LGfgNMqyA1mPlTbxJ6JCraAQ0Efncz3HIUA2bOgQe9dG/eu7H08V2Oou3hy9nNPzVcJcSarlHicNA1jPLxMV8EV1LmICTM+z2//T2udYTgk0MyvQEFdynTraIim7qlfNN3TDAGNsPskkavDF/l9tIO131Tq7npHdo3fu8rx4n0N3KeCz0sLIFJhDgD8kc3mwYLm65TIj43aZ02OkRQYmlVu7eOcG/HYMcu1lHLxzcgXm/iM3uWzZ8YMw1nlD47eW+yf5S/QHn2UDac1ckQSwrg5Vhu+lsBkloL+OZ6IHDZ/2NMO5jAbszqTuZOSdDLe2LHypo3kXwksl9m1hhtOZkVcYh66kiaeBLzfo/FG/11JzyPvSl4HNd4K9HTjJwxBT4DycuIxIEv29TFspVUagL37u9KC2gpgzEA8+oPVj8efc//i7WoaesgwnemJlkLdrZ40lOzyGtGGqrILSi+7L2I96HZcQZLXCT+2NEvYNMZE9EpCMPspdbMkA3iHxo5SJn/uMORNAP0vrHUiiVCx2nxyZNwOHefz7ZhgxIdyhz/X6gZw2H2E3yF9g==
+X-Microsoft-Antispam-Message-Info: aCwSpyM3lkHMRE1U4o/67E6EMFc4kF75t4t57OzWaY1cXDcY+MDq6lmdjZCTDuS2CuHkzNrjtjWXDu4SlG5e6Z1Xum1y44+PqMz14Fm6b0xyfCefgDvDwKMzgCop1jCbgAfENSG3WrS2QgpGaFbpfdnstnVlcqQIJKd8AtRGSB/10fmF8oTQO0Vc8993FqM4JWrKblN+AcDaBXUK/+/9tFSHqdYzyWTXHBMwdMqZmsYDYd9HUzFb1E9KR92448RN0qnkB4v2koHMYgIbdEtYTOTFmkn/x5Cxjmsn6sYaSBswM8FNxocIe2Olgfryh/ZbSWLIgqslmrqLBB3uAixIlNznSElWcbKT9KZdfScQBbx1BimzcYZvJjyPD8Iudc59xhVXS+1in03XGtdwHMWY4l/sNSUpt5zrshxrxBhpkWUxQcVhaCucp5RMLBZcfcseYW7fD9G8tmUZiakH9Na1uH1bywjrNwZOtylO18QYH9D4/M9sJd5/uppUIbzvF8DmmAaIbQn4ihpO+8HkY9b+dfu6G8Iwb/UvSZVfc8uUkILZ1hsIbzO+ckdYKuV4J7TgnxDQns2RLPVP06o7GuKSTdpAPy5bA7J7GzsXwKkEoEBaKV6Rk2PhbvC0IyQHsNAqu1aV9Su+3Gcg19pnugGBZ4+UX08IVU4c54cGRIddaS6X69yXhJZJ2OTFmevSZs3teGfengLGyD5d9hZZMe8y6jl+SYnB0g5S1IwnNma/T7XHH8HAZkrGS/X3EKOlXlBJLTfi1apGl8+fvFIdfze8RA==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(136003)(39860400002)(376002)(346002)(230922051799003)(82310400011)(186009)(451199024)(64100799003)(1800799012)(36840700001)(40470700004)(46966006)(40460700003)(103116003)(41300700001)(54906003)(316002)(86362001)(8676002)(70586007)(8936002)(4326008)(478600001)(36756003)(6916009)(70206006)(83380400001)(36860700001)(5660300002)(47076005)(356005)(81166007)(1076003)(2906002)(6666004)(82740400003)(336012)(426003)(2616005)(40480700001)(26005)(36900700001);
+ SFS:(13230031)(4636009)(396003)(376002)(136003)(346002)(39860400002)(230922051799003)(64100799003)(451199024)(186009)(1800799012)(82310400011)(46966006)(40470700004)(36840700001)(83380400001)(426003)(40460700003)(6666004)(1076003)(2616005)(26005)(336012)(316002)(70586007)(70206006)(54906003)(6916009)(40480700001)(5660300002)(103116003)(2906002)(4326008)(86362001)(8676002)(8936002)(36756003)(41300700001)(82740400003)(478600001)(81166007)(356005)(36860700001)(47076005)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 05:32:03.5125 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 62c8fb58-eff9-4c9c-af7d-08dbf61cadaa
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2023 05:32:19.0717 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ef3c58c-1fb7-4abe-7624-08dbf61cb6ee
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC1.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000FCC3.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4254
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5961
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,63 +121,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+From: Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>
 
-Enable mt35xu512aba_fixups for all mt35 series flashes to work
-in DTR mode, and return after nor->fixups is updated, otherwise
-it will get overwritten with macronix_octal_fixups.
-This flash works in DTR mode only if CONFIG_SPI_FLASH_MT35XU
-is enabled and SPI_NOR_OCTAL_DTR_READ flag is set in id table.
+In a dual parallel configuration, halve the read offset.
+Determine whether the read offset points to the lower or
+upper flash in a dual stacked configuration and set the
+corresponding flags accordingly.
 
-Additionally, a new flag, "SPI_XFER_SET_DDR," has been introduced
-to instruct the Ospi controller driver to switch to DDR mode.
+Include support for cases where the read involves an odd
+number of bytes.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Extend support for cross-die reads in flash memory devices
+that contain multiple dies within them.
+
+Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>
+Signed-off-by: Michal Simek <michal.simek@xilinx.com>
 Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 8 +++++++-
- include/spi.h                  | 1 +
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/mtd/spi/spi-nor-core.c | 61 ++++++++++++++++++++++++++++++----
+ include/spi.h                  |  3 +-
+ 2 files changed, 56 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 8949dab548..e505648e5d 100644
+index e505648e5d..f6e7592458 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3991,6 +3991,7 @@ static int spi_nor_micron_octal_dtr_enable(struct spi_nor *nor)
- 	if (ret)
- 		return ret;
+@@ -1503,11 +1503,8 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+ 	int ret;
+ 	u32 offset = from;
+-	u32 stack_shift = 0;
+-	u32 read_len = 0;
+-	u32 rem_bank_len = 0;
+-	u8 bank;
+-	u8 is_ofst_odd = 0;
++	u32 bank_size, stack_shift = 0, read_len = 0, rem_bank_len = 0;
++	u8 bank, cur_bank, nxt_bank, is_ofst_odd = 0;
  
-+	nor->spi->flags |= SPI_XFER_SET_DDR;
- 	buf = SPINOR_MT_OCT_DTR;
- 	op = (struct spi_mem_op)
- 		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_MT_WR_ANY_REG, 1),
-@@ -4305,8 +4306,13 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ 	dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, len);
+ 
+@@ -1541,6 +1538,40 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 			}
+ 		}
+ 
++		if (nor->addr_width == 4) {
++			/*
++			 * Some flash devices like N25Q512 have multiple dies
++			 * in it. Read operation in these devices is bounded
++			 * by its die segment. In a continuous read, across
++			 * multiple dies, when the last byte of the selected
++			 * die segment is read, the next byte read is the
++			 * first byte of the same die segment. This is Die
++			 * cross over issue. So to handle this issue, split
++			 * a read transaction, that spans across multiple
++			 * banks, into one read per bank. Bank size is 16MB
++			 * for single and dual stacked mode and 32MB for dual
++			 * parallel mode.
++			 */
++			if (nor->spi && nor->spi->multi_die) {
++				bank_size = SZ_16M;
++				if (nor->flags & SNOR_F_HAS_PARALLEL)
++					bank_size <<= 1;
++				cur_bank = offset / bank_size;
++				nxt_bank = (offset + len) / bank_size;
++				if (cur_bank != nxt_bank)
++					rem_bank_len = (bank_size *
++							(cur_bank + 1)) -
++							offset;
++				else
++					rem_bank_len = (mtd->size >>
++							stack_shift) -
++							offset;
++			} else {
++				rem_bank_len = (mtd->size >> stack_shift) -
++						offset;
++			}
++		}
++
+ 		if (nor->flags & SNOR_F_HAS_PARALLEL)
+ 			offset /= 2;
+ 
+@@ -1552,6 +1583,15 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
  #endif
+ 		}
  
- #ifdef CONFIG_SPI_FLASH_MT35XU
--	if (!strcmp(nor->info->name, "mt35xu512aba"))
-+	if (!strcmp(nor->info->name, "mt35xu512aba") ||
-+	    !strcmp(nor->info->name, "mt35xl512aba") ||
-+	    !strcmp(nor->info->name, "mt35xu01g") ||
-+	    !strcmp(nor->info->name, "mt35xu02g")) {
- 		nor->fixups = &mt35xu512aba_fixups;
-+		return;
-+	}
- #endif
++		if (len < rem_bank_len)
++			read_len = len;
++		else
++			read_len = rem_bank_len;
++
++		ret = spi_nor_wait_till_ready(nor);
++		if (ret)
++			goto read_err;
++
+ 		ret = nor->read(nor, offset, read_len, buf);
+ 		if (ret == 0) {
+ 			/* We shouldn't see 0-length reads */
+@@ -1561,8 +1601,15 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 		if (ret < 0)
+ 			goto read_err;
  
- #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
+-		*retlen += ret;
+-		buf += ret;
++		if (is_ofst_odd == 1) {
++			memcpy(buf, (buf + 1), (len - 1));
++			*retlen += (ret - 1);
++			buf += ret - 1;
++			is_ofst_odd = 0;
++		} else {
++			*retlen += ret;
++			buf += ret;
++		}
+ 		from += ret;
+ 		len -= ret;
+ 	}
 diff --git a/include/spi.h b/include/spi.h
-index 6bc8808bb9..eb015ecbf5 100644
+index eb015ecbf5..9014066ee3 100644
 --- a/include/spi.h
 +++ b/include/spi.h
-@@ -171,6 +171,7 @@ struct spi_slave {
+@@ -165,7 +165,7 @@ struct spi_slave {
+ 	unsigned int max_write_size;
+ 	void *memory_map;
+ 
+-	u8 flags;
++	u32 flags;
+ #define SPI_XFER_BEGIN		BIT(0)	/* Assert CS before transfer */
+ #define SPI_XFER_END		BIT(1)	/* Deassert CS after transfer */
  #define SPI_XFER_ONCE		(SPI_XFER_BEGIN | SPI_XFER_END)
- #define SPI_XFER_U_PAGE		BIT(4)
- #define SPI_XFER_STACKED	BIT(5)
-+#define SPI_XFER_SET_DDR	BIT(6)
- 	/*
- 	 * Flag indicating that the spi-controller has multi chip select
- 	 * capability and can assert/de-assert more than one chip select
+@@ -179,6 +179,7 @@ struct spi_slave {
+ 	 */
+ 	bool multi_cs_cap;
+ 	u32 bytemode;
++	bool multi_die;			/* flash with multiple dies */
+ };
+ 
+ /**
 -- 
 2.27.0
 
