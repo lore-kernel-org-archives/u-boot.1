@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6873C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 10:45:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3515C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 10:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5293787698;
-	Wed,  6 Dec 2023 11:45:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A21F870F4;
+	Wed,  6 Dec 2023 11:54:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="afybLKV2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hufU5nXE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16066876B1; Wed,  6 Dec 2023 11:45:27 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 9B09B870F4; Wed,  6 Dec 2023 11:54:14 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E515B8766C
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 11:45:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E081E870DE
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 11:54:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50bf4f97752so4402428e87.1
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 02:45:24 -0800 (PST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ca02def690so43544921fa.3
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 02:54:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701859524; x=1702464324; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1701860050; x=1702464850; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O9JxkC3RJpzfPWr3SEqBGB1CSfYA7D1NKc7qYHPamTU=;
- b=afybLKV23KXdQAqstqdsaQUO3RxtvaCB/pLBzT4T3484BiW0Inqp9rr96NtgFcGxtb
- hHhEbAdxMxKYep/InacMx/nmrx2Xdz2q4bDjhbSES+YvOQFX1rZQLciSjo/S9UQR2Wzc
- G8XHVon6OMTkisalOxgI96j13rkUS4Pl5t7IJMIsbE0yucqy7iNbNYcTg2Qp9qprAihw
- JwoKuZV5KS1UhR2w7PQ1qbB/DtiqElgOvxx9uXKU7HM3RocW7toQwStJgEF5u/yUd0DH
- V0Wdn7Xr17R4nKR0uV0iryZaQwkFi8f3SFArHwJsNIO/ehdJIxY/rW8OZcVh+dtMBXMK
- 9iUQ==
+ bh=nKnEoRIHwfSsn6df1Tv69R/x0VMy/fw3inI2I48cUC8=;
+ b=hufU5nXETVj+qqC8R0ioaYxoc752+agFVbYlcMCq5j4gsOBmVjiU/nNtJMrQT6rlKJ
+ Zb2oydkfJTr9ii6EX+m3bG15lbNnTQfrquUKs2qJbPkgmld846ZdmpXIHowYHA8IE6SS
+ IO3mw75NZcVYGjh+1RTHiEP6mUllJTMFfwlrGKPmFfRw5yGgFHgOwrx4hw0wAo8FhVeh
+ 4wF2nyBRtMixasa4YH72Gz+Twbd8fr8x3jr7dQe/5muekG9MXSk9Rfj8MDjmB06Yp09j
+ ZwbeLL/jY3qbPqTExrTgeb6Gkt/s8YMluvhOj3v8SJS+cLbLDrYRCTeo03ZHYInZY2Pq
+ iLLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701859524; x=1702464324;
+ d=1e100.net; s=20230601; t=1701860050; x=1702464850;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=O9JxkC3RJpzfPWr3SEqBGB1CSfYA7D1NKc7qYHPamTU=;
- b=DaYPttat4OMAT8b2Tl+P1wOXa/pMIuaf4NvLcQjNUF/K11OEgaNEQOH7a6nqUxS2BR
- DfSZgD9E2ntLny/8tYe055/JGHlXXkb9zUDwsFRqK+3E3xlbx0Y8yxmtQk5n1xpr5cAx
- Opmp1r2H4/V5gBp5SLT4Xr72wF8TBdDmAxElLgbirUiv+rImrkrXgYZ9e8xMUTLo0sLA
- wdj4jH6DOwOri5CzxwUoL/Sj7LYzPXssoMvvkfsW0gOkqWb+K7b8Wdl9HhYRLr7W8t2X
- jw2udvoIP+7xTMNDB6OIcJvsNGDZ/3Kx6BVRapxMbOYJ7jZ0/33TLvr0/5mRwZzsGlsl
- xTcA==
-X-Gm-Message-State: AOJu0YypoQ5+uEfpcXvpzLNYGsgKYR9YJxqi23DDWum8ID4/Ev4zMczR
- 2n01fRXBWRVTKIS3qq/tXQX8F7JPwCNovXeCIEYO9Q==
-X-Google-Smtp-Source: AGHT+IE7nrqwu6AGmbUapf6FPkzhyCGtFJoXEonlNIFg3gK9s8f4MDL10A0imMs2Q2JQ50ymvCyFzAaaI+akPfeFWhU=
-X-Received: by 2002:a2e:9550:0:b0:2ca:1a41:adeb with SMTP id
- t16-20020a2e9550000000b002ca1a41adebmr432340ljh.34.1701859524185; Wed, 06 Dec
- 2023 02:45:24 -0800 (PST)
+ bh=nKnEoRIHwfSsn6df1Tv69R/x0VMy/fw3inI2I48cUC8=;
+ b=KcBvn69GB/IF/hDMTBxAT5OpxxJqkp9rgzs/6h2uJCmqPMwvuyBgHjxv3RbkVx3JId
+ D7tN5vfX/Txr9q6lmsbu38YDQbeH9HgEVC2LOLhvxvnKFx3+rj86BHIvW8c4F+ZzKQzR
+ jROair9wySee1CZ2RpM+4IhMkOzemaxQJDFjFLfHQBS83cX7zDtukSE3UOsncYOPVd75
+ o/ckEcgo+80ODERnZDqw8AxTSRzPIIQEl6HV80Mx2Aazf/EyuScWTgOD3hkcGiBoEfqf
+ zJsHtXFxmo8lLNEPlMWjZoacYywAx/ZZHrltddiYxigtdTg6YEEx+N18MAigrI05g/m0
+ nn+g==
+X-Gm-Message-State: AOJu0YwvAEvTvqjr6auRGj79lqIb3QBqaaWI2dtwwqVDO0CyVywoi9OW
+ WrFdiWwDpdMZCPDW7gTT+aB4hK8llrSN9m7Ut4QnlA==
+X-Google-Smtp-Source: AGHT+IH/pWa6BKV+xGSX2joNIfbdtw+Ln69ybqJCDYdqS/0In2I2ovmuNFvzaykdWw5EBFDqifE0OVjBxR5cKPgiv/s=
+X-Received: by 2002:a2e:b019:0:b0:2c9:e50f:710a with SMTP id
+ y25-20020a2eb019000000b002c9e50f710amr445593ljk.82.1701860050195; Wed, 06 Dec
+ 2023 02:54:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
- <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
- <20231122140100.GT2513409@bill-the-cat>
- <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
- <20231122142758.GU2513409@bill-the-cat>
-In-Reply-To: <20231122142758.GU2513409@bill-the-cat>
+References: <20231127195029.90951-1-raymond.mao@linaro.org>
+ <20231127195029.90951-2-raymond.mao@linaro.org>
+ <CAC_iWjJ8qkOGVVqDa-_vg4x2W2rocb=ysQDPJhEgE0rOnwox6w@mail.gmail.com>
+ <CAEfUkUK0nwVwKkh6E9fHu9oRRX67bQdzVTsLuWeB16vYkv+2Pg@mail.gmail.com>
+ <CAC_iWjK_CBOccm_n4N7ZwYg-6=VFr_qOJ=kpuStOpBQCNE+cKA@mail.gmail.com>
+ <CAEfUkUJtmiPLVkvJ6Ambjwzz4Vj2aSbrt95_oBWVf0u6eaiwxw@mail.gmail.com>
+In-Reply-To: <CAEfUkUJtmiPLVkvJ6Ambjwzz4Vj2aSbrt95_oBWVf0u6eaiwxw@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 6 Dec 2023 12:44:47 +0200
-Message-ID: <CAC_iWjJ6KKJH=oBcXD7gb6f8KcK+OQV4Qo=B=UNeEUk-w2q61A@mail.gmail.com>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-To: Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Date: Wed, 6 Dec 2023 12:53:34 +0200
+Message-ID: <CAC_iWjL7_QOB+bGDR32mNEXwinFy6oZeYmfx_sdaAgE7kd3t2Q@mail.gmail.com>
+Subject: Re: [PATCH v2 01/18] bloblist: Update the tag numbering
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, Bin Meng <bmeng.cn@gmail.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain <n-jain1@ti.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,112 +93,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Wed, 22 Nov 2023 at 16:28, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 4 Dec 2023 at 20:55, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> On Wed, Nov 22, 2023 at 07:44:09PM +0530, Sumit Garg wrote:
-> > On Wed, 22 Nov 2023 at 19:31, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Nov 22, 2023 at 11:51:29AM +0530, Sumit Garg wrote:
-> > > > Hi Caleb,
-> > > >
-> > > > On Tue, 21 Nov 2023 at 22:39, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> > > [snip]
-> > > > > == DT loading ==
-> > > > >
-> > > > > Previously, boards used the FDT blob embedded into U-Boot (via
-> > > > > OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
-> > > > > bootloader, so we can instead rely on the first-stage bootloader to
-> > > > > populate some useful FDT properties for us (notably the /memory node and
-> > > > > KASLR seed) and fetch the DTB that it provides. Combined with the memory
-> > > > > map changes above, this let's us entirely avoid configuring the memory
-> > > > > map explicitly.
-> > > >
-> > > > Since with this change, we don't need to embed FDT blob in the u-boot
-> > > > binary, so I was thinking if we really need to import DTs from Linux
-> > > > for different platforms and then play a catchup game?
-> > > >
-> > > > IMO, the build command would look like following if we import
-> > > > pre-built FDT blob from Linux:
-> > > >
-> > > > - Build u-boot::
-> > > >
-> > > >        $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> > > >        $ make qcom_defconfig
-> > > >        $ make
-> > > >
-> > > > - gzip u-boot::
-> > > >
-> > > >        gzip u-boot-nodtb.bin
-> > > >
-> > > > - Append dtb to gzipped u-boot::
-> > > >
-> > > >         cat u-boot-nodtb.bin.gz
-> > > > <linux-tree>/arch/arm64/boot/dts/qcom/your-board.dtb >
-> > > > u-boot-nodtb.bin.gz-dtb
-> > > >
-> > > > This would avoid the maintenance burden to keep DT in sync with that
-> > > > of Linux. And since DT bindings in Linux are backwards compatible, we
-> > > > can say u-boot should work with DTB picked up from any Linux kernel
-> > > > stable release.
-> > >
-> > > I guess one question I have is, are we being passed the device tree
-> > > (since we're acting like the Linux Kernel)
-> >
-> > Yeah that is the case here, see patch #1 in this series regarding how
-> > FDT address is being retrieved from previous stage bootloader (ABL on
-> > sdm845 and qcs404 SoCs).
+> Hi Ilias,
 >
-> That's what I thought.
->
-> > > or knowing that we have the
-> > > dtb attached to the end of us and making use of the old kernel appended
-> > > dtb option? We're fine in for example the rpi_arm64 case of just being
-> > > given a device tree from the previous stage and not needing one in-tree.
-> >
-> > That's good to know and we can replicate that for Qcom platforms which
-> > are chainloaded and don't need an embedded DT.
->
-> So yes, moving these towards the direction of rpi_arm64 and specifically
-> using imply OF_HAS_PRIOR_STAGE or select OF_HAS_PRIOR_STAGE (force that
-> the dtb must be provided to us) sounds like the right direction to take
-> these platforms.
+> What is the difference between the new added XFERLIST_EVLOG and the existing BLOBLISTT_TPM2_TCG_LOG and BLOBLISTT_TCPA_LOG in U-Boot?
 >
 
-IMHO that option isn't that useful.  Grepping for OF_HAS_PRIOR_STAGE
-shows that we use it to print where the DT came from unless I am
-missing something...
-On top of that having implies in the Kconfig to control those prints
-makes little sense to me and it's a half-baked solution anyway,
-because may boards don't fill this properly.  This thing was cleaned
-up in 2e8d2f88439d, 2ea63271e522f, and d6f8ab30a2af46 but then got
-reintroduced in 275b4832f6bf91 without anyone acking or reviewing. I
-am fine with Caleb suggests here, but I think we can do way better.
+I am not really sure what the existing options are supposed to mean.
+Having discrete options for v1 and v2 makes little sense since the
+EvenLog format already contains that info.
 
-Instead of having that imply we can get rid of it and only have
-OF_BOARD(and perhaps rename it). So a general cleanup I have in mind
-is
-
-CONFIG_OF_SEPARATE -> rename it to CONFIG_OF_APPEND because it is
-actually appended at the end of the binary.
-CONFIG_OF_EMBED -> Leave it as is, it's there for debugging mostly.
-CONFIG_OF_BOARD perhaps rename it to something more useful, but the
-semantics are 'The DT comes from an *external* source. A bloblist,
-some EEPROM location, CPU registers etc'
-CONFIG_OF_HAS_PRIOR_STAGE -> Get rid of it again. gd already has
-gd->fdt_src, just add a FDTSRC_UNKNOWN as default and delegate the
-responsibility of filling this properly at fdtdec_setup(). The boards
-that use OF_BOARD can fill this in properly, instead of relying on
-Kconfig imply options and we can even be more explicit on where the DT
-came from.
-
-I can send an RFC if anyone thinks this is a cleaner approach
+The newly added options is supposed to
+- Hand you over an EventLog from a previous stage boot loader, so you
+can continue extending that instead of creating a new one. We do that
+already parsing for tpm_event_log_addr, which is what TF-A fills in.
+In the future we need to add the bloblist option.
+- Tell you whether you need to replay it or not.
 
 Thanks
 /Ilias
 
-
-
-> --
-> Tom
+> Thanks and regards,
+> Raymond
+>
+> On Mon, 4 Dec 2023 at 12:52, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>>
+>> On Mon, 4 Dec 2023 at 18:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Hi Ilias,
+>> >
+>> > BLOBLISTT_AREA_ARM is now holding the ones we already defined in the FW Handoff spec for TF-A project only.
+>> > The TPM eventlog related ones are undefined in the spec yet, they stay in the group BLOBLISTT_AREA_FIRMWARE.
+>>
+>> We did define them past 0.9 [0]. So I think we should add them regardless.
+>> They are part of the main doc now [1]
+>>
+>> [0] https://github.com/FirmwareHandoff/firmware_handoff/pull/16/files
+>> [1] https://github.com/FirmwareHandoff/firmware_handoff/blob/main/source/transfer_list.rst#tpm-event-log-table-entry-layout-xferlist_evlog
+>>
+>> Regards
+>> /Ilias
+>>
+>> >
+>> > >  /* BLOBLISTT_AREA_FIRMWARE */
+>> > >- { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+>> > >- { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+>> > >  { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+>> > >  { BLOBLISTT_TCPA_LOG, "TPM log space" },
+>> > >- { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>> > >+ { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+>> >
+>> > Thanks and regards,
+>> > Raymond
+>> >
+>> > On Mon, 4 Dec 2023 at 03:25, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>> >>
+>> >> Hi all,
+>> >>
+>> >> [...]
+>> >>
+>> >> >  common/bloblist.c  | 16 +++++++++---
+>> >> >  include/bloblist.h | 65 ++++++++++++++++++++++++----------------------
+>> >> >  test/bloblist.c    |  4 +--
+>> >> >  3 files changed, 48 insertions(+), 37 deletions(-)
+>> >> >
+>> >> > diff --git a/common/bloblist.c b/common/bloblist.c
+>> >> > index a22f6c12b0..349ceddea5 100644
+>> >> > --- a/common/bloblist.c
+>> >> > +++ b/common/bloblist.c
+>> >> > @@ -36,16 +36,24 @@ static struct tag_name {
+>> >> >         enum bloblist_tag_t tag;
+>> >> >         const char *name;
+>> >> >  } tag_name[] = {
+>> >> > -       { BLOBLISTT_NONE, "(none)" },
+>> >> > +       { BLOBLISTT_VOID, "(void)" },
+>> >> >
+>> >> >         /* BLOBLISTT_AREA_FIRMWARE_TOP */
+>> >> > +       { BLOBLISTT_CONTROL_FDT, "Control FDT" },
+>> >> > +       { BLOBLISTT_HOB_BLOCK, "HOB block" },
+>> >> > +       { BLOBLISTT_HOB_LIST, "HOB list" },
+>> >> > +       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>> >> >
+>> >> >         /* BLOBLISTT_AREA_FIRMWARE */
+>> >> > -       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+>> >> > -       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+>> >> >         { BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+>> >> >         { BLOBLISTT_TCPA_LOG, "TPM log space" },
+>> >> > -       { BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
+>> >>
+>> >> There are some TPM Eventlog related entries that are missing here.
+>> >> Can we add them?
+>> >>
+>> >> > +       { BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+>> >> > +
+>> >> > +       /* BLOBLISTT_AREA_ARM */
+>> >> > +       { BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
+>> >> > +
+>> >> > +       /* BLOBLISTT_AREA_OTHER */
+>> >> > +       { BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+>> >> [...]
+>> >>
+>> >> Thanks
+>> >> /Ilias
