@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F6DDC4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 10:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D919C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 10:45:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B602386EA6;
-	Wed,  6 Dec 2023 11:40:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D295A87032;
+	Wed,  6 Dec 2023 11:45:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iUDWFoEp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WkGEr1yt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B37A870DE; Wed,  6 Dec 2023 11:40:40 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id A8794870DE; Wed,  6 Dec 2023 11:45:13 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2C4386DD2
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 11:40:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9388A86EA6
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 11:45:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9fa2714e828so79581766b.1
- for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 02:40:37 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-54c4f95e27fso5282908a12.1
+ for <u-boot@lists.denx.de>; Wed, 06 Dec 2023 02:45:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1701859237; x=1702464037; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pBRxqLzA1DD5KPc6+egwO21EjaTUR1vgQ3jxMDvUZxQ=;
- b=iUDWFoEpEcYGDuNimwQ6eeVaEdFLK3OI8IPDA1iuYc8OP8D1jKPwZqQPiO5Pb9QHJ1
- z3mufZMd/dw162h24LjsgcPFO1WsOmXelh3QQfHkgB/pfwCUXFjUktnHuxiIoiiS7/cQ
- oHXDb0l3aZzo/ZqShyGsONFADIbM0yeX+f1I/Nh8tPUtOHhCH4LdaEX7GNKe2/TyJ3vJ
- 9jtA8o9N052A3uOFW77g2ZcKYi2PeGa4g8594BPv83WAx7OI6tpb/lsoF+UFDahV8nv1
- bf0QrpkgL9PjdR3VfZofq0SmX36jsQGDvb02Wrf1p7QjDwMtp363tl0atGsTTLQNPmo9
- Wkjw==
+ d=gmail.com; s=20230601; t=1701859511; x=1702464311; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/Cgq4FGI/1LZhwaomQeeoZFHOj8vJT5niw9+B2ZGo4Y=;
+ b=WkGEr1ytxDc9m1YIt7FLdMYryvwjAjLZpLi1X30WyQwGkingAoQ2KBMYnnw9f7VWDe
+ RnBDooe/hfyOTm6fbbNO0PD3KOjzMIhRCGTPVz0rFNCNIeBXQ8gbMfkS1tfp398J7DZA
+ zF+qQQ3h/mY2n4qoanGZtAc5j0YYIrCQJsUPQwfwu+RoI/uTo16HPO0VvhpbLV+Sm7d5
+ Q1M6LytcdL0RpAHHSACd8ubzcycAWczT7opf49aTqDBeDyCstOijRWaWeDNKu89FQWz6
+ WJE1lWhkzxdLWtSkY/Gq38WQQ+hWhP5BqlmTVurnSNg6FtTr4pILVZntItmxvagsgiPe
+ zpRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701859237; x=1702464037;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pBRxqLzA1DD5KPc6+egwO21EjaTUR1vgQ3jxMDvUZxQ=;
- b=bmChd+vrBXaHlm3tsLSUzI5iJzKiHT9m+sWSegR3/DnM8txWyRDe59J5pcxzdPsqEd
- jKkERavGCnxx4Px58xl5AWvh1gp7SGghblKLFC6FPMbT/aqWsHFv52E6JLQXeqMxauiE
- OxnPnFwabbxm1aJ/Z4ykMFqgM7zg6MJ2eqC7Q1/z72hZUt0ICGvTIRby3/XZmUduaGXV
- vUz94YOwBgvX9mt/UhvyZSepo31+Bdh7D5EVRZEqQniAsRp54ku2F0jk90EVU+3Mt3tG
- h++z7cSNnaHwa6KsUoyWsC1fxBY0+AE7QRz7gYNCMOMcBgtW7N/qmnro+hKgjRRqRpOj
- V5fA==
-X-Gm-Message-State: AOJu0YxzKlrzCiNY5Gt4jhjeePvkpPJyB6ejZEBbw08pC0WinRi775Tc
- n9OqNs2bSYl3xhQR7Rp7z0tB0CO1a/a5NO2qfHmxog==
-X-Google-Smtp-Source: AGHT+IHzTzo5OypAtFMuNuFj1tfEEdfqDMMT1IGbc6ex3sc5azVnixb+ve/M0QxTU9m3C/vib19lF8VUzm7Dta3bmaQ=
-X-Received: by 2002:a17:906:7f0c:b0:a0c:fe2f:c445 with SMTP id
- d12-20020a1709067f0c00b00a0cfe2fc445mr366235ejr.69.1701859237128; Wed, 06 Dec
- 2023 02:40:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1701859511; x=1702464311;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/Cgq4FGI/1LZhwaomQeeoZFHOj8vJT5niw9+B2ZGo4Y=;
+ b=f/WpPRo8N+SC2/gY5rqOU5WviKXo9Wg3cVRA3iGQEUTxD65BVrU+tsuuBOWnvVJvc0
+ iwFguw2ViDUc300ClYssozgI7mHAUOjSW9iAHZKiwkWECrXoI0XikYujsOjz0b4TL3jd
+ wICeQ20mr+NF9zWF9RqMuCFldzggfPfjn4JyC86SVXONQckxyIgtQ63Gf1uZEDYbggfa
+ g4Eju0thACtTt87RPo3vmSQHiojlSIi+EIW4+VPHzrZM7TYPTEV5avpB8INJu+4AxBdY
+ CwrfUOxojc7F1RH2Aneu1S3X7eQyJeZ5XcImRLrMJZV1XOdTvNq49A501NnJq7uvKeHs
+ PtRw==
+X-Gm-Message-State: AOJu0Yz6DUiePZpfgJBnUNvTWoBSg0E1Rzqm+y5HLHHXRNSL1bawcnLD
+ YVmQgvR2iLVK7OLsiK8w05cHwXP2RdA0qAS7F9Y=
+X-Google-Smtp-Source: AGHT+IGWWEtB7zZogucKCo5Bkvx3HOLyYS2vdNxti3njeH0wnTxG/tGEgyTbwBe+2IGGMQCxbNbvI9Lj1ETzMDbeBug=
+X-Received: by 2002:a50:d498:0:b0:54c:a846:99f9 with SMTP id
+ s24-20020a50d498000000b0054ca84699f9mr520405edi.81.1701859510747; Wed, 06 Dec
+ 2023 02:45:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-27-maxim.uvarov@linaro.org>
- <20231127131129.GD2513409@bill-the-cat>
- <c7022ef3-ad0c-4f89-ad47-a0f7df2a24c6@web.de>
- <CAD8XO3aVLzpqV=MDVO2mJBP=sLzSieXhrV8GUPYPpu76mRKjeQ@mail.gmail.com>
- <CAD8XO3Y4_=8wDQcFNJW1MT1yiyDmbQxP3UCRWWWPZzuJkZp88g@mail.gmail.com>
- <1402b942-9ce9-4bc3-9fac-0eb438b23e77@web.de>
- <CAD8XO3bYyfDVnVQdcqDji39Y=i1Q2jdG-SQ6KUWsBPo0umoZnQ@mail.gmail.com>
- <b47859ca-36d3-4eee-88fb-f7859e69ff2d@web.de>
- <CAD8XO3Zqt1SN6t4MWXozJ4R-FjQ1324Vn5=h6xCe13gwxb9qSA@mail.gmail.com>
- <5f54c9b0-921b-46c2-9e5c-eb657b4f1ef3@web.de>
-In-Reply-To: <5f54c9b0-921b-46c2-9e5c-eb657b4f1ef3@web.de>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Wed, 6 Dec 2023 16:40:24 +0600
-Message-ID: <CAD8XO3Yd=7JWbd496W__bg27r9tDcG8_BWg6ibDpvtrZz6ctHA@mail.gmail.com>
-Subject: Re: [PATHv11 26/43] configs/tbs2910_defconfig inc limit
-To: Soeren Moch <smoch@web.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, goldsimon@gmx.de
+References: <20231205023751.61679-1-heinrich.schuchardt@canonical.com>
+ <CADQ0-X9Euv7UwVS49N=DvQxN+O_+6fq_jJw=Jiqauau6TyLpUg@mail.gmail.com>
+ <35373146-3e24-461f-88b7-58eb01be1c45@canonical.com>
+In-Reply-To: <35373146-3e24-461f-88b7-58eb01be1c45@canonical.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 6 Dec 2023 10:44:59 +0000
+Message-ID: <CALeDE9O_7ndGQeEoErVQQcpvSWVVpw5dg+tygvyYi_s4Ta5Wtg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: boot options should relate to the ESP
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,284 +89,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 6 Dec 2023 at 13:06, Soeren Moch <smoch@web.de> wrote:
+On Wed, Dec 6, 2023 at 9:31=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 05.12.23 07:23, Masahisa Kojima wrote:
+> > Hi Heinrich,
+> >
+> > On Tue, 5 Dec 2023 at 11:38, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> * Only generate removable media entries for EFI system partitions.
+> >> * Only offer EFI system partitions for boot options in the eficonfig
+> >>    command.
+> >>
+> >> Fixes: c416f1c0bcab ("bootmenu: add removable media entries")
+> >> Fixes: 87d791423ac6 ("eficonfig: menu-driven addition of UEFI boot opt=
+ion")
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >>   cmd/eficonfig.c              | 6 ++++--
+> >>   lib/efi_loader/efi_bootmgr.c | 3 ++-
+> >>   2 files changed, 6 insertions(+), 3 deletions(-)
+> >>
+> >> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> >> index 34a59cb15d..c066b28b6b 100644
+> >> --- a/cmd/eficonfig.c
+> >> +++ b/cmd/eficonfig.c
+> >> @@ -626,8 +626,10 @@ static efi_status_t eficonfig_select_volume(struc=
+t eficonfig_select_file_info *f
+> >>          efi_handle_t *volume_handles =3D NULL;
+> >>          struct efi_simple_file_system_protocol *v;
+> >>
+> >> -       ret =3D efi_locate_handle_buffer_int(BY_PROTOCOL, &efi_simple_=
+file_system_protocol_guid,
+> >> -                                          NULL, &count, (efi_handle_t=
+ **)&volume_handles);
+> >> +       /* Find all EFI system partitions */
+> >> +       ret =3D efi_locate_handle_buffer_int(BY_PROTOCOL,
+> >> +                                          &efi_system_partition_guid,
+> >> +                                          NULL, &count, &volume_handl=
+es);
+> >
+> > UEFI specification v2.10 section '3.5 Boot Mechanisms' says
+> > "EFI can boot from a device using the EFI_SIMPLE_FILE_SYSTEM_PROTOCOL o=
+r the
+> > EFI_LOAD_FILE_PROTOCOL."
+> >
+> > So in my understanding of the UEFI spec, I think
+> > efi_simple_file_system_protocol_guid
+> > is correct here.
+> >
+> >>          if (ret !=3D EFI_SUCCESS) {
+> >>                  eficonfig_print_msg("No block device found!");
+> >>                  return ret;
+> >> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr=
+.c
+> >> index 48153bd5ff..9e84391186 100644
+> >> --- a/lib/efi_loader/efi_bootmgr.c
+> >> +++ b/lib/efi_loader/efi_bootmgr.c
+> >> @@ -1047,8 +1047,9 @@ efi_status_t efi_bootmgr_update_media_device_boo=
+t_option(void)
+> >>          efi_handle_t *volume_handles =3D NULL;
+> >>          struct eficonfig_media_boot_option *opt =3D NULL;
+> >>
+> >> +       /* Find all EFI system partitions */
+> >>          ret =3D efi_locate_handle_buffer_int(BY_PROTOCOL,
+> >> -                                          &efi_simple_file_system_pro=
+tocol_guid,
+> >> +                                          &efi_system_partition_guid,
+> >
+> > In EDK II reference implementation[0], it enumerates all
+> > block_io_protocol devices
+> > and eliminates logical partitions.
+> > Should we do the same? If yes, I can prepare the patch on this.
+>
+> This is what the boot options look like on an EDK II system:
+>
+> $ efibootmgr -v
+> BootCurrent: 000D
+> Timeout: 3 seconds
+> BootOrder:
+> 000D,000B,000C,0003,0004,0005,0006,0007,0008,0009,000A,0000,0001,0002
+> Boot0000* UiApp
+> FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(462caa21-7614-4503-836=
+e-8ab6f4662331)
+> Boot0001* helloworld
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,655=
+35,0)/HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c9f,0x2000,0x200000)/File(\=
+helloworld.efi)h.e.l.l.o.
+> .w.o.r.l.d...
+> Boot0002* UEFI Crucial_CT128M550SSD1 14270C7CFEFE
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f20000000000)/Sata(1,655=
+35,0)N.....YM....R,Y.
+> Boot0003* UEFI eMMC Device
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ct=
+rl(0x0)N.....YM....R,Y.
+> Boot0004* UEFI eMMC Device 2
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ct=
+rl(0x1)N.....YM....R,Y.
+> Boot0005* UEFI eMMC Device 3
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,00006ef00000000000)/eMMC(0)/Ct=
+rl(0x2)N.....YM....R,Y.
+> Boot0006* UEFI PXEv4 (MAC:000000000001)
+> MAC(000000000001,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> Boot0007* UEFI PXEv4 (MAC:000000000002)
+> MAC(000000000002,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> Boot0008* UEFI PXEv4 (MAC:000000000003)
+> MAC(000000000003,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> Boot0009* UEFI PXEv4 (MAC:000000000004)
+> MAC(000000000004,1)/IPv4(0.0.0.00.0.0.0,0,0)N.....YM....R,Y.
+> Boot000A* UEFI Shell
+> FvVol(5eda4200-2c5f-43cb-9da3-0baf74b1b30c)/FvFile(7c04a583-9e3e-4f1c-ad6=
+5-e05268d0b4d1)
+> Boot000B* UEFI HL-DT-ST DVDRAM GTC0N
+> VenHw(0d51905b-b77e-452a-a2c0-eca0cc8d514a,000054f40000000000)/Sata(1,655=
+35,0)N.....YM....R,Y.
+> Boot000C* ubuntu
+> HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\u=
+buntu\grubaa64.efi)
+> Boot000D* grub
+> HD(1,GPT,5a1ba4fc-f9b4-4da2-b5e1-065e9cd10e3a,0x800,0x100000)/File(\EFI\g=
+rub\shimaa64.efi)
+> Boot1001* helloworld
+> HD(1,GPT,40c323d0-6b76-47c4-bc82-e05bf5d23c8f,0x2000,0x200000)/File(hello=
+world.efi)
+>
+> As you described autogenerated boot options are on block device level
+> irrespective of the existence of an ESP.
+>
+> EDK II does not to care if /EFI/BOOT/BOOT<ARCH>.EFI is on a partition
+> with the ESP partition type.
+>
+> We should try to mimic the EDK II behavior.
 
-> On 05.12.23 21:00, Maxim Uvarov wrote:
->
-> On Wed, 6 Dec 2023 at 00:25, Soeren Moch <smoch@web.de> wrote:
->
->> On 05.12.23 17:25, Maxim Uvarov wrote:
->>
->> On Tue, 5 Dec 2023 at 21:49, Soeren Moch <smoch@web.de> wrote:
->>
->>> On 05.12.23 14:15, Maxim Uvarov wrote:
->>>
->>> I think I solved the size issue on all the boards.
->>>
->>> Key changes:
->>> 1. remove compilation of original ping.c and tftp.c (tftp had also
->>> server code, so I will partially bring it back.)
->>>
->>> Interesting.
->>> @Tom: Is there other server code in u-boot, that is enabled by default
->>> (and can be used to reclaim code space)?
->>> Fur sure I do not need u-boot to act as server for tftp (maye nfs,
->>> others).
->>>
->>
->> Maybe I need to be more clear about this. reference to code from tftp.c
->> and ping.c exist in net.c, test/image/spl_load_net.c, test.dm/dsa.c,
->> test/dm/eth.c.
->> And even if that code is not used (replaced with lwip calls to the same
->> commands in my case) it adds additional size. Even enabled LTO does not see
->> direct difference.
->>
->> So 'server code' does not mean u-boot acting as network server, you mean
->> this code is referenced by something else? And things in test do increase
->> image size?
->>
-> This was my question to understand possible options to save space.
->
->
->>
->>
->>> 2. LTO=y
->>> 3. CONFIG_LOGLEVEL=3 instead of 4.
->>> 4. CONFIG_CMD_DATE is not set
->>> 5. CONFIG_CMD_LICENSE is not set
->>> 6. CONFIG_CMD_PING (if 1-6 did not help).
->>>
->>> And these changes were enough for CI tagrets to build.
->>> I also tested that Raspberry PI 4B works fine (dhcp, ping). Looking for
->>> other boards to test.
->>>
->>> For example for this tbs2910 board changes are:
->>>
->>> Disabling CMD_DATE is unfortunate. This can help to debug RTC problems
->>> (already used it for this purpose).
->>> And, if we are that close to the size limit, than maybe we can get away
->>> for this series, but for sure will run into trouble for every other small
->>> change to u-boot core/driver code.
->>>
->>> Regards,
->>> Soeren
->>>
->>
->> The problem is that for many targets the limit is 1MB.
->>
->> For tbs2910 it is 383kBytes. And there was plenty of free space when I
->> introduced mainline u-boot support. But yes, space got tighter over time.
->>
->
-> Hm,
-> orig:
-> -rw-r--r-- 1 uboot uboot 371K Dec  5 19:54 u-boot.bin
-> lwip:
-> -rw-r--r-- 1 uboot uboot 380K Dec  5 19:55 u-boot.bin
->
-> Then if I just enable CMD_DATE:
-> u-boot.imx exceeds file size limit:
->   limit:  0x5fc00 bytes
->   actual: 0x60c00 bytes
->   excess: 0x1000 bytes
-> make: *** [Makefile:1240: u-boot.imx] Error 1
-> make: *** Deleting file 'u-boot.imx'
-> uboot@3eebd85985c8:~/uboot-size$ ls -lh u-boot.bin
-> -rw-r--r-- 1 uboot uboot 382K Dec  5 19:58 u-boot.bin
->
-> So limit for your board is:
-> (gdb) p 0x5fc00/1024
-> $1 = 383
->
-> 383k. Where do you see the space?
->
-> Here I do not understand what you want to ask.
->
-> As I wrote earlier, yes, tbs2910 limit is 383k, for u-boot.imx, the number
-> you tried to change in this patch to 408k, but this change is not possible.
->
-> Without your changes there is some space left (not as much as 2014 when I
-> introduced tbs2910 support in u-boot), but enough to make further u-boot
-> development with unavoidable small image size increases possible. (size of
-> v2024.01-rc4 u-boot.imx for tbs2910 is 375k).
->
-> Regards,
-> Soeren
->
-
-
-Soeren, this patch which changes the limit will not be applied. I will send
-another patch which modies defconfig and makes room for lwip stack.
-If you want to keep CMD_DATE that is fine, probably we can disable EFI for
-this board or something else.
-
-BR,
-Maxim.
-
-
->
-> BR,
-> Maxim.
->
->
->
->> U-Boot in some minimal configuration is about 500kb. But U-boot with EFI,
->> USB, Eth drivers,  MMC, RTC, and all the commands is 900+ kb and very close
->> to 1MB. Most of the new features are enabled by default.
->>
->> No. Tom does a very good job to ensure that there is no (not much)
->> additional space required for unrelated boards that do not need new
->> features.
->>
->> I.e. they do not exist in _defconfig and appear in the resulting .config
->> automatically.  I would say that for some small targets things like EFI,
->> Secure boot, TPM, Updates and many others are not needed. But if new
->> features will appear by default very soon we will see limits.
->>
->> New features will not be enabled for old space constrained boards. In
->> your series you did not offer to keep the old implementation instead, this
->> is different and the reason why we discuss image size constraints.
->>
->> Regards,
->> Soeren
->>
->>
->> BR,
->> Maxim.
->>
->>>
->>> --- a/configs/tbs2910_defconfig
->>> +++ b/configs/tbs2910_defconfig
->>> @@ -18,6 +18,7 @@ CONFIG_SYS_MEMTEST_END=0x2f400000
->>>  CONFIG_LTO=y
->>>  CONFIG_HAS_BOARD_SIZE_LIMIT=y
->>>  CONFIG_BOARD_SIZE_LIMIT=392192
->>> +CONFIG_TIMESTAMP=y (this was added by savedefconfig)
->>>  # CONFIG_BOOTSTD is not set
->>>  CONFIG_SUPPORT_RAW_INITRD=y
->>>  CONFIG_BOOTDELAY=3
->>> @@ -26,6 +27,7 @@ CONFIG_BOOTCOMMAND="mmc rescan; if run bootcmd_up1;
->>> then run bootcmd_up2; else r
->>>  CONFIG_USE_PREBOOT=y
->>>  CONFIG_PREBOOT="echo PCI:; pci enum; pci 1; usb start"
->>>  CONFIG_DEFAULT_FDT_FILE="imx6q-tbs2910.dtb"
->>> +CONFIG_LOGLEVEL=3
->>>  CONFIG_PRE_CONSOLE_BUFFER=y
->>>  CONFIG_HUSH_PARSER=y
->>>  CONFIG_SYS_PROMPT="Matrix U-Boot> "
->>> @@ -52,7 +54,7 @@ CONFIG_CMD_DHCP=y
->>>  CONFIG_CMD_MII=y
->>>  CONFIG_CMD_PING=y
->>>  CONFIG_CMD_CACHE=y
->>> -CONFIG_CMD_TIME=y
->>> +# CONFIG_CMD_DATE is not set
->>>  CONFIG_CMD_SYSBOOT=y
->>>  # CONFIG_CMD_VIDCONSOLE is not set
->>>  CONFIG_CMD_EXT2=y
->>>
->>> BR,
->>> Maxim.
->>>
->>>
->>> On Tue, 28 Nov 2023 at 13:09, Maxim Uvarov <maxim.uvarov@linaro.org>
->>> wrote:
->>>
->>>>
->>>>
->>>> On Tue, 28 Nov 2023 at 03:20, Soeren Moch <smoch@web.de> wrote:
->>>>
->>>>> On 27.11.23 14:11, Tom Rini wrote:
->>>>> > On Mon, Nov 27, 2023 at 06:57:09PM +0600, Maxim Uvarov wrote:
->>>>> >
->>>>> >> Increase allowed binary size to fit lwip code.
->>>>> >>
->>>>> >> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
->>>>> >> ---
->>>>> >>   configs/tbs2910_defconfig | 2 +-
->>>>> >>   1 file changed, 1 insertion(+), 1 deletion(-)
->>>>> >>
->>>>> >> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
->>>>> >> index 8fbe84f1d2..ce40efa9ab 100644
->>>>> >> --- a/configs/tbs2910_defconfig
->>>>> >> +++ b/configs/tbs2910_defconfig
->>>>> >> @@ -17,7 +17,7 @@ CONFIG_SYS_MEMTEST_START=0x10000000
->>>>> >>   CONFIG_SYS_MEMTEST_END=0x2f400000
->>>>> >>   CONFIG_LTO=y
->>>>> >>   CONFIG_HAS_BOARD_SIZE_LIMIT=y
->>>>> >> -CONFIG_BOARD_SIZE_LIMIT=392192
->>>>> >> +CONFIG_BOARD_SIZE_LIMIT=417792
->>>>> >>   # CONFIG_BOOTSTD is not set
->>>>> >>   CONFIG_SUPPORT_RAW_INITRD=y
->>>>> >>   CONFIG_BOOTDELAY=3
->>>>> > This is another case where the binary size is a fairly hard limit.
->>>>> You
->>>>> > forgot to cc the board maintainer here (and I assume the rest of the
->>>>> > series too) for these config changes.
->>>>> ThanksTom for sending a notification to me.
->>>>>
->>>>> Yes, the CONFIG_BOARD_SIZE_LIMIT is a hard limit and this patch in its
->>>>> current form will break tbs2910 support and even brick the board for
->>>>> some configurations. So NAK for this patch.
->>>>> > I think on this platform it's not
->>>>> > impossible (like it is on am335x where I just replied) but really
->>>>> > difficult. I'll let Soeren comment on if switching the network stack
->>>>> to
->>>>> > lwip is the kind of feature enhancement that warrants the pain of
->>>>> > dealing with the size change here or not.
->>>>> Network boot is no important feature for this board and not used in
->>>>> the default boot configuration. But network support always was part
->>>>> of the config, may be used by some users, and is at least required
->>>>> to communicate the ethernet address to linux.
->>>>>
->>>>> So I'm not interested in a new network stack for this board, but
->>>>> also cannot disable network support completely. This seems to be a
->>>>> problem for this patch series, since networking support implies LWIP
->>>>> now.
->>>>>
->>>>>
->>>> Thanks Soeren for the explanation. Then yes, something more advanced is
->>>> needed
->>>> to be done here.
->>>>
->>>>
->>>>
->>>>> The question for me is, why is the new network stack consuming so
->>>>> much space, with only a few enabled commands? Is the whole library
->>>>> linked in with some unused features (the cover letter mentions much
->>>>> more than what seems to be used in the converted commands). Or is
->>>>> the old network stack linked in in parallel to the new one? Can
->>>>> we save space here?
->>>>>
->>>>
->>>> Yes, the old code is still there. I decided to not touch it for the
->>>> first integration (arp.o, bootp.o, ping.o and
->>>> mostly all from net/Makefile).  Those files also have reference code in
->>>> net/net.c. Not compiling
->>>> and not linking this code will save some space, but It's larger than
->>>> the current version.
->>>> Like for EVM SPL code with usb+net+ext4 and etc have very minimal space
->>>> for network stack.
->>>> I will take a look at this more closely...
->>>>
->>>>
->>>>>
->>>>> NFS support in the old networking code is quite big, enabled by
->>>>> default,
->>>>> and probably still there in parallel to this new lwip library. If there
->>>>> is really no other option to save space, and lwip in general is agreed
->>>>> to be the way forward for U-Boot, and only tbs2910 is blocking that,
->>>>> then from my point of view disabling NFS for tbs2910 could be a way
->>>>> to stay within the size limit.
->>>>>
->>>>> ok. I think that by default we need something very minimal (dhcp,
->>>> tftp),  probably ping is even not needed.
->>>>
->>>>
->>>>
->>>>> Regards,
->>>>> Soeren
->>>>>
->>>>>
->>>
->>
->
+I believe the UEFI spec allows VFAT partition type as well ESP
+partition type. For example a lot of Raspberry Pis won't load their
+firmware of a ESP partition type but will off VFAT even though they
+are essentially the same thing.
