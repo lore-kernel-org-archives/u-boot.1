@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7C79C4167B
-	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 09:53:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B506C4167B
+	for <u-boot@archiver.kernel.org>; Wed,  6 Dec 2023 09:53:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D171877E9;
-	Wed,  6 Dec 2023 10:52:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 860518766C;
+	Wed,  6 Dec 2023 10:52:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fS6Ic41j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OumD3aGN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0F348749C; Wed,  6 Dec 2023 10:52:04 +0100 (CET)
+ id 0C0528787B; Wed,  6 Dec 2023 10:52:07 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACA28775A
- for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 10:52:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D58BF8763C
+ for <u-boot@lists.denx.de>; Wed,  6 Dec 2023 10:52:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B69pvdB053553;
- Wed, 6 Dec 2023 03:51:57 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B69q1oC053568;
+ Wed, 6 Dec 2023 03:52:01 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701856317;
- bh=xDkUzTPe1Nje+KILqa9J5Q9z+LAi8U2o7pKFOJGgGMI=;
+ s=ti-com-17Q1; t=1701856321;
+ bh=iOlb4FTrOM1NY4P1oBxa1w5NS1mOEnlJ4OSoGzdUgSs=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=fS6Ic41jN8TGLrdEEsZ27oj/m+rnk45uXAdRxgD6lv+9g3LQ1fs6gmOc8jvzV+Mcw
- hJMdah/L7Yap6ZRIQP7mc2vuERJchaRUDlz6L/LpiifkxlHdYvI931ehU7xrrGtlb3
- t231gYJfXOzyNp/VmCZcmjVRgoaOcw2nei48YZ0o=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B69pvAI039106
+ b=OumD3aGNcW1xA20/+QK8+cA79ucXbT+GlCin8xzb4tb0kWWkOBpmqlUMCh7d+JkiK
+ NphHUZyNi/UC4g2djNkFOjODeud+7VdRk7GMxkTM+A35igP18hPSDtYtTPwCU3y4wc
+ eH7gSDLWglrcHaHZ8T9zjRYSpdqZZEGiAY98xx9g=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B69q1KV111782
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 6 Dec 2023 03:51:57 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 6 Dec 2023 03:52:01 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 6
- Dec 2023 03:51:57 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 03:52:01 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 6 Dec 2023 03:51:57 -0600
+ Frontend Transport; Wed, 6 Dec 2023 03:52:01 -0600
 Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B69pQBd039003;
- Wed, 6 Dec 2023 03:51:53 -0600
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B69pQBe039003;
+ Wed, 6 Dec 2023 03:51:57 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Wed, 6 Dec 2023 15:21:29 +0530
-Subject: [PATCH v6 7/8] docs: k3: Cleanup FIT signature documentation
+Date: Wed, 6 Dec 2023 15:21:30 +0530
+Subject: [PATCH v6 8/8] docs: k3: Add secure booting documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20231206-binman-firewalling-v6-7-e7fce13a6dc1@ti.com>
+Message-ID: <20231206-binman-firewalling-v6-8-e7fce13a6dc1@ti.com>
 References: <20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com>
 In-Reply-To: <20231206-binman-firewalling-v6-0-e7fce13a6dc1@ti.com>
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
@@ -67,11 +67,11 @@ CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
  <nm@ti.com>, Thomas Richard <thomas.richard@bootlin.com>, Gregory CLEMENT
  <gregory.clement@bootlin.com>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1701856286; l=13414;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1701856286; l=2639;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=M/2xEMlEbgxCrtETkoLobBuyr16eEOJ5hUiIsiWXcwU=;
- b=KiGa5lOEpjVYaSR30I5rAuPF/BR6JMMkSMIp2t0ChbcdmTBzLiKVPj/nU7gVYY0CyosVexyYn
- 3N2xDeSWfbCAISCWbM6FEdVipPZx0GS/FvIGGf8G/oKuiPTHkcnHivH
+ bh=4SIX1BkssWQBzKyhOerPJ0IB+U9824YmIQfb0V4OruA=;
+ b=VKvXKiQqeZi+lqyktt6plDPUPzHRVafrG+FZVTN6zvcSiZ5MRI1p8JMe5K9v+T5OhqDJViLss
+ 8ddG+IwiTR4DodV2SmsRPQF4/UxRguS4qMoYD4DJ/J89rxKu2Z6dLf/
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -91,348 +91,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The previous documentation had been very crude so refactor it to make it
-cleaner and concise.
+This commit adds a general flow to explain the usage of firewalls and
+the chain of trust in K3 devices.
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- doc/board/ti/k3.rst | 270 +++++++++++++++++++++++++++++++++-------------------
- 1 file changed, 171 insertions(+), 99 deletions(-)
+ doc/board/ti/k3.rst | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
 
 diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index a127215ce539..947b86ba8292 100644
+index 947b86ba8292..60d04c5708be 100644
 --- a/doc/board/ti/k3.rst
 +++ b/doc/board/ti/k3.rst
-@@ -248,6 +248,8 @@ Building tiboot3.bin
-    the final `tiboot3.bin` binary. (or the `sysfw.itb` if your device
-    uses the split binary flow)
+@@ -104,6 +104,51 @@ firmware can be loaded on the now free core in the wakeup domain.
+ For more information on the bootup process of your SoC, consult the
+ device specific boot flow documentation.
  
-+.. _k3_rst_include_start_build_steps_spl_r5:
++Secure Boot
++^^^^^^^^^^^
 +
- .. k3_rst_include_start_build_steps_spl_r5
- .. prompt:: bash $
- 
-@@ -312,6 +314,8 @@ use the `lite` option.
-    finished, we can jump back into U-Boot again, this time running on a
-    64bit core in the main domain.
- 
-+.. _k3_rst_include_start_build_steps_uboot:
++K3 HS-SE devices are used for authenticated boot flow with secure boot.
++HS-FS devices have optional authentication in the flow and doesn't "require"
++authentication unless converted to HS-SE devices.
 +
- .. k3_rst_include_start_build_steps_uboot
- .. prompt:: bash $
- 
-@@ -330,144 +334,212 @@ wakeup and main domain and to boot to the U-Boot prompt
-    | `tispl.bin` for HS devices or `tispl.bin_unsigned` for GP devices
-    | `u-boot.img` for HS devices or `u-boot.img_unsigned` for GP devices
- 
--Fit Signature Signing
-+FIT signature signing
- ---------------------
- 
--K3 Platforms have fit signature signing enabled by default on their primary
--platforms. Here we'll take an example for creating fit image for J721e platform
-+K3 platforms have FIT signature signing enabled by default on their primary
-+platforms. Here we'll take an example for creating FIT Image for J721E platform
- and the same can be extended to other platforms
- 
--1. Describing FIT source
-+Pre-requisites:
++Chain of trust
++""""""""""""""
 +
-+* U-boot build (:ref:`U-boot build <k3_rst_include_start_build_steps_spl_r5>`)
-+* Linux Image and Linux DTB prebuilt
++1) SMS starts up and loads the authenticated ROM code in Wakeup Domain
++2) ROM code starts up and loads the authenticated tiboot3.bin in Wakeup
++   Domain
++3) Wakeup SPL (tiboot3.bin) would authenticate the next set of binaries
++   (ATF,OP-TEE,DM,SPL,etc.)
++4) After ATF and OP-TEE load, ARMV8 U-boot authenticates the next set of
++   binaries (Linux and DTBs) if using FIT Image authentication and having a
++   signature node in U-boot.
 +
-+Describing FIT source
-+^^^^^^^^^^^^^^^^^^^^^
- 
--  .. code-block:: bash
-+FIT Image is a packed structure containing binary blobs and configurations.
-+The Kernel FIT Image that we have has Kernel Image, DTB and the DTBOs.  It
-+supports packing multiple images and configurations that allow you to
-+choose any configuration at runtime to boot from.
++Steps 1-3 are all authenticated by either the ROM code or TIFS as the
++authenticating entity and step 4 uses U-boot standard mechanism for
++authenticating.
 +
-+.. code-block::
- 
-     /dts-v1/;
- 
-     / {
--            description = "Kernel fitImage for j721e-hs-evm";
--            #address-cells = <1>;
--
--            images {
--                    kernel-1 {
--                            description = "Linux kernel";
--                            data = /incbin/("Image");
--                            type = "kernel";
--                            arch = "arm64";
--                            os = "linux";
--                            compression = "none";
--                            load = <0x80080000>;
--                            entry = <0x80080000>;
--                            hash-1 {
--                                    algo = "sha512";
--                            };
--
--                    };
--                    fdt-ti_k3-j721e-common-proc-board.dtb {
--                            description = "Flattened Device Tree blob";
--                            data = /incbin/("k3-j721e-common-proc-board.dtb");
--                            type = "flat_dt";
--                            arch = "arm64";
--                            compression = "none";
--                            load = <0x83000000>;
--                            hash-1 {
--                                    algo = "sha512";
--                            };
--
--                    };
-+        description = "FIT Image description";
-+        #address-cells = <1>;
++All the authentication that are done for ROM/TIFS are done through x509
++certificates that are signed.
 +
-+        images {
-+            [image-1]
-+            [image-2]
-+            [fdt-1]
-+            [fdt-2]
-+        }
++Firewalls
++"""""""""
 +
-+        configurations {
-+            default = <conf-1>
-+            [conf-1: image-1,fdt-1]
-+            [conf-2: image-2,fdt-1]
-+        }
-+    }
++1) ROM comes up and sets up firewalls that are needed by itself
++2) TIFS (in multicertificate will setup it's own firewalls)
++3) R5 SPL comes along and opens up other firewalls ( that are not owned by
++   anyone - essentially firewalls that were setup by ROM but are not needed
++   anymore)
++4) Each stage beyond this: such as tispl.bin containing TFA/OPTEE uses OIDs to
++   set up firewalls to protect themselves (enforced by TIFS)
++5) TFA/OP-TEE can configure other firewalls at runtime if required as they
++   are already authenticated and firewalled off from illegal access.
++6) A53 SPL and U-boot itself startups but has no ability to change the
++   protection firewalls enforced by x509 OIDs or any other firewalls
++   configured by ROM/TIFS in the beginning.
 +
-+* Sample Images
++Futhur, firewalls have a lockdown bit in hardware that enforces the setting
++(and cannot be over-ridden) till the full system is resetted.
 +
-+.. code-block::
-+
-+    kernel-1 {
-+            description = "Linux kernel";
-+            data = /incbin/("linux.bin");
-+            type = "kernel";
-+            arch = "arm64";
-+            os = "linux";
-+            compression = "gzip";
-+            load = <0x81000000>;
-+            entry = <0x81000000>;
-+            hash-1 {
-+                    algo = "sha512";
-             };
--
--            configurations {
--                    default = "conf-ti_k3-j721e-common-proc-board.dtb";
--                    conf-ti_k3-j721e-common-proc-board.dtb {
--                            description = "Linux kernel, FDT blob";
--                            fdt = "fdt-ti_k3-j721e-common-proc-board.dtb";
--                            kernel = "kernel-1";
--                            signature-1 {
--                                    algo = "sha512,rsa4096";
--                                    key-name-hint = "custMpk";
--                                    sign-images = "kernel", "fdt";
--                            };
--                    };
-+    };
-+    fdt-ti_k3-j721e-common-proc-board.dtb {
-+            description = "Flattened Device Tree blob";
-+            data = /incbin/("arch/arm64/boot/dts/ti/k3-j721e-common-proc-board.dtb");
-+            type = "flat_dt";
-+            arch = "arm64";
-+            compression = "none";
-+            load = <0x83000000>;
-+            hash-1 {
-+                    algo = "sha512";
-             };
-     };
-+    # Optional images
-+    fdt-ti_k3-j721e-evm-virt-mac-client.dtbo {
-+            description = "Flattened Device Tree blob";
-+            data = /incbin/("arch/arm64/boot/dts/ti/k3-j721e-evm-virt-mac-client.dtbo");
-+            type = "flat_dt";
-+            arch = "arm64";
-+            compression = "none";
-+            load = <0x83080000>;
-+            hash-1 {
-+                    algo = "sha512";
-+            };
-+    };
-+
-+.. note::
-+
-+    Change the path in data variables to point to the respective files in your
-+    local machine. For e.g change "linux.bin" to "<path-to-kernel-image>".
+ Software Sources
+ ----------------
  
--  You would require to change the '/incbin/' lines to point to the respective
--  files in your local machine and the key-name-hint also needs to be changed
--  if you are using some other key other than the TI dummy key that we are
--  using for this example.
-+For enabling usage of FIT signature, add the signature node to the
-+corresponding configuration node as follows.
- 
--2. Compile U-boot for the respective board
-+* Sample Configurations
- 
--.. include::  k3.rst
--    :start-after: .. k3_rst_include_start_build_steps_uboot
--    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. code-block::
-+
-+    conf-ti_k3-j721e-common-proc-board.dtb {
-+            description = "Linux kernel, FDT blob";
-+            fdt = "fdt-ti_k3-j721e-common-proc-board.dtb";
-+            kernel = "kernel-1";
-+            signature-1 {
-+                    algo = "sha512,rsa4096";
-+                    key-name-hint = "custMpk";
-+                    sign-images = "kernel", "fdt";
-+            };
-+    };
-+    # Optional configurations
-+    conf-ti_k3-j721e-evm-virt-mac-client.dtbo {
-+            description = "FDTO blob";
-+            fdt = "fdt-ti_k3-j721e-evm-virt-mac-client.dtbo";
-+
-+            signature-1 {
-+                    algo = "sha512,rsa4096";
-+                    key-name-hint = "custMpk";
-+                    sign-images = "fdt";
-+            };
-+    };
-+
-+Specify all images you need the signature to authenticate as a part of
-+sign-images. The key-name-hint needs to be changed if you are using some
-+other key other than the TI dummy key that we are using for this example.
-+It should be the name of the file containing the keys.
- 
- .. note::
- 
--    The changes only affect a72 binaries so the example just builds that
-+    Generating new set of keys:
-+
-+    .. prompt:: bash $
- 
--3. Sign the fit image and embed the dtb in uboot
-+        mkdir keys
-+        openssl genpkey -algorithm RSA -out keys/dev.key \
-+        -pkeyopt rsa_keygen_bits:4096 -pkeyopt rsa_keygen_pubexp:65537
-+        openssl req -batch -new -x509 -key keys/dev.key -out keys/dev.crt
- 
--  Now once the build is done, you'll have a dtb for your board that you'll
--  be passing to mkimage for signing the fitImage and embedding the key in
--  the u-boot dtb.
-+Generating the fitImage
-+^^^^^^^^^^^^^^^^^^^^^^^
- 
--  .. prompt:: bash $
-+.. note::
-+
-+    For signing a secondary platform like SK boards, you'll require
-+    additional steps
-+
-+    - Change the CONFIG_DEFAULT_DEVICE_TREE
- 
--    mkimage -r -f fitImage.its -k $UBOOT_PATH/board/ti/keys -K
--    $UBOOT_PATH/build/a72/dts/dt.dtb
-+        For e.g
- 
--  For signing a secondary platform, pass the -K parameter to that DTB
-+        .. code-block::
- 
--  .. prompt:: bash $
-+            diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-+            index a5c1df7e0054..6d0126d955ef 100644
-+            --- a/configs/j721e_evm_a72_defconfig
-+            +++ b/configs/j721e_evm_a72_defconfig
-+            @@ -13,7 +13,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
-+             CONFIG_ENV_SIZE=0x20000
-+             CONFIG_DM_GPIO=y
-+             CONFIG_SPL_DM_SPI=y
-+            -CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-common-proc-board"
-+            +CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-sk"
-+             CONFIG_SPL_TEXT_BASE=0x80080000
-+             CONFIG_DM_RESET=y
-+             CONFIG_SPL_MMC=y
- 
--    mkimage -f fitImage.its -k $UBOOT_PATH/board/ti/keys -K
--    $UBOOT_PATH/build/a72/arch/arm/dts/k3-j721e-sk.dtb
-+    - Change the binman nodes to package u-boot.dtb for the correct set of platform
- 
--  .. note::
-+        For e.g
- 
--    If changing `CONFIG_DEFAULT_DEVICE_TREE` to the secondary platform,
--    binman changes would also be required so that correct dtb gets packaged.
-+        .. code-block::
- 
--    .. code-block:: bash
-+            diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-+                  index 673be646b1e3..752fa805fe8d 100644
-+                  --- a/arch/arm/dts/k3-j721e-binman.dtsi
-+                  +++ b/arch/arm/dts/k3-j721e-binman.dtsi
-+                  @@ -299,8 +299,8 @@
-+                   #define SPL_J721E_SK_DTB "spl/dts/k3-j721e-sk.dtb"
- 
--      diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
--      index 673be646b1e3..752fa805fe8d 100644
--      --- a/arch/arm/dts/k3-j721e-binman.dtsi
--      +++ b/arch/arm/dts/k3-j721e-binman.dtsi
--      @@ -299,8 +299,8 @@
--       #define SPL_J721E_SK_DTB "spl/dts/k3-j721e-sk.dtb"
-+                   #define UBOOT_NODTB "u-boot-nodtb.bin"
-+                  -#define J721E_EVM_DTB "u-boot.dtb"
-+                  -#define J721E_SK_DTB "arch/arm/dts/k3-j721e-sk.dtb"
-+                  +#define J721E_EVM_DTB "arch/arm/dts/k3-j721e-common-proc-board.dtb"
-+                  +#define J721E_SK_DTB "u-boot.dtb"
- 
--       #define UBOOT_NODTB "u-boot-nodtb.bin"
--      -#define J721E_EVM_DTB "u-boot.dtb"
--      -#define J721E_SK_DTB "arch/arm/dts/k3-j721e-sk.dtb"
--      +#define J721E_EVM_DTB "arch/arm/dts/k3-j721e-common-proc-board.dtb"
--      +#define J721E_SK_DTB "u-boot.dtb"
-+This step will embed the public key in the u-boot.dtb file that was already
-+built during the initial u-boot build.
- 
--5. Rebuilt u-boot
-+.. prompt:: bash $
- 
--   This is required so that the modified dtb gets updated in u-boot.img
-+    mkimage -r -f fitImage.its -k $UBOOT_PATH/board/ti/keys -K $UBOOT_PATH/build/$ARMV8/dts/dt.dtb fitImage
- 
--.. include::  k3.rst
--    :start-after: .. k3_rst_include_start_build_steps_uboot
--    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. note::
- 
--6. (Optional) Enabled FIT_SIGNATURE_ENFORCED
-+    If you have another set of keys then change the -k argument to point to
-+    the folder where your keys are present, the build requires the presence
-+    of both .key and .crt file.
- 
--   By default u-boot will boot up the fit image without any authentication as
--   such if the public key is not embedded properly, to check if the public key
--   nodes are proper you can enable FIT_SIGNATURE_ENFORCED that would not rely
--   on the dtb for anything else then the signature node for checking the fit
--   image, rest other things will be enforced such as the property of
--   required-keys. This is not an extensive check so do manual checks also
-+Build u-boot again
-+^^^^^^^^^^^^^^^^^^
- 
--   This is by default enabled for devices with TI_SECURE_DEVICE enabled.
-+The updated u-boot.dtb needs to be packed in u-boot.img for authentication
-+so rebuild U-boot ARMV8 without changing any parameters.
-+Refer (:ref:`U-boot ARMV8 build <k3_rst_include_start_build_steps_uboot>`)
- 
- .. note::
- 
--   The devices now also have distroboot enabled so if the fit image doesn't
--   work then the fallback to normal distroboot will be there on hs devices,
--   this will need to be explicitly disabled by changing the boot_targets.
-+   The devices now also have distroboot enabled so if the FIT image doesn't
-+   work then the fallback to normal distroboot will be there on HS devices.
-+   This will need to be explicitly disabled by changing the boot_targets to
-+   disallow fallback during testing.
- 
- Saving environment
- ------------------
 
 -- 
 2.41.0
