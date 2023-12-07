@@ -4,43 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB67BC4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 13:53:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEF5C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 14:22:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E2C986CF4;
-	Thu,  7 Dec 2023 14:53:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B548387185;
+	Thu,  7 Dec 2023 15:22:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Y8QuTmMl";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7515686D2B; Thu,  7 Dec 2023 14:52:59 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2F0E686C72
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 14:52:57 +0100 (CET)
+ id 4A19286F40; Thu,  7 Dec 2023 15:22:53 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3D787185
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 15:22:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 99E3812FC;
- Thu,  7 Dec 2023 05:53:42 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 31CF63F6C4;
- Thu,  7 Dec 2023 05:52:55 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Chukun Pan <amadeus@jmu.edu.cn>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Bob McChesney <bob@electricworry.net>,
- Stephen Graf <stephen.graf@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Pull request: u-boot-sunxi/master for v2024.01
-Date: Thu,  7 Dec 2023 13:52:40 +0000
-Message-Id: <20231207135240.2070795-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id F2DE9CE2381;
+ Thu,  7 Dec 2023 14:22:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19886C433C8;
+ Thu,  7 Dec 2023 14:22:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1701958967;
+ bh=71GRLi10KsRY3/c2IyqfAKSTK19PKBYA7JM02ACQegM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Y8QuTmMlBGx7t/sCGFFChLj5SqTtVDwbM97cUo8TPjCb86bz5zooR+1DzHNCaoOg9
+ F2iUlMnl0BJadIbufdldd8gDxXQ/fmKi1wUoMei9rMTV5EqknB/y7wSGABhPpa5n56
+ 7xz7yGsYyKgYC2yU0HN56ZrYoUCVgLaT9gNfKYbgaKOyi9G/I8hbsaxcUEj7dnIo2p
+ KhpR+G7J7clrdbLW8aspEjyE1SPbjFCTXe3eZ0K7v1VhVFPHmVey1a7GmNdrTJddLA
+ t+LSKtOW43phYHFYEfu9UbQySCQwcYWCgA4qMaJXtdK2j9O2Lt+LJrxH5X4RAXSgcR
+ xcKlaADAdKaSA==
+Message-ID: <619f6788-9f00-4729-a945-1b1af0621735@kernel.org>
+Date: Thu, 7 Dec 2023 16:22:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ hs@denx.de, enrico.leto@siemens.com, praneeth@ti.com, nm@ti.com,
+ vigneshr@ti.com, u-boot@lists.denx.de
+References: <20231125111605.47536-1-rogerq@kernel.org>
+ <20231126173520.GA2513409@bill-the-cat>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20231126173520.GA2513409@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,59 +74,31 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-please pull the hopefully final sunxi changes for this cycle:
+On 26/11/2023 19:35, Tom Rini wrote:
+> On Sat, Nov 25, 2023 at 01:16:05PM +0200, Roger Quadros wrote:
+> 
+>> AM335x uses a special driver "am335x_spl_bch.c" as SPL
+>> NAND loader. This driver expects 1 sector at a time ECC
+>> and doesn't work well with multi-sector ECC that was implemented in
+>> commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+>>
+>> Switch back to 1 sector at a time read/ECC.
+>>
+>> Fixes: 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based correction")
+>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>> ---
+>>  drivers/mtd/nand/raw/omap_gpmc.c | 95 ++++++++++----------------------
+>>  1 file changed, 29 insertions(+), 66 deletions(-)
+> 
+> I'm glad to see this fixed. My question is, can we abstract this
+> slightly as I assume there's a performance hit on the newer SoCs that
+> support more than one sector at a time for ECC and I assume it's just
+> am335x and related that don't support the feature. Thanks.
+> 
 
-the first four patches are actual fixes. The last three patches add
-support for the apparently popular OrangePi Zero 3 board: multiple
-people seem to be champing at the bit, so I'd rather give them
-something real instead of people using random trees they found on the
-Internet. It's actually mostly the new defconfig file anyway, so the
-chances for regressions are very slim.
+It looks like that the ELM driver (omap_elm.c) is not yet ready for multi-sector setup yet.
+I will need more time to test the multi-sector implementation.
 
-Gitlab CI passed, and multiple people booted that on the Zero 3 board.
-
-Thanks,
-Andre
-
-=========================================================
-The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b63:
-
-  Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
-
-for you to fetch changes up to d2e1cc69a24719e9939a84dc42bdf281af6ec35d:
-
-  sunxi: H616: Add OrangePi Zero 3 board support (2023-12-06 23:09:17 +0000)
-
-----------------------------------------------------------------
-Andre Przywara (5):
-      sunxi: H616: OrangePi Zero 2: enable USB power supply
-      sunxi: h616: (really) lower SPL stack address to avoid BROM data
-      mtd: spi-nor: Add support for zBIT ZB25VQ128
-      sunxi: H616: remove default AXP305 selection
-      sunxi: H616: Add OrangePi Zero 3 board support
-
-Chukun Pan (1):
-      sunxi: dts: arm64: update emac for Orange Pi Zero 3
-
-Stephen Graf (1):
-      sunxi: correct documentation for SPI flashing
-
- arch/arm/dts/Makefile                       |  1 +
- arch/arm/dts/sun50i-h616-orangepi-zero.dtsi |  3 ---
- arch/arm/dts/sun50i-h616-orangepi-zero2.dts |  3 +++
- arch/arm/dts/sun50i-h618-orangepi-zero3.dts |  2 ++
- board/sunxi/MAINTAINERS                     |  5 +++++
- common/spl/Kconfig                          |  2 +-
- configs/orangepi_zero2_defconfig            |  2 ++
- configs/orangepi_zero3_defconfig            | 32 +++++++++++++++++++++++++++++
- configs/x96_mate_defconfig                  |  1 +
- doc/board/allwinner/sunxi.rst               |  3 +--
- drivers/mtd/spi/Kconfig                     |  5 +++++
- drivers/mtd/spi/spi-nor-ids.c               |  5 +++++
- drivers/power/Kconfig                       |  1 -
- 13 files changed, 58 insertions(+), 7 deletions(-)
- create mode 100644 configs/orangepi_zero3_defconfig
+-- 
+cheers,
+-roger
