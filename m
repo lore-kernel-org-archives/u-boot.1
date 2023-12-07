@@ -4,77 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F890C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 03:14:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736FDC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 03:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD7B28745E;
-	Fri,  8 Dec 2023 04:14:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D7B1F87083;
+	Fri,  8 Dec 2023 04:48:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shokubai.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NJ7C0cqM";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=shokubai.tech header.i=@shokubai.tech header.b="KH06Yooh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFD6186335; Fri,  8 Dec 2023 04:14:22 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 543FD874F3; Thu,  7 Dec 2023 21:24:07 +0100 (CET)
+Received: from smtpout11.r2.mail-out.ovh.net (smtpout11.r2.mail-out.ovh.net
+ [54.36.141.11])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0517D8745E
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 04:14:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A5A6870F6
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 21:24:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-54bfa9b3ffaso2347039a12.1
- for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 19:14:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702005258; x=1702610058; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+UIVQchT+Tt4YFE7o1tSnDE005F52hVyNzEVg1mv9l0=;
- b=NJ7C0cqMxjN5cmg0T96aBs7B6pFFLNPUC9bLZ/hbA82LthWIxDNndoGUlj9KPTx5Tc
- EPh9qxieMUzzsQv4YfY3CyKtAADqslqa7sqKSOgFBboezab86/ZkW992Ci0oCpM4F0Lg
- n4Y8Zhdpy1FI3aYhdU4ceRQB8RPDqfJek0wmE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702005258; x=1702610058;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+UIVQchT+Tt4YFE7o1tSnDE005F52hVyNzEVg1mv9l0=;
- b=AK/o3JLVPXDXlyevQ/vWxhmDc2QNfaHqvQOm7gwZdlqbdAvzC9SUsEoacNqzFKMZsA
- wQIrkHGUuz4aduVkLxTJ1lobmc2Tzp8GDYIyu2gZBrSZNdac4ZKo7jU2gRc57dmt22sp
- j1lxtoiZjQLQEIGx/phDzwP5gS5SR1JJit/0GOxPgdiFk9e5lzNGrEWjBa/j8Q/Ror1y
- wUFY8Ebj9i/PmOi5i7EDivZiP0pnBkwrn4aIhz8DclHPgcIWBFuTUyDUuBk+0CV2f6Qe
- tSbgQWiAWQxw58Iut4xDR+N3ymEdiVP+/WOdDLWda1KRm2NrY+TCEljXdQQn6tsx4Vwa
- iKpg==
-X-Gm-Message-State: AOJu0Yxe+geAWUJ6wEI1rMLT6WCX26o/zwSYlCViPxEFA9QF6Vs1XBBV
- +QJLoJfHnsu1BdTGdGwbWoVp0FyYpcvXPs2vWCryhA==
-X-Google-Smtp-Source: AGHT+IGFiRCd18BO9M2PJhgbxyYMfyb+xv/69Xk1mYGFMFLF4zM+duVFJOimW89Tv9yJlZ1L+MlNvBFbSfSpQfnQGgM=
-X-Received: by 2002:a17:906:2b46:b0:9dd:7ccf:77f8 with SMTP id
- b6-20020a1709062b4600b009dd7ccf77f8mr1611471ejg.20.1702005258212; Thu, 07 Dec
- 2023 19:14:18 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shokubai.tech
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ff@shokubai.tech
+Received: from DAG2EX3.indiv5.local (unknown [10.111.208.198])
+ by mo512.mail-out.ovh.net (Postfix) with ESMTPS id F319F26A8B;
+ Thu,  7 Dec 2023 20:24:02 +0000 (UTC)
+Received: from DAG2EX1.indiv5.local (172.16.2.21) by DAG2EX3.indiv5.local
+ (172.16.2.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Thu, 7 Dec
+ 2023 21:24:02 +0100
+Received: from DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b]) by
+ DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b%6]) with mapi id
+ 15.01.2507.035; Thu, 7 Dec 2023 21:24:01 +0100
+From: ff <ff@shokubai.tech>
+To: Rob Herring <robh+dt@kernel.org>
+CC: Sumit Garg <sumit.garg@linaro.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski@linaro.org>, "u-boot-custodians@lists.denx.de"
+ <u-boot-custodians@lists.denx.de>, Tom Rini <trini@konsulko.com>, "Krzysztof
+ Kozlowski" <krzysztof.kozlowski+dt@linaro.org>, "conor+dt@kernel.org"
+ <conor+dt@kernel.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, "Rayagonda
+ Kokatanur" <rayagonda.kokatanur@broadcom.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jorge Ramirez-Ortiz
+ <jorge.ramirez.ortiz@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
+ "Marek Vasut" <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "Simon Glass" <sjg@chromium.org>, Boot Architecture Mailman List
+ <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Thread-Topic: [PATCH 00/21] Qualcomm generic board support
+Thread-Index: AQHaJnNnhdt4kVlXP0S2F0B2DoM1cbCZSWcAgADt+wCAADt7e4ABQ+dlgAD1AACAANBmoYAAoteAgAAquTU=
+Date: Thu, 7 Dec 2023 20:24:01 +0000
+Message-ID: <61B1DEC4-4004-491A-B5A9-1548ACAD6104@shokubai.tech>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <CAFA6WYPe8_onKNYzAVr9RHVbwUZCTiEkDizwnfL6QRsqii-JUg@mail.gmail.com>
+ <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+ <CAL_JsqL4dKbziAgwaCDz7sw-evuX7LZ3E-H6h=xQ9cXiyThY1Q@mail.gmail.com>
+ <CAFA6WYPnobZ+eTGuOs+yTYNnuBu6i37Db9ZS2gr36heH1mFV5Q@mail.gmail.com>
+ <f72c772b-7fd7-4558-96d3-086f8ab7515a@linaro.org>
+ <CAFA6WYOPh6UBt3FDm-c0tfp3YvWtRHkaxy2CJNg8ORKOwPwq0w@mail.gmail.com>
+ <34334add-4017-46f6-873a-d9233e29f640@linaro.org>
+ <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
+ <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
+ <5C77B3D5-3659-40BC-86BB-E73E7034E017@shokubai.tech>,
+ <CAL_JsqLBQCStz39-5d0CSnZzuSfc6473d2=HEY2NF7Hm83L9YA@mail.gmail.com>
+In-Reply-To: <CAL_JsqLBQCStz39-5d0CSnZzuSfc6473d2=HEY2NF7Hm83L9YA@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: fr-FR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-16-raymond.mao@linaro.org>
- <CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com>
- <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
- <CAPnjgZ0Hxsbv7EHbcnvLtmRSrPgMDfOFS+KmvYBcZgVC1Je4Ng@mail.gmail.com>
- <CAC_iWjKhmJ4BrH73-5sg8XGjMfJbsx8oWLsz3sGKdP8jdoHBDg@mail.gmail.com>
- <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
- <CAEfUkU+hXKDxcWpeMqOfuc2jyUOALwcG2a9pP2=0wKLFTscP7A@mail.gmail.com>
-In-Reply-To: <CAEfUkU+hXKDxcWpeMqOfuc2jyUOALwcG2a9pP2=0wKLFTscP7A@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Dec 2023 20:14:06 -0700
-Message-ID: <CAPnjgZ2ghUo5jOkvp1eKvOz6t=Pzw1KLMrhURtPNfLtF9Ooa=A@mail.gmail.com>
-Subject: Re: [PATCH v2 15/18] fdt: Allow the devicetree to come from a bloblist
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+DKIM-Signature: v=1; a=rsa-sha256; d=shokubai.tech; s=ovhex1078890-selector1; 
+ c=relaxed/relaxed; t=1701980642; h=from:to:subject:date;
+ bh=dwgEkuhVKMoc4XDVdcyxgrZwRD+g/p61S0zIbc10Ze4=;
+ b=KH06Yooh2tkIMQXMQfSHAmY5zY2D9it+A05STIpcyN6SCM2ZRdM4Umwbhsuo85fbGFJi/MSfHePd/5pBVDQeoj/S/OfEVtF9kdtXV47lKmkrObOpGRRFbFm49Itx3CdBqq6PlhBahHlaRvBO8+9fIA4vWkoNx8qWjHVft82BmUIWAkriLOPNhlYVvQOUqcSmgpSXBaVZXQhC0XhZPc4RO7uEIpPJ8PqPGyDOmnN9TUSGg5SmsMoFgLfBOfmtXA5w2NojspTcvRUlIl+vUDgmaaa9hmuA7S+vr6L+4u/uVctS2Eg6AvoZm/Ce67rdxdlu0WctYnBO71Lr3mu9R8SBdQ==
+X-Ovh-Tracer-Id: 3018256177646648982
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudekfedgjeehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefuthffkfhfjggtggesrgdtmhertddtjeenucfhrhhomhepfhhfuceofhhfsehshhhokhhusggrihdrthgvtghhqeenucggtffrrghtthgvrhhnpeehleeukeeuudejudduudeugefftedugefguddujefggefgtefhudefuddvhfetgeenucffohhmrghinhepkhgvrhhnvghlrdhorhhgpdgrrhhmrdgtohhmnecukfhppeduvdejrddtrddtrddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeofhhfsehshhhokhhusggrihdrthgvtghhqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehsuhhmihhtrdhgrghrgheslhhinhgrrhhordhorhhgpdhkrhiihihsiihtohhfrdhkohiilhhofihskhhisehlihhnrghrohdrohhrghdpuhdqsghoohhtqdgtuhhsthhoughirghnsheslhhishhtshdruggvnhigrdguvgdpthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhkrhiihihsiihtohhfrdhkohiilhhofihskhhiodgutheslhhinhgrrhhordhorhhgpdgtohhnohhrodgutheskhgvrhhnvghlrdhorhhgpdgtrghlvggsrdgtohhnnhholhhlhieslhhinh
+ grrhhordhorhhgpdhnvghilhdrrghrmhhsthhrohhngheslhhinhgrrhhordhorhhgpdhrfhhrihgvugdruggvvhesghhmrghilhdrtghomhdpughsrghnkhhouhhskhhisehgmhgrihhlrdgtohhmpdhpvghnghdrfhgrnhesnhigphdrtghomhdpjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrrgihrghgohhnuggrrdhkohhkrghtrghnuhhrsegsrhhorggutghomhdrtghomhdplhhukhhmrgesuggvnhigrdguvgdpshgvrghnghgrvdesghhmrghilhdrtghomhdpjhhorhhgvgdrrhgrmhhirhgviidrohhrthhiiiesghhmrghilhdrtghomhdpshhtvghphhgrnhesghgvrhhhohhlugdrnhgvthdpmhgrrhgvgiesuggvnhigrdguvgdpuhdqsghoohhtsehlihhsthhsrdguvghngidruggvpdhsjhhgsegthhhrohhmihhumhdrohhrghdpsghoohhtqdgrrhgthhhithgvtghtuhhrvgeslhhishhtshdrlhhinhgrrhhordhorhhgpdhrohgshhdoughtsehkvghrnhgvlhdrohhrghdpoffvtefjohhsthepmhhoheduvddpmhhouggvpehsmhhtphhouhht
+X-Mailman-Approved-At: Fri, 08 Dec 2023 04:48:17 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,176 +112,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
-On Wed, 6 Dec 2023 at 13:35, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Simon,
->
-> > The other thing missing here is SPL. The bloblist is designed such
-> > that it can be set up in any phase of U-Boot, then is passed to
-> > following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
-> > need. As I noted, it breaks sandbox_spl. What happens if a board wants
-> > to use bloblist in SPL but doesn't want the SPL DT to come from a
-> > prior stage? What happens if SPL wants doesn't want to pass the U-Boot
-> > DT through to U-Boot in the bloblist? It is all just horribly
-> > confusing.
-> I think the logic to decide whether to take the DT from bloblist really depends
-> on the board vendor.
-> I will move this kind of logics into board specific functions from fdtdec.c in the
-> next revision.
-> Board vendors can decide the behaviors they want. This can answer the question
-> above and for example whether they want a fallback when no DT exists in the
-> bloblist or the DT from bloblis is corrupted, or just print a warning message.
-> For Qemu-arm, as an example of design reference, I prefer to take the DT from the
-> bloblist automatically when (BLOBLIST && OF_BOARD) and keep the fallback
-> compatibility to load from `CFG_SYS_SDRAM_BASE` when DT from bloblist is
-> corrupted.
-> I will take a look into the sandbox_spl failures you mentioned.
-
-In the interests of my sanity, could you send just the bloblist
-updates and move the other patches into a separate series?
-
-Regards,
-SImon
-
-
->
-> Thanks and regards,
-> Raymond
->
->
-> On Tue, 5 Dec 2023 at 22:57, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Ilias,
->>
->> On Mon, 4 Dec 2023 at 23:22, Ilias Apalodimas
->> <ilias.apalodimas@linaro.org> wrote:
->> >
->> > Hi Simon,
->> >
->> > We did discuss this in OSFC but perhaps you forgot.  The discussion
->> > was based on the mail here [0].
->>
->> Perhaps I did? Or perhaps we had a different understanding of it?
->>
->> >
->> > On Tue, 5 Dec 2023 at 02:52, Simon Glass <sjg@chromium.org> wrote:
->> > >
->> > > Hi Raymond,
->> > >
->> > > On Mon, 4 Dec 2023 at 12:25, Raymond Mao <raymond.mao@linaro.org> wrote:
->> > > >
->> > > > Hi Simon,
->> > > >
->> > > > When `OF_BOARD` is defined, the FDT should be from one of  the board-specific mechanisms:
->> > > > 1. FDT from a bloblist via boot args
->> > > > 2. FDT in memory
->> > > > I don't think we need a new build option to distinguish these two, since it can be done in runtime by checking whether the boot args follow the FW Handoff spec conventions and the FDT exists in the bloblist.
->> > >
->> > > No, I would really like this to be deterministic, so we can fail if
->> > > something goes wrong. The bloblist should be 'declared' as the way to
->> > > boot, for a board.
->> >
->> > We *are* deterministic. I am just going to repeat what we discussed in
->> > OSFC for completeness.
->> > OF_BLOBLIST makes little sense because we are not going to add a
->> > Kconfig per blolblist entry.
->> > I haven't looked at what the patch does yet but the idea was really simple.
->> > - Under OF_BOARD (which can arguably be renamed to OF_PREVIOUS_STAGE
->> > or something like that)  if CONFIG_BLOB is enabled we scan for a
->> > bloblist
->> > - If CONFIG_BLOB is enabled but no bloblist is provided we fail the boot
->> > - If CONFIG_BLOB is not enabled we do what we did up to now, maybe
->> > with a message that this is going to be obsoleted once enough boards
->> > migrate to a bloblist
->> >
->> > IOW if support for a bloblist is enabled we expect to find one from
->> > the previous bootloader. I've lost count of how many times I repeated
->> > this, but here it goes again
->> > The device tree can come
->> > - From u-boot
->> > - From a previous stage loader *somehow* (eg. passed on a bloblist,
->> > passed on a register, read from an EEPROM etc)
->> >
->> > We should keep that distinction and create subcategories for the
->> > 'comes from a previous stage loader', rather than adding arbitrary
->> > config options which only confuse people
->>
->> I don't know why you are so frustrated about this. This patch does not
->> even do what you have listed above, so far as I can tell.
->>
->> We have:
->> - OF_HAS_PRIOR_STAGE which indicates that U-Boot is not the first phase
->> - OF_BOARD which indicates that the board can do anything it likes
->> - BLOBLIST which indicates that there is a bloblist
->>
->> I proposed adding:
->> - OF_BLOBLIST which indicates that U-Boot gets the DT from the bloblist
->>
->> I understood that your intention OF_BOARD would go away since there
->> are almost no cases that need it. I was skeptical it could be done but
->> I definitely agreed (and still do) that it would be great if that
->> could go away, as we would not need OF_BLOBLIST since OF_BOARD would
->> effectively mean the same thing.
->>
->> But when I look at this patch, that is not what is happening. In fact,
->> there is no indication that the DT came from the bloblist. U-Boot will
->> just report 'devicetree: board'. We must say where it came from.
->>
->> The other thing missing here is SPL. The bloblist is designed such
->> that it can be set up in any phase of U-Boot, then is passed to
->> following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
->> need. As I noted, it breaks sandbox_spl. What happens if a board wants
->> to use bloblist in SPL but doesn't want the SPL DT to come from a
->> prior stage? What happens if SPL wants doesn't want to pass the U-Boot
->> DT through to U-Boot in the bloblist? It is all just horribly
->> confusing.
->>
->> So I believe, in fact, that we cannot get rid of OF_BOARD now, and
->> perhaps for quite a long time. There is another discussion about
->> Qualcomm where they want a gzipped DT attached to the end of U-Boot,
->> for example. Perhaps the key problem with this patch is that it would
->> ensure that OF_BOARD sticks around, since it means both a) Get the DT
->> from bloblist if BLOBLIST; b) Get the DT from a board-specific
->> mechanism if !BLOBLIST. That is not what we discussed.
->>
->> Why not just take my original patch and work from there? It will save
->> a lot of time. We can then progressively migrate boards from OF_BOARD
->> to OF_BLOBLIST and then perhaps one day remove OF_BOARD (I remain
->> skeptical, but hopeful). The whole 'standard passage' thing [1] was
->> carefully thought out *two years ago* and (I believe) dealt with all
->> of the issues above.
->>
->> For now, we should apply the patches which bring in the spec changes,
->> so we can figure out the rest of it. I have added my review tag for
->> those.
->>
->> Regards,
->> SImon
->> >
->> > Regards
->> > /Ilias
->> > >
->> > > If in the future all boards a reusing bloblist for this feature, then
->> > > sure, we can drop it. But we have things like rpi which do their own
->> > > thing.
->> > >
->> > > > If it fulfills the above conditions, we can take the FDT from bloblist, otherwise from the predefined memory address.
->> > > > This is fully backward compatible without adding a new build option.
->> > >
->> > > Again, we need to obtain the FDT from the bloblist if and only if the
->> > > board requires it. It creates a lot of confusion to have it as an
->> > > optional feature, when we know which way it should be.
->> > >
->> > > Ultimately OF_BOARD should go away. We just need to push bloblist to
->> > > other projects and closed-source firmware as the correct way to pass a
->> > > DT.
->> > >
->> > > Regards,
->> > > Simon
->> > > [.]
->> >
->> > [0] https://lore.kernel.org/u-boot/CAPnjgZ0SqVyj_drLEQrP21zPYCco3HOP-rYD+nKJMa0BVYpMDA@mail.gmail.com/
->>
->> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+DQoNCkxlIDcgZMOpYy4gMjAyMyDDoCAxOTo1MSwgUm9iIEhlcnJpbmcgPHJvYmgrZHRAa2VybmVs
+Lm9yZz4gYSDDqWNyaXQgOg0KDQrvu79PbiBUaHUsIERlYyA3LCAyMDIzIGF0IDI6MDjigK9BTSBm
+ZiA8ZmZAc2hva3ViYWkudGVjaD4gd3JvdGU6DQoNCg0KDQpMZSA2IGTDqWMuIDIwMjMgw6AgMjE6
+NDIsIFJvYiBIZXJyaW5nIDxyb2JoK2R0QGtlcm5lbC5vcmc+IGEgw6ljcml0IDoNCg0K77u/T24g
+VHVlLCBEZWMgNSwgMjAyMyBhdCAxMTowNeKAr1BNIFN1bWl0IEdhcmcgPHN1bWl0LmdhcmdAbGlu
+YXJvLm9yZz4gd3JvdGU6DQoNCk9uIFR1ZSwgNSBEZWMgMjAyMyBhdCAxNTozOSwgS3J6eXN6dG9m
+IEtvemxvd3NraQ0KPGtyenlzenRvZi5rb3psb3dza2lAbGluYXJvLm9yZz4gd3JvdGU6DQoNCk9u
+IDA1LzEyLzIwMjMgMTA6NDUsIFN1bWl0IEdhcmcgd3JvdGU6DQorIFUtYm9vdCBjdXN0b2RpYW5z
+IGxpc3QNCg0KT24gVHVlLCA1IERlYyAyMDIzIGF0IDEyOjU4LCBLcnp5c3p0b2YgS296bG93c2tp
+DQo8a3J6eXN6dG9mLmtvemxvd3NraUBsaW5hcm8ub3JnPiB3cm90ZToNCg0KT24gMDUvMTIvMjAy
+MyAwODoxMywgU3VtaXQgR2FyZyB3cm90ZToNCkBEVCBiaW5kaW5ncyBtYWludGFpbmVycywNCg0K
+R2l2ZW4gdGhlIGVhc2Ugb2YgbWFpbnRlbmFuY2Ugb2YgRFQgYmluZGluZ3Mgd2l0aGluIExpbnV4
+IGtlcm5lbA0Kc291cmNlIHRyZWUsIEkgZG9uJ3QgaGF2ZSBhIHNwZWNpZmljIG9iamVjdGlvbiB0
+aGVyZS4gQnV0IGNhbiB3ZSBlYXNlDQpEVFMgdGVzdGluZyBmb3IgZmlybXdhcmUvYm9vdGxvYWRl
+ciBwcm9qZWN0cyBieSBwcm92aWRpbmcgYSB2ZXJzaW9uZWQNCnJlbGVhc2UgcGFja2FnZSBmb3Ig
+RFQgYmluZGluZ3M/IE9yIGlmIHNvbWVvbmUgZWxzZSBoYXMgYSBiZXR0ZXIgaWRlYQ0KaGVyZSBw
+bGVhc2UgZmVlbCBmcmVlIHRvIGNoaW1lIGluLg0KDQpUaGlzIGRvZXNuJ3Qgd29yayBmb3IgeW91
+PzoNCg0KaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvZGV2
+aWNldHJlZS9kZXZpY2V0cmVlLXJlYmFzaW5nLmdpdC8NCg0KVGhhbmtzLCB0aGlzIGlzIGNlcnRh
+aW5seSBhIGdvb2Qgc3RlcCB3aGljaCBJIHdhc24ndCBhd2FyZSBvZi4gRnVydGhlcg0Kc2ltcGxp
+ZmljYXRpb24gY2FuIGJlIGRvbmUgdG8gZGVjb3VwbGUgZGV2aWNldHJlZSBzb3VyY2UgZmlsZXMg
+ZnJvbSBEVA0KYmluZGluZ3MuDQoNCldoeT8NCg0KSSBzdXBwb3NlIHlvdSBhcmUgYWxyZWFkeSBh
+d2FyZSB0aGF0IExpbnV4IERUUyBmaWxlcyBhcmUgYSBzdWJzZXQgb2YNCndoYXQgY291bGQgYmUg
+c3VwcG9ydGVkIGJ5IGRldmljZXRyZWUgc2NoZW1hcy4gVGhlcmUgY2FuIGJlDQpmaXJtd2FyZS9i
+b290bG9hZGVyIHNwZWNpZmljIHByb3BlcnRpZXMgKG9uZSBleGFtcGxlIGJlaW5nIFsxXSkgd2hp
+Y2gNCkxpbnV4IGtlcm5lbCBjYW4gc2ltcGx5IGlnbm9yZS4gV2lsbCB5b3UgYmUgd2lsbGluZyB0
+byBhZGQgYWxsIG9mDQp0aG9zZSBEVCBwcm9wZXJ0aWVzIHRvIExpbnV4IERUUyBmaWxlcyBhbmQg
+bWFpbnRhaW4gdGhlbT8NCg0KV2UgYWxyZWFkeSBhZGRlZCB0aGVtIGFuZCB3ZSBhbHJlYWR5IG1h
+aW50YWluIHRoZW0uIERUUyBkZXNjcmliZXMgdGhlDQpoYXJkd2FyZSwgbm90IHRoZSBPUy1zdWJz
+ZXQgb2YgdGhlIGhhcmR3YXJlLg0KDQpMZXQgbG9vayBhdCBzb21lIG51bWJlcnMgaWYgeW91ciBz
+dGF0ZW1lbnQgaXMganVzdGlmaWVkIG9yIG5vdCBmb3IgdGhlDQpleGFtcGxlIEkgZ2F2ZToNCg0K
+dS1ib290JCBnaXQgZ3JlcCAtbnIgYm9vdHBoLSogYXJjaC9hcm0qIHwgd2MgLWwNCjQwNzkNCg0K
+bGludXgkIGdpdCBncmVwIC1uciBib290cGgtKiBhcmNoL2FybSogfCB3YyAtbA0KMjY3DQoNCkkg
+aGF2ZSBubyBjb250cm9sIG92ZXIgd2hldGhlciBhbnlvbmUgaGFzIHN1Ym1pdHRlZCB0aGUgb3Ro
+ZXIgMzgxMiBpbnN0YW5jZXMuDQoNCkl0IGxvb2tzIGxpa2UgdGhlcmUgaXMgYWx3YXlzIGdvaW5n
+IHRvIGJlIGEgY2F0Y2ggdXAgZ2FtZSByZWdhcmRpbmcgRFQNCnByb3BlcnRpZXMgd2hpY2ggZWl0
+aGVyIExpbnV4IGtlcm5lbCBvciB1LWJvb3Qgb3IgYW55IG90aGVyDQpmaXJtd2FyZS9ib290bG9h
+ZGVyIHByb2plY3QgZG9uJ3QgY2FyZSBhYm91dC4NCg0KQXMgbG9uZyBhcyBkdHMgZmlsZXMgaW4g
+dS1ib290IGFyZSBtYW51YWxseSBzeW5jJ2VkLCB5ZXMuIFRoYXQgaXMgdGhlDQpwcm9ibGVtIGFu
+ZCBpdCBkb2Vzbid0IG1hdHRlciBpZiB3ZSBoYXZlIGEgc3RhbmRhbG9uZSByZXBvc2l0b3J5IG9y
+DQpub3QuDQoNCklmIHlvdSB3YW50IHRvIG1vdmUgaW4gdGhhdCBkaXJlY3Rpb24sIHN0YXJ0IGF1
+dG9tYXRpbmcgd2hhdCB1LWJvb3QNCmltcG9ydHMuIFlvdSBuZWVkIHRvIGRvIHRoYXQgZm9yIGJp
+bmRpbmdzIGlmIHlvdSB3YW50IHRvIHJ1bg0KdmFsaWRhdGlvbiwgc28gd2h5IG5vdCBkdHMgZmls
+ZXMgdG9vPw0KDQpIb3dldmVyLCBEVCBiaW5kaW5ncyBhcmUgc29tZXRoaW5nIHdoaWNoIHNob3Vs
+ZCBiZSBjb21tb24sIHRoZQ0KaGFyZHdhcmUgZGVzY3JpcHRpb24gb2YgYSBkZXZpY2Ugc2hvdWxk
+IGJlIHVuaXZlcnNhbC4gSU1PLCBzcGxpdHRpbmcNCg0KQm90aCBEVCBiaW5kaW5ncyBhbmQgRFRT
+IHNob3VsZCBiZSBjb21tb24uIEkgZG9uJ3Qgc2VlIHRoZSBkaWZmZXJlbmNlLg0KDQpJZiB3ZSBy
+ZWFsbHkgY2FyZSBhYm91dCBEVFMgdG8gYmUgY29tbW9uIHRoZW4gdGhlIGNvbnRyaWJ1dGlvbiBt
+b2RlbA0KaGFzIHRvIGNoYW5nZSB3aGVyZSB0aGVyZSBpcyBhIHNpbmdsZSByZXBvIGhvc3Rpbmcg
+RFQgYmluZGluZ3MgYW5kDQpEVFMuIEFsbCBvdGhlciBwcm9qZWN0cyB3aGV0aGVyIGl0IGlzIExp
+bnV4IGtlcm5lbCBvciB1LWJvb3Qgb3IgYW55DQpvdGhlciBPUy9maXJtd2FyZS9ib290bG9hZGVy
+IGFyZSBqdXN0IGNvbnN1bWluZyBEVFMgZmlsZXMgZnJvbSB0aGF0DQpzaW5nbGUgcmVwby4NCg0K
+UmVhbGx5LCBvbmx5IHRoZSBrZXJuZWwgYW5kIHUtYm9vdCBtYXR0ZXIuIE5vLCBJIGRvbid0IG1l
+YW4gSSBkb24ndA0KY2FyZSBhYm91dCBvdGhlciBwcm9qZWN0cywgYnV0IHRob3NlIGFyZSB0aGUg
+MiB3aXRoIHRoZSB3aWRlc3QgaC93DQpzdXBwb3J0IGJ5IGZhciBhbmQgd2hpY2ggaGF2ZSBhIG1h
+am9yIGVmZm9ydCB0byBzeW5jIGNvcGllcyBvZiBkdHMNCmZpbGVzIGluIGJvdGggcHJvamVjdHMu
+IFRoZSByZXN0IGFyZSBqdXN0IG5vaXNlIGluIHRlcm1zIG9mIHRoaXMNCnByb2JsZW0uDQoNCkkg
+c3VwcG9zZSB0aGlzIGlzIHNvbWV0aGluZyB0aGF0IExpbnV4IERUIG1haW50YWluZXJzDQpoYXZl
+IG9iamVjdGVkIHRvIGluIHRoZSBwYXN0IGZvciBlYXNlIG9mIG1haW50ZW5hbmNlLiBJIGFtIG5v
+dCBzdXJlIGlmDQp5b3UgZm9sa3MgYXJlIHdpbGxpbmcgdG8gY2hhbmdlIHRoYXQgc3RhbmNlLg0K
+DQpUaGUgaXNzdWUgaXMgbm8gb25lIHN0ZXBzIHVwIHRvIGhlbHAgbWFpbnRhaW4gc3VjaCBhIHJl
+cG9zaXRvcnkgd2hpbGUNCnRoZXJlIGlzIGxvdHMgb2YgcmV2aWV3IGFuZCBtYWludGFpbmVyIHdv
+cmsgb24gd2hhdCBnb2VzIGludG8gdGhlDQprZXJuZWwgdHJlZS4gSSdtIGhhcHB5IHRvIGRpcmVj
+dCBteSBiaW5kaW5nIHJldmlldyBhdHRlbnRpb24gdG8NCndoZXJldmVyIHRoZSBtYWpvcml0eSBv
+ZiB0aGUgYmluZGluZ3MgZ28uIEJ1dCB0aGUgd29yayBvbiB0aGUgRFRTIHNpZGUNCmlzIG1vc3Rs
+eSBTb0MgdHJlZSBtYWludGFpbmVycyBhbmQgc3ViLW1haW50YWluZXJzLg0KDQpBc3N1bWUgZm9y
+IGEgbWludXRlIHdlIGhhdmUgdGhpcyBzdGFuZGFsb25lIHJlcG8uIFdoYXQgaGFwcGVucyBuZXh0
+Pw0KV2Ugc3RhcnQgd2l0aCBhbiBlbXB0eSByZXBvIGFuZCB0aGVuIG1lcmdlIGFuZCBtb3ZlIHBs
+YXRmb3JtcyAxIGJ5IDE/DQoNCldoYXQgYWJvdXQgbGV2ZXJhZ2luZyBTeXN0ZW1SZWFkeS1JUiBj
+b21wbGlhbnQgYm9hcmQgbWFpbnRhaW5lcnMgYW5kIHN0YXJ0IHdpdGggYSBjb3JlIG9mIG1vdGl2
+YXRlZCBwZW9wbGUgPw0KDQpJIHRoaW5rIHRoZXJlIGFyZSAyIEFUTS4gU3lucXVhY2VyIGFuZCBp
+Lk1YOCB2YXJpYW50cy4NCg0KQmFzZWQgb24gIGh0dHBzOi8vd3d3LmFybS5jb20vYXJjaGl0ZWN0
+dXJlL3N5c3RlbS1hcmNoaXRlY3R1cmVzL3N5c3RlbXJlYWR5LWNlcnRpZmljYXRpb24tcHJvZ3Jh
+bS9pcg0KIHJvdWdobHkgMzAgYm9hcmRzLg0KDQpTeW5xdWFjZXIgb25seQ0KaGFzIGEgRFQgaW4g
+dS1ib290LCBzbyBub3QgcmVhbGx5IGFueXRoaW5nIHRvIGRvIHRoZXJlLg0KSSdtIHByZXR0eQ0K
+c3VyZSB0aGUgY2VydGlmaWVkIERUQnMgZm9yIGkuTVg4IGRvbid0IG1hdGNoIHdoYXQncyBpbiB1
+LWJvb3Qgb3IgdGhlDQprZXJuZWwgdHJlZS4gSG9wZWZ1bGx5LCBpdCdzIGp1c3QgYSBzdWJzZXQs
+IGJ1dCBzdGlsbCwgdGhlcmUncyBhIGdhcC4NCkkgZG9uJ3Qga25vdyB0aGF0IHRoZXJlIGlzIG1v
+dGl2YXRpb24gdGhlcmUgZWl0aGVyLg0KTm90ZSB0aGF0IFN5c3RlbVJlYWR5IGN1cnJlbnRseSBv
+bmx5IHJlcXVpcmVzIGV2ZXJ5IG5vZGUgd2l0aA0KJ2NvbXBhdGlibGUnIGhhdmUgYSBzY2hlbWEu
+IEl0IGRvZXMgbm90IHlldCByZXF1aXJlIG5vIHNjaGVtYQ0Kd2FybmluZ3MuIElmIHdlIHdlbnQg
+d2l0aCBhIDEgYnkgMSBhcHByb2FjaCwgSSB3b3VsZCBwdXNoIHRoYXQNCnBsYXRmb3JtcyBoYXZl
+IHRvIGJlIGZyZWUgb2Ygd2FybmluZ3MuDQoNCkhvdyBtYW55IHllYXJzIHdpbGwgdGhhdCB0YWtl
+Pw0KDQpTaG91bGQgYWxsIHBsYXRmb3JtcyBmb2xsb3dpbmcgdGhhdCBvcmdhbml6YXRpb24gYmUg
+YSBnb2FsPw0KDQpZb3UgbWVhbiBzaG91bGQgYWxsIHBsYXRmb3JtcyBiZSBtb3ZlZD8gQWJzb2x1
+dGVseS4gSSBkb24ndCB0aGluayB3ZQ0Kd2FudCB0byBzb2x2ZSB0aGUgcHJvYmxlbSBvZiBoYXZp
+bmcgRFRTIGZpbGVzIGluIDIgcGxhY2VzIGJ5IGNyZWF0aW5nDQphIDNyZCBwbGFjZS4NCkFjdHVh
+bGx5LCBpZiB3ZSBsaW1pdCBoZSBEVFMgaW4gdGhlIHRoaXJkIHBsYWNlIGZvciBTeXN0ZW1SZWFk
+eS1JUiwgdGhlcmUgc2hvdWxkIGJlIG5vIERUQiBpbiB0aGUgTGludXggZGlzdHJpYnV0aW9uLiBJ
+dCB3b3VsZCBiZSB0aGUgZXF1aXZhbGVudCBhcyBBQ1BJIGJvYXJkcyAuIFNvIGlzIGl0IHN0aWxs
+IGFuIGlzc3VlID8gQSByZWZlcmVuY2UgdG8gdGhlIHRoZSB0aGlyZCByZXBvIG1heSBiZSBoaW50
+ZWQgaW4gYSB0ZXh0IGZpbGUuDQoNCkkgZG9uJ3QgcmVhbGx5IHRoaW5rIDEgYnkgMSBpcyB0aGUg
+cmlnaHQgYXBwcm9hY2guIEkgd2FzIGp1c3QNCmVudW1lcmF0aW5nIGhvdyB0aGlzIGNvdWxkIHdv
+cmsuIEl0J3Mgbm90IHRoYXQgdXNlZnVsIHRvIHNheSB3ZSBuZWVkIGENCnN0YW5kYWxvbmUgcmVw
+byB3aXRob3V0IHdvcmtpbmcgdGhydSB0aGUgbG9naXN0aWNzIG9mIGhvdyBleGFjdGx5IHRoYXQN
+CndpbGwgd29yay4NCg0KUm9iDQo=
