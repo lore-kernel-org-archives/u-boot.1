@@ -4,64 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B45AC4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4360CC4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:54:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B931874A5;
-	Thu,  7 Dec 2023 17:52:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C47738722C;
+	Thu,  7 Dec 2023 17:54:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JieTxUeu";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="DhqwAeQu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A91DF87474; Thu,  7 Dec 2023 17:52:28 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7F76387250; Thu,  7 Dec 2023 17:54:09 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86CE38722C
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:52:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EA1487207
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:54:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GqMm1101600;
- Thu, 7 Dec 2023 10:52:22 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701967942;
- bh=Y5tqMy+XvblHMveTuuyn3u+UbjmmJhX6mBZmrtZz8uI=;
- h=From:To:CC:Subject:Date;
- b=JieTxUeu+7GrQvJfcCXNppLq8VH0fLHUxjNAwGetzzCRHSV1CJ4zYKTYnEmAhcdRo
- f1yZOdt4zgr806vzRKR1L2Bd/nuCV83/BLM2nlbfGRJaYqxPLy8Ykq2xkaTo9nDUn/
- 1hNr+pQs0HzC9H0CpRfK758gBSZG2tWhXFL5Hslw=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B7GqMVs044082
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Dec 2023 10:52:22 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Dec 2023 10:52:21 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Dec 2023 10:52:22 -0600
-Received: from localhost (reidt-hp-z2.dhcp.ti.com [128.247.81.215])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GqLKX030121;
- Thu, 7 Dec 2023 10:52:21 -0600
-From: Reid Tonking <reidt@ti.com>
-To: <trini@konsulko.com>
-CC: <nm@ti.com>, <m-chawdhry@ti.com>, <u-boot@lists.denx.de>,
- <u-kumar1@ti.com>, <bb@ti.com>, <a-nandan@ti.com>, <vishalm@ti.com>, Reid
- Tonking <reidt@ti.com>
-Subject: [PATCH v3 0/2] Fix J7200 kernel boot when using upstream u-boot
-Date: Thu, 7 Dec 2023 10:52:09 -0600
-Message-ID: <20231207165211.2319475-1-reidt@ti.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 3906eb07-9521-11ee-b94e-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 3906eb07-9521-11ee-b94e-005056992ed3;
+ Thu, 07 Dec 2023 17:54:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=JiKnOIntVDM9nOkOt8hmMcK/qqMziCVQF21Z0YJW9ik=;
+ b=DhqwAeQu8Zakcbi6nVyw/Sx3uxe2L6aNg5jsZNDdS1ovH5vjIgksa12FETdUnF+Mq8VsvBRMrJ+C2
+ CH67aVnaPOlbWbLaZ1AnLT3dHlXWDcDOTACN67pNVyXPIHkyaVotliFy9pIC3wvxCZXMo7OEaYyfgc
+ EkIXTkQ1kcLOTnzk9WRqZQzJ8WDMhjWoAQm5zzIk3DXWLu+zAOKaZ/oTvRhgTsD/TWOOrHjJRqexLf
+ j0+xocMPfaQ28/GI6SMdt5hBQrH629HAnHJ/aZk6syyRMbIRxmLAZbB8X3vLbEE2D3SmIXNM+NO6IP
+ cbl7AmqenpduMaYuTNfMguBzjZ14cWA==
+X-KPN-MID: 33|7RGbxEgWckfrOZRHukT4kK5RiIVFcwELQEvP11uYVUr73+RRo6cB/yPyG402ieQ
+ Ge1hbaJ9AcqzeBEHM2yv9sa84Y13p/mlEE3f8x1DNfes=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|xyyGkctMCxzK69Ri3EbOoo/OZ86vQ0ImVp+ercIp0aQVlo34tg/WBbCllD+7FIW
+ PYm80+obHivE3iA1Ssmg3Sg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 3b90b6f4-9521-11ee-acaa-00505699d6e5;
+ Thu, 07 Dec 2023 17:54:06 +0100 (CET)
+Date: Thu, 07 Dec 2023 17:54:06 +0100
+Message-Id: <871qby7y35.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: sjg@chromium.org, heinrich.schuchardt@canonical.com,
+ ilias.apalodimas@linaro.org, kettenis@openbsd.org, u-boot@lists.denx.de
+In-Reply-To: <20231207123636.26264-1-ilias.apalodimas@linaro.org> (message
+ from Ilias Apalodimas on Thu, 7 Dec 2023 14:36:36 +0200)
+Subject: Re: [PATCH v2] bootstd: Fix a memory leak in the efi manager bootflow
+References: <20231207123636.26264-1-ilias.apalodimas@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,37 +74,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the 09.01.00.002 release of ti-linux-firmware [0] upstream uboot
-has led to the kernel hanging during boot [1] for the TI J7200 S0C. The
-issue was found to be a few patches that had be added to ti-u-boot, but not
-yet upstreamed. This series adds the missing two patches to allow upstream
-u-boot to boot the kernel properly [2].
+> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Date: Thu,  7 Dec 2023 14:36:36 +0200
+> 
+> efi_get_var() allocates memory which has to be freed after the value of
+> the variable is consumed. Free the memory properly
+> 
+> Fixes: f2bfa0cb1794 ("bootstd: Make efi_mgr bootmeth work for non-sandbox setups")
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+> Apologies for the quick resend but the previous patches wasn't compiling due to
+> the missing #include <malloc.h>
+> 
+> Changes since v1
+> - Add #include <malloc.h> since it's needed for free()
+> 
+>  boot/bootmeth_efi_mgr.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
-[0] https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/commit/?h=ti-linux-firmware-next&id=952fd03e36a50ec070e73560dc1060102d637ce0
+Oops!
 
-Boot logs:
-[1] https://gist.github.com/reidt1/5f4e85a0db258bcf20d7168bd0caebd0
-[2] https://gist.github.com/reidt1/e950dc97f15ad0a09623d64f81edac39
+Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
 
-Links to patches on ti-u-boot:
-https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04-next&id=d878fbef4d4460e87608d8d2dfe5311499de49c5
-https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04-next&id=543e735fe495be233a8a75b19b3d7f8ed44251e0
-
-Changes since v2:
-- changed platdata counts in clk-data.c to use array_size instead of
-	hardcoded value
-Link to v2: https://lore.kernel.org/u-boot/20231206211753.2225158-1-reidt@ti.com/T/#m0a035ac752b812b67c7e83719b5e2b34edab7b26
-
-
-Reid Tonking (2):
-  arm: mach-k3: j72xx: add new 'virtual' mux
-  arm: dts: k3-j7200-r5-common-proc-board: Set parent clock for clock ID
-    323
-
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts |  3 ++-
- arch/arm/mach-k3/j7200/clk-data.c              | 13 +++++++++++--
- 2 files changed, 13 insertions(+), 3 deletions(-)
-
--- 
-2.34.1
-
+> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
+> index e6c42d41fb80..6428c096d7f8 100644
+> --- a/boot/bootmeth_efi_mgr.c
+> +++ b/boot/bootmeth_efi_mgr.c
+> @@ -16,6 +16,7 @@
+>  #include <dm.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+> +#include <malloc.h>
+> 
+>  /**
+>   * struct efi_mgr_priv - private info for the efi-mgr driver
+> @@ -65,6 +66,7 @@ static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+>  	bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
+>  				&size);
+>  	if (bootorder) {
+> +		free(bootorder);
+>  		bflow->state = BOOTFLOWST_READY;
+>  		return 0;
+>  	}
+> --
+> 2.40.1
+> 
+> 
