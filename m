@@ -4,76 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8E0C4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 14:28:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22E2EC10DC3
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 14:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E025186D85;
-	Thu,  7 Dec 2023 15:28:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 9116286F40;
+	Thu,  7 Dec 2023 15:38:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Wp/ElJj3";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="hFvfub1k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFC6D86F40; Thu,  7 Dec 2023 15:28:25 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 923F3870A0; Thu,  7 Dec 2023 15:38:11 +0100 (CET)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACE9D8269F
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 15:28:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-40c2c65e6aaso4560925e9.2
- for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 06:28:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1701959303; x=1702564103;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=VntyrWc/jYjW4kXH7Qwq7TkZMk86hPLLvWO9ki9un80=;
- b=Wp/ElJj3RVVV3ChWRZ/1WBr8x7yoj2OnhHYDdKM2QCUoIOGdZzQjUzD39DGPsOBTOs
- rHv5hiqZsqop3nFTbrXNm9g6EVyKVa93job7ocgKOZ2qJ2k4FHp41CliqVM+V1zkWsE2
- FNEtCUoXq9nT7VKNR34ULY0ZoCpE5bNkz+6GM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701959303; x=1702564103;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VntyrWc/jYjW4kXH7Qwq7TkZMk86hPLLvWO9ki9un80=;
- b=rgM+vX3b/SWdnUZzHJ7L3iOddNGVt8EdxiGAc5E23vCI+6uyrG0zZ83eONNXss5Eyu
- EbEs/HUorcGJbAgZA52JXirlJx37TnLs0PS6bhuO82k+P0MLSnkPlt8CDFOZTXa68htS
- pDil3tOVvcc6DGFeaHWLbXkn66r+laHcvkfpw2jrcaDuy3vwJTyArWCetUIYUiEkv/7Z
- omC6GyW2ZKLTfkdOYlsZsSEo3uLqH8UYGWz/qcUFt2P0MYpS7i3cHe5wthuQr21kkw/d
- zr1viDNbdL7rT0a5+emCZSkhJYFu7iBJRt1G4LqwU4R47uQNvwKnmAm6LPMFXDS8dlUN
- TMyw==
-X-Gm-Message-State: AOJu0YxkBAaGqqCMZzo1JLh964iPCZe6R5X04uRakBq0/VTBAMlmAH7o
- xAbwqmXw5h/HYsx5StsOmGE5Tg==
-X-Google-Smtp-Source: AGHT+IFOL+fKMCb9k+T2sd73EMac7NNFRzdUIOqJ/9nli7OKDTzx6ubZ04nQhWESkW81NXSxAqyiVg==
-X-Received: by 2002:a05:600c:2352:b0:40c:2100:60b1 with SMTP id
- 18-20020a05600c235200b0040c210060b1mr1513091wmq.178.1701959302992; 
- Thu, 07 Dec 2023 06:28:22 -0800 (PST)
-Received: from panicking.amarulasolutions.com
- ([2001:b07:6474:ebbf:55e:f958:69d5:35de])
- by smtp.gmail.com with ESMTPSA id
- i6-20020a1709064ec600b00a1c85124b08sm894568ejv.94.2023.12.07.06.28.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Dec 2023 06:28:22 -0800 (PST)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH] pxe_utils: Increase feedback to user when fdt file is not
- found
-Date: Thu,  7 Dec 2023 15:28:19 +0100
-Message-Id: <20231207142819.1511709-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.40.1
+ by phobos.denx.de (Postfix) with ESMTPS id 9B00386538
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 15:38:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ideasonboard.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi
+ [213.243.189.158])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 4CA62669;
+ Thu,  7 Dec 2023 15:37:27 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1701959847;
+ bh=zXe+jRGFsIALQDiNPjUbby+TY+TBluHe2uMVYoZajGE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=hFvfub1kMNWT+sajOcN5s7Ix3DNF2A6Pkg5dQ9Y7g9Coz6OmKJnCPKj2yL9gUCwUK
+ 8mnLCDDOxUytTLxkyTZeJGqrH5UF7H7W1qtp4hNUzgp15DJZLkbLfPcGsN6exWkTrZ
+ O1MzrHNjifnFuxyRI9lkqoozUdRpBmc8Z61b/zJ0=
+Date: Thu, 7 Dec 2023 16:38:14 +0200
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Chen-Yu Tsai <wenst@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Terrell <terrelln@fb.com>, Will Deacon <will@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ linux-kernel@vger.kernel.org, workflows@vger.kernel.org
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+Message-ID: <20231207143814.GD15521@pendragon.ideasonboard.com>
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231203153401.GV8402@pendragon.ideasonboard.com>
+ <20231207142723.GA3187877@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20231207142723.GA3187877@google.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,48 +76,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-extlinux.conf can set fdtdir. fdtdir look for fdt file using
-information found in the enviroment variable. The function does
-not report any error in the case the file is not found
+On Thu, Dec 07, 2023 at 10:27:23PM +0800, Chen-Yu Tsai wrote:
+> On Sun, Dec 03, 2023 at 05:34:01PM +0200, Laurent Pinchart wrote:
+> > Hi Simon,
+> > 
+> > Thank you for the patch.
+> > 
+> > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
+> > > Add a script which produces a Flat Image Tree (FIT), a single file
+> > > containing the built kernel and associated devicetree files.
+> > > Compression defaults to gzip which gives a good balance of size and
+> > > performance.
+> > > 
+> > > The files compress from about 86MB to 24MB using this approach.
+> > > 
+> > > The FIT can be used by bootloaders which support it, such as U-Boot
+> > > and Linuxboot. It permits automatic selection of the correct
+> > > devicetree, matching the compatible string of the running board with
+> > > the closest compatible string in the FIT. There is no need for
+> > > filenames or other workarounds.
+> > > 
+> > > Add a 'make image.fit' build target for arm64, as well. Use
+> > > FIT_COMPRESSION to select a different algorithm.
+> > > 
+> > > The FIT can be examined using 'dumpimage -l'.
+> > > 
+> > > This features requires pylibfdt (use 'pip install libfdt'). It also
+> > > requires compression utilities for the algorithm being used. Supported
+> > > compression options are the same as the Image.xxx files. For now there
+> > > is no way to change the compression other than by editing the rule for
+> > > $(obj)/image.fit
+> > > 
+> > > While FIT supports a ramdisk / initrd, no attempt is made to support
+> > > this here, since it must be built separately from the Linux build.
+> > 
+> > FIT images are very useful, so I think this is a very welcome addition
+> > to the kernel build system. It can get tricky though: given the
+> > versatile nature of FIT images, there can't be any
+> > one-size-fits-them-all solution to build them, and striking the right
+> > balance between what makes sense for the kernel and the features that
+> > users may request will probably lead to bikeshedding. As we all love
+> > bikeshedding, I thought I would start selfishly, with a personal use
+> > case :-) This isn't a yak-shaving request though, I don't see any reason
+> > to delay merging this series.
+> > 
+> > Have you envisioned building FIT images with a subset of DTBs, or adding
+> > DTBOs ? Both would be fairly trivial extensions to this script by
+> > extending the supported command line arguments. It would perhaps be more
+> > difficult to integrate in the kernel build system though. This leads me
+> > to a second question: would you consider merging extensions to this
+> > script if they are not used by the kernel build system, but meant for
+> > users who manually invoke the script ? More generally, is the script
+> 
+> We'd also be interested in some customization, though in a different way.
+> We imagine having a rule file that says X compatible string should map
+> to A base DTB, plus B and C DTBO for the configuration section. The base
+> DTB would carry all common elements of some device, while the DTBOs
+> carry all the possible second source components, like different display
+> panels or MIPI cameras for instance. This could drastically reduce the
+> size of FIT images in ChromeOS by deduplicating all the common stuff.
 
-Scanning for bootflows in all bootdevs
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------  ----------------
-Scanning global bootmeth 'efi_mgr':
-No EFI system partition
-No EFI system partition
-Failed to persist EFI variables
-Scanning bootdev 'mmc@fa10000.bootdev':
-  0  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_ /boot/extlinux/extlinux.conf
-** Booting bootflow 'mmc@fa10000.bootdev.part_1' with extlinux
-1:      am62x-sk-buildroot
-Retrieving file: /boot/Image
-append: console=ttyS2,115200n8 root=PARTUUID=c586a30c-0bf1-4323-aba8-779c814ee135 rw
-		rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x02800000
-Retrieving file: /boot/k3-am623_ccm_m3.dtb
-Skipping fdtdir /boot/ for failure retrieving dts
+Do you envision the "mapping" compatible string mapping to a config
+section in the FIT image, that would bundle the base DTB and the DTBOs ?
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- boot/pxe_utils.c | 5 +++++
- 1 file changed, 5 insertions(+)
+> > meant to be used stand-alone as well, in which case its command line
+> > arguments need to remain backward-compatible, or do you see it as being
+> > internal to the kernel ?
+> 
+> [...]
+> 
+> ChenYu
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index a92bb896c6..83bc167785 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -700,6 +700,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 					       label->name);
- 					goto cleanup;
- 				}
-+
-+				if (label->fdtdir) {
-+					printf("Skipping fdtdir %s for failure retrieving dts\n",
-+						label->fdtdir);
-+				}
- 			}
- 
- 			if (label->kaslrseed)
 -- 
-2.40.1
+Regards,
 
+Laurent Pinchart
