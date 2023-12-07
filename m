@@ -4,64 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A413C4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 21:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA579C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 21:37:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92E2F86844;
-	Thu,  7 Dec 2023 22:30:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
+	by phobos.denx.de (Postfix) with ESMTP id 17A34869B6;
+	Thu,  7 Dec 2023 22:37:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gerhold.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="qjHo/ZRz";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gerhold.net header.i=@gerhold.net header.b="VT1jZle5";
+	dkim=permerror (0-bit key) header.d=gerhold.net header.i=@gerhold.net header.b="89S7AvBB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EA5786758; Thu,  7 Dec 2023 22:30:51 +0100 (CET)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
+ id 6BA0486EEC; Thu,  7 Dec 2023 22:37:50 +0100 (CET)
+Received: from mo4-p02-ob.smtp.rzone.de (mo4-p02-ob.smtp.rzone.de
+ [81.169.146.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 295D1870F6
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 22:30:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ideasonboard.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=laurent.pinchart@ideasonboard.com
-Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi
- [213.243.189.158])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id DD5862B09;
- Thu,  7 Dec 2023 22:30:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1701984605;
- bh=++YvcrFz66sxa8xgV41El02Yomhcy3SFgFNd1nuRnT4=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=qjHo/ZRz7cMTAzyVsUjZpcWDuOQmvhscaXDaYQ1RRBxxdyqH8SRbU5uNzfrbQMi68
- 6U2jlkEY6KjCvzx5NSH+v9u2KvUGSz2YDo8ysALpNEtSSHkFqEFJW1ZpberVVdlgFl
- ceq0o2I/6kI1tIn+iHWmMCoAXdpRoWFSsl8IoTGw=
-Date: Thu, 7 Dec 2023 23:30:52 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Chen-Yu Tsai <wenst@chromium.org>, linux-arm-kernel@lists.infradead.org,
- Masahiro Yamada <masahiroy@kernel.org>,
- Ahmad Fatoum <a.fatoum@pengutronix.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Nicolas Schier <nicolas@fjasle.eu>, Tom Rini <trini@konsulko.com>,
- Catalin Marinas <catalin.marinas@arm.com>,
- Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
- Nick Terrell <terrelln@fb.com>, Will Deacon <will@kernel.org>,
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
- linux-kernel@vger.kernel.org, workflows@vger.kernel.org
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-Message-ID: <20231207213052.GD25616@pendragon.ideasonboard.com>
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231203153401.GV8402@pendragon.ideasonboard.com>
- <20231207142723.GA3187877@google.com>
- <20231207143814.GD15521@pendragon.ideasonboard.com>
- <CAPnjgZ1q3yBeyYfjLumJ03HR7JM1xwN7sMbNJqfUWpsVxFTs4Q@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id DDC6086758
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 22:37:47 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=gerhold.net
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=stephan@gerhold.net
+ARC-Seal: i=1; a=rsa-sha256; t=1701985066; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=o+l62GIzLL4KZtOntMceb87Q9TvJC2uSnmFZgC9Y8Fjl5zagEXRh4kInKHf1WQatQp
+ ZcqLkXr7n/zboosEv8s6X/EbHSJOwdMK/6Uqfxv9PEA13hhFLWqJw3I3pBar7Z4noPnj
+ F/rYGAnZr6Tq5mqwgPbNErbdPjhLIQDw+zXZghgssPvIRiKzyx++Im0/meB2dDMIwty3
+ 55q7Cle4ZyFPkFHStWO2+6oebz4t7W4ebvbOMxuYKZ/H4Dms/EraT0GQ2uz+MTbyVMBU
+ 92dJUIJmwEe2r6Gfg9S0IRITNUuDC+7P02qqiiRVCW045EIQhOwYaahuXUAjWQ+X81a3
+ RN4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1701985066;
+ s=strato-dkim-0002; d=strato.com;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=p9WIzhBLSo61NXXCy8BkSxyTouu6n8D9oR4kRx/OZ20=;
+ b=FArDSKtD/7U0KqAeThIEgZJfB2nlQkDhg8wsRxbKzN3S00U14IajCjeERwMsHUFioq
+ 965RmcvbknW4vH67hUh3GfBlTRER0zZ4QtOEb1W1OWSbEyULeEWsLY4dwJiEPNIYJdU1
+ 22m4f2BC43XpxZFWZJ7C1V5gP4GVKu0CxWuSzgBy4l2pHRU3azAQAShQQY2jKmeELGRv
+ yO+uds1vBBiR3x2xSZqBM/V7MEz+aknR/K25+B3Bk2tyk7aqmdgplU4mK/Xq4MhAjGm3
+ qALVDXHw6NVoiLE10sNYinOpjjOej/VqFqZo3S07wKsfxqEXsNZ/OrViwmBSdd2phFHd
+ 4qsA==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo02
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1701985066;
+ s=strato-dkim-0002; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=p9WIzhBLSo61NXXCy8BkSxyTouu6n8D9oR4kRx/OZ20=;
+ b=VT1jZle5wmm/RvRHO1mAdHm1eX8AojYAQtQLs79G+am6Wf0zrUn3zyUy0KPWQWDl5o
+ rGfcUOacmEZt/w8oQWAhSf9y9UCDZvQfy6V5ZCah9CDZzI4cAwnxCgO+FvMBljdnSByj
+ QlOL+HYB12OvdJlnvfL1AXWt2gvX1YFyc+uu7jifdhaZZwdJWVy7Ga3TzRxt1Y4DuKP3
+ 73azsnDsu7zGZBvPxU1KVanh4fHzA4D9SAzCl0I6E5KK+nVq88j2tY+/VcSf2K0tUhzc
+ evsgTZWVvAkJ5RlCzxIgnJU5tIEXmLIwuw0wI48eAlKSmfkKp12Aqm8uR0fecpEO5h3E
+ p+Dg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1701985066;
+ s=strato-dkim-0003; d=gerhold.net;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:Cc:Date:
+ From:Subject:Sender;
+ bh=p9WIzhBLSo61NXXCy8BkSxyTouu6n8D9oR4kRx/OZ20=;
+ b=89S7AvBBto35Xs6AA/f0y+ZN48EyC7td+qwG5y0WtpOaKCe66r1m6e0TgFLAO9hvV4
+ mWXOWIWy+PLzyQUXouAQ==
+X-RZG-AUTH: ":P3gBZUipdd93FF5ZZvYFPugejmSTVR2nRPhVOQ/OcYgojyw4j34+u261EJF5OxJD4peA8paF1A=="
+Received: from gerhold.net by smtp.strato.de (RZmta 49.10.0 SBL|AUTH)
+ with ESMTPSA id 58bb61zB7LbkAWa
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Thu, 7 Dec 2023 22:37:46 +0100 (CET)
+Date: Thu, 7 Dec 2023 22:37:45 +0100
+From: Stephan Gerhold <stephan@gerhold.net>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH 18/21] dts: msm8916: import DT from Linux
+Message-ID: <ZXI7KbpOKDp5fpbd@gerhold.net>
+References: <20231121-b4-qcom-common-target-v1-0-9492198e0c15@linaro.org>
+ <20231121-b4-qcom-common-target-v1-18-9492198e0c15@linaro.org>
+ <ZV0DJrk_iOMd5I2a@gerhold.net>
+ <3334681a-e5b3-4d76-afea-26f8111808e8@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1q3yBeyYfjLumJ03HR7JM1xwN7sMbNJqfUWpsVxFTs4Q@mail.gmail.com>
+In-Reply-To: <3334681a-e5b3-4d76-afea-26f8111808e8@linaro.org>
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,86 +112,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 07, 2023 at 01:52:53PM -0700, Simon Glass wrote:
-> On Thu, 7 Dec 2023 at 07:38, Laurent Pinchart wrote:
-> > On Thu, Dec 07, 2023 at 10:27:23PM +0800, Chen-Yu Tsai wrote:
-> > > On Sun, Dec 03, 2023 at 05:34:01PM +0200, Laurent Pinchart wrote:
-> > > > Hi Simon,
-> > > >
-> > > > Thank you for the patch.
-> > > >
-> > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
-> > > > > Add a script which produces a Flat Image Tree (FIT), a single file
-> > > > > containing the built kernel and associated devicetree files.
-> > > > > Compression defaults to gzip which gives a good balance of size and
-> > > > > performance.
-> > > > >
-> > > > > The files compress from about 86MB to 24MB using this approach.
-> > > > >
-> > > > > The FIT can be used by bootloaders which support it, such as U-Boot
-> > > > > and Linuxboot. It permits automatic selection of the correct
-> > > > > devicetree, matching the compatible string of the running board with
-> > > > > the closest compatible string in the FIT. There is no need for
-> > > > > filenames or other workarounds.
-> > > > >
-> > > > > Add a 'make image.fit' build target for arm64, as well. Use
-> > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > >
-> > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > >
-> > > > > This features requires pylibfdt (use 'pip install libfdt'). It also
-> > > > > requires compression utilities for the algorithm being used. Supported
-> > > > > compression options are the same as the Image.xxx files. For now there
-> > > > > is no way to change the compression other than by editing the rule for
-> > > > > $(obj)/image.fit
-> > > > >
-> > > > > While FIT supports a ramdisk / initrd, no attempt is made to support
-> > > > > this here, since it must be built separately from the Linux build.
-> > > >
-> > > > FIT images are very useful, so I think this is a very welcome addition
-> > > > to the kernel build system. It can get tricky though: given the
-> > > > versatile nature of FIT images, there can't be any
-> > > > one-size-fits-them-all solution to build them, and striking the right
-> > > > balance between what makes sense for the kernel and the features that
-> > > > users may request will probably lead to bikeshedding. As we all love
-> > > > bikeshedding, I thought I would start selfishly, with a personal use
-> > > > case :-) This isn't a yak-shaving request though, I don't see any reason
-> > > > to delay merging this series.
-> > > >
-> > > > Have you envisioned building FIT images with a subset of DTBs, or adding
-> > > > DTBOs ? Both would be fairly trivial extensions to this script by
-> > > > extending the supported command line arguments. It would perhaps be more
-> > > > difficult to integrate in the kernel build system though. This leads me
-> > > > to a second question: would you consider merging extensions to this
-> > > > script if they are not used by the kernel build system, but meant for
-> > > > users who manually invoke the script ? More generally, is the script
-> > >
-> > > We'd also be interested in some customization, though in a different way.
-> > > We imagine having a rule file that says X compatible string should map
-> > > to A base DTB, plus B and C DTBO for the configuration section. The base
-> > > DTB would carry all common elements of some device, while the DTBOs
-> > > carry all the possible second source components, like different display
-> > > panels or MIPI cameras for instance. This could drastically reduce the
-> > > size of FIT images in ChromeOS by deduplicating all the common stuff.
-> >
-> > Do you envision the "mapping" compatible string mapping to a config
-> > section in the FIT image, that would bundle the base DTB and the DTBOs ?
-> >
-> > > > meant to be used stand-alone as well, in which case its command line
-> > > > arguments need to remain backward-compatible, or do you see it as being
-> > > > internal to the kernel ?
+On Thu, Dec 07, 2023 at 07:11:02PM +0000, Caleb Connolly wrote:
+> On 21/11/2023 19:21, Stephan Gerhold wrote:
+> > On Tue, Nov 21, 2023 at 05:09:41PM +0000, Caleb Connolly wrote:
+> >> Import the msm8916 devicetree from Linux and adjust the dragonboard410c
+> >> devicetree to use it.
+> >>
+> > 
+> > Can you add a note here from which Linux version you took the DT?
+> > 
+> > It seems quite old, the msm8916-pm8916.dtsi doesn't exist anymore
+> > upstream since v6.5. Would be nice to bring it up to date (I don't have
+> > any more cleanup planned at the moment, so the current state upstream
+> > will probably stay mostly as-is).
 > 
-> It is great to see all this discussion! I did send a proposal to the
-> U-Boot ML about extensions but it was mixed up with other things, so
-> I'll start a new thread.
-> 
-> For now, I am really just waiting for this to be applied, before
-> talking too much about future possibilities.
+> That file still exists on 6.7-rc4, as far as I can tell?
 
-Sure, I don't see any reason to delay this series until you have fixed
-everybody's system images problems :-)
+Sorry, I meant msm8916-pins.dtsi :') That one doesn't exist anymore.
 
--- 
-Regards,
+Thanks,
+Stephan
 
-Laurent Pinchart
