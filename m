@@ -4,54 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFAE3C4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989D4C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E017286F95;
-	Thu,  7 Dec 2023 17:26:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1E0B286CF4;
+	Thu,  7 Dec 2023 17:33:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Pawt62xW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CKWg1J9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69E0086F95; Thu,  7 Dec 2023 17:26:22 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F24587232; Thu,  7 Dec 2023 17:33:45 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B60A386EEC
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:26:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E107086564
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:33:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 48AB162094;
- Thu,  7 Dec 2023 16:26:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 425EBC433C7;
- Thu,  7 Dec 2023 16:26:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1701966378;
- bh=xkM57RmQLgHLRbhS7ND9X1xVD4L59m2EMnxV2ZDcKT4=;
- h=From:To:Cc:Subject:Date:From;
- b=Pawt62xWIo0LsNhD8TwjLn/XQwkluSCFPYqSkA8fTZD8GVPbUg9A24DiwYxfUya8N
- yfTJsijaR5AaasWUUjOKFaUkGnVbhR5C0mW229lj7JtomARUgWNBOydnpBDXzOFotz
- SyZXYLBGxl8e+utU3rQb8Gx3hMcedkUwbMd+96MbNW7mjj1FePRZGom91vMSVVX8Tb
- qOL/Cie6gnggYyC6MMOwPdmHzK3WruZAPOUx2NGDzrbombSmSXODQg/lf5WFmoJYG9
- 30402mpFeTtxmvE69OsfjcqpdkC8VZb+aiUAxta14S9ZSmCg4rJZOExa5oryNtNpXM
- 2HmOvYsBAnK5g==
-From: Roger Quadros <rogerq@kernel.org>
-To: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- hs@denx.de
-Cc: enrico.leto@siemens.com, trini@konsulko.com, praneeth@ti.com, nm@ti.com,
- vigneshr@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>,
- Hong Guan <hguan@ti.com>
-Subject: [PATCH] mtd: rawnand: omap_elm: Fix elm_init definition
-Date: Thu,  7 Dec 2023 18:26:09 +0200
-Message-Id: <20231207162609.155555-1-rogerq@kernel.org>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GXeV6016203;
+ Thu, 7 Dec 2023 10:33:40 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1701966820;
+ bh=QEdwZJbHaEO+3KuraGqMiNZOiPlDzn/Gs58Sw+eYVRM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=CKWg1J9DqX0r7kwj9V45IyG5LZgZ7/iFYSHDqtZlO1jL+9zjXFcRBVa6WTK0tcaq0
+ QH2verP4oRw7cWN4Lt0ubiMytnec9j4h1ow76S0sgej6nWE2W8Qv4Ef9EzwkkLs7vm
+ sVwMiCy1KFs+Nc2RyAQVDGPK5RjDG1VxjKHSEdwM=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B7GXege030104
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 7 Dec 2023 10:33:40 -0600
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
+ Dec 2023 10:33:40 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 7 Dec 2023 10:33:40 -0600
+Received: from localhost (reidt-hp-z2.dhcp.ti.com [128.247.81.215])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GXeqm036473;
+ Thu, 7 Dec 2023 10:33:40 -0600
+Date: Thu, 7 Dec 2023 10:33:40 -0600
+From: reidt <reidt@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: <trini@konsulko.com>, <nm@ti.com>, <u-boot@lists.denx.de>,
+ <m-chawdhry@ti.com>, <bb@ti.com>, <a-nandan@ti.com>, <vishalm@ti.com>
+Subject: Re: [PATCH v2 1/2] arm: mach-k3: j72xx: add new 'virtual' mux
+Message-ID: <20231207163340.uzwdq5drvkgjmwds@reidt-HP-Z2>
+References: <20231206211753.2225158-1-reidt@ti.com>
+ <20231206211753.2225158-2-reidt@ti.com>
+ <85aa4240-da6f-483b-8d56-121878b9b88f@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <85aa4240-da6f-483b-8d56-121878b9b88f@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,62 +80,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The macro ELM_BASE is defined in mach/hardware.h and is
-not visible at the omap_elm.h header file. Avoid using it
-in omap_elm.h.
+On 10:11-20231207, Kumar, Udit wrote:
+> 
+> On 12/7/2023 2:47 AM, Reid Tonking wrote:
+> > From: Bryan Brattlof <bb@ti.com>
+> > 
+> > In order for the Cortex-A72s to operate at different frequencies other
+> > than the default 2GHz, add in a new 'virtual' mux (a mux that does not
+> > physically exist in the clock tree) that can be selected.
+> > 
+> > CC: Vishal Mahaveer <vishalm@ti.com>
+> > Signed-off-by: Bryan Brattlof <bb@ti.com>
+> > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> > Signed-off-by: Reid Tonking <reidt@ti.com>
+> > ---
+> >   arch/arm/mach-k3/j7200/clk-data.c | 13 +++++++++++--
+> >   1 file changed, 11 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/arch/arm/mach-k3/j7200/clk-data.c b/arch/arm/mach-k3/j7200/clk-data.c
+> > index 9b45786a2d4..126627fff47 100644
+> > --- a/arch/arm/mach-k3/j7200/clk-data.c
+> > +++ b/arch/arm/mach-k3/j7200/clk-data.c
+> > @@ -141,6 +141,11 @@ static const char * const k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
+> >   	"hsdiv4_16fft_main_0_hsdivout0_clk",
+> >   };
+> > +static const char * const main_pll8_sel_extwave_out0_parents[] = {
+> > +	"pllfracf_ssmod_16fft_main_8_foutvcop_clk",
+> > +	"hsdiv0_16fft_main_8_hsdivout0_clk",
+> > +};
+> > +
+> >   static const char * const mcu_obsclk_outmux_out0_parents[] = {
+> >   	"mcu_obsclk_div_out0",
+> >   	"gluelogic_hfosc0_clkout",
+> > @@ -396,6 +401,7 @@ static const struct clk_data clk_list[] = {
+> >   	CLK_DIV("hsdiv4_16fft_main_3_hsdivout2_clk", "pllfracf_ssmod_16fft_main_3_foutvcop_clk", 0x683088, 0, 7, 0, 0),
+> >   	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_main_0_sysclkout_clk", k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
+> >   	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
+> > +	CLK_MUX("main_pll8_sel_extwave_out0", main_pll8_sel_extwave_out0_parents, 2, 0x688040, 0, 1, 0),
+> >   	CLK_DIV("mcu_obsclk_div_out0", "wkup_obsclk_mux_out0", 0x43008000, 8, 4, 0, 0),
+> >   	CLK_MUX("mcu_obsclk_outmux_out0", mcu_obsclk_outmux_out0_parents, 2, 0x43008000, 24, 1, 0),
+> >   	CLK_PLL("pllfracf_ssmod_16fft_main_4_foutvcop_clk", "main_pll4_xref_sel_out0", 0x684000, 0),
+> > @@ -545,11 +551,14 @@ static const struct dev_clk soc_dev_clk_data[] = {
+> >   	DEV_CLK(288, 14, "board_0_hfosc1_clk_out"),
+> >   	DEV_CLK(288, 15, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+> >   	DEV_CLK(288, 17, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+> > +	DEV_CLK(323, 0, "main_pll8_sel_extwave_out0"),
+> > +	DEV_CLK(323, 1, "pllfracf_ssmod_16fft_main_8_foutvcop_clk"),
+> > +	DEV_CLK(323, 2, "hsdiv0_16fft_main_8_hsdivout0_clk"),
+> >   };
+> >   const struct ti_k3_clk_platdata j7200_clk_platdata = {
+> >   	.clk_list = clk_list,
+> > -	.clk_list_cnt = 109,
+> > +	.clk_list_cnt = 110,
+> >   	.soc_dev_clk_data = soc_dev_clk_data,
+> > -	.soc_dev_clk_data_cnt = 129,
+> > +	.soc_dev_clk_data_cnt = 132,
+> 
+> Looks you missed to update this with ARRAY_SIZE
+>
 
-Reported-by: Hong Guan <hguan@ti.com>
-Fixes: 7363cf0581a3 ("mtd: rawnand: omap_elm: u-boot driver model support")
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- drivers/mtd/nand/raw/omap_elm.c | 4 ++--
- drivers/mtd/nand/raw/omap_elm.h | 6 ------
- 2 files changed, 2 insertions(+), 8 deletions(-)
+Made a git error on my end - will have the corrected v3 out shortly
 
-diff --git a/drivers/mtd/nand/raw/omap_elm.c b/drivers/mtd/nand/raw/omap_elm.c
-index 56a2c39e4f..015ec9bc2d 100644
---- a/drivers/mtd/nand/raw/omap_elm.c
-+++ b/drivers/mtd/nand/raw/omap_elm.c
-@@ -185,7 +185,6 @@ void elm_reset(void)
- 		;
- }
- 
--#ifdef ELM_BASE
- /**
-  * elm_init - Initialize ELM module
-  *
-@@ -194,10 +193,11 @@ void elm_reset(void)
-  */
- void elm_init(void)
- {
-+#ifdef ELM_BASE
- 	elm_cfg = (struct elm *)ELM_BASE;
- 	elm_reset();
--}
- #endif
-+}
- 
- #if CONFIG_IS_ENABLED(SYS_NAND_SELF_INIT)
- 
-diff --git a/drivers/mtd/nand/raw/omap_elm.h b/drivers/mtd/nand/raw/omap_elm.h
-index a7f7bacb15..f3db00d55d 100644
---- a/drivers/mtd/nand/raw/omap_elm.h
-+++ b/drivers/mtd/nand/raw/omap_elm.h
-@@ -74,12 +74,6 @@ int elm_check_error(u8 *syndrome, enum bch_level bch_type, u32 *error_count,
- 		u32 *error_locations);
- int elm_config(enum bch_level level);
- void elm_reset(void);
--#ifdef ELM_BASE
- void elm_init(void);
--#else
--static inline void elm_init(void)
--{
--}
--#endif
- #endif /* __ASSEMBLY__ */
- #endif /* __ASM_ARCH_ELM_H */
-
-base-commit: 2f0282922b2c458eea7f85c500a948a587437b63
--- 
-2.34.1
-
+-Reid
