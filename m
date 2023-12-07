@@ -4,89 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE0CC4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 14:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C8E0C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 14:28:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEAEE8715C;
-	Thu,  7 Dec 2023 15:25:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E025186D85;
+	Thu,  7 Dec 2023 15:28:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Fi4uU8wv";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Wp/ElJj3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FB0F87232; Thu,  7 Dec 2023 15:25:09 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AFC6D86F40; Thu,  7 Dec 2023 15:28:25 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D7F486FB8
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 15:25:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACE9D8269F
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 15:28:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1F24A3F6E6
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 14:25:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1701959103;
- bh=s4ts0vq9WioTVsGuZexk/A42NUKryCT0uHlLXmDhLUo=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Fi4uU8wv909cXFIMoVVwch/XiBrFzK4AIP0gSFpS607HvHMUR7UQe1AStohVocSoG
- 9yApXBq3meZ4e7+5nu44SxPpZSlOCS3VOq1UBA2BW4mUFn1T65uELOgr4I0CXnhDLa
- Ic1mAe6VHhwayYTH08wAs1yqPSfJzkLfVjrNXDOcZxJ8pghGmA6B587/gV3sIRBuGA
- xDaCwSIghUQ7ieGr0wH7FJGxLhi8xIwCJAmdoyq4vCjato4Iwlzb0QeTHF3Nzvm5TA
- 073rG6gQDvSArrE2Kz1cYQosaoNtuZLnENlsfVw/OLJTDz6q+/Ju2lyZZSnkTQIxfa
- TWMmjImBYhC/A==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-332e71b8841so1013077f8f.0
- for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 06:25:03 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40c2c65e6aaso4560925e9.2
+ for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 06:28:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1701959303; x=1702564103;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VntyrWc/jYjW4kXH7Qwq7TkZMk86hPLLvWO9ki9un80=;
+ b=Wp/ElJj3RVVV3ChWRZ/1WBr8x7yoj2OnhHYDdKM2QCUoIOGdZzQjUzD39DGPsOBTOs
+ rHv5hiqZsqop3nFTbrXNm9g6EVyKVa93job7ocgKOZ2qJ2k4FHp41CliqVM+V1zkWsE2
+ FNEtCUoXq9nT7VKNR34ULY0ZoCpE5bNkz+6GM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701959102; x=1702563902;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=s4ts0vq9WioTVsGuZexk/A42NUKryCT0uHlLXmDhLUo=;
- b=Xl12yuwiMaDidwAkHNOh0iFaPkkBpKKrywAAutmRrjYXas1T8fkWCXTRYhqm7bripG
- WY9JMIUSwrRAKTLkVB3jSpnm2veqrp2fq7HTemYwPJDyPSLToz/OnYPYL8hlAJTiz2DQ
- FLjkAjzJV4YuteZSW+y1RHKdE6vkF1treSCtN8AUEB4IOxQG2J3Agv67RPGG8soMebp7
- bbRAhsznKmOVR4jFMmHGq1iYtOi+WGF3xVC3R1DI9uHVYf20O6u7CxDEZ7a16peaZlwY
- H7bZAZ0youMVesD5iltQAahgi1j9fkSucAsV44Bk9gpRJetGima1UUcMK7gfDjOQ9EZz
- Aolg==
-X-Gm-Message-State: AOJu0Yy/Y6mwYPFhAgQCfXpg/WoveXqkkSDl15UQq6P/ngP5cszZZZul
- lzboexGsx4xEfzExXpYD4c4lOGNPn7YTNnVKjo27/ey3CpwLLwue1QqaZl4pVdqZakxijXKtvuf
- 5nh2pBSD+9ffC80DyYZKlSYYS3RrCs1A=
-X-Received: by 2002:a1c:7505:0:b0:40b:5e59:ccb2 with SMTP id
- o5-20020a1c7505000000b0040b5e59ccb2mr1776353wmc.147.1701959102740; 
- Thu, 07 Dec 2023 06:25:02 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHXYEFkQfvgwFozdy3GGEy3RMMF2GRI0EqK/BVLP/d7WIITzMEqKpe3DZZEOddnK2nRf6zOUg==
-X-Received: by 2002:a1c:7505:0:b0:40b:5e59:ccb2 with SMTP id
- o5-20020a1c7505000000b0040b5e59ccb2mr1776347wmc.147.1701959102306; 
- Thu, 07 Dec 2023 06:25:02 -0800 (PST)
-Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- az8-20020a05600c600800b004064cd71aa8sm2072506wmb.34.2023.12.07.06.25.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Dec 2023 06:25:01 -0800 (PST)
-Message-ID: <9d9bdc85-1924-4a1e-8021-9b12a7df7713@canonical.com>
-Date: Thu, 7 Dec 2023 15:25:01 +0100
+ d=1e100.net; s=20230601; t=1701959303; x=1702564103;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VntyrWc/jYjW4kXH7Qwq7TkZMk86hPLLvWO9ki9un80=;
+ b=rgM+vX3b/SWdnUZzHJ7L3iOddNGVt8EdxiGAc5E23vCI+6uyrG0zZ83eONNXss5Eyu
+ EbEs/HUorcGJbAgZA52JXirlJx37TnLs0PS6bhuO82k+P0MLSnkPlt8CDFOZTXa68htS
+ pDil3tOVvcc6DGFeaHWLbXkn66r+laHcvkfpw2jrcaDuy3vwJTyArWCetUIYUiEkv/7Z
+ omC6GyW2ZKLTfkdOYlsZsSEo3uLqH8UYGWz/qcUFt2P0MYpS7i3cHe5wthuQr21kkw/d
+ zr1viDNbdL7rT0a5+emCZSkhJYFu7iBJRt1G4LqwU4R47uQNvwKnmAm6LPMFXDS8dlUN
+ TMyw==
+X-Gm-Message-State: AOJu0YxkBAaGqqCMZzo1JLh964iPCZe6R5X04uRakBq0/VTBAMlmAH7o
+ xAbwqmXw5h/HYsx5StsOmGE5Tg==
+X-Google-Smtp-Source: AGHT+IFOL+fKMCb9k+T2sd73EMac7NNFRzdUIOqJ/9nli7OKDTzx6ubZ04nQhWESkW81NXSxAqyiVg==
+X-Received: by 2002:a05:600c:2352:b0:40c:2100:60b1 with SMTP id
+ 18-20020a05600c235200b0040c210060b1mr1513091wmq.178.1701959302992; 
+ Thu, 07 Dec 2023 06:28:22 -0800 (PST)
+Received: from panicking.amarulasolutions.com
+ ([2001:b07:6474:ebbf:55e:f958:69d5:35de])
+ by smtp.gmail.com with ESMTPSA id
+ i6-20020a1709064ec600b00a1c85124b08sm894568ejv.94.2023.12.07.06.28.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 07 Dec 2023 06:28:22 -0800 (PST)
+From: Michael Trimarchi <michael@amarulasolutions.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH] pxe_utils: Increase feedback to user when fdt file is not
+ found
+Date: Thu,  7 Dec 2023 15:28:19 +0100
+Message-Id: <20231207142819.1511709-1-michael@amarulasolutions.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] bootstd: Fix a memory leak in the efi manager bootflow
-Content-Language: en-US
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sjg@chromium.org
-Cc: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
-References: <20231207123636.26264-1-ilias.apalodimas@linaro.org>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231207123636.26264-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,46 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07.12.23 13:36, Ilias Apalodimas wrote:
-> efi_get_var() allocates memory which has to be freed after the value of
-> the variable is consumed. Free the memory properly
-> 
-> Fixes: f2bfa0cb1794 ("bootstd: Make efi_mgr bootmeth work for non-sandbox setups")
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+extlinux.conf can set fdtdir. fdtdir look for fdt file using
+information found in the enviroment variable. The function does
+not report any error in the case the file is not found
 
-Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------  ----------------
+Scanning global bootmeth 'efi_mgr':
+No EFI system partition
+No EFI system partition
+Failed to persist EFI variables
+Scanning bootdev 'mmc@fa10000.bootdev':
+  0  extlinux     ready   mmc          1  mmc@fa10000.bootdev.part_ /boot/extlinux/extlinux.conf
+** Booting bootflow 'mmc@fa10000.bootdev.part_1' with extlinux
+1:      am62x-sk-buildroot
+Retrieving file: /boot/Image
+append: console=ttyS2,115200n8 root=PARTUUID=c586a30c-0bf1-4323-aba8-779c814ee135 rw
+		rootfstype=ext4 rootwait earlycon=ns16550a,mmio32,0x02800000
+Retrieving file: /boot/k3-am623_ccm_m3.dtb
+Skipping fdtdir /boot/ for failure retrieving dts
 
-> ---
-> Apologies for the quick resend but the previous patches wasn't compiling due to
-> the missing #include <malloc.h>
-> 
-> Changes since v1
-> - Add #include <malloc.h> since it's needed for free()
-> 
->   boot/bootmeth_efi_mgr.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-> index e6c42d41fb80..6428c096d7f8 100644
-> --- a/boot/bootmeth_efi_mgr.c
-> +++ b/boot/bootmeth_efi_mgr.c
-> @@ -16,6 +16,7 @@
->   #include <dm.h>
->   #include <efi_loader.h>
->   #include <efi_variable.h>
-> +#include <malloc.h>
-> 
->   /**
->    * struct efi_mgr_priv - private info for the efi-mgr driver
-> @@ -65,6 +66,7 @@ static int efi_mgr_read_bootflow(struct udevice *dev, struct bootflow *bflow)
->   	bootorder = efi_get_var(u"BootOrder", &efi_global_variable_guid,
->   				&size);
->   	if (bootorder) {
-> +		free(bootorder);
->   		bflow->state = BOOTFLOWST_READY;
->   		return 0;
->   	}
-> --
-> 2.40.1
-> 
+Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+---
+ boot/pxe_utils.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index a92bb896c6..83bc167785 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -700,6 +700,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 					       label->name);
+ 					goto cleanup;
+ 				}
++
++				if (label->fdtdir) {
++					printf("Skipping fdtdir %s for failure retrieving dts\n",
++						label->fdtdir);
++				}
+ 			}
+ 
+ 			if (label->kaslrseed)
+-- 
+2.40.1
 
