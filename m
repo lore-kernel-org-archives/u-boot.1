@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94419C10F05
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 17:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C87C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 17:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBC1187150;
-	Thu,  7 Dec 2023 18:15:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id 45F20874D0;
+	Thu,  7 Dec 2023 18:15:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="FO7jX2rl";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="GpgWkFYd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A6D0870F6; Thu,  7 Dec 2023 16:09:11 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2382C86940; Thu,  7 Dec 2023 16:32:39 +0100 (CET)
+Received: from mail-wr1-x449.google.com (mail-wr1-x449.google.com
+ [IPv6:2a00:1450:4864:20::449])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D384386C47
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 16:09:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 114048715C
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 16:32:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mzamazal@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1701961743;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=FJXKNdUzjLQpUYpo28T7FT5/29+qFOuwBs3kEZGwWNM=;
- b=FO7jX2rlE8kcND8/cCxo//pFbqiJPultInpeCdogLUHuyKFQViNSthtey6XMg8TNjrMZQ5
- B6XfJh+g/FhvEURSy/bbEhHSljGJ/ikUeToLDOkjflcKm74qzcksHD5RBiw7sFRKOYzpm+
- 2gVclGKUkhnHrY6PQycsAMeOIYPvjNY=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-387-eJSYJ4S1O_OOr3VZuWOwiA-1; Thu, 07 Dec 2023 10:09:02 -0500
-X-MC-Unique: eJSYJ4S1O_OOr3VZuWOwiA-1
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-54dbe033977so494968a12.0
- for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 07:09:02 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3k-VxZQgKBlgF0D8A84B6EE6B4.2ECK-1EEJB8IJI.34DN.34@flex--panikiel.bounces.google.com
+Received: by mail-wr1-x449.google.com with SMTP id
+ ffacd0b85a97d-33331e69698so861729f8f.1
+ for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 07:32:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1701963155; x=1702567955; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:from:subject:message-id
+ :mime-version:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+vsEAZ1V0elRgsirhoU5DZEbJW1W7XddfnT19SCMAoE=;
+ b=GpgWkFYd5dQY4EJb3hn3St5FcooOQKyqGZSNrexmgDa3mXbbPJPKfofPbFBAcxkhpT
+ j8ufFILkPMJChAbXOk9rtJa0TVIjm7OYezUTpYhJ523ztmj3/xA7JbvNz2jHjDS11I2j
+ JBFjrV8UNAUsn/mqXMFdMS5Fn6RSMGi+tF3xRBtisl6s6sgGh5R1pxPlN9rmhRV4FXW6
+ fNG9OVThH4MWlGJbVH1lRsSXMLx0TJxm+sjLrU0c8fjn+N2/m4k7/7kEzipEBzOlFqV4
+ hLj/fM+WQ1GFHhU0Zg0lIB7uBfjLP4iYx+M1WOvHq10UmlzMyTGUGGkTed6Q7jnleiRj
+ 3Zbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1701961740; x=1702566540;
- h=mime-version:user-agent:message-id:date:references:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1701963155; x=1702567955;
+ h=content-transfer-encoding:cc:to:from:subject:message-id
+ :mime-version:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FJXKNdUzjLQpUYpo28T7FT5/29+qFOuwBs3kEZGwWNM=;
- b=RS+iRl6/J4AktwcjlKdhqmqcAbKAs/UqXJnVa1vCn111tj66hdp3eXm8rktdlqNZWY
- gmbCbmWZRlx+dreWMz0N1CBH/tTL2Y5jEcrsnw3M7A112OUvUsrGOFtDXoBVMCOV2ZPK
- Jepjd0aGZhLJPqCJaykexNNQ2uhTqDdMxoZmYS69OObIuffIuyYkj/XVsogb0QgxHO1W
- ScaMwj38K7uXYCvoaZ2hi3sg/s5PNCGnIKJ+AUnAbruIFm8nJ/Esw5o/cq3S2knyst0T
- WfFG9y/dxG76cMlYAJHXel54rAwAWTgpbUFH4PZ26fJHycaiCwL675xPfku0uie24r7T
- njJw==
-X-Gm-Message-State: AOJu0YyWGpfXnjrrcMA752JgdVePF+UKz8Dl590IjFPycSy9VVAZnVuY
- UrU30wII3EyRWZPA0kKapgzcwd25Hp18A5LL9whfnJ1nFtVqx+aMrFrVxtht7yJPHlxPXXQLyBA
- asB2OP/Kanzr0ULSYzcyrEKJWKplgGhwPOt2qzd/NTsDWSGcx5n+ZDnyefhnA+UEVs/KipOCSqA
- ==
-X-Received: by 2002:aa7:c648:0:b0:54c:c68e:95a7 with SMTP id
- z8-20020aa7c648000000b0054cc68e95a7mr839004edr.52.1701961740149; 
- Thu, 07 Dec 2023 07:09:00 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGvXjBknqDTRT4Umc0oTIDOr0qp4WfcyjKdlLpGFqvPzEJMI3+RKDj3CryAPJM0ZLXoODg+Xw==
-X-Received: by 2002:aa7:c648:0:b0:54c:c68e:95a7 with SMTP id
- z8-20020aa7c648000000b0054cc68e95a7mr838993edr.52.1701961739725; 
- Thu, 07 Dec 2023 07:08:59 -0800 (PST)
-Received: from nuthatch (ip-77-48-47-2.net.vodafone.cz. [77.48.47.2])
- by smtp.gmail.com with ESMTPSA id
- eh11-20020a0564020f8b00b0054cba269d4fsm856300edb.16.2023.12.07.07.08.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 07 Dec 2023 07:08:59 -0800 (PST)
-From: Milan Zamazal <mzamazal@redhat.com>
-To: Gilles Talis <gilles.talis@gmail.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, uboot-imx@nxp.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-In-Reply-To: <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> (Peng Fan's
- message of "Thu, 25 May 2023 08:12:07 +0800")
-References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com>
-Date: Thu, 07 Dec 2023 16:08:58 +0100
-Message-ID: <877clq6odx.fsf@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain
+ bh=+vsEAZ1V0elRgsirhoU5DZEbJW1W7XddfnT19SCMAoE=;
+ b=NY4kDOGXDoi/v+5ahMvyDjPIC2QBK0LBfLgVKtq/opOv8UMjpW1cqy+dfjuzegP/tS
+ QaTxjv0eoKnQFMD3crCMJYhPQjxpBy+OG7lY9fsX0VsCV07VX+s1K02+YJB5N04Alxir
+ ajj7utWaWitndd8GJKoGLaHlUnCemOB1RI+dKwtF6D7795lOhmeX6sVY6Y4Y5P8CS4JP
+ +Tp1cbSyhsijwRo2FjlXOLv/t9epwPx4AHaIfiuzwmJGT/pfHu7kNPt70BReTifS8n45
+ 4wQhDkQzoELrOn4oDsLButiiD6ojirgcCmtydbbzqgHCsRis5hBUJwuOg+ci4OORA/N3
+ 0URw==
+X-Gm-Message-State: AOJu0YyKLho6MTLiIyuW44J3FtEvhPqoItl/xmYuEGLxgHhuyEyQ6T39
+ /y2mOgm4FwsWYkBtE3OQ2Bu9xOvI15TV6javWEKDpf8JPQZnCNqEo+s/cNKkwgDyydsnnwzxKfM
+ 6Nxpw+h4O6wLSJ65JR4aAcoAYDmP+aC858h+e75TY/Vq0hacxviFN5QF+k98t6uh1
+X-Google-Smtp-Source: AGHT+IE+mk/PY90coKkxWO5RxDh9fsy8bvT+HAv+w5UcfXZnOXCqqarU09oKl27F4pQGq5kED/E261bWIO99ZQ==
+X-Received: from szatan.c.googlers.com ([fda3:e722:ac3:cc00:28:9cb1:c0a8:2d83])
+ (user=panikiel job=sendgmr) by 2002:adf:9dcc:0:b0:333:5457:641 with SMTP id
+ q12-20020adf9dcc000000b0033354570641mr17118wre.10.1701963155362; Thu, 07 Dec
+ 2023 07:32:35 -0800 (PST)
+Date: Thu,  7 Dec 2023 15:32:30 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+Message-ID: <20231207153230.2471652-1-panikiel@google.com>
+Subject: [PATCH 1/1] ARM: dts: chameleonv3: Update handoffs
+From: "=?UTF-8?q?Pawe=C5=82=20Anikiel?=" <panikiel@google.com>
+To: u-boot@lists.denx.de, marex@denx.de, simon.k.r.goldschmidt@gmail.com, 
+ tien.fong.chee@intel.com
+Cc: sjg@chromium.org, amstan@chromium.org, 
+ "=?UTF-8?q?Pawe=C5=82=20Anikiel?=" <panikiel@google.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 07 Dec 2023 18:15:43 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,90 +89,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Peng Fan <peng.fan@oss.nxp.com> writes:
+Update the chameleonv3 handoffs with the ones generated from the final
+FPGA design.
 
-> On 5/24/2023 3:21 AM, Gilles Talis wrote:
->> Add support for the Polyhex Debix Model A SBC board.
->> It is an industrial grade single board computer based on
->> NXP's i.MX 8M Plus.
->> Currently supported interfaces are:
->> - Serial console
->> - Micro SD
->> - eQOS and FEC Ethernet
->> imx8mp-debix-model-a.dts is taken from Linux 6.3.
->> Signed-off-by: Gilles Talis<gilles.talis@gmail.com>
->
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+Signed-off-by: Pawe=C5=82 Anikiel <panikiel@google.com>
+---
+ ...ocfpga_arria10_chameleonv3_480_2_handoff.h | 22 +++++++++----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
-Do you know why the patch has been left (as far as I can see) without
-further action?
-
-BTW, I applied it to current master, compiled approximately following
-https://docs.u-boot.org/en/latest/board/nxp/imx8mp_evk.html and tried to
-use it on Debix Model A.  U-Boot starts but cannot find the partition
-table on the SD card:
-
-  U-Boot SPL 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00 +0000)
-  Normal Boot
-  WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-  Trying to boot from BOOTROM
-  Boot Stage: Primary boot
-  image offset 0x8000, pagesize 0x200, ivt offset 0x0
-  NOTICE:  BL31: v2.2(release):rel_imx_5.4.70_2.3.6-0-g15e8ff164-dirty
-  NOTICE:  BL31: Built : 00:00:00, Jan  1 1980
-
-
-  U-Boot 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00 +0000)
-
-  CPU:   Freescale i.MX8MP[8] rev1.1 at 1200 MHz
-  Reset cause: POR
-  Model: Polyhex Debix Model A i.MX8MPlus board
-  DRAM:  2 GiB
-  Core:  83 devices, 22 uclasses, devicetree: separate
-  WDT:   Started watchdog@30280000 with servicing every 1000ms (60s timeout)
-  MMC:   FSL_SDHC: 1, FSL_SDHC: 2
-  Loading Environment from MMC... *** Warning - bad CRC, using default environment
-
-  In:    serial@30890000
-  Out:   serial@30890000
-  Err:   serial@30890000
-  Net:   eth1: ethernet@30bf0000 [PRIME]
-  Hit any key to stop autoboot:  2 <0x08><0x08><0x08> 1 <0x08><0x08><0x08> 0 
-  switch to partitions #0, OK
-  mmc1 is current device
-  Scanning mmc 1:1...
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  <0x1b>7<0x1b>[r<0x1b>[999;999H<0x1b>[6n<0x1b>8Card did not respond to voltage select! : -110
-  No EFI system partition
-  No EFI system partition
-  Failed to persist EFI variables
-  Remove /soc@0/bus@30800000/ethernet@30be0000:phy-reset-gpios
-  BootOrder not defined
-  EFI boot manager: Cannot load any image
-  ,** No partition table - mmc 1 **
-  Couldn't find partition mmc 1:1
-  Card did not respond to voltage select! : -110
-  u-boot=>
-
-When I use an old U-Boot blob provided by Debix, it boots fine from the
-same SD card.  The SD card contains a Fedora aarch64 image with a msdos
-partition table.
-
-Do you know what could be wrong?
-
-Regards,
-Milan
+diff --git a/arch/arm/dts/socfpga_arria10_chameleonv3_480_2_handoff.h b/arc=
+h/arm/dts/socfpga_arria10_chameleonv3_480_2_handoff.h
+index caaff604eb..37cd5d653d 100644
+--- a/arch/arm/dts/socfpga_arria10_chameleonv3_480_2_handoff.h
++++ b/arch/arm/dts/socfpga_arria10_chameleonv3_480_2_handoff.h
+@@ -13,9 +13,9 @@
+ #define EMAC2_CLK_HZ 250000000
+ #define EOSC1_CLK_HZ 33330000
+ #define F2H_FREE_CLK_HZ 200000000
+-#define H2F_USER0_CLK_HZ 200000000
++#define H2F_USER0_CLK_HZ 250000000
+ #define H2F_USER1_CLK_HZ 100000000
+-#define L3_MAIN_FREE_CLK_HZ 200000000
++#define L3_MAIN_FREE_CLK_HZ 250000000
+ #define SDMMC_CLK_HZ 200000000
+ #define TPIU_CLK_HZ 100000000
+ #define MAINPLLGRP_CNTR15CLK_CNT 900
+@@ -24,7 +24,7 @@
+ #define MAINPLLGRP_CNTR4CLK_CNT 900
+ #define MAINPLLGRP_CNTR5CLK_CNT 900
+ #define MAINPLLGRP_CNTR6CLK_CNT 9
+-#define MAINPLLGRP_CNTR7CLK_CNT 9
++#define MAINPLLGRP_CNTR7CLK_CNT 7
+ #define MAINPLLGRP_CNTR7CLK_SRC 0
+ #define MAINPLLGRP_CNTR8CLK_CNT 19
+ #define MAINPLLGRP_CNTR9CLK_CNT 900
+@@ -68,7 +68,7 @@
+ #define CLKMGR_TESTIOCTRL_PERICLKSEL 8
+ #define ALTERAGRP_MPUCLK_MAINCNT 1
+ #define ALTERAGRP_MPUCLK_PERICNT 900
+-#define ALTERAGRP_NOCCLK_MAINCNT 9
++#define ALTERAGRP_NOCCLK_MAINCNT 7
+ #define ALTERAGRP_NOCCLK_PERICNT 900
+ #define ALTERAGRP_MPUCLK ((ALTERAGRP_MPUCLK_PERICNT << 16) | \
+ 	(ALTERAGRP_MPUCLK_MAINCNT))
+@@ -120,9 +120,9 @@
+ #define CONFIG_IO_15_WK_PU_EN 1
+ #define CONFIG_IO_16_INPUT_BUF_EN 0
+ #define CONFIG_IO_16_PD_DRV_STRG 10
+-#define CONFIG_IO_16_PD_SLW_RT 1
++#define CONFIG_IO_16_PD_SLW_RT 0
+ #define CONFIG_IO_16_PU_DRV_STRG 8
+-#define CONFIG_IO_16_PU_SLW_RT 1
++#define CONFIG_IO_16_PU_SLW_RT 0
+ #define CONFIG_IO_16_RTRIM 1
+ #define CONFIG_IO_16_WK_PU_EN 0
+ #define CONFIG_IO_17_INPUT_BUF_EN 1
+@@ -169,9 +169,9 @@
+ #define CONFIG_IO_5_WK_PU_EN 0
+ #define CONFIG_IO_6_INPUT_BUF_EN 0
+ #define CONFIG_IO_6_PD_DRV_STRG 10
+-#define CONFIG_IO_6_PD_SLW_RT 1
++#define CONFIG_IO_6_PD_SLW_RT 0
+ #define CONFIG_IO_6_PU_DRV_STRG 8
+-#define CONFIG_IO_6_PU_SLW_RT 1
++#define CONFIG_IO_6_PU_SLW_RT 0
+ #define CONFIG_IO_6_RTRIM 1
+ #define CONFIG_IO_6_WK_PU_EN 0
+ #define CONFIG_IO_7_INPUT_BUF_EN 1
+@@ -213,7 +213,7 @@
+ #define PINMUX_DEDICATED_IO_9_SEL 8
+ #define PINMUX_I2C0_USEFPGA_SEL 1
+ #define PINMUX_I2C1_USEFPGA_SEL 0
+-#define PINMUX_I2CEMAC0_USEFPGA_SEL 0
++#define PINMUX_I2CEMAC0_USEFPGA_SEL 1
+ #define PINMUX_I2CEMAC1_USEFPGA_SEL 0
+ #define PINMUX_I2CEMAC2_USEFPGA_SEL 0
+ #define PINMUX_NAND_USEFPGA_SEL 0
+@@ -283,10 +283,10 @@
+ /* Bridge Configuration */
+ #define F2H_AXI_SLAVE 1
+ #define F2SDRAM0_AXI_SLAVE 1
+-#define F2SDRAM1_AXI_SLAVE 1
++#define F2SDRAM1_AXI_SLAVE 0
+ #define F2SDRAM2_AXI_SLAVE 1
+ #define H2F_AXI_MASTER 1
+-#define LWH2F_AXI_MASTER 1
++#define LWH2F_AXI_MASTER 0
+=20
+ /* Voltage Select for Config IO */
+ #define CONFIG_IO_BANK_VSEL \
+--=20
+2.43.0.472.g3155946c3a-goog
 
