@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989D4C4167B
-	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E98B9C4167B
+	for <u-boot@archiver.kernel.org>; Thu,  7 Dec 2023 16:52:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E0B286CF4;
-	Thu,  7 Dec 2023 17:33:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5497B87250;
+	Thu,  7 Dec 2023 17:52:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CKWg1J9D";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hGWo/YfE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F24587232; Thu,  7 Dec 2023 17:33:45 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 89D938747A; Thu,  7 Dec 2023 17:52:26 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E107086564
- for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:33:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4954F87207
+ for <u-boot@lists.denx.de>; Thu,  7 Dec 2023 17:52:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=reidt@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GXeV6016203;
- Thu, 7 Dec 2023 10:33:40 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GqMjf006401;
+ Thu, 7 Dec 2023 10:52:22 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1701966820;
- bh=QEdwZJbHaEO+3KuraGqMiNZOiPlDzn/Gs58Sw+eYVRM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=CKWg1J9DqX0r7kwj9V45IyG5LZgZ7/iFYSHDqtZlO1jL+9zjXFcRBVa6WTK0tcaq0
- QH2verP4oRw7cWN4Lt0ubiMytnec9j4h1ow76S0sgej6nWE2W8Qv4Ef9EzwkkLs7vm
- sVwMiCy1KFs+Nc2RyAQVDGPK5RjDG1VxjKHSEdwM=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B7GXege030104
+ s=ti-com-17Q1; t=1701967942;
+ bh=eWJIRTBHFewRO3E+bVZtbe94HmIJdf9F2rFmK849YUI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=hGWo/YfEgCeUtuuxXR44igPw93QSquY3PJSS+ajejvFf3NXcSyqfwI3yujGpF5QlG
+ BkEfSGVficVkX6XcEysyfxuIYxpDZEHHmKAG18D1dveKLhSpI91K4LPYSYORxR+afe
+ OYSBjimYUiF5MySIkSuIUBesOn3PC1qvyIEQzDAA=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3B7GqM2d087236
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 7 Dec 2023 10:33:40 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 7 Dec 2023 10:52:22 -0600
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 7
- Dec 2023 10:33:40 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 10:52:21 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 7 Dec 2023 10:33:40 -0600
+ Frontend Transport; Thu, 7 Dec 2023 10:52:22 -0600
 Received: from localhost (reidt-hp-z2.dhcp.ti.com [128.247.81.215])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GXeqm036473;
- Thu, 7 Dec 2023 10:33:40 -0600
-Date: Thu, 7 Dec 2023 10:33:40 -0600
-From: reidt <reidt@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: <trini@konsulko.com>, <nm@ti.com>, <u-boot@lists.denx.de>,
- <m-chawdhry@ti.com>, <bb@ti.com>, <a-nandan@ti.com>, <vishalm@ti.com>
-Subject: Re: [PATCH v2 1/2] arm: mach-k3: j72xx: add new 'virtual' mux
-Message-ID: <20231207163340.uzwdq5drvkgjmwds@reidt-HP-Z2>
-References: <20231206211753.2225158-1-reidt@ti.com>
- <20231206211753.2225158-2-reidt@ti.com>
- <85aa4240-da6f-483b-8d56-121878b9b88f@ti.com>
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3B7GqLeJ030126;
+ Thu, 7 Dec 2023 10:52:21 -0600
+From: Reid Tonking <reidt@ti.com>
+To: <trini@konsulko.com>
+CC: <nm@ti.com>, <m-chawdhry@ti.com>, <u-boot@lists.denx.de>,
+ <u-kumar1@ti.com>, <bb@ti.com>, <a-nandan@ti.com>, <vishalm@ti.com>, Reid
+ Tonking <reidt@ti.com>
+Subject: [PATCH v3 2/2] arm: dts: k3-j7200-r5-common-proc-board: Set parent
+ clock for clock ID 323
+Date: Thu, 7 Dec 2023 10:52:11 -0600
+Message-ID: <20231207165211.2319475-3-reidt@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231207165211.2319475-1-reidt@ti.com>
+References: <20231207165211.2319475-1-reidt@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <85aa4240-da6f-483b-8d56-121878b9b88f@ti.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,65 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:11-20231207, Kumar, Udit wrote:
-> 
-> On 12/7/2023 2:47 AM, Reid Tonking wrote:
-> > From: Bryan Brattlof <bb@ti.com>
-> > 
-> > In order for the Cortex-A72s to operate at different frequencies other
-> > than the default 2GHz, add in a new 'virtual' mux (a mux that does not
-> > physically exist in the clock tree) that can be selected.
-> > 
-> > CC: Vishal Mahaveer <vishalm@ti.com>
-> > Signed-off-by: Bryan Brattlof <bb@ti.com>
-> > Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> > Signed-off-by: Reid Tonking <reidt@ti.com>
-> > ---
-> >   arch/arm/mach-k3/j7200/clk-data.c | 13 +++++++++++--
-> >   1 file changed, 11 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/arch/arm/mach-k3/j7200/clk-data.c b/arch/arm/mach-k3/j7200/clk-data.c
-> > index 9b45786a2d4..126627fff47 100644
-> > --- a/arch/arm/mach-k3/j7200/clk-data.c
-> > +++ b/arch/arm/mach-k3/j7200/clk-data.c
-> > @@ -141,6 +141,11 @@ static const char * const k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
-> >   	"hsdiv4_16fft_main_0_hsdivout0_clk",
-> >   };
-> > +static const char * const main_pll8_sel_extwave_out0_parents[] = {
-> > +	"pllfracf_ssmod_16fft_main_8_foutvcop_clk",
-> > +	"hsdiv0_16fft_main_8_hsdivout0_clk",
-> > +};
-> > +
-> >   static const char * const mcu_obsclk_outmux_out0_parents[] = {
-> >   	"mcu_obsclk_div_out0",
-> >   	"gluelogic_hfosc0_clkout",
-> > @@ -396,6 +401,7 @@ static const struct clk_data clk_list[] = {
-> >   	CLK_DIV("hsdiv4_16fft_main_3_hsdivout2_clk", "pllfracf_ssmod_16fft_main_3_foutvcop_clk", 0x683088, 0, 7, 0, 0),
-> >   	CLK_MUX_PLLCTRL("k3_pll_ctrl_wrap_main_0_sysclkout_clk", k3_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
-> >   	CLK_DIV("k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
-> > +	CLK_MUX("main_pll8_sel_extwave_out0", main_pll8_sel_extwave_out0_parents, 2, 0x688040, 0, 1, 0),
-> >   	CLK_DIV("mcu_obsclk_div_out0", "wkup_obsclk_mux_out0", 0x43008000, 8, 4, 0, 0),
-> >   	CLK_MUX("mcu_obsclk_outmux_out0", mcu_obsclk_outmux_out0_parents, 2, 0x43008000, 24, 1, 0),
-> >   	CLK_PLL("pllfracf_ssmod_16fft_main_4_foutvcop_clk", "main_pll4_xref_sel_out0", 0x684000, 0),
-> > @@ -545,11 +551,14 @@ static const struct dev_clk soc_dev_clk_data[] = {
-> >   	DEV_CLK(288, 14, "board_0_hfosc1_clk_out"),
-> >   	DEV_CLK(288, 15, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-> >   	DEV_CLK(288, 17, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-> > +	DEV_CLK(323, 0, "main_pll8_sel_extwave_out0"),
-> > +	DEV_CLK(323, 1, "pllfracf_ssmod_16fft_main_8_foutvcop_clk"),
-> > +	DEV_CLK(323, 2, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-> >   };
-> >   const struct ti_k3_clk_platdata j7200_clk_platdata = {
-> >   	.clk_list = clk_list,
-> > -	.clk_list_cnt = 109,
-> > +	.clk_list_cnt = 110,
-> >   	.soc_dev_clk_data = soc_dev_clk_data,
-> > -	.soc_dev_clk_data_cnt = 129,
-> > +	.soc_dev_clk_data_cnt = 132,
-> 
-> Looks you missed to update this with ARRAY_SIZE
->
+Previously, dynamic frequency scaling supported rates only through fixed
+divison.
 
-Made a git error on my end - will have the corrected v3 out shortly
+This virtual clock mux configuration enables more varied rates on A72
+clock ID 202 by setting up the required register.
 
--Reid
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+Signed-off-by: Reid Tonking <reidt@ti.com>
+---
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+index f0a73605020..018faaa13b6 100644
+--- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+@@ -24,7 +24,8 @@
+ 				<&k3_pds 4 TI_SCI_PD_EXCLUSIVE>;
+ 		resets = <&k3_reset 202 0>;
+ 		clocks = <&k3_clks 61 1>;
+-		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>;
++		assigned-clocks = <&k3_clks 202 2>, <&k3_clks 61 1>, <&k3_clks 323 0>;
++		assigned-clock-parents= <0>, <0>, <&k3_clks 323 2>;
+ 		assigned-clock-rates = <2000000000>, <200000000>;
+ 		ti,sci = <&dmsc>;
+ 		ti,sci-proc-id = <32>;
+-- 
+2.34.1
+
