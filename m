@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84AD5C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 03:14:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F890C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 03:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81AE18642A;
-	Fri,  8 Dec 2023 04:14:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD7B28745E;
+	Fri,  8 Dec 2023 04:14:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vp6iPtaW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NJ7C0cqM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 213CC8642D; Fri,  8 Dec 2023 04:14:16 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id AFD6186335; Fri,  8 Dec 2023 04:14:22 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF79086335
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 04:14:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0517D8745E
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 04:14:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a1db6816177so217532766b.0
- for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 19:14:11 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-54bfa9b3ffaso2347039a12.1
+ for <u-boot@lists.denx.de>; Thu, 07 Dec 2023 19:14:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702005251; x=1702610051; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702005258; x=1702610058; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=B/JovaJUpmi7D2p6sp1ObRYNupRUexxZP1LEJALBCEk=;
- b=Vp6iPtaWl9NvEL9WqE4nRKIV6dh/7vXe4giVynurEfdARpPr3uwGQgixhJxzUtrBev
- qalT/SkCu2yLVoJKfpl/0NBMeheQVj8tJHDqemGN6yPZql/oEypOp7i/ssM+GjTE71FI
- g8wg/PAPGZ6oEc3138XRaDOM2hDSMzpcZm3jU=
+ bh=+UIVQchT+Tt4YFE7o1tSnDE005F52hVyNzEVg1mv9l0=;
+ b=NJ7C0cqMxjN5cmg0T96aBs7B6pFFLNPUC9bLZ/hbA82LthWIxDNndoGUlj9KPTx5Tc
+ EPh9qxieMUzzsQv4YfY3CyKtAADqslqa7sqKSOgFBboezab86/ZkW992Ci0oCpM4F0Lg
+ n4Y8Zhdpy1FI3aYhdU4ceRQB8RPDqfJek0wmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702005251; x=1702610051;
+ d=1e100.net; s=20230601; t=1702005258; x=1702610058;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B/JovaJUpmi7D2p6sp1ObRYNupRUexxZP1LEJALBCEk=;
- b=EoIicygwzxHWkn2Lpt8L0MM6AxRlUt9dawyOdf0/XrfBN1O+g0iO+JdE+IoaMdY0Bj
- vqd0eMWVpBMKmNCQtwGmtTYC02lGzzG77sgZqTA3bUxEdwk6mfTOK1VuMcVElnqMyLaM
- qyzKqwOI4jqj7dP6y+C8doGWrhWmJTdljjI21sTPU6v9VX/O79/1luWVRENaVToZcV8B
- 3KWSDJdL1jGAazFrGeJGGVn6c2KNxGy9P7CHHjaOmHmgBJIre1gri0EWYx8dDIinNMsD
- vkqF4Rw3ZKcLm/r1S4r0HFospdg3FopQeS4ksm6GUS6KUrASLXQYESIx+p78rZs+zeZ7
- kNIA==
-X-Gm-Message-State: AOJu0YzBo2TOsXfEgJiPEz/O4XG2d6+q6t/pP0PuusPeHM7Oj3ABTkPj
- em4MPfELGVLfvC8pPwD8OpmuHu1OIf5p+ruqUMTLVg==
-X-Google-Smtp-Source: AGHT+IGNFR5F53bVew4v9mvWKkzZOrJRLEPUGtd5OJby6DX8BFDvEPY2ftUdsnFX7qTrjwBPtsUVvA2P1DdrONOb74I=
-X-Received: by 2002:a17:906:5fd0:b0:a19:a19b:426e with SMTP id
- k16-20020a1709065fd000b00a19a19b426emr1121356ejv.217.1702005250995; Thu, 07
- Dec 2023 19:14:10 -0800 (PST)
+ bh=+UIVQchT+Tt4YFE7o1tSnDE005F52hVyNzEVg1mv9l0=;
+ b=AK/o3JLVPXDXlyevQ/vWxhmDc2QNfaHqvQOm7gwZdlqbdAvzC9SUsEoacNqzFKMZsA
+ wQIrkHGUuz4aduVkLxTJ1lobmc2Tzp8GDYIyu2gZBrSZNdac4ZKo7jU2gRc57dmt22sp
+ j1lxtoiZjQLQEIGx/phDzwP5gS5SR1JJit/0GOxPgdiFk9e5lzNGrEWjBa/j8Q/Ror1y
+ wUFY8Ebj9i/PmOi5i7EDivZiP0pnBkwrn4aIhz8DclHPgcIWBFuTUyDUuBk+0CV2f6Qe
+ tSbgQWiAWQxw58Iut4xDR+N3ymEdiVP+/WOdDLWda1KRm2NrY+TCEljXdQQn6tsx4Vwa
+ iKpg==
+X-Gm-Message-State: AOJu0Yxe+geAWUJ6wEI1rMLT6WCX26o/zwSYlCViPxEFA9QF6Vs1XBBV
+ +QJLoJfHnsu1BdTGdGwbWoVp0FyYpcvXPs2vWCryhA==
+X-Google-Smtp-Source: AGHT+IGFiRCd18BO9M2PJhgbxyYMfyb+xv/69Xk1mYGFMFLF4zM+duVFJOimW89Tv9yJlZ1L+MlNvBFbSfSpQfnQGgM=
+X-Received: by 2002:a17:906:2b46:b0:9dd:7ccf:77f8 with SMTP id
+ b6-20020a1709062b4600b009dd7ccf77f8mr1611471ejg.20.1702005258212; Thu, 07 Dec
+ 2023 19:14:18 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127195029.90951-1-raymond.mao@linaro.org>
- <20231127195029.90951-3-raymond.mao@linaro.org>
- <CAPnjgZ3_LJRBhTQHEuu_Ow+6GB4r8ZtdgEBtxxHtYG1m8LmJBg@mail.gmail.com>
- <CAEfUkULSsZuY-Yszg-O6H8PfQYWhMa2wJHgKO0N0ZtKnjQJ5fw@mail.gmail.com>
-In-Reply-To: <CAEfUkULSsZuY-Yszg-O6H8PfQYWhMa2wJHgKO0N0ZtKnjQJ5fw@mail.gmail.com>
+ <20231127195029.90951-16-raymond.mao@linaro.org>
+ <CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com>
+ <CAEfUkUKaBotDRyReCLc_R628VzZ1CmaNdq_nCp=kd8iCn5R6-Q@mail.gmail.com>
+ <CAPnjgZ0Hxsbv7EHbcnvLtmRSrPgMDfOFS+KmvYBcZgVC1Je4Ng@mail.gmail.com>
+ <CAC_iWjKhmJ4BrH73-5sg8XGjMfJbsx8oWLsz3sGKdP8jdoHBDg@mail.gmail.com>
+ <CAPnjgZ2QqOW_GGUUbM6EvmDN6gPJ0XKxk6SDNGiRChsTz8Y2Cw@mail.gmail.com>
+ <CAEfUkU+hXKDxcWpeMqOfuc2jyUOALwcG2a9pP2=0wKLFTscP7A@mail.gmail.com>
+In-Reply-To: <CAEfUkU+hXKDxcWpeMqOfuc2jyUOALwcG2a9pP2=0wKLFTscP7A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 7 Dec 2023 20:13:54 -0700
-Message-ID: <CAPnjgZ23J5tW3Tr5ouhxu3yvo4uMZwHkhQLpBKwxTHoBrbagSg@mail.gmail.com>
-Subject: Re: [PATCH v2 02/18] bloblist: Adjust API to align in powers of 2
+Date: Thu, 7 Dec 2023 20:14:06 -0700
+Message-ID: <CAPnjgZ2ghUo5jOkvp1eKvOz6t=Pzw1KLMrhURtPNfLtF9Ooa=A@mail.gmail.com>
+Subject: Re: [PATCH v2 15/18] fdt: Allow the devicetree to come from a bloblist
 To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, 
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  Bin Meng <bmeng.cn@gmail.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Nikhil M Jain <n-jain1@ti.com>, Baruch Siach <baruch@tkos.co.il>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, 
- Sean Anderson <seanga2@gmail.com>, Qu Wenruo <wqu@suse.com>
+ Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Michal Simek <michal.simek@amd.com>, Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,47 +93,174 @@ X-Virus-Status: Clean
 
 Hi Raymond,
 
-On Wed, 6 Dec 2023 at 13:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+On Wed, 6 Dec 2023 at 13:35, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
 > Hi Simon,
 >
-> I am wondering if I shall put in your review tag as you are one of the authors of many patches...
-> What is the best approach under this situation in the U-Boot community?
+> > The other thing missing here is SPL. The bloblist is designed such
+> > that it can be set up in any phase of U-Boot, then is passed to
+> > following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
+> > need. As I noted, it breaks sandbox_spl. What happens if a board wants
+> > to use bloblist in SPL but doesn't want the SPL DT to come from a
+> > prior stage? What happens if SPL wants doesn't want to pass the U-Boot
+> > DT through to U-Boot in the bloblist? It is all just horribly
+> > confusing.
+> I think the logic to decide whether to take the DT from bloblist really depends
+> on the board vendor.
+> I will move this kind of logics into board specific functions from fdtdec.c in the
+> next revision.
+> Board vendors can decide the behaviors they want. This can answer the question
+> above and for example whether they want a fallback when no DT exists in the
+> bloblist or the DT from bloblis is corrupted, or just print a warning message.
+> For Qemu-arm, as an example of design reference, I prefer to take the DT from the
+> bloblist automatically when (BLOBLIST && OF_BOARD) and keep the fallback
+> compatibility to load from `CFG_SYS_SDRAM_BASE` when DT from bloblist is
+> corrupted.
+> I will take a look into the sandbox_spl failures you mentioned.
 
-Well, where it is modified by you, I think it is reasonable to add my review.
+In the interests of my sanity, could you send just the bloblist
+updates and move the other patches into a separate series?
 
 Regards,
-Simon
+SImon
 
 
 >
 > Thanks and regards,
 > Raymond
 >
-> On Sat, 2 Dec 2023 at 13:33, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Tue, 5 Dec 2023 at 22:57, Simon Glass <sjg@chromium.org> wrote:
 >>
->> On Mon, 27 Nov 2023 at 12:52, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > From: Simon Glass <sjg@chromium.org>
->> >
->> > The updated bloblist structure stores the alignment as a power-of-two
->> > value in its structures. Adjust the API to use this, to avoid needing to
->> > calling ilog2().
->> >
->> > Drop a stale comment while we are here.
->> >
->> > Signed-off-by: Simon Glass <sjg@chromium.org>
->> > Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->> > Changes in v2
->> > - Update the bloblist alignment to align to FW handoff spec v0.9.
->> >
->> >  arch/x86/lib/tables.c |  3 ++-
->> >  common/bloblist.c     | 24 +++++++++++-------------
->> >  include/bloblist.h    | 12 +++++++-----
->> >  test/bloblist.c       |  4 ++--
->> >  4 files changed, 22 insertions(+), 21 deletions(-)
->> >
+>> Hi Ilias,
 >>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> On Mon, 4 Dec 2023 at 23:22, Ilias Apalodimas
+>> <ilias.apalodimas@linaro.org> wrote:
+>> >
+>> > Hi Simon,
+>> >
+>> > We did discuss this in OSFC but perhaps you forgot.  The discussion
+>> > was based on the mail here [0].
+>>
+>> Perhaps I did? Or perhaps we had a different understanding of it?
+>>
+>> >
+>> > On Tue, 5 Dec 2023 at 02:52, Simon Glass <sjg@chromium.org> wrote:
+>> > >
+>> > > Hi Raymond,
+>> > >
+>> > > On Mon, 4 Dec 2023 at 12:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> > > >
+>> > > > Hi Simon,
+>> > > >
+>> > > > When `OF_BOARD` is defined, the FDT should be from one of  the board-specific mechanisms:
+>> > > > 1. FDT from a bloblist via boot args
+>> > > > 2. FDT in memory
+>> > > > I don't think we need a new build option to distinguish these two, since it can be done in runtime by checking whether the boot args follow the FW Handoff spec conventions and the FDT exists in the bloblist.
+>> > >
+>> > > No, I would really like this to be deterministic, so we can fail if
+>> > > something goes wrong. The bloblist should be 'declared' as the way to
+>> > > boot, for a board.
+>> >
+>> > We *are* deterministic. I am just going to repeat what we discussed in
+>> > OSFC for completeness.
+>> > OF_BLOBLIST makes little sense because we are not going to add a
+>> > Kconfig per blolblist entry.
+>> > I haven't looked at what the patch does yet but the idea was really simple.
+>> > - Under OF_BOARD (which can arguably be renamed to OF_PREVIOUS_STAGE
+>> > or something like that)  if CONFIG_BLOB is enabled we scan for a
+>> > bloblist
+>> > - If CONFIG_BLOB is enabled but no bloblist is provided we fail the boot
+>> > - If CONFIG_BLOB is not enabled we do what we did up to now, maybe
+>> > with a message that this is going to be obsoleted once enough boards
+>> > migrate to a bloblist
+>> >
+>> > IOW if support for a bloblist is enabled we expect to find one from
+>> > the previous bootloader. I've lost count of how many times I repeated
+>> > this, but here it goes again
+>> > The device tree can come
+>> > - From u-boot
+>> > - From a previous stage loader *somehow* (eg. passed on a bloblist,
+>> > passed on a register, read from an EEPROM etc)
+>> >
+>> > We should keep that distinction and create subcategories for the
+>> > 'comes from a previous stage loader', rather than adding arbitrary
+>> > config options which only confuse people
+>>
+>> I don't know why you are so frustrated about this. This patch does not
+>> even do what you have listed above, so far as I can tell.
+>>
+>> We have:
+>> - OF_HAS_PRIOR_STAGE which indicates that U-Boot is not the first phase
+>> - OF_BOARD which indicates that the board can do anything it likes
+>> - BLOBLIST which indicates that there is a bloblist
+>>
+>> I proposed adding:
+>> - OF_BLOBLIST which indicates that U-Boot gets the DT from the bloblist
+>>
+>> I understood that your intention OF_BOARD would go away since there
+>> are almost no cases that need it. I was skeptical it could be done but
+>> I definitely agreed (and still do) that it would be great if that
+>> could go away, as we would not need OF_BLOBLIST since OF_BOARD would
+>> effectively mean the same thing.
+>>
+>> But when I look at this patch, that is not what is happening. In fact,
+>> there is no indication that the DT came from the bloblist. U-Boot will
+>> just report 'devicetree: board'. We must say where it came from.
+>>
+>> The other thing missing here is SPL. The bloblist is designed such
+>> that it can be set up in any phase of U-Boot, then is passed to
+>> following phases. So using IS_ENABLED(BLOBLIST) doesn't do what we
+>> need. As I noted, it breaks sandbox_spl. What happens if a board wants
+>> to use bloblist in SPL but doesn't want the SPL DT to come from a
+>> prior stage? What happens if SPL wants doesn't want to pass the U-Boot
+>> DT through to U-Boot in the bloblist? It is all just horribly
+>> confusing.
+>>
+>> So I believe, in fact, that we cannot get rid of OF_BOARD now, and
+>> perhaps for quite a long time. There is another discussion about
+>> Qualcomm where they want a gzipped DT attached to the end of U-Boot,
+>> for example. Perhaps the key problem with this patch is that it would
+>> ensure that OF_BOARD sticks around, since it means both a) Get the DT
+>> from bloblist if BLOBLIST; b) Get the DT from a board-specific
+>> mechanism if !BLOBLIST. That is not what we discussed.
+>>
+>> Why not just take my original patch and work from there? It will save
+>> a lot of time. We can then progressively migrate boards from OF_BOARD
+>> to OF_BLOBLIST and then perhaps one day remove OF_BOARD (I remain
+>> skeptical, but hopeful). The whole 'standard passage' thing [1] was
+>> carefully thought out *two years ago* and (I believe) dealt with all
+>> of the issues above.
+>>
+>> For now, we should apply the patches which bring in the spec changes,
+>> so we can figure out the rest of it. I have added my review tag for
+>> those.
+>>
+>> Regards,
+>> SImon
+>> >
+>> > Regards
+>> > /Ilias
+>> > >
+>> > > If in the future all boards a reusing bloblist for this feature, then
+>> > > sure, we can drop it. But we have things like rpi which do their own
+>> > > thing.
+>> > >
+>> > > > If it fulfills the above conditions, we can take the FDT from bloblist, otherwise from the predefined memory address.
+>> > > > This is fully backward compatible without adding a new build option.
+>> > >
+>> > > Again, we need to obtain the FDT from the bloblist if and only if the
+>> > > board requires it. It creates a lot of confusion to have it as an
+>> > > optional feature, when we know which way it should be.
+>> > >
+>> > > Ultimately OF_BOARD should go away. We just need to push bloblist to
+>> > > other projects and closed-source firmware as the correct way to pass a
+>> > > DT.
+>> > >
+>> > > Regards,
+>> > > Simon
+>> > > [.]
+>> >
+>> > [0] https://lore.kernel.org/u-boot/CAPnjgZ0SqVyj_drLEQrP21zPYCco3HOP-rYD+nKJMa0BVYpMDA@mail.gmail.com/
+>>
+>> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
