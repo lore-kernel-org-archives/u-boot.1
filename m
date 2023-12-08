@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922A6C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 18:53:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAD0C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 21:56:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 146AC8761B;
-	Fri,  8 Dec 2023 19:53:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E46587525;
+	Fri,  8 Dec 2023 22:56:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lx6eePTl";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QVM696iI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6ECD87630; Fri,  8 Dec 2023 19:53:02 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1A5AA87620; Fri,  8 Dec 2023 22:56:21 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A48B08761B
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 19:53:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D89EB87215
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 22:56:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so443335a12.0
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 10:53:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702061579; x=1702666379; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OK/c4lrUrjhndRxUThfq9xoSL7E1Yuy3F50+IiEhZDw=;
- b=Lx6eePTlncz470WWo57SI4Kn0Ic/67GUWC2vRswxXxuZhPaxyNoF+8RVkCQYcCdY38
- tp9MjydGjdMfY0tFzR2At/Em2jFq2zdyWoyKsjZWEpu9/C1xP19mcJNPNlneIrVzV4pT
- SBbwFzhcixvrHTPWRRoUE1ZeAkT/cbnZmF6BrsalAH9jWkanD5lItlHMCSr0Q1hUBdVw
- KdoEnTY1ZhzxXfelJDFH3PbOxEKg89x1eRJStCD3Ob03FWSFPFqMULxiR8kzi4inlA5u
- CuzEGns4OhZD6DWhMPSo/bfYp0R0hRiWpi/5ggKtsYZ3q44Y214Zl87nN1lHST8PY9Uc
- GccA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702061579; x=1702666379;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OK/c4lrUrjhndRxUThfq9xoSL7E1Yuy3F50+IiEhZDw=;
- b=KlPQylGXW1d9exvX9oNjdDhDCEXOgzpmdIKn85/zvU2n5VnuKdpTCBeqERQEsWf0uk
- KrqqkrfdXGRyLNL3bJIiO89SRtsvl9QYwOgzsY5DUYoa9BiKU59m2CgbzNzRqw0dKq9r
- wRcQYiST/ccJHnUEKqO9BzaMeqlHUUciEaXlc+zX9Nl6cSwmS7Q+80ZKUetDgXW75JIr
- IAT4Mz74Y8E3cgrnSAeFdCB+WAhO7iQZP/zty5ryPvSYNocIsmdi8onM1LJU/TI6l8Lv
- l/wUnqS2bLtmVP3ali7h3RM+Sg/XrjEW2gOKB7uu0qtaLsOIOFIbBKaGyUvCZ5HNSMjq
- xAgw==
-X-Gm-Message-State: AOJu0YxiEr8U/xKt2kizFH8G1/r1al+ewWfL/wPPGT/6OqzDgb1L9cSM
- 6uq/cnMBoUsaVqe9w4T9P4YD/pxTkdkaJS3/qHh+81eqlS0=
-X-Google-Smtp-Source: AGHT+IFxbVjTp7rI8M2iZMG5WwPp9fL1L/QpBTGiLXYVKz8T00WlM0H/Y1pS7qIaK3C+ykGPeV5uWQQLtXsnF383ITI=
-X-Received: by 2002:a17:90a:6345:b0:286:4055:63e0 with SMTP id
- v5-20020a17090a634500b00286405563e0mr1081462pjs.0.1702061578841; Fri, 08 Dec
- 2023 10:52:58 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 7A88AB83046
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 21:56:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC682C433CA
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 21:56:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1702072577;
+ bh=lLQ2WDCFYnh09MKNvKahHNehAE3mXonCy/B5T05x9JM=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=QVM696iIcTYOFN+ev+FZUSa0/ixShjERZF+VIKawdd9uLQrXYEX411unpB8wvAZut
+ kmruEk2LsZ0WrxbnQNh1cKguyfbgpz4yL6P0mVvsSdZx5zs/KagDL3fxtV2oRsRIJQ
+ UlsYw9d262QTPWJi25GWjm4+bFwH/nrlQLmLRT3IIRyWggljT7BpbMxU2Yt9w25K9F
+ zaxGru+oEKJN01GxqEMMuhiA1PsKZ86RazkibkaWzpwmX/vd85LqdWk21rDI0l6vtC
+ Dt2ZGycSZDwEvaHQJjlfn7x7JsAOPJgAjdUAXI43z7EcEOfZja5RCHIoZN0/BaRRub
+ BiK3mxuFgvy7Q==
+Received: by mail-lf1-f51.google.com with SMTP id
+ 2adb3069b0e04-50bfd3a5b54so2906551e87.3
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 13:56:17 -0800 (PST)
+X-Gm-Message-State: AOJu0Yz5oTllAkGl7xEFFdxpc852v2YqTMFatQNzJeHDsqeJOKS1tWPl
+ tPrJfXr7vWw8lsBouWVhTUoB9M4CZPuQ275BJg==
+X-Google-Smtp-Source: AGHT+IEI2ip3XV4V7TTB5nRPLVsv6tOfk4vWYEqLclmJPsP0iDuLLixjRpN97skNUaRQnS3dh1vfZAeeAx25aEDiGfc=
+X-Received: by 2002:a05:6512:a90:b0:50b:f23d:d804 with SMTP id
+ m16-20020a0565120a9000b0050bf23dd804mr338588lfu.77.1702072575996; Fri, 08 Dec
+ 2023 13:56:15 -0800 (PST)
 MIME-Version: 1.0
-References: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
-In-Reply-To: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 8 Dec 2023 15:52:46 -0300
-Message-ID: <CAOMZO5BzCRhNnseNq5RMP94GLt=1H9s742ywtm_LWOqTxaJcrg@mail.gmail.com>
-Subject: Re: iMX6, CONFIG_IMX_HAB and fuse_read()
-To: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
-Cc: u-boot@lists.denx.de
+References: <20231116172859.393744-1-sjg@chromium.org>
+ <20231208150042.GA1278773-robh@kernel.org>
+ <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+From: Rob Herring <robh@kernel.org>
+Date: Fri, 8 Dec 2023 15:56:02 -0600
+X-Gmail-Original-Message-ID: <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
+Message-ID: <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
+ Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Pratyush Yadav <ptyadav@amazon.de>, 
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,20 +87,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lisandro,
-
-On Fri, Dec 8, 2023 at 3:43=E2=80=AFPM Lisandro P=C3=A9rez Meyer <lpmeyer@i=
-cs.com> wrote:
+On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Hi!
+> Hi Rob,
 >
-> I am currently not subscribed (already filled the form waiting for
-> confirmation), so please CC me for the moment.
+> On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
+> >
+> > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
+> > > Add a compatible string for binman, so we can extend fixed-partitions
+> > > in various ways.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v5)
+> > >
+> > > Changes in v5:
+> > > - Add #address/size-cells and parternProperties
+> > > - Drop $ref to fixed-partitions.yaml
+> > > - Drop 'select: false'
+> > >
+> > > Changes in v4:
+> > > - Change subject line
+> > >
+> > > Changes in v3:
+> > > - Drop fixed-partition additional compatible string
+> > > - Drop fixed-partitions from the example
+> > > - Mention use of compatible instead of label
+> > >
+> > > Changes in v2:
+> > > - Drop mention of 'enhanced features' in fixed-partitions.yaml
+> > > - Mention Binman input and output properties
+> > > - Use plain partition@xxx for the node name
+> > >
+> > >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++++++++=
+++
+> > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+> > >  MAINTAINERS                                   |  5 ++
+> > >  3 files changed, 74 insertions(+)
+> > >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/=
+binman.yaml
+> > >
+> > > diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.=
+yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> > > new file mode 100644
+> > > index 000000000000..329217550a98
+> > > --- /dev/null
+> > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> > > @@ -0,0 +1,68 @@
+> > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > +# Copyright 2023 Google LLC
+> > > +
+> > > +%YAML 1.2
+> > > +---
+> > > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
+> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > +
+> > > +title: Binman firmware layout
+> > > +
+> > > +maintainers:
+> > > +  - Simon Glass <sjg@chromium.org>
+> > > +
+> > > +description: |
+> > > +  The binman node provides a layout for firmware, used when packagin=
+g firmware
+> > > +  from multiple projects. It is based on fixed-partitions, with some
+> > > +  extensions, but uses 'compatible' to indicate the contents of the =
+node, to
+> > > +  avoid perturbing or confusing existing installations which use 'la=
+bel' for a
+> > > +  particular purpose.
+> > > +
+> > > +  Binman supports properties used as inputs to the firmware-packagin=
+g process,
+> > > +  such as those which control alignment of partitions. This binding =
+addresses
+> > > +  these 'input' properties. For example, it is common for the 'reg' =
+property
+> > > +  (an 'output' property) to be set by Binman, based on the alignment=
+ requested
+> > > +  in the input.
+> > > +
+> > > +  Once processing is complete, input properties have mostly served t=
+heir
+> > > +  purpose, at least until the firmware is repacked later, e.g. due t=
+o a
+> > > +  firmware update. The 'fixed-partitions' binding should provide eno=
+ugh
+> > > +  information to read the firmware at runtime, including decompressi=
+on if
+> > > +  needed.
+> >
+> > How is this going to work exactly? binman reads these nodes and then
+> > writes out 'fixed-partitions' nodes. But then you've lost the binman
+> > specifc parts needed for repacking.
 >
-> I am trying to enable Secure Boot/HAB on u-boot 2022.07. In a previous
+> No, they are the same node. I do want the extra information to stick
+> around. So long as it is compatible with fixed-partition as well, this
+> should work OK.
 
-Please try the top of tree U-Boot instead.
+How can it be both? The partitions node compatible can be either
+'fixed-partitions' or 'binman'.
 
-On the mx7dsabresd_defconfig, for example, both CONFIG_IMX_HAB=3Dy and
-CONFIG_CMD_FUSE=3Dy are selected
-and this target builds fine.
+In the partition nodes, 'align' for example is allowed for a binman
+partition but not a fixed-partition.
+
+Note that the schema may not actually warn on extra properties ATM
+because there are some issues with the schema structure. Since there
+can be nested partittions, that complicates matters. It's been on my
+todo list to fix.
+
+
+Rob
