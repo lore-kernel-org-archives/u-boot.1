@@ -4,79 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D7AC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 15:12:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10EB1C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 15:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D80C87536;
-	Fri,  8 Dec 2023 16:12:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4DE348754A;
+	Fri,  8 Dec 2023 16:33:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tLkPyjGV";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="cXOxmgVJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 135D986308; Fri,  8 Dec 2023 16:12:33 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4547B875A0; Fri,  8 Dec 2023 16:33:22 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAC5287536;
- Fri,  8 Dec 2023 16:12:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 08BED87536
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 16:33:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 42C45CE0D55;
- Fri,  8 Dec 2023 15:12:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56FB8C433CB;
- Fri,  8 Dec 2023 15:12:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702048345;
- bh=7R641hSDXjIXLF4BWBZ4LxdbMqaGfhOyauhC3A+X7J8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=tLkPyjGVZlqDE9yBF9ZmMDtuSyRSVF8kz7mmy8Ciwol68fdXKpgWflTJYunMudbP1
- 6V/YXyKfxI0FUgIfQgvaC/ueORwLQRqR/RstiPwjIJPMX6mcN+ibkem2azuH7Kz3UX
- AlteVFSTWU6mSnw1ePxlUpLL5sy63Ma+/l8U0CYq6IioOMnVZ163hSl2n+UJ/u/sGg
- eh0sZ/DEUmnc9L8k36LmVqzwTs2VS0c9Racv+p2l6n6NSkw3rowVs9v9xThxGGwbMM
- dqTeW0HlabhaV/kDoI87I9105TmqwDnEtjhExX41h0K0gdWzqNbVFOS23Go4wi/0+E
- 9botpcCVd2G9w==
-Date: Fri, 8 Dec 2023 15:12:19 +0000
-From: Conor Dooley <conor@kernel.org>
-To: ff <ff@shokubai.tech>
-Cc: Rob Herring <robh+dt@kernel.org>, Sumit Garg <sumit.garg@linaro.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
- Tom Rini <trini@konsulko.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- "conor+dt@kernel.org" <conor+dt@kernel.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>,
- "boot-architecture@lists.linaro.org" <boot-architecture@lists.linaro.org>
-Subject: Re: [PATCH 00/21] Qualcomm generic board support
-Message-ID: <20231208-reshoot-operation-a36504ba2ed9@spud>
-References: <f72c772b-7fd7-4558-96d3-086f8ab7515a@linaro.org>
- <CAFA6WYOPh6UBt3FDm-c0tfp3YvWtRHkaxy2CJNg8ORKOwPwq0w@mail.gmail.com>
- <34334add-4017-46f6-873a-d9233e29f640@linaro.org>
- <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
- <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
- <5C77B3D5-3659-40BC-86BB-E73E7034E017@shokubai.tech>
- <CAL_JsqLBQCStz39-5d0CSnZzuSfc6473d2=HEY2NF7Hm83L9YA@mail.gmail.com>
- <61B1DEC4-4004-491A-B5A9-1548ACAD6104@shokubai.tech>
- <20231207-unmixable-surround-ff6c525e36fd@spud>
- <390B4BCF-EC60-4409-9A85-FE8607334C39@shokubai.tech>
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1702049599; x=1704641599;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=zyGrAc+2LS7X4+ksm0pipOpS5QiFmd3kIZSyJ4oypvY=;
+ b=cXOxmgVJH9HkMdOIuHbIrGATjQyxyzqHOZ7fwP7gDUu//hExZj4Yk/sxeV2OLjfQ
+ puqkZGKJ5S+4V9H4eHlOPy3V7a2iq1bND13AM7xj7g5SqWTzgTJtKaCiknxjgkLP
+ V5bSMKAusHLjS6IIL4GkXJ90rnOzof41ALUTtrgEVLs=;
+X-AuditID: ac14000a-fbefe7000000290d-35-6573373f102d
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 3C.A0.10509.F3733756;
+ Fri,  8 Dec 2023 16:33:19 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 8 Dec 2023
+ 16:33:19 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, <nm@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v3 0/2] *** Add support for phyCORE-AM62x ***
+Date: Fri, 8 Dec 2023 16:33:09 +0100
+Message-ID: <20231208153311.2422720-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="/MZd3HCZHKlEueEQ"
-Content-Disposition: inline
-In-Reply-To: <390B4BCF-EC60-4409-9A85-FE8607334C39@shokubai.tech>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrKLMWRmVeSWpSXmKPExsWyRpKBR9fevDjV4ORzNYs3P84yWUydtJnd
+ 4u3eTnaL7nfqDiwerw6sYvc4e2cHo0d/dwurx/Eb25kCWKK4bFJSczLLUov07RK4Mia/vshc
+ cF684s/HdpYGxi7hLkZODgkBE4lPf8+zgthCAouZJN7Oju9i5AKyHzFKLG+ewgSSYBNQl7iz
+ 4RtYkYiAlMTLzo3MIDazgKPE00/3WUBsYQFbiTUT/wHVcHCwCKhIfJobDRLmFbCUeHPnFRPE
+ LnmJmZe+s0PEBSVOznzCAjFGXqJ562yokRISB1+8YIa4R17ixaXlLDC90869ZoawQyW2ftnO
+ NIFRYBaSUbOQjJqFZNQCRuZVjEK5mcnZqUWZ2XoFGZUlqcl6KambGEFBK8LAtYOxb47HIUYm
+ DsZDjBIczEoivDnn81OFeFMSK6tSi/Lji0pzUosPMUpzsCiJ867uCE4VEkhPLEnNTk0tSC2C
+ yTJxcEo1MIY+4dqrrdtbs/dQvl/dh8w4l0ka135FbMjkMzrbl6TyxKW25q2CdXGW7vSQI28t
+ TL5r9JyYfj09flmak++R0443Dz9eyq7nJBPwQcDqxtpwZfMJyYkf99w/G7DBqqOhSu/VVEUV
+ 72OPXjRdtgqtK1//1u9s89o1T5qkXRzqfgfu8C0QENL/rsRSnJFoqMVcVJwIADr6hNRIAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,205 +84,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+v3:
+  - Add boot modes chapter
+  - Reference tiboot3.bin instead of GP binary for default flashing
+  - Minor spelling fixes
+  - Pick up Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
---/MZd3HCZHKlEueEQ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+v2: https://lists.denx.de/pipermail/u-boot/2023-November/538971.html
+v1: https://lists.denx.de/pipermail/u-boot/2023-October/535750.html
 
-On Fri, Dec 08, 2023 at 09:39:27AM +0000, ff wrote:
->=20
->=20
-> Le 7 d=C3=A9c. 2023 =C3=A0 21:31, Conor Dooley <conor@kernel.org> a =C3=
-=A9crit :
->=20
-> What on earth has happened here with quoting? Please fix your mail
-> client man, this mail is a mess to read.
->=20
-> Conor: Hopefully I have now fixed MacOS Mail configuration=E2=80=A6
-> For all: please accept my apologies on past inconveniences.
+Wadim Egorov (2):
+  board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
+  doc: board: phytec: Add phyCORE-AM62x
 
-Judging by this mail looking like it does, nothing has changed?
-You can check it on lore too:
-https://lore.kernel.org/u-boot/CAC_iWjKKwjpD1VAbXJaB=3DUDQPWMS+k65tv-qL=3DJ=
-newzSEhGEow@mail.gmail.com/T/#ma8c4fc1268c68aab0b05b96b2cea5c90cc2525b8
+ arch/arm/dts/Makefile                         |    4 +-
+ .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
+ arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
+ .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  166 ++
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  380 +++
+ arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  119 +
+ arch/arm/mach-k3/am62x/Kconfig                |   17 +
+ board/phytec/phycore_am62x/Kconfig            |   33 +
+ board/phytec/phycore_am62x/MAINTAINERS        |   15 +
+ board/phytec/phycore_am62x/Makefile           |    8 +
+ board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
+ board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
+ board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
+ board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
+ board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
+ board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
+ configs/phycore_am62x_a53_defconfig           |  115 +
+ configs/phycore_am62x_r5_defconfig            |  130 +
+ doc/board/phytec/index.rst                    |    1 +
+ doc/board/phytec/phycore-am62x.rst            |  158 ++
+ doc/board/ti/k3.rst                           |    1 +
+ include/configs/phycore_am62x.h               |   15 +
+ 23 files changed, 5538 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
+ create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
+ create mode 100644 board/phytec/phycore_am62x/Kconfig
+ create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
+ create mode 100644 board/phytec/phycore_am62x/Makefile
+ create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
+ create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
+ create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
+ create mode 100644 configs/phycore_am62x_a53_defconfig
+ create mode 100644 configs/phycore_am62x_r5_defconfig
+ create mode 100644 doc/board/phytec/phycore-am62x.rst
+ create mode 100644 include/configs/phycore_am62x.h
 
-I'm not going to fix the quoting by hand, I have better things to do :)
+-- 
+2.34.1
 
-Cheers,
-Conor.
-
->=20
-> On Thu, Dec 07, 2023 at 08:24:01PM +0000, ff wrote:
->=20
->=20
-> Le 7 d=C3=A9c. 2023 =C3=A0 19:51, Rob Herring <robh+dt@kernel.org> a =C3=
-=A9crit :
->=20
-> =EF=BB=BFOn Thu, Dec 7, 2023 at 2:08=E2=80=AFAM ff <ff@shokubai.tech> wro=
-te:
->=20
->=20
->=20
-> Le 6 d=C3=A9c. 2023 =C3=A0 21:42, Rob Herring <robh+dt@kernel.org> a =C3=
-=A9crit :
->=20
-> =EF=BB=BFOn Tue, Dec 5, 2023 at 11:05=E2=80=AFPM Sumit Garg <sumit.garg@l=
-inaro.org> wrote:
->=20
-> On Tue, 5 Dec 2023 at 15:39, Krzysztof Kozlowski
-> <krzysztof.kozlowski@linaro.org> wrote:
->=20
-> On 05/12/2023 10:45, Sumit Garg wrote:
-> + U-boot custodians list
->=20
-> On Tue, 5 Dec 2023 at 12:58, Krzysztof Kozlowski
-> <krzysztof.kozlowski@linaro.org> wrote:
->=20
-> On 05/12/2023 08:13, Sumit Garg wrote:
-> @DT bindings maintainers,
->=20
-> Given the ease of maintenance of DT bindings within Linux kernel
-> source tree, I don't have a specific objection there. But can we ease
-> DTS testing for firmware/bootloader projects by providing a versioned
-> release package for DT bindings? Or if someone else has a better idea
-> here please feel free to chime in.
->=20
-> This doesn't work for you?:
->=20
-> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-reb=
-asing.git/
->=20
-> Thanks, this is certainly a good step which I wasn't aware of. Further
-> simplification can be done to decouple devicetree source files from DT
-> bindings.
->=20
-> Why?
->=20
-> I suppose you are already aware that Linux DTS files are a subset of
-> what could be supported by devicetree schemas. There can be
-> firmware/bootloader specific properties (one example being [1]) which
-> Linux kernel can simply ignore. Will you be willing to add all of
-> those DT properties to Linux DTS files and maintain them?
->=20
-> We already added them and we already maintain them. DTS describes the
-> hardware, not the OS-subset of the hardware.
->=20
-> Let look at some numbers if your statement is justified or not for the
-> example I gave:
->=20
-> u-boot$ git grep -nr bootph-* arch/arm* | wc -l
-> 4079
->=20
-> linux$ git grep -nr bootph-* arch/arm* | wc -l
-> 267
->=20
-> I have no control over whether anyone has submitted the other 3812 instan=
-ces.
->=20
-> It looks like there is always going to be a catch up game regarding DT
-> properties which either Linux kernel or u-boot or any other
-> firmware/bootloader project don't care about.
->=20
-> As long as dts files in u-boot are manually sync'ed, yes. That is the
-> problem and it doesn't matter if we have a standalone repository or
-> not.
->=20
-> If you want to move in that direction, start automating what u-boot
-> imports. You need to do that for bindings if you want to run
-> validation, so why not dts files too?
->=20
-> However, DT bindings are something which should be common, the
-> hardware description of a device should be universal. IMO, splitting
->=20
-> Both DT bindings and DTS should be common. I don't see the difference.
->=20
-> If we really care about DTS to be common then the contribution model
-> has to change where there is a single repo hosting DT bindings and
-> DTS. All other projects whether it is Linux kernel or u-boot or any
-> other OS/firmware/bootloader are just consuming DTS files from that
-> single repo.
->=20
-> Really, only the kernel and u-boot matter. No, I don't mean I don't
-> care about other projects, but those are the 2 with the widest h/w
-> support by far and which have a major effort to sync copies of dts
-> files in both projects. The rest are just noise in terms of this
-> problem.
->=20
-> I suppose this is something that Linux DT maintainers
-> have objected to in the past for ease of maintenance. I am not sure if
-> you folks are willing to change that stance.
->=20
-> The issue is no one steps up to help maintain such a repository while
-> there is lots of review and maintainer work on what goes into the
-> kernel tree. I'm happy to direct my binding review attention to
-> wherever the majority of the bindings go. But the work on the DTS side
-> is mostly SoC tree maintainers and sub-maintainers.
->=20
-> Assume for a minute we have this standalone repo. What happens next?
-> We start with an empty repo and then merge and move platforms 1 by 1?
->=20
-> What about leveraging SystemReady-IR compliant board maintainers and star=
-t with a core of motivated people ?
->=20
-> I think there are 2 ATM. Synquacer and i.MX8 variants.
->=20
-> Based on  https://www.arm.com/architecture/system-architectures/systemrea=
-dy-certification-program/ir
-> roughly 30 boards.
->=20
-> Synquacer only
-> has a DT in u-boot, so not really anything to do there.
-> I'm pretty
-> sure the certified DTBs for i.MX8 don't match what's in u-boot or the
-> kernel tree. Hopefully, it's just a subset, but still, there's a gap.
-> I don't know that there is motivation there either.
-> Note that SystemReady currently only requires every node with
-> 'compatible' have a schema. It does not yet require no schema
-> warnings. If we went with a 1 by 1 approach, I would push that
-> platforms have to be free of warnings.
->=20
-> How many years will that take?
->=20
-> Should all platforms following that organization be a goal?
->=20
-> You mean should all platforms be moved? Absolutely. I don't think we
-> want to solve the problem of having DTS files in 2 places by creating
-> a 3rd place.
->=20
-> I think this bit here is the only thing you actually wrote:
->=20
-> Actually, if we limit he DTS in the third place for SystemReady-IR,
-> there should be no DTB in the Linux distribution.
-> It would be the equivalent as ACPI boards . So is it still an issue ?
-> A reference to the the third repo may be hinted in a text file.
->=20
-> SystemReady is only for one architecture, why would using it as the
-> centralised point for devicetree files make sense?
->=20
-> SystemReady is an Arm certification but built on EBBR which is
-> the important part and also adopted by RISC-V.
-> So when I said SystemReady, one should read EBBR.
-> EBBR is promoting a DT life cycle that is in line with
-> having an out of OS/Firmware repos definitions.
->=20
-> I don't really think 1 by 1 is the right approach. I was just
-> enumerating how this could work. It's not that useful to say we need a
-> standalone repo without working thru the logistics of how exactly that
-> will work.
->=20
-> Rob
->=20
-
---/MZd3HCZHKlEueEQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZXMyUgAKCRB4tDGHoIJi
-0h8YAQDb9uV9Pvzi4RzIpgq0umFCu6MxISfkx7PstLLRhwDxBwEAnbWSp8Wv3IIx
-2Utlcd7eLa0jdH+i853oTVPqoZEHfAA=
-=YN+v
------END PGP SIGNATURE-----
-
---/MZd3HCZHKlEueEQ--
