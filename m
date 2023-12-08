@@ -4,72 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1EAC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 13:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18340C46CC5
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 13:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DE6B8754A;
-	Fri,  8 Dec 2023 14:20:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BD5787590;
+	Fri,  8 Dec 2023 14:20:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shokubai.tech
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="EVFfjGpS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=shokubai.tech header.i=@shokubai.tech header.b="wMqEwyos";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6056683414; Fri,  8 Dec 2023 09:37:50 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9CAD5870D5; Fri,  8 Dec 2023 10:39:35 +0100 (CET)
+Received: from 1.mo619.mail-out.ovh.net (1.mo619.mail-out.ovh.net
+ [178.33.253.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AF5E8642A
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 09:37:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFE9D87527;
+ Fri,  8 Dec 2023 10:39:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wan.yee.lau@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1702024666; x=1733560666;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=wHI5oNqxECHqe/ym5hpRDPuS35JhBCm02lE70Y58gsU=;
- b=EVFfjGpSuNmXpHWSgfqB2ZzHi1AJNRORpBIoSau5XNCSmJe4FDwZ+1pR
- 4Qy9msx4ufUCGgbPP1oSJfOUoXqnRruDUbiT04GwEQKG+mRvHvUPYaq/5
- YrB5S8WdQLVSU+3fQuNs3L/Vz6/rtUtcN5yJln+RLYlZWMtLDOtGMfVdG
- lgHevjscMCRJFSKUy1yX0+uI31PXUTIWg9ZHRMNr0pBT2iDmC1us/B0rx
- PNF8JnDo3+/1A43zXd9+bCE5s2mHfsZIEbcqfWrzM+uXWN7rPRN6NndnW
- w+gi9koiQH8+ZlnIPj+QPIO1x69sPKWkdm1TLfyreVuU9N/d5aA7pne+z A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10917"; a="460855852"
-X-IronPort-AV: E=Sophos;i="6.04,260,1695711600"; d="scan'208";a="460855852"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 Dec 2023 00:37:36 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10917"; a="945350199"
-X-IronPort-AV: E=Sophos;i="6.04,260,1695711600"; d="scan'208";a="945350199"
-Received: from pglc00507.png.intel.com ([10.221.239.199])
- by orsmga005.jf.intel.com with ESMTP; 08 Dec 2023 00:37:31 -0800
-From: wan.yee.lau@intel.com
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Bin Meng <bmeng.cn@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>, Peng Fan <peng.fan@nxp.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Konrad Dybcio <konrad.dybcio@linaro.org>, Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
- Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
- Alif <alif.zakuan.yuslaimi@intel.com>,
- Teik Heng <teik.heng.chong@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>,
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [PATCH v1 1/1] drivers: misc: Add socfpga_dtreg driver for Intel
- SoCFPGA
-Date: Fri,  8 Dec 2023 16:37:26 +0800
-Message-Id: <20231208083726.26906-1-wan.yee.lau@intel.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=none (p=none dis=none) header.from=shokubai.tech
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ff@shokubai.tech
+Received: from DAG2EX3.indiv5.local (unknown [10.111.172.95])
+ by mo619.mail-out.ovh.net (Postfix) with ESMTPS id B81CE23E47;
+ Fri,  8 Dec 2023 09:39:28 +0000 (UTC)
+Received: from DAG2EX1.indiv5.local (172.16.2.21) by DAG2EX3.indiv5.local
+ (172.16.2.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Fri, 8 Dec
+ 2023 10:39:28 +0100
+Received: from DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b]) by
+ DAG2EX1.indiv5.local ([fe80::8db3:f8fe:2645:753b%6]) with mapi id
+ 15.01.2507.035; Fri, 8 Dec 2023 10:39:27 +0100
+From: ff <ff@shokubai.tech>
+To: Conor Dooley <conor@kernel.org>
+CC: Rob Herring <robh+dt@kernel.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, "conor+dt@kernel.org"
+ <conor+dt@kernel.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, "Rayagonda
+ Kokatanur" <rayagonda.kokatanur@broadcom.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jorge Ramirez-Ortiz
+ <jorge.ramirez.ortiz@gmail.com>, Stephan Gerhold <stephan@gerhold.net>,
+ "Marek Vasut" <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ "Simon Glass" <sjg@chromium.org>, "boot-architecture@lists.linaro.org"
+ <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Thread-Topic: [PATCH 00/21] Qualcomm generic board support
+Thread-Index: AQHaJnNnhdt4kVlXP0S2F0B2DoM1cbCZSWcAgADt+wCAADt7e4ABQ+dlgAD1AACAANBmoYAAoteAgAAquTX///FMAIAA3CKA
+Date: Fri, 8 Dec 2023 09:39:27 +0000
+Message-ID: <390B4BCF-EC60-4409-9A85-FE8607334C39@shokubai.tech>
+References: <CAL_JsqL4dKbziAgwaCDz7sw-evuX7LZ3E-H6h=xQ9cXiyThY1Q@mail.gmail.com>
+ <CAFA6WYPnobZ+eTGuOs+yTYNnuBu6i37Db9ZS2gr36heH1mFV5Q@mail.gmail.com>
+ <f72c772b-7fd7-4558-96d3-086f8ab7515a@linaro.org>
+ <CAFA6WYOPh6UBt3FDm-c0tfp3YvWtRHkaxy2CJNg8ORKOwPwq0w@mail.gmail.com>
+ <34334add-4017-46f6-873a-d9233e29f640@linaro.org>
+ <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
+ <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
+ <5C77B3D5-3659-40BC-86BB-E73E7034E017@shokubai.tech>
+ <CAL_JsqLBQCStz39-5d0CSnZzuSfc6473d2=HEY2NF7Hm83L9YA@mail.gmail.com>
+ <61B1DEC4-4004-491A-B5A9-1548ACAD6104@shokubai.tech>
+ <20231207-unmixable-surround-ff6c525e36fd@spud>
+In-Reply-To: <20231207-unmixable-surround-ff6c525e36fd@spud>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [176.145.220.134]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; d=shokubai.tech; s=ovhex1078890-selector1; 
+ c=relaxed/relaxed; t=1702028368; h=from:to:subject:date;
+ bh=SrTGvSGpep+TQuOOhiqvW8m75R3hycl7yTv5SrnF26g=;
+ b=wMqEwyossLeztTdbaS6Xxjou09GLGMx7+IufLKUZKyLqXfDUS355WzEi1NL+3cg7tavXboDFQICkqbkE9L7eRtwNncZ6jGP7Vs4JG8N4unPGVGd/6J8GEYBRAqWKV43NCxAbcotpAFZc6Q96jPHNx3JiegDeM+kVXjvp6uo4dmsz9SzbXgpzHoDMZbZfmLsc1G78Uj9+DYqAZ45TGoMicAKOHEQ8xm0r2rmrCPB9aTo1ezvk8NPqsqDuA+hbUx8jTfQbfHkONa3ER3s/zUpp4zM3o+Ee/I7noAx9//HCm1uR/4tE6PmWsMiBe7d3yOB0qj4uKwPqPTRFrX2pZ0rFMQ==
+X-Ovh-Tracer-Id: 16451930916043079408
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrudekiedgtdeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefuthffkfhfjghitgggsegrtdhmredttdejnecuhfhrohhmpehffhcuoehffhesshhhohhkuhgsrghirdhtvggthheqnecuggftrfgrthhtvghrnhepudefhefhffegieegiefffffhtdelhfdtkefgfeeffedttdejuedvfeelhffhveeinecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdprghrmhdrtghomhenucfkphepuddvjedrtddrtddruddpudejiedrudeghedrvddvtddrudefgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeduvdejrddtrddtrddupdhmrghilhhfrhhomhepoehffhesshhhohhkuhgsrghirdhtvggthheqpdhnsggprhgtphhtthhopedupdhrtghpthhtoheptghonhhorheskhgvrhhnvghlrdhorhhgpdhrohgshhdoughtsehkvghrnhgvlhdrohhrghdpshhumhhithdrghgrrhhgsehlihhnrghrohdrohhrghdpkhhriiihshiithhofhdrkhhoiihlohifshhkiheslhhinhgrrhhordhorhhgpdhuqdgsohhothdqtghushhtohguihgrnhhssehlihhsthhsrdguvghngidruggvpdhtrhhinhhisehkohhnshhulhhkohdrtghomhdpkhhriiihshiithhofhdrkhhoiihlohifshhkih
+ doughtsehlihhnrghrohdrohhrghdptghonhhorhdoughtsehkvghrnhgvlhdrohhrghdptggrlhgvsgdrtghonhhnohhllhihsehlihhnrghrohdrohhrghdpnhgvihhlrdgrrhhmshhtrhhonhhgsehlihhnrghrohdrohhrghdprhhfrhhivggurdguvghvsehgmhgrihhlrdgtohhmpdgushgrnhhkohhushhkihesghhmrghilhdrtghomhdpphgvnhhgrdhfrghnsehngihprdgtohhmpdhjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgrhigrghhonhgurgdrkhhokhgrthgrnhhurhessghrohgruggtohhmrdgtohhmpdhluhhkmhgrseguvghngidruggvpdhsvggrnhhgrgdvsehgmhgrihhlrdgtohhmpdhjohhrghgvrdhrrghmihhrvgiirdhorhhtihiisehgmhgrihhlrdgtohhmpdhsthgvphhhrghnsehgvghrhhholhgurdhnvghtpdhmrghrvgigseguvghngidruggvpdhuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpshhjghestghhrhhomhhiuhhmrdhorhhgpdgsohhothdqrghrtghhihhtvggtthhurhgvsehlihhsthhsrdhlihhnrghrohdrohhrghdpoffvtefjohhsthepmhhoieduledpmhhouggvpehsmhhtphhouhht
 X-Mailman-Approved-At: Fri, 08 Dec 2023 14:20:38 +0100
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,242 +104,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Wan Yee Lau <wan.yee.lau@intel.com>
-
-This driver can be used to provide user a clean interface and all register
-settings are centralized in one place, device tree without need for
-hardcoding in the source code.
-
-Signed-off-by: Wan Yee Lau <wan.yee.lau@intel.com>
----
- .../misc/socfpga_dtreg.txt                    |  66 ++++++++++
- drivers/misc/Kconfig                          |   7 ++
- drivers/misc/Makefile                         |   1 +
- drivers/misc/socfpga_dtreg.c                  | 117 ++++++++++++++++++
- 4 files changed, 191 insertions(+)
- create mode 100644 doc/device-tree-bindings/misc/socfpga_dtreg.txt
- create mode 100644 drivers/misc/socfpga_dtreg.c
-
-diff --git a/doc/device-tree-bindings/misc/socfpga_dtreg.txt b/doc/device-tree-bindings/misc/socfpga_dtreg.txt
-new file mode 100644
-index 0000000000..5458103f88
---- /dev/null
-+++ b/doc/device-tree-bindings/misc/socfpga_dtreg.txt
-@@ -0,0 +1,66 @@
-+* Firewall and privilege register settings in device tree
-+
-+Required properties:
-+--------------------
-+
-+- compatible: should contain "intel,socfpga-dtreg"
-+- reg: Physical base address and size of block register.
-+- intel,offset-settings: 32-bit offset address of block register,
-+			 followed by 32-bit value settings and
-+			 the masking bits, only masking bit
-+			 set to 1 allows modification.
-+
-+This driver can be used to provide user a clean interface and all register
-+settings are centralized in one place, device tree without need for
-+hardcoding in the source code.
-+
-+General setup would be to set the memory address used by the register,
-+followed by the offset-settings containing the 32-bit offset address
-+of the block register, then the 32-bit value settings and
-+lastly the masking bits.
-+
-+Example:
-+--------
-+
-+Configuration for multiple dtreg node support in device tree:
-+
-+	socfpga_mainfirewall: socfpga-mainfirewall {
-+		compatible = "intel,socfpga-dtreg";
-+                	#address-cells = <1>;
-+                        #size-cells = <1>;
-+		        bootph-all;
-+
-+                        coh_cpu0_bypass_OC_Firewall_main_Firewall@f7100200 {
-+                        	reg = <0xf7100200 0x00000014>;
-+                                intel,offset-settings =
-+                                	/* Disable ocram security at CCU for non secure access */
-+                                        <0x0000004 0x8000ffff 0xe007ffff>,
-+                                        <0x0000008 0x8000ffff 0xe007ffff>,
-+                                        <0x000000c 0x8000ffff 0xe007ffff>,
-+                                        <0x0000010 0x8000ffff 0xe007ffff>;
-+                                bootph-all;
-+                        };
-+                };
-+
-+	socfpga_mpfefirewall: socfpga-mpfefirewall {
-+        	compatible = "intel,socfpga-dtreg";
-+                	#address-cells = <1>;
-+                        #size-cells = <1>;
-+			bootph-all;
-+
-+                        soc_noc_fw_mpfe_csr_inst_0_mpfe_scr@f8020000 {
-+                                reg = <0xf8020000 0x0000001c>;
-+                                intel,offset-settings =
-+                                        /* Disable MPFE firewall for SMMU */
-+                                        <0x00000000 0x00010101 0x00010101>,
-+                                        /* Disable MPFE firewall for HMC adapter */
-+                                        <0x00000004 0x00000001 0x00010101>;
-+				bootph-all;
-+                        };
-+                };
-+
-+To call the nodes use:
-+
-+	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-mainfirewall", &dev);
-+	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-mpfefirewall", &dev);
-+
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index fccd9b89b8..c423905ba2 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -683,4 +683,11 @@ config SL28CPLD
- 	  the base driver which provides common access methods for the
- 	  sub-drivers.
-
-+config SPL_SOCFPGA_DT_REG
-+	bool "Enable register setting from device tree in SPL"
-+	depends on SPL
-+	help
-+	  Enable register setting from device tree. This also
-+	  provides user a clean interface and all register settings are
-+	  centralized in one place, device tree.
- endmenu
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index b67b82358a..8f813edd84 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -89,3 +89,4 @@ obj-$(CONFIG_K3_AVS0) += k3_avs.o
- obj-$(CONFIG_ESM_K3) += k3_esm.o
- obj-$(CONFIG_ESM_PMIC) += esm_pmic.o
- obj-$(CONFIG_SL28CPLD) += sl28cpld.o
-+obj-$(CONFIG_SPL_SOCFPGA_DT_REG) += socfpga_dtreg.o
-diff --git a/drivers/misc/socfpga_dtreg.c b/drivers/misc/socfpga_dtreg.c
-new file mode 100644
-index 0000000000..982f9592cb
---- /dev/null
-+++ b/drivers/misc/socfpga_dtreg.c
-@@ -0,0 +1,117 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2023 Intel Corporation <www.intel.com>
-+ */
-+
-+#include <asm/io.h>
-+#include <common.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <linux/sizes.h>
-+
-+#define NUMBER_OF_ELEMENTS 3
-+
-+static int socfpga_dtreg_probe(struct udevice *dev)
-+{
-+	const fdt32_t *list;
-+	fdt_addr_t offset, base;
-+	fdt_val_t val, read_val, mask, set_mask;
-+	int size, i;
-+	u32 blk_sz, reg;
-+	ofnode node;
-+	const char *name = NULL;
-+
-+	debug("%s(dev=%p)\n", __func__, dev);
-+
-+	if (!dev_has_ofnode(dev))
-+		return 0;
-+
-+	dev_for_each_subnode(node, dev) {
-+		name = ofnode_get_name(node);
-+		if (!name)
-+			return -EINVAL;
-+
-+		if (ofnode_read_u32_index(node, "reg", 1, &blk_sz))
-+			return -EINVAL;
-+
-+		base = ofnode_get_addr(node);
-+		if (base == FDT_ADDR_T_NONE)
-+			return -EINVAL;
-+
-+		debug("%s(node_offset 0x%lx node_name %s ", __func__,
-+		      node.of_offset, name);
-+		debug("node addr 0x%llx blk sz 0x%x)\n", base, blk_sz);
-+
-+		list = ofnode_read_prop(node, "intel,offset-settings", &size);
-+		if (!list)
-+			return -EINVAL;
-+
-+		debug("%s(intel,offset-settings property size=%x)\n", __func__,
-+		      size);
-+		size /= sizeof(*list) * NUMBER_OF_ELEMENTS;
-+
-+		/*
-+		 * First element: offset
-+		 * Second element: val
-+		 * Third element: mask
-+		 */
-+		for (i = 0; i < size; i++) {
-+			offset = fdt32_to_cpu(*list++);
-+			val = fdt32_to_cpu(*list++);
-+
-+			/* Reads the masking bit value from the list */
-+			mask = fdt32_to_cpu(*list++);
-+
-+			/*
-+			 * Reads out the offsets, value and masking bits
-+			 * Ex: <0x00000000 0x00000230 0xffffffff>
-+			 */
-+			debug("%s(intel,offset-settings 0x%llx : 0x%llx : 0x%llx)\n",
-+			      __func__, offset, val, mask);
-+
-+			if (blk_sz < offset + SZ_4) {
-+				printf("%s: Overflow as offset 0x%llx or reg",
-+				       __func__, offset);
-+				printf(" write is more than block size 0x%x\n",
-+				       blk_sz);
-+				return -EINVAL;
-+			}
-+
-+			if (mask != 0) {
-+				if (mask == 0xffffffff) {
-+					reg = base + offset;
-+					writel(val, (uintptr_t)reg);
-+				} else {
-+					/* Mask the value with the masking bits */
-+					set_mask = val & mask;
-+
-+					reg = base + offset;
-+
-+					/* Clears and sets specific bits in the register */
-+					clrsetbits_le32((uintptr_t)reg, mask, set_mask);
-+				}
-+			}
-+
-+			read_val = readl((uintptr_t)reg);
-+
-+			/* Reads out the register, masked value and the read value */
-+			debug("%s(reg 0x%x = wr : 0x%llx  rd : 0x%llx)\n",
-+			      __func__, reg, set_mask, read_val);
-+
-+		}
-+	}
-+
-+	return 0;
-+};
-+
-+static const struct udevice_id socfpga_dtreg_ids[] = {
-+	{.compatible = "intel,socfpga-dtreg"},
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(socfpga_dtreg) = {
-+	.name		= "socfpga-dtreg",
-+	.id		= UCLASS_NOP,
-+	.of_match	= socfpga_dtreg_ids,
-+	.probe		= socfpga_dtreg_probe,
-+};
---
-2.25.1
-
+DQoNCkxlIDcgZMOpYy4gMjAyMyDDoCAyMTozMSwgQ29ub3IgRG9vbGV5IDxjb25vckBrZXJuZWwu
+b3JnPiBhIMOpY3JpdCA6DQoNCldoYXQgb24gZWFydGggaGFzIGhhcHBlbmVkIGhlcmUgd2l0aCBx
+dW90aW5nPyBQbGVhc2UgZml4IHlvdXIgbWFpbA0KY2xpZW50IG1hbiwgdGhpcyBtYWlsIGlzIGEg
+bWVzcyB0byByZWFkLg0KDQpDb25vcjogSG9wZWZ1bGx5IEkgaGF2ZSBub3cgZml4ZWQgTWFjT1Mg
+TWFpbCBjb25maWd1cmF0aW9u4oCmDQpGb3IgYWxsOiBwbGVhc2UgYWNjZXB0IG15IGFwb2xvZ2ll
+cyBvbiBwYXN0IGluY29udmVuaWVuY2VzLg0KDQpPbiBUaHUsIERlYyAwNywgMjAyMyBhdCAwODoy
+NDowMVBNICswMDAwLCBmZiB3cm90ZToNCg0KDQpMZSA3IGTDqWMuIDIwMjMgw6AgMTk6NTEsIFJv
+YiBIZXJyaW5nIDxyb2JoK2R0QGtlcm5lbC5vcmc+IGEgw6ljcml0IDoNCg0K77u/T24gVGh1LCBE
+ZWMgNywgMjAyMyBhdCAyOjA44oCvQU0gZmYgPGZmQHNob2t1YmFpLnRlY2g+IHdyb3RlOg0KDQoN
+Cg0KTGUgNiBkw6ljLiAyMDIzIMOgIDIxOjQyLCBSb2IgSGVycmluZyA8cm9iaCtkdEBrZXJuZWwu
+b3JnPiBhIMOpY3JpdCA6DQoNCu+7v09uIFR1ZSwgRGVjIDUsIDIwMjMgYXQgMTE6MDXigK9QTSBT
+dW1pdCBHYXJnIDxzdW1pdC5nYXJnQGxpbmFyby5vcmc+IHdyb3RlOg0KDQpPbiBUdWUsIDUgRGVj
+IDIwMjMgYXQgMTU6MzksIEtyenlzenRvZiBLb3psb3dza2kNCjxrcnp5c3p0b2Yua296bG93c2tp
+QGxpbmFyby5vcmc+IHdyb3RlOg0KDQpPbiAwNS8xMi8yMDIzIDEwOjQ1LCBTdW1pdCBHYXJnIHdy
+b3RlOg0KKyBVLWJvb3QgY3VzdG9kaWFucyBsaXN0DQoNCk9uIFR1ZSwgNSBEZWMgMjAyMyBhdCAx
+Mjo1OCwgS3J6eXN6dG9mIEtvemxvd3NraQ0KPGtyenlzenRvZi5rb3psb3dza2lAbGluYXJvLm9y
+Zz4gd3JvdGU6DQoNCk9uIDA1LzEyLzIwMjMgMDg6MTMsIFN1bWl0IEdhcmcgd3JvdGU6DQpARFQg
+YmluZGluZ3MgbWFpbnRhaW5lcnMsDQoNCkdpdmVuIHRoZSBlYXNlIG9mIG1haW50ZW5hbmNlIG9m
+IERUIGJpbmRpbmdzIHdpdGhpbiBMaW51eCBrZXJuZWwNCnNvdXJjZSB0cmVlLCBJIGRvbid0IGhh
+dmUgYSBzcGVjaWZpYyBvYmplY3Rpb24gdGhlcmUuIEJ1dCBjYW4gd2UgZWFzZQ0KRFRTIHRlc3Rp
+bmcgZm9yIGZpcm13YXJlL2Jvb3Rsb2FkZXIgcHJvamVjdHMgYnkgcHJvdmlkaW5nIGEgdmVyc2lv
+bmVkDQpyZWxlYXNlIHBhY2thZ2UgZm9yIERUIGJpbmRpbmdzPyBPciBpZiBzb21lb25lIGVsc2Ug
+aGFzIGEgYmV0dGVyIGlkZWENCmhlcmUgcGxlYXNlIGZlZWwgZnJlZSB0byBjaGltZSBpbi4NCg0K
+VGhpcyBkb2Vzbid0IHdvcmsgZm9yIHlvdT86DQoNCmh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHVi
+L3NjbS9saW51eC9rZXJuZWwvZ2l0L2RldmljZXRyZWUvZGV2aWNldHJlZS1yZWJhc2luZy5naXQv
+DQoNClRoYW5rcywgdGhpcyBpcyBjZXJ0YWlubHkgYSBnb29kIHN0ZXAgd2hpY2ggSSB3YXNuJ3Qg
+YXdhcmUgb2YuIEZ1cnRoZXINCnNpbXBsaWZpY2F0aW9uIGNhbiBiZSBkb25lIHRvIGRlY291cGxl
+IGRldmljZXRyZWUgc291cmNlIGZpbGVzIGZyb20gRFQNCmJpbmRpbmdzLg0KDQpXaHk/DQoNCkkg
+c3VwcG9zZSB5b3UgYXJlIGFscmVhZHkgYXdhcmUgdGhhdCBMaW51eCBEVFMgZmlsZXMgYXJlIGEg
+c3Vic2V0IG9mDQp3aGF0IGNvdWxkIGJlIHN1cHBvcnRlZCBieSBkZXZpY2V0cmVlIHNjaGVtYXMu
+IFRoZXJlIGNhbiBiZQ0KZmlybXdhcmUvYm9vdGxvYWRlciBzcGVjaWZpYyBwcm9wZXJ0aWVzIChv
+bmUgZXhhbXBsZSBiZWluZyBbMV0pIHdoaWNoDQpMaW51eCBrZXJuZWwgY2FuIHNpbXBseSBpZ25v
+cmUuIFdpbGwgeW91IGJlIHdpbGxpbmcgdG8gYWRkIGFsbCBvZg0KdGhvc2UgRFQgcHJvcGVydGll
+cyB0byBMaW51eCBEVFMgZmlsZXMgYW5kIG1haW50YWluIHRoZW0/DQoNCldlIGFscmVhZHkgYWRk
+ZWQgdGhlbSBhbmQgd2UgYWxyZWFkeSBtYWludGFpbiB0aGVtLiBEVFMgZGVzY3JpYmVzIHRoZQ0K
+aGFyZHdhcmUsIG5vdCB0aGUgT1Mtc3Vic2V0IG9mIHRoZSBoYXJkd2FyZS4NCg0KTGV0IGxvb2sg
+YXQgc29tZSBudW1iZXJzIGlmIHlvdXIgc3RhdGVtZW50IGlzIGp1c3RpZmllZCBvciBub3QgZm9y
+IHRoZQ0KZXhhbXBsZSBJIGdhdmU6DQoNCnUtYm9vdCQgZ2l0IGdyZXAgLW5yIGJvb3RwaC0qIGFy
+Y2gvYXJtKiB8IHdjIC1sDQo0MDc5DQoNCmxpbnV4JCBnaXQgZ3JlcCAtbnIgYm9vdHBoLSogYXJj
+aC9hcm0qIHwgd2MgLWwNCjI2Nw0KDQpJIGhhdmUgbm8gY29udHJvbCBvdmVyIHdoZXRoZXIgYW55
+b25lIGhhcyBzdWJtaXR0ZWQgdGhlIG90aGVyIDM4MTIgaW5zdGFuY2VzLg0KDQpJdCBsb29rcyBs
+aWtlIHRoZXJlIGlzIGFsd2F5cyBnb2luZyB0byBiZSBhIGNhdGNoIHVwIGdhbWUgcmVnYXJkaW5n
+IERUDQpwcm9wZXJ0aWVzIHdoaWNoIGVpdGhlciBMaW51eCBrZXJuZWwgb3IgdS1ib290IG9yIGFu
+eSBvdGhlcg0KZmlybXdhcmUvYm9vdGxvYWRlciBwcm9qZWN0IGRvbid0IGNhcmUgYWJvdXQuDQoN
+CkFzIGxvbmcgYXMgZHRzIGZpbGVzIGluIHUtYm9vdCBhcmUgbWFudWFsbHkgc3luYydlZCwgeWVz
+LiBUaGF0IGlzIHRoZQ0KcHJvYmxlbSBhbmQgaXQgZG9lc24ndCBtYXR0ZXIgaWYgd2UgaGF2ZSBh
+IHN0YW5kYWxvbmUgcmVwb3NpdG9yeSBvcg0Kbm90Lg0KDQpJZiB5b3Ugd2FudCB0byBtb3ZlIGlu
+IHRoYXQgZGlyZWN0aW9uLCBzdGFydCBhdXRvbWF0aW5nIHdoYXQgdS1ib290DQppbXBvcnRzLiBZ
+b3UgbmVlZCB0byBkbyB0aGF0IGZvciBiaW5kaW5ncyBpZiB5b3Ugd2FudCB0byBydW4NCnZhbGlk
+YXRpb24sIHNvIHdoeSBub3QgZHRzIGZpbGVzIHRvbz8NCg0KSG93ZXZlciwgRFQgYmluZGluZ3Mg
+YXJlIHNvbWV0aGluZyB3aGljaCBzaG91bGQgYmUgY29tbW9uLCB0aGUNCmhhcmR3YXJlIGRlc2Ny
+aXB0aW9uIG9mIGEgZGV2aWNlIHNob3VsZCBiZSB1bml2ZXJzYWwuIElNTywgc3BsaXR0aW5nDQoN
+CkJvdGggRFQgYmluZGluZ3MgYW5kIERUUyBzaG91bGQgYmUgY29tbW9uLiBJIGRvbid0IHNlZSB0
+aGUgZGlmZmVyZW5jZS4NCg0KSWYgd2UgcmVhbGx5IGNhcmUgYWJvdXQgRFRTIHRvIGJlIGNvbW1v
+biB0aGVuIHRoZSBjb250cmlidXRpb24gbW9kZWwNCmhhcyB0byBjaGFuZ2Ugd2hlcmUgdGhlcmUg
+aXMgYSBzaW5nbGUgcmVwbyBob3N0aW5nIERUIGJpbmRpbmdzIGFuZA0KRFRTLiBBbGwgb3RoZXIg
+cHJvamVjdHMgd2hldGhlciBpdCBpcyBMaW51eCBrZXJuZWwgb3IgdS1ib290IG9yIGFueQ0Kb3Ro
+ZXIgT1MvZmlybXdhcmUvYm9vdGxvYWRlciBhcmUganVzdCBjb25zdW1pbmcgRFRTIGZpbGVzIGZy
+b20gdGhhdA0Kc2luZ2xlIHJlcG8uDQoNClJlYWxseSwgb25seSB0aGUga2VybmVsIGFuZCB1LWJv
+b3QgbWF0dGVyLiBObywgSSBkb24ndCBtZWFuIEkgZG9uJ3QNCmNhcmUgYWJvdXQgb3RoZXIgcHJv
+amVjdHMsIGJ1dCB0aG9zZSBhcmUgdGhlIDIgd2l0aCB0aGUgd2lkZXN0IGgvdw0Kc3VwcG9ydCBi
+eSBmYXIgYW5kIHdoaWNoIGhhdmUgYSBtYWpvciBlZmZvcnQgdG8gc3luYyBjb3BpZXMgb2YgZHRz
+DQpmaWxlcyBpbiBib3RoIHByb2plY3RzLiBUaGUgcmVzdCBhcmUganVzdCBub2lzZSBpbiB0ZXJt
+cyBvZiB0aGlzDQpwcm9ibGVtLg0KDQpJIHN1cHBvc2UgdGhpcyBpcyBzb21ldGhpbmcgdGhhdCBM
+aW51eCBEVCBtYWludGFpbmVycw0KaGF2ZSBvYmplY3RlZCB0byBpbiB0aGUgcGFzdCBmb3IgZWFz
+ZSBvZiBtYWludGVuYW5jZS4gSSBhbSBub3Qgc3VyZSBpZg0KeW91IGZvbGtzIGFyZSB3aWxsaW5n
+IHRvIGNoYW5nZSB0aGF0IHN0YW5jZS4NCg0KVGhlIGlzc3VlIGlzIG5vIG9uZSBzdGVwcyB1cCB0
+byBoZWxwIG1haW50YWluIHN1Y2ggYSByZXBvc2l0b3J5IHdoaWxlDQp0aGVyZSBpcyBsb3RzIG9m
+IHJldmlldyBhbmQgbWFpbnRhaW5lciB3b3JrIG9uIHdoYXQgZ29lcyBpbnRvIHRoZQ0Ka2VybmVs
+IHRyZWUuIEknbSBoYXBweSB0byBkaXJlY3QgbXkgYmluZGluZyByZXZpZXcgYXR0ZW50aW9uIHRv
+DQp3aGVyZXZlciB0aGUgbWFqb3JpdHkgb2YgdGhlIGJpbmRpbmdzIGdvLiBCdXQgdGhlIHdvcmsg
+b24gdGhlIERUUyBzaWRlDQppcyBtb3N0bHkgU29DIHRyZWUgbWFpbnRhaW5lcnMgYW5kIHN1Yi1t
+YWludGFpbmVycy4NCg0KQXNzdW1lIGZvciBhIG1pbnV0ZSB3ZSBoYXZlIHRoaXMgc3RhbmRhbG9u
+ZSByZXBvLiBXaGF0IGhhcHBlbnMgbmV4dD8NCldlIHN0YXJ0IHdpdGggYW4gZW1wdHkgcmVwbyBh
+bmQgdGhlbiBtZXJnZSBhbmQgbW92ZSBwbGF0Zm9ybXMgMSBieSAxPw0KDQpXaGF0IGFib3V0IGxl
+dmVyYWdpbmcgU3lzdGVtUmVhZHktSVIgY29tcGxpYW50IGJvYXJkIG1haW50YWluZXJzIGFuZCBz
+dGFydCB3aXRoIGEgY29yZSBvZiBtb3RpdmF0ZWQgcGVvcGxlID8NCg0KSSB0aGluayB0aGVyZSBh
+cmUgMiBBVE0uIFN5bnF1YWNlciBhbmQgaS5NWDggdmFyaWFudHMuDQoNCkJhc2VkIG9uICBodHRw
+czovL3d3dy5hcm0uY29tL2FyY2hpdGVjdHVyZS9zeXN0ZW0tYXJjaGl0ZWN0dXJlcy9zeXN0ZW1y
+ZWFkeS1jZXJ0aWZpY2F0aW9uLXByb2dyYW0vaXINCnJvdWdobHkgMzAgYm9hcmRzLg0KDQpTeW5x
+dWFjZXIgb25seQ0KaGFzIGEgRFQgaW4gdS1ib290LCBzbyBub3QgcmVhbGx5IGFueXRoaW5nIHRv
+IGRvIHRoZXJlLg0KSSdtIHByZXR0eQ0Kc3VyZSB0aGUgY2VydGlmaWVkIERUQnMgZm9yIGkuTVg4
+IGRvbid0IG1hdGNoIHdoYXQncyBpbiB1LWJvb3Qgb3IgdGhlDQprZXJuZWwgdHJlZS4gSG9wZWZ1
+bGx5LCBpdCdzIGp1c3QgYSBzdWJzZXQsIGJ1dCBzdGlsbCwgdGhlcmUncyBhIGdhcC4NCkkgZG9u
+J3Qga25vdyB0aGF0IHRoZXJlIGlzIG1vdGl2YXRpb24gdGhlcmUgZWl0aGVyLg0KTm90ZSB0aGF0
+IFN5c3RlbVJlYWR5IGN1cnJlbnRseSBvbmx5IHJlcXVpcmVzIGV2ZXJ5IG5vZGUgd2l0aA0KJ2Nv
+bXBhdGlibGUnIGhhdmUgYSBzY2hlbWEuIEl0IGRvZXMgbm90IHlldCByZXF1aXJlIG5vIHNjaGVt
+YQ0Kd2FybmluZ3MuIElmIHdlIHdlbnQgd2l0aCBhIDEgYnkgMSBhcHByb2FjaCwgSSB3b3VsZCBw
+dXNoIHRoYXQNCnBsYXRmb3JtcyBoYXZlIHRvIGJlIGZyZWUgb2Ygd2FybmluZ3MuDQoNCkhvdyBt
+YW55IHllYXJzIHdpbGwgdGhhdCB0YWtlPw0KDQpTaG91bGQgYWxsIHBsYXRmb3JtcyBmb2xsb3dp
+bmcgdGhhdCBvcmdhbml6YXRpb24gYmUgYSBnb2FsPw0KDQpZb3UgbWVhbiBzaG91bGQgYWxsIHBs
+YXRmb3JtcyBiZSBtb3ZlZD8gQWJzb2x1dGVseS4gSSBkb24ndCB0aGluayB3ZQ0Kd2FudCB0byBz
+b2x2ZSB0aGUgcHJvYmxlbSBvZiBoYXZpbmcgRFRTIGZpbGVzIGluIDIgcGxhY2VzIGJ5IGNyZWF0
+aW5nDQphIDNyZCBwbGFjZS4NCg0KSSB0aGluayB0aGlzIGJpdCBoZXJlIGlzIHRoZSBvbmx5IHRo
+aW5nIHlvdSBhY3R1YWxseSB3cm90ZToNCg0KQWN0dWFsbHksIGlmIHdlIGxpbWl0IGhlIERUUyBp
+biB0aGUgdGhpcmQgcGxhY2UgZm9yIFN5c3RlbVJlYWR5LUlSLA0KdGhlcmUgc2hvdWxkIGJlIG5v
+IERUQiBpbiB0aGUgTGludXggZGlzdHJpYnV0aW9uLg0KSXQgd291bGQgYmUgdGhlIGVxdWl2YWxl
+bnQgYXMgQUNQSSBib2FyZHMgLiBTbyBpcyBpdCBzdGlsbCBhbiBpc3N1ZSA/DQpBIHJlZmVyZW5j
+ZSB0byB0aGUgdGhlIHRoaXJkIHJlcG8gbWF5IGJlIGhpbnRlZCBpbiBhIHRleHQgZmlsZS4NCg0K
+U3lzdGVtUmVhZHkgaXMgb25seSBmb3Igb25lIGFyY2hpdGVjdHVyZSwgd2h5IHdvdWxkIHVzaW5n
+IGl0IGFzIHRoZQ0KY2VudHJhbGlzZWQgcG9pbnQgZm9yIGRldmljZXRyZWUgZmlsZXMgbWFrZSBz
+ZW5zZT8NCg0KU3lzdGVtUmVhZHkgaXMgYW4gQXJtIGNlcnRpZmljYXRpb24gYnV0IGJ1aWx0IG9u
+IEVCQlIgd2hpY2ggaXMNCnRoZSBpbXBvcnRhbnQgcGFydCBhbmQgYWxzbyBhZG9wdGVkIGJ5IFJJ
+U0MtVi4NClNvIHdoZW4gSSBzYWlkIFN5c3RlbVJlYWR5LCBvbmUgc2hvdWxkIHJlYWQgRUJCUi4N
+CkVCQlIgaXMgcHJvbW90aW5nIGEgRFQgbGlmZSBjeWNsZSB0aGF0IGlzIGluIGxpbmUgd2l0aA0K
+aGF2aW5nIGFuIG91dCBvZiBPUy9GaXJtd2FyZSByZXBvcyBkZWZpbml0aW9ucy4NCg0KSSBkb24n
+dCByZWFsbHkgdGhpbmsgMSBieSAxIGlzIHRoZSByaWdodCBhcHByb2FjaC4gSSB3YXMganVzdA0K
+ZW51bWVyYXRpbmcgaG93IHRoaXMgY291bGQgd29yay4gSXQncyBub3QgdGhhdCB1c2VmdWwgdG8g
+c2F5IHdlIG5lZWQgYQ0Kc3RhbmRhbG9uZSByZXBvIHdpdGhvdXQgd29ya2luZyB0aHJ1IHRoZSBs
+b2dpc3RpY3Mgb2YgaG93IGV4YWN0bHkgdGhhdA0Kd2lsbCB3b3JrLg0KDQpSb2INCg0K
