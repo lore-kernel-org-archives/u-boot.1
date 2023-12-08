@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C27C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:32:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF1CC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026F6876C2;
-	Fri,  8 Dec 2023 23:31:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E9C3876AA;
+	Fri,  8 Dec 2023 23:31:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="nX+WBqUI";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="HUESj3Vp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08B638768A; Fri,  8 Dec 2023 23:31:11 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 969D1876C6; Fri,  8 Dec 2023 23:31:12 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7646987695
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:31:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DF898762F
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:31:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40c256ffdbcso26856115e9.2
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:31:06 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-40c2c65e6aaso22785585e9.2
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:31:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702074666; x=1702679466;
+ d=amarulasolutions.com; s=google; t=1702074667; x=1702679467;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ismp48oEL6JutAwHlMCruy7oPdpEnb4dUu6uMukT8U4=;
- b=nX+WBqUIIhxeYXRycnopARmQfYnE1x+bi+S1F4TXiWDbSRID5tY5qZ4hY1Nwiz8XVD
- z5IzKdb/e+2XHsbMrMPor9kM6OTAThF4DdVBS523NXVSSf2FefjtKBW27LZo4pIurj6p
- pFRjJtNgcmfFoLII3sXneF0CjxN+1DWS/cjMY=
+ bh=7MmvUmQV0CYJ5xeMBDgOVJIx7WYUEYy8T26nZgN7uRk=;
+ b=HUESj3VpJnapvUfWipIq2f5aKLFRPmiDyDG/sQgpwKmT8mlz7QKET8o5i9HxoPG0Qt
+ pg8a2qN1cdy4Y2TUbST1cr784qJJ2LQGBUYW3LLHkVBSVX8/3KdeHndHWf94FU1uMueq
+ U9UzHmryoSUbf24EYa+V29Ku+PbIjj2NEwTDY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702074666; x=1702679466;
+ d=1e100.net; s=20230601; t=1702074667; x=1702679467;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ismp48oEL6JutAwHlMCruy7oPdpEnb4dUu6uMukT8U4=;
- b=xBgChKOLkr2QSYqOojfKBUPVANNrBySZQNmRQJCr4b9RMTz8YULWJ6q+coae50wSEO
- e901CucyEsbB5lS1An411LYnZ1cJgIj8OKlIJMpC00f76HZLuC8MYkwhTfysleXNBtC3
- EoyQmpY6OEP/BlPX+RF9xf2WZ0wXzBGlWwnXTRvSkaPTImcHHOUOiCQ8vXALUihAa+f0
- WVAg5FIbOckn8K2snJDuF/IK8pKYD8bIbZZAMx7A5XZjpjsc3jVvd4TtzNOxM2U0ZSEX
- ufdG1dPEo9mEoiSMHZGoRNTXwX7OW5XyalFEz7i+dZQNdQKB2YuzkLZ6lK17BNFkO9PX
- 0V9g==
-X-Gm-Message-State: AOJu0Yx/MDgNIh8D/wbql6awAah9RPmAjO3y3Wqe7tgNg0g45XtxME9C
- slhlVXtq+z3nA40N3xZEsyLikBjS8P30R7WV12ToZA==
-X-Google-Smtp-Source: AGHT+IF0g1m3KUU8g5fYX5QZdt15NbfFoXvj51QEfsV3wSJghu3WzDdJJAit26J1i3sLtJ3xnKTsPQ==
-X-Received: by 2002:a05:600c:44c7:b0:40c:246c:bd70 with SMTP id
- f7-20020a05600c44c700b0040c246cbd70mr342979wmo.91.1702074666009; 
- Fri, 08 Dec 2023 14:31:06 -0800 (PST)
+ bh=7MmvUmQV0CYJ5xeMBDgOVJIx7WYUEYy8T26nZgN7uRk=;
+ b=w9/GhWhKF7DpTv7hnGC4o4fCng5odPYApYZWu6rk6CJcv73VgCMwVJc6Bs0+W8VKcc
+ v6Sv2i0DxgP8y3vPKV0jnMgIU/IUA/8TNkPrWa77fl1mi6QhZS4flh8VnsJWdqrOSt+c
+ CU/cPdaQHS2lCNLCpGiKg560AWtjncLtD1BYjjMnQ3vufHv9fFs95NOSQoooQJEvrggM
+ JMLGrA2l9VHl3taceAjheufTqmg5KVrVLA5fbgHnQLhsiSGRUoOmVyZonjk+YcHWKZgS
+ ULJQkDGVW8m9rIu66m1A9t3H3sB47uK32rNAsuhHwn4X8Anwqw7JAaFeQCcneaIQjZnP
+ xubQ==
+X-Gm-Message-State: AOJu0YwgUhY2YbzerWRZ33hhdBILiTH32UubV6CScHeLm7xBgxyx1Q+q
+ Y/DekSd2o/IdqYZ3Idfv8tl79DiNiZJdIQ0WmPm2JQ==
+X-Google-Smtp-Source: AGHT+IFyleortqOr/9Juo71PbYAC8VwH/N0x8H09Ct72aZmgOu5Ioxht9N6Bjmf+Jb1bVDmXHAlAng==
+X-Received: by 2002:a05:600c:4296:b0:40b:5e4a:406c with SMTP id
+ v22-20020a05600c429600b0040b5e4a406cmr317718wmc.140.1702074667088; 
+ Fri, 08 Dec 2023 14:31:07 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.31.05
+ h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.31.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 14:31:05 -0800 (PST)
+ Fri, 08 Dec 2023 14:31:06 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Edmond <seanedmond@microsoft.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Roger Knecht <rknecht@pm.me>,
- Michal Simek <michal.simek@amd.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Subject: [PATCH v12 09/24] cli: Add menu for hush parser
-Date: Fri,  8 Dec 2023 23:30:10 +0100
-Message-Id: <20231208223025.55076-10-francis.laniel@amarulasolutions.com>
+ Marek Vasut <marex@denx.de>, Hector Palacios <hector.palacios@digi.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>, Bin Meng <bmeng.cn@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: [PATCH v12 10/24] global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
+Date: Fri,  8 Dec 2023 23:30:11 +0100
+Message-Id: <20231208223025.55076-11-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
 References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
@@ -99,55 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the moment, the menu contains only entry: HUSH_OLD_PARSER which is the
-default.
-The goal is to prepare the field to add a new hush parser which guarantees
-actual behavior is still correct.
+This flag is used to indicate we are using the hush parser.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 ---
- cmd/Kconfig     | 13 +++++++++++++
- common/Makefile |  2 +-
- 2 files changed, 14 insertions(+), 1 deletion(-)
+ common/cli.c                      | 2 ++
+ include/asm-generic/global_data.h | 4 ++++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index df6d71c103..30ea081a10 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -23,6 +23,19 @@ config HUSH_PARSER
- 	  If disabled, you get the old, much simpler behaviour with a somewhat
- 	  smaller memory footprint.
+diff --git a/common/cli.c b/common/cli.c
+index 3916a7b10a..e5fe1060d0 100644
+--- a/common/cli.c
++++ b/common/cli.c
+@@ -268,6 +268,8 @@ void cli_loop(void)
+ void cli_init(void)
+ {
+ #ifdef CONFIG_HUSH_PARSER
++	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER))
++		gd->flags |= GD_FLG_HUSH_OLD_PARSER;
+ 	u_boot_hush_start();
+ #endif
  
-+menu "Hush flavor to use"
-+depends on HUSH_PARSER
-+
-+config HUSH_OLD_PARSER
-+	bool "Use hush old parser"
-+	default y
-+	help
-+	  This option enables the old flavor of hush based on hush Busybox from
-+	  2005.
-+
-+	  It is actually the default U-Boot shell when decided to use hush as shell.
-+endmenu
-+
- config CMDLINE_EDITING
- 	bool "Enable command line editing"
- 	depends on CMDLINE
-diff --git a/common/Makefile b/common/Makefile
-index cdeadf7202..23851a68e2 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -8,7 +8,7 @@ ifndef CONFIG_SPL_BUILD
- obj-y += init/
- obj-y += main.o
- obj-y += exports.o
--obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
-+obj-$(CONFIG_HUSH_OLD_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index e8c6412e3f..0a9b6bd92a 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -697,6 +697,10 @@ enum gd_flags {
+ 	 * @GD_FLG_BLOBLIST_READY: bloblist is ready for use
+ 	 */
+ 	GD_FLG_BLOBLIST_READY = 0x800000,
++	/**
++	 * @GD_FLG_HUSH_OLD_PARSER: Use hush old parser.
++	 */
++	GD_FLG_HUSH_OLD_PARSER = 0x1000000,
+ };
  
- # # boards
+ #endif /* __ASSEMBLY__ */
 -- 
 2.34.1
 
