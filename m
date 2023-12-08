@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ABE1C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:31:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EBB4C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:31:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90F5A87645;
-	Fri,  8 Dec 2023 23:30:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F0FF787633;
+	Fri,  8 Dec 2023 23:30:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZSNE4mox";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="XB9HNW6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 449628762F; Fri,  8 Dec 2023 23:30:55 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id C3BE287650; Fri,  8 Dec 2023 23:30:56 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5D7C87632
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:30:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A37638763A
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:30:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40c2bb872e2so22181715e9.3
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:30:52 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40b5155e154so30620895e9.3
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:30:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702074652; x=1702679452;
+ d=amarulasolutions.com; s=google; t=1702074654; x=1702679454;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gv+U5AQk+nMFfM4c+tK26MVDL+uj1qPOHddwPA9pWWs=;
- b=ZSNE4moxvq4vvvHJ2RGkFiLHuG0tLqYz1TiAOrNlOtGj1Vb/RWhukx1XH5F9Zk5K3Y
- t8gdzm3B5rxmyNjT/EcIpKPa+eMKk2PpFxd2rQQUaw5Beyjvo8BG7/CuiINmorfBkdFb
- Ef3bLzxL0sixED7IxWCP/wQC67+a4hv0+mR58=
+ bh=pwEIoBRzDMfib4wpua2a5vZNPxfG7SL92b0tVloomGY=;
+ b=XB9HNW6m9KvDyP3GGFwyRe+r7pNTjxngECWPlgq+c2QPsKGX2WG97hQ0vPlmX1ZR03
+ 0CZHHhdzAb5T5Hn5fzHyr88TWrvOUi1BL2+wEXCm9sR++tAIGhkjBUiQppArYoat1VZU
+ CWr1K1AMB7aritlYZqefdb34owgfAmdoJdtCA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702074652; x=1702679452;
+ d=1e100.net; s=20230601; t=1702074654; x=1702679454;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gv+U5AQk+nMFfM4c+tK26MVDL+uj1qPOHddwPA9pWWs=;
- b=tzqxaEQYvTIsJJE+0cxeEsCprEZqAZX3EMPUf+ZlcFy8hEawtsAW+quRT7j7m/LLLX
- UNhzAsGZAwnFm5ZeVMIEC0+QAWqqMkfVMXoLVfJ2aSjJj0JpiKNZG3MfruyhLCBDq5+k
- pGoD3EqOLZzoKPQyZ7Verklx5y5IgOxFGoxhZRZWFCe4/XVQGCe9lxK1bO8AbqGjCTwF
- fBhHaB3mrbW1IwLMrxlxOX59nzbABIZKQiW7dS3mfXvjGETyPr4z9qvyMwupWQ+Y1n+v
- h/2Fu9sbP6QB0OL+rit8dPbsQPHT6nj+4yLTWcRdD2Znfpg5U9HaVjkiY5UsxDsSy77v
- jMIQ==
-X-Gm-Message-State: AOJu0YxLR76SlkY/XFxx5kvY81uiCTyqTHG1mZfmDQk+iwAVtc1W4cPg
- AdJeCQwOY4ORDx1VJs1Q1OUd2LjpzlLBl1m2r7gQQA==
-X-Google-Smtp-Source: AGHT+IHNc1NhDu2Nu1dzpkbjR15vHVW3F6lanPuyQdTwuZoIK4vG9kEy/u3riABqbRPw2dXAcxwhFA==
-X-Received: by 2002:a05:600c:3423:b0:40b:5e22:305 with SMTP id
- y35-20020a05600c342300b0040b5e220305mr174926wmp.113.1702074652179; 
- Fri, 08 Dec 2023 14:30:52 -0800 (PST)
+ bh=pwEIoBRzDMfib4wpua2a5vZNPxfG7SL92b0tVloomGY=;
+ b=Pgr5IBTKVeT3R9zXneBVSKRO8yAwNhkSbA8tUjxhwGdVcCiz2Qtky4MmAWnbeHXg9V
+ V/1IqXBj2AePo3+K0nX+DgQljgQuKPy3ssJjB7jrFDyfzLiQn+Ww0q4mx1bu9504Lkf/
+ 6fos6MzvJdHe0TpIN+oxjdj5UabNNbBT4kLTxK66Admv4W5Vcp3yP61HQh+S3M9dsGtC
+ W9dcDCfLMoOwiIma0/CJojEAbsT/EqEUzhGihJa0nO0xvrGb85uaqlf3/lz5uklhE0xN
+ NUirvA4dRwEdVwObSljE5Dj8Lq9YfGD/JBmhGZnJQrwYEb8CONphew7oh2Ndoh6faD+9
+ S9NA==
+X-Gm-Message-State: AOJu0Yzjw5IhVi0xwn9eV0fUDyUxjfesE0oprMjeZUyIKPHPViA+T8Za
+ JYE7Xqp9Z4yJAhLnjT+VC716A9I4oTy4Pv9JpzkErg==
+X-Google-Smtp-Source: AGHT+IHKwqcwDAwqpRJA1hQW1um5R/jkt6YhBKkfpmMsOnaVjh/Dwv91GSm2+22LtWgHvTKb4J64MA==
+X-Received: by 2002:a05:600c:141:b0:40c:3667:9e89 with SMTP id
+ w1-20020a05600c014100b0040c36679e89mr277367wmm.85.1702074653932; 
+ Fri, 08 Dec 2023 14:30:53 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.30.51
+ h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.30.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 14:30:51 -0800 (PST)
+ Fri, 08 Dec 2023 14:30:53 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alexander Gendin <agendin@matrox.com>,
- Stephen Carlson <stcarlso@linux.microsoft.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v12 01/24] test: Add framework to test hush behavior
-Date: Fri,  8 Dec 2023 23:30:02 +0100
-Message-Id: <20231208223025.55076-2-francis.laniel@amarulasolutions.com>
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Subject: [PATCH v12 02/24] test: hush: Test hush if/else
+Date: Fri,  8 Dec 2023 23:30:03 +0100
+Message-Id: <20231208223025.55076-3-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
 References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
@@ -98,115 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a new subcommand to ut: ut hush.
-For the moment, this command does nothing, future commits will add tests which
-will be run on command call.
-
-Note that CONFIG_HUSH_PARSER must be defined to compile this new subcommand.
+As asked in commit 9c6bf1715f6a ("test/py: hush_if_test: Add tests to cover
+octal/hex values"), this commit translates test_hush_if_test.py to a C test.
 
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/test/hush.h     | 15 +++++++++++++++
- include/test/suites.h   |  1 +
- test/Makefile           |  3 +++
- test/cmd_ut.c           |  6 ++++++
- test/hush/Makefile      |  6 ++++++
- test/hush/cmd_ut_hush.c | 20 ++++++++++++++++++++
- 6 files changed, 51 insertions(+)
- create mode 100644 include/test/hush.h
- create mode 100644 test/hush/Makefile
- create mode 100644 test/hush/cmd_ut_hush.c
+ test/hush/Makefile |   1 +
+ test/hush/if.c     | 316 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 317 insertions(+)
+ create mode 100644 test/hush/if.c
 
-diff --git a/include/test/hush.h b/include/test/hush.h
-new file mode 100644
-index 0000000000..cca66544a0
---- /dev/null
-+++ b/include/test/hush.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * (C) Copyright 2021
-+ * Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
-+ */
-+
-+#ifndef __TEST_HUSH_H__
-+#define __TEST_HUSH_H__
-+
-+#include <test/test.h>
-+
-+/* Declare a new environment test */
-+#define HUSH_TEST(_name, _flags)	UNIT_TEST(_name, _flags, hush_test)
-+
-+#endif /* __TEST_HUSH_H__ */
-diff --git a/include/test/suites.h b/include/test/suites.h
-index ad4fc926f4..fc0f9334c0 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -42,6 +42,7 @@ int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_exit(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_ut_hush(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_lib(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_log(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
-diff --git a/test/Makefile b/test/Makefile
-index 8e1fed2c28..10cf6a7976 100644
---- a/test/Makefile
-+++ b/test/Makefile
-@@ -17,6 +17,9 @@ obj-$(CONFIG_FUZZ) += fuzz/
- ifndef CONFIG_SANDBOX_VPL
- obj-$(CONFIG_UNIT_TEST) += lib/
- endif
-+ifneq ($(CONFIG_HUSH_PARSER),)
-+obj-$(CONFIG_$(SPL_)CMDLINE) += hush/
-+endif
- obj-$(CONFIG_$(SPL_)CMDLINE) += print_ut.o
- obj-$(CONFIG_$(SPL_)CMDLINE) += str_ut.o
- obj-$(CONFIG_UT_TIME) += time_ut.o
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 2d5b80f992..2f96dfa934 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -118,6 +118,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
- #ifdef CONFIG_CMD_ADDRMAP
- 	U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
- #endif
-+#if CONFIG_IS_ENABLED(HUSH_PARSER)
-+	U_BOOT_CMD_MKENT(hush, CONFIG_SYS_MAXARGS, 1, do_ut_hush, "", ""),
-+#endif
- #ifdef CONFIG_CMD_LOADM
- 	U_BOOT_CMD_MKENT(loadm, CONFIG_SYS_MAXARGS, 1, do_ut_loadm, "", ""),
- #endif
-@@ -210,6 +213,9 @@ U_BOOT_LONGHELP(ut,
- #ifdef CONFIG_CONSOLE_TRUETYPE
- 	"\nfont - font command"
- #endif
-+#if CONFIG_IS_ENABLED(HUSH_PARSER)
-+	"\nhush - Test hush behavior"
-+#endif
- #ifdef CONFIG_CMD_LOADM
- 	"\nloadm - loadm command parameters and loading memory blob"
- #endif
 diff --git a/test/hush/Makefile b/test/hush/Makefile
-new file mode 100644
-index 0000000000..dfa2a92615
---- /dev/null
+index dfa2a92615..a3c9ae5106 100644
+--- a/test/hush/Makefile
 +++ b/test/hush/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# (C) Copyright 2021
-+# Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
-+
-+obj-y += cmd_ut_hush.o
-diff --git a/test/hush/cmd_ut_hush.c b/test/hush/cmd_ut_hush.c
+@@ -4,3 +4,4 @@
+ # Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
+ 
+ obj-y += cmd_ut_hush.o
++obj-y += if.o
+diff --git a/test/hush/if.c b/test/hush/if.c
 new file mode 100644
-index 0000000000..48a1adbf28
+index 0000000000..b7200e32ec
 --- /dev/null
-+++ b/test/hush/cmd_ut_hush.c
-@@ -0,0 +1,20 @@
++++ b/test/hush/if.c
+@@ -0,0 +1,316 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
 + * (C) Copyright 2021
@@ -215,18 +126,314 @@ index 0000000000..48a1adbf28
 +
 +#include <common.h>
 +#include <command.h>
++#include <env_attr.h>
 +#include <test/hush.h>
-+#include <test/suites.h>
 +#include <test/ut.h>
 +
-+int do_ut_hush(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	struct unit_test *tests = UNIT_TEST_SUITE_START(hush_test);
-+	const int n_ents = UNIT_TEST_SUITE_COUNT(hush_test);
++/*
++ * All tests will execute the following:
++ * if condition_to_test; then
++ *   true
++ * else
++ *   false
++ * fi
++ * If condition is true, command returns 1, 0 otherwise.
++ */
++const char *if_format = "if %s; then true; else false; fi";
 +
-+	return cmd_ut_category("hush", "hush_test_",
-+			       tests, n_ents, argc, argv);
++static int hush_test_if_base(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "true");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "false");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
 +}
++HUSH_TEST(hush_test_if_base, 0);
++
++static int hush_test_if_basic_operators(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test aaa = aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa < bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test bbb < aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test bbb > aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa > bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -eq 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -eq 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ne 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ne 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -lt 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -lt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -lt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -le 456");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -le 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -le 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -gt 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -gt 123");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -gt 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 456 -ge 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ge 123");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 123 -ge 456");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_basic_operators, 0);
++
++static int hush_test_if_octal(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 010 -eq 010");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -eq 011");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 011");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 010");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_octal, 0);
++
++static int hush_test_if_hexadecimal(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x2000001");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x2000000");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 0x1ffffff");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_hexadecimal, 0);
++
++static int hush_test_if_mixed(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test 010 -eq 10");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 010 -ne 10");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0xa -eq 10");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0xa -eq 012");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 2000000 -gt 0x1ffffff");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -gt 1ffffff");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -lt 1ffffff");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -eq 2000000");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test 0x2000000 -ne 2000000");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"aaa\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -n \"aaa\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -n \"\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_mixed, 0);
++
++static int hush_test_if_inverted(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = aaa");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_inverted, 0);
++
++static int hush_test_if_binary(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -o bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -o bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -o bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -o bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -a bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa != aaa -a bbb = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -a bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test aaa = aaa -a bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_binary, 0);
++
++static int hush_test_if_inverted_binary(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	sprintf(if_formatted, if_format, "test ! aaa != aaa -o ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa != aaa -o ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa -o ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! aaa = aaa -o ! bbb = bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa != aaa -o ! ! bbb != bbb");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa != aaa -o ! ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format,
++		"test ! ! aaa = aaa -o ! ! bbb != bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test ! ! aaa = aaa -o ! ! bbb = bbb");
++	ut_assertok(run_command(if_formatted, 0));
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_inverted_binary, 0);
++
++static int hush_test_if_z_operator(struct unit_test_state *uts)
++{
++	char if_formatted[128];
++
++	/* Deal with environment variable used during test. */
++	env_set("ut_var_nonexistent", NULL);
++	env_set("ut_var_exists", "1");
++	env_set("ut_var_unset", "1");
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_nonexistent\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_exists\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_unset\"");
++	ut_asserteq(1, run_command(if_formatted, 0));
++
++	env_set("ut_var_unset", NULL);
++	sprintf(if_formatted, if_format, "test -z \"$ut_var_unset\"");
++	ut_assertok(run_command(if_formatted, 0));
++
++	/* Clear the set environment variable. */
++	env_set("ut_var_exists", NULL);
++
++	return 0;
++}
++HUSH_TEST(hush_test_if_z_operator, 0);
 -- 
 2.34.1
 
