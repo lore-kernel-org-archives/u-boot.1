@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F508C10DCE
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 10:52:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F133CC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 11:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64AFB874B9;
-	Fri,  8 Dec 2023 11:52:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AF15874B9;
+	Fri,  8 Dec 2023 12:13:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="JrHSDbFB";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="JAS5qtmb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6340E870D5; Fri,  8 Dec 2023 11:52:19 +0100 (CET)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
+ id CD78C874ED; Fri,  8 Dec 2023 12:13:44 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A53386C8E
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 11:52:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7D8587140
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 12:13:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4b2e0492fffso547550e0c.0
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 02:52:15 -0800 (PST)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-db549f869a3so2253595276.1
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 03:13:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702032733; x=1702637533;
+ d=amarulasolutions.com; s=google; t=1702034021; x=1702638821;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gJBn5sBWddScih8gGo+SSLRyQV4a7jHfId68sG0SUtU=;
- b=JrHSDbFB0am4LwjyIyeUCde/nDsdU0md29v6S2NoLQ7FhZGz5sZBYNPZgiSrSLSbzz
- eY43wuN8tc4K4VuU0bbJqqdIluIw6pwCvq9iZHyZK6neAEXRMKUL8rxpZ/NgrIB5zxIK
- Ff7dcdWKoqleMWrp5S2MF5UwI3gtqp2NM284XdllLBVqmpclfU2UuzHlzNbbYG+yCEn5
- w0JwiWELKVrp72Vo7My9jrEOy5/wYSUY8NerqIFW+NgEnspXM5qefnmOEGvK2eNGqpwq
- XgS68Ge1J+6IGHH2/n4Id9nSJeakOO3nSiAccf9z2z8njMR2tvKrs4e70rHrpSmNElm7
- YKBw==
+ bh=bY67WxPSaaxqlP4fbIulswVUo9KLf/7FMfYOvPQfvG8=;
+ b=JAS5qtmbL2eMWWFRp5ia5vNnxjIeBZVXNbJ1Wj92qndiQUNe81yLlTkNPT0EIQaeSa
+ oke6YRFbjyJqzjhglEl5/Fk995vZZNWtuu1wYzejnwxBsc6IP+nbgqLh9FylSsvfcVoi
+ CNkX3hz42dH4FfLDhcrqhlhnOVtiGC6mVORpM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702032733; x=1702637533;
+ d=1e100.net; s=20230601; t=1702034021; x=1702638821;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gJBn5sBWddScih8gGo+SSLRyQV4a7jHfId68sG0SUtU=;
- b=ufdT428l1rBs3X3AQcrgx8icPpXnpbBuDhChQBHm3UzC+f01aWOGOVmeLOAbNVb9yM
- SbV9M362QqF+s2wsLFWnNKpA/+aFf2bvLvX3ZC1ClKH0iOXFtU1wqJnWnh8iDym8uuC6
- th55IYsVoPO+zK/qVtTIgft/98i+kjBqtBnolcOtis0wVJGEIJfy9WP+rhopMZ1bVa+g
- PtSSZu1FmurRR8fpR1w2JnYXr33BdB+c/+4oqb/4tlwJOSK7AOG3L1A5PFE2zXIz1wug
- cehnniW2FE/u+nbuGnBbnnimYR2U6my4rWGjow2AS6G8J1PdW5EVQoWPG+NHf7DYDc0/
- wtJw==
-X-Gm-Message-State: AOJu0Yzw4WasrRagciiZqm59KllIIXDj5xJ5F382ZPbjH6GOPAKE1eju
- i3mY/ShRabTwFgE7Zpyw4j75gV6HDt/YBk3RdLwcwpZ+KIMAXM8QHl5gwiQo
-X-Google-Smtp-Source: AGHT+IF/sWncCleMGGph508oyrn2mYQ2dZGXeLkO9CVEDqSv9tYoK9fz+R4B1OioHVuuPYA1Q8/sELMTPiIeTn6VzXY=
-X-Received: by 2002:a05:6122:2013:b0:4b2:8efa:65df with SMTP id
- l19-20020a056122201300b004b28efa65dfmr4420345vkd.14.1702032733614; Fri, 08
- Dec 2023 02:52:13 -0800 (PST)
+ bh=bY67WxPSaaxqlP4fbIulswVUo9KLf/7FMfYOvPQfvG8=;
+ b=APpwGrbEnrwzNqRRuIxqjXuexEl6/+9/Qi3GjlXsGsRm15Qv/9BFPmKY+gPTsQ/wkg
+ /WsJBrmLNRkHLJygDuu0pah80VAAxboBjdIA8tOAk9wEb4v7MjzJDS92DPA9pQ9Tf0ID
+ XhJqoiNoYBGyo0VZ+Xbf8ZEx4Z8Af/+AdYtrlnwLPzoBbKNgLmotOqTp54xhVO4xO4zU
+ 6ipGmli4ruVBLuYjrXaJKbkaHdqmyuED1BHwroncG5cSf+wg9cCiVWvPTx/R9LTIF8IM
+ v/JDdAcUYiH8fovdAYVsSYUlxwXWJq+nUF4JBvkcf2AbJ2Ul7xEbr4fipV/TUwOPUh4M
+ Wf/A==
+X-Gm-Message-State: AOJu0Yw1c0TIwKZ3xgyPgRvGvUg600v13tqJ8EB1bmjNdTqyrj+7XzqZ
+ sqnH/a4QD5ZOQK/LK7sVtooNG5Jb0G1q2Jv84EFxUg==
+X-Google-Smtp-Source: AGHT+IF8dZr9ooriHFNjvWpHVzULeHwvMjstM/pXORyijD0DsmEQCTfWIsSZHeSTVAZOudq+3AFQ17+5uUQsHxXNnCE=
+X-Received: by 2002:a25:8187:0:b0:db5:46bf:30ef with SMTP id
+ p7-20020a258187000000b00db546bf30efmr3855268ybk.42.1702034021303; Fri, 08 Dec
+ 2023 03:13:41 -0800 (PST)
 MIME-Version: 1.0
 References: <20231119172310.1307942-1-i@shantur.com>
 In-Reply-To: <20231119172310.1307942-1-i@shantur.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Fri, 8 Dec 2023 10:52:02 +0000
-Message-ID: <CABEcMwW14BFrA1ZYWTh7iQTsnrXA7LdBPcREKf_QeO71op+Wdw@mail.gmail.com>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Fri, 8 Dec 2023 16:43:30 +0530
+Message-ID: <CAMty3ZDK3jcscgNfMZj4SySK6Kd9L1ZJ6nwaM3eJU_VTBA7yvw@mail.gmail.com>
 Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
  SoCs
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, 
+To: Shantur Rathore <i@shantur.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Bharat Gooty <bharat.gooty@broadcom.com>, 
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -89,10 +87,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom / Kever
-
-On Sun, Nov 19, 2023 at 5:24=E2=80=AFPM Shantur Rathore <i@shantur.com> wro=
-te:
+On Sun, Nov 19, 2023 at 10:54=E2=80=AFPM Shantur Rathore <i@shantur.com> wr=
+ote:
 >
 > Rockchip SoCs can support wide range of bootflows.
 > Without full bootflow commands, it can be difficult to
@@ -117,14 +113,8 @@ te:
 >         imply DEBUG_UART_BOARD_INIT
 >         imply BOOTSTD_DEFAULTS
 > +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
->         imply FAT_WRITE
->         imply SARADC_ROCKCHIP
->         imply SPL_SYSRESET
-> --
-> 2.40.1
->
 
-Can this please be merged in ?
+Yes, but better to give this option to specific board vendors as
+defaults are enough to boot 1st bootflow and what ever media's it has.
 
-Kind regards,
-Shantur
+Jagan.
