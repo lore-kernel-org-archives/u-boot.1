@@ -4,122 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5690EC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 17:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A66C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 17:47:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65137875F5;
-	Fri,  8 Dec 2023 18:07:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kontron.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C4DB8751A;
+	Fri,  8 Dec 2023 18:47:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="MDTLLWLF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZillBO4M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B2A4875F8; Fri,  8 Dec 2023 18:06:59 +0100 (CET)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0709.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::709])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5CEEE8752B; Fri,  8 Dec 2023 18:47:11 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1335D875DE
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 18:06:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24F2B86EF3
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 18:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kontron.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Thomas.Schaefer@kontron.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KDXXSB8PleX6nyuAXHabkjzxrc/pkPntQ5W1KeIg7NoGHbCW9MJ3bjvbS1h4OFLFYznf2IdIKdurQlbQ0kzQk6Y7fdhy0YjABoom6anH5tUMSg3hX/m2lRbA0QWjJRVtqai3yEbBwcDZ40TFHFJHBUYJY6LHGs+b/A5Aqzn1hMfD2E4l6GjRByy3kSYI156mxcwpLDfCLPtPQEfpCn5BglFRXvVElGUviz3vfzc5+IgaQKLx+APpNvQa/q6SIV4DzZiEB3Km95Ffc9xnQOXP3BQwGaTvNf02TWXYygyR0UUviJYo1ZvmmQEZZr/5riSardu8OHnTF6ZCfyHvOBBaGA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4hymTFXze2X8HLRPIv3onwPl6xEG6Ov0ZwgUjTP3CBA=;
- b=BnVNXr4dOE5VbJtJ55Dj2Jg46wH+Hw2LCNrpVA5P6VPEtMm7fkGdf37L/K5h6CVr0mmdDunsfY3OXe6pEQH3crRtsFon6OqdrqV7nDrfwbn/cKIaMHYldfwXzf9PeQb7Cywd+AZmTMMfTFQqPTArui46RVXab7xHRSv/9woSFMqGwRI8TlwwtgAwRTrP819ZceGfqbFSt8PVmiSaQ8GMCVWPQ9+oi9nDga5GXVu4aJE2ssR9QwDxMgaYShUzKOUGA93GdosqUtGvtiCmqQj3U8jddAQWJDQQGRHdbRCcWdR+ncB2tHSk/sFEXkAHPaiYbCZMVnvx6vOLHit1R3ohUw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=kontron.com; dmarc=pass action=none header.from=kontron.com;
- dkim=pass header.d=kontron.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
- s=selector2-mysnt-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4hymTFXze2X8HLRPIv3onwPl6xEG6Ov0ZwgUjTP3CBA=;
- b=MDTLLWLFG70tJ6CjvqJFhFCnuRoXZj26/rfmLg59pFhDDjU1z6Xt8NoZvSR/1H5ybN8oGOtoKmIb5k1wCK8Cmvj0EW6y23q/KXX+xHJrSzjQT0iQTEWyo645UDR56RlPIfJcx2oOE2szlBvMgqi1Exdo0ByuCmF4nVDP2w+7hoE=
-Received: from AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:46::22)
- by PR3PR10MB3820.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:49::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.28; Fri, 8 Dec
- 2023 17:06:54 +0000
-Received: from AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7175:23f3:d229:bb12]) by AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7175:23f3:d229:bb12%3]) with mapi id 15.20.7068.028; Fri, 8 Dec 2023
- 17:06:54 +0000
-From: Thomas Schaefer <Thomas.Schaefer@kontron.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "macpaul.lin@mediatek.com" <macpaul.lin@mediatek.com>,
- "fparent@baylibre.com" <fparent@baylibre.com>
-Subject: Using uart1 on mediatek mt8195 derived board
-Thread-Topic: Using uart1 on mediatek mt8195 derived board
-Thread-Index: Adop93yhTv2TROYySNOqmHa1StEQRA==
-Date: Fri, 8 Dec 2023 17:06:54 +0000
-Message-ID: <AM0PR10MB2082C282ACACF92E42484727F78AA@AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=kontron.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM0PR10MB2082:EE_|PR3PR10MB3820:EE_
-x-ms-office365-filtering-correlation-id: 2ad8cb10-0039-401d-22c5-08dbf810144b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: lIPJhKzGDn/tIrVWG5smlrAXjPtHyBteVQn2ScUCmqsX9229MmHWQ7Uyp2ajbMExFyEGrNmSR3sO3BOlEQ8HAEWbXf49V2sCBW6Mryq0RCBRtHcSI2pmEtZCvyY33Dr05Vj+Yf2lGrXTcAlptWHMmKOgfFrx1dcTE/IiJLKgyZhbON5VmKpaJ2jMCGGFgn31Iu8jRTXtzO62z+iBY/hjVAVhfSw15DDcq9dbAfI99OzfWsR9Toh9htyGzhS4Dbf4VHfDeiYO2Qo/6Wy+YGJbHm/kCYLEKPmObhwU80pT6mz32r0DORuL5Z8auuC4KYSzoYcF8f/wC6x1ohzycGmvssbgdwm88kwhftYo7/7696ECfSW9hetC9cq87aw+/CUIrDMauMYRyNEyyfkkxNksFO+6YQ9+VgnszLVU9Ul8VZsNMU2dWorMteGqn8JAAk/myctGITNs+sNF9PNO1UuZ7HaNVaxrDqiyuADZfDJFFFC+IGsIy2uUT4jceuksb84xBRhtZqPCq8rSCuBJVvbQg4WDpfMjxXGko53OfsTIu4Dz6Qt15WnLneWpk2P1W6SKmq/wvkLhDsFxA8IsWnfBu4Z0R5CGLnTlmJNjappnRUM=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(396003)(376002)(366004)(346002)(39860400002)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(86362001)(83380400001)(33656002)(55016003)(15974865002)(66574015)(71200400001)(26005)(966005)(66946007)(66446008)(66476007)(66556008)(76116006)(64756008)(54906003)(6916009)(316002)(6506007)(7696005)(9686003)(38100700002)(478600001)(4326008)(8936002)(8676002)(52536014)(5660300002)(122000001)(2906002)(66899024)(38070700009)(41300700001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?GyGcHXbLK2hmwCQ9tMcEqXBhgd4p2wmfnEJWzh0e6ybZ8tH4vlOl9tymsH?=
- =?iso-8859-1?Q?zV6eoVDHEXXeyyUh3l4N0J+vNPgOkH7hiIgvzQvMDzl6Hqz/GDp3XVT7GU?=
- =?iso-8859-1?Q?zOv1JKjg0SiI5jQUKPewqn5JuYoDWRZkNPVLyA6v8g0j6G6KaC3VvoZUnc?=
- =?iso-8859-1?Q?EuZExgGyGksQzxGkkGC/uHyFfFWaBqLD9mRLo82V0zqxWoGfvmgAHTtGjC?=
- =?iso-8859-1?Q?bEAbOodKRUyYs++LA0bJhWtvozrwtYBptPMoDAUDjD/tsS4qCS+awsFeDE?=
- =?iso-8859-1?Q?8ciq3xOKBVxoBaTcIF9f2wMuWzJh6uLE7ETOO3TmqgIgfCg4T/vpv39I68?=
- =?iso-8859-1?Q?khybL7tYvT9sJYY5821iHs4+3dOdQuszwQoZUtvfXXOFhageEw/DdXXgD6?=
- =?iso-8859-1?Q?CuhoiEKQKZ1zdCixB27NJOqG0zmfsHnSpDNHEqSiigx0ZzQVV0gfrqazM2?=
- =?iso-8859-1?Q?K0YXRGsGSW+aDSt/89OfqfprjtyfedJgI1+NErLNnUv5dWZpTz7Qcm27m1?=
- =?iso-8859-1?Q?d6TiEPrX74yMgR+OJhpovivuDW7/eSNZGpi8r1epxZYdR/h/pjmTZ9ONhG?=
- =?iso-8859-1?Q?F89oJhv6hWy3yzewI4gHqDBbl601s3TIkKEy7Eo4b9bTDhkcqDjMm0muN8?=
- =?iso-8859-1?Q?fimpUEUMhNY18AP5c+RPJP0vJ+ESYDJ3zqkG0sxNYQmRxVVxFK8D0EZlIL?=
- =?iso-8859-1?Q?a7WpvQTCse8HiYOpQxdFMXRmWLeaAcMZoLiVAl3t8E1w5neAwT9hASWqN7?=
- =?iso-8859-1?Q?MQbfLSWbB/YFjgoZ5XpPiqchuAZvDLCJJ26jcjhy5AN6M5paacfn5H6syh?=
- =?iso-8859-1?Q?Miae/ClZV1P0Irhi4oaaQmyq+4IL8BISWnlQES3y0UBFdRjyu/8PYVhID2?=
- =?iso-8859-1?Q?J+bVUtwxgJJRtt1Mv7ySP0AAladuvI91uUU1e6mtdi3fXSU8ndaOHmFzqB?=
- =?iso-8859-1?Q?PZAqJB8I3htb2QtD4KCBy8qu7Wreq4cT9MRJwzwdpOas65GA71TxhoNni8?=
- =?iso-8859-1?Q?jPoqv2QZezXfUJ28BpfgQ13OzMaGnCoy93TcYboY3mz6OR3iPMgfzc2Ypo?=
- =?iso-8859-1?Q?fP4iEvhWrjVUITTIPUEUMOyO8PvrgYkDWNGO7/NJlHY6p3yWsPyHWM+RHK?=
- =?iso-8859-1?Q?CMGe5FxLZVWmIqb20JiQ2ZfCuUXeSsm976YB5gGBrffY5/9/b4VbpoGbia?=
- =?iso-8859-1?Q?+Nx+gNIrFYG7QW9yi0J6XPVmRmvBXROl3qZu3a8zLAlYyU55CS9FXWYd+0?=
- =?iso-8859-1?Q?beAEW66cWzbY70FY+6QWczBNOzxUHObxleXIi6C/sxPx9bmo3JbZFTNx3A?=
- =?iso-8859-1?Q?TzfCBGlbdl1+qBNfvShZdUDyPRqD5IEJ30yuaPdPw9aECJyBN1WknUADsr?=
- =?iso-8859-1?Q?Vef7Tcf6kN1jsxQmpl4QT59lrIQBgVW/NMmV+dZgO3isDfX/fqG7gwQArj?=
- =?iso-8859-1?Q?S8vGdd4BX5ii/MYnW/KN9ub9Ubc3C8ZIaxyytsW2MwkgFTz1ce1v6PaZqQ?=
- =?iso-8859-1?Q?XqqebTi0Om6tOK00X/NXlTkBiYkMddr7Xmff8DYSknCldQiMNH5rnL2Qc+?=
- =?iso-8859-1?Q?yozQojhJf1foYpobgD2aqeOr4bGDVXY9DoRIveJLxKypT3y0qTkUSaoE0R?=
- =?iso-8859-1?Q?VWKtoiLGyjZUGxrw0supQAx/MQCEMaeK//4+gcohj+VhAUJjArFOdqpw?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a196f84d217so281813766b.3
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 09:47:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702057628; x=1702662428; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hAJ1WnEzjSjmEz7f7Ppx70QG1I8gsBXxVNcDVYzxKYo=;
+ b=ZillBO4MHKKFeNR8YaSaaOQ0HWL5iWHXHjjkTvxDmeDA2VVcP1x8UFXGRREX7lquMV
+ YPl2iCGEQUAd5VLosX3+EAD5bLkRm6ieS1tUSshRmCR/w1Mc2AluqPpqblOv9/+0l0Ql
+ 6G7lJFDRqPdZR6Zco6VPFFl28fIRsc2AlY6kk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702057628; x=1702662428;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hAJ1WnEzjSjmEz7f7Ppx70QG1I8gsBXxVNcDVYzxKYo=;
+ b=UJVmdl4XvEuORA0jAwFOMUbhAZjtyV0N8z0uKA+0+yfJ2oWalFDPYFufpshAkZ8avm
+ RqlQGtFmUV948UqCBw10xDQ9l9BeMbDpQUEDqkII3Z8/X1MvCqqN/nPY6MpmA4OoU+U5
+ mVu1kBvQkydtcdZ9dtBhUr6uVf8VityO1cia5033UvfliMTGpCCVXmKXVmhMR70qEiqS
+ 20KL8S7Xg32T/13PDY7xr1b/wdS0pfqJrjRbHytcpBSlhez077QZu9X6/dEaog2YuafR
+ 9QvN40quA7MuTSaE7RFN9q5Dae1XbOM3uda5DrfDzjABzUVjmArW/M9zYD5E6Z+AXM45
+ pBaw==
+X-Gm-Message-State: AOJu0Yzmcqlb5OlvMnqK/qkSN06KGDAxK0iUtyShnPbR9UWFIKHPVyPo
+ qxgwwTOtv1siXKpfKjs1Xl2iPdvGmRNYePdF1M5lBg==
+X-Google-Smtp-Source: AGHT+IHVlaS5EYXTYlrQruZM+vx0QSh6/N3o/eDY14hRk0UBFA1FHofU1ZiRsQbF3VqXkzoInBKqIDKTJzp/jsjqxTU=
+X-Received: by 2002:a17:906:68d9:b0:a19:a1ba:8cfa with SMTP id
+ y25-20020a17090668d900b00a19a1ba8cfamr158447ejr.152.1702057628271; Fri, 08
+ Dec 2023 09:47:08 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: kontron.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR10MB2082.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ad8cb10-0039-401d-22c5-08dbf810144b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Dec 2023 17:06:54.6508 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: K0fQdo/oMMKPrvO9t3fbkqmWTqTGk4S91QVXXM/HdDoDkUnTTy6GeHRhxjP+RPKsIqnpwHjSqTBgmC6mIzyzUYXvt+qlTEwcJrT7yIO+6x4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3820
+References: <20231116172859.393744-1-sjg@chromium.org>
+ <20231208150042.GA1278773-robh@kernel.org>
+In-Reply-To: <20231208150042.GA1278773-robh@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 8 Dec 2023 10:46:51 -0700
+Message-ID: <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
+To: Rob Herring <robh@kernel.org>
+Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
+ Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Pratyush Yadav <ptyadav@amazon.de>, 
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,98 +89,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Macpaul, Fabien,
+Hi Rob,
 
-I'm referring to patch series https://patchwork.ozlabs.org/project/uboot/pa=
-tch/20230804110448.24589-1-macpaul.lin@mediatek.com/ where support for the =
-mediatek mt8195 SOC is introduced into u-boot. We are developing a board ba=
-sed on the mt8195 as well but we want to use UART1 instead of UART0 for deb=
-ug output messages.
+On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
+>
+> On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
+> > Add a compatible string for binman, so we can extend fixed-partitions
+> > in various ways.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v5)
+> >
+> > Changes in v5:
+> > - Add #address/size-cells and parternProperties
+> > - Drop $ref to fixed-partitions.yaml
+> > - Drop 'select: false'
+> >
+> > Changes in v4:
+> > - Change subject line
+> >
+> > Changes in v3:
+> > - Drop fixed-partition additional compatible string
+> > - Drop fixed-partitions from the example
+> > - Mention use of compatible instead of label
+> >
+> > Changes in v2:
+> > - Drop mention of 'enhanced features' in fixed-partitions.yaml
+> > - Mention Binman input and output properties
+> > - Use plain partition@xxx for the node name
+> >
+> >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++++++++++
+> >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+> >  MAINTAINERS                                   |  5 ++
+> >  3 files changed, 74 insertions(+)
+> >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> >
+> > diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> > new file mode 100644
+> > index 000000000000..329217550a98
+> > --- /dev/null
+> > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> > @@ -0,0 +1,68 @@
+> > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > +# Copyright 2023 Google LLC
+> > +
+> > +%YAML 1.2
+> > +---
+> > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
+> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > +
+> > +title: Binman firmware layout
+> > +
+> > +maintainers:
+> > +  - Simon Glass <sjg@chromium.org>
+> > +
+> > +description: |
+> > +  The binman node provides a layout for firmware, used when packaging firmware
+> > +  from multiple projects. It is based on fixed-partitions, with some
+> > +  extensions, but uses 'compatible' to indicate the contents of the node, to
+> > +  avoid perturbing or confusing existing installations which use 'label' for a
+> > +  particular purpose.
+> > +
+> > +  Binman supports properties used as inputs to the firmware-packaging process,
+> > +  such as those which control alignment of partitions. This binding addresses
+> > +  these 'input' properties. For example, it is common for the 'reg' property
+> > +  (an 'output' property) to be set by Binman, based on the alignment requested
+> > +  in the input.
+> > +
+> > +  Once processing is complete, input properties have mostly served their
+> > +  purpose, at least until the firmware is repacked later, e.g. due to a
+> > +  firmware update. The 'fixed-partitions' binding should provide enough
+> > +  information to read the firmware at runtime, including decompression if
+> > +  needed.
+>
+> How is this going to work exactly? binman reads these nodes and then
+> writes out 'fixed-partitions' nodes. But then you've lost the binman
+> specifc parts needed for repacking.
 
-Our board is booting and we see boot messages on a debug pin header connect=
-ed to UART0 when using the settings from the demo board, but when trying to=
- switch to UART1, no more messages appear on the console. What we have trie=
-d is the following:
+No, they are the same node. I do want the extra information to stick
+around. So long as it is compatible with fixed-partition as well, this
+should work OK.
 
-- Adaptation of the dts and dtsi files with uart1 settings taken from linux=
- device tree:
-
-diff --git a/arch/arm/dts/mt8195.dtsi b/arch/arm/dts/mt8195.dtsi
-index a7e4db5aa7..53eb437fad 100644
---- a/arch/arm/dts/mt8195.dtsi
-+++ b/arch/arm/dts/mt8195.dtsi
-@@ -245,6 +245,17 @@
-                        status =3D "disabled";
-                };
-
-+               uart1: serial@11001200 {
-+                       compatible =3D "mediatek,mt8195-uart",
-+                                    "mediatek,hsuart";
-+                       reg =3D <0 0x11001200 0 0x1000>;
-+                       interrupts =3D <GIC_SPI 91 IRQ_TYPE_LEVEL_LOW>;
-+                       clock-frequency =3D <26000000>;
-+                       clocks =3D <&clk26m>, <&clk26m>;
-+                       clock-names =3D "baud", "bus";
-+                       status =3D "disabled";
-+               };
-+
-                pericfg_ao: syscon@11003000 {
-                        compatible =3D "mediatek,mt8195-pericfg_ao", "sysco=
-n";
-                        reg =3D <0 0x11003000 0 0x1000>;
-
-diff --git a/arch/arm/dts/mt8195-kontron-sbc-i1200.dts b/arch/arm/dts/mt819=
-5-kontron-sbc-i1200.dts
-index c6ea7e8f3d..4700a6d303 100644
---- a/arch/arm/dts/mt8195-kontron-sbc-i1200.dts
-+++ b/arch/arm/dts/mt8195-kontron-sbc-i1200.dts
-@@ -58,7 +58,7 @@
-        };
-
-        chosen {
--               stdout-path =3D &uart0;
-+               stdout-path =3D &uart1;
-        };
-
-        reg_1p8v: regulator-1p8v {
-@@ -121,7 +121,7 @@
-        status =3D "okay";
- };
-
--&uart0 {
-+&uart1 {
-        status =3D "okay";
- };
-
-We also tried to change the DEBUG_UART settings in the defconfig to match w=
-ith UART1, but without success.
-
-Are there any special means to make UART1 interface run?
-
-Best regards,
-Thomas
-
-Thomas Sch=E4fer
-SW Design Engineer
-
-T:
-+49 681 95916 203
-
-
-thomas.schaefer@kontron.com
-www.kontron.com
-
-
-
-           =20
-Kontron Europe GmbH
-Heinrich-Barth-Stra=DFe 1-1a | 66115 Saarbr=FCcken | Germany
-
-              =20
-
-Die gesetzlichen Pflichtangaben finden Sie hier
-Please find our mandatory legal statement here
-Unsere Datenschutzerkl=E4rung finden Sie hier
-Please find our mandatory privacy statement here
-
-
+Regards,
+SImon
