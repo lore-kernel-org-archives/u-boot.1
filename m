@@ -4,75 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A66C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 17:47:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D56F8C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 18:43:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C4DB8751A;
-	Fri,  8 Dec 2023 18:47:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1BFD287618;
+	Fri,  8 Dec 2023 19:43:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZillBO4M";
+	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="tk9q3Pq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CEEE8752B; Fri,  8 Dec 2023 18:47:11 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id D457E87618; Fri,  8 Dec 2023 19:42:24 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24F2B86EF3
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 18:47:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 494568760A
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 19:42:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a196f84d217so281813766b.3
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 09:47:09 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=ics.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lpmeyer@ics.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-58d3c5126e9so1219646eaf.1
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 10:42:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702057628; x=1702662428; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702060940; x=1702665740;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:to:subject:message-id:date:from
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hAJ1WnEzjSjmEz7f7Ppx70QG1I8gsBXxVNcDVYzxKYo=;
- b=ZillBO4MHKKFeNR8YaSaaOQ0HWL5iWHXHjjkTvxDmeDA2VVcP1x8UFXGRREX7lquMV
- YPl2iCGEQUAd5VLosX3+EAD5bLkRm6ieS1tUSshRmCR/w1Mc2AluqPpqblOv9/+0l0Ql
- 6G7lJFDRqPdZR6Zco6VPFFl28fIRsc2AlY6kk=
+ bh=nzsO/PJXaBD55jGeZmt6GaAio6QeV0JTKRsWFU15fKo=;
+ b=tk9q3Pq4tWZBfWoSdZfeisRTvJwmyn3NA12WzhjkgCvlN+GqO7m1LA2ZJ25o0guQR0
+ LjqgUsel/e0+ttwkP2b/eEYnqdjnTLTS9MFPa8+v8ELW0KZyf3eqjmXHmjFO/FNYJt+d
+ hLAxCNNDjYRuTd3Ld4ewc86327AVAufoelPIK3ypk45Q3U0EyuxmeV34pyW0cGGQQk01
+ RNwLodfxZy6YpH/jTZzVQ+V7HjcY9oZ5JRlmEXPkg5IYjuOJjcNjR3w59m2HSpZ9orJC
+ Bv7zrBbhAekh0Frn4dZXbjvE49vOKgkvDPZ8qSTlXrOT5pew8PORs1R7EiF4jAxNj3vh
+ ZauA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702057628; x=1702662428;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1702060940; x=1702665740;
+ h=content-transfer-encoding:to:subject:message-id:date:from
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hAJ1WnEzjSjmEz7f7Ppx70QG1I8gsBXxVNcDVYzxKYo=;
- b=UJVmdl4XvEuORA0jAwFOMUbhAZjtyV0N8z0uKA+0+yfJ2oWalFDPYFufpshAkZ8avm
- RqlQGtFmUV948UqCBw10xDQ9l9BeMbDpQUEDqkII3Z8/X1MvCqqN/nPY6MpmA4OoU+U5
- mVu1kBvQkydtcdZ9dtBhUr6uVf8VityO1cia5033UvfliMTGpCCVXmKXVmhMR70qEiqS
- 20KL8S7Xg32T/13PDY7xr1b/wdS0pfqJrjRbHytcpBSlhez077QZu9X6/dEaog2YuafR
- 9QvN40quA7MuTSaE7RFN9q5Dae1XbOM3uda5DrfDzjABzUVjmArW/M9zYD5E6Z+AXM45
- pBaw==
-X-Gm-Message-State: AOJu0Yzmcqlb5OlvMnqK/qkSN06KGDAxK0iUtyShnPbR9UWFIKHPVyPo
- qxgwwTOtv1siXKpfKjs1Xl2iPdvGmRNYePdF1M5lBg==
-X-Google-Smtp-Source: AGHT+IHVlaS5EYXTYlrQruZM+vx0QSh6/N3o/eDY14hRk0UBFA1FHofU1ZiRsQbF3VqXkzoInBKqIDKTJzp/jsjqxTU=
-X-Received: by 2002:a17:906:68d9:b0:a19:a1ba:8cfa with SMTP id
- y25-20020a17090668d900b00a19a1ba8cfamr158447ejr.152.1702057628271; Fri, 08
- Dec 2023 09:47:08 -0800 (PST)
+ bh=nzsO/PJXaBD55jGeZmt6GaAio6QeV0JTKRsWFU15fKo=;
+ b=Vdcq8JCRIp+MjWV0gW9CnY8mdG/mDcrSEWF5B9n81K9s6+Sj8npQikr966Y1KHbOY5
+ wudsEFodGVCQJK4FVEue67hfqFXcpgvYrhjVoK039Ix5urgL8HNh2iduDd3obeN0eMba
+ 5cEKKZQnJ7qP1TuL22GKdDyuSTJaonR9wzaaxZzPPnhQWLfYxeVBKB/vQv6EIsWRXxgf
+ FSOxQwFSFEc+HUeUEWQR/XrXp/qJGj+H5Z4yKXriv18X4yzzFpQSyEBK7DwWF5ICEN8f
+ LXlxMzcjqVbNL0TYNQu6AQowCAS2rAztJrcZAYTU5qBUhjK54Wi+X2HTVtLP3GgGp4p6
+ hE8Q==
+X-Gm-Message-State: AOJu0Yyn5TEjNYNLdn5ke5xy4RmQAg9wWuVLHPhFDZPz88oe/y6i2rxl
+ t+xyHWuxGMNZfIJDEZrc8FSN9swQ4Yxp4WViMUzfW3bu7pVjNVusMa0=
+X-Google-Smtp-Source: AGHT+IEG6Ci4U2ix2WwjGJgrBbwONacEzrf8Lw96lGfki7AtLDlI8Mhq+cGADjxMRfQop50lJqCCyIm5aW36niFgNng=
+X-Received: by 2002:a05:6820:1ac9:b0:590:87c5:2b0c with SMTP id
+ bu9-20020a0568201ac900b0059087c52b0cmr570139oob.7.1702060940575; Fri, 08 Dec
+ 2023 10:42:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
-In-Reply-To: <20231208150042.GA1278773-robh@kernel.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 8 Dec 2023 10:46:51 -0700
-Message-ID: <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
+From: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
+Date: Fri, 8 Dec 2023 15:42:04 -0300
+Message-ID: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
+Subject: iMX6, CONFIG_IMX_HAB and fuse_read()
+To: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 08 Dec 2023 19:43:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,88 +83,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
+Hi!
 
-On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
->
-> On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
-> > Add a compatible string for binman, so we can extend fixed-partitions
-> > in various ways.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v5)
-> >
-> > Changes in v5:
-> > - Add #address/size-cells and parternProperties
-> > - Drop $ref to fixed-partitions.yaml
-> > - Drop 'select: false'
-> >
-> > Changes in v4:
-> > - Change subject line
-> >
-> > Changes in v3:
-> > - Drop fixed-partition additional compatible string
-> > - Drop fixed-partitions from the example
-> > - Mention use of compatible instead of label
-> >
-> > Changes in v2:
-> > - Drop mention of 'enhanced features' in fixed-partitions.yaml
-> > - Mention Binman input and output properties
-> > - Use plain partition@xxx for the node name
-> >
-> >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++++++++++
-> >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
-> >  MAINTAINERS                                   |  5 ++
-> >  3 files changed, 74 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> >
-> > diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> > new file mode 100644
-> > index 000000000000..329217550a98
-> > --- /dev/null
-> > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> > @@ -0,0 +1,68 @@
-> > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > +# Copyright 2023 Google LLC
-> > +
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: Binman firmware layout
-> > +
-> > +maintainers:
-> > +  - Simon Glass <sjg@chromium.org>
-> > +
-> > +description: |
-> > +  The binman node provides a layout for firmware, used when packaging firmware
-> > +  from multiple projects. It is based on fixed-partitions, with some
-> > +  extensions, but uses 'compatible' to indicate the contents of the node, to
-> > +  avoid perturbing or confusing existing installations which use 'label' for a
-> > +  particular purpose.
-> > +
-> > +  Binman supports properties used as inputs to the firmware-packaging process,
-> > +  such as those which control alignment of partitions. This binding addresses
-> > +  these 'input' properties. For example, it is common for the 'reg' property
-> > +  (an 'output' property) to be set by Binman, based on the alignment requested
-> > +  in the input.
-> > +
-> > +  Once processing is complete, input properties have mostly served their
-> > +  purpose, at least until the firmware is repacked later, e.g. due to a
-> > +  firmware update. The 'fixed-partitions' binding should provide enough
-> > +  information to read the firmware at runtime, including decompression if
-> > +  needed.
->
-> How is this going to work exactly? binman reads these nodes and then
-> writes out 'fixed-partitions' nodes. But then you've lost the binman
-> specifc parts needed for repacking.
+I am currently not subscribed (already filled the form waiting for
+confirmation), so please CC me for the moment.
 
-No, they are the same node. I do want the extra information to stick
-around. So long as it is compatible with fixed-partition as well, this
-should work OK.
+I am trying to enable Secure Boot/HAB on u-boot 2022.07. In a previous
+version this was achieved by enabling CONFIG_SECURE_BOOT, which was
+then renamed to CONFIG_IMX_HAB.
 
-Regards,
-SImon
+Now if I enable this option I get:
+
+```
+| arm-tdx-linux-gnueabi-ld.bfd: arch/arm/mach-imx/hab.o: in function
+`imx_hab_is_enabled':
+| /home/lisandro/myproject/build/tmp/work/apalis_imx6-tdx-linux-gnueabi/u-b=
+oot-toradex/1_2022.07-r0/git/arch/arm/mach-imx/hab.c:875:
+undefined reference to `fuse_read'
+| make[2]: *** [/home/lisandro/myproject/build/tmp/work/apalis_imx6-tdx-lin=
+ux-gnueabi/u-boot-toradex/1_2022.07-r0/git/scripts/Makefile.spl:525:
+spl/u-boot-spl] Error 1
+```
+
+Now without IMX_HAB enabled CONFIG_CMD_FUSE is enabled and actually
+works, ie, I can read the fuses from u-boot's command line. So I'm
+suspecting this is just a missing condition... somewhere. But so far I
+have not been able to detect exactly where. Can anyone give me a
+non-NULL pointer on this?
+
+Thanks in advance, Lisandro.
+
+--
+Lisandro P=C3=A9rez Meyer
+Embedded Platform Engineer
