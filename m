@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D56F8C4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 18:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922A6C4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 18:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BFD287618;
-	Fri,  8 Dec 2023 19:43:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ics.com
+	by phobos.denx.de (Postfix) with ESMTP id 146AC8761B;
+	Fri,  8 Dec 2023 19:53:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="tk9q3Pq4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lx6eePTl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D457E87618; Fri,  8 Dec 2023 19:42:24 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id D6ECD87630; Fri,  8 Dec 2023 19:53:02 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 494568760A
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 19:42:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A48B08761B
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 19:53:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ics.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lpmeyer@ics.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-58d3c5126e9so1219646eaf.1
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 10:42:22 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-55b5a37acb6so443335a12.0
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 10:53:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702060940; x=1702665740;
- darn=lists.denx.de; 
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nzsO/PJXaBD55jGeZmt6GaAio6QeV0JTKRsWFU15fKo=;
- b=tk9q3Pq4tWZBfWoSdZfeisRTvJwmyn3NA12WzhjkgCvlN+GqO7m1LA2ZJ25o0guQR0
- LjqgUsel/e0+ttwkP2b/eEYnqdjnTLTS9MFPa8+v8ELW0KZyf3eqjmXHmjFO/FNYJt+d
- hLAxCNNDjYRuTd3Ld4ewc86327AVAufoelPIK3ypk45Q3U0EyuxmeV34pyW0cGGQQk01
- RNwLodfxZy6YpH/jTZzVQ+V7HjcY9oZ5JRlmEXPkg5IYjuOJjcNjR3w59m2HSpZ9orJC
- Bv7zrBbhAekh0Frn4dZXbjvE49vOKgkvDPZ8qSTlXrOT5pew8PORs1R7EiF4jAxNj3vh
- ZauA==
+ d=gmail.com; s=20230601; t=1702061579; x=1702666379; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OK/c4lrUrjhndRxUThfq9xoSL7E1Yuy3F50+IiEhZDw=;
+ b=Lx6eePTlncz470WWo57SI4Kn0Ic/67GUWC2vRswxXxuZhPaxyNoF+8RVkCQYcCdY38
+ tp9MjydGjdMfY0tFzR2At/Em2jFq2zdyWoyKsjZWEpu9/C1xP19mcJNPNlneIrVzV4pT
+ SBbwFzhcixvrHTPWRRoUE1ZeAkT/cbnZmF6BrsalAH9jWkanD5lItlHMCSr0Q1hUBdVw
+ KdoEnTY1ZhzxXfelJDFH3PbOxEKg89x1eRJStCD3Ob03FWSFPFqMULxiR8kzi4inlA5u
+ CuzEGns4OhZD6DWhMPSo/bfYp0R0hRiWpi/5ggKtsYZ3q44Y214Zl87nN1lHST8PY9Uc
+ GccA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702060940; x=1702665740;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nzsO/PJXaBD55jGeZmt6GaAio6QeV0JTKRsWFU15fKo=;
- b=Vdcq8JCRIp+MjWV0gW9CnY8mdG/mDcrSEWF5B9n81K9s6+Sj8npQikr966Y1KHbOY5
- wudsEFodGVCQJK4FVEue67hfqFXcpgvYrhjVoK039Ix5urgL8HNh2iduDd3obeN0eMba
- 5cEKKZQnJ7qP1TuL22GKdDyuSTJaonR9wzaaxZzPPnhQWLfYxeVBKB/vQv6EIsWRXxgf
- FSOxQwFSFEc+HUeUEWQR/XrXp/qJGj+H5Z4yKXriv18X4yzzFpQSyEBK7DwWF5ICEN8f
- LXlxMzcjqVbNL0TYNQu6AQowCAS2rAztJrcZAYTU5qBUhjK54Wi+X2HTVtLP3GgGp4p6
- hE8Q==
-X-Gm-Message-State: AOJu0Yyn5TEjNYNLdn5ke5xy4RmQAg9wWuVLHPhFDZPz88oe/y6i2rxl
- t+xyHWuxGMNZfIJDEZrc8FSN9swQ4Yxp4WViMUzfW3bu7pVjNVusMa0=
-X-Google-Smtp-Source: AGHT+IEG6Ci4U2ix2WwjGJgrBbwONacEzrf8Lw96lGfki7AtLDlI8Mhq+cGADjxMRfQop50lJqCCyIm5aW36niFgNng=
-X-Received: by 2002:a05:6820:1ac9:b0:590:87c5:2b0c with SMTP id
- bu9-20020a0568201ac900b0059087c52b0cmr570139oob.7.1702060940575; Fri, 08 Dec
- 2023 10:42:20 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702061579; x=1702666379;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OK/c4lrUrjhndRxUThfq9xoSL7E1Yuy3F50+IiEhZDw=;
+ b=KlPQylGXW1d9exvX9oNjdDhDCEXOgzpmdIKn85/zvU2n5VnuKdpTCBeqERQEsWf0uk
+ KrqqkrfdXGRyLNL3bJIiO89SRtsvl9QYwOgzsY5DUYoa9BiKU59m2CgbzNzRqw0dKq9r
+ wRcQYiST/ccJHnUEKqO9BzaMeqlHUUciEaXlc+zX9Nl6cSwmS7Q+80ZKUetDgXW75JIr
+ IAT4Mz74Y8E3cgrnSAeFdCB+WAhO7iQZP/zty5ryPvSYNocIsmdi8onM1LJU/TI6l8Lv
+ l/wUnqS2bLtmVP3ali7h3RM+Sg/XrjEW2gOKB7uu0qtaLsOIOFIbBKaGyUvCZ5HNSMjq
+ xAgw==
+X-Gm-Message-State: AOJu0YxiEr8U/xKt2kizFH8G1/r1al+ewWfL/wPPGT/6OqzDgb1L9cSM
+ 6uq/cnMBoUsaVqe9w4T9P4YD/pxTkdkaJS3/qHh+81eqlS0=
+X-Google-Smtp-Source: AGHT+IFxbVjTp7rI8M2iZMG5WwPp9fL1L/QpBTGiLXYVKz8T00WlM0H/Y1pS7qIaK3C+ykGPeV5uWQQLtXsnF383ITI=
+X-Received: by 2002:a17:90a:6345:b0:286:4055:63e0 with SMTP id
+ v5-20020a17090a634500b00286405563e0mr1081462pjs.0.1702061578841; Fri, 08 Dec
+ 2023 10:52:58 -0800 (PST)
 MIME-Version: 1.0
-From: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
-Date: Fri, 8 Dec 2023 15:42:04 -0300
-Message-ID: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
-Subject: iMX6, CONFIG_IMX_HAB and fuse_read()
-To: u-boot@lists.denx.de
+References: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
+In-Reply-To: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 8 Dec 2023 15:52:46 -0300
+Message-ID: <CAOMZO5BzCRhNnseNq5RMP94GLt=1H9s742ywtm_LWOqTxaJcrg@mail.gmail.com>
+Subject: Re: iMX6, CONFIG_IMX_HAB and fuse_read()
+To: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Fri, 08 Dec 2023 19:43:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,36 +86,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
+Hi Lisandro,
 
-I am currently not subscribed (already filled the form waiting for
-confirmation), so please CC me for the moment.
+On Fri, Dec 8, 2023 at 3:43=E2=80=AFPM Lisandro P=C3=A9rez Meyer <lpmeyer@i=
+cs.com> wrote:
+>
+> Hi!
+>
+> I am currently not subscribed (already filled the form waiting for
+> confirmation), so please CC me for the moment.
+>
+> I am trying to enable Secure Boot/HAB on u-boot 2022.07. In a previous
 
-I am trying to enable Secure Boot/HAB on u-boot 2022.07. In a previous
-version this was achieved by enabling CONFIG_SECURE_BOOT, which was
-then renamed to CONFIG_IMX_HAB.
+Please try the top of tree U-Boot instead.
 
-Now if I enable this option I get:
-
-```
-| arm-tdx-linux-gnueabi-ld.bfd: arch/arm/mach-imx/hab.o: in function
-`imx_hab_is_enabled':
-| /home/lisandro/myproject/build/tmp/work/apalis_imx6-tdx-linux-gnueabi/u-b=
-oot-toradex/1_2022.07-r0/git/arch/arm/mach-imx/hab.c:875:
-undefined reference to `fuse_read'
-| make[2]: *** [/home/lisandro/myproject/build/tmp/work/apalis_imx6-tdx-lin=
-ux-gnueabi/u-boot-toradex/1_2022.07-r0/git/scripts/Makefile.spl:525:
-spl/u-boot-spl] Error 1
-```
-
-Now without IMX_HAB enabled CONFIG_CMD_FUSE is enabled and actually
-works, ie, I can read the fuses from u-boot's command line. So I'm
-suspecting this is just a missing condition... somewhere. But so far I
-have not been able to detect exactly where. Can anyone give me a
-non-NULL pointer on this?
-
-Thanks in advance, Lisandro.
-
---
-Lisandro P=C3=A9rez Meyer
-Embedded Platform Engineer
+On the mx7dsabresd_defconfig, for example, both CONFIG_IMX_HAB=3Dy and
+CONFIG_CMD_FUSE=3Dy are selected
+and this target builds fine.
