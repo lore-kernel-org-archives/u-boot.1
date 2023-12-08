@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC25C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 01:14:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D15EC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 01:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 684AE87559;
+	by phobos.denx.de (Postfix) with ESMTP id D682D8762F;
 	Sat,  9 Dec 2023 02:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="IssYZic1";
+	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="VB9WgFss";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C78A38761C; Fri,  8 Dec 2023 20:54:51 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id AFA8D8755C; Fri,  8 Dec 2023 21:09:35 +0100 (CET)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCA10874ED
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 20:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6EB874F3
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 21:09:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=ics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lpmeyer@ics.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-1f060e059a3so1454517fac.1
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 11:54:47 -0800 (PST)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-59093f6c94aso356694eaf.0
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 12:09:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702065286; x=1702670086;
+ d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702066170; x=1702670970;
  darn=lists.denx.de; 
  h=content-transfer-encoding:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6VQVCgLvgWiXm+Jih9SKbWQmF8Sy6LPCOf4maljQKx8=;
- b=IssYZic1vcvhuzFGkOauqUv3UssAIU9tIM5Qmigygd6EWsPEj4ywJKrO2zqNPAG45W
- NbsH/ibUAwhq5CJO9cMrma/tetjwR1B9maWHcLYY5VcIrnFqg1Ct7f7KTcTL86ZbbF4y
- Mv/allfZvh3JJt7Kf78hSyohne61tq8h00MUA0MTDCDb8yhlrT9ZuBZ4EvkEjQjVPeCB
- DA259Quvx24DG3+KYuVWI7a2a4TeSauYh3THgCaWhqTMtqjhr27hTe2Kj6+/GYTf2owj
- KHdLDO5+ytG20vzTEhcwX8dxn2Q1FBsAoddTqQU52WhO25rZsaW8a5XJpQNVzgH0QsJz
- hHHw==
+ bh=r8tE+FcHEZgxHCUUhOky+gwPmYcbRQYX+UnmbEEsVYw=;
+ b=VB9WgFss++OOb/S+abKyYW3tJjZ0U9aIGCUW8MXvQqTPDtRh6piXsl2iBrN4tgvH4O
+ xVU7namitRzFEJOnKpIJFmOmDEyhknZITqKHR3eIgCotOsJeLv1cp3Tb9q//tAEXTtkz
+ b0WEKn8+5J68fJy3q5bNWT4wnyBSEHKhK8c/0doKKZHy6/t2zsq+hL3UPq5QqzNfVMZU
+ qRHGAlB1/Pirwv9qkCF7CxqX3ieIKh5nfGKHYvHtfbeCxhkV35Plfetv+IJniT9Vt9wI
+ vIu/ahNebLE/6j1lxGe4kzLbaY+P51GLsTVx/VNr521g/Shb0DXHr7oY+aahmddGUGWG
+ 6kjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702065286; x=1702670086;
+ d=1e100.net; s=20230601; t=1702066170; x=1702670970;
  h=content-transfer-encoding:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6VQVCgLvgWiXm+Jih9SKbWQmF8Sy6LPCOf4maljQKx8=;
- b=Qs4L2yyQprd5V2VLh6kkMQ7ooV/RnF+MmkUuB4R6qFv7VJS2ak9+wqLU0XtjzQ2zUZ
- DHXeS7MVPKmKmUEoNS2/kr+8wEhl+IGgI/61BTwCAFArEEnIxF9iuGaNBg2b+oNTnIMI
- brEu2+vafRo6JrmMJ3O5B3aAm6twoQTgNwU/W5oPntuVAwKZiWNzT801/E7BkQB5CgUb
- rUaXuNCMhoviTacJJU0JgGcP4NYpo/p2DmN//083vRKSE3q94mRGZzowM1iykoIAqDkZ
- iTGOHp/0nU8imG/WwsxDCFWcaCvbQUMX2G6LS281TenIsq3b7BvMNGeT+NnF+Opw+FQz
- oKPg==
-X-Gm-Message-State: AOJu0Yx5D+KzWrKCFMMBguqHw9xlfQyMd9laXupsBjbHtRbjK8eB/scA
- 8UzcV/wSsB5m07RjWIf0M9sLeyjleq7+kt3FqPsM+a22G5Fku9npT2g=
-X-Google-Smtp-Source: AGHT+IEyeS4L2Vuoj09BAsjaqrN8fWxKSv6mRFwhszbgGh968Kw2aV5EMTCtlFyip3V0Wyuhnm1oFyGN1nkl2JgK4EI=
-X-Received: by 2002:a05:6870:70a4:b0:1fb:75c:4016 with SMTP id
- v36-20020a05687070a400b001fb075c4016mr706887oae.118.1702065285863; Fri, 08
- Dec 2023 11:54:45 -0800 (PST)
+ bh=r8tE+FcHEZgxHCUUhOky+gwPmYcbRQYX+UnmbEEsVYw=;
+ b=i98GnBox0QYq6qwe4h//fGyh4wXVbM2ucbTQBX3zTn+hwqJJrRmoMb7n/UR9OrNDvI
+ YNGNB2hBmhCP4/QAMUK5Dv/2O4F1KDj2eLYYIGKTb+PIUucHq5PqAseU4hjpIFWmRCGU
+ l7w8Z+WmAfkLQbwZDYpSZlfXKde1liXFHOQmKrdJ6HeKLhMK+GqOR3rEdRE985GOWGIT
+ 06C34Bl4dj61R9sVvKQkFLcgjCBgsv4ooNGKFVQ0E0SJmhSomOsgrqgj74aUa831eGmA
+ rHWyuiSllvRf5yUDO2HWwpmD55aQp/2F0jHIq5lLpvrLpb5hEHjnfImTUn84CpV48w5q
+ z+Tg==
+X-Gm-Message-State: AOJu0Yzo98IwqYt0DuGv+mRTgdKN1pPKRd5VOiidu4BvhuzTkUQlNRlt
+ waEsiVgMLs6tVDtV79lUCzKjTDGhMYKj1uFyvmiWBIwec2Ihjy0LZCs=
+X-Google-Smtp-Source: AGHT+IEl+m1GZtOd5d+5Trqag6LfFN80y+GITzrVzXYSAXunoqpHlRfLj/YY6T5H+hCiHjaoB3jzgofEE4FZmSdnGcc=
+X-Received: by 2002:a4a:e6d8:0:b0:58e:28cb:43f with SMTP id
+ v24-20020a4ae6d8000000b0058e28cb043fmr728819oot.6.1702066169930; Fri, 08 Dec
+ 2023 12:09:29 -0800 (PST)
 MIME-Version: 1.0
 References: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
  <CAOMZO5BzCRhNnseNq5RMP94GLt=1H9s742ywtm_LWOqTxaJcrg@mail.gmail.com>
-In-Reply-To: <CAOMZO5BzCRhNnseNq5RMP94GLt=1H9s742ywtm_LWOqTxaJcrg@mail.gmail.com>
+ <CABqjNW-w3BRg0rqDXXYRMKY6-Ws3HsuxdUbx_pKAQ2hiuUrOaA@mail.gmail.com>
+In-Reply-To: <CABqjNW-w3BRg0rqDXXYRMKY6-Ws3HsuxdUbx_pKAQ2hiuUrOaA@mail.gmail.com>
 From: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
-Date: Fri, 8 Dec 2023 16:54:30 -0300
-Message-ID: <CABqjNW-w3BRg0rqDXXYRMKY6-Ws3HsuxdUbx_pKAQ2hiuUrOaA@mail.gmail.com>
+Date: Fri, 8 Dec 2023 17:09:14 -0300
+Message-ID: <CABqjNW_2o4qfbStxA3A_e4YHMzo80ki1QZSwXn0YxeLDjS0ZCQ@mail.gmail.com>
 Subject: Re: iMX6, CONFIG_IMX_HAB and fuse_read()
 To: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -87,67 +88,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
+Don't forget to CC me ;-)
 
-On Fri, Dec 8, 2023 at 3:53=E2=80=AFPM Fabio Estevam <festevam@gmail.com> w=
-rote:
+On Fri, Dec 8, 2023 at 4:54=E2=80=AFPM Lisandro P=C3=A9rez Meyer <lpmeyer@i=
+cs.com> wrote:
+[snip]
+> > On the mx7dsabresd_defconfig, for example, both CONFIG_IMX_HAB=3Dy and
+> > CONFIG_CMD_FUSE=3Dy are selected
+> > and this target builds fine.
 >
-> Hi Lisandro,
+> Sure thing!
 >
-> On Fri, Dec 8, 2023 at 3:43=E2=80=AFPM Lisandro P=C3=A9rez Meyer <lpmeyer=
-@ics.com> wrote:
-> >
-> > Hi!
-> >
-> > I am currently not subscribed (already filled the form waiting for
-> > confirmation), so please CC me for the moment.
-> >
-> > I am trying to enable Secure Boot/HAB on u-boot 2022.07. In a previous
+> For the sake of completeness:
 >
-> Please try the top of tree U-Boot instead.
+> gcc: gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz as per
+> https://developer-archives.toradex.com/knowledge-base/build-u-boot-and-li=
+nux-kernel-from-source-code#tab-4-imx-6
 >
-> On the mx7dsabresd_defconfig, for example, both CONFIG_IMX_HAB=3Dy and
-> CONFIG_CMD_FUSE=3Dy are selected
-> and this target builds fine.
+> ```
+> $ export ARCH=3Darm
+> $ export DTC_FLAGS=3D"-@"
+> $ export PATH=3D~/gcc-linaro/bin/:$PATH
+> $ export CROSS_COMPILE=3Darm-none-linux-gnueabihf-
+> ```
+>
+> I added IMX_HAB:
+>
+> ```
+> $ echo "CONFIG_IMX_HAB=3Dy" >> configs/apalis_imx6_defconfig
+> ```
+>
+> And built:
+>
+> ```
+> $ make apalis_imx6_defconfig
+> $ make -j16
+> [...]
+>   LD      spl/u-boot-spl
+> arm-none-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function
+> `imx_hab_is_enabled':
+> /tmp/tmp.iSzdlFQa34/u-boot/arch/arm/mach-imx/hab.c:879: undefined
+> reference to `fuse_read'
+> make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+> ```
+>
+> Same error :-/
 
-Sure thing!
-
-For the sake of completeness:
-
-gcc: gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf.tar.xz as per
-https://developer-archives.toradex.com/knowledge-base/build-u-boot-and-linu=
-x-kernel-from-source-code#tab-4-imx-6
-
-```
-$ export ARCH=3Darm
-$ export DTC_FLAGS=3D"-@"
-$ export PATH=3D~/gcc-linaro/bin/:$PATH
-$ export CROSS_COMPILE=3Darm-none-linux-gnueabihf-
-```
-
-I added IMX_HAB:
-
-```
-$ echo "CONFIG_IMX_HAB=3Dy" >> configs/apalis_imx6_defconfig
-```
-
-And built:
-
-```
-$ make apalis_imx6_defconfig
-$ make -j16
-[...]
-  LD      spl/u-boot-spl
-arm-none-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function
-`imx_hab_is_enabled':
-/tmp/tmp.iSzdlFQa34/u-boot/arch/arm/mach-imx/hab.c:879: undefined
-reference to `fuse_read'
-make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
-```
-
-Same error :-/
-
-
+Forgot to mention: I used master's current HEAD, commit
+2f0282922b2c458eea7f85c500a948a587437b63
 
 
 --=20
