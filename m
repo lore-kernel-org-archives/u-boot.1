@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E385DC4167B
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40B8FC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 22:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07FCB876FF;
-	Fri,  8 Dec 2023 23:31:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6915D876F9;
+	Fri,  8 Dec 2023 23:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rIqMZikg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="bLLQGgLv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B66E876A4; Fri,  8 Dec 2023 23:31:35 +0100 (CET)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id B074A876FF; Fri,  8 Dec 2023 23:31:36 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B55F87525
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:31:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C0AC876B1
+ for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 23:31:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-40c2308faedso26996535e9.1
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:31:26 -0800 (PST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40b5155e154so30626645e9.3
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 14:31:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702074686; x=1702679486;
+ d=amarulasolutions.com; s=google; t=1702074689; x=1702679489;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=doWty2U9xWIS6+YzeofXrePWP4HMK9WU0hHwvvDf5u0=;
- b=rIqMZikg3IODOaiEdMUoEXpZaV/SdriqMWnMvWR9IzOHwRt60MxkrowKuZkgptjrcW
- su47g+ptaagVNb5cpwMVZM/DdoUU3xXW3Kzw50h/fwD8QTvCkoq2+fNQgEgcROs7vSb3
- dPNuMesuvNQ3wcA1oUUMyo3pMgPoMXAG4x66k=
+ bh=E4tcdqhu/YPrTZG+VE9jx9mo+yCI/RsZ7riQIoBINg8=;
+ b=bLLQGgLvykprJMwukqDQlUmGM/odBcY/YZrBignAU6lw3UD1booCfC4cjoNYX4CJHx
+ SZgO4W3AVnj9ebc/SMEdno4WuQiIm7MBSF2j5deGilH83/peSnFuu/JgzDNrkHVbv3Xt
+ sb/BaOEySt2iOFOQ6VAZtg5mKzVEHkaUKSz3U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702074686; x=1702679486;
+ d=1e100.net; s=20230601; t=1702074689; x=1702679489;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=doWty2U9xWIS6+YzeofXrePWP4HMK9WU0hHwvvDf5u0=;
- b=oV7bLoNXtahpxXOAFwTEmG8Rf3gEAT+wuFqj4pnQb7moIJ/CN9zHEJobe3VlOzVW9F
- C8kmjenn0eSmLlkFyjvvIEzSf5kcJ+0/eq3a+r3Tyenvjn0KHXozfyTnb74t0NobFcrP
- gvkC+6jBmGuGA7xNOVCTFQKuweiGLSD0ReOugsJ5mhaCrENe8pfGqYu22iMbdXS2tS7k
- Uib/NvgM5fSX1vFyKkJbe74angUSraDFuRrk/90ArVseOYLgndl8DBZ6+qDZYvtvYnZu
- dvsPW54l1IpXZ+McCcmsX9xo+qZvwbXH1pR7R7dlL7Ntuusa8UCBB1h7cBf+fw5/1htf
- t+RA==
-X-Gm-Message-State: AOJu0YyN8vRjGS0AX/w+V1Z9M2Rx2vBrOHBfQHaxEFD+/momCKJvcRH6
- bNB1KcYD1wI0lb938J+N0UJF0OGaJdaqZTQebEyzQw==
-X-Google-Smtp-Source: AGHT+IE0T2Hs0956TK02Lq5TTRzkzcL4yTE45aKG1NlO1yj7wrEFjrBPwkGZUbiPybf1zHIQ+nkl4Q==
-X-Received: by 2002:a05:600c:ac6:b0:40b:5e21:d361 with SMTP id
- c6-20020a05600c0ac600b0040b5e21d361mr366023wmr.106.1702074686003; 
- Fri, 08 Dec 2023 14:31:26 -0800 (PST)
+ bh=E4tcdqhu/YPrTZG+VE9jx9mo+yCI/RsZ7riQIoBINg8=;
+ b=JsffsFvBjxReVm5kLPcEn7I/Ze+2cSpPJm6pkurY+opo8iIwpSVq8gjTvV4vQIkBgz
+ pTit8rYDWLBppfk96OmJcnC2oDjALKfKMByfpNGmVjoPY7Y7/iBDD4iU2n6NemlbTIXL
+ wYgeEl1QzGgWfhXKt83OjLpwct26kWCiBGLFV5cSaBnkzQnFLToIK36YfbpYZtJxlZSf
+ vnkPByWQXeQXBiS6AGDSw3GEZe6AucFhSEU54WtVDsHQm5dxXuIyVXLREBxJQPj0zqh3
+ 80feH308m9yjkTAWNCvKxmm132qJcxrnCEF5ZSdimMxPkpue8EZn1OQGszra5vk1F9Re
+ OHgA==
+X-Gm-Message-State: AOJu0YzWbtm+nV9XePgLjj2VJ5bLS6R2b8zOh30bLV1D0vd0i6RKbbL1
+ m0R+RKRB1ZylgnCJnSJW67O4cZmLMFDbScDJ5tDZ2g==
+X-Google-Smtp-Source: AGHT+IEJZ6wgrOndnotvUEPsIPUAZtAM5g7f3MVLSLyMTf09kCsiU49pFVmg3RRQS7FEX6pEdBkrnw==
+X-Received: by 2002:a05:600c:294:b0:40b:5e21:bdcd with SMTP id
+ 20-20020a05600c029400b0040b5e21bdcdmr285157wmk.92.1702074688907; 
+ Fri, 08 Dec 2023 14:31:28 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.31.25
+ h11-20020a05600c350b00b0040b4cb14d40sm6357863wmq.19.2023.12.08.14.31.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 14:31:25 -0800 (PST)
+ Fri, 08 Dec 2023 14:31:28 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v12 21/24] test: hush: Fix loop tests for modern hush
-Date: Fri,  8 Dec 2023 23:30:22 +0100
-Message-Id: <20231208223025.55076-22-francis.laniel@amarulasolutions.com>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Edmond <seanedmond@microsoft.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Roger Knecht <rknecht@pm.me>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PATCH v12 23/24] cmd: Set modern hush as default shell
+Date: Fri,  8 Dec 2023 23:30:24 +0100
+Message-Id: <20231208223025.55076-24-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
 References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
@@ -92,77 +97,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modifies return code got from while loop as modern hush always returns 0 from
-while loop.
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 ---
- test/hush/loop.c | 34 ++++++++++++++++++++++++++++++----
- 1 file changed, 30 insertions(+), 4 deletions(-)
+ cmd/Kconfig | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/test/hush/loop.c b/test/hush/loop.c
-index ca777e38fe..80a9071a80 100644
---- a/test/hush/loop.c
-+++ b/test/hush/loop.c
-@@ -9,6 +9,9 @@
- #include <env_attr.h>
- #include <test/hush.h>
- #include <test/ut.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 8b49a97aca..c9d4375ebb 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -28,21 +28,17 @@ depends on HUSH_PARSER
  
- static int hush_test_for(struct unit_test_state *uts)
- {
-@@ -21,7 +24,12 @@ static int hush_test_for(struct unit_test_state *uts)
- 	ut_assert_nextline("quux");
- 	ut_assert_console_end();
+ config HUSH_OLD_PARSER
+ 	bool "Use hush old parser"
+-	default y
+ 	help
+ 	  This option enables the old flavor of hush based on hush Busybox from
+ 	  2005.
  
--	puts("Beware: this test set local variable loop_i and it cannot be unset!");
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* Reset local variable. */
-+		ut_assertok(run_command("loop_i=", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		puts("Beware: this test set local variable loop_i and it cannot be unset!");
-+	}
+-	  It is actually the default U-Boot shell when decided to use hush as shell.
+-
+ config HUSH_MODERN_PARSER
+ 	bool "Use hush modern parser"
++	default y
+ 	help
+ 	  This option enables the new flavor of hush based on hush upstream
+ 	  Busybox.
  
- 	return 0;
- }
-@@ -31,12 +39,30 @@ static int hush_test_while(struct unit_test_state *uts)
- {
- 	console_record_reset_enable();
- 
--	/* Exit status is that of test, so 1 since test is false to quit the loop. */
--	ut_asserteq(1, run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/*
-+		 * Hush 2021 always returns 0 from while loop...
-+		 * You can see code snippet near this line to have a better
-+		 * understanding:
-+		 * debug_printf_exec(": while expr is false: breaking (exitcode:EXIT_SUCCESS)\n");
-+		 */
-+		ut_assertok(run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		/*
-+		 * Exit status is that of test, so 1 since test is false to quit
-+		 * the loop.
-+		 */
-+		ut_asserteq(1, run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
-+	}
- 	ut_assert_nextline("bar");
- 	ut_assert_console_end();
- 
--	puts("Beware: this test set local variable loop_foo and it cannot be unset!");
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* Reset local variable. */
-+		ut_assertok(run_command("loop_foo=", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		puts("Beware: this test set local variable loop_foo and it cannot be unset!");
-+	}
- 
- 	return 0;
- }
+-	  This parser is experimental and not well tested.
+-
+ config HUSH_SELECTABLE
+ 	bool
+ 	default y if HUSH_OLD_PARSER && HUSH_MODERN_PARSER
 -- 
 2.34.1
 
