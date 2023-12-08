@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B633CC10F05
-	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 15:00:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D7AC4167B
+	for <u-boot@archiver.kernel.org>; Fri,  8 Dec 2023 15:12:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E02FA874FB;
-	Fri,  8 Dec 2023 16:00:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1D80C87536;
+	Fri,  8 Dec 2023 16:12:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tLkPyjGV";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 869778754A; Fri,  8 Dec 2023 16:00:49 +0100 (CET)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com
- [209.85.210.53])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 135D986308; Fri,  8 Dec 2023 16:12:33 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD5AA803AE
- for <u-boot@lists.denx.de>; Fri,  8 Dec 2023 16:00:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAC5287536;
+ Fri,  8 Dec 2023 16:12:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robherring2@gmail.com
-Received: by mail-ot1-f53.google.com with SMTP id
- 46e09a7af769-6d9dc789f23so1036733a34.3
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 07:00:46 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702047645; x=1702652445;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yhQWuvNrfy0nDTet/URpa1HIQtUWnl4nOPZplCeKz7Q=;
- b=UJ0CzAEgmFIRqeKeijGt/OvI98M9426j+zvD4ukcyxwqMGzkdSUnkOCHC/A3kafKhv
- +/nZOxqdJlmPq2GB+PjUrJRbm1NeTHIhDhoL4V8ViWGCuAWyC74FXVnk8z3K5voeBRCi
- lSsT+3IqLQ3tgNKDa4gxQUvGQ6gXqsmJwOwJlyg1UE88WYlsnBfpZeGNwJIUKagODx0U
- iHYz7oYPjBbwjjp0cmTsqZt/qBS/XdkzukmWoOk2+gYeo+2MxgTaE3ZQkmhCZMgUQ+he
- 9T3tPAi+Sei1fwC2qMmkzYrXl3KgfEeVHDFjFNXBdWW5KUf+8BYueK38HL9/+oDzBy8u
- /zNg==
-X-Gm-Message-State: AOJu0Ywk7Pv5ciMLspdJV0h7veQMDVTcVt7OUcvl3W8wA7IadHLPzCMh
- 0jnEiWHS+e9aea9m75VCrQ==
-X-Google-Smtp-Source: AGHT+IFNLtyInrOf9nIFSbmfUtQCKSgkpfe0CHZ/yGXwzd/BlzrMLoh/hXXynLP9bXaT2VnqR+WYNQ==
-X-Received: by 2002:a05:6830:110f:b0:6d9:ef4a:82db with SMTP id
- w15-20020a056830110f00b006d9ef4a82dbmr203527otq.13.1702047644628; 
- Fri, 08 Dec 2023 07:00:44 -0800 (PST)
-Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net.
- [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
- bn20-20020a0568300c9400b006d9e756fac2sm283283otb.51.2023.12.08.07.00.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Dec 2023 07:00:43 -0800 (PST)
-Received: (nullmailer pid 1287216 invoked by uid 1000);
- Fri, 08 Dec 2023 15:00:42 -0000
-Date: Fri, 8 Dec 2023 09:00:42 -0600
-From: Rob Herring <robh@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>,
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Conor Dooley <conor+dt@kernel.org>,
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 42C45CE0D55;
+ Fri,  8 Dec 2023 15:12:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 56FB8C433CB;
+ Fri,  8 Dec 2023 15:12:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1702048345;
+ bh=7R641hSDXjIXLF4BWBZ4LxdbMqaGfhOyauhC3A+X7J8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=tLkPyjGVZlqDE9yBF9ZmMDtuSyRSVF8kz7mmy8Ciwol68fdXKpgWflTJYunMudbP1
+ 6V/YXyKfxI0FUgIfQgvaC/ueORwLQRqR/RstiPwjIJPMX6mcN+ibkem2azuH7Kz3UX
+ AlteVFSTWU6mSnw1ePxlUpLL5sy63Ma+/l8U0CYq6IioOMnVZ163hSl2n+UJ/u/sGg
+ eh0sZ/DEUmnc9L8k36LmVqzwTs2VS0c9Racv+p2l6n6NSkw3rowVs9v9xThxGGwbMM
+ dqTeW0HlabhaV/kDoI87I9105TmqwDnEtjhExX41h0K0gdWzqNbVFOS23Go4wi/0+E
+ 9botpcCVd2G9w==
+Date: Fri, 8 Dec 2023 15:12:19 +0000
+From: Conor Dooley <conor@kernel.org>
+To: ff <ff@shokubai.tech>
+Cc: Rob Herring <robh+dt@kernel.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ "u-boot-custodians@lists.denx.de" <u-boot-custodians@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>,
- =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-Message-ID: <20231208150042.GA1278773-robh@kernel.org>
-References: <20231116172859.393744-1-sjg@chromium.org>
+ "conor+dt@kernel.org" <conor+dt@kernel.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ "neil.armstrong@linaro.org" <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Simon Glass <sjg@chromium.org>,
+ "boot-architecture@lists.linaro.org" <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Message-ID: <20231208-reshoot-operation-a36504ba2ed9@spud>
+References: <f72c772b-7fd7-4558-96d3-086f8ab7515a@linaro.org>
+ <CAFA6WYOPh6UBt3FDm-c0tfp3YvWtRHkaxy2CJNg8ORKOwPwq0w@mail.gmail.com>
+ <34334add-4017-46f6-873a-d9233e29f640@linaro.org>
+ <CAFA6WYN_uf0+tHm7RxXXz_7U3tdbdsK1rttnQN-rcfRknrcDQA@mail.gmail.com>
+ <CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com>
+ <5C77B3D5-3659-40BC-86BB-E73E7034E017@shokubai.tech>
+ <CAL_JsqLBQCStz39-5d0CSnZzuSfc6473d2=HEY2NF7Hm83L9YA@mail.gmail.com>
+ <61B1DEC4-4004-491A-B5A9-1548ACAD6104@shokubai.tech>
+ <20231207-unmixable-surround-ff6c525e36fd@spud>
+ <390B4BCF-EC60-4409-9A85-FE8607334C39@shokubai.tech>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="/MZd3HCZHKlEueEQ"
 Content-Disposition: inline
-In-Reply-To: <20231116172859.393744-1-sjg@chromium.org>
+In-Reply-To: <390B4BCF-EC60-4409-9A85-FE8607334C39@shokubai.tech>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,79 +93,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
-> Add a compatible string for binman, so we can extend fixed-partitions
-> in various ways.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v5)
-> 
-> Changes in v5:
-> - Add #address/size-cells and parternProperties
-> - Drop $ref to fixed-partitions.yaml
-> - Drop 'select: false'
-> 
-> Changes in v4:
-> - Change subject line
-> 
-> Changes in v3:
-> - Drop fixed-partition additional compatible string
-> - Drop fixed-partitions from the example
-> - Mention use of compatible instead of label
-> 
-> Changes in v2:
-> - Drop mention of 'enhanced features' in fixed-partitions.yaml
-> - Mention Binman input and output properties
-> - Use plain partition@xxx for the node name
-> 
->  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++++++++++
->  .../bindings/mtd/partitions/partitions.yaml   |  1 +
->  MAINTAINERS                                   |  5 ++
->  3 files changed, 74 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> new file mode 100644
-> index 000000000000..329217550a98
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> @@ -0,0 +1,68 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +# Copyright 2023 Google LLC
-> +
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Binman firmware layout
-> +
-> +maintainers:
-> +  - Simon Glass <sjg@chromium.org>
-> +
-> +description: |
-> +  The binman node provides a layout for firmware, used when packaging firmware
-> +  from multiple projects. It is based on fixed-partitions, with some
-> +  extensions, but uses 'compatible' to indicate the contents of the node, to
-> +  avoid perturbing or confusing existing installations which use 'label' for a
-> +  particular purpose.
-> +
-> +  Binman supports properties used as inputs to the firmware-packaging process,
-> +  such as those which control alignment of partitions. This binding addresses
-> +  these 'input' properties. For example, it is common for the 'reg' property
-> +  (an 'output' property) to be set by Binman, based on the alignment requested
-> +  in the input.
-> +
-> +  Once processing is complete, input properties have mostly served their
-> +  purpose, at least until the firmware is repacked later, e.g. due to a
-> +  firmware update. The 'fixed-partitions' binding should provide enough
-> +  information to read the firmware at runtime, including decompression if
-> +  needed.
 
-How is this going to work exactly? binman reads these nodes and then 
-writes out 'fixed-partitions' nodes. But then you've lost the binman 
-specifc parts needed for repacking.
+--/MZd3HCZHKlEueEQ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Rob
+On Fri, Dec 08, 2023 at 09:39:27AM +0000, ff wrote:
+>=20
+>=20
+> Le 7 d=C3=A9c. 2023 =C3=A0 21:31, Conor Dooley <conor@kernel.org> a =C3=
+=A9crit :
+>=20
+> What on earth has happened here with quoting? Please fix your mail
+> client man, this mail is a mess to read.
+>=20
+> Conor: Hopefully I have now fixed MacOS Mail configuration=E2=80=A6
+> For all: please accept my apologies on past inconveniences.
+
+Judging by this mail looking like it does, nothing has changed?
+You can check it on lore too:
+https://lore.kernel.org/u-boot/CAC_iWjKKwjpD1VAbXJaB=3DUDQPWMS+k65tv-qL=3DJ=
+newzSEhGEow@mail.gmail.com/T/#ma8c4fc1268c68aab0b05b96b2cea5c90cc2525b8
+
+I'm not going to fix the quoting by hand, I have better things to do :)
+
+Cheers,
+Conor.
+
+>=20
+> On Thu, Dec 07, 2023 at 08:24:01PM +0000, ff wrote:
+>=20
+>=20
+> Le 7 d=C3=A9c. 2023 =C3=A0 19:51, Rob Herring <robh+dt@kernel.org> a =C3=
+=A9crit :
+>=20
+> =EF=BB=BFOn Thu, Dec 7, 2023 at 2:08=E2=80=AFAM ff <ff@shokubai.tech> wro=
+te:
+>=20
+>=20
+>=20
+> Le 6 d=C3=A9c. 2023 =C3=A0 21:42, Rob Herring <robh+dt@kernel.org> a =C3=
+=A9crit :
+>=20
+> =EF=BB=BFOn Tue, Dec 5, 2023 at 11:05=E2=80=AFPM Sumit Garg <sumit.garg@l=
+inaro.org> wrote:
+>=20
+> On Tue, 5 Dec 2023 at 15:39, Krzysztof Kozlowski
+> <krzysztof.kozlowski@linaro.org> wrote:
+>=20
+> On 05/12/2023 10:45, Sumit Garg wrote:
+> + U-boot custodians list
+>=20
+> On Tue, 5 Dec 2023 at 12:58, Krzysztof Kozlowski
+> <krzysztof.kozlowski@linaro.org> wrote:
+>=20
+> On 05/12/2023 08:13, Sumit Garg wrote:
+> @DT bindings maintainers,
+>=20
+> Given the ease of maintenance of DT bindings within Linux kernel
+> source tree, I don't have a specific objection there. But can we ease
+> DTS testing for firmware/bootloader projects by providing a versioned
+> release package for DT bindings? Or if someone else has a better idea
+> here please feel free to chime in.
+>=20
+> This doesn't work for you?:
+>=20
+> https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-reb=
+asing.git/
+>=20
+> Thanks, this is certainly a good step which I wasn't aware of. Further
+> simplification can be done to decouple devicetree source files from DT
+> bindings.
+>=20
+> Why?
+>=20
+> I suppose you are already aware that Linux DTS files are a subset of
+> what could be supported by devicetree schemas. There can be
+> firmware/bootloader specific properties (one example being [1]) which
+> Linux kernel can simply ignore. Will you be willing to add all of
+> those DT properties to Linux DTS files and maintain them?
+>=20
+> We already added them and we already maintain them. DTS describes the
+> hardware, not the OS-subset of the hardware.
+>=20
+> Let look at some numbers if your statement is justified or not for the
+> example I gave:
+>=20
+> u-boot$ git grep -nr bootph-* arch/arm* | wc -l
+> 4079
+>=20
+> linux$ git grep -nr bootph-* arch/arm* | wc -l
+> 267
+>=20
+> I have no control over whether anyone has submitted the other 3812 instan=
+ces.
+>=20
+> It looks like there is always going to be a catch up game regarding DT
+> properties which either Linux kernel or u-boot or any other
+> firmware/bootloader project don't care about.
+>=20
+> As long as dts files in u-boot are manually sync'ed, yes. That is the
+> problem and it doesn't matter if we have a standalone repository or
+> not.
+>=20
+> If you want to move in that direction, start automating what u-boot
+> imports. You need to do that for bindings if you want to run
+> validation, so why not dts files too?
+>=20
+> However, DT bindings are something which should be common, the
+> hardware description of a device should be universal. IMO, splitting
+>=20
+> Both DT bindings and DTS should be common. I don't see the difference.
+>=20
+> If we really care about DTS to be common then the contribution model
+> has to change where there is a single repo hosting DT bindings and
+> DTS. All other projects whether it is Linux kernel or u-boot or any
+> other OS/firmware/bootloader are just consuming DTS files from that
+> single repo.
+>=20
+> Really, only the kernel and u-boot matter. No, I don't mean I don't
+> care about other projects, but those are the 2 with the widest h/w
+> support by far and which have a major effort to sync copies of dts
+> files in both projects. The rest are just noise in terms of this
+> problem.
+>=20
+> I suppose this is something that Linux DT maintainers
+> have objected to in the past for ease of maintenance. I am not sure if
+> you folks are willing to change that stance.
+>=20
+> The issue is no one steps up to help maintain such a repository while
+> there is lots of review and maintainer work on what goes into the
+> kernel tree. I'm happy to direct my binding review attention to
+> wherever the majority of the bindings go. But the work on the DTS side
+> is mostly SoC tree maintainers and sub-maintainers.
+>=20
+> Assume for a minute we have this standalone repo. What happens next?
+> We start with an empty repo and then merge and move platforms 1 by 1?
+>=20
+> What about leveraging SystemReady-IR compliant board maintainers and star=
+t with a core of motivated people ?
+>=20
+> I think there are 2 ATM. Synquacer and i.MX8 variants.
+>=20
+> Based on  https://www.arm.com/architecture/system-architectures/systemrea=
+dy-certification-program/ir
+> roughly 30 boards.
+>=20
+> Synquacer only
+> has a DT in u-boot, so not really anything to do there.
+> I'm pretty
+> sure the certified DTBs for i.MX8 don't match what's in u-boot or the
+> kernel tree. Hopefully, it's just a subset, but still, there's a gap.
+> I don't know that there is motivation there either.
+> Note that SystemReady currently only requires every node with
+> 'compatible' have a schema. It does not yet require no schema
+> warnings. If we went with a 1 by 1 approach, I would push that
+> platforms have to be free of warnings.
+>=20
+> How many years will that take?
+>=20
+> Should all platforms following that organization be a goal?
+>=20
+> You mean should all platforms be moved? Absolutely. I don't think we
+> want to solve the problem of having DTS files in 2 places by creating
+> a 3rd place.
+>=20
+> I think this bit here is the only thing you actually wrote:
+>=20
+> Actually, if we limit he DTS in the third place for SystemReady-IR,
+> there should be no DTB in the Linux distribution.
+> It would be the equivalent as ACPI boards . So is it still an issue ?
+> A reference to the the third repo may be hinted in a text file.
+>=20
+> SystemReady is only for one architecture, why would using it as the
+> centralised point for devicetree files make sense?
+>=20
+> SystemReady is an Arm certification but built on EBBR which is
+> the important part and also adopted by RISC-V.
+> So when I said SystemReady, one should read EBBR.
+> EBBR is promoting a DT life cycle that is in line with
+> having an out of OS/Firmware repos definitions.
+>=20
+> I don't really think 1 by 1 is the right approach. I was just
+> enumerating how this could work. It's not that useful to say we need a
+> standalone repo without working thru the logistics of how exactly that
+> will work.
+>=20
+> Rob
+>=20
+
+--/MZd3HCZHKlEueEQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZXMyUgAKCRB4tDGHoIJi
+0h8YAQDb9uV9Pvzi4RzIpgq0umFCu6MxISfkx7PstLLRhwDxBwEAnbWSp8Wv3IIx
+2Utlcd7eLa0jdH+i853oTVPqoZEHfAA=
+=YN+v
+-----END PGP SIGNATURE-----
+
+--/MZd3HCZHKlEueEQ--
