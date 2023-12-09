@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33AA6C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C15BC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:49:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65566876A1;
-	Sat,  9 Dec 2023 19:39:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C45428744F;
+	Sat,  9 Dec 2023 19:49:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aaR/xbak";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Plqu1Stj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 441D0876A8; Sat,  9 Dec 2023 19:39:41 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 0C9188753A; Sat,  9 Dec 2023 19:49:22 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A46D876A1
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:39:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 716E287215
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5d279bcce64so29049827b3.3
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:39:39 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5df49931b4eso7175567b3.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:49:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702147178; x=1702751978; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702147758; x=1702752558; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cZHIWF+R5LarVCQ7byzr6jAtjIjFXXFL2Yusa7kY4+c=;
- b=aaR/xbaki4ydOCeoWenf0k7qV7NWN5YEllZBYsr87TcJ+Lqs9W4HTOzQa1w9FMLZc2
- bi+TON0JwRyqTc8KDee4R1K+7WWHzLvlenjCN4YwW1bG+Sul+2EXeveDFOkIETsqRNS7
- 6mjdqLFoAh0ljrljH4x7QQH+MGqZ2WpWTXwaA=
+ bh=esaY8CLRRwjuhArDkpJAMjE21JZIpEQkk+HutMZXjXA=;
+ b=Plqu1Stj8XYMjlmWdv4ZLwOvtYhHnH2WXcAPjuMDu9PXTVKxIPQQj452OH3gEDBXXw
+ ikcBF1SftVegD+iC1xJNXbOKO8FoG8CQUzW7gIbIlK2WVVThgQohrUSQYnoCw13YDWD6
+ +VIW46fXw1CkG0I45VbILHzhv03L7WqnQk/2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702147178; x=1702751978;
+ d=1e100.net; s=20230601; t=1702147758; x=1702752558;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cZHIWF+R5LarVCQ7byzr6jAtjIjFXXFL2Yusa7kY4+c=;
- b=rJVvjKgsgCTLvpX5lgyEI5XUvbY5VtM+YA4a4S4I6sXYO9PbCfu6Yes2vobC/4+O0o
- yWWdEdwePLI50r/guxlfpIe0QtDd5diQ9f82H3Wn9GjYXdl/s3oQwNYlQbfq3rsAnME0
- gb2lPClyqZ+fEN8iguUi7F2WRtUpSLZvVUMUGARO+RylCgKZYKgyRresi4LEuA6wUfsP
- cKER42STKi/TVwRQGS7+gx0Kz8QUoaCcLldt4B+syDOs/IBJS37XHJqk7Av+7SADZTM5
- HxZ8kYNBNMe25UdIIDGAH+1+phEW2v0hmG7NvuXvIf4pK5vGtF2UuHgbplFaAKjjaZtI
- Py5Q==
-X-Gm-Message-State: AOJu0Yy9dErycQbYionFGeO9dgOmcWTwSJsVI79GSfu1sEgsYyuro6Fm
- jQQl6orHiO4m8uAvcHeeRC2P2w==
-X-Google-Smtp-Source: AGHT+IHCh0mfp6VajG2nq2x00jgQO9LwcRKHlKDSS+56piWZv/BBquyj44lmiDTUrxki/LwBgjlgwQ==
-X-Received: by 2002:a0d:eac9:0:b0:5de:7465:f52e with SMTP id
- t192-20020a0deac9000000b005de7465f52emr1489128ywe.61.1702147177835; 
- Sat, 09 Dec 2023 10:39:37 -0800 (PST)
+ bh=esaY8CLRRwjuhArDkpJAMjE21JZIpEQkk+HutMZXjXA=;
+ b=QhQX0KH+bmqgtP8Iyqxdu9OPJmQdC7LUOib/aDgEX0WU1aMPsOJ7hfXvaeZl29JEt8
+ ss/DDFQOdtU4tblKQjf196wg+VDNTlT2k+3ZfXddb3vcaMiE94xlfxIVRK0fSahvjaDr
+ Eh2Uhm3JJH+yFjiZfkYq+9MduLv0zlDEDazho8VDrkEoHEsHqUHaAg18v8pOQ5ghZ8Ww
+ 9XmSutPlnDa/LGOimeg/5HmpH+egB6ql9eBedrZS0acJXhw1NVDXTxD4ffUoyOQ6WJHN
+ ku/3aFoBOEvuIoLUDxq9jHaoC65wxHelwMkik2FHEFAp52NBHQoMIPS/tT8UUnBtLGwm
+ PzIQ==
+X-Gm-Message-State: AOJu0YzZHvsqZrHvmh5jxxcYR4CWHCEnEHqRSEbUHYiGuPaUaRDDkx76
+ +D42QCflxVz7npRb6ifhm2jTeg==
+X-Google-Smtp-Source: AGHT+IHV8kIqTvJz1HIvIcyPCaewZIr+pOGJXnDxcPgyA8hDlpE1UGe5Rnd64SHSsqlCdqHIEK/RRg==
+X-Received: by 2002:a05:690c:3405:b0:5df:5d59:60bd with SMTP id
+ fn5-20020a05690c340500b005df5d5960bdmr692763ywb.28.1702147758122; 
+ Sat, 09 Dec 2023 10:49:18 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- e3-20020a0dc203000000b005c5a08c5c15sm1630456ywd.136.2023.12.09.10.39.36
+ m9-20020a81d249000000b005d72c7c1241sm1624226ywl.112.2023.12.09.10.49.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 10:39:37 -0800 (PST)
-Date: Sat, 9 Dec 2023 13:39:35 -0500
+ Sat, 09 Dec 2023 10:49:17 -0800 (PST)
+Date: Sat, 9 Dec 2023 13:49:15 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Manuel Traut <manuel.traut@mt.com>, Marek Vasut <marex@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [PATCH 09/14] pxe: Refactor to reduce the size of label_boot()
-Message-ID: <20231209183935.GX2513409@bill-the-cat>
-References: <20231204003144.899097-1-sjg@chromium.org>
- <20231203173130.9.I66588a1ea770bbeea0a355c2e533e32344302c80@changeid>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, sean.anderson@seco.com,
+ neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com,
+ mark.kettenis@xs4all.nl, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
+ nodes are missing
+Message-ID: <20231209184915.GY2513409@bill-the-cat>
+References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+ <20231127171058.165777-3-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
+ <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
+ <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
+ <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LkrM8DUe4P6y+s3k"
+ protocol="application/pgp-signature"; boundary="qvls0D6tmIF4iOSv"
 Content-Disposition: inline
-In-Reply-To: <20231203173130.9.I66588a1ea770bbeea0a355c2e533e32344302c80@changeid>
+In-Reply-To: <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,44 +101,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---LkrM8DUe4P6y+s3k
+--qvls0D6tmIF4iOSv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 03, 2023 at 05:31:33PM -0700, Simon Glass wrote:
+On Wed, Dec 06, 2023 at 06:03:14PM +0200, Ilias Apalodimas wrote:
+> Hi Simon,
+>=20
+> On Sat, 2 Dec 2023 at 20:28, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, 29 Nov 2023 at 23:50, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > [...]
+> > >
+> > >> > Changes since v1:
+> > >> > - Tokenize the DT node entry and use the appropriate value instead=
+ of
+> > >> >   the entire string
+> > >> > - Removed Peters tested/reviewed-by tags due to the above
+> > >> >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++=
+++---
+> > >> >  1 file changed, 90 insertions(+), 4 deletions(-)
+> > >> >
+> > >>
+> > >> Can this be put behind a Kconfig? It adds quite a bit of code which
+> > >> punishes those boards which do the right thing.
+> > >
+> > >
+> > > Sure but OTOH the code increase should be really minimal. But I don't=
+ mind I can add a Kconfig
+> > >
+> > >>
+> > >> > +
+> > >> > +       dt_str =3D ofnode_read_string(ofnode_root(), nprop->dt_str=
+);
+> > >>
+> > >> Could this use ofnode_read_string_index() ?
+> > >
+> > >
+> > > Maybe, I'll have a look and change it if that works
+>=20
+> Unless I am missing something this doesn't work.
+> This is designed to return a string index from a DT property that's defin=
+ed as
+> foo_property =3D "value1", "value2" isn't it?
+>=20
+> The code above is trying to read an existing property (e.g compatible)
+> and get the string after the comma delimiter.
+> Perhaps I should add this in drivers/core/ofnode.c instead?
+>=20
+> > >
+> > > [...]
+> > >
+> > >>
+> > >> Any chance of a test for this code?
+> > >
+> > >
+> > > Sure, but any suggestions on where to add the test?
+> > > SMBIOS tables are populated on OS booting, do we have a test somewher=
+e that boots an OS?
+> >
+> > They are written on startup, right? They should certainly be in place
+> > before U-Boot enters the command line.
+>=20
+> Not always.  I am not sure if x86 does that, but on the rest of the
+> architectures, they are only initialized when the efi smbios code
+> runs. Wasn't this something you were trying to change?
 
-> This function is far too long and complicated. Split out the part
-> which actually calls the boot commands into a separate function.
->=20
-> Change a strncpy() to strlcpy() to keep checkpatch happy.
->=20
-> No functional change is intended.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Please split strncpy -> strlcpy in to its own patch so it can be
-reviewed easily, thanks.
+One of those things I keep repeating is that we don't know for sure what
+the right values here are until we load the DT the OS _will_ use. It's
+quite valid to start U-Boot and pass it a generic "good enough" DT at
+run time until U-Boot can see (GPIOs, EEPROM, whatever) what it's on and
+what the real DT to load before passing to the OS is. Since U-Boot
+doesn't need SMBIOS tables itself, we should make these "late" not
+"early".
 
 --=20
 Tom
 
---LkrM8DUe4P6y+s3k
+--qvls0D6tmIF4iOSv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0tGcACgkQFHw5/5Y0
-tyyl+Qv+Klo3m/7tZ5JyiuE3Rwqiz6A1DNs9UA2Zq6Mt3wcjkyQSyTVd57e7vGHB
-tEfjywmeiRGy2L1wSZjhrBS5e84mcPQiB4VXP4Y64vfqzo676WIttSvl0PoKIR8I
-HNOEa2DRBA20FICKUlPBUet/fVGKFICK5c1tpRUZ1TSEcvazcfuRBZpCGodw7Xok
-FG/xmdQvTQJxro5fQbC7wijUT59g7a1UxwpQgEVj62X7ZbkBHT3C+VxwAkqfOuMR
-w4AIMAe+Up1K3izHSOgF7+C1Qk8Pckj08+WiPOSl6TXgyA3RiWaMQj6IL4Ylss8a
-kSHoQdqOJ9l3Hp1rB/1kGalCSD3OGtYVCjdEogau+rjO5M7fiMzR1UYWXBJfwq94
-kRaErd5hjZojFuD5CTxpRqMFeEGlkKmF28cdesumlVGxSevmjsDBksoTd/1HoZ2j
-7wTqubnO3kD3YCMJu9hDne3kWfE3HNtLXnlRpqRlGsuaU7h1G4G+sl+OnrHox1Cv
-14Ztqilv
-=qQaG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0tqsACgkQFHw5/5Y0
+tyz89QwAgH1FUxkOb7hs7vo/pvthn3ucDbVwsGkQHsSZDbo2j/ECSzaTWZjtQdO8
+so0aZpNQkj11+WqYQnxzRKtJ4QHbaDGxibx6nUFCSTJZB0oPUoQFFhTWysRa/1ai
+fSiCypodqU41w2iUk8R/YZBNaso9PSldgtwCuoln42KOMuWnt7na+xQTlARdOwEX
+OAGsU5TM73rrQQH5S45QPgkyWltfB1EAPfVMlnxUdhG/bWIsWRWlbmpTCVrHDhhJ
+9MwsyfF2WgMHjoO9DjT0cZpResbwPySmtlNagxBU9KzbGLI0nmExsnnzHd3EDcQM
+HDQmXsx11mcS7ERMHgZjuE2Gii5BifLEpxZF6U4K4/ajJ4Pv+ypPGZ7nH8yPawTN
+J59FAXIPObs5FRir3v2AXhrbdiHjmxbCGxTy5ebcHfJ/cugzloohBa1rrMn53jrH
+Dqje42mnZ8BIX5QBZCL2AlVezEDm0LCbQ5Y8gjSj+JshOK2Qm4xmkiD7D8JjmpdC
+gidgrL/N
+=5L2F
 -----END PGP SIGNATURE-----
 
---LkrM8DUe4P6y+s3k--
+--qvls0D6tmIF4iOSv--
