@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B26A4C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 14:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0668C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 14:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E640087660;
-	Sat,  9 Dec 2023 15:40:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EAB0E8766D;
+	Sat,  9 Dec 2023 15:51:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="P96q1BIg";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NGG2PV26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B693287664; Sat,  9 Dec 2023 15:40:25 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 601178767F; Sat,  9 Dec 2023 15:51:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD3E48761B
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 15:40:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B5F887660
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 15:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702132798; x=1702737598; i=xypron.glpk@gmx.de;
- bh=y+Ft1KJ/0oZBoA+yKPr2FmR4Sjt7KWg7Dug2gPezibk=;
+ t=1702133474; x=1702738274; i=xypron.glpk@gmx.de;
+ bh=mm85iekLqDmXzXrlSEpNK41gDhqvYeZ0/5mnurPGAN4=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=P96q1BIgQK1Yh1KfHmT7KD0HIvpyzbboOY/GfldFVyU5Dzugp/h4Pqm3bsOK3+jf
- 4QrH3FhgxYExXIN2SVKnvxKVrmrHMZTfvtVoDk8l0zn2b4TXckaDG9NSVE1ThTgg5
- PevpnvmIvB/wTl2EhSbs/aysM0ijEs9KwGBYDyptuKAP+3P18IqGBQUc7f/637+Uq
- e2PQ7Ss+5Wnfh6/8+T0lJQrcbOMdTFmOO5dSIi7JsVP+f2h0uq9pARSY13irGILJd
- 8cfrjFWSsjJ/T2Jug1fuMGC3X2jGsDjKALMsp6ke3HsEYb91U5ykF4898QlkhOB4h
- B49yvBEigB4SjDO1rw==
+ b=NGG2PV26N2XeCtLfC/L0OFf6js5MauJzXXCAStxUiDHRrBZApQ64Ng3rKpFCHohW
+ URCax1mv5Ofrzd/x1eFf+M3KtcqQc8ZKexL5MOMvb11lJ9BA3B+4F7G7z3U/axah3
+ wvYDZ07cZqtZPlotD1zQgqOk61H8QLtYFVU5C1i/4sULSgqrurrZxBCQ4P/rm0UiA
+ Nr8mXipYwgvDZC2LXHvJ6WTi9gsG0FrKqxBD0Aa3XLmZ9nF9GKxnSkKE/RMbdmQKl
+ Zbwf1me1LC1m+pmTGuZsLkWSpcl6ckjmCWIK259mQas+/h0kD3fEspo4Fq+BPrXa1
+ m5zltKQNJcB2G1gjNQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MryXN-1rXEPT2MtR-00nycj; Sat, 09
- Dec 2023 15:39:58 +0100
-Message-ID: <ef369d4e-9cfb-41ea-b57a-2d0165587a4d@gmx.de>
-Date: Sat, 9 Dec 2023 15:39:56 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLzFx-1quaNU45U9-00HxOP; Sat, 09
+ Dec 2023 15:51:14 +0100
+Message-ID: <f97c5b43-7e71-41d4-a22e-a347e3c91ca4@gmx.de>
+Date: Sat, 9 Dec 2023 15:51:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] Makefile.lib: Always rebuild DSDT
+Subject: Re: [PATCH 1/2] efi_loader: use original image_index for FMP
+ versioning
 Content-Language: en-US, de-DE
-To: Simon Glass <sjg@chromium.org>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>, u-boot@lists.denx.de
-References: <20211020123742.31098-1-andriy.shevchenko@linux.intel.com>
- <3a272671-7c96-4644-a4ee-05257c7efb30@canonical.com>
- <CAPnjgZ3X9hC_n3pqgsDcAuoAfP6yEwQCG0h=PXq-oDj_cwpozQ@mail.gmail.com>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Jassi Brar <jaswinder.singh@linaro.org>, u-boot@lists.denx.de
+References: <20231114092508.3955838-1-masahisa.kojima@linaro.org>
+ <20231114092508.3955838-2-masahisa.kojima@linaro.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAPnjgZ3X9hC_n3pqgsDcAuoAfP6yEwQCG0h=PXq-oDj_cwpozQ@mail.gmail.com>
+In-Reply-To: <20231114092508.3955838-2-masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:p9uprceVGPrBk/g/aGweJHsMYxsgiojCG9WlgQ735qldnIdJGiW
- ID+M0Vm2u0sWGSXMfkMArzvhj44XYhcDWZVz+pO1AY78wgDXh/k6eK0QQYuouJKceqGI72Q
- hXe2z57XgYU3HI1Lw7LPeU94WGS21z4X2vR8bHpkjJqTRtRsg9zo8tRcdFbx9z4H8Pm5t50
- n5B//qLwCVkWXPLCdQHxw==
-UI-OutboundReport: notjunk:1;M01:P0:B2dKzO0nPk8=;kZ3BgiX9FRXdS8cw5jNnvX9xWzs
- jLXWSg3J4sodWUW5DxeO2dbt5CDU5dzkNJHY4LP8E69TvYUJlBoANlJMwqd4FPvpqRynlLYzT
- 8b67HSDVrzjzQyXzSh9LnHJkcxDMOk3uDiIKorCoccX2H+lOJp+eEh/jn9Uk4bMI3MCMUV55y
- CJeWpnq21/gQvUWL1IowmGENvSm97X2xuM8hrbwMoovi1xJTWm7gtneKMOSj66FvuFDpuhbx/
- FqwA+zhnN62kJCyufGhE99bm9X5thqx++7rpda/fhCMJt2tLjhn/lGsgcqr37FUhmgRw0Krti
- Rf0yd1i4WIwDN5+S2FkWEnHFUtSH+X8gGDGt94L7Iw84653WwmiYNP9Sg0Wubnz+JvqE5GRcO
- i6DmjE/1jFlfywaoesT3D8zMq1+4neHcKB1IS689CF2jyghV4Y+xYU033hu6oOR3BKdb7+kn4
- q9WLz+IIkCi24tKm9QeyQv0kGBmolDE851UMl9x+OxAe8rfiRlv0Vz1vzpjUvWV+ARKG9qtYI
- stHSdi7DCG/sHRxJAJ6pWiiLT+q+y/vPso4chHvCMXTrRaaSOKql1R7BMSCNSvL57KTq4gEFJ
- SLfJSXo+GOUKKM/kXkPq5QbojOqxBwEM8vZWQt8eY6f0c1K0LJeWwXi64ryOf5zx6i7IJGOlf
- DG9WydoLU8az3KgQ92s6iMm7nZJDyU3i9Dpq+F+hxkF/8+cCuEiDh/HEslEtFfQtbodisEpju
- GmSu5j8CS7RY8bad5PZm3tOUuVAP3ApwBhlsGT/SzSoOQ7YavOmxZgcNxLY4apGRnnnHDlLBW
- IwzqZqBUS3k9wSFF45lTBcmvRDfnzWkl0O8larPntkGUJbpjoVyh3FUqDB2al8rPz5t6ZS1SI
- I88A3dt0eWGKcJezam79fC0DDvlIrcaSg+5n0pJ60nCPvCQQENfFoqv62ZHtHC001OJvzhN9U
- mHpJPa7GbCm62CV1iQWGsrQHQJA=
+X-Provags-ID: V03:K1:guc5FfJQq+ciWgYkj0rWfwxntqX7RUHNFDgXStp/2PvDHSsQToo
+ dh8LvlUr6H0MeIDFPYZZ2YawQjBdlsDUaBzEviRzTpRbDNFFNdlbZkUFXwUS8pNgqv9ziU4
+ iiZZhAMBa8QWzoYYOiFFgtZOu7o/JYlwTbD2F8pV7K/MUfNwN00KimzJlaJncRTylcwxaGk
+ ZeCJJ/bV8M+3eLSjAKN5g==
+UI-OutboundReport: notjunk:1;M01:P0:N+YGX2cq5hM=;or2uCixJ41qhAfPq16JLQbleeDf
+ aF2crfrkfQzKUA1l3nyzQ6Pgd8k35353V5mVxMZ5bnQRZsgr6nAEzF08HI1rxfqqyQpPic7lS
+ BTO811B3XcMvgqYxKKQYHbckVu4L/6nj/3jL11/asXykWKIQjLsbKk0EcrcqULvzZ1jQonsN9
+ q5fcsuPqDq2B6ppKq9j7kobXuocvc6KDYDqxF5owuuWNHrQUPOHvE4D0NV3+qDua7APhR0WPR
+ a+sqxsigl0f0B2Pvg7IP8+mmICwO+7+XwuZcg6tkuLNcIjyAUNF21jMkgEQjOJhezUwUBPp3M
+ 8y9ZrcWyAxbhSwcHmcQ6M/lb+zIRVJWQfbbe2mWGNfBTKkvi44LPqrGbuwRS+63GlWACtcZWI
+ tlpX6owetGDwn9Kh1XEDeRI6Vow+0TnLBbhWuB0NAI4biMPiKvLY0XPVmubZL31pQZhcTOCFW
+ TGxDFH1JsIpKOVMr5Q5p+Lpus1+SBpJQZQGOwGyhpFex2E7WHDx+FsoROxTrYyqUEDeVlz7tv
+ PDdDbbR5HGB5LcYm0vyK1Qe4qMHS9gd1pq6t+ULDSGD3DOAd0KXBRLT46SO91CroUj3EY9s5X
+ 3/ruueU9Soge1tU2PcHEDlRbk+tOFVL3NSgUS9fpyJ47tbH+Il5xsxXzS2/sQksFteRxhGQSF
+ XJCjQoZpO4f6Ps+rfr7gxxZltQ0dzUKDAND8qrAKJL5IbBj4N7RUfFT4Z/H4QyAQR9CcfGNOe
+ nMjw+n/p9Ti+ddZsTk8MxGJ7QatmuqSq8mJ8LMSprXFJngvtO7+eYOmaOpK/hcNwi0QKWhzsQ
+ BuidJn8GPOvRlD1RgSVpc1HbAwbUwqROOiuDsptW9WCxeZWTryZk6iKlh646c+ETg1AcRJJzP
+ bxw9y9sAj0h0rMnZ4GCcgHKGvELBeKaTjjCg48bEAcX19wjI8gdzI3ROJ+PwEXecO7UpNl9f1
+ eUMFtz/LqZfvHsgqanR87HPtbWk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,70 +92,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/30/23 03:45, Simon Glass wrote:
-> Hi,
->
-> On Wed, 29 Nov 2023 at 10:17, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> On 20.10.21 14:37, Andy Shevchenko wrote:
->>> The dsdt.asl is usually combined out of several files that are include=
-d
->>> in the main one. Whenever we change the content of any of such files,
->>> build system is not able to recognize them. Hence the easiest way is t=
-o
->>> force DSDT rebuild each time we run make.
->>>
->>> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
->>
->> The build process that you describe is not in our documentation.
->>
->> By which defconfig is $(src)/dsdt.asl consumed? Where does it come from=
-?
->> Please, provide a reproducible example.
->>
->> Would you be able to provide a documentation patch explaining how to us=
-e
->> a user provided dsdt.asl file?
->>
->> Best regards
->>
->> Heinrich
->>
->>
->>> ---
->>>    scripts/Makefile.lib | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
->>> index 07696e86bb54..8c3c893b398a 100644
->>> --- a/scripts/Makefile.lib
->>> +++ b/scripts/Makefile.lib
->>> @@ -441,7 +441,7 @@ cmd_acpi_c_asl=3D         \
->>>        iasl -p $@ -tc $(ASL_TMP) $(if $(KBUILD_VERBOSE:1=3D), >/dev/nu=
-ll) && \
->>>        mv $(patsubst %.c,%.hex,$@) $@
->>>
->>> -$(obj)/dsdt.c:    $(src)/dsdt.asl
->>> +$(obj)/dsdt.c:    $(src)/dsdt.asl FORCE
->>>        $(call cmd,acpi_c_asl)
->>>        $(Q)sed -i -e "s,dsdt_aml_code,AmlCode," $@
->>>
->>
->
-> I agree that this patch is better than having the bug. But yes the
-> docs could really use some notes here, for the person who does come
-> along and clean up the dependency bug.
->
-> Regards,
-> Simon
+On 11/14/23 10:25, Masahisa Kojima wrote:
+> FMP versioning uses the image_index argument of
+> EFI_FIRMWARE_MANAGEMENT_PROTOCOL.SetImage() service.
+> When CONFIG_FWU_MULTI_BANK_UPDATE is enabled, image_index
+> is updated by fwu_get_image_index() function. This commit
+> saves the original image_index argument and use it for
+> FMP versioning.
 
-The patch is neither applicable to origin/next nor to origin/master.
+Why should we call fwu_get_image_index() here if we don't use the new
+value? Maybe the call should be placed somewhere else?
 
-I only find a line
-
-$(obj)/dsdt_generated.c:    $(src)/dsdt.asl
+Should the call really be needed here, please add a new local variable
+inside the if block and add a comment describing why the call is needed.
 
 Best regards
 
 Heinrich
+
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>   lib/efi_loader/efi_firmware.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware=
+.c
+> index 9abb29f1df..9c1a273926 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -612,6 +612,8 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>   {
+>   	int ret;
+>   	efi_status_t status;
+> +	u8 original_image_index =3D image_index;
+> +
+>   	struct fmp_state state =3D { 0 };
+>
+>   	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+> @@ -641,7 +643,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>   			     NULL, NULL))
+>   		return EFI_EXIT(EFI_DEVICE_ERROR);
+>
+> -	efi_firmware_set_fmp_state_var(&state, image_index);
+> +	efi_firmware_set_fmp_state_var(&state, original_image_index);
+>
+>   	return EFI_EXIT(EFI_SUCCESS);
+>   }
+
