@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01509C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46FAAC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1DBB87630;
-	Sat,  9 Dec 2023 12:45:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C77758757F;
+	Sat,  9 Dec 2023 12:57:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="g6HaJtlw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GHMK11DV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E98B587630; Sat,  9 Dec 2023 12:45:32 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id B58BF87620; Sat,  9 Dec 2023 12:57:43 +0100 (CET)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B6C8757F
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:45:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A010E8757C
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:57:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-54dcfca54e0so3554684a12.1
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 03:45:30 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-6ceccf6d88fso215055b3a.1
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 03:57:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702122330; x=1702727130; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702123060; x=1702727860; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xAaUZhJN0TgXiU3BpM54tDosoRqLceuhxD7CM5U2QoA=;
- b=g6HaJtlwdNo22WViZNjzsX6T5pWl7fJ83VdBuSnfnB0WHZg6HxwP5ZMLUIWXkfzLzd
- wXXe++oNbR7k/6vCzyrTGOP8KYO0zKn4UnfMH/XkHXZX0sPe/sCbnmGrFQ3YJU8BCMtP
- dPPl9AuHG0vUTMH96bnlDu3p1mVngwpIF8fSfitMzZ9MeM5zfGK+Nyh5GbEz685bF2dL
- Aj7UiCarqBpC4vpPc55ptGopIe8MXb/Na4NSkJItQM/BC5DrD0fEeqntKtMGNR9dv5Bh
- eBtO61dtOojaH7msKPB56r62l+2xUroI4zW8xO+OquFxKTvfBdRgxAgnmo+LSorospQu
- g4yw==
+ bh=e1AWC4sixDFYIgP5Nq5jvbGsG05em8zCyIHmQtnjhSQ=;
+ b=GHMK11DV20Rl34lasnqFyb7VBFpy3NOVjREib5Yz7MXqAefpIb3ugW8TX15oH26hAh
+ nxxvdC1KSjP5cVxYAf7tuvNIfx4YoPW1WIsv0iddSG0cnMRkh+NYEBX3FS9tpQDJwoCD
+ dD9WXIVoTUezTr/QGmMrc0tIuhgqQCHxdtsb4y4bX5X7eROgoYIWHIupcE+j4tB9UrVV
+ j9TF8OmZi9aGPjFiy/2RWDDYvWxCr8vx4HxWXsBas1V/zCC7zSZfKN7i/ncvyOBPzHfM
+ t/ymKqhfjXZzy27SlW5hwi6WC3hs56eXJzjF3xDXG33hEAP0E0lZff0qR3VF0CtQEHac
+ E/Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702122330; x=1702727130;
+ d=1e100.net; s=20230601; t=1702123060; x=1702727860;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xAaUZhJN0TgXiU3BpM54tDosoRqLceuhxD7CM5U2QoA=;
- b=svnP0qF8DpfxskZIdO4CZjtR7FtvMZtf4n/SCyRl6099zK3CskCnJ4rJuueIrv32eU
- CYg1c5FXWnsmEsce90DmamBJkruFDfLpXhNgapFODPTelMuFIfWbYnj+lXvN6vdgpB7p
- y5di03c0AkSPeffNgdY7y2yvsA/2rn+7xsYqQvaxUX6THeLZef4QV4dAQTnS06XOpcNM
- yTpnQ4Q6P7vgY6ktGuxEbAglYH91nV4yM6+EGuV+W0xjbZLfOPNLWAlmGRP8OrLXlTUA
- LajSL5iaMREnnrDCKbEKeZZMpzEkskETBevULjNoDv6pq+zHJSq4azPbvk45Y5IDfVvt
- 07oQ==
-X-Gm-Message-State: AOJu0YwdY4YJu1TvuaYnK6WgJyY7AIhUzRhZveWabzW81OcOSP5B3qiI
- Vd3tHfIbSbT27XoOObRwD7D6tDtfY21mYweoG4U=
-X-Google-Smtp-Source: AGHT+IGkm/YO5OSLBLqL+ndBGsmQx62a36qwtTGwtwpmGWLHqS2E9AfkAh+FXGQkTE+bAvwn7b+YfXn3jMe96OnVjPY=
-X-Received: by 2002:a05:6402:2152:b0:54c:7994:ac02 with SMTP id
- bq18-20020a056402215200b0054c7994ac02mr937704edb.33.1702122329961; Sat, 09
- Dec 2023 03:45:29 -0800 (PST)
+ bh=e1AWC4sixDFYIgP5Nq5jvbGsG05em8zCyIHmQtnjhSQ=;
+ b=DgU/8N7I7EG0i6lERT46g/EcYimwv+p3rO7O38zOgPNxHRI8MQ2/sMcskDM8xkq4T1
+ zPEL7r1TMnxB/LJi2vCcvBSagUOuS4jtP01A35p1w86pwm/3erkwjzG95zHrU3KjGmav
+ jf2Mgcoo440ZwPK1Bi/IMEuK1OJpJZPa9se2GuHxI64fdStR33HGhDEjMejMppTNEaUr
+ /NLoScqkgnEEHEVYnjjhJeNKgNGElc7RM+gQJnpnsFxmmaVGv7UhL0KpqeJfaknPil60
+ BG2ezvYp7UxjPFzNYhW5G/w54CKh0tsm6vkY40g7znJd4gS/SvOsGfoVqCP5cPotcjkw
+ zO9A==
+X-Gm-Message-State: AOJu0YwAo4rBzXcQDRJIth6ArxSeVoFCruWTtPwy6Fg1iOszLkwcAjLx
+ y+3QEBi8i74pRowRelpK6/fVIDlRg4hgp4MkQCockrzu
+X-Google-Smtp-Source: AGHT+IG2DNjFEkLSXm6J8549ZgWURjQD4SwLfn818TsrZ6FdSQ5g9Ion6Eg7fQf/GHxHfeGSWbOWQsI3LROsNFYWRXk=
+X-Received: by 2002:a05:6a00:4655:b0:6cd:e328:9d8e with SMTP id
+ kp21-20020a056a00465500b006cde3289d8emr3219737pfb.3.1702123059815; Sat, 09
+ Dec 2023 03:57:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
- <20231207091850.17776-3-ilias.apalodimas@linaro.org>
-In-Reply-To: <20231207091850.17776-3-ilias.apalodimas@linaro.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 9 Dec 2023 11:45:18 +0000
-Message-ID: <CALeDE9O9u_y+t5eM=fiNn70hENRSNN_X9BTpsJkwEdegNMDvGA@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, sjg@chromium.org, sean.anderson@seco.com, 
- neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
- mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+References: <20231207175056.336787-1-marex@denx.de>
+In-Reply-To: <20231207175056.336787-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 9 Dec 2023 08:57:28 -0300
+Message-ID: <CAOMZO5Bf5sa7oEKyCJ7cArj2AKm=gdi4e+agKhdioaj8C=0fzg@mail.gmail.com>
+Subject: Re: [PATCH 1/2] ARM: imx: Force DRAM regulators into FPWM mode on
+ Data Modul i.MX8M Plus eDM SBC
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,245 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 7, 2023 at 12:57=E2=80=AFPM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, Dec 7, 2023 at 2:51=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> In order to fill in the SMBIOS tables U-Boot currently relies on a
-> "u-boot,sysinfo-smbios" compatible node.  This is fine for the boards
-> that already include such nodes.  However with some recent EFI changes,
-> the majority of boards can boot up distros, which usually rely on
-> things like dmidecode etc for their reporting.  For boards that
-> lack this special node the SMBIOS output looks like:
+> In case the Buck5 and Buck6 regulators which supply DRAM Vdd1 and Vdd2/Vd=
+dq
+> respectively operate in automatic PWM/PFM mode, the DRAM EDAC detects mor=
+e
+> correctable errors than if the regulators operate in forced PWM only mode=
+.
+> Force DRAM regulators to forced PWM mode only to stop tempting the DRAM.
 >
-> System Information
->         Manufacturer: Unknown
->         Product Name: Unknown
->         Version: Unknown
->         Serial Number: Unknown
->         UUID: Not Settable
->         Wake-up Type: Reserved
->         SKU Number: Unknown
->         Family: Unknown
->
-> This looks problematic since most of the info are "Unknown".  The DT spec
-> specifies standard properties containing relevant information like
-> 'model' and 'compatible' for which the suggested format is
-> <manufacturer,model>. Unfortunately the 'model' string found in DTs is
-> usually lacking the manufacturer so we can't use it for both
-> 'Manufacturer' and 'Product Name' SMBIOS entries reliably.
->
-> So let's add a last resort to our current smbios parsing.  If none of
-> the sysinfo properties are found, scan for those information in the
-> root node of the device tree. Use the 'model' to fill the 'Product
-> Name' and the first value of 'compatible' for the 'Manufacturer', since
-> that always contains one.
->
-> pre-patch:
-> Handle 0x0001, DMI type 1, 27 bytes
-> System Information
->         Manufacturer: Unknown
->         Product Name: Unknown
->         Version: Unknown
->         Serial Number: 100000000bb24ceb
->         UUID: 30303031-3030-3030-3061-613234636435
->         Wake-up Type: Reserved
->         SKU Number: Unknown
->         Family: Unknown
-> [...]
->
-> and post patch:
-> Handle 0x0001, DMI type 1, 27 bytes
-> System Information
->         Manufacturer: raspberrypi
->         Product Name: Raspberry Pi 4 Model B Rev 1.1
->         Version: Unknown
->         Serial Number: 100000000bb24ceb
->         UUID: 30303031-3030-3030-3061-613234636435
->         Wake-up Type: Reserved
->         SKU Number: Unknown
->         Family: Unknown
-> [...]
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Tested-by: Peter Robinson <pbrobinson@gmail.com>
-> ---
-> Simon, I'll work with tou on the refactoring you wanted and
-> remove the EFI requirement of SMBIOS in !x86 platforms.
-> Since this code has no tests, I'll add some once the refactoring
-> is done
->
-> Changes since v2:
-> - Spelling mistakes
-> - rebase on top of patch #1 changes
-> Changes since v1:
-> - Tokenize the DT node entry and use the appropriate value instead of
->   the entire string
-> - Removed Peters tested/reviewed-by tags due to the above
->  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 89 insertions(+), 5 deletions(-)
->
-> diff --git a/lib/smbios.c b/lib/smbios.c
-> index 444aa245a273..3f0e1d529537 100644
-> --- a/lib/smbios.c
-> +++ b/lib/smbios.c
-> @@ -9,11 +9,14 @@
->  #include <dm.h>
->  #include <env.h>
->  #include <linux/stringify.h>
-> +#include <linux/string.h>
->  #include <mapmem.h>
->  #include <smbios.h>
->  #include <sysinfo.h>
->  #include <tables_csum.h>
->  #include <version.h>
-> +#include <malloc.h>
-> +#include <dm/ofnode.h>
->  #ifdef CONFIG_CPU
->  #include <cpu.h>
->  #include <dm/uclass-internal.h>
-> @@ -43,6 +46,25 @@
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> +/**
-> + * struct map_sysinfo - Mapping of sysinfo strings to DT
-> + *
-> + * @sysinfo_str: sysinfo string
-> + * @dt_str: DT string
-> + * @max: Max index of the tokenized string to pick. Counting starts from=
- 0
-> + *
-> + */
-> +struct map_sysinfo {
-> +       const char *sysinfo_str;
-> +       const char *dt_str;
-> +       int max;
-> +};
-> +
-> +static const struct map_sysinfo sysinfo_to_dt[] =3D {
-> +       { .sysinfo_str =3D "product", .dt_str =3D "model", 2 },
-> +       { .sysinfo_str =3D "manufacturer", .dt_str =3D "compatible", 1 },
-> +};
-> +
->  /**
->   * struct smbios_ctx - context for writing SMBIOS tables
->   *
-> @@ -87,6 +109,18 @@ struct smbios_write_method {
->         const char *subnode_name;
->  };
->
-> +static const struct map_sysinfo *convert_sysinfo_to_dt(const char *sysin=
-fo_str)
-> +{
-> +       int i;
-> +
-> +       for (i =3D 0; i < ARRAY_SIZE(sysinfo_to_dt); i++) {
-> +               if (!strcmp(sysinfo_str, sysinfo_to_dt[i].sysinfo_str))
-> +                       return &sysinfo_to_dt[i];
-> +       }
-> +
-> +       return NULL;
-> +}
-> +
->  /**
->   * smbios_add_string() - add a string to the string area
->   *
-> @@ -124,6 +158,42 @@ static int smbios_add_string(struct smbios_ctx *ctx,=
- const char *str)
->         }
->  }
->
-> +/**
-> + * get_str_from_dt - Get a substring from a DT property.
-> + *                   After finding the property in the DT, the function
-> + *                   will parse comma-separated values and return the va=
-lue.
-> + *                   If nprop->max exceeds the number of comma-separated
-> + *                   elements, the last non NULL value will be returned.
-> + *                   Counting starts from zero.
-> + *
-> + * @nprop: sysinfo property to use
-> + * @str: pointer to fill with data
-> + * @size: str buffer length
-> + */
-> +static
-> +void get_str_from_dt(const struct map_sysinfo *nprop, char *str, size_t =
-size)
-> +{
-> +       const char *dt_str;
-> +       int cnt =3D 0;
-> +       char *token;
-> +
-> +       memset(str, 0, size);
-> +       if (!nprop || !nprop->max)
-> +               return;
-> +
-> +       dt_str =3D ofnode_read_string(ofnode_root(), nprop->dt_str);
-> +       if (!dt_str)
-> +               return;
-> +
-> +       memcpy(str, dt_str, size);
-> +       token =3D strtok(str, ",");
-> +       while (token && cnt < nprop->max) {
-> +               strlcpy(str, token, strlen(token) + 1);
-> +               token =3D strtok(NULL, ",");
-> +               cnt++;
-> +       }
-> +}
-> +
->  /**
->   * smbios_add_prop_si() - Add a property from the devicetree or sysinfo
->   *
-> @@ -137,6 +207,8 @@ static int smbios_add_string(struct smbios_ctx *ctx, =
-const char *str)
->  static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
->                               int sysinfo_id, const char *dval)
->  {
-> +       int ret;
-> +
->         if (!dval || !*dval)
->                 dval =3D "Unknown";
->
-> @@ -145,18 +217,30 @@ static int smbios_add_prop_si(struct smbios_ctx *ct=
-x, const char *prop,
->
->         if (sysinfo_id && ctx->dev) {
->                 char val[SMBIOS_STR_MAX];
-> -               int ret;
->
->                 ret =3D sysinfo_get_str(ctx->dev, sysinfo_id, sizeof(val)=
-, val);
->                 if (!ret)
->                         return smbios_add_string(ctx, val);
->         }
->         if (IS_ENABLED(CONFIG_OF_CONTROL)) {
-> -               const char *str;
-> -
-> -               str =3D ofnode_read_string(ctx->node, prop);
-> +               const char *str =3D NULL;
-> +               char str_dt[128] =3D { 0 };
-> +               /*
-> +                * If the node is not valid fallback and try the entire D=
-T
-> +                * so we can at least fill in manufacturer and board type
-> +                */
-> +               if (ofnode_valid(ctx->node)) {
-> +                       str =3D ofnode_read_string(ctx->node, prop);
-> +               } else {
-> +                       const struct map_sysinfo *nprop;
-> +
-> +                       nprop =3D convert_sysinfo_to_dt(prop);
-> +                       get_str_from_dt(nprop, str_dt, sizeof(str_dt));
-> +                       str =3D (const char *)str_dt;
-> +               }
->
-> -               return smbios_add_string(ctx, str ? str : dval);
-> +               ret =3D smbios_add_string(ctx, str && *str ? str : dval);
-> +               return ret;
->         }
->
->         return 0;
-> --
-> 2.40.1
->
+> Signed-off-by: Marek Vasut <marex@denx.de>
+
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
