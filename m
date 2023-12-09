@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E2DC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 13:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECBC3C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 13:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89DAB8761C;
-	Sat,  9 Dec 2023 14:45:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D5898764C;
+	Sat,  9 Dec 2023 14:49:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aQNreilS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p8kwebGg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCAAE87620; Sat,  9 Dec 2023 14:45:55 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 42F9D8764D; Sat,  9 Dec 2023 14:49:35 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9527F8757F
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 14:45:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D57F8761C
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 14:49:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5cdc0b3526eso22979077b3.1
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 05:45:53 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-db53f8cf4afso2732656276.3
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 05:49:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702129552; x=1702734352; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702129772; x=1702734572; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cIbXlLx1WE6r6gCrII0MXABhRLUQKoRyQZ/hCp5geiI=;
- b=aQNreilSt0xcYuh2VCIKLRZiCXR/q8MEHCDXhRSOyvrreZd3hE+ZV5w03ju+tmvVem
- 4pH9oO/4fJpO79305MUQ3PdIpfbJnbwsHSitrKt/nHuCmZE7C2zBejWxsHo0ab50pvd7
- DH3WA3QPRB0jlRejfDHXFVba2eH3KAxno76Eg=
+ bh=viGG3ddVUOR9jQnPQ6fpgIoks73+hLt4VcHUHdAj3ro=;
+ b=p8kwebGgD8/VFzw/6A9jcSltV4rSuN3jtvpDbQmrl1rXKUVbei+KjzLE4CuYZ2B/So
+ +pbYgRxSI84eqZlcXtoeJaJe9g8VaekZAVff67aqaaSAXkGaEQEQ5yo8ySOUp1zkqipO
+ 7govCcjFZueXCjr23Wf6X1lLPn7n5B34IBkec=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702129552; x=1702734352;
+ d=1e100.net; s=20230601; t=1702129772; x=1702734572;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cIbXlLx1WE6r6gCrII0MXABhRLUQKoRyQZ/hCp5geiI=;
- b=Hl218gyTHzWFg7+vA3j672q8yFHguVPKz8LeboXNxq1uRx1HrAHJxrdQUdp1pkbeG5
- wy43xNhnCXARpmfxvgsJg6jNfv+G/2ND54FU7RMl2x6ecWSmbeWRLq+w+Y3OOqyK9Hcm
- gFjqpcNgilJT5mobx1advtXuXaL4wM1M1Lirzt+rVLcTNYgHYWpZ6rQIy+nLvGqB2ri8
- Uu95o+rREI/tt4fTnok3mEWrx29XhmoBp6PmjVhxMllc8G9pOZvcy9DxAY1ixmk8CO/t
- FD271zUz+5yUSgUkEpujSdRlPgiWolFB0cv+/mhiVQP0FS5TbrwczYy9Ir3Iin4G3kAI
- m78g==
-X-Gm-Message-State: AOJu0Yxc+aGEavmgh4n4Wa+P/TJNHU2t+SdgoyLl88j4kbF7eiTIZyve
- zt+TYLGMzVqYop25oJYZVm/Atg==
-X-Google-Smtp-Source: AGHT+IFgBVdaV1Yr0DyTbTsLluNVQ89MI7j73PU+5txsNqcLc6j7tItZNJxoRdBhmqlHcSMZztPnJQ==
-X-Received: by 2002:a0d:f346:0:b0:5d3:d489:ccb2 with SMTP id
- c67-20020a0df346000000b005d3d489ccb2mr1629960ywf.24.1702129552265; 
- Sat, 09 Dec 2023 05:45:52 -0800 (PST)
+ bh=viGG3ddVUOR9jQnPQ6fpgIoks73+hLt4VcHUHdAj3ro=;
+ b=uPsFO2/InHnNBOZmNsmptNslJhKbLp+ulwJkiPKP0ySq/2pqXjZXDonXlX+kv2aJlE
+ LoelbmkTcmp0LI9nEH6eFV6HW2cTmP28Rshb2VhTynskg2ziz7ZQ5KPnhJaiMn0S8ImR
+ EfQCZUoebR9FfpXFIjER3/zTjG4Sjee676poMgG93kV+lfvhvs6adoxkAb+PHGniTL5b
+ Ls8WvQIdyl1XxpkE1bX2cKmhbBpg/7+T47Ps7OuliAD77VIGnegD2V8C1OG7kl+Me12Z
+ wgHJg2wBUebrq68VbYGle+dcT3O1PZn9j3lMrhBfKMgGppv80zERK7I5G1ZStxXuUUKN
+ BEAA==
+X-Gm-Message-State: AOJu0YwM4W9FFMi0YFDkEIkFjtzJgxJCCAWmIjtSEK8NF23mzQzkM1Ed
+ HClZZQ398HGpH5PATVrU+9MnUeKZNUZQbIFB+uiuaQ==
+X-Google-Smtp-Source: AGHT+IGyqh0MfXCtfW0qMNEwlVotCFaWVb4ByIgEydTNG3d+yi4AZIcmya5vNcO59kb6OD2ffGEm7g==
+X-Received: by 2002:a5b:783:0:b0:db7:d3f9:adcd with SMTP id
+ b3-20020a5b0783000000b00db7d3f9adcdmr862845ybq.54.1702129771705; 
+ Sat, 09 Dec 2023 05:49:31 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- e7-20020a81dd07000000b005d755416307sm1449504ywn.73.2023.12.09.05.45.51
+ f1-20020a056902038100b00db5331d70d5sm1270420ybs.33.2023.12.09.05.49.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 05:45:51 -0800 (PST)
-Date: Sat, 9 Dec 2023 08:45:49 -0500
+ Sat, 09 Dec 2023 05:49:31 -0800 (PST)
+Date: Sat, 9 Dec 2023 08:49:29 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Leo <ycliang@andestech.com>, Rick Chen <rick@andestech.com>,
- Bin Meng <bmeng.cn@gmail.com>, Yu Chien Peter Lin <peterlin@andestech.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Miao Yan <yanmiaobest@gmail.com>, Asherah Connor <ashe@kivikakk.ee>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 5/7] riscv: qemu: copy ACPI tables from QEMU
-Message-ID: <20231209134549.GC2513409@bill-the-cat>
-References: <20231121152740.24783-1-heinrich.schuchardt@canonical.com>
- <20231121152740.24783-6-heinrich.schuchardt@canonical.com>
- <CAPnjgZ0jM5QiTTn7f88daZpO2qmR2fh8WMqDO=faRdfJ6kFcCw@mail.gmail.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [u-boot-gitdm PATCH 2/2] Add some more employers
+Message-ID: <20231209134929.GD2513409@bill-the-cat>
+References: <20231203044719.667116-1-sjg@chromium.org>
+ <20231203044719.667116-2-sjg@chromium.org>
+ <966886ca-3e37-4c31-bffd-64d7ccbba7e5@kwiboo.se>
+ <20231203213247.GW2513409@bill-the-cat>
+ <CAPnjgZ0S2RZuuSGtqu6EMdogAerWpmOM65DpCN+T7jdEq8MzYA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7P7Q2v0ExRW9T6sj"
+ protocol="application/pgp-signature"; boundary="1Wj8zIsDExNQ9FbD"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0jM5QiTTn7f88daZpO2qmR2fh8WMqDO=faRdfJ6kFcCw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0S2RZuuSGtqu6EMdogAerWpmOM65DpCN+T7jdEq8MzYA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,55 +96,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7P7Q2v0ExRW9T6sj
+--1Wj8zIsDExNQ9FbD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 02, 2023 at 11:23:19AM -0700, Simon Glass wrote:
-> On Tue, 21 Nov 2023 at 08:28, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > If CONFIG_GENERATE_ACPI_TABLES=3Dy, read the ACPI tables provided by QE=
-MU
-> > and make them available to U-Boot.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> > v2:
-> >         no change
-> > ---
-> >  board/emulation/qemu-riscv/qemu-riscv.c | 17 +++++++++++++++++
-> >  1 file changed, 17 insertions(+)
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> Can we not use common code to do this? What is different about ARM and x8=
-6?
+On Sun, Dec 03, 2023 at 05:44:28PM -0700, Simon Glass wrote:
 
-This is why I was trying to convince people we need a symbol that means
-"handle ACPI tables for QEMU targets" as yes, this code too should be in
-that common area I bet.
+> Hi Tom,
+>=20
+> Would it be worth be resending this as individual patches and copying
+> the people for each domain? Or perhaps we could have a way to
+> encourage people to add the details?
+
+It's just one table, and entry. So I will add a line to the release
+emails encouraging people that want to make sure their company is
+attributed correctly to send an email.
 
 --=20
 Tom
 
---7P7Q2v0ExRW9T6sj
+--1Wj8zIsDExNQ9FbD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0b40ACgkQFHw5/5Y0
-tyzBQgv7BuThI1h8zes333ZRRAYJtApw8f637feoFKVHSm/4lbPMR5zWEM8ZrE/v
-OTxAumkLq97GMpjc+FDA/sEtBMDyl4w3uHwYCdl1D7gFM4XJrL07O3WTsk3Hu4Ny
-bLyjWfTDBj7iXaAbxOQX8HHvkdPhA/UecjDAY3f3GnGDTpjF/4sa+UoOZf9TH/GA
-Ib73MpIaAokVo/2ITRW5zDRNFoKw+QfnFAtH7/ZfmkwXLol6DXcz0Dpcya7PpFRQ
-yBiaW5GKqwZwG+CmYi++lBR2yiPmj72A91oxS1e5scgpMx0eAiwSprdXIKfIbuVc
-hGQ0TfWKq6xaNc0F4LCevt84CixynPMJE0lUbddmKMvYdP+oIuu4S+orWTm92GN6
-d3krF8VTbOgwL/38Dp1kDU6ydDm+wBk05tBjB00K5Spnbq5Q1YWekmL3GWUPRw09
-EkmsD4b+V59sUaXoUibDPUrO37B/D1EvQEx1DnZTSugtGuxNnkTIQxOhwEfhZJ1T
-OsHity5U
-=m69W
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0cGkACgkQFHw5/5Y0
+tyzAiQwAplXmAco3WFZGh4eFmlCpZAb6A0WK4DEevi7oQTKZoAawZ58fQ7ElyDk1
+DG7doHWe868DFpPLcr2ZAM2EAvtpEw9L740KRZIWxlBCbB3JMVFCEpTEnQ9hb5Qh
+sYi2VPo2tkAe2qNYEctw8EzTCSecfj7sHa86EIgB2A3iuPvaFKuD5TXQNL6pRmRQ
+W6F/36i2VowyV85OtzxR6T1SbW6qXvhNOPfK/GzBzdxz6/KGRrGF8yP26QB39rhw
+x2hnhBAF1M45zeyZvtc48Lx5pCijdSU3bEYlnkSO9cW6CPGlnlUbRUGNiAjwAz1P
+Lq97uhUOlivCagsDZ+osooyb789HnCwhoJ8ByzDCKHQycHaodIkQe9lda5VYg5nK
+GX7hh8781had/0OR1KCT1lTmywf225fmDBkcBB+/RO8zVEVOz/CZkCNpjdx3IhYN
+MA+WxZ8PdgXg0mz2NGFs0unLxxFn5tYYcEFMJ4bJRkkMZLRyo6FVdE8w9viyBhlF
+UeI2xuPB
+=BOLg
 -----END PGP SIGNATURE-----
 
---7P7Q2v0ExRW9T6sj--
+--1Wj8zIsDExNQ9FbD--
