@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75FEFC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 22:42:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7CBC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 23:05:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAC07875DB;
-	Sat,  9 Dec 2023 23:42:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id CEA748758F;
+	Sun, 10 Dec 2023 00:05:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="PHwj7x8E";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="ISK3vEZI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 601D3875E3; Sat,  9 Dec 2023 23:42:28 +0100 (CET)
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7DDB4875DB; Sun, 10 Dec 2023 00:05:38 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA5728758F
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 23:42:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB10887499
+ for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 00:05:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-7c522ea69e8so791424241.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 14:42:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702161744; x=1702766544;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cYj2iknE2gc2aTsT3JhJRTZqTc2l4zR03SJgxpKZ6ao=;
- b=PHwj7x8E6hvB80uA14A5wspTVV9jssYQCKT/izCYy3rh5ZBVJKVA275Igpb0J8jHNd
- FcyE3yN15SF9tkJqVfQGBYKTsEK/0bTET7rNoQCn8FGhkYkQcRd+GWp0LEeSFBuzrH/b
- DJhw4hDrvRLYYg7SIeAcmMfKmJ3B8zIU992YgdncrlfgjWeJ+NiyWPbSHgdt1x5VGXo6
- x1xEeBg4FAXIsgy2PhvTfZ1GbQToPW7gXEzLccPGLJ03PP7Zx+R1sDkdpUAwt+xsw5ZJ
- tyEcIJwh0B5UO3iVKo+Sd2ws/uklDa0MpJMt6YO+963/DrhPqDvH+7SvA4bo/fUPISOf
- R7Jg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702161744; x=1702766544;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cYj2iknE2gc2aTsT3JhJRTZqTc2l4zR03SJgxpKZ6ao=;
- b=ECC1sTLDtUHCP07zQbRUr1aCQsUq4FLa971mLcJX4y5UyPNj+m5PdSYlh+A3p49ojS
- KkUPSA7HYyJJk4I8JcKDbYgjzyu2JgEp5eM49jUPwwopwge8NZNGYUJ3BImhHH9K/0wc
- YM/xkuDWgRY8VOs5nikmJfpT1SISpO65ds6XzlFgiGHt/oxu+EDioYeKj7v3CJS8Zrzt
- PeE2qyk8rYitmLsNTPj2YGbi859AOQMmTyBOnMyiZj48Q6bIHrZcE8hrwDogMGjz+LaY
- quyDNqPwQBk72gTdUssn2O35T/KDQdivrDUhzugnECzotvrBJzNKHi+dhp5P0qPXY9uP
- +pLQ==
-X-Gm-Message-State: AOJu0YwB0l2f3JyFz/KEYwxl4Hm/pbSkV4c2oB034MaX2heK22Ref06+
- hEHCtAMtPjNrXNJgL2+t7HrJP+/d1HfYtFV/XqSDEg==
-X-Google-Smtp-Source: AGHT+IEaDF9quc15ROOGK5n0BxSBG3n0H0yo4rPi4d1Xtusz2BP7GkS62NGIYNAj4itafDDk29wIwMOZd1eyCPAbqcQ=
-X-Received: by 2002:a05:6122:168e:b0:4b2:c554:dfca with SMTP id
- 14-20020a056122168e00b004b2c554dfcamr1998953vkl.25.1702161744229; Sat, 09 Dec
- 2023 14:42:24 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
- <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
- <CAHc5_t33K1J=mDteE8jTLoLpFonPSKWBgs43Ak748q1WJ4Uv8A@mail.gmail.com>
- <493b645c-1bf2-4bd9-9457-30e98aa17040@canonical.com>
- <CAHc5_t3_soy2Je+CMazMMW+1Dhx15704SMuXZwnYhToxdb8vnw@mail.gmail.com>
- <adf71fc6-9323-4c56-9f26-f12c09fa7275@canonical.com>
- <87fs11tzhy.fsf@bloch.sibelius.xs4all.nl>
- <CALeDE9O6dS-xKzvmGgts+56HW82CxdoOtqG+1kER8DTW9xS5kQ@mail.gmail.com>
- <CABEcMwWY96f+YZst4y-Xsv3NLbVeG+JTxewuULgWQf3W0E2w-Q@mail.gmail.com>
-In-Reply-To: <CABEcMwWY96f+YZst4y-Xsv3NLbVeG+JTxewuULgWQf3W0E2w-Q@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Sat, 9 Dec 2023 22:42:13 +0000
-Message-ID: <CABEcMwWkp6aBOwKowT0YRme8qe=5ZyUx6zFQHOJ3+Bcu4ECKJw@mail.gmail.com>
-Subject: Re: bootstd: Support for distro specific EFI folders
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, u-boot@lists.denx.de,
- sjg@chromium.org, ilias.apalodimas@linaro.org, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1702163135;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SrIMXJnOP/Cootq0O+SXM/shvoV6lYqAJ0mhq3vcxe4=;
+ b=ISK3vEZIZLrNVe6MBgZhDa//laIP+QS4yVFZFNUzvRt5MbgbMN683JrIkmLGqdBBY+UeLX
+ 7/PyEn7lLQVL5TNbk7MeRCXy76+Z8V37cAGpoq3j13sBVy8AjJQOXtHEaatbhAcgJ6s6Ku
+ b4ajc16uynYjR0NkEuftIcy9k0BKO80TuSJtfaf+nXDyhO2fu/Adt0vgYXJbvubQJzbYyk
+ TQnjKDmoWhC2seTDSP7W/zZwEsi/P6ceVSmRR4xJaepWqPqsYqGgdvLiT4NzWRV4wFzbOV
+ g1AWI0+TKB/6tJ95jzGfJVOHutP/buveKw0TO2bSOyyLcF7GG18JlfnjDF7wcw==
+Date: Sun, 10 Dec 2023 00:05:34 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Andre Przywara <andre.przywara@arm.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Vignesh R
+ <vigneshr@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>, Jernej Skrabec
+ <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, Mikhail
+ Kalashnikov <iuncuim@gmail.com>, Piotr Oniszczuk
+ <piotr.oniszczuk@gmail.com>, Bob McChesney <bob@electricworry.net>, Stephen
+ Graf <stephen.graf@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH v2 1/3] mtd: spi-nor: Add support for zBIT ZB25VQ128
+In-Reply-To: <20231209221320.GN2513409@bill-the-cat>
+References: <20231204005954.13201-1-andre.przywara@arm.com>
+ <20231204005954.13201-2-andre.przywara@arm.com>
+ <20231206162443.7f0692d7@donnerap.manchester.arm.com>
+ <20231209203423.GF2513409@bill-the-cat>
+ <3c6b3fe41f54a2d2a391d433684e80d9@manjaro.org>
+ <20231209204336.GG2513409@bill-the-cat>
+ <5f898df3e85bb46df5e3dbaa81525047@manjaro.org>
+ <20231209212109.GL2513409@bill-the-cat>
+ <0dc545aa9d32038dbe7bc481595198b0@manjaro.org>
+ <20231209221320.GN2513409@bill-the-cat>
+Message-ID: <97a1444d984fd329351048bb571dadbb@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,234 +84,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Dec 9, 2023 at 4:26=E2=80=AFPM Shantur Rathore <i@shantur.com> wrot=
-e:
->
-> Hi Peter,
->
-> On Wed, Dec 6, 2023 at 12:16=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
-com> wrote:
-> >
-> > On Sun, Nov 19, 2023 at 6:55=E2=80=AFPM Mark Kettenis <mark.kettenis@xs=
-4all.nl> wrote:
-> > >
-> > > > Date: Sat, 18 Nov 2023 23:52:11 +0100
-> > > > From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > >
-> > > Hi Heinrich,
-> > >
-> > > > On 11/18/23 22:28, Shantur Rathore wrote:
-> > > > > Hi Heinrich,
-> > > > >
-> > > > > On Fri, Nov 17, 2023 at 3:12=E2=80=AFPM Heinrich Schuchardt
-> > > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > > >>
-> > > > >> On 11/16/23 19:45, Shantur Rathore wrote:
-> > > > >>> On Thu, Nov 16, 2023 at 6:15=E2=80=AFPM Heinrich Schuchardt
-> > > > >>> <heinrich.schuchardt@canonical.com> wrote:
-> > > > >>>>
-> > > > >>>> On 11/16/23 17:52, Shantur Rathore wrote:
-> > > > >>>>> Hi Simon,
-> > > > >>>>>
-> > > > >>>>> Currently bootstd - bootmethod_efi only looks for the default
-> > > > >>>>> bootxx64.efi in /EFI/boot folder only.
-> > > > >>>>> Generally many distros end up putting their bootloaders in
-> > > > >>>>> EFI/<distro> folders like EFI/ubuntu and EFI/debian etc.
-> > > > >>>>>
-> > > > >>>>> In x86 worlds, the NVRAM is modified and new boot entries are=
- added to
-> > > > >>>>> support these but in the U-boot world the NVRAM variables are
-> > > > >>>>> read-only.
-> > > > >>>>
-> > > > >>>> I guess you are referring to UEFI boot options. These typicall=
-y are not
-> > > > >>>> stored in non-volatile RAM but on a SPI flash device.
-> > > > >>>>
-> > > > >>>
-> > > > >>> Thanks for correcting me.
-> > > > >>>
-> > > > >>>>>
-> > > > >>>>> What would be the best way to implement this?
-> > > > >>>>>
-> > > > >>>>> I was thinking of having a "efi_prefixes" environment variabl=
-e which
-> > > > >>>>> can be set to "ubuntu debian centos" etc and bootmethod_efi c=
-an try
-> > > > >>>>> all of them. Will bootmethod_efi be able to support multiple =
-entries (
-> > > > >>>>> thinking of multiboot ) ?
-> > > > >>>>
-> > > > >>>> On my laptop I have:
-> > > > >>>>
-> > > > >>>> EFI/Microsoft/Boot/bootmgr.efi
-> > > > >>>> EFI/Microsoft/Boot/memtest.efi
-> > > > >>>> EFI/Boot/bootx64.efi
-> > > > >>>> EFI/Boot/fbx64.efi
-> > > > >>>> EFI/Boot/mmx64.efi
-> > > > >>>> EFI/debian/shimx64.efi
-> > > > >>>> EFI/debian/grubx64.efi
-> > > > >>>> EFI/debian/mmx64.efi
-> > > > >>>> EFI/debian/fbx64.efi
-> > > > >>>> EFI/ubuntu/grubx64.efi
-> > > > >>>> EFI/ubuntu/shimx64.efi
-> > > > >>>> EFI/ubuntu/mmx64.efi
-> > > > >>>>
-> > > > >>>> Obviously each installed operating system provides multiple EF=
-I binaries
-> > > > >>>> and non uses the fallback file name BOOT<ARCH>.EFI. A value "u=
-buntu
-> > > > >>>> debian centos" would not be able to describe which file you ar=
-e looking
-> > > > >>>> for.
-> > > > >>>>
-> > > > >>>> We already have the U-Boot command line eficonfig and efidebug=
- commands
-> > > > >>>> to set up UEFI boot options which can describe which EFI binar=
-y to load
-> > > > >>>> and which command line to pass to it. These are considered by =
-the
-> > > > >>>> existing boot flows.
-> > > > >>>
-> > > > >>> So, I am building a new RockPro64 based cluster and using Canon=
-ical
-> > > > >>> MAAS to set them up automatically, booting them up using DHCP a=
-nd
-> > > > >>> installing them over the network.
-> > > > >>> I configured an Armbian image using Packer to be compatible wit=
-h MAAS
-> > > > >>> and it happily installs it. As part of installation process, a
-> > > > >>> grub-install is run which installs the grub efi,
-> > > > >>> this EFI ends up in EFI/debian instead of expected EFI/boot.
-> > > > >>> To be able to make it boot, I have to add commands to move it t=
-o
-> > > > >>> EFI/boot. I am trying to find a way in U-Boot that would allow =
-me to
-> > > > >>> skip this step.
-> > > > >>> With eficonfig if I understand correctly, it would need manual
-> > > > >>> intervention to create boot entries.
-> > > > >>>
-> > > > >>>>
-> > > > >>>> If you are installing the shim-signed package on Ubuntu, the E=
-FI boot
-> > > > >>>> option for Ubuntu is set up by EFI/BOOT/BOOT<ARCH>.EFI using t=
-he content
-> > > > >>>> of EFI/ubuntu/BOOT<ARCH>.CSV. This is done before ExitBootServ=
-ices() and
-> > > > >>>> therefore should work with current U-Boot.
-> > > > >>>>
-> > > > >>>> Patches are pending upstream to make EFI variables writable fr=
-om Linux
-> > > > >>>> if they are stored in the RPMB partition in the eMMC. See this=
- series:
-> > > > >>>>
-> > > > >>>> https://lore.kernel.org/linux-efi/20231107054057.1893-2-masahi=
-sa.kojima@linaro.org/
-> > > > >>>>
-> > > > >>>
-> > > > >>> Would it be possible to save it in SPI Flash as the U-Boot envi=
-ronment ?
-> > > > >>
-> > > > >> Currently this is not supported by U-Boot.
-> > > > >>
-> > > > >> The U-Boot environment variables can be stored in lots of differ=
-ent
-> > > > >> places SPI flash is only one of these. But none of these locatio=
-ns is
-> > > > >> protected from OS access which would be preferable for UEFI vari=
-ables
-> > > > >> for security reasons.
-> > > > >>
-> > > > >> To support boards without eMMC the right way forward would be wr=
-iting a
-> > > > >> new implementation of the OP-TEE standalone MM which writes the
-> > > > >> variables to SPI flash instead of the RPMB partition and ensures=
- that
-> > > > >> the SPI flash' MMIO registers are protected against access from =
-the
-> > > > >> non-secure world.
-> > > > >
-> > > > > Thanks for explaining this to me.
-> > > > > This seems like a long way to go, for now what would be an accept=
-able
-> > > > > solution, some options are
-> > > > >
-> > > > > 1. Allow to set a space separated efi_prefixes (e.g. "boot ubuntu
-> > > > > debian") variable which is ready by bootmeth_efi and used as
-> > > > > efi/<efi_prefix> instead of efi/boot.
-> > > > > 2. Improve bootmeth_efi to find all bootxxxx.efi in efi/ folder a=
-nd
-> > > > > present all them as bootflows to bootstd.
-> > > >
-> > > > As mentioned in a prior mail ubuntu/bootxxxx.efi and debian/bootxxx=
-x.efi
-> > > > don't exist. I would prefer not to add any distro specific stuff in
-> > > > upstream U-Boot. Instead we will continue to drive what Linaro has
-> > > > suggested to improve U-Boot EFI variables support in Linux.
-> > >
-> > > I agree that adding hacks like this is not a good idea.
-> > >
-> > > The Linaro approach that involves OP-TEE makes for a fairly complex
-> > > solution.  And there are plenty of boards that have neither eMMC nor
-> > > SPI flash.  If Secure Boot is not a requirement (and I'd argue that
-> > > for most "hobbyist" boards it isn't) storing the EFI variables in a
-> > > file on the ESP (as implemented by the CONFIG_EFI_VARIABLE_FILE_STORE
-> > > Kconfig option) is a workable alternative.  And this is actually what
-> > > the rockpro64-rk3399_defconfig enables.
-> > >
-> > > I noticed that the latest EBBR attempts to standardize this:
-> > >
-> > >   https://arm-software.github.io/ebbr/index.html#document-chapter5-va=
-riable-storage
-> > >
-> > > Not sure what the status here is.  But if the Linux kernel folks
-> > > accept that alternative implementations for runtime EFI variable
-> > > access are a thing, then a method that modifies the file would be
-> > > possible as well.  Or maybe it is good enough to implement support fo=
-r
-> > > this in the efivar library.
-> > >
-> > > That said, Linux distros probably should install their EFI bootloader
-> > > as EFI/BOOT/BOOTxxxx.EFI if that file doesn't exist yet.  Some Linux
-> > > distros already do this.  This would make the distro work "out of the
-> > > box" on a lot more boards.
-> >
-> > I believe the EFI/BOOT/BOOTxxxx.EFI is the EFI fallback mechanism (not
-> > sure it that's the proper spec name but it's what I've heard it
-> > referred to) and tha's the way Fedora generally works to boot devices
-> > that don't have working set variable where the boot entry can be
-> > updated. I had assumed that was part of the standard as, at least in
-> > Fedora, that has always been there and explicitly the way we made UEFI
-> > work on U-Boot from the outset.
->
-> This is definitely the standard for Removable Storage as per the spec.
-> Section 3.5.1.1 Removable Media Boot Behavior - Link [0]
->
-> [0] - https://uefi.org/sites/default/files/resources/UEFI_Spec_2_10_Aug29=
-.pdf
->
-> But the spec isn't stopping the firmware to perform scan to be able to li=
-st
-> the possible bootable EFIs, in-fact it says firmware can do special thing=
-s as in
-> Section  3.4.3 Boot Option Variables Default Boot Behavior
->
-> @Simon Glass - If one was to implement such a scanning behaviour (
-> knowing it might not be
-> merged ), how should one go about this?
->
-> As I understand, the bootmeth_efi is expected to provide only 1
-> bootflow for a partition, what would
-> be the best way for bootmeth_efi to provide multiple bootflows for
-> each partition.
->
-> Kind regards,
-> Shantur
+On 2023-12-09 23:13, Tom Rini wrote:
+> On Sat, Dec 09, 2023 at 10:43:35PM +0100, Dragan Simic wrote:
+>> On 2023-12-09 22:21, Tom Rini wrote:
+>> > On Sat, Dec 09, 2023 at 10:02:09PM +0100, Dragan Simic wrote:
+>> > > On 2023-12-09 21:43, Tom Rini wrote:
+>> > > > On Sat, Dec 09, 2023 at 09:37:28PM +0100, Dragan Simic wrote:
+>> > > > > On 2023-12-09 21:34, Tom Rini wrote:
+>> > > > > > On Wed, Dec 06, 2023 at 04:24:43PM +0000, Andre Przywara wrote:
+>> > > > > > > On Mon,  4 Dec 2023 00:59:52 +0000
+>> > > > > > > Andre Przywara <andre.przywara@arm.com> wrote:
+>> > > > > > > > Add support for the zBIT ZB25VQ128 (128M-bit) SPI NOR flash memory chip,
+>> > > > > > > > as used on the Xunlong Orange Pi Zero 3 board.
+>> > > > > > >
+>> > > > > > > does anyone have any objections against this patch? I wanted to take
+>> > > > > > > this
+>> > > > > > > via the sunxi tree, as this blocks some board support patches.
+>> > > > > > >
+>> > > > > > > IIUC Linux gave up on adding rather generic entries up for each and
+>> > > > > > > every
+>> > > > > > > SPI NOR chip, if there is nothing special about them:
+>> > > > > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=773bbe1044
+>> > > > > > > Should we follow suit here?
+>> > > > > >
+>> > > > > > And we could then start trimming the table we do have as well, to
+>> > > > > > reclaim space?
+>> > > > >
+>> > > > > In general, yes, but we'd also need to consume a bit more space with
+>> > > > > the
+>> > > > > additional auto-detection logic.
+>> > > >
+>> > > > Maybe part one of the series is backport that logic, part two is remove
+>> > > > all the easy to remove tables? Or at least a number of them so the
+>> > > > series is a wash and then a targeted series of drop-an-entry and cc the
+>> > > > person that added it so they can run-time verify it's still fine?
+>> > >
+>> > > Sounds like a plan to me and I'm willing to work on that.  Though, I think
+>> > > we'll inevitably end up with increasing the resulting image sizes a bit, but
+>> > > that might be an acceptable trade-off for making supporting more SPI chips
+>> > > and more new boards much easier in the future.
+>> >
+>> > Yeah, this is where we need to go overall long term if nothing else.
+>> 
+>> I agree, it would make the things a bit easier.  I'll see to start 
+>> working
+>> on it next week.
+> 
+> Thanks!
 
-Throwing spanner in the works, with Unified Kernel Image coming in,
-it will be required to implement the scanning for EFI files.
-
-https://github.com/uapi-group/specifications/blob/main/specs/boot_loader_sp=
-ecification.md#locating-boot-entries
-
-Kind regards,
-Shantur
+Thank you for agreeing with this new approach.
