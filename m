@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B456C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 02:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498AEC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 02:59:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D81B87536;
-	Sat,  9 Dec 2023 03:44:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A3DAE874B7;
+	Sat,  9 Dec 2023 03:59:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W+ahcN2e";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KDdrFCY6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EACA8757F; Sat,  9 Dec 2023 03:44:39 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id AE3AE87536; Sat,  9 Dec 2023 03:59:36 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A5A4874B7
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 03:44:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F9ED87215
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 03:59:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1d1cb7651a9so5853345ad.1
- for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 18:44:36 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6d9d84019c5so1724074a34.3
+ for <u-boot@lists.denx.de>; Fri, 08 Dec 2023 18:59:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702089875; x=1702694675; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6bZxkUvNrDX+Ow+/O4wOVKFJ1dqm6YkiwsZGIQA/7CQ=;
- b=W+ahcN2e+0gW4AA02zum8Z0pc/e+EZEMhvL9G8sDvriPJ3QpcCdfSaD4B7J2ld044O
- upB29vXoEpcmCZin6hGrlPBASq7RcQGooKIKPh6xfsi9ayNe4LdQSXDZ8m84yVeDl0gQ
- gAH58fLiDugjzdnxXdoxpIOlg8ud1g5DlAD9YX7dZcY5Ig9Zz00asOilwu08jaass+Dd
- UeKe4APmnl7FUTeXkOv0Y4EYHQuzCgHal/WvzKgehmAUdXq38iPeBLPqr4Qm4jvmCBSv
- ve2+/HKyJFVmVMj7duTtYlLi8sQpfIVPjy2Lb8VpO9IH+e/OXzLYcTs3EG84v3UN//OW
- lVHA==
+ d=konsulko.com; s=google; t=1702090773; x=1702695573; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=icjMaRD7QkxFpG0NqfWvq1JMQ9+z7ZzgtX4d8KXqFZw=;
+ b=KDdrFCY6zjT+oslFNDT7pg8Bf1EbF3nicL7mrL2ESsiRrdWO3YROar+YovASn1Qw4O
+ uFGxjaBT3qB+4iXWacpG6Y8unjlJGRArXpSxEZ17EnsW+8Beb1H3/bZY4BAxL0Tq+nvZ
+ WABtXbO3DKjdlicSSuQmEUG1o2yXelb+2HO/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702089875; x=1702694675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6bZxkUvNrDX+Ow+/O4wOVKFJ1dqm6YkiwsZGIQA/7CQ=;
- b=xDYlF4KwDFQi2iKWZcuIvW2HpUYM982C7nyAnsK9GIns2/OjvQKChU7NdEnT444Z4G
- MriU3sz/UwT8FqsymWMoyREGPQBzapUozN6ISYC/3QBBTylCpQMMsdvVKl+goMHFlvK4
- ph0tL80fm4rzqp+DpXjzNeUbATLiHj2Iym8TvkueZ4mqatXYcyJH1Ghv3mOqMjaPSRQB
- uqniy2CGRovxjbbVmzYMmqVgjThkcsTg+p1YsQSp705VLCLpnl2BCvTU2mEInALYlvBe
- YkaHzaBwfM402Xtv5g3+JX2a7nj+cXFjT8QcTA0mB1ETwBh9jsKfX1lphsMXBZkRsYnr
- c2ZA==
-X-Gm-Message-State: AOJu0YwRrlH7ltnIb7V80TlQEDq+Rjl8hpkOGCCFuK2B3FJS7LTMRzAM
- UdY+z+1kAD6slculcHayrCt0STFiLnzSsgCDO90gNMMdtlM=
-X-Google-Smtp-Source: AGHT+IH6re4LvD/iEEn6NF1HH5RA5HlU/s6N0fAiWmMkDagOUlhHdgJcS97XwLqeBYo+74F7DfSxS7YS93yJk3PYX9A=
-X-Received: by 2002:a17:903:32cb:b0:1cf:ce83:3b5d with SMTP id
- i11-20020a17090332cb00b001cfce833b5dmr1952277plr.6.1702089875260; Fri, 08 Dec
- 2023 18:44:35 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702090773; x=1702695573;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=icjMaRD7QkxFpG0NqfWvq1JMQ9+z7ZzgtX4d8KXqFZw=;
+ b=dMFTsGrzGH0PowcL+85XsoBvFwC8/95dPj1q1uKX68LeVBOb+RrBg57mcXSmIgBTfE
+ LXvaSH7cNoUWu7lL1Dgh9G7kUy93c5HOM8pCnlu0Tvm8cdp/3qjpVpY2IheIHNs8W+4X
+ NjDsVdvjd7ZjEX+QvepOzIBlgFySOXksFA71nwc3xmPpb8YaoDzU08jfrP8gIR5pj95J
+ 555uy4LCLBQ22N4opznxGv7dHR1Z4WDN01b7H4QC/oC0+JjYmqspdsaijZrKGAi3I6fK
+ 73Wu+go3VFI9gNUIq6B1ipTipSqXOrIWWi1DSD0EVEcQGg6KtP145lhK/tRM2HvMgdc5
+ 6QIg==
+X-Gm-Message-State: AOJu0YxNOekxLdLRk7+QMB1scpcFLGym9wcDRoq/X4KgFZXdI8zW5xRu
+ KyyidqX0nGH++yVNyNtfDHh0ce9JnKSevzeHpmwTAQ==
+X-Google-Smtp-Source: AGHT+IGuGy026NKqR0IlQVyEyE14rwLstats4EwN/2dWbjcFEZtQy49CZS7FGIdoFFWmnL0e5r3rTA==
+X-Received: by 2002:a9d:7689:0:b0:6d9:cb22:b8e7 with SMTP id
+ j9-20020a9d7689000000b006d9cb22b8e7mr1087891otl.65.1702090773182; 
+ Fri, 08 Dec 2023 18:59:33 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
+ [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
+ by smtp.gmail.com with ESMTPSA id
+ k206-20020a816fd7000000b005d0494763c1sm1134163ywc.140.2023.12.08.18.59.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Dec 2023 18:59:32 -0800 (PST)
+Date: Fri, 8 Dec 2023 21:59:30 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Stefan Roese <sr@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-watchdog/master
+Message-ID: <20231209025930.GY2513409@bill-the-cat>
+References: <b5692c19-9431-47ee-9053-52deef9ac539@denx.de>
 MIME-Version: 1.0
-References: <CABqjNW-wv1g-3W139TyTX_sSP5h3KLFzX_Sqzvx+atV=ZJrOYw@mail.gmail.com>
- <CAOMZO5BzCRhNnseNq5RMP94GLt=1H9s742ywtm_LWOqTxaJcrg@mail.gmail.com>
- <CABqjNW-w3BRg0rqDXXYRMKY6-Ws3HsuxdUbx_pKAQ2hiuUrOaA@mail.gmail.com>
-In-Reply-To: <CABqjNW-w3BRg0rqDXXYRMKY6-Ws3HsuxdUbx_pKAQ2hiuUrOaA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 8 Dec 2023 23:44:23 -0300
-Message-ID: <CAOMZO5DZ9WzWqeHQ_ApgCMW_jTxiGCPeB4s=Q921jTdkbZZytA@mail.gmail.com>
-Subject: Re: iMX6, CONFIG_IMX_HAB and fuse_read()
-To: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JLqpOPMhUj4xdP35"
+Content-Disposition: inline
+In-Reply-To: <b5692c19-9431-47ee-9053-52deef9ac539@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,26 +91,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 8, 2023 at 10:15=E2=80=AFPM Lisandro P=C3=A9rez Meyer <lpmeyer@=
-ics.com> wrote:
 
-> I added IMX_HAB:
->
-> ```
-> $ echo "CONFIG_IMX_HAB=3Dy" >> configs/apalis_imx6_defconfig
-> ```
+--JLqpOPMhUj4xdP35
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Please try like this:
+On Mon, Dec 04, 2023 at 11:18:17AM +0100, Stefan Roese wrote:
 
---- a/configs/apalis_imx6_defconfig
-+++ b/configs/apalis_imx6_defconfig
-@@ -21,7 +21,9 @@ CONFIG_OF_LIBFDT_OVERLAY=3Dy
- CONFIG_SYS_MONITOR_LEN=3D409600
- CONFIG_SPL_MMC=3Dy
- CONFIG_SPL_SERIAL=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_SPL=3Dy
-+CONFIG_IMX_HAB=3Dy
- CONFIG_CMD_HDMIDETECT=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x14200000
- CONFIG_AHCI=3Dy
+> Hi Tom,
+>=20
+> please pull the following watchdog related fix:
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--JLqpOPMhUj4xdP35
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmVz2A8ACgkQFHw5/5Y0
+tyzs4gv/asBEIzdjqh42MM/Uug8rj26Rx9MzaXoB53X39QG3fi8RwnXl2Bjp694C
+GEZbGUAUFToJQueszg3P35R6qnLe+YxPG5CATpBuNFWjsBulc0QuX3YBy0hD6Pog
+49ueCBXmBhRdyznfpi/ep71YNLvEeE6fUHlApMBmYu/x8puqQ++t2nCerXeWp3aZ
+tou8752vRaop0JqstvS0Xzw6eYCzcF2kqUY3qOfjoFLPu0Dbd9odsWoeXLQ3YHdI
+vicGDHHZCx9pdmO5ykWfHeqsARhLD08no4pIbr5yi1/7Kv5sQr4JYw7yyE5Q7qzj
+MuUZS67yOP4dhSSD8C35fU6SwWmdVTXOVk3ds73yD6OmGX+frXZIrZ+drCtLXbty
+VKYDCgGNprFDi4cdEbc7cW5sXQhQGAwK6RPF8rqPjo5aYPOH+l79xUbR030IOSPh
+symmWLXEQ0wjzoTVYDbhFqomjb8ICACFL+3OQbkzZ67gTT5sH3PalIsMmjWRMpyM
+jWyJOg9Z
+=yyA3
+-----END PGP SIGNATURE-----
+
+--JLqpOPMhUj4xdP35--
