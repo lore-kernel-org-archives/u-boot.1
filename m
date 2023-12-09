@@ -4,68 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53764C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 21:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45BC0C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 22:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADDE987652;
-	Sat,  9 Dec 2023 22:43:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 628858754B;
+	Sat,  9 Dec 2023 23:03:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="efXwD6Q7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TL53qQqW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 319B487652; Sat,  9 Dec 2023 22:43:45 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F240D8761B; Sat,  9 Dec 2023 23:03:55 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C7187142
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 22:43:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id C761A87517
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 23:03:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6d9f8578932so975427a34.2
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 14:03:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1702159432; x=1702764232; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BWUJqCSblUtW06vbd0AS0H2nsiI0FW29XnOoGEwUdJA=;
+ b=TL53qQqW6bjcEPjbf6rKABcytwSH/cBPNDftUD1RC+nkZjXSHbtpmVl+yKAzR0gdsR
+ vEO5gJmTsOCpMNiRJDADOseuILe/OWhGwP+6LO12sM4rULrtePwEHh0Ea5dVApW94VgH
+ O2jhAsNB2IzeYXfcpUmgLlQej6snh9dpkBBZg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702159432; x=1702764232;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BWUJqCSblUtW06vbd0AS0H2nsiI0FW29XnOoGEwUdJA=;
+ b=JULvO8rRtfzubgsPVnnUZZjGMeNdEazLIlEs1skg860BBSZICiwgMlUsQDpVo4OZgq
+ Roy1ZAaS7nCINBRuMsLkgxSINBJrHwEicW8zo1yt2MjLgRntEtQ6ACtAjCrPJPs0sdED
+ u1gFMpU32sHYUPp3Q1s0lQNHbVY7WevjUtDziy3qex8PmHAyUhYd80LgTsk8s7q78zWS
+ fGeXuvjrIfEP7/70B8sopDFExMaWqhiz6pUQwcF+YH7kV5iixLQ5lrWq8jdTZPn8TzNX
+ T3kpsHFvkCyHfRuEeOLrKq8z0oMubHwtGh3Ro/lMVLmsvtOBULnk6n3lEBlBmzIdKnfv
+ r7nQ==
+X-Gm-Message-State: AOJu0Yx03wcCfngR2oIzFbgVrJB5oHuP7cJhm5SvMK5bxv+EQ+alNZFQ
+ NqWCh3aMZ/il4fn09MRfceKoQQ==
+X-Google-Smtp-Source: AGHT+IEHhLg+MGVQhQjf8Q6ZFbP+yq9XdkipgCLp8EdtXJ+FBodToXtSyR9HGlcY/wLe3cdeFkuzPg==
+X-Received: by 2002:a9d:7981:0:b0:6d8:5421:1e0c with SMTP id
+ h1-20020a9d7981000000b006d854211e0cmr2317374otm.34.1702159432327; 
+ Sat, 09 Dec 2023 14:03:52 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-8dee-9b11-e8b3-3204.res6.spectrum.com.
+ [2603:6081:7b00:6400:8dee:9b11:e8b3:3204])
+ by smtp.gmail.com with ESMTPSA id
+ q1-20020a0de701000000b005cb1bf4d466sm1765692ywe.82.2023.12.09.14.03.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 09 Dec 2023 14:03:51 -0800 (PST)
+Date: Sat, 9 Dec 2023 17:03:49 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ conor+dt@kernel.org, Caleb Connolly <caleb.connolly@linaro.org>,
+ neil.armstrong@linaro.org, Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Boot Architecture Mailman List <boot-architecture@lists.linaro.org>
+Subject: Re: [PATCH 00/21] Qualcomm generic board support
+Message-ID: <20231209220349.GM2513409@bill-the-cat>
+References: <20231122140100.GT2513409@bill-the-cat>
+ <CAFA6WYNoz-Pqn38FpKLj9eJxX6B019HvQoukdCma3S=+O6tOCg@mail.gmail.com>
+ <20231122142758.GU2513409@bill-the-cat>
+ <c47b163b-d0d9-4de6-8ea8-ebe884b28e4b@linaro.org>
+ <CAFA6WYO_Dk+7FWDGjUdDub27YCwVKRjS+vZfMrT8otjvv-QO_Q@mail.gmail.com>
+ <22b2c2e2-9ce1-4a5f-8cda-565184eec120@linaro.org>
+ <260c6f67-17f7-4255-b759-12fe25024673@linaro.org>
+ <CAFA6WYMeg6B7Ozb42u79U43=26JmK3CaxfO29uuqQnGipFowEA@mail.gmail.com>
+ <20231130143512.GQ2513409@bill-the-cat>
+ <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1702158216;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=I22dAiACCWXoJwHGOM2OVY6XLh0ErHXpkTsbno0/AR8=;
- b=efXwD6Q7wqmSm+FCs6xZbDLzxPNwia+o9/s+8JQcadCoDpob4FYvfI9pCxxHP5ESORK1BB
- NS/8IPOtlWl0X/yD9J+kjhnicTlM/X+oaXHJxJ2KSdTlUigjhLjtuxESdxxLWR7nZnmjPr
- mhUjnYjPSXufpfIpkkRX3BUH75gyyTJsoG/QuK/syLjuCfyWz8IkWzOW/jN8gtuNCswCLm
- VsWWNP34c6/25ph4Cs3gSX0fm3CO8wl06U+xE2xX3KgLAvVGiilprD4fWefFTLXzi7EPu+
- CiFbqxINtVf8yg59VNNBSzjL5EOiakDgsic0PgEEtLewqubx2Az0VWRcXT94oA==
-Date: Sat, 09 Dec 2023 22:43:35 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>, Vignesh R
- <vigneshr@ti.com>, Jaehoon Chung <jh80.chung@samsung.com>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, Mikhail
- Kalashnikov <iuncuim@gmail.com>, Piotr Oniszczuk
- <piotr.oniszczuk@gmail.com>, Bob McChesney <bob@electricworry.net>, Stephen
- Graf <stephen.graf@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 1/3] mtd: spi-nor: Add support for zBIT ZB25VQ128
-In-Reply-To: <20231209212109.GL2513409@bill-the-cat>
-References: <20231204005954.13201-1-andre.przywara@arm.com>
- <20231204005954.13201-2-andre.przywara@arm.com>
- <20231206162443.7f0692d7@donnerap.manchester.arm.com>
- <20231209203423.GF2513409@bill-the-cat>
- <3c6b3fe41f54a2d2a391d433684e80d9@manjaro.org>
- <20231209204336.GG2513409@bill-the-cat>
- <5f898df3e85bb46df5e3dbaa81525047@manjaro.org>
- <20231209212109.GL2513409@bill-the-cat>
-Message-ID: <0dc545aa9d32038dbe7bc481595198b0@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bMYqinvgNj0S7H9s"
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,48 +111,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-12-09 22:21, Tom Rini wrote:
-> On Sat, Dec 09, 2023 at 10:02:09PM +0100, Dragan Simic wrote:
->> On 2023-12-09 21:43, Tom Rini wrote:
->> > On Sat, Dec 09, 2023 at 09:37:28PM +0100, Dragan Simic wrote:
->> > > On 2023-12-09 21:34, Tom Rini wrote:
->> > > > On Wed, Dec 06, 2023 at 04:24:43PM +0000, Andre Przywara wrote:
->> > > > > On Mon,  4 Dec 2023 00:59:52 +0000
->> > > > > Andre Przywara <andre.przywara@arm.com> wrote:
->> > > > > > Add support for the zBIT ZB25VQ128 (128M-bit) SPI NOR flash memory chip,
->> > > > > > as used on the Xunlong Orange Pi Zero 3 board.
->> > > > >
->> > > > > does anyone have any objections against this patch? I wanted to take
->> > > > > this
->> > > > > via the sunxi tree, as this blocks some board support patches.
->> > > > >
->> > > > > IIUC Linux gave up on adding rather generic entries up for each and
->> > > > > every
->> > > > > SPI NOR chip, if there is nothing special about them:
->> > > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=773bbe1044
->> > > > > Should we follow suit here?
->> > > >
->> > > > And we could then start trimming the table we do have as well, to
->> > > > reclaim space?
->> > >
->> > > In general, yes, but we'd also need to consume a bit more space with
->> > > the
->> > > additional auto-detection logic.
->> >
->> > Maybe part one of the series is backport that logic, part two is remove
->> > all the easy to remove tables? Or at least a number of them so the
->> > series is a wash and then a targeted series of drop-an-entry and cc the
->> > person that added it so they can run-time verify it's still fine?
->> 
->> Sounds like a plan to me and I'm willing to work on that.  Though, I 
->> think
->> we'll inevitably end up with increasing the resulting image sizes a 
->> bit, but
->> that might be an acceptable trade-off for making supporting more SPI 
->> chips
->> and more new boards much easier in the future.
-> 
-> Yeah, this is where we need to go overall long term if nothing else.
 
-I agree, it would make the things a bit easier.  I'll see to start 
-working on it next week.
+--bMYqinvgNj0S7H9s
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Dec 04, 2023 at 11:02:57AM +0530, Sumit Garg wrote:
+
+[snip]
+> But currently u-boot doesn't have a proper way to validate those DTS
+> against DT bindings (maintained in Linux kernel). Although there are
+> Devicetree schema tools available here [2], there isn't a versioned
+> release package of DT bindings which one should use to validate DTS
+> files.
+
+I will have more / other things to say but I want to chime in here. That
+U-Boot cannot validate the DTS files is a bug, not a feature. I would
+very much appreciate if someone(s) with time and skills to do so would
+re-sync us with the kernel Kbuild again so that we can both stay in sync
+again and have the validation targets / functionality available here
+too.
+
+--=20
+Tom
+
+--bMYqinvgNj0S7H9s
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV05EIACgkQFHw5/5Y0
+tyyaVwv/T4uCG1TzBf/sYW3PKZLrw2tCrXqlScrZqpgFnp3XqELqS4nswQlyS0E5
+np6apeN6Sq3NKiYsK53KfcNJBvvZFRy4YAu3BEbgV3/R1DuUHWX5oRteKESd1nLU
+xt7zpEzzVd79YUnlC3YkySXbXDAfx/soODDQNeYhz2wnX+OF1oclWcQWaapkr1Lz
+eZ/omBmqR2SMD8nQpKzVXfh+RL9vl6sSDHnsyPn/Cjn7tiVR9GrAciehLHE7g7vJ
+nOcbVdNHPWjCw88jo9tYDQfeGc7VQl+H/8rfA1HSackDoro6NrYWm3QYEAAfndKl
+zRI0G1/ZtmpyfEOjOKQiRC/Dmrc6dZHyzPSpNouAKSglKNoYh+wQ7uOFS0bkOyWz
+tPtU5WdlyemhabNaLCICjCIbi12VeQlnPqSarm1sNsF64HDhkoYB9GoBe94mDUqW
+0pMgV8S1c9CxoG6CYbG50pHlWb4cnc9/Yo/3+O89LHBwjBvPzirSpJ4myh2Gcjsa
+xrX7ik5q
+=MOCH
+-----END PGP SIGNATURE-----
+
+--bMYqinvgNj0S7H9s--
