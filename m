@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2CEBC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 19:51:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D30B5C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 20:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FBF187632;
-	Sat,  9 Dec 2023 20:51:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E9D9B8717E;
+	Sat,  9 Dec 2023 21:01:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XIevHdty";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qfmWT5qd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75FB9870FF; Sat,  9 Dec 2023 20:51:07 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id A26F78753C; Sat,  9 Dec 2023 21:01:34 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58C628765B
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 20:51:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7200187078
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 21:01:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5cbcfdeaff3so30984767b3.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 11:51:05 -0800 (PST)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-dbc72b692adso298215276.2
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 12:01:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702151464; x=1702756264; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=D/OeiIR+oPTMDEGG98WrzOuHC9d9oQ2/cKr1PXwdxh8=;
- b=XIevHdtyxU7/UU21lwX9mrxMmESX0x86ZJ+EImAqX90iHrebD5vDFGdvZHvXgZ7kZE
- +zP8dLXNaxxVteXYDaJlWg2slr4pnASBL5ttjLzqCfB3KkiJtTvpK8cfwuQntYiofAOl
- WDmnjd90cvKSAzDPBYKpuyDogokXyQvqUSQDs=
+ d=konsulko.com; s=google; t=1702152091; x=1702756891; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Yz0Nuuhx9Jgaa5oJujXBPttVsLlPE/sxNCLVC6W8t/4=;
+ b=qfmWT5qdMewk6+qFO0chuMW1b1W7vKqBn21bA/0n6lcLgKuMBxZTXLnfTE5Iiyu7uq
+ LE5tUr0DJxMhbrMMLzr87RsV1L1YXMjXjfjtP3G1AdeoRguKr9soLyFsmLcUfb+Sd7V9
+ 7HF7LlL04Ve2tXNDOJhGdix+GSPRSC2l3Luv8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702151464; x=1702756264;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D/OeiIR+oPTMDEGG98WrzOuHC9d9oQ2/cKr1PXwdxh8=;
- b=BS2l5r6y2nQpR7mOSGgFvxz8CgtvoQ+dOXwFuJe52EZqF1IHfX71U1omXpQAESTyLR
- zzKMYq1hkXtkXkStx3KkLLw4EP2kHOSjxvLWYV/VCTMzxopFeu0oLZ3Xjd6cMQXxUvS8
- 0WfXj1qUIEClw8pBmcTmssQKNEwNtYx60S1OB6qkpoSb9my8dHnZbvFzxhS5uM9znxKi
- HQAzESQJpkPFG3jAzdgHL5pMAR8BlBTAN5mgxTel5NAaL8lCKNSsZfcRgF2CbZfiy185
- a0aR3vnMG64U1pk7FXPkk3ITo49ejivNS1vAfVjVloql87pHDHr3gJNCSvJ8257sOjAw
- NoLw==
-X-Gm-Message-State: AOJu0YziPPEe69molFwECqx3QrGP4x55bGECsBzaR8ldjWwWQAX6wE8e
- S+wFK6dV4xlFjyLBgqw0sKZ6/w==
-X-Google-Smtp-Source: AGHT+IGBKoyiFhfPmN/9anqlnVNUZprVLAleUPsoxMnmw063uQHz7feGf0kTTD7Otv2KM24OemDDRA==
-X-Received: by 2002:a0d:cc05:0:b0:5d9:8e2:7a44 with SMTP id
- o5-20020a0dcc05000000b005d908e27a44mr1668460ywd.33.1702151464055; 
- Sat, 09 Dec 2023 11:51:04 -0800 (PST)
-Received: from bill-the-cat
+ d=1e100.net; s=20230601; t=1702152091; x=1702756891;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Yz0Nuuhx9Jgaa5oJujXBPttVsLlPE/sxNCLVC6W8t/4=;
+ b=Z1DLwGeA/dJejHLdk43HMyqa6EfReftd1XltgCc51eWilOsI34ZClQ87G3tlxP/YZP
+ nXy40kYaIaibayqAaFFPlIH8yYPU1gupnjW9/WN3zGesBA+zOmEouU3ijJqQEtbEEOfx
+ XRG1VwTkZ+fngPb792shO97BibK85+70M9AZgUB3rJLdDTwE3+k/t/F/JcJdCvC9SIwR
+ JUr/bFj6xyXJlQda2ZWR3IqnrKVQzuVnQC11EJhfYtZlKGQSv8j5n/lvPfJ0fl2AEPgU
+ PGgsMR5r+IButKKGGRcVVmODUvxtgAonfBvRCvUB/kB6y9JoI+FHepOXtL7024sqhBF+
+ Dbrg==
+X-Gm-Message-State: AOJu0YxpJhFaUCysG+a6tSbiavQGqhNSTuhZbDBWca5/jZCdJubwO6q9
+ mA5ukS5Xi7wGMCtxTqxqaiqJb7YJtnEg9Iosl/W7eA==
+X-Google-Smtp-Source: AGHT+IGU/dpJ0SmffVHNcjq3IORTPbgrWD5IZ0lH2N1SJYIxsjmiHokvpFZ/ELjNfjYia2n1EpqimA==
+X-Received: by 2002:a5b:789:0:b0:d9a:4ae7:ba2c with SMTP id
+ b9-20020a5b0789000000b00d9a4ae7ba2cmr1155386ybq.22.1702152089465; 
+ Sat, 09 Dec 2023 12:01:29 -0800 (PST)
+Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- d62-20020a0df441000000b005d6f34893dfsm1676885ywf.135.2023.12.09.11.51.03
+ y26-20020a25ad1a000000b00d7ba4c5e31fsm1465343ybi.39.2023.12.09.12.01.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 11:51:03 -0800 (PST)
-Date: Sat, 9 Dec 2023 14:51:01 -0500
+ Sat, 09 Dec 2023 12:01:29 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- hs@denx.de, enrico.leto@siemens.com, praneeth@ti.com, nm@ti.com,
- vigneshr@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH] mtd: nand: omap_gpmc: Fix NAND in SPL for AM335x
-Message-ID: <20231209195101.GC2513409@bill-the-cat>
-References: <20231125111605.47536-1-rogerq@kernel.org>
- <20231126173520.GA2513409@bill-the-cat>
- <619f6788-9f00-4729-a945-1b1af0621735@kernel.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH] test/py: Disable error E0611 in two cases for pylint
+Date: Sat,  9 Dec 2023 15:01:28 -0500
+Message-Id: <20231209200128.3819612-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ihB1ECKMNH3oz94A"
-Content-Disposition: inline
-In-Reply-To: <619f6788-9f00-4729-a945-1b1af0621735@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,65 +87,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Recently pylint has started to complain about:
+No name 'fs_helper' in module 'tests' (no-name-in-module)
 
---ihB1ECKMNH3oz94A
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Due to:
+from tests import fs_helper
 
-On Thu, Dec 07, 2023 at 04:22:42PM +0200, Roger Quadros wrote:
-> Hi Tom,
->=20
-> On 26/11/2023 19:35, Tom Rini wrote:
-> > On Sat, Nov 25, 2023 at 01:16:05PM +0200, Roger Quadros wrote:
-> >=20
-> >> AM335x uses a special driver "am335x_spl_bch.c" as SPL
-> >> NAND loader. This driver expects 1 sector at a time ECC
-> >> and doesn't work well with multi-sector ECC that was implemented in
-> >> commit 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based co=
-rrection")
-> >>
-> >> Switch back to 1 sector at a time read/ECC.
-> >>
-> >> Fixes: 04fcd2587321 ("mtd: rawnand: omap_gpmc: Fix BCH6/16 HW based co=
-rrection")
-> >> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> >> ---
-> >>  drivers/mtd/nand/raw/omap_gpmc.c | 95 ++++++++++----------------------
-> >>  1 file changed, 29 insertions(+), 66 deletions(-)
-> >=20
-> > I'm glad to see this fixed. My question is, can we abstract this
-> > slightly as I assume there's a performance hit on the newer SoCs that
-> > support more than one sector at a time for ECC and I assume it's just
-> > am335x and related that don't support the feature. Thanks.
-> >=20
->=20
-> It looks like that the ELM driver (omap_elm.c) is not yet ready for multi=
--sector setup yet.
-> I will need more time to test the multi-sector implementation.
+However, we have:
+test/py/tests/fs_helper.py
 
-Ah, thanks.  Lets make that clearer in the commit message of the next
-spin please.
+And since we do not want to add a dummy test/py/tests/__init__.py to
+silence this warning we instead just disable it as needed.
 
---=20
-Tom
+Cc: Simon Glass <sjg@chromium.org>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ test/py/tests/test_fs/conftest.py | 1 +
+ test/py/tests/test_ut.py          | 1 +
+ 2 files changed, 2 insertions(+)
 
---ihB1ECKMNH3oz94A
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
+index 0d87d180c7b6..7c76425b51a4 100644
+--- a/test/py/tests/test_fs/conftest.py
++++ b/test/py/tests/test_fs/conftest.py
+@@ -9,6 +9,7 @@ import re
+ from subprocess import call, check_call, check_output, CalledProcessError
+ from fstest_defs import *
+ import u_boot_utils as util
++# pylint: disable=E0611
+ from tests import fs_helper
+ 
+ supported_fs_basic = ['fat16', 'fat32', 'ext4']
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index 1d9149a3f683..0e3a48e73f61 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -9,6 +9,7 @@ import os.path
+ import pytest
+ 
+ import u_boot_utils
++# pylint: disable=E0611
+ from tests import fs_helper
+ 
+ def mkdir_cond(dirname):
+-- 
+2.34.1
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0xSUACgkQFHw5/5Y0
-tyzjQwv9EZDUlwZBhBcfsyN2g2Ru0IKIiJbgJkcu6BHjV6e/p+T9UqRFmpKf6tT9
-zxZ0SUIUlf+E+glIhjsuW5lLREou+Nzg7sq2cirStyjeXqGLvKd30h6GfsrZlYDy
-egmlMb6snROTVMf6Ch0mrKFALwGuXSaNUYO985lY1d/7GftvJ2xBqaIvb0FW7X9j
-csmui4kHBTq4CwwnBXvuBCz6kKawKRy5pB0RsCRzGuYKJ3qKJ788YEjjPtf3LIbi
-wsuticMdyhEWKNd1vwYy2Cb+dRD6ZcxTYiCE65XoJ7ghA+uzQyV/GrhCZyV22s71
-lwC+gA5oal33PbF47FAdqqvKyD5kvp/8gg83ettjRN9rGlpTkznl3tBgOO2S9ylD
-gIBqUM6Zk1jGMFcozu8e8EukcC76stmCPwil6ME9CFcOEsarfJqrcpKirnlhl2hK
-BpkJbfRwkbg6Usw9eTmsm3YFRObAz1ItHQ1tHbJo2iWlJdYp1Cka1tskQbD7CouR
-lFial9mZ
-=Bc4T
------END PGP SIGNATURE-----
-
---ihB1ECKMNH3oz94A--
