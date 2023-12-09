@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B80C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7075C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:12:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C4BC8744F;
-	Sat,  9 Dec 2023 19:05:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 092908744F;
+	Sat,  9 Dec 2023 19:12:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="gllYQa+z";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="fEm+tRCc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C6C9875D6; Sat,  9 Dec 2023 19:05:52 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 2815787622; Sat,  9 Dec 2023 19:12:09 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 444A287215
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:05:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3512987215
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:12:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-336166b8143so602607f8f.3
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:05:50 -0800 (PST)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40c38e292c8so5649555e9.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:12:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702145149; x=1702749949;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702145526; x=1702750326;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=q7tyX5GW+vxZId60pQjxYqy8LGZfH/FGEXCxeotPuDo=;
- b=gllYQa+zGaSKczvOtuqNAekhS4N5kXJ5BGX/3110h4wn11bvuDEOscD2iqaNEJ3RwS
- MexDeJwCKBvQrgB5vHt2AL/9akVkpK9hbVvt39TdBmiG8d3Z+jYGCh2T7s3O9K6pfOFu
- eZjK9uSyzcsUcvGaOK1dOc9k5cXo2ualCYH1Syg4RLqFHd/57IDHAN2xlI0ZCT79scRC
- R7IaA7Ut6eWSpeM1blc1HTzQ7hlN/st66MyIVvt0RypafdTRl5bimCgFlRkmQ7LE16Na
- NdAM9Ahw8Jkx3lCPmJlGZl8MTEgp5GYh292il2+pLN9Fuwm9uMLk9a+Q0cHdpRHU10OT
- U65g==
+ bh=gfXDkSSg6z23BktGOsJ8JiN0VQyzzNEGG9TyNtaW96w=;
+ b=fEm+tRCcSTqufgTu0jH/yQm/mU7+V4A5bnhavY5NkoS2OR7Dld3TOmd0wpGUNddDhA
+ 95/4JUjo37IbryhxGgsgujkDbkXGGfQEa4Pq/Kxdhauu79YqKvHEotLBTc+FmMjEem+r
+ rbajUGt6AEQtNuNVRjEZ8WQC/tPtCOJD60698/WC35GECjwb6V1YzOfB3U6soLZrJsER
+ G9efiTle9Udmjtd6kXzRNhTh0lIlpFsIQBeh78Trft05OFLSrw2gP3SN07cnatRb6Ty4
+ HqWOzr2OrIE01MtF1xZ+xs2S2O+usB267aF0pCXNouqqzHapy9p0eGJfp1KuCZllvoRV
+ JsMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702145149; x=1702749949;
+ d=1e100.net; s=20230601; t=1702145526; x=1702750326;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=q7tyX5GW+vxZId60pQjxYqy8LGZfH/FGEXCxeotPuDo=;
- b=aUchy5WV5GwJtRWPg3BukKjeYQFYOV0lirhWpw76tu5RvnRlNDQt3ckafsGQ5cPJpe
- aYsn/8iYYor6Coz7GoyVS19Q2WyvK7IAIvtEBTimr8gFiB9G3beP5jWQhbvJrFC+qanH
- 8vk+g5BMSh+cjRkR1p2cv7obOEub2bfRdeOiHuTtHy0eaRtEuGjwLksbvoCoT92zojFf
- pSpLTD6xqtuNMvyQGvtJzpqNTCc6Q9/0SNcGmH42rCS8RXDWN8MIWvAZxprclbrwX62F
- wpsqtmr7v1CmuOB8cVF/pgMavSkt49v5wXjt+50oTUdxCQ61LXFePEvpaRvhYfj5rww4
- uN/w==
-X-Gm-Message-State: AOJu0YyNZWP9VxicE9v8KMRRuA+Y9O9qknue9oHLp+/JfCm0aWCERW9C
- 1a6NiU3tklL8i+NJSlY7z6/Psw==
-X-Google-Smtp-Source: AGHT+IE+zt0sz0znxe31ZF3hRFaS4nHBq5aZ0qpPe3JHT+4SwQFepj0dWxVWnsezDd6u2uxBdRRjZA==
-X-Received: by 2002:a5d:540c:0:b0:333:4a10:ddc8 with SMTP id
- g12-20020a5d540c000000b003334a10ddc8mr884272wrv.110.1702145149513; 
- Sat, 09 Dec 2023 10:05:49 -0800 (PST)
+ bh=gfXDkSSg6z23BktGOsJ8JiN0VQyzzNEGG9TyNtaW96w=;
+ b=h7h+fiRn1IKPle+SDPC0ocSf+oQTaiCmjn3LmqO+zaRc+eNfjvOM0ZKgCCE/wIBhQN
+ MHXTsnb9ntYdEvaPc7j1oKcPkwIW6yt/9TJ1mTj2l3dL7h0tMyO4quXSC1mUHV3hM66o
+ +0h17L8k0JR3Q0oajLVpfurRQEeHBjCJ+3HrEjtw+bkhaKdiwO74qBSlnbv2aKIiI1zv
+ y1HhgJdPl+DLFe9kMev+LVmzI/PvlMZXKQ8COv3u6Rwh2Febvzh+vfIz0ePEPLidiLQ6
+ IAZHik4qf2uHkE1OF/2fjbNDduB1AIw3cip1oD3B8uknRGxnfh4lry6LiGRlI7RWiNWM
+ /OwA==
+X-Gm-Message-State: AOJu0YyMXB2SjpjUD+Iso8i5zsx9Lxy2BCTEEJg1Oxaa8xxfbT/wQFJ8
+ ST6uU+Ld6x1P4NVEjqv1onc9rA==
+X-Google-Smtp-Source: AGHT+IGpFjkvzDEV5RePZRMaevtGePnwhfNjKPU5/aJCMS1Vr7P1zUkryM4OFP63JNVa520U2CvAqw==
+X-Received: by 2002:a7b:cbd4:0:b0:40c:1f04:e5b with SMTP id
+ n20-20020a7bcbd4000000b0040c1f040e5bmr917868wmi.143.1702145525786; 
+ Sat, 09 Dec 2023 10:12:05 -0800 (PST)
 Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
  [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
- h14-20020a5d548e000000b003333fbb68c7sm4762541wrv.112.2023.12.09.10.05.48
+ w13-20020adfee4d000000b00333339e5f42sm4826824wro.32.2023.12.09.10.12.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 10:05:49 -0800 (PST)
+ Sat, 09 Dec 2023 10:12:05 -0800 (PST)
 From: Shantur Rathore <i@shantur.com>
 To: marex@denx.de
-Cc: clamor95@gmail.com, bmeng.cn@gmail.com, Shantur Rathore <i@shantur.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: [PATCH v3] dts: rockpro64: Disable usb regulators-always-on
-Date: Sat,  9 Dec 2023 18:04:37 +0000
-Message-Id: <20231209180437.330969-1-i@shantur.com>
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com, Shantur Rathore <i@shantur.com>,
+ Hector Martin <marcan@marcan.st>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH v3] common: usb-hub: Reset hub port before scanning
+Date: Sat,  9 Dec 2023 18:10:56 +0000
+Message-Id: <20231209181057.331815-1-i@shantur.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,13 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-USB port regulators should be controlled by PHYs
-so we remove always-on property and let PHY manage the
-regulator.
+Currently when a hub is turned on, all the ports are powered on.
+This works well for hubs which have individual power control.
 
-Typec port has misconfigured phy-supply in upstream and
-now that we are removing always-on, we need to fix the
-phy-supply until its fixed upstream.
+For the hubs without individual power control this has no effect.
+Mostly in these scenarios the hub port is powered before the USB
+controller is enabled, this can lead to some devices in unexpected
+state.
+
+With this patch, we explicitly reset the port while powering up hub
+This resets the port for hubs without port power control and has
+no effect on hubs with port power control as the port is still off.
+
+Before this patch AMicro AM8180 based NVME to USB adapter won't be
+detected as a USB3.0 Mass Storage device but with this it works as
+expected.
+
+Tested working after this patch:
+1. AMicro AM8180 based NVME to USB Adapter
+2. Kingston DataTraveler 3.0
+3. GenesysLogic USB3.0 Hub
+
+The drives were tested while connected directly and via the hub.
 
 Signed-off-by: Shantur Rathore <i@shantur.com>
 
@@ -110,32 +124,25 @@ Changes in v3:
 Changes in v2:
 - As requested, added fix for regulator-always-on in RockPro64
 
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ common/usb_hub.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-index 732727d9b0..638d567357 100644
---- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-@@ -22,6 +22,18 @@
- 	};
- };
+diff --git a/common/usb_hub.c b/common/usb_hub.c
+index 70279f301d..3fb7e14d10 100644
+--- a/common/usb_hub.c
++++ b/common/usb_hub.c
+@@ -174,8 +174,10 @@ static void usb_hub_power_on(struct usb_hub_device *hub)
  
-+&u2phy0_host {
-+	phy-supply = <&vcc5v0_typec>;
-+};
-+
-+&vcc5v0_host {
-+	/delete-property/ regulator-always-on;
-+};
-+
-+&vcc5v0_typec {
-+	/delete-property/ regulator-always-on;
-+};
-+
- &vdd_center {
- 	regulator-min-microvolt = <950000>;
- 	regulator-max-microvolt = <950000>;
+ 	debug("enabling power on all ports\n");
+ 	for (i = 0; i < dev->maxchild; i++) {
++		usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_RESET);
++		debug("Reset : port %d returns %lX\n", i + 1, dev->status);
+ 		usb_set_port_feature(dev, i + 1, USB_PORT_FEAT_POWER);
+-		debug("port %d returns %lX\n", i + 1, dev->status);
++		debug("PowerOn : port %d returns %lX\n", i + 1, dev->status);
+ 	}
+ 
+ #ifdef CONFIG_SANDBOX
 -- 
 2.40.1
 
