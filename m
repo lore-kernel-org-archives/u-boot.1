@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F262C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31515C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EB598765B;
-	Sat,  9 Dec 2023 19:39:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E209487686;
+	Sat,  9 Dec 2023 19:39:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VqATPkj+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f7IGs2KX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49BD087215; Sat,  9 Dec 2023 19:39:29 +0100 (CET)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id A338187687; Sat,  9 Dec 2023 19:39:34 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C05D8765B
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:39:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BA8887686
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:39:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-db3fa47c2f7so3418850276.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:39:27 -0800 (PST)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5d3758fdd2eso29900567b3.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:39:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702147166; x=1702751966; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702147171; x=1702751971; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7iDiuW7nf5nuWEzBOTU4PLfkUoe/xBXLR/1lEfS+jDA=;
- b=VqATPkj+UyvG/z/RBLgaHXR+Yz6Z7Pgt6NMpSB2and+WMAOvu60EcYK3QFgtEYhfwz
- 4PmfbnvRAFgqYD+A5Edd9qB85btPtxvz5xgj1xBCoHCkq2uyZxgslM7PDJ1cr0F5h3L9
- iQzJpMQhwMfxI79I7HFfpiST5tOVrOGqQVCA8=
+ bh=u6EpbRSSN9oQbYOURABbcOQG27reo8MixcejocfMsm4=;
+ b=f7IGs2KXOeJodIoae31NbrKL6OgTe81P2LCGN45nkVa8KimSmBk711/MEIKKn39mPu
+ tYvY9BxPuTD+Y6KJIxc2efb2RF7F6+e5TaVSuOcxMknY+CFBchjfPRpAGuNQyBN+ltBe
+ NOrZ+v28GgTDyL36dK88VFnbMbJnTSwVpvqls=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702147166; x=1702751966;
+ d=1e100.net; s=20230601; t=1702147171; x=1702751971;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7iDiuW7nf5nuWEzBOTU4PLfkUoe/xBXLR/1lEfS+jDA=;
- b=B+Zg0uE0EnpIvOGFF6908pLCn8QyLptrjGsmmDUGptB8JADIIMbaWObjpHVQNhOob4
- ognsJnD31Yjks/RI4bbpqgPDa7loC1otz9XKKAEGif7K9OIhmPpVO12sROy2sgG7DhhG
- vnMxLJZhPw0WAtF6A4PSzt9+CMhNaIppqe0lxF29JiXfsggnHybnbdIN4y7IXiMtculq
- u6aNqkiyhi5dUM17AppJ1sNHonqBEQNgIH6w8iJjO+3uh60dOEG+/TCS4Qh2AJksW/vG
- Mfvt1RtZIikuu7XEhGpPHyL/KI0w4/eAkyNDxzG7Oy6WhYu6aZBVPtxYVLc3jZPyITL3
- Tdhg==
-X-Gm-Message-State: AOJu0YwBSI47n64lzGGWFK+cQ9Yz7Kv3YG5OYoZGcSYme6lSP6KKyQsQ
- bD40R8uR5WPeF8NnEWAoHOO9CQ==
-X-Google-Smtp-Source: AGHT+IEFZCfihVq//CwNiOUA1XqeH4pfd7u4BODdMlC4y+NDkzggO+o1BEx4W9rY270LsndMROY4hg==
-X-Received: by 2002:a25:ae02:0:b0:db5:48f9:2b46 with SMTP id
- a2-20020a25ae02000000b00db548f92b46mr1143740ybj.2.1702147165892; 
- Sat, 09 Dec 2023 10:39:25 -0800 (PST)
+ bh=u6EpbRSSN9oQbYOURABbcOQG27reo8MixcejocfMsm4=;
+ b=UhBi80Q6HBxrR4xGBI3u3B7+nN0Yrl4+SC25OGjZOIVfBtx54Pcm6gvEuublzpk9X9
+ FS79iyINS1kSMWSQJyNz5QbtIfYsXy7eQjlIBVeoPnZ3zqC3qTc1NodbRrAAGZepPejZ
+ kgliohcqc57yKCmRAASNinbrLrzxTtG9y8wHpI3DKWyJlT5ztCsHYRa4KlFzsXT6L8po
+ gVxrrjHANNumNIETYH81VDa9MQw8qkOo8Yf45JMrjnClkEMtkpsv7ohwnOTuNkacQUDi
+ CJO7YeviZFxj74T9aJZVe8kQOFRTSdYA+H3mchjQqwMyfNlek/hDvnJmPcoiB/v60pg+
+ qTew==
+X-Gm-Message-State: AOJu0YynUcjp/B+hSZd9ytdsyNH8yDHoRNgvXeoN+jEsNe4uO8B2o/aa
+ EM96mUbakmrnKoPq3i1JknUKfhGZR0UmZ+Ur9toD3g==
+X-Google-Smtp-Source: AGHT+IHtBej3HtC/8IwkExWA6c52Ep0enLKTIl0DLSyJ+92n2a7Ni0ugqSW/xtZC1l599e+N++g49g==
+X-Received: by 2002:a81:4a45:0:b0:5d7:1941:3562 with SMTP id
+ x66-20020a814a45000000b005d719413562mr1582001ywa.73.1702147171205; 
+ Sat, 09 Dec 2023 10:39:31 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- a28-20020a25ae1c000000b00d8168e226e6sm1435347ybj.47.2023.12.09.10.39.23
+ m14-20020a81d24e000000b005d8bb479c51sm1637179ywl.11.2023.12.09.10.39.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 10:39:24 -0800 (PST)
-Date: Sat, 9 Dec 2023 13:39:22 -0500
+ Sat, 09 Dec 2023 10:39:30 -0800 (PST)
+Date: Sat, 9 Dec 2023 13:39:28 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: Re: [PATCH 03/14] bootm: Make OS booting dependent on BOOTM
-Message-ID: <20231209183922.GV2513409@bill-the-cat>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH 07/14] bootm: Make cmdline optional with bootm_boot_start()
+Message-ID: <20231209183928.GW2513409@bill-the-cat>
 References: <20231204003144.899097-1-sjg@chromium.org>
- <20231204003144.899097-3-sjg@chromium.org>
+ <20231204003144.899097-7-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1AiwHQD3uh8rdJ6d"
+ protocol="application/pgp-signature"; boundary="XjfoEcMs4gf5HI5a"
 Content-Disposition: inline
-In-Reply-To: <20231204003144.899097-3-sjg@chromium.org>
+In-Reply-To: <20231204003144.899097-7-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,45 +97,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---1AiwHQD3uh8rdJ6d
+--XjfoEcMs4gf5HI5a
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 03, 2023 at 05:31:27PM -0700, Simon Glass wrote:
+On Sun, Dec 03, 2023 at 05:31:31PM -0700, Simon Glass wrote:
 
-> Booting an OS does not require the 'bootm' command, so change the
-> condition for these options.
->=20
-> Move them into boot/ so they don't depend on CMDLINE
->=20
-> Note that CMD_BOOTM_PRE_LOAD has been put directly into the bootm code
-> so will need some additional refactoring (and a test!) to allow it to
-> change over.
+> Allow the default command line to be used when booting the OS. This is
+> needed by fastboot.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  boot/bootm.c    | 10 ++++++----
+>  include/bootm.h |  2 +-
+>  2 files changed, 7 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index f630b8c1a9c3..4a5da2a3bebf 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -1187,10 +1187,12 @@ int bootm_boot_start(ulong addr, const char *cmdl=
+ine)
+> =20
+>  	snprintf(addr_str, sizeof(addr_str), "%lx", addr);
+> =20
+> -	ret =3D env_set("bootargs", cmdline);
+> -	if (ret) {
+> -		printf("Failed to set cmdline\n");
+> -		return ret;
+> +	if (cmdline) {
+> +		ret =3D env_set("bootargs", cmdline);
+> +		if (ret) {
+> +			printf("Failed to set cmdline\n");
+> +			return ret;
+> +		}
+>  	}
+>  	memset(&bmi, '\0', sizeof(bmi));
+>  	bmi.addr_fit =3D addr_str;
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+env_set handles NULL today. If there's some problem with fastboot with
+CMDLINE=3Dn without this patch I worry there's a functional problem being
+obscured here. Or it's not a problem at this point in the code to set
+bootargs to empty and we need to allow for that in general.
 
 --=20
 Tom
 
---1AiwHQD3uh8rdJ6d
+--XjfoEcMs4gf5HI5a
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0tFoACgkQFHw5/5Y0
-tyxb3gv/fdc7HwsmSpzI1bybGPi88seOanCk+Xoc54nGNRQfrg3oZ2IQbGNlHe0g
-RK72lP8OXwP4zKGOeT0neffIjEAIX4ZPg+HcTXeBkVGzJc6ChaNSVjqGDk4yPsIV
-Vm3SHlTGN6wCeop/CaFwsQ+rRsNPOYV8HTdjwcumt1RdOBzJjptXP08vwQ9tp3Hb
-M7gORv3cNqvJqmcwbQ6Lu1WmAO3uI/ILvkVH9guGfaX/P42m5+TtnwSBX3aUvPNw
-pNKFDPmkJ7Q7ODZgrVw2BUm7bmZps/0MsTiLKQTXAgIQhY3BqI32ofVzl/meudED
-rXGzI3549SUTHPFoSkj3V8DwxmS9F2LIyf26Yy1sqY6RrG3XImyFmlCY0wgJbCts
-pCP+fB/+k4VXrxB/mb/pb1sOjZRE1LuNWCJ7ezqz2mV4BTuN2Xjdf0f9WiX4PGug
-C+ooi7jq93gS17zAHWMaCX8oXm1INVnhA0txUqU5+59JEdnScwbg93p8hFB1NPKQ
-sUrtcZZY
-=IQ+r
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0tGAACgkQFHw5/5Y0
+tyxcfQv/Zgf85MtiSosts84K/z/MUHonDFxB5fMHoVMLHwZg5pDgnalRMPzygxV5
+AkBD5/M5jQKwBI9icsPruj7nVAwLU9hmzou+BzjRO1SUjgk1ujBISTjtZdlV8x1R
+5ojv8SMcWC/o87GlUzrREZIxXLzCXdEJ1n690BT9t/jmQ8ELE5IfFdr72KsCIxLl
+vXt6fwp2vsOTNMY79E4wgqMAILmStXT4aMWYgsutgMleJ5agBo151JevV3XosRkk
+b05NudYm3qvMK1ErHAlX02deRJpi/29QtYM9qxs7voxzgT2A6eQBySBJFaSTTUQl
+wSIDvbeCL1f6NQAo2bxrI1+VhxKvx4sxRqNIgWTq7qFInt7QwwGFfmKxe+bI8p9B
+3Fut4oiVgimQYi6qrvnLSx0EpBtoEEtQLkHk6DDCx7LOeQsv6WOIk2r0RCg+zdsK
+IgtMT3A/YQkBakh4Zfz8PpygFszlh+ijU1g8UuuZtjUKZoHT5QrcB32LR1QlgkPW
+fIfU3bL8
+=vo1Y
 -----END PGP SIGNATURE-----
 
---1AiwHQD3uh8rdJ6d--
+--XjfoEcMs4gf5HI5a--
