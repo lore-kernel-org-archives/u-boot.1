@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFFCFC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:15:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A22AC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 18:16:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FB388744F;
-	Sat,  9 Dec 2023 19:15:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EC0E87660;
+	Sat,  9 Dec 2023 19:16:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bUPWqbwb";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="XMjh1+Vm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C2FF87632; Sat,  9 Dec 2023 19:15:57 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 470208765B; Sat,  9 Dec 2023 19:16:02 +0100 (CET)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0DA887215
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:15:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D25088764C
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 19:15:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-db547d3631fso3381843276.1
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:15:54 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3b8903f7192so2188837b6e.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 10:15:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702145753; x=1702750553; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tyYjHmayoJb1IAW1gN6JovMi1Q53Qhh0dloct0BM7QU=;
- b=bUPWqbwb84jsSNHOoDyxrZ+GBhOACuBGV0K9xB5c650745J5OMtfDSiL00GoL1rXGo
- SMXjHXUTIojfbcwPQK+4vKyMJOISfnx0L2xVHjgT9zOjmhFblP3oQshqYuxZaHx4h0J1
- Arv9U751qB/ijFguilbzwutr/YR8xOMjaMzM0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702145753; x=1702750553;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702145758; x=1702750558;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tyYjHmayoJb1IAW1gN6JovMi1Q53Qhh0dloct0BM7QU=;
- b=N08S0ZtKnn4g1ykQuQViXpKSY4Siu6bobvGBrhl8pPSjzqeYYUUaAzVZ/J3jqyT5Oz
- ZGBR7FOqIkOtMeVHSP4u2E8Cy/t9LI6ra52m9FTgztDNvCqFU4EocgfrCYNzsy+6VLYH
- gQWbWsEWUMsu8Zy9A0c3Es9zPnBGmD5iXoHS/DMvHk4NXrXHyXTC358FSr/2NXdGv1XD
- qgrZEz6g67mnd/n8874drnYM80NSsAMwdSjCOPdJhUmh9gNmsGhcqAQTyailjYz+N7nq
- Y+2SW5UO8pe8Ho6OWY7iBd7PBBCNaNkpNMPr5rpnl/GLo7X7cY0Bs/ZLnmquXM1eR0nM
- EUJw==
-X-Gm-Message-State: AOJu0YwGcDQlnres3Tla/59kmEDL2bXFgwhY8TN7mp41AUn+Ag6uOE1U
- GH9uaapeE15FfwXHm97bbmIr5w==
-X-Google-Smtp-Source: AGHT+IFIo0YQOVfzFHxQ548WvOqbnW1BAh5eTzj6Yasp9KCIDHqlK4BOUzQXD9WSoKLY4sctDRM5+g==
-X-Received: by 2002:a25:dc53:0:b0:db9:8f6d:f499 with SMTP id
- y80-20020a25dc53000000b00db98f6df499mr1263404ybe.48.1702145753030; 
- Sat, 09 Dec 2023 10:15:53 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
- [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
- by smtp.gmail.com with ESMTPSA id
- 13-20020a25040d000000b00d7f06aa25c5sm1421912ybe.58.2023.12.09.10.15.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 10:15:52 -0800 (PST)
-Date: Sat, 9 Dec 2023 13:15:50 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 0/4] bootflow: bootmeth_efi: Fix network efi boot.
-Message-ID: <20231209181550.GR2513409@bill-the-cat>
-References: <20231119165501.1305136-1-i@shantur.com>
- <CAHc5_t3MwUvFdQQaZGeONxS-JNuB4mYXyU9YSexN8bCbQUTRYQ@mail.gmail.com>
- <CAPnjgZ3umb6g3O7r+bNtCpGihFHoq9Yp3Fnq9Hd-VkQvewX0oQ@mail.gmail.com>
- <CAHc5_t0+o5FvgpLUDAWLq6932fapzVDy=+47LQUcsAPT-3arWQ@mail.gmail.com>
- <CAPnjgZ0g2wgL=baD=LUmw2tK-E0tmUpoRaDE2oYNDLw0tum99Q@mail.gmail.com>
+ bh=2HlPWZ9fle7qROzBdzXkZdFXHPnzJiq1KzB2ShOf83Q=;
+ b=XMjh1+VmUKjX5e9UkFpr/Vawni7OAKGv0kHHVD2yxpFiXNt3+vQjicUM67aZDUwQ2P
+ PzvVJ9DlVt42wOegIIcL3qUoS74Ng2sNnBFaFVCyaqi6auzQtz8j4g0AXxkMqKseM4JC
+ xht3ghzAgJD2LT7/GnvCKml69kxq49cDnnXJM9dZKq7tqQQZPBSusb9sdZsbq2QVhNWV
+ clujR17mBowIVhnooDA5fsq9A2jOsHrXG5U3/uxpvg2HvmnWwMrrXS4myumWxuy/z5yz
+ U54tkgzMzDI0rRu4ui9iAU7eqPFBkEaB6HffHd9p+cJiI9O1UVs+l5gz/FerxIIVhETL
+ v7Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702145758; x=1702750558;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2HlPWZ9fle7qROzBdzXkZdFXHPnzJiq1KzB2ShOf83Q=;
+ b=Z9nLQ0pVFCUbu1VbM+jnAO55aYdRDpJCqJQteFhYNNXi80rTAgwdsC4h/57RfgGJLZ
+ mbLEzvAip5DY2Ezsv/das5IG6QDjgHNLFRZVrVvmKfckB14Yu3tvwFPJQZYnxIPphzeX
+ ahfpzLDoktmb+CIt0BhwuJydrgDyae6wFXJk2/LjGVORNXZzJ+DjaXZz9+TMFxagL39u
+ GYX/8Fn+BpI+RsG4HLCJld8wnjUVdDXF8GjfKlAPwMcR4o2axJCnQ44sErHJ8Ugk5NLz
+ 47hrgcpW05rwrrxiojCR2YyFa7zBt3JDfk/iRG71VZvKfq9w0TcPPnexUmJVeDO0bw9b
+ +NzA==
+X-Gm-Message-State: AOJu0YznH7ANYSUrcoRyWLavn5h/UwBCxA1WwRkXWRJklu1hxzbNEgbu
+ Bo1FyLRZSnWLlyDYb6K8mMkrlLPzysLSigPQFTcRGw==
+X-Google-Smtp-Source: AGHT+IGZR7woH7WpFk4GUXfd3SSzOb6a6ur/c9oXB7Bzs/Rj8A02HuRHGVJs2HHq5xDpbFlFmFNfRZvLIIQaL/fOZQY=
+X-Received: by 2002:a05:6808:1598:b0:3b6:b071:3079 with SMTP id
+ t24-20020a056808159800b003b6b0713079mr2098672oiw.27.1702145758475; Sat, 09
+ Dec 2023 10:15:58 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oIUNHxQzOMOVjcfR"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0g2wgL=baD=LUmw2tK-E0tmUpoRaDE2oYNDLw0tum99Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231208000947.248849-1-i@shantur.com>
+ <20231208000947.248849-3-i@shantur.com>
+ <edd57912-f38f-4589-bb21-c638db8535e1@denx.de>
+ <CABEcMwWA1FzdPtvRBwk_9KaXC12R1OCDMoOtuFSvuG8XhphQdQ@mail.gmail.com>
+In-Reply-To: <CABEcMwWA1FzdPtvRBwk_9KaXC12R1OCDMoOtuFSvuG8XhphQdQ@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Sat, 9 Dec 2023 18:15:47 +0000
+Message-ID: <CABEcMwVu=qTFgbg0D9MteUVE55Sq_s=sSHn1fPNfHK2_voMpBw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] dts: rockpro64: Disable usb regulators-always-on
+To: Marek Vasut <marex@denx.de>
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com, 
+ Jagan Teki <jagan@amarulasolutions.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,68 +92,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---oIUNHxQzOMOVjcfR
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Dec 05, 2023 at 08:54:51PM -0700, Simon Glass wrote:
-> Hi Shantur,
->=20
-> On Tue, 5 Dec 2023 at 04:13, Shantur Rathore <i@shantur.com> wrote:
+On Sat, Dec 9, 2023 at 5:57=E2=80=AFPM Shantur Rathore <i@shantur.com> wrot=
+e:
+>
+> Hi Marek,
+>
+> On Sat, Dec 9, 2023 at 5:31=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 > >
-> > Hi Simon,
+> > On 12/8/23 01:09, Shantur Rathore wrote:
+> > > USB port regulators should be controlled by phys
 > >
-> > On Tue, Dec 5, 2023 at 12:52=E2=80=AFAM Simon Glass <sjg@chromium.org> =
-wrote:
-> > >
-> > > Hi Shantur,
-> > >
-> > > On Mon, 4 Dec 2023 at 05:38, Shantur Rathore <i@shantur.com> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > On Sun, Nov 19, 2023 at 4:56=E2=80=AFPM Shantur Rathore <i@shantur.=
-com> wrote:
-> > > > >
-> > > > >
-> > > > > Currently bootmeth_efi crashes while doing a network (dhcp) boot.
-> > > > > This patch series fixes issues and both network and disk boot wor=
-ks.
-> > > > >
-> > > > How can I help to get this patch series merged in?
-> > >
-> > > You can check patchwork [1] to see who it is assigned to. I don't see
-> > > it in my queue though.
-> > >
-> > It's with Tom Rini I believe but with status Needs Review / ACK.
+> > PHYs
 > >
-> > https://patchwork.ozlabs.org/project/uboot/list/?series=3D382855
->=20
-> OK, well it has a review so that tag may be out-of-date.
+> > > so we remove always-on property and let phy manage the
+> > > regulator.
+> > >
+> > > Typec port has misconfugred
+> >
+> > misconfigured (typo)
+>
+> Thanks will fix both typos in v3
+>
+> >
+> > > phy-supply in upstream and
+> > > now that we are removing always-on, we need to fix the
+> > > phy-supply until its fixed upstream.
+> >
+> > Where is the upstream Linux kernel patch ?
+> > Was it submitted already ?
+> >
+>
+> No, there is no patch yet for this in Linux upstream.
+>
+> > You should send this patch separately, it doesn't depend on the USB Hub
+> > 1/2 patch and will go in through different (rockchip) tree.
+>
+> Sure, I will split and send v3 for these now.
 
-OK, so you're happy with it Simon, so I'll grab it for master shortly.
+These have been split to
 
---=20
-Tom
+[0] - https://patchwork.ozlabs.org/project/uboot/patch/20231209181057.33181=
+5-1-i@shantur.com/
+[1] - https://patchwork.ozlabs.org/project/uboot/patch/20231209180437.33096=
+9-1-i@shantur.com/
 
---oIUNHxQzOMOVjcfR
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0rtMACgkQFHw5/5Y0
-tywEaAv+O9rEJGPS8rWG0bHtbeEozRbmcupWUEVuHZvsPQ+QNbRVz2WdCCu6Fq9p
-ZZuVM+VVnxPG8NL3Jho0Huzuefp67W22Mm/aCVPmjWCV11tfr9weExJQ8m/ibyJn
-4CYnhwEMkIGEjrjpoSSvWZ2ZalSceChLyxODSQ+YbBqeGX/B4dR/PhrSFavfa6Fw
-AT8T1uUCV5HtuZkuoMebf+pi/b9mAeeSyYji4z8MhKKRWPMhcK8EwWjfu0S9Guht
-N5ilyPFDIDx5F/h/b8M797cCkU+Zex8XaSCQupp86chv7FnRX8f7oCGKuaXMUeJl
-AxLCmZeGtlomqVslCCsdnCUc2VuEFAE1wIsushn4B2GgTiNyxGdiB4VQMnGY5vMp
-2W+KaJwWKEh+3GSGSdDpkgkuq6SGnrliU1BYneUUyUzqoPGZ/Z5yxm0rFrS3pf+I
-qwySi28H1LWS317KoENfstNuUh01B1fp7ZYq0AeE+DGPYrmakLH33bg6vjBivRqG
-jxoEb3Wl
-=Q6rU
------END PGP SIGNATURE-----
-
---oIUNHxQzOMOVjcfR--
+Thanks,
+Shantur
