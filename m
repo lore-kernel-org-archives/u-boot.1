@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09962C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 20:59:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99A1EC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 21:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 682A687517;
-	Sat,  9 Dec 2023 21:59:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB404876B1;
+	Sat,  9 Dec 2023 21:59:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="adDedjmb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jiXco/fr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 549088755D; Sat,  9 Dec 2023 21:59:50 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 62EFD876B1; Sat,  9 Dec 2023 21:59:56 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35D0D86F67
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 21:59:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFB34876A8
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 21:59:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5d6b9143782so27291947b3.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 12:59:48 -0800 (PST)
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-daf26d84100so3169520276.3
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 12:59:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702155586; x=1702760386; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702155592; x=1702760392; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I6gr9yknZaH7Rgj43UXVjI4tvU6ItLn6K2x2nvvLAAI=;
- b=adDedjmb22sPAcmtIA11JKbVRsUhwF5c3U5v8Tg0Bp2qXX2Z0pRnKVSskFmDzdmE43
- P/PF92VEDLPGWLKrL8t4CSFzvOmS9+QaQ5huEltZBVUDr17PambRmpL9ea0VNKa5jQwi
- /7HmBYXBzoA/67A1hJvOHt1qLk89xdvcaazTE=
+ bh=EaeaxVl3WY/ZfT2p7wIC9iNIQedljorhcxlY+BJy0jE=;
+ b=jiXco/frm/2amM/cCu+PF/oUHhQ/Cq4/ftm6X7vxM7Fa7ut+eTTVU9yUtt8aGOUKkh
+ 1Jcdyp7FeRIFFWrKLRVaD6r1Ym4LKlv73FBtmA7cHNq8mcDL23xIyJk1GFlUh1btVcO+
+ mqO0WjoJrqmU7nndjIrVq167jBPuqI+qpafRU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702155586; x=1702760386;
+ d=1e100.net; s=20230601; t=1702155592; x=1702760392;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I6gr9yknZaH7Rgj43UXVjI4tvU6ItLn6K2x2nvvLAAI=;
- b=qinYtI259N5McPBThWCg4LzUkGh4i7a7LXlcbebv4gbT/qvs0P4KB/mxxJSJptnht9
- PQjGNmOyU+0VJCtu+nAj1OKLncHHoYwkru/nduX7EJ9zcKO3QBgo1eB8yhZtjfRon66D
- enZ1mXkSRDF5nn/aBQ5nUb78yzACJSMe9qU+qg6dNWymNSKO10j7GD7y0P8OWS1c3cbF
- DPXW7Q4Xz6Oy+WwGPnebvQtLHfhC/h7Gk3+uwtpws1b9nMg4ZdvWZeCfPYvyCvLZPUq+
- pYP8GxIrnftMdNTeLRZJB7TRyainvkPCOTscg8App7kfzk5oAlQj/ww3zxgFU3tATzJc
- CcBg==
-X-Gm-Message-State: AOJu0Yzm2kVZrGswMI5gxS7GiftcvVHLDDB1Pm2w5mztWnzwYyPT1N+k
- 6bZIP7wwHSSGRnE6Ucb0FTSKkRgEaRH9zsWpC/JsPA==
-X-Google-Smtp-Source: AGHT+IHEeRunT53nfEwVfK0GJc3Se4uuZLnG+N+jNLBWNO4qkQIj+EIaPf96drMi3fIQ1M4oOHwFVQ==
-X-Received: by 2002:a0d:ff46:0:b0:5d7:1940:7d62 with SMTP id
- p67-20020a0dff46000000b005d719407d62mr1483194ywf.57.1702155586617; 
- Sat, 09 Dec 2023 12:59:46 -0800 (PST)
+ bh=EaeaxVl3WY/ZfT2p7wIC9iNIQedljorhcxlY+BJy0jE=;
+ b=iLYGl6WqiEpxVuMSMevByn9DhYie2mK0Abu+Ofg2ypZSj1Y6p0I8QjN2LSwDoHcwUU
+ xiB/xbOK/cZMM5cNkz089mfP9CIY2TFimqoCjq0N9matpuFfFu9x2QhgnDlIZrvJ8hxw
+ 3tCDhmPsYl+GjAsJsOBZFq5EIhm/M8OT4WBFNMGG2PzAJ1JckHTl82+RceNOGk9BXE3A
+ iJOx624DLvndVQoKJLG6bZzJWBE3ioV1UcI++872VvIqGTQQyVo/rYCKmBIi105GVy5i
+ hVRG7s9oU2V2GlMKE+ieij+EQyN2U0M9SRbVmCs/hobbPrvwqCirlry/LJMUo1NFuX5V
+ XWvQ==
+X-Gm-Message-State: AOJu0YxB3DM9BNN8hNB381xHrK4VzSdg36XNgs8CEpGnavYsrK+5PLIb
+ ZUszIRxjUjedoS/MOOf9Vb1rtCclOZK0EDJypQv4kw==
+X-Google-Smtp-Source: AGHT+IHHEnZvvhL5hVgC/+Mqvmm0qBRbdNOYXv/Es0bAiKGVOiJ/Humabp6ixYoJQ+VzGRpYGJZztQ==
+X-Received: by 2002:a81:5b85:0:b0:5cd:c65c:8173 with SMTP id
+ p127-20020a815b85000000b005cdc65c8173mr1725497ywb.10.1702155592691; 
+ Sat, 09 Dec 2023 12:59:52 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- r5-20020a818105000000b005a7f676f305sm1701078ywf.106.2023.12.09.12.59.45
+ e3-20020a0dc203000000b005c5a08c5c15sm1708871ywd.136.2023.12.09.12.59.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 12:59:46 -0800 (PST)
-Date: Sat, 9 Dec 2023 15:59:44 -0500
+ Sat, 09 Dec 2023 12:59:52 -0800 (PST)
+Date: Sat, 9 Dec 2023 15:59:50 -0500
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] test/py: Disable error E0611 in two cases for pylint
-Message-ID: <20231209205944.GJ2513409@bill-the-cat>
-References: <20231209200128.3819612-1-trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20231209205950.GK2513409@bill-the-cat>
+References: <ZXHMh3tIsPEZa3Vc@swlinux02>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="goLRiAxoF389fzc0"
+ protocol="application/pgp-signature"; boundary="4Zh5Az9XEkHULq+0"
 Content-Disposition: inline
-In-Reply-To: <20231209200128.3819612-1-trini@konsulko.com>
+In-Reply-To: <ZXHMh3tIsPEZa3Vc@swlinux02>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,49 +92,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---goLRiAxoF389fzc0
+--4Zh5Az9XEkHULq+0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 09, 2023 at 03:01:28PM -0500, Tom Rini wrote:
+On Thu, Dec 07, 2023 at 09:46:23PM +0800, Leo Liang wrote:
 
-> Recently pylint has started to complain about:
-> No name 'fs_helper' in module 'tests' (no-name-in-module)
+> Hi Tom,
 >=20
-> Due to:
-> from tests import fs_helper
+> The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b=
+63:
 >=20
-> However, we have:
-> test/py/tests/fs_helper.py
+>   Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
 >=20
-> And since we do not want to add a dummy test/py/tests/__init__.py to
-> silence this warning we instead just disable it as needed.
+> are available in the Git repository at:
 >=20
-> Cc: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 94533cd9c15a60b74420e53a725fab54d38dd555:
+>=20
+>   starfive: visionfive2: add device tree overlay support (2023-12-06 16:0=
+5:39 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/18812
+>=20
 
-Applied to u-boot/master and u-boot/next, to unbreak CI now, thanks!
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---goLRiAxoF389fzc0
+--4Zh5Az9XEkHULq+0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV01UAACgkQFHw5/5Y0
-tyz6TAv/aZKGFKRx5LO4F6pegjlGdTgiZMsg6HBPO5ihs+x6AdolQnJ8IkQG4Bz0
-kGB4M1ALoZlxR8X2XHck8kKxegKEr4/z0QoTyfzVsqt/HK3P2iHVja4t9XNiMid4
-wqSSUHukGdo4EYgXmGwt3TN2emRf6gJFksUWaOR2k2MVjAEUIjAzC4a8Sie81o3x
-PZhhhKnP9Qw1V9XiwC5r7ixV7jJUoZJU1XC5O/84YCgrwfxNZkfbzf3tGotRDp9o
-ZsrgH4PH9ETo/bY9yvermbFwYxmzX0/etPbEIXghhR9xeaY0gEV+IbFYSfMTsgCd
-VyiJJ/uC8j7Zp55cMzVDmSSAxlKQu+eQ7nmjDGokGwaCzGt8Y09blQLbITMkAQz0
-mnat1gARsmmHYlfrt9oiSDqCHWy25hEa2Do3QEIAI105VR2hXY9A+FW9bNnfaLgW
-n69pacSr5Liz/wnuLWj1jCTh2zOWcpQ93qPixwuRyAUd0Evnr2ricTG5GXwXqtiV
-XjgH26jB
-=mqma
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV01UYACgkQFHw5/5Y0
+tyw4Zgv/e8L/4a6k6V+PtmWFbmjpcOTcy+8Q8CtXmi+xV/P5tKw++tX/Rh5SZEhI
++4Auoqq3EcrbSrHnugkWYTeteVwtfegeYfdLzGiecQ7rgH1l0Ow5dwULn2T+MJM6
+aDAMIHhYx76xGWvjybE9xLA+UoiqodziUwvAGJEKuAzR74QSsJXKWz8V5T3eh8ri
+Xbio2f3tqNOVe3+KX4YbBdvIwYzw7ZPa5KsFa1Dm58h86xnAufBCsBtiw5EKJMBO
+F7mRhFGpdtkCFpIW9AsQ8EtJK5bdQ9PsG77RZHIH0jjtx2q8NLD2nMo8ZkdDn75Y
+MCQhkOeRNDAm0t8qKQnNzkAtr5YnPpUyyfZ+Q3JeUWxnwmA6JMjxCDwdbhY2GDhD
+lRv9DtmYWT/fNKFSpAo0hKW5NqX3Mq8YIDAIyflloy336Nq50suHKvLH5SFIHqoG
+Q4yWMpMgLIiZpQZH0/IcnKgK7pMZp/sAmeX6RDQSQvvyUgOazHiPfyPzDHRAacpx
+0TKAiF8b
+=pmZy
 -----END PGP SIGNATURE-----
 
---goLRiAxoF389fzc0--
+--4Zh5Az9XEkHULq+0--
