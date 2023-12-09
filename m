@@ -4,95 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D123C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 22:13:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 704C4C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 22:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 775A987517;
-	Sat,  9 Dec 2023 23:13:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A52CF875A4;
+	Sat,  9 Dec 2023 23:19:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V0CtJIsm";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="eoK9iji0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99FF68754B; Sat,  9 Dec 2023 23:13:27 +0100 (CET)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 4FDEA875DB; Sat,  9 Dec 2023 23:19:07 +0100 (CET)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C838874CA
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 23:13:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DCC08758F
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 23:19:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3b9de2332e3so2050415b6e.1
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 14:13:24 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-6d9dc789f23so1935092a34.3
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 14:19:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702160003; x=1702764803; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oNbu87EqaVnV78/e22aQl/ZDPAhbIypgXs0Y4CUGbbo=;
- b=V0CtJIsmQ8+Phu6GusWPj3mfbcuQi94+1SfNorgx3VU4Y6fiG6jPqKMUFtnhImhZLJ
- 3d86CjWNifF8TBHwEl+Ef9tXf3bISccgdkhYkD7iF7pMdjaPRa04ToaLf2Eg0uoAehEB
- 3P1SPpaRpJs8F6kP8c7XnacHfGbTocysG8x9c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702160003; x=1702764803;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702160343; x=1702765143;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oNbu87EqaVnV78/e22aQl/ZDPAhbIypgXs0Y4CUGbbo=;
- b=dZvz6ezfqz4+RdwJWUM+b6MrfpenN6HfOwmR+XeNUFOTYkzsGKpsREx9/hbs8/TpSR
- BvpoZC2Z5vJeVczcoLstpCL6ZP0rr27EhEsKhhS0NdcZJuvenxb8UqHQPBIlbPaz80jg
- MQp5CjmUoHe1ThNuMIylh0VsG2wky1m5s5JW9XwBLl9n9KZRcYlYFCik3C/8QwfdICtf
- p5MN31awUKE7qAXS9k5EMP46cgTfw1GOlH9n8uoq2yPLCBp/9LfiNhrxMklqKp8egkzs
- TjhoEmjrHYeGnBUG+9G0MChYit1O41TYNVMWakxX5JA4yv4ODbObNbOLP6tpKc9tf9ct
- YuoA==
-X-Gm-Message-State: AOJu0YxcL9FFKq9an/51WEEkrrOyYf6d3cUbiLfGHwiZacLNy1Sts4Hk
- mA+t0QMQfIKkedE/Uu9/IR3wSw==
-X-Google-Smtp-Source: AGHT+IHPrV+LQrUZMh7uT0mg6jllTwNRunyG4R0+KcKnzDg1bvWRqPsMqN/2wprszJ7FNdihH80HdQ==
-X-Received: by 2002:a05:6808:2394:b0:3b9:e580:c21b with SMTP id
- bp20-20020a056808239400b003b9e580c21bmr2252485oib.20.1702160003495; 
- Sat, 09 Dec 2023 14:13:23 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-8dee-9b11-e8b3-3204.res6.spectrum.com.
- [2603:6081:7b00:6400:8dee:9b11:e8b3:3204])
- by smtp.gmail.com with ESMTPSA id
- y190-20020a81a1c7000000b005c9cbfc868bsm1759699ywg.33.2023.12.09.14.13.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 14:13:22 -0800 (PST)
-Date: Sat, 9 Dec 2023 17:13:20 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Dragan Simic <dsimic@manjaro.org>
-Cc: Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Vignesh R <vigneshr@ti.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Mikhail Kalashnikov <iuncuim@gmail.com>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>,
- Bob McChesney <bob@electricworry.net>,
- Stephen Graf <stephen.graf@gmail.com>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH v2 1/3] mtd: spi-nor: Add support for zBIT ZB25VQ128
-Message-ID: <20231209221320.GN2513409@bill-the-cat>
-References: <20231204005954.13201-1-andre.przywara@arm.com>
- <20231204005954.13201-2-andre.przywara@arm.com>
- <20231206162443.7f0692d7@donnerap.manchester.arm.com>
- <20231209203423.GF2513409@bill-the-cat>
- <3c6b3fe41f54a2d2a391d433684e80d9@manjaro.org>
- <20231209204336.GG2513409@bill-the-cat>
- <5f898df3e85bb46df5e3dbaa81525047@manjaro.org>
- <20231209212109.GL2513409@bill-the-cat>
- <0dc545aa9d32038dbe7bc481595198b0@manjaro.org>
+ bh=iu2vbosxKgM/XJCwav4KC2jZN3tNdfiEm0VO75u6adM=;
+ b=eoK9iji0xA8e9Ue+K2SKLF76DpP9K98ASHhAi+F5IHENXw6Bjqw1smxhvi8tzJGNdh
+ lHDbs3cIXx8HS2a/46bsxFnKh/IpgbXb4LAfRv8FO0rT7h/RMDrOk3iiIoH4NzKfcKjN
+ /lf18623zUC1DQnl3x5C7W39SCj5kyI1qeyswbVo3xJOiB+wmXWkKjTgQATSp37etCtL
+ taavKSOBKgZx1P0lcLdmJVDLg7tQCObky6DK+0SBzw7yowpnVOgPmzG9k9PurQQXyE/q
+ APk2H0upzZFSLjg0TN2L56VJTQM6OjABDMQsKuwKXl5BOy5scmvD6kozsPB9gCAcswcU
+ bGvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702160343; x=1702765143;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iu2vbosxKgM/XJCwav4KC2jZN3tNdfiEm0VO75u6adM=;
+ b=ZF8D32z+WsTAml2gE4svuMoEpEUx5g+CwMkcWPNuB081kcj4qBLx8IO2vqqYGxJZqh
+ xEr3c42j9kYio2u3Br1AjcRfPkglFKm1U3s6Rn95stleYFoSSq9cFmsrnAap4xOefkJH
+ GFyRSmSILpFYu+Kln0rFdloNUjwdZLHR8BypOoKOx66CUYj+wqyZX2LlgjlWLWuHGXSY
+ bsa2Y2vJVf57psksX7+orutdJWnVH5TUCA07JJHdFxCI0hAQPxsFoGbU/zSNGTnzpOCL
+ e9jT9Y2ik5rrL03v5VOmhTFPJqrj4q52uZVaD7Te79ib4qeSWRF5gBy4yxwwsRGPDr0s
+ Kb7Q==
+X-Gm-Message-State: AOJu0YxyeaQp5cBcbtk2Q+kenYuR429xyCrL4qEGzZLDvzMTGU2KFNnv
+ MoHx1AEM4C9UKZBwS/gQZT/EdLpHlB3VKJzcXVYnGg==
+X-Google-Smtp-Source: AGHT+IEnGSr4iAEBbIaBKT2CLaeIWHhRutc9H+ykBzYZE6U/NXi3vPJBJvuJaSkJ4wwPiiE4GmXV1kr4CcGnDqjBO2U=
+X-Received: by 2002:a05:6808:bcf:b0:3b8:ba0a:3460 with SMTP id
+ o15-20020a0568080bcf00b003b8ba0a3460mr2530179oik.17.1702160342976; Sat, 09
+ Dec 2023 14:19:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="N1mjptx0EPtMX5jH"
-Content-Disposition: inline
-In-Reply-To: <0dc545aa9d32038dbe7bc481595198b0@manjaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231119172310.1307942-1-i@shantur.com>
+ <CAMty3ZDK3jcscgNfMZj4SySK6Kd9L1ZJ6nwaM3eJU_VTBA7yvw@mail.gmail.com>
+ <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
+ <CALeDE9NgZ_zRGgxo2kBaKYAKF-8tKmt-Eoddxf=8U2Q=T29Yjg@mail.gmail.com>
+ <CABEcMwUDnAQG3h-jrPEim2u_19UMtqhjcG5cSiE-QpjawHACCQ@mail.gmail.com>
+ <20231209205627.GI2513409@bill-the-cat>
+In-Reply-To: <20231209205627.GI2513409@bill-the-cat>
+From: Shantur Rathore <i@shantur.com>
+Date: Sat, 9 Dec 2023 22:18:51 +0000
+Message-ID: <CABEcMwXYCczbTRVgqGC=USRJw138tDM0RkbmGoR4zSY7pBj1PA@mail.gmail.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+To: Tom Rini <trini@konsulko.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Bharat Gooty <bharat.gooty@broadcom.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,88 +95,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---N1mjptx0EPtMX5jH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Dec 09, 2023 at 10:43:35PM +0100, Dragan Simic wrote:
-> On 2023-12-09 22:21, Tom Rini wrote:
-> > On Sat, Dec 09, 2023 at 10:02:09PM +0100, Dragan Simic wrote:
-> > > On 2023-12-09 21:43, Tom Rini wrote:
-> > > > On Sat, Dec 09, 2023 at 09:37:28PM +0100, Dragan Simic wrote:
-> > > > > On 2023-12-09 21:34, Tom Rini wrote:
-> > > > > > On Wed, Dec 06, 2023 at 04:24:43PM +0000, Andre Przywara wrote:
-> > > > > > > On Mon,  4 Dec 2023 00:59:52 +0000
-> > > > > > > Andre Przywara <andre.przywara@arm.com> wrote:
-> > > > > > > > Add support for the zBIT ZB25VQ128 (128M-bit) SPI NOR flash=
- memory chip,
-> > > > > > > > as used on the Xunlong Orange Pi Zero 3 board.
-> > > > > > >
-> > > > > > > does anyone have any objections against this patch? I wanted =
-to take
-> > > > > > > this
-> > > > > > > via the sunxi tree, as this blocks some board support patches.
-> > > > > > >
-> > > > > > > IIUC Linux gave up on adding rather generic entries up for ea=
-ch and
-> > > > > > > every
-> > > > > > > SPI NOR chip, if there is nothing special about them:
-> > > > > > > https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linu=
-x.git/commit/?id=3D773bbe1044
-> > > > > > > Should we follow suit here?
-> > > > > >
-> > > > > > And we could then start trimming the table we do have as well, =
-to
-> > > > > > reclaim space?
-> > > > >
-> > > > > In general, yes, but we'd also need to consume a bit more space w=
-ith
-> > > > > the
-> > > > > additional auto-detection logic.
+On Sat, Dec 9, 2023 at 8:56=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Dec 08, 2023 at 01:59:26PM +0000, Shantur Rathore wrote:
+> > Hi Peter,
+> >
+> > On Fri, Dec 8, 2023 at 12:59=E2=80=AFPM Peter Robinson <pbrobinson@gmai=
+l.com> wrote:
+> > >
+> > > On Fri, Dec 8, 2023 at 12:52=E2=80=AFPM Shantur Rathore <i@shantur.co=
+m> wrote:
 > > > >
-> > > > Maybe part one of the series is backport that logic, part two is re=
-move
-> > > > all the easy to remove tables? Or at least a number of them so the
-> > > > series is a wash and then a targeted series of drop-an-entry and cc=
- the
-> > > > person that added it so they can run-time verify it's still fine?
-> > >=20
-> > > Sounds like a plan to me and I'm willing to work on that.  Though, I
-> > > think
-> > > we'll inevitably end up with increasing the resulting image sizes a
-> > > bit, but
-> > > that might be an acceptable trade-off for making supporting more SPI
-> > > chips
-> > > and more new boards much easier in the future.
-> >=20
-> > Yeah, this is where we need to go overall long term if nothing else.
->=20
-> I agree, it would make the things a bit easier.  I'll see to start working
-> on it next week.
+> > > > Hi Jagan,
+> > > >
+> > > > On Fri, Dec 8, 2023 at 11:13=E2=80=AFAM Jagan Teki <jagan@amarulaso=
+lutions.com> wrote:
+> > > > >
+> > > > > On Sun, Nov 19, 2023 at 10:54=E2=80=AFPM Shantur Rathore <i@shant=
+ur.com> wrote:
+> > > > > >
+> > > > > > Rockchip SoCs can support wide range of bootflows.
+> > > > > > Without full bootflow commands, it can be difficult to
+> > > > > > figure out issues if any, hence enable by default.
+> > > > > >
+> > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > >
+> > > > > > Signed-off-by: Shantur Rathore <i@shantur.com>
+> > > > > > ---
+> > > > > >
+> > > > > > (no changes since v1)
+> > > > > >
+> > > > > >  arch/arm/Kconfig | 1 +
+> > > > > >  1 file changed, 1 insertion(+)
+> > > > > >
+> > > > > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > > > > > index d812685c98..fca6ef6d7e 100644
+> > > > > > --- a/arch/arm/Kconfig
+> > > > > > +++ b/arch/arm/Kconfig
+> > > > > > @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
+> > > > > >         imply CMD_DM
+> > > > > >         imply DEBUG_UART_BOARD_INIT
+> > > > > >         imply BOOTSTD_DEFAULTS
+> > > > > > +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
+> > > > >
+> > > > > Yes, but better to give this option to specific board vendors as
+> > > > > defaults are enough to boot 1st bootflow and what ever media's it=
+ has.
+> > > > >
+> > > >
+> > > > Yes, that's correct it is enough to boot but by default there is no=
+ option
+> > > > to choose what to boot from.
+> > > > This was discussed in an earlier version of this patch [0] where I =
+was
+> > > > explicitly enabling only for RP64.
+> > >
+> > > What actual extra functionality does this provide, what is the impact
+> > > on the size of images? You've not provided reasonable justification
+> > > outside of very vague statements, it would be useful to know what the
+> > > added options actually solves.
+> >
+> > BOOTSTD_FULL enables all the options in bootflow commands. This is need=
+ed if
+> > - you want to choose between multiple available bootflows rather than
+> > just boot one default.
+> > - if you need to list the available bootflows that bootstd has found
+> > - if you need to select and boot any bootflow other than default.
+> > By default all other commands in U-boot come with options to show detai=
+ls
+> > For example, nvme info, nvme detail, usb info, usb tree but with
+> > bootstd no way to know anything.
+> >
+> > Image size - u-boot.itd without BOOTSTD_FULL - 1193984 bytes
+> > Image size - u-boot.itb with BOOTSTD_FULL - 1214976 bytes
+> > Difference - 20992 bytes
+> >
+> > According to binman for RK3399 u-boot can take upto 4M [1] so we have
+> > ample space.
+> >
+> > This was discussed in the previous patch in the link below [0]
+> >
+> > [0] - https://patchwork.ozlabs.org/project/uboot/patch/20231111001329.5=
+37704-1-i@shantur.com/
+> > [1] - https://github.com/shantur/u-boot/blob/master/arch/arm/dts/rk3399=
+-u-boot.dtsi#L68
+>
+> If I'm recalling everything right, this also brings "bootflow" as a
+> command more in line with what could be done with distro_bootcmd in
+> terms of "cover every possible case and let the user override things"
+>
+Yes,
+That's correct.
 
-Thanks!
-
---=20
-Tom
-
---N1mjptx0EPtMX5jH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV05oAACgkQFHw5/5Y0
-tywkWwv/Zy5aKU00kYp9bu5Sv5U2LkS19uSU3uhkTKHTwdxRuoJZ5V0s8ZajnfA8
-vZvEGFF40V+JzFUQxFPPQ4cLOU5JhMEVbt8GynzqOXnRK0o+AAEtre6Nnh2265zW
-KZc2Z+SW7QhBECSebFVilSm75SJDoUGiiRMG3OFlsYYmJ7FMqRKAiKhnITcclOQg
-8aSzZGapmP5eCm2USIIsL039PULg4Ra3oxvF36aLkcpFRtbikMPOuoESlYQW8jod
-owQEcdiY9U9SduFyxpFVkaQF97Wy56sIfHUX+orzPmz195d2B+KgBKTbtaunZfua
-TypRhGSUQRIp4IiaHm6AmJDSRgJJ3PYO+98369sCncEpAseIcWsG6mljKexHlTtl
-bmNFBIyEHIUlr3lP+1IYW5qH+t30SKb18p9gGmz15OXROexwnvM95FgLVREyrSl2
-439kEsdQK5Pb0I5oqqWq8jmEf//VeaL8/PAKxdCs361JZF/fFe+2gZ+ZTMN0UzXQ
-AFWO7r6p
-=8XU5
------END PGP SIGNATURE-----
-
---N1mjptx0EPtMX5jH--
+U_BOOT_LONGHELP(bootflow,
+#ifdef CONFIG_CMD_BOOTFLOW_FULL
+"scan [-abeGl] [bdev]  - scan for valid bootflows (-l list, -a all, -e
+errors, -b boot, -G no global)\n"
+"bootflow list [-e]             - list scanned bootflows (-e errors)\n"
+"bootflow select [<num>|<name>] - select a bootflow\n"
+"bootflow info [-ds]            - show info on current bootflow (-d
+dump bootflow)\n"
+"bootflow read                  - read all current-bootflow files\n"
+"bootflow boot                  - boot current bootflow\n"
+"bootflow menu [-t]             - show a menu of available bootflows\n"
+"bootflow cmdline [set|get|clear|delete|auto] <param> [<value>] -
+update cmdline"
+#else
+"scan - boot first available bootflow\n"
+#endif
+);
