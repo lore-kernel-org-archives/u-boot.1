@@ -4,108 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B242C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B577C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:43:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55341875A4;
-	Sat,  9 Dec 2023 12:07:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E90D8757F;
+	Sat,  9 Dec 2023 12:43:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cuh1DHfV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yyep+W+9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CFD7875B5; Sat,  9 Dec 2023 12:07:03 +0100 (CET)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20627.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7ea9::627])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9509E875A4; Sat,  9 Dec 2023 12:43:04 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE2448757F
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:07:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC4708757C
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:43:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=neal.frager@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KEPYwr/9hkYyxph4dgMXLgHwdmXCjfP1/toGlRPdm5sYnlsZXF4es5q14r6FrdhX4bLa9irp/ZMNcnuoAv7o3ELwKCZN7c6pf0gl7G0Q5e8y5oEjdVB7ROO5C73xc1R3RlYt32fhkiZMKbIjgfsiUdKJVNKyWhFJJMlVR3yyzu4L0lN6JUCyYsoK3SCAdllRbZNt5g0HwX6Yv439cad+ZBRjnycoeYaqpcQCyyLuE8qOWfasfXgNERK6zkct5/Ev1sZcId5juDbqvw/XJwpQa+ztWCT+i9vmOdtuqzj+YAjXSXgi0l2FMOnMN5t7/1wFfPL1DCZgX0jcwUcMjmC31g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8BujxuWAPsVcDjhk8jrjvaNAh0lJlIekZkQXeBjJTcY=;
- b=Q7lya8C8gVdmCZzMaj93rx5f6GklEXDYg4va9ZyXAs9Ufo0l3M8zlMnsCaziIg5k/awRuEqtbNt+FGCLkxf6E61+TTUp464r27G9vNc9Ja6uEosg5KScOYibj9y5bj6NCFo6om0UuDwNGgyyXCKhc8hOSW/Q3NXnxqYgs/WzNEuZSB62pzBnIXGr8fQJgrYRtVg77Egz+VxzB4CN00WN7341YANHgk0aOa+xoErtt4pVwAyWGdoflcRpZhGoYYotMb401ooHa5KP3txawmd8oAiNx0PJrqQYaoJO4wqUi6/BhNryhmUY/uilfpTxPIDjG7ZBOMY3QpZ6na2RZCbTfA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8BujxuWAPsVcDjhk8jrjvaNAh0lJlIekZkQXeBjJTcY=;
- b=cuh1DHfVs82fKEqCtBGSutxEJ9qNKvNPw6zlfWNoTw5TpiqkVl8ParyJmm5NZ1zYnvo7xVe10Qe649e8/QuFLcZlaPF2BCTM8+1VqVftgLk2pXhzNjaEmYoCNwK2uoX+/6wpqrK5EHteOtgrJ065FpWgkJl4wGR1t6CqFRyyU1Y=
-Received: from BL1PR13CA0125.namprd13.prod.outlook.com (2603:10b6:208:2bb::10)
- by BL1PR12MB5079.namprd12.prod.outlook.com (2603:10b6:208:31a::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.29; Sat, 9 Dec
- 2023 11:06:52 +0000
-Received: from MN1PEPF0000F0E2.namprd04.prod.outlook.com
- (2603:10b6:208:2bb:cafe::cc) by BL1PR13CA0125.outlook.office365.com
- (2603:10b6:208:2bb::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.18 via Frontend
- Transport; Sat, 9 Dec 2023 11:06:51 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000F0E2.mail.protection.outlook.com (10.167.242.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7091.18 via Frontend Transport; Sat, 9 Dec 2023 11:06:51 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sat, 9 Dec
- 2023 05:06:51 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Sat, 9 Dec
- 2023 05:06:50 -0600
-Received: from xirengwts09.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
- Transport; Sat, 9 Dec 2023 05:06:50 -0600
-From: Neal Frager <neal.frager@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <luca.ceresoli@bootlin.com>, Neal Frager
- <neal.frager@amd.com>
-Subject: [PATCH v1 1/1] arm64: zynqmp: Add output-enable pins to SOMs
-Date: Sat, 9 Dec 2023 11:06:47 +0000
-Message-ID: <20231209110647.890409-1-neal.frager@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-54f49c10c37so3288383a12.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 03:43:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702122181; x=1702726981; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jwGPFAnXjm3NGXsSKWwkkOFZT/rbiHK3CBTJDA6QJUg=;
+ b=Yyep+W+9uejhMUpq2AOagaRZdWygllk0hKyrPhChBRZtvZXyCHeQROSAQlS0ZTLGAf
+ cqQPwFGyw4Y9nm3SX0BVfjQCBtifqF3HtgWL/k5ZzMUTyTuvEJO9b9JUducJh2+coGpe
+ JXwy6Z+rmR1QH+XQHNlBq2e+Pd/x2EfjhJkX+lHS6eqay1+22D6x6ydZGvh2RHdYo1EM
+ s6jHO1/7FkNYt+/r4Bn5lzV1HT9eiUeFxO75veZXLacO6Gtq8db4HJK/HEuOzKOuNnup
+ aUD0MFTOjuJu9FGQn30ZAARLCM6YDAf1bQnDF0Wzl77YtcWkVQ1NM6j7cpc/AhakwctU
+ jEEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702122181; x=1702726981;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jwGPFAnXjm3NGXsSKWwkkOFZT/rbiHK3CBTJDA6QJUg=;
+ b=LGaOCfgjnuk6nm5aYrTQrkyLzzVvP8l+R4Ax1SiqSBTrLeVVu+ciVzL18bXUPKx8dc
+ 0yWHgsBim4bFv0eSuxNdfSvtBAlSlezqox0O5tBLzUptpl3sf8emeG49hJ2gRw5lTED8
+ 5XnurSSjRQtlnPdVfff0p5qBd3Cmqym0FJ4FzedrlVhlqiggKAhLO7RDqApMOuxZ6mbG
+ T5usqW/gpSyikbWAZ/jUDLCXjuQzj9wNx75uBZ9WktSylwva+RZ5u2JtGnzy+d8Ixo2h
+ QvwkvJWv+L8eYyVoRuefg9h9U3P5mEEgTw8yz3tI3+nnOqWV3EyA661cNwVtGYd5WJvP
+ Tvhw==
+X-Gm-Message-State: AOJu0Yxp0vtSpdzd/i991F91nvT4Pk/VHUY+m2AtNy4/dmNjnU0qE5Ru
+ rMbmA6tPSHaVPrOB2INFC4RIH0kC4ZYsyTLRuFo=
+X-Google-Smtp-Source: AGHT+IGwvTUJF0GiS2THRdP48OtQ9QoZOz11BFCbnHXQaBlSyrw9hxnZwpubZD5spEu5ieIDOBLT+mr8HURkrXCEQzA=
+X-Received: by 2002:a50:f604:0:b0:54c:c745:49dd with SMTP id
+ c4-20020a50f604000000b0054cc74549ddmr1442625edn.19.1702122180746; Sat, 09 Dec
+ 2023 03:43:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0E2:EE_|BL1PR12MB5079:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2efa875f-fb9c-4fae-c1bb-08dbf8a6f23f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: e6ca1uTKsvpn704rDTArZI5SYZ6rypHb/wuLo118nSXOCAaxhYVOn9xT6NhM3oecou20ahUqvcqfd84ELLGqoEPKenhzO5XZdZ7qLwoEUU3dD5pF5nhajyEuyML8m5N7XcQZgTNi3H+TK7ZEKqsRLdSa5c6lbkkk1s0RE6eYObAsmsrFmDqh8blVhnGT21W/hTZTPuVgAcAZN8fJWM0Bg6Q4ZOkUs10+WnGVXH5Xxahj0NUXJh/NN7omBqHKANvQm78qkW4yeYsjgcafwN9ZCb70Mu+3j3EPpn5RpLmtTunZYVu/ZHLpG5fShT1Zf8JXMPz2ZPNBqUGf5RvFekltp9HxoUmA0EVhDkgwRfY6mfN+SR/Mpar4WdlRyo9FJbXDSbG1eMcqbkcrTN3OH0iUktZVebKWebYoSv+eAhVv6xXs7BGL2hxhJlcds9zl7TxIvi7GS1Rhe+c4eMXd/4lKIjqsBD6F0h2joEgh1k7s/EZtjCZiwNe7pTCy/rgSPGFgzl/gNPZwI9ObOrNZkszi9oVfK8k2iwV2Uh4cL5dv6uXPiMxLodeocoBb2+Xg4tm2ITmS2yuIqH8XNi3MUYsvxI+6gD5VkdVwIS79lM/BJk8EqrtMYq7Y7iJFcupH4sFeuToixaHmmHiEpBrFhOwr35IrSrcSMN/KXfXT16ocTHUNkiRVq9Bw/eW8gHgZrvsZBsV9aF32hl3DAYxAMANBk4SXyktgGyEXP7E3DzvyGePwBOJVkmi2sBO4KKFnWRKFd82jiKRMtgvrj71gc/Poug==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(39860400002)(396003)(136003)(376002)(230922051799003)(451199024)(64100799003)(1800799012)(82310400011)(186009)(46966006)(36840700001)(40470700004)(336012)(40460700003)(426003)(1076003)(2616005)(26005)(36860700001)(5660300002)(44832011)(2906002)(4326008)(41300700001)(6666004)(478600001)(47076005)(8676002)(8936002)(70206006)(70586007)(316002)(6916009)(54906003)(82740400003)(81166007)(356005)(86362001)(36756003)(40480700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2023 11:06:51.5112 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2efa875f-fb9c-4fae-c1bb-08dbf8a6f23f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0E2.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5079
+References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
+ <20231207091850.17776-2-ilias.apalodimas@linaro.org>
+In-Reply-To: <20231207091850.17776-2-ilias.apalodimas@linaro.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 9 Dec 2023 11:42:49 +0000
+Message-ID: <CALeDE9Mj9oLC8ZeBa84Kp8UCVDkRNUK0oUEPJyPLxhX3ePHQEg@mail.gmail.com>
+Subject: Re: [PATCH 1/2 v3] smbios: Simplify reporting of unknown values
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: trini@konsulko.com, sjg@chromium.org, sean.anderson@seco.com, 
+ neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
+ mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,83 +89,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the zynqmp pinctrl driver supports the tri-state registers, make
-sure that the pins requiring output-enable are configured appropriately for
-SOMs.
+On Thu, Dec 7, 2023 at 10:17=E2=80=AFPM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> If a value is not valid during the DT or SYSINFO parsing,  we explicitly
+> set that to "Unknown Product" and "Unknown" for the product and
+> manufacturer respectively.  It's cleaner if we move the checks insisde
+> smbios_add_prop_si() and provide an alternative string in case the
+> primary is NULL or empty
+>
+> pre-patch dmidecode
+> <snip>
+> Handle 0x0001, DMI type 1, 27 bytes
+> System Information
+>         Manufacturer: Unknown
+>         Product Name: Unknown Product
+>         Version: Not Specified
+>         Serial Number: Not Specified
+>         UUID: Not Settable
+>         Wake-up Type: Reserved
+>         SKU Number: Not Specified
+>         Family: Not Specified
+>
+> [...]
+>
+> post-patch dmidecode:
+>
+> Handle 0x0001, DMI type 1, 27 bytes
+> System Information
+>         Manufacturer: Unknown
+>         Product Name: Unknown
+>         Version: Unknown
+>         Serial Number: Unknown
+>         UUID: Not Settable
+>         Wake-up Type: Reserved
+>         SKU Number: Unknown
+>         Family: Unknown
+> [...]
+>
+> While at it make smbios_add_prop_si() add a string directly if the prop
+> node is NULL and replace smbios_add_string() calls with
+> smbios_add_prop_si(ctx, NULL, ....)
+>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Tested-by: Peter Robinson <pbrobinson@gmail.com>
 
-Without it, all tristate setting for MIOs, which are not related to SOM
-itself, are using default configuration which is not correct setting.
-It means SDs, USBs, ethernet, etc. are not working properly.
-
-In past it was fixed through calling tristate configuration via bootcmd:
-usb_init=mw 0xFF180208 2020
-kv260_gem3=mw 0xFF18020C 0xFC0 && gpio toggle gpio@ff0a000038 && \
-  gpio toggle gpio@ff0a000038
-
-Signed-off-by: Neal Frager <neal.frager@amd.com>
----
- arch/arm/dts/zynqmp-sck-kd-g-revA.dts | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dts b/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-index 56f3128528..ffdb60fa51 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-@@ -175,6 +175,7 @@
- 		conf-tx {
- 			pins = "MIO36";
- 			bias-disable;
-+			output-enable;
- 		};
- 
- 		mux {
-@@ -220,12 +221,14 @@
- 		conf-rx {
- 			pins = "MIO45", "MIO46", "MIO47", "MIO48";
- 			bias-disable;
-+			output-enable;
- 			low-power-disable;
- 		};
- 
- 		conf-bootstrap {
- 			pins = "MIO44", "MIO49";
- 			bias-disable;
-+			output-enable;
- 			low-power-disable;
- 		};
- 
-@@ -233,6 +236,7 @@
- 			pins = "MIO38", "MIO39", "MIO40",
- 				"MIO41", "MIO42", "MIO43";
- 			bias-disable;
-+			output-enable;
- 			low-power-enable;
- 		};
- 
-@@ -241,6 +245,7 @@
- 			slew-rate = <SLEW_RATE_SLOW>;
- 			power-source = <IO_STANDARD_LVCMOS18>;
- 			bias-disable;
-+			output-enable;
- 		};
- 
- 		mux-mdio {
-@@ -271,6 +276,7 @@
- 			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
- 			"MIO60", "MIO61", "MIO62", "MIO63";
- 			bias-disable;
-+			output-enable;
- 			drive-strength = <4>;
- 			slew-rate = <SLEW_RATE_SLOW>;
- 		};
-@@ -298,6 +304,7 @@
- 			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
- 			"MIO72", "MIO73", "MIO74", "MIO75";
- 			bias-disable;
-+			output-enable;
- 			drive-strength = <4>;
- 			slew-rate = <SLEW_RATE_SLOW>;
- 		};
--- 
-2.25.1
-
+> ---
+> Changes since v2:
+> - refactor even more code and remove the smbios_add_string calls from the
+>   main code. Instead use smbios_add_prop() foir everything and add a
+>   default value, in case the parsed one is NULL or emtpy
+> Changes since v1:
+> - None
+>
+>  lib/smbios.c | 73 +++++++++++++++++++++++++---------------------------
+>  1 file changed, 35 insertions(+), 38 deletions(-)
+>
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index d7f4999e8b2a..444aa245a273 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -102,9 +102,6 @@ static int smbios_add_string(struct smbios_ctx *ctx, =
+const char *str)
+>         int i =3D 1;
+>         char *p =3D ctx->eos;
+>
+> -       if (!*str)
+> -               str =3D "Unknown";
+> -
+>         for (;;) {
+>                 if (!*p) {
+>                         ctx->last_str =3D p;
+> @@ -134,11 +131,18 @@ static int smbios_add_string(struct smbios_ctx *ctx=
+, const char *str)
+>   *
+>   * @ctx:       context for writing the tables
+>   * @prop:      property to write
+> + * @dval:      Default value to use if the string is not found or is emp=
+ty
+>   * Return:     0 if not found, else SMBIOS string number (1 or more)
+>   */
+>  static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+> -                             int sysinfo_id)
+> +                             int sysinfo_id, const char *dval)
+>  {
+> +       if (!dval || !*dval)
+> +               dval =3D "Unknown";
+> +
+> +       if (!prop)
+> +               return smbios_add_string(ctx, dval);
+> +
+>         if (sysinfo_id && ctx->dev) {
+>                 char val[SMBIOS_STR_MAX];
+>                 int ret;
+> @@ -151,8 +155,8 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx,=
+ const char *prop,
+>                 const char *str;
+>
+>                 str =3D ofnode_read_string(ctx->node, prop);
+> -               if (str)
+> -                       return smbios_add_string(ctx, str);
+> +
+> +               return smbios_add_string(ctx, str ? str : dval);
+>         }
+>
+>         return 0;
+> @@ -161,12 +165,15 @@ static int smbios_add_prop_si(struct smbios_ctx *ct=
+x, const char *prop,
+>  /**
+>   * smbios_add_prop() - Add a property from the devicetree
+>   *
+> - * @prop:      property to write
+> + * @prop:      property to write. The default string will be written if
+> + *             prop is NULL
+> + * @dval:      Default value to use if the string is not found or is emp=
+ty
+>   * Return:     0 if not found, else SMBIOS string number (1 or more)
+>   */
+> -static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop)
+> +static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop,
+> +                          const char *dval)
+>  {
+> -       return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE);
+> +       return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE, dval);
+>  }
+>
+>  static void smbios_set_eos(struct smbios_ctx *ctx, char *eos)
+> @@ -228,11 +235,9 @@ static int smbios_write_type0(ulong *current, int ha=
+ndle,
+>         memset(t, 0, sizeof(struct smbios_type0));
+>         fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, handle);
+>         smbios_set_eos(ctx, t->eos);
+> -       t->vendor =3D smbios_add_string(ctx, "U-Boot");
+> +       t->vendor =3D smbios_add_prop(ctx, NULL, "U-Boot");
+>
+> -       t->bios_ver =3D smbios_add_prop(ctx, "version");
+> -       if (!t->bios_ver)
+> -               t->bios_ver =3D smbios_add_string(ctx, PLAIN_VERSION);
+> +       t->bios_ver =3D smbios_add_prop(ctx, "version", PLAIN_VERSION);
+>         if (t->bios_ver)
+>                 gd->smbios_version =3D ctx->last_str;
+>         log_debug("smbios_version =3D %p: '%s'\n", gd->smbios_version,
+> @@ -241,7 +246,7 @@ static int smbios_write_type0(ulong *current, int han=
+dle,
+>         print_buffer((ulong)gd->smbios_version, gd->smbios_version,
+>                      1, strlen(gd->smbios_version) + 1, 0);
+>  #endif
+> -       t->bios_release_date =3D smbios_add_string(ctx, U_BOOT_DMI_DATE);
+> +       t->bios_release_date =3D smbios_add_prop(ctx, NULL, U_BOOT_DMI_DA=
+TE);
+>  #ifdef CONFIG_ROM_SIZE
+>         t->bios_rom_size =3D (CONFIG_ROM_SIZE / 65536) - 1;
+>  #endif
+> @@ -280,22 +285,19 @@ static int smbios_write_type1(ulong *current, int h=
+andle,
+>         memset(t, 0, sizeof(struct smbios_type1));
+>         fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+>         smbios_set_eos(ctx, t->eos);
+> -       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer");
+> -       if (!t->manufacturer)
+> -               t->manufacturer =3D smbios_add_string(ctx, "Unknown");
+> -       t->product_name =3D smbios_add_prop(ctx, "product");
+> -       if (!t->product_name)
+> -               t->product_name =3D smbios_add_string(ctx, "Unknown Produ=
+ct");
+> +       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer", "Unknown=
+");
+> +       t->product_name =3D smbios_add_prop(ctx, "product", "Unknown");
+>         t->version =3D smbios_add_prop_si(ctx, "version",
+> -                                       SYSINFO_ID_SMBIOS_SYSTEM_VERSION)=
+;
+> +                                       SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
+> +                                       "Unknown");
+>         if (serial_str) {
+> -               t->serial_number =3D smbios_add_string(ctx, serial_str);
+> +               t->serial_number =3D smbios_add_prop(ctx, NULL, serial_st=
+r);
+>                 strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
+>         } else {
+> -               t->serial_number =3D smbios_add_prop(ctx, "serial");
+> +               t->serial_number =3D smbios_add_prop(ctx, "serial", "Unkn=
+own");
+>         }
+> -       t->sku_number =3D smbios_add_prop(ctx, "sku");
+> -       t->family =3D smbios_add_prop(ctx, "family");
+> +       t->sku_number =3D smbios_add_prop(ctx, "sku", "Unknown");
+> +       t->family =3D smbios_add_prop(ctx, "family", "Unknown");
+>
+>         len =3D t->length + smbios_string_table_len(ctx);
+>         *current +=3D len;
+> @@ -314,15 +316,12 @@ static int smbios_write_type2(ulong *current, int h=
+andle,
+>         memset(t, 0, sizeof(struct smbios_type2));
+>         fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+>         smbios_set_eos(ctx, t->eos);
+> -       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer");
+> -       if (!t->manufacturer)
+> -               t->manufacturer =3D smbios_add_string(ctx, "Unknown");
+> -       t->product_name =3D smbios_add_prop(ctx, "product");
+> -       if (!t->product_name)
+> -               t->product_name =3D smbios_add_string(ctx, "Unknown Produ=
+ct");
+> +       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer", "Unknown=
+");
+> +       t->product_name =3D smbios_add_prop(ctx, "product", "Unknown");
+>         t->version =3D smbios_add_prop_si(ctx, "version",
+> -                                       SYSINFO_ID_SMBIOS_BASEBOARD_VERSI=
+ON);
+> -       t->asset_tag_number =3D smbios_add_prop(ctx, "asset-tag");
+> +                                       SYSINFO_ID_SMBIOS_BASEBOARD_VERSI=
+ON,
+> +                                       "Unknown");
+> +       t->asset_tag_number =3D smbios_add_prop(ctx, "asset-tag", "Unknow=
+n");
+>         t->feature_flags =3D SMBIOS_BOARD_FEATURE_HOSTING;
+>         t->board_type =3D SMBIOS_BOARD_MOTHERBOARD;
+>
+> @@ -343,9 +342,7 @@ static int smbios_write_type3(ulong *current, int han=
+dle,
+>         memset(t, 0, sizeof(struct smbios_type3));
+>         fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
+>         smbios_set_eos(ctx, t->eos);
+> -       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer");
+> -       if (!t->manufacturer)
+> -               t->manufacturer =3D smbios_add_string(ctx, "Unknown");
+> +       t->manufacturer =3D smbios_add_prop(ctx, "manufacturer", "Unknown=
+");
+>         t->chassis_type =3D SMBIOS_ENCLOSURE_DESKTOP;
+>         t->bootup_state =3D SMBIOS_STATE_SAFE;
+>         t->power_supply_state =3D SMBIOS_STATE_SAFE;
+> @@ -388,8 +385,8 @@ static void smbios_write_type4_dm(struct smbios_type4=
+ *t,
+>  #endif
+>
+>         t->processor_family =3D processor_family;
+> -       t->processor_manufacturer =3D smbios_add_string(ctx, vendor);
+> -       t->processor_version =3D smbios_add_string(ctx, name);
+> +       t->processor_manufacturer =3D smbios_add_prop(ctx, NULL, vendor);
+> +       t->processor_version =3D smbios_add_prop(ctx, NULL, name);
+>  }
+>
+>  static int smbios_write_type4(ulong *current, int handle,
+> --
+> 2.40.1
+>
