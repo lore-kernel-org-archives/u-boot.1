@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 225A3C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 15:59:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D87C4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 16:01:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9406C8765B;
-	Sat,  9 Dec 2023 16:59:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CFC35876A7;
+	Sat,  9 Dec 2023 17:01:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kJFNgkL5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNG4iNEd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1877587645; Sat,  9 Dec 2023 16:59:34 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id E534C876AA; Sat,  9 Dec 2023 17:01:51 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0061A8765B
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 16:59:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 923A08765B
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 17:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d05ff42db0so28370087b3.2
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 07:59:31 -0800 (PST)
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-db5e692d4e0so3322788276.2
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 08:01:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702137570; x=1702742370; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702137708; x=1702742508; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RVWVNYK+BRHjWvvRHmYZQVca/dbStEtEIC4V6bQ4F3U=;
- b=kJFNgkL5S2YZymLLxUfATVXQ4j+2P5WhjsCampVb93c/cyHHea3jYnbp14nzhWisI5
- KcimOlo6tv8FW/RnzcnKafXnsHJ44LIBdoRdu7kR1AAIdLRHzw3epM1qBp+pDFvnebo+
- AqGKfuz3nJYFEneX5nZbCa1gsdKesbYNGBUjA=
+ bh=rHLB0T027V+ByulGg+2t8798VePgktCYAba9kF17KCg=;
+ b=KNG4iNEdnmI/n1T3X/sk+uuCupFBNFinjn0y9skBaZi9750nSRpbXc9S2Ea8HtypKJ
+ 7Ej4mCW5Oak78pcHG9iifvt7anF98zVfrBbbp4sEzUFq9KmOj2DccnLfouoyYq+l2GuV
+ TNkXvO0uDqJvhoz4ZRHlrtInN/gBe8BySGybE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702137570; x=1702742370;
+ d=1e100.net; s=20230601; t=1702137708; x=1702742508;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RVWVNYK+BRHjWvvRHmYZQVca/dbStEtEIC4V6bQ4F3U=;
- b=Qi+z94L+/vnM0TjDbKnh2CZCM50D24egqyNPRPbLWhEA3H723oypnXNABNNvraR5+d
- 1wsISf+9zeduPx0Gxdfe27qWVnalJAvrh0g1jWRSLRhFlbMBDkCO5mzmnfdiopLS+uh5
- SjYC3+GW5HUjcKmkX5e+qK3mpDM7IrHIDxXhBQLYliBFQSkhXM98uO0ynH4zgn5HuyJm
- IKyfTZBUMefI5kVli7G3rxYby94M5VwdE0zdnragE9/hfMJM2UmdO4spMGTz3R5wBSUU
- XqxjBAmKO7m0pl9Re7AwkJMotAMqHMacD8rszVRhmGx3+HSEUw8niM+eNboavNOjzHW5
- gukQ==
-X-Gm-Message-State: AOJu0YwWDAHKW3gMs4WeLWedtT3isJG+jwLWRvRqozwaatdu0+3JLBKw
- qs4lAHkPFy0VTWNl9050/ntbCg==
-X-Google-Smtp-Source: AGHT+IHEA1b2uVjf/Cxyqra9mcCvyN8AX8TMb8e+ieGj3IiPbluQUOyAyhe4kSZ2V3DVwnPdakI2SA==
-X-Received: by 2002:a81:650a:0:b0:5d0:9a2f:26e7 with SMTP id
- z10-20020a81650a000000b005d09a2f26e7mr1295298ywb.19.1702137569787; 
- Sat, 09 Dec 2023 07:59:29 -0800 (PST)
+ bh=rHLB0T027V+ByulGg+2t8798VePgktCYAba9kF17KCg=;
+ b=OBlO0j6OL9tAgASBO6V3OvIwlNEE9vZFHeLOTCZ3Ag5Mj7QxwmY+PuGtts2mKkz1M7
+ +RjzEx6auhqdSUdCepPeWjGB0flYmKcLJS7GMDVUzq2A9GhmcZt2KcndlJOe83uZ1AYf
+ BGD9oDmIXxoDha0oskJJ7R6MqI5e7ULfrm81ORoGSjlz4atDpJ0inUh3x+uZwI9ga0cI
+ NXb14x5+Wbp1kEiaiXsAmHDe/r0JanUvkyL8jWyG5Z4QHqwKVNBj1a2Rx5yq0CoY6Stq
+ T3SetG9ePAWK5gY0nLu0wBVahyYPwpKHwTJZH4evWYI7dj9JVj6+CUD4g94oa7KgoEZd
+ Q3Aw==
+X-Gm-Message-State: AOJu0YxdSeyrfiTXxD/AMHkWL60sF/Hx77QjmASGvMyff7YchBEY1hwO
+ ZTf+/+WRPMSt0I4XE5mL0XNhIh5zI8Nb9u89UfDdtw==
+X-Google-Smtp-Source: AGHT+IHKBe+cgSQkB5oLSTNNeS12NWzth42KuP2N53hmIOJOl/81B574bJNnm7wXA7pxpYvQYXnJeA==
+X-Received: by 2002:a05:690c:460c:b0:5d8:3a38:a65d with SMTP id
+ gw12-20020a05690c460c00b005d83a38a65dmr1120430ywb.100.1702137708227; 
+ Sat, 09 Dec 2023 08:01:48 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- y188-20020a0dd6c5000000b005d6da42e443sm1558619ywd.59.2023.12.09.07.59.28
+ o65-20020a817344000000b00583f8f41cb8sm1539570ywc.63.2023.12.09.08.01.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 07:59:29 -0800 (PST)
-Date: Sat, 9 Dec 2023 10:59:27 -0500
+ Sat, 09 Dec 2023 08:01:47 -0800 (PST)
+Date: Sat, 9 Dec 2023 11:01:45 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 07/18] mips: Add a reset_cpu() function
-Message-ID: <20231209155927.GP2513409@bill-the-cat>
+ Eddie James <eajames@linux.ibm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH 12/18] bootm: Adjust how the board is reset
+Message-ID: <20231209160145.GQ2513409@bill-the-cat>
 References: <20231204002642.895926-1-sjg@chromium.org>
- <20231203172622.7.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
+ <20231204002642.895926-6-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XsJQRfQqmNJGgE+r"
+ protocol="application/pgp-signature"; boundary="vcFbeA9uU5KMiHlZ"
 Content-Disposition: inline
-In-Reply-To: <20231203172622.7.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
+In-Reply-To: <20231204002642.895926-6-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,41 +96,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XsJQRfQqmNJGgE+r
+--vcFbeA9uU5KMiHlZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 03, 2023 at 05:26:23PM -0700, Simon Glass wrote:
+On Sun, Dec 03, 2023 at 05:26:28PM -0700, Simon Glass wrote:
 
-> The current do_reset() is called from a command context. Add a function
-> which can be used from anywhere, as is done on ARM.
+> Use reset_cpu() to reset the board, copying the logic from the 'reset'
+> command. This makes more sense than directly calling the do_reset()
+> function with the arguments passsed to the bootm command.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
 
-A consistent API here for all architectures is good, thanks for doing
-this cleanup.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---XsJQRfQqmNJGgE+r
+--vcFbeA9uU5KMiHlZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0jt8ACgkQFHw5/5Y0
-tyzPrAwAqYRZFucbl1cGKeD/JlS708jvSSQwdQW15fj0krRx064QunCyQkmnv9am
-BC5uZYqpAcvtkcas0TztdAWVoRZAhcb7g4V00zDvpa4HduNbFSnNbaecoY9m9oC2
-IqQfRrPX7uP53lqeS5eZ9N2CnrNeYo1KJ+sOTxJijLXyqaNh149XC6zI2vFBtVbv
-ReFvWmAtMqRjqLrSWmKXYF8w8peL5BD6IctGL90CjkZo5NjlgPfUal7REeSqweDB
-qpZyvbmTNswhfIe6H8xgIniflshRqKdbUxvxss6jnYqQiDw5fY1c6mmCUexl4qdm
-sHXXFU9MKQjQGHj65HuPVVAP7g2rgE9Dp9d+MnX6VYY8E3sn0/rqYZNmtbkyRuO5
-kOgBpK9Ybh54tazD6D/COuRjFnSm+xORaP9BfdGHNAMDxrHUkHd4GOnqp1rR7JtY
-kSLbwJpxl/FXZZrTtcIZY0mFhfJ/JvKyMfQlgeRUo1lDOWI+L8evX9ugt4b+0c9x
-0nP+dCzB
-=Tj2B
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0j2kACgkQFHw5/5Y0
+tyw4pwv/dF/nznSi15Cx44Q25HtzpIoiGCharsnp45TehlPi83Bbk1yJOZtf5jfU
+tCc1nxOwOTs0e6cKI8+Z4f7NDNnb8AjLd4zuKbqhbynadEHfuV++KcGrUItItg54
+6cNsMP9E7WIGH4UMJWmoYn6QvsMhdWFlnArPntLGNf8EjJsqIs5SOovtp7Oot42w
+L3NTJ3C+KqVNVNVY2vqTAjVc6m/k2WxMAKoAUDIaAtjFqePJnFX+/7SeT32f0Py+
+Pj25le7Z+cAA5c6GGUBfRKOCn+MXbrAWtnaRm+Q9KeOFLtOBWtW91uWNffH5qU9V
+WCRYY0PnFYnueAJCvUrp8tnpobxjHYML/CALzM0HrFtcKWlH88Gl2J9wzA40eMF+
+lGGc/n4RH3VZw6Dwi/DjiXy/zb5Mz07OZrNJaX2XbFcTZeDIJGAz5aZBu3Q3riZj
+637IdCEa9oYcNDB8OhTNWiBHjFUE9zbu71olekvg0M/IBk1SH+sdFWhQ/GzS8zti
+RKh0Bxup
+=qctZ
 -----END PGP SIGNATURE-----
 
---XsJQRfQqmNJGgE+r--
+--vcFbeA9uU5KMiHlZ--
