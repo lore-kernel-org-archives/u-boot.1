@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90D87C4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 16:01:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA7FC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 16:15:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFC35876A7;
-	Sat,  9 Dec 2023 17:01:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 702A487215;
+	Sat,  9 Dec 2023 17:15:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNG4iNEd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pin4kVwh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E534C876AA; Sat,  9 Dec 2023 17:01:51 +0100 (CET)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id D8719874CA; Sat,  9 Dec 2023 17:15:03 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 923A08765B
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 17:01:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1FD38717E
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 17:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-db5e692d4e0so3322788276.2
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 08:01:49 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-77f4b8bbe0eso108863285a.1
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 08:15:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702137708; x=1702742508; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rHLB0T027V+ByulGg+2t8798VePgktCYAba9kF17KCg=;
- b=KNG4iNEdnmI/n1T3X/sk+uuCupFBNFinjn0y9skBaZi9750nSRpbXc9S2Ea8HtypKJ
- 7Ej4mCW5Oak78pcHG9iifvt7anF98zVfrBbbp4sEzUFq9KmOj2DccnLfouoyYq+l2GuV
- TNkXvO0uDqJvhoz4ZRHlrtInN/gBe8BySGybE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702137708; x=1702742508;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1702138500; x=1702743300; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rHLB0T027V+ByulGg+2t8798VePgktCYAba9kF17KCg=;
- b=OBlO0j6OL9tAgASBO6V3OvIwlNEE9vZFHeLOTCZ3Ag5Mj7QxwmY+PuGtts2mKkz1M7
- +RjzEx6auhqdSUdCepPeWjGB0flYmKcLJS7GMDVUzq2A9GhmcZt2KcndlJOe83uZ1AYf
- BGD9oDmIXxoDha0oskJJ7R6MqI5e7ULfrm81ORoGSjlz4atDpJ0inUh3x+uZwI9ga0cI
- NXb14x5+Wbp1kEiaiXsAmHDe/r0JanUvkyL8jWyG5Z4QHqwKVNBj1a2Rx5yq0CoY6Stq
- T3SetG9ePAWK5gY0nLu0wBVahyYPwpKHwTJZH4evWYI7dj9JVj6+CUD4g94oa7KgoEZd
- Q3Aw==
-X-Gm-Message-State: AOJu0YxdSeyrfiTXxD/AMHkWL60sF/Hx77QjmASGvMyff7YchBEY1hwO
- ZTf+/+WRPMSt0I4XE5mL0XNhIh5zI8Nb9u89UfDdtw==
-X-Google-Smtp-Source: AGHT+IHKBe+cgSQkB5oLSTNNeS12NWzth42KuP2N53hmIOJOl/81B574bJNnm7wXA7pxpYvQYXnJeA==
-X-Received: by 2002:a05:690c:460c:b0:5d8:3a38:a65d with SMTP id
- gw12-20020a05690c460c00b005d83a38a65dmr1120430ywb.100.1702137708227; 
- Sat, 09 Dec 2023 08:01:48 -0800 (PST)
-Received: from bill-the-cat
+ bh=Fy7Zcu6EgPD0IhBZLiio24dx4lOfH16Q75UB8jU3DaA=;
+ b=pin4kVwhcg/fTrN+bxIjlaZIt7fEdah/MJSIOUho4W0lrRM9BbzqgRlqWJLG17dxTN
+ o5t4+IN15y4wfIYCwU48F4MvxoGbi3Fem4wNxc93/dumbsd8/D84bBmI22ubwiyiKfex
+ cuMpv0cQ9bTsdwL6H5BGBmMoU3+mxf5oXFwIU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702138500; x=1702743300;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Fy7Zcu6EgPD0IhBZLiio24dx4lOfH16Q75UB8jU3DaA=;
+ b=Ldl1nZ4UQR21lS5ouqdTin0DmBVOium60zHGx4jprYuRDZuFVvS/9KtmXVXnITfuzN
+ VfT3m19iPevRRjLwYxn1h4p6iy/lRePE9I+rQCdHVjOm9DIJARh26h1JO97JnMRua7uw
+ 6YYVHf0v6ptNOm5ARVfVz4hXatKdHhxdowl1vvRQls3jrfWpQnqEDYAW9x/uBWR5rFHT
+ SoOTGlE30TDasMiggWVxiayfjsBi3zITdx97DO/jtNBz463DsTnsRUf4PRt4mZHhXttw
+ zurmeAirFcVKqhS0uqZGBYV4sFVneocO+q07E7gbaXKxkdftevUN8YbUo/088OJ4ZLy8
+ MTPA==
+X-Gm-Message-State: AOJu0Yze8E7n/ctyF9i48y2YKaEUB0UVEWnm+OS7noi3EUMWiG2bLVgS
+ OcsLPfGNMNWIFy+YGoWlelnaRg==
+X-Google-Smtp-Source: AGHT+IEg1gMpjfpYNOPX9BQ6JVGEusq5y3QR68dOJ9slA9IYbBNMsH8drRGpEzw/AWC6+bZyl5UulA==
+X-Received: by 2002:a05:620a:22c1:b0:77f:26:18fd with SMTP id
+ o1-20020a05620a22c100b0077f002618fdmr2121714qki.6.1702138500348; 
+ Sat, 09 Dec 2023 08:15:00 -0800 (PST)
+Received: from [127.0.1.1]
  (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
  [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
  by smtp.gmail.com with ESMTPSA id
- o65-20020a817344000000b00583f8f41cb8sm1539570ywc.63.2023.12.09.08.01.47
+ x8-20020a81b048000000b005df5d592244sm616046ywk.78.2023.12.09.08.14.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 08:01:47 -0800 (PST)
-Date: Sat, 9 Dec 2023 11:01:45 -0500
+ Sat, 09 Dec 2023 08:14:59 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Eddie James <eajames@linux.ibm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: Re: [PATCH 12/18] bootm: Adjust how the board is reset
-Message-ID: <20231209160145.GQ2513409@bill-the-cat>
-References: <20231204002642.895926-1-sjg@chromium.org>
- <20231204002642.895926-6-sjg@chromium.org>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Mario Six <mario.six@gdsys.cc>, Nikhil M Jain <n-jain1@ti.com>
+In-Reply-To: <20231007214106.15744-1-marek.vasut+renesas@mailbox.org>
+References: <20231007214106.15744-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v2 1/9] cmd: bdinfo: Optionally use getopt and
+ implement bdinfo -a
+Message-Id: <170213849955.3414542.12578678737270108706.b4-ty@konsulko.com>
+Date: Sat, 09 Dec 2023 11:14:59 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vcFbeA9uU5KMiHlZ"
-Content-Disposition: inline
-In-Reply-To: <20231204002642.895926-6-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,41 +93,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 07 Oct 2023 23:40:58 +0200, Marek Vasut wrote:
 
---vcFbeA9uU5KMiHlZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Add optional support for getopt() and in case this is enabled via
+> GETOPT configuration option, implement support for 'bdinfo -a'.
+> The 'bdinfo -a' behaves exactly like bdinfo and prints 'all' the
+> bdinfo information. This is implemented in preparation for other
+> more fine-grained options.
+> 
+> 
+> [...]
 
-On Sun, Dec 03, 2023 at 05:26:28PM -0700, Simon Glass wrote:
+Applied to u-boot/next, thanks!
 
-> Use reset_cpu() to reset the board, copying the logic from the 'reset'
-> command. This makes more sense than directly calling the do_reset()
-> function with the arguments passsed to the bootm command.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+-- 
 Tom
 
---vcFbeA9uU5KMiHlZ
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0j2kACgkQFHw5/5Y0
-tyw4pwv/dF/nznSi15Cx44Q25HtzpIoiGCharsnp45TehlPi83Bbk1yJOZtf5jfU
-tCc1nxOwOTs0e6cKI8+Z4f7NDNnb8AjLd4zuKbqhbynadEHfuV++KcGrUItItg54
-6cNsMP9E7WIGH4UMJWmoYn6QvsMhdWFlnArPntLGNf8EjJsqIs5SOovtp7Oot42w
-L3NTJ3C+KqVNVNVY2vqTAjVc6m/k2WxMAKoAUDIaAtjFqePJnFX+/7SeT32f0Py+
-Pj25le7Z+cAA5c6GGUBfRKOCn+MXbrAWtnaRm+Q9KeOFLtOBWtW91uWNffH5qU9V
-WCRYY0PnFYnueAJCvUrp8tnpobxjHYML/CALzM0HrFtcKWlH88Gl2J9wzA40eMF+
-lGGc/n4RH3VZw6Dwi/DjiXy/zb5Mz07OZrNJaX2XbFcTZeDIJGAz5aZBu3Q3riZj
-637IdCEa9oYcNDB8OhTNWiBHjFUE9zbu71olekvg0M/IBk1SH+sdFWhQ/GzS8zti
-RKh0Bxup
-=qctZ
------END PGP SIGNATURE-----
-
---vcFbeA9uU5KMiHlZ--
