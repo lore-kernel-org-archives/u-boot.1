@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46FAAC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5EEC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 11:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C77758757F;
-	Sat,  9 Dec 2023 12:57:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37CB38757F;
+	Sat,  9 Dec 2023 12:58:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GHMK11DV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TMbZJnvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B58BF87620; Sat,  9 Dec 2023 12:57:43 +0100 (CET)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 89F4F8757C; Sat,  9 Dec 2023 12:58:23 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A010E8757C
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:57:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E4018757F
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 12:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6ceccf6d88fso215055b3a.1
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 03:57:41 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6ce6f4d3dafso698852b3a.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 03:58:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702123060; x=1702727860; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702123100; x=1702727900; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e1AWC4sixDFYIgP5Nq5jvbGsG05em8zCyIHmQtnjhSQ=;
- b=GHMK11DV20Rl34lasnqFyb7VBFpy3NOVjREib5Yz7MXqAefpIb3ugW8TX15oH26hAh
- nxxvdC1KSjP5cVxYAf7tuvNIfx4YoPW1WIsv0iddSG0cnMRkh+NYEBX3FS9tpQDJwoCD
- dD9WXIVoTUezTr/QGmMrc0tIuhgqQCHxdtsb4y4bX5X7eROgoYIWHIupcE+j4tB9UrVV
- j9TF8OmZi9aGPjFiy/2RWDDYvWxCr8vx4HxWXsBas1V/zCC7zSZfKN7i/ncvyOBPzHfM
- t/ymKqhfjXZzy27SlW5hwi6WC3hs56eXJzjF3xDXG33hEAP0E0lZff0qR3VF0CtQEHac
- E/Kg==
+ bh=1nJzozNu/MZwa6apuuIlZpb+PVN9OZGHqjbCXgCfI7Q=;
+ b=TMbZJnvoJLfMuWG7P1tzJr3l1S6bNsWSXTjMs052BYyIbjMmaZbjt0lkGjZSBOk/sK
+ XlctU9TSvFjlylstqKdGWcwulAKYhI61xuxLEPp6OAu1hDm/C+yPKXS5LL4xcG8B5xuT
+ +KOMeazYkTFlN12xklWMxe8Fnbe/c7jLSJy0UGzdBx9ciNaIInqM8Y4utiIteTkAZGb8
+ vxsGgEPHSPI8a4Ifwbg7QTJcTlmo+gZKqCHdDjkPwxcEvGNba5wRe+Fr0m4gBOO4VH2U
+ eGGhklRPyzEIJVjQtTr2ZfBgzMV3oBL5oDOAKdB4AXchDZ7tbMAfij7ZxpPAcMkyP42h
+ rISA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702123060; x=1702727860;
+ d=1e100.net; s=20230601; t=1702123100; x=1702727900;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e1AWC4sixDFYIgP5Nq5jvbGsG05em8zCyIHmQtnjhSQ=;
- b=DgU/8N7I7EG0i6lERT46g/EcYimwv+p3rO7O38zOgPNxHRI8MQ2/sMcskDM8xkq4T1
- zPEL7r1TMnxB/LJi2vCcvBSagUOuS4jtP01A35p1w86pwm/3erkwjzG95zHrU3KjGmav
- jf2Mgcoo440ZwPK1Bi/IMEuK1OJpJZPa9se2GuHxI64fdStR33HGhDEjMejMppTNEaUr
- /NLoScqkgnEEHEVYnjjhJeNKgNGElc7RM+gQJnpnsFxmmaVGv7UhL0KpqeJfaknPil60
- BG2ezvYp7UxjPFzNYhW5G/w54CKh0tsm6vkY40g7znJd4gS/SvOsGfoVqCP5cPotcjkw
- zO9A==
-X-Gm-Message-State: AOJu0YwAo4rBzXcQDRJIth6ArxSeVoFCruWTtPwy6Fg1iOszLkwcAjLx
- y+3QEBi8i74pRowRelpK6/fVIDlRg4hgp4MkQCockrzu
-X-Google-Smtp-Source: AGHT+IG2DNjFEkLSXm6J8549ZgWURjQD4SwLfn818TsrZ6FdSQ5g9Ion6Eg7fQf/GHxHfeGSWbOWQsI3LROsNFYWRXk=
-X-Received: by 2002:a05:6a00:4655:b0:6cd:e328:9d8e with SMTP id
- kp21-20020a056a00465500b006cde3289d8emr3219737pfb.3.1702123059815; Sat, 09
- Dec 2023 03:57:39 -0800 (PST)
+ bh=1nJzozNu/MZwa6apuuIlZpb+PVN9OZGHqjbCXgCfI7Q=;
+ b=u9i9fK5kI7Q1tBRoH2kiOGg5Gp4IFPAKydZ/FIE6Nmf80k30o3knNCfWiF1hSUErYQ
+ IcniuGqJwlUBOwHf6CX+hV4FazOaWndiYou1y0qPcuyQGW3jgw9ibnx07s4EeFLQGCbq
+ pOKphEZD98sNxI07n8WtiACR1o6N7sjesHjjKxL+oEC54tlCF9MJHsxesDypD0xBWgL1
+ LWuAjBu2semQ+mroYIpIb4WCrMybBSl0lgY12svi289KSMguaZIFyZstHLne9xEA/bSS
+ Bzryh6z31dDDEExrK3qeeG3q/rAtmfdYaVG24aIUzfSmrp63RdGKqMKY3iI02oWkLOgR
+ WbXg==
+X-Gm-Message-State: AOJu0YyyMEno3npI4NwCz8F07uR8Xki2wBkmL5AnlIiL023Sqesa/i+l
+ Q8VFsDObdDdrwYrNv2rrVNthQPwbzskjgn2To6Q=
+X-Google-Smtp-Source: AGHT+IHCcmoi/+NIeLSOwmPRL195LUstn1ZYn+Yb1V/MfLi3OUWBTyXxB2FbjQTpvHSZaWroJ60687xs8unkqHOCaNQ=
+X-Received: by 2002:a17:90a:d794:b0:286:f1b8:da7b with SMTP id
+ z20-20020a17090ad79400b00286f1b8da7bmr2811612pju.0.1702123099776; Sat, 09 Dec
+ 2023 03:58:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20231207175056.336787-1-marex@denx.de>
-In-Reply-To: <20231207175056.336787-1-marex@denx.de>
+ <20231207175056.336787-2-marex@denx.de>
+In-Reply-To: <20231207175056.336787-2-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 9 Dec 2023 08:57:28 -0300
-Message-ID: <CAOMZO5Bf5sa7oEKyCJ7cArj2AKm=gdi4e+agKhdioaj8C=0fzg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] ARM: imx: Force DRAM regulators into FPWM mode on
- Data Modul i.MX8M Plus eDM SBC
+Date: Sat, 9 Dec 2023 08:58:08 -0300
+Message-ID: <CAOMZO5D6p=YyakA7w2xE6ABY2xa_DL08CajRhvzpZTSSbryS4w@mail.gmail.com>
+Subject: Re: [PATCH 2/2] ARM: imx: Update DRAM timings with inline ECC on Data
+ Modul i.MX8M Plus eDM SBC
 To: Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Stefano Babic <sbabic@denx.de>
@@ -90,13 +91,25 @@ X-Virus-Status: Clean
 
 On Thu, Dec 7, 2023 at 2:51=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> In case the Buck5 and Buck6 regulators which supply DRAM Vdd1 and Vdd2/Vd=
-dq
-> respectively operate in automatic PWM/PFM mode, the DRAM EDAC detects mor=
+> Import DRAM timings generated by the DDR tool 3.31 which introduce assort=
+ed
+> tweaks to the DRAM controller settings. Furthermore, enable DBI to improv=
 e
-> correctable errors than if the regulators operate in forced PWM only mode=
-.
-> Force DRAM regulators to forced PWM mode only to stop tempting the DRAM.
+> noise resilience of the DRAM bus by reducing the number of bit changes on
+> the bus.
+>
+> Reduce the DRAM rate to 3600 MTps to remove all remaining correctable err=
+ors
+> reported by EDAC . It is not entirely clear why the slightly faster setti=
+ng
+> does produce sporadic correctable errors, while this one does not, but th=
+is
+> could be related to simpler PLL setting at 3600 MTps.
+>
+> Enable inline ECC which is necessary to detect ECC errors and collect
+> statistics by the EDAC driver in Linux. This reduces the DRAM size by
+> 64 MiB for each 512 MiB of DRAM, so for a 4 GiB device the available
+> DRAM size becomes 3.5 GiB .
 >
 > Signed-off-by: Marek Vasut <marex@denx.de>
 
