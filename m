@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C5CDC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 13:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D4CC4167B
+	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 13:58:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E20FD8761B;
-	Sat,  9 Dec 2023 14:53:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 437FC8759F;
+	Sat,  9 Dec 2023 14:58:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TA240dTQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YGooVxiR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAF9C8763A; Sat,  9 Dec 2023 14:53:29 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 283C787128; Sat,  9 Dec 2023 14:14:15 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92E148759F
- for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 14:53:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1328B86F87
+ for <u-boot@lists.denx.de>; Sat,  9 Dec 2023 14:14:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5d74186170fso25242697b3.3
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 05:53:27 -0800 (PST)
+ spf=pass smtp.mailfrom=wenst@chromium.org
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2c9f4bb2e5eso39873281fa.1
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 05:14:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702130006; x=1702734806; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Kn/fNsIbxc+/IJqetBJo1R0Zfl4eL9IQPZKqlmNmdwI=;
- b=TA240dTQzUBF1vsPO9bDIPs/nWJPJyRrbIgyCCX6DUac6AWQv0pI4A4hMLEUn0D446
- zTc0CtBZ849cWAERgFFL1mZ62+pzRBw+W/yYQIhOJYk6mtDAoIFsrk2Bo1Y8M3OR7Su7
- mPMClzyyUHABQInkhKrfp61TBP4r/vZjQ7wrM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702130006; x=1702734806;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1702127651; x=1702732451; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kn/fNsIbxc+/IJqetBJo1R0Zfl4eL9IQPZKqlmNmdwI=;
- b=gU2um/45yJJMQ9opAKyTlvKHI0YIttECc1RPEcqCmONAO0TJDKrqBwT7229nJqKOU9
- 6JkSTJ8TNwVt1pGju4E+OivZmHW3mCJYe6lSUx8nqSA+jug4U+nPAyKJ/KcXz6lsWGHw
- S/NoDOlw2zRDHwe0PcEiNk83oxD6a3CKqw8Ncsk2i5x+ArcnNZiSN6xp6fcEpulx91/q
- QYOX9tuioKLzMLHBXj6HMAJQwzChcy3xB+Yu/SMS4D6Q4KIAX6cDmuSM/NtLLbWmNrSz
- +kqPe18xsSBhPobmItU1lipaqZWDPzF6EsgJ+kS27t5NDZc88oJ+8hUokAEDkpGqv2qV
- /8Ww==
-X-Gm-Message-State: AOJu0YznNHeFhaw/pmRa+WJFQ8JmFmAkiBHu9jXZdHJbD6UD3U+AFnc9
- w90GjY//Fya9eOec7JbIyFiwDGMGFSMEpilp2LrhLw==
-X-Google-Smtp-Source: AGHT+IGgC0qwt+xm6VBuZyOjKXUv0HkMFueyqt9cZ3udD6AfeQpARA9f575Yffj230r/cacNBQcM9A==
-X-Received: by 2002:a81:8447:0:b0:5d3:7ee5:d0db with SMTP id
- u68-20020a818447000000b005d37ee5d0dbmr989836ywf.20.1702130006156; 
- Sat, 09 Dec 2023 05:53:26 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b2bd-da43-c83a-80e1.res6.spectrum.com.
- [2603:6081:7b00:6400:b2bd:da43:c83a:80e1])
- by smtp.gmail.com with ESMTPSA id
- l5-20020a0de205000000b005d37278f973sm1475973ywe.36.2023.12.09.05.53.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 05:53:25 -0800 (PST)
-Date: Sat, 9 Dec 2023 08:53:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-gitdm PATCH 1/2] Use Google LLC for Google
-Message-ID: <20231209135324.GA3191433@bill-the-cat>
-References: <20231203044719.667116-1-sjg@chromium.org>
+ bh=yAnV5/VTJKO+oXGb78o4eRSh3GZ7EBZgVLaL6KtYl8o=;
+ b=YGooVxiRzre4dG43geDSekw5+OF5jOohJhbw0ze9r9TRketbDdxowcISrE6JgRfxCv
+ FUjZW8QIJjTnGUEJqhw6GGC1vriVp7kNhRX1nUSnxyKhmix7/2adzlW8vSqVcArQFtHu
+ KeLeQawAxiCMWAHJahDhjq6XsSgzaMtrpTW04=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702127651; x=1702732451;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yAnV5/VTJKO+oXGb78o4eRSh3GZ7EBZgVLaL6KtYl8o=;
+ b=PGJB1JxmReSX77woDjZ/yE3Uzb5XxLbk//wj+EMYl1kvacWvuOoZdlMoiRTcLT0g7b
+ QgbjzpwP6te5i6Ol2JAROjQajLb2YU0dq9kJpMcCopDTqy29GFafijSscPYCgajIAs4F
+ GV9ToybwNgVQYBHSRtYRS94LDEmFf4CT2AchCBPsxMeLoMHQLRTPo/jNxPouArmdJyqF
+ 0M+aW5egmrOb+t8tGjascNCwlbPAY7zuVxIvJeqJGgeiqwbd4M34j/tb4ipCyp5E5KKd
+ wkWEY2aDvKzdl4/hwVhZZSmbQOxhFcXpaPE30cII17iznQWcXIfbB91BloiwC/fW2o7p
+ mfzQ==
+X-Gm-Message-State: AOJu0Ywsy/1CWIP4kp39iU9o35/5FMftvCuYYOhiIuPSkA95nGrcgOs1
+ gZ4UVfG+zL6mC259oV5CCkywfpQttwIb0c+GdvkJtA==
+X-Google-Smtp-Source: AGHT+IGeCP4QFN7ZgQJeFnN7faugEryNKJ80Nvg0QuCcVgGBL3GaaL9QrMygC+jl/dS1Ke3ms4zU355E0zK8lA+JEz0=
+X-Received: by 2002:ac2:4acf:0:b0:50b:f8d8:b176 with SMTP id
+ m15-20020ac24acf000000b0050bf8d8b176mr648422lfp.124.1702127651029; Sat, 09
+ Dec 2023 05:14:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dx2vmU3j3osS3X3J"
-Content-Disposition: inline
-In-Reply-To: <20231203044719.667116-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231203153401.GV8402@pendragon.ideasonboard.com>
+ <20231207142723.GA3187877@google.com>
+ <20231207143814.GD15521@pendragon.ideasonboard.com>
+In-Reply-To: <20231207143814.GD15521@pendragon.ideasonboard.com>
+From: Chen-Yu Tsai <wenst@chromium.org>
+Date: Sat, 9 Dec 2023 22:13:59 +0900
+Message-ID: <CAGXv+5Go_0pEVAOLQmRCc_a9-YUtZEmBfXtMuBupX_nb9iqwbw@mail.gmail.com>
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org, 
+ Masahiro Yamada <masahiroy@kernel.org>, Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
+ Tom Rini <trini@konsulko.com>, 
+ Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
+ Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
+ Will Deacon <will@kernel.org>, 
+ linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, workflows@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 09 Dec 2023 14:58:01 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +96,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Dec 7, 2023 at 11:38=E2=80=AFPM Laurent Pinchart
+<laurent.pinchart@ideasonboard.com> wrote:
+>
+> On Thu, Dec 07, 2023 at 10:27:23PM +0800, Chen-Yu Tsai wrote:
+> > On Sun, Dec 03, 2023 at 05:34:01PM +0200, Laurent Pinchart wrote:
+> > > Hi Simon,
+> > >
+> > > Thank you for the patch.
+> > >
+> > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
+> > > > Add a script which produces a Flat Image Tree (FIT), a single file
+> > > > containing the built kernel and associated devicetree files.
+> > > > Compression defaults to gzip which gives a good balance of size and
+> > > > performance.
+> > > >
+> > > > The files compress from about 86MB to 24MB using this approach.
+> > > >
+> > > > The FIT can be used by bootloaders which support it, such as U-Boot
+> > > > and Linuxboot. It permits automatic selection of the correct
+> > > > devicetree, matching the compatible string of the running board wit=
+h
+> > > > the closest compatible string in the FIT. There is no need for
+> > > > filenames or other workarounds.
+> > > >
+> > > > Add a 'make image.fit' build target for arm64, as well. Use
+> > > > FIT_COMPRESSION to select a different algorithm.
+> > > >
+> > > > The FIT can be examined using 'dumpimage -l'.
+> > > >
+> > > > This features requires pylibfdt (use 'pip install libfdt'). It also
+> > > > requires compression utilities for the algorithm being used. Suppor=
+ted
+> > > > compression options are the same as the Image.xxx files. For now th=
+ere
+> > > > is no way to change the compression other than by editing the rule =
+for
+> > > > $(obj)/image.fit
+> > > >
+> > > > While FIT supports a ramdisk / initrd, no attempt is made to suppor=
+t
+> > > > this here, since it must be built separately from the Linux build.
+> > >
+> > > FIT images are very useful, so I think this is a very welcome additio=
+n
+> > > to the kernel build system. It can get tricky though: given the
+> > > versatile nature of FIT images, there can't be any
+> > > one-size-fits-them-all solution to build them, and striking the right
+> > > balance between what makes sense for the kernel and the features that
+> > > users may request will probably lead to bikeshedding. As we all love
+> > > bikeshedding, I thought I would start selfishly, with a personal use
+> > > case :-) This isn't a yak-shaving request though, I don't see any rea=
+son
+> > > to delay merging this series.
+> > >
+> > > Have you envisioned building FIT images with a subset of DTBs, or add=
+ing
+> > > DTBOs ? Both would be fairly trivial extensions to this script by
+> > > extending the supported command line arguments. It would perhaps be m=
+ore
+> > > difficult to integrate in the kernel build system though. This leads =
+me
+> > > to a second question: would you consider merging extensions to this
+> > > script if they are not used by the kernel build system, but meant for
+> > > users who manually invoke the script ? More generally, is the script
+> >
+> > We'd also be interested in some customization, though in a different wa=
+y.
+> > We imagine having a rule file that says X compatible string should map
+> > to A base DTB, plus B and C DTBO for the configuration section. The bas=
+e
+> > DTB would carry all common elements of some device, while the DTBOs
+> > carry all the possible second source components, like different display
+> > panels or MIPI cameras for instance. This could drastically reduce the
+> > size of FIT images in ChromeOS by deduplicating all the common stuff.
+>
+> Do you envision the "mapping" compatible string mapping to a config
+> section in the FIT image, that would bundle the base DTB and the DTBOs ?
 
---dx2vmU3j3osS3X3J
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+That's exactly the idea. The mapping compatible string could be untied
+from the base board's compatible string if needed (which we probably do).
 
-On Sat, Dec 02, 2023 at 09:46:57PM -0700, Simon Glass wrote:
+So something like:
 
-> The name changed a few years ago, so update it.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+config {
+    config-1 {
+        compatible =3D "google,krane-sku0";
+        fdt =3D "krane-baseboard", "krane-sku0-overlay";
+    };
+};
 
-Applied to gitdm/u-boot, thanks! Do you want me to do a quick search and
-replace on the stats pages since v2017.10 onward or just for future
-releases?
+With "krane-sku0-overlay" being an overlay that holds the differences
+between the SKUs, in this case the display panel and MIPI camera (not
+upstreamed) that applies to SKU0 in particular.
 
---=20
-Tom
+Sorry for not giving a more concrete idea.
 
---dx2vmU3j3osS3X3J
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+ChenYu
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV0cVMACgkQFHw5/5Y0
-tyyTCgwAth+epMsPB7G+GCcxgNEHkufTXEXq+hWYKleB3UU0FeCO9DTOowqelMHO
-bSOk7vPmnM3oSl2qadgwiC+y+wvlQ25oQKLwkZ2AoJyS6rFhkS5ma1M14GZc9zkT
-yjdnSz7AwvOh+sMufwVilM5NdZgBcL+bPgQakync70ngR+mOkZCGOHM+3lYyRJwC
-3Qd0Cm4r4/kIipGvkFO3svFMD/vaBLCqR/r/XsQ0gMAVjIx+2XADBUWuj+3g4Trb
-Ttv/PUCQOJQXFAvAde4tFERNkEhxEUMSPdFzF+Kbf/Wn8bfL+hsS22oe2GmOZn3F
-tKlm5Pj6iga9cVhfubxFMxL3VPYd3R9VmR6Nrvs0fY7i7Ac4nWkdYETDkUxsKpdh
-h9eXI9vEuzP7cwh1MOqNQQGYmic5VO0vkhOfxOhpGVi47Tml4v64xd3QkxtdpljB
-87TvF/TIDFa0zZzg/Civg9eT+mxyfmDuOoCGJrVba7WmwpAGHzYiWXnkxSDK6jUk
-zhUUfbWO
-=dVOX
------END PGP SIGNATURE-----
-
---dx2vmU3j3osS3X3J--
+> > > meant to be used stand-alone as well, in which case its command line
+> > > arguments need to remain backward-compatible, or do you see it as bei=
+ng
+> > > internal to the kernel ?
+> >
+> > [...]
+> >
+> > ChenYu
+>
+> --
+> Regards,
+>
+> Laurent Pinchart
