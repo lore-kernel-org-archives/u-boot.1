@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E86EFC4167B
-	for <u-boot@archiver.kernel.org>; Sat,  9 Dec 2023 23:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 238A2C4167B
+	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 00:04:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05A1487067;
-	Sun, 10 Dec 2023 00:16:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 39C8686308;
+	Sun, 10 Dec 2023 01:04:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HWMlQ+CW";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="Hl3bCg9g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F382987053; Sun, 10 Dec 2023 00:16:38 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id BA39087078; Sun, 10 Dec 2023 01:04:38 +0100 (CET)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDEE87067
- for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 00:16:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5191A803AE
+ for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 01:04:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5d3758fdd2eso30599667b3.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 15:16:35 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-7cac4a9faccso290386241.0
+ for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 16:04:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702163794; x=1702768594; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8fZ6Yu7sHGNhaHwJQ4xbeVY8SZZJ6BjEUHv/biJZYjc=;
- b=HWMlQ+CWPxNf9VxJXf6rEYDqqJ51bjYFoIWXxyNkoAyhJJx72zLpiSmlo1d+Z5SbDT
- VtIMwRv8/358hq/E50UBq3gBeZWb7q33rzfvwHEiisShv5Kcf/BV1Wvehs0jBo7wo05r
- 7Zo+JA+OT74QRY2g0oV9eqgSw3kfsEvi0TyMM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702163794; x=1702768594;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702166675; x=1702771475;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8fZ6Yu7sHGNhaHwJQ4xbeVY8SZZJ6BjEUHv/biJZYjc=;
- b=EYSeG68p6StCSr65IPAYz8f8H9NXU9m0YodjcZfXg+XapaWqfgV7gu92JNFUiz7NIv
- 60mmCXkX2VsuO8EEBSSjaA46sSR624NId1iqS0ciUI/CqvWhZ8pnETCY7bUkhngCeHka
- pxLrplNm43gtMawggPGpz317Oe1IDvAPcKRuJz9q4iPg5xamsJJr3KNM1BK7U0x5Iqyj
- a4hRs+fTGofzq2vSBvuZlpgaxfWMZmHKukmDOZSifVN+qaKiViayOQ9GFF0YQVShUVNb
- sLf+tyR+pXozQSDLEej7pA6HnO0N2W2WmLW2/Yc0MwRL6Fm2YbLrTSSaoiokiUXXaKWh
- UE7g==
-X-Gm-Message-State: AOJu0YzPWVw0dX5X3Gr39fY8FTatPjacUSmFllgBl9MIxmTzsLei6q3X
- sXMkGNZlNuJHMx4S+6XGyFJsFrzeEn5cVhcX7R/jNg==
-X-Google-Smtp-Source: AGHT+IExQFCiQCM/x7hnkGCY8U2Hv3uZM9dTelI7p/kSudeJeNv5nQdXj9yg6KbYMyhxOnTvwuoTKw==
-X-Received: by 2002:a81:5cc2:0:b0:5d7:1941:3577 with SMTP id
- q185-20020a815cc2000000b005d719413577mr1280808ywb.94.1702163793872; 
- Sat, 09 Dec 2023 15:16:33 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-8dee-9b11-e8b3-3204.res6.spectrum.com.
- [2603:6081:7b00:6400:8dee:9b11:e8b3:3204])
- by smtp.gmail.com with ESMTPSA id
- gi3-20020a05690c424300b005df4992992esm929341ywb.24.2023.12.09.15.16.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 09 Dec 2023 15:16:33 -0800 (PST)
-Date: Sat, 9 Dec 2023 18:16:31 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Francis Laniel <francis.laniel@amarulasolutions.com>
-Cc: u-boot@lists.denx.de,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v12 00/24] Modernize U-Boot shell
-Message-ID: <20231209231631.GO2513409@bill-the-cat>
-References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
+ bh=v9z8VGgJzkJclJAaFmfaqA3N63FGIxVQJCSI9qtljYE=;
+ b=Hl3bCg9g/RS70hhr9OAK27l0+9nafPxh2efYUvpE0L9fjg6d6tDuVufBW3KfPFu9s9
+ JykY7+QY2dWJL95ZLUsRWUnxwZja6iNvvji0m5xuy8HVFdAbHxwwJunSIZ4Y7w6Qr62e
+ uZLhCHsEcVX0ps6X4OfXZj8d1SzIdULweCDSagjJC92/Ji3xQqD8zTWEsnH0pbJlvZZT
+ A8dYb4LwtIZj1MGp92Q/S/GIZOLsCzE73UgxLxcaCjf18XcIJbN3k0OAopaIaVJ0FVdk
+ 4e35SlM8vWqJ5SvLUTxr66fvCdSqna+1KVBZuxAJNZUYuullPU/50oq/driHm0321chM
+ UKDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702166675; x=1702771475;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=v9z8VGgJzkJclJAaFmfaqA3N63FGIxVQJCSI9qtljYE=;
+ b=T/iNrouSD/N1Hz/PWzIpv9h3QFLVhk9u4FxpkYZiWoC9xcBUSkhKm6B0Y4r1uw5VpT
+ FYLUillABUGJrQwQkMQ7xoCavtXbPPeHvM3jBV6QB9ohbXALcdob748fxE1aP2QeoHih
+ Djk+k40xglS8ST/IZ7ZCUp3vO/xsKBhSIPC6KxOBzCaUgVsapUkUrI3kbUxu9yBbvfDg
+ 0F/kKGtlNl+EFakKs/kR6M3UvoYDaf2aCeLvqQPizzKJ2GFdbXN4z8ZPhGo7S11/l0Sc
+ hWyxlA0U18QhtaqJjmy2UgijqX+x8vzdkQ1PFiY6BQbW4os+WEabt5XDqxwf2GTPtMAI
+ 4oSw==
+X-Gm-Message-State: AOJu0Yzty+lW99zbp19LFNhii1xUaxXnGfsxzdQ26P/vWEPvx8Djb6tT
+ ZN9mkJO7SgHLxghva0YXTq2VZx8bQ3Oyuu0zWEB37A==
+X-Google-Smtp-Source: AGHT+IH0EI5hdcPjXCR3j57T+20bwTGgHU9XGZM7S/n/VcnQtd6DT5igXiBITJZdyoVYOBAWtlkpFz56Px4cAcvmh+4=
+X-Received: by 2002:a1f:6ec3:0:b0:4b2:e4e1:827f with SMTP id
+ j186-20020a1f6ec3000000b004b2e4e1827fmr1939008vkc.9.1702166674968; Sat, 09
+ Dec 2023 16:04:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lcm+qk3tdl7sa+zX"
-Content-Disposition: inline
-In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231208000947.248849-1-i@shantur.com>
+ <20231208000947.248849-3-i@shantur.com>
+ <edd57912-f38f-4589-bb21-c638db8535e1@denx.de>
+ <CABEcMwWA1FzdPtvRBwk_9KaXC12R1OCDMoOtuFSvuG8XhphQdQ@mail.gmail.com>
+ <e9e44210-0330-4ecd-96e1-629ef519202d@denx.de>
+ <CABEcMwWhBUj4CFz8XbYYuhntRzJGZXKUoQ47QLo29XC3DNdGmw@mail.gmail.com>
+In-Reply-To: <CABEcMwWhBUj4CFz8XbYYuhntRzJGZXKUoQ47QLo29XC3DNdGmw@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Sun, 10 Dec 2023 00:04:24 +0000
+Message-ID: <CABEcMwVO+z15kLMRMxydxL8rdNi7rN4H_EEdFmKiNz5HdKv3QQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] dts: rockpro64: Disable usb regulators-always-on
+To: Marek Vasut <marex@denx.de>
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com, 
+ Jagan Teki <jagan@amarulasolutions.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,201 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, Dec 9, 2023 at 10:20=E2=80=AFPM Shantur Rathore <i@shantur.com> wro=
+te:
+>
+> On Sat, Dec 9, 2023 at 10:05=E2=80=AFPM Marek Vasut <marex@denx.de> wrote=
+:
+> >
+> > On 12/9/23 18:57, Shantur Rathore wrote:
+> > > Hi Marek,
+> > >
+> > > On Sat, Dec 9, 2023 at 5:31=E2=80=AFPM Marek Vasut <marex@denx.de> wr=
+ote:
+> > >>
+> > >> On 12/8/23 01:09, Shantur Rathore wrote:
+> > >>> USB port regulators should be controlled by phys
+> > >>
+> > >> PHYs
+> > >>
+> > >>> so we remove always-on property and let phy manage the
+> > >>> regulator.
+> > >>>
+> > >>> Typec port has misconfugred
+> > >>
+> > >> misconfigured (typo)
+> > >
+> > > Thanks will fix both typos in v3
+> > >
+> > >>
+> > >>> phy-supply in upstream and
+> > >>> now that we are removing always-on, we need to fix the
+> > >>> phy-supply until its fixed upstream.
+> > >>
+> > >> Where is the upstream Linux kernel patch ?
+> > >> Was it submitted already ?
+> > >>
+> > >
+> > > No, there is no patch yet for this in Linux upstream.
+> >
+> > Why not ? I would expect the fix should be consistent between both
+> > U-Boot and Linux .
+>
+> Yes you are right. I will be raising a patch for linux too.
 
---lcm+qk3tdl7sa+zX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 08, 2023 at 11:30:01PM +0100, Francis Laniel wrote:
-
-> Hi.
->=20
->=20
-> During 2021 summer, Sean Anderson wrote a contribution to add a new shell=
-, based
-> on LIL, to U-Boot [1, 2].
-> While one of the goals of this contribution was to address the fact actual
-> U-Boot shell, which is based on Busybox hush, is old there was a discussi=
-on
-> about adding a new shell versus updating the actual one [3, 4].
->=20
-> So, in this series, with Harald Seiler, we updated the actual U-Boot shel=
-l to
-> reflect what is currently in Busybox source code.
-> Basically, this contribution is about taking a snapshot of Busybox shell/=
-hush.c
-> file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
->=20
-> This contribution was written to be as backward-compatible as possible to=
- avoid
-> breaking the existing.
-> So, the modern hush flavor offers the same as the actual, that is to say:
-> 1. Variable expansion.
-> 2. Instruction lists (;, && and ||).
-> 3. If, then and else.
-> 4. Loops (for, while and until).
-> No new features offered by Busybox hush were implemented (e.g. functions).
->=20
-> It is possible to change the parser at runtime using the "cli" command:
-> =3D> cli print
-> old
-> =3D> cli set modern
-> =3D> cli print
-> modern
-> =3D> cli set old
-> The default parser is the old one.
-> Note that to use both parser, you would need to set both
-> CONFIG_HUSH_MODERN_PARSER and CONFIG_HUSH_OLD_PARSER.
->=20
-> In terms of testing, new unit tests were added to ut to ensure the new be=
-havior
-> is the same as the old one and it does not add regression.
-> Nonetheless, if old behavior was buggy and fixed upstream, the fix is the=
-n added
-> to U-Boot [5].
-> In sandbox, all of these tests pass smoothly:
-> =3D> printenv board
-> board=3Dsandbox
-> =3D> ut hush
-> Running 20 hush tests
-> ...
-> Failures: 0
-> =3D> cli set modern
-> =3D> ut hush
-> Running 20 hush tests
-> ...
-> Failures: 0
->=20
-> Thanks to the effort of Harald Seiler, I was successful booting a board:
-> =3D> printenv fdtfile
-> fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> =3D> cli get
-> old
-> =3D> boot
-> ...
-> root@lepotato:~#
-> root@lepotato:~# reboot
-> ...
-> =3D> cli set modern
-> =3D> cli get
-> modern
-> =3D> printenv fdtfile
-> fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> =3D> boot
-> ...
-> root@lepotato:~#
->=20
-> This contribution indeed adds a lot of code and there were concern about =
-its
-> size [6, 7].
-> With regard to the amount of code added, the cli_hush_upstream.c is 13030=
- lines
-> long but it seems a smaller subset is really used:
-> gcc -D__U_BOOT__ -E common/cli_hush_upstream.c | wc -l
-> 2870
-> Despite this, it is better to still have the whole upstream code for the =
-sake of
-> easing maintenance.
-> With regard to memory size, I conducted some experiments for version 8 of=
- this
-> series and for a subset of arm64 boards and found the worst case to be 4K=
- [8].
-> Tom Rini conducted more research on this and also found the increase to be
-> acceptable [9].
->=20
-> If you want to review it - your review will really be appreciated - here =
-are
-> some information regarding the commits:
-> * commits marked as "test:" deal with unit tests.
-> * commit "cli: Add Busybox upstream hush.c file." copies Busybox shell/hu=
-sh.c
-> into U-Boot tree, this explain why this commit contains around 12000 addi=
-tions.
-> * commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously add=
-ed file
-> to permit us to use this as new shell.
-> The really good idea of #include'ing Busybox code into a wrapper file to =
-define
-> some particular functions while minimizing modifications to upstream code=
- comes
-> from Harald Seiler.
-> * commit "cmd: Add new parser command" adds a new command which permits
-> selecting parser at runtime.
-> I am not really satisfied with the fact it calls cli_init() and cli_loop(=
-) each
-> time the parser is set, so your reviews would be welcomed.
-> * Other commits focus on enabling features we need (e.g. if).
->=20
-> Changes since:
->  v2:
->   * Added a small fix to compile sandbox with NO_SDL=3D1.
->   * Added a command to change parser at runtime.
->   * Added 2021 parser function to all run_command*().
->  v3:
->   * Various bug fixes pointed by the CI.
->   * Added upstream busybox hush commits until 6th February 2022.
->  v4:
->   * Various cleaning.
->   * Modified python test to accept failure output when the test are desig=
-ned to
->   fail.
->   * Bumped upstream busybox hush commits until 24h March 2022.
->  v5:
->   * Bumped upstream busybox hush commits until 30th January 2023.
->   * Fix how hush interprets '<' and '>', indeed we needed to escape them =
-but I
->   removed this behavior as tests are handled by test command and not hush
->   itself. This permitted to have the ut fdt to pass.
->   * Fix a problem with how exit was handled. This was reported by the ut =
-exit
->   test.
->  v6:
->   * There was no v6 and I got mixed up with version.
->  v7:
->   * Bumped upstream busybox hush commits until 9th May 2023.
->   * Renamed parser command to change parser at runtime to cli and added
->   documentation.
->   * Added better separation of patches.
->   * Removed code about __gnu_thumb1_case_si as it was merged in another s=
-eries.
->   * Various cleaning.
->  v8:
->   * Bumped upstream busybox hush commits until 25th May 2023.
->  v9:
->   * Bumped upstream busybox hush commits until 2nd October 2023.
->  v10:
->   * Fixed a build error in commit adding cli command.
->   * Add new CONFIG_HUSH_SELECTABLE to only build cli command if the two s=
-hell
->   flavors are selected.
->  v11:
->   * Renamed everything containing 2021 to modern.
->   * Fixed cmd Kconfig indentation.
->   * Set modern parser as default for majority of boards except some.
-
-Thanks, this looks good overall and I'll put things in CI soon and aim
-to get this in to -next and v2024.04.
-
---=20
-Tom
-
---lcm+qk3tdl7sa+zX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV09UwACgkQFHw5/5Y0
-tyxNQQv/eiQUDEjHaW8leVK+Ety8ATLTS3QFqU4hfOdFNQ4T2grdAnJTx3NeE8jr
-LBEpTb+uxBVE1pIY1V3JRF3tuNM9W1Iv3+qNUOCtmJULZVyb+ndnecFOKteKZqmZ
-NfoBtBI7ZLeTOaNAioalSalJpxJZci9EUkCCQvPKMLToa/cm+9ZMN7TO6FALkbak
-G9bYgj+g/0D8kn0jHLYGtpwin/CkwM3CVuPz+0RZq1w28Cx7QtA2y33c8KcTUjUR
-+Ompp1HuVONi70buOIx4dFn02HZmEpmZU8TSD2sdd1AWWMDV/ZasuG9LiirwnO6d
-9XJxh4GrWZdOE3xuYQHMB5IBlhvXluSE8rOVbRsGSgGxkuNOL8fpoqSszrgft4xa
-GnM9MOerRW//OfATFLHCTWuJROnzrx9dWYvSQ4bG9TU70VmRSP829gCdEklRhML7
-TfDtDR/8XYsEYa42gVXcEYUCuhTfLxegHt+/x7t15JtQfcI4k1BBag643WXQ9zmu
-8u42PZjY
-=UomB
------END PGP SIGNATURE-----
-
---lcm+qk3tdl7sa+zX--
+This has been published to devicetree -
+https://lore.kernel.org/linux-devicetree/20231209233536.350876-1-i@shantur.=
+com/
