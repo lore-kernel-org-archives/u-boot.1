@@ -4,91 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC169C4167B
-	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 07:41:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC77CC4167B
+	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 11:07:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6D398754B;
-	Sun, 10 Dec 2023 08:41:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B71386314;
+	Sun, 10 Dec 2023 12:07:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PEvRzyLL";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m2gdIqyA";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KD4mXq+Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F88C8755D; Sun, 10 Dec 2023 08:41:35 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7E67287076; Sun, 10 Dec 2023 12:07:42 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98AD386DEE
- for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 08:41:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00C00807E2
+ for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 12:07:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2ca0715f0faso47112721fa.0
- for <u-boot@lists.denx.de>; Sat, 09 Dec 2023 23:41:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702194092; x=1702798892; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H8S1dN+lrU90NkMK2AZcVmFPWjusY7vdXg4ir2HiQfs=;
- b=PEvRzyLLGJNq39VsD/rELtl8dFlIFSRLk/2ZsNCQzBRRFtiohRJSUcSM+BMUyCb5UX
- 4McdygywWS4azaCOcDqikNSuP5C497cUf5xx5OGGdcKmcCX5wWUkjGaJoRwXD+mH41wB
- Hj94OnpEK2154wTWOu92ht9nv2XiXBp8rkskujOPz/+naJJx49/rDVQ/1oT0bsl3nb8L
- S79XajBJOw3Q6by3mv2dWdybToeXRVJwWmyEUX/FpwqWfGRPFV3MkkVZrfhUOU14Gfy8
- V3l9JLcKSCzMY5t001VZJC4SDOwQ3LOiUQ6MlwnQ4inHjhH/tExMfhXCjDSlFCcYHn7N
- 5/iw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702194092; x=1702798892;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H8S1dN+lrU90NkMK2AZcVmFPWjusY7vdXg4ir2HiQfs=;
- b=o1xBM23hSibmD9BE5HbBbp0JtofTAgVf78cnzWA+OPwzgI2K6eDBHkU5zD3Ob6V9Hf
- FY2byuZcsHSQnMwf33G3oIGKAn9M3+85qTJO+2yakBtJY/UxuasMGSkZQ7wcVcMBSBF4
- wkV8sA7Xly0GXS2rlLW9kebky66zV/hVH+Jd2voWlDFxKI8/zunf8u3I4YIqn8+AcDkX
- Cx0bRkd3oSKUz/GR1kDg+y3JnG95+4XXHYbRlMpzUjO1hjsZOohMWMVikqX1btjlfN3A
- AS7fJBatg9sibGwwGZAFIixjs4d+Y8jgN2TqwKLDu9Rqdi7mijpH1LNLmit2F79lu6qx
- s8FQ==
-X-Gm-Message-State: AOJu0YwGHSQQLo5+OpWdHSGhe7b5FfdoWTUjXSqpNEO9yvm3ZlCLcQCZ
- N3AB8a3KRSqgB4HejOj+ssTtOHoH/upx3nzOAXOpow==
-X-Google-Smtp-Source: AGHT+IFtX3qJ5Q93d2Bzvbkyi8uuEeWjz80sCnWnIVmDnQzyC9wjXxZFlTzxb75JRGYELF/zUtn68vOTO4iMitC6UfQ=
-X-Received: by 2002:a05:651c:1145:b0:2cc:1cc1:586a with SMTP id
- h5-20020a05651c114500b002cc1cc1586amr487493ljo.19.1702194091552; Sat, 09 Dec
- 2023 23:41:31 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Sp2Cb3FKpz9snc;
+ Sun, 10 Dec 2023 12:07:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702206459;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Q/hvqYwV7CjvDi0MSIfemIvHNl35zDXetc7Yqa+NFEQ=;
+ b=m2gdIqyA6oH3e3lwYi5gWUSkknjdFnL4blUqHsDm38KZXMXNVPY2Ivd6iIw/iapkaZ9OcU
+ WJQLTdtzg6igIpBUnz2my+mo+2bhoc4iYN0UvRRaEcexcUMEnAGHjv6DcNVYr7fEf0pyYY
+ TqEwvJTUMss+j+uruYrSanRLE4aNtDyBOrlub5+2LelY99K8bAiTzBxYBZxeqp6MDwg3xF
+ l5iv6PIita4HslP9s9iLcFaJYEhBT7xvV4Bmzxqr7LcN/CWcKTAH7fV9AY9BH/C3uzi0i9
+ lK3sJ7oq+o48FCvAgBc/5cy1epo5gMQ4hJR4XBxfJ4HWWIk6c8zo32DcZV++fw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702206457;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Q/hvqYwV7CjvDi0MSIfemIvHNl35zDXetc7Yqa+NFEQ=;
+ b=KD4mXq+Z+hp/xUGh3pFZ4IsmPN6wkXIar8ai6UKzO5I/siQAMZJIvqO94Ep/trUam1nuga
+ PPsHoxNX0fJcJmzFv88YGcVbRDfajIq//KsU4FnG8DzPggzAu7vyzKWWW0TppgmzNGqPEb
+ 1O8Wa8LOVYsjLzJbGLT1FS+uzIJd/i+QpaigvaplaTlbBTmWtr4vQtxKCovJ0b5Ig0pjyA
+ 5ACX6XoPazwI/S6UU4HIg2PIw837PErenwCfh0ogqSZSPkhpy64XyesAEDYXg3m4+ATwVz
+ 7n6RsBlTfjc5e+bp+Kq2f6dQcRwhmBFZyxUJkK0cW+XUyRKx7SIBLMJlZsNIpA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2] mmc: Poll CD in case cyclic framework is enabled
+Date: Sun, 10 Dec 2023 12:07:11 +0100
+Message-ID: <20231210110721.18600-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <CAHc5_t2_f5u4Sqm2L2XGAPSgha3EM53RtjL7M25CDyKRnE5VOg@mail.gmail.com>
- <25cd1fbe-5ed2-4444-8dc6-8378273d9897@canonical.com>
- <CAHc5_t33K1J=mDteE8jTLoLpFonPSKWBgs43Ak748q1WJ4Uv8A@mail.gmail.com>
- <493b645c-1bf2-4bd9-9457-30e98aa17040@canonical.com>
- <CAHc5_t3_soy2Je+CMazMMW+1Dhx15704SMuXZwnYhToxdb8vnw@mail.gmail.com>
- <adf71fc6-9323-4c56-9f26-f12c09fa7275@canonical.com>
- <87fs11tzhy.fsf@bloch.sibelius.xs4all.nl>
- <CAC_iWjJWgTS6Os7fp4jP=u1+osBccndoR+CBgFUt2nb04RWwWA@mail.gmail.com>
- <CAPnjgZ04C=_MoCjKBYUdmBXyQn-zviAMQJxMHQAfj1MwvqOMzw@mail.gmail.com>
- <CAHc5_t2mQGQ4WLSXjh105QXnxMTeF3=x69N28dDiSdRMBHq3kg@mail.gmail.com>
- <1e2bad87-3372-452d-ae27-01c100378ecf@canonical.com>
- <CAPnjgZ05pDOATqw9wha-pOZsgjCF-4dgLL7-a4r-JPUjtMospg@mail.gmail.com>
- <671228f5-8a11-4be9-b8fe-1331232e7498@canonical.com>
- <CAPnjgZ1dghg2T8D8fSpHUgstgipwv+jRQssimpAGqTaPjvvQTA@mail.gmail.com>
- <638c9f48-693c-466e-a510-6004896a466c@canonical.com>
- <CAPnjgZ2=zCJbmA4CAjgRFUhGfojq6cOJMUeC4jB3Dm+u8UNG+A@mail.gmail.com>
- <c1ff4723-18f6-4fc4-bbba-8cc7490ca480@canonical.com>
- <CAPnjgZ3+dEFYazXKaGMfrLKAS5aKBhN-+HnH_3xy3qWaLNCtzg@mail.gmail.com>
- <CAHc5_t30UFOdpqDVtrC3kCKayMTF3oRovkxA1wrVkr+beKpoyw@mail.gmail.com>
-In-Reply-To: <CAHc5_t30UFOdpqDVtrC3kCKayMTF3oRovkxA1wrVkr+beKpoyw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 10 Dec 2023 09:40:55 +0200
-Message-ID: <CAC_iWj+R4OmjHn8THLv_uivrhPFSGMLk+JLnYYB19r4PBRGEww@mail.gmail.com>
-Subject: Re: bootstd: Support for distro specific EFI folders
-To: Shantur Rathore <i@shantur.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, 
- u-boot@lists.denx.de, trini@konsulko.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 2a0f60a008b06355837
+X-MBO-RS-META: dttpweh3tapju83sjd896mbh7t15wm51
+X-Rspamd-Queue-Id: 4Sp2Cb3FKpz9snc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,37 +85,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur
+In case the cyclic framework is enabled, poll the card detect of already
+initialized cards and deinitialize them in case they are removed. Since
+the card initialization is a longer process and card initialization is
+done on first access to an uninitialized card anyway, avoid initializing
+newly detected uninitialized cards in the cyclic callback.
 
-[...]
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Simon Glass <sjg@chromium.org>
+---
+V2: Move the cyclic registration/unregistration into mmc init/deinit
+---
+ drivers/mmc/mmc.c | 30 ++++++++++++++++++++++++++++++
+ include/mmc.h     |  5 +++++
+ 2 files changed, 35 insertions(+)
 
-> >
-> > >
-> > > >
-> > > > Also the information is very limited, e.g. it does not show the Ubuntu
-> > > > version, kernel version, etc.
-> > >
-> > > The length of the labels is only limited by available storage. It is the
-> > > OS'es choice to opt for a such a short label.
-> >
-> > Yes, really I am looking for metadata that includes more detail at
-> > different leaves, not just a label.
-> >
->
-> The job of these EFI is to load grub bootloader and rest all details
-> (kernel version,
-> OS, etc) is supposed to be handled by Grub.
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index eb5010c1465..2ff297c2970 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -2985,6 +2985,20 @@ static int mmc_complete_init(struct mmc *mmc)
+ 	return err;
+ }
+ 
++static void mmc_cyclic_cd_poll(void *ctx)
++{
++	struct mmc *m = ctx;
++
++	if (!m->has_init)
++		return;
++
++	if (mmc_getcd(m))
++		return;
++
++	mmc_deinit(m);
++	m->has_init = 0;
++}
++
+ int mmc_init(struct mmc *mmc)
+ {
+ 	int err = 0;
+@@ -3007,6 +3021,17 @@ int mmc_init(struct mmc *mmc)
+ 	if (err)
+ 		pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+ 
++	if (CONFIG_IS_ENABLED(CYCLIC) && !mmc->cyclic) {
++		/* Register cyclic function for card detect polling */
++		mmc->cyclic = cyclic_register(mmc_cyclic_cd_poll, 100 * 1000,
++					      mmc->cfg->name, mmc);
++		if (!mmc->cyclic) {
++			printf("Failed to register %s CD poll function\n",
++				mmc->cfg->name);
++			err = -EINVAL;
++		}
++	}
++
+ 	return err;
+ }
+ 
+@@ -3014,6 +3039,11 @@ int mmc_deinit(struct mmc *mmc)
+ {
+ 	u32 caps_filtered;
+ 
++	if (mmc->cyclic) {
++		cyclic_unregister(mmc->cyclic);
++		mmc->cyclic = NULL;
++	}
++
+ 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
+ 	    !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+diff --git a/include/mmc.h b/include/mmc.h
+index 1022db3ffa7..4256d5567ef 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -14,6 +14,7 @@
+ #include <linux/sizes.h>
+ #include <linux/compiler.h>
+ #include <linux/dma-direction.h>
++#include <cyclic.h>
+ #include <part.h>
+ 
+ struct bd_info;
+@@ -739,6 +740,10 @@ struct mmc {
+ 	u8 hs400_tuning;
+ 
+ 	enum bus_mode user_speed_mode; /* input speed mode from user */
++
++#if CONFIG_IS_ENABLED(CYCLIC)
++	struct cyclic_info	*cyclic;
++#endif
+ };
+ 
+ #if CONFIG_IS_ENABLED(DM_MMC)
+-- 
+2.42.0
 
-Not necessarily. I'd prefer skipping GRUB for embedded boards that
-don't boot distros. You can load the kernel directly and u-boot allows
-to configure that (see eficonfig and efidebug). WE just need to make
-sure that a bootflow with grub works as intended
-
-Cheers
-/Ilias
->
-> [0] - https://uefi.org/sites/default/files/resources/UEFI_Spec_2_10_Aug29.pdf
-> [1] - https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2471
->
-> Kind Regards,
-> Shantur
