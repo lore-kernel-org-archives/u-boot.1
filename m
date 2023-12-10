@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC77CC4167B
-	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 11:07:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE948C4167B
+	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 15:02:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B71386314;
-	Sun, 10 Dec 2023 12:07:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0CD1287076;
+	Sun, 10 Dec 2023 16:02:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m2gdIqyA";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KD4mXq+Z";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i1ltc90D";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LfOSBm99";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E67287076; Sun, 10 Dec 2023 12:07:42 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id E48A987232; Sun, 10 Dec 2023 16:02:37 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00C00807E2
- for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 12:07:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA9E187045
+ for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 16:02:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Sp2Cb3FKpz9snc;
- Sun, 10 Dec 2023 12:07:39 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Sp7Qg27fLz9sZq;
+ Sun, 10 Dec 2023 16:02:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702206459;
+ s=mail20150812; t=1702220555;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Q/hvqYwV7CjvDi0MSIfemIvHNl35zDXetc7Yqa+NFEQ=;
- b=m2gdIqyA6oH3e3lwYi5gWUSkknjdFnL4blUqHsDm38KZXMXNVPY2Ivd6iIw/iapkaZ9OcU
- WJQLTdtzg6igIpBUnz2my+mo+2bhoc4iYN0UvRRaEcexcUMEnAGHjv6DcNVYr7fEf0pyYY
- TqEwvJTUMss+j+uruYrSanRLE4aNtDyBOrlub5+2LelY99K8bAiTzBxYBZxeqp6MDwg3xF
- l5iv6PIita4HslP9s9iLcFaJYEhBT7xvV4Bmzxqr7LcN/CWcKTAH7fV9AY9BH/C3uzi0i9
- lK3sJ7oq+o48FCvAgBc/5cy1epo5gMQ4hJR4XBxfJ4HWWIk6c8zo32DcZV++fw==
+ bh=EOG9Eb8AB8q8PwBd1k2vu8hvnQ5kzB4rca3rP22Ou5E=;
+ b=i1ltc90DskdRgRkKzoH/SgVil7PuOu/M7ycfPJpi2Mr68tRM2VWtnxtnWWuyRPmaOBhRqk
+ l8BPoGg/3YY1aQRBxty+No12JIKzIdYJNAsU0pUWHjwjKdPrC93FcHJWezvb05JqXFO9vQ
+ isCtTj3ccvSAOsb5coSJ98NBItEs3XF87CZd0JUwiU1GDUgGNbtQngbszBsaQO/WFRDOlI
+ O3lpW4BK0wKpZz2lXwSWc0+hSFSSPdD3tI92LU7Zxo9+R7axEyICmNzej2NyXJK5ZuXt97
+ sxddY8wiqAc2bOyHocc7nm7bQ0xntJ9L2yYYHyKaX6vmzE1JxQgqhYynDBIGYA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702206457;
+ s=mail20150812; t=1702220553;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Q/hvqYwV7CjvDi0MSIfemIvHNl35zDXetc7Yqa+NFEQ=;
- b=KD4mXq+Z+hp/xUGh3pFZ4IsmPN6wkXIar8ai6UKzO5I/siQAMZJIvqO94Ep/trUam1nuga
- PPsHoxNX0fJcJmzFv88YGcVbRDfajIq//KsU4FnG8DzPggzAu7vyzKWWW0TppgmzNGqPEb
- 1O8Wa8LOVYsjLzJbGLT1FS+uzIJd/i+QpaigvaplaTlbBTmWtr4vQtxKCovJ0b5Ig0pjyA
- 5ACX6XoPazwI/S6UU4HIg2PIw837PErenwCfh0ogqSZSPkhpy64XyesAEDYXg3m4+ATwVz
- 7n6RsBlTfjc5e+bp+Kq2f6dQcRwhmBFZyxUJkK0cW+XUyRKx7SIBLMJlZsNIpA==
+ bh=EOG9Eb8AB8q8PwBd1k2vu8hvnQ5kzB4rca3rP22Ou5E=;
+ b=LfOSBm99nQbKtED7Z8JVcBa8s3EY634GAF8+oJl1XrTbKaIli8fIg4Jor7yyc7KMeMzvlR
+ wuBE5Jh+TONsDGjp/GQVehqLnfNwV37E1yz+DrnftD0Q+fX1MdIg+4tyOA6Vyz80cYt3NY
+ jUWO/Md7ObEILm1P2EnvW+o9vJO4fOfs5ilnT9UoJLfvf3JpZSnUbpgrOv1iGdUNZeRhs0
+ nAmxRtAuYpOUDn9pdwdJUagb17h07lSHa9nrzwIHACz4ii/vxVbsqQM/EyQ9R+Mymwg2eB
+ KzvTusO+kxaXudBRvkjiA0u1epIfVUI+GzhZ69RkT+RWgnhR+oL1wpLeNWlDbA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2] mmc: Poll CD in case cyclic framework is enabled
-Date: Sun, 10 Dec 2023 12:07:11 +0100
-Message-ID: <20231210110721.18600-1-marek.vasut+renesas@mailbox.org>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] test: bdinfo: Handle systems without getopt
+Date: Sun, 10 Dec 2023 16:01:56 +0100
+Message-ID: <20231210150213.124370-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2a0f60a008b06355837
-X-MBO-RS-META: dttpweh3tapju83sjd896mbh7t15wm51
-X-Rspamd-Queue-Id: 4Sp2Cb3FKpz9snc
+X-MBO-RS-ID: 88d9073237e46c70d30
+X-MBO-RS-META: 6dcdayuef5sixshjb7gt3iyo13qzghkq
+X-Rspamd-Queue-Id: 4Sp7Qg27fLz9sZq
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,102 +84,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case the cyclic framework is enabled, poll the card detect of already
-initialized cards and deinitialize them in case they are removed. Since
-the card initialization is a longer process and card initialization is
-done on first access to an uninitialized card anyway, avoid initializing
-newly detected uninitialized cards in the cyclic callback.
+Systems without getopt support fall back to plain full bdinfo print,
+handle such a case, which occurs e.g. with sandbox_flattree_defconfig .
 
+Fixes: 8827a3871452 ("test: bdinfo: Test bdinfo -h")
+Fixes: 2696f3ab8101 ("test: bdinfo: Test bdinfo -m")
+Fixes: 3ff2d796a6f2 ("test: bdinfo: Test bdinfo -e")
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 ---
-V2: Move the cyclic registration/unregistration into mmc init/deinit
----
- drivers/mmc/mmc.c | 30 ++++++++++++++++++++++++++++++
- include/mmc.h     |  5 +++++
- 2 files changed, 35 insertions(+)
+ test/cmd/bdinfo.c | 26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index eb5010c1465..2ff297c2970 100644
---- a/drivers/mmc/mmc.c
-+++ b/drivers/mmc/mmc.c
-@@ -2985,6 +2985,20 @@ static int mmc_complete_init(struct mmc *mmc)
- 	return err;
- }
- 
-+static void mmc_cyclic_cd_poll(void *ctx)
-+{
-+	struct mmc *m = ctx;
-+
-+	if (!m->has_init)
-+		return;
-+
-+	if (mmc_getcd(m))
-+		return;
-+
-+	mmc_deinit(m);
-+	m->has_init = 0;
-+}
-+
- int mmc_init(struct mmc *mmc)
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 9744bd16df9..053f2224919 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -237,12 +237,17 @@ static int bdinfo_test_help(struct unit_test_state *uts)
  {
- 	int err = 0;
-@@ -3007,6 +3021,17 @@ int mmc_init(struct mmc *mmc)
- 	if (err)
- 		pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
- 
-+	if (CONFIG_IS_ENABLED(CYCLIC) && !mmc->cyclic) {
-+		/* Register cyclic function for card detect polling */
-+		mmc->cyclic = cyclic_register(mmc_cyclic_cd_poll, 100 * 1000,
-+					      mmc->cfg->name, mmc);
-+		if (!mmc->cyclic) {
-+			printf("Failed to register %s CD poll function\n",
-+				mmc->cfg->name);
-+			err = -EINVAL;
-+		}
+ 	/* Test BDINFO unknown option help text print */
+ 	ut_assertok(console_record_reset_enable());
+-	ut_asserteq(1, run_commandf("bdinfo -h"));
+-	ut_assert_nextlinen("bdinfo: invalid option -- h");
+-	ut_assert_nextlinen("bdinfo - print Board Info structure");
+-	ut_assert_nextline_empty();
+-	ut_assert_nextlinen("Usage:");
+-	ut_assert_nextlinen("bdinfo");
++	if (!CONFIG_IS_ENABLED(GETOPT)) {
++		ut_asserteq(0, run_commandf("bdinfo -h"));
++		ut_assertok(bdinfo_test_all(uts));
++	} else {
++		ut_asserteq(1, run_commandf("bdinfo -h"));
++		ut_assert_nextlinen("bdinfo: invalid option -- h");
++		ut_assert_nextlinen("bdinfo - print Board Info structure");
++		ut_assert_nextline_empty();
++		ut_assert_nextlinen("Usage:");
++		ut_assert_nextlinen("bdinfo");
 +	}
-+
- 	return err;
- }
+ 	ut_assertok(ut_check_console_end(uts));
  
-@@ -3014,6 +3039,11 @@ int mmc_deinit(struct mmc *mmc)
- {
- 	u32 caps_filtered;
+ 	return 0;
+@@ -255,7 +260,10 @@ static int bdinfo_test_memory(struct unit_test_state *uts)
+ 	/* Test BDINFO memory layout only print */
+ 	ut_assertok(console_record_reset_enable());
+ 	ut_assertok(run_commandf("bdinfo -m"));
+-	ut_assertok(bdinfo_check_mem(uts));
++	if (!CONFIG_IS_ENABLED(GETOPT))
++		ut_assertok(bdinfo_test_all(uts));
++	else
++		ut_assertok(bdinfo_check_mem(uts));
+ 	ut_assertok(ut_check_console_end(uts));
  
-+	if (mmc->cyclic) {
-+		cyclic_unregister(mmc->cyclic);
-+		mmc->cyclic = NULL;
-+	}
-+
- 	if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
- 	    !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
- 	    !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
-diff --git a/include/mmc.h b/include/mmc.h
-index 1022db3ffa7..4256d5567ef 100644
---- a/include/mmc.h
-+++ b/include/mmc.h
-@@ -14,6 +14,7 @@
- #include <linux/sizes.h>
- #include <linux/compiler.h>
- #include <linux/dma-direction.h>
-+#include <cyclic.h>
- #include <part.h>
+ 	return 0;
+@@ -268,7 +276,9 @@ static int bdinfo_test_eth(struct unit_test_state *uts)
+ 	/* Test BDINFO ethernet settings only print */
+ 	ut_assertok(console_record_reset_enable());
+ 	ut_assertok(run_commandf("bdinfo -e"));
+-	if (IS_ENABLED(CONFIG_CMD_NET))
++	if (!CONFIG_IS_ENABLED(GETOPT))
++		ut_assertok(bdinfo_test_all(uts));
++	else if (IS_ENABLED(CONFIG_CMD_NET))
+ 		ut_assertok(test_eth(uts));
+ 	ut_assertok(ut_check_console_end(uts));
  
- struct bd_info;
-@@ -739,6 +740,10 @@ struct mmc {
- 	u8 hs400_tuning;
- 
- 	enum bus_mode user_speed_mode; /* input speed mode from user */
-+
-+#if CONFIG_IS_ENABLED(CYCLIC)
-+	struct cyclic_info	*cyclic;
-+#endif
- };
- 
- #if CONFIG_IS_ENABLED(DM_MMC)
 -- 
 2.42.0
 
