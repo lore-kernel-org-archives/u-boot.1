@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2299C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 08:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D1AC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BFAA87478;
-	Mon, 11 Dec 2023 09:34:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id C49D287650;
+	Mon, 11 Dec 2023 10:00:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zonFetnU";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z9sErS4b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7396E87441; Mon, 11 Dec 2023 09:33:59 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BE2688766D; Mon, 11 Dec 2023 10:00:43 +0100 (CET)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7708E8753A
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:33:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E814875FE
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:00:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=07096e4b69=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BB7MqYP006545; Mon, 11 Dec 2023 09:33:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=7Cl0vu+Y7WisQ8XSbrec3rRw5dlp8dknqEVxojueRMg=; b=zo
- nFetnUV8KsDpCOK5vERWPxA18j9m0Teik2H5hgXnTSlDyVuzdZLWk3pyWJUzuDmt
- kxJL2NUR5pJsE5VYF0yhX2Wqijwlo/sW+DK2O4GuYxNrkDu2xTAbo4DD/V2bLl70
- JUZA//vkntImNHeyXgoFEs36SoCr7PdsrXOX+/WpdaEYv7RmBPMKhr3PleH5oMaE
- seDZSKpGxqCQ2qu4OXpuXtVwtEaaHvDnDjb25YhjG2s0LOBx1wRm1nnPGIs5iAFn
- DczMZuI8OxmmrICVKhwmIz50Tuu8R0TZHTKPT1hAOLZfd6N5wVS6/uqm13u3/Sbb
- 9+EQd1gPEFXqeG4OwqDw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uw2p4knvw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Dec 2023 09:33:54 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CD46A10005C;
- Mon, 11 Dec 2023 09:33:53 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BEB2D21B51A;
- Mon, 11 Dec 2023 09:33:53 +0100 (CET)
-Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Dec
- 2023 09:33:53 +0100
-Message-ID: <e2e7a5fa-01a6-49ce-a061-725479dd43c3@foss.st.com>
-Date: Mon, 11 Dec 2023 09:33:52 +0100
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-5c629a9fe79so2195362a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:00:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1702285238; x=1702890038;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BY2CdbPPJsTHC24zbkM3RkJ/Y5IF7bCirtD5UxLv+VI=;
+ b=Z9sErS4bNVjrrcAyI6jS6gXNhzX9iNGf8WR4N4oVQRWU6fcOaQJ2BbOpej501Pku4k
+ C902gtNdfxNmzLx0eiF/bVmoCtHkwizhn1GeAv8AJdup1vXq0FMKOOOxOOD4HEYF45YZ
+ qHXFzGESoOrfnqjyUqUzmdWF/LYTxA6wMi6AQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702285238; x=1702890038;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BY2CdbPPJsTHC24zbkM3RkJ/Y5IF7bCirtD5UxLv+VI=;
+ b=jsqKfSOq/WwmGxS5sFjigxnEYhPyCTXPb43br+9ARzR1v1xf2W7hiQCoDek3jl+Ab9
+ oNLdtT/t4UcMeIVOAH3nq1z5HzQV+Mn9MethsPZVSMTP0L0xxUgWG+sYp1VqLADKmQ6i
+ +9k8ivwaWE9k1WBxRdmYVqoAPSeZeSD+2NmhUKfpnBMGn+SNkX9IHWUQJb6SLs6oHXC3
+ KfqBx85N5ZCR6osNLoVo8ymTfxT4TO3qk7/X1EIM4z+3+W20cPi+NYU24apvPMPBe6pA
+ SN/th79Ir+b96yq6L5QTCtaIbmqG1jHe1ssTCtWx6bjQW0CwRiHVU3ojlhXYuDHNG+M2
+ rHHg==
+X-Gm-Message-State: AOJu0YxrF5ZpF09iraWO+DKhDwIbo4VgOP/ELJd5BfZZOZjP6Xy1oDX0
+ 4WvfY4CM+v9p8EFt2jpPyRrQYwChPOxZDKTn8GKJbQ==
+X-Google-Smtp-Source: AGHT+IF2Tbti2TCmmo08X7uJQDum0HWHJmWlI9tW2dG5Kbif/6sirevCL9pCPIk2RMjKrWrNNoFEFg==
+X-Received: by 2002:a05:6a21:3298:b0:18f:97c:926b with SMTP id
+ yt24-20020a056a21329800b0018f097c926bmr1833027pzb.80.1702285238367; 
+ Mon, 11 Dec 2023 01:00:38 -0800 (PST)
+Received: from localhost.localdomain ([49.205.242.204])
+ by smtp.gmail.com with ESMTPSA id
+ e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.00.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Dec 2023 01:00:37 -0800 (PST)
+From: Jagan Teki <jagan@amarulasolutions.com>
+To: Anatolij Gustschin <agust@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Stuebner <heiko@sntech.de>
+Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH 00/17] video: dw_hdmi: Support Vendor PHY
+Date: Mon, 11 Dec 2023 14:29:22 +0530
+Message-Id: <20231211085939.5478-1-jagan@amarulasolutions.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RESEND RFC PATCH v2 4/5] ARM: dts: stm32: support display on
- stm32f469-disco board
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20231130144033.1850298-1-dario.binacchi@amarulasolutions.com>
- <20231130144033.1850298-5-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231130144033.1850298-5-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.54]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-11_02,2023-12-07_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,149 +91,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Unlike RK3399, Sunxi/Meson DW HDMI the new Rockchip SoC Rk3328 would
+support external vendor PHY with DW HDMI chip.
 
+Support this vendor PHY by adding new platform PHY ops via DW HDMI
+driver and call the respective generic phy from platform driver code.
 
-On 11/30/23 15:40, Dario Binacchi wrote:
-> Add support to Orise Tech OTM8009A display on stm32f469-disco board.
-> 
-> It was necessary to retrieve the framebuffer address from the device tree
-> because the address returned by the video-uclass driver pointed to a memory
-> area that was not usable.
-> 
-> Furthermore, unlike Linux, the DSI driver requires the LTDC clock to be
-> properly probed. Hence, the changes made to the DSI node in
-> stm32f469-disco-u-boot.dtsi.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Add DRAM_SIZE macro.
-> - Fix frame buffer allocation function so that it is backward compatible
->   with boards other than the one it was introduced for (i. e. stm32f469-disco).
->   Tested on stm32f469-disco and stm32mp157f-dk2 boards.
-> 
->  arch/arm/dts/stm32f469-disco-u-boot.dtsi |  4 +++
->  configs/stm32f469-discovery_defconfig    | 13 ++++++++++
->  drivers/video/stm32/stm32_ltdc.c         | 31 ++++++++++++++++++++++++
->  3 files changed, 48 insertions(+)
-> 
-> diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> index 8e781c5a7b23..47ba9fa4a783 100644
-> --- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> @@ -92,7 +92,9 @@
->  
->  &dsi {
->  	clocks = <&rcc 0 STM32F4_APB2_CLOCK(DSI)>,
-> +		 <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>,
->  		 <&clk_hse>;
-> +	clock-names = "pclk", "px_clk", "ref";
->  };
->  
->  &gpioa {
-> @@ -140,6 +142,8 @@
->  };
->  
->  &ltdc {
-> +	bootph-all;
-> +
->  	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
->  };
->  
-> diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
-> index 21c5498466cd..85e795e83e7d 100644
-> --- a/configs/stm32f469-discovery_defconfig
-> +++ b/configs/stm32f469-discovery_defconfig
-> @@ -21,6 +21,7 @@ CONFIG_CMD_GPT=y
->  # CONFIG_RANDOM_UUID is not set
->  CONFIG_CMD_MMC=y
->  # CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_BMP=y
->  CONFIG_CMD_CACHE=y
->  CONFIG_CMD_TIMER=y
->  # CONFIG_ISO_PARTITION is not set
-> @@ -40,3 +41,15 @@ CONFIG_SPI_FLASH_STMICRO=y
->  CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
-> +CONFIG_VIDEO=y
-> +CONFIG_BACKLIGHT_GPIO=y
-> +CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
-> +CONFIG_VIDEO_STM32=y
-> +CONFIG_VIDEO_STM32_DSI=y
-> +CONFIG_VIDEO_STM32_MAX_XRES=480
-> +CONFIG_VIDEO_STM32_MAX_YRES=800
-> +CONFIG_BMP_16BPP=y
-> +CONFIG_BMP_24BPP=y
-> +CONFIG_BMP_32BPP=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
-> index 6fd90e33919d..9054db1d78b3 100644
-> --- a/drivers/video/stm32/stm32_ltdc.c
-> +++ b/drivers/video/stm32/stm32_ltdc.c
-> @@ -495,6 +495,33 @@ static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
->  	setbits_le32(priv->regs + LTDC_L1CR, LXCR_LEN);
->  }
->  
-> +#if IS_ENABLED(CONFIG_TARGET_STM32F469_DISCOVERY)
-> +static int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +#define SDRAM_SIZE 0x1000000 /* 128Mbit = 16 Mbyte = 0x1000000 */
+This series tested in RK3328 with 1080p (1920x1080) resolution.
 
-Hi Dario,
+Patch 0001/0005: Support Vendor PHY
+Patch 0006/0008: VOP extension for win, dsp offsets
+Patch 0009/0010: RK3328 VOP, HDMI clocks
+Patch 0011:	 Rockchip Inno HDMI PHY
+Patch 0012:	 RK3328 HDMI driver
+Patch 0013:	 RK3328 VOP driver
+Patch 0014/0017: Enable HDMI Out for RK3328
 
-Sorry for the delay
+Importent:
+One pontential issues is that Linux HDMI out on RK3328 has effected by
+this patchset as I wouldn't find any relation or clue.
 
-The SDRAM_SIZE can be retrieve using gd->ram_size, i propose to replace by this :
-	u32 sdram_size = gd->ram_size;
+[    0.752016] Loading compiled-in X.509 certificates
+[    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
+[    0.788391] inno-hdmi-phy ff430000.phy: inno_hdmi_phy_rk3328_clk_recalc_rate rate 148500000 vco 148500000
+[    0.798353] rockchip-drm display-subsystem: bound ff370000.vop (ops vop_component_ops)
+[    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not found, using dummy regulator
+[    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed out, status: 0x00004b
+[    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not found, using dummy regulator
+[    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed out, status: 0x00004b
+[    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX controller v2.11a with HDCP (inno_dw_hdmi_phy2)
+[    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare HDMI I2C bus driver
+[    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi (ops dw_hdmi_rockchip_ops)
+[    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for display-subsystem on minor 0
 
+The only way I can use Linux HDMI by disabling IOMMU or support
+disable-iommu link for RK3328 via DT [1].
 
-> +	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +	phys_addr_t cpu;
-> +	dma_addr_t bus;
-> +	u64 dma_size;
-> +	int ret;
-> +
-> +	ret = dev_get_dma_range(dev, &cpu, &bus, &dma_size);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get dma address\n");
-> +		return ret;
-> +	}
-> +
-> +	uc_plat->base = bus + SDRAM_SIZE - ALIGN(uc_plat->size, uc_plat->align);
-> +	return 0;
-> +}
-> +#else
-> +static inline int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +	/* Delegate framebuffer allocation to video-uclass */
-> +	return 0;
-> +}
-> +#endif
-> +
->  static int stm32_ltdc_probe(struct udevice *dev)
->  {
->  	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> @@ -605,6 +632,10 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  	priv->crop_h = timings.vactive.typ;
->  	priv->alpha = 0xFF;
->  
-> +	ret = stm32_ltdc_alloc_fb(dev);
-> +	if (ret)
-> +		return ret;
-> +
->  	dev_dbg(dev, "%dx%d %dbpp frame buffer at 0x%lx\n",
->  		timings.hactive.typ, timings.vactive.typ,
->  		VNBITS(priv->l2bpp), uc_plat->base);
+[1] https://www.spinics.net/lists/devicetree/msg605124.html
 
-Can you split this patch in 2 parts:
-  _ DTS
-  _ LTDC driver update
+Any inputs?
+Jagan.
 
-Thanks
-Patrice
+Jagan Teki (17):
+  video: rockchip: hdmi: Detect hpd after controller init
+  video: dw_hdmi: Add Vendor PHY handling
+  video: dw_hdmi: Extend the HPD detection
+  video: dw_hdmi: Add read_hpd hook
+  video: dw_hdmi: Add setup_hpd hook
+  video: rockchip: vop: Simplify rkvop_enable
+  video: rockchip: vop: Add win offset support
+  video: rockchip: vop: Add dsp offset support
+  clk: rockchip: rk3328: Add VOP clk support
+  clk: rk3328: Add get hdmiphy clock
+  phy: rockchip: Add Rockchip INNO HDMI PHY driver
+  video: rockchip: Add rk3328 hdmi support
+  video: rockchip: Add rk3328 vop support
+  ARM: dts: rk3328: Enable VOP for bootph-all
+  rockchip: Enable preconsole for rk3328
+  configs: evb-rk3328: Enable vidconsole for rk3328
+  configs: Enable HDMI Out for ROC-RK3328-CC
 
+ arch/arm/dts/rk3328-u-boot.dtsi               |   4 +
+ .../include/asm/arch-rockchip/cru_rk3328.h    |  34 +
+ arch/arm/mach-rockchip/Kconfig                |   1 +
+ common/Kconfig                                |   2 +-
+ configs/roc-cc-rk3328_defconfig               |   5 +
+ drivers/clk/rockchip/clk_rk3328.c             | 100 +-
+ drivers/phy/rockchip/Kconfig                  |   7 +
+ drivers/phy/rockchip/Makefile                 |   1 +
+ drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 885 ++++++++++++++++++
+ drivers/video/dw_hdmi.c                       |  48 +-
+ drivers/video/meson/meson_dw_hdmi.c           |  11 +-
+ drivers/video/rockchip/Makefile               |   2 +
+ drivers/video/rockchip/rk3328_hdmi.c          | 131 +++
+ drivers/video/rockchip/rk3328_vop.c           |  66 ++
+ drivers/video/rockchip/rk3399_hdmi.c          |   8 +-
+ drivers/video/rockchip/rk_hdmi.c              |  12 +-
+ drivers/video/rockchip/rk_hdmi.h              |   3 +
+ drivers/video/rockchip/rk_vop.c               |  44 +-
+ drivers/video/rockchip/rk_vop.h               |   4 +
+ drivers/video/sunxi/sunxi_dw_hdmi.c           |  19 +-
+ include/configs/evb_rk3328.h                  |   5 +
+ include/configs/rk3328_common.h               |   1 +
+ include/dw_hdmi.h                             |  17 +-
+ 23 files changed, 1371 insertions(+), 39 deletions(-)
+ create mode 100644 drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
+ create mode 100644 drivers/video/rockchip/rk3328_hdmi.c
+ create mode 100644 drivers/video/rockchip/rk3328_vop.c
+
+-- 
+2.25.1
 
