@@ -4,58 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85258C10F05
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 18:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89AFFC10F05
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 18:27:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADD34876E9;
-	Mon, 11 Dec 2023 19:23:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0E3C3876E9;
+	Mon, 11 Dec 2023 19:27:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lWxn2I7G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t/vQRfAG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2798E87740; Mon, 11 Dec 2023 19:23:03 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 9F5E98779C; Mon, 11 Dec 2023 19:27:16 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73E1287635
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 19:23:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A1FA87635
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 19:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-db5e692d4e0so4976470276.2
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:23:00 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-db99bad7745so4360162276.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:27:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702318979; x=1702923779; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lrfRijXHoVqz3GHwZegtpBAREf0A1yn+oZ68753YrF0=;
- b=lWxn2I7GBvalqKRkjlnp4x+4KIq37ZNrwREIOQkpCL32KccvFdg/f51byR6xmM0Jaq
- Jm33wDGXgVADXirzJIhRhx3iu9lrWlSRIamwGE4/TRDD205W9hD4IQj4MwW68vTGqa7t
- PImkR7jiOMF0Jlrwilo5VQG66+arkWF+noZ+E=
+ d=konsulko.com; s=google; t=1702319233; x=1702924033; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=UEubL1JE/3kxL0SPsmfyQl3MhvC+XFaiaFceZsg2Og0=;
+ b=t/vQRfAGNa5Nji5Ko0EwzX/A4qh+IAnYhdAexBBgPvFnFMVEqtK0ixz/WFRJTO2Is3
+ 6ISBJYMvA4GRX3AdMklZ0EXB/meD79+cM5aA59yolsBi0laS0ZJd9r7YmDKr4w1EzPOM
+ /fzLZ2qQOi4PrvoGbCQSlCU5hwZLWLhMA9ZuY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702318979; x=1702923779;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lrfRijXHoVqz3GHwZegtpBAREf0A1yn+oZ68753YrF0=;
- b=OC3du1gypnpUTjbiZ5QP5YGgL2BH3p7N4kVoyK6v+x+TzqR7/lMh2sx2NaFhAdMu29
- YfzRbQ30ycGyZjeVAX0QgwV34zFe6U4lpF/XjboWs6GYJoPbarVPfkp/2MRuwKVZbKMN
- UcpfCUC45EWKFsfYUK2NAYyxpzAtPcs6jjUYy43536oc3XrPRO+ihlFRL1M584DF1UYc
- T776PyOYl2d7++Ti7VUql7fNiTKp0bGOB35djojJ80a/yjbLbnaEzu1yBr0aWP+Caj+d
- 4E1823egt4LlNudzFVTGz8qj+F+pW7RaUZ1fRWtDK4j/RhUX3qo8mmLU8eG1jShi/Y0F
- mDJw==
-X-Gm-Message-State: AOJu0YyxZ+wDo4XKHX0NgVzhxW4f6wxkMp6ydXCqKgsePQ8BM9iXzhQa
- WaBszt77t7jDt9z9WYYNszx74MbqJVJ75ZKxkuo2nw==
-X-Google-Smtp-Source: AGHT+IF2mnQPwtZ+5eAGSVSy0Ri2Ka2K31Ffzf19TPwbsZw2yqf5yTW0GDFeiLMtc2dcEFr1pYyS8sU7JvjWKKBLaFo=
-X-Received: by 2002:a25:844f:0:b0:db7:dad0:60e1 with SMTP id
- r15-20020a25844f000000b00db7dad060e1mr3182011ybm.110.1702318977451; Mon, 11
- Dec 2023 10:22:57 -0800 (PST)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1702319233; x=1702924033;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UEubL1JE/3kxL0SPsmfyQl3MhvC+XFaiaFceZsg2Og0=;
+ b=VV2/wAgasyGguNII9eHNhWLM1Qx5e90sSWg11IAQPu5y7N03OLDYO38HzKaV1DHKrd
+ yRqASLqJXlMjs7+1XdXgqdVbQqb217ll9+ZtjsW3qd+u+wrTy810In00EVKacKF4AMqA
+ 6pl7NeOQaYsaIvAe8fZaKTj5QOnf98iMmLMd0y0FBVwbbsr3oSqm11jwZ/nH9Vzv0hrd
+ 0lMA3lu876d3ExA465EXKRCIZHJPu7QsxH1f1C8O8vwGSqrEI13YUqCC8Qetmnk+Lwc9
+ +Lsf1uL+2OWFhZGhXdA0G8olTCUQOFuFSdNocSUnx/a0ujHzVOl8MUXPDfpw94jy0Of0
+ zQUw==
+X-Gm-Message-State: AOJu0YwVGslONmy1G3SWwy1/0xW8WA41kyWgMM84JWY7zjZlZvnTCQRW
+ 3U5NvoB+0F/S6fUIhEV3+Kg0uA==
+X-Google-Smtp-Source: AGHT+IHLKkTe8+el3Q4C/JRuVWkMyxtmWRKSXz9rAsytA/x4Wd0H9yjbB40N1lq1US+7BDWyvjq3VQ==
+X-Received: by 2002:a25:ab11:0:b0:db7:dacf:2f1a with SMTP id
+ u17-20020a25ab11000000b00db7dacf2f1amr3598338ybi.97.1702319233295; 
+ Mon, 11 Dec 2023 10:27:13 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-fa42-ae3b-3aac-d543.res6.spectrum.com.
+ [2603:6081:7b00:6400:fa42:ae3b:3aac:d543])
+ by smtp.gmail.com with ESMTPSA id
+ w3-20020a5b05c3000000b00d72176bdc5csm2641184ybp.40.2023.12.11.10.27.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Dec 2023 10:27:12 -0800 (PST)
+Date: Mon, 11 Dec 2023 13:27:10 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Shantur Rathore <i@shantur.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de,
+ Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+Message-ID: <20231211182710.GT2513409@bill-the-cat>
 References: <20231119172310.1307942-1-i@shantur.com>
  <CAMty3ZDK3jcscgNfMZj4SySK6Kd9L1ZJ6nwaM3eJU_VTBA7yvw@mail.gmail.com>
  <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
@@ -65,20 +82,13 @@ References: <20231119172310.1307942-1-i@shantur.com>
  <CABEcMwXYCczbTRVgqGC=USRJw138tDM0RkbmGoR4zSY7pBj1PA@mail.gmail.com>
  <CAPnjgZ3gEoOFxahZ2mg=MTQTmBPyCBphS8uVcpSSwq2bg4eJwQ@mail.gmail.com>
  <20231211181918.GS2513409@bill-the-cat>
-In-Reply-To: <20231211181918.GS2513409@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 Dec 2023 11:22:45 -0700
-Message-ID: <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
-To: Tom Rini <trini@konsulko.com>
-Cc: Shantur Rathore <i@shantur.com>, Peter Robinson <pbrobinson@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, 
- Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0VGJPCUCdzrxTivf"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,152 +105,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 11 Dec 2023 at 11:19, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Dec 11, 2023 at 10:52:12AM -0700, Simon Glass wrote:
-> > Hi,
-> >
-> > On Sat, 9 Dec 2023 at 15:19, Shantur Rathore <i@shantur.com> wrote:
-> > >
-> > > On Sat, Dec 9, 2023 at 8:56=E2=80=AFPM Tom Rini <trini@konsulko.com> =
-wrote:
-> > > >
-> > > > On Fri, Dec 08, 2023 at 01:59:26PM +0000, Shantur Rathore wrote:
-> > > > > Hi Peter,
-> > > > >
-> > > > > On Fri, Dec 8, 2023 at 12:59=E2=80=AFPM Peter Robinson <pbrobinso=
-n@gmail.com> wrote:
-> > > > > >
-> > > > > > On Fri, Dec 8, 2023 at 12:52=E2=80=AFPM Shantur Rathore <i@shan=
-tur.com> wrote:
-> > > > > > >
-> > > > > > > Hi Jagan,
-> > > > > > >
-> > > > > > > On Fri, Dec 8, 2023 at 11:13=E2=80=AFAM Jagan Teki <jagan@ama=
-rulasolutions.com> wrote:
-> > > > > > > >
-> > > > > > > > On Sun, Nov 19, 2023 at 10:54=E2=80=AFPM Shantur Rathore <i=
-@shantur.com> wrote:
-> > > > > > > > >
-> > > > > > > > > Rockchip SoCs can support wide range of bootflows.
-> > > > > > > > > Without full bootflow commands, it can be difficult to
-> > > > > > > > > figure out issues if any, hence enable by default.
-> > > > > > > > >
-> > > > > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > (no changes since v1)
-> > > > > > > > >
-> > > > > > > > >  arch/arm/Kconfig | 1 +
-> > > > > > > > >  1 file changed, 1 insertion(+)
-> > > > > > > > >
-> > > > > > > > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > > > > > > > index d812685c98..fca6ef6d7e 100644
-> > > > > > > > > --- a/arch/arm/Kconfig
-> > > > > > > > > +++ b/arch/arm/Kconfig
-> > > > > > > > > @@ -1986,6 +1986,7 @@ config ARCH_ROCKCHIP
-> > > > > > > > >         imply CMD_DM
-> > > > > > > > >         imply DEBUG_UART_BOARD_INIT
-> > > > > > > > >         imply BOOTSTD_DEFAULTS
-> > > > > > > > > +       imply BOOTSTD_FULL if BOOTSTD_DEFAULTS
-> > > > > > > >
-> > > > > > > > Yes, but better to give this option to specific board vendo=
-rs as
-> > > > > > > > defaults are enough to boot 1st bootflow and what ever medi=
-a's it has.
-> > > > > > > >
-> > > > > > >
-> > > > > > > Yes, that's correct it is enough to boot but by default there=
- is no option
-> > > > > > > to choose what to boot from.
-> > > > > > > This was discussed in an earlier version of this patch [0] wh=
-ere I was
-> > > > > > > explicitly enabling only for RP64.
-> > > > > >
-> > > > > > What actual extra functionality does this provide, what is the =
-impact
-> > > > > > on the size of images? You've not provided reasonable justifica=
-tion
-> > > > > > outside of very vague statements, it would be useful to know wh=
-at the
-> > > > > > added options actually solves.
-> > > > >
-> > > > > BOOTSTD_FULL enables all the options in bootflow commands. This i=
-s needed if
-> > > > > - you want to choose between multiple available bootflows rather =
-than
-> > > > > just boot one default.
-> > > > > - if you need to list the available bootflows that bootstd has fo=
-und
-> > > > > - if you need to select and boot any bootflow other than default.
-> > > > > By default all other commands in U-boot come with options to show=
- details
-> > > > > For example, nvme info, nvme detail, usb info, usb tree but with
-> > > > > bootstd no way to know anything.
-> > > > >
-> > > > > Image size - u-boot.itd without BOOTSTD_FULL - 1193984 bytes
-> > > > > Image size - u-boot.itb with BOOTSTD_FULL - 1214976 bytes
-> > > > > Difference - 20992 bytes
-> > > > >
-> > > > > According to binman for RK3399 u-boot can take upto 4M [1] so we =
-have
-> > > > > ample space.
-> > > > >
-> > > > > This was discussed in the previous patch in the link below [0]
-> > > > >
-> > > > > [0] - https://patchwork.ozlabs.org/project/uboot/patch/2023111100=
-1329.537704-1-i@shantur.com/
-> > > > > [1] - https://github.com/shantur/u-boot/blob/master/arch/arm/dts/=
-rk3399-u-boot.dtsi#L68
-> > > >
-> > > > If I'm recalling everything right, this also brings "bootflow" as a
-> > > > command more in line with what could be done with distro_bootcmd in
-> > > > terms of "cover every possible case and let the user override thing=
-s"
-> > > >
-> > > Yes,
-> > > That's correct.
-> > >
-> > > U_BOOT_LONGHELP(bootflow,
-> > > #ifdef CONFIG_CMD_BOOTFLOW_FULL
-> > > "scan [-abeGl] [bdev]  - scan for valid bootflows (-l list, -a all, -=
-e
-> > > errors, -b boot, -G no global)\n"
-> > > "bootflow list [-e]             - list scanned bootflows (-e errors)\=
-n"
-> > > "bootflow select [<num>|<name>] - select a bootflow\n"
-> > > "bootflow info [-ds]            - show info on current bootflow (-d
-> > > dump bootflow)\n"
-> > > "bootflow read                  - read all current-bootflow files\n"
-> > > "bootflow boot                  - boot current bootflow\n"
-> > > "bootflow menu [-t]             - show a menu of available bootflows\=
-n"
-> > > "bootflow cmdline [set|get|clear|delete|auto] <param> [<value>] -
-> > > update cmdline"
-> > > #else
-> > > "scan - boot first available bootflow\n"
-> > > #endif
-> > > );
-> >
-> > I suggest we keep it off for now, as we did put in quite a bit of
-> > effort to reduce code size. It would be a shame to throw it all away.
-> >
-> > That said, I can imagine this becoming a pain for people over time, as
-> > the 'bootflow' command becomes the common way to interact with U-Boot.
-> > I just wonder if it is too early to make the switch?
->
-> I think in hind-sight too much stuff is omitted without BOOTSTD_FULL.
-> The option itself then enables other stuff too by default, but some
-> parts of the bootflow command itself should be visible even without FULL
-> to make things easier on the user.
+--0VGJPCUCdzrxTivf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-At the time the goal was to avoid growth compared to the distro
-scripts. We could perhaps add some more things in with BOOTSTD_FULL
-but still have it as an option?
+On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
+> Hi Tom,
+[snip]
+> > I think in hind-sight too much stuff is omitted without BOOTSTD_FULL.
+> > The option itself then enables other stuff too by default, but some
+> > parts of the bootflow command itself should be visible even without FULL
+> > to make things easier on the user.
+>=20
+> At the time the goal was to avoid growth compared to the distro
+> scripts. We could perhaps add some more things in with BOOTSTD_FULL
+> but still have it as an option?
 
-Regards,
-Simon
+Right. But now that we've tried this, some of the feedback has been that
+it's just too minimal right now. Like looking at the help message for
+bootflow, list and info should probably always be available. And maybe
+the flags for "scan" should be re-thought? Too late to change things now
+but "bootflow scan -b" should maybe how it's always been for "scan and
+boot".
+
+--=20
+Tom
+
+--0VGJPCUCdzrxTivf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV3VH4ACgkQFHw5/5Y0
+tyxobQv8Djg1D/vJx3+K8KH7kNjqRkmH2pkn3DBW3j5W6w5qah4y6/F/9h+CBpbJ
+Et71z55b0GGzkqffw99R17NO6xxZT76r9lrKh31jdnGu/QEH+cTqQFPIUxbJVN2D
+dnqEBYKKzfCTypE9kZMmW/Ux3eZD8AHg8OalA0RrEptbWdd/tNxORdB9ci5Gg163
+6vsuDLSubvN2U/OovjK5AR0Mcf8wybU4pmz26RczYk+7aPzjLfxYDitnCwnMwa30
+5a0jBBuDd/K4FRvCTlW9q3HymlM2ItVo5DQZDnxby0ngnZ1hu7BRmfWJL6qgnsig
+wKSOqWFGmyp0rkbbeG80fwIDPJxCUfanRZ/e+mmwHI49qV0UQR9LRgGzxoKbBJLf
+1RV8PtEvbVyJUcE6YFBs5Ys95aYCeZ4ehpJoBGsnxGKNEiG/l3KcHaIvzLQO3Gau
+V65cslH6wdXvFDlDmi6nRUEixL2hupFYwX6ccYyL584O7QgCO48MJadhsnSRUtJk
+99f9ClsO
+=OaMV
+-----END PGP SIGNATURE-----
+
+--0VGJPCUCdzrxTivf--
