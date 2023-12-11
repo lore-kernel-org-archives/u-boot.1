@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDCAFC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 21:19:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9B78C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 22:06:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D8EA87734;
-	Mon, 11 Dec 2023 22:19:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D3D65877B6;
+	Mon, 11 Dec 2023 23:06:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jc41lNpT";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="NJ3jWBwe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62418876F4; Mon, 11 Dec 2023 22:19:45 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id D6265877B6; Mon, 11 Dec 2023 23:06:52 +0100 (CET)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEE9C8779E
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 22:19:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-286f3e0d010so1492778a91.0
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 13:19:41 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEB73877B3
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 23:06:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-50bfa7f7093so6435689e87.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 14:06:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702329580; x=1702934380; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ayVn8KN/6xFe+Kont3U/0fx6RW6SMLingDFXvhGHn7k=;
- b=jc41lNpTOeyxVfAyrtAfPxSGRBbokANdmfQn9YGmr3rjiRA+tl4phHIKv1uBKrSPsS
- 2r4c3rAOIlgzRKu20m1T2Q1tyfotF9gh/4jTxfnlq6tQenpFwv3LWHE1B6LPBpXBujBE
- v7EoKWBT5WcZZxKZmt9HI+o/90brG4YBXsBM92CuD3aFrmNTXvH8So3tLgc3t6WMDFKG
- 7MJ+Q6NzaFStmD/g9lgvKoPdILnLr2aCsRUcTIWIjMNdEXHcBl9y5Lao/9U/hNVuy8s9
- od8qBOrClpJwxbdPdf/5A+QGz8+KysDePzRpXZVVeUhPCh6A8FDfxl0D+jwOxo1sRGOq
- 5+XQ==
+ d=amarulasolutions.com; s=google; t=1702332410; x=1702937210;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jgjor0CBTHy7XzOQ/Y6y7ZxJzmr44UtwtBmoDoQEgaY=;
+ b=NJ3jWBwezt1QX0tvQTmx6Qx3CeuBWYEKpoMespGuZOqNHVZKRWx2w6EUnzdR6ZMJQz
+ X2rvuTf5ffxZC+x2Bobye8AGdJoCyJDBi904dp/zoEzat5Gr9NEGTBHlxBJHuMSRHvsv
+ V1R/Ds2JqRlaoQxPo9bcIbDWMGi+H5wo3gBlo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702329580; x=1702934380;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ayVn8KN/6xFe+Kont3U/0fx6RW6SMLingDFXvhGHn7k=;
- b=TH3fuz9qY/SNDwAl/+Ex1atTmNynCGFJxQCwdB6lHqW7mR5NyVhdRNIlpJIl+Ze3xb
- 4nKZOldPrDFd4OaeM4SerKnBSLl3c4DLBebkLVpJOiJWG2MgEfCRmXSbTsN3KX/wAF9m
- UYLp+o/gaUgdlR+bPYSrMnnOfLxEB4jOi2jjNFHGFeY06ywQxNQD/OYDqVa7/mvl6ahW
- xkPS+2OD+90lPj+rx1wsWHQX1Ixxop5ynFN1oiMusufNECkY9svZQrHMCOsUhjVSb5QA
- R5ObdiWmRjZ2+zuPPlD1lwo2DqXZZi4FCtciYaQDkOeH86JSLiLEz1V1K0/77yBkmyLj
- 6YsQ==
-X-Gm-Message-State: AOJu0YyymoXs/1N5aWMLradYbhb1phvf8aWFPxxCNUPQuZgsZTbmwkIB
- KVqMEUnEKBGaet9cdtFyM9HhfdvPuedfFGHjvo0=
-X-Google-Smtp-Source: AGHT+IGQQFF/ZqUDJUhfImxrdBZpxuvHVeXvixZR+mM20o8UYIKUjmd7+IRlahtVJKqhtPtB2eEn3Un6/A+BRHYaa54=
-X-Received: by 2002:a17:90b:3718:b0:286:6955:6754 with SMTP id
- mg24-20020a17090b371800b0028669556754mr8855859pjb.0.1702329580133; Mon, 11
- Dec 2023 13:19:40 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702332410; x=1702937210;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jgjor0CBTHy7XzOQ/Y6y7ZxJzmr44UtwtBmoDoQEgaY=;
+ b=gmmRprDy9ftcVFlL2CU/IWdkFMA3+AobiENQbTAkDXzj6BpxmHjao7EhwgHvw3vBEs
+ /bBb5IK5qHzTp76Q0hHOQhajM1YtiXcdSljjSqPf2tpzfztQQE7bGKoZ8Jln1eOLBbuJ
+ sBo/Wf+O1QaLOydEiPKqI+H++My5s8cOCcx0idhtJhXYgs8XZYAAHTmMEv441lshCTM3
+ gXrhqirUMkN+TUUglWO5+x7B/I6SgKq5VvyLztzY+labdx/F3sSqCXjsqh4mBdsLDjFa
+ bkpWVmGuZKVUNBQSTWWzrRkMy6T9xIhN/dkbhBhxdEOlIicNRwOCpJhcUobIUlHSr1yg
+ /CgA==
+X-Gm-Message-State: AOJu0YyTCmQKKhskCVpfTs8EhuMdCWQs8kggcNewPjvHAgRlWOJZGr0X
+ 0+Ri+KIAvoIZwtirLm0rXRw7Gn1hZBnfyJ09+9hqUg==
+X-Google-Smtp-Source: AGHT+IFaJh857hb/MLPxS3Jfsr6yHydSWHKdHJsxa1+MiT2ACUW0FP5UBgePlTSW4toPjZCI4H3L+A==
+X-Received: by 2002:a05:6512:92a:b0:50b:e9ec:4e2c with SMTP id
+ f10-20020a056512092a00b0050be9ec4e2cmr1933885lft.104.1702332409906; 
+ Mon, 11 Dec 2023 14:06:49 -0800 (PST)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-82-54-95-129.retail.telecomitalia.it. [82.54.95.129])
+ by smtp.gmail.com with ESMTPSA id
+ se13-20020a170907a38d00b00a1f78048f08sm4568276ejc.146.2023.12.11.14.06.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Dec 2023 14:06:49 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3 0/6] Support display on stm32f469-disco board
+Date: Mon, 11 Dec 2023 23:05:50 +0100
+Message-ID: <20231211220643.1073606-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
- <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
-In-Reply-To: <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 11 Dec 2023 18:19:27 -0300
-Message-ID: <CAOMZO5BGOK=SMBxAA6QcAziZQurTN-p-Bh0hWuQiduSHoUvmPw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] clk: imx8mn: add pwm clocks
-To: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,14 +93,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nicolas,
+The series adds support for the Orise Tech OTM8009A display on the
+stm32f469-disco board. Substantial differences in the drivers for clock
+management, LTDC and DSI compared to Linux, made it necessary to modify
+the device tree. These changes were made in stm32f469-disco-uboot.dtsi to
+avoid altering the Linux device tree. It is therefore desirable, as soon
+as possible, to add these drivers the functionalities so that they do not
+require device tree properties that deviate from those present in the Linux
+version.
 
-On Mon, Dec 11, 2023 at 1:52=E2=80=AFPM Nicolas Heemeryck
-<nicolas.heemeryck@devialet.com> wrote:
->
-> Based on Linux kernel 6.7-rc4, add necessary clocks for the PWM
-> controllers.
->
-> Signed-off-by: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+Changes in v3:
+- Add Patrice Chotard's Reviewed-by tag.
+- Remove RFC tag
+- Split "[4/5] ARM: dts: stm32: support display on stm32f469-disco board"
+  patch in 2 parts:
+  - DTS ([4/6] ARM: dts: stm32: support MIPI DSI on stm32f469-disco board)
+  - config and LTDC driver update ([5/6] board: stm32f469-disco: add support to display)
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Changes in v2:
+- Add Patrice Chotard's Reviewed-by tag to patches 1, 2 and 3 of the series.
+- Fix frame buffer allocation for stm32f469 discovery board.
+
+Dario Binacchi (6):
+  ARM: dts: stm32f469-disco: sync with Linux 6.5
+  ARM: dts: stm32: make the LTDC clock usable by the clock driver
+  ARM: dts: stm32: make the DSI clock usable by the clock driver
+  ARM: dts: stm32: support MIPI DSI on stm32f469-disco board
+  board: stm32f469-disco: add support to display
+  board: stm32f469-disco: add splash screen with stmicroelectronics logo
+
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 ++++++++++
+ arch/arm/dts/stm32f469-disco.dts         |   4 +--
+ configs/stm32f469-discovery_defconfig    |  16 ++++++++++++
+ drivers/video/stm32/stm32_ltdc.c         |  31 +++++++++++++++++++++++
+ include/configs/stm32f469-discovery.h    |   2 ++
+ tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
+ 6 files changed, 64 insertions(+), 2 deletions(-)
+ create mode 100644 tools/logos/stm32f469-discovery.bmp
+
+-- 
+2.43.0
+
