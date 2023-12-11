@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 142D3C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:03:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81C06C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:03:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D238B876A4;
-	Mon, 11 Dec 2023 10:01:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C85287719;
+	Mon, 11 Dec 2023 10:01:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Q++h5fHA";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="CNRmqmq3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D38487718; Mon, 11 Dec 2023 10:01:40 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 194AD87721; Mon, 11 Dec 2023 10:01:44 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA444876A4
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:01:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D718B876C7
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:01:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d32c599e83so500095ad.0
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:01:37 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1d04c097e34so32405635ad.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:01:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702285296; x=1702890096;
+ d=amarulasolutions.com; s=google; t=1702285300; x=1702890100;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2gNxMg1IyhU3HfVGqIXTc3vYjiZZE0NWMhSBqwbjsqU=;
- b=Q++h5fHAxIcyzO4W1S2ovoe0Z/3lF0hYxEWyKNS0p/feRoJdgGpc20rBgpgF/wMXzd
- qvjjQFqtL1oNYDGPJqU2G4Rxu2BBga1cvJtrJUH7KLn70BItyqGn4rTdSB9Kgp4MSfRd
- FthG+m55ZIhnq/ISF+5VLHBIygjXa0gsU4YoI=
+ bh=oSNbSHvYxZmXQ44u/a1g+gZnsUNQRHVUJGU7gTP45bs=;
+ b=CNRmqmq3Z5Tuy09oHcQSaTvGQV9n+x0U/1KYBueO42BmnR2vYXzxYHGk43bPMXQhcB
+ Bgf82bwbk1nSm7oQVumgLnyLjPdODfwG2S2uP2cUxdguJqC9s4IKDdfmb9hI7MOUXK9O
+ wo56R7My+2WSCyjuOH8H+RlEFUma8rv+TCIdo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702285296; x=1702890096;
+ d=1e100.net; s=20230601; t=1702285300; x=1702890100;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2gNxMg1IyhU3HfVGqIXTc3vYjiZZE0NWMhSBqwbjsqU=;
- b=n8e0FETQ2YJaamcQx9jLyDwZKTmKPwF52M9K/uBYSWo5/dfKlFLoJgPyMVu2gJVIUd
- 5tRjpxXmwjFdUQw4RgC2g8Qfzplpt4QaS3zQ2ywJwArptZCmOp5y6H0boQKFXDM3NJfl
- GDWKMlZzDOE1N3Gn9a9D9eJwFP6RFYOAU+8qSNE3i9SObGyrddzp4gbb0ZDHPTvRm0KV
- 4fF2LJzP7LAwnhouraOblGC/fVQ3pIumPQTScITANRt+cSyFiIK8tm142eVmI4OW0R9f
- rTObUNV/W4N3MlsYVgxd8uYi5vAi3jTm9i0j5X/FSBJunaCwUkI/tBRdAvkb3GHlwgcw
- fwKw==
-X-Gm-Message-State: AOJu0Ywj3SYG4wNZ42QHssCWNqWq69g7DSlprUV3HKZJhjbkEh6z3H5L
- FZ0vgwo2R2MJeyO1NNqTTf1+pw==
-X-Google-Smtp-Source: AGHT+IEp/dUmdamyXQFj/4R1a1HyY8/UYc5z06VRLYmwuhmLGb5cNMeJCW4pNimkaUF2o/RUkFGxYA==
-X-Received: by 2002:a17:902:b207:b0:1d0:6b95:9c0d with SMTP id
- t7-20020a170902b20700b001d06b959c0dmr3805890plr.65.1702285296299; 
- Mon, 11 Dec 2023 01:01:36 -0800 (PST)
+ bh=oSNbSHvYxZmXQ44u/a1g+gZnsUNQRHVUJGU7gTP45bs=;
+ b=CSderwR/nXsfyKE2piHAphVb/wCUchxOmaRF/YFyo4lHyWMMuiikkiIXTy/ULobMPt
+ mqloMDvfdALnSOiBj6DBMH/O4prOmUHHfcIqHRpFjYQE5T3dymMaZgsJHCTpd8WbAaKW
+ 7CyHw3bqGX97/YH4Fk2IxU9YkFkeHmbnFeyqUTGzHM60kuMSTKWZ9qO8mOij5Iiz+B13
+ Nn7ynaW/vtMM337uOqhGRxgWRw0JX0rr6RCS3N+g3+hj3XK4+4fy42N6+AMZd4yZZgWB
+ DTW9pzNf7Pw8/zuR8vfzvYmeXhFCJ8SF7JmyFp2euw3GKfl9DFvIx0jE9AqL4AkwRqe9
+ q6sg==
+X-Gm-Message-State: AOJu0YzvpZUe00avX77rrhUJq/1FszS4KNrgIcNVMK6VqkYx1ku7vqyB
+ 5pS4urTT5jifrSS7xjbKOsPtNQ==
+X-Google-Smtp-Source: AGHT+IE9Vh5r81/RmMILgxwXg0zPKRYSzIwlJb2Nv0Cteiv30JbKmiLAuOCAd9dbx3URBB9qbMvSjg==
+X-Received: by 2002:a17:903:2342:b0:1d0:700b:3f78 with SMTP id
+ c2-20020a170903234200b001d0700b3f78mr6694892plh.50.1702285300174; 
+ Mon, 11 Dec 2023 01:01:40 -0800 (PST)
 Received: from localhost.localdomain ([49.205.242.204])
  by smtp.gmail.com with ESMTPSA id
- e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.01.32
+ e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.01.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 01:01:35 -0800 (PST)
+ Mon, 11 Dec 2023 01:01:39 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Anatolij Gustschin <agust@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -69,10 +69,10 @@ To: Anatolij Gustschin <agust@denx.de>,
  Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Heiko Stuebner <heiko@sntech.de>
 Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Jagan Teki <jagan@edgeble.ai>
-Subject: [PATCH 13/17] video: rockchip: Add rk3328 vop support
-Date: Mon, 11 Dec 2023 14:29:35 +0530
-Message-Id: <20231211085939.5478-14-jagan@amarulasolutions.com>
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH 14/17] ARM: dts: rk3328: Enable VOP for bootph-all
+Date: Mon, 11 Dec 2023 14:29:36 +0530
+Message-Id: <20231211085939.5478-15-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231211085939.5478-1-jagan@amarulasolutions.com>
 References: <20231211085939.5478-1-jagan@amarulasolutions.com>
@@ -94,100 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jagan Teki <jagan@edgeble.ai>
+Model: Firefly roc-rk3328-cc
+DRAM: 1 GiB (effective 1022 MiB)
+Video device 'vop@ff370000' cannot allocate frame buffer memory -ensure the device is set up before relocation
+Error binding driver 'rockchip_rk3328_vop': -28
+Some drivers failed to bind
+initcall sequence 000000003ffcd5e8 failed at call 000000000021a5c4 (err=-28)
+ ### ERROR ### Please RESET the board ###
 
-Add support for Rockchip RK3328 VOP.
-
-Signed-off-by: Jagan Teki <jagan@edgeble.ai>
+Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 ---
- drivers/video/rockchip/Makefile     |  1 +
- drivers/video/rockchip/rk3328_vop.c | 66 +++++++++++++++++++++++++++++
- 2 files changed, 67 insertions(+)
- create mode 100644 drivers/video/rockchip/rk3328_vop.c
+ arch/arm/dts/rk3328-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
-index 4991303c73..f55beceebf 100644
---- a/drivers/video/rockchip/Makefile
-+++ b/drivers/video/rockchip/Makefile
-@@ -6,6 +6,7 @@
- ifdef CONFIG_VIDEO_ROCKCHIP
- obj-y += rk_vop.o
- obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
-+obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
- obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
- obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
- obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
-diff --git a/drivers/video/rockchip/rk3328_vop.c b/drivers/video/rockchip/rk3328_vop.c
-new file mode 100644
-index 0000000000..2512314e64
---- /dev/null
-+++ b/drivers/video/rockchip/rk3328_vop.c
-@@ -0,0 +1,66 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 Edgeble AI Technologies Pvt. Ltd.
-+ */
+diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
+index a9f2536de2..5258fec566 100644
+--- a/arch/arm/dts/rk3328-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-u-boot.dtsi
+@@ -68,3 +68,7 @@
+ &spi0 {
+ 	bootph-all;
+ };
 +
-+#include <common.h>
-+#include <dm.h>
-+#include <video.h>
-+#include <asm/io.h>
-+#include "rk_vop.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+static void rk3328_set_pin_polarity(struct udevice *dev,
-+				    enum vop_modes mode, u32 polarity)
-+{
-+	struct rk_vop_priv *priv = dev_get_priv(dev);
-+	struct rk3288_vop *regs = priv->regs;
-+
-+	switch (mode) {
-+	case VOP_MODE_HDMI:
-+		clrsetbits_le32(&regs->dsp_ctrl1,
-+				M_RK3399_DSP_HDMI_POL,
-+				V_RK3399_DSP_HDMI_POL(polarity));
-+		break;
-+	default:
-+		debug("%s: unsupported output mode %x\n", __func__, mode);
-+	}
-+}
-+
-+static int rk3328_vop_probe(struct udevice *dev)
-+{
-+	/* Before relocation we don't need to do anything */
-+	if (!(gd->flags & GD_FLG_RELOC))
-+		return 0;
-+
-+	return rk_vop_probe(dev);
-+}
-+
-+struct rkvop_driverdata rk3328_driverdata = {
-+	.dsp_offset = 0x490,
-+	.win_offset = 0xd0,
-+	.features = VOP_FEATURE_OUTPUT_10BIT,
-+	.set_pin_polarity = rk3328_set_pin_polarity,
-+};
-+
-+static const struct udevice_id rk3328_vop_ids[] = {
-+	{
-+		.compatible = "rockchip,rk3328-vop",
-+		.data = (ulong)&rk3328_driverdata
-+	},
-+	{ /* sentile */ }
-+};
-+
-+static const struct video_ops rk3328_vop_ops = {
-+};
-+
-+U_BOOT_DRIVER(rk3328_vop) = {
-+	.name	= "rk3328_vop",
-+	.id	= UCLASS_VIDEO,
-+	.of_match = rk3328_vop_ids,
-+	.ops	= &rk3328_vop_ops,
-+	.bind	= rk_vop_bind,
-+	.probe	= rk3328_vop_probe,
-+	.priv_auto	= sizeof(struct rk_vop_priv),
++&vop {
++	bootph-all;
 +};
 -- 
 2.25.1
