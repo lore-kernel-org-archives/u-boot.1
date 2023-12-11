@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D6CEC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 16:28:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13D36C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E609F87775;
-	Mon, 11 Dec 2023 17:28:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 59EDF8778F;
+	Mon, 11 Dec 2023 18:48:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="P5/kbvAM";
+	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="hZIpAt+I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14B8C8777C; Mon, 11 Dec 2023 17:28:01 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 84FB087682; Mon, 11 Dec 2023 18:48:39 +0100 (CET)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B04A3876E2
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 17:27:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4787E8776E
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:48:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702312075; x=1702916875; i=xypron.glpk@gmx.de;
- bh=IcCgWNhrqLlRDpHhgZ7w3iAoTBJE1g+pePi5g/h/xyg=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=P5/kbvAMRCHwrTYsjbzbsbWgItyQwxgtV7qn25jzMHJOsYGAtF+evSGfs1N6zuKK
- yJwKePhv8/P/S1XuliS8kI/6jguja+KgHYCg1ZtTo+s0EMmExEY+EjH5rofT8Pa6E
- K21j3DqZMwRvd2lvCJAK8m+q7atDuyuRAMpeJ+JXujMm26B7PaztUAl2ugapZeYLi
- gJEk/9v4200tLe7it3MzxfmDALC0bWPApNkOuNwUW3tso3SwDlD4hPVs693BNt/tq
- aeLpbEizcZAGqKqkpGlfnLEeav5bdTmfvhBXSm09O5HLhuAewg+gj2pe4CXH0SqG1
- 1Na5ZC9lUwG2AHemDA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKhm-1qsQKX2muQ-00OpuY; Mon, 11
- Dec 2023 17:27:55 +0100
-Message-ID: <951ffe69-9b87-45ee-a16c-0397bd49eb24@gmx.de>
-Date: Mon, 11 Dec 2023 17:27:50 +0100
+ dmarc=none (p=none dis=none) header.from=ics.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lpmeyer@ics.com
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-58d08497aa1so2970282eaf.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:48:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702316913; x=1702921713;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B/dmK+pCzBvYrZPuLzMDh1JXqv0dzju38Gs5bc9t6zE=;
+ b=hZIpAt+IV7tgc8ssQW609BP2DyzIJelZVxtLvNQS1b85b6PSApC48pLL8/BnRSYxo8
+ czMJDFxJfzLoDAb10Gjyb8AT/3JIoOT7Fr9zu+7Rlf7aGZzCL8XoNqVjnowy+ben3XjG
+ hWijTi1tlz06effpNXcQx9YlknwLoze0dQJKEdbTEF7NJ5BZmWD0S3Qga2ObnCWDvqru
+ 2Z8FV2X5fsqJjC3j0JlsxePWuKXmO9ob3Q1hL1+FIIRFFh0K7LFk94JWoQUdB0wZiLfb
+ Sa30rclJS1TGZYlO/F2l/HL3wzM+DL1vvLwNrpSXHWpxASY5eSFxd5x9sBawSXzRXnlo
+ Cp6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702316913; x=1702921713;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=B/dmK+pCzBvYrZPuLzMDh1JXqv0dzju38Gs5bc9t6zE=;
+ b=lXp+K2xpuaJF5NOw4GJ+896Yx2p/6ZR8LRTMKGQJJAQpdPuot96qHbQ4xtFyGRPUHS
+ L6qKhuiu/E7GovZ1R04J2cYNHvNsmVZqrvhe269jLcoSgXtawtCTfmmJpt9eg9Rv+nrI
+ aKBZSnFC4xyYL1iYYXFHehbofABLWKz43+1dKc3e/x7tZ7wjx49TLMbM34fMFcxMsxDE
+ jEL8Uipnv9OQvda1QKDuxUlSCetKlrd/S2d+wnc9tJetE1ld+3r0XnJgp367tbE8OdaQ
+ MQvJuETmZKSAZ8GRkdJMAws70DB4dfAhZ3+X26eh+ldhUDjs0q5Sy2MdF1qb/ncvR/Lg
+ ISEg==
+X-Gm-Message-State: AOJu0YxYK++4nLif3fvpH4fPyRGSA4AmKnP/Pip8ihaUWxoCauEpVCsY
+ dVVdO+o25KPnvIkJqj7FSVr74/0hwnpmgG7KY4tGMTRT2oh+Zznf
+X-Google-Smtp-Source: AGHT+IF5MAZkePqT9ZNUYluwzDjtC2mV7iJdSXRr9Xt/tEOofEYvkBVtydE5UbcsY5rx7bwOW1aOMlC/NprPpAd7FiE=
+X-Received: by 2002:a05:6820:16a2:b0:590:7537:9535 with SMTP id
+ bc34-20020a05682016a200b0059075379535mr3126966oob.1.1702316912986; Mon, 11
+ Dec 2023 09:48:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] lib: vsprintf: enable '%*pb[l]' format specifier
-Content-Language: en-US
-To: lukas.funke-oss@weidmueller.com
-Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
- <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-References: <20231211122051.1240855-1-lukas.funke-oss@weidmueller.com>
- <20231211122051.1240855-5-lukas.funke-oss@weidmueller.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231211122051.1240855-5-lukas.funke-oss@weidmueller.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20231211134617.457471-1-festevam@gmail.com>
+In-Reply-To: <20231211134617.457471-1-festevam@gmail.com>
+From: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
+Date: Mon, 11 Dec 2023 14:48:17 -0300
+Message-ID: <CABqjNW-5D-j0knfNDrWVpn6U7nXtLrSLcguzkHKT1zqXJf_4jA@mail.gmail.com>
+Subject: Re: [PATCH] imx: imx-hab: Select SPL_DRIVERS_MISC in the SPL case
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, trini@konsulko.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:06xUbz9oABMTn/vGLVAurKSlDYb9vh4gIuhBnbRzyGnxyr9xjF7
- NywAyURH4vKe3ufYwIVGsF6f97NL9ScLVOjY1RKkv6Vi9NhtJeoXg9N5dgXCefKYRQmR7ZS
- Wd1HFE6UYAWj3ElLFleMHNo6OWbtVHDS99k+pq08wypAYqO/YQbIDp1eOqNntHjCGOg9a7L
- BquCmdK+ZeXVZLZCYuG6w==
-UI-OutboundReport: notjunk:1;M01:P0:xdvZBYQGS6Y=;KRKAo1ASlrVQDvB4n2DXS8UBaR3
- OykHYNfkNmbK3jjK8T1HsBdSZ7lyNvguuo8FH0G5JQhsphtoKXXF5LAMvBYLRUp9ldQNrj21x
- G7hUn0fYhEvSdy2ZbbdlfzUONulvMnRiFmDtY9ZiLWCAfr5t1ktEQYk2zkMfNcou3GIrM8KaQ
- TH2rorxaJvK3I6yjI8+WT0noJmaJOvXOZmbAHiEHDRGFYC43+emh/MauyRQmkxXvJGfJ1eRQX
- SjXgBnbs6St89t9NvXaikBfVfPs9LA4GdGFmVQu3azqSfcmHBEFOjZcjhwAHG7M7UbpWNU+q/
- mawTrl5kV5kfZW5dkwFDgeNL2MQF7ApZsBfQ/ooL7tQIGSVignkzmOuyyB7YFnwu4l7pDadhh
- 8Y/WRV9vKJhhGDqALYNIV+Lv0pazjDyyFd1vp570sCws33+xaKPKGPA9XsIbODDeHYfXgmkgG
- 4pV6C+v2SEt8nfhyFjcQyrCrj+m/LdSYVp88O5iWGwzyR5bgTsAsbHO/YAeZQbqYwzkVOgbzL
- yazJiqTG2EIFh010ifvXCEsgkUO9DrgtFfMvpGwAaSjJPaAh7zX3hEgYiOMB7UsYOloHo1M9J
- XmkWHaE8IotQNOTA3Ato+RqK+DGzlpRylPNAudLm7Vg7lIHZ3jSQOKfwYM2Ta7jrGCfFItwVM
- 4X4B0Tdu8hC52gt5vD8OMaHbuc8yInlGB+o7sKyYFeZVIDQqbFX2Nk/MxaUvgHn2E6e4UXkC5
- I3Vaka1jScPkeB61TrGLamfvaR+poELSaiTKzU1znox4PN7i9BKzzi06N9rZxcr3bwGS6J3R+
- ve2P2AuLwdcF01X8e1lR+qMvOIeYKkyT4lWWOaaXfmEifBIOrlQBH+AdtxRK+yKMVTVnv19nI
- LsP9eWNdT82zJOwb+2VlO5/YXLSLsImW6CDNa9J5FgelgcnwHEGr7nyUFNTVIlddKWHk/KPS3
- Mq/GDB1iyqK2qMA4TPFY1beNEeg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,134 +87,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.12.23 13:20, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
+On Mon, Dec 11, 2023 at 10:46=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 >
-> The commit enables vsprintf() to handle the '%*pb[l]' format specifier
-> in order to print bitmaps and its derivatives such as cpumask and
-> nodemask [1]. This can be used to derive kernel boot parameters from
-> bitmaks such as 'isolcpu' or 'nohz_full' [2].
+> From: Fabio Estevam <festevam@denx.de>
 >
-> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
-> [2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters=
-.html
+> Selecting CONFIG_IMX_HAB=3Dy on a SPL target, such as apalis_imx6_defconf=
+ig,
+> for example, leads to the following build error:
 >
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-
-Please, add a change for doc/develop/printf.rst to the patch describing
-the new format.
-
-Best regards
-
-Heinrich
-
+> /usr/bin/arm-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function=
+ `imx_hab_is_enabled':
+> arch/arm/mach-imx/hab.c:879: undefined reference to `fuse_read'
+>
+> fuse_read() comes from SPL_MXC_OCOTP, which depends on SPL_DRIVERS_MISC,
+> since commit 251a3053b1e6 ("misc: imx: remove DM dependency for ocotp
+> driver in SPL").
+>
+> Select SPL_DRIVERS_MISC in the SPL case to fix this build issue.
+>
+> Reported-by: Lisandro P=C3=A9rez Meyer <lpmeyer@ics.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 > ---
+>  arch/arm/mach-imx/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 >
->   lib/vsprintf.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++
->   1 file changed, 75 insertions(+)
+> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+> index abd48d42583a..c34bc25c0bfb 100644
+> --- a/arch/arm/mach-imx/Kconfig
+> +++ b/arch/arm/mach-imx/Kconfig
+> @@ -54,6 +54,7 @@ config IMX_HAB
+>         bool "Support i.MX HAB features"
+>         depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5 || ARCH_IMX8M || ARCH=
+_MX7ULP
+>         select FSL_CAAM if HAS_CAAM
+> +       select SPL_DRIVERS_MISC if SPL
+>         imply CMD_DEKBLOB if HAS_CAAM
+>         help
+>           This option enables the support for secure boot (HAB).
+> --
+> 2.34.1
 >
-> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
-> index e14c6ca9f9..abbd80ea9c 100644
-> --- a/lib/vsprintf.c
-> +++ b/lib/vsprintf.c
-> @@ -25,6 +25,7 @@
->   #include <linux/err.h>
->   #include <linux/types.h>
->   #include <linux/string.h>
-> +#include <linux/bitmap.h>
->
->   /* we use this so that we can do without the ctype library */
->   #define is_digit(c)	((c) >=3D '0' && (c) <=3D '9')
-> @@ -390,6 +391,71 @@ static char *ip4_addr_string(char *buf, char *end, =
-u8 *addr, int field_width,
->   		      flags & ~SPECIAL);
->   }
->
-> +static char *bitmap_string(char *buf, char *end, const unsigned long *b=
-itmap,
-> +			   int field_width, int precision, int flags)
-> +{
-> +	const int CHUNKSIZE =3D 32;
-> +	int nr_bits =3D max_t(int, field_width, 0);
-> +	int i, chunksz;
-> +	int first =3D 1;
-> +
-> +	chunksz =3D nr_bits & (CHUNKSIZE - 1);
-> +	if (chunksz =3D=3D 0)
-> +		chunksz =3D CHUNKSIZE;
-> +
-> +	i =3D ALIGN(nr_bits, CHUNKSIZE) - CHUNKSIZE;
-> +	for (; i >=3D 0; i -=3D CHUNKSIZE) {
-> +		u32 chunkmask, val;
-> +		int word, bit;
-> +
-> +		chunkmask =3D ((1ULL << chunksz) - 1);
-> +		word =3D i / BITS_PER_LONG;
-> +		bit =3D i % BITS_PER_LONG;
-> +		val =3D (bitmap[word] >> bit) & chunkmask;
-> +
-> +		if (!first) {
-> +			if (buf < end)
-> +				*buf =3D ',';
-> +			buf++;
-> +		}
-> +		first =3D 0;
-> +
-> +		field_width =3D DIV_ROUND_UP(chunksz, 4);
-> +		buf =3D number(buf, end, val, 16, field_width, precision,
-> +			     (SMALL | ZEROPAD));
-> +
-> +		chunksz =3D CHUNKSIZE;
-> +	}
-> +	return buf;
-> +}
-> +
-> +static char *bitmap_list_string(char *buf, char *end, unsigned long *ad=
-dr,
-> +				int field_width, int precision, int flags)
-> +{
-> +	int nr_bits =3D max_t(int, field_width, 0);
-> +	int first =3D 1;
-> +	int rbot, rtop;
-> +
-> +	for_each_set_bitrange(rbot, rtop, addr, nr_bits) {
-> +		if (!first) {
-> +			if (buf < end)
-> +				*buf =3D ',';
-> +			buf++;
-> +		}
-> +		first =3D 0;
-> +
-> +		buf =3D number(buf, end, rbot, 10, 0, -1, 0);
-> +		if (rtop =3D=3D rbot + 1)
-> +			continue;
-> +
-> +		if (buf < end)
-> +			*buf =3D '-';
-> +		buf =3D number(++buf, end, rtop - 1, 10, 0, -1, 0);
-> +	}
-> +
-> +	return buf;
-> +}
-> +
->   #ifdef CONFIG_LIB_UUID
->   /*
->    * This works (roughly) the same way as Linux's.
-> @@ -503,6 +569,15 @@ static char *pointer(const char *fmt, char *buf, ch=
-ar *end, void *ptr,
->   					       precision, flags);
->   		flags &=3D ~SPECIAL;
->   		break;
-> +	case 'b':
-> +		switch (fmt[1]) {
-> +		case 'l':
-> +			return bitmap_list_string(buf, end, ptr, field_width,
-> +							precision, flags);
-> +		default:
-> +			return bitmap_string(buf, end, ptr, field_width,
-> +						precision, flags);
-> +		}
->   #ifdef CONFIG_LIB_UUID
->   	case 'U':
->   		return uuid_string(buf, end, ptr, field_width, precision,
 
+Tested-by: Lisandro P=C3=A9rez Meyer <lpmeyer@ics.com>
+
+--=20
+Lisandro P=C3=A9rez Meyer
+Embedded Platform Engineer
