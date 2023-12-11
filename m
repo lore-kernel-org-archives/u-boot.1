@@ -4,73 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AD0DC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 14:46:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFE2C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 14:48:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 595EB876DF;
-	Mon, 11 Dec 2023 15:46:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ics.com
+	by phobos.denx.de (Postfix) with ESMTP id 19F8E8767A;
+	Mon, 11 Dec 2023 15:48:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ics-com.20230601.gappssmtp.com header.i=@ics-com.20230601.gappssmtp.com header.b="BBugW6Zy";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 212A687734; Mon, 11 Dec 2023 15:46:00 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1702306113;
+	bh=j0nUO5hi8gbAigYFtWe3/Ll4IymCvq9E+6377U5WtHs=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=oK/GkYT6wMGehc85l/qU3lUIk0y9PZpuc3IM/7LBqFYIxGzQAQShFPVMRtNmMh4tu
+	 cI5v6YuSouxJ4VU1r22k82DNiz1SlnM4Zy2eP9jGGmd22hlnAPNMzxv08pRDn+xR0j
+	 URV2rYgBLAj2fGXxeSM20KlGLRqPmDPSsVQg6CfqiePRX/KLGL0FnP5OEsDidJ5+HN
+	 dMSVxiGiF/2Oh/oAuop9az3+XJgL84cu5Qa3X8qPnloDzbxelvQYqf/r2cej1acreG
+	 eS+0pDP9+OqJWMqSY+WsuaSe0ljwt6uGcCK0rRv9q0Bpt20YAPU4gDNmW9orRLZ1yk
+	 0R65kxikz9rMQ==
+Received: from mail.denx.de (unknown
+ [IPv6:2a01:238:438b:c500:173d:9f52:ddab:ee01])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC46E876DD
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 15:45:56 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ics.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lpmeyer@ics.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3b88f2a37deso3533004b6e.0
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 06:45:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ics-com.20230601.gappssmtp.com; s=20230601; t=1702305955; x=1702910755;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vQ1Wwy9kvT5uMtW/tEBIykMxgph1Q7s9E7ZgUsvkmDk=;
- b=BBugW6ZyhH/vC87X5qhQN7A9MZCa2DNff+lxRDjrvma1o32A3s7U9cCkHYKMxq8Sf6
- GAvPJulswv4kU/e15rK8dyHKCdPRQobRcAM1thE5TOlXiOkeLSbF+MYxYluK3egOB0H6
- NVzF4CkhdNlIAMX3zOO35NQwbJPu0CmISpwSp+Egl9LVuuReAh3AgTHad2upwHRrTuv8
- YRIG0xVrRP5HkNwI6lOphhGT5wTV4L7rBR3IZtCXYf23uQ8cKS18HoIIDfe5D6VLuFqQ
- kjlSgaHPCl5cUarQV0sDeuRzZmPLeyUl0oX9qvKU+iHTt/cuKnnJiKs/6gCIHlshL1o9
- gzig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702305955; x=1702910755;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vQ1Wwy9kvT5uMtW/tEBIykMxgph1Q7s9E7ZgUsvkmDk=;
- b=ILMX3anhDW79WUqeRp0aO8FieMeE04fq5/4ECEFeiRXCFVo8anPJNDGTcA+Gme4vBL
- 57RxiSV0adzc+yQ019J4Fg8giC/DFKqjoOHOy4CzQpv/9WHM3+0P56ZlEbDiwCcUh7ut
- SvjsDU4GQYNA1oaOqzebe6kApJ0JvSJamTqi0M8wcH01AkP61Xe6sv+q48IbglWM4Slr
- ldHpEVL0oX7MdIvG89WXbSewiq9OMkz8Hk1eh+VLGEquyNlKieUcAshpNPekqo39FTTL
- VoPp46gtiKHJTH/snv+lampInt1pWHMhapUfNuSWblcFhUslRK6ROqlr9n3AYbsuqkEL
- U8+g==
-X-Gm-Message-State: AOJu0YwlW/O0A5WCwoLLF80/mRCFZ4s1mKOLyuNq8C8zG1Z1opOmmisl
- WyHAJ4dAuJGuNQ6lZMJ7PeZ5NTc8LqeVbmyeYHtkZQ==
-X-Google-Smtp-Source: AGHT+IFnsdPdhWQ6ajnQRfXZTCWmkGtuSQTVWX4zwwrVlY0vxTcONb5p5hbkKj8z3eDo2WKb+j2E1hCcQ73Xzja4X7Q=
-X-Received: by 2002:a05:6871:7512:b0:1fb:75a:6d4b with SMTP id
- ny18-20020a056871751200b001fb075a6d4bmr5362845oac.114.1702305955321; Mon, 11
- Dec 2023 06:45:55 -0800 (PST)
+ (Authenticated sender: festevam@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EECFC87073;
+ Mon, 11 Dec 2023 15:48:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1702306112;
+ bh=j0nUO5hi8gbAigYFtWe3/Ll4IymCvq9E+6377U5WtHs=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=JDwnhg5ziDIrcTVQjtrhVQY97A4sApkaZOKUOJfV34nVEaUapAhl5gpzGR6Uv/+Km
+ CZt+PXAsm0sJ5iDLF4TJAsoa3OspbnrpKs0wJ+d2pU5wJj/WMxY0sfFdZdt319Ndkl
+ YTrFDFnlnU/9dgw/eFCB1JyxfTPdj2IPAfW/t9jFnvilhZKQf34iW56jj6DXyuv1u9
+ Io6hjUqo5/QkeieQC+SDKB4BpNDmHK+yFYB572pQCR1MbUANVh5K+Wboexog5QViNX
+ DW1aT/y5KodAr/gpYzxwFuD8Yzi//huHKBSx/j9B713Oie5VAw4sCzCgK7Mq3wqljb
+ m89QT6lNgh0sA==
 MIME-Version: 1.0
-References: <20231211134617.457471-1-festevam@gmail.com>
-In-Reply-To: <20231211134617.457471-1-festevam@gmail.com>
-From: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
-Date: Mon, 11 Dec 2023 11:45:39 -0300
-Message-ID: <CABqjNW-C3862iH0sLQxGnVBL3f4nhcasS4swMo-DSex2GGx8BA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Date: Mon, 11 Dec 2023 11:48:31 -0300
+From: Fabio Estevam <festevam@denx.de>
+To: =?UTF-8?Q?Lisandro_P=C3=A9rez_Meyer?= <lpmeyer@ics.com>
+Cc: Fabio Estevam <festevam@gmail.com>, sbabic@denx.de, trini@konsulko.com,
+ u-boot@lists.denx.de
 Subject: Re: [PATCH] imx: imx-hab: Select SPL_DRIVERS_MISC in the SPL case
-To: Fabio Estevam <festevam@gmail.com>
-Cc: sbabic@denx.de, trini@konsulko.com, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <CABqjNW-C3862iH0sLQxGnVBL3f4nhcasS4swMo-DSex2GGx8BA@mail.gmail.com>
+References: <20231211134617.457471-1-festevam@gmail.com>
+ <CABqjNW-C3862iH0sLQxGnVBL3f4nhcasS4swMo-DSex2GGx8BA@mail.gmail.com>
+Message-ID: <b24495a2bd3ceb5ba744bc359312c10f@denx.de>
+X-Sender: festevam@denx.de
+User-Agent: Roundcube Webmail/1.3.6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,50 +72,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 11, 2023 at 10:46=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
->
-> From: Fabio Estevam <festevam@denx.de>
->
-> Selecting CONFIG_IMX_HAB=3Dy on a SPL target, such as apalis_imx6_defconf=
-ig,
-> for example, leads to the following build error:
->
-> /usr/bin/arm-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function=
- `imx_hab_is_enabled':
-> arch/arm/mach-imx/hab.c:879: undefined reference to `fuse_read'
->
-> fuse_read() comes from SPL_MXC_OCOTP, which depends on SPL_DRIVERS_MISC,
-> since commit 251a3053b1e6 ("misc: imx: remove DM dependency for ocotp
-> driver in SPL").
->
-> Select SPL_DRIVERS_MISC in the SPL case to fix this build issue.
->
-> Reported-by: Lisandro P=C3=A9rez Meyer <lpmeyer@ics.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
->  arch/arm/mach-imx/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-> index abd48d42583a..c34bc25c0bfb 100644
-> --- a/arch/arm/mach-imx/Kconfig
-> +++ b/arch/arm/mach-imx/Kconfig
-> @@ -54,6 +54,7 @@ config IMX_HAB
->         bool "Support i.MX HAB features"
->         depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5 || ARCH_IMX8M || ARCH=
-_MX7ULP
->         select FSL_CAAM if HAS_CAAM
-> +       select SPL_DRIVERS_MISC if SPL
->         imply CMD_DEKBLOB if HAS_CAAM
->         help
->           This option enables the support for secure boot (HAB).
-> --
-> 2.34.1
+Hi Lisandro,
 
-I actually tested this, so, should I reply with Reviewed-By?
+On 11/12/2023 11:45, Lisandro Pérez Meyer wrote:
 
+> I actually tested this, so, should I reply with Reviewed-By?
 
---=20
-Lisandro P=C3=A9rez Meyer
-Embedded Platform Engineer
+Feel free to reply with your Tested-by tag.
+
+Thanks
