@@ -4,76 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08A2C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 13:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52470C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 13:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31E3487640;
-	Mon, 11 Dec 2023 14:46:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A292087682;
+	Mon, 11 Dec 2023 14:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Upi07QMx";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A454C8775C; Mon, 11 Dec 2023 14:46:28 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7BE1487716; Mon, 11 Dec 2023 03:23:11 +0100 (CET)
+Received: from mdcsw (unknown [202.188.176.82])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B1FB87756
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 14:46:26 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6cea0ea6817so253981b3a.1
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 05:46:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702302385; x=1702907185; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=17fbl17on8V4CXsXoXeaayv7ut9OJxB/ZaPgi9wJENE=;
- b=Upi07QMxOmcu7b5o3Wr+4UCPhzK94HHeRXHQGtOkkE6g5KG41ntVI/C4DU9PButNc9
- JJBupPrMbnOVHQOtdCap/5qbgaDvW+QiWw6cNgKsQIhd+imupW4L1yvs80IktsHNyxbI
- nYtELYaMcCVbMKSY8SsHphnliNC/ddPjus34cVAtWbC0LCVv1grIS4UBFfXlm0803B+J
- EolTu9+9M9m5AmIETBDM3mafoZcoDnXWI3Qx6glUpHqiQA6Z+Mkfygd1oReh98DJzkzI
- nfpcpm1F418TUTdzRowAM14yTeaAh9ncKooIzE03Ea7KRM3MWm1QGDZfqOBAZvvfMKrE
- BTtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702302385; x=1702907185;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=17fbl17on8V4CXsXoXeaayv7ut9OJxB/ZaPgi9wJENE=;
- b=MpxdqgjY06cMhe4W6laKOKWObdlLcrOw2BkB1/C9CZ0hRlkrJwl420+Vf/GAN1BeQg
- R+DTF3rzUBoep9J3+bDAS4R6dKBJpnRVMIBJcVV0zPExIkaKpzIPQB1SaLXOx7fIwiIN
- dP91JGqdCfVjIwPaXwAoSUuHvSRGIqg4Qu3e4U/pkp4RrVSZmGO9F/FRvGYkA1Wp7kKf
- mJp8DsojPJ82OpDwM/8Hs2hScGJDTVZXwdwemGoq4Rr9GA7CMBxUHetumwWJwREUdsYA
- TPnuigLQBxM5aARfRJMaj4lOgfeU6bcDRS8AEXP6BE7T7PSLiiPu8jEK049jLJxgeD5o
- d6zw==
-X-Gm-Message-State: AOJu0YxeBn2r49kaLnILG+AM4O0uNH3qRmoVvmn0jwIU3WcTmMgiJ+SR
- ko9kga6FgM3BWu2ErGjW4MQ=
-X-Google-Smtp-Source: AGHT+IHCPE7rw714RYr3j7ETlQz05ktjICs2dDW2KP0KCAATO33AJmOoGXUsgzyGMtwLfRJDZwbr3w==
-X-Received: by 2002:a05:6a00:1143:b0:6ce:7b6f:8c82 with SMTP id
- b3-20020a056a00114300b006ce7b6f8c82mr9356975pfm.0.1702302384587; 
- Mon, 11 Dec 2023 05:46:24 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:1d51:eaf7:9aaa:d7c])
- by smtp.gmail.com with ESMTPSA id
- u10-20020a62d44a000000b006cde1cef719sm6454221pfl.152.2023.12.11.05.46.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 05:46:24 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: lpmeyer@ics.com, trini@konsulko.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] imx: imx-hab: Select SPL_DRIVERS_MISC in the SPL case
-Date: Mon, 11 Dec 2023 10:46:17 -0300
-Message-Id: <20231211134617.457471-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id D9C69876F2
+ for <U-Boot@lists.denx.de>; Mon, 11 Dec 2023 03:23:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
+Authentication-Results: phobos.denx.de; spf=fail
+ smtp.mailfrom="junliang.tan@sw_buildbot"@starfivetech.com
+Received: by mdcsw (Postfix, from userid 5274)
+ id AC0CD2C841ED; Mon, 11 Dec 2023 10:23:04 +0800 (CST)
+From: Jun Liang Tan <junliang.tan@starfivetech.com>
+To: U-Boot@lists.denx.de
+Cc: cheehong.ang@starfivetech.com, junliang.tan@starfivetech.com,
+ Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
+ Wei Liang Lim <weiliang.lim@starfivetech.com>
+Subject: [PATCH v2] timer: starfive: Add Starfive timer support
+Date: Mon, 11 Dec 2023 10:22:10 +0800
+Message-Id: <20231211022210.3880678-1-junliang.tan@starfivetech.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 11 Dec 2023 14:47:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,38 +52,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
 
-Selecting CONFIG_IMX_HAB=y on a SPL target, such as apalis_imx6_defconfig,
-for example, leads to the following build error:
+Add timer driver in Starfive SoC. It is an timer that outside
+of CPU core and inside Starfive SoC.
 
-/usr/bin/arm-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function `imx_hab_is_enabled':
-arch/arm/mach-imx/hab.c:879: undefined reference to `fuse_read'
+Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
 
-fuse_read() comes from SPL_MXC_OCOTP, which depends on SPL_DRIVERS_MISC,
-since commit 251a3053b1e6 ("misc: imx: remove DM dependency for ocotp
-driver in SPL").
-
-Select SPL_DRIVERS_MISC in the SPL case to fix this build issue.
-
-Reported-by: Lisandro Pérez Meyer <lpmeyer@ics.com>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
+Changes for v2:
+- correct driver name, comment, variable
 ---
- arch/arm/mach-imx/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/timer/starfive-timer.c | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index abd48d42583a..c34bc25c0bfb 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -54,6 +54,7 @@ config IMX_HAB
- 	bool "Support i.MX HAB features"
- 	depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5 || ARCH_IMX8M || ARCH_MX7ULP
- 	select FSL_CAAM if HAS_CAAM
-+	select SPL_DRIVERS_MISC if SPL
- 	imply CMD_DEKBLOB if HAS_CAAM
- 	help
- 	  This option enables the support for secure boot (HAB).
+diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-timer.c
+index 816402fdbf..6ac7d7f1d0 100644
+--- a/drivers/timer/starfive-timer.c
++++ b/drivers/timer/starfive-timer.c
+@@ -1,7 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * Copyright 2022 StarFive, Inc. All rights reserved.
+- *   Author: Lee Kuan Lim <kuanlim.lee@starfivetech.com>
++ *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+  */
+ 
+ #include <common.h>
+@@ -48,8 +48,8 @@ static int starfive_probe(struct udevice *dev)
+ 	int ret;
+ 
+ 	priv->base = dev_read_addr_ptr(dev);
+-	if (IS_ERR(priv->base))
+-		return PTR_ERR(priv->base);
++	if (!priv->base)
++		return -EINVAL;
+ 
+ 	timer_channel = dev_read_u32_default(dev, "channel", 0);
+ 	priv->base = priv->base + (0x40 * timer_channel);
+@@ -64,14 +64,16 @@ static int starfive_probe(struct udevice *dev)
+ 		return ret;
+ 	uc_priv->clock_rate = clk_get_rate(&clk);
+ 
+-	/* Initiate timer, channel 0 */
+-	/* Unmask Interrupt Mask */
++	/*
++	 * Initiate timer, channel 0
++	 * Unmask Interrupt Mask
++	 */
+ 	writel(0, priv->base + STF_TIMER_INT_MASK);
+ 	/* Single run mode Setting */
+ 	if (dev_read_bool(dev, "single-run"))
+ 		writel(1, priv->base + STF_TIMER_CTL);
+ 	/* Set Reload value */
+-	priv->timer_size = dev_read_u32_default(dev, "timer-size", 0xffffffff);
++	priv->timer_size = dev_read_u32_default(dev, "timer-size", -1U);
+ 	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
+ 	/* Enable to start timer */
+ 	writel(1, priv->base + STF_TIMER_ENABLE);
+@@ -85,7 +87,7 @@ static const struct udevice_id starfive_ids[] = {
+ };
+ 
+ U_BOOT_DRIVER(jh8100_starfive_timer) = {
+-	.name		= "jh8100_starfive_timer",
++	.name		= "starfive_timer",
+ 	.id		= UCLASS_TIMER,
+ 	.of_match	= starfive_ids,
+ 	.probe		= starfive_probe,
 -- 
-2.34.1
+2.25.1
 
