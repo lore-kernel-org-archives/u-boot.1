@@ -4,67 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67B3C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:54:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D97DCC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:54:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C43877D4;
-	Mon, 11 Dec 2023 18:53:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D5A28877C6;
+	Mon, 11 Dec 2023 18:53:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VPClBr7b";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mihBtlyK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A66686308; Mon, 11 Dec 2023 18:53:25 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id EF350877BA; Mon, 11 Dec 2023 18:53:11 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 897A5877CD
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:53:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DBD4877A9
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:53:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5d05ff42db0so45762717b3.2
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:53:23 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dbc662854adso2007681276.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:53:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702317202; x=1702922002; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702317185; x=1702921985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KaaUHeguNeeyPvh/3BsI6tO6gHOmGjp9EHGMdlc5nfU=;
- b=VPClBr7bZbEmBUf3apXNLavUSrXj6mVXNPkoQfAgfs26l20QrIVCb7ouFC3etxe7tZ
- OXiKuSQ2jp0+fF1/7FGdJXQ8aUbSwSeQB25UewcEnf6HCYTLNGUE2YfYxfCABMSjovtw
- iig+/R0UsTHVAHvQHx+dFWiMYAaAuzqfhXQ7k=
+ bh=petkZ4p0QHcTWt9NS/GnWE9K1OqBj6pxmd7IMetzKRY=;
+ b=mihBtlyKKNow0e2bWi8J8w/zpw5ATQiYLKk+6xQgTIa/1ljp/LtzWxFQi33RDE0h6+
+ JqpL/vvSVrfbpdGgoVsG8uKztRUHiuGPoFum+255IuwbQxKhxodKlsoctn0H4RCOM+eW
+ rV8U55q0oPkbnO2UFumczbBe9lIS5wghoOEbs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702317202; x=1702922002;
+ d=1e100.net; s=20230601; t=1702317185; x=1702921985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KaaUHeguNeeyPvh/3BsI6tO6gHOmGjp9EHGMdlc5nfU=;
- b=WT37ieRdzoVlFraRjBFcOkYBCDPb4xvlTrawj25p6CSEkLni+MiCdAEp3FjGuU1lhS
- gaH9u2gU+xDV6ErKyJUo7yPk10wnkQs1qf80Zh+RyKEWJCBdycaxIsh50nsv6zXRtQSw
- wocQO/88t+3U/UvYp6oPWHf5ryFtzFl02chR1gUjiUS9paSyXiQwLsEzNMJg7x8n/0rE
- j8thIBPPszzMqoe6wYt4foOw74nBpFBJdIblOA33esy6bsr9Vk2zcOiuT8RBgx9RFlxX
- 2dWcGC1wov9yNMq22Ks3NK/iJBeJQ3SDCX0bQPUzZE5F8J1n3cPFAwUbLgonbuUWYdZ4
- mkew==
-X-Gm-Message-State: AOJu0YxexEe22jFkkSL4UCpGCse5uuPL2+TEk5D5xFx2tl/OTIIoIhhH
- mkcHiDMI1ErEhS1W/zrwFr1t3EZOkrc5O999ndJM6Q==
-X-Google-Smtp-Source: AGHT+IFjxGZJU90MpZWdz2tbYFQ4O0bJdgSc5NtG8OmcMag+6363BX92KqDOYlQD9reFxXijetSzrZGouGsMRDaaIiI=
-X-Received: by 2002:a0d:d4d0:0:b0:5cc:dcf:47a4 with SMTP id
- w199-20020a0dd4d0000000b005cc0dcf47a4mr4008935ywd.40.1702317202005; Mon, 11
- Dec 2023 09:53:22 -0800 (PST)
+ bh=petkZ4p0QHcTWt9NS/GnWE9K1OqBj6pxmd7IMetzKRY=;
+ b=kVszRz0t4axH+dxLJD9DPUrbvfyg252epDAFaaKqpWZHjOLaYgBJb9N1qsojmTM12b
+ gf+r7djg4gfU2LjN9FA+ag8m+/XHqISM12co/h4jAgOr/0hVyn6C7RVc2jGKJeC+Pa1l
+ Jb4vzGnQuhHrcoqZTtxGnwYs5IVM8HtueZdzlJBHCkScYnFWtZDdTKj271HeiCShkyzO
+ OWHdSLThJh7O+JwdlRq7r23+F0PswkDQxLSa1pAvwvdTK1TIEWK5fLnOIpZVnuwbOmyO
+ xjynNp8HQ4EQKkmpe4WNVBjRzMT+Fg+ykhgFOPGSHaOzM9bS+XAkeu1qzfpFqxi6YB9D
+ QFyg==
+X-Gm-Message-State: AOJu0Yy99BJuyEsVvpmjK1ut4xTGIqomGwsoO0MMmF7Ul+CbCBylvwhS
+ 6rmJijfU5iRLoIF8Brm8HkPiAZv3RSALHJsmBKiDcg==
+X-Google-Smtp-Source: AGHT+IE5C6SV8FY1TgUWxLBQnkwywB/6/VPxotRdso8ZB5NnNiYcnbjXXGnuc399jw/mqJCO9pzE0vsrc5K0tQv9AEI=
+X-Received: by 2002:a5b:50b:0:b0:dbc:b0f2:94f8 with SMTP id
+ o11-20020a5b050b000000b00dbcb0f294f8mr525564ybp.108.1702317184845; Mon, 11
+ Dec 2023 09:53:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20231209200300.12272-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231209200300.12272-1-heinrich.schuchardt@canonical.com>
+References: <20231204002642.895926-1-sjg@chromium.org>
+ <20231209190932.GZ2513409@bill-the-cat>
+In-Reply-To: <20231209190932.GZ2513409@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 Dec 2023 10:52:11 -0700
-Message-ID: <CAPnjgZ0ApG8GpgHgr-dS9se7GkSn_YnWpPn0n5V9BaTtuKfHNA@mail.gmail.com>
-Subject: Re: [PATCH] CI: update pylint to recent version
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, u-boot@lists.denx.de
+Date: Mon, 11 Dec 2023 10:52:07 -0700
+Message-ID: <CAPnjgZ2qtrJZQ=x32Z9ESsYkhRv+1aseHSpoJo9_VW8_uN+guA@mail.gmail.com>
+Subject: Re: [PATCH 00/18] Complete decoupling of bootm logic from commands
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>, 
+ Chanho Park <chanho61.park@samsung.com>, 
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Eddie James <eajames@linux.ibm.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Leo <ycliang@andestech.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mario Six <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Nikita Shubin <n.shubin@yadro.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, 
+ Rick Chen <rick@andestech.com>, Safae Ouajih <souajih@baylibre.com>, 
+ Scott McNutt <smcnutt@psyent.com>, Sean Anderson <sean.anderson@seco.com>,
+ Stefan Roese <sr@denx.de>, Thomas Chou <thomas@wytron.com.tw>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>, 
+ Wolfgang Denk <wd@denx.de>, uboot-snps-arc@synopsys.com, 
+ uboot-stm32@st-md-mailman.stormreply.com
 Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Mon, 11 Dec 2023 18:53:38 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,28 +104,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 9 Dec 2023 at 13:03, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sat, 9 Dec 2023 at 12:09, Tom Rini <trini@konsulko.com> wrote:
 >
-> We are missing some Python problems like
+> On Sun, Dec 03, 2023 at 05:26:16PM -0700, Simon Glass wrote:
 >
->    "Using variable 'varname' before assignment"
+> > This series continues refactoring the bootm code to allow it to be used
+> > with CONFIG_COMMAND disabled. The OS-handling code is refactored and
+> > a new bootm_run() function is created to run through the bootm stages.
+> > This completes the work.
+> >
+> > A booti_go() function is created also, in case it proves useful, but at
+> > last for now standard boot does not use this.
+> >
+> > This is cmdd (part d of CMDLINE refactoring)
+> > It depends on dm/bootstda-working
+> > which depends on dm/cmdc-working
 >
-> Switch to a more recent version. Adjust the documentation accordingly.
+> Since I would ask "what's the size impact of all of this?", I went and
+> checked. I rebased your current cmdd-working branch on top of current
+> next, and compared. While I'm sure this will change a little given
+> feedback so far, generally platforms shrink a little (probably due to
+> the bootm args stuff you dropped, but may need to keep). The only big
+> growth I saw was branch specific and your "rpi" patch, oh yes, that
+> grows rpi_4 given that you change a bunch of stuff there. So that
+> doesn't count.
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  .azure-pipelines.yml      | 2 +-
->  .gitlab-ci.yml            | 2 +-
->  doc/develop/python_cq.rst | 4 ++--
->  3 files changed, 4 insertions(+), 4 deletions(-)
+> So generally speaking, I'm OK with this series up to cmdd-working, and
+> will continue catching up and providing specific feedback.
 >
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Is there an associated patch to actually fix these problems?
+OK, great. I have had a busy week but may be able to catch up a bit on
+the plane.
 
 Regards,
 Simon
