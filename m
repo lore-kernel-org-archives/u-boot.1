@@ -4,37 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52470C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 13:47:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F601C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 13:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A292087682;
-	Mon, 11 Dec 2023 14:47:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 2015987766;
+	Mon, 11 Dec 2023 14:47:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=devialet.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=devialet.com header.i=@devialet.com header.b="X41cmE9e";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BE1487716; Mon, 11 Dec 2023 03:23:11 +0100 (CET)
-Received: from mdcsw (unknown [202.188.176.82])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2CC9D8761C; Mon, 11 Dec 2023 11:06:40 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9C69876F2
- for <U-Boot@lists.denx.de>; Mon, 11 Dec 2023 03:23:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
-Authentication-Results: phobos.denx.de; spf=fail
- smtp.mailfrom="junliang.tan@sw_buildbot"@starfivetech.com
-Received: by mdcsw (Postfix, from userid 5274)
- id AC0CD2C841ED; Mon, 11 Dec 2023 10:23:04 +0800 (CST)
-From: Jun Liang Tan <junliang.tan@starfivetech.com>
-To: U-Boot@lists.denx.de
-Cc: cheehong.ang@starfivetech.com, junliang.tan@starfivetech.com,
- Kuan Lim Lee <kuanlim.lee@starfivetech.com>,
- Wei Liang Lim <weiliang.lim@starfivetech.com>
-Subject: [PATCH v2] timer: starfive: Add Starfive timer support
-Date: Mon, 11 Dec 2023 10:22:10 +0800
-Message-Id: <20231211022210.3880678-1-junliang.tan@starfivetech.com>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id 28732876BA
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 11:06:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=devialet.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=nicolas.heemeryck@devialet.com
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-334ae2b2337so735903f8f.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 02:06:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=devialet.com; s=google; t=1702289194; x=1702893994; darn=lists.denx.de;
+ h=mime-version:references:in-reply-to:message-id:date:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pUYFH2gDDc66Md+SkvSPyz/mTFR7C4LNXn1fZwpOdZE=;
+ b=X41cmE9eOXN7tgBh3qZeYt6x5DE37o7+3OvHkhIrZ8q26/fMG7F+2BoQrvMlWU2ukG
+ Uw2MmzP4YaVNxqstphTbPCCUv+/i7xQGolk887IjTVZW/AsR5kiUA7yzo2BmIE88uvl2
+ M1VfLIkwnReL1drS5BIO64aEuI1QAD/pe7RiY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702289194; x=1702893994;
+ h=mime-version:references:in-reply-to:message-id:date:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pUYFH2gDDc66Md+SkvSPyz/mTFR7C4LNXn1fZwpOdZE=;
+ b=mPw5JwjGweNtZa2uxtYMdI1hNj5OkM/G00osGT/LbJzKYrt92Py1/agb6y+n90MbSl
+ MfacMFscHNqgYHnyxLl3GmVa2J047W2zTS09W8iBPW3eAc11hBUvTYhLtJsbZN3ELxuo
+ 0sK0oQMarY8StlC4ag0H6QLqnww4X+1o1ufHUciwZmthWJ5jae4Qaw5LGF9CdmcTH6bR
+ w21fyH1qspvhAmpVYdhv0IhZPEWVSHEJoPA+c1hwjOGcVLLOBHJIiqLrNlhW2nECY2Bd
+ i/WGViVEwJtn/NGkVYH5ExILb1k5FNNUCSwKlJG1c95URajAJWFDJBC5CuZ2CEq0pQYE
+ i/Mg==
+X-Gm-Message-State: AOJu0Yw9iDM1GaLmsANN931y6cErw+pm1YR7JO8+7Hy0LVNpxE/TTZxf
+ VHagvI1cItIhMxRtMDpOzmW0iKzyu5Gb2gfNXKKN1kynuOj9VX8IIvP+5akQEL3CJPxAxRffxwr
+ wEQJHi7LQaaB7+DUfw6mlZXhwipsRzGz8wPPQrBWDk+pPreWHsKb6vOPE4acQNZSOZJSeyRADvQ
+ bfjQjdl6j5TtE=
+X-Google-Smtp-Source: AGHT+IENDYBzjb3lhE0A4rnWWR295E51SRW9Eeeuz4nOwmLRP8ZNhZ+0qEJ6naRhFMBi9lwFg2W6CQ==
+X-Received: by 2002:a05:600c:1c0d:b0:40a:771f:6a56 with SMTP id
+ j13-20020a05600c1c0d00b0040a771f6a56mr5200823wms.4.1702289194338; 
+ Mon, 11 Dec 2023 02:06:34 -0800 (PST)
+Received: from nicolas-laptop.. ([2a01:e0a:297:6e80:8c1:cec5:e3b7:94b1])
+ by smtp.gmail.com with ESMTPSA id
+ g20-20020a05600c4ed400b0040c31bb66dcsm12173591wmq.20.2023.12.11.02.06.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Dec 2023 02:06:34 -0800 (PST)
+From: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+Subject: [PATCH 1/1] clk: imx8mn: add pwm clocks
+Date: Mon, 11 Dec 2023 11:06:13 +0100
+Message-Id: <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
+References: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
 X-Mailman-Approved-At: Mon, 11 Dec 2023 14:47:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -52,73 +90,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Based on Linux kernel 6.7-rc4, add necessary clocks for the PWM
+controllers.
 
-Add timer driver in Starfive SoC. It is an timer that outside
-of CPU core and inside Starfive SoC.
+Signed-off-by: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
 
-Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
-Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
-
-Changes for v2:
-- correct driver name, comment, variable
 ---
- drivers/timer/starfive-timer.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-timer.c
-index 816402fdbf..6ac7d7f1d0 100644
---- a/drivers/timer/starfive-timer.c
-+++ b/drivers/timer/starfive-timer.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright 2022 StarFive, Inc. All rights reserved.
-- *   Author: Lee Kuan Lim <kuanlim.lee@starfivetech.com>
-+ *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
-  */
+ drivers/clk/imx/clk-imx8mn.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
+index 692823e74b88..457acb8a401e 100644
+--- a/drivers/clk/imx/clk-imx8mn.c
++++ b/drivers/clk/imx/clk-imx8mn.c
+@@ -83,6 +83,20 @@ static const char *imx8mn_i2c3_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_
+ static const char *imx8mn_i2c4_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m", "sys_pll3_out", "audio_pll1_out",
+ 					 "video_pll_out", "audio_pll2_out", "sys_pll1_133m", };
  
- #include <common.h>
-@@ -48,8 +48,8 @@ static int starfive_probe(struct udevice *dev)
- 	int ret;
++#ifndef CONFIG_SPL_BUILD
++static const char *imx8mn_pwm1_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
++					 "sys_pll3_out", "clk_ext1", "sys_pll1_80m", "video_pll_out", };
++
++static const char *imx8mn_pwm2_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
++					 "sys_pll3_out", "clk_ext1", "sys_pll1_80m", "video_pll_out", };
++
++static const char *imx8mn_pwm3_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
++					 "sys_pll3_out", "clk_ext2", "sys_pll1_80m", "video_pll_out", };
++
++static const char *imx8mn_pwm4_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
++					 "sys_pll3_out", "clk_ext2", "sys_pll1_80m", "video_pll_out", };
++#endif
++
+ static const char *imx8mn_wdog_sels[] = {"clock-osc-24m", "sys_pll1_133m", "sys_pll1_160m", "m7_alt_pll",
+ 					 "sys_pll2_125m", "sys_pll3_out", "sys_pll1_80m", "sys_pll2_166m", };
  
- 	priv->base = dev_read_addr_ptr(dev);
--	if (IS_ERR(priv->base))
--		return PTR_ERR(priv->base);
-+	if (!priv->base)
-+		return -EINVAL;
+@@ -330,6 +344,22 @@ static int imx8mn_clk_probe(struct udevice *dev)
+ 	clk_dm(IMX8MN_CLK_ENET1_ROOT,
+ 	       imx_clk_gate4("enet1_root_clk", "enet_axi",
+ 	       base + 0x40a0, 0));
++	clk_dm(IMX8MN_CLK_PWM1,
++	       imx8m_clk_composite("pwm1", imx8mn_pwm1_sels, base + 0xb380));
++	clk_dm(IMX8MN_CLK_PWM2,
++	       imx8m_clk_composite("pwm2", imx8mn_pwm2_sels, base + 0xb400));
++	clk_dm(IMX8MN_CLK_PWM3,
++	       imx8m_clk_composite("pwm3", imx8mn_pwm3_sels, base + 0xb480));
++	clk_dm(IMX8MN_CLK_PWM4,
++	       imx8m_clk_composite("pwm4", imx8mn_pwm4_sels, base + 0xb500));
++	clk_dm(IMX8MN_CLK_PWM1_ROOT,
++	       imx_clk_gate4("pwm1_root_clk", "pwm1", base + 0x4280, 0));
++	clk_dm(IMX8MN_CLK_PWM2_ROOT,
++	       imx_clk_gate4("pwm2_root_clk", "pwm2", base + 0x4290, 0));
++	clk_dm(IMX8MN_CLK_PWM3_ROOT,
++	       imx_clk_gate4("pwm3_root_clk", "pwm3", base + 0x42a0, 0));
++	clk_dm(IMX8MN_CLK_PWM4_ROOT,
++	       imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
+ #endif
  
- 	timer_channel = dev_read_u32_default(dev, "channel", 0);
- 	priv->base = priv->base + (0x40 * timer_channel);
-@@ -64,14 +64,16 @@ static int starfive_probe(struct udevice *dev)
- 		return ret;
- 	uc_priv->clock_rate = clk_get_rate(&clk);
- 
--	/* Initiate timer, channel 0 */
--	/* Unmask Interrupt Mask */
-+	/*
-+	 * Initiate timer, channel 0
-+	 * Unmask Interrupt Mask
-+	 */
- 	writel(0, priv->base + STF_TIMER_INT_MASK);
- 	/* Single run mode Setting */
- 	if (dev_read_bool(dev, "single-run"))
- 		writel(1, priv->base + STF_TIMER_CTL);
- 	/* Set Reload value */
--	priv->timer_size = dev_read_u32_default(dev, "timer-size", 0xffffffff);
-+	priv->timer_size = dev_read_u32_default(dev, "timer-size", -1U);
- 	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
- 	/* Enable to start timer */
- 	writel(1, priv->base + STF_TIMER_ENABLE);
-@@ -85,7 +87,7 @@ static const struct udevice_id starfive_ids[] = {
- };
- 
- U_BOOT_DRIVER(jh8100_starfive_timer) = {
--	.name		= "jh8100_starfive_timer",
-+	.name		= "starfive_timer",
- 	.id		= UCLASS_TIMER,
- 	.of_match	= starfive_ids,
- 	.probe		= starfive_probe,
+ #if CONFIG_IS_ENABLED(DM_SPI)
 -- 
-2.25.1
+2.34.1
 
+
+-- 
+- Confidential -
