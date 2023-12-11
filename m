@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D44DC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 20:53:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDCAFC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 21:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ACB68777C;
-	Mon, 11 Dec 2023 21:53:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4D8EA87734;
+	Mon, 11 Dec 2023 22:19:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LE7yE0QU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jc41lNpT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B77C587790; Mon, 11 Dec 2023 21:53:33 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 62418876F4; Mon, 11 Dec 2023 22:19:45 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4167C86308
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 21:53:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEE9C8779E
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 22:19:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5d8ddcc433fso36886637b3.1
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 12:53:30 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-286f3e0d010so1492778a91.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 13:19:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702328009; x=1702932809; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=yiRV0Dr48LmhuA4nS3iIYMx7eKymxr0hBJqMIZMgyYs=;
- b=LE7yE0QUSOTEe1rjxNM5enw5sugI/9tlq/mqeSyI/ptZAT5iaxUA+348QsAjQMLTez
- qlsoLHbqspv1XI3ozh21UnnbqrwLJ8gmAhoCuvZFbs8NjEPMNogjAkg9i8SfGjQQrK4B
- ggosPuKPXYxgVPkhXgs3WLuwyY1P6ObY++kdM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702328009; x=1702932809;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1702329580; x=1702934380; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yiRV0Dr48LmhuA4nS3iIYMx7eKymxr0hBJqMIZMgyYs=;
- b=rJG2YgFsvIEMV+cbCnutErRtlr42MKgYgkVotJM5TYaTW3V7DgWehli1Lmx14KJP5m
- mlqss3HcSaSQknHv0hviGdLLJID/+81m9AKIdhQvrmy34kmLuhH2ZBOniUREAHrbkUxu
- 6ErFs/EHuuZ4Bce7rN87g/troxu5i/laJKMKbI4HJrIQxSOYE4GGx6eGIkyZwLPKfePf
- k5iabTmf4f+Cn+o/xL1ocIS7/L4RbLYFC2DcTxmpDAlSIwyL65fuoXnY1gS+kXXKl+ci
- s2+pTzIkUoeHMQnKXOE4hK8LcYDFNBa9gZUHvDn+cFi7HTh3BENn3UqF007xRqdqHDNk
- qkWg==
-X-Gm-Message-State: AOJu0YzZY7REcHpMrk3Q8QTEGHp5RLo2t8KTBCnNd0pt2EU8PD8mEkFQ
- yXBHXXEGxrxV2mZY0jiv+w7eQg==
-X-Google-Smtp-Source: AGHT+IGbDcIasCstNFt/6XtT8jgW2QmCy2KsMD6YHk1/X+CBlOHKCLo33HMH/JkNiX1Dz5cFgy4Ifw==
-X-Received: by 2002:a0d:e901:0:b0:5d7:1940:8ddc with SMTP id
- s1-20020a0de901000000b005d719408ddcmr2322705ywe.67.1702328008896; 
- Mon, 11 Dec 2023 12:53:28 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-fa42-ae3b-3aac-d543.res6.spectrum.com.
- [2603:6081:7b00:6400:fa42:ae3b:3aac:d543])
- by smtp.gmail.com with ESMTPSA id
- j124-20020a819282000000b005d3500ea9fasm3267419ywg.10.2023.12.11.12.53.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 12:53:28 -0800 (PST)
-Date: Mon, 11 Dec 2023 15:53:26 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, jagan@amarulasolutions.com
-Subject: Re: [PATCH v4] arm: dts: rockpro64: Add RockPro64 smbios
-Message-ID: <20231211205326.GX2513409@bill-the-cat>
-References: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
- <20231113112309.730323-1-i@shantur.com>
- <CABEcMwUwDypY090MOYSEtBGMRZOBnTk6hKuM2-OcJW-n+M7OHg@mail.gmail.com>
+ bh=ayVn8KN/6xFe+Kont3U/0fx6RW6SMLingDFXvhGHn7k=;
+ b=jc41lNpTOeyxVfAyrtAfPxSGRBbokANdmfQn9YGmr3rjiRA+tl4phHIKv1uBKrSPsS
+ 2r4c3rAOIlgzRKu20m1T2Q1tyfotF9gh/4jTxfnlq6tQenpFwv3LWHE1B6LPBpXBujBE
+ v7EoKWBT5WcZZxKZmt9HI+o/90brG4YBXsBM92CuD3aFrmNTXvH8So3tLgc3t6WMDFKG
+ 7MJ+Q6NzaFStmD/g9lgvKoPdILnLr2aCsRUcTIWIjMNdEXHcBl9y5Lao/9U/hNVuy8s9
+ od8qBOrClpJwxbdPdf/5A+QGz8+KysDePzRpXZVVeUhPCh6A8FDfxl0D+jwOxo1sRGOq
+ 5+XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702329580; x=1702934380;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ayVn8KN/6xFe+Kont3U/0fx6RW6SMLingDFXvhGHn7k=;
+ b=TH3fuz9qY/SNDwAl/+Ex1atTmNynCGFJxQCwdB6lHqW7mR5NyVhdRNIlpJIl+Ze3xb
+ 4nKZOldPrDFd4OaeM4SerKnBSLl3c4DLBebkLVpJOiJWG2MgEfCRmXSbTsN3KX/wAF9m
+ UYLp+o/gaUgdlR+bPYSrMnnOfLxEB4jOi2jjNFHGFeY06ywQxNQD/OYDqVa7/mvl6ahW
+ xkPS+2OD+90lPj+rx1wsWHQX1Ixxop5ynFN1oiMusufNECkY9svZQrHMCOsUhjVSb5QA
+ R5ObdiWmRjZ2+zuPPlD1lwo2DqXZZi4FCtciYaQDkOeH86JSLiLEz1V1K0/77yBkmyLj
+ 6YsQ==
+X-Gm-Message-State: AOJu0YyymoXs/1N5aWMLradYbhb1phvf8aWFPxxCNUPQuZgsZTbmwkIB
+ KVqMEUnEKBGaet9cdtFyM9HhfdvPuedfFGHjvo0=
+X-Google-Smtp-Source: AGHT+IGQQFF/ZqUDJUhfImxrdBZpxuvHVeXvixZR+mM20o8UYIKUjmd7+IRlahtVJKqhtPtB2eEn3Un6/A+BRHYaa54=
+X-Received: by 2002:a17:90b:3718:b0:286:6955:6754 with SMTP id
+ mg24-20020a17090b371800b0028669556754mr8855859pjb.0.1702329580133; Mon, 11
+ Dec 2023 13:19:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="l04RieoeQfWjukUc"
-Content-Disposition: inline
-In-Reply-To: <CABEcMwUwDypY090MOYSEtBGMRZOBnTk6hKuM2-OcJW-n+M7OHg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
+ <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
+In-Reply-To: <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 11 Dec 2023 18:19:27 -0300
+Message-ID: <CAOMZO5BGOK=SMBxAA6QcAziZQurTN-p-Bh0hWuQiduSHoUvmPw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] clk: imx8mn: add pwm clocks
+To: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,111 +88,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Nicolas,
 
---l04RieoeQfWjukUc
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Dec 11, 2023 at 1:52=E2=80=AFPM Nicolas Heemeryck
+<nicolas.heemeryck@devialet.com> wrote:
+>
+> Based on Linux kernel 6.7-rc4, add necessary clocks for the PWM
+> controllers.
+>
+> Signed-off-by: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
 
-On Mon, Dec 11, 2023 at 08:42:19PM +0000, Shantur Rathore wrote:
-> Hi,
->=20
-> On Mon, Nov 13, 2023 at 11:24=E2=80=AFAM Shantur Rathore <i@shantur.com> =
-wrote:
-> >
-> > Add smbios information for Pine64 RockPro64 board and enable in
-> > config
-> >
-> > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > ---
-> >  Changes
-> >  v4: Change PINE64 to Pine64
-> >  v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
-> >
-> >  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 ++++++++++++++++++++++
-> >  configs/rockpro64-rk3399_defconfig        |  2 ++
-> >  2 files changed, 24 insertions(+)
-> >
-> > diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/r=
-k3399-rockpro64-u-boot.dtsi
-> > index 732727d9b0..089732524a 100644
-> > --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > @@ -9,6 +9,28 @@
-> >         chosen {
-> >                 u-boot,spl-boot-order =3D "same-as-spl", &spi_flash, &s=
-dmmc, &sdhci;
-> >         };
-> > +
-> > +        smbios {
-> > +                compatible =3D "u-boot,sysinfo-smbios";
-> > +                smbios {
-> > +                        system {
-> > +                                manufacturer =3D "Pine64";
-> > +                                product =3D "RockPro64";
-> > +                        };
-> > +
-> > +                        baseboard {
-> > +                                manufacturer =3D "Pine64";
-> > +                                product =3D "RockPro64";
-> > +                        };
-> > +
-> > +                        chassis {
-> > +                                manufacturer =3D "Pine64";
-> > +                                product =3D "RockPro64";
-> > +                        };
-> > +                };
-> > +        };
-> > +
-> > +
-> >  };
-> >
-> >  &sdhci {
-> > diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3=
-399_defconfig
-> > index 4cd6b76665..affb6137e0 100644
-> > --- a/configs/rockpro64-rk3399_defconfig
-> > +++ b/configs/rockpro64-rk3399_defconfig
-> > @@ -90,6 +90,8 @@ CONFIG_BAUDRATE=3D1500000
-> >  CONFIG_DEBUG_UART_SHIFT=3D2
-> >  CONFIG_SYS_NS16550_MEM32=3Dy
-> >  CONFIG_ROCKCHIP_SPI=3Dy
-> > +CONFIG_SYSINFO=3Dy
-> > +CONFIG_SYSINFO_SMBIOS=3Dy
-> >  CONFIG_SYSRESET=3Dy
-> >  CONFIG_USB=3Dy
-> >  CONFIG_USB_XHCI_HCD=3Dy
-> > --
-> > 2.40.1
-> >
->=20
-> Can this please be merged if no changes are required?
->=20
-> [0] - https://patchwork.ozlabs.org/project/uboot/patch/20231113112309.730=
-323-1-i@shantur.com/
-
-Yes, we should just defer this and pickup the SMBIOS series that Ilias
-has posted.
-
---=20
-Tom
-
---l04RieoeQfWjukUc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV3dsMACgkQFHw5/5Y0
-tyyHGgv/fY9w90u9tXn1cmIzJsK0gZ75dd1OiDltDEcHIjvuP7PJX8A8TbDPiYzA
-MC4511AAH3gzN3v/Xmk7Bfj57CPnaWKGNsCz8CiF5/ZBeQaFKvwA+ZnxxrODQpZK
-hhmdL8PDF121r7jEbM1gf9WKrVjDYAycEhn+CAdSLiULO+iuusXC92jh4FYzY4S+
-l6pntRPBW7kt1OG13UHfEfCKkBQ9gwmdwYUSAoNol/6IVTQo4E0HGZnCgHtL0W9t
-hf/Ta7BdV9YjzBhKiEoa2b7fU1WOa43hzLHeA8oQqUopIuWggqpHm07aDIamP1HY
-dOkbZzzF9tG9kJG38x/vhs0SRSGv5jN8ctkwNu8i3jsEa88OUzKgh33ih9m/XtAA
-MquA9ghqWeti5rPUhmnA+WOniCaCpcCvPwbjLek0IyFvoYvckJZ2ORSeuAOozJas
-2PJ/yiJPs4PTcqzODDLz7Gp+DW2tduZVcY7XYeqmxeAOYZAQhnX+/zKjrhuuUkLc
-g6WUcXOG
-=zGzc
------END PGP SIGNATURE-----
-
---l04RieoeQfWjukUc--
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
