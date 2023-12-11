@@ -4,76 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA98CC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972DBC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93DF87796;
-	Mon, 11 Dec 2023 18:53:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 177B3877B0;
+	Mon, 11 Dec 2023 18:53:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OiNYoyZ+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YAHJO2rp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22EF5877B2; Mon, 11 Dec 2023 18:53:12 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 6BEB287796; Mon, 11 Dec 2023 18:53:12 +0100 (CET)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65BC7877AB
+ by phobos.denx.de (Postfix) with ESMTPS id 5CBC1877A8
  for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:53:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so4609419276.0
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-db979bbae81so3645280276.0
  for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:53:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702317185; x=1702921985; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=13ZovILlUhFA0lws9FHsCAfFkZRnsJ/gBzae1UyLoJg=;
- b=OiNYoyZ+Q1XSG5EE8es6jkImoQkd1hSElAP92KA+5pjI1ikLh9iW43juM48adSHwDH
- wAG1ji633q83nSqYH8WPra6FPaucv3GEbqGMZmpD6nNDzHlx3aEb/V1DxHnnHQr+fKsV
- do7JKjdAJGc8SrOW5jcPYeEJrgrclN+F59QXI=
+ bh=O95U9jTlxYAefgSvkh8dskhNv4Ab9ZO/fQ12FLWvgb4=;
+ b=YAHJO2rp7O7BfmxKBpbNYVYB+1pKIGHuf3ZaUsTA0CguuK/TlnM4Ps7oApZSTb804L
+ XTVKhvg6XU9dD5ruUX3Y6CpSCAH6GLozkmUWA2Wyw8QZRIAxBnFrMQuafqLlrQnCMdJZ
+ Tze6UWhs5vZL30Y9txEXwa2QdZyaTKJXKYfng=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702317185; x=1702921985;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=13ZovILlUhFA0lws9FHsCAfFkZRnsJ/gBzae1UyLoJg=;
- b=HbM4eSpUHEyEaN0b8gDVi04kTmHTzcX9Z8FNeYZlv5+/clpJzI5FO38KOMqU/rHMo6
- JFCFfZH03tw+mx4l/xaWf6VO3uQP8M1nUaqDH4wq/jZQrxjZefr7RWaGsZZdf4/VMmEk
- Eg6pwYe+Yu9KToK+Oaxw0V0jfg58C68AHC6yilqFclKkfeK63ZAJ+5H30Lj91Ssm8K69
- K+5VuF5xH9t9Z/a4W47XDCUeOGAm0PJYV6+vVH9goOENozDs5YPLIK8jCli8/AYjGxpv
- Dhn5ar8a8nGSjF09SApNvmrvhVQYn57LkUk7GGDNdAXbXAG0ReFyDTsglrBjUjfQIhpI
- wIzg==
-X-Gm-Message-State: AOJu0Yw6OlGSIrOl/I6QKqeMYkpDGl37aJX7lD868I1+eBmgYyKUf3X9
- Xgb61mXjbJqnkRpXgor8uxR/Jk408xcOnPtFYoL+FQ==
-X-Google-Smtp-Source: AGHT+IGzCLxJ/x9TGHTMUa7B3NVEC0BB5LLP0CFxPkmB+A1o9Fbuu85hRb0O2r1Tq/hLXM6gst0RMuJfa54iP/uNlNg=
-X-Received: by 2002:a05:6902:3cc:b0:db5:4ae6:1605 with SMTP id
- g12-20020a05690203cc00b00db54ae61605mr2806790ybs.65.1702317184892; Mon, 11
- Dec 2023 09:53:04 -0800 (PST)
+ bh=O95U9jTlxYAefgSvkh8dskhNv4Ab9ZO/fQ12FLWvgb4=;
+ b=rb0YWFQLwZz6zTPZS2gEp2UbdA/lsSuHESz3apG19DQpcQJn1S6LtxErlYnFysGceX
+ eLvEyUbDPyCgnV5H+2mkBw+RpKd32i3rGUtUzGq7UpKVsJqVvqHI24BjU4toBAlDZSVo
+ lDBZ/9b6hZlu5iV60gQwmE6jfMDeWQcoWR2HUj2Dr7naoJckJWkcsmzqPr0j3h+GZDFP
+ o2ygZOo9KVXzhF43LP9lwrUIfqsNgdmShyM/NMQedIbx7I1Ezm/aFRSrlxbSSELM7LCq
+ T41JlyK30iyYnPU/2ZDyuM06LlzB+y7smo0PLfYuD+6UAO//vsyej+F2v1ckpBBe1szW
+ q3ww==
+X-Gm-Message-State: AOJu0Yw1jjkh1DxXx4i2rlWWup1LZIZ7n/1+LhqisSIZZLzsvtoT3pOp
+ uUXx+kM9plY/LxjeLFhZyowprEWxu4TyJD8/ZD3iqg==
+X-Google-Smtp-Source: AGHT+IE2xwVguDMKfG7VWw43veW4MbHHjsRY1uMYDJyole/KgsxtIYSBWlGF/qIRn+cQxBqgbshvgwdc9iI+aT8dCJw=
+X-Received: by 2002:a25:ac46:0:b0:dbc:afb3:84c4 with SMTP id
+ r6-20020a25ac46000000b00dbcafb384c4mr638286ybd.110.1702317184840; Mon, 11 Dec
+ 2023 09:53:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20231204003144.899097-1-sjg@chromium.org>
- <20231203173130.2.I826be28024caa3834c47f752d0be1000855dd4fd@changeid>
- <20231209183917.GU2513409@bill-the-cat>
-In-Reply-To: <20231209183917.GU2513409@bill-the-cat>
+References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 11 Dec 2023 10:52:10 -0700
-Message-ID: <CAPnjgZ3gASnXP7Hx6r3SuCRtbKJ2nwOQyjAfRbDtWpVf77eAyQ@mail.gmail.com>
-Subject: Re: [PATCH 02/14] bootm: Add a Kconfig option for bootm functionality
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Brodkin <abrodkin@synopsys.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Eric Nelson <eric@nelint.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Michal Simek <michal.simek@amd.com>, 
- Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
+Date: Mon, 11 Dec 2023 10:52:25 -0700
+Message-ID: <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
+Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,27 +81,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek,
 
-On Sat, 9 Dec 2023 at 11:39, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 10 Dec 2023 at 08:03, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
-> On Sun, Dec 03, 2023 at 05:31:26PM -0700, Simon Glass wrote:
+> In case the cyclic framework is enabled, poll the card detect of already
+> initialized cards and deinitialize them in case they are removed. Since
+> the card initialization is a longer process and card initialization is
+> done on first access to an uninitialized card anyway, avoid initializing
+> newly detected uninitialized cards in the cyclic callback.
 >
-> > Create a separate Kconfig option which enables the bootm logic,
-> > separate from the 'bootm' command. This will eventually allow booting
-> > without CMDLINE enabled.
-> >
-> > Update boards which disable CMD_BOOTM to disable BOOTM instead, since
-> > CMD_BOOTM now depends on BOOTM
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+> V2: Move the cyclic registration/unregistration into mmc init/deinit
+> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
+>     does not work with structure members
+> ---
+>  drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
+>  include/mmc.h     |  5 +++++
+>  2 files changed, 41 insertions(+)
 >
-> This is fine, to start with. But I wonder if it shouldn't be an
-> unprompted option and select'd by functionality as needed. That might be
-> clearer to the user going through menus, but we can see better once the
-> whole picture is available.
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index eb5010c1465..a5686dbc12e 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
+>         return err;
+>  }
+>
+> +#if CONFIG_IS_ENABLED(CYCLIC)
+> +static void mmc_cyclic_cd_poll(void *ctx)
+> +{
+> +       struct mmc *m = ctx;
+> +
+> +       if (!m->has_init)
+> +               return;
+> +
+> +       if (mmc_getcd(m))
+> +               return;
+> +
+> +       mmc_deinit(m);
+> +       m->has_init = 0;
+> +}
+> +#endif
+> +
+>  int mmc_init(struct mmc *mmc)
+>  {
+>         int err = 0;
+> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
+>         if (err)
+>                 pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+>
+> +#if CONFIG_IS_ENABLED(CYCLIC)
 
-Perhaps. As you imply, it will likely become clearer later.
+We really shouldn't be adding new #ifdefs to the code.
+
+If you really want to make put ->cyclic behind an #ifdef then how
+about creating an accessor as is done in global_data.h ?
+
+> +       if (!mmc->cyclic) {
+> +               /* Register cyclic function for card detect polling */
+> +               mmc->cyclic = cyclic_register(mmc_cyclic_cd_poll, 100 * 1000,
+> +                                             mmc->cfg->name, mmc);
+> +               if (!mmc->cyclic) {
+> +                       printf("Failed to register %s CD poll function\n",
+> +                               mmc->cfg->name);
+> +                       err = -EINVAL;
+> +               }
+> +       }
+> +#endif
+> +
+>         return err;
+>  }
+>
+> @@ -3014,6 +3043,13 @@ int mmc_deinit(struct mmc *mmc)
+>  {
+>         u32 caps_filtered;
+>
+> +#if CONFIG_IS_ENABLED(CYCLIC)
+> +       if (mmc->cyclic) {
+> +               cyclic_unregister(mmc->cyclic);
+> +               mmc->cyclic = NULL;
+> +       }
+> +#endif
+> +
+>         if (!CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) &&
+>             !CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) &&
+>             !CONFIG_IS_ENABLED(MMC_HS400_SUPPORT))
+> diff --git a/include/mmc.h b/include/mmc.h
+> index 1022db3ffa7..4256d5567ef 100644
+> --- a/include/mmc.h
+> +++ b/include/mmc.h
+> @@ -14,6 +14,7 @@
+>  #include <linux/sizes.h>
+>  #include <linux/compiler.h>
+>  #include <linux/dma-direction.h>
+> +#include <cyclic.h>
+>  #include <part.h>
+>
+>  struct bd_info;
+> @@ -739,6 +740,10 @@ struct mmc {
+>         u8 hs400_tuning;
+>
+>         enum bus_mode user_speed_mode; /* input speed mode from user */
+> +
+> +#if CONFIG_IS_ENABLED(CYCLIC)
+> +       struct cyclic_info      *cyclic;
+> +#endif
+>  };
+>
+>  #if CONFIG_IS_ENABLED(DM_MMC)
+> --
+> 2.42.0
+>
 
 Regards,
 Simon
