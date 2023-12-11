@@ -4,130 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E48C46CA3
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 15:24:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D6CEC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 16:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1FF68771F;
-	Mon, 11 Dec 2023 16:24:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=hitachienergy.com
+	by phobos.denx.de (Postfix) with ESMTP id E609F87775;
+	Mon, 11 Dec 2023 17:28:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hitachienergy.com header.i=@hitachienergy.com header.b="gREloQCJ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="P5/kbvAM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC7058771F; Mon, 11 Dec 2023 16:24:03 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 14B8C8777C; Mon, 11 Dec 2023 17:28:01 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DB66876F8
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 16:23:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=hitachienergy.com
+ by phobos.denx.de (Postfix) with ESMTPS id B04A3876E2
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 17:27:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=holger.brunck@hitachienergy.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=i615vzooCbNXjU0s+kbYwCKrkhNFRIvZ9Ve47GuaEou4tyPPQUefXm7cM94ND9bTKieiYVtAbMlW8fht3f2VxjYeEKJKMih7GBWSNNMTjqlkFR6fk++qoZge7iV8dq6Yt5O7tDpQD6vGhONZWTEVheiwj92V075LjFGWH73WAJScLM4Ks3E214nhecFcbwXUtOm539SMDGRo//Ku9I+vMlKZ9kyPa4JpPfqSX2yWmEL3ivgiNzkNf9uX8nMmcom5AQO7bFJcbxDzsTbMURClQ3vSpAaZqzpAuGEoeJDghyFWwrxrP10K+hhdw3ZFCcTgnMhH5hfFffPksQWpI9PkCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SQZOPQQRF3kDJAor1xoY97F3iCW203LJirhN1+yMkRo=;
- b=LiVnsY35tMM+MJbLUZ/RFYWRt9qyMlbJU/wMEdQf4aKkBo6V9YEV7sHCDf5+4UYV8eSDFv+/PvxT6rwj+DKfxDFSJ3n+prgBJ5cr8J2zgt+IjR3uVtvvzRjD2tv2ubkXTQvZI9aWD/JH9RF1r5++Tq4RerG41LmF1az0Sq5BYrn3oY2qXMeOXjEYZmfvAf4zAc2UqRehoVbcR+E5+TOPGwu6UZv/baxmEbWYncqzMHRxvYt40fSj1Vq1mj86NnRTP6nD5SYLwpPBIMReSQBUieZIyjAZcpLhDpqV1VmJIoRU43gAMD0c12Xw46t9wcMGJ3DBC/V+p53eCanvi22BEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=hitachienergy.com; dmarc=pass action=none
- header.from=hitachienergy.com; dkim=pass header.d=hitachienergy.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hitachienergy.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SQZOPQQRF3kDJAor1xoY97F3iCW203LJirhN1+yMkRo=;
- b=gREloQCJccZlZzoCnOZkX0O4fIxJDylUrF/I6CwAYDcEm8cZ1ODiAbdxcUokKATRCkdZceVRjBkJf0mnVq5tySwQTnaqfPC/Ctf4eh5BPxoVQV3HbNZ+iu5P3h1RIVtOhCsnP5TXMdjVEhcdjUlMDh4Rki1I2eBe2kG7KWnUsCdeui7cA2mu1FmUAUI9roPJZnTV0LuF6+Xaj3DrUUzKpiY6JAlcHYG7bYkvZ3daD/mcPoAmyosL3DVvz6LyjU3JojoQ7h2RtZ7rCPcsG6gUWgE124MoB/NJ3DoYxHiCr0Lz94kDpQ7JQiEq30tWF4PgxWzV0SxsM44XlarqVVGHWQ==
-Received: from DU2PR06MB8334.eurprd06.prod.outlook.com (2603:10a6:10:2e5::13)
- by GVXPR06MB8798.eurprd06.prod.outlook.com (2603:10a6:150:112::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Mon, 11 Dec
- 2023 15:23:57 +0000
-Received: from DU2PR06MB8334.eurprd06.prod.outlook.com
- ([fe80::7761:fd7a:8b02:9546]) by DU2PR06MB8334.eurprd06.prod.outlook.com
- ([fe80::7761:fd7a:8b02:9546%3]) with mapi id 15.20.7068.031; Mon, 11 Dec 2023
- 15:23:57 +0000
-From: Holger Brunck <holger.brunck@hitachienergy.com>
-To: Francis Laniel <francis.laniel@amarulasolutions.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, Tom Rini
- <trini@konsulko.com>, Harald Seiler <hws@denx.de>, Simon Glass
- <sjg@chromium.org>, Niel Fourie <lusus@denx.de>, Heiko Schocher <hs@denx.de>, 
- Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>
-Subject: RE: [PATCH v12 24/24] configs: Use old hush for several boards
-Thread-Topic: [PATCH v12 24/24] configs: Use old hush for several boards
-Thread-Index: AQHaKiZLt4odRaYmh0mj/AQTFSc9eLCkNr5w
-Date: Mon, 11 Dec 2023 15:23:57 +0000
-Message-ID: <DU2PR06MB83347C10573EE54EC0259B32F78FA@DU2PR06MB8334.eurprd06.prod.outlook.com>
-References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
- <20231208223025.55076-25-francis.laniel@amarulasolutions.com>
-In-Reply-To: <20231208223025.55076-25-francis.laniel@amarulasolutions.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-processedbytemplafy: true
-x-templafyemailsigvstoversion: 8.28.0.0
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=hitachienergy.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DU2PR06MB8334:EE_|GVXPR06MB8798:EE_
-x-ms-office365-filtering-correlation-id: 4c0e8a5b-03f1-4e48-80a0-08dbfa5d3185
-x-he-o365-outbound: HEO365Out
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: LkMBDgNKkbjA7NiIZ8RsCjrrCZds5euCoEn/cW9mT7yMbsADx7GPuwYu6Xj8SPRCxbB96k7VjYxPmX2Pvdf4eBjaaFLpFIpyMGdENVTWt6VTL8cKutxpvqkwlKXHGVqJc452Njgq3LmVB0GPRvWW6y/uYctxGojJ1PpVKqLbCGl2uVcKkFrpUmWNdIfhYfD7gweG9zEmqiHnexlRzxYQOuiuZCWKTCbkJPu2UHUqUWANO4LOagoaw8xNnTkYZoI4d1psP+qqncA32TAC/xUzLfYluqR56iQ/mJ+a8TYDblojg1m8e27+lvLOC8dj1e3VfRdwSyKjVCI2UimBoThcX7j3ZmMnVpuEFcsPenJXv3dU2zst8nQql/ITvctbalmUbKeZp1A5ve1VQM1LFrFkkb/rmj0DttPrjO57MxgR0i/aVJDjyq27CmKDSbX/YWMMecWuywWOdG3zV5vbwiubgW+cVcCPDxNtlpABW6JaCup8qqGBja3q3BM5/JOF+zx0zBHfbOorkS9JSIQSs5J/Ofj0EifhKbr/O/HgtVHZoTuzi+dYcEiPoFknxHzg/ITGNq/ZM41M5Uw9dcK0IXXAXhMjdt5Y6LUMrZ1BBWNBUZWZun6nYYnl4MOLrnS4ceoP
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR06MB8334.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(136003)(396003)(39860400002)(376002)(346002)(230922051799003)(64100799003)(451199024)(186009)(1800799012)(55016003)(107886003)(7696005)(26005)(6506007)(71200400001)(478600001)(9686003)(38070700009)(38100700002)(33656002)(86362001)(82960400001)(2906002)(44832011)(5660300002)(54906003)(66946007)(66556008)(66476007)(66446008)(64756008)(41300700001)(76116006)(83380400001)(122000001)(52536014)(316002)(8936002)(8676002)(4326008)(110136005);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?TvqAJN3IOUguAz0/+hfX0IJ6KLDuOKGgwv3C/6AmSJfw3hk6ux0XxW2fqMav?=
- =?us-ascii?Q?0CGLGrh0vuucQwHliYIR5Yu6sIaeoVwBalAMlkA8erKcaKLCz1MA79+30vUe?=
- =?us-ascii?Q?/uEZ2TlKh7GNkZpRzRxSN2l9kSvPjAwZfGb/8JBwhkdLXIJA1uRIFUezT0kv?=
- =?us-ascii?Q?cHUABEhd7REka3a39LlmQFTO7HHdp31i9vkIfqi9pJ4CRIIjn3E/It6KWqvQ?=
- =?us-ascii?Q?GAgYgAEjVUhIScoatZr5Hu4VtXRYzuVJb7zSHdRogfPbpwh83YSgA8QpGhNu?=
- =?us-ascii?Q?UU3842KRu7M3pISNQ/kuS9TCuv2OF6bRQjTBH4QJALmdgjWqjraldMxOsGFC?=
- =?us-ascii?Q?YiyMNYODcuaelzvQjBz38foe15nOMd86jek4pWuu4e2kGgk0Jp7tSV9rZIT5?=
- =?us-ascii?Q?WM8MXsV8jY8H894GWGvgF2LAohGUcJQhx2bU3o4wlT31MK1SXc/wKqlzYTLc?=
- =?us-ascii?Q?+R3JyLuebGq9Yd7YYLryxlm3Q1zpvWPEJDzZ9nHk8x+OcmbDduhD+PP5HeH2?=
- =?us-ascii?Q?BUTAucyPatP8EVevsn1Bm1YAgVvPANzAg2x1x5zb3ZuXGc5mPhNVhqpf/eWE?=
- =?us-ascii?Q?BaMW7We58EgLoZ5OBKHeSsPcGkU1qGhNnf1PZhtyrApyPrWuChJ1mVNkYAgc?=
- =?us-ascii?Q?cAnGAV2tuvoy8Ml03uL2g5cSGhRgvZd/BZbZHUr6m8pe21DpJC45L1I8JZX3?=
- =?us-ascii?Q?82Qg8qnsUacSeFohGnfv9l6qMyf7/0HvAoGlRZ3+tLncf/j5BDAg+hqT5cTK?=
- =?us-ascii?Q?SfKCoEl+K5PGGKLzh8L2KojZCYst+uO5LPU4pGF3zAS8U7rdbWBa96wK++pP?=
- =?us-ascii?Q?jDQit6HJZYmmV6qUz20oxWgI5kvVO+o53TpBQs/mAas+eBGW0dfar3FW8VI7?=
- =?us-ascii?Q?G1mvH5v5Bm1kjQLe4Pir1+Pu7r/ojuKRyMRp5WVznf9H8cpoqQ0+7oWzioPp?=
- =?us-ascii?Q?cq9A1RWDP4pPe/S/0nME9w+gWs2oj4E9AB5dbs+wQq3Od6mr3yIMS/GsRkz4?=
- =?us-ascii?Q?R8Fyp1u8kV0e4V2Zma+hgwZqb4DjmzPRY2sAPfqvr7DclDCAFVqiD9ODUWVr?=
- =?us-ascii?Q?8NPWjE3L0ONxWwA5eaUN8Xlu0G68kWT+7wjmOZMjSP49jb/qbL2lHQ41LJPT?=
- =?us-ascii?Q?IqyqaVS0Uhdm8r/vFO36o6DhW9VSL2dcuz3VrvCMs6+w+fHoUAleKdtxIIpl?=
- =?us-ascii?Q?HOq1ROskxzKD/b5kLQFKy6cldw4tO7o2IrcVXzO8OnkMRT3qwAtKYN9jKMOW?=
- =?us-ascii?Q?qT3zHflSePPm8ultyqfuJsK6SPBndfv1MHxfjfY/z5rk7IWAxLKVrc/gGMOT?=
- =?us-ascii?Q?mH22HeLLVqlyrJ2IJ+6TAvdac6O6qqBriNiwkAljsl6K7Cc1KrpYf8UE77gQ?=
- =?us-ascii?Q?eHZ2eCoOAB245y0AwAXiW21X+XHs2sX8tjj4NpqYJN0tPMH9nOftfXYIbC7n?=
- =?us-ascii?Q?tO7etwRzMg9MlLCfBZwpVWB5QKpk+awD4cYjZgp4EPe/NQaqB39ZtZJhlO1c?=
- =?us-ascii?Q?B5uIhLln6eN/5TtBu2WfUegBWddZOY7YNGjyly2bQIk+llEj1qOR7+2FpBpW?=
- =?us-ascii?Q?BV6E+uqIVBooNKUTR92mPdj1k3/AgTGIwifr1Cp1LiTzit2JJ//jSzr06QuQ?=
- =?us-ascii?Q?Og=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1702312075; x=1702916875; i=xypron.glpk@gmx.de;
+ bh=IcCgWNhrqLlRDpHhgZ7w3iAoTBJE1g+pePi5g/h/xyg=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=P5/kbvAMRCHwrTYsjbzbsbWgItyQwxgtV7qn25jzMHJOsYGAtF+evSGfs1N6zuKK
+ yJwKePhv8/P/S1XuliS8kI/6jguja+KgHYCg1ZtTo+s0EMmExEY+EjH5rofT8Pa6E
+ K21j3DqZMwRvd2lvCJAK8m+q7atDuyuRAMpeJ+JXujMm26B7PaztUAl2ugapZeYLi
+ gJEk/9v4200tLe7it3MzxfmDALC0bWPApNkOuNwUW3tso3SwDlD4hPVs693BNt/tq
+ aeLpbEizcZAGqKqkpGlfnLEeav5bdTmfvhBXSm09O5HLhuAewg+gj2pe4CXH0SqG1
+ 1Na5ZC9lUwG2AHemDA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKhm-1qsQKX2muQ-00OpuY; Mon, 11
+ Dec 2023 17:27:55 +0100
+Message-ID: <951ffe69-9b87-45ee-a16c-0397bd49eb24@gmx.de>
+Date: Mon, 11 Dec 2023 17:27:50 +0100
 MIME-Version: 1.0
-X-OriginatorOrg: hitachienergy.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR06MB8334.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c0e8a5b-03f1-4e48-80a0-08dbfa5d3185
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Dec 2023 15:23:57.2465 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 7831e6d9-dc6c-4cd1-9ec6-1dc2b4133195
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: a5gCqro29GX7tGd/MTpqOYlbri+3ohtNiMsbMx/tIKE1BHUwrm+s3AQ6qXRFtIIAKUQ8G8jJc8voVSwpzVM/nJsLjqqKL/9AHH7PgbzeneU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR06MB8798
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] lib: vsprintf: enable '%*pb[l]' format specifier
+Content-Language: en-US
+To: lukas.funke-oss@weidmueller.com
+Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
+ <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+References: <20231211122051.1240855-1-lukas.funke-oss@weidmueller.com>
+ <20231211122051.1240855-5-lukas.funke-oss@weidmueller.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231211122051.1240855-5-lukas.funke-oss@weidmueller.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:06xUbz9oABMTn/vGLVAurKSlDYb9vh4gIuhBnbRzyGnxyr9xjF7
+ NywAyURH4vKe3ufYwIVGsF6f97NL9ScLVOjY1RKkv6Vi9NhtJeoXg9N5dgXCefKYRQmR7ZS
+ Wd1HFE6UYAWj3ElLFleMHNo6OWbtVHDS99k+pq08wypAYqO/YQbIDp1eOqNntHjCGOg9a7L
+ BquCmdK+ZeXVZLZCYuG6w==
+UI-OutboundReport: notjunk:1;M01:P0:xdvZBYQGS6Y=;KRKAo1ASlrVQDvB4n2DXS8UBaR3
+ OykHYNfkNmbK3jjK8T1HsBdSZ7lyNvguuo8FH0G5JQhsphtoKXXF5LAMvBYLRUp9ldQNrj21x
+ G7hUn0fYhEvSdy2ZbbdlfzUONulvMnRiFmDtY9ZiLWCAfr5t1ktEQYk2zkMfNcou3GIrM8KaQ
+ TH2rorxaJvK3I6yjI8+WT0noJmaJOvXOZmbAHiEHDRGFYC43+emh/MauyRQmkxXvJGfJ1eRQX
+ SjXgBnbs6St89t9NvXaikBfVfPs9LA4GdGFmVQu3azqSfcmHBEFOjZcjhwAHG7M7UbpWNU+q/
+ mawTrl5kV5kfZW5dkwFDgeNL2MQF7ApZsBfQ/ooL7tQIGSVignkzmOuyyB7YFnwu4l7pDadhh
+ 8Y/WRV9vKJhhGDqALYNIV+Lv0pazjDyyFd1vp570sCws33+xaKPKGPA9XsIbODDeHYfXgmkgG
+ 4pV6C+v2SEt8nfhyFjcQyrCrj+m/LdSYVp88O5iWGwzyR5bgTsAsbHO/YAeZQbqYwzkVOgbzL
+ yazJiqTG2EIFh010ifvXCEsgkUO9DrgtFfMvpGwAaSjJPaAh7zX3hEgYiOMB7UsYOloHo1M9J
+ XmkWHaE8IotQNOTA3Ato+RqK+DGzlpRylPNAudLm7Vg7lIHZ3jSQOKfwYM2Ta7jrGCfFItwVM
+ 4X4B0Tdu8hC52gt5vD8OMaHbuc8yInlGB+o7sKyYFeZVIDQqbFX2Nk/MxaUvgHn2E6e4UXkC5
+ I3Vaka1jScPkeB61TrGLamfvaR+poELSaiTKzU1znox4PN7i9BKzzi06N9rZxcr3bwGS6J3R+
+ ve2P2AuLwdcF01X8e1lR+qMvOIeYKkyT4lWWOaaXfmEifBIOrlQBH+AdtxRK+yKMVTVnv19nI
+ LsP9eWNdT82zJOwb+2VlO5/YXLSLsImW6CDNa9J5FgelgcnwHEGr7nyUFNTVIlddKWHk/KPS3
+ Mq/GDB1iyqK2qMA4TPFY1beNEeg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,147 +91,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
-> ---
->  configs/kmcent2_defconfig              | 1 +
->  configs/kmcoge5ne_defconfig            | 1 +
->  configs/kmeter1_defconfig              | 1 +
->  configs/kmopti2_defconfig              | 1 +
->  configs/kmsupx5_defconfig              | 1 +
->  configs/kmtepr2_defconfig              | 1 +
->  configs/pg_wcom_expu1_defconfig        | 1 +
->  configs/pg_wcom_expu1_update_defconfig | 1 +
->  configs/pg_wcom_seli8_defconfig        | 1 +
->  configs/pg_wcom_seli8_update_defconfig | 1 +
->  configs/socfpga_secu1_defconfig        | 1 +
->  configs/tuge1_defconfig                | 1 +
->  configs/tuxx1_defconfig                | 1 +
->  13 files changed, 13 insertions(+)
->=20
-> diff --git a/configs/kmcent2_defconfig b/configs/kmcent2_defconfig index
-> 2cf9565fc9..ac272b3840 100644
-> --- a/configs/kmcent2_defconfig
-> +++ b/configs/kmcent2_defconfig
-> @@ -111,3 +111,4 @@ CONFIG_BCH=3Dy
->  CONFIG_PANIC_HANG=3Dy
->  CONFIG_LZO=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/kmcoge5ne_defconfig b/configs/kmcoge5ne_defconfig
-> index 257ceeca90..ace5080690 100644
-> --- a/configs/kmcoge5ne_defconfig
-> +++ b/configs/kmcoge5ne_defconfig
-> @@ -202,3 +202,4 @@ CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
->  CONFIG_BCH=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/kmeter1_defconfig b/configs/kmeter1_defconfig index
-> 46e0370e35..56b83c085d 100644
-> --- a/configs/kmeter1_defconfig
-> +++ b/configs/kmeter1_defconfig
-> @@ -173,3 +173,4 @@ CONFIG_DM_ETH_PHY=3Dy
->  CONFIG_QE_UEC=3Dy
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/kmopti2_defconfig b/configs/kmopti2_defconfig index
-> c6c021adde..08c7602f5d 100644
-> --- a/configs/kmopti2_defconfig
-> +++ b/configs/kmopti2_defconfig
-> @@ -183,3 +183,4 @@ CONFIG_QE_UEC=3Dy
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/kmsupx5_defconfig b/configs/kmsupx5_defconfig index
-> 25642e7018..72db26f320 100644
-> --- a/configs/kmsupx5_defconfig
-> +++ b/configs/kmsupx5_defconfig
-> @@ -166,3 +166,4 @@ CONFIG_QE_UEC=3Dy
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/kmtepr2_defconfig b/configs/kmtepr2_defconfig index
-> ea37a29060..ed908d3c77 100644
-> --- a/configs/kmtepr2_defconfig
-> +++ b/configs/kmtepr2_defconfig
-> @@ -182,3 +182,4 @@ CONFIG_QE_UEC=3Dy
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/pg_wcom_expu1_defconfig
-> b/configs/pg_wcom_expu1_defconfig index 455b439151..0337447f79 100644
-> --- a/configs/pg_wcom_expu1_defconfig
-> +++ b/configs/pg_wcom_expu1_defconfig
-> @@ -105,3 +105,4 @@ CONFIG_DM_SERIAL=3Dy
->  CONFIG_SYS_NS16550=3Dy
->  CONFIG_LZO=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/pg_wcom_expu1_update_defconfig
-> b/configs/pg_wcom_expu1_update_defconfig
-> index 269116cd0d..e5daa306ab 100644
-> --- a/configs/pg_wcom_expu1_update_defconfig
-> +++ b/configs/pg_wcom_expu1_update_defconfig
-> @@ -103,3 +103,4 @@ CONFIG_DM_SERIAL=3Dy
->  CONFIG_SYS_NS16550=3Dy
->  CONFIG_LZO=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/pg_wcom_seli8_defconfig
-> b/configs/pg_wcom_seli8_defconfig index 678bc10070..e86a17abdf 100644
-> --- a/configs/pg_wcom_seli8_defconfig
-> +++ b/configs/pg_wcom_seli8_defconfig
-> @@ -105,3 +105,4 @@ CONFIG_DM_SERIAL=3Dy
->  CONFIG_SYS_NS16550=3Dy
->  CONFIG_LZO=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/pg_wcom_seli8_update_defconfig
-> b/configs/pg_wcom_seli8_update_defconfig
-> index 7c7b001903..886334a043 100644
-> --- a/configs/pg_wcom_seli8_update_defconfig
-> +++ b/configs/pg_wcom_seli8_update_defconfig
-> @@ -103,3 +103,4 @@ CONFIG_DM_SERIAL=3Dy
->  CONFIG_SYS_NS16550=3Dy
->  CONFIG_LZO=3Dy
->  CONFIG_POST=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/socfpga_secu1_defconfig
-> b/configs/socfpga_secu1_defconfig index b8052f1dee..2622bb0432 100644
-> --- a/configs/socfpga_secu1_defconfig
-> +++ b/configs/socfpga_secu1_defconfig
-> @@ -113,3 +113,4 @@ CONFIG_DESIGNWARE_WATCHDOG=3Dy
-> CONFIG_WDT=3Dy  CONFIG_SYS_TIMER_COUNTS_DOWN=3Dy  # CONFIG_GZIP is
-> not set
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/tuge1_defconfig b/configs/tuge1_defconfig index
-> 9ff5d1599f..5c4d33235e 100644
-> --- a/configs/tuge1_defconfig
-> +++ b/configs/tuge1_defconfig
-> @@ -166,3 +166,4 @@ CONFIG_QE_UEC=3Dy
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> diff --git a/configs/tuxx1_defconfig b/configs/tuxx1_defconfig index
-> 5b33e8fa64..16b50dd571 100644
-> --- a/configs/tuxx1_defconfig
-> +++ b/configs/tuxx1_defconfig
-> @@ -183,3 +183,4 @@ CONFIG_QE_UEC=3Dy
->  # CONFIG_PINCTRL_FULL is not set
->  CONFIG_QE=3Dy
->  CONFIG_SYS_NS16550=3Dy
-> +CONFIG_HUSH_OLD_PARSER=3Dy
-> --
-> 2.34.1
+On 11.12.23 13:20, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+>
+> The commit enables vsprintf() to handle the '%*pb[l]' format specifier
+> in order to print bitmaps and its derivatives such as cpumask and
+> nodemask [1]. This can be used to derive kernel boot parameters from
+> bitmaks such as 'isolcpu' or 'nohz_full' [2].
+>
+> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
+> [2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters=
+.html
+>
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 
-Reviewed-by: <holger.brunck@hitachienergy.com>
-
-Thanks for taking care of this.=20
+Please, add a change for doc/develop/printf.rst to the patch describing
+the new format.
 
 Best regards
-Holger Brunck
+
+Heinrich
+
+> ---
+>
+>   lib/vsprintf.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 75 insertions(+)
+>
+> diff --git a/lib/vsprintf.c b/lib/vsprintf.c
+> index e14c6ca9f9..abbd80ea9c 100644
+> --- a/lib/vsprintf.c
+> +++ b/lib/vsprintf.c
+> @@ -25,6 +25,7 @@
+>   #include <linux/err.h>
+>   #include <linux/types.h>
+>   #include <linux/string.h>
+> +#include <linux/bitmap.h>
+>
+>   /* we use this so that we can do without the ctype library */
+>   #define is_digit(c)	((c) >=3D '0' && (c) <=3D '9')
+> @@ -390,6 +391,71 @@ static char *ip4_addr_string(char *buf, char *end, =
+u8 *addr, int field_width,
+>   		      flags & ~SPECIAL);
+>   }
+>
+> +static char *bitmap_string(char *buf, char *end, const unsigned long *b=
+itmap,
+> +			   int field_width, int precision, int flags)
+> +{
+> +	const int CHUNKSIZE =3D 32;
+> +	int nr_bits =3D max_t(int, field_width, 0);
+> +	int i, chunksz;
+> +	int first =3D 1;
+> +
+> +	chunksz =3D nr_bits & (CHUNKSIZE - 1);
+> +	if (chunksz =3D=3D 0)
+> +		chunksz =3D CHUNKSIZE;
+> +
+> +	i =3D ALIGN(nr_bits, CHUNKSIZE) - CHUNKSIZE;
+> +	for (; i >=3D 0; i -=3D CHUNKSIZE) {
+> +		u32 chunkmask, val;
+> +		int word, bit;
+> +
+> +		chunkmask =3D ((1ULL << chunksz) - 1);
+> +		word =3D i / BITS_PER_LONG;
+> +		bit =3D i % BITS_PER_LONG;
+> +		val =3D (bitmap[word] >> bit) & chunkmask;
+> +
+> +		if (!first) {
+> +			if (buf < end)
+> +				*buf =3D ',';
+> +			buf++;
+> +		}
+> +		first =3D 0;
+> +
+> +		field_width =3D DIV_ROUND_UP(chunksz, 4);
+> +		buf =3D number(buf, end, val, 16, field_width, precision,
+> +			     (SMALL | ZEROPAD));
+> +
+> +		chunksz =3D CHUNKSIZE;
+> +	}
+> +	return buf;
+> +}
+> +
+> +static char *bitmap_list_string(char *buf, char *end, unsigned long *ad=
+dr,
+> +				int field_width, int precision, int flags)
+> +{
+> +	int nr_bits =3D max_t(int, field_width, 0);
+> +	int first =3D 1;
+> +	int rbot, rtop;
+> +
+> +	for_each_set_bitrange(rbot, rtop, addr, nr_bits) {
+> +		if (!first) {
+> +			if (buf < end)
+> +				*buf =3D ',';
+> +			buf++;
+> +		}
+> +		first =3D 0;
+> +
+> +		buf =3D number(buf, end, rbot, 10, 0, -1, 0);
+> +		if (rtop =3D=3D rbot + 1)
+> +			continue;
+> +
+> +		if (buf < end)
+> +			*buf =3D '-';
+> +		buf =3D number(++buf, end, rtop - 1, 10, 0, -1, 0);
+> +	}
+> +
+> +	return buf;
+> +}
+> +
+>   #ifdef CONFIG_LIB_UUID
+>   /*
+>    * This works (roughly) the same way as Linux's.
+> @@ -503,6 +569,15 @@ static char *pointer(const char *fmt, char *buf, ch=
+ar *end, void *ptr,
+>   					       precision, flags);
+>   		flags &=3D ~SPECIAL;
+>   		break;
+> +	case 'b':
+> +		switch (fmt[1]) {
+> +		case 'l':
+> +			return bitmap_list_string(buf, end, ptr, field_width,
+> +							precision, flags);
+> +		default:
+> +			return bitmap_string(buf, end, ptr, field_width,
+> +						precision, flags);
+> +		}
+>   #ifdef CONFIG_LIB_UUID
+>   	case 'U':
+>   		return uuid_string(buf, end, ptr, field_width, precision,
+
