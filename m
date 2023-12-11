@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D1AC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0EA9C46CC5
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C49D287650;
-	Mon, 11 Dec 2023 10:00:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B96087661;
+	Mon, 11 Dec 2023 10:00:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z9sErS4b";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="C9A8JkDQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE2688766D; Mon, 11 Dec 2023 10:00:43 +0100 (CET)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id D5F6F875FE; Mon, 11 Dec 2023 10:00:47 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E814875FE
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:00:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 936D887682
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:00:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-5c629a9fe79so2195362a12.3
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:00:40 -0800 (PST)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5c1f8b0c149so2159655a12.3
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:00:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702285238; x=1702890038;
+ d=amarulasolutions.com; s=google; t=1702285244; x=1702890044;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BY2CdbPPJsTHC24zbkM3RkJ/Y5IF7bCirtD5UxLv+VI=;
- b=Z9sErS4bNVjrrcAyI6jS6gXNhzX9iNGf8WR4N4oVQRWU6fcOaQJ2BbOpej501Pku4k
- C902gtNdfxNmzLx0eiF/bVmoCtHkwizhn1GeAv8AJdup1vXq0FMKOOOxOOD4HEYF45YZ
- qHXFzGESoOrfnqjyUqUzmdWF/LYTxA6wMi6AQ=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rfhFmISy7TpLID85G+fj1JtvnjYvzFcqsx7bGP/aKbc=;
+ b=C9A8JkDQFhcmii7ixW7yBQBPpezx9q0U+ou7ca2VzPKjnpG8Bv7nRSWauMwASyAffz
+ ARqgKOP2JLp1H3IrAwY/yCEPsoNUpTwr4r+k5ujlK/rXbpdEMnM/KGddfWAeOg5uaR08
+ vcqyOxvKIVKeL/egme9zbGOy05BkiOP0PsysM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702285238; x=1702890038;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BY2CdbPPJsTHC24zbkM3RkJ/Y5IF7bCirtD5UxLv+VI=;
- b=jsqKfSOq/WwmGxS5sFjigxnEYhPyCTXPb43br+9ARzR1v1xf2W7hiQCoDek3jl+Ab9
- oNLdtT/t4UcMeIVOAH3nq1z5HzQV+Mn9MethsPZVSMTP0L0xxUgWG+sYp1VqLADKmQ6i
- +9k8ivwaWE9k1WBxRdmYVqoAPSeZeSD+2NmhUKfpnBMGn+SNkX9IHWUQJb6SLs6oHXC3
- KfqBx85N5ZCR6osNLoVo8ymTfxT4TO3qk7/X1EIM4z+3+W20cPi+NYU24apvPMPBe6pA
- SN/th79Ir+b96yq6L5QTCtaIbmqG1jHe1ssTCtWx6bjQW0CwRiHVU3ojlhXYuDHNG+M2
- rHHg==
-X-Gm-Message-State: AOJu0YxrF5ZpF09iraWO+DKhDwIbo4VgOP/ELJd5BfZZOZjP6Xy1oDX0
- 4WvfY4CM+v9p8EFt2jpPyRrQYwChPOxZDKTn8GKJbQ==
-X-Google-Smtp-Source: AGHT+IF2Tbti2TCmmo08X7uJQDum0HWHJmWlI9tW2dG5Kbif/6sirevCL9pCPIk2RMjKrWrNNoFEFg==
-X-Received: by 2002:a05:6a21:3298:b0:18f:97c:926b with SMTP id
- yt24-20020a056a21329800b0018f097c926bmr1833027pzb.80.1702285238367; 
- Mon, 11 Dec 2023 01:00:38 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702285244; x=1702890044;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rfhFmISy7TpLID85G+fj1JtvnjYvzFcqsx7bGP/aKbc=;
+ b=a/kDX1tVbvkb97vfm0rsbQ17xwNoQzk93Ogbb9R3ZlYKOUBVYhhtJJXqEonnUv2aHi
+ AE9yOr9Ifniq9tXZg8nXT9RbuU9/MMaBw67xgMBgEeWnhKv/5/kohkUSu8Vw0rqkRWcB
+ eSoOgHabXlfw1pOZ6ZPkqBOe8dfIyUW1jjmAqkVHsgp5fn704rc6e9tDEQni924C1IDr
+ ctSFNaTHMsBy3Atbjn+zhu5tCCe6dz6nNG2E8x9Z5+9hymCzDBUIqh+GFaTV7m9roDRW
+ tCQaQN9RV7YzjJP23XV3Zv52L23hgie4ZuC9w0ksGrL1JgsyAmysElf1Imxw9GqyI1+L
+ HiBQ==
+X-Gm-Message-State: AOJu0YxjsNS7IzZfPYgNWI+MyBq06E7JEBHkVQ4cT4s8ZXnmFRxEZ/5R
+ PITfuWSylWp6N2vVfS3V0cm/lw==
+X-Google-Smtp-Source: AGHT+IGkXQb1IQ55IGUXFKAftoBOoa0nYD84albETXKAjEffq79gLW3vshqHYVZXX3o2maVOO+aWJg==
+X-Received: by 2002:a05:6a20:914b:b0:18b:aceb:7a79 with SMTP id
+ x11-20020a056a20914b00b0018baceb7a79mr1747848pzc.12.1702285243913; 
+ Mon, 11 Dec 2023 01:00:43 -0800 (PST)
 Received: from localhost.localdomain ([49.205.242.204])
  by smtp.gmail.com with ESMTPSA id
- e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.00.34
+ e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.00.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 01:00:37 -0800 (PST)
+ Mon, 11 Dec 2023 01:00:43 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Anatolij Gustschin <agust@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -68,11 +69,13 @@ To: Anatolij Gustschin <agust@denx.de>,
  Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Heiko Stuebner <heiko@sntech.de>
 Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: [PATCH 00/17] video: dw_hdmi: Support Vendor PHY
-Date: Mon, 11 Dec 2023 14:29:22 +0530
-Message-Id: <20231211085939.5478-1-jagan@amarulasolutions.com>
+ Jagan Teki <jagan@edgeble.ai>
+Subject: [PATCH 01/17] video: rockchip: hdmi: Detect hpd after controller init
+Date: Mon, 11 Dec 2023 14:29:23 +0530
+Message-Id: <20231211085939.5478-2-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231211085939.5478-1-jagan@amarulasolutions.com>
+References: <20231211085939.5478-1-jagan@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,94 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unlike RK3399, Sunxi/Meson DW HDMI the new Rockchip SoC Rk3328 would
-support external vendor PHY with DW HDMI chip.
+From: Jagan Teki <jagan@edgeble.ai>
 
-Support this vendor PHY by adding new platform PHY ops via DW HDMI
-driver and call the respective generic phy from platform driver code.
+HDP is a hardware connector event, so detect the same once the
+controller and attached PHY initialization are done.
 
-This series tested in RK3328 with 1080p (1920x1080) resolution.
+Signed-off-by: Jagan Teki <jagan@edgeble.ai>
+---
+ drivers/video/rockchip/rk_hdmi.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Patch 0001/0005: Support Vendor PHY
-Patch 0006/0008: VOP extension for win, dsp offsets
-Patch 0009/0010: RK3328 VOP, HDMI clocks
-Patch 0011:	 Rockchip Inno HDMI PHY
-Patch 0012:	 RK3328 HDMI driver
-Patch 0013:	 RK3328 VOP driver
-Patch 0014/0017: Enable HDMI Out for RK3328
-
-Importent:
-One pontential issues is that Linux HDMI out on RK3328 has effected by
-this patchset as I wouldn't find any relation or clue.
-
-[    0.752016] Loading compiled-in X.509 certificates
-[    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
-[    0.788391] inno-hdmi-phy ff430000.phy: inno_hdmi_phy_rk3328_clk_recalc_rate rate 148500000 vco 148500000
-[    0.798353] rockchip-drm display-subsystem: bound ff370000.vop (ops vop_component_ops)
-[    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not found, using dummy regulator
-[    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed out, status: 0x00004b
-[    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not found, using dummy regulator
-[    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed out, status: 0x00004b
-[    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX controller v2.11a with HDCP (inno_dw_hdmi_phy2)
-[    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare HDMI I2C bus driver
-[    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi (ops dw_hdmi_rockchip_ops)
-[    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for display-subsystem on minor 0
-
-The only way I can use Linux HDMI by disabling IOMMU or support
-disable-iommu link for RK3328 via DT [1].
-
-[1] https://www.spinics.net/lists/devicetree/msg605124.html
-
-Any inputs?
-Jagan.
-
-Jagan Teki (17):
-  video: rockchip: hdmi: Detect hpd after controller init
-  video: dw_hdmi: Add Vendor PHY handling
-  video: dw_hdmi: Extend the HPD detection
-  video: dw_hdmi: Add read_hpd hook
-  video: dw_hdmi: Add setup_hpd hook
-  video: rockchip: vop: Simplify rkvop_enable
-  video: rockchip: vop: Add win offset support
-  video: rockchip: vop: Add dsp offset support
-  clk: rockchip: rk3328: Add VOP clk support
-  clk: rk3328: Add get hdmiphy clock
-  phy: rockchip: Add Rockchip INNO HDMI PHY driver
-  video: rockchip: Add rk3328 hdmi support
-  video: rockchip: Add rk3328 vop support
-  ARM: dts: rk3328: Enable VOP for bootph-all
-  rockchip: Enable preconsole for rk3328
-  configs: evb-rk3328: Enable vidconsole for rk3328
-  configs: Enable HDMI Out for ROC-RK3328-CC
-
- arch/arm/dts/rk3328-u-boot.dtsi               |   4 +
- .../include/asm/arch-rockchip/cru_rk3328.h    |  34 +
- arch/arm/mach-rockchip/Kconfig                |   1 +
- common/Kconfig                                |   2 +-
- configs/roc-cc-rk3328_defconfig               |   5 +
- drivers/clk/rockchip/clk_rk3328.c             | 100 +-
- drivers/phy/rockchip/Kconfig                  |   7 +
- drivers/phy/rockchip/Makefile                 |   1 +
- drivers/phy/rockchip/phy-rockchip-inno-hdmi.c | 885 ++++++++++++++++++
- drivers/video/dw_hdmi.c                       |  48 +-
- drivers/video/meson/meson_dw_hdmi.c           |  11 +-
- drivers/video/rockchip/Makefile               |   2 +
- drivers/video/rockchip/rk3328_hdmi.c          | 131 +++
- drivers/video/rockchip/rk3328_vop.c           |  66 ++
- drivers/video/rockchip/rk3399_hdmi.c          |   8 +-
- drivers/video/rockchip/rk_hdmi.c              |  12 +-
- drivers/video/rockchip/rk_hdmi.h              |   3 +
- drivers/video/rockchip/rk_vop.c               |  44 +-
- drivers/video/rockchip/rk_vop.h               |   4 +
- drivers/video/sunxi/sunxi_dw_hdmi.c           |  19 +-
- include/configs/evb_rk3328.h                  |   5 +
- include/configs/rk3328_common.h               |   1 +
- include/dw_hdmi.h                             |  17 +-
- 23 files changed, 1371 insertions(+), 39 deletions(-)
- create mode 100644 drivers/phy/rockchip/phy-rockchip-inno-hdmi.c
- create mode 100644 drivers/video/rockchip/rk3328_hdmi.c
- create mode 100644 drivers/video/rockchip/rk3328_vop.c
-
+diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
+index 8dcd4d5964..b75a174489 100644
+--- a/drivers/video/rockchip/rk_hdmi.c
++++ b/drivers/video/rockchip/rk_hdmi.c
+@@ -112,14 +112,14 @@ int rk_hdmi_probe(struct udevice *dev)
+ 	struct dw_hdmi *hdmi = &priv->hdmi;
+ 	int ret;
+ 
++	dw_hdmi_init(hdmi);
++	dw_hdmi_phy_init(hdmi);
++
+ 	ret = dw_hdmi_phy_wait_for_hpd(hdmi);
+ 	if (ret < 0) {
+ 		debug("hdmi can not get hpd signal\n");
+ 		return -1;
+ 	}
+ 
+-	dw_hdmi_init(hdmi);
+-	dw_hdmi_phy_init(hdmi);
+-
+ 	return 0;
+ }
 -- 
 2.25.1
 
