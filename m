@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5958AC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 23:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDCAC4332F
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 23:23:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 443F3877EA;
+	by phobos.denx.de (Postfix) with ESMTP id D3A4D877F4;
 	Tue, 12 Dec 2023 00:22:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eoGzmXwt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kGbOzRob";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85EED877C6; Tue, 12 Dec 2023 00:21:57 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 6BAB687773; Tue, 12 Dec 2023 00:21:58 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F0BC877C6
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 00:21:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81222877CC
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 00:21:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3b9f727d94cso681283b6e.1
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 15:21:36 -0800 (PST)
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3b9e2a014e8so3379124b6e.2
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 15:21:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702336895; x=1702941695; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702336896; x=1702941696; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i87RhnjO8GZSHdEP0gaGe/4YhkfPRWoWKMbSvztmvCg=;
- b=eoGzmXwt/DUwRqZVw6IV8GpnytRG+KMzjAhc8P03ICHig9YjrfSJ7fR7HmA7DvAlYO
- sdS8wvqgzoc6Y+4VlZwZDzv7JrXbyHAoQnHQ4bI/y56rxvgeUN11rDaR/Io0iOmTrtCO
- fpTLClIhtod5RWZXuasW1WJlh6FzM0X2GKchNZTWwlsRAiv7RFoXEleHqRJPQU7aAhyb
- L9z3tuRrGihnN6DnZkpPU2UR4YXuEnOiVkqD49e0I2wpwRQnHO2lcB4zaNf6ByuTRJ8z
- ehVAn7aMbd6ouFE1pAJfxngGbw9+sZfUY5NQeRBf2xowDDXJWj83LG48f9SdxKS9xBI6
- a1CA==
+ bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
+ b=kGbOzRoblO473UIJQPbR48U5KgChKJ/YSgvi72sMXUXpp8Ltgt/3W7daIj28S5J3Ve
+ zYB16/V0GADO+fDGRcU1XhbS8pamL0kJH8WM8IsW1TWVLgwCGlDohNU3bs0Ztwom1Zx5
+ 6YFcQ+HQBNGbPwQhQOF7hAWepSkfb0UCcbUSQPVdHlRgQeBrcDXCrWS4UU5wQ6GYAxvt
+ r5yUSWBdEqnQIMYbaiUPjIVrINDDGWtwHvib/n2M7bjkE/bGczsfuyE6WTDynxL0crmI
+ YXtDbqE9o9TTVD8ays2YsEgPMTQ3qNlLYpd1pd9jZbqyzV6XA8aNkcdwE3FRxOM8182w
+ 8ZEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702336895; x=1702941695;
+ d=1e100.net; s=20230601; t=1702336896; x=1702941696;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i87RhnjO8GZSHdEP0gaGe/4YhkfPRWoWKMbSvztmvCg=;
- b=u0OQ4k68x0W10V1D2f6BdsPy+c3yOmhU3odLHn5NiXcoAhQ5CwTraGDsJmxKvPBDqi
- hP5RuVuy973pExsT28O+lSlc1L10ALasAewh9OjskMiPemfE/fTDNci3Wp1ehipyk5+3
- HXhOX3PL+zxsyGHJPj/FHV3Wxm7FExxtY8izZzmMHgiwrUwvDuu30Gqe9XnJVCLUl2R2
- m8jvylicUXnNUUx6D/Kgqbr6woTXSxdLuOnRMmt5I3y+nMnMzF8au3pcf85VtoLsAEvt
- S7KMrJQMcO7Sni8RY7VVGnuJJdneq/UHgTRmGgZkNLRX34bW/2QKq9wsGKw37fC+vBme
- nIfQ==
-X-Gm-Message-State: AOJu0Ywyts9CfJx5eAZCfBaeGuEUta6WSQ6w/0W+2Cnc7adZT6K8b72g
- JbUhsZdZCl9c39t4FhYl1Fb9/M1UdEk=
-X-Google-Smtp-Source: AGHT+IEygxniXBlpEc2ncxhLpKEsyOk4jJnvPkrZAMAR2LwqAMNB7SETfwPbtnFkvZ0zhf4MyaGOEw==
-X-Received: by 2002:a05:6808:1146:b0:3b8:b063:8938 with SMTP id
- u6-20020a056808114600b003b8b0638938mr3895863oiu.70.1702336894864; 
- Mon, 11 Dec 2023 15:21:34 -0800 (PST)
+ bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
+ b=ipuV6xuEhW5Azr3cRWdyTocaUnRGdSAeM5GQPKmswvf39kzPqpWCkZ7S2t7OC2hl8a
+ uBPOed2m02CIMETUOYm6K8UP5WYFPhou9JN1LojvjrScDoUo2rNNpAeTf5QKlBIns/Na
+ AL8MaVPj7U9jza2A4TJfV320lCEynv/yNNTQWMYbpEJWzlAVj1xNuubz8c6xALtSKuf9
+ lrO0AkfU1LhbGz08dBcJXzxb5wAqmV3aXwcTK2hnuIhC+0O/95ReeiHb5ZO9BNIVLnnL
+ 5JMBrrfFoepzvmxx9IFTXzKRYKihWk1Ubm+ZhXLt3uFe6E0CNHpacCF5yZo55kjQ7mLb
+ 2gpg==
+X-Gm-Message-State: AOJu0YzCsJlUG1g5kpjOtHsm5DYoKmdTUQgXlQ2WBg9eVMZJHDZBicQd
+ 8lNI15GIbRyB7NcHpn4dPEbHRqMCcGk=
+X-Google-Smtp-Source: AGHT+IFIKCJhs/8v4oGGvzYo5DsKvQzApLOsBHOkMt6F1arc7d0sbQ3L9HkO1foRAfuIDauiUweo9Q==
+X-Received: by 2002:a05:6808:2099:b0:3b9:e618:1861 with SMTP id
+ s25-20020a056808209900b003b9e6181861mr6718081oiw.1.1702336895997; 
+ Mon, 11 Dec 2023 15:21:35 -0800 (PST)
 Received: from localhost.localdomain ([75.28.21.198])
  by smtp.gmail.com with ESMTPSA id
- bl11-20020a056808308b00b003b9d0371517sm2059617oib.28.2023.12.11.15.21.34
+ bl11-20020a056808308b00b003b9d0371517sm2059617oib.28.2023.12.11.15.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 15:21:34 -0800 (PST)
+ Mon, 11 Dec 2023 15:21:35 -0800 (PST)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: andre.przywara@arm.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org,
  Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V3 5/7] rockchip: board: Add board_rng_seed() for all Rockchip
- devices
-Date: Mon, 11 Dec 2023 17:21:23 -0600
-Message-Id: <20231211232125.171438-6-macroalpha82@gmail.com>
+Subject: [PATCH V3 7/7] doc: board: anbernic: Update rgxx3 to add new boards
+Date: Mon, 11 Dec 2023 17:21:25 -0600
+Message-Id: <20231211232125.171438-8-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231211232125.171438-1-macroalpha82@gmail.com>
 References: <20231211232125.171438-1-macroalpha82@gmail.com>
@@ -96,102 +95,60 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-Allow all rockchip devices to use the hardware RNG to seed Linux
-RNG.
+Update the RGxx3 documentation to note that it now supports the
+RG-ARC-D, RG-ARC-S, Powkiddy RK2023, and Powkiddy RGB30. Also update
+verbiage around panel detection to note that it is no longer hard coded
+to the RG503.
 
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- arch/arm/mach-rockchip/board.c             | 32 ++++++++++++++++++++++
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 29 --------------------
- 2 files changed, 32 insertions(+), 29 deletions(-)
+ doc/board/anbernic/rgxx3.rst | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 57f08e0be0..77145524ea 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -348,3 +348,35 @@ __weak int misc_init_r(void)
- 	return ret;
- }
- #endif
-+
-+#if IS_ENABLED(CONFIG_BOARD_RNG_SEED) && IS_ENABLED(CONFIG_RNG_ROCKCHIP)
-+#include <rng.h>
-+
-+/* Use hardware rng to seed Linux random. */
-+__weak int board_rng_seed(struct abuf *buf)
-+{
-+	struct udevice *dev;
-+	size_t len = 0x8;
-+	u64 *data;
-+
-+	data = malloc(len);
-+	if (!data) {
-+		printf("Out of memory\n");
-+		return -ENOMEM;
-+	}
-+
-+	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-+		printf("No RNG device\n");
-+		return -ENODEV;
-+	}
-+
-+	if (dm_rng_read(dev, data, len)) {
-+		printf("Reading RNG failed\n");
-+		return -EIO;
-+	}
-+
-+	abuf_init_set(buf, data, len);
-+
-+	return 0;
-+}
-+#endif
-diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-index 45854709f5..7bef5a53f0 100644
---- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-+++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-@@ -17,7 +17,6 @@
- #include <mmc.h>
- #include <panel.h>
- #include <pwm.h>
--#include <rng.h>
- #include <stdlib.h>
- #include <video_bridge.h>
+diff --git a/doc/board/anbernic/rgxx3.rst b/doc/board/anbernic/rgxx3.rst
+index 7d1beb423c..d159ed2f76 100644
+--- a/doc/board/anbernic/rgxx3.rst
++++ b/doc/board/anbernic/rgxx3.rst
+@@ -5,6 +5,8 @@ U-Boot for Anbernic RGxx3 Devices
  
-@@ -137,34 +136,6 @@ void spl_board_init(void)
- 	       (GPIO0_BASE + GPIO_SWPORT_DR_H));
- }
+ This allows U-Boot to boot the following Anbernic devices:
  
--/* Use hardware rng to seed Linux random. */
--int board_rng_seed(struct abuf *buf)
--{
--	struct udevice *dev;
--	size_t len = 0x8;
--	u64 *data;
--
--	data = malloc(len);
--	if (!data) {
--		printf("Out of memory\n");
--		return -ENOMEM;
--	}
--
--	if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
--		printf("No RNG device\n");
--		return -ENODEV;
--	}
--
--	if (dm_rng_read(dev, data, len)) {
--		printf("Reading RNG failed\n");
--		return -EIO;
--	}
--
--	abuf_init_set(buf, data, len);
--
--	return 0;
--}
--
- /*
-  * Buzz the buzzer so the user knows something is going on. Make it
-  * optional in case PWM is disabled.
++ - Anbernic RG-ARC-D
++ - Anbernic RG-ARC-S
+  - Anbernic RG353M
+  - Anbernic RG353P
+  - Anbernic RG353PS
+@@ -12,18 +14,24 @@ This allows U-Boot to boot the following Anbernic devices:
+  - Anbernic RG353VS
+  - Anbernic RG503
+ 
++Additionally, the following very similar non-Anbernic devices are also
++supported:
++
++ - Powkiddy RGB30
++ - Powkiddy RK2023
++
+ The correct device is detected automatically by comparing ADC values
+ from ADC channel 1. In the event of an RG353V or RG353P, an attempt
+ is then made to probe for an eMMC and if it fails the device is assumed
+ to be an RG353VS or RG353PS. Based on the detected device, the
+ environment variables "board", "board_name", and "fdtfile" are set to
+ the correct values corresponding to the board which can be read by a
+-boot script to boot with the correct device tree. If the board detected
+-is not of type RG503 (which currently has only 1 panel revision) a
+-panel detect is then performed by probing a "dummy" display on the DSI
+-bus and then querying the display ID. The display ID is then compared
+-to a table to get the known compatible string for use in Linux, and
+-this string is saved as an environment variable of "panel".
++boot script to boot with the correct device tree. If a board is defined
++as requiring panel detection, a panel detect is then performed by
++probing a "dummy" display on the DSI bus and then querying the display
++ID. The display ID is then compared to a table to get the known
++compatible string for use in Linux, and this string is saved as an
++environment variable of "panel".
+ 
+ FDT fixups are performed in the event of an RG353M to change the device
+ name, or in the event the panel detected does not match the devicetree.
 -- 
 2.34.1
 
