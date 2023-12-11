@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34410C4167B
-	for <u-boot@archiver.kernel.org>; Sun, 10 Dec 2023 21:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD5C4C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 04:24:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79AE78706B;
-	Sun, 10 Dec 2023 22:25:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id B52FD87718;
+	Mon, 11 Dec 2023 05:24:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="i2P1LwGK";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sMOCOGcx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VElDCtwc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67F56876F2; Sun, 10 Dec 2023 22:25:38 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 99F1187719; Mon, 11 Dec 2023 05:24:26 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3256586F42
- for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 22:25:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 603E787712
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 05:24:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4SpHwb4stdz9sZq;
- Sun, 10 Dec 2023 22:25:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702243535;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=tqW9W3VcYjWafBdHUfvzGnxOTeSkyWYaQDp0VbPbyjo=;
- b=i2P1LwGKc4vv7HybouQ21Ap3CmqSQ43x8P0TBVz6Dj1awMShFVsdDM6WMwRVhtOWdnng2p
- 4TwYnwULToo1ts1AN1MFpjvmU7aBziD4Pt+WZU6VzjeXeCHLAUf1P6wAhKcRwDvRMVGewp
- sTxyXYJ2iEuqQIY2VboAD2sw0+vrOsJAgxZiqhAecQ5X0yuZqB4RNjmUyv28jQiD2qM2jx
- ai3X8Hqpm06fyiVsNiA01hjIByQuHCnlOz01sxTKVWWgF2XIxY7Z3zK8sJEJtoXF88bMPa
- tbKSmjZWvOfHsHhvL7ni06IUgJk/ajsjw+afxwdf9QXj4X4TPERcuBiSHEN9/w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702243533;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=tqW9W3VcYjWafBdHUfvzGnxOTeSkyWYaQDp0VbPbyjo=;
- b=sMOCOGcxUD1wYmFHy4Aa6nyGXM5rg3g6B/jKvcqIA4NLYKaP7qql6dDmv4uo/FjA8NRnU0
- WEJOlFtmGIZl6zI7Z4x8lkes3xQyre0yHC2J/6W8JmSDrn0lvKe8iyx+Qwn9nhh02UeyaP
- qNNexP29bw+1GDjls/LAMvvqT6Mb0AYiZpQfiSKgNpAwO1bWAPDzbp4fiCiM7noJtDnFpz
- /pB/JjkWZDpsezV9rhV20ff2WgUzvLFGAFMpjVNwpW3+o0zh4G9U5Zdv1/zanxcp0M8mdX
- 9fOAEbtLFiizculBEsutetDlQGMNGGZ3b4X+0RXHMImvAO3d5PR55KgciAgH6A==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] cmd: part: Cover both part type entries with GUID ifdef
-Date: Sun, 10 Dec 2023 22:25:07 +0100
-Message-ID: <20231210212522.398132-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ca00dffc23so49539381fa.2
+ for <u-boot@lists.denx.de>; Sun, 10 Dec 2023 20:24:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702268663; x=1702873463; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=d9DlkPilUIqLbxnrhlQbHdkrJTOIjVByUSaEJxW6p74=;
+ b=VElDCtwc+a8AZo7PlgqenHnuyhDPpJ6H11UVX2IIpcBXZpV63VUqxChffoA6AmZseC
+ 1QfdedFBXfJXkhE116sm4dS6sWILuCb+fyRC3+/Uyb0b8T1kVWlzzGx0mrAhzQyuiZgB
+ 10Fu62An/gzhSZ7rFDXVa38blUdG+lL2fVrItNuH5PDdwxxv6ZXjjooUXPCSmOIlxb2C
+ FwBHQdiQ/BJUJndlQMxshRfG41m5Svr+Dpqz+eXhBQUR0yT4qDUCteJ6UCtDVpfvWsbV
+ DupgweFCEZZg+/A4EUPyIE7jOGP/Dk7IzNcJY2x214v80qqoqduJGz/J0d0FLQRT+DQn
+ LIcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702268663; x=1702873463;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=d9DlkPilUIqLbxnrhlQbHdkrJTOIjVByUSaEJxW6p74=;
+ b=rGUo1XkuHKp1EsZiytYGnaSU6KDtvjE7XXNt3Je7eCW7d1byPRrEiKYQX9+z9YwNhI
+ +7KVjh52+CrUAzzNzPHp3YzbluhdUP4h673/NgVM6KLh0/awCleOdNooeYrCVF1buwZJ
+ /51vpKbnXT7qG5ALtaFETFEXPGqPTGMfialnJlRfkQOMVLhrUKKjBQsdrztneWUxZxNc
+ FfVs54OSPcr2D1sowvr9WDaOF4Hw+GXjqI46AGx1O3p71qQMvl+ZJcUaCtDuIT5DS9Vp
+ 8NbNCIu3tPzFRfnjgWo+wWuZp8Ro9+UZQybF1B/4ufXzvQa/JI0my7TOra/MI8wZKHFV
+ vuoA==
+X-Gm-Message-State: AOJu0Yxsw447j8iyIKBUGgx3dwvXwm0kUoU/FFHOcaavNBWpOMXyLBvD
+ 7tRvXrK4fmAxm8IGorCU5noXNkM7xY/rdRYDTZCXrg==
+X-Google-Smtp-Source: AGHT+IETwAWEQdlHnkcFwVpcsRCsP2HUw5Rwtv77GqKhKjgoA/mZZ05Gm3volP5RNaqGzZVAxMoVbFoidqt2de4HLRc=
+X-Received: by 2002:a05:651c:2d9:b0:2cc:1f06:9ad4 with SMTP id
+ f25-20020a05651c02d900b002cc1f069ad4mr489977ljo.34.1702268662998; Sun, 10 Dec
+ 2023 20:24:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 33nmwhyz9h53cy48yq5ykp3tu8ejjg71
-X-MBO-RS-ID: d083a4276ddce1b2925
-X-Rspamd-Queue-Id: 4SpHwb4stdz9sZq
+References: <20231114092508.3955838-1-masahisa.kojima@linaro.org>
+ <20231114092508.3955838-2-masahisa.kojima@linaro.org>
+ <f97c5b43-7e71-41d4-a22e-a347e3c91ca4@gmx.de>
+In-Reply-To: <f97c5b43-7e71-41d4-a22e-a347e3c91ca4@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Mon, 11 Dec 2023 13:24:11 +0900
+Message-ID: <CADQ0-X_JY70Ay_xbTeDznOQwTk4jX=B6S2QFm=PkznwW=u-jLw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] efi_loader: use original image_index for FMP
+ versioning
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Jassi Brar <jaswinder.singh@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,34 +89,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 'part type' subcommand depends on GUID partition table support.
-The help text exposes one of two 'part type' subcommand entries,
-hide both in case GUID partition table support is not enabled to
-avoid confusing users.
+Hi Heinrich,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
----
- cmd/part.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Sat, 9 Dec 2023 at 23:51, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 11/14/23 10:25, Masahisa Kojima wrote:
+> > FMP versioning uses the image_index argument of
+> > EFI_FIRMWARE_MANAGEMENT_PROTOCOL.SetImage() service.
+> > When CONFIG_FWU_MULTI_BANK_UPDATE is enabled, image_index
+> > is updated by fwu_get_image_index() function. This commit
+> > saves the original image_index argument and use it for
+> > FMP versioning.
+>
+> Why should we call fwu_get_image_index() here if we don't use the new
+> value? Maybe the call should be placed somewhere else?
+>
+> Should the call really be needed here, please add a new local variable
+> inside the if block and add a comment describing why the call is needed.
 
-diff --git a/cmd/part.c b/cmd/part.c
-index 0ce190005d3..c75f85acd52 100644
---- a/cmd/part.c
-+++ b/cmd/part.c
-@@ -308,9 +308,9 @@ U_BOOT_CMD(
- #ifdef CONFIG_PARTITION_TYPE_GUID
- 	"part type <interface> <dev>:<part>\n"
- 	"    - print partition type\n"
--#endif
- 	"part type <interface> <dev>:<part> <varname>\n"
- 	"    - set environment variable to partition type\n"
-+#endif
- 	"part set <interface> <dev> type\n"
- 	"    - set partition type for a device\n"
- 	"part types\n"
--- 
-2.42.0
+fwu_get_image_index() aims to convert image_index in FMP.SetImage() to
+dfu_alt_num passed to dfu_write_by_alt() function.
+I think fwu_get_image_index() should be renamed and does not update original
+image_index. I will send the next version.
 
+Thanks,
+Masahisa Kojima
+
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >   lib/efi_loader/efi_firmware.c | 4 +++-
+> >   1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> > index 9abb29f1df..9c1a273926 100644
+> > --- a/lib/efi_loader/efi_firmware.c
+> > +++ b/lib/efi_loader/efi_firmware.c
+> > @@ -612,6 +612,8 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+> >   {
+> >       int ret;
+> >       efi_status_t status;
+> > +     u8 original_image_index = image_index;
+> > +
+> >       struct fmp_state state = { 0 };
+> >
+> >       EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+> > @@ -641,7 +643,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+> >                            NULL, NULL))
+> >               return EFI_EXIT(EFI_DEVICE_ERROR);
+> >
+> > -     efi_firmware_set_fmp_state_var(&state, image_index);
+> > +     efi_firmware_set_fmp_state_var(&state, original_image_index);
+> >
+> >       return EFI_EXIT(EFI_SUCCESS);
+> >   }
+>
