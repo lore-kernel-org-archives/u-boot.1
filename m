@@ -4,57 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D310C4332F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 19:08:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27147C4332F
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 19:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D85287763;
-	Mon, 11 Dec 2023 20:08:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 17E4F87775;
+	Mon, 11 Dec 2023 20:15:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="NYWlHQG2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mTEBBTr0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EABDE87772; Mon, 11 Dec 2023 20:08:35 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0C3C187784; Mon, 11 Dec 2023 20:15:51 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73F55876E9
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 20:08:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 02C1B87772
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 20:15:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5e1a3199f6bso3024977b3.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 11:15:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1702322146; x=1702926946; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=pimV5mmvwItKBqZ/UycpsBhiVl7QpxWDnCIFxK/CNY4=;
+ b=mTEBBTr0tb7xhdSS3Jgp0hWNGX7y8NLi3Rxr6anATOB/uD3IP99pehrFgadg9zYlOx
+ h+wzR4dodboOGrcdNzgAhC7EtrTdmRi//p+LZDGbnp6f2Hu6+oC7hku1JPdNRLjop76N
+ PExMByZgTttpXv6JixgNx/oWT5iqJFhuJGAcU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702322146; x=1702926946;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pimV5mmvwItKBqZ/UycpsBhiVl7QpxWDnCIFxK/CNY4=;
+ b=Uq2d8neKWcmMTlvppd7sh2w56eB8A0igQ5VzhlrC5zOhvWCuto9NtRlC4IR3+OFFpb
+ z+y28lElwjt33htIpJm6ZXFpwnX6dJ6qdqG5QnjjFuIXFldpX2WYHo1ID/hd3qg5tfL2
+ Aa1BryebcX1BIBixF+2ypuY3K/d14zf+HLjHZgsAvqiz+Kzieow+a+wuqbvlp3O1qWeQ
+ wE/4lNiTicIDNxiVcjMGAMR93FV8EE7Xn7jZfdhlT+rGn5DKNuSiPUdFqw0NC11zbq+q
+ Zk2bcClaIn7aAIHJN4aVcyeaLFqH+Uugt9XE8gZgZip+S2Qny4M+nBgxzSYawS39Qwkh
+ OUWg==
+X-Gm-Message-State: AOJu0YxctblRFeULfPdcmpX9wTxDcRcfIzc9yheQdwAiWLi1d8J9SgPK
+ TGuAnJFVuM4ajQsbbFFIhWwQDw==
+X-Google-Smtp-Source: AGHT+IGC49aQXGm/10LLg9TCXp7AYBJyLZvtE9lymcjD9ILQIiMYV++jbaP3XxOLFw6oMemdEzzyHw==
+X-Received: by 2002:a25:ad61:0:b0:dbc:af6a:f31f with SMTP id
+ l33-20020a25ad61000000b00dbcaf6af31fmr720027ybe.115.1702322145827; 
+ Mon, 11 Dec 2023 11:15:45 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-fa42-ae3b-3aac-d543.res6.spectrum.com.
+ [2603:6081:7b00:6400:fa42:ae3b:3aac:d543])
+ by smtp.gmail.com with ESMTPSA id
+ j82-20020a252355000000b00db9811e1f92sm2748149ybj.7.2023.12.11.11.15.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Dec 2023 11:15:45 -0800 (PST)
+Date: Mon, 11 Dec 2023 14:15:43 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: m-chawdhry@ti.com, bmeng.cn@gmail.com, sjg@chromium.org, afd@ti.com,
+ mkorpershoek@baylibre.com, n-francis@ti.com, nm@ti.com,
+ u-boot@lists.denx.de, vigneshr@ti.com, srk@ti.com
+Subject: Re: [PATCH] include: env: ti: ti_common: Run
+ main_cpsw0_qsgmii_phyinit conditionally
+Message-ID: <20231211191543.GU2513409@bill-the-cat>
+References: <20231211104209.1078892-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1702321712;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dfbtfpavpJjL6bBzx0CrAhhFYwDAhwC+tOxLspAb7w4=;
- b=NYWlHQG2hryoZFbnhV8Lb6GHeuZ0SvXUf5V2Uy1pHbuUFJGPwET0FWf+e8KPUcNuu8y5X9
- I8tZcSGonq6QK/xxAMJSw32H47zpFH/LxlppodpR9CKyjfCga48AXIiewD3P/F3zc4XF9r
- wszO4e9Ps/mG1HZZwzmQ5MDAgbvUsKYw5e8ZZ5AhI52fhjY9TC+wQuphy2KH4ja81th4mU
- fMLdXupWvLJLj8EU2hPSfvKdX2VyQVhXGHTtUEcxfUu7FgJsBNYkxbEnx5hGzpgrX0MJU9
- ag3BIL2ZMHd2P7kseKpC7ez2XbI5NWeVVf9HDKqp0Hy9F11EfAcJAGZ2hUpujA==
-Date: Mon, 11 Dec 2023 20:08:32 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg
- <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] iommu: fix compilation when CONFIG_PCI disabled
-In-Reply-To: <20231211-b4-dwc3-qcom-v1-1-46275113b4f2@linaro.org>
-References: <20231211-b4-dwc3-qcom-v1-0-46275113b4f2@linaro.org>
- <20231211-b4-dwc3-qcom-v1-1-46275113b4f2@linaro.org>
-Message-ID: <e99c00cbe8b0cf7f8a4c9217d5298625@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="cQGmqvIwa/qGTAxM"
+Content-Disposition: inline
+In-Reply-To: <20231211104209.1078892-1-s-vadapalli@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,34 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-12-11 19:41, Caleb Connolly wrote:
-> The dev_pci_iommu_enable() function is only available when CONFIG_PCI 
-> is
-> enabled, replace the runtime check with a preprocessor one to fix
-> compilation with pci disabled.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  drivers/iommu/iommu-uclass.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/iommu/iommu-uclass.c 
-> b/drivers/iommu/iommu-uclass.c
-> index 72f123df55a5..98731d5e2c44 100644
-> --- a/drivers/iommu/iommu-uclass.c
-> +++ b/drivers/iommu/iommu-uclass.c
-> @@ -100,9 +100,10 @@ int dev_iommu_enable(struct udevice *dev)
->  		dev->iommu = dev_iommu;
->  	}
-> 
-> -	if (CONFIG_IS_ENABLED(PCI) && count < 0 &&
-> -	    device_is_on_pci_bus(dev))
-> +#if CONFIG_IS_ENABLED(PCI)
-> +	if (count < 0 && device_is_on_pci_bus(dev))
->  		return dev_pci_iommu_enable(dev);
-> +#endif
-> 
->  	return 0;
->  }
 
-Perhaps there's no need to introduce an ifdef here.
+--cQGmqvIwa/qGTAxM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Dec 11, 2023 at 04:12:09PM +0530, Siddharth Vadapalli wrote:
+
+> From: Manorit Chawdhry <m-chawdhry@ti.com>
+>=20
+> The main_cpsw0_qsgmii_phyinit command is defined only for certain TI
+> SoCs which have the do_main_cpsw0_qsgmii_phyinit variable set.
+>=20
+> Add a check to ensure that the main_cpsw0_qsgmii_phyinit command is run
+> only for such SoCs.
+>=20
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--cQGmqvIwa/qGTAxM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV3X9wACgkQFHw5/5Y0
+tyxMWAwAoBtiJjL9lWP3v7vOxB77Yblpz86OOoPEpYotS0erSoOxKhTkptGJsTY2
+VJq8mT0582kMxMK9bB51z8PPqmSSuSoueOw8G1I8Oo68VvuhJ7epnkMs7jdJBRvi
+c4KBIcUzLK8ZUrQ9w+921AnHGrluyseFlPs9BD26vZKX3V5l0EsgrUDZPxqqLuAc
+fDRZaPFTqcLdH6gqEPF2UA+iaasSIoBZIQfwOg99ZCwj4n00ORIOIs+TgJe1ecE/
+GDim+Nt2o8vbuBn5Og3V8MSjYNyzvLxBQv1kehLVj8Gs59b6bKjjDY11kT+uMN/K
+EN8ToxQT2i6y8LAUn70S9u321pq/qC06o82vF4Urz1RyQII7f2kv59/NQ1j50Usn
+RobndOpOQLOKPX5oyIqU7PMQu2dx7o20h+F7rLUD2gxBfiKjA5nZOWGBa5guslQf
+YVvvRpV8N+SGBmrcTtYCqOpio5qLPSawAZiyvW5b2rTwBpTCl8H7pC0gKI2uS3gT
+QdVfvmkQ
+=9nh1
+-----END PGP SIGNATURE-----
+
+--cQGmqvIwa/qGTAxM--
