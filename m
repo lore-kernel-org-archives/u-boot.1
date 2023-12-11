@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8B4C4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87907C4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 17:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DDDF8778F;
-	Mon, 11 Dec 2023 18:55:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19D148778F;
+	Mon, 11 Dec 2023 18:56:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KsyvBEPQ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="gS0JTWo2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FA4587796; Mon, 11 Dec 2023 18:55:16 +0100 (CET)
+ id ED564877C6; Mon, 11 Dec 2023 18:56:48 +0100 (CET)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DBAE8776E
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:55:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2748B877B7
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 18:56:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4B78D3F1EE
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 17:55:13 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id AD60640AB2
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 17:56:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702317313;
- bh=FOOt30GuuGvb0qCVawHyYJUUnLjn/MqPjV2mcbFQBF8=;
+ s=20210705; t=1702317406;
+ bh=hks7c6/jiUvhXkEO5+NYWmdAcWBZkSg+b0s/5u0RE6c=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=KsyvBEPQGlRb2EFsVjCCn6UTCu+cFKVAZGL1hXu4ceO8Ls653LFDWS2X9q6BjOtbK
- lItcBfhRwsDlRVaZRtZpDVGvkyRi/n4ntlCYeC2wBrP1bvVM54XBsxzZlWwkSj3M0J
- f1dJCW2rqNwUeoILCUsQPXOvFiaPB2Eg6mFvMRdcfueopkOv1/HXEQJEe1yd+++Gft
- NP3mOm1KLGjhIJ3vg9FAbFohYFSgmk4HlGeH+dxCuIIVFYNyjF/moR7tnlVGcqRKOp
- 040wul+unaMFSk6j2BHrYGQ8lEZ+qBbrLb+rk3phTxd7/15bMB1wiRhRmICR43K1HI
- c0zWkjlPqUFVw==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-40c25973861so32157625e9.2
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:55:13 -0800 (PST)
+ b=gS0JTWo2BCHDE0JqbD7Gwut+vFsOEVkDblBT2ea6ZX9OkZyp+phw3zpMyax/fXMxn
+ ckvspRoK5A9SwG4aEN46fWxl5BfFiOiTQaEGtNeMloOHRodCO9vUYUOllHHtCU1zD9
+ zhU+b0QINjWlHX4PnjKmnqXQH9I59NSTkUgOndY/nS6l5iYtCdSk/m6M58p+5G3ri6
+ lZZTxxOR1DqeM8v5f3Mb5iBN/OhSUCCofAhYb/pwx6+gqmBzLI7W1Dlpd3fRwkpacm
+ RU2uDlBGZ846qm5UO4e5bJO9841ivO/kvgeJyOVtP7U08a7RNO8cIbVfxzhFIE5UGq
+ VjTVWihVGOadQ==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-40c3cea4c19so17696935e9.1
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 09:56:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702317312; x=1702922112;
+ d=1e100.net; s=20230601; t=1702317406; x=1702922206;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FOOt30GuuGvb0qCVawHyYJUUnLjn/MqPjV2mcbFQBF8=;
- b=sAaI+KZ5X8uZinoeeyujm+C7MXOS05lC/OlGfiuEopUjhlh/KWU8tUERnBx9Rpw2BT
- Yh43gsDq7+oZDKNNUADT3tLKOjfQmlO2r2TEjoVVnk1f/sjvYiPCzO1TjehjOtHu+38a
- nJoA3gDu7H4DkQOao3DvwgV289h73q4/UDXDcyfGHe24B5SgTbMu28k8DjEKL27VLWXA
- 8bTP2aNDMwYYkYLkuTLW5ydshdTbSxYTyNGJC4O+sH32sK8VkyybPwEG7dkwyWSdm1kx
- Yt692DHB23UkI04kO1R/sBQgjYaodSxaUHqxHfCNImQw6Nhq6sXQBaOnQfhL4Zc/KXCx
- BjiQ==
-X-Gm-Message-State: AOJu0Yw3pAv1yntOLrzfGjGGuy5jk/vZcUL/JpIuIdDhoxNwJKAHruNr
- Pz/WBijR02APbDVEH9zw6w5olTxvsYo4YExHiHuL5Dz0wNsxwqtQ5+6QNGPFBIMEWgZrMx7QpBb
- ZKjqScbZpmFQW4urUegsxFcvbNXOkbOo=
-X-Received: by 2002:a05:600c:512a:b0:40c:37f7:c2da with SMTP id
- o42-20020a05600c512a00b0040c37f7c2damr2393847wms.16.1702317312188; 
- Mon, 11 Dec 2023 09:55:12 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH3UcXzUZyLJ4j0WyAt9MQP4UBkUrSlMGE/b7Dtxszq09TjBdQQKNl19PomSZsXEWoV4zI2IQ==
-X-Received: by 2002:a05:600c:512a:b0:40c:37f7:c2da with SMTP id
- o42-20020a05600c512a00b0040c37f7c2damr2393840wms.16.1702317311857; 
- Mon, 11 Dec 2023 09:55:11 -0800 (PST)
+ bh=hks7c6/jiUvhXkEO5+NYWmdAcWBZkSg+b0s/5u0RE6c=;
+ b=X1E7/FgFOP0HcJbhgh4+WU3X8sWdvRoOroKOP8140p9bvoa++jxaDeLIcId8z/oMiP
+ IciKnTzOA+LxgOb4nzFGzNEg6rfhYqcwkeeGDycjK23wqAeTu7w9ZPN18/cGFbF7qrbT
+ RvGY456I/3/0HS+wsUpGgWS8rdZcAgp2leQmuGc/lCV61XqUWNMjPavYW1Gp9j/eiW94
+ IDPnr0PKHDZYG9b3S/Yt+p44QcEhjI0fMdNGjJJmd8tOvbsuMN4IAu8tOBJWsyhkAxiE
+ JbenVw50t10xC90223GoFwFGs5AFnRPNmwInIfU8mGZG1No7U0DnuzUhbuYyxe/RoWkS
+ Gcuw==
+X-Gm-Message-State: AOJu0YzlyyfDBczZXBwDOzZza6WaWAjr8ccp5l5o+m2I2pWZ6Xi0Tuc0
+ tmnTI1tXKCxX0dlMomK6mA5AGh13GXKK6GbDJFoG6M6MNe4DBrX3cppLEQWNkdDLtif+LUpJ8ps
+ Ni9FJO4U07dLFTx4W+ZbB7CC/eM4G01Y=
+X-Received: by 2002:a7b:c3cf:0:b0:40c:2654:5709 with SMTP id
+ t15-20020a7bc3cf000000b0040c26545709mr2258578wmj.116.1702317406208; 
+ Mon, 11 Dec 2023 09:56:46 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHjHZI+jeKswOoB3puI0hb5/KYSIlVAUsgGs20SulwONf9zp7KJpOycUTpkvulmdzoOjO15cA==
+X-Received: by 2002:a7b:c3cf:0:b0:40c:2654:5709 with SMTP id
+ t15-20020a7bc3cf000000b0040c26545709mr2258569wmj.116.1702317405782; 
+ Mon, 11 Dec 2023 09:56:45 -0800 (PST)
 Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
  [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- l15-20020a05600c1d0f00b003feae747ff2sm16071240wms.35.2023.12.11.09.55.11
+ l15-20020a05600c1d0f00b003feae747ff2sm16071240wms.35.2023.12.11.09.56.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Dec 2023 09:55:11 -0800 (PST)
-Message-ID: <b56a73e7-ff4c-4d0d-b334-17af022d911e@canonical.com>
-Date: Mon, 11 Dec 2023 18:55:10 +0100
+ Mon, 11 Dec 2023 09:56:45 -0800 (PST)
+Message-ID: <60f3046c-2af9-40b5-aea4-849fc6999d3a@canonical.com>
+Date: Mon, 11 Dec 2023 18:56:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] test: vboot: Using variable 'old_dtb' before
+Subject: Re: [PATCH 1/1] binman: elf: Using variable 'old_val' before
  assignment
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>
-Cc: Roman Kopytin <Roman.Kopytin@kaspersky.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>, u-boot@lists.denx.de
-References: <20231209185411.8212-1-heinrich.schuchardt@canonical.com>
- <20231209185411.8212-3-heinrich.schuchardt@canonical.com>
- <CAPnjgZ1ycQgEvd5jEDyEW77fgJMu9x4c3+_Ep5+oShz3SRZQVw@mail.gmail.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+References: <20231209185031.7275-1-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ0wa=CK5Q5SCpPHZiv7zGLGXnEprzVTTt_P6iiP-zmZfA@mail.gmail.com>
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAPnjgZ1ycQgEvd5jEDyEW77fgJMu9x4c3+_Ep5+oShz3SRZQVw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0wa=CK5Q5SCpPHZiv7zGLGXnEprzVTTt_P6iiP-zmZfA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -108,25 +106,30 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 11.12.23 18:52, Simon Glass wrote:
-> On Sat, 9 Dec 2023 at 11:54, Heinrich Schuchardt
+> On Sat, 9 Dec 2023 at 11:50, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
 >>
->> old_dtb can only be assumed initialized in the finally block
+>> old_val can only be assumed initialized in the finally block
 >> if it is assigned a value before the try statement.
 >>
 >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >> ---
->>   test/py/tests/test_vboot.py | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>   tools/binman/elf_test.py | 8 ++++----
+>>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/tools/binman/elf_test.py b/tools/binman/elf_test.py
+>> index e3dee79d06..b64134123c 100644
+>> --- a/tools/binman/elf_test.py
+>> +++ b/tools/binman/elf_test.py
+>> @@ -249,8 +249,8 @@ class TestElf(unittest.TestCase):
 >>
 > 
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > 
-> I suggest mentioning the motivation for the patch in your commit
-> message. E.g. does it cause a pylint failure?
+> An odd case though...I cannot imagine how this might fail.
 
-You only get a pylint error with current pylint, not with the one used 
-by our CI.
+This patch is needed to use a recent pylint. Otherwise 'make pylint_err' 
+will fail in future.
 
 Best regards
 
