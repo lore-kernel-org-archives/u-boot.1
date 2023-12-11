@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D1DC4167B
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:03:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F203EC4167B
+	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 09:04:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D286B8772A;
-	Mon, 11 Dec 2023 10:01:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC9F787661;
+	Mon, 11 Dec 2023 10:01:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="b55YpO7e";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="dmsvo2TW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F6188769A; Mon, 11 Dec 2023 10:01:48 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 5408A8764C; Mon, 11 Dec 2023 10:01:52 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28A5E87725
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:01:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CAA8787727
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 10:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-1d05e4a94c3so36736045ad.1
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:01:46 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d098b87eeeso37023555ad.0
+ for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 01:01:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702285304; x=1702890104;
+ d=amarulasolutions.com; s=google; t=1702285308; x=1702890108;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RqZ3uep2ldeSCiMDN9Gnj/VvA2lNl6QWFSy1xAd9IBw=;
- b=b55YpO7eLPpfV/XlSwJ01dwh3XtJs6ofZJ5oRQijITV8N2+6AjavWv3IdfZ1o92bTb
- 2DYu1JISRkpdcAIEP1VUty4xoBH77ZarMyUH7hByp9yyzCZgDIfuhxqO7nONPedczBZE
- vdjYUIi8xnZ05ElIuASoNMuy6idAaQu77LCPo=
+ bh=tMSOqDUiHg3x8Ta8RjINlgr9WbHH1qo96WZyRpls9Vg=;
+ b=dmsvo2TW2VI56ZuZfdqS1Mt0SVI4I3PuqMwstxs4tpTJV0GsSuVPn5UewgjuRI+1CM
+ 41Vtf0WqTWV5Qu6YN9pOPDmp/qpzCR140UwScI7yBVL0XuH8vtZT1XxlVAvZSy22h76b
+ Q3TUJYbivV9g0zvrMyrNSl6qTuTeGgAp9bDFo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702285304; x=1702890104;
+ d=1e100.net; s=20230601; t=1702285308; x=1702890108;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RqZ3uep2ldeSCiMDN9Gnj/VvA2lNl6QWFSy1xAd9IBw=;
- b=Xy/liAvK/PbzR+mjnXNc5cyXlEGkm+WgLuaQRRiuLHBs55IE92kVGr9xkUv8SGYeob
- 4p0U0DBMssJ28Us3EMjgVh+s+Zy+oiSK+X5PBjyhnoBYYAEnX0nssz37C16rg/aAsNNr
- 34bayqlN1a+dC17giIqZh0sL/1+747iT1tnBuBXGdrH9O3d14O9V/SghoACHrxxLINQm
- 1cnoEcL6riTZXqeMIKc5Z4tj1PMTw7gF6mk0YNIHk65GWg9D8YaA1IW1+HrzrKNfmAX7
- IuRIp/9HfxS6OaQGmJjqwBqEtFqqVO2wpSOufh68U1LeonGDB1LQ6fVuwZOf9W++5uuV
- z5QA==
-X-Gm-Message-State: AOJu0YxvNWQmZdrvbhQAxG92yZk1yEMo7iAZ686/Ypazhb0I07qmgexx
- +2wNJG3iV0MU2vlWNMjXLU7zIQ==
-X-Google-Smtp-Source: AGHT+IF1C1IdjCGINskcCsz487eQVQrdCGy6JA6repTkUoA2c1Les5J0/iSFlp0arRxqiiTZg8N7pw==
-X-Received: by 2002:a17:902:b7c5:b0:1d0:6ffe:a0f with SMTP id
- v5-20020a170902b7c500b001d06ffe0a0fmr3947253plz.109.1702285304485; 
- Mon, 11 Dec 2023 01:01:44 -0800 (PST)
+ bh=tMSOqDUiHg3x8Ta8RjINlgr9WbHH1qo96WZyRpls9Vg=;
+ b=YGgt/9o2/xa3cPspWmqckOJHy7PrO49gXntluBJe88oNH2BzJ9qgNY9J2EPaasx94J
+ LMVQSDKqyGrcV9VttIKiA2rr8RVaOU3RkFAusdl0LIHw8rcyjNxlOROoUpZYxutmTS1Z
+ TZYDjatrConfnpDtMHO/kqYqsfTgUBgpDhh5oh86f2qwlEtx9e/1KkMf2r1xqKMnhdAP
+ oFhnUSwgav7WI6/EqthGRfVEB3db5aAHVs5kqL7YDWwBgjcWh8W/AR2ELYQjUJc65MFZ
+ KdmGvtmCZC48mrEtI/dQ1wdxsz506iskg3VjA4OZaCdPHjjmWcmHG65GAGqWsvF74deA
+ wzDg==
+X-Gm-Message-State: AOJu0YyWPWoq1MBHK0ERVaq7D4IWfGZv1Iqc6FtwwjPZtaHAge4Fa8mj
+ WwT8BsTbmLZ/mpid80rl2Avp3FRPkMJq3r3d2nUHyw==
+X-Google-Smtp-Source: AGHT+IEmdDVg4DPQMXpJQglpFY/AkY7yBMe3JDPj4UU9Zx4TSCoRhMyh8Ft399FNb3wRHLxquExNpQ==
+X-Received: by 2002:a17:902:8498:b0:1d0:6ffd:9e32 with SMTP id
+ c24-20020a170902849800b001d06ffd9e32mr3260161plo.132.1702285308158; 
+ Mon, 11 Dec 2023 01:01:48 -0800 (PST)
 Received: from localhost.localdomain ([49.205.242.204])
  by smtp.gmail.com with ESMTPSA id
- e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.01.40
+ e21-20020a170902d39500b001cfb93fa4fasm6080779pld.150.2023.12.11.01.01.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 01:01:44 -0800 (PST)
+ Mon, 11 Dec 2023 01:01:47 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Anatolij Gustschin <agust@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -70,9 +70,9 @@ To: Anatolij Gustschin <agust@denx.de>,
  Heiko Stuebner <heiko@sntech.de>
 Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
  Jagan Teki <jagan@amarulasolutions.com>
-Subject: [PATCH 15/17] rockchip: Enable preconsole for rk3328
-Date: Mon, 11 Dec 2023 14:29:37 +0530
-Message-Id: <20231211085939.5478-16-jagan@amarulasolutions.com>
+Subject: [PATCH 16/17] configs: evb-rk3328: Enable vidconsole for rk3328
+Date: Mon, 11 Dec 2023 14:29:38 +0530
+Message-Id: <20231211085939.5478-17-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231211085939.5478-1-jagan@amarulasolutions.com>
 References: <20231211085939.5478-1-jagan@amarulasolutions.com>
@@ -94,39 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable and set the start address of pre-console buffer for RK3328.
+Enable video console for Rockchip RK3328.
 
 Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 ---
- arch/arm/mach-rockchip/Kconfig | 1 +
- common/Kconfig                 | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ include/configs/evb_rk3328.h    | 5 +++++
+ include/configs/rk3328_common.h | 1 +
+ 2 files changed, 6 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index b577a911e7..60f403fe74 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -179,6 +179,7 @@ config ROCKCHIP_RK3328
- 	select SUPPORT_TPL
- 	select TPL
- 	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	imply PRE_CONSOLE_BUFFER
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_SDRAM_COMMON
- 	imply SPL_ROCKCHIP_COMMON_BOARD
-diff --git a/common/Kconfig b/common/Kconfig
-index 0f54819519..093ebfbd1e 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -208,7 +208,7 @@ config PRE_CON_BUF_ADDR
- 	default 0x2f000000 if ARCH_SUNXI && MACH_SUN9I
- 	default 0x4f000000 if ARCH_SUNXI && !MACH_SUN9I
- 	default 0x0f000000 if ROCKCHIP_RK3288
--	default 0x0f200000 if ROCKCHIP_RK3399
-+	default 0x0f200000 if ROCKCHIP_RK3399 || ROCKCHIP_RK3328
- 	help
- 	  This sets the start address of the pre-console buffer. This must
- 	  be in available memory and is accessed before relocation and
+diff --git a/include/configs/evb_rk3328.h b/include/configs/evb_rk3328.h
+index d10e5b1d2e..c985080f7b 100644
+--- a/include/configs/evb_rk3328.h
++++ b/include/configs/evb_rk3328.h
+@@ -6,6 +6,11 @@
+ #ifndef __EVB_RK3328_H
+ #define __EVB_RK3328_H
+ 
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdin=serial,usbkbd\0" \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
+ #include <configs/rk3328_common.h>
+ 
+ #endif
+diff --git a/include/configs/rk3328_common.h b/include/configs/rk3328_common.h
+index e920ec7e5d..2c40674b22 100644
+--- a/include/configs/rk3328_common.h
++++ b/include/configs/rk3328_common.h
+@@ -26,6 +26,7 @@
+ 	ENV_MEM_LAYOUT_SETTINGS \
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+ 	"partitions=" PARTS_DEFAULT \
++	ROCKCHIP_DEVICE_SETTINGS \
+ 	"boot_targets=" BOOT_TARGETS "\0"
+ 
+ #endif
 -- 
 2.25.1
 
