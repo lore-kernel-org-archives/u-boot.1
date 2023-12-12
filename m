@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF18C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 17:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E3FCC4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 17:33:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD9E9870A4;
-	Tue, 12 Dec 2023 18:19:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BED6807E2;
+	Tue, 12 Dec 2023 18:33:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="UE1WKrHN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SD2r7r6L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6402B86D37; Tue, 12 Dec 2023 18:19:58 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 9D83D80844; Tue, 12 Dec 2023 18:33:55 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24717877CD
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 18:19:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 53611804CE
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 18:33:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5e1a3199f6bso14918777b3.0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:19:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50dfac6c0beso3426447e87.2
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:33:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702401595; x=1703006395;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UfBaDk6fy0fwgxA7513+0QUa/H+qgg/S1p6nSWJBscs=;
- b=UE1WKrHN1PeXyW+tYXc5Z5gusjy1uKbdFKdtCGwgtCWLTb1PxuICpaLW+2eLIL2RBv
- I9ffgSnZW2sLHgn7wx8umbzFvsZigvODnD/FrrqufB/cxfhaXlx3pEL0jeRe+lI94UCd
- kHZgUQ+JYb86OfMNmd6lxKHdiP82QYoafQMuM=
+ d=gmail.com; s=20230601; t=1702402431; x=1703007231; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sSEzRB6F/9q3x0IvJ35JV0W7klsQRoW3I1+qiHJDAOU=;
+ b=SD2r7r6Lm/N3b53u+K9AA6VRAamPGDnd7s3NSmAMT8E4FFj+PbhDGhnAE+tvBEdbHp
+ OWDeL4umVKVIlxctw48RAoJvDYBZaW4Qg8oUd7W0oSejRHY9C9uF9dIqysK82ZWpfq0S
+ u2CeSeG9jwJxVKvJoxW4WtBjUY3IsAvx/dNcN3dkXceGS4kGFrtyuGEPE+jUHu8RBO4B
+ Vh+AMNJ7BqtNlWord4th4nsvmR9cL922yGQP9vGz3MKzHYdQ41rpUOBd/a2CFKbdJGsl
+ bJI4rV0keANdFjvG6gStTDiPMCjB2QnuS7weU98pBydXCYImDtVi9nresZ39A8GVq5HY
+ +Qeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702401595; x=1703006395;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UfBaDk6fy0fwgxA7513+0QUa/H+qgg/S1p6nSWJBscs=;
- b=LMvJKX/IQ5ThBS5q6qpsFcN9Fc+KpZp+VSoY+WENrjUN5iOsN3kmUsgfYE03c2u354
- UAfUNFxgXEu3TgXy0F4f2QxDtetxEynVTVHjx0O1cf4hUfPlHzZNh1BUHPrDcgCHgaVS
- OAKKttmoGBiBsakg7aRK5LLqFPAfYi0DsiueDJkC4kkSEXD722OpzR+KARA9QHVwZ8uS
- UBDXJ/KIoSXxLLCQGyyJWPHlDXJCftgTxhvRUqVm6IL/gGOj+8Y1uHdL0OyZv61TdVH8
- ytJTlYSkl1yrQetNT/jz9k7SPpfuuqCN2ALY4ZOK/0hArl4sq/k8pULqIDt3nBJ/nIQ6
- 3asQ==
-X-Gm-Message-State: AOJu0YyyjvAmRm4JllHsSETI05kIxMYJ7PFJUdUrca4VBzvc8NzFsTrl
- pIb5SLiDbHKAdYidVzHTtIeZ+7+2STe8wTsJbNwiyQ==
-X-Google-Smtp-Source: AGHT+IGLIUR/5nnmnbmz8JU5ZTOxEA3Ms8c7zBAT0uivNPFk9DThRftbubJtmWeE/Qef9f4VCIA843izmfbAb6WApms=
-X-Received: by 2002:a81:4a41:0:b0:5d7:1941:2c27 with SMTP id
- x62-20020a814a41000000b005d719412c27mr4574487ywa.84.1702401594776; Tue, 12
- Dec 2023 09:19:54 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702402431; x=1703007231;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sSEzRB6F/9q3x0IvJ35JV0W7klsQRoW3I1+qiHJDAOU=;
+ b=C8qPYq3uEHa800RK84ZBOiONHDIgJZLmt/Gj7+cwA9Hv7VLLyJCSyrHPvdFhnVzuD1
+ k9HeUKqimxwsX06MocxVlyv1UfVHcBwOUYv3GivgRYvnqQ9gcff3/B3weSNLsUFvWTQz
+ 2/cJlBgjMbnyjavh4NDXfkiIt2OVjnXUJPEzCbPTmpfP7q3dakxK6SxmH7UjWYTbEKjB
+ 1C6Qa+0s/thadhzkadHh35Gg6lAT1RymtBwsOXtkhKnkLHTiz5Pcf2XKOY4iRPaxUXef
+ 5KYWlxmxhXxRpX1qJFvC+S5zYVdy3MZLzYXox/xBI7wmImnbtSW1J2N97DU3SgsmpOrm
+ rK2g==
+X-Gm-Message-State: AOJu0YyQo8DW8iY56gbGZ4+afz0XdeZA/TjxXGY57rVjHGGK5vLrLk+k
+ wDFSJ9kxYSxhRjInJ97D+Hmc5yfc02I=
+X-Google-Smtp-Source: AGHT+IHYqK4wASv56l1bxQz+d1Uy4WQQ6ZbuR4D4uRv9KnfhOojSPT0v5JBZrqijsMCG08k2WGRHxw==
+X-Received: by 2002:a05:6512:1154:b0:50d:1b79:b34a with SMTP id
+ m20-20020a056512115400b0050d1b79b34amr3561135lfg.82.1702402430668; 
+ Tue, 12 Dec 2023 09:33:50 -0800 (PST)
+Received: from localhost.lan (031011218106.poznan.vectranet.pl.
+ [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
+ vi7-20020a170907d40700b00a1dc7e789fbsm6493714ejc.21.2023.12.12.09.33.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Dec 2023 09:33:50 -0800 (PST)
+From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] fw_env: fix reading NVMEM device's "compatible" value
+Date: Tue, 12 Dec 2023 18:33:27 +0100
+Message-Id: <20231212173327.22819-1-zajec5@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-References: <20220603070132.29734-1-vaishnav.a@ti.com>
- <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
- <20231212140438.GA1721487@bill-the-cat>
-In-Reply-To: <20231212140438.GA1721487@bill-the-cat>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Tue, 12 Dec 2023 22:49:43 +0530
-Message-ID: <CAMty3ZCypqjN=RG7-wVUObbKTQ7Q7XOiwpJ0H3oCAojjTDpNrQ@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi-nor-core: Implement
- spi_nor_read_sfdp_dma_unsafe() for sfdp parse
-To: Tom Rini <trini@konsulko.com>
-Cc: Vaishnav Achath <vaishnav.a@ti.com>, u-boot@lists.denx.de, vigneshr@ti.com,
- p.yadav@ti.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,27 +90,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 12, 2023 at 7:34=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Sun, Jul 10, 2022 at 11:07:41AM +0530, Jagan Teki wrote:
-> > On Fri, Jun 3, 2022 at 12:31 PM Vaishnav Achath <vaishnav.a@ti.com> wro=
-te:
-> > >
-> > > During SFDP header parse and BFPT parse, structures in stack are used
-> > > to perform spi_nor_read_sfdp() which expects a dma-safe buffer.
-> > >
-> > > This commit introduces spi_nor_read_sfdp_dma_unsafe() to wrap
-> > > spi_nor_read_sfdp() using a kmalloc'ed bounce buffer which is
-> > > the same implementation in Linux (drivers/mtd/spi-nor/sfdp.c).
-> > >
-> > > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> > > ---
-> >
-> > Applied to u-boot-spi/master
->
-> Where did this end up? Thanks.
+From: Rafał Miłecki <rafal@milecki.pl>
 
-I have CI, will send PR. soon.
+Call to fread() was changed to check for return value. The problem is it
+can't be checked for returning 1 (as it is) to determine success.
 
-Jagan.
+We call fread() with buffer size as "size" argument. Reading any
+"compatible" value shorter than buffer size will result in returning 0
+even on success.
+
+Modify code to use fstat() to determine expected read length.
+
+This fixes regression that broke using fw_env with NVMEM devices.
+
+Fixes: c059a22b7776 ("tools: env: fw_env: Fix unused-result warning")
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+---
+ tools/env/fw_env.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/tools/env/fw_env.c b/tools/env/fw_env.c
+index c9a8774ace..bf8b7ba304 100644
+--- a/tools/env/fw_env.c
++++ b/tools/env/fw_env.c
+@@ -1732,6 +1732,7 @@ static int find_nvmem_device(void)
+ 	}
+ 
+ 	while (!nvmem && (dent = readdir(dir))) {
++		struct stat s;
+ 		FILE *fp;
+ 		size_t size;
+ 
+@@ -1749,14 +1750,22 @@ static int find_nvmem_device(void)
+ 			continue;
+ 		}
+ 
+-		size = fread(buf, sizeof(buf), 1, fp);
++		if (fstat(fileno(fp), &s)) {
++			fprintf(stderr, "Failed to fstat %s\n", comp);
++			goto next;
++		}
++
++		if (s.st_size >= sizeof(buf)) {
++			goto next;
++		}
++
++		size = fread(buf, s.st_size, 1, fp);
+ 		if (size != 1) {
+ 			fprintf(stderr,
+ 				"read failed about %s\n", comp);
+-			fclose(fp);
+-			return -EIO;
++			goto next;
+ 		}
+-
++		buf[s.st_size] = '\0';
+ 
+ 		if (!strcmp(buf, "u-boot,env")) {
+ 			bytes = asprintf(&nvmem, "%s/%s/nvmem", path, dent->d_name);
+@@ -1765,6 +1774,7 @@ static int find_nvmem_device(void)
+ 			}
+ 		}
+ 
++next:
+ 		fclose(fp);
+ 	}
+ 
+-- 
+2.35.3
+
