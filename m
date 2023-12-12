@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CB9C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 301F4C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF1A986E65;
-	Tue, 12 Dec 2023 15:04:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B3E9E874DD;
+	Tue, 12 Dec 2023 15:06:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q2LAqfA3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TGKI6ZJp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E21387040; Tue, 12 Dec 2023 15:04:44 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id D01B78760D; Tue, 12 Dec 2023 15:06:17 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1717A86DDC
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:04:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CD48587495
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:06:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5cdc0b3526eso45638717b3.1
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:04:42 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2c9f85eff28so85849241fa.3
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:06:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702389881; x=1702994681; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HMmfQdMFLPOHvrNdscPNSF08PBTsfBU/Yqkqhyd+FXw=;
- b=Q2LAqfA3yX3Dkn0w6SNbZaFZQSmgTNg6MOadffVMSlG0PjEYo9ien3c8wvMn0D7c14
- BNoHS5f2ZHo5G1s7DGKTP/KXN5IO9Q2reE403uAoVEc/zn7WnuVDcKVhzY3p5U8mhPli
- Qtvkoz56taI5JB8OS8NFvJWUM3gJGun0ZkRdU=
+ d=chromium.org; s=google; t=1702389974; x=1702994774; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1tMOORCNOYtEIJA8dDTNDz8TejM74te+xohGNEKCi54=;
+ b=TGKI6ZJpFuM7ZungVpj10KLBxIQoEtc8W9Z/I+f1vAohQD0e008m5DZE6GhXb4QMuv
+ 0Fz/yOGOATj30O7krnrsJDiKvdX8pjz/Bn9kV/QXJdHEKI21Kk6egoDuoCPEABHXWCZV
+ etCTXUZSw95TGZH7zChJa4wuthe2CDayjyyds=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702389881; x=1702994681;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HMmfQdMFLPOHvrNdscPNSF08PBTsfBU/Yqkqhyd+FXw=;
- b=geMS85ObEwjDHYfMv+fKYbJXS92mIW3E+Nv/AUb3EPJZzOAhztqz88HE8Sn6v43qFi
- mPZrl1M4PkORse9ccTmUHxvDEn/VpERjJLfu2n8mBqEeX0i5wFPasckzQgz77s1vB3bg
- LC+SBGBG4VcynGhc3NR0PCrrYAJpFvPgwk590k6bMKuLL3TF0f0Ig+dXgeuaiA3Hup+K
- iKKtVxYGV7nD9fRBhh/eZF7+VyvfPbo5H4OMsOdnCSC7nvrOLDZqSeYz3bAsmUZNCOgv
- DlwJzHO+lsWs+RPUztXQ9fDpUh5GZnghTtnKUFyBJwgC+Rwt5WIUICjYDRgCLH8CFbzX
- b6hw==
-X-Gm-Message-State: AOJu0YxA9XwwY0W1g27F6G8gjIxs0h5J47iDWg3apI6+CNn43HjHyAQg
- 31aDygmRaF2IGJ++2IF+u1SZGn0jsHvNDjIlxvg=
-X-Google-Smtp-Source: AGHT+IFHvFzb7trkYZL+pEs9Db1zka3PijpcOAWYiAbFIglUCj83q8WHMbwNIpajKvrgu1qucSqimQ==
-X-Received: by 2002:a0d:d909:0:b0:5d6:e87d:96c0 with SMTP id
- b9-20020a0dd909000000b005d6e87d96c0mr4409712ywe.1.1702389880801; 
- Tue, 12 Dec 2023 06:04:40 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4e19-645a-5f86-e6ef.res6.spectrum.com.
- [2603:6081:7b00:6400:4e19:645a:5f86:e6ef])
- by smtp.gmail.com with ESMTPSA id
- v6-20020a81a546000000b005ca4e49bb54sm3686376ywg.142.2023.12.12.06.04.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Dec 2023 06:04:40 -0800 (PST)
-Date: Tue, 12 Dec 2023 09:04:38 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Vaishnav Achath <vaishnav.a@ti.com>, u-boot@lists.denx.de,
- vigneshr@ti.com, p.yadav@ti.com
-Subject: Re: [PATCH] mtd: spi-nor-core: Implement
- spi_nor_read_sfdp_dma_unsafe() for sfdp parse
-Message-ID: <20231212140438.GA1721487@bill-the-cat>
-References: <20220603070132.29734-1-vaishnav.a@ti.com>
- <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1702389974; x=1702994774;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1tMOORCNOYtEIJA8dDTNDz8TejM74te+xohGNEKCi54=;
+ b=YGG86o9IfauFSm7gnp1TzRzGRlLGEAKmmyrKVWfMUPCdWMwNs/8sd4BPtSHXZ57f4z
+ +tsFLGmnppyPgeFKnJxiDo0wOLdPNc/BHKZAlAVVrJ+penf2Mjd6QWHDsW6KtZx37epX
+ fgyFrNdckoEwfIkxGXqMqefoy+D+RdauHuv8oZQLoGWIDBXO9+DqkbNukTGs6SqN2TDn
+ Q6dJG/xLQJlMY9b7+mUJ/C+Zc4h5eS2ZGMps7m6y3NvaEIC5Ta2zTeoVDRj4TtqvhSeS
+ CpwGYB2R5iBUGgoCt16a3B+dE6E2/v6HGiQKmnINopGrjq2pJIZrX0Ae1/r714AWIbAd
+ PR9A==
+X-Gm-Message-State: AOJu0Yy5Un2DdQpabYz34ZEBDdeOnwU0AcJ8fQZUXiiet7k0+uVixcLE
+ ItCOpOkX46kuEYIJA5Lj3mpibL0AC+Acg5bZ3iT/t8pQsCWsecaQC6Q=
+X-Google-Smtp-Source: AGHT+IH2dJRmSCKmnR0hgWA/F9+kWV6B8rQEmfyChAn5h/4EJVhyZ330zRC20EZ7iwNkeRbvp5po71WHlZ3b4iySAkU=
+X-Received: by 2002:a2e:9397:0:b0:2ca:ed2:2a31 with SMTP id
+ g23-20020a2e9397000000b002ca0ed22a31mr2614897ljh.52.1702389973847; Tue, 12
+ Dec 2023 06:06:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aI7SI58HXgKHHixm"
-Content-Disposition: inline
-In-Reply-To: <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
+ <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
+ <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
+In-Reply-To: <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 12 Dec 2023 07:05:59 -0700
+Message-ID: <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
+Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,48 +83,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Marek,
 
---aI7SI58HXgKHHixm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sun, Jul 10, 2022 at 11:07:41AM +0530, Jagan Teki wrote:
-> On Fri, Jun 3, 2022 at 12:31 PM Vaishnav Achath <vaishnav.a@ti.com> wrote:
+On Mon, 11 Dec 2023 at 12:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>
+> On 12/11/23 18:52, Simon Glass wrote:
+> > Hi Marek,
 > >
-> > During SFDP header parse and BFPT parse, structures in stack are used
-> > to perform spi_nor_read_sfdp() which expects a dma-safe buffer.
+> > On Sun, 10 Dec 2023 at 08:03, Marek Vasut
+> > <marek.vasut+renesas@mailbox.org> wrote:
+> >>
+> >> In case the cyclic framework is enabled, poll the card detect of already
+> >> initialized cards and deinitialize them in case they are removed. Since
+> >> the card initialization is a longer process and card initialization is
+> >> done on first access to an uninitialized card anyway, avoid initializing
+> >> newly detected uninitialized cards in the cyclic callback.
+> >>
+> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >> ---
+> >> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> >> Cc: Peng Fan <peng.fan@nxp.com>
+> >> Cc: Simon Glass <sjg@chromium.org>
+> >> ---
+> >> V2: Move the cyclic registration/unregistration into mmc init/deinit
+> >> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
+> >>      does not work with structure members
+> >> ---
+> >>   drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
+> >>   include/mmc.h     |  5 +++++
+> >>   2 files changed, 41 insertions(+)
+> >>
+> >> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> >> index eb5010c1465..a5686dbc12e 100644
+> >> --- a/drivers/mmc/mmc.c
+> >> +++ b/drivers/mmc/mmc.c
+> >> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
+> >>          return err;
+> >>   }
+> >>
+> >> +#if CONFIG_IS_ENABLED(CYCLIC)
+> >> +static void mmc_cyclic_cd_poll(void *ctx)
+> >> +{
+> >> +       struct mmc *m = ctx;
+> >> +
+> >> +       if (!m->has_init)
+> >> +               return;
+> >> +
+> >> +       if (mmc_getcd(m))
+> >> +               return;
+> >> +
+> >> +       mmc_deinit(m);
+> >> +       m->has_init = 0;
+> >> +}
+> >> +#endif
+> >> +
+> >>   int mmc_init(struct mmc *mmc)
+> >>   {
+> >>          int err = 0;
+> >> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
+> >>          if (err)
+> >>                  pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+> >>
+> >> +#if CONFIG_IS_ENABLED(CYCLIC)
 > >
-> > This commit introduces spi_nor_read_sfdp_dma_unsafe() to wrap
-> > spi_nor_read_sfdp() using a kmalloc'ed bounce buffer which is
-> > the same implementation in Linux (drivers/mtd/spi-nor/sfdp.c).
+> > We really shouldn't be adding new #ifdefs to the code.
 > >
-> > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> > ---
->=20
-> Applied to u-boot-spi/master
+> > If you really want to make put ->cyclic behind an #ifdef then how
+> > about creating an accessor as is done in global_data.h ?
+>
+> That's really just working around the underlying issue, which is that
+> this does not compile:
+>
+> struct foo {
+> #if CONFIG_IS_ENABLED(STUFF)
+>    type member;
+> #endif
+> ...
+> };
+>
+> type fn() {
+> ...
+> if (CONFIG_IS_ENABLED(STUFF))
+>    access struct->member;
+> ...
+> }
+>
+> Accessor won't make it any better, would it ? It would only attempt to
+> hide the error and make the code more fragile, i.e. this:
+>
+> accessor(struct)
+> {
+> type fn() {
+> if (CONFIG_IS_ENABLED(STUFF))
+>    return access struct->member;
+> else
+>    return 0;
+> }
+>
+> }
+>
+> type fn() {
+> ...
+>    accessor(struct);
+> ...
+> }
+>
+> I suspect it also won't compile for one thing, and for the other, it
+> really just hides the issue.
 
-Where did this end up? Thanks.
+No, I mean like this:
 
---=20
-Tom
+#ifdef CONFIG_ACPI
+#define gd_acpi_ctx() gd->acpi_ctx
+#define gd_acpi_start() gd->acpi_start
+#define gd_set_acpi_start(addr) gd->acpi_start = addr
+#else
+#define gd_acpi_ctx() NULL
+#define gd_acpi_start() 0UL
+#define gd_set_acpi_start(addr)
+#endif
 
---aI7SI58HXgKHHixm
-Content-Type: application/pgp-signature; name="signature.asc"
+The header file has #ifdefs but not the C files.
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV4aHMACgkQFHw5/5Y0
-tyzGNgwAkiisBVIhw8BKeuQPC/C+iMI68Kxuh9LDVEK7hIZECRYEMTZmy/B4KMb4
-mYYWSJZY7W+GzTFdmDUHTP+27zqZklclMaoNqC8zxbaf5hiS009l10eP+4rPZLYP
-SwHtBSzo0O5fFiw3afNHFnxmGpMdB3ktilx6mNELVoXqGGQxwDGSnHMMnnh+kFht
-vw1H0q7sYLgnvYiySrAnObCGc8mtaRn6agdXkDiImv02hY6DsU0wNccVXjyip6ES
-SjyOX1HdLFtnxUQmsCNhXbIm0FQNGutak+NF/fedzAgyfJYLUsLZyYF2VuAEE4NW
-mO9HR8KBcok30etG+Sc8Yu4DOWex0xy6VJEKkIJtG24bfd5BcurfXrZi7U08rMnQ
-IICEy3CqzCmK7teYMLjXa7MR8ifecfC+WDTHCBAH4rlu8e+jgM0tFKfZgk9zL0vZ
-pEq9cCK1OQyJEun++3erGAXVU3vrC9XIKL3cluD4rAxfMqLpPALo1Q2sThnTmQuR
-ieGQsr1G
-=PC44
------END PGP SIGNATURE-----
-
---aI7SI58HXgKHHixm--
+Regards,
+Simon
