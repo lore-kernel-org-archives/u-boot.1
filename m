@@ -4,67 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D66A6C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:06:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B675C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29BE587754;
-	Tue, 12 Dec 2023 15:06:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B0657874DD;
+	Tue, 12 Dec 2023 15:12:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BGpyuPTC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J1MEFOHU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6032B87495; Tue, 12 Dec 2023 15:06:18 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 779D3877CD; Tue, 12 Dec 2023 15:12:02 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E7C8874E0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:06:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00DE686E65
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:11:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a1d93da3eb7so663645766b.0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:06:15 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-77f2f492a43so318603385a.2
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:11:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702389974; x=1702994774; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wXX1iaGCfPCSMkPGgKygBQAUep1rpecFSYqO9ePCG2I=;
- b=BGpyuPTCKvB+eiRrU9ghAWcqLJJ2IfXFij0YBKNlKH2hQdWR+s/HPiSACOIWJNiBcF
- dYDlE7/7Yje4cTzTNvThSmeGwROtcSxTpsnHfc5k0g8RBDiTa0ecbGt/IwORPf0D6ZuY
- hNt5jaG9GEPlGKJh4jdvxCt2QxfdUmd8Dp6VQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702389974; x=1702994774;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ d=gmail.com; s=20230601; t=1702390319; x=1702995119; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=wXX1iaGCfPCSMkPGgKygBQAUep1rpecFSYqO9ePCG2I=;
- b=wZiJ/TnN/yHQRfWHBE30hmlgVrLgmDohkeNOd1kOIGvMfG4r6E8fzvkUWjdP0+e4/6
- +6fIi/yFXRSZHcvrkMhNj+kW9lR1AmfKGa9HI8ZmWC0S5qJKcnn2L3hXepr0NDeGYGQ1
- O+wpFp4uD1TqKtLi5984wyDR/sYEncvasKpR3wz3EbBXc0EtyCFviz8EIZh1tac+tnnj
- bPW8igwOKwMClqgoGF3zS/4fgg1Fu2ite3hbRlNnQuzH3JZhmz4iBR6f8uCCIiTktEM2
- diGKmZC/vNCZLTIY4VGmhmW+0hN8d0OKkgSCv4ieOzTe+dG+p6uLMt99i2erNN059rk/
- Y+6w==
-X-Gm-Message-State: AOJu0YypyQiGE5/M93jSL2+vwGH8Hsr/POnGAsXmgodEHcXGem9GLfCt
- GNzx6I/noRnziv1/OFOASvVlBO6sW205bgqkih9hlSYlTpMfJJKJyE9ibg==
-X-Google-Smtp-Source: AGHT+IGCFVxztppksx+liUYRBJ3oULo0rwArDK1OGB9bHh1XvrkG6shq9f5SGMweQ30OGjmVLh8J6r+mqR+IrnGOoAE=
-X-Received: by 2002:a17:906:6a1d:b0:9c2:2d0a:320c with SMTP id
- qw29-20020a1709066a1d00b009c22d0a320cmr3804747ejc.46.1702389973819; Tue, 12
- Dec 2023 06:06:13 -0800 (PST)
+ bh=4j0nCBkGGJQwj35jWIGakQMHyUzXzmTlOIHOC/CgU08=;
+ b=J1MEFOHU3CUT4uxa0zWeZBnWiAdPcCfNBbZHDX9ZroRStjWSWx37+6TuHgKxIqxvSl
+ U4D1dm4hHiLuSjsgJeosAMM/4zOT8GYlnUyx5fC5YKMmN0/NF4TtPZwSQqwUK8ZUfOhU
+ wFHbOq2v14PQMBaA21RvBfZL/Ozf3pjUFn3ecSzqZw/qE+uWfNcFkZJt4xiwsaju4jky
+ V9TeTrruuK0amS+r9DMDA9AnSmZoQdaf9qeOugbJTOiwAKDQC8ftVZww2GMW1M2cOBdz
+ VWBEl6fItkjGH3ti4DFAlqHcIj36LUxfff0HEfiAtD9PnBSbGAkLItff9w0zqHrInaEI
+ RfJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702390319; x=1702995119;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4j0nCBkGGJQwj35jWIGakQMHyUzXzmTlOIHOC/CgU08=;
+ b=ZyHGuZGp6qcK56aJLIzAZgFbl+tiONhANxr1iRQuuZ5bUwrRQ/VbG4iwr4XxSRQOMl
+ wcpDQU+D/QzgX/Y6+/qPBw/d6ZwQA3dVmz6KzOeBfbD+Ad6uwC8wLQoa2oTFTOvmew9K
+ s+PAWo9bhn8ngmbx11L2/dIo6pdKXm2tgWZpob+cWppdZTZv1NKoPEK7PUEK2tgdqIKF
+ ghiUFjOBb+Y6Z1saY8uTTqAvIA8EXBc4IWot1s7eTT8AwlDJqPvutMXXIKOuVyz4WhTy
+ 4iPtzylwDO4nG/grb8nsnAJanatdngacvCP3N2ACwWRmmF8l4wmyS6j6m0FOrEX0HwZX
+ W02Q==
+X-Gm-Message-State: AOJu0YynwNuZowl0HXJiW2JWYBpIhIdcC0dhhiL7lOwIRKDmAse0jFp4
+ Jp/iZOmBrHoz5ksZAP89hMc=
+X-Google-Smtp-Source: AGHT+IHrvGfKuhcNbnpEDNsa84QYxiXGbwiVGYrR+zxObhr3UMxVE8PMAbDlnmbghhdrnCqTSEOKGA==
+X-Received: by 2002:a05:620a:42:b0:77e:fba3:936e with SMTP id
+ t2-20020a05620a004200b0077efba3936emr6219816qkt.80.1702390318677; 
+ Tue, 12 Dec 2023 06:11:58 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ po6-20020a05620a384600b0077d9fdde1dcsm3737299qkn.42.2023.12.12.06.11.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Dec 2023 06:11:58 -0800 (PST)
+Message-ID: <9760cfbe-ad54-8a38-a9a7-9308b0b7ca25@gmail.com>
+Date: Tue, 12 Dec 2023 09:11:57 -0500
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 12 Dec 2023 07:05:56 -0700
-Message-ID: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
-Subject: Proposal: FIT support for extension boards / overlays
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>, 
- Andrew Davis <afd@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v7 0/8] clk: Switch from soc_clk_dump to clk_ops function
+Content-Language: en-US
+To: neil.armstrong@linaro.org, Igor Prusov <ivprusov@sberdevices.ru>,
+ u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ u-boot-amlogic@groups.io, uboot-stm32@st-md-mailman.stormreply.com
+References: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+ <88960dfc-441f-49fb-bd36-ee32e754b003@linaro.org>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <88960dfc-441f-49fb-bd36-ee32e754b003@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,104 +103,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-The devicetree files for a board can be quite large, perhaps around
-60KB. To boot on any supported board, many of them need to be
-provided, typically hundreds.
-
-All boards for a particular SoC share common parts.  It would be
-helpful to use overlays for common pieces, to reduce the overall size.
-
-Some boards have extension add-ons which have their own devicetree
-overlays. It would be helpful to know which ones should be applied for
-a particular extension.
-
-I propose implementing extensions in FIT. This has a new '/extensions'
-node, so you can specify what extensions are available for each FIT
-configuration.
-
-For example:
-
-/ {
-  images {
-    kernel {
-      // common kernel
-    };
-
-    fdt-1 {
-      // FDT for board1
-    };
-
-    fdto-1 {
-      // FDT overlay
-    };
-
-    fdto-2 {
-      // FDT overlay
-    };
-
-    fdto-3 {
-      // FDT overlay
-    };
-  };
-
-  configurations {
-    conf-1 {
-        compatible = ...
-        fdt = "fdt-1";
-        extensions = "ext1", "ext-2";
-    };
-  };
-
-  extensions {
-    ext-1 {
-        fdto = "fdto-1";   // FDT overlay for this 'cape' or 'hat'
-        kernel = "kernel-1";
-        compatible = "vendor,combined-device1";
-        extensions = "ext-3";
-    };
-
-    ext-2 {
-        fdto = "fdto-2";   // fdt overlay for this 'cape'
-        compatible = "vendor,device2";
-    };
-
-    ext-3 {
-        fdto = "fdto-3";
-        compatible = "vendor,device3";
-    };
-  };
-};
-
-So FIT configurations have a list of supported extensions. The
-extensions are hierarchical so that you can have ext-1 which can
-optionally have ext-2 as well. This allows boards to share a common
-SoC to add in overlays as needed by their board. It also allows common
-'capes' or 'hats' to be specified only once and used by a group of
-boards which share the same interface.
-
-Within U-Boot, extensions actually present are declared by a sysinfo
-driver for the board, with new methods:
-
-get_compat() - determine the compatible strings for the current platform
-get_ext() - get a list of compatible strings for extensions which are
-actually present
-
-The extension compatible-strings are used to select the correct things
-from the FIT, apply the overlays and produce the final DT.
-
-To make this simpler for the common case (without extensions), we can
-allow multiple FDT images for a configuration, with the first one
-being the base SoC .dtb and the others being the .dtbo overlay(s) for
-the board:
-
-confi-1 {
-        compatible = ...
-        fdt = "fdt-1", "fdto-1";
-};
-
-Comments welcome.
-
-Regards,
-Simon
+T24gMTIvMTIvMjMgMDk6MDMsIE5laWwgQXJtc3Ryb25nIHdyb3RlOg0KPiBIaSBJZ29yLCBT
+ZWFuLA0KPiANCj4gT24gMDkvMTEvMjAyMyAxMTo1NSwgSWdvciBQcnVzb3Ygd3JvdGU6DQo+
+PiBDdXJyZW50bHkgY2xvY2sgcHJvdmlkZXJzIG1heSBvdmVycmlkZSBkZWZhdWx0IGltcGxl
+bWVudGF0aW9uIG9mDQo+PiBzb2NfY2xrX2R1bXAgZnVuY3Rpb24gdG8gcmVwbGFjZSBjbGsg
+ZHVtcCBjb21tYW5kIG91dHB1dC4gVGhpcyBjYXVzZXMNCj4+IGNvbmZ1c2luZyBiZWhhdmlv
+dXIgd2hlbiB1LWJvb3QgaXMgYnVpbHQgd2l0aCBvbmUgb2Ygc3VjaCBkcml2ZXJzDQo+PiBl
+bmFibGVkIGJ1dCBzdGlsbCBoYXMgY2xvY2tzIGRlZmluZWQgdXNpbmcgQ0NGLiBGb3IgZXhh
+bXBsZSwgZW5hYmxpbmcNCj4+IENNRF9DTEsgYW5kIHVzaW5nIGNsayBkdW1wIG9uIHNhbmRi
+b3ggdGFyZ2V0IHdpbGwgbm90IHNob3cgQ0NGIGNsb2Nrcw0KPj4gYmVjYXVzZSBrMjEwIGRy
+aXZlciBvdmVycmlkZXMgY29tbW9uIHNvY19jbGtfZHVtcC4NCj4gDQo+IFdoYXQncyB0aGUg
+c3RhdGUgb2YgdGhpcyBzZXJpZSA/DQoNCkF3YWl0aW5nIHVwc3RyZWFtLiBJIHdpbGwgbWFr
+ZSBhIFBSIHdpdGggaXQgZm9yIG5leHQuDQoNCi0tU2Vhbg0KDQo+IFRoYW5rcywNCj4gTmVp
+bA0KPiANCj4+DQo+PiBDaGFuZ2Vsb2c6DQo+PiDCoCB2MSAtPiB2MjoNCj4+IMKgIC0gQWRk
+IG1pc3Npbmcgc3RhdGljIHRvIGR1bXAgZnVuY3Rpb25zDQo+Pg0KPj4gwqAgdjIgLT4gdjM6
+DQo+PiDCoCAtIE1ha2Ugc29jX2Nsa19kdW1wIGluIGNtZC9jbGsuYyBzdGF0aWMgaW5zdGVh
+ZCBvZiByZW1vdmluZyBfX3dlYWsNCj4+DQo+PiDCoCB2MyAtPiB2NDoNCj4+IMKgIC0gUmVi
+YXNlIGFuZCByZWZhY3RvciBkdW1wIGZvciBuZXcgQW1sb2dpYyBBMSBjbG9jayBjb250cm9s
+bGVyIGRyaXZlcg0KPj4NCj4+IMKgIHY0IC0+IHY1Og0KPj4gwqAgLSBBZGQgZG9jcyBmb3Ig
+ZHVtcCgpIGZ1bmN0aW9uIGluIGNsa19vcHMNCj4+IMKgIC0gUHJpbnQgZHJpdmVyIGFuZCBk
+ZXZpY2UgbmFtZXMgYmVmb3JlIGNhbGxpbmcgY29ycmVzcG9uZGluZyBkdW1wKCkNCj4+DQo+
+PiDCoCB2NSAtPiB2NjoNCj4+IMKgIC0gZHVtcCgpIHJldHVybiB0eXBlIGNoYW5nZWQgdG8g
+dm9pZA0KPj4gwqAgLSBtZXNvbl9jbGtfZHVtcCgpIGFuZCBoZWxwZXIgZnVuY3Rpb25zIG1v
+dmVkIHVuZGVyIENPTkZJR19DTURfQ0xLIHRvDQo+PiDCoMKgwqAgZml4IHVudXNlZC1mdW5j
+dGlvbiBkaWFnbm9zdGljDQo+Pg0KPj4gdjYgLT4gdjc6DQo+PiDCoCAtIGZpeCByZXR1cm4g
+dHlwZSBvZiBrMjEwX2Nsa19kdW1wKCkNCj4+IMKgIC0gZml4IGNsa19vcHMgZHVtcCgpIGRv
+Y3Mgc2luY2UgaXQgcmV0dXJucyB2b2lkIG5vdw0KPj4NCj4+IElnb3IgUHJ1c292ICg4KToN
+Cj4+IMKgwqAgY2xrOiB6eW5xOiBNb3ZlIHNvY19jbGtfZHVtcCB0byBaeW5xIGNsb2NrIGRy
+aXZlcg0KPj4gwqDCoCBjbGs6IGFzdDI2MDA6IE1vdmUgc29jX2Nsa19kdW1wIGZ1bmN0aW9u
+DQo+PiDCoMKgIGNsazogazIxMDogTW92ZSBzb2NfY2xrX2R1bXAgZnVuY3Rpb24NCj4+IMKg
+wqAgY2xrOiBhbWxvZ2ljOiBNb3ZlIGRyaXZlciBhbmQgb3BzIHN0cnVjdHMNCj4+IMKgwqAg
+Y2xrOiBBZGQgZHVtcCBvcGVyYXRpb24gdG8gY2xrX29wcw0KPj4gwqDCoCBjbWQ6IGNsazog
+VXNlIGR1bXAgZnVuY3Rpb24gZnJvbSBjbGtfb3BzDQo+PiDCoMKgIGNsazogdHJlZXdpZGU6
+IHN3aXRjaCB0byBjbG9jayBkdW1wIGZyb20gY2xrX29wcw0KPj4gwqDCoCBjbWQ6IGNsazog
+TWFrZSBzb2NfY2xrX2R1bXAgc3RhdGljDQo+Pg0KPj4gwqAgYXJjaC9hcm0vbWFjaC16eW5x
+L2Nsay5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNTcgLS0tLS0tLS0tLS0t
+LS0NCj4+IMKgIGFyY2gvbWlwcy9tYWNoLXBpYzMyL2NwdS5jwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHzCoCAyMyAtLS0tLS0NCj4+IMKgIGNtZC9jbGsuY8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEzICsrKy0N
+Cj4+IMKgIGRyaXZlcnMvY2xrL2FzcGVlZC9jbGtfYXN0MjYwMC5jwqDCoMKgwqDCoMKgIHzC
+oCA4MyArKysrKysrKysrLS0tLS0tLS0tLQ0KPj4gwqAgZHJpdmVycy9jbGsvY2xrX2syMTAu
+Y8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTA0ICsrKysrKysrKysrKy0t
+LS0tLS0tLS0tLS0NCj4+IMKgIGRyaXZlcnMvY2xrL2Nsa19waWMzMi5jwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzNyArKysrKysrKysNCj4+IMKgIGRyaXZlcnMvY2xr
+L2Nsa192ZXJzYWwuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOSArKy0N
+Cj4+IMKgIGRyaXZlcnMvY2xrL2Nsa196eW5xLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB8wqAgNTIgKysrKysrKysrKysrKw0KPj4gwqAgZHJpdmVycy9jbGsvY2xrX3p5
+bnFtcC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMjIgKysrLS0tDQo+PiDC
+oCBkcml2ZXJzL2Nsay9pbXgvY2xrLWlteDguY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
+wqAgMTMgKy0tLQ0KPj4gwqAgZHJpdmVycy9jbGsvbWVzb24vYTEuY8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA1OCArKysrKystLS0tLS0tLQ0KPj4gwqAgZHJpdmVy
+cy9jbGsvbXZlYnUvYXJtYWRhLTM3eHgtcGVyaXBoLmMgfMKgIDIwICsrKy0tDQo+PiDCoCBk
+cml2ZXJzL2Nsay9zdG0zMi9jbGstc3RtMzJtcDEuY8KgwqDCoMKgwqDCoCB8wqAgMzEgKyst
+LS0tLS0NCj4+IMKgIGluY2x1ZGUvY2xrLXVjbGFzcy5owqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgIHzCoCAxMyArKysrDQo+PiDCoCBpbmNsdWRlL2Nsay5owqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMiAt
+DQo+PiDCoCAxNSBmaWxlcyBjaGFuZ2VkLCAyNjkgaW5zZXJ0aW9ucygrKSwgMjY4IGRlbGV0
+aW9ucygtKQ0KPj4NCj4gDQoNCg==
