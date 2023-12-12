@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 984FFC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 08:53:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B45E2C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 08:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31AB6877DB;
-	Tue, 12 Dec 2023 09:53:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9FFD78078B;
+	Tue, 12 Dec 2023 09:53:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="ZXMFaRSq";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="PGCm+3Wl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A25C87754; Tue, 12 Dec 2023 09:53:12 +0100 (CET)
+ id 903B9877E0; Tue, 12 Dec 2023 09:53:13 +0100 (CET)
 Received: from EUR01-VE1-obe.outbound.protection.outlook.com
  (mail-ve1eur01on0604.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:fe1f::604])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F116F877CA
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:53:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B557877CC
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:53:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jz3upDzy+vEYwQlHfcIdjL1/ChCa3Y0IOEZcxFkXGJ4tExP9JOomQhQ4iO8jKHWtMH7kfviBXUrziYPY9ZrxbyjmTfOTwAxLM8KGlWitoMtRV+xLePgfwGm9fJsi/imhIuVbMLEsx19Q/AT3uFiLSL5Jpt3DNXuJJs5poCdJaIvX+e//BeeImIyvbrb8Vr/GG+KC0qc/YHpfM9b53tepQ78DAGIi6j0OwelKThW+48DblhzyUcijHdkPqKR4XJusXgj2Ft88XdBjz4mGvODOlojqMnqU0FQfPLbQxtcRI98pTBf2xSdZvvTLvO/SwQ2YNfhYt0CcQ/v+ZFIYckG0Ug==
+ b=mOwOlw5J0yB5hsmTf/Ul10tuqi7QqwwhclRyHu/9ICzOcYFWfyv/GYwWwqEnk0Aa8J5QCktuHV61qQP3aJhC9QDzvCv9KC9QrcoQ8SzkjpwvRMmEobdRPXWFtVKXVXNtOgIufWmVsOrKLoHxuAwHsupnL8JigC0cjwPuJ6tSnNz8ThxMmkzZ6+vMYlZkD2h4WK8TFNNkGmhqOtXaRzigj7KlU9M5b8CPYCV4wJA5w6ZpxjuMQTFMKjfcVmgx/+V4eJdeIT6d8zQr1qFT+y0JdXVihFbivT0CJl+grSajUwrkJIfMivaZ2fkvmxPuOzo4W2lc0039KJiRkqM6OEkh3g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z8cqmA8DSV4svkkJK3ZSlaMfw4UCEQDaoZZToZ6Y6oM=;
- b=F12DyFVMZPgOihoXnSgJPdP7rGZx/sYfq4wddN27sdL1TwZRt/DOKHChWkHpVgvwWEiHkKFpJNOWnTS/Gr5TURlkO8c1rf2iLZgBGRtEDj8yD+lpi9ws2RPq+M6Ts7Xzg0f/5vHTLIrYj6RRj2mW0xWZosuoMNqke1DIuFTQW/yPqdZoMg4UNK91TCNGZCSVEppC4L+aciGw8kF4fAZL8Z5fOQ+6q7icYtTtbwkLkmgVXWo7K4gjcYuaUXPJiZ0vFRCED1bJPCLgk5kDVUKYdRC0rXyr0xTHC+iZc+KC4g57Gj8LiciV+hv0sjW/qA0npCFO4Vdhz2bPMbu62ZOs8g==
+ bh=n07+P3mwqVnl0WW4bgxwPNDemca/fFO3Junda8XW1mE=;
+ b=oIAkrUkWEve+B5ezDsIYrdeaWTrEJ7QCh6IVIiKRkjHYmlylQJrrXnnWtt5Ks8WL5b2Ogt9do0pkQ9yG81CIrMfSnkUT/WiaJ4d6SGklM1Mvke+XKr+2LvRZlNo1biOv1beyCHRmDpW59QNSP9zJbL0KDWZDzEoFjZ0RLaU8zvgyHb6CHx/OZ6Df0RQEA/Dp+Q2tK7MysiQmgmCa4DOdzzrjgoW9LlvRy6RN2C8/Y5kwWe5xj/niqsT0P6Q/9bexL9yLetQZa8U5uNspJUtKTCuFIxJk1X2CTvFX5c+Wk+qMLH/Ee8dk/x0zNHD1DYGbwPZWz2BO+T5YTjAQT4EOnA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z8cqmA8DSV4svkkJK3ZSlaMfw4UCEQDaoZZToZ6Y6oM=;
- b=ZXMFaRSqjdEq/USlbIzL1UpklOLzt+Y0x+UabufQQ5BfC6Ghjvk4Oh59GxDpgPUf22ZPEbTLyDrSguySlPicV8Y2NyUzp08xxChH7h8zcXaRoGSnApDaBUM8Lzlc4n1UiSfi4IUsDOwSyKTFUnY6ElSM+vXMhZHqZ9TcCLsfCek=
+ bh=n07+P3mwqVnl0WW4bgxwPNDemca/fFO3Junda8XW1mE=;
+ b=PGCm+3Wlulzr7g/0+hZ0qYnA+NRxd1BAnkXHp70DxbrF+qm+qg9Do+50m7NquWXEfMKT43k6IWNi7980L0mctE/KSqAnXneve9bvQxXbhQhDjB92CMM+BrcVsjEKxT24w4N9K+oee9xm5CMvSgYENdWBs+iL0uj/Q/OXxAu6PMY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
  by AM9PR08MB5940.eurprd08.prod.outlook.com (2603:10a6:20b:281::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.33; Tue, 12 Dec
- 2023 08:53:07 +0000
+ 2023 08:53:08 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::b914:d9b5:6462:13b6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::b914:d9b5:6462:13b6%5]) with mapi id 15.20.7025.022; Tue, 12 Dec 2023
- 08:53:07 +0000
+ 08:53:08 +0000
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lukas Funke <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
- Roland Gaudig <roland.gaudig@weidmueller.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: [PATCH v2 0/6] Enable setexpr command to print cpu-list like bitmaps
-Date: Tue, 12 Dec 2023 09:52:30 +0100
-Message-Id: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
+ Lukas Funke <lukas.funke@weidmueller.com>
+Subject: [PATCH v2 2/6] linux: bitmap.h: add 'for_each_set_bitrange' iteration
+ macro
+Date: Tue, 12 Dec 2023 09:52:32 +0100
+Message-Id: <20231212085236.2730768-3-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
+References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: FR0P281CA0211.DEUP281.PROD.OUTLOOK.COM
@@ -71,53 +72,53 @@ X-ClientProxiedBy: FR0P281CA0211.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AM9PR08MB5940:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9190b3c-4a0e-4b96-0553-08dbfaefc281
+X-MS-Office365-Filtering-Correlation-Id: a7a88a22-1be7-418e-9997-08dbfaefc357
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: pk9+GzsuPYKXz+9hDwg1IEsrUkYKQ6U9ASfdovBZ08lNCXmZbD+QBoE4J/uv6VgIkTBfT1vp3RjV9P+JOUfzzyAuLKQ7uuNeGkHRwNFK1aYtV8c1e1Ddn/3TMVYRbAYhBjVbaJcIsP+ZYO85XbUysT79sFglwHBsfcDV01qhukvSDr5GLhhIq691eXcvadk50s0CA+Q99iG2VFWC3+0Blqn4Vd4VDmuWRYbMbl3lZk9iRa9YgdQCH6TSPg35s6v/mkMoFF9bONvmxrF8f3vOS+NsWgauONAUosh/79bJOKRYF4140toxpVAhhPtO3LPnRkEvdFKf3cBGNcd4xqY+ByiJS6iCvdG6ulzpgOZDd5o6zcHC1cN7LGuCwzMOOKsFRUNZuNl0ZK3a5DdyihU2lDScj85880zBtyofu3Pz99Na7NiKgjLkU9zsj7eh1jnjO3L86blq7peQauHRacWS0H3OwV5OBNE44oG1iihXIcBRHRio0Cx5jaYCApWy3bhsIIE6kxETSvmaIkl+FN6eTY3Fs/Vg25gqZmznP/ztLj4eEnTf3+BL0CFUrmIcom/odbj1D5rE+Fl3JFuoKLPBaqdo2chgaLsS6R/Rt05iqCU=
+X-Microsoft-Antispam-Message-Info: sVSy1S6CSQ3oT4kv5JTgkHA1BZ24RloVR5DUq+LpEZNAFWb+/pB6LDZ6JpNm0M9X+7dqIYDWZd2GFKm7oGM91GMNBJtEdLZM6wsfQHu3wLCn/Z5Fmcr5kGdysa4RevZpgDtT51ZQfr8RvSUO/Tz3K+oM+h7B65naID8QsUVGR+Y3CtdddMHZwRx522X9VzONfURSnbxqQl/P5e+QcfoVmOAc4RM8yDV34jY0bbOPn1TfcKSPVW3bLKagwZvfFCFKEi73hqbo+38HhETg1JLSpxBdObZbCFpt0rwr36n2XQTaq6kxAF34E/5yrHZojp+JBO9vyD9stAmeKe5EqCgwi0UyF20avUxLVFup8Lj2dxlwpTGIIEIysiNBuskJisCtnarJN1E5otZMa/LgfccgcUj2h0gF+3jB7orXYfBDnUdKFzW6yYf3Va0GFcJDz3ixApBiviElXdG+jwfuRDU3KZtAVl+OSnURdDOJ4+32N2CBEbgoa5JDZYtC4LAtdap6lpS20WxjV2vYVDfGoonoSA7A8Pf/PHvQGC4lhUz56P3tafAAc3sA66TkZbzCRSUkWqPWWZ01x959FpDB8v4Aze4gxOhne0wZVPK1me/WrquaiwwKcERCCLkYAdmMatRT
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(136003)(366004)(346002)(396003)(376002)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(26005)(83380400001)(52116002)(6506007)(6512007)(2616005)(1076003)(9686003)(5660300002)(4326008)(8676002)(41300700001)(6486002)(2906002)(6666004)(8936002)(316002)(966005)(478600001)(6916009)(66476007)(66556008)(66946007)(38100700002)(36756003)(86362001)(54906003)(38350700005);
+ SFS:(13230031)(39860400002)(136003)(366004)(346002)(396003)(376002)(230922051799003)(451199024)(1800799012)(64100799003)(186009)(26005)(107886003)(83380400001)(52116002)(6506007)(6512007)(2616005)(1076003)(9686003)(5660300002)(4326008)(8676002)(41300700001)(6486002)(2906002)(6666004)(8936002)(316002)(478600001)(6916009)(66476007)(66556008)(66946007)(38100700002)(36756003)(86362001)(54906003)(38350700005);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?h5aigibI08i+EpUDhtFf7iyojL6xW+kqq8U2z52tQynJGbrsZpoqIuD5eCci?=
- =?us-ascii?Q?oeqrSR09zpYAA+/VUh6aj+R9rY2SdHeL9u8+8OfqtgtUw+bmn0TmTBE5uHUV?=
- =?us-ascii?Q?LV0qIPFnw0t66igC1KI/4fzpQ4ObgJBPu+gfYTjLYwkPNZ6P5opNsU+i5WZO?=
- =?us-ascii?Q?KHbreV2V7xLNBqfkW3kxxXjpjlB3d+GOYluMfIuxAr+LZkUsVX2ospkrRZfc?=
- =?us-ascii?Q?iyy6YxHKkyG6VGdQHkvm+N4aiy8Tw+zoBhbeOTNTuwJ+Qz4MmDZFdniOrYnb?=
- =?us-ascii?Q?GSadbjTxxnf0FU0Tcm6rb/TMJ3+87KylA19I7W0tLHEYpxPp20++Y0RQChl5?=
- =?us-ascii?Q?yRiWp/m1xR10OGuM5yScwUhGYKPoL7EAJYcx/6fd3oSdjd8pnfRj7h3Rp7bG?=
- =?us-ascii?Q?vg6RpsrX8GbaMzAt4JbGXCTs3C5NGyROqnpT++vJkzP3SvK8M5e60gWNeb52?=
- =?us-ascii?Q?WrAfr7yzMoTk/IO2ZppQQdcu8FJk+EYLwQs+wl8Gwwp6cbkj+S6OrACpUx6G?=
- =?us-ascii?Q?3FjQOpFgEP46QHgE6ohykc7m29mBM3zH+HmpAHTYoS7KC3ByRMY9sAp57f4x?=
- =?us-ascii?Q?9cZzw1EA5N3DHUgyPEJL+JibStrVyeuTvZIRag/Vz/ZdNAOr2Wa+egW2bW9k?=
- =?us-ascii?Q?+DN66tMuhy5DH7EacK1ow2h40563HkIMW7lNH0kvkz23GiHIyLBYg2xBQ9XQ?=
- =?us-ascii?Q?d/Xa40lKxZyemuef0MWf0l/cwkZ28Y5jGngPQ8UVUApLafClG0K3zrRGIsNH?=
- =?us-ascii?Q?ibISkjcqg1WK7QLeBf/dDFdKBCecbuuWIEpE1LWplrkHlLTQz8MOiKnV7y++?=
- =?us-ascii?Q?vobJtAiN59+jVlpqPzjoTTjl+ynOi1djtl5HegAEEBbBFRJfTDpDfNsWV7fD?=
- =?us-ascii?Q?0YqbC4rFN9GEyToVem/NtIexiubN1lM9/iNe+mz8kzPEPIaNEHgMaKg9YSE3?=
- =?us-ascii?Q?XNpZh3TvEjf18914q7x73cCO8awcW0CZDObxqeLxol8cDc0pIi5aA7tpK04t?=
- =?us-ascii?Q?VG1V61hFq+9TiOh2RRezfECuwBXpxbiW8AfWVvmQUttjaUe/lcDNsDQHMcfZ?=
- =?us-ascii?Q?90PEfFA6RhDfqOTRgCuwqdTB8kW9SDS0JJBodHyyiR97sk5BfbvHc7bVZzdY?=
- =?us-ascii?Q?m7Dq+PUgiwxGhvSAtpy8r7uyZwGJiNR6PGJCoN/tGy4RGLwDzmc1KWMAy02M?=
- =?us-ascii?Q?qSsH9wdc1oZiGYNHdzrFulVw93/rE3kvkNnVPYg31Fk1vIOeCQAZOrvv+oNN?=
- =?us-ascii?Q?kTMl36jLNWFzS0VC59vpmgFFZ3uQHgXd3X4JCvZTesvD/6jtzGNDzUDHht7n?=
- =?us-ascii?Q?HK/CrGSVoCeGbeZMTtWLm4h1F/6FNnXICR1ig/MYlp1faNF1++qQaDfmlHHn?=
- =?us-ascii?Q?nmlyVfOp5eFkB3fKPAMecxoWzbN8+m2rv2NKDSVIjci8JB4XmIVErOB6NmfF?=
- =?us-ascii?Q?1PZ8uOi+poOaVIffduHYi5IK9RujWugUCrPb0NUJQHVfr+ZEVOtURKS3gSzC?=
- =?us-ascii?Q?YsqYUxMxKElsri1yvyDtRqoJegr654kPnvN+J993XT+CXDQ15pa9zfxLqUS4?=
- =?us-ascii?Q?hYf7qrbeCLCyQ5JTR9mlE3k222nCM1ClBGSmuKKssNk5N6D6Yz2o8IU7RGyR?=
- =?us-ascii?Q?zw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?QM50hDcADeLo/zgSY1H34HjzB6wn3aGIxCE29GD/7a7Ofnt10DFm/EPxnXKH?=
+ =?us-ascii?Q?MpbahnaZ+mhA3NOcpNYjfL5zV7iLjA57ItEPLI+r7lU6qPs05GNOI8YOzMGx?=
+ =?us-ascii?Q?Ep8HRNtuEAQ064VLWLNMZ4zzZg1oHizhcrt4WLQhUz47touVY7F9V7FbgyC2?=
+ =?us-ascii?Q?1XowNVLHzhRK/dHYGiXwCYBkqbVPtEY5TeBRnxu4KRZ6v3Lp/otFoVJS+gdM?=
+ =?us-ascii?Q?cuHnvbY7wRnlS80k0jdTHQNZRQW3uEmnedYQGJ56QBTT5AwDJAzO80iJl7QS?=
+ =?us-ascii?Q?RCuoL1QaBozFLRSO7XyX/Ab1f0seg5W+lbx7NNvV+L01+1XfzzgNR66KglhF?=
+ =?us-ascii?Q?K+twXBXbh8yJ04gN9auzOECqkODiAVH8DhhDFtQmuQl2zZGZHkBD+GUvzWK0?=
+ =?us-ascii?Q?UyHxj7HUO7CHWk9C4yTlOBVEkg0iFdRid18ijfCfp/+VaLkN3HwBM+dCaNnh?=
+ =?us-ascii?Q?Y1OvKewslmAX2xPAKIMS0fytcheYVcUTY9ZFwSP8kZJfcjFwGHuHImdw/3EJ?=
+ =?us-ascii?Q?apVjKHXB88NpFoMVdONybanTLsUMJT5DkKrdYWCwmG+9WfB7B8LAyAb5TbCg?=
+ =?us-ascii?Q?fK+N+3hNUSfRrsjA7tO9qUmTLFSqgpR0kKRE3Yooa18BI7ZxpuDUwt2R+gzf?=
+ =?us-ascii?Q?O/JNo91tnSYRXEhv2iNWguUsCvqlF0AEgIFLVtBrR7/bvCcQnTLUVYJshacx?=
+ =?us-ascii?Q?iSY0AFLJdFmT9FVRcOzFHWgZF7KT/2LPKNRUIpuF3u9eHrv6zh/ArvnOApOp?=
+ =?us-ascii?Q?YJuv7W1fyZ1M2sXpG5iMiYAIeQaRr4/8mq95XK3ceuNsyGAi1k4ij0j5b/m3?=
+ =?us-ascii?Q?11dr+T0QnrVu16snwV6YpjdulruTnhf/8HnZJZxLJ57Ka6rbuo8yZbs1LayJ?=
+ =?us-ascii?Q?mhiccKy8XphWk++PQmUNLn/qlYxAjWMsVLeWN78zXMxSgqzpxd9rOmUd7B8g?=
+ =?us-ascii?Q?hJpuo7xbhpE2T6ToXN3k5iieYggFY4llTaSldL1aELolEy2g376VcsE2/j2c?=
+ =?us-ascii?Q?OUAIVayRV0LRN8R/yvV8ghkRENRbvjMBl6OWujnWJ/b7nCPNadtOFQuIywUh?=
+ =?us-ascii?Q?0DIfCNRoVd0HCKfxAIRh5n7zkUyVUaGBhiF1FI4Hecwe1TEUhxCzi4Xu/zad?=
+ =?us-ascii?Q?x1bFdR5dayJy+RZDLraCQlFfvP/zxmRYwd+hNPCoRMxQJmZ5W39zYPB3VILc?=
+ =?us-ascii?Q?cQ8UvYmgVG9SXEIeYo7qA5fcEvOGX0ffA9p2A7XDDT9/NaUHwpDXFHISPo3/?=
+ =?us-ascii?Q?32vtkwGxAoOEHTi+A3YRTIK+HiOdAO0HXLHy1U0HKhkBbSbyTQ0koQHGL8zO?=
+ =?us-ascii?Q?k/A5Nt30fGL4vY6IQaap49iuW7ZDaqZAS6ncKh/++T77If1XyxHfEfs1VJS7?=
+ =?us-ascii?Q?ElCxqwcJNI5m5SDMJmezEutGXxIwe+y/9Z6hR0tGwhXh6dYFp3tJ8wxQCQlf?=
+ =?us-ascii?Q?RrVWyG4wt0xMD6mtKGmFa6+xp1xv2kjO8RdZoenAmWrkKW1sJV3RaTz/bWjG?=
+ =?us-ascii?Q?u13rDEyUD/6PbNYyTMZZ/oi+IQEJltiu3Oq2GzzUfxJgmC84HHLX07sWQm15?=
+ =?us-ascii?Q?2xannBbdha94ssa21G6jtY+Co18mJWnQp4bKTjtuZA6TRhOtz1TyhF/9YiGG?=
+ =?us-ascii?Q?mQ=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9190b3c-4a0e-4b96-0553-08dbfaefc281
+X-MS-Exchange-CrossTenant-Network-Message-Id: a7a88a22-1be7-418e-9997-08dbfaefc357
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2023 08:53:07.1758 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2023 08:53:08.5581 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2JUI4XeXduwWy8gg4xoJ1en9hbU7GcbwXdW1m6v/2fKjZWJnIq+etCNAu5gxxjyHCU5/B6jY//rsocodEGlDTw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8bJRLoPvcdeyu2uXOje5P6VadWx14tgJqt2a+EODi8XVsur4eO5lsmnPn8m2MX583SaL+vGvpqd1Z+M3c0VHQg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB5940
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -137,44 +138,36 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
+Add 'for_each_set_bitrange' (from Linux kernel) in order to iterate
+over each set bitrange of a bitmap. This becomes handy if one wants
+to generate a cpu list i.e. for isolcpu or nohz_full.
 
-This series enables the 'setexpr' command to print "cpu list"-like
-bitmaps based on the printk format specifier [1].
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+---
 
-One use-case is to pass cpu list [2] based kernel parameter like
-'isolcpu', 'nohz_full', irq affinity or RCU related CPU parameter to
-the kernel via a separate firmware variable without exposing the
-'bootargs' variable to directly.
+(no changes since v1)
 
-Example:
+ include/linux/bitmap.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-setexpr isolcpu_bootarg=%32pbl $myCPUisolation
-&& env set bootargs "$isolcpu_bootarg"
-&& bootm
-
-[1] https://www.kernel.org/doc/Documentation/printk-formats.txt
-[2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
-
-
-Changes in v2:
-- Add bitmap format specifier to documentation
-
-Lukas Funke (6):
-  sandbox: add generic find_next_zero_bit implementation
-  linux: bitmap.h: add 'for_each_set_bitrange' iteration macro
-  test: cmd: setexptr: Add tests for bitmap string format
-  doc: printf() codes: Add bitmap format specifier
-  lib: vsprintf: enable '%*pb[l]' format specifier
-  cmd: printf: forward '%p' format string specifier
-
- arch/sandbox/include/asm/bitops.h | 16 ++++++-
- cmd/printf.c                      | 29 ++++++++++++
- doc/develop/printf.rst            |  6 +++
- include/linux/bitmap.h            |  7 +++
- lib/vsprintf.c                    | 75 +++++++++++++++++++++++++++++++
- test/cmd/setexpr.c                |  9 ++++
- 6 files changed, 140 insertions(+), 2 deletions(-)
-
+diff --git a/include/linux/bitmap.h b/include/linux/bitmap.h
+index 0a8503af9f..9714533078 100644
+--- a/include/linux/bitmap.h
++++ b/include/linux/bitmap.h
+@@ -159,6 +159,13 @@ static inline unsigned long find_first_bit(const unsigned long *addr, unsigned l
+ 	     (bit) < (size);					\
+ 	     (bit) = find_next_bit((addr), (size), (bit) + 1))
+ 
++#define for_each_set_bitrange(b, e, addr, size)			\
++	for ((b) = 0;						\
++	     (b) = find_next_bit((addr), (size), b),		\
++	     (e) = find_next_zero_bit((addr), (size), (b) + 1),	\
++	     (b) < (size);					\
++	     (b) = (e) + 1)
++
+ static inline unsigned long
+ bitmap_find_next_zero_area(unsigned long *map,
+ 			   unsigned long size,
 -- 
 2.30.2
 
