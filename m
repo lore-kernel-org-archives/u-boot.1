@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6849CC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 09:25:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE4CC4167D
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 10:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 473EA86E73;
-	Tue, 12 Dec 2023 10:25:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 618DB8718A;
+	Tue, 12 Dec 2023 11:13:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KpVPJysE";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="U+11zzq5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAFBB807E9; Tue, 12 Dec 2023 10:25:48 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A08E0877E3; Tue, 12 Dec 2023 11:13:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37C3186E73
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 10:25:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6552A87103
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 11:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d3644ca426so52946457b3.1
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 01:25:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702373144; x=1702977944;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q4gRcyGGdKlPmDkFHkjXrnlocz6KgKc57z1UWGMEZ9U=;
- b=KpVPJysEVp8kDrbJ27HZWaof26kK0lmvaUF3YTey4JGICN2BmqbfdWaRhR9VkNeQ3G
- vmRYbM0j4Dom4lxfZu140uf7nKGh3aJ0xEIvvCCp/8og3QGTqGNVBnxeZ1Lk7RlSOGWZ
- ChVf2RpslIx9NQH3CfgttQevXLl1D3HgMeoSc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702373144; x=1702977944;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q4gRcyGGdKlPmDkFHkjXrnlocz6KgKc57z1UWGMEZ9U=;
- b=NAdhF0yUUKzNmp009SCSG3tHYXPP0JNrOZOk+3Z0yTn7ChZcIvZuF84TdGoP3MEtC1
- hjzYiZp0od/TVEJQ7yl4tVAerjORSDagBJj+M0K0nTbXf+4LyndIEdn2nijL0EyghK8n
- MAVuZJMoE0A08IzsTsePDjGKpBh9UmUtHzBmxrgFYIsIAAFOARrKPjYJNy3BXivJWTVH
- kkxj00tl/hzMC0YsJvJUlmZGVG/ybSl4oheD85Gi+VI+O4oRUDGwqPQ7pxUEfRER4Io6
- ISRAp6c6hgqnru+9Z0w0326Elc18Ruu963c9lJ8+s6wXZQ12IkRNs00dWpa6nsn9YxFN
- uI8w==
-X-Gm-Message-State: AOJu0YyPU3k+oPESGCp7E26mFbAO0EFIu7cgDLmqI3K6tzrj25ASmkmp
- eWJdyoWAL72K8mqdouJbT8TA4ywgndgfKS7imzjUZim9GfAc5uZuhcuCfg==
-X-Google-Smtp-Source: AGHT+IFRjMsGq4/pKkhcRb7MfqKU1rG11T7W6ahtzQIfetp7eOyp2CAWNWdy6Fe9NR3oNirYVPt6iZXxGBRyqaVrlco=
-X-Received: by 2002:a0d:c907:0:b0:5d7:1941:3578 with SMTP id
- l7-20020a0dc907000000b005d719413578mr3837377ywd.95.1702373143795; Tue, 12 Dec
- 2023 01:25:43 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1702375996; x=1702980796; i=xypron.glpk@gmx.de;
+ bh=Koo7oYHvZOpHNw2UaNX5EmacRuLvnGFnbEOUo6l6pq8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=U+11zzq5mLUextNeZ0OIqNj2xsMU1aG1CsUw9FaBw7Mwm7x5epc7KiZnNvPEDZ++
+ f5JfPa6mHHwe1D8A1E6ULCvoxjVU/3MB56D+BfPWq7DEO4vs8SwQ/R3t9xHqX+XlO
+ hYIT0pKdN9N/XeOuWxbM9vpjup1tYUk5vJkI0AgTw8fUvLjsqqD9sYUpWQVkqAXZT
+ dxNsn+WiZ23DPx6ItWY6Rwl6ReSm+q06iXCPjnd6Kr5udmTUXEC1CaxDmAZbOqRUQ
+ QgzhnZ4vLDoPz+nckPhB1Z6ZDuVlrIQ27Mm4M6nIB2uqAxn41A2BKatquJQNrayI3
+ MNyQebfXyUQ7niObMA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MWRVb-1qgqZj1P4d-00Xwzk; Tue, 12
+ Dec 2023 11:13:16 +0100
+Message-ID: <7e505616-9053-48f6-a282-c6ce8a09a531@gmx.de>
+Date: Tue, 12 Dec 2023 11:13:10 +0100
 MIME-Version: 1.0
-References: <20231211085939.5478-1-jagan@amarulasolutions.com>
- <20231211085939.5478-3-jagan@amarulasolutions.com>
- <a963f773-f17c-46e9-b468-ca9e6217ffce@linaro.org>
-In-Reply-To: <a963f773-f17c-46e9-b468-ca9e6217ffce@linaro.org>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Tue, 12 Dec 2023 14:55:32 +0530
-Message-ID: <CAMty3ZA7Z20wUzgJnu4rEwLBZhhizJaFVg5OEK4MpvmpMGk7DA@mail.gmail.com>
-Subject: Re: [PATCH 02/17] video: dw_hdmi: Add Vendor PHY handling
-To: neil.armstrong@linaro.org
-Cc: Anatolij Gustschin <agust@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
- Da Xue <da.xue@libretech.co>, Jagan Teki <jagan@edgeble.ai>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/6] Enable setexpr command to print cpu-list like
+ bitmaps
+Content-Language: en-US
+To: lukas.funke-oss@weidmueller.com
+Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
+ <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Roland Gaudig <roland.gaudig@weidmueller.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, u-boot@lists.denx.de
+References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lQVNqwBoQei6mGEwBea5tnXjVSSfai1EvS1q36luAgrr1VDo1ND
+ /786G7CL6/Vw+/0BoyRVh+QmAMw4D5WzGOrTX0x+QJd8rzqCQOqYqMuJi+79TUpVCrnAtB0
+ cUSv2BQjREAbS/QoCH/LkQuY+NzMo2O2MehJI2GoxaSSpk9fMD/sgjztnwhOxTm+GxiURs+
+ RBVZkAcSDf17gv7EoMUUw==
+UI-OutboundReport: notjunk:1;M01:P0:lzJSLn/kdMY=;OL3p9lezKMDWfC0zVwgSFjxDod3
+ cQYSiXYA5Lr79hYVtK6AUP0cM7MAj/zkiP1+IyI+Jq6HH5UT0mMPLR8w4BqKbndG+pa+tpjcN
+ FwiQu3tfBZifYryRRjrGt0R074qxYhTfY1VukpZ3EjzC/RlZo5lxOI0Kxd9uoXrbBuLVP7ylF
+ Lo7Jsz75CpbgRDtStgC9VtbpFmkBESmoUcU2RKn1KyuZRtZYosTrjTrFa3VBxgf2aglbp5cec
+ blNe7Oni5h82XMS6gtHRv+l0JlbKBqz9OKoe56N+LdzqmIw3Q0Ase/DmvaSt52nIaZT7rO0p4
+ OZ4CtgXDZGiKcTVWN3OcQtP+5XuGwjQZM2g35vZnH5uZY5l4xgj0SqSDovO6yZ1SYIhaV8N0a
+ ax8RlsxC4yp5Yh0n0eTTqQGlpHBdFfVUcxf/IDNOp6IKOEjZO2mwJC0OeWX8aZcRcV1YwV+Iu
+ mxC4cxRRtwNWpvPxRoEgqVzA2HI0h2M7msehqJYH7RrlLrHE/GJBg2G/Y2DVzwpe77b2CrEWz
+ saHgQj0gSYUCu9rVbityAhtxxHSTkfyxq0gIl1UNUPyinrY1MatojED56wOJ1MQtJB3g0ERTG
+ piste5jvQetbJWUK9s2OZEUD6XFJ/gA+ZfBfeCcYjfhixKvJ21dZNRMMX4Gk9NUi2KhWmfibk
+ cDwDC4NhkJeeJQPt3de9RZH+eB7BJ2txtyAEYM1K4uwLZiIJrki61gwLIUFrhlSqErFfYSwfm
+ /0vxOonQZFFlVELjm9YtWTSYaYaDPSOFJmtcNQW2YgNZmVZ2AtI1eZ/dBcrfAZA8zLG6hKNWI
+ 9uXpcwg0HRDrWOkvDk6fVnC6bX5R0cfzkXHVKpergCPU0Pyo1ib80AtKMBDpDeAb1Tm0xpPiQ
+ VSOqxDuYYcCxOxwfo1mKTnUp67kdY2p4MP6elcMoRigWZ83S8+NuCMb8neCahgq6Pd0SBC0fZ
+ KRpd9w==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,233 +92,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 11, 2023 at 2:38=E2=80=AFPM Neil Armstrong
-<neil.armstrong@linaro.org> wrote:
+On 12.12.23 09:52, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
 >
-> On 11/12/2023 09:59, Jagan Teki wrote:
-> > From: Jagan Teki <jagan@edgeble.ai>
-> >
-> > DW HDMI support Vendor PHY like Rockchip RK3328 Inno HDMI PHY.
-> >
-> > Extend the vendor phy handling by adding platform phy hooks.
-> >
-> > Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-> > ---
-> >   drivers/video/dw_hdmi.c              | 29 +++++++++++++++++++++++++++=
--
-> >   drivers/video/meson/meson_dw_hdmi.c  | 11 ++++++++++-
-> >   drivers/video/rockchip/rk3399_hdmi.c |  8 +++++++-
-> >   drivers/video/rockchip/rk_hdmi.c     |  2 +-
-> >   drivers/video/sunxi/sunxi_dw_hdmi.c  | 11 ++++++++++-
-> >   include/dw_hdmi.h                    | 14 +++++++++++++-
-> >   6 files changed, 69 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
-> > index c4fbb18294..ea12a09407 100644
-> > --- a/drivers/video/dw_hdmi.c
-> > +++ b/drivers/video/dw_hdmi.c
-> > @@ -988,7 +988,7 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const stru=
-ct display_timing *edid)
-> >
-> >       hdmi_av_composer(hdmi, edid);
-> >
-> > -     ret =3D hdmi->phy_set(hdmi, edid->pixelclock.typ);
-> > +     ret =3D hdmi->ops->phy_set(hdmi, edid->pixelclock.typ);
-> >       if (ret)
-> >               return ret;
-> >
-> > @@ -1009,10 +1009,37 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const =
-struct display_timing *edid)
-> >       return 0;
-> >   }
-> >
-> > +static const struct dw_hdmi_phy_ops dw_hdmi_synopsys_phy_ops =3D {
-> > +     .phy_set =3D dw_hdmi_phy_cfg,
-> > +};
-> > +
-> > +static void dw_hdmi_detect_phy(struct dw_hdmi *hdmi)
-> > +{
-> > +     if (!hdmi->data)
-> > +             return;
-> > +
-> > +     /* hook Synopsys PHYs ops */
-> > +     if (!hdmi->data->phy_force_vendor) {
-> > +             hdmi->ops =3D &dw_hdmi_synopsys_phy_ops;
-> > +             return;
-> > +     }
-> > +
-> > +     /* Vendor HDMI PHYs must assign phy_ops in plat_data */
-> > +     if (!hdmi->data->phy_ops) {
-> > +             printf("Unsupported Vendor HDMI phy_ops\n");
-> > +             return;
-> > +     }
-> > +
-> > +     /* hook Vendor HDMI PHYs ops */
-> > +     hdmi->ops =3D hdmi->data->phy_ops;
-> > +}
-> > +
-> >   void dw_hdmi_init(struct dw_hdmi *hdmi)
-> >   {
-> >       uint ih_mute;
-> >
-> > +     dw_hdmi_detect_phy(hdmi);
-> > +
-> >       /*
-> >        * boot up defaults are:
-> >        * hdmi_ih_mute   =3D 0x03 (disabled)
-> > diff --git a/drivers/video/meson/meson_dw_hdmi.c b/drivers/video/meson/=
-meson_dw_hdmi.c
-> > index 5db01904b5..63ca3ac52e 100644
-> > --- a/drivers/video/meson/meson_dw_hdmi.c
-> > +++ b/drivers/video/meson/meson_dw_hdmi.c
-> > @@ -375,6 +375,15 @@ static int meson_dw_hdmi_wait_hpd(struct dw_hdmi *=
-hdmi)
-> >       return -ETIMEDOUT;
-> >   }
-> >
-> > +static const struct dw_hdmi_phy_ops dw_hdmi_meson_phy_ops =3D {
-> > +     .phy_set =3D meson_dw_hdmi_phy_cfg,
 >
-> Pretty sure this should be meson_dw_hdmi_phy_init
+> This series enables the 'setexpr' command to print "cpu list"-like
+> bitmaps based on the printk format specifier [1].
+>
+> One use-case is to pass cpu list [2] based kernel parameter like
+> 'isolcpu', 'nohz_full', irq affinity or RCU related CPU parameter to
+> the kernel via a separate firmware variable without exposing the
+> 'bootargs' variable to directly.
+>
+> Example:
+>
+> setexpr isolcpu_bootarg=3D%32pbl $myCPUisolation
 
-Correct, I will update this.
+I applied your patches on top of origin/next but your example simply
+does not work:
 
->
-> > +};
-> > +
-> > +static const struct dw_hdmi_plat_data dw_hdmi_meson_plat_data =3D {
-> > +     .phy_force_vendor =3D true,
-> > +     .phy_ops =3D &dw_hdmi_meson_phy_ops,
-> > +};
-> > +
-> >   static int meson_dw_hdmi_probe(struct udevice *dev)
-> >   {
-> >       struct meson_dw_hdmi *priv =3D dev_get_priv(dev);
-> > @@ -397,7 +406,7 @@ static int meson_dw_hdmi_probe(struct udevice *dev)
-> >
-> >       priv->hdmi.hdmi_data.enc_out_bus_format =3D MEDIA_BUS_FMT_RGB888_=
-1X24;
-> >       priv->hdmi.hdmi_data.enc_in_bus_format =3D MEDIA_BUS_FMT_YUV8_1X2=
-4;
-> > -     priv->hdmi.phy_set =3D meson_dw_hdmi_phy_init;
-> > +     priv->hdmi.data =3D &dw_hdmi_meson_plat_data;
-> >       if (meson_hdmi_is_compatible(priv, HDMI_COMPATIBLE_G12A))
-> >               priv->hdmi.reg_io_width =3D 1;
-> >       else {
-> > diff --git a/drivers/video/rockchip/rk3399_hdmi.c b/drivers/video/rockc=
-hip/rk3399_hdmi.c
-> > index 3041360c6e..b32139a8a6 100644
-> > --- a/drivers/video/rockchip/rk3399_hdmi.c
-> > +++ b/drivers/video/rockchip/rk3399_hdmi.c
-> > @@ -64,8 +64,14 @@ static const struct dm_display_ops rk3399_hdmi_ops =
-=3D {
-> >       .enable =3D rk3399_hdmi_enable,
-> >   };
-> >
-> > +static const struct dw_hdmi_plat_data rk3399_hdmi_drv_data =3D {
-> > +};
-> > +
-> >   static const struct udevice_id rk3399_hdmi_ids[] =3D {
-> > -     { .compatible =3D "rockchip,rk3399-dw-hdmi" },
-> > +     {
-> > +             .compatible =3D "rockchip,rk3399-dw-hdmi",
-> > +             .data =3D (ulong)&rk3399_hdmi_drv_data
-> > +     },
-> >       { }
-> >   };
-> >
-> > diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/=
-rk_hdmi.c
-> > index b75a174489..e34f532cd6 100644
-> > --- a/drivers/video/rockchip/rk_hdmi.c
-> > +++ b/drivers/video/rockchip/rk_hdmi.c
-> > @@ -83,6 +83,7 @@ int rk_hdmi_of_to_plat(struct udevice *dev)
-> >       struct rk_hdmi_priv *priv =3D dev_get_priv(dev);
-> >       struct dw_hdmi *hdmi =3D &priv->hdmi;
-> >
-> > +     hdmi->data =3D (const struct dw_hdmi_plat_data *)dev_get_driver_d=
-ata(dev);
-> >       hdmi->ioaddr =3D (ulong)dev_read_addr(dev);
-> >       hdmi->mpll_cfg =3D rockchip_mpll_cfg;
-> >       hdmi->phy_cfg =3D rockchip_phy_config;
-> > @@ -90,7 +91,6 @@ int rk_hdmi_of_to_plat(struct udevice *dev)
-> >       /* hdmi->i2c_clk_{high,low} are set up by the SoC driver */
-> >
-> >       hdmi->reg_io_width =3D 4;
-> > -     hdmi->phy_set =3D dw_hdmi_phy_cfg;
-> >
-> >       priv->grf =3D syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
-> >
-> > diff --git a/drivers/video/sunxi/sunxi_dw_hdmi.c b/drivers/video/sunxi/=
-sunxi_dw_hdmi.c
-> > index 0324a050d0..4b67a1614e 100644
-> > --- a/drivers/video/sunxi/sunxi_dw_hdmi.c
-> > +++ b/drivers/video/sunxi/sunxi_dw_hdmi.c
-> > @@ -369,6 +369,15 @@ static int sunxi_dw_hdmi_probe(struct udevice *dev=
-)
-> >       return 0;
-> >   }
-> >
-> > +static const struct dw_hdmi_phy_ops dw_hdmi_sunxi_phy_ops =3D {
-> > +     .phy_set =3D sunxi_dw_hdmi_phy_cfg,
-> > +};
-> > +
-> > +static const struct dw_hdmi_plat_data dw_hdmi_sunxi_plat_data =3D {
-> > +     .phy_force_vendor =3D true,
-> > +     .phy_ops =3D &dw_hdmi_sunxi_phy_ops,
-> > +};
-> > +
-> >   static int sunxi_dw_hdmi_of_to_plat(struct udevice *dev)
-> >   {
-> >       struct sunxi_dw_hdmi_priv *priv =3D dev_get_priv(dev);
-> > @@ -379,7 +388,7 @@ static int sunxi_dw_hdmi_of_to_plat(struct udevice =
-*dev)
-> >       hdmi->i2c_clk_high =3D 0xd8;
-> >       hdmi->i2c_clk_low =3D 0xfe;
-> >       hdmi->reg_io_width =3D 1;
-> > -     hdmi->phy_set =3D sunxi_dw_hdmi_phy_cfg;
-> > +     hdmi->data =3D &dw_hdmi_sunxi_plat_data;
-> >
-> >       ret =3D reset_get_bulk(dev, &priv->resets);
-> >       if (ret)
-> > diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
-> > index 8acae3839f..4ad8b39f84 100644
-> > --- a/include/dw_hdmi.h
-> > +++ b/include/dw_hdmi.h
-> > @@ -534,6 +534,17 @@ struct hdmi_data_info {
-> >       struct hdmi_vmode video_mode;
-> >   };
-> >
-> > +struct dw_hdmi;
-> > +
-> > +struct dw_hdmi_phy_ops {
-> > +     int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
-> > +};
-> > +
-> > +struct dw_hdmi_plat_data {
-> > +     bool phy_force_vendor;
-> > +     const struct dw_hdmi_phy_ops *phy_ops;
-> > +};
->
-> Why do you need a separate phy_ops and this phy_force_vendor ?
->
-> Simply use the provided phy_ops is pointer !=3D NULL
->
-> I think simply use a single struct passed as pdata to have:
->
-> if (!hdmi->data)
->         hdmi->ops =3D &dw_hdmi_synopsys_phy_ops;
-> else
->         /* hook Vendor HDMI PHYs ops */
->         hdmi->ops =3D hdmi->data;
+=3D> setenv myCPUisolation 123456789abcdef0
+=3D> setexpr isolcpu_bootarg=3D%32pbl $myCPUisolation
+## Error: illegal character '=3D'in variable name "isolcpu_bootarg=3D%32pb=
+l"
 
-This logic seems not proper according to DW HDMI vendor phy support.
+This produces some output:
 
-phy_set -> dw_hdmi_phy_cfg in dw_hdmi.c is what synopsys default phy
-ops set. and reset defined in their hdmi drivers are vendor-related.
-So only rk3399 has default synopsys phy_set but meson, sunxi and this
-rk3328 has vendor phy ops. We need to define plat_data with phy_ops
-and phy_force_vendor flag to support this setup.
+=3D> setexpr a fmt '%32pbl' 64; echo $a
+6
 
-Thanks,
-Jagan.
+But the result is completely unexpected. Number arguments in U-Boot are
+always hexadecimal. So the output should be
+
+2,5-6
+
+Best regards
+
+Heinrich
+
+> && env set bootargs "$isolcpu_bootarg"
+> && bootm
+>
+> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
+> [2] https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters=
+.html
+>
+>
+> Changes in v2:
+> - Add bitmap format specifier to documentation
+>
+> Lukas Funke (6):
+>    sandbox: add generic find_next_zero_bit implementation
+>    linux: bitmap.h: add 'for_each_set_bitrange' iteration macro
+>    test: cmd: setexptr: Add tests for bitmap string format
+>    doc: printf() codes: Add bitmap format specifier
+>    lib: vsprintf: enable '%*pb[l]' format specifier
+>    cmd: printf: forward '%p' format string specifier
+>
+>   arch/sandbox/include/asm/bitops.h | 16 ++++++-
+>   cmd/printf.c                      | 29 ++++++++++++
+>   doc/develop/printf.rst            |  6 +++
+>   include/linux/bitmap.h            |  7 +++
+>   lib/vsprintf.c                    | 75 +++++++++++++++++++++++++++++++
+>   test/cmd/setexpr.c                |  9 ++++
+>   6 files changed, 140 insertions(+), 2 deletions(-)
+>
+
