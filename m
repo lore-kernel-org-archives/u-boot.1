@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C23C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 17:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF18C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 17:20:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F70D87015;
-	Tue, 12 Dec 2023 18:09:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BD9E9870A4;
+	Tue, 12 Dec 2023 18:19:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VHFmqU/m";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="UE1WKrHN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB4A886FFE; Tue, 12 Dec 2023 18:09:50 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id 6402B86D37; Tue, 12 Dec 2023 18:19:58 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AE2787015
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 18:09:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24717877CD
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 18:19:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-28ad9492d15so25343a91.1
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:09:46 -0800 (PST)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5e1a3199f6bso14918777b3.0
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 09:19:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702400985; x=1703005785; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1702401595; x=1703006395;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lhs84GLOwfawe7fZiRY6QOV9thXT+z9aOeFH2TUSYS0=;
- b=VHFmqU/mG+qoA6As3oUvAPUlpiozR5Eho/HYgRcD0QsnmFct8SClbafxzLUfW5Glgo
- aQSQbhSiWZC4nEEEloh2/CN85ospDRngN2Uz4Z3buN85rtf+FfkGvuuQwr+EJ5/awiev
- W8em99r/3lfMK7Dac+iVzdJ4h/QF8KGTPcyr1YrsI7TTJLA4kakeNQVVkOq7C6KfMzFk
- 1p+4vvb6hkFK4rfVAfXrl5GATMVbvyIglmiODdKUhj2Ctw0grjJVT6RioKKjS0ZHKVWe
- JmKAmBSOjMJMkU0eiI8Fim+wnehvaC/Wza7mUZBG+wG2NLy+hAGqQKUIimMaCvlOJboU
- txAg==
+ bh=UfBaDk6fy0fwgxA7513+0QUa/H+qgg/S1p6nSWJBscs=;
+ b=UE1WKrHN1PeXyW+tYXc5Z5gusjy1uKbdFKdtCGwgtCWLTb1PxuICpaLW+2eLIL2RBv
+ I9ffgSnZW2sLHgn7wx8umbzFvsZigvODnD/FrrqufB/cxfhaXlx3pEL0jeRe+lI94UCd
+ kHZgUQ+JYb86OfMNmd6lxKHdiP82QYoafQMuM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702400985; x=1703005785;
+ d=1e100.net; s=20230601; t=1702401595; x=1703006395;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lhs84GLOwfawe7fZiRY6QOV9thXT+z9aOeFH2TUSYS0=;
- b=IZeEUiY3Up/VwNz2/ngcAamDHs/x8D8HmWvtBio6oMioMupGK457yOGQ/ijbsQun+h
- +Mdd2Jh1yz9k40fUbRc4OlPNoCNlmgolUXS0JkKuzUZloqfjZK0aBr0Fy/hI0j19SEE7
- Zft3mVafoIbrg5/x+IvL2mOO1N0mHTPRZX28JEco68DA8l0EPmKBHWg33I80szfTnn02
- 5jMJFCAoAuUvLYy7YGP8DS9SeDRJj/vUwJ4K7kHlXibS1I3yKcMu9ZBeRwK4Ky4zqGNc
- eHV1mL62uGCz5OUgZdkFppSH+EP9EsZAiFUqNwjDV+yAVarWO5nl/77J2T1ObE94hZ4U
- Hk7w==
-X-Gm-Message-State: AOJu0YzIIN3uFmUfg/oyU6KasVVvE/levY/+2T2xgmXaRsNJeAj68UTQ
- eWMNoNq4e2tL8XI8L3YsX2ZHz2+E8hTocWySpkI=
-X-Google-Smtp-Source: AGHT+IHpkk8CTBf5q8jvuTXcuBaMeuNetTpaLCpJfxIzXXoDxcrzPN+wXxaCdz3NA+Y+AphbvnWuP7IEshOYAV9k9Mc=
-X-Received: by 2002:a17:90a:d916:b0:28a:d272:f162 with SMTP id
- c22-20020a17090ad91600b0028ad272f162mr1051437pjv.2.1702400984724; Tue, 12 Dec
- 2023 09:09:44 -0800 (PST)
+ bh=UfBaDk6fy0fwgxA7513+0QUa/H+qgg/S1p6nSWJBscs=;
+ b=LMvJKX/IQ5ThBS5q6qpsFcN9Fc+KpZp+VSoY+WENrjUN5iOsN3kmUsgfYE03c2u354
+ UAfUNFxgXEu3TgXy0F4f2QxDtetxEynVTVHjx0O1cf4hUfPlHzZNh1BUHPrDcgCHgaVS
+ OAKKttmoGBiBsakg7aRK5LLqFPAfYi0DsiueDJkC4kkSEXD722OpzR+KARA9QHVwZ8uS
+ UBDXJ/KIoSXxLLCQGyyJWPHlDXJCftgTxhvRUqVm6IL/gGOj+8Y1uHdL0OyZv61TdVH8
+ ytJTlYSkl1yrQetNT/jz9k7SPpfuuqCN2ALY4ZOK/0hArl4sq/k8pULqIDt3nBJ/nIQ6
+ 3asQ==
+X-Gm-Message-State: AOJu0YyyjvAmRm4JllHsSETI05kIxMYJ7PFJUdUrca4VBzvc8NzFsTrl
+ pIb5SLiDbHKAdYidVzHTtIeZ+7+2STe8wTsJbNwiyQ==
+X-Google-Smtp-Source: AGHT+IGLIUR/5nnmnbmz8JU5ZTOxEA3Ms8c7zBAT0uivNPFk9DThRftbubJtmWeE/Qef9f4VCIA843izmfbAb6WApms=
+X-Received: by 2002:a81:4a41:0:b0:5d7:1941:2c27 with SMTP id
+ x62-20020a814a41000000b005d719412c27mr4574487ywa.84.1702401594776; Tue, 12
+ Dec 2023 09:19:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20231025230456.7924-1-aford173@gmail.com>
- <CAOMZO5B-QMKUB7rFAqvXPyMNJVm0PX+PPZoTuwQVo3uYhsX_-A@mail.gmail.com>
- <CAHCN7xLzZexpsZ=wS0Mu-vXdEmq4564bYz6vZYmp8Ej=jFb2Zg@mail.gmail.com>
-In-Reply-To: <CAHCN7xLzZexpsZ=wS0Mu-vXdEmq4564bYz6vZYmp8Ej=jFb2Zg@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 12 Dec 2023 14:09:32 -0300
-Message-ID: <CAOMZO5DJu==ZCGGjY7trx5sm34_ai_dJEP+ZgROeXDfiFsxLjQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] configs: imx8mp_beacon: Do not set
- SYS_CONSOLE_IS_IN_ENV
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, sbabic@denx.de, aford@beaconembedded.com
+References: <20220603070132.29734-1-vaishnav.a@ti.com>
+ <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
+ <20231212140438.GA1721487@bill-the-cat>
+In-Reply-To: <20231212140438.GA1721487@bill-the-cat>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Tue, 12 Dec 2023 22:49:43 +0530
+Message-ID: <CAMty3ZCypqjN=RG7-wVUObbKTQ7Q7XOiwpJ0H3oCAojjTDpNrQ@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi-nor-core: Implement
+ spi_nor_read_sfdp_dma_unsafe() for sfdp parse
+To: Tom Rini <trini@konsulko.com>
+Cc: Vaishnav Achath <vaishnav.a@ti.com>, u-boot@lists.denx.de, vigneshr@ti.com,
+ p.yadav@ti.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,13 +88,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adam,
-
-On Tue, Dec 12, 2023 at 2:05=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
-e:
-
-> Fabio / Stefan,
+On Tue, Dec 12, 2023 at 7:34=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Is there any chance this series can be applied to imx-next?
+> On Sun, Jul 10, 2022 at 11:07:41AM +0530, Jagan Teki wrote:
+> > On Fri, Jun 3, 2022 at 12:31 PM Vaishnav Achath <vaishnav.a@ti.com> wro=
+te:
+> > >
+> > > During SFDP header parse and BFPT parse, structures in stack are used
+> > > to perform spi_nor_read_sfdp() which expects a dma-safe buffer.
+> > >
+> > > This commit introduces spi_nor_read_sfdp_dma_unsafe() to wrap
+> > > spi_nor_read_sfdp() using a kmalloc'ed bounce buffer which is
+> > > the same implementation in Linux (drivers/mtd/spi-nor/sfdp.c).
+> > >
+> > > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> > > ---
+> >
+> > Applied to u-boot-spi/master
+>
+> Where did this end up? Thanks.
 
-Yes, I will start collecting patches for u-boot-imx next soon.
+I have CI, will send PR. soon.
+
+Jagan.
