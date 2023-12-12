@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDCAC4332F
-	for <u-boot@archiver.kernel.org>; Mon, 11 Dec 2023 23:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44587C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 00:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3A4D877F4;
-	Tue, 12 Dec 2023 00:22:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9444D876C7;
+	Tue, 12 Dec 2023 01:18:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kGbOzRob";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="WpW7pHrT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BAB687773; Tue, 12 Dec 2023 00:21:58 +0100 (CET)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3269B876C7; Tue, 12 Dec 2023 01:18:56 +0100 (CET)
+Received: from mail-m12828.netease.com (mail-m12828.netease.com
+ [103.209.128.28])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81222877CC
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 00:21:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB07887652
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 01:18:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3b9e2a014e8so3379124b6e.2
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 15:21:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702336896; x=1702941696; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
- b=kGbOzRoblO473UIJQPbR48U5KgChKJ/YSgvi72sMXUXpp8Ltgt/3W7daIj28S5J3Ve
- zYB16/V0GADO+fDGRcU1XhbS8pamL0kJH8WM8IsW1TWVLgwCGlDohNU3bs0Ztwom1Zx5
- 6YFcQ+HQBNGbPwQhQOF7hAWepSkfb0UCcbUSQPVdHlRgQeBrcDXCrWS4UU5wQ6GYAxvt
- r5yUSWBdEqnQIMYbaiUPjIVrINDDGWtwHvib/n2M7bjkE/bGczsfuyE6WTDynxL0crmI
- YXtDbqE9o9TTVD8ays2YsEgPMTQ3qNlLYpd1pd9jZbqyzV6XA8aNkcdwE3FRxOM8182w
- 8ZEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702336896; x=1702941696;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k5CXCYUczBUQjKQamPloqkUsFz2d5ZVu36134TsC2t4=;
- b=ipuV6xuEhW5Azr3cRWdyTocaUnRGdSAeM5GQPKmswvf39kzPqpWCkZ7S2t7OC2hl8a
- uBPOed2m02CIMETUOYm6K8UP5WYFPhou9JN1LojvjrScDoUo2rNNpAeTf5QKlBIns/Na
- AL8MaVPj7U9jza2A4TJfV320lCEynv/yNNTQWMYbpEJWzlAVj1xNuubz8c6xALtSKuf9
- lrO0AkfU1LhbGz08dBcJXzxb5wAqmV3aXwcTK2hnuIhC+0O/95ReeiHb5ZO9BNIVLnnL
- 5JMBrrfFoepzvmxx9IFTXzKRYKihWk1Ubm+ZhXLt3uFe6E0CNHpacCF5yZo55kjQ7mLb
- 2gpg==
-X-Gm-Message-State: AOJu0YzCsJlUG1g5kpjOtHsm5DYoKmdTUQgXlQ2WBg9eVMZJHDZBicQd
- 8lNI15GIbRyB7NcHpn4dPEbHRqMCcGk=
-X-Google-Smtp-Source: AGHT+IFIKCJhs/8v4oGGvzYo5DsKvQzApLOsBHOkMt6F1arc7d0sbQ3L9HkO1foRAfuIDauiUweo9Q==
-X-Received: by 2002:a05:6808:2099:b0:3b9:e618:1861 with SMTP id
- s25-20020a056808209900b003b9e6181861mr6718081oiw.1.1702336895997; 
- Mon, 11 Dec 2023 15:21:35 -0800 (PST)
-Received: from localhost.localdomain ([75.28.21.198])
- by smtp.gmail.com with ESMTPSA id
- bl11-20020a056808308b00b003b9d0371517sm2059617oib.28.2023.12.11.15.21.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Dec 2023 15:21:35 -0800 (PST)
-From: Chris Morgan <macroalpha82@gmail.com>
-To: u-boot@lists.denx.de
-Cc: andre.przywara@arm.com, kever.yang@rock-chips.com,
- philipp.tomsich@vrull.eu, sjg@chromium.org,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V3 7/7] doc: board: anbernic: Update rgxx3 to add new boards
-Date: Mon, 11 Dec 2023 17:21:25 -0600
-Message-Id: <20231211232125.171438-8-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231211232125.171438-1-macroalpha82@gmail.com>
-References: <20231211232125.171438-1-macroalpha82@gmail.com>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=WpW7pHrTMqJvw+IpsJy3zg1ovHmV5HSJ9F5TrmJZ2nz01Y7ln3ixpNDkI+wG6K1vNkBE9BrcIYBQM/9W/E68ShiI3tSDYHy2pwP5F99EkVDpT3zkoolMZE84HbIkdMszqUeDeXN1eFYbpN7jwLRXr8UIJ5Z3oiztKoCGdgE4yTg=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=WEsE3E9USvSzdWNe2vCztcjawHrtDszIK376ldyGl9M=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 036F3400189;
+ Tue, 12 Dec 2023 08:18:42 +0800 (CST)
+Message-ID: <42239d46-1355-48a3-b5fe-406a45d8556f@rock-chips.com>
+Date: Tue, 12 Dec 2023 08:18:42 +0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] arm: dts: rockpro64: Add RockPro64 smbios
+Content-Language: en-US
+To: Shantur Rathore <i@shantur.com>, u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
+ jagan@amarulasolutions.com, akash@openedev.com
+References: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
+ <20231113112309.730323-1-i@shantur.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20231113112309.730323-1-i@shantur.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk5IGlYYGEkZGE5OSEoZSUJVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8c5b63e7582eb3kusn036f3400189
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pk06Azo4OjwwQjoBNwkSDg8j
+ NDRPFDlVSlVKTEtJSE9LSElITUNCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISENNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,62 +74,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
 
-Update the RGxx3 documentation to note that it now supports the
-RG-ARC-D, RG-ARC-S, Powkiddy RK2023, and Powkiddy RGB30. Also update
-verbiage around panel detection to note that it is no longer hard coded
-to the RG503.
+On 2023/11/13 19:23, Shantur Rathore wrote:
+> Add smbios information for Pine64 RockPro64 board and enable in
+> config
+>
+> Signed-off-by: Shantur Rathore <i@shantur.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
----
- doc/board/anbernic/rgxx3.rst | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
-
-diff --git a/doc/board/anbernic/rgxx3.rst b/doc/board/anbernic/rgxx3.rst
-index 7d1beb423c..d159ed2f76 100644
---- a/doc/board/anbernic/rgxx3.rst
-+++ b/doc/board/anbernic/rgxx3.rst
-@@ -5,6 +5,8 @@ U-Boot for Anbernic RGxx3 Devices
- 
- This allows U-Boot to boot the following Anbernic devices:
- 
-+ - Anbernic RG-ARC-D
-+ - Anbernic RG-ARC-S
-  - Anbernic RG353M
-  - Anbernic RG353P
-  - Anbernic RG353PS
-@@ -12,18 +14,24 @@ This allows U-Boot to boot the following Anbernic devices:
-  - Anbernic RG353VS
-  - Anbernic RG503
- 
-+Additionally, the following very similar non-Anbernic devices are also
-+supported:
-+
-+ - Powkiddy RGB30
-+ - Powkiddy RK2023
-+
- The correct device is detected automatically by comparing ADC values
- from ADC channel 1. In the event of an RG353V or RG353P, an attempt
- is then made to probe for an eMMC and if it fails the device is assumed
- to be an RG353VS or RG353PS. Based on the detected device, the
- environment variables "board", "board_name", and "fdtfile" are set to
- the correct values corresponding to the board which can be read by a
--boot script to boot with the correct device tree. If the board detected
--is not of type RG503 (which currently has only 1 panel revision) a
--panel detect is then performed by probing a "dummy" display on the DSI
--bus and then querying the display ID. The display ID is then compared
--to a table to get the known compatible string for use in Linux, and
--this string is saved as an environment variable of "panel".
-+boot script to boot with the correct device tree. If a board is defined
-+as requiring panel detection, a panel detect is then performed by
-+probing a "dummy" display on the DSI bus and then querying the display
-+ID. The display ID is then compared to a table to get the known
-+compatible string for use in Linux, and this string is saved as an
-+environment variable of "panel".
- 
- FDT fixups are performed in the event of an RG353M to change the device
- name, or in the event the panel detected does not match the devicetree.
--- 
-2.34.1
-
+Thanks,
+- Kever
+> ---
+>   Changes
+>   v4: Change PINE64 to Pine64
+>   v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
+>
+>   arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 ++++++++++++++++++++++
+>   configs/rockpro64-rk3399_defconfig        |  2 ++
+>   2 files changed, 24 insertions(+)
+>
+> diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> index 732727d9b0..089732524a 100644
+> --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+> @@ -9,6 +9,28 @@
+>   	chosen {
+>   		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
+>   	};
+> +
+> +        smbios {
+> +                compatible = "u-boot,sysinfo-smbios";
+> +                smbios {
+> +                        system {
+> +                                manufacturer = "Pine64";
+> +                                product = "RockPro64";
+> +                        };
+> +
+> +                        baseboard {
+> +                                manufacturer = "Pine64";
+> +                                product = "RockPro64";
+> +                        };
+> +
+> +                        chassis {
+> +                                manufacturer = "Pine64";
+> +                                product = "RockPro64";
+> +                        };
+> +                };
+> +        };
+> +
+> +
+>   };
+>   
+>   &sdhci {
+> diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
+> index 4cd6b76665..affb6137e0 100644
+> --- a/configs/rockpro64-rk3399_defconfig
+> +++ b/configs/rockpro64-rk3399_defconfig
+> @@ -90,6 +90,8 @@ CONFIG_BAUDRATE=1500000
+>   CONFIG_DEBUG_UART_SHIFT=2
+>   CONFIG_SYS_NS16550_MEM32=y
+>   CONFIG_ROCKCHIP_SPI=y
+> +CONFIG_SYSINFO=y
+> +CONFIG_SYSINFO_SMBIOS=y
+>   CONFIG_SYSRESET=y
+>   CONFIG_USB=y
+>   CONFIG_USB_XHCI_HCD=y
