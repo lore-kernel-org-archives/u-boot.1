@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 301F4C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:06:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D66A6C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3E9E874DD;
-	Tue, 12 Dec 2023 15:06:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29BE587754;
+	Tue, 12 Dec 2023 15:06:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TGKI6ZJp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BGpyuPTC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01B78760D; Tue, 12 Dec 2023 15:06:17 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 6032B87495; Tue, 12 Dec 2023 15:06:18 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD48587495
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:06:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E7C8874E0
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:06:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2c9f85eff28so85849241fa.3
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:06:14 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a1d93da3eb7so663645766b.0
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:06:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702389974; x=1702994774; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1tMOORCNOYtEIJA8dDTNDz8TejM74te+xohGNEKCi54=;
- b=TGKI6ZJpFuM7ZungVpj10KLBxIQoEtc8W9Z/I+f1vAohQD0e008m5DZE6GhXb4QMuv
- 0Fz/yOGOATj30O7krnrsJDiKvdX8pjz/Bn9kV/QXJdHEKI21Kk6egoDuoCPEABHXWCZV
- etCTXUZSw95TGZH7zChJa4wuthe2CDayjyyds=
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=wXX1iaGCfPCSMkPGgKygBQAUep1rpecFSYqO9ePCG2I=;
+ b=BGpyuPTCKvB+eiRrU9ghAWcqLJJ2IfXFij0YBKNlKH2hQdWR+s/HPiSACOIWJNiBcF
+ dYDlE7/7Yje4cTzTNvThSmeGwROtcSxTpsnHfc5k0g8RBDiTa0ecbGt/IwORPf0D6ZuY
+ hNt5jaG9GEPlGKJh4jdvxCt2QxfdUmd8Dp6VQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702389974; x=1702994774;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1tMOORCNOYtEIJA8dDTNDz8TejM74te+xohGNEKCi54=;
- b=YGG86o9IfauFSm7gnp1TzRzGRlLGEAKmmyrKVWfMUPCdWMwNs/8sd4BPtSHXZ57f4z
- +tsFLGmnppyPgeFKnJxiDo0wOLdPNc/BHKZAlAVVrJ+penf2Mjd6QWHDsW6KtZx37epX
- fgyFrNdckoEwfIkxGXqMqefoy+D+RdauHuv8oZQLoGWIDBXO9+DqkbNukTGs6SqN2TDn
- Q6dJG/xLQJlMY9b7+mUJ/C+Zc4h5eS2ZGMps7m6y3NvaEIC5Ta2zTeoVDRj4TtqvhSeS
- CpwGYB2R5iBUGgoCt16a3B+dE6E2/v6HGiQKmnINopGrjq2pJIZrX0Ae1/r714AWIbAd
- PR9A==
-X-Gm-Message-State: AOJu0Yy5Un2DdQpabYz34ZEBDdeOnwU0AcJ8fQZUXiiet7k0+uVixcLE
- ItCOpOkX46kuEYIJA5Lj3mpibL0AC+Acg5bZ3iT/t8pQsCWsecaQC6Q=
-X-Google-Smtp-Source: AGHT+IH2dJRmSCKmnR0hgWA/F9+kWV6B8rQEmfyChAn5h/4EJVhyZ330zRC20EZ7iwNkeRbvp5po71WHlZ3b4iySAkU=
-X-Received: by 2002:a2e:9397:0:b0:2ca:ed2:2a31 with SMTP id
- g23-20020a2e9397000000b002ca0ed22a31mr2614897ljh.52.1702389973847; Tue, 12
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wXX1iaGCfPCSMkPGgKygBQAUep1rpecFSYqO9ePCG2I=;
+ b=wZiJ/TnN/yHQRfWHBE30hmlgVrLgmDohkeNOd1kOIGvMfG4r6E8fzvkUWjdP0+e4/6
+ +6fIi/yFXRSZHcvrkMhNj+kW9lR1AmfKGa9HI8ZmWC0S5qJKcnn2L3hXepr0NDeGYGQ1
+ O+wpFp4uD1TqKtLi5984wyDR/sYEncvasKpR3wz3EbBXc0EtyCFviz8EIZh1tac+tnnj
+ bPW8igwOKwMClqgoGF3zS/4fgg1Fu2ite3hbRlNnQuzH3JZhmz4iBR6f8uCCIiTktEM2
+ diGKmZC/vNCZLTIY4VGmhmW+0hN8d0OKkgSCv4ieOzTe+dG+p6uLMt99i2erNN059rk/
+ Y+6w==
+X-Gm-Message-State: AOJu0YypyQiGE5/M93jSL2+vwGH8Hsr/POnGAsXmgodEHcXGem9GLfCt
+ GNzx6I/noRnziv1/OFOASvVlBO6sW205bgqkih9hlSYlTpMfJJKJyE9ibg==
+X-Google-Smtp-Source: AGHT+IGCFVxztppksx+liUYRBJ3oULo0rwArDK1OGB9bHh1XvrkG6shq9f5SGMweQ30OGjmVLh8J6r+mqR+IrnGOoAE=
+X-Received: by 2002:a17:906:6a1d:b0:9c2:2d0a:320c with SMTP id
+ qw29-20020a1709066a1d00b009c22d0a320cmr3804747ejc.46.1702389973819; Tue, 12
  Dec 2023 06:06:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
- <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
- <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
-In-Reply-To: <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 12 Dec 2023 07:05:59 -0700
-Message-ID: <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
-Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Date: Tue, 12 Dec 2023 07:05:56 -0700
+Message-ID: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
+Subject: Proposal: FIT support for extension boards / overlays
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>, 
+ Andrew Davis <afd@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,127 +81,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi,
 
-On Mon, 11 Dec 2023 at 12:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 12/11/23 18:52, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Sun, 10 Dec 2023 at 08:03, Marek Vasut
-> > <marek.vasut+renesas@mailbox.org> wrote:
-> >>
-> >> In case the cyclic framework is enabled, poll the card detect of already
-> >> initialized cards and deinitialize them in case they are removed. Since
-> >> the card initialization is a longer process and card initialization is
-> >> done on first access to an uninitialized card anyway, avoid initializing
-> >> newly detected uninitialized cards in the cyclic callback.
-> >>
-> >> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >> ---
-> >> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> >> Cc: Peng Fan <peng.fan@nxp.com>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> ---
-> >> V2: Move the cyclic registration/unregistration into mmc init/deinit
-> >> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
-> >>      does not work with structure members
-> >> ---
-> >>   drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
-> >>   include/mmc.h     |  5 +++++
-> >>   2 files changed, 41 insertions(+)
-> >>
-> >> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-> >> index eb5010c1465..a5686dbc12e 100644
-> >> --- a/drivers/mmc/mmc.c
-> >> +++ b/drivers/mmc/mmc.c
-> >> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
-> >>          return err;
-> >>   }
-> >>
-> >> +#if CONFIG_IS_ENABLED(CYCLIC)
-> >> +static void mmc_cyclic_cd_poll(void *ctx)
-> >> +{
-> >> +       struct mmc *m = ctx;
-> >> +
-> >> +       if (!m->has_init)
-> >> +               return;
-> >> +
-> >> +       if (mmc_getcd(m))
-> >> +               return;
-> >> +
-> >> +       mmc_deinit(m);
-> >> +       m->has_init = 0;
-> >> +}
-> >> +#endif
-> >> +
-> >>   int mmc_init(struct mmc *mmc)
-> >>   {
-> >>          int err = 0;
-> >> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
-> >>          if (err)
-> >>                  pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
-> >>
-> >> +#if CONFIG_IS_ENABLED(CYCLIC)
-> >
-> > We really shouldn't be adding new #ifdefs to the code.
-> >
-> > If you really want to make put ->cyclic behind an #ifdef then how
-> > about creating an accessor as is done in global_data.h ?
->
-> That's really just working around the underlying issue, which is that
-> this does not compile:
->
-> struct foo {
-> #if CONFIG_IS_ENABLED(STUFF)
->    type member;
-> #endif
-> ...
-> };
->
-> type fn() {
-> ...
-> if (CONFIG_IS_ENABLED(STUFF))
->    access struct->member;
-> ...
-> }
->
-> Accessor won't make it any better, would it ? It would only attempt to
-> hide the error and make the code more fragile, i.e. this:
->
-> accessor(struct)
-> {
-> type fn() {
-> if (CONFIG_IS_ENABLED(STUFF))
->    return access struct->member;
-> else
->    return 0;
-> }
->
-> }
->
-> type fn() {
-> ...
->    accessor(struct);
-> ...
-> }
->
-> I suspect it also won't compile for one thing, and for the other, it
-> really just hides the issue.
+The devicetree files for a board can be quite large, perhaps around
+60KB. To boot on any supported board, many of them need to be
+provided, typically hundreds.
 
-No, I mean like this:
+All boards for a particular SoC share common parts.  It would be
+helpful to use overlays for common pieces, to reduce the overall size.
 
-#ifdef CONFIG_ACPI
-#define gd_acpi_ctx() gd->acpi_ctx
-#define gd_acpi_start() gd->acpi_start
-#define gd_set_acpi_start(addr) gd->acpi_start = addr
-#else
-#define gd_acpi_ctx() NULL
-#define gd_acpi_start() 0UL
-#define gd_set_acpi_start(addr)
-#endif
+Some boards have extension add-ons which have their own devicetree
+overlays. It would be helpful to know which ones should be applied for
+a particular extension.
 
-The header file has #ifdefs but not the C files.
+I propose implementing extensions in FIT. This has a new '/extensions'
+node, so you can specify what extensions are available for each FIT
+configuration.
+
+For example:
+
+/ {
+  images {
+    kernel {
+      // common kernel
+    };
+
+    fdt-1 {
+      // FDT for board1
+    };
+
+    fdto-1 {
+      // FDT overlay
+    };
+
+    fdto-2 {
+      // FDT overlay
+    };
+
+    fdto-3 {
+      // FDT overlay
+    };
+  };
+
+  configurations {
+    conf-1 {
+        compatible = ...
+        fdt = "fdt-1";
+        extensions = "ext1", "ext-2";
+    };
+  };
+
+  extensions {
+    ext-1 {
+        fdto = "fdto-1";   // FDT overlay for this 'cape' or 'hat'
+        kernel = "kernel-1";
+        compatible = "vendor,combined-device1";
+        extensions = "ext-3";
+    };
+
+    ext-2 {
+        fdto = "fdto-2";   // fdt overlay for this 'cape'
+        compatible = "vendor,device2";
+    };
+
+    ext-3 {
+        fdto = "fdto-3";
+        compatible = "vendor,device3";
+    };
+  };
+};
+
+So FIT configurations have a list of supported extensions. The
+extensions are hierarchical so that you can have ext-1 which can
+optionally have ext-2 as well. This allows boards to share a common
+SoC to add in overlays as needed by their board. It also allows common
+'capes' or 'hats' to be specified only once and used by a group of
+boards which share the same interface.
+
+Within U-Boot, extensions actually present are declared by a sysinfo
+driver for the board, with new methods:
+
+get_compat() - determine the compatible strings for the current platform
+get_ext() - get a list of compatible strings for extensions which are
+actually present
+
+The extension compatible-strings are used to select the correct things
+from the FIT, apply the overlays and produce the final DT.
+
+To make this simpler for the common case (without extensions), we can
+allow multiple FDT images for a configuration, with the first one
+being the base SoC .dtb and the others being the .dtbo overlay(s) for
+the board:
+
+confi-1 {
+        compatible = ...
+        fdt = "fdt-1", "fdto-1";
+};
+
+Comments welcome.
 
 Regards,
 Simon
