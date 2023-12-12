@@ -4,78 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7130FC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 20:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14251C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 21:02:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA34B8749E;
-	Tue, 12 Dec 2023 21:36:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 76B79871BB;
+	Tue, 12 Dec 2023 22:02:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Z7HG0gVq";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="qqJri2oc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C507086E96; Tue, 12 Dec 2023 21:36:37 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E0F6D877B0; Tue, 12 Dec 2023 22:02:37 +0100 (CET)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [IPv6:2a00:1098:ed:100::25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8283D871AA
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 21:36:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40c256ffdbcso63032935e9.2
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 12:36:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702413394; x=1703018194;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kBXLX5RJFV56OBI3cDpM9c/PFj8oUsHZ3J4JPUp+5d0=;
- b=Z7HG0gVqKM4fBZk4s2GZB7kxlHV6Fe7B0XYWOVMMchx0ANZ3Dicuo9RqZCHAnytp1V
- L6itngJ5bgjyANYUWFKmjBYtpOs4a+ILqMuk3/IBVEiN5y/OQX8jw8Wx2AODqzHE2BJt
- Ho4r51LST37wFxp8lqGdEimNt6+7sf0LHsr+Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702413394; x=1703018194;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kBXLX5RJFV56OBI3cDpM9c/PFj8oUsHZ3J4JPUp+5d0=;
- b=i2+v9Fgf7oLdDOLA/5fQ0XBEBLnuTXaKfUV1p2Io7OnxQJaXRoR0ylzaP3UlYFkwXP
- WHcM/C2nuiOLnEi1mime5t6tVFdVR05rA0lKCDownQNACAOIXTLBYjeEEsSZDE/1rIWL
- lcYk7ST6bSDEaSs3eeKaNI/PnL3oeVY+12/LteAIuhepDWAtwPyUSfP9NZ7PQEQQ5ssr
- poS7tAti4t1JFEyZxwUfoJfLH6xYLOpUUml33YqBDz6OtGymj8WtR6G6PWCydkjd6q6v
- G13dSKgfTUx4depLoZdHRefXXTs0zOWRMRCronQkxvPuVys1fGFmsz07X4EdVHrhpn1r
- ifIA==
-X-Gm-Message-State: AOJu0Yy4ciNIvAwpBegA9rFuHj6gaDdWoGaWN0XvYpayTuvIkeL926BP
- hqCVV1lYN6DmdMnPJUWe6Z82Bg==
-X-Google-Smtp-Source: AGHT+IGQKMZpUOk7bGDUhckpGprZ39jSX2B7YpPBaGSU9nQV5zL/wpLsTSMNCvEKHqy2lWLDKUVnuw==
-X-Received: by 2002:a05:600c:17d0:b0:40c:9e0:e969 with SMTP id
- y16-20020a05600c17d000b0040c09e0e969mr3422835wmo.61.1702413393886; 
- Tue, 12 Dec 2023 12:36:33 -0800 (PST)
-Received: from pwmachine.localnet (85-170-33-133.rev.numericable.fr.
- [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- gw18-20020a05600c851200b004063c9f68f2sm17418101wmb.26.2023.12.12.12.36.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Dec 2023 12:36:33 -0800 (PST)
-From: Francis Laniel <francis.laniel@amarulasolutions.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v12 00/24] Modernize U-Boot shell
-Date: Tue, 12 Dec 2023 21:36:32 +0100
-Message-ID: <2710814.mvXUDI8C0e@pwmachine>
-In-Reply-To: <20231209231631.GO2513409@bill-the-cat>
-References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
- <20231209231631.GO2513409@bill-the-cat>
+ by phobos.denx.de (Postfix) with ESMTPS id C2CEE871BB
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 22:02:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sjoerd@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1702414955;
+ bh=5Rx+VeKARFqgPOUkQ16MhtPs0hG1QKFFDiUrWlYGJn0=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=qqJri2ocXeIV4U+RK95JyZJMnODRX9ih0dBl6kesuIFENKK7QFWsuT1/IKTZA/Fnn
+ a1spREWQhlZJzGQ3uwnA1O2oeHpMlbeyKmSVNEowH4wC34AeDk262M46XzO8nDl0i1
+ 0Hbev9IH+ppei9z1fp0EJA0imJ/B2dIgayqDR0EZezCKTHO2VHglPv4XhC1ZRuxTgw
+ J/iwCTTwDgU36cFdSWFwkLZR+8Xo3WRni1OSWIpzWrjQZn3ywQThkX9pLcyZiSgBrI
+ 8GSi4re1++hgDZgJTa1wacXOnwxOkXpV3sQJi+HvUMy5EdymCSFCwLh+MxlY1qf0Um
+ 7Z4lge1Rxlneg==
+Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: sjoerd)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 15CB63781476;
+ Tue, 12 Dec 2023 21:02:35 +0000 (UTC)
+Received: by beast.luon.net (Postfix, from userid 1000)
+ id A3731984A53F; Tue, 12 Dec 2023 22:02:34 +0100 (CET)
+From: Sjoerd Simons <sjoerd@collabora.com>
+To: u-boot@lists.denx.de
+Cc: Nishanth Menon <nm@ti.com>, Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Marek Vasut <marex@denx.de>
+Subject: [PATCH v3 1/4] usb: dwc3: Add dwc3 glue driver for am62
+Date: Tue, 12 Dec 2023 22:02:21 +0100
+Message-ID: <20231212210234.509309-2-sjoerd@collabora.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20231212210234.509309-1-sjoerd@collabora.com>
+References: <20231212210234.509309-1-sjoerd@collabora.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,190 +74,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
+Add glue code for TI AM62 to the dwc3 driver; Most code adopted from
+TI vendor u-boot code.
 
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Le dimanche 10 d=E9cembre 2023, 00:16:31 CET Tom Rini a =E9crit :
-> On Fri, Dec 08, 2023 at 11:30:01PM +0100, Francis Laniel wrote:
-> > Hi.
-> >=20
-> >=20
-> > During 2021 summer, Sean Anderson wrote a contribution to add a new she=
-ll,
-> > based on LIL, to U-Boot [1, 2].
-> > While one of the goals of this contribution was to address the fact act=
-ual
-> > U-Boot shell, which is based on Busybox hush, is old there was a
-> > discussion
-> > about adding a new shell versus updating the actual one [3, 4].
-> >=20
-> > So, in this series, with Harald Seiler, we updated the actual U-Boot sh=
-ell
-> > to reflect what is currently in Busybox source code.
-> > Basically, this contribution is about taking a snapshot of Busybox
-> > shell/hush.c file (as it exists in commit 37460f5da) and adapt it to su=
-it
-> > U-Boot needs.
-> >=20
-> > This contribution was written to be as backward-compatible as possible =
-to
-> > avoid breaking the existing.
-> > So, the modern hush flavor offers the same as the actual, that is to sa=
-y:
-> > 1. Variable expansion.
-> > 2. Instruction lists (;, && and ||).
-> > 3. If, then and else.
-> > 4. Loops (for, while and until).
-> > No new features offered by Busybox hush were implemented (e.g. function=
-s).
-> >=20
-> > It is possible to change the parser at runtime using the "cli" command:
-> > =3D> cli print
-> > old
-> > =3D> cli set modern
-> > =3D> cli print
-> > modern
-> > =3D> cli set old
-> > The default parser is the old one.
-> > Note that to use both parser, you would need to set both
-> > CONFIG_HUSH_MODERN_PARSER and CONFIG_HUSH_OLD_PARSER.
-> >=20
-> > In terms of testing, new unit tests were added to ut to ensure the new
-> > behavior is the same as the old one and it does not add regression.
-> > Nonetheless, if old behavior was buggy and fixed upstream, the fix is t=
-hen
-> > added to U-Boot [5].
-> > In sandbox, all of these tests pass smoothly:
-> > =3D> printenv board
-> > board=3Dsandbox
-> > =3D> ut hush
-> > Running 20 hush tests
-> > ...
-> > Failures: 0
-> > =3D> cli set modern
-> > =3D> ut hush
-> > Running 20 hush tests
-> > ...
-> > Failures: 0
-> >=20
-> > Thanks to the effort of Harald Seiler, I was successful booting a board:
-> > =3D> printenv fdtfile
-> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> > =3D> cli get
-> > old
-> > =3D> boot
-> > ...
-> > root@lepotato:~#
-> > root@lepotato:~# reboot
-> > ...
-> > =3D> cli set modern
-> > =3D> cli get
-> > modern
-> > =3D> printenv fdtfile
-> > fdtfile=3Damlogic/meson-gxl-s905x-libretech-cc.dtb
-> > =3D> boot
-> > ...
-> > root@lepotato:~#
-> >=20
-> > This contribution indeed adds a lot of code and there were concern about
-> > its size [6, 7].
-> > With regard to the amount of code added, the cli_hush_upstream.c is 130=
-30
-> > lines long but it seems a smaller subset is really used:
-> > gcc -D__U_BOOT__ -E common/cli_hush_upstream.c | wc -l
-> > 2870
-> > Despite this, it is better to still have the whole upstream code for the
-> > sake of easing maintenance.
-> > With regard to memory size, I conducted some experiments for version 8 =
-of
-> > this series and for a subset of arm64 boards and found the worst case to
-> > be 4K [8]. Tom Rini conducted more research on this and also found the
-> > increase to be acceptable [9].
-> >=20
-> > If you want to review it - your review will really be appreciated - here
-> > are some information regarding the commits:
-> > * commits marked as "test:" deal with unit tests.
-> > * commit "cli: Add Busybox upstream hush.c file." copies Busybox
-> > shell/hush.c into U-Boot tree, this explain why this commit contains
-> > around 12000 additions. * commit "cli: Port Busybox 2021 hush to U-Boot=
-=2E"
-> > modifies previously added file to permit us to use this as new shell.
-> > The really good idea of #include'ing Busybox code into a wrapper file to
-> > define some particular functions while minimizing modifications to
-> > upstream code comes from Harald Seiler.
-> > * commit "cmd: Add new parser command" adds a new command which permits
-> > selecting parser at runtime.
-> > I am not really satisfied with the fact it calls cli_init() and cli_loo=
-p()
-> > each time the parser is set, so your reviews would be welcomed.
-> > * Other commits focus on enabling features we need (e.g. if).
-> >=20
-> > Changes since:
-> >  v2:
-> >   * Added a small fix to compile sandbox with NO_SDL=3D1.
-> >   * Added a command to change parser at runtime.
-> >   * Added 2021 parser function to all run_command*().
-> > =20
-> >  v3:
-> >   * Various bug fixes pointed by the CI.
-> >   * Added upstream busybox hush commits until 6th February 2022.
-> > =20
-> >  v4:
-> >   * Various cleaning.
-> >   * Modified python test to accept failure output when the test are
-> >   designed to fail.
-> >   * Bumped upstream busybox hush commits until 24h March 2022.
-> > =20
-> >  v5:
-> >   * Bumped upstream busybox hush commits until 30th January 2023.
-> >   * Fix how hush interprets '<' and '>', indeed we needed to escape them
-> >   but I removed this behavior as tests are handled by test command and
-> >   not hush itself. This permitted to have the ut fdt to pass.
-> >   * Fix a problem with how exit was handled. This was reported by the ut
-> >   exit
-> >   test.
-> > =20
-> >  v6:
-> >   * There was no v6 and I got mixed up with version.
-> > =20
-> >  v7:
-> >   * Bumped upstream busybox hush commits until 9th May 2023.
-> >   * Renamed parser command to change parser at runtime to cli and added
-> >   documentation.
-> >   * Added better separation of patches.
-> >   * Removed code about __gnu_thumb1_case_si as it was merged in another
-> >   series. * Various cleaning.
-> > =20
-> >  v8:
-> >   * Bumped upstream busybox hush commits until 25th May 2023.
-> > =20
-> >  v9:
-> >   * Bumped upstream busybox hush commits until 2nd October 2023.
-> > =20
-> >  v10:
-> >   * Fixed a build error in commit adding cli command.
-> >   * Add new CONFIG_HUSH_SELECTABLE to only build cli command if the two
-> >   shell
-> >   flavors are selected.
-> > =20
-> >  v11:
-> >   * Renamed everything containing 2021 to modern.
-> >   * Fixed cmd Kconfig indentation.
-> >   * Set modern parser as default for majority of boards except some.
->=20
-> Thanks, this looks good overall and I'll put things in CI soon and aim
-> to get this in to -next and v2024.04.
+---
 
-Thank you!
-In the meanwhile, I will take a look time to time to upstream busybox to ke=
-ep=20
-our version of hush up to date!
+(no changes since v2)
 
-I will also take a look to enabling function, but I guarantee anything on t=
-his=20
-side!
+Changes in v2:
+- Switch dwc3 glue to a seperate driver rather then in dwc-generic
 
+ drivers/usb/dwc3/Kconfig     |  14 ++++
+ drivers/usb/dwc3/Makefile    |   1 +
+ drivers/usb/dwc3/dwc3-am62.c | 125 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 140 insertions(+)
+ create mode 100644 drivers/usb/dwc3/dwc3-am62.c
 
-Best regards.
-
+diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
+index c0c8c16fd9c..26a1e1770c5 100644
+--- a/drivers/usb/dwc3/Kconfig
++++ b/drivers/usb/dwc3/Kconfig
+@@ -37,6 +37,20 @@ config SPL_USB_DWC3_GENERIC
+ 	  Select this for Xilinx ZynqMP and similar Platforms.
+ 	  This wrapper supports Host and Peripheral operation modes.
+ 
++config SPL_USB_DWC3_AM62
++	bool "TI AM62 USB wrapper"
++	depends on SPL_DM_USB && SPL_USB_DWC3_GENERIC
++	help
++	  Select this for TI AM62 Platforms.
++	  This wrapper supports Host and Peripheral operation modes.
++
++config USB_DWC3_AM62
++	bool "TI AM62 USB wrapper"
++	depends on DM_USB && USB_DWC3_GENERIC
++	help
++	  Select this for TI AM62 Platforms.
++	  This wrapper supports Host and Peripheral operation modes.
++
+ config USB_DWC3_MESON_G12A
+ 	bool "Amlogic Meson G12A USB wrapper"
+ 	depends on DM_USB && USB_DWC3 && ARCH_MESON
+diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
+index 97b4f7191ca..a46b6824ab7 100644
+--- a/drivers/usb/dwc3/Makefile
++++ b/drivers/usb/dwc3/Makefile
+@@ -6,6 +6,7 @@ dwc3-y					:= core.o
+ 
+ obj-$(CONFIG_USB_DWC3_GADGET)		+= gadget.o ep0.o
+ 
++obj-$(CONFIG_$(SPL_)USB_DWC3_AM62)	+= dwc3-am62.o
+ obj-$(CONFIG_USB_DWC3_OMAP)		+= dwc3-omap.o
+ obj-$(CONFIG_USB_DWC3_MESON_G12A)	+= dwc3-meson-g12a.o
+ obj-$(CONFIG_USB_DWC3_MESON_GXL)	+= dwc3-meson-gxl.o
+diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+new file mode 100644
+index 00000000000..56c3b26a531
+--- /dev/null
++++ b/drivers/usb/dwc3/dwc3-am62.c
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * TI AM62 specific glue layer for DWC3
++ */
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <asm/io.h>
++
++#include "dwc3-generic.h"
++
++static void dwc3_ti_am62_glue_configure(struct udevice *dev, int index,
++					enum usb_dr_mode mode)
++{
++#define USBSS_MODE_CONTROL		0x1c
++#define USBSS_PHY_CONFIG		0x8
++#define USBSS_PHY_VBUS_SEL_MASK		GENMASK(2, 1)
++#define USBSS_PHY_VBUS_SEL_SHIFT	1
++#define USBSS_MODE_VALID	BIT(0)
++#define PHY_PLL_REFCLK_MASK	GENMASK(3, 0)
++static const int dwc3_ti_am62_rate_table[] = {	/* in KHZ */
++	9600,
++	10000,
++	12000,
++	19200,
++	20000,
++	24000,
++	25000,
++	26000,
++	38400,
++	40000,
++	58000,
++	50000,
++	52000,
++};
++
++	struct clk usb2_refclk;
++	int rate_code, i, ret;
++	unsigned long rate;
++	u32 reg;
++	void *usbss;
++	bool vbus_divider;
++	struct regmap *syscon;
++	struct ofnode_phandle_args args;
++
++	usbss = dev_remap_addr_index(dev, 0);
++	if (IS_ERR(usbss)) {
++		dev_err(dev, "can't map IOMEM resource\n");
++		return;
++	}
++
++	ret = clk_get_by_name(dev, "ref", &usb2_refclk);
++	if (ret) {
++		dev_err(dev, "can't get usb2_refclk\n");
++		return;
++	}
++
++	/* Calculate the rate code */
++	rate = clk_get_rate(&usb2_refclk);
++	rate /= 1000;	/* To KHz */
++	for (i = 0; i < ARRAY_SIZE(dwc3_ti_am62_rate_table); i++) {
++		if (dwc3_ti_am62_rate_table[i] == rate)
++			break;
++	}
++
++	if (i == ARRAY_SIZE(dwc3_ti_am62_rate_table)) {
++		dev_err(dev, "unsupported usb2_refclk rate: %lu KHz\n", rate);
++		return;
++	}
++
++	rate_code = i;
++
++	/* Read the syscon property */
++	syscon = syscon_regmap_lookup_by_phandle(dev, "ti,syscon-phy-pll-refclk");
++	if (IS_ERR(syscon)) {
++		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
++		return;
++	}
++
++	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "ti,syscon-phy-pll-refclk", NULL, 1,
++					     0, &args);
++	if (ret)
++		return;
++
++	/* Program PHY PLL refclk by reading syscon property */
++	ret = regmap_update_bits(syscon, args.args[0], PHY_PLL_REFCLK_MASK, rate_code);
++	if (ret) {
++		dev_err(dev, "failed to set phy pll reference clock rate\n");
++		return;
++	}
++
++	/* VBUS divider select */
++	reg = readl(usbss + USBSS_PHY_CONFIG);
++	vbus_divider = dev_read_bool(dev, "ti,vbus-divider");
++	if (vbus_divider)
++		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
++
++	writel(reg, usbss + USBSS_PHY_CONFIG);
++
++	/* Set mode valid */
++	reg = readl(usbss + USBSS_MODE_CONTROL);
++	reg |= USBSS_MODE_VALID;
++	writel(reg, usbss + USBSS_MODE_CONTROL);
++}
++
++struct dwc3_glue_ops ti_am62_ops = {
++	.glue_configure = dwc3_ti_am62_glue_configure,
++};
++
++static const struct udevice_id dwc3_am62_match[] = {
++	{ .compatible = "ti,am62-usb", .data = (ulong)&ti_am62_ops },
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(dwc3_am62_wrapper) = {
++	.name	= "dwc3-am62",
++	.id	= UCLASS_SIMPLE_BUS,
++	.of_match = dwc3_am62_match,
++	.bind = dwc3_glue_bind,
++	.probe = dwc3_glue_probe,
++	.remove = dwc3_glue_remove,
++	.plat_auto	= sizeof(struct dwc3_glue_data),
++};
+-- 
+2.43.0
 
