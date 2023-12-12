@@ -4,135 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2D3C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 11:56:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 318A2C4167B
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 12:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F04887252;
-	Tue, 12 Dec 2023 12:56:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 028E1877BF;
+	Tue, 12 Dec 2023 13:28:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="czZ1beTI";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="dxSO2PVk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 847DE877C4; Tue, 12 Dec 2023 12:56:46 +0100 (CET)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on0628.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::628])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D3892877E0; Tue, 12 Dec 2023 13:28:25 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3744B8718A
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 12:56:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3E94287732
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 13:28:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=No3yzz1feHxqhdW9SpJPzHTDjuM0IMCDqSmJ9ynDl/hk8//rse5B6BxlZksK2+RIdO+yQzGmtKttDNs4oHxPApKDMPdOj+FSKxs8wrFRhstNFJr8Y89a3ZtRHKgh790xV8njYNuTgr/0jH86iszBtlYU5F+i0M8rdAxE8COioUQu9YxmTCT0/DCe/qEA6PolzQ4ysi0Q4sWEuKs350fAGwNLcEZEr1O8glbsPJHY/S6WH9hKc6MopPlXsW72c/Zsy+nkMNEqY3m3Q71TXa9TjuQlsVFwKUi7Ub9ZLAGZbGvvkenk7D+5PFHbW2J/61pBIXe77ao0qOf+lBHRrCHHPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DQbGKLzECiOscUcSYJ9qLbIx8n9MAtPjkt/wIzvape4=;
- b=dlDulmrbXZ+8JiJqVRkyM8jQVx6TZNMg0QkExC7ifcfpHw3amp261N92DqHUyi6QLhhXZY/1PaiSg80BQVWWOtP62p2mh1fMFPEroBa7fyunGMhAVOdntaGA4VJT/h0wKLjI9PNDte0jKF4vFUvm+UiTc4OB6e0BxQbJ1EcnJimy1s62E8uFg/1jtoZJLkURZTw+SBWBBS1ADggg5nTvS2vVU08x1FPRz0uQfVCDMFxpy6+T308KaQyuVpZvq694GFN084Lr/ERg4q+62/iUWIwg/x0GqBtFmtFKL3z1S7XlDxOs82PelcxDiXD1hDwbGPRNFKNpuih6dNJDc12GnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DQbGKLzECiOscUcSYJ9qLbIx8n9MAtPjkt/wIzvape4=;
- b=czZ1beTIWczYeylSSmFtqhByPzix9O2uoXhblFbtadOczgOUsrykaHMOcXlTHMLU9hMj44bpqk4zRtJtdeGgCAtl3Tu+tMxcHu7oQheDnkhhsID+FOZFO0UtNYpXli27xOC2wkEOPjrq868lGsrrop/0ZxGgG1KER9VlOn+ixoQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by DBBPR08MB10628.eurprd08.prod.outlook.com (2603:10a6:10:52d::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.32; Tue, 12 Dec
- 2023 11:56:41 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::b914:d9b5:6462:13b6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::b914:d9b5:6462:13b6%5]) with mapi id 15.20.7025.022; Tue, 12 Dec 2023
- 11:56:41 +0000
-Message-ID: <5f58d016-58d2-4e73-8fb3-503313f91496@weidmueller.com>
-Date: Tue, 12 Dec 2023 12:56:40 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/6] Enable setexpr command to print cpu-list like
- bitmaps
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
- <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
- Roland Gaudig <roland.gaudig@weidmueller.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, u-boot@lists.denx.de
-References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
- <7e505616-9053-48f6-a282-c6ce8a09a531@gmx.de>
- <4f39df6f-2871-428e-8977-36a89b6cdc7c@gmx.de>
-From: Lukas Funke <lukas.funke-oss@weidmueller.com>
-In-Reply-To: <4f39df6f-2871-428e-8977-36a89b6cdc7c@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0236.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:b2::8) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+ dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mzamazal@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1702384097;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=QbElN8UoiOkrUot9bqUPc5hhh/VIi3f9LBVbETNjoZ8=;
+ b=dxSO2PVk0Nzd9FGZdskA7TbEfqjQBYk6WNU7ROCBQyfhHspk8W67El5R6d/SYtPlvA577B
+ AmVhfXptPf4pcX39vBavJ5so1ApkDe/DDsoCjo8AreglO0uBMuMTPnbxCITw1sxmb/THvj
+ lwC0DCw1Ikws5IZqBVnU9+EIuB19vGU=
+Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
+ [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-208-AxzPYFGROyO2eA7vokRajQ-1; Tue, 12 Dec 2023 07:28:16 -0500
+X-MC-Unique: AxzPYFGROyO2eA7vokRajQ-1
+Received: by mail-lj1-f198.google.com with SMTP id
+ 38308e7fff4ca-2ca0cf837d5so43516211fa.3
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 04:28:16 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702384093; x=1702988893;
+ h=content-transfer-encoding:mime-version:user-agent:message-id:date
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=OVWilocc9B5EY2bjLc36sr8LhdkRVa9vE9Fbopq3yU0=;
+ b=qF/VvGngkNVcGNxwY+HiwlUwwh+V8sdroXvOSXMWbAgH3bhQVUzJMT579pBlzY+nz+
+ C2j8vrJwUzElSMYpk4wMJS2UAX/KTKCUD4r+8sJKr3pkNrUQO/tdQk1kiQZlyKldiWC4
+ osSosENCZYo9+Ifwu49l860fLssk9ffzJa6H2F6X8wGQ++VIdAC15CdfW2s9TLvFY/HF
+ qsKHLnpnIwqT8BwjV4XaoZu0j+I2JXbB+G2uBvFvZrqp37GHfAQGaBQRR01XRnK+WBHw
+ qiYblUghflBqQ9NCr32/AnqNwp3iRhGVvfnZ8Kclxt4kG5r5aJ9cMOqwg8WZRR8Q8eC6
+ 1plA==
+X-Gm-Message-State: AOJu0YxxIBpqaOBi3AmKQns1Jr7YKjH6P0lM4nujstoQkxmk9y99Gtg+
+ XxbGWipCidQzPtz3HD8s++wzPHllJ8HAqDrv84K2438RR18aj0al/iJhu4TaD2w0A0a8EY6hFy/
+ 7FeEOp2KHCBXC2HqzvdT8Sx1wk+w8hvIEHUvulDtOurIv2iT5Kb5yaWj8dm51cc5mr5oKLSEKZw
+ ==
+X-Received: by 2002:a2e:a783:0:b0:2cb:2b39:8646 with SMTP id
+ c3-20020a2ea783000000b002cb2b398646mr2758658ljf.16.1702384093668; 
+ Tue, 12 Dec 2023 04:28:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFX4TQ698gDTFRFGU3JpCtqol1Nz+NA4PlCsTWpee/+BngI7aTSpHtfOUPOpv+llBpmiKaKQQ==
+X-Received: by 2002:a2e:a783:0:b0:2cb:2b39:8646 with SMTP id
+ c3-20020a2ea783000000b002cb2b398646mr2758643ljf.16.1702384093187; 
+ Tue, 12 Dec 2023 04:28:13 -0800 (PST)
+Received: from nuthatch (ip-77-48-47-2.net.vodafone.cz. [77.48.47.2])
+ by smtp.gmail.com with ESMTPSA id
+ g6-20020a056402090600b0054c9211021csm4564427edz.69.2023.12.12.04.28.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Dec 2023 04:28:12 -0800 (PST)
+From: Milan Zamazal <mzamazal@redhat.com>
+To: Gilles Talis <gilles.talis@gmail.com>
+Cc: Peng Fan <peng.fan@oss.nxp.com>, uboot-imx@nxp.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
+In-Reply-To: <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
+ (Gilles Talis's message of "Mon, 11 Dec 2023 20:35:22 -0400")
+References: <20230523192155.33222-1-gilles.talis@gmail.com>
+ <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com>
+ <877clq6odx.fsf@redhat.com>
+ <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
+Date: Tue, 12 Dec 2023 13:28:11 +0100
+Message-ID: <87bkavbo6c.fsf@redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|DBBPR08MB10628:EE_
-X-MS-Office365-Filtering-Correlation-Id: b1ce9d24-0384-444d-7bed-08dbfb0967bd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: y4Kk38WBUSvj05O6D142I8GQnoGYUYMiaUefQRRqpv5IZpMaTWSr6ojWIEEdKH3qlXPCGYgPyzWHaH+iotyzeYkKj3s7KhDjVlerkqqnjfVL6nUJv/iL3k5O4hKoUAsm1AyS84TK4RwNi3TRhcIUF6q/sxyKofd9/F8UCoP80q82ebAnCBcaWC/QKUXy2EVjc3HUP++gtX6LGOAJvzYr3+wfvO01M2gesibBLVQAxZCtscCf7mzakW/vhIB9zhSNI6UcJjZNUdG9UY0Uagx3/uv35kayCB4Q7B/72HPexG4WoUAHhqTb11Fa4onkzz/8avgsWy1Mw0WLqvfagQbMOGJQsgJZLEFwd19Mjgf1Xd6oF/goYkvPsH3P0n3+snTmqfYdhmgczThDG1pJr/8iIVda9raMZW6z0y92/OkGGblKBbrOBFGi4dOUsitBinhSCXkC+TDOMSlTSVRvdLyPhI87llBX8LfqT4kOsDdbs5LetCvL+IlGmZBDQ/7t8ZbfLpO1C88kbPdiB/oIhPFY5my6ZXjucYiJ0rf7WImxdIOfIN+gtInFcfdDVoRqzomI2tn1PSxhw+kkd8RJDwlPuIEyCNbsEWR4OHxyOy7IHe51qJwB3H/xS/vB70qS0YxPOwEJkm9vkL4RRkgk6Sv0AA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(396003)(39860400002)(376002)(136003)(230922051799003)(186009)(451199024)(1800799012)(64100799003)(31686004)(26005)(2616005)(316002)(6916009)(31696002)(86362001)(36756003)(38100700002)(83380400001)(5660300002)(53546011)(6512007)(6506007)(66556008)(66946007)(8936002)(966005)(8676002)(6486002)(66476007)(54906003)(4326008)(2906002)(478600001)(41300700001)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dVNvcnFLTHNqTG1EWWh3SzloU3pIOWhjNDR4eGpUZ05SMEpsOFV0RzFwUm00?=
- =?utf-8?B?R0hhRmovenpSS2hXMm9TNzlIVU1RMmYvRUs2bWxjazNXcGNpNVJqV2QrUmwy?=
- =?utf-8?B?a0RvUnNpQ0NQVGlqMWUzR3ZPT0NCay93UkozWjAzNXV0ZFQ2V2tyM1gwT0g1?=
- =?utf-8?B?dk13a0VhS2RXcE1BNDNGaW9OZzJ5SnNSZHNsaUFYTmJtdkxHN2pGUjVweS9M?=
- =?utf-8?B?YWpMYzRaRk5DeVU0MnRON1VSTjZnVmdWZXJHeTBaRkJGZVM1ekZKWUFGLy90?=
- =?utf-8?B?b0N1RGI4TDdhNzE1aWl6alhaTzlscURROGswcUg4dGM5L2RZckN3aklBc0Z5?=
- =?utf-8?B?MzF0a3ZReUdiRWg1S3pzRXRtenZOY2FmZkM2TnZ5Ylk4QXJUVVNSeExubm9X?=
- =?utf-8?B?NHV5NGYySUJaTGM1Yk5sYlJOSW4rTkZuSkxrQ0lYSWlHbFRnZTk4QlRhZlEy?=
- =?utf-8?B?OU5yc0NmVUd2L2lLcS9mN2tGS01uUDd3dGQwVlQxUEpEbmFqM1lvN25LUnNV?=
- =?utf-8?B?aXRxTFhNQkxKV29UR1REVTFJTndhWVU0eEc0MmNsY3I5b0RlRDdCVFhiR3VW?=
- =?utf-8?B?bHZqME91c2trRTJhYlRrZVJySHJOVjAzUm5pQXRmdm92c3ZUOXhlMmFRZzVm?=
- =?utf-8?B?ai9IR1RrUFZlQ2ViU2pCK1d2dnBHR2JId29UL0Vnc3ErSjBja3UrS3Z0T2p3?=
- =?utf-8?B?T3RUQ2JTc3JybEhMUE9raGtFd1FjT3JkL3JldXZncDdiaFJMcDhiL04rMmcw?=
- =?utf-8?B?YVg3NFBHaGorUm8xR2NEc2U3T05EYTB5Q3ZSY3VCMVlWR0crSHQyaUVpVnpD?=
- =?utf-8?B?VE4wcU9SbUdWemRDM0owU2xMdmV6Wi9DNHNkS2xwQm90blVjaFRpU3A3N2hq?=
- =?utf-8?B?VEdPbFhFNXVUQTFYbDhXZzdTaHk2amVBWTlYNXlVd0I1TTFTcXZwNUlRVGgy?=
- =?utf-8?B?UTlFYS9DTk1IYzNIT3pncXN1Z1RuYXpXbEpPbU8vdzBKb08wUWtvR0VMYXhQ?=
- =?utf-8?B?MWtMWURUeHN0RWp6Z1JCcm4rQXJ3ODNQSjRTbEpnblhKby90YUR2bVBSVmJX?=
- =?utf-8?B?QXVVaFhLenR5V3UrYXJrZjBEMzJoeklvcFUvenY1eXhIL0NiL0lSUGh1OVI0?=
- =?utf-8?B?Y3Z4Vm45U0R1dHA0cVV6WEdIYVJtU1hPQzlxZWkxU1E1TFh5MHNBRmhDVkw0?=
- =?utf-8?B?ZGlHTmtwakdtMmFvV29QdHhuZ3BjbDcrdk9OMmUrQi9WS0RONDJRWitkdWxM?=
- =?utf-8?B?bmtoRDFpakFxMm00ekorUGphNWk4ZDRTdTNWV1FmVmxwSFZac3BuSkMrZEpr?=
- =?utf-8?B?NXlvS0dOeGxoa3MxbGpJTHVYT25GbmhDcko0aEdOTS82UmhSa3pBYnRTVUdy?=
- =?utf-8?B?dEdFNlFVZmVrcVVENjlnVEJhZVppSGZEcUtwdDlNT0w2am4vL0NqbU5xYjl5?=
- =?utf-8?B?V0V6VnY3V2FVUEJTVm4ySlRrSzhQUGI5Q2ZWMVpwVnVBMDgxWEEzZ3NZK0h5?=
- =?utf-8?B?blFSWlo4YTFYK0hVVXpNZzFpSGVqUjkxcjlZVm42eDhhNkxFeld4clErTWhU?=
- =?utf-8?B?b1dPSzI5djd0Mm1wTFo2MHRIeHovZWZFV1gvNkJwcnF5UzZxeitMeUFqTVdR?=
- =?utf-8?B?aTNrY2w4WU9yUGhOYklwZ2hRQnpRZkRFOG02cnRuRytWZHJFQlkzb0lhNlEz?=
- =?utf-8?B?Sm5iN202SjY3UU82aFU2b2kxWC9laTUveDZ6a3J0TG45cGpqR0VMK0ljeUhT?=
- =?utf-8?B?Yko3SGlqKzVQSDNjM0FEekloZ2h5Vnk4ZDE0Mk0xQitjTko3NXFma3RnVVpD?=
- =?utf-8?B?OS80M2dMaG5YMGVxN0xEQXVvckhrRktXczVYWHcrME5TNUdrYmt5WEE2Z2pI?=
- =?utf-8?B?MVB6MTFmZnZtMyszald0TWJSeUpSQlhmUUh5QTBlelBlR2IvWEpsajRZcVhh?=
- =?utf-8?B?S0ZKZEVTVmFEbWJ1UVhOQVBZL2dvU2lQS1pXNXFmQVVadWxXbWVRRDFXcGhL?=
- =?utf-8?B?YW1PRWJ2ekpCN3NZdEFyKzlKWER1SWMrRE5XWUNVRFQ4OFB4bGYzeUdQUVdl?=
- =?utf-8?B?MUM4WjFIS2wvU3N0dUk0bmNRNXA2QlBJNkhlZmxBSWkwL1R0YjhBM2dmMHJn?=
- =?utf-8?B?WjB4SUk3aTlvckh1b0diU0xhMG1TcXFXRmZPekZPNTE2Yy94QVF2eHVHNm1a?=
- =?utf-8?B?MVE9PQ==?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1ce9d24-0384-444d-7bed-08dbfb0967bd
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Dec 2023 11:56:41.7711 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hQ+M+YUoBam7sfHOvA2og/XXIc19pyjfy2XIovQyQ1+RNF9F8L6+dS8S0ULrZCXLTOiQuLoyqeh1fjE+XNO1Mw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB10628
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,93 +106,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.12.2023 12:40, Heinrich Schuchardt wrote:
-> On 12.12.23 11:13, Heinrich Schuchardt wrote:
->> On 12.12.23 09:52, lukas.funke-oss@weidmueller.com wrote:
->>> From: Lukas Funke <lukas.funke@weidmueller.com>
->>>
->>>
->>> This series enables the 'setexpr' command to print "cpu list"-like
->>> bitmaps based on the printk format specifier [1].
->>>
->>> One use-case is to pass cpu list [2] based kernel parameter like
->>> 'isolcpu', 'nohz_full', irq affinity or RCU related CPU parameter to
->>> the kernel via a separate firmware variable without exposing the
->>> 'bootargs' variable to directly.
->>>
->>> Example:
->>>
->>> setexpr isolcpu_bootarg=%32pbl $myCPUisolation
->>
->> I applied your patches on top of origin/next but your example simply
->> does not work:
->>
->> => setenv myCPUisolation 123456789abcdef0
->> => setexpr isolcpu_bootarg=%32pbl $myCPUisolation
->> ## Error: illegal character '='in variable name "isolcpu_bootarg=%32pbl"
->>
->> This produces some output:
->>
->> => setexpr a fmt '%32pbl' 64; echo $a
->> 6
->>
->> But the result is completely unexpected. Number arguments in U-Boot are
->> always hexadecimal. So the output should be
->>
->> 2,5-6
-> 
-> doc/usage/cmd/setexpr.rst
-> 
-> has an example showing this.
-> 
->      => setexpr foo fmt 0x%08x 63
->      => echo $foo
->      0x00000063
->      =>
-> 
-> You provide a use case for %pbl but not an reason why you want to
-> support %pb. If you wanted to use the output in a device-tree
-> manipulation the %pb output would have to be big-endian formatted.
+Gilles Talis <gilles.talis@gmail.com> writes:
 
-I added it to be consistent with the kernel printk. Currently there is 
-no use case for it. Shall we remove the %pb or leave it in for consistency?
-
-Best regards
-Lukas
-
-> 
-> Best regards
-> 
-> Heinrcih
-> 
+> Hi Milan,
+>
+> Le jeu. 7 d=C3=A9c. 2023 =C3=A0 11:09, Milan Zamazal <mzamazal@redhat.com=
+> a =C3=A9crit :
+>
+>> Peng Fan <peng.fan@oss.nxp.com> writes:
 >>
->>> && env set bootargs "$isolcpu_bootarg"
->>> && bootm
->>>
->>> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
->>> [2]
->>> https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
->>>
->>>
->>> Changes in v2:
->>> - Add bitmap format specifier to documentation
->>>
->>> Lukas Funke (6):
->>>    sandbox: add generic find_next_zero_bit implementation
->>>    linux: bitmap.h: add 'for_each_set_bitrange' iteration macro
->>>    test: cmd: setexptr: Add tests for bitmap string format
->>>    doc: printf() codes: Add bitmap format specifier
->>>    lib: vsprintf: enable '%*pb[l]' format specifier
->>>    cmd: printf: forward '%p' format string specifier
->>>
->>>   arch/sandbox/include/asm/bitops.h | 16 ++++++-
->>>   cmd/printf.c                      | 29 ++++++++++++
->>>   doc/develop/printf.rst            |  6 +++
->>>   include/linux/bitmap.h            |  7 +++
->>>   lib/vsprintf.c                    | 75 +++++++++++++++++++++++++++++++
->>>   test/cmd/setexpr.c                |  9 ++++
->>>   6 files changed, 140 insertions(+), 2 deletions(-)
->>>
+>> > On 5/24/2023 3:21 AM, Gilles Talis wrote:
+>> >> Add support for the Polyhex Debix Model A SBC board.
+>> >> It is an industrial grade single board computer based on
+>> >> NXP's i.MX 8M Plus.
+>> >> Currently supported interfaces are:
+>> >> - Serial console
+>> >> - Micro SD
+>> >> - eQOS and FEC Ethernet
+>> >> imx8mp-debix-model-a.dts is taken from Linux 6.3.
+>> >> Signed-off-by: Gilles Talis<gilles.talis@gmail.com>
+>> >
+>> > Reviewed-by: Peng Fan <peng.fan@nxp.com>
 >>
-> 
+>> Do you know why the patch has been left (as far as I can see) without
+>> further action?
+>>
+> I don't know. I assume the maintainer is very busy or has missed it. I wa=
+s
+> planning to do a resend in the next few weeks.
+>
+>
+>>
+>> BTW, I applied it to current master, compiled approximately following
+>> https://docs.u-boot.org/en/latest/board/nxp/imx8mp_evk.html and tried to
+>> use it on Debix Model A.  U-Boot starts but cannot find the partition
+>> table on the SD card:
+>>
+>>   U-Boot SPL 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00
+>> +0000)
+>>   Normal Boot
+>>   WDT: Started watchdog@30280000 with servicing every 1000ms (60s
+>> timeout)
+>>   Trying to boot from BOOTROM
+>>   Boot Stage: Primary boot
+>>   image offset 0x8000, pagesize 0x200, ivt offset 0x0
+>>   NOTICE: BL31: v2.2(release):rel_imx_5.4.70_2.3.6-0-g15e8ff164-dirty
+>>   NOTICE:  BL31: Built : 00:00:00, Jan  1 1980
+>>
+>>
+>>   U-Boot 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00 +00=
+00)
+>>
+>>   CPU:   Freescale i.MX8MP[8] rev1.1 at 1200 MHz
+>>   Reset cause: POR
+>>   Model: Polyhex Debix Model A i.MX8MPlus board
+>>   DRAM:  2 GiB
+>>   Core: 83 devices, 22 uclasses, devicetree: separate
+>>   WDT: Started watchdog@30280000 with servicing every 1000ms (60s
+>> timeout)
+>>   MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+>>   Loading Environment from MMC... *** Warning - bad CRC, using default
+>> environment
+>>
+>>   In:    serial@30890000
+>>   Out:   serial@30890000
+>>   Err:   serial@30890000
+>>   Net:   eth1: ethernet@30bf0000 [PRIME]
+>>   Hit any key to stop autoboot: 2 <0x08><0x08><0x08> 1 <0x08><0x08><0x08=
+>
+>> 0
+>>   switch to partitions #0, OK
+>>   mmc1 is current device
+>>   Scanning mmc 1:1...
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   <0x1b>7<0x1b>[r<0x1b>[999;999H<0x1b>[6n<0x1b>8Card did not respond to
+>> voltage select! : -110
+>>   No EFI system partition
+>>   No EFI system partition
+>>   Failed to persist EFI variables
+>>   Remove /soc@0/bus@30800000/ethernet@30be0000:phy-reset-gpios
+>>   BootOrder not defined
+>>   EFI boot manager: Cannot load any image
+>>   ,** No partition table - mmc 1 **
+>>   Couldn't find partition mmc 1:1
+>>   Card did not respond to voltage select! : -110
+>>   u-boot=3D>
+>>
+>> When I use an old U-Boot blob provided by Debix, it boots fine from the
+>> same SD card.  The SD card contains a Fedora aarch64 image with a msdos
+>> partition table.
+>>
+>> Do you know what could be wrong?
+>>
+> Interesting. I don't have a clue yet,. but let me give it a try and come
+> back to you. Where can I download the Fedora aarch64 image you mentioned
+> above?
+
+I flashed the image freshly, to another SD card, and it boots happily.
+So I can confirm your patch works. :-)
+
+I don't know what's wrong with the partition table on the original SD
+card.  I manipulated with the partitions and their properties a bit
+before but parted or the other versions of U-Boot I tried don't report
+any problem.  Maybe the U-Boot version from master that I happened to
+compile does something differently.  Anyway, it's unlikely to be related
+to this patch as it boots fine on a freshly flashed SD card.
+
+Thank you for the patch, hopefully it'll get merged.
+
+Regards,
+Milan
 
