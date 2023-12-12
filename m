@@ -4,107 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08462C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:03:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CB9C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 14:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F22C887040;
-	Tue, 12 Dec 2023 15:03:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CF1A986E65;
+	Tue, 12 Dec 2023 15:04:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VLRGmEce";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q2LAqfA3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20FB687040; Tue, 12 Dec 2023 15:03:25 +0100 (CET)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 2E21387040; Tue, 12 Dec 2023 15:04:44 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 334DF86D9E
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:03:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1717A86DDC
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 15:04:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-336121f93e3so1858378f8f.0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:03:23 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5cdc0b3526eso45638717b3.1
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 06:04:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702389802; x=1702994602; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=w5wrypY0Fao/rFN36xFxRLeHIuKKTfCkF0Dt4zGRz8I=;
- b=VLRGmEceB2pkDyI6ImyiqGkoTQgCYlLy3Rr7ZGkBR8R/1KgUqqr8yWRtJjb6NMTMBk
- LkKVaNv+TVVhypCib47CW7cViVW9503FQfgC3WvtLDSIbQu6hMPTjWDZbgVxAbxnm0gX
- uaZRmD1RcSp+KiSMl2YcAqaB1PbIcxuZd1SPKBj3O0TtIu1PL4krLTG3N9ioS29KWinI
- 3KuUb8AIxzklegeTC+3MNesy1IPtqEZqHP8v6WPAPPEf12cKLkHEY5kkrVkB2pj/57PN
- ycgNLHzSXh8FRUJrLX0UfKYUxHlzQPmekLLWR4xPPg+rQO1CIjpNeBE+uOfF7TKKAjfz
- bTAg==
+ d=konsulko.com; s=google; t=1702389881; x=1702994681; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HMmfQdMFLPOHvrNdscPNSF08PBTsfBU/Yqkqhyd+FXw=;
+ b=Q2LAqfA3yX3Dkn0w6SNbZaFZQSmgTNg6MOadffVMSlG0PjEYo9ien3c8wvMn0D7c14
+ BNoHS5f2ZHo5G1s7DGKTP/KXN5IO9Q2reE403uAoVEc/zn7WnuVDcKVhzY3p5U8mhPli
+ Qtvkoz56taI5JB8OS8NFvJWUM3gJGun0ZkRdU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702389802; x=1702994602;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=w5wrypY0Fao/rFN36xFxRLeHIuKKTfCkF0Dt4zGRz8I=;
- b=Ib/MsdGhSwv4rC8gnmRnSgZv0lb9eWeL5rkhEI0M/xrz8WZNJ7Amz4bKlcmrjMlCYQ
- adJ0NgL0ZZuvntgglQ6L9U72NNafWlu11dK6jXnlAeSG2NQiD6PjGCx/+yHJSKJBZCS0
- VmAo1prY17V2vYEOVPLklWbvxtAaWDhVRaFs/jrqLigDflqVMG3hOqLEeHUvK+IjerYm
- vXmM9j2kb63e9Bxu3qZtJtyQ9HbHGCnrk9VLdhrZbWilR3yGlbSwRS8hYiZNq9XZbyHy
- ShQ8TFG3QoGKPdi9Jxzp52DhgR7vaCwcla84CL/xTmoTlXW3+sDnIN/NFKSe3so3Kw93
- U6DQ==
-X-Gm-Message-State: AOJu0Yypzk04weWLHcSSkKrOiVghBWch5c5CreeTf4M4sSlxxk45q5cq
- mg2VEGPN/Lv+YfmZgc74Tj94Rw==
-X-Google-Smtp-Source: AGHT+IGKhVNlpXYbjjaenxbHT3i4NBylkVLW356xM+DqvbFlnSBtG1Kz/NxHXTpEIPQGooS+AwXVDQ==
-X-Received: by 2002:adf:fb49:0:b0:333:2fd7:95f4 with SMTP id
- c9-20020adffb49000000b003332fd795f4mr3778018wrs.47.1702389802506; 
- Tue, 12 Dec 2023 06:03:22 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:5894:fa62:26b4:bf82?
- ([2a01:e0a:982:cbb0:5894:fa62:26b4:bf82])
+ d=1e100.net; s=20230601; t=1702389881; x=1702994681;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HMmfQdMFLPOHvrNdscPNSF08PBTsfBU/Yqkqhyd+FXw=;
+ b=geMS85ObEwjDHYfMv+fKYbJXS92mIW3E+Nv/AUb3EPJZzOAhztqz88HE8Sn6v43qFi
+ mPZrl1M4PkORse9ccTmUHxvDEn/VpERjJLfu2n8mBqEeX0i5wFPasckzQgz77s1vB3bg
+ LC+SBGBG4VcynGhc3NR0PCrrYAJpFvPgwk590k6bMKuLL3TF0f0Ig+dXgeuaiA3Hup+K
+ iKKtVxYGV7nD9fRBhh/eZF7+VyvfPbo5H4OMsOdnCSC7nvrOLDZqSeYz3bAsmUZNCOgv
+ DlwJzHO+lsWs+RPUztXQ9fDpUh5GZnghTtnKUFyBJwgC+Rwt5WIUICjYDRgCLH8CFbzX
+ b6hw==
+X-Gm-Message-State: AOJu0YxA9XwwY0W1g27F6G8gjIxs0h5J47iDWg3apI6+CNn43HjHyAQg
+ 31aDygmRaF2IGJ++2IF+u1SZGn0jsHvNDjIlxvg=
+X-Google-Smtp-Source: AGHT+IFHvFzb7trkYZL+pEs9Db1zka3PijpcOAWYiAbFIglUCj83q8WHMbwNIpajKvrgu1qucSqimQ==
+X-Received: by 2002:a0d:d909:0:b0:5d6:e87d:96c0 with SMTP id
+ b9-20020a0dd909000000b005d6e87d96c0mr4409712ywe.1.1702389880801; 
+ Tue, 12 Dec 2023 06:04:40 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-4e19-645a-5f86-e6ef.res6.spectrum.com.
+ [2603:6081:7b00:6400:4e19:645a:5f86:e6ef])
  by smtp.gmail.com with ESMTPSA id
- q12-20020a5d574c000000b003363654301esm193942wrw.98.2023.12.12.06.03.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 06:03:21 -0800 (PST)
-Message-ID: <a5cbd4fe-dd24-40ae-a61c-c2af27d5e0ee@linaro.org>
-Date: Tue, 12 Dec 2023 15:03:21 +0100
+ v6-20020a81a546000000b005ca4e49bb54sm3686376ywg.142.2023.12.12.06.04.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Dec 2023 06:04:40 -0800 (PST)
+Date: Tue, 12 Dec 2023 09:04:38 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Vaishnav Achath <vaishnav.a@ti.com>, u-boot@lists.denx.de,
+ vigneshr@ti.com, p.yadav@ti.com
+Subject: Re: [PATCH] mtd: spi-nor-core: Implement
+ spi_nor_read_sfdp_dma_unsafe() for sfdp parse
+Message-ID: <20231212140438.GA1721487@bill-the-cat>
+References: <20220603070132.29734-1-vaishnav.a@ti.com>
+ <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v1] arm: dts: meson: add NAND controller node for AXG
-Content-Language: en-US, fr
-To: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, kernel@sberdevices.ru,
- oxffffaa@gmail.com
-References: <20231130122712.189700-1-avkrasnov@salutedevices.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231130122712.189700-1-avkrasnov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="aI7SI58HXgKHHixm"
+Content-Disposition: inline
+In-Reply-To: <CAMty3ZCTiW88SAuaZ6vCfuDAsHKPv0nA8ku_Tvs_11mEuidfMw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,78 +89,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 30/11/2023 13:27, Arseniy Krasnov wrote:
+--aI7SI58HXgKHHixm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Can you add a reference to the Linux patches that you submitted so
-we know it will be safe to sync the DT from Linux when they are merged ?
+On Sun, Jul 10, 2022 at 11:07:41AM +0530, Jagan Teki wrote:
+> On Fri, Jun 3, 2022 at 12:31 PM Vaishnav Achath <vaishnav.a@ti.com> wrote:
+> >
+> > During SFDP header parse and BFPT parse, structures in stack are used
+> > to perform spi_nor_read_sfdp() which expects a dma-safe buffer.
+> >
+> > This commit introduces spi_nor_read_sfdp_dma_unsafe() to wrap
+> > spi_nor_read_sfdp() using a kmalloc'ed bounce buffer which is
+> > the same implementation in Linux (drivers/mtd/spi-nor/sfdp.c).
+> >
+> > Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
+> > ---
+>=20
+> Applied to u-boot-spi/master
 
-Thanks,
-Neil
+Where did this end up? Thanks.
 
-> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-> ---
->   arch/arm/dts/meson-axg.dtsi | 35 +++++++++++++++++++++++++++++++++++
->   1 file changed, 35 insertions(+)
-> 
-> diff --git a/arch/arm/dts/meson-axg.dtsi b/arch/arm/dts/meson-axg.dtsi
-> index 3f5254eeb4..c01ace3ff1 100644
-> --- a/arch/arm/dts/meson-axg.dtsi
-> +++ b/arch/arm/dts/meson-axg.dtsi
-> @@ -430,6 +430,27 @@
->   					};
->   				};
->   
-> +				nand_all_pins: nand_all_pins {
-> +					mux {
-> +						groups = "emmc_nand_d0",
-> +							 "emmc_nand_d1",
-> +							 "emmc_nand_d2",
-> +							 "emmc_nand_d3",
-> +							 "emmc_nand_d4",
-> +							 "emmc_nand_d5",
-> +							 "emmc_nand_d6",
-> +							 "emmc_nand_d7",
-> +							 "nand_ce0",
-> +							 "nand_ale",
-> +							 "nand_cle",
-> +							 "nand_wen_clk",
-> +							 "nand_ren_wr";
-> +						function = "nand";
-> +						input-enable;
-> +						bias-pull-up;
-> +					};
-> +				};
-> +
->   				emmc_ds_pins: emmc_ds {
->   					mux {
->   						groups = "emmc_ds";
-> @@ -1906,6 +1927,20 @@
->   				resets = <&reset RESET_SD_EMMC_C>;
->   			};
->   
-> +			nfc: nand-controller@7800 {
-> +				#address-cells = <2>;
-> +				#size-cells = <2>;
-> +				pinctrl-0 = <&nand_all_pins>;
-> +				pinctrl-names = "default";
-> +				compatible = "amlogic,meson-axg-nfc";
-> +				status = "okay";
-> +				reg = <0x0 0x7800 0x0 0x100>,
-> +				      <0x0 0x7000 0x0 0x800>;
-> +				clocks = <&clkc CLKID_SD_EMMC_C>,
-> +					 <&clkc CLKID_FCLK_DIV2>;
-> +				clock-names = "core", "device";
-> +			};
-> +
->   			usb2_phy1: phy@9020 {
->   				compatible = "amlogic,meson-gxl-usb2-phy";
->   				#phy-cells = <0>;
+--=20
+Tom
 
+--aI7SI58HXgKHHixm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV4aHMACgkQFHw5/5Y0
+tyzGNgwAkiisBVIhw8BKeuQPC/C+iMI68Kxuh9LDVEK7hIZECRYEMTZmy/B4KMb4
+mYYWSJZY7W+GzTFdmDUHTP+27zqZklclMaoNqC8zxbaf5hiS009l10eP+4rPZLYP
+SwHtBSzo0O5fFiw3afNHFnxmGpMdB3ktilx6mNELVoXqGGQxwDGSnHMMnnh+kFht
+vw1H0q7sYLgnvYiySrAnObCGc8mtaRn6agdXkDiImv02hY6DsU0wNccVXjyip6ES
+SjyOX1HdLFtnxUQmsCNhXbIm0FQNGutak+NF/fedzAgyfJYLUsLZyYF2VuAEE4NW
+mO9HR8KBcok30etG+Sc8Yu4DOWex0xy6VJEKkIJtG24bfd5BcurfXrZi7U08rMnQ
+IICEy3CqzCmK7teYMLjXa7MR8ifecfC+WDTHCBAH4rlu8e+jgM0tFKfZgk9zL0vZ
+pEq9cCK1OQyJEun++3erGAXVU3vrC9XIKL3cluD4rAxfMqLpPALo1Q2sThnTmQuR
+ieGQsr1G
+=PC44
+-----END PGP SIGNATURE-----
+
+--aI7SI58HXgKHHixm--
