@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A520C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 15:24:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48005C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 15:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ED158746C;
-	Tue, 12 Dec 2023 16:24:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A55E387495;
+	Tue, 12 Dec 2023 16:43:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="f/1aFfNO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jVFy6Y2j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8648C871CE; Tue, 12 Dec 2023 16:24:22 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id E12CF86C67; Tue, 12 Dec 2023 16:43:35 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC8A86FD8
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 16:24:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A0828746C;
+ Tue, 12 Dec 2023 16:43:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702394658; x=1702999458; i=xypron.glpk@gmx.de;
- bh=qjrKsPbu0dIuE44ib1Ab94zTGDEiv2CoOv8qbOhMges=;
+ t=1702395795; x=1703000595; i=xypron.glpk@gmx.de;
+ bh=hSp8whzAE77P2LjJkJ01eRKqR1YV8zRuwJsQ3exo0G0=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=f/1aFfNO3eI1uW06O8q9R0zvZdX7wY8sahpTSGD2oVvPqN+0z5nlTDhlrNDZ3gIW
- iXKroWjLITet0FqYs1ftBksc7/gb5PMKZmeZqIHK4giPS7g6eZh9yTBZnGSc3AES9
- MyxvH7rCXARA1PgnPYJ6KVIOIk31HeG+8W0+jw5YPEFbyUqpt9XH45Qyy0lxVUwPO
- rAlflXkouz9zYS2d4kdiTpLs+2DFuvIlREm98bunCY37Ms+i7fPHQRwvVEQtolpbj
- DzlHeNbrKgUh3/Ex/bR4hGfbGSl4fCFG6SU+dD9A/F8HiSqz1ChKf5nOj/u3O/jTi
- onXEvvtfdBgAGD09XA==
+ b=jVFy6Y2jE1wLgVQX3/TlVnfGnVkeMLZx9C5X9KJD6PWcieeMqEkPHDwcXCrcx9C/
+ EEsHJK2UTXNJ0fc5o/t+GhXNYfbkWMmb+MzBYQ39NBAhTCnDoSQe227O3rMhBemPv
+ Aa8WRJDLUAh28nzVAZ4rDVWnOzuC5W0gJvJ2ytEvH5BpMEPCnCq4Ss9yOm9y3GFyv
+ VF6qhmkvttTX5zqREOJzubbr3cxbLwNqL3Y6i9OUglgHQErbEhastJbSSZLveE5GI
+ XTtqFRq5mHpgtQVRZF1IcWdnKBEwuzFA0PGMTJJSPHngYl+1YbWbO9oqv43+hxcnv
+ Ob3iQbw9GYD6CQL1Ww==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M3DJl-1rCF8p2o9d-003dKP; Tue, 12
- Dec 2023 16:24:18 +0100
-Message-ID: <a2555b3d-564d-42c5-85dd-66bb8dd0cfff@gmx.de>
-Date: Tue, 12 Dec 2023 16:24:17 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mdvqg-1ro3Yi3yFC-00b2Js; Tue, 12
+ Dec 2023 16:43:15 +0100
+Message-ID: <51c47679-32d8-45a7-9d9a-4c534ed98c32@gmx.de>
+Date: Tue, 12 Dec 2023 16:43:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] cmd: printf: forward '%p' format string specifier
+Subject: Re: Proposal: FIT support for extension boards / overlays
 Content-Language: en-US
-To: lukas.funke-oss@weidmueller.com
-Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
- <lukas.funke@weidmueller.com>, Roland Gaudig
- <roland.gaudig@weidmueller.com>, u-boot@lists.denx.de
-References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
- <20231212085236.2730768-7-lukas.funke-oss@weidmueller.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>,
+ Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231212085236.2730768-7-lukas.funke-oss@weidmueller.com>
+In-Reply-To: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:OsLoC4gHiQEDg22iKfk+/6IQISq0TPMq41IgerTLrle9PnlD56P
- T2s+jnC58qJoC21DccBy16vbnLZPG4mUgXfTV4OffA1YR5AIsCxX57BLJ8pY3nJ5jZLt0Uu
- enX0/Hv/DP9XsMoP6vSVRj7GihzsRoHilDc7U1UwJJ+jP5hroJngIL02I9ZQRhnWkfUFE/I
- K6Cz+W/6GEuZ7x8eQqHsQ==
-UI-OutboundReport: notjunk:1;M01:P0:9fGXjuXSRP0=;Mx3ydBqUbF11wFQF23OHcBBEkCy
- d1M76ejBFZC7VBSVAim6mTxs6MN+AI2v4AGB7+8P89OwbiGreiLsmlLLogqSCEYNUpXNk/hAX
- kLOyUQyuEAixYkyKsMD/XdCvoeBUTn+ttsMVQtdmXrSWbAIcpN3Og1HOiQqP8OcHdTIF+vxLH
- +FNp7g7BsF8gFB0GEEM/BdjwfPeMMJHqZuLjT8RBhHHyc5fffTLk5J9IZ3XNT2wuPv8wPVJR7
- bGVu42mAtJmpb01lN7yATrB1dQ3IFzhBqOTBd5ePZJud6Pq2jLoSeermV9NgTREy4rWxm1iRH
- DLXyWwC/YK1vgOot7FYu5IF7XINFxRuwRvJSck5JhZywuxjX16uQhec7t0q2ub375+Jj+0S42
- fZpyjT+Eph+4yX68Z3DdXBhjY5vY3vaU3dhLwmgs/WEPy0BfVNzmigY1jjVaRqpcRd2s1fO/f
- tDozh5v9PFPMKFlWhBJlGWrTfIQLE6AaabKLQ42q8Qiu2qCafxHomIv1F3/4oGUJYakPvpvPe
- Yi4SEZbTBi/duXZg9/b25UEyxj03ZUoK2J5lCRaM4sPKVq9BZClwEzatuclGSiFaA3FcajLNt
- CoWO5qg6Bnz4DzsvU+1RyzO+hCTpTC/AWGfV1ylWN9oEyjC9ZVbHgiArctuWol7s7Sl+s3t2y
- dCYr72xKXw0kq0iTs5hUKraWtNRfU6MoP08BX/+xRNF0mYWh/4Q4iZd1MWiLItE3erqKPPgJQ
- FjI/ut96Kbb0ruC0sq54VculvLbErAi3hIVkAjpuZMt5N444Zj0GKAQiSIjuk1e5wQldxXt/1
- hVjuuJ5t0d8ZqJQk46RBG8+cGJrFLbpz+R3FnzHeCi2kRMPfVpMp9w4CKTzh9Vv7hUwL/Q4nd
- 2RBBCAZe97Gido1HPBaaGxNRPSItU8mOqvUpON0oLvW4yguigdpBVjHq3VWwCBs3k28K18n8x
- mzSmvvVETmlz4DqjAtVufNzURq0=
+X-Provags-ID: V03:K1:wD6sgO5TdpL9eS2zKxVZGeWQzNDIUJ8yKn6bRqAjZQSy4T+JR9Q
+ kDvv2R3rtujoNnSUCo+U3fMhbIt3oH0g3Lx6T5noa5vNXWatO+/cfqVIhH7GI7o+t+MNPFG
+ WmrtoRukDGevVlyuJ66nlBVlwWnxT317ULKPTxAACwGmQZeL7w5PVhGQPppt7LDEDOxVDke
+ a8dUWnNjInA7zVUAXER6Q==
+UI-OutboundReport: notjunk:1;M01:P0:HjmHjq5w2FU=;8Yo2TTdNAp/uAPRtn696iQfv9Ml
+ dWRv3G3YFnOBuxY8kuPuJa6LlfH58gf5eWGBBk1Y9l+mI2K9BYDwXTAsURGbbdyK2zgzF0IUh
+ 4xNFU41WZyjwZmLk0b1vaFeU/Ya9llK4ae4kbzYEKU14uisOawMABl5iqCK6X6aSWevpCPnsP
+ Qf71t/mokuMsQ10miAMI6uxIX2+9z8PNwlmVE1+mBnGkPpuQ6XexfS3NYqAdA4hF9JznUjvKR
+ s69ZRik/VazpO04ZZoOHDeEHYEAswiYEY1lc2+DFPspijzly36fOoBGIv0BmtSsMweLbVWps6
+ M6IsTq+EsZP5y6x0kjMFm516PF6D+y1nFRwnbjHqWYGWGxNx60dW7wYANRgEDQ6ZOEQspY4Ss
+ sgydD0FhvYidso3cze+jV9d4qVSRAySBpAUBkVbogxu42ZQAy7MdWSQvGHZOszg2xo6MicuPd
+ NlxQvz0ZqNLjZeIWngTojpLL1LGMgbvdxQxPhN/o4doL89+dIPJqeq16r8u5T1K6GZwYzGt01
+ Yd3IE0KXo38lkVjHvMx8MBoI098g+/8LEocQKt9oWdw8iwymgOqg7Z2JzndCGvgh4LDQopfnh
+ Viqb6SqTlwE67tItQvWgN4oPzwZ7JVZpcWBJkigPQvQhvysRvq6YK0M27wK9oEoTZ0kSRZF8L
+ go+JdN25S7Cg7pN/4VsoGwebk64lJCID7YyeW4aZzC5Owpj3iBaVABgVB0XhAQB6tEdJiCqXg
+ rezCyd/gvXCW23c8zOexfCHdMfzlxXmYHO8Qpfc171Jts3zUexka7mqke73Tfe3h76uYqDpaV
+ H3zFYeQ9hRVTayH46+ZC7P/r6bWiSqgvgevI6TykYXqjMR162BvXQEHSfiE4pFnxPLzfMT0uA
+ nptnyJGAbhjdvUTVia91jUV8fP/LLffMaUXQBBxn55gYA3P6GQzyJvrPpZ7jjplNL/6IeWnSK
+ pTPztJGQAB17DfM+EVyhjA/XjEQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,82 +92,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.12.23 09:52, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
+On 12.12.23 15:05, Simon Glass wrote:
+> Hi,
 >
-> Forward '%p' format specifier to the underlying format logic in order
-> to print pointers, especially bitmaps.
+> The devicetree files for a board can be quite large, perhaps around
+> 60KB. To boot on any supported board, many of them need to be
+> provided, typically hundreds.
 >
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> ---
+> All boards for a particular SoC share common parts.  It would be
+> helpful to use overlays for common pieces, to reduce the overall size.
 >
-> (no changes since v1)
+> Some boards have extension add-ons which have their own devicetree
+> overlays. It would be helpful to know which ones should be applied for
+> a particular extension.
 >
->   cmd/printf.c | 29 +++++++++++++++++++++++++++++
->   1 file changed, 29 insertions(+)
+> I propose implementing extensions in FIT. This has a new '/extensions'
+> node, so you can specify what extensions are available for each FIT
+> configuration.
 >
-> diff --git a/cmd/printf.c b/cmd/printf.c
-> index 0c6887e0d6..a90c923871 100644
-> --- a/cmd/printf.c
-> +++ b/cmd/printf.c
-> @@ -90,6 +90,7 @@
->   #include <stddef.h>
->   #include <stdio.h>
->   #include <stdlib.h>
-> +#include <linux/bitmap.h>
+> For example:
 >
->   #define WANT_HEX_ESCAPES 0
->   #define PRINT_CONVERSION_ERROR 1
-> @@ -476,6 +477,16 @@ static int get_width_prec(const char *str)
->   	return (int)v;
->   }
+> / {
+>    images {
+>      kernel {
+>        // common kernel
+>      };
 >
-> +static int print_pointer(struct print_inf *inf, char *format,
-> +			 unsigned int fmt_length, const char *argument)
-> +{
-> +	u64 value =3D simple_strtoull(argument, NULL, 0);
-> +
-> +	printf_str(inf, format, &value);
-> +
-> +	return inf->error;
-> +}
-> +
->   /* Print the text in FORMAT, using ARGV for arguments to any '%' direc=
-tives.
->    * Return advanced ARGV.
->    */
-> @@ -536,6 +547,24 @@ static char **print_formatted(struct print_inf *inf=
-, char *f, char **argv, int *
->   					}
->   				}
->   			}
-> +			if (*f =3D=3D 'p') {
-> +				static const char ptr_format_chars[] =3D "bl";
-> +				++f;
-> +				++direc_length;
-> +				char *p =3D strchr(ptr_format_chars, *f);
-> +				/* consume whole format token */
-> +				while (*f !=3D '\0' && *(p++) =3D=3D *f) {
-> +					++f;
-> +					++direc_length;
-> +				}
-> +				if (print_pointer(inf, direc_start, direc_length, *argv++)) {
-> +					printf("`%s': invalid format\n", direc_start);
+>      fdt-1 {
+>        // FDT for board1
+>      };
+>
+>      fdto-1 {
+>        // FDT overlay
+>      };
+>
+>      fdto-2 {
+>        // FDT overlay
+>      };
+>
+>      fdto-3 {
+>        // FDT overlay
+>      };
+>    };
+>
+>    configurations {
+>      conf-1 {
+>          compatible =3D ...
+>          fdt =3D "fdt-1";
+>          extensions =3D "ext1", "ext-2";
 
-There are different error codes. PRINT_TRUNCATED_ERROR does not indicate
-an invalid format.
+Shouldn't there be braces around the item list?
+
+How do you specify optional and required but otherwise unrelated
+extensions for a configuration?
+
+>      };
+>    };
+>
+>    extensions {
+>      ext-1 {
+>          fdto =3D "fdto-1";   // FDT overlay for this 'cape' or 'hat'
+>          kernel =3D "kernel-1";
+>          compatible =3D "vendor,combined-device1";
+>          extensions =3D "ext-3";
+>      };
+>
+>      ext-2 {
+>          fdto =3D "fdto-2";   // fdt overlay for this 'cape'
+>          compatible =3D "vendor,device2";
+>      };
+>
+>      ext-3 {
+>          fdto =3D "fdto-3";
+>          compatible =3D "vendor,device3";
+>      };
+>    };
+> };
+>
+> So FIT configurations have a list of supported extensions. The
+> extensions are hierarchical so that you can have ext-1 which can
+> optionally have ext-2 as well. This allows boards to share a common
+
+ext2 seems not to be related to ext-3. Do you mean ext-3 optionally
+extending ext-1? How would you specify that ext-n is required for ext-m
+to work?
+
+The sequence of applying overlays may make a difference. I cannot see
+that your current suggestion defines a sequence in which the overlays
+are applied.
+
+> SoC to add in overlays as needed by their board. It also allows common
+> 'capes' or 'hats' to be specified only once and used by a group of
+> boards which share the same interface.
+>
+> Within U-Boot, extensions actually present are declared by a sysinfo
+> driver for the board, with new methods:
+>
+> get_compat() - determine the compatible strings for the current platform
+> get_ext() - get a list of compatible strings for extensions which are
+> actually present
+
+Do you expect U-Boot to have code that injects device-tree fragments
+with a compatible string into the control FDT after discovering add-ons?
+
+Why can't we simply write the compatible constraint into the overlay
+definition (fdto-#) and enumerate the overlays in the configuration?
+
+On some busses detection is problematic. Two alternative add-ons may use
+the same SPI address but need different FDT overlays.
 
 Best regards
 
 Heinrich
 
-> +					/* causes main() to exit with error */
-> +					return saved_argv - 1;
-> +				}
-> +				f--;
-> +				break;
-> +			}
+
 >
->   			/* Remove "lLhz" size modifiers, repeatedly.
->   			 * bash does not like "%lld", but coreutils
+> The extension compatible-strings are used to select the correct things
+> from the FIT, apply the overlays and produce the final DT.
+>
+> To make this simpler for the common case (without extensions), we can
+> allow multiple FDT images for a configuration, with the first one
+> being the base SoC .dtb and the others being the .dtbo overlay(s) for
+> the board:
+>
+> confi-1 {
+>          compatible =3D ...
+>          fdt =3D "fdt-1", "fdto-1";
+> };
+>
+> Comments welcome.
+>
+> Regards,
+> Simon
 
