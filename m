@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6356C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 21:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC66C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 21:03:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80C0F8760D;
-	Tue, 12 Dec 2023 22:02:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 12665877C2;
+	Tue, 12 Dec 2023 22:02:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="H8px/9KE";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="NniBOQa4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFBFF877C2; Tue, 12 Dec 2023 22:02:39 +0100 (CET)
+ id 29E4C86DC3; Tue, 12 Dec 2023 22:02:40 +0100 (CET)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
  [IPv6:2a00:1098:ed:100::25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DED4D874D0
+ by phobos.denx.de (Postfix) with ESMTPS id F2ED487698
  for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 22:02:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
@@ -28,31 +28,31 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sjoerd@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
  s=mail; t=1702414955;
- bh=46g6zvckFSGMigzL/oV3JCK/hBwoA9GDsAhelO0HHY4=;
+ bh=mq0yNR1oL8cXjWy8U1Rwsoql22e5ZlZYyJTTQt33kSk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=H8px/9KEojTF2iXlsYymqSZbAbOkfY+nqe40VsvWeEB8j6gfpucAkfih/nK+ruBkt
- 5laHutsGXCCwXfIs1yG9mfNmWoZ7KDsRGF74ih2d2rlHXYZfRGeKGdsocgy7aeXThV
- vXNI8nPfh5joDdx6TFH/Kvnbryn+rIh2DvmWC67+vo5Zr8rqTgVXD9hdOiANkAaUz/
- VdFqD+FNqeGfsQ0rIk8+jZPcONJ7437/3fCQsDap/oJphsGAk60068WED/BQqT/YV5
- /HK6w5WemTZivlImArkiR3Oc+wjXeDmnSlFLmApD2o245PKlHbL7gloJiVg7crPFzp
- fsLJ0orTXEeiw==
+ b=NniBOQa49PRdlTZTAtfnc0lGB2SchBNQ741j534kxqQBU0fqwZlkI6M4xpY0l8/2v
+ MSGuDKv5BTV651iHrptSflXewjAZweA41kyD7Xmcp97ovWBzXYW8u+3zK7rJ+0aUEX
+ Fe54VCyOQX1qny7OvqkcoFI7VmW06PKRLbb1WZ2IVH7NbQtINr0ceVplgJbCoaPq/l
+ NESDyxZVGszQ9RMyNi9yIS98So2AQ4c1y9VwXyGntZ2ntdZ7U3m2Zq6TP4nlIecm58
+ 2dWXZQCGIQ4HIyPIOtxzC8XK4f+riVeNmfJtLopiXkenWqNnpThvT4DYd1e8w4+xXX
+ KH/eb7bp5KayQ==
 Received: from beast.luon.net (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (No client certificate requested) (Authenticated sender: sjoerd)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 6A2323781478;
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 8FEFF3781479;
  Tue, 12 Dec 2023 21:02:35 +0000 (UTC)
 Received: by beast.luon.net (Postfix, from userid 1000)
- id 09715984A543; Tue, 12 Dec 2023 22:02:35 +0100 (CET)
+ id 36490984A545; Tue, 12 Dec 2023 22:02:35 +0100 (CET)
 From: Sjoerd Simons <sjoerd@collabora.com>
 To: u-boot@lists.denx.de
 Cc: Nishanth Menon <nm@ti.com>, Martyn Welch <martyn.welch@collabora.com>,
- Roger Quadros <rogerq@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 3/4] arm: dts: k3-am625-sk: Enable usb ports in u-boot
-Date: Tue, 12 Dec 2023 22:02:23 +0100
-Message-ID: <20231212210234.509309-4-sjoerd@collabora.com>
+ Bryan Brattlof <bb@ti.com>, Dave Gerlach <d-gerlach@ti.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 4/4] configs: am62x_evm_*: Enable USB and DFU support
+Date: Tue, 12 Dec 2023 22:02:24 +0100
+Message-ID: <20231212210234.509309-5-sjoerd@collabora.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231212210234.509309-1-sjoerd@collabora.com>
 References: <20231212210234.509309-1-sjoerd@collabora.com>
@@ -74,38 +74,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable both usb0 as a peripheral for use with DFU and
+Enable USB host as well as USB gadget and DFU support for a53; For the
+r5 due to the smaller available size create a new config just for
+DFU support
 
 Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
 
 ---
 
 Changes in v3:
-- Enable usb nodes in all boot phases
+- Run savedefconfig to adjust to more recent u-boot
 
 Changes in v2:
-- Only enable usb port 0 DFU in SPL
+- Create a seperate defconfig for R5
 
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ configs/am62x_evm_a53_defconfig       |  31 ++++++-
+ configs/am62x_evm_r5_usbdfu_defconfig | 111 ++++++++++++++++++++++++++
+ 2 files changed, 141 insertions(+), 1 deletion(-)
+ create mode 100644 configs/am62x_evm_r5_usbdfu_defconfig
 
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index fa778b0ff4c..1fc0d407cbf 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -46,3 +46,12 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+&usbss0 {
-+	bootph-all;
-+};
-+
-+&usb0 {
-+	dr_mode = "peripheral";
-+	bootph-all;
-+};
+diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+index df2511546ea..1bd8f0fd9ec 100644
+--- a/configs/am62x_evm_a53_defconfig
++++ b/configs/am62x_evm_a53_defconfig
+@@ -1,5 +1,6 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_LEN=0x2000000
+ CONFIG_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL_LIBCOMMON_SUPPORT=y
+ CONFIG_SPL_LIBGENERIC_SUPPORT=y
+@@ -40,17 +41,23 @@ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+ CONFIG_SPL_DM_MAILBOX=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+ CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
+ # CONFIG_SPL_SPI_FLASH_TINY is not set
+ CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_USB_GADGET=y
++CONFIG_SPL_DFU=y
+ CONFIG_SPL_YMODEM_SUPPORT=y
+-CONFIG_SYS_BOOTM_LEN=0x800000
++CONFIG_CMD_DFU=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_MULTI_DTB_FIT=y
+@@ -61,10 +68,17 @@ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_SYSCON=y
+ CONFIG_SPL_OF_TRANSLATE=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
+ CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+ CONFIG_DMA_CHANNELS=y
+ CONFIG_TI_K3_NAVSS_UDMA=y
+ CONFIG_TI_SCI_PROTOCOL=y
+@@ -103,4 +117,19 @@ CONFIG_CADENCE_QSPI=y
+ CONFIG_SYSRESET=y
+ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_TI_SCI=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_AM62=y
++CONFIG_USB_DWC3_AM62=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
++CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+diff --git a/configs/am62x_evm_r5_usbdfu_defconfig b/configs/am62x_evm_r5_usbdfu_defconfig
+new file mode 100644
+index 00000000000..14bc08f60a4
+--- /dev/null
++++ b/configs/am62x_evm_r5_usbdfu_defconfig
+@@ -0,0 +1,111 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SYS_MALLOC_LEN=0x08000000
++CONFIG_SYS_MALLOC_F_LEN=0x9000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SOC_K3_AM625=y
++CONFIG_TARGET_AM625_R5_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c3a7f0
++CONFIG_ENV_SIZE=0x20000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am625-r5-sk"
++CONFIG_SPL_TEXT_BASE=0x43c00000
++CONFIG_DM_RESET=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x7000
++CONFIG_SPL_SIZE_LIMIT=0x3A7F0
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x3500
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0x3B000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x43c3b000
++CONFIG_SPL_BSS_MAX_SIZE=0x3000
++CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_REMOTEPROC=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_REMOTEPROC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_MISC=y
++CONFIG_ESM_K3=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SPECIFY_CONSOLE_INDEX=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_AM62=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_SPL_DFU=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
 -- 
 2.43.0
 
