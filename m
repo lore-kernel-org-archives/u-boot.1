@@ -4,78 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48005C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 15:43:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC3C1C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 15:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A55E387495;
-	Tue, 12 Dec 2023 16:43:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 51372871CE;
+	Tue, 12 Dec 2023 16:52:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jVFy6Y2j";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nb7sYO61";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12CF86C67; Tue, 12 Dec 2023 16:43:35 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C980187015; Tue, 12 Dec 2023 16:52:28 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A0828746C;
- Tue, 12 Dec 2023 16:43:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D477D870D0;
+ Tue, 12 Dec 2023 16:52:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702395795; x=1703000595; i=xypron.glpk@gmx.de;
- bh=hSp8whzAE77P2LjJkJ01eRKqR1YV8zRuwJsQ3exo0G0=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=jVFy6Y2jE1wLgVQX3/TlVnfGnVkeMLZx9C5X9KJD6PWcieeMqEkPHDwcXCrcx9C/
- EEsHJK2UTXNJ0fc5o/t+GhXNYfbkWMmb+MzBYQ39NBAhTCnDoSQe227O3rMhBemPv
- Aa8WRJDLUAh28nzVAZ4rDVWnOzuC5W0gJvJ2ytEvH5BpMEPCnCq4Ss9yOm9y3GFyv
- VF6qhmkvttTX5zqREOJzubbr3cxbLwNqL3Y6i9OUglgHQErbEhastJbSSZLveE5GI
- XTtqFRq5mHpgtQVRZF1IcWdnKBEwuzFA0PGMTJJSPHngYl+1YbWbO9oqv43+hxcnv
- Ob3iQbw9GYD6CQL1Ww==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mdvqg-1ro3Yi3yFC-00b2Js; Tue, 12
- Dec 2023 16:43:15 +0100
-Message-ID: <51c47679-32d8-45a7-9d9a-4c534ed98c32@gmx.de>
-Date: Tue, 12 Dec 2023 16:43:13 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BCFqIqM069457;
+ Tue, 12 Dec 2023 09:52:18 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1702396338;
+ bh=OpFdrxO1t5tevEeuE2IpjidX+ZYOUapzho53rgqMpF4=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=nb7sYO618Olf7D6lnj7lH6SK3HkCf/94inIvSKnB0z/uDS9hERA919FMRWacqDGDq
+ uyqQZNmirGbD7ggevgDPn4MRtIyWjRpq/AXPrNMsoQoz/wDnWRDv/1IkC04QT/YvZL
+ F80ENDwpPyN8Z3rsJUXORV96FP1W3lk4T2IJFLFM=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BCFqIas005602
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 12 Dec 2023 09:52:18 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
+ Dec 2023 09:52:17 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 12 Dec 2023 09:52:17 -0600
+Received: from [10.247.16.251] (ula0226330.dhcp.ti.com [10.247.16.251])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BCFqH6j031051;
+ Tue, 12 Dec 2023 09:52:17 -0600
+Message-ID: <ae0675e2-940a-439e-9557-e5a4f745f1b0@ti.com>
+Date: Tue, 12 Dec 2023 09:52:16 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Proposal: FIT support for extension boards / overlays
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>,
- Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Geert Uytterhoeven <geert@linux-m68k.org>, Laurent Pinchart
+ <laurent.pinchart@ideasonboard.com>, Chen-Yu Tsai <wenst@chromium.org>, Tom
+ Rini <trini@konsulko.com>, U-Boot Custodians
+ <u-boot-custodians@lists.denx.de>
 References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+From: Andrew Davis <afd@ti.com>
 In-Reply-To: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wD6sgO5TdpL9eS2zKxVZGeWQzNDIUJ8yKn6bRqAjZQSy4T+JR9Q
- kDvv2R3rtujoNnSUCo+U3fMhbIt3oH0g3Lx6T5noa5vNXWatO+/cfqVIhH7GI7o+t+MNPFG
- WmrtoRukDGevVlyuJ66nlBVlwWnxT317ULKPTxAACwGmQZeL7w5PVhGQPppt7LDEDOxVDke
- a8dUWnNjInA7zVUAXER6Q==
-UI-OutboundReport: notjunk:1;M01:P0:HjmHjq5w2FU=;8Yo2TTdNAp/uAPRtn696iQfv9Ml
- dWRv3G3YFnOBuxY8kuPuJa6LlfH58gf5eWGBBk1Y9l+mI2K9BYDwXTAsURGbbdyK2zgzF0IUh
- 4xNFU41WZyjwZmLk0b1vaFeU/Ya9llK4ae4kbzYEKU14uisOawMABl5iqCK6X6aSWevpCPnsP
- Qf71t/mokuMsQ10miAMI6uxIX2+9z8PNwlmVE1+mBnGkPpuQ6XexfS3NYqAdA4hF9JznUjvKR
- s69ZRik/VazpO04ZZoOHDeEHYEAswiYEY1lc2+DFPspijzly36fOoBGIv0BmtSsMweLbVWps6
- M6IsTq+EsZP5y6x0kjMFm516PF6D+y1nFRwnbjHqWYGWGxNx60dW7wYANRgEDQ6ZOEQspY4Ss
- sgydD0FhvYidso3cze+jV9d4qVSRAySBpAUBkVbogxu42ZQAy7MdWSQvGHZOszg2xo6MicuPd
- NlxQvz0ZqNLjZeIWngTojpLL1LGMgbvdxQxPhN/o4doL89+dIPJqeq16r8u5T1K6GZwYzGt01
- Yd3IE0KXo38lkVjHvMx8MBoI098g+/8LEocQKt9oWdw8iwymgOqg7Z2JzndCGvgh4LDQopfnh
- Viqb6SqTlwE67tItQvWgN4oPzwZ7JVZpcWBJkigPQvQhvysRvq6YK0M27wK9oEoTZ0kSRZF8L
- go+JdN25S7Cg7pN/4VsoGwebk64lJCID7YyeW4aZzC5Owpj3iBaVABgVB0XhAQB6tEdJiCqXg
- rezCyd/gvXCW23c8zOexfCHdMfzlxXmYHO8Qpfc171Jts3zUexka7mqke73Tfe3h76uYqDpaV
- H3zFYeQ9hRVTayH46+ZC7P/r6bWiSqgvgevI6TykYXqjMR162BvXQEHSfiE4pFnxPLzfMT0uA
- nptnyJGAbhjdvUTVia91jUV8fP/LLffMaUXQBBxn55gYA3P6GQzyJvrPpZ7jjplNL/6IeWnSK
- pTPztJGQAB17DfM+EVyhjA/XjEQ=
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,136 +82,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.12.23 15:05, Simon Glass wrote:
+On 12/12/23 8:05 AM, Simon Glass wrote:
 > Hi,
->
+> 
 > The devicetree files for a board can be quite large, perhaps around
 > 60KB. To boot on any supported board, many of them need to be
 > provided, typically hundreds.
->
+> 
 > All boards for a particular SoC share common parts.  It would be
 > helpful to use overlays for common pieces, to reduce the overall size.
->
+> 
+
+For this to save much size we would need to have the SoC split
+from each board that uses it. We don't have that in DT today.
+There are some efforts in progress to help on this but until
+then we will not get much here.
+
 > Some boards have extension add-ons which have their own devicetree
 > overlays. It would be helpful to know which ones should be applied for
 > a particular extension.
->
+> 
 > I propose implementing extensions in FIT. This has a new '/extensions'
 > node, so you can specify what extensions are available for each FIT
 > configuration.
->
+> 
 > For example:
->
+> 
 > / {
 >    images {
 >      kernel {
 >        // common kernel
 >      };
->
+> 
 >      fdt-1 {
 >        // FDT for board1
 >      };
->
+> 
 >      fdto-1 {
 >        // FDT overlay
 >      };
->
+> 
 >      fdto-2 {
 >        // FDT overlay
 >      };
->
+> 
 >      fdto-3 {
 >        // FDT overlay
 >      };
 >    };
->
+> 
 >    configurations {
 >      conf-1 {
->          compatible =3D ...
->          fdt =3D "fdt-1";
->          extensions =3D "ext1", "ext-2";
-
-Shouldn't there be braces around the item list?
-
-How do you specify optional and required but otherwise unrelated
-extensions for a configuration?
-
+>          compatible = ...
+>          fdt = "fdt-1";
+>          extensions = "ext1", "ext-2";
 >      };
 >    };
->
+> 
 >    extensions {
 >      ext-1 {
->          fdto =3D "fdto-1";   // FDT overlay for this 'cape' or 'hat'
->          kernel =3D "kernel-1";
->          compatible =3D "vendor,combined-device1";
->          extensions =3D "ext-3";
+>          fdto = "fdto-1";   // FDT overlay for this 'cape' or 'hat'
+>          kernel = "kernel-1";
+>          compatible = "vendor,combined-device1";
+>          extensions = "ext-3";
 >      };
->
+> 
 >      ext-2 {
->          fdto =3D "fdto-2";   // fdt overlay for this 'cape'
->          compatible =3D "vendor,device2";
+>          fdto = "fdto-2";   // fdt overlay for this 'cape'
+>          compatible = "vendor,device2";
 >      };
->
+> 
 >      ext-3 {
->          fdto =3D "fdto-3";
->          compatible =3D "vendor,device3";
+>          fdto = "fdto-3";
+>          compatible = "vendor,device3";
 >      };
 >    };
 > };
->
+> 
 > So FIT configurations have a list of supported extensions. The
 > extensions are hierarchical so that you can have ext-1 which can
 > optionally have ext-2 as well. This allows boards to share a common
-
-ext2 seems not to be related to ext-3. Do you mean ext-3 optionally
-extending ext-1? How would you specify that ext-n is required for ext-m
-to work?
-
-The sequence of applying overlays may make a difference. I cannot see
-that your current suggestion defines a sequence in which the overlays
-are applied.
-
 > SoC to add in overlays as needed by their board. It also allows common
 > 'capes' or 'hats' to be specified only once and used by a group of
 > boards which share the same interface.
->
+> 
+
+Are you suggesting an 'extension' that lists every 'cape', then for each
+board that has a 'cape' header we list that 'hierarchical extension'
+to suggest support?
+
+Seems reasonable, but we don't have universal DTB overlays today. Each
+overlay needs to be built for a specific board due to several reasons
+(I have some plans to help solve this but the upstream kernel path might
+be a ways out).
+
 > Within U-Boot, extensions actually present are declared by a sysinfo
 > driver for the board, with new methods:
->
+> 
 > get_compat() - determine the compatible strings for the current platform
 > get_ext() - get a list of compatible strings for extensions which are
 > actually present
-
-Do you expect U-Boot to have code that injects device-tree fragments
-with a compatible string into the control FDT after discovering add-ons?
-
-Why can't we simply write the compatible constraint into the overlay
-definition (fdto-#) and enumerate the overlays in the configuration?
-
-On some busses detection is problematic. Two alternative add-ons may use
-the same SPI address but need different FDT overlays.
-
-Best regards
-
-Heinrich
-
-
->
+> 
 > The extension compatible-strings are used to select the correct things
 > from the FIT, apply the overlays and produce the final DT.
->
+> 
+
+These extension compatible-strings, could they just be the name of
+the overlay file? That is what we do today with our name_overlays[0].
+The benefit is these names can be used to load and apply overlays in
+the non-FIT case just the same.
+
+If we name the configuration nodes after the DTBO that they contain
+then I'm not sure what this 'extensions' list gains us over having
+a list of overlays to apply like we do today.
+
+Andrew
+
+[0] https://github.com/trini/u-boot/blob/master/board/ti/am65x/evm.c#L189
+
 > To make this simpler for the common case (without extensions), we can
 > allow multiple FDT images for a configuration, with the first one
 > being the base SoC .dtb and the others being the .dtbo overlay(s) for
 > the board:
->
+> 
 > confi-1 {
->          compatible =3D ...
->          fdt =3D "fdt-1", "fdto-1";
+>          compatible = ...
+>          fdt = "fdt-1", "fdto-1";
 > };
->
+> 
 > Comments welcome.
->
+> 
 > Regards,
 > Simon
-
