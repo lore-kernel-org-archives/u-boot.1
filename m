@@ -4,73 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B72FC4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 00:35:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D058C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 03:27:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68812877B3;
-	Tue, 12 Dec 2023 01:35:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 46B12877B3;
+	Tue, 12 Dec 2023 04:27:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EslralnP";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="MVzRNHQs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90FD2877A9; Tue, 12 Dec 2023 01:35:36 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2E163877B6; Tue, 12 Dec 2023 01:54:16 +0100 (CET)
+Received: from out-180.mta1.migadu.com (out-180.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::b4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA9D877BB
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 01:35:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA7C886FD5
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 01:54:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gilles.talis@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a1f33c13ff2so434773366b.3
- for <u-boot@lists.denx.de>; Mon, 11 Dec 2023 16:35:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702341334; x=1702946134; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+/vsa3e2VAOoaqoS2s9JzZ1WzFbsWkisT8EBUBktAzw=;
- b=EslralnPXdXJPouf2xGUW+i7Gtb44NNqDuUgcCK0+Z35RUgF9FP37kU8MnwNkfaheQ
- LZGW2oU+8H64HAI3dEERTRn4fIPE2DIH0o+L2Q2ztfdbZ7GbYisF+tnHZSf5BdVAvSdH
- x4SBQL6yNDB3AUi+sLx9U1eK+/4nq5Lq2Doh4FzFyqeE6+TYn5tnh01eduyibJMnguun
- hzPWoteCv38qBnvHvbX6iPSao/XBerVWtkTbe0qBBo3c9S0OSkiY0tsGg1M9lRbq70iJ
- yr22XbhKfKNrzZ2klm6RTyj62bFA+R0omfAUu/ZXlly/EB/DtxF56dOYC3nbvcITTos5
- Lauw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702341334; x=1702946134;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+/vsa3e2VAOoaqoS2s9JzZ1WzFbsWkisT8EBUBktAzw=;
- b=SBOPvqiaqcYWayYD/YyP/Ftsfek9ZhSZT5zN6Vs60M1JBRjH1Y+KoGFnwoR1C4M+cE
- ScV565ds6aJgbi2MixBesz1PnJayV0RvnNXiBSwDF5PkK5d9YdV9lZis9IsZUzBUBFqL
- qbulA6Fbn70P7roBgmSfUSdeHG3QcAlXtCcMsnbTWk0MKqb9o8ZiTs9Z9vTcoPXTx2q5
- Smrw2cVagHbg/Ry7ag2Ul90WH8Ppi0xiqoykJWd7h/s/LDw/5kwgx7QS1lN0TjjG2XmX
- RcA4tYq3b/UsYcpymLoEZgbuNATt7kLAXLE5QCDEDt/YvpsVLYj5SYJvvru7uHAb3cdn
- npQw==
-X-Gm-Message-State: AOJu0Yx70nwtDrsjSNdN+vvNzjbE4DiI2yk27AYSZyYxuMx6PIc0TBTR
- stX5hV2/UTI8bBBe740tIRfQ4TO2fBr1zs8qfAOwzltkInc=
-X-Google-Smtp-Source: AGHT+IGbZKKe1m4TL9zWonRiduO3TKuKv70s90cvgfS5mO7Gf6sg4x6r/Ec404uQ4j/rbEd+8yrBNlW2L4XnOeY0iKY=
-X-Received: by 2002:a17:906:6d06:b0:9b2:d554:da0e with SMTP id
- m6-20020a1709066d0600b009b2d554da0emr2941368ejr.69.1702341333484; Mon, 11 Dec
- 2023 16:35:33 -0800 (PST)
+ spf=none smtp.mailfrom=contact@jookia.org
+Date: Tue, 12 Dec 2023 11:53:50 +1100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1702342450;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type;
+ bh=l3iswTqPjGp6NqoONxxKB+TTObpsez70BihFVr0BV/s=;
+ b=MVzRNHQsjvDHMftnCBHMau/LsA32MVqkylJb+0yyFKbEnbdo5WE7XChZYnennpKyifxSYh
+ v3REypJnQS3Q2Ph5kfulBxAEFBxwbTNHBz1zbmNLyBwvTvgjw+My19EXfHZZtCfFrKv52F
+ /AIWDHLVB4e/s74plhWhS/8RUMi1iD8pcnk6L5VqpXRfSL/iOJe/CxcdqG2uwbpVYGmzEY
+ nNVkSnkq9fBQhlmFIpBQUF2bmEKHSC7gNR0PAZN3JceGCv+tLWatves0NIRheCcpMwJCEr
+ E8jUEkegyPxCl4AAx2D6G1FNadALmUNJMyZf+Oy0zgXz3vNnqIBGB4wo0uiyWQ==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+To: linux-sunxi@lists.linux.de, u-boot@lists.denx.de,
+ Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>
+Subject: T113 sunxi SPI NAND thoughts, feedback wanted
+Message-ID: <ZXevHkZvw-aTbsYV@titan>
 MIME-Version: 1.0
-References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> <877clq6odx.fsf@redhat.com>
-In-Reply-To: <877clq6odx.fsf@redhat.com>
-From: Gilles Talis <gilles.talis@gmail.com>
-Date: Mon, 11 Dec 2023 20:35:22 -0400
-Message-ID: <CAKcgs2x1FdvW0afXN=GGRc5nb8rhZtm70xzkURFeworcmTHPpg@mail.gmail.com>
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-To: Milan Zamazal <mzamazal@redhat.com>
-Cc: Peng Fan <peng.fan@oss.nxp.com>, uboot-imx@nxp.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Tue, 12 Dec 2023 04:27:20 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,116 +65,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Milan,
+Greetings sunxi and U-Boot friends!
 
-Le jeu. 7 d=C3=A9c. 2023 =C3=A0 11:09, Milan Zamazal <mzamazal@redhat.com> =
-a =C3=A9crit :
+Over the past five months I've managed to slog through getting a
+complete SPI NAND U-Boot and Linux setup running on my Mango Pi MQ.
 
-> Peng Fan <peng.fan@oss.nxp.com> writes:
->
-> > On 5/24/2023 3:21 AM, Gilles Talis wrote:
-> >> Add support for the Polyhex Debix Model A SBC board.
-> >> It is an industrial grade single board computer based on
-> >> NXP's i.MX 8M Plus.
-> >> Currently supported interfaces are:
-> >> - Serial console
-> >> - Micro SD
-> >> - eQOS and FEC Ethernet
-> >> imx8mp-debix-model-a.dts is taken from Linux 6.3.
-> >> Signed-off-by: Gilles Talis<gilles.talis@gmail.com>
-> >
-> > Reviewed-by: Peng Fan <peng.fan@nxp.com>
->
-> Do you know why the patch has been left (as far as I can see) without
-> further action?
->
-I don't know. I assume the maintainer is very busy or has missed it. I was
-planning to do a resend in the next few weeks.
+My tree is here, but I will be slowly trying to upstream my work over
+the next few months: https://github.com/Jookia/u-boot/commits/jookia_t113/
 
+It is based on master at the moment with the following patches:
+- SUNIV SPI NAND support in SPL
+  (https://lore.kernel.org/u-boot/8034158c-03ab-7488-6afa-a67f04264705@gmail.com)
+- UART1 and UART2 support for the Mango Pi MQ
+- SPI NAND device tree addition for my device
+- A new boot option: BOOT_DEVICE_SPINAND
+- SPL SPI booting on the T113 (superseeded by someone else)
+- SPI controller support for the T113 (superseeded by someone else)
+- MTD Kconfig requirement for UBI
+- spinand_ helper functions to support UBI in the SPL
+- UBI SPINAND support
+- UBI SPL FIT support
+- musb gadget suport (superseeded by someone else)
 
->
-> BTW, I applied it to current master, compiled approximately following
-> https://docs.u-boot.org/en/latest/board/nxp/imx8mp_evk.html and tried to
-> use it on Debix Model A.  U-Boot starts but cannot find the partition
-> table on the SD card:
->
->   U-Boot SPL 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00
-> +0000)
->   Normal Boot
->   WDT:   Started watchdog@30280000 with servicing every 1000ms (60s
-> timeout)
->   Trying to boot from BOOTROM
->   Boot Stage: Primary boot
->   image offset 0x8000, pagesize 0x200, ivt offset 0x0
->   NOTICE:  BL31: v2.2(release):rel_imx_5.4.70_2.3.6-0-g15e8ff164-dirty
->   NOTICE:  BL31: Built : 00:00:00, Jan  1 1980
->
->
->   U-Boot 2024.01-rc3-07226-g43f2873fa9-dirty (Jan 01 1980 - 00:00:00 +000=
-0)
->
->   CPU:   Freescale i.MX8MP[8] rev1.1 at 1200 MHz
->   Reset cause: POR
->   Model: Polyhex Debix Model A i.MX8MPlus board
->   DRAM:  2 GiB
->   Core:  83 devices, 22 uclasses, devicetree: separate
->   WDT:   Started watchdog@30280000 with servicing every 1000ms (60s
-> timeout)
->   MMC:   FSL_SDHC: 1, FSL_SDHC: 2
->   Loading Environment from MMC... *** Warning - bad CRC, using default
-> environment
->
->   In:    serial@30890000
->   Out:   serial@30890000
->   Err:   serial@30890000
->   Net:   eth1: ethernet@30bf0000 [PRIME]
->   Hit any key to stop autoboot:  2 <0x08><0x08><0x08> 1 <0x08><0x08><0x08=
->
-> 0
->   switch to partitions #0, OK
->   mmc1 is current device
->   Scanning mmc 1:1...
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   <0x1b>7<0x1b>[r<0x1b>[999;999H<0x1b>[6n<0x1b>8Card did not respond to
-> voltage select! : -110
->   No EFI system partition
->   No EFI system partition
->   Failed to persist EFI variables
->   Remove /soc@0/bus@30800000/ethernet@30be0000:phy-reset-gpios
->   BootOrder not defined
->   EFI boot manager: Cannot load any image
->   ,** No partition table - mmc 1 **
->   Couldn't find partition mmc 1:1
->   Card did not respond to voltage select! : -110
->   u-boot=3D>
->
-> When I use an old U-Boot blob provided by Debix, it boots fine from the
-> same SD card.  The SD card contains a Fedora aarch64 image with a msdos
-> partition table.
->
-> Do you know what could be wrong?
->
-Interesting. I don't have a clue yet,. but let me give it a try and come
-back to you. Where can I download the Fedora aarch64 image you mentioned
-above?
+This patch seems to be independently written for the T113 SPI support
+but looks the same as what I've done:
+https://lore.kernel.org/u-boot/20231111133432.755363-1-bigunclemax@gmail.com/
 
+The same with this USB fix:
+https://lore.kernel.org/u-boot/20230615190701.327852-1-CFSworks@gmail.com/
 
->
-> Regards,
-> Milan
->
-> Thanks!
-Gilles.
+I plan to add feedback and review to both these patches. Though USB is a
+separate subject, I would be interested to know what speeds people are
+getting over USB gadget on the T113. DFU seems to cap out at 70KiB/s,
+much lower than SSH in Linux.
+
+Anyway, talking in IRC and reading patches on the mailing list, it seems
+there's a little lack of direction for SPI NAND support in U-Boot.
+Particularly around how to integrate it alongside existing NAND support
+and handling bad blocks.
+
+I'd like to first talk about the boot device situation. It works like
+this:
+
+- BOOT_DEVICE_SPI means SPI NOR memory
+- BOOT_DEVICE_NAND means parallel NAND memory
+- BOOT_DEVICE_ONENAND means OneNAND memory
+- drivers/mtd/spi uses drivers/spi/spi-mem
+- drivers/mtd/nand/spi uses drivers/spi/spi-mem
+- drivers/spi/spi-mem uses drivers/spi/spi-sunxi
+- common/spl/spl_spi uses drivers/spi/spi-mem and BOOT_DEVICE_SPI
+- common/spl/spl_nand uses mtd/nand/raw and BOOT_DEVICE_NAND
+- common/spl/spl_onenand uses drivers/mtd/onenand and BOOT_DEVICE_ONENAND
+- common/spl/spl_ubi uses drivers/mtd/nand/raw or drivers/mtd/onenand
+  and either BOOT_DEVICE_NAND or BOOT_DEVICE_ONENAND
+- drivers/nand/raw has a sunxi NAND and sunxi NAND SPL driver
+- arch/arm/mach-sunxi/spl_spi_sunxi implements its own SPI loader
+
+A quick grep shows the following custom SPL_LOAD_IMAGE_METHODs in arch:
+
+arch/arm/mach-sunxi/spl_spi_sunxi.c:SPL_LOAD_IMAGE_METHOD("sunxi SPI", 0, BOOT_DEVICE_SPI, spl_spi_load_image);
+arch/x86/cpu/apollolake/spl.c:SPL_LOAD_IMAGE_METHOD("Mapped SPI", 2, BOOT_DEVICE_SPI_MMAP, rom_load_image);
+arch/x86/cpu/apollolake/spl.c:SPL_LOAD_IMAGE_METHOD("Fast SPI", 1, BOOT_DEVICE_FAST_SPI,
+
+Looking closer at the NAND APIs SPL uses, it calls the following
+functions and defines:
+
+nand_init();
+nand_deselect();
+int nand_spl_load_image(uint32_t offs, unsigned int size, void *dst);
+int nand_spl_read_block(int block, int offset, int len, void *dst);
+int onenand_spl_read_block(int block, int offset, int len, void *dst);
+int onenand_spl_load_image(uint32_t offs, uint32_t size, void *dst);
+BOOT_DEVICE_NAND
+BOOT_DEVICE_ONENAND
+CONFIG_SYS_ONENAND_PAGE_SIZE
+CONFIG_SYS_NAND_U_BOOT_OFFS
+CONFIG_SYS_NAND_BLOCK_SIZE
+CONFIG_SYS_NAND_PAGE_SIZE
+CONFIG_SPL_SPI_SUNXI_NAND_ASSUMED_PAGESIZE (used by SUNIV NAND patch)
+
+In the SUNIV NAND patch there was a question of whether to add a
+device-specific BOOT_DEVICE. I think the answer to that heavily depends
+on whether the current OneNAND/NAND separation makes sense. The APIs are
+basically the same, just with different implementations. The only thing
+the BOOT_DEVICE_ does here is indicate that there is a distinct boot
+ROM option and that we have booted from it. This disambiguates which
+NAND we would be using on sunxi: Parallel or SPI.
+
+In my patches I went ahead and added a new SPI NAND API:
+
+spinand_init();
+spinand_deselect();
+spinand_spl_read_block(int block, int offset, int len, void *dst);
+BOOT_DEVICE_SPINAND
+CONFIG_SPL_SPINAND_PAGE_SIZE
+CONFIG_SPL_SPINAND_BLOCK_SIZE
+(I removed the SUNIV NAND config)
+
+I implemented this in the custom sunxi loader code and made UBI use it.
+It might be better off as its own thing in drivers/mtd/nand/spi. Then
+perhaps arch/arm/mach-sunxi/spl_spi_sunxi could be refactored and moved
+to drivers/mtd/spi/, or removed entirely.
+
+I also want to note that with NAND there's also the question of what to
+do with bad blocks: The flash I use has 128KiB block sizes. The SPL is
+32KiB and U-Boot is 444KiB, needing 4 blocks.
+
+The boot ROM will try multiple pages. To quote
+https://linux-sunxi.org/Bootable_SPI_flash:
+
+"Some SoCs can also boot from SPI NAND flash. Here the BROM tries to
+read a valid first stage bootloader starting from page number 0, 32, 64,
+96, 128, 160, 192 and 224. It only reads the first 1024 bytes from every
+page. Since it simply sends the standard SPI NAND flash commands, it is
+a good idea to use a flash with ECC turned on by default and is
+performed by the flash itself, since errors cannot otherwise be
+corrected."
+
+In other words, it looks at 64KiB offsets from 0KiB to 448KiB. The ROM
+will put the offset in the upper byte like it does with MMC.
+
+For my solution I put the SPL at 0KiB, 128KiB, 256KiB and 384KiB. 
+I then created a 128MiB UBI partition with a 4MiB U-Boot partition and
+dumped the image there. UBI scans each erase block, so that's around
+65536 blocks for my UBI partition. I think?
+
+This works surprisingly well and doesn't seem to have a noticeable
+impact on boot despite U-Boot being shoved to the end of the NAND in my
+setup. I managed to set up fast mapping later but the naive approach
+here seems to work without any trouble.
+
+A smarter flash system could try to find a continous set of good blocks,
+flash U-Boot there and then flash an SPL pointing to it. But if you're
+using NAND you're probably going to be running UBI anyway for Linux, and
+the code for this is already here and works. Creating custom software
+for this that runs on the target for flashing seems like a pain.
+
+I'd like some feedback or discussion about what is the best soltuion
+here to go for. Maybe I'm missing something obvious?
+
+I'd also be interested in which patches from my tree would be a good
+start for contributing. I haven't sent any patches to U-Boot before and
+starting with a large refactoring probably isn't a good idea when I have
+some smaller patches. I might toss these up on the lists soon:
+
+- UART1 and UART2 support for the Mango Pi MQ
+- MTD Kconfig requirement for UBI
+- UBI SPL FIT support
+
+Thanks for your time,
+John.
