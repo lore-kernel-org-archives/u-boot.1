@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2A0C4332F
-	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 10:25:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26312C4332F
+	for <u-boot@archiver.kernel.org>; Tue, 12 Dec 2023 11:29:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29074877D9;
-	Tue, 12 Dec 2023 11:25:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 598CB877D6;
+	Tue, 12 Dec 2023 12:29:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="sS6kRrZt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZLf+YPuV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40539877D9; Tue, 12 Dec 2023 11:25:36 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4925D877D8; Tue, 12 Dec 2023 12:29:02 +0100 (CET)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 156C587682
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 11:25:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 244EA877D3
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 12:29:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702376729; x=1702981529; i=xypron.glpk@gmx.de;
- bh=SfRg9Tu239dWiTflYQS4ZDN/14hDJjG3m56/sVUaYjk=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=sS6kRrZt+xolKMwKZPwOfQ7MdRgC347dHYFqejy0LMD+6CewCdR0X7ecKuSSyg8g
- eTSsBCst+/FDtOg1shBH2H6YtMOze5hlwpUq39WpRQL7oz+VE2EX8GPcD4uz7Z9Q6
- XtdwUYVKN/uQudv52phJ3rd8ZEpQ/Puqhq85lJDW0S9NK9nYlvsDwxFjzWwJyGl5b
- 1cQ70OWu/bPoJMa1S+Hd/KQ0aJeeCRQdNESX/sPO4MHnLHyrKmncSCeOwVQQxDgbP
- g6B1ObmJyq4ncCpm/84zY+VGp2lkdBx+pSf1lWFP0/KG47oJya/XgDTKHohWjdth7
- 0mfhxOCF8L5//PhzXg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MhlGq-1rhuv31FYW-00dlPq; Tue, 12
- Dec 2023 11:25:29 +0100
-Message-ID: <d8b7fdf8-5ecf-4a0c-bbb2-9d5561cd5c16@gmx.de>
-Date: Tue, 12 Dec 2023 11:25:28 +0100
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-6d089bc4e1aso1560760b3a.0
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 03:29:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702380538; x=1702985338; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lDt/kpDpH/jXDX3hBGGN2ssXCs3/CtOaxRpn2kXfuZ8=;
+ b=ZLf+YPuVYFxuSnbiG4W5GU6KBGiZFveomRx4x98LtEiVGO1CXONtYY+34SkPlSD3XI
+ sq0gVGB9Q8577FsCZH4WMutIEnSR5GCfFEastsBusqgH0EcEzCNslLu9P9+71Ln1jnXn
+ 7cCf9kYzYcscoNQh/in8CJZvinV+nQ7jZlLXpwgprLkTNvW9H6fHLcQRG6PKZXCvd6NG
+ GBRFXcaLi8dyI2fTf6xDLga7u1oMVT+xsUKl4oYmi75K5fZYuOJNtK1q/8I+A8XCM6O6
+ nWfY0A7ze5/KlIiSK9D728hWztuiN3LELYcJOXF2rfpo3daUrK7V1Fh1GmwYCn++JQR3
+ 3JFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702380538; x=1702985338;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lDt/kpDpH/jXDX3hBGGN2ssXCs3/CtOaxRpn2kXfuZ8=;
+ b=sbXaaRvJMr5mDzrwg3vrmmciBW81bR90toIEPHit1t6vOPg/Mj6VNbXxo3Ky3ZafUW
+ OgBKIqFqJ882j892XXPC/ArptF1nE0x6O53d/wwNO/lxQszA23LEB18Cjqn6v6EH8+FH
+ iYujbVohDBvmQJk0Nwc3zZ7yddjkzlU1s/nRJfX08bzaPS8JOM4tBWowZ1ejdeJ9Di0N
+ M77NvTA0+ystSuEFWKMd+jrEee1hPkU/MevXqN0momiTJGDFZ08/43/DgMu8kCVOltzf
+ h+xqKxc/SLAjOc50kIYmnWRt6e+f7wAyHbUHmWGMMbPv7NBd4rjngyla08WCnZiWH4eL
+ 6/MA==
+X-Gm-Message-State: AOJu0YxS6mCTdHf17btkUpJoW2AaqQIAKGKpGve4hZsyE3S1lQ6EZfFV
+ LscIvVc4s5yjfbUx7W8X1JFsezzzAKTh2guU
+X-Google-Smtp-Source: AGHT+IGPqDZdiBws8oT3G4kyuGOsikQh9FPeTk9sXJ2/165aHVwj7FKAKMi4OGxpSRc8CtIw7FWadQ==
+X-Received: by 2002:a05:6a00:6518:b0:6ce:f51f:2ea8 with SMTP id
+ hc24-20020a056a00651800b006cef51f2ea8mr4383373pfb.21.1702380538317; 
+ Tue, 12 Dec 2023 03:28:58 -0800 (PST)
+Received: from hdebian.corp.toradex.com ([201.82.41.210])
+ by smtp.gmail.com with ESMTPSA id
+ kq13-20020a056a004b0d00b006c3069547bfsm7877663pfb.79.2023.12.12.03.28.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 12 Dec 2023 03:28:57 -0800 (PST)
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: u-boot@lists.denx.de,
+	Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH v1] board: colibri_imx7: fix emmc detection
+Date: Tue, 12 Dec 2023 08:28:15 -0300
+Message-ID: <20231212112815.7880-1-hiagofranco@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] doc: printf() codes: Add bitmap format specifier
-Content-Language: en-US
-To: lukas.funke-oss@weidmueller.com
-Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
- <lukas.funke@weidmueller.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- u-boot@lists.denx.de
-References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
- <20231212085236.2730768-5-lukas.funke-oss@weidmueller.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231212085236.2730768-5-lukas.funke-oss@weidmueller.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:dDBEllxoQErxpoiK2Q4ToSbL1AG/NH9rBle0W7EM4WF6U8i7zMl
- Osenhwk38rebHJ6UUTuw0Z5JeZtYu118t9g1H2a4RdiCUgZ5i92jzqxN9tVLj4eyoPp2F5s
- Iripmsl+dM3WQC1V7tPBVTEbyhFp5IPeX9h+TKtptgeD6HNmTkGbVrKD+lm+lhCSH5RqNvX
- FU5hHlerQ+2ddwPdeAwxA==
-UI-OutboundReport: notjunk:1;M01:P0:eo5Dt4ORwAs=;EiupoDHCoYCIEmUTYXMxzXLrF80
- 3qF6fLJThRlG3D2xWh4MHAQfDkMGOA9Yz7OtS/SNTxGtDMtBgITm9CLaajk7UKu3IwC8AY9sl
- jefuynQ3JIrXazvybkWBz6II7xeWZUZR3+RihFX3aj91Cdha9eab2RrPV0IErKKsl1aFjmNBI
- sp13hhZkA+TFKHOEdfECqOk0z3emaJTumY2P+62inMKvbBscdmuROcUUDCaMApoLS4swa93Go
- Z0wjBFtbaZ7NaBM/XhV7Vt8wIwV/WQ8ig6b13WtZqjZN9aeblhb1um3ENs8uzykLQCvnYcBS5
- Je8+DjWyjjDcbl3iAlZnHmHdVRGTYCfRkttUeQp6SwL/VClhpxr1d36eN2H9TMveIGmWpHwaD
- 6RmfTf34baBzt4kTTzyCOSS1YOzcn0XfHogA9bg9ijqz2yiyPG0++njK0Cgryp9r20uslO9oW
- I7ZHY+c/YiZOvlWexgfgVPFEq51vv++qF6rHDae4eKODSauYXutaIht0NpqLKEVpuINYRwt3K
- AgOp3XH/NYJtkQ5usWVeq+HfZypHiMCSp6opkSOFae82AHGRWbn/B/6NaT9fQp8XPZvnuAyYG
- /v36va9sWEu0gCmnuIKfFBT9Wmv9ykncs9ygiSUhBF2S2hj9lPCWEbM6iKs7L9URltzpoHzma
- 3ZynCkcGcGrC493nn5p4qLkycnlqEcpq1GWWlMqBwS0K/rXvOtbVbCjca5Xp63VpU5+sU72vU
- Wayjufo8hyWq5nXXzBHpxDhYv7kFalixDwzvF0bc5EB1cgWp0nE34Z9gG2WYKPhArdUKjgsLU
- 1cSkekgQ51AeOFmJp/zXVJKVF8EkE/8LHqK4KMt6rhSPfw8HyT1ItdO266jHMgHCuT7a4zJvL
- 1mgyHnFvTHZtWzWJpvzO1SQ9CSVGv9Zooz3Gqc0H3l+TU+vb5GCpDxM+qyJui3U2Ml4WTpiRk
- Xrma6bQ/mv6fkl5LFVstTysX1uw=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,62 +89,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12.12.23 09:52, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
->
-> Add '%*pb[l]' printf format specifier as descriped in [1].
->
-> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
->
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> ---
->
-> (no changes since v1)
->
->   doc/develop/printf.rst | 6 ++++++
->   1 file changed, 6 insertions(+)
->
-> diff --git a/doc/develop/printf.rst b/doc/develop/printf.rst
-> index 99d05061b1..c3537b1796 100644
-> --- a/doc/develop/printf.rst
-> +++ b/doc/develop/printf.rst
-> @@ -165,6 +165,12 @@ Pointers
->   	* phys_size_t
->   	* resource_size_t
->
-> +%*pb, %*pbl
-> +        prints bitmap and its derivatives such as cpumask and nodemask.
-> +        '%*pb' outputs the bitmap with field width as the number of bit=
-s
-> +        and '%*pbl' outputs the bitmap as range list with field width a=
-s
-> +        the number of bits.
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-This looks like '*' has to added as character. I would leave it away as
-you can always have %<width>.<precision><format specifier>. '*' is only
-needed if you want to path the width as extra parameter.
+Later versions of Colibri iMX7D V1.1B modules use a "new" SoC fusing. The
+difference lies in whether we enable the boot ROM to use the eMMC reset
+signal. Depending on the SoC fuse, the boot ROM configures this pin as a
+GPIO output to drive the reset signal. Our eMMC vs NAND detection
+currently only sets that signal to a GPIO without explicitly setting any
+direction. Previously, by default, it was set as an input. As the boot ROM
+now configures it as an output, we receive a value of zero instead of one,
+indicating the absence of the pull-up on eMMC modules.
 
-With the given description I would not have expected an output like
-'2,5-6' for the number 0x64. Please, add separate entries for %pb and
-%pbl and provide examples.
+To fix this, set the SION bit, allowing the reading back of the value
+even if it is configured as an output by the boot ROM. It's important to
+note that with the new SoC fusing, we now read back what the boot ROM
+drives rather than the real value caused by the pull-up resistor. However,
+if it were ever driven low, the eMMC would permanently be reset.
 
-=3D> setexpr a fmt '%320pb' 100; echo $a
-0000555a,00000000,00000000,00000000,00000000,00000080,00007fff,f0094f48,00=
-000000,00000064
-=3D> setexpr a fmt '%3200pb' 100; echo $a
-`%3200pb': invalid format
-0000555a,00000000,00000000,00000000,00000000,00000080,00007fff,f0094f48,00=
-000000,00000064
+In addition, remove hard-coded variant in the eMMC build case as since the
+commit 0c39564d0281 ("toradex: colibri_imx7: Enable nand/emmc detection
+and set boot variant") will anyways always get overridden by the detection
+routing in board code.
 
-Nothing in the documentation makes me assume that width 320 should work
-and 3200 should not.
+Fixes: 0c39564d ("toradex: colibri_imx7: Enable nand/emmc detection and set boot variant")
+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+---
+ board/toradex/colibri_imx7/colibri_imx7.c | 6 +++---
+ include/configs/colibri_imx7.h            | 1 -
+ 2 files changed, 3 insertions(+), 4 deletions(-)
 
-Best regards
-
-Heinrich
-
-> +
->   %pD
->           prints a UEFI device path
->
+diff --git a/board/toradex/colibri_imx7/colibri_imx7.c b/board/toradex/colibri_imx7/colibri_imx7.c
+index f0356af008..3e7c5d64c3 100644
+--- a/board/toradex/colibri_imx7/colibri_imx7.c
++++ b/board/toradex/colibri_imx7/colibri_imx7.c
+@@ -66,7 +66,7 @@ int dram_init(void)
+ }
+ 
+ static iomux_v3_cfg_t const flash_detection_pads[] = {
+-	MX7D_PAD_SD3_RESET_B__GPIO6_IO11 | MUX_PAD_CTRL(FLASH_DETECTION_CTRL),
++	MX7D_PAD_SD3_RESET_B__GPIO6_IO11 | MUX_PAD_CTRL(FLASH_DETECTION_CTRL) | MUX_MODE_SION,
+ };
+ 
+ static iomux_v3_cfg_t const uart1_pads[] = {
+@@ -193,9 +193,9 @@ int board_init(void)
+ 	gd->bd->bi_boot_params = PHYS_SDRAM + 0x100;
+ 
+ 	/*
+-	 * Enable GPIO on NAND_WE_B/eMMC_RST with 100k pull-down. eMMC_RST
++	 * Enable GPIO SION on NAND_WE_B/eMMC_RST with 100k pull-down. eMMC_RST
+ 	 * is pulled high with 4.7k for eMMC devices. This allows to reliably
+-	 * detect eMMC/NAND flash
++	 * detect eMMC vs NAND flash.
+ 	 */
+ 	imx_iomux_v3_setup_multiple_pads(flash_detection_pads, ARRAY_SIZE(flash_detection_pads));
+ 	gpio_request(FLASH_DET_GPIO, "flash-detection-gpio");
+diff --git a/include/configs/colibri_imx7.h b/include/configs/colibri_imx7.h
+index 03f8ed1478..7a9f4afe7d 100644
+--- a/include/configs/colibri_imx7.h
++++ b/include/configs/colibri_imx7.h
+@@ -101,7 +101,6 @@
+ 	UBI_BOOTCMD
+ #elif defined(CONFIG_TARGET_COLIBRI_IMX7_EMMC)
+ #define MODULE_EXTRA_ENV_SETTINGS \
+-	"variant=-emmc\0" \
+ 	EMMC_ANDROID_BOOTCMD
+ #endif
+ 
+-- 
+2.43.0
 
