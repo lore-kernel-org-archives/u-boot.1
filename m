@@ -4,101 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E18C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:03:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24008C4167D
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:07:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80F0386ECA;
-	Wed, 13 Dec 2023 21:02:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A09F3807E2;
+	Wed, 13 Dec 2023 21:07:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cZaeBMGj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AkpzfZ9o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C74587646; Wed, 13 Dec 2023 21:01:27 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 494F6877E6; Wed, 13 Dec 2023 21:07:33 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFF3F8749F
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:01:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28FF8807E2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-dbcc63b7c68so1695976276.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:01:24 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-28ab6f0944bso435784a91.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:07:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702497683; x=1703102483; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4qx+hZ2dW2DhzBWV9ah+UIb3u7WuI0mqLzlIVuMRmEk=;
- b=cZaeBMGjCA3dgA7M/g9BFqFLsEIa4oI0tKrxIAKQGdVYic4Et4VvROTb8PwtDzE8jt
- nkskuU0d4cqg65g1cQBDaEyFV95EJ5rSQ/89vwA+wCWH+Wx1NsbsJHZiwiM9P6bYYmWX
- 4ILz51YinOImypsgiM2YNui7VGCn7wcMwBgJw=
+ d=gmail.com; s=20230601; t=1702498049; x=1703102849; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=SOLJ8pBPCrLBqGRKxuryStu9KURNIy//374XuzwxMpk=;
+ b=AkpzfZ9oGXPKPN72lUjQGwpQCOEYgF1jxlqnxPXm74GA/324YE18Raw81+JTa9sKMO
+ eiVj+uJl4POApZFpZwHQn9UCjvAedp0c5HXOFOyaiBspr5cfONWkFeWuU0PZk1m0FMh3
+ /I2f2u7J4QAxvOLYT3uE54Br7Vj5KgiA6PVSAzpRRfwRdErbWt06wRXn3gDUhu+gy62p
+ oPuZ/Triaq0zWIvAQHyfQBCr2dOR462A23BzsoZ5sI+y2QILOh6bb7iHjiiL9kdzw7LL
+ KMPrfF52shBf8mcb+yh78RGJItWO4YzWRAMQ13EQjx2SRk28bD6O+M6BkMA1D7BATyPd
+ IYxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702497683; x=1703102483;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4qx+hZ2dW2DhzBWV9ah+UIb3u7WuI0mqLzlIVuMRmEk=;
- b=HANyaanudsDHutGAM4kDztUvcL38tOfH97j9yhhQRkGLWVEUB0z3GpIQT+1iz+CWyT
- SLQzwmDQ8zEgPSvPw/KNTcLk32Rl/ApwChtqTMRb+xLK+jShgaifsGYsOpQ81UGKajWh
- MkxeE058aPfLqSB+0KjI/pEjw0EuP4MRkfSwrTwqceIMzcky3Bi5qU7q7ip9MlxZn2t9
- ZcKlEYd9Iu3XFS9S8v+zDiX4xW7brNJRVMc3x/DnfO6kDImM8Vc4/8BIVybJhiejXwMG
- 1sXEKERU7y14+ywgjgTpqWxIwJQsQksXZx7i25xHEkokqlD1/wG/HneJCrq36j9vxNZQ
- DmaQ==
-X-Gm-Message-State: AOJu0YxXjvOnc5LJ74YazwIr6NJ9GkDwzlVdPFkRq3Znmofj7BIuPagK
- B7xriRVs0YdlKgTvYJXkgSqLNw==
-X-Google-Smtp-Source: AGHT+IF6Js/+8Vnspj2WKBMmkNORaO4jxP7E1Zj/Fa4Z7XSCvfnlPXXqryLm5rna5+dsGZbmAXZyKg==
-X-Received: by 2002:a05:6902:1366:b0:dbc:b14e:4774 with SMTP id
- bt6-20020a056902136600b00dbcb14e4774mr3643230ybb.40.1702497683742; 
- Wed, 13 Dec 2023 12:01:23 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-6400-d78a-ada8-3cce-fa3d.res6.spectrum.com.
- [2603:6081:7b00:6400:d78a:ada8:3cce:fa3d])
- by smtp.gmail.com with ESMTPSA id
- w3-20020a5b05c3000000b00d72176bdc5csm4176069ybp.40.2023.12.13.12.01.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 12:01:23 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Albert Aribaud <albert.u.boot@aribaud.net>, 
- Alexander Gendin <agendin@matrox.com>, Baruch Siach <baruch@tkos.co.il>, 
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Evgeny Bachinin <EABachinin@sberdevices.ru>, 
- Fabio Estevam <festevam@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Jerry Van Baren <vanbaren@cideas.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Linus Walleij <linus.walleij@linaro.org>, 
- =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Qu Wenruo <wqu@suse.com>, Safae Ouajih <souajih@baylibre.com>, 
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>, 
- Stefano Babic <sbabic@denx.de>, 
- Stephen Carlson <stcarlso@linux.microsoft.com>, 
- This contributor prefers not to receive mails <noreply@example.com>, 
- Tim Harvey <tharvey@gateworks.com>, 
- Tobias Waldekranz <tobias@waldekranz.com>, linux-btrfs@vger.kernel.org
-In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
-References: <20231118210547.577026-1-sjg@chromium.org>
-Subject: Re: [PATCH v3 00/32] bootm: Refactoring to reduce reliance on
- CMDLINE (part A)
-Message-Id: <170249768190.2729322.17736686943926786117.b4-ty@konsulko.com>
-Date: Wed, 13 Dec 2023 15:01:21 -0500
+ d=1e100.net; s=20230601; t=1702498049; x=1703102849;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SOLJ8pBPCrLBqGRKxuryStu9KURNIy//374XuzwxMpk=;
+ b=qkPuNAYJ9bk3KQCSGufpmBH9NbHtoF/Gn8RVvdlZTpZ5FOqfaWtBBpYsVJAtQ5S6EC
+ hG4djWyqWsi47Tnyha+xyep2PvPcU5r8XZNE8IJJ7Gshhf1rPrE8dCv//PA+AuL0kR7M
+ pCCI3ABrfAY8r4iORPxwsDD3tFRhffTvjPyLKncWRJipVp9Twt5wKHze+QMb8ixFCo/J
+ wd42nistCIeeDyPCbUMOJsQ6rsnmhX0iBQwiPz/5YxxHq6Pn6vBCM2MJAM05mcCGtdQH
+ fWll4mV+fVPhgSI37E/Hi3zfMAC5xhABk6RYHGkKhR91kvRLfngDO33oeOrGVfCnuFg1
+ DNrw==
+X-Gm-Message-State: AOJu0YzOQmcrotA/BUcSxphBZBTIKQiy44nfxSKTq6MOO5h6qIUQ0pIF
+ n6z1356G1xBeLgrVNnfHNyTqRKSSRN42Av/f8wQ=
+X-Google-Smtp-Source: AGHT+IEBh2oCGpbIdI6YH1RAkDkG9tqGnj6nQgNcW80yS/Xwqn56bRQlueNHa7qeQ1VVqYexIjcQ7GCaLngfy+DklXg=
+X-Received: by 2002:a17:90a:7046:b0:28a:f305:e7c0 with SMTP id
+ f64-20020a17090a704600b0028af305e7c0mr1574357pjk.4.1702498049318; Wed, 13 Dec
+ 2023 12:07:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
-X-Mailman-Approved-At: Wed, 13 Dec 2023 21:02:58 +0100
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 13 Dec 2023 17:07:17 -0300
+Message-ID: <CAOMZO5BwEDh9NvQB8ht4bPq0G1EkYxaKXJPgFk7xpe6cjD4V7A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] drivers: rtc: add pcf2131 rtc driver
+To: Joy Zou <joy.zou@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Chris Packham <judge.packham@gmail.com>,
+ peng.fan@nxp.com, saproj@gmail.com, Stefano Babic <sbabic@denx.de>,
+ Simon Glass <sjg@chromium.org>, 
+ U-Boot-Denx <u-boot@lists.denx.de>, dl-uboot-imx <uboot-imx@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,22 +85,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Nov 2023 14:04:48 -0700, Simon Glass wrote:
+Hi Joy,
 
-> It would be useful to be able to boot an OS when CONFIG_CMDLINE is
-> disabled. This could allow reduced code size.
-> 
-> Standard boot provides a way to handle programmatic boot, without
-> scripts, so such a feature is possible. The main impediment is the
-> inability to use the booting features of U-Boot without a command line.
-> So the solution is to avoid passing command arguments and the like to
-> code in boot/
-> 
-> [...]
+In Linux, the pcf2131 rtc is handled by the pcf2127 driver.
 
-Applied to u-boot/next, thanks!
-
--- 
-Tom
-
-
+I suggest we do the same in U-Boot. Thanks
