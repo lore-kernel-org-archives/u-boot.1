@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74238C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F35D8C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:17:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7482F877F8;
-	Wed, 13 Dec 2023 04:16:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 987818781D;
+	Wed, 13 Dec 2023 04:17:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rEkUgQ+0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fYtvemJY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62F10876CC; Wed, 13 Dec 2023 04:16:54 +0100 (CET)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
+ id 900A787800; Wed, 13 Dec 2023 04:16:57 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54A4F871F0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B2B0877E5
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:16:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-5906988ab8dso2722924eaf.0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:16:50 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5cbcfdeaff3so65057147b3.0
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:16:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702437409; x=1703042209; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702437412; x=1703042212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ej0oeHj+1Cf+AC7xJe4DMYSt4r96r/SdsJEDthrCTPA=;
- b=rEkUgQ+0YnNY4U3tBnb0a241FTpNgBUinyUHoKkzim111iPVjyQ6SOli+Tzbt8L/wA
- L0o6KHxlGmmlT4+RvgU0gh3nOp7aQF2FOL8gGL1jhxEhOASml2Dxl84iAY4cN9OLX8sW
- MWyugC567vazreRl+H6QrhzT/ZE2KmrtgKPbloNoKVyqY6hExvddGskJEViprzl+6g3A
- xU4otne6rI+PjkSeg0Mb3i07vUHpzt78IFK8ThOH6SR5A8pP7LjG1IyOPoYH5Ck+KBnW
- NKp/gVaEUoNcZgYiTW9SVKiOmDgPJr8lg+xNRrXy2vkVxnwp+8uPVlrGq91+vkNe6Thh
- zI0w==
+ bh=sJKNTzeYWThMcQQrSObBQIb6N2kP9i4dEZLeoiFCyKE=;
+ b=fYtvemJYqz7+9aA/5jivEJJUqzxjkvAhyZ+iod2qnTN8N+45AYyd3IdLuAlrykHVzL
+ F8dqs/CeYYIIiOsVPmDsWglAbQPcpoVmLmJt9e+QKo1NCycov0f887DJaJmTVQhj7/EW
+ GiUBU75xx+PsQ3XNCArIO4WaRt4JGJgiW+wgp2FGzYkEKfV4DN0ghthTy+EOhqoNHZ5G
+ 3Qm0aNRju1Ty23MNGGMmofGy9vpv7xc5BBbuADWhrcaI+DPHjLLq/cK+d+lhM1aIztCW
+ UPN8MVD98vu7uhCJnZ0G9qV72LKZUXL4xXTzjMOrCBYlW3aY5ZQq6LztjF9XQYqznXAs
+ Bkew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702437409; x=1703042209;
+ d=1e100.net; s=20230601; t=1702437412; x=1703042212;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ej0oeHj+1Cf+AC7xJe4DMYSt4r96r/SdsJEDthrCTPA=;
- b=JjwyUpGBd3sD1g/yJTtQ+bURiXSG8Dh0PcYU9rs+Po+65R808JvOK73Z3gCCtdkW3j
- xidpdHw+MMrQ5Zh668fI5H3eabj3XuWudq+ZrBixB8ubn2GfkzK57kOj1595a893j0iQ
- qALkfqn5stJZtO+4aM7zwC3Y+lhml0mhR3CwHNiCs4Hxrn9300ScK4GF/Na6xi3A656B
- lAqdh7RZc0VUvsNv4c5qj/+7uxa/o26rscoQ6Wppfx3N9AFl5Za+PasJBOSzb1iYTjIU
- CJEBQxL1lJ5+Vv0cLgRxk3rvWI5+/GDbw6A3vUkePvEIrKTFPI5qp1YmfipavDgT74d2
- iNmQ==
-X-Gm-Message-State: AOJu0YzyqPaxv/TBS7pYrcdL+CKm1F5FNRMI97m+097hAvPTUQyv+IPR
- 3rNjf5nNdY3teKW207L0F5xoPJ4thlnBVxJzhbQ=
-X-Google-Smtp-Source: AGHT+IGhvjMI0eCOLdKZEPiWKT7F4U6SyAFKPbfJ9kGryIOBOFfP4MA1bNtnV1QENeZ45l1gHlNTTQ==
-X-Received: by 2002:a05:6870:171c:b0:1fb:2e4:12ff with SMTP id
- h28-20020a056870171c00b001fb02e412ffmr4563102oae.1.1702437408990; 
- Tue, 12 Dec 2023 19:16:48 -0800 (PST)
+ bh=sJKNTzeYWThMcQQrSObBQIb6N2kP9i4dEZLeoiFCyKE=;
+ b=IrX+nHzHbJbGmdd2TZWElebIO+rY3/vYJzvt4grTlAMqim8JHU4PIkW6gTNwZvwKRX
+ TmNuYBYCTAOrK7nyBBCO+YnX1dRfua8Tde+H/lrOzomq7Ur/YDiNlSRTveEDKs+RQf/c
+ HZw/GuMPedRiXmMPMW4ZA6eCQkvlrfrTRSTUNZuSP2BDTHMxlcsHv7cXTM7hQjUxylFt
+ CwTfRoNcRorr0aVH8/FmbCEHc4qEu6BxOtAXV0d68u86NrJDJ3oOwAYDGByksKpyK0YG
+ 99lT+kB2EKV5wL98DJkPTV9iLLytgeCL2PuATFikO1xCpv/BE+YuU52e7BJGWHRAUOPl
+ 25hw==
+X-Gm-Message-State: AOJu0YwnJWR94YsICrpp/5UypS1mOJm55Sbrn6ybbBZVUj7xM7KmHtn2
+ gRuTL6KA1jLOTaBpdiUB1udcEw==
+X-Google-Smtp-Source: AGHT+IGq6mYtfrxJ6GI+qJulpdwjabH07xsQKcIbr0pzLPzWy/X0mP+1tS9FWwEX/knklfA9tSKu4g==
+X-Received: by 2002:a81:52c8:0:b0:5e2:7e6d:31c6 with SMTP id
+ g191-20020a8152c8000000b005e27e6d31c6mr812776ywb.93.1702437411879; 
+ Tue, 12 Dec 2023 19:16:51 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- b24-20020a9d7558000000b006d879d8a4d8sm2567144otl.78.2023.12.12.19.16.48
+ m18-20020a9d6ad2000000b006d7e23c58b6sm2578842otq.38.2023.12.12.19.16.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Dec 2023 19:16:48 -0800 (PST)
+ Tue, 12 Dec 2023 19:16:51 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  u-boot@lists.denx.de
-Subject: [PATCH 02/13] dt-bindings: soc: samsung: Add Exynos PMU
-Date: Tue, 12 Dec 2023 21:16:35 -0600
-Message-Id: <20231213031646.28828-3-semen.protsenko@linaro.org>
+Subject: [PATCH 05/13] soc: samsung: Add Exynos PMU driver
+Date: Tue, 12 Dec 2023 21:16:38 -0600
+Message-Id: <20231213031646.28828-6-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231213031646.28828-1-semen.protsenko@linaro.org>
 References: <20231213031646.28828-1-semen.protsenko@linaro.org>
@@ -92,111 +92,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add bindings documentation for Exynos PMU hardware block. It was taken
-from Linux kernel [1], but minimized and modified to reflect features
-that will be actually supported in U-Boot soon. For example,
-the "samsung,uart-debug-1" property is not available in Linux kernel
-bindings and only present in U-Boot.
+Add basic Power Management Unit (PMU) driver for Exynos SoCs. For now
+it's only capable of changing UART path in PMU, which is needed for
+E850-96 board. The driver's structure resembles the exynos-pmu driver
+from Linux kernel, and although it's very basic and slim at the moment,
+it can be easily extended in future if the need arises.
 
-[1] Documentation/devicetree/bindings/soc/samsung/exynos-pmu.yaml
+UCLASS_NOP is used, as there are no benefits in using more elaborate
+classes like UCLASS_MISC in this case. The DM_FLAG_PROBE_AFTER_BIND flag
+is added in bind function, as the probe function must be always called
+for this driver.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- .../soc/samsung/exynos-pmu.yaml               | 85 +++++++++++++++++++
- 1 file changed, 85 insertions(+)
- create mode 100644 doc/device-tree-bindings/soc/samsung/exynos-pmu.yaml
+ drivers/soc/samsung/Kconfig      |  10 +++
+ drivers/soc/samsung/Makefile     |   1 +
+ drivers/soc/samsung/exynos-pmu.c | 102 +++++++++++++++++++++++++++++++
+ 3 files changed, 113 insertions(+)
+ create mode 100644 drivers/soc/samsung/exynos-pmu.c
 
-diff --git a/doc/device-tree-bindings/soc/samsung/exynos-pmu.yaml b/doc/device-tree-bindings/soc/samsung/exynos-pmu.yaml
+diff --git a/drivers/soc/samsung/Kconfig b/drivers/soc/samsung/Kconfig
+index ffb87fe79316..737b7ca8cd19 100644
+--- a/drivers/soc/samsung/Kconfig
++++ b/drivers/soc/samsung/Kconfig
+@@ -5,6 +5,16 @@ menuconfig SOC_SAMSUNG
+ 
+ if SOC_SAMSUNG
+ 
++config EXYNOS_PMU
++	bool "Exynos PMU controller driver"
++	depends on ARCH_EXYNOS
++	select REGMAP
++	select SYSCON
++	help
++	  Enable support for system controller configuration driver. It allows
++	  one to configure system controller registers (e.g. some register in
++	  PMU syscon) by providing register's offset, mask and value.
++
+ config EXYNOS_USI
+ 	bool "Exynos USI (Universal Serial Interface) driver"
+ 	depends on ARCH_EXYNOS
+diff --git a/drivers/soc/samsung/Makefile b/drivers/soc/samsung/Makefile
+index 833ac073fbfa..0eb3ed8353b0 100644
+--- a/drivers/soc/samsung/Makefile
++++ b/drivers/soc/samsung/Makefile
+@@ -1,3 +1,4 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
++obj-$(CONFIG_EXYNOS_PMU)	+= exynos-pmu.o
+ obj-$(CONFIG_EXYNOS_USI)	+= exynos-usi.o
+diff --git a/drivers/soc/samsung/exynos-pmu.c b/drivers/soc/samsung/exynos-pmu.c
 new file mode 100644
-index 000000000000..c3e95c33b01d
+index 000000000000..233ad4a908f5
 --- /dev/null
-+++ b/doc/device-tree-bindings/soc/samsung/exynos-pmu.yaml
-@@ -0,0 +1,85 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/soc/samsung/exynos-pmu.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
++++ b/drivers/soc/samsung/exynos-pmu.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2023 Linaro Ltd.
++ * Author: Sam Protsenko <semen.protsenko@linaro.org>
++ *
++ * Exynos PMU (Power Management Unit) driver.
++ */
 +
-+title: Samsung Exynos SoC series Power Management Unit (PMU)
++#include <dm.h>
++#include <errno.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <linux/bitops.h>
++#include <linux/err.h>
 +
-+maintainers:
-+  - Sam Protsenko <semen.protsenko@linaro.org>
++#define EXYNOS850_UART_IO_SHARE_CTRL	0x0760
++#define SEL_RXD_AP_UART_SHIFT		16
++#define SEL_RXD_AP_UART_MASK		GENMASK(17, 16)
++#define SEL_TXD_GPIO_1_SHIFT		20
++#define SEL_TXD_GPIO_1_MASK		GENMASK(21, 20)
++#define RXD_GPIO_1			0x3
++#define TXD_AP_UART			0x0
 +
-+description: |+
-+  PMU block controls the power and operation states of Exynos SoC. It contains
-+  registers for changing the state of next features::
++struct exynos_pmu {
++	struct udevice *dev;
++	const struct exynos_pmu_data *pmu_data;
++	struct regmap *regmap;
++};
 +
-+  - Local power control. Exynos SoCs have various power domains, and it's
-+    possible to turn them on and off independently, using corresponding
-+    registers in PMU block
-+  - System-level power control. That allows putting the system into power-down
-+    modes (sleep) by turning off the power for most of the domains
-+  - Miscellaneous PMU related features
++struct exynos_pmu_data {
++	int (*pmu_init)(struct exynos_pmu *priv);
++};
 +
-+# Custom select to avoid matching all nodes with 'syscon'
-+select:
-+  properties:
-+    compatible:
-+      contains:
-+        enum:
-+          - samsung,exynos850-pmu
-+  required:
-+    - compatible
++static int exynos850_pmu_init(struct exynos_pmu *priv)
++{
++	ofnode node;
++	bool uart_debug_1;
++	unsigned int offset, mask, value;
 +
-+properties:
-+  compatible:
-+    oneOf:
-+      - items:
-+          - enum:
-+              - samsung,exynos850-pmu
-+          - const: syscon
++	node = dev_ofnode(priv->dev);
++	uart_debug_1 = ofnode_read_bool(node, "samsung,uart-debug-1");
++	if (!uart_debug_1)
++		return 0;
 +
-+  reg:
-+    maxItems: 1
++	/*
++	 * If uart1_pins are used for serial, AP UART lines have to be muxed
++	 * in PMU block to UART_DEBUG_1 path (GPIO_1). By default (reset value)
++	 * UART_DEBUG_0 path (uart0_pins) is connected to AP UART lines.
++	 */
++	offset = EXYNOS850_UART_IO_SHARE_CTRL;
++	mask = SEL_RXD_AP_UART_MASK | SEL_TXD_GPIO_1_MASK;
++	value = RXD_GPIO_1 << SEL_RXD_AP_UART_SHIFT |
++		TXD_AP_UART << SEL_TXD_GPIO_1_SHIFT;
++	return regmap_update_bits(priv->regmap, offset, mask, value);
++}
 +
-+  samsung,uart-debug-1:
-+    type: boolean
-+    description:
-+      Enable this property if AP UART lines (Application Processor UART) must be
-+      connected to UART_DEBUG_1 path in PMU block. That's usually needed when
-+      the serial console is provided by uart1_pins. If this property is not
-+      specified, the default behavior will be used (AP UART lines connected to
-+      UART_DEBUG_0 path, which usually means uart0_pins are used for the serial
-+      console).
++static const struct exynos_pmu_data exynos850_pmu_data = {
++	.pmu_init = exynos850_pmu_init,
++};
 +
-+  syscon-poweroff:
-+    $ref: /schemas/power/reset/syscon-poweroff.yaml#
-+    type: object
-+    description:
-+      Node for power off method
++static int exynos_pmu_bind(struct udevice *dev)
++{
++	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
++	return 0;
++}
 +
-+  syscon-reboot:
-+    $ref: /schemas/power/reset/syscon-reboot.yaml#
-+    type: object
-+    description:
-+      Node for reboot method
++static int exynos_pmu_probe(struct udevice *dev)
++{
++	ofnode node;
++	struct exynos_pmu *priv;
 +
-+required:
-+  - compatible
-+  - reg
++	priv = dev_get_priv(dev);
++	priv->dev = dev;
 +
-+additionalProperties: false
++	node = dev_ofnode(dev);
++	priv->regmap = syscon_node_to_regmap(node);
++	if (IS_ERR(priv->regmap))
++		return PTR_ERR(priv->regmap);
 +
-+examples:
-+  - |
-+    pmu_system_controller: system-controller@11860000 {
-+        compatible = "samsung,exynos850-pmu", "syscon";
-+        reg = <0x11860000 0x10000>;
++	priv->pmu_data = (struct exynos_pmu_data *)dev_get_driver_data(dev);
++	if (priv->pmu_data && priv->pmu_data->pmu_init)
++		return priv->pmu_data->pmu_init(priv);
 +
-+        reboot: syscon-reboot {
-+            compatible = "syscon-reboot";
-+            regmap = <&pmu_system_controller>;
-+            offset = <0x3a00>; /* SYSTEM_CONFIGURATION */
-+            mask = <0x2>; /* SWRESET_SYSTEM */
-+            value = <0x2>; /* reset value */
-+        };
-+    };
++	return 0;
++}
++
++static const struct udevice_id exynos_pmu_ids[] = {
++	{
++		.compatible = "samsung,exynos850-pmu",
++		.data = (ulong)&exynos850_pmu_data
++	},
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(exynos_pmu) = {
++	.name		= "exynos-pmu",
++	.id		= UCLASS_NOP,
++	.of_match	= exynos_pmu_ids,
++	.bind		= exynos_pmu_bind,
++	.probe		= exynos_pmu_probe,
++	.priv_auto	= sizeof(struct exynos_pmu),
++};
 -- 
 2.39.2
 
