@@ -4,75 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536F3C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:23:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FE3C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:30:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3874874D9;
-	Wed, 13 Dec 2023 10:23:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B440F871AA;
+	Wed, 13 Dec 2023 10:30:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SIEUUlCd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u785P7A/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A0CE871AA; Wed, 13 Dec 2023 10:23:52 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 36F57877D9; Wed, 13 Dec 2023 10:30:23 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E43F86D12
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:23:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5638B87015
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:30:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-54f4b31494fso10404873a12.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:23:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-33338c47134so6104380f8f.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:30:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702459429; x=1703064229; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/iYb+fd1YE9uF6Pe3ERw0fdvuw4VPF3afyK0BMmtnCY=;
- b=SIEUUlCd7+TObsFrXEb/hZhs/Z12WuDqALWXRo4/u2dDORyLNAYkXnBaXbxsR/8E10
- 5TjybFbettWnzdjJWxStMfJQNtzK79+4KoE9rx/pl58tR5M83V9l50kbqwZOgAIMU4Ik
- Q9lLWZK4gtKcQI/6o2hWriJdeq4MO5sprV9ePUPMaiukzsUGqZWb11EC7GFsf8FiUFNK
- cTHt2xekvNB55YmKJCHfSXldiY3Jeiq5cm1Odrk6dX6PpBkNjA17NbpsJsw5as8m0lsj
- QrEBUYhtA8h4a4l9zoYUh2NC9dCNJ5Y6MzRfayi6fvqlF3ZzJQU2I1kWNUjoJ4JmfkBU
- BwAQ==
+ d=linaro.org; s=google; t=1702459820; x=1703064620; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=E+Wk6lJKkwdpW5iXxOSKeoq70miEq59nRglwqSNX58k=;
+ b=u785P7A/aNv1LqA5NC9NmhhkCuYwDJkYMvtLxt3FbfRfiY1zkpw5rtbjerE+URW0zU
+ V4CSCBjcwQxpiUtYzQNXoKXFpZMatP10Cqrp/AiEq1SvTlNla9QsqvpUYpMCo7Ql3VGC
+ yAb9XSBosa8MkonCO4ecBZ6gCIB1XvpfPCYZ4q0nM1W57RuvsSYlQaCTLvelGpNWniF2
+ lK1vaHHTpzrxFfHJL2tmewgFUp29o5tfvuQrXqKACX47CUcBNCkTRkJqLAUXd0CbZkWZ
+ /lxWhkt2/ecOuWpO77rJ9fZsiTWNyKSUuno6BlgWiH3T0balE9EskE/IuU/8CRzMG0/g
+ zdzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702459429; x=1703064229;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1702459820; x=1703064620;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/iYb+fd1YE9uF6Pe3ERw0fdvuw4VPF3afyK0BMmtnCY=;
- b=em5aeiPtsbhoV4Z/gQjksvFJ5tbRN3yuIFw+ke5iMTmox+zGetvLEpj6R7xSCC+qiI
- Oa/zmHjXOedTzLkXcqHIAwlXdOuZZf4RBVJeW/rX9oRy8axhpITAGrV8NDxm9EA8t/8S
- Yqx66OqbmeKtd0EIiMwXhOdbVH4qTaZX2pqyQ7lbOnsF/rYjFm3pEeVlCuiI1bx6rcuz
- tuF84CkMl7q3wvRS+KBLbJpO1iYTYBl0GxTyZmphTZHYYWzfXYX5Mljn0zR2C0Y4HysR
- yAQKhdXR8pHIFNjhZCt0nTAWbT72heVmXjjY9Fsgap7+e6vvDsrhZYHxD4fQszgUT7xi
- h0RA==
-X-Gm-Message-State: AOJu0YzdnUbna9iM4eKLTHNYUMG5K3HH623u3s4SNs7giezmhoudDOBs
- cRaB5VgmeNZ9dAoUngwdvs/xwx42pgM=
-X-Google-Smtp-Source: AGHT+IH1Q+crZ+orR7pK2CtMJgTqSD1VWGpfxX3VzohdSVlEKkKYkUkqY0rMy4oDPxoTTD32TWtZ2g==
-X-Received: by 2002:a50:f617:0:b0:552:2412:af7a with SMTP id
- c23-20020a50f617000000b005522412af7amr520992edn.15.1702459429195; 
- Wed, 13 Dec 2023 01:23:49 -0800 (PST)
-Received: from localhost.lan (031011218106.poznan.vectranet.pl.
- [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
- cf5-20020a0564020b8500b005521741b8f3sm412201edb.29.2023.12.13.01.23.48
+ bh=E+Wk6lJKkwdpW5iXxOSKeoq70miEq59nRglwqSNX58k=;
+ b=QeA672XSc4gFVsFuS0Q2Yakwj3mKdIIp7nbPQMPXNkHqpNZS2yDYeamBtsjeII/Xg9
+ vert6Wq5LUwyTlGwi/70clCA0rIZwfqMmskM801U0jLg8UPkEjtYfggeJzvPBQeMHqJw
+ YlZvz9ceMy7bsSCRJTvVjQ7mFd7YOLEqTtEphf/CJOnzPjpMKYs09EvKlm3ByT5ahzLf
+ bwZKj/0cPaw1pbzy5pD7i/zDK29YThyd9tub3pmbawULjG9eA6HQjh6G4+47osj50tbW
+ VsNwAdhyAScQYRfCG7MXjUeF19SRgZLgfQoiFWoJyaw4PjstaNfbpJ8ESxygOynNeFXm
+ K1Tg==
+X-Gm-Message-State: AOJu0YwgFO17mhLIu2ButeYPFucClKk42Fx35WGqWTGb7y0tJpzVAzpR
+ 8W/i3AKsdzwyeRIkEZE5x9TsaA==
+X-Google-Smtp-Source: AGHT+IFkb4/Z4nAOMUH4O4hr0RwBxW5C+xiTWTHZruGFvbqsPwOAa8SZq1IN/1LDA0jEgBtKqfZ52w==
+X-Received: by 2002:a05:6000:1007:b0:333:2fd2:6f7b with SMTP id
+ a7-20020a056000100700b003332fd26f7bmr3543985wrx.133.1702459819758; 
+ Wed, 13 Dec 2023 01:30:19 -0800 (PST)
+Received: from [127.0.1.1] ([2a01:e0a:982:cbb0:596e:6d4f:fc0a:ec65])
+ by smtp.gmail.com with ESMTPSA id
+ h12-20020a5d504c000000b003333521a1cesm678817wrt.57.2023.12.13.01.30.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 01:23:48 -0800 (PST)
-From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Cc: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
-Subject: [PATCH] fw_env: rename variables holding env data content
-Date: Wed, 13 Dec 2023 10:23:44 +0100
-Message-Id: <20231213092344.17024-1-zajec5@gmail.com>
-X-Mailer: git-send-email 2.35.3
+ Wed, 13 Dec 2023 01:30:19 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v2 0/2] ARM: meson: introduce GXL MDIO mux driver and
+ switch to Linux v6.4 DT
+Date: Wed, 13 Dec 2023 10:30:11 +0100
+Message-Id: <20231213-u-boot-gxl-mdio-mux-v2-0-c56bb02a75ea@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKN5eWUC/32NQQqDMBBFryKz7hQTKdKueo/iYhJjHFCnJBpSx
+ Ls39QDdfHgf/vs7RBfYRXhUOwSXOLIsBfSlAjvS4h1yXxh0rRullcYNjciKPk849yw4bxmNrXX
+ ryJRsoCzfwQ2cT+urKzxyXCV8zpOkfu1/X1JY4516opu1LQ3mOfFCQa4SPHTHcXwB0zNEDbcAA
+ AA=
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Vyacheslav Bocharov <adeep@lexina.in>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2503;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=FIuWtHSeZsGEmhH82xAOBSjsdqhkSKLtyLoSiQr92kc=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBleXmlu0cqacvEZ1vIX7tnSt448UTz0LVhewYoP
+ UwkQxxzJR+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZXl5pQAKCRB33NvayMhJ
+ 0YwMD/46iHk/fveStGNwghlFasPybTTNAXHLW1ro1b+49IdvrXxKddFn60/ymq08xhZ6+DHh4Y+
+ hr6f8VqWkQlZQsFXd5V1JcGdUcIZY8ZNHdBPOXxMe5EKwWgocL9ce4oMLULYKp1UJAfGzIOKA4e
+ oTW8cOxRZlTscTBwCQYgrwFG6l+HASC7ru3WEvt2q5qC/2U8od3Wy9bzjLFbwuaHL1b6MXhg0os
+ Q1HdzNv9Y6CSzBWRObOsyP64LzaRgTp9p3k5Op9hiNISX1lRDDNpbM9BXEB3nXBuNVDC6GNfjea
+ EyBSah+Kfeyy1jI0H4gr5duzRv8oMDz2a9zAg3YomT+4Ig+ZsIfdwQfbPLVdrfEl7KVqWJPt38s
+ 6PPVyAf5+Fhv/DO8/M2/YbT5lr6/zt2EaxlGt3P9Fbdn3uZWaWNWXi1iKSTnqgxGhPIFlTOpxlG
+ aJboqttz6nqbtSoAEZQQNODjKNk25EBYXNoM5wc3jDyaNqc8y/YbZ7MlkORreYHL0X9rPS7HenN
+ mXr7VSk/SV6sTMktNk/WNJz1+cvC4Jkb7cRzNPJU7lS2Zuw6BP/sWxErDNx9gWnXpPg4r9jL+db
+ sr0ckh753mTckD1D4hqRzQcYmgjwOmC7X93e6yvyNvPTNz2vF82CF+9ZcDLR8n/TgRRrDkHLFY3
+ lxVjI00FD7uq6Ug==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,138 +113,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Rafał Miłecki <rafal@milecki.pl>
+Linux v6.4 uses a new MDIO mux driver for GXL boards, let's port the driver
+to U-Boot and sync the GXBB/GXL/GXM DT to make use of this driver.
 
-Rename "addr0" and "addr1" to "buf0" and "buf1" accordingly. Name "addr"
-suggests that variable contains a numeric value being some kind of
-address. Name "buf" is de facto a standard name for pointer to allocated
-memory for reading data to.
-
-While at it drop redundant checks for NULL before calling free().
-
-Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- tools/env/fw_env.c | 39 ++++++++++++++++++---------------------
- 1 file changed, 18 insertions(+), 21 deletions(-)
+Changes in v2:
+- Fixed copyright line in mdio mux driver
+- Link to v1: https://lore.kernel.org/r/20231212-u-boot-gxl-mdio-mux-v1-0-9adaa5cc7afb@linaro.org
 
-diff --git a/tools/env/fw_env.c b/tools/env/fw_env.c
-index bf8b7ba304..0347e9d15a 100644
---- a/tools/env/fw_env.c
-+++ b/tools/env/fw_env.c
-@@ -1416,11 +1416,11 @@ int fw_env_open(struct env_opts *opts)
- {
- 	int crc0, crc0_ok;
- 	unsigned char flag0;
--	void *addr0 = NULL;
-+	void *buf0 = NULL;
- 
- 	int crc1, crc1_ok;
- 	unsigned char flag1;
--	void *addr1 = NULL;
-+	void *buf1 = NULL;
- 
- 	int ret;
- 
-@@ -1430,8 +1430,8 @@ int fw_env_open(struct env_opts *opts)
- 	if (parse_config(opts))	/* should fill envdevices */
- 		return -EINVAL;
- 
--	addr0 = calloc(1, CUR_ENVSIZE);
--	if (addr0 == NULL) {
-+	buf0 = calloc(1, CUR_ENVSIZE);
-+	if (buf0 == NULL) {
- 		fprintf(stderr,
- 			"Not enough memory for environment (%ld bytes)\n",
- 			CUR_ENVSIZE);
-@@ -1440,13 +1440,13 @@ int fw_env_open(struct env_opts *opts)
- 	}
- 
- 	dev_current = 0;
--	if (flash_io(O_RDONLY, addr0, CUR_ENVSIZE)) {
-+	if (flash_io(O_RDONLY, buf0, CUR_ENVSIZE)) {
- 		ret = -EIO;
- 		goto open_cleanup;
- 	}
- 
- 	if (!have_redund_env) {
--		struct env_image_single *single = addr0;
-+		struct env_image_single *single = buf0;
- 
- 		crc0 = crc32(0, (uint8_t *)single->data, ENV_SIZE);
- 		crc0_ok = (crc0 == single->crc);
-@@ -1458,12 +1458,12 @@ int fw_env_open(struct env_opts *opts)
- 			environment.dirty = 1;
- 		}
- 
--		environment.image = addr0;
-+		environment.image = buf0;
- 		environment.crc = &single->crc;
- 		environment.flags = NULL;
- 		environment.data = single->data;
- 	} else {
--		struct env_image_redundant *redundant0 = addr0;
-+		struct env_image_redundant *redundant0 = buf0;
- 		struct env_image_redundant *redundant1;
- 
- 		crc0 = crc32(0, (uint8_t *)redundant0->data, ENV_SIZE);
-@@ -1472,17 +1472,17 @@ int fw_env_open(struct env_opts *opts)
- 		flag0 = redundant0->flags;
- 
- 		dev_current = 1;
--		addr1 = calloc(1, CUR_ENVSIZE);
--		if (addr1 == NULL) {
-+		buf1 = calloc(1, CUR_ENVSIZE);
-+		if (buf1 == NULL) {
- 			fprintf(stderr,
- 				"Not enough memory for environment (%ld bytes)\n",
- 				CUR_ENVSIZE);
- 			ret = -ENOMEM;
- 			goto open_cleanup;
- 		}
--		redundant1 = addr1;
-+		redundant1 = buf1;
- 
--		if (flash_io(O_RDONLY, addr1, CUR_ENVSIZE)) {
-+		if (flash_io(O_RDONLY, buf1, CUR_ENVSIZE)) {
- 			ret = -EIO;
- 			goto open_cleanup;
- 		}
-@@ -1571,17 +1571,17 @@ int fw_env_open(struct env_opts *opts)
- 		 * flags before writing out
- 		 */
- 		if (dev_current) {
--			environment.image = addr1;
-+			environment.image = buf1;
- 			environment.crc = &redundant1->crc;
- 			environment.flags = &redundant1->flags;
- 			environment.data = redundant1->data;
--			free(addr0);
-+			free(buf0);
- 		} else {
--			environment.image = addr0;
-+			environment.image = buf0;
- 			environment.crc = &redundant0->crc;
- 			environment.flags = &redundant0->flags;
- 			environment.data = redundant0->data;
--			free(addr1);
-+			free(buf1);
- 		}
- #ifdef DEBUG
- 		fprintf(stderr, "Selected env in %s\n", DEVNAME(dev_current));
-@@ -1590,11 +1590,8 @@ int fw_env_open(struct env_opts *opts)
- 	return 0;
- 
-  open_cleanup:
--	if (addr0)
--		free(addr0);
--
--	if (addr1)
--		free(addr1);
-+	free(buf0);
-+	free(buf1);
- 
- 	return ret;
- }
+---
+Neil Armstrong (2):
+      net: Add Amlogic GXL MDIO Mux driver
+      ARM: dts: sync Amlogic GX DT to Linux v6.4
+
+ arch/arm/dts/meson-gx-libretech-pc.dtsi            |   4 +-
+ arch/arm/dts/meson-gx.dtsi                         |  21 ++--
+ arch/arm/dts/meson-gxbb-nanopi-k2.dts              |  13 +-
+ arch/arm/dts/meson-gxbb-odroidc2.dts               |  26 ++--
+ arch/arm/dts/meson-gxbb.dtsi                       |  18 ++-
+ arch/arm/dts/meson-gxl-s805x-libretech-ac.dts      |   2 +-
+ .../arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts |  12 +-
+ arch/arm/dts/meson-gxl-s905x-khadas-vim.dts        |  16 +--
+ arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts   |   3 +-
+ arch/arm/dts/meson-gxl-s905x-p212.dts              |  68 ++++++++++
+ arch/arm/dts/meson-gxl-s905x-p212.dtsi             |  21 ++--
+ arch/arm/dts/meson-gxl.dtsi                        |  43 ++++---
+ arch/arm/dts/meson-gxm-khadas-vim2.dts             |  15 +--
+ arch/arm/dts/meson-gxm-wetek-core2.dts             |   2 -
+ configs/beelink-gt1-ultimate_defconfig             |   2 +-
+ configs/jethub_j80_defconfig                       |   2 +-
+ configs/khadas-vim2_defconfig                      |   2 +-
+ configs/khadas-vim_defconfig                       |   2 +-
+ configs/libretech-ac_defconfig                     |   2 +-
+ configs/libretech-cc_defconfig                     |   2 +-
+ configs/libretech-cc_v2_defconfig                  |   2 +-
+ configs/libretech-s905d-pc_defconfig               |   2 +-
+ configs/libretech-s912-pc_defconfig                |   2 +-
+ configs/p212_defconfig                             |   2 +-
+ configs/wetek-core2_defconfig                      |   2 +-
+ drivers/net/Kconfig                                |   7 ++
+ drivers/net/Makefile                               |   1 +
+ drivers/net/mdio_mux_meson_gxl.c                   | 138 +++++++++++++++++++++
+ 28 files changed, 342 insertions(+), 90 deletions(-)
+---
+base-commit: 65eed687729c28431d38c6c9174da4d878fb107f
+change-id: 20231212-u-boot-gxl-mdio-mux-bc027eab0273
+
+Best regards,
 -- 
-2.35.3
+Neil Armstrong <neil.armstrong@linaro.org>
 
