@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17D9BC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:39:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B2C5C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:40:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64B938784C;
+	by phobos.denx.de (Postfix) with ESMTP id DD05487852;
 	Wed, 13 Dec 2023 21:39:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eJ8HU086";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XfoYR0or";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5607787817; Wed, 13 Dec 2023 21:39:06 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 8B05A8781A; Wed, 13 Dec 2023 21:39:06 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2970A8781E
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B62987828
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-dbcc63b7c68so1733706276.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:00 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-db5e5647c24so7094902276.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499938; x=1703104738; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702499941; x=1703104741; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EHPxvbL041eRwhCZu2oPDKtCTwIcoMJx+AJrbTD2rL8=;
- b=eJ8HU0863VxA2Phoqi+t1YwoSIeBRau4W6tTQNjYFeY4fDPejQ7HhCVEAJxTwKBj+a
- DQm9SJ9GBYa7zdz8ksdhXpChUvrV4MTv39D7rfFQeigSD81D/L6G1mHXkfY66iHBSCFq
- Q1N++lvpLR9bKD7//Rr6lcA9NYXBzHjAI45Wo=
+ bh=GUx0PrdPXY2pFpiQz+3scC14fITcKaBaE5pwdTLhcv0=;
+ b=XfoYR0orTABgZ2Xu75emDnPlKGY0P8QJfzA2yQ4bSoQSy+feQu72g9l0a9FBK92eq+
+ QKJLs3cmfxITVitcHFx7QmVyQ7lAJjyl8+DXDpy4wwf84N7bXv7k5US6e+gb9/UVhBFN
+ KPq0Cvnz6ygtmRS/7B+8xnzH1wbLrdY5ytTjc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499938; x=1703104738;
+ d=1e100.net; s=20230601; t=1702499941; x=1703104741;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EHPxvbL041eRwhCZu2oPDKtCTwIcoMJx+AJrbTD2rL8=;
- b=MH0rIC+t86hkCbdABx49MUTIz9jws96Pl5AjTw3ZL3pTrrCUz15AXJJ4pc7m3T/JJk
- cCEfllyLJ2VkhodA3nt6NJJiOcgxnbEQqkSV4Tx7AjP3msLjtalSof86s79xzd3rdksj
- T+wYWj4O5dZO2k2UzXHVsI4GI8Z1GKmlpal8lPHtt3wJo/FBvDUM+GpANpKDLd4bt1WZ
- Bc/Nj+m3zSIuiy98AiBFSL732BLfvwdmjyCq2U66NilJir+I0mQMVLpsDbwK19GB/d3s
- dzAY6lWdTL/hfQhmS/BapR0UI8/1YXkZO6awAcu7cqD7gocnOXc+JUF+rbfrduTeNOIO
- EMtQ==
-X-Gm-Message-State: AOJu0YzejBf4RIkq2m9YzFwb7m8w38cpaUqqCzBxTMkT1eUd502xjK54
- ThwE5MfBenzdoYJRcK1RwUYFjqSgDE5g0pv4clyTfA==
-X-Google-Smtp-Source: AGHT+IFk6GRFlTZQcK7mV4Kb6s/7t1tbEsyoVq/j+qYsGsblkVYHxiQ0f4LJ83qod6JOw5hde8ktfWESwMeHfUPKBrE=
-X-Received: by 2002:a25:a404:0:b0:db5:3e3b:d2bb with SMTP id
- f4-20020a25a404000000b00db53e3bd2bbmr6171718ybi.48.1702499938256; Wed, 13 Dec
- 2023 12:38:58 -0800 (PST)
+ bh=GUx0PrdPXY2pFpiQz+3scC14fITcKaBaE5pwdTLhcv0=;
+ b=MAQbrI+uQh2Fb1NiiO14GhiwWjebldvF8RHZqGYqoeriXbKvLr+z96Ddq0ZgIQH0Gf
+ Rh02+0pg+E9JAQVNWIja/P5cvkAY9ajOKWI9vRev7wYmLpr59E/ulmt/3uSOT0eWIeRV
+ 6RvZmMLmadDoYEQhpYsK/O3cIu6w7iaEHtVpXaw8aNJ73jXSYN8Ahi971jGGe726JyRu
+ V27a2U5pI+Ou+crRGrVXB1aua0qMZEotQ7W2Crf41u49QL9zsB26IWGzTMYo19AW5kCX
+ H3tusleHvuTVz7RJ/QzV2M2Z+BfMBzbH5gWFjkjTyCQ8adN0trqXig1Jq1TIW7VMi2t+
+ GxEA==
+X-Gm-Message-State: AOJu0YwBNhWjEbuolJiAts5amBHNFihPEjj39tPo2ZMlVPznmejKIA47
+ 8EX0kVyjRXfQLcej/5eMw9u9n0MPwSHu62LPUC64kw==
+X-Google-Smtp-Source: AGHT+IEkzRz5wRQkIsEqb0OnYg6PXrsTAP8DvqDhTAKqHGHuAFkzhsD9j2zWOXhKCYeDF3d9JH4wDqYoXXQCAHGRUmg=
+X-Received: by 2002:a25:9391:0:b0:dbc:b93c:71d0 with SMTP id
+ a17-20020a259391000000b00dbcb93c71d0mr2786594ybm.19.1702499941458; Wed, 13
+ Dec 2023 12:39:01 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 14:38:50 -0600
+ HTTPREST; Wed, 13 Dec 2023 14:38:56 -0600
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231211180733.86629-3-heinrich.schuchardt@canonical.com>
-References: <20231211180733.86629-3-heinrich.schuchardt@canonical.com>
- <20231211180733.86629-1-heinrich.schuchardt@canonical.com>
-Date: Wed, 13 Dec 2023 14:38:50 -0600
-X-Google-Sender-Auth: kRtyqEt_iFpdzg1p6FtJO81If1w
-Message-ID: <CAPnjgZ1Q0L9_wme0u7qqs_3Fr+c8=Kt9_edt+MDqniFjxv7CJg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/2] test: vboot: Using variable 'old_dtb' before
- assignment
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Roman Kopytin <Roman.Kopytin@kaspersky.com>,
- Ivan Mikhaylov <fr0st61te@gmail.com>, 
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+In-Reply-To: <20231205102056.dmkh4fntzs4thpdv@uda0497581>
+References: <20231205102056.dmkh4fntzs4thpdv@uda0497581>
+ <20231205094220.2301360-1-n-francis@ti.com>
+ <20231205094220.2301360-4-n-francis@ti.com>
+Date: Wed, 13 Dec 2023 14:38:56 -0600
+X-Google-Sender-Auth: T7ACzJg4IZDNj4LlMMWtRzloWow
+Message-ID: <CAPnjgZ1sR9f-eG3RLj+OVmk8301wswxqSDc+QWbQzgByKKw4qQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] doc: board: ti: k3: Mention TI_DM argument
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: marcel.ziswiler@toradex.com, sjg@chromium.org, alpernebiyasak@gmail.com, 
+ u-boot@lists.denx.de, hs@denx.de, christophe.leroy@csgroup.eu, 
+ mr.bossman075@gmail.com, afd@ti.com, kamlesh@ti.com, nm@ti.com, 
+ c-shilwant@ti.com, u-kumar1@ti.com, Neha Malcom Francis <n-francis@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,18 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-old_dtb can only be assumed initialized in the finally block
-if it is assigned a value before the try statement.
+Hi Neha,
 
-Avoid a pylint error reported by current pylint.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-v2:
-	mention pylint in commit message
----
- test/py/tests/test_vboot.py | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
+On 15:12-20231205, Neha Malcom Francis wrote:
+> Mention TI_DM argument can be used to fetch a custom DM binary in the
+> A72 build instructions for K3 devices.
+>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> Reviewed-by: Andrew Davis <afd@ti.com>
+> ---
+>  doc/board/ti/k3.rst | 7 +++++++
+>  1 file changed, 7 insertions(+)
+>
 Applied to u-boot-dm/next, thanks!
