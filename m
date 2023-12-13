@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0791C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 19:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F42C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 19:52:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 226DB87824;
+	by phobos.denx.de (Postfix) with ESMTP id 844BC8783E;
 	Wed, 13 Dec 2023 20:52:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wesib2go";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KKrb5Nea";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86F77877B0; Wed, 13 Dec 2023 20:52:19 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 555D7877B0; Wed, 13 Dec 2023 20:52:20 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DB7D87824
+ by phobos.denx.de (Postfix) with ESMTPS id 70B9E87831
  for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 20:52:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-dbcd9af2428so612816276.1
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5e35e1dfb99so1595587b3.0
  for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 11:52:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702497136; x=1703101936; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pdUMfTnZDj9/hnx6COdJ0b8tVKU/kVgKfJrMaV+MDV4=;
- b=Wesib2go7FB8S9sTN51XiHjy+dPgf0AvjoAY2gLIl31Je6DzCldMJMvuOOjnCTWScO
- J/5B1MqMdg1zCfF2WQDelpqeFQzhGGkUkfGax+6cys+I3utcDgDkVwGl075rG4Wzcctw
- gZmmxwrousVFIUAXXeNuUbPXIrOWdCGq2XmQU=
+ bh=Cr8shdRWV/FTK5bDknskPEsNujbtW+sAWjFPQvMNRkI=;
+ b=KKrb5NeaJuwL8RmGq7loVUyQVqbrcetrkuK6ql9xaTrQ4KZp79D8FgGoZspBsBfud5
+ l7aoNWEJIbIumYiguDun/LJsvTmZTg5BKPWGVUlAnEW70Qz5WKeCp/PDNKrLyeySTYMI
+ /GCzgIB6V52mVdGacJZs6emwq/GcrZ4S1K4jI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702497136; x=1703101936;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=pdUMfTnZDj9/hnx6COdJ0b8tVKU/kVgKfJrMaV+MDV4=;
- b=bD1MTHOf7bgQRdbDcdDKFnAP6TYDeYCDIJjXYnigxOhntNngOPI26V6OY5NsJyIubN
- y3HzyQo1G8ts0guQELCkNm5paaFs0f2E5hW5hz5QFm8178ynH8i502HxCCTRh3ITBqBI
- cy/DqwmPMloL5mZWF6zkwIYV9JKD+deFR4viXPIrG7zJWfhE9j/EibmE3LHb1uvo3S1X
- Svt7+sQ6e4q3nILulwmjoCn0ScweAU5HnkN8hEMnD94G5ysErpGy2TTW3+g8/oqlQ1fR
- U4upWsXHb0oGIg1wdxzZR5lrhVvYrCz6cjdOfyPyReLQkj74qjLGr2L6IFKlz0AgjlND
- z2jA==
-X-Gm-Message-State: AOJu0YzKDbG5WGKOSxLFc6kESHXf+Jjxai0Sel4KTDvcjpje3G1gT4wn
- odksssoN2BLVGS6Qjpo9BwWMgSW5LEHto79A1X8eHTJWbEqoto3wA3I=
-X-Google-Smtp-Source: AGHT+IEWhwjeB6uIVNSuKIl0Xtjx3/2WRYHPFYibdbwAjmPzjhbRw/cJwI18aoYxFK/3FlmnYUVKiOIeMOPU6SSIPH8=
-X-Received: by 2002:a25:2415:0:b0:dbc:cc25:8a6 with SMTP id
- k21-20020a252415000000b00dbccc2508a6mr1412498ybk.43.1702497135962; Wed, 13
+ bh=Cr8shdRWV/FTK5bDknskPEsNujbtW+sAWjFPQvMNRkI=;
+ b=d8VBMRqli8PTy+swmlFEkb51cW2e8nOCQHpSanI28B3R5V03hspzt57a9FwMcZSXJW
+ LhHmUZ3CndADN5Lw+6iu00GlpehemLnCh5C423VySwVu9VwwYoSbFfJ5gzLV4/YhzExy
+ 5vf5Iznc8M7wFEI2p/24aOebX++7UB1ngmuRM78u5C3yRnZRJDoZ9fMQaPOsG/0pueke
+ FIUmsr8+QuplQFqly5PBFM5qstuCyMlX10PYZ9fNzYyskXNQiEzn2J+NuaeZyvOrhx6k
+ XKQs4HsbE17AMeglUF1LdhVghiTLiQyCme6472O8gV+aeb86itNszYRpW/yRbRrpSMsD
+ t3kA==
+X-Gm-Message-State: AOJu0YzwEarUD/ZoGOxhxul/dI5OGS0+9HZrQUhv7vKab2U7uaOJfwoF
+ r1VK1EvW16CYMvA0J3CpgIEkiH3uipgMDctAxEeiwA==
+X-Google-Smtp-Source: AGHT+IGkWQaP7kZBMeQ3vTOO1Uz8h3JEGtSDuHrNa1ouv1HRYi4GzWvgPZbUkl/G8ZI26Jn2SyBh7lJzhQE4bpWE88g=
+X-Received: by 2002:a25:c088:0:b0:db9:7695:75e2 with SMTP id
+ c130-20020a25c088000000b00db9769575e2mr5075845ybf.29.1702497135967; Wed, 13
  Dec 2023 11:52:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20231203044719.667116-1-sjg@chromium.org>
- <20231209135324.GA3191433@bill-the-cat>
-In-Reply-To: <20231209135324.GA3191433@bill-the-cat>
+References: <20231211122051.1240855-1-lukas.funke-oss@weidmueller.com>
+ <20231211122051.1240855-4-lukas.funke-oss@weidmueller.com>
+In-Reply-To: <20231211122051.1240855-4-lukas.funke-oss@weidmueller.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:51:34 -0700
-Message-ID: <CAPnjgZ2yZyVG2yxZ33XbWYk1ax-V9Vdj=wZqdwy7n_uT41-2fw@mail.gmail.com>
-Subject: Re: [u-boot-gitdm PATCH 1/2] Use Google LLC for Google
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 13 Dec 2023 12:50:04 -0700
+Message-ID: <CAPnjgZ3YhS8NvBHm0aRFUTP8=oXJ58tPcpjXjy9uQBD9R96Ykw@mail.gmail.com>
+Subject: Re: [PATCH 3/5] test: cmd: setexptr: Add tests for bitmap string
+ format
+To: lukas.funke-oss@weidmueller.com
+Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,21 +82,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Sat, 9 Dec 2023 at 06:53, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 11 Dec 2023 at 05:21, <lukas.funke-oss@weidmueller.com> wrote:
 >
-> On Sat, Dec 02, 2023 at 09:46:57PM -0700, Simon Glass wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
 >
-> > The name changed a few years ago, so update it.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Add test to test the bitmap format specifier
 >
-> Applied to gitdm/u-boot, thanks! Do you want me to do a quick search and
-> replace on the stats pages since v2017.10 onward or just for future
-> releases?
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> ---
+>
+>  test/cmd/setexpr.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
 
-It's fine as is, don't worry.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
