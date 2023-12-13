@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA31CC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:35:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8D4C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:50:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7460E87863;
-	Wed, 13 Dec 2023 17:35:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A71C87830;
+	Wed, 13 Dec 2023 17:50:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PaVcAgeS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GBpAInm5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB7E087830; Wed, 13 Dec 2023 17:35:17 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 48D2187830; Wed, 13 Dec 2023 17:50:36 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6594E87863
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:35:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16E278784F
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:50:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1d350ee90b6so1289795ad.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:35:10 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5e263e43ff2so14554427b3.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:50:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702485308; x=1703090108; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1702486232; x=1703091032; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8bd+dNYd3oGbKavwIyAmyhqHKSWBjNGcP2v+eR2ALNI=;
- b=PaVcAgeSLKdXAORMM0/N6tR+agxqPnnz0i1FRLs+dxKF3vUljJbKD0PL1WJz87NKpk
- ZeHDG2t1um/v0OVjSNEaiNq3XqPoWt8OMhPnYFbKGvP/xr7puOIBVeHbM8qvuwLhYYKV
- BhMKWbZ4iKe8Z+tV9lo//MurdOW+fbVwfZ93CoXw3stFSm7vjGIDufuPPomnWvXAPROk
- +yoKyPvXjJmhLNCWcRSbdfIOR+4Jp0wUAOSEpOLg3bH3EEWyZqIPJzlPsXv0CLwwddLn
- qW3Tlmx9xiaK2B26KUMQMrpGkVq/lxp0lWbHSMQmJE4uBWypa9COG86njEdZNw2Sq8AY
- 2mrw==
+ bh=AyOYFfd7ilByF70fY20VO4Z3BTj0CRGg/swc8ZTYBaM=;
+ b=GBpAInm55l9NxpXX8Pwpr8dX4FKVleZawhPEksHe9FTqA33YjbcQCG49MRQIi8AKmb
+ Q6K2eEUQriHhFxfDa4NakMCHwtoQ4RTfGtMi20kLRdaluzpD92zvBQ3zVpR4rckhR4YM
+ rT9ORvc3bAAGz9djNotkJyd1OjngynOPTqJTk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702485308; x=1703090108;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1702486232; x=1703091032;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8bd+dNYd3oGbKavwIyAmyhqHKSWBjNGcP2v+eR2ALNI=;
- b=unP3/SCEsb9PIfH/Zt+KIxssxqmiRFdwLMQuFV7qybJtABdc4DEd4O7VZ/cz3t35tu
- 9cFEiHN4PFqaC9F8+bYVsgA8VP86MbKD1nGdyXTW9YO4a1kf9SB3Yd8Snd9FyFBUBhQv
- W8Ul64QYmZZwHfHv/jscDMGKHfmubgZdX5hOBLDSMwfG89VWlE61/UaSDflGWxF/saIf
- kKZN5i4pLabxPMrkeJ/Ojm6jxxBskzWYyH3JvVkr4oiGUHmtdkTRfL5WJMmXojZxqaxv
- PkJ00khtuSXQP30hZhqXJJJpzMEd/M3ZpgpBk17/bKTmmzWtlx9fVx6rqPu72B8c1uL8
- 1WQw==
-X-Gm-Message-State: AOJu0YyKq8vTw90O8T2w+E1cF2xHRkcAKz+I1rr/bW8ikV2X7QCV4tCm
- rZNQZh7mtI4/NUDIxFbXGp8ZtKmDxPTt9vVNals=
-X-Google-Smtp-Source: AGHT+IFo+frvIn/gROKwwG2MudxS8LSRFSJWj50xdfzT8LblK+Ld4MtxDtE9jQWnWJ/0HZ0eqv+519PtbOccyBbBOms=
-X-Received: by 2002:a17:902:ea0d:b0:1d0:b693:ae30 with SMTP id
- s13-20020a170902ea0d00b001d0b693ae30mr16315075plg.6.1702485308593; Wed, 13
- Dec 2023 08:35:08 -0800 (PST)
+ bh=AyOYFfd7ilByF70fY20VO4Z3BTj0CRGg/swc8ZTYBaM=;
+ b=iRGq1e+jB7ykmEiktUVJHP+aVe67FCnBZoZGgo7lQWj9PhV4CI1LM2I/2RcZD11bHG
+ WYlrBVkwP2juJ4hhMLUbQOlho6q9hE5KCUjM1QMCzKYjy93/+HHlrnTcPotnD+EMoec6
+ 6R8N08vrlG0FU/foVYo5irvXgM7/0WAkexL1MTBIH+pZx+37kYSxqIhhvvGYoSC3b0UV
+ xAlPq2s26hBA2MCkbUCy1nR1G/HrFA6y1R/engB3AFk08uw5QgBMoMLpi1zoIHfstctZ
+ cYxPhaS1emrahtXs0Bu/n5hPGsiFVkAdqQcXPrSZdgBs61g7Kwlas7SvzmBYlF+lCJQY
+ HouA==
+X-Gm-Message-State: AOJu0YzQvqHkBUpc+rsxlaLIKY18EaeZxqLKWHGZ0RmmL6TNnMEothhg
+ sFf/R260Qix5olmAvnJyBNF766szYj15kcPm0Es=
+X-Google-Smtp-Source: AGHT+IHXUuGoE8118MQxo1Rx+vvbNkQPt66/ix7JiQhAcdNWlvJuQ27jPEP1JSlypLgwrEZV9aRdHQ==
+X-Received: by 2002:a0d:d203:0:b0:5d8:8922:f560 with SMTP id
+ u3-20020a0dd203000000b005d88922f560mr6503060ywd.79.1702486232488; 
+ Wed, 13 Dec 2023 08:50:32 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-6400-d78a-ada8-3cce-fa3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:d78a:ada8:3cce:fa3d])
+ by smtp.gmail.com with ESMTPSA id
+ v190-20020a0dd3c7000000b005d75bce5836sm4781799ywd.28.2023.12.13.08.50.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Dec 2023 08:50:32 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Marek Vasut <marex@denx.de>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Doug Zobel <douglas.zobel@climate.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>
+In-Reply-To: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
+References: <20231117113811.149329-1-rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v2 0/6] some LED patches
+Message-Id: <170248623185.2217435.16173809669522136612.b4-ty@konsulko.com>
+Date: Wed, 13 Dec 2023 11:50:31 -0500
 MIME-Version: 1.0
-References: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
- <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
-In-Reply-To: <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:34:55 -0300
-Message-ID: <CAOMZO5D1cnHPGO3Vxf56tPYdrpkH5T9_mK-4Frx6POU-qDx_UA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] clk: imx8mn: add pwm clocks
-To: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,12 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 11, 2023 at 1:52=E2=80=AFPM Nicolas Heemeryck
-<nicolas.heemeryck@devialet.com> wrote:
->
-> Based on Linux kernel 6.7-rc4, add necessary clocks for the PWM
-> controllers.
->
-> Signed-off-by: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+On Fri, 17 Nov 2023 12:38:05 +0100, Rasmus Villemoes wrote:
 
-Applied to u-boot-imx next, thanks.
+> I wanted to add support for ti,lp5562, and found an old submission
+> from Doug. While trying to modify that to work in current U-Boot, I
+> found a problem with the "move label handling to core" patches.
+> 
+> Patch 1 is a prerequisite for the ti,lp5562 driver, which turned out
+> to be needed by Christian as well.
+> 
+> [...]
+
+Applied to u-boot/next, thanks!
+
+-- 
+Tom
+
+
