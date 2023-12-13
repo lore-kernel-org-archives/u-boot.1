@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A31C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB28FC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B07C286A81;
-	Wed, 13 Dec 2023 17:30:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5880D86A81;
+	Wed, 13 Dec 2023 17:31:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikeVyC3s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WRfI8nlV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9F0D87843; Wed, 13 Dec 2023 17:30:32 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 19D5786564; Wed, 13 Dec 2023 17:31:11 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9259386564
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:30:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F4A88784F
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:31:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-286f3e0d010so1861488a91.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:30:30 -0800 (PST)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-286f3e0d010so1861684a91.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:31:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702485029; x=1703089829; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702485067; x=1703089867; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SkKIYn+tstPS5N1DOgcdRYAbuadxkYw1u9MURpihTTs=;
- b=ikeVyC3sHJc/s0HYODyWo+FHYE0owEJ4Z0gDkPuObAlp76Cf9KXaeZpX0uORkDXaZ1
- URo3lmhamLpihVre1Bwx9we61Hbgssu9R2Lm4NzFFqK+s0HIMunJUKU+UEQLXOVOKwvo
- JFrInuYRi1R6Nuq78o/+lmMY2ABK+mf2zuo+dIrVMpHWb2W4dOE5Ntt/pEqJe7QAawdb
- dpXNFKv0rPFhletLPTK7jBD10VRgzJLvWzVpBjgv4e/ycPO5EeV15VKm/IvQ1nHu7nDi
- rWcjKzwsVhC1HwwMS/eOiw4qe5SXnYXGZnY4mDPkeDHpSZgI4qsKuM1/Xqvvih6toGYp
- T07A==
+ bh=52G2aa+zKGc4ag52LtrdeHNsME+bEZ6jX/o3hIumJsQ=;
+ b=WRfI8nlVH/UA2T4MCRMHu3A48IA6IYv7cRj0OqYooWVJG5KOxIj4PWY9UB+ufEFIMV
+ bUEIX1DNB3YzVSfEcJysPgwdzq+PtYcIhC3rLMwtfqpEkGingkhoPlhwHRFq/Vl7mWKB
+ 6sDaBKd3DmZ/uQT04GPyumxvOaZ9NmzmXcyZne52gf7rop2lKZlq5N3WuGG2+qkmBjN8
+ af/14V55e6a18vij7b8/kEKCmYLpF9dcK2lIZHYrAdid74SGHbJrlcR01NGaib6RIQif
+ P2ewy3DJdDJxT+jF6/1k0OqZ2FsfExxSPO//vCsF3dykMD0fe90NjM25fBDBPTo6JaYP
+ /qGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702485029; x=1703089829;
+ d=1e100.net; s=20230601; t=1702485067; x=1703089867;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SkKIYn+tstPS5N1DOgcdRYAbuadxkYw1u9MURpihTTs=;
- b=LrKeSTH3xeHNPwtalF4L/WGEJSku9jtIGS5FuBw3zkdtqi0xaQR4DY3V9zaHm2Dmmr
- eg7bv0CpBitybrnp3vweIFFqIqYhbtin3uW9j7UrxCbLnyfklw76k+6/JzBoFFxP0M8C
- OekSi7NgP6Hd/H8Sl4P5IQUswGJn2feRxrV8OXVnXrI2KGcA2b1WrGH6qIMKMWj8gMaj
- yHpH+7cVEunGj1R+2+nNMg/RvtD/A7L7GmIJn2ZqtzyJuv5ojaFuQpy4IUfO0vVKBN2q
- BuA9qUR0amWAuU37nzB4T4MLz8vntyrSvAbhM1RcRJ5xGP+jieduksp4YrTDRfldAxfP
- rhyg==
-X-Gm-Message-State: AOJu0YxY/+JA1Ah2J3avIueQRcp5UW5cAl0fLFptITjQ/YJS3vfCatui
- sTDVdoLGIY57NJ99aLzQX03Nvc5zwkgA4AmYLcQ=
-X-Google-Smtp-Source: AGHT+IEmFz/2AVkeThX5RR5Pzbsf3NllkOXFhm0PnPMJP/yZrg1qoaavOCLCfqejt92DKEKw1I1216CHjxSc1sxYFjY=
-X-Received: by 2002:a05:6a20:3942:b0:18c:198a:469b with SMTP id
- r2-20020a056a20394200b0018c198a469bmr19114973pzg.6.1702485028935; Wed, 13 Dec
- 2023 08:30:28 -0800 (PST)
+ bh=52G2aa+zKGc4ag52LtrdeHNsME+bEZ6jX/o3hIumJsQ=;
+ b=lfbcH0eAkWw0A8S81Zm3Pw4lStjjJIVVe9NSwR1wn4VYkH50MJ2EEGSrDyz+cF87AT
+ OHON6bCxg0gTS3c5ZmNrwWGzd1qxTALXHFFLEFpmmQEauuKLQ3XgjIpg0jB3gZfm/Gfg
+ C951l/kh46Wlup/Ay2VjH1lFcDDG3xyhcs2sxeGc2fFlFa+/eWsoQoOhz8VmKozvIoaP
+ CTBplSfXttGtA/dM7IRJ425E4npsTBSMmDt7Cu4X9w1MgHauIyZPZXGd/fUBKY/MZdLA
+ OnCLgJTNvkQD0Fl77SeVsTfBANerGzTvuiq6HmNdyAOwB6CutxXIuKa5DS97QHuW6l33
+ m9lw==
+X-Gm-Message-State: AOJu0YwYOCsrMolyWl1NBFWCtq2Msb8dKGSPAfOEnZN249DdgB5jE6uK
+ GkI3gpRi6p6gBME3U7BkkJOwjxXy4WyMyOf/iBk=
+X-Google-Smtp-Source: AGHT+IFEFS51hBMpp+JT4lNpPRgUUJ6ll9GWczKrsoJkB9djt4HY8HoTtARpq261DPcLR59Ufpd3JEekbJ59XRQ8KCQ=
+X-Received: by 2002:a17:90b:3718:b0:286:6955:6754 with SMTP id
+ mg24-20020a17090b371800b0028669556754mr14382034pjb.0.1702485066869; Wed, 13
+ Dec 2023 08:31:06 -0800 (PST)
 MIME-Version: 1.0
-References: <20231019194241.2207814-1-hugo@hugovil.com>
-In-Reply-To: <20231019194241.2207814-1-hugo@hugovil.com>
+References: <20231019194323.2207989-1-hugo@hugovil.com>
+In-Reply-To: <20231019194323.2207989-1-hugo@hugovil.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:30:16 -0300
-Message-ID: <CAOMZO5C0LN2FhsyKnO+CKtcjVpkjK066pKm3ZMU+vTkGMJT6jQ@mail.gmail.com>
-Subject: Re: [PATCH] imx8mn_var_som: Add myself to MAINTAINERS
+Date: Wed, 13 Dec 2023 13:30:54 -0300
+Message-ID: <CAOMZO5BekTAdGuVmchqu4xTBQr1YVqdKMBHEuxgLVA1TE+q4eQ@mail.gmail.com>
+Subject: Re: [PATCH] imx8mn-var-som: Simplify FEC initialization
 To: Hugo Villeneuve <hugo@hugovil.com>
 Cc: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>, 
  Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
@@ -87,14 +87,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 19, 2023 at 4:42=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
+On Thu, Oct 19, 2023 at 4:43=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
 wrote:
 >
 > From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 >
-> I would like to help maintaining the imx8mn_var_som symphony board.
+> With DM enabled, there is no need for board code to initialize
+> the FEC interface.
 >
-> Add myself to MAINTAINERS.
+> The ethernet PHYs on the symphony carrier board have a dedicated
+> crystal/oscillator. If the SOM has the EC configuration option
+> (onboard ethernet PHY), it also has a dedicated crystal/oscillator.
+> So in all cases, there is no need to enable the RGMII TX clk output.
+>
+> This follows a similar change introduced by Fabio Estevam:
+>   Link: https://lore.kernel.org/u-boot/20231019170441.1610453-1-festevam@=
+gmail.com/
 >
 > Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
