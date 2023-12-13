@@ -4,108 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C98C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 13:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88C20C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 14:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8449687506;
-	Wed, 13 Dec 2023 14:41:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 01D1986D12;
+	Wed, 13 Dec 2023 15:08:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="WHoH2f/d";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EF1q+cLX";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="cN4WwfAC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E3D687633; Wed, 13 Dec 2023 14:41:02 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E8D6987506; Wed, 13 Dec 2023 15:08:05 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75900874A5
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 14:41:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCE5986C67
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 15:08:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=neal.frager@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cua0l05hBVNQJGphLWDMEAjBGxc4/NiiUulChlaexpYZaxTyOv34EogSu78wpiKM6RxRuMvCtc9x97Uvnhkn3f7CFiEYD6FY3fo8gToT/XWfMzqVxmSbItfs47Uznl2xeO2h70UbF/QNi2EyFmKylfUELHyt1KBSvyiIqMDPvnnMVatlakVH15Pz4CtuQPHahS/se+ocVvWIgzmzaddRq4kzyPoPP78i/4GekkTyQMJYfHM990LcEWABWq4xw8Ux9PnzshZI9LrwnOpdJ0YARqcHAPjljEi4SDWL7F5VSMpH+FZA7n+T0QJG9XxOQufnsDqvCzlSRV+4BpAOrTvsiQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V/MYSCLoGWRpKyxCNh7wjvBke2mPkWRnuPhydlD9cls=;
- b=RYoGFISBVeKzzbcm4gNabWB9zvMBnaO6RuP0fX7OXxJNDJzoYu8B+me6Uwnd+pGzkd3NnjtnM2Vi79mqAIU7rkEFX3pw/NtyBUUVW/vmSi5nfxi9Yum2WGDQIAhAMLOhmKjyFNQjVv/xz4dYdfX/7fd9KlPeB26ZhUFiX8Rjc5JWl83Y491BIGsyUR7U38zoFCixonhiRMRXgJGPtEJwj7YLFxIPHNOGFuCxr+21Qx2RDIy4RxnI45YjaCjpU0cCa93iTtI7hI8APW2U8QS0gnHKTXCatkMDyhBUOFKujJHnMirhAYX2o8NQhn/rNp86Xj1sK85IQLtcNEu1k6mXtw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V/MYSCLoGWRpKyxCNh7wjvBke2mPkWRnuPhydlD9cls=;
- b=WHoH2f/d7d7UQ6ydef8uBjLkpjuOkJSMKC1vUbss/O+UzbmwO2LGzgJ0A8xYmUEf/TrrZUo9mJ49sfsDZ1wzs3xfntK31lJ4dpW9gU0YDieXMaVNj4AwHJ8BAUPb2U3UNqM0ue3KPQFYlrIw0s4iQOE1wCuxzDPyVAtxWtb3btU=
-Received: from DM6PR03CA0010.namprd03.prod.outlook.com (2603:10b6:5:40::23) by
- CH3PR12MB8331.namprd12.prod.outlook.com (2603:10b6:610:12f::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.26; Wed, 13 Dec
- 2023 13:40:56 +0000
-Received: from CY4PEPF0000EDD7.namprd03.prod.outlook.com
- (2603:10b6:5:40:cafe::a3) by DM6PR03CA0010.outlook.office365.com
- (2603:10b6:5:40::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.26 via Frontend
- Transport; Wed, 13 Dec 2023 13:40:56 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EDD7.mail.protection.outlook.com (10.167.241.211) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7091.26 via Frontend Transport; Wed, 13 Dec 2023 13:40:56 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 13 Dec
- 2023 07:40:55 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 13 Dec
- 2023 07:40:55 -0600
-Received: from xirengwts09.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
- Transport; Wed, 13 Dec 2023 07:40:54 -0600
-From: Neal Frager <neal.frager@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <luca.ceresoli@bootlin.com>, Neal Frager
- <neal.frager@amd.com>
-Subject: [PATCH v2 1/1] arm64: zynqmp: Add output-enable pins to SOMs
-Date: Wed, 13 Dec 2023 13:40:52 +0000
-Message-ID: <20231213134052.2818879-1-neal.frager@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Sqy4M2nR8z9t76;
+ Wed, 13 Dec 2023 15:08:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702476483;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=adAuMfQPuwwtm1I9GnoDdlRhLd8LxJUAo390i8gNxYo=;
+ b=EF1q+cLXGosfLEUFtQFgVG+jwHQJ/05Yw9DxYLSWQZkbvMUEOdGeAnnaJPDOCmKX3gmGR7
+ IpionyM6pCF/Ur7NLF28GWZxlsPIPe/KygOKRbgivKREW1/+/NboVgyGmjSva5R0RYQLnf
+ OePgnfmO8BnrvMfbJio2UkYmfiFBClng/xGhMZ1pjdT97m7Uko0aHB50bnnu5unMYRYUk9
+ njUAgN9Qm+7zCzSydXvyA1IveHv5nqx+js+68yOcI9ZdcuGAAYxi1FOtOMZcj+5wuVnTIh
+ 3U3cOECTARZuF6eqc476ABGj9MUPIqUx1R7f77QbHwlAtxvTicVFrFlv1XVYIg==
+Message-ID: <b09c6600-b05b-4fec-beb0-c0a9a226a507@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702476481;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=adAuMfQPuwwtm1I9GnoDdlRhLd8LxJUAo390i8gNxYo=;
+ b=cN4WwfACj1OJVMseE6s/wXw1YzVrTq8dQNhMmQkEBdFB1tK39TEjwUxSGUxHjNFucF2lVl
+ sHt2fo66681875Uz/8M+4gBEBPJ52SWF0WzpA0vfK9pfhIjZ/OoqxnWiCuEu1E0YTjvxjI
+ OPDTGe4iJgOZfvLu3f1wWfN3pr1mNZTys4EqxbopA0PfgRWa9SnWWOIsrhftnmxGVHBQ+H
+ 7IfpaKwbXmARKHhGa6ZoMWEaalmsLFKzHTO301K4t+DN6XqUn+l5ci6fW9zA6MNj3WNP1S
+ QDytW0xg8CV9gadD8OmftQ+JRmuKOLDZiX85xgBPoKRvuocQ+ra5BFTXqRVrxA==
+Date: Wed, 13 Dec 2023 15:07:59 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD7:EE_|CH3PR12MB8331:EE_
-X-MS-Office365-Filtering-Correlation-Id: e615ae28-2d13-4460-fcb2-08dbfbe12246
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: GBpsYVuatFPgtE4f7pI0DLSeCgXpFy5Wd34mWTr6Cu68ZQA5GXj644e61pNrnxcqOY4nL6xo/wZMmjQUqA+DbO4kdJZat1YKKJ1vnB/quDP9k6ttOVBE+w04KE5TLHUkmet5oeFXGZYnlXy4/eTmTUmf/UnbQfMbHPAOVFfR6xic3Q1rZv6GcmQlyw5HYUMnMefz7zNOIfArKW2yeZPEmXnKmPy8TW3JJdtCiLWOb4nvBa/mSvR4w4i4CKAfh8RW+0OS25YmvkqTQzfJgFNzo8rLBOQa3j3FvzqcGJjxjDS/V8e0+iGsPHCwlFLEl2OWjArixqJTT/p5ts+A/f2j9eRLPek8qyP4vqe5gsnZ4DpmbCABNp53wrwDMTxtRk4cwab1HOKWAPa9BuFQn6qX12gofG3Z6FepmBrCm4Qe+qbLe6ViNYjMgoSHayLa2EzWYcX57uoewsj7YhJxr9auVLf6fv6d2Ik+QBqd7yhNJRAoVKAWth+QKYhzIwHFVucZujpcGZvAybVKCqicvuuS4Ye+5F46ZCxj7OOPr/GmST69rbHbGKmRl8X9l8uczkyhW+MtOhHcHH/YzPhfc4hwy5MX1IJ94yZtoNX0kwIus/EOyiuUMM6MAo0/CvVAdldzrXYsRWmFrpCt2CIGSARFbdfvPpbbsaJrRz2/WTerkbUkB5WVI2aWNlML8Ul6iByjy5EgJsfT2qBf/gXPEkht3xeRkiBdybonBlN34afcI7Rj9zUJkGmqg8iXA3j5Jgw0fjhNRmhO67TwcJ/zIm4h2A==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(376002)(346002)(136003)(230922051799003)(451199024)(1800799012)(82310400011)(64100799003)(186009)(46966006)(40470700004)(36840700001)(40460700003)(426003)(26005)(336012)(1076003)(2616005)(47076005)(36860700001)(44832011)(5660300002)(4326008)(8676002)(8936002)(41300700001)(2906002)(478600001)(316002)(54906003)(6916009)(70206006)(70586007)(36756003)(86362001)(82740400003)(356005)(81166007)(40480700001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 13:40:56.3410 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e615ae28-2d13-4460-fcb2-08dbfbe12246
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD7.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8331
+Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
+ <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
+ <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
+ <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: f7d42ff9b0b2122c6ee
+X-MBO-RS-META: 7nnko5g3pz1f33uqk61f4wunszssdsm3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,79 +90,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the zynqmp pinctrl driver supports the tri-state registers, make
-sure that the pins requiring output-enable are configured appropriately for
-SOMs.
+On 12/12/23 15:05, Simon Glass wrote:
+> Hi Marek,
+> 
+> On Mon, 11 Dec 2023 at 12:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
+>>
+>> On 12/11/23 18:52, Simon Glass wrote:
+>>> Hi Marek,
+>>>
+>>> On Sun, 10 Dec 2023 at 08:03, Marek Vasut
+>>> <marek.vasut+renesas@mailbox.org> wrote:
+>>>>
+>>>> In case the cyclic framework is enabled, poll the card detect of already
+>>>> initialized cards and deinitialize them in case they are removed. Since
+>>>> the card initialization is a longer process and card initialization is
+>>>> done on first access to an uninitialized card anyway, avoid initializing
+>>>> newly detected uninitialized cards in the cyclic callback.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>> ---
+>>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>>>> Cc: Peng Fan <peng.fan@nxp.com>
+>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>> ---
+>>>> V2: Move the cyclic registration/unregistration into mmc init/deinit
+>>>> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
+>>>>       does not work with structure members
+>>>> ---
+>>>>    drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
+>>>>    include/mmc.h     |  5 +++++
+>>>>    2 files changed, 41 insertions(+)
+>>>>
+>>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+>>>> index eb5010c1465..a5686dbc12e 100644
+>>>> --- a/drivers/mmc/mmc.c
+>>>> +++ b/drivers/mmc/mmc.c
+>>>> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
+>>>>           return err;
+>>>>    }
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(CYCLIC)
+>>>> +static void mmc_cyclic_cd_poll(void *ctx)
+>>>> +{
+>>>> +       struct mmc *m = ctx;
+>>>> +
+>>>> +       if (!m->has_init)
+>>>> +               return;
+>>>> +
+>>>> +       if (mmc_getcd(m))
+>>>> +               return;
+>>>> +
+>>>> +       mmc_deinit(m);
+>>>> +       m->has_init = 0;
+>>>> +}
+>>>> +#endif
+>>>> +
+>>>>    int mmc_init(struct mmc *mmc)
+>>>>    {
+>>>>           int err = 0;
+>>>> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
+>>>>           if (err)
+>>>>                   pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
+>>>>
+>>>> +#if CONFIG_IS_ENABLED(CYCLIC)
+>>>
+>>> We really shouldn't be adding new #ifdefs to the code.
+>>>
+>>> If you really want to make put ->cyclic behind an #ifdef then how
+>>> about creating an accessor as is done in global_data.h ?
+>>
+>> That's really just working around the underlying issue, which is that
+>> this does not compile:
+>>
+>> struct foo {
+>> #if CONFIG_IS_ENABLED(STUFF)
+>>     type member;
+>> #endif
+>> ...
+>> };
+>>
+>> type fn() {
+>> ...
+>> if (CONFIG_IS_ENABLED(STUFF))
+>>     access struct->member;
+>> ...
+>> }
+>>
+>> Accessor won't make it any better, would it ? It would only attempt to
+>> hide the error and make the code more fragile, i.e. this:
+>>
+>> accessor(struct)
+>> {
+>> type fn() {
+>> if (CONFIG_IS_ENABLED(STUFF))
+>>     return access struct->member;
+>> else
+>>     return 0;
+>> }
+>>
+>> }
+>>
+>> type fn() {
+>> ...
+>>     accessor(struct);
+>> ...
+>> }
+>>
+>> I suspect it also won't compile for one thing, and for the other, it
+>> really just hides the issue.
+> 
+> No, I mean like this:
+> 
+> #ifdef CONFIG_ACPI
+> #define gd_acpi_ctx() gd->acpi_ctx
+> #define gd_acpi_start() gd->acpi_start
+> #define gd_set_acpi_start(addr) gd->acpi_start = addr
+> #else
+> #define gd_acpi_ctx() NULL
+> #define gd_acpi_start() 0UL
+> #define gd_set_acpi_start(addr)
+> #endif
+> 
+> The header file has #ifdefs but not the C files.
 
-Without it, all tristate setting for MIOs, which are not related to SOM
-itself, are using default configuration which is not correct setting.
-It means SDs, USBs, ethernet, etc. are not working properly.
-
-In past it was fixed through calling tristate configuration via bootcmd:
-usb_init=mw 0xFF180208 2020
-kv260_gem3=mw 0xFF18020C 0xFC0 && gpio toggle gpio@ff0a000038 && \
-  gpio toggle gpio@ff0a000038
-
-Signed-off-by: Neal Frager <neal.frager@amd.com>
----
-V1->V2:
- - remove output-enable from gem1 conf-rx pins
----
- arch/arm/dts/zynqmp-sck-kd-g-revA.dts | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dts b/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-index 56f3128528..12865392a3 100644
---- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-+++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dts
-@@ -175,6 +175,7 @@
- 		conf-tx {
- 			pins = "MIO36";
- 			bias-disable;
-+			output-enable;
- 		};
- 
- 		mux {
-@@ -226,6 +227,7 @@
- 		conf-bootstrap {
- 			pins = "MIO44", "MIO49";
- 			bias-disable;
-+			output-enable;
- 			low-power-disable;
- 		};
- 
-@@ -233,6 +235,7 @@
- 			pins = "MIO38", "MIO39", "MIO40",
- 				"MIO41", "MIO42", "MIO43";
- 			bias-disable;
-+			output-enable;
- 			low-power-enable;
- 		};
- 
-@@ -241,6 +244,7 @@
- 			slew-rate = <SLEW_RATE_SLOW>;
- 			power-source = <IO_STANDARD_LVCMOS18>;
- 			bias-disable;
-+			output-enable;
- 		};
- 
- 		mux-mdio {
-@@ -271,6 +275,7 @@
- 			pins = "MIO54", "MIO56", "MIO57", "MIO58", "MIO59",
- 			"MIO60", "MIO61", "MIO62", "MIO63";
- 			bias-disable;
-+			output-enable;
- 			drive-strength = <4>;
- 			slew-rate = <SLEW_RATE_SLOW>;
- 		};
-@@ -298,6 +303,7 @@
- 			pins = "MIO66", "MIO68", "MIO69", "MIO70", "MIO71",
- 			"MIO72", "MIO73", "MIO74", "MIO75";
- 			bias-disable;
-+			output-enable;
- 			drive-strength = <4>;
- 			slew-rate = <SLEW_RATE_SLOW>;
- 		};
--- 
-2.25.1
-
+Hmmm, I can't say I like that either, that just adds more indirection 
+into the code and makes it harder to read in my opinion .
