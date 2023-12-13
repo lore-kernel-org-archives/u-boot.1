@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A11C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:30:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3249FC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:30:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D2EA87800;
+	by phobos.denx.de (Postfix) with ESMTP id D39528781D;
 	Wed, 13 Dec 2023 10:30:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G0EzvfsJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jD8+HrSY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D24F987015; Wed, 13 Dec 2023 10:30:23 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id E985E877E2; Wed, 13 Dec 2023 10:30:25 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 362F8871AA
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:30:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 159AC877CD
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:30:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-33635d11d92so752571f8f.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:30:21 -0800 (PST)
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3360ae1b937so3329089f8f.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:30:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702459820; x=1703064620; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702459821; x=1703064621; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Xb+HF1PPlgWJ5vSvv5zwE9PzUMBCQyQC6W64EY5QSn0=;
- b=G0EzvfsJYT2H71tpro8+b7NsVLyJYklHJQ9GyaHHUU/wepC9Vez3t2GyaxWSJ4xFpE
- CUHYHwgwzuquM76daIRHzNyFX3/riOat6O3Waxjn9v3uzgTJ+db/W2h5BO6aOpm7OAiG
- 0WMVBlFy/Iowq/ztg6uunWoy/ZCNP9WRRHPCC9i7Smp7RVu33GQxl5Kcc3pa/yIjZ6Fm
- CIPe8LdQwiBTFA/sBQYpRzaYvDfOzuBrt+KtPEdtd9720eHqw7Aoe59RRInQtOPStNhF
- c2kQPGzFcEtogU4fDf7FeGi2bh/wmWsmPbS7DLED4Y9t4apfPmPuDq8S/TGbqBmLAICs
- g6Qg==
+ :reply-to; bh=X7ZyhELYFjRAkyE0+so9g3JAxwjw/1vuAnF8gU25rk8=;
+ b=jD8+HrSYnkfuzmwpgCY73XV14jBAIWolQwmLx7e2Cnpf4UnhGOSRRy9TRktzC4X7f5
+ 2B5ZnsJNqnWCJ9OcaQYd3tRFjCSf9wLiPzd8U9MzMbgJk9kKfYAkKRyzgcuSYuq2LtPQ
+ XwKjJjG6zWRuLRCpOaIz3Ei70RkDCVLfthLLZKpgmOvXYXLdGoXKzi184NAdkiRQq7Gd
+ 1qEuScECxVgjxu0huThI5pf2W7Wk5ELAppz3cDpMeoIWdPWu0qhCo/BO+8Mu6KbeWqhf
+ EtZ6phW9NAED5hs6jvj1d5NrS4KBdc0XvN0HP5MLcDg9DZRLsSedLwUaD/t32ExfXIb9
+ 6MaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702459820; x=1703064620;
+ d=1e100.net; s=20230601; t=1702459821; x=1703064621;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Xb+HF1PPlgWJ5vSvv5zwE9PzUMBCQyQC6W64EY5QSn0=;
- b=J3PKSrzikKLFWdce8cyiFS4jxeVP8bSdZTDovmGutVmro1dzEdcMIIuqEA4Kw8i1Oo
- uHT6IIppCfTjbJjNAOP1lWGOD63DUGSuAeOkG0e41qTRYFy8PAEfw4lh3Y3Q1c3rqOJu
- Ieg+hx3ugtmEh4LxY/bEhJHWOOEQrUUdxUZtCfO55022TMu0xmcUVrBn7w/vLq4cCZrT
- c1c7fm3Sy0bBttw//kIM61WjBr86aZa+PO3LfM9IIu7X6fPcL/WP8WN4Y4foiDhRCecv
- cajS0LOKvsCChTHWLv1KJycVtACXwDVvxszrGXKDiM4cSqqPewN5SWTpvySvpvk1ylKc
- n/TQ==
-X-Gm-Message-State: AOJu0Yybdda2bR9EsZ97eCRsbCx2B4SmtJfNd6mMGa8HfyMjaLYFdm8I
- 2bnfhy5gG+xqnmUXVMJ51Jb0Ng==
-X-Google-Smtp-Source: AGHT+IFAc0uYXf3JS8n8Xb/qtCyVLfDLOuAFagrl9K4g4qzfCNdETt8VP1BFrl1JcylIaQ0cEAaXlA==
-X-Received: by 2002:adf:e4c4:0:b0:336:1b08:be28 with SMTP id
- v4-20020adfe4c4000000b003361b08be28mr3443489wrm.61.1702459820526; 
- Wed, 13 Dec 2023 01:30:20 -0800 (PST)
+ bh=X7ZyhELYFjRAkyE0+so9g3JAxwjw/1vuAnF8gU25rk8=;
+ b=lggnA2bSKOOwav6WOsSpy1iwTNwxnJklPDCSeAaoYvpOgo8hIqg5ciKCI3CQcpF6yQ
+ zXQ0puaLciaTjJGPX9GtEcREA6xv5uwyMdsOZbtbHc/IYD3W8Yz/PxnW9DwVKyde+Njl
+ PxDpu3DgOIfdDLoCGyPtYyODCzZr5GiVv7diAWFqZIcxwo4xcTMlgbqrCc3meMvPjEt8
+ nqotBJ3Ux+7AH8Ki/pkI+5Rnn1H8kAxGDnDuSPSjpRtOUgdfcb4wCoUtFtARqoW1biVo
+ iyeol0ZBSalNW3UFopbquCxlPMHc3VwXwgTpr6xuQx3BPINZZI/G4mOpgoRy9wrZW/xy
+ HJXw==
+X-Gm-Message-State: AOJu0YxRXZ8vDvhQjXVxdRfeD4WrBKyn/sG7/yQilfw3sU9UZdbLRNZY
+ ZNzF7RogSCZi/cIzG0rn7QMO8w==
+X-Google-Smtp-Source: AGHT+IFGa0EXNAjXFsDJYpOVMzB7nrS2707+Y7HvC1QY/jSrtXquiScGWAW84WhOq5Ean97fVKgrwg==
+X-Received: by 2002:adf:fc52:0:b0:333:47eb:a278 with SMTP id
+ e18-20020adffc52000000b0033347eba278mr3855102wrs.80.1702459821434; 
+ Wed, 13 Dec 2023 01:30:21 -0800 (PST)
 Received: from [127.0.1.1] ([2a01:e0a:982:cbb0:596e:6d4f:fc0a:ec65])
  by smtp.gmail.com with ESMTPSA id
- h12-20020a5d504c000000b003333521a1cesm678817wrt.57.2023.12.13.01.30.19
+ h12-20020a5d504c000000b003333521a1cesm678817wrt.57.2023.12.13.01.30.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 01:30:20 -0800 (PST)
+ Wed, 13 Dec 2023 01:30:21 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 13 Dec 2023 10:30:12 +0100
-Subject: [PATCH v2 1/2] net: Add Amlogic GXL MDIO Mux driver
+Date: Wed, 13 Dec 2023 10:30:13 +0100
+Subject: [PATCH v2 2/2] ARM: dts: sync Amlogic GX DT to Linux v6.4
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231213-u-boot-gxl-mdio-mux-v2-1-c56bb02a75ea@linaro.org>
+Message-Id: <20231213-u-boot-gxl-mdio-mux-v2-2-c56bb02a75ea@linaro.org>
 References: <20231213-u-boot-gxl-mdio-mux-v2-0-c56bb02a75ea@linaro.org>
 In-Reply-To: <20231213-u-boot-gxl-mdio-mux-v2-0-c56bb02a75ea@linaro.org>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
@@ -77,21 +77,21 @@ To: Joe Hershberger <joe.hershberger@ni.com>,
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.12.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5612;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=21657;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=8zFHpbaCfpky6TcLUOMzXDzzHLvfk+56YGGbydKVkWo=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBleXmohPdC3pm4mweZQrtsK+AUsw6g4xtf8ld9P
- 03tSilv6CyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZXl5qAAKCRB33NvayMhJ
- 0b2UEACw0I2RnUmlEeNUwqH8Ekfoj7tttNV+sN3EYlBM3AI9+QrxO/QcwWPBv5gR7kC/WXDmAFb
- YsUKgzVsf5q/r9iqC4jxTDOvCRN92MbvPsS6PyWrPRpeVR5BE/xgJ+v5KoeggHbCCC16TXzQJDA
- A4Dbh7g6nriRwmVbPz6rYoGFmgADcI2/Hi15syChPv3gjnKDVQ/XPYw/xHzdKkGAKqlfLfwiG1I
- poeKMWbkZmThI8kYleWyiDR/64DLH2xHGYEWJJh/74QOf985Vh0OJ40I+S49C1mWqqJgcsF7lpm
- w+SKPRX/rkyQPFR0y8Ysd6tuMjbFdONYGlnaaTGwrqrdPFfHh7n5lSuDabxJKZ4+FEZp+os+2zt
- 6ctfJQlCwM4nIbmyiqKbyC2E8ujwOTLxAmYzfvp4JrEzGGj5zijEki7mAbjh23Iu4aOMljELVwW
- 2N2xBM6zlLSKq96yrL1u6zIujqMy7pQ08YJs6OiXXvj+RCMUVhbvZajHNNeNSqMxjwMYtlKJUys
- dmE4mdvwJnS8sIQr5uy7sQojQ5I/xLGBCg7rW20Obz8XIQKMT4cuiI0xrhdrZOcEo6S9ah3vQly
- WcI5q+wu8gDS/6iUZF68t3TfN1VFR5lyrB30LHdqTon/sIp0ilrAGjE95gv/NrQQmEdyhN4Z1nw
- o6pixB62sTJanQQ==
+ bh=itGySbPgwi7uhcvkFyoerS/k+1Zb3t8bGI+EVHFjMFk=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBleXmp3XFrSLMPYsgUaGDG8rwQ4cxIXJ/nqrz9Q
+ 22c3PpOkAuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZXl5qQAKCRB33NvayMhJ
+ 0R8JEACX7jmIzgBVlMQCNfSqhR7i/nB5IhRAhhss6lo8O3RZBLu5wRg/VcDAb4qvB3gY42Um4lh
+ WSLuFpup8d+rsc8+cbWZo3E/a3EY/cybmwoTf64bcn5Ut4D+EktiZjJx8uCl4AE54gHNXkz/JC+
+ 7P471CCdC4aevrB3JLLCasq9MmExAKhG6SyfN+DSUj8XnZBVHwrG9/FdR5dvgY4YJTqeflNu3Co
+ U2x/uAX2/cwD1XuiUG5iSjtZXgxcp7X9gxidZ+LP+VS3BPrlbmAR0QXixRcp+wCMFAs6RzQ3oRN
+ 6+4I5tkmFzvtld4T8p5viJSZEwmuIKG8jQ7Doh9jiSwEZF25y72EReZRvgv/bPZYK9ePu+id6DM
+ S++nCpzFC6Hp1QpnMaFDavBUKO08D2TR/+7QLNRX+Iu5ip/0/XZMyyKSnZNpOThNrUsltrkaRr0
+ TgPMcZgd39PKQLu+OEq4hf5o4EimYRrwU82Gm5k7kZEYGltf8NHkVU3K1hOr7qxEADjwjbu3sp6
+ mX9PhwuNZbqkz8YfZR2sSMFbdoZ8T1JJYP4uoau4o/aE7SxHJgnP1OZZQuuJ1CoUg7gmPmmFQSk
+ NAW9LFLEEnW3ucLphdFjVGEUdIa2ARjKXA5hUa7H7+cZG3a8QFaAbjeFgbkexIhwMOqKMWPHMOv
+ ORrupyhjSFe1R+g==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -110,193 +110,782 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Port the mdio-mux-meson-gxl.c Linux driver introduced in [1],
-and adapt it to U-Boot.
+Sync Amlogic GXBB, GXL & GXM DTs from Linux v6.4, and also
+switch to GXL MDIO MUX driver to adapt to DT change,
 
-This driver is needed to boot U-Boot with Linux DT since v6.4,
-since it switched the MDIO mux from the mmio to a proper GXL driver.
-
-[1] 9a24e1ff4326 ("net: mdio: add amlogic gxl mdio mux support")
+Most of the changes are only cosmetic or doesn't concern U-Boot,
+the most important change for U-Boot is the GXL mdio mux compatible
+switch to amlogic,gxl-mdio-mux.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/net/Kconfig              |   7 ++
- drivers/net/Makefile             |   1 +
- drivers/net/mdio_mux_meson_gxl.c | 138 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 146 insertions(+)
+ arch/arm/dts/meson-gx-libretech-pc.dtsi            |  4 +-
+ arch/arm/dts/meson-gx.dtsi                         | 21 ++++---
+ arch/arm/dts/meson-gxbb-nanopi-k2.dts              | 13 ++++-
+ arch/arm/dts/meson-gxbb-odroidc2.dts               | 26 ++++-----
+ arch/arm/dts/meson-gxbb.dtsi                       | 18 +++++-
+ arch/arm/dts/meson-gxl-s805x-libretech-ac.dts      |  2 +-
+ .../arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts | 12 +++-
+ arch/arm/dts/meson-gxl-s905x-khadas-vim.dts        | 16 +----
+ arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts   |  3 +-
+ arch/arm/dts/meson-gxl-s905x-p212.dts              | 68 ++++++++++++++++++++++
+ arch/arm/dts/meson-gxl-s905x-p212.dtsi             | 21 ++++---
+ arch/arm/dts/meson-gxl.dtsi                        | 43 +++++++++-----
+ arch/arm/dts/meson-gxm-khadas-vim2.dts             | 15 ++---
+ arch/arm/dts/meson-gxm-wetek-core2.dts             |  2 -
+ configs/beelink-gt1-ultimate_defconfig             |  2 +-
+ configs/jethub_j80_defconfig                       |  2 +-
+ configs/khadas-vim2_defconfig                      |  2 +-
+ configs/khadas-vim_defconfig                       |  2 +-
+ configs/libretech-ac_defconfig                     |  2 +-
+ configs/libretech-cc_defconfig                     |  2 +-
+ configs/libretech-cc_v2_defconfig                  |  2 +-
+ configs/libretech-s905d-pc_defconfig               |  2 +-
+ configs/libretech-s912-pc_defconfig                |  2 +-
+ configs/p212_defconfig                             |  2 +-
+ configs/wetek-core2_defconfig                      |  2 +-
+ 25 files changed, 196 insertions(+), 90 deletions(-)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index ebab4d9f2e..18ec910d12 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -988,4 +988,11 @@ config MDIO_MUX_MESON_G12A
- 	  This driver is used for the MDIO mux found on the Amlogic G12A & compatible
- 	  SoCs.
+diff --git a/arch/arm/dts/meson-gx-libretech-pc.dtsi b/arch/arm/dts/meson-gx-libretech-pc.dtsi
+index 2d7032f41e..4e84ab87cc 100644
+--- a/arch/arm/dts/meson-gx-libretech-pc.dtsi
++++ b/arch/arm/dts/meson-gx-libretech-pc.dtsi
+@@ -17,7 +17,7 @@
+ 		io-channel-names = "buttons";
+ 		keyup-threshold-microvolt = <1800000>;
  
-+config MDIO_MUX_MESON_GXL
-+	bool "MDIO MUX for Amlogic Meson GXL SoCs"
-+	depends on DM_MDIO_MUX
-+	help
-+	  This driver is used for the MDIO mux found on the Amlogic GXL & compatible
-+	  SoCs.
+-		update-button {
++		button-update {
+ 			label = "update";
+ 			linux,code = <KEY_VENDOR>;
+ 			press-threshold-microvolt = <1300000>;
+@@ -416,7 +416,7 @@
+ 	pinctrl-names = "default";
+ 	status = "okay";
+ 
+-	gd25lq128: spi-flash@0 {
++	gd25lq128: flash@0 {
+ 		compatible = "jedec,spi-nor";
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+diff --git a/arch/arm/dts/meson-gx.dtsi b/arch/arm/dts/meson-gx.dtsi
+index 6b457b2c30..11f89bfecb 100644
+--- a/arch/arm/dts/meson-gx.dtsi
++++ b/arch/arm/dts/meson-gx.dtsi
+@@ -49,6 +49,12 @@
+ 			no-map;
+ 		};
+ 
++		/* 32 MiB reserved for ARM Trusted Firmware (BL32) */
++		secmon_reserved_bl32: secmon@5300000 {
++			reg = <0x0 0x05300000 0x0 0x2000000>;
++			no-map;
++		};
 +
- endif # NETDEVICES
-diff --git a/drivers/net/Makefile b/drivers/net/Makefile
-index 1ce6fea323..3794609fd2 100644
---- a/drivers/net/Makefile
-+++ b/drivers/net/Makefile
-@@ -58,6 +58,7 @@ obj-$(CONFIG_MCFFEC) += mcffec.o mcfmii.o
- obj-$(CONFIG_MDIO_IPQ4019) += mdio-ipq4019.o
- obj-$(CONFIG_MDIO_MUX_I2CREG) += mdio_mux_i2creg.o
- obj-$(CONFIG_MDIO_MUX_MESON_G12A) += mdio_mux_meson_g12a.o
-+obj-$(CONFIG_MDIO_MUX_MESON_GXL) += mdio_mux_meson_gxl.o
- obj-$(CONFIG_MDIO_MUX_MMIOREG) += mdio_mux_mmioreg.o
- obj-$(CONFIG_MDIO_MUX_SANDBOX) += mdio_mux_sandbox.o
- obj-$(CONFIG_MDIO_SANDBOX) += mdio_sandbox.o
-diff --git a/drivers/net/mdio_mux_meson_gxl.c b/drivers/net/mdio_mux_meson_gxl.c
-new file mode 100644
-index 0000000000..8ef3ae598b
---- /dev/null
-+++ b/drivers/net/mdio_mux_meson_gxl.c
-@@ -0,0 +1,138 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (c) 2022 Baylibre, SAS.
-+ * Author: Jerome Brunet <jbrunet@baylibre.com>
-+ * Copyright (c) 2023 Neil Armstrong <neil.armstrong@linaro.org>
-+ */
+ 		linux,cma {
+ 			compatible = "shared-dma-pool";
+ 			reusable;
+@@ -126,6 +132,7 @@
+ 
+ 		l2: l2-cache0 {
+ 			compatible = "cache";
++			cache-level = <2>;
+ 		};
+ 	};
+ 
+@@ -226,7 +233,7 @@
+ 			reg = <0x14 0x10>;
+ 		};
+ 
+-		eth_mac: eth_mac@34 {
++		eth_mac: eth-mac@34 {
+ 			reg = <0x34 0x10>;
+ 		};
+ 
+@@ -243,7 +250,7 @@
+ 		scpi_clocks: clocks {
+ 			compatible = "arm,scpi-clocks";
+ 
+-			scpi_dvfs: scpi_clocks@0 {
++			scpi_dvfs: clocks-0 {
+ 				compatible = "arm,scpi-dvfs-clocks";
+ 				#clock-cells = <1>;
+ 				clock-indices = <0>;
+@@ -444,7 +451,7 @@
+ 
+ 			sysctrl_AO: sys-ctrl@0 {
+ 				compatible = "amlogic,meson-gx-ao-sysctrl", "simple-mfd", "syscon";
+-				reg =  <0x0 0x0 0x0 0x100>;
++				reg = <0x0 0x0 0x0 0x100>;
+ 
+ 				clkc_AO: clock-controller {
+ 					compatible = "amlogic,meson-gx-aoclkc";
+@@ -525,7 +532,7 @@
+ 			#size-cells = <2>;
+ 			ranges = <0x0 0x0 0x0 0xc8834000 0x0 0x2000>;
+ 
+-			hwrng: rng {
++			hwrng: rng@0 {
+ 				compatible = "amlogic,meson-rng";
+ 				reg = <0x0 0x0 0x0 0x4>;
+ 			};
+@@ -596,21 +603,21 @@
+ 			sd_emmc_a: mmc@70000 {
+ 				compatible = "amlogic,meson-gx-mmc", "amlogic,meson-gxbb-mmc";
+ 				reg = <0x0 0x70000 0x0 0x800>;
+-				interrupts = <GIC_SPI 216 IRQ_TYPE_EDGE_RISING>;
++				interrupts = <GIC_SPI 216 IRQ_TYPE_LEVEL_HIGH>;
+ 				status = "disabled";
+ 			};
+ 
+ 			sd_emmc_b: mmc@72000 {
+ 				compatible = "amlogic,meson-gx-mmc", "amlogic,meson-gxbb-mmc";
+ 				reg = <0x0 0x72000 0x0 0x800>;
+-				interrupts = <GIC_SPI 217 IRQ_TYPE_EDGE_RISING>;
++				interrupts = <GIC_SPI 217 IRQ_TYPE_LEVEL_HIGH>;
+ 				status = "disabled";
+ 			};
+ 
+ 			sd_emmc_c: mmc@74000 {
+ 				compatible = "amlogic,meson-gx-mmc", "amlogic,meson-gxbb-mmc";
+ 				reg = <0x0 0x74000 0x0 0x800>;
+-				interrupts = <GIC_SPI 218 IRQ_TYPE_EDGE_RISING>;
++				interrupts = <GIC_SPI 218 IRQ_TYPE_LEVEL_HIGH>;
+ 				status = "disabled";
+ 			};
+ 		};
+diff --git a/arch/arm/dts/meson-gxbb-nanopi-k2.dts b/arch/arm/dts/meson-gxbb-nanopi-k2.dts
+index 7273eed529..7d94160f58 100644
+--- a/arch/arm/dts/meson-gxbb-nanopi-k2.dts
++++ b/arch/arm/dts/meson-gxbb-nanopi-k2.dts
+@@ -385,9 +385,20 @@
+ 
+ /* Bluetooth on AP6212 */
+ &uart_A {
+-	status = "disabled";
++	status = "okay";
+ 	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
+ 	pinctrl-names = "default";
++	uart-has-rtscts;
 +
-+#include <dm.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <miiphy.h>
-+#include <asm/io.h>
-+#include <linux/bitfield.h>
-+#include <linux/delay.h>
++	bluetooth {
++		compatible = "brcm,bcm43438-bt";
++		clocks = <&wifi_32k>;
++		clock-names = "lpo";
++		vbat-supply = <&vddio_ao3v3>;
++		vddio-supply = <&vddio_ao18>;
++		host-wakeup-gpios = <&gpio GPIOX_21 GPIO_ACTIVE_HIGH>;
++		shutdown-gpios = <&gpio GPIOX_20 GPIO_ACTIVE_HIGH>;
++	};
+ };
+ 
+ /* 40-pin CON1 */
+diff --git a/arch/arm/dts/meson-gxbb-odroidc2.dts b/arch/arm/dts/meson-gxbb-odroidc2.dts
+index 201596247f..01356437a0 100644
+--- a/arch/arm/dts/meson-gxbb-odroidc2.dts
++++ b/arch/arm/dts/meson-gxbb-odroidc2.dts
+@@ -250,21 +250,6 @@
+ 	};
+ };
+ 
+-&gpio_ao {
+-	/*
+-	 * WARNING: The USB Hub on the Odroid-C2 needs a reset signal
+-	 * to be turned high in order to be detected by the USB Controller
+-	 * This signal should be handled by a USB specific power sequence
+-	 * in order to reset the Hub when USB bus is powered down.
+-	 */
+-	hog-0 {
+-		gpio-hog;
+-		gpios = <GPIOAO_4 GPIO_ACTIVE_HIGH>;
+-		output-high;
+-		line-name = "usb-hub-reset";
+-	};
+-};
+-
+ &hdmi_tx {
+ 	status = "okay";
+ 	pinctrl-0 = <&hdmi_hpd_pins>, <&hdmi_i2c_pins>;
+@@ -414,5 +399,16 @@
+ };
+ 
+ &usb1 {
++	dr_mode = "host";
++	#address-cells = <1>;
++	#size-cells = <0>;
+ 	status = "okay";
 +
-+#define ETH_REG2		0x0
-+#define  REG2_PHYID		GENMASK(21, 0)
-+#define   EPHY_GXL_ID		0x110181
-+#define  REG2_LEDACT		GENMASK(23, 22)
-+#define  REG2_LEDLINK		GENMASK(25, 24)
-+#define  REG2_DIV4SEL		BIT(27)
-+#define  REG2_ADCBYPASS		BIT(30)
-+#define  REG2_CLKINSEL		BIT(31)
-+#define ETH_REG3		0x4
-+#define  REG3_ENH		BIT(3)
-+#define  REG3_CFGMODE		GENMASK(6, 4)
-+#define  REG3_AUTOMDIX		BIT(7)
-+#define  REG3_PHYADDR		GENMASK(12, 8)
-+#define  REG3_PWRUPRST		BIT(21)
-+#define  REG3_PWRDOWN		BIT(22)
-+#define  REG3_LEDPOL		BIT(23)
-+#define  REG3_PHYMDI		BIT(26)
-+#define  REG3_CLKINEN		BIT(29)
-+#define  REG3_PHYIP		BIT(30)
-+#define  REG3_PHYEN		BIT(31)
-+#define ETH_REG4		0x8
-+#define  REG4_PWRUPRSTSIG	BIT(0)
++	hub@1 {
++		/* Genesys Logic GL852G USB 2.0 hub */
++		compatible = "usb5e3,610";
++		reg = <1>;
++		vdd-supply = <&p5v0>;
++		reset-gpio = <&gpio_ao GPIOAO_4 GPIO_ACTIVE_LOW>;
++	};
+ };
+diff --git a/arch/arm/dts/meson-gxbb.dtsi b/arch/arm/dts/meson-gxbb.dtsi
+index 7c029f552a..12ef6e81c8 100644
+--- a/arch/arm/dts/meson-gxbb.dtsi
++++ b/arch/arm/dts/meson-gxbb.dtsi
+@@ -300,8 +300,8 @@
+ };
+ 
+ &gpio_intc {
+-	compatible = "amlogic,meson-gpio-intc",
+-		     "amlogic,meson-gxbb-gpio-intc";
++	compatible = "amlogic,meson-gxbb-gpio-intc",
++		     "amlogic,meson-gpio-intc";
+ 	status = "okay";
+ };
+ 
+@@ -427,6 +427,20 @@
+ 			};
+ 		};
+ 
++		spi_idle_high_pins: spi-idle-high-pins {
++			mux {
++				groups = "spi_sclk";
++				bias-pull-up;
++			};
++		};
 +
-+#define MESON_GXL_MDIO_EXTERNAL_ID 0
-+#define MESON_GXL_MDIO_INTERNAL_ID 1
++		spi_idle_low_pins: spi-idle-low-pins {
++			mux {
++				groups = "spi_sclk";
++				bias-pull-down;
++			};
++		};
 +
-+struct mdio_mux_meson_gxl_priv {
-+	phys_addr_t regs;
+ 		spi_ss0_pins: spi-ss0 {
+ 			mux {
+ 				groups = "spi_ss0";
+diff --git a/arch/arm/dts/meson-gxl-s805x-libretech-ac.dts b/arch/arm/dts/meson-gxl-s805x-libretech-ac.dts
+index 2d769203f6..213a0705eb 100644
+--- a/arch/arm/dts/meson-gxl-s805x-libretech-ac.dts
++++ b/arch/arm/dts/meson-gxl-s805x-libretech-ac.dts
+@@ -298,7 +298,7 @@
+ 	pinctrl-0 = <&nor_pins>;
+ 	pinctrl-names = "default";
+ 
+-	w25q32: spi-flash@0 {
++	w25q32: flash@0 {
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+ 		compatible = "jedec,spi-nor";
+diff --git a/arch/arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts b/arch/arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts
+index 6eafb90869..a18d6d241a 100644
+--- a/arch/arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts
++++ b/arch/arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts
+@@ -86,11 +86,11 @@
+ };
+ 
+ &efuse {
+-	bt_mac: bt_mac@6 {
++	bt_mac: bt-mac@6 {
+ 		reg = <0x6 0x6>;
+ 	};
+ 
+-	wifi_mac: wifi_mac@C {
++	wifi_mac: wifi-mac@c {
+ 		reg = <0xc 0x6>;
+ 	};
+ };
+@@ -213,6 +213,12 @@
+ 	pinctrl-0 = <&uart_a_pins>, <&uart_a_cts_rts_pins>;
+ 	pinctrl-names = "default";
+ 	uart-has-rtscts;
++
++	bluetooth {
++		compatible = "realtek,rtl8822cs-bt";
++		enable-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
++		host-wake-gpios = <&gpio GPIOX_18 GPIO_ACTIVE_HIGH>;
++       };
+ };
+ 
+ &uart_C {
+@@ -233,7 +239,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&i2c_b_pins>;
+ 
+-	pcf8563: pcf8563@51 {
++	pcf8563: rtc@51 {
+ 		compatible = "nxp,pcf8563";
+ 		reg = <0x51>;
+ 		status = "okay";
+diff --git a/arch/arm/dts/meson-gxl-s905x-khadas-vim.dts b/arch/arm/dts/meson-gxl-s905x-khadas-vim.dts
+index 60feac0179..02f81839d4 100644
+--- a/arch/arm/dts/meson-gxl-s905x-khadas-vim.dts
++++ b/arch/arm/dts/meson-gxl-s905x-khadas-vim.dts
+@@ -140,7 +140,6 @@
+ 		compatible = "haoyu,hym8563";
+ 		reg = <0x51>;
+ 		#clock-cells = <0>;
+-		clock-frequency = <32768>;
+ 		clock-output-names = "xin32k";
+ 	};
+ };
+@@ -218,20 +217,7 @@
+ };
+ 
+ &sd_emmc_a {
+-	brcmf: wifi@1 {
+-		reg = <1>;
+-		compatible = "brcm,bcm4329-fmac";
+-	};
+-};
+-
+-&uart_A {
+-	bluetooth {
+-		compatible = "brcm,bcm43438-bt";
+-		shutdown-gpios = <&gpio GPIOX_17 GPIO_ACTIVE_HIGH>;
+-		max-speed = <2000000>;
+-		clocks = <&wifi32k>;
+-		clock-names = "lpo";
+-	};
++	max-frequency = <100000000>;
+ };
+ 
+ /* This is brought out on the Linux_RX (18) and Linux_TX (19) pins: */
+diff --git a/arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts b/arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts
+index 93d8f8aff7..6c4e68e0e6 100644
+--- a/arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts
++++ b/arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts
+@@ -284,7 +284,7 @@
+ 	pinctrl-0 = <&nor_pins>;
+ 	pinctrl-names = "default";
+ 
+-	nor_4u1: spi-flash@0 {
++	nor_4u1: flash@0 {
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+ 		compatible = "jedec,spi-nor";
+@@ -305,7 +305,6 @@
+ };
+ 
+ &usb2_phy0 {
+-	pinctrl-names = "default";
+ 	phy-supply = <&vcc5v>;
+ };
+ 
+diff --git a/arch/arm/dts/meson-gxl-s905x-p212.dts b/arch/arm/dts/meson-gxl-s905x-p212.dts
+index 2602940c20..9b4ea6a493 100644
+--- a/arch/arm/dts/meson-gxl-s905x-p212.dts
++++ b/arch/arm/dts/meson-gxl-s905x-p212.dts
+@@ -7,11 +7,19 @@
+ /dts-v1/;
+ 
+ #include "meson-gxl-s905x-p212.dtsi"
++#include <dt-bindings/sound/meson-aiu.h>
+ 
+ / {
+ 	compatible = "amlogic,p212", "amlogic,s905x", "amlogic,meson-gxl";
+ 	model = "Amlogic Meson GXL (S905X) P212 Development Board";
+ 
++	dio2133: analog-amplifier {
++		compatible = "simple-audio-amplifier";
++		sound-name-prefix = "AU2";
++		VCC-supply = <&hdmi_5v>;
++		enable-gpios = <&gpio GPIOH_5 GPIO_ACTIVE_HIGH>;
++	};
++
+ 	cvbs-connector {
+ 		compatible = "composite-video-connector";
+ 
+@@ -32,6 +40,66 @@
+ 			};
+ 		};
+ 	};
++
++	sound {
++		compatible = "amlogic,gx-sound-card";
++		model = "S905X-P212";
++		audio-aux-devs = <&dio2133>;
++		audio-widgets = "Line", "Lineout";
++		audio-routing = "AU2 INL", "ACODEC LOLN",
++				"AU2 INR", "ACODEC LORN",
++				"Lineout", "AU2 OUTL",
++				"Lineout", "AU2 OUTR";
++		assigned-clocks = <&clkc CLKID_MPLL0>,
++				  <&clkc CLKID_MPLL1>,
++				  <&clkc CLKID_MPLL2>;
++		assigned-clock-parents = <0>, <0>, <0>;
++		assigned-clock-rates = <294912000>,
++				       <270950400>,
++				       <393216000>;
++		dai-link-0 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_FIFO>;
++		};
++
++		dai-link-1 {
++			sound-dai = <&aiu AIU_CPU CPU_I2S_ENCODER>;
++			dai-format = "i2s";
++			mclk-fs = <256>;
++
++			codec-0 {
++				sound-dai = <&aiu AIU_HDMI CTRL_I2S>;
++			};
++
++			codec-1 {
++				sound-dai = <&aiu AIU_ACODEC CTRL_I2S>;
++			};
++		};
++
++		dai-link-2 {
++			sound-dai = <&aiu AIU_HDMI CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&hdmi_tx>;
++			};
++		};
++
++		dai-link-3 {
++			sound-dai = <&aiu AIU_ACODEC CTRL_OUT>;
++
++			codec-0 {
++				sound-dai = <&acodec>;
++			};
++		};
++	};
 +};
 +
-+static int meson_gxl_enable_internal_mdio(struct mdio_mux_meson_gxl_priv *priv)
-+{
-+	u32 val;
-+
-+	/* Setup the internal phy */
-+	val = (REG3_ENH |
-+	       FIELD_PREP(REG3_CFGMODE, 0x7) |
-+	       REG3_AUTOMDIX |
-+	       FIELD_PREP(REG3_PHYADDR, 8) |
-+	       REG3_LEDPOL |
-+	       REG3_PHYMDI |
-+	       REG3_CLKINEN |
-+	       REG3_PHYIP);
-+
-+	writel(REG4_PWRUPRSTSIG, priv->regs + ETH_REG4);
-+	writel(val, priv->regs + ETH_REG3);
-+	mdelay(10);
-+
-+	/* NOTE: The HW kept the phy id configurable at runtime.
-+	 * The id below is arbitrary. It is the one used in the vendor code.
-+	 * The only constraint is that it must match the one in
-+	 * drivers/net/phy/meson-gxl.c to properly match the PHY.
-+	 */
-+	writel(FIELD_PREP(REG2_PHYID, EPHY_GXL_ID),
-+	       priv->regs + ETH_REG2);
-+
-+	/* Enable the internal phy */
-+	val |= REG3_PHYEN;
-+	writel(val, priv->regs + ETH_REG3);
-+	writel(0, priv->regs + ETH_REG4);
-+
-+	/* The phy needs a bit of time to power up */
-+	mdelay(10);
-+
-+	return 0;
-+}
-+
-+static int meson_gxl_enable_external_mdio(struct mdio_mux_meson_gxl_priv *priv)
-+{
-+	/* Reset the mdio bus mux to the external phy */
-+	writel(0, priv->regs + ETH_REG3);
-+
-+	return 0;
-+}
-+
-+static int mdio_mux_meson_gxl_select(struct udevice *mux, int cur, int sel)
-+{
-+	struct mdio_mux_meson_gxl_priv *priv = dev_get_priv(mux);
-+
-+	debug("%s: %x -> %x\n", __func__, (u32)cur, (u32)sel);
-+
-+	/* if last selection didn't change we're good to go */
-+	if (cur == sel)
-+		return 0;
-+
-+	switch (sel) {
-+	case MESON_GXL_MDIO_EXTERNAL_ID:
-+		return meson_gxl_enable_external_mdio(priv);
-+	case MESON_GXL_MDIO_INTERNAL_ID:
-+		return meson_gxl_enable_internal_mdio(priv);
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct mdio_mux_ops mdio_mux_meson_gxl_ops = {
-+	.select = mdio_mux_meson_gxl_select,
++&acodec {
++	AVDD-supply = <&vddio_ao18>;
++	status = "okay";
 +};
 +
-+static int mdio_mux_meson_gxl_probe(struct udevice *dev)
-+{
-+	struct mdio_mux_meson_gxl_priv *priv = dev_get_priv(dev);
-+
-+	priv->regs = dev_read_addr(dev);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id mdio_mux_meson_gxl_ids[] = {
-+	{ .compatible = "amlogic,gxl-mdio-mux" },
-+	{ }
++&aiu {
++	status = "okay";
+ };
+ 
+ &cec_AO {
+diff --git a/arch/arm/dts/meson-gxl-s905x-p212.dtsi b/arch/arm/dts/meson-gxl-s905x-p212.dtsi
+index 05cb2f5e5c..a150cc0e18 100644
+--- a/arch/arm/dts/meson-gxl-s905x-p212.dtsi
++++ b/arch/arm/dts/meson-gxl-s905x-p212.dtsi
+@@ -97,6 +97,14 @@
+ 	pinctrl-names = "default";
+ };
+ 
++&pwm_ef {
++	status = "okay";
++	pinctrl-0 = <&pwm_e_pins>;
++	pinctrl-names = "default";
++	clocks = <&clkc CLKID_FCLK_DIV4>;
++	clock-names = "clkin0";
 +};
 +
-+U_BOOT_DRIVER(mdio_mux_meson_gxl) = {
-+	.name		= "mdio_mux_meson_gxl",
-+	.id		= UCLASS_MDIO_MUX,
-+	.of_match	= mdio_mux_meson_gxl_ids,
-+	.probe		= mdio_mux_meson_gxl_probe,
-+	.ops		= &mdio_mux_meson_gxl_ops,
-+	.priv_auto	= sizeof(struct mdio_mux_meson_gxl_priv),
-+};
+ &saradc {
+ 	status = "okay";
+ 	vref-supply = <&vddio_ao18>;
+@@ -125,6 +133,11 @@
+ 
+ 	vmmc-supply = <&vddao_3v3>;
+ 	vqmmc-supply = <&vddio_boot>;
++
++	brcmf: wifi@1 {
++		reg = <1>;
++		compatible = "brcm,bcm4329-fmac";
++	};
+ };
+ 
+ /* SD card */
+@@ -165,14 +178,6 @@
+ 	vqmmc-supply = <&vddio_boot>;
+ };
+ 
+-&pwm_ef {
+-	status = "okay";
+-	pinctrl-0 = <&pwm_e_pins>;
+-	pinctrl-names = "default";
+-	clocks = <&clkc CLKID_FCLK_DIV4>;
+-	clock-names = "clkin0";
+-};
+-
+ /* This is connected to the Bluetooth module: */
+ &uart_A {
+ 	status = "okay";
+diff --git a/arch/arm/dts/meson-gxl.dtsi b/arch/arm/dts/meson-gxl.dtsi
+index c3ac531c4f..17bcfa4702 100644
+--- a/arch/arm/dts/meson-gxl.dtsi
++++ b/arch/arm/dts/meson-gxl.dtsi
+@@ -312,8 +312,8 @@
+ };
+ 
+ &gpio_intc {
+-	compatible = "amlogic,meson-gpio-intc",
+-		     "amlogic,meson-gxl-gpio-intc";
++	compatible = "amlogic,meson-gxl-gpio-intc",
++		     "amlogic,meson-gpio-intc";
+ 	status = "okay";
+ };
+ 
+@@ -429,6 +429,20 @@
+ 			};
+ 		};
+ 
++		spi_idle_high_pins: spi-idle-high-pins {
++			mux {
++				groups = "spi_sclk";
++				bias-pull-up;
++			};
++		};
++
++		spi_idle_low_pins: spi-idle-low-pins {
++			mux {
++				groups = "spi_sclk";
++				bias-pull-down;
++			};
++		};
++
+ 		spi_ss0_pins: spi-ss0 {
+ 			mux {
+ 				groups = "spi_ss0";
+@@ -759,16 +773,23 @@
+ 		};
+ 	};
+ 
+-	eth-phy-mux {
+-		compatible = "mdio-mux-mmioreg", "mdio-mux";
++	eth_phy_mux: mdio@558 {
++		reg = <0x0 0x558 0x0 0xc>;
++		compatible = "amlogic,gxl-mdio-mux";
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+-		reg = <0x0 0x55c 0x0 0x4>;
+-		mux-mask = <0xffffffff>;
++		clocks = <&clkc CLKID_FCLK_DIV4>;
++		clock-names = "ref";
+ 		mdio-parent-bus = <&mdio0>;
+ 
+-		internal_mdio: mdio@e40908ff {
+-			reg = <0xe40908ff>;
++		external_mdio: mdio@0 {
++			reg = <0x0>;
++			#address-cells = <1>;
++			#size-cells = <0>;
++		};
++
++		internal_mdio: mdio@1 {
++			reg = <0x1>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+ 
+@@ -779,12 +800,6 @@
+ 				max-speed = <100>;
+ 			};
+ 		};
+-
+-		external_mdio: mdio@2009087f {
+-			reg = <0x2009087f>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+ 	};
+ };
+ 
+diff --git a/arch/arm/dts/meson-gxm-khadas-vim2.dts b/arch/arm/dts/meson-gxm-khadas-vim2.dts
+index 18a4b7a6c5..74897a1548 100644
+--- a/arch/arm/dts/meson-gxm-khadas-vim2.dts
++++ b/arch/arm/dts/meson-gxm-khadas-vim2.dts
+@@ -52,10 +52,11 @@
+ 		gpios = <&gpio GPIODV_14 GPIO_ACTIVE_HIGH
+ 			 &gpio GPIODV_15 GPIO_ACTIVE_HIGH>;
+ 		/* Dummy RPM values since fan is optional */
+-		gpio-fan,speed-map = <0 0
+-				      1 1
+-				      2 2
+-				      3 3>;
++		gpio-fan,speed-map =
++				<0 0>,
++				<1 1>,
++				<2 2>,
++				<3 3>;
+ 		#cooling-cells = <2>;
+ 	};
+ 
+@@ -270,7 +271,6 @@
+ 		compatible = "haoyu,hym8563";
+ 		reg = <0x51>;
+ 		#clock-cells = <0>;
+-		clock-frequency = <32768>;
+ 		clock-output-names = "xin32k";
+ 	};
+ };
+@@ -307,7 +307,8 @@
+ 	#size-cells = <0>;
+ 
+ 	bus-width = <4>;
+-	max-frequency = <60000000>;
++	cap-sd-highspeed;
++	max-frequency = <100000000>;
+ 
+ 	non-removable;
+ 	disable-wp;
+@@ -373,7 +374,7 @@
+ 	pinctrl-0 = <&nor_pins>;
+ 	pinctrl-names = "default";
+ 
+-	w25q32: spi-flash@0 {
++	w25q32: flash@0 {
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+ 		compatible = "winbond,w25q16", "jedec,spi-nor";
+diff --git a/arch/arm/dts/meson-gxm-wetek-core2.dts b/arch/arm/dts/meson-gxm-wetek-core2.dts
+index 1e7f77f9b5..f8c40340b9 100644
+--- a/arch/arm/dts/meson-gxm-wetek-core2.dts
++++ b/arch/arm/dts/meson-gxm-wetek-core2.dts
+@@ -45,8 +45,6 @@
+ 
+ 	gpio-keys-polled {
+ 		compatible = "gpio-keys-polled";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 		poll-interval = <100>;
+ 
+ 		button-power {
+diff --git a/configs/beelink-gt1-ultimate_defconfig b/configs/beelink-gt1-ultimate_defconfig
+index 1313dde92f..00fdad8544 100644
+--- a/configs/beelink-gt1-ultimate_defconfig
++++ b/configs/beelink-gt1-ultimate_defconfig
+@@ -46,7 +46,7 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/jethub_j80_defconfig b/configs/jethub_j80_defconfig
+index b370e5d1d4..15e410de82 100644
+--- a/configs/jethub_j80_defconfig
++++ b/configs/jethub_j80_defconfig
+@@ -54,7 +54,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/khadas-vim2_defconfig b/configs/khadas-vim2_defconfig
+index 28e9052245..59ef33723e 100644
+--- a/configs/khadas-vim2_defconfig
++++ b/configs/khadas-vim2_defconfig
+@@ -51,7 +51,7 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/khadas-vim_defconfig b/configs/khadas-vim_defconfig
+index d27ab6f590..5ed7c1a408 100644
+--- a/configs/khadas-vim_defconfig
++++ b/configs/khadas-vim_defconfig
+@@ -45,7 +45,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/libretech-ac_defconfig b/configs/libretech-ac_defconfig
+index bc17b423a2..f0ab19580c 100644
+--- a/configs/libretech-ac_defconfig
++++ b/configs/libretech-ac_defconfig
+@@ -57,7 +57,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/libretech-cc_defconfig b/configs/libretech-cc_defconfig
+index baa9b1b3db..bb1a37a0cd 100644
+--- a/configs/libretech-cc_defconfig
++++ b/configs/libretech-cc_defconfig
+@@ -44,7 +44,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/libretech-cc_v2_defconfig b/configs/libretech-cc_v2_defconfig
+index b1c267a791..8949e240c9 100644
+--- a/configs/libretech-cc_v2_defconfig
++++ b/configs/libretech-cc_v2_defconfig
+@@ -52,7 +52,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_PHY=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+diff --git a/configs/libretech-s905d-pc_defconfig b/configs/libretech-s905d-pc_defconfig
+index cd138d696e..a5dc3115fc 100644
+--- a/configs/libretech-s905d-pc_defconfig
++++ b/configs/libretech-s905d-pc_defconfig
+@@ -53,7 +53,7 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/libretech-s912-pc_defconfig b/configs/libretech-s912-pc_defconfig
+index dabb4ca4ec..68f462eeff 100644
+--- a/configs/libretech-s912-pc_defconfig
++++ b/configs/libretech-s912-pc_defconfig
+@@ -52,7 +52,7 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/p212_defconfig b/configs/p212_defconfig
+index b90391d9b5..6b73607d64 100644
+--- a/configs/p212_defconfig
++++ b/configs/p212_defconfig
+@@ -40,7 +40,7 @@ CONFIG_PHY_MESON_GXL=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
+diff --git a/configs/wetek-core2_defconfig b/configs/wetek-core2_defconfig
+index 9bf3de9e7a..01ffb8bbd7 100644
+--- a/configs/wetek-core2_defconfig
++++ b/configs/wetek-core2_defconfig
+@@ -46,7 +46,7 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_MDIO=y
+ CONFIG_DM_MDIO_MUX=y
+ CONFIG_ETH_DESIGNWARE_MESON8B=y
+-CONFIG_MDIO_MUX_MMIOREG=y
++CONFIG_MDIO_MUX_MESON_GXL=y
+ CONFIG_MESON_GXL_USB_PHY=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_MESON_GXL=y
 
 -- 
 2.34.1
