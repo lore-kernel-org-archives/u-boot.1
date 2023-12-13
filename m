@@ -4,78 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DAF5C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:46:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6878CC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:46:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0FBF87937;
-	Wed, 13 Dec 2023 21:39:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C368687824;
+	Wed, 13 Dec 2023 21:40:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FmMz6iBy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TEOwI7CY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 867818790A; Wed, 13 Dec 2023 21:39:46 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 408A58783D; Wed, 13 Dec 2023 21:40:42 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BE9187922
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 388348781A
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:40:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a1ef2f5ed01so924861266b.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:44 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40c2c65e6aaso76660095e9.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:40:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499983; x=1703104783; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vBn5YXzPrUssb6JtKZg+60VJX1QndFI3o1wkd9j/15Y=;
- b=FmMz6iByL86YCcrrVXuo+T4YO4AcBt0R6S17Z6K7HcaqRVqRmCirHSkX3bnVzjXR4P
- Oaz9qcoxVaCK3d0kutHgwLsPiksknKonsDjdNtfOcQp8Pm361Dz0En8NHMvRTzh1cNRT
- w9CS7Sb2ke9Ennxylv0FzvqbffPOwqOpRYqEU=
+ d=chromium.org; s=google; t=1702500039; x=1703104839; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xB95cjcdvIB06Yg29C3hAE8VaRY/V7IPKGYsxWUKUN8=;
+ b=TEOwI7CYebIqQG2U0jby8ygH33XmaaO3DSdHH9H45Mg4N7+qW79QLPnVqUohrhvZCH
+ JYdO22W46TpIL4OEcUdxmX3kyHbqD4ZwwOLXK4C5fBK6gyAI/zIbGXA6MJt/RElj05Wf
+ 3x5w0iAnJ9sNtK51vfyZ7Zh5XQKt18lsQlRIc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499983; x=1703104783;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vBn5YXzPrUssb6JtKZg+60VJX1QndFI3o1wkd9j/15Y=;
- b=t0RczZ1jJ4ItjSaBtpIsEOVT04IlGCDYNx2imoHyYD/BF73AIlzL6Mzn6oPZtBm7Hz
- o33yU22shfqqFDiJyHh92eBuWLGwdMY+X5ISATXK0VHcf8akrO2KgfIO0Hhb7ibfyYhP
- xWdxExxzuhQCPhvHW80Q3HfSvmT8PSxpLC137O6kKs+gjIl8NR2ZZ5iAp0h3jobS+vxu
- 1PeM35ySP1qN459M68a8KzxyN3/YUnsDDsHKH+G6EfknP5i/Y6R77RDrUBd9nsqy6pZ2
- JfGqf/PTQCuw0AqqTPfbkE0hXjKp81YqmHO4/1sDY7Sr+TJ0nqXiBQf9pK/J+dIeGz+P
- ukIA==
-X-Gm-Message-State: AOJu0YwLMORjFjBrXdpZfiQt070SVgzULm0w/PL+amYk3XDr2LTa3Kzi
- woF1tK30MlNAbInTjbfBpp7EdgloRriMff+ytuQhRA==
-X-Google-Smtp-Source: AGHT+IGOuB7b6WIIXAZ5qfhVNABcPt8KbwJC7H6AwMpPTVjeiNbKUjZZrvV024xNsF6tf5lMqS+oILSFOJiLYvX72ks=
-X-Received: by 2002:a17:906:c112:b0:a1b:7622:db60 with SMTP id
- do18-20020a170906c11200b00a1b7622db60mr2655027ejc.1.1702499983287; Wed, 13
- Dec 2023 12:39:43 -0800 (PST)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 12:39:42 -0800
+ d=1e100.net; s=20230601; t=1702500039; x=1703104839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xB95cjcdvIB06Yg29C3hAE8VaRY/V7IPKGYsxWUKUN8=;
+ b=T+EBjT/FTijoxyK4pLxxUxQjm//dsXEECs7NfCVkT9T6CLH9Mf0o3ji7WqbE+JwteP
+ r+W6D7Es7RwFtE4sf3+DpmKAWql7giQ0xckp0UU4G7QpKzXqLI4T8HhMSgHkHeLrTvbD
+ wRFfnqH8/17bpjOEAsOS8kskOeQ63yLngUuFjNG1SNClDqnEyHQ+Zngl3E75dWLz1WbP
+ gGywhBLMzB8KIzfJ4m51UWNMoeso+SSaIsM1NQ6fnFAVpC3+UVmT1rL/B8bR8zOOvYJZ
+ KXwxusWF2LOdJ6MR+gmOlP3Zw5qehdXJBNQIuDncXu/16gS1yqsHS+k8Ewh+Zfmqr2am
+ 6jpQ==
+X-Gm-Message-State: AOJu0YxoIYD40/kT02cihAXq3imUbjJ5z0+qcSX9SlaSUuxgk0R9Em8L
+ FJg6QW5wPg/1hi3m6bqivLw/+MCbeoMb9Oih9JRIOA==
+X-Google-Smtp-Source: AGHT+IFf01tsqT39jhrONWT5jVLyMQfvPaJG9aTR5bwqSSTKoYXSU5/W7ItUD8YJ4BGv20gK6Qn99poruF1tVP7SwCI=
+X-Received: by 2002:a05:600c:4fd6:b0:401:bdd7:49ae with SMTP id
+ o22-20020a05600c4fd600b00401bdd749aemr3856446wmq.18.1702500039429; Wed, 13
+ Dec 2023 12:40:39 -0800 (PST)
 MIME-Version: 1.0
+References: <20231123131003.238105-1-dario.binacchi@amarulasolutions.com>
+ <CAOf5uwmqVaUoD0HayhVkyPL+qNe+n2ZoV8PyjJzHmskBm2TKYQ@mail.gmail.com>
+In-Reply-To: <CAOf5uwmqVaUoD0HayhVkyPL+qNe+n2ZoV8PyjJzHmskBm2TKYQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231002011553.463514-3-sjg@chromium.org>
-References: <20231002011553.463514-3-sjg@chromium.org>
- <20231002011553.463514-1-sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:39:42 -0800
-X-Google-Sender-Auth: XNGvbWKHzDvz-VO9yJNm39VbluE
-Message-ID: <CAPnjgZ2Bs-yfYj7=9h4Pyha2vT=WW-6ta3QYK-3+a6dGLdPXbg@mail.gmail.com>
-Subject: Re: [PATCH 02/34] test: Add a new suite for commands
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <agust@denx.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Linus Walleij <linus.walleij@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stephen Carlson <stcarlso@linux.microsoft.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 13 Dec 2023 13:40:28 -0700
+Message-ID: <CAPnjgZ3EhqRX3RkAuW7nWK-UbWRK-3DLhZ2GYtR=V0shVxenHA@mail.gmail.com>
+Subject: Re: [PATCH] binman: doc: fix typo
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,21 +84,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new suite for 'cmd' tests, used for testing commands. These are
-kept in the test/cmd directory.
-
-For now it is empty, but it will be used for coreboot-command tests.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- include/test/cmd.h    | 15 +++++++++++++++
- include/test/suites.h |  1 +
- test/cmd/Makefile     |  2 ++
- test/cmd/cmd_ut_cmd.c | 21 +++++++++++++++++++++
- test/cmd_ut.c         |  6 ++++++
- 5 files changed, 45 insertions(+)
- create mode 100644 include/test/cmd.h
- create mode 100644 test/cmd/cmd_ut_cmd.c
+On Thu, 23 Nov 2023 at 06:13, Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi
+>
+> On Thu, Nov 23, 2023 at 2:10=E2=80=AFPM Dario Binacchi
+> <dario.binacchi@amarulasolutions.com> wrote:
+> >
+> > s/use set/set/
+> >
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > ---
+> >
+> >  tools/binman/binman.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
 
 Applied to u-boot-dm/next, thanks!
