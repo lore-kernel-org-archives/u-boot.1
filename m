@@ -4,67 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C858C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0042C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 06:06:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4FA3876CC;
-	Wed, 13 Dec 2023 04:58:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9BF86870F6;
+	Wed, 13 Dec 2023 07:06:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fDReiXw5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EEBB877B0; Wed, 13 Dec 2023 04:58:57 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5E4BE87227; Wed, 13 Dec 2023 07:06:51 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06A2E86DC3
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21E2A86FB0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 07:06:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BD3wj7F068991;
- Tue, 12 Dec 2023 21:58:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702439925;
- bh=b5o4TklXyoAw16qpcAqJVzbp6hpEC+OAvUOpfH33fqM=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=fDReiXw5qFYedp2QVSVabRnPRJAk+E2QIkzI2NVgYf07sjb5roeqjvakedCAdwcYt
- QZBNfsPsOgfWVNmjQKi2IFlFHidin76qWkMa0eMyBpuYZmLnBfnWxIp1lwS8bu6pBz
- NPCvCRzedllM0xMpovU7uMrS3HGeY2Vt+t7NBjQ8=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BD3wj5Q059335
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 12 Dec 2023 21:58:45 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 12
- Dec 2023 21:58:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 12 Dec 2023 21:58:45 -0600
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BD3wjSo035613;
- Tue, 12 Dec 2023 21:58:45 -0600
-Date: Tue, 12 Dec 2023 21:58:45 -0600
-From: Bryan Brattlof <bb@ti.com>
-To: Sjoerd Simons <sjoerd@collabora.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Martyn Welch
- <martyn.welch@collabora.com>, Dave Gerlach <d-gerlach@ti.com>, "Marcel
- Ziswiler" <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v3 4/4] configs: am62x_evm_*: Enable USB and DFU support
-Message-ID: <20231213035845.m77fgbgik7pu6mdo@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20231212210234.509309-1-sjoerd@collabora.com>
- <20231212210234.509309-5-sjoerd@collabora.com>
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3BD66ebe005219;
+ Wed, 13 Dec 2023 14:06:40 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Wed, 13 Dec 2023 14:06:40 +0800
+Date: Wed, 13 Dec 2023 14:06:36 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Randolph <randolph@andestech.com>
+CC: <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>, <dylan@andestech.com>, 
+ <tim609@andestech.com>, CL Wang <cl634@andestech.com>
+Subject: Re: [PATCH V2 1/2] drivers: watchdog: add andes atcwdt200 support
+Message-ID: <ZXlJ7Cja4MixBfBV@swlinux02>
+References: <20231130120729.1362747-1-randolph@andestech.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231212210234.509309-5-sjoerd@collabora.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <20231130120729.1362747-1-randolph@andestech.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3BD66ebe005219
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,37 +62,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sjoerd!
-
-On December 12, 2023 thus sayeth Sjoerd Simons:
-> Enable USB host as well as USB gadget and DFU support for a53; For the
-> r5 due to the smaller available size create a new config just for
-> DFU support
+On Thu, Nov 30, 2023 at 08:07:28PM +0800, Randolph wrote:
+> This patch adds an implementation of the Andes watchdog ATCWDT200 driver.
 > 
-> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> 
+> Signed-off-by: CL Wang <cl634@andestech.com>
+> Signed-off-by: Randolph <randolph@andestech.com>
 > ---
+>  drivers/watchdog/Kconfig         |   6 +
+>  drivers/watchdog/Makefile        |   1 +
+>  drivers/watchdog/atcwdt200_wdt.c | 220 +++++++++++++++++++++++++++++++
+>  3 files changed, 227 insertions(+)
+>  create mode 100644 drivers/watchdog/atcwdt200_wdt.c
 > 
-> Changes in v3:
-> - Run savedefconfig to adjust to more recent u-boot
-> 
-> Changes in v2:
-> - Create a seperate defconfig for R5
-> 
->  configs/am62x_evm_a53_defconfig       |  31 ++++++-
->  configs/am62x_evm_r5_usbdfu_defconfig | 111 ++++++++++++++++++++++++++
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 07fc4940e9..6b0f77dd3f 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -130,6 +130,12 @@ config WDT_AT91
+>  	  Select this to enable Microchip watchdog timer, which can be found on
+>  	  some AT91 devices.
+>  
+> +config WDT_ATCWDT200
+> +	bool "Andes watchdog timer support"
+> +	depends on WDT
+> +	help
+> +	  Select this to enable Andes ATCWDT200 watchdog timer
+> +
+>  config WDT_BCM6345
+>  	bool "BCM6345 watchdog timer support"
+>  	depends on WDT && (ARCH_BMIPS || BCM6856 || \
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index eef786f5e7..1750ebbb1f 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -22,6 +22,7 @@ obj-$(CONFIG_WDT_ARM_SMC) += arm_smc_wdt.o
+>  obj-$(CONFIG_WDT_ARMADA_37XX) += armada-37xx-wdt.o
+>  obj-$(CONFIG_WDT_ASPEED) += ast_wdt.o
+>  obj-$(CONFIG_WDT_AST2600) += ast2600_wdt.o
+> +obj-$(CONFIG_WDT_ATCWDT200) += atcwdt200_wdt.o
+>  obj-$(CONFIG_WDT_BCM2835) += bcm2835_wdt.o
+>  obj-$(CONFIG_WDT_BCM6345) += bcm6345_wdt.o
+>  obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
+> diff --git a/drivers/watchdog/atcwdt200_wdt.c b/drivers/watchdog/atcwdt200_wdt.c
+> new file mode 100644
+> index 0000000000..2a456d7a46
+> --- /dev/null
+> +++ b/drivers/watchdog/atcwdt200_wdt.c
+> @@ -0,0 +1,220 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C)  2023 Andes Technology Corporation.
+> + *
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <dm.h>
+> +#include <hang.h>
+> +#include <linux/bitops.h>
+> +#include <wdt.h>
+> +
+> +#define NODE_NOT_FOUND     0xFFFFFFFF
+> +
+> +#define WDT_WP_MAGIC       0x5aa5
+> +#define WDT_RESTART_MAGIC  0xcafe
+> +
+> +/* Control Register */
+> +#define REG_WDT_ID         0x00
+> +#define REG_WDT_CFG        0x10
+> +#define REG_WDT_RS         0x14
+> +#define REG_WDT_WE         0x18
+> +#define REG_WDT_STA        0x1C
+> +
+> +#define RST_TIME_OFF       8
+> +#define RST_TIME_MSK       (0x7 << RST_TIME_OFF)
+> +#define RST_CLK_128        (0 << RST_TIME_OFF)
+> +#define RST_CLK_256        (1 << RST_TIME_OFF)
+> +#define RST_CLK_512        (2 << RST_TIME_OFF)
+> +#define RST_CLK_1024       (3 << RST_TIME_OFF)
+> +#define INT_TIME_OFF       4
+> +#define INT_TIME_MSK       (0xf << INT_TIME_OFF)
+> +#define INT_CLK_2_6        (0 << INT_TIME_OFF)  /* clk period*2^6  */
+> +#define INT_CLK_2_8        (1 << INT_TIME_OFF)  /* clk period*2^8  */
+> +#define INT_CLK_2_10       (2 << INT_TIME_OFF)  /* clk period*2^10 */
+> +#define INT_CLK_2_11       (3 << INT_TIME_OFF)  /* clk period*2^11 */
+> +#define INT_CLK_2_12       (4 << INT_TIME_OFF)  /* clk period*2^12 */
+> +#define INT_CLK_2_13       (5 << INT_TIME_OFF)  /* clk period*2^13 */
+> +#define INT_CLK_2_14       (6 << INT_TIME_OFF)  /* clk period*2^14 */
+> +#define INT_CLK_2_15       (7 << INT_TIME_OFF)  /* clk period*2^15 */
+> +#define INT_CLK_2_17       (8 << INT_TIME_OFF)  /* clk period*2^17 */
+> +#define INT_CLK_2_19       (9 << INT_TIME_OFF)  /* clk period*2^19 */
+> +#define INT_CLK_2_21       (10 << INT_TIME_OFF) /* clk period*2^21 */
+> +#define INT_CLK_2_23       (11 << INT_TIME_OFF) /* clk period*2^23 */
+> +#define INT_CLK_2_25       (12 << INT_TIME_OFF) /* clk period*2^25 */
+> +#define INT_CLK_2_27       (13 << INT_TIME_OFF) /* clk period*2^27 */
+> +#define INT_CLK_2_29       (14 << INT_TIME_OFF) /* clk period*2^29 */
+> +#define INT_CLK_2_31       (15 << INT_TIME_OFF) /* clk period*2^31 */
+> +#define INT_CLK_MIN        0x0
+> +#define INT_CLK_MAX_16B    0x7
+> +#define INT_CLK_MAX_32B    0xF
+> +#define RST_EN             BIT(3)
+> +#define INT_EN             BIT(2)
+> +#define CLK_PCLK           BIT(1)
+> +#define WDT_EN             BIT(0)
+> +#define INT_EXPIRED        BIT(0)
+> +
+> +#define INT_TIME_ARRAY     16
+> +#define RST_TIME_ARRAY     8
+> +
+> +struct wdt_priv {
+> +	void __iomem *base;
+> +	u32 wdt_clk_src;
+> +	u32 clk_freq;
+> +	u8  max_clk;
+> +};
+> +
+> +static inline u8 atcwdt_get_2_power_of_n(u8 index, u8 type)
+> +{
+> +	const u8 div_int[INT_TIME_ARRAY] = {6, 8, 10, 11, 12, 13, 14, 15,
+> +					    17, 19, 21, 23, 25, 27, 29, 31};
+> +	const u8 div_rst[RST_TIME_ARRAY] = {7, 8, 9, 10, 11, 12, 13, 14};
+> +	u8 *pdiv;
+> +
+> +	if (type == RST_TIME_ARRAY)
+> +		pdiv = div_rst;
+> +	else
+> +		pdiv = div_int;
+> +
+> +	if (index >= type)
+> +		index = type - 1;
+> +
+> +	return pdiv[index];
+> +}
+> +
+> +static u8 atwdt_search_msb(u64 freq_ms, u8 type)
+             ^^^^^
+Hi Randolph,
 
-One of the newer developments was the addition of config fragments[0] to 
-try to minimize all the duplicate defconfigs for all the different 
-evaluation boards for the same SoC we have in the pipeline. I'm 
-wondering what people would think if we did this for the different 
-boot-mode defconfigs for the 62xx extended family like this usbdfu and 
-cpsw? 
+Is this a typo here? (atcwdt?)
 
-idk how messy it would get trying to disable one of the primary boot 
-modes like MMC and enable USB though... So this may be a idea for 
-another day.
 
-[0] https://lore.kernel.org/u-boot/20231130115552.3580995-16-a-nandan@ti.com/ 
+> +{
+> +	u64 result;
+> +	u64 freq_sec;
+> +	u8 index;
+> +
+> +	freq_sec = freq_ms / 1000;
+> +	for (index = 0; index < type; index++) {
+> +		result = freq_sec >> atcwdt_get_2_power_of_n(index, type);
+> +
+> +		if (result <= 1)
+> +			break;
+> +	}
+> +
+> +	return index;
+> +}
 
-~Bryan
+> +static const struct udevice_id atcwdt_wdt_ids[] = {
+> +	{.compatible = "andestech,atcwdt200"},
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(atcwdt) = {
+> +	.name = "atc_wdt",
+             ^^^^^^^
+Is this a typo as well?
+
+> +	.id = UCLASS_WDT,
+> +	.probe = atcwdt_wdt_probe,
+> +	.of_match = atcwdt_wdt_ids,
+> +	.ops = &atcwdt_wdt_ops,
+> +	.priv_auto = sizeof(struct wdt_priv),
+> +};
+
+
+Other than that,
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
