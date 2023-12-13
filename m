@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B16BBC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:00:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 575FAC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:00:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AD41878D0;
-	Wed, 13 Dec 2023 22:00:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D9684878B7;
+	Wed, 13 Dec 2023 22:00:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UFMV6DLn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eq4c8RJe";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="pc3QnaXm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0144878BF; Wed, 13 Dec 2023 22:00:31 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 32EE587880; Wed, 13 Dec 2023 22:00:43 +0100 (CET)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 455BA87880
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 22:00:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95B97878B7
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 22:00:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Sr7DB66Zwz9svb;
- Wed, 13 Dec 2023 22:00:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702501226;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2RoGCA6G2sQTSpyP6IJ7K92Sy88ZxJuWH0lsQYAi4dY=;
- b=UFMV6DLnxHZyeUBnhAiPVkYylP/gtnQnF2UBc29RJncoKnjbnstxLap5yHjVc1FZrFtW9Y
- cHdLEs6mxlKU7zlAH7QNJFst/ODnSlMcfGaMDhQam3/xWsRxMdPoSPkSmohhs8uYpNC+v2
- ITTD8e7n+8Jh8Vm0gy+b1WaQ9wf2yYmseqG6narObF1KwvNuvpfy6SBI2A6OU1u2APvmwN
- pGkixSUfaZLzc0LUPReh9aCkgJbeF1RSDRuqbYM1memm05knG2E3F+OzJys2a7dw9yKaK3
- X4bmNVThD24Tb+LUA61WAFHsGUaFa47SyX+Pa3B/R+B3vIPKs8EqqsptrTXWJA==
-Message-ID: <1eeea86e-f696-4452-a160-6c5e8131f6ad@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702501225;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2RoGCA6G2sQTSpyP6IJ7K92Sy88ZxJuWH0lsQYAi4dY=;
- b=eq4c8RJegDaTwtAXMg1KYnn0syuRZE5B7SBOLO0ofyk+zHrrAPMvsxuL9pXWSm2vfkkDxY
- +Z5OO9LrsEm173O+ARU9IoUWTHzZ5+POED/X7ElewOsJeSC4/MavTmvL1/AEAetZ482i4u
- lXUBMG5tsJMtd+OuLKQ9mxsb3AwG8oLicKz2x9db5T7zqsQLTf/RmNn/5eE+7nEYyo+dUJ
- py3EYGhrQhe1qHhh3XB3GBINPg0wQ6/yTS8l7H5xgyJLEoVclDholxDuF8OZ6gQ9sdCDyJ
- 7wtUo04P4MRPJw+neBQer852HcH4h707SicJWmfGGaHiiz9mrp6s8HnUeV2WyQ==
-Date: Wed, 13 Dec 2023 22:00:23 +0100
-MIME-Version: 1.0
-Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
-Content-Language: en-US
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: a90b0ae8-99fa-11ee-91e7-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id a90b0ae8-99fa-11ee-91e7-005056994fde;
+ Wed, 13 Dec 2023 22:00:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=/kwpCwXIvI24I6ir6VJT2uOWiiU5t0LwyDXeifhGX+I=;
+ b=pc3QnaXmQsRSCc/dCBpqw0yABD8okHQw4RUIuYp3fxIPKQojG1DOZ5aYg+bGQ7sM7mm1yNh0SuDOy
+ 0lyeY1zsu76xxgq/WEBEBFphA6u/EEFz1AC3Pp/LJygPJwA/YmIhZ5/z3IrIOMAyacSkuaH+y8w7ad
+ jFFRhMX+Bz7ijcvPNS6W4dv5rEtAa+vRtKbytcqZ//QHhGWTZhEwW62VO0IGrevYSt5jgyHScDNtMl
+ i3XxO2J6vNHUqGLrD0hIStbl5VWHr1hpRMmbk2q2GFNH/xwotACIymYoOQC/fUO3fpdi5pDAnyajbm
+ 6aN5mJyRRppq/Roz8f4kLOvfz98c/hA==
+X-KPN-MID: 33|KYHi0bGRzDTkToC+WnYFJ9aPX2bUXrnHNloFbu6o9SFLO25mncS7DdusxBSeVGf
+ 8VHP52yyaalOVK2nelHJhG8ZQxk8J0Fbndj9rW/DMlyA=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|auxhqopRA4sSCXJvFzZifrITU5KA0Kyh3qaf9OK+bRKnSkrk3ME/0Cu78AytYtH
+ omypJFgg69rFhAmK02C1cWg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id ab3051d9-99fa-11ee-ad2d-005056998788;
+ Wed, 13 Dec 2023 22:00:39 +0100 (CET)
+Date: Wed, 13 Dec 2023 22:00:38 +0100
+Message-Id: <87y1dx6cnd.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
 To: Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
- <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
- <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
- <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
- <b09c6600-b05b-4fec-beb0-c0a9a226a507@mailbox.org>
- <CAPnjgZ0vjRjX3nQ+GU-vL6cgZN++szsS_ZEYXN1KXJD=Yxgyvw@mail.gmail.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAPnjgZ0vjRjX3nQ+GU-vL6cgZN++szsS_ZEYXN1KXJD=Yxgyvw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: cfa9f9cfe0e4a8f659b
-X-MBO-RS-META: ascg6pwhimj8jyjer57byxg1iji8qfom
-X-Rspamd-Queue-Id: 4Sr7DB66Zwz9svb
+Cc: trini@konsulko.com, ilias.apalodimas@linaro.org,
+ sean.anderson@seco.com, neil.armstrong@linaro.org,
+ heinrich.schuchardt@canonical.com, pbrobinson@gmail.com,
+ u-boot@lists.denx.de
+In-Reply-To: <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
+ (message from Simon Glass on Wed, 13 Dec 2023 13:41:05 -0700)
+Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
+ nodes are missing
+References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+ <20231127171058.165777-3-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
+ <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
+ <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
+ <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
+ <20231209184915.GY2513409@bill-the-cat>
+ <CAC_iWjKKG50d5QhUZFLUgxqO+VhgE7bC9Tk_SmCR0x4f3zD74g@mail.gmail.com>
+ <CAPnjgZ27G=6fDadAiJk_aG9He2ZpyFhhsZDYxUwEp5+0AQatYg@mail.gmail.com>
+ <20231213201909.GG2513409@bill-the-cat>
+ <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,144 +87,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/13/23 20:49, Simon Glass wrote:
-> Hi Marek,
+> From: Simon Glass <sjg@chromium.org>
+> Date: Wed, 13 Dec 2023 13:41:05 -0700
 > 
-> On Wed, 13 Dec 2023 at 07:08, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>
->> On 12/12/23 15:05, Simon Glass wrote:
->>> Hi Marek,
->>>
->>> On Mon, 11 Dec 2023 at 12:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
->>>>
->>>> On 12/11/23 18:52, Simon Glass wrote:
->>>>> Hi Marek,
->>>>>
->>>>> On Sun, 10 Dec 2023 at 08:03, Marek Vasut
->>>>> <marek.vasut+renesas@mailbox.org> wrote:
->>>>>>
->>>>>> In case the cyclic framework is enabled, poll the card detect of already
->>>>>> initialized cards and deinitialize them in case they are removed. Since
->>>>>> the card initialization is a longer process and card initialization is
->>>>>> done on first access to an uninitialized card anyway, avoid initializing
->>>>>> newly detected uninitialized cards in the cyclic callback.
->>>>>>
->>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>>> ---
->>>>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
->>>>>> Cc: Peng Fan <peng.fan@nxp.com>
->>>>>> Cc: Simon Glass <sjg@chromium.org>
->>>>>> ---
->>>>>> V2: Move the cyclic registration/unregistration into mmc init/deinit
->>>>>> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
->>>>>>        does not work with structure members
->>>>>> ---
->>>>>>     drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
->>>>>>     include/mmc.h     |  5 +++++
->>>>>>     2 files changed, 41 insertions(+)
->>>>>>
->>>>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
->>>>>> index eb5010c1465..a5686dbc12e 100644
->>>>>> --- a/drivers/mmc/mmc.c
->>>>>> +++ b/drivers/mmc/mmc.c
->>>>>> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
->>>>>>            return err;
->>>>>>     }
->>>>>>
->>>>>> +#if CONFIG_IS_ENABLED(CYCLIC)
->>>>>> +static void mmc_cyclic_cd_poll(void *ctx)
->>>>>> +{
->>>>>> +       struct mmc *m = ctx;
->>>>>> +
->>>>>> +       if (!m->has_init)
->>>>>> +               return;
->>>>>> +
->>>>>> +       if (mmc_getcd(m))
->>>>>> +               return;
->>>>>> +
->>>>>> +       mmc_deinit(m);
->>>>>> +       m->has_init = 0;
->>>>>> +}
->>>>>> +#endif
->>>>>> +
->>>>>>     int mmc_init(struct mmc *mmc)
->>>>>>     {
->>>>>>            int err = 0;
->>>>>> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
->>>>>>            if (err)
->>>>>>                    pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
->>>>>>
->>>>>> +#if CONFIG_IS_ENABLED(CYCLIC)
->>>>>
->>>>> We really shouldn't be adding new #ifdefs to the code.
->>>>>
->>>>> If you really want to make put ->cyclic behind an #ifdef then how
->>>>> about creating an accessor as is done in global_data.h ?
->>>>
->>>> That's really just working around the underlying issue, which is that
->>>> this does not compile:
->>>>
->>>> struct foo {
->>>> #if CONFIG_IS_ENABLED(STUFF)
->>>>      type member;
->>>> #endif
->>>> ...
->>>> };
->>>>
->>>> type fn() {
->>>> ...
->>>> if (CONFIG_IS_ENABLED(STUFF))
->>>>      access struct->member;
->>>> ...
->>>> }
->>>>
->>>> Accessor won't make it any better, would it ? It would only attempt to
->>>> hide the error and make the code more fragile, i.e. this:
->>>>
->>>> accessor(struct)
->>>> {
->>>> type fn() {
->>>> if (CONFIG_IS_ENABLED(STUFF))
->>>>      return access struct->member;
->>>> else
->>>>      return 0;
->>>> }
->>>>
->>>> }
->>>>
->>>> type fn() {
->>>> ...
->>>>      accessor(struct);
->>>> ...
->>>> }
->>>>
->>>> I suspect it also won't compile for one thing, and for the other, it
->>>> really just hides the issue.
->>>
->>> No, I mean like this:
->>>
->>> #ifdef CONFIG_ACPI
->>> #define gd_acpi_ctx() gd->acpi_ctx
->>> #define gd_acpi_start() gd->acpi_start
->>> #define gd_set_acpi_start(addr) gd->acpi_start = addr
->>> #else
->>> #define gd_acpi_ctx() NULL
->>> #define gd_acpi_start() 0UL
->>> #define gd_set_acpi_start(addr)
->>> #endif
->>>
->>> The header file has #ifdefs but not the C files.
->>
->> Hmmm, I can't say I like that either, that just adds more indirection
->> into the code and makes it harder to read in my opinion .
+> Hi Tom,
 > 
-> Sure, it isn't for everyone. But adding new #ifdefs is really grim
-> IMO. Maybe you will get used to it?
+> On Wed, 13 Dec 2023 at 13:19, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Dec 13, 2023 at 12:50:03PM -0700, Simon Glass wrote:
+> > > Hi Ilias,
+> > >
+> > > On Mon, 11 Dec 2023 at 00:49, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Tom,
+> > > >
+> > > > On Sat, 9 Dec 2023 at 20:49, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Dec 06, 2023 at 06:03:14PM +0200, Ilias Apalodimas wrote:
+> > > > > > Hi Simon,
+> > > > > >
+> > > > > > On Sat, 2 Dec 2023 at 20:28, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Hi Ilias,
+> > > > > > >
+> > > > > > > On Wed, 29 Nov 2023 at 23:50, Ilias Apalodimas
+> > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon,
+> > > > > > > >
+> > > > > > > > [...]
+> > > > > > > >
+> > > > > > > >> > Changes since v1:
+> > > > > > > >> > - Tokenize the DT node entry and use the appropriate value instead of
+> > > > > > > >> >   the entire string
+> > > > > > > >> > - Removed Peters tested/reviewed-by tags due to the above
+> > > > > > > >> >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
+> > > > > > > >> >  1 file changed, 90 insertions(+), 4 deletions(-)
+> > > > > > > >> >
+> > > > > > > >>
+> > > > > > > >> Can this be put behind a Kconfig? It adds quite a bit of code which
+> > > > > > > >> punishes those boards which do the right thing.
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > Sure but OTOH the code increase should be really minimal. But I don't mind I can add a Kconfig
+> > > > > > > >
+> > > > > > > >>
+> > > > > > > >> > +
+> > > > > > > >> > +       dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
+> > > > > > > >>
+> > > > > > > >> Could this use ofnode_read_string_index() ?
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > Maybe, I'll have a look and change it if that works
+> > > > > >
+> > > > > > Unless I am missing something this doesn't work.
+> > > > > > This is designed to return a string index from a DT property that's defined as
+> > > > > > foo_property = "value1", "value2" isn't it?
+> > > > > >
+> > > > > > The code above is trying to read an existing property (e.g compatible)
+> > > > > > and get the string after the comma delimiter.
+> > > > > > Perhaps I should add this in drivers/core/ofnode.c instead?
+> > > > > >
+> > > > > > > >
+> > > > > > > > [...]
+> > > > > > > >
+> > > > > > > >>
+> > > > > > > >> Any chance of a test for this code?
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > Sure, but any suggestions on where to add the test?
+> > > > > > > > SMBIOS tables are populated on OS booting, do we have a test somewhere that boots an OS?
+> > > > > > >
+> > > > > > > They are written on startup, right? They should certainly be in place
+> > > > > > > before U-Boot enters the command line.
+> > > > > >
+> > > > > > Not always.  I am not sure if x86 does that, but on the rest of the
+> > > > > > architectures, they are only initialized when the efi smbios code
+> > > > > > runs. Wasn't this something you were trying to change?
+> > > > >
+> > > > > One of those things I keep repeating is that we don't know for sure what
+> > > > > the right values here are until we load the DT the OS _will_ use. It's
+> > > > > quite valid to start U-Boot and pass it a generic "good enough" DT at
+> > > > > run time until U-Boot can see (GPIOs, EEPROM, whatever) what it's on and
+> > > > > what the real DT to load before passing to the OS is. Since U-Boot
+> > > > > doesn't need SMBIOS tables itself, we should make these "late" not
+> > > > > "early".
+> > > >
+> > > > Fair enough, we can defer the init and testing of those late, just
+> > > > before we are about to boot. But this is irrelevant to what this patch
+> > > > does, can we get the fallback mechanism in first, assuming everyone is
+> > > > ok with the patch now?
+> > > >
+> > >
+> > > I would like this behind a Kconfig. Making it the default means people
+> > > are going to start relying on (in user space) and then discover later
+> > > that it is wrong.
+> >
+> > What do you mean wrong, exactly?
+> 
+> "raspberrypi" instead of "Raspberry Pi", for example, or "friendlyarm"
+> instead of "FriendlyElec"
 
-I don't really want to get used to such workarounds which only obfuscate 
-the code and decrease readability.
+Heh, well, even in the x86 world vendors can't even spell their own
+name consistently.
 
-> Maybe there is a better approach?
+> I just wonder what this information is actually used for. If it is
+> just for fun, that is fine, but I believe some tools do use dmidecode,
+> at which point it needs to be accurate and should not change later,
+> e.g. when someone decides to actually add the info.
 
-I am open to suggestions . If there are none, I would say go with the 
-ifdefs .
+So the Linux kernel uses this information to apply quirks for specific
+machines.  But I hope that on platforms that have a device tree folks
+will just use the board compatible string for that purpose.
+
+Otherwise I think this information is mostly used to populate system
+information UIs and asset databases.
