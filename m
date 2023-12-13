@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA131C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A427C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:44:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FBEC87905;
+	by phobos.denx.de (Postfix) with ESMTP id BEB09878E1;
 	Wed, 13 Dec 2023 21:39:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vl0Gczh0";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PTrBFeaZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74442878CF; Wed, 13 Dec 2023 21:39:34 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id E961487899; Wed, 13 Dec 2023 21:39:35 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E70C9878CA
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EB6F878EA
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a1f8f470903so552921366b.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:31 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a22f59c6aeaso174857766b.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499971; x=1703104771; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702499973; x=1703104773; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aus/8pTcXHVgk0sjUDZzsffPZqEGTJsQ8dYD6BgW/Ck=;
- b=Vl0Gczh0BqcK1NT8S7a5xc/cDmfCwFXTXPr0FugOHWhP14PHpxhtof+j6eYy7V0X0n
- csmHdhbHA0po23YmmP8DsYrVevkAPU5G1OVluzcRpD0sT3OWR/pfCZEl1yLFO84DYHYO
- euDW9m/izoycJ76NVxdq9aoAaHG5wIIZWOwBo=
+ bh=sBqsX9OnyigMVZ+lp5w0R4zHM/gfOOjxumy7aj5ygB0=;
+ b=PTrBFeaZpQygZshtvc4OWHf2kZy+h7tLa6aSQHGnbX+hNClZ319CVfZy89+zuTaEbE
+ 79JU4N+Vy8bMzFvBae8VrRUDxyKVRVBKwaNMtQWnl74VmvDO13TXwxMK1p9v48spTUXe
+ ipFhwVIB7zOx9AW2dL+ACdwZbHwu5Phi/cYaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499971; x=1703104771;
+ d=1e100.net; s=20230601; t=1702499973; x=1703104773;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aus/8pTcXHVgk0sjUDZzsffPZqEGTJsQ8dYD6BgW/Ck=;
- b=IVxKZMIsGDwqe+FNuZn1+T5xHU6fWZKpPLIhpjTPgdlpEIDvZK/HCfHt25ffP2ZZVx
- gAPGVNVdlEJYKCStiTWL3W8rmH7TnfFA8eQR2CcMFBIBGsCxf3twh62OQ3S6vkS2DQMI
- FGgVVn82s1XxzajziIxqGtA0SmRrTqemujFOjBPcyofFQBO0oVXOcfvIVeZ4/ID+r+dX
- Yg+RnxAYn/QO6+DHOUvEn/tMaKTrHeqRyo0gKLhqBw3ndByNEB9tpGAah8T8WvZS/xh/
- 2XESO+m8oLD58dKBxbc1dqqu20ffwry0Q9UcibbIYz3KZrb/9ygcqZNBuP04xFdF8uGW
- dobw==
-X-Gm-Message-State: AOJu0YxXiPhTd10Ic5UCN9cnZSKCxxh073a9GOjiC+xbzot9w8LCjlPK
- me6rJWqJLgOrdF6os0SjPdxRR7iKUdlxpzN5wVR+/w==
-X-Google-Smtp-Source: AGHT+IFcQFj6SOsVZWmnpaVZKzaWVSqSkzNszJo8TE0XYqilM2DOH0HTWtZjS1zwYBud5Slb9E85YHdJjcbUQxjvjH8=
-X-Received: by 2002:a17:906:6a09:b0:a1d:53e7:dcb7 with SMTP id
- qw9-20020a1709066a0900b00a1d53e7dcb7mr6327162ejc.41.1702499971410; Wed, 13
- Dec 2023 12:39:31 -0800 (PST)
+ bh=sBqsX9OnyigMVZ+lp5w0R4zHM/gfOOjxumy7aj5ygB0=;
+ b=l2VoqItAR9JY8F4+UZYVvprrptn9zBf8sski/aMnqcyCkjqdRJFSBWG7rG4m9Wn3Q7
+ 5aELKCnbVKD3MkF00UozEmRk/p6uSzpNBNRLSQPhGgsutZ1dJz3n3Nm5lekz5XkDQlsf
+ cHnInf4YVn3fsH9qiBs6XUSQEd3Jnr9g7iUJ3H3dJ+tGO7zEzN4o8i+U4g+DbqyiVStH
+ 3sGRsncylF6rSP+fhtF4dii8OTnQBa+o/XpCmw4K7ov41WPY4AaCigPU4cv6NdA3Py58
+ PDS8gl0BX1qpk8yZMvmTmKytq35taWXvxxMuQyo2LyxTvkrlbgr3M23ERoVlmwKPS/Wc
+ djeQ==
+X-Gm-Message-State: AOJu0Yyk2XIaHVtxdEQasWQXPCgYi1E7+DPUBkDsTtNXQvCPeDy5Fhm6
+ /zLnhHRrQWzwmeritmaOgttU/t75vpKZtM8keM7dNQ==
+X-Google-Smtp-Source: AGHT+IFyBtIJa8qhLv+FALd7OtAnPaumA3hz1dRO6zPiONUfhM6bvKouHM+ep+ERjXfS3WcKz/zWfsxCjlncFEr/eW0=
+X-Received: by 2002:a17:907:7203:b0:a19:a19b:55e3 with SMTP id
+ dr3-20020a170907720300b00a19a19b55e3mr5818225ejc.115.1702499972836; Wed, 13
+ Dec 2023 12:39:32 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 12:39:30 -0800
+ HTTPREST; Wed, 13 Dec 2023 12:39:31 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231002011553.463514-15-sjg@chromium.org>
-References: <20231002011553.463514-15-sjg@chromium.org>
+In-Reply-To: <CAPnjgZ1MZoZ018YvjWnY4kSBSR1ZPvDZSJFg6GqoMjFK_FYcfg@mail.gmail.com>
+References: <CAPnjgZ1MZoZ018YvjWnY4kSBSR1ZPvDZSJFg6GqoMjFK_FYcfg@mail.gmail.com>
  <20231002011553.463514-1-sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:39:30 -0800
-X-Google-Sender-Auth: xCIFq1KaLepRVIJP04Yfx8nRrfE
-Message-ID: <CAPnjgZ3AJXkGszREbHF65FjpjWrKW4eO8=Wykpsxf_9oQy8uVA@mail.gmail.com>
-Subject: Re: [PATCH 14/34] sandbox: Add a dummy booti command
+ <20231002011553.463514-14-sjg@chromium.org>
+Date: Wed, 13 Dec 2023 12:39:31 -0800
+X-Google-Sender-Auth: lhkto0bXY8_p16r5Mu9UmXP9AcY
+Message-ID: <CAPnjgZ1emQSCO4+Z1BJVdjJmq0hASNB=UErz69aujzv0e6sotg@mail.gmail.com>
+Subject: Re: [PATCH 13/34] video: Add a function to clear the display
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <agust@denx.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>, 
- Tobias Waldekranz <tobias@waldekranz.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng@tinylab.org>,
+ Harald Seiler <hws@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -91,16 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add basic sandbox support for 'booti' so we can start to boot the test
-ARMbian image. This is helpful in checking that it is parsed correctly.
+Hi,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Sun, 1 Oct 2023 at 19:16, Simon Glass <sjg@chromium.org> wrote:
+>
+> Move the code from the 'cls' command into the console file, so it can
+> be called from elsewhere.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  cmd/cls.c         | 25 +++----------------------
+>  common/console.c  | 31 +++++++++++++++++++++++++++++++
+>  include/console.h | 10 ++++++++++
+>  3 files changed, 44 insertions(+), 22 deletions(-)
+>
 
- arch/sandbox/lib/bootm.c     | 7 +++++++
- cmd/Kconfig                  | 2 +-
- cmd/booti.c                  | 2 +-
- configs/tools-only_defconfig | 3 ++-
- 4 files changed, 11 insertions(+), 3 deletions(-)
+Any word on this patch, please?
+
+Heinrich, do you want to look at it?
+
+Regards,
+Simon
 
 Applied to u-boot-dm/next, thanks!
