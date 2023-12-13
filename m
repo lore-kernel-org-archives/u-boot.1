@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE15C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DECC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:42:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 391D6878AF;
+	by phobos.denx.de (Postfix) with ESMTP id 9CE8E878B7;
 	Wed, 13 Dec 2023 21:39:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E4DU5Vrk";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CTB7Fk+u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2958187878; Wed, 13 Dec 2023 21:39:20 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 0B9F587883; Wed, 13 Dec 2023 21:39:22 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E4B387876
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBDA787873
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50dfac6c0beso5352084e87.2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:13 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a1f47f91fc0so888316566b.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499952; x=1703104752; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702499959; x=1703104759; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZI3jbjJ/xU5wGbp7VNZ0/yKlqcj746hKvWnwe8rcIGs=;
- b=E4DU5VrkmYZrAZb6+dIRqcdAMtVUCdINtlfTFENf3Jh3KijhUxwGM2nAvP+KIn7lAE
- ziFwKmokS4dP6kQVr4rNmx9I+XMND6wwgvssCnIF3iSnL7u2961Zt9i89UfsQNGfIAnt
- zXZJWTPctS0SfL9tHg2Pfcvc402hjb3CUmbi4=
+ bh=3GhImlZi1UsBFmj0ZMva+bb4BTtlBxonZ3TqK8mmuN8=;
+ b=CTB7Fk+uoShRnO0MCqTEHvS9GFS3lE7iefk5a7kjuyF1Hi/E8aXDIzQZT2UDpT2OI5
+ EjkR0MKX4+W+s8g9J+E+nYL2Ep3fqjWTEm1PiF3UUUIhzASlqY/UFkB8sj8vULSKADGL
+ skjynv6bv9N7T3qiVqMISTz39MRmlx1LAtAAE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499952; x=1703104752;
+ d=1e100.net; s=20230601; t=1702499959; x=1703104759;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZI3jbjJ/xU5wGbp7VNZ0/yKlqcj746hKvWnwe8rcIGs=;
- b=GK0QlQsHkMxf4/rYzKJcN3k6ZXMQv2eUecRkXHvUYlcumvYe+rYAUNFMCck1VuGAmx
- PnSclH3AeZv0DX3jdTr+FEaAFRGuk4/qeACFXw55fdH+VaTSKxrOrMOWR9h308KmGY6c
- E9zT6diRNu32WOFKkVLqpRSN9KVyLF8CAu36GJ2BKwd1LIQoKGqjwa2gddgzgC3JS0AE
- /NDP9pU8klVFW3Dy1sjRLj/fDXTqk/oHWzrnue+ahRn8FbFbx05hLGNRAVuEmbF+ISPh
- 1dZvvbH6DENosVlXsv5l2/Sgvn59m9+HaNnh9+nUubc6tZ539As+NjN4thDxC1+fgl48
- 2/IA==
-X-Gm-Message-State: AOJu0YwlwkiCf4Q6mmDZMCVhnLr6SbmTpBH0u7PKXQiFI4eMnrM2p342
- qbCmjmxrNflPbZtlgSxDTUvsEoOWfPXR+dz96OuNT+e6F/q/UHNfooM=
-X-Google-Smtp-Source: AGHT+IGGkfXUlUrerjkr2ZFjytX+1+NoB0S4Ppi2widLvR2bh+kSa8vFZk2PKfqzyEzkGlYYAwlIlFti8Ta5hhqjXi0=
-X-Received: by 2002:a05:6512:6d:b0:50b:d764:966d with SMTP id
- i13-20020a056512006d00b0050bd764966dmr3690823lfo.81.1702499952362; Wed, 13
- Dec 2023 12:39:12 -0800 (PST)
+ bh=3GhImlZi1UsBFmj0ZMva+bb4BTtlBxonZ3TqK8mmuN8=;
+ b=gvbE4vMoJvacFNawsls/tLfRiNZy21PbIgXzLtRKpFjiR9AErnCkMFG6CftDBsgA0H
+ +mzFmTJ1DkfOYsKxbW0pnZ80uzrASFsXw6S8NhU18LSU2wWM+3rqcgeVY5S5ix6XYGCx
+ KGybRp8198/6MqvtJPVKCwRxyt+Yt5TcLPXlb/1cPr2La14PgQaFTNnYPKWtwejOqLxC
+ 8lvuqMSV3AaKELuSA7H1RuY34Ozjw+Y8jmigH6byThpdPNlkLU1iHz0x3xYGYr2k6/zI
+ bViJHDs3YtR3b+gs/ZT0JPgKgkzRP/Jnay8bUP2qcWto/MhpGtAP4zKbggnk8lDCdgDD
+ h8bQ==
+X-Gm-Message-State: AOJu0YzD/yw6UK9/3st4hzio8C5YmtEysP/VBRO/MsgOQM4s1Sc/htP/
+ oq05bxZyp+jdxV+gPp9MX00Hbr4Blg7iE3RdwMY3qw==
+X-Google-Smtp-Source: AGHT+IGP/8uDbcQuZPyUN+nYEvHSJ4mwwsF+Xo8+UBqVwkSj14W7MFcRYdwtpFiQQAq1YnYYiMsL+2VJSX2z0zQnvS8=
+X-Received: by 2002:a17:906:1083:b0:a19:a19b:55df with SMTP id
+ u3-20020a170906108300b00a19a19b55dfmr5011952eju.111.1702499958799; Wed, 13
+ Dec 2023 12:39:18 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 12:39:08 -0800
+ HTTPREST; Wed, 13 Dec 2023 12:39:16 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231119153611.639252-7-sjg@chromium.org>
-References: <20231119153611.639252-7-sjg@chromium.org>
- <20231119153611.639252-1-sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:39:08 -0800
-X-Google-Sender-Auth: yiPFqcztkuaOc3NYm9K5Fvc2rHY
-Message-ID: <CAPnjgZ2ASRyRe0_Oh5Dkx7S=LbrY_Nztj_k4c0=P=KHnG6hYBw@mail.gmail.com>
-Subject: Re: [PATCH 6/7] patman: Update the run script
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <CAC_iWj+z31=9e1N0XOkRBWrmfTwxWXLhMWpOGpSbr_wK+r8rvQ@mail.gmail.com>
+References: <CAC_iWj+z31=9e1N0XOkRBWrmfTwxWXLhMWpOGpSbr_wK+r8rvQ@mail.gmail.com>
+ <20231118215727.95086-1-heinrich.schuchardt@canonical.com>
+ <20231118215727.95086-2-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ3f+emLPjdhSSLBnGrGbqnHe1a5cajyL0csdVz1KTDfqw@mail.gmail.com>
+Date: Wed, 13 Dec 2023 12:39:16 -0800
+X-Google-Sender-Auth: SbGMipfu6QbZ1_CDTzIAbT3K3ZM
+Message-ID: <CAPnjgZ0wJWoKAmce62rNJu3O7QKs=Sa2yNKiwMeZFdurTJ1Ozw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] acpi: consider XSDT in acpi_find_table()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,13 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Patman now has its main program in a function, so update the toml file
-to match.
+On Sun, 19 Nov 2023 at 02:45, Simon Glass <sjg@chromium.org> wrote:
+>
+> On Sat, 18 Nov 2023 at 14:57, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > The RSDT table is deprecated and does not exist on all systems.
+> >
+> > By preference scan XSDT for the table to find. If no XSDT table exists, try
+> > to use the RSDT table.
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> > v2:
+> >         consider that map_sysmem(0, 0) != NULL
+> > ---
+> >  lib/acpi/acpi.c | 20 ++++++++++++++++----
+> >  1 file changed, 16 insertions(+), 4 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- tools/patman/pyproject.toml | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
 Applied to u-boot-dm/next, thanks!
