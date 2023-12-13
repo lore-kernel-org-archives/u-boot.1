@@ -4,80 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF9BC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 14:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8E6DC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 14:56:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 580FA87509;
-	Wed, 13 Dec 2023 15:55:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 32A1A8779D;
+	Wed, 13 Dec 2023 15:56:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aHN5FCRG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Mm24NoyY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE9A4877E3; Wed, 13 Dec 2023 15:55:52 +0100 (CET)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7358D87509; Wed, 13 Dec 2023 15:56:53 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CD31871AA
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 15:55:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EB1B877F8
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 15:56:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-da077db5145so5830970276.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 06:55:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702479349; x=1703084149; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=48G7W8pdsIIuzVB02CFn7GY8xicpbYrUFGD0n6oF468=;
- b=aHN5FCRG3BIxws5bVePC/ZN0rVPRCXucFt2jdPx3nClYdP1xdosw1m8BuHvCx9hsGi
- dGCOerEH6D4EcN4nmO8KfvapfUMIXj4fhr9VOTkCokTg/7gBe3VJ1VqkqBdelnIb+xmo
- mMMT/QBg62xWhFDhGnZl7lzVAK9Klzfc/kD28=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702479349; x=1703084149;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=48G7W8pdsIIuzVB02CFn7GY8xicpbYrUFGD0n6oF468=;
- b=YryXDmQW8fXGu+Ge3/dJwYzBjLHlj+sdXYzkMZIHZgPKA0l3Z3Ik88/JtRr3j3cwEr
- fL7X+aX7k7+b4E+mdCM0ibIYCDMCnco1Oed5qx+ufAZV7sJ7vcfIQvWnkUTWGlnC/Tjb
- J6CkieNzKSvbHiLUMB6SwRaZLJMeYERzebldx/Qq1Z53waXlFGvHoYpX/5EcBJI+Oody
- Fo2VH0mA/n05lzsgmFSyzVX9xE1edUnTZ+oFZKQaPg1rD0ALZMHTak5ROoAinR3Yy0A6
- oqqvdOft2aFTnD8YAzz24e0EWiCm0FR9ZK10PJtbYO2AKuQG5MVYVfZ1ziBl3xUeVy6d
- O70A==
-X-Gm-Message-State: AOJu0Yyi5r0wh/lzgwMe2JyBjVumBmlMeT7H1usIDaFGor4HcjCdQ22C
- jdhJDELeas1An0NAW+8S5XIoew==
-X-Google-Smtp-Source: AGHT+IGR2Aqolry27byu0K3AF77a+Q0WaibG/C9224F02wuYV6ct/v3s3Rildi1gfIIRfjIZAqDm1w==
-X-Received: by 2002:a25:77d8:0:b0:dbc:ca86:7aab with SMTP id
- s207-20020a2577d8000000b00dbcca867aabmr971406ybc.2.1702479348747; 
- Wed, 13 Dec 2023 06:55:48 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-d78a-ada8-3cce-fa3d.res6.spectrum.com.
- [2603:6081:7b00:6400:d78a:ada8:3cce:fa3d])
- by smtp.gmail.com with ESMTPSA id
- cj9-20020a056902188900b00dbcd9bb4bbasm205897ybb.58.2023.12.13.06.55.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 06:55:48 -0800 (PST)
-Date: Wed, 13 Dec 2023 09:55:46 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Duncan Hare <DuncanCHare@yahoo.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] net: wget: Support non-default HTTP port
-Message-ID: <20231213145546.GA2039458@bill-the-cat>
-References: <20231104151012.51516-1-marex@denx.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BDEuR1L043394;
+ Wed, 13 Dec 2023 08:56:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1702479387;
+ bh=5juCWlj059/fjNoFoMupOnMt6nTi9VWN+TN9rK64Yms=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Mm24NoyY/5Q5t3DijMZ/fWUDtH4a5SySX/sQgGG6KSgbhzHFjkX8agBaWq/ZnD/GL
+ jThl0QGwpY2VRYq8lBtQdnqD8XJ69Gpn9tTTJIQmAHoFZShgyj3xsakcLMXn00rBEt
+ /iMv/ngxfrdGt1AQtbQMgVeJDJiQbzuTfo+r8/pk=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BDEuRhx099783
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 13 Dec 2023 08:56:27 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 13
+ Dec 2023 08:56:27 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 13 Dec 2023 08:56:26 -0600
+Received: from [172.24.227.6] (devarsht.dhcp.ti.com [172.24.227.6])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BDEuMWG069212;
+ Wed, 13 Dec 2023 08:56:23 -0600
+Message-ID: <871ec46f-feb6-146f-91f9-6f02c0da3b45@ti.com>
+Date: Wed, 13 Dec 2023 20:26:22 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HUQt1s925AlsUcAv"
-Content-Disposition: inline
-In-Reply-To: <20231104151012.51516-1-marex@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v5 0/8] Move framebuffer reservation for SPL to RAM end
+Content-Language: en-US
+To: <u-boot@lists.denx.de>, <sjg@chromium.org>, <agust@denx.de>,
+ <trini@konsulko.com>, <bmeng.cn@gmail.com>, <msuchanek@suse.de>,
+ <rasmus.villemoes@prevas.dk>, <yangshiji66@outlook.com>
+CC: <praneeth@ti.com>, <nm@ti.com>, <vigneshr@ti.com>, <a-bhatia1@ti.com>,
+ <j-luthra@ti.com>, <nsekhar@ti.com>, <n-jain1@ti.com>
+References: <20231205155523.721784-1-devarsht@ti.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20231205155523.721784-1-devarsht@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,64 +83,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Antoine,
 
---HUQt1s925AlsUcAv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 05/12/23 21:25, Devarsh Thakkar wrote:
+> Move video memory reservation for SPL at end of RAM so that it does
+> not interefere with reservations for next stage so that the next stage
+> need not have holes in between for passed regions and instead it can
+> maintain continuity in reservations.
+> 
+> Also catch the bloblist before starting reservations to avoid the same
+> problem.
+> 
+> While at it, also fill missing fields in video handoff struct before
+> passing it to next stage.
+> 
+> This is as per discussions at :
+> For moving SPL framebuffer reservation at end of RAM:
+> 
+> https://lore.kernel.org/all/CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT9VK8TwJg@mail.gmail.com/
+> 
+> For filling missing video handoff fields :
+> https://lore.kernel.org/all/CAPnjgZ1Hs0rNf0JDirp6YPsOQ5=QqQSP9g9qRwLoOASUV8a4cw@mail.gmail.com/
+> 
+> Changelog:
+> V2:
+> - Make a generic function to reserve video memory at SPL stage.
+> - Add debug prints while skipping framebuffer allocation at uboot.
+> - Correct commenting style as suggested.
+> 
+> V3:
+> - Change spl_reserve_video to spl_reserve_video_from_ram_top
+>   which enforce framebuffer reservation from end of RAM.
+> - Use gd->ram_top instead of local ram_top and update
+>   gd->reloc_addr after each reservation.
+> - Print error message on framebuffer reservation.
+> - Update SPL doc with spl splash screen specific info.
+> 
+> V4:
+> - Split patches into atomic commits.
+> - Remove duplicate check for video blob passed addresses and error out
+>   if invalid address/size received from blob.
+> - Improve SPL documentation memory reservation scheme and print message
+>   for video memory reservation from bloblist. 
+> - Add Reviewed-By.
+> 
+> V5:
+>  - Add comment for filling video handoff size with aligned size
+>  - Use PHASE_BOARD_F while checking for U-boot proper stage
+>  - Add Reviewed-by
+> 
 
-On Sat, Nov 04, 2023 at 04:09:54PM +0100, Marek Vasut wrote:
+Is it possible to pull this series in if no further comments ?
 
-> Currently the wget command is hard wired to HTTP port 80. This is
-> inconvenient, as it is extremely easy to start trivial HTTP server
-> as an unprivileged user using e.g. python http module to serve the
-> files, but such a server has to run on one of the higher ports:
-> "
-> $ python3 -m http.server -d $(pwd) 8080
-> "
->=20
-> Make it possible to configure HTTP server port the same way it is
-> possible to configure TFTP server port, using environment variable
-> 'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
-> fallback port. This way, users can start their own trivial server
-> and conveniently download whatever files they need into U-Boot.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-> Cc: Duncan Hare <DuncanCHare@yahoo.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  include/net/wget.h |  1 -
->  net/wget.c         | 14 ++++++++++----
->  2 files changed, 10 insertions(+), 5 deletions(-)
+Regards
+Devarsh
 
-Sorry for the late review, can you please update the docs as well with
-this? For example 'tftpdstp' is documented in both the environment doc
-and the tftp command doc.
-
---=20
-Tom
-
---HUQt1s925AlsUcAv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV5xe8ACgkQFHw5/5Y0
-tyw6Vgv/dACDBoBg3Zb35eej1jqo3clJKd1Y1a/OZDKz/fhx0WwKHq1h5/SQulG6
-mIEyUDdCsX/7Bne9+4YisfwLs0BvRlnfnsEcY6A/8lSacp8mMBhVzU6z2+xTOjhk
-6m2u5/OFRzrvxlhMln5pZ15nw1DIUNYIRKa7N/hoYUgW837mRISpxCHX/Q1/2ivl
-kFLb7LZE+cW5CMWZ2u1OychaR3TF3H7GG/6DiEXrsmA+gaHWs8mTIICavanOKpgg
-uXft9JssUozaS0DD8hQsYmjSVBDuJ4ciHiaRYyNlvlIckgn8ZoSYCRdDTNAy8KQw
-2Hd2KA805T0QID5vWUsihmfIw/wuFwghQMoAl6yqZOO8L82Ptm2Kvk4qO4HT3u5i
-E0D517wHUYqdTfzMFbX7bJRVwuO/W1sfdkqnHXdGhfmvZQ51CyxoADxxTyIN6Rqp
-DYuLxuO99oaGs6Sw4tyligEAN+YN5TDPwEu9Z4m4s6zHyd+h/9yYRgEpjgZsPauw
-N4JyBx8f
-=8Szb
------END PGP SIGNATURE-----
-
---HUQt1s925AlsUcAv--
+> Test logs:
+> https://gist.github.com/devarsht/30a3c1591270c9ebae00714b48d33058
+> 
+> Devarsh Thakkar (8):
+>   spl: Enforce framebuffer reservation from end of RAM
+>   arm: mach-k3: common: Reserve video memory from end of the RAM
+>   board: ti: am62x: evm: Remove video_setup from spl_board_init
+>   common/board_f: Catch bloblist before starting reservations
+>   video: Skip framebuffer reservation if already reserved
+>   video: Fill video handoff in video post probe
+>   doc: spl: Add info for missing Kconfigs
+>   doc: spl: Add info regarding memory reservation
+> 
+>  arch/arm/mach-k3/common.c    | 17 ++++++++++-----
+>  board/ti/am62x/evm.c         | 18 ----------------
+>  common/board_f.c             | 41 +++++++++++++++++++++++++++++++-----
+>  common/spl/spl.c             | 19 +++++++++++++++++
+>  doc/develop/spl.rst          | 37 ++++++++++++++++++++++++++++++++
+>  drivers/video/video-uclass.c | 40 ++++++++++++++++++++++++-----------
+>  include/spl.h                | 10 +++++++++
+>  7 files changed, 142 insertions(+), 40 deletions(-)
+> 
