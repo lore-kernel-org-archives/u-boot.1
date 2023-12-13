@@ -4,71 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF554C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 19:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E18C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D43F387852;
-	Wed, 13 Dec 2023 20:52:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 80F0386ECA;
+	Wed, 13 Dec 2023 21:02:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hkW47yhf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cZaeBMGj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3A5787857; Wed, 13 Dec 2023 20:52:34 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 1C74587646; Wed, 13 Dec 2023 21:01:27 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05A2A87850
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 20:52:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFF3F8749F
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:01:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-db537948ea0so7201535276.2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 11:52:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-dbcc63b7c68so1695976276.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:01:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702497150; x=1703101950; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t0BcNri+9OqLMewU6y0G7X4aGhg9VkVZJxhdeXMyaz8=;
- b=hkW47yhfn0HuvKJcamXAN5arhxc68V13p+P3jpOd7iuhk2I+gqbTTKqPav8aFSoKkj
- teVU+dKWANjit40E3vVPoU7VfDJNVaraypgU/a45OchEA8TUY41tNcKVGP7h3K0jnXIC
- 1K0o2eaUa2LmJxtV1hN+z8haaMMPyxiLbhs1Q=
+ d=konsulko.com; s=google; t=1702497683; x=1703102483; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4qx+hZ2dW2DhzBWV9ah+UIb3u7WuI0mqLzlIVuMRmEk=;
+ b=cZaeBMGjCA3dgA7M/g9BFqFLsEIa4oI0tKrxIAKQGdVYic4Et4VvROTb8PwtDzE8jt
+ nkskuU0d4cqg65g1cQBDaEyFV95EJ5rSQ/89vwA+wCWH+Wx1NsbsJHZiwiM9P6bYYmWX
+ 4ILz51YinOImypsgiM2YNui7VGCn7wcMwBgJw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702497150; x=1703101950;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t0BcNri+9OqLMewU6y0G7X4aGhg9VkVZJxhdeXMyaz8=;
- b=jKQH1CPtBoANklo3nMgxbSJZiaz3zFYYfFHC3ddyqfPYt14Nv3BQOVwO+3F+BC8z9N
- Snqde0FaEpapDYFj0ekKKpNcpOgS7JjUskpSNubKPH7pWYBV1aEr9BXyPbvimjiQ/KTA
- 7oi8u2h7rZG8yOA9rFdkG1d6oLU2Xu+5JaLY7FpyC9b07vuZC/5KWqK439vtGE8TQobG
- cY2ih0PTYWY/GJfmbpGb2SJ0c2x9YF3Bic1BEEHzxydlgIybctC6/sl8YALWvPJNSNHk
- +j+VTQMtFXuLP7AAV66XajGEtWDel8LjUAvTUkrHpdMnT6eaURXNInIlWysSxwiaVl/t
- X3Bg==
-X-Gm-Message-State: AOJu0YyOkPtB0evyeRNoi3NQw3+BFXaM/Iy31AjSuwsTF3D6Xi2WJdPG
- qQRbBb/nEPlHUj6Y5bs4j8dBzqyWiHWEJnYg5+xrLA==
-X-Google-Smtp-Source: AGHT+IHnOajbBfClFOt27YsmHWjkqL86/kCiobe64FoUd37j0Jb3s90tb/U1QBIsa5f2PogQjCJWk9QwmphtBgQuZjk=
-X-Received: by 2002:a5b:151:0:b0:dbc:692e:b08 with SMTP id
- c17-20020a5b0151000000b00dbc692e0b08mr5328702ybp.80.1702497149501; 
- Wed, 13 Dec 2023 11:52:29 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702497683; x=1703102483;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4qx+hZ2dW2DhzBWV9ah+UIb3u7WuI0mqLzlIVuMRmEk=;
+ b=HANyaanudsDHutGAM4kDztUvcL38tOfH97j9yhhQRkGLWVEUB0z3GpIQT+1iz+CWyT
+ SLQzwmDQ8zEgPSvPw/KNTcLk32Rl/ApwChtqTMRb+xLK+jShgaifsGYsOpQ81UGKajWh
+ MkxeE058aPfLqSB+0KjI/pEjw0EuP4MRkfSwrTwqceIMzcky3Bi5qU7q7ip9MlxZn2t9
+ ZcKlEYd9Iu3XFS9S8v+zDiX4xW7brNJRVMc3x/DnfO6kDImM8Vc4/8BIVybJhiejXwMG
+ 1sXEKERU7y14+ywgjgTpqWxIwJQsQksXZx7i25xHEkokqlD1/wG/HneJCrq36j9vxNZQ
+ DmaQ==
+X-Gm-Message-State: AOJu0YxXjvOnc5LJ74YazwIr6NJ9GkDwzlVdPFkRq3Znmofj7BIuPagK
+ B7xriRVs0YdlKgTvYJXkgSqLNw==
+X-Google-Smtp-Source: AGHT+IF6Js/+8Vnspj2WKBMmkNORaO4jxP7E1Zj/Fa4Z7XSCvfnlPXXqryLm5rna5+dsGZbmAXZyKg==
+X-Received: by 2002:a05:6902:1366:b0:dbc:b14e:4774 with SMTP id
+ bt6-20020a056902136600b00dbcb14e4774mr3643230ybb.40.1702497683742; 
+ Wed, 13 Dec 2023 12:01:23 -0800 (PST)
+Received: from [127.0.1.1]
+ (2603-6081-7b00-6400-d78a-ada8-3cce-fa3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:d78a:ada8:3cce:fa3d])
+ by smtp.gmail.com with ESMTPSA id
+ w3-20020a5b05c3000000b00d72176bdc5csm4176069ybp.40.2023.12.13.12.01.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Dec 2023 12:01:23 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Alexander Gendin <agendin@matrox.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Evgeny Bachinin <EABachinin@sberdevices.ru>, 
+ Fabio Estevam <festevam@gmail.com>, Ivan Mikhaylov <fr0st61te@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jerry Van Baren <vanbaren@cideas.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Linus Walleij <linus.walleij@linaro.org>, 
+ =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Qu Wenruo <wqu@suse.com>, Safae Ouajih <souajih@baylibre.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, 
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ This contributor prefers not to receive mails <noreply@example.com>, 
+ Tim Harvey <tharvey@gateworks.com>, 
+ Tobias Waldekranz <tobias@waldekranz.com>, linux-btrfs@vger.kernel.org
+In-Reply-To: <20231118210547.577026-1-sjg@chromium.org>
+References: <20231118210547.577026-1-sjg@chromium.org>
+Subject: Re: [PATCH v3 00/32] bootm: Refactoring to reduce reliance on
+ CMDLINE (part A)
+Message-Id: <170249768190.2729322.17736686943926786117.b4-ty@konsulko.com>
+Date: Wed, 13 Dec 2023 15:01:21 -0500
 MIME-Version: 1.0
-References: <20231210150304.124458-1-marek.vasut+renesas@mailbox.org>
- <CAPnjgZ10dpyK3qyoogTaabyH0sNsXRZReCGdvVhdO=0LG2DJWw@mail.gmail.com>
- <6b56dc6f-f753-4da3-b371-4a8146d3f4e9@mailbox.org>
- <CAPnjgZ1bwt8-n=saKfdcoKOx42SdE1-t36eGazaiatzn626_ww@mail.gmail.com>
- <b09c6600-b05b-4fec-beb0-c0a9a226a507@mailbox.org>
-In-Reply-To: <b09c6600-b05b-4fec-beb0-c0a9a226a507@mailbox.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:49:59 -0700
-Message-ID: <CAPnjgZ0vjRjX3nQ+GU-vL6cgZN++szsS_ZEYXN1KXJD=Yxgyvw@mail.gmail.com>
-Subject: Re: [PATCH v3] mmc: Poll CD in case cyclic framework is enabled
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.4
+X-Mailman-Approved-At: Wed, 13 Dec 2023 21:02:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,138 +115,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Sat, 18 Nov 2023 14:04:48 -0700, Simon Glass wrote:
 
-On Wed, 13 Dec 2023 at 07:08, Marek Vasut <marek.vasut@mailbox.org> wrote:
->
-> On 12/12/23 15:05, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Mon, 11 Dec 2023 at 12:24, Marek Vasut <marek.vasut@mailbox.org> wrote:
-> >>
-> >> On 12/11/23 18:52, Simon Glass wrote:
-> >>> Hi Marek,
-> >>>
-> >>> On Sun, 10 Dec 2023 at 08:03, Marek Vasut
-> >>> <marek.vasut+renesas@mailbox.org> wrote:
-> >>>>
-> >>>> In case the cyclic framework is enabled, poll the card detect of already
-> >>>> initialized cards and deinitialize them in case they are removed. Since
-> >>>> the card initialization is a longer process and card initialization is
-> >>>> done on first access to an uninitialized card anyway, avoid initializing
-> >>>> newly detected uninitialized cards in the cyclic callback.
-> >>>>
-> >>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >>>> ---
-> >>>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> >>>> Cc: Peng Fan <peng.fan@nxp.com>
-> >>>> Cc: Simon Glass <sjg@chromium.org>
-> >>>> ---
-> >>>> V2: Move the cyclic registration/unregistration into mmc init/deinit
-> >>>> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
-> >>>>       does not work with structure members
-> >>>> ---
-> >>>>    drivers/mmc/mmc.c | 36 ++++++++++++++++++++++++++++++++++++
-> >>>>    include/mmc.h     |  5 +++++
-> >>>>    2 files changed, 41 insertions(+)
-> >>>>
-> >>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-> >>>> index eb5010c1465..a5686dbc12e 100644
-> >>>> --- a/drivers/mmc/mmc.c
-> >>>> +++ b/drivers/mmc/mmc.c
-> >>>> @@ -2985,6 +2985,22 @@ static int mmc_complete_init(struct mmc *mmc)
-> >>>>           return err;
-> >>>>    }
-> >>>>
-> >>>> +#if CONFIG_IS_ENABLED(CYCLIC)
-> >>>> +static void mmc_cyclic_cd_poll(void *ctx)
-> >>>> +{
-> >>>> +       struct mmc *m = ctx;
-> >>>> +
-> >>>> +       if (!m->has_init)
-> >>>> +               return;
-> >>>> +
-> >>>> +       if (mmc_getcd(m))
-> >>>> +               return;
-> >>>> +
-> >>>> +       mmc_deinit(m);
-> >>>> +       m->has_init = 0;
-> >>>> +}
-> >>>> +#endif
-> >>>> +
-> >>>>    int mmc_init(struct mmc *mmc)
-> >>>>    {
-> >>>>           int err = 0;
-> >>>> @@ -3007,6 +3023,19 @@ int mmc_init(struct mmc *mmc)
-> >>>>           if (err)
-> >>>>                   pr_info("%s: %d, time %lu\n", __func__, err, get_timer(start));
-> >>>>
-> >>>> +#if CONFIG_IS_ENABLED(CYCLIC)
-> >>>
-> >>> We really shouldn't be adding new #ifdefs to the code.
-> >>>
-> >>> If you really want to make put ->cyclic behind an #ifdef then how
-> >>> about creating an accessor as is done in global_data.h ?
-> >>
-> >> That's really just working around the underlying issue, which is that
-> >> this does not compile:
-> >>
-> >> struct foo {
-> >> #if CONFIG_IS_ENABLED(STUFF)
-> >>     type member;
-> >> #endif
-> >> ...
-> >> };
-> >>
-> >> type fn() {
-> >> ...
-> >> if (CONFIG_IS_ENABLED(STUFF))
-> >>     access struct->member;
-> >> ...
-> >> }
-> >>
-> >> Accessor won't make it any better, would it ? It would only attempt to
-> >> hide the error and make the code more fragile, i.e. this:
-> >>
-> >> accessor(struct)
-> >> {
-> >> type fn() {
-> >> if (CONFIG_IS_ENABLED(STUFF))
-> >>     return access struct->member;
-> >> else
-> >>     return 0;
-> >> }
-> >>
-> >> }
-> >>
-> >> type fn() {
-> >> ...
-> >>     accessor(struct);
-> >> ...
-> >> }
-> >>
-> >> I suspect it also won't compile for one thing, and for the other, it
-> >> really just hides the issue.
-> >
-> > No, I mean like this:
-> >
-> > #ifdef CONFIG_ACPI
-> > #define gd_acpi_ctx() gd->acpi_ctx
-> > #define gd_acpi_start() gd->acpi_start
-> > #define gd_set_acpi_start(addr) gd->acpi_start = addr
-> > #else
-> > #define gd_acpi_ctx() NULL
-> > #define gd_acpi_start() 0UL
-> > #define gd_set_acpi_start(addr)
-> > #endif
-> >
-> > The header file has #ifdefs but not the C files.
->
-> Hmmm, I can't say I like that either, that just adds more indirection
-> into the code and makes it harder to read in my opinion .
+> It would be useful to be able to boot an OS when CONFIG_CMDLINE is
+> disabled. This could allow reduced code size.
+> 
+> Standard boot provides a way to handle programmatic boot, without
+> scripts, so such a feature is possible. The main impediment is the
+> inability to use the booting features of U-Boot without a command line.
+> So the solution is to avoid passing command arguments and the like to
+> code in boot/
+> 
+> [...]
 
-Sure, it isn't for everyone. But adding new #ifdefs is really grim
-IMO. Maybe you will get used to it? Maybe there is a better approach?
+Applied to u-boot/next, thanks!
 
-Regards,
-Simon
+-- 
+Tom
+
+
