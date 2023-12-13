@@ -4,108 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D5F0C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 241B9C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 09:42:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DA0E877D8;
-	Wed, 13 Dec 2023 10:35:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 72CDC87015;
+	Wed, 13 Dec 2023 10:42:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SgzcawAi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BdDiNUM3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35F90877D4; Wed, 13 Dec 2023 10:35:46 +0100 (CET)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 7625086FB0; Wed, 13 Dec 2023 10:42:52 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03043877EE
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:35:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D6C087508
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 10:42:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3363397426eso1402053f8f.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:35:42 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2ca1e6a94a4so87143371fa.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 01:42:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702460142; x=1703064942; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=N4hKhekNyotkHA0D+EX6nmiYfqOYvHPHBpaAxAOSj9Y=;
- b=SgzcawAifTREOx/BhwX0gdxxp8q2HGPR94zmE86y+y4h89zyuGg94kSXaVrWIYT28k
- HY9zFK4XiMz3IqcLiNEPSGw8aCvvUWYr79txdC5LGEVfDcEGjdaDKgJa/F4d1xIHDSqw
- g1Oq5QgXmTSzBvlItAhoOm2KM6FoQiDi8YswXl/GDgVpLUuKDoidh4SA5YNUkPBwSK1E
- AQuiOSn9pbUR9S3ivBMnpcWLfeE/Ts+kuPsB8h3iSs3qQnelF+vXNfQFN7rvXJnb5G3B
- omB7kFVp2qNVSyQlM4SIr2d4LMkM1Udd4TOIXUxoVQyi/k7OIiGPa5EJHKvxbHFc7Msr
- 2PMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702460142; x=1703064942;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ d=gmail.com; s=20230601; t=1702460567; x=1703065367; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
  :date:message-id:reply-to;
- bh=N4hKhekNyotkHA0D+EX6nmiYfqOYvHPHBpaAxAOSj9Y=;
- b=guz/iqJJHqRHIfO8dtpgZrOfbExqWv+UpXqrlGO0ZAtLVWEHvKlRV6PXJwOOxQ8mq9
- G6DVD5bnMZC8Lebvwcr+fO2pEK6peY+md0wHNFVNpRTw6Qc+T4Ybp81ycNI3vrGazZGy
- 0v8TYoSqJUUnNEydWsTkn9nH0kxp8cPwQtWGARWjqHvgZR+WCACpjFXnX2MmiOL0HFuw
- hbiR/dD+PkCsQVM9cBsFqcFBCia1uZa6nlxfbig0yfMXl3Vsd2AGHtT3Ck40J/MBvTCx
- QUDWZECXPVyLxK7zqbdiiC2TmbbjiSVPtb2R+rPuJTXKKO3YNyMBJuRlCjAKwXNC9NAF
- fiew==
-X-Gm-Message-State: AOJu0Yy4BKs5tqqFc3lp3K02CrlCWFZkbghLHGHL7jRPOVwIq4DmafMF
- 1OQbYE1git3JzfkhuRu1uQ8o8w==
-X-Google-Smtp-Source: AGHT+IGFXBLP1ZIzYHkbt9T/xMp3tLcAl8aeFXYnWV/SxvogAB8t2EBNHsLm8XfScIA4V4tZqWo2Ww==
-X-Received: by 2002:a05:6000:544:b0:333:ed:82e7 with SMTP id
- b4-20020a056000054400b0033300ed82e7mr4169144wrf.10.1702460141525; 
- Wed, 13 Dec 2023 01:35:41 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:596e:6d4f:fc0a:ec65?
- ([2a01:e0a:982:cbb0:596e:6d4f:fc0a:ec65])
- by smtp.gmail.com with ESMTPSA id
- o8-20020a5d4a88000000b00334b302e97fsm12743451wrq.96.2023.12.13.01.35.39
+ bh=L/JR9qKNk9W6KYrAY51X+hgio2/ug9n1SoO0Gu4aRrc=;
+ b=BdDiNUM34iLr8YaAKKLumqyzwya0y5QcGCK42eBKTbobT999RZ4LRB3yzBQk7fmmyE
+ FTMYmXulwSyAU3+/botk1DLSX+MV/mRpfUuEsBDiUIPHDW5JFTv+9fMOq0AnL/z8+bDi
+ BLJW+wXfgxmtFly3Prx6bd2w1/Vwbv24Gr1dSncrEDzGd9rZ6gAdpn+qE47I6UgWZG0L
+ O+HGlKPt5q3epw4SYdRpD89W9SO1H4ky+bNtStfYUNN4rFgADbMYMl/5JtAnIk3ToC5v
+ xHgCzLNxaHXa8Z7I6rAGx8fVRuJiQ0WeQ/LyMxjgf1MA3Utd09xCat51XJCuf4rpox/6
+ tN6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702460567; x=1703065367;
+ h=content-transfer-encoding:mime-version:message-id:references
+ :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=L/JR9qKNk9W6KYrAY51X+hgio2/ug9n1SoO0Gu4aRrc=;
+ b=SLGX44ZPybtqhJkY7/Cq4n3fKtKP5SFzKnCJWQJRO4h4TAuExESxoRuP0L2ggBYWk6
+ 06elQI1uY4oDkcQUlGzPdAc+1Kd+HvjIDEMhXmts4v/Qh01fcy3RuvBv2roPJA6z19aI
+ +HT4sXCn7mB/yFRzQXbTK1icsGt1m8rmvTX+Si8YATvT7IxgXTOSNBWrdzAuB/eae3zH
+ ns6O+oChqZbSXVleXtxJNTHqImsUStMA6zyq26L4RydMLgvCSdq4i8ovult+lFFAUIIC
+ kFSYm+zoWbF+jXqWJZ7kt6TvX4binDgBrpAUQjlRkaWYr8l52i98fl2i8APv4u4STMEy
+ TPXQ==
+X-Gm-Message-State: AOJu0YzkwK6h8dckcpNm9NDjYai9HxfybQ8ZeRymlJ5Av+EHIXISslKL
+ X3Q34aL6B4nuBBA5eoo3APc=
+X-Google-Smtp-Source: AGHT+IEINiT5M2CJdzn5Df3SWb8EQNC2Sy41nuyzWENZ2pgXXWUA42I8+0FTTzCtUyqkNyJ9avt0zg==
+X-Received: by 2002:a05:651c:b1e:b0:2cc:1d91:87ff with SMTP id
+ b30-20020a05651c0b1e00b002cc1d9187ffmr2642999ljr.11.1702460567189; 
+ Wed, 13 Dec 2023 01:42:47 -0800 (PST)
+Received: from [127.0.0.1] ([91.204.85.69]) by smtp.gmail.com with ESMTPSA id
+ p13-20020a50c94d000000b0054dc979e31fsm5461326edh.2.2023.12.13.01.42.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Dec 2023 01:35:39 -0800 (PST)
-Message-ID: <e7e0d6fa-2ba5-4ea0-928b-bb0c0f6b05d3@linaro.org>
-Date: Wed, 13 Dec 2023 10:35:38 +0100
+ Wed, 13 Dec 2023 01:42:46 -0800 (PST)
+Date: Wed, 13 Dec 2023 11:42:45 +0200
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>
+CC: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v1 0/5] Convert recently merged T30 boards to use DM PMIC
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231115191149.GI6601@bill-the-cat>
+References: <20231106083229.256322-1-clamor95@gmail.com>
+ <CALeDE9P=aUfEvhh-FD_mwRZ+5rgMkQbn+v6skqW7s3EVvnf6eg@mail.gmail.com>
+ <CAPVz0n0LDVh-8W=o2Hp-AXU_=Jg5CnuYh54LxsE6XH=DD7nD5A@mail.gmail.com>
+ <CALeDE9NLfGRpLxNNqNGOY3S-d9hWP1DWDjL526JNw_8xPqjaXw@mail.gmail.com>
+ <CAPVz0n1WepmE6pTxSaeK6yHH2ji6_L+LF7a=TZk6hLWS8GcHKA@mail.gmail.com>
+ <CALeDE9NjK3b=OskgsjCvO44M01nRZ6-5LrEgUZtYQfxy7gN5mQ@mail.gmail.com>
+ <20231106210407.GK496310@bill-the-cat> <ZVTo7BKHmwzns_G-@orome.fritz.box>
+ <20231115191149.GI6601@bill-the-cat>
+Message-ID: <C9328ED4-05E7-4060-BF5A-9CB1BCEE5B00@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v12 00/24] Modernize U-Boot shell
-Content-Language: en-US, fr
-To: Francis Laniel <francis.laniel@amarulasolutions.com>, u-boot@lists.denx.de
-Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>,
- Simon Glass <sjg@chromium.org>
-References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,253 +94,132 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08/12/2023 23:30, Francis Laniel wrote:
-> Hi.
-> 
-> 
-> During 2021 summer, Sean Anderson wrote a contribution to add a new shell, based
-> on LIL, to U-Boot [1, 2].
-> While one of the goals of this contribution was to address the fact actual
-> U-Boot shell, which is based on Busybox hush, is old there was a discussion
-> about adding a new shell versus updating the actual one [3, 4].
-> 
-> So, in this series, with Harald Seiler, we updated the actual U-Boot shell to
-> reflect what is currently in Busybox source code.
-> Basically, this contribution is about taking a snapshot of Busybox shell/hush.c
-> file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
-> 
-> This contribution was written to be as backward-compatible as possible to avoid
-> breaking the existing.
-> So, the modern hush flavor offers the same as the actual, that is to say:
-> 1. Variable expansion.
-> 2. Instruction lists (;, && and ||).
-> 3. If, then and else.
-> 4. Loops (for, while and until).
-> No new features offered by Busybox hush were implemented (e.g. functions).
-> 
-> It is possible to change the parser at runtime using the "cli" command:
-> => cli print
-> old
-> => cli set modern
-> => cli print
-> modern
-> => cli set old
-> The default parser is the old one.
-> Note that to use both parser, you would need to set both
-> CONFIG_HUSH_MODERN_PARSER and CONFIG_HUSH_OLD_PARSER.
-> 
-> In terms of testing, new unit tests were added to ut to ensure the new behavior
-> is the same as the old one and it does not add regression.
-> Nonetheless, if old behavior was buggy and fixed upstream, the fix is then added
-> to U-Boot [5].
-> In sandbox, all of these tests pass smoothly:
-> => printenv board
-> board=sandbox
-> => ut hush
-> Running 20 hush tests
-> ...
-> Failures: 0
-> => cli set modern
-> => ut hush
-> Running 20 hush tests
-> ...
-> Failures: 0
-> 
-> Thanks to the effort of Harald Seiler, I was successful booting a board:
-> => printenv fdtfile
-> fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-> => cli get
-> old
-> => boot
-> ...
-> root@lepotato:~#
-> root@lepotato:~# reboot
-> ...
-> => cli set modern
-> => cli get
-> modern
-> => printenv fdtfile
-> fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-> => boot
-> ...
-> root@lepotato:~#
-> 
-> This contribution indeed adds a lot of code and there were concern about its
-> size [6, 7].
-> With regard to the amount of code added, the cli_hush_upstream.c is 13030 lines
-> long but it seems a smaller subset is really used:
-> gcc -D__U_BOOT__ -E common/cli_hush_upstream.c | wc -l
-> 2870
-> Despite this, it is better to still have the whole upstream code for the sake of
-> easing maintenance.
-> With regard to memory size, I conducted some experiments for version 8 of this
-> series and for a subset of arm64 boards and found the worst case to be 4K [8].
-> Tom Rini conducted more research on this and also found the increase to be
-> acceptable [9].
-> 
-> If you want to review it - your review will really be appreciated - here are
-> some information regarding the commits:
-> * commits marked as "test:" deal with unit tests.
-> * commit "cli: Add Busybox upstream hush.c file." copies Busybox shell/hush.c
-> into U-Boot tree, this explain why this commit contains around 12000 additions.
-> * commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously added file
-> to permit us to use this as new shell.
-> The really good idea of #include'ing Busybox code into a wrapper file to define
-> some particular functions while minimizing modifications to upstream code comes
-> from Harald Seiler.
-> * commit "cmd: Add new parser command" adds a new command which permits
-> selecting parser at runtime.
-> I am not really satisfied with the fact it calls cli_init() and cli_loop() each
-> time the parser is set, so your reviews would be welcomed.
-> * Other commits focus on enabling features we need (e.g. if).
-> 
-> Changes since:
->   v2:
->    * Added a small fix to compile sandbox with NO_SDL=1.
->    * Added a command to change parser at runtime.
->    * Added 2021 parser function to all run_command*().
->   v3:
->    * Various bug fixes pointed by the CI.
->    * Added upstream busybox hush commits until 6th February 2022.
->   v4:
->    * Various cleaning.
->    * Modified python test to accept failure output when the test are designed to
->    fail.
->    * Bumped upstream busybox hush commits until 24h March 2022.
->   v5:
->    * Bumped upstream busybox hush commits until 30th January 2023.
->    * Fix how hush interprets '<' and '>', indeed we needed to escape them but I
->    removed this behavior as tests are handled by test command and not hush
->    itself. This permitted to have the ut fdt to pass.
->    * Fix a problem with how exit was handled. This was reported by the ut exit
->    test.
->   v6:
->    * There was no v6 and I got mixed up with version.
->   v7:
->    * Bumped upstream busybox hush commits until 9th May 2023.
->    * Renamed parser command to change parser at runtime to cli and added
->    documentation.
->    * Added better separation of patches.
->    * Removed code about __gnu_thumb1_case_si as it was merged in another series.
->    * Various cleaning.
->   v8:
->    * Bumped upstream busybox hush commits until 25th May 2023.
->   v9:
->    * Bumped upstream busybox hush commits until 2nd October 2023.
->   v10:
->    * Fixed a build error in commit adding cli command.
->    * Add new CONFIG_HUSH_SELECTABLE to only build cli command if the two shell
->    flavors are selected.
->   v11:
->    * Renamed everything containing 2021 to modern.
->    * Fixed cmd Kconfig indentation.
->    * Set modern parser as default for majority of boards except some.
-> 
-> Francis Laniel (24):
->    test: Add framework to test hush behavior
->    test: hush: Test hush if/else
->    test/py: hush_if_test: Remove the test file
->    test: hush: Test hush variable expansion
->    test: hush: Test hush commands list
->    test: hush: Test hush loops
->    cli: Add Busybox upstream hush.c file
->    cli: Port upstream Busybox hush to U-Boot
->    cli: Add menu for hush parser
->    global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
->    cmd: Add new cli command
->    cli: Enables using modern hush parser as command line parser
->    cli: hush_modern: Enable variables expansion for modern hush
->    cli: hush_modern: Add functions to be called from run_command()
->    cli: add modern hush as parser for run_command*()
->    test: hush: Fix instructions list tests for modern hush
->    test: hush: Fix variable expansion tests for modern hush
->    cli: hush_modern: Enable using < and > as string compare operators
->    cli: hush_modern: Enable if keyword
->    cli: hush_modern: Enable loops
->    test: hush: Fix loop tests for modern hush
->    cli: modern_hush: Add upstream commits up to 2nd October 2023.
->    cmd: Set modern hush as default shell
->    configs: Use old hush for several boards
-> 
->   cmd/Kconfig                            |    21 +
->   cmd/Makefile                           |     2 +
->   cmd/cli.c                              |   134 +
->   common/Makefile                        |     3 +-
->   common/cli.c                           |    82 +-
->   common/cli_hush_modern.c               |   324 +
->   common/cli_hush_upstream.c             | 13030 +++++++++++++++++++++++
->   configs/kmcent2_defconfig              |     1 +
->   configs/kmcoge5ne_defconfig            |     1 +
->   configs/kmeter1_defconfig              |     1 +
->   configs/kmopti2_defconfig              |     1 +
->   configs/kmsupx5_defconfig              |     1 +
->   configs/kmtepr2_defconfig              |     1 +
->   configs/pg_wcom_expu1_defconfig        |     1 +
->   configs/pg_wcom_expu1_update_defconfig |     1 +
->   configs/pg_wcom_seli8_defconfig        |     1 +
->   configs/pg_wcom_seli8_update_defconfig |     1 +
->   configs/socfpga_secu1_defconfig        |     1 +
->   configs/tuge1_defconfig                |     1 +
->   configs/tuxx1_defconfig                |     1 +
->   doc/usage/cmd/cli.rst                  |    74 +
->   doc/usage/index.rst                    |     1 +
->   include/asm-generic/global_data.h      |     8 +
->   include/cli_hush.h                     |    51 +-
->   include/test/hush.h                    |    15 +
->   include/test/suites.h                  |     1 +
->   test/Makefile                          |     3 +
->   test/cmd_ut.c                          |     6 +
->   test/hush/Makefile                     |    10 +
->   test/hush/cmd_ut_hush.c                |    20 +
->   test/hush/dollar.c                     |   226 +
->   test/hush/if.c                         |   316 +
->   test/hush/list.c                       |   140 +
->   test/hush/loop.c                       |    91 +
->   test/py/tests/test_hush_if_test.py     |   197 -
->   test/py/tests/test_ut.py               |     8 +-
->   36 files changed, 14565 insertions(+), 211 deletions(-)
->   create mode 100644 cmd/cli.c
->   create mode 100644 common/cli_hush_modern.c
->   create mode 100644 common/cli_hush_upstream.c
->   create mode 100644 doc/usage/cmd/cli.rst
->   create mode 100644 include/test/hush.h
->   create mode 100644 test/hush/Makefile
->   create mode 100644 test/hush/cmd_ut_hush.c
->   create mode 100644 test/hush/dollar.c
->   create mode 100644 test/hush/if.c
->   create mode 100644 test/hush/list.c
->   create mode 100644 test/hush/loop.c
->   delete mode 100644 test/py/tests/test_hush_if_test.py
-> 
-> 
-> Best regards and thank you in advance.
-> ---
-> [1] https://lists.denx.de/pipermail/u-boot/2021-July/453347.html
-> [2] https://runtimeterror.com/tech/lil/
-> [3] https://lists.denx.de/pipermail/u-boot/2021-July/453790.html
-> [4] https://lists.denx.de/pipermail/u-boot/2021-July/453848.html
-> [5] https://lists.denx.de/pipermail/u-boot/2021-August/458569.html
-> [6] https://lists.denx.de/pipermail/u-boot/2023-November/536768.html
-> [7] https://lists.denx.de/pipermail/u-boot/2023-May/518140.html
-> [8] https://lists.denx.de/pipermail/u-boot/2023-May/518147.html
-> [9] https://lists.denx.de/pipermail/u-boot/2023-November/536952.html
-> --
-> 2.34.1
-> 
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on libretech-ac
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on libretech-cc
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on bananapi-m2s
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on bananapi-m5
 
-For reference:
-https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/pipelines/1105162563/test_report
+15 =D0=BB=D0=B8=D1=81=D1=82=D0=BE=D0=BF=D0=B0=D0=B4=D0=B0 2023 =D1=80=2E 2=
+1:11:49 GMT+02:00, Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=
+=D1=81=D0=B0=D0=B2(-=D0=BB=D0=B0):
+>On Wed, Nov 15, 2023 at 04:51:08PM +0100, Thierry Reding wrote:
+>> On Mon, Nov 06, 2023 at 04:04:07PM -0500, Tom Rini wrote:
+>> > On Mon, Nov 06, 2023 at 02:11:16PM +0000, Peter Robinson wrote:
+>> > > On Mon, Nov 6, 2023 at 1:28=E2=80=AFPM Svyatoslav Ryhel <clamor95@g=
+mail=2Ecom> wrote:
+>> > > >
+>> > > > =D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82=2E 2023=E2=80=AF=D1=80=
+=2E =D0=BE 15:13 Peter Robinson <pbrobinson@gmail=2Ecom> =D0=BF=D0=B8=D1=88=
+=D0=B5:
+>> > > > >
+>> > > > > On Mon, Nov 6, 2023 at 11:58=E2=80=AFAM Svyatoslav Ryhel <clamo=
+r95@gmail=2Ecom> wrote:
+>> > > > > >
+>> > > > > > =D0=BF=D0=BD, 6 =D0=BB=D0=B8=D1=81=D1=82=2E 2023=E2=80=AF=D1=
+=80=2E =D0=BE 13:46 Peter Robinson <pbrobinson@gmail=2Ecom> =D0=BF=D0=B8=D1=
+=88=D0=B5:
+>> > > > > > >
+>> > > > > > > Hi Svyatoslav,
+>> > > > > > >
+>> > > > > > > > Since the proposed PMIC patches have been accepted, I see=
+ the need
+>> > > > > > > > to convert boards which I maintain to use DM drivers inst=
+ead of board hacks=2E
+>> > > > > > > >
+>> > > > > > > > Svyatoslav Ryhel (5):
+>> > > > > > > >   board: lg-x3: convert LG Optimus 4X and Vu to use DM PM=
+IC
+>> > > > > > > >   board: endeavoru: convert HTC One X to use DM PMIC
+>> > > > > > >
+>> > > > > > > Is there a reason why the two above devices don't appear to=
+ have their
+>> > > > > > > =2Edts files in the upstream kernel?
+>> > > > > > >
+>> > > > > >
+>> > > > > > Yes, there is a reason=2E Linux maintainers treat submitters =
+as
+>> > > > > > existential enemies or as dirt at least=2E I was trying to wo=
+rk with
+>> > > > > > linux but I have no desire to spend any time to upstream ende=
+avoru or
+>> > > > > > lg_x3=2E
+>> > > > >
+>> > > > > The usual policy for acceptance into U-Boot is to have upstream=
+ review
+>> > > > > in the kernel first=2E
+>> > > > >
+>> > > >
+>> > > > May you point to a policy which clearly and explicitly states thi=
+s as
+>> > > > a mandatory condition?
+>> > >=20
+>> > > There have been a number of devices rejected in the past until thei=
+r
+>> > > DT are upstream but I'll leave Tom, who I've explicitly added on cc=
+:,
+>> > > to clarify the exact policy=2E
+>> >=20
+>> > Well, here is where it's tricky=2E I brought this up for one of the
+>> > Broadcom MIPS platforms a week or two back, and Linus Walleij's point
+>> > (and I'm paraphrasing) is there's not really an upstream for it to go=
+=2E
+>> >=20
+>> > What we cannot have is device tree bindings[1] that aren't upstream o=
+r
+>> > worse yet conflict with the official bindings=2E
+>> >=20
+>> > So the general way to resolve that is have device tree file be drop-i=
+n
+>> > from the linux kernel, and what additions we must have be done via
+>> > -u-boot=2Edtsi files=2E And in turn, some SoCs are better about keepi=
+ng in
+>> > sync with the kernel than other SoCs are=2E
+>> >=20
+>> > Now, upstream being actively hostile to dts files, especially for old=
+er
+>> > platforms? That's unfortunate=2E So long as we aren't violating the r=
+ules
+>> > about bindings, the intention is that we don't have device trees that
+>> > are either (a) massively out of sync with the kernel[2] or (b) kept
+>> > intentionally mismatched from the kernel=2E
+>> >=20
+>> > --=20
+>> > Tom
+>> >=20
+>> > [1]: There are both examples like binman that Simon is working on at
+>> > least but this is more exception than intentional rule=2E
+>> > [2]: Per our other conversions, I know the tegra ones are in this
+>> > unfortunate state in general
+>>=20
+>> On the Tegra side we've been fairly lax about the device trees in
+>> U-Boot, I suppose=2E The assumption had always been that U-Boot would l=
+oad
+>> an external DTB and pass it to the kernel on boot, so keeping them both
+>> in sync was never a high priority=2E
+>>=20
+>> U-Boot does only a very tiny amount of what Linux does, so dropping in
+>> the kernel DTB always seemed a bit overkill=2E
+>>=20
+>> In either case, if this is problematic, it's something that I could tak=
+e
+>> a look at=2E Again, it's expected that the device trees are different, =
+for
+>> historical reasons, but I'd be surprised if they actually conflict with
+>> one another=2E U-Boot's DTB was always supposed to be a subset of the
+>> Linux DTB=2E
+>
+>So, the issue with U-Boot and kernel device trees being out of sync is
+>that we then can't support the model of "just pass the current DT to the
+>OS"=2E This in general is good to support because it means that even if a
+>given platform isn't formally SystemReady IR certified it's still likely
+>to be functional=2E
+>
+>The most strict rule is that you can't have bindings in U-Boot that
+>conflict with the kernel, or should be in the kernel but aren't, and so
+>on=2E
+>
 
-Thanks !
-Neil
+So you say that U-Boot should support only components which have linux dri=
+ver? May you clarify?
