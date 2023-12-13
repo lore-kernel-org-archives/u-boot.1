@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 676FEC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:42:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C90CC4167B
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19439878BF;
+	by phobos.denx.de (Postfix) with ESMTP id 85A0B878C5;
 	Wed, 13 Dec 2023 21:39:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HtjNDkSc";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nCKYuSuH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC2F87872; Wed, 13 Dec 2023 21:39:22 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id CE3A487880; Wed, 13 Dec 2023 21:39:21 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CDEB87864
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F014B87872
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a22fb5f71d9so207511366b.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:20 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a1db99cd1b2so944977266b.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499959; x=1703104759; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702499958; x=1703104758; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uikBuOp2lHVOCPZwmZkVJFMPuWfo3oxBbSbiaiG8v3s=;
- b=HtjNDkScQrP9Jh+XN353OSZurt1/pZSeBmSfoBhp/m3M01V86xCtOw1+XR1IgeEKRt
- C9CALMc+E462ERNf+mgJ59+4BZbmqUGtjB6BTOqf9BQ3mc++g8QQiHIJNUarVJENCCrZ
- 6nKb8pxm2ujFjWCVuNKsLSIc/n8FWPSjJTkRI=
+ bh=FAREx+6V2RtNFYu+BPu6qis8KsDgUHrDr/szdEXgFW8=;
+ b=nCKYuSuHOdsCOT2A+s5x/cj04CnhkSehLtkmoSQwn+aAvS3DIz48A3qvCRPwHjEP09
+ ebUSLEYDR8HrUMaYuUOpjSDm/ORW0Zn6BrZ1dOf6frUJM5DomR0bPqKiBMOu4hAKY2A9
+ 0oaM22nSFviICSSNiN0xOCC9rbzBn7/efhRqs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499959; x=1703104759;
+ d=1e100.net; s=20230601; t=1702499958; x=1703104758;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uikBuOp2lHVOCPZwmZkVJFMPuWfo3oxBbSbiaiG8v3s=;
- b=Sj+v4FSL6H9NXahYd5Dyk11obXIDIG9WPy5SpD6/vFoMTAz2Giq6eR7EXS/Z9hCNsh
- pkDJY6HV7b2NGFcv6ujQKTRtIr/0FO1RYcyUeiyPKKV4WnLh0nBmGibHmWxH8cdZP0cn
- aOoLrIAVqBGMIHRgYimZsaG9qZBUHzQQYOE6wSFAhhlJUVL6iNAgxcTePMtygo2ygHki
- CHM/91UPo3eL16666OIL0h+utudTUkXCwogn+1PZjOisHJViB+nQ/Y9gUhBYOeTGrWT6
- w8zaYGStl+jquVV11C2XzRnRQhTPdRewR47qrjCrlSgv6qcb1+c2iVjCVIxwhR2ec4Ot
- eiYA==
-X-Gm-Message-State: AOJu0YwVWNtwWdE+ewybSsZPr6uWO3H0LOqdS7vySJ+Nr9QKGAMmPXHm
- fthUw7W5KnqXfCsk2B9xENBRYiUr3I2eU5aoEUjg/xehedMqCLiE6bc=
-X-Google-Smtp-Source: AGHT+IEg+aULZbuqCDAwNu0FsnKqUsQH4Z5pGd86lMljwiQmphP3Vlg7/WXWKW+LhJwEJAAg5gyoJN0e9lOQ26MD2Ds=
-X-Received: by 2002:a17:906:109c:b0:a1a:5397:b67f with SMTP id
- u28-20020a170906109c00b00a1a5397b67fmr9665335eju.4.1702499959538; Wed, 13 Dec
- 2023 12:39:19 -0800 (PST)
+ bh=FAREx+6V2RtNFYu+BPu6qis8KsDgUHrDr/szdEXgFW8=;
+ b=P0/lmuIAG5MOPbkuxdlzMEnvw8Vr0FhHQhoZ1DxR7Ssv6lD5d1G8rM++GJZaaYU4ag
+ 21+p/fTvUtfZINwms+k8gc18Az1DWVbIJFRuJOBiTA4RuNi30BtSGw9T1Y9dbzsiwuoD
+ hovaryvwZApJZ03AzivuPQZ+Au0eI/MMhqH5gwHwMamWmbBV8qlD++7j83KHKwZRzsbw
+ 0sGsBxb7vjaAyjr6Ww4DlkxSoRGIx3D5NOYerlnDiT5ts6/r0FzJ6s0/TlJ1MruwltQ8
+ 4F7Csm0WB0UTLkxUdA91yyge0qaJfcSKMV6F+wS/mT3EwWpZUdA7Yg2rpzd4E2uLizVj
+ uHGg==
+X-Gm-Message-State: AOJu0YwNnh5HhLg0ABFFdMWFYXSAgBwp3MLiks2kETXKhbvGJtz5FjsD
+ uYwM3eJ6DYLDNrfZsfVBzC6PxnBmZOcFA78oLS9WLA==
+X-Google-Smtp-Source: AGHT+IH+7uQCRGeEL+F8fOTgihc/PZoP/rdldnw3zRQuYvksIXkXUMguL3sKedI7J/mex70pgyOlHhfNGmgzKNjXvKw=
+X-Received: by 2002:a17:906:c019:b0:a1b:86e2:a1ab with SMTP id
+ e25-20020a170906c01900b00a1b86e2a1abmr2923551ejz.223.1702499958347; Wed, 13
+ Dec 2023 12:39:18 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 12:39:18 -0800
+ HTTPREST; Wed, 13 Dec 2023 12:39:13 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ1VV13ESFie-8XEu1JEC=5YX9D-TATDVPwJC6M7AYTxsQ@mail.gmail.com>
-References: <CAPnjgZ1VV13ESFie-8XEu1JEC=5YX9D-TATDVPwJC6M7AYTxsQ@mail.gmail.com>
- <20231118215237.94875-1-heinrich.schuchardt@canonical.com>
-Date: Wed, 13 Dec 2023 12:39:18 -0800
-X-Google-Sender-Auth: Mql-iWPzFO6soWWrEICWHsQ66Rw
-Message-ID: <CAPnjgZ2_c4dz-KSWCA49WmCWpmeapoQZP26KwutiEDJgkK78eA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] acpi: simplify acpi_write_ssdt()
+In-Reply-To: <CAPnjgZ01wYe-kKZhfGAhn3NcAEe5nywAAJqQRHnRnxvC+w3Qzg@mail.gmail.com>
+References: <CAPnjgZ01wYe-kKZhfGAhn3NcAEe5nywAAJqQRHnRnxvC+w3Qzg@mail.gmail.com>
+ <20231118215727.95086-1-heinrich.schuchardt@canonical.com>
+ <20231118215727.95086-3-heinrich.schuchardt@canonical.com>
+Date: Wed, 13 Dec 2023 12:39:13 -0800
+X-Google-Sender-Auth: JJ2gLr3rWlVVRcX5L3g0yQ3MY6Y
+Message-ID: <CAPnjgZ2bSNc7HxwjdgTdGQLqT7FfT2Ev8QQanP5C2SmmuXPKsQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] test: unit test for acpi_find_table()
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, 
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
@@ -85,17 +86,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 18 Nov 2023 at 14:52, Heinrich Schuchardt
+On Sat, 18 Nov 2023 at 14:57, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> * Converting to void * is superfluous when calling memset().
-> * acpi_fill_header() already fills oem_table_id.
+> Provide a unit test for acpi_find_table()
 >
-> Fixes: d953137526cc ("x86: Move SSDT table to a writer function")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/acpi/ssdt.c | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+> v2:
+>         new patch
+> ---
+>  test/dm/acpi.c | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 96 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
