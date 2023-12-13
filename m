@@ -4,73 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 575FAC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9FAC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9684878B7;
-	Wed, 13 Dec 2023 22:00:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 0615987852;
+	Wed, 13 Dec 2023 22:11:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="pc3QnaXm";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 32EE587880; Wed, 13 Dec 2023 22:00:43 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1702501916;
+	bh=3aaAqwvjp1e0N0wfT0dKQPJ4/Gx7ktbfK130SeGYbMc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=NBhOKbNc/p9NFtbz6bugw5a/Vk4lwJrwmYk3mL1lKPpO7QFGvRdjn8hVZequyGJzM
+	 fFnpjlRIgfAaAfZ62JLTR1xIWJtl84jB9rU5TbuXomdgOmPQ1+MgmNVNxy/EkDX2+f
+	 MKv4coWsTsjSQ5NIFasbdYTRhL7iQFr6wdXgIFP/HK+/csEL25IQG6v5nBtVD1Yiay
+	 d/yvD5hsgXNJDsjqJ89Zq5oIGajFGr9kHBdxbY9CebdnM+DkiJd7J23Hd1DiT7xkJN
+	 T0qBT7kvZGtPeVPSZboRBW59d2jValEcf/VrIprjvx/kVfIPgf06/ikhv/3+3tbAYa
+	 ls+z330SDugvw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95B97878B7
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 22:00:40 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: a90b0ae8-99fa-11ee-91e7-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id a90b0ae8-99fa-11ee-91e7-005056994fde;
- Wed, 13 Dec 2023 22:00:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=/kwpCwXIvI24I6ir6VJT2uOWiiU5t0LwyDXeifhGX+I=;
- b=pc3QnaXmQsRSCc/dCBpqw0yABD8okHQw4RUIuYp3fxIPKQojG1DOZ5aYg+bGQ7sM7mm1yNh0SuDOy
- 0lyeY1zsu76xxgq/WEBEBFphA6u/EEFz1AC3Pp/LJygPJwA/YmIhZ5/z3IrIOMAyacSkuaH+y8w7ad
- jFFRhMX+Bz7ijcvPNS6W4dv5rEtAa+vRtKbytcqZ//QHhGWTZhEwW62VO0IGrevYSt5jgyHScDNtMl
- i3XxO2J6vNHUqGLrD0hIStbl5VWHr1hpRMmbk2q2GFNH/xwotACIymYoOQC/fUO3fpdi5pDAnyajbm
- 6aN5mJyRRppq/Roz8f4kLOvfz98c/hA==
-X-KPN-MID: 33|KYHi0bGRzDTkToC+WnYFJ9aPX2bUXrnHNloFbu6o9SFLO25mncS7DdusxBSeVGf
- 8VHP52yyaalOVK2nelHJhG8ZQxk8J0Fbndj9rW/DMlyA=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|auxhqopRA4sSCXJvFzZifrITU5KA0Kyh3qaf9OK+bRKnSkrk3ME/0Cu78AytYtH
- omypJFgg69rFhAmK02C1cWg==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id ab3051d9-99fa-11ee-ad2d-005056998788;
- Wed, 13 Dec 2023 22:00:39 +0100 (CET)
-Date: Wed, 13 Dec 2023 22:00:38 +0100
-Message-Id: <87y1dx6cnd.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, ilias.apalodimas@linaro.org,
- sean.anderson@seco.com, neil.armstrong@linaro.org,
- heinrich.schuchardt@canonical.com, pbrobinson@gmail.com,
- u-boot@lists.denx.de
-In-Reply-To: <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
- (message from Simon Glass on Wed, 13 Dec 2023 13:41:05 -0700)
-Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
- <20231127171058.165777-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
- <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
- <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
- <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
- <20231209184915.GY2513409@bill-the-cat>
- <CAC_iWjKKG50d5QhUZFLUgxqO+VhgE7bC9Tk_SmCR0x4f3zD74g@mail.gmail.com>
- <CAPnjgZ27G=6fDadAiJk_aG9He2ZpyFhhsZDYxUwEp5+0AQatYg@mail.gmail.com>
- <20231213201909.GG2513409@bill-the-cat>
- <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id ACC8D86579;
+ Wed, 13 Dec 2023 22:11:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1702501914;
+ bh=3aaAqwvjp1e0N0wfT0dKQPJ4/Gx7ktbfK130SeGYbMc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=XQmQrwQqtBotb2fK8gClINKbcrS4pqLt7c5GejzlOR1jAKBpjUSNM3779VJH4Iqx2
+ zXJA6bP6ckuQ3xW7sRsrzYX8qK3FYcK9cAr5zyMQGqv9guv4q7MMG1tSIz4mdi33FX
+ /vs7VKOnFXvg+MLkCY/mzwBRp4jUF3K8QzIstzluQbK+6xDCuSikycaqPVEpLDPgDY
+ 9Vz14S4uSH3aEpDQLn902jRTaPe3X8S9hfTltfXfzXZC/Rq3z69BKSOzbmS0MgVJRf
+ /ytyjSRNDvfvxuZ4PeCeZ0ywMJa817UIlnuhWZLznhywoSN6x5eCy+rTyr4NxDOi07
+ GTN+zangcAwaw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Duncan Hare <DuncanCHare@yahoo.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] net: wget: Support non-default HTTP port
+Date: Wed, 13 Dec 2023 22:11:13 +0100
+Message-ID: <20231213211125.279880-1-marex@denx.de>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,119 +68,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Wed, 13 Dec 2023 13:41:05 -0700
-> 
-> Hi Tom,
-> 
-> On Wed, 13 Dec 2023 at 13:19, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Dec 13, 2023 at 12:50:03PM -0700, Simon Glass wrote:
-> > > Hi Ilias,
-> > >
-> > > On Mon, 11 Dec 2023 at 00:49, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 9 Dec 2023 at 20:49, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Dec 06, 2023 at 06:03:14PM +0200, Ilias Apalodimas wrote:
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On Sat, 2 Dec 2023 at 20:28, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > >
-> > > > > > > Hi Ilias,
-> > > > > > >
-> > > > > > > On Wed, 29 Nov 2023 at 23:50, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Simon,
-> > > > > > > >
-> > > > > > > > [...]
-> > > > > > > >
-> > > > > > > >> > Changes since v1:
-> > > > > > > >> > - Tokenize the DT node entry and use the appropriate value instead of
-> > > > > > > >> >   the entire string
-> > > > > > > >> > - Removed Peters tested/reviewed-by tags due to the above
-> > > > > > > >> >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
-> > > > > > > >> >  1 file changed, 90 insertions(+), 4 deletions(-)
-> > > > > > > >> >
-> > > > > > > >>
-> > > > > > > >> Can this be put behind a Kconfig? It adds quite a bit of code which
-> > > > > > > >> punishes those boards which do the right thing.
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Sure but OTOH the code increase should be really minimal. But I don't mind I can add a Kconfig
-> > > > > > > >
-> > > > > > > >>
-> > > > > > > >> > +
-> > > > > > > >> > +       dt_str = ofnode_read_string(ofnode_root(), nprop->dt_str);
-> > > > > > > >>
-> > > > > > > >> Could this use ofnode_read_string_index() ?
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Maybe, I'll have a look and change it if that works
-> > > > > >
-> > > > > > Unless I am missing something this doesn't work.
-> > > > > > This is designed to return a string index from a DT property that's defined as
-> > > > > > foo_property = "value1", "value2" isn't it?
-> > > > > >
-> > > > > > The code above is trying to read an existing property (e.g compatible)
-> > > > > > and get the string after the comma delimiter.
-> > > > > > Perhaps I should add this in drivers/core/ofnode.c instead?
-> > > > > >
-> > > > > > > >
-> > > > > > > > [...]
-> > > > > > > >
-> > > > > > > >>
-> > > > > > > >> Any chance of a test for this code?
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Sure, but any suggestions on where to add the test?
-> > > > > > > > SMBIOS tables are populated on OS booting, do we have a test somewhere that boots an OS?
-> > > > > > >
-> > > > > > > They are written on startup, right? They should certainly be in place
-> > > > > > > before U-Boot enters the command line.
-> > > > > >
-> > > > > > Not always.  I am not sure if x86 does that, but on the rest of the
-> > > > > > architectures, they are only initialized when the efi smbios code
-> > > > > > runs. Wasn't this something you were trying to change?
-> > > > >
-> > > > > One of those things I keep repeating is that we don't know for sure what
-> > > > > the right values here are until we load the DT the OS _will_ use. It's
-> > > > > quite valid to start U-Boot and pass it a generic "good enough" DT at
-> > > > > run time until U-Boot can see (GPIOs, EEPROM, whatever) what it's on and
-> > > > > what the real DT to load before passing to the OS is. Since U-Boot
-> > > > > doesn't need SMBIOS tables itself, we should make these "late" not
-> > > > > "early".
-> > > >
-> > > > Fair enough, we can defer the init and testing of those late, just
-> > > > before we are about to boot. But this is irrelevant to what this patch
-> > > > does, can we get the fallback mechanism in first, assuming everyone is
-> > > > ok with the patch now?
-> > > >
-> > >
-> > > I would like this behind a Kconfig. Making it the default means people
-> > > are going to start relying on (in user space) and then discover later
-> > > that it is wrong.
-> >
-> > What do you mean wrong, exactly?
-> 
-> "raspberrypi" instead of "Raspberry Pi", for example, or "friendlyarm"
-> instead of "FriendlyElec"
+Currently the wget command is hard wired to HTTP port 80. This is
+inconvenient, as it is extremely easy to start trivial HTTP server
+as an unprivileged user using e.g. python http module to serve the
+files, but such a server has to run on one of the higher ports:
+"
+$ python3 -m http.server -d $(pwd) 8080
+"
 
-Heh, well, even in the x86 world vendors can't even spell their own
-name consistently.
+Make it possible to configure HTTP server port the same way it is
+possible to configure TFTP server port, using environment variable
+'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
+fallback port. This way, users can start their own trivial server
+and conveniently download whatever files they need into U-Boot.
 
-> I just wonder what this information is actually used for. If it is
-> just for fun, that is fine, but I believe some tools do use dmidecode,
-> at which point it needs to be accurate and should not change later,
-> e.g. when someone decides to actually add the info.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Cc: Duncan Hare <DuncanCHare@yahoo.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+V2: Update documentation
+---
+ doc/usage/cmd/wget.rst    |  3 ++-
+ doc/usage/environment.rst |  4 ++++
+ include/net/wget.h        |  1 -
+ net/wget.c                | 14 ++++++++++----
+ 4 files changed, 16 insertions(+), 6 deletions(-)
 
-So the Linux kernel uses this information to apply quirks for specific
-machines.  But I hope that on platforms that have a device tree folks
-will just use the board compatible string for that purpose.
+diff --git a/doc/usage/cmd/wget.rst b/doc/usage/cmd/wget.rst
+index e1e7f8d8145..8e7383b6c60 100644
+--- a/doc/usage/cmd/wget.rst
++++ b/doc/usage/cmd/wget.rst
+@@ -16,7 +16,8 @@ Description
+ The wget command is used to download a file from an HTTP server.
+ 
+ wget command will use HTTP over TCP to download files from an HTTP server.
+-Currently it can only download image from an HTTP server hosted on port 80.
++By default the destination port is 80 and the source port is pseudo-random.
++The environment variable *httpdstp* can be used to set the destination port.
+ 
+ address
+     memory address for the data downloaded
+diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+index c57b717caaf..82b6ea7b6e7 100644
+--- a/doc/usage/environment.rst
++++ b/doc/usage/environment.rst
+@@ -306,6 +306,10 @@ ethrotate
+     anything other than "no", U-Boot does go through all
+     available network interfaces.
+ 
++httpdstp
++    If this is set, the value is used for HTTP's TCP
++    destination port instead of the default port 80.
++
+ netretry
+     When set to "no" each network operation will
+     either succeed or fail without retrying.
+diff --git a/include/net/wget.h b/include/net/wget.h
+index da0920de118..6714f7ea573 100644
+--- a/include/net/wget.h
++++ b/include/net/wget.h
+@@ -17,6 +17,5 @@ enum wget_state {
+ };
+ 
+ #define DEBUG_WGET		0	/* Set to 1 for debug messages */
+-#define SERVER_PORT		80
+ #define WGET_RETRY_COUNT	30
+ #define WGET_TIMEOUT		2000UL
+diff --git a/net/wget.c b/net/wget.c
+index 6ae2237a0a8..817c5ebd5d0 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -19,6 +19,9 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++/* The default, change with environment variable 'httpdstp' */
++#define SERVER_PORT		80
++
+ static const char bootfile1[] = "GET ";
+ static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+ static const char http_eom[] = "\r\n\r\n";
+@@ -134,19 +137,22 @@ static void wget_send_stored(void)
+ 	int len = retry_len;
+ 	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
+ 	unsigned int tcp_seq_num = retry_tcp_ack_num;
++	unsigned int server_port;
+ 	uchar *ptr, *offset;
+ 
++	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
++
+ 	switch (current_wget_state) {
+ 	case WGET_CLOSED:
+ 		debug_cond(DEBUG_WGET, "wget: send SYN\n");
+ 		current_wget_state = WGET_CONNECTING;
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
++		net_send_tcp_packet(0, server_port, our_port, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 		packets = 0;
+ 		break;
+ 	case WGET_CONNECTING:
+ 		pkt_q_idx = 0;
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
++		net_send_tcp_packet(0, server_port, our_port, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 
+ 		ptr = net_tx_packet + net_eth_hdr_size() +
+@@ -161,14 +167,14 @@ static void wget_send_stored(void)
+ 
+ 		memcpy(offset, &bootfile3, strlen(bootfile3));
+ 		offset += strlen(bootfile3);
+-		net_send_tcp_packet((offset - ptr), SERVER_PORT, our_port,
++		net_send_tcp_packet((offset - ptr), server_port, our_port,
+ 				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
+ 		current_wget_state = WGET_CONNECTED;
+ 		break;
+ 	case WGET_CONNECTED:
+ 	case WGET_TRANSFERRING:
+ 	case WGET_TRANSFERRED:
+-		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
++		net_send_tcp_packet(0, server_port, our_port, action,
+ 				    tcp_seq_num, tcp_ack_num);
+ 		break;
+ 	}
+-- 
+2.42.0
 
-Otherwise I think this information is mostly used to populate system
-information UIs and asset databases.
