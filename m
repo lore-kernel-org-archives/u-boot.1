@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B3EC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70AA0C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:19:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 548A087801;
-	Wed, 13 Dec 2023 04:17:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0D6F2871F0;
+	Wed, 13 Dec 2023 04:17:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zr6VauGO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KYU0e5U5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AF65871F0; Wed, 13 Dec 2023 04:17:09 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id D83BB877EC; Wed, 13 Dec 2023 04:17:10 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CDE28780E
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:16:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F42987822
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:17:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5913e3a9e05so750668eaf.1
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:16:59 -0800 (PST)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6d9d84019c5so4850789a34.3
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:17:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702437418; x=1703042218; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702437419; x=1703042219; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gdmcceIKIT33OFAdzuXky1GaB0HFjzcloi9WRpCzVyk=;
- b=zr6VauGOhFKMPfvLoNipjJITUsj9bLfzwm+EqTfY04sXQvT1LQw2g1e9isVRzZugpj
- BpDl7o8T54azCTU2/wwRm6DM/D8NE5hy1UkgA0dmR+Kx03QFr2QqycnJ8LlwLvwPaGk1
- eDk7R7icsYU3fnKH7dsSn8YB/Px7NezF4EXiwg7Jn/CywM+RaCs2aY1t2E+wwQjaDh+b
- KBxuWZPBy/O5DjVcMrDfYhWY6QA4bAoqq8evA14bXiuz2uNz8dsa4cel4k4HspeZEfgs
- wO9tZWs/ubnR/zV/K76+0686HEv8FY7i7KDoPILZ93GiRIrbvXROH1ouvLU+e+4xcowc
- wvZg==
+ bh=wCKfxk7RxxuQybzuaeY5DVICR5kE7xn8ldimDxWoUtQ=;
+ b=KYU0e5U5p/hhfhYncN4MIFbUSPjueRe0j06XeSpKIflf4MIE53GBlmOH8kvWTGfgui
+ lX9DEMT47mk7n3AdWOsbvTH6RfCW361FNiXAwT31+OvbJtz4qwVUvIa06VkQR9F+82o8
+ RNXDoIdw5Q4JqIeXER9yNOQygYzff0xlvkL1W7+ZLa34GUWNC+2tfrdwHe8Cgpl0JD03
+ ExeTetoMeZ2ur1sjy/my3dvTCzk2PtMl69zkvPV+AzUPiDqtWbkL8P7CNLbSJK+hZAZ6
+ 0z1ZFSdUAOi+zfhrPdKx8SId/QU7YqbjAOVTOKmP3mETmrISsRu+Z+WUC0fynwu0lNVq
+ i+lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702437418; x=1703042218;
+ d=1e100.net; s=20230601; t=1702437419; x=1703042219;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gdmcceIKIT33OFAdzuXky1GaB0HFjzcloi9WRpCzVyk=;
- b=eGUrRypVqtcmqh6IUkHQPb7jC71rz3qPBDGjtCitNqpCaxFU59F3QsyMoGV03QnJ1x
- Fzjy7A3C6BkMZaG8iP0W5wyiKNHgFFMFtMQ6kM2mKdKWeAKVR6+RbrVE99iwTILe6dTx
- YFXQCCNeFP3RzcXxm++Ghu2XxwbuB2bF1KeLOyxpmlpRGbjeRBjjCewCbD3VrJIdTBUg
- Ey6L1EXT2c7XkXUINZZxpQJbblIHR4uA/rJcACNwLWEEGNvFZgjYMDiP2llxxE+uHXNi
- nr4EaL7+QebJPrYQBxXj+TM8rr9jXjvyqKXInpD3IDcQ37IHDROYoIJGRI/nJ6mIOFns
- UOLA==
-X-Gm-Message-State: AOJu0YyEER46rxpAmzMZisC+vavVWGRPRrohM2DD+yq7WPR1V2/tgPzS
- iDWaao0WefE9XOCPx4Sm7CjPlQ==
-X-Google-Smtp-Source: AGHT+IFz8V+5ZfVGPJ4h1hPiORJj7zGM3ZHdKp38KRwM9wB6kqJwBHAEnx9oOlDJ6AiE/8p9hrSk3A==
-X-Received: by 2002:a05:6820:1627:b0:590:2b6d:a862 with SMTP id
- bb39-20020a056820162700b005902b6da862mr5550472oob.15.1702437417762; 
- Tue, 12 Dec 2023 19:16:57 -0800 (PST)
+ bh=wCKfxk7RxxuQybzuaeY5DVICR5kE7xn8ldimDxWoUtQ=;
+ b=YqolVIRwJ3U+m6/U5ZlGCnFIXxU5u06nQiC0CcP9craeDXEI5j78xQGjSMYXRwxxEA
+ 34ixIQnNEi8zbP6E8uKwk8V4BrJr2fFaROk7ckXFY3Bcj0tL1P5/WDJapx+JV5hxfkav
+ +rMr0mp9Aie+b/YzIYYhhtKKFkRqKAwWw/BQBdiqA1nG+riP5yzEqxB90waUAYHtVPVn
+ fiz43U+EhHm+pC1Ev9qWAUxliLyb0znoSR2ZEVfuLdngOw6vtDmuyA2OcVuMn6OLz98R
+ YqwPO1QXjkdsyPC0ieT/uZB4ThuNp2sE9wRTvKSDPBYRtuQaORFP55QGwm0B2ChiVh7e
+ z/0A==
+X-Gm-Message-State: AOJu0YyVGBYOLrTk1MWc2Fuua8oofZgcc3Ue/c/keaxc4wQdJPVLKfva
+ BIJZPNbp4ufeGoD+gKvXaV6fSw==
+X-Google-Smtp-Source: AGHT+IEOKQqxXs6sI9Ec2vqbPYTAA12Jz8CoxhAqWZ+8Lekmv6HPgvhWARxCwP70LoUJmy9ROP23Lw==
+X-Received: by 2002:a9d:7a89:0:b0:6d8:74e2:8a51 with SMTP id
+ l9-20020a9d7a89000000b006d874e28a51mr7152227otn.48.1702437418859; 
+ Tue, 12 Dec 2023 19:16:58 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- h26-20020a4a281a000000b0058df6ae23fdsm2819260ooa.33.2023.12.12.19.16.57
+ cm11-20020a056830650b00b006d99d363723sm1642853otb.63.2023.12.12.19.16.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Dec 2023 19:16:57 -0800 (PST)
+ Tue, 12 Dec 2023 19:16:58 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  u-boot@lists.denx.de
-Subject: [PATCH 11/13] arm: exynos: Add Exynos850 SoC support
-Date: Tue, 12 Dec 2023 21:16:44 -0600
-Message-Id: <20231213031646.28828-12-semen.protsenko@linaro.org>
+Subject: [PATCH 12/13] board: samsung: Add support for E850-96 board
+Date: Tue, 12 Dec 2023 21:16:45 -0600
+Message-Id: <20231213031646.28828-13-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231213031646.28828-1-semen.protsenko@linaro.org>
 References: <20231213031646.28828-1-semen.protsenko@linaro.org>
@@ -92,1666 +92,1989 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Samsung Exynos850 is ARMv8-based mobile-oriented SoC. It features
-Cortex-A55 CPU (8 cores) and it's built using 8nm process.
+Add support for WinLink E850-96 board [1]. It's based on Exynos850 SoC
+and follows 96boards specification, so it's compatible with 96boards
+mezzanine boards [2]. This patch enables next features:
 
-Add Exynos850 support by enabling next features:
+  * Serial console
+  * USI
+  * PMU (muxing AP UART path)
+  * Pinctrl
+  * Clocks
+  * Timer (ARMv8 architected)
+  * Reset control
 
-  * Import Exynos850 SoC dtsi files from Linux kernel
-  * Add Exynos850 MMU memory map
-  * Introduce ARCH_EXYNOS9 platform config option
+It's quite a minimal enablement. Features like MMC, USB and Ethernet
+will be enabled later.
+
+The rationale for config values is as follows:
+
+  * TEXT_BASE = 0xf8800000
+
+    That's where BL2 loads the U-Boot payload, so TEXT_BASE must be
+    exactly this value. Overall the memory map is designed in a way to
+    keep the bootloader in the upper 128 MiB area of RAM, which is
+    0xf8000000..0xffffffff. That includes bootloader's code, stack,
+    data, heap, MMU tables, etc. All the memory below that 128 MiB chunk
+    can be used for storing boot images (0x80000000..0xf8000000).
+
+  * CUSTOM_SYS_INIT_SP_ADDR = 0xf8c00000
+
+    Just 4 MiB above the TEXT_BASE address, to leave enough space for
+    U-Boot code and stack itself (grows downwards).
+
+  * SYS_LOAD_ADDR = 0x80000000
+
+    The beginning of RAM. That's where Linux kernel image must be
+    loaded.
+
+  * SYS_MALLOC_LEN = 0x81f000
+
+    8 MiB for malloc() + ENV_SIZE (128 KiB)
+
+  * SYS_MALLOC_F_LEN = 0x4000
+
+    Increase malloc() pool size available before relocation from 8 KiB
+    (default) to 16 KiB. Otherwise "alloc space exhausted" message
+    appears in U-Boot log during board_init_f() stage. There are next
+    reasons for doing so:
+
+      1. Having "bootph-all" flags in some dts nodes leads to binding
+         those during pre-relocation stage, and binding (DM) uses
+         dynamic memory allocation
+      2. clk-exynos850 driver uses CCF clocks, which in turn use dynamic
+         memory allocation
+
+Device tree file was imported from Linux kernel. All nodes and boot
+phase flags added in exynos850-e850-96-u-boot.dtsi are only needed to
+enable serial console:
+
+  * oscclk -> cmu_top -> cmu_peri: generate UART/USI clocks
+  * pinctrl_alive and uart1_pins: needed to mux UART pins
+  * pmu_system_controller: configures AP UART path to uart1_pins
+  * usi_uart: configures USI block to operate as a UART protocol
+  * serial_0: enables serial console (UART)
+
+[1] https://www.96boards.org/product/e850-96b/
+[2] https://www.96boards.org/products/mezzanine/
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- arch/arm/dts/exynos-pinctrl.h       |  79 +++
- arch/arm/dts/exynos850-pinctrl.dtsi | 663 +++++++++++++++++++++++
- arch/arm/dts/exynos850.dtsi         | 809 ++++++++++++++++++++++++++++
- arch/arm/mach-exynos/Kconfig        |   9 +
- arch/arm/mach-exynos/mmu-arm64.c    |  34 ++
- 5 files changed, 1594 insertions(+)
- create mode 100644 arch/arm/dts/exynos-pinctrl.h
- create mode 100644 arch/arm/dts/exynos850-pinctrl.dtsi
- create mode 100644 arch/arm/dts/exynos850.dtsi
+ arch/arm/dts/Makefile                         |    1 +
+ arch/arm/dts/exynos850-e850-96-u-boot.dtsi    |   37 +
+ arch/arm/dts/exynos850-e850-96.dts            |  273 ++++
+ arch/arm/mach-exynos/Kconfig                  |   19 +-
+ board/samsung/e850-96/Kconfig                 |   16 +
+ board/samsung/e850-96/MAINTAINERS             |    9 +
+ board/samsung/e850-96/Makefile                |    6 +
+ board/samsung/e850-96/e850-96.c               |   22 +
+ configs/e850-96_defconfig                     |   21 +
+ doc/board/samsung/e850-96.rst                 |   87 ++
+ .../img/exynos850-boot-architecture.svg       | 1283 +++++++++++++++++
+ doc/board/samsung/index.rst                   |    1 +
+ include/configs/e850-96.h                     |   12 +
+ 13 files changed, 1786 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+ create mode 100644 arch/arm/dts/exynos850-e850-96.dts
+ create mode 100644 board/samsung/e850-96/Kconfig
+ create mode 100644 board/samsung/e850-96/MAINTAINERS
+ create mode 100644 board/samsung/e850-96/Makefile
+ create mode 100644 board/samsung/e850-96/e850-96.c
+ create mode 100644 configs/e850-96_defconfig
+ create mode 100644 doc/board/samsung/e850-96.rst
+ create mode 100644 doc/board/samsung/img/exynos850-boot-architecture.svg
+ create mode 100644 include/configs/e850-96.h
 
-diff --git a/arch/arm/dts/exynos-pinctrl.h b/arch/arm/dts/exynos-pinctrl.h
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 5fc888680b39..7d949a6798ee 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -31,6 +31,7 @@ dtb-$(CONFIG_EXYNOS7420) += exynos7420-espresso7420.dtb
+ dtb-$(CONFIG_TARGET_A5Y17LTE) += exynos78x0-axy17lte.dtb
+ dtb-$(CONFIG_TARGET_A3Y17LTE) += exynos78x0-axy17lte.dtb
+ dtb-$(CONFIG_TARGET_A7Y17LTE) += exynos78x0-axy17lte.dtb
++dtb-$(CONFIG_TARGET_E850_96) += exynos850-e850-96.dtb
+ 
+ dtb-$(CONFIG_ARCH_APPLE) += \
+ 	t8103-j274.dtb \
+diff --git a/arch/arm/dts/exynos850-e850-96-u-boot.dtsi b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
 new file mode 100644
-index 000000000000..7dd94a9b3652
+index 000000000000..7ad11e9faab2
 --- /dev/null
-+++ b/arch/arm/dts/exynos-pinctrl.h
-@@ -0,0 +1,79 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Samsung Exynos DTS pinctrl constants
-+ *
-+ * Copyright (c) 2016 Samsung Electronics Co., Ltd.
-+ *		http://www.samsung.com
-+ * Copyright (c) 2022 Linaro Ltd
-+ * Author: Krzysztof Kozlowski <krzk@kernel.org>
-+ */
-+
-+#ifndef __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__
-+#define __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__
-+
-+#define EXYNOS_PIN_PULL_NONE		0
-+#define EXYNOS_PIN_PULL_DOWN		1
-+#define EXYNOS_PIN_PULL_UP		3
-+
-+/* Pin function in power down mode */
-+#define EXYNOS_PIN_PDN_OUT0		0
-+#define EXYNOS_PIN_PDN_OUT1		1
-+#define EXYNOS_PIN_PDN_INPUT		2
-+#define EXYNOS_PIN_PDN_PREV		3
-+
-+/*
-+ * Drive strengths for Exynos5410, Exynos542x, Exynos5800, Exynos7885, Exynos850
-+ * (except GPIO_HSI block), ExynosAutov9 (FSI0, PERIC1)
-+ */
-+#define EXYNOS5420_PIN_DRV_LV1		0
-+#define EXYNOS5420_PIN_DRV_LV2		1
-+#define EXYNOS5420_PIN_DRV_LV3		2
-+#define EXYNOS5420_PIN_DRV_LV4		3
-+
-+/* Drive strengths for Exynos5433 */
-+#define EXYNOS5433_PIN_DRV_FAST_SR1	0
-+#define EXYNOS5433_PIN_DRV_FAST_SR2	1
-+#define EXYNOS5433_PIN_DRV_FAST_SR3	2
-+#define EXYNOS5433_PIN_DRV_FAST_SR4	3
-+#define EXYNOS5433_PIN_DRV_FAST_SR5	4
-+#define EXYNOS5433_PIN_DRV_FAST_SR6	5
-+#define EXYNOS5433_PIN_DRV_SLOW_SR1	8
-+#define EXYNOS5433_PIN_DRV_SLOW_SR2	9
-+#define EXYNOS5433_PIN_DRV_SLOW_SR3	0xa
-+#define EXYNOS5433_PIN_DRV_SLOW_SR4	0xb
-+#define EXYNOS5433_PIN_DRV_SLOW_SR5	0xc
-+#define EXYNOS5433_PIN_DRV_SLOW_SR6	0xf
-+
-+/* Drive strengths for Exynos7 (except FSYS1) */
-+#define EXYNOS7_PIN_DRV_LV1		0
-+#define EXYNOS7_PIN_DRV_LV2		2
-+#define EXYNOS7_PIN_DRV_LV3		1
-+#define EXYNOS7_PIN_DRV_LV4		3
-+
-+/* Drive strengths for Exynos7 FSYS1 block */
-+#define EXYNOS7_FSYS1_PIN_DRV_LV1	0
-+#define EXYNOS7_FSYS1_PIN_DRV_LV2	4
-+#define EXYNOS7_FSYS1_PIN_DRV_LV3	2
-+#define EXYNOS7_FSYS1_PIN_DRV_LV4	6
-+#define EXYNOS7_FSYS1_PIN_DRV_LV5	1
-+#define EXYNOS7_FSYS1_PIN_DRV_LV6	5
-+
-+/* Drive strengths for Exynos850 GPIO_HSI block */
-+#define EXYNOS850_HSI_PIN_DRV_LV1	0	/* 1x   */
-+#define EXYNOS850_HSI_PIN_DRV_LV1_5	1	/* 1.5x */
-+#define EXYNOS850_HSI_PIN_DRV_LV2	2	/* 2x   */
-+#define EXYNOS850_HSI_PIN_DRV_LV2_5	3	/* 2.5x */
-+#define EXYNOS850_HSI_PIN_DRV_LV3	4	/* 3x   */
-+#define EXYNOS850_HSI_PIN_DRV_LV4	5	/* 4x   */
-+
-+#define EXYNOS_PIN_FUNC_INPUT		0
-+#define EXYNOS_PIN_FUNC_OUTPUT		1
-+#define EXYNOS_PIN_FUNC_2		2
-+#define EXYNOS_PIN_FUNC_3		3
-+#define EXYNOS_PIN_FUNC_4		4
-+#define EXYNOS_PIN_FUNC_5		5
-+#define EXYNOS_PIN_FUNC_6		6
-+#define EXYNOS_PIN_FUNC_EINT		0xf
-+#define EXYNOS_PIN_FUNC_F		EXYNOS_PIN_FUNC_EINT
-+
-+#endif /* __DTS_ARM64_SAMSUNG_EXYNOS_PINCTRL_H__ */
-diff --git a/arch/arm/dts/exynos850-pinctrl.dtsi b/arch/arm/dts/exynos850-pinctrl.dtsi
-new file mode 100644
-index 000000000000..424bc80bde68
---- /dev/null
-+++ b/arch/arm/dts/exynos850-pinctrl.dtsi
-@@ -0,0 +1,663 @@
++++ b/arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+@@ -0,0 +1,37 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Samsung's Exynos850 SoC pin-mux and pin-config device tree source
-+ *
-+ * Copyright (C) 2017 Samsung Electronics Co., Ltd.
-+ * Copyright (C) 2021 Linaro Ltd.
-+ *
-+ * Samsung's Exynos850 SoC pin-mux and pin-config options are listed as device
-+ * tree nodes in this file.
++ * Copyright (c) 2023 Linaro Ltd.
 + */
 +
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include "exynos-pinctrl.h"
++&cmu_top {
++	bootph-all;
++};
++
++&cmu_peri {
++	bootph-all;
++};
++
++&oscclk {
++	bootph-all;
++};
 +
 +&pinctrl_alive {
-+	gpa0: gpa0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 2 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 7 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 8 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpa1: gpa1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 13 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 14 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 15 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpa2: gpa2-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 18 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 20 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 21 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 22 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 24 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpa3: gpa3-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 25 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 26 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 27 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 28 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 29 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 32 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpa4: gpa4-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 33 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 35 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 36 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpq0: gpq0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	/* I2C5 (also called CAM_PMIC_I2C in TRM) */
-+	i2c5_pins: i2c5-pins {
-+		samsung,pins = "gpa3-5", "gpa3-6";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_3>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* I2C6 (also called MOTOR_I2C in TRM) */
-+	i2c6_pins: i2c6-pins {
-+		samsung,pins = "gpa3-7", "gpa4-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_3>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI: UART_DEBUG_0 pins */
-+	uart0_pins: uart0-pins {
-+		samsung,pins = "gpq0-0", "gpq0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+
-+	/* USI: UART_DEBUG_1 pins */
-+	uart1_pins: uart1-pins {
-+		samsung,pins = "gpa3-7", "gpa4-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
++	bootph-all;
 +};
 +
-+&pinctrl_cmgp {
-+	gpm0: gpm0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm1: gpm1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 40 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm2: gpm2-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm3: gpm3-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm4: gpm4-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm5: gpm5-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm6: gpm6-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	gpm7: gpm7-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+		interrupt-parent = <&gic>;
-+		interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH>;
-+	};
-+
-+	/* USI_CMGP0: HSI2C function */
-+	hsi2c3_pins: hsi2c3-pins {
-+		samsung,pins = "gpm0-0", "gpm1-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI_CMGP0: UART function (4 pins, Auto Flow Control) */
-+	uart1_single_pins: uart1-single-pins {
-+		samsung,pins = "gpm0-0", "gpm1-0", "gpm2-0", "gpm3-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+
-+	/* USI_CMGP0: UART function (2 pins, Non-Auto Flow Control) */
-+	uart1_dual_pins: uart1-dual-pins {
-+		samsung,pins = "gpm0-0", "gpm1-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+
-+	/* USI_CMGP0: SPI function */
-+	spi1_pins: spi1-pins {
-+		samsung,pins = "gpm0-0", "gpm1-0", "gpm2-0", "gpm3-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI_CMGP1: HSI2C function */
-+	hsi2c4_pins: hsi2c4-pins {
-+		samsung,pins = "gpm4-0", "gpm5-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI_CMGP1: UART function (4 pins, Auto Flow Control) */
-+	uart2_single_pins: uart2-single-pins {
-+		samsung,pins = "gpm4-0", "gpm5-0", "gpm6-0", "gpm7-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+
-+	/* USI_CMGP1: UART function (2 pins, Non-Auto Flow Control) */
-+	uart2_dual_pins: uart2-dual-pins {
-+		samsung,pins = "gpm4-0", "gpm5-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+
-+	/* USI_CMGP1: SPI function */
-+	spi2_pins: spi2-pins {
-+		samsung,pins = "gpm4-0", "gpm5-0", "gpm6-0", "gpm7-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
++&pmu_system_controller {
++	bootph-all;
++	samsung,uart-debug-1;
 +};
 +
-+&pinctrl_aud {
-+	gpb0: gpb0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpb1: gpb1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	aud_codec_mclk_pins: aud-codec-mclk-pins {
-+		samsung,pins = "gpb0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_codec_mclk_idle_pins: aud-codec-mclk-idle-pins {
-+		samsung,pins = "gpb0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_i2s0_pins: aud-i2s0-pins {
-+		samsung,pins = "gpb0-1", "gpb0-2", "gpb0-3", "gpb0-4";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_i2s0_idle_pins: aud-i2s0-idle-pins {
-+		samsung,pins = "gpb0-1", "gpb0-2", "gpb0-3", "gpb0-4";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_i2s1_pins: aud-i2s1-pins {
-+		samsung,pins = "gpb1-0", "gpb1-1", "gpb1-2", "gpb1-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_i2s1_idle_pins: aud-i2s1-idle-pins {
-+		samsung,pins = "gpb1-0", "gpb1-1", "gpb1-2", "gpb1-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_fm_pins: aud-fm-pins {
-+		samsung,pins = "gpb1-4";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
-+
-+	aud_fm_idle_pins: aud-fm-idle-pins {
-+		samsung,pins = "gpb1-4";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
++&serial_0 {
++	bootph-all;
 +};
 +
-+&pinctrl_hsi {
-+	gpf2: gpf2-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	sd2_clk_pins: sd2-clk-pins {
-+		samsung,pins = "gpf2-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS850_HSI_PIN_DRV_LV2>;
-+	};
-+
-+	sd2_cmd_pins: sd2-cmd-pins {
-+		samsung,pins = "gpf2-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS850_HSI_PIN_DRV_LV2>;
-+	 };
-+
-+	sd2_bus1_pins: sd2-bus1-pins {
-+		samsung,pins = "gpf2-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS850_HSI_PIN_DRV_LV2>;
-+	};
-+
-+	sd2_bus4_pins: sd2-bus4-pins {
-+		samsung,pins = "gpf2-3", "gpf2-4", "gpf2-5";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS850_HSI_PIN_DRV_LV2>;
-+	};
-+
-+	sd2_pdn_pins: sd2-pdn-pins {
-+		samsung,pins = "gpf2-0", "gpf2-1", "gpf2-2", "gpf2-3",
-+			       "gpf2-4", "gpf2-5";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+	};
++&uart1_pins {
++	bootph-all;
 +};
 +
-+&pinctrl_core {
-+	gpf0: gpf0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpf1: gpf1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	sd0_clk_pins: sd0-clk-pins {
-+		samsung,pins = "gpf0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_cmd_pins: sd0-cmd-pins {
-+		samsung,pins = "gpf0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_rdqs_pins: sd0-rdqs-pins {
-+		samsung,pins = "gpf0-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_nreset_pins: sd0-nreset-pins {
-+		samsung,pins = "gpf0-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_bus1_pins: sd0-bus1-pins {
-+		samsung,pins = "gpf1-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_bus4_pins: sd0-bus4-pins {
-+		samsung,pins = "gpf1-1", "gpf1-2", "gpf1-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
-+
-+	sd0_bus8_pins: sd0-bus8-pins {
-+		samsung,pins = "gpf1-4", "gpf1-5", "gpf1-6", "gpf1-7";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV4>;
-+	};
++&usi_uart {
++	bootph-all;
 +};
-+
-+&pinctrl_peri {
-+	gpc0: gpc0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpc1: gpc1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpg0: gpg0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpg1: gpg1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpg2: gpg2-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpg3: gpg3-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpp0: gpp0-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+	gpp1: gpp1-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	gpp2: gpp2-gpio-bank {
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+	};
-+
-+	sensor_mclk0_in_pins: sensor-mclk0-in-pins {
-+		samsung,pins = "gpc0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk0_out_pins: sensor-mclk0-out-pins {
-+		samsung,pins = "gpc0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk0_fn_pins: sensor-mclk0-fn-pins {
-+		samsung,pins = "gpc0-0";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk1_in_pins: sensor-mclk1-in-pins {
-+		samsung,pins = "gpc0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk1_out_pins: sensor-mclk1-out-pins {
-+		samsung,pins = "gpc0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk1_fn_pins: sensor-mclk1-fn-pins {
-+		samsung,pins = "gpc0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk2_in_pins: sensor-mclk2-in-pins {
-+		samsung,pins = "gpc0-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk2_out_pins: sensor-mclk2-out-pins {
-+		samsung,pins = "gpc0-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_DOWN>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	sensor_mclk2_fn_pins: sensor-mclk2-fn-pins {
-+		samsung,pins = "gpc0-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV3>;
-+	};
-+
-+	/* USI: HSI2C0 */
-+	hsi2c0_pins: hsi2c0-pins {
-+		samsung,pins = "gpc1-0", "gpc1-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI: HSI2C1 */
-+	hsi2c1_pins: hsi2c1-pins {
-+		samsung,pins = "gpc1-2", "gpc1-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI: HSI2C2 */
-+	hsi2c2_pins: hsi2c2-pins {
-+		samsung,pins = "gpc1-4", "gpc1-5";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	/* USI: SPI */
-+	spi0_pins: spi0-pins {
-+		samsung,pins = "gpp2-0", "gpp2-1", "gpp2-2", "gpp2-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	i2c0_pins: i2c0-pins {
-+		samsung,pins = "gpp0-0", "gpp0-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	i2c1_pins: i2c1-pins {
-+		samsung,pins = "gpp0-2", "gpp0-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	i2c2_pins: i2c2-pins {
-+		samsung,pins = "gpp0-4", "gpp0-5";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	i2c3_pins: i2c3-pins {
-+		samsung,pins = "gpp1-0", "gpp1-1";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	i2c4_pins: i2c4-pins {
-+		samsung,pins = "gpp1-2", "gpp1-3";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_UP>;
-+		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
-+	};
-+
-+	xclkout_pins: xclkout-pins {
-+		samsung,pins = "gpq0-2";
-+		samsung,pin-function = <EXYNOS_PIN_FUNC_2>;
-+		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-+	};
-+};
-diff --git a/arch/arm/dts/exynos850.dtsi b/arch/arm/dts/exynos850.dtsi
+diff --git a/arch/arm/dts/exynos850-e850-96.dts b/arch/arm/dts/exynos850-e850-96.dts
 new file mode 100644
-index 000000000000..53104e65b9c6
+index 000000000000..f074df8982b3
 --- /dev/null
-+++ b/arch/arm/dts/exynos850.dtsi
-@@ -0,0 +1,809 @@
++++ b/arch/arm/dts/exynos850-e850-96.dts
+@@ -0,0 +1,273 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Samsung Exynos850 SoC device tree source
++ * WinLink E850-96 board device tree source
 + *
 + * Copyright (C) 2018 Samsung Electronics Co., Ltd.
 + * Copyright (C) 2021 Linaro Ltd.
 + *
-+ * Samsung Exynos850 SoC device nodes are listed in this file.
-+ * Exynos850 based board files can include this file and provide
-+ * values for board specific bindings.
++ * Device tree source file for WinLink's E850-96 board which is based on
++ * Samsung Exynos850 SoC.
 + */
 +
-+#include <dt-bindings/clock/exynos850.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/soc/samsung,exynos-usi.h>
++/dts-v1/;
++
++#include "exynos850.dtsi"
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/input/input.h>
++#include <dt-bindings/leds/common.h>
 +
 +/ {
-+	/* Also known under engineering name Exynos3830 */
-+	compatible = "samsung,exynos850";
-+	#address-cells = <2>;
-+	#size-cells = <1>;
-+
-+	interrupt-parent = <&gic>;
++	model = "WinLink E850-96 board";
++	compatible = "winlink,e850-96", "samsung,exynos850";
 +
 +	aliases {
-+		pinctrl0 = &pinctrl_alive;
-+		pinctrl1 = &pinctrl_cmgp;
-+		pinctrl2 = &pinctrl_aud;
-+		pinctrl3 = &pinctrl_hsi;
-+		pinctrl4 = &pinctrl_core;
-+		pinctrl5 = &pinctrl_peri;
++		mmc0 = &mmc_0;
++		serial0 = &serial_0;
 +	};
 +
-+	arm-pmu {
-+		compatible = "arm,cortex-a55-pmu";
-+		interrupts = <GIC_SPI 89 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 90 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 91 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 108 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 109 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>,
-+			     <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH>;
-+		interrupt-affinity = <&cpu0>, <&cpu1>, <&cpu2>, <&cpu3>,
-+				     <&cpu4>, <&cpu5>, <&cpu6>, <&cpu7>;
++	chosen {
++		stdout-path = &serial_0;
 +	};
 +
-+	/* Main system clock (XTCXO); external, must be 26 MHz */
-+	oscclk: clock-oscclk {
-+		compatible = "fixed-clock";
-+		clock-output-names = "oscclk";
-+		#clock-cells = <0>;
-+	};
++	connector {
++		compatible = "gpio-usb-b-connector", "usb-b-connector";
++		label = "micro-USB";
++		type = "micro";
++		vbus-supply = <&reg_usb_host_vbus>;
++		id-gpios = <&gpa0 0 GPIO_ACTIVE_LOW>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&micro_usb_det_pins>;
 +
-+	cpus {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		cpu-map {
-+			cluster0 {
-+				core0 {
-+					cpu = <&cpu0>;
-+				};
-+				core1 {
-+					cpu = <&cpu1>;
-+				};
-+				core2 {
-+					cpu = <&cpu2>;
-+				};
-+				core3 {
-+					cpu = <&cpu3>;
-+				};
-+			};
-+
-+			cluster1 {
-+				core0 {
-+					cpu = <&cpu4>;
-+				};
-+				core1 {
-+					cpu = <&cpu5>;
-+				};
-+				core2 {
-+					cpu = <&cpu6>;
-+				};
-+				core3 {
-+					cpu = <&cpu7>;
-+				};
++		port {
++			usb_dr_connector: endpoint {
++				remote-endpoint = <&usb1_drd_sw>;
 +			};
 +		};
++	};
 +
-+		cpu0: cpu@0 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x0>;
-+			enable-method = "psci";
++	/*
++	 * RAM: 4 GiB (eMCP):
++	 *   - 2 GiB at 0x80000000
++	 *   - 2 GiB at 0x880000000
++	 *
++	 * 0xbab00000..0xbfffffff: secure memory (85 MiB).
++	 */
++	memory@80000000 {
++		device_type = "memory";
++		reg = <0x0 0x80000000 0x3ab00000>,
++		      <0x0 0xc0000000 0x40000000>,
++		      <0x8 0x80000000 0x80000000>;
++	};
++
++	gpio-keys {
++		compatible = "gpio-keys";
++		pinctrl-names = "default";
++		pinctrl-0 = <&key_voldown_pins &key_volup_pins>;
++
++		volume-down-key {
++			label = "Volume Down";
++			linux,code = <KEY_VOLUMEDOWN>;
++			gpios = <&gpa1 0 GPIO_ACTIVE_LOW>;
 +		};
-+		cpu1: cpu@1 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x1>;
-+			enable-method = "psci";
-+		};
-+		cpu2: cpu@2 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x2>;
-+			enable-method = "psci";
-+		};
-+		cpu3: cpu@3 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x3>;
-+			enable-method = "psci";
-+		};
-+		cpu4: cpu@100 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x100>;
-+			enable-method = "psci";
-+		};
-+		cpu5: cpu@101 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x101>;
-+			enable-method = "psci";
-+		};
-+		cpu6: cpu@102 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x102>;
-+			enable-method = "psci";
-+		};
-+		cpu7: cpu@103 {
-+			device_type = "cpu";
-+			compatible = "arm,cortex-a55";
-+			reg = <0x103>;
-+			enable-method = "psci";
++
++		volume-up-key {
++			label = "Volume Up";
++			linux,code = <KEY_VOLUMEUP>;
++			gpios = <&gpa0 7 GPIO_ACTIVE_LOW>;
 +		};
 +	};
 +
-+	psci {
-+		compatible = "arm,psci-1.0";
-+		method = "smc";
++	leds {
++		compatible = "gpio-leds";
++
++		/* HEART_BEAT_LED */
++		user_led1: led-1 {
++			label = "yellow:user1";
++			gpios = <&gpg2 2 GPIO_ACTIVE_HIGH>;
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_HEARTBEAT;
++			linux,default-trigger = "heartbeat";
++		};
++
++		/* eMMC_LED */
++		user_led2: led-2 {
++			label = "yellow:user2";
++			gpios = <&gpg2 3 GPIO_ACTIVE_HIGH>;
++			color = <LED_COLOR_ID_YELLOW>;
++			linux,default-trigger = "mmc0";
++		};
++
++		/* SD_LED */
++		user_led3: led-3 {
++			label = "white:user3";
++			gpios = <&gpg2 4 GPIO_ACTIVE_HIGH>;
++			color = <LED_COLOR_ID_WHITE>;
++			function = LED_FUNCTION_SD;
++			linux,default-trigger = "mmc2";
++		};
++
++		/* WIFI_LED */
++		wlan_active_led: led-4 {
++			label = "yellow:wlan";
++			gpios = <&gpg2 6 GPIO_ACTIVE_HIGH>;
++			color = <LED_COLOR_ID_YELLOW>;
++			function = LED_FUNCTION_WLAN;
++			linux,default-trigger = "phy0tx";
++			default-state = "off";
++		};
++
++		/* BLUETOOTH_LED */
++		bt_active_led: led-5 {
++			label = "blue:bt";
++			gpios = <&gpg2 7 GPIO_ACTIVE_HIGH>;
++			color = <LED_COLOR_ID_BLUE>;
++			function = LED_FUNCTION_BLUETOOTH;
++			linux,default-trigger = "hci0-power";
++			default-state = "off";
++		};
 +	};
 +
-+	timer {
-+		compatible = "arm,armv8-timer";
-+		/* Hypervisor Virtual Timer interrupt is not wired to GIC */
-+		interrupts =
-+		     <GIC_PPI 13 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
-+		     <GIC_PPI 14 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
-+		     <GIC_PPI 11 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>,
-+		     <GIC_PPI 10 (GIC_CPU_MASK_SIMPLE(8) | IRQ_TYPE_LEVEL_LOW)>;
++	/* TODO: Remove this once PMIC is implemented  */
++	reg_dummy: regulator-0 {
++		compatible = "regulator-fixed";
++		regulator-name = "dummy_reg";
 +	};
 +
-+	soc: soc@0 {
-+		compatible = "simple-bus";
-+		#address-cells = <1>;
++	reg_usb_host_vbus: regulator-1 {
++		compatible = "regulator-fixed";
++		regulator-name = "usb_host_vbus";
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		gpio = <&gpa3 5 GPIO_ACTIVE_LOW>;
++	};
++
++	reserved-memory {
++		#address-cells = <2>;
 +		#size-cells = <1>;
-+		ranges = <0x0 0x0 0x0 0x20000000>;
++		ranges;
 +
-+		chipid@10000000 {
-+			compatible = "samsung,exynos850-chipid";
-+			reg = <0x10000000 0x100>;
++		ramoops@f0000000 {
++			compatible = "ramoops";
++			reg = <0x0 0xf0000000 0x200000>;
++			record-size = <0x20000>;
++			console-size = <0x20000>;
++			ftrace-size = <0x100000>;
++			pmsg-size = <0x20000>;
 +		};
-+
-+		timer@10040000 {
-+			compatible = "samsung,exynos850-mct",
-+				     "samsung,exynos4210-mct";
-+			reg = <0x10040000 0x800>;
-+			interrupts = <GIC_SPI 203 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 204 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 205 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 207 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 209 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 210 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 211 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 212 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 213 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 214 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&oscclk>, <&cmu_peri CLK_GOUT_MCT_PCLK>;
-+			clock-names = "fin_pll", "mct";
-+		};
-+
-+		gic: interrupt-controller@12a01000 {
-+			compatible = "arm,gic-400";
-+			#interrupt-cells = <3>;
-+			#address-cells = <0>;
-+			reg = <0x12a01000 0x1000>,
-+			      <0x12a02000 0x2000>,
-+			      <0x12a04000 0x2000>,
-+			      <0x12a06000 0x2000>;
-+			interrupt-controller;
-+			interrupts = <GIC_PPI 9 (GIC_CPU_MASK_SIMPLE(8) |
-+						 IRQ_TYPE_LEVEL_HIGH)>;
-+		};
-+
-+		pmu_system_controller: system-controller@11860000 {
-+			compatible = "samsung,exynos850-pmu", "syscon";
-+			reg = <0x11860000 0x10000>;
-+
-+			reboot: syscon-reboot {
-+				compatible = "syscon-reboot";
-+				regmap = <&pmu_system_controller>;
-+				offset = <0x3a00>; /* SYSTEM_CONFIGURATION */
-+				mask = <0x2>; /* SWRESET_SYSTEM */
-+				value = <0x2>; /* reset value */
-+			};
-+		};
-+
-+		watchdog_cl0: watchdog@10050000 {
-+			compatible = "samsung,exynos850-wdt";
-+			reg = <0x10050000 0x100>;
-+			interrupts = <GIC_SPI 228 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cmu_peri CLK_GOUT_WDT0_PCLK>, <&oscclk>;
-+			clock-names = "watchdog", "watchdog_src";
-+			samsung,syscon-phandle = <&pmu_system_controller>;
-+			samsung,cluster-index = <0>;
-+			status = "disabled";
-+		};
-+
-+		watchdog_cl1: watchdog@10060000 {
-+			compatible = "samsung,exynos850-wdt";
-+			reg = <0x10060000 0x100>;
-+			interrupts = <GIC_SPI 229 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cmu_peri CLK_GOUT_WDT1_PCLK>, <&oscclk>;
-+			clock-names = "watchdog", "watchdog_src";
-+			samsung,syscon-phandle = <&pmu_system_controller>;
-+			samsung,cluster-index = <1>;
-+			status = "disabled";
-+		};
-+
-+		cmu_peri: clock-controller@10030000 {
-+			compatible = "samsung,exynos850-cmu-peri";
-+			reg = <0x10030000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_PERI_BUS>,
-+				 <&cmu_top CLK_DOUT_PERI_UART>,
-+				 <&cmu_top CLK_DOUT_PERI_IP>;
-+			clock-names = "oscclk", "dout_peri_bus",
-+				      "dout_peri_uart", "dout_peri_ip";
-+		};
-+
-+		cmu_g3d: clock-controller@11400000 {
-+			compatible = "samsung,exynos850-cmu-g3d";
-+			reg = <0x11400000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_G3D_SWITCH>;
-+			clock-names = "oscclk", "dout_g3d_switch";
-+		};
-+
-+		cmu_apm: clock-controller@11800000 {
-+			compatible = "samsung,exynos850-cmu-apm";
-+			reg = <0x11800000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_CLKCMU_APM_BUS>;
-+			clock-names = "oscclk", "dout_clkcmu_apm_bus";
-+		};
-+
-+		cmu_cmgp: clock-controller@11c00000 {
-+			compatible = "samsung,exynos850-cmu-cmgp";
-+			reg = <0x11c00000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_apm CLK_GOUT_CLKCMU_CMGP_BUS>;
-+			clock-names = "oscclk", "gout_clkcmu_cmgp_bus";
-+		};
-+
-+		cmu_core: clock-controller@12000000 {
-+			compatible = "samsung,exynos850-cmu-core";
-+			reg = <0x12000000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_CORE_BUS>,
-+				 <&cmu_top CLK_DOUT_CORE_CCI>,
-+				 <&cmu_top CLK_DOUT_CORE_MMC_EMBD>,
-+				 <&cmu_top CLK_DOUT_CORE_SSS>;
-+			clock-names = "oscclk", "dout_core_bus",
-+				      "dout_core_cci", "dout_core_mmc_embd",
-+				      "dout_core_sss";
-+		};
-+
-+		cmu_top: clock-controller@120e0000 {
-+			compatible = "samsung,exynos850-cmu-top";
-+			reg = <0x120e0000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>;
-+			clock-names = "oscclk";
-+		};
-+
-+		cmu_mfcmscl: clock-controller@12c00000 {
-+			compatible = "samsung,exynos850-cmu-mfcmscl";
-+			reg = <0x12c00000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>,
-+				 <&cmu_top CLK_DOUT_MFCMSCL_MFC>,
-+				 <&cmu_top CLK_DOUT_MFCMSCL_M2M>,
-+				 <&cmu_top CLK_DOUT_MFCMSCL_MCSC>,
-+				 <&cmu_top CLK_DOUT_MFCMSCL_JPEG>;
-+			clock-names = "oscclk", "dout_mfcmscl_mfc",
-+				      "dout_mfcmscl_m2m", "dout_mfcmscl_mcsc",
-+				      "dout_mfcmscl_jpeg";
-+		};
-+
-+		cmu_dpu: clock-controller@13000000 {
-+			compatible = "samsung,exynos850-cmu-dpu";
-+			reg = <0x13000000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_DPU>;
-+			clock-names = "oscclk", "dout_dpu";
-+		};
-+
-+		cmu_hsi: clock-controller@13400000 {
-+			compatible = "samsung,exynos850-cmu-hsi";
-+			reg = <0x13400000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>,
-+				 <&cmu_top CLK_DOUT_HSI_BUS>,
-+				 <&cmu_top CLK_DOUT_HSI_MMC_CARD>,
-+				 <&cmu_top CLK_DOUT_HSI_USB20DRD>;
-+			clock-names = "oscclk", "dout_hsi_bus",
-+				      "dout_hsi_mmc_card", "dout_hsi_usb20drd";
-+		};
-+
-+		cmu_is: clock-controller@14500000 {
-+			compatible = "samsung,exynos850-cmu-is";
-+			reg = <0x14500000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>,
-+				 <&cmu_top CLK_DOUT_IS_BUS>,
-+				 <&cmu_top CLK_DOUT_IS_ITP>,
-+				 <&cmu_top CLK_DOUT_IS_VRA>,
-+				 <&cmu_top CLK_DOUT_IS_GDC>;
-+			clock-names = "oscclk", "dout_is_bus", "dout_is_itp",
-+				      "dout_is_vra", "dout_is_gdc";
-+		};
-+
-+		cmu_aud: clock-controller@14a00000 {
-+			compatible = "samsung,exynos850-cmu-aud";
-+			reg = <0x14a00000 0x8000>;
-+			#clock-cells = <1>;
-+
-+			clocks = <&oscclk>, <&cmu_top CLK_DOUT_AUD>;
-+			clock-names = "oscclk", "dout_aud";
-+		};
-+
-+		pinctrl_alive: pinctrl@11850000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x11850000 0x1000>;
-+
-+			wakeup-interrupt-controller {
-+				compatible = "samsung,exynos850-wakeup-eint";
-+			};
-+		};
-+
-+		pinctrl_cmgp: pinctrl@11c30000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x11c30000 0x1000>;
-+
-+			wakeup-interrupt-controller {
-+				compatible = "samsung,exynos850-wakeup-eint";
-+			};
-+		};
-+
-+		pinctrl_core: pinctrl@12070000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x12070000 0x1000>;
-+			interrupts = <GIC_SPI 451 IRQ_TYPE_LEVEL_HIGH>;
-+		};
-+
-+		pinctrl_hsi: pinctrl@13430000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x13430000 0x1000>;
-+			interrupts = <GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>;
-+		};
-+
-+		pinctrl_peri: pinctrl@139b0000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x139b0000 0x1000>;
-+			interrupts = <GIC_SPI 192 IRQ_TYPE_LEVEL_HIGH>;
-+		};
-+
-+		pinctrl_aud: pinctrl@14a60000 {
-+			compatible = "samsung,exynos850-pinctrl";
-+			reg = <0x14a60000 0x1000>;
-+		};
-+
-+		rtc: rtc@11a30000 {
-+			compatible = "samsung,s3c6410-rtc";
-+			reg = <0x11a30000 0x100>;
-+			interrupts = <GIC_SPI 57 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&cmu_apm CLK_GOUT_RTC_PCLK>;
-+			clock-names = "rtc";
-+			status = "disabled";
-+		};
-+
-+		mmc_0: mmc@12100000 {
-+			compatible = "samsung,exynos7-dw-mshc-smu";
-+			reg = <0x12100000 0x2000>;
-+			interrupts = <GIC_SPI 452 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			clocks = <&cmu_core CLK_GOUT_MMC_EMBD_ACLK>,
-+				 <&cmu_core CLK_GOUT_MMC_EMBD_SDCLKIN>;
-+			clock-names = "biu", "ciu";
-+			fifo-depth = <0x40>;
-+			status = "disabled";
-+		};
-+
-+		i2c_0: i2c@13830000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13830000 0x100>;
-+			interrupts = <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c0_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C0_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		i2c_1: i2c@13840000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13840000 0x100>;
-+			interrupts = <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c1_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C1_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		i2c_2: i2c@13850000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13850000 0x100>;
-+			interrupts = <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c2_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C2_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		i2c_3: i2c@13860000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13860000 0x100>;
-+			interrupts = <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c3_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C3_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		i2c_4: i2c@13870000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13870000 0x100>;
-+			interrupts = <GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c4_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C4_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		/* I2C_5 (also called CAM_PMIC_I2C in TRM) */
-+		i2c_5: i2c@13880000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13880000 0x100>;
-+			interrupts = <GIC_SPI 201 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c5_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C5_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		/* I2C_6 (also called MOTOR_I2C in TRM) */
-+		i2c_6: i2c@13890000 {
-+			compatible = "samsung,s3c2440-i2c";
-+			reg = <0x13890000 0x100>;
-+			interrupts = <GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&i2c6_pins>;
-+			clocks = <&cmu_peri CLK_GOUT_I2C6_PCLK>;
-+			clock-names = "i2c";
-+			status = "disabled";
-+		};
-+
-+		sysmmu_mfcmscl: sysmmu@12c50000 {
-+			compatible = "samsung,exynos-sysmmu";
-+			reg = <0x12c50000 0x9000>;
-+			interrupts = <GIC_SPI 174 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-names = "sysmmu";
-+			clocks = <&cmu_mfcmscl CLK_GOUT_MFCMSCL_SYSMMU_CLK>;
-+			#iommu-cells = <0>;
-+		};
-+
-+		sysmmu_dpu: sysmmu@130c0000 {
-+			compatible = "samsung,exynos-sysmmu";
-+			reg = <0x130c0000 0x9000>;
-+			interrupts = <GIC_SPI 122 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-names = "sysmmu";
-+			clocks = <&cmu_dpu CLK_GOUT_DPU_SMMU_CLK>;
-+			#iommu-cells = <0>;
-+		};
-+
-+		sysmmu_is0: sysmmu@14550000 {
-+			compatible = "samsung,exynos-sysmmu";
-+			reg = <0x14550000 0x9000>;
-+			interrupts = <GIC_SPI 164 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-names = "sysmmu";
-+			clocks = <&cmu_is CLK_GOUT_IS_SYSMMU_IS0_CLK>;
-+			#iommu-cells = <0>;
-+		};
-+
-+		sysmmu_is1: sysmmu@14570000 {
-+			compatible = "samsung,exynos-sysmmu";
-+			reg = <0x14570000 0x9000>;
-+			interrupts = <GIC_SPI 166 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-names = "sysmmu";
-+			clocks = <&cmu_is CLK_GOUT_IS_SYSMMU_IS1_CLK>;
-+			#iommu-cells = <0>;
-+		};
-+
-+		sysmmu_aud: sysmmu@14850000 {
-+			compatible = "samsung,exynos-sysmmu";
-+			reg = <0x14850000 0x9000>;
-+			interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>;
-+			clock-names = "sysmmu";
-+			clocks = <&cmu_aud CLK_GOUT_AUD_SYSMMU_CLK>;
-+			#iommu-cells = <0>;
-+		};
-+
-+		sysreg_peri: syscon@10020000 {
-+			compatible = "samsung,exynos850-peri-sysreg",
-+				     "samsung,exynos850-sysreg", "syscon";
-+			reg = <0x10020000 0x10000>;
-+			clocks = <&cmu_peri CLK_GOUT_SYSREG_PERI_PCLK>;
-+		};
-+
-+		sysreg_cmgp: syscon@11c20000 {
-+			compatible = "samsung,exynos850-cmgp-sysreg",
-+				     "samsung,exynos850-sysreg", "syscon";
-+			reg = <0x11c20000 0x10000>;
-+			clocks = <&cmu_cmgp CLK_GOUT_SYSREG_CMGP_PCLK>;
-+		};
-+
-+		usbdrd: usb@13600000 {
-+			compatible = "samsung,exynos850-dwusb3";
-+			ranges = <0x0 0x13600000 0x10000>;
-+			clocks = <&cmu_hsi CLK_GOUT_USB_BUS_EARLY_CLK>,
-+				 <&cmu_hsi CLK_GOUT_USB_REF_CLK>;
-+			clock-names = "bus_early", "ref";
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			status = "disabled";
-+
-+			usbdrd_dwc3: usb@0 {
-+				compatible = "snps,dwc3";
-+				reg = <0x0 0x10000>;
-+				interrupts = <GIC_SPI 137 IRQ_TYPE_LEVEL_HIGH>;
-+				phys = <&usbdrd_phy 0>;
-+				phy-names = "usb2-phy";
-+			};
-+		};
-+
-+		usbdrd_phy: phy@135d0000 {
-+			compatible = "samsung,exynos850-usbdrd-phy";
-+			reg = <0x135d0000 0x100>;
-+			clocks = <&cmu_hsi CLK_GOUT_USB_PHY_ACLK>,
-+				 <&cmu_hsi CLK_GOUT_USB_PHY_REF_CLK>;
-+			clock-names = "phy", "ref";
-+			samsung,pmu-syscon = <&pmu_system_controller>;
-+			#phy-cells = <1>;
-+			status = "disabled";
-+		};
-+
-+		usi_uart: usi@138200c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x138200c0 0x20>;
-+			samsung,sysreg = <&sysreg_peri 0x1010>;
-+			samsung,mode = <USI_V2_UART>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_peri CLK_GOUT_UART_PCLK>,
-+				 <&cmu_peri CLK_GOUT_UART_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			serial_0: serial@13820000 {
-+				compatible = "samsung,exynos850-uart";
-+				reg = <0x13820000 0xc0>;
-+				interrupts = <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&uart0_pins>;
-+				clocks = <&cmu_peri CLK_GOUT_UART_PCLK>,
-+					 <&cmu_peri CLK_GOUT_UART_IPCLK>;
-+				clock-names = "uart", "clk_uart_baud0";
-+				status = "disabled";
-+			};
-+		};
-+
-+		usi_hsi2c_0: usi@138a00c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x138a00c0 0x20>;
-+			samsung,sysreg = <&sysreg_peri 0x1020>;
-+			samsung,mode = <USI_V2_I2C>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_peri CLK_GOUT_HSI2C0_PCLK>,
-+				 <&cmu_peri CLK_GOUT_HSI2C0_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			hsi2c_0: i2c@138a0000 {
-+				compatible = "samsung,exynosautov9-hsi2c";
-+				reg = <0x138a0000 0xc0>;
-+				interrupts = <GIC_SPI 193 IRQ_TYPE_LEVEL_HIGH>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&hsi2c0_pins>;
-+				clocks = <&cmu_peri CLK_GOUT_HSI2C0_IPCLK>,
-+					 <&cmu_peri CLK_GOUT_HSI2C0_PCLK>;
-+				clock-names = "hsi2c", "hsi2c_pclk";
-+				status = "disabled";
-+			};
-+		};
-+
-+		usi_hsi2c_1: usi@138b00c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x138b00c0 0x20>;
-+			samsung,sysreg = <&sysreg_peri 0x1030>;
-+			samsung,mode = <USI_V2_I2C>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_peri CLK_GOUT_HSI2C1_PCLK>,
-+				 <&cmu_peri CLK_GOUT_HSI2C1_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			hsi2c_1: i2c@138b0000 {
-+				compatible = "samsung,exynosautov9-hsi2c";
-+				reg = <0x138b0000 0xc0>;
-+				interrupts = <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&hsi2c1_pins>;
-+				clocks = <&cmu_peri CLK_GOUT_HSI2C1_IPCLK>,
-+					 <&cmu_peri CLK_GOUT_HSI2C1_PCLK>;
-+				clock-names = "hsi2c", "hsi2c_pclk";
-+				status = "disabled";
-+			};
-+		};
-+
-+		usi_hsi2c_2: usi@138c00c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x138c00c0 0x20>;
-+			samsung,sysreg = <&sysreg_peri 0x1040>;
-+			samsung,mode = <USI_V2_I2C>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_peri CLK_GOUT_HSI2C2_PCLK>,
-+				 <&cmu_peri CLK_GOUT_HSI2C2_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			hsi2c_2: i2c@138c0000 {
-+				compatible = "samsung,exynosautov9-hsi2c";
-+				reg = <0x138c0000 0xc0>;
-+				interrupts = <GIC_SPI 195 IRQ_TYPE_LEVEL_HIGH>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&hsi2c2_pins>;
-+				clocks = <&cmu_peri CLK_GOUT_HSI2C2_IPCLK>,
-+					 <&cmu_peri CLK_GOUT_HSI2C2_PCLK>;
-+				clock-names = "hsi2c", "hsi2c_pclk";
-+				status = "disabled";
-+			};
-+		};
-+
-+		usi_spi_0: usi@139400c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x139400c0 0x20>;
-+			samsung,sysreg = <&sysreg_peri 0x1050>;
-+			samsung,mode = <USI_V2_SPI>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_peri CLK_GOUT_SPI0_PCLK>,
-+				 <&cmu_peri CLK_GOUT_SPI0_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+		};
-+
-+		usi_cmgp0: usi@11d000c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x11d000c0 0x20>;
-+			samsung,sysreg = <&sysreg_cmgp 0x2000>;
-+			samsung,mode = <USI_V2_I2C>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI0_PCLK>,
-+				 <&cmu_cmgp CLK_GOUT_CMGP_USI0_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			hsi2c_3: i2c@11d00000 {
-+				compatible = "samsung,exynosautov9-hsi2c";
-+				reg = <0x11d00000 0xc0>;
-+				interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&hsi2c3_pins>;
-+				clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI0_IPCLK>,
-+					 <&cmu_cmgp CLK_GOUT_CMGP_USI0_PCLK>;
-+				clock-names = "hsi2c", "hsi2c_pclk";
-+				status = "disabled";
-+			};
-+
-+			serial_1: serial@11d00000 {
-+				compatible = "samsung,exynos850-uart";
-+				reg = <0x11d00000 0xc0>;
-+				interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&uart1_single_pins>;
-+				clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI0_PCLK>,
-+					 <&cmu_cmgp CLK_GOUT_CMGP_USI0_IPCLK>;
-+				clock-names = "uart", "clk_uart_baud0";
-+				status = "disabled";
-+			};
-+		};
-+
-+		usi_cmgp1: usi@11d200c0 {
-+			compatible = "samsung,exynos850-usi";
-+			reg = <0x11d200c0 0x20>;
-+			samsung,sysreg = <&sysreg_cmgp 0x2010>;
-+			samsung,mode = <USI_V2_I2C>;
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges;
-+			clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI1_PCLK>,
-+				 <&cmu_cmgp CLK_GOUT_CMGP_USI1_IPCLK>;
-+			clock-names = "pclk", "ipclk";
-+			status = "disabled";
-+
-+			hsi2c_4: i2c@11d20000 {
-+				compatible = "samsung,exynosautov9-hsi2c";
-+				reg = <0x11d20000 0xc0>;
-+				interrupts = <GIC_SPI 63 IRQ_TYPE_LEVEL_HIGH>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&hsi2c4_pins>;
-+				clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI1_IPCLK>,
-+					 <&cmu_cmgp CLK_GOUT_CMGP_USI1_PCLK>;
-+				clock-names = "hsi2c", "hsi2c_pclk";
-+				status = "disabled";
-+			};
-+
-+			serial_2: serial@11d20000 {
-+				compatible = "samsung,exynos850-uart";
-+				reg = <0x11d20000 0xc0>;
-+				interrupts = <GIC_SPI 63 IRQ_TYPE_LEVEL_HIGH>;
-+				pinctrl-names = "default";
-+				pinctrl-0 = <&uart2_single_pins>;
-+				clocks = <&cmu_cmgp CLK_GOUT_CMGP_USI1_PCLK>,
-+					 <&cmu_cmgp CLK_GOUT_CMGP_USI1_IPCLK>;
-+				clock-names = "uart", "clk_uart_baud0";
-+				status = "disabled";
-+			};
++	};
++
++	/*
++	 * RTC clock (XrtcXTI); external, must be 32.768 kHz.
++	 *
++	 * TODO: Remove this once RTC clock is implemented properly as part of
++	 *       PMIC driver.
++	 */
++	rtcclk: clock-rtcclk {
++		compatible = "fixed-clock";
++		clock-output-names = "rtcclk";
++		#clock-cells = <0>;
++		clock-frequency = <32768>;
++	};
++};
++
++&cmu_hsi {
++	clocks = <&oscclk>, <&rtcclk>,
++		 <&cmu_top CLK_DOUT_HSI_BUS>,
++		 <&cmu_top CLK_DOUT_HSI_MMC_CARD>,
++		 <&cmu_top CLK_DOUT_HSI_USB20DRD>;
++	clock-names = "oscclk", "rtcclk", "dout_hsi_bus",
++		      "dout_hsi_mmc_card", "dout_hsi_usb20drd";
++};
++
++&mmc_0 {
++	status = "okay";
++	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
++	cap-mmc-highspeed;
++	non-removable;
++	mmc-hs400-enhanced-strobe;
++	card-detect-delay = <200>;
++	clock-frequency = <800000000>;
++	bus-width = <8>;
++	samsung,dw-mshc-ciu-div = <3>;
++	samsung,dw-mshc-sdr-timing = <0 4>;
++	samsung,dw-mshc-ddr-timing = <2 4>;
++	samsung,dw-mshc-hs400-timing = <0 2>;
++
++	pinctrl-names = "default";
++	pinctrl-0 = <&sd0_clk_pins &sd0_cmd_pins &sd0_rdqs_pins &sd0_nreset_pins
++		     &sd0_bus1_pins &sd0_bus4_pins &sd0_bus8_pins>;
++};
++
++&oscclk {
++	clock-frequency = <26000000>;
++};
++
++&pinctrl_alive {
++	key_voldown_pins: key-voldown-pins {
++		samsung,pins = "gpa1-0";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_EINT>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
++	};
++
++	key_volup_pins: key-volup-pins {
++		samsung,pins = "gpa0-7";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_EINT>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
++		samsung,pin-drv = <EXYNOS5420_PIN_DRV_LV1>;
++	};
++
++	micro_usb_det_pins: micro-usb-det-pins {
++		samsung,pins = "gpa0-0";
++		samsung,pin-function = <EXYNOS_PIN_FUNC_INPUT>;
++		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
++	};
++};
++
++&rtc {
++	status = "okay";
++	clocks = <&cmu_apm CLK_GOUT_RTC_PCLK>, <&rtcclk>;
++	clock-names = "rtc", "rtc_src";
++};
++
++&serial_0 {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart1_pins>;
++};
++
++&usbdrd {
++	status = "okay";
++	vdd10-supply = <&reg_dummy>;
++	vdd33-supply = <&reg_dummy>;
++};
++
++&usbdrd_dwc3 {
++	dr_mode = "otg";
++	usb-role-switch;
++	role-switch-default-mode = "host";
++
++	port {
++		usb1_drd_sw: endpoint {
++			remote-endpoint = <&usb_dr_connector>;
 +		};
 +	};
 +};
 +
-+#include "exynos850-pinctrl.dtsi"
++&usbdrd_phy {
++	status = "okay";
++};
++
++&usi_uart {
++	samsung,clkreq-on; /* needed for UART mode */
++	status = "okay";
++};
++
++&watchdog_cl0 {
++	status = "okay";
++};
++
++&watchdog_cl1 {
++	status = "okay";
++};
 diff --git a/arch/arm/mach-exynos/Kconfig b/arch/arm/mach-exynos/Kconfig
-index 8f3aee052c8a..45fc6bb024b0 100644
+index 45fc6bb024b0..af00ee1db07a 100644
 --- a/arch/arm/mach-exynos/Kconfig
 +++ b/arch/arm/mach-exynos/Kconfig
-@@ -58,6 +58,15 @@ config ARCH_EXYNOS7
- 	  Cortex-A53 CPU (and some in a big.LITTLE configuration). There are
- 	  multiple SoCs in this family including Exynos7420.
+@@ -2,7 +2,7 @@ if ARCH_EXYNOS
  
-+config ARCH_EXYNOS9
-+	bool "Exynos9 SoC family"
-+	select ARM64
-+	select BLK
-+	select DM_MMC
-+	help
-+	  Samsung Exynos9 SoC family are based on ARMv8 Cortex CPU. There are
-+	  multiple SoCs in this family including Exynos850.
-+
+ config BOARD_COMMON
+ 	def_bool y
+-	depends on !TARGET_SMDKV310 && !TARGET_ARNDALE
++	depends on !TARGET_SMDKV310 && !TARGET_ARNDALE && !TARGET_E850_96
+ 
+ config SPI_BOOTING
+ 	bool
+@@ -237,6 +237,22 @@ config  TARGET_A3Y17LTE
  endchoice
+ endif
  
- if ARCH_EXYNOS4
-diff --git a/arch/arm/mach-exynos/mmu-arm64.c b/arch/arm/mach-exynos/mmu-arm64.c
-index 8d8c64e8f8fa..30e522804fbf 100644
---- a/arch/arm/mach-exynos/mmu-arm64.c
-+++ b/arch/arm/mach-exynos/mmu-arm64.c
-@@ -6,6 +6,7 @@
- 
- #include <common.h>
- #include <asm/armv8/mmu.h>
-+#include <linux/sizes.h>
- 
- #if IS_ENABLED(CONFIG_EXYNOS7420)
- 
-@@ -95,4 +96,37 @@ static struct mm_region exynos7880_mem_map[] = {
- };
- 
- struct mm_region *mem_map = exynos7880_mem_map;
++if ARCH_EXYNOS9
 +
-+#elif IS_ENABLED(CONFIG_EXYNOS850)
++choice
++	prompt "EXYNOS9 board select"
 +
-+static struct mm_region exynos850_mem_map[] = {
-+	{
-+		/* Peripheral block */
-+		.virt = 0x10000000UL,
-+		.phys = 0x10000000UL,
-+		.size = SZ_256M,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE |
-+			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-+	}, {
-+		/* DDR, 32-bit area */
-+		.virt = 0x80000000UL,
-+		.phys = 0x80000000UL,
-+		.size = SZ_2G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_INNER_SHARE
-+	}, {
-+		/* DDR, 64-bit area */
-+		.virt = 0x880000000UL,
-+		.phys = 0x880000000UL,
-+		.size = SZ_2G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_INNER_SHARE
-+	}, {
-+		/* List terminator */
-+	}
-+};
++config TARGET_E850_96
++	bool "WinLink E850-96 board"
++	select ARM64
++	select CLK_EXYNOS
++	select OF_CONTROL
++	select PINCTRL
++	select PINCTRL_EXYNOS850
 +
-+struct mm_region *mem_map = exynos850_mem_map;
++endchoice
++endif
 +
- #endif
+ config SYS_SOC
+ 	default "exynos"
+ 
+@@ -261,5 +277,6 @@ source "board/samsung/smdk5250/Kconfig"
+ source "board/samsung/smdk5420/Kconfig"
+ source "board/samsung/espresso7420/Kconfig"
+ source "board/samsung/axy17lte/Kconfig"
++source "board/samsung/e850-96/Kconfig"
+ 
+ endif
+diff --git a/board/samsung/e850-96/Kconfig b/board/samsung/e850-96/Kconfig
+new file mode 100644
+index 000000000000..f891a906959b
+--- /dev/null
++++ b/board/samsung/e850-96/Kconfig
+@@ -0,0 +1,16 @@
++if TARGET_E850_96
++
++config EXYNOS850
++	bool "Exynos850 SoC support"
++	default y
++
++config SYS_BOARD
++	default "e850-96"
++
++config SYS_VENDOR
++	default "samsung"
++
++config SYS_CONFIG_NAME
++	default "e850-96"
++
++endif
+diff --git a/board/samsung/e850-96/MAINTAINERS b/board/samsung/e850-96/MAINTAINERS
+new file mode 100644
+index 000000000000..e8b9365eea85
+--- /dev/null
++++ b/board/samsung/e850-96/MAINTAINERS
+@@ -0,0 +1,9 @@
++WINLINK E850-96 BOARD
++M:	Sam Protsenko <semen.protsenko@linaro.org>
++S:	Maintained
++F:	arch/arm/dts/exynos850-e850-96-u-boot.dtsi
++F:	arch/arm/dts/exynos850-e850-96.dts
++F:	board/samsung/e850-96/
++F:	configs/e850-96_defconfig
++F:	doc/board/samsung/e850-96.rst
++F:	include/configs/e850-96.h
+diff --git a/board/samsung/e850-96/Makefile b/board/samsung/e850-96/Makefile
+new file mode 100644
+index 000000000000..301c22337119
+--- /dev/null
++++ b/board/samsung/e850-96/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2020, Linaro Limited
++# Sam Protsenko <semen.protsenko@linaro.org>
++
++obj-y	:= e850-96.o
+diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
+new file mode 100644
+index 000000000000..a00d81b5d4c3
+--- /dev/null
++++ b/board/samsung/e850-96/e850-96.c
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2020, Linaro Limited
++ * Sam Protsenko <semen.protsenko@linaro.org>
++ */
++
++#include <init.h>
++
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
++
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
++
++int board_init(void)
++{
++	return 0;
++}
+diff --git a/configs/e850-96_defconfig b/configs/e850-96_defconfig
+new file mode 100644
+index 000000000000..bb41635ff784
+--- /dev/null
++++ b/configs/e850-96_defconfig
+@@ -0,0 +1,21 @@
++CONFIG_ARM=y
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_ARCH_EXYNOS=y
++CONFIG_TEXT_BASE=0xf8800000
++CONFIG_SYS_MALLOC_LEN=0x81f000
++CONFIG_SYS_MALLOC_F_LEN=0x4000
++CONFIG_ARCH_EXYNOS9=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xf8c00000
++CONFIG_DEFAULT_DEVICE_TREE="exynos850-e850-96"
++CONFIG_SYS_LOAD_ADDR=0x80000000
++# CONFIG_AUTOBOOT is not set
++# CONFIG_DISPLAY_CPUINFO is not set
++# CONFIG_NET is not set
++CONFIG_CLK_EXYNOS850=y
++# CONFIG_MMC is not set
++CONFIG_SOC_SAMSUNG=y
++CONFIG_EXYNOS_PMU=y
++CONFIG_EXYNOS_USI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_SYSCON=y
+diff --git a/doc/board/samsung/e850-96.rst b/doc/board/samsung/e850-96.rst
+new file mode 100644
+index 000000000000..0cb95473e536
+--- /dev/null
++++ b/doc/board/samsung/e850-96.rst
+@@ -0,0 +1,87 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Sam Protsenko <semen.protsenko@linaro.org>
++
++WinLink E850-96 board
++=====================
++
++Overview
++--------
++
++WinLink's E850-96 board [1]_ is based on Samsung Exynos850 SoC and follows
++96Boards Consumer Edition specification [2]_. That makes it possible to use
++96Boards mezzanine boards [3]_ along with it. It's an open-hardware board and
++the hardware design files [4]_ were published, along with the supported
++software [5]_ and related documentation.
++
++U-Boot can be used on E850-96 instead of the original Samsung LittleKernel based
++bootloader [6]_. Because FWBL1 [7]_ doesn't verify bootloader's signature, there
++is no need to sign a U-Boot binary. That means U-Boot binary can be flashed into
++``bootloader`` partition (instead of LittleKernel bootloader) and it will just
++work.
++
++Because BL2 bootloader already sets up DRAM and runs the final bootloader
++(U-Boot) from DRAM, there is no need in U-Boot SPL. It's enough to have only
++U-Boot proper (``u-boot.bin``).
++
++Boot Flow
++---------
++
++The boot path for Exynos850 is shown on the figure below.
++
++.. image:: img/exynos850-boot-architecture.svg
++  :alt: Exynos850 SoC boot flow
++
++Legend:
++
++* ``BL0``: Boot ROM code
++* ``BL1``: Software part of Boot ROM
++* ``EPBL``: Exynos Primary Boot Loader
++* ``BL2``: Initializes CMU and DRAM and runs the final bootloader
++* ``Bootloader``: Final bootloader (e.g. U-Boot); also called BL33 in terms of
++  ARM boot flow
++* ``EL3_MON``: EL3 monitor (trusted firmware, handles SMC calls); also called
++  BL31 in terms of ARM boot flow
++* ``LDFW``: Loadable Firmware
++
++Build Procedure
++---------------
++
++.. warning::
++  At the moment both eMMC and USB features are not enabled in U-Boot. Flashing
++  U-Boot binary **WILL** effectively brick your board. The ``dltool`` [8]_ can
++  be used then to perform USB boot and flash LittleKernel bootloader binary [7]_
++  to unbrick and revive the board. Flashing U-Boot binary might be helpful for
++  developers or anybody who want to check current state of U-Boot enablement on
++  E850-96 (which is mostly serial console and related blocks).
++
++Build U-Boot binary from source code (using AArch64 baremetal GCC toolchain):
++
++.. prompt:: bash $
++
++  export PATH=<toolchain path>/bin:$PATH
++  export CROSS_COMPILE=<toolchain prefix>
++  make e850-96_defconfig
++  make
++
++Boot E850-96 board into fastboot mode as described in board software doc [9]_,
++and flash U-Boot binary into ``bootloader`` eMMC partition:
++
++.. prompt:: bash $
++
++  fastboot flash bootloader u-boot.bin
++  fastboot reboot
++
++U-Boot will boot up to the shell.
++
++References
++----------
++
++.. [1] https://www.96boards.org/product/e850-96b/
++.. [2] https://www.96boards.org/products/ce/
++.. [3] https://www.96boards.org/products/mezzanine/
++.. [4] https://www.96boards.org/documentation/consumer/e850-96b/hardware-docs/
++.. [5] https://gitlab.com/Linaro/96boards/e850-96/
++.. [6] https://gitlab.com/Linaro/96boards/e850-96/lk
++.. [7] https://gitlab.com/Linaro/96boards/e850-96/images
++.. [8] https://gitlab.com/Linaro/96boards/e850-96/tools/dltool
++.. [9] https://gitlab.com/Linaro/96boards/e850-96/doc
+diff --git a/doc/board/samsung/img/exynos850-boot-architecture.svg b/doc/board/samsung/img/exynos850-boot-architecture.svg
+new file mode 100644
+index 000000000000..c6e850407b4a
+--- /dev/null
++++ b/doc/board/samsung/img/exynos850-boot-architecture.svg
+@@ -0,0 +1,1283 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<!-- Do not edit this file with editors other than draw.io -->
++
++<svg
++   version="1.1"
++   width="611px"
++   height="327px"
++   viewBox="-0.5 -0.5 611 327"
++   content="&lt;mxfile host=&quot;app.diagrams.net&quot; modified=&quot;2023-12-13T00:04:32.824Z&quot; agent=&quot;Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&quot; etag=&quot;21pvX7xTZUZ4TDUqmo5l&quot; version=&quot;22.1.8&quot; type=&quot;device&quot;&gt;
++  &lt;diagram name=&quot;Page-1&quot; id=&quot;F-97ItDN78I3cBfC3uC2&quot;&gt;
++    &lt;mxGraphModel dx=&quot;987&quot; dy=&quot;663&quot; grid=&quot;1&quot; gridSize=&quot;10&quot; guides=&quot;1&quot; tooltips=&quot;1&quot; connect=&quot;1&quot; arrows=&quot;1&quot; fold=&quot;1&quot; page=&quot;1&quot; pageScale=&quot;1&quot; pageWidth=&quot;850&quot; pageHeight=&quot;1100&quot; math=&quot;0&quot; shadow=&quot;0&quot;&gt;
++      &lt;root&gt;
++        &lt;mxCell id=&quot;0&quot; /&gt;
++        &lt;mxCell id=&quot;1&quot; parent=&quot;0&quot; /&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-47&quot; value=&quot;Secure World&quot; style=&quot;shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;right=0;fillColor=#f8cecc;fontFamily=Helvetica;fontSize=11;strokeColor=#b85450;verticalAlign=top;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;430&quot; y=&quot;160&quot; width=&quot;140&quot; height=&quot;200&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-48&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;whiteSpace=wrap;html=1;top=0;left=0;fillColor=#f8cecc;fontFamily=Helvetica;fontSize=11;strokeColor=#b85450;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;340&quot; y=&quot;360&quot; width=&quot;230&quot; height=&quot;60&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-49&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;whiteSpace=wrap;html=1;bottom=0;right=0;fillColor=#f8cecc;fontFamily=Helvetica;fontSize=11;strokeColor=#b85450;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;340&quot; y=&quot;340&quot; width=&quot;160&quot; height=&quot;80&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-50&quot; value=&quot;&quot; style=&quot;shape=partialRectangle;whiteSpace=wrap;html=1;top=0;left=0;fillColor=#f8cecc;fontFamily=Helvetica;fontSize=11;rotation=-90;strokeColor=#b85450;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;465.71&quot; y=&quot;255.7&quot; width=&quot;199.53&quot; height=&quot;9.06&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-43&quot; value=&quot;Non-Secure World&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;align=center;verticalAlign=top;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;340&quot; y=&quot;160&quot; width=&quot;80&quot; height=&quot;170&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-42&quot; value=&quot;&amp;lt;span style=&amp;quot;white-space: pre;&amp;quot;&amp;gt;&amp;#x9;&amp;lt;/span&amp;gt;Booting Period&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;align=left;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;30&quot; y=&quot;270&quot; width=&quot;300&quot; height=&quot;150&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-4&quot; value=&quot;&quot; style=&quot;edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-1&quot; target=&quot;azJPLbs4vMiacVWs4TNu-2&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-1&quot; value=&quot;BL0&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;40&quot; y=&quot;360&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-5&quot; value=&quot;&quot; style=&quot;edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-2&quot; target=&quot;azJPLbs4vMiacVWs4TNu-3&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-2&quot; value=&quot;BL1&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;100&quot; y=&quot;360&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-9&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-3&quot; target=&quot;azJPLbs4vMiacVWs4TNu-6&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;Array as=&quot;points&quot;&gt;
++              &lt;mxPoint x=&quot;180&quot; y=&quot;350&quot; /&gt;
++            &lt;/Array&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-26&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-3&quot; target=&quot;azJPLbs4vMiacVWs4TNu-13&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-3&quot; value=&quot;EPBL&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;160&quot; y=&quot;360&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-10&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;exitX=0.5;exitY=1;exitDx=0;exitDy=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-6&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;270&quot; y=&quot;310&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;200&quot; y=&quot;370&quot; as=&quot;targetPoint&quot; /&gt;
++            &lt;Array as=&quot;points&quot;&gt;
++              &lt;mxPoint x=&quot;220&quot; y=&quot;340&quot; /&gt;
++            &lt;/Array&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-12&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-6&quot; target=&quot;azJPLbs4vMiacVWs4TNu-11&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-6&quot; value=&quot;BL2&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;200&quot; y=&quot;280&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-16&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-11&quot; target=&quot;azJPLbs4vMiacVWs4TNu-14&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-27&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;289.5&quot; y=&quot;320&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;289.5000000000009&quot; y=&quot;360&quot; as=&quot;targetPoint&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-11&quot; value=&quot;Bootloader&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;260&quot; y=&quot;280&quot; width=&quot;60&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-23&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-13&quot; target=&quot;azJPLbs4vMiacVWs4TNu-20&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-24&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-13&quot; target=&quot;azJPLbs4vMiacVWs4TNu-21&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-13&quot; value=&quot;EL3_MON&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;260&quot; y=&quot;360&quot; width=&quot;300&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-17&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-14&quot; target=&quot;azJPLbs4vMiacVWs4TNu-15&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-14&quot; value=&quot;Linux&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;360&quot; y=&quot;280&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-15&quot; value=&quot;&amp;lt;div&amp;gt;Android&amp;lt;/div&amp;gt;&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;360&quot; y=&quot;200&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-19&quot; value=&quot;Secure App&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;440&quot; y=&quot;200&quot; width=&quot;60&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-22&quot; style=&quot;edgeStyle=elbowEdgeStyle;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;&quot; edge=&quot;1&quot; parent=&quot;1&quot; source=&quot;azJPLbs4vMiacVWs4TNu-20&quot; target=&quot;azJPLbs4vMiacVWs4TNu-19&quot;&gt;
++          &lt;mxGeometry relative=&quot;1&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-20&quot; value=&quot;Secure OS&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;440&quot; y=&quot;280&quot; width=&quot;60&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-21&quot; value=&quot;LDFW&quot; style=&quot;rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;520&quot; y=&quot;280&quot; width=&quot;40&quot; height=&quot;40&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-32&quot; value=&quot;&amp;lt;div&amp;gt;iROM&amp;lt;/div&amp;gt;&quot; style=&quot;shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;fillColor=none;endSize=3;width=30;startSize=3;strokeWidth=1;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;100&quot; height=&quot;100&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;40&quot; y=&quot;460&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;80&quot; y=&quot;460&quot; as=&quot;targetPoint&quot; /&gt;
++            &lt;Array as=&quot;points&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-33&quot; value=&quot;&amp;lt;div&amp;gt;iRAM&amp;lt;/div&amp;gt;&quot; style=&quot;shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;fillColor=none;endSize=6;width=30;startSize=6;strokeWidth=1;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;100&quot; height=&quot;100&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;100&quot; y=&quot;460&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;240&quot; y=&quot;460&quot; as=&quot;targetPoint&quot; /&gt;
++            &lt;Array as=&quot;points&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-34&quot; value=&quot;&amp;lt;div&amp;gt;DRAM&amp;lt;/div&amp;gt;&quot; style=&quot;shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;fillColor=none;endSize=6;width=30;startSize=6;strokeWidth=1;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;100&quot; height=&quot;100&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;260&quot; y=&quot;460&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;560&quot; y=&quot;460&quot; as=&quot;targetPoint&quot; /&gt;
++            &lt;Array as=&quot;points&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-35&quot; value=&quot;&quot; style=&quot;endArrow=none;dashed=1;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;shape=connector;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;50&quot; height=&quot;50&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;20&quot; y=&quot;260&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;610&quot; y=&quot;260&quot; as=&quot;targetPoint&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-36&quot; value=&quot;&quot; style=&quot;endArrow=none;dashed=1;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;shape=connector;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;50&quot; height=&quot;50&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;20&quot; y=&quot;340&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;610&quot; y=&quot;340&quot; as=&quot;targetPoint&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-38&quot; value=&quot;&quot; style=&quot;endArrow=none;dashed=1;html=1;rounded=0;labelBackgroundColor=default;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;shape=connector;&quot; edge=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry width=&quot;50&quot; height=&quot;50&quot; relative=&quot;1&quot; as=&quot;geometry&quot;&gt;
++            &lt;mxPoint x=&quot;20&quot; y=&quot;410&quot; as=&quot;sourcePoint&quot; /&gt;
++            &lt;mxPoint x=&quot;610&quot; y=&quot;410&quot; as=&quot;targetPoint&quot; /&gt;
++          &lt;/mxGeometry&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-39&quot; value=&quot;EL0&quot; style=&quot;text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;570&quot; y=&quot;205&quot; width=&quot;60&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-40&quot; value=&quot;EL1&quot; style=&quot;text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;570&quot; y=&quot;285&quot; width=&quot;60&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++        &lt;mxCell id=&quot;azJPLbs4vMiacVWs4TNu-41&quot; value=&quot;EL3&quot; style=&quot;text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;
++          &lt;mxGeometry x=&quot;570&quot; y=&quot;365&quot; width=&quot;60&quot; height=&quot;30&quot; as=&quot;geometry&quot; /&gt;
++        &lt;/mxCell&gt;
++      &lt;/root&gt;
++    &lt;/mxGraphModel&gt;
++  &lt;/diagram&gt;
++&lt;/mxfile&gt;
++"
++   id="svg242"
++   sodipodi:docname="Untitled Diagram.drawio(1).svg"
++   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
++   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
++   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
++   xmlns:xlink="http://www.w3.org/1999/xlink"
++   xmlns="http://www.w3.org/2000/svg"
++   xmlns:svg="http://www.w3.org/2000/svg"
++   xmlns:xhtml="http://www.w3.org/1999/xhtml">
++  <sodipodi:namedview
++     id="namedview244"
++     pagecolor="#ffffff"
++     bordercolor="#000000"
++     borderopacity="0.25"
++     inkscape:showpageshadow="2"
++     inkscape:pageopacity="0.0"
++     inkscape:pagecheckerboard="0"
++     inkscape:deskcolor="#d1d1d1"
++     showgrid="false"
++     inkscape:zoom="1.4211573"
++     inkscape:cx="171.69105"
++     inkscape:cy="123.84273"
++     inkscape:window-width="1916"
++     inkscape:window-height="1053"
++     inkscape:window-x="0"
++     inkscape:window-y="23"
++     inkscape:window-maximized="1"
++     inkscape:current-layer="switch30" />
++  <defs
++     id="defs2" />
++  <g
++     id="g232">
++    <rect
++       x="410"
++       y="0"
++       width="140"
++       height="200"
++       fill="#f8cecc"
++       stroke="none"
++       pointer-events="all"
++       id="rect4" />
++    <path
++       d="M 410 0 L 550 0 M 550 200 M 410 200 L 410 0"
++       fill="none"
++       stroke="#b85450"
++       stroke-linecap="square"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path6" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g12">
++      <switch
++         id="switch10">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 138px; height: 1px; padding-top: 7px; margin-left: 411px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Secure World</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="480"
++           y="18"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text8">Secure World</text>
++      </switch>
++    </g>
++    <rect
++       x="320"
++       y="200"
++       width="230"
++       height="60"
++       fill="#f8cecc"
++       stroke="none"
++       pointer-events="all"
++       id="rect14" />
++    <path
++       d="M 320 200 M 550 200 L 550 260 L 320 260"
++       fill="none"
++       stroke="#b85450"
++       stroke-linecap="square"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path16" />
++    <rect
++       x="320"
++       y="180"
++       width="160"
++       height="80"
++       fill="#f8cecc"
++       stroke="none"
++       pointer-events="all"
++       id="rect18" />
++    <path
++       d="M 320 180 L 480 180 M 480 260 M 320 260 L 320 180"
++       fill="none"
++       stroke="#b85450"
++       stroke-linecap="square"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path20" />
++    <rect
++       x="445.71"
++       y="95.7"
++       width="199.53"
++       height="9.06"
++       fill="#f8cecc"
++       stroke="none"
++       transform="rotate(-90,545.48,100.23)"
++       pointer-events="all"
++       id="rect22" />
++    <path
++       d="M 445.71 95.7 M 645.24 95.7 L 645.24 104.76 L 445.71 104.76"
++       fill="none"
++       stroke="#b85450"
++       stroke-linecap="square"
++       stroke-miterlimit="10"
++       transform="rotate(-90,545.48,100.23)"
++       pointer-events="all"
++       id="path24" />
++    <rect
++       x="320"
++       y="0"
++       width="80"
++       height="170"
++       fill="#d5e8d4"
++       stroke="#82b366"
++       pointer-events="all"
++       id="rect26" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g32">
++      <switch
++         id="switch30">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 78px; height: 1px; padding-top: 7px; margin-left: 321px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Non-Secure World</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="360"
++           y="18"
++           fill="#000000"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text28"><tspan
++             sodipodi:role="line"
++             id="tspan629"
++             x="360"
++             y="18">Non-Secure</tspan><tspan
++             sodipodi:role="line"
++             id="tspan631"
++             x="360"
++             y="31.75">World</tspan></text>
++      </switch>
++    </g>
++    <rect
++       x="10"
++       y="110"
++       width="300"
++       height="150"
++       fill="#dae8fc"
++       stroke="#6c8ebf"
++       pointer-events="all"
++       id="rect34" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g40">
++      <switch
++         id="switch38">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 298px; height: 1px; padding-top: 117px; margin-left: 12px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: left;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;"><xhtml:span
++   style="white-space: pre;" />
++Booting Period</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="12"
++           y="128"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           id="text36">	Booting Period</text>
++      </switch>
++    </g>
++    <path
++       d="M 60 220 L 73.63 220"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path42" />
++    <path
++       d="M 78.88 220 L 71.88 223.5 L 73.63 220 L 71.88 216.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path44" />
++    <rect
++       x="20"
++       y="200"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect46" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g52">
++      <switch
++         id="switch50">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 220px; margin-left: 21px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">BL0</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="40"
++           y="224"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text48">BL0</text>
++      </switch>
++    </g>
++    <path
++       d="M 120 220 L 133.63 220"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path54" />
++    <path
++       d="M 138.88 220 L 131.88 223.5 L 133.63 220 L 131.88 216.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path56" />
++    <rect
++       x="80"
++       y="200"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect58" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g64">
++      <switch
++         id="switch62">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 220px; margin-left: 81px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">BL1</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="100"
++           y="224"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text60">BL1</text>
++      </switch>
++    </g>
++    <path
++       d="M 160 200 L 160 140 L 173.63 140"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path66" />
++    <path
++       d="M 178.88 140 L 171.88 143.5 L 173.63 140 L 171.88 136.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path68" />
++    <path
++       d="M 180 220 L 209.67 220 L 233.63 220"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path70" />
++    <path
++       d="M 238.88 220 L 231.88 223.5 L 233.63 220 L 231.88 216.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path72" />
++    <rect
++       x="140"
++       y="200"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect74" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g80">
++      <switch
++         id="switch78">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 220px; margin-left: 141px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">EPBL</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="160"
++           y="224"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text76">EPBL</text>
++      </switch>
++    </g>
++    <path
++       d="M 200 160 L 200 210 L 186.37 210"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path82" />
++    <path
++       d="M 181.12 210 L 188.12 206.5 L 186.37 210 L 188.12 213.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path84" />
++    <path
++       d="M 220 140 L 229.67 140 L 233.63 140"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path86" />
++    <path
++       d="M 238.88 140 L 231.88 143.5 L 233.63 140 L 231.88 136.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path88" />
++    <rect
++       x="180"
++       y="120"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect90" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g96">
++      <switch
++         id="switch94">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 140px; margin-left: 181px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">BL2</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="200"
++           y="144"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="12px"
++           text-anchor="middle"
++           id="text92">BL2</text>
++      </switch>
++    </g>
++    <path
++       d="M 300 140 L 319.67 140 L 333.63 140"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path98" />
++    <path
++       d="M 338.88 140 L 331.88 143.5 L 333.63 140 L 331.88 136.5 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path100" />
++    <path
++       d="M 269.5 160 L 269.64 193.63"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path102" />
++    <path
++       d="M 269.66 198.88 L 266.13 191.9 L 269.64 193.63 L 273.13 191.87 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path104" />
++    <rect
++       x="240"
++       y="120"
++       width="60"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect106" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g112">
++      <switch
++         id="switch110">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 140px; margin-left: 241px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Bootloader</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="270"
++           y="143"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text108">Bootloader</text>
++      </switch>
++    </g>
++    <path
++       d="M 449.67 200 L 449.67 166.37"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path114" />
++    <path
++       d="M 449.67 161.12 L 453.17 168.12 L 449.67 166.37 L 446.17 168.12 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path116" />
++    <path
++       d="M 519.67 200 L 519.67 166.37"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path118" />
++    <path
++       d="M 519.67 161.12 L 523.17 168.12 L 519.67 166.37 L 516.17 168.12 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path120" />
++    <rect
++       x="240"
++       y="200"
++       width="300"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect122" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g128">
++      <switch
++         id="switch126">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 298px; height: 1px; padding-top: 220px; margin-left: 241px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">EL3_MON</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="390"
++           y="223"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text124">EL3_MON</text>
++      </switch>
++    </g>
++    <path
++       d="M 359.67 120 L 359.67 86.37"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path130" />
++    <path
++       d="M 359.67 81.12 L 363.17 88.12 L 359.67 86.37 L 356.17 88.12 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path132" />
++    <rect
++       x="340"
++       y="120"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect134" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g140">
++      <switch
++         id="switch138">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 140px; margin-left: 341px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Linux</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="360"
++           y="143"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text136">Linux</text>
++      </switch>
++    </g>
++    <rect
++       x="340"
++       y="40"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect142" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g148">
++      <switch
++         id="switch146">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 60px; margin-left: 341px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">
++                <xhtml:div>Android</xhtml:div>
++              </xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="360"
++           y="63"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text144">Android</text>
++      </switch>
++    </g>
++    <rect
++       x="420"
++       y="40"
++       width="60"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect150" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g156">
++      <switch
++         id="switch154">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 60px; margin-left: 421px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Secure App</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="450"
++           y="63"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text152">Secure App</text>
++      </switch>
++    </g>
++    <path
++       d="M 449.67 120 L 449.67 86.37"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="stroke"
++       id="path158" />
++    <path
++       d="M 449.67 81.12 L 453.17 88.12 L 449.67 86.37 L 446.17 88.12 Z"
++       fill="rgb(0, 0, 0)"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path160" />
++    <rect
++       x="420"
++       y="120"
++       width="60"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect162" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g168">
++      <switch
++         id="switch166">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 140px; margin-left: 421px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Secure OS</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="450"
++           y="143"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text164">Secure OS</text>
++      </switch>
++    </g>
++    <rect
++       x="500"
++       y="120"
++       width="40"
++       height="40"
++       fill="rgb(255, 255, 255)"
++       stroke="rgb(0, 0, 0)"
++       pointer-events="all"
++       id="rect170" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g176">
++      <switch
++         id="switch174">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 38px; height: 1px; padding-top: 140px; margin-left: 501px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">LDFW</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="520"
++           y="143"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text172">LDFW</text>
++      </switch>
++    </g>
++    <path
++       d="M 30.5 315 L 30.5 325.5 L 20.5 300 L 30.5 274.5 L 30.5 285 L 49.5 285 L 49.5 274.5 L 59.5 300 L 49.5 325.5 L 49.5 315 Z"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path178" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g184">
++      <switch
++         id="switch182">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 300px; margin-left: 40px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 255); white-space: nowrap;">
++                <xhtml:div>iROM</xhtml:div>
++              </xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="40"
++           y="303"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text180">iROM</text>
++      </switch>
++    </g>
++    <path
++       d="M 99.5 315 L 99.5 325.5 L 80.5 300 L 99.5 274.5 L 99.5 285 L 200.5 285 L 200.5 274.5 L 219.5 300 L 200.5 325.5 L 200.5 315 Z"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path186" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g192">
++      <switch
++         id="switch190">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 300px; margin-left: 150px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 255); white-space: nowrap;">
++                <xhtml:div>iRAM</xhtml:div>
++              </xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="150"
++           y="303"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text188">iRAM</text>
++      </switch>
++    </g>
++    <path
++       d="M 259.5 315 L 259.5 325.5 L 240.5 300 L 259.5 274.5 L 259.5 285 L 520.5 285 L 520.5 274.5 L 539.5 300 L 520.5 325.5 L 520.5 315 Z"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       pointer-events="all"
++       id="path194" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g200">
++      <switch
++         id="switch198">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 300px; margin-left: 390px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; background-color: rgb(255, 255, 255); white-space: nowrap;">
++                <xhtml:div>DRAM</xhtml:div>
++              </xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="390"
++           y="303"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text196">DRAM</text>
++      </switch>
++    </g>
++    <path
++       d="M 0 100 L 590 100"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       stroke-dasharray="3 3"
++       pointer-events="stroke"
++       id="path202" />
++    <path
++       d="M 0 180 L 590 180"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       stroke-dasharray="3 3"
++       pointer-events="stroke"
++       id="path204" />
++    <path
++       d="M 0 250 L 590 250"
++       fill="none"
++       stroke="rgb(0, 0, 0)"
++       stroke-miterlimit="10"
++       stroke-dasharray="3 3"
++       pointer-events="stroke"
++       id="path206" />
++    <rect
++       x="550"
++       y="45"
++       width="60"
++       height="30"
++       fill="none"
++       stroke="none"
++       pointer-events="all"
++       id="rect208" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g214">
++      <switch
++         id="switch212">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 60px; margin-left: 551px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">EL0</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="580"
++           y="63"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text210">EL0</text>
++      </switch>
++    </g>
++    <rect
++       x="550"
++       y="125"
++       width="60"
++       height="30"
++       fill="none"
++       stroke="none"
++       pointer-events="all"
++       id="rect216" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g222">
++      <switch
++         id="switch220">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 140px; margin-left: 551px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">EL1</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="580"
++           y="143"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text218">EL1</text>
++      </switch>
++    </g>
++    <rect
++       x="550"
++       y="205"
++       width="60"
++       height="30"
++       fill="none"
++       stroke="none"
++       pointer-events="all"
++       id="rect224" />
++    <g
++       transform="translate(-0.5 -0.5)"
++       id="g230">
++      <switch
++         id="switch228">
++        <foreignObject
++           style="overflow: visible; text-align: left;"
++           pointer-events="none"
++           width="100%"
++           height="100%"
++           requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
++          <xhtml:div
++             style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 220px; margin-left: 551px;">
++            <xhtml:div
++               style="box-sizing: border-box; font-size: 0px; text-align: center;"
++               data-drawio-colors="color: rgb(0, 0, 0); ">
++              <xhtml:div
++                 style="display: inline-block; font-size: 11px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">EL3</xhtml:div>
++            </xhtml:div>
++          </xhtml:div>
++        </foreignObject>
++        <text
++           x="580"
++           y="223"
++           fill="rgb(0, 0, 0)"
++           font-family="Helvetica"
++           font-size="11px"
++           text-anchor="middle"
++           id="text226">EL3</text>
++      </switch>
++    </g>
++  </g>
++  <switch
++     id="switch240">
++    <g
++       requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
++       id="g234" />
++    <a
++       transform="translate(0,-5)"
++       xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems"
++       target="_blank"
++       id="a238">
++      <text
++         text-anchor="middle"
++         font-size="10px"
++         x="50%"
++         y="100%"
++         id="text236">Text is not SVG - cannot display</text>
++    </a>
++  </switch>
++</svg>
+diff --git a/doc/board/samsung/index.rst b/doc/board/samsung/index.rst
+index 971805e20169..a1c9636b0507 100644
+--- a/doc/board/samsung/index.rst
++++ b/doc/board/samsung/index.rst
+@@ -7,3 +7,4 @@ Samsung
+    :maxdepth: 2
+ 
+    axy17lte
++   e850-96
+diff --git a/include/configs/e850-96.h b/include/configs/e850-96.h
+new file mode 100644
+index 000000000000..4607b3089b21
+--- /dev/null
++++ b/include/configs/e850-96.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2020, Linaro Limited
++ * Sam Protsenko <semen.protsenko@linaro.org>
++ *
++ * Configuration for E850-96 board.
++ */
++
++#ifndef __E850_96_H
++#define __E850_96_H
++
++#endif /* __E850_96_H */
 -- 
 2.39.2
 
