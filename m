@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB28FC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD5DC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5880D86A81;
-	Wed, 13 Dec 2023 17:31:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D9DC386A81;
+	Wed, 13 Dec 2023 17:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WRfI8nlV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JF+sKzTB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19D5786564; Wed, 13 Dec 2023 17:31:11 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 6FA5E86A81; Wed, 13 Dec 2023 17:31:44 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F4A88784F
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:31:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EADAE86564
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:31:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-286f3e0d010so1861684a91.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:31:08 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-28ae1de660bso230113a91.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:31:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702485067; x=1703089867; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702485100; x=1703089900; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=52G2aa+zKGc4ag52LtrdeHNsME+bEZ6jX/o3hIumJsQ=;
- b=WRfI8nlVH/UA2T4MCRMHu3A48IA6IYv7cRj0OqYooWVJG5KOxIj4PWY9UB+ufEFIMV
- bUEIX1DNB3YzVSfEcJysPgwdzq+PtYcIhC3rLMwtfqpEkGingkhoPlhwHRFq/Vl7mWKB
- 6sDaBKd3DmZ/uQT04GPyumxvOaZ9NmzmXcyZne52gf7rop2lKZlq5N3WuGG2+qkmBjN8
- af/14V55e6a18vij7b8/kEKCmYLpF9dcK2lIZHYrAdid74SGHbJrlcR01NGaib6RIQif
- P2ewy3DJdDJxT+jF6/1k0OqZ2FsfExxSPO//vCsF3dykMD0fe90NjM25fBDBPTo6JaYP
- /qGw==
+ bh=QyeKcVCYBs4IJawAuE84IHooo0K/3FQPjlIt7pE7J+Q=;
+ b=JF+sKzTBjjGw8v+20/tpHNLzgFamKRku3QcYXS2jFX/3WijfPZx4O0A4cDR5h+SzF0
+ FtHg3yn8P727rsuC/J9Yd+rRi9GPMBH5iZOnsG8F+ViLB+3jiPWU15rRINeYdKjVgttZ
+ pWYK6/9WWz2LAAx3DXRQCgKVnXfZjtzb4pfJMlmSfNRWCde86NtWls3WiYPE+sJhxUSA
+ 5/CUr6RINE2bVvKr7OoutGgXWfqPFpcphVwhHpZg2x5WuUyYG1CzDIL6+U9/QeSMCZeM
+ WQIGEc2TIjDCk9te5xkee3afGan8liAu1LCNsu1P+eR9qe6sWng/U0JLvspHEhRGXZdi
+ um8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702485067; x=1703089867;
+ d=1e100.net; s=20230601; t=1702485100; x=1703089900;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=52G2aa+zKGc4ag52LtrdeHNsME+bEZ6jX/o3hIumJsQ=;
- b=lfbcH0eAkWw0A8S81Zm3Pw4lStjjJIVVe9NSwR1wn4VYkH50MJ2EEGSrDyz+cF87AT
- OHON6bCxg0gTS3c5ZmNrwWGzd1qxTALXHFFLEFpmmQEauuKLQ3XgjIpg0jB3gZfm/Gfg
- C951l/kh46Wlup/Ay2VjH1lFcDDG3xyhcs2sxeGc2fFlFa+/eWsoQoOhz8VmKozvIoaP
- CTBplSfXttGtA/dM7IRJ425E4npsTBSMmDt7Cu4X9w1MgHauIyZPZXGd/fUBKY/MZdLA
- OnCLgJTNvkQD0Fl77SeVsTfBANerGzTvuiq6HmNdyAOwB6CutxXIuKa5DS97QHuW6l33
- m9lw==
-X-Gm-Message-State: AOJu0YwYOCsrMolyWl1NBFWCtq2Msb8dKGSPAfOEnZN249DdgB5jE6uK
- GkI3gpRi6p6gBME3U7BkkJOwjxXy4WyMyOf/iBk=
-X-Google-Smtp-Source: AGHT+IFEFS51hBMpp+JT4lNpPRgUUJ6ll9GWczKrsoJkB9djt4HY8HoTtARpq261DPcLR59Ufpd3JEekbJ59XRQ8KCQ=
-X-Received: by 2002:a17:90b:3718:b0:286:6955:6754 with SMTP id
- mg24-20020a17090b371800b0028669556754mr14382034pjb.0.1702485066869; Wed, 13
- Dec 2023 08:31:06 -0800 (PST)
+ bh=QyeKcVCYBs4IJawAuE84IHooo0K/3FQPjlIt7pE7J+Q=;
+ b=tfYmkH/WPH5dXoBNG0fIva2OVmHUEq7z2fdANeUoL8ex5SInCUSQ4o6CA3Z6bGSVrC
+ p4ML735hOxEuIu4AsbtK7FaE2GNO1GG0zXi9VBq6DfhoegSf446SnCKS3oBsQaRLP7MH
+ NQCJ6YCZGXyO1qu6RL7dwM+IkmAVtGPg7oO3EFMSAe/XucbEk+F4ynvxOs7Hj4rkD7Xc
+ YKwbHIpoBbK9SQloppiozANAbL52nf/bfEXBeRIYVA+DH/MKgtpz3tqcSv5hB+4QIU/F
+ MmyBJaSKb50sv0vJS6P7cLCMkfcok4bDlHvcQkFlu5uDV3UeHdrpcgf8yb5CdI9fWoqx
+ N+1w==
+X-Gm-Message-State: AOJu0Yy59CQRGCNpDWLBVI2MJRquEKbKM0Se6rpHYUmuBDm4IXSMLRcb
+ IN802yn9mSlzqpx4yK2w2+xlKS4IpVv3UayXF3o=
+X-Google-Smtp-Source: AGHT+IGeAmD69dLZmh+wV3E31HnjB0rv7FvR0ZDU+Jz7/70Ozso8qO5IBqsyh4r7JY6ciU8L7tStmOLQOsiTnyCjpA4=
+X-Received: by 2002:a17:90b:3909:b0:286:f169:79f1 with SMTP id
+ ob9-20020a17090b390900b00286f16979f1mr14191239pjb.2.1702485100333; Wed, 13
+ Dec 2023 08:31:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20231019194323.2207989-1-hugo@hugovil.com>
-In-Reply-To: <20231019194323.2207989-1-hugo@hugovil.com>
+References: <20231023152629.2727547-1-hugo@hugovil.com>
+In-Reply-To: <20231023152629.2727547-1-hugo@hugovil.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:30:54 -0300
-Message-ID: <CAOMZO5BekTAdGuVmchqu4xTBQr1YVqdKMBHEuxgLVA1TE+q4eQ@mail.gmail.com>
-Subject: Re: [PATCH] imx8mn-var-som: Simplify FEC initialization
+Date: Wed, 13 Dec 2023 13:31:27 -0300
+Message-ID: <CAOMZO5DPTQqERC7_ozTiZhATJLDdYVQCqY7RLPQcegY0UETZYg@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: Remove non-working address from MAINTAINERS
 To: Hugo Villeneuve <hugo@hugovil.com>
-Cc: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>, 
+Cc: Michael Trimarchi <michael@amarulasolutions.com>, 
  Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -87,22 +87,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 19, 2023 at 4:43=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
+On Mon, Oct 23, 2023 at 1:45=E2=80=AFPM Hugo Villeneuve <hugo@hugovil.com> =
 wrote:
 >
 > From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 >
-> With DM enabled, there is no need for board code to initialize
-> the FEC interface.
+> The address ariel.dalessandro@collabora.com is no longer working:
 >
-> The ethernet PHYs on the symphony carrier board have a dedicated
-> crystal/oscillator. If the SOM has the EC configuration option
-> (onboard ethernet PHY), it also has a dedicated crystal/oscillator.
-> So in all cases, there is no need to enable the RGMII TX clk output.
+>   A message that you sent could not be delivered to one or more of its
+>   recipients. This is a permanent error. The following address(es) failed=
+:
 >
-> This follows a similar change introduced by Fabio Estevam:
->   Link: https://lore.kernel.org/u-boot/20231019170441.1610453-1-festevam@=
-gmail.com/
+>   ariel.dalessandro@collabora.com
+>     host mx.collabora.co.uk [46.235.227.165]
+>     SMTP error from remote mail server after RCPT TO:<ariel.dalessandro@c=
+ollabora.com>:
+>     550 5.1.1 <ariel.dalessandro@collabora.com>: Recipient address reject=
+ed:
+>     undeliverable address: host mail.collabora.co.uk[46.235.227.172] said=
+:
+>     550 5.1.1 <ariel.dalessandro@collabora.com>: Recipient address reject=
+ed:
+>     User unknown in local recipient table (in reply to RCPT TO command)
+>
+> Remove this address from MAINTAINERS.
 >
 > Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
