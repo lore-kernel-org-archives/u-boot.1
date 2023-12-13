@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2603CC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 19:51:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA29C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 19:51:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 091C8877B0;
-	Wed, 13 Dec 2023 20:51:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 798C4875FC;
+	Wed, 13 Dec 2023 20:51:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M2PVFjVr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kf17YZRv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2752874CC; Wed, 13 Dec 2023 20:51:03 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id DA9AD86D12; Wed, 13 Dec 2023 20:51:08 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48E5D87579
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 20:51:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 966DD877F8
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 20:51:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-dbc666461daso4594756276.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 11:51:01 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5d279bcce64so73784087b3.3
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 11:51:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702497060; x=1703101860; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UvFnjdfBNgT+0GSt2FUbGRzZQlgRcGURIgBr4RDM1h8=;
- b=M2PVFjVrcPwTvqEuVKZ0qLbuhB0OoSvrFxqoBXyJQ3RF9/7DDQiW8rq2V27vwNjTMH
- LkAKqc7K6qPm9/O8egUZTv3yO4TS+hf32gY3mYzWx4JpmCmF6+8gQRy2gcw24WUEHfZO
- TfacHBjI9cQAe0xEZxFf3wp66MqQ+OQlTzF0Y=
+ d=chromium.org; s=google; t=1702497065; x=1703101865; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rzv7NuFJqnU3kp3W4BxTwHPcnjw3gc7I+DI43Xqn2bE=;
+ b=Kf17YZRvK+fQI5kfJBQu3gtVwp3qEECJ5SpV3yv9O8noyhyv5X8mEm/omEzMXaA6tL
+ Bc/cMNJ0x5RckR0AjeC2K3SCq3C5zK+bqG59k+gt2Do6U4e6haZtPYiEP9sJrefAdixL
+ qXEfR9dd8Ecx8vmGhup2hWzE12ziA6wJc01L8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702497060; x=1703101860;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UvFnjdfBNgT+0GSt2FUbGRzZQlgRcGURIgBr4RDM1h8=;
- b=U/Ykge2SKRluPUUUqhvjgZaOohQuHtjwH3crVBdAPqUjVGbSlQze7We8BvxjzeMIRb
- s2ch6bTMouu5vMI2ByYP6Rvsk37RHFGXOr1hAnLuIbFqBIYGWIe/WLuWgiy68FVel0qt
- jWR1OyQMa9XVhNZmqPKQSnv0L1tMvc0cwS5dmplkuTw++2tLHuUwJiYagXLAPoaSpFUQ
- tu2Mr6xVjl8prwZzvw9Oiu5NgCK9Jniz4si5haiZ4nOsdf/DZkBDdbHOJjH+KYPDU6aa
- 0Bwi7Pqc0O6/P1N5vcIuJHWpG60n8DVCkSSk96q6ev+5H+DU0kpbujED7HCG5x92Krbx
- 4sSQ==
-X-Gm-Message-State: AOJu0Yx3RKUhcXsIjGeTb6PhLmsR+GG1TgP4gXaXxfe8//H4kjkn++0p
- v36FcxaGsjal3oQG+5MD93zZKYZ8ma02ZeNYE8gijQ==
-X-Google-Smtp-Source: AGHT+IHpsVQVcg3Cvjy406xsm6Di/1/Qp3IaiT6Hsr7kC3xVlztLhBBtoaweaJtlXsKT3XUODV80WoLy773B13s2osA=
-X-Received: by 2002:a5b:58e:0:b0:db7:dacf:6fde with SMTP id
- l14-20020a5b058e000000b00db7dacf6fdemr5814855ybp.102.1702497059654; Wed, 13
- Dec 2023 11:50:59 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702497065; x=1703101865;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rzv7NuFJqnU3kp3W4BxTwHPcnjw3gc7I+DI43Xqn2bE=;
+ b=dMp4TfNSwSw41/ma9vZAHMVMnXjC3E/kwch7PPCXO6T/nHEIqxAFR+wkKdQBsvMHbX
+ G42XE0Jk/7AbI+wJXR9NnEXK1RnTehzmf5lty05BUzUaRV9ddfULNti50bjhKYhrqmnA
+ c8p6jzbXP4sEBlcUXu3A3iZAMyGMFY4BHmFf9bqtgtt6a3z5XP7v0lDZf3sgiggXraQ8
+ hd/T8sWe6KkTaxf5Y/0LkyuVQ/+Tj3Dcva5wP6LdGlh/9ULrsS9DGLFhLC2VJOnmMlOP
+ 2d6OctkWhRRM5RrdZxl+WuEDf4EuT2QXL6Fhz+TLG15dgwM/+nS9PttTg9RSawVpFjOk
+ Sm8Q==
+X-Gm-Message-State: AOJu0Yz+82o25BmqJyoWReuGzzOkBAbE+mnLCq1A6SgE+IVBRZpex0/C
+ 5+nCjoLX1yddZ24kpNP13ZZfun12hX5+BLQ/SkqDYg==
+X-Google-Smtp-Source: AGHT+IH0ZQnM07RgYjR4mWUuz+WrC1B3mzJWpnP/IedzCAh+jWeQUOKYA7embAcUg92B5qGqetwQ7+pDmFk5LITudR0=
+X-Received: by 2002:a0d:c482:0:b0:5d7:1941:2c3c with SMTP id
+ g124-20020a0dc482000000b005d719412c3cmr6025657ywd.105.1702497065046; Wed, 13
+ Dec 2023 11:51:05 -0800 (PST)
 MIME-Version: 1.0
-References: <LO2P265MB2605C61E483A315CC62D1DCFDB8DA@LO2P265MB2605.GBRP265.PROD.OUTLOOK.COM>
-In-Reply-To: <LO2P265MB2605C61E483A315CC62D1DCFDB8DA@LO2P265MB2605.GBRP265.PROD.OUTLOOK.COM>
+References: <20231211085939.5478-1-jagan@amarulasolutions.com>
+ <20231211085939.5478-3-jagan@amarulasolutions.com>
+In-Reply-To: <20231211085939.5478-3-jagan@amarulasolutions.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:49:56 -0700
-Message-ID: <CAPnjgZ37QpGjJHevWDF_N=eNUKNL5TguewG-y7JMNuDkss2o2g@mail.gmail.com>
-Subject: Re: whitelist commands
-To: Thomas McCann <Tmccann@drumgrange.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Date: Wed, 13 Dec 2023 12:50:07 -0700
+Message-ID: <CAPnjgZ1GxCLBjdB0TQQ-5jjNnpHE11iN6b9Mv2WOdP5pmQN-LA@mail.gmail.com>
+Subject: Re: [PATCH 02/17] video: dw_hdmi: Add Vendor PHY handling
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Anatolij Gustschin <agust@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de,
+ Da Xue <da.xue@libretech.co>, Jagan Teki <jagan@edgeble.ai>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,50 +85,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thomas,
+Hi Jagan,
 
-On Wed, 13 Dec 2023 at 07:29, Thomas McCann <Tmccann@drumgrange.com> wrote:
+On Mon, 11 Dec 2023 at 02:00, Jagan Teki <jagan@amarulasolutions.com> wrote:
 >
-> How do I add commands to the whitelist.
+> From: Jagan Teki <jagan@edgeble.ai>
+>
+> DW HDMI support Vendor PHY like Rockchip RK3328 Inno HDMI PHY.
+>
+> Extend the vendor phy handling by adding platform phy hooks.
+>
+> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
+> ---
+>  drivers/video/dw_hdmi.c              | 29 +++++++++++++++++++++++++++-
+>  drivers/video/meson/meson_dw_hdmi.c  | 11 ++++++++++-
+>  drivers/video/rockchip/rk3399_hdmi.c |  8 +++++++-
+>  drivers/video/rockchip/rk_hdmi.c     |  2 +-
+>  drivers/video/sunxi/sunxi_dw_hdmi.c  | 11 ++++++++++-
+>  include/dw_hdmi.h                    | 14 +++++++++++++-
+>  6 files changed, 69 insertions(+), 6 deletions(-)
+>
 
-Which whitelist are you referring to? I am not aware of one for commands.
+Isn't there a PHY framework we should use in U-Boot?
+
+Regards,
+Sim on
+
+> diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
+> index c4fbb18294..ea12a09407 100644
+> --- a/drivers/video/dw_hdmi.c
+> +++ b/drivers/video/dw_hdmi.c
+> @@ -988,7 +988,7 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>
+>         hdmi_av_composer(hdmi, edid);
+>
+> -       ret = hdmi->phy_set(hdmi, edid->pixelclock.typ);
+> +       ret = hdmi->ops->phy_set(hdmi, edid->pixelclock.typ);
+>         if (ret)
+>                 return ret;
+>
+> @@ -1009,10 +1009,37 @@ int dw_hdmi_enable(struct dw_hdmi *hdmi, const struct display_timing *edid)
+>         return 0;
+>  }
+>
+> +static const struct dw_hdmi_phy_ops dw_hdmi_synopsys_phy_ops = {
+> +       .phy_set = dw_hdmi_phy_cfg,
+> +};
+> +
+> +static void dw_hdmi_detect_phy(struct dw_hdmi *hdmi)
+> +{
+> +       if (!hdmi->data)
+> +               return;
+> +
+> +       /* hook Synopsys PHYs ops */
+> +       if (!hdmi->data->phy_force_vendor) {
+> +               hdmi->ops = &dw_hdmi_synopsys_phy_ops;
+> +               return;
+> +       }
+> +
+> +       /* Vendor HDMI PHYs must assign phy_ops in plat_data */
+> +       if (!hdmi->data->phy_ops) {
+> +               printf("Unsupported Vendor HDMI phy_ops\n");
+> +               return;
+> +       }
+> +
+> +       /* hook Vendor HDMI PHYs ops */
+> +       hdmi->ops = hdmi->data->phy_ops;
+> +}
+> +
+>  void dw_hdmi_init(struct dw_hdmi *hdmi)
+>  {
+>         uint ih_mute;
+>
+> +       dw_hdmi_detect_phy(hdmi);
+> +
+>         /*
+>          * boot up defaults are:
+>          * hdmi_ih_mute   = 0x03 (disabled)
+> diff --git a/drivers/video/meson/meson_dw_hdmi.c b/drivers/video/meson/meson_dw_hdmi.c
+> index 5db01904b5..63ca3ac52e 100644
+> --- a/drivers/video/meson/meson_dw_hdmi.c
+> +++ b/drivers/video/meson/meson_dw_hdmi.c
+> @@ -375,6 +375,15 @@ static int meson_dw_hdmi_wait_hpd(struct dw_hdmi *hdmi)
+>         return -ETIMEDOUT;
+>  }
+>
+> +static const struct dw_hdmi_phy_ops dw_hdmi_meson_phy_ops = {
+> +       .phy_set = meson_dw_hdmi_phy_cfg,
+> +};
+> +
+> +static const struct dw_hdmi_plat_data dw_hdmi_meson_plat_data = {
+> +       .phy_force_vendor = true,
+> +       .phy_ops = &dw_hdmi_meson_phy_ops,
+> +};
+> +
+>  static int meson_dw_hdmi_probe(struct udevice *dev)
+>  {
+>         struct meson_dw_hdmi *priv = dev_get_priv(dev);
+> @@ -397,7 +406,7 @@ static int meson_dw_hdmi_probe(struct udevice *dev)
+>
+>         priv->hdmi.hdmi_data.enc_out_bus_format = MEDIA_BUS_FMT_RGB888_1X24;
+>         priv->hdmi.hdmi_data.enc_in_bus_format = MEDIA_BUS_FMT_YUV8_1X24;
+> -       priv->hdmi.phy_set = meson_dw_hdmi_phy_init;
+> +       priv->hdmi.data = &dw_hdmi_meson_plat_data;
+>         if (meson_hdmi_is_compatible(priv, HDMI_COMPATIBLE_G12A))
+>                 priv->hdmi.reg_io_width = 1;
+>         else {
+> diff --git a/drivers/video/rockchip/rk3399_hdmi.c b/drivers/video/rockchip/rk3399_hdmi.c
+> index 3041360c6e..b32139a8a6 100644
+> --- a/drivers/video/rockchip/rk3399_hdmi.c
+> +++ b/drivers/video/rockchip/rk3399_hdmi.c
+> @@ -64,8 +64,14 @@ static const struct dm_display_ops rk3399_hdmi_ops = {
+>         .enable = rk3399_hdmi_enable,
+>  };
+>
+> +static const struct dw_hdmi_plat_data rk3399_hdmi_drv_data = {
+> +};
+> +
+>  static const struct udevice_id rk3399_hdmi_ids[] = {
+> -       { .compatible = "rockchip,rk3399-dw-hdmi" },
+> +       {
+> +               .compatible = "rockchip,rk3399-dw-hdmi",
+> +               .data = (ulong)&rk3399_hdmi_drv_data
+> +       },
+>         { }
+>  };
+>
+> diff --git a/drivers/video/rockchip/rk_hdmi.c b/drivers/video/rockchip/rk_hdmi.c
+> index b75a174489..e34f532cd6 100644
+> --- a/drivers/video/rockchip/rk_hdmi.c
+> +++ b/drivers/video/rockchip/rk_hdmi.c
+> @@ -83,6 +83,7 @@ int rk_hdmi_of_to_plat(struct udevice *dev)
+>         struct rk_hdmi_priv *priv = dev_get_priv(dev);
+>         struct dw_hdmi *hdmi = &priv->hdmi;
+>
+> +       hdmi->data = (const struct dw_hdmi_plat_data *)dev_get_driver_data(dev);
+>         hdmi->ioaddr = (ulong)dev_read_addr(dev);
+>         hdmi->mpll_cfg = rockchip_mpll_cfg;
+>         hdmi->phy_cfg = rockchip_phy_config;
+> @@ -90,7 +91,6 @@ int rk_hdmi_of_to_plat(struct udevice *dev)
+>         /* hdmi->i2c_clk_{high,low} are set up by the SoC driver */
+>
+>         hdmi->reg_io_width = 4;
+> -       hdmi->phy_set = dw_hdmi_phy_cfg;
+>
+>         priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+>
+> diff --git a/drivers/video/sunxi/sunxi_dw_hdmi.c b/drivers/video/sunxi/sunxi_dw_hdmi.c
+> index 0324a050d0..4b67a1614e 100644
+> --- a/drivers/video/sunxi/sunxi_dw_hdmi.c
+> +++ b/drivers/video/sunxi/sunxi_dw_hdmi.c
+> @@ -369,6 +369,15 @@ static int sunxi_dw_hdmi_probe(struct udevice *dev)
+>         return 0;
+>  }
+>
+> +static const struct dw_hdmi_phy_ops dw_hdmi_sunxi_phy_ops = {
+> +       .phy_set = sunxi_dw_hdmi_phy_cfg,
+> +};
+> +
+> +static const struct dw_hdmi_plat_data dw_hdmi_sunxi_plat_data = {
+> +       .phy_force_vendor = true,
+> +       .phy_ops = &dw_hdmi_sunxi_phy_ops,
+> +};
+> +
+>  static int sunxi_dw_hdmi_of_to_plat(struct udevice *dev)
+>  {
+>         struct sunxi_dw_hdmi_priv *priv = dev_get_priv(dev);
+> @@ -379,7 +388,7 @@ static int sunxi_dw_hdmi_of_to_plat(struct udevice *dev)
+>         hdmi->i2c_clk_high = 0xd8;
+>         hdmi->i2c_clk_low = 0xfe;
+>         hdmi->reg_io_width = 1;
+> -       hdmi->phy_set = sunxi_dw_hdmi_phy_cfg;
+> +       hdmi->data = &dw_hdmi_sunxi_plat_data;
+>
+>         ret = reset_get_bulk(dev, &priv->resets);
+>         if (ret)
+> diff --git a/include/dw_hdmi.h b/include/dw_hdmi.h
+> index 8acae3839f..4ad8b39f84 100644
+> --- a/include/dw_hdmi.h
+> +++ b/include/dw_hdmi.h
+> @@ -534,6 +534,17 @@ struct hdmi_data_info {
+>         struct hdmi_vmode video_mode;
+>  };
+>
+> +struct dw_hdmi;
+> +
+> +struct dw_hdmi_phy_ops {
+> +       int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
+> +};
+> +
+> +struct dw_hdmi_plat_data {
+> +       bool phy_force_vendor;
+> +       const struct dw_hdmi_phy_ops *phy_ops;
+> +};
+> +
+>  struct dw_hdmi {
+>         ulong ioaddr;
+>         const struct hdmi_mpll_config *mpll_cfg;
+> @@ -543,8 +554,9 @@ struct dw_hdmi {
+>         u8 reg_io_width;
+>         struct hdmi_data_info hdmi_data;
+>         struct udevice *ddc_bus;
+> +       const struct dw_hdmi_phy_ops *ops;
+
+??
+
+We should use phy.h I believe. Having said that, it sorely needs a
+proper conversion to driver model.
+
+> +       const struct dw_hdmi_plat_data *data;
+>
+> -       int (*phy_set)(struct dw_hdmi *hdmi, uint mpixelclock);
+>         void (*write_reg)(struct dw_hdmi *hdmi, u8 val, int offset);
+>         u8 (*read_reg)(struct dw_hdmi *hdmi, int offset);
+>  };
+> --
+> 2.25.1
+>
 
 Regards,
 Simon
-
-
->
->
-> Yours sincerely,
->
-> [cid:image001.png@01DA2DCD.383194D0]<http://www.drumgrange.com/>
->
-> Thomas McCann
-> Software Engineer
-> =F0=9F=93=A7 Tmccann@drumgrange.com
->
-> [cid:image002.png@01DA2DCD.383194D0]<https://linkedin.com/company/drumgra=
-nge-ltd>[cid:image003.png@01DA2DCD.383194D0]<https://www.adsgroup.org.uk/ab=
-out/>. [cid:image004.png@01DA2DCD.383194D0] <https://hellios.com/joscar/> .=
- [cid:image005.png@01DA2DCD.383194D0] <https://www.cyberaware.gov.uk/cybere=
-ssentials/> ..[cid:image006.jpg@01DA2DCD.383194D0]<https://www.drumgrange.c=
-om/about-us/armed-forces-corporate-covenant/>
->
-> .
-> Drumgrange is recruiting! For more information, click here.<https://www.d=
-rumgrange.com/careers/>
-> .
->
-> =F0=9F=8C=B2  Please consider the environment before printing this e-mail
-> This communication may contain information which is subject to UK Export =
-Control Law, commercial-in-confidence and/or legally privileged and is inte=
-nded only for the addressee named above. If you are not the named addressee=
-, the communication has been sent to you in error. Any copying, distributio=
-n or other use of the information is strictly prohibited. Please note we do=
- not accept liability for any viruses which may be transmitted in or with t=
-his message.
->
-> Drumgrange Ltd. is a company registered in England and Wales with company=
- registration number 1460044 Registered office address. Drumgrange Ltd. Uni=
-t A, The Forum, Hanworth Lane, Chertsey, Surrey, KT16 9JX.
->
