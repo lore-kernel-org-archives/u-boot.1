@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8BDC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:24:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE866C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D826687808;
-	Wed, 13 Dec 2023 17:24:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60E4D877E2;
+	Wed, 13 Dec 2023 17:25:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LMKij3Vp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YbftWl4l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 888F087808; Wed, 13 Dec 2023 17:24:42 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id E3B9987827; Wed, 13 Dec 2023 17:25:28 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63FDA874BB
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:24:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BD4D186564
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:25:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5c6910e93e3so991855a12.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:24:40 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6ce6d089482so760121b3a.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:25:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702484679; x=1703089479; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702484725; x=1703089525; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gcg0M/CzLS/D90gTkzwpbSgUGrlUzJseoxqa/nyToQo=;
- b=LMKij3VphAW17YHE5RuW2Nqdr3wl7uccDguRW6sWIXBawSgYYXIQBA2mBb+4BKg/eO
- x++UJc9q75a7ZhTauHlV4a3BRkeN1SDFCGJgstHciGekv74rOEiwpI0WK3nKAYD0aFeT
- TRjYkZX4ZvdZqkrmo6AgcYgJ33DJScGV6jLwKI8fw+8cF3JH+obeFwXr5btqZMWeYjfE
- RmybWXOafVtNBRU7mdPQbayN0/TVRdlQFbhwlWaVHDBBgUpUFW8bUIvr16TcHhEdQEht
- IufTVEdORalbarnZPL61moa+0+wjCzAgMjVk/+OsMzRYdj9l/PfI1BSzhCoI6w7mmvNp
- rQMA==
+ bh=MEvpvnGftqsvIaZ3e9aRPxy6zYWFpLCQOhzzOOZ5zEY=;
+ b=YbftWl4lTRG8ctDGLO+PpQYWHj8dI5bSR3pIAZulc+HZxDunVcEB3lwNaDHiFBvE1x
+ BvjTPKe9z743cIJR75xt/R+GexYWqjeb3bADwqsL7B6Cn4Y6YqdG9R+iXECbovYov9zr
+ 8Y0prYuPJtENNOvOg2CRDVeY4rKavPFKP2XZyDS2/IcUedszoTIVu28xEOqkRNQxgyrr
+ Gk+/lYtjqicHC2EszvaukCiq3GwY917z3E9CkZQfq//Wu9nGXRCql3el9LzTwV3DAmI8
+ E+7BVyD9nTHA/bKjhNogBR3Lrn/wcSPhecUlCXZBAYo1uEw0V/ftnzc4jhyOl7hHjAHk
+ IZpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702484679; x=1703089479;
+ d=1e100.net; s=20230601; t=1702484725; x=1703089525;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gcg0M/CzLS/D90gTkzwpbSgUGrlUzJseoxqa/nyToQo=;
- b=NozehWSRul8b8N7aecXfYkAkRVg4bTlOVbeWQEGBaIaLlsZTqhXMOUeXjhrPB5lxG6
- TRnWrfWiXy+vY8P5tPSBFQjPGpfd10BYrdrEg3jh0racv4LQC9R7lH20wBprXnBdeiMD
- 1vi3CQJbq+Gnv9FgLiLqZvGkdNbpJ2hGwxKClxedIvwhvkfGezeqEXewsEkH3F5LHBt0
- /4x8jHOHwCimc+22zi9b2ggmqivdCsQI7N3jzkcv5N98hEG3xbr0Fe4TWFbcgyR9IR4z
- FZyidHxqR81JdwN78JqbIoc7/D4UpAVX7/dH6OHT3sC+f/Mcs+dgt//mw9j3sOvGBY6I
- iPng==
-X-Gm-Message-State: AOJu0Yyc3Ya0sZH83zwBkNDVuFgwKPR8MpHi8lZgxnMPGeqiybQOQO9l
- 0pOAoEqwXiSP3JYulIVurWRs5sMLzwxPIyVmtH9rJjMdFX0=
-X-Google-Smtp-Source: AGHT+IGMNitJ6gSh5SLbKcMSuMzbKYLEixv8XS1w2WPqwOQIAYXooUCPo3W/Xb+cfv1UVW9huzqtOlB0nGT3AD5UK4w=
-X-Received: by 2002:a17:90a:d916:b0:28a:d272:f162 with SMTP id
- c22-20020a17090ad91600b0028ad272f162mr3957315pjv.2.1702484678633; Wed, 13 Dec
- 2023 08:24:38 -0800 (PST)
+ bh=MEvpvnGftqsvIaZ3e9aRPxy6zYWFpLCQOhzzOOZ5zEY=;
+ b=qReaV+8cxs/aY3XolrbVuAq+ewzsOF9N/SvZMoiwaFm9yMyzo+8XjilZvRii/mNQnv
+ Qi2Wz4okYgGKCllhEkWR/vi8sFISdmEWCD+uxYSyjUT5n9CZC0Z1xi2EUeoU5CdC5pR7
+ wKg6TRXn9iWBkZOpIXMUafhc3hRAiqUTOBnML6Engjanvl4JwMYHWNG5xw0Kzo7qyQi5
+ wag4idz672Y3UceEXbSCZX4Fx2gvgX4NyKVggDdMohd6pCqD9ObMp/7S+TOgoJ3NYBNi
+ oLcED85kvtQfaspHuC/thXEpSl+iuavooQuqXB++eHKIX5t/RzarFMV3utwfULcK50VD
+ hftw==
+X-Gm-Message-State: AOJu0Ywc0F9EkD6qZKYKFU+YuIR8OSumeSZze0tPn/WaoTRaZIOc9rbC
+ eiZfTS/bBhqoMO8eyCRzbvI5Mb0aFrjtiVsc8OM=
+X-Google-Smtp-Source: AGHT+IF2uvUQ1c4SgOQg0rzWiLSSqIJYqAsaHIxzqUncX0NwmFgGY3hpmEGQD1CyiAl4XqU1jq/HsWWnevcogdNZxNw=
+X-Received: by 2002:a05:6a00:2401:b0:6ce:4f4c:d475 with SMTP id
+ z1-20020a056a00240100b006ce4f4cd475mr17882533pfh.3.1702484724866; Wed, 13 Dec
+ 2023 08:25:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20231017094501.7713-1-sebastien.szymanski@armadeus.com>
-In-Reply-To: <20231017094501.7713-1-sebastien.szymanski@armadeus.com>
+References: <20231017142500.4074185-1-hugo@hugovil.com>
+In-Reply-To: <20231017142500.4074185-1-hugo@hugovil.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:24:25 -0300
-Message-ID: <CAOMZO5AGcJ+xiE-VUoVL8r9K=varPzwsykD5iqH89ePpAoq75Q@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] net: dwc_eth_qos: add i.MX93 support
-To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Cc: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Date: Wed, 13 Dec 2023 13:25:12 -0300
+Message-ID: <CAOMZO5A7rmVzwmsewahpRpwup_TSceZC00856xdZ0EOXjhJ1EQ@mail.gmail.com>
+Subject: Re: [PATCH] imx8mn-var-som: add manufacturer to target description
+To: Hugo Villeneuve <hugo@hugovil.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,12 +87,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 17, 2023 at 6:45=E2=80=AFAM S=C3=A9bastien Szymanski
-<sebastien.szymanski@armadeus.com> wrote:
+On Tue, Oct 17, 2023 at 11:25=E2=80=AFAM Hugo Villeneuve <hugo@hugovil.com>=
+ wrote:
 >
-> Add support for DWC EQoS MAC on i.MX93.
+> From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 >
-> Signed-off-by: S=C3=A9bastien Szymanski <sebastien.szymanski@armadeus.com=
+> Add Variscite manufacturer to the IMX8MN_VAR_SOM target menu label as
+> the majority of targets include the manufacturer as part of their menu
+> description/label and it helps when looking for a particular
+> manufacturer/board.
 >
+> Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
-Applied all to u-boot-imx next, thanks.
+Applied to u-boot-imx next, thanks.
