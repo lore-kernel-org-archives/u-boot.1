@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD56C4167B
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:15:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81226C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:15:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED1F187579;
-	Wed, 13 Dec 2023 17:14:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 65FD6877E5;
+	Wed, 13 Dec 2023 17:14:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="NlzckIwv";
+	dkim=pass (1024-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="jFcRas9n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23F538780E; Wed, 13 Dec 2023 17:14:42 +0100 (CET)
+ id A510487815; Wed, 13 Dec 2023 17:14:42 +0100 (CET)
 Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on0600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::600])
+ (mail-vi1eur04on0607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0e::607])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AD6B877DE
+ by phobos.denx.de (Postfix) with ESMTPS id BA369874A5
  for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:14:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=radu-nicolae.pirea@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BuaBxtMhh7oLsEd4qEIbgKlFCPOMy4yAJwy8Wxm6Y+C5r6YANnNkkBUmvrzrMEjKrkHxb1dvapvJTOJKUG79+K94iZdaVRMlW1nlpbR66NeVekXRS4IyJxca3yb0NCWXxV+TFzvz22aj6AydOnKKdW40BJQzti6YKLabeZgfdeNeobarRxTHpT47x9NY7TG1VLD/+456kjKy1XOf3n3XMH3KTviTWp+3/+jJQa3UtLWjVbII8axhip5BsPr3CF+M01vAgwtLTzbXOk5S1ybleZBORLqzI5gvCTjc34RhQ5HH2y3DW6XBPyeKn+N2Wg8WlLEkVitWcBWP9+xbIv+xXw==
+ b=U3UBuuIz4cabs5hHkOvi/hZoZX6wGwv1twLVWyKm/yrIF11WQv/k+aocJkDWbszZv52QtGmgu10EPVA3syyxtRJN9sFokYv4EmLphPlIim/wAgjbf2fxtOQbs2fBdgrx+IY/qD2ABcElyqhOEK460qATDwTDK+PQIlQFifdLCPguy6O5fS4ungp5YnhItaTVcUOPMYDfbBhe3G8TF0oqXmY/hNYhBI6BSU6YQQHzMmCWBU6JJgzAoN50R7J8Stf/F0NLrHMqnPkGdNJfPn9bWo6X3XeQlmp7Jhakp/qIyPQH/1NKI0uAUm/erbP4aq6aoDCe/GNWmlce1cYm47mZ6Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sIk1jqt0Gmx1UUZX5ufSFhHur6ajZOVBLHUJiAnKVf8=;
- b=lVtUrg7juajpA8qUskhsqLB25ifoSXRTNsnnzZJTX8hYAygSvRVkfn1LtOvNtA+m2sqkf6aZqK2yF7gpxnbINy6tS+YLlzXFGORCnNWBJABr8H5CK1YSypfBdYSz4NVmVIIk+5j5bLQAq0vmddY4D/3OW/9okBC2aR1JX6uz8Ze9OZBcaZlnrRJtVcQyT8fc/mwfabd/FuP5QZYusLJ3Wk8gmiTIbowHLDE0sk3a3b5Y1ISO7A8+EewTCxW6ZMTzYzsy5eLaCIx8UxRUayP9YBEcbfesFo+XkxiBGPjpM5f9aXNd9U4j7Bd11rrtY4UHycbypIIhdyqs880IEGRYVA==
+ bh=5LHe6nRkwFXJWzgvLOJ7sAJmfR62GdQGbE6yaLafkY4=;
+ b=C4pAZcpeg6KKCfDcyMbHM5YiUMVJzPal1RhkkHjT9lt54wDZDuEOr7bjZQhrRY5rzfz/I52e9G0OPDp8pLeew5ZGFtQ3xCDPbc4VpaI+665Et+jaY5FTI9CCObfAnaQtOBJIYWa69P+y+HrGOYOny+xoyJvZq7FE75NWsa3Sa/vYewAQJ7ZirhAgV2ZU2OmGlEI1ZUPaywuFmDpI4T7ED68hQB6ikFeObV+eSsJPbTgBJwDvKQJf3hDe0c4R6Quld2B7/7HO2h/RH5BEL7fVh8kRNHzt7D7t/2uSdTaEyf6djmE6YxA1yaGh4GNtdDD2Syl3KvFt6BAsu57X3i/Mtw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector2-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sIk1jqt0Gmx1UUZX5ufSFhHur6ajZOVBLHUJiAnKVf8=;
- b=NlzckIwvIZIRpnSCvmFM2omWU/7mxklFQUxB6bBROXpZwUcuTFJwdBW7NuJvZM9N7Zp9DR6B2diGcNrXqiE3h/m53RlH8HiWgZ9xIHCca437Dg9Q0tSr2oad+0pmdWRYDXCajuXo0T8i5dehvFKsZzFDDTEXRBA9VzTO+FUDNQo=
+ bh=5LHe6nRkwFXJWzgvLOJ7sAJmfR62GdQGbE6yaLafkY4=;
+ b=jFcRas9n/uSrJLSgV5di/WE5das+w8UPWwg7Y6LGWhCQoBKApu7Dn+3HsMCh/Z0TOtjGr2yPMbKcdI3wCCJ9xZfZkP679gPMBAvuGZ7t6RmRo2i48I7xvafmeAaKy5Q62z0zFrJCs2luyHejE4rOrDD68CHOP5jQ064PzGUsBBo=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from AM9PR04MB8954.eurprd04.prod.outlook.com (2603:10a6:20b:409::7)
  by AM7PR04MB6871.eurprd04.prod.outlook.com (2603:10a6:20b:109::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.26; Wed, 13 Dec
- 2023 16:14:38 +0000
+ 2023 16:14:39 +0000
 Received: from AM9PR04MB8954.eurprd04.prod.outlook.com
  ([fe80::d618:e9c8:189a:892c]) by AM9PR04MB8954.eurprd04.prod.outlook.com
  ([fe80::d618:e9c8:189a:892c%6]) with mapi id 15.20.7091.022; Wed, 13 Dec 2023
- 16:14:38 +0000
+ 16:14:39 +0000
 From: "Radu Pirea (NXP OSS)" <radu-nicolae.pirea@oss.nxp.com>
 To: joe.hershberger@ni.com, rfried.dev@gmail.com,
  marek.vasut+renesas@mailbox.org, michal.simek@amd.com, nm@ti.com
 Cc: u-boot@lists.denx.de, andrei.botila@oss.nxp.com,
  sebastian.tobuschat@oss.nxp.com,
  "Radu Pirea (NXP OSS)" <radu-nicolae.pirea@oss.nxp.com>
-Subject: [PATCH v1 2/4] net: phy: nxp-c45-tja11xx: read PHY the speed from
- hardware
-Date: Wed, 13 Dec 2023 18:14:21 +0200
-Message-Id: <20231213161423.258870-3-radu-nicolae.pirea@oss.nxp.com>
+Subject: [PATCH v1 3/4] net: phy: nxp-c45-tja11xx: rename nxp_c45_tja11xx
+ structure
+Date: Wed, 13 Dec 2023 18:14:22 +0200
+Message-Id: <20231213161423.258870-4-radu-nicolae.pirea@oss.nxp.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231213161423.258870-1-radu-nicolae.pirea@oss.nxp.com>
 References: <20231213161423.258870-1-radu-nicolae.pirea@oss.nxp.com>
@@ -75,54 +75,54 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AM9PR04MB8954:EE_|AM7PR04MB6871:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2b0077bc-e627-4f80-415f-08dbfbf69afe
+X-MS-Office365-Filtering-Correlation-Id: 9fe90cd9-0d17-4596-0a38-08dbfbf69b7f
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: o0PYiOYaQmHX3CP3Q8Bi0GwNC+WM+wzYmP7dVZO0I6xbuimQhcXc+1aJ5EoXq4a/3sz7rJwyu2xQczoo85zPReNLt71Jg67Z2ZtP7PlRKp3rfJQ84niAq1yd3UW4BjVL0quZAvxjxEr8kO9MLkLdkp/7Ga4geX2MxCJp2QdYGxXhYdSgbCrcKi2hj+byMQtytfWtOKQ0Jgjg9vCq7RkJ+SKX2rAbIbFIzAWvvV5SSA0ubFSp1ankwwBh3m53RjzV4Tg2qDiTDm8VbGuf0J8tbcpiLYdVzw/YHszYCu59+hV84U61nB052NEfaHFz10NvtIGtzppAlkqdueZbu+fY+YSBDQWkxADH+upx+yAZD1VV0fDa8fTG7uUtOlzA8Td06YPQUyIl4XcFhHjI1HmocjjeBwEePOlAHDP75yODKLr1T2BYjxnog5BHVcUFt9IL70bHaqeE7adOypbfia/sd/zHf/cqp+wGwbCm0tUtA6Sx2sJ64WKlLRhRbp55KtSXfzMBWEANlVfw6daTBTUc1Llikpm+1RzFsR2n+jBnPV2mEwqrqBuovN2Xfa9mECP6GhERked5DISAka5Bperf3B7DBFI45lhMxRdS14GBcbIkp6HLJjAGR5nmG6iIpc56
+X-Microsoft-Antispam-Message-Info: s/VfWIuQw6cChET0aDKwtdTy2eFbUDnTSvjF794WCmkvOrGk+eY5ovSVOTgu582H56b9Aga8tuL9QHLwa2pY/oqSunR07k49Ok/4cyZ85bq/iL4T4rsj5V0lZuxLTf9N7h6iSZ58yEP+NLkr8NauJvYWzjcFvRX6G7dfHfRSFqD8gjy4bmJif1OY+iXbGnSvbHgKshMTbCnaUKFe6XW6LWGREuyReWk40fY+7a+07NpgkHaGbTuZQpbWzgXyDexw5/nlbGJdrOTOnWLeVlc6vw+J9YnqjVQM3Tle+bG8L3Q+hFLxXxXwYQcw1co2mnpx+1SALBDMVoCSqzja7M56cWG+wgNSDsY0/GwMvtiJZ4A9wA/Npn8U7EQECJ4kyz7KCVTrphxsaTUraEIpEbKa1R2KCTNMxp3YFQnIDyJ78L2Zn1AxnqeQtdEtfeQrUU5lEUnUKmJZsGAx1VfWbV5JKo67nfx9oAHhDShAaJA2FJTuahwKIyJUnQhcc45tS9qQNyFIdk9E58/AFl+3cM2ac3HTDaablqiwNTjqnhremHyqP8+MhTQ6SDvJMqWJpmrFJglVBkHdlrs7y+OmuLYSc5cz0WoDCPwrobvvKgboE5TjN5xXjpMVQwMv601iho9l
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8954.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(136003)(346002)(366004)(39860400002)(396003)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(26005)(66946007)(66476007)(66556008)(86362001)(38350700005)(83380400001)(6506007)(2616005)(6512007)(1076003)(52116002)(316002)(6666004)(2906002)(478600001)(6486002)(5660300002)(4326008)(8676002)(38100700002)(41300700001)(8936002);
+ SFS:(13230031)(376002)(136003)(346002)(366004)(39860400002)(396003)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(26005)(66946007)(66476007)(66556008)(86362001)(38350700005)(83380400001)(6506007)(2616005)(6512007)(1076003)(52116002)(316002)(6666004)(4744005)(2906002)(478600001)(6486002)(5660300002)(4326008)(8676002)(38100700002)(41300700001)(8936002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tpbRiMqQwUIFkDpqbLwTKFdA8aI4wl8RdOxAMd/I2sWtcVcFTUU/Y59tH4lr?=
- =?us-ascii?Q?05l82BgZHsLybWllNevmekyuv2XZgzZOefR0Q7OB+N4TvYRKROUD3Ueoqk9J?=
- =?us-ascii?Q?9ViFKREXVlt2MQqFKn81G02KbtW66nYOO3wVvjcP8I+cy4qxfSknTLXT0Feh?=
- =?us-ascii?Q?M5OvCfOLn0MzYCgC/+cuLxjtEf1czqF+c83icectqjh9bzBFiRq538IIKCky?=
- =?us-ascii?Q?BSAAnHEtusLG9ERrCm7H0ANOHhx5GT8EPDBdqb76vteNGM5pXzgvurLyVKUb?=
- =?us-ascii?Q?hnRRsv0O/fPIwg/gZZOOGIOquciPWYvUCR/ToaeJHt1CPB6DhtlOxJysWBbS?=
- =?us-ascii?Q?7H2P3nOy+wxhynsilET/yE02GrQayZ4QK5UawVjx5gGhRNfOnza3lpEQ9MVF?=
- =?us-ascii?Q?+PLFFcr4p8lpu+QAhk6X0GuWLmtkQxNR+Vjp75+dpQWAsHct50md4IYVrOKV?=
- =?us-ascii?Q?I3W5VeWUlKMdyFYKwwTg5brrYQ8hj7dSshRwUBviFtuxGjkZUVslw5K1Fbhm?=
- =?us-ascii?Q?sQLptg3dDabgoiLbdtNplSt/iCL/rFMTSM/vxZV8iMYCgkxk4oLPB66KtR4f?=
- =?us-ascii?Q?d8eGQe2ujNLj6t4VY+vtCsm65KEabBfy3U7u4LwxITg9r8fCqigNVT5gj784?=
- =?us-ascii?Q?rEinWVO6QRlX2KVbT8iQKr8wbgOKu7EjuCfRwfGsSxrRsq3A3s+/gffuSx3P?=
- =?us-ascii?Q?tPz1N/ry7jKOlgZu2ayTjTDPXdgpb4l1c7Ve+5OOv6iqdgeWlC2P/kENSEj7?=
- =?us-ascii?Q?QtYkwP23cFZ/0FF71Z1r5uLpxzKNY1YnkabjMM88iVmHexXUQYrq5Sy5j1Eo?=
- =?us-ascii?Q?LEU57i4+uXMzHW25tG9U9IIoNEbiJZnWmkro6AES9+SYO31MwWs+FbJms2Df?=
- =?us-ascii?Q?tHs0tb3IcCd2x9RTAPxF5E0GzFLJQR9DTY8e+z8Oi4R9e+JjAIz6U4/BegH5?=
- =?us-ascii?Q?tWKZ1emYLvQIilncUyFI0RQuCytoJI23A0e1wIMtdwwO7pfoXq2BwsTdKD5z?=
- =?us-ascii?Q?NvhEEwL0bO1P5KyW5NwN0sRAsL+G5Mri//3IStGqY21RSWCp9onAWMlVX9uo?=
- =?us-ascii?Q?/OqWoikCDCaD/lQQrPdTZFw1fn4nGH3ajw3UWyrK9QsZy7YKMokaa+RnHTAP?=
- =?us-ascii?Q?A47r8GyotgCsK55hBTId81DmHfd1qucLMVL2mECe4G06/vWRr7RhnmLRBGgg?=
- =?us-ascii?Q?STPI0Uz4OokQdpcrS/YXpwpVq5fTu8/yCTrWMf+PjTD7DuwGeAp6WapAMtKY?=
- =?us-ascii?Q?crGZNXD86wt3+G1In4wO6gf6s9ePAGnpV+BtVkWhVFQipcNa6wZFa9v5KUMi?=
- =?us-ascii?Q?SBtBBH/jruK/Uq7Fr9u5pLtcojTLmc855ehNlqGs2WoZ6Jxic3NP6vok8jpl?=
- =?us-ascii?Q?7UvB898D/wGcJhOFQHNjaQJcILLJknAa29rNlikgsOChMASr5YGD/4+7PdAd?=
- =?us-ascii?Q?WwQzUazLK4TnAjNQ03iabJ8v/9w2XvSc9lPCRpYPG7MOrFtHkgmrMO+0VTsW?=
- =?us-ascii?Q?m3uvtftG01n5/pxtD8FqyWbbPAJS18uJrCaHIV5VSWJZmNnBZEtVRcZcHC7T?=
- =?us-ascii?Q?4+utXkJCsQ6PVr4fe2l34h5sEIGZh5hrOMQDFEYRBEhc8lp3bzI1rPt1+7It?=
- =?us-ascii?Q?fw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?wPP/xE25Lw6o9eORBV7cCgDPMfQKht5LQY5L3CH1C39Tq3URBxakxv5hBSGb?=
+ =?us-ascii?Q?Ec1VAHWcILdjVPnlp6GMVvF+2auOCWFnsKNaU1kLU5V5dTADpeA044B+7Ttw?=
+ =?us-ascii?Q?Ip44GbQQBnL9nr8f786ZabYzrso5hKLnvWQ+g3wXTpvo2Nv0alZVHdzlkIEh?=
+ =?us-ascii?Q?GYV1TVD4cFQMpak0JXQPrsw061v+xUs5T9N/w2jxGkXijiVgxnZUjXLbSD6Q?=
+ =?us-ascii?Q?t1LlM2ou6os63n5qXvJzHZoduw0bOywl6ejFpxK1ur+FDVUgXfTXCogaH4/g?=
+ =?us-ascii?Q?F+XdtI7NBwIyDGg7+guE7CSeACdjzfXSXtsoaL3t5Qiyk3qFnBpYcuhHCxDo?=
+ =?us-ascii?Q?5pX1zET45BIQ6vrJgjoST46hb27MVqZdOos+nLKepj9MEsGMHyuCzgt47eEz?=
+ =?us-ascii?Q?/rE1k7cHXjUseei6657htOHhjuU4A3SNmQOz6Ou0GrSQ0eQySKDO2+4PtnR2?=
+ =?us-ascii?Q?d5q9/AEzizWj2EPNWbfPwKJ7gijtpwp28yiqSsfDR99f2kyxe7AS+y/mYTNo?=
+ =?us-ascii?Q?bt5Tz8gyL02ftGtgrCy8yHA+7aYQtdJS6QQe0rLWdHjiAd5SNQTx2ddRlpwD?=
+ =?us-ascii?Q?Us4vFBVHeBIYLzYP5Xq4hmPjZOTFyCxeykzSNd07DBdzYTPPmLpvRTfrD8KO?=
+ =?us-ascii?Q?M7bDiT25lKha29zgxzwL0UDhJrZVgZfVQqBQu41nYW9Fd0xDsN/QKPV0KGg4?=
+ =?us-ascii?Q?7AM86i8Bn+8boDu/pHjnwc/UqpAO3mEAnt7Sw83FL8hnjH1HM1ZeIBxV185y?=
+ =?us-ascii?Q?XuH88WXXwvcsSh77qEFbJ+X7kKYkpimNoT3QiEJNz4kEMiOIBUHYpj79jMH/?=
+ =?us-ascii?Q?OHxiTa59mKIOtawB7lzDbrNnOog5SYZNX5HC/mX6/L0JcDB+XQrcD/BSc3b2?=
+ =?us-ascii?Q?lJPFT9ocmds4ODBACIj3bHf9gLSLzWDZacimFW7Qc69jxdguVDoqSz4DVcz6?=
+ =?us-ascii?Q?orI3pHzo+v6u06BCLWImb3rS0AdjzooidKES55PGZQ1aBHT6KqCpU1AJ6Kc+?=
+ =?us-ascii?Q?uf7T59kzq+pk/NJbC51fZ0ttyV/YCKwVfCkONA+TLdD4i3PKGsCHseZxeiGz?=
+ =?us-ascii?Q?8jM5po/OqXwj/59NsZ1h+pwu/RaoEu4ublJfSsNgIdxF/TwIcioTtCFbhbDN?=
+ =?us-ascii?Q?73u8uN5RvLKXQoqyfVILro3zR/alaGKq3R/DRlAiWsSgtjE2PtTflINd0koi?=
+ =?us-ascii?Q?eLP7gURbY/V0eMbMZggAoLNJUQbQ0D+kJDPawBOYy1mEWrPxl4K0keCr/kDf?=
+ =?us-ascii?Q?Cj+gbGnT/Ul5YW9fPlCt920nOtntxlzlzhHiSPT6P1lUC5wWPT78vrLlIGUo?=
+ =?us-ascii?Q?W5/r74bJjga5lZJ4xyKKmnz5Soac+5Z4RKTzXP+CzXsHslq2HpCyH3Cp07TU?=
+ =?us-ascii?Q?LHWiW2HBIImaT0y6uD2Az606Jy+ogPvUaJBcg7W6/oMz4AwS2HxjANDxDbsM?=
+ =?us-ascii?Q?CnWRds1EqFxNFnNAKFB19QOfQ7XpNNH3ba0iZuMs1GEc1TxBPkBYO4KM65Ue?=
+ =?us-ascii?Q?sgXkV9hPX9SqdJp9lZuuHE4nYIpSMHz88pPWAb+/NUP9eeuwpCGEql5rqiBK?=
+ =?us-ascii?Q?Jeyo8vekQik3QIcNBUU0eow3iJ8+n0rcL8uSh5Ji1REZswJo0dvbsNlnpKJK?=
+ =?us-ascii?Q?2Q=3D=3D?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2b0077bc-e627-4f80-415f-08dbfbf69afe
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9fe90cd9-0d17-4596-0a38-08dbfbf69b7f
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8954.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 16:14:38.5557 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 16:14:39.4354 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ebuPjygj5dmv5rSU07IXoPt0W9tvzxOsUiW45q/N4Z3Xj/lhjmJiB+NJmXK/DltNLedM7LNDRjbKLIZZKYeJeeZxMrM4CbiKCg8/08n/7v0=
+X-MS-Exchange-CrossTenant-UserPrincipalName: sKEdCnHd3An6vpEUKtaTzlaJ/aROIYfZVEgotCRlpSqH+LfNdLZw7G6Yr9XXPBopD9GZeZOaoSOl3moGOFZA+lZXBhu1Sw9Iv6nWxPzvdV0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6871
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,53 +140,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Read PHY speed from hardware instead of assuming 100Mbps by default.
-The TJA1103 works only at 100Mbps, but the driver will support more PHYs.
+Rename nxp_c45_tja11xx structure to nxp_c45_tja1103. The driver will
+support more PHYs and nxp_c45_tja11xx is too generic.
 
 Signed-off-by: Radu Pirea (NXP OSS) <radu-nicolae.pirea@oss.nxp.com>
 ---
- drivers/net/phy/nxp-c45-tja11xx.c | 22 +++++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+ drivers/net/phy/nxp-c45-tja11xx.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/net/phy/nxp-c45-tja11xx.c b/drivers/net/phy/nxp-c45-tja11xx.c
-index 38fb38b9fb..27d871c4b6 100644
+index 27d871c4b6..e787f5fbb9 100644
 --- a/drivers/net/phy/nxp-c45-tja11xx.c
 +++ b/drivers/net/phy/nxp-c45-tja11xx.c
-@@ -306,13 +306,33 @@ static int nxp_c45_config(struct phy_device *phydev)
- 	return nxp_c45_start_op(phydev);
- }
+@@ -353,7 +353,7 @@ static int nxp_c45_probe(struct phy_device *phydev)
+ #define NXP_C45_COMMON_FEATURES	(SUPPORTED_TP | \
+ 	SUPPORTED_MII)
  
-+static int nxp_c45_speed(struct phy_device *phydev)
-+{
-+	int val;
-+
-+	val = phy_read_mmd(phydev, MDIO_MMD_PMAPMD, MDIO_CTRL1);
-+	if (val < 0)
-+		return val;
-+
-+	if (val & MDIO_PMA_CTRL1_SPEED100)
-+		phydev->speed = SPEED_100;
-+	else
-+		phydev->speed = 0;
-+
-+	return 0;
-+}
-+
- static int nxp_c45_startup(struct phy_device *phydev)
- {
- 	u32 reg;
-+	int ret;
- 
- 	reg = phy_read_mmd(phydev, MDIO_MMD_PMAPMD, MDIO_STAT1);
- 	phydev->link = !!(reg & MDIO_STAT1_LSTATUS);
--	phydev->speed = SPEED_100;
-+	ret = nxp_c45_speed(phydev);
-+	if (ret < 0)
-+		return ret;
-+
- 	phydev->duplex = DUPLEX_FULL;
- 	return 0;
- }
+-U_BOOT_PHY_DRIVER(nxp_c45_tja11xx) = {
++U_BOOT_PHY_DRIVER(nxp_c45_tja1103) = {
+ 	.name = "NXP C45 TJA1103",
+ 	.uid  = PHY_ID_TJA_1103,
+ 	.mask = 0xfffff0,
 -- 
 2.34.1
 
