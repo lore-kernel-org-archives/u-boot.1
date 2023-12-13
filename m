@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17FAC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBA6FC4167D
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:22:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B768874CC;
-	Wed, 13 Dec 2023 17:22:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 61074877E2;
+	Wed, 13 Dec 2023 17:22:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JGdEoyO4";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="h1rFjEV4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCDC58781D; Wed, 13 Dec 2023 17:22:11 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 8D81B877E2; Wed, 13 Dec 2023 17:22:40 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFE38874BB
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:22:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56B3C86564
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:22:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-28ac70368b9so402599a91.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:22:09 -0800 (PST)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-dbcd1e7adf3so805389276.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:22:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702484528; x=1703089328; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1702484557; x=1703089357;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kqmFEEpuBNGxgFl85J7DiSziPjHBsq0AsoiGQ6R7f2A=;
- b=JGdEoyO4VD6FQg7d6V0KvxyTWX3VhAyRnswtwVu62C3aqgVD3otcuOIX7XiEw67cGz
- 4w+7Lzg++fHjsC7MKsq9YRP9Qhb0zs66gp4BIZ/ecAsP9fDvmXR43Zkse721tOxEzMfP
- tDJFrr3qrf+Mut/TOM2d8dQUhHQCwarPneVteiUqghYF0AnVo3PaVVCgN60oy7+Tb3Cw
- ttxp+n2m+dTeM2fd+kGKnjNQrhsnl7a1rIkyk5zB9Cs2Ut3Yg9dMLC4aqsB+juu5Vvf4
- /g5Q2M1vBwSJG/3ZX3Mhz6pJgJLj0R25FRsbLnTCe8AS1mjpGNcHV239OetiQQVv/kv8
- xHRw==
+ bh=WxOrdZEm0XCA6HIfSi2mxQrHkO3PkyCd8xWFhSJXOmI=;
+ b=h1rFjEV4htRoupbIkVeuL5aICGOaenzF2KhHYZZM/bwZiDtUrXOxKqsbIAlcUJwDRR
+ WtCSDiGjiDfM62cnrFdqOWbkTDC3RpWGViJv5Wior6fR/RjIgAlUPZJYd28LLZcJZq/g
+ xnWdatZhN0X4LN2kulZvP8WWMH3HgWiluT2fE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702484528; x=1703089328;
+ d=1e100.net; s=20230601; t=1702484557; x=1703089357;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kqmFEEpuBNGxgFl85J7DiSziPjHBsq0AsoiGQ6R7f2A=;
- b=LeE8NZ18GRFY+3kF5s6Du2FdlNxMfP5NU2I+jfrJsfqxNG18XmcKJGK4yJIX50TXQW
- si4dL8ykZFXrM8bTxVvrxFPyebKujE/U3uQh2HotwmZJR7rLeREJMZf0RI/lXNUXurfJ
- Pb8scsGIukB1AxYXYL26KQBOVhi+xbtzfdboJANNvaoG2LOUEm+deNXKxc2hlEwySbgx
- N/H6AdtEnJ8hcy3GVUbsKykai/X4wqbLPDXyVTC9xt2kX3BKCqgg3Jifwp73NtYM8EKn
- D+22fI0nnGI3ixJQq/2IsOTdFSXcjFWrxAd31Yqu3RE7sJR6mSWePZMJAaezGW21o2Jp
- CAbA==
-X-Gm-Message-State: AOJu0YwRkveIy8+l+6tKmkLFER5BUqhA0lDMJCt2Nw+Etnfph4zYELgB
- TFzJDyinF45ZJ51+dlC97sDxlnVPkEDeAFGuJvQ=
-X-Google-Smtp-Source: AGHT+IFtTRKyhGAJFhVfGIKCz/Qdm66sEn8wCWWDelRCfmaLN3jlUvhas/0yXRNYDrpKeiD1SULXox6kuSebhIa+jAY=
-X-Received: by 2002:a17:90b:3a82:b0:283:5405:9e90 with SMTP id
- om2-20020a17090b3a8200b0028354059e90mr14014476pjb.3.1702484528057; Wed, 13
- Dec 2023 08:22:08 -0800 (PST)
+ bh=WxOrdZEm0XCA6HIfSi2mxQrHkO3PkyCd8xWFhSJXOmI=;
+ b=UODbZLID3dR82Xlp8fhFnStMYOJplB1Hg7/63O8ex4Oo8lA8YCw3fxtDVXG9ET5YtH
+ SEn7S7y+y3qsOZhpLvLxiEuwcqrzbRKGqHbcEBrfuwSPyvqniL69wwBbecVUoXSQXuwi
+ kRPmYHJ1/18zC62StUyL/7gGvZ1016rXJnHklrxxXnC+NvIrZt4YQk9rZY2jIBja2oFe
+ 1/Ap7Oh4vECSKWuYfJUYvQax7plsWB9sAuMb6Aa8DtMSpy0KmAhh3Nq1eHB9XSOExP/i
+ wJv5xA80WXrcx6/n99RA9srIAsvToJ27BWA+JptIRlk2TWXNgwLqNM6GEF/fOipJgXmp
+ keLQ==
+X-Gm-Message-State: AOJu0YzpBHKBUv/xO+sPewDFnpiCULdz/54e8E6XtYvcOS3ASo4+euV5
+ 406tYAdDqIhaWAI+69tKnTUi8B8ujdM5XkdPg1RRAA==
+X-Google-Smtp-Source: AGHT+IEKlsppP9ycEjzRqN47rq+Lbn6l8LDiCr3A5ymKTxaPY1gdVVxpvF1CbG1Ubs25CfF6h0rwvastDotHkFw3eBQ=
+X-Received: by 2002:a25:e74a:0:b0:dbc:d090:1d10 with SMTP id
+ e71-20020a25e74a000000b00dbcd0901d10mr791840ybh.129.1702484557079; Wed, 13
+ Dec 2023 08:22:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20230523192155.33222-1-gilles.talis@gmail.com>
- <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> <877clq6odx.fsf@redhat.com>
-In-Reply-To: <877clq6odx.fsf@redhat.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:21:55 -0300
-Message-ID: <CAOMZO5C=N408U+dY+C-czBSGYMexmDeiUdyzwLkLjZcy7DtS1A@mail.gmail.com>
-Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
-To: Milan Zamazal <mzamazal@redhat.com>
-Cc: Gilles Talis <gilles.talis@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
- uboot-imx@nxp.com, u-boot@lists.denx.de
+References: <20231204085247.9772-1-venkatesh.abbarapu@amd.com>
+ <b687ac77-96b2-4bb5-a353-e209818bba09@amd.com>
+In-Reply-To: <b687ac77-96b2-4bb5-a353-e209818bba09@amd.com>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Wed, 13 Dec 2023 21:52:25 +0530
+Message-ID: <CAMty3ZAaTZkM7jx_h8pLysiCKbSQmdQiKWWxR-YncAt_b8vSfg@mail.gmail.com>
+Subject: Re: [PATCH v2] mtd: spi-nor: Add IS25LP02G flash support
+To: Michal Simek <michal.simek@amd.com>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de,
+ git@xilinx.com, Sreekanth Sunnam <Sreekanth.Sunnam@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,25 +86,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 7, 2023 at 2:15=E2=80=AFPM Milan Zamazal <mzamazal@redhat.com> =
-wrote:
+On Wed, Dec 13, 2023 at 9:19=E2=80=AFPM Michal Simek <michal.simek@amd.com>=
+ wrote:
 >
-> Peng Fan <peng.fan@oss.nxp.com> writes:
 >
-> > On 5/24/2023 3:21 AM, Gilles Talis wrote:
-> >> Add support for the Polyhex Debix Model A SBC board.
-> >> It is an industrial grade single board computer based on
-> >> NXP's i.MX 8M Plus.
-> >> Currently supported interfaces are:
-> >> - Serial console
-> >> - Micro SD
-> >> - eQOS and FEC Ethernet
-> >> imx8mp-debix-model-a.dts is taken from Linux 6.3.
-> >> Signed-off-by: Gilles Talis<gilles.talis@gmail.com>
+>
+> On 12/4/23 09:52, Venkatesh Yadav Abbarapu wrote:
+> > Add support for ISSI 256MB flash IS25LP02G. This part supports 4byte
+> > opcodes. It also supports dual and quad read.
 > >
-> > Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> > Signed-off-by: Sreekanth Sunnam <Sreekanth.Sunnam@amd.com>
+> > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> > ---
+> > Changes in v2:
+> > - Fixed the name to Sreekanth Sunnam.
+> > ---
+> >   drivers/mtd/spi/spi-nor-ids.c | 2 ++
+> >   1 file changed, 2 insertions(+)
+> >
+> > diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-id=
+s.c
+> > index 3cb132dcff..9a73198227 100644
+> > --- a/drivers/mtd/spi/spi-nor-ids.c
+> > +++ b/drivers/mtd/spi/spi-nor-ids.c
+> > @@ -217,6 +217,8 @@ const struct flash_info spi_nor_ids[] =3D {
+> >                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) =
+},
+> >       { INFO("is25lp01g",  0x9d601b, 0, 64 * 1024, 2048,
+> >                       SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) =
+},
+> > +     { INFO("is25lp02g",  0x9d6022, 0, 64 * 1024, 4096,
+> > +                     SECT_4K | SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) =
+},
+> >       { INFO("is25wp008", 0x9d7014, 0, 64 * 1024,  16, SPI_NOR_QUAD_REA=
+D) },
+> >       { INFO("is25wp016", 0x9d7015, 0, 64 * 1024,  32, SPI_NOR_QUAD_REA=
+D) },
+> >       { INFO("is25wp032",  0x9d7016, 0, 64 * 1024,  64,
 >
-> Do you know why the patch has been left (as far as I can see) without
-> further action?
+> Jagan/Tom: Do you want to take it? Or should I take it via my tree?
 
-Applied to u-boot-imx next, thanks.
+Picked on my tree.
+
+Jagan.
