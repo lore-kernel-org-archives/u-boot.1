@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 896ECC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA31CC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B2FC87831;
-	Wed, 13 Dec 2023 17:34:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7460E87863;
+	Wed, 13 Dec 2023 17:35:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LTuNXHWc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PaVcAgeS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A2AF8785D; Wed, 13 Dec 2023 17:34:38 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id CB7E087830; Wed, 13 Dec 2023 17:35:17 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECF4A87830
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:34:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6594E87863
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:35:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-28ae1de660bso230935a91.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:34:35 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1d350ee90b6so1289795ad.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:35:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702485274; x=1703090074; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702485308; x=1703090108; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=plVkZBQpwM/VaDC5E1jkVyhMzsvDQ1H9n1HFeG67ld0=;
- b=LTuNXHWcTl9SJ6PZZ9y7pgqx26ncT1FSEmhDSA10/Pue2CIJBKvgyXQ3ifnv3U9B2B
- ud8ArE22GXmr3OEmJ8D6E++5cI8JmaV/ZhGNk2d2Pkof1m10+4QVaDBDEgOUpw86RucK
- HD23K9EINyH759FWd/lI39PJXl4CKWHiQx70eGPrg0BTSrg2OAM7b9+V4ZQFx68z1vkI
- MMjlxFgQelJSrgvPCACADiRI5R1LYeAp7F4NBEjyzsfs9Qhyfx5Ult8LbCyq95RXROCg
- u9W6Kqyoym2nlfYXOrHQJOT72ZGxs9mI7LLyntFScwp92uHcpYrVaUoK204qklgVh0tv
- 7NRQ==
+ bh=8bd+dNYd3oGbKavwIyAmyhqHKSWBjNGcP2v+eR2ALNI=;
+ b=PaVcAgeSLKdXAORMM0/N6tR+agxqPnnz0i1FRLs+dxKF3vUljJbKD0PL1WJz87NKpk
+ ZeHDG2t1um/v0OVjSNEaiNq3XqPoWt8OMhPnYFbKGvP/xr7puOIBVeHbM8qvuwLhYYKV
+ BhMKWbZ4iKe8Z+tV9lo//MurdOW+fbVwfZ93CoXw3stFSm7vjGIDufuPPomnWvXAPROk
+ +yoKyPvXjJmhLNCWcRSbdfIOR+4Jp0wUAOSEpOLg3bH3EEWyZqIPJzlPsXv0CLwwddLn
+ qW3Tlmx9xiaK2B26KUMQMrpGkVq/lxp0lWbHSMQmJE4uBWypa9COG86njEdZNw2Sq8AY
+ 2mrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702485274; x=1703090074;
+ d=1e100.net; s=20230601; t=1702485308; x=1703090108;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=plVkZBQpwM/VaDC5E1jkVyhMzsvDQ1H9n1HFeG67ld0=;
- b=c7utK8W7kMUVzVTB6mq4nhclN+E9Wg5TBLnc9Q0ADnDF79l3IgBi2aG0ZR7hmJHFbV
- hwDj1hjkVt2PIZWYlHhUnvpF4aTAujo7+PM4/45RQfjB+iGAwZl9+CwcO7wh84YVdL4u
- iQIsu7529/AMOSeD5riftbz0Nw0EFvrTiZ3magRpob036O9wjYK8rpCWrkbuvKKcw1ZV
- YobL2oTD+EV8+s+evzcKJcXfKSKXtvhOW+53aHBneNwDy57kHHMpB9VVZ8DnwPDUWpr5
- 6kdZOM9cndghMNwBHMqAUFJdRBvXcsXZaHkD0xDsXYwA62fxitsEgSLt834mSb14o1cO
- PM1Q==
-X-Gm-Message-State: AOJu0Yxla0xkmobqqNu+KKPRgtswdGYTb8p/+fwYGN4kZmFWvFNK8Op7
- WRvznFzCF61hjlRlx6hWSHHSD9IQr5Wlx2jmpLo=
-X-Google-Smtp-Source: AGHT+IEEiHwFrth4xLMqOGe0rE8y25Oq1N1j5gUeEeaXnXs98JEjzrB2naicgzLwP8bj4WkO/0en4gt+318TQSP+utA=
-X-Received: by 2002:a17:90a:4b46:b0:28a:f1fa:3da1 with SMTP id
- o6-20020a17090a4b4600b0028af1fa3da1mr1109086pjl.3.1702485274317; Wed, 13 Dec
- 2023 08:34:34 -0800 (PST)
+ bh=8bd+dNYd3oGbKavwIyAmyhqHKSWBjNGcP2v+eR2ALNI=;
+ b=unP3/SCEsb9PIfH/Zt+KIxssxqmiRFdwLMQuFV7qybJtABdc4DEd4O7VZ/cz3t35tu
+ 9cFEiHN4PFqaC9F8+bYVsgA8VP86MbKD1nGdyXTW9YO4a1kf9SB3Yd8Snd9FyFBUBhQv
+ W8Ul64QYmZZwHfHv/jscDMGKHfmubgZdX5hOBLDSMwfG89VWlE61/UaSDflGWxF/saIf
+ kKZN5i4pLabxPMrkeJ/Ojm6jxxBskzWYyH3JvVkr4oiGUHmtdkTRfL5WJMmXojZxqaxv
+ PkJ00khtuSXQP30hZhqXJJJpzMEd/M3ZpgpBk17/bKTmmzWtlx9fVx6rqPu72B8c1uL8
+ 1WQw==
+X-Gm-Message-State: AOJu0YyKq8vTw90O8T2w+E1cF2xHRkcAKz+I1rr/bW8ikV2X7QCV4tCm
+ rZNQZh7mtI4/NUDIxFbXGp8ZtKmDxPTt9vVNals=
+X-Google-Smtp-Source: AGHT+IFo+frvIn/gROKwwG2MudxS8LSRFSJWj50xdfzT8LblK+Ld4MtxDtE9jQWnWJ/0HZ0eqv+519PtbOccyBbBOms=
+X-Received: by 2002:a17:902:ea0d:b0:1d0:b693:ae30 with SMTP id
+ s13-20020a170902ea0d00b001d0b693ae30mr16315075plg.6.1702485308593; Wed, 13
+ Dec 2023 08:35:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20231109162401.38941-1-hiago.franco@toradex.com>
-In-Reply-To: <20231109162401.38941-1-hiago.franco@toradex.com>
+References: <20231211100613.46650-1-nicolas.heemeryck@devialet.com>
+ <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
+In-Reply-To: <20231211100613.46650-2-nicolas.heemeryck@devialet.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:34:21 -0300
-Message-ID: <CAOMZO5B9UzOkDxT=rd9-x_t4ZgPASNMAKp0nMPFiTF-r3=jQXQ@mail.gmail.com>
-Subject: Re: [PATCH 0/2] apalis/colibri imx6/imx6ull/imx7: Add fastboot supp
-To: Hiago De Franco <hiagofranco@gmail.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de, 
- Hiago De Franco <hiago.franco@toradex.com>
+Date: Wed, 13 Dec 2023 13:34:55 -0300
+Message-ID: <CAOMZO5D1cnHPGO3Vxf56tPYdrpkH5T9_mK-4Frx6POU-qDx_UA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] clk: imx8mn: add pwm clocks
+To: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,17 +88,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Nov 9, 2023 at 9:44=E2=80=AFPM Hiago De Franco <hiagofranco@gmail.c=
-om> wrote:
+On Mon, Dec 11, 2023 at 1:52=E2=80=AFPM Nicolas Heemeryck
+<nicolas.heemeryck@devialet.com> wrote:
 >
-> This patch series introduces Fastboot support on all Apalis iMX6,
-> Colibri iMX6, Colibri iMX6ULL and Colibri iMX7 machines. It includes the
-> necessary configurations in their respective defconfig files and
-> implements logic in the boards files to determine whether SDP or Fastboot
-> will be utilized.
+> Based on Linux kernel 6.7-rc4, add necessary clocks for the PWM
+> controllers.
 >
-> Hiago De Franco (2):
->   apalis/colibri imx6/imx6ull/imx7: defconfig: Enable fastboot support
->   board: apalis/colibri imx6/imx6ull/imx7: Add fastboot bootcmd support
+> Signed-off-by: Nicolas Heemeryck <nicolas.heemeryck@devialet.com>
 
-Applied all to u-boot-imx next, thanks.
+Applied to u-boot-imx next, thanks.
