@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A754C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 08:22:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2B3C4167D
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 08:28:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B072877C2;
-	Wed, 13 Dec 2023 09:22:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+	by phobos.denx.de (Postfix) with ESMTP id 016A687463;
+	Wed, 13 Dec 2023 09:28:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mu1ZR1cm";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF6AD877CD; Wed, 13 Dec 2023 09:22:23 +0100 (CET)
-Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com
- [209.85.219.173])
+ id 59C3A874D9; Wed, 13 Dec 2023 09:28:31 +0100 (CET)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 863D887734;
- Wed, 13 Dec 2023 09:22:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux-m68k.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1D60F871D7
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 09:28:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=geert.uytterhoeven@gmail.com
-Received: by mail-yb1-f173.google.com with SMTP id
- 3f1490d57ef6-d9caf5cc948so6345080276.0; 
- Wed, 13 Dec 2023 00:22:21 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3b9b6ba42a4so3038759b6e.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 00:28:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702456107; x=1703060907; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CfA3GmZAIjxdzpQcDQw84ZSpmc1GeKgE3BSkLN7k5oM=;
+ b=Mu1ZR1cmkhikguZGKSPwFKEv6ml2E1HpUiBRfe3LkIG0GTsDAKO+pc8Yda7ADuzuWS
+ 2BNvo9V3UDk15kyzophREQKRJJsDqU5f9K8zk7DF5jeOkOBxZ81H2AfG2wIOYdmY5fJL
+ mIpWxors1UXFUxlPet+wNu5b4jLCEedQdnWSVQVUDIW02FGeZQ0dSIVBhdNu2RFFK8cO
+ v9mryk7GvAkdGKZIUfgpCPOlDAE8GcdgxwT4czAkMnuezpsgTNrm5bSePzuD5ort8nmA
+ aRngr9bDkY5KJ0ujqTl5AqkXidlNYiGFnwAP1CZl4GS2OTKJgyp4jWV18DIh5yKY2vM+
+ w3FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702455740; x=1703060540;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wyo3wp77elB10N8bmvU+a2gMSD/SCgZGjs6MLVCESck=;
- b=AK5Uihpba5Qeks3l1N1w1tmZi9Zu+t+nGjvovMhD8ILfPnDh5OGmvCMilRyX/CvgvO
- E2Q5JrNE2FXjhbZkS90tnmnHL7jL09xVTzqGZc/Nn67A/fyn72aENF2Uryu3i83gq+1A
- XpMQayrMCV+yuTRjc/sJCO0uRVi7oMP1BRjRhQ2b5K9z5PS6LzRHyeHBD7doupuFbdQ+
- niZCSZU7C0dhYlsTzBQZXrmeqhsgMP/Zs5sJy1W8+1dosqNf/xerW38ufUgVCAGWFAZt
- MXlYm3wXfNsFmOehvp5N3f8drh7PTOK5pADL3XnvqytwIRuEOw7ion/d+f0FKqXFIh2A
- nbPQ==
-X-Gm-Message-State: AOJu0YybmOS43k/HOnWS+fNHfUVGvaFFOsspvQRrcRmhRfQgbCvBziaa
- isekgORGxjqX+foILU4/DnLf8S71QDIJHg==
-X-Google-Smtp-Source: AGHT+IEnRgK+UDpDwaZ2QSHOCwVwglGYbAvYVGliMFRrbO3S7/lEHVCVKAqJ3pIz1aPPJ9Eb1NDqxQ==
-X-Received: by 2002:a05:6902:e0d:b0:db5:4082:b8f0 with SMTP id
- df13-20020a0569020e0d00b00db54082b8f0mr5221069ybb.4.1702455740041; 
- Wed, 13 Dec 2023 00:22:20 -0800 (PST)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com.
- [209.85.128.174]) by smtp.gmail.com with ESMTPSA id
- u4-20020a258f84000000b00dafa5f86dc2sm3779814ybl.16.2023.12.13.00.22.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Dec 2023 00:22:19 -0800 (PST)
-Received: by mail-yw1-f174.google.com with SMTP id
- 00721157ae682-5de93b677f4so47157857b3.2; 
- Wed, 13 Dec 2023 00:22:19 -0800 (PST)
-X-Received: by 2002:a05:690c:4088:b0:5e2:7074:91a3 with SMTP id
- gb8-20020a05690c408800b005e2707491a3mr1097794ywb.73.1702455739213; Wed, 13
- Dec 2023 00:22:19 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702456107; x=1703060907;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CfA3GmZAIjxdzpQcDQw84ZSpmc1GeKgE3BSkLN7k5oM=;
+ b=efSdqjl7w/6ofR99U4NRT/WZN/q6OAvUgHrg+6umQq02d+zSIMY4xXLtXiHF4vsDSg
+ d5yDk6WFMXm30lZSA1AW3an9Rv8X8NjxX5SCIexk0M5e1O7CLGpMjrJ0BNsngHRn0anT
+ 78GCWn2aBVUXidJZRVix0kswA7RzHNov4hndfJqgaym58ZVK2g1tHoQeYBP1y8vN4h9B
+ Q6v/+Od7+SofUsfie1JEhH0olcDanAQgIGf3306A7loh1JdqjtJ6gim5J5Id4B7O0Dn9
+ lQoS8dXwT1N3FGkh3FBE3Mc7lFLFa13ypaShE3mjiGpG0AZeJGMeUemfkWzqjIzS5ntD
+ S2hg==
+X-Gm-Message-State: AOJu0YywyWg75t8Xc8HudSnbda8LrLvRLaiEDxi5fSHwgyklTrvVfSKV
+ iyFaq4iuYzs3A4VTkyR9G+6W40rh5t69qMb20yM=
+X-Google-Smtp-Source: AGHT+IGlga1HgcRM4gwUuDp8Nn5LM8PWlL8+2ANQPxYWvuBDJc1mQDroyY7UpNECiGuE5fHrfb5dfLxuh8yAJgWNv54=
+X-Received: by 2002:a05:6808:1b20:b0:3b9:e765:6990 with SMTP id
+ bx32-20020a0568081b2000b003b9e7656990mr3990769oib.28.1702456107468; Wed, 13
+ Dec 2023 00:28:27 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
- <ae0675e2-940a-439e-9557-e5a4f745f1b0@ti.com>
-In-Reply-To: <ae0675e2-940a-439e-9557-e5a4f745f1b0@ti.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Wed, 13 Dec 2023 09:22:07 +0100
-X-Gmail-Original-Message-ID: <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
-Message-ID: <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
-Subject: Re: Proposal: FIT support for extension boards / overlays
-To: Andrew Davis <afd@ti.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+References: <20231130201352.6379-1-semen.protsenko@linaro.org>
+In-Reply-To: <20231130201352.6379-1-semen.protsenko@linaro.org>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Wed, 13 Dec 2023 17:28:16 +0900
+Message-ID: <CALrBrZ1oqd93DWGTX5G8ibsjsBQma-VUBtsZGzN=WfJkTesDew@mail.gmail.com>
+Subject: Re: [PATCH 0/7] pinctrl: exynos: Prepare for other SoCs support
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,50 +89,42 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, Dec 12, 2023 at 4:52=E2=80=AFPM Andrew Davis <afd@ti.com> wrote:
-> On 12/12/23 8:05 AM, Simon Glass wrote:
-> > The devicetree files for a board can be quite large, perhaps around
-> > 60KB. To boot on any supported board, many of them need to be
-> > provided, typically hundreds.
-> >
-> > All boards for a particular SoC share common parts.  It would be
-> > helpful to use overlays for common pieces, to reduce the overall size.
-> >
+2023=EB=85=84 12=EC=9B=94 1=EC=9D=BC (=EA=B8=88) 05:13, Sam Protsenko <seme=
+n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+
+> Some Exynos SoCs (not supported by pinctrl-exynos driver yet) have
+> different offsets and widths of pin bank registers (i.e. PIN_CON,
+> PIN_PUD and PIN_DRV registers). Rework pinctrl-exynos driver so it
+> allows for different offsets and widths of those registers by adding
+> the corresponding API. That makes it possible to add the support for
+> new Exynos SoCs in pinctrl-exynos driver.
 >
-> For this to save much size we would need to have the SoC split
-> from each board that uses it. We don't have that in DT today.
-> There are some efforts in progress to help on this but until
-> then we will not get much here.
+> The main patch in this series is:
+>
+>   pinctrl: exynos: Support different register types in pin banks
+>
+> Other patches are just related cleanups and refactoring commits,
+> required for the clean implementation of the main patch.
+>
+> Sam Protsenko (7):
+>   pinctrl: exynos: Improve coding style
+>   pinctrl: exynos: Extract pin parsing code into a separate function
+>   pinctrl: exynos: Rework pin_to_bank_base() to obtain data by name
+>   pinctrl: exynos: Support different register types in pin banks
+>   pinctrl: exynos: Refactor handling the pin related dt properties
+>   pinctrl: exynos: Reduce variables scope
+>   pinctrl: exynos: Convert to use livetree API for fdt access
+>
+>  drivers/pinctrl/exynos/pinctrl-exynos.c     | 125 ++++++++++++--------
+>  drivers/pinctrl/exynos/pinctrl-exynos.h     |  36 +++++-
+>  drivers/pinctrl/exynos/pinctrl-exynos7420.c |   2 +
+>  3 files changed, 108 insertions(+), 55 deletions(-)
+>
+> --
+> 2.39.2
+>
 
-Indeed.
+applied to u-boot-samsung.
 
-E.g. The Kingfisher board[1] is an extension for (various) ULCB
-boards[2], but we cannot use an overlay for the former, as the
-combinations need to have different top-level compatible (and model)
-values.  Hence currently we use a .dtsi file and lots of extra .dts
-files[3].
-
-The other issue is the need for parameterization, due to slight
-differences in pins/signals on various base boards, or because the
-same connector is present multiple times (e.g. for multi-camera
-setups[4][5]).
-
-[1] arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-[2] arch/arm64/boot/dts/renesas/*-ulcb.dts
-[3] arch/arm64/boot/dts/renesas/*-ulcb-kf.dts
-[4] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov5640-single.dtsi
-[5] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov7725-single.dtsi
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
---=20
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
-
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
+Thanks,
+Minkyu Kang.
