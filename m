@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E30B1C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 23:06:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 692EAC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 23:06:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CDA687905;
-	Thu, 14 Dec 2023 00:06:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C818C8791A;
+	Thu, 14 Dec 2023 00:06:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SoQEkxI8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oGS4YRiK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16EB887909; Thu, 14 Dec 2023 00:06:11 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 74CDC87916; Thu, 14 Dec 2023 00:06:15 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F9408790B
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 00:06:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CBF187900
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 00:06:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-20335dd197eso455267fac.3
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 15:06:08 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3b9e6262fccso4650291b6e.3
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 15:06:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702508766; x=1703113566; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702508771; x=1703113571; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=O4rpO6yBNmbDALcm/8GM7BueJnROmEtNyCeGclmq3gE=;
- b=SoQEkxI8FaOCMjSyRWTypBg2UISj+RA8cs1QqUkDDbEaxrmPDuwCgnB5s/zBsvsm1Q
- TDffo9TOwZKLBj4+8KvA7FFUQelPhhLp32fFgELaWvMxVlaXU/mEiASmbEiKBcan9TH4
- Vy39RUBwFFGjUwE6uS/L/jlrSKGo2crbeBXdA=
+ bh=4VJukG8BwLirUSKMl+l5z1UAVGHeHN3r+qjzQlKvr+I=;
+ b=oGS4YRiKykgGspwqWYiJd0NDPxY4ftPEBrzByZMpsdhkBCg8qIuk5wjM12tlWtgPKb
+ jCBERNoLc0qErGHnqNsSI3jRI3vPC68Nq9Gkg8iLdWHkX/voBRFOH6FD4+GHVvhtf50y
+ CLHwNN20cOysnTPW+NbyP+pc49hUWnynM5eLg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702508766; x=1703113566;
+ d=1e100.net; s=20230601; t=1702508771; x=1703113571;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O4rpO6yBNmbDALcm/8GM7BueJnROmEtNyCeGclmq3gE=;
- b=i2GKLwfyj8jhdL0GkZk9I42xz1Rw3MuKhXmO+qJWVDXzQVBGPtXtqMbhp8Ov/voEcj
- 6lv49HxoB4c48qwzPB96ewdTOKiMc6N7n4Famr9+big35hZVthSBNE35c4N9R1Tk/bpt
- 5mhCbGQdaBoBqsH0ouOgW+Nx6Z4oCW/8PZh0K3PpKq+ydeL7D/5Sieumu/B105wnf+/y
- 1cP+vQGLVKp+hz1vg4yuz5zlJ7xofOTOT2jyevF8yhMH6/nY8xix2cuLIyXye5pqDEuT
- lRyCOqBROzV6zoMPPJ5gt+7sXsojIM6vgAMbMZ+RvExcA90ctbKOOzuy+4p8jWjfSdJA
- YRYQ==
-X-Gm-Message-State: AOJu0Yx/VC2N4+yMP8AqQ2I1CHce82Vt5eyyAmqUIHG/vG3GuauXSCDR
- nlv3OURCLcjkMQAM4RJMDOucPA==
-X-Google-Smtp-Source: AGHT+IG3jLqNnAOqNtx8A9Pk9LBRpFkqMkwthri4DaoeqyVuifaArLooNy2SV2IR5t+ycYThRN/uXw==
-X-Received: by 2002:a05:6871:e70b:b0:1fb:75a:c44e with SMTP id
- qa11-20020a056871e70b00b001fb075ac44emr8986030oac.119.1702508766319; 
- Wed, 13 Dec 2023 15:06:06 -0800 (PST)
+ bh=4VJukG8BwLirUSKMl+l5z1UAVGHeHN3r+qjzQlKvr+I=;
+ b=PhKHRznMcAKHGn+i+0ZiVdT75LQPtArYH2pKl30Rbb6Ea3OmJmPaqBTqq0q+AcoGb5
+ qBaHUAxPTTVFPTGTfTUbSxjK7A0sSqyp19s65YZIMlZL2GsMiBGwHd21s5k5ySZbidBM
+ 2Xn2UTdnE588eLo6/lJJjhckMZI8zL9V7KW7rArlF2a9WVOmSVNI5tYd7saX3VVNHHsu
+ Bhrmn+IWwE+3dWq6sOkifLZkbRrlY19+vVQjbELMhnBQc+UA57AhEDjCc0NPN5ikSqme
+ NlycNxvk3lcDYNt1EVn5/r+KrNox7hZoiRtGGiTl8dkeotbuMsXmIoGnWh7KnNCBO0ZN
+ PiSQ==
+X-Gm-Message-State: AOJu0YyWKX71NYNV2E6WDdzjv/iBwo22GT0uqHRkRsDjLrraXyJJ/ISY
+ ugOwZKjU559bzetkUVMTgA0J2eACKHL8G0tncp8=
+X-Google-Smtp-Source: AGHT+IGjWJMsYvLDyQOsVH97PgR3jfaNsKpb/xXMOTfoTq66JfMXDrY2PHiyeaYns4AYCfyBcXxHHQ==
+X-Received: by 2002:a05:6870:b623:b0:203:2b02:7251 with SMTP id
+ cm35-20020a056870b62300b002032b027251mr1431730oab.2.1702508770940; 
+ Wed, 13 Dec 2023 15:06:10 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
  [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
  by smtp.gmail.com with ESMTPSA id
- u33-20020a25ab24000000b00dbcd0082242sm825648ybi.65.2023.12.13.15.06.05
+ p13-20020a259e8d000000b00da082362238sm4311575ybq.0.2023.12.13.15.06.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Dec 2023 15:06:05 -0800 (PST)
-Date: Wed, 13 Dec 2023 18:06:04 -0500
+ Wed, 13 Dec 2023 15:06:10 -0800 (PST)
+Date: Wed, 13 Dec 2023 18:06:08 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Shantur Rathore <i@shantur.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] maintainers: rk3399: remove maintainer
-Message-ID: <20231213230604.GQ2513409@bill-the-cat>
-References: <20231124120431.115717-1-i@shantur.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Subject: Re: [PATCH] maintainers: bcmns3: remove maintainer
+Message-ID: <20231213230608.GR2513409@bill-the-cat>
+References: <20231205091229.183512-1-pbrobinson@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7ken9Hfm1I5xt7br"
+ protocol="application/pgp-signature"; boundary="rpAKjgagsyWCCxjJ"
 Content-Disposition: inline
-In-Reply-To: <20231124120431.115717-1-i@shantur.com>
+In-Reply-To: <20231205091229.183512-1-pbrobinson@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,40 +93,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7ken9Hfm1I5xt7br
+--rpAKjgagsyWCCxjJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 24, 2023 at 12:04:31PM +0000, Shantur Rathore wrote:
+On Tue, Dec 05, 2023 at 09:12:22AM +0000, Peter Robinson wrote:
 
-> Remove Akash Gajjar <akash@openedev.com> from
-> MAINTAINERS as email is bouncing.
+> Remove Bharat Gooty as a maintainer as his mail is
+> bouncing.
 >=20
-> Signed-off-by: Shantur Rathore <i@shantur.com>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---7ken9Hfm1I5xt7br
+--rpAKjgagsyWCCxjJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV6ONwACgkQFHw5/5Y0
-tyzPzAv/XeBh20NvsN7iEzpl8gxxidsVoyT5vDTgQE2fCvm3gfVg+OKPKRLgymr8
-3xukCW93bPV/H19SEs8mh7hinq0ZQW/iX8FBIAdCcij18rGh8SJHDXHJaR7SyqLB
-G+ajeKcm9Mqk67Zeb1CKK9LLsAoqO/8+dqjctAQo+eQQ8be1JsUZ66/uoRNfGuDP
-QfOKbDf5MrkE3Vco0GNYiEbShtgS3zOGeXzCBHhgocAcS49tXJYBTdUox1XvtuGc
-djlHzWGRhiITaTzQOydYgD4UlHjlY9ZoA0O8ONO96cHJPJSXxZAXa4p+5XNwTJHj
-lzi1wXEb2B6yrWLXwAoHABDNUb5tf0G3SJdQUD1ePxMulET5jXpDXrBIER/f6r9l
-DuHgL/hcIAO4qtm0zPa0y4BTA4iaiE3ggK68qK43Ryjbg3n9zCpQlm1WOyq0BR2b
-F5pqLO4Ph3R+s2Lt3+5naKCR5CEBWgOKCLTJiws6aKRZIU9P1cJgR1BxLONJ5NYP
-hNfTUKQX
-=77Dr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV6OOAACgkQFHw5/5Y0
+tyzdLgwAs/oVF27zTrvN42E9BNk+R7ZK0FhK3Vp5u2uNunDATpSw522DL5AcHDCy
+7YC4HnjtwlfF58a2VZlESBtQg2SHyTSyvf/B455OTmsRr1Dh34q3UHYrgxRKSBAo
+i/vHfOTcSWPSSvKdkid/fdQUOrykcw8jHS2ZOPXMLod9vTdpT6n5vHbMPu2gPYsS
+hARRLPNr/Pf0hvTtjStVb74DS5envionGOX+SfZeeYZU4RfaXyRMiQAIj0Grd/0d
+R0N65rWGb9FiVSHawLmfLHgI70pBDpD6FlDXpk88dy6v6qvqte+i+cHNd8AlcOK5
+xpTimuqYXOQl4Gcd5sKcLd+OnWWjS0hv17GS7dNuNuTxhA4NKBVNwiRgqdcFJcox
+w5vKBoVCNxp3dVn49AgFY5TLolnp/izb7vK8wdUhadTT5681/E0LavuxyCuM/eJt
+rDWbsUNOw02S5ZKug93BcvJndGq1zNH5vh6tFQ2tepoSnoTm1xB42Kz7b2hdSv0S
+WtQYqdQD
+=tBUQ
 -----END PGP SIGNATURE-----
 
---7ken9Hfm1I5xt7br--
+--rpAKjgagsyWCCxjJ--
