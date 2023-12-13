@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827B9C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:51:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAB2C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:51:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF1AA87863;
-	Wed, 13 Dec 2023 21:51:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 76FE58783E;
+	Wed, 13 Dec 2023 21:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MkZQNzZA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JwsUfNzm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8472187863; Wed, 13 Dec 2023 21:51:12 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 87AC087833; Wed, 13 Dec 2023 21:51:14 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F31E287825
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:51:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 590FA8783E
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:51:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40c2c5a8150so67682525e9.2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:51:09 -0800 (PST)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a1e7971db2aso860228666b.3
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:51:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702500669; x=1703105469; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=QdIqnhi3ng3Q6lVg1Aq/+HQeDXzlhQNW3Mp9aQMls/Y=;
- b=MkZQNzZAqYhdMxVW6qQi98MAkZrQ98KZe0lxHcVha85gmIpDPEi3dDskJG6QMwcmh/
- MDSjMcrkWlynr3C3NP6y42H9Xw6/hIIP8TG/gC2DwQI91lDNmCjdovPpGKq2sFk6AGdw
- lOeSEowH5mFM0sFeJ3sFKxJLskYD7cK8QOGfc=
+ d=chromium.org; s=google; t=1702500672; x=1703105472; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PNpUgfdnWzeFHnzoKuI3o9ocU7ASbx8RXhRitJdEHU4=;
+ b=JwsUfNzm7Rl/jgM/Aw/JNzaiU87EV0S7gK1gbzCcOzgk1yIvhOHiObi2mIx/5KUn4T
+ isLfpl2ayVPQ1nykl562vZMpvFl/vBtveFjkuYbR7n6vEKRtccaHPdySftYNWxaJYuwl
+ IuTxx4o7ZZ3COx5ag26MkTU7qn/RAYZuN4yNA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702500669; x=1703105469;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QdIqnhi3ng3Q6lVg1Aq/+HQeDXzlhQNW3Mp9aQMls/Y=;
- b=W65IdGl7V/xeJviYOZPlwsqqM4pisSG4us3sf78eumsu0JRSWnH+WGxOrAL22DgBwo
- WeK1E/2DVt0L/UDggJIc4Db/OYSQN/tprqL1rwPMbQcUwLOErIxNpq/GE/C9u0s23sfI
- TXJ16y76RZKc3Z5EQIWX78gN7MsIycSdRkLSbX3/BkESFkh7jd2Wr3cw/Qeu0pVL9INM
- eM2Y5xLXsRcW8TZyDOvb/5st05zcA82c62FxtCduxJobFmr6BzMlN1W5sHlqIsKt9V06
- Yw+JKRzXhGNG1B4ouydgvr2ObUbcbaki4b+P5JcpjKC69ap6AqbBwfZa7wqAUN0DzOj4
- irCA==
-X-Gm-Message-State: AOJu0YxXJWdpmVgcPsO5F/wMbffs9NksEc8gxGiAjee95PMGSvhecI8q
- sYHQf5WLLKhpED97bZWoPAtwT3h2ho6Kg1mhtvAN40T7bL7c7q2OQRElQw==
-X-Google-Smtp-Source: AGHT+IGOjd5WSQ+fxE29TIzfc+prIyVAzggKGj1RWMlTQEIQAue8FkBh0Ism6DG13MBOzHL9SpRrZpTdiSuLvjLklAU=
-X-Received: by 2002:a05:600c:319b:b0:40c:38a5:3465 with SMTP id
- s27-20020a05600c319b00b0040c38a53465mr4254383wmp.133.1702500668823; Wed, 13
- Dec 2023 12:51:08 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702500672; x=1703105472;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PNpUgfdnWzeFHnzoKuI3o9ocU7ASbx8RXhRitJdEHU4=;
+ b=Ik2wDIGvo5H4z8Gw2oiJPA4HuX+JkorgPHouE9+LRrd2jBRxbGs2xgR4FU8aPEVlXt
+ Cb9Znl1m5Artpe8Pp6mHYamS7P3sIYMJu2Sn+iAj6nC2pgfYTgWbLLY9J32e42lxDjqz
+ k18a5PiWc2TfYnfD1R4WsSpvnYgHBTiftlg8HennRTFbPC0PA5BZRWP0JAyJTz/x5nxf
+ ZfpaakN1JNyokiVDNMBi8OlO6BtFbRknSqu92a1EyxXASsESXgNm+3Zlu2NwKJlggbn9
+ V3bWnMKkoTN2asdeX52ULBSo9sHtZ6XMljaweYtc63VgySJJzNTJSOgcSu/hVI6RFdOM
+ n6Pg==
+X-Gm-Message-State: AOJu0Yw+7H7/yqagoMgAzouylOgOWWHWX9DTvgs/hYP2+bsM3MrOgZYe
+ a2CZRzqVX8CV3zkHS8FxPL3pWAYDOvMYA5F1654ntQ==
+X-Google-Smtp-Source: AGHT+IElNf9x2hV6USiEN9i8Z/a8EfqD1lYB/rMaHT8fEyrXD1nwnf94Fmf5fiaCw28ft3SgpZ5cAy3mbCK3K/geBC8=
+X-Received: by 2002:a17:906:1316:b0:a19:a37:ab80 with SMTP id
+ w22-20020a170906131600b00a190a37ab80mr4711359ejb.47.1702500671533; Wed, 13
+ Dec 2023 12:51:11 -0800 (PST)
 MIME-Version: 1.0
+References: <20231202153400.537050-1-sjg@chromium.org>
+ <20231202153400.537050-2-sjg@chromium.org>
+ <20231209154839.GG2513409@bill-the-cat>
+ <CAPnjgZ0TxjEf-CvN_jC-c_7yVMb473YAjy-GH=Zrj6wwb4fqFA@mail.gmail.com>
+ <20231213204250.GJ2513409@bill-the-cat>
+In-Reply-To: <20231213204250.GJ2513409@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 13:50:57 -0700
-Message-ID: <CAPnjgZ0s24hmQ+W4NDunJ5UXq0eq28Z=U02gnK54i=5MeoS45A@mail.gmail.com>
-Subject: Please pull u-boot-dm/next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+Date: Wed, 13 Dec 2023 13:51:00 -0700
+Message-ID: <CAPnjgZ0qK5J=Q3xPK6K5BhXi2jpSYBchSR8n7mHEi15ekLn1Hg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] cyclic: Add a symbol for SPL
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng@tinylab.org>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <sean.anderson@seco.com>, 
+ Stefan Roese <sr@denx.de>, Troy Kisky <troykiskyboundary@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,163 +94,65 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-This is for the -next branch
+On Wed, 13 Dec 2023 at 13:42, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Dec 13, 2023 at 12:50:02PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Sat, 9 Dec 2023 at 08:48, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sat, Dec 02, 2023 at 08:33:48AM -0700, Simon Glass wrote:
+> > >
+> > > > The cyclic subsystem is currently enabled either in all build phases
+> > > > or none. For tools this should not be enabled, but since lib/shc256.c
+> > > > and other files include watchdog.h in the host build, we must make
+> > > > sure that it is not enabled there.
+> > >
+> > > This part is what I see as the Wrong Direction. There's some code we
+> > > really need to share with our user space tools, in order to not
+> > > copy/paste the same code. In turn, this code must be as user-space
+> > > friendly as possible. Maybe even we re-factor things a little more, if
+> > > needed, so that we _just_ have the library functions in common files,
+> > > and u-boot or user space only files have the make use of logic. I don't
+> > > feel bad about tools/ needing:
+> > > void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
+> > >                 unsigned char *output, unsigned int chunk_sz)
+> > > {
+> > >         sha256_context ctx;
+> > >         sha256_starts(&ctx);
+> > >         sha256_update(&ctx, input, ilen);
+> > >         sha256_finish(&ctx, output);
+> > > }
+> > >
+> > > (and so on for other algos) as a duplicate bit of code. Much less so
+> > > than I do about adding <linux/kconfig.h> to a direct include list (since
+> > > we should never be doing that) so that later on we can if
+> > > (IS_ENABLED(..)) the existing code.
+> >
+> > Bear in mind that we have the CONFIG_TOOLS_... options entirely to
+> > deal with the need for tools to enable features in common code. This
+> > SHA thing is a very small part of the code, compared to common code in
+> > boot/ for example.
+> >
+> > So is this really a win?
+>
+> I don't follow you here, sorry.
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/39e7e039b02e1cf8b04ea668e2bfe2cd2ef0e14d
+I mean that we share a lot of code already, code which contains CONFIG
+options. So does it matter avoiding adding one more?
 
-https://dev.azure.com/simon0972/u-boot/_build/results?buildId=56&view=results
+> We share lib/sha*.c with host tools for
+> generic mkimage functionality. I'm fine with continuing to use
+> USE_HOSTCC as the guard for U-Boot / userspace here. And I don't think
+> switching these files from:
+> #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+> to:
+>         if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
+> improves readability of the code.
 
+Perhaps I am being too hard on the #ifdefs.
 
-The following changes since commit 9565771076c2d4b0193f1741b3990695ac33c1f3:
-
-  Merge patch series "bootm: Refactoring to reduce reliance on CMDLINE
-(part A)" (2023-12-13 11:51:53 -0500)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-next-13dec23
-
-for you to fetch changes up to 39e7e039b02e1cf8b04ea668e2bfe2cd2ef0e14d:
-
-  test: vboot: Using variable 'old_dtb' before assignment (2023-12-13
-13:20:20 -0700)
-
-----------------------------------------------------------------
-minor improvements to test, acpi
-updates for new PyPl release
-
-----------------------------------------------------------------
-Dario Binacchi (1):
-      binman: doc: fix typo
-
-Heinrich Schuchardt (11):
-      acpi: move acpi_get_rsdp_addr() to acpi/acpi_table.h
-      acpi: cannot have RSDT above 4 GiB
-      acpi: simplify acpi_write_ssdt()
-      acpi: consider XSDT in acpi_find_table()
-      test: unit test for acpi_find_table()
-      acpi: fix struct acpi_xsdt
-      cmd: acpi: fix acpi list command
-      cmd: check argc for acpi dump
-      binman: elf: Using variable 'old_val' before assignment
-      test: fit: Using variable 'old_dtb' before assignment
-      test: vboot: Using variable 'old_dtb' before assignment
-
-Ilias Apalodimas (1):
-      bootstd: Fix a memory leak in the efi manager bootflow
-
-Neha Malcom Francis (3):
-      binman: etype: dm: Add entry type for TI DM
-      arm: dts: k3-*-binman: Move to using ti-dm entry type
-      doc: board: ti: k3: Mention TI_DM argument
-
-Simon Glass (28):
-      test: Add a new suite for commands
-      test: Add helper to skip to partial console line
-      test: Make UT_LIB_ASN1 depend on sandbox
-      test: Run bootstd tests only on sandbox
-      test: Handle use of stack pointer in bdinfo
-      test: bdinfo: Add missing asserts
-      test: fdt: Add a special case for real boards
-      test: font: Add dependencies on fonts
-      test: event: Only run test_event_probe() on sandbox
-      test: lmb: Move tests into the lib suite
-      test: print: Skip test on x86
-      video: Add a function to clear the display
-      sandbox: Add a dummy booti command
-      bootstd: Add a menu option to bootflow scan
-      boot: Drop size parameter from image_setup_libfdt()
-      fdt: Check for a valid fdt in oftree_ensure()
-      fdt: Improve the comment for fdt_shrink_to_minimum()
-      fdt: ppc: Drop extra size for ramdisk
-      boot: Move adding initrd earlier in image_setup_libfdt()
-      fdt: Drop the confusing casts in lmb_free()
-      fdt: Move ft_verify_fdt() before the final fixups
-      doc: Update documentation URL
-      u_boot_pylib: Correct readme formatting
-      tools: Keep test_util and patman test files in the pip release
-      u_boot_pylib: Correct files used for pip release
-      tools/make_pip: Add mention of u_boot_pylib in tool list
-      patman: Update the run script
-      tools: Move python tools to version 0.0.6
-
- MAINTAINERS                                       |   2 +-
- Makefile                                          |   1 +
- README                                            |   2 +-
- arch/arm/dts/k3-am625-sk-binman.dtsi              |   4 +-
- arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi |   4 +-
- arch/arm/dts/k3-am62a-sk-binman.dtsi              |   4 +-
- arch/arm/dts/k3-j7200-binman.dtsi                 |   4 +-
- arch/arm/dts/k3-j721e-binman.dtsi                 |   4 +-
- arch/arm/dts/k3-j721s2-binman.dtsi                |   4 +-
- arch/mips/lib/bootm.c                             |   4 +-
- arch/sandbox/lib/bootm.c                          |   7 +++
- arch/x86/include/asm/acpi_table.h                 |   9 ----
- boot/bootmeth_efi_mgr.c                           |   2 +
- boot/fdt_support.c                                |   1 -
- boot/image-board.c                                |   2 +-
- boot/image-fdt.c                                  |  27 ++++++------
- cmd/Kconfig                                       |   2 +-
- cmd/acpi.c                                        |  67
-++++++++++++++++-------------
- cmd/bootefi.c                                     |   2 +-
- cmd/bootflow.c                                    |  27 ++++++++++--
- cmd/booti.c                                       |   2 +-
- cmd/cls.c                                         |  25 ++---------
- common/console.c                                  |  31 ++++++++++++++
- configs/tools-only_defconfig                      |   1 +
- doc/board/ti/k3.rst                               |   7 +++
- doc/build/documentation.rst                       |   2 +-
- doc/usage/cmd/bootflow.rst                        |   5 +++
- drivers/core/ofnode.c                             |   5 +++
- drivers/misc/qfw.c                                |   1 +
- include/acpi/acpi_table.h                         |  11 ++++-
- include/console.h                                 |  10 +++++
- include/fdt_support.h                             |  24 ++++++++++-
- include/image.h                                   |   3 +-
- include/test/cmd.h                                |  15 +++++++
- include/test/suites.h                             |   1 +
- include/test/ut.h                                 |  30 +++++++++++++
- lib/acpi/acpi.c                                   |  20 +++++++--
- lib/acpi/base.c                                   |  23 +++++++---
- lib/acpi/ssdt.c                                   |   3 +-
- lib/efi_loader/efi_dt_fixup.c                     |   2 +-
- scripts/make_pip.sh                               |  14 +++++-
- test/Kconfig                                      |   6 +++
- test/Makefile                                     |   2 +-
- test/boot/bootflow.c                              |  82
-++++++++++++++++++++++++++++++++++++
- test/cmd/Makefile                                 |   2 +
- test/cmd/bdinfo.c                                 |  23 ++++++++--
- test/cmd/cmd_ut_cmd.c                             |  21 +++++++++
- test/cmd/fdt.c                                    |   8 +++-
- test/cmd/font.c                                   |   6 ++-
- test/cmd_ut.c                                     |   8 +++-
- test/common/event.c                               |   3 ++
- test/dm/acpi.c                                    | 124
-++++++++++++++++++++++++++++++++++++++++++++++++++----
- test/lib/lmb.c                                    |  36 ++++++----------
- test/print_ut.c                                   |   8 ++++
- test/py/tests/test_fit.py                         |   6 +--
- test/py/tests/test_vboot.py                       |   6 +--
- test/ut.c                                         |  27 ++++++++++++
- tools/binman/binman.rst                           |   2 +-
- tools/binman/elf_test.py                          |   8 ++--
- tools/binman/entries.rst                          |  14 ++++++
- tools/binman/etype/ti_dm.py                       |  22 ++++++++++
- tools/binman/ftest.py                             |   7 +++
- tools/binman/pyproject.toml                       |   6 +--
- tools/binman/test/225_ti_dm.dts                   |  13 ++++++
- tools/buildman/pyproject.toml                     |   6 +--
- tools/dtoc/pyproject.toml                         |   6 +--
- tools/patman/pyproject.toml                       |   8 ++--
- tools/u_boot_pylib/README.rst                     |   2 +-
- tools/u_boot_pylib/pyproject.toml                 |   9 ++--
- 69 files changed, 691 insertions(+), 194 deletions(-)
- create mode 100644 include/test/cmd.h
- create mode 100644 test/cmd/cmd_ut_cmd.c
- create mode 100644 tools/binman/etype/ti_dm.py
- create mode 100644 tools/binman/test/225_ti_dm.dts
+BTW we have a tools_build() function now.
 
 Regards,
 Simon
