@@ -4,50 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC8EC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 15:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57669C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 15:38:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BAD487801;
-	Wed, 13 Dec 2023 16:00:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC4C387633;
+	Wed, 13 Dec 2023 16:38:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="kNTD8Aj2";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="aZY9JN1r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4130587801; Wed, 13 Dec 2023 16:00:36 +0100 (CET)
+ id 55C41874FB; Wed, 13 Dec 2023 16:38:21 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 842BE87804
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 16:00:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F11387633
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 16:38:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-From: Alexander Dahl <ada@thorsis.com>
+Date: Wed, 13 Dec 2023 16:38:09 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
- t=1702479629;
+ t=1702481896;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=s7S2fkaPvjNH8uNKnGpGQAkrq34scZlI+RKoh8eVYdY=;
- b=kNTD8Aj2W/s10uAAPHwFf3Mc/R2Q3K2Lcp/1+Q83Bk5QPh43Ic3CjghyAVl5qpNpofDbqZ
- 96zuGIDCd/9ekFQeebGY0OOtZfMqMpYCGZNPMS7nCCjd+WldGUECX04Wq87atTtlHq2MpB
- iNUuCeyUA55eKUTl/jwOP7HN3uDNMs739nMDFoJhmcDd/gBGFRMxASUcnu56ZmRCVsnX+p
- Xhf7OBPezmw10+rnSu6JkrtCTg8DQX4YIYbrsUtCc/IzLlsCSR7OTnfjdInzCC7JDZwbTU
- MvC3KTxCCuOictND/MUzhX3pkYk6UHQhyJe/7CKiK7clV0rN47BwZIv4OcamUA==
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Terry Lv <terry.lv@nxp.com>, Marek Vasut <marex@denx.de>
-Subject: Re: =?UTF-8?B?5Zue5aSNOg==?= Build failed when CONFIG_TOOLS_LIBCRYPTO
- is disabled on latest u-boot
-Date: Wed, 13 Dec 2023 16:00:29 +0100
-Message-ID: <2370209.ElGaqSPkdT@ada-pc>
-In-Reply-To: <GVXPR04MB995027625009662BDCDB81948FBDA@GVXPR04MB9950.eurprd04.prod.outlook.com>
-References: <AM6PR04MB61521B84F78571B282FE1D828FD5A@AM6PR04MB6152.eurprd04.prod.outlook.com>
- <GVXPR04MB995027625009662BDCDB81948FBDA@GVXPR04MB9950.eurprd04.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+ to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
+ references:references; bh=euu2zaNDziFFDMS9KGfE3Y0+ma3WEsvs+wEO8T/oDvg=;
+ b=aZY9JN1r9Wy1TfhhXSCSIicROD2J0W+rvdKLTBo32RuVdd8DIbqJX6ji5LNT1wHD6R8jPV
+ 1oHc3Vg6v6tuqLtkbcNWe/oD4+ZFZvRb3R/lW5p0vOmjrovDtzIvO+ZWkDpma3O7dVNLTX
+ gTcegO6TBESphs+zNt4UEqMMe95iGAJeEMjb1iVGGq/DOnu6X4WGOOabG6xR/5ku9WqW2A
+ B5CQ2Tz36JOHwPlAgSGcwiccBTrQQkriyVZuwTEEiRunZAzUALGK0pov/Z9PpKQ27hHctG
+ pw14UMoDUJiI5fxkK6G/gdjmA3mnmHbytcssz/4iHt9s0NJ1wsqjAUnA8U63yg==
+From: Alexander Dahl <ada@thorsis.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Fabio Estevam <festevam@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Mikhail Ilin <ilin.mikhail.ol@gmail.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Stefan Eichenberger <eichest@gmail.com>,
+ Steven Lawrance <steven.lawrance@softathome.com>,
+ Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>
+Subject: Re: [PATCH v1 2/2] tools: fix build without LIBCRYPTO support
+Message-ID: <13471813.uLZWGnKmhe@ada-pc>
+Mail-Followup-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Fabio Estevam <festevam@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Mikhail Ilin <ilin.mikhail.ol@gmail.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Stefan Eichenberger <eichest@gmail.com>,
+ Steven Lawrance <steven.lawrance@softathome.com>,
+ Thomas Haemmerle <thomas.haemmerle@leica-geosystems.com>
+References: <20230121154743.667253-1-paulerwan.rio@gmail.com>
+ <20230121154743.667253-3-paulerwan.rio@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230121154743.667253-3-paulerwan.rio@gmail.com>
+X-KMail-Identity: 600738659
+X-KMail-Transport: 2015100914
+X-KMail-Link-Message: 46901
+X-KMail-Link-Type: reply
+X-KMail-Identity-Name: Alexander Dahl (thorsis, en)
+X-KMail-Transport-Name: thorsis.com
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -67,279 +99,167 @@ X-Virus-Status: Clean
 
 Hello,
 
-Am Montag, 27. November 2023, 03:53:49 CET schrieb Terry Lv:
-> Hi Experts,
->=20
->   Any feedback on this?
+Am Samstag, 21. Januar 2023, 16:47:42 CET schrieb Paul-Erwan Rio:
+> Commit <cb9faa6f98ae56d70d59505dad290dd3d381cb7b> introduced a
+> target-independent configuration to build crypto features in host tools.
+> 
+> But since commit <2c21256b27d70b5950bd059330cdab027fb6ab7e>, the build
+> without OpenSSL is broken, due to FIT signature/encryption features. Add
+> missing conditional compilation tokens to fix this.
+> 
+> Signed-off-by: Paul-Erwan Rio <paulerwan.rio@gmail.com>
 
-Bitten by the same problem again, I did a quick search on lore and found=20
-these:
+I applied your patch to my v2023.10 based tree and it fails to build
+(just using one board as example here, it is not the only one
+failing).
 
-1. Patch from 2021:
+    % buildman -o ~/build/u-boot/buildman -Pr -a '~CONFIG_TOOLS_LIBCRYPTO' sama5d27_som1_ek_mmc
+    Building current source for 2 boards (2 threads, 8 jobs per thread)
+           arm:  +   sama5d27_som1_ek_mmc1      
+    +tools/image-host.c:17:10: fatal error: openssl/pem.h: Datei oder Verzeichnis nicht gefunden
+    +   17 | #include <openssl/pem.h>
+    +      |          ^~~~~~~~~~~~~~~
+    +compilation terminated.
+    +make[2]: *** [scripts/Makefile.host:112: tools/image-host.o] Fehler 1
+    +make[1]: *** [Makefile:1857: tools] Fehler 2
+    +make: *** [Makefile:177: sub-make] Error 2
+           arm:  +   sama5d27_som1_ek_mmc                  
+    +tools/image-host.c:17:10: fatal error: openssl/pem.h: Datei oder Verzeichnis nicht gefunden
+    +   17 | #include <openssl/pem.h>
+    +      |          ^~~~~~~~~~~~~~~
+    +compilation terminated.
+    +make[2]: *** [scripts/Makefile.host:112: tools/image-host.o] Fehler 1
+    +make[1]: *** [Makefile:1857: tools] Fehler 2
+    +make: *** [Makefile:177: sub-make] Error 2
+        0    0    2 /2              sama5d27_som1_ek_mmc
+    Completed: 2 total built, 2 newly), duration 0:00:01, rate 2.00
 
-   https://lore.kernel.org/u-boot/20211021093304.25399-1-pali@kernel.org/
+Same if I apply the whole series to master (this time with english
+locale):
 
-   I carried that patch up to 2022.04, but it does not solve the whole prob=
-lem=20
-in recent U-Boot anymore.
+    % buildman -o ~/build/u-boot/buildman -Pr -a '~CONFIG_TOOLS_LIBCRYPTO' sama5d27_som1_ek_mmc
+    Building current source for 2 boards (2 threads, 8 jobs per thread)
+           arm:  +   sama5d27_som1_ek_mmc       
+    +tools/image-host.c:17:10: fatal error: openssl/pem.h: No such file or directory
+    +   17 | #include <openssl/pem.h>
+    +      |          ^~~~~~~~~~~~~~~
+    +compilation terminated.
+    +make[2]: *** [scripts/Makefile.host:112: tools/image-host.o] Error 1
+    +make[1]: *** [Makefile:1858: tools] Error 2
+    +make: *** [Makefile:177: sub-make] Error 2
+           arm:  +   sama5d27_som1_ek_mmc1                
+    +tools/image-host.c:17:10: fatal error: openssl/pem.h: No such file or directory
+    +   17 | #include <openssl/pem.h>
+    +      |          ^~~~~~~~~~~~~~~
+    +compilation terminated.
+    +make[2]: *** [scripts/Makefile.host:112: tools/image-host.o] Error 1
+    +make[1]: *** [Makefile:1858: tools] Error 2
+    +make: *** [Makefile:177: sub-make] Error 2
+        0    0    2 /2              sama5d27_som1_ek_mmc1
+    Completed: 2 total built, 2 newly), duration 0:00:01, rate 2.00
 
-2. Another patch tackling the same issue from early 2022:
-
-   https://lore.kernel.org/u-boot/20220111153120.1276641-1-marex@denx.de/
-
-3. Discussion from mid 2022:=20
-
-   https://lore.kernel.org/u-boot/1884029.XjOfZupGQm@ada/
-
-4. Patch series from earlier this year:
-
-   https://lore.kernel.org/u-boot/20230121154743.667253-1-paulerwan.rio@gma=
-il.com/
-
-As far as I can tell none of the proposed patches got applied.  I'm going t=
-o=20
-test those now which I was not aware of yet.
+Did you have time to look into this again?  Or maybe did you sent an
+updated series I overlooked?
 
 Greets
 Alex
 
->=20
->   Thanks!
->=20
-> Regards
-> Terry
-> ________________________________
-> =E5=8F=91=E4=BB=B6=E4=BA=BA: Terry Lv
-> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2023=E5=B9=B410=E6=9C=8818=E6=97=A5=
- 12:03
-> =E6=94=B6=E4=BB=B6=E4=BA=BA: u-boot@lists.denx.de <u-boot@lists.denx.de>
-> =E4=B8=BB=E9=A2=98: Build failed when CONFIG_TOOLS_LIBCRYPTO is disabled =
-on latest u-boot
->=20
-> Hi Experts,
->=20
->   We need to disable CONFIG_TOOLS_LIBCRYPTO in our u-boot.
->=20
->   But when I disable CONFIG_TOOLS_LIBCRYPTO from menuconfig, my u-boot bu=
-ild
-> fails.
-=20
-> Logs:
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-lin
-> ux/usr/bin/ld: tools/image-host.o: in function `read_pub_key':
-> image-host.c:(.text+0x8f): undefined reference to `PEM_read_X509'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: image-host.c:(.text+0x9e): undefined reference to
-> `X509_get_pubkey'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: image-host.c:(.text+0xae): undefined reference to
-> `i2d_PublicKey'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: image-host.c:(.text+0xc1): undefined reference to
-> `X509_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `openssl_err':
-> kwbimage.c:(.text+0xbb): undefined reference to `ERR_get_error'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-lin
-> ux/usr/bin/ld: kwbimage.c:(.text+0xd7): undefined reference to
-> `ERR_error_string'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwb_load_rsa_key':
-> kwbimage.c:(.text+0x19d): undefined reference to `PEM_read_RSAPrivateKey'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwb_compute_pubkey_hash':
-> kwbimage.c:(.text+0x278): undefined reference to `EVP_MD_CTX_new'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x28c): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x291): undefined reference to
-> `EVP_sha256'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x29c): undefined reference to
-> `EVP_DigestInit'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x2b6): undefined reference to
-> `EVP_DigestUpdate'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x2ca): undefined reference to
-> `EVP_DigestFinal'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x2d9): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x2e1): undefined reference to
-> `EVP_MD_CTX_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwb_export_pubkey':
-> kwbimage.c:(.text+0x3b2): undefined reference to `RSA_get0_key'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-lin
-> ux/usr/bin/ld: kwbimage.c:(.text+0x3c3): undefined reference to
-> `RSA_get0_key'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x3f5): undefined reference to
-> `BN_num_bits'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x408): undefined reference to
-> `BN_num_bits'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x47e): undefined reference to `BN_bn2b=
-in'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x49f): undefined reference to `BN_bn2b=
-in'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwb_verify':
-> kwbimage.c:(.text+0x66f): undefined reference to `EVP_PKEY_new'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-lin
-> ux/usr/bin/ld: kwbimage.c:(.text+0x686): undefined reference to
-> `EVP_PKEY_set1_RSA'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x696): undefined reference to
-> `EVP_PKEY_size'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6a6): undefined reference to
-> `EVP_MD_CTX_new'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6ba): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6bf): undefined reference to
-> `EVP_sha256'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6ca): undefined reference to
-> `EVP_DigestInit'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6e2): undefined reference to
-> `EVP_DigestUpdate'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x6fd): undefined reference to
-> `EVP_VerifyFinal'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x71d): undefined reference to
-> `EVP_MD_CTX_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x73b): undefined reference to
-> `EVP_PKEY_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x807): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x80f): undefined reference to
-> `EVP_MD_CTX_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x817): undefined reference to
-> `EVP_PKEY_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwb_sign_and_verify':
-> kwbimage.c:(.text+0x84e): undefined reference to `EVP_PKEY_new'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-lin
-> ux/usr/bin/ld: kwbimage.c:(.text+0x865): undefined reference to
-> `EVP_PKEY_set1_RSA'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x875): undefined reference to
-> `EVP_PKEY_size'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x885): undefined reference to
-> `EVP_MD_CTX_new'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x89a): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x89f): undefined reference to
-> `EVP_sha256'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x8ae): undefined reference to
-> `EVP_DigestInit'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x8cc): undefined reference to
-> `EVP_DigestUpdate'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x8ef): undefined reference to
-> `EVP_SignFinal'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x907): undefined reference to
-> `EVP_MD_CTX_reset'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x913): undefined reference to
-> `EVP_MD_CTX_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x91b): undefined reference to
-> `EVP_PKEY_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x93b): undefined reference to
-> `EVP_PKEY_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: kwbimage.c:(.text+0x9ed): undefined reference to
-> `EVP_MD_CTX_free'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `kwbimage_set_header':
-> kwbimage.c:(.text+0x26aa): undefined reference to `d2i_RSAPublicKey'
-> /opt/samba/nxa08304/gcc_cross_toolchain/5.4-zeus/sysroots/x86_64-pokysdk-=
-li
-> nux/usr/bin/ld: tools/kwbimage.o: in function `EVP_MD_CTX_cleanup':
-> kwbimage.c:(.text+0x4aa5): undefined reference to `EVP_MD_CTX_reset'
-> collect2: error: ld returned 1 exit status
-> make[1]: *** [scripts/Makefile.host:104: tools/dumpimage] Error 1
-> make[1]: *** Waiting for unfinished jobs....
->=20
->   Do you know whether there is a patch to fix the issue?
->=20
->   Thanks!
->=20
-> Regards
-> Terry
-
-
-
+> ---
+> 
+>  include/image.h    | 2 +-
+>  tools/Kconfig      | 1 +
+>  tools/fit_image.c  | 2 +-
+>  tools/image-host.c | 2 ++
+>  tools/mkimage.c    | 5 +++--
+>  5 files changed, 8 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/image.h b/include/image.h
+> index 7717a4c13d..6a616d15fb 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -1388,7 +1388,7 @@ int calculate_hash(const void *data, int data_len,
+> const char *algo, * device
+>   */
+>  #if defined(USE_HOSTCC)
+> -# if defined(CONFIG_FIT_SIGNATURE)
+> +# if CONFIG_IS_ENABLED(FIT_SIGNATURE)
+>  #  define IMAGE_ENABLE_SIGN	1
+>  #  define FIT_IMAGE_ENABLE_VERIFY	1
+>  #  include <openssl/evp.h>
+> diff --git a/tools/Kconfig b/tools/Kconfig
+> index 539708f277..cfad26302c 100644
+> --- a/tools/Kconfig
+> +++ b/tools/Kconfig
+> @@ -46,6 +46,7 @@ config TOOLS_FIT_RSASSA_PSS
+>  	  Support the rsassa-pss signature scheme in the tools builds
+> 
+>  config TOOLS_FIT_SIGNATURE
+> +	depends on TOOLS_LIBCRYPTO
+>  	def_bool y
+>  	help
+>  	  Enable signature verification of FIT uImages in the tools builds
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> index 8a18b1b0ba..148dc5df40 100644
+> --- a/tools/fit_image.c
+> +++ b/tools/fit_image.c
+> @@ -61,7 +61,7 @@ static int fit_add_file_data(struct image_tool_params
+> *params, size_t size_inc, ret = fit_set_timestamp(ptr, 0, time);
+>  	}
+> 
+> -	if (!ret)
+> +	if (CONFIG_IS_ENABLED(FIT_SIGNATURE) && !ret)
+>  		ret = fit_pre_load_data(params->keydir, dest_blob, ptr);
+> 
+>  	if (!ret) {
+> diff --git a/tools/image-host.c b/tools/image-host.c
+> index 4a24dee815..d09a03bd76 100644
+> --- a/tools/image-host.c
+> +++ b/tools/image-host.c
+> @@ -1119,6 +1119,7 @@ static int fit_config_add_verification_data(const char
+> *keydir, return 0;
+>  }
+> 
+> +#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
+>  /*
+>   * 0) open file (open)
+>   * 1) read certificate (PEM_read_X509)
+> @@ -1227,6 +1228,7 @@ int fit_pre_load_data(const char *keydir, void
+> *keydest, void *fit) out:
+>  	return ret;
+>  }
+> +#endif
+> 
+>  int fit_cipher_data(const char *keydir, void *keydest, void *fit,
+>  		    const char *comment, int require_keys,
+> diff --git a/tools/mkimage.c b/tools/mkimage.c
+> index 8306861ce5..866410934e 100644
+> --- a/tools/mkimage.c
+> +++ b/tools/mkimage.c
+> @@ -115,7 +115,7 @@ static void usage(const char *msg)
+>  		"          -B => align size in hex for FIT structure and 
+header\n"
+>  		"          -b => append the device tree binary to the 
+FIT\n"
+>  		"          -t => update the timestamp in the FIT\n");
+> -#ifdef CONFIG_FIT_SIGNATURE
+> +#if CONFIG_IS_ENABLED(FIT_SIGNATURE)
+>  	fprintf(stderr,
+>  		"Signing / verified boot options: [-k keydir] [-K dtb] [ 
+-c <comment>]
+> [-p addr] [-r] [-N engine]\n" "          -k => set directory containing
+> private keys\n"
+> @@ -130,8 +130,9 @@ static void usage(const char *msg)
+>  		"          -o => algorithm to use for signing\n");
+>  #else
+>  	fprintf(stderr,
+> -		"Signing / verified boot not supported 
+(CONFIG_FIT_SIGNATURE
+> undefined)\n"); +		"Signing / verified boot not supported
+> (CONFIG_TOOLS_FIT_SIGNATURE undefined)\n"); #endif
+> +
+>  	fprintf(stderr, "       %s -V ==> print version information and 
+exit\n",
+>  		params.cmdname);
+>  	fprintf(stderr, "Use '-T list' to see a list of available image 
+types\n");
 
