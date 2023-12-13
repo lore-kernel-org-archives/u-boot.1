@@ -4,54 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9FAC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3095DC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0615987852;
-	Wed, 13 Dec 2023 22:11:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 86C0C874ED;
+	Wed, 13 Dec 2023 22:37:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1702501916;
-	bh=3aaAqwvjp1e0N0wfT0dKQPJ4/Gx7ktbfK130SeGYbMc=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=NBhOKbNc/p9NFtbz6bugw5a/Vk4lwJrwmYk3mL1lKPpO7QFGvRdjn8hVZequyGJzM
-	 fFnpjlRIgfAaAfZ62JLTR1xIWJtl84jB9rU5TbuXomdgOmPQ1+MgmNVNxy/EkDX2+f
-	 MKv4coWsTsjSQ5NIFasbdYTRhL7iQFr6wdXgIFP/HK+/csEL25IQG6v5nBtVD1Yiay
-	 d/yvD5hsgXNJDsjqJ89Zq5oIGajFGr9kHBdxbY9CebdnM+DkiJd7J23Hd1DiT7xkJN
-	 T0qBT7kvZGtPeVPSZboRBW59d2jValEcf/VrIprjvx/kVfIPgf06/ikhv/3+3tbAYa
-	 ls+z330SDugvw==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CiTs8KPV";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E052886FF7; Wed, 13 Dec 2023 22:37:31 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ACC8D86579;
- Wed, 13 Dec 2023 22:11:53 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1702501914;
- bh=3aaAqwvjp1e0N0wfT0dKQPJ4/Gx7ktbfK130SeGYbMc=;
- h=From:To:Cc:Subject:Date:From;
- b=XQmQrwQqtBotb2fK8gClINKbcrS4pqLt7c5GejzlOR1jAKBpjUSNM3779VJH4Iqx2
- zXJA6bP6ckuQ3xW7sRsrzYX8qK3FYcK9cAr5zyMQGqv9guv4q7MMG1tSIz4mdi33FX
- /vs7VKOnFXvg+MLkCY/mzwBRp4jUF3K8QzIstzluQbK+6xDCuSikycaqPVEpLDPgDY
- 9Vz14S4uSH3aEpDQLn902jRTaPe3X8S9hfTltfXfzXZC/Rq3z69BKSOzbmS0MgVJRf
- /ytyjSRNDvfvxuZ4PeCeZ0ywMJa817UIlnuhWZLznhywoSN6x5eCy+rTyr4NxDOi07
- GTN+zangcAwaw==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Duncan Hare <DuncanCHare@yahoo.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] net: wget: Support non-default HTTP port
-Date: Wed, 13 Dec 2023 22:11:13 +0100
-Message-ID: <20231213211125.279880-1-marex@denx.de>
-X-Mailer: git-send-email 2.42.0
+ by phobos.denx.de (Postfix) with ESMTPS id 9B55787895
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 22:37:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50bf37fd2bbso10069460e87.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 13:37:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702503449; x=1703108249; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jo0vq59rtJC42RINAX0bn+85hTn+tCmZjS4xZEjMYMU=;
+ b=CiTs8KPV+wOOtVWtY0zOEdPe+PpBKZXSM1v6fBdyj5QTjdl6QbCAXXz3Cv8LQ+ZjL+
+ +rOhAPenj1oHp864TpXth3oUA9IvaJTxqP71ngoIT37hKYcAEO9PcOr5bFlburh+mak7
+ bCjjgjNqP70nnzcJksSg1KuRPVYfjksene9WMx6NjCcPMTC3j5rXepDbcJ4LclJJ9piV
+ p5pMlkIHZ86CXyBiObzJ8XdufL8bUL1fPSSi7/Rc2pIHIOyXVHPG2DWf4iUAVd+veCcj
+ WR5Da3BcPfa7xA6uxWmUgSxWmyLcCsvVAEA2Jz+BtWG+o6u0SJXRTHw1pxXoSnvHiFlY
+ LBng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702503449; x=1703108249;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jo0vq59rtJC42RINAX0bn+85hTn+tCmZjS4xZEjMYMU=;
+ b=j+8vPoJF0qzOMNSeRt92lXwBDa85pn98Mg4/6dpULU7OVMbB1qrYVi9eDEkcoxcdJO
+ csHVs6QWxjM/KVAC6RikIL3botScbi7s9Xa+EDl82pnN+af5vKt0uBGRohUxYRVZSGsj
+ PuarlO2ZJo+wK5XhUFdWoiYTyC6uGtYSkTOEZ6vZ5fvCqnJkUmOpm+uK9COwgZ9tsbxs
+ g/PC/GDcvO/pEHrMVspowiff+3FuJR0Y3Dwc3mRSIkGh3p71XeJRKIB3/GcDI6Hjvt7F
+ 074K01Gqyabre2V3lfwtXuLRcsR4O9cYaZn4XjbutX/HDEtFZSyCZED8Hd0PMp890HKm
+ jRqw==
+X-Gm-Message-State: AOJu0YyKJ4nHZtgkRHDhkh809t5AlkglbIRnn/L6NvYzt1J9xDeOCaLY
+ lGN+J+34u7LsIXLAxyV9M2jKEDR4ZZ0xDB+vc7D9vQ==
+X-Google-Smtp-Source: AGHT+IG+qhsrfp90fdNVuoGsDtrYuNilLp3ZxuIicUK0kr1XzlzLdtCLIw3GbBLted5ktwRfifglQnlMhj4LjVMrKLg=
+X-Received: by 2002:a05:6512:610:b0:50b:fbbb:2035 with SMTP id
+ b16-20020a056512061000b0050bfbbb2035mr4593965lfe.97.1702503448658; Wed, 13
+ Dec 2023 13:37:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
+ <20231207091850.17776-2-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2Y5Dzhp2c5qsoDEjY-w8NsueEHgvCSfTEbtEOPMTJ9wA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2Y5Dzhp2c5qsoDEjY-w8NsueEHgvCSfTEbtEOPMTJ9wA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 13 Dec 2023 23:36:52 +0200
+Message-ID: <CAC_iWj+zd5X7FiM7XQVPSj9a7cwxpo-VHR6TV36y98ust-Ckpg@mail.gmail.com>
+Subject: Re: [PATCH 1/2 v3] smbios: Simplify reporting of unknown values
+To: Simon Glass <sjg@chromium.org>
+Cc: trini@konsulko.com, sean.anderson@seco.com, neil.armstrong@linaro.org, 
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,133 +88,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the wget command is hard wired to HTTP port 80. This is
-inconvenient, as it is extremely easy to start trivial HTTP server
-as an unprivileged user using e.g. python http module to serve the
-files, but such a server has to run on one of the higher ports:
-"
-$ python3 -m http.server -d $(pwd) 8080
-"
+Hi Simon,
 
-Make it possible to configure HTTP server port the same way it is
-possible to configure TFTP server port, using environment variable
-'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
-fallback port. This way, users can start their own trivial server
-and conveniently download whatever files they need into U-Boot.
+On Wed, 13 Dec 2023 at 21:52, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Thu, 7 Dec 2023 at 02:19, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > If a value is not valid during the DT or SYSINFO parsing,  we explicitly
+> > set that to "Unknown Product" and "Unknown" for the product and
+> > manufacturer respectively.  It's cleaner if we move the checks insisde
+> > smbios_add_prop_si() and provide an alternative string in case the
+> > primary is NULL or empty
+> >
+> > pre-patch dmidecode
+> > <snip>
+> > Handle 0x0001, DMI type 1, 27 bytes
+> > System Information
+> >         Manufacturer: Unknown
+> >         Product Name: Unknown Product
+> >         Version: Not Specified
+> >         Serial Number: Not Specified
+> >         UUID: Not Settable
+> >         Wake-up Type: Reserved
+> >         SKU Number: Not Specified
+> >         Family: Not Specified
+> >
+> > [...]
+> >
+> > post-patch dmidecode:
+> >
+> > Handle 0x0001, DMI type 1, 27 bytes
+> > System Information
+> >         Manufacturer: Unknown
+> >         Product Name: Unknown
+> >         Version: Unknown
+> >         Serial Number: Unknown
+> >         UUID: Not Settable
+> >         Wake-up Type: Reserved
+> >         SKU Number: Unknown
+> >         Family: Unknown
+> > [...]
+> >
+> > While at it make smbios_add_prop_si() add a string directly if the prop
+> > node is NULL and replace smbios_add_string() calls with
+> > smbios_add_prop_si(ctx, NULL, ....)
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> > Changes since v2:
+> > - refactor even more code and remove the smbios_add_string calls from the
+> >   main code. Instead use smbios_add_prop() foir everything and add a
+> >   default value, in case the parsed one is NULL or emtpy
+> > Changes since v1:
+> > - None
+> >
+> >  lib/smbios.c | 73 +++++++++++++++++++++++++---------------------------
+> >  1 file changed, 35 insertions(+), 38 deletions(-)
+> >
+>
+> I actually think we should just stop here and first write a test for
+> what we already have. I can take a crack at it if you like?
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: Duncan Hare <DuncanCHare@yahoo.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
----
-V2: Update documentation
----
- doc/usage/cmd/wget.rst    |  3 ++-
- doc/usage/environment.rst |  4 ++++
- include/net/wget.h        |  1 -
- net/wget.c                | 14 ++++++++++----
- 4 files changed, 16 insertions(+), 6 deletions(-)
+I don't mind.  As I said in a previous email I'd rather do it after
+the refactoring you had in mind. But I don't see why that should stop
+the current patch from going forward.
 
-diff --git a/doc/usage/cmd/wget.rst b/doc/usage/cmd/wget.rst
-index e1e7f8d8145..8e7383b6c60 100644
---- a/doc/usage/cmd/wget.rst
-+++ b/doc/usage/cmd/wget.rst
-@@ -16,7 +16,8 @@ Description
- The wget command is used to download a file from an HTTP server.
- 
- wget command will use HTTP over TCP to download files from an HTTP server.
--Currently it can only download image from an HTTP server hosted on port 80.
-+By default the destination port is 80 and the source port is pseudo-random.
-+The environment variable *httpdstp* can be used to set the destination port.
- 
- address
-     memory address for the data downloaded
-diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-index c57b717caaf..82b6ea7b6e7 100644
---- a/doc/usage/environment.rst
-+++ b/doc/usage/environment.rst
-@@ -306,6 +306,10 @@ ethrotate
-     anything other than "no", U-Boot does go through all
-     available network interfaces.
- 
-+httpdstp
-+    If this is set, the value is used for HTTP's TCP
-+    destination port instead of the default port 80.
-+
- netretry
-     When set to "no" each network operation will
-     either succeed or fail without retrying.
-diff --git a/include/net/wget.h b/include/net/wget.h
-index da0920de118..6714f7ea573 100644
---- a/include/net/wget.h
-+++ b/include/net/wget.h
-@@ -17,6 +17,5 @@ enum wget_state {
- };
- 
- #define DEBUG_WGET		0	/* Set to 1 for debug messages */
--#define SERVER_PORT		80
- #define WGET_RETRY_COUNT	30
- #define WGET_TIMEOUT		2000UL
-diff --git a/net/wget.c b/net/wget.c
-index 6ae2237a0a8..817c5ebd5d0 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -19,6 +19,9 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+/* The default, change with environment variable 'httpdstp' */
-+#define SERVER_PORT		80
-+
- static const char bootfile1[] = "GET ";
- static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
- static const char http_eom[] = "\r\n\r\n";
-@@ -134,19 +137,22 @@ static void wget_send_stored(void)
- 	int len = retry_len;
- 	unsigned int tcp_ack_num = retry_tcp_seq_num + (len == 0 ? 1 : len);
- 	unsigned int tcp_seq_num = retry_tcp_ack_num;
-+	unsigned int server_port;
- 	uchar *ptr, *offset;
- 
-+	server_port = env_get_ulong("httpdstp", 10, SERVER_PORT) & 0xffff;
-+
- 	switch (current_wget_state) {
- 	case WGET_CLOSED:
- 		debug_cond(DEBUG_WGET, "wget: send SYN\n");
- 		current_wget_state = WGET_CONNECTING;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		packets = 0;
- 		break;
- 	case WGET_CONNECTING:
- 		pkt_q_idx = 0;
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 
- 		ptr = net_tx_packet + net_eth_hdr_size() +
-@@ -161,14 +167,14 @@ static void wget_send_stored(void)
- 
- 		memcpy(offset, &bootfile3, strlen(bootfile3));
- 		offset += strlen(bootfile3);
--		net_send_tcp_packet((offset - ptr), SERVER_PORT, our_port,
-+		net_send_tcp_packet((offset - ptr), server_port, our_port,
- 				    TCP_PUSH, tcp_seq_num, tcp_ack_num);
- 		current_wget_state = WGET_CONNECTED;
- 		break;
- 	case WGET_CONNECTED:
- 	case WGET_TRANSFERRING:
- 	case WGET_TRANSFERRED:
--		net_send_tcp_packet(0, SERVER_PORT, our_port, action,
-+		net_send_tcp_packet(0, server_port, our_port, action,
- 				    tcp_seq_num, tcp_ack_num);
- 		break;
- 	}
--- 
-2.42.0
+>
+> > diff --git a/lib/smbios.c b/lib/smbios.c
+> > index d7f4999e8b2a..444aa245a273 100644
+> > --- a/lib/smbios.c
+> > +++ b/lib/smbios.c
+> > @@ -102,9 +102,6 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
+> >         int i = 1;
+> >         char *p = ctx->eos;
+> >
+> > -       if (!*str)
+> > -               str = "Unknown";
+> > -
+> >         for (;;) {
+> >                 if (!*p) {
+> >                         ctx->last_str = p;
+> > @@ -134,11 +131,18 @@ static int smbios_add_string(struct smbios_ctx *ctx, const char *str)
+> >   *
+> >   * @ctx:       context for writing the tables
+> >   * @prop:      property to write
+>
+> which can now be NULL?
 
+No, it can't because smbios_add_string can't do that. See commit 00a871d34e2f0a.
+But instead of checking it here, I moved the code around and
+smbios_add_string is only called from smbios_add_prop_si instead of
+calling it on each failure of smbios_add_prop_si(). In that function,
+we make sure the value isn't NULL, apart from the ->get_str sysinfo
+calls -- none of these currently returns null though. I can move the
+checking back to where it was if to shield us again dump 'get_str'
+implementations, or in the future fix smbios_add_string properly, but
+that's not the point of this patch.
+
+>
+> > + * @dval:      Default value to use if the string is not found or is empty
+> >   * Return:     0 if not found, else SMBIOS string number (1 or more)
+> >   */
+> >  static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+> > -                             int sysinfo_id)
+> > +                             int sysinfo_id, const char *dval)
+> >  {
+> > +       if (!dval || !*dval)
+> > +               dval = "Unknown";
+>
+> You shouldn't need this, right? It is already the default value.
+
+Unless someone misuses smbios_add_prop_si() with both the prop and
+dval being NULL. Also see above.
+
+>
+> > +
+> > +       if (!prop)
+> > +               return smbios_add_string(ctx, dval);
+> > +
+> >         if (sysinfo_id && ctx->dev) {
+> >                 char val[SMBIOS_STR_MAX];
+> >                 int ret;
+> > @@ -151,8 +155,8 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+> >                 const char *str;
+> >
+> >                 str = ofnode_read_string(ctx->node, prop);
+> > -               if (str)
+> > -                       return smbios_add_string(ctx, str);
+> > +
+> > +               return smbios_add_string(ctx, str ? str : dval);
+> >         }
+> >
+> >         return 0;
+> > @@ -161,12 +165,15 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+> >  /**
+> >   * smbios_add_prop() - Add a property from the devicetree
+> >   *
+> > - * @prop:      property to write
+> > + * @prop:      property to write. The default string will be written if
+> > + *             prop is NULL
+> > + * @dval:      Default value to use if the string is not found or is empty
+> >   * Return:     0 if not found, else SMBIOS string number (1 or more)
+> >   */
+> > -static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop)
+> > +static int smbios_add_prop(struct smbios_ctx *ctx, const char *prop,
+> > +                          const char *dval)
+> >  {
+> > -       return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE);
+> > +       return smbios_add_prop_si(ctx, prop, SYSINFO_ID_NONE, dval);
+> >  }
+> >
+> >  static void smbios_set_eos(struct smbios_ctx *ctx, char *eos)
+> > @@ -228,11 +235,9 @@ static int smbios_write_type0(ulong *current, int handle,
+> >         memset(t, 0, sizeof(struct smbios_type0));
+> >         fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, handle);
+> >         smbios_set_eos(ctx, t->eos);
+> > -       t->vendor = smbios_add_string(ctx, "U-Boot");
+> > +       t->vendor = smbios_add_prop(ctx, NULL, "U-Boot");
+>
+> What is this doing exactly? I don't really understand this change.
+
+Re-read the patch description please, it's explained in the last paragraph.
+
+>
+> >
+
+[...]
+
+> > 2.40.1
+> >
+>
+> From my understanding, the only thing your fallback adds is the
+> manufacturer ('vendor' from DT compatible = "vendor,board"), and the
+> product (from DT model = "..."). This is an awful lot of code to make
+> that change and it seems very, confusing to me.
+
+Can we please comment on the current patchset? Future history and
+digging becomes a nightmare otherwise.
+
+>
+> Instead, can you do something like:
+>
+> if (!IS_ENABLED(CONFIG_SYSINFO)) {
+
+That beats the purpose of the series though, we want this as a
+*fallback* not disabled in the defconfig.
+
+>    const char *compat = ofnode_read_string(ofnode_root(), "compatible");
+>    const char *model = ofnode_read_string(ofnode_root(), "model");
+>    const *p = strchr(compat, ',');
+
+No. This is just a quick and dirty patch that allows you to split on
+the first comma. On top of that it won't work for cases like 'model'
+which, most of the times, only has a single value (which is again
+explained in the patch description) and you have to add a bunch of ifs
+on the code above. You could only parse compatible only, but model
+tends to be way more accurate than the one added in the compatible
+node. The first is a full description of the device while the latter
+is just a trigger for driver probing etc.
+
+random example
+model = "Socionext Developer Box";
+compatible = "socionext,developer-box", "socionext,synquacer";
+
+>    char vendor[32];
+>
+>   *vendor = '\0';
+>   if (p) {
+>       int len = p - compat + 1;
+>
+>       strlcpy(vendor, compat, len);
+>   }
+>
+>   // add these two strings to the ctx struct so that
+> smbios_write_type1() can pass them as defaults
+> }
+>
+> You still need to make the 'default' change, but much of the other
+> code could go away?
+>
+> Regards,
+> Simon
+
+Thanks
+/Ilias
