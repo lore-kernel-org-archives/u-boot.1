@@ -4,171 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C140FC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 07:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0362FC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 07:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1B4D87463;
-	Wed, 13 Dec 2023 08:59:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A7AF87646;
+	Wed, 13 Dec 2023 08:59:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ipzydZbr";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="QYzhGMjS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91C3F874D0; Wed, 13 Dec 2023 08:59:41 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::604])
+ id A60918779D; Wed, 13 Dec 2023 08:59:44 +0100 (CET)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01on0618.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1f::618])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8F9787015
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:59:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2575487646
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:59:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YzYldISHNC5Sh4wtNnelUnDwU6y3ELWWR+/0Sgkxmc0BecLjp3Mblnj1/RRZxxP1gQ4R6GsmU4vg/iyE6sCoqgELnuKLpji7csDHGjmR/2nwZsNY9Rsg2t4trnycj/HlX+zCVlie+U+wzmY3nKcZK0zGivNNhhvJbB3Z7bklAVlrD28HZ5r5oV6dMWF5+qI0cfTdm3+lP+GYj9/gZMJPUbDaXzI2S4otrGjrAdNJ8T8ErJc8oyK5OaweB8aBkKFcf+3j7fp6QbXEkCQia5KjDVtgw+KbtKdkGyzt3G52+9z/6K30R1+MfPveqeTj/3NaDZBLQNQcVD1Ndu5VcO6elw==
+ b=FrZwk6acP8QctzlEfG//L43BNobg3Gs7PuHHG6S63jrLUV7GzShlmyOQmf8WP8Pb+iSS0qoSZHhiw5Edj3MB+Usb4m+ai2+9Wl0lEVU3sq+Mge8I7y7dzj0/u+I4BR7tng9LQqBer2VbwMkuIz23JbIOXYu9iBDUBtsUV8D8B1Q0giYjULRzvWoYlaLB7tjEVleKeOXXlybpoexgyCHTsEQ92GVd/i0Lpqrcp7I5VxZ/R/d+nlvxv/nP2798XKRAwT2m6euLbukgIJBplHSS9Hmzkh4TuywF+2h7GiCZP5RKD5du36sXwoOlhhSZMESgK52lMQT0Zs33YFlZn2NKYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N8rbCTutn2laGmiY0KlU9o47BaPsQmUFjxXgrB1IfOo=;
- b=XOW4GZ9bdc/oQ3o1VNPjzg6344tvOkXyW/9MhgdS50K6rro146ISMEgx8DbotzwuKEd/U9B8I8zDLycCvm1KyS4NgjwApMLg7bxsd0nRgPB8xtqm319K6vU59GIChgtLQdEsbo46jPIRP+CQLxaPRlXGdOg2sYDP7C8/4dfla2Dw1teqWRkewRF4nvHwPMtvJybyMxz/lDALGIenD6cQ4XdzpbcR5zSkSTFSllzrluKrqPb2EZDP395MdPl8h2Wem6zzUAj4QrPEwS48RBXenbhaHAVbsVn2JNOckWLYeC1SxfT7qyCoxSmJRYZtnERe31NjycraPbTU3l7qNrA2EQ==
+ bh=DonRC/rmo1D2eCQesWXPwBxPQDU8ITGNn1OrJ8Gk4Fc=;
+ b=fqirhxnonh13JzjTrjKkCsarXv3sjh9NHK4cjhk/aS6B3WOqf/bXsPnvB108S3Dc/fCOA+ZUus8o9Qk8P2R89jxnDT8WHUyilJesKIXm+vjjOYfDD4K7bOgFoSjFFAGqipx4og6oeh1L7/gUeHRrGgpCy6/DVuxyibIrpa4EIIiG3lWOgyHVvD9+zwFzy9WIvKIybu6/MT+IYjDotiUGjoafHzAvcoDHg0LjQiyoRBKG/pefST3c6FjwPl6pPV9V1lVjsAnb8jtVcOIGuxPa480jCLL1TNHepoI+sQOleOnbmXqCmrg+ApqAWonjYh+Qd0vTHy8GPjlkLzGLWtOmFw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N8rbCTutn2laGmiY0KlU9o47BaPsQmUFjxXgrB1IfOo=;
- b=ipzydZbrPDl4ad0jwU6FGnE8Li/1TDTOINVv6pM0P5odqfYUmYho/y6NShBXUDZ7/gU5NN+tB3kfrSqafMK6np+6VvaFOVJs3mFX4z+fwKoH8jaOmj9FRzWYSn8ggSv85hgpwkmCUYHZRG+sy7EldDQKXDkJ2RsqKj3dV9Rdx9Q=
+ bh=DonRC/rmo1D2eCQesWXPwBxPQDU8ITGNn1OrJ8Gk4Fc=;
+ b=QYzhGMjSvuaaoqWJDhYG7OE3RTb2owUn2ekXRZs4S/fX6b+ZdGVd5BC0E6Z27ghGdjvZz5F6q94AMsvN4tw/cjaSOacuFw7BYAh8x1rHHeHiAsLL4f/rf+u4JwULEI8QmT0KsTIOnU4rL9M9+XwmrnnQ/3P/K2A7FFbhZ9vTzYE=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by IA0PR12MB8984.namprd12.prod.outlook.com (2603:10b6:208:492::13)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by DB8PR08MB5530.eurprd08.prod.outlook.com (2603:10a6:10:11f::24)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7068.33; Wed, 13 Dec
- 2023 07:59:35 +0000
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::39a2:42da:ea20:3349%5]) with mapi id 15.20.7068.033; Wed, 13 Dec 2023
- 07:59:35 +0000
-Message-ID: <e6ecad5d-5ec6-4ce7-a072-1c9e3b2761a1@amd.com>
-Date: Wed, 13 Dec 2023 08:59:26 +0100
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.26; Wed, 13 Dec
+ 2023 07:59:40 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::b914:d9b5:6462:13b6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::b914:d9b5:6462:13b6%5]) with mapi id 15.20.7025.022; Wed, 13 Dec 2023
+ 07:59:39 +0000
+Message-ID: <b83134b7-5862-4c22-b43c-c11d4e0e7a1e@weidmueller.com>
+Date: Wed, 13 Dec 2023 08:59:38 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] mailbox: zynqmp: support multiple child nodes
-Content-Language: en-US
-To: Tanmay Shah <tanmay.shah@amd.com>, u-boot@lists.denx.de
-References: <20231204215620.63334-1-tanmay.shah@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231204215620.63334-1-tanmay.shah@amd.com>
+Subject: Re: [PATCH v2 0/6] Enable setexpr command to print cpu-list like
+ bitmaps
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Lukas Funke
+ <lukas.funke@weidmueller.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, u-boot@lists.denx.de
+References: <20231212085236.2730768-1-lukas.funke-oss@weidmueller.com>
+ <7e505616-9053-48f6-a282-c6ce8a09a531@gmx.de>
+ <4f39df6f-2871-428e-8977-36a89b6cdc7c@gmx.de>
+ <5f58d016-58d2-4e73-8fb3-503313f91496@weidmueller.com>
+ <06e44317-5907-4b64-bdbf-ebdefd199655@gmx.de>
+From: Lukas Funke <lukas.funke-oss@weidmueller.com>
+In-Reply-To: <06e44317-5907-4b64-bdbf-ebdefd199655@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR03CA0063.eurprd03.prod.outlook.com
- (2603:10a6:803:50::34) To BYAPR12MB4758.namprd12.prod.outlook.com
- (2603:10b6:a03:a5::28)
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0091.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cb::20) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|IA0PR12MB8984:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9de8f6d6-49a2-48ff-5b34-08dbfbb171f8
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|DB8PR08MB5530:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89c285fa-fa55-4080-4b04-08dbfbb174e3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 08W82gtopHfR5ONjqzaGim1tw8MOuoTHs8dUjp1gElv0bc1kifE84hL235XPHHfquD0oKmTQSbEimwmZ+Yxrfox29dPXzA1b873B0+j25E4L70O+OBmt3s/l6hhSTEvrJChzyqzJJ4iIUzHhWEBnadREpaCm6NbPl1wT1mHSjDOkbvn4ztUrBX9CeAcTs7p5CNcQinRss7DZoW5PuFzBw17w3pGObCeWo+C5Lc+wXNCiyr7wxi325QVBct4bGV8icph6kREOa1jeQdBGHrwbTHLjixUIRRl9QruBQ/SpgxybVTD0Q629B8imnIiZFYMQPwa9ev3Sc+r/GJsl5Jwlo7XihSISmWZbQI2aZ/3aCc8l4JXJazdbffDcWzB86EEca9FQs3rzxZrXcr4whH/MxRwn8sjXExKsdvxz7dYktv8XDp+ML1Uns+/igm11+/hLSa7OIAeYJ2+B1ns45Apszy10JonzEEt5MzWjeREjVVuRvVpCh+vDzi2sOm9SclydNSana9dWfuAscY9s5HK81CpIzQbXWwTkhWTDq7+2x238nllf+BVMTTpUKvKjfo6/iGugNo/xzUAht7ibtZ8/po8ejZ3iked34jOd2mMapNerxPB0E0ZS0HYPFg36C+rVCH4dVQgNdWdMceBzIfoD6w==
+X-Microsoft-Antispam-Message-Info: N5aUk/8lWHYRh9A6IimWXF8uhIiswJtLMHi+4uM74pPhgtb7UZcGA+y2l3QCcfB+1v391JqTemd7WwaekzcIiOoxlNrxdytMufQT6Hl8Q2h1UEF9sZLSaW7ptM22Eum04O78efqsnvGqq/r2L46S831iBjbg6Vn9UwWtIF+sRHihMd/ONzLmEEc89tmiLfJaOY6PueYEBipxXynsAyniEr5c6bcMRT/22QImjlcNJ1yUFaN1+1LgKVop0F2q1kLEWQRkrsGdVNttCA6zdLQouyXbY0g3WX/uk1nRq+zrEHLEZGlo8QoUAD5hnzWOMPqrJBnzOQt6NNfqvVwxojSLADIHIyjPwCx5gSgs7LvV73uTFQdEgds3jlc+2M8H2w5v0zgr2kx218OkgoVqn+PU26JbaTiKbLHJfDEhZeQ98LDlKDywSgQZkkzEGV8HFbnJxSiVFIg0GGI6KlMrbO7G9WWEwiXzKrfUP78bwMM4auAsGoGu9Rh0au7+Uca2GRcxKfam1Ji+2ZXs9vp9+O2O9j+d6vKhhcLLq4BboZW3q7IkMmfTYpbU4EeS3enGnql+R7AmjHDo07A6tgAIhtLbJ80z1TxeoN4T5QdBEQw+5D0z85zQ2blONgL669iBKs8ocOMONqJArkQjW54mCHLAgu1oZ25gl4OKv04nGSuTe0s=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(39860400002)(366004)(376002)(396003)(346002)(136003)(230922051799003)(451199024)(64100799003)(1800799012)(186009)(66946007)(66556008)(66476007)(31686004)(15650500001)(5660300002)(2906002)(44832011)(316002)(6506007)(6666004)(8676002)(8936002)(41300700001)(38100700002)(478600001)(31696002)(86362001)(53546011)(83380400001)(6512007)(2616005)(26005)(36756003)(6486002)(45980500001)(43740500002);
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(396003)(39860400002)(376002)(366004)(136003)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(31696002)(36756003)(86362001)(31686004)(66556008)(966005)(66946007)(6512007)(53546011)(6486002)(6506007)(41300700001)(26005)(38100700002)(83380400001)(2616005)(54906003)(8676002)(5660300002)(66476007)(478600001)(4326008)(2906002)(6916009)(316002)(8936002)(87944015)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VEVBdFV0bG9OckFYQmQrQk9rMG9aWXZ3Z0cvWElQcSt0T1llc0lYb0RUb005?=
- =?utf-8?B?SUdLdGx3KzZwOW15cHhzZmZtb3ZjakNuV2hkSHE4d2lPYUxldmRaOHh4M01I?=
- =?utf-8?B?ZWZPS1N5UmlSRFBxQ0R6SE9xOE4rbVFjcG5hSURWUGJOTUdEaUgvRHl1SGdk?=
- =?utf-8?B?djZ6NzN4bThDSUZjSzNhckZ3MWtLYWlFZzFZb01URWJOVXFhR1dtOXluaWhQ?=
- =?utf-8?B?NDVnbjhXNXdtNUhpdkswbjBQRjQxTUh6My9QMjlNRzRha2hpWXgxcUw2ZDRR?=
- =?utf-8?B?U3FlMDhCdStrV1ova1F5TE16eTJLRWxoWVlmYVRVVzhJQ3BNVi82cnlYdnQw?=
- =?utf-8?B?T3VKMG5DUUxOcXA2emN3MmRJUm9IZTY1bGlSM2htS1NmNmpjSENvMFpnWHl4?=
- =?utf-8?B?bWNzdDFYNHpnanJCakp6SUg1OUpTUTVyS1hRS1R5SUNyVzZvVnk2eDVpd3lq?=
- =?utf-8?B?ZlBVblBtRTFSc2YxYkRuV0EyQWswbFR6amd3UVc2TVZ5MXhhbHVJWDJmWHJS?=
- =?utf-8?B?aVVRK1FUcXhjYzN4TysxdlYvejFwUzM1bGd5SkFieTFSNm1zcHRlSkpua1I5?=
- =?utf-8?B?ZUZJMUdxUTVNU3F4TTc4aVNySjNTS3lMUkFmSlBxQTNJb21jZEFTQzN5c2tx?=
- =?utf-8?B?MWR6Ni9UVUROL0lDUjR3cmlNYjcrZ096RXZsYkE0cXptbE9VeU0rMnFzVzBO?=
- =?utf-8?B?T1M0d1gwOXd2alFXZWlEQUttUGlPZTh3aHpGZ2NlZ0xaZWxqNVVHaW1TeWtQ?=
- =?utf-8?B?c2RwVWJMd2pnNnhReStwaDg5SUdPWEN2ZytFODRKTnBWSWVrRGFNak8vNlVY?=
- =?utf-8?B?cHMwNFBSdVNmVlRoaXcrWXF6bTBWV1hDMUlwVUk3NTRnVFlTQkh0dkhrZjBy?=
- =?utf-8?B?b0dhN1pvc2s4TExzcmJmdTE2dWEvT21qL0p4bFUvaW5rSUg1YStsVllnTW5L?=
- =?utf-8?B?Uk9GWDBLVGQwWTVwbmllUXR3T0dCNVNCUXQrWjBqbHFyNmE2Q2pTek9FMEVD?=
- =?utf-8?B?ODJpMW1KeFF5MDZHZkRzN3JWcVVaRmZmT1pIYkd2anRQWkdDYnNuRkJmSzRr?=
- =?utf-8?B?aFJIZGdpUHJhaVhIdGJINDJCRUtNc1pZbzRjSUxhaWcySEVzNitEc3o3TDAv?=
- =?utf-8?B?Q3J4RE5NbWRXU2VES2dHOHV2SjJYbkUvZVliZkRwdGRaMnV2czhveGlMMjky?=
- =?utf-8?B?N2Y0Z1NxSlVMdHFMNis2c2NTb1h6U1BQNnlvblpHUHNpWmhaaERuMVozYW9s?=
- =?utf-8?B?Q2RISis3M3h4RU8xbm9kQTV1YXdJRXFURXRSSk9nbUltdHAwNTVnRkNIcTF2?=
- =?utf-8?B?STd3NVhPOTA2UWxzTHhCeVk2SjVvb0NhS0NQZTQyQTB2SFBTVGNhT2xjd2pI?=
- =?utf-8?B?c2JjNEdaMHpNREtNazViM01EWFpHcUM2eHplNFZuMW5YNG1IcE5LNVhPcHAy?=
- =?utf-8?B?Qi9YejlpMzFZQzdVdWVidldHQzhMbHdVOEozd3QzMnRsSEFPWmlPT0JiVE1J?=
- =?utf-8?B?THd3anlCVCthUmxxYmZiMS9ySE1lUXJVajJ3T3YyVGlkamkwMEU4b3NIMlVC?=
- =?utf-8?B?cTh4K0lJay9hUW5WOEpCRVpTVnNVTU9sZTREaVRCMmNmb0xyL0x5SGpKdytQ?=
- =?utf-8?B?K3BYZERUUTMvMkFwdXVFQ3oyRGRMLzFQSWhleEJiNmVha1Blbmx5b1M2R3pP?=
- =?utf-8?B?MWRZVkltMklEemJsY1I0ZkxmbGUrSkM4amRuVHlYbDE5R0FpalVvWkZ6aVlm?=
- =?utf-8?B?ejk4YjcxZWEvVERySG9UYkQwczJTaXhmNVAwZHBCSTBNMnQ2OW5INDltRWNZ?=
- =?utf-8?B?Z2tlL1o5SHJNMmlmUENZUWxFNW12Vk43SzM3Ly9JWnJ5cjZLcGFsQ3NkbU1Q?=
- =?utf-8?B?M0M5WkcxUkNtTDB3NXdTaHptUk0zWGEyb1c1TWx6RitFQUxJR3Q1bUtES2Zw?=
- =?utf-8?B?dkZ4cHppbGFwSTZrWDhrZ3FpdGJtTjF1TFhSRnl5WkdmZFVwTlVYOWFDTW9E?=
- =?utf-8?B?NldTbmpUWmFWVS9ROXFsUkZqOWdnSHdvRUgxd0tCVjlzdGZHclY2RzNqRG1O?=
- =?utf-8?B?Zk8xb0VONWVUdEdhYkg4cmw5NkE0ZDdudWVMZEVuNkxEVEg3Z1IxbE1RcnVo?=
- =?utf-8?Q?jAQzmDH091iKcYq3hNcoKTC7u?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9de8f6d6-49a2-48ff-5b34-08dbfbb171f8
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d2ZNa1RSWjNtQTdiejFkSFpzZ2UzQWNRT2ZkQk9GSlBDcVZ4QW1kR3NKUTlw?=
+ =?utf-8?B?b2JhTEk3d3AxSzhPa3I4NFlGekNWMFRiMk9lb2FRL3dva0hadU1ZZGhCcXJu?=
+ =?utf-8?B?M3RIZ1FHd1c2bnNVb1FGb3lGNkN2RWZYeVN5VlNrWW11SnBaa0U0eWhjSkUy?=
+ =?utf-8?B?NWJlSWpLTmdBM25XMmNuUWRWT1E3MEJHVXNIelozSk5YUEFwRVo1OTVDY2tX?=
+ =?utf-8?B?SWFUMkkxYWhQTlRXNjh3SitCUWowZkNQTXFDZUxjN3BkQ3FLSFFvajhDOGJq?=
+ =?utf-8?B?Q3RtRXZNMkJmSzhTVitwbDNGNXVWNHdpa1dJU01PcTlNUy8xQmtoc0tOMnlu?=
+ =?utf-8?B?Z0VicmhONy85bVE1NlNUZ1RDdTNzZS9ZTWhFSjdESXFnTEd0b1lhajFENi9P?=
+ =?utf-8?B?NFZ5cDF5bjFRTUJ3aURza1B1eWhIMnZneXpCNmx5RWp5cUZsWFF1R0pqdHJS?=
+ =?utf-8?B?R1J1S2VRS01QTFFFdWxVZVJ6L2ZWcy9kYUVPc3lSOVpYeVFacjJTOWYrbEFO?=
+ =?utf-8?B?UVhVRE5WSDZoenNORG9yOERoLzBHb1Jpck4weGRrbjJtR09OTjZFUUJhZHhT?=
+ =?utf-8?B?TitBMFI5NXdPOE5Sem9Jay9hYnE4d1BMb2RwR1R3S0VOQU84b1Q4WXlLcWdX?=
+ =?utf-8?B?WTliMEtZb044Y0QxZUdNWUNodkNwc0dBcUV4Vy9jVnMvNEV4bmMrczZkajV0?=
+ =?utf-8?B?YXFzWk1adXdJeXVocGZNSmRIQjFWd0J1TTRXOGlLRTBCTERVMXdEVVJZdGs1?=
+ =?utf-8?B?cEllK29oS3F6dlc5RGVPbzhSZ2M2ZGpkcXZ1MkZBdk80YTAvNVBSVmpFRUUz?=
+ =?utf-8?B?bnVHN0FjanltcTZFaEdVam1zSzFFQTlqRU42M09DSTh4NzkvcmoxOFFSSzl3?=
+ =?utf-8?B?K0hIRzY3a0NiMGVxNnduWnhNVFdCTjlnNzR3Q0kyYXFjMGZ2dklQWll0djcz?=
+ =?utf-8?B?REJ4NTRxcEdtbDA3STFtL1pxd3N6V1NuY1BBcTUwUWd5MldOcjJxTHBLNk5C?=
+ =?utf-8?B?UXBKQlhQR3hRbUtZUmo4a1YrVncyRmtqUThWWVZucnB2RDkzV3F3YmhLTExn?=
+ =?utf-8?B?SkNndERNbDlDSys0MnVSaXdCaTVVcEpkYWFidWQ4cys5ZTRETFQ2STVVUkxa?=
+ =?utf-8?B?TTVORUo0d3BXbzBwYVZxUEFlcVFacnJyVkxuOGllTHNPZXhneTl4bGZDMGh6?=
+ =?utf-8?B?bWlXUFBYR3FuWm9vTlgrMXVOZnJSdEVqU0doMG41VUx5OGpVYXdGbTBtTU02?=
+ =?utf-8?B?U2d2bW4vWk5Xc3ZMSWsrYVlnN1Y4WkE5Z0JUTVYyUzNmQTMxUFdtQUp1eHp4?=
+ =?utf-8?B?ejlFTHd3LzMybE81aUxlQnZ4Nm1LR2MwaUMzY2VpVEF6SFVLNkQvdG5LR2hO?=
+ =?utf-8?B?TEdaK2dCOFdYSEltNCtIQ2x4M0JqM0ZBZ3AxY0hOMDZZOVR5cExVeFRvM3ky?=
+ =?utf-8?B?bHBNU2NGWkFJa3lMQkNGQzZiOEZXZlZDZnVJSjNHMGVlWVlBSS9lVjByUyt1?=
+ =?utf-8?B?K1k1Q1N2M3BSRTk3QW51enVDSmlVYngrNG9WSHBBZnRCelRsRENhZy9qN1Bz?=
+ =?utf-8?B?dkhoTFBqKzVTVGIwQlBzS2pIL2dDc1VMblVCL3VWTGNzSmc1ZTF5c25meStt?=
+ =?utf-8?B?Yzdoa2JMdEVITzNuSm0zaXdXSmZBc1BTcFdIb0p1QUcvREwwdWpzeU9iSDJm?=
+ =?utf-8?B?S2lDNFZ4SWY0R0VxbTU1Rjd5Q2s1alc2WGZGWnhTbVZCTDVwblNXR05QWW1Q?=
+ =?utf-8?B?VGlnc3pLRDZ4U05iRUQxa0laTzM5NjJzOElVaUZuL3BvcFNUQnZadDZ6V3Vs?=
+ =?utf-8?B?T0hSK3FRZnhqckM5LzBHTlBaMmNTbTZiZU9UYk9jeXVWZmU3eGpKbmMwSmVF?=
+ =?utf-8?B?TU9MYVl1Sm8rL1FMOWZTTENNQ1c4VUNrVnVac1RGNko4TjUzdHZZZDFncTZB?=
+ =?utf-8?B?dzFqVlVFTHVMRkJ0MXVNTVBVT1RKMzQvR3JnUWRhM0U1TTlZeFo0bGQyTk1E?=
+ =?utf-8?B?MDBDZ1RNeFMxNFRRTGJmQTNhM1ppOXFNY1JoVi8ybVlkcXhRQ1hvSlFkVm9r?=
+ =?utf-8?B?Q2RuYjdMTGNNVmFwRVU5MGgzTWduZGJYNmU3Rml1V0MwN2JXRzk5Z0cyL2dz?=
+ =?utf-8?B?ZjE2VzFPdDI1TElGbXBWTVpnWG1BOVpwTWJON2kzV285NktISXdwcGNoNFJm?=
+ =?utf-8?B?SkE9PQ==?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89c285fa-fa55-4080-4b04-08dbfbb174e3
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 07:59:34.9053 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 07:59:39.3277 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4nhn0pgxl8e9fczFTOhB0kn19ja4FviMaKyCfnrE/aa+xkw7KdA6pcmjbd5gGxdT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8984
+X-MS-Exchange-CrossTenant-UserPrincipalName: lAnpmjJXH0UhAY5fgP3o/8/hmppZfQjRsfzFzM4xsZtR8IdbFnVxHzZbTPUGsRCcC5lgL/OwJ4kvZB49JVrpsQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5530
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,38 +150,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12.12.2023 14:09, Heinrich Schuchardt wrote:
+> On 12.12.23 12:56, Lukas Funke wrote:
+>> On 12.12.2023 12:40, Heinrich Schuchardt wrote:
+>>> On 12.12.23 11:13, Heinrich Schuchardt wrote:
+>>>> On 12.12.23 09:52, lukas.funke-oss@weidmueller.com wrote:
+>>>>> From: Lukas Funke <lukas.funke@weidmueller.com>
+>>>>>
+>>>>>
+>>>>> This series enables the 'setexpr' command to print "cpu list"-like
+>>>>> bitmaps based on the printk format specifier [1].
+>>>>>
+>>>>> One use-case is to pass cpu list [2] based kernel parameter like
+>>>>> 'isolcpu', 'nohz_full', irq affinity or RCU related CPU parameter to
+>>>>> the kernel via a separate firmware variable without exposing the
+>>>>> 'bootargs' variable to directly.
+>>>>>
+>>>>> Example:
+>>>>>
+>>>>> setexpr isolcpu_bootarg=%32pbl $myCPUisolation
+>>>>
+>>>> I applied your patches on top of origin/next but your example simply
+>>>> does not work:
+>>>>
+>>>> => setenv myCPUisolation 123456789abcdef0
+>>>> => setexpr isolcpu_bootarg=%32pbl $myCPUisolation
+>>>> ## Error: illegal character '='in variable name 
+>>>> "isolcpu_bootarg=%32pbl"
+>>>>
+>>>> This produces some output:
+>>>>
+>>>> => setexpr a fmt '%32pbl' 64; echo $a
+>>>> 6
+>>>>
+>>>> But the result is completely unexpected. Number arguments in U-Boot are
+>>>> always hexadecimal. So the output should be
+>>>>
+>>>> 2,5-6
+>>>
+>>> doc/usage/cmd/setexpr.rst
+>>>
+>>> has an example showing this.
+>>>
+>>>      => setexpr foo fmt 0x%08x 63
+>>>      => echo $foo
+>>>      0x00000063
+>>>      =>
+>>>
+>>> You provide a use case for %pbl but not an reason why you want to
+>>> support %pb. If you wanted to use the output in a device-tree
+>>> manipulation the %pb output would have to be big-endian formatted.
+>>
+>> I added it to be consistent with the kernel printk. Currently there is
+>> no use case for it. Shall we remove the %pb or leave it in for 
+>> consistency?
+> 
+> As long as we don't know if usage requires big-endian or little-endian I
+> would keep it out.
 
+Ok, will remove '%bp'.
 
-On 12/4/23 22:56, Tanmay Shah wrote:
-> Current zynqmp_ipi driver is hardcoded to work with only PMU
-> mailbox node.
 > 
-> This patch series adds new driver "zynqmp_ipi_dest" to support
-> multiple child node of current "zynqmp-ipi-mailbox" node. It
-> also adds support of SMC calls to TF-A to configure IPI
-> register address space.
+> Looking at the %pbl use case: What sources of the value to convert do
+> you envision? When the argument is a pointer, e.g.
 > 
-> New driver uses compatible property recently introduced for each
-> child mailbox node. However it is important to maintain backward
-> compatibility for old dts. Previous driver now binds each child
-> node to "zynqmp_ipi_dest" driver which is needed to maintain
-> backward compatibility.
-> 
-> Tanmay Shah (4):
->    mailbox: zynqmp: support smc calls to TF-A
->    mailbox: add el3 support only for zynqmp platform
->    mailbox: zynqmp: support mulitple mboxes via device-tree
->    dts: zynqmp: add missing destination mailbox compatible
-> 
->   arch/arm/dts/zynqmp.dtsi           |   1 +
->   drivers/firmware/firmware-zynqmp.c |  22 ++++
->   drivers/mailbox/zynqmp-ipi.c       | 159 ++++++++++++++++++++++++++---
->   3 files changed, 169 insertions(+), 13 deletions(-)
-> 
-> base-commit: 5c4e9d0c74a8c2f8d0f4e0ab9cf44959298c2bad
+>    setexpr a fmt '%128pbl' *$fdtcontroladdr
 
-I have reviewed it internally multiple times and also tested on kv260 and I 
-can't see any issue. That's why applied.
+The dereference of an address in 'setexpr name fmt <format> <value> ...' 
+doesn't work. This is only handled in 'setexptr name <value>. I'll try 
+to add this to the 'fmt' case.
 
-Thanks,
-Michal
+Best regards
+Lukas
+
+> 
+> you seem to expect that the 32bit tuples are stored in low endian order.
+> 
+> Please, test the output of a 64bit number on a big-endian system. 
+> You must not assume a unsigned long long to be stored as 32bit tuples in low
+> endian order here.
+> 
+> The output does not match what is in memory. This needs to be fixed:
+> 
+> => setexpr a fmt '%128pbl' *0x8bae060; echo $a
+> 64,66,69-72,74,76,79,82,85-87,89,91-92,94,96-98,108,110,112,114,117,119,121,123,125,127
+> => setexpr a fmt '%128pb' *0x8bae060; echo $a
+> feedf00d,deadbeef,00000000,00000000
+> => mm.l 8bae060
+> 08bae060: edfe0dd0 ?
+> 08bae064: 92ac0000 ?
+> 08bae068: 78000000 ?
+> 08bae06c: 208a0000 ?
+> 
+> Here is another wrong output:
+> 
+>    =>  setexpr a fmt '%128pb' 0x92acd00dfeed; echo $a
+>    feedf00d,deadbeef,000092ac,d00dfeed
+> 
+> Expected output is
+> 
+>    00000000,00000000,000092ac,d00dfeed
+> 
+> A buffer overrun occurs. You are reading memory after the u64 value that
+> you create internally. To do it correctly you need to copy the u64 value
+> into a 128 bit buffer that has been zeroed out.
+> 
+> Best regards
+> 
+> Heinrich
+> 
+>>
+>> Best regards
+>> Lukas
+>>
+>>>
+>>> Best regards
+>>>
+>>> Heinrcih
+>>>
+>>>>
+>>>>> && env set bootargs "$isolcpu_bootarg"
+>>>>> && bootm
+>>>>>
+>>>>> [1] https://www.kernel.org/doc/Documentation/printk-formats.txt
+>>>>> [2]
+>>>>> https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
+>>>>>
+>>>>>
+>>>>> Changes in v2:
+>>>>> - Add bitmap format specifier to documentation
+>>>>>
+>>>>> Lukas Funke (6):
+>>>>>    sandbox: add generic find_next_zero_bit implementation
+>>>>>    linux: bitmap.h: add 'for_each_set_bitrange' iteration macro
+>>>>>    test: cmd: setexptr: Add tests for bitmap string format
+>>>>>    doc: printf() codes: Add bitmap format specifier
+>>>>>    lib: vsprintf: enable '%*pb[l]' format specifier
+>>>>>    cmd: printf: forward '%p' format string specifier
+>>>>>
+>>>>>   arch/sandbox/include/asm/bitops.h | 16 ++++++-
+>>>>>   cmd/printf.c                      | 29 ++++++++++++
+>>>>>   doc/develop/printf.rst            |  6 +++
+>>>>>   include/linux/bitmap.h            |  7 +++
+>>>>>   lib/vsprintf.c                    | 75
+>>>>> +++++++++++++++++++++++++++++++
+>>>>>   test/cmd/setexpr.c                |  9 ++++
+>>>>>   6 files changed, 140 insertions(+), 2 deletions(-)
+>>>>>
+>>>>
+>>>
+>>
+> 
+
