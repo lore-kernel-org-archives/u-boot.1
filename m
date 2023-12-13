@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9C20C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BF00C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:28:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 375BD86A81;
-	Wed, 13 Dec 2023 17:28:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CAA8987846;
+	Wed, 13 Dec 2023 17:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GIGOrnyo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qn0BY442";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0333787807; Wed, 13 Dec 2023 17:28:07 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 043598783E; Wed, 13 Dec 2023 17:28:38 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8F6986A81
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:28:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 64A6F87846
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:28:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-28ab6f0944bso387283a91.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:28:04 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-28ac8f1c7b1so281231a91.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:28:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702484883; x=1703089683; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702484914; x=1703089714; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I7dgK0y1GAYY63yIrlT4OeFwEj2zMrzvLduICGFJu/0=;
- b=GIGOrnyoVy+z2kNLTnnRn4rCXMHHlauDS+2844RYCFL5BU2gMBHp5EEF+KHWskCbNQ
- n3lCzDs6TId4ifqr+3CGHtp9WTDGtuuhYREMsyXIEjgIGSmH0VLLmbOucwonoEGyZfC5
- c4XaJ3fgja7bckMqxs0IRJMRNgMmNbP/FyQOWayiLV6f3YaXibFCfGcB1xncZkyDre61
- HU2wohOZY8Ebvg93oHh7gbCuM1IbWYkTeLGpWO7rMlu3gP5zUDaVJeQAEwgpwt27l5js
- XxnTBy4/ajuAn0pZ8uP2WSlkrDuKy+k0Oy12u0a3h4zNyqvNft9CfXMOMNLA+8Ujwj1x
- wtnw==
+ bh=75c0ZRR1XLPLPjb6eEhvjaR1ky0np4GZx3CRNJva0g0=;
+ b=Qn0BY442xNwwgJOQ1zR9fLMep99kvqYLVOytBoLU931vJeh5RvtDc3eswxkW7sQV2P
+ nTbEMhJ7pIcO91BxbxZZPlXF+YW3O/xUoyOt6Jw3SIk5wTeF9mVPL9D16ZPrYsazo+xR
+ bzoYmnzNrE9HUqu3/njwvysZAT/pPVrgADhLt3GuafCnZxm8T4IY1bHiUT4pkhLSEEcJ
+ cZ8txfUtvmJJP4RJ3MGzskwcWcDteHIzlIsbiGONg2TvLFv8VhZ0kkfS/loJGfNIeLEq
+ +1DMDlH//KR430QPrLpnGt8cAt856zMtPqWy7nbRrynCtlWMvZknRK6IFtZ6zHdm1aXP
+ b0Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702484883; x=1703089683;
+ d=1e100.net; s=20230601; t=1702484914; x=1703089714;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I7dgK0y1GAYY63yIrlT4OeFwEj2zMrzvLduICGFJu/0=;
- b=xBXP0YcezQiR2UAJhf9mPF01YMrz4I4yoQ6/9Lf7e3DWJaWCFNFV3ELvTj98qTQF+l
- 4PFkcNW6a+qza+skpA1RyjtLu6j1YG/RdFJUZm13LxI6R5Bbksn2nC5J+nLNtTYCGHTe
- r1zsQVsRbm1yMjyL1jeaMmzgQiWuCHp4haKuaQY1FGGh9e1Dw6RvIvkQx6YOJPsJ4a12
- RSR+45QTuTUt3ZAad42A/uDko4RxmF0ws0xtZJ3F/2CN3MgwYY6AY8GxV0cA+TKbNr1e
- yO3+EbO/+F+I8hO/fSFXvT9HxZ+tguqwD69tPrBbGgGM3MEAngaTZh1Gf/ich95PG/mb
- s/6Q==
-X-Gm-Message-State: AOJu0YxnDmYTGcAFzr+qZM1ENibJW2twSP0VaXWxcizO6Q6kHJ0lhZUn
- DN++4owSC0p/ka/vCq2jqFL3K3NASRWv7oUlP9EFdvIOd4g=
-X-Google-Smtp-Source: AGHT+IGmw2/PNXZi+l4MPamF5CYTDdljkMvEXTL1MfjUaUOwey1mNey/Szy4T/B4OGET+dKUzj5V/Uk04+ih6fuvm98=
-X-Received: by 2002:a17:90a:88f:b0:28a:e25d:a9da with SMTP id
- v15-20020a17090a088f00b0028ae25da9damr2213461pjc.3.1702484883076; Wed, 13 Dec
- 2023 08:28:03 -0800 (PST)
+ bh=75c0ZRR1XLPLPjb6eEhvjaR1ky0np4GZx3CRNJva0g0=;
+ b=OsJyHwsvenfeNdlPllhNPz28877vF867E2nuB2lptanLh7IKdcFbLDXdpFcfpZgZsO
+ 8kwHx1aWkK1bh6OSOdhQj1WysfIB28IL7nLLyt/UAoDz9rhcPugKiGRvXXLFSBwZARiS
+ nswIEtYcYGfyj8GmouMZKHwZThaBHXdeFoZmvlfib34LN5RtPA2uXS24Eo7WK82VhBwy
+ 7xQDLscuUSVXcp6G6bWdWUXARprE+1kLkp/pZhyf8fu+hPOD1RttrfREFUFOJXvgD/pO
+ GKenkeMCMO84G+9kXQXzNOZZubwkITc8mRRFv1JIkQQgakch48bejEMGZSgrb0LaAsI0
+ a2QQ==
+X-Gm-Message-State: AOJu0Yz9xZjJNBKfuTHi1CXITtWzJ4zGE5G98aYyLxDA5XZeVwOhvID+
+ qKtJqtSYdOlYsHprlFRaBy6fOgysGWPK2pC+Wbk=
+X-Google-Smtp-Source: AGHT+IFj5RJLQxElkFtVEbrMa6fpMKRoHdQ6rKYa4zpSDrtKP0ALo6Kc6OKskibsx/eR85YKs2JnbQ43zj5fbwGPRPg=
+X-Received: by 2002:a17:90b:1055:b0:28a:f2f2:331f with SMTP id
+ gq21-20020a17090b105500b0028af2f2331fmr1057511pjb.4.1702484913723; Wed, 13
+ Dec 2023 08:28:33 -0800 (PST)
 MIME-Version: 1.0
-References: <20231019120623.1476421-1-festevam@gmail.com>
-In-Reply-To: <20231019120623.1476421-1-festevam@gmail.com>
+References: <20231019123609.1489768-1-festevam@gmail.com>
+In-Reply-To: <20231019123609.1489768-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:27:50 -0300
-Message-ID: <CAOMZO5BKHoP9Zn-+ziFqhC-NLEt5TTPb2nq+qibd7eHQ8nVTqQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] arm: dts: imx8mm: Sync with linux-next 20231019
+Date: Wed, 13 Dec 2023 13:28:21 -0300
+Message-ID: <CAOMZO5CkWeoKYCMP+qdc8o+Tgpfs+k_fdqqh-ZDfaYXDdcecjA@mail.gmail.com>
+Subject: Re: [PATCH] phy: phy-imx8mq-usb: Remove .exit operation
 To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, aford173@gmail.com, tharvey@gateworks.com, 
- Fabio Estevam <festevam@denx.de>
+Cc: u-boot@lists.denx.de, aford173@gmail.com, marex@denx.de, 
+ tharvey@gateworks.com, peng.fan@nxp.com, Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,24 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 19, 2023 at 9:06=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
+On Thu, Oct 19, 2023 at 9:36=E2=80=AFAM Fabio Estevam <festevam@gmail.com> =
 wrote:
 >
 > From: Fabio Estevam <festevam@denx.de>
 >
-> Sync imx8mm.dtsi with linux-next 20231019.
+> Currently, when running "ums 0 mmc 2" and breaking it via
+> CTRL + C, the following message is seen:
 >
-> The motivation for doing this sync was a bug when doing "ums 0 mmc 1"
-> on imx8mm-evk. It worked well for the first time, but after doing
-> a CTRL+C and launching the ums again, the command did not work.
+> u-boot=3D> ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x1dacc00
+> CTRL+C - Operation aborted
+> clk usb_phy_root_clk already disabled
 >
-> Adam Ford suggested to sync imx8mm.dtsi with the Linux dts, as there was
-> a recent USB power domain reorganization there.
+> The USB PHY clock is disabled twice: first it gets disabled
+> inside imx8mq_usb_phy_power_off(), then it is disabled again
+> inside imx8mq_usb_phy_exit().
 >
-> After syncing the imx8mm.dtsi with Linux, the ums command works without
-> problem after a CTRL+C.
+> Let the USB PHY clock be disabled only once inside
+> imx8mq_usb_phy_power_off() by removing the .exit operation.
 >
-> Suggested-by: Adam Ford <aford173@gmail.com>
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Applied all to u-boot-imx next, thanks.
+Applied to u-boot-imx next, thanks.
