@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8135AC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:18:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F690C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 03:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C0BC87807;
+	by phobos.denx.de (Postfix) with ESMTP id A6FA5877D7;
 	Wed, 13 Dec 2023 04:17:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TpJXqS8K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Eg+80k+R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D8B187831; Wed, 13 Dec 2023 04:17:03 +0100 (CET)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id 03B1587838; Wed, 13 Dec 2023 04:17:05 +0100 (CET)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 138B6877EF
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:16:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DB2187808
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 04:16:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-59082c4aadaso3221582eaf.0
- for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:16:56 -0800 (PST)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-20306782371so658644fac.1
+ for <u-boot@lists.denx.de>; Tue, 12 Dec 2023 19:16:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702437414; x=1703042214; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702437416; x=1703042216; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6WsrJKB2LReO2HLQEmttdV0f5TMHaNdjFjNb7bFSaxs=;
- b=TpJXqS8KquJ52t355yCACGYhbm1FV9y4EHNDAl4D52BeKmWIuyj4ate0xH7GVfbJCN
- ytipMVx7Vpq4qgMTm/QFPE+07OrOuvGVI7GIue7q3s4b30KJxF4IPg8XtmfvZW3EI1zk
- 2+Lwt7T/FPPAJ+KIvCluJP7RZrmPmnL0FYeRp94gmxfgwYeg6c7y30NWVOoAPQAX83Av
- qTKY2cu6O5mg2eRUuBWRU7c5ZKrmWlQKK8EDn54qS8HTolPUA9ogupcsd0F3u9L9zC2f
- 6A7TMWQa5UATmFKwt+Fep+HiefdOLGlRdF9nSt6ncAuHkiutsw5Ji54g46ZwUzIfdkJ0
- PCEw==
+ bh=o1J6qIzTig9qb3eDgofK9oHcpHK5zeXCofzzH4dLRSQ=;
+ b=Eg+80k+RaKBOevoUzvEhMZu8gUNvVu9Eq8Kc06b+oxqAgw22Z2bsnfHfLspQ+x1zn2
+ rfKbNBgZyID6tE8gyuI61TYhx+qWeU/ueTEF4jYYzU0mflnHWdSZpFVAmh8YciVkcO6x
+ cKAyiNT1UDiltCel7I6ITqICF+cCES8O30ZkuJZAr/asj38/D8BzRxCeteJq1xkFzgh9
+ 9lUQTn3gTiD9SjKEtqPjaSyBk6YXAbSVYIBtbVub8vIzNW1Zel83XJTC/9bQjfVCxBMP
+ ni5dxO4nYl2VyoWup3e55SftWbAgjSzf+F+QtZan2iBpMSSxujKo95k5msWmvrfK7QPv
+ Q87w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702437414; x=1703042214;
+ d=1e100.net; s=20230601; t=1702437416; x=1703042216;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6WsrJKB2LReO2HLQEmttdV0f5TMHaNdjFjNb7bFSaxs=;
- b=A3C+aqedA0R94Nd2B0NZFbDkcngl3gTYLACzMC+pYCRe7PqAvxDBgLvPjVcF3mAr+2
- /oMzlOdyYC4MBxOpWcbp5TTSMNAqDljkj7bLlACR5vwUXPo6XXeyX/JJRZedRj49aaeT
- /NtnEsz3aDu8tdYF+02OqSk/j8aw01PUUJiMLUpRS4RmZiTSEIw/ddJVE8JbYb2cxVs0
- jsNUGJ5lm+u2WhP4N1H7BhTC48gSR8k8g5ioDaojl8dtupgP4OjUGWNhL8KjOEOAk72a
- NwQuEyXTubRWE0gr/05uH4ZcwzFtEh8X10WZpq+Dk1UromQRPjYBp5T6e0b7jaMVKiYF
- yEgQ==
-X-Gm-Message-State: AOJu0YwZH0EzTMqBHms+zViHdtJrKJvyuZ9kbkyA2ZIc5FURDuZJzOXo
- QHDF/PLW/1A/OBWNWPZhUu8hgw==
-X-Google-Smtp-Source: AGHT+IGh4AQmw2ADj8UKzH1oUwpJ17iLMBSqk1XishDQK2Y5n3my7qjKxo5zVFPZbJeltLLU6d/CRw==
-X-Received: by 2002:a05:6871:5b09:b0:1fb:75a:de75 with SMTP id
- op9-20020a0568715b0900b001fb075ade75mr8647165oac.99.1702437414644; 
- Tue, 12 Dec 2023 19:16:54 -0800 (PST)
+ bh=o1J6qIzTig9qb3eDgofK9oHcpHK5zeXCofzzH4dLRSQ=;
+ b=Amlb5Ho9/naUBM/w2JbHZRCaLucBWh9BX+GsOi3RLTMD49tjgULV6UfMz7HxkU+0Lr
+ AtPMJo7FArgMHulLenXDaACYgIm6cIM5sNHZufthq1nMiU6sj4IuSggDkYwCcbolcyAR
+ iXe/hqW+Px6kwXcbn1RmKcYfpGmyFUM8gkGu0mo1Zk+Qyz4J6aXzFpEOnd97V0dHdopF
+ N8f5aDrgdNoe0pbnXVVCTh9r2Pe1U+lFxboBwhWkh/QVp9Yhz9HlNjF1rktkS/Asj2O8
+ hta7qEm9dWRVUnYCtwwTsBr6AzUksX2eQBYq6daEavPw8pvm9/guCXGmUXA1wGIVnqXY
+ oKVQ==
+X-Gm-Message-State: AOJu0Yyy1zu5B3t4jfI/mjbyfA+lKo2sUgRV35bA3DJNN5aAlkuhMUa1
+ doe/ZrgsU8vE2jQTlpM8IixKBA==
+X-Google-Smtp-Source: AGHT+IEwQxtVQA9e31afcm/TLg9XVrzxhLhRdfkynQgxdyrf/UiifueixwH9E+YPwGDxxnKgowkI8Q==
+X-Received: by 2002:a05:6870:9a8f:b0:1fa:25d8:46a8 with SMTP id
+ hp15-20020a0568709a8f00b001fa25d846a8mr9426412oab.32.1702437415860; 
+ Tue, 12 Dec 2023 19:16:55 -0800 (PST)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- eg46-20020a05687098ae00b002030e38887dsm592394oab.41.2023.12.12.19.16.54
+ mp23-20020a056871329700b001fb634b546dsm3703709oac.14.2023.12.12.19.16.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 Dec 2023 19:16:54 -0800 (PST)
+ Tue, 12 Dec 2023 19:16:55 -0800 (PST)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  u-boot@lists.denx.de
-Subject: [PATCH 08/13] clk: exynos: Add Exynos850 clock driver
-Date: Tue, 12 Dec 2023 21:16:41 -0600
-Message-Id: <20231213031646.28828-9-semen.protsenko@linaro.org>
+Subject: [PATCH 09/13] pinctrl: exynos: Add pinctrl support for Exynos850
+Date: Tue, 12 Dec 2023 21:16:42 -0600
+Message-Id: <20231213031646.28828-10-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231213031646.28828-1-semen.protsenko@linaro.org>
 References: <20231213031646.28828-1-semen.protsenko@linaro.org>
@@ -92,239 +92,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heavily influenced by its Linux kernel counterpart. It's implemented on
-top of recently added Samsung CCF clock framework API. For now only UART
-leaf clocks are implemented, along with all preceding clocks in CMU_TOP
-and CMU_PERI. The UART baud clock is required in the serial driver, to
-get its rate for the consequent baud rate calculation.
+Add pinctrl support for Exynos850 SoC. It was mostly extracted from
+corresponding Linux kernel code [1]. Power down modes and external
+interrupt data were removed while converting the code for U-Boot, but
+everything else was kept almost unchanged.
+
+[1] drivers/pinctrl/samsung/pinctrl-exynos-arm64.c
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/clk/exynos/Kconfig         |   7 ++
- drivers/clk/exynos/Makefile        |   1 +
- drivers/clk/exynos/clk-exynos850.c | 189 +++++++++++++++++++++++++++++
- 3 files changed, 197 insertions(+)
- create mode 100644 drivers/clk/exynos/clk-exynos850.c
+ drivers/pinctrl/exynos/Kconfig             |   8 ++
+ drivers/pinctrl/exynos/Makefile            |   1 +
+ drivers/pinctrl/exynos/pinctrl-exynos850.c | 125 +++++++++++++++++++++
+ 3 files changed, 134 insertions(+)
+ create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos850.c
 
-diff --git a/drivers/clk/exynos/Kconfig b/drivers/clk/exynos/Kconfig
-index eb0efa97d15c..85ce9d6e2418 100644
---- a/drivers/clk/exynos/Kconfig
-+++ b/drivers/clk/exynos/Kconfig
-@@ -15,4 +15,11 @@ config CLK_EXYNOS7420
- 	  This enables common clock driver support for platforms based
- 	  on Samsung Exynos7420 SoC.
- 
-+config CLK_EXYNOS850
-+	bool "Clock driver for Samsung's Exynos850 SoC"
-+	select CLK_CCF
-+	help
-+	  This enables common clock driver support for platforms based
-+	  on Samsung Exynos850 SoC.
+diff --git a/drivers/pinctrl/exynos/Kconfig b/drivers/pinctrl/exynos/Kconfig
+index a60f49869b45..1b7fb62bc4ba 100644
+--- a/drivers/pinctrl/exynos/Kconfig
++++ b/drivers/pinctrl/exynos/Kconfig
+@@ -16,3 +16,11 @@ config PINCTRL_EXYNOS78x0
+ 	help
+ 	  Support pin multiplexing and pin configuration control on
+ 	  Samsung's Exynos78x0 SoC.
 +
- endmenu
-diff --git a/drivers/clk/exynos/Makefile b/drivers/clk/exynos/Makefile
-index 04c5b9a39e16..734100e2bff3 100644
---- a/drivers/clk/exynos/Makefile
-+++ b/drivers/clk/exynos/Makefile
-@@ -9,3 +9,4 @@
- 
- obj-$(CONFIG_$(SPL_TPL_)CLK_CCF)	+= clk.o clk-pll.o
- obj-$(CONFIG_CLK_EXYNOS7420)		+= clk-exynos7420.o
-+obj-$(CONFIG_CLK_EXYNOS850)		+= clk-exynos850.o
-diff --git a/drivers/clk/exynos/clk-exynos850.c b/drivers/clk/exynos/clk-exynos850.c
++config PINCTRL_EXYNOS850
++	bool "Samsung Exynos850 pinctrl driver"
++	depends on ARCH_EXYNOS && PINCTRL_FULL
++	select PINCTRL_EXYNOS
++	help
++	  Support pin multiplexing and pin configuration control on
++	  Samsung's Exynos850 SoC.
+diff --git a/drivers/pinctrl/exynos/Makefile b/drivers/pinctrl/exynos/Makefile
+index 07db970ca942..3abe1226eb74 100644
+--- a/drivers/pinctrl/exynos/Makefile
++++ b/drivers/pinctrl/exynos/Makefile
+@@ -6,3 +6,4 @@
+ obj-$(CONFIG_PINCTRL_EXYNOS)		+= pinctrl-exynos.o
+ obj-$(CONFIG_PINCTRL_EXYNOS7420)	+= pinctrl-exynos7420.o
+ obj-$(CONFIG_PINCTRL_EXYNOS78x0)	+= pinctrl-exynos78x0.o
++obj-$(CONFIG_PINCTRL_EXYNOS850)		+= pinctrl-exynos850.o
+diff --git a/drivers/pinctrl/exynos/pinctrl-exynos850.c b/drivers/pinctrl/exynos/pinctrl-exynos850.c
 new file mode 100644
-index 000000000000..cf94a3e1b646
+index 000000000000..2445dd752ea8
 --- /dev/null
-+++ b/drivers/clk/exynos/clk-exynos850.c
-@@ -0,0 +1,189 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/drivers/pinctrl/exynos/pinctrl-exynos850.c
+@@ -0,0 +1,125 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Samsung Exynos850 clock driver.
 + * Copyright (c) 2023 Linaro Ltd.
 + * Author: Sam Protsenko <semen.protsenko@linaro.org>
++ *
++ * Samsung Exynos USI driver (Universal Serial Interface).
 + */
 +
 +#include <dm.h>
-+#include <asm/io.h>
-+#include <dt-bindings/clock/exynos850.h>
-+#include "clk.h"
++#include <dm/pinctrl.h>
++#include "pinctrl-exynos.h"
 +
-+/* ---- CMU_TOP ------------------------------------------------------------- */
++#define EXYNOS850_PIN_BANK(pins, reg, id)		\
++	{						\
++		.type		= &exynos850_bank_type,	\
++		.offset		= reg,			\
++		.nr_pins	= pins,			\
++		.name		= id			\
++	}
 +
-+/* Register Offset definitions for CMU_TOP (0x120e0000) */
-+#define PLL_CON0_PLL_MMC			0x0100
-+#define PLL_CON3_PLL_MMC			0x010c
-+#define PLL_CON0_PLL_SHARED0			0x0140
-+#define PLL_CON3_PLL_SHARED0			0x014c
-+#define PLL_CON0_PLL_SHARED1			0x0180
-+#define PLL_CON3_PLL_SHARED1			0x018c
-+#define CLK_CON_MUX_MUX_CLKCMU_PERI_BUS		0x1070
-+#define CLK_CON_MUX_MUX_CLKCMU_PERI_IP		0x1074
-+#define CLK_CON_MUX_MUX_CLKCMU_PERI_UART	0x1078
-+#define CLK_CON_DIV_CLKCMU_PERI_BUS		0x187c
-+#define CLK_CON_DIV_CLKCMU_PERI_IP		0x1880
-+#define CLK_CON_DIV_CLKCMU_PERI_UART		0x1884
-+#define CLK_CON_DIV_PLL_SHARED0_DIV2		0x188c
-+#define CLK_CON_DIV_PLL_SHARED0_DIV3		0x1890
-+#define CLK_CON_DIV_PLL_SHARED0_DIV4		0x1894
-+#define CLK_CON_DIV_PLL_SHARED1_DIV2		0x1898
-+#define CLK_CON_DIV_PLL_SHARED1_DIV3		0x189c
-+#define CLK_CON_DIV_PLL_SHARED1_DIV4		0x18a0
-+#define CLK_CON_GAT_GATE_CLKCMU_PERI_BUS	0x2080
-+#define CLK_CON_GAT_GATE_CLKCMU_PERI_IP		0x2084
-+#define CLK_CON_GAT_GATE_CLKCMU_PERI_UART	0x2088
-+
-+static const struct samsung_pll_clock top_pure_pll_clks[] = {
-+	PLL(pll_0822x, CLK_FOUT_SHARED0_PLL, "fout_shared0_pll", "clock-oscclk",
-+	    PLL_CON3_PLL_SHARED0),
-+	PLL(pll_0822x, CLK_FOUT_SHARED1_PLL, "fout_shared1_pll", "clock-oscclk",
-+	    PLL_CON3_PLL_SHARED1),
-+	PLL(pll_0831x, CLK_FOUT_MMC_PLL, "fout_mmc_pll", "clock-oscclk",
-+	    PLL_CON3_PLL_MMC),
++/* CON, DAT, PUD, DRV */
++static const struct samsung_pin_bank_type exynos850_bank_type = {
++	.fld_width = { 4, 1, 4, 4, },
++	.reg_offset = { 0x00, 0x04, 0x08, 0x0c, },
 +};
 +
-+/* List of parent clocks for Muxes in CMU_TOP */
-+PNAME(mout_shared0_pll_p)	= { "clock-oscclk", "fout_shared0_pll" };
-+PNAME(mout_shared1_pll_p)	= { "clock-oscclk", "fout_shared1_pll" };
-+PNAME(mout_mmc_pll_p)		= { "clock-oscclk", "fout_mmc_pll" };
-+/* List of parent clocks for Muxes in CMU_TOP: for CMU_PERI */
-+PNAME(mout_peri_bus_p)		= { "dout_shared0_div4", "dout_shared1_div4" };
-+PNAME(mout_peri_uart_p)		= { "clock-oscclk", "dout_shared0_div4",
-+				    "dout_shared1_div4", "clock-oscclk" };
-+PNAME(mout_peri_ip_p)		= { "clock-oscclk", "dout_shared0_div4",
-+				    "dout_shared1_div4", "clock-oscclk" };
-+
-+static const struct samsung_mux_clock top_pure_mux_clks[] = {
-+	MUX(CLK_MOUT_SHARED0_PLL, "mout_shared0_pll", mout_shared0_pll_p,
-+	    PLL_CON0_PLL_SHARED0, 4, 1),
-+	MUX(CLK_MOUT_SHARED1_PLL, "mout_shared1_pll", mout_shared1_pll_p,
-+	    PLL_CON0_PLL_SHARED1, 4, 1),
-+	MUX(CLK_MOUT_MMC_PLL, "mout_mmc_pll", mout_mmc_pll_p,
-+	    PLL_CON0_PLL_MMC, 4, 1),
++static const struct pinctrl_ops exynos850_pinctrl_ops = {
++	.set_state = exynos_pinctrl_set_state
 +};
 +
-+static const struct samsung_mux_clock top_peri_mux_clks[] = {
-+	MUX(CLK_MOUT_PERI_BUS, "mout_peri_bus", mout_peri_bus_p,
-+	    CLK_CON_MUX_MUX_CLKCMU_PERI_BUS, 0, 1),
-+	MUX(CLK_MOUT_PERI_UART, "mout_peri_uart", mout_peri_uart_p,
-+	    CLK_CON_MUX_MUX_CLKCMU_PERI_UART, 0, 2),
-+	MUX(CLK_MOUT_PERI_IP, "mout_peri_ip", mout_peri_ip_p,
-+	    CLK_CON_MUX_MUX_CLKCMU_PERI_IP, 0, 2),
++/* pin banks of exynos850 pin-controller 0 (ALIVE) */
++static const struct samsung_pin_bank_data exynos850_pin_banks0[] = {
++	EXYNOS850_PIN_BANK(8, 0x000, "gpa0"),
++	EXYNOS850_PIN_BANK(8, 0x020, "gpa1"),
++	EXYNOS850_PIN_BANK(8, 0x040, "gpa2"),
++	EXYNOS850_PIN_BANK(8, 0x060, "gpa3"),
++	EXYNOS850_PIN_BANK(4, 0x080, "gpa4"),
++	EXYNOS850_PIN_BANK(3, 0x0a0, "gpq0"),
 +};
 +
-+static const struct samsung_div_clock top_pure_div_clks[] = {
-+	DIV(CLK_DOUT_SHARED0_DIV3, "dout_shared0_div3", "mout_shared0_pll",
-+	    CLK_CON_DIV_PLL_SHARED0_DIV3, 0, 2),
-+	DIV(CLK_DOUT_SHARED0_DIV2, "dout_shared0_div2", "mout_shared0_pll",
-+	    CLK_CON_DIV_PLL_SHARED0_DIV2, 0, 1),
-+	DIV(CLK_DOUT_SHARED1_DIV3, "dout_shared1_div3", "mout_shared1_pll",
-+	    CLK_CON_DIV_PLL_SHARED1_DIV3, 0, 2),
-+	DIV(CLK_DOUT_SHARED1_DIV2, "dout_shared1_div2", "mout_shared1_pll",
-+	    CLK_CON_DIV_PLL_SHARED1_DIV2, 0, 1),
-+	DIV(CLK_DOUT_SHARED0_DIV4, "dout_shared0_div4", "dout_shared0_div2",
-+	    CLK_CON_DIV_PLL_SHARED0_DIV4, 0, 1),
-+	DIV(CLK_DOUT_SHARED1_DIV4, "dout_shared1_div4", "dout_shared1_div2",
-+	    CLK_CON_DIV_PLL_SHARED1_DIV4, 0, 1),
++/* pin banks of exynos850 pin-controller 1 (CMGP) */
++static const struct samsung_pin_bank_data exynos850_pin_banks1[] = {
++	EXYNOS850_PIN_BANK(1, 0x000, "gpm0"),
++	EXYNOS850_PIN_BANK(1, 0x020, "gpm1"),
++	EXYNOS850_PIN_BANK(1, 0x040, "gpm2"),
++	EXYNOS850_PIN_BANK(1, 0x060, "gpm3"),
++	EXYNOS850_PIN_BANK(1, 0x080, "gpm4"),
++	EXYNOS850_PIN_BANK(1, 0x0a0, "gpm5"),
++	EXYNOS850_PIN_BANK(1, 0x0c0, "gpm6"),
++	EXYNOS850_PIN_BANK(1, 0x0e0, "gpm7"),
 +};
 +
-+static const struct samsung_div_clock top_peri_div_clks[] = {
-+	DIV(CLK_DOUT_PERI_BUS, "dout_peri_bus", "gout_peri_bus",
-+	    CLK_CON_DIV_CLKCMU_PERI_BUS, 0, 4),
-+	DIV(CLK_DOUT_PERI_UART, "dout_peri_uart", "gout_peri_uart",
-+	    CLK_CON_DIV_CLKCMU_PERI_UART, 0, 4),
-+	DIV(CLK_DOUT_PERI_IP, "dout_peri_ip", "gout_peri_ip",
-+	    CLK_CON_DIV_CLKCMU_PERI_IP, 0, 4),
++/* pin banks of exynos850 pin-controller 2 (AUD) */
++static const struct samsung_pin_bank_data exynos850_pin_banks2[] = {
++	EXYNOS850_PIN_BANK(5, 0x000, "gpb0"),
++	EXYNOS850_PIN_BANK(5, 0x020, "gpb1"),
 +};
 +
-+static const struct samsung_gate_clock top_peri_gate_clks[] = {
-+	GATE(CLK_GOUT_PERI_BUS, "gout_peri_bus", "mout_peri_bus",
-+	     CLK_CON_GAT_GATE_CLKCMU_PERI_BUS, 21, 0, 0),
-+	GATE(CLK_GOUT_PERI_UART, "gout_peri_uart", "mout_peri_uart",
-+	     CLK_CON_GAT_GATE_CLKCMU_PERI_UART, 21, 0, 0),
-+	GATE(CLK_GOUT_PERI_IP, "gout_peri_ip", "mout_peri_ip",
-+	     CLK_CON_GAT_GATE_CLKCMU_PERI_IP, 21, 0, 0),
++/* pin banks of exynos850 pin-controller 3 (HSI) */
++static const struct samsung_pin_bank_data exynos850_pin_banks3[] = {
++	EXYNOS850_PIN_BANK(6, 0x000, "gpf2"),
 +};
 +
-+static const struct samsung_clk_group top_cmu_clks[] = {
-+	/* CMU_TOP_PURECLKCOMP */
-+	{ S_CLK_PLL, top_pure_pll_clks, ARRAY_SIZE(top_pure_pll_clks) },
-+	{ S_CLK_MUX, top_pure_mux_clks, ARRAY_SIZE(top_pure_mux_clks) },
-+	{ S_CLK_DIV, top_pure_div_clks, ARRAY_SIZE(top_pure_div_clks) },
-+
-+	/* CMU_TOP clocks for CMU_PERI */
-+	{ S_CLK_MUX, top_peri_mux_clks, ARRAY_SIZE(top_peri_mux_clks) },
-+	{ S_CLK_GATE, top_peri_gate_clks, ARRAY_SIZE(top_peri_gate_clks) },
-+	{ S_CLK_DIV, top_peri_div_clks, ARRAY_SIZE(top_peri_div_clks) },
++/* pin banks of exynos850 pin-controller 4 (CORE) */
++static const struct samsung_pin_bank_data exynos850_pin_banks4[] = {
++	EXYNOS850_PIN_BANK(4, 0x000, "gpf0"),
++	EXYNOS850_PIN_BANK(8, 0x020, "gpf1"),
 +};
 +
-+static int exynos850_cmu_top_probe(struct udevice *dev)
-+{
-+	return samsung_cmu_register_one(dev, top_cmu_clks,
-+					ARRAY_SIZE(top_cmu_clks));
-+}
++/* pin banks of exynos850 pin-controller 5 (PERI) */
++static const struct samsung_pin_bank_data exynos850_pin_banks5[] = {
++	EXYNOS850_PIN_BANK(2, 0x000, "gpg0"),
++	EXYNOS850_PIN_BANK(6, 0x020, "gpp0"),
++	EXYNOS850_PIN_BANK(4, 0x040, "gpp1"),
++	EXYNOS850_PIN_BANK(4, 0x060, "gpp2"),
++	EXYNOS850_PIN_BANK(8, 0x080, "gpg1"),
++	EXYNOS850_PIN_BANK(8, 0x0a0, "gpg2"),
++	EXYNOS850_PIN_BANK(1, 0x0c0, "gpg3"),
++	EXYNOS850_PIN_BANK(3, 0x0e0, "gpc0"),
++	EXYNOS850_PIN_BANK(6, 0x100, "gpc1"),
++};
 +
-+static const struct udevice_id exynos850_cmu_top_ids[] = {
-+	{ .compatible = "samsung,exynos850-cmu-top" },
++static const struct samsung_pin_ctrl exynos850_pin_ctrl[] = {
++	{
++		/* pin-controller instance 0 ALIVE data */
++		.pin_banks	= exynos850_pin_banks0,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks0),
++	}, {
++		/* pin-controller instance 1 CMGP data */
++		.pin_banks	= exynos850_pin_banks1,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks1),
++	}, {
++		/* pin-controller instance 2 AUD data */
++		.pin_banks	= exynos850_pin_banks2,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks2),
++	}, {
++		/* pin-controller instance 3 HSI data */
++		.pin_banks	= exynos850_pin_banks3,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks3),
++	}, {
++		/* pin-controller instance 4 CORE data */
++		.pin_banks	= exynos850_pin_banks4,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks4),
++	}, {
++		/* pin-controller instance 5 PERI data */
++		.pin_banks	= exynos850_pin_banks5,
++		.nr_banks	= ARRAY_SIZE(exynos850_pin_banks5),
++	},
++	{/* list terminator */}
++};
++
++static const struct udevice_id exynos850_pinctrl_ids[] = {
++	{ .compatible = "samsung,exynos850-pinctrl",
++		.data = (ulong)exynos850_pin_ctrl },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(exynos850_cmu_top) = {
-+	.name		= "exynos850-cmu-top",
-+	.id		= UCLASS_CLK,
-+	.of_match	= exynos850_cmu_top_ids,
-+	.ops		= &ccf_clk_ops,
-+	.probe		= exynos850_cmu_top_probe,
-+	.flags		= DM_FLAG_PRE_RELOC,
-+};
-+
-+/* ---- CMU_PERI ------------------------------------------------------------ */
-+
-+/* Register Offset definitions for CMU_PERI (0x10030000) */
-+#define PLL_CON0_MUX_CLKCMU_PERI_BUS_USER	0x0600
-+#define PLL_CON0_MUX_CLKCMU_PERI_UART_USER	0x0630
-+#define CLK_CON_GAT_GOUT_PERI_UART_IPCLK	0x20a8
-+#define CLK_CON_GAT_GOUT_PERI_UART_PCLK		0x20ac
-+
-+/* List of parent clocks for Muxes in CMU_PERI */
-+PNAME(mout_peri_bus_user_p)	= { "clock-oscclk", "dout_peri_bus" };
-+PNAME(mout_peri_uart_user_p)	= { "clock-oscclk", "dout_peri_uart" };
-+
-+static const struct samsung_mux_clock peri_mux_clks[] = {
-+	MUX(CLK_MOUT_PERI_BUS_USER, "mout_peri_bus_user", mout_peri_bus_user_p,
-+	    PLL_CON0_MUX_CLKCMU_PERI_BUS_USER, 4, 1),
-+	MUX(CLK_MOUT_PERI_UART_USER, "mout_peri_uart_user",
-+	    mout_peri_uart_user_p, PLL_CON0_MUX_CLKCMU_PERI_UART_USER, 4, 1),
-+};
-+
-+static const struct samsung_gate_clock peri_gate_clks[] = {
-+	GATE(CLK_GOUT_UART_IPCLK, "gout_uart_ipclk", "mout_peri_uart_user",
-+	     CLK_CON_GAT_GOUT_PERI_UART_IPCLK, 21, 0, 0),
-+	GATE(CLK_GOUT_UART_PCLK, "gout_uart_pclk", "mout_peri_bus_user",
-+	     CLK_CON_GAT_GOUT_PERI_UART_PCLK, 21, 0, 0),
-+};
-+
-+static const struct samsung_clk_group peri_cmu_clks[] = {
-+	{ S_CLK_MUX, peri_mux_clks, ARRAY_SIZE(peri_mux_clks) },
-+	{ S_CLK_GATE, peri_gate_clks, ARRAY_SIZE(peri_gate_clks) },
-+};
-+
-+static int exynos850_cmu_peri_probe(struct udevice *dev)
-+{
-+	return samsung_register_cmu(dev, peri_cmu_clks, exynos850_cmu_top);
-+}
-+
-+static const struct udevice_id exynos850_cmu_peri_ids[] = {
-+	{ .compatible = "samsung,exynos850-cmu-peri" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(exynos850_cmu_peri) = {
-+	.name		= "exynos850-cmu-peri",
-+	.id		= UCLASS_CLK,
-+	.of_match	= exynos850_cmu_peri_ids,
-+	.ops		= &ccf_clk_ops,
-+	.probe		= exynos850_cmu_peri_probe,
-+	.flags		= DM_FLAG_PRE_RELOC,
++U_BOOT_DRIVER(pinctrl_exynos850) = {
++	.name		= "pinctrl_exynos850",
++	.id		= UCLASS_PINCTRL,
++	.of_match	= exynos850_pinctrl_ids,
++	.priv_auto	= sizeof(struct exynos_pinctrl_priv),
++	.ops		= &exynos850_pinctrl_ops,
++	.probe		= exynos_pinctrl_probe,
 +};
 -- 
 2.39.2
