@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8AADC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73954C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:27:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FCCC8782F;
-	Wed, 13 Dec 2023 17:26:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 012FE877E2;
+	Wed, 13 Dec 2023 17:27:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hgp/S3k3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ab+FIn5r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 591DB8782F; Wed, 13 Dec 2023 17:26:26 +0100 (CET)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id F1FF986564; Wed, 13 Dec 2023 17:27:02 +0100 (CET)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1872877E2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:26:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6F918782F
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:27:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6ceccf6d88fso973877b3a.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:26:23 -0800 (PST)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-55b5a37acb6so1144597a12.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:27:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702484782; x=1703089582; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702484819; x=1703089619; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AOol0FgkpcJxPxZGqtmcaeTk3Ir652hMQBNEl6SPk+I=;
- b=hgp/S3k352PGujcTUF/Nqd7q4IQMcYJkJ0tAlPB/JlVZTJIal/h2cM8eJPH4p7SxiO
- SHUtNoGzeh7kmRssaG6dQh+mJQZycgXOz2JBtBfVLJTSF6cNBVwBtxmCpzmWNX26pbM3
- To9172XizSfxiFpeaE7Ls6QJi3jgACoqvM/l4BK+ThgT2lhEvX/gJD+y8f8XxLh5iU+0
- UxEK1L69OnYSspMQc5frBD0AAt+6PcpGi/9fif5+6HRhkaV/rs2REhfzct0T9i8nNkt3
- XZGI000GZiCCpAQMw2lViq/jyn8zvdUSWg0dl++GbYizF/VZO2QRWn0hKU86wn69Z+sm
- Ig6A==
+ bh=J50STkWp+8UHvw0TSviH/Da2vFEJnfO4JAD07+X8KzU=;
+ b=ab+FIn5rjSMGFj2VLvIGigilUHjqoDOYO2bzbKwo8WYgJGMvNcERoemEyEfP8jQp04
+ V5t9ekBBHf2sr0PJL2Jt5QHy9kOdPzxSx8e1V28CQXUqXAD29V0chpPFYaMotQze8aAr
+ enrbdBEE1sjzd70vbtdBddVkvdCBOG5x3P+KXjpJE4eZZRcaXHrZmLnP/nGrl1tudywt
+ Z2tOSurP3xUflRMmaAi+VNYUp/wkH1k1LmUzP34gVbB58zrdrVjk2eWNgjGcuNcNqbYD
+ DIBZjzB9K9XlDlCTSIUk2SCdvOl4c12Um7slLGcNuBjGLcG7ZjuiduQVpAaU7HVMYiJA
+ qVLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702484782; x=1703089582;
+ d=1e100.net; s=20230601; t=1702484819; x=1703089619;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AOol0FgkpcJxPxZGqtmcaeTk3Ir652hMQBNEl6SPk+I=;
- b=M2G9ZQzN/Updb3dQ3kcyW0oHgXLRuej4rTfGWYHRTyBqSWCZTB6RTXdjo0b1DF/k79
- g9+05Kf37lqTePtVhzW4RBVxkPE68aB2X4sELiRA62npz39+xv/yEjpZgddLVJ+qJFkx
- cmvWRtw0V9O1DKZelhg4Gb4Rma9iMJxrpISUr12M7FCHeD1aOlaEpRA9hPa5Rww0uSqV
- /9VP1JKGKaBEp1Tgq2a5QfyP5oP2AnQO4nwORJjb56TjRR8HZ+E7eYY91ND5QO9Do9Xg
- 2I+rFOL3nTAZjdXc1VCe69nuoE24KDR8GhAL7NINUfETHSy3ru66tD9DdAa9qWiBTq9u
- OvHg==
-X-Gm-Message-State: AOJu0YxVdk3pPcsXAN3kwIlxhfApOv1Uxah3NkuLGw/Di7yMfZRUiLny
- nXn1NayowojJG4FDD9Pzis6CjanCMwbuCbuQbTk=
-X-Google-Smtp-Source: AGHT+IEaXBFmEEu2zeTztGvqgCcb5VBkcWHP4Se0aDwlRP0nWCvIfMVZh17o/smDsSFv8aRWT7jQVkFTfomMvtxGvC4=
-X-Received: by 2002:a05:6a00:1254:b0:6bc:ff89:a2fc with SMTP id
- u20-20020a056a00125400b006bcff89a2fcmr17511111pfi.2.1702484781915; Wed, 13
- Dec 2023 08:26:21 -0800 (PST)
+ bh=J50STkWp+8UHvw0TSviH/Da2vFEJnfO4JAD07+X8KzU=;
+ b=B4BXTpfC8vxj5M7L0L+MKXBDdq7fKk3KZKT55mZB0Dr0IRrFUX7tWAjmLesUNcdOU9
+ Y690n0j75cxGJoQymabiPnCdmvMWmgrCzA15/hk8TzIdsxesRWyiX7w7EeUQvcwGWdtS
+ i1542OqAdanYkqkKsiJ3w8XCYXu7YCCCqioZRBJKwDL0+w3IFTUGB9qBvSQktKb5ltid
+ fkYXsQhvzqToaZUEMwOrNLNArqgQXQJHBKdWM6SePhBF3pCNaZf5Wm7AIcTrAqTQdOlk
+ 1ILdefw80GN2ClzBt58Vh3KE+x2pDzabWrJD6Qp2bsmTiqUKYBKtEBn634p603o76Gdf
+ x9Cw==
+X-Gm-Message-State: AOJu0YzaeZEvK04uxqrfwJct9Gro1wHRT24kRaJD5LFDs707zBH7j8Wy
+ 5nRTEC9wQM3WWPzyyanJwmlbwak09zviO4YaR16Fol9nr/s=
+X-Google-Smtp-Source: AGHT+IFk+hJBlKPmgZRf+RU26y/AvF9gYsFElcR27WQ8D08P2V+yNZNVMnznK6szb8r/GdMy59lSL7ZJnSX5L3x9HJo=
+X-Received: by 2002:a05:6a21:78a3:b0:18b:a1d7:a736 with SMTP id
+ bf35-20020a056a2178a300b0018ba1d7a736mr18428264pzc.6.1702484819022; Wed, 13
+ Dec 2023 08:26:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20231018183352.2168191-1-tharvey@gateworks.com>
-In-Reply-To: <20231018183352.2168191-1-tharvey@gateworks.com>
+References: <20231018191742.1303779-1-festevam@gmail.com>
+In-Reply-To: <20231018191742.1303779-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:26:09 -0300
-Message-ID: <CAOMZO5Cb0E7TXd_kg=w5ee6LRnozR9BC79uX1R+0LfG7PYegvw@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: imx8mp-venice-gw73xx: add TPM device
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Date: Wed, 13 Dec 2023 13:26:46 -0300
+Message-ID: <CAOMZO5C+BrgSQdmHhPj9_qUqz7Vqi0SrS69N45E80F_Fa4f0gw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] imx8mp_evk: Convert to DM_PMIC
+To: sbabic@denx.de
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,13 +86,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 18, 2023 at 3:33=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+On Wed, Oct 18, 2023 at 4:17=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
 wrote:
 >
-> Add the TPM device found on the GW73xx revision F PCB.
+> From: Fabio Estevam <festevam@denx.de>
 >
-> This hangs off of SPI2, uses gpio1_10 as a CS and gpio1_11 as RST#.
+> Currently, the imx8mp_evk uses the non-DM code to initialize the PMIC.
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> Convert to DM_PMIC, which is the recommended way to access the PMIC.
+>
+> While at it, fix multi-line comments style.
+>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
 Applied to u-boot-imx next, thanks.
