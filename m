@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9ADEC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 21:43:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A9A9C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 22:22:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EB9487886;
-	Wed, 13 Dec 2023 22:43:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B03C2878DB;
+	Wed, 13 Dec 2023 23:22:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lXxSzVmr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z3qeI7xL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65E8E878B3; Wed, 13 Dec 2023 22:43:14 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id D31F3878D6; Wed, 13 Dec 2023 23:22:36 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48F1D8747A
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 22:43:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFFA28779D
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:22:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2cc3dd2d897so8756991fa.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 13:43:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a1ca24776c3so4675766b.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 14:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702503791; x=1703108591; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702506154; x=1703110954; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NVytI9euu+eEJR2s2Ywil0CL/l4wwNFWWnJdIER6Gz0=;
- b=lXxSzVmrOwZ1Nw/BnXAIUeZHXUvUTJu60tguxNZKvMerFvCtRqdXY6W5wHsD5LOcuU
- Ki72sVBgdbRKXhpbOi0s5ULIPU0gf4PeoHlEHUSRtGLTstbjt3lzpNyLmRFY4mhFDpKc
- RJAZpWDsNaJ0rp04NMVFZyl3DO4kIwnVReZcykZHLUZRscI6Rk85WeCFVLG5t3cRM90d
- Lr113CsUF2nL2Njp5CT2jr9UUT5uCow81D2FPLAqNBHx+w/0+yj2jnwb6UdeRmIldget
- x4exb6TS+7rgMxj35eTkufe+PaCw6+AVB2N8zr3hlEV7ymkjj/AssidNPcWbdAkqFNWs
- lwOw==
+ bh=Zu94AiX06RA78kj2vTGxtr9XV1U32wm0UU7TU+/Xqd4=;
+ b=Z3qeI7xLOyTIVMaZS9EHPkc+TnrNQflO8f1KL4HDFd+mbrdFz6a7+UBLPKrViNryhF
+ CeKqUFLtADKdMckK7z+lpzhWBAw3XqhVcHQ1YFcSpTD99y0uajdHxqHSw/hnTHJqI7jw
+ QNQmyx8hXyaXZqddpb/zlLKXQFqVcIUc2voY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702503791; x=1703108591;
+ d=1e100.net; s=20230601; t=1702506154; x=1703110954;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NVytI9euu+eEJR2s2Ywil0CL/l4wwNFWWnJdIER6Gz0=;
- b=hNTIkTzdBgeAY1EVoBEAO/d6PRNp6ovcApc+fndBwwZpJhUbYJPNVOYtmWWXsFJm1t
- vRMQZreLZgJ8Wk+HoINIdgkfA3O2lBYE3qIIosDWdXUAKQbRW4NX1HmFoQWMgORBVlEk
- F+macl57ZazZM0ggICXcOugnexf63VBO57eJMndaohOlzmp+DA/GNqvtxZNsoNo4/taA
- WFPn29YKxzRP1GWNmbPf9R4TgYdh6soDXGU0tSre1f4szC7NQs8gd6MK/VDqaDXhLBfl
- GpcTv7A6X3og4yIK3dQzQi+TP9ogOHK4nkPMBjk8KRwWkAS2el6PX9FdxfayTiyiwsvI
- alig==
-X-Gm-Message-State: AOJu0YydUJVHVJAfIa2o/rBI5TC7wLQEiZ3080VmPj7hxg82PrUBMiw+
- KGS3QFqFVUYmL97/a99/QXfF8p/pzdCP1PS5d2sZgA==
-X-Google-Smtp-Source: AGHT+IFpdVx1YXGJSajM3v4bZffgcpFtAxzKsisGdznw/TYCVihRSuimsStz5YWzgHXTJF4oZXGGLryqIFS/cApn+EI=
-X-Received: by 2002:ac2:5457:0:b0:50c:bf8:ad13 with SMTP id
- d23-20020ac25457000000b0050c0bf8ad13mr3281430lfn.100.1702503791544; Wed, 13
- Dec 2023 13:43:11 -0800 (PST)
+ bh=Zu94AiX06RA78kj2vTGxtr9XV1U32wm0UU7TU+/Xqd4=;
+ b=SJ1R1wusc//Gq7rsAWybNRFIFKs2ymqRLuFwGBPRvhdbnxtTAoMKbRdU7g1jN+Tnab
+ bk1Dq7X+q14bcXwo6Fx3cu+Z7kd5t2sIwlXZOA+SM8XVGi+WfYIzF9q/LYo2cnL+wuBp
+ YrL9FvYL87fyiG3vGX9mPPB/ILDhVQENoPpHYM1ACit30+eDENRbcbOqH41izxlNR8kF
+ qGEP1O2KZXadyqS2NDV8DRB3F+UvB0w/nlbHXlwdwwn+vXz0rBpi1Cg99Cr+e1jwzDV9
+ HzjEde4S878kjL3clqAxnqg77l3Cdhe9BCh1FZ5YN01aIPY6ZKGmxF3ypJftp3Bvvq1q
+ nS+w==
+X-Gm-Message-State: AOJu0YygnEr3POlYbaOM7VMTJArenNvBexMRzTupA9Qkj6xk9ch0JF1R
+ 59oFL+dJa7vDf/h6eObpoCXx8XzLLveqaIB65Vir5sfm1jY5EdR7IKw=
+X-Google-Smtp-Source: AGHT+IELNTE2TNYb0/V7DUFeNYgbuzuFYAV0gsnyx1xl3ntEaK8Ax2d4PpI0HKtKqeWfS1DznAXQr5ebIcGvrP/GG/g=
+X-Received: by 2002:a17:907:6d05:b0:a1e:63ec:f0c5 with SMTP id
+ sa5-20020a1709076d0500b00a1e63ecf0c5mr11381835ejc.40.1702506154170; Wed, 13
+ Dec 2023 14:22:34 -0800 (PST)
 MIME-Version: 1.0
 References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
  <20231207091850.17776-3-ilias.apalodimas@linaro.org>
  <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 13 Dec 2023 23:42:35 +0200
-Message-ID: <CAC_iWj+sxOhz5bLe=3cZ1vPx5KZSEe61Y+8eA5KdJBK=0MvvWw@mail.gmail.com>
+ <CAC_iWj+sxOhz5bLe=3cZ1vPx5KZSEe61Y+8eA5KdJBK=0MvvWw@mail.gmail.com>
+In-Reply-To: <CAC_iWj+sxOhz5bLe=3cZ1vPx5KZSEe61Y+8eA5KdJBK=0MvvWw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 Dec 2023 15:22:16 -0700
+Message-ID: <CAPnjgZ0bXoGXmjxhdYgrCCzs2HTSviJVOGTvmUL8_qy=O4JZAg@mail.gmail.com>
 Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
  nodes are missing
-To: Simon Glass <sjg@chromium.org>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: trini@konsulko.com, sean.anderson@seco.com, neil.armstrong@linaro.org, 
  heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
  u-boot@lists.denx.de
@@ -89,57 +86,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Ilias,
 
-[...]
+On Wed, 13 Dec 2023 at 14:43, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> [...]
+>
+> >
+> > Can we add a Kconfig to enable this?
+>
+> I don't see the point, and I am not the only one.
+
+The information is not curated and isn't accurate. E.g. it can end up
+putting the vendor, device and version all into a single field,
+instead of using the fields correctly.
 
 >
-> Can we add a Kconfig to enable this?
-
-I don't see the point, and I am not the only one.
-
-> > + * @size: str buffer length
-
-[...]
-
-> > +       int cnt = 0;
-> > +       char *token;
-> > +
-> > +       memset(str, 0, size);
+> > > + * @size: str buffer length
 >
-> *str = '\0' should be enough, assuming size is not 0
-
-I generally prefer initializing all memory, it's not that big of a burden here.
-
-[...]
-
-> > -               str = ofnode_read_string(ctx->node, prop);
-> > +               const char *str = NULL;
-> > +               char str_dt[128] = { 0 };
-> > +               /*
-> > +                * If the node is not valid fallback and try the entire DT
+> [...]
 >
-> s/and/then/ ?
+> > > +       int cnt = 0;
+> > > +       char *token;
+> > > +
+> > > +       memset(str, 0, size);
+> >
+> > *str = '\0' should be enough, assuming size is not 0
 >
+> I generally prefer initializing all memory, it's not that big of a burden here.
 
-Sure
+OK, not a big deal, just odd. Also it is a character, so '\0' is better.
 
-> > +                * so we can at least fill in manufacturer and board type
-> > +                */
-> > +               if (ofnode_valid(ctx->node)) {
-> > +                       str = ofnode_read_string(ctx->node, prop);
-> > +               } else {
-> > +                       const struct map_sysinfo *nprop;
-> > +
-> > +                       nprop = convert_sysinfo_to_dt(prop);
-> > +                       get_str_from_dt(nprop, str_dt, sizeof(str_dt));
-> > +                       str = (const char *)str_dt;
 >
-> can't you drop the case?
+> [...]
+>
+> > > -               str = ofnode_read_string(ctx->node, prop);
+> > > +               const char *str = NULL;
+> > > +               char str_dt[128] = { 0 };
+> > > +               /*
+> > > +                * If the node is not valid fallback and try the entire DT
+> >
+> > s/and/then/ ?
+> >
+>
+> Sure
+>
+> > > +                * so we can at least fill in manufacturer and board type
+> > > +                */
+> > > +               if (ofnode_valid(ctx->node)) {
+> > > +                       str = ofnode_read_string(ctx->node, prop);
+> > > +               } else {
+> > > +                       const struct map_sysinfo *nprop;
+> > > +
+> > > +                       nprop = convert_sysinfo_to_dt(prop);
+> > > +                       get_str_from_dt(nprop, str_dt, sizeof(str_dt));
+> > > +                       str = (const char *)str_dt;
+> >
+> > can't you drop the case?
+>
+> What case?
 
-What case?
+Sorry, I meant 'cast'.
 
-[...]
-
-Thanks
-/Ilias
+Regards,
+Simon
