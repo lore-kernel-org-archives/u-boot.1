@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAB2C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:51:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA4EC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:56:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76FE58783E;
-	Wed, 13 Dec 2023 21:51:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B60F88782E;
+	Wed, 13 Dec 2023 21:56:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JwsUfNzm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qPFcFMp0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87AC087833; Wed, 13 Dec 2023 21:51:14 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 871DB8784E; Wed, 13 Dec 2023 21:56:40 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 590FA8783E
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:51:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FE5986F7E
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:56:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a1e7971db2aso860228666b.3
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:51:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5c85e8fdd2dso72330967b3.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:56:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702500672; x=1703105472; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PNpUgfdnWzeFHnzoKuI3o9ocU7ASbx8RXhRitJdEHU4=;
- b=JwsUfNzm7Rl/jgM/Aw/JNzaiU87EV0S7gK1gbzCcOzgk1yIvhOHiObi2mIx/5KUn4T
- isLfpl2ayVPQ1nykl562vZMpvFl/vBtveFjkuYbR7n6vEKRtccaHPdySftYNWxaJYuwl
- IuTxx4o7ZZ3COx5ag26MkTU7qn/RAYZuN4yNA=
+ d=konsulko.com; s=google; t=1702500997; x=1703105797; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aUYrQhmulTwOBndpOgr2g2/+p8WY7Ra7rfZG0QOXu3I=;
+ b=qPFcFMp0DajE1rvH+RATPwc1ecu2M0U6S0WKPxZAp2nhTs3+pmKccaX8c4Pmmlv1on
+ 9Fci+DgUiNkdUX0NOkdUTWsM7DZ1kbfVVJSciNnap4it5ZukNRgtXGvE1WIomsvQ1h/s
+ j+lZHH3zKDdrzlmFU7oTg1Kh0eBG60kVFME2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702500672; x=1703105472;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PNpUgfdnWzeFHnzoKuI3o9ocU7ASbx8RXhRitJdEHU4=;
- b=Ik2wDIGvo5H4z8Gw2oiJPA4HuX+JkorgPHouE9+LRrd2jBRxbGs2xgR4FU8aPEVlXt
- Cb9Znl1m5Artpe8Pp6mHYamS7P3sIYMJu2Sn+iAj6nC2pgfYTgWbLLY9J32e42lxDjqz
- k18a5PiWc2TfYnfD1R4WsSpvnYgHBTiftlg8HennRTFbPC0PA5BZRWP0JAyJTz/x5nxf
- ZfpaakN1JNyokiVDNMBi8OlO6BtFbRknSqu92a1EyxXASsESXgNm+3Zlu2NwKJlggbn9
- V3bWnMKkoTN2asdeX52ULBSo9sHtZ6XMljaweYtc63VgySJJzNTJSOgcSu/hVI6RFdOM
- n6Pg==
-X-Gm-Message-State: AOJu0Yw+7H7/yqagoMgAzouylOgOWWHWX9DTvgs/hYP2+bsM3MrOgZYe
- a2CZRzqVX8CV3zkHS8FxPL3pWAYDOvMYA5F1654ntQ==
-X-Google-Smtp-Source: AGHT+IElNf9x2hV6USiEN9i8Z/a8EfqD1lYB/rMaHT8fEyrXD1nwnf94Fmf5fiaCw28ft3SgpZ5cAy3mbCK3K/geBC8=
-X-Received: by 2002:a17:906:1316:b0:a19:a37:ab80 with SMTP id
- w22-20020a170906131600b00a190a37ab80mr4711359ejb.47.1702500671533; Wed, 13
- Dec 2023 12:51:11 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702500997; x=1703105797;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aUYrQhmulTwOBndpOgr2g2/+p8WY7Ra7rfZG0QOXu3I=;
+ b=dae/rwVuS7npDKn0gO/J8R2sg9bUMd8AD7cN6YR0jt9/8YvzjoJy79r+cf/J/GD5un
+ i2Fjxs1gBKIWH6Qqpf5DC4uTntBVbNQWfC/66JKuqxAovp/3Z8YC9qENETivzoJj+GP2
+ FlPfD/jrA/IiToZlBWtqVP0HlaoGyCLweMUtUqQXCHDwvGQy8OE4AwRjsezMho39QN6g
+ 3B6V9VZx0Q/C1EKo1FGuTzTJEVZhLT/Bwl65epg79IooJyEYEgsRAJaPzTklItNNqTHL
+ KPoXfR8E94xtLGFEmPegFpJ8PmyaDaaWdOkwuiHh+4b8kJzdy7e0P7rGPH8rNNBsQ9og
+ Ufwg==
+X-Gm-Message-State: AOJu0YyxoaRKT8i+U3V2DEarDh5CGgiX/I7vmygWky21j6niOF4zCfyf
+ VJpO3hUhUep9UpUUmwLU1xzZ+w==
+X-Google-Smtp-Source: AGHT+IHaIF/C1N0JeiIMhTCvRM0amMOOH0kyy6YD3Swf2WqKH42AaCb6pA6KV9VtmZ2MKwtzJgquFw==
+X-Received: by 2002:a0d:d956:0:b0:5d7:1940:dd63 with SMTP id
+ b83-20020a0dd956000000b005d71940dd63mr6712979ywe.57.1702500996762; 
+ Wed, 13 Dec 2023 12:56:36 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d78a-ada8-3cce-fa3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:d78a:ada8:3cce:fa3d])
+ by smtp.gmail.com with ESMTPSA id
+ d62-20020a0df441000000b005d6f34893dfsm4957180ywf.135.2023.12.13.12.56.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Dec 2023 12:56:36 -0800 (PST)
+Date: Wed, 13 Dec 2023 15:56:34 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sean.anderson@seco.com,
+ neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com,
+ mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
+ nodes are missing
+Message-ID: <20231213205634.GK2513409@bill-the-cat>
+References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
+ <20231207091850.17776-3-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
+ <20231213201655.GF2513409@bill-the-cat>
+ <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20231202153400.537050-1-sjg@chromium.org>
- <20231202153400.537050-2-sjg@chromium.org>
- <20231209154839.GG2513409@bill-the-cat>
- <CAPnjgZ0TxjEf-CvN_jC-c_7yVMb473YAjy-GH=Zrj6wwb4fqFA@mail.gmail.com>
- <20231213204250.GJ2513409@bill-the-cat>
-In-Reply-To: <20231213204250.GJ2513409@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 13:51:00 -0700
-Message-ID: <CAPnjgZ0qK5J=Q3xPK6K5BhXi2jpSYBchSR8n7mHEi15ekLn1Hg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] cyclic: Add a symbol for SPL
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng@tinylab.org>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Nikhil M Jain <n-jain1@ti.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <sean.anderson@seco.com>, 
- Stefan Roese <sr@denx.de>, Troy Kisky <troykiskyboundary@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jCBVs7/C08ZA51j4"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,67 +98,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Wed, 13 Dec 2023 at 13:42, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Dec 13, 2023 at 12:50:02PM -0700, Simon Glass wrote:
-> > Hi Tom,
+--jCBVs7/C08ZA51j4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 13, 2023 at 01:41:04PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 13 Dec 2023 at 13:17, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, 9 Dec 2023 at 08:48, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, Dec 13, 2023 at 12:51:33PM -0700, Simon Glass wrote:
+> > > Hi Ilias,
 > > >
-> > > On Sat, Dec 02, 2023 at 08:33:48AM -0700, Simon Glass wrote:
+> > > On Thu, 7 Dec 2023 at 02:19, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > In order to fill in the SMBIOS tables U-Boot currently relies on a
+> > > > "u-boot,sysinfo-smbios" compatible node.  This is fine for the boar=
+ds
+> > > > that already include such nodes.  However with some recent EFI chan=
+ges,
+> > > > the majority of boards can boot up distros, which usually rely on
+> > > > things like dmidecode etc for their reporting.  For boards that
+> > > > lack this special node the SMBIOS output looks like:
+> > > >
+> > > > System Information
+> > > >         Manufacturer: Unknown
+> > > >         Product Name: Unknown
+> > > >         Version: Unknown
+> > > >         Serial Number: Unknown
+> > > >         UUID: Not Settable
+> > > >         Wake-up Type: Reserved
+> > > >         SKU Number: Unknown
+> > > >         Family: Unknown
+> > > >
+> > > > This looks problematic since most of the info are "Unknown".  The D=
+T spec
+> > > > specifies standard properties containing relevant information like
+> > > > 'model' and 'compatible' for which the suggested format is
+> > > > <manufacturer,model>. Unfortunately the 'model' string found in DTs=
+ is
+> > > > usually lacking the manufacturer so we can't use it for both
+> > > > 'Manufacturer' and 'Product Name' SMBIOS entries reliably.
+> > > >
+> > > > So let's add a last resort to our current smbios parsing.  If none =
+of
+> > > > the sysinfo properties are found, scan for those information in the
+> > > > root node of the device tree. Use the 'model' to fill the 'Product
+> > > > Name' and the first value of 'compatible' for the 'Manufacturer', s=
+ince
+> > > > that always contains one.
+> > > >
+> > > > pre-patch:
+> > > > Handle 0x0001, DMI type 1, 27 bytes
+> > > > System Information
+> > > >         Manufacturer: Unknown
+> > > >         Product Name: Unknown
+> > > >         Version: Unknown
+> > > >         Serial Number: 100000000bb24ceb
+> > > >         UUID: 30303031-3030-3030-3061-613234636435
+> > > >         Wake-up Type: Reserved
+> > > >         SKU Number: Unknown
+> > > >         Family: Unknown
+> > > > [...]
+> > > >
+> > > > and post patch:
+> > > > Handle 0x0001, DMI type 1, 27 bytes
+> > > > System Information
+> > > >         Manufacturer: raspberrypi
+> > > >         Product Name: Raspberry Pi 4 Model B Rev 1.1
+> > > >         Version: Unknown
+> > > >         Serial Number: 100000000bb24ceb
+> > > >         UUID: 30303031-3030-3030-3061-613234636435
+> > > >         Wake-up Type: Reserved
+> > > >         SKU Number: Unknown
+> > > >         Family: Unknown
+> > > > [...]
+> > > >
+> > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > ---
+> > > > Simon, I'll work with tou on the refactoring you wanted and
+> > > > remove the EFI requirement of SMBIOS in !x86 platforms.
+> > > > Since this code has no tests, I'll add some once the refactoring
+> > > > is done
+> > > >
+> > > > Changes since v2:
+> > > > - Spelling mistakes
+> > > > - rebase on top of patch #1 changes
+> > > > Changes since v1:
+> > > > - Tokenize the DT node entry and use the appropriate value instead =
+of
+> > > >   the entire string
+> > > > - Removed Peters tested/reviewed-by tags due to the above
+> > > >  lib/smbios.c | 94 ++++++++++++++++++++++++++++++++++++++++++++++++=
++---
+> > > >  1 file changed, 89 insertions(+), 5 deletions(-)
 > > >
-> > > > The cyclic subsystem is currently enabled either in all build phases
-> > > > or none. For tools this should not be enabled, but since lib/shc256.c
-> > > > and other files include watchdog.h in the host build, we must make
-> > > > sure that it is not enabled there.
-> > >
-> > > This part is what I see as the Wrong Direction. There's some code we
-> > > really need to share with our user space tools, in order to not
-> > > copy/paste the same code. In turn, this code must be as user-space
-> > > friendly as possible. Maybe even we re-factor things a little more, if
-> > > needed, so that we _just_ have the library functions in common files,
-> > > and u-boot or user space only files have the make use of logic. I don't
-> > > feel bad about tools/ needing:
-> > > void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
-> > >                 unsigned char *output, unsigned int chunk_sz)
-> > > {
-> > >         sha256_context ctx;
-> > >         sha256_starts(&ctx);
-> > >         sha256_update(&ctx, input, ilen);
-> > >         sha256_finish(&ctx, output);
-> > > }
-> > >
-> > > (and so on for other algos) as a duplicate bit of code. Much less so
-> > > than I do about adding <linux/kconfig.h> to a direct include list (since
-> > > we should never be doing that) so that later on we can if
-> > > (IS_ENABLED(..)) the existing code.
+> > > Can we add a Kconfig to enable this?
 > >
-> > Bear in mind that we have the CONFIG_TOOLS_... options entirely to
-> > deal with the need for tools to enable features in common code. This
-> > SHA thing is a very small part of the code, compared to common code in
-> > boot/ for example.
-> >
-> > So is this really a win?
->
-> I don't follow you here, sorry.
+> > Why? This is the default option that we want moving forward in order to
+> > get the fields populated.
+>=20
+> The model name is fine. The manufacturer is in lower case (using the
+> DT vendor name), so not in the right format.
+>=20
+> It only populates two fields, so far as I can tell.
 
-I mean that we share a lot of code already, code which contains CONFIG
-options. So does it matter avoiding adding one more?
+Maybe we need to turn this discussion on its head slightly. What do you
+want to do to get SMBIOS fields to be widely populated with
+generally-correct information? What we have been doing has seen very
+little adoption so we need something else.
 
-> We share lib/sha*.c with host tools for
-> generic mkimage functionality. I'm fine with continuing to use
-> USE_HOSTCC as the guard for U-Boot / userspace here. And I don't think
-> switching these files from:
-> #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
-> to:
->         if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
-> improves readability of the code.
+--=20
+Tom
 
-Perhaps I am being too hard on the #ifdefs.
+--jCBVs7/C08ZA51j4
+Content-Type: application/pgp-signature; name="signature.asc"
 
-BTW we have a tools_build() function now.
+-----BEGIN PGP SIGNATURE-----
 
-Regards,
-Simon
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV6GngACgkQFHw5/5Y0
+tyxi5Av/aRQmZGBxFt1UTH4XkIColReLxVAVfzYO3Kwlxr13Fwlg2envTG4CWmE5
+FMVSEcLBDETZin7Z1+6vmtWY4S9OiYGynyATWB3wkKCibq0NeQEUCDW9vBs9PcPL
+n3YH7wCwsF3QDf9XBGC5tpbWNSRPke0kdrl0VJd7Vi0RMtHjy8v6IZd4aV98rB6T
+ZeYOPxHoBuj8V5GD0pkImP2CgETRUEFt4ShtT9+mzY5xhN12fGzywA6ObfReWsad
+VIXYdtpxSDTQxoM0up6CydUfRYeEWoxxrt6nh5h6tqLYCETraeQ1NWDDT6kllKL1
+DIDYZA6w4scR7J2OsME2I1YmT8wVAlj4zDwx+ZNVhayg16ATBepmdzcL3EbGEpjz
+iJaCIqU1TFmtBhO2/AeXZykGDZCToVYadS0KBgu4PLqb3nq6bmkS2GonyIjbd5lu
+FvayygA71XSuItGKS4YpAJU+t3FpnPJCL1XJx9rIk0fPFl+2v0RMWo/2HcWnknCj
+5nCJFRCB
+=/a1i
+-----END PGP SIGNATURE-----
+
+--jCBVs7/C08ZA51j4--
