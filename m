@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C2B3C4167D
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 08:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A13C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 08:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 016A687463;
-	Wed, 13 Dec 2023 09:28:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E375C87463;
+	Wed, 13 Dec 2023 09:31:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mu1ZR1cm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FNa71EjX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59C3A874D9; Wed, 13 Dec 2023 09:28:31 +0100 (CET)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id 862C5877D8; Wed, 13 Dec 2023 09:31:27 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D60F871D7
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 09:28:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DF5E871D7
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 09:31:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3b9b6ba42a4so3038759b6e.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 00:28:29 -0800 (PST)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5906d0c38c3so3844588eaf.3
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 00:31:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702456107; x=1703060907; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702456284; x=1703061084; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CfA3GmZAIjxdzpQcDQw84ZSpmc1GeKgE3BSkLN7k5oM=;
- b=Mu1ZR1cmkhikguZGKSPwFKEv6ml2E1HpUiBRfe3LkIG0GTsDAKO+pc8Yda7ADuzuWS
- 2BNvo9V3UDk15kyzophREQKRJJsDqU5f9K8zk7DF5jeOkOBxZ81H2AfG2wIOYdmY5fJL
- mIpWxors1UXFUxlPet+wNu5b4jLCEedQdnWSVQVUDIW02FGeZQ0dSIVBhdNu2RFFK8cO
- v9mryk7GvAkdGKZIUfgpCPOlDAE8GcdgxwT4czAkMnuezpsgTNrm5bSePzuD5ort8nmA
- aRngr9bDkY5KJ0ujqTl5AqkXidlNYiGFnwAP1CZl4GS2OTKJgyp4jWV18DIh5yKY2vM+
- w3FQ==
+ bh=cUMFpbFXPiPg/pwkbM7vUldInUxC4CbnDI/Ln/FriCE=;
+ b=FNa71EjX2ANNeb1EFPfB2QBTp6UY/AHCMuljU7xvgNNJYD5ok0NZeNZBhn8Kp6yJ2R
+ 5a4g7WctHZNaLaTXhg67B0iPsOgLF3V9PEhVFOrN8kfKkmT5ekk6sDr+kprLKAI/78xR
+ JMpOu1QrAP0oaLJNqEw87Bh/HsXOsZAUp/uT0JEScV4qssKXdDLyEbElLf141hLlFlY2
+ Tq/Zwi+/OefUy1rv+ySpAQr7uL31tCWjM7zeEp6kUjnCECD1y68Bhp97A+iv1ltmWTB8
+ aOaKnn6RnTKUa9Ppe/xaiSkJLWLMT+KscfmeAqokv8z8ff4ixCPrnRQ/mG1cU09/cBDp
+ nwKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702456107; x=1703060907;
+ d=1e100.net; s=20230601; t=1702456284; x=1703061084;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CfA3GmZAIjxdzpQcDQw84ZSpmc1GeKgE3BSkLN7k5oM=;
- b=efSdqjl7w/6ofR99U4NRT/WZN/q6OAvUgHrg+6umQq02d+zSIMY4xXLtXiHF4vsDSg
- d5yDk6WFMXm30lZSA1AW3an9Rv8X8NjxX5SCIexk0M5e1O7CLGpMjrJ0BNsngHRn0anT
- 78GCWn2aBVUXidJZRVix0kswA7RzHNov4hndfJqgaym58ZVK2g1tHoQeYBP1y8vN4h9B
- Q6v/+Od7+SofUsfie1JEhH0olcDanAQgIGf3306A7loh1JdqjtJ6gim5J5Id4B7O0Dn9
- lQoS8dXwT1N3FGkh3FBE3Mc7lFLFa13ypaShE3mjiGpG0AZeJGMeUemfkWzqjIzS5ntD
- S2hg==
-X-Gm-Message-State: AOJu0YywyWg75t8Xc8HudSnbda8LrLvRLaiEDxi5fSHwgyklTrvVfSKV
- iyFaq4iuYzs3A4VTkyR9G+6W40rh5t69qMb20yM=
-X-Google-Smtp-Source: AGHT+IGlga1HgcRM4gwUuDp8Nn5LM8PWlL8+2ANQPxYWvuBDJc1mQDroyY7UpNECiGuE5fHrfb5dfLxuh8yAJgWNv54=
-X-Received: by 2002:a05:6808:1b20:b0:3b9:e765:6990 with SMTP id
- bx32-20020a0568081b2000b003b9e7656990mr3990769oib.28.1702456107468; Wed, 13
- Dec 2023 00:28:27 -0800 (PST)
+ bh=cUMFpbFXPiPg/pwkbM7vUldInUxC4CbnDI/Ln/FriCE=;
+ b=sp1QB72IzKoDjbyN8G8eDAdJDqfDXTEBCu0PO/Rl5PV3L+ISwfkXwfEabEZX5vyZ93
+ CuEhnuIv8vZ4Zzqrbq9wbXxM9aSVqy7dFXml2qanH4lVVIPpfl1tGLiQwy+wXPssmuIp
+ BDU8zzeQl4ptu85Os6HMAwNJQtu3idA38TY/zNGy2EFekp0wwNlMnMgXy7wdKoF+kEco
+ RqoH6HjsTMMSlfOLBkX0zGbKRhXh4vgCYYrB9YcJq26wceet2KMpJrmJSlj9YavZuCvr
+ FMcmZNAaqGwoBejzF8PbLyOC5Mnc7eLQThWnOj/oNuJzWXr70V3GG8lrZMkICGkeSujH
+ tmjQ==
+X-Gm-Message-State: AOJu0Ywu89+m4+4iPGbGhtPHWSofDzBr+GwU/iLZRKjjG6FwiRBn8Ai1
+ tSq0fqbrMpnDFKBzk2eTbSWFyR8fOqkxWAfzGsE=
+X-Google-Smtp-Source: AGHT+IEP1WRJ1eBjbsWkTQj26M2MGBMdBJ8gPlXB3+BRjuVatoNSVIRGglmJTV8Z/i1BR9bV7kJlYaFRNMbRs77ZK4E=
+X-Received: by 2002:a05:6820:1503:b0:590:92bd:d3e9 with SMTP id
+ ay3-20020a056820150300b0059092bdd3e9mr7541974oob.14.1702456283700; Wed, 13
+ Dec 2023 00:31:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20231130201352.6379-1-semen.protsenko@linaro.org>
-In-Reply-To: <20231130201352.6379-1-semen.protsenko@linaro.org>
+References: <20231127182609.4663-1-stefan_b@posteo.net>
+In-Reply-To: <20231127182609.4663-1-stefan_b@posteo.net>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Wed, 13 Dec 2023 17:28:16 +0900
-Message-ID: <CALrBrZ1oqd93DWGTX5G8ibsjsBQma-VUBtsZGzN=WfJkTesDew@mail.gmail.com>
-Subject: Re: [PATCH 0/7] pinctrl: exynos: Prepare for other SoCs support
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Wed, 13 Dec 2023 17:31:12 +0900
+Message-ID: <CALrBrZ07WDM89w0vNRM_hcNxyTjBuqsqHLrtqdBOV_mRYszeeg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/2] arm: s5p4418: fix relocation
+To: Stefan Bosch <stefan_b@posteo.net>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -89,39 +89,35 @@ X-Virus-Status: Clean
 
 Hi,
 
-2023=EB=85=84 12=EC=9B=94 1=EC=9D=BC (=EA=B8=88) 05:13, Sam Protsenko <seme=
-n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> Some Exynos SoCs (not supported by pinctrl-exynos driver yet) have
-> different offsets and widths of pin bank registers (i.e. PIN_CON,
-> PIN_PUD and PIN_DRV registers). Rework pinctrl-exynos driver so it
-> allows for different offsets and widths of those registers by adding
-> the corresponding API. That makes it possible to add the support for
-> new Exynos SoCs in pinctrl-exynos driver.
+2023=EB=85=84 11=EC=9B=94 28=EC=9D=BC (=ED=99=94) 03:46, Stefan Bosch <stef=
+an_b@posteo.net>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+
 >
-> The main patch in this series is:
+> Fix relocation of u-boot for s5p4418-SoC. I.e. use __image_copy_start
+> instead of _start to calculate the monitor length. Furthermore use an
+> adapted version of relocate_vectors for the s5p4418-SoC. Background:
+> The header (NSIH) used by the 2nd-bootloader (included at the begin of
+> u-boot.bin) is not loaded into RAM. Therefore _start has to be after
+> the header and therefore is not equal to __image_copy_start which is
+> at the begin of the header.
 >
->   pinctrl: exynos: Support different register types in pin banks
+> Changes in v2:
+> - Cosmetic: Fix spelling mistake in commit message
 >
-> Other patches are just related cleanups and refactoring commits,
-> required for the clean implementation of the main patch.
+> Stefan Bosch (2):
+>   common: board_f: change calculation of gd->mon_len to fix s5p4418
+>     reloc
+>   arm: s5p4418: fix relocation of vectors
 >
-> Sam Protsenko (7):
->   pinctrl: exynos: Improve coding style
->   pinctrl: exynos: Extract pin parsing code into a separate function
->   pinctrl: exynos: Rework pin_to_bank_base() to obtain data by name
->   pinctrl: exynos: Support different register types in pin banks
->   pinctrl: exynos: Refactor handling the pin related dt properties
->   pinctrl: exynos: Reduce variables scope
->   pinctrl: exynos: Convert to use livetree API for fdt access
->
->  drivers/pinctrl/exynos/pinctrl-exynos.c     | 125 ++++++++++++--------
->  drivers/pinctrl/exynos/pinctrl-exynos.h     |  36 +++++-
->  drivers/pinctrl/exynos/pinctrl-exynos7420.c |   2 +
->  3 files changed, 108 insertions(+), 55 deletions(-)
+>  arch/arm/cpu/armv7/s5p4418/Makefile   |  3 +++
+>  arch/arm/cpu/armv7/s5p4418/relocate.S | 24 ++++++++++++++++++++++++
+>  common/board_f.c                      |  2 +-
+>  3 files changed, 28 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/cpu/armv7/s5p4418/relocate.S
 >
 > --
-> 2.39.2
+> 2.17.1
 >
 
 applied to u-boot-samsung.
