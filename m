@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11632C4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA05C4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 20:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD34C8790F;
-	Wed, 13 Dec 2023 21:39:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FFE48791F;
+	Wed, 13 Dec 2023 21:39:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K1E7rZiM";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bO+GNHF3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12F10878F1; Wed, 13 Dec 2023 21:39:42 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 3BF4C87911; Wed, 13 Dec 2023 21:39:44 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E05287906
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F6D5878E2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 21:39:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-9fa2714e828so961440866b.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:39 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a22f59c6aeaso174871566b.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 12:39:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702499979; x=1703104779; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702499981; x=1703104781; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0CWblDbLIPqOespTSgkr49l+X5qvOZZI1QFBoG94xuU=;
- b=K1E7rZiMtdoSOdvKPQpKce7wDHkNeLkt6CdgqbGzsk4YIXmH5zGjNgnHNKS6mONcfZ
- uUUvWCudCma2AGZpXKQY5WOLHrYdZhhj+MAt6fF4rp5XRjVyeRk77W/Cn5PGSiVc87CS
- 1NosRBxLEI/i876FS+k1TQI9cyCfIsbc9frIM=
+ bh=2sbGe/BSacdu/qslfYKlTUpV+9tfCyI0tBUGXAvv79A=;
+ b=bO+GNHF3ukFcNYByrH8x4ffWYyRpaBDUO/jpsRlTgah4Vt4WxboSyDFQaZku7zH84T
+ e70G0rnZvroiR42kGNpOkX+mtug3Dk22dYDdVaPA+VETCAWOTyqUmz8GeGZhecErMk1A
+ 6WnTYIqRhi3bKjsG6aDxPManJez8vrFWvgyzQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702499979; x=1703104779;
+ d=1e100.net; s=20230601; t=1702499981; x=1703104781;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0CWblDbLIPqOespTSgkr49l+X5qvOZZI1QFBoG94xuU=;
- b=wTXJE2C47cUOk7EbMHoYi1BBYxl7EM1gn5P/SnQbK/F1dIlNLSreaZtg2lfJ2wUULw
- 7FV73mId6nFfbNtOWrAhoxAAkXE9yE4bCYypMxZysq34RVJkVZlsasqtvkfhOpkSd1Ie
- X6cRq6ACiQiesI4eNEGdOyjc1FbV9Qot7bVFkurEnRLX1f/EjYVmTWULP8pm/Nd6nKpu
- 7tYDKoL9vAr35VfKrvyFzIB0oBjKiYULnKHlO6SSbhCnMCUs24aFWWUezrsw5DdEPDkT
- jntgBrTEuKXEbemlW1Q7zZHV8AohWNsGEcvBWhuTXxDsPy9QvuoAO00YxzH+yL3tiOoo
- zLUg==
-X-Gm-Message-State: AOJu0YxAh4EHY6fjtcwJ0JQD+8/HbSb4pkSqNQR6y18nWSn9atIrfJPL
- FbulGp8y+AZpx4PMdfDWZ6I/x6rzXVurUIFjIEiws4HQ8cNlDj0xWO8=
-X-Google-Smtp-Source: AGHT+IF+EhcQdceqwgq+hNzqas7E0XjxSI8x3qMNxxke40masLYtRv/pbV4IY1V/fxfhoggDb2aMHCKuZ8T5HseKpUo=
-X-Received: by 2002:a17:907:9870:b0:a04:1f99:3b48 with SMTP id
- ko16-20020a170907987000b00a041f993b48mr4012012ejc.74.1702499978990; Wed, 13
- Dec 2023 12:39:38 -0800 (PST)
+ bh=2sbGe/BSacdu/qslfYKlTUpV+9tfCyI0tBUGXAvv79A=;
+ b=MvWMjqg8kMTkgw4NtL+z37UabPrpNFeU2tTvhj6KwCIbwdrnqevlY6qQtW8jJzrffC
+ 7smPHr0Mpz+iihoptKOQSwHTnGDGN6oHKX+LID4dV3QVNeLGg89luvQl//X+QOmmu0HV
+ sNxbuajc5wF59gXsmOSTjFgwDRMr+f6sK+U4e5swmwZeBz8l21DfvP/X3dWm65lZ0ip8
+ iU7XcYSSMG71hwZYOCAt/gwU6eJDzNktZc05jeFEVEheyXXTGbL76HnC9wZDWaoxozQz
+ RiaFPT24GBAyjU8IbvH6s9wfvQZSLH6Zub2yvg4Rco6QlOaE6TePwkwY4l+A8h5bx0cD
+ 2dAQ==
+X-Gm-Message-State: AOJu0YzBnvjVP4R8dHgPsk7BZlmZ4yABWIU1j+6eYSLnynudYLtR2ob5
+ kW9rvAhWkKCFIGkurbH7KY9BQFKkdJaIr96tZ4l+UA==
+X-Google-Smtp-Source: AGHT+IHGLJMR7AutPdY9dFmrtFEKG7zj/noBymRWfX1PHiEJWJW2Slsjndddx2sgcDfk7DkPT0WO9DkwgYK3GCfenSY=
+X-Received: by 2002:a17:907:503:b0:a19:a19b:55f5 with SMTP id
+ wj3-20020a170907050300b00a19a19b55f5mr3489537ejb.133.1702499981051; Wed, 13
+ Dec 2023 12:39:41 -0800 (PST)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 13 Dec 2023 12:39:37 -0800
+ HTTPREST; Wed, 13 Dec 2023 12:39:39 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231002011553.463514-8-sjg@chromium.org>
-References: <20231002011553.463514-8-sjg@chromium.org>
+In-Reply-To: <20231002011553.463514-6-sjg@chromium.org>
+References: <20231002011553.463514-6-sjg@chromium.org>
  <20231002011553.463514-1-sjg@chromium.org>
-Date: Wed, 13 Dec 2023 12:39:37 -0800
-X-Google-Sender-Auth: STmQ6hrhM2VAL2ajGcxwZ34Nem0
-Message-ID: <CAPnjgZ3BFETyuBBdDbwHK8R9SOoGzx1C-Kw0U4RGjTbh0=P5Kw@mail.gmail.com>
-Subject: Re: [PATCH 07/34] test: bdinfo: Add missing asserts
+Date: Wed, 13 Dec 2023 12:39:39 -0800
+X-Google-Sender-Auth: BW7y6JUQg-X8OGDF-nTFR1TA6Bs
+Message-ID: <CAPnjgZ3_YjrVteUFWaWz_evad7-T83PBTtGCoz137nr9FaJTsw@mail.gmail.com>
+Subject: Re: [PATCH 05/34] test: Run bootstd tests only on sandbox
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Anatolij Gustschin <agust@denx.de>,
+ Anatolij Gustschin <agust@denx.de>, Brandon Maier <brandon.maier@collins.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Linus Walleij <linus.walleij@linaro.org>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Nikhil M Jain <n-jain1@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,14 +90,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Calling into sub-test functions should be done using ut_assertok() so
-that the test exits immediately on failure. Add those which are
-missing.
+These make use of disk images which are not available on reak boards.
+Add a new Kconfig to ensure these tests only run where they are valid.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/cmd/bdinfo.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ test/Kconfig  | 5 +++++
+ test/Makefile | 2 +-
+ test/cmd_ut.c | 2 +-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
 
 Applied to u-boot-dm/next, thanks!
