@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E86FC4332F
-	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C17FAC4332F
+	for <u-boot@archiver.kernel.org>; Wed, 13 Dec 2023 16:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86B0687579;
-	Wed, 13 Dec 2023 17:21:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B768874CC;
+	Wed, 13 Dec 2023 17:22:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mLE+qXUl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JGdEoyO4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D584B874CC; Wed, 13 Dec 2023 17:21:16 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id DCDC58781D; Wed, 13 Dec 2023 17:22:11 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10C2087579
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:21:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFE38874BB
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 17:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ce40061e99so1199128b3a.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:21:13 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-28ac70368b9so402599a91.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 08:22:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702484472; x=1703089272; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702484528; x=1703089328; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CZ9WR+eP6YZTANLhOfP9PIN1yT2yEU+HxxAOQwKfBao=;
- b=mLE+qXUln7F0aW+cTze1lIVCEmYpZ8PP2Ep0goegg9e94hsw1WId5PYqrlfeg8NSyJ
- T4R+QjujT3REvC0iAirg5RkCNToUvkC7jxpltsanGCR+gI2wzo16fY/6vMCEuk4NgzIs
- u6EwKGHcCVF/haXdbRva+DdqutFAxUNGwA97+hhp9YF5BQkH8EXRbwLE0OisK3rolGlQ
- 5pIKlWAJ/yX8IezfFTZ8W/fKaL4rqa3kLornxF9BPImUlF8ElY9zPg70I6Fa5B+pu/PC
- Kt6DVN3MN4GavUPEoKfYb0j/toi4+QpJwGLTG0HPw0M/Rt0ftZi7Juth5yDUbhRn54Sh
- pZDg==
+ bh=kqmFEEpuBNGxgFl85J7DiSziPjHBsq0AsoiGQ6R7f2A=;
+ b=JGdEoyO4VD6FQg7d6V0KvxyTWX3VhAyRnswtwVu62C3aqgVD3otcuOIX7XiEw67cGz
+ 4w+7Lzg++fHjsC7MKsq9YRP9Qhb0zs66gp4BIZ/ecAsP9fDvmXR43Zkse721tOxEzMfP
+ tDJFrr3qrf+Mut/TOM2d8dQUhHQCwarPneVteiUqghYF0AnVo3PaVVCgN60oy7+Tb3Cw
+ ttxp+n2m+dTeM2fd+kGKnjNQrhsnl7a1rIkyk5zB9Cs2Ut3Yg9dMLC4aqsB+juu5Vvf4
+ /g5Q2M1vBwSJG/3ZX3Mhz6pJgJLj0R25FRsbLnTCe8AS1mjpGNcHV239OetiQQVv/kv8
+ xHRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702484472; x=1703089272;
+ d=1e100.net; s=20230601; t=1702484528; x=1703089328;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CZ9WR+eP6YZTANLhOfP9PIN1yT2yEU+HxxAOQwKfBao=;
- b=fDXcAAZ56H5Q55Siv9Bh20t9H0G1L8hfTHNIkTQ0+uOl4ea9VTy74wJp5/jTe/1pxS
- itT6JByDGtGETLB4ekWPu7luk6etAA16244TF7MrhYlx4GbklqXhiDeF8vBvxXcv6xSM
- sneITbFROXBsqa7EGG/bQDVXGlLPT7tqhjs7SSEja1WtxZGItfG3c6vI/5XLnI2RBrAl
- cNMxI9TKWJYpDyihYjVXUjA9gH+inrLZqUlvuWIIcIyd8K+l1z47xvvLysEx+Khzc9N2
- VBSCWqZ3t4g3Q5ZHzhgnO2RQk1MwXf4SpHD3QKId2K4aFSiIxZtd7U/uwvfk3zRpNmtM
- YAmA==
-X-Gm-Message-State: AOJu0YwPlyDghrdmm5LuEWH8qrMu4MK/y7wAJHt/GuvjLuMRHxb5FGug
- /hyB37PD6PdWNm4zm/ucoAS65WDbP8xd0IJICSddTOsy
-X-Google-Smtp-Source: AGHT+IFrs+v5ktTwJfYJX5Ir7duf8lO/GeFgwc19B3Mmr/Xa44iwc3YmjkCL7+gZmtsyclJv7dmwgLG/9iZwFVfsGXY=
-X-Received: by 2002:a05:6a00:1254:b0:6bc:ff89:a2fc with SMTP id
- u20-20020a056a00125400b006bcff89a2fcmr17495816pfi.2.1702484472360; Wed, 13
- Dec 2023 08:21:12 -0800 (PST)
+ bh=kqmFEEpuBNGxgFl85J7DiSziPjHBsq0AsoiGQ6R7f2A=;
+ b=LeE8NZ18GRFY+3kF5s6Du2FdlNxMfP5NU2I+jfrJsfqxNG18XmcKJGK4yJIX50TXQW
+ si4dL8ykZFXrM8bTxVvrxFPyebKujE/U3uQh2HotwmZJR7rLeREJMZf0RI/lXNUXurfJ
+ Pb8scsGIukB1AxYXYL26KQBOVhi+xbtzfdboJANNvaoG2LOUEm+deNXKxc2hlEwySbgx
+ N/H6AdtEnJ8hcy3GVUbsKykai/X4wqbLPDXyVTC9xt2kX3BKCqgg3Jifwp73NtYM8EKn
+ D+22fI0nnGI3ixJQq/2IsOTdFSXcjFWrxAd31Yqu3RE7sJR6mSWePZMJAaezGW21o2Jp
+ CAbA==
+X-Gm-Message-State: AOJu0YwRkveIy8+l+6tKmkLFER5BUqhA0lDMJCt2Nw+Etnfph4zYELgB
+ TFzJDyinF45ZJ51+dlC97sDxlnVPkEDeAFGuJvQ=
+X-Google-Smtp-Source: AGHT+IFtTRKyhGAJFhVfGIKCz/Qdm66sEn8wCWWDelRCfmaLN3jlUvhas/0yXRNYDrpKeiD1SULXox6kuSebhIa+jAY=
+X-Received: by 2002:a17:90b:3a82:b0:283:5405:9e90 with SMTP id
+ om2-20020a17090b3a8200b0028354059e90mr14014476pjb.3.1702484528057; Wed, 13
+ Dec 2023 08:22:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20230504104111.1823988-1-festevam@gmail.com>
-In-Reply-To: <20230504104111.1823988-1-festevam@gmail.com>
+References: <20230523192155.33222-1-gilles.talis@gmail.com>
+ <58a07085-3926-b942-fb8c-58f1f5eac421@oss.nxp.com> <877clq6odx.fsf@redhat.com>
+In-Reply-To: <877clq6odx.fsf@redhat.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 13:20:59 -0300
-Message-ID: <CAOMZO5AqSfdf4HoWMX6yFgu2LutJvr4O84RpfxPizc1-r1ppGA@mail.gmail.com>
-Subject: Re: [PATCH] imx8qm_dmsse20a1: Improve SPL memory configuration
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Oliver Graute <oliver.graute@kococonnector.com>
+Date: Wed, 13 Dec 2023 13:21:55 -0300
+Message-ID: <CAOMZO5C=N408U+dY+C-czBSGYMexmDeiUdyzwLkLjZcy7DtS1A@mail.gmail.com>
+Subject: Re: [PATCH v2] imx: imx8mp: Add support for Polyhex Debix Model A SBC
+To: Milan Zamazal <mzamazal@redhat.com>
+Cc: Gilles Talis <gilles.talis@gmail.com>, Peng Fan <peng.fan@oss.nxp.com>,
+ uboot-imx@nxp.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,20 +88,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, May 4, 2023 at 7:41=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
-rote:
+On Thu, Dec 7, 2023 at 2:15=E2=80=AFPM Milan Zamazal <mzamazal@redhat.com> =
+wrote:
 >
-> From: Fabio Estevam <festevam@denx.de>
+> Peng Fan <peng.fan@oss.nxp.com> writes:
 >
-> Currently, building imx8qm_dmsse20a1_defconfig leads to the following
-> warning:
+> > On 5/24/2023 3:21 AM, Gilles Talis wrote:
+> >> Add support for the Polyhex Debix Model A SBC board.
+> >> It is an industrial grade single board computer based on
+> >> NXP's i.MX 8M Plus.
+> >> Currently supported interfaces are:
+> >> - Serial console
+> >> - Micro SD
+> >> - eQOS and FEC Ethernet
+> >> imx8mp-debix-model-a.dts is taken from Linux 6.3.
+> >> Signed-off-by: Gilles Talis<gilles.talis@gmail.com>
+> >
+> > Reviewed-by: Peng Fan <peng.fan@nxp.com>
 >
-> aarch64-linux-ld.bfd: invalid origin for memory region .sdram
->
-> Fix it by using the same SPL memory layout as done in the imx8mq_evk.
->
-> Reported-by: Tom Rini <trini@konsulko.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> Tested-by: Oliver Graute <oliver.graute@kococonnector.com>
+> Do you know why the patch has been left (as far as I can see) without
+> further action?
 
 Applied to u-boot-imx next, thanks.
