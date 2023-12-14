@@ -4,63 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB54C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A28C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:55:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1893287B4E;
+	by phobos.denx.de (Postfix) with ESMTP id 8DA5D87B57;
 	Thu, 14 Dec 2023 17:52:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="avcBuVg3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J/qF1spg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55D1187ABC; Thu, 14 Dec 2023 17:30:24 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4E79887AC5; Thu, 14 Dec 2023 17:51:45 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B7EF87505
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:30:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77FE687ACA
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id D1B1AA0B08;
- Thu, 14 Dec 2023 17:30:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :from:from:message-id:mime-version:reply-to:subject:subject:to
- :to; s=mail; bh=4IQL+oF99QSuhsVcPvJ46e9KNRvpjVmRySWXpxuCHNs=; b=
- avcBuVg35Qn8KZmPdN8G5S+dgDbVJulvLr+ZqKmzLwkXdxU5LcXszLctrTkrLBr6
- OJ5ib9NftX2LAwheOYNkUN39lAAkKz5n9UF+ckb/iygYPcE8oUY4QthhWhtdk7EO
- /Keiw7XYW28s/2K5MTxGrzT/9DaHhVfgWZgCRlhC4Fyc6aUasY2gEMCYJW7d24fZ
- EiIzsjbouUiEGXC9Vd64oBZpHU/Oadnwy0IoM7yM4tIKQ1UqppTqHjiynbucGUO6
- UPyAlzHJwMd6fbIJNbGF2i1nSCFqs5cFfAhDEmAOc7QK5KpUBvqvhE+2a6Cf6qwM
- VCUvOR/h5wRQ/aAXpDBhWBtXKcFb1AA7k+j0Dw5XrojQYjK80MoNfEEEwaSc3kRZ
- dzE5IOqTAoPe99Y5KqVaJe7N72hpDXbUf03Z7yvuARvUEF5rymRRKUkc34qn8+0D
- uKbWJXnzhag2DC22WH+JJPormcHNwX5NVMoMDElDzGSeqM6qn/Roxr4+nyt3B92c
- h1hlKxz+jpdZD9pI281CKuZMovp3iMiPeNzOgynv9FNkqkotenF+rBrO5LLrscpk
- t7q3XKnL7ZyN/s4zovS5iwDVitz1a3pt2L/cIB+RhwucsSUGaM6lXzQrfpJVSM8O
- A8FQLDmL2I6EzWTs/7Eidqnhxt8vyUafHkKrUqrcdzs=
-From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?=
- <csokas.bence@prolan.hu>
-Subject: [PATCH] arm: spl: Use separate fault handlers instead of a single
- common one
-Date: Thu, 14 Dec 2023 17:29:31 +0100
-Message-ID: <20231214162931.34236-1-csokas.bence@prolan.hu>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-35f418f394dso23454065ab.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702572701; x=1703177501; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s+dxsgUPBLoTcoQWhp34wtg56IrCFS8NnHBImkU+8po=;
+ b=J/qF1spg8gl7VMlAJlRBPjOdbulsSsWp1ZYpLUv4Aorw16mV1VuEQKThCqpu2gHFaE
+ tuhCbn94EkbbHmKGHSVKIiLZAXc2w+FzdEr6entZmPojrAl/d1WucC3qmWeTibRXsiEA
+ 7MsLtagdkkOBqFFR32fVih1oHltuDVDfnRkGg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702572701; x=1703177501;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s+dxsgUPBLoTcoQWhp34wtg56IrCFS8NnHBImkU+8po=;
+ b=a4El0OGA7XLo8G6vupvYfi0PAsDVG14sJI0W3sQeLWNaYuFmabct7sAuing5C1CgSh
+ kYeuT3fs7V5UQtt5Q3942KSfosXpRAMWJjJPN/wJYQhWhthLElQXDZTglBnWOl9H/6Sw
+ 21Sc2Ky3ZnGhYL+o/3llhKguM934dKZASd9o2juti1JH3+Id3JH6IV0qmU+x4ZhbVLvG
+ 7d7qvdZ/kBTAnOinzfcSD7v6AQ2Ye1IJYFixdkj/uHDroerjJBO3tptchOno8HqCJJu8
+ aCiPi707FzbEDWV5Jdwf3qv9LYlKklJuUNUsDjv3OF5GgnoJE0eX1MHCxhLFUTXcepTF
+ V0Rg==
+X-Gm-Message-State: AOJu0YxMJLosr0czObaG5QreSO5gzXX4/PEaI6js9GH98aweIAiCbJVa
+ 9kCKEg74jfGMEbsX8Ue1brWNTslruR8509c82lzZsQ==
+X-Google-Smtp-Source: AGHT+IHS2iJlKsxPLqFzkMQCoWrul5SQ4wQK2/jFrYNWbggtR5tiixU+SyrMXiXWgPxymrcyV6WDRw==
+X-Received: by 2002:a05:6e02:1b85:b0:35e:6b86:3c1e with SMTP id
+ h5-20020a056e021b8500b0035e6b863c1emr14352739ili.34.1702572700998; 
+ Thu, 14 Dec 2023 08:51:40 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 08:51:40 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Nikita Shubin <n.shubin@yadro.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Rick Chen <rick@andestech.com>,
+ Safae Ouajih <souajih@baylibre.com>, Scott McNutt <smcnutt@psyent.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>,
+ Thomas Chou <thomas@wytron.com.tw>, Wolfgang Denk <wd@denx.de>,
+ uboot-snps-arc@synopsys.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 00/21] Complete decoupling of bootm logic from commands
+Date: Thu, 14 Dec 2023 09:50:09 -0700
+Message-ID: <20231214165112.2182274-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-ESET-AS: R=OK; S=0; OP=CALC; TIME=1702571420; VERSION=7966; MC=3290524803;
- ID=81617; TRN=0; CRV=0; IPC=; SP=0; SIPS=0; PI=3; F=0
-X-ESET-Antispam: OK
-X-EsetResult: clean, is OK
-X-EsetId: 37303A29916D385C6D7166
 X-Mailman-Approved-At: Thu, 14 Dec 2023 17:52:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,71 +111,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
-Add a Kconfig option to separate the different handlers into their own individual infinite loops.
+This series continues refactoring the bootm code to allow it to be used
+with CONFIG_COMMAND disabled. The OS-handling code is refactored and
+a new bootm_run() function is created to run through the bootm stages.
+This completes the work.
 
-Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
----
- arch/arm/Kconfig       | 10 ++++++++++
- arch/arm/lib/vectors.S | 18 ++++++++++++++++++
- 2 files changed, 28 insertions(+)
+A booti_go() function is created also, in case it proves useful, but at
+last for now standard boot does not use this.
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 328e2ddc33..47494cb72b 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -79,6 +79,16 @@ config SPL_SYS_NO_VECTOR_TABLE
- 	depends on SPL
- 	bool
- 
-+config SPL_USE_SEPARATE_FAULT_HANDLERS
-+	bool "Use separate fault handlers instead of a single common one"
-+	depends on !SPL_SYS_NO_VECTOR_TABLE
-+	default n
-+	help
-+	  Instead of a common fault handler, generate a separate one for
-+	  undefined_instruction, software_interrupt, prefetch_abort etc.
-+	  This is for debugging purposes, when you want to set breakpoints
-+	  on them separately.
-+
- config LINUX_KERNEL_IMAGE_HEADER
- 	depends on ARM64
- 	bool
-diff --git a/arch/arm/lib/vectors.S b/arch/arm/lib/vectors.S
-index 7cf7d1636f..a14bca6fb8 100644
---- a/arch/arm/lib/vectors.S
-+++ b/arch/arm/lib/vectors.S
-@@ -138,11 +138,29 @@ _fiq:			.word fiq
- #if !CONFIG_IS_ENABLED(SYS_NO_VECTOR_TABLE)
- 	.align	5
- undefined_instruction:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	undefined_instruction
-+#endif
- software_interrupt:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	software_interrupt
-+#endif
- prefetch_abort:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	prefetch_abort
-+#endif
- data_abort:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	data_abort
-+#endif
- not_used:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	not_used
-+#endif
- irq:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	irq
-+#endif
- fiq:
- 1:
- 	b	1b			/* hang and never return */
+This is cmdd (part d of CMDLINE refactoring)
+It depends on dm/bootstda-working
+which depends on dm/cmdc-working
+
+Changes in v2:
+- Add new patch to enable more bootm OS methods in sandbox
+- Split addition of struct bootm_info to its own patch
+- Split changing of boot_os_fn parameters to a separate patch
+- Split out adding the rest of struct bootm_info fields to separate patch
+- Split out patch to move do_bootm_states() comment to header
+- Split out booti removal of #ifdef
+- Split out bootz removal of #ifdef
+- Adjust patch to focus just on dropping the do_bootm_states() arguments
+- Split do_bootm_states() rename to a separate patch
+- Rework series to allow OS access to cmdline arguments for bootm
+
+Simon Glass (21):
+  mips: Add a reset_cpu() function
+  m68k: Add a reset_cpu() function
+  ppc: Add a reset_cpu() function
+  nios2: Add a reset_cpu() function
+  riscv: Add a reset_cpu() function
+  bootm: Adjust how the board is reset
+  sandbox: bootm: Enable more bootm OS methods
+  bootm: Create a struct for argument information
+  bootm: Adjust arguments of boot_os_fn
+  bootm: Add more fields to bootm_info
+  bootm: Move do_bootm_states() comment to header file
+  booti: Avoid use of #ifdef
+  bootz: Avoid use of #ifdef
+  bootm: Drop arguments from do_bootm_states()
+  bootm: Rename do_bootm_states() to bootm_run_states()
+  bootm: Tidy up boot_selected_os()
+  bootm: Create a function to run through the bootm states
+  stm32: Use local vars in stm32prog for initrd and fdt
+  bootm: Create a function to run through the bootz states
+  stm32: Use bootm_run() and bootz_run()
+  bootm: Create a function to run through the booti states
+
+ arch/arc/lib/bootm.c                          |   5 +-
+ arch/arm/lib/bootm.c                          |   6 +-
+ .../cmd_stm32prog/cmd_stm32prog.c             |  33 +++--
+ arch/m68k/lib/bootm.c                         |   5 +-
+ arch/m68k/lib/traps.c                         |   7 +
+ arch/microblaze/lib/bootm.c                   |   6 +-
+ arch/mips/cpu/cpu.c                           |   8 +-
+ arch/mips/lib/bootm.c                         |   8 +-
+ arch/nios2/cpu/cpu.c                          |   8 +-
+ arch/nios2/lib/bootm.c                        |  10 +-
+ arch/powerpc/lib/bootm.c                      |   5 +-
+ arch/powerpc/lib/traps.c                      |  10 ++
+ arch/riscv/cpu/cpu.c                          |  13 ++
+ arch/riscv/lib/bootm.c                        |  11 +-
+ arch/riscv/lib/reset.c                        |   7 +-
+ arch/sandbox/cpu/cpu.c                        |   8 ++
+ arch/sandbox/lib/bootm.c                      |   5 +-
+ arch/sh/lib/bootm.c                           |   6 +-
+ arch/x86/lib/bootm.c                          |   6 +-
+ arch/xtensa/lib/bootm.c                       |   4 +-
+ boot/bootm.c                                  | 133 ++++++++++--------
+ boot/bootm_os.c                               |  78 +++++-----
+ cmd/booti.c                                   |  55 +++++---
+ cmd/bootm.c                                   |  43 ++++--
+ cmd/bootz.c                                   |  35 +++--
+ configs/sandbox_defconfig                     |   3 +-
+ include/bootm.h                               | 124 ++++++++++++++--
+ 27 files changed, 440 insertions(+), 202 deletions(-)
+
 -- 
-2.25.1
-
+2.43.0.472.g3155946c3a-goog
 
