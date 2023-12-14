@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A654C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F1E4C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:17:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B66F87B40;
-	Thu, 14 Dec 2023 19:13:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B88AC87B4C;
+	Thu, 14 Dec 2023 19:17:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="lhjwHXT9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MdWKENCi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7D9387B54; Thu, 14 Dec 2023 19:13:28 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id F256687B60; Thu, 14 Dec 2023 19:17:03 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1384B87B40
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:13:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 863BE87B4C
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:17:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5cece20f006so84147057b3.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:13:26 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5e25d1d189eso8131927b3.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:17:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702577605; x=1703182405;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eCdIYbX2LcwCQK7MedsibwXCeIkhRDT6CeWtB3Le+vw=;
- b=lhjwHXT9fYdj3FA7dIJz9sl0cf5XZCGknEskUBOBQOByp8fiT6lS16PPBiXxi2OceU
- CV8R4eReaDKOZFbT/aD8iRAVOHQz8z/WsDO9h72wAL5QEQ2N/vIrWIEgVDFRYbD9lDgV
- Oowpg5UpbFpM4WWpS7OJX3hbNsrlwjWG33WNc=
+ d=konsulko.com; s=google; t=1702577820; x=1703182620; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4FSaWL+w7GAFox6pRmc00WNVEqdJBijpJ60CeIYOj88=;
+ b=MdWKENCiFzFqA93LWdtAPA2eo2CyJGXC2QvhXn6g0h97eeJJEIZDQFh6QB00oSZaHd
+ D5ngukeUAPfhFvikIJ5Oa60BF/I/e5Pr8busbrJl3idoKI0pw9SuQfjek89HGn8JFi1m
+ 0tQt5r2ILsLCywnDLn29O9b949F4tOpp9ws40=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702577605; x=1703182405;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eCdIYbX2LcwCQK7MedsibwXCeIkhRDT6CeWtB3Le+vw=;
- b=Cr/Rw0rOM9l0JtkDKGjXPxs1q5Gvyd4jy9ufWJix5fYUOc29MKbFdQAKR+qS2cPCo1
- eKWx4z9isymkmna5v4JNWgqbgunmWda/rmr1w5/cnW0ILN+ju6/vDBW83ZFyQcAJyiBK
- is19jfcaJ9Wzo/dtZpgciQh9UA7dFrogiZ8Ee/O2S1TBUcNtCEVtyZ9kfGsNnFMuZNsb
- IOBmGiG23aFzEXyZYaOLHo9DIzicIKmezHAcsbHehp+O3DSPMwPp9cAliyrLxNEshNz0
- r3CStbqADOBNWhJ5mVxnSqpISsVhPaSNZUbr0/UoD3XAT5Z3gbUi3fILK9BQ4uVAG4HA
- m0zA==
-X-Gm-Message-State: AOJu0YxuDfSzZhCiqgHg3qe8/CkG5Eg5U7YaNmdlFsbFL4x4xh+F7ZZp
- PYi0tvLVYjr3eEm5T2Arxd0/fZO8ZdsywYQt/Ky1NA==
-X-Google-Smtp-Source: AGHT+IHOtn9U+eVolcHkYz5t41gUArQ+IjecGuwreBPvWMG1FejvjIaTopEl4CFF558vAaCZlTsAfEC7rTYFWVZO4D8=
-X-Received: by 2002:a5b:b05:0:b0:dbc:c39a:b3cb with SMTP id
- z5-20020a5b0b05000000b00dbcc39ab3cbmr3281934ybp.95.1702577603825; Thu, 14 Dec
- 2023 10:13:23 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702577820; x=1703182620;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4FSaWL+w7GAFox6pRmc00WNVEqdJBijpJ60CeIYOj88=;
+ b=ZT4KjVuxLr7PcYpcgXxv0pzVU2zCsiMQkLKNoo3xuMaMxNd3uJdR6i+QpUykRE8JsL
+ 2a6oDeyKFW6Xd/toXGG7nkkU1oDLeINgC60oqOhb9bSgI8EzeYZS+mG/8nAV7gBfnm0T
+ J/pcQf0hl9/HX+QjloKEMivO5FGrAYR28gkuQhCewzunZdeWbR1P8EcnipKKi2wz7boR
+ FaLe17/eTWJyuGDn6ucO8RfMAaB1Qv5hWS7HtaqZIdy57adeo5SWWo/Pzv2CyODCoWtp
+ GRlNNA3v2JshGI399eF/6iUzLyVLYyPF4OJnmot+SedqMB5QgjPj4dNK8HaoVXsrE2Ah
+ rPew==
+X-Gm-Message-State: AOJu0YypTai1nFRphkKfgg/KqrIxhwC/ps1Fu25WoeEoW8/TwpHtencC
+ YY15+P95zjZHdMg3xK5+5gqJvmSJ+pyaIXuivcc=
+X-Google-Smtp-Source: AGHT+IGQnkYLcsGIlrwJcTXgdo0uriGi3dv1q5Sm4a5skZmi1liRyMTXoxr/5flpJ4OGYjB55fswdQ==
+X-Received: by 2002:a0d:df41:0:b0:5e2:8830:7261 with SMTP id
+ i62-20020a0ddf41000000b005e288307261mr2675855ywe.0.1702577819559; 
+ Thu, 14 Dec 2023 10:16:59 -0800 (PST)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
+ [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
+ by smtp.gmail.com with ESMTPSA id
+ s129-20020a0dd087000000b005d361dd6454sm5665698ywd.87.2023.12.14.10.16.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 10:16:59 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [v2 01/16] qe: Add <config.h> to linux/immap_qe.h
+Date: Thu, 14 Dec 2023 13:16:43 -0500
+Message-Id: <20231214181658.3359902-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230804022548.24138-1-jit.loon.lim@intel.com>
-In-Reply-To: <20230804022548.24138-1-jit.loon.lim@intel.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Thu, 14 Dec 2023 23:43:12 +0530
-Message-ID: <CAMty3ZCwc_EEdRFn4d9RL9b1rZnwUi0YqkujcuzMFDNeiUc8fQ@mail.gmail.com>
-Subject: Re: [PATCH v1] drivers: mtd: spi: Add support for GD55LB02GEBIR SPI
- NOR flash
-To: Jit Loon Lim <jit.loon.lim@intel.com>
-Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
- Simon <simon.k.r.goldschmidt@gmail.com>, Tien Fong <tien.fong.chee@intel.com>, 
- Kok Kiang <kok.kiang.hea@intel.com>, Dinesh <dinesh.maniyam@intel.com>, 
- Boon Khai <boon.khai.ng@intel.com>, Alif <alif.zakuan.yuslaimi@intel.com>, 
- Teik Heng <teik.heng.chong@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,15 +87,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 4, 2023 at 7:56=E2=80=AFAM Jit Loon Lim <jit.loon.lim@intel.com=
-> wrote:
->
-> From: Teik Heng Chong <teik.heng.chong@intel.com>
->
-> Add Support for GigaDevice GD55LB02GEBIR SPI NOR flash as QSPI
-> configuration flash
->
-> Signed-off-by: Teik Heng Chong <teik.heng.chong@intel.com>
-> ---
+Given how we define QE_MURAM_SIZE today, this header needs to have
+<config.h> added to it.
 
-Applied to u-boot-spi/master
+Signed-off-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ include/linux/immap_qe.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/linux/immap_qe.h b/include/linux/immap_qe.h
+index 45307f51c103..a692f5dfb373 100644
+--- a/include/linux/immap_qe.h
++++ b/include/linux/immap_qe.h
+@@ -11,6 +11,8 @@
+ #ifndef __IMMAP_QE_H__
+ #define __IMMAP_QE_H__
+ 
++#include <config.h>
++
+ #ifdef CONFIG_MPC83xx
+ #if defined(CONFIG_ARCH_MPC8360)
+ #define QE_MURAM_SIZE		0xc000UL
+-- 
+2.34.1
+
