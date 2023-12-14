@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E9BAC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 17:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E58EC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 17:52:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8CEF87B37;
-	Thu, 14 Dec 2023 18:51:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 599B087B46;
+	Thu, 14 Dec 2023 18:51:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZczNw9qt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n+E4kbCP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0927D87A92; Thu, 14 Dec 2023 18:51:37 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 46A3E87A92; Thu, 14 Dec 2023 18:51:39 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B96BB87B22
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 18:51:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2967F87A92
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 18:51:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5d33574f64eso84693937b3.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 09:51:34 -0800 (PST)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5e266e8d39eso28326277b3.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 09:51:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702576293; x=1703181093; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702576296; x=1703181096; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Y5i9StxwS115ukC9GXdxIdcvAZXtIS0PGEu+hbdF0VI=;
- b=ZczNw9qt9G+xCfhGo+WY0N2pPJFndNDlWDvCvlBkMwpATDdkUws+9RqQ5dDbn1mqh8
- a5rk/oULdvgAR6Kgiz4Py1h6w3jXNYj4sbADUTh+pnmlzB+AKBE63hAoNG258brQ7kbQ
- kCFChQvkIlhe0zzdHvZmw+PNrhUz9W5MYkDog=
+ bh=JmAunETMfAMvtmIMueXKgBAz3jvlLc189MEAOOM68Ow=;
+ b=n+E4kbCP9+GB0+GuKr+SyLWgrCYgnoBMwW5YfTpV1IVPbpIv9uq2DShrsNhDR1qGfn
+ 8ygnFFQXwIKA5EUZAyGNYfSdoK/eA1vzOvAlob8dJ6lnMhK0SRNlS7Nbt0duMasrvR18
+ Cjk/y7OKeeizk68zjsx7p9vq/rqY9sNg/h4Hg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702576293; x=1703181093;
+ d=1e100.net; s=20230601; t=1702576296; x=1703181096;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y5i9StxwS115ukC9GXdxIdcvAZXtIS0PGEu+hbdF0VI=;
- b=h2lyYGhvpvoAT3w9+Tc/y3zkAL7Di6RlvrM7TLukBSxBgyw/D9WXUBPCNG15Lp8d3Z
- S95nOpoQf1gz57BWTaIYKxrTv/IDcUSyWTaASa5rEVurCAZ2F8HXD8bNU4GQoVx06Mcz
- qyBUpH3hGgL/0bBCUm5HMVy9PDuYRVbiJ3A9NFKf7eU3aHtLKSVrBicvNOtL87/Nht5r
- 6xGMrRXx4aFP6uYGOpu/1QjOS3GI3kN01UEuFirurTT8o11Xo7Vvf81bUJTnlLUmhnGF
- t9ob9ueXEYkl1ubQTsdvaDSlu9BkSVtKs3+oL8K1jUpCCOhEXuVy6gIEmIfKU8GxctLB
- AfWw==
-X-Gm-Message-State: AOJu0YxxPqJTaAY6VdH7/AU7wOcw19Iy0npO4Tnrg6Wwek5oYYldek3H
- Nj9iXZhl1ShtdyvLZ0M3ZcHmPQ==
-X-Google-Smtp-Source: AGHT+IGHvbyKIx9gLYewgUfIMIq3oPCsczwSyRst/8Lfn5KftrFK7XTIv4S8TjbBXkj6Mwo3Nk/7Ig==
-X-Received: by 2002:a0d:ddcc:0:b0:5e3:7f02:275e with SMTP id
- g195-20020a0dddcc000000b005e37f02275emr1367509ywe.11.1702576292014; 
- Thu, 14 Dec 2023 09:51:32 -0800 (PST)
+ bh=JmAunETMfAMvtmIMueXKgBAz3jvlLc189MEAOOM68Ow=;
+ b=I00iCaNYpeahqm5vs+RpoxpkmGnj+z67dVX1qC63GVRl60M41yHbEicO78SprNfY6r
+ Hdd/GdvzCx5INfjK9r0mmuvAlH5E3eM0qMz4s7R6pC4cCnz6O21KuMbOePkU5EISYWuj
+ zINTozC2ym+DGadRwvJ+ib6S5gYRbgETTM8l6R9mSdwC3J3HpFq+CWZTQsjir1MnrsEF
+ YOGTqN2ehPwSKRnese6NgHa8u/q47IHK3xivkgcIif9LyJBFYEzAViSwo2gW3IafAqsV
+ vqMdt+4URSzB4rrzu49qYq38B3VieO5ToDo8A4gvxGlYw/N1XeHb8vfJMUDOljPb7Aa0
+ Oe0w==
+X-Gm-Message-State: AOJu0YwJkAi9jpZ/N+AH5s42yBWx4IOgw/bCDprCBP/0rJ+yXyw/8tU7
+ OlpZPtCk+BcA08OgxjdjAUcUCJ8S+v13OgvkjyQ=
+X-Google-Smtp-Source: AGHT+IEcUSJszryecEuovOFeecTVa+FbEhbcybNVRmmM98bRj7tkfVw3qzR8vC01PKhLip3rmvMAwQ==
+X-Received: by 2002:a0d:d489:0:b0:5e3:e273:a50e with SMTP id
+ w131-20020a0dd489000000b005e3e273a50emr741874ywd.94.1702576295857; 
+ Thu, 14 Dec 2023 09:51:35 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
  [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
  by smtp.gmail.com with ESMTPSA id
- p206-20020a0de6d7000000b005e3f63083a1sm266000ywe.97.2023.12.14.09.51.31
+ n186-20020a0dfdc3000000b005d37b4b7cb6sm5642371ywf.77.2023.12.14.09.51.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 09:51:31 -0800 (PST)
-Date: Thu, 14 Dec 2023 12:51:29 -0500
+ Thu, 14 Dec 2023 09:51:35 -0800 (PST)
+Date: Thu, 14 Dec 2023 12:51:33 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Eddie James <eajames@linux.ibm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Safae Ouajih <souajih@baylibre.com>
-Subject: Re: [PATCH v2 14/21] bootm: Drop arguments from do_bootm_states()
-Message-ID: <20231214175129.GH2513409@bill-the-cat>
+Subject: Re: [PATCH v2 10/21] bootm: Add more fields to bootm_info
+Message-ID: <20231214175133.GI2513409@bill-the-cat>
 References: <20231214165112.2182274-1-sjg@chromium.org>
- <20231214165112.2182274-10-sjg@chromium.org>
+ <20231214165112.2182274-6-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BfbfqF5a0OdqFVpa"
+ protocol="application/pgp-signature"; boundary="4xwMf/jOewGgEQwF"
 Content-Disposition: inline
-In-Reply-To: <20231214165112.2182274-10-sjg@chromium.org>
+In-Reply-To: <20231214165112.2182274-6-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,49 +97,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BfbfqF5a0OdqFVpa
+--4xwMf/jOewGgEQwF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 14, 2023 at 09:50:23AM -0700, Simon Glass wrote:
+On Thu, Dec 14, 2023 at 09:50:19AM -0700, Simon Glass wrote:
 
-> Use the bootm_info struct to hold the information required by bootm.
->=20
-> Now that none of the functions called from do_bootm_states() needs an
-> argv[] list, change the arguments of do_bootm_states() as well. Take
-> care to use the same value for boot_progress even though it is a little
-> inconsistent.
->=20
-> For booti make sure it only uses argv[] and argc at the top of the
-> function, so we can eventually refactor to remove these parameters.
->=20
-> With bootm, some OSes need access to the arguments provided to the
-> command, so set these up in the bootm_info struct, for bootm only.
+> Add fields for the three bootm parameters and other things needed for
+> booting. Also add a helper to set up the struct correctly.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> diff --git a/include/bootm.h b/include/bootm.h
+> index 85c560d5a0ae..c9ab55f18d39 100644
+> --- a/include/bootm.h
+> +++ b/include/bootm.h
+> @@ -19,17 +19,52 @@ struct cmd_tbl;
+>  /**
+>   * struct bootm_info() - information used when processing images to boot
+>   *
+> + * These mirror the first three arguments of the bootm command. They are
+> + * designed to handle any type of image, but typically it is a FIT.
+> + *
+> + * @addr_fit: Address of image to bootm, as passed to
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Maybe we should just call this addr_img ? I was fine with this at first,
+and then started reviewing 14+ and it just reads oddly at that point.
+Since we use this for starting everything in memory I think we should
+name this a bit more generically, and avoid the editorializing about
+being typically FIT as well.
 
 --=20
 Tom
 
---BfbfqF5a0OdqFVpa
+--4xwMf/jOewGgEQwF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7QKEACgkQFHw5/5Y0
-tywVJQwAnzCemX/98trsrHF+2vDojCrLLgLddDcbWUGVvDNwBJmR83wCHN2nN2Nm
-PqV3yZdUYPxU/peV2bHG3ctpbAIlKFyFs69Kp1zk756nxXvyOfryFW5G99mHHFfV
-cKiOoxegySg7M16UsW+DIxsrDQqg83o25XjHcJxqY2NQhlPieIdVqoWokTfzajt9
-UlX8HR7MVn87nrUDgxk3aOfEi1kPpoedOHBD7VjCAOS8cXL7lYPovuSEfKqvQL8N
-DvNMuO8GRLdiaQvzH01v8mRYJrgvDG1aYp+N2sNmbU5cpmTmJXgi91kV5LsWKVm5
-7W2Q+7KEQVsorcRtgLPIjbMj5lsF/+YDEfUCJa0awac4oMG9uW5OuAYgkr8jgKK3
-II0v35J3SqawxolNWURgE1uUUwVgEJ2Yq9cWASza8AwLyxeGMYUeDo1YUfU+nscb
-TeNyhp8CvfZejVLkisIJoeqzDSZocE6RyJ3ma6yiJdpjbwxpPi2chRcho37RmVG7
-av/iiBJL
-=StrB
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7QKUACgkQFHw5/5Y0
+tyzD6gwAhgpE2n53QUKQXRf3gRZV+t/j0f3vJvLydRw3y/x3/ZIGJM213I72rDrB
+VzILpJKHyf/1AG1PPP3nLbeOKgNIkU39Ps4vMOvdTIO41PuU/1NKHJkCpyQUv6Qv
+ryFv6XqIGraKX06cNi8xhgqIg5aB0ClqfjmmJRRomjNVaCPPA9v6n/+kiuAvXFpW
+LLIARbYq1v/0FwPHWWga2yY1wDA1fYuC4YDe4VTg9NROlFbxTbx9ud6iJwfiB5lP
+X60kW9YqZvImuP2+qVmTPB7vbAS9Z/1LXxrvYanbCw6aNHRdg6tD9hG9ePJ/nqyz
+meCY1Sn7uH7iQPji70YYU5imQWaMkWzdbECbn/XJyQJKMkuo4izqs3gdxB6fHjL7
+l+CnA33AmlZhls7SNgaoTsKJHmKvbusfsvkUPw+cElvH1/UYIGIJWpbHYC5MyX+e
+zti19YhZ4vcLd4AliblATlxM/EYVMLkkaCmylbzWV7BepuD/bl2fRzJjsEoL5AfO
+E4bdqj4L
+=XUMd
 -----END PGP SIGNATURE-----
 
---BfbfqF5a0OdqFVpa--
+--4xwMf/jOewGgEQwF--
