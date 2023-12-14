@@ -4,49 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22BC3C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 219DEC10F13
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:32:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79AAF8782F;
-	Thu, 14 Dec 2023 11:12:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C11387A47;
+	Thu, 14 Dec 2023 11:32:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B1DB787A46; Thu, 14 Dec 2023 11:12:54 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5267087811
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:12:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BEACkW9063651;
- Thu, 14 Dec 2023 18:12:46 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 14 Dec 2023
- 18:12:42 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- Randolph <randolph@andestech.com>, CL Wang <cl634@andestech.com>, "Leo
- Yu-Chi Liang" <ycliang@andestech.com>
-Subject: [PATCH V3 2/2] configs: andes: add watchdog support fot andes ae350
-Date: Thu, 14 Dec 2023 18:12:30 +0800
-Message-ID: <20231214101230.824550-2-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231214101230.824550-1-randolph@andestech.com>
-References: <20231214101230.824550-1-randolph@andestech.com>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LyUdSsFm";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1464B87A4C; Thu, 14 Dec 2023 11:32:20 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D9A0087A35
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:32:17 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-28b1481f601so35675a91.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 02:32:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702549936; x=1703154736; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=n5vU2XMTk7CRW+Mb+MJUFMR5+S0dQKsGpZ2eJxVwIJM=;
+ b=LyUdSsFmhjPHBpghDPgdVX35pgyZemLpQxEKgcINTyxFA89ufSnQqLDQs/8VU7N5f5
+ FhpjoYvv+MH8LyW4V1CKuNzVHE6hj+O5MFCmKN16CQOO8WNxK52sU2WOfN1/VPqhgFCO
+ HIDc81SFLb5ac5jUNFZKGkGm0L65CzDnMNZUCqmNuPlLEl10Epd6aQ3N8RhNljSC150a
+ 3ej4NCYW9KcRLJWcmdmq9uBtZx8cvqAErB2NnGCjuLARZP1UckUYVB00OoFwDE2NSPtI
+ nlSMJbgJm7rHKc9TG9P8LT/mZOvIhww1z4bLclSZjT2pkJGjlm357xz+tU0uA3L1VMFa
+ fZIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702549936; x=1703154736;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=n5vU2XMTk7CRW+Mb+MJUFMR5+S0dQKsGpZ2eJxVwIJM=;
+ b=pdzNc6Hh8yIV3OIfrn6ULpHDnJ1FlbfK5bw3IcuLCCJxc6nHXQ0r3cpsavuX8KIl7E
+ tnMQkeyEC5U68XsH0BCiwIR29X6AfyMJZgaVG/ikravJEbBo5gPm/gFFIz3/z2PcE5Rl
+ J1TZLGINIsSRscE3dNMYQyfQIm5ghFFouJBfzHWBKEhfshGK/UMu3MKT1KA8lV4W6K1t
+ gDz/rmrq9UdHDKYqQnk1ssFVHJZ41q0QRUT163uJ8IgM3PSY78nXHXfETXc9VBJWu9h7
+ E4AiuIRC5L77srN+p29RHWBLNO8unDaavK2BVTc3mcP7kJ80SxcvNSKp6sy6jOyLC10l
+ Rpxw==
+X-Gm-Message-State: AOJu0YzFZIgFAqQgLUVUM7imqCV2kZzeAS5VoLgf/XFl1VXmIjvcsd8P
+ k2Cj5k6odYfsvZBGXUlFjuxCZD/2YetjGKbzbFo=
+X-Google-Smtp-Source: AGHT+IGUo5f1tbs7fU7FYBHYo3nqcRf7BUPJkIhMPqJ0ObfMSXG4wrhteuf7HMeB0bRZx1fINn7AMQng8z4Pc9sL5IM=
+X-Received: by 2002:a17:90b:1055:b0:28a:f2f2:331f with SMTP id
+ gq21-20020a17090b105500b0028af2f2331fmr3181803pjb.4.1702549936179; Thu, 14
+ Dec 2023 02:32:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.173]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BEACkW9063651
+References: <20231104163243.117404-1-marex@denx.de>
+In-Reply-To: <20231104163243.117404-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 14 Dec 2023 07:32:04 -0300
+Message-ID: <CAOMZO5Dd8C3KVUTJHr+oT3sTHUzMZ8Sod2dH6oO8wNuNvimXoA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] arm: imx6: Enable TCP, IPv6, wget on DH i.MX6 DHCOM
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,175 +89,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It adds the ATCWDT200 support for Andes AE350 platform.
-It also enables wdt command support.
+On Sat, Nov 4, 2023 at 1:32=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Enable support for TCP protocol, wget, and IPv6 on this platform.
+> The former two allow users download payload into the U-Boot from
+> a web server, which may be more convenient or easier to set up
+> than TFTP server. The later is enabled to future proof the IP
+> stack on this platform.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Signed-off-by: CL Wang <cl634@andestech.com>
-Signed-off-by: Randolph <randolph@andestech.com>
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
----
- configs/ae350_rv32_defconfig         | 4 ++++
- configs/ae350_rv32_spl_defconfig     | 4 ++++
- configs/ae350_rv32_spl_xip_defconfig | 4 ++++
- configs/ae350_rv32_xip_defconfig     | 4 ++++
- configs/ae350_rv64_defconfig         | 4 ++++
- configs/ae350_rv64_spl_defconfig     | 4 ++++
- configs/ae350_rv64_spl_xip_defconfig | 4 ++++
- configs/ae350_rv64_xip_defconfig     | 4 ++++
- 8 files changed, 32 insertions(+)
-
-diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-index 06cd972a0d..eb4dd90311 100644
---- a/configs/ae350_rv32_defconfig
-+++ b/configs/ae350_rv32_defconfig
-@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index f469d5bb2b..e09f878329 100644
---- a/configs/ae350_rv32_spl_defconfig
-+++ b/configs/ae350_rv32_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index 9672a19c23..850e67a0d9 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-index b90200a97e..fa0b52f686 100644
---- a/configs/ae350_rv32_xip_defconfig
-+++ b/configs/ae350_rv32_xip_defconfig
-@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-index a4b9ad6162..e67c9cbf93 100644
---- a/configs/ae350_rv64_defconfig
-+++ b/configs/ae350_rv64_defconfig
-@@ -22,6 +22,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -48,3 +49,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index 834a0fbbdd..1a3c294b16 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -57,3 +58,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index b52b8d78d7..f8db0a1a85 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -33,6 +33,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -58,3 +59,6 @@ CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
- # CONFIG_BINMAN_FDT is not set
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
-diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-index cc5e751c9b..51509e76c5 100644
---- a/configs/ae350_rv64_xip_defconfig
-+++ b/configs/ae350_rv64_xip_defconfig
-@@ -23,6 +23,7 @@ CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_SF_TEST=y
-+CONFIG_CMD_WDT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_PREFER_SERVERIP=y
- CONFIG_CMD_CACHE=y
-@@ -49,3 +50,6 @@ CONFIG_BAUDRATE=38400
- CONFIG_SYS_NS16550=y
- CONFIG_SPI=y
- CONFIG_ATCSPI200_SPI=y
-+# CONFIG_WATCHDOG_AUTOSTART is not set
-+CONFIG_WDT=y
-+CONFIG_WDT_ATCWDT200=y
--- 
-2.34.1
-
+Applied to u-boot-imx next, thanks.
