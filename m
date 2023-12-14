@@ -4,115 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED677C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 14:53:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1AEC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 15:36:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1371D87A8E;
-	Thu, 14 Dec 2023 15:53:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ED5E187AA4;
+	Thu, 14 Dec 2023 16:36:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HdvIuyRv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kzcAr2YW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF59487A9B; Thu, 14 Dec 2023 15:53:16 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 24E5487AA1; Thu, 14 Dec 2023 16:36:30 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F06787A89
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 15:53:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14DA987A61
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 16:36:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2cc47f1e829so4258851fa.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 06:53:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5527ee1b5c3so1024646a12.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 07:36:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702565593; x=1703170393; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=skXGbXSIreTR378cHYiM0gsCg47hJf9aYIfMnwZnJOA=;
- b=HdvIuyRvLu0H/SZDsC8jCaRxGlLL4GJfAqTJdRVW5VxEwcIIXpr5DyooE63QCTmIdN
- H+SYwMnQ5v8NGLUhK2ZbXkDpByGAatagftCZtdjLH9p3MKvPPXm+10XvydeiZAT/wbUF
- I2X6A6FkGNqUAfJ6pAKUlXtPW5uo2ybEdxdW3zdCCpQBC1zsKOr+E6rjiSBMUatD6Pzw
- uo5Jvo8BYJ0JW4tGHzituYr3ltYhrD1LisaeEMj7CBphg7wQ0Sm0tOfhj83cUndE5YRX
- xgldZlln5UeKwenG7XdVYKb/XW13nBjQCMDsdzEvgfDCO+DPrQdlClqVgu77XoMzzJAb
- 57Zw==
+ d=gmail.com; s=20230601; t=1702568187; x=1703172987; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7aoTw4OzsLC4RfHyhEqd9IMSyhLj1y7UIdS2DuMa/Jw=;
+ b=kzcAr2YW7lINM2PWD9fKyGJA+rqv3rPqSnt+iz4y3SZx4StYaSeQd/H2xghuTCAjYP
+ RM+NALSfJO2Ohd1RDHEVDUmQDmE4HOY9VzQpXOmtmFZdZFrq7ssvCNxV9YCy2q0Hketr
+ k02IV7wpcZKPVHJCuzIT8463xy2gHyXT+68Q4oVJNbLuZhsLSLo7Trr3dt1rF3CN8hYR
+ T3Co2LEN17NTJ0Mw0kO57qGrkVkE/iURgzDZJEAm8akIEgvr6NuS7yeITUl3wTFu23r5
+ yfCBR4IUlkVuUbkxdO1vkeykiNSnTBGdJ+vk5hwndba97tzTauSd8xH5redZWEqZ7nuf
+ UZNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702565593; x=1703170393;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=skXGbXSIreTR378cHYiM0gsCg47hJf9aYIfMnwZnJOA=;
- b=X2UwHv26NVUrT4FTJQAZS13ssrk8eZ3KA7umJDqjC8JFrGIa5+Czpeo521CWqS+dX1
- nM3iBhkJkwmKLW9FfoCpDENKDY3MIEYV7nxuPBNcyGZj068meBSXxLP/XSnm3HRX0hPj
- RCygRtihaDKEqokO/q4yj+phjF0qyjxo9UieMBVg0XiIPkEEPXDs+vgNS+E4vEv6rVxC
- Zo6wD9bZJEsJDOnYV1N+8kwL6DAeSl4uVngbkxMzVIfpH7VnuZ5ruiPSGQTq/ExRxQ+C
- iWOIa/aZigahxOO7v/NLTC55HvJ4sNuq2iESrEwOq5CWJPkQx8NebcmR8vpdAXWz6hSG
- /oFQ==
-X-Gm-Message-State: AOJu0YyJ19SthmCxUjCIXjkjY4Vy2TnOB97E/922EvAeqcCVvIwt+x0c
- SHk+yxMqJ3pWmNdQtfSNnMq1tg==
-X-Google-Smtp-Source: AGHT+IHyaE024GLfsR+Wc4ryyIrZYr/2H4ovYTdMbPruIU33VMS2BT3rzXtgdRHHKojUAmfund7rWA==
-X-Received: by 2002:a2e:8e39:0:b0:2cc:41f1:a53c with SMTP id
- r25-20020a2e8e39000000b002cc41f1a53cmr611359ljk.7.1702565593213; 
- Thu, 14 Dec 2023 06:53:13 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:1ec5:7f64:7775:e1e3?
- ([2a01:e0a:982:cbb0:1ec5:7f64:7775:e1e3])
- by smtp.gmail.com with ESMTPSA id
- x14-20020adfdd8e000000b0033630da3528sm6670578wrl.25.2023.12.14.06.53.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Dec 2023 06:53:12 -0800 (PST)
-Message-ID: <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
-Date: Thu, 14 Dec 2023 15:53:11 +0100
+ d=1e100.net; s=20230601; t=1702568187; x=1703172987;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7aoTw4OzsLC4RfHyhEqd9IMSyhLj1y7UIdS2DuMa/Jw=;
+ b=SJIt9xMd+zNC6ImKwpFOI3f+X7mMWcu6gWYhbMhIT4pyCyiInXemEebNsi1QRnF7k+
+ I/Ifp1lk+r5w10icbKY3o8tFyDWVRAvvWJw94v6nBUaOA1eQAItn+640AAJU6CULTyko
+ rv4uJCWOBEAx5UHPKWNbATLVgZsCfBqKMzvBWFMT0KorpaoOrf242/7rlG4VWV7BZHUR
+ RsGxeFjYyRrTj8HqOJM9+UJDFeIdQZSTiudgWKQkSicF63zkrLYXp5Obj4eqymUqaY/h
+ 8qdB3sQIqwse3cGcbhKNS1pmSX2iyDhOS0jK0DDjWdM6iJbWVfkjWIZ6XFu2HRIMbvsi
+ qbxg==
+X-Gm-Message-State: AOJu0Yxs5IrmymXb/KseelB4ecgRgbg6BJlMzmtMsiNtzfH+MeokOw67
+ QsqR6vSPZT8ZkCIN3oyINGI=
+X-Google-Smtp-Source: AGHT+IGpJEjbt5Kw87AvVHEmj7Sqpfrh6cn5IZWW6q5OWiB43w0Gdk/CJyr7aaNhgpvuSEwj4xh7tw==
+X-Received: by 2002:a50:9f4e:0:b0:551:c796:78d0 with SMTP id
+ b72-20020a509f4e000000b00551c79678d0mr3884602edf.27.1702568187199; 
+ Thu, 14 Dec 2023 07:36:27 -0800 (PST)
+Received: from localhost.lan (031011218106.poznan.vectranet.pl.
+ [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
+ fd1-20020a056402388100b0055265d5f3c6sm910575edb.24.2023.12.14.07.36.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 07:36:26 -0800 (PST)
+From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
+To: Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ devicetree@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ u-boot@lists.denx.de,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
+Subject: [PATCH RFC] dt-bindings: nvmem: u-boot,
+ env: add any-name MAC cells compatible
+Date: Thu, 14 Dec 2023 16:36:20 +0100
+Message-Id: <20231214153620.23998-1-zajec5@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
- dgilmore@fedoraproject.org, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231214135103.1606605-1-sumit.garg@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,188 +90,126 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Rafał Miłecki <rafal@milecki.pl>
 
-On 14/12/2023 14:50, Sumit Garg wrote:
-> Prerquisite
+So far we had a property for "ethaddr" NVMEM cell containing base
+Ethernet MAC address. The problem is vendors often pick non-standard
+names for storing MAC(s) (other than "ethaddr"). A few names were
+noticed over years:
+1. "wanaddr" (Edimax, ELECOM, EnGenius, I-O DATA, Sitecom)
+2. "et1macaddr" (ASUS)
+3. "eth1addr" (Buffalo)
+4. "athaddr" (EnGenius)
+5. "baseMAC" (Netgear)
+6. "mac" (Netgear)
+7. "mac_addr" (Moxa)
+and more ("HW_LAN_MAC", "HW_WAN_MAC", "INIC_MAC_ADDR", "LAN_MAC_ADDR",
+"RADIOADDR0", "RADIOADDR1", "WAN_MAC_ADDR", "lan1_mac_addr", "wanmac",
+"wmac1", "wmac2").
 
-s/Prerquisite/Prerequisite/
+It doesn't make sense to add property for every possible MAC cell name.
+Instead allow specifying cells with "mac" compatible.
 
-> -----------
-> 
-> This patch series requires devicetree-rebasing git repo to be added as a
-> subtree to the main U-boot repo via:
-> 
-> $ git subtree add --prefix devicetree-rebasing \
->        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->        v6.6-dts --squash
+Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+---
+List of devices and their U-Boot MAC variables:
+alphanetworks,asl56026) wanmac
+asus,rt-ac65p) et1macaddr
+asus,rt-ac85p) et1macaddr
+belkin,f9k1109v1) HW_WAN_MAC + HW_LAN_MAC 
+buffalo,ls220de) eth1addr
+buffalo,ls421de) eth1addr
+checkpoint,l-50) lan1_mac_addr
+dovado,tiny-ac) INIC_MAC_ADDR
+dovado,tiny-ac) LAN_MAC_ADDR + WAN_MAC_ADDR
+edimax,ra21s) wanaddr
+edimax,rg21s) wanaddr
+elecom,wrc-2533ghbk-i) wanaddr
+elecom,wrc-2533ghbk2-t) wanaddr
+engenius,ecb1200) athaddr
+engenius,ecb1750) athaddr
+engenius,epg5000) wanaddr
+engenius,epg600) wanaddr
+engenius,esr1200) wanaddr
+engenius,esr1750) wanaddr
+engenius,esr600) wanaddr
+engenius,esr600h) wanaddr
+engenius,esr900) wanaddr
+enterasys,ws-ap3705i) RADIOADDR0 + RADIOADDR1
+iodata,wn-ac1167dgr) wanaddr
+iodata,wn-ac1167gr) wanaddr
+iodata,wn-ac1600dgr) wanaddr
+iodata,wn-ac1600dgr2) wanaddr
+iodata,wn-ac733gr3) wanaddr
+iodata,wn-ag300dgr) wanaddr
+iodata,wnpr2600g) wanaddr
+moxa,awk-1137c) mac_addr
+netgear,wax220) mac
+netgear,wndap620) baseMAC
+netgear,wndap660) baseMAC
+ocedo,panda) wmac1 + wmac2
+sitecom,wlr-7100) wanaddr
+sitecom,wlr-8100) wanaddr
 
-So I think the big question is: when should the subtree be updated ?
+ .../devicetree/bindings/nvmem/u-boot,env.yaml | 33 +++++++++++++++++++
+ 1 file changed, 33 insertions(+)
 
-Because as we discussed in the previous GH pull request, if a bindings changes
-was made in the upstream Linux DT, then the subtree update should wait until
-the u-boot support is merged before updating. This could cause a lot of frustration.
-
-And this could cause a lot of regressions, even more if both Linux and U-boot are
-not maintained by the same people.
-
-Neil
-
-> 
-> Background
-> ----------
-> 
-> This effort started while I was reviewing patch series corresponding to
-> Qcom platforms [1] which was about to import modified devicetree source
-> files from Linux kernel. I suppose keeping devicetree files sync with
-> Linux kernel without any DT bindings schema validation has been a pain
-> for U-boot SoC/platform maintainers. There has been past discussions
-> about a single DT repo but that hasn't come up and Linux kernel remained
-> the place where DT source files as well as bindings are placed and
-> maintained.
-> 
-> However, Linux kernel DT maintainers proposed [2] for U-boot to rather
-> use devicetree-rebasing repo [3] which is a forked copy from Linux
-> kernel for DT source files as well as bindings. It is tagged at every
-> Linux kernel major release or intermideate release candidates. So here I
-> have tried to reuse that to bring DT bingings compliance as well as a
-> standard way to maintain a regular sync of DT source files with Linux
-> kernel.
-> 
-> In order to maintain devicetree files sync, U-boot will maintains a Git
-> subtree for devicetee-rebasing repo as `devicetee-rebasing/` sub-directory.
-> It will be regularly updated with every new kernel major release via
-> subtree pull as follows::
-> 
-> $ git subtree pull --prefix devicetree-rebasing \
->        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->        <release-tag> --squash
-> 
-> The RFC/prototype for this series has been discussed with Linux DT
-> maintainers as well as U-boot maintainers here [4]. Now we would like to
-> reach out to wider U-boot community to seek feedback.
-> 
-> [1] https://lore.kernel.org/all/CAFA6WYMLUD9cnkr=R0Uur+1UeTMkKjM2zDdMJtXb3nmrLk+pDg@mail.gmail.com/
-> [2] https://lore.kernel.org/all/CAL_JsqKEjv2tSGmT+0ZiO7_qbBfhTycbGnhJhYpKDFzfO9jzDg@mail.gmail.com/
-> [3] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
-> [4] https://github.com/u-boot/u-boot/pull/451
-> 
-> Changes
-> -------
-> 
-> Traditionally, U-boot placed copies of devicetree source files from Linux
-> kernel into `arch/<arch>/dts/<name>.dts`, which can be selected via:
->   
-> CONFIG_DEFAULT_DEVICE_TREE "<name>"
->   
-> SoC/board maintainers are encouraged to migrate to using mirrored copies
-> from `devicetree-rebasing/` into `dts/arch/<arch>/<vendor>` via:
->   
-> CONFIG_OF_UPSTREAM=y
-> CONFIG_DEFAULT_DEVICE_TREE "<vendor>/<name>"
-> 
-> An example have been shown for Amlogic meson-gxbb SoC and corresponding
-> derived boards via patch #7 and #8.
-> 
-> Devicetree bindings schema checks
-> ---------------------------------
-> 
-> With devicetee-rebasing Git subtree, the devicetree bindings are also
-> regularly synced with Linux kernel as `devicetree-rebasing/Bindings/`
-> sub-directory. This allows U-boot to run devicetree bindings schema checks
-> which will bring compliance to U-boot core/drivers regarding usage of
-> devicetree.
-> 
-> Dependencies
-> ------------
-> 
-> The DT schema project must be installed in order to validate the DT schema
-> binding documents and validate DTS files using the DT schema. The DT schema
-> project can be installed with pip:
-> 
-> $ pip3 install dtschema
-> 
-> Note that 'dtschema' installation requires 'swig' and Python development
-> files installed first. On Debian/Ubuntu systems:
-> 
-> $ apt install swig python3-dev
-> 
-> Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
-> installed. Ensure they are in your PATH (~/.local/bin by default).
-> 
-> Recommended is also to install yamllint (used by dtschema when present).
-> 
-> Running checks
-> --------------
-> 
-> In order to perform validation of DTB files, use the ``dtbs_check`` target:
-> 
-> $ make dtbs_check
-> 
-> It is also possible to run checks with a subset of matching schema files by
-> setting the ``DT_SCHEMA_FILES`` variable to 1 or more specific schema files
-> or patterns (partial match of a fixed string). Each file or pattern should
-> be separated by ':'.
-> 
-> $ make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml:rtc.yaml
-> $ make dtbs_check DT_SCHEMA_FILES=/gpio/
-> $ make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml
-> 
-> Sumit Garg (8):
->    Azure CI: Exclude devicetree-rebasing subtree for CONFIG checks
->    Makefile: Add support for DT bindings schema checks
->    scripts/Makefile.lib: Statically define *-u-boot.dtsi files location
->    dts: Add alternative location for upstream DTB builds
->    doc: devicetree: Updates for devicetree-rebasing subtree
->    MAINTAINERS: Add myself as devicetree-rebasing maintainer
->    dts: meson-gxbb: Switch to using upstream DT
->    dts: meson-gxbb: Drop redundant devicetree files
-> 
->   .azure-pipelines.yml                    |   3 +-
->   MAINTAINERS                             |   6 +
->   Makefile                                |  20 +-
->   arch/arm/dts/Makefile                   |   8 -
->   arch/arm/dts/meson-gxbb-kii-pro.dts     | 140 ----
->   arch/arm/dts/meson-gxbb-nanopi-k2.dts   | 415 ------------
->   arch/arm/dts/meson-gxbb-odroidc2.dts    | 418 ------------
->   arch/arm/dts/meson-gxbb-p200.dts        | 100 ---
->   arch/arm/dts/meson-gxbb-p201.dts        |  26 -
->   arch/arm/dts/meson-gxbb-p20x.dtsi       | 250 -------
->   arch/arm/dts/meson-gxbb-wetek-hub.dts   |  58 --
->   arch/arm/dts/meson-gxbb-wetek-play2.dts | 119 ----
->   arch/arm/dts/meson-gxbb-wetek.dtsi      | 292 --------
->   arch/arm/dts/meson-gxbb.dtsi            | 856 ------------------------
->   configs/nanopi-k2_defconfig             |   3 +-
->   configs/odroid-c2_defconfig             |   3 +-
->   configs/p200_defconfig                  |   3 +-
->   configs/p201_defconfig                  |   3 +-
->   configs/videostrong-kii-pro_defconfig   |   3 +-
->   configs/wetek-hub_defconfig             |   3 +-
->   configs/wetek-play2_defconfig           |   3 +-
->   doc/develop/devicetree/control.rst      | 108 ++-
->   dts/Kconfig                             |  11 +
->   dts/Makefile                            |  17 +-
->   dts/arch/arm64/Makefile                 |  23 +
->   dts/arch/arm64/amlogic                  |   1 +
->   scripts/Makefile.lib                    |  42 +-
->   27 files changed, 204 insertions(+), 2730 deletions(-)
->   delete mode 100644 arch/arm/dts/meson-gxbb-kii-pro.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-nanopi-k2.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-odroidc2.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-p200.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-p201.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-p20x.dtsi
->   delete mode 100644 arch/arm/dts/meson-gxbb-wetek-hub.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-wetek-play2.dts
->   delete mode 100644 arch/arm/dts/meson-gxbb-wetek.dtsi
->   delete mode 100644 arch/arm/dts/meson-gxbb.dtsi
->   create mode 100644 dts/arch/arm64/Makefile
->   create mode 120000 dts/arch/arm64/amlogic
-> 
+diff --git a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml b/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
+index 0006f022d0af..68214b96f5c9 100644
+--- a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
++++ b/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
+@@ -67,6 +67,34 @@ properties:
+         description: The first argument is a MAC address offset.
+         const: 1
+ 
++patternProperties:
++  ".*":
++    allOf:
++      - if:
++          type: object
++        then:
++          properties:
++            compatible:
++              enum:
++                - mac
++      - if:
++          properties:
++            compatible:
++              contains:
++                const: mac
++        then:
++          description:
++            Ethernet interfaces base MAC address.
++
++          properties:
++            compatible: true
++
++            "#nvmem-cell-cells":
++              description: The first argument is a MAC address offset.
++              const: 1
++
++          additionalProperties: false
++
+ additionalProperties: false
+ 
+ examples:
+@@ -90,6 +118,11 @@ examples:
+             mac: ethaddr {
+                 #nvmem-cell-cells = <1>;
+             };
++
++            wanaddr {
++                compatible = "mac";
++                #nvmem-cell-cells = <1>;
++            };
+         };
+     };
+   - |
+-- 
+2.35.3
 
