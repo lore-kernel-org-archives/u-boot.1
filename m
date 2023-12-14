@@ -4,52 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E5BC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 07:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE19C4167D
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 07:58:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C11C587A16;
-	Thu, 14 Dec 2023 08:34:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E08F87A3A;
+	Thu, 14 Dec 2023 08:58:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux-m68k.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uTwxK+Ca";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE06087A30; Thu, 14 Dec 2023 08:34:25 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EDE1087A3C; Thu, 14 Dec 2023 08:58:08 +0100 (CET)
+Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com
+ [209.85.219.174])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 091228796F
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:34:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AD7A87A36
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:58:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=linux-m68k.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 8045CCE2127
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 07:34:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7307C433A9
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 07:34:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702539255;
- bh=0sJX63hk23OFUCPWAXphdE2kSZZfa5lWGWce7cbs/GA=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=uTwxK+Ca4TqHHzHH5wnc6B4C7Bo1qFHxy6q8FxW6v2gFQxgRaPvPwY3hzFXVOsmsi
- l4ILMD3Qh9W755sLOoJbSo1UgolZwZr8ztzlHkp13buZvOXKPWF6TApZgyuartauwP
- swqGjyOhc5Yg8W7Ie/MbvuZsuKnnZSZ4un8INECzVB57R60CWseHYqf5epFO9sKjrs
- yHPqY52VoC5eM25lADy9PXGuO5FPCKYPCfJWzOVR+/j7+C+d3rm02zlLYf4MdGh6bZ
- H+VIJybzHPWEjbjobpkvTvEv/OnU2AD5Ih5p2RmQCfqy4NornyruZ3mUB+a33skdb7
- T/QuwdlHlGowA==
-Received: by mail-ot1-f50.google.com with SMTP id
- 46e09a7af769-6da2db096bcso149281a34.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:34:15 -0800 (PST)
-X-Gm-Message-State: AOJu0Ywoerjxkqxv36h9eRVH9P41Tc4NaHxqNq4XT6e9IKHsXFug+IFY
- NVNJYkFn4DaV+5Q4DvUDptxbvBxBL4Yktkvz6ms=
-X-Google-Smtp-Source: AGHT+IEMKnC6FlP9GRM63r+EHiC1p5vnRxH1XqjV7YGVctzAInZpA1YMwKlOfYOhwnCGD4xlWnFt7aMoiCFn0edAslc=
-X-Received: by 2002:a05:6808:1491:b0:3b9:fabb:f66b with SMTP id
- e17-20020a056808149100b003b9fabbf66bmr3911157oiw.2.1702539255076; Wed, 13 Dec
- 2023 23:34:15 -0800 (PST)
+ spf=pass smtp.mailfrom=geert.uytterhoeven@gmail.com
+Received: by mail-yb1-f174.google.com with SMTP id
+ 3f1490d57ef6-dbcdde08dc1so858876276.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:58:06 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702540685; x=1703145485;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sj0NwqxPiof3ml42MbQY4Ahv5ohZXpex6OnUgaYQww8=;
+ b=cFDd3DeDsqqIHKRasBYarbQ1P00fFk4+krdpPAyw/UTOp1dkP8FsTUtPVdmaL5CqwN
+ 2br1NW8nyb69W/02rmxeAMc5dV8PPj/DyUUscV2dgdZZDCYqzkZlfupyeOkGLODmFXPc
+ 3SvEbFx29uP+k3lkA8fcC0bnzdPAFzbcUT86fNI64l5Db49ym6op/vjREkmNmGzTwpJF
+ ixJ8qXOzPeOe8o2Ivq/3+UIPOZGMwRxwGRDEtKMnvIBo7pwcRC+If8us8OUqUnHdkZ1E
+ x351yrNz/cTUyOcBUcV1BTxHTSxDp77MYMGGMa6ROcDNrGSqhDaMtnlolCJxa6T5S5Kl
+ 47cg==
+X-Gm-Message-State: AOJu0YwbJkwzEDktBw5thss6TBF7ZiGsfQvJc1Fy3w8dkpDNPMjgADJ5
+ MMMkB8viuD4OBKBOEt/Qdb2IiEmAvQJj7w==
+X-Google-Smtp-Source: AGHT+IHo/S281vqqi1jWbhDSdCMlxq4RFeiWMTmEDrRdU5ChokA1BvMEhStG5NnB3+vMP6JBpvTelw==
+X-Received: by 2002:a05:6902:1b0e:b0:dbc:bfb7:1f45 with SMTP id
+ eh14-20020a0569021b0e00b00dbcbfb71f45mr2862511ybb.13.1702540684825; 
+ Wed, 13 Dec 2023 23:58:04 -0800 (PST)
+Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com.
+ [209.85.219.182]) by smtp.gmail.com with ESMTPSA id
+ cj9-20020a056902188900b00dbcd9bb4bbasm762844ybb.58.2023.12.13.23.58.04
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 13 Dec 2023 23:58:04 -0800 (PST)
+Received: by mail-yb1-f182.google.com with SMTP id
+ 3f1490d57ef6-db8892a5f96so7436599276.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:58:04 -0800 (PST)
+X-Received: by 2002:a5b:7cf:0:b0:da0:442f:988e with SMTP id
+ t15-20020a5b07cf000000b00da0442f988emr5673057ybq.19.1702540684087; Wed, 13
+ Dec 2023 23:58:04 -0800 (PST)
 MIME-Version: 1.0
 References: <20231202035511.487946-1-sjg@chromium.org>
  <20231202035511.487946-3-sjg@chromium.org>
@@ -62,13 +68,13 @@ References: <20231202035511.487946-1-sjg@chromium.org>
  <CAGXv+5Est3FL-XcEL-vB-6zVNas0mqb2cNYa==Yb7W2SQU9xVQ@mail.gmail.com>
  <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
 In-Reply-To: <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Thu, 14 Dec 2023 16:33:38 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAR7Fm-1yaZmyH78vG5yNbbW2Avjj5F63u+aST6JQoMd5A@mail.gmail.com>
-Message-ID: <CAK7LNAR7Fm-1yaZmyH78vG5yNbbW2Avjj5F63u+aST6JQoMd5A@mail.gmail.com>
+From: Geert Uytterhoeven <geert@linux-m68k.org>
+Date: Thu, 14 Dec 2023 08:57:52 +0100
+X-Gmail-Original-Message-ID: <CAMuHMdXDPSQXNhBH5LCrggfJCWG32v_ZtcRdPfaGRuLj20N+Lg@mail.gmail.com>
+Message-ID: <CAMuHMdXDPSQXNhBH5LCrggfJCWG32v_ZtcRdPfaGRuLj20N+Lg@mail.gmail.com>
 Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Chen-Yu Tsai <wenst@chromium.org>
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>, 
+To: Masahiro Yamada <masahiroy@kernel.org>
+Cc: Chen-Yu Tsai <wenst@chromium.org>, 
  Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Simon Glass <sjg@chromium.org>, 
  linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
@@ -97,17 +103,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 14, 2023 at 3:12=E2=80=AFPM Masahiro Yamada <masahiroy@kernel.o=
+Hi Yamada-san,
+
+On Thu, Dec 14, 2023 at 7:12=E2=80=AFAM Masahiro Yamada <masahiroy@kernel.o=
 rg> wrote:
->
 > On Thu, Dec 14, 2023 at 1:03=E2=80=AFPM Chen-Yu Tsai <wenst@chromium.org>=
  wrote:
-> >
 > > On Sun, Dec 10, 2023 at 1:31=E2=80=AFAM Geert Uytterhoeven <geert@linux=
 -m68k.org> wrote:
-> > >
-> > > Hi Laurent,
-> > >
 > > > On Sat, Dec 9, 2023 at 4:29=E2=80=AFPM Laurent Pinchart
 > > > <laurent.pinchart@ideasonboard.com> wrote:
 > > > > On Sat, Dec 09, 2023 at 10:13:59PM +0900, Chen-Yu Tsai wrote:
@@ -262,163 +265,27 @@ re
 > > If we don't we could end up with two configurations that have the same
 > > compatible string?
 >
->
 > Right.
 >
 > We would end up with such situations because applying
 > an overlay does not change the compatible string.
->
->
->
-> With this code in arch/arm64/boot/dts/ti/Makefile:
->
-> k3-am642-tqma64xxl-mbax4xxl-sdcard-dtbs :=3D \
->       k3-am642-tqma64xxl-mbax4xxl.dtb k3-am64-tqma64xxl-mbax4xxl-sdcard.d=
-tbo
-> k3-am642-tqma64xxl-mbax4xxl-wlan-dtbs :=3D \
->       k3-am642-tqma64xxl-mbax4xxl.dtb k3-am64-tqma64xxl-mbax4xxl-wlan.dtb=
-o
->
->
->
->
-> $ fdtdump  arch/arm64/boot/dts/ti/k3-am642-tqma64xxl-mbax4xxl-sdcard.dtb
-> 2>/dev/null| head -n15 | tail -n2
->     model =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier board";
->     compatible =3D "tq,am642-tqma6442l-mbax4xxl", "tq,am642-tqma6442l",
-> "ti,am642";
->
->
-> $ fdtdump  arch/arm64/boot/dts/ti/k3-am642-tqma64xxl-mbax4xxl-wlan.dtb
-> 2>/dev/null| head -n15 | tail -n2
->     model =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier board";
->     compatible =3D "tq,am642-tqma6442l-mbax4xxl", "tq,am642-tqma6442l",
-> "ti,am642";
->
->
->
->
->
-> These two go into image.fit, but one of them is completely dead
-> since there is no way to distinguish them.
->
->
-> $ fdtdump  arch/arm64/boot/image.fit
->
->         ...
->
->         conf-10 {
->             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> "tq,am642-tqma6442l", "ti,am642";
->             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier=
- board";
->             fdt =3D "fdt-10";
->             kernel =3D "kernel";
->         };
->
->         ...
->
->         conf-25 {
->             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
-> "tq,am642-tqma6442l", "ti,am642";
->             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier=
- board";
->             fdt =3D "fdt-25";
->             kernel =3D "kernel";
->         };
->
->
->
->
->
-> I agree with Chen-Yu.
->
-> FIT should not include full DTBs.
->
-> Bootloaders should assemble the final DTB
-> from base and overlays on-the-fly.
->
->
-> The FIT spec allows the "fdt" property to list
-> multiple image nodes.
->
->
-> o config-1
->  |- description =3D "configuration description"
->  |- kernel =3D "kernel sub-node unit name"
->  |- fdt =3D "fdt sub-node unit-name" [, "fdt overlay sub-node unit-name",=
- ...]
->  |- loadables =3D "loadables sub-node unit-name"
->  |- script =3D "
->  |- compatible =3D "vendor
 
+That is correct.  Which is one of the reasons for not using overlays
+for this, cfr. the details in my reply in the other thread
+"Re: Proposal: FIT support for extension boards / overlays"
+https://lore.kernel.org/all/CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex=
+6wvQ@mail.gmail.com/
 
+Gr{oetje,eeting}s,
 
-
-
-This is a question for U-Boot (and barebox).
-
-
-
-
-   images {
-          base {
-                ...
-          };
-
-          addon1 {
-                ...
-          };
-
-          addon2 {
-                ...
-          };
-    };
-
-    configurations {
-          ...
-          fdt =3D "base", "addon1", "addon2";
-    };
-
-
-
-
-Is U-Boot's "bootm" command able to dynamically construct
-the full DTB from "base" + "addon1" + "addon2"
-and pass to the kernel?
-
-
-
-When I used overlay from U-Boot command line last time,
-I typed complicated commands, following this manual:
-https://docs.u-boot.org/en/latest/usage/fdt_overlays.html
-
-
-
-
-One more question to confirm if I can use this
-for my practical use-cases.
-
-Is U-Boot able to handle FIT (includes kernel + DTs)
-and a separate initrd?
-
-  # bootm  <fit-address>:<conf-name>  <ramdisk-address>
-
-
-Presumably, it would be difficult to inject initramdisk
-into image.fit later, so I am hoping bootm would work like that,
-but I did not delve into U-Boot code.
-
-
-
-If it works, is it possible to verify the integrity of initrd?
-The kernel and DTs inside FIT will be verified, but not sure
-if it is possible for ramdisk.
-
-
-
-
+                        Geert
 
 --=20
-Best Regards
-Masahiro Yamada
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
+.org
+
+In personal conversations with technical people, I call myself a hacker. Bu=
+t
+when I'm talking to journalists I just say "programmer" or something like t=
+hat.
+                                -- Linus Torvalds
