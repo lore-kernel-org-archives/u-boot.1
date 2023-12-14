@@ -4,60 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C11DAC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F972C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:51:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FAA987822;
-	Thu, 14 Dec 2023 17:47:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id A337887AD3;
+	Thu, 14 Dec 2023 17:51:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="u8JHyJkz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DFHkxqo5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 048D087A21; Thu, 14 Dec 2023 17:47:47 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8843587AD3; Thu, 14 Dec 2023 17:51:47 +0100 (CET)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FF80877E2
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:47:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F83287AC5
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 7debb60f-9aa0-11ee-91e7-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 7debb60f-9aa0-11ee-91e7-005056994fde;
- Thu, 14 Dec 2023 17:47:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=epTBktcQxmu6MMlnjwJsF6Enk6fC3YFlsmDqkB6LrGI=;
- b=u8JHyJkzRbfLdx2ziZ8ZrdsLpI33bWDfYCpsVhuUAq4TN2FpSBuo7ztSmn8MYXMUfV4hovXtcThXX
- /bULOjhiVGV48h7YGyqO/1J2enQBaNGPUpE+2kuxAvHJ/prFk/KMvLfoUt7+Z6vP0VvSPWqFl8ePeB
- M6vtB+CVrBbLOcbEFHcz0NLV1BtPhWQ5X8jUnNAjsCNrAH1zCC+JjbAtCzn1jIaIPkw8X7ka7+ixJ9
- eABEPq0+WTasBhz99wcp1qfGskrJqEsfGvdUEaJDycqnaUKfZ+7HI8PCnGQ0loDhAJ+hqn1qh+svKy
- UQy9hnSVSkoP2yuN3Zl36wMNW+9Fsew==
-X-KPN-MID: 33|qp4sAY9P0gghx7hud7DVJ41qT5fGTSsADrMZhZDVwAnS1qc9H9iQ1PcwnT0OyD2
- dLwg2Ws/MyOqSW+d7vLhugHHnhKMA4oEV4BNeVROwgKg=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|0G1k6EzhPYpfb4j3m8k3N6gZyEF50OZwUdgcJvQiznmWJhw3I8lW2WpXYNj7LDW
- DvjOHJLwbFuSRt6wmb9s/rw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 80175816-9aa0-11ee-acaa-00505699d6e5;
- Thu, 14 Dec 2023 17:47:43 +0100 (CET)
-Date: Thu, 14 Dec 2023 17:47:42 +0100
-Message-Id: <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, sjg@chromium.org,
- Drew.Reed@arm.com, u-boot@lists.denx.de, nd@arm.com
-In-Reply-To: <20231214155346.GB295924@e130802.arm.com> (message from
- Abdellatif El Khlifi on Thu, 14 Dec 2023 15:53:46 +0000)
-Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
-References: <20231214155346.GB295924@e130802.arm.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-35f77a076e1so2162805ab.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702572704; x=1703177504; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4CBT60uiP4+j9cauRH/CkSpdQijkPMwjpQPjTvsAf3Y=;
+ b=DFHkxqo5rl+LQK9ui5vsQIU6sPxVfk5+BPJzkGGVEfd/tZsDuZAPDJiZ7agD04dO9/
+ +mYoj/Cj8MwZgZ32bERMgbb6cBfx+YA81D05yACriJFqF44maPhqC3X10HF7A1EubHam
+ WrKEFN5nIfH2t6lh6Uu3+ob5lf+Hd2s1yA/+c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702572704; x=1703177504;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4CBT60uiP4+j9cauRH/CkSpdQijkPMwjpQPjTvsAf3Y=;
+ b=uvnJWKgmJ32IAPHqoUTJRinpsK+psMuZait2t/zorfLuLM6R5Vf4VmhdbQkk01AQrk
+ rNFte8rBpBcBiXB+AgfbErD5WWkK79VHTyazC7jXHkfuAYQccqm0BB+B/jedLgIjuIC+
+ edr27st5uYqDn070dIlabfP0/54/ZJeO2F7N0mSQYgz8GY+H3X1EEM2NDYw9ivK8Zm0L
+ AZAVJ7ap63WP3KpmUWV7rEjhNlrW3pTtCBWzyB1f6yByaghqUthNGFf3Ppf9mZcCn2B5
+ nT+Lye1dNHhHUN12YsMXRGuzpT5XR8lRayfOPZ/bKYLjoI1WcsG2J1WDTAR16G7QQK2z
+ aCPQ==
+X-Gm-Message-State: AOJu0Yy/DnaPIvMOC3YuluSSnWxBFbWRx+MbgmY7VfVEUjUPKs+iYlLi
+ toFV1fCN57DTckqZ+FVdlL+6dNJfUxh9tPLaXDSxFg==
+X-Google-Smtp-Source: AGHT+IGdAfIGP38fZnfTrFYrjzSEMekNT8hQEAEbqJ+/2JZi5waNgwapCb8h7XB7KTyra7maqQ2eoA==
+X-Received: by 2002:a92:c24b:0:b0:35d:5994:ffca with SMTP id
+ k11-20020a92c24b000000b0035d5994ffcamr7051107ilo.32.1702572704052; 
+ Thu, 14 Dec 2023 08:51:44 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 08:51:43 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: [PATCH v2 01/21] mips: Add a reset_cpu() function
+Date: Thu, 14 Dec 2023 09:50:10 -0700
+Message-ID: <20231214094939.v2.1.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
+References: <20231214165112.2182274-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,47 +89,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Thu, 14 Dec 2023 15:53:46 +0000
-> From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+The current do_reset() is called from a command context. Add a function
+which can be used from anywhere, as is done on ARM.
 
-Hi Abdellatif,
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-> Hi guys,
-> 
-> I'd like to ask for advice regarding adding EFI RT support to the Arm's FF-A bus
-> in U-Boot.
-> 
-> The objective is to enable the FF-A messaging APIs in EFI RT to be
-> used for comms with the secure world. This will help getting/setting
-> EFI variables through FF-A.
-> 
-> The existing FF-A APIs in U-Boot call the DM APIs (which are not available at RT).
-> 
-> Two possible solutions:
-> 
-> 1/ having the entire U-Boot in RT space (as Simon stated in this discussion[1])
+(no changes since v1)
 
-I don't think this is a terribly good idea.  With this approach orders
-of magnitude more code will be present in kernel address space one the
-OS kernel is running and calling into the EFI runtime.  Including code
-that may access hardware devices that are now under OS control.  It
-will be nigh impossible to audit all that code and make sure that only
-a safe subset of it gets called.  So...
+ arch/mips/cpu/cpu.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-> 
-> 2/ Create an RT variant for the FF-A APIs needed.
->       These RT variant don't call the DM APIs
->       (e.g: ffa_mm_communicate_runtime, ffa_sync_send_receive_runtime, ...)
-> 
-> What do you recommend please ?
+diff --git a/arch/mips/cpu/cpu.c b/arch/mips/cpu/cpu.c
+index acfc9dc43f17..443465047715 100644
+--- a/arch/mips/cpu/cpu.c
++++ b/arch/mips/cpu/cpu.c
+@@ -4,6 +4,7 @@
+  * Wolfgang Denk, DENX Software Engineering, <wd@denx.de>
+  */
+ 
++#include <cpu_func.h>
+ #include <command.h>
+ #include <init.h>
+ #include <linux/compiler.h>
+@@ -20,9 +21,14 @@ void __weak _machine_restart(void)
+ 		/* NOP */;
+ }
+ 
+-int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++void reset_cpu(void)
+ {
+ 	_machine_restart();
++}
++
++int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	reset_cpu();
+ 
+ 	return 0;
+ }
+-- 
+2.43.0.472.g3155946c3a-goog
 
-...this is what I would recommend.  Preferably in a way that refactors
-the code such that the low-level functionality is shared between the
-DM and non-DM APIs.
-
-> 
-> [1]: https://lore.kernel.org/all/CAPnjgZ21qLnSFcCJ9rPQXEfQf-NjMBF3kYUDBBOc6WUQXQtDEA@mail.gmail.com/
-> 
-> Cheers,
-> Abdellatif
-> 
