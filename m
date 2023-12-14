@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE19C4167D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 07:58:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6165AC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 08:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E08F87A3A;
-	Thu, 14 Dec 2023 08:58:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+	by phobos.denx.de (Postfix) with ESMTP id 8DCDD87A00;
+	Thu, 14 Dec 2023 09:11:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EDE1087A3C; Thu, 14 Dec 2023 08:58:08 +0100 (CET)
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com
- [209.85.219.174])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AD7A87A36
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:58:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=linux-m68k.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=geert.uytterhoeven@gmail.com
-Received: by mail-yb1-f174.google.com with SMTP id
- 3f1490d57ef6-dbcdde08dc1so858876276.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:58:06 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702540685; x=1703145485;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sj0NwqxPiof3ml42MbQY4Ahv5ohZXpex6OnUgaYQww8=;
- b=cFDd3DeDsqqIHKRasBYarbQ1P00fFk4+krdpPAyw/UTOp1dkP8FsTUtPVdmaL5CqwN
- 2br1NW8nyb69W/02rmxeAMc5dV8PPj/DyUUscV2dgdZZDCYqzkZlfupyeOkGLODmFXPc
- 3SvEbFx29uP+k3lkA8fcC0bnzdPAFzbcUT86fNI64l5Db49ym6op/vjREkmNmGzTwpJF
- ixJ8qXOzPeOe8o2Ivq/3+UIPOZGMwRxwGRDEtKMnvIBo7pwcRC+If8us8OUqUnHdkZ1E
- x351yrNz/cTUyOcBUcV1BTxHTSxDp77MYMGGMa6ROcDNrGSqhDaMtnlolCJxa6T5S5Kl
- 47cg==
-X-Gm-Message-State: AOJu0YwbJkwzEDktBw5thss6TBF7ZiGsfQvJc1Fy3w8dkpDNPMjgADJ5
- MMMkB8viuD4OBKBOEt/Qdb2IiEmAvQJj7w==
-X-Google-Smtp-Source: AGHT+IHo/S281vqqi1jWbhDSdCMlxq4RFeiWMTmEDrRdU5ChokA1BvMEhStG5NnB3+vMP6JBpvTelw==
-X-Received: by 2002:a05:6902:1b0e:b0:dbc:bfb7:1f45 with SMTP id
- eh14-20020a0569021b0e00b00dbcbfb71f45mr2862511ybb.13.1702540684825; 
- Wed, 13 Dec 2023 23:58:04 -0800 (PST)
-Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com.
- [209.85.219.182]) by smtp.gmail.com with ESMTPSA id
- cj9-20020a056902188900b00dbcd9bb4bbasm762844ybb.58.2023.12.13.23.58.04
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Dec 2023 23:58:04 -0800 (PST)
-Received: by mail-yb1-f182.google.com with SMTP id
- 3f1490d57ef6-db8892a5f96so7436599276.2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 23:58:04 -0800 (PST)
-X-Received: by 2002:a5b:7cf:0:b0:da0:442f:988e with SMTP id
- t15-20020a5b07cf000000b00da0442f988emr5673057ybq.19.1702540684087; Wed, 13
- Dec 2023 23:58:04 -0800 (PST)
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="q2TyWMYI";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 563098798E; Thu, 14 Dec 2023 09:11:32 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AB6387A3C
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 09:11:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1702541483; x=1703146283; i=xypron.glpk@gmx.de;
+ bh=sPGs94aiWyTA4+ksqfgnt3+eQkTi3Y1SkbLYI+GgzU8=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=q2TyWMYIB2XQ9HvEIwEAoDdQ0V0ZIKCRyotYvLJUYTl5VWSZeIGT3fLOa47kb6yb
+ tbGbjNaVJaWvsVOuF2fhRbOSn5M3uS1pTxYLCGw+ebk+HhR8AnaZJ30G1gBtdY5KX
+ GpDmYaYONh+0RovKlcHyhEJMUo8EDdcsYxIs0sGuofKxkIIq69jn3CvHLVCY1N7+J
+ VTd86oNiJ+ggV7XydI4g9FQpsnyLhRV5hmv6l54Ga76HgMGy+9ikQdjsvY2wWfp2J
+ E+zvKgLKj393CzkR/fodvIrCEGnfcSFy4DaszRo4/Jk7dqTgNfHpRNd9iB7FV4Y5N
+ HuIAEzMQy9l6WUT8JA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mv31W-1rVDfH0Kh6-00qz4l; Thu, 14
+ Dec 2023 09:11:23 +0100
+Message-ID: <3f130fcc-845e-48a5-b68f-bb569ba3e165@gmx.de>
+Date: Thu, 14 Dec 2023 09:11:18 +0100
 MIME-Version: 1.0
-References: <20231202035511.487946-1-sjg@chromium.org>
- <20231202035511.487946-3-sjg@chromium.org>
- <20231203153401.GV8402@pendragon.ideasonboard.com>
- <20231207142723.GA3187877@google.com>
- <20231207143814.GD15521@pendragon.ideasonboard.com>
- <CAGXv+5Go_0pEVAOLQmRCc_a9-YUtZEmBfXtMuBupX_nb9iqwbw@mail.gmail.com>
- <20231209152946.GC13421@pendragon.ideasonboard.com>
- <CAMuHMdVMZs6mnwWBgFwktO=8o=QzROv60cfZe085MhD6HxQjpQ@mail.gmail.com>
- <CAGXv+5Est3FL-XcEL-vB-6zVNas0mqb2cNYa==Yb7W2SQU9xVQ@mail.gmail.com>
- <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
-In-Reply-To: <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Thu, 14 Dec 2023 08:57:52 +0100
-X-Gmail-Original-Message-ID: <CAMuHMdXDPSQXNhBH5LCrggfJCWG32v_ZtcRdPfaGRuLj20N+Lg@mail.gmail.com>
-Message-ID: <CAMuHMdXDPSQXNhBH5LCrggfJCWG32v_ZtcRdPfaGRuLj20N+Lg@mail.gmail.com>
-Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
-To: Masahiro Yamada <masahiroy@kernel.org>
-Cc: Chen-Yu Tsai <wenst@chromium.org>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Simon Glass <sjg@chromium.org>, 
- linux-arm-kernel@lists.infradead.org, Ahmad Fatoum <a.fatoum@pengutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Nicolas Schier <nicolas@fjasle.eu>,
- Tom Rini <trini@konsulko.com>, 
- Catalin Marinas <catalin.marinas@arm.com>, Jonathan Corbet <corbet@lwn.net>, 
- Nathan Chancellor <nathan@kernel.org>, Nick Terrell <terrelln@fb.com>,
- Will Deacon <will@kernel.org>, 
- linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org, 
- linux-kernel@vger.kernel.org, workflows@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 13/34] video: Add a function to clear the display
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng@tinylab.org>,
+ Harald Seiler <hws@denx.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20231002011553.463514-1-sjg@chromium.org>
+ <20231002011553.463514-14-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231002011553.463514-14-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:77Hz4qOHKqP37v2emq5KfZtkiSYFUYR2mi0TmP9veNMpgOMbtOZ
+ iKOXjGMJ6kGd2mC56XoxYaYZtsCU8QVEW1syBD+s6GXdgmcmjF2wfoebp8ku/ktPHgiFw9Z
+ S9xL6KBk8qF+Ear9VZtE35f87i+8IB36fj+rsqCziCEjQ17kHKRx1ZdfL0mXHfc36fKYg10
+ faSkMi2ZA6x8HAOiAirnQ==
+UI-OutboundReport: notjunk:1;M01:P0:joA3wK8sdQU=;47tXDbXwYCQAanrQk/sDPZfxYQN
+ Lyps6jUTfV9oA/T1j2UexHxeC86Aw+7MR42qIilduPkx2WZ/3SLgowrmDN7x7jqEK1mJ2cty/
+ hiuc6fSpeOs3hrnX9FwXfgHTOnsLLtvECEw4giIGzLMP6KnSVF6hP1WdwLXT5DS9dIFXX4Y9v
+ C0HyABqG3LBvxQ4NbTGYEyLUfceaCToQpELNc77hyfPVZ1c3Gwqhq2osGL2gTWWYWEYPbF4Bc
+ VpB2jnxj2B7G7+EO0sNaV3V0Bvtre3D9BZ4q1AhLEZEdE6gGrpt84kXI+je5PlwJcAp0m8FT3
+ Ux5cVwCOJf3+2Eszn6Q2pEG31E/wYbv7VeLKKLGvonj6Uw9okoELBgu/taXf4U2tI3bVAd+1s
+ 67XU1J9kVE9++SaLnLDpG/kdAC4xWG1bqAJ5qFBsgrt0pIPQDZEz/GXOZ+/SqKmb8yDuikOKB
+ o9Op/PFnVEvOM9nT5F/CMsMjnGHoccGxU9pWsD5yLx9RAspUquXhJmTrNYsPpwaaTuXa811kX
+ R7Nfb/PkpmT8mtflGeVju/2dJLi7kyzhJObUWRSEMhIP33Dnz0UDhefsBchTHV2lkCIy6qhIb
+ GbRoXLUP2ky5lNfayDKzkhc/JRUtiDA8kq/IJ+9HlxFHja+yChhR7ADgI3HV978leMsuLUJaQ
+ zQ0I330YNc2mCDYy1PnI7mDSvrzX2YmI02T/OG+5GXvgPNS4sWbTb0DjomlvYK5z6tyiKJVVq
+ PtEl5rtLrFjN3m0g+ZwU65tnGTiqqrS86mMcB6fc+3ExEPpB3drFwNI3y2bpye8B1f+d4yEFF
+ 4L8MnIc4D6PgQtY2CkwtyeAimKE5K3dUqmaRSZGISetagSdLBeDLDno6NaPNCS0RxeWuzmqBZ
+ HY6JVksGYwrqahUDQjkDq9/GrM1Bu4kF11EVxZGWCXBevxl6uVkq7K61bPn0vhF60mTGq8G1Z
+ JZmClSxtOY5pVaR56PVwn30hCCU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,189 +91,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yamada-san,
+On 02.10.23 03:15, Simon Glass wrote:
+> Move the code from the 'cls' command into the console file, so it can
+> be called from elsewhere.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-On Thu, Dec 14, 2023 at 7:12=E2=80=AFAM Masahiro Yamada <masahiroy@kernel.o=
-rg> wrote:
-> On Thu, Dec 14, 2023 at 1:03=E2=80=AFPM Chen-Yu Tsai <wenst@chromium.org>=
- wrote:
-> > On Sun, Dec 10, 2023 at 1:31=E2=80=AFAM Geert Uytterhoeven <geert@linux=
--m68k.org> wrote:
-> > > On Sat, Dec 9, 2023 at 4:29=E2=80=AFPM Laurent Pinchart
-> > > <laurent.pinchart@ideasonboard.com> wrote:
-> > > > On Sat, Dec 09, 2023 at 10:13:59PM +0900, Chen-Yu Tsai wrote:
-> > > > > On Thu, Dec 7, 2023 at 11:38=E2=80=AFPM Laurent Pinchart
-> > > > > <laurent.pinchart@ideasonboard.com> wrote:
-> > > > > > On Thu, Dec 07, 2023 at 10:27:23PM +0800, Chen-Yu Tsai wrote:
-> > > > > > > On Sun, Dec 03, 2023 at 05:34:01PM +0200, Laurent Pinchart wr=
-ote:
-> > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote=
-:
-> > > > > > > > > Add a script which produces a Flat Image Tree (FIT), a si=
-ngle file
-> > > > > > > > > containing the built kernel and associated devicetree fil=
-es.
-> > > > > > > > > Compression defaults to gzip which gives a good balance o=
-f size and
-> > > > > > > > > performance.
-> > > > > > > > >
-> > > > > > > > > The files compress from about 86MB to 24MB using this app=
-roach.
-> > > > > > > > >
-> > > > > > > > > The FIT can be used by bootloaders which support it, such=
- as U-Boot
-> > > > > > > > > and Linuxboot. It permits automatic selection of the corr=
-ect
-> > > > > > > > > devicetree, matching the compatible string of the running=
- board with
-> > > > > > > > > the closest compatible string in the FIT. There is no nee=
-d for
-> > > > > > > > > filenames or other workarounds.
-> > > > > > > > >
-> > > > > > > > > Add a 'make image.fit' build target for arm64, as well. U=
-se
-> > > > > > > > > FIT_COMPRESSION to select a different algorithm.
-> > > > > > > > >
-> > > > > > > > > The FIT can be examined using 'dumpimage -l'.
-> > > > > > > > >
-> > > > > > > > > This features requires pylibfdt (use 'pip install libfdt'=
-). It also
-> > > > > > > > > requires compression utilities for the algorithm being us=
-ed. Supported
-> > > > > > > > > compression options are the same as the Image.xxx files. =
-For now there
-> > > > > > > > > is no way to change the compression other than by editing=
- the rule for
-> > > > > > > > > $(obj)/image.fit
-> > > > > > > > >
-> > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made=
- to support
-> > > > > > > > > this here, since it must be built separately from the Lin=
-ux build.
-> > > > > > > >
-> > > > > > > > FIT images are very useful, so I think this is a very welco=
-me addition
-> > > > > > > > to the kernel build system. It can get tricky though: given=
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> ---
+>
+>   cmd/cls.c         | 25 +++----------------------
+>   common/console.c  | 31 +++++++++++++++++++++++++++++++
+>   include/console.h | 10 ++++++++++
+>   3 files changed, 44 insertions(+), 22 deletions(-)
+>
+> diff --git a/cmd/cls.c b/cmd/cls.c
+> index 1125a3f81bbb..80d0558d4679 100644
+> --- a/cmd/cls.c
+> +++ b/cmd/cls.c
+> @@ -7,33 +7,14 @@
+>    */
+>   #include <common.h>
+>   #include <command.h>
+> +#include <console.h>
+>   #include <dm.h>
+> -#include <video_console.h>
+> -
+> -#define CSI "\x1b["
+>
+>   static int do_video_clear(struct cmd_tbl *cmdtp, int flag, int argc,
+>   			  char *const argv[])
+>   {
+> -	__maybe_unused struct udevice *dev;
+> -
+> -	/*
+> -	 * Send clear screen and home
+> -	 *
+> -	 * FIXME(Heinrich Schuchardt <xypron.glpk@gmx.de>): This should go
+> -	 * through an API and only be written to serial terminals, not video
+> -	 * displays
+> -	 */
+> -	printf(CSI "2J" CSI "1;1H");
+> -	if (IS_ENABLED(CONFIG_VIDEO_ANSI))
+> -		return 0;
+> -
+> -	if (IS_ENABLED(CONFIG_VIDEO)) {
+> -		if (uclass_first_device_err(UCLASS_VIDEO_CONSOLE, &dev))
+> -			return CMD_RET_FAILURE;
+> -		if (vidconsole_clear_and_reset(dev))
+> -			return CMD_RET_FAILURE;
+> -	}
+> +	if (console_clear())
+> +		return CMD_RET_FAILURE;
+>
+>   	return CMD_RET_SUCCESS;
+>   }
+> diff --git a/common/console.c b/common/console.c
+> index 98c3ee6ca6b8..1ffda49c87e0 100644
+> --- a/common/console.c
+> +++ b/common/console.c
+> @@ -19,12 +19,15 @@
+>   #include <stdio_dev.h>
+>   #include <exports.h>
+>   #include <env_internal.h>
+> +#include <video_console.h>
+>   #include <watchdog.h>
+>   #include <asm/global_data.h>
+>   #include <linux/delay.h>
+>
+>   DECLARE_GLOBAL_DATA_PTR;
+>
+> +#define CSI "\x1b["
+> +
+>   static int on_console(const char *name, const char *value, enum env_op=
+ op,
+>   	int flags)
+>   {
+> @@ -1010,6 +1013,34 @@ int console_init_f(void)
+>   	return 0;
+>   }
+>
+> +int console_clear(void)
+> +{
+> +	/*
+> +	 * Send clear screen and home
+> +	 *
+> +	 * FIXME(Heinrich Schuchardt <xypron.glpk@gmx.de>): This should go
+> +	 * through an API and only be written to serial terminals, not video
+> +	 * displays
+> +	 */
+> +	printf(CSI "2J" CSI "1;1H");
+> +	if (IS_ENABLED(CONFIG_VIDEO_ANSI))
+> +		return 0;
+> +
+> +	if (IS_ENABLED(CONFIG_VIDEO)) {
+> +		struct udevice *dev;
+> +		int ret;
+> +
+> +		ret =3D uclass_first_device_err(UCLASS_VIDEO_CONSOLE, &dev);
+> +		if (ret)
+> +			return ret;
+> +		ret =3D vidconsole_clear_and_reset(dev);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static void stdio_print_current_devices(void)
+>   {
+>   	char *stdinname, *stdoutname, *stderrname;
+> diff --git a/include/console.h b/include/console.h
+> index ceb733b5cb69..e29817e57b00 100644
+> --- a/include/console.h
+> +++ b/include/console.h
+> @@ -156,6 +156,16 @@ int console_announce_r(void);
+>    */
+>   void console_puts_select_stderr(bool serial_only, const char *s);
+>
+> +/**
+> + * console_clear() - Clear the console
+> + *
+> + * Uses an ANSI sequence to clear the display, failing back to clearing=
  the
-> > > > > > > > versatile nature of FIT images, there can't be any
-> > > > > > > > one-size-fits-them-all solution to build them, and striking=
- the right
-> > > > > > > > balance between what makes sense for the kernel and the fea=
-tures that
-> > > > > > > > users may request will probably lead to bikeshedding. As we=
- all love
-> > > > > > > > bikeshedding, I thought I would start selfishly, with a per=
-sonal use
-> > > > > > > > case :-) This isn't a yak-shaving request though, I don't s=
-ee any reason
-> > > > > > > > to delay merging this series.
-> > > > > > > >
-> > > > > > > > Have you envisioned building FIT images with a subset of DT=
-Bs, or adding
-> > > > > > > > DTBOs ? Both would be fairly trivial extensions to this scr=
-ipt by
-> > > > > > > > extending the supported command line arguments. It would pe=
-rhaps be more
-> > > > > > > > difficult to integrate in the kernel build system though. T=
-his leads me
-> > > > > > > > to a second question: would you consider merging extensions=
- to this
-> > > > > > > > script if they are not used by the kernel build system, but=
- meant for
-> > > > > > > > users who manually invoke the script ? More generally, is t=
-he script
-> > > > > > >
-> > > > > > > We'd also be interested in some customization, though in a di=
-fferent way.
-> > > > > > > We imagine having a rule file that says X compatible string s=
-hould map
-> > > > > > > to A base DTB, plus B and C DTBO for the configuration sectio=
-n. The base
-> > > > > > > DTB would carry all common elements of some device, while the=
- DTBOs
-> > > > > > > carry all the possible second source components, like differe=
-nt display
-> > > > > > > panels or MIPI cameras for instance. This could drastically r=
-educe the
-> > > > > > > size of FIT images in ChromeOS by deduplicating all the commo=
-n stuff.
-> > > > > >
-> > > > > > Do you envision the "mapping" compatible string mapping to a co=
-nfig
-> > > > > > section in the FIT image, that would bundle the base DTB and th=
-e DTBOs ?
-> > > > >
-> > > > > That's exactly the idea. The mapping compatible string could be u=
-ntied
-> > > > > from the base board's compatible string if needed (which we proba=
-bly do).
-> > > > >
-> > > > > So something like:
-> > > > >
-> > > > > config {
-> > > > >     config-1 {
-> > > > >         compatible =3D "google,krane-sku0";
-> > > > >         fdt =3D "krane-baseboard", "krane-sku0-overlay";
-> > > > >     };
-> > > > > };
-> > > > >
-> > > > > With "krane-sku0-overlay" being an overlay that holds the differe=
-nces
-> > > > > between the SKUs, in this case the display panel and MIPI camera =
-(not
-> > > > > upstreamed) that applies to SKU0 in particular.
-> > > >
-> > > > The kernel DT makefiles already contain information on what overlay=
-s to
-> > > > apply to what base boards, in order to test the overlays and produc=
-e
-> > > > "full" DTBs. Maybe that information could be leveraged to create th=
-e
-> > > > configurations in the FIT image ?
-> > >
-> > > Although the "full" DTBs created may only be a subset of all possible
-> > > combinations (I believe Rob just started with creating one "full" DTB
-> > > for each overlay, cfr. the additions I made in commit a09c3e105a20858=
-0
-> > > ("arm64: dts: renesas: Apply overlays to base dtbs")), that could
-> > > definitely be a start.
-> > >
-> > > Now, since the kernel build system already creates "full" DTBs, does
-> > > that mean that all of the base DTBs, overlays, and "full" DTBs will
-> > > end up in the FIT image?
-> >
-> > I suppose we could add an option to the packing tool to be able to _not=
-_
-> > add the "full" DTBs if they can also be assembled with a base DTB and
-> > overlays. Think of it as a firmware compatibility option: if the firmwa=
-re
-> > supports overlays, then you almost always want the deconstructed parts,
-> > not the fully assembled ones. Vice versa.
-> >
-> > If we don't we could end up with two configurations that have the same
-> > compatible string?
->
-> Right.
->
-> We would end up with such situations because applying
-> an overlay does not change the compatible string.
+> + * video display directly if !CONFIG_VIDEO_ANSI
+> + *
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int console_clear(void);
+> +
+>   /*
+>    * CONSOLE multiplexing.
+>    */
 
-That is correct.  Which is one of the reasons for not using overlays
-for this, cfr. the details in my reply in the other thread
-"Re: Proposal: FIT support for extension boards / overlays"
-https://lore.kernel.org/all/CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex=
-6wvQ@mail.gmail.com/
-
-Gr{oetje,eeting}s,
-
-                        Geert
-
---=20
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k=
-.org
-
-In personal conversations with technical people, I call myself a hacker. Bu=
-t
-when I'm talking to journalists I just say "programmer" or something like t=
-hat.
-                                -- Linus Torvalds
