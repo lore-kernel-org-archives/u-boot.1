@@ -4,74 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33CD3C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91415C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:36:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A358487A5E;
-	Thu, 14 Dec 2023 11:33:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F0FF087A69;
+	Thu, 14 Dec 2023 11:36:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LCP6VkK3";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MInxbS9b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2631787A66; Thu, 14 Dec 2023 11:33:45 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3117987A65; Thu, 14 Dec 2023 11:36:47 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F93D87A60
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:33:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EBA0487A6A
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:36:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so1377682a12.0
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 02:33:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702550020; x=1703154820; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rjo621yv41iaT24rYAFe8tbxVd+E+w5MGVTUDKJhNoQ=;
- b=LCP6VkK3LYH9iVpXQFLs3DNyYW8R/MFcxqyOjLg3/JRXkhohBx/wzAVeM9aW6xcGOz
- 5IEclhpJChfnpgCu39IWiZQ0lM7p0nDBidlIRn8ImVF9ZR+iasarJKV4yHdwGdRLEIEN
- gN3DTAs3kHDeBj38iYCCDjhNldT1nMH1JWKkO/RI0sAcm6bqbZYetjsakoOQmDalbOL9
- Lb7BDOEPfAqmShXgirfcVBmbUkZ9YU5HWHJXn45EKjOimB3/kNAXk+TDhBjfI3SB4+vj
- Z6GCkZFsdiEuPiKUKXSiXebQprtbrGyg6EyElYna5AL+PE8mCh5mN3Pw7G9CKDPBwOTk
- P7OQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702550020; x=1703154820;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rjo621yv41iaT24rYAFe8tbxVd+E+w5MGVTUDKJhNoQ=;
- b=gqeGaxIAtzG1aOTFqGHjvrZp7w6gBuG+xoJMh8Fg4b/5PcdhwLYb3EM1tfuVTpFSkU
- ePvjk2bAm2rz/4n1g+ejpAkkwsevjIMsVAXfOH4cS4Yoa+qFhIJazaSlJPvtti7ocJBh
- /z98L+GDr/eIzee9L17Sz6zFa/iUX4EtMLB5kMDIv0NnV8qy7nccN+fV7P6yCwRoyjUq
- 0nKRfbW5x7xNAtvTHHDD6RTcY9BQzbqev9qZzxHpUN/E+hhPcjFjDgZBPfkgPqUx5UyR
- l+ms40QzUELJNvm+H7Wq5XdyjUc+/rEAWvM7COY+02E65AxjKJ5q5WXLL1KZKFnW2jme
- l3Ow==
-X-Gm-Message-State: AOJu0YxEqTwRZ0dkvBRXzxNpxQguxlt8JMYihi10jYsr2B30K8PRrazY
- Hazc0MSSPoHKEwOwLFlOuVu74XhRNNwiGFHbOE0=
-X-Google-Smtp-Source: AGHT+IE9Jdquxmi18fXJ7W/FRQR1M0NMS7ToLz1iJ6pltmaGr420J1O7H9LveRBbCVxRCyGFaW9sBNa3Cfdv/InwCcE=
-X-Received: by 2002:a17:90a:6345:b0:286:4055:63e0 with SMTP id
- v5-20020a17090a634500b00286405563e0mr16323860pjs.0.1702550020526; Thu, 14 Dec
- 2023 02:33:40 -0800 (PST)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 8BE19B82166;
+ Thu, 14 Dec 2023 10:36:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07476C433C8;
+ Thu, 14 Dec 2023 10:36:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1702550203;
+ bh=EsO8goaQVqffnUPtLWcA+tXXoaUhduJHufKSvMtikEQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=MInxbS9b1tjpM6gDKiO5b+DvGC3jYeNKjjd9Xn3ZWdaEMrjn9kS/kln4s8S1QYjJ/
+ AbKjJRT9xnlS54AoT4opY/Y1cKpx5QUAmbT3aFned4UbUoACwyuzlbqbknVTChRys3
+ cYfVU4D7TL/hkqWzaQ1XUmUcuX93V0Uxe0LktETuN8pu+cn1st13iVervxiOKXL5Oe
+ Yg/Y2T6Hg+IscIgBoNJYIMZMzZFCUEYpt0Wm32TDd6m3CSaMQQkTUZwfrOfDWlLGME
+ A06Pltmx4euLX4Ij3doxf83E8eY3eTTwzChl6GzO8M14YzGTjf4YFqGXiNd9wLykNs
+ oZGg4O7KayK4g==
+Message-ID: <054aa15f-05b9-4645-ab00-fac1be46dad7@kernel.org>
+Date: Thu, 14 Dec 2023 12:36:39 +0200
 MIME-Version: 1.0
-References: <20231122233753.64481-1-marex@denx.de>
-In-Reply-To: <20231122233753.64481-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 14 Dec 2023 07:33:29 -0300
-Message-ID: <CAOMZO5D+N9gNj7U_x5Z1YadqbBH0wfMe2qxa46JkWmdZ0Wrsaw@mail.gmail.com>
-Subject: Re: [PATCH] arm64: imx8mp: Enable TCP, IPv6, wget on Data Modul
- i.MX8M eDM SBC
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Stefano Babic <sbabic@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] arm: dts: k3-am625-sk: Enable usb ports in u-boot
+Content-Language: en-US
+To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
+Cc: Nishanth Menon <nm@ti.com>, Martyn Welch <martyn.welch@collabora.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Julien Panis <jpanis@baylibre.com>
+References: <20231212210234.509309-1-sjoerd@collabora.com>
+ <20231212210234.509309-4-sjoerd@collabora.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20231212210234.509309-4-sjoerd@collabora.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,14 +73,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Nov 22, 2023 at 8:38=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Enable support for TCP protocol, wget, and IPv6 on this platform.
-> The former two allow users download payload into the U-Boot from
-> a web server, which may be more convenient or easier to set up
-> than TFTP server. The later is enabled to future proof the IP
-> stack on this platform.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Applied to u-boot-imx next, thanks.
+
+On 12/12/2023 23:02, Sjoerd Simons wrote:
+> Enable both usb0 as a peripheral for use with DFU and
+> 
+> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+> 
+> ---
+> 
+> Changes in v3:
+> - Enable usb nodes in all boot phases
+> 
+> Changes in v2:
+> - Only enable usb port 0 DFU in SPL
+> 
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> index fa778b0ff4c..1fc0d407cbf 100644
+> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> @@ -46,3 +46,12 @@
+>  &cpsw_port2 {
+>  	status = "disabled";
+>  };
+> +
+> +&usbss0 {
+> +	bootph-all;
+> +};
+> +
+> +&usb0 {
+> +	dr_mode = "peripheral";
+
+There was a series [1] just to undo this.
+
+Can we make it auto-magically work even when mode is "otg"
+Can we address anything missing at the driver level?
+
+> +	bootph-all;
+> +};
+
+[1] https://lore.kernel.org/all/20230706-handle-otg-as-periph-v3-0-27e24fa17345@baylibre.com/
+
+-- 
+cheers,
+-roger
