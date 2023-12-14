@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F42DC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A654C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 988B087B0C;
-	Thu, 14 Dec 2023 19:12:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B66F87B40;
+	Thu, 14 Dec 2023 19:13:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="S6Fme6MF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="lhjwHXT9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A752687AB2; Thu, 14 Dec 2023 19:12:38 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id D7D9387B54; Thu, 14 Dec 2023 19:13:28 +0100 (CET)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1F7987B40
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:12:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1384B87B40
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:13:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-dbcdde08dc1so1437765276.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:12:34 -0800 (PST)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5cece20f006so84147057b3.3
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:13:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702577553; x=1703182353;
+ d=amarulasolutions.com; s=google; t=1702577605; x=1703182405;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9p5n3d6DyFwc5auxit0Zp3opBorIQ70mFl+UrIphf88=;
- b=S6Fme6MFr0Ch71/GPHhuL7dghlV7wmDWuWdB0VRIQolpa27Qv1RVr1OwjrxwZve6aC
- uZ3Woc2VCv7ejDOvsBLggWcQs+ZZNj/lggX9RXr35yKJjCcjSKkq0fHP6oLIk7KPJdTT
- 7NAY9xZ9Xo/ZOXXGIHiwwCtsXiH//lubCNY8g=
+ bh=eCdIYbX2LcwCQK7MedsibwXCeIkhRDT6CeWtB3Le+vw=;
+ b=lhjwHXT9fYdj3FA7dIJz9sl0cf5XZCGknEskUBOBQOByp8fiT6lS16PPBiXxi2OceU
+ CV8R4eReaDKOZFbT/aD8iRAVOHQz8z/WsDO9h72wAL5QEQ2N/vIrWIEgVDFRYbD9lDgV
+ Oowpg5UpbFpM4WWpS7OJX3hbNsrlwjWG33WNc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702577553; x=1703182353;
+ d=1e100.net; s=20230601; t=1702577605; x=1703182405;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9p5n3d6DyFwc5auxit0Zp3opBorIQ70mFl+UrIphf88=;
- b=M7r1a9oW+Ce/muG6s8t+WfSE8l+hagqIeS+OnZpN8mV7yJrLjp+0v7DMQ6iZeOe/qV
- YgG4mUiBgYQdjK/DwXkYlnUZEbpIODGS4uNXK1hiLV1YfXbgtfU7tV/sa2ayGyYZ+1HN
- fd4EDFxPCSBzcm4aHpqypTfU8mSLvvhLWT38QAyDNPY7qYpCqT96/xRNiqoqvxkKcHkC
- Wceg8rJIbO1nOWwBz3ojkGa/+F6nxdlAKlmQvOoRbW4E3GGhFPKHYNqgVva2FVHqzUyO
- rKg0xY2kAOKXuqRSUTaM32aSBanT7wiB++tyPRSIoIffXkufbOv0BRDqPXSKgRkWP7RI
- EhjQ==
-X-Gm-Message-State: AOJu0Ywsp68TaXv3AmgfmYVdNhxXOMYbFWTJzf9eyHI5sB8nbPq3j2fD
- PvUykEtRCRggLA4T80Hr5LdRXDKZ8c0nXF8zeQvyfw==
-X-Google-Smtp-Source: AGHT+IEX5oKpdjRMbgpvL2mOkq72Yz88DHNwKk3uxxhrpc5Z0aoZxS1ayz9y8t2rdJ1lDudcgOFZTB7iVE316eSv7Ig=
-X-Received: by 2002:a25:d106:0:b0:dbc:eb28:b683 with SMTP id
- i6-20020a25d106000000b00dbceb28b683mr763289ybg.97.1702577553438; Thu, 14 Dec
- 2023 10:12:33 -0800 (PST)
+ bh=eCdIYbX2LcwCQK7MedsibwXCeIkhRDT6CeWtB3Le+vw=;
+ b=Cr/Rw0rOM9l0JtkDKGjXPxs1q5Gvyd4jy9ufWJix5fYUOc29MKbFdQAKR+qS2cPCo1
+ eKWx4z9isymkmna5v4JNWgqbgunmWda/rmr1w5/cnW0ILN+ju6/vDBW83ZFyQcAJyiBK
+ is19jfcaJ9Wzo/dtZpgciQh9UA7dFrogiZ8Ee/O2S1TBUcNtCEVtyZ9kfGsNnFMuZNsb
+ IOBmGiG23aFzEXyZYaOLHo9DIzicIKmezHAcsbHehp+O3DSPMwPp9cAliyrLxNEshNz0
+ r3CStbqADOBNWhJ5mVxnSqpISsVhPaSNZUbr0/UoD3XAT5Z3gbUi3fILK9BQ4uVAG4HA
+ m0zA==
+X-Gm-Message-State: AOJu0YxuDfSzZhCiqgHg3qe8/CkG5Eg5U7YaNmdlFsbFL4x4xh+F7ZZp
+ PYi0tvLVYjr3eEm5T2Arxd0/fZO8ZdsywYQt/Ky1NA==
+X-Google-Smtp-Source: AGHT+IHOtn9U+eVolcHkYz5t41gUArQ+IjecGuwreBPvWMG1FejvjIaTopEl4CFF558vAaCZlTsAfEC7rTYFWVZO4D8=
+X-Received: by 2002:a5b:b05:0:b0:dbc:c39a:b3cb with SMTP id
+ z5-20020a5b0b05000000b00dbcc39ab3cbmr3281934ybp.95.1702577603825; Thu, 14 Dec
+ 2023 10:13:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20230804022712.25915-1-jit.loon.lim@intel.com>
-In-Reply-To: <20230804022712.25915-1-jit.loon.lim@intel.com>
+References: <20230804022548.24138-1-jit.loon.lim@intel.com>
+In-Reply-To: <20230804022548.24138-1-jit.loon.lim@intel.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Thu, 14 Dec 2023 23:42:22 +0530
-Message-ID: <CAMty3ZBVNiMkcV96ZMgmYUZsSp-pZJ3pBUKLdm_+XC5k1ZxmJA@mail.gmail.com>
-Subject: Re: [PATCH v1] drivers: spi: Add MT25U01G part number for SPI NOR
- Flash
+Date: Thu, 14 Dec 2023 23:43:12 +0530
+Message-ID: <CAMty3ZCwc_EEdRFn4d9RL9b1rZnwUi0YqkujcuzMFDNeiUc8fQ@mail.gmail.com>
+Subject: Re: [PATCH v1] drivers: mtd: spi: Add support for GD55LB02GEBIR SPI
+ NOR flash
 To: Jit Loon Lim <jit.loon.lim@intel.com>
 Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
  Simon <simon.k.r.goldschmidt@gmail.com>, Tien Fong <tien.fong.chee@intel.com>, 
@@ -91,17 +91,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 4, 2023 at 7:57=E2=80=AFAM Jit Loon Lim <jit.loon.lim@intel.com=
+On Fri, Aug 4, 2023 at 7:56=E2=80=AFAM Jit Loon Lim <jit.loon.lim@intel.com=
 > wrote:
 >
-> MT25QU01 OPN with 4B OPCODE support is currently not supported in
-> source code and the driver reuses the definition for "n25q00a"
-> which has the same silicon ID but is a slower part.
+> From: Teik Heng Chong <teik.heng.chong@intel.com>
 >
-> Adding mt25u01g definition to the source code to support a faster
-> read response for MT25QU01 QSPI NOR Flash device.
+> Add Support for GigaDevice GD55LB02GEBIR SPI NOR flash as QSPI
+> configuration flash
 >
-> Signed-off-by: Jit Loon Lim <jit.loon.lim@intel.com>
+> Signed-off-by: Teik Heng Chong <teik.heng.chong@intel.com>
 > ---
 
-Applied u-boot-spi/master
+Applied to u-boot-spi/master
