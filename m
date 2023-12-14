@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FE7C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 21:15:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6915C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 21:27:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27B1E87ADA;
-	Thu, 14 Dec 2023 22:15:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BDD587ADA;
+	Thu, 14 Dec 2023 22:27:28 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lTL6cDnU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cczzRBTi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22CF987B1C; Thu, 14 Dec 2023 22:15:38 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id A557587B1C; Thu, 14 Dec 2023 22:27:26 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 130EB87ADA
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:15:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D1D187AB5
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:27:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a1f8510883aso2435266b.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:15:36 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a1ca24776c3so218559866b.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:27:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702588535; x=1703193335; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702589244; x=1703194044; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UGf6gOE21LBQIdL7nl1i60OApL+MgQdPENCb5TjgK9c=;
- b=lTL6cDnUyFbEHodUK5a/sPbQUaMucvVY88sRiUOD1jFV1pWiFwDpk3c0y0EUK3KZLK
- VkmCjohHxJ+j1UHDbkN8uYzjXVxtSR4dsP5NWgqFfxvX75pPtnIlfDgp1taGLDbg+t9V
- Xqtb9J2+IEcAFEZ8nBoHXN+Km9yU0Gf/VR1bU=
+ bh=tQLR3TCzDnjOcoUY0UAy1UbsLgGNkBs2xj+zMAJuyhY=;
+ b=cczzRBTiBd3/GGqMgO7Id/DQJTTR9TjzLsZ+34C5Lc4/UVRwlKerNm4CJ46eVDohgD
+ 8hkdgFdrc0+jcRqXXr94L/0f54wIQT5rehjo/cP1BqbVffgwVmesWHgRHbMBfWWOX6BP
+ 6cIPlblOMfW7I6LrZbWX39XDW5Bp75uKVp18I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702588535; x=1703193335;
+ d=1e100.net; s=20230601; t=1702589244; x=1703194044;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UGf6gOE21LBQIdL7nl1i60OApL+MgQdPENCb5TjgK9c=;
- b=ZjosV4HnOjDIOt5g2CA5JaTKXlcqDCcjqHfP1R1su46Ax8jEjjxlJLAMEP+a76pU3V
- ACK4NL4dZYS+3HB2IVnxQDpSFuHFb6xCKxxN1b09lwmHsg7H6hE7+qrO7Bzn9UMZZeHs
- VZu4BHapeTrxrf8LP3XIrYmtQgUAmFrpIeUalDEkX5K3gvGoBlFIeFodOHrj+BFhzEfQ
- rhV3OshK76SBnAqVdGj+HVtNzH8/+gfcgH7RNolx1z9oZY2f9i8wMKpkO+x9F3pwxRvF
- 1/XZOlMtmD1MK/aafxvv1KtQktNXYS07qLgJ5Q+SXs6jDxr2nOKjVZ73lMYgLF2M5iDL
- ur5g==
-X-Gm-Message-State: AOJu0YxrPnojeGPXtgbO2INIyekoMvf85aZyu/KEvHh+iRnnL2OWIEgq
- bfAab3orJZjc2M0OfRtYW1P0cy6rciuXGcUPIzy2fA==
-X-Google-Smtp-Source: AGHT+IGaCSZZ6X9yUHhNzbnHfZ5PhrjAGA5J9pRdfrPEXbdj+d2BWkjnCECMBN7IL5sbkifdc4rfHlq2zciQjLeM5uQ=
-X-Received: by 2002:a17:906:60f:b0:a1d:756b:383b with SMTP id
- s15-20020a170906060f00b00a1d756b383bmr2675111ejb.10.1702588535055; Thu, 14
- Dec 2023 13:15:35 -0800 (PST)
+ bh=tQLR3TCzDnjOcoUY0UAy1UbsLgGNkBs2xj+zMAJuyhY=;
+ b=Y/3tOBySH1y0jasl9c8Xiv4FVEQx4wAsu4qabkaaaBTsLrXlAWUl4H8X1+ZxtznFaV
+ lstDRA+6ytL3mP9EhDXUQCujIJnn2KiVilhN+mZT/fCX+piFFyECrRBsJKkHARCVfGA1
+ PDajzZLJvxcZrPkhyf1Y/4nS8SIrCeQi+hfbMnFKQKUBEl85xYTFRAjlI/FT8zWS2Bki
+ DrUWQyJavIE9dqmaixl335qvrD9uS23/vi59PT8u12PkZx6QwrqjvScQvFvtWSA7qrAi
+ ojc2bQ4ML6n6AfMwcdy3OLMXsCpO64QeX09FU8WLUxqraTtMvqsrHkBsXX8NikJSaByB
+ XS9g==
+X-Gm-Message-State: AOJu0YwFqJS5YyZxm3mpVQzou12hVLBMsxTPmd/JxB6itFbbfd0F03jg
+ Xc03igaEe/gi4bupRZHe5kxwSg4YElEAlb1Qas0rzg==
+X-Google-Smtp-Source: AGHT+IE7OYOAzIzBqNAvCTayftZvK3DtzN2NEMkheGR79bvEI3MFe4Unl3+AfpaA2BHcjVdb51pzpP/lBxzBQ/Ebrqw=
+X-Received: by 2002:a17:906:782:b0:a1d:2f59:81a4 with SMTP id
+ l2-20020a170906078200b00a1d2f5981a4mr10882943ejc.62.1702589243759; Thu, 14
+ Dec 2023 13:27:23 -0800 (PST)
 MIME-Version: 1.0
-References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
- <ae0675e2-940a-439e-9557-e5a4f745f1b0@ti.com>
- <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
-In-Reply-To: <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
+References: <20231214153620.23998-1-zajec5@gmail.com>
+In-Reply-To: <20231214153620.23998-1-zajec5@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Dec 2023 14:15:16 -0700
-Message-ID: <CAPnjgZ1JjSKKaxcWU+CaHLS_g=HG=3q_XoscgxnGa3+sA3p7aQ@mail.gmail.com>
-Subject: Re: Proposal: FIT support for extension boards / overlays
-To: Geert Uytterhoeven <geert@linux-m68k.org>,
- Masahiro Yamada <masahiroy@kernel.org>
-Cc: Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Date: Thu, 14 Dec 2023 14:27:12 -0700
+Message-ID: <CAPnjgZ31AAauR876W1RmU4JPzKUD8XAMCZrJDumE+Dr4miqABQ@mail.gmail.com>
+Subject: Re: [PATCH RFC] dt-bindings: nvmem: u-boot, env: add any-name MAC
+ cells compatible
+To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
+Cc: Rob Herring <robh+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ devicetree@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de, 
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,58 +90,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Masahiro Yamada too
+Hi Rafa=C5=82,
 
-On Wed, 13 Dec 2023 at 01:22, Geert Uytterhoeven <geert@linux-m68k.org> wro=
-te:
+On Thu, 14 Dec 2023 at 08:36, Rafa=C5=82 Mi=C5=82ecki <zajec5@gmail.com> wr=
+ote:
 >
-> Hi,
+> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
 >
-> On Tue, Dec 12, 2023 at 4:52=E2=80=AFPM Andrew Davis <afd@ti.com> wrote:
-> > On 12/12/23 8:05 AM, Simon Glass wrote:
-> > > The devicetree files for a board can be quite large, perhaps around
-> > > 60KB. To boot on any supported board, many of them need to be
-> > > provided, typically hundreds.
-> > >
-> > > All boards for a particular SoC share common parts.  It would be
-> > > helpful to use overlays for common pieces, to reduce the overall size=
-.
-> > >
-> >
-> > For this to save much size we would need to have the SoC split
-> > from each board that uses it. We don't have that in DT today.
-> > There are some efforts in progress to help on this but until
-> > then we will not get much here.
+> So far we had a property for "ethaddr" NVMEM cell containing base
+> Ethernet MAC address. The problem is vendors often pick non-standard
+> names for storing MAC(s) (other than "ethaddr"). A few names were
+> noticed over years:
+> 1. "wanaddr" (Edimax, ELECOM, EnGenius, I-O DATA, Sitecom)
+> 2. "et1macaddr" (ASUS)
+> 3. "eth1addr" (Buffalo)
+> 4. "athaddr" (EnGenius)
+> 5. "baseMAC" (Netgear)
+> 6. "mac" (Netgear)
+> 7. "mac_addr" (Moxa)
+> and more ("HW_LAN_MAC", "HW_WAN_MAC", "INIC_MAC_ADDR", "LAN_MAC_ADDR",
+> "RADIOADDR0", "RADIOADDR1", "WAN_MAC_ADDR", "lan1_mac_addr", "wanmac",
+> "wmac1", "wmac2").
 >
-> Indeed.
+> It doesn't make sense to add property for every possible MAC cell name.
+> Instead allow specifying cells with "mac" compatible.
 >
-> E.g. The Kingfisher board[1] is an extension for (various) ULCB
-> boards[2], but we cannot use an overlay for the former, as the
-> combinations need to have different top-level compatible (and model)
-> values.  Hence currently we use a .dtsi file and lots of extra .dts
-> files[3].
+> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+> ---
+> List of devices and their U-Boot MAC variables:
+> alphanetworks,asl56026) wanmac
+> asus,rt-ac65p) et1macaddr
+> asus,rt-ac85p) et1macaddr
+> belkin,f9k1109v1) HW_WAN_MAC + HW_LAN_MAC
+> buffalo,ls220de) eth1addr
+> buffalo,ls421de) eth1addr
+> checkpoint,l-50) lan1_mac_addr
+> dovado,tiny-ac) INIC_MAC_ADDR
+> dovado,tiny-ac) LAN_MAC_ADDR + WAN_MAC_ADDR
+> edimax,ra21s) wanaddr
+> edimax,rg21s) wanaddr
+> elecom,wrc-2533ghbk-i) wanaddr
+> elecom,wrc-2533ghbk2-t) wanaddr
+> engenius,ecb1200) athaddr
+> engenius,ecb1750) athaddr
+> engenius,epg5000) wanaddr
+> engenius,epg600) wanaddr
+> engenius,esr1200) wanaddr
+> engenius,esr1750) wanaddr
+> engenius,esr600) wanaddr
+> engenius,esr600h) wanaddr
+> engenius,esr900) wanaddr
+> enterasys,ws-ap3705i) RADIOADDR0 + RADIOADDR1
+> iodata,wn-ac1167dgr) wanaddr
+> iodata,wn-ac1167gr) wanaddr
+> iodata,wn-ac1600dgr) wanaddr
+> iodata,wn-ac1600dgr2) wanaddr
+> iodata,wn-ac733gr3) wanaddr
+> iodata,wn-ag300dgr) wanaddr
+> iodata,wnpr2600g) wanaddr
+> moxa,awk-1137c) mac_addr
+> netgear,wax220) mac
+> netgear,wndap620) baseMAC
+> netgear,wndap660) baseMAC
+> ocedo,panda) wmac1 + wmac2
+> sitecom,wlr-7100) wanaddr
+> sitecom,wlr-8100) wanaddr
 >
-> The other issue is the need for parameterization, due to slight
-> differences in pins/signals on various base boards, or because the
-> same connector is present multiple times (e.g. for multi-camera
-> setups[4][5]).
+>  .../devicetree/bindings/nvmem/u-boot,env.yaml | 33 +++++++++++++++++++
+>  1 file changed, 33 insertions(+)
 >
-> [1] arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
-> [2] arch/arm64/boot/dts/renesas/*-ulcb.dts
-> [3] arch/arm64/boot/dts/renesas/*-ulcb-kf.dts
-> [4] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov5640-single.dtsi
-> [5] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov7725-single.dtsi
->
-> Gr{oetje,eeting}s,
->
->                         Geert
->
-> --
-> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m6=
-8k.org
->
-> In personal conversations with technical people, I call myself a hacker. =
-But
-> when I'm talking to journalists I just say "programmer" or something like=
- that.
->                                 -- Linus Torvalds
+
+Are these upstream U-Boots, or just vendor forks?
+
+Regards,
+Simon
