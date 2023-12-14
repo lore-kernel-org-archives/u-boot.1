@@ -4,50 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3CDC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 12:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE51CC4167D
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 12:48:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07A9A87A2A;
-	Thu, 14 Dec 2023 13:46:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id D41878755B;
+	Thu, 14 Dec 2023 13:48:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BC82A87A42; Thu, 14 Dec 2023 13:46:30 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7AD287A25
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:46:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BECkJHR032519;
- Thu, 14 Dec 2023 20:46:19 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Thu, 14 Dec 2023 20:46:16 +0800
-Date: Thu, 14 Dec 2023 20:46:14 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Tom Rini <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Rick Jian-Zhi
- =?utf-8?B?Q2hlbijpmbPlu7rlv5cp?= <rick@andestech.com>
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <ZXr5FhMwRT4gpwsK@swlinux02>
-References: <KL1PR03MB6059E8E8F10CAE683A330D1FA58DA@KL1PR03MB6059.apcprd03.prod.outlook.com>
- <20231214121902.GW2513409@bill-the-cat>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PToosM6N";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5CA6F8752B; Thu, 14 Dec 2023 13:48:38 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D586387575
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:48:35 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5d7a47d06eeso80590177b3.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 04:48:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1702558114; x=1703162914; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ynkzbg0VcmBQfCgEEi+/Ynn+2q0pEZCQki+1b/U8ctA=;
+ b=PToosM6N2UchnkhdgIfXqXCYEQ4J1ooueV6I9YZaLzV2Wc9E0XNpW/Bekj0dc2rgMu
+ anVWeRC4gMUN2gOIVydmQfFm+mm+47H0KBVAFPX7842LXGKL7fnfaxF/OxChCBJEYnOn
+ h2legnWIU/pu1fMmCMl9UbxE3AmkE4IyggYrU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702558114; x=1703162914;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ynkzbg0VcmBQfCgEEi+/Ynn+2q0pEZCQki+1b/U8ctA=;
+ b=JBz0+hs9pw3KEnCLRIJSMk5CJIUTU/ovUaLoJPVIgF1t1UyI8+Vv7+kmhUVuDR/oKE
+ iIydPdzI0IhamY0efnWu+wrbvYpX9AeUn8re/028zsI9ZKLMb0y0HGIlEC7jxfmNtW4D
+ GYhmx+y/T+pzR6nodCUr/k0+idsPOsqRadpYye3A9XHaoNHsPPMw7HYposDc0yQpHaGt
+ f9Sdf7MfjhyoEf1hscvSMOawbJiQv79kSiy3kgvlKGQsyN+F1GYfmolJgfX2GePAN1v5
+ 8hD2rZl41GYvFH/gXezMX4DP4fudjJ6BjCqi8lxNqd13qL8D/fCnC8l55B1FbG7yhPU/
+ jBYw==
+X-Gm-Message-State: AOJu0Ywud+/qKf3nvmfxfcTe/Sib8VHLXxcm14TN3H82wKvlPJec+3Ml
+ IucPm1gpFImnCuymoysQM71KNw==
+X-Google-Smtp-Source: AGHT+IE3enZpmTguDFDdaq/NlSHNW19uxf+vbgAd53vociQtjZbBAL3ndXs2cO0bNb0DczobieA+MQ==
+X-Received: by 2002:a81:c30e:0:b0:5e3:9b5f:e3f with SMTP id
+ r14-20020a81c30e000000b005e39b5f0e3fmr659201ywk.59.1702558114476; 
+ Thu, 14 Dec 2023 04:48:34 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
+ [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
+ by smtp.gmail.com with ESMTPSA id
+ y185-20020a0dd6c2000000b005e309c357desm1021315ywd.145.2023.12.14.04.48.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 04:48:33 -0800 (PST)
+Date: Thu, 14 Dec 2023 07:48:31 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Masahiro Yamada <masahiroy@kernel.org>
+Cc: Chen-Yu Tsai <wenst@chromium.org>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Simon Glass <sjg@chromium.org>, linux-arm-kernel@lists.infradead.org,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nicolas Schier <nicolas@fjasle.eu>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Jonathan Corbet <corbet@lwn.net>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Terrell <terrelln@fb.com>, Will Deacon <will@kernel.org>,
+ linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
+ linux-kernel@vger.kernel.org, workflows@vger.kernel.org,
+ Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH v9 2/2] arm64: boot: Support Flat Image Tree
+Message-ID: <20231214124831.GX2513409@bill-the-cat>
+References: <20231202035511.487946-1-sjg@chromium.org>
+ <20231202035511.487946-3-sjg@chromium.org>
+ <20231203153401.GV8402@pendragon.ideasonboard.com>
+ <20231207142723.GA3187877@google.com>
+ <20231207143814.GD15521@pendragon.ideasonboard.com>
+ <CAGXv+5Go_0pEVAOLQmRCc_a9-YUtZEmBfXtMuBupX_nb9iqwbw@mail.gmail.com>
+ <20231209152946.GC13421@pendragon.ideasonboard.com>
+ <CAMuHMdVMZs6mnwWBgFwktO=8o=QzROv60cfZe085MhD6HxQjpQ@mail.gmail.com>
+ <CAGXv+5Est3FL-XcEL-vB-6zVNas0mqb2cNYa==Yb7W2SQU9xVQ@mail.gmail.com>
+ <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B/bTjf96qQSCoIlX"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231214121902.GW2513409@bill-the-cat>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BECkJHR032519
+In-Reply-To: <CAK7LNATyD-PeNbaLTjJmU9=koqqE+V6QvFe09c2VrXopWvjpcw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,44 +112,282 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, Dec 14, 2023 at 07:19:02AM -0500, Tom Rini wrote:
-> On Thu, Dec 14, 2023 at 10:38:07AM +0800, Leo Yu-Chi Liang(梁育齊) wrote:
-> 
-> > Hi Tom,
-> > 
-> > The following changes since commit 20d0464300c25db673cfb5e4539aa3767606d151:
-> > 
-> >   Merge tag 'u-boot-imx-20231212' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2023-12-12 16:33:57 -0500)
-> > 
-> > are available in the Git repository at:
-> > 
-> >   https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
-> > 
-> > for you to fetch changes up to 8c785ddb7ae8d675faf558c81a29938cb0ec2b35:
-> > 
-> >   riscv: sifive: unmatched: migrate to text environment (2023-12-13 16:19:43 +0800)
-> > 
-> > CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18889
-> > ----------------------------------------------------------------
-> > - VisionFive2: Enable CONFIG_SYSRESET
-> > - StarFive: Modify starfive timer driver
-> > - AMD/Xilinx: Add MicroBlaze V support
-> > - Unmatched: Migrate to text environment
-> > ----------------------------------------------------------------
-> 
-> Are all of these really appropriate for a release less than a month away
-> or should I take this to -next? Thanks.
+--B/bTjf96qQSCoIlX
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ah! You're right!
-I think merging to -next seems to be more appropriate!
-Thanks for the reminder!
+On Thu, Dec 14, 2023 at 03:12:07PM +0900, Masahiro Yamada wrote:
+> On Thu, Dec 14, 2023 at 1:03=E2=80=AFPM Chen-Yu Tsai <wenst@chromium.org>=
+ wrote:
+> >
+> > On Sun, Dec 10, 2023 at 1:31=E2=80=AFAM Geert Uytterhoeven <geert@linux=
+-m68k.org> wrote:
+> > >
+> > > Hi Laurent,
+> > >
+> > > On Sat, Dec 9, 2023 at 4:29=E2=80=AFPM Laurent Pinchart
+> > > <laurent.pinchart@ideasonboard.com> wrote:
+> > > > On Sat, Dec 09, 2023 at 10:13:59PM +0900, Chen-Yu Tsai wrote:
+> > > > > On Thu, Dec 7, 2023 at 11:38=E2=80=AFPM Laurent Pinchart
+> > > > > <laurent.pinchart@ideasonboard.com> wrote:
+> > > > > > On Thu, Dec 07, 2023 at 10:27:23PM +0800, Chen-Yu Tsai wrote:
+> > > > > > > On Sun, Dec 03, 2023 at 05:34:01PM +0200, Laurent Pinchart wr=
+ote:
+> > > > > > > > On Fri, Dec 01, 2023 at 08:54:42PM -0700, Simon Glass wrote:
+> > > > > > > > > Add a script which produces a Flat Image Tree (FIT), a si=
+ngle file
+> > > > > > > > > containing the built kernel and associated devicetree fil=
+es.
+> > > > > > > > > Compression defaults to gzip which gives a good balance o=
+f size and
+> > > > > > > > > performance.
+> > > > > > > > >
+> > > > > > > > > The files compress from about 86MB to 24MB using this app=
+roach.
+> > > > > > > > >
+> > > > > > > > > The FIT can be used by bootloaders which support it, such=
+ as U-Boot
+> > > > > > > > > and Linuxboot. It permits automatic selection of the corr=
+ect
+> > > > > > > > > devicetree, matching the compatible string of the running=
+ board with
+> > > > > > > > > the closest compatible string in the FIT. There is no nee=
+d for
+> > > > > > > > > filenames or other workarounds.
+> > > > > > > > >
+> > > > > > > > > Add a 'make image.fit' build target for arm64, as well. U=
+se
+> > > > > > > > > FIT_COMPRESSION to select a different algorithm.
+> > > > > > > > >
+> > > > > > > > > The FIT can be examined using 'dumpimage -l'.
+> > > > > > > > >
+> > > > > > > > > This features requires pylibfdt (use 'pip install libfdt'=
+). It also
+> > > > > > > > > requires compression utilities for the algorithm being us=
+ed. Supported
+> > > > > > > > > compression options are the same as the Image.xxx files. =
+For now there
+> > > > > > > > > is no way to change the compression other than by editing=
+ the rule for
+> > > > > > > > > $(obj)/image.fit
+> > > > > > > > >
+> > > > > > > > > While FIT supports a ramdisk / initrd, no attempt is made=
+ to support
+> > > > > > > > > this here, since it must be built separately from the Lin=
+ux build.
+> > > > > > > >
+> > > > > > > > FIT images are very useful, so I think this is a very welco=
+me addition
+> > > > > > > > to the kernel build system. It can get tricky though: given=
+ the
+> > > > > > > > versatile nature of FIT images, there can't be any
+> > > > > > > > one-size-fits-them-all solution to build them, and striking=
+ the right
+> > > > > > > > balance between what makes sense for the kernel and the fea=
+tures that
+> > > > > > > > users may request will probably lead to bikeshedding. As we=
+ all love
+> > > > > > > > bikeshedding, I thought I would start selfishly, with a per=
+sonal use
+> > > > > > > > case :-) This isn't a yak-shaving request though, I don't s=
+ee any reason
+> > > > > > > > to delay merging this series.
+> > > > > > > >
+> > > > > > > > Have you envisioned building FIT images with a subset of DT=
+Bs, or adding
+> > > > > > > > DTBOs ? Both would be fairly trivial extensions to this scr=
+ipt by
+> > > > > > > > extending the supported command line arguments. It would pe=
+rhaps be more
+> > > > > > > > difficult to integrate in the kernel build system though. T=
+his leads me
+> > > > > > > > to a second question: would you consider merging extensions=
+ to this
+> > > > > > > > script if they are not used by the kernel build system, but=
+ meant for
+> > > > > > > > users who manually invoke the script ? More generally, is t=
+he script
+> > > > > > >
+> > > > > > > We'd also be interested in some customization, though in a di=
+fferent way.
+> > > > > > > We imagine having a rule file that says X compatible string s=
+hould map
+> > > > > > > to A base DTB, plus B and C DTBO for the configuration sectio=
+n. The base
+> > > > > > > DTB would carry all common elements of some device, while the=
+ DTBOs
+> > > > > > > carry all the possible second source components, like differe=
+nt display
+> > > > > > > panels or MIPI cameras for instance. This could drastically r=
+educe the
+> > > > > > > size of FIT images in ChromeOS by deduplicating all the commo=
+n stuff.
+> > > > > >
+> > > > > > Do you envision the "mapping" compatible string mapping to a co=
+nfig
+> > > > > > section in the FIT image, that would bundle the base DTB and th=
+e DTBOs ?
+> > > > >
+> > > > > That's exactly the idea. The mapping compatible string could be u=
+ntied
+> > > > > from the base board's compatible string if needed (which we proba=
+bly do).
+> > > > >
+> > > > > So something like:
+> > > > >
+> > > > > config {
+> > > > >     config-1 {
+> > > > >         compatible =3D "google,krane-sku0";
+> > > > >         fdt =3D "krane-baseboard", "krane-sku0-overlay";
+> > > > >     };
+> > > > > };
+> > > > >
+> > > > > With "krane-sku0-overlay" being an overlay that holds the differe=
+nces
+> > > > > between the SKUs, in this case the display panel and MIPI camera =
+(not
+> > > > > upstreamed) that applies to SKU0 in particular.
+> > > >
+> > > > The kernel DT makefiles already contain information on what overlay=
+s to
+> > > > apply to what base boards, in order to test the overlays and produce
+> > > > "full" DTBs. Maybe that information could be leveraged to create the
+> > > > configurations in the FIT image ?
+> > >
+> > > Although the "full" DTBs created may only be a subset of all possible
+> > > combinations (I believe Rob just started with creating one "full" DTB
+> > > for each overlay, cfr. the additions I made in commit a09c3e105a208580
+> > > ("arm64: dts: renesas: Apply overlays to base dtbs")), that could
+> > > definitely be a start.
+> > >
+> > > Now, since the kernel build system already creates "full" DTBs, does
+> > > that mean that all of the base DTBs, overlays, and "full" DTBs will
+> > > end up in the FIT image?
+> >
+> > I suppose we could add an option to the packing tool to be able to _not_
+> > add the "full" DTBs if they can also be assembled with a base DTB and
+> > overlays. Think of it as a firmware compatibility option: if the firmwa=
+re
+> > supports overlays, then you almost always want the deconstructed parts,
+> > not the fully assembled ones. Vice versa.
+> >
+> > If we don't we could end up with two configurations that have the same
+> > compatible string?
+>=20
+>=20
+> Right.
+>=20
+> We would end up with such situations because applying
+> an overlay does not change the compatible string.
+>=20
+>=20
+>=20
+> With this code in arch/arm64/boot/dts/ti/Makefile:
+>=20
+> k3-am642-tqma64xxl-mbax4xxl-sdcard-dtbs :=3D \
+>       k3-am642-tqma64xxl-mbax4xxl.dtb k3-am64-tqma64xxl-mbax4xxl-sdcard.d=
+tbo
+> k3-am642-tqma64xxl-mbax4xxl-wlan-dtbs :=3D \
+>       k3-am642-tqma64xxl-mbax4xxl.dtb k3-am64-tqma64xxl-mbax4xxl-wlan.dtbo
+>=20
+>=20
+>=20
+>=20
+> $ fdtdump  arch/arm64/boot/dts/ti/k3-am642-tqma64xxl-mbax4xxl-sdcard.dtb
+> 2>/dev/null| head -n15 | tail -n2
+>     model =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier board";
+>     compatible =3D "tq,am642-tqma6442l-mbax4xxl", "tq,am642-tqma6442l",
+> "ti,am642";
+>=20
+>=20
+> $ fdtdump  arch/arm64/boot/dts/ti/k3-am642-tqma64xxl-mbax4xxl-wlan.dtb
+> 2>/dev/null| head -n15 | tail -n2
+>     model =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier board";
+>     compatible =3D "tq,am642-tqma6442l-mbax4xxl", "tq,am642-tqma6442l",
+> "ti,am642";
+>=20
+>=20
+>=20
+>=20
+>=20
+> These two go into image.fit, but one of them is completely dead
+> since there is no way to distinguish them.
 
-Best regards,
-Leo
+I'd asked Rob about the problem of multiple platforms that don't have a
+unique compatible string, and never did quite conclude if the spec needs
+to spell out one way or another if they really need to be unique.
+There's some valid use cases where you might not, but then there's cases
+like the above where that really seems like a dts bug (and those
+platforms should have their dts* files reworked to be like other
+carrier+som+different peripherals and likely be
+tq,am642-tqma6442l-mbax4xxl-wlan and so on).
 
-> -- 
-> Tom
+>=20
+>=20
+> $ fdtdump  arch/arm64/boot/image.fit
+>=20
+>         ...
+>=20
+>         conf-10 {
+>             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+> "tq,am642-tqma6442l", "ti,am642";
+>             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier=
+ board";
+>             fdt =3D "fdt-10";
+>             kernel =3D "kernel";
+>         };
+>=20
+>         ...
+>=20
+>         conf-25 {
+>             compatible =3D "tq,am642-tqma6442l-mbax4xxl",
+> "tq,am642-tqma6442l", "ti,am642";
+>             description =3D "TQ-Systems TQMa64xxL SoM on MBax4xxL carrier=
+ board";
+>             fdt =3D "fdt-25";
+>             kernel =3D "kernel";
+>         };
+>=20
+>=20
+>=20
+>=20
+>=20
+> I agree with Chen-Yu.
 
+> FIT should not include full DTBs.
+>=20
+> Bootloaders should assemble the final DTB
+> from base and overlays on-the-fly.
 
+I think we need to think about that more because both FIT and UKI try
+and solve the problem of a single verifiyable (in the various security /
+secure boot meanings of the word) image. So saying "but not DTBs" will I
+believe become "let the distribution people worry about it".
+
+Or am I misunderstanding your comment, and this is only in the context
+of real or quasi overlays?
+
+--=20
+Tom
+
+--B/bTjf96qQSCoIlX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV6+ZwACgkQFHw5/5Y0
+tyxjZgv/c9kJRHcdwKjxJfBNyd3mWhLVjkey7xi1A9ypEqph2eyZR1XLfN8/ynRW
+TzyE3UF113bhTFT1ejsUwUUVRBrPkZKTdEUmzEgPxOcSVwu43txkexSLcoiPLFhl
+Z8ELDoBQ6XJCBxL3SOHUWuuSrOoxoAoYbQt2YK+H12vCpuCG0stKyzALRmyAlONL
+9F/TbqlsA/GPLH1cm7JeZYJeZ03l0IvBFkKgqEWPgk0mQfYNSHOpz6TyKaf3uVdq
+UBsoJpor/OtUiba3rvdbFUZ2B0zyKij5i4CrmbS/nddpUwR0gskHjultJS+2LT9o
+Hb/XtRWUN8c3V5VBE/EjKzUXRld9ZgkWnhb9jJrngjJmWg/EBvsZjpCFW/gybegM
+AvEffJyA703dfXLpsNQhnVL9YOYFd37G/1oNSVART5kxj+gD+NEP+YKKKqSt1B4P
+yxwViPPcvfq7mfiAsyNgUgB8VxAafx2LSd5uvZqDVQhkCXrpjEv5MR/eMjRgBxmP
+Fa/6zHfn
+=9yva
+-----END PGP SIGNATURE-----
+
+--B/bTjf96qQSCoIlX--
