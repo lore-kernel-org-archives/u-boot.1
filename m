@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2587C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 02:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE30DC4167B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 02:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E269D87905;
-	Thu, 14 Dec 2023 03:00:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A15D8791C;
+	Thu, 14 Dec 2023 03:01:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BwhevR1A";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fDY8CAnD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE32D87994; Thu, 14 Dec 2023 03:00:28 +0100 (CET)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id F178B87995; Thu, 14 Dec 2023 03:01:29 +0100 (CET)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7658587871
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:00:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1AA587905
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:01:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-55b5a37acb6so1279848a12.0
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 18:00:26 -0800 (PST)
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5ca5b616de0so128256a12.1
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 18:01:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702519225; x=1703124025; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702519286; x=1703124086; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Nix7e/cJuUPjptcO+SHw8JvTaYWDumfsHdbjZj1TLEo=;
- b=BwhevR1AaoVwTv0D2ssa0eLsIRdKFVoc66KCTF0cM1rhbl0E/L8Y/tUxQvxzDAKHiF
- 18zZ7uSTorzSOSgQ7cqhoTl+0/9sQ81gegBTiPiLDUx41MnH1znranUbXuurzKw28y2y
- 7veywLcva1Mz7LjV9Y4tcGbxpsAoT6qwPmnTE5vmw+kDA+C3R9yVoCJCnzqeHp5ZWu2R
- zoukYARJyg1Exo4YEbXr5xstcgJd2yI0mVBFSg5+kJ4b3qsTZWiURVpV3sIWjPfs6oOz
- /f0Yv/aJz+e0Qms+F0TgSpOH+QTIw3d3DbOwmD5lkxQys2wEKIrIsk/q7w9fwd9VzneX
- yMcA==
+ bh=eEDA0kkoptt8L5Fpjn3QuUF7OOSs1JxONd7SNJHpoK8=;
+ b=fDY8CAnD12af4rbgaAxM3I/zD/LO872kCTCpTb6wi6tjq1qEU1zA0rvyNtSTgGGQiv
+ TyM0HH5Jgbi5ZrQ08VaiVxHTRyOZy5R4WUuOFe/A+fxMBcVgU7heSuAI7UmZ8A7fDDU2
+ tRLQ2r1sus+qDmFLi1HKuJV7qE4MgAjOnubPxqX+QLqHMGHmR4EAkGsDBDksyKfrxIeM
+ Ttf9SxSD16hE0mnAsAdNo5OODw1y6y83NaVVVU6xRKYcQ87b41rPuvHRUKO21bONRMQw
+ Jwc3tBQeUVBAvKhaCALVvKvVwa+LXMsb90vKXOqEQ95G5DLSW4dPXUCF1s4esD+KmHkC
+ xOeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702519225; x=1703124025;
+ d=1e100.net; s=20230601; t=1702519286; x=1703124086;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Nix7e/cJuUPjptcO+SHw8JvTaYWDumfsHdbjZj1TLEo=;
- b=EikGZ6VlKr2gsBHak5DaPLbUWnBL79lw5H5CofUt3ZRcJQLNrdVBFPX50UnkxWMesU
- Iq3diSo57t2/V4HaLOgEgk3tRTbR1Y79nIk/f46YONcfV875aohFSiokNA1AWhBlnVFK
- gIDfz17uJpcBBkdpq2FtNw9f274knyEvJINWtxy4c2flXr2xEWykg4DxCKrpKsmR4iNk
- 73mcW4zUBAxHzYssmqa7e5ydxGt2kFARkaZvyNa3aNdCYCeM+KWV3PttRiQhxZaftOlZ
- cgyyIbRk/qAHBX+SvUFRBFYVq8lSHxb+27JTpGoe0bh5K3V95yQ5lU/g6oZ2VmCCwy3q
- F/AA==
-X-Gm-Message-State: AOJu0YwZ6Br37hrTIF0Nm/91BFTNfFr0hWb/ebTetJPhAORhXGZriS6Z
- SJLm4pjExHDKJ58QesN4OzGwWYVJGPH3mn0Q2pw7lOLW2Os=
-X-Google-Smtp-Source: AGHT+IGfNIVMo7BERIqlwYJOQVUc/7vCkmekUhxU6Kaq0rbgkFD5StqaD0heJiu9kWJp8wh7QfqVMYSO1RJeSq19YHg=
+ bh=eEDA0kkoptt8L5Fpjn3QuUF7OOSs1JxONd7SNJHpoK8=;
+ b=if4RrunJQGmduxhze8qCqiXV0MpQ1IFiyiTvAgSfgRXwosH5grGSX7CToKsdKBAt60
+ GUw5xcWGP+TieXtCvbyA0YX7e1kqn9/vovH5yyFAYQ+0tnBeHuLQCEneZZLB90t+z0qz
+ zE724r+WY+ueyFBgetH5gMf7ExVi0+Fgd05SNl7QjXIqI7WA+E+Fk+0kHYCWg22ySkF7
+ sewpLecCcl5BrzEeidjvwXkYOEEuo3foi/PW7ZQnKGhNlEeOQK3WEx7mWjqXZkDyvrXp
+ 6Eq+S9YWL2hEPZ3lCf3BCs4s0AUGSS+NRPmuZgI7TIB//Fac+bzV0TJl48+y1bgMJNbI
+ /P/A==
+X-Gm-Message-State: AOJu0YyBoAw0UEaALJyNolPjimaD59StYjqzMJRIVK597uSzWiA7UpsG
+ vELWy9HU4XDiw8VNCBmiFI63YEoxbn+C72AG8k23Pj7TdQI=
+X-Google-Smtp-Source: AGHT+IHYXvWynxnn4YEjWG50ee4G1Kyp+lzyS1o+wx+ZtgtHEIESndxrnsGwyF3G5sw9mr514xZIMpDTbKqx4mSSw+0=
 X-Received: by 2002:a17:90b:188f:b0:28a:f2bf:207e with SMTP id
- mn15-20020a17090b188f00b0028af2bf207emr2326989pjb.1.1702519224690; Wed, 13
- Dec 2023 18:00:24 -0800 (PST)
+ mn15-20020a17090b188f00b0028af2bf207emr2330247pjb.1.1702519286106; Wed, 13
+ Dec 2023 18:01:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20231018185212.128405-1-marex@denx.de>
-In-Reply-To: <20231018185212.128405-1-marex@denx.de>
+References: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+In-Reply-To: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 23:00:13 -0300
-Message-ID: <CAOMZO5D-P5-6V91w3k8NEsUFa8YhG=K-f=n=z0FhM65Sh=qa-A@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: mxs: Clear CPSR V bit to activate low vectors
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Lukasz Majewski <lukma@denx.de>, Stefano Babic <sbabic@denx.de>
+Date: Wed, 13 Dec 2023 23:01:14 -0300
+Message-ID: <CAOMZO5AOPeAXLOLASErVCszdGHHBF+aCPgKPs7AniwjsQQP26A@mail.gmail.com>
+Subject: Re: [PATCH] tools: mxsboot: pre-fill buffer with 0xff, not 0
+To: Alessandro Rubini <rubini@gnudd.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,22 +86,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 18, 2023 at 3:52=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Sun, Dec 3, 2023 at 9:24=E2=80=AFPM Alessandro Rubini <rubini@gnudd.com>=
+ wrote:
 >
-> The MXS starts with CPSR V bit set, which makes the CPU jump to high vect=
-ors
-> in case of an exception. Those high vectors are located at 0xffff0000, wh=
-ich
-> is where the BootROM exception table is located as well. U-Boot should ha=
-ndle
-> exceptions on its own using its own exception handling code, which is loc=
-ated
-> at 0x0, i.e. at low vectors. Clear the CPSR V bit, so that the CPU would =
-jump
-> to low vectors on exception instead, and therefore run the U-Boot excepti=
-on
-> handling code.
+> The tool works for me, with imx28 and NAND memory, but the resulting
+> blocks are reported as bad, both by u-boot and the kernel.
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> This makes it impossible to erase from Linux (for an upgrade without
+> console access, for example -- u-boot can "nand scrub" but linux can't).
+>
+> pre-filling with 0xff creates a proper boot loader image, but no
+> bad-block marker is there when written to flash.
+>
+> Signed-off-by: Alessandro Rubini <rubini@gnudd.com>
 
-Applied to u-boot-imx next, thanks.
+Applied to u-boot-imx next, thanks
