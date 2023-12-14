@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5F3C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 14:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D976EC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 14:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD0B487980;
-	Thu, 14 Dec 2023 15:14:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B28587A2A;
+	Thu, 14 Dec 2023 15:27:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="JcSpEpmE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V/I6FSq5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 220AD87A42; Thu, 14 Dec 2023 15:14:36 +0100 (CET)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 494B287A71; Thu, 14 Dec 2023 15:27:22 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFD568796E
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 15:14:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 187D887A42
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 15:27:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-20316647099so1627393fac.2
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 06:14:33 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5d05ff42db0so82003767b3.2
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 06:27:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1702563272; x=1703168072;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=28e7S0xfYIfVd2NmiktRn6IUySZTQEoiafvIq6EQgjg=;
- b=JcSpEpmEMpCGH2E1IHsl/Qv11zYXYTap5754bI5geT3//Q5XXbz3kgvELzgKqENroc
- 7uFYxAylG7oZb6C5jgITkSjQXPtUjFR6oTCAQsAeSEsrN+vAEPy6nlajWtt3l5weusO+
- COSr1+siNe/h3z2vJG0iY7PqQ3ZR/nRbYEb+0N2UIO+5uelLCNLb4FBxboSAlcrH5JCL
- xmEEYHJJvB5Eo2E5EiBDEnHV12VdxRbnZ35pHzYNO5EicaUYGNC0oNhs3phBToP9mCmb
- 590ZsLRg7dlM1cqhOlkRhHr14Lfvn+luoYBhwE7mgvXZsmVAcWUQ1FpYxXB2g9Pjurbm
- reWg==
+ d=konsulko.com; s=google; t=1702564038; x=1703168838; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=K1rT4X24RxFTVAeVxlohuRYtYsDoo/0UaWUuOpzhbBk=;
+ b=V/I6FSq5bwa3uT8wTVV50fUqaRfsXOOq96qvqfo4UWxpcncL/uFrJebNDZ0l6F8W0/
+ ZQ+E1EWuh6UvRPtQmYmaZsRvsfdLiWhynanKbhPkMvSg9hwq3GW27EPribGuRAQvQlmn
+ Fofs6fWN/LMpm96fJCxpnYywi1lKI9E+L0sgs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702563272; x=1703168072;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=28e7S0xfYIfVd2NmiktRn6IUySZTQEoiafvIq6EQgjg=;
- b=xLRNmoSzMZIUo4B+x0NJHboRqx9fYxG7988bpv3owWdJE11679yqVVNnXjNnPTY0Fz
- OhulCjNhGjEGdJJKQhfWwZgaBUr0RQLM6IpqqOnfFOXjSpp0g5SILuo9JUV9IXdpMDII
- tjC+Uf8zTUm+EXJQvHKzOssLpYS1FQv72MdrA0rddhQm40oNQRCElOMR3WzK6NMd8ebE
- 4VSgJaMq3XBtPSOHTg8ksQxqIsBbvYCnTc7hQOjIDgd1ULR7c/gBVbxgd6xf3IGlwKcP
- ZLYTIyZrCEzsnpMnZgfr46yudva6ztuGycea3rWyWA46YncNhB5+PkH+X04vM4mScp3p
- B3Iw==
-X-Gm-Message-State: AOJu0YymRC5VVtQlv+f82LiznLe9njGKzN9N97v7+EVoboxlAKQUOLUH
- igGroBkg0P5SryDEtr7j5D/C0FG18E9k4MVhKvx3qQ==
-X-Google-Smtp-Source: AGHT+IFB6TNX3lySGQrI8Kd8MxyFYtQtvSe/ulQL7DIEFglGzDggDR6/A/5dcbjsHwWLPKaDPaKWW9WsBWXunXBFu30=
-X-Received: by 2002:a05:6870:1ec3:b0:203:5906:87c1 with SMTP id
- pc3-20020a0568701ec300b00203590687c1mr352005oab.109.1702563272426; Thu, 14
- Dec 2023 06:14:32 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702564038; x=1703168838;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K1rT4X24RxFTVAeVxlohuRYtYsDoo/0UaWUuOpzhbBk=;
+ b=gAb86yR+q8wFgjoP9m1DZ6LALr7XpRWjvGS6NforNZ8Jqci3BpSkc33Rf0+jHTZaFF
+ UfjAK5B0q7GKurk6lD603tWHR46XKYWtExoi3OpGokyECgbuVskACH4yic3lK6GhxNH1
+ lIZJ97WiHJzhw8XzHYpytegWrdhH0CnO0chE9+CknS9MKYLLN/mljUpmCKr9PnoB8Wz/
+ 2rUss+4f7OucyLtN5rZvedg4GHfspTYxqIPb1jWF5OOm1QdWm249oBidtd/3ydswj3YZ
+ qnGJRN74shRPR1xUTC6DPMbG4VMor8BnA2cHbr459u5guG3pAzg55CS0iUYJeF9a1GTQ
+ 3kBw==
+X-Gm-Message-State: AOJu0Yx49q1US6tqvH8XE3rI3Nlr8+Ge0Rd8+MhQmFh+ECjhD2Ql05Ku
+ z4ER9+HhnoIpDht1DetR1tqAWQ==
+X-Google-Smtp-Source: AGHT+IFdGe/aNYSRbcyQON5YvCW/CXqM+sNraLlFKAjTEj+yurI5A5iO+c+KLXW2v3xawcoT5QBHzA==
+X-Received: by 2002:a0d:c044:0:b0:5d7:1941:2c34 with SMTP id
+ b65-20020a0dc044000000b005d719412c34mr7893253ywd.97.1702564037744; 
+ Thu, 14 Dec 2023 06:27:17 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
+ [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
+ by smtp.gmail.com with ESMTPSA id
+ n193-20020a0dcbca000000b005e2e8b26925sm1200969ywd.61.2023.12.14.06.27.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 06:27:16 -0800 (PST)
+Date: Thu, 14 Dec 2023 09:27:13 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de, sjg@chromium.org,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de
+Subject: Re: [PATCH 1/8] Azure CI: Exclude devicetree-rebasing subtree for
+ CONFIG checks
+Message-ID: <20231214142713.GZ2513409@bill-the-cat>
+References: <20231214135103.1606605-1-sumit.garg@linaro.org>
+ <20231214135103.1606605-2-sumit.garg@linaro.org>
 MIME-Version: 1.0
-References: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
- <20231113112309.730323-1-i@shantur.com>
- <CABEcMwUwDypY090MOYSEtBGMRZOBnTk6hKuM2-OcJW-n+M7OHg@mail.gmail.com>
- <20231211205326.GX2513409@bill-the-cat>
- <CAPnjgZ23x6dAwq8UDvTXBikRgC3mbTfH5PV=KVF45pFPXY3cQA@mail.gmail.com>
- <20231213202951.GH2513409@bill-the-cat>
- <CAPnjgZ2=P-kmGFEO0k_fp=XVps0YC16YJ_+yAqk4xVz0CGYz=g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2=P-kmGFEO0k_fp=XVps0YC16YJ_+yAqk4xVz0CGYz=g@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Thu, 14 Dec 2023 14:14:21 +0000
-Message-ID: <CABEcMwVbb-6670ESQJKFva_jnSPQMzCrzrscDmwnGvQqhXHMSw@mail.gmail.com>
-Subject: Re: [PATCH v4] arm: dts: rockpro64: Add RockPro64 smbios
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com, jagan@amarulasolutions.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="bWNVijVtr7SXCNTJ"
+Content-Disposition: inline
+In-Reply-To: <20231214135103.1606605-2-sumit.garg@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,88 +103,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Wed, Dec 13, 2023 at 8:41=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Tom,
->
-> On Wed, 13 Dec 2023 at 13:29, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Dec 13, 2023 at 12:50:06PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 11 Dec 2023 at 13:53, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Dec 11, 2023 at 08:42:19PM +0000, Shantur Rathore wrote:
-> > > > > Hi,
-> > > > >
-> > > > > On Mon, Nov 13, 2023 at 11:24=E2=80=AFAM Shantur Rathore <i@shant=
-ur.com> wrote:
-> > > > > >
-> > > > > > Add smbios information for Pine64 RockPro64 board and enable in
-> > > > > > config
-> > > > > >
-> > > > > > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > > > > > ---
-> > > > > >  Changes
-> > > > > >  v4: Change PINE64 to Pine64
-> > > > > >  v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
-> > > > > >
-> > > > > >  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 +++++++++++++++=
-+++++++
-> > > > > >  configs/rockpro64-rk3399_defconfig        |  2 ++
-> > > > > >  2 files changed, 24 insertions(+)
-> > > > > >
-> > > > > > diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/a=
-rm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > index 732727d9b0..089732524a 100644
-> > > > > > --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > @@ -9,6 +9,28 @@
-> > > > > >         chosen {
-> > > > > >                 u-boot,spl-boot-order =3D "same-as-spl", &spi_f=
-lash, &sdmmc, &sdhci;
-> > > > > >         };
-> > > > > > +
-> > > > > > +        smbios {
-> > > > > > +                compatible =3D "u-boot,sysinfo-smbios";
-> > > > > > +                smbios {
-> > > > > > +                        system {
-> > > > > > +                                manufacturer =3D "Pine64";
-> > > > > > +                                product =3D "RockPro64";
-> > > > > > +                        };
-> > [snip]
-> > > > Yes, we should just defer this and pickup the SMBIOS series that Il=
-ias
-> > > > has posted.
-> > >
-> > > I don't think it is a suitable substitute, it is just a fallback.
-> > >
-> > > So I believe this patch should be applied.
-> >
-> > Please note that this patch is adding _less_ details than the top-level
-> > model field contains today for the platform.  The only difference is
-> > "Pine64" vs "pine64".
->
-> The top-level model is "Pine64 RockPro64 v2.1", I believe. But:
->
-> - the first part of that is the manufacturer, not the product
-> - the second part is what we have in this patch
-> - the third part is the version
->
-> SMBIOS tries to split things up into separate fields.
->
-> So, perhaps a new version of this patch could add:
->
->    system {
->      version =3D "2.1";
->    };
->
+--bWNVijVtr7SXCNTJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I can add the above or any more details needed to a new patch
-Will that be enough to make it merge-able
+On Thu, Dec 14, 2023 at 07:20:56PM +0530, Sumit Garg wrote:
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>  .azure-pipelines.yml | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index d6f3fa423c6..f100c4493e6 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -65,7 +65,8 @@ stages:
+>        # have no matches.
+>        - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CON=
+FIG_'
+>                    :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
+> -                  :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
+> +                  :^include/linux/kconfig.h :^tools/ :^devicetree-rebasi=
+ng/ &&
+> +                  exit 1 || exit 0
+> =20
+>    - job: docs
+>      displayName: 'Build documentation'
 
-Kind regards,
-Shantur
+The GitLab tests needs an equivalent change.
+
+--=20
+Tom
+
+--bWNVijVtr7SXCNTJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7ELsACgkQFHw5/5Y0
+tyy8xAwAkJMrVTvV1C6S5lnwh7Mmpy5A+CwcKAs49b6s2TLAISy2hgCMmzuNxm2c
+V34luEX2TYSLP94sa8lvEHUUrr+59FTLa4FXMXQeme+9VfPtpMdVMIhk1uqFGvJG
+J0Tpnaxjeh/x3Uu+TXwA/xWvtpQj1OwS39YNzS2DrK4zu1LTxZ/2sLA/siE3gQ75
+mWjjgUFupW8t5A1qQOaYHeBhYI4nCwhY3525IIu3hLHpZyIHbsSw8uATR1h2afN1
+f/urLS0FzpvN6HX3AZFkwlHHD9doxmPDIvej6HEZSlzk51wbAnxagnNT9mI70b+F
+LEbhX5449eC4B+DRSMgfnJRwmZw5fQm2xQEgZPNz4iE/JC02ErXPX6VAmChtMpSH
+E1LiFPIS2Tyi/X++Uya+yEioUL5Pe+ozNuOx6bzE2ggph2/nyHNaf3D6A+kQ3PVl
+94QHPKsL5CKJQdH0WmzRMNVXWPjzeV+cnalaUX+d5NXjzjPBmLh4mu9pDzNh+AM0
+pdf7z7VQ
+=4UIP
+-----END PGP SIGNATURE-----
+
+--bWNVijVtr7SXCNTJ--
