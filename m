@@ -4,78 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8404C4167B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:55:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB54C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:55:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E41587B46;
-	Thu, 14 Dec 2023 17:52:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1893287B4E;
+	Thu, 14 Dec 2023 17:52:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CphpxSPo";
+	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="avcBuVg3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C379D87B07; Thu, 14 Dec 2023 17:52:06 +0100 (CET)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 55D1187ABC; Thu, 14 Dec 2023 17:30:24 +0100 (CET)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2531C87B0C
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:52:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B7EF87505
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:30:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-35f49b80192so2134945ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:52:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572721; x=1703177521; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Pbs9enqBC8BWbW5GmhIFPrJNH6FcG637oTYbhc2eyOs=;
- b=CphpxSPoLPIyfIaSuCbuzs6i0iO5OeSF8OY+ExwEBg3xolt1k25qRs4bK1NnwwqSZF
- ludsfqSBV3IBCkISn2EQr/DuMg671g0bdEWlnYqJOsOkYiUtshCj5mT+p0T6wZn9f/Fo
- j2S3jCMqeb02zMRHQT2bJ/PTNsBl+q/maQH70=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572721; x=1703177521;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Pbs9enqBC8BWbW5GmhIFPrJNH6FcG637oTYbhc2eyOs=;
- b=hi/1LP18EzcYcEXg5rp1X8juw2B+ynzMlIQP3PSIe/dFbq6Qy8d8YLDIxeQMAifhRX
- Cqi5zBP4HiiiFQTBMISM6JA2r/XmFAjXQvTn0Yn7Qmp/asUtDuNSltR0aCzCNlSQJmAC
- cINWA/GJcUFFx2+9Qxv1gMOw6WIgPK3BeqDc1+OS0Jt0WKZeg5IIIvy5+G0/glLz6EOh
- C3T1AYCH3q1m1bSOKJsGY0uRcbf+WKl9srLUl+GpJq8wRvcc9VGR6oCli7elqnPTbLBO
- IdVKova+QpVNA/Oc7uQpgwm1mxFC3PnyTG19AqbOg3xLE0spbhVoECXOKxQDpUJnMSAs
- RjzQ==
-X-Gm-Message-State: AOJu0YzvWSxJWOJrFtVBxm6LQ7NgJNs7j8IugNmKY2MQG9DiwvUirMcb
- W9Fe8z1UyDzZINcMS0JkkY9HZHaQKQLsih13LYcN8Q==
-X-Google-Smtp-Source: AGHT+IEVZSwH7o/+bgfB8hdMRMN9drjvwjthoNR83BHGGtZWVidYk1cQEZq7KrgpPrA7J7JVKB9mtQ==
-X-Received: by 2002:a05:6e02:1a06:b0:35c:d0b2:2c8 with SMTP id
- s6-20020a056e021a0600b0035cd0b202c8mr8309239ild.16.1702572721598; 
- Thu, 14 Dec 2023 08:52:01 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.52.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:52:01 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH v2 21/21] bootm: Create a function to run through the booti
- states
-Date: Thu, 14 Dec 2023 09:50:30 -0700
-Message-ID: <20231214094939.v2.21.I95fe77f4a7f3d6c3dba3ecb3aec30a48739198f9@changeid>
-X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
-In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
-References: <20231214165112.2182274-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=prolan.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
+ [127.0.0.1])
+ by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id D1B1AA0B08;
+ Thu, 14 Dec 2023 17:30:20 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :from:from:message-id:mime-version:reply-to:subject:subject:to
+ :to; s=mail; bh=4IQL+oF99QSuhsVcPvJ46e9KNRvpjVmRySWXpxuCHNs=; b=
+ avcBuVg35Qn8KZmPdN8G5S+dgDbVJulvLr+ZqKmzLwkXdxU5LcXszLctrTkrLBr6
+ OJ5ib9NftX2LAwheOYNkUN39lAAkKz5n9UF+ckb/iygYPcE8oUY4QthhWhtdk7EO
+ /Keiw7XYW28s/2K5MTxGrzT/9DaHhVfgWZgCRlhC4Fyc6aUasY2gEMCYJW7d24fZ
+ EiIzsjbouUiEGXC9Vd64oBZpHU/Oadnwy0IoM7yM4tIKQ1UqppTqHjiynbucGUO6
+ UPyAlzHJwMd6fbIJNbGF2i1nSCFqs5cFfAhDEmAOc7QK5KpUBvqvhE+2a6Cf6qwM
+ VCUvOR/h5wRQ/aAXpDBhWBtXKcFb1AA7k+j0Dw5XrojQYjK80MoNfEEEwaSc3kRZ
+ dzE5IOqTAoPe99Y5KqVaJe7N72hpDXbUf03Z7yvuARvUEF5rymRRKUkc34qn8+0D
+ uKbWJXnzhag2DC22WH+JJPormcHNwX5NVMoMDElDzGSeqM6qn/Roxr4+nyt3B92c
+ h1hlKxz+jpdZD9pI281CKuZMovp3iMiPeNzOgynv9FNkqkotenF+rBrO5LLrscpk
+ t7q3XKnL7ZyN/s4zovS5iwDVitz1a3pt2L/cIB+RhwucsSUGaM6lXzQrfpJVSM8O
+ A8FQLDmL2I6EzWTs/7Eidqnhxt8vyUafHkKrUqrcdzs=
+From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?=
+ <csokas.bence@prolan.hu>
+Subject: [PATCH] arm: spl: Use separate fault handlers instead of a single
+ common one
+Date: Thu, 14 Dec 2023 17:29:31 +0100
+Message-ID: <20231214162931.34236-1-csokas.bence@prolan.hu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-ESET-AS: R=OK; S=0; OP=CALC; TIME=1702571420; VERSION=7966; MC=3290524803;
+ ID=81617; TRN=0; CRV=0; IPC=; SP=0; SIPS=0; PI=3; F=0
+X-ESET-Antispam: OK
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29916D385C6D7166
+X-Mailman-Approved-At: Thu, 14 Dec 2023 17:52:15 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,70 +78,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In a few places, the booti command is used to handle a boot. We want
-these to be done without needing CONFIG_CMDLINE, so add a new
-booti_run() function to handle this.
+It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
+Add a Kconfig option to separate the different handlers into their own individual infinite loops.
 
-So far this is not used.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
 ---
+ arch/arm/Kconfig       | 10 ++++++++++
+ arch/arm/lib/vectors.S | 18 ++++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
-Changes in v2:
-- Rework series to allow OS access to cmdline arguments for bootm
-
- boot/bootm.c    | 13 +++++++++++++
- include/bootm.h | 13 +++++++++++++
- 2 files changed, 26 insertions(+)
-
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 1c5a99817a82..248341c927d9 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -1155,6 +1155,19 @@ int bootz_run(struct bootm_info *bmi)
- 	return bootm_run_states(bmi, states);
- }
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 328e2ddc33..47494cb72b 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -79,6 +79,16 @@ config SPL_SYS_NO_VECTOR_TABLE
+ 	depends on SPL
+ 	bool
  
-+int booti_run(struct bootm_info *bmi)
-+{
-+	int states;
++config SPL_USE_SEPARATE_FAULT_HANDLERS
++	bool "Use separate fault handlers instead of a single common one"
++	depends on !SPL_SYS_NO_VECTOR_TABLE
++	default n
++	help
++	  Instead of a common fault handler, generate a separate one for
++	  undefined_instruction, software_interrupt, prefetch_abort etc.
++	  This is for debugging purposes, when you want to set breakpoints
++	  on them separately.
 +
-+	bmi->cmd_name = "booti";
-+	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
-+		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
-+	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
-+		states |= BOOTM_STATE_RAMDISK;
-+
-+	return bootm_run_states(bmi, states);
-+}
-+
- int bootm_boot_start(ulong addr, const char *cmdline)
- {
- 	char addr_str[30];
-diff --git a/include/bootm.h b/include/bootm.h
-index 4665c7a24fa5..2245503eb0ea 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -176,6 +176,19 @@ int bootm_run(struct bootm_info *bmi);
-  */
- int bootz_run(struct bootm_info *bmi);
- 
-+/**
-+ * booti_run() - Run the entire booti process
-+ *
-+ * This runs through the booti process from start to finish, using the default
-+ * set of states.
-+ *
-+ * This uses bootm_run_states().
-+ *
-+ * @bmi: bootm information
-+ * Return: 0 if ok, something else on error
-+ */
-+int booti_run(struct bootm_info *bmi);
-+
- void arch_preboot_os(void);
- 
- /*
+ config LINUX_KERNEL_IMAGE_HEADER
+ 	depends on ARM64
+ 	bool
+diff --git a/arch/arm/lib/vectors.S b/arch/arm/lib/vectors.S
+index 7cf7d1636f..a14bca6fb8 100644
+--- a/arch/arm/lib/vectors.S
++++ b/arch/arm/lib/vectors.S
+@@ -138,11 +138,29 @@ _fiq:			.word fiq
+ #if !CONFIG_IS_ENABLED(SYS_NO_VECTOR_TABLE)
+ 	.align	5
+ undefined_instruction:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	undefined_instruction
++#endif
+ software_interrupt:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	software_interrupt
++#endif
+ prefetch_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	prefetch_abort
++#endif
+ data_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	data_abort
++#endif
+ not_used:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	not_used
++#endif
+ irq:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	irq
++#endif
+ fiq:
+ 1:
+ 	b	1b			/* hang and never return */
 -- 
-2.43.0.472.g3155946c3a-goog
+2.25.1
+
 
