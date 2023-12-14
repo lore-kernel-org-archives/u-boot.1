@@ -4,59 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B3CFC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:59:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D67C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 11:02:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B645B87706;
-	Thu, 14 Dec 2023 11:59:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6111587A5E;
+	Thu, 14 Dec 2023 12:02:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FyIwyilF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OQuf7uXg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05E1D874F6; Thu, 14 Dec 2023 11:59:23 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5BF5D87A60; Thu, 14 Dec 2023 12:02:28 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D02487A5E
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:59:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86C4287A4F
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 12:02:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 206DDB82183;
- Thu, 14 Dec 2023 10:59:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D12B5C433C7;
- Thu, 14 Dec 2023 10:59:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702551559;
- bh=dbj+hYbKn1bLX2ztc2xnR9JYd8lQgSWgB5FSsEluq8g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FyIwyilFWuCkmM82lpj6wS1RVqNx6nnfnvxbyFSID9mfkGUzdryy2n/pfjrDinygN
- zt79wCkt+lF1IIo6U/ify1EuqNt3vQjW9nvUva2ZRDQYtUdKt6irv2j4kaoGV7cAkv
- cIjKmgw4ijKcifG8zoT2NOX1lQva4hbiUs8Rob6c5VpTBCUNAJFa/g0c33MHFm1U5C
- mhIV4nj8uVu/UYRfNEbTx/GQM/Ku3gP0KapkBlXJOgxQzPi/HyavMrxi+u5xTk+5eo
- uD3s8o19jsjLWQ9veGCP0VFxh/9zWrfcoV/At7fRx/H5djeXAx7Glsnv0g/RMpYGPU
- e+D0G7ipcb42w==
-Message-ID: <351a7de9-1410-45ea-a655-b72ecb5672d3@kernel.org>
-Date: Thu, 14 Dec 2023 12:59:14 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1d346f4a043so5974845ad.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:02:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702551744; x=1703156544; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YI24J1OBy4pGr37cS6XzDP65T2YWtXFqL+ITVm7Uv3k=;
+ b=OQuf7uXg7K0yOaKrbEGedzgoWQM7GIzEcphwF0wOj6VMQnbcfmvQsr3CZh8zX7rkJq
+ 7CZqHjN1KvrGY3ku5RfIoMujnEUMM5VThRipJDAXLV/KQ5aBLQlth7Gx6t60AWP4hrDW
+ byZOW5TnCAtYOOaDFy3QSuYAgSYIdmyB1NAipRozLspwW1Lc0CHyg1gsWoU4sKZXm3Yn
+ 7Qzx5+Egt8iG2Qu1dG+CSRFladDVkoeL7Y82aKYp0FyiRQ8pX8nd/z5+sxqi+KBHcuBH
+ YSfp6ZDwoljsR0x0d9P7xzb/cGbu+7wgAKFe/HJNPcnhi7r7E6cviQrRUZcpyvM+hdQm
+ He+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702551744; x=1703156544;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YI24J1OBy4pGr37cS6XzDP65T2YWtXFqL+ITVm7Uv3k=;
+ b=vO9ZQcyxoj3MbyDpl2utOmAISlBGQgmvYhp4hCLX7bZllSuzLVck8vU62d4qhKxhA2
+ KoApMIlLW4c0RbKowRtrHjaI1DFBV059m0/rwfgxZgHoNfStDz1xj42S4M+XmnEg7EKu
+ 3jIOBifge6MqfFx8b/QkxBdeEE8nCpfzCO4Z2IREMtC3iVWvfbogPc6NjMhh5L3ObFTm
+ 5oPLwbT/BfYy/G37bROrUEI9lUUXAvw2inKxJu/d9VLA1u1e+eKkrB3JsLs9yGGAq0uL
+ My2VStzM3Dxxt5BDsGEq37ibjUGAodcnrT9mB3F6wFjLsyC7TA1VYHVhsCf3eNXmAS8D
+ kmDQ==
+X-Gm-Message-State: AOJu0YxLFGbKaJy+XQ+rPf5uLKrJTQTq3Oe/0TxCCaYyKPvm23/wYSO9
+ 44Kvh8TA71IXZh5hYbyKY3I=
+X-Google-Smtp-Source: AGHT+IEU/y9jAt859x/UzB6AO6qDPHvdSbyn/9OPLNZ+VJ/ViN2LFM5JVY310FWXsOqedlZhcKdzaA==
+X-Received: by 2002:a17:903:2303:b0:1d0:c128:1ef2 with SMTP id
+ d3-20020a170903230300b001d0c1281ef2mr19261888plh.3.1702551743707; 
+ Thu, 14 Dec 2023 03:02:23 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f163:488c:ee49:c334])
+ by smtp.gmail.com with ESMTPSA id
+ t15-20020a170902e84f00b001cfa4178981sm844917plg.309.2023.12.14.03.02.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 03:02:23 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de
+Subject: Pull request: Please pull u-boot-imx-next-20231214
+Date: Thu, 14 Dec 2023 08:02:19 -0300
+Message-Id: <20231214110219.14460-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] usb: dwc3: Add dwc3 glue driver for am62
-Content-Language: en-US
-To: Sjoerd Simons <sjoerd@collabora.com>, u-boot@lists.denx.de
-Cc: Nishanth Menon <nm@ti.com>, Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Marek Vasut <marex@denx.de>
-References: <20231212210234.509309-1-sjoerd@collabora.com>
- <20231212210234.509309-2-sjoerd@collabora.com>
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20231212210234.509309-2-sjoerd@collabora.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,200 +90,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sjoerd,
+Hi Tom,
 
-On 12/12/2023 23:02, Sjoerd Simons wrote:
-> Add glue code for TI AM62 to the dwc3 driver; Most code adopted from
-> TI vendor u-boot code.
-> 
-> Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> 
-> ---
-> 
-> (no changes since v2)
-> 
-> Changes in v2:
-> - Switch dwc3 glue to a seperate driver rather then in dwc-generic
-> 
->  drivers/usb/dwc3/Kconfig     |  14 ++++
->  drivers/usb/dwc3/Makefile    |   1 +
->  drivers/usb/dwc3/dwc3-am62.c | 125 +++++++++++++++++++++++++++++++++++
->  3 files changed, 140 insertions(+)
->  create mode 100644 drivers/usb/dwc3/dwc3-am62.c
-> 
-> diff --git a/drivers/usb/dwc3/Kconfig b/drivers/usb/dwc3/Kconfig
-> index c0c8c16fd9c..26a1e1770c5 100644
-> --- a/drivers/usb/dwc3/Kconfig
-> +++ b/drivers/usb/dwc3/Kconfig
-> @@ -37,6 +37,20 @@ config SPL_USB_DWC3_GENERIC
->  	  Select this for Xilinx ZynqMP and similar Platforms.
->  	  This wrapper supports Host and Peripheral operation modes.
->  
-> +config SPL_USB_DWC3_AM62
-> +	bool "TI AM62 USB wrapper"
-> +	depends on SPL_DM_USB && SPL_USB_DWC3_GENERIC
-> +	help
-> +	  Select this for TI AM62 Platforms.
-> +	  This wrapper supports Host and Peripheral operation modes.
-> +
-> +config USB_DWC3_AM62
-> +	bool "TI AM62 USB wrapper"
-> +	depends on DM_USB && USB_DWC3_GENERIC
-> +	help
-> +	  Select this for TI AM62 Platforms.
-> +	  This wrapper supports Host and Peripheral operation modes.
-> +
->  config USB_DWC3_MESON_G12A
->  	bool "Amlogic Meson G12A USB wrapper"
->  	depends on DM_USB && USB_DWC3 && ARCH_MESON
-> diff --git a/drivers/usb/dwc3/Makefile b/drivers/usb/dwc3/Makefile
-> index 97b4f7191ca..a46b6824ab7 100644
-> --- a/drivers/usb/dwc3/Makefile
-> +++ b/drivers/usb/dwc3/Makefile
-> @@ -6,6 +6,7 @@ dwc3-y					:= core.o
->  
->  obj-$(CONFIG_USB_DWC3_GADGET)		+= gadget.o ep0.o
->  
-> +obj-$(CONFIG_$(SPL_)USB_DWC3_AM62)	+= dwc3-am62.o
->  obj-$(CONFIG_USB_DWC3_OMAP)		+= dwc3-omap.o
->  obj-$(CONFIG_USB_DWC3_MESON_G12A)	+= dwc3-meson-g12a.o
->  obj-$(CONFIG_USB_DWC3_MESON_GXL)	+= dwc3-meson-gxl.o
-> diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
-> new file mode 100644
-> index 00000000000..56c3b26a531
-> --- /dev/null
-> +++ b/drivers/usb/dwc3/dwc3-am62.c
-> @@ -0,0 +1,125 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * TI AM62 specific glue layer for DWC3
-> + */
-> +
-> +#include <dm.h>
-> +#include <dm/device_compat.h>
-> +#include <regmap.h>
-> +#include <syscon.h>
-> +#include <asm/io.h>
-> +
-> +#include "dwc3-generic.h"
-> +
-> +static void dwc3_ti_am62_glue_configure(struct udevice *dev, int index,
-> +					enum usb_dr_mode mode)
-> +{
-> +#define USBSS_MODE_CONTROL		0x1c
-> +#define USBSS_PHY_CONFIG		0x8
-> +#define USBSS_PHY_VBUS_SEL_MASK		GENMASK(2, 1)
-> +#define USBSS_PHY_VBUS_SEL_SHIFT	1
-> +#define USBSS_MODE_VALID	BIT(0)
-> +#define PHY_PLL_REFCLK_MASK	GENMASK(3, 0)
-> +static const int dwc3_ti_am62_rate_table[] = {	/* in KHZ */
-> +	9600,
-> +	10000,
-> +	12000,
-> +	19200,
-> +	20000,
-> +	24000,
-> +	25000,
-> +	26000,
-> +	38400,
-> +	40000,
-> +	58000,
-> +	50000,
-> +	52000,
-> +};
+Please pull this u-boot-imx material targetted for 'next', thanks.
 
-Can we please move these defines and dwc3_ti_am62_rate_table outside the function?
+The following changes since commit be4a5f7c35685d228b3abc398a8d86c434274de5:
 
-> +
-> +	struct clk usb2_refclk;
-> +	int rate_code, i, ret;
-> +	unsigned long rate;
-> +	u32 reg;
-> +	void *usbss;
-> +	bool vbus_divider;
-> +	struct regmap *syscon;
-> +	struct ofnode_phandle_args args;
-> +
-> +	usbss = dev_remap_addr_index(dev, 0);
-> +	if (IS_ERR(usbss)) {
-> +		dev_err(dev, "can't map IOMEM resource\n");
-> +		return;
-> +	}
-> +
-> +	ret = clk_get_by_name(dev, "ref", &usb2_refclk);
-> +	if (ret) {
-> +		dev_err(dev, "can't get usb2_refclk\n");
-> +		return;
-> +	}
-> +
-> +	/* Calculate the rate code */
-> +	rate = clk_get_rate(&usb2_refclk);
-> +	rate /= 1000;	/* To KHz */
-> +	for (i = 0; i < ARRAY_SIZE(dwc3_ti_am62_rate_table); i++) {
-> +		if (dwc3_ti_am62_rate_table[i] == rate)
-> +			break;
-> +	}
-> +
-> +	if (i == ARRAY_SIZE(dwc3_ti_am62_rate_table)) {
-> +		dev_err(dev, "unsupported usb2_refclk rate: %lu KHz\n", rate);
-> +		return;
-> +	}
-> +
-> +	rate_code = i;
-> +
-> +	/* Read the syscon property */
-> +	syscon = syscon_regmap_lookup_by_phandle(dev, "ti,syscon-phy-pll-refclk");
-> +	if (IS_ERR(syscon)) {
-> +		dev_err(dev, "unable to get ti,syscon-phy-pll-refclk regmap\n");
-> +		return;
-> +	}
-> +
-> +	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev), "ti,syscon-phy-pll-refclk", NULL, 1,
-> +					     0, &args);
-> +	if (ret)
-> +		return;
-> +
-> +	/* Program PHY PLL refclk by reading syscon property */
-> +	ret = regmap_update_bits(syscon, args.args[0], PHY_PLL_REFCLK_MASK, rate_code);
-> +	if (ret) {
-> +		dev_err(dev, "failed to set phy pll reference clock rate\n");
-> +		return;
-> +	}
-> +
-> +	/* VBUS divider select */
-> +	reg = readl(usbss + USBSS_PHY_CONFIG);
-> +	vbus_divider = dev_read_bool(dev, "ti,vbus-divider");
-> +	if (vbus_divider)
-> +		reg |= 1 << USBSS_PHY_VBUS_SEL_SHIFT;
-> +
-> +	writel(reg, usbss + USBSS_PHY_CONFIG);
-> +
-> +	/* Set mode valid */
-> +	reg = readl(usbss + USBSS_MODE_CONTROL);
-> +	reg |= USBSS_MODE_VALID;
-> +	writel(reg, usbss + USBSS_MODE_CONTROL);
-> +}
-> +
-> +struct dwc3_glue_ops ti_am62_ops = {
-> +	.glue_configure = dwc3_ti_am62_glue_configure,
-> +};
-> +
-> +static const struct udevice_id dwc3_am62_match[] = {
-> +	{ .compatible = "ti,am62-usb", .data = (ulong)&ti_am62_ops },
-> +	{ /* sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(dwc3_am62_wrapper) = {
-> +	.name	= "dwc3-am62",
-> +	.id	= UCLASS_SIMPLE_BUS,
-> +	.of_match = dwc3_am62_match,
-> +	.bind = dwc3_glue_bind,
-> +	.probe = dwc3_glue_probe,
-> +	.remove = dwc3_glue_remove,
-> +	.plat_auto	= sizeof(struct dwc3_glue_data),
-> +};
+  test: bdinfo: Handle systems without getopt (2023-12-10 10:08:30 -0500)
 
--- 
-cheers,
--roger
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20231214
+
+for you to fetch changes up to 6b73200aedb1d3fb0a52e2600bd6b1e3ff5e5faf:
+
+  arm64: imx8mp: Enable TCP, IPv6, wget on Data Modul i.MX8M eDM SBC (2023-12-14 06:24:27 -0300)
+
+u-boot-imx-next-20231214
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/18918
+
+- Add TPM support for venice boards
+- Add networking support for imx93-evk
+- Enable TCP, IPv6, wget for DHCOM and Data Modul boards
+- Enable fastboot support for Toradex boards
+- Allow pico-imx7d to boot from SD
+- Enable fastboot for beacon imx8m beacon boards, disabled SYS_CONSOLE_IS_IN_ENV
+- Fix mxsboot to prevent NAND blocks being reported as bad
+- Add imx8mm PWM clock support
+- Several devicetree syncs with the kernel
+- Add support for i.MX8MP Polyhex Debix Model A SBC
+- Reworked ddr_load_train_firmware() to get a 50ms boot time improvement
+----------------------------------------------------------------
+
+Adam Ford (5):
+      configs: imx8mp_beacon: Do not set SYS_CONSOLE_IS_IN_ENV
+      configs: imx8mm_beacon: Enable fastboot downloading
+      configs: imx8mm_beacon: Disable the WDT autostart
+      configs: imx8mn_beacon: Do not set SYS_CONSOLE_IS_IN_ENV
+      configs: imx8mn_beacon: Disable the WDT autostart
+
+Alessandro Rubini (1):
+      tools: mxsboot: pre-fill buffer with 0xff, not 0
+
+Arnaud Ferraris (2):
+      librem5: properly set the `fdtfile` env variable
+      librem5: Add addresses for compressed kernel load
+
+Benjamin Szőke (1):
+      pico-imx7d: add baseboard SD card boot detect
+
+Cem Tenruh (1):
+      arm: dts: imx8mm-phyboard-polis-rdk: Sync dts files with kernel
+
+Fabio Estevam (14):
+      imx8qm_dmsse20a1: Improve SPL memory configuration
+      imx7d-sdb: Sync devicetree with kernel 6.5-rc1
+      imx8mp_evk: Convert to DM_PMIC
+      imx8mp_evk: Add myself to MAINTAINERS
+      arm: dts: imx8mm: Sync with linux-next 20231019
+      arm: dts: imx8mn: Sync with linux-next 20231019
+      arm: dts: imx8mp: Sync with linux-next 20231019
+      phy: phy-imx8mq-usb: Remove .exit operation
+      imx8mp_evk: Simplify Ethernet initialization
+      imx8mp_evk: Remove unneeded header files
+      clock_imx8mm: Add a stub for imx8mp_fec_interface_init()
+      pico-imx7d: Remove board_phy_config()
+      imx7d-pico-pi-u-boot.dtsi: Fix aliases indentation
+      imx: imx-hab: Select SPL_DRIVERS_MISC in the SPL case
+
+Gilles Talis (1):
+      imx: imx8mp: Add support for Polyhex Debix Model A SBC
+
+Hiago De Franco (2):
+      apalis/colibri imx6/imx6ull/imx7: defconfig: Enable fastboot support
+      board: apalis/colibri imx6/imx6ull/imx7: Add fastboot bootcmd support
+
+Hugo Villeneuve (4):
+      imx8mn-var-som: add manufacturer to target description
+      imx8mn_var_som: Add myself to MAINTAINERS
+      imx8mn-var-som: Simplify FEC initialization
+      MAINTAINERS: Remove non-working address from MAINTAINERS
+
+Igor Opaniuk (1):
+      imx: imx8: ahab: refactor do_ahab_close command
+
+Marek Vasut (5):
+      arm: mxs: Fix ICOLL macro name typo
+      arm: mxs: Clear CPSR V bit to activate low vectors
+      arm: imx6: Enable TCP, IPv6, wget on DH i.MX6 DHCOM
+      arm64: imx8mp: Enable TCP, IPv6, wget on DH i.MX8MP DHCOM
+      arm64: imx8mp: Enable TCP, IPv6, wget on Data Modul i.MX8M eDM SBC
+
+Nicolas Heemeryck (1):
+      clk: imx8mn: add pwm clocks
+
+Ricardo Salveti (1):
+      ARM: imx8ulp: support env in fat and ext4
+
+Shawn Guo (1):
+      ddr: imx: Save the FW loading if it hasn't changed
+
+Sébastien Szymanski (4):
+      net: dwc_eth_qos: add i.MX93 support
+      net: dwc_eth_qos: Add board_interface_eth_init() for i.MX93
+      net: phy: realtek: Add support for RTL8211F(D)(I)-VD-CG
+      arm: dts: imx93-evk: remove wrong eqos compatible string
+
+Tim Harvey (2):
+      arm: dts: imx8mm-venice-gw73xx: add TPM device
+      arm: dts: imx8mp-venice-gw73xx: add TPM device
+
+ arch/arm/cpu/arm926ejs/mxs/mxs.c                   |    4 +
+ arch/arm/cpu/arm926ejs/mxs/spl_boot.c              |    8 +-
+ arch/arm/dts/Makefile                              |    3 +-
+ arch/arm/dts/imx7d-pico-pi-u-boot.dtsi             |   11 +-
+ arch/arm/dts/imx7d-sdb-u-boot.dtsi                 |   51 -
+ arch/arm/dts/imx7d-sdb.dts                         |   73 +-
+ ....dtsi => imx8mm-phyboard-polis-rdk-u-boot.dtsi} |    0
+ arch/arm/dts/imx8mm-phyboard-polis-rdk.dts         |  460 +++++
+ arch/arm/dts/imx8mm-phycore-som.dtsi               |  440 +++++
+ arch/arm/dts/imx8mm-venice-gw73xx-0x-u-boot.dtsi   |    7 +
+ arch/arm/dts/imx8mm-venice-gw73xx.dtsi             |   10 +-
+ arch/arm/dts/imx8mm.dtsi                           |  153 +-
+ arch/arm/dts/imx8mn.dtsi                           |  167 +-
+ arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi      |  141 ++
+ arch/arm/dts/imx8mp-debix-model-a.dts              |  507 ++++++
+ arch/arm/dts/imx8mp-evk-u-boot.dtsi                |   32 +-
+ arch/arm/dts/imx8mp-venice-gw73xx-2x-u-boot.dtsi   |    9 +
+ arch/arm/dts/imx8mp-venice-gw73xx.dtsi             |    9 +-
+ arch/arm/dts/imx8mp.dtsi                           |  542 +++++-
+ arch/arm/dts/imx93-11x11-evk-u-boot.dtsi           |    4 -
+ arch/arm/dts/phycore-imx8mm.dts                    |  287 ---
+ arch/arm/include/asm/arch-imx8/sys_proto.h         |    1 +
+ arch/arm/include/asm/arch-mxs/regs-base.h          |    2 +-
+ arch/arm/mach-imx/Kconfig                          |    1 +
+ arch/arm/mach-imx/imx8/ahab.c                      |   45 +-
+ arch/arm/mach-imx/imx8m/Kconfig                    |   10 +-
+ arch/arm/mach-imx/imx8m/clock_imx8mm.c             |    7 +
+ arch/arm/mach-imx/imx8ulp/soc.c                    |   28 +-
+ arch/arm/mach-imx/imx9/clock.c                     |   53 +
+ board/bsh/imx8mn_smm_s2/MAINTAINERS                |    1 -
+ board/freescale/imx8mp_evk/MAINTAINERS             |    1 +
+ board/freescale/imx8mp_evk/imx8mp_evk.c            |   41 +-
+ board/freescale/imx8mp_evk/spl.c                   |   50 +-
+ board/freescale/imx93_evk/imx93_evk.c              |   16 -
+ board/freescale/mx7dsabresd/mx7dsabresd.c          |    2 +-
+ board/phytec/phycore_imx8mm/MAINTAINERS            |    5 +-
+ board/polyhex/imx8mp_debix_model_a/Kconfig         |   15 +
+ board/polyhex/imx8mp_debix_model_a/MAINTAINERS     |    8 +
+ board/polyhex/imx8mp_debix_model_a/Makefile        |   13 +
+ .../imx8mp_debix_model_a/imx8mp_debix_model_a.c    |   55 +
+ .../imx8mp_debix_model_a/imximage-8mp-lpddr4.cfg   |    9 +
+ board/polyhex/imx8mp_debix_model_a/lpddr4_timing.c | 1843 ++++++++++++++++++++
+ board/polyhex/imx8mp_debix_model_a/spl.c           |  129 ++
+ board/purism/librem5/librem5.c                     |   27 +-
+ board/technexion/pico-imx7d/Makefile               |    2 +-
+ board/technexion/pico-imx7d/pico-imx7d.c           |   88 +-
+ board/technexion/pico-imx7d/spl.c                  |   91 +-
+ board/toradex/apalis_imx6/apalis_imx6.c            |   13 +-
+ board/toradex/colibri-imx6ull/colibri-imx6ull.c    |   13 +-
+ board/toradex/colibri_imx6/colibri_imx6.c          |   13 +-
+ board/toradex/colibri_imx7/colibri_imx7.c          |   14 +-
+ board/variscite/imx8mn_var_som/MAINTAINERS         |    2 +-
+ board/variscite/imx8mn_var_som/imx8mn_var_som.c    |   13 -
+ configs/apalis_imx6_defconfig                      |    3 +
+ configs/colibri-imx6ull-emmc_defconfig             |    3 +
+ configs/colibri-imx6ull_defconfig                  |    3 +
+ configs/colibri_imx6_defconfig                     |    3 +
+ configs/colibri_imx7_defconfig                     |    3 +
+ configs/colibri_imx7_emmc_defconfig                |    4 +-
+ configs/dh_imx6_defconfig                          |    7 +
+ configs/imx8mm_beacon_defconfig                    |    7 +-
+ configs/imx8mm_data_modul_edm_sbc_defconfig        |    5 +
+ configs/imx8mn_beacon_defconfig                    |    2 +
+ configs/imx8mp_beacon_defconfig                    |    1 +
+ configs/imx8mp_data_modul_edm_sbc_defconfig        |    5 +
+ configs/imx8mp_debix_model_a_defconfig             |  110 ++
+ configs/imx8mp_dhcom_pdk2_defconfig                |    5 +
+ configs/imx8mp_dhcom_pdk3_defconfig                |    5 +
+ configs/imx8mp_evk_defconfig                       |   12 +-
+ configs/imx8qm_dmsse20a1_defconfig                 |    9 +
+ configs/phycore-imx8mm_defconfig                   |    2 +-
+ drivers/clk/imx/clk-imx8mn.c                       |   30 +
+ drivers/ddr/imx/phy/helper.c                       |    7 +
+ drivers/net/dwc_eth_qos.c                          |    4 +
+ drivers/net/dwc_eth_qos_imx.c                      |    3 +
+ drivers/net/phy/realtek.c                          |   14 +
+ drivers/phy/phy-imx8mq-usb.c                       |    6 -
+ include/configs/imx8mp_debix_model_a.h             |   54 +
+ include/configs/librem5.h                          |    2 +
+ include/configs/pico-imx7d.h                       |    4 +-
+ include/dt-bindings/clock/imx8mp-clock.h           |    3 +-
+ tools/mxsboot.c                                    |    2 +-
+ 82 files changed, 5200 insertions(+), 647 deletions(-)
+ rename arch/arm/dts/{phycore-imx8mm-u-boot.dtsi => imx8mm-phyboard-polis-rdk-u-boot.dtsi} (100%)
+ create mode 100644 arch/arm/dts/imx8mm-phyboard-polis-rdk.dts
+ create mode 100644 arch/arm/dts/imx8mm-phycore-som.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-debix-model-a-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-debix-model-a.dts
+ delete mode 100644 arch/arm/dts/phycore-imx8mm.dts
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/Kconfig
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/MAINTAINERS
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/Makefile
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/imximage-8mp-lpddr4.cfg
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/lpddr4_timing.c
+ create mode 100644 board/polyhex/imx8mp_debix_model_a/spl.c
+ create mode 100644 configs/imx8mp_debix_model_a_defconfig
+ create mode 100644 include/configs/imx8mp_debix_model_a.h
