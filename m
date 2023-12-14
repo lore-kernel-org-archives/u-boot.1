@@ -4,73 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3700EC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 09:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C394FC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 10:12:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6626D87A35;
-	Thu, 14 Dec 2023 10:20:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E8E6E87A08;
+	Thu, 14 Dec 2023 11:12:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VVQtxxpw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E37DF87A3E; Thu, 14 Dec 2023 10:20:51 +0100 (CET)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 697D087A14; Thu, 14 Dec 2023 11:12:51 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E371878ED
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:20:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2738987811
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:12:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7cb0fdced70so1103916241.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 01:20:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702545648; x=1703150448; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H3HpAX6CQXGZvGX5HmnS+9SB4uxM0bBy0lkGfjCKfd0=;
- b=VVQtxxpwcXdlli3s9edFI0JGj1vd5VK7wA8Qt1d4u9NameAS0anBEM6krYrtLCc+8y
- wcO55hM/Em/ZMkOhJ5g5SMam4dFOkSe4WQvE6CECkPScqv4v2MrcKmm7VwXkGBJ488By
- /SI05gbj6g2vWGPdIyiXzeQMsdqjLDP6nMYXMBJ6qLaularjBdvflVsLexbU11Y8pQzo
- e5edGHPKFhZe/zhpjdGyy//9DaVQcxqJdAPmfnI5vtzPNsSXO/LfnrWSqdfmBtI8skpe
- jAU0KBszRwpkO8O+Of9ubEMMtM6x0iY2XHM6FuTDa+zcXv308M8LeQBWpYYSXojNMS8e
- t6DA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702545648; x=1703150448;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H3HpAX6CQXGZvGX5HmnS+9SB4uxM0bBy0lkGfjCKfd0=;
- b=MYlGowqWaTVHxNiGXE8A28e4UBp/eeY/x3VmSAZBiJ6wRegeUuHDD40Oexh756YKR/
- sXCIXHaHi51QKRYVzcTnoxSREQJsb41RrvxmzvBXZz0mDPsnMW6k8TGikZD+D2UglRaF
- dZm648ueDKzK7ugfE4VmbqVUnl156BtnU1Nfd3qxKmN5Jwyz2HklWwfWOWzWPJJMIfbu
- BEXPkU/QOLfc9Yox+GSMxBkuoZ5Uh0zj+Jyy8jc+oGxidiiXAs411z7y7lYOth36Je/E
- lRHzbpewI0ut78fM3CmlLyAPX+47S7nt6Kx7paV+aJENRogOTkA1wIpnT2J9SYKXfNXD
- 19mA==
-X-Gm-Message-State: AOJu0Yxl3WYXnzXAt4qiKm4He+YogC6WgQHmOPRwPfZ+3ycWRKMxJdbL
- hCU9zjCsbAGrsaWEUCw1XB4bza4NZVOyuabqNXCaWA==
-X-Google-Smtp-Source: AGHT+IG2tlALZJcawt+mIvaIss16r3wrUe0S75NuIQ1s0aQezClu/9OErQs0jvAVI/Bk6IBlRG8XsfBOZYrFru9AIuU=
-X-Received: by 2002:a05:6102:1608:b0:465:da5a:8a58 with SMTP id
- cu8-20020a056102160800b00465da5a8a58mr7970415vsb.28.1702545648237; Thu, 14
- Dec 2023 01:20:48 -0800 (PST)
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3BEACfOE063630;
+ Thu, 14 Dec 2023 18:12:41 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from atctrx.andestech.com (10.0.15.173) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0; Thu, 14 Dec 2023
+ 18:12:38 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ Randolph <randolph@andestech.com>, CL Wang <cl634@andestech.com>, "Leo
+ Yu-Chi Liang" <ycliang@andestech.com>
+Subject: [PATCH V3 1/2] drivers: watchdog: add andes atcwdt200 support
+Date: Thu, 14 Dec 2023 18:12:29 +0800
+Message-ID: <20231214101230.824550-1-randolph@andestech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20231211-b4-dwc3-qcom-v1-0-46275113b4f2@linaro.org>
-In-Reply-To: <20231211-b4-dwc3-qcom-v1-0-46275113b4f2@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 14 Dec 2023 14:50:37 +0530
-Message-ID: <CAFA6WYMU=nefETmdVWSoyxvnYwO_0EWNHESnP=HUSg0w0ufzCA@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Qualcomm quirky SMMU support
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Mark Kettenis <kettenis@openbsd.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.173]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3BEACfOE063630
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,59 +61,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+This patch adds an implementation of the Andes watchdog ATCWDT200 driver.
 
-On Tue, 12 Dec 2023 at 00:11, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Qualcomm platforms are heavily locked down, in many cases offering no
-> way for users to gain EL2 or EL3 code execution and including many
-> additional security features. Among these are modifications made to
-> the SMMU behaviour (done by having the hypervisor intercept register
-> accesses). On many platforms it is not possible to disable the SMMU,
-> and not possible to configure streams in BYPASS.
+Signed-off-by: CL Wang <cl634@andestech.com>
+Signed-off-by: Randolph <randolph@andestech.com>
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+---
+ drivers/watchdog/Kconfig         |   6 +
+ drivers/watchdog/Makefile        |   1 +
+ drivers/watchdog/atcwdt200_wdt.c | 220 +++++++++++++++++++++++++++++++
+ 3 files changed, 227 insertions(+)
+ create mode 100644 drivers/watchdog/atcwdt200_wdt.c
 
-I suppose SDM845 is one of those.
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 569726119c..8318fd77a3 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -130,6 +130,12 @@ config WDT_AT91
+ 	  Select this to enable Microchip watchdog timer, which can be found on
+ 	  some AT91 devices.
+ 
++config WDT_ATCWDT200
++	bool "Andes watchdog timer support"
++	depends on WDT
++	help
++	  Select this to enable Andes ATCWDT200 watchdog timer
++
+ config WDT_BCM6345
+ 	bool "BCM6345 watchdog timer support"
+ 	depends on WDT && (ARCH_BMIPS || BCM6856 || \
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 5520d3d9ae..7b39adcf0f 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -22,6 +22,7 @@ obj-$(CONFIG_WDT_ARM_SMC) += arm_smc_wdt.o
+ obj-$(CONFIG_WDT_ARMADA_37XX) += armada-37xx-wdt.o
+ obj-$(CONFIG_WDT_ASPEED) += ast_wdt.o
+ obj-$(CONFIG_WDT_AST2600) += ast2600_wdt.o
++obj-$(CONFIG_WDT_ATCWDT200) += atcwdt200_wdt.o
+ obj-$(CONFIG_WDT_BCM2835) += bcm2835_wdt.o
+ obj-$(CONFIG_WDT_BCM6345) += bcm6345_wdt.o
+ obj-$(CONFIG_WDT_BOOKE) += booke_wdt.o
+diff --git a/drivers/watchdog/atcwdt200_wdt.c b/drivers/watchdog/atcwdt200_wdt.c
+new file mode 100644
+index 0000000000..c6a8e4e054
+--- /dev/null
++++ b/drivers/watchdog/atcwdt200_wdt.c
+@@ -0,0 +1,220 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C)  2023 Andes Technology Corporation.
++ *
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <hang.h>
++#include <linux/bitops.h>
++#include <wdt.h>
++
++#define NODE_NOT_FOUND     0xFFFFFFFF
++
++#define WDT_WP_MAGIC       0x5aa5
++#define WDT_RESTART_MAGIC  0xcafe
++
++/* Control Register */
++#define REG_WDT_ID         0x00
++#define REG_WDT_CFG        0x10
++#define REG_WDT_RS         0x14
++#define REG_WDT_WE         0x18
++#define REG_WDT_STA        0x1C
++
++#define RST_TIME_OFF       8
++#define RST_TIME_MSK       (0x7 << RST_TIME_OFF)
++#define RST_CLK_128        (0 << RST_TIME_OFF)
++#define RST_CLK_256        (1 << RST_TIME_OFF)
++#define RST_CLK_512        (2 << RST_TIME_OFF)
++#define RST_CLK_1024       (3 << RST_TIME_OFF)
++#define INT_TIME_OFF       4
++#define INT_TIME_MSK       (0xf << INT_TIME_OFF)
++#define INT_CLK_2_6        (0 << INT_TIME_OFF)  /* clk period*2^6  */
++#define INT_CLK_2_8        (1 << INT_TIME_OFF)  /* clk period*2^8  */
++#define INT_CLK_2_10       (2 << INT_TIME_OFF)  /* clk period*2^10 */
++#define INT_CLK_2_11       (3 << INT_TIME_OFF)  /* clk period*2^11 */
++#define INT_CLK_2_12       (4 << INT_TIME_OFF)  /* clk period*2^12 */
++#define INT_CLK_2_13       (5 << INT_TIME_OFF)  /* clk period*2^13 */
++#define INT_CLK_2_14       (6 << INT_TIME_OFF)  /* clk period*2^14 */
++#define INT_CLK_2_15       (7 << INT_TIME_OFF)  /* clk period*2^15 */
++#define INT_CLK_2_17       (8 << INT_TIME_OFF)  /* clk period*2^17 */
++#define INT_CLK_2_19       (9 << INT_TIME_OFF)  /* clk period*2^19 */
++#define INT_CLK_2_21       (10 << INT_TIME_OFF) /* clk period*2^21 */
++#define INT_CLK_2_23       (11 << INT_TIME_OFF) /* clk period*2^23 */
++#define INT_CLK_2_25       (12 << INT_TIME_OFF) /* clk period*2^25 */
++#define INT_CLK_2_27       (13 << INT_TIME_OFF) /* clk period*2^27 */
++#define INT_CLK_2_29       (14 << INT_TIME_OFF) /* clk period*2^29 */
++#define INT_CLK_2_31       (15 << INT_TIME_OFF) /* clk period*2^31 */
++#define INT_CLK_MIN        0x0
++#define INT_CLK_MAX_16B    0x7
++#define INT_CLK_MAX_32B    0xF
++#define RST_EN             BIT(3)
++#define INT_EN             BIT(2)
++#define CLK_PCLK           BIT(1)
++#define WDT_EN             BIT(0)
++#define INT_EXPIRED        BIT(0)
++
++#define INT_TIME_ARRAY     16
++#define RST_TIME_ARRAY     8
++
++struct wdt_priv {
++	void __iomem *base;
++	u32 wdt_clk_src;
++	u32 clk_freq;
++	u8  max_clk;
++};
++
++static inline u8 atcwdt_get_2_power_of_n(u8 index, u8 type)
++{
++	const u8 div_int[INT_TIME_ARRAY] = {6, 8, 10, 11, 12, 13, 14, 15,
++					    17, 19, 21, 23, 25, 27, 29, 31};
++	const u8 div_rst[RST_TIME_ARRAY] = {7, 8, 9, 10, 11, 12, 13, 14};
++	u8 *pdiv;
++
++	if (type == RST_TIME_ARRAY)
++		pdiv = div_rst;
++	else
++		pdiv = div_int;
++
++	if (index >= type)
++		index = type - 1;
++
++	return pdiv[index];
++}
++
++static u8 atcwdt_search_msb(u64 freq_ms, u8 type)
++{
++	u64 result;
++	u64 freq_sec;
++	u8 index;
++
++	freq_sec = freq_ms / 1000;
++	for (index = 0; index < type; index++) {
++		result = freq_sec >> atcwdt_get_2_power_of_n(index, type);
++
++		if (result <= 1)
++			break;
++	}
++
++	return index;
++}
++
++static int atcwdt_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++	u64 rst_max_count;
++	u32 rst_max_time_ms;
++	u64 rst_time_ms;
++	u64 int_time_ms;
++	u8  rst_time;
++	u8  int_time;
++
++	rst_max_count = 1 << atcwdt_get_2_power_of_n(RST_TIME_ARRAY, RST_TIME_ARRAY);
++	rst_max_time_ms = (rst_max_count * 1000) / priv->clk_freq;
++
++	if (timeout > rst_max_time_ms) {
++		int_time_ms = timeout - rst_max_time_ms;
++		rst_time_ms = rst_max_time_ms;
++	} else {
++		int_time_ms = 0;
++		rst_time_ms = timeout;
++	}
++
++	rst_time = atcwdt_search_msb(rst_time_ms * priv->clk_freq, RST_TIME_ARRAY);
++
++	if (int_time_ms) {
++		int_time = atcwdt_search_msb(int_time_ms * priv->clk_freq, INT_TIME_ARRAY);
++		if (int_time > priv->max_clk)
++			int_time = priv->max_clk;
++	} else {
++		int_time = 0;
++	}
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(((rst_time << RST_TIME_OFF) & RST_TIME_MSK) | ((int_time << INT_TIME_OFF) &
++		INT_TIME_MSK) | INT_EN | RST_EN | priv->wdt_clk_src | WDT_EN,
++		priv->base + REG_WDT_CFG);
++
++	return 0;
++}
++
++static int atcwdt_wdt_stop(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(0, priv->base + REG_WDT_CFG);
++
++	return 0;
++}
++
++static int atcwdt_wdt_restart(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++
++	writel(WDT_WP_MAGIC, priv->base + REG_WDT_WE);
++	writel(WDT_RESTART_MAGIC, priv->base + REG_WDT_RS);
++	setbits_le32(priv->base + REG_WDT_STA, INT_EXPIRED);
++
++	return 0;
++}
++
++static int atcwdt_wdt_expire_now(struct udevice *dev, ulong flags)
++{
++	atcwdt_wdt_start(dev, 0, 0);
++	hang();
++
++	return 0;
++}
++
++static int atcwdt_wdt_probe(struct udevice *dev)
++{
++	struct wdt_priv *priv = dev_get_priv(dev);
++	int timer_16bit;
++
++	priv->base = dev_remap_addr_index(dev, 0);
++	if (!priv->base)
++		return -EFAULT;
++
++	priv->wdt_clk_src = dev_read_u32_default(dev, "clock-source", NODE_NOT_FOUND);
++	if (priv->wdt_clk_src == NODE_NOT_FOUND || priv->wdt_clk_src > 1)
++		priv->wdt_clk_src = CLK_PCLK;
++
++	timer_16bit = dev_read_u32_default(dev, "16bit_timer", NODE_NOT_FOUND);
++	if (timer_16bit == 1 || timer_16bit == NODE_NOT_FOUND)
++		priv->max_clk = INT_CLK_MAX_16B;
++	else
++		priv->max_clk = INT_CLK_MAX_32B;
++
++	priv->clk_freq = dev_read_u32_default(dev, "clock-frequency", NODE_NOT_FOUND);
++	if (priv->clk_freq == NODE_NOT_FOUND) {
++		printf("atcwdt200: Please provide a valid \"clock-frequency\" in DTB\n");
++		return -EINVAL;
++	}
++
++	atcwdt_wdt_stop(dev);
++
++	return 0;
++}
++
++static const struct wdt_ops atcwdt_wdt_ops = {
++	.start = atcwdt_wdt_start,
++	.reset = atcwdt_wdt_restart,
++	.stop = atcwdt_wdt_stop,
++	.expire_now = atcwdt_wdt_expire_now,
++};
++
++static const struct udevice_id atcwdt_wdt_ids[] = {
++	{.compatible = "andestech,atcwdt200"},
++	{}
++};
++
++U_BOOT_DRIVER(atcwdt) = {
++	.name = "atcwdt200
++	.id = UCLASS_WDT,
++	.probe = atcwdt_wdt_probe,
++	.of_match = atcwdt_wdt_ids,
++	.ops = &atcwdt_wdt_ops,
++	.priv_auto = sizeof(struct wdt_priv),
++};
+-- 
+2.34.1
 
->
-> To enable support for peripherals like USB which depend on DMA, we must
-> allocate a context bank on the SMMU and configure an IDENTITY mapping.
->
-> This patch series fixes support for building IOMMU without CONFIG_PCI.
->
-> Then, it introduces first introduces support for a .connect() op in
-> IOMMU drivers, this is called before the peripheral drivers .probe()
-> function and allows for IOMMU devices to perform one-time setup.
->
-> Lastly, introduce a new driver which supports the SMMU as found on
-> Qualcomm platforms, when a DMA capable peripherals is probed, this
-> driver will first see if the previous stage bootloader configured a
-> context bank for the given stream ID already, and if not then it
-> allocates and configures one so that DMA accesses will work.
->
-> There are no in-tree users for this driver yet, however it is required
-> for upcoming USB support on SDM845 and future Qualcomm platforms.
->
-
-Is there any other pending stuff for USB to be supported on SDM845? If
-not then you should enable USB alongside this patch-set as without a
-user its hard to justify this driver merge as it is.
-
--Sumit
-
-> ---
-> Caleb Connolly (3):
->       iommu: fix compilation when CONFIG_PCI disabled
->       iommu: add a connect op
->       iommu: add qcom-hyp-smmu
->
->  drivers/iommu/Kconfig         |  16 ++
->  drivers/iommu/Makefile        |   1 +
->  drivers/iommu/iommu-uclass.c  |  16 +-
->  drivers/iommu/qcom-hyp-smmu.c | 396 ++++++++++++++++++++++++++++++++++++++++++
->  include/iommu.h               |   9 +
->  5 files changed, 436 insertions(+), 2 deletions(-)
-> ---
-> base-commit: 8806443ed784dad5b5daf351b0175acb3343e729
->
-> // Caleb (they/them)
->
