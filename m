@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F972C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C518C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A337887AD3;
-	Thu, 14 Dec 2023 17:51:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1692F87ACC;
+	Thu, 14 Dec 2023 17:51:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DFHkxqo5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RpfddI0K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8843587AD3; Thu, 14 Dec 2023 17:51:47 +0100 (CET)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id C40D887AD6; Thu, 14 Dec 2023 17:51:48 +0100 (CET)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F83287AC5
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51AC787ACD
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-35f77a076e1so2162805ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:45 -0800 (PST)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-7b6f43740b4so328057939f.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572704; x=1703177504; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702572705; x=1703177505; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4CBT60uiP4+j9cauRH/CkSpdQijkPMwjpQPjTvsAf3Y=;
- b=DFHkxqo5rl+LQK9ui5vsQIU6sPxVfk5+BPJzkGGVEfd/tZsDuZAPDJiZ7agD04dO9/
- +mYoj/Cj8MwZgZ32bERMgbb6cBfx+YA81D05yACriJFqF44maPhqC3X10HF7A1EubHam
- WrKEFN5nIfH2t6lh6Uu3+ob5lf+Hd2s1yA/+c=
+ bh=W6oIQefgMtqpis6xG6Hg9Li9bgP0R6wmvWJfX3noPTs=;
+ b=RpfddI0KC+y93pXzzmQKwAx8C1EsnieCsizmmqzLEGO5izcg3qu2gJHIBxLzMzjIXs
+ oMo/+PHHgLcA3sc5X9cKF6MJkBo1Hs3XkbDTOfQ0dQgTl8/aqCAMM+DjoFbUCQwRToOP
+ MSCPRR1jpIr2Sn+UyXMXZ2mynkJ6lIegCOJPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572704; x=1703177504;
+ d=1e100.net; s=20230601; t=1702572705; x=1703177505;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4CBT60uiP4+j9cauRH/CkSpdQijkPMwjpQPjTvsAf3Y=;
- b=uvnJWKgmJ32IAPHqoUTJRinpsK+psMuZait2t/zorfLuLM6R5Vf4VmhdbQkk01AQrk
- rNFte8rBpBcBiXB+AgfbErD5WWkK79VHTyazC7jXHkfuAYQccqm0BB+B/jedLgIjuIC+
- edr27st5uYqDn070dIlabfP0/54/ZJeO2F7N0mSQYgz8GY+H3X1EEM2NDYw9ivK8Zm0L
- AZAVJ7ap63WP3KpmUWV7rEjhNlrW3pTtCBWzyB1f6yByaghqUthNGFf3Ppf9mZcCn2B5
- nT+Lye1dNHhHUN12YsMXRGuzpT5XR8lRayfOPZ/bKYLjoI1WcsG2J1WDTAR16G7QQK2z
- aCPQ==
-X-Gm-Message-State: AOJu0Yy/DnaPIvMOC3YuluSSnWxBFbWRx+MbgmY7VfVEUjUPKs+iYlLi
- toFV1fCN57DTckqZ+FVdlL+6dNJfUxh9tPLaXDSxFg==
-X-Google-Smtp-Source: AGHT+IGdAfIGP38fZnfTrFYrjzSEMekNT8hQEAEbqJ+/2JZi5waNgwapCb8h7XB7KTyra7maqQ2eoA==
-X-Received: by 2002:a92:c24b:0:b0:35d:5994:ffca with SMTP id
- k11-20020a92c24b000000b0035d5994ffcamr7051107ilo.32.1702572704052; 
+ bh=W6oIQefgMtqpis6xG6Hg9Li9bgP0R6wmvWJfX3noPTs=;
+ b=dkzRWrF53F8lzI/o2P0vIRmEpHGn5fHKGcCzqX0c7r2jKgy6Ow0y8aJYgWMPhOSVY2
+ iiw802pIvOyrqaQs1FJmE41sXtM+m7Ppe8mm1r5o+JFmjrkNs/bTtfcT2BPhxSMFojY2
+ rx3GK5RzfMpcc8d3J8HmgNACWYdpITrO6EY4cVHa66iF3Cwh07EDTzUJ4NCkaFLasQGW
+ n8NKKzIu3uuryh88d+p4fJoTo0WEcfZatdSrZs9S9h4kfAC6Fvnoo99gjP0Oznt3ohj1
+ Nx4t8fzXT/HROVflPCYlvlQqgauFyQb2F+YZEmwaScYvYgAXtvtsHF4r5B/ErMm6IcFg
+ wraw==
+X-Gm-Message-State: AOJu0YyxhGfhSdV0jiJ2vQzfpmzynmd8o/syTouV5xwTEfc+T9ncx4Ey
+ V5NTzROdpV/nI9OPIODIx6CApJTeXsFBkcrWYHCX1Q==
+X-Google-Smtp-Source: AGHT+IGd3DZH/lyft/KnU3enOG8HTJaFM8ygG09KzdVYcTRhVwGWIqHDpZiXOZj/zMbH+9kwOiTvTA==
+X-Received: by 2002:a05:6e02:4:b0:35f:83a2:d90d with SMTP id
+ bb4-20020a056e02000400b0035f83a2d90dmr1068727ilb.36.1702572704858; 
  Thu, 14 Dec 2023 08:51:44 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.43
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:51:43 -0800 (PST)
+ Thu, 14 Dec 2023 08:51:44 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 01/21] mips: Add a reset_cpu() function
-Date: Thu, 14 Dec 2023 09:50:10 -0700
-Message-ID: <20231214094939.v2.1.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
+ Angelo Dureghello <angelo@kernel-spcece.org>,
+ Alison Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Angelo Dureghello <angelo@sysam.it>
+Subject: [PATCH v2 02/21] m68k: Add a reset_cpu() function
+Date: Thu, 14 Dec 2023 09:50:11 -0700
+Message-ID: <20231214094939.v2.2.I2c0bbce52ecf7ce9458c481fbd12b6029e5ebd27@changeid>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
 References: <20231214165112.2182274-1-sjg@chromium.org>
@@ -92,42 +94,40 @@ X-Virus-Status: Clean
 The current do_reset() is called from a command context. Add a function
 which can be used from anywhere, as is done on ARM.
 
+Since there are lots of reset functions, this one actually just calls
+do_reset(). Future refactoring could correct this.
+
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Acked-by: Angelo Dureghello <angelo@kernel-spcece.org>
 ---
 
 (no changes since v1)
 
- arch/mips/cpu/cpu.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ arch/m68k/lib/traps.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/arch/mips/cpu/cpu.c b/arch/mips/cpu/cpu.c
-index acfc9dc43f17..443465047715 100644
---- a/arch/mips/cpu/cpu.c
-+++ b/arch/mips/cpu/cpu.c
-@@ -4,6 +4,7 @@
-  * Wolfgang Denk, DENX Software Engineering, <wd@denx.de>
+diff --git a/arch/m68k/lib/traps.c b/arch/m68k/lib/traps.c
+index c283351181d8..ae8ae6ccf592 100644
+--- a/arch/m68k/lib/traps.c
++++ b/arch/m68k/lib/traps.c
+@@ -7,6 +7,7 @@
+  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
   */
  
 +#include <cpu_func.h>
- #include <command.h>
  #include <init.h>
- #include <linux/compiler.h>
-@@ -20,9 +21,14 @@ void __weak _machine_restart(void)
- 		/* NOP */;
- }
- 
--int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+void reset_cpu(void)
- {
- 	_machine_restart();
-+}
-+
-+int do_reset(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	reset_cpu();
+ #include <watchdog.h>
+ #include <command.h>
+@@ -65,3 +66,9 @@ int arch_initr_trap(void)
  
  	return 0;
  }
++
++void reset_cpu(void)
++{
++	/* TODO: Refactor all the do_reset calls to be reset_cpu() instead */
++	do_reset(NULL, 0, 0, NULL);
++}
 -- 
 2.43.0.472.g3155946c3a-goog
 
