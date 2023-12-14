@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9080C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEDD3C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:53:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F98D87B01;
-	Thu, 14 Dec 2023 17:51:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B66C787ADB;
+	Thu, 14 Dec 2023 17:51:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ep7M8B4g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="njhd+BCd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68E2B87AEF; Thu, 14 Dec 2023 17:51:54 +0100 (CET)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 9998887AC2; Thu, 14 Dec 2023 17:51:58 +0100 (CET)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2887287AC7
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48D2287AF9
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-35f49b80192so2133855ab.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:52 -0800 (PST)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-35d55c8ab0cso33518685ab.2
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572710; x=1703177510; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702572714; x=1703177514; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vfh3HkdL6JmAndTrZv0LtNkX5eUtH1t7ViVVIZAoJng=;
- b=ep7M8B4gn+bBYm0qPzaPw8YQ42XyIWNhDkj4Aur9oJaqiOWpI/EX1ir3l+c3ejFg8J
- t1/5b6+OouNCdDz0J6SHZpNSVaMnR1oeRSyOWEIPGEw0muEP1CULMLHJl/xJnkBVnd96
- LLouubwX49S4b/U6WVppMr8LFiLuM0wo+FDoA=
+ bh=BDNgc+Giy/3ts6K03lrJuc4i6d9t9Q90whPdKm7ZmAE=;
+ b=njhd+BCdX1wcG49zZ8LNuljxMcL8xzL/sMmjgrQBNxBTv4RBtS7OMHDjP+UofpDDEh
+ GIyk45q9iD4eB4rwwqRC12H5ASMRdpvufqhgPHcrjnyLlr3hGM89WMYeuT6FiHvmswFR
+ gB5pEZphkMdf4zYRiEk6d0uxly3XmeLVWY6/A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572710; x=1703177510;
+ d=1e100.net; s=20230601; t=1702572714; x=1703177514;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vfh3HkdL6JmAndTrZv0LtNkX5eUtH1t7ViVVIZAoJng=;
- b=eWYUEwNTMam+jFEdyxFoAMrDXGJoFWIZC2iodmCBhMOd1OnMtxpxr8eRj++WpWSHh0
- FeBD0fW6Ocm0Hs7Hvg5+k1ZjaJD0/6yuJADmCVQHQzEPyRYreepsfWLLoItFWVMt7Gq0
- WpUkMGKkVRIUezPSQNOtgXvEWys2wNo/KNrNmH5T9JcDaPKPKNtY5zSo/FvBzaSLJMuU
- /JXoA6rQO0bSyqv1nt3/vGcFpaObmbZrFVU+XH4m5H23D8TVfmqZiCmH/+gsXqkofS6d
- 9AVAmgzf3YkLFMPq9b65jhvCBIC39PlEBo1YQSkfNdB7+R8tFmYvjiTDs0B7OgeP8u5G
- 1eJw==
-X-Gm-Message-State: AOJu0YwnocwJWzWrzGTmbyRojjSiAfX/lxZu8fcM8T+Hhog/mKbLD/lN
- jVQODj3CvIuHxQY5fQ9jiA1vdylmpc0oxy8e+xHEIw==
-X-Google-Smtp-Source: AGHT+IFQyhx78HEKxZW8L5BOw/83fUrjDN15lSLuSmWzYw2h4NyxEK/kqxXEG81GJhL7FoJHwRckLA==
-X-Received: by 2002:a05:6e02:1b0d:b0:35d:701a:bc5d with SMTP id
- i13-20020a056e021b0d00b0035d701abc5dmr7839739ilv.28.1702572710143; 
- Thu, 14 Dec 2023 08:51:50 -0800 (PST)
+ bh=BDNgc+Giy/3ts6K03lrJuc4i6d9t9Q90whPdKm7ZmAE=;
+ b=tO8XYstfQdqBq5VnurTttooUlq79R/4aOo64RndnMmWrJkoWwGrSRePzlAvGaPyHFP
+ 4QHyqg1iYGPC5Vjei53Wqmqb2y5QPiKfGhypNl3WUnN/OV5RDJu4IS9XxDaLxY8UGRO+
+ tC9US2Kqb5o32mRw9iv9JP7m//Hreph+TtHmKnJf32NW+kTztvjwHr8LYx9NMdid1JjF
+ k0k/kc0DkCU2NTnv1oKx5636hMXMQiVl4E5GXx/xp6hUc4kxhV99EK+IaK88og6JHVDK
+ kuRtRqOb40avM+EJZe1+JxnCsZ1/nTihdEfmm1+WU8X0DL0pRAFg8HcE/WfV9Z21swX6
+ WwCw==
+X-Gm-Message-State: AOJu0YxXwlL4gYaP4bh9CFJYUhAtpVsa+7nBPptYk77J8ncgnu5Ng8Mm
+ jpVP5s33VDWGmWuj8yq8uaUz2578H0ah7PFPMdzraw==
+X-Google-Smtp-Source: AGHT+IHRuOC0qd4gy142uJuiOnKSlKTImSB3k3tHRTx3kTEikCUhcVyIql1ArqPpHr0rmSlRVO5l+g==
+X-Received: by 2002:a05:6e02:174a:b0:35d:7054:3dd6 with SMTP id
+ y10-20020a056e02174a00b0035d70543dd6mr14422594ill.6.1702572713911; 
+ Thu, 14 Dec 2023 08:51:53 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.49
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:51:49 -0800 (PST)
+ Thu, 14 Dec 2023 08:51:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Eddie James <eajames@linux.ibm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2 08/21] bootm: Create a struct for argument information
-Date: Thu, 14 Dec 2023 09:50:17 -0700
-Message-ID: <20231214165112.2182274-4-sjg@chromium.org>
+Subject: [PATCH v2 12/21] booti: Avoid use of #ifdef
+Date: Thu, 14 Dec 2023 09:50:21 -0700
+Message-ID: <20231214165112.2182274-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
 References: <20231214165112.2182274-1-sjg@chromium.org>
@@ -89,64 +89,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some OS functions require the arguments to the 'bootm' command. This is
-inconvenient for two reasons.
-
-Firstly, there may not be any actual command, if CMDLINE is not enabled
-and programmatic boot is being used.
-
-Secondly, most functions don't require the arguments, so it is
-inefficient to pass them when not needed. For example it increases code
-size.
-
-Create a new struct which holds the arguments, which can be used if
-needed.
-
-Add the images pointer as well, since this is commonly needed.
+Use the compiler to get the set of states, instead of the preprocessor.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Split addition of struct bootm_info to its own patch
+- Split out booti removal of #ifdef
 
- include/bootm.h | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ cmd/booti.c | 24 +++++++++++-------------
+ 1 file changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/include/bootm.h b/include/bootm.h
-index f5229ea90b33..a6d5d5ceee8f 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -16,6 +16,20 @@ struct cmd_tbl;
- #define BOOTM_ERR_OVERLAP		(-2)
- #define BOOTM_ERR_UNIMPLEMENTED	(-3)
+diff --git a/cmd/booti.c b/cmd/booti.c
+index 41d40c962ec2..d3cceb7e0a39 100644
+--- a/cmd/booti.c
++++ b/cmd/booti.c
+@@ -105,6 +105,7 @@ static int booti_start(struct cmd_tbl *cmdtp, int flag, int argc,
  
-+/**
-+ * struct bootm_info() - information used when processing images to boot
-+ *
-+ * @images: images information
-+ * @argc: Number of arguments to the command (excluding the actual command).
-+ *	This is 0 if there are no arguments
-+ * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
-+ */
-+struct bootm_info {
-+	struct bootm_headers *images;
-+	int argc;
-+	char *const *argv;
-+};
+ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
++	int states;
+ 	int ret;
+ 
+ 	/* Consume 'booti' */
+@@ -120,19 +121,16 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	bootm_disable_interrupts();
+ 
+ 	images.os.os = IH_OS_LINUX;
+-#ifdef CONFIG_RISCV_SMODE
+-	images.os.arch = IH_ARCH_RISCV;
+-#elif CONFIG_ARM64
+-	images.os.arch = IH_ARCH_ARM64;
+-#endif
+-	ret = do_bootm_states(cmdtp, flag, argc, argv,
+-#ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
+-			      BOOTM_STATE_RAMDISK |
+-#endif
+-			      BOOTM_STATE_MEASURE |
+-			      BOOTM_STATE_OS_PREP | BOOTM_STATE_OS_FAKE_GO |
+-			      BOOTM_STATE_OS_GO,
+-			      &images, 1);
++	if (IS_ENABLED(CONFIG_RISCV_SMODE))
++		images.os.arch = IH_ARCH_RISCV;
++	else if (IS_ENABLED(CONFIG_ARM64))
++		images.os.arch = IH_ARCH_ARM64;
 +
- /*
-  *  Continue booting an OS image; caller already has:
-  *  - copied image header to global variable `header'
-@@ -39,7 +53,7 @@ typedef int boot_os_fn(int flag, int argc, char *const argv[],
- extern boot_os_fn do_bootm_linux;
- extern boot_os_fn do_bootm_vxworks;
++	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
++		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
++	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
++		states |= BOOTM_STATE_RAMDISK;
++	ret = do_bootm_states(cmdtp, flag, argc, argv, states, &images, 1);
  
--int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_bootelf(struct cmd_tbl *cmdtp, int fglag, int argc, char *const argv[]);
- 
- boot_os_fn *bootm_os_get_boot_func(int os);
- 
+ 	return ret;
+ }
 -- 
 2.43.0.472.g3155946c3a-goog
 
