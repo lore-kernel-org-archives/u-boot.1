@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE30DC4167B
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 02:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6307C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 02:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A15D8791C;
-	Thu, 14 Dec 2023 03:01:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13E31879A0;
+	Thu, 14 Dec 2023 03:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fDY8CAnD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fLUJ7/07";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F178B87995; Thu, 14 Dec 2023 03:01:29 +0100 (CET)
-Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
- [IPv6:2607:f8b0:4864:20::535])
+ id CD150879A3; Thu, 14 Dec 2023 03:02:17 +0100 (CET)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1AA587905
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:01:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73C7A8791C
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:02:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-5ca5b616de0so128256a12.1
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 18:01:27 -0800 (PST)
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5c67fdbe7d4so1124499a12.0
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 18:02:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702519286; x=1703124086; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702519334; x=1703124134; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eEDA0kkoptt8L5Fpjn3QuUF7OOSs1JxONd7SNJHpoK8=;
- b=fDY8CAnD12af4rbgaAxM3I/zD/LO872kCTCpTb6wi6tjq1qEU1zA0rvyNtSTgGGQiv
- TyM0HH5Jgbi5ZrQ08VaiVxHTRyOZy5R4WUuOFe/A+fxMBcVgU7heSuAI7UmZ8A7fDDU2
- tRLQ2r1sus+qDmFLi1HKuJV7qE4MgAjOnubPxqX+QLqHMGHmR4EAkGsDBDksyKfrxIeM
- Ttf9SxSD16hE0mnAsAdNo5OODw1y6y83NaVVVU6xRKYcQ87b41rPuvHRUKO21bONRMQw
- Jwc3tBQeUVBAvKhaCALVvKvVwa+LXMsb90vKXOqEQ95G5DLSW4dPXUCF1s4esD+KmHkC
- xOeA==
+ bh=47gLWmgqtM70/xKoD8VYLDi3vUDxCLcXeMGxKrFGQjc=;
+ b=fLUJ7/07Qwd6qALS3vvIenocfcotSOQ17jQyc5jtNmIGERprzW+gL0O4dR8lVvE5pj
+ pi0qtclKNYHEFtFvm+p3Glzo6zYCKaO4h2A9zb5VcCpYYsa3zrp/uar0q+yp/JJ6c++J
+ GoF/rA6dmZ8kDQx2e+lLj3ZO+eQCTb8yj/8RRySjxr9ITs3K6mOkZGg7992qBLUjb+8r
+ sMPkfumDuONdMa+uUd9SZIFHnaqzcX8lRRBJPHRmLthowVbVmT+h0CBYGsyCbOymb9Lg
+ NZEv35MmABhL7OpXDHYzv5fMawFY2Um/4fsx6xy/F54E7m0JZwroXzxRUOcx/MF5T/Yh
+ aLAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702519286; x=1703124086;
+ d=1e100.net; s=20230601; t=1702519334; x=1703124134;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eEDA0kkoptt8L5Fpjn3QuUF7OOSs1JxONd7SNJHpoK8=;
- b=if4RrunJQGmduxhze8qCqiXV0MpQ1IFiyiTvAgSfgRXwosH5grGSX7CToKsdKBAt60
- GUw5xcWGP+TieXtCvbyA0YX7e1kqn9/vovH5yyFAYQ+0tnBeHuLQCEneZZLB90t+z0qz
- zE724r+WY+ueyFBgetH5gMf7ExVi0+Fgd05SNl7QjXIqI7WA+E+Fk+0kHYCWg22ySkF7
- sewpLecCcl5BrzEeidjvwXkYOEEuo3foi/PW7ZQnKGhNlEeOQK3WEx7mWjqXZkDyvrXp
- 6Eq+S9YWL2hEPZ3lCf3BCs4s0AUGSS+NRPmuZgI7TIB//Fac+bzV0TJl48+y1bgMJNbI
- /P/A==
-X-Gm-Message-State: AOJu0YyBoAw0UEaALJyNolPjimaD59StYjqzMJRIVK597uSzWiA7UpsG
- vELWy9HU4XDiw8VNCBmiFI63YEoxbn+C72AG8k23Pj7TdQI=
-X-Google-Smtp-Source: AGHT+IHYXvWynxnn4YEjWG50ee4G1Kyp+lzyS1o+wx+ZtgtHEIESndxrnsGwyF3G5sw9mr514xZIMpDTbKqx4mSSw+0=
-X-Received: by 2002:a17:90b:188f:b0:28a:f2bf:207e with SMTP id
- mn15-20020a17090b188f00b0028af2bf207emr2330247pjb.1.1702519286106; Wed, 13
- Dec 2023 18:01:26 -0800 (PST)
+ bh=47gLWmgqtM70/xKoD8VYLDi3vUDxCLcXeMGxKrFGQjc=;
+ b=DhsDACA4ieJrHg52nLAB2kzrrLKiqDsH5BrtEqI6XH/lHmi9y2uv0VjHDlpbM7MAXj
+ IJ5xRTIeGNdBQk18ijrqahrlwuLNgwAEYyDZZ0eWjDVwtaEWMIhCZt7dMf94SDgxzq7W
+ 2rVRE9kiccOmP/dkOxw490Es6YFOzvUOT0IM2+u4y3HmZgr2UlB4u2yvamA9AVuEGaoI
+ o9LgKpU5DktrMAa0RZT6jB4wfNJPi+zUD44eK56VUfJPb9NSwpW/TBtE1BDcIXbMnjcM
+ qIyLGChcb/gYFuF9vFWPliK15XMsdo5imgDH+lVJ/FQ5KU/0kosrkxx83JwBzvsmikOY
+ 7q2Q==
+X-Gm-Message-State: AOJu0YyXJxy/Zm/C5k3G687M4qCjALgyHtq+5FL1GJJ8kEJZMqQQClBY
+ 14Irg3N1XgCiuTwELj3+F/XMirUwm69rg0IoYNM=
+X-Google-Smtp-Source: AGHT+IFdAf1Dg1GI6+j7DkI4fb9Qd7TQwe2t7eZtY1Yb0DDP2eIVGPLiHTw9krTIptWtVkfbogUf2YYQuLMklGRibqg=
+X-Received: by 2002:a05:6a20:3d29:b0:18b:c9cf:4521 with SMTP id
+ y41-20020a056a203d2900b0018bc9cf4521mr20719977pzi.2.1702519333818; Wed, 13
+ Dec 2023 18:02:13 -0800 (PST)
 MIME-Version: 1.0
-References: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
-In-Reply-To: <ZWy2Chxgz9mRxGQN@arcana.i.gnudd.com>
+References: <20231211134617.457471-1-festevam@gmail.com>
+In-Reply-To: <20231211134617.457471-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 13 Dec 2023 23:01:14 -0300
-Message-ID: <CAOMZO5AOPeAXLOLASErVCszdGHHBF+aCPgKPs7AniwjsQQP26A@mail.gmail.com>
-Subject: Re: [PATCH] tools: mxsboot: pre-fill buffer with 0xff, not 0
-To: Alessandro Rubini <rubini@gnudd.com>
-Cc: u-boot@lists.denx.de
+Date: Wed, 13 Dec 2023 23:02:02 -0300
+Message-ID: <CAOMZO5CY6jOnz-wuccr8B5fSgt5E2AxDA+4cnOpEJrTVe+f-9A@mail.gmail.com>
+Subject: Re: [PATCH] imx: imx-hab: Select SPL_DRIVERS_MISC in the SPL case
+To: sbabic@denx.de
+Cc: lpmeyer@ics.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,18 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 3, 2023 at 9:24=E2=80=AFPM Alessandro Rubini <rubini@gnudd.com>=
+On Mon, Dec 11, 2023 at 10:46=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
  wrote:
 >
-> The tool works for me, with imx28 and NAND memory, but the resulting
-> blocks are reported as bad, both by u-boot and the kernel.
+> From: Fabio Estevam <festevam@denx.de>
 >
-> This makes it impossible to erase from Linux (for an upgrade without
-> console access, for example -- u-boot can "nand scrub" but linux can't).
+> Selecting CONFIG_IMX_HAB=3Dy on a SPL target, such as apalis_imx6_defconf=
+ig,
+> for example, leads to the following build error:
 >
-> pre-filling with 0xff creates a proper boot loader image, but no
-> bad-block marker is there when written to flash.
+> /usr/bin/arm-linux-gnueabihf-ld.bfd: arch/arm/mach-imx/hab.o: in function=
+ `imx_hab_is_enabled':
+> arch/arm/mach-imx/hab.c:879: undefined reference to `fuse_read'
 >
-> Signed-off-by: Alessandro Rubini <rubini@gnudd.com>
+> fuse_read() comes from SPL_MXC_OCOTP, which depends on SPL_DRIVERS_MISC,
+> since commit 251a3053b1e6 ("misc: imx: remove DM dependency for ocotp
+> driver in SPL").
+>
+> Select SPL_DRIVERS_MISC in the SPL case to fix this build issue.
+>
+> Reported-by: Lisandro P=C3=A9rez Meyer <lpmeyer@ics.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Applied to u-boot-imx next, thanks
+Applied to u-boot-imx next, thanks.
