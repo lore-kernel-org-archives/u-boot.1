@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F2AC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E92C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33FDE87B3C;
-	Thu, 14 Dec 2023 19:21:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 774B187B6C;
+	Thu, 14 Dec 2023 19:23:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mJP8Yr1t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KRUpLc8b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 299DA87AF1; Thu, 14 Dec 2023 19:21:27 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id C416A87B78; Thu, 14 Dec 2023 19:23:34 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63DFD87B4B
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:21:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 99E5387B65
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5cece20f006so84223617b3.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:21:24 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5e35e1dfb99so11137707b3.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702578082; x=1703182882;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S2VS2Ig1ur19SLkcnjaU3RcvKowke3NFo7juz9fHXDc=;
- b=mJP8Yr1tetXCsHiurEc6G2opwUbCHDeHkiF1Uxu2KSW/b8U9dpkxDyepOcubiKzL50
- 935z/WjJQtVU/eLKSDp56i8kR/WOdTuP4ZF33POIgJSiM/3DQuUgcEveeGehyL2j7JOZ
- sFP0ZMGAhi3G6IW4pWvgH/AN9mrRwmbQuNQXU=
+ d=konsulko.com; s=google; t=1702578211; x=1703183011; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=B9LLmQt+8gdlmhrVj3fg4fNVC6Ym5XbNTTORsMHExC8=;
+ b=KRUpLc8bJky4MuEDJVqUVBzHiN7HesvdDojgLNzA4W9cj/7RDdi3z/J10F+i2rAHd7
+ 26eRCZSWg3PAZAMDYT9o4QAz8TrgcCD/6HDZb9jPJI9LRPhZ6jilv8qjTaBnHnp7JzEd
+ lTON+uInB06dbwZ8KG9rqjmPR8itjm+tIOVHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702578082; x=1703182882;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S2VS2Ig1ur19SLkcnjaU3RcvKowke3NFo7juz9fHXDc=;
- b=Ovj4FzISQO5fSFa3ZgXPHXCnA3hBOBvMHStkKLZyx8fqg0M0EmskdzTo8VbZ8lqxCh
- U9MH5dxYFuCj7cMc5QeLZQWXfbtkAcuvrP006OmJ9xCLxnqXEtAsikhQ95TJ01Ka94su
- dp/QUNpvaA4xT9yOVrjgORR3oH0XdvRkhATdyolmMspdRpEHPWSwl8bvfUJ4Oy6aZwu4
- y9a1drxiO5+1H1xGXuFjgSLpSgkvwaYpbwpdQZ+3IKZLbeph1jAU+Fwwa/6QEMxAjXRU
- aRMzHao57VjYnVbGtEsxSiEPKKUiS5V/Zm/ig59EituU6KjNn1dxVcALY3SbXRRbBnpP
- i3Vw==
-X-Gm-Message-State: AOJu0Yy2ODLMhBwRFtIh9FqFHBxeRv3L59vf7b4ZEhOPz7FHrpeu7KYT
- UWrC5fToprRsWS5IbJ9Fmg5Pt/GcWD0dzqVZifmVfg==
-X-Google-Smtp-Source: AGHT+IGMPEHn0HMdEne71oq8MF6IaAIixN6IxneniZRS2awtY93A7sMMOtTr6+RmO7WhFBtDCeQsgT+/SYrwLZQp2EE=
-X-Received: by 2002:a0d:d8d0:0:b0:5de:a315:b727 with SMTP id
- a199-20020a0dd8d0000000b005dea315b727mr8830309ywe.25.1702578081940; Thu, 14
- Dec 2023 10:21:21 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702578211; x=1703183011;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=B9LLmQt+8gdlmhrVj3fg4fNVC6Ym5XbNTTORsMHExC8=;
+ b=n2C+czbZVdosV1t1bVDFqO+xzgoItH1NI3UB5cPvxUpXl16BMUnOgUA4gM8gAc4UqX
+ WJhrtzutj3vJPW7s/Gsqz8nuSU4mI10je0z+LKjDpi/9huuR4uqVbZm0nKYhbWllOTs3
+ bOZT9/Bm0RhBJjYWBenw40wzHZjHH8V/VtnngotqgOwKRIIVe+igTrZurI1GC7T8qahC
+ ZWBVdzTIa/MWXeHq3Yiy2ANoubRC7YMOZ/bpqcgfBkI/8s6seqXouAEJhCZJXiSaQ4uf
+ LsRQVjc64D2O9FWv6rU8r7Vqw2le3yeqCi/lWYIbsXGeOSIti/fQ8cPxaondKPnNZdKY
+ 271A==
+X-Gm-Message-State: AOJu0Yz4MVjnPD3myFXmbAKdtyF71BeJh+iybary9Xcl7/oaFAGdX28U
+ yrxEbYC95JUmsbQR4mXejLCY6w==
+X-Google-Smtp-Source: AGHT+IFyzhwqFmKuKmwoHC+GMYZpblJNMlCbacisO988azC+tYqFZCZKgrmPJsXWFpNIx2qIkSS4Bg==
+X-Received: by 2002:a81:d541:0:b0:5cb:332e:ab68 with SMTP id
+ l1-20020a81d541000000b005cb332eab68mr8456795ywj.5.1702578211299; 
+ Thu, 14 Dec 2023 10:23:31 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
+ [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
+ by smtp.gmail.com with ESMTPSA id
+ j83-20020a819256000000b005e41757c940sm165010ywg.57.2023.12.14.10.23.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 10:23:30 -0800 (PST)
+Date: Thu, 14 Dec 2023 13:23:28 -0500
+From: Tom Rini <trini@konsulko.com>
+To: neil.armstrong@linaro.org
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de
+Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
+ U-boot
+Message-ID: <20231214182328.GQ2513409@bill-the-cat>
+References: <20231214135103.1606605-1-sumit.garg@linaro.org>
+ <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
 MIME-Version: 1.0
-References: <20231017192926.54397-1-ivprusov@salutedevices.com>
- <20231017192926.54397-2-ivprusov@salutedevices.com>
-In-Reply-To: <20231017192926.54397-2-ivprusov@salutedevices.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Thu, 14 Dec 2023 23:51:11 +0530
-Message-ID: <CAMty3ZDXP_dOK8W=OoxuowKMtz4sh7DY2teBqw1V7UxxCPAjDQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] mtd: spinand: add support for ESMT F50x1G41LB
-To: Igor Prusov <ivprusov@salutedevices.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, prusovigor@gmail.com,
- kernel@sberdevices.ru, Chuanhong Guo <gch981213@gmail.com>,
- Martin Kurbanov <mmkurbanov@sberdevices.ru>, 
- Dmitry Rokosov <ddrokosov@sberdevices.ru>,
- Frieder Schrempf <frieder.schrempf@kontron.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ypWK503ZnJrJ6kVr"
+Content-Disposition: inline
+In-Reply-To: <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,26 +103,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 18, 2023 at 12:59=E2=80=AFAM Igor Prusov <ivprusov@salutedevice=
-s.com> wrote:
->
-> Adaptation of Linux commit d74c36480a67
->
-> This patch adds support for ESMT F50L1G41LB and F50D1G41LB.
-> It seems that ESMT likes to use random JEDEC ID from other vendors.
-> Their 1G chips uses 0xc8 from GigaDevice and 2G/4G chips uses 0x2c from
-> Micron. For this reason, the ESMT entry is named esmt_c8 with explicit
-> JEDEC ID in variable name.
->
-> Datasheets:
-> https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/F50L1G41LB(2M).pdf
-> https://www.esmt.com.tw/upload/pdf/ESMT/datasheets/F50D1G41LB(2M).pdf
->
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
-> Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
-> Signed-off-by: Martin Kurbanov <mmkurbanov@sberdevices.ru>
-> Signed-off-by: Dmitry Rokosov <ddrokosov@sberdevices.ru>
-> Tested-by: Martin Kurbanov <mmkurbanov@sberdevices.ru>
-> ---
 
-Applied to u-boot-spi/master
+--ypWK503ZnJrJ6kVr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 14, 2023 at 03:53:11PM +0100, neil.armstrong@linaro.org wrote:
+> Hi,
+>=20
+> On 14/12/2023 14:50, Sumit Garg wrote:
+> > Prerquisite
+>=20
+> s/Prerquisite/Prerequisite/
+>=20
+> > -----------
+> >=20
+> > This patch series requires devicetree-rebasing git repo to be added as a
+> > subtree to the main U-boot repo via:
+> >=20
+> > $ git subtree add --prefix devicetree-rebasing \
+> >        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicet=
+ree-rebasing.git \
+> >        v6.6-dts --squash
+>=20
+> So I think the big question is: when should the subtree be updated ?
+>=20
+> Because as we discussed in the previous GH pull request, if a bindings ch=
+anges
+> was made in the upstream Linux DT, then the subtree update should wait un=
+til
+> the u-boot support is merged before updating. This could cause a lot of f=
+rustration.
+>=20
+> And this could cause a lot of regressions, even more if both Linux and U-=
+boot are
+> not maintained by the same people.
+
+I think some of the important questions to ask are, how often / likely
+are the breakages to occur? It seems like these days it's either:
+- U-Boot had an early version of the binding and we already state we
+  don't support backwards compatibility here. It should be on the
+  maintainer to be proactive in this case.
+- It's a "the DT was wrong about the hardware, sorry not sorry it's an
+  incompatible DTS change now". This too is hopefully the kind of thing
+  that at least board maintainers will be more actively aware of needing
+  to deal with in U-Boot, if it's really a problem.
+
+So I would plan on grabbing only full kernel releases and in to -next as
+soon as possible. Our cadences don't match up exactly, but I think do
+fairly well enough.
+
+--=20
+Tom
+
+--ypWK503ZnJrJ6kVr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7SBoACgkQFHw5/5Y0
+tyzBCQwAtdVhCLPvnQmd4EuYkf4A9cf6yDSKZVR+GsPrO6PmmPtyVZsE9w/X7GCj
+2aXcM+VxdjNTI5kO26y7hmnYdaOMqvBjZ/rnZREdNq6CpI6XhMo+c9D64EH2kKmb
+0Y4bcm+noTixfOVVLlnXc0CnDCW4GZ7VJ3Q9WloqppnMNOiTOXe8PenkRh6djCAs
+CcnAlh01qkgakOH2IOvk6579oKTaNuWbazs3B4zB+UKEAs1gb+gfeScPcfXBJeIK
+Ty0tRbJfBXMxCQSX9RJExk0wfAoAhLqc1FIKYfOSaNuoPPxW9z2aFN8OfmLQGSVm
+IwONGUqMR1duK5wm1FXsNK5VNcL9YiAeHU3s9/uOYpyPDMPczVTBoj85DY+jeWQR
+fb5yOExuN21BQMrTE+oA6uOOUT0eVWylUT2hw8X9BLo8kEnoM6vMkF5L4A3aMoQR
+huQPM0SA4bKKNxZ3+9xzxpcxKWkI2/xTLS6isO6Zcyzm6wKw2oxfqjIZJIGyBc9X
+RZor69hr
+=pT1W
+-----END PGP SIGNATURE-----
+
+--ypWK503ZnJrJ6kVr--
