@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58482C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 20:43:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0DAFC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 21:09:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A566587B0B;
-	Thu, 14 Dec 2023 21:43:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A22187A93;
+	Thu, 14 Dec 2023 22:09:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mdQYdVlG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MEXceueG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5A9487B25; Thu, 14 Dec 2023 21:43:55 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 22E1F87A8E; Thu, 14 Dec 2023 22:09:39 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C56C87A76
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 21:43:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6001987B3A
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:09:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dbce6056e85so1034319276.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 12:43:53 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a1db99cd1b2so2350666b.2
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:09:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702586632; x=1703191432; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=q5ea7G8GvVu1qhTBKoRfR48p0A5NdLHJXMVN75gK4ZU=;
- b=mdQYdVlGihs5tfrnd3XQKx7XCxZeJHnE+fmfuDdUhsBG0Eyx1CeEEey7tfGIIJxTuC
- 0LgUA3NTZ/t5EwUNKTwO6FozC1zgyS4geHr+WgxlKxhJ6S/Bcijs8KQTM/CFLLmlWVFO
- sf2lAZJEj/pGlpl9Je4ed8yyrdMMJQvYwhgj8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702586632; x=1703191432;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1702588176; x=1703192976; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q5ea7G8GvVu1qhTBKoRfR48p0A5NdLHJXMVN75gK4ZU=;
- b=BGnmlL6SYttlwLkYyMROJsNEa7pKrt0Pnx+C6un1pd2xKLcpLSx+AVoDmvDuaor7Ut
- ZHwoxeb3av5bVjkxMfOOc8SzIltnsWus5dmA1+uEEXeknJ4FJOCr9BK+M0MAW1HChiTS
- 7htloR4XWfA31SK1lhEOJi0pkc4LECKXVEW1wUNt1zcbYwTugjdS6I26bQ7KZl8e67Ad
- 3a/nQiw4BX9qJ3891erEghI6iU7U2ILROI69QkLWZEqNBcfg1LMMxH3ZVTl3kWZ05eHY
- IXHbPp19kX91fK25mLb5oYk139XPKzgzKpaHqjBb+oqN2+xLLuVeZJyoRspAvEMrGi1R
- cnJA==
-X-Gm-Message-State: AOJu0YyudgGCv8hBGFDmbpIb8Eh8P+0pEnI4PHooNCoFJgI7S6lBZYjd
- +i+VmlWzikRZHD3CJdvDM7Uzjw==
-X-Google-Smtp-Source: AGHT+IGsZai/OGfa3y5avI3CzDvicw+9qM6JJP9nz7E6NBAosTrETLH9lfchM79VS308JClxJPILTw==
-X-Received: by 2002:a05:6902:cc6:b0:d81:97c:c016 with SMTP id
- cq6-20020a0569020cc600b00d81097cc016mr8046707ybb.15.1702586632119; 
- Thu, 14 Dec 2023 12:43:52 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
- [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
- by smtp.gmail.com with ESMTPSA id
- j7-20020a255507000000b00db5380fc1absm4252549ybb.19.2023.12.14.12.43.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 12:43:51 -0800 (PST)
-Date: Thu, 14 Dec 2023 15:43:49 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] xilinx patches for v2024.04-rc1
-Message-ID: <20231214204349.GS2513409@bill-the-cat>
-References: <b60d9dfe-cc17-46b4-8fa8-dffdb8651812@amd.com>
+ bh=jnjPB6iX18JgpGdFMBMYrxpteo2U43QjbY9/lo9Je7Y=;
+ b=MEXceueGXcuXjFqOdA4FvGnWzJBjIRUQJT4HP/Sj//o4WelMVcnW5beHiAvg0yPmHf
+ jInmpulid6oiRdaf5dfbGJr/9BXkPXF2BCB21EQUDVxat5crRf3s+YUnmHc8nTrnh9V6
+ SkaIXwDB8DK9EjbytRc1WJbM9dgfuCxij+g1o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702588176; x=1703192976;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jnjPB6iX18JgpGdFMBMYrxpteo2U43QjbY9/lo9Je7Y=;
+ b=PtGA863c69YYUjAMP8jde84a06+DGiLhXmk53wVKGKz04VjsyJ//PbOV4Vvplw1vLt
+ Y8OBB4lb5+EWjYoUBYadHogm16y55ykh6oLeqPEDS2XRidFEMWLPj8dTmU7W+IlRKEka
+ HJMqHQPCf0/hMS8kSnK1wSialil18tpU66mPnIQvgqiospqJrylUhY452tOrz6ymMTEj
+ n3R4nb0i1uNQQnSu3EGxAHAx6ikEOSkLpOSVP7d0vPAhpxJga/ZQ/U/dkg+QQ/1XgJbM
+ FtiKg6g6J3hOowojNuF6mV1pWUh4mWAhPpesbUkAo49bSESGQm3th8jHG7meS9AcKgag
+ HGIg==
+X-Gm-Message-State: AOJu0YyFXGfKnlGfilNGME7NHEZABdaK2Bc6lSeYetFNNb/cVv5Kj7fY
+ Pf2zZ4xhbgKmAuD/eq+ZU1h+hVaNPtVVIPA8LXZqcQ==
+X-Google-Smtp-Source: AGHT+IE1mZhqGInPUAvje+k24w89h1v23G78AX9kBt06f8sNc/raFxf+pFaK2GPm69Hxyl/NeGszL+XSJBb5CtBIqnE=
+X-Received: by 2002:a17:907:2d12:b0:a19:9b79:8b45 with SMTP id
+ gs18-20020a1709072d1200b00a199b798b45mr5234161ejc.86.1702588175444; Thu, 14
+ Dec 2023 13:09:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="w18ty+XgnWVG7wQm"
-Content-Disposition: inline
-In-Reply-To: <b60d9dfe-cc17-46b4-8fa8-dffdb8651812@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231116172859.393744-1-sjg@chromium.org>
+ <20231208150042.GA1278773-robh@kernel.org>
+ <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
+ <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
+ <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
+ <20231214172702.GA617226-robh@kernel.org>
+In-Reply-To: <20231214172702.GA617226-robh@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 14 Dec 2023 14:09:24 -0700
+Message-ID: <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
+Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
+To: Rob Herring <robh@kernel.org>
+Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
+ Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Pratyush Yadav <ptyadav@amazon.de>, 
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,66 +95,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rob,
 
---w18ty+XgnWVG7wQm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 14 Dec 2023 at 10:27, Rob Herring <robh@kernel.org> wrote:
+>
+> On Fri, Dec 08, 2023 at 03:58:10PM -0700, Simon Glass wrote:
+> > Hi Rob,
+> >
+> > On Fri, 8 Dec 2023 at 14:56, Rob Herring <robh@kernel.org> wrote:
+> > >
+> > > On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@chromium.org=
+> wrote:
+> > > >
+> > > > Hi Rob,
+> > > >
+> > > > On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
+> > > > >
+> > > > > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
+> > > > > > Add a compatible string for binman, so we can extend fixed-part=
+itions
+> > > > > > in various ways.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > (no changes since v5)
+> > > > > >
+> > > > > > Changes in v5:
+> > > > > > - Add #address/size-cells and parternProperties
+> > > > > > - Drop $ref to fixed-partitions.yaml
+> > > > > > - Drop 'select: false'
+> > > > > >
+> > > > > > Changes in v4:
+> > > > > > - Change subject line
+> > > > > >
+> > > > > > Changes in v3:
+> > > > > > - Drop fixed-partition additional compatible string
+> > > > > > - Drop fixed-partitions from the example
+> > > > > > - Mention use of compatible instead of label
+> > > > > >
+> > > > > > Changes in v2:
+> > > > > > - Drop mention of 'enhanced features' in fixed-partitions.yaml
+> > > > > > - Mention Binman input and output properties
+> > > > > > - Use plain partition@xxx for the node name
+> > > > > >
+> > > > > >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++=
+++++++++
+> > > > > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+> > > > > >  MAINTAINERS                                   |  5 ++
+> > > > > >  3 files changed, 74 insertions(+)
+> > > > > >  create mode 100644 Documentation/devicetree/bindings/mtd/parti=
+tions/binman.yaml
+> > > > > >
+> > > > > > diff --git a/Documentation/devicetree/bindings/mtd/partitions/b=
+inman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> > > > > > new file mode 100644
+> > > > > > index 000000000000..329217550a98
+> > > > > > --- /dev/null
+> > > > > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.y=
+aml
+> > > > > > @@ -0,0 +1,68 @@
+> > > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> > > > > > +# Copyright 2023 Google LLC
+> > > > > > +
+> > > > > > +%YAML 1.2
+> > > > > > +---
+> > > > > > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
+> > > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > > > +
+> > > > > > +title: Binman firmware layout
+> > > > > > +
+> > > > > > +maintainers:
+> > > > > > +  - Simon Glass <sjg@chromium.org>
+> > > > > > +
+> > > > > > +description: |
+> > > > > > +  The binman node provides a layout for firmware, used when pa=
+ckaging firmware
+> > > > > > +  from multiple projects. It is based on fixed-partitions, wit=
+h some
+> > > > > > +  extensions, but uses 'compatible' to indicate the contents o=
+f the node, to
+> > > > > > +  avoid perturbing or confusing existing installations which u=
+se 'label' for a
+> > > > > > +  particular purpose.
+> > > > > > +
+> > > > > > +  Binman supports properties used as inputs to the firmware-pa=
+ckaging process,
+> > > > > > +  such as those which control alignment of partitions. This bi=
+nding addresses
+> > > > > > +  these 'input' properties. For example, it is common for the =
+'reg' property
+> > > > > > +  (an 'output' property) to be set by Binman, based on the ali=
+gnment requested
+> > > > > > +  in the input.
+> > > > > > +
+> > > > > > +  Once processing is complete, input properties have mostly se=
+rved their
+> > > > > > +  purpose, at least until the firmware is repacked later, e.g.=
+ due to a
+> > > > > > +  firmware update. The 'fixed-partitions' binding should provi=
+de enough
+> > > > > > +  information to read the firmware at runtime, including decom=
+pression if
+> > > > > > +  needed.
+> > > > >
+> > > > > How is this going to work exactly? binman reads these nodes and t=
+hen
+> > > > > writes out 'fixed-partitions' nodes. But then you've lost the bin=
+man
+> > > > > specifc parts needed for repacking.
+> > > >
+> > > > No, they are the same node. I do want the extra information to stic=
+k
+> > > > around. So long as it is compatible with fixed-partition as well, t=
+his
+> > > > should work OK.
+> > >
+> > > How can it be both? The partitions node compatible can be either
+> > > 'fixed-partitions' or 'binman'.
+> >
+> > Can we not allow it to be both? I have tried to adjust things in
+> > response to feedback but perhaps the feedback was leading me down the
+> > wrong path?
+>
+> Sure, but then the schema has to and that means extending
+> fixed-partitions.
 
-On Thu, Dec 14, 2023 at 04:50:53PM +0100, Michal Simek wrote:
+Can we cross that bridge later? There might be resistance to it. I'm
+not sure. For now, perhaps just a binman compatible works well enough
+to make progress.
 
-> Hi Tom,
->=20
-> please pull these patches to your next branch. There is nothing
-> controversial from my point of view. The biggest change is to create new
-> kria defconfig to target couple of boards based on ZynqMP. There is going=
- to
-> be work related to binman to start to composing boot images and especially
-> FIT image with dtb+dtbo together. That's why I am expecting more patches =
-to
-> come for 2024.04 but I want to clean my queue now to get these patches for
-> testing.
->=20
-> Thanks,
-> Michal
->=20
->=20
-> he following changes since commit be4a5f7c35685d228b3abc398a8d86c434274de=
-5:
->=20
->   test: bdinfo: Handle systems without getopt (2023-12-10 10:08:30 -0500)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2024.04-rc1
->=20
-> for you to fetch changes up to 4f340244b974d52c48e01cb845cfe8315f7e5764:
->=20
->   clk: zynqmp: enable topsw_lsbus clock (2023-12-13 16:48:15 +0100)
->=20
-
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---w18ty+XgnWVG7wQm
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7aQIACgkQFHw5/5Y0
-tyzp5wwAmu+c5nDf9Kg86bO48Fu7blCjYjFbebaEm2FftE8hGcy5W/f0Lca/2WLg
-7svYLEWyP17jOKURsHzwe+fm3otsOAB9oDxNmsJ9osqabII8OpKEDspNA+hMwt2H
-4h3We7LZkYYUrpPEhutLcBmlat8XlycAl4PwdZnh0d+L/2HUoop+aaTK2hLedZ9p
-SebCOvWaFGXDhnDTZnISjSXObBZ0L35k/WC7PiKJCUWQ4Sv8nJ0jsAyulfe/B938
-hliQdDhMeZ17f6pcKDzjy7gHfTD0rfxaQQ1ekFWeGn4p2gDgnXl1x/Jd4iO0yLij
-ki019WTY30p0TBssAY0OTqNE9cCsM3FUorYzB6YEqu5ttxRbs53wxcWtpVAUGDsa
-U1klStrktWRR5xpRiOKLJolP0xwoI3DgqdggvWCdV8YXdI7cW8T13WFI4LZeAiXv
-XyOEpZFMffchIXfeIqhySHgZo61N8Y4k+rHJFhIcHUs0xedggQJFD5UKrwRxI2Lg
-OTgyC+8E
-=Bliq
------END PGP SIGNATURE-----
-
---w18ty+XgnWVG7wQm--
+Regards,
+Simon
