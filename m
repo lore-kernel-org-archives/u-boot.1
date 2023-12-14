@@ -4,76 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C99C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 03:19:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CD4C46CA3
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 04:25:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 390AE879B5;
-	Thu, 14 Dec 2023 04:19:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 98A358798F;
+	Thu, 14 Dec 2023 05:25:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="df8Dl1wc";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="aIVrpeZR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C2CA879BD; Thu, 14 Dec 2023 04:19:32 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D77138718A; Thu, 14 Dec 2023 02:53:58 +0100 (CET)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on0631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::631])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 992A38797D
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 04:19:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 845B58798E
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 02:53:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33642523623so909652f8f.2
- for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 19:19:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702523969; x=1703128769; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EPxLHvz4jUBR9sn6RsDyaPq1VtFHoJXjqAMYkR9PJ88=;
- b=df8Dl1wcjWVOrg6pBWOPWFMMxzJsBfKdiwV56oyjboJCXC0OhKE80BJ5lyTyUjIkFd
- AcpMAoQIcsG8UWmDn/V8UxIvdopWzxjH/anhr0kCJQQsQlqvah8FS4TuKaYsPMVDaxbV
- K5zBVFTFZoh/cEiM/2saFVx+8Jxq4pZcTfxnI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702523969; x=1703128769;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EPxLHvz4jUBR9sn6RsDyaPq1VtFHoJXjqAMYkR9PJ88=;
- b=JTtElX0cjEC7BnSPKISWra2wKcsf0cLfsBhwV9YKoXpe7eSlvJafxU0w/Ah3rzSAfl
- pJiiSaRrrcj/jUk954Rx3G7w5Mg1g0sceQLPfrV7DH2GT5gMnE6NG5WDc8ORBfKVsqCz
- L+zFOETI++sI0YqfXKob+zBtuAAOovhIQAi3oYADFTQBn/rxakexdu2fsSNcWz+gxfXN
- VrJW6sTbHWTOF5CWaz4kn7UW063YDYJbX82BGAsBFrDP+lSvHosKJNTwpGh/w6QGU9vT
- h1i/Z/SfIr8KRc+doh13zzmSz8Z8JXZE4qyjbpnN3C9ODBOnOPEnofX8Gh0gBkHFYmpP
- VTrw==
-X-Gm-Message-State: AOJu0Yz+ZHrUUditRDesppS9kuEYVA8IrKPbw9FkIg1XdLpr8obHeHKt
- kG3HgsIEVJfyyAqAEQkty5Mvbl8ZAK74d+9fgRV3RQ==
-X-Google-Smtp-Source: AGHT+IESPqT3bhxcpP4VQUn27MJBMLRCZ9L9ZotQJWWJvzIanu6/cnttF2xW/8RiWxbR7pDv5C+yo5dgGiM09Zujdtk=
-X-Received: by 2002:a05:600c:827:b0:40b:5e59:ea13 with SMTP id
- k39-20020a05600c082700b0040b5e59ea13mr4391388wmp.178.1702523968680; Wed, 13
- Dec 2023 19:19:28 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=joy.zou@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jO0p/TEAwVgxfjZYKkqOsIaUMn5jhgNj9lrUJMBJNieNfzkwomVNT8FX+H1w0iVip+Q1fSuwkr3z/+dIGmggZyUkumHcM/22eZ/As6VZzu58dUr+BKg/Mjb4YgaV4VwqaLF7NCuxvY3zTufJ4B3oJ3pzeOnSQ8uLFYx/nPVKHiqmRBuwYLBkjSqTsTgSD8xfRMuGz/YzigqJLbQOumlz/JSFrHRVoyQI69BeqzbH9SFcxaFjkd/3YtKb5ZPDZ9DcEYq63w8bAlkgpt0TDAJw2Rix8ZaLK4nqRaUlwIUisdWGP/chhq7ejLQJ2gEyZq4beoe7L1nf1qNTdUQDNLdPFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RjvpLO4qdG0JaCxTWZcq+/RxLG7cUoGYZN8CTT31cvw=;
+ b=FNYISYFL8KEpcjtwDp7aijzr+boHyj+s6/M3re55vjyFq3yH8tuPD10Zhq3lj0ZZzv2QA7nnDPiAEKMMQwWh1lXvCFv4N9JqShqNVbMymwU7+ltaghl3wQ/zCQ+V1ZFsfqRa0niv08VekpFbjiIWodAeGlJQQsd1Ko7ul2boc7OB4Cc6B6VIGZ+SJl8oJBF0NH9eymB9SfcKEp0qCWRj5E9NnKfguxLesUaUjM98sVRVNLLAvB40XuIjQSGRhV4OajT6eIjeLkjhGG62QRoVICzBhdzsWE9/2USs9IlU142PHvHyADt16SKzNXRcYqXzC0zRHP05OPSQ37zLklNuEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RjvpLO4qdG0JaCxTWZcq+/RxLG7cUoGYZN8CTT31cvw=;
+ b=aIVrpeZRCKR7UfbvH+NC+UpUZCRMviWMcomj4MBGQq5co86lDVWuQA89+1AcmFtPvUxSpy2lpb7UgVr3cfAtX9zdTlDUXa/kVLFk4G/hUZQ3E221hBwIuHDLF6rkIYV94aPOSNnX3p7f6E/55d8iaoiB4b32SowzsDwh4EouHOU=
+Received: from VI1PR04MB5936.eurprd04.prod.outlook.com (2603:10a6:803:e1::18)
+ by AM9PR04MB8586.eurprd04.prod.outlook.com (2603:10a6:20b:439::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.28; Thu, 14 Dec
+ 2023 01:53:53 +0000
+Received: from VI1PR04MB5936.eurprd04.prod.outlook.com
+ ([fe80::b5d7:b27a:eb5f:69e0]) by VI1PR04MB5936.eurprd04.prod.outlook.com
+ ([fe80::b5d7:b27a:eb5f:69e0%5]) with mapi id 15.20.7091.022; Thu, 14 Dec 2023
+ 01:53:53 +0000
+From: Joy Zou <joy.zou@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: Chris Packham <judge.packham@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ "saproj@gmail.com" <saproj@gmail.com>, Stefano Babic <sbabic@denx.de>, Simon
+ Glass <sjg@chromium.org>, U-Boot-Denx <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Ye Li <ye.li@nxp.com>
+Subject: RE: [EXT] Re: [PATCH v2 1/3] drivers: rtc: add pcf2131 rtc driver
+Thread-Topic: [EXT] Re: [PATCH v2 1/3] drivers: rtc: add pcf2131 rtc driver
+Thread-Index: AQHaLgAB8svUesRA1EKyMK4GcKaVe7CoBBMQ
+Date: Thu, 14 Dec 2023 01:53:53 +0000
+Message-ID: <VI1PR04MB5936F89E871F2F3C73C0039AE18CA@VI1PR04MB5936.eurprd04.prod.outlook.com>
+References: <CAOMZO5BwEDh9NvQB8ht4bPq0G1EkYxaKXJPgFk7xpe6cjD4V7A@mail.gmail.com>
+In-Reply-To: <CAOMZO5BwEDh9NvQB8ht4bPq0G1EkYxaKXJPgFk7xpe6cjD4V7A@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI1PR04MB5936:EE_|AM9PR04MB8586:EE_
+x-ms-office365-filtering-correlation-id: afea1f0a-6bc9-4bee-e69c-08dbfc47867d
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: u97zQ+O5v36ShIYins5V+6XirkEHLljagINRdpPAscfPeQGqcMGkKi/yI6r3BIhM7fzT87QNl7o1sAMkaLiucyEjdgEKP7/7Gz7BlXujPqIcJag3iF2XUR1kXQI8iaZWH/BtQXhTE/ahHJ2VDUgFL4hbS4hf5PPWpe92YrNXNDGvDji3+xtKFybr73ewGUhBaWDrM0J5g+R/e/E800lZo7rHIC8dbaMLWZaxP7olqEf8srQiHQmSx3JgkwN9e10FIXpd3oSkl9YjhR42rXBzPKqfQT4Xi6xgeW86UTI4WxO0UBVtYXeKwEJjjJZ5zuU+hx76XkLITZLK0CsKUPFMCCX9UcH8uaYDr6/dAf6x+dwAk6Inpf3wc+AukFXgMbjRe2jkrEYEPq+A+4JU6loi8rk4/00z6luo4G8hQpE7gAG1SkZ8wYWTR4pPGaufKjGRW5W6IoIwhDFuAs8UfCqjRfzSdWJfsASHwEuEIvJwpsXQWW13rZ0ItOu1YXgBa+zbTzpq7HF6AkXfqXxRaOwugTvuRBETMyQxYJC/RPZGC3r57+IeK8UpHK2vGXqskhcn09fl5FijRlVbJmMTaMuGNbxjS2dA2GxzG6Y575e+sNbrOJ7uD2lCcquNYvLtgEyW9hTw0/C1cHdT2RpursZc7N5imCHLG5mHgO1/xhHV2M8=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI1PR04MB5936.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(136003)(39860400002)(366004)(376002)(396003)(346002)(230273577357003)(230922051799003)(230173577357003)(1800799012)(186009)(64100799003)(451199024)(53546011)(7696005)(9686003)(6506007)(478600001)(83380400001)(71200400001)(26005)(2906002)(4744005)(5660300002)(41300700001)(316002)(64756008)(66446008)(54906003)(6916009)(76116006)(66556008)(66946007)(66476007)(4326008)(44832011)(52536014)(8936002)(8676002)(55016003)(33656002)(38070700009)(86362001)(122000001)(38100700002);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cWlIVWZBQ1pWdHQrWUZjT2EyTzZXazZjUkhLREhsKzIwSzZwWnMvblNlY3pv?=
+ =?utf-8?B?SW01ZU1aYUlWVTFpT3d2cVI0cGRDNUpEeHp0Q290RjlncGJnZUZISldZQXV4?=
+ =?utf-8?B?UHR6R0dSTVVXQ1VwZ0VZUUlGUkM5bkoya2pUVVJMci9QOFdSMGhmWUdWbzlP?=
+ =?utf-8?B?S0c3SFc3OHgzd0pLb3hkUXZ5TDZYRys2a2J4WjBnUjkrcXJzOEdLRzA3YWpZ?=
+ =?utf-8?B?K283Tmp0MmhYbVJrd2ErY0NGaUNhOFN5Wm5jUWd3cE9EeEZ4Sy9NN3Z1N1ov?=
+ =?utf-8?B?bUVaR1ZkRkxzeTdrTzNoazZYRVJWeU5IbEtuUzBrcWNLQ3VYaWxiNEsvT0tM?=
+ =?utf-8?B?MEduSUlHSGZBd1RoVXdWQlhzVFNZMDlXQTB0K25RNCtzY2MyaGFZclNqTnV6?=
+ =?utf-8?B?TytPODI4MG5DTGd3eGpPV2tOdFhvYUI0SlNYUDdaeEVwVmx6TUhFS0oxR0ll?=
+ =?utf-8?B?WUp5Yy8yR3FOWUxMOGY0ckVFenc4VVFJSmNEdlFFdjRUTVhIYlBwdnYycm42?=
+ =?utf-8?B?eXZ0cmFaK29aUjBBc1RHMktaRENvTnJSK2FhamhRUFVURTJ5ejdsV2QrbC9H?=
+ =?utf-8?B?d2M0OGdUT2R2SWhiWmZQV2RmdjhFOVQ4NmVSV3pBcElYLzBzNnUwcXorT0tY?=
+ =?utf-8?B?c2duZVRDcExCeXNHREpzQjhNS0gxSlExMzF6RkdCclVOT1FEY00veStiZE56?=
+ =?utf-8?B?Y0tkR0x0OU5HZWVJV25WcmE1OVpWbHAzeHdCK0FtN2RESFZ1VkwvdmxBYWl3?=
+ =?utf-8?B?a2NrSXdmT25jMmo1ZThmVU5hTTJWVEszL2RNT0xIK2dXMzZ0OG10WURtUEFX?=
+ =?utf-8?B?UEdQMGZ2K0lwNG8zZjRWTHB2cnh2UXJ5dENYVWtHRHZlWlFTcUpMSklYQ0pj?=
+ =?utf-8?B?VmdSeVVjbDQyR1RWUTltcXRqZnB5YWNIa2R1N1FWU0xUckVzS2I0Si9FYkpF?=
+ =?utf-8?B?eWdZRmF6UHVTTkpkbmNCZFUvRURSdjBDaWNLR1Yvb211ajdmbnQ0RStoVkFU?=
+ =?utf-8?B?ZlNSV2xwQWkrZHRMa2JKSW01MmxPQmNBNnJzby9SQU9HSVZHRE0vUGd2UW5L?=
+ =?utf-8?B?VVdSbEJsd0t5c0tFbEtSTWRtSURHUVhZMTBrQ2VabWY2N04vRFJydHpjTktw?=
+ =?utf-8?B?Vmg2UithZjZKa0xXODB4Y1QvUmJ6QTdsQ3I1K2tpK1MrenJKbjQ3MWpaY0hn?=
+ =?utf-8?B?dml0VWFScVJyR0VWZzNRbE55U3lIRDQySG51VWY1UDYySWl0U1RnUkswU05O?=
+ =?utf-8?B?QWp3TkdvbjM2NDlSY2MzTGtSZGhGV2QzVWZwckpGSnBXbG5Sd1NiRW5tUVdI?=
+ =?utf-8?B?Uk4xQnhEYzNnM3NBZFhIQ3R0Y0dka1RwbFRaczNndEVmeWhNTHBpdXFKdnhU?=
+ =?utf-8?B?Vmd3b1F2TFVWMGhXNTRGeFRVN09SWm9OMWlQSnl1Q1JjUGoxYkJnaE5CTFNW?=
+ =?utf-8?B?ckkxaU1BNVZVMHZzeTJlUDJHeEdteForQnpyWmFBTko3WWxOWDJreDVlUEpH?=
+ =?utf-8?B?RjBpWTlUNWhoampPTDl1ZFNscVpkZ1FmVEVrd2wxU1cwNDliMmprQzZnSjZ6?=
+ =?utf-8?B?ZVcyQ1NNbDZDRUQra2hrWkY1Z3hwajZKNEk0OEZqdVF5alN6bTdCeUNXNi9R?=
+ =?utf-8?B?akt4WnJtMXJkSzRUNlduZHRhY0hkbFlGQlNxR0hBdFRjMUFEUE43MzNQNjR1?=
+ =?utf-8?B?VUxQRmZPMjRxblU4UVRtNyt3ZURHUUxDN1JGMG9vWEVZd0JzNjg2VXYvdG1E?=
+ =?utf-8?B?MTZRcnJEOGVJR3poTXhHQjlIamduUUZ3SmFzRmRjbitOQmxYZGxsM0Jhd1Uw?=
+ =?utf-8?B?ZHFwblRjS0tGbHlqNmM4RWoydGVMeWYvUkpiRE5Lc3RmYmtqdEhpeCtEb1Js?=
+ =?utf-8?B?NWF1T1pZeHphdEh4VXU3ejRKSjhxTEVWd05pb1liNXg3dXp5ZVlMY0hXMDI4?=
+ =?utf-8?B?UHFKQ01DMW1lZEw3b00vV0N4RzhnWnNjSm1CMEVCelRleUlWNDVLQ1k4OWtV?=
+ =?utf-8?B?M1pPWUdxZUhpSU10dTB2UjJzeStST1ZZbDdTbFdLSStURjdRRzB2OFlCNklH?=
+ =?utf-8?B?QmRMdHNMWjQ2R00rZTFqSDJEK0huY3EyUWVUb295RVJkNjNXQTB3M2VtZVZU?=
+ =?utf-8?Q?bhcs=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
- <20231207091850.17776-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
- <20231213201655.GF2513409@bill-the-cat>
- <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
- <20231213205634.GK2513409@bill-the-cat>
- <CAPnjgZ2hV25e1zjrNqKqd-doO9A1L9H58oToDANOSEQr5jwexA@mail.gmail.com>
- <20231213230545.GM2513409@bill-the-cat>
-In-Reply-To: <20231213230545.GM2513409@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 13 Dec 2023 20:19:11 -0700
-Message-ID: <CAPnjgZ0L+kVG0DWExwDJXYG5FfObq34LULV=se9T50OvcmhfMw@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sean.anderson@seco.com, 
- neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
- mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5936.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: afea1f0a-6bc9-4bee-e69c-08dbfc47867d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Dec 2023 01:53:53.2172 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: DfXYA7brx6aCN8dPs7u4Mw2z12kcV+MLrpoRk6XtQt9mxBMNFEUN3JKvHjLzPq39
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8586
+X-Mailman-Approved-At: Thu, 14 Dec 2023 05:25:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,174 +146,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Wed, 13 Dec 2023 at 16:05, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Dec 13, 2023 at 03:22:25PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 13 Dec 2023 at 13:56, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Dec 13, 2023 at 01:41:04PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 13 Dec 2023 at 13:17, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Dec 13, 2023 at 12:51:33PM -0700, Simon Glass wrote:
-> > > > > > Hi Ilias,
-> > > > > >
-> > > > > > On Thu, 7 Dec 2023 at 02:19, Ilias Apalodimas
-> > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > >
-> > > > > > > In order to fill in the SMBIOS tables U-Boot currently relies on a
-> > > > > > > "u-boot,sysinfo-smbios" compatible node.  This is fine for the boards
-> > > > > > > that already include such nodes.  However with some recent EFI changes,
-> > > > > > > the majority of boards can boot up distros, which usually rely on
-> > > > > > > things like dmidecode etc for their reporting.  For boards that
-> > > > > > > lack this special node the SMBIOS output looks like:
-> > > > > > >
-> > > > > > > System Information
-> > > > > > >         Manufacturer: Unknown
-> > > > > > >         Product Name: Unknown
-> > > > > > >         Version: Unknown
-> > > > > > >         Serial Number: Unknown
-> > > > > > >         UUID: Not Settable
-> > > > > > >         Wake-up Type: Reserved
-> > > > > > >         SKU Number: Unknown
-> > > > > > >         Family: Unknown
-> > > > > > >
-> > > > > > > This looks problematic since most of the info are "Unknown".  The DT spec
-> > > > > > > specifies standard properties containing relevant information like
-> > > > > > > 'model' and 'compatible' for which the suggested format is
-> > > > > > > <manufacturer,model>. Unfortunately the 'model' string found in DTs is
-> > > > > > > usually lacking the manufacturer so we can't use it for both
-> > > > > > > 'Manufacturer' and 'Product Name' SMBIOS entries reliably.
-> > > > > > >
-> > > > > > > So let's add a last resort to our current smbios parsing.  If none of
-> > > > > > > the sysinfo properties are found, scan for those information in the
-> > > > > > > root node of the device tree. Use the 'model' to fill the 'Product
-> > > > > > > Name' and the first value of 'compatible' for the 'Manufacturer', since
-> > > > > > > that always contains one.
-> > > > > > >
-> > > > > > > pre-patch:
-> > > > > > > Handle 0x0001, DMI type 1, 27 bytes
-> > > > > > > System Information
-> > > > > > >         Manufacturer: Unknown
-> > > > > > >         Product Name: Unknown
-> > > > > > >         Version: Unknown
-> > > > > > >         Serial Number: 100000000bb24ceb
-> > > > > > >         UUID: 30303031-3030-3030-3061-613234636435
-> > > > > > >         Wake-up Type: Reserved
-> > > > > > >         SKU Number: Unknown
-> > > > > > >         Family: Unknown
-> > > > > > > [...]
-> > > > > > >
-> > > > > > > and post patch:
-> > > > > > > Handle 0x0001, DMI type 1, 27 bytes
-> > > > > > > System Information
-> > > > > > >         Manufacturer: raspberrypi
-> > > > > > >         Product Name: Raspberry Pi 4 Model B Rev 1.1
-> > > > > > >         Version: Unknown
-> > > > > > >         Serial Number: 100000000bb24ceb
-> > > > > > >         UUID: 30303031-3030-3030-3061-613234636435
-> > > > > > >         Wake-up Type: Reserved
-> > > > > > >         SKU Number: Unknown
-> > > > > > >         Family: Unknown
-> > > > > > > [...]
-> > > > > > >
-> > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > > > > > > ---
-> > > > > > > Simon, I'll work with tou on the refactoring you wanted and
-> > > > > > > remove the EFI requirement of SMBIOS in !x86 platforms.
-> > > > > > > Since this code has no tests, I'll add some once the refactoring
-> > > > > > > is done
-> > > > > > >
-> > > > > > > Changes since v2:
-> > > > > > > - Spelling mistakes
-> > > > > > > - rebase on top of patch #1 changes
-> > > > > > > Changes since v1:
-> > > > > > > - Tokenize the DT node entry and use the appropriate value instead of
-> > > > > > >   the entire string
-> > > > > > > - Removed Peters tested/reviewed-by tags due to the above
-> > > > > > >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
-> > > > > > >  1 file changed, 89 insertions(+), 5 deletions(-)
-> > > > > >
-> > > > > > Can we add a Kconfig to enable this?
-> > > > >
-> > > > > Why? This is the default option that we want moving forward in order to
-> > > > > get the fields populated.
-> > > >
-> > > > The model name is fine. The manufacturer is in lower case (using the
-> > > > DT vendor name), so not in the right format.
-> > > >
-> > > > It only populates two fields, so far as I can tell.
-> > >
-> > > Maybe we need to turn this discussion on its head slightly. What do you
-> > > want to do to get SMBIOS fields to be widely populated with
-> > > generally-correct information? What we have been doing has seen very
-> > > little adoption so we need something else.
-> >
-> > Well, who or what is actually using this info? Is the problem just
-> > that it doesn't actually matter, so no one bothers? I'm just not sure.
->
-> Users are using this information. Peter has explained that Fedora has
-> been carrying Ilias' original version of this patch since it was posted
-> so that bug reports say (something close enough and that can be tracked
-> down) what device they're on, rather than "Unknown" / "Unknown Product".
-
-Unfortunately I failed to get the latest Fedora running on rpi4. Is
-this the only ARM board it supports a download for? (I must be missing
-something)
-
-Anyway, so this presumably requires EFI? If so, this is the kind of
-vertical integration and legacy promotion that really frustrates me.
-If not, then what is the mechanism to supply SMBIOS to user space?
-
-I believe we have been here before, too. What program is used to
-collect the bug reports? Is it sos, perhaps?
-
->
-> > The fact that on ARM you cannot pass it to the kernel without EFI
-> > might be inhibiting its usefulness, too? Usefulness is the key
-> > question for me.
->
-> I'm setting aside the discussion of how one will tell the kernel where
-> the SMBIOS is, outside of EFI as it's not a U-Boot problem and belongs
-> on other lists.
-
-OK, but in my mind this is a concern.
-
->
-> > Anyway, my suggestion (once we understand why we care about SMBIOS
-> > tables) is patches like we just saw from rockpro64, perhaps even with
-> > a few more fields filled out. This series seems like a backup for
-> > board maintainers that don't care, which is fine, but we should at
-> > least be able to disable it.
->
-> The issue is that this series adds, for free, useful and sufficiently
-> correct information in the common cases. The "for free" is a huge
-> feature too. Drawing on the rockpro64 patch, I would suggest seeing if
-> /version (or /hardware-rev or whatever) is something Rob is interested
-> in adding so it can be something filled out or not and then pulled from
-> DT instead of a new set of DT nodes that look a whole lot like the
-> existing DT nodes and properties that already exist.
-
-The new DT nodes / SMBIOS binding [1] allows for the correct
-information to be provided, though.
-
-I'm fine with this as a Kconfig option, but it is a hack. It purports
-to provide SMBIOS info but (for both of the two fields it fills in) it
-is not in the correct format. It only works with EFI. If someone comes
-along and adds the proper info for a board, the name will change in
-the bug reports.
-
-Which system-info tool is used? I see that hardinfo records the model
-[2] and produces a sensible name for the compatible string [3].
-
-Regards,
-Simon
-
-[1] https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/sysinfo/smbios.txt
-[2] https://github.com/lpereira/hardinfo/blob/master/modules/devices.c#L547
-[3] https://github.com/lpereira/hardinfo/blob/master/modules/devices/arm/processor.c#L433
+T2thee+8jFRoYW5rcyB5b3VyIGtpbmQgcmVtaW5kZXIhDQoNCkJSDQpKb3kgWm91DQoNCj4gLS0t
+LS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogRmFiaW8gRXN0ZXZhbSA8ZmVzdGV2YW1A
+Z21haWwuY29tPg0KPiBTZW50OiAyMDIz5bm0MTLmnIgxNOaXpSA0OjA3DQo+IFRvOiBKb3kgWm91
+IDxqb3kuem91QG54cC5jb20+DQo+IENjOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5j
+b20+OyBDaHJpcyBQYWNraGFtDQo+IDxqdWRnZS5wYWNraGFtQGdtYWlsLmNvbT47IFBlbmcgRmFu
+IDxwZW5nLmZhbkBueHAuY29tPjsNCj4gc2Fwcm9qQGdtYWlsLmNvbTsgU3RlZmFubyBCYWJpYyA8
+c2JhYmljQGRlbnguZGU+OyBTaW1vbiBHbGFzcw0KPiA8c2pnQGNocm9taXVtLm9yZz47IFUtQm9v
+dC1EZW54IDx1LWJvb3RAbGlzdHMuZGVueC5kZT47IGRsLXVib290LWlteA0KPiA8dWJvb3QtaW14
+QG54cC5jb20+OyBZZSBMaSA8eWUubGlAbnhwLmNvbT4NCj4gU3ViamVjdDogW0VYVF0gUmU6IFtQ
+QVRDSCB2MiAxLzNdIGRyaXZlcnM6IHJ0YzogYWRkIHBjZjIxMzEgcnRjIGRyaXZlcg0KPiANCj4g
+Q2F1dGlvbjogVGhpcyBpcyBhbiBleHRlcm5hbCBlbWFpbC4gUGxlYXNlIHRha2UgY2FyZSB3aGVu
+IGNsaWNraW5nIGxpbmtzIG9yDQo+IG9wZW5pbmcgYXR0YWNobWVudHMuIFdoZW4gaW4gZG91YnQs
+IHJlcG9ydCB0aGUgbWVzc2FnZSB1c2luZyB0aGUgJ1JlcG9ydA0KPiB0aGlzIGVtYWlsJyBidXR0
+b24NCj4gDQo+IA0KPiBIaSBKb3ksDQo+IA0KPiBJbiBMaW51eCwgdGhlIHBjZjIxMzEgcnRjIGlz
+IGhhbmRsZWQgYnkgdGhlIHBjZjIxMjcgZHJpdmVyLg0KPiANCj4gSSBzdWdnZXN0IHdlIGRvIHRo
+ZSBzYW1lIGluIFUtQm9vdC4gVGhhbmtzDQo=
