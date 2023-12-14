@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AACC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9080C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:53:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B6A987AFD;
-	Thu, 14 Dec 2023 17:51:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0F98D87B01;
+	Thu, 14 Dec 2023 17:51:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NWbxZThs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ep7M8B4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C5CB87ACF; Thu, 14 Dec 2023 17:51:53 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 68E2B87AEF; Thu, 14 Dec 2023 17:51:54 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F8C87ADA
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2887287AC7
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:51:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-35f519f3ea9so21594455ab.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:50 -0800 (PST)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-35f49b80192so2133855ab.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:51:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572709; x=1703177509; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702572710; x=1703177510; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V9Okq7peTTsLcn5PM6r8lIiWCZPLBF0CABSZSykAA8M=;
- b=NWbxZThsM9Zge5TbAjPOoG8azVYtGkNpbSVBJ/5ldveOPF/MF/ZjMv0lh+6RKewGMM
- x9E11QHMvaBZ0JN4Mpon91bBJiWPrxVR90OQL57CDpVbqp4IvneRZyi8Xth2ok977tVM
- EulDsHghtzehTQPTchHEYQ+xfHrbpNeOYhX30=
+ bh=vfh3HkdL6JmAndTrZv0LtNkX5eUtH1t7ViVVIZAoJng=;
+ b=ep7M8B4gn+bBYm0qPzaPw8YQ42XyIWNhDkj4Aur9oJaqiOWpI/EX1ir3l+c3ejFg8J
+ t1/5b6+OouNCdDz0J6SHZpNSVaMnR1oeRSyOWEIPGEw0muEP1CULMLHJl/xJnkBVnd96
+ LLouubwX49S4b/U6WVppMr8LFiLuM0wo+FDoA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572709; x=1703177509;
+ d=1e100.net; s=20230601; t=1702572710; x=1703177510;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V9Okq7peTTsLcn5PM6r8lIiWCZPLBF0CABSZSykAA8M=;
- b=Ddzlnd63g5WhYoezEtIbDPu0INwMgsyZd9NbP6Ua6ZcRM2Jh+6f82m0PtNg583g34+
- aqt+tbL1JYMZiCA6i1+gvdlbLQr+kSaJZ9De6v9ZD1ykoTmD4Nayx3XrBPLHZk6AKhH2
- zyR7Ie2BEKYLgAi4MB4oR6ilityA2r9eJdJzHWhEo4mRMG8Gb6VSqfJoIS9H9DZvcUMu
- wUkoYGYlFvtiou+pNdVHF618DpNChkEzVtHELSqX1M8RA5Y5AtIVYwN++FKKuYgrGIee
- Y3dPkuXDuynqrDuC5THXIhtiyXtppVHJVCxq5j7nafJzLKc+mHdRrSQWt65tIxdPpZlu
- 506g==
-X-Gm-Message-State: AOJu0YwwtyUkZEJFys46Wn1smphHW+BB8kkHMr8YOxEsSgXj4Ed6WSez
- q7m2YXXPvjjKs2KnUM/xn8nwHe5EYYb9FW/QY7VRGQ==
-X-Google-Smtp-Source: AGHT+IHivnzzJNMKW4XX116vk/Us3ngpGNYo/OmQPSFGPvbnMGLrp+/vDG0LoG1iXgT2Q38PHkcOTw==
-X-Received: by 2002:a05:6e02:15c5:b0:35d:59a2:bd3 with SMTP id
- q5-20020a056e0215c500b0035d59a20bd3mr9188697ilu.105.1702572709385; 
- Thu, 14 Dec 2023 08:51:49 -0800 (PST)
+ bh=vfh3HkdL6JmAndTrZv0LtNkX5eUtH1t7ViVVIZAoJng=;
+ b=eWYUEwNTMam+jFEdyxFoAMrDXGJoFWIZC2iodmCBhMOd1OnMtxpxr8eRj++WpWSHh0
+ FeBD0fW6Ocm0Hs7Hvg5+k1ZjaJD0/6yuJADmCVQHQzEPyRYreepsfWLLoItFWVMt7Gq0
+ WpUkMGKkVRIUezPSQNOtgXvEWys2wNo/KNrNmH5T9JcDaPKPKNtY5zSo/FvBzaSLJMuU
+ /JXoA6rQO0bSyqv1nt3/vGcFpaObmbZrFVU+XH4m5H23D8TVfmqZiCmH/+gsXqkofS6d
+ 9AVAmgzf3YkLFMPq9b65jhvCBIC39PlEBo1YQSkfNdB7+R8tFmYvjiTDs0B7OgeP8u5G
+ 1eJw==
+X-Gm-Message-State: AOJu0YwnocwJWzWrzGTmbyRojjSiAfX/lxZu8fcM8T+Hhog/mKbLD/lN
+ jVQODj3CvIuHxQY5fQ9jiA1vdylmpc0oxy8e+xHEIw==
+X-Google-Smtp-Source: AGHT+IFQyhx78HEKxZW8L5BOw/83fUrjDN15lSLuSmWzYw2h4NyxEK/kqxXEG81GJhL7FoJHwRckLA==
+X-Received: by 2002:a05:6e02:1b0d:b0:35d:701a:bc5d with SMTP id
+ i13-20020a056e021b0d00b0035d701abc5dmr7839739ilv.28.1702572710143; 
+ Thu, 14 Dec 2023 08:51:50 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.48
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:51:48 -0800 (PST)
+ Thu, 14 Dec 2023 08:51:49 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 07/21] sandbox: bootm: Enable more bootm OS methods
-Date: Thu, 14 Dec 2023 09:50:16 -0700
-Message-ID: <20231214165112.2182274-3-sjg@chromium.org>
+ Eddie James <eajames@linux.ibm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 08/21] bootm: Create a struct for argument information
+Date: Thu, 14 Dec 2023 09:50:17 -0700
+Message-ID: <20231214165112.2182274-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
 References: <20231214165112.2182274-1-sjg@chromium.org>
@@ -91,58 +89,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is useful for sandbox to build as much code as possible. Enable
-support for booting various other operating systems. Add the missing
-cache functions.
+Some OS functions require the arguments to the 'bootm' command. This is
+inconvenient for two reasons.
 
-These operating systems do not actually boot on sandbox, of course.
+Firstly, there may not be any actual command, if CMDLINE is not enabled
+and programmatic boot is being used.
+
+Secondly, most functions don't require the arguments, so it is
+inefficient to pass them when not needed. For example it increases code
+size.
+
+Create a new struct which holds the arguments, which can be used if
+needed.
+
+Add the images pointer as well, since this is commonly needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Add new patch to enable more bootm OS methods in sandbox
+- Split addition of struct bootm_info to its own patch
 
- arch/sandbox/cpu/cpu.c    | 8 ++++++++
- configs/sandbox_defconfig | 3 ++-
- 2 files changed, 10 insertions(+), 1 deletion(-)
+ include/bootm.h | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index a1c5c7c4311a..d134905e3f5f 100644
---- a/arch/sandbox/cpu/cpu.c
-+++ b/arch/sandbox/cpu/cpu.c
-@@ -286,6 +286,14 @@ void sandbox_set_enable_pci_map(int enable)
- 	enable_pci_map = enable;
- }
+diff --git a/include/bootm.h b/include/bootm.h
+index f5229ea90b33..a6d5d5ceee8f 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -16,6 +16,20 @@ struct cmd_tbl;
+ #define BOOTM_ERR_OVERLAP		(-2)
+ #define BOOTM_ERR_UNIMPLEMENTED	(-3)
  
-+void dcache_enable(void)
-+{
-+}
++/**
++ * struct bootm_info() - information used when processing images to boot
++ *
++ * @images: images information
++ * @argc: Number of arguments to the command (excluding the actual command).
++ *	This is 0 if there are no arguments
++ * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
++ */
++struct bootm_info {
++	struct bootm_headers *images;
++	int argc;
++	char *const *argv;
++};
 +
-+void dcache_disable(void)
-+{
-+}
-+
- int dcache_status(void)
- {
- 	return 1;
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index af3e7d85be39..fd9ca24f8dbe 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -44,10 +44,11 @@ CONFIG_CMD_CPU=y
- CONFIG_CMD_LICENSE=y
- CONFIG_CMD_BOOTM_PRE_LOAD=y
- CONFIG_CMD_BOOTZ=y
-+CONFIG_BOOTM_OPENRTOS=y
-+CONFIG_BOOTM_OSE=y
- CONFIG_CMD_BOOTEFI_HELLO=y
- CONFIG_CMD_BOOTMENU=y
- CONFIG_CMD_ABOOTIMG=y
--# CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
- CONFIG_CMD_ERASEENV=y
+ /*
+  *  Continue booting an OS image; caller already has:
+  *  - copied image header to global variable `header'
+@@ -39,7 +53,7 @@ typedef int boot_os_fn(int flag, int argc, char *const argv[],
+ extern boot_os_fn do_bootm_linux;
+ extern boot_os_fn do_bootm_vxworks;
+ 
+-int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_bootelf(struct cmd_tbl *cmdtp, int fglag, int argc, char *const argv[]);
+ 
+ boot_os_fn *bootm_os_get_boot_func(int os);
+ 
 -- 
 2.43.0.472.g3155946c3a-goog
 
