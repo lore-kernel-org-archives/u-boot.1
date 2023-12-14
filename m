@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64756C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 18:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E43BC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 19:47:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0E0587BB1;
-	Thu, 14 Dec 2023 19:27:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 17DEE87AFD;
+	Thu, 14 Dec 2023 20:47:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="bOWDRsrL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kl11YYPK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BCB187B22; Thu, 14 Dec 2023 19:27:23 +0100 (CET)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 1725687B1C; Thu, 14 Dec 2023 20:47:54 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4773087B6C
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 19:27:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2A31D87AD4
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:47:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dbcc9d4b1aeso2336382276.2
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 10:27:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2cc2683fdaaso10129851fa.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 11:47:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702578439; x=1703183239;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yJoBlFOdKEdFagdg8uhmI/7aFiMtsLsZo9YRL+RlGmw=;
- b=bOWDRsrLitt5Qo1SwR9kX/edYpBgRFZt36bf+JbYRPtOPu3YOuk1KB4NtiLOQoF/15
- 30Vv+JqSD8hTDBzSF/SPQa2taXQazNd/pZi4SPZBqeyRSmuAs5nGY/PcETLEpcsAJ29K
- 3DsAGwfqWwaeOgoeRV3ffT5QXu0Zf5OyyBnBI=
+ d=linaro.org; s=google; t=1702583270; x=1703188070; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cDh+GiOi2VsfIudSjLcoalrI31bXosdNhgkeDA4LIjw=;
+ b=kl11YYPKBO8p21+L7mQNPpM9GSpEFmsKte6+FoXA0WVsiLORvKtnQd2jsO2oR91UdR
+ lVA02yP/S6whdz+6KeJHdtVKSEVCMb3YZuTjnAqOK/zQGxXeM2KjLChrrxlj056dK7t/
+ 7DK3DaDKyXtdYtz8p41/86pHqsQ7kxU6bN2WZ5faHOvY/eIc43hcZ6N8Psdnb8ttO+08
+ rnDkPPv8BowknqT44GVAYH8q8Mo45P/QIoNuTSNaYEHu/jz9ke5XpbiE0SaZXTspdkzF
+ PW4iPyXtoPSduoUBY5ocfPyUaS7zFCrWiNp2sT41ejmG4yPD+P327GtZ0AQ+55vJ/0yE
+ c2Xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702578439; x=1703183239;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yJoBlFOdKEdFagdg8uhmI/7aFiMtsLsZo9YRL+RlGmw=;
- b=K0SWWs6uSCHkiaP874+mEmrDOIzpdH1dpXDjpJMfSKSotpacFw/MX0H3q+xcgPWsxA
- ASlN0eDcjiZ5xO/6DoVrLPYt7Bdt3pbpM3anVO4E4y6VVpFJ0rkm8h+2d5IRVZOd1Hea
- fGtb4gwzc0idkJ1s8mOeYAX3NWW4sJFxO5gfcLYS/nNfw7gW6bcYRPiaMBuCwhEutnp9
- y7WSZpkmSy+D+cV7VdvFRkbXoSgzZNTyWSZTey8+xPzPi8v+Y96/mUxWppvIjsX94mJr
- p4N7tCaLYEUPt2P7rLO0N8hk3Ey6yjajU3ND0OXgCNfzXsDDniO7DfsZCdjloyjotal4
- uM4Q==
-X-Gm-Message-State: AOJu0YyEY6ldZg2qhVQCk1qZTWMbr3Ezn+sGBk9kxv5JxHcQbZwICNU1
- XxPKXsVwTUC7gnxoj/ACbwUfxw+CJylfsAf3mWJpFvrTLEQh8jzlkVk=
-X-Google-Smtp-Source: AGHT+IEB9dEMsLUF9xd7atc2v10zW73W67mhdJC8dzb5IK1tgC3SqyLt4OVMmOU9DGc6fI1WVOzY98JA9W92WXZ72po=
-X-Received: by 2002:a25:abe1:0:b0:dbc:ec97:d7dd with SMTP id
- v88-20020a25abe1000000b00dbcec97d7ddmr700401ybi.97.1702578438960; Thu, 14 Dec
- 2023 10:27:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702583270; x=1703188070;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cDh+GiOi2VsfIudSjLcoalrI31bXosdNhgkeDA4LIjw=;
+ b=dsNSI/V0EQpHbzOVTiu+EuyPyNKh1rABZ7MMMcy0HfqYHR7DywviBxHKDf1/7l3I2r
+ Ni3pv3FmhncmHKQfvoODlgdXgawCVVGqDZYLmqYZZArmzMJ6gpWsjbWcZqqgFB7EWviK
+ wYi+LS/eCrHjVh0QtYsxM6sqemYUHxYzyJp5D+F6HIpelkZ5k7Ru/DqzhSvp9Tqfp3OD
+ FdrywB2xKfMKN8hGKAFpYjM9faxQCJ/gwGwZW15A0JjUX/D5FyP4JnG5KYYIQ9XiG+om
+ GOM3WRMnIdgZHqaQaWRxcVN1VUzrHvHFY7fXgnBPC29rlfh/LLQ5GIRWLPQhj869iFoL
+ yL4Q==
+X-Gm-Message-State: AOJu0YykK0Mx7yuPgIgrUoqcF/QfZyxTEDZPKHtfIFpwsSGdr6LmsASk
+ wxqiVhGOOiZp29iCrg1ucP++uoQ5MmjilVVdYnAPKQ==
+X-Google-Smtp-Source: AGHT+IFC2sx5BUwVdXv8HyTucCvVLq52Wx+L2yOX4VaiDEbfx2RfcpFW642aHZ5Aw7vux9lfQHrYSssArAEaoDmcnVU=
+X-Received: by 2002:a2e:9295:0:b0:2ca:2346:8044 with SMTP id
+ d21-20020a2e9295000000b002ca23468044mr5819867ljh.4.1702583269794; Thu, 14 Dec
+ 2023 11:47:49 -0800 (PST)
 MIME-Version: 1.0
-References: <856ada64-ba6e-4f32-bbf5-23030df85238@siemens.com>
-In-Reply-To: <856ada64-ba6e-4f32-bbf5-23030df85238@siemens.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Thu, 14 Dec 2023 23:57:07 +0530
-Message-ID: <CAMty3ZCnNLX1m8q8yQ3knAhfeiHH6uOUyY1_ykA5kKmoVj4P9w@mail.gmail.com>
-Subject: Re: [PATCH] spi: cadence-quadspi: Fix error message on stuck busy
- state
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>,
- Stefan Roese <sr@denx.de>
+References: <20231214155346.GB295924@e130802.arm.com>
+ <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 14 Dec 2023 21:47:13 +0200
+Message-ID: <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
+Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
+To: Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Abdellatif El Khlifi <Abdellatif.ElKhlifi@arm.com>
+Cc: xypron.glpk@gmx.de, sjg@chromium.org, Drew.Reed@arm.com, 
+ u-boot@lists.denx.de, nd@arm.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,15 +87,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 30, 2023 at 9:50=E2=80=AFPM Jan Kiszka <jan.kiszka@siemens.com>=
- wrote:
->
-> From: Jan Kiszka <jan.kiszka@siemens.com>
->
-> We are not iterating CQSPI_REG_RETRY, we are waiting 'timeout' ms, since
-> day 1.
->
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
+Hi Mark, Abdellatif
 
-Applied to u-boot-spi/master
+On Thu, 14 Dec 2023 at 18:47, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > Date: Thu, 14 Dec 2023 15:53:46 +0000
+> > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+>
+> Hi Abdellatif,
+>
+> > Hi guys,
+> >
+> > I'd like to ask for advice regarding adding EFI RT support to the Arm's FF-A bus
+> > in U-Boot.
+> >
+> > The objective is to enable the FF-A messaging APIs in EFI RT to be
+> > used for comms with the secure world. This will help getting/setting
+> > EFI variables through FF-A.
+> >
+> > The existing FF-A APIs in U-Boot call the DM APIs (which are not available at RT).
+> >
+> > Two possible solutions:
+> >
+> > 1/ having the entire U-Boot in RT space (as Simon stated in this discussion[1])
+>
+> I don't think this is a terribly good idea.  With this approach orders
+> of magnitude more code will be present in kernel address space one the
+> OS kernel is running and calling into the EFI runtime.  Including code
+> that may access hardware devices that are now under OS control.  It
+> will be nigh impossible to audit all that code and make sure that only
+> a safe subset of it gets called.  So...
+
++100
+I think we should draw a line here. I mentioned it on another thread,
+but I did a shot BoF in Plumbers discussing issues like this,
+problems, and potential solutions [0] [1]. Since that talk patches for
+the kernel that 'solve' the problem for RPMBs got pulled into
+linux-next [2].
+The TL;DR of that talk is that if the kernel ends up being in control
+of the hardware that stores the EFI variables, we need to find elegant
+ways to teach the kernel how to store those directly. The EFI
+requirement of an isolated flash is something that mostly came from
+the x86 world and is not a reality on the majority of embedded boards.
+I also think we should give up on Authenticated EFI variables in that
+case. We get zero guarantees unless the medium has similar properties
+to an RPMB.
+If a vendor cares about proper UEFI secure boot he can implement
+proper hardware.
+
+>
+> >
+> > 2/ Create an RT variant for the FF-A APIs needed.
+> >       These RT variant don't call the DM APIs
+> >       (e.g: ffa_mm_communicate_runtime, ffa_sync_send_receive_runtime, ...)
+> >
+> > What do you recommend please ?
+>
+> ...this is what I would recommend.  Preferably in a way that refactors
+> the code such that the low-level functionality is shared between the
+> DM and non-DM APIs.
+
+Yes. The only thing you need to keep alive is the machinery to talk to
+the secure world. The bus, flash driver etc should all be running
+isolated in there. In that case you can implement SetVariableRT as
+described the the EFI spec.
+
+[...]
+
+[0] https://www.youtube.com/watch?v=UdQk0SCUAlA
+[1] https://lpc.events/event/17/contributions/1653/attachments/1338/2682/Plumbers%20-%20EFI%20setvariable%20problems%20and%20solutions.pdf
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=c44b6be62e8dd4ee0a308c36a70620613e6fc55f
+
+
+/Ilias
