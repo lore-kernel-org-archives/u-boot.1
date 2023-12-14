@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23165C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 20:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD33C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 20:28:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9473387B2B;
-	Thu, 14 Dec 2023 21:15:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F91487B07;
+	Thu, 14 Dec 2023 21:28:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ccmgR5ak";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BR+rA1UR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65CE087AEF; Thu, 14 Dec 2023 21:15:20 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9B58C87ABA; Thu, 14 Dec 2023 21:28:51 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17CF087B2B
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 21:15:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80F6C87B22
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 21:28:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5e266e8d39eso29749097b3.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 12:15:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702584915; x=1703189715; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MoKxmCRm3Sr15GNm3SqsSkHNIJv8+ft/NupKZLa75p0=;
- b=ccmgR5akqQpCP8EQtUmsyj4HY806SBJUjBn2o1dlyFiUp5CyeMAkadbITGPDUcc4If
- L1p8YQMalsn1jT8tp63PhCK6LJB6shXzQohydB4xLNjYbXbqahJfMyiCI8FdhsSk+x+B
- UhpQ4uqgkxdIOEtyvRpF/GmALgfI+lvGM2tC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702584915; x=1703189715;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MoKxmCRm3Sr15GNm3SqsSkHNIJv8+ft/NupKZLa75p0=;
- b=dKZZIIM92Z2EYTPp++vAwDIbnONK/piy6qhuB+nN962LkTPc6j02+2b7ASR8eBz+jG
- pM1VuFKl1aa6/aaHEzPmiZFbx+gQlIhIewsKYOv7c501nDyRCDtH2bPuuWGsQMVmQ5aG
- CIksSMvRAvbq+oqC0O+Xn2hsKx7Gn7Oz8sOZp30JPzlRKS50aVKPh+v2D0Dtr7/iLp3A
- B4LVs9msGWgAPdqA2n0GtVHwTE2xb3lZd/N3niDao/Sw+GSsEtYlDVX6IPVhUWHBaIOG
- n4tmpFjYt0Rghd6eNUaGyK1OSCFDxhmFOrzbqSvMil1XmAlexqTv6LtcD9n/ohnJ+plh
- pxNw==
-X-Gm-Message-State: AOJu0YzHbMw+uMuSG7oL6bjaxIEQ7hUn8vhPVPAurkIdJ3+CPYDllE98
- kh65GxQpSPz4h+1HgOGS53dmSQ==
-X-Google-Smtp-Source: AGHT+IGcgMU12rXcdUy6ujOp3LPFUj1y95FRucqW1kQ3okzU67pSdsYhNhir3rpier+Rb4hkWjOETA==
-X-Received: by 2002:a0d:d304:0:b0:5d3:e2a2:8bcd with SMTP id
- v4-20020a0dd304000000b005d3e2a28bcdmr8406120ywd.5.1702584914768; 
- Thu, 14 Dec 2023 12:15:14 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ef43-b142-0a3d-20b7.res6.spectrum.com.
- [2603:6081:7b00:6400:ef43:b142:a3d:20b7])
- by smtp.gmail.com with ESMTPSA id
- x145-20020a0dd597000000b005e2fb7fad5asm1369996ywd.78.2023.12.14.12.15.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 12:15:14 -0800 (PST)
-Date: Thu, 14 Dec 2023 15:15:11 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Rob Herring <robh+dt@kernel.org>
-Cc: neil.armstrong@linaro.org, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- u-boot-custodians@lists.denx.de, sjg@chromium.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
- marex@denx.de
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-Message-ID: <20231214201511.GR2513409@bill-the-cat>
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
- <20231214182328.GQ2513409@bill-the-cat>
- <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BEKSWuT020788;
+ Thu, 14 Dec 2023 14:28:32 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1702585712;
+ bh=VYZqLSbUfaJA6Lj0V5pNXKFoYtzAaAPstxjQHHJnHLI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=BR+rA1URikuFEpsnSQ04Q7nPboKsTTO2yF5VIgQ9psD3TJC126w6A76QgLG5bNbgG
+ GQWsJoRvMffgIq6viqXIVrindXxPtHcElI66o/Jv6t54p7PGomqcSewr81jlmNqOqv
+ j9X8JJd/Ygoo52xWtJGtXYNMHKlkBTVNILcMKdEA=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BEKSWsO018252
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 14 Dec 2023 14:28:32 -0600
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 14
+ Dec 2023 14:28:31 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 14 Dec 2023 14:28:31 -0600
+Received: from [10.247.16.251] (ula0226330.dhcp.ti.com [10.247.16.251])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BEKSVGe043916;
+ Thu, 14 Dec 2023 14:28:31 -0600
+Message-ID: <1a97e28b-34ad-44e5-8fbd-ced7a5a69d68@ti.com>
+Date: Thu, 14 Dec 2023 14:28:31 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YKSR0UsW+3kxGDxP"
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+Content-Language: en-US
+To: "bb@ti.com" <bb@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>
+CC: "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
+ "ralph.siemsen@linaro.org" <ralph.siemsen@linaro.org>, "nm@ti.com"
+ <nm@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "n-francis@ti.com" <n-francis@ti.com>,
+ "kamlesh@ti.com" <kamlesh@ti.com>, "a-nandan@ti.com" <a-nandan@ti.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>,
+ "lukma@denx.de" <lukma@denx.de>, "hnagalla@ti.com" <hnagalla@ti.com>,
+ "a-bhatia1@ti.com" <a-bhatia1@ti.com>,
+ "m-chawdhry@ti.com" <m-chawdhry@ti.com>, "j-choudhary@ti.com"
+ <j-choudhary@ti.com>, "rasmus.villemoes@prevas.dk"
+ <rasmus.villemoes@prevas.dk>, "christian.gmeiner@gmail.com"
+ <christian.gmeiner@gmail.com>, "marek.vasut+renesas@mailbox.org"
+ <marek.vasut+renesas@mailbox.org>, "sinthu.raja@mistralsolutions.com"
+ <sinthu.raja@mistralsolutions.com>, "sabiya.d@ti.com" <sabiya.d@ti.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, "xypron.glpk@gmx.de"
+ <xypron.glpk@gmx.de>, "rogerq@kernel.org" <rogerq@kernel.org>
+References: <20231206123753.1486031-1-a-nandan@ti.com>
+ <51eeab25314144926eaefaa2e83353ffec9309fe.camel@toradex.com>
+ <20231214201019.5bjxb5ki67yjn4ku@bryanbrattlof.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20231214201019.5bjxb5ki67yjn4ku@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,90 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/14/23 2:10 PM, bb@ti.com wrote:
+> On December 14, 2023 thus sayeth Marcel Ziswiler:
+>> Hi Apurva
+>>
+>> Thanks!
+>>
+>> On Wed, 2023-12-06 at 18:07 +0530, Apurva Nandan wrote:
+>>> Hello Everyone!
+>>>
+>>> This series will introduce basic support (SD and UART) support for Texas
+>>> Instruments J784S4 EVM.
+>>
+>> For the whole series:
+>>
+>> Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>>
+>> However, one thing I noticed is that with upstream TF-A I do get the following errors:
+>>
+>> NOTICE:  BL31: v2.10.0  (release):v2.10.0-76-g02091541d
+>> NOTICE:  BL31: Built : 18:13:08, Dec 14 2023
+>> ERROR:   Failed to get response (-19)
+>> ERROR:   Transfer send failed (-19)
+>> ERROR:   Unable to query firmware capabilities (-19)
+>>
+>> While with latest TF-A from downstream TI BSP (both 9.0 and 9.1 use the same versin) I do not get any errors:
+>>
+>> NOTICE:  BL31: v2.9(release):v2.9.0-614-gd7a7135d3
+>> NOTICE:  BL31: Built : 18:40:38, Dec 14 2023
+>>
+> 
+> What version of TIFS are you running? Not getting a response usually
+> means firmware is dead or we're not using the right thread to talk.
+> 
 
---YKSR0UsW+3kxGDxP
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In this case the early versions of TIFS/DM for J784S4/AM69 had
+a bug where the "query firmware capabilities" API was left disabled.
+This is fixed in the next version of firmware, this error message
+is harmless today anyway (no LPM yet).
 
-On Thu, Dec 14, 2023 at 01:48:42PM -0600, Rob Herring wrote:
-> On Thu, Dec 14, 2023 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Thu, Dec 14, 2023 at 03:53:11PM +0100, neil.armstrong@linaro.org wro=
-te:
-> > > Hi,
-> > >
-> > > On 14/12/2023 14:50, Sumit Garg wrote:
-> > > > Prerquisite
-> > >
-> > > s/Prerquisite/Prerequisite/
-> > >
-> > > > -----------
-> > > >
-> > > > This patch series requires devicetree-rebasing git repo to be added=
- as a
-> > > > subtree to the main U-boot repo via:
-> > > >
-> > > > $ git subtree add --prefix devicetree-rebasing \
-> > > >        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/dev=
-icetree-rebasing.git \
-> > > >        v6.6-dts --squash
-> > >
-> > > So I think the big question is: when should the subtree be updated ?
-> > >
-> > > Because as we discussed in the previous GH pull request, if a binding=
-s changes
-> > > was made in the upstream Linux DT, then the subtree update should wai=
-t until
-> > > the u-boot support is merged before updating. This could cause a lot =
-of frustration.
-> > >
-> > > And this could cause a lot of regressions, even more if both Linux an=
-d U-boot are
-> > > not maintained by the same people.
-> >
-> > I think some of the important questions to ask are, how often / likely
-> > are the breakages to occur? It seems like these days it's either:
-> > - U-Boot had an early version of the binding and we already state we
-> >   don't support backwards compatibility here. It should be on the
-> >   maintainer to be proactive in this case.
-> > - It's a "the DT was wrong about the hardware, sorry not sorry it's an
-> >   incompatible DTS change now". This too is hopefully the kind of thing
-> >   that at least board maintainers will be more actively aware of needing
-> >   to deal with in U-Boot, if it's really a problem.
->=20
-> A common issue in the kernel is with forward compatibility when
-> platforms add new resources from a new provider. Then the kernel
-> expects a driver for the provider and waits for the dependency. Of
-> course, older kernels don't have that provider driver and so the
-> dependency is never met. Not sure if u-boot will have similar issues?
-> At least you should/could know if the provider driver exists or not.
-> (The kernel doesn't because modules.)
-
-I think we'll be fine, but time will tell. And perhaps the more frequent
-re-syncing will make any sort of corner cases show up more quickly and
-be something we can figure out how to resolve going forward really.
-
---=20
-Tom
-
---YKSR0UsW+3kxGDxP
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV7YkwACgkQFHw5/5Y0
-tywceAv/SdTLgyhe8sCnAnCxl5PsSBjY4d/MpKCVjWWcGAYWn3lbV3cRV6+DtTPS
-8NFBXdQzZaj/Tt/9qa7nXYieBQMqzWWJ8oAB7SOknGTdvGyEpXjeE100wPpQ/pPA
-Ch+llUH8Ol6kSuiDB+jUJ1htYCcTpE7+koaMaG3fN0SZE6xjBk1kUnlJg+mRc/fY
-JJVzQzjK8n0NTAVVn3qLuAc+JCKG/dVIdzkol8LB/3sWQMXQe73ETVXR3+eTZAJO
-uRtSuUG4Q0awMU0fLRdfi0YG0wkJ0g8M2JzD1GlGzI1OalSvVGbOf7qK6bkFgdwY
-yh7VWOhHH9h+ON3uZVGNxEy1NPQ0Z0kYUiMaTI8mVd6rnH4NcPrWOeGW8R8guLGR
-NaY3WgtziZmlODw4nTIBf9jVmDq/+HkvLVRoj3D5U/tAuJhcRc7Mfiq7LNGaVa2U
-UG2UOtMuRFku6SFVfhC4APNTaPCv74+WJs1cInTLE3SXVcAVKh6HTvQeJFed2l2y
-VDe8f97P
-=4AWg
------END PGP SIGNATURE-----
-
---YKSR0UsW+3kxGDxP--
+Andrew
