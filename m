@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0DAFC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 21:09:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9FE7C4167B
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 21:15:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A22187A93;
-	Thu, 14 Dec 2023 22:09:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 27B1E87ADA;
+	Thu, 14 Dec 2023 22:15:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MEXceueG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lTL6cDnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22E1F87A8E; Thu, 14 Dec 2023 22:09:39 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 22CF987B1C; Thu, 14 Dec 2023 22:15:38 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6001987B3A
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:09:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 130EB87ADA
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:15:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a1db99cd1b2so2350666b.2
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:09:36 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a1f8510883aso2435266b.3
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:15:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702588176; x=1703192976; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702588535; x=1703193335; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jnjPB6iX18JgpGdFMBMYrxpteo2U43QjbY9/lo9Je7Y=;
- b=MEXceueGXcuXjFqOdA4FvGnWzJBjIRUQJT4HP/Sj//o4WelMVcnW5beHiAvg0yPmHf
- jInmpulid6oiRdaf5dfbGJr/9BXkPXF2BCB21EQUDVxat5crRf3s+YUnmHc8nTrnh9V6
- SkaIXwDB8DK9EjbytRc1WJbM9dgfuCxij+g1o=
+ bh=UGf6gOE21LBQIdL7nl1i60OApL+MgQdPENCb5TjgK9c=;
+ b=lTL6cDnUyFbEHodUK5a/sPbQUaMucvVY88sRiUOD1jFV1pWiFwDpk3c0y0EUK3KZLK
+ VkmCjohHxJ+j1UHDbkN8uYzjXVxtSR4dsP5NWgqFfxvX75pPtnIlfDgp1taGLDbg+t9V
+ Xqtb9J2+IEcAFEZ8nBoHXN+Km9yU0Gf/VR1bU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702588176; x=1703192976;
+ d=1e100.net; s=20230601; t=1702588535; x=1703193335;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jnjPB6iX18JgpGdFMBMYrxpteo2U43QjbY9/lo9Je7Y=;
- b=PtGA863c69YYUjAMP8jde84a06+DGiLhXmk53wVKGKz04VjsyJ//PbOV4Vvplw1vLt
- Y8OBB4lb5+EWjYoUBYadHogm16y55ykh6oLeqPEDS2XRidFEMWLPj8dTmU7W+IlRKEka
- HJMqHQPCf0/hMS8kSnK1wSialil18tpU66mPnIQvgqiospqJrylUhY452tOrz6ymMTEj
- n3R4nb0i1uNQQnSu3EGxAHAx6ikEOSkLpOSVP7d0vPAhpxJga/ZQ/U/dkg+QQ/1XgJbM
- FtiKg6g6J3hOowojNuF6mV1pWUh4mWAhPpesbUkAo49bSESGQm3th8jHG7meS9AcKgag
- HGIg==
-X-Gm-Message-State: AOJu0YyFXGfKnlGfilNGME7NHEZABdaK2Bc6lSeYetFNNb/cVv5Kj7fY
- Pf2zZ4xhbgKmAuD/eq+ZU1h+hVaNPtVVIPA8LXZqcQ==
-X-Google-Smtp-Source: AGHT+IE1mZhqGInPUAvje+k24w89h1v23G78AX9kBt06f8sNc/raFxf+pFaK2GPm69Hxyl/NeGszL+XSJBb5CtBIqnE=
-X-Received: by 2002:a17:907:2d12:b0:a19:9b79:8b45 with SMTP id
- gs18-20020a1709072d1200b00a199b798b45mr5234161ejc.86.1702588175444; Thu, 14
- Dec 2023 13:09:35 -0800 (PST)
+ bh=UGf6gOE21LBQIdL7nl1i60OApL+MgQdPENCb5TjgK9c=;
+ b=ZjosV4HnOjDIOt5g2CA5JaTKXlcqDCcjqHfP1R1su46Ax8jEjjxlJLAMEP+a76pU3V
+ ACK4NL4dZYS+3HB2IVnxQDpSFuHFb6xCKxxN1b09lwmHsg7H6hE7+qrO7Bzn9UMZZeHs
+ VZu4BHapeTrxrf8LP3XIrYmtQgUAmFrpIeUalDEkX5K3gvGoBlFIeFodOHrj+BFhzEfQ
+ rhV3OshK76SBnAqVdGj+HVtNzH8/+gfcgH7RNolx1z9oZY2f9i8wMKpkO+x9F3pwxRvF
+ 1/XZOlMtmD1MK/aafxvv1KtQktNXYS07qLgJ5Q+SXs6jDxr2nOKjVZ73lMYgLF2M5iDL
+ ur5g==
+X-Gm-Message-State: AOJu0YxrPnojeGPXtgbO2INIyekoMvf85aZyu/KEvHh+iRnnL2OWIEgq
+ bfAab3orJZjc2M0OfRtYW1P0cy6rciuXGcUPIzy2fA==
+X-Google-Smtp-Source: AGHT+IGaCSZZ6X9yUHhNzbnHfZ5PhrjAGA5J9pRdfrPEXbdj+d2BWkjnCECMBN7IL5sbkifdc4rfHlq2zciQjLeM5uQ=
+X-Received: by 2002:a17:906:60f:b0:a1d:756b:383b with SMTP id
+ s15-20020a170906060f00b00a1d756b383bmr2675111ejb.10.1702588535055; Thu, 14
+ Dec 2023 13:15:35 -0800 (PST)
 MIME-Version: 1.0
-References: <20231116172859.393744-1-sjg@chromium.org>
- <20231208150042.GA1278773-robh@kernel.org>
- <CAPnjgZ2i4gvgiUeHPOfHuOdBooV4e=QQEq6iMo0JbDwOS6dCwA@mail.gmail.com>
- <CAL_Jsq+xMZ8yz4H9D59uCSyX4h5W+4ruGF++=wVA=msXz+Y01A@mail.gmail.com>
- <CAPnjgZ1uW8T6woXSqFUNm301=W3zBYOrADREkrz=DuwSW87qZg@mail.gmail.com>
- <20231214172702.GA617226-robh@kernel.org>
-In-Reply-To: <20231214172702.GA617226-robh@kernel.org>
+References: <CAPnjgZ06s64C2ux1rABNAnMv3q4W++sjhNGCO_uPMH_9sTF7Mw@mail.gmail.com>
+ <ae0675e2-940a-439e-9557-e5a4f745f1b0@ti.com>
+ <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
+In-Reply-To: <CAMuHMdXQdMeXUOAAw5nDO4+q5_HFvUc86Wi8ykMwjUwPex6wvQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 14 Dec 2023 14:09:24 -0700
-Message-ID: <CAPnjgZ2oJSGPO91Y_aLbe+v250WFrND4n3T0mOvhERYidVu=eQ@mail.gmail.com>
-Subject: Re: [PATCH v6 1/3] dt-bindings: mtd: partitions: Add binman compatible
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, Miquel Raynal <miquel.raynal@bootlin.com>, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Michael Walle <mwalle@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Pratyush Yadav <ptyadav@amazon.de>, 
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
+Date: Thu, 14 Dec 2023 14:15:16 -0700
+Message-ID: <CAPnjgZ1JjSKKaxcWU+CaHLS_g=HG=3q_XoscgxnGa3+sA3p7aQ@mail.gmail.com>
+Subject: Re: Proposal: FIT support for extension boards / overlays
+To: Geert Uytterhoeven <geert@linux-m68k.org>,
+ Masahiro Yamada <masahiroy@kernel.org>
+Cc: Andrew Davis <afd@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Chen-Yu Tsai <wenst@chromium.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,135 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
++Masahiro Yamada too
 
-On Thu, 14 Dec 2023 at 10:27, Rob Herring <robh@kernel.org> wrote:
+On Wed, 13 Dec 2023 at 01:22, Geert Uytterhoeven <geert@linux-m68k.org> wro=
+te:
 >
-> On Fri, Dec 08, 2023 at 03:58:10PM -0700, Simon Glass wrote:
-> > Hi Rob,
-> >
-> > On Fri, 8 Dec 2023 at 14:56, Rob Herring <robh@kernel.org> wrote:
-> > >
-> > > On Fri, Dec 8, 2023 at 11:47=E2=80=AFAM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Rob,
-> > > >
-> > > > On Fri, 8 Dec 2023 at 08:00, Rob Herring <robh@kernel.org> wrote:
-> > > > >
-> > > > > On Thu, Nov 16, 2023 at 10:28:50AM -0700, Simon Glass wrote:
-> > > > > > Add a compatible string for binman, so we can extend fixed-part=
-itions
-> > > > > > in various ways.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v5)
-> > > > > >
-> > > > > > Changes in v5:
-> > > > > > - Add #address/size-cells and parternProperties
-> > > > > > - Drop $ref to fixed-partitions.yaml
-> > > > > > - Drop 'select: false'
-> > > > > >
-> > > > > > Changes in v4:
-> > > > > > - Change subject line
-> > > > > >
-> > > > > > Changes in v3:
-> > > > > > - Drop fixed-partition additional compatible string
-> > > > > > - Drop fixed-partitions from the example
-> > > > > > - Mention use of compatible instead of label
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > - Drop mention of 'enhanced features' in fixed-partitions.yaml
-> > > > > > - Mention Binman input and output properties
-> > > > > > - Use plain partition@xxx for the node name
-> > > > > >
-> > > > > >  .../bindings/mtd/partitions/binman.yaml       | 68 +++++++++++=
-++++++++
-> > > > > >  .../bindings/mtd/partitions/partitions.yaml   |  1 +
-> > > > > >  MAINTAINERS                                   |  5 ++
-> > > > > >  3 files changed, 74 insertions(+)
-> > > > > >  create mode 100644 Documentation/devicetree/bindings/mtd/parti=
-tions/binman.yaml
-> > > > > >
-> > > > > > diff --git a/Documentation/devicetree/bindings/mtd/partitions/b=
-inman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> > > > > > new file mode 100644
-> > > > > > index 000000000000..329217550a98
-> > > > > > --- /dev/null
-> > > > > > +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.y=
-aml
-> > > > > > @@ -0,0 +1,68 @@
-> > > > > > +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> > > > > > +# Copyright 2023 Google LLC
-> > > > > > +
-> > > > > > +%YAML 1.2
-> > > > > > +---
-> > > > > > +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-> > > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > > +
-> > > > > > +title: Binman firmware layout
-> > > > > > +
-> > > > > > +maintainers:
-> > > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > > +
-> > > > > > +description: |
-> > > > > > +  The binman node provides a layout for firmware, used when pa=
-ckaging firmware
-> > > > > > +  from multiple projects. It is based on fixed-partitions, wit=
-h some
-> > > > > > +  extensions, but uses 'compatible' to indicate the contents o=
-f the node, to
-> > > > > > +  avoid perturbing or confusing existing installations which u=
-se 'label' for a
-> > > > > > +  particular purpose.
-> > > > > > +
-> > > > > > +  Binman supports properties used as inputs to the firmware-pa=
-ckaging process,
-> > > > > > +  such as those which control alignment of partitions. This bi=
-nding addresses
-> > > > > > +  these 'input' properties. For example, it is common for the =
-'reg' property
-> > > > > > +  (an 'output' property) to be set by Binman, based on the ali=
-gnment requested
-> > > > > > +  in the input.
-> > > > > > +
-> > > > > > +  Once processing is complete, input properties have mostly se=
-rved their
-> > > > > > +  purpose, at least until the firmware is repacked later, e.g.=
- due to a
-> > > > > > +  firmware update. The 'fixed-partitions' binding should provi=
-de enough
-> > > > > > +  information to read the firmware at runtime, including decom=
-pression if
-> > > > > > +  needed.
-> > > > >
-> > > > > How is this going to work exactly? binman reads these nodes and t=
-hen
-> > > > > writes out 'fixed-partitions' nodes. But then you've lost the bin=
-man
-> > > > > specifc parts needed for repacking.
-> > > >
-> > > > No, they are the same node. I do want the extra information to stic=
-k
-> > > > around. So long as it is compatible with fixed-partition as well, t=
-his
-> > > > should work OK.
-> > >
-> > > How can it be both? The partitions node compatible can be either
-> > > 'fixed-partitions' or 'binman'.
-> >
-> > Can we not allow it to be both? I have tried to adjust things in
-> > response to feedback but perhaps the feedback was leading me down the
-> > wrong path?
+> Hi,
 >
-> Sure, but then the schema has to and that means extending
-> fixed-partitions.
-
-Can we cross that bridge later? There might be resistance to it. I'm
-not sure. For now, perhaps just a binman compatible works well enough
-to make progress.
-
-Regards,
-Simon
+> On Tue, Dec 12, 2023 at 4:52=E2=80=AFPM Andrew Davis <afd@ti.com> wrote:
+> > On 12/12/23 8:05 AM, Simon Glass wrote:
+> > > The devicetree files for a board can be quite large, perhaps around
+> > > 60KB. To boot on any supported board, many of them need to be
+> > > provided, typically hundreds.
+> > >
+> > > All boards for a particular SoC share common parts.  It would be
+> > > helpful to use overlays for common pieces, to reduce the overall size=
+.
+> > >
+> >
+> > For this to save much size we would need to have the SoC split
+> > from each board that uses it. We don't have that in DT today.
+> > There are some efforts in progress to help on this but until
+> > then we will not get much here.
+>
+> Indeed.
+>
+> E.g. The Kingfisher board[1] is an extension for (various) ULCB
+> boards[2], but we cannot use an overlay for the former, as the
+> combinations need to have different top-level compatible (and model)
+> values.  Hence currently we use a .dtsi file and lots of extra .dts
+> files[3].
+>
+> The other issue is the need for parameterization, due to slight
+> differences in pins/signals on various base boards, or because the
+> same connector is present multiple times (e.g. for multi-camera
+> setups[4][5]).
+>
+> [1] arch/arm64/boot/dts/renesas/ulcb-kf.dtsi
+> [2] arch/arm64/boot/dts/renesas/*-ulcb.dts
+> [3] arch/arm64/boot/dts/renesas/*-ulcb-kf.dts
+> [4] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov5640-single.dtsi
+> [5] arch/arm/boot/dts/renesas/r8a7742-iwg21d-q7-dbcm-ov7725-single.dtsi
+>
+> Gr{oetje,eeting}s,
+>
+>                         Geert
+>
+> --
+> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m6=
+8k.org
+>
+> In personal conversations with technical people, I call myself a hacker. =
+But
+> when I'm talking to journalists I just say "programmer" or something like=
+ that.
+>                                 -- Linus Torvalds
