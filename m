@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2352BC4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE37C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 16:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 885FE87505;
-	Thu, 14 Dec 2023 17:29:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 992E687AB8;
+	Thu, 14 Dec 2023 17:30:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LZhxCHcG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lpjD4jzf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1000687225; Thu, 14 Dec 2023 17:29:24 +0100 (CET)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 7C97187505; Thu, 14 Dec 2023 17:30:35 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81F2A87ABC
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:29:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A45487AB8
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 17:30:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6ceccf6d88fso1281252b3a.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:29:21 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1d346f4a043so6677845ad.0
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 08:30:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702571360; x=1703176160; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702571430; x=1703176230; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fc30ZFwztOt5Qfo+35jjhTqZtIBpk1hLZk08OvCBbig=;
- b=LZhxCHcGqcAcv4wVLQtoa6tGHYG9wcBv2B+tBXBTWnJ3SHqYdkOr4IN/IZwusLlEqt
- aaakhr1mQrXQZ1NqZ3279W+ac+8sVewpSv9zmE6Y88CMToK2KY4Jpw+ea5EDPFQ6ymtg
- /4SB4RkPHzttMox3XhvIzpdNX8z1PtBHHPRZemlOfZKB5lwQXJAui0F49NH7FLYxFcjo
- 8vUjHH20iOjt2DHtpNsWnmhqsb5O+e53styDWYqYLDNZjPsxBWl8li/SWA+4HH6LDtpV
- Yyt5/J2JPfN0Z8ddZuh/jXFZLEg/JiZmfKtj/SpVjs20j34K6dIr6oBenk3mHibjn91d
- 2AdA==
+ bh=SKSJerhkI73GmSHBDqkmYukOM9ANMsgC4FYe5PNMRpM=;
+ b=lpjD4jzfTIOGi3C21VLKJbzazBEFAfc5Qi6tER/mf+LoEy9JOi3t8mPHF46i/l0wAJ
+ 7pqnUHbd113yJs1gDeE3P9U3lPzgaH0ZbMDN10tjNmA99dBzweehAGPLRrjrPEpe0vh8
+ OAt6mIVN+2kxT3kMATyvY5/feEBqokb8zGMqb2gDYzom55eZ57JA11TH3/JymDG1IH8O
+ NxZohXOPwWVyxbSMrDlaZZ2PKxZE836Ag/2L9pU44tMGn+tsycwHnhoAmYZmUW3j+Dnk
+ NUGbrblAvrJwLUPJIViymnkf1QV86RbPwN1drwFtFzLs444iSXCtugRhTgeiQotlvYr8
+ 5wCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702571360; x=1703176160;
+ d=1e100.net; s=20230601; t=1702571430; x=1703176230;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Fc30ZFwztOt5Qfo+35jjhTqZtIBpk1hLZk08OvCBbig=;
- b=N2jKb2qjjxzjQZv8UqibF1PPCcWsVAj0TYRyAvJGFv1Hk8at7My8dmuF9AMs22hha7
- prNJLlH8jkz77B0y17mM8TjsDU4uYZtPUJ5XUcmFrwek0T52FXa8dwa+RY7A1eqX1Ojz
- jx3VDlBc84ZBE1lY+G9er4s1qhluITufCCaQS6RGLvVI9E478CeLUFeki47IcWouoCEJ
- uo3OCf/kfAGpCuzZ9rOqNMi2UM68nrvPdv+3kNlv/ctw7qX1rFZkQzKqK6wkI8G02rAE
- /a9ZqLTgueOjQl4s7mbvKbCamm0hO/fumd2IsWILq7ec98TX4RKTg5ucF0HMsrHqMbvf
- APIw==
-X-Gm-Message-State: AOJu0YzqMCy6s60jAEhR1VfeHMGGrt/Op4Q9hN/gqLWzQDHJL3eE5CEM
- X5e9PcWdHTpRouVWPYPmBsX2zP0+AIZsyBrv4HGyCVCM
-X-Google-Smtp-Source: AGHT+IG6jkqHUdtBcYkcCbhpjXHIQSn0hVNqpjX04/nBuYPybvV3M1T5Wz3+9lYCoSYd/JEPxiJ57SKO3rDR/HE6sJM=
-X-Received: by 2002:a05:6a21:998e:b0:187:4a56:9a06 with SMTP id
- ve14-20020a056a21998e00b001874a569a06mr23459819pzb.5.1702571359633; Thu, 14
- Dec 2023 08:29:19 -0800 (PST)
+ bh=SKSJerhkI73GmSHBDqkmYukOM9ANMsgC4FYe5PNMRpM=;
+ b=wPYJKTCfccFGZaOmsfg+DTs5u+8crslLjzAF3N0Im72j5DCiIHmzAY4mRAUqVr+2Da
+ fFTfOSRtY9seKApoW9FtE1Uza7PlktJTYP7olHdbUpF2l6ZJTriEBvAngYvPO1ZHPcBw
+ 8Q+05ydis9bakx8tGNgH+/L7vgXoyRbEjFj0/uwvLgwwfK4slgFjWHWMcMin+7OoSW3T
+ IPRDyKJbiWZKZ6r4BE6zAdH2D9yHbZzzzAoLz+J12iW3HZ7CrZYaIHr2Q/2+yUQLJRzJ
+ cgDrj2qgLay/TEXqQJSt05avBxk9FWxJd5rOV68NUUpbfKRnf+TGGA3klBHJNfNFW9e6
+ 9A+A==
+X-Gm-Message-State: AOJu0YxiupNwE4Qj2uNi4FeiyTU32TQ/IxIdEw3LHZ23spmFgHGvT8A9
+ r19wsEkfCSEXmpHYbIV3iV8+Bqr1afMR7jnqDN8=
+X-Google-Smtp-Source: AGHT+IHMYoW+45XpR1oMWxIneMs+R7R1oKw33DhySabi/0Tg2FB3o44fUc/IUypHQrVw3QMR7X0A56nlyqtOmehWgYc=
+X-Received: by 2002:a05:6a21:a5aa:b0:18f:d3d3:846 with SMTP id
+ gd42-20020a056a21a5aa00b0018fd3d30846mr23906073pzc.1.1702571430222; Thu, 14
+ Dec 2023 08:30:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214162227.1199831-1-tharvey@gateworks.com>
- <20231214162227.1199831-3-tharvey@gateworks.com>
-In-Reply-To: <20231214162227.1199831-3-tharvey@gateworks.com>
+References: <20231214162543.1200276-1-tharvey@gateworks.com>
+ <20231214162543.1200276-2-tharvey@gateworks.com>
+In-Reply-To: <20231214162543.1200276-2-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 14 Dec 2023 13:29:07 -0300
-Message-ID: <CAOMZO5Bx5Rb3oh2MCeh7ebuwJaLM3ZxUM7F3_2bP6TkPUrQY=A@mail.gmail.com>
-Subject: Re: [PATCH 3/3] imx8mp-venice: update DRAM config for 2000MHz
+Date: Thu, 14 Dec 2023 13:30:18 -0300
+Message-ID: <CAOMZO5DuRnmNpT-GZxkjL4UmwNW-NyQWf+VNy4Q+N1=aitUptA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] ARM: dts: imx8mm-venice: prepare for dek blob
+ encapsulation
 To: Tim Harvey <tharvey@gateworks.com>
 Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
@@ -90,12 +91,20 @@ X-Virus-Status: Clean
 
 Hi Tim,
 
-On Thu, Dec 14, 2023 at 1:22=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+On Thu, Dec 14, 2023 at 1:25=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
 wrote:
 >
-> The imx8mp venice boards can support 2000Mhz DRAM.
-> Update the DRAM config to support this.
+> Prepare for DEK blob encapsulation support through "dek_blob" command.
+> On ARMv8, u-boot runs in non-secure, thus cannot encapsulate a DEK blob
+> for encrypted boot.
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> The DEK blob is encapsulated by OP-TEE through a trusted application
+> call. U-boot sends and receives the DEK and the DEK blob binaries
+> through OP-TEE dynamic shared memory.
+>
+> To enable the DEK blob encapsulation, add to the defconfig:
+> CONFIG_SECURE_BOOT=3Dy
 
-Do you consider this series material for 2024.01 or 2024.04?
+This option does not exist.
+
+Do you mean CONFIG_IMX_HAB=3Dy?
