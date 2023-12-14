@@ -4,53 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D63C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 02:38:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04C99C4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 03:19:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20EF587863;
-	Thu, 14 Dec 2023 03:38:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 390AE879B5;
+	Thu, 14 Dec 2023 04:19:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5474C87863; Thu, 14 Dec 2023 03:38:29 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE67087858
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 03:38:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BE2cFXv010042;
- Thu, 14 Dec 2023 10:38:15 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Thu, 14 Dec 2023 10:38:12 +0800
-Date: Thu, 14 Dec 2023 10:38:07 +0800
-From: Leo Yu-Chi =?utf-8?B?TGlhbmco5qKB6IKy6b2KKQ==?= <ycliang@andestech.com>
-To: "trini@konsulko.com" <trini@konsulko.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Rick Jian-Zhi
- =?utf-8?B?Q2hlbijpmbPlu7rlv5cp?= <rick@andestech.com>, Leo Yu-Chi
- =?utf-8?B?TGlhbmco5qKB6IKy6b2KKQ==?= <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <KL1PR03MB6059E8E8F10CAE683A330D1FA58DA@KL1PR03MB6059.apcprd03.prod.outlook.com>
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="df8Dl1wc";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1C2CA879BD; Thu, 14 Dec 2023 04:19:32 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 992A38797D
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 04:19:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33642523623so909652f8f.2
+ for <u-boot@lists.denx.de>; Wed, 13 Dec 2023 19:19:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702523969; x=1703128769; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EPxLHvz4jUBR9sn6RsDyaPq1VtFHoJXjqAMYkR9PJ88=;
+ b=df8Dl1wcjWVOrg6pBWOPWFMMxzJsBfKdiwV56oyjboJCXC0OhKE80BJ5lyTyUjIkFd
+ AcpMAoQIcsG8UWmDn/V8UxIvdopWzxjH/anhr0kCJQQsQlqvah8FS4TuKaYsPMVDaxbV
+ K5zBVFTFZoh/cEiM/2saFVx+8Jxq4pZcTfxnI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702523969; x=1703128769;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EPxLHvz4jUBR9sn6RsDyaPq1VtFHoJXjqAMYkR9PJ88=;
+ b=JTtElX0cjEC7BnSPKISWra2wKcsf0cLfsBhwV9YKoXpe7eSlvJafxU0w/Ah3rzSAfl
+ pJiiSaRrrcj/jUk954Rx3G7w5Mg1g0sceQLPfrV7DH2GT5gMnE6NG5WDc8ORBfKVsqCz
+ L+zFOETI++sI0YqfXKob+zBtuAAOovhIQAi3oYADFTQBn/rxakexdu2fsSNcWz+gxfXN
+ VrJW6sTbHWTOF5CWaz4kn7UW063YDYJbX82BGAsBFrDP+lSvHosKJNTwpGh/w6QGU9vT
+ h1i/Z/SfIr8KRc+doh13zzmSz8Z8JXZE4qyjbpnN3C9ODBOnOPEnofX8Gh0gBkHFYmpP
+ VTrw==
+X-Gm-Message-State: AOJu0Yz+ZHrUUditRDesppS9kuEYVA8IrKPbw9FkIg1XdLpr8obHeHKt
+ kG3HgsIEVJfyyAqAEQkty5Mvbl8ZAK74d+9fgRV3RQ==
+X-Google-Smtp-Source: AGHT+IESPqT3bhxcpP4VQUn27MJBMLRCZ9L9ZotQJWWJvzIanu6/cnttF2xW/8RiWxbR7pDv5C+yo5dgGiM09Zujdtk=
+X-Received: by 2002:a05:600c:827:b0:40b:5e59:ea13 with SMTP id
+ k39-20020a05600c082700b0040b5e59ea13mr4391388wmp.178.1702523968680; Wed, 13
+ Dec 2023 19:19:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-Thread-Topic: [GIT PULL] u-boot-riscv/master
-Thread-Index: AQHaLZ5pXAqhkrwn90aRO1POGe26RQ==
-Content-Language: en-US
-x-ms-exchange-imapappendstamp: KL1PR0302MB5265.apcprd03.prod.outlook.com
- (15.20.7113.000)
-Content-ID: <D0450E86D33A17408082A13F344749DF@andesone.onmicrosoft.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BE2cFXv010042
+References: <20231207091850.17776-1-ilias.apalodimas@linaro.org>
+ <20231207091850.17776-3-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
+ <20231213201655.GF2513409@bill-the-cat>
+ <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
+ <20231213205634.GK2513409@bill-the-cat>
+ <CAPnjgZ2hV25e1zjrNqKqd-doO9A1L9H58oToDANOSEQr5jwexA@mail.gmail.com>
+ <20231213230545.GM2513409@bill-the-cat>
+In-Reply-To: <20231213230545.GM2513409@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 Dec 2023 20:19:11 -0700
+Message-ID: <CAPnjgZ0L+kVG0DWExwDJXYG5FfObq34LULV=se9T50OvcmhfMw@mail.gmail.com>
+Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
+ nodes are missing
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sean.anderson@seco.com, 
+ neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
+ mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,67 +92,172 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-The following changes since commit 20d0464300c25db673cfb5e4539aa3767606d151:
+On Wed, 13 Dec 2023 at 16:05, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Dec 13, 2023 at 03:22:25PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 13 Dec 2023 at 13:56, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Dec 13, 2023 at 01:41:04PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Wed, 13 Dec 2023 at 13:17, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Dec 13, 2023 at 12:51:33PM -0700, Simon Glass wrote:
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Thu, 7 Dec 2023 at 02:19, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > In order to fill in the SMBIOS tables U-Boot currently relies on a
+> > > > > > > "u-boot,sysinfo-smbios" compatible node.  This is fine for the boards
+> > > > > > > that already include such nodes.  However with some recent EFI changes,
+> > > > > > > the majority of boards can boot up distros, which usually rely on
+> > > > > > > things like dmidecode etc for their reporting.  For boards that
+> > > > > > > lack this special node the SMBIOS output looks like:
+> > > > > > >
+> > > > > > > System Information
+> > > > > > >         Manufacturer: Unknown
+> > > > > > >         Product Name: Unknown
+> > > > > > >         Version: Unknown
+> > > > > > >         Serial Number: Unknown
+> > > > > > >         UUID: Not Settable
+> > > > > > >         Wake-up Type: Reserved
+> > > > > > >         SKU Number: Unknown
+> > > > > > >         Family: Unknown
+> > > > > > >
+> > > > > > > This looks problematic since most of the info are "Unknown".  The DT spec
+> > > > > > > specifies standard properties containing relevant information like
+> > > > > > > 'model' and 'compatible' for which the suggested format is
+> > > > > > > <manufacturer,model>. Unfortunately the 'model' string found in DTs is
+> > > > > > > usually lacking the manufacturer so we can't use it for both
+> > > > > > > 'Manufacturer' and 'Product Name' SMBIOS entries reliably.
+> > > > > > >
+> > > > > > > So let's add a last resort to our current smbios parsing.  If none of
+> > > > > > > the sysinfo properties are found, scan for those information in the
+> > > > > > > root node of the device tree. Use the 'model' to fill the 'Product
+> > > > > > > Name' and the first value of 'compatible' for the 'Manufacturer', since
+> > > > > > > that always contains one.
+> > > > > > >
+> > > > > > > pre-patch:
+> > > > > > > Handle 0x0001, DMI type 1, 27 bytes
+> > > > > > > System Information
+> > > > > > >         Manufacturer: Unknown
+> > > > > > >         Product Name: Unknown
+> > > > > > >         Version: Unknown
+> > > > > > >         Serial Number: 100000000bb24ceb
+> > > > > > >         UUID: 30303031-3030-3030-3061-613234636435
+> > > > > > >         Wake-up Type: Reserved
+> > > > > > >         SKU Number: Unknown
+> > > > > > >         Family: Unknown
+> > > > > > > [...]
+> > > > > > >
+> > > > > > > and post patch:
+> > > > > > > Handle 0x0001, DMI type 1, 27 bytes
+> > > > > > > System Information
+> > > > > > >         Manufacturer: raspberrypi
+> > > > > > >         Product Name: Raspberry Pi 4 Model B Rev 1.1
+> > > > > > >         Version: Unknown
+> > > > > > >         Serial Number: 100000000bb24ceb
+> > > > > > >         UUID: 30303031-3030-3030-3061-613234636435
+> > > > > > >         Wake-up Type: Reserved
+> > > > > > >         SKU Number: Unknown
+> > > > > > >         Family: Unknown
+> > > > > > > [...]
+> > > > > > >
+> > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > ---
+> > > > > > > Simon, I'll work with tou on the refactoring you wanted and
+> > > > > > > remove the EFI requirement of SMBIOS in !x86 platforms.
+> > > > > > > Since this code has no tests, I'll add some once the refactoring
+> > > > > > > is done
+> > > > > > >
+> > > > > > > Changes since v2:
+> > > > > > > - Spelling mistakes
+> > > > > > > - rebase on top of patch #1 changes
+> > > > > > > Changes since v1:
+> > > > > > > - Tokenize the DT node entry and use the appropriate value instead of
+> > > > > > >   the entire string
+> > > > > > > - Removed Peters tested/reviewed-by tags due to the above
+> > > > > > >  lib/smbios.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++---
+> > > > > > >  1 file changed, 89 insertions(+), 5 deletions(-)
+> > > > > >
+> > > > > > Can we add a Kconfig to enable this?
+> > > > >
+> > > > > Why? This is the default option that we want moving forward in order to
+> > > > > get the fields populated.
+> > > >
+> > > > The model name is fine. The manufacturer is in lower case (using the
+> > > > DT vendor name), so not in the right format.
+> > > >
+> > > > It only populates two fields, so far as I can tell.
+> > >
+> > > Maybe we need to turn this discussion on its head slightly. What do you
+> > > want to do to get SMBIOS fields to be widely populated with
+> > > generally-correct information? What we have been doing has seen very
+> > > little adoption so we need something else.
+> >
+> > Well, who or what is actually using this info? Is the problem just
+> > that it doesn't actually matter, so no one bothers? I'm just not sure.
+>
+> Users are using this information. Peter has explained that Fedora has
+> been carrying Ilias' original version of this patch since it was posted
+> so that bug reports say (something close enough and that can be tracked
+> down) what device they're on, rather than "Unknown" / "Unknown Product".
 
-  Merge tag 'u-boot-imx-20231212' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2023-12-12 16:33:57 -0500)
+Unfortunately I failed to get the latest Fedora running on rpi4. Is
+this the only ARM board it supports a download for? (I must be missing
+something)
 
-are available in the Git repository at:
+Anyway, so this presumably requires EFI? If so, this is the kind of
+vertical integration and legacy promotion that really frustrates me.
+If not, then what is the mechanism to supply SMBIOS to user space?
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+I believe we have been here before, too. What program is used to
+collect the bug reports? Is it sos, perhaps?
 
-for you to fetch changes up to 8c785ddb7ae8d675faf558c81a29938cb0ec2b35:
+>
+> > The fact that on ARM you cannot pass it to the kernel without EFI
+> > might be inhibiting its usefulness, too? Usefulness is the key
+> > question for me.
+>
+> I'm setting aside the discussion of how one will tell the kernel where
+> the SMBIOS is, outside of EFI as it's not a U-Boot problem and belongs
+> on other lists.
 
-  riscv: sifive: unmatched: migrate to text environment (2023-12-13 16:19:43 +0800)
+OK, but in my mind this is a concern.
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18889
-----------------------------------------------------------------
-- VisionFive2: Enable CONFIG_SYSRESET
-- StarFive: Modify starfive timer driver
-- AMD/Xilinx: Add MicroBlaze V support
-- Unmatched: Migrate to text environment
-----------------------------------------------------------------
-Jaehoon Chung (2):
-      riscv: dts: jh7110: Add a gpio-restart node
-      configs: visionfive2: Enable CONFIG_SYSRESET config
+>
+> > Anyway, my suggestion (once we understand why we care about SMBIOS
+> > tables) is patches like we just saw from rockpro64, perhaps even with
+> > a few more fields filled out. This series seems like a backup for
+> > board maintainers that don't care, which is fine, but we should at
+> > least be able to disable it.
+>
+> The issue is that this series adds, for free, useful and sufficiently
+> correct information in the common cases. The "for free" is a huge
+> feature too. Drawing on the rockpro64 patch, I would suggest seeing if
+> /version (or /hardware-rev or whatever) is something Rob is interested
+> in adding so it can be something filled out or not and then pulled from
+> DT instead of a new set of DT nodes that look a whole lot like the
+> existing DT nodes and properties that already exist.
 
-Kuan Lim Lee (1):
-      timer: starfive: Add Starfive timer support
+The new DT nodes / SMBIOS binding [1] allows for the correct
+information to be provided, though.
 
-Michal Simek (1):
-      riscv: Add support for AMD/Xilinx MicroBlaze V
+I'm fine with this as a Kconfig option, but it is a hack. It purports
+to provide SMBIOS info but (for both of the two fields it fills in) it
+is not in the correct format. It only works with EFI. If someone comes
+along and adds the proper info for a board, the name will change in
+the bug reports.
 
-Yong-Xuan Wang (1):
-      riscv: sifive: unmatched: migrate to text environment
+Which system-info tool is used? I see that hardinfo records the model
+[2] and produces a sensible name for the compatible string [3].
 
- arch/riscv/Kconfig                               |   4 +
- arch/riscv/dts/Makefile                          |   2 +
- arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi |   5 ++
- arch/riscv/dts/xilinx-mbv32.dts                  | 106 +++++++++++++++++++++++
- board/sifive/unmatched/unmatched.env             |  19 ++++
- board/xilinx/Kconfig                             |   3 +-
- board/xilinx/common/board.c                      |   5 ++
- board/xilinx/mbv/Kconfig                         |  28 ++++++
- board/xilinx/mbv/MAINTAINERS                     |   7 ++
- board/xilinx/mbv/Makefile                        |   5 ++
- board/xilinx/mbv/board.c                         |  11 +++
- configs/sifive_unmatched_defconfig               |   2 +-
- configs/starfive_visionfive2_defconfig           |   1 +
- configs/xilinx_mbv32_defconfig                   |  30 +++++++
- configs/xilinx_mbv32_smode_defconfig             |  32 +++++++
- drivers/timer/starfive-timer.c                   |  16 ++--
- include/configs/sifive-unmatched.h               |  37 --------
- include/configs/xilinx_mbv.h                     |   6 ++
- 18 files changed, 273 insertions(+), 46 deletions(-)
- create mode 100644 arch/riscv/dts/xilinx-mbv32.dts
- create mode 100644 board/sifive/unmatched/unmatched.env
- create mode 100644 board/xilinx/mbv/Kconfig
- create mode 100644 board/xilinx/mbv/MAINTAINERS
- create mode 100644 board/xilinx/mbv/Makefile
- create mode 100644 board/xilinx/mbv/board.c
- create mode 100644 configs/xilinx_mbv32_defconfig
- create mode 100644 configs/xilinx_mbv32_smode_defconfig
- create mode 100644 include/configs/xilinx_mbv.h
+Regards,
+Simon
 
-Best regards,
-Leo
-
+[1] https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/sysinfo/smbios.txt
+[2] https://github.com/lpereira/hardinfo/blob/master/modules/devices.c#L547
+[3] https://github.com/lpereira/hardinfo/blob/master/modules/devices/arm/processor.c#L433
