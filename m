@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFC48C4332F
-	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 12:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3320EC4332F
+	for <u-boot@archiver.kernel.org>; Thu, 14 Dec 2023 12:12:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F32E687A4D;
-	Thu, 14 Dec 2023 13:11:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C1E7B87A70;
+	Thu, 14 Dec 2023 13:11:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="ihugx5Gi";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="jkflWMim";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D1B87A2E; Thu, 14 Dec 2023 13:11:47 +0100 (CET)
+ id 6C1AF87A68; Thu, 14 Dec 2023 13:11:49 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78C1287A64
+ by phobos.denx.de (Postfix) with ESMTPS id 9F84887A70
  for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 13:11:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
@@ -28,20 +28,24 @@ From: Alexander Dahl <ada@thorsis.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  t=1702555903;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
- bh=5tJwttUxbvkn1LSytziFpw9NC6mhuFO0tebTmYan9jQ=;
- b=ihugx5GiOXeOiC19Md2SZAXPN0CzxeIHDZxtnyF9GlOLgk4CmfVEZh77dEcd8K+uR8346Y
- 8wveaQYOZ2c1vS2PGym1rxk66trVksumR3Zc7JVay1xjVEdGwdeHymWzyrE3GUoh8VYX4E
- 9m5Bgj/ZVJCYXpuyBYupeRDD3xr8/sxqLO8iF8xAenDpww2vpGrTJm4vvMBhcg2orJMlEy
- LCGHGFQEW1CIieqYC0WGajZKy7ajF7cX3r+HSFLqsZX8BDyWKKA2e4CKQHGOlSkIKCHaOu
- YtBQ79HPjImtYv2wy5bguqnQuV0wLTXwT+nSnUXjnUvhiO+vZuGwpRDMP89DkA==
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wERgIUvLyXTKOcvM9MGus0RX69APkgydwK8SDkBex3c=;
+ b=jkflWMimPexIRUQ6pyxtktzqSkdTCK59kdpfQJ2FTpsGjL5iHHT7skXZeZQKh/j9hH/Yqc
+ ncVeT1he9nTRKy3feM8lkM54/GW1uWiS6worEPwNefag3SWypG42bm9HmpiKA4UkT83MDy
+ htt8ahi+lGcA2cOMAaQHIKjhvSp2OPq+nvGDWJOO+XPyhblb7YZDlL3bweUHbyv/8d34zH
+ rArkTbJd6+hN25OhiKR+eINJfRfDajrW9dQe8VNK+KkScZw4+jcjCngY6dT5tfC4ImqB4R
+ 6Gk4omj0wzkxxqdwNNqvFSqcB2PXT4CBeTrc0gj+LCV+PY3h1O8BoRZiviVesQ==
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
  Terry Lv <terry.lv@nxp.com>
-Subject: [PATCH v2 0/2] tools: Fix build without host OpenSSL
-Date: Thu, 14 Dec 2023 13:11:34 +0100
-Message-Id: <20231214121136.3286703-1-ada@thorsis.com>
+Subject: [PATCH v2 1/2] tools: kwbimage: Allow disabling build on non-mvebu
+ platforms
+Date: Thu, 14 Dec 2023 13:11:35 +0100
+Message-Id: <20231214121136.3286703-2-ada@thorsis.com>
+In-Reply-To: <20231214121136.3286703-1-ada@thorsis.com>
+References: <20231214121136.3286703-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -59,80 +63,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei hei,
+Some users want to build with CONFIG_TOOLS_LIBCRYPTO disabled, which in
+general is possible for at least some boards.  32-bit mvebu however
+requires kwbimage for building SPL, and kwbimage has a hard dependency
+to host OpenSSL.
 
-every now and then some user wants to build without having to install
-OpenSSL development libraries on the build host for different reasons.
-This is not possible for all boards supported by U-Boot and not for all
-configurations, but at least for some.  And U-Boot has an option for
-that, which currently does not work.
+The new symbol CONFIG_TOOLS_KWBIMAGE allows disabling kwbimage build on
+non-mvebu platforms, and thus building without host libcrypto from
+OpenSSL.
 
-The topic was discussed multiple times and multiple patches were
-proposed to fix things, but to my knowledge none got applied.  I'm aware
-of at least the discussions listed below.
+Based on previous work and discussions, see links below.
 
-This series is based on the work done by Paul-Erwan Rio earlier this
-year, but replacing the first of two patches by a new patch based on two
-older approaches from 2021 and 2022 and the feedback they got.  Because
-of that, I gave it the v2 right away.
-
-I added some notes to both patches for further explanations on my
-decisions.
-
-I tested this with and without libssl-dev installed on a Debian
-GNU/Linux 12 (bookworm) host (amd64 arch), with buildman and the
-following options:
-
-    buildman -b master..mybranch -a '~CONFIG_TOOLS_KWBIMAGE' -a '~CONFIG_TOOLS_LIBCRYPTO' atmel
-
-And with libssl-dev installed this:
-
-    buildman -b master..mybranch atmel
-    buildman -b master..mybranch turris
-
-Building 'turris' without libssl-dev installed fails as expected.
-
-The series solves _my_ immediate problem (building a recent U-Boot for
-an at91 based board _without_ FIT images and/or signing, in a BSP from
-2018 which we can not update, and which does not handle host openssl
-correctly), but I did not investigate other combinations, except those
-listed above.  Test on real hardware was only on our at91 based boards.
-
-Please test and let me know what you think.  I can imagine having CI
-testing builds with and without CONFIG_TOOLS_LIBCRYPTO set might be
-difficult, because building without won't work for every board.  It can
-not, because some boards require it while others don't.
-
-Greets
-Alex
-
-Cc: Marek Vasut <marex@denx.de>
-Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefan Roese <sr@denx.de>
 Link: https://lore.kernel.org/u-boot/20211021093304.25399-1-pali@kernel.org/
 Link: https://lore.kernel.org/u-boot/20220111153120.1276641-1-marex@denx.de/
-Link: https://lore.kernel.org/u-boot/1884029.XjOfZupGQm@ada/
-Link: https://lore.kernel.org/u-boot/20230121154743.667253-1-paulerwan.rio@gmail.com/
-Link: https://lore.kernel.org/u-boot/AM6PR04MB61521B84F78571B282FE1D828FD5A@AM6PR04MB6152.eurprd04.prod.outlook.com/
+Link: https://lore.kernel.org/u-boot/20230121154743.667253-2-paulerwan.rio@gmail.com/
+Cc: Marek Vasut <marex@denx.de>
+Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+---
 
-Alexander Dahl (1):
-  tools: kwbimage: Allow disabling build on non-mvebu platforms
-
-Paul-Erwan Rio (1):
-  tools: fix build without LIBCRYPTO support
+Notes:
+    This is more or less a mashup of the patches of Pali and Marek, but
+    considering the feedback given by Samuel on Pali's patch and considering
+    what I thought was the preferred style in other parts of the Makefile.
+    
+    Link: https://lore.kernel.org/u-boot/f4660467-9d25-dc46-9e60-b2f7f09236c2@sholland.org/
 
  arch/arm/mach-mvebu/Kconfig | 1 +
- include/image.h             | 2 +-
- tools/Kconfig               | 6 ++++++
+ tools/Kconfig               | 5 +++++
  tools/Makefile              | 5 ++++-
- tools/fit_image.c           | 2 +-
- tools/image-host.c          | 4 ++++
- tools/mkimage.c             | 5 +++--
- 7 files changed, 20 insertions(+), 5 deletions(-)
+ 3 files changed, 10 insertions(+), 1 deletion(-)
 
-
-base-commit: 27089f1e4d11fd7e0619097b59258d0428cde2ac
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index c80d8587b14..2058c95ca2d 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -15,6 +15,7 @@ config ARMADA_32BIT
+ 	select SUPPORT_SPL
+ 	select SYS_L2_PL310 if !SYS_L2CACHE_OFF
+ 	select TRANSLATION_OFFSET
++	select TOOLS_KWBIMAGE if SPL
+ 	select SPL_SYS_NO_VECTOR_TABLE if SPL
+ 	select ARCH_VERY_EARLY_INIT
+ 
+diff --git a/tools/Kconfig b/tools/Kconfig
+index 6e23f44d550..f8632cd59d0 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -25,6 +25,11 @@ config TOOLS_LIBCRYPTO
+ 	  This selection does not affect target features, such as runtime FIT
+ 	  signature verification.
+ 
++config TOOLS_KWBIMAGE
++	bool "Enable kwbimage support in host tools"
++	default y
++	select TOOLS_LIBCRYPTO
++
+ config TOOLS_FIT
+ 	def_bool y
+ 	help
+diff --git a/tools/Makefile b/tools/Makefile
+index 1aa1e36137b..fd3b207eb96 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -94,8 +94,11 @@ LIBCRYPTO_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := \
+ 			generated/lib/fdt-libcrypto.o \
+ 			sunxi_toc0.o
+ 
++KWB_IMAGE_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := kwbimage.o
++
+ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
+ 
++
+ # common objs for dumpimage and mkimage
+ dumpimage-mkimage-objs := aisimage.o \
+ 			atmelimage.o \
+@@ -114,7 +117,7 @@ dumpimage-mkimage-objs := aisimage.o \
+ 			imximage.o \
+ 			imx8image.o \
+ 			imx8mimage.o \
+-			kwbimage.o \
++			$(KWB_IMAGE_OBJS-y) \
+ 			generated/lib/md5.o \
+ 			lpc32xximage.o \
+ 			mxsimage.o \
 -- 
 2.39.2
 
