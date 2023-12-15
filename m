@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2BBC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 12:54:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441BEC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:07:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FEF587B24;
-	Fri, 15 Dec 2023 13:54:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 82EA787B88;
+	Fri, 15 Dec 2023 14:07:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UEMUEOl9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QyYQvtBK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F09887B99; Fri, 15 Dec 2023 13:54:53 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 448D287B6F; Fri, 15 Dec 2023 14:07:18 +0100 (CET)
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
+ [IPv6:2607:f8b0:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8368B87B24
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:54:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C7EB87B9E
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:07:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40c339d2b88so6628115e9.3
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 04:54:51 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-5a0dc313058so51864a12.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:07:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1702644891; x=1703249691;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=qcXvOebjJMINlMWcqeUxZXYIiesXif3h5YiqgIddf20=;
- b=UEMUEOl9dIkwnOW+av9p6QS/egFEE+sKoqYcbiEJg3LKnEfVeY6BSTA6IMMUYmJgcf
- TEbjabrOF6dGwDa+Ye+VTgV9CnqLtQwpxHOa81QW93HaqhqqJVuqKZEGqaWl+4P1EXyt
- Qpu/qSTjcGEjxbkelRwYficW40uPA+nQOQc7iyylchGlpTestfM4xKhsPsy43LB0Jhz7
- 4kbUUwnYIW3DsAj9/sDgzzXLgHAZUeizY4H1RY75MO55oLirMBd3n3XwyTUh2/WG3id6
- Fjh5Xf7iLJPlZHzMwhOmkdOhGtoWIOeGDse7KuZgKWe9FooFwGpylOLscsEfMT7Mah5/
- AiAg==
+ d=gmail.com; s=20230601; t=1702645633; x=1703250433; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+b2Ir3GzsOB1yOmrxip/AHulvjWjZT/cvAzisefcISQ=;
+ b=QyYQvtBKzZBOO1zMNLsUTYzgDJWJwxs7AdtBbNC4vnmca8FAnaUeQiZ092EzcF2dBN
+ pcj51KsnrzO1bp8Rk84NVDaYbtlFglxlk2QBv1HFpr+jagqLRJgGIaqmS6A01Y6KHKgk
+ hPZiznD4u4v59HfrRbO8Ofw4372Qms0/XyVvTUueVCD8l+jnloj2QwGjdybxP8qkcPug
+ eu07o2FtddTVX8J2cig5GtkQucMkzaD4RwJSSd2dYmClTP8ZoI6wUQWq1scDubJmfjqd
+ Jzleltho8sagDzcqX4jEgKK8mrnnT2/28qST2SmRUJdyYlvkbHvTSrPnoJxTaI+s22Sr
+ ZPog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702644891; x=1703249691;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qcXvOebjJMINlMWcqeUxZXYIiesXif3h5YiqgIddf20=;
- b=Aq2HnC59mEr1OmgfQbMMvx6yu1utIHbj/64h8AmgbrXs6iXVtaJp3a4i2gq/BVGqYF
- uwOih8D1gZlGz4Cy91gDWAANfxLTkGemdTBNh5TubXjvuWn+nl15TOrKSdc0mbs2Z+BK
- CrBEmRuLv3pWKgfBUoYWt9ofFbySt8cXOy6hO47+QOiUu/iMRYWOJFlhWFtDbyIifzgx
- N8onzbOWI5LB9TJh7wfb7Ebk8kViHyVJ01lKdKgG8QK8jOwrLrPceXUKUUB2Hb0qS7is
- qvbiLEM1vLrqRCw0kJyAtikaMioKZu9k4R0D6W6pAaAVsu+xWx4j9KDsHXMXAvSiup7D
- ioqg==
-X-Gm-Message-State: AOJu0Yxu3x32IgrDD0uae7u58nhe4mFArADEiDJfkPgzgXtVj0FJV8p4
- FHCstoLwgEq1cDvfroYEPgnhqw==
-X-Google-Smtp-Source: AGHT+IF8/9gvDb9eDXVJWc0hPJOqIzWU75xBNAGOlR3FhUofA0wPwLHrRaoOnVwTKXs8Y74pgNwepg==
-X-Received: by 2002:a05:600c:2317:b0:40b:5e94:e2db with SMTP id
- 23-20020a05600c231700b0040b5e94e2dbmr5944053wmo.78.1702644890823; 
- Fri, 15 Dec 2023 04:54:50 -0800 (PST)
-Received: from localhost ([89.207.171.106]) by smtp.gmail.com with ESMTPSA id
- g10-20020a05600c4eca00b0040c11fbe581sm28740280wmq.27.2023.12.15.04.54.50
+ d=1e100.net; s=20230601; t=1702645633; x=1703250433;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+b2Ir3GzsOB1yOmrxip/AHulvjWjZT/cvAzisefcISQ=;
+ b=L9d+Sd2N5wjRIPQzHXlEFXRtYRgN9ZaEY9mzVDAY5haDEInIt9axN1y+FNSywosXwB
+ Fot9Pq0ARLO6tp/0yqdb/PYYqTzlcL0NFUa/TuGxbD5dn9mBSor8pMguEJ77lovKUQ85
+ CpHHiBKhUbRFco+F7zoI4xGPCK8L353IPLM9vKXBN4vF9WTRGRhImwOlSOhHaCtluczn
+ KatuffH3978+rpk6vly+JnTxHBwGrt4oCf4NWoxZ1oF0prK08zBeUpbaM2wHWpB974xX
+ IiTKIvbTgM82FeadA9Cr+zVxlw7q3G1j0CMJpYUOU3lGHgFciQPl0loeMwhKvdxUwHo2
+ PG+g==
+X-Gm-Message-State: AOJu0YwGFev6DrREPUogvDXGQIcXl5V7n8k0t5XSZexgQwUuHtH145wL
+ iXk2dmxO6KuR+QWj5JQ++80=
+X-Google-Smtp-Source: AGHT+IEPtiSykf9vE+Eiqt+E0eRz4bOS+K5eMVVy98JuwpnafRnAdCTRkx0PVgItBbSCQF33sy85jw==
+X-Received: by 2002:a17:90a:88f:b0:28a:e25d:a9da with SMTP id
+ v15-20020a17090a088f00b0028ae25da9damr7591941pjc.3.1702645632634; 
+ Fri, 15 Dec 2023 05:07:12 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:16e1:6184:2e5d:deaa])
+ by smtp.gmail.com with ESMTPSA id
+ in18-20020a17090b439200b0028b041cbef3sm3568226pjb.22.2023.12.15.05.07.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 04:54:50 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH] clk: fix clk_get_rate() always return ulong
-In-Reply-To: <878r5vtzjv.fsf@baylibre.com>
-References: <871qcj5frz.fsf@baylibre.com> <878r5vtzjv.fsf@baylibre.com>
-Date: Fri, 15 Dec 2023 13:54:47 +0100
-Message-ID: <875y0ztylk.fsf@baylibre.com>
+ Fri, 15 Dec 2023 05:07:12 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: sbabic@denx.de, marex@denx.de, tharvey@gateworks.com, u-boot@lists.denx.de
+Subject: Pull request: Please pull u-boot-imx-20231214
+Date: Fri, 15 Dec 2023 10:07:07 -0300
+Message-Id: <20231215130707.184861-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,84 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On ven., d=C3=A9c. 15, 2023 at 13:34, Mattijs Korpershoek <mkorpershoek@bay=
-libre.com> wrote:
+Hi Tom,
 
-> Hi Julien,
->
-> Thank you for the patch.
->
-> On mar., nov. 21, 2023 at 15:42, Julien Masson <jmasson@baylibre.com> wro=
-te:
->
->> When we call clk_get_rate(), we expect to get clock rate value as
->> ulong.
->> In that case we should not use log_ret() macro since it use internally
->> an int.
->
-> This is quite subtle, it only happens when log_reg is enabled via
-> CONFIG_LOG_ERROR_RETURN.
->
->> Otherwise we may return an invalid/truncated clock rate value.
->>
->> Signed-off-by: Julien Masson <jmasson@baylibre.com>
->
-> I'm wondering if there are any other places where this happens,
-> but this change looks good to me.
->
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Please pull these fixes from u-boot-imx, thanks.
 
-Thinking a bit more about this, shouldn't we add some check for
-downcasting in log.h in order to make sure this does not happen in the futu=
-re?
+The following changes since commit 27089f1e4d11fd7e0619097b59258d0428cde2ac:
 
-Something like this should work:
+  Merge branch '2023-12-13-assorted-minor-fixes' (2023-12-13 09:57:28 -0500)
 
-diff --git a/include/log.h b/include/log.h
-index 6e84f080ef3d..20088399617c 100644
---- a/include/log.h
-+++ b/include/log.h
-@@ -332,12 +332,14 @@ void __assert_fail(const char *assertion, const char =
-*file, unsigned int line,
-  * use 4 bytes in rodata
-  */
- #define log_ret(_ret) ({ \
-+       _Static_assert(sizeof(_ret) <=3D sizeof(int), "Cannot log without d=
-owncasting"); \
-        int __ret =3D (_ret); \
-        if (__ret < 0) \
-                log(LOG_CATEGORY, LOGL_ERR, "returning err=3D%d\n", __ret);=
- \
-        __ret; \
-        })
+are available in the Git repository at:
 
-Downcasting just when logs are enabled can be the cause for quite some
-subtle bugs so breaking the build in these cases might be a good
-warning.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-20231214
 
-Any thoughts?
+for you to fetch changes up to 4f7122ca1580602399afc30f94f4b37f79e4d662:
 
->
->> ---
->>  drivers/clk/clk-uclass.c | 6 +-----
->>  1 file changed, 1 insertion(+), 5 deletions(-)
->>
->> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
->> index 3b5e3f9c86..41dcd14be5 100644
->> --- a/drivers/clk/clk-uclass.c
->> +++ b/drivers/clk/clk-uclass.c
->> @@ -488,11 +488,7 @@ ulong clk_get_rate(struct clk *clk)
->>  	if (!ops->get_rate)
->>  		return -ENOSYS;
->>=20=20
->> -	ret =3D ops->get_rate(clk);
->> -	if (ret)
->> -		return log_ret(ret);
->> -
->> -	return 0;
->> +	return ops->get_rate(clk);
->>  }
->>=20=20
->>  struct clk *clk_get_parent(struct clk *clk)
->> --=20
->> 2.41.0
+  imx8mp-venice: update DRAM config for 2000MHz (2023-12-14 15:34:12 -0300)
+
+u-boot-imx-20231214
+-------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/18937
+
+- Fix for i.MX8M Plus eDM SBC DDR timings with inlinc ECC
+- Switch to FPWM mode on Data Modul i.MX8M Plus eDM SBC so that
+DRAM EDAC detects more correctable errors
+- Fix for imx8mp-venice board DDR initialization 
+
+----------------------------------------------------------------
+Marek Vasut (7):
+      arm64: imx8mp: Inhibit DTC warning on DH i.MX8MP DHCOM rev.100 DTO
+      ddr: imx: Handle 3734 in addition to 3733 and 3732 MTps rates
+      ddr: imx: Add 3600 MTps rate support
+      ARM: imx: Enable CAAM on Data Modul i.MX8M Mini/Plus eDM SBC
+      ARM: imx: Enable CAAM on DH i.MX8M Plus DHCOM
+      ARM: imx: Force DRAM regulators into FPWM mode on Data Modul i.MX8M Plus eDM SBC
+      ARM: imx: Update DRAM timings with inline ECC on Data Modul i.MX8M Plus eDM SBC
+
+Tim Harvey (3):
+      board: gateworks: venice: remove extra file
+      imx8mp-venice: fix DRAM bus configuration
+      imx8mp-venice: update DRAM config for 2000MHz
+
+ arch/arm/dts/Makefile                              |    2 +
+ arch/arm/mach-imx/imx8m/clock_imx8mm.c             |    1 +
+ board/data_modul/common/common.c                   |   18 +-
+ .../imx8mp_edm_sbc/lpddr4_timing_4G_32.c           |  175 +-
+ board/data_modul/imx8mp_edm_sbc/spl.c              |    5 +
+ .../gateworks/venice/lpddr4_timing_imx8mm_512mb.c  | 1849 --------------------
+ board/gateworks/venice/lpddr4_timing_imx8mp.c      |  327 ++--
+ configs/imx8mm_data_modul_edm_sbc_defconfig        |    1 +
+ configs/imx8mp_data_modul_edm_sbc_defconfig        |    2 +
+ configs/imx8mp_dhcom_pdk2_defconfig                |    1 +
+ configs/imx8mp_dhcom_pdk3_defconfig                |    1 +
+ drivers/ddr/imx/phy/ddrphy_utils.c                 |    5 +
+ 12 files changed, 301 insertions(+), 2086 deletions(-)
+ delete mode 100644 board/gateworks/venice/lpddr4_timing_imx8mm_512mb.c
