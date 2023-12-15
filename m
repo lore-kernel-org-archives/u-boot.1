@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43494C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:20:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FD2C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:21:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E71287BA0;
-	Fri, 15 Dec 2023 17:20:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DADE87C10;
+	Fri, 15 Dec 2023 17:21:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ixypsilon.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M3YFfUeD";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ixypsilon.net header.i=@ixypsilon.net header.b="HiWl5Mx2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8841187B6E; Fri, 15 Dec 2023 17:20:54 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5D4CE87BE1; Fri, 15 Dec 2023 15:00:24 +0100 (CET)
+Received: from uvw.ixypsilon.net (uvw.ixypsilon.net [81.223.58.118])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 729B987BA0
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:20:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3908D87BDA
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:00:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ixypsilon.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-27fe16e8e02so103087a91.0
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:20:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702657250; x=1703262050; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ma5Orb5s25rHkXVUZNgzqyJhVyy1wJGFif0qGjZ8hXI=;
- b=M3YFfUeD3aIp1T3TSRNTA2EhKq+I7IKJzzfb3y79gs36Q+3FUDOZHnuGzC7snt18F6
- K816NVfat8pPqQyYf5WuFngbby9n8oGSculW0z6ytm06+8Ca52QMGC5vDL00J+YGPexO
- b0aHJ7ft8pc5sXDYaaiE1FyJXOAf45Y6OtgmGRMz/AYgl8Bz8mO0xyhqBe1n2UZ6PG3R
- WQbwZMEXt4NX+SDFzPlgDecrhTRj9hTe+3H8GgPf8/eVvZ7xPaIofKE3audA6ux2poPO
- YUkyUnTRaKLQCYlzJ5g+Dr5dLKKONr+f0+bcHi+B+8KMzHHTvb9u/yfQhZpPY5Cl+5EM
- QmnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702657250; x=1703262050;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ma5Orb5s25rHkXVUZNgzqyJhVyy1wJGFif0qGjZ8hXI=;
- b=jUu6RvVEbzqUciFDqwzAT1CvpY/HpF6WjjI9HpLGCp+InoqHM6hWvPwCuwduPFXvCU
- BznxYR08yv3i1ImczH/r9uN3ACEEWhi7CF4ZUzM9fALtA6ke4YNOjW9VztOgvpHJ2TQ6
- aSwrDhoZA8B3phlOvpC//MUvnYNKMCzBoU7tSMHm9Ax8xh2WLtrLYrvRMqU4mHdytsoc
- k9gihNC1fnFH/j9TM+hEMltLdUU2u/yhgH1IQdZs8R7ayvN10YQM9b3CEOwhBoY80zOd
- wyMjJZVmvlMtGpEHN165TpbIewdkg9q75mXHlKom0PxqvqTPtj+2sBfCBcexHSZnSgm9
- vhPA==
-X-Gm-Message-State: AOJu0Yx44s2Tq66eXP1rrSr8vKej7YBACDAXyvwq2hD+797EjeY3z2gE
- pe86XervC3lkrGsgOYA+FhLlHv9d1plhYsCQVx8=
-X-Google-Smtp-Source: AGHT+IFPtHWM//LEpRSTCGMELJx0rjXn+oztbfZizNBe6M5FyI1/0wC2zzGydfwqLBwLxcbTINgyM/N0qEL/0yDHhdc=
-X-Received: by 2002:a17:90a:b286:b0:286:dfae:32f6 with SMTP id
- c6-20020a17090ab28600b00286dfae32f6mr19960005pjr.1.1702657249685; Fri, 15 Dec
- 2023 08:20:49 -0800 (PST)
+ spf=pass smtp.mailfrom=stefan.nagy@ixypsilon.net
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ixypsilon.net; s=20210903; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cHgViL9urankaoCbzQ4g9W2hBZNg/6l4UexROkaWHiM=; t=1702648822; x=1703858422; 
+ b=HiWl5Mx21geLQdHSf0WT38Hkh+3KOw9tx6CxqIuIajUvQ2FuUSRc4s34RYeGvybkAuNOo6kQGSI
+ fPYGkoWI/+nEWmWqJhIowj+ZFoc00GWzdb3dExJcxalRigb+iTJWC8XOMEF579/GB8XphqKOlQMUI
+ IozVGG7SX6fmCfg+uh/ltXhTCHRHWceDf0MKlV5NeFin/lkWERVBa/+jOG3tPEtXIrrPLIL97Bo3V
+ Ah8iN2O8GjxT0waSoX4Pba/2SEt9tZLCXtir2CIAx20ADsJSC0xnCCBMo0BX8kUK3wq1BVTyYkF8y
+ RiF20fmNRWET0l14sIBCOAUmRV6DPQb+VhaQ==;
+Received: from [192.168.0.1] (helo=librem14.Hitronhub.home)
+ by uvw.ixypsilon.net with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <stefan.nagy@ixypsilon.net>) id 1rE8ji-0007Dl-2M;
+ Fri, 15 Dec 2023 15:00:20 +0100
+From: Stefan Nagy <stefan.nagy@ixypsilon.net>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Subject: [PATCH] rock-pi-4: Enable SPI flash
+Date: Fri, 15 Dec 2023 15:00:15 +0100
+Message-Id: <20231215140015.13671-1-stefan.nagy@ixypsilon.net>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-References: <20220830174932.96360-1-alan@londelec.com>
- <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
- <20231009094924.56042353@wsk>
- <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
-In-Reply-To: <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 15 Dec 2023 13:20:37 -0300
-Message-ID: <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
-Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
- from DCDC_BATT without 5V
-To: Alan Kay <alan@londelec.com>
-Cc: Lukasz Majewski <lukma@denx.de>, cody@londelec.com,
- Stefano Babic <sbabic@denx.de>, 
- Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Spam_score: -1.0
+X-Mailman-Approved-At: Fri, 15 Dec 2023 17:21:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,18 +69,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alan and Cody,
+The ROCK Pi 4A/B/C boards come with a 32 Mbit SPI NOR flash chip
+(XTX Technology Limited XT25F32).
 
-On Mon, Oct 9, 2023 at 9:45=E2=80=AFAM Alan Kay <alan@londelec.com> wrote:
+Sync the devicetrees from Linux to enable spi1 and add a device
+node for the NOR flash chip. In the board's defconfig files enable
+the Rockchip SPI driver, add XTX SPI flash support and set the
+SPI flash default bus identifier.
 
-> The patch:
-> https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47=
-b31976b18cac4
-> does fix the issue, please feel free to discard my patch, thank you.
+This patch has been tested on ROCK Pi 4A.
 
-Ok, what about the patch below?
+Signed-off-by: Stefan Nagy <stefan.nagy@ixypsilon.net>
+---
+ arch/arm/dts/rk3399-rock-pi-4a.dts  | 10 ++++++++++
+ arch/arm/dts/rk3399-rock-pi-4c.dts  | 10 ++++++++++
+ configs/rock-pi-4-rk3399_defconfig  |  3 +++
+ configs/rock-pi-4c-rk3399_defconfig |  3 +++
+ 4 files changed, 26 insertions(+)
 
-https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-cody=
-@londelec.com/
+diff --git a/arch/arm/dts/rk3399-rock-pi-4a.dts b/arch/arm/dts/rk3399-rock-pi-4a.dts
+index 931334aa..d5df8939 100644
+--- a/arch/arm/dts/rk3399-rock-pi-4a.dts
++++ b/arch/arm/dts/rk3399-rock-pi-4a.dts
+@@ -12,3 +12,13 @@
+ 	model = "Radxa ROCK Pi 4A";
+ 	compatible = "radxa,rockpi4a", "radxa,rockpi4", "rockchip,rk3399";
+ };
++
++&spi1 {
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <10000000>;
++	};
++};
+diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts b/arch/arm/dts/rk3399-rock-pi-4c.dts
+index d32efab7..de2ebe4c 100644
+--- a/arch/arm/dts/rk3399-rock-pi-4c.dts
++++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
+@@ -43,6 +43,16 @@
+ 	hp-det-gpio = <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
+ };
+ 
++&spi1 {
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		spi-max-frequency = <10000000>;
++	};
++};
++
+ &uart0 {
+ 	status = "okay";
+ 
+diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
+index 84e0dcf0..c45a8c04 100644
+--- a/configs/rock-pi-4-rk3399_defconfig
++++ b/configs/rock-pi-4-rk3399_defconfig
+@@ -61,6 +61,8 @@ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=1
++CONFIG_SPI_FLASH_XTX=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
+ CONFIG_NVME_PCI=y
+@@ -74,6 +76,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SPI=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
+index 5c9fb147..1ca19b4e 100644
+--- a/configs/rock-pi-4c-rk3399_defconfig
++++ b/configs/rock-pi-4c-rk3399_defconfig
+@@ -58,6 +58,8 @@ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=1
++CONFIG_SPI_FLASH_XTX=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
+ CONFIG_NVME_PCI=y
+@@ -71,6 +73,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SPI=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+-- 
+2.30.2
 
-Is this still needed?
