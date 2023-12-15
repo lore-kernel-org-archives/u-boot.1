@@ -4,70 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0FCC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 17:53:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC5DFC4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 18:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AFDF87C30;
-	Fri, 15 Dec 2023 18:53:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E499B87BD5;
+	Fri, 15 Dec 2023 19:26:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m08apf44";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="pA5T1/Jo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5168487C36; Fri, 15 Dec 2023 18:53:43 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 23CE387BDC; Fri, 15 Dec 2023 19:26:24 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E62C87BFC
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 18:53:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB19287BD4
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:26:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a1e2f34467aso78310166b.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 09:53:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702662820; x=1703267620; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QLkqVT8m2OC4MJ2UCuHuoY/ltwY+JoMYufFC+/4ANBg=;
- b=m08apf44B4GEazAcLCkb2rwjk0xkAhEpWF5cu8BHKsS1iLcxEgZYBaga+/HxP39oNw
- MN8uPsJzjUKERn0NucmnZpCEO8eQjs+SkwisvfmcfMqYi7ae2uvQGf4mm2osv1k+WJh5
- kWRWsiQQTP5Yu1l0aGaQjU9lD5rePM+kzhW34=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702662820; x=1703267620;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QLkqVT8m2OC4MJ2UCuHuoY/ltwY+JoMYufFC+/4ANBg=;
- b=d7SHsdI8OOEdzMeFq2d/7/gsBsxQcopERfQE6Knpx+ZxbySnniivNkxPKrflvnrkk6
- 7RM+K2FUYorhLSK/ojROprwETvye/+HQ62uZ5Z2pQ405bcB9Wqh2mTvaMoSsVoK/QP9l
- Mb6uw+HaZCSFQ1Vhxket/IWJHK+t1y68Jk2tltZOtFmf+yyEr3yaiqAfXpHum9JyKKoQ
- R7cMwH9NmSX4eTPvoMMKMmyPvMEJ9xaKE/8XPSdTINmjrMq9VVoOvgdM7hspOG5yxDXj
- f0jpVjzWi0R6AlSQ49WIUgFDM5m9hFNeTxx8E3TieOcMHW0ZSXI4RlDDktJ+/ThkQm3F
- mTfA==
-X-Gm-Message-State: AOJu0YzYIbkBb+rHiOKHHSad/XhB4TYUnLDc4aqyRzZK4JiIHpfI4uFB
- 4jCanzIRygMko+neB7HldYVj1iv2XdV3oMvwrhk1Cg==
-X-Google-Smtp-Source: AGHT+IFUdP20LOGwKWwhXZRGbNgoDoISYRivZpBtKB7eeTZ9vRzuw+ry9bkbyJQ0a667v/E4WUI3aO9gHfa7mbcyyyk=
-X-Received: by 2002:a17:906:d970:b0:a09:7c04:461f with SMTP id
- rp16-20020a170906d97000b00a097c04461fmr7289873ejb.65.1702662819981; Fri, 15
- Dec 2023 09:53:39 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <LO2P265MB2605C61E483A315CC62D1DCFDB8DA@LO2P265MB2605.GBRP265.PROD.OUTLOOK.COM>
- <CAPnjgZ37QpGjJHevWDF_N=eNUKNL5TguewG-y7JMNuDkss2o2g@mail.gmail.com>
- <LO2P265MB26056606FC59BFEDCDE78DA1DB93A@LO2P265MB2605.GBRP265.PROD.OUTLOOK.COM>
-In-Reply-To: <LO2P265MB26056606FC59BFEDCDE78DA1DB93A@LO2P265MB2605.GBRP265.PROD.OUTLOOK.COM>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 15 Dec 2023 10:53:22 -0700
-Message-ID: <CAPnjgZ21WgxARj2f6M8_HpWMceF+Xg1=H0fA5=9SWYH0qn7ZXA@mail.gmail.com>
-Subject: Re: whitelist commands
-To: Thomas McCann <Tmccann@drumgrange.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1702664781;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=CRLsqQR5+wuAn3/7Ss7XANhVinSshd8kY7FOnclfEZs=;
+ b=pA5T1/JoSVplyvy0wL1+kljZi+jESM9e39tm2whimYp07PxtY3m8k6xPkSw6iNoSzLSNmQ
+ XuN+rXLiCl+wtUjsln6pMjwhMy4lv6VNfvEIBLAh3M8SFJjpW+Vcwi6LSTtA5+M5J4+Gb2
+ 0/ky0TUXh5GEz+EzbhR9xTuHbjZL7ugS8pJE9wQUWf3b4Xvdpxdx5c6ZeeQ2eylLLVQ2/+
+ dkI5kaf7D7HCV30eNUfOORqdD9/QHCyviSo1pahuKgg/Zr784ET9fjXHO5+pEt9MeduoXu
+ gGmCsSzgc8MqsBaf4kQf3fC1lOxfGgKiH9/L0fcdvaVdpFncRnXfhQDVdVbArA==
+Date: Fri, 15 Dec 2023 19:26:21 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Stefan Nagy <stefan.nagy@ixypsilon.net>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [PATCH] rock-pi-4: Enable SPI flash
+In-Reply-To: <20231215140015.13671-1-stefan.nagy@ixypsilon.net>
+References: <20231215140015.13671-1-stefan.nagy@ixypsilon.net>
+Message-ID: <8bf532f00e9713b410ebb0d80d765357@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,106 +68,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thomas,
+On 2023-12-15 15:00, Stefan Nagy wrote:
+> The ROCK Pi 4A/B/C boards come with a 32 Mbit SPI NOR flash chip
+> (XTX Technology Limited XT25F32).
+> 
+> Sync the devicetrees from Linux to enable spi1 and add a device
+> node for the NOR flash chip. In the board's defconfig files enable
+> the Rockchip SPI driver, add XTX SPI flash support and set the
+> SPI flash default bus identifier.
+> 
+> This patch has been tested on ROCK Pi 4A.
+> 
+> Signed-off-by: Stefan Nagy <stefan.nagy@ixypsilon.net>
+> ---
+>  arch/arm/dts/rk3399-rock-pi-4a.dts  | 10 ++++++++++
+>  arch/arm/dts/rk3399-rock-pi-4c.dts  | 10 ++++++++++
+>  configs/rock-pi-4-rk3399_defconfig  |  3 +++
+>  configs/rock-pi-4c-rk3399_defconfig |  3 +++
+>  4 files changed, 26 insertions(+)
+> 
+> diff --git a/arch/arm/dts/rk3399-rock-pi-4a.dts
+> b/arch/arm/dts/rk3399-rock-pi-4a.dts
+> index 931334aa..d5df8939 100644
+> --- a/arch/arm/dts/rk3399-rock-pi-4a.dts
+> +++ b/arch/arm/dts/rk3399-rock-pi-4a.dts
+> @@ -12,3 +12,13 @@
+>  	model = "Radxa ROCK Pi 4A";
+>  	compatible = "radxa,rockpi4a", "radxa,rockpi4", "rockchip,rk3399";
+>  };
+> +
+> +&spi1 {
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <10000000>;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> index d32efab7..de2ebe4c 100644
+> --- a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> +++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> @@ -43,6 +43,16 @@
+>  	hp-det-gpio = <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
+>  };
+> 
+> +&spi1 {
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <10000000>;
+> +	};
+> +};
+> +
+>  &uart0 {
+>  	status = "okay";
+> 
+> diff --git a/configs/rock-pi-4-rk3399_defconfig
+> b/configs/rock-pi-4-rk3399_defconfig
+> index 84e0dcf0..c45a8c04 100644
+> --- a/configs/rock-pi-4-rk3399_defconfig
+> +++ b/configs/rock-pi-4-rk3399_defconfig
+> @@ -61,6 +61,8 @@ CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SPI_FLASH_XTX=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -74,6 +76,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>  CONFIG_BAUDRATE=1500000
+>  CONFIG_DEBUG_UART_SHIFT=2
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
+> diff --git a/configs/rock-pi-4c-rk3399_defconfig
+> b/configs/rock-pi-4c-rk3399_defconfig
+> index 5c9fb147..1ca19b4e 100644
+> --- a/configs/rock-pi-4c-rk3399_defconfig
+> +++ b/configs/rock-pi-4c-rk3399_defconfig
+> @@ -58,6 +58,8 @@ CONFIG_MMC_DW=y
+>  CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SPI_FLASH_XTX=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -71,6 +73,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+>  CONFIG_BAUDRATE=1500000
+>  CONFIG_DEBUG_UART_SHIFT=2
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
 
-On Fri, 15 Dec 2023 at 02:12, Thomas McCann <Tmccann@drumgrange.com> wrote:
->
-> Hello Simon,
->
-> Firstly my apologies I very new to U-Boot and just trying to make sense o=
-f it all. My chip currently does not boot because the commands "bootelf" co=
-mmend is not whitelisted.
-> My question was two-fold really, it the whitelisting done by u-boot or is=
- specified in the device tree?
-> How does one modify the u-boot boot.scr so that I can boot my device to n=
-ot use bootelf?
+Perhaps it would be better to wait a bit until your patch for the Linux 
+kernel [1] is accepted, and then have the updated spi-max-frequency 
+values synced back to U-Boot in the v2 of this patch.
 
-Please can you keep the ML copied with replies? (and BTW we try to add
-posts to the bottom)
-
-To find this:
-- look up do_bootelf()   (~all commands start with do_ and end with
-the command name)
-- this is in cmd/elf.c
-- then look up cmd/Makefile to see where elf.o is enabled:
-obj-$(CONFIG_CMD_ELF) +=3D elf.o
-- then look up cmd/Kconfig to see 'config CMD_ELF'
-
-So probably your board has CMD_ELF disabled. It is enabled by default,
-so perhaps you have '# CONFIG_CMD_ELF is not set' in the
-config_xxx_defconfig for your board? If you remove that, then the
-command should be enabled. You can check using 'make menuconfig' or by
-using grep on the .config file produced.
-
-Regards,
-Simon
-
-
->
->
-> Yours sincerely,
->
-> Thomas McCann | Software Engineer
->
-> -----Original Message-----
-> From: Simon Glass <sjg@chromium.org>
-> Sent: Wednesday, December 13, 2023 7:50 PM
-> To: Thomas McCann <Tmccann@drumgrange.com>
-> Cc: u-boot@lists.denx.de
-> Subject: Re: whitelist commands
->
-> CAUTION: This email originated from outside the organisation, do not clic=
-k links or open attachments unless you recognise the sender and know the co=
-ntent is safe. Forward this email to it@drumgrange.com<mailto:IT@drumgrange=
-.com> if you believe it is suspicious.
->
-> Hi Thomas,
->
-> On Wed, 13 Dec 2023 at 07:29, Thomas McCann <Tmccann@drumgrange.com> wrot=
-e:
-> >
-> > How do I add commands to the whitelist.
->
-> Which whitelist are you referring to? I am not aware of one for commands.
->
-> Regards,
-> Simon
->
->
-> >
-> >
-> > Yours sincerely,
-> >
-> > [cid:image001.png@01DA2DCD.383194D0]<http://www.drumgrange.com/>
-> >
-> > Thomas McCann
-> > Software Engineer
-> > =F0=9F=93=A7 Tmccann@drumgrange.com
-> >
-> > [cid:image002.png@01DA2DCD.383194D0]<https://linkedin.com/company/drum
-> > grange-ltd>[cid:image003.png@01DA2DCD.383194D0]<https://www.adsgroup.o
-> > rg.uk/about/>. [cid:image004.png@01DA2DCD.383194D0]
-> > <https://hellios.com/joscar/> . [cid:image005.png@01DA2DCD.383194D0]
-> > <https://www.cyberaware.gov.uk/cyberessentials/>
-> > ..[cid:image006.jpg@01DA2DCD.383194D0]<https://www.drumgrange.com/abou
-> > t-us/armed-forces-corporate-covenant/>
-> >
-> > .
-> > Drumgrange is recruiting! For more information, click
-> > here.<https://www.drumgrange.com/careers/>
-> > .
-> >
-> > =F0=9F=8C=B2  Please consider the environment before printing this e-ma=
-il This
-> > communication may contain information which is subject to UK Export Con=
-trol Law, commercial-in-confidence and/or legally privileged and is intende=
-d only for the addressee named above. If you are not the named addressee, t=
-he communication has been sent to you in error. Any copying, distribution o=
-r other use of the information is strictly prohibited. Please note we do no=
-t accept liability for any viruses which may be transmitted in or with this=
- message.
-> >
-> > Drumgrange Ltd. is a company registered in England and Wales with compa=
-ny registration number 1460044 Registered office address. Drumgrange Ltd. U=
-nit A, The Forum, Hanworth Lane, Chertsey, Surrey, KT16 9JX.
-> >
+[1] 
+https://lore.kernel.org/linux-rockchip/4fce0de996d6cc3056d972cd3fc3fb93@manjaro.org/T/#m0621f671c597a4c0138b27bfc6fa3a16f82b721f
