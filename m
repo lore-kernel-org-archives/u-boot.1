@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 765E8C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 11:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 907D5C35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 12:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62AD8784E;
-	Fri, 15 Dec 2023 12:58:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id EEFCE87B7F;
+	Fri, 15 Dec 2023 13:01:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dBpZV+8O";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="uYWkRg5k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25BE987A8C; Fri, 15 Dec 2023 12:58:07 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6A1B487B84; Fri, 15 Dec 2023 13:01:19 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAC868782F
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:58:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52E3687B7C
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:01:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0713fbabb1=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3BF9hv5X018594; Fri, 15 Dec 2023 12:58:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=n4JCG+nxJsygtROkWxYjTijXeNsI8zsKB4TLL0KQ/8U=; b=dB
- pZV+8ODtjO3YT6MmTNtBv39LnvHMMnNuR1Qdq2V/r0koSW/+zer+uBapajWBSUTW
- z4YBvqCsoxW7BJfnmKe4R93rzV1hJzqDZm8HPyZFiELQFF7dHDXgTGH1ms2JuKqL
- /LueBtBPD+xMkcLisUXDJ6ugmJXOTh6WG3ifcHw/kCUNZeZCEXCEoYtWW3Q9A8TN
- Q3KDgaYjwuMHf0Cg0JuB/63WEmMNB4ldXlSSaa3IrIbC8pe3cgPeqGavbCSD1CHm
- ME4bu7SCXJd9MQNT8QSceZdyUW4WmRUvn0+G80bLIPh8uxw9RRIoiMRZAPKpWprt
- p8h1bnPBobCDTM+xcZ1A==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uyb2k9jnd-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 12:58:01 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8021C100052;
- Fri, 15 Dec 2023 12:58:00 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 772BE215BFD;
- Fri, 15 Dec 2023 12:58:00 +0100 (CET)
-Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 12:57:59 +0100
-Message-ID: <d6c9f0fa-863f-4e21-8a6e-d16b982ff5b7@foss.st.com>
-Date: Fri, 15 Dec 2023 12:57:58 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 20/21] stm32: Use bootm_run() and bootz_run()
-Content-Language: en-US
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40c2a444311so5984425e9.2
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 04:01:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1702641677; x=1703246477;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wHaiUwnSvhBfw3lIYLX9CkfYB5vCCz9w23aBg0p0hKg=;
+ b=uYWkRg5kITmcHC579OssA3HJK8qTvzif42NDc8Nh//6reuKM5ZN3dvPMmRqDgRjfOJ
+ ZRSDr8Iyyec5JLmBWAamEBkYsTsmaCEdjfHJH6wNaxVW3EPEvyVASrYBxv7G6mCB92hu
+ CCYwd3DNVivNKcKRJwBlW9ukKF/psGH2wG237fbR6CBqd3zpiXMluz6SB8mEA82OEAnx
+ JgsW/xjFTCxCf9H4xCLRHv+uWl++ars2rQAsvD+3XEh1w3hxKE70APu/l+t55tG0FuPf
+ yj2dPEMv2kzR+NHCz9nbLAnWlM1C2ignlMad8ePIBoAZv5JuLWvhstlG6B1Dyd34E2Bn
+ AycA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702641677; x=1703246477;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wHaiUwnSvhBfw3lIYLX9CkfYB5vCCz9w23aBg0p0hKg=;
+ b=ReuTnYop1Rl3eWzN+loJNgViqdzLlNNeNbK6eWTfC8eeM5UTSuZA+lPsdYTfP0U9HP
+ N3a3K7AQN7zLUCX3amOWPV6gY99yth50DCKWYYhDLXbT1/0bHy2Ql4VaJ56ZsDqNYv+e
+ 5E/HMLMsELRpgTv916V6l/BR8ZS/M2pi2Kmz3QuydhHy36ygJPdmhPMqPH1weD9eyfrX
+ PiS8ffpkUa+FbqJuEOiygBogCdjLnwURhkBnqhgZabk7o/rCNMGVoDyyLnagMfmMAfhX
+ Ar41YO5Ajwa2SyAzR+AMsfxfT336DwGqlLQtH5bHKGH0YPWDr9tyqMya5Rt2+WhnLwwd
+ WGTQ==
+X-Gm-Message-State: AOJu0Yx3ENMHAwl0/mXy/UEu+Hym2QcnfBQxNFH30KJ9RmkRvj9Cktlg
+ 4gtcpldVejHprpUT4f76khb+TbVBHyy0+G3j9ok=
+X-Google-Smtp-Source: AGHT+IHRQWJg0riMn+5YboyQ28i8RNhZs3ggg5Q1x8R/WqFXOCpZFnn2LKW/u4lX81NZIbCLn+3/dQ==
+X-Received: by 2002:a05:600c:4eca:b0:40c:6137:b27c with SMTP id
+ g10-20020a05600c4eca00b0040c6137b27cmr769421wmq.109.1702641676705; 
+ Fri, 15 Dec 2023 04:01:16 -0800 (PST)
+Received: from localhost ([89.207.171.106]) by smtp.gmail.com with ESMTPSA id
+ fm14-20020a05600c0c0e00b00407b93d8085sm31200034wmb.27.2023.12.15.04.01.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 04:01:16 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Sean Anderson <sean.anderson@seco.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Eddie
+ James <eajames@linux.ibm.com>, Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH v2 06/21] bootm: Adjust how the board is reset
+In-Reply-To: <20231214165112.2182274-2-sjg@chromium.org>
 References: <20231214165112.2182274-1-sjg@chromium.org>
- <20231214165112.2182274-16-sjg@chromium.org>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20231214165112.2182274-16-sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.22.165]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-15_06,2023-12-14_01,2023-05-22_02
+ <20231214165112.2182274-2-sjg@chromium.org>
+Date: Fri, 15 Dec 2023 13:01:13 +0100
+Message-ID: <87le9vu12u.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,84 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-On 12/14/23 17:50, Simon Glass wrote:
-> Use the new bootm/z_run() functions to avoid having to create an
-> argument list for the stm32prog code.
+Thank you for your patch.
+
+On jeu., d=C3=A9c. 14, 2023 at 09:50, Simon Glass <sjg@chromium.org> wrote:
+
+> Use reset_cpu() to reset the board, copying the logic from the 'reset'
+> command. This makes more sense than directly calling the do_reset()
+> function with the arguments passsed to the bootm command.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 > ---
 >
 > (no changes since v1)
 >
->   .../cmd_stm32prog/cmd_stm32prog.c             | 20 ++++++++++---------
->   1 file changed, 11 insertions(+), 9 deletions(-)
+>  boot/bootm.c | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
 >
-> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> index 8670535844d3..3ed393b7199f 100644
-> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> @@ -4,6 +4,7 @@
->    */
->   
->   #include <common.h>
-> +#include <bootm.h>
->   #include <command.h>
->   #include <dfu.h>
->   #include <image.h>
-> @@ -125,12 +126,10 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
->   		char dtb_addr[20];
->   		char initrd_addr[40];
->   		char *fdt_arg, *initrd_arg;
-> -		char *bootm_argv[5] = {
-> -			"bootm", boot_addr_start,
-> -		};
->   		const void *uimage = (void *)data->uimage;
->   		const void *dtb = (void *)data->dtb;
->   		const void *initrd = (void *)data->initrd;
-> +		struct bootm_info bmi;
->   
->   		fdt_arg = dtb_addr;
->   		if (!dtb)
-> @@ -141,7 +140,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
->   		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
->   			 "0x%p", uimage);
->   
-> -		initrd_arg = "-";
-> +		initrd_arg = NULL;
->   		if (initrd) {
->   			snprintf(initrd_addr, sizeof(initrd_addr) - 1,
->   				 "0x%p:0x%zx", initrd, data->initrd_size);
-> @@ -149,15 +148,18 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
->   		}
->   
->   		printf("Booting kernel at %s %s %s...\n\n\n", boot_addr_start,
-> -		       initrd_arg, fdt_arg);
-> -		bootm_argv[2] = initrd_arg;
-> -		bootm_argv[3] = fdt_arg;
-> +		       initrd_arg ?: "-", fdt_arg);
-> +
-> +		bootm_init(&bmi);
-> +		bmi.addr_fit = boot_addr_start;
-> +		bmi.conf_ramdisk = initrd_arg;
-> +		bmi.conf_fdt = fdt_arg;
->   
->   		/* Try bootm for legacy and FIT format image */
->   		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
-> -			do_bootm(cmdtp, 0, 4, bootm_argv);
-> +			bootm_run(&bmi);
->   		else if (IS_ENABLED(CONFIG_CMD_BOOTZ))
-> -			do_bootz(cmdtp, 0, 4, bootm_argv);
-> +			bootz_run(&bmi);
->   	}
->   	if (data->script)
->   		cmd_source_script(data->script, NULL, NULL);
-
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
-
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index 301cfded05cb..8a0dba5074e8 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -1140,10 +1140,12 @@ err:
+>  	if (iflag)
+>  		enable_interrupts();
+>=20=20
+> -	if (ret =3D=3D BOOTM_ERR_UNIMPLEMENTED)
+> +	if (ret =3D=3D BOOTM_ERR_UNIMPLEMENTED) {
+>  		bootstage_error(BOOTSTAGE_ID_DECOMP_UNIMPL);
+> -	else if (ret =3D=3D BOOTM_ERR_RESET)
+> -		do_reset(cmdtp, flag, argc, argv);
+> +	} else if (ret =3D=3D BOOTM_ERR_RESET) {
+> +		printf("Resetting the board...\n");
+> +		reset_cpu();
+> +	}
+>=20=20
+>  	return ret;
+>  }
+> --=20
+> 2.43.0.472.g3155946c3a-goog
