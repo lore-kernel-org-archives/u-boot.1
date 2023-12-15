@@ -4,119 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D05C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 07:54:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D78CC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 08:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7B21875B9;
-	Fri, 15 Dec 2023 08:54:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 320D28767B;
+	Fri, 15 Dec 2023 09:15:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SF23ycaf";
+	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="qrPd6nsx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F185E87B4C; Fri, 15 Dec 2023 08:54:46 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 97EF787AE6; Fri, 15 Dec 2023 09:15:11 +0100 (CET)
+Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6AC9875B9
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:54:44 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-40c317723a8so4436305e9.3
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 23:54:44 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6A40875B9
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 09:15:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=matthias.schiffer@ew.tq-group.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702626884; x=1703231684; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=1aZoud8po6wsnTFFTJ6fgKtd417sEG0xWSU5s6TbLfE=;
- b=SF23ycafQvc6c2gMBWMwvCyAnx+rSQJ4JsB/bP3OfYplC0PSLcIRLOWGFjWk5CfTJO
- /IkdbhIc/kV4h4qbV4EY9n/rSIhxa+1iWVFORNtOtClEJMSIbeb9PIZG794paTV/AFJ6
- tM5d1VrfkNMHk4Le4Dx8AUWrA+TC1hr55VAXllIfn9VbmotF+ODsH0BtIbofXjTqMx/h
- 38HYR64/eBw2vdmG8cj+lXpMSiRtb17r9/eAHQ7l7RsDy1D332hjul13hL0vBR6wzV1Q
- TRDNg8LGlVi1lDzHcp1MEavVEf/dOb6nHKaSgZetelb0lSQw33xeWzENXMl2wGIlWKfz
- uP5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702626884; x=1703231684;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=1aZoud8po6wsnTFFTJ6fgKtd417sEG0xWSU5s6TbLfE=;
- b=V9qtQyrL0fv5yZQJvDhSAdyhROSfsAyvpWxghrsIp8gBBCcQMTA0/OZfLLeQfZFZ2S
- ACT5SJEfxUPDMwvzpiEvMClcPGcg2pSG2O+4PlX2S4ZyRJ5CUDE3yfnTFI4DEfz2EYMY
- RDE9zqiARy/RfnFfWiKVxbKaTYxNYEIZFZuNVIP6JJhOO11MXXBZGJz506kl7MTrPYF4
- P3k0lk5TDUnwyyRhCOauoolUljDC9AGA4BburMqx5VNsep6KCv/MzaPAPals1eQcAZPE
- Bt+UoLiGawHJ/r97WriOH0mIUAh76olUvhK2a5pmejDd/QLSfrKqVyso/PO/fooEW9aA
- zg7w==
-X-Gm-Message-State: AOJu0YyNw9uthaLLKC8XK6//qmfg9etrT9FmkG7l66JAdTNIkhkzrkdq
- sDnQD7a/c5wuzgA5esTtCTuo/A==
-X-Google-Smtp-Source: AGHT+IG3vAKpFAHsymcwWdJLdgUj+glrOzRYngCe2TjV1BolAPHyLmbdOvI5pKbavxLaj1lx1IgyDQ==
-X-Received: by 2002:a7b:c407:0:b0:40c:32b5:d38d with SMTP id
- k7-20020a7bc407000000b0040c32b5d38dmr5394448wmi.147.1702626884197; 
- Thu, 14 Dec 2023 23:54:44 -0800 (PST)
-Received: from ?IPV6:2a0d:e487:115f:e549:fc61:d8:ed51:fc0d?
- ([2a0d:e487:115f:e549:fc61:d8:ed51:fc0d])
- by smtp.gmail.com with ESMTPSA id
- m16-20020a05600c4f5000b0040c57e4ea28sm11348948wmq.17.2023.12.14.23.54.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Dec 2023 23:54:43 -0800 (PST)
-Message-ID: <df272f79-fc39-4a99-8a51-302d829c920e@linaro.org>
-Date: Fri, 15 Dec 2023 08:54:34 +0100
+ d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
+ t=1702628106; x=1734164106;
+ h=message-id:subject:from:to:cc:date:in-reply-to:
+ references:content-transfer-encoding:mime-version;
+ bh=P5Z4sUT/PmplV6OVEMlRleAiLKtwoYX7IQpaFkcv57g=;
+ b=qrPd6nsxSHP3UthV7QwTznJJAry2LPhZvu4TvLBt+UqlRMTxxoyfKeTV
+ aXa40HGkYpNBP6yzbSz3WNs8oBKfHzeH3Z3YkboIGdj/vzpjPcVWrWxd7
+ /Z2ggL21fQSmTe+gauUk2hzuCzgTsuYhP/wJsgQoEgDRRpMtKLndqdpwk
+ KkNmI0MCCpBP5xA+wZvOVBI7Bj/MVLUSPGoxThXESw/Xav6Z2n5tP0H2D
+ Z2MXNbz4vWC6ZUcHiNm7Lz9Bv7NEUyaxLWJltKd/2aSRZqK3sv0kUAV7z
+ WWC4AcbYUj8fNGfFsum9mfjNXnJcUNj1Jxjd7wugLToqvRrnx+OGYZx2B g==;
+X-IronPort-AV: E=Sophos;i="6.04,278,1695679200"; d="scan'208";a="34525002"
+Received: from vtuxmail01.tq-net.de ([10.115.0.20])
+ by mx1.tq-group.com with ESMTP; 15 Dec 2023 09:15:06 +0100
+Received: from [192.168.2.128] (SCHIFFERM-M2.tq-net.de [10.121.53.15])
+ by vtuxmail01.tq-net.de (Postfix) with ESMTPA id 21F20280075;
+ Fri, 15 Dec 2023 09:15:06 +0100 (CET)
+Message-ID: <36da0b3bf24834e08759a5fbdc5ebfea27a61fb6.camel@ew.tq-group.com>
+Subject: Re: [PATCH] boot: add support for fdt_fixup command in environment
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "u-boot@ew.tq-group.com"
+ <u-boot@ew.tq-group.com>
+Date: Fri, 15 Dec 2023 09:15:06 +0100
+In-Reply-To: <CAPnjgZ1iF6k8Dv+nk7p7Jq-+jqfOGXYUtFTyMSThN28bM=e3zQ@mail.gmail.com>
+References: <20231211110317.697011-1-matthias.schiffer@ew.tq-group.com>
+ <CAPnjgZ1iF6k8Dv+nk7p7Jq-+jqfOGXYUtFTyMSThN28bM=e3zQ@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-Content-Language: en-US, fr
-To: Tom Rini <trini@konsulko.com>, Rob Herring <robh+dt@kernel.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
- dgilmore@fedoraproject.org, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
- <20231214182328.GQ2513409@bill-the-cat>
- <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
- <20231214201511.GR2513409@bill-the-cat>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231214201511.GR2513409@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,68 +68,158 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14/12/2023 21:15, Tom Rini wrote:
-> On Thu, Dec 14, 2023 at 01:48:42PM -0600, Rob Herring wrote:
->> On Thu, Dec 14, 2023 at 12:23 PM Tom Rini <trini@konsulko.com> wrote:
->>>
->>> On Thu, Dec 14, 2023 at 03:53:11PM +0100, neil.armstrong@linaro.org wrote:
->>>> Hi,
->>>>
->>>> On 14/12/2023 14:50, Sumit Garg wrote:
->>>>> Prerquisite
->>>>
->>>> s/Prerquisite/Prerequisite/
->>>>
->>>>> -----------
->>>>>
->>>>> This patch series requires devicetree-rebasing git repo to be added as a
->>>>> subtree to the main U-boot repo via:
->>>>>
->>>>> $ git subtree add --prefix devicetree-rebasing \
->>>>>         git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->>>>>         v6.6-dts --squash
->>>>
->>>> So I think the big question is: when should the subtree be updated ?
->>>>
->>>> Because as we discussed in the previous GH pull request, if a bindings changes
->>>> was made in the upstream Linux DT, then the subtree update should wait until
->>>> the u-boot support is merged before updating. This could cause a lot of frustration.
->>>>
->>>> And this could cause a lot of regressions, even more if both Linux and U-boot are
->>>> not maintained by the same people.
->>>
->>> I think some of the important questions to ask are, how often / likely
->>> are the breakages to occur? It seems like these days it's either:
->>> - U-Boot had an early version of the binding and we already state we
->>>    don't support backwards compatibility here. It should be on the
->>>    maintainer to be proactive in this case.
->>> - It's a "the DT was wrong about the hardware, sorry not sorry it's an
->>>    incompatible DTS change now". This too is hopefully the kind of thing
->>>    that at least board maintainers will be more actively aware of needing
->>>    to deal with in U-Boot, if it's really a problem.
->>
->> A common issue in the kernel is with forward compatibility when
->> platforms add new resources from a new provider. Then the kernel
->> expects a driver for the provider and waits for the dependency. Of
->> course, older kernels don't have that provider driver and so the
->> dependency is never met. Not sure if u-boot will have similar issues?
->> At least you should/could know if the provider driver exists or not.
->> (The kernel doesn't because modules.)
-> 
-> I think we'll be fine, but time will tell. And perhaps the more frequent
-> re-syncing will make any sort of corner cases show up more quickly and
-> be something we can figure out how to resolve going forward really.
-> 
+On Wed, 2023-12-13 at 19:52 +0000, Simon Glass wrote:
+> ********************
+> Achtung externe E-Mail: =C3=96ffnen Sie Anh=C3=A4nge und Links nur, wenn =
+Sie wissen, dass diese aus einer sicheren Quelle stammen und sicher sind. L=
+eiten Sie die E-Mail im Zweifelsfall zur Pr=C3=BCfung an den IT-Helpdesk we=
+iter.
+> Attention external email: Open attachments and links only if you know tha=
+t they are from a secure source and are safe. In doubt forward the email to=
+ the IT-Helpdesk to check it.
+> ********************
+>=20
+> On Mon, 11 Dec 2023 at 04:04, Matthias Schiffer
+> <matthias.schiffer@ew.tq-group.com> wrote:
+> >=20
+> > The "fdt" command is convenient for making small changes to the OS FDT,
+> > especially during development. This is easy when the kernel and FDT are
+> > loaded separately, but can be cumbersome for FIT images, requiring to
+> > unpack the image, manually apply overlays, etc.
+> >=20
+> > Add an option to execute a command "fdt_fixup" from the environment at
+> > the beginning of image_setup_libfdt() (after overlays are applied, and
+> > before the other fixups).
+> >=20
+> > Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+> > ---
+> >  boot/Kconfig     |  9 +++++++++
+> >  boot/image-fdt.c | 19 +++++++++++++++++--
+> >  2 files changed, 26 insertions(+), 2 deletions(-)
+>=20
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>=20
+> How about a test?
 
-Sure, I suppose I'll only switch the stable boards, and keep the in-progress ones
-with manual sync.
-And I'll need to make a prerequisite to any breaking DT change to have the corresponding
-U-Boot change submitted before (and probably other OSes like *BSD*s)
+Makes sense, I'll add a unit test.
 
-Neil
+
+>=20
+>=20
+> >=20
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index ef71883a502..7eea935f490 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -1502,6 +1502,15 @@ if OF_LIBFDT
+> >=20
+> >  menu "Devicetree fixup"
+> >=20
+> > +config OF_ENV_SETUP
+> > +       bool "Run a command from environment to set up device tree befo=
+re boot"
+> > +       depends on CMD_FDT
+> > +       help
+> > +         This causes U-Boot to run a command from the environment vari=
+able
+> > +         fdt_fixup before booting into the operating system, which can=
+ use the
+> > +         fdt command to modify the device tree. The device tree is the=
+n passed
+> > +         to the OS.
+> > +
+> >  config OF_BOARD_SETUP
+> >         bool "Set up board-specific details in device tree before boot"
+> >         help
+> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> > index f10200f6474..78b5c639381 100644
+> > --- a/boot/image-fdt.c
+> > +++ b/boot/image-fdt.c
+> > @@ -9,6 +9,7 @@
+> >   */
+> >=20
+> >  #include <common.h>
+> > +#include <command.h>
+> >  #include <fdt_support.h>
+> >  #include <fdtdec.h>
+> >  #include <env.h>
+> > @@ -608,8 +609,22 @@ int image_setup_libfdt(struct bootm_headers *image=
+s, void *blob,
+> >  {
+> >         ulong *initrd_start =3D &images->initrd_start;
+> >         ulong *initrd_end =3D &images->initrd_end;
+> > -       int ret =3D -EPERM;
+> > -       int fdt_ret;
+> > +       int ret, fdt_ret;
+> > +
+> > +       if (IS_ENABLED(CONFIG_OF_ENV_SETUP)) {
+> > +               const char *fdt_fixup;
+> > +
+> > +               fdt_fixup =3D env_get("fdt_fixup");
+> > +               if (fdt_fixup) {
+> > +                       set_working_fdt_addr(map_to_sysmem(blob));
+>=20
+> Is that not already done?
+
+Not necessarily in all code paths that lead to image_setup_libfdt().
+
+
+>=20
+> > +                       ret =3D run_command_list(fdt_fixup, -1, 0);
+> > +                       if (ret)
+> > +                               printf("WARNING: fdt_fixup command retu=
+rned %d\n",
+> > +                                      ret);
+> > +               }
+>=20
+> Would it make sense to put this code near the end of the function,
+> after other fixups have been done?
+
+With separate image and FDT, one would usually run the fdt command to modif=
+y the FDT before bootm,
+so the modifications also happen before other fixups. My intention was to g=
+et the same behavior for
+FIT images.
+
+I don't care much either way though, for most fixups the order shouldn't ma=
+tter too much, and we can
+always add an fdt_fixup_early or fdt_fixup_late if an actual usecase for su=
+ch a sequence of fixups
+comes up.
+
+Regards,
+Matthias
+
+
+>=20
+> > +       }
+> > +
+> > +       ret =3D -EPERM;
+> >=20
+> >         if (fdt_root(blob) < 0) {
+> >                 printf("ERROR: root node setup failed\n");
+> > --
+> > TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, =
+Germany
+> > Amtsgericht M=C3=BCnchen, HRB 105018
+> > Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan=
+ Schneider
+> > https://www.tq-group.com/
+> >=20
+>=20
+> Regards,
+> Simon
+>=20
+
+--=20
+TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
+any
+Amtsgericht M=C3=BCnchen, HRB 105018
+Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
+neider
+https://www.tq-group.com/
