@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D37C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 18:29:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C19A0C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 18:29:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDE1B87C30;
-	Fri, 15 Dec 2023 19:28:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BC58387C6E;
+	Fri, 15 Dec 2023 19:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="e4iozIrd";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eYEvpJMU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D9E787C2C; Fri, 15 Dec 2023 19:28:59 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
+ id CF5CD87C56; Fri, 15 Dec 2023 19:29:00 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEFD187C50
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:28:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 608A087C5D
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:28:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+forbidden405.outlook.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 6D5DDCE30C8;
- Fri, 15 Dec 2023 18:28:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id A0010C433C8;
+ by sin.source.kernel.org (Postfix) with ESMTP id 6B47DCE2F6F;
+ Fri, 15 Dec 2023 18:28:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 89DC8C433CA;
  Fri, 15 Dec 2023 18:28:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1702664933;
- bh=+c1LM4HFOZ8qTloEWF6tRtMn3Bl3QdyIxkB3jslCims=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=e4iozIrdxLcRSj67MrUq6V6AJ//uvwzt8SSaqOpAyjnRqzGAzgg6TiKEAb3bpBiOo
- iGesHXuzAiiFhuGd3GvJ/Ev6jb1luMgNBJWDjnbxgAcNfxzr3zrkeSP/Odq/v0SxSx
- //lEVTf4mhYBBbMGgdq89D0b/3dOR+jjU/6vLPCLpQ89t/AupQI9TxfF4eoLDdF0Xn
- gVGI3NQvXbvdR6qT2WYwdpy9qTDe0UTAcUcE2XhjVKdfIefHelIrN/pR4aUAwuaSxO
- CAGZqLsvE7qpmp6lupORV+2OJ2JuORh0HsIWDqbf0zvJFk7XVSRag8D+fe17tkT8nd
- wVh1mi2Rb/99g==
+ s=k20201202; t=1702664934;
+ bh=OUovCpskf3sjR88V7uRl9KTZC43ZbpJtQSn38lTvjqk=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=eYEvpJMUAnqJNQlE2bpaWgwnfCeP52DIo6zvsq+QSPYPCs/lCmPuCl3RcXcORyEy8
+ Gz+C38zQjmPhBvxXduwOTSYAUkBkqRRCsHmlTtT9CkHTmkZQjO6v2p0j56TRKHV7Ie
+ 6uwDY/qF+m94HBnMLRU5KvocIKzwCzt+FTT0TV74sYoTjeKRhlz7osdR7iWPvE+BQZ
+ Y4a2D8ZWaM5uDa+7HvBtG+/VdrxQvzGivhyYsjPj3IIBUf6CR7t3+pE0pPEl0E7I88
+ NwxWNlrDEzB4gDF4UEl0/YaUCGPjz12YSr1Jc5dkDL9DnZjUtA7hfARRAtURyy72+L
+ dmWFUIbY/ADXg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 883CBC35274;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 7A4BFC4167B;
  Fri, 15 Dec 2023 18:28:53 +0000 (UTC)
 From: Yang Xiwen via B4 Relay <devnull+forbidden405.outlook.com@kernel.org>
-Date: Sat, 16 Dec 2023 02:28:51 +0800
-Subject: [PATCH v3 1/2] clk: get correct ops for clk_enable() and clk_disable()
+Subject: [PATCH v3 0/2] clk: ccf: fix enable_count mismatch
+Date: Sat, 16 Dec 2023 02:28:50 +0800
+Message-Id: <20231111-enable_count-v3-0-08a821892fa9@outlook.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231111-enable_count-v3-1-08a821892fa9@outlook.com>
-References: <20231111-enable_count-v3-0-08a821892fa9@outlook.com>
-In-Reply-To: <20231111-enable_count-v3-0-08a821892fa9@outlook.com>
+X-B4-Tracking: v=1; b=H4sIAOKafGUC/32NQQ7CIBAAv9JwFrOAra0n/2GMAbq1xBYMtETT9
+ O9Cbx50b7Ob2VlIQG8wkFOxEI/RBONsArEriO6lvSM1bWLCgQuWhqKVasCbdrOdqGxLACZ4VbO
+ SJEXJgFR5aXWfpVGGCX0+PD125rV1LtfEvQmT8+8tG1ne/ihERoGW0HQHANk0Wp3dPA3OPfbaj
+ SS/ivyfzpPOAcWR1xWAKr/1dV0/Bg0eXwIBAAA=
 To: Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Yang Xiwen <forbidden405@outlook.com>
 X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1702664931; l=1187;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1702664931; l=1401;
  i=forbidden405@outlook.com; s=20230415; h=from:subject:message-id;
- bh=lkdm+vGFt2P1kjUtpjLgf/OGQ+pcAmah4UJq3vZOUKo=;
- b=u12vzkE9QuN3ZZXQtTBniKgdXhe++J0aMWLWLQtVMWTzn978jWpRKO1/zAh31UG27eRuEdkOP
- /aF4/s/o+xaDc6+ELs9aPSqzeW8xW99iEElwu5iQXZi+EjouJrDUVJV
+ bh=OUovCpskf3sjR88V7uRl9KTZC43ZbpJtQSn38lTvjqk=;
+ b=tkgiV1QT1VUw06eQuTJ0AKBio9C1QAt5nKD05m0lnxNHrBb+gcB7+5CZgZKBsIcST2q0X3XNt
+ KhSVzoVzENlBP7Hr8TgX6zSH2xLHR1jHg/8TCIOrPwbjlQLnOHgs3bL
 X-Developer-Key: i=forbidden405@outlook.com; a=ed25519;
  pk=hfdpPU3AXR+t7fdv58tXCD4UzRNq+fop2TMJezFlAhM=
 X-Endpoint-Received: by B4 Relay for forbidden405@outlook.com/20230415 with
@@ -85,42 +86,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yang Xiwen <forbidden405@outlook.com>
-
-assign clk_dev_ops(clkp->dev) to ops to ensure correct clk operations
-are called on clocks.
-
-This fixes the incorrect enable_count issue as described in [1].
+As described in [1], enable_count is incremented by 2 when
+ccf_clk_enable() is called. This series of patch fixed this issue and
+added a testcase for that.
 
 [1]: https://lore.kernel.org/all/SEZPR06MB695927A6DEEEF8489A06897396A7A@SEZPR06MB6959.apcprd06.prod.outlook.com/
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
 Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 ---
- drivers/clk/clk-uclass.c | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v3:
+- move i2v_root in front of devm clocks. So that clk_test driver needs a
+  minimum modification
+- squash patch 1, 3 and 4. -- Suggested by Sean
+- rewrite commit log for clarity.
+- Link to v2: https://lore.kernel.org/r/20231111-enable_count-v2-0-20e3728600b5@outlook.com
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index 3b5e3f9c86..3e9d68feb3 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -640,6 +640,7 @@ int clk_enable(struct clk *clk)
- 	if (CONFIG_IS_ENABLED(CLK_CCF)) {
- 		/* Take id 0 as a non-valid clk, such as dummy */
- 		if (clk->id && !clk_get_by_id(clk->id, &clkp)) {
-+			ops = clk_dev_ops(clkp->dev);
- 			if (clkp->enable_count) {
- 				clkp->enable_count++;
- 				return 0;
-@@ -699,6 +700,7 @@ int clk_disable(struct clk *clk)
- 
- 	if (CONFIG_IS_ENABLED(CLK_CCF)) {
- 		if (clk->id && !clk_get_by_id(clk->id, &clkp)) {
-+			ops = clk_dev_ops(clkp->dev);
- 			if (clkp->flags & CLK_IS_CRITICAL)
- 				return 0;
- 
+Changes in v2:
+- add missing SoB in patch 1/4, no functional change
+- Link to v1: https://lore.kernel.org/r/20231111-enable_count-v1-0-509f400a99cb@outlook.com
 
+---
+Yang Xiwen (2):
+      clk: get correct ops for clk_enable() and clk_disable()
+      test: dm: clk_ccf: test ccf_clk_ops
+
+ arch/sandbox/dts/test.dts      |  4 +++-
+ arch/sandbox/include/asm/clk.h |  1 +
+ drivers/clk/clk-uclass.c       |  2 ++
+ drivers/clk/clk_sandbox_ccf.c  |  1 +
+ drivers/clk/clk_sandbox_test.c |  1 +
+ test/dm/clk_ccf.c              | 14 +++++++++++---
+ 6 files changed, 19 insertions(+), 4 deletions(-)
+---
+base-commit: 3b913c148249a2b9d12ff25517ec311646e83bee
+change-id: 20231111-enable_count-ad5001326815
+
+Best regards,
 -- 
-2.39.2
+Yang Xiwen <forbidden405@outlook.com>
 
