@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8FCC41535
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:04:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7766EC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4877E87BDC;
-	Fri, 15 Dec 2023 15:04:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id A9D2987BDB;
+	Fri, 15 Dec 2023 15:09:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ftY3OL0X";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="p/gu3zEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDBE287BDA; Fri, 15 Dec 2023 15:04:41 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B162A87B8B; Fri, 15 Dec 2023 15:09:47 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D301087BDC
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:04:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B90687BE5
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:09:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BF9Wx5x016099; Fri, 15 Dec 2023 15:04:35 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=mT3VVtOVUw1PkeMpvz+BT9S92obtqBFwTJA7KnFPvAA=; b=ft
- Y3OL0XR5a/d3BciM4IAykeMJy8TUg6r34MgtrT8CT8LEdBIMXvRR70WRopwovF5T
- fImrQLMDd0FoPU/+sYFLhSzUdGvQxpFRsN0nTTc1DYJz75GXVwLPwDxzzGB2b1Qj
- FB4Kwsuz3ioMBcoTjtBsUS5P9WRlR6O5CHZ/jc+TIBFvz6pO6DGClQaAGm8rgiMh
- 3mZGq7lOf2vdKR7b66mF3M8Ltkz1HjlhcB2D2RYXT1WWTXF3gfeEKSDzBwx/KIp/
- D8j/W2EjhRcMmVTSbPKZH1TZEK59jtRcUXvz3W5c9xhsTfGv8zWmEgWD/AmlLxCC
- kLhgBykn7y2yWULNzqHA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uw42nytjq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 15:04:35 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 307C5100052;
- Fri, 15 Dec 2023 15:04:35 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 28057226FC9;
- Fri, 15 Dec 2023 15:04:35 +0100 (CET)
-Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 15:04:34 +0100
-Message-ID: <73272cef-b129-425c-991c-d7c86a8abded@foss.st.com>
-Date: Fri, 15 Dec 2023 15:04:34 +0100
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jmasson@baylibre.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-336417c565eso553647f8f.3
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 06:09:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1702649385; x=1703254185;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=yCzC92qhmKJtrFOl3mq5lGW3hR8+io9+ksIxptLfT9I=;
+ b=p/gu3zEZiIjWvM1PDjU2NkclHp8xXms0n3T100aTV7uhccvWdqZHg4C9YyDD+mX04F
+ JYucOAqyx9UX2AZLN0ZCdURmun3L/pzo6sLJXZVZ/oKHH7qLBB9cB4XSyKqLDi8ni1Mt
+ 3HlhWL+7KW3ca2InfWhVCgM5Oq7PLUSaloWudfBSSkL5oQ7stY37ILI/N0893ux6qAEG
+ Of1CCNyM6CJkA+MYENEDFyg3DiRrv3H5eBltqdpavwqzZYy6wM3/XSEQw4wl/5lJS/6j
+ ZNuGkGVw38Zw4Iew4FDWhYZlntxI2Aq8eXOU9wMyzrRmESmklx6rgcuVZzQznozMvRWA
+ VvTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702649385; x=1703254185;
+ h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yCzC92qhmKJtrFOl3mq5lGW3hR8+io9+ksIxptLfT9I=;
+ b=p4vM+N3kVPAPmzDfN9j7361iivj9OxcZ1w6T1hMy/MvrpmkRtX+gEvsFwI8aoawi98
+ lSukJXSDv6+fm11XdoA7mb8Y8lUtRTLc/WqF1xthp9x05GmQVuhiOxTpknhhpFDYvXj3
+ xIYKGmxJQ/bXZKy7qQwHcVKpEOskBC9TIvE0kvSaDt8RQNmDQVbAnt/iR6nt4w8eI/cW
+ /5Wcse6V/rYqwbHrLv8NONuCmg/a6xephTdTA9kaQBtcHRxRLr/4dEvqMKuN8ACpItF2
+ 8jyf2j5CiowLyaUoEk1P60A8f+eebq36+Cx10LDZHJ2RF1LSb1Kdbu/PLKqFfr9xx8ev
+ tcLQ==
+X-Gm-Message-State: AOJu0Yza0mxsZBHNQ72Ztchn3PMnSxVDzIfPojhWr5Q9h36G5KbCqZGs
+ 1HdENg2Nf719d+K0eM27aQFRBny6NWiQYRxEU2Q=
+X-Google-Smtp-Source: AGHT+IGdlqBLWC+wgDgUowi86+D9F8w5Gc8lHvRK92Q6oPsg+gGnsLCcLp3DB84nVUpH3m7xO0yg6w==
+X-Received: by 2002:adf:f8cd:0:b0:336:4b7c:a72a with SMTP id
+ f13-20020adff8cd000000b003364b7ca72amr952061wrq.14.1702649384657; 
+ Fri, 15 Dec 2023 06:09:44 -0800 (PST)
+Received: from localhost (laubervilliers-658-1-213-31.w90-63.abo.wanadoo.fr.
+ [90.63.244.31]) by smtp.gmail.com with ESMTPSA id
+ s5-20020a5d4245000000b003364c3d846esm2933844wrr.85.2023.12.15.06.09.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 06:09:44 -0800 (PST)
+From: Julien Masson <jmasson@baylibre.com>
+To: u-boot@lists.denx.de
+Cc: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v2] clk: fix clk_get_rate() always return ulong
+Date: Fri, 15 Dec 2023 15:09:43 +0100
+Message-ID: <87o7erv9p4.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] clk: stm32f: fix setting of LCD clock
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Sean Anderson
- <seanga2@gmail.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20231111104625.137511-1-dario.binacchi@amarulasolutions.com>
- <20231111104625.137511-2-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231111104625.137511-2-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.23.141]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-15_08,2023-12-14_01,2023-05-22_02
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,60 +88,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When we call clk_get_rate(), we expect to get clock rate value as
+ulong.
+In that case we should not use log_ret() macro since it use internally
+an int.
+Otherwise we may return an invalid/truncated clock rate value.
 
+Signed-off-by: Julien Masson <jmasson@baylibre.com>
+---
+Changes in v2:
+- remove local var ret (fix warning)
+- Link to v1: https://lore.kernel.org/all/871qcj5frz.fsf@baylibre.com
+---
+ drivers/clk/clk-uclass.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-On 11/11/23 11:46, Dario Binacchi wrote:
-> Set pllsaidivr only if the PLLSAIR output frequency is an exact multiple
-> of the pixel clock rate. Otherwise, we search through all combinations
-> of pllsaidivr * pllsair and use the one which gives the rate closest to
-> requested one.
-> 
-> Fixes: 5e993508cb25 ("clk: clk_stm32f: Add set_rate for LTDC clock")
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
->  drivers/clk/stm32/clk-stm32f.c | 26 ++++++++++++++------------
->  1 file changed, 14 insertions(+), 12 deletions(-)
-> 
-> diff --git a/drivers/clk/stm32/clk-stm32f.c b/drivers/clk/stm32/clk-stm32f.c
-> index 4c1864193357..d68c75ed2013 100644
-> --- a/drivers/clk/stm32/clk-stm32f.c
-> +++ b/drivers/clk/stm32/clk-stm32f.c
-> @@ -522,18 +522,20 @@ static ulong stm32_set_rate(struct clk *clk, ulong rate)
->  
->  	/* get the current PLLSAIR output freq */
->  	pllsair_rate = stm32_clk_get_pllsai_rate(priv, PLLSAIR);
-> -	best_div = pllsair_rate / rate;
-> -
-> -	/* look into pllsaidivr_table if this divider is available*/
-> -	for (i = 0 ; i < sizeof(pllsaidivr_table); i++)
-> -		if (best_div == pllsaidivr_table[i]) {
-> -			/* set pll_saidivr with found value */
-> -			clrsetbits_le32(&regs->dckcfgr,
-> -					RCC_DCKCFGR_PLLSAIDIVR_MASK,
-> -					pllsaidivr_table[i] <<
-> -					RCC_DCKCFGR_PLLSAIDIVR_SHIFT);
-> -			return rate;
-> -		}
-> +	if ((pllsair_rate % rate) == 0) {
-> +		best_div = pllsair_rate / rate;
-> +
-> +		/* look into pllsaidivr_table if this divider is available */
-> +		for (i = 0 ; i < sizeof(pllsaidivr_table); i++)
-> +			if (best_div == pllsaidivr_table[i]) {
-> +				/* set pll_saidivr with found value */
-> +				clrsetbits_le32(&regs->dckcfgr,
-> +						RCC_DCKCFGR_PLLSAIDIVR_MASK,
-> +						pllsaidivr_table[i] <<
-> +						RCC_DCKCFGR_PLLSAIDIVR_SHIFT);
-> +				return rate;
-> +			}
-> +	}
->  
->  	/*
->  	 * As no pllsaidivr value is suitable to obtain requested freq,
-Applied to u-boot-stm32/next
+diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+index 3b5e3f9c86..3cbcb2d033 100644
+--- a/drivers/clk/clk-uclass.c
++++ b/drivers/clk/clk-uclass.c
+@@ -478,7 +478,6 @@ void clk_free(struct clk *clk)
+ ulong clk_get_rate(struct clk *clk)
+ {
+ 	const struct clk_ops *ops;
+-	ulong ret;
+ 
+ 	debug("%s(clk=%p)\n", __func__, clk);
+ 	if (!clk_valid(clk))
+@@ -488,11 +487,7 @@ ulong clk_get_rate(struct clk *clk)
+ 	if (!ops->get_rate)
+ 		return -ENOSYS;
+ 
+-	ret = ops->get_rate(clk);
+-	if (ret)
+-		return log_ret(ret);
+-
+-	return 0;
++	return ops->get_rate(clk);
+ }
+ 
+ struct clk *clk_get_parent(struct clk *clk)
+-- 
+2.43.0
 
-Thanks
-Patrice
