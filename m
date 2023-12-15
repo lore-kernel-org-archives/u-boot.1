@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0829C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:23:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A21C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 20:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30DCF87C6F;
-	Fri, 15 Dec 2023 20:23:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E74A87BD3;
+	Fri, 15 Dec 2023 21:00:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CJNdfFGP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AmUNrJ2z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29E8687C6F; Fri, 15 Dec 2023 20:23:35 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 39446876B2; Fri, 15 Dec 2023 21:00:25 +0100 (CET)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 962C687C46
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:23:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D30C687BD3
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 21:00:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-27fe16e8e02so147138a91.0
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:23:32 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3365752934bso538284f8f.2
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:00:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702668211; x=1703273011; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702670422; x=1703275222; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VW/luWXRBA0rcZmnhbTG2EpP+cLibkUDOLGCpPeQzbs=;
- b=CJNdfFGPK0b2BHhkYF9KgH/A7Q3rbsO2FPTyxFNq4iSR0w78IC6wAidc52eq0nQRNM
- ZhIH30Leib4NzyH4wvQxGDWSJhF/gGtPhWrvCtq8K80+oEt5nYgIf47a/3Xad1iy48z/
- 8i0Qg93WAOu3P0zTZzo0MSL+GZaIgyTwvdN8dowrAwUYmD2ydXmgk9oLZh+fwyngou2/
- BQKzatwyUY6kNj9KPEXGfaj/HCxhsAqpC9pkNFSGhexRaeae0YtlH8HlfeJlWNwI9Ikn
- gcLXo3GXUS2NzyudMTo6eJ0tEIP+hrjWWUxNtGuKC1c9NyE3zpPAmuPpVGwlFh9WqxBb
- LhWQ==
+ bh=LnYNx8DnO5kIEt0IExgDmDyYhn8rOtLJWJtZzX2eLeY=;
+ b=AmUNrJ2z/pF9sZ70VE+JiNAevxqtFwPvL1xz77ngYtbszqchBmt5/+R1GUOwEnrN2m
+ xyH9EDY4XKOIHLXEZ8q2Lfgb/WxjorfK99CfW0Rxogg6YfieYtQvAopL9MkZkAsOEbtd
+ 4DIzW16pAjg/XKOiKnktRZGrOTglauILKQ1SpVq8xG6Wt87zkNjyfhmx8iK6Z9mDLbIl
+ ljX3TlPYGPhswb2jodBwqxxx5VOXCz9gEqFzxxLBxk5GLL46n+uTghWOoZOwwS8XOk/C
+ CQxY5Cp67ml5lcgH8HMvaCAwrbH4ZYtthVohznQ1earRKbWKNwyRhFhdkbQK5dsY+v/W
+ iLmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702668211; x=1703273011;
+ d=1e100.net; s=20230601; t=1702670422; x=1703275222;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VW/luWXRBA0rcZmnhbTG2EpP+cLibkUDOLGCpPeQzbs=;
- b=PfLYdmWCBA0D7JsHqHH8a6LJ2Hrs93o/PuytfxyfYHCMsIIWZxpE0CsCK+pVT2AToK
- VfzNNocL2G3RL9++HAL0yt436mXSsPgzOKhOvTy9KERSI00CluIu9ag2roplJgdO4T11
- LgY5+oQdmG7evek4ZNHYmLOonDJLcyAOnxxhyIsjyBlQBNkTG2UbK5ALTDANJxUxMf8w
- zs5dWfG7oJgROlFG/U+iWG0kLJ56y+qnI/YDO4hVSf5CRhacXmWcVECbAhdd9+nk8pgD
- VRcFWSslUDEjksc2nF8OxBa6FVvuVIz439ZhG7N15H43PgPJa5NFxZT4o2Eao5fmCwy5
- C7Dw==
-X-Gm-Message-State: AOJu0Yz+9gAVw7sF7DCfm9LWItMfjcd1/2naTj+Sn5hWWonLuFC9jvbO
- /OtPAZrujI5aBiKwFxm/1b/53khiwxsSG7Aufc8=
-X-Google-Smtp-Source: AGHT+IEXz/2K2xvPLCfjub3ljvKprPtAe0IQfkmTCXSqC8KOedlq9TG8J6Fz9ZKwEmIPvQlR2mUChZiOZeixDdec6Zc=
-X-Received: by 2002:a17:90a:4f4e:b0:28b:3d3b:865f with SMTP id
- w14-20020a17090a4f4e00b0028b3d3b865fmr1369784pjl.0.1702668210931; Fri, 15 Dec
- 2023 11:23:30 -0800 (PST)
+ bh=LnYNx8DnO5kIEt0IExgDmDyYhn8rOtLJWJtZzX2eLeY=;
+ b=Lu4ZMyI4dHbTqw9w0bswNkEtoxnbZmai5eoeqxAowvvN7uaxfgOs+XOwVCvDGaOa24
+ VYouC/jAakT0UZJFVwhULqkIErETkNfvJxtErA3+EQsn6zRqxI0wHZkKP+r6VSIJnVMs
+ Cqu+5+m04jWp9IRFKk5n0BwPFaGEfQ1UU7ZY0vbTqP/mGd6Ysb7JfSbjtFoEWWCk5xlK
+ BdG+GpiWrAuA4I8tciMjI0nh55qnRH/gEP/dTnV2be/oUkiSNpy0fQXEPZMe/Xv5lv7c
+ zFR4BOazb9wYcnv4F8+hI/iZoeQl2YYnR4CkLKilaKNtFGeE87QL0YkBxu6G6l88zkLH
+ TMxw==
+X-Gm-Message-State: AOJu0Yw3CL6GufAA9KgzxSslV2w+TaapsLiBI3SggS+Jcy9lGsEjk5dS
+ o7rJTGHvy4L2WMSBr/8hrAIrVqj5gYUOsiPTzjVSGeF/
+X-Google-Smtp-Source: AGHT+IF5Cz0f+YZGIJN/AxtFH4qFomZIcuabd02gCnxLY2EorGm5N1N+LBXMTBDIRpSNVotdk0Oo/0oDJq+boJ7VXWU=
+X-Received: by 2002:a5d:5382:0:b0:336:44cd:7269 with SMTP id
+ d2-20020a5d5382000000b0033644cd7269mr2043692wrv.136.1702670421988; Fri, 15
+ Dec 2023 12:00:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20220830174932.96360-1-alan@londelec.com>
- <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
- <20231009094924.56042353@wsk>
- <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
- <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 15 Dec 2023 16:23:18 -0300
-Message-ID: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
-Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
- from DCDC_BATT without 5V
-To: Alan Kay <alan@londelec.com>
-Cc: Lukasz Majewski <lukma@denx.de>, cody@londelec.com,
- Stefano Babic <sbabic@denx.de>, 
- Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
+References: <20231117075240.15741-1-clamor95@gmail.com>
+ <20231117075240.15741-2-clamor95@gmail.com>
+ <af9d8670-a99b-5ad3-712b-49ccf31cdea0@gmail.com>
+ <CAPVz0n22VgkjEQC4pGD1Eq+jJs0y8o61itnrKC_WvvEb=zop7A@mail.gmail.com>
+ <ac7c89c4-0b81-ae12-6bc4-ab191fee3b1c@gmail.com>
+In-Reply-To: <ac7c89c4-0b81-ae12-6bc4-ab191fee3b1c@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 15 Dec 2023 22:00:10 +0200
+Message-ID: <CAPVz0n2NbYCBwL8ccG6WMarD7bD4S-y34rueCCuQeCsSyWj=Uw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] clk: clk-gpio: add actual gated clock
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,15 +90,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 15, 2023 at 1:20=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
-
-> Ok, what about the patch below?
+=D0=BF=D1=82, 15 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE 20:4=
+5 Sean Anderson <seanga2@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-co=
-dy@londelec.com/
+> On 12/15/23 13:26, Svyatoslav Ryhel wrote:
+> > =D0=BF=D1=82, 15 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE =
+19:25 Sean Anderson <seanga2@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >>
+> >> On 11/17/23 02:52, Svyatoslav Ryhel wrote:
+> >>> Existing gpio-gate-clock driver acts like a simple GPIO switch withou=
+t any
+> >>> effect on gated clock. Add actual clock actions into enable/disable o=
+ps and
+> >>> implement get_rate op by passing gated clock if it is enabled.
+> >>>
+> >>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> >>> ---
+> >>>    drivers/clk/clk-gpio.c | 47 +++++++++++++++++++++++++++++++++++---=
+----
+> >>>    1 file changed, 40 insertions(+), 7 deletions(-)
+> >>>
+> >>> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+> >>> index 26d795b978..a55470cfbf 100644
+> >>> --- a/drivers/clk/clk-gpio.c
+> >>> +++ b/drivers/clk/clk-gpio.c
+> >>> @@ -3,19 +3,23 @@
+> >>>     * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org=
 >
-> Is this still needed?
+> >>>     */
+> >>>
+> >>> -#include <asm/gpio.h>
+> >>> -#include <common.h>
+> >>> -#include <clk-uclass.h>
+> >>> +#include <clk.h>
+> >>>    #include <dm.h>
+> >>> +#include <clk-uclass.h>
+> >>> +#include <linux/clk-provider.h>
+> >>> +
+> >>> +#include <asm/gpio.h>
+> >>>
+> >>>    struct clk_gpio_priv {
+> >>>        struct gpio_desc        enable;
+> >>> +     struct clk              *clk;
+> >>
+> >> Please name this "parent".
+> >>
+> > I see no need in this since clk is generic name and this driver can
+> > accept only one clock with any name.
+>
+> It's good documentation. It makes it clear what the purpose of the member=
+ is.
+>
+This driver uses a single (1) clock with a single purpose.
 
-I looked in the i.MX28 Reference Manual, and the one above looks a
-correct fix. I will queue it.
+Why do you think you need a clock in a clock-gpio driver? Hm, I don't
+know. This will remain a mystery for future archeo-coders yeah.
+
+> >>>    };
+> >>>
+> >>>    static int clk_gpio_enable(struct clk *clk)
+> >>>    {
+> >>>        struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
+> >>>
+> >>> +     clk_prepare_enable(priv->clk);
+> >>
+> >> Just clk_enable is fine. We don't have a separate prepare stage line L=
+inux.
+> >>
+> > U-Boot supports clk_prepare_enable and since this support is present I
+> > see no contradiction in using it.
+>
+> These functions are only there for to make it easier to port code from Li=
+nux.
+> Since this code was written for U-Boot, just use the actual function.
+>
+Then document that its use is discouraged. Until then it is not restricted.
+
+> >>>        dm_gpio_set_value(&priv->enable, 1);
+> >>>
+> >>>        return 0;
+> >>> @@ -26,21 +30,50 @@ static int clk_gpio_disable(struct clk *clk)
+> >>>        struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
+> >>>
+> >>>        dm_gpio_set_value(&priv->enable, 0);
+> >>> +     clk_disable_unprepare(priv->clk);
+> >>>
+> >>>        return 0;
+> >>>    }
+> >>>
+> >>> +static ulong clk_gpio_get_rate(struct clk *clk)
+> >>> +{
+> >>> +     struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
+> >>> +     int ret;
+> >>> +
+> >>> +     ret =3D dm_gpio_get_value(&priv->enable);
+> >>> +     if (ret)
+> >>> +             return clk_get_rate(priv->clk);
+> >>> +     else
+> >>> +             return -EINVAL;
+> >>
+> >> This should always return the parent rate.
+> >>
+> > How can you return clock rate if the gate is disabled?
+>
+> This allows consumers to know what the rate will be before they
+> enable the clock.
+>
+I don't quite understand the logic behind this but ok.
+
+> >>> +}
+> >>> +
+> >>>    const struct clk_ops clk_gpio_ops =3D {
+> >>>        .enable         =3D clk_gpio_enable,
+> >>>        .disable        =3D clk_gpio_disable,
+> >>> +     .get_rate       =3D clk_gpio_get_rate,
+> >>>    };
+> >>>
+> >>> -static int clk_gpio_probe(struct udevice *dev)
+> >>> +static int clk_gpio_of_to_plat(struct udevice *dev)
+> >>
+> >> This change should be a separate commit.
+> >>
+> > This actually should not be accepted first place
+> >
+> > .of_to_plat - convert device tree data to plat
+> > .probe - make a device ready for use
+> >
+> > https://github.com/u-boot/u-boot/blob/master/doc/develop/driver-model/d=
+esign.rst
+>
+> Yes, this is why I was a bit confused :)
+>
+> >>>    {
+> >>>        struct clk_gpio_priv *priv =3D dev_get_priv(dev);
+> >>> +     int ret;
+> >>>
+> >>> -     return gpio_request_by_name(dev, "enable-gpios", 0,
+> >>> -                                 &priv->enable, GPIOD_IS_OUT);
+> >>> +     priv->clk =3D devm_clk_get(dev, NULL);
+> >>> +     if (IS_ERR(priv->clk)) {
+> >>> +             log_err("%s: Could not get gated clock: %ld\n",
+> >>> +                     __func__, PTR_ERR(priv->clk));
+> >>> +             return PTR_ERR(priv->clk);
+> >>> +     }
+> >>> +
+> >>> +     ret =3D gpio_request_by_name(dev, "enable-gpios", 0,
+> >>> +                                &priv->enable, GPIOD_IS_OUT);
+> >>> +     if (ret) {
+> >>> +             log_err("%s: Could not decode enable-gpios (%d)\n",
+> >>> +                     __func__, ret);
+> >>
+> >> Use dev_dbg for probe errors to reduce binary size.
+> >>
+> > These errors provide intel about probing 2 key parts of the driver.
+> > How would you know it fails in case you have no devices which face
+> > this error? Iis there any convention or restriction which prohibits
+> > this? If yes, then provide a document please.
+>
+> https://docs.u-boot.org/en/latest/develop/driver-model/design.html#error-=
+codes
+>
+> | Ideally, messages in drivers should only be displayed when debugging,
+> | e.g. by using log_debug() although in extreme cases log_warning() or
+> | log_error() may be used.
+>
+> > All other general clock drivers use log_err/dev_err versions btw.
+>
+> Yeah, it's something we have not been so consistent with enforcing.
+>
+Alright
+
+> >>> +             return ret;
+> >>> +     }
+> >>> +
+> >>> +     return 0;
+> >>>    }
+> >>>
+> >>>    /*
+> >>> @@ -59,7 +92,7 @@ U_BOOT_DRIVER(gpio_gate_clock) =3D {
+> >>>        .name           =3D "gpio_clock",
+> >>>        .id             =3D UCLASS_CLK,
+> >>>        .of_match       =3D clk_gpio_match,
+> >>> -     .probe          =3D clk_gpio_probe,
+> >>> +     .of_to_plat     =3D clk_gpio_of_to_plat,
+> >>>        .priv_auto      =3D sizeof(struct clk_gpio_priv),
+> >>>        .ops            =3D &clk_gpio_ops,
+> >>>        .flags          =3D DM_FLAG_PRE_RELOC,
+> >>
+> >> --Sean
+>
