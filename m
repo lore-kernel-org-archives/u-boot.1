@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F239C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 21:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 810A9C35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 22:47:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0FA987C12;
-	Fri, 15 Dec 2023 22:06:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BABDF8767B;
+	Fri, 15 Dec 2023 23:47:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mUTqxagK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nDfqKG3E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56C0887C4B; Fri, 15 Dec 2023 22:06:28 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id D944787BB5; Fri, 15 Dec 2023 23:47:56 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C644D87C10
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 22:06:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94B978761C
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 23:47:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-42581f9c0e7so7515621cf.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:06:25 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-67aa0f5855cso6094056d6.1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:47:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702674384; x=1703279184; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=inuIfhkqmRbZdJO3B7ODStmTql6VhqgopTVMHYh0LnA=;
- b=mUTqxagKur5tz1QE7O0YOSlPDEXhFbfd6l3+vKprrFoC6jCamNOLZAxtOT29SQ7pu9
- 3TDpINBvbHedKPu0ThBfVN9szp3rrpvgOgn9A5SVatR1tHtOtxzknLmrJyYNaOpq244u
- qT+mNJSldgKa0vX0AVM/mIBo//zlcQSznixJxROVuVMFfHw5mMONnlRbZrHZTd/9ephS
- +P2fFIpLSTIu6uBHeMHA7f2vsICDId78cm1EfZxlt1zkMT6pc9WDob8urSB7FEodp40N
- iNEnBTw204gVpFGL8b+xHMhv0YeLCFIyBaeDlY8VjJEpJkN+vdjwTaC1w/CsfWYFwII8
- QPRA==
+ d=konsulko.com; s=google; t=1702680473; x=1703285273; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jtIos0rqjRx/PEuynE5IdYpHXsc8E3JXXVWxSriLZfI=;
+ b=nDfqKG3EI65FkvqiQ+AQ4jVfwdg7yJsI4JWYTtVP9ubY43+iG3VX4Xmw17kAumEGxB
+ 6j+2350GfcIxTDqCE+XcnrN11vkTCQyzAl7+zHC8rLPXrJ6DLgeaH7pSZOgxDwZVpoa2
+ kw7Ujy9dRbZ76tbgQwtZng/bKkEl3ydfuKkno=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702674384; x=1703279184;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=inuIfhkqmRbZdJO3B7ODStmTql6VhqgopTVMHYh0LnA=;
- b=XZRe4fvjSFhUFoxyvDU62x7q1k+Rs2g/IKoWSWv14SDrKknm2NFkhkJPAOti2+ihQC
- ETX6aWLB4asfh8aypBLxD50OjxozTHHhr62LYJ+KKDBJnspBuM1rAFxPQ56i8/A3axCN
- Cy3HeULVX0d7Ydxda1IhbZZxoNdi3dW+NEEwCOeSuxW7UkRR6MhNtIQA45xh3P7fjfU5
- XntcGHndiRjGl0ASRCwmSIOqPpgARtmQY/3+YwPxJDXwkjongPlHo8F4I3ii8aLPiB1a
- DUZ85HQfjKgCvWs+fy751tLDJ+g5Vh3gA+Xb64foTWhIQ4PQGqYqhmKH505h/QOAKzmE
- pJxA==
-X-Gm-Message-State: AOJu0YxwwvGjeLBOv4NpN1M9PvR2j3QKPlPVWrbGGu7yxaZY211K4RZK
- u+fpCwcsldHns2OdZsHJS4y6xNL8aBTSRA==
-X-Google-Smtp-Source: AGHT+IFB/6uONUeaz56sRBA23it8tjERNdu6J9MDiu+oemc9wQWX1Mo/8tStlqtMn/HVUL8ZPOo88Q==
-X-Received: by 2002:ac8:5bce:0:b0:425:4043:765e with SMTP id
- b14-20020ac85bce000000b004254043765emr16554135qtb.134.1702674384602; 
- Fri, 15 Dec 2023 13:06:24 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- g20-20020ac84694000000b0040399fb5ef3sm6975310qto.0.2023.12.15.13.06.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Dec 2023 13:06:24 -0800 (PST)
-Message-ID: <09b2e060-35a4-9509-145f-d1e3080638f7@gmail.com>
-Date: Fri, 15 Dec 2023 16:06:23 -0500
+ d=1e100.net; s=20230601; t=1702680473; x=1703285273;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jtIos0rqjRx/PEuynE5IdYpHXsc8E3JXXVWxSriLZfI=;
+ b=dDKuetW3W7yagXTWcQMjCtnhXvzsNk7hyJviWqp+GWsiWN7fCVtEwY4bl2+u/Xl/nA
+ TGoZjjVKg7XkZroEcucIF3WVhqHFhxQhrEbBXSX2awvO/nTkGEFM0gTj8E9HavyubchN
+ FdphzEaHs7+km3LQi1B0KjDL22BoZyYB2xIwJczTBEUt8SExTUdPNsYc+NU0BB1LCIZY
+ 89DzUiFQ4xgKAj40V6io3g+ZsNZ+3LQIaRbYTJRJTVbtvrjs21Uv34k1kRbUOZJasZ6q
+ Og3i7K6p6ywvmbPGHldzSiUWWpe8LFfPeF3ah81LPp7C3oUIIf9SmjpsC1msAixiWwwo
+ fTEg==
+X-Gm-Message-State: AOJu0YwxzZtr+XIt762qQ4Ao9zK9HzC2BC7RcPEu6gMhcvSRyq6MCCn6
+ 3WhUjw1il65SCzp6H0fE1TSung==
+X-Google-Smtp-Source: AGHT+IEyxHUMZ26iZgu0YYGVOiIsIstmluxiFTp221n7z0ABIfo74iUWdzSOL0ujRw3ZfRFqqQpbAg==
+X-Received: by 2002:a05:6214:1d0c:b0:67f:fb4:f970 with SMTP id
+ e12-20020a0562141d0c00b0067f0fb4f970mr3887624qvd.43.1702680473327; 
+ Fri, 15 Dec 2023 14:47:53 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-4efc-63ef-4955-a8ab.res6.spectrum.com.
+ [2603:6081:7b00:6400:4efc:63ef:4955:a8ab])
+ by smtp.gmail.com with ESMTPSA id
+ q2-20020a0ce202000000b0067a93291d3dsm7197072qvl.78.2023.12.15.14.47.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 14:47:51 -0800 (PST)
+Date: Fri, 15 Dec 2023 17:47:49 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Davis <afd@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2] arm: mach-k3: Move K3 common schema.yaml out of board
+ directory
+Message-ID: <20231215224749.GC2513409@bill-the-cat>
+References: <20231122213005.680781-1-afd@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Igor Prusov <ivprusov@sberdevices.ru>,
- Yang Xiwen <forbidden405@outlook.com>
-From: Sean Anderson <seanga2@gmail.com>
-Subject: [GIT PULL] clock changes for u-boot/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Xuksf1E0buEzIM5/"
+Content-Disposition: inline
+In-Reply-To: <20231122213005.680781-1-afd@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,43 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 3ac22891cfc0dc6d8eec25d2b0fbdd2eb8f3d3ed:
 
-   Merge tag 'u-boot-imx-20231214' of https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2023-12-15 08:22:31 -0500)
+--Xuksf1E0buEzIM5/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-are available in the Git repository at:
+On Wed, Nov 22, 2023 at 03:30:05PM -0600, Andrew Davis wrote:
 
-   https://source.denx.de/u-boot/custodians/u-boot-clk.git tags/clk-2024.01-rc5
+> This file is common for all K3, move it out of board/ directory and
+> into mach-k3. As we need to change the path in k3-binman.dtsi let's
+> take this opportunity to switch to absolute paths which makes adding
+> non-TI boards (like Toradex Verdin) not need to override these paths.
+>=20
+> Signed-off-by: Andrew Davis <afd@ti.com>
 
-for you to fetch changes up to 97d65b32d76cb3b8297cd8aa2c1f0caab5ab6c57:
+Applied to u-boot/next, thanks!
 
-   test: dm: clk_ccf: fix building error (2023-12-15 15:30:12 -0500)
+--=20
+Tom
 
-----------------------------------------------------------------
-clock changes for u-boot/master
+--Xuksf1E0buEzIM5/
+Content-Type: application/pgp-signature; name="signature.asc"
 
-This has some clock fixes which should go in before the release. It's a bit
-late in the cycle, but most of these have tests to go along with them.
+-----BEGIN PGP SIGNATURE-----
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8148ACgkQFHw5/5Y0
+tywyHgv/YWW+O3z3TDCzu5XcR6stEKx+iqOSGWhLjkshvW37Hox/Awxj99Mp9WP2
+4D0RYAqTiZAy5+jKA4s0//z2cLdqHn8ANPCeAl/iP4PkYpNRqODe/Xhsn2zgWXBi
+NKHC6CDiOx+zfyAYMUfbocJFq0MVlKGh49h/aOOWngDMPzPxCvqGuAmLS7EB0+gL
+Bsibg/nPfMDN12ln8CeUhUSYCyiJ/4VgtBdwEWshqeokL30YIeW6JJtLUFYO6Xyt
+pMw2faPaSJfpg3o15f8m7mlFZv7pDFhKQexZu5Pu3zqcHPuDoo5nFeAml9h7mhb3
+vQKumrmMyIf1h/LhM+fpRfUsHhTm0gw/jk0de+1A8EpZuMqDHGy9ILu8I0MkX2ZC
+Ib1MMky8o0Jm8DUOLxBPSkNgN1GQYH/+HO9sf6eHNaV/FVmIOiaxIZtJ1DRhtTxu
+Uw6gEdC0VuuRKn8K6ocvoZ5wBU2FCvBs3MeEUZU0/saUd7NlaIGSO57RTU74HyUu
+3H8SVSAY
+=t/Pc
+-----END PGP SIGNATURE-----
 
-----------------------------------------------------------------
-Igor Prusov (2):
-       clk: Check that composite clock's div has set_rate()
-       dm: test: clk: Add test for ccf clk_set_rate()
-
-Yang Xiwen (4):
-       clk: check parent_name in clk_register to avoid confusing log_error() output
-       clk: get correct ops for clk_enable() and clk_disable()
-       test: dm: clk_ccf: test ccf_clk_ops
-       test: dm: clk_ccf: fix building error
-
-  arch/sandbox/dts/test.dts      |  4 +++-
-  arch/sandbox/include/asm/clk.h |  1 +
-  drivers/clk/clk-composite.c    |  2 +-
-  drivers/clk/clk-uclass.c       |  2 ++
-  drivers/clk/clk.c              | 18 ++++++++++--------
-  drivers/clk/clk_sandbox_ccf.c  |  1 +
-  drivers/clk/clk_sandbox_test.c |  1 +
-  test/dm/clk_ccf.c              | 22 ++++++++++++++++++++--
-  8 files changed, 39 insertions(+), 12 deletions(-)
+--Xuksf1E0buEzIM5/--
