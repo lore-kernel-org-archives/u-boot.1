@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5057FC4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 20:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16386C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 20:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D391B87C64;
-	Fri, 15 Dec 2023 21:52:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88C6287C00;
+	Fri, 15 Dec 2023 21:56:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BJ+KDyab";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FmlBH3K1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67FBB87C75; Fri, 15 Dec 2023 21:52:31 +0100 (CET)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 091EA87BDE; Fri, 15 Dec 2023 21:56:29 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C7C487C50
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 21:52:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EF2B87A80
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 21:56:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-4259c7dfb63so7006891cf.1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:52:28 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-77f44cd99c6so82771685a.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:56:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702673548; x=1703278348; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1702673784; x=1703278584; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=853Ldboy94OQjwVeGtpB7Gc/0ixdxbntMJtzzogOIaw=;
- b=BJ+KDyabTQv/7BPyPlIcnZ/1AUQl/WJUkKmNFyMrNoIzYpArJEd8bC7ZZe1kmuBib0
- U2bPlhszHi9BZSsXnS1DBKdXB+Is/GWgv8NxY10jd4VQKH3xGpzxnVHAYXHIO8HuH3zp
- VE2LlneKPrhrJa64ssjqrZPx+aSDWo2scQSQqiQ1XODk1n16WrDr2pPITJhduYOeDxL8
- 52lv+kk8K6Sc/FhmaR+fry47vGPsTTmc+bteoCLuMchc7aRbOHm1xsNcyrX7Z5mol8e3
- 35rtTgqvInTAX/tF+lmL49VP/C8BQ201LAYmBPx0YZW8L6l+JNiulbFp4Nw0MMbxHT4D
- VvvA==
+ bh=295+wU/92deQviFkVJcIQuVwshoTHEadpDLPn3m31oE=;
+ b=FmlBH3K1OL1LHeUpki1FF6/KPiqZR/HmOHAQNrQVlwhKcr+PZskBeiF+M+mW5dzBU5
+ oaxdZSuxcH4OL42bD5XP4Zh8YZx316xOGGGjcdwnjlJRfkVORCUVgtD0n/JMJpo92abW
+ Hf+PIwUhcKH15LZtX4fqW6ZGD9pZ/uQvPgKuX0BHsxc1FFE4qSdJfiSJBJ6+rhfXsjiI
+ DZ+LLDoJ4mrPm3ih0gcPzqPY1iWP4SAmjAGOff5b5EZOijmDlwtKdqis/MqvWK0Z0SGK
+ TY0pqd8PEtyN6p/KUvgdq2XRYoFsn8tz20Ct5z2gZvOUYY8O+eKLu4uzt0rTkIeeoKF/
+ v8xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702673548; x=1703278348;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=853Ldboy94OQjwVeGtpB7Gc/0ixdxbntMJtzzogOIaw=;
- b=WOzhjrHdZeGhs8AYuwciOEWO8hMN6mqcO22/hRIOH80VqmiytfExsfxUweA6OJhPnk
- twiP6VbvytBkkJb8e1HKW0QcSl9FjxOnG5E7LJ62aU+8H9cBApqT1GbJUx84f/HSZiTA
- xHkfC0QpFn7fLd4kQ/PeHZ+lhqlykHEMYbQPBL85XKuzpc15twXMp+i67MwEmzNs+aZP
- 0SDzEnfjKXGJK31N+3zYdvPiDhtIms8fDnKTMTFsyZr8Q4MJhqMCLr8AVR3M52uYiH+F
- trLOknJ12U5mFdybnnXy1y+DaPB6MYrN6+TtxxXAYpuDFVSpG1K7eb64kHYNT1ng8eX6
- jAEA==
-X-Gm-Message-State: AOJu0YynlOv/tOI0qK5cYXQMLtVzSwl/z6g8d0uHYlzImEHjsEMLl9yC
- cLr7Y/Qvuu5oe9XC/xslK1UaKk2QOFuyow==
-X-Google-Smtp-Source: AGHT+IGm6ElUPp9LtvSrfZx4bztSSQZ1B8X92gFU5X2iwGAm1f5DU8fNk4EHgKAYm6nWtHh6mzbLoA==
-X-Received: by 2002:ac8:5bce:0:b0:425:a28f:ddd8 with SMTP id
- b14-20020ac85bce000000b00425a28fddd8mr14035012qtb.137.1702673547824; 
- Fri, 15 Dec 2023 12:52:27 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- bb38-20020a05622a1b2600b00425b3fd33f2sm5732837qtb.90.2023.12.15.12.52.27
+ d=1e100.net; s=20230601; t=1702673784; x=1703278584;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=295+wU/92deQviFkVJcIQuVwshoTHEadpDLPn3m31oE=;
+ b=Cw4er8+uJWIiwPv9xrg0yYh7NHSf2QJx37UIeXS/fiBdTO0kdMm4+RiUiq8KYSikxJ
+ kOOMkQRAZlfkTHi6UOF2LfUCKpk1FG5jKfS0GChWdSsGFgbEQwrjaZ+fRf4NtGDwbWGk
+ U1AyFuxr7MmfT4MrcG6KGIhLj9G9bl1Wr3bCqbQG2S5P1U3Z6rjudvcm4FUFTPFqZzQu
+ YmN62ug3UcUCtJzNaQT+lyEtwWA48c+XMSq4lu2l1C2M/XtTz5o5NcNF3zwX3Yonu0AB
+ DkLijEvFVgtomcx1pAxd8zosOzA1IPhVlmJkMJ4Lsd9jjrGwSpVW4V5nW0c+z4Nf0UWv
+ ynJg==
+X-Gm-Message-State: AOJu0YzzDs25xVRGv28lq8iQpCOYvii31qC9CFBlsLgX5y6iNjbawEIP
+ U2zZVXYnKGB3mVo3iKzEAVU=
+X-Google-Smtp-Source: AGHT+IHX7CeO2+lIEru6zLiHX9vG5JAZlYe3sCdQQaOC4Nd7/acMShGRa1ax5F3B9Q7h9mJ8CVVc6w==
+X-Received: by 2002:a05:620a:46a8:b0:77e:fbba:6457 with SMTP id
+ bq40-20020a05620a46a800b0077efbba6457mr20039301qkb.54.1702673784067; 
+ Fri, 15 Dec 2023 12:56:24 -0800 (PST)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ de13-20020a05620a370d00b0077d897deb89sm6325887qkb.127.2023.12.15.12.56.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Dec 2023 12:52:27 -0800 (PST)
-Message-ID: <30d112d0-3952-5b40-5689-a0abfc37f989@gmail.com>
-Date: Fri, 15 Dec 2023 15:52:26 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jim Liu <jim.t90615@gmail.com>, Igor Prusov <ivprusov@sberdevices.ru>
+ Fri, 15 Dec 2023 12:56:23 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
-Subject: [GIT PULL] clock changes for u-boot/next
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: forbidden405@outlook.com,
+	Lukasz Majewski <lukma@denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>,
+	u-boot@lists.denx.de
+Subject: Re: [PATCH] test: dm: clk_ccf: fix building error
+Date: Fri, 15 Dec 2023 15:56:20 -0500
+Message-Id: <170267377371.2422101.6355740792789467718.b4-ty@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231216-b4-fix_build-v1-1-b8e79c94744f@outlook.com>
+References: <20231216-b4-fix_build-v1-1-b8e79c94744f@outlook.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,56 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit fa3f19aa56c519d6345cc774187b7a8fdc053d71:
+On Sat, 16 Dec 2023 04:21:11 +0800, Yang Xiwen wrote:
+> Fix unused variable error produced by building tests
+> 
+> 
 
-   Merge tag 'xilinx-for-v2024.04-rc1' of https://source.denx.de/u-boot/custodians/u-boot-microblaze into next (2023-12-14 13:27:11 -0500)
+Applied, thanks!
 
-are available in the Git repository at:
+[1/1] test: dm: clk_ccf: fix building error
+      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/97d65b32d76c
 
-   https://source.denx.de/u-boot/custodians/u-boot-clk.git tags/clk-2024.01-next
-
-for you to fetch changes up to 652d8d4561a34fc71d9bcb6ad2b0035d2c4189c1:
-
-   clk: nuvoton: add read only feature for clk driver (2023-12-15 13:05:55 -0500)
-
-----------------------------------------------------------------
-clock patches for u-boot/next
-
-The main thing in here is Igor's conversion of soc_clk_dump to a clk_ops
-member. There's also a write-protect feature for nuvoton clocks.
-
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-
-----------------------------------------------------------------
-Igor Prusov (8):
-       clk: zynq: Move soc_clk_dump to Zynq clock driver
-       clk: ast2600: Move soc_clk_dump function
-       clk: k210: Move soc_clk_dump function
-       clk: amlogic: Move driver and ops structs
-       clk: Add dump operation to clk_ops
-       cmd: clk: Use dump function from clk_ops
-       clk: treewide: switch to clock dump from clk_ops
-       cmd: clk: Make soc_clk_dump static
-
-Jim Liu (1):
-       clk: nuvoton: add read only feature for clk driver
-
-  arch/arm/mach-zynq/clk.c               |  57 ---------------------------------------------------
-  arch/mips/mach-pic32/cpu.c             |  23 ---------------------
-  cmd/clk.c                              |  13 ++++++++++--
-  drivers/clk/aspeed/clk_ast2600.c       |  83 +++++++++++++++++++++++++++++++++++++-------------------------------------
-  drivers/clk/clk_k210.c                 | 104 +++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------
-  drivers/clk/clk_pic32.c                |  37 +++++++++++++++++++++++++++++++++
-  drivers/clk/clk_versal.c               |   9 +++++---
-  drivers/clk/clk_zynq.c                 |  52 +++++++++++++++++++++++++++++++++++++++++++++++
-  drivers/clk/clk_zynqmp.c               |  22 ++++++++++----------
-  drivers/clk/imx/clk-imx8.c             |  13 ++++--------
-  drivers/clk/meson/a1.c                 |  58 +++++++++++++++++++++-------------------------------
-  drivers/clk/mvebu/armada-37xx-periph.c |  20 +++++++++++-------
-  drivers/clk/nuvoton/clk_npcm.c         |  15 +++++++++++---
-  drivers/clk/nuvoton/clk_npcm.h         |   1 +
-  drivers/clk/nuvoton/clk_npcm8xx.c      |  12 +++++------
-  drivers/clk/stm32/clk-stm32mp1.c       |  31 ++++++++--------------------
-  include/clk-uclass.h                   |  13 ++++++++++++
-  include/clk.h                          |   2 --
-  18 files changed, 288 insertions(+), 277 deletions(-)
+Best regards,
+-- 
+Sean Anderson <seanga2@gmail.com>
