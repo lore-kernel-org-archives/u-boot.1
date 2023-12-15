@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36DBC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBF98C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:22:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF62487B9A;
-	Fri, 15 Dec 2023 05:19:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6BDEA87BB0;
+	Fri, 15 Dec 2023 05:19:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NnTMGD3H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QIqwI2Xt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C63987B81; Fri, 15 Dec 2023 05:19:45 +0100 (CET)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 024C087B0D; Fri, 15 Dec 2023 05:19:46 +0100 (CET)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D40CC87B0D
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5C0E87AD1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3b9de2332e3so249500b6e.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:41 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3b9de2332e3so249507b6e.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702613980; x=1703218780; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702613981; x=1703218781; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JU+ufDRyzFLs9C3Dz5e5OXqcfVjewGL4njGvzPUkPHg=;
- b=NnTMGD3HR7WLBe6eSOmhrYKoPFXgReKDaCudCV+z6sa0wfxMJ0Db1C4+RTuGK5d7Oq
- TEpeSJuWY3st80uovGPUu2fsupZigmhEfK4skg8Uzg6qy56GGurYekrg5imLp3muxKav
- T5fjLubDKco3/v+1QBHUQaB4E9kDPzV2NWFEw=
+ bh=ITXlQCMXex9y9kfVhTeJuk5fMOj95vC6GLUfbZdXszM=;
+ b=QIqwI2Xtyj4sO7x84DDseJLCi8qAWaK63qqfXGjqSx5aph/9Whfcpfc2DbGqA/J2Be
+ PH9zpWa/3rj6RktGyYtkmSiXRJSbra9bEzArSfXZUSo78PiHG/qjj+/I+ite+Eqdbfu2
+ eyZ+zAi6fIAVpCy23nGKc+5HSyyPy4IGJSlww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702613980; x=1703218780;
+ d=1e100.net; s=20230601; t=1702613981; x=1703218781;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JU+ufDRyzFLs9C3Dz5e5OXqcfVjewGL4njGvzPUkPHg=;
- b=pK+bAvguAJXW8ydhiRyxOmW+cDzD40X9h9bmGOi1gFf6BuLQ5MAKORBWabXeXx1mx9
- IhoGg18mvJX4og+ZLZkANsftgusZ6/c64tYzpDEQ5voboo407uvLDPC1NT63VkTDAaDR
- lLLIcM1GzETWRpSuu9QD2TVJATptq9BkAmLFrN0QW4Jzna8KphEc/+ucr9+1bnadsAf9
- ptzcXLxbdhV8x3RFC8TRK308kHvzR787c2p48td13F8I0D2ggKteNJvbjRA2yidUj9HI
- s4DlTIemooq6EPsDAacQJTU3z85kmJGAwqNm7or1v1vOo7m8Q0yMWZKZEH+JtKCtTBe7
- FaWw==
-X-Gm-Message-State: AOJu0Yy4ppR7AhpCql+qmFCl4fQbH3Zy0dUlsnt7oxXwJ/igZAWBuxRL
- OQluZlko54dKHAfvqO2Mu2VgblppR24RBMmD6sy2/g==
-X-Google-Smtp-Source: AGHT+IHGBVZJ4agP3sfzWcxwGCBX+iRkt3COtLvjNZGB8x4Wd7Y1eTpQqV4Ejo9TW9r7LDwEeZeyPg==
-X-Received: by 2002:a05:6808:38c4:b0:3ba:eb4:a5a6 with SMTP id
- el4-20020a05680838c400b003ba0eb4a5a6mr10170615oib.42.1702613980479; 
- Thu, 14 Dec 2023 20:19:40 -0800 (PST)
+ bh=ITXlQCMXex9y9kfVhTeJuk5fMOj95vC6GLUfbZdXszM=;
+ b=luejZn8V8XY4vM9GtxgQNGp7Q4YLXlAv3WjqTw27AWKL+FQnrMHGVPR2YMKWw3biuy
+ lOt/4K2Bh8UU4tz2poCKKWRMxwPpGCTwMtADBT7uQKOwkTg4plEHhDYkvRgOgYoPAjCn
+ EqKjxMIfWwpe2LKBCD5+koMVmR3Qz0eJLzCU6571jT+/WcYRMqbRyghXQQn+N68e5gSm
+ qooL8cQrNGpimUEnPaejUvV3PCrjFg13/Xb8d5wiigCMNVXIq9xz0mDp0dS2VrT4QAYN
+ pNx4lt2OQpTJ8YcLX06UFMynUpJs6lKDmQ21cdpCrkODXiawggCwCLhgSUTdOLImSKAG
+ yuZw==
+X-Gm-Message-State: AOJu0Yw0iZe9v9XsjO8ftDEz8AEetzBUTZQwXzy8X/I1lyxvkR5lIDlZ
+ kjwu20+SZodOOpy1aFnIrzIdEmH2oSkGasxlK+F42Q==
+X-Google-Smtp-Source: AGHT+IFJavzSjryBlSAT0Fxoe8oJj0JB3Kfk5GO7tV5ekC0gpxGtCF25ehcDFuYf2ZAMaLjQ5LCF+w==
+X-Received: by 2002:a05:6808:1a1d:b0:3b9:e8d0:3b36 with SMTP id
+ bk29-20020a0568081a1d00b003b9e8d03b36mr11502819oib.49.1702613981386; 
+ Thu, 14 Dec 2023 20:19:41 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.39
+ be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 20:19:40 -0800 (PST)
+ Thu, 14 Dec 2023 20:19:41 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, Marek Vasut <marex@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-Subject: [PATCH v2 15/16] pxe: Allow booting without CMDLINE for the zboot
- method
-Date: Thu, 14 Dec 2023 21:19:13 -0700
-Message-ID: <20231215041919.2197788-13-sjg@chromium.org>
+ Bin Meng <bmeng.cn@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Soeren Moch <smoch@web.de>
+Subject: [PATCH v2 16/16] x86: Drop message about features being missing with
+ 64-bit
+Date: Thu, 14 Dec 2023 21:19:14 -0700
+Message-ID: <20231214211906.v2.16.Ia810a48e8e8cf895dea87336ae124701e9c72167@changeid>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231215041919.2197788-1-sjg@chromium.org>
 References: <20231215041919.2197788-1-sjg@chromium.org>
@@ -93,68 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use zboot_run() to boot rather than the command line. This allows
-extlinux to be used (on x86) without CMDLINE being enabled.
-
-Collect any error but do not return it, to match the existing code.
+At this point most things work, including booting a distro, so drop
+this message.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/pxe_utils.c | 19 ++++++++-----------
- 1 file changed, 8 insertions(+), 11 deletions(-)
+ arch/x86/lib/spl.c               | 2 +-
+ doc/board/emulation/qemu-x86.rst | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index c9da82b8e45f..5ceabfd04ee6 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -568,10 +568,8 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 			  char *initrd_addr_str, char *initrd_filesize)
+diff --git a/arch/x86/lib/spl.c b/arch/x86/lib/spl.c
+index c15f11f8cdf4..4e4cf18dec5c 100644
+--- a/arch/x86/lib/spl.c
++++ b/arch/x86/lib/spl.c
+@@ -283,7 +283,7 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
  {
- 	struct bootm_info bmi;
--	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
- 	const char *fdt_addr;
- 	ulong kernel_addr_r;
--	int zboot_argc = 3;
- 	void *buf;
  	int ret;
  
-@@ -625,16 +623,10 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 	}
+-	printf("Jumping to 64-bit U-Boot: Note many features are missing\n");
++	printf("Jumping to 64-bit U-Boot\n");
+ 	ret = cpu_jump_to_64bit_uboot(spl_image->entry_point);
+ 	debug("ret=%d\n", ret);
+ 	hang();
+diff --git a/doc/board/emulation/qemu-x86.rst b/doc/board/emulation/qemu-x86.rst
+index c604e42990ed..4eeba46ba7a9 100644
+--- a/doc/board/emulation/qemu-x86.rst
++++ b/doc/board/emulation/qemu-x86.rst
+@@ -134,7 +134,7 @@ The output will be something like this::
  
- 	bmi.addr_fit = kernel_addr;
--	zboot_argv[1] = kernel_addr;
+    U-Boot SPL 2023.07 (Jul 23 2023 - 08:00:12 -0600)
+    Trying to boot from SPI
+-   Jumping to 64-bit U-Boot: Note many features are missing
++   Jumping to 64-bit U-Boot
  
--	if (initrd_addr_str) {
-+	if (initrd_addr_str)
- 		bmi.conf_ramdisk = initrd_str;
  
--		zboot_argv[3] = initrd_addr_str;
--		zboot_argv[4] = initrd_filesize;
--		zboot_argc = 5;
--	}
--
- 	if (!fdt_addr)
- 		fdt_addr = env_get("fdt_addr");
- 
-@@ -657,8 +649,13 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 	else if (IS_ENABLED(CONFIG_BOOTM))
- 		ret = bootz_run(&bmi);
- 	/* Try booting an x86_64 Linux kernel image */
--	else if (IS_ENABLED(CONFIG_CMD_ZBOOT))
--		do_zboot_parent(ctx->cmdtp, 0, zboot_argc, zboot_argv, NULL);
-+	else if (IS_ENABLED(CONFIG_ZBOOT))
-+		ret = zboot_run(hextoul(kernel_addr, NULL), 0,
-+				initrd_addr_str ?
-+					hextoul(initrd_addr_str, NULL) : 0,
-+				initrd_addr_str ?
-+					hextoul(initrd_filesize, NULL) : 0,
-+				0, NULL);
- 
- 	unmap_sysmem(buf);
- 
+    U-Boot 2023.07 (Jul 23 2023 - 08:00:12 -0600)
 -- 
 2.43.0.472.g3155946c3a-goog
 
