@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F5FC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790AFC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A25E8798E;
-	Fri, 15 Dec 2023 14:17:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C0B9487BB9;
+	Fri, 15 Dec 2023 14:26:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jT2624Xl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C43F87B85; Fri, 15 Dec 2023 14:17:41 +0100 (CET)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F7C587BC1; Fri, 15 Dec 2023 14:26:26 +0100 (CET)
+Received: from 4.mo581.mail-out.ovh.net (4.mo581.mail-out.ovh.net
+ [178.32.122.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 268528755D
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:17:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E49C87BB1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4258b8632f4so5022521cf.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:17:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702646258; x=1703251058; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m4szXc+dNtL7r8a/YPLp13Cikf3nzFInvkFUk1At718=;
- b=jT2624XlnxaQKxkiJLekT6Af355q/8uPSmmTHUr9iHjizRlOnRxO8ZMXg8n/TgR5B1
- 78E5uGMbiE5s2rqpPx68f0Q5uxxWz39J6ZPczjD7BnqO+w0yWVEZcSI5olQZqlOsPxWX
- 9FknkvKyh9JTFJq4Bt5ydsWvH6SXsqm3rWTR4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702646258; x=1703251058;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m4szXc+dNtL7r8a/YPLp13Cikf3nzFInvkFUk1At718=;
- b=pkCv7mArc/v9oyy+1zG8rWgG0Fyp7hB0dPHNjCrhzn6tSFK3EmFBJDVdR74u903Ce3
- bteqfvoEj2DS8hDhxLwu7BWl1UGrkxyeS4XsAGc4HqvQI6ivIZ0AmAT+ksZbZH5Uxh7x
- 8gR8mlSEC6S4j0qwuTlLMzGjNoRSX00SH2zADHF2b2HVj0FBO37gTAieE8nHrLUBEIEM
- RnAePdR0ABkDhbxokS6EIpTGjDoUbdt7daoHCFxxw6pPs3X94rczSryh64vceoaWLy2m
- jL7ZCAd9JRH5BC4tUffo0uy5ufFz+qeOelE2CoovxhJDDv74CXbiq2QAWI7Sa6AdNS50
- qNeQ==
-X-Gm-Message-State: AOJu0YyD5MI+tbp+qOUJUhp3MsSJi/bMrN0dLy5xWvkTFtkEqEH5eWqj
- +wFWAkRXQ3duq7qYkE4meQkwD7ng/Su6sztyhBM=
-X-Google-Smtp-Source: AGHT+IGZ38WdGPMS5+QUdsfPMGWv3Ufy9atzDFJm7xAE0Yki/jdvfJ7+M9BAW+/Hv7saAnp1RX2Uow==
-X-Received: by 2002:ac8:7dc6:0:b0:425:9f0f:d7fe with SMTP id
- c6-20020ac87dc6000000b004259f0fd7femr16078137qte.65.1702646257810; 
- Fri, 15 Dec 2023 05:17:37 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
- [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
- by smtp.gmail.com with ESMTPSA id
- e7-20020ac845c7000000b00418122186ccsm6628929qto.12.2023.12.15.05.17.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 05:17:37 -0800 (PST)
-Date: Fri, 15 Dec 2023 08:17:35 -0500
-From: Tom Rini <trini@konsulko.com>
-To: =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] arm: spl: Use separate fault handlers instead of a
- single common one
-Message-ID: <20231215131735.GT2513409@bill-the-cat>
-References: <20231214162931.34236-1-csokas.bence@prolan.hu>
- <20231214175348.GM2513409@bill-the-cat>
- <723ec7d9-218d-4ad2-ae02-ead55a10dafd@prolan.hu>
+ dmarc=none (p=none dis=none) header.from=armadeus.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sebastien.szymanski@armadeus.com
+Received: from director11.ghost.mail-out.ovh.net (unknown [10.108.17.234])
+ by mo581.mail-out.ovh.net (Postfix) with ESMTP id 845F528C2F
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:26:23 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-z9m4m (unknown [10.110.178.161])
+ by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id C6C4E1FD9C;
+ Fri, 15 Dec 2023 13:26:22 +0000 (UTC)
+Received: from armadeus.com ([37.59.142.101])
+ by ghost-submission-6684bf9d7b-z9m4m with ESMTPSA
+ id WAnxLv5TfGXQsgAAI9rXVg
+ (envelope-from <sebastien.szymanski@armadeus.com>);
+ Fri, 15 Dec 2023 13:26:22 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-101G004fd18ba91-fa62-4756-b31c-10cfd448d871,
+ EE1322658B9640F39C03CDED81C5E13E4737D870)
+ smtp.auth=sebastien.szymanski@armadeus.com
+X-OVh-ClientIp: 92.148.253.243
+Message-ID: <8e73cb81-b40e-472c-bfb6-cb4ff32dff19@armadeus.com>
+Date: Fri, 15 Dec 2023 14:25:33 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1389jPki66Rj8fWN"
-Content-Disposition: inline
-In-Reply-To: <723ec7d9-218d-4ad2-ae02-ead55a10dafd@prolan.hu>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] Makefile: pass -ansi option to cmd_gen_envp
+Content-Language: en-US
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Le Jin <le.jin@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Fabio Estevam <festevam@denx.de>, Heiko Schocher <hs@denx.de>,
+ Jesse Taube <mr.bossman075@gmail.com>, Eduard Strehlau <eduard@lionizers.com>
+References: <20231215111333.31286-1-sebastien.szymanski@armadeus.com>
+ <CAOMZO5C8F3EpzpMS3=XC5n8uzzR30LBpY9V7t-Het7NEe+krXQ@mail.gmail.com>
+From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
+ xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
+ ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
+ yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
+ ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
+ cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
+ AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
+ LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
+ /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
+ v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
+ 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
+ d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
+ ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
+ B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
+ vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
+ zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
+ KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
+ FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
+ 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
+ MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
+ ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
+ DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
+ ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
+ pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
+ JNoSD7Kz6Y9qnKo=
+In-Reply-To: <CAOMZO5C8F3EpzpMS3=XC5n8uzzR30LBpY9V7t-Het7NEe+krXQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 6052556425107270557
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrvddtvddghedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefurogsrghsthhivghnucfuiiihmhgrnhhskhhiuceoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqeenucggtffrrghtthgvrhhnpedtgeehtdduledtudevveekveevveefffdthedtieekgeeukeevtdffieegteekhfenucfkphepuddvjedrtddrtddruddpledvrddugeekrddvheefrddvgeefpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +101,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Fabio,
 
---1389jPki66Rj8fWN
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 12/15/23 13:03, Fabio Estevam wrote:
+> Hi Sébastien,
+> 
+> On Fri, Dec 15, 2023 at 8:14 AM Sébastien Szymanski
+> <sebastien.szymanski@armadeus.com> wrote:
+> 
+>> --- a/board/siemens/iot2050/iot2050.env
+>> +++ b/board/siemens/iot2050/iot2050.env
+>> @@ -1,4 +1,4 @@
+>> -// SPDX-License-Identifier: GPL-2.0+
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+> 
 
-On Fri, Dec 15, 2023 at 01:10:45PM +0100, Cs=F3k=E1s Bence wrote:
->=20
->=20
-> 2023. 12. 14. 18:53 keltez=E9ssel, Tom Rini =EDrta:
-> > On Thu, Dec 14, 2023 at 05:29:31PM +0100, Cs=F3k=E1s Bence wrote:
-> >=20
-> > > It may be necessary to set breakpoints etc. on a specific fault handl=
-er in SPL.
-> > > Add a Kconfig option to separate the different handlers into their ow=
-n individual infinite loops.
-> > >=20
-> > > Signed-off-by: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
-> > > ---
-> > >   arch/arm/Kconfig       | 10 ++++++++++
-> > >   arch/arm/lib/vectors.S | 18 ++++++++++++++++++
-> > >   2 files changed, 28 insertions(+)
-> > >=20
-> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > index 328e2ddc33..47494cb72b 100644
-> > > --- a/arch/arm/Kconfig
-> > > +++ b/arch/arm/Kconfig
-> > > @@ -79,6 +79,16 @@ config SPL_SYS_NO_VECTOR_TABLE
-> > >   	depends on SPL
-> > >   	bool
-> > > +config SPL_USE_SEPARATE_FAULT_HANDLERS
-> > > +	bool "Use separate fault handlers instead of a single common one"
-> > > +	depends on !SPL_SYS_NO_VECTOR_TABLE
-> >=20
-> > Will this dep catch that this is only valid for !ARM64 && !CPU_V7M ?
->=20
-> Is it? How so?
-> So should I put `depends on !SPL_SYS_NO_VECTOR_TABLE && !ARM64 && !CPU_V7=
-M`
-> instead?
+With the -ansi option, the C++ style comments make an error:
 
-Well, looking at arch/arm/lib/Makefile, vector.S is only used in the
-case I said, so you would need to modify the other files as well.
+include/generated/env.txt:1:1: error: C++ style comments are not allowed 
+in ISO C90
+     1 | // SPDX-License-Identifier: GPL-2.0+
 
---=20
-Tom
+I should have mention that in my commit log.
 
---1389jPki66Rj8fWN
-Content-Type: application/pgp-signature; name="signature.asc"
+Regards,
 
------BEGIN PGP SIGNATURE-----
+> This is an unrelated change.
+> 
+>>   /*
+>>    * Copyright (c) Siemens AG, 2023
+>>    *
+>> diff --git a/board/storopack/smegw01/smegw01.env b/board/storopack/smegw01/smegw01.env
+>> index 93de8669109d..6807ada71887 100644
+>> --- a/board/storopack/smegw01/smegw01.env
+>> +++ b/board/storopack/smegw01/smegw01.env
+>> @@ -1,4 +1,4 @@
+>> -// SPDX-License-Identifier: GPL-2.0+
+>> +/* SPDX-License-Identifier: GPL-2.0+ */
+> 
+> Same here.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8UecACgkQFHw5/5Y0
-tyyM+QwAjiyFOndcmqxHLn77Sk8vR79/hVY0Md4cHQWPijSXkGWqNcLdOlLVU8UI
-4FCTA7XdGeHzQC+DqShmPOFUtSlRKzdykEn3TuC9P0rrBAuAMM8mpuQQr3EllJoh
-xpVpiZ4KpYKXlVT7UyEkYrNb2RllA6QnkGrgrBYrMet7VcDid2zeTqgn7acM5JZz
-h5GCZAGDbqzxmyh8mVK/jwvMTg7P+XiQr9vfV5V7TZse1ham0BWaDvrd+jYE8UOt
-pquEHvo1UuK4MS9EGUVGBEUm+/TKf4+oJhNvtNbDy1Z3/bWycpeely3H2y/Nzs3g
-Z3SP2nHVtyQ0e1aAUxXbT8i2oXQlKOVhFCQi4vRiOUh+gXkY4eP7USBGgx+GGv4V
-KA6QWrEOysNV460vmTWF+Lg4ae6ryepBptwN0dM1J82qYla3AwdMJAMsC0TtHHCN
-sybiXGwFTKr+1i41dgiRhIoXcUcuUSCrSTDGxmBO1tbjkwLoRHtQhG/7idm2y2Xr
-uDYWlK9i
-=CK5V
------END PGP SIGNATURE-----
+-- 
+Sébastien Szymanski, Armadeus Systems
+Software engineer
 
---1389jPki66Rj8fWN--
