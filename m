@@ -4,53 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88039C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C442EC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:15:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21E7F87BC4;
+	by phobos.denx.de (Postfix) with ESMTP id A515187BC9;
 	Fri, 15 Dec 2023 14:15:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=longervision.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=longervision.com header.i=@longervision.com header.b="RUi4V6Gz";
+	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="lOKGv8Ec";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B00887B60; Fri, 15 Dec 2023 11:46:26 +0100 (CET)
-Received: from mail.longervision.com (longervision.com [159.65.68.90])
+ id 133A287B9E; Fri, 15 Dec 2023 13:10:49 +0100 (CET)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E36487695
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:46:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=longervision.com
+ by phobos.denx.de (Postfix) with ESMTPS id DFF7687B69
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:10:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jiapei@longervision.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A8FC38731D5
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 02:46:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=longervision.com;
- s=dkim; t=1702637175;
- h=from:reply-to:subject:date:message-id:to:mime-version:content-type:
- content-language; bh=IX0GRgVpInyBvy6xDsvH8ZU97tEKd1DqwKDcIwdQIR4=;
- b=RUi4V6Gzsfqb62S/VeMrcw/CVf1miWetw5WW67VvhDcrKefLEO23slOg/5iuSFY4pA19U+
- Fnlgg6jLhh7cmzK/AaqSsADDWkeNEeinFmr0CCqvQHuNQ0J55IXqiIbtyr/RpU9b/hNke5
- 1VU5GhuaYde0uYTK3xVugDSzS/NqrviTc3CTJQFNKHoJ1F8TwGOPB+cg6Dz3CoE3/ZmwHR
- Pf9rZXqyuBCJr5myVwqSh+Xy4i7RdHnYYOEdPhI920bbFOAF6rVNGOIlSe9rBomkv2mEzi
- nI8RTZCXP26IAEh43iCta1UIfBhEeqjzoXHaDsNiywXmvKHX7gcxftxw8USvYw==
-Message-ID: <5d800e23-e427-4198-ab24-f2e1fe595c4f@longervision.com>
-Date: Fri, 15 Dec 2023 02:46:10 -0800
+ dmarc=pass (p=none dis=none) header.from=prolan.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
+ [127.0.0.1])
+ by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 417B7A05EF;
+ Fri, 15 Dec 2023 13:10:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :from:from:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=mail; bh=xHeXEFmwzIf9HmOD/y4s
+ PWVzRpxYpvNClRfUmkLcq+8=; b=lOKGv8EcTL4JJyMTjVUFKgaqyza+ybuA3Wlq
+ 7M2jl+1Q3WIi82mTbWuKQa6nauz3zeu/pIcIUZsr0Gx3sipSEUBzKwHW+1Q0f7Lh
+ eF5zdqEGZRJS/IbY+yUE8MzbpJyz+Qhbs0EHjqWfI9iCghibLitg8UUGCEiHCEHq
+ R3SQ+sSYSc6y/oAO+Vl9n2YnFNU1qY6fhiqzV+XJ+Iw2QRZawBO8Q/xq4SCZt3r/
+ uvT9melgDVyM85gn97O3zDg8BTJ32JsYM6SUujeorG0mL/5ISl3potwthMUpaZWl
+ t01LQ/lGf1p4OSMN8pRKSlF8QP8X+87/8iaR6lGwmuNyKsy+LJMkpIJ7VYCXj77D
+ iLEh2+r/AvXUqYVHf5tAGq6zv0Qh4lDBHXmWc5I8iHEIUGuN/JVP96KqQjCUTuo9
+ GBTjerAYyYRtyDmhDu0rT5t4WfrKixucX44bN9BYcHzp0xXCTLbGhoTH0yAQ2gGu
+ UO6nQBbH1pB3BjoLKvoiq5jOFAwF9GFtUb0Jud5NWx4RQqj3Dnb9GIjGLe3uZMGL
+ gPRZ8QdXrD+d7APGMkZul/uZtf3SP+/2lYfJ+ZXBhEAgCT6GzHcxMsNImusOxNCh
+ c89sRqwkvfgcD9WbOqj7a47D4qEqHrcm1xZx/JpSYJE1PL/AJmzSOINOFvckGgHI
+ 3hoeEQU=
+Message-ID: <723ec7d9-218d-4ad2-ae02-ead55a10dafd@prolan.hu>
+Date: Fri, 15 Dec 2023 13:10:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: spl: Use separate fault handlers instead of a single
+ common one
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20231214162931.34236-1-csokas.bence@prolan.hu>
+ <20231214175348.GM2513409@bill-the-cat>
 Content-Language: en-US
-To: u-boot@lists.denx.de
-From: Pei Jia <jiapei@longervision.com>
-Subject: Where is the u-boot for BeagleV-Fire?
-Organization: Longer Vision Technology (Canada) Ltd.
-X-Last-TLS-Session-Version: TLSv1.3
+From: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>
+In-Reply-To: <20231214175348.GM2513409@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.254.7.28]
+X-ClientProxiedBy: ATLAS.intranet.prolan.hu (10.254.0.229) To
+ sinope.intranet.prolan.hu (10.254.0.237)
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29916D385C6D7066
 X-Mailman-Approved-At: Fri, 15 Dec 2023 14:15:15 +0100
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,24 +77,51 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: jiapei@longervision.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Where can I find the u-boot defconfig file for BeagleV-Fire?
 
-I've got an issue posted at 
-https://forum.beagleboard.org/t/error-illegal-operands-li-t1/36823 .
+2023. 12. 14. 18:53 keltezéssel, Tom Rini írta:
+> On Thu, Dec 14, 2023 at 05:29:31PM +0100, Csókás Bence wrote:
+> 
+>> It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
+>> Add a Kconfig option to separate the different handlers into their own individual infinite loops.
+>>
+>> Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
+>> ---
+>>   arch/arm/Kconfig       | 10 ++++++++++
+>>   arch/arm/lib/vectors.S | 18 ++++++++++++++++++
+>>   2 files changed, 28 insertions(+)
+>>
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 328e2ddc33..47494cb72b 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -79,6 +79,16 @@ config SPL_SYS_NO_VECTOR_TABLE
+>>   	depends on SPL
+>>   	bool
+>>   
+>> +config SPL_USE_SEPARATE_FAULT_HANDLERS
+>> +	bool "Use separate fault handlers instead of a single common one"
+>> +	depends on !SPL_SYS_NO_VECTOR_TABLE
+> 
+> Will this dep catch that this is only valid for !ARM64 && !CPU_V7M ?
 
+Is it? How so?
+So should I put `depends on !SPL_SYS_NO_VECTOR_TABLE && !ARM64 && 
+!CPU_V7M` instead?
 
-Thank you...
+> 
+>> +	default n
+> 
+> "n" is the default, so don't add this.
 
+Understood.
 
--- 
-Dr. Pei Jia
-Email: jiapei@longervision.com
-Cell: +1 778-863-5816 <tel:+17788635816>
-Website: https://www.longervision.ca
+> 
+> Otherwise looks good.
+> 
+
