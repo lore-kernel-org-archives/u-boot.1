@@ -4,152 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F131C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A674C46CA2
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A39E387C1D;
-	Fri, 15 Dec 2023 15:51:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 28F2087C24;
+	Fri, 15 Dec 2023 15:52:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="YXNtnDSV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hddY5dH6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E79A487BC7; Fri, 15 Dec 2023 15:51:29 +0100 (CET)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.109.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BBB8C87C28; Fri, 15 Dec 2023 15:52:02 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88B6987C1D
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:51:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id 8D50D87C24
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:51:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1702651887;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PTz/hq9qdDOizDRrJiNMpH+nyrVqIkawtk1x0+tAnZw=;
- b=YXNtnDSVpihoqBqJ7sk4+QYAlAD+E9IvDHcEhCif/K1lcVZ43qEITD3jD9qrHmIJytVlbc
- bnSLbrFTsQEOdCO4Ygtgl3VLiiWwVwRQyV56sqUn7tbRVUIPnBKa61v4zTn8y5LkU9bpfU
- bi0pQAJDRBQWsH6E/am41u9bIolsnT4=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2040.outbound.protection.outlook.com [104.47.22.40]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-3-PDvf-mY6Noa34uYBdUQbkg-1; Fri, 15 Dec 2023 15:51:24 +0100
-X-MC-Unique: PDvf-mY6Noa34uYBdUQbkg-1
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR2P278MB0987.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:61::13) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7091.31; Fri, 15 Dec 2023 14:51:22 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::cdd5:e0c0:e3f7:dd1]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::cdd5:e0c0:e3f7:dd1%5]) with mapi id 15.20.7091.032; Fri, 15 Dec 2023
- 14:51:22 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "nm@ti.com" <nm@ti.com>
-CC: "jh80.chung@samsung.com" <jh80.chung@samsung.com>, "rogerq@kernel.org"
- <rogerq@kernel.org>, "sabiya.d@ti.com" <sabiya.d@ti.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "n-francis@ti.com"
- <n-francis@ti.com>, "kamlesh@ti.com" <kamlesh@ti.com>, "afd@ti.com"
- <afd@ti.com>, "a-nandan@ti.com" <a-nandan@ti.com>, "j-choudhary@ti.com"
- <j-choudhary@ti.com>, "lukma@denx.de" <lukma@denx.de>,
- "sinthu.raja@mistralsolutions.com" <sinthu.raja@mistralsolutions.com>,
- "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "m-chawdhry@ti.com"
- <m-chawdhry@ti.com>, "hnagalla@ti.com" <hnagalla@ti.com>,
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BFEpmur026820;
+ Fri, 15 Dec 2023 08:51:48 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1702651908;
+ bh=1XtT6eVQtPt+nlS6qUJw7zrSNgvFMRdxFLGZDUbjJOs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hddY5dH6fQ1YT0YqcdB9gFWu0yrVDbja8ghVX0AC4of2/0IC6J4eqRT14qdf18xQh
+ IFNKLLlH7qXzuTJiLE1/Uz1UDCM3k0S7cwSfVgR3b2sh9w8kIrcnoyEGHuykwCsw7E
+ kKQNnRJM1BaE2sxzM3xwFglPIu89Wk9RpnwdAryM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BFEpmDX051527
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 15 Dec 2023 08:51:48 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 15
+ Dec 2023 08:51:48 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 15 Dec 2023 08:51:47 -0600
+Received: from [10.247.16.251] (ula0226330.dhcp.ti.com [10.247.16.251])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BFEpljq078351;
+ Fri, 15 Dec 2023 08:51:47 -0600
+Message-ID: <1f2ffe78-2771-4ff7-be74-ab8ef92adf05@ti.com>
+Date: Fri, 15 Dec 2023 08:51:47 -0600
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, "bb@ti.com" <bb@ti.com>
+CC: "jh80.chung@samsung.com" <jh80.chung@samsung.com>, "sjg@chromium.org"
+ <sjg@chromium.org>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "n-francis@ti.com" <n-francis@ti.com>, "kamlesh@ti.com" <kamlesh@ti.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "a-nandan@ti.com" <a-nandan@ti.com>, "j-choudhary@ti.com"
+ <j-choudhary@ti.com>, "lukma@denx.de" <lukma@denx.de>, "hnagalla@ti.com"
+ <hnagalla@ti.com>, "a-bhatia1@ti.com" <a-bhatia1@ti.com>,
+ "m-chawdhry@ti.com" <m-chawdhry@ti.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>,
  "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
  "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>, "sjg@chromium.org"
- <sjg@chromium.org>, "ralph.siemsen@linaro.org" <ralph.siemsen@linaro.org>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "bb@ti.com" <bb@ti.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "sinthu.raja@mistralsolutions.com" <sinthu.raja@mistralsolutions.com>,
+ "nm@ti.com" <nm@ti.com>, "ralph.siemsen@linaro.org"
+ <ralph.siemsen@linaro.org>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "sabiya.d@ti.com" <sabiya.d@ti.com>,
+ "rogerq@kernel.org" <rogerq@kernel.org>,
  "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
-Thread-Topic: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
-Thread-Index: AQHaKEErqILJ/BT++EqH7SwUhV8EjbCpGYyAgAApEICAANQZgIAAXTsAgAAH44A=
-Date: Fri, 15 Dec 2023 14:51:22 +0000
-Message-ID: <6098b6c45f0e2c59a85d1a8671f8724bf2372dda.camel@toradex.com>
 References: <20231206123753.1486031-1-a-nandan@ti.com>
  <51eeab25314144926eaefaa2e83353ffec9309fe.camel@toradex.com>
  <20231214201019.5bjxb5ki67yjn4ku@bryanbrattlof.com>
- <946574dc39d1cfb5bd08950a61eae06f3fbdc06c.camel@toradex.com>
- <20231215142308.2vbeicrlkbgr2pui@rebound>
-In-Reply-To: <20231215142308.2vbeicrlkbgr2pui@rebound>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR2P278MB0987:EE_
-x-ms-office365-filtering-correlation-id: 9e229072-8971-44cb-3dea-08dbfd7d4ddb
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: OnjZ6Yqi9ziBJ2XoVkUVFAPyv3g5agudabu2ZImPd/s/LCqBxOWI5AzNoLWHfanEuuigyFb7BObhFqFv3W6y8p8ToVwJF2a5W9T0eYKNPzQtY6G990X8348BMCH1SVUR4UAKkARoOqUyakRK+fPLxwSEj0FGaHgNKAsWGmiajGd9QA3jxRZr11cuvjU0zUcdCVsF00+pRw6OC9xMw5XruCtWSgoFtFX9Srh8BDQOrn8tdPj9mdGaDMfQHu2jZ07+8+0Uuaoht1/e8HDwi8sUcPFa9g+qOjFFUbS8UY8W+GW/Rn24qtDaXWCJefQtKeddYo54DLOwjZv/F32KmF5RCc5SEHJ3RvdQ1ruGgSiskmjrnnuhex5R9rGVt2g5Jk5KsxAxNFaFKHqpiPM9kPf+UJlSAVrga/lXxPK5iX8TMY0bjGem+210glMlQWY2CG8UZPflTL5Eoaytrpvwh8ZgJYDg1Xm147bkOQPde90sD//9UuXNduszK8fxqKyd67QZ5O7CG24rVho6PRXuj2KRbjEPBBhbwDmwOYtqqNWRnIozxaGdPo+9V/3qN8AN/WIQ6Je2W9mvT6hCBQictetVPjNVqYbLX1Ntv7Pkb3K4Y1c=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(376002)(39850400004)(396003)(366004)(346002)(230922051799003)(1800799012)(186009)(451199024)(64100799003)(316002)(54906003)(66476007)(66446008)(64756008)(66556008)(6916009)(66946007)(8676002)(76116006)(6506007)(8936002)(6486002)(7416002)(5660300002)(4326008)(44832011)(478600001)(86362001)(41300700001)(83380400001)(71200400001)(2906002)(966005)(6512007)(2616005)(36756003)(4001150100001)(122000001)(38100700002)(38070700009);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?a2ErK3RCd2dMM08ySEdOSVpVYTJBMGpHMHFmU1dPTVIrUVFDSFd5VWs1Z3hO?=
- =?utf-8?B?dWhNZVl3ZGhPWXhWVTZWZTdKUVZKQ3lyYk1kMEFVanlIVzlKMmRSUVdqaFZC?=
- =?utf-8?B?aFRrcW00NkFtYW5nSUQ1eHRpdDlBSTFxTWtBd01KdWxGWlZkc3MyNXA2SlZQ?=
- =?utf-8?B?L1AzVmFnSUtmd0c5dDM4ZlJBNTVpd0RaZXpyWW5zNXFDQlUwbjZsaWRHT3lP?=
- =?utf-8?B?aTBaQnhpVXR1V2V5d0g5aU9YVVQwVjFPRkZsSDlERW5SaEtDaUhzVE4ydUtU?=
- =?utf-8?B?OFZERzhjbWc2RGtGS2E5VkJQOVNyc2VuZ1R5clh1MzdWb2ZiUU9CWGRaZytT?=
- =?utf-8?B?bkd5Sy9ESklYWXZ5d1lvS2s1aVFmRGFFV3pVaUxFdHNyaUxrakJvMEhrV0ph?=
- =?utf-8?B?M2JDUllsdnU2QjNzNmFiR1ZaQnMzWnNwSUoyM3ZRS0JpMnQ4ZVBtUUw3N3ZR?=
- =?utf-8?B?bXd1c3hQSjNZOUIzYUozdDEyci80NHZ3Wk1FQ3Z4TW1SQWF6ZDlJZnNpS1M5?=
- =?utf-8?B?OGhQYWJHajZGMTJXL09kVmRPN2hNMGxpajdWOTJLRXc4bE5EaFJJdFZuR0Zw?=
- =?utf-8?B?Zm5LeVBYNno2bWVMcnV6cHp0OHp6dmFLKzcrZEZnZGJBQVJOeFpUODRXdHdz?=
- =?utf-8?B?eDZhNVdkQTZYTkhCY1p0UVlLa08zajNMMFQrejVKbVROK3RHUjdOWVo1ZWlJ?=
- =?utf-8?B?VTRXY2lLakNBUzVvaWVaWmhUSGdaeXpEb0R6bE91ZWhWSVA3NWpDait4Yk1p?=
- =?utf-8?B?VE44dHZKdnJFWmE1bzRlaHluWHZuTWxDa2lNM0xoRzhQaUpYem5LeThkQVlI?=
- =?utf-8?B?NTZTRURwZFhTV2p3MUt1amFSVWVMOHdjWmE3SnhSWjRIc0NEZEJiRzlGUXlJ?=
- =?utf-8?B?Z0wycU96MERzd2lFS3BWUmpKQldUVFVQQzFtdHV4TS93R09uRi8rNUlHQUxN?=
- =?utf-8?B?cjNOYm4reWZqeDZ1S0gvY0FhaHZnc2RIMlBxeGc0T3lJSVRGWWRFKzVZdFov?=
- =?utf-8?B?Vkh4L0dNU1NDZlkwWTFaeUIvQzVnL0lGaE9NK1BMVks5SW93RWt2SkZhNUxQ?=
- =?utf-8?B?dUR3aFU1a3F2YW9uNHkwbkt4QUJPcE56bkRIcHppNVRYQ1hJdm1OcVZ5VVQ1?=
- =?utf-8?B?R3NNd3ZrSUR4byttTTdFbHJFd2NDZUF5aGFGaWlrRFNrL0xhcno3T0svaFFP?=
- =?utf-8?B?Q2tUMm1NdU5ZWjFHdXE1SFkxelBNYzVrd1h2SU1BajdLOU5Ldis3OFRBSDZw?=
- =?utf-8?B?bktBV1d4L2NMK2Z2MVN1TWJObXoxakt0U1F3WGh4Zngzcm4xMkl6L2ZkSllZ?=
- =?utf-8?B?bWtlVldsWWFweUdHV21QNXpxT2dBNGE0UXI2cTRraEM2dFhDVE4wYVFLR3cr?=
- =?utf-8?B?NmtvdHd0eVpLSDlGUnFlVUxYYi9ZVHhmNEFOc0Q5bmtnNE1YNE5rL0NINUhh?=
- =?utf-8?B?dkVlekROMG02ZGF6cE5tWjQyYll3Yy91RkJ0eHVsSEZMU0dWeHFmaEVyTXpr?=
- =?utf-8?B?WG8vVGw0TG9qSDZKd0NIQVdmdEVsc0VVRkt5RnB3UjRyM2o0cGxLU0pNTWVY?=
- =?utf-8?B?aUpvd1ZSeDNKa2ZmelNOeTJpN1JEVXhFc0NXS3Z1UE9CMFhwVUIwUFExOUtx?=
- =?utf-8?B?cGxGUkJJSEo5OVROeG5sd0RZeFBxaURVN0pmV2ZZSUsyWk5kYkV5T051blFJ?=
- =?utf-8?B?TGk4S3JRekdDVDFiN0lVK1A5NnpMd21pUllSN01tVnBmbk5RZDZrSk5TbUc5?=
- =?utf-8?B?OUtkcFlWZWxYQVVBM2g4cWxLY1VLam9WUWtTTE5FeUpMamZRUHJDYlRuSUhJ?=
- =?utf-8?B?SVlqOHoyNmVQenZFUW04dkhCdHlzTXNPWWkvVElTN3JuNG9UU0tsNjQwUXlL?=
- =?utf-8?B?eXJOckJxV3FObkVXQjhER2o1V1pQc3BZemRzWWxKemZQREM4bmozNmR4Um11?=
- =?utf-8?B?T2wwQ3J5RGx3ZzAyREVxZnROMDJYeWR3ZHg1WW04OVdFOG9wUzgwc0lSc3hJ?=
- =?utf-8?B?em9Gd29HMmJPeDZIV3B1NUhUbmx6VUVPeC8vZTdFUWEwZnN4bFVQZ1QxUmN5?=
- =?utf-8?B?S1B2UHNZRFNZMlNzTWgvZmJ6ZE0vdGtWSEE5OCsvNS9rUlNoQ2lzTGdvcFI3?=
- =?utf-8?B?a3AyR0YrZTR3ckRjZUl1UTU1YXUzVjBkdVFqK21jLzlKWnZuT1lOWHlDVmQ1?=
- =?utf-8?B?YlJBcWdZOURyK091VVhZSGxFTTllbDF6a0RsYXVnUGVIOWVBZ1NoS1NROGtP?=
- =?utf-8?B?TGhISTJmTElTeEUrRnhEZ3ZsdjhRPT0=?=
-MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e229072-8971-44cb-3dea-08dbfd7d4ddb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Dec 2023 14:51:22.1659 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: o6zehyMJ4qCDu0kycUzvgywrqmT3P35xMrUp5zWrcFcKffQTwYFOLf+0pGepEwNmYZvMUhkaRCESQLw5IDrIkEyKyeGPGY/wt/4IXnE6X3Y=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR2P278MB0987
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
+ <1a97e28b-34ad-44e5-8fbd-ced7a5a69d68@ti.com>
+ <b8777dbd0fae3ce00f41e00601cc8ad62b171b87.camel@toradex.com>
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <6E6451EF8AB0334E9AFBC44859B2D2BE@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <b8777dbd0fae3ce00f41e00601cc8ad62b171b87.camel@toradex.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,36 +99,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gRnJpLCAyMDIzLTEyLTE1IGF0IDA4OjIzIC0wNjAwLCBOaXNoYW50aCBNZW5vbiB3cm90ZToN
-Cg0KW3NuaXBdDQoNCj4gPiA+IFdoYXQgdmVyc2lvbiBvZiBUSUZTIGFyZSB5b3UgcnVubmluZz8g
-Tm90IGdldHRpbmcgYSByZXNwb25zZSB1c3VhbGx5IA0KPiA+ID4gbWVhbnMgZmlybXdhcmUgaXMg
-ZGVhZCBvciB3ZSdyZSBub3QgdXNpbmcgdGhlIHJpZ2h0IHRocmVhZCB0byB0YWxrLg0KPiA+IA0K
-PiA+IFllYWgsIHNvcnJ5LiBJIHdhcyBhbHdheXMgcnVubmluZyB0aGUgbGF0ZXN0IGZyb20gdGhl
-IHRpLWxpbnV4LWZpcm13YXJlIGJyYW5jaDoNCj4gPiANCj4gPiBTWVNGVyBBQkk6IDMuMSAoZmly
-bXdhcmUgcmV2IDB4MDAwOSAnOS4xLjItLXYwOS4wMS4wMiAoS29vbCBLb2FsYSknKQ0KPiA+IA0K
-PiA+IFNvLCBpdCBpcyByZWFsbHkgVEYtQSB3aGljaCBzZWVtcyB0byBjYXVzZSB0aGUgaXNzdWUu
-DQo+IA0KPiBBY3R1YWxseSBub3QgVEZBIGVpdGhlciAoVEZBIGNvbXBsYWlucyBjb3JyZWN0bHkp
-LiB3ZSBoYXZlIGFuIGludGVybmFsDQo+IHRpY2tldCB0aGF0IGlzIGluIHRoZSBtaWRkbGUgb2Yg
-Z2V0dGluZyBmaXhlZCBmb3IgVElGUyBhbmQgUERLIHRvDQo+IGVuYWJsZSB0aGlzLiBhIGJpdCBv
-ZiBoaXN0b3J5OiBBIG5ldyBhcGkgVElTQ0lfTVNHX1FVRVJZX0ZXX0NBUFNbMV0NCj4gd2FzIGlu
-dHJvZHVjZWQgdG8gaGVscCBkZXRlcm1pbmUgd2hpY2ggdmVyc2lvbiBvZiBmaXJtd2FyZSBjb21i
-aW5hdGlvbg0KPiBzdXBwb3J0cyB3aGF0IGZlYXR1cmVzIChzdWNoIGFzIExvdyBwb3dlciwgZXRj
-KS4gVGhpcyBhbGxvd3MgZm9yDQo+IGNvbnNpc3RlbnQgVEZBL0tlcm5lbCBpbXBsZW1lbnRhdGlv
-biB0aGF0IGNhbiBkeW5hbWljYWxseSBkZXRlY3QNCj4gcGxhdGZvcm1zIChzaW5jZSBMUE0gYWxz
-byBpbnZvbHZlZCBhIGJpdCBvZiBmaXJtd2FyZSBoYW5kc2hha2luZyBmb3INCj4gYm9hcmQgc3Bl
-Y2lmaWMgZGV0YWlscyAtIFBNSUMgY29udHJvbCBhbmQgdGhlIGxpa2UpLiBUaGlzIEFQSSBpcyBh
-cw0KPiBmdW5kYW1lbnRhbCBhcyB2ZXJzaW9uIG1lc3NhZ2UgQVBJIHRoYXQgYWxsIGZpcm13YXJl
-IGFyZSBzdXBwb3NlZCB0bw0KPiBpbXBsZW1lbnQuIHVuZm9ydHVuYXRlbHkgdGhlIGRlZmNvbmZp
-ZyBvcHRpb24gZm9yIHRoYXQgQVBJIHdhc24ndA0KPiBwcm9wZXJseSBpbXBsZW1lbnRlZCBmb3Ig
-dmFyaW91cyBmaXJtd2FyZSBjb21wb25lbnRzIGNvcnJlY3RseS4gLQ0KPiBpbXBhY3RlZCBjaGlw
-cyBhcmU6IGo3MjFlLCBqNzIwMCwgajcyMXMyL2FtNjgsIGo3ODRzNC9hbTY5LiBPdGhlcg0KPiBL
-MyBwcm9jZXNzb3IgZmlybXdhcmUgaGF2ZSBpdCBpbXBsZW1lbnRlZCBjb3JyZWN0bHkuIFRoZSBs
-YXRlc3QNCj4gOS4xLjgtLXYwOS4wMS4wOCBoYXMgdGhlIGJ1ZyBhcyB3ZWxsIC0gYnV0IGhvcGVm
-dWxseSBzaG91bGQgYmUgZml4ZWQNCj4gYW5kIHJlbGVhc2VkIHNvb24taXNoLg0KDQpUaGFua3Ms
-IE5pc2hhbnRoLiBHbGFkIHlvdSBndXlzIGFyZSBhd2FyZSBvZiB0aGlzIGFuZCBJIGFtIG5vdCBq
-dXN0IHNlZWluZyB0aGluZ3MgKDstcCkuDQoNCj4gWzFdIGh0dHBzOi8vc29mdHdhcmUtZGwudGku
-Y29tL3Rpc2NpL2VzZC9sYXRlc3QvMl90aXNjaV9tc2dzL2dlbmVyYWwvY29yZS5odG1sI3Rpc2Np
-LW1zZy1xdWVyeS1mdy1jYXBzDQo+IC0tDQo+IFJlZ2FyZHMsDQo+IE5pc2hhbnRoIE1lbm9uDQo+
-IEtleSAoMHhEREI1ODQ5RDE3MzYyNDlEKSAvIEZpbmdlcnByaW50OiBGOEEyIDg2OTMgNTRFQiA4
-MjMyIDE3QTPCoCAxQTM0IEREQjUgODQ5RCAxNzM2IDI0OUQNCg0KQ2hlZXJzDQoNCk1hcmNlbA0K
+On 12/15/23 2:51 AM, Marcel Ziswiler wrote:
+> On Thu, 2023-12-14 at 14:28 -0600, Andrew Davis wrote:
+>> On 12/14/23 2:10 PM, bb@ti.com wrote:
+>>> On December 14, 2023 thus sayeth Marcel Ziswiler:
+>>>> Hi Apurva
+>>>>
+>>>> Thanks!
+>>>>
+>>>> On Wed, 2023-12-06 at 18:07 +0530, Apurva Nandan wrote:
+>>>>> Hello Everyone!
+>>>>>
+>>>>> This series will introduce basic support (SD and UART) support for Texas
+>>>>> Instruments J784S4 EVM.
+>>>>
+>>>> For the whole series:
+>>>>
+>>>> Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+>>>>
+>>>> However, one thing I noticed is that with upstream TF-A I do get the following errors:
+>>>>
+>>>> NOTICE:  BL31: v2.10.0  (release):v2.10.0-76-g02091541d
+>>>> NOTICE:  BL31: Built : 18:13:08, Dec 14 2023
+>>>> ERROR:   Failed to get response (-19)
+>>>> ERROR:   Transfer send failed (-19)
+>>>> ERROR:   Unable to query firmware capabilities (-19)
+>>>>
+>>>> While with latest TF-A from downstream TI BSP (both 9.0 and 9.1 use the same versin) I do not get any
+>>>> errors:
+>>>>
+>>>> NOTICE:  BL31: v2.9(release):v2.9.0-614-gd7a7135d3
+>>>> NOTICE:  BL31: Built : 18:40:38, Dec 14 2023
+>>>>
+>>>
+>>> What version of TIFS are you running? Not getting a response usually
+>>> means firmware is dead or we're not using the right thread to talk.
+>>>
+>>
+>> In this case the early versions of TIFS/DM for J784S4/AM69 had
+>> a bug where the "query firmware capabilities" API was left disabled.
+>> This is fixed in the next version of firmware, this error message
+>> is harmless today anyway (no LPM yet).
+> 
+> No, I was always running the latest from the ti-linux-firmware branch:
+> 
+> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.2--v09.01.02 (Kool Koala)')
+> 
+> So, it is really TF-A which seems to cause the issue here.
+> 
 
+When I said "fixed in the next version" I meant the next to
+be released, as in not yet out (I'd guess out in a week or so).
+Sorry for any confusion here.
+
+I added support for this new API to TF-A only recently,
+which is why the old TF-A versions don't print this error.
+Nishanth gives more details in the other thread, but as
+said this error is harmless and will go away in with
+the next firmware update.
+
+Andrew
+
+>> Andrew
+> 
+> Cheers
+> 
+> Marcel
