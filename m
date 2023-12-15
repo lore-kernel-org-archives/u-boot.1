@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B882C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:57:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8651AC41535
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:04:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00519877CD;
-	Fri, 15 Dec 2023 14:57:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D74EA87A64;
+	Fri, 15 Dec 2023 15:04:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="dqORwpSZ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="P9g1SUUl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F35A87BD3; Fri, 15 Dec 2023 14:57:48 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 414F2877CD; Fri, 15 Dec 2023 15:04:31 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2931E8755B
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:57:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FD4487AAE
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:04:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BF9d4L8006684; Fri, 15 Dec 2023 14:57:43 +0100
+ 3BF9TPBF028431; Fri, 15 Dec 2023 15:04:25 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=FuXGqSyWowDDTfL9mZvZkCwAoqWkzc5TYqF2mt9j6oc=; b=dq
- ORwpSZwaybGN8Ru2XV6NKrFAHvY96Yb7Qe96SHudR0bTuex6t65uFYUN5+Yj+cYo
- MAVBUhfi9XRMS0QEuWJKHgRGGiydBTyuLFhNgCtyCeQrvU7FpTlyu2gZkxLMKm1m
- l3GGOWvwXhe7z61voWqmQJKI99Z1KBVRD3HlQaOSu3kCFb7NvvnKKC/ACbqhPf/M
- q6izJo59qnicg+aHhKrkaCjLWhprf2m71sleicNqlnz6kRgUx7FBd37414AMmAOZ
- zCh6PriyY+pMFpASmZDXiFShmGV9T+RWAhEk3xlgunx+qLeazw4Lrxb6fiKervE/
- M1QGhhAySSxYKpVW5oKg==
+ selector1; bh=H2lemVg3y86YWYr1+x3r8QhF4IFv1F6vpTVi4m6GQ9o=; b=P9
+ g1SUUlOFd3xNEmnMIWEVdjj718D3TbCSPCuDkcbfrY56QSbaP5F34Xg4qlyaeAWr
+ k547QuzCKSRz0d0FoxZI5vIT39eSprqurlinoyhfHc3jGwvkWlUtoYH4Eq+AIYML
+ oJ2CZl6SxROQYstGNl44l/g2WAtlmk9zOxWUH+m1Gbd+HWjbPQmLtqRVunQVCGUM
+ 1zqiprbgygTFo/jrltGgMJ5hBThH5x8r6foW/E1B0BgsRHPtge8JulKGLyEUTXL7
+ NRFr5EDG6VXrovqA5ah8Se0XnMBcDBeBNolKKu1+bOBljyll0GgpvBXkibPVV1Z5
+ op+hn8BnG9+/M2lZKSqg==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvg0h9uht-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvehmtm1w-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 14:57:43 +0100 (CET)
+ Fri, 15 Dec 2023 15:04:25 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 919DA100052;
- Fri, 15 Dec 2023 14:57:42 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6778D100052;
+ Fri, 15 Dec 2023 15:04:24 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 825252248C9;
- Fri, 15 Dec 2023 14:57:42 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5B623226FB4;
+ Fri, 15 Dec 2023 15:04:24 +0100 (CET)
 Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 14:57:42 +0100
-Message-ID: <86978183-f731-428a-8bf2-3e1c27502e7d@foss.st.com>
-Date: Fri, 15 Dec 2023 14:57:41 +0100
+ 2023 15:04:23 +0100
+Message-ID: <6830f875-b159-4105-9a57-79c98b411d9d@foss.st.com>
+Date: Fri, 15 Dec 2023 15:04:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: stm32f769-disco: rework ltdc node
+Subject: Re: [PATCH 1/2] clk: stm32f: fix setting of division factor for
+ LCD_CLK
+Content-Language: en-US
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20231111104440.137117-1-dario.binacchi@amarulasolutions.com>
-Content-Language: en-US
+CC: <linux-amarula@amarulasolutions.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Sean Anderson
+ <seanga2@gmail.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20231111104625.137511-1-dario.binacchi@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231111104440.137117-1-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20231111104625.137511-1-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.23.141]
@@ -93,72 +94,31 @@ X-Virus-Status: Clean
 
 
 
-On 11/11/23 11:44, Dario Binacchi wrote:
-> With commit f479f5dbb7ac ("ARM: dts: stm32: add ltdc support on
-> stm32f746 MCU"), which adds the 'ltdc' node in stm32f746.dtsi, we can
-> simplify stm32f769-disco-uboot.dtsi and align stm32f769-disco.dtsi with
-> the kernel version.
+On 11/11/23 11:46, Dario Binacchi wrote:
+> The value to be written to the register must be appropriately shifted,
+> as is correctly done in other parts of the code.
 > 
+> Fixes: 5e993508cb25 ("clk: clk_stm32f: Add set_rate for LTDC clock")
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
 > ---
 > 
->  arch/arm/dts/stm32f769-disco-u-boot.dtsi | 23 +++++++++--------------
->  arch/arm/dts/stm32f769-disco.dts         |  4 ++++
->  2 files changed, 13 insertions(+), 14 deletions(-)
+>  drivers/clk/stm32/clk-stm32f.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> index 2c823cce98b4..add55c96e21f 100644
-> --- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> @@ -70,22 +70,17 @@
->  				};
->  			};
->  		};
-> +	};
-> +};
+> diff --git a/drivers/clk/stm32/clk-stm32f.c b/drivers/clk/stm32/clk-stm32f.c
+> index ed7660196ef0..4c1864193357 100644
+> --- a/drivers/clk/stm32/clk-stm32f.c
+> +++ b/drivers/clk/stm32/clk-stm32f.c
+> @@ -530,7 +530,8 @@ static ulong stm32_set_rate(struct clk *clk, ulong rate)
+>  			/* set pll_saidivr with found value */
+>  			clrsetbits_le32(&regs->dckcfgr,
+>  					RCC_DCKCFGR_PLLSAIDIVR_MASK,
+> -					pllsaidivr_table[i]);
+> +					pllsaidivr_table[i] <<
+> +					RCC_DCKCFGR_PLLSAIDIVR_SHIFT);
+>  			return rate;
+>  		}
 >  
-> -		ltdc: display-controller@40016800 {
-> -			compatible = "st,stm32-ltdc";
-> -			reg = <0x40016800 0x200>;
-> -			resets = <&rcc STM32F7_APB2_RESET(LTDC)>;
-> -			clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
-> -
-> -			status = "okay";
-> -			bootph-all;
-> +&ltdc {
-> +	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
-> +	bootph-all;
->  
-> -			ports {
-> -				port@0 {
-> -					dp_out: endpoint {
-> -						remote-endpoint = <&dsi_in>;
-> -					};
-> -				};
-> +	ports {
-> +		port@0 {
-> +			dp_out: endpoint {
-> +				remote-endpoint = <&dsi_in>;
->  			};
->  		};
->  	};
-> diff --git a/arch/arm/dts/stm32f769-disco.dts b/arch/arm/dts/stm32f769-disco.dts
-> index 6f93fc7bcfcd..d63cd2ba7eb4 100644
-> --- a/arch/arm/dts/stm32f769-disco.dts
-> +++ b/arch/arm/dts/stm32f769-disco.dts
-> @@ -86,6 +86,10 @@
->  	status = "okay";
->  };
->  
-> +&ltdc {
-> +	status = "okay";
-> +};
-> +
->  &rtc {
->  	status = "okay";
->  };
-
 Applied to u-boot-stm32/next
 
 Thanks
