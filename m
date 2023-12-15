@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55466C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9187BC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:22:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D374987BEC;
-	Fri, 15 Dec 2023 15:13:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1251587C08;
+	Fri, 15 Dec 2023 15:22:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="2WIOo0ro";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vTyZXoyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C905987BF6; Fri, 15 Dec 2023 15:13:03 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0914187BE7; Fri, 15 Dec 2023 15:22:43 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC8687BE4
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:13:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA9BC87C11
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:22:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BF9dlJF028436; Fri, 15 Dec 2023 15:13:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=6xCcXQyn99iRhLZ8grv5OFshDt5uJrWpGPlmJk9r4Zg=; b=2W
- IOo0roxy6f2LRe2LM7n7GPnLwY7VCf3oqEi+nozEXGVK4RoAprOtxYeiVAiDfONE
- PrsPB08tQosMvbVk6vpv11BgdsBn4aPcizlyYCHUZfN3AAayO+STggHXYA8CpDfe
- ESnCKpFBSkrRgVJieYchbyl7vUxZRKgerkzVeHwaNG9f9Du+QSX03Fv49HgNQjvA
- L0Mdo9eZ0cr4DoTjoag3iFZeIypNLwVvZjaXavDr1NiL6lW2Xk6JfUQITNv37+OS
- U0xTxHouc6h53CBKpdzQz9Ae6cdLvVmfn495yXAAnKiZJlKvh9gAmiLgjgzAGjz5
- zPfsG22SuMroZ4y7O8eQ==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvehmtn0p-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 15:13:01 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0857E100058;
- Fri, 15 Dec 2023 15:13:01 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F31E42278B6;
- Fri, 15 Dec 2023 15:13:00 +0100 (CET)
-Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 15:13:00 +0100
-Message-ID: <593de0a9-9c11-445e-8254-372d485b011a@foss.st.com>
-Date: Fri, 15 Dec 2023 15:13:00 +0100
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3365705d38eso329219f8f.1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 06:22:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1702650129; x=1703254929;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=D9K+lquOSea0b6fbJy1nxB3LtaJnnZkLVOQOzJ2Oxw4=;
+ b=vTyZXoyR/gDf/gU4HTRcTu4ft4uaE6JQQEHeIld+rnpguZuYLWHiY4yKdo9yXwQOJ4
+ Ead0B9f2gttz09abdjVN+V3v9V1R2k67j7snyeHZnMk0gim0O+doVotyoiHeZ5ayPnKM
+ xpVTS2GpR7Cmz838D+nqcYhhCYR2Sds5m1zHwj2XNJCMluZGYNsAFOF1mbfzliqh+4N8
+ Gp7/xty2vnEfRfdQSa+S48yR7B+by9+W3dRX0zK32UWJUXe3NTUnXMCesKPsSUVb/0Xp
+ XuMtsTNKkNCSSOt4f7mjDgyLvhD9J2hElM3616qE2jXveMTtDYXz4kFsH9huyBr7nEzZ
+ M+ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702650129; x=1703254929;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=D9K+lquOSea0b6fbJy1nxB3LtaJnnZkLVOQOzJ2Oxw4=;
+ b=klYga/lvZxiQCJQdbaVLqsKhr1doUiRrMH2gdc2Q7qBeGDsRoJ5kTAWfzrctCt+TBR
+ vugVzG4XZCKb2f6ZSdlBzeVn5zsQYKQukkbZ3Sv41KzcKhCpV4+284XQXBaHuH5CsjvJ
+ Ru6N0rCNC+4AqXZ15MR2/rTdgv4YjJ/i9ZjC9LM2jJKJYgpprBTJCyIZl7o0vTn7+J/Z
+ zL3mRUjuopqjJ7Dwnoq4qJ9N7bKWHcvlddAGulLHZ0JhddiEXNBxpNvpccPF2nASLhyR
+ 9PFN26j26cfhx0QkSIFrQQtZIA3KZO4iNO+mhPDgqKQSHaLn0nNd3NDjs/wdEhTlvMid
+ 06+w==
+X-Gm-Message-State: AOJu0Yzn0QfQfu/NqGNOTiPJ2lJn61yWR8+bDulvXvCAf1+v7TBmYJQM
+ h+eJHKbYuyKZHKtkYenrxbHJYA==
+X-Google-Smtp-Source: AGHT+IGekZeJRfnGI3Zj45Dsq+9HjuoIGnMHrkpSBZmjsEh7x8IO9wHktdXadDeDz626u5XlJV8vYQ==
+X-Received: by 2002:a05:6000:12c2:b0:336:4b38:89b5 with SMTP id
+ l2-20020a05600012c200b003364b3889b5mr987326wrx.203.1702650129346; 
+ Fri, 15 Dec 2023 06:22:09 -0800 (PST)
+Received: from localhost ([2a01:cb16:2072:bcf7:e952:c673:7cc0:1bd5])
+ by smtp.gmail.com with ESMTPSA id
+ g9-20020a5d4889000000b0033609584b9dsm18814376wrq.74.2023.12.15.06.22.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 06:22:08 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
+Cc: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [PATCH v2] clk: fix clk_get_rate() always return ulong
+In-Reply-To: <87o7erv9p4.fsf@baylibre.com>
+References: <87o7erv9p4.fsf@baylibre.com>
+Date: Fri, 15 Dec 2023 15:22:06 +0100
+Message-ID: <87zfybsfzl.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] board: st: common: Fix board_get_alt_info_mtd()
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
- <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.23.141]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-15_08,2023-12-14_01,2023-05-22_02
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,66 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On ven., d=C3=A9c. 15, 2023 at 15:09, Julien Masson <jmasson@baylibre.com> =
+wrote:
 
+> When we call clk_get_rate(), we expect to get clock rate value as
+> ulong.
+> In that case we should not use log_ret() macro since it use internally
+> an int.
+> Otherwise we may return an invalid/truncated clock rate value.
+>
+> Signed-off-by: Julien Masson <jmasson@baylibre.com>
 
-On 12/15/23 12:52, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> On 11/17/23 18:01, Patrice Chotard wrote:
->> Since MTD devices are partioned, we got the following
->> error when command "dfu 0" is executed:
->>
->> DFU alt info setting: done
->> ERROR: Too many arguments for nor0
->> ERROR: DFU entities configuration failed!
->> ERROR: (partition table does not match dfu_alt_info?)
->>
->> Fixes: 31325e1b8b9c ("stm32mp1: dynamically build DFU_ALT_INFO")
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->>   board/st/common/stm32mp_dfu.c | 9 ++-------
->>   1 file changed, 2 insertions(+), 7 deletions(-)
->>
->> diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
->> index a8eb8d5cae2..ded3bf81961 100644
->> --- a/board/st/common/stm32mp_dfu.c
->> +++ b/board/st/common/stm32mp_dfu.c
->> @@ -73,7 +73,6 @@ static void board_get_alt_info_mmc(struct udevice *dev, char *buf)
->>   static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
->>   {
->>       struct mtd_info *part;
->> -    bool first = true;
->>       const char *name;
->>       int len, partnum = 0;
->>   @@ -86,17 +85,13 @@ static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
->>               "mtd %s=", name);
->>         len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
->> -            "%s raw 0x0 0x%llx ",
->> +            "%s raw 0x0 0x%llx",
->>               name, mtd->size);
->>         list_for_each_entry(part, &mtd->partitions, node) {
->>           partnum++;
->> -        if (!first)
->> -            len += snprintf(buf + len, DFU_ALT_BUF_LEN - len, ";");
->> -        first = false;
->> -
->>           len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
->> -                "%s_%s part %d",
->> +                ";%s_%s part %d",
->>                   name, part->name, partnum);
->>       }
->>   }
-> 
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
-> Thanks
-> Patrick
-> 
-Applied to u-boot-stm32/next
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Thanks
-Patrice
+> ---
+> Changes in v2:
+> - remove local var ret (fix warning)
+> - Link to v1: https://lore.kernel.org/all/871qcj5frz.fsf@baylibre.com
+> ---
+>  drivers/clk/clk-uclass.c | 7 +------
+>  1 file changed, 1 insertion(+), 6 deletions(-)
+>
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index 3b5e3f9c86..3cbcb2d033 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -478,7 +478,6 @@ void clk_free(struct clk *clk)
+>  ulong clk_get_rate(struct clk *clk)
+>  {
+>  	const struct clk_ops *ops;
+> -	ulong ret;
+>=20=20
+>  	debug("%s(clk=3D%p)\n", __func__, clk);
+>  	if (!clk_valid(clk))
+> @@ -488,11 +487,7 @@ ulong clk_get_rate(struct clk *clk)
+>  	if (!ops->get_rate)
+>  		return -ENOSYS;
+>=20=20
+> -	ret =3D ops->get_rate(clk);
+> -	if (ret)
+> -		return log_ret(ret);
+> -
+> -	return 0;
+> +	return ops->get_rate(clk);
+>  }
+>=20=20
+>  struct clk *clk_get_parent(struct clk *clk)
+> --=20
+> 2.43.0
