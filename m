@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78FFC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:49:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CEBC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:53:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CC0D87BC6;
-	Fri, 15 Dec 2023 14:49:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2CD8D87AFD;
+	Fri, 15 Dec 2023 14:53:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SWobo+iA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ITy/80XM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A58DD87BD3; Fri, 15 Dec 2023 14:49:30 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id C316D87AE7; Fri, 15 Dec 2023 14:53:00 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 766D687BBD
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:49:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B275C87AFD
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:52:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-67ad032559fso4371066d6.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:49:28 -0800 (PST)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-77f3d75dafeso48300985a.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:52:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702648167; x=1703252967; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702648377; x=1703253177; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m1V2abb+jqP7q59eoYmg01F9g2D+oCQFBJ35NP5GM1c=;
- b=SWobo+iAJ273Kq1ehdqZyxrYL40E9TvpQRACMueYTs9Q3RyKi/0+ZGNwd8AgRub54A
- 38EknIy3/bNkR5vxTBCavGP1Pi7Qduaej5YRtW7pNGMubLIZ+c1Gl+IO+mbRUNysvSBc
- reLacYeY+09uCotMgaDGGtn0IXkP9sJFtu7r8=
+ bh=8co6AYJF06e7fTzbCVjheNeN/YGgkzTMLaFtqDcw9fI=;
+ b=ITy/80XMvBxE77+vxnQ3w2KUkhXwJR4tC2kNL+Bah4hT3+tebkQauboWITj4i1ek64
+ rrn/qYub0uodDgeJkiSO//1u9Ltsan5FYgesgSqTN/AFFM9DPKDxrPRnjObBFWXCXhEw
+ Es3KiU5oKuC4JQonSKobZ0p+MSOC9Sk5CGIlw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702648167; x=1703252967;
+ d=1e100.net; s=20230601; t=1702648377; x=1703253177;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m1V2abb+jqP7q59eoYmg01F9g2D+oCQFBJ35NP5GM1c=;
- b=CIuhhueegtV0+HPnPoag2MLGPARc9NNyNbq1nQkRuZT9/F1tY6ZA6A7TSY06PmOW0T
- p5jGo/uTl/D1f/Z8xseLOhWI2weFwkhtfKAg0FEqgCFtwpYuqlyo619HyVt/It1SdhbZ
- LEdDRXe+fJ09sB0QlRvpH049rP2l1a9eVKnzrrUujlHC/szxTV19HGkOmuU5nGPME1ei
- x39Ai0rZgvGiDwMQ0ksaooQ5+Lm5CkOKuIApjeMJzjE6lmjGqyEdpKPU7RRg6yww6R5Z
- 9LG2ZUwTJB3lcMh1Yishv5PeS22SFsjg3DdVuV+PEjZfY+RyHfE915qsI4s3uiUGNw5n
- a/qg==
-X-Gm-Message-State: AOJu0YykXKwhCg3ETpKyr78kFORBU5TXJMBIDwIaJ1SG5EKHdi72AjrC
- Mz2AuTGXk6oPEeNCoyaB2TzWZQ==
-X-Google-Smtp-Source: AGHT+IFpcbB2I4CBlkX3EhNF/97a7PH/+qMGmFOaIGOiiLe9GujWdZ2cC2Bo8MkcNkeR4aOou53zSA==
-X-Received: by 2002:a0c:fb44:0:b0:67e:f55b:7eb0 with SMTP id
- b4-20020a0cfb44000000b0067ef55b7eb0mr4869791qvq.68.1702648167171; 
- Fri, 15 Dec 2023 05:49:27 -0800 (PST)
+ bh=8co6AYJF06e7fTzbCVjheNeN/YGgkzTMLaFtqDcw9fI=;
+ b=apduUt34UB+29q+0FYzsm1f5cZ1ZL3bpBIaszLlLYD9jWbhV203GXGO7MsVIaaaYZ7
+ YyyyICJUN2wOunH2Oy+UcxZ1TwFKs/sdCUvbqzX1g6n1QYBnAtxTjMjkI97fdZmdcANp
+ eG97u/cSBF8CsH4RXLy9GVCZQ3ow8tCuZSMQgwZLW8ZLskgg9XpE2cbL1FXnLO6pcC90
+ FqO+YkJrcSjLfWg+v+lQV0qfiQPBa5+LThTHhtF/z3Ti4wOBiW+pN5mmMCGDMXzRAamh
+ 5F4b4IBqUp6r8YjnWgYuzZTitB8FRi5xqUeCaOv/moc1H4K9oPl84g/ToRAK+jNdwtFn
+ fJWw==
+X-Gm-Message-State: AOJu0Ywg/MEYbH4+QtfLNhYQeOpS79XBWXvqM55Oazj8jeKvcHq7u/Qj
+ 71gvdVQrclRcKN8Y2msyIFxHvw==
+X-Google-Smtp-Source: AGHT+IHCmbf93bJvuulhNpPh62lqbwIMwazPnl7zaSpBW4EZbzx7vB2bCsS+21L87G+MWFC+SaTtaw==
+X-Received: by 2002:a05:620a:4103:b0:77f:9e22:fd7b with SMTP id
+ j3-20020a05620a410300b0077f9e22fd7bmr4745298qko.65.1702648377344; 
+ Fri, 15 Dec 2023 05:52:57 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
  [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
  by smtp.gmail.com with ESMTPSA id
- ff17-20020a0562140bd100b0067ae405e0a8sm690330qvb.57.2023.12.15.05.49.26
+ o4-20020a05620a2a0400b0077f7910e857sm2604580qkp.134.2023.12.15.05.52.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 05:49:26 -0800 (PST)
-Date: Fri, 15 Dec 2023 08:49:24 -0500
+ Fri, 15 Dec 2023 05:52:56 -0800 (PST)
+Date: Fri, 15 Dec 2023 08:52:54 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Kiernan <alex.kiernan@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH v2 08/16] fastboot: Remove dependencies on CMDLINE
-Message-ID: <20231215134924.GW2513409@bill-the-cat>
-References: <20231215041919.2197788-1-sjg@chromium.org>
- <20231215041919.2197788-8-sjg@chromium.org>
+To: TracyMg_Li@outlook.com
+Cc: jagan@amarulasolutions.com, andre.przywara@arm.com, festevam@gmail.com,
+ patrick.delaunay@foss.st.com, tharvey@gateworks.com,
+ pbrobinson@gmail.com, weichangzheng@phytium.com.cn, hs@denx.de,
+ d-gerlach@ti.com, u-boot@lists.denx.de, robh+dt@kernel.org
+Subject: Re: [patch v2] ARM add initial support for the Phytium Pe2201 Board.
+ Add pe2201 platform code and the device tree of pe2201 platform
+ board. The initial support comprises the UART and PCIe.
+Message-ID: <20231215135254.GX2513409@bill-the-cat>
+References: <SEYPR01MB5884AEE0DD200DBAEB95D1D0F193A@SEYPR01MB5884.apcprd01.prod.exchangelabs.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8ym+fqEe1EWZt5WS"
+ protocol="application/pgp-signature"; boundary="5JgEJv8HLd0NkrCw"
 Content-Disposition: inline
-In-Reply-To: <20231215041919.2197788-8-sjg@chromium.org>
+In-Reply-To: <SEYPR01MB5884AEE0DD200DBAEB95D1D0F193A@SEYPR01MB5884.apcprd01.prod.exchangelabs.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,60 +97,58 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8ym+fqEe1EWZt5WS
+--5JgEJv8HLd0NkrCw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 14, 2023 at 09:19:06PM -0700, Simon Glass wrote:
-> It is possible to boot a kernel without CMDLINE being enabled. Update
-> the implementation to handle this, and drop the condition from the
-> FASTBOOT config.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> Changes in v2:
-> - Avoid changing the logic when a command is not set
->=20
->  drivers/fastboot/Kconfig     |  1 -
->  drivers/fastboot/fb_common.c | 30 ++++++++++++++----------------
->  2 files changed, 14 insertions(+), 17 deletions(-)
->=20
-> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-> index 11fc0fe1c800..837c6f1180da 100644
-> --- a/drivers/fastboot/Kconfig
-> +++ b/drivers/fastboot/Kconfig
-> @@ -1,5 +1,4 @@
->  menu "Fastboot support"
-> -	depends on CMDLINE
-> =20
->  config FASTBOOT
->  	bool
+On Fri, Dec 15, 2023 at 03:13:14PM +0800, TracyMg_Li@outlook.com wrote:
 
-Please expand the help to note that CMDLINE is recommended and that the
-more complex use cases that require running additional commands rather
-than simply booting the OS will not work without CMDLINE, thanks.
+> From: TracyMg_Li <TracyMg_Li@outlook.com>
+>=20
+> Signed-off-by: TracyMg_Li <TracyMg_Li@outlook.com>
+
+You still have the commit message as the first line of the commit and it
+needs to be broken up in to the body of the message instead.
+
+[snip]
+> +/* BOOT */
+> +#define BOOT_TARGET_DEVICES(func)	\
+> +	func(SCSI, scsi, 0)	\
+> +
+> +#include <config_distro_bootcmd.h>
+> +
+> +/* Initial environment variables */
+> +#define CFG_EXTRA_ENV_SETTINGS	\
+> +	"image=3DImage\0"	\
+> +	"scriptaddr=3D0x90100000\0"	\
+> +	"kernel_addr_r=3D0x90200000\0"	\
+> +	"fdt_addr_r=3D0x95000000\0"	\
+> +	"boot_fit=3Dno\0"	\
+> +	"fdtfile=3Dphytium-pe2201.dtb\0"	\
+> +	BOOTENV
+
+Please switch to bootstd and plain text environment, thanks.
 
 --=20
 Tom
 
---8ym+fqEe1EWZt5WS
+--5JgEJv8HLd0NkrCw
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8WWEACgkQFHw5/5Y0
-tywmiAv8Ci6FbOfx8JfA6LfaUVLdAHrjTJXaza6fnIAgSxkUT2xYAsyCw/PoA0EC
-P0K/OhEi9/Aibv63pxOpYVSh+2rzjLS3hg+bpWbS5mzJOSOxJnKc57eb0q5jJZ2k
-pfGXQ3RN45t1rHYJu74CSQubZrgYUdbjmVwhIX1J1gwAJxaDhTTAwJ0bI14J6HHn
-sgML2aQ250NIIAw7NlmNnh9ct/glzdrY/BBUgiBXNtuoUiWALLM2fcwZ1nFDlCIx
-66XHEBK70fEfU2PCj9MDDaCUXMcHxQ9GqgZogP9MGvbrhpMLA1a+va/8aG2RomhM
-gBaFAaGTRvUSS5Q+RPQkRTcMeqCyrqm6EA8Bk7ugrtAKyzcO4AfqzJjCbEm1V2R6
-tnlg3cqAMDy98AzXePfsUuG97xuUFvDsCMrIee+/Xzh4ySK47Wayck9MB4BIyPrl
-ZKIzRhQG13r7hnFTDxFFOfUZnISUCSUi6waenRxLSTh3KXgkvTUgPmqmcUtcWWt1
-I/evnRyx
-=8KNE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8WjYACgkQFHw5/5Y0
+tyzRtQv/ShMoq1GxdA9Qmun6MTP4oRUwot3ufCKLhGdIulfjnsfLKXnCPd0zs1yM
+YvSpjYQD7mSH7br/skPm2DqNFHkvIEjGldBD09UizdHIigF7XrnI9jSV4D54DFvC
+Z1ud7TWlAz4W64Ehg5SpyKl84vD2oydaOopccAxov1/4JvCCBrAwoVORjybSt7tk
+iIdEnUiWWh8jo2mTh79LjoTGIx8YQcdWEA8Ou9aNIPqCEAJEXNzSfThXga36Y4Nt
+Z3N/V616+EaA1DG0ThFPV1yjZ4D0f/gfe+Rg4clT9zoyWFWfxPwypN1QSXr/zM+t
+O2RO5c7g6HJoi+WdJ5WtzNLOtwpbvVYTuPhlUl6U5z+g3fkWwIRJ1KrV2AcS2LTx
+9lL42+UibI6VbJMh+AyLZqNyc7WAL2S1YGwuDhrsZi9D4Z9VQ2hEMJ2Afzh7voaS
+ReqQ1ZDzXxBHiXy/ZG2XD+VFRYiacJX90nBPZecuDahwjPXUGO07Lr0NIy7cmbI1
+8Z0gvJAn
+=3fAc
 -----END PGP SIGNATURE-----
 
---8ym+fqEe1EWZt5WS--
+--5JgEJv8HLd0NkrCw--
