@@ -4,95 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11639C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:20:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01264C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:22:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F5F87C51;
-	Fri, 15 Dec 2023 20:20:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C9BF87C4A;
+	Fri, 15 Dec 2023 20:22:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZxApoieM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DxLpzmtg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C59087C3B; Fri, 15 Dec 2023 20:20:02 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EE96E87C6F; Fri, 15 Dec 2023 20:22:26 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A681D87C57
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:19:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2BA9487C45
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:22:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-67f11ccd8e7so7352146d6.3
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:19:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702667998; x=1703272798; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LtrcrJlr6NeQHIK2RkW/lpzI31QtzOIlHI31PNSBLU8=;
- b=ZxApoieMGP14sKZl3a+1wdGsiV58q4V+1cmTxzd/i1KXHz4qFd0GcqDN9HQlY7cyXR
- GDci8BaWYUcDZf1/FpPUbVQXo08JCN+pAkWNSymP3/Wk51inzFfZAV5f+zl4PcghuPwE
- Jt1hi9S31hsSnvHkwBZbmTZJGA9vLHRcgAqy0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702667998; x=1703272798;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LtrcrJlr6NeQHIK2RkW/lpzI31QtzOIlHI31PNSBLU8=;
- b=GuwS5b0Y2f8hr+oMEqtJANMVFz/gaiDsS0wBrO8f9ZcAtJVotXlQiYi5UdV/p1IUmL
- S/40sLNBCZLikpnHkc9jxvDnJbJit+CEbGPqh1QxCAzyQMQvgA58g0V0hqcaLdi94EMc
- 29TdITyLIfn/W66QdUyZilPUXxmIWjIlisXmeqiM0Zr5HLj+7d9dVZRxr19T5kg4jjeF
- b3VhYledDrzwIGMDQ7ZGoaUZhAYzvRpdgIkGDQ85iUXULTMT9zRTPEaOq2YRk1K7ZThp
- dQzAm08UeP3pR3SPCutgOrnyp4WrICY9G+PPuO+VX7MqFTlpERwODwFfELwkdU39wDPg
- b3uQ==
-X-Gm-Message-State: AOJu0YwwblzHcUtG8+UDStSUEEFPiV8owMIU4Jq7ccqD/+9JYcpugkXq
- hQwQn2hL91VkCVZ0NNuWYCx7oQ==
-X-Google-Smtp-Source: AGHT+IEXSZCKchxGWNoVq1SMxj+4CTcV+mepkoZuc3c4CPgAyUIRFQ/5wpilBU7u/z6VfE4xPil6hg==
-X-Received: by 2002:a05:6214:1cc3:b0:67f:2335:5ef2 with SMTP id
- g3-20020a0562141cc300b0067f23355ef2mr575416qvd.89.1702667998372; 
- Fri, 15 Dec 2023 11:19:58 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
- [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
- by smtp.gmail.com with ESMTPSA id
- b2-20020a0cbf42000000b0067ec8702d1dsm5319558qvj.137.2023.12.15.11.19.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 11:19:57 -0800 (PST)
-Date: Fri, 15 Dec 2023 14:19:54 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Conor Dooley <conor@kernel.org>
-Cc: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
- Rob Herring <robh+dt@kernel.org>, neil.armstrong@linaro.org,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
- sjg@chromium.org, krzysztof.kozlowski+dt@linaro.org,
- caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
- marex@denx.de
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-Message-ID: <20231215191954.GA2513409@bill-the-cat>
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
- <20231214182328.GQ2513409@bill-the-cat>
- <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
- <0a143e84-5379-4455-b3c8-dc97beb9514c@linaro.org>
- <20231215133743.GV2513409@bill-the-cat>
- <20231215-sputter-puzzle-128dc9f85d73@spud>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8DF4D3F5F0; 
+ Fri, 15 Dec 2023 19:22:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1702668139;
+ bh=u18/5lFC0XIL+NSLRVYOPSDAdlePlnRIS0NlorStt8U=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=DxLpzmtgo1TX2UR2ZGy/s/hvRSh3Ly2k2C+2DMqDk12XwuNjbSQvZk3ytmwBORZiG
+ ZgDhVHHruWN2Ln23aJWlUFizbkUoB8VCI7SOUpfJ8FQUc8chnsHS/UOMNfaqc/qHP7
+ 5cOBCgg2PXVpwgeQk6UnIqHRgo3DyTr9UVMRQE3RTlNCnUHgYqOa453Y166K3UP6lG
+ vXNIUY8BkeyBaIuwOJbM/xWPaFlGYrqREoS8rtgwKiP1wCABfl/QkzY1D2m4H2uD05
+ Q6SwnavTRqBBwepjwHu11vbnS0FzBzt0eZEmxXnRhYQFqj2rPAQhC+CUYsCgWB00Uj
+ 5NmmWS8IvBGaQ==
+Message-ID: <a3e003c8-1681-466f-a224-4098d1ef7b22@canonical.com>
+Date: Fri, 15 Dec 2023 20:22:19 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RLHb8GQVgKBMSjwX"
-Content-Disposition: inline
-In-Reply-To: <20231215-sputter-puzzle-128dc9f85d73@spud>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] cmd: acpi: check HW reduced flag in acpi list
+Content-Language: en-US, de-DE
+To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+References: <20231215164016.137794-1-heinrich.schuchardt@canonical.com>
+ <20231215164016.137794-4-heinrich.schuchardt@canonical.com>
+ <ZXyRDStdm4J__CIX@smile.fi.intel.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <ZXyRDStdm4J__CIX@smile.fi.intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,130 +76,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/15/23 18:46, Andy Shevchenko wrote:
+> On Fri, Dec 15, 2023 at 05:40:16PM +0100, Heinrich Schuchardt wrote:
+>> On non x86 platforms the hardware reduce flag must be set in the FADT
+>> table. Write an error message if the flag is missing.
+> 
+> ...
+> 
+>> +	if (!IS_ENABLED(CONFIG_X86) &&
+>> +	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
+>> +		log_err("FADT not ACPI hardware reduced compliant\n");
+> 
+> I guess it's half baked solution as this, HW reduced, flag adds more
+> limitations even on x86. If you want a good validation it should be done
+> in a separate function taking others aspects into account.
+> 
+> But since it doesn't affect my area of interest in U-Boot, I won't prevent
+> you from doing this way, it's up to the U-Boot maintainers how to proceed
+> with it.
+> 
 
---RLHb8GQVgKBMSjwX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This flag is checked by Linux. It won't boot at all if the flag is not 
+set on arm64 or riscv64. See arch/arm64/kernel/acpi.c and 
+arch/riscv/kernel/acpi.c, function acpi_fadt_sanity_check().
 
-On Fri, Dec 15, 2023 at 02:45:11PM +0000, Conor Dooley wrote:
-> On Fri, Dec 15, 2023 at 08:37:43AM -0500, Tom Rini wrote:
-> > On Fri, Dec 15, 2023 at 08:50:51AM +0100, Krzysztof Kozlowski wrote:
-> > > On 14/12/2023 20:48, Rob Herring wrote:
-> > > >>
-> > > >> I think some of the important questions to ask are, how often / li=
-kely
-> > > >> are the breakages to occur? It seems like these days it's either:
-> > > >> - U-Boot had an early version of the binding and we already state =
-we
-> > > >>   don't support backwards compatibility here. It should be on the
-> > > >>   maintainer to be proactive in this case.
-> > > >> - It's a "the DT was wrong about the hardware, sorry not sorry it'=
-s an
-> > > >>   incompatible DTS change now". This too is hopefully the kind of =
-thing
-> > > >>   that at least board maintainers will be more actively aware of n=
-eeding
-> > > >>   to deal with in U-Boot, if it's really a problem.
-> > > >=20
-> > > > A common issue in the kernel is with forward compatibility when
-> > > > platforms add new resources from a new provider. Then the kernel
-> > > > expects a driver for the provider and waits for the dependency. Of
-> > > > course, older kernels don't have that provider driver and so the
-> > > > dependency is never met. Not sure if u-boot will have similar issue=
-s?
-> > > > At least you should/could know if the provider driver exists or not.
-> > > > (The kernel doesn't because modules.)
-> > >=20
-> > > If some U-Boot platform decides to aggressively sync with kernel DTS,
-> > > then probably the kernel subarch maintainer should be aware of it.
-> > > Mentioned forward compatibility issue is a result of assumption that
-> > > there are no out-of-tree upstream consumers of our DTS. I am certainly
-> > > not aware of any such consumer for Samsung. If someone told me (me
-> > > wearing Samsung hat), hey U-Boot now cares, I would start caring as w=
-ell.
-> > >=20
-> > > The usual argument of contributors wanting to break the backward and
-> > > forward compatibility, is "there is no other OS depending on this"
-> > > (recent discussion with Johan about order of interrupts:
-> > > https://lore.kernel.org/all/ZWcPZPX-eT-xHAOv@hovoldconsulting.com/ ).
-> > > You need to tell the maintainers of that platform, that now they have
-> > > other OS/firmware/bootloader depending on DTS compatibility.
-> >=20
-> > I think this hints at one of the bigger impacts this might have.
-> > Reminding everyone that other projects do use the device trees and have
-> > for years.
->=20
-> TBF, we do try to ask these questions as much as possible, usually (for
-> me at least) citing U-Boot or the BSDs as users. It largely seems to me
-> like we are all bark and no bite though, so a project like U-Boot having
-> a defined "schedule" as you suggest below would add more meaning to our
-> questioning.
->=20
-> > Without rehashing history, BSD does use the trees as-is and
-> > for platforms U-Boot supports they are supposed to be re-synced
-> > periodically.
->=20
-> I know this is the theory, but I also know that how well this is
-> implemented varies wildly per-platform. I generally don't pay all
-> that much attention to the various arm platforms, but I do pay
-> attention to what's going on for RISC-V and there appear to be no
-> active maintainers of individual platforms and the architecture
-> maintainers are not aware of the status of the equivalent patches
-> for Linux when they apply patches.
->=20
-> In recent memory, this has lead to the clock indices in the DT
-> differing between U-Boot and Linux for one such platform, which, IMO,
-> is an insidious difference that is hard to spot during review and highly
-> unlikely to crop up while comparing dts files, since the defines were nam=
-ed
-> identically. To be clear, I am not expecting the architecture code
-> maintainers to be aware of the minutiae of the various RISC-V platforms,
-> but rather suggesting they might have an easier time reviewing if both
-> projects' dts files and binding headers were tied together.
->=20
-> That said, automatically synced devicetrees will, as has been pointed out,
-> require the platform maintainers in Linux to be more aware of the affect =
-of
-> what they accept on other users, but it will also require the equivalent
-> maintainers on the U-Boot side to engage too, so that the "upstream" dts
-> files do not change in a way that screws the usecase in U-Boot.
+Once you have booted you can use the Firmware Test Suite (FWTS) to check 
+the rest. I don't plan rewriting such a validation in U-Boot.
 
-Yeah, it will hopefully lead to better coordination between maintainers
-in some places. There are SoCs where the kernel DTS people are the
-U-Boot DTS people too. All in all, I should probably CC more people than
-I usually do on these resync patches just to try and head off any
-tricky changes like you've mentioned above.
+Best regards
 
-> Also, if people send fixes to the U-Boot copies of these devicetrees,
-> would the plan be to request that these are sent to Linux and the fixes
-> pulled in via a resync after each -rc release of Linux (or similar, just
-> throwing some example schedule out there)?
-
-The way we've always tried to operate is that changes should be pushed
-to Linux and resynced down, or at least submitted simultaneously. If
-there's some specific bugfixes that need to come in out of cycle I
-_think_ subtree handles cherry picked commits in a reasonable fashion.
-
---=20
-Tom
-
---RLHb8GQVgKBMSjwX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8ptYACgkQFHw5/5Y0
-tyyKBgv7BVSQkeprEQzWJTMp0f8pdUUA3HMyTAiUkAxp0EKkaqIOmthMjZDBiVcV
-NSklXHapjPYN0s3HThDaBxd1TKSenmjXDFWyOldF7JQ8zEf/VHprawfbculgLg0g
-E1NNovps2Hawt05fxmbjQ2Fxqa50dcW4pgbgbYju+W0Au+y5IrZzThlchzdgfav5
-SRA/eafuv9qSZALg7ifKdO2vrOgR6FKgE3LsFmUECH5xtVYL87fhuGXV1nXNkLkG
-/9aPkAokOZi7FWppoSaOY47hxZVGReccdBxLKEE4vwYQSwimfhDzOMXBzWwzfPK6
-s2lOucq0Sq+5o/ToCLWNm4/VTZziKY8iPnfqcA/oe8f1F4amUbaK2vNU0Whv9n0F
-TgcHqqpFwghkYQs7HTWxaIUXt6sxc2F0Xopw4lJ8w+/qigq+XtHifZYJ3lGW7bIr
-qsc+3njtxl25wG3mAZwNZCizvdCstCSVhBN2TzfXj8JdSGCUS+NBIDWrJDyGYR/9
-RL8oUsFy
-=1/sk
------END PGP SIGNATURE-----
-
---RLHb8GQVgKBMSjwX--
+Heinrich
