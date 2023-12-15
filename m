@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE79C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709FBC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:30:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADC7287C13;
-	Fri, 15 Dec 2023 17:30:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2993887C16;
+	Fri, 15 Dec 2023 17:30:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xc0JAkhQ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="cqb+kvIZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A80187C13; Fri, 15 Dec 2023 17:30:48 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B4FEC87C12; Fri, 15 Dec 2023 17:30:49 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5E5987C0D
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:30:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6535C87C0A
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:30:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-58dd3528497so621566eaf.3
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:30:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702657843; x=1703262643; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RBbttW7ykI3R12+XzafV+W6+Uv9ZNHlYu3uGGAj7C2I=;
- b=Xc0JAkhQb7S6sAeN7DmqR6gF2ijxtJDq+W/OoLcIWMjuB31fDgowfQAe3PVgihCo+e
- 7YHVSa15Rp85kwNGysp2XWTgDP9TptFBb6W/AKHVX4GJv7uGZZEZtTR90o/rlb+kp/n+
- lioePMOgKuEv7j0+T60mxr1bi5RgdDqexxU3C87u0dWRBtojK3wpzzHO7yWYPE72y5hD
- M/gonAwlPzA8RMkYDEj2BYt+BFrQCOZgBighm8mYaKFyJ4soszMLaGYuZ+gbOE3OXmP8
- HbA4DobEwvb1WVOUSo2txGT3AEntCAmew3ALkLfwInSaaJpU+LlAe6Q8SRDZSNwMY6EO
- VH6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702657843; x=1703262643;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RBbttW7ykI3R12+XzafV+W6+Uv9ZNHlYu3uGGAj7C2I=;
- b=sMrKf8DNBodBTY7aa9sYwUROl4WGNBGl6V1HNaMoTsKKFafLaoyc1TRwt/RPy4H1Zx
- MTBr9c9T4wkVm4QuQn50WhpE2u3yVYk+xcbLAj9qA9leIO/IQWpH478GvQB+n7Ven+5B
- zFlWEby308Ihg2dti0yJJ45cwQR722FS2WisQdS34rk+0gejlZ94xTJ7i0lug9SzXUFS
- fuDH+eLxeRMWYZP2lD8HgLQ/+RICRcGJRrnJkw5YAe3rRCQFHyOw865iAN6uWo4Inpmd
- 2LEE1lHTUhuI/FElMVHxkYzUSX8L2ehWaQ1diOD5Ewkz5Z3aUvVebXbVSBsxSN3jnzQG
- W9Nw==
-X-Gm-Message-State: AOJu0YxpfNa1bF00bScT86mkXaxsBjyp3ZERk7QsiHdNUXYJ/SXz0RtL
- mSqRZ/ys3uAXIV68oaA/5kU=
-X-Google-Smtp-Source: AGHT+IGfnghI0TkU9XnXxTYFOQdWeohPrH3I7/sml60JApcUAmsBiCxnxzR15bfNjfpde2SwuxB3Ug==
-X-Received: by 2002:a05:6358:cc03:b0:16c:70c:7f63 with SMTP id
- gx3-20020a056358cc0300b0016c070c7f63mr10084944rwb.27.1702657843149; 
- Fri, 15 Dec 2023 08:30:43 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- c16-20020a0ceb50000000b0067efe4f3cd1sm2152748qvq.75.2023.12.15.08.30.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Dec 2023 08:30:42 -0800 (PST)
-Message-ID: <f1618f28-e1fb-d4cd-3690-ec325818452c@gmail.com>
-Date: Fri, 15 Dec 2023 11:30:41 -0500
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3BFFQa0x018518; Fri, 15 Dec 2023 17:30:43 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:from:subject:to:cc:content-type
+ :content-transfer-encoding; s=selector1; bh=WYOo4BuQYNotETG1zbEx
+ 7ygd4eCMrSkmuZ/fQBJ9rpg=; b=cqb+kvIZLxq9Yi+/PQZSBvmX3ZEetf36AW3/
+ w67kLHa/IPnhL+2mGBI6y1Jb1rb+aFt+us9VEihMG/+icnt1a26MBbG2T8/wK9i4
+ jlgx8+8VjtXXUl4SJUyyvFeOZi7eJH5jC+LT/oJ/IhKr2nbcD/OWZtxOqVnTU2ES
+ LoB6CbAfudpVNyPG9IAIIobJ3wTIHOHhNLeQmnmpHTFxukWsrXlxyZeEsTErZ8x0
+ wLas27hAdzLKwW78PyjAGK0fYpo2zZiAwu9uO2U1ljaCyw2+RModSRfBJ5nN14eG
+ 89a35Bn4C4AwlzmNBsXE7058ai87ih7zbQ1ejFkIVjosqefO4A==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uyb2kak24-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 15 Dec 2023 17:30:43 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 378EA100052;
+ Fri, 15 Dec 2023 17:30:43 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2B294233C92;
+ Fri, 15 Dec 2023 17:30:43 +0100 (CET)
+Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
+ 2023 17:30:42 +0100
+Message-ID: <3fc77153-d293-485b-aad3-32757be6ee73@foss.st.com>
+Date: Fri, 15 Dec 2023 17:30:42 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2] clk: fix clk_get_rate() always return ulong
+User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>
-References: <87o7erv9p4.fsf@baylibre.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <87o7erv9p4.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [PULL] Pull request for u-boot next / v2024.04 = u-boot-stm32-20231215
+To: Tom Rini <trini@konsulko.com>
+CC: U-Boot Mailing List <u-boot@lists.denx.de>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, <patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.23.141]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-15_10,2023-12-14_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,53 +87,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom
 
-On 12/15/23 09:09, Julien Masson wrote:
-> When we call clk_get_rate(), we expect to get clock rate value as
-> ulong.
-> In that case we should not use log_ret() macro since it use internally
-> an int.
-> Otherwise we may return an invalid/truncated clock rate value.
+Please pull the STM32 related patches for u-boot/next, v2024.04: u-boot-stm32-20231215
 
-Fixes: 5c5992cb90c ("clk: Add debugging for return values")
+CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/18947
 
-+CC Simon
+The following changes since commit fa3f19aa56c519d6345cc774187b7a8fdc053d71:
 
-> Signed-off-by: Julien Masson <jmasson@baylibre.com>
-> ---
-> Changes in v2:
-> - remove local var ret (fix warning)
-> - Link to v1: https://lore.kernel.org/all/871qcj5frz.fsf@baylibre.com
-> ---
->   drivers/clk/clk-uclass.c | 7 +------
->   1 file changed, 1 insertion(+), 6 deletions(-)
-> 
-> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-> index 3b5e3f9c86..3cbcb2d033 100644
-> --- a/drivers/clk/clk-uclass.c
-> +++ b/drivers/clk/clk-uclass.c
-> @@ -478,7 +478,6 @@ void clk_free(struct clk *clk)
->   ulong clk_get_rate(struct clk *clk)
->   {
->   	const struct clk_ops *ops;
-> -	ulong ret;
->   
->   	debug("%s(clk=%p)\n", __func__, clk);
->   	if (!clk_valid(clk))
-> @@ -488,11 +487,7 @@ ulong clk_get_rate(struct clk *clk)
->   	if (!ops->get_rate)
->   		return -ENOSYS;
->   
-> -	ret = ops->get_rate(clk);
-> -	if (ret)
-> -		return log_ret(ret);
-> -
-> -	return 0;
-> +	return ops->get_rate(clk);
->   }
->   
->   struct clk *clk_get_parent(struct clk *clk)
+  Merge tag 'xilinx-for-v2024.04-rc1' of https://source.denx.de/u-boot/custodians/u-boot-microblaze into next (2023-12-14 13:27:11 -0500)
 
-Anyway, I don't particularly care about logging the error here.
+are available in the Git repository at:
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+  https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20231215
+
+for you to fetch changes up to 395507e50d7137e0bcfce74e1b4122e49d9984cb:
+
+  configs: stm32: Apply savedefconfig (2023-12-15 15:41:23 +0100)
+
+----------------------------------------------------------------
+_ run savedefconfig on all STM32 defconfig
+
+STM32 MCU:
+_ Sync stm32f469-disco DT with Linux 6.5
+_ rework ltdc node for stm32f769-disco
+_ clk: stm32f: Fix settings for LCD_CLK
+_ Support display on stm32f469-disco board
+
+STM32 MPU:
+_ stm32mp_dfu : Fix board_get_alt_info_mtd()
+_ stm32mp_dfu : Simplify MTD device parsing
+
+----------------------------------------------------------------
+Dario Binacchi (9):
+      ARM: dts: stm32f769-disco: rework ltdc node
+      clk: stm32f: fix setting of division factor for LCD_CLK
+      clk: stm32f: fix setting of LCD clock
+      ARM: dts: stm32f469-disco: sync with Linux 6.5
+      ARM: dts: stm32: make the LTDC clock usable by the clock driver
+      ARM: dts: stm32: make the DSI clock usable by the clock driver
+      ARM: dts: stm32: support MIPI DSI on stm32f469-disco board
+      board: stm32f469-disco: add support to display
+      board: stm32f469-disco: add splash screen with stmicroelectronics logo
+
+Patrice Chotard (3):
+      board: st: common: Fix board_get_alt_info_mtd()
+      board: st: common: simplify MTD device parsing
+      configs: stm32: Apply savedefconfig
+
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 +++++++++++++
+ arch/arm/dts/stm32f469-disco.dts         |   4 ++--
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi |  23 +++++++++--------------
+ arch/arm/dts/stm32f769-disco.dts         |   4 ++++
+ board/st/common/stm32mp_dfu.c            |  28 ++++------------------------
+ configs/stm32746g-eval_defconfig         |   4 ++--
+ configs/stm32f429-discovery_defconfig    |   2 +-
+ configs/stm32f429-evaluation_defconfig   |   4 ++--
+ configs/stm32f469-discovery_defconfig    |  19 +++++++++++++++++--
+ configs/stm32f746-disco_defconfig        |   4 ++--
+ configs/stm32f769-disco_defconfig        |   4 ++--
+ configs/stm32h743-disco_defconfig        |   4 ++--
+ configs/stm32mp13_defconfig              |   2 +-
+ drivers/clk/stm32/clk-stm32f.c           |  25 ++++++++++++++-----------
+ drivers/video/stm32/stm32_ltdc.c         |  31 +++++++++++++++++++++++++++++++
+ include/configs/stm32f469-discovery.h    |   2 ++
+ tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
+ 17 files changed, 108 insertions(+), 65 deletions(-)
+ create mode 100644 tools/logos/stm32f469-discovery.bmp
