@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E8EC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47509C35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:34:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACAA287BF2;
-	Fri, 15 Dec 2023 14:33:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 39D5487BF5;
+	Fri, 15 Dec 2023 14:33:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Zm/Y7Sh2";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="k1Isk4II";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 532CC87BDC; Fri, 15 Dec 2023 14:32:59 +0100 (CET)
+ id 92FBA87BB9; Fri, 15 Dec 2023 14:32:59 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D0D87BD8
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6509687BB9
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 41CD9401CB; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B68D042F63; 
  Fri, 15 Dec 2023 13:32:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702647176;
- bh=TIFsBb+oIfGyA9iCKiLzSoFuedZV6RAfykVeQtC1tEA=;
+ s=20210705; t=1702647177;
+ bh=c6JUneQWwAh9EiM6MQB3eY2Bo9PyUWJv9QAyGsSPQF8=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=Zm/Y7Sh2VQ/OIaSPKT46eREqDYbxK5gDLhiOgmVNzji07J/n2w0etu3EqmXTLjb9Q
- J1MeUJ9o5OgBE5naYoOz1zavkMaEGD9ni2Kz3gqzd5SLljLglvW+7qT5fKmn+W0r/T
- DnvvdgZjoCcj4DxpQE+FcvzA+lOAzG1d6q4gSnwQ+eZaguR2dp8XWYvAbMoJWCxIRG
- buQuSYYgJ2argK/NRkARhXooPAz2aw/82lR2ewyuf4cp5zgZArGJsW6fEofB8wmjN3
- YrBaf9/4WJH62GtYPLD96tH9xf6ks9CZxEwbPWFPsDImHF7v3uE3hgBmZ1H9+u5qtU
- 3SvLyIv/GbK3Q==
+ b=k1Isk4II/5JZvazHYek3120y876n8W4uSB5YGak+e4hBVM+PqvV74fQBkG/b8kL2p
+ fjrJY716HLrrpzkJh2SEOSel59If4J/lCw8zWDUruBuV75r058gx9WZMFZ43KW3gcX
+ VVHQHryLZEP7uIf9924iP817EhRgJsI6VGGoTd3Wipho+b3dLmLwzL/Os/N/A9RKDG
+ 0DlpOoMLlyAY+iuO3PMh+2187RI6mhDAEllk5aoJCNSfKp3xBBlZdh63eNpU/FXx6s
+ ZP7mvKyL2FH2y0qY07EofEzphFXse3PQfiwW0KMADvGvUmIph7i5yPeslrwOFhMyR4
+ x+lV75GLV2AtQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -51,9 +51,9 @@ Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 8/9] configs: qemu: add config fragment for ACPI
-Date: Fri, 15 Dec 2023 14:32:44 +0100
-Message-Id: <20231215133245.7923-9-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 9/9] arm: enable support for QEMU firmware tables
+Date: Fri, 15 Dec 2023 14:32:45 +0100
+Message-Id: <20231215133245.7923-10-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
 References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
@@ -75,84 +75,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a configuration fragment to enable ACPI on QEMU.
+Enable the QEMU firmware interface if ACPI tables are to be supported on
+the QEMU platform.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v2:
-	no change
+	new patch
 ---
- MAINTAINERS                         |  1 +
- board/emulation/configs/acpi.config |  3 +++
- doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
- doc/board/emulation/index.rst       |  1 +
- 4 files changed, 28 insertions(+)
- create mode 100644 board/emulation/configs/acpi.config
- create mode 100644 doc/board/emulation/acpi.rst
+ board/emulation/qemu-arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index d77b9ffc9b..c1562d8115 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -53,6 +53,7 @@ Maintainers List (try to look for most precise areas first)
- ACPI:
- M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
-+F:	board/emulation/configs/acpi.config
- F:	cmd/acpi.c
- F:	lib/acpi/
+diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
+index ac2d078f42..e21c135e86 100644
+--- a/board/emulation/qemu-arm/Kconfig
++++ b/board/emulation/qemu-arm/Kconfig
+@@ -5,6 +5,7 @@ config TEXT_BASE
  
-diff --git a/board/emulation/configs/acpi.config b/board/emulation/configs/acpi.config
-new file mode 100644
-index 0000000000..b7ed811e33
---- /dev/null
-+++ b/board/emulation/configs/acpi.config
-@@ -0,0 +1,3 @@
-+CONFIG_CMD_QFW=y
-+CONFIG_ACPI=y
-+CONFIG_GENERATE_ACPI_TABLE=y
-diff --git a/doc/board/emulation/acpi.rst b/doc/board/emulation/acpi.rst
-new file mode 100644
-index 0000000000..e1208ca51e
---- /dev/null
-+++ b/doc/board/emulation/acpi.rst
-@@ -0,0 +1,23 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+ACPI on QEMU
-+============
-+
-+QEMU can provide ACPI tables on ARM, RISC-V, and x86.
-+
-+The following settings are needed::
-+
-+    CONFIG_CMD_QFW=y
-+    CONFIG_ACPI=y
-+    CONFIG_GENERATE_ACPI_TABLE=y
-+
-+On x86 these settings are already included in the defconfig files. ARM and
-+RISC-V default to use device-trees.
-+
-+Instead of updating the configuration manually you can add the configuration
-+fragment `acpi.config` to the make command for initializing the configuration.
-+E.g.
-+
-+.. code-block:: bash
-+
-+    make qemu-riscv64_smode_defconfig acpi.config
-diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
-index 932c65adeb..d3d6b8f3d8 100644
---- a/doc/board/emulation/index.rst
-+++ b/doc/board/emulation/index.rst
-@@ -6,6 +6,7 @@ Emulation
- .. toctree::
-    :maxdepth: 1
- 
-+   acpi
-    blkdev
-    ../../usage/semihosting
-    qemu-arm
+ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
++	select QFW if ACPI
+ 	select QFW_MMIO if CMD_QFW
+ 	imply VIRTIO_MMIO
+ 	imply VIRTIO_PCI
 -- 
 2.40.1
 
