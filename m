@@ -4,72 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3278AC46CA2
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:07:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11639C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B49C87A8C;
-	Fri, 15 Dec 2023 20:07:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 70F5F87C51;
+	Fri, 15 Dec 2023 20:20:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JqbOwgvS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZxApoieM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0391C87695; Fri, 15 Dec 2023 20:07:41 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id 4C59087C3B; Fri, 15 Dec 2023 20:20:02 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9717E87C09
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:07:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A681D87C57
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:19:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-28b18920659so98848a91.1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:07:38 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-67f11ccd8e7so7352146d6.3
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:19:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702667257; x=1703272057; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tp75lNQ43fZfW/exxNNUrw/R2bauqCmpG/PaWPVF83I=;
- b=JqbOwgvS6WGDK2p8dyCDpP+NfvBf+m0zkXOwGsulUOOB6h+cM6gZeTX9DXeUGe1iW2
- bZOolQRkTLDx1M8RBfEabB3Wsc/5KwUXDnOQQuUdWUDYduaZswuVKQWgydI5PfWBsQF6
- 3AadehMnpUIZz3WuV5+TIO2gb13ny+pw+cJPxVL2slhBC8ISFgZuaie8wZJ4Ai29bzCL
- RWbvtnm2PB2tswkEQnZqj0ALlo8oB2oJK37n9udtporsvVQzKBMlJP2z19zF6e59bD7K
- fhx99PEs3DBqhm5aNspnrsVks2+ScADyEtiXWCbmIAKVhRkr2TEcv25WhHUI45EssP8/
- ZCuQ==
+ d=konsulko.com; s=google; t=1702667998; x=1703272798; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LtrcrJlr6NeQHIK2RkW/lpzI31QtzOIlHI31PNSBLU8=;
+ b=ZxApoieMGP14sKZl3a+1wdGsiV58q4V+1cmTxzd/i1KXHz4qFd0GcqDN9HQlY7cyXR
+ GDci8BaWYUcDZf1/FpPUbVQXo08JCN+pAkWNSymP3/Wk51inzFfZAV5f+zl4PcghuPwE
+ Jt1hi9S31hsSnvHkwBZbmTZJGA9vLHRcgAqy0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702667257; x=1703272057;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tp75lNQ43fZfW/exxNNUrw/R2bauqCmpG/PaWPVF83I=;
- b=dO0GQE59Kq1bPnNzoPFDc57eFje7mLPk+qnS83GJVHJ4O7B0ABDJwE4tKvdcGvKZh5
- MIDVlhkNI6kV1T61hWxXz7RYxHvL5FNuUtJmKyaOGrx3tiYS+/UWGy/FggXlMJkRY+FX
- Qp8QMxveTSsZB9nXRvZ6YFVp/Cg51O/hDYktmSb2Ie1/+MK1yxDus0tc0rFYoXPPsd6Q
- j0Y6Su33MUHl4neavcVlXYU2S9Vrk5CdJ/GWX3DnXzrH8hww5NblyxyeLjMZS0pHwhUD
- g2i8owKl6kq42ZtVLs9MJXdhkVmLB2xv5SPgq5WXRVCgFqRooLqmHjJKfa7lneKdnWT9
- aDDg==
-X-Gm-Message-State: AOJu0YzZ8DyMt2fg0ke514SA+8kWRJ0aEl4ygFd913xlgqrdOcbHCmcf
- Kv6ZEszvwVtKaOOWL5QWIuP+ubhnDMsPbHeO8S+1g90L3BU=
-X-Google-Smtp-Source: AGHT+IFgFRNTJmLtMaKty20rGNJxUz8NoTpANl06SvLRKf0tD5zrqyw9ubELpyBWs/Av9LP+OCMcSe9gj052A95Go2c=
-X-Received: by 2002:a17:90a:9e1:b0:28b:3288:d9b8 with SMTP id
- 88-20020a17090a09e100b0028b3288d9b8mr2069759pjo.3.1702667256839; Fri, 15 Dec
- 2023 11:07:36 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702667998; x=1703272798;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LtrcrJlr6NeQHIK2RkW/lpzI31QtzOIlHI31PNSBLU8=;
+ b=GuwS5b0Y2f8hr+oMEqtJANMVFz/gaiDsS0wBrO8f9ZcAtJVotXlQiYi5UdV/p1IUmL
+ S/40sLNBCZLikpnHkc9jxvDnJbJit+CEbGPqh1QxCAzyQMQvgA58g0V0hqcaLdi94EMc
+ 29TdITyLIfn/W66QdUyZilPUXxmIWjIlisXmeqiM0Zr5HLj+7d9dVZRxr19T5kg4jjeF
+ b3VhYledDrzwIGMDQ7ZGoaUZhAYzvRpdgIkGDQ85iUXULTMT9zRTPEaOq2YRk1K7ZThp
+ dQzAm08UeP3pR3SPCutgOrnyp4WrICY9G+PPuO+VX7MqFTlpERwODwFfELwkdU39wDPg
+ b3uQ==
+X-Gm-Message-State: AOJu0YwwblzHcUtG8+UDStSUEEFPiV8owMIU4Jq7ccqD/+9JYcpugkXq
+ hQwQn2hL91VkCVZ0NNuWYCx7oQ==
+X-Google-Smtp-Source: AGHT+IEXSZCKchxGWNoVq1SMxj+4CTcV+mepkoZuc3c4CPgAyUIRFQ/5wpilBU7u/z6VfE4xPil6hg==
+X-Received: by 2002:a05:6214:1cc3:b0:67f:2335:5ef2 with SMTP id
+ g3-20020a0562141cc300b0067f23355ef2mr575416qvd.89.1702667998372; 
+ Fri, 15 Dec 2023 11:19:58 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
+ [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
+ by smtp.gmail.com with ESMTPSA id
+ b2-20020a0cbf42000000b0067ec8702d1dsm5319558qvj.137.2023.12.15.11.19.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 11:19:57 -0800 (PST)
+Date: Fri, 15 Dec 2023 14:19:54 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Conor Dooley <conor@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>,
+ Rob Herring <robh+dt@kernel.org>, neil.armstrong@linaro.org,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ sjg@chromium.org, krzysztof.kozlowski+dt@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de
+Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
+ U-boot
+Message-ID: <20231215191954.GA2513409@bill-the-cat>
+References: <20231214135103.1606605-1-sumit.garg@linaro.org>
+ <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
+ <20231214182328.GQ2513409@bill-the-cat>
+ <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
+ <0a143e84-5379-4455-b3c8-dc97beb9514c@linaro.org>
+ <20231215133743.GV2513409@bill-the-cat>
+ <20231215-sputter-puzzle-128dc9f85d73@spud>
 MIME-Version: 1.0
-References: <20230926065438.418051-1-akoch@initse.com>
-In-Reply-To: <20230926065438.418051-1-akoch@initse.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 15 Dec 2023 16:07:24 -0300
-Message-ID: <CAOMZO5CvK+9REbnQn3nSD2XbyNS=kvveFeg1KuKOUcLq2TftRg@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: imx8mm_evk: Fix PMIC definition
-To: Alexander Koch <akoch@initse.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="RLHb8GQVgKBMSjwX"
+Content-Disposition: inline
+In-Reply-To: <20231215-sputter-puzzle-128dc9f85d73@spud>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,66 +109,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
 
-On Tue, Sep 26, 2023 at 3:55=E2=80=AFAM Alexander Koch <akoch@initse.com> w=
-rote:
->
-> Newer revisions of the i.MX8MM EVK are equipped with a different PMIC tha=
-n
-> the initial ones (PCA9540 instead of BD71847), which has already been
-> reflected in 4c07a21e5.
+--RLHb8GQVgKBMSjwX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This commit hash does not exist:
+On Fri, Dec 15, 2023 at 02:45:11PM +0000, Conor Dooley wrote:
+> On Fri, Dec 15, 2023 at 08:37:43AM -0500, Tom Rini wrote:
+> > On Fri, Dec 15, 2023 at 08:50:51AM +0100, Krzysztof Kozlowski wrote:
+> > > On 14/12/2023 20:48, Rob Herring wrote:
+> > > >>
+> > > >> I think some of the important questions to ask are, how often / li=
+kely
+> > > >> are the breakages to occur? It seems like these days it's either:
+> > > >> - U-Boot had an early version of the binding and we already state =
+we
+> > > >>   don't support backwards compatibility here. It should be on the
+> > > >>   maintainer to be proactive in this case.
+> > > >> - It's a "the DT was wrong about the hardware, sorry not sorry it'=
+s an
+> > > >>   incompatible DTS change now". This too is hopefully the kind of =
+thing
+> > > >>   that at least board maintainers will be more actively aware of n=
+eeding
+> > > >>   to deal with in U-Boot, if it's really a problem.
+> > > >=20
+> > > > A common issue in the kernel is with forward compatibility when
+> > > > platforms add new resources from a new provider. Then the kernel
+> > > > expects a driver for the provider and waits for the dependency. Of
+> > > > course, older kernels don't have that provider driver and so the
+> > > > dependency is never met. Not sure if u-boot will have similar issue=
+s?
+> > > > At least you should/could know if the provider driver exists or not.
+> > > > (The kernel doesn't because modules.)
+> > >=20
+> > > If some U-Boot platform decides to aggressively sync with kernel DTS,
+> > > then probably the kernel subarch maintainer should be aware of it.
+> > > Mentioned forward compatibility issue is a result of assumption that
+> > > there are no out-of-tree upstream consumers of our DTS. I am certainly
+> > > not aware of any such consumer for Samsung. If someone told me (me
+> > > wearing Samsung hat), hey U-Boot now cares, I would start caring as w=
+ell.
+> > >=20
+> > > The usual argument of contributors wanting to break the backward and
+> > > forward compatibility, is "there is no other OS depending on this"
+> > > (recent discussion with Johan about order of interrupts:
+> > > https://lore.kernel.org/all/ZWcPZPX-eT-xHAOv@hovoldconsulting.com/ ).
+> > > You need to tell the maintainers of that platform, that now they have
+> > > other OS/firmware/bootloader depending on DTS compatibility.
+> >=20
+> > I think this hints at one of the bigger impacts this might have.
+> > Reminding everyone that other projects do use the device trees and have
+> > for years.
+>=20
+> TBF, we do try to ask these questions as much as possible, usually (for
+> me at least) citing U-Boot or the BSDs as users. It largely seems to me
+> like we are all bark and no bite though, so a project like U-Boot having
+> a defined "schedule" as you suggest below would add more meaning to our
+> questioning.
+>=20
+> > Without rehashing history, BSD does use the trees as-is and
+> > for platforms U-Boot supports they are supposed to be re-synced
+> > periodically.
+>=20
+> I know this is the theory, but I also know that how well this is
+> implemented varies wildly per-platform. I generally don't pay all
+> that much attention to the various arm platforms, but I do pay
+> attention to what's going on for RISC-V and there appear to be no
+> active maintainers of individual platforms and the architecture
+> maintainers are not aware of the status of the equivalent patches
+> for Linux when they apply patches.
+>=20
+> In recent memory, this has lead to the clock indices in the DT
+> differing between U-Boot and Linux for one such platform, which, IMO,
+> is an insidious difference that is hard to spot during review and highly
+> unlikely to crop up while comparing dts files, since the defines were nam=
+ed
+> identically. To be clear, I am not expecting the architecture code
+> maintainers to be aware of the minutiae of the various RISC-V platforms,
+> but rather suggesting they might have an easier time reviewing if both
+> projects' dts files and binding headers were tied together.
+>=20
+> That said, automatically synced devicetrees will, as has been pointed out,
+> require the platform maintainers in Linux to be more aware of the affect =
+of
+> what they accept on other users, but it will also require the equivalent
+> maintainers on the U-Boot side to engage too, so that the "upstream" dts
+> files do not change in a way that screws the usecase in U-Boot.
 
-$ git show 4c07a21e5
-fatal: ambiguous argument '4c07a21e5': unknown revision or path not in
-the working tree.
+Yeah, it will hopefully lead to better coordination between maintainers
+in some places. There are SoCs where the kernel DTS people are the
+U-Boot DTS people too. All in all, I should probably CC more people than
+I usually do on these resync patches just to try and head off any
+tricky changes like you've mentioned above.
 
-> These changes have been reverted implicitly as part of the device tree
-> re-sync with the Linux kernel done in 24a7a3c1c.
->
-> This lead to an inconsistent state: while the device tree describes the o=
-ld
-> PMIC again the code in board/freescale/imx8mm_evk/spl.c tries to initiali=
-ze
-> the new PMIC:
->
->     ret =3D pmic_get("pca9450@25", &dev);
->     if (ret =3D=3D -ENODEV) {
->             puts("No pmic\n");
->             return 0;
->     }
+> Also, if people send fixes to the U-Boot copies of these devicetrees,
+> would the plan be to request that these are sent to Linux and the fixes
+> pulled in via a resync after each -rc release of Linux (or similar, just
+> throwing some example schedule out there)?
 
-Yes, I agree this is inconsistent and we need to fix it.
+The way we've always tried to operate is that changes should be pushed
+to Linux and resynced down, or at least submitted simultaneously. If
+there's some specific bugfixes that need to come in out of cycle I
+_think_ subtree handles cherry picked commits in a reasonable fashion.
 
->
-> This leads to the expected error message from SPL:
+--=20
+Tom
 
-> -       pmic@4b {
-> -               compatible =3D "rohm,bd71847";
-> -               reg =3D <0x4b>;
-> -               pinctrl-names =3D "default";
-> +       pmic: pca9450@25 {
-> +               reg =3D <0x25>;
-> +               compatible =3D "nxp,pca9450a";
+--RLHb8GQVgKBMSjwX
+Content-Type: application/pgp-signature; name="signature.asc"
 
-If we change like this, we will lose the change after a sync with the Linux=
- dts.
+-----BEGIN PGP SIGNATURE-----
 
-In Linux we have arch/arm64/boot/dts/freescale/imx8mm-evk.dtsi that contain=
-s:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8ptYACgkQFHw5/5Y0
+tyyKBgv7BVSQkeprEQzWJTMp0f8pdUUA3HMyTAiUkAxp0EKkaqIOmthMjZDBiVcV
+NSklXHapjPYN0s3HThDaBxd1TKSenmjXDFWyOldF7JQ8zEf/VHprawfbculgLg0g
+E1NNovps2Hawt05fxmbjQ2Fxqa50dcW4pgbgbYju+W0Au+y5IrZzThlchzdgfav5
+SRA/eafuv9qSZALg7ifKdO2vrOgR6FKgE3LsFmUECH5xtVYL87fhuGXV1nXNkLkG
+/9aPkAokOZi7FWppoSaOY47hxZVGReccdBxLKEE4vwYQSwimfhDzOMXBzWwzfPK6
+s2lOucq0Sq+5o/ToCLWNm4/VTZziKY8iPnfqcA/oe8f1F4amUbaK2vNU0Whv9n0F
+TgcHqqpFwghkYQs7HTWxaIUXt6sxc2F0Xopw4lJ8w+/qigq+XtHifZYJ3lGW7bIr
+qsc+3njtxl25wG3mAZwNZCizvdCstCSVhBN2TzfXj8JdSGCUS+NBIDWrJDyGYR/9
+RL8oUsFy
+=1/sk
+-----END PGP SIGNATURE-----
 
-pmic@4b {
-compatible =3D "rohm,bd71847";
-
-and arch/arm64/boot/dts/freescale/imx8mm-evkb.dts that contains:
-
-&i2c1 {
-/delete-node/ pmic@4b;
-
-pmic@25 {
-compatible =3D "nxp,pca9450a";
-
-We need to have a new imx8mm-evkb_defconfig in U-Boot to deal with the
-PCA9450 PMIC.
+--RLHb8GQVgKBMSjwX--
