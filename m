@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C9DC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF1AC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C389B87BD2;
-	Fri, 15 Dec 2023 14:32:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49A0487BC7;
+	Fri, 15 Dec 2023 14:32:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XYyisUqt";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g6bKksWK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A92187BCE; Fri, 15 Dec 2023 14:32:55 +0100 (CET)
+ id F3FD987BD6; Fri, 15 Dec 2023 14:32:56 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2DE087BA7
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA83C87BC9
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0C9433F5F0; 
- Fri, 15 Dec 2023 13:32:52 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A71DC401CA; 
+ Fri, 15 Dec 2023 13:32:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702647172;
- bh=0xz2ybCgLOzCE6CanD0Ho9p9OACcezVODSvSrxoccPw=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=XYyisUqti/cg2auBRTb4Y0/2DQWRhW8TTgfu1AcVMHRWyylwT9DtO95JNS4RqvxO0
- ALvSlZWtd6I/qlTaZyt46bMtWqKgnN1uYtZCTLBN8MCkn/zHNjYZ+gqpNJeP/ZSBEG
- wADpo5XbUF6nleBCoNAcc6m6p8l2SkawS6zZfaZS4q1NggxPgx6W7U7aNC0nIq2Wg3
- lIsqwEKlrEmR2K3pcNm4jvOh6a80mSmvyAZqrfIsVIpgouK4OfbN9UJzyFMjD++HGP
- dxnFLqfPlviEVIHjF+6LOe6FX4lXdP5J6XAEEWOXV0DCglOy7Pvg+PNBwfLZV6eLff
- k1cncN4RF2JbQ==
+ s=20210705; t=1702647174;
+ bh=dRhHp3eubmq10gkP4o+3iqVJ9lryyYfLavvQszTyaSU=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ MIME-Version;
+ b=g6bKksWKsJ56dkYUUhgOb5aIQQ20v7jkUBWxDD1MA60rc0B/kJsUtGCPincHWDDLM
+ 0X49i7tL2KTFkjMN8usd8zXAVA6ilh/RnNbq6r/qxD+srj2Z46FFtTlD1ddYLUAe/e
+ XD7hD9X3BDb7kfcfW8gTz51wpJ2/stynPTg6bN1KQiHT5qhVMRxIFKO95sdoxr0eqT
+ gpdFB0bXDkK8F7noq7KN3xpwtyaNmCbJ/8L6FvPLL9vwOP0J7fLYkJBkWll4P8vXxZ
+ tmmG/5ah/wKESuRaWlIwLWX1KazAKs/pAxbINloPQQyy/EfpdjVXkdW8kCcR3rZZDa
+ luPZsxKWILgeA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -50,10 +51,12 @@ Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 0/9] acpi: add ACPI support on QEMU ARM and RISC-V
-Date: Fri, 15 Dec 2023 14:32:36 +0100
-Message-Id: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 3/9] arrm: add ACPI fields to global data
+Date: Fri, 15 Dec 2023 14:32:39 +0100
+Message-Id: <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
+References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,45 +75,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QEMU 8.1.2 can create ACPI tables for the ARM and RISC-V architectures
-Allow passing them through to the operating system.
-Provide a new config fragment that enables this.
+Add fields for the location of ACPI tables to the global data.
 
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
 v2:
-	consider ARM architecture too
-	invoke write_acpi_tables() via EVT_LAST_STAGE_INIT
+	new patch
+---
+ arch/arm/include/asm/global_data.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-Heinrich Schuchardt (9):
-  acpi: Kconfig symbol CONFIG_QFW_ACPI
-  acpi: carve out qfw_acpi.c
-  arrm: add ACPI fields to global data
-  risc-v: add ACPI fields to global data
-  acpi: enable writing ACPI tables on QEMU
-  risc-v: add support for QEMU firmware tables
-  riscv: allow usage of ACPI
-  configs: qemu: add config fragment for ACPI
-  arm: enable support for QEMU firmware tables
-
- MAINTAINERS                          |   1 +
- arch/Kconfig                         |   1 +
- arch/arm/include/asm/global_data.h   |   4 +
- arch/riscv/include/asm/global_data.h |   4 +
- board/emulation/configs/acpi.config  |   3 +
- board/emulation/qemu-arm/Kconfig     |   1 +
- board/emulation/qemu-riscv/Kconfig   |   2 +
- doc/board/emulation/acpi.rst         |  23 +++
- doc/board/emulation/index.rst        |   1 +
- drivers/misc/Kconfig                 |   7 +
- drivers/misc/Makefile                |   1 +
- drivers/misc/qfw.c                   | 240 -----------------------
- drivers/misc/qfw_acpi.c              | 281 +++++++++++++++++++++++++++
- lib/acpi/Makefile                    |   2 +-
- lib/acpi/acpi_writer.c               |   4 +-
- 15 files changed, 332 insertions(+), 243 deletions(-)
- create mode 100644 board/emulation/configs/acpi.config
- create mode 100644 doc/board/emulation/acpi.rst
- create mode 100644 drivers/misc/qfw_acpi.c
-
+diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+index 75bd9d56f8..9505399bb1 100644
+--- a/arch/arm/include/asm/global_data.h
++++ b/arch/arm/include/asm/global_data.h
+@@ -19,6 +19,10 @@ struct arch_global_data {
+ #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
+ 	u32 sdhc_clk;
+ #endif
++	ulong table_start;		/* Start address of ACPI tables */
++	ulong table_end;		/* End address of ACPI tables */
++	ulong table_start_high;		/* Start address of high ACPI tables */
++	ulong table_end_high;		/* End address of high ACPI tables */
+ 
+ #if defined(CONFIG_FSL_ESDHC)
+ 	u32 sdhc_per_clk;
 -- 
 2.40.1
 
