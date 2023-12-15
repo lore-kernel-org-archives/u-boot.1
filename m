@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CBD3C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AAAC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 148C787B9E;
+	by phobos.denx.de (Postfix) with ESMTP id 8B87387BA2;
 	Fri, 15 Dec 2023 05:19:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GitXo1wU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j0f4SblR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B010487B81; Fri, 15 Dec 2023 05:19:40 +0100 (CET)
+ id 1A8AB87B96; Fri, 15 Dec 2023 05:19:42 +0100 (CET)
 Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
  [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4777087AD1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27AED87B72
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3b9fd22bb1aso218354b6e.2
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:38 -0800 (PST)
+ 5614622812f47-3b9e2a5e8faso100639b6e.1
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702613977; x=1703218777; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HjhTSpvEAQlLxSjElB7m1VSHst8e2tl/8TVGfWSmjVs=;
- b=GitXo1wUW4CiuqVxTPXJ2JkiTAgrsSNzC9pfDzYk1YqD0vgXc1drxQVVZFLDWjC+UD
- nMCYeSx0zxWkHjAPschaOdFJaO+fmlyCpfF8wv5t3qTH8e+qTINykPYOUK0lKjZrSqLu
- 2lNwvFXsg/PvtBfX+q4mTAKjhgLVWWwgZI2/M=
+ bh=9+ouZGr5RMmoq111AYG72szViTuUsFNEETNT60bMDGQ=;
+ b=j0f4SblRb+EJT+Q03WWsAZwJZPLM72BzNJMtqWaeHcd7yHQxZCNbGrbd7UAee+yVO4
+ +JQctHx7Hy69sxrfam5H4uIimPRnyT+EXZeYXJN2Ut+4W3DEddSn6ULsQbZQVWdAPG8u
+ C/m3Yhy7ia42MAzeyjSvRp0/de7RA6eGOE4sw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702613977; x=1703218777;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HjhTSpvEAQlLxSjElB7m1VSHst8e2tl/8TVGfWSmjVs=;
- b=mggMiDQsnlTbQ6gMzr7tHgJzvTe8H5Wug7wbAOg+8bBoD4x8IWQCUoRPntTH260aew
- 34dEhFXcQl4jebY7GiVLIO5QukAlW2boBPvYQ9uilVu6jDYP4qsmBelmHTOvwDADFRk1
- zIhXLTtmxrsv5iY4bcLtkUTnQ3IM99JqC89/h1Euzy2wGJEJB3FbmMMMvq7EYC7FH/y8
- nHF/C8YQu8x4DYhfqBBPpPG1+LWotPFH5xZbu16JSiuPssxnvvYN2TACb4rRZGRxQMnW
- jMV0IBjdLUYXN0oXsIDE7ioEPp/uUdls0bjbaOt6r1wT6MkvGVWRk/NFW3TF5ZGv82mT
- imQw==
-X-Gm-Message-State: AOJu0YznW2IwZ2zUWoCroWiu/hgwB4q20xP6X6TLGajA+jYWlSfJmF8B
- 7wfxsXp6eDzAH/14cXPkZdKzfyxxGv+V3WwCQIJkQg==
-X-Google-Smtp-Source: AGHT+IFspYIhc4I/fFnzaeuWhzMxN7C23Ar0O39hMzavhJVt5AEKogJm5AaZwNovT0y8kipXjUBHtA==
-X-Received: by 2002:a05:6808:2381:b0:3a8:7c67:7cd with SMTP id
- bp1-20020a056808238100b003a87c6707cdmr13843399oib.24.1702613976782; 
- Thu, 14 Dec 2023 20:19:36 -0800 (PST)
+ bh=9+ouZGr5RMmoq111AYG72szViTuUsFNEETNT60bMDGQ=;
+ b=owYF/lG+hMJJ4YGCL01xdWa0ItXK6hZadMZEvDj7IReUpSVG09WSM4JCUFugEjaTsw
+ qza1wqQFvV2fkIyvejMYW0HVjIDhtgPdKjx4a6W8OlzOl5quhFJMAZMnxJzLSRWfkKk4
+ C1/3uYglpBP/ghTLwgtojXlplRAaJeeljtiRiWE+KA1wuU3I3bMsnkrEBBrcdVXi4bRX
+ WE4MfGFL957pO15Op8jpZEFX+yuy7fAw8DDcYBHVybAzKW61FIYHYr3YdiNWzTCzZUnK
+ 3YxeYR2hIlSZLRDpK5bFDG+U5NJVfqhqUTIf/C4Et6LE5HCfPz3oXQ6n8BOFoLLDxDPr
+ xeXA==
+X-Gm-Message-State: AOJu0YxyLBXSBWTAsl7dpaFGDxctGHaboy99YhcJDzicCbkok+d4BnPC
+ CYiMbzzm53N1PVb6lerG4NPGPM+CdrRiDt9Ux2K0/Q==
+X-Google-Smtp-Source: AGHT+IECSjq18Hpvv3Yapet6TSQHmnTqYJZ+Ds7da/NmNnFiiowHLu/QG+thkGCUHDWxc0KiU3vJGg==
+X-Received: by 2002:a05:6808:14d5:b0:3b8:b063:2c07 with SMTP id
+ f21-20020a05680814d500b003b8b0632c07mr4957554oiw.45.1702613977648; 
+ Thu, 14 Dec 2023 20:19:37 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.35
+ be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 20:19:36 -0800 (PST)
+ Thu, 14 Dec 2023 20:19:37 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Dan Carpenter <dan.carpenter@linaro.org>, Marek Vasut <marex@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Sean Edmond <seanedmond@microsoft.com>,
  Thomas Mittelstaedt <thomas.mittelstaedt@de.bosch.com>
-Subject: [PATCH v2 11/16] pxe: Refactor to reduce the size of label_boot()
-Date: Thu, 14 Dec 2023 21:19:09 -0700
-Message-ID: <20231214211906.v2.11.I66588a1ea770bbeea0a355c2e533e32344302c80@changeid>
+Subject: [PATCH v2 12/16] pxe: Refactor to avoid over-using bootm_argv
+Date: Thu, 14 Dec 2023 21:19:10 -0700
+Message-ID: <20231215041919.2197788-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231215041919.2197788-1-sjg@chromium.org>
 References: <20231215041919.2197788-1-sjg@chromium.org>
@@ -91,378 +92,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is far too long and complicated. Split out the part
-which actually calls the boot commands into a separate function.
+The bootm_argv[3] expression is used in many places. It is the FDT
+address, so use that name throughout.
 
-Change a strncpy() to strlcpy() to keep checkpatch happy.
-
-No functional change is intended.
+Assign it to bootm_argv[3] only at the end, when all the conditions are
+resolved.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/pxe_utils.c | 301 +++++++++++++++++++++++++----------------------
- 1 file changed, 163 insertions(+), 138 deletions(-)
+ boot/pxe_utils.c | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
 
 diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 2c87aba7ed33..6fbccadd99e6 100644
+index 6fbccadd99e6..a6aee68bb797 100644
 --- a/boot/pxe_utils.c
 +++ b/boot/pxe_utils.c
-@@ -470,159 +470,47 @@ skip_overlay:
- #endif
- 
- /**
-- * label_boot() - Boot according to the contents of a pxe_label
-+ * label_run_boot() - Run the correct boot procedure
-  *
-- * If we can't boot for any reason, we return.  A successful boot never
-- * returns.
-+ * fdt usage is optional:
-+ * It handles the following scenarios.
-  *
-- * The kernel will be stored in the location given by the 'kernel_addr_r'
-- * environment variable.
-+ * Scenario 1: If fdt_addr_r specified and "fdt" or "fdtdir" label is
-+ * defined in pxe file, retrieve fdt blob from server. Pass fdt_addr_r to
-+ * bootm, and adjust argc appropriately.
-  *
-- * If the label specifies an initrd file, it will be stored in the location
-- * given by the 'ramdisk_addr_r' environment variable.
-+ * If retrieve fails and no exact fdt blob is specified in pxe file with
-+ * "fdt" label, try Scenario 2.
-  *
-- * If the label specifies an 'append' line, its contents will overwrite that
-- * of the 'bootargs' environment variable.
-+ * Scenario 2: If there is an fdt_addr specified, pass it along to
-+ * bootm, and adjust argc appropriately.
-+ *
-+ * Scenario 3: If there is an fdtcontroladdr specified, pass it along to
-+ * bootm, and adjust argc appropriately, unless the image type is fitImage.
-+ *
-+ * Scenario 4: fdt blob is not available.
-  *
-  * @ctx: PXE context
-  * @label: Label to process
-+ * @kernel_addr: string containing the kernel address / config
-+ * @initrd_str: string containing the initrd address / size
-+ * @initrd_addr_str: initrd address, or NULL if none
-+ * @initrd_filesize: initrd size in bytes; only valid if initrd_addr_str is not
-+ *	NULL
-  * Returns does not return on success, otherwise returns 0 if a localboot
-  *	label was processed, or 1 on error
-  */
--static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
-+static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
-+			  char *kernel_addr, char *initrd_str,
-+			  char *initrd_addr_str, char *initrd_filesize)
+@@ -506,18 +506,19 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
  {
  	char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
  	char *zboot_argv[] = { "zboot", NULL, "0", NULL, NULL };
--	char *kernel_addr = NULL;
--	char *initrd_addr_str = NULL;
--	char initrd_filesize[10];
--	char initrd_str[28];
--	char mac_str[29] = "";
--	char ip_str[68] = "";
--	char *fit_addr = NULL;
-+	ulong kernel_addr_r;
++	const char *fdt_addr;
+ 	ulong kernel_addr_r;
  	int bootm_argc = 2;
  	int zboot_argc = 3;
--	int len = 0;
--	ulong kernel_addr_r;
  	void *buf;
  
--	label_print(label);
--
--	label->attempted = 1;
--
--	if (label->localboot) {
--		if (label->localboot_val >= 0)
--			label_localboot(label);
--		return 0;
--	}
--
--	if (!label->kernel) {
--		printf("No kernel given, skipping %s\n",
--		       label->name);
--		return 1;
--	}
--
--	if (get_relfile_envaddr(ctx, label->kernel, "kernel_addr_r",
--				NULL) < 0) {
--		printf("Skipping %s for failure retrieving kernel\n",
--		       label->name);
--		return 1;
--	}
--
--	kernel_addr = env_get("kernel_addr_r");
--	/* for FIT, append the configuration identifier */
--	if (label->config) {
--		int len = strlen(kernel_addr) + strlen(label->config) + 1;
--
--		fit_addr = malloc(len);
--		if (!fit_addr) {
--			printf("malloc fail (FIT address)\n");
--			return 1;
--		}
--		snprintf(fit_addr, len, "%s%s", kernel_addr, label->config);
--		kernel_addr = fit_addr;
--	}
--
--	/* For FIT, the label can be identical to kernel one */
--	if (label->initrd && !strcmp(label->kernel_label, label->initrd)) {
--		initrd_addr_str =  kernel_addr;
--	} else if (label->initrd) {
--		ulong size;
--		if (get_relfile_envaddr(ctx, label->initrd, "ramdisk_addr_r",
--					&size) < 0) {
--			printf("Skipping %s for failure retrieving initrd\n",
--			       label->name);
--			goto cleanup;
--		}
--		strcpy(initrd_filesize, simple_xtoa(size));
--		initrd_addr_str = env_get("ramdisk_addr_r");
--		size = snprintf(initrd_str, sizeof(initrd_str), "%s:%lx",
--				initrd_addr_str, size);
--		if (size >= sizeof(initrd_str))
--			goto cleanup;
--	}
--
--	if (label->ipappend & 0x1) {
--		sprintf(ip_str, " ip=%s:%s:%s:%s",
--			env_get("ipaddr"), env_get("serverip"),
--			env_get("gatewayip"), env_get("netmask"));
--	}
--
--	if (IS_ENABLED(CONFIG_CMD_NET))	{
--		if (label->ipappend & 0x2) {
--			int err;
--
--			strcpy(mac_str, " BOOTIF=");
--			err = format_mac_pxe(mac_str + 8, sizeof(mac_str) - 8);
--			if (err < 0)
--				mac_str[0] = '\0';
--		}
--	}
--
--	if ((label->ipappend & 0x3) || label->append) {
--		char bootargs[CONFIG_SYS_CBSIZE] = "";
--		char finalbootargs[CONFIG_SYS_CBSIZE];
--
--		if (strlen(label->append ?: "") +
--		    strlen(ip_str) + strlen(mac_str) + 1 > sizeof(bootargs)) {
--			printf("bootarg overflow %zd+%zd+%zd+1 > %zd\n",
--			       strlen(label->append ?: ""),
--			       strlen(ip_str), strlen(mac_str),
--			       sizeof(bootargs));
--			goto cleanup;
--		}
--
--		if (label->append)
--			strlcpy(bootargs, label->append, sizeof(bootargs));
--
--		strcat(bootargs, ip_str);
--		strcat(bootargs, mac_str);
--
--		cli_simple_process_macros(bootargs, finalbootargs,
--					  sizeof(finalbootargs));
--		env_set("bootargs", finalbootargs);
--		printf("append: %s\n", finalbootargs);
--	}
--
--	/*
--	 * fdt usage is optional:
--	 * It handles the following scenarios.
--	 *
--	 * Scenario 1: If fdt_addr_r specified and "fdt" or "fdtdir" label is
--	 * defined in pxe file, retrieve fdt blob from server. Pass fdt_addr_r to
--	 * bootm, and adjust argc appropriately.
--	 *
--	 * If retrieve fails and no exact fdt blob is specified in pxe file with
--	 * "fdt" label, try Scenario 2.
--	 *
--	 * Scenario 2: If there is an fdt_addr specified, pass it along to
--	 * bootm, and adjust argc appropriately.
--	 *
--	 * Scenario 3: If there is an fdtcontroladdr specified, pass it along to
--	 * bootm, and adjust argc appropriately, unless the image type is fitImage.
--	 *
--	 * Scenario 4: fdt blob is not available.
--	 */
- 	bootm_argv[3] = env_get("fdt_addr_r");
+-	bootm_argv[3] = env_get("fdt_addr_r");
++	fdt_addr = env_get("fdt_addr_r");
  
  	/* For FIT, the label can be identical to kernel one */
-@@ -637,6 +525,7 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 			fdtfile = label->fdt;
- 		} else if (label->fdtdir) {
- 			char *f1, *f2, *f3, *f4, *slash;
-+			int len;
+ 	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
+-		bootm_argv[3] = kernel_addr;
++		fdt_addr = kernel_addr;
+ 	/* if fdt label is defined then get fdt from server */
+-	} else if (bootm_argv[3]) {
++	} else if (fdt_addr) {
+ 		char *fdtfile = NULL;
+ 		char *fdtfilefree = NULL;
  
- 			f1 = env_get("fdtfile");
- 			if (f1) {
-@@ -679,7 +568,7 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
- 			fdtfilefree = malloc(len);
- 			if (!fdtfilefree) {
- 				printf("malloc fail (FDT filename)\n");
--				goto cleanup;
-+				return -ENOMEM;
- 			}
+@@ -582,7 +583,7 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
  
- 			snprintf(fdtfilefree, len, "%s%s%s%s%s%s",
-@@ -698,7 +587,7 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 			free(fdtfilefree);
+ 			if (err < 0) {
+-				bootm_argv[3] = NULL;
++				fdt_addr = NULL;
+ 
  				if (label->fdt) {
  					printf("Skipping %s for failure retrieving FDT\n",
- 					       label->name);
--					goto cleanup;
-+					return -ENOENT;
- 				}
- 			}
+@@ -599,7 +600,7 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+ 				label_boot_fdtoverlay(ctx, label);
+ #endif
+ 		} else {
+-			bootm_argv[3] = NULL;
++			fdt_addr = NULL;
+ 		}
+ 	}
  
-@@ -757,6 +646,142 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+@@ -615,20 +616,21 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+ 		zboot_argc = 5;
+ 	}
  
- 	unmap_sysmem(buf);
+-	if (!bootm_argv[3])
+-		bootm_argv[3] = env_get("fdt_addr");
++	if (!fdt_addr)
++		fdt_addr = env_get("fdt_addr");
  
-+	return 0;
-+}
-+
-+/**
-+ * label_boot() - Boot according to the contents of a pxe_label
-+ *
-+ * If we can't boot for any reason, we return.  A successful boot never
-+ * returns.
-+ *
-+ * The kernel will be stored in the location given by the 'kernel_addr_r'
-+ * environment variable.
-+ *
-+ * If the label specifies an initrd file, it will be stored in the location
-+ * given by the 'ramdisk_addr_r' environment variable.
-+ *
-+ * If the label specifies an 'append' line, its contents will overwrite that
-+ * of the 'bootargs' environment variable.
-+ *
-+ * @ctx: PXE context
-+ * @label: Label to process
-+ * Returns does not return on success, otherwise returns 0 if a localboot
-+ *	label was processed, or 1 on error
-+ */
-+static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
-+{
-+	char *kernel_addr = NULL;
-+	char *initrd_addr_str = NULL;
-+	char initrd_filesize[10];
-+	char initrd_str[28];
-+	char mac_str[29] = "";
-+	char ip_str[68] = "";
-+	char *fit_addr = NULL;
-+	int ret;
-+
-+	label_print(label);
-+
-+	label->attempted = 1;
-+
-+	if (label->localboot) {
-+		if (label->localboot_val >= 0)
-+			label_localboot(label);
-+		return 0;
-+	}
-+
-+	if (!label->kernel) {
-+		printf("No kernel given, skipping %s\n",
-+		       label->name);
-+		return 1;
-+	}
-+
-+	if (get_relfile_envaddr(ctx, label->kernel, "kernel_addr_r",
-+				NULL) < 0) {
-+		printf("Skipping %s for failure retrieving kernel\n",
-+		       label->name);
-+		return 1;
-+	}
-+
-+	kernel_addr = env_get("kernel_addr_r");
-+	/* for FIT, append the configuration identifier */
-+	if (label->config) {
-+		int len = strlen(kernel_addr) + strlen(label->config) + 1;
-+
-+		fit_addr = malloc(len);
-+		if (!fit_addr) {
-+			printf("malloc fail (FIT address)\n");
-+			return 1;
-+		}
-+		snprintf(fit_addr, len, "%s%s", kernel_addr, label->config);
-+		kernel_addr = fit_addr;
-+	}
-+
-+	/* For FIT, the label can be identical to kernel one */
-+	if (label->initrd && !strcmp(label->kernel_label, label->initrd)) {
-+		initrd_addr_str = kernel_addr;
-+	} else if (label->initrd) {
-+		ulong size;
-+
-+		if (get_relfile_envaddr(ctx, label->initrd, "ramdisk_addr_r",
-+					&size) < 0) {
-+			printf("Skipping %s for failure retrieving initrd\n",
-+			       label->name);
-+			goto cleanup;
-+		}
-+		strcpy(initrd_filesize, simple_xtoa(size));
-+		initrd_addr_str = env_get("ramdisk_addr_r");
-+		size = snprintf(initrd_str, sizeof(initrd_str), "%s:%lx",
-+				initrd_addr_str, size);
-+		if (size >= sizeof(initrd_str))
-+			goto cleanup;
-+	}
-+
-+	if (label->ipappend & 0x1) {
-+		sprintf(ip_str, " ip=%s:%s:%s:%s",
-+			env_get("ipaddr"), env_get("serverip"),
-+			env_get("gatewayip"), env_get("netmask"));
-+	}
-+
-+	if (IS_ENABLED(CONFIG_CMD_NET))	{
-+		if (label->ipappend & 0x2) {
-+			int err;
-+
-+			strcpy(mac_str, " BOOTIF=");
-+			err = format_mac_pxe(mac_str + 8, sizeof(mac_str) - 8);
-+			if (err < 0)
-+				mac_str[0] = '\0';
-+		}
-+	}
-+
-+	if ((label->ipappend & 0x3) || label->append) {
-+		char bootargs[CONFIG_SYS_CBSIZE] = "";
-+		char finalbootargs[CONFIG_SYS_CBSIZE];
-+
-+		if (strlen(label->append ?: "") +
-+		    strlen(ip_str) + strlen(mac_str) + 1 > sizeof(bootargs)) {
-+			printf("bootarg overflow %zd+%zd+%zd+1 > %zd\n",
-+			       strlen(label->append ?: ""),
-+			       strlen(ip_str), strlen(mac_str),
-+			       sizeof(bootargs));
-+			goto cleanup;
-+		}
-+
-+		if (label->append)
-+			strlcpy(bootargs, label->append, sizeof(bootargs));
-+
-+		strcat(bootargs, ip_str);
-+		strcat(bootargs, mac_str);
-+
-+		cli_simple_process_macros(bootargs, finalbootargs,
-+					  sizeof(finalbootargs));
-+		env_set("bootargs", finalbootargs);
-+		printf("append: %s\n", finalbootargs);
-+	}
-+
-+	ret = label_run_boot(ctx, label, kernel_addr, initrd_str,
-+			     initrd_addr_str, initrd_filesize);
-+
- cleanup:
- 	free(fit_addr);
+ 	kernel_addr_r = genimg_get_kernel_addr(kernel_addr);
+ 	buf = map_sysmem(kernel_addr_r, 0);
  
+-	if (!bootm_argv[3] && genimg_get_format(buf) != IMAGE_FORMAT_FIT)
+-		bootm_argv[3] = env_get("fdtcontroladdr");
++	if (!fdt_addr && genimg_get_format(buf) != IMAGE_FORMAT_FIT)
++		fdt_addr = env_get("fdtcontroladdr");
+ 
+-	if (bootm_argv[3]) {
++	if (fdt_addr) {
+ 		if (!bootm_argv[2])
+ 			bootm_argv[2] = "-";
+ 		bootm_argc = 4;
+ 	}
++	bootm_argv[3] = (char *)fdt_addr;
+ 
+ 	/* Try bootm for legacy and FIT format image */
+ 	if (genimg_get_format(buf) != IMAGE_FORMAT_INVALID &&
 -- 
 2.43.0.472.g3155946c3a-goog
 
