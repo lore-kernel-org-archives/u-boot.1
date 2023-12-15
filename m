@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52F7FC4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 20:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FB7DC4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 20:49:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D67D487C17;
-	Fri, 15 Dec 2023 21:48:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A8B287C50;
+	Fri, 15 Dec 2023 21:48:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OwnqAkYo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="atqumwxq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6F7087C4B; Fri, 15 Dec 2023 21:48:53 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 8AE2587C17; Fri, 15 Dec 2023 21:48:55 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5734587C17
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 21:48:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25D9C87BD0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 21:48:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-425a116f1cdso8504861cf.0
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:48:51 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-77f524597c3so62613385a.3
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 12:48:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702673329; x=1703278129; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702673332; x=1703278132; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0jXkQvGvseRr9OSLhDEpKNiBne6PE2K/af+l97pnxyM=;
- b=OwnqAkYoCVSk1b3DqOUOFwH3/14Uq9DdRB5lVp7blK/3syOZJxuCCBgb32wVJPkphO
- TpTTJ0MPl8Y665rQ21sBi1qtUXtVsZ2lRrFaxRAxcV3zFrmIbv+uftbb2mYQQ7Hx0yWf
- BRlYepyjoKK5eO0HQuPUVZDaCUyRCucAWpXXxjvzgQp1jw7FeVk/XthJw6I0qHQ2eMYO
- i223T7edaKTSQ5S6fZ0ujPJGZ31Q6hhSwJLw66TG3DB3MdZuGVjRqypomvchg7nC7WY5
- MiNqMJ2DG4SAE/aUAF0PSMizdHX3CVmovGnpWSTdvLNUz54WYwsKgrmKFcLKH4lMhkWL
- 8n9g==
+ bh=dTiyDAS0207utKS0wOX+d8wPJK8nJGfgo9zSlPSTI8c=;
+ b=atqumwxqc4CSb5W/nje8kuRK1DKPyKAsrnzNQzKfP4q5c6HUrMLQbz28xriAZX1DhR
+ krE7irf7yTDxJIRKO3l/9a8XQ2Wj2y1xipSu6+JQ9HAjPOpTHNWWt4mUdQH3nS7xKNC9
+ dgN9nMJNH437CkkQbgkZpXPrwNaYnBKA+he0VxxLuygSO75DDewyjpP+TPciD5HP0c4U
+ AekZZfOUiWCJ7OuojHpQ3x4GiWLqnIwacHmbdBb5nteG4gTtSp6mlTC251Ndxro3K2EW
+ XIh3LTFAKrsqotuTOwl1y8NcsAQv9qM8MpbXznIXBbZxHdwU2aKnxFGBE8BENBSj0Ke5
+ jjGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702673329; x=1703278129;
+ d=1e100.net; s=20230601; t=1702673332; x=1703278132;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0jXkQvGvseRr9OSLhDEpKNiBne6PE2K/af+l97pnxyM=;
- b=Ky2jvop8w4Utjp/mDBE6a6Bm5q+vX3UcKgBJv/vTKjOkwXfSNC101wgpv8hyyTIGuI
- AWoHLZVIAbF4B+PcYeD6ZIdoFPxWcMI0YR9gw9/X1z9LQ1LJXPUsj3it3h1dWQjuIO1D
- vyMjbOCVKbdp/TQi89KsN/6dODMEDlMX3lczS4D2qfvGPehUrq8d86+d11bNJOqY7w4/
- P2UkpBOtKz2aZ/OuwJCvL2dmwLRG5F8ATpDVhrbJuufRAR1GH4Qqd0iNXydCFq2ld7gH
- jybix/gNLnDlVOFyVezlKkiriItILe7ESc8XHgC07Kgwp22j7mkwAfPnxz1DxQ7oItYn
- xM/w==
-X-Gm-Message-State: AOJu0Yy0PAfSIM1wdxzJqpMwc+nd/6DQMVLlaKUXOY7s2kFuK8iXMOrw
- UPFHf53fmVVrKY/qreRAaAvKOU5YwP9OyA==
-X-Google-Smtp-Source: AGHT+IFh0KB6Ddcmip2ygFoybmhbuqRp+r9fRO8MZjby6AGfEX+H07Qa3nzASYtL43r0h9ISZE904w==
-X-Received: by 2002:a05:622a:11cb:b0:425:4043:18a0 with SMTP id
- n11-20020a05622a11cb00b00425404318a0mr21132014qtk.83.1702673329488; 
- Fri, 15 Dec 2023 12:48:49 -0800 (PST)
+ bh=dTiyDAS0207utKS0wOX+d8wPJK8nJGfgo9zSlPSTI8c=;
+ b=Y4Ee3ocf/41fXA6M26DyFkbue2Rt+4CLRBrzOLJzYHnUci6TRxh1GEu2reyB9Tktdk
+ CusSc+DaArNVVQ/6p50YsOoEplIfucqbynCCuBYidnuODTtAI3QXpuDVvkI+XXocn7sj
+ tFtOnRhlyz3mpa3mBfxzrwtoJgqU5rnWp7XhySic3xUHGIR1aiFgFVjF4/W0ZEJwqzHn
+ M9Bb2kt5JbjqTYP5wRL7lH8LpMKwTryddQC35/4Vr4Y8XPmToe5t5vuk9wv0leEellNC
+ fAqNXc6v0H2gN6S84T5Y+ojITQSvaYFWofFNRXAtRHjQlB6Kwst1GUN7eZsz9UID8tLa
+ pe3Q==
+X-Gm-Message-State: AOJu0YyQs79ykwHh0IDPOA8d7POdxFscFdhMPai2CHD7XCpqOrL8sH5e
+ uHjeNQQAkWk2kwyd9mjNYls=
+X-Google-Smtp-Source: AGHT+IE1A6m+w0acnHQmQiBDtlCHMNe2Os/bwwXyhTFN/8A/X+Z1/GD7VdM1+1fS+0Q6I95OZlUb2w==
+X-Received: by 2002:ad4:4f88:0:b0:67e:f245:f72f with SMTP id
+ em8-20020ad44f88000000b0067ef245f72fmr5016586qvb.102.1702673331962; 
+ Fri, 15 Dec 2023 12:48:51 -0800 (PST)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- z4-20020ac875c4000000b004180fb5c6adsm6908123qtq.25.2023.12.15.12.48.48
+ bn3-20020a05620a2ac300b0077d9b938490sm6331693qkb.23.2023.12.15.12.48.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Dec 2023 12:48:49 -0800 (PST)
+ Fri, 15 Dec 2023 12:48:51 -0800 (PST)
 From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de, daniel.schwierzeck@gmail.com, michal.simek@amd.com,
- sr@denx.de, neil.armstrong@linaro.org, patrice.chotard@foss.st.com,
- ivprusov@sberdevices.ru, Lukasz Majewski <lukma@denx.de>,
- patrick.delaunay@foss.st.com, ryan_chen@aspeedtech.com,
- chiawei_wang@aspeedtech.com
-Cc: Sean Anderson <seanga2@gmail.com>, joel@jms.id.au,
- u-boot-amlogic@groups.io, kernel@sberdevices.ru, BMC-SW@aspeedtech.com,
- prusovigor@gmail.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH v7 0/8] clk: Switch from soc_clk_dump to clk_ops function
-Date: Fri, 15 Dec 2023 15:48:32 -0500
-Message-Id: <170267330672.2421617.16500568591017689149.b4-ty@gmail.com>
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, jim.t90615@gmail.com,
+ KWLIU@nuvoton.com
+Cc: Sean Anderson <seanga2@gmail.com>,
+	u-boot@lists.denx.de
+Subject: Re: [PATCH v3] clk: nuvoton: add read only feature for clk driver
+Date: Fri, 15 Dec 2023 15:48:33 -0500
+Message-Id: <170267330672.2421617.8613669182068933649.b4-ty@gmail.com>
 X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231109105516.24892-1-ivprusov@sberdevices.ru>
-References: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+In-Reply-To: <20231114090004.3746024-1-JJLIU0@nuvoton.com>
+References: <20231114090004.3746024-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
@@ -98,34 +94,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 9 Nov 2023 13:55:08 +0300, Igor Prusov wrote:
-> Currently clock providers may override default implementation of
-> soc_clk_dump function to replace clk dump command output. This causes
-> confusing behaviour when u-boot is built with one of such drivers
-> enabled but still has clocks defined using CCF. For example, enabling
-> CMD_CLK and using clk dump on sandbox target will not show CCF clocks
-> because k210 driver overrides common soc_clk_dump.
+On Tue, 14 Nov 2023 17:00:04 +0800, Jim Liu wrote:
+> Add a flag to set ahb/apb/fiu/spi clock divider as read-only
+> The spi clock setting is related to booting flash, it is setup by early
+> bootloader.
+> It just protects the clock source and can't modify it in uboot.
 > 
-> [...]
+> 
 
 Applied, thanks!
 
-[1/8] clk: zynq: Move soc_clk_dump to Zynq clock driver
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/bdac75511411
-[2/8] clk: ast2600: Move soc_clk_dump function
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/3f192541df79
-[3/8] clk: k210: Move soc_clk_dump function
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/77beaad3d1d2
-[4/8] clk: amlogic: Move driver and ops structs
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/4f48202ba82e
-[5/8] clk: Add dump operation to clk_ops
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/505ef5f627d8
-[6/8] cmd: clk: Use dump function from clk_ops
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/258c1002383e
-[7/8] clk: treewide: switch to clock dump from clk_ops
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/bc3e313ff6af
-[8/8] cmd: clk: Make soc_clk_dump static
-      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/5666558a6cb0
+[1/1] clk: nuvoton: add read only feature for clk driver
+      https://source.denx.de/u-boot/custodians/u-boot-clk/-/commit/652d8d4561a3
 
 Best regards,
 -- 
