@@ -4,56 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F05A6C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 03:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1C3C4167D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:19:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F57587ADA;
-	Fri, 15 Dec 2023 04:21:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B7C887ADA;
+	Fri, 15 Dec 2023 05:19:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="h8pRLZg1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BJQ5m/TN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E325C87869; Fri, 15 Dec 2023 04:21:11 +0100 (CET)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C585487AEC; Fri, 15 Dec 2023 05:19:31 +0100 (CET)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2282287AE6
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 04:21:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id B818187ADB
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6d9dc789f23so267555a34.3
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702613967; x=1703218767; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gKub56859e9DPGFt6rOacaF1p1ewqTEhUXOuaKsxM/I=;
+ b=BJQ5m/TNvzdvXFhgGggel130l0Uc/da8qyES+xTJvvDcXJ2IVTYMrVdMBQP/6dTZS4
+ vNZSK9cS9KbhIidL/9ECpAfL1+tuH6ZLdD5rxzggeMBa88vxLsRLG1dBnKdl+ULoZuqJ
+ 6EXL1rxngPTitaWbVYizIygI0xDuyBAMwI5hQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702613967; x=1703218767;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gKub56859e9DPGFt6rOacaF1p1ewqTEhUXOuaKsxM/I=;
+ b=ADcVn+rWhrKYhzVcfkoIGtWMTk3X/QzJPiYOen0EWMWcoXsixYoAc2chz3Y3yluMFv
+ AaNMc7fW9hBNPnxvLOJIjcSBA/UMnpOnDw8SWLEmxGZaf9s3//tUELkIhtXLwOpB4/AR
+ rBxF+6GtgJxTU3L2aqsX+ogwmVsg57DoL5vjMvFUVo1ka3foEHyKFs4Qmhmvqia9uBIk
+ 0Nu//nztJDvY6bPISiXkG0PSJVOVM1nZb49XuvrPKN7uyAuZslGiFeOmP9E0pJLx5zWB
+ 7KtzGguH0qGUOg0BOx3hGN9dih1DosxrKqVbwRiE+roVBHHVP5xMwAewDMS0NIqi+QId
+ jJXg==
+X-Gm-Message-State: AOJu0Yy8vzCzDKmVA7MvlNyjf3maqZ4WtOOZUZEt8xMlRDrceOSeETMV
+ oO4RmonJ6Fy7LGbqC35AeElF6oNveN7EqGzeczJ4OA==
+X-Google-Smtp-Source: AGHT+IEiYYBJJCgJ51zems7jIPb/6LTN04kTJ0j0FDU6k1szrN1eYdGB4CQ/JPwN8s66rKTK6kYvDA==
+X-Received: by 2002:a05:6808:650b:b0:3ba:a85:429f with SMTP id
+ fm11-20020a056808650b00b003ba0a85429fmr7813949oib.115.1702613967098; 
+ Thu, 14 Dec 2023 20:19:27 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 20:19:26 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH v2 01/16] boot: Reorder FIT and BOOTSTD to be first
+Date: Thu, 14 Dec 2023 21:18:59 -0700
+Message-ID: <20231215041919.2197788-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+In-Reply-To: <20231215041919.2197788-1-sjg@chromium.org>
+References: <20231215041919.2197788-1-sjg@chromium.org>
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1702610468;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zIKwh1OLD62RqtJFZ+xKCChuqtkscUC3Ugqcy8a9Tos=;
- b=h8pRLZg1O+t4DwHTom0N14KUS6eyB9XEFe8AsN41sKU2RwqCHZ0q7nXnk6KCtlyERa83zR
- 53/hQvy685ewRtNQ4gYBPSzVf9Wn1QlHOqRCNhCd54mWEWqHSP2Rc1LnN1LPSl4arfcUSe
- IMXXgPHErSoDSD2fvijRAWAkOCrZT3RAfC0BNaJC0iPaC1nAvztAJ5MDq+sVm+0b1FJukX
- Jj7xvE8+M0BB+xMKMhjsE8CosX2Ve5Rph4uL1XbxI6bDiOMSRd+hwIk9as4cT9HcgHtspr
- ejxEoIqgqmSjSwd2cARbiaI4m8s6qR0V8twOZVqipO4cIK4ZM2WJilQ3LZFTxg==
-Date: Fri, 15 Dec 2023 04:21:06 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com,
- michal.simek@amd.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- git@xilinx.com
-Subject: Re: [PATCH] mtd: spi-nor: Add support for Macronix flash part
-In-Reply-To: <20231214163623.1924877-1-tejas.arvind.bhumkar@amd.com>
-References: <20231214163623.1924877-1-tejas.arvind.bhumkar@amd.com>
-Message-ID: <f3babb1378261fbf11fb057e9d860bac@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,45 +88,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-12-14 17:36, Tejas Bhumkar wrote:
-> Added support for Macronix OSPI flash parts MX25UM51345G
-> and MX66UM2G45G, with initial testing conducted on the
-> Tenzing-se1 board using STR mode for basic erase, write,
-> and readback operations.
-> 
-> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-> ---
->  drivers/mtd/spi/spi-nor-ids.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c 
-> b/drivers/mtd/spi/spi-nor-ids.c
-> index f86e7ff8e5..a08f105549 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -267,6 +267,8 @@ const struct flash_info spi_nor_ids[] = {
->  	{ INFO("mx66l2g45g",  0xc2201c, 0, 64 * 1024, 4096, SECT_4K |
-> SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
->  	{ INFO("mx25l1633e", 0xc22415, 0, 64 * 1024,   32, SPI_NOR_QUAD_READ
-> | SPI_NOR_4B_OPCODES | SECT_4K) },
->  	{ INFO("mx25r6435f", 0xc22817, 0, 64 * 1024,   128,  SECT_4K) },
-> +	{ INFO("mx25um51345g",   0xc2813a, 0, 64 * 1024, 1024, SECT_4K |
-> SPI_NOR_4B_OPCODES) },
-> +	{ INFO("mx66um2g45g",    0xc2803c, 0, 64 * 1024, 4096, SECT_4K |
-> SPI_NOR_4B_OPCODES) },
->  	{ INFO("mx66uw2g345gx0", 0xc2943c, 0, 64 * 1024, 4096, SECT_4K |
-> SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
->  	{ INFO("mx66lm1g45g",    0xc2853b, 0, 64 * 1024, 2048, SECT_4K |
-> SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
->  	{ INFO("mx25lm51245g",   0xc2853a, 0, 64 * 1024, 1024, SECT_4K |
-> SPI_NOR_OCTAL_DTR_READ | SPI_NOR_4B_OPCODES) },
+The boot menu shows Android first and then a timestamp option. Move
+these later since they are less commonly used.
 
-The patch looks good to me, so:
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+(no changes since v1)
 
-Please see also [1].  I hope you'll be willing to test the patches when 
-they're ready.
+ boot/Kconfig | 36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
 
-[1] 
-https://lore.kernel.org/u-boot/0dc545aa9d32038dbe7bc481595198b0@manjaro.org/T/#u
+diff --git a/boot/Kconfig b/boot/Kconfig
+index b438002059c3..e0098b3f31d7 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -2,24 +2,6 @@ menu "Boot options"
+ 
+ menu "Boot images"
+ 
+-config ANDROID_BOOT_IMAGE
+-	bool "Android Boot Images"
+-	default y if FASTBOOT
+-	help
+-	  This enables support for booting images which use the Android
+-	  image format header.
+-
+-config TIMESTAMP
+-	bool "Show image date and time when displaying image information"
+-	default y if CMD_DATE
+-	help
+-	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
+-	  an image is printed by image commands like bootm or iminfo. This
+-	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
+-	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
+-	  loaded that does not, the message 'Wrong FIT format: no timestamp'
+-	  is shown.
+-
+ menuconfig FIT
+ 	bool "Flattened Image Tree (FIT)"
+ 	select HASH
+@@ -695,6 +677,24 @@ config BOOTMETH_SCRIPT
+ 
+ endif # BOOTSTD
+ 
++config ANDROID_BOOT_IMAGE
++	bool "Android Boot Images"
++	default y if FASTBOOT
++	help
++	  This enables support for booting images which use the Android
++	  image format header.
++
++config TIMESTAMP
++	bool "Show image date and time when displaying image information"
++	default y if CMD_DATE
++	help
++	  When CONFIG_TIMESTAMP is selected, the timestamp (date and time) of
++	  an image is printed by image commands like bootm or iminfo. This
++	  is shown as 'Timestamp: xxx' and 'Created: xxx'. If this option is
++	  enabled, then U-Boot requires FITs to have a timestamp. If a FIT is
++	  loaded that does not, the message 'Wrong FIT format: no timestamp'
++	  is shown.
++
+ config LEGACY_IMAGE_FORMAT
+ 	bool "Enable support for the legacy image format"
+ 	default y if !FIT_SIGNATURE && !TI_SECURE_DEVICE
+-- 
+2.43.0.472.g3155946c3a-goog
+
