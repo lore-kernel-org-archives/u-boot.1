@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96440C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E01AC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:40:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E8B787C19;
-	Fri, 15 Dec 2023 17:40:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 177B387C30;
+	Fri, 15 Dec 2023 17:40:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="I+7SBsqP";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OAJGUbTa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E66DB87C2A; Fri, 15 Dec 2023 17:40:27 +0100 (CET)
+ id 257B387C2D; Fri, 15 Dec 2023 17:40:29 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 970A087C13
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:40:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B32087C1B
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:40:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,27 +31,27 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DAAB7401C3; 
- Fri, 15 Dec 2023 16:40:23 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4D374401CA; 
+ Fri, 15 Dec 2023 16:40:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1702658424;
- bh=ZoOOkKHAOHkUMrUnxM2YjUVpfxTdEWT3nbAiRUNR/5Y=;
+ bh=rYKcZFiTyuaCuESDmCW2MtPbnbk8q2cFP07Dy0UwELA=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=I+7SBsqPbZqhHt8DY1GxRVImITX00XvvzQV3hqyuzxk3H0rbo67xeFPIrbfbhSIeL
- llD7UXSs11QJT3QkNvB0h3I+4k6SvYLd/LLcZuANT4Xse+mpYQIdO1N2Xxtlrifz22
- ZfSIDIV4JeObG/zC615uwkj/L8RMeGTVJ7ucxb34yIPeJfMw9vdJu1iYRmGAEFURwl
- OK3TjE7eeCAfd9jwrLSbm2wuA0iDVhDlq/n9rFrr8cb2vgDbOPdVZyCFjjNH7UW6La
- 29yF3sP0+K4tS+DGqR0BHHD72w1BSIubz/GRfAR1p2CsWYuN2uT/KvFNdjyn7nfUqg
- 1H3bBEzMBZnyw==
+ b=OAJGUbTa2VLbAVpNm0JZ8862SbRGhGGzo29ygiU4vAy6ucg+1xMY0BlRSAS0l+mCB
+ vyNQV4WXTeCEMwWa/Hi7mxkq5OVK/J9iO5TaD4+N/8ih4923qFs2qG5WB9HN9jbhW/
+ YWBZm6mqRL79PJGi9ePHKB/9xEHen6v+xVPojbBAmRB6cl5i3yUcVnDkHtgT16bD79
+ bh50bAh3FuELVCi8dcwl5UlUJNJCV7Cm9mZBAU1ev0Auh1T7rUGAP0SS1pReF/8qpq
+ 5Jup20y6OuV6RB3kkji1KUeacTINb7iDG1jNmAzYrPSybhE6KwmLoFzvbrP6v1bFgZ
+ 49YrQMv2dhpoQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/3] cmd: acpi: fix listing DSDT and FACS
-Date: Fri, 15 Dec 2023 17:40:15 +0100
-Message-Id: <20231215164016.137794-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/3] cmd: acpi: check HW reduced flag in acpi list
+Date: Fri, 15 Dec 2023 17:40:16 +0100
+Message-Id: <20231215164016.137794-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231215164016.137794-1-heinrich.schuchardt@canonical.com>
 References: <20231215164016.137794-1-heinrich.schuchardt@canonical.com>
@@ -73,34 +73,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If field X_FIRMWARE_CTRL is filled, field FIRMWARE must be ignored. If
-field X_DSDT is filled, field DSDT must be ignored.
+On non x86 platforms the hardware reduce flag must be set in the FADT
+table. Write an error message if the flag is missing.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- cmd/acpi.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ cmd/acpi.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/cmd/acpi.c b/cmd/acpi.c
-index 0c14409242..24910c150b 100644
+index 24910c150b..2e9a333ffa 100644
 --- a/cmd/acpi.c
 +++ b/cmd/acpi.c
-@@ -53,9 +53,13 @@ static int dump_table_name(const char *sig)
- 
- static void list_fadt(struct acpi_fadt *fadt)
- {
--	if (fadt->dsdt)
-+	if (fadt->x_dsdt)
-+		dump_hdr(map_sysmem(fadt->x_dsdt, 0));
-+	else if (fadt->dsdt)
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <command.h>
+ #include <display_options.h>
++#include <log.h>
+ #include <mapmem.h>
+ #include <acpi/acpi_table.h>
+ #include <asm/acpi_table.h>
+@@ -57,6 +58,9 @@ static void list_fadt(struct acpi_fadt *fadt)
+ 		dump_hdr(map_sysmem(fadt->x_dsdt, 0));
+ 	else if (fadt->dsdt)
  		dump_hdr(map_sysmem(fadt->dsdt, 0));
--	if (fadt->firmware_ctrl)
-+	if (fadt->x_firmware_ctrl)
-+		dump_hdr(map_sysmem(fadt->x_firmware_ctrl, 0));
-+	else if (fadt->firmware_ctrl)
- 		dump_hdr(map_sysmem(fadt->firmware_ctrl, 0));
- }
- 
++	if (!IS_ENABLED(CONFIG_X86) &&
++	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
++		log_err("FADT not ACPI hardware reduced compliant\n");
+ 	if (fadt->x_firmware_ctrl)
+ 		dump_hdr(map_sysmem(fadt->x_firmware_ctrl, 0));
+ 	else if (fadt->firmware_ctrl)
 -- 
 2.40.1
 
