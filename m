@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5C8DC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55466C35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6153487A10;
-	Fri, 15 Dec 2023 15:12:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D374987BEC;
+	Fri, 15 Dec 2023 15:13:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="GcXRWCQI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="2WIOo0ro";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B7C28761B; Fri, 15 Dec 2023 15:12:48 +0100 (CET)
+ id C905987BF6; Fri, 15 Dec 2023 15:13:03 +0100 (CET)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F09E87536
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:12:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC8687BE4
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:13:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BF9b4Mk028439; Fri, 15 Dec 2023 15:12:45 +0100
+ 3BF9dlJF028436; Fri, 15 Dec 2023 15:13:01 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=BEOeenzKA4OB1w+LsG5+JBtGetax5kbKMIN0N7yrbn8=; b=Gc
- XRWCQI3ugmom2NkNdb/33REHUNqWO6Wz2ZPkZwXEi9kWZzvbf+xPb6f1hPeVxZaN
- ZIhXKVjbyjMRDumTwd3cMWRutKGVFM+v9wZiGe0Amlw8kaq7OhnROlnwTIfir3tS
- 2cTLPbr1LdtV+u5cYDMFlwTWcsw2jRXh+6fRNwosFi3/42zgPlBSm+3BcGbF4Tf1
- gJTP65MWZkgFyQk7IQ1IgOmyugT6rEbSU79F7WlrumlE5nypz0Kp+sBuF4u4QAWu
- KiaNqFfiIflMQJeGZYQW3eFubr7V/sCPzGmU14jpWU0rv6OSz9cWvVVzta3lH2mI
- YhduaojAvGPFUbvEZEcQ==
+ selector1; bh=6xCcXQyn99iRhLZ8grv5OFshDt5uJrWpGPlmJk9r4Zg=; b=2W
+ IOo0roxy6f2LRe2LM7n7GPnLwY7VCf3oqEi+nozEXGVK4RoAprOtxYeiVAiDfONE
+ PrsPB08tQosMvbVk6vpv11BgdsBn4aPcizlyYCHUZfN3AAayO+STggHXYA8CpDfe
+ ESnCKpFBSkrRgVJieYchbyl7vUxZRKgerkzVeHwaNG9f9Du+QSX03Fv49HgNQjvA
+ L0Mdo9eZ0cr4DoTjoag3iFZeIypNLwVvZjaXavDr1NiL6lW2Xk6JfUQITNv37+OS
+ U0xTxHouc6h53CBKpdzQz9Ae6cdLvVmfn495yXAAnKiZJlKvh9gAmiLgjgzAGjz5
+ zPfsG22SuMroZ4y7O8eQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvehmtmyj-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvehmtn0p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 15:12:45 +0100 (CET)
+ Fri, 15 Dec 2023 15:13:01 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 87CF2100052;
- Fri, 15 Dec 2023 15:12:44 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0857E100058;
+ Fri, 15 Dec 2023 15:13:01 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 800512278B3;
- Fri, 15 Dec 2023 15:12:44 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F31E42278B6;
+ Fri, 15 Dec 2023 15:13:00 +0100 (CET)
 Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 15:12:44 +0100
-Message-ID: <85143540-3b4b-4d3e-bcf6-e1084f605336@foss.st.com>
-Date: Fri, 15 Dec 2023 15:12:43 +0100
+ 2023 15:13:00 +0100
+Message-ID: <593de0a9-9c11-445e-8254-372d485b011a@foss.st.com>
+Date: Fri, 15 Dec 2023 15:13:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: st: common: simplify MTD device parsing
+Subject: Re: [PATCH 1/2] board: st: common: Fix board_get_alt_info_mtd()
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
- <20231117170107.1147598-2-patrice.chotard@foss.st.com>
- <7137cd11-03ee-4a3c-8ff6-4e5c9268981d@foss.st.com>
+ <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <7137cd11-03ee-4a3c-8ff6-4e5c9268981d@foss.st.com>
+In-Reply-To: <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.23.141]
@@ -92,47 +91,55 @@ X-Virus-Status: Clean
 
 
 
-On 12/15/23 12:53, Patrick DELAUNAY wrote:
+On 12/15/23 12:52, Patrick DELAUNAY wrote:
 > Hi,
 > 
 > On 11/17/23 18:01, Patrice Chotard wrote:
->> Simplify the way all MTD devices are parsed.
+>> Since MTD devices are partioned, we got the following
+>> error when command "dfu 0" is executed:
+>>
+>> DFU alt info setting: done
+>> ERROR: Too many arguments for nor0
+>> ERROR: DFU entities configuration failed!
+>> ERROR: (partition table does not match dfu_alt_info?)
+>>
+>> Fixes: 31325e1b8b9c ("stm32mp1: dynamically build DFU_ALT_INFO")
 >>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   board/st/common/stm32mp_dfu.c | 19 ++-----------------
->>   1 file changed, 2 insertions(+), 17 deletions(-)
+>>   board/st/common/stm32mp_dfu.c | 9 ++-------
+>>   1 file changed, 2 insertions(+), 7 deletions(-)
 >>
 >> diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
->> index ded3bf81961..77edb86e78c 100644
+>> index a8eb8d5cae2..ded3bf81961 100644
 >> --- a/board/st/common/stm32mp_dfu.c
 >> +++ b/board/st/common/stm32mp_dfu.c
->> @@ -123,24 +123,9 @@ void set_dfu_alt_info(char *interface, char *devstr)
->>           /* probe all MTD devices */
->>           mtd_probe_devices();
->>   -        /* probe SPI flash device on a bus */
->> -        if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
->> -            mtd = get_mtd_device_nm("nor0");
->> -            if (!IS_ERR_OR_NULL(mtd))
->> +        mtd_for_each_device(mtd)
->> +            if (!mtd_is_partition(mtd))
->>                   board_get_alt_info_mtd(mtd, buf);
+>> @@ -73,7 +73,6 @@ static void board_get_alt_info_mmc(struct udevice *dev, char *buf)
+>>   static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+>>   {
+>>       struct mtd_info *part;
+>> -    bool first = true;
+>>       const char *name;
+>>       int len, partnum = 0;
+>>   @@ -86,17 +85,13 @@ static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+>>               "mtd %s=", name);
+>>         len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+>> -            "%s raw 0x0 0x%llx ",
+>> +            "%s raw 0x0 0x%llx",
+>>               name, mtd->size);
+>>         list_for_each_entry(part, &mtd->partitions, node) {
+>>           partnum++;
+>> -        if (!first)
+>> -            len += snprintf(buf + len, DFU_ALT_BUF_LEN - len, ";");
+>> -        first = false;
 >> -
->> -            mtd = get_mtd_device_nm("nor1");
->> -            if (!IS_ERR_OR_NULL(mtd))
->> -                board_get_alt_info_mtd(mtd, buf);
->> -        }
->> -
->> -        mtd = get_mtd_device_nm("nand0");
->> -        if (!IS_ERR_OR_NULL(mtd))
->> -            board_get_alt_info_mtd(mtd, buf);
->> -
->> -        mtd = get_mtd_device_nm("spi-nand0");
->> -        if (!IS_ERR_OR_NULL(mtd))
->> -            board_get_alt_info_mtd(mtd, buf);
+>>           len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+>> -                "%s_%s part %d",
+>> +                ";%s_%s part %d",
+>>                   name, part->name, partnum);
 >>       }
->>         if (IS_ENABLED(CONFIG_DFU_VIRT)) {
+>>   }
 > 
 > 
 > 
