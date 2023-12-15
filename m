@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790AFC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F6BC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0B9487BB9;
-	Fri, 15 Dec 2023 14:26:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
+	by phobos.denx.de (Postfix) with ESMTP id 5982A87BB1;
+	Fri, 15 Dec 2023 14:32:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F7C587BC1; Fri, 15 Dec 2023 14:26:26 +0100 (CET)
-Received: from 4.mo581.mail-out.ovh.net (4.mo581.mail-out.ovh.net
- [178.32.122.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E49C87BB1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:26:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=armadeus.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director11.ghost.mail-out.ovh.net (unknown [10.108.17.234])
- by mo581.mail-out.ovh.net (Postfix) with ESMTP id 845F528C2F
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 13:26:23 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-z9m4m (unknown [10.110.178.161])
- by director11.ghost.mail-out.ovh.net (Postfix) with ESMTPS id C6C4E1FD9C;
- Fri, 15 Dec 2023 13:26:22 +0000 (UTC)
-Received: from armadeus.com ([37.59.142.101])
- by ghost-submission-6684bf9d7b-z9m4m with ESMTPSA
- id WAnxLv5TfGXQsgAAI9rXVg
- (envelope-from <sebastien.szymanski@armadeus.com>);
- Fri, 15 Dec 2023 13:26:22 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-101G004fd18ba91-fa62-4756-b31c-10cfd448d871,
- EE1322658B9640F39C03CDED81C5E13E4737D870)
- smtp.auth=sebastien.szymanski@armadeus.com
-X-OVh-ClientIp: 92.148.253.243
-Message-ID: <8e73cb81-b40e-472c-bfb6-cb4ff32dff19@armadeus.com>
-Date: Fri, 15 Dec 2023 14:25:33 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JvYEVAX6";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 13EB187BB9; Fri, 15 Dec 2023 14:32:18 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C55DB87BA2
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:15 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-67a9febb2bfso5065636d6.1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:32:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1702647134; x=1703251934; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=I4noflrnYFEA+IEs4LK2Bni9Qn0ioB0CZs4WU/BoleY=;
+ b=JvYEVAX64u7qu0XDz2OxUsQ5M1ngIbUOGBUGodYvM4itRHfhRhhcsZEPZqMZhGl5sF
+ ia/VyXoKb/FZpTSlYQmYKa5usqkM4My8gRUffB4Mv2cCEmuf1GH2LZjEW4crieMIQcbg
+ k5iKuBn0tlpyYqLFPfse0AfJg8Wsj9AuaJkiY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702647134; x=1703251934;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I4noflrnYFEA+IEs4LK2Bni9Qn0ioB0CZs4WU/BoleY=;
+ b=r/t9dcX/FVonG/wSNUQ1ALG+gm/iPF52oSO631hsNvel5l8zcYFVHtZY72oa+VcdXR
+ Pxy+h9KkhYYBo0wZ+y2n6I6AQKVpj6w/wYe5cAIy8jXBvm0383rBnrIM0rKrBs1dppxc
+ gJS+25+Jufrlq/FJ/Tbkm+uGvkxH5D5daVAczS8iNPhWtU+LGSXN3I0xj7WP0Sfj0RjL
+ RqSLBystxGrop4nY7NpbYs7g3E4eCLxPbytKyAp+2MVk9x9pLeCBUVEgNbCuMcKILhiK
+ 5Ue7FrL49HuNuGIOMOEOVJFzI1EwYOXXmCCfVQC8CupnPUL/CflsblL/jOQGnLYybfJM
+ gJEg==
+X-Gm-Message-State: AOJu0Yye+LHD2u0IWVgZxPYx5P3YU48mYvbQNDVmgQoNX4uqtq8YQgaQ
+ LzP3zxVKqfViHn+uuK2jUpLdIw==
+X-Google-Smtp-Source: AGHT+IH7cnMz4IeZEoLFJG+Truk2GDXe0BQnDQ6/e4BxJ2paRuY20hjBQazJ6+3cuW0ZAidGOGJigg==
+X-Received: by 2002:a05:6214:2508:b0:67f:3ee:4f65 with SMTP id
+ gf8-20020a056214250800b0067f03ee4f65mr5516363qvb.11.1702647134561; 
+ Fri, 15 Dec 2023 05:32:14 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
+ [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
+ by smtp.gmail.com with ESMTPSA id
+ v10-20020ad4528a000000b0067ef3341c77sm2589311qvr.39.2023.12.15.05.32.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Dec 2023 05:32:13 -0800 (PST)
+Date: Fri, 15 Dec 2023 08:32:11 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Prasanth Mantena <p-mantena@ti.com>
+Cc: Neha Malcom Francis <n-francis@ti.com>, sjg@chromium.org,
+ alpernebiyasak@gmail.com, matwey.kornilov@gmail.com,
+ jkridner@beagleboard.org, robertcnelson@gmail.com,
+ u-boot@lists.denx.de, nm@ti.com, vigneshr@ti.com, u-kumar1@ti.com,
+ a-nandan@ti.com
+Subject: Re: [PATCH v3] board: ti: common: board_detect: Fix EEPROM offset
+ read for 1-byte
+Message-ID: <20231215133211.GU2513409@bill-the-cat>
+References: <20231030170458.21668-1-p-mantena@ti.com>
+ <9f562302-3fb5-4b79-acec-5bf6f201f29f@ti.com>
+ <20231215062519.5yb2x7ecek2imrbu@uda0496754>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] Makefile: pass -ansi option to cmd_gen_envp
-Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Le Jin <le.jin@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Fabio Estevam <festevam@denx.de>, Heiko Schocher <hs@denx.de>,
- Jesse Taube <mr.bossman075@gmail.com>, Eduard Strehlau <eduard@lionizers.com>
-References: <20231215111333.31286-1-sebastien.szymanski@armadeus.com>
- <CAOMZO5C8F3EpzpMS3=XC5n8uzzR30LBpY9V7t-Het7NEe+krXQ@mail.gmail.com>
-From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
- xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
- ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
- yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
- ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
- cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
- AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
- LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
- /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
- v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
- 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
- d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
- ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
- B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
- vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
- zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
- KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
- FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
- 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
- MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
- ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
- DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
- ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
- pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
- JNoSD7Kz6Y9qnKo=
-In-Reply-To: <CAOMZO5C8F3EpzpMS3=XC5n8uzzR30LBpY9V7t-Het7NEe+krXQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 6052556425107270557
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrvddtvddghedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepkfffgggfuffvvehfhfgjtgfgsehtkeertddtvdejnecuhfhrohhmpefurogsrghsthhivghnucfuiiihmhgrnhhskhhiuceoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqeenucggtffrrghtthgvrhhnpedtgeehtdduledtudevveekveevveefffdthedtieekgeeukeevtdffieegteekhfenucfkphepuddvjedrtddrtddruddpledvrddugeekrddvheefrddvgeefpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheekuddpmhhouggvpehsmhhtphhouhht
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="j7iivRrMH0ocPAzp"
+Content-Disposition: inline
+In-Reply-To: <20231215062519.5yb2x7ecek2imrbu@uda0496754>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,47 +98,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
 
-On 12/15/23 13:03, Fabio Estevam wrote:
-> Hi Sébastien,
-> 
-> On Fri, Dec 15, 2023 at 8:14 AM Sébastien Szymanski
-> <sebastien.szymanski@armadeus.com> wrote:
-> 
->> --- a/board/siemens/iot2050/iot2050.env
->> +++ b/board/siemens/iot2050/iot2050.env
->> @@ -1,4 +1,4 @@
->> -// SPDX-License-Identifier: GPL-2.0+
->> +/* SPDX-License-Identifier: GPL-2.0+ */
-> 
+--j7iivRrMH0ocPAzp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-With the -ansi option, the C++ style comments make an error:
+On Fri, Dec 15, 2023 at 11:55:20AM +0530, Prasanth Mantena wrote:
+> On 15:15-20231107, Neha Malcom Francis wrote:
+> > Hi Prasanth,
+> >=20
+> > On 30/10/23 22:34, Prasanth Babu Mantena wrote:
+> > > EEPROM detection logic in ti_i2c_eeprom_get() involves reading
+> > > the total size and the 1-byte size with an offset 1. The commit
+> > > 9f393a2d7af8 ("board: ti: common: board_detect: Fix EEPROM read
+> > > quirk for 2-byte") that attempts to fix this uses a wrong pointer to
+> > > compare.
+> > >=20
+> > > The value with one offset is read into offset_test, but the pointer
+> > > used to match was still ep, resulting in an invalid comparison of the
+> > > values. The intent is to identify bad 2-byte addressing eeproms that
+> > > get stuck on the successive reads.
+> > >=20
+> > > Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read=
+ quirk for 2-byte)
+> > > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> > > Tested-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+> > > ---
+> > > v3 <--> v2:
+> > > Improved and concise commit description.
+> > >=20
+> > > v2 <--> v1:
+> > > Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
+> > > Improved commit message.
+> > >=20
+> > >   board/ti/common/board_detect.c | 4 ++--
+> > >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_d=
+etect.c
+> > > index 9a53884c98..869f7a47f8 100644
+> > > --- a/board/ti/common/board_detect.c
+> > > +++ b/board/ti/common/board_detect.c
+> > > @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int b=
+us_addr, int dev_addr,
+> > >   	rc =3D dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
+> > > -	if (*((u32 *)ep) !=3D (header & 0xFF))
+> > > +	if (offset_test !=3D ((header >> 8) & 0xFF))
+> > >   		one_byte_addressing =3D false;
+> > >   	/* Corrupted data??? */
+> > > @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int b=
+us_addr, int dev_addr,
+> > >   	rc =3D i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_t=
+est));
+> > > -	if (*((u32 *)ep) !=3D (header & 0xFF))
+> > > +	if (offset_test !=3D ((header >> 8) & 0xFF))
+> > >   		one_byte_addressing =3D false;
+> > >   	/* Corrupted data??? */
+> >=20
+> > Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+> >=20
+>=20
+> Can this patch be considered for merge considering no further comments.
 
-include/generated/env.txt:1:1: error: C++ style comments are not allowed 
-in ISO C90
-     1 | // SPDX-License-Identifier: GPL-2.0+
+Given the "fun" of the various beagle families I think I was still
+hoping for a tested-by on some of the corner cases they have.
 
-I should have mention that in my commit log.
+--=20
+Tom
 
-Regards,
+--j7iivRrMH0ocPAzp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> This is an unrelated change.
-> 
->>   /*
->>    * Copyright (c) Siemens AG, 2023
->>    *
->> diff --git a/board/storopack/smegw01/smegw01.env b/board/storopack/smegw01/smegw01.env
->> index 93de8669109d..6807ada71887 100644
->> --- a/board/storopack/smegw01/smegw01.env
->> +++ b/board/storopack/smegw01/smegw01.env
->> @@ -1,4 +1,4 @@
->> -// SPDX-License-Identifier: GPL-2.0+
->> +/* SPDX-License-Identifier: GPL-2.0+ */
-> 
-> Same here.
+-----BEGIN PGP SIGNATURE-----
 
--- 
-Sébastien Szymanski, Armadeus Systems
-Software engineer
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8VVUACgkQFHw5/5Y0
+tywmmgv/YOW4YpvvTRlOQhVrhDKoxLpZYvkysO5CnDjEzE4M3WjXRatklk6ke7zK
+qZM880i0TzoHwxn/Iu1kxqbSPOrZ/6WZsIfJRA7jx/4sK5rQBYAg6oUyaJf70NMb
+CuyczTVYfI6RFhCoak9VnnHZJAMbar8MnYZbzJhULj61fvis58x6UP6bQZBspzSl
+geLzep8hq0S7+6RQ+aVrFmJQ8leBUxemhZdm4fmyALbDU35UHkVcRqZ4LsiyXLej
+mat1s5Z5OmijMLQbFs8YJepkobwdIvd3Y13Y2S/wNI2XvNbh/BbbyUeSOHELYXVC
+FwySUjmnbQWoCh8N9MaO7UUtzvs87UnZ436SEkBY+A0lmj349a8NsRCpGObV8/Rr
++qcd1q2Nx9qNnAoW9MWne38X9hnpctNDHGNb/Oa6803SFuMYw33jti6dvEJeqnTf
+jQmttt4Gi874VK/uwgBrvOfO9oDmE8/GQm+c57pj4yq5v///SaN7kQHUd2CRl5Dh
+gZmKjD4+
+=yRvn
+-----END PGP SIGNATURE-----
 
+--j7iivRrMH0ocPAzp--
