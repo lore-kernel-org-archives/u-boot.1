@@ -4,59 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D78CC4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 08:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2DF2C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 08:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 320D28767B;
-	Fri, 15 Dec 2023 09:15:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id D056A87A84;
+	Fri, 15 Dec 2023 09:49:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="qrPd6nsx";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="X0/fu6ww";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97EF787AE6; Fri, 15 Dec 2023 09:15:11 +0100 (CET)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1179087A21; Fri, 15 Dec 2023 09:49:36 +0100 (CET)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.109.113])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6A40875B9
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 09:15:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ew.tq-group.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=matthias.schiffer@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
- t=1702628106; x=1734164106;
- h=message-id:subject:from:to:cc:date:in-reply-to:
- references:content-transfer-encoding:mime-version;
- bh=P5Z4sUT/PmplV6OVEMlRleAiLKtwoYX7IQpaFkcv57g=;
- b=qrPd6nsxSHP3UthV7QwTznJJAry2LPhZvu4TvLBt+UqlRMTxxoyfKeTV
- aXa40HGkYpNBP6yzbSz3WNs8oBKfHzeH3Z3YkboIGdj/vzpjPcVWrWxd7
- /Z2ggL21fQSmTe+gauUk2hzuCzgTsuYhP/wJsgQoEgDRRpMtKLndqdpwk
- KkNmI0MCCpBP5xA+wZvOVBI7Bj/MVLUSPGoxThXESw/Xav6Z2n5tP0H2D
- Z2MXNbz4vWC6ZUcHiNm7Lz9Bv7NEUyaxLWJltKd/2aSRZqK3sv0kUAV7z
- WWC4AcbYUj8fNGfFsum9mfjNXnJcUNj1Jxjd7wugLToqvRrnx+OGYZx2B g==;
-X-IronPort-AV: E=Sophos;i="6.04,278,1695679200"; d="scan'208";a="34525002"
-Received: from vtuxmail01.tq-net.de ([10.115.0.20])
- by mx1.tq-group.com with ESMTP; 15 Dec 2023 09:15:06 +0100
-Received: from [192.168.2.128] (SCHIFFERM-M2.tq-net.de [10.121.53.15])
- by vtuxmail01.tq-net.de (Postfix) with ESMTPA id 21F20280075;
- Fri, 15 Dec 2023 09:15:06 +0100 (CET)
-Message-ID: <36da0b3bf24834e08759a5fbdc5ebfea27a61fb6.camel@ew.tq-group.com>
-Subject: Re: [PATCH] boot: add support for fdt_fixup command in environment
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "u-boot@ew.tq-group.com"
- <u-boot@ew.tq-group.com>
-Date: Fri, 15 Dec 2023 09:15:06 +0100
-In-Reply-To: <CAPnjgZ1iF6k8Dv+nk7p7Jq-+jqfOGXYUtFTyMSThN28bM=e3zQ@mail.gmail.com>
-References: <20231211110317.697011-1-matthias.schiffer@ew.tq-group.com>
- <CAPnjgZ1iF6k8Dv+nk7p7Jq-+jqfOGXYUtFTyMSThN28bM=e3zQ@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
+ by phobos.denx.de (Postfix) with ESMTPS id 26C8E87AE6
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 09:49:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1702630173;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xUHaixgSrJYiCUUs6AUjuSJ6aeU1GvSCl500gK1FX9Q=;
+ b=X0/fu6wwCMOAc5T7R0duzjHA+e6wpJ5wJKpGRsQ4/3/pfKLbqU0VQoq44OjfDW11sQ1qIr
+ Al8aBfVA121vzkkYjZpHV4qPoSUifhfRFj7a+g2AJnGwOKnKlbDOOdtdHeBj/ItOEaVtmM
+ k1i9fUrZ99RrU7ALwez3L4whHciqfUY=
+Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
+ (mail-zr0che01lp2104.outbound.protection.outlook.com [104.47.22.104]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-35-7jZR7DTuPZ23dna6VxKVwg-1; Fri, 15 Dec 2023 09:49:30 +0100
+X-MC-Unique: 7jZR7DTuPZ23dna6VxKVwg-1
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ ZR0P278MB0943.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:4f::12) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7091.31; Fri, 15 Dec 2023 08:49:28 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::cdd5:e0c0:e3f7:dd1]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::cdd5:e0c0:e3f7:dd1%5]) with mapi id 15.20.7091.032; Fri, 15 Dec 2023
+ 08:49:28 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "bb@ti.com" <bb@ti.com>
+CC: "jh80.chung@samsung.com" <jh80.chung@samsung.com>,
+ "sinthu.raja@mistralsolutions.com" <sinthu.raja@mistralsolutions.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, "n-francis@ti.com" <n-francis@ti.com>,
+ "kamlesh@ti.com" <kamlesh@ti.com>, "afd@ti.com" <afd@ti.com>,
+ "a-nandan@ti.com" <a-nandan@ti.com>, "seanga2@gmail.com" <seanga2@gmail.com>, 
+ "lukma@denx.de" <lukma@denx.de>, "j-choudhary@ti.com" <j-choudhary@ti.com>,
+ "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "m-chawdhry@ti.com"
+ <m-chawdhry@ti.com>, "hnagalla@ti.com" <hnagalla@ti.com>,
+ "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
+ "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "nm@ti.com" <nm@ti.com>, "ralph.siemsen@linaro.org"
+ <ralph.siemsen@linaro.org>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "sabiya.d@ti.com" <sabiya.d@ti.com>, "rogerq@kernel.org" <rogerq@kernel.org>, 
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+Thread-Topic: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+Thread-Index: AQHaKEErqILJ/BT++EqH7SwUhV8EjbCpGYyAgAApEICAANQZgA==
+Date: Fri, 15 Dec 2023 08:49:28 +0000
+Message-ID: <946574dc39d1cfb5bd08950a61eae06f3fbdc06c.camel@toradex.com>
+References: <20231206123753.1486031-1-a-nandan@ti.com>
+ <51eeab25314144926eaefaa2e83353ffec9309fe.camel@toradex.com>
+ <20231214201019.5bjxb5ki67yjn4ku@bryanbrattlof.com>
+In-Reply-To: <20231214201019.5bjxb5ki67yjn4ku@bryanbrattlof.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0943:EE_
+x-ms-office365-filtering-correlation-id: eecb7444-4fba-4719-eef6-08dbfd4abf5a
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: Pxsx+wNQu8wpr8QZwGz0iP/YQNkXxITN2nsWGfVxougcxDNqT1INSPbZJv7oQ10qfiCCkQuPW+1NxUrcEN0ya/c+0P53TOAZMqY0WB6aABvLmW/rervDhr+3501OciRf3dg4EqnWnZxN+9tqFuXihxhbGXZfN6Ftfx1We/MEAxUtNoGFso9BXHIXlyfRNZa93Hi8lYi5qr9jucLJApsB3KiPQaBF2IF4PJWETxSspx0WUlsLLfXlw4d0eR5L7nxKe7w3vM44CaSHyQERHZn0toMEGgJTZQsbMhCfohUqzRWraDY8NljKAa3U4ClMIXtJE1HDfnhkfXzgU6V9dnzNK0Evs0i2b0nD20N7Bjce2C7wJD5Wlne7boCCh+Vmh7ylsK1uA5dGoU28glwKRfYnTTX3u2pbjcMUHe9GsyzkL9Lkv5u2aoSO9VILAmRZg3El3zmLrsmKDVAyvpMnFEz262B6MuZIGL0YhhqPpOH4ZCyBDkpJ6V78siTxtJMaSsFlZ1ZuAQt0B0j6geYmiKRJ2H2tiELH1uuymKd6L+Zs0GRSwc2wQGn+od4MoO5dIF7IB2ZJ4sOaeol6WIOvYMa0tICVhBvwRiqnk1HIxgiqdUOFiNTKnE8R/cjB5/fY3OCw
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(39840400004)(136003)(346002)(366004)(376002)(396003)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(86362001)(8936002)(8676002)(4326008)(316002)(44832011)(6486002)(478600001)(76116006)(66946007)(66556008)(66476007)(66446008)(64756008)(54906003)(6916009)(41300700001)(38070700009)(7416002)(2906002)(4001150100001)(5660300002)(36756003)(122000001)(38100700002)(6512007)(2616005)(71200400001)(6506007)(83380400001);
+ DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TkpBKy9qS2xHODdtZUNKS0JBSlJpaFhBODBDUGl1U3NkQ1R1RmpTcTVpRnB5?=
+ =?utf-8?B?TFN2VGhXUmd0aXFQSW8xcGhSekxNZGx1V0pvaEhYV2JCOEdiaC9Wdm1mVWZI?=
+ =?utf-8?B?YkF0Z1AwcGpNY2dBZ1g5NURtNUZxVzhmMXlVNmRHcDI2U0ZwMEE4YXc2NTBO?=
+ =?utf-8?B?R1VFY2xNR08yMlQwQ0RPeVltRk1zbXZJQjN4SHJ6aytBZHRyNTdMeUhObUVv?=
+ =?utf-8?B?V3QwOXlPdU5pV1l5dmlYOTlhOHlQNGlOZ1Vob2JHN1dHRDRaTlFPSE14WEV0?=
+ =?utf-8?B?dlhCbXJMOWhHbGFVaThtVlNyaHQ1T1NvYXIvcWRUVlpta3BNbkE1cEVMN2Q4?=
+ =?utf-8?B?TjV6eVZ6WmpkZStiY2Nkc0M0YjlzNFcrMHc0dmUyVFJDbVVQcHhDNk9odDRr?=
+ =?utf-8?B?MXBiUjFUdkwxRjhsQS9lWFNXakZpUzdaR2JLeERNZi8zSTB6ODA5cmZRc3RV?=
+ =?utf-8?B?M0hXUFRQU3FaMFk3MHRVTDFlRCsybnQ5WEhBUUMybFh0aDBvdmthOW4wYVdz?=
+ =?utf-8?B?bGZhWC9FOWRPNUdTTlAydGNxNzVNdmxrcmVaZHBVRVBVUzlwTTBNYUVGMmJo?=
+ =?utf-8?B?UlVSTTBaN2QyTm5BUDBoU0hsdjRFaW1oZGNzS2JxWkVVb01ORHdiWi9IanI5?=
+ =?utf-8?B?NWJ6VmJqTWFHNnFxN3NTV0VGMENNVVlwVzBCTkhjOGhFbFF2eWFvQmhQNVZ5?=
+ =?utf-8?B?bWNxakd6TXhCcG4zeEx4Tm5qZmRVcVhrVVlnNWhLUFpRaWNwOHl5OFpDbS81?=
+ =?utf-8?B?WjVCdVNIZmVlaUlKN0E1QVk4dGk2aXJjRXVaQ2g2ZkM1Y1NEazBRZ3RZbmNO?=
+ =?utf-8?B?Y1JhTFB3RmJVN0lLSVpaZCthNy9wZjlWNzI5alZMUC9UUEVkTFo3VUVIZHJ6?=
+ =?utf-8?B?akQwRGpWd0tCZGg1RUtqaG9ZS0NzdjArWlRNZ2laMFhDSEx1MDJkVlpsN1VT?=
+ =?utf-8?B?VTJJMW04cFVJOUppaUd0dmpsRFFFblI1bTVTNnpEdXdvVmdSU0l3b1dSSjV4?=
+ =?utf-8?B?MVJRNzhMbW1KbkZhekt1dWk5OXk5WkhUY0d0MWtaWk10TzdDTVpRVURieDl2?=
+ =?utf-8?B?V2ZYREc2RzdudEJPVnYxRGhCTHVWZlQrT0RZVkUvRFNNNnNYbjJVbUs2NlVz?=
+ =?utf-8?B?WURBMWlFWE1uMURRUHdJQzdLVVhxaTJ2UmdOaW5laG9sYTQ5a1hxSXl6MFEy?=
+ =?utf-8?B?c0lpaVB2SFIyYkExQmx3eEp6aXo2QkQ3OWg5RlZFQW13bC9nN0ZXWUxMY3I2?=
+ =?utf-8?B?MHlaTUd1VTNOWEhEc3FCTWNCWXJsb3F2UCtQaHY5UEtsS0lic2JUYXliL1RF?=
+ =?utf-8?B?N3FKaDdXT09xTzlKcHpiMGdFZUxUaDZVOFJSN3lRdXpRa2FyUXg1aG9wanRD?=
+ =?utf-8?B?anFNUEtqVXYraStjckFncERrdnNlQnl3WDMxRnE0VjY0blNKMnpZSnY3MllY?=
+ =?utf-8?B?ZDNuaFhPWUdjOWtlLytBekNvY1F6Y2ptMVozdDN5bUxsVUo4R0JqRTIwdHp4?=
+ =?utf-8?B?bEszbjVuSE90QWw4YjhBY1IzL3NTaDlLaXZUODAvMmJ3dndnOWdtcG1pVElC?=
+ =?utf-8?B?azdsbzZTMC9RM0kvZ2hCUHhQR29yejBUbjFHcWtGR1prYmR1VlBYbGwxSGUx?=
+ =?utf-8?B?c3I2V015dG84bkNXUDV4cjNNRThLWi9rV0JSZHp2RVRXTlZUeE5NQm9mSWNi?=
+ =?utf-8?B?R1V2ZW9wcHFUTW9kejZwODNnS2VHd0VhdnlDNkZjbnYrNWt1K1poKysxUDVM?=
+ =?utf-8?B?dFRmQk5EQ1Y3UW5DZTJvc1JuUUo0cFBIUnRxWUI5OW10dUMwandNN1ppUWVq?=
+ =?utf-8?B?eFpCZ25aNW8rYXFsbzVkdzNXSUdrYVpmNVM5WDAxUEtCM0JoRk5YbmdWOU9J?=
+ =?utf-8?B?RHU0ZTcrS2x5R09Ba0tvbUVZQ1NiSmkwQ0lWNDY3UXg0bWc0ci9BNUFNMDRN?=
+ =?utf-8?B?MkVGMUtDWU5STlBYRFB4L0wwb3FwSzJoTjFpWVF5emNBQitxaTNPUmFjeW5R?=
+ =?utf-8?B?cFptYmF1SVhBQ1lLUkxrcXAvbEVqc1BKaG5VRUJZOE9jRTdLeGhpZVR3YURy?=
+ =?utf-8?B?L2IwemVjbUlkM2g4c20wOXVtYUpHN2pjVGxRNFh3VHlia0ZJL3lMcTZFckpR?=
+ =?utf-8?B?MVE1L1JDMkllYXZyV3JpenJqaVpQSWo3RytYcjFScEF3MEdUSUdHNmhDcmNk?=
+ =?utf-8?B?a20rbFZPc1R0OVpETVg0TWJLZEZaUXlBOUo3UkZSbjliY2UzeWxydjV3d3hh?=
+ =?utf-8?B?eTlxa3Z5Z2dab3E2ZHQ4Y2hWMjBRPT0=?=
 MIME-Version: 1.0
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: eecb7444-4fba-4719-eef6-08dbfd4abf5a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Dec 2023 08:49:28.2395 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: brA9sCG5LO0Wp3NK4kZGrQbnF9iKmsNaSZT5yvss/9dX27aP0zQ6QlNyKY9BUz0hOOJ5CDUQycouydtCKlx4tbeedrWLosPzbFnPa0hBBt0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0943
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <37B3D8C03FB7F146BD77906245CBEB65@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,153 +164,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2023-12-13 at 19:52 +0000, Simon Glass wrote:
-> ********************
-> Achtung externe E-Mail: =C3=96ffnen Sie Anh=C3=A4nge und Links nur, wenn =
-Sie wissen, dass diese aus einer sicheren Quelle stammen und sicher sind. L=
-eiten Sie die E-Mail im Zweifelsfall zur Pr=C3=BCfung an den IT-Helpdesk we=
-iter.
-> Attention external email: Open attachments and links only if you know tha=
-t they are from a secure source and are safe. In doubt forward the email to=
- the IT-Helpdesk to check it.
-> ********************
->=20
-> On Mon, 11 Dec 2023 at 04:04, Matthias Schiffer
-> <matthias.schiffer@ew.tq-group.com> wrote:
-> >=20
-> > The "fdt" command is convenient for making small changes to the OS FDT,
-> > especially during development. This is easy when the kernel and FDT are
-> > loaded separately, but can be cumbersome for FIT images, requiring to
-> > unpack the image, manually apply overlays, etc.
-> >=20
-> > Add an option to execute a command "fdt_fixup" from the environment at
-> > the beginning of image_setup_libfdt() (after overlays are applied, and
-> > before the other fixups).
-> >=20
-> > Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-> > ---
-> >  boot/Kconfig     |  9 +++++++++
-> >  boot/image-fdt.c | 19 +++++++++++++++++--
-> >  2 files changed, 26 insertions(+), 2 deletions(-)
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> How about a test?
+T24gVGh1LCAyMDIzLTEyLTE0IGF0IDE0OjEwIC0wNjAwLCBiYkB0aS5jb20gd3JvdGU6DQo+IE9u
+IERlY2VtYmVyIDE0LCAyMDIzIHRodXMgc2F5ZXRoIE1hcmNlbCBaaXN3aWxlcjoNCj4gPiBIaSBB
+cHVydmENCj4gPiANCj4gPiBUaGFua3MhDQo+ID4gDQo+ID4gT24gV2VkLCAyMDIzLTEyLTA2IGF0
+IDE4OjA3ICswNTMwLCBBcHVydmEgTmFuZGFuIHdyb3RlOg0KPiA+ID4gSGVsbG8gRXZlcnlvbmUh
+DQo+ID4gPiANCj4gPiA+IFRoaXMgc2VyaWVzIHdpbGwgaW50cm9kdWNlIGJhc2ljIHN1cHBvcnQg
+KFNEIGFuZCBVQVJUKSBzdXBwb3J0IGZvciBUZXhhcw0KPiA+ID4gSW5zdHJ1bWVudHMgSjc4NFM0
+IEVWTS4NCj4gPiANCj4gPiBGb3IgdGhlIHdob2xlIHNlcmllczoNCj4gPiANCj4gPiBUZXN0ZWQt
+Ynk6IE1hcmNlbCBaaXN3aWxlciA8bWFyY2VsLnppc3dpbGVyQHRvcmFkZXguY29tPg0KPiA+IA0K
+PiA+IEhvd2V2ZXIsIG9uZSB0aGluZyBJIG5vdGljZWQgaXMgdGhhdCB3aXRoIHVwc3RyZWFtIFRG
+LUEgSSBkbyBnZXQgdGhlIGZvbGxvd2luZyBlcnJvcnM6DQo+ID4gDQo+ID4gTk9USUNFOsKgIEJM
+MzE6IHYyLjEwLjDCoCAocmVsZWFzZSk6djIuMTAuMC03Ni1nMDIwOTE1NDFkDQo+ID4gTk9USUNF
+OsKgIEJMMzE6IEJ1aWx0IDogMTg6MTM6MDgsIERlYyAxNCAyMDIzDQo+ID4gRVJST1I6wqDCoCBG
+YWlsZWQgdG8gZ2V0IHJlc3BvbnNlICgtMTkpDQo+ID4gRVJST1I6wqDCoCBUcmFuc2ZlciBzZW5k
+IGZhaWxlZCAoLTE5KQ0KPiA+IEVSUk9SOsKgwqAgVW5hYmxlIHRvIHF1ZXJ5IGZpcm13YXJlIGNh
+cGFiaWxpdGllcyAoLTE5KQ0KPiA+IA0KPiA+IFdoaWxlIHdpdGggbGF0ZXN0IFRGLUEgZnJvbSBk
+b3duc3RyZWFtIFRJIEJTUCAoYm90aCA5LjAgYW5kIDkuMSB1c2UgdGhlIHNhbWUgdmVyc2luKSBJ
+IGRvIG5vdCBnZXQgYW55DQo+ID4gZXJyb3JzOg0KPiA+IA0KPiA+IE5PVElDRTrCoCBCTDMxOiB2
+Mi45KHJlbGVhc2UpOnYyLjkuMC02MTQtZ2Q3YTcxMzVkMw0KPiA+IE5PVElDRTrCoCBCTDMxOiBC
+dWlsdCA6IDE4OjQwOjM4LCBEZWMgMTQgMjAyMw0KPiA+IA0KPiANCj4gV2hhdCB2ZXJzaW9uIG9m
+IFRJRlMgYXJlIHlvdSBydW5uaW5nPyBOb3QgZ2V0dGluZyBhIHJlc3BvbnNlIHVzdWFsbHkgDQo+
+IG1lYW5zIGZpcm13YXJlIGlzIGRlYWQgb3Igd2UncmUgbm90IHVzaW5nIHRoZSByaWdodCB0aHJl
+YWQgdG8gdGFsay4NCg0KWWVhaCwgc29ycnkuIEkgd2FzIGFsd2F5cyBydW5uaW5nIHRoZSBsYXRl
+c3QgZnJvbSB0aGUgdGktbGludXgtZmlybXdhcmUgYnJhbmNoOg0KDQpTWVNGVyBBQkk6IDMuMSAo
+ZmlybXdhcmUgcmV2IDB4MDAwOSAnOS4xLjItLXYwOS4wMS4wMiAoS29vbCBLb2FsYSknKQ0KDQpT
+bywgaXQgaXMgcmVhbGx5IFRGLUEgd2hpY2ggc2VlbXMgdG8gY2F1c2UgdGhlIGlzc3VlLg0KDQo+
+IH5Ccnlhbg0K
 
-Makes sense, I'll add a unit test.
-
-
->=20
->=20
-> >=20
-> > diff --git a/boot/Kconfig b/boot/Kconfig
-> > index ef71883a502..7eea935f490 100644
-> > --- a/boot/Kconfig
-> > +++ b/boot/Kconfig
-> > @@ -1502,6 +1502,15 @@ if OF_LIBFDT
-> >=20
-> >  menu "Devicetree fixup"
-> >=20
-> > +config OF_ENV_SETUP
-> > +       bool "Run a command from environment to set up device tree befo=
-re boot"
-> > +       depends on CMD_FDT
-> > +       help
-> > +         This causes U-Boot to run a command from the environment vari=
-able
-> > +         fdt_fixup before booting into the operating system, which can=
- use the
-> > +         fdt command to modify the device tree. The device tree is the=
-n passed
-> > +         to the OS.
-> > +
-> >  config OF_BOARD_SETUP
-> >         bool "Set up board-specific details in device tree before boot"
-> >         help
-> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> > index f10200f6474..78b5c639381 100644
-> > --- a/boot/image-fdt.c
-> > +++ b/boot/image-fdt.c
-> > @@ -9,6 +9,7 @@
-> >   */
-> >=20
-> >  #include <common.h>
-> > +#include <command.h>
-> >  #include <fdt_support.h>
-> >  #include <fdtdec.h>
-> >  #include <env.h>
-> > @@ -608,8 +609,22 @@ int image_setup_libfdt(struct bootm_headers *image=
-s, void *blob,
-> >  {
-> >         ulong *initrd_start =3D &images->initrd_start;
-> >         ulong *initrd_end =3D &images->initrd_end;
-> > -       int ret =3D -EPERM;
-> > -       int fdt_ret;
-> > +       int ret, fdt_ret;
-> > +
-> > +       if (IS_ENABLED(CONFIG_OF_ENV_SETUP)) {
-> > +               const char *fdt_fixup;
-> > +
-> > +               fdt_fixup =3D env_get("fdt_fixup");
-> > +               if (fdt_fixup) {
-> > +                       set_working_fdt_addr(map_to_sysmem(blob));
->=20
-> Is that not already done?
-
-Not necessarily in all code paths that lead to image_setup_libfdt().
-
-
->=20
-> > +                       ret =3D run_command_list(fdt_fixup, -1, 0);
-> > +                       if (ret)
-> > +                               printf("WARNING: fdt_fixup command retu=
-rned %d\n",
-> > +                                      ret);
-> > +               }
->=20
-> Would it make sense to put this code near the end of the function,
-> after other fixups have been done?
-
-With separate image and FDT, one would usually run the fdt command to modif=
-y the FDT before bootm,
-so the modifications also happen before other fixups. My intention was to g=
-et the same behavior for
-FIT images.
-
-I don't care much either way though, for most fixups the order shouldn't ma=
-tter too much, and we can
-always add an fdt_fixup_early or fdt_fixup_late if an actual usecase for su=
-ch a sequence of fixups
-comes up.
-
-Regards,
-Matthias
-
-
->=20
-> > +       }
-> > +
-> > +       ret =3D -EPERM;
-> >=20
-> >         if (fdt_root(blob) < 0) {
-> >                 printf("ERROR: root node setup failed\n");
-> > --
-> > TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, =
-Germany
-> > Amtsgericht M=C3=BCnchen, HRB 105018
-> > Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan=
- Schneider
-> > https://www.tq-group.com/
-> >=20
->=20
-> Regards,
-> Simon
->=20
-
---=20
-TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Germ=
-any
-Amtsgericht M=C3=BCnchen, HRB 105018
-Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan Sch=
-neider
-https://www.tq-group.com/
