@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6912AC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78FFC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB43687AFD;
-	Fri, 15 Dec 2023 14:49:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CC0D87BC6;
+	Fri, 15 Dec 2023 14:49:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="mG20VwSO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SWobo+iA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0872C874FB; Fri, 15 Dec 2023 14:49:17 +0100 (CET)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id A58DD87BD3; Fri, 15 Dec 2023 14:49:30 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE04787AFD
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:49:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 766D687BBD
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:49:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jmasson@baylibre.com
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3363ebb277bso429493f8f.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:49:13 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-67ad032559fso4371066d6.2
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:49:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1702648153; x=1703252953;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:in-reply-to
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K01rLP9Ql3YafEyNVwCeXmqSld9DlVdioIBFR/LHwMA=;
- b=mG20VwSOsOfhKS/bJw3bVzOww8QnVVAPJ4Pf40641snoO8aAesW1N/GqjbQvA8IMkD
- Vlwg+B76ijG6BWcxgliefeteXHXc4gTDDJBsAnsLlbjL+Yhc6gPtrqYvIkH7RHE2M8wG
- bvysKfmhjzj0+9QIm6KzcJN9kmqPfBYt7XpM5CH+GpZGJ4PUPCI4Jrv4ip9FNFlyv9vD
- KrGZnE1esAu52KQ5Qcs7VvHqy5rNpgRR0r6cb/u+uklEF+ZecTtJCDSaeq5h4/hMYnL9
- l9lmUcjkD7qJNMu8kFi616XxQ/pF/S0crb/2vh39LPjIOEbIxzi1jQQ8GZ4zZCUnoGrA
- V+sw==
+ d=konsulko.com; s=google; t=1702648167; x=1703252967; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=m1V2abb+jqP7q59eoYmg01F9g2D+oCQFBJ35NP5GM1c=;
+ b=SWobo+iAJ273Kq1ehdqZyxrYL40E9TvpQRACMueYTs9Q3RyKi/0+ZGNwd8AgRub54A
+ 38EknIy3/bNkR5vxTBCavGP1Pi7Qduaej5YRtW7pNGMubLIZ+c1Gl+IO+mbRUNysvSBc
+ reLacYeY+09uCotMgaDGGtn0IXkP9sJFtu7r8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702648153; x=1703252953;
- h=content-transfer-encoding:mime-version:message-id:date:in-reply-to
- :subject:cc:to:from:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1702648167; x=1703252967;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K01rLP9Ql3YafEyNVwCeXmqSld9DlVdioIBFR/LHwMA=;
- b=syZVKniVkpykiglJuTMfC5hbtNqDes7FlZFqsBuXFm48+6uY2p1TaoiaF8X7pA/uLQ
- MDkEGFNdTUCuU1Z7WiY6E0u9EfeLjfY6rptHE2erv5ROHwaFWvJtgxgRkpIc1i1tfNGU
- ehtX7mUCDIQGjCbWxbtSu9K8iL/KuRLtNnT94noaC6wJZAp2FhIQyThTmFGM2+W1w5kJ
- SIbCfLzd06OJ1aLJNT8neAFVt4CVPkXWaXh4Cv4afFi5ODwcPKnl+N6BimjTrV2zPKY+
- GhlLOvRJIUFzjUo543hOM2zm1kFmDJk6SFOS2Byj2g2uV6NP+S25Vi0SFiOwdOU1/rkf
- KKIw==
-X-Gm-Message-State: AOJu0Yx1b00X05R2ts0dhvepJnngjJdqkcKvXTSjkWbKBJzebMMTMsNh
- eH9v9OFTPwtFEWFhmzFOasPbcg==
-X-Google-Smtp-Source: AGHT+IGAOA/8oq9LjCox95PWvcJ8xlnjtEUOwbG7JvKy3vwlVkGIdp47qKKqwAjXDR/9ihG3Rgvahw==
-X-Received: by 2002:a5d:6a46:0:b0:336:4b3a:cef3 with SMTP id
- t6-20020a5d6a46000000b003364b3acef3mr1049238wrw.5.1702648153293; 
- Fri, 15 Dec 2023 05:49:13 -0800 (PST)
-Received: from localhost (laubervilliers-658-1-213-31.w90-63.abo.wanadoo.fr.
- [90.63.244.31]) by smtp.gmail.com with ESMTPSA id
- d9-20020adfef89000000b0033342978c93sm18848417wro.30.2023.12.15.05.49.12
+ bh=m1V2abb+jqP7q59eoYmg01F9g2D+oCQFBJ35NP5GM1c=;
+ b=CIuhhueegtV0+HPnPoag2MLGPARc9NNyNbq1nQkRuZT9/F1tY6ZA6A7TSY06PmOW0T
+ p5jGo/uTl/D1f/Z8xseLOhWI2weFwkhtfKAg0FEqgCFtwpYuqlyo619HyVt/It1SdhbZ
+ LEdDRXe+fJ09sB0QlRvpH049rP2l1a9eVKnzrrUujlHC/szxTV19HGkOmuU5nGPME1ei
+ x39Ai0rZgvGiDwMQ0ksaooQ5+Lm5CkOKuIApjeMJzjE6lmjGqyEdpKPU7RRg6yww6R5Z
+ 9LG2ZUwTJB3lcMh1Yishv5PeS22SFsjg3DdVuV+PEjZfY+RyHfE915qsI4s3uiUGNw5n
+ a/qg==
+X-Gm-Message-State: AOJu0YykXKwhCg3ETpKyr78kFORBU5TXJMBIDwIaJ1SG5EKHdi72AjrC
+ Mz2AuTGXk6oPEeNCoyaB2TzWZQ==
+X-Google-Smtp-Source: AGHT+IFpcbB2I4CBlkX3EhNF/97a7PH/+qMGmFOaIGOiiLe9GujWdZ2cC2Bo8MkcNkeR4aOou53zSA==
+X-Received: by 2002:a0c:fb44:0:b0:67e:f55b:7eb0 with SMTP id
+ b4-20020a0cfb44000000b0067ef55b7eb0mr4869791qvq.68.1702648167171; 
+ Fri, 15 Dec 2023 05:49:27 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
+ [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
+ by smtp.gmail.com with ESMTPSA id
+ ff17-20020a0562140bd100b0067ae405e0a8sm690330qvb.57.2023.12.15.05.49.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 05:49:12 -0800 (PST)
-From: Julien Masson <jmasson@baylibre.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>
-Cc: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH] clk: fix clk_get_rate() always return ulong
-In-Reply-To: <875y0ztylk.fsf@baylibre.com>
-Date: Fri, 15 Dec 2023 14:49:11 +0100
-Message-ID: <87plz7vanc.fsf@fedora.mail-host-address-is-not-set>
+ Fri, 15 Dec 2023 05:49:26 -0800 (PST)
+Date: Fri, 15 Dec 2023 08:49:24 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Kiernan <alex.kiernan@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: [PATCH v2 08/16] fastboot: Remove dependencies on CMDLINE
+Message-ID: <20231215134924.GW2513409@bill-the-cat>
+References: <20231215041919.2197788-1-sjg@chromium.org>
+ <20231215041919.2197788-8-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8ym+fqEe1EWZt5WS"
+Content-Disposition: inline
+In-Reply-To: <20231215041919.2197788-8-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,101 +94,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
 
-Thanks for the review.
+--8ym+fqEe1EWZt5WS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri 15 Dec 2023 at 14:38, Mattijs Korpershoek <mkorpershoek@baylibre.com=
-> wrote:
+On Thu, Dec 14, 2023 at 09:19:06PM -0700, Simon Glass wrote:
+> It is possible to boot a kernel without CMDLINE being enabled. Update
+> the implementation to handle this, and drop the condition from the
+> FASTBOOT config.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> Changes in v2:
+> - Avoid changing the logic when a command is not set
+>=20
+>  drivers/fastboot/Kconfig     |  1 -
+>  drivers/fastboot/fb_common.c | 30 ++++++++++++++----------------
+>  2 files changed, 14 insertions(+), 17 deletions(-)
+>=20
+> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> index 11fc0fe1c800..837c6f1180da 100644
+> --- a/drivers/fastboot/Kconfig
+> +++ b/drivers/fastboot/Kconfig
+> @@ -1,5 +1,4 @@
+>  menu "Fastboot support"
+> -	depends on CMDLINE
+> =20
+>  config FASTBOOT
+>  	bool
 
-> On ven., d=C3=A9c. 15, 2023 at 13:34, Mattijs Korpershoek <mkorpershoek@b=
-aylibre.com> wrote:
->=20
->> Hi Julien,
->>
->> Thank you for the patch.
->>
->> On mar., nov. 21, 2023 at 15:42, Julien Masson <jmasson@baylibre.com> wr=
-ote:
->>
->>> When we call clk_get_rate(), we expect to get clock rate value as
->>> ulong.
->>> In that case we should not use log_ret() macro since it use internally
->>> an int.
->>
->> This is quite subtle, it only happens when log_reg is enabled via
->> CONFIG_LOG_ERROR_RETURN.
->>
->>> Otherwise we may return an invalid/truncated clock rate value.
->>>
->>> Signed-off-by: Julien Masson <jmasson@baylibre.com>
->>
->> I'm wondering if there are any other places where this happens,
->> but this change looks good to me.
->>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->=20
-> Thinking a bit more about this, shouldn't we add some check for
-> downcasting in log.h in order to make sure this does not happen in the fu=
-ture?
->=20
-> Something like this should work:
->=20
-> diff --git a/include/log.h b/include/log.h
-> index 6e84f080ef3d..20088399617c 100644
-> --- a/include/log.h
-> +++ b/include/log.h
-> @@ -332,12 +332,14 @@ void __assert_fail(const char *assertion, const cha=
-r *file, unsigned int line,
->   * use 4 bytes in rodata
->   */
->  #define log_ret(_ret) ({ \
-> +       _Static_assert(sizeof(_ret) <=3D sizeof(int), "Cannot log without=
- downcasting"); \
->         int __ret =3D (_ret); \
->         if (__ret < 0) \
->                 log(LOG_CATEGORY, LOGL_ERR, "returning err=3D%d\n", __ret=
-); \
->         __ret; \
->         })
->=20
-> Downcasting just when logs are enabled can be the cause for quite some
-> subtle bugs so breaking the build in these cases might be a good
-> warning.
->=20
-> Any thoughts?
->
-
-I agree with the suggestion but in that case all the macros in log.h may
-need to be updated with the same kind of checks.
-
-And that is not the initial intention of this patch, we should do that
-in a separate patch I guess.
-
->>
->>> ---
->>> drivers/clk/clk-uclass.c | 6 +-----
->>> 1 file changed, 1 insertion(+), 5 deletions(-)
->>>
->>> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
->>> index 3b5e3f9c86..41dcd14be5 100644
->>> --- a/drivers/clk/clk-uclass.c
->>> +++ b/drivers/clk/clk-uclass.c
->>> @@ -488,11 +488,7 @@ ulong clk_get_rate(struct clk *clk)
->>> if (!ops->get_rate)
->>> return -ENOSYS;
->>>=20
->>> -	ret =3D ops->get_rate(clk);
->>> -	if (ret)
->>> -		return log_ret(ret);
->>> -
->>> -	return 0;
->>> +	return ops->get_rate(clk);
->>> }
->>>=20
->>> struct clk *clk_get_parent(struct clk *clk)
->>> --=20
->>> 2.41.0
+Please expand the help to note that CMDLINE is recommended and that the
+more complex use cases that require running additional commands rather
+than simply booting the OS will not work without CMDLINE, thanks.
 
 --=20
-Julien Masson
+Tom
+
+--8ym+fqEe1EWZt5WS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8WWEACgkQFHw5/5Y0
+tywmiAv8Ci6FbOfx8JfA6LfaUVLdAHrjTJXaza6fnIAgSxkUT2xYAsyCw/PoA0EC
+P0K/OhEi9/Aibv63pxOpYVSh+2rzjLS3hg+bpWbS5mzJOSOxJnKc57eb0q5jJZ2k
+pfGXQ3RN45t1rHYJu74CSQubZrgYUdbjmVwhIX1J1gwAJxaDhTTAwJ0bI14J6HHn
+sgML2aQ250NIIAw7NlmNnh9ct/glzdrY/BBUgiBXNtuoUiWALLM2fcwZ1nFDlCIx
+66XHEBK70fEfU2PCj9MDDaCUXMcHxQ9GqgZogP9MGvbrhpMLA1a+va/8aG2RomhM
+gBaFAaGTRvUSS5Q+RPQkRTcMeqCyrqm6EA8Bk7ugrtAKyzcO4AfqzJjCbEm1V2R6
+tnlg3cqAMDy98AzXePfsUuG97xuUFvDsCMrIee+/Xzh4ySK47Wayck9MB4BIyPrl
+ZKIzRhQG13r7hnFTDxFFOfUZnISUCSUi6waenRxLSTh3KXgkvTUgPmqmcUtcWWt1
+I/evnRyx
+=8KNE
+-----END PGP SIGNATURE-----
+
+--8ym+fqEe1EWZt5WS--
