@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE98C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 15:00:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43494C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 16:20:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE838877E5;
-	Fri, 15 Dec 2023 16:00:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E71287BA0;
+	Fri, 15 Dec 2023 17:20:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rK8/SMg1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M3YFfUeD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A224387A7F; Fri, 15 Dec 2023 16:00:41 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 8841187B6E; Fri, 15 Dec 2023 17:20:54 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9B0B87603
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 16:00:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 729B987BA0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 17:20:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50e215f5a38so310494e87.2
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 07:00:38 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-27fe16e8e02so103087a91.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:20:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702652438; x=1703257238; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Pvs5l1wWEDAwCNrVI7uwxS22mO/FO7Q0vFqQZD5qWPE=;
- b=rK8/SMg1PUZE6dEOkTX9JMZXSsU8iJzpBpuNmXFS6ihAG1OE0cNeHDMITgGXIirx98
- nKBSELF2ZecYPDn45459v+roPIImbttm/Ho9qk+vvPHT6BGPXRxP56qJCfcWOfbixSDr
- /wYtlqa5GIkoE3tVcLrWkftWJc1prs+Je4oxNPKiBgGNeGWiGk6pEnFZU8EYtuAuJ+Ob
- n/78fywOgq5WFcDzchhQtkCcDaex1pXUbAutzkzjjnYx8atUEofQXrQA4Z707NT4JgM3
- Op4dJfHM/TS2bjndzlGF/TAAd68Gvu4xtcamVQKPh2LMX29qQeEIflFJg39EusZP9ZoG
- scAg==
+ d=gmail.com; s=20230601; t=1702657250; x=1703262050; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ma5Orb5s25rHkXVUZNgzqyJhVyy1wJGFif0qGjZ8hXI=;
+ b=M3YFfUeD3aIp1T3TSRNTA2EhKq+I7IKJzzfb3y79gs36Q+3FUDOZHnuGzC7snt18F6
+ K816NVfat8pPqQyYf5WuFngbby9n8oGSculW0z6ytm06+8Ca52QMGC5vDL00J+YGPexO
+ b0aHJ7ft8pc5sXDYaaiE1FyJXOAf45Y6OtgmGRMz/AYgl8Bz8mO0xyhqBe1n2UZ6PG3R
+ WQbwZMEXt4NX+SDFzPlgDecrhTRj9hTe+3H8GgPf8/eVvZ7xPaIofKE3audA6ux2poPO
+ YUkyUnTRaKLQCYlzJ5g+Dr5dLKKONr+f0+bcHi+B+8KMzHHTvb9u/yfQhZpPY5Cl+5EM
+ QmnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702652438; x=1703257238;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Pvs5l1wWEDAwCNrVI7uwxS22mO/FO7Q0vFqQZD5qWPE=;
- b=MKFz/g9qe9AnEy549We7tnYV0IOYD0Bhat5fHR3ZcVoGPM/21sT2KoTvQv8NM9btLy
- mSR45ceK/Hoqkn2stGmZuXZBV2JT6HGgzXOsQo5MCFZN92s+oZ3Cogblg29KwyCvn5We
- fbeWs+O8IRi5U47Wo1JCcrVMl/M0XRtX3rslJf6nVxR91VeFoCzPZa5vZ4zj0VIshzKd
- VU4YEH2kaU2rBdn4HeGabKHvfB2VXKEgpLmStGhnE4wO85/1Gl3L/7vYOQIGiceiDbdo
- 2JlqfQJZnqKN/60mztfjeI3MXQv2ZouC9vevDjvNg2iJUng8vyPprn7UXNt+7Shuo1MU
- PwMA==
-X-Gm-Message-State: AOJu0YyJmhr/0uTXN/F9dqSTCFGDaH1L+6Jq/jcpo8bjOEc+PUPdC4MG
- 75vC1mt3OPokl1nAAQ+O2qKVJNk4HhL2A1vFI52lvg==
-X-Google-Smtp-Source: AGHT+IFAGlmL0bxXYBhJHeTn1bv80zjeRyRHWFFWVufq36llbQCRRTHqh//aOIitwv+2G0rxn3Awe/j/4/8w+dNh5LI=
-X-Received: by 2002:a05:6512:31d2:b0:50e:1fa1:5ffa with SMTP id
- j18-20020a05651231d200b0050e1fa15ffamr495139lfe.130.1702652437933; Fri, 15
- Dec 2023 07:00:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702657250; x=1703262050;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ma5Orb5s25rHkXVUZNgzqyJhVyy1wJGFif0qGjZ8hXI=;
+ b=jUu6RvVEbzqUciFDqwzAT1CvpY/HpF6WjjI9HpLGCp+InoqHM6hWvPwCuwduPFXvCU
+ BznxYR08yv3i1ImczH/r9uN3ACEEWhi7CF4ZUzM9fALtA6ke4YNOjW9VztOgvpHJ2TQ6
+ aSwrDhoZA8B3phlOvpC//MUvnYNKMCzBoU7tSMHm9Ax8xh2WLtrLYrvRMqU4mHdytsoc
+ k9gihNC1fnFH/j9TM+hEMltLdUU2u/yhgH1IQdZs8R7ayvN10YQM9b3CEOwhBoY80zOd
+ wyMjJZVmvlMtGpEHN165TpbIewdkg9q75mXHlKom0PxqvqTPtj+2sBfCBcexHSZnSgm9
+ vhPA==
+X-Gm-Message-State: AOJu0Yx44s2Tq66eXP1rrSr8vKej7YBACDAXyvwq2hD+797EjeY3z2gE
+ pe86XervC3lkrGsgOYA+FhLlHv9d1plhYsCQVx8=
+X-Google-Smtp-Source: AGHT+IFPtHWM//LEpRSTCGMELJx0rjXn+oztbfZizNBe6M5FyI1/0wC2zzGydfwqLBwLxcbTINgyM/N0qEL/0yDHhdc=
+X-Received: by 2002:a17:90a:b286:b0:286:dfae:32f6 with SMTP id
+ c6-20020a17090ab28600b00286dfae32f6mr19960005pjr.1.1702657249685; Fri, 15 Dec
+ 2023 08:20:49 -0800 (PST)
 MIME-Version: 1.0
-References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
- <20231215133245.7923-7-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231215133245.7923-7-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 15 Dec 2023 17:00:01 +0200
-Message-ID: <CAC_iWjKXjgT3DS=wRvm_KHOEZ5YSsfCO3pbRKayPKp8DOzRJsQ@mail.gmail.com>
-Subject: Re: [PATCH v2 6/9] risc-v: add support for QEMU firmware tables
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+References: <20220830174932.96360-1-alan@londelec.com>
+ <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
+ <20231009094924.56042353@wsk>
+ <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
+In-Reply-To: <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 15 Dec 2023 13:20:37 -0300
+Message-ID: <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
+Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
+ from DCDC_BATT without 5V
+To: Alan Kay <alan@londelec.com>
+Cc: Lukasz Majewski <lukma@denx.de>, cody@londelec.com,
+ Stefano Babic <sbabic@denx.de>, 
+ Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,38 +93,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Dec 2023 at 15:32, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Enable the QEMU firmware interface if ACPI tables are to be supported on
-> the QEMU platform.
->
-> Enable the QFW MMIO interface if the QEMU firmware interface is enabled.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> v2:
->         no change
-> ---
->  board/emulation/qemu-riscv/Kconfig | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
-> index 2709c9ca1e..59cf66896e 100644
-> --- a/board/emulation/qemu-riscv/Kconfig
-> +++ b/board/emulation/qemu-riscv/Kconfig
-> @@ -33,6 +33,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
->         def_bool y
->         select GENERIC_RISCV
->         select SUPPORT_SPL
-> +       select QFW if ACPI
-> +       select QFW_MMIO if QFW
->         imply AHCI
->         imply SMP
->         imply BOARD_LATE_INIT
-> --
-> 2.40.1
->
+Hi Alan and Cody,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Mon, Oct 9, 2023 at 9:45=E2=80=AFAM Alan Kay <alan@londelec.com> wrote:
+
+> The patch:
+> https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47=
+b31976b18cac4
+> does fix the issue, please feel free to discard my patch, thank you.
+
+Ok, what about the patch below?
+
+https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-cody=
+@londelec.com/
+
+Is this still needed?
