@@ -4,108 +4,177 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAF4C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 07:40:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077C5C4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 07:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B76D98758F;
-	Fri, 15 Dec 2023 08:40:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8232187A8C;
+	Fri, 15 Dec 2023 08:43:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5Ng3r9J/";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="co+k7+xu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCE768780E; Fri, 15 Dec 2023 08:40:28 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20618.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::618])
+ id 74AEE8798E; Fri, 15 Dec 2023 08:43:12 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DB7687575
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:40:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C49887A93
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:43:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=neal.frager@amd.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E780NvP/ZYeJDyqtZLdiqEMhiI8tnpE4F968jGTJa1Y9kVy135tQZt/wFRcW8df5238pp8AFGGVnBSzw+GzbORH04FVvaxsJkt7tJDvyE5fE56HLfgXRBa5e0ObMAWmpbmaHmUDR626W4u3EN2AMCSSvYyO8PCOF8RBuzooiTp4Ayp2AmssWk9KDAl+I337t/8GPaje7d8pJyUmWs6i9ANFQcHYwBBf/Kev0Fq4McwM4amwoMUfiK5Pz0J8/9UVRg8XpOMiUafymt2j7WE/Jpumx8uiPHe4/2DCWNGSKK9SYS1FlSC6n7inZ4d+Or6yLkphjds98eNKbaWSn1+T+2A==
+ b=QT7sOaTcHK9V3BfTpQN3zKGmRm8RASHL1Ho8RjiGB260Cb/O8ufLMG74v8FNvHuB6doGHiTpWI6pPzM8u5zuUROAKjn4VngRXC5bDrXdZ0ho2okZiSs82aWVLuy7vKopJVzxaAJ2Weu/ZjZTnwkDcIZlF4efb8Hd3RFr2Dyl/ubs2g0nKNswiVeQVPWC8mJQmwUJ/E/+V1ivOx8b+F0GW6jupu+JAd3LWhIVoa1lOMg03D9AO9CsUAhI1I9XLUhnV7Mdo9mE9cdI+j8+yFJv1jmKxn0muZIErXezcJwaICvQYeTXdUw3znKje1Mj8piMunNlj6YEcpci1e6ae5KASA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RlYAqGnbc8oYholGSylYZFmJi64+7U1U5ApE+aqA7Dk=;
- b=Zi8xxvZV+dXkw+YM8kG1IN9H5I3Vq5GS3bT//PWzpwqpHbUzs4LCWwDj4hZJqJxPEcC1CnDHBM6/IVq1x9WmNuEG9z7JnCgPDkTkFyg8PBxUv9c/FOPxQ5+4DEdhoDNmaYuTyx/Y32R0cyJ+M2XiLn4CwciSWcFXdk9pwffB/jy0FqnBzuRMHxvTRQX8l7SxiEudbV+eWvKSVwN0HuyHiRUz4JEk/+NN2UAiOXdsWX2xNVXtsY/0PsN5qayoS92sLfJrGQrT5ELvYjB6qCvk3ZVCN5yHrmfaNhQPO2cjNf12ggYi1k/rOfm25aLzhCh5xjqdu1A/UIOvhmezs3uRkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=7Oe1hDDEtN6X/+rKHI17EaJyoN9gC++i+Vz9h9/hv+E=;
+ b=TBDQChnDJhBtDh3VnqjAgkYEL8tSywKw2fPR7jp9VgXvEglUZjZxtHtWt8dhBuowqtgYU95PGkIOhrMuS29n3PFYGLPFYUsIhjsxfO5i1hRJfyxl4bBzf3R1gY6oGKK66JzlKyx28MlK6AVAthkDNbFGeBdtSFWbRB4GOX9DeT9FsrJ4Hv8QCx7kE+9ETDZK8XHALUD2HSlX00YHFtfCe9Qpz0+Ta7yV8qD+kDW+PxiQhvrnBOUkmeTIrvsubDqWP9bm1dw3pcncmKZIF706r1+Vjhx1gbn2aSBK80KLOOQcDderb72686S8wJyF7KMbztOW/9w7zgOSNdCmWAVVlg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RlYAqGnbc8oYholGSylYZFmJi64+7U1U5ApE+aqA7Dk=;
- b=5Ng3r9J/KnCzkY8WVz1ipkWOpZmV7wvLxGPCvCSKpzCVGj8BwoHhrrQ5gAI/aAM1XvKA/DF2fXol4VRX2Ivx36clqkIFA60mAPP7+vAoESQSXwQ5FS8Yl5KBXS6aSQChf1bIfo6srXUuPP/1nMnhOXEakaP+sB9k9bE8rTgl+8U=
-Received: from SA1P222CA0163.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c3::22)
- by PH7PR12MB6419.namprd12.prod.outlook.com (2603:10b6:510:1fd::5)
+ bh=7Oe1hDDEtN6X/+rKHI17EaJyoN9gC++i+Vz9h9/hv+E=;
+ b=co+k7+xuObPLDmlVpkq+5uAUL4KQcFhMk+155QXy6zdYB7TJwsRuFDuDQWeetD7vgtT3KGhvioy2CIPjXoZCogWrOs3VHSjRXDppO8kG8jl6DAVMx3q985bv1mYULwe83SdtoqaZAbKuHy7OtEY1jDdhA0pDyHCVH++EueB2MEg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
+ by IA1PR12MB6163.namprd12.prod.outlook.com (2603:10b6:208:3e9::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.28; Fri, 15 Dec
- 2023 07:40:17 +0000
-Received: from SN1PEPF000252A2.namprd05.prod.outlook.com
- (2603:10b6:806:3c3:cafe::3a) by SA1P222CA0163.outlook.office365.com
- (2603:10b6:806:3c3::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.31 via Frontend
- Transport; Fri, 15 Dec 2023 07:40:17 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF000252A2.mail.protection.outlook.com (10.167.242.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7091.26 via Frontend Transport; Fri, 15 Dec 2023 07:40:16 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 15 Dec
- 2023 01:40:16 -0600
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Fri, 15 Dec
- 2023 01:40:15 -0600
-Received: from xirengwts09.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.34 via Frontend
- Transport; Fri, 15 Dec 2023 01:40:15 -0600
-From: Neal Frager <neal.frager@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <luca.ceresoli@bootlin.com>, Neal Frager
- <neal.frager@amd.com>
-Subject: [PATCH v2 1/1] arm64: zynqmp: Enable usb3 for k24 som
-Date: Fri, 15 Dec 2023 07:40:12 +0000
-Message-ID: <20231215074012.483465-1-neal.frager@amd.com>
-X-Mailer: git-send-email 2.25.1
+ 2023 07:43:05 +0000
+Received: from BYAPR12MB4758.namprd12.prod.outlook.com
+ ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
+ ([fe80::39a2:42da:ea20:3349%5]) with mapi id 15.20.7091.030; Fri, 15 Dec 2023
+ 07:43:05 +0000
+Message-ID: <17c59f83-d28a-419d-82f0-6be6734e797a@amd.com>
+Date: Fri, 15 Dec 2023 08:42:58 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/1] arm64: zynqmp: Fix k24 psu_init_gpl.c clocking
+Content-Language: en-US
+To: "Frager, Neal" <neal.frager@amd.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: "luca.ceresoli@bootlin.com" <luca.ceresoli@bootlin.com>
+References: <20231213134007.2818069-1-neal.frager@amd.com>
+ <c2e4c147-9dab-4f11-8721-8f6aa52e3af4@amd.com>
+ <CH2PR12MB50043CB2CCF03CFF39ED5768F08CA@CH2PR12MB5004.namprd12.prod.outlook.com>
+ <a366b338-7e02-42a4-b5ac-b295c37c0dfe@amd.com>
+ <CH2PR12MB500405650DD1385734E82341F08CA@CH2PR12MB5004.namprd12.prod.outlook.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <CH2PR12MB500405650DD1385734E82341F08CA@CH2PR12MB5004.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PH7PR17CA0021.namprd17.prod.outlook.com
+ (2603:10b6:510:324::27) To BYAPR12MB4758.namprd12.prod.outlook.com
+ (2603:10b6:a03:a5::28)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000252A2:EE_|PH7PR12MB6419:EE_
-X-MS-Office365-Filtering-Correlation-Id: e2c42969-8146-4d89-4d1e-08dbfd4114ca
+X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|IA1PR12MB6163:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7782bdd4-6471-4da8-1079-08dbfd417900
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Cyhh/CiRbJb6zw+IDX7FFIcJySpXUsmiVHNzecMNkHmdpzdiLeXezRSY5IpCihuPheUzNB8fWaX+wzmIj6HQfd3KYyKKMHE+y5K5D4278y5uV+ErpfevDgBdpd1b3kTdHNXVv9Y08Q5qqYRopKyg3uKBrRFoc1uSadV2SHyR1hn2qxAquF/yvbxhSVG0LpJSi7R/gbPGpDjbS0v1iFef/vLZI2tLrQbftcOv36zxQut3HgZnyl9fLsoQXwfQ2BotywytAkumrV8QrrrQ+oYDbdxdfFnH+4Mn0wXUUDw6/axW5f9VHRr/CfPLKyhiv76mmPfAAi/xBBwXeVGIOujzXq8dQveEk4cjx+3/kGqh6Gkt91UtJBK4Aa5+p2nx+v7TObXa/dwEbcKz4Ayd9imLszMjh3UTE/WcunoJm45RPfzQ6k8pgNEaDSH+saaQZ3wMp4xwqYidcuFxkvlzGwp3WFjk/p3G8BdOWodogXtwyRhQpZbzFpUjY5fyzDuahWTChA3JOsHB5tsJPS/4A/4/l576HYB8dmgCfiME3lIsmLL5LN9dOHyh5pTCKfbjPpGi5I6h6Kjx+Qk+s9gHGl2BnKAQNZqCT2ThrB0ZZAVqaaK+rp2oO1Sgr/ItL11iYe9nJxbhREWeOT9komSpE+WsRP7hxkDcsBX3Wa4Gkg/vcWh9UU+l64AWUvJJuklam2Cg+0njIpuSPZkOSAqb5+9Dyph9bn1zl67LZH1BwCk7kqVgX66OqrVOg6ofLMQb503RSnsm0dkmDlrzNYXSgx+nwA==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(136003)(346002)(376002)(230922051799003)(64100799003)(82310400011)(186009)(451199024)(1800799012)(36840700001)(40470700004)(46966006)(41300700001)(1076003)(478600001)(2616005)(30864003)(36860700001)(336012)(26005)(86362001)(70206006)(70586007)(40480700001)(426003)(6666004)(54906003)(6916009)(356005)(81166007)(40460700003)(82740400003)(316002)(83380400001)(36756003)(8676002)(4326008)(8936002)(2906002)(47076005)(44832011)(5660300002)(36900700001);
+X-Microsoft-Antispam-Message-Info: 3d84Tf2Ew8k/E5d4t8KBgbqboAfKUQnWRvLE0aUWt5Vc23Lhm+RaO5lce6MzpFibALKsNX3FyXLxz7ZrGbv+ySprlNjLSr4dcmAXkpFRBhwvlEuqXlERMt+FsIayGYZCBw5Mlfv6KZpzCy5HYtwZS4jv3oq6VAJzvZ1OUWXY4yI5R0f5qhy5dMeXNb9I73SIf0O/oRGidDQIfcoEaRoRv9oVMjh7+znSGw+ZORXuGdNF8xpkI2RfVBdQCvJo3hLdCBjkKA3H7D3iFoJkmiJHINWACLFji0bYZJ/ksipVJYkqavpIbpCH38C8kqDQFqQQRHpeuRtcCWVBZxzfTP4mrjV4KyCaenWMzGu1pKZAHFZ4ONaktudPkGo2ykdU5Q9rOkl+Zl4tu80/d5P/4/5LGjomUQk1uHWrydEXwpb6E/4W957ZFRy4MwMBSPVpIyjfSmS2GKnwyHfO6OEROHGvpuXiNHK4UQh1+2y7XsisP50pSHUsh+UIPkjAmy17kx98yenlbYrH3aC48m4vjHOPpZ6BPCPovukaA52Ai06/L78vlpFntj3koEpCphcDbuy8iq89L5erw3V77Dw6JEJCvmOU7G2vevcRtoj9L4YgYqvoORlF05ynLLlqXoqDjKetBLjSt0KiaX7AQ6nQaqIWug==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(136003)(376002)(346002)(396003)(39860400002)(366004)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(26005)(2616005)(6506007)(6666004)(53546011)(6512007)(83380400001)(5660300002)(44832011)(4326008)(478600001)(41300700001)(8676002)(2906002)(316002)(8936002)(110136005)(66556008)(66476007)(6486002)(66946007)(36756003)(31696002)(86362001)(38100700002)(31686004)(43740500002)(45980500001);
  DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WlNodHF5QUlDWkRNME0waHNHODg1M3JXZm1SdDJXVVpSaTcvM1FQc1FrQ3U2?=
+ =?utf-8?B?WVZOMHBWbXFDNFFBTzJ2dEc4bEJUNkhCdFlTQVlIL05TdWdlUlZFS1orZWlI?=
+ =?utf-8?B?bzRqUWhQREtUWUEwUkI3anJmYTExSkw1WCtmTEx1N0Y4WkwrZVpya2ZXZ2dS?=
+ =?utf-8?B?YzF0M0E0NG9hZCt4NjRHOUpOWEJOdkNVbnJqNEU4TXhZZzNSUVh6cEZmbkxx?=
+ =?utf-8?B?RERaVFN4MVJsZHk1dFBTZ3I5Sk1jVzNWUDcyWEdPZjY1YWUyMmZBUGtNQ0c0?=
+ =?utf-8?B?VFg1UVVtRnM3SHhZbzZQb0RZRUlvc2xNQVIzQk5WVlMvcHBqSElJM21UZUt1?=
+ =?utf-8?B?ZXVxeHRlOUJnaldXNm9DQUVJWTRyYzFKaDd0c2h5VzZwdFJ4cDF4TXR2YUJ0?=
+ =?utf-8?B?alppNFlYNHRmWmxXVjU3ZGhhblJjM2RoeWROZFVkRDhJMEdONFhQVnNmdnZV?=
+ =?utf-8?B?SUtKa0M0MDIvbXN6TkZLYUdyR3EyZytLb2ZlUHZ1aTdMVVZHM2IxMURURTRv?=
+ =?utf-8?B?ZzV2eER6YmZKVlhjL3VPYUF6ZlZrOStiWFRVc293THB4YmFPVjQ4Q0JEMXl5?=
+ =?utf-8?B?SldDSTlEQlY2MGNKcTVBSkZlTmN0dWZGdmhzSXZ1OE12cWlvOW8zZmVOdnJ3?=
+ =?utf-8?B?VnJKdjc2UWNVcUlSVC9aNkp4V3BTdUNCRXU1Q3RPVzNSYkg3dkRUK2E3dnRi?=
+ =?utf-8?B?OFNUMytGWHR6cUc1ZWtTM0RFSkd3S08xRXgzTndDVHdGMUxqaEExbW03RlZP?=
+ =?utf-8?B?dEZKZXR4eGNFY2d4TzA2K2Z2MEg0cXp1UUdSR3AvcW50aGs4aFlGQ1Qxbktu?=
+ =?utf-8?B?OEloUFVybkMrZEFJUXBsZWpWb1FzN2R0Wk5JR0txY2dBUG5QRmdaYVNKL1dt?=
+ =?utf-8?B?aVUxMjNReGRFWXQ3cFFnd3hhVzN1Q0NWS1U4N2dWN3o4SFp0VHgvSmVjekNG?=
+ =?utf-8?B?UmlxZ2dLaWRiUVVnMG1pdjVKQ28zT3k5MDRDaEVHQTF5TXFTa1BxdmRwYWZv?=
+ =?utf-8?B?UThoL2RzeU5UcjBPbGtqOUlSOGUrV2loL0M2VWcwRDFpdnlzRVVJeHpMOEJp?=
+ =?utf-8?B?SjdqN1VpVU9TKzhJa1NoZjdlcElYcHRDaDh5UXcydkxwRmFVeG5FUmNIMmdQ?=
+ =?utf-8?B?WTUyanM4c2dhL0ZmaFVHaTFrRlhud1RqSzAwdGVEYWtHckV0NGVKaUdvNmYz?=
+ =?utf-8?B?Z0pqRGRzWVhkMlR0MUY2V3RaZThKTTV6M1JnSkNIeHEwR2p2a1ZERWZDMk1D?=
+ =?utf-8?B?a1FraWhZVVNhZVlBQVQ2V0VVdzZVZi96VE5NcjVJYlZWcUEyVExPT1ZzTXJ3?=
+ =?utf-8?B?a3c5c2R5eVhDUEY0SWFFOEVEKzFXcXcxN254anZzVkJpUURLeEZieEdDNi9H?=
+ =?utf-8?B?VWVCSkw2T2pTZ0w1a2pza0lBclBwLzc3aC9YKzFBUlNKdGVFMUdyTVdhb3BM?=
+ =?utf-8?B?ZUNXeHNaN3YwalhKM2RudWphQWlkNTV2WmtLbzVhUGMvY0srdjNGbGNXYlQv?=
+ =?utf-8?B?UlBaK0F1eXErYktaRU1iY2RvZW1oT0dVM2ZPVVVUbkloQkVaWmUrUlZyRTFG?=
+ =?utf-8?B?clpHQjdaSHRmUmxCR2xCR3NHbC9HNDNCdjBRazV3bzBGMmZVL3VJcXFDSHpH?=
+ =?utf-8?B?THYyNU0rQTlsVEdSUjltenRSM1FKRGVRVEh0eXUvRUd3dUJCcmduWEhzUFFE?=
+ =?utf-8?B?YXV6MmE3YWFOS3lIZFlXT2FGdUFvVVdMb1oyREJWWnBjT0dsTUk1NVRBeFZW?=
+ =?utf-8?B?Y3NsSWhxYVcwOGVGcmt3YklyNnVNSjlYUGVqTDhpMUxlcFFUUVF4U3FmQldS?=
+ =?utf-8?B?TDhJNU5xN3ZHNDlRTWZCQ3Z2dHJGOEh6OUdNVlAxd0J0SFJPZHFTbXM5Wkov?=
+ =?utf-8?B?KzM4eHhuVWNHMzh1L1Znd0szNjdFL2JjQnpKQVVsTjZoazZjbHd1TTlKb2JZ?=
+ =?utf-8?B?ZUdSS3BvYitwc1F5REJPOTJ0Z1VJV2VQWnRyRFp6eDRFeDhoWThodDcwNnpi?=
+ =?utf-8?B?V0lCTlpkeGxDWmhrUG1GUHZydWZUc0xWSTUvWExEZWc5aTVsL2MySEQreGRL?=
+ =?utf-8?B?blcvTGM0YlhOT2dESW8reDcyTDVGM2VXT3I5Smdtc1M1eGltMWZNWm1PeWky?=
+ =?utf-8?Q?gKEQntHjz+3QI9ADkXyqbWeFF?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2023 07:40:16.5467 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2c42969-8146-4d89-4d1e-08dbfd4114ca
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7782bdd4-6471-4da8-1079-08dbfd417900
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Dec 2023 07:43:04.9340 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000252A2.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6419
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: m+GFi74PM8ipfFkh/8WP5Hnz4iQwy5Xb4H6BK1sJ+NEKO5koXjj+9VhFp3h2uQ8z
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6163
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,368 +191,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, the u-boot zynqmp psgtr driver is not connected to the usb dwc3
-driver.  Without this, the only way for u-boot to be able to use usb3 is if
-the psgtr serdes clocking is already enabled in the psu_init_gpl.c.  This
-patch enables the psgtr serdes for usb3 use, so the u-boot dwc3 driver will
-work properly on boards based on the k24 som.
+Hi Neal,
 
-In addition, this patch correctly configures mio76 and mio77 as gpio pins
-which are used as reset gpio pins on the kd240 starter kit.
+On 12/14/23 18:11, Frager, Neal wrote:
+> Hi Michal,
+> 
+>>
+>>> This patch corrects the k24 som clocking configuration such that the serdes
+>>
+>>> Corrects the ...
+>>
+>> Ok.
+>>
+>>> clocks are correctly enabled and the usb0 is configured to use the psgtr
+>>> refclk2 for usb3 mode.
+>>
+>>> I sort of have no problem with this patch but it should be better described.
+>>> Pretty much serdes configuration should be called from u-boot because we already
+>>> have psgtr driver and usb3.0 can be configured out of it.
+>>> But we can't touch dwc3 driver now that's why the only way to do it is to
+>>> configure via psu_init.
+>>> But it should be clear from commit message that it is workaround not really
+>>> something what should be here.
+>>
+>> I will re-test this without the serdes additions to see if they are
+>> really necessary.
+>>
+>>> This patch also corrects the configuration of mio pins mio76 and mio77
+>>> which should be configured as gpio pins.
+>>
+>>> This is definitely fine.
+>>
+>> Good.
+>>
+>>>
+>>> Signed-off-by: Neal Frager <neal.frager@amd.com>
+>>
+>>> You mentioned that SPL didn't work before. Is it because of incorrect serdes
+>>> configuration? Because that's sounds weird because you don't need serdes
+>>> initialization for booting out of qspi. That's why looking for which is that bit
+>>> which make SPL work on KD240.
+>>
+>> The SPL works.  The issue is the same as I had with the kr260
+>> board.  The sd card interface is over usb, so unless the usb3
+>> works correctly, u-boot has no sd card interface and cannot
+>> find the Linux kernel and file system.
+>>
+>> So what I meant was that I cannot boot up properly
+>> when starting from the SPL.  This is what this patch is
+>> meant to fix.
+> 
+>> What I have seen on KD240 was that I could get to u-boot prompt. And for that
+>> you don't need any serdes initialization at all.
+> 
+> Yes, agreed.  I can get to u-boot prompt too without
+> any additional patches.
 
-This patch is needed for enabling u-boot to load an OS on the kd240
-starter kit by either usb3 or the sd card interface connected over the usb3
-to sd card bridge.
+ok. Good.
 
-Signed-off-by: Neal Frager <neal.frager@amd.com>
----
-V1->V2:
- - rebased patch to latest u-boot master branch
- - improved git commit message
----
- .../zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c  | 283 +++++++++++++++++-
- 1 file changed, 270 insertions(+), 13 deletions(-)
+> 
+>> For booting OS you need it if you want to use USB3.0.
+> 
+> And for the kd240, sd card requires usb3.0 also.
+> 
+>> That's why I want to make it clear what makes kd240 to boot u-boot.
+>> And what makes to access sd over usb to boot OS.
+> 
+> Understood.  The issue I am trying to solve is enabling
+> sd over usb to boot OS.
 
-diff --git a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
-index 166e61431b..591f093752 100644
---- a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
-+++ b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
-@@ -72,6 +72,18 @@ static void dpll_prog(int div2, int ddr_pll_fbdiv, int d_lock_dly,
- 	Xil_Out32(((0xFD1A0000U) + 0x0000002C), pll_ctrl_regval);
- }
- 
-+static int serdes_illcalib(u32 lane3_protocol, u32 lane3_rate,
-+			   u32 lane2_protocol, u32 lane2_rate,
-+			   u32 lane1_protocol, u32 lane1_rate,
-+			   u32 lane0_protocol, u32 lane0_rate)
-+{
-+	Xil_Out32(0xFD409914, 0xF3);
-+	Xil_Out32(0xFD409940, 0xF3);
-+	Xil_Out32(0xFD409990, 0x20);
-+	Xil_Out32(0xFD409924, 0x37);
-+	return 1;
-+}
-+
- static unsigned long psu_pll_init_data(void)
- {
- 	psu_mask_write(0xFF5E0034, 0xFE7FEDEFU, 0x7E4B0C62U);
-@@ -528,8 +540,8 @@ static unsigned long psu_mio_init_data(void)
- 	psu_mask_write(0xFF180124, 0x000000FEU, 0x00000002U);
- 	psu_mask_write(0xFF180128, 0x000000FEU, 0x00000002U);
- 	psu_mask_write(0xFF18012C, 0x000000FEU, 0x00000002U);
--	psu_mask_write(0xFF180130, 0x000000FEU, 0x000000C0U);
--	psu_mask_write(0xFF180134, 0x000000FEU, 0x000000C0U);
-+	psu_mask_write(0xFF180130, 0x000000FEU, 0x00000000U);
-+	psu_mask_write(0xFF180134, 0x000000FEU, 0x00000000U);
- 	psu_mask_write(0xFF180204, 0xFFFFFFFFU, 0x50000000U);
- 	psu_mask_write(0xFF180208, 0xFFFFFFFFU, 0x00B02020U);
- 	psu_mask_write(0xFF18020C, 0x00003FFFU, 0x00000FC0U);
-@@ -569,21 +581,16 @@ static unsigned long psu_peripherals_init_data(void)
- 	psu_mask_write(0xFD1A0100, 0x0001807CU, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x001A0000U, 0x00000000U);
- 	psu_mask_write(0xFF5E023C, 0x0093C018U, 0x00000000U);
--	psu_mask_write(0xFF5E0230, 0x00000008U, 0x00000000U);
-+	psu_mask_write(0xFF5E0230, 0x00000002U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00000001U, 0x00000000U);
- 	psu_mask_write(0xFF180390, 0x00000004U, 0x00000004U);
- 	psu_mask_write(0xFF5E023C, 0x00000400U, 0x00000000U);
--	psu_mask_write(0xFF5E0238, 0x00000040U, 0x00000000U);
--	psu_mask_write(0xFF180310, 0x00008000U, 0x00000000U);
--	psu_mask_write(0xFF180320, 0x33840000U, 0x02840000U);
--	psu_mask_write(0xFF18031C, 0x7FFE0000U, 0x64500000U);
--	psu_mask_write(0xFF180358, 0x00000008U, 0x00000008U);
--	psu_mask_write(0xFF180324, 0x03C00000U, 0x00000000U);
-+	psu_mask_write(0xFF5E0238, 0x00000080U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00000400U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00008000U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00000010U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00007800U, 0x00000000U);
--	psu_mask_write(0xFF5E0238, 0x00000004U, 0x00000000U);
-+	psu_mask_write(0xFF5E0238, 0x00000006U, 0x00000000U);
- 	psu_mask_write(0xFF5E0238, 0x00040000U, 0x00000000U);
- 	psu_mask_write(0xFF4B0024, 0x000000FFU, 0x000000FFU);
- 	psu_mask_write(0xFFCA5000, 0x00001FFFU, 0x00000000U);
-@@ -591,13 +598,111 @@ static unsigned long psu_peripherals_init_data(void)
- 	psu_mask_write(0xFFA60040, 0x80000000U, 0x80000000U);
- 	psu_mask_write(0xFF260020, 0xFFFFFFFFU, 0x05F5DD18U);
- 	psu_mask_write(0xFF260000, 0x00000001U, 0x00000001U);
--	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000202U);
-+	psu_mask_write(0xFF0A0284, 0x03FFFFFFU, 0x01000000U);
-+	psu_mask_write(0xFF0A0288, 0x03FFFFFFU, 0x01000000U);
-+	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0100U);
- 
- 	mask_delay(1);
--	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000002U);
-+	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0000U);
- 
- 	mask_delay(5);
--	psu_mask_write(0xFF5E0250, 0x00000F0FU, 0x00000202U);
-+	psu_mask_write(0xFF0A0014, 0x03FF03FFU, 0x02FF0100U);
-+
-+	return 1;
-+}
-+
-+static unsigned long psu_serdes_init_data(void)
-+{
-+	psu_mask_write(0xFD410008, 0x0000001FU, 0x00000008U);
-+	psu_mask_write(0xFD402868, 0x00000080U, 0x00000080U);
-+	psu_mask_write(0xFD40A094, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD40A368, 0x000000FFU, 0x00000038U);
-+	psu_mask_write(0xFD40A36C, 0x00000007U, 0x00000003U);
-+	psu_mask_write(0xFD40A370, 0x000000FFU, 0x000000F4U);
-+	psu_mask_write(0xFD40A374, 0x000000FFU, 0x00000031U);
-+	psu_mask_write(0xFD40A378, 0x000000FFU, 0x00000002U);
-+	psu_mask_write(0xFD40A37C, 0x00000033U, 0x00000030U);
-+	psu_mask_write(0xFD40906C, 0x00000003U, 0x00000003U);
-+	psu_mask_write(0xFD4080F4, 0x00000003U, 0x00000003U);
-+	psu_mask_write(0xFD4090CC, 0x00000020U, 0x00000020U);
-+	psu_mask_write(0xFD401074, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD405074, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD409074, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD40D074, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD401994, 0x00000007U, 0x00000007U);
-+	psu_mask_write(0xFD405994, 0x00000007U, 0x00000007U);
-+	psu_mask_write(0xFD40989C, 0x00000080U, 0x00000080U);
-+	psu_mask_write(0xFD4098F8, 0x000000FFU, 0x0000001AU);
-+	psu_mask_write(0xFD4098FC, 0x000000FFU, 0x0000001AU);
-+	psu_mask_write(0xFD409990, 0x000000FFU, 0x00000010U);
-+	psu_mask_write(0xFD409924, 0x000000FFU, 0x000000FEU);
-+	psu_mask_write(0xFD409928, 0x000000FFU, 0x00000000U);
-+	psu_mask_write(0xFD409900, 0x000000FFU, 0x0000001AU);
-+	psu_mask_write(0xFD40992C, 0x000000FFU, 0x00000000U);
-+	psu_mask_write(0xFD409980, 0x000000FFU, 0x000000FFU);
-+	psu_mask_write(0xFD409914, 0x000000FFU, 0x000000F7U);
-+	psu_mask_write(0xFD409918, 0x00000001U, 0x00000001U);
-+	psu_mask_write(0xFD409940, 0x000000FFU, 0x000000F7U);
-+	psu_mask_write(0xFD409944, 0x00000001U, 0x00000001U);
-+	psu_mask_write(0xFD409994, 0x00000007U, 0x00000007U);
-+	psu_mask_write(0xFD40D994, 0x00000007U, 0x00000007U);
-+	psu_mask_write(0xFD40107C, 0x0000000FU, 0x00000001U);
-+	psu_mask_write(0xFD40507C, 0x0000000FU, 0x00000001U);
-+	psu_mask_write(0xFD40907C, 0x0000000FU, 0x00000001U);
-+	psu_mask_write(0xFD40D07C, 0x0000000FU, 0x00000001U);
-+	psu_mask_write(0xFD4019A4, 0x000000FFU, 0x000000FFU);
-+	psu_mask_write(0xFD401038, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD40102C, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD4059A4, 0x000000FFU, 0x000000FFU);
-+	psu_mask_write(0xFD405038, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD40502C, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD4099A4, 0x000000FFU, 0x000000FFU);
-+	psu_mask_write(0xFD409038, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD40902C, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD40D9A4, 0x000000FFU, 0x000000FFU);
-+	psu_mask_write(0xFD40D038, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD40D02C, 0x00000040U, 0x00000040U);
-+	psu_mask_write(0xFD4019AC, 0x00000003U, 0x00000000U);
-+	psu_mask_write(0xFD4059AC, 0x00000003U, 0x00000000U);
-+	psu_mask_write(0xFD4099AC, 0x00000003U, 0x00000000U);
-+	psu_mask_write(0xFD40D9AC, 0x00000003U, 0x00000000U);
-+	psu_mask_write(0xFD401978, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD405978, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD409978, 0x00000010U, 0x00000010U);
-+	psu_mask_write(0xFD40D978, 0x00000010U, 0x00000010U);
-+
-+	serdes_illcalib(0, 0, 3, 0, 0, 0, 0, 0);
-+	psu_mask_write(0xFD410014, 0x00000007U, 0x00000003U);
-+	return 1;
-+}
-+
-+static unsigned long psu_resetout_init_data(void)
-+{
-+	psu_mask_write(0xFF5E023C, 0x00000400U, 0x00000000U);
-+	psu_mask_write(0xFF9D0080, 0x00000001U, 0x00000001U);
-+	psu_mask_write(0xFF9D007C, 0x00000001U, 0x00000000U);
-+	psu_mask_write(0xFF5E023C, 0x00000140U, 0x00000000U);
-+	psu_mask_write(0xFF5E0230, 0x00000002U, 0x00000000U);
-+	psu_mask_write(0xFD1A0100, 0x00010000U, 0x00000000U);
-+	psu_mask_write(0xFD4A0200, 0x00000002U, 0x00000000U);
-+	psu_mask_write(0xFD4A0238, 0x0000000FU, 0x00000000U);
-+	psu_mask_write(0xFE20C200, 0x00023FFFU, 0x00022457U);
-+	psu_mask_write(0xFE20C630, 0x003FFF00U, 0x00000000U);
-+	psu_mask_write(0xFE20C11C, 0x00000600U, 0x00000600U);
-+	psu_mask_write(0xFE20C12C, 0x00004000U, 0x00004000U);
-+	psu_mask_write(0xFD480064, 0x00000200U, 0x00000200U);
-+	mask_poll(0xFD40A3E4, 0x00000010U);
-+
-+	return 1;
-+}
-+
-+static unsigned long psu_resetin_init_data(void)
-+{
-+	psu_mask_write(0xFF5E023C, 0x00000540U, 0x00000540U);
-+	psu_mask_write(0xFF5E0230, 0x00000002U, 0x00000002U);
-+	psu_mask_write(0xFD4A0238, 0x0000000FU, 0x0000000AU);
-+	psu_mask_write(0xFD4A0200, 0x00000002U, 0x00000002U);
-+	psu_mask_write(0xFD1A0100, 0x00010000U, 0x00010000U);
- 
- 	return 1;
- }
-@@ -911,6 +1016,157 @@ static unsigned long psu_ddr_phybringup_data(void)
- 	return 1;
- }
- 
-+static int serdes_enb_coarse_saturation(void)
-+{
-+	Xil_Out32(0xFD402094, 0x00000010);
-+	Xil_Out32(0xFD406094, 0x00000010);
-+	Xil_Out32(0xFD40A094, 0x00000010);
-+	Xil_Out32(0xFD40E094, 0x00000010);
-+	return 1;
-+}
-+
-+static int serdes_fixcal_code(void)
-+{
-+	int maskstatus = 1;
-+	unsigned int rdata = 0;
-+	unsigned int match_pmos_code[23];
-+	unsigned int match_nmos_code[23];
-+	unsigned int match_ical_code[7];
-+	unsigned int match_rcal_code[7];
-+	unsigned int p_code = 0;
-+	unsigned int n_code = 0;
-+	unsigned int i_code = 0;
-+	unsigned int r_code = 0;
-+	unsigned int repeat_count = 0;
-+	unsigned int L3_TM_CALIB_DIG20 = 0;
-+	unsigned int L3_TM_CALIB_DIG19 = 0;
-+	unsigned int L3_TM_CALIB_DIG18 = 0;
-+	unsigned int L3_TM_CALIB_DIG16 = 0;
-+	unsigned int L3_TM_CALIB_DIG15 = 0;
-+	unsigned int L3_TM_CALIB_DIG14 = 0;
-+	int i = 0;
-+
-+	rdata = Xil_In32(0xFD40289C);
-+	rdata = rdata & ~0x03;
-+	rdata = rdata | 0x1;
-+	Xil_Out32(0xFD40289C, rdata);
-+	int count = 0;
-+	do {
-+		if (count == 1100000)
-+			break;
-+		rdata = Xil_In32(0xFD402B1C);
-+		count++;
-+	} while ((rdata & 0x0000000E) != 0x0000000E);
-+
-+	for (i = 0; i < 23; i++) {
-+		match_pmos_code[i] = 0;
-+		match_nmos_code[i] = 0;
-+	}
-+	for (i = 0; i < 7; i++) {
-+		match_ical_code[i] = 0;
-+		match_rcal_code[i] = 0;
-+	}
-+
-+	do {
-+		Xil_Out32(0xFD410010, 0x00000000);
-+		Xil_Out32(0xFD410014, 0x00000000);
-+
-+		Xil_Out32(0xFD410010, 0x00000001);
-+		Xil_Out32(0xFD410014, 0x00000000);
-+
-+		maskstatus = mask_poll(0xFD40EF14, 0x2);
-+		if (maskstatus == 0) {
-+			xil_printf("#SERDES initialization timed out\n\r");
-+			return maskstatus;
-+		}
-+
-+		p_code = mask_read(0xFD40EF18, 0xFFFFFFFF);
-+		n_code = mask_read(0xFD40EF1C, 0xFFFFFFFF);
-+		;
-+		i_code = mask_read(0xFD40EF24, 0xFFFFFFFF);
-+		r_code = mask_read(0xFD40EF28, 0xFFFFFFFF);
-+		;
-+
-+		if (p_code >= 0x26 && p_code <= 0x3C)
-+			match_pmos_code[p_code - 0x26] += 1;
-+
-+		if (n_code >= 0x26 && n_code <= 0x3C)
-+			match_nmos_code[n_code - 0x26] += 1;
-+
-+		if (i_code >= 0xC && i_code <= 0x12)
-+			match_ical_code[i_code - 0xC] += 1;
-+
-+		if (r_code >= 0x6 && r_code <= 0xC)
-+			match_rcal_code[r_code - 0x6] += 1;
-+
-+	} while (repeat_count++ < 10);
-+
-+	for (i = 0; i < 23; i++) {
-+		if (match_pmos_code[i] >= match_pmos_code[0]) {
-+			match_pmos_code[0] = match_pmos_code[i];
-+			p_code = 0x26 + i;
-+		}
-+		if (match_nmos_code[i] >= match_nmos_code[0]) {
-+			match_nmos_code[0] = match_nmos_code[i];
-+			n_code = 0x26 + i;
-+		}
-+	}
-+
-+	for (i = 0; i < 7; i++) {
-+		if (match_ical_code[i] >= match_ical_code[0]) {
-+			match_ical_code[0] = match_ical_code[i];
-+			i_code = 0xC + i;
-+		}
-+		if (match_rcal_code[i] >= match_rcal_code[0]) {
-+			match_rcal_code[0] = match_rcal_code[i];
-+			r_code = 0x6 + i;
-+		}
-+	}
-+
-+	L3_TM_CALIB_DIG20 = mask_read(0xFD40EC50, 0xFFFFFFF0);
-+	L3_TM_CALIB_DIG20 = L3_TM_CALIB_DIG20 | 0x8 | ((p_code >> 2) & 0x7);
-+
-+	L3_TM_CALIB_DIG19 = mask_read(0xFD40EC4C, 0xFFFFFF18);
-+	L3_TM_CALIB_DIG19 = L3_TM_CALIB_DIG19 | ((p_code & 0x3) << 6)
-+	    | 0x20 | 0x4 | ((n_code >> 3) & 0x3);
-+
-+	L3_TM_CALIB_DIG18 = mask_read(0xFD40EC48, 0xFFFFFF0F);
-+	L3_TM_CALIB_DIG18 = L3_TM_CALIB_DIG18 | ((n_code & 0x7) << 5) | 0x10;
-+
-+	L3_TM_CALIB_DIG16 = mask_read(0xFD40EC40, 0xFFFFFFF8);
-+	L3_TM_CALIB_DIG16 = L3_TM_CALIB_DIG16 | ((r_code >> 1) & 0x7);
-+
-+	L3_TM_CALIB_DIG15 = mask_read(0xFD40EC3C, 0xFFFFFF30);
-+	L3_TM_CALIB_DIG15 = L3_TM_CALIB_DIG15 | ((r_code & 0x1) << 7)
-+	    | 0x40 | 0x8 | ((i_code >> 1) & 0x7);
-+
-+	L3_TM_CALIB_DIG14 = mask_read(0xFD40EC38, 0xFFFFFF3F);
-+	L3_TM_CALIB_DIG14 = L3_TM_CALIB_DIG14 | ((i_code & 0x1) << 7) | 0x40;
-+
-+	Xil_Out32(0xFD40EC50, L3_TM_CALIB_DIG20);
-+	Xil_Out32(0xFD40EC4C, L3_TM_CALIB_DIG19);
-+	Xil_Out32(0xFD40EC48, L3_TM_CALIB_DIG18);
-+	Xil_Out32(0xFD40EC40, L3_TM_CALIB_DIG16);
-+	Xil_Out32(0xFD40EC3C, L3_TM_CALIB_DIG15);
-+	Xil_Out32(0xFD40EC38, L3_TM_CALIB_DIG14);
-+	return maskstatus;
-+}
-+
-+static int init_serdes(void)
-+{
-+	int status = 1;
-+
-+	status &= psu_resetin_init_data();
-+
-+	status &= serdes_fixcal_code();
-+	status &= serdes_enb_coarse_saturation();
-+
-+	status &= psu_serdes_init_data();
-+	status &= psu_resetout_init_data();
-+
-+	return status;
-+}
-+
- static void init_peripheral(void)
- {
- 	psu_mask_write(0xFD5F0018, 0x8000001FU, 0x8000001FU);
-@@ -927,6 +1183,7 @@ int psu_init(void)
- 	status &= psu_ddr_init_data();
- 	status &= psu_ddr_phybringup_data();
- 	status &= psu_peripherals_init_data();
-+	status &= init_serdes();
- 	init_peripheral();
- 
- 	status &= psu_afi_config();
--- 
-2.25.1
+good.
+
+> 
+>> And no issue to add serdes initialization to psu_init to get boot OS part to
+>> work till someone has time to wire psgtr driver with dwc3 to configure it at run
+>> time.
+> 
+> Is someone currently working on wiring psgtr driver with dwc3?
+
+I don't think so.
+
+> 
+> If this were to happen soon, than this psu_init_gpl.c patch
+> would become unnecessary.
+
+I will take some time to get there that's why it is fine to enable serdes lines 
+via psu_init. You can put k24 to kv260/kr260 carrier cards but that's not normal 
+mode of operations that's why it shouldn't be a problem.
+Maybe it is nice to test it to see but definitely not requirement.
+
+Thanks,
+Michal
 
