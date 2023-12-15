@@ -4,62 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01264C4167B
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0829C4167B
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 19:23:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C9BF87C4A;
-	Fri, 15 Dec 2023 20:22:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 30DCF87C6F;
+	Fri, 15 Dec 2023 20:23:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="DxLpzmtg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CJNdfFGP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE96E87C6F; Fri, 15 Dec 2023 20:22:26 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 29E8687C6F; Fri, 15 Dec 2023 20:23:35 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BA9487C45
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:22:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 962C687C46
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 20:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8DF4D3F5F0; 
- Fri, 15 Dec 2023 19:22:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702668139;
- bh=u18/5lFC0XIL+NSLRVYOPSDAdlePlnRIS0NlorStt8U=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=DxLpzmtgo1TX2UR2ZGy/s/hvRSh3Ly2k2C+2DMqDk12XwuNjbSQvZk3ytmwBORZiG
- ZgDhVHHruWN2Ln23aJWlUFizbkUoB8VCI7SOUpfJ8FQUc8chnsHS/UOMNfaqc/qHP7
- 5cOBCgg2PXVpwgeQk6UnIqHRgo3DyTr9UVMRQE3RTlNCnUHgYqOa453Y166K3UP6lG
- vXNIUY8BkeyBaIuwOJbM/xWPaFlGYrqREoS8rtgwKiP1wCABfl/QkzY1D2m4H2uD05
- Q6SwnavTRqBBwepjwHu11vbnS0FzBzt0eZEmxXnRhYQFqj2rPAQhC+CUYsCgWB00Uj
- 5NmmWS8IvBGaQ==
-Message-ID: <a3e003c8-1681-466f-a224-4098d1ef7b22@canonical.com>
-Date: Fri, 15 Dec 2023 20:22:19 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-27fe16e8e02so147138a91.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 11:23:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702668211; x=1703273011; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VW/luWXRBA0rcZmnhbTG2EpP+cLibkUDOLGCpPeQzbs=;
+ b=CJNdfFGPK0b2BHhkYF9KgH/A7Q3rbsO2FPTyxFNq4iSR0w78IC6wAidc52eq0nQRNM
+ ZhIH30Leib4NzyH4wvQxGDWSJhF/gGtPhWrvCtq8K80+oEt5nYgIf47a/3Xad1iy48z/
+ 8i0Qg93WAOu3P0zTZzo0MSL+GZaIgyTwvdN8dowrAwUYmD2ydXmgk9oLZh+fwyngou2/
+ BQKzatwyUY6kNj9KPEXGfaj/HCxhsAqpC9pkNFSGhexRaeae0YtlH8HlfeJlWNwI9Ikn
+ gcLXo3GXUS2NzyudMTo6eJ0tEIP+hrjWWUxNtGuKC1c9NyE3zpPAmuPpVGwlFh9WqxBb
+ LhWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702668211; x=1703273011;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VW/luWXRBA0rcZmnhbTG2EpP+cLibkUDOLGCpPeQzbs=;
+ b=PfLYdmWCBA0D7JsHqHH8a6LJ2Hrs93o/PuytfxyfYHCMsIIWZxpE0CsCK+pVT2AToK
+ VfzNNocL2G3RL9++HAL0yt436mXSsPgzOKhOvTy9KERSI00CluIu9ag2roplJgdO4T11
+ LgY5+oQdmG7evek4ZNHYmLOonDJLcyAOnxxhyIsjyBlQBNkTG2UbK5ALTDANJxUxMf8w
+ zs5dWfG7oJgROlFG/U+iWG0kLJ56y+qnI/YDO4hVSf5CRhacXmWcVECbAhdd9+nk8pgD
+ VRcFWSslUDEjksc2nF8OxBa6FVvuVIz439ZhG7N15H43PgPJa5NFxZT4o2Eao5fmCwy5
+ C7Dw==
+X-Gm-Message-State: AOJu0Yz+9gAVw7sF7DCfm9LWItMfjcd1/2naTj+Sn5hWWonLuFC9jvbO
+ /OtPAZrujI5aBiKwFxm/1b/53khiwxsSG7Aufc8=
+X-Google-Smtp-Source: AGHT+IEXz/2K2xvPLCfjub3ljvKprPtAe0IQfkmTCXSqC8KOedlq9TG8J6Fz9ZKwEmIPvQlR2mUChZiOZeixDdec6Zc=
+X-Received: by 2002:a17:90a:4f4e:b0:28b:3d3b:865f with SMTP id
+ w14-20020a17090a4f4e00b0028b3d3b865fmr1369784pjl.0.1702668210931; Fri, 15 Dec
+ 2023 11:23:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] cmd: acpi: check HW reduced flag in acpi list
-Content-Language: en-US, de-DE
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+References: <20220830174932.96360-1-alan@londelec.com>
+ <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
+ <20231009094924.56042353@wsk>
+ <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
+ <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5Di2RxqmrCW-OYt+b4g-823wrP0JF6Gkb3P7=gMb3kEwQ@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 15 Dec 2023 16:23:18 -0300
+Message-ID: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
+Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
+ from DCDC_BATT without 5V
+To: Alan Kay <alan@londelec.com>
+Cc: Lukasz Majewski <lukma@denx.de>, cody@londelec.com,
+ Stefano Babic <sbabic@denx.de>, 
+ Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  u-boot@lists.denx.de
-References: <20231215164016.137794-1-heinrich.schuchardt@canonical.com>
- <20231215164016.137794-4-heinrich.schuchardt@canonical.com>
- <ZXyRDStdm4J__CIX@smile.fi.intel.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <ZXyRDStdm4J__CIX@smile.fi.intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,33 +94,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/15/23 18:46, Andy Shevchenko wrote:
-> On Fri, Dec 15, 2023 at 05:40:16PM +0100, Heinrich Schuchardt wrote:
->> On non x86 platforms the hardware reduce flag must be set in the FADT
->> table. Write an error message if the flag is missing.
-> 
-> ...
-> 
->> +	if (!IS_ENABLED(CONFIG_X86) &&
->> +	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
->> +		log_err("FADT not ACPI hardware reduced compliant\n");
-> 
-> I guess it's half baked solution as this, HW reduced, flag adds more
-> limitations even on x86. If you want a good validation it should be done
-> in a separate function taking others aspects into account.
-> 
-> But since it doesn't affect my area of interest in U-Boot, I won't prevent
-> you from doing this way, it's up to the U-Boot maintainers how to proceed
-> with it.
-> 
+On Fri, Dec 15, 2023 at 1:20=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 
-This flag is checked by Linux. It won't boot at all if the flag is not 
-set on arm64 or riscv64. See arch/arm64/kernel/acpi.c and 
-arch/riscv/kernel/acpi.c, function acpi_fadt_sanity_check().
+> Ok, what about the patch below?
+>
+> https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-co=
+dy@londelec.com/
+>
+> Is this still needed?
 
-Once you have booted you can use the Firmware Test Suite (FWTS) to check 
-the rest. I don't plan rewriting such a validation in U-Boot.
-
-Best regards
-
-Heinrich
+I looked in the i.MX28 Reference Manual, and the one above looks a
+correct fix. I will queue it.
