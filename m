@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF71C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 07:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26E4DC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 07:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F45387A4E;
-	Fri, 15 Dec 2023 08:13:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 930CD878FE;
+	Fri, 15 Dec 2023 08:15:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BjqbK9IU";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="KHORejey";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E83F487A4B; Fri, 15 Dec 2023 08:13:56 +0100 (CET)
-Received: from mail-m17214.xmail.ntesmail.com (mail-m17214.xmail.ntesmail.com
- [45.195.17.214])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B02587ADA; Fri, 15 Dec 2023 08:15:32 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.120])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86C9187ABC
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:13:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6F1DF8709C
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 08:15:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=BjqbK9IUB6PQM5oYbbIP/MBbgb74OoOOftVj1d8fIG6/2mv/MmWdtk7wE7jfD0O8F8pbOVcpIZ51UK7u0LWlSgGgrtB7bOzrwRBcJ2r3XYsyFZY7F+Z+im883aVcHT5TocHMibRcgfphVI8onSJscF67YDXYwJksZKQQvzqe4x4=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=fGCZXGVSQoh76nf2JIo1gu35cFnTGgnh2YI92PtRwho=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 83AB5400497;
- Fri, 15 Dec 2023 15:13:38 +0800 (CST)
-Message-ID: <f04a716f-1383-493c-87b5-e39edacee857@rock-chips.com>
-Date: Fri, 15 Dec 2023 15:13:36 +0800
+ dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1702624529; x=1734160529;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=BCZmaJ05K+85ihGe/Z3zg2FwG7m1grBcw5qPjmAaZ68=;
+ b=KHORejeyBOdUl7OmuEpiSF29TLmLWh5Qzy5n8gHlLuxPEymG1uQMeoh6
+ JsYOBqHTraJ6XYnxgUgoIwAzpOGZoJzla0XKRf8vMo6GHzCgpFGbiW/Fy
+ xi8lDzzZIxOHDKHbQYgFIocvP7TVtiAFcqjjivKubi3lJaUlVJY3tgQba
+ XdoE5yzMZGOt0vRr5TCNfOTP7CHcaqaUM6y7g8DB4H5pTkNlKVwuWftfi
+ 49qruAcTjqiWk0HIR+MetBGTzACJEYyT/YPugmEsoySm63NqialMeepRC
+ EPhbp3yjAXqUg2rOy/lthrSvmvZaaDlrvHveINCLUskDEg/iQmklH8kic Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10924"; a="394113512"
+X-IronPort-AV: E=Sophos;i="6.04,277,1695711600"; d="scan'208";a="394113512"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+ by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Dec 2023 23:15:26 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.04,278,1695711600"; d="scan'208";a="16188176"
+Received: from ppglcf0283.png.intel.com ([10.126.161.129])
+ by orviesa002.jf.intel.com with ESMTP; 14 Dec 2023 23:15:22 -0800
+From: dinesh.maniyam@intel.com
+To: u-boot@lists.denx.de
+Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
+ Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
+ Alif <alif.zakuan.yuslaimi@intel.com>,
+ Teik Heng <teik.heng.chong@intel.com>,
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>,
+ Jit Loon Lim <jit.loon.lim@intel.com>,
+ Sieu Mun Tang <sieu.mun.tang@intel.com>
+Subject: [PATCH] clk: altera: n5x: Fix MEMCLKMGR_EXTCNTRST_C0CNTRST to bit(0)
+Date: Fri, 15 Dec 2023 15:15:19 +0800
+Message-Id: <20231215071519.25270-1-dinesh.maniyam@intel.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/17] video: dw_hdmi: Support Vendor PHY
-Content-Language: en-US
-To: Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner
- <heiko@sntech.de>, Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
- =?UTF-8?B?6Jab5bCP5piO?= <xxm@rock-chips.com>, =?UTF-8?B?5pON55Ge5p2w?=
- <algea.cao@rock-chips.com>, =?UTF-8?B?6Zer5a2d5Yab?=
- <andy.yan@rock-chips.com>
-References: <20231211085939.5478-1-jagan@amarulasolutions.com>
- <CAMty3ZBNC7Fpi-S4uOwfJ3ULWQ27PiVAKTqbnQKB3nB5vXHrhg@mail.gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <CAMty3ZBNC7Fpi-S4uOwfJ3ULWQ27PiVAKTqbnQKB3nB5vXHrhg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGBofVh0fQkhMHk5KTk5ITFUTARMWGhIXJBQOD1
- lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSVVKS0tVSkJZBg++
-X-HM-Tid: 0a8c6c52de3c2eb3kusn83ab5400497
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBQ6Mhw6ITw0DTdLViMpDgE5
- L08aFA1VSlVKTEtJTUlPT0lLS0NJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU5ISE03Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,80 +79,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan,
+From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-On 2023/12/15 14:36, Jagan Teki wrote:
-> Hi Heiko/Kerver/Anatoloj,
->
-> On Mon, Dec 11, 2023 at 2:30 PM Jagan Teki <jagan@amarulasolutions.com> wrote:
->> Unlike RK3399, Sunxi/Meson DW HDMI the new Rockchip SoC Rk3328 would
->> support external vendor PHY with DW HDMI chip.
->>
->> Support this vendor PHY by adding new platform PHY ops via DW HDMI
->> driver and call the respective generic phy from platform driver code.
->>
->> This series tested in RK3328 with 1080p (1920x1080) resolution.
->>
->> Patch 0001/0005: Support Vendor PHY
->> Patch 0006/0008: VOP extension for win, dsp offsets
->> Patch 0009/0010: RK3328 VOP, HDMI clocks
->> Patch 0011:      Rockchip Inno HDMI PHY
->> Patch 0012:      RK3328 HDMI driver
->> Patch 0013:      RK3328 VOP driver
->> Patch 0014/0017: Enable HDMI Out for RK3328
->>
->> Importent:
->> One pontential issues is that Linux HDMI out on RK3328 has effected by
->> this patchset as I wouldn't find any relation or clue.
->>
->> [    0.752016] Loading compiled-in X.509 certificates
->> [    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
->> [    0.788391] inno-hdmi-phy ff430000.phy: inno_hdmi_phy_rk3328_clk_recalc_rate rate 148500000 vco 148500000
->> [    0.798353] rockchip-drm display-subsystem: bound ff370000.vop (ops vop_component_ops)
->> [    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not found, using dummy regulator
->> [    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed out, status: 0x00004b
->> [    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not found, using dummy regulator
->> [    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed out, status: 0x00004b
->> [    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX controller v2.11a with HDCP (inno_dw_hdmi_phy2)
->> [    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare HDMI I2C bus driver
->> [    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi (ops dw_hdmi_rockchip_ops)
->> [    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for display-subsystem on minor 0
->>
->> The only way I can use Linux HDMI by disabling IOMMU or support
->> disable-iommu link for RK3328 via DT [1].
->>
->> [1] https://www.spinics.net/lists/devicetree/msg605124.html
-> Is anyone aware of this issue? I did post the patches for Linux IOMMU
-> but seems not a proper solution. Any suggestions?
+MEMCLKMGR_EXTCNTRST_C0CNTRST register defined as BIT[0] in documentation
+but it is wrongly defined as BIT[7] in u-boot code. This register is used
+to hold associated pingpong counter in reset
+while PLL and 5:1 mux configuration is changed.
 
-I'm not expert in HDMI/VOP, so I can't provide a suitable solution in 
-the kernel,
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
+---
+ drivers/clk/altera/clk-mem-n5x.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-but here is the reason why we need patch to workaround the issue in the 
-kernel:
+diff --git a/drivers/clk/altera/clk-mem-n5x.h b/drivers/clk/altera/clk-mem-n5x.h
+index 7b687012e8..c6bc44bb34 100644
+--- a/drivers/clk/altera/clk-mem-n5x.h
++++ b/drivers/clk/altera/clk-mem-n5x.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+ /*
+- * Copyright (C) 2020-2022 Intel Corporation <www.intel.com>
++ * Copyright (C) 2020-2023 Intel Corporation <www.intel.com>
+  */
+ 
+ #ifndef	_CLK_MEM_N5X_
+@@ -77,7 +77,7 @@
+ #define MEMCLKMGR_PLLOUTDIV_C0CNT_MASK			GENMASK(4, 0)
+ #define MEMCLKMGR_PLLOUTDIV_C0CNT_OFFSET		0
+ 
+-#define MEMCLKMGR_EXTCNTRST_C0CNTRST			BIT(7)
++#define MEMCLKMGR_EXTCNTRST_C0CNTRST			BIT(0)
+ #define MEMCLKMGR_EXTCNTRST_ALLCNTRST			\
+ 	(MEMCLKMGR_EXTCNTRST_C0CNTRST)
+ 
+-- 
+2.26.2
 
-- The VOP driver working in U-Boot is non-IOMMU mode, and the VOP access 
-DDR by physical address;
-
-- The VOP driver working in kernel with IOMMU enabled(by default), the 
-VOP access DDR with virtual address(by IOMMU);
-
-- The VOP is keep working in kernel before kernel VOP driver is enabled, 
-and the IOMMU driver will be enabled by
-
-    the Linux PM framework, since the IOMMU is not correctly configured 
-at this point, the VOP will access unknown
-
-     space(the original physical address in U-Boot) convert by IOMMU;
-
-So we need to disable the IOMMU temporary in kernel startup before VOP 
-driver is enabled.
-
-
-Thanks,
-
-- Kever
-
->
-> Thanks,
-> Jagan.
