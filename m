@@ -4,85 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ED0C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 06:06:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F98AC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 06:25:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14E9A87AEC;
-	Fri, 15 Dec 2023 07:06:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 46CF787B35;
+	Fri, 15 Dec 2023 07:25:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xTD2MQjW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xWRJ+H5L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16F5E87B4C; Fri, 15 Dec 2023 07:06:32 +0100 (CET)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B3FF587A93; Fri, 15 Dec 2023 07:25:30 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA8B687AEC
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 07:06:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AFA087B25
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 07:25:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-464a3b84ef7so836756137.1
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 22:06:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702620388; x=1703225188; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QgQDb2dMpB2gLncYNtzo5iKnhAw3wUiPEOkXIqBOgMU=;
- b=xTD2MQjWDGh2jxMYOJ083gy7JJQiCXxPXd9O/Ty9LenP+dX8RkxvMdwNHH78CWIGnT
- SV8Yq/L4TOFYlLyIFg6TA/7Sj9IaXAh83ym/Xw1+DC8w+7dwqAe99/F5Jc9YtAFZk5ZN
- kJWbbiewXGvdow01emuf59E5h6faWbi/kZYyQSdpe0LTctBhNa284p/gmsZiIF/MTydW
- R/N6ApslXvKSmDzztjYfeentLyb0yfQqWE1k0rreY9PYUQNu2DKbiA6QyXT68ekX+u9g
- 6nXsgNlOnloA98KMIKiDwoBxBLYA6R3UPPElc1G16FicN0zXLnqlvMxd9QSXSLEtH6Sq
- vcew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702620388; x=1703225188;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QgQDb2dMpB2gLncYNtzo5iKnhAw3wUiPEOkXIqBOgMU=;
- b=Y2zy+DnDsNJq0BVeevJUA9+K1nkXbxudKR4Yv3cJh8oXgMMzpMLGLNUYs/8FDijeZ4
- jrdlkBGw9t/WH05P+DdeVgsX8xFWtmEmz7YhAtwURNGiDb55bGhc8rTPnH6jfNsklhG1
- 323bh6KGzxg1mT5zPQceEsLrSv27gk/PqFctQKKzPfkA4gULEVB2R9kDHPxlJwja8Iew
- SqdEGJI59JFctseNT7hTewCYTdL/RVRCGviUHKtOtiNqsv/AmuJ+Pg5sTxJAbwWegTRx
- Js3bEX+X8NZwAAckq2iLjcZnCtUhM6GbEKVrBju4+Nb9ovgK5ltPfdSR7DYDBRUf0IhG
- h/vQ==
-X-Gm-Message-State: AOJu0Yyo3b5r14QGFRWbvoqVbZ4+DvZXMD/c0a9R344IGuJ6jddNHjwM
- zyZrk5GYLw2ezBgk51lJiqnIomztL7AnWvqtZdYFFg==
-X-Google-Smtp-Source: AGHT+IEaunAA8hpa6RM0FTyIE62dqupY6k0Ik8ie4irRPZ/LVR0m+5aZijZfz+Q6hyOhN2dAxWTxXFiPsXGV6gPGlrc=
-X-Received: by 2002:a67:be02:0:b0:464:7ad2:2dc with SMTP id
- x2-20020a67be02000000b004647ad202dcmr9915243vsq.28.1702620388476; Thu, 14 Dec
- 2023 22:06:28 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BF6PMx3079537;
+ Fri, 15 Dec 2023 00:25:22 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1702621522;
+ bh=t8btuuAPStPG5gMlYSKZ6tePxyu4FBbOF18CANvw+94=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=xWRJ+H5Lue1BAJFNpJtb1lp3L5qlaG4DDLmwXaKkMnT6HZBwmRHN5U/s+f//Al6dh
+ 32rUn2hIxKwrYQ6B7bZQR3BD38LWLVqPS1aUOcUAL4rmpRgYjQS4PuduOTzWVZPYNP
+ y62OUtOoy9xilQsWYe1dwDUES3VMSs0zKa1npMuY=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BF6PMKn086684
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 15 Dec 2023 00:25:22 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 15
+ Dec 2023 00:25:21 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 15 Dec 2023 00:25:21 -0600
+Received: from localhost (uda0496754.dhcp.ti.com [172.24.227.218])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BF6PLoH122203;
+ Fri, 15 Dec 2023 00:25:21 -0600
+Date: Fri, 15 Dec 2023 11:55:20 +0530
+From: Prasanth Mantena <p-mantena@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
+ <matwey.kornilov@gmail.com>, <jkridner@beagleboard.org>,
+ <robertcnelson@gmail.com>, <u-boot@lists.denx.de>, <nm@ti.com>,
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-nandan@ti.com>
+Subject: Re: [PATCH v3] board: ti: common: board_detect: Fix EEPROM offset
+ read for 1-byte
+Message-ID: <20231215062519.5yb2x7ecek2imrbu@uda0496754>
+References: <20231030170458.21668-1-p-mantena@ti.com>
+ <9f562302-3fb5-4b79-acec-5bf6f201f29f@ti.com>
 MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
- <20231214182328.GQ2513409@bill-the-cat>
- <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
- <20231214201511.GR2513409@bill-the-cat>
-In-Reply-To: <20231214201511.GR2513409@bill-the-cat>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 15 Dec 2023 11:36:17 +0530
-Message-ID: <CAFA6WYME3EGnedt=1ASm_mTzp+--OTjPSKvQG-Pj=9RbxgeYtQ@mail.gmail.com>
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-To: Tom Rini <trini@konsulko.com>
-Cc: Rob Herring <robh+dt@kernel.org>, neil.armstrong@linaro.org,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org, 
- dgilmore@fedoraproject.org, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <9f562302-3fb5-4b79-acec-5bf6f201f29f@ti.com>
+User-Agent: NeoMutt/20171215
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,77 +83,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Dec 2023 at 01:45, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Dec 14, 2023 at 01:48:42PM -0600, Rob Herring wrote:
-> > On Thu, Dec 14, 2023 at 12:23=E2=80=AFPM Tom Rini <trini@konsulko.com> =
-wrote:
-> > >
-> > > On Thu, Dec 14, 2023 at 03:53:11PM +0100, neil.armstrong@linaro.org w=
-rote:
-> > > > Hi,
-> > > >
-> > > > On 14/12/2023 14:50, Sumit Garg wrote:
-> > > > > Prerquisite
-> > > >
-> > > > s/Prerquisite/Prerequisite/
-> > > >
-> > > > > -----------
-> > > > >
-> > > > > This patch series requires devicetree-rebasing git repo to be add=
-ed as a
-> > > > > subtree to the main U-boot repo via:
-> > > > >
-> > > > > $ git subtree add --prefix devicetree-rebasing \
-> > > > >        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/d=
-evicetree-rebasing.git \
-> > > > >        v6.6-dts --squash
-> > > >
-> > > > So I think the big question is: when should the subtree be updated =
-?
-> > > >
-> > > > Because as we discussed in the previous GH pull request, if a bindi=
-ngs changes
-> > > > was made in the upstream Linux DT, then the subtree update should w=
-ait until
-> > > > the u-boot support is merged before updating. This could cause a lo=
-t of frustration.
-> > > >
-> > > > And this could cause a lot of regressions, even more if both Linux =
-and U-boot are
-> > > > not maintained by the same people.
-> > >
-> > > I think some of the important questions to ask are, how often / likel=
-y
-> > > are the breakages to occur? It seems like these days it's either:
-> > > - U-Boot had an early version of the binding and we already state we
-> > >   don't support backwards compatibility here. It should be on the
-> > >   maintainer to be proactive in this case.
-> > > - It's a "the DT was wrong about the hardware, sorry not sorry it's a=
-n
-> > >   incompatible DTS change now". This too is hopefully the kind of thi=
-ng
-> > >   that at least board maintainers will be more actively aware of need=
-ing
-> > >   to deal with in U-Boot, if it's really a problem.
-> >
-> > A common issue in the kernel is with forward compatibility when
-> > platforms add new resources from a new provider. Then the kernel
-> > expects a driver for the provider and waits for the dependency. Of
-> > course, older kernels don't have that provider driver and so the
-> > dependency is never met. Not sure if u-boot will have similar issues?
-> > At least you should/could know if the provider driver exists or not.
-> > (The kernel doesn't because modules.)
->
-> I think we'll be fine, but time will tell. And perhaps the more frequent
-> re-syncing will make any sort of corner cases show up more quickly and
-> be something we can figure out how to resolve going forward really.
->
+On 15:15-20231107, Neha Malcom Francis wrote:
+> Hi Prasanth,
+> 
+> On 30/10/23 22:34, Prasanth Babu Mantena wrote:
+> > EEPROM detection logic in ti_i2c_eeprom_get() involves reading
+> > the total size and the 1-byte size with an offset 1. The commit
+> > 9f393a2d7af8 ("board: ti: common: board_detect: Fix EEPROM read
+> > quirk for 2-byte") that attempts to fix this uses a wrong pointer to
+> > compare.
+> > 
+> > The value with one offset is read into offset_test, but the pointer
+> > used to match was still ep, resulting in an invalid comparison of the
+> > values. The intent is to identify bad 2-byte addressing eeproms that
+> > get stuck on the successive reads.
+> > 
+> > Fixes: 9f393a2d7af8 (board: ti: common: board_detect: Fix EEPROM read quirk for 2-byte)
+> > Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+> > Tested-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
+> > ---
+> > v3 <--> v2:
+> > Improved and concise commit description.
+> > 
+> > v2 <--> v1:
+> > Fix inplace for the else condition of CONFIG_IS_ENABLED(DM_I2C).
+> > Improved commit message.
+> > 
+> >   board/ti/common/board_detect.c | 4 ++--
+> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
+> > index 9a53884c98..869f7a47f8 100644
+> > --- a/board/ti/common/board_detect.c
+> > +++ b/board/ti/common/board_detect.c
+> > @@ -128,7 +128,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
+> >   	rc = dm_i2c_read(dev, 0x1, &offset_test, sizeof(offset_test));
+> > -	if (*((u32 *)ep) != (header & 0xFF))
+> > +	if (offset_test != ((header >> 8) & 0xFF))
+> >   		one_byte_addressing = false;
+> >   	/* Corrupted data??? */
+> > @@ -180,7 +180,7 @@ static int __maybe_unused ti_i2c_eeprom_get(int bus_addr, int dev_addr,
+> >   	rc = i2c_read(dev_addr, 0x1, byte, &offset_test, sizeof(offset_test));
+> > -	if (*((u32 *)ep) != (header & 0xFF))
+> > +	if (offset_test != ((header >> 8) & 0xFF))
+> >   		one_byte_addressing = false;
+> >   	/* Corrupted data??? */
+> 
+> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+> 
 
-Agree, frequent re-syncing is something we should aim for. However, if
-required then we can always revisit our approach.
+Can this patch be considered for merge considering no further comments.
 
--Sumit
+Regards,
+Prasanth
 
-> --
-> Tom
+
+
+> -- 
+> Thanking You
+> Neha Malcom Francis
