@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF1AC35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D3BBC35274
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 13:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49A0487BC7;
+	by phobos.denx.de (Postfix) with ESMTP id B85AD87BDA;
 	Fri, 15 Dec 2023 14:32:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="g6bKksWK";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GcpTfFaX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3FD987BD6; Fri, 15 Dec 2023 14:32:56 +0100 (CET)
+ id 4F04387BD6; Fri, 15 Dec 2023 14:32:57 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA83C87BC9
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60EBB87BA7
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 14:32:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A71DC401CA; 
- Fri, 15 Dec 2023 13:32:53 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 4648C401CB; 
+ Fri, 15 Dec 2023 13:32:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1702647174;
- bh=dRhHp3eubmq10gkP4o+3iqVJ9lryyYfLavvQszTyaSU=;
+ bh=vMVoYmp5WOHeBxoRJpVCCugWSdkffVUKYX1VKS2DdAc=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=g6bKksWKsJ56dkYUUhgOb5aIQQ20v7jkUBWxDD1MA60rc0B/kJsUtGCPincHWDDLM
- 0X49i7tL2KTFkjMN8usd8zXAVA6ilh/RnNbq6r/qxD+srj2Z46FFtTlD1ddYLUAe/e
- XD7hD9X3BDb7kfcfW8gTz51wpJ2/stynPTg6bN1KQiHT5qhVMRxIFKO95sdoxr0eqT
- gpdFB0bXDkK8F7noq7KN3xpwtyaNmCbJ/8L6FvPLL9vwOP0J7fLYkJBkWll4P8vXxZ
- tmmG/5ah/wKESuRaWlIwLWX1KazAKs/pAxbINloPQQyy/EfpdjVXkdW8kCcR3rZZDa
- luPZsxKWILgeA==
+ b=GcpTfFaXic+UlxkDoYVkSfS2zregOf5LLqS4ETW95+YP8GEwRoAUzKL3gji11GAks
+ Lmv1JNnTvo+429oAdmX1ZIVL1jb7HMb6MixGUAs948SY3/ObAi5EolAc8SjUmRVEwv
+ RyZGzkSN5WtvEattIIDyjq+WWdSYsGuYr9rn382nl/o3jkvGIYkPa+Y9SzzhNuBPSO
+ p3xVUQNQNYQD8NIOT5vbEt55HvY2+Biwes/luruOBizlTkfha44uR43Ayh3tFTwQeS
+ xwohaj8dSojqJcbtlkEY16nCzeoEJGlcyD3ktwL4kzS3dA7m6cBLvN9wanI10kgbKs
+ PBSxHCLG8pgtA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -51,9 +51,9 @@ Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 3/9] arrm: add ACPI fields to global data
-Date: Fri, 15 Dec 2023 14:32:39 +0100
-Message-Id: <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 4/9] risc-v: add ACPI fields to global data
+Date: Fri, 15 Dec 2023 14:32:40 +0100
+Message-Id: <20231215133245.7923-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
 References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
@@ -78,28 +78,29 @@ X-Virus-Status: Clean
 Add fields for the location of ACPI tables to the global data.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 v2:
-	new patch
+	no change
 ---
- arch/arm/include/asm/global_data.h | 4 ++++
+ arch/riscv/include/asm/global_data.h | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
-index 75bd9d56f8..9505399bb1 100644
---- a/arch/arm/include/asm/global_data.h
-+++ b/arch/arm/include/asm/global_data.h
-@@ -19,6 +19,10 @@ struct arch_global_data {
- #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
- 	u32 sdhc_clk;
+diff --git a/arch/riscv/include/asm/global_data.h b/arch/riscv/include/asm/global_data.h
+index 937fa4d154..a8f6a217f1 100644
+--- a/arch/riscv/include/asm/global_data.h
++++ b/arch/riscv/include/asm/global_data.h
+@@ -32,6 +32,10 @@ struct arch_global_data {
+ 	ulong available_harts;
+ #endif
  #endif
 +	ulong table_start;		/* Start address of ACPI tables */
 +	ulong table_end;		/* End address of ACPI tables */
 +	ulong table_start_high;		/* Start address of high ACPI tables */
 +	ulong table_end_high;		/* End address of high ACPI tables */
- 
- #if defined(CONFIG_FSL_ESDHC)
- 	u32 sdhc_per_clk;
+ #ifdef CONFIG_SMBIOS
+ 	ulong smbios_start;		/* Start address of SMBIOS table */
+ #endif
 -- 
 2.40.1
 
