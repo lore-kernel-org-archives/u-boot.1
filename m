@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 089F6C4332F
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51B7CC4332F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 04:20:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9723D87B22;
-	Fri, 15 Dec 2023 05:19:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34A2B87B46;
+	Fri, 15 Dec 2023 05:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Um9pz5z6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DTnZsLCL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A9C87ACC; Fri, 15 Dec 2023 05:19:33 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id C6FB887AEC; Fri, 15 Dec 2023 05:19:34 +0100 (CET)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2CA987AD1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E2EE87AE6
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 05:19:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3b9fd7b14cdso606235b6e.0
- for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:30 -0800 (PST)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6d9d84019c5so266814a34.3
+ for <u-boot@lists.denx.de>; Thu, 14 Dec 2023 20:19:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702613969; x=1703218769; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702613971; x=1703218771; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iEgB7J6hsLrYRoaXWmBiq87MXmVGCUA5a+v4rnf7LGw=;
- b=Um9pz5z6rIOY2rs6c28Df73XDiJmCg7CYpcVfIXu/iw641saCDoC8zLKioJ4XGW9d5
- rtssIClYHhfAhohYhJNWC73Eo1720S+mmwwQx0GXFHXhFABYyhpKS7RAlodI4F7ulB9a
- euYx5PoSjYAJYYreo347D1dziaZQ4EsZuorww=
+ bh=k2lOOuEzycbKJc6a2CuFfwtNI0BFTM35wRHtzHB1oQw=;
+ b=DTnZsLCLzuY8NYgIxJVGyK8DLCOrVuB68M7W3ApRZ7oNkzTb5zwhcfh9TXjUJ4pBBm
+ N8WXvWlgt0ryyWj0MXqDX3PdimFwogEQ3ZSk5i3nLjeTGQm+nsC+u2CkH45Lac6Q60aH
+ UVHPxDZeY/q8bDAgFGXHFNVSsWQwKR0vRkh/A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702613969; x=1703218769;
+ d=1e100.net; s=20230601; t=1702613971; x=1703218771;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iEgB7J6hsLrYRoaXWmBiq87MXmVGCUA5a+v4rnf7LGw=;
- b=pqcVroB3fRnFePVhefmQA2uBlZ3TOcueY1ouwcwJndPPnx04J4rrOHIvrJL9IHo8xN
- p36l8SlEyCJMOq2NMsAxaewgx2UF3Yqk42OSBD7jRqWPGblNnWuNDmDW9ssqYjnEMJuA
- pm9pjFe52HC1gbSD82+KPnPOCKUjG6GwOhxtoDTepQQZWSVpSd00gUdtsviADQcFXnt1
- Zk+Sg7/h4Wc492L2e9bo2pvnHTLhONYnV6ksKZvsWDcfUACb+QSQnSzkeTetM10yycLe
- UwUnauROTgzv4Ms2ikX2ffSf9gfQikkrF4xX/F6uLL+L4k4Y00PX6/P2J54324criz2f
- 8Kyw==
-X-Gm-Message-State: AOJu0Yy34/3nd7JebLm5v/Hi5PAZS74EHjoj+TivJe73xvVJzY0+LadM
- w0ocMHtOjgpebANZu1/NScEJPDHHu33Cemce1HRJZg==
-X-Google-Smtp-Source: AGHT+IE+1DAlbdjgflivd5fkk+/3wJskToGijZmSy29sUmZV1fAvwe3DkvlA94kRod0S5ezEV6sq0A==
-X-Received: by 2002:a05:6808:2dc3:b0:3ba:940:bc32 with SMTP id
- gn3-20020a0568082dc300b003ba0940bc32mr4775192oib.39.1702613969291; 
- Thu, 14 Dec 2023 20:19:29 -0800 (PST)
+ bh=k2lOOuEzycbKJc6a2CuFfwtNI0BFTM35wRHtzHB1oQw=;
+ b=lNG0GAGbOK/dI0y0h3rU1RGgqZLNE96MeDy3O9dzX2End9OBEOUoI4/DimgRPYkyIq
+ iW4iFkQRg3RT/WYWTGAFRigUU4o84GXxDGBNBAB7h6FL8isQwVVuvu8u4+PbfkdtDIeh
+ qIX9Ys46W7Ow/ZJLt3UUdVuSS/bAHLLbDF8ObCAa0Q5vuW66+FHzMhGN0QHETG6iyzbl
+ A7oXR8b4KeVcClL8KknkYs2/u803ROUOp1QtYIWuk1Uk//Aep2dS7T+LCguaO3c1qokn
+ l4DXf0l4OfR+xpLBojAxuo9TDAuWz4CaqdwCb4TPyrj56HlM1oZKoyW/9X8S1d2AltiB
+ jGdA==
+X-Gm-Message-State: AOJu0YydwpJuLHv2na93E9hZBFbT0CKfLvE8yF92C1a+D11EGWCCEaMg
+ C7DCvUMqc6SGbwYhaDU+Y0NEYzp/Q4uOW8VS1+4plQ==
+X-Google-Smtp-Source: AGHT+IEi+xvjypGnO4N4auqr2b+qjXK9cknhOXXxFPwq+7d8+4JzMftIY7lLXMn6q1ZIuLZGYZkH+w==
+X-Received: by 2002:a05:6808:ec7:b0:3b8:b063:825f with SMTP id
+ q7-20020a0568080ec700b003b8b063825fmr12576894oiv.97.1702613970777; 
+ Thu, 14 Dec 2023 20:19:30 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.28
+ be15-20020a056808218f00b003b898ffd8fcsm3601492oib.50.2023.12.14.20.19.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 20:19:29 -0800 (PST)
+ Thu, 14 Dec 2023 20:19:30 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH v2 03/16] bootm: Make OS booting dependent on BOOTM
-Date: Thu, 14 Dec 2023 21:19:01 -0700
-Message-ID: <20231215041919.2197788-3-sjg@chromium.org>
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Huan Wang <alison.wang@nxp.com>, Leo <ycliang@andestech.com>,
+ Marek Vasut <marex@denx.de>, Max Filippov <jcmvbkbc@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <sean.anderson@seco.com>, Thomas Chou <thomas@wytron.com.tw>,
+ Yu Chien Peter Lin <peterlin@andestech.com>, uboot-snps-arc@synopsys.com
+Subject: [PATCH v2 04/16] treewide: Make arch-specific bootm code depend on
+ BOOTM
+Date: Thu, 14 Dec 2023 21:19:02 -0700
+Message-ID: <20231215041919.2197788-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231215041919.2197788-1-sjg@chromium.org>
 References: <20231215041919.2197788-1-sjg@chromium.org>
@@ -95,152 +98,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Booting an OS does not require the 'bootm' command, so change the
-condition for these options.
-
-Move them into boot/ so they don't depend on CMDLINE
-
-Note that CMD_BOOTM_PRE_LOAD has been put directly into the bootm code
-so will need some additional refactoring (and a test!) to allow it to
-change over.
+Allow these functions to be compiled in when CONFIG_BOOTM is enabled,
+even if CONFIG_CMD_BOOTM is not.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v1)
 
- boot/Kconfig | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
- cmd/Kconfig  | 49 -------------------------------------------------
- 2 files changed, 49 insertions(+), 49 deletions(-)
+ arch/arc/lib/Makefile        | 2 +-
+ arch/arm/lib/Makefile        | 2 +-
+ arch/m68k/lib/Makefile       | 2 +-
+ arch/microblaze/lib/Makefile | 2 +-
+ arch/mips/lib/Makefile       | 2 +-
+ arch/nios2/lib/Makefile      | 2 +-
+ arch/powerpc/lib/Makefile    | 2 +-
+ arch/riscv/lib/Makefile      | 2 +-
+ arch/sandbox/lib/Makefile    | 2 +-
+ arch/sh/lib/Makefile         | 2 +-
+ arch/x86/lib/Makefile        | 2 +-
+ arch/xtensa/lib/Makefile     | 2 +-
+ 12 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 8b32a51f7e7c..9fa8789bc2b1 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -689,6 +689,55 @@ config BOOTM
- 	  This option should normally be enabled. It is used to implement the
- 	  'bootm' command.
+diff --git a/arch/arc/lib/Makefile b/arch/arc/lib/Makefile
+index 0eb44bcf33d0..bde1c3d8af3a 100644
+--- a/arch/arc/lib/Makefile
++++ b/arch/arc/lib/Makefile
+@@ -12,6 +12,6 @@ obj-y += reset.o
+ obj-y += ints_low.o
+ obj-y += init_helpers.o
  
-+config BOOTM_LINUX
-+	bool "Support booting Linux OS images"
-+	depends on BOOTM || CMD_BOOTZ || CMD_BOOTI
-+	default y
-+	help
-+	  Support booting the Linux kernel directly via a command such as bootm
-+	  or booti or bootz.
-+
-+config BOOTM_NETBSD
-+	bool "Support booting NetBSD (non-EFI) loader images"
-+	depends on BOOTM
-+	default y
-+	help
-+	  Support booting NetBSD via the bootm command.
-+
-+config BOOTM_OPENRTOS
-+	bool "Support booting OPENRTOS / FreeRTOS images"
-+	depends on BOOTM
-+	help
-+	  Support booting OPENRTOS / FreeRTOS via the bootm command.
-+
-+config BOOTM_OSE
-+	bool "Support booting Enea OSE images"
-+	depends on (ARM && (ARM64 || CPU_V7A || CPU_V7R) || SANDBOX || PPC || X86)
-+	depends on BOOTM
-+	help
-+	  Support booting Enea OSE images via the bootm command.
-+
-+config BOOTM_PLAN9
-+	bool "Support booting Plan9 OS images"
-+	depends on BOOTM
-+	default y
-+	help
-+	  Support booting Plan9 images via the bootm command.
-+
-+config BOOTM_RTEMS
-+	bool "Support booting RTEMS OS images"
-+	depends on BOOTM
-+	default y
-+	help
-+	  Support booting RTEMS images via the bootm command.
-+
-+config BOOTM_VXWORKS
-+	bool "Support booting VxWorks OS images"
-+	depends on BOOTM
-+	default y
-+	help
-+	  Support booting VxWorks images via the bootm command.
-+
- config ANDROID_BOOT_IMAGE
- 	bool "Android Boot Images"
- 	default y if FASTBOOT
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 2af66a66c1e1..116e53f972d0 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -291,48 +291,6 @@ config CMD_BOOTI
- 	help
- 	  Boot an AArch64 Linux Kernel image from memory.
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
  
--config BOOTM_LINUX
--	bool "Support booting Linux OS images"
--	depends on CMD_BOOTM || CMD_BOOTZ || CMD_BOOTI
--	default y
--	help
--	  Support booting the Linux kernel directly via a command such as bootm
--	  or booti or bootz.
--
--config BOOTM_NETBSD
--	bool "Support booting NetBSD (non-EFI) loader images"
--	depends on CMD_BOOTM
--	default y
--	help
--	  Support booting NetBSD via the bootm command.
--
--config BOOTM_OPENRTOS
--	bool "Support booting OPENRTOS / FreeRTOS images"
--	depends on CMD_BOOTM
--	help
--	  Support booting OPENRTOS / FreeRTOS via the bootm command.
--
--config BOOTM_OSE
--	bool "Support booting Enea OSE images"
--	depends on (ARM && (ARM64 || CPU_V7A || CPU_V7R) || SANDBOX || PPC || X86)
--	depends on CMD_BOOTM
--	help
--	  Support booting Enea OSE images via the bootm command.
--
--config BOOTM_PLAN9
--	bool "Support booting Plan9 OS images"
--	depends on CMD_BOOTM
--	default y
--	help
--	  Support booting Plan9 images via the bootm command.
--
--config BOOTM_RTEMS
--	bool "Support booting RTEMS OS images"
--	depends on CMD_BOOTM
--	default y
--	help
--	  Support booting RTEMS images via the bootm command.
--
- config CMD_SEAMA
- 	bool "Support read SEAMA NAND images"
- 	depends on MTD_RAW_NAND
-@@ -349,13 +307,6 @@ config CMD_VBE
- 	  is used to boot. Updating the parameters is not currently
- 	  supported.
+ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += _millicodethunk.o libgcc2.o
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index b1bcd3746625..b20a467f684c 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -31,7 +31,7 @@ endif
+ obj-$(CONFIG_CPU_V7M) += cmd_boot.o
+ obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
+ obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BOOTZ) += bootm.o zimage.o
+ else
+ obj-$(CONFIG_$(SPL_TPL_)FRAMEWORK) += spl.o
+diff --git a/arch/m68k/lib/Makefile b/arch/m68k/lib/Makefile
+index 6e1fd938f526..5ccd9545cb5c 100644
+--- a/arch/m68k/lib/Makefile
++++ b/arch/m68k/lib/Makefile
+@@ -8,7 +8,7 @@
+ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += lshrdi3.o muldi3.o ashldi3.o ashrdi3.o
  
--config BOOTM_VXWORKS
--	bool "Support booting VxWorks OS images"
--	depends on CMD_BOOTM
--	default y
--	help
--	  Support booting VxWorks images via the bootm command.
--
- config CMD_BOOTEFI
- 	bool "bootefi"
- 	depends on EFI_LOADER
+ obj-y	+= bdinfo.o
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-y	+= cache.o
+ obj-y	+= interrupts.o
+ obj-y	+= time.o
+diff --git a/arch/microblaze/lib/Makefile b/arch/microblaze/lib/Makefile
+index dfd8135f4f25..2f234825f804 100644
+--- a/arch/microblaze/lib/Makefile
++++ b/arch/microblaze/lib/Makefile
+@@ -3,6 +3,6 @@
+ # (C) Copyright 2003-2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BDI) += bdinfo.o
+ obj-y	+= muldi3.o
+diff --git a/arch/mips/lib/Makefile b/arch/mips/lib/Makefile
+index 9ee1fcb5c702..f8e162c53b58 100644
+--- a/arch/mips/lib/Makefile
++++ b/arch/mips/lib/Makefile
+@@ -10,7 +10,7 @@ obj-y	+= reloc.o
+ obj-y	+= stack.o
+ obj-y	+= traps.o
+ 
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_GO) += boot.o
+ obj-$(CONFIG_SPL_BUILD) += spl.o
+ 
+diff --git a/arch/nios2/lib/Makefile b/arch/nios2/lib/Makefile
+index a9f3c7100e72..68a5ca007d55 100644
+--- a/arch/nios2/lib/Makefile
++++ b/arch/nios2/lib/Makefile
+@@ -4,5 +4,5 @@
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+ 
+ obj-y	+= cache.o
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-y	+= libgcc.o
+diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
+index bb819dcbb6cc..dcce9834927d 100644
+--- a/arch/powerpc/lib/Makefile
++++ b/arch/powerpc/lib/Makefile
+@@ -34,7 +34,7 @@ obj-y	+= ticks.o
+ endif
+ obj-y	+= reloc.o
+ 
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-y	+= cache.o
+ obj-y	+= extable.o
+ obj-y	+= interrupts.o
+diff --git a/arch/riscv/lib/Makefile b/arch/riscv/lib/Makefile
+index 9a05b662fd63..0b2c88db6bad 100644
+--- a/arch/riscv/lib/Makefile
++++ b/arch/riscv/lib/Makefile
+@@ -6,7 +6,7 @@
+ # Copyright (C) 2017 Andes Technology Corporation
+ # Rick Chen, Andes Technology Corporation <rick@andestech.com>
+ 
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
+ obj-$(CONFIG_CMD_GO) += boot.o
+ obj-y	+= cache.o
+diff --git a/arch/sandbox/lib/Makefile b/arch/sandbox/lib/Makefile
+index a2bc5a7ee60f..c4924b23c832 100644
+--- a/arch/sandbox/lib/Makefile
++++ b/arch/sandbox/lib/Makefile
+@@ -7,5 +7,5 @@
+ 
+ obj-y	+= fdt_fixup.o interrupts.o sections.o
+ obj-$(CONFIG_PCI)	+= pci_io.o
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-$(CONFIG_CMD_BOOTZ) += bootm.o
+diff --git a/arch/sh/lib/Makefile b/arch/sh/lib/Makefile
+index e7520a328d54..8c3c30293a3c 100644
+--- a/arch/sh/lib/Makefile
++++ b/arch/sh/lib/Makefile
+@@ -6,7 +6,7 @@
+ extra-y	+= start.o
+ 
+ obj-y	+= board.o
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ obj-y	+= time.o
+ obj-$(CONFIG_CMD_SH_ZIMAGEBOOT) += zimageboot.o
+ 
+diff --git a/arch/x86/lib/Makefile b/arch/x86/lib/Makefile
+index 8fc35e1b51ea..94aa335ede4c 100644
+--- a/arch/x86/lib/Makefile
++++ b/arch/x86/lib/Makefile
+@@ -16,7 +16,7 @@ obj-$(CONFIG_X86_32BIT_INIT) += string.o
+ endif
+ 
+ ifndef CONFIG_SPL_BUILD
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ endif
+ obj-y	+= cmd_boot.o
+ obj-$(CONFIG_$(SPL_)COREBOOT_SYSINFO)	+= coreboot/
+diff --git a/arch/xtensa/lib/Makefile b/arch/xtensa/lib/Makefile
+index ad4fe32cb699..bb9157f30f0f 100644
+--- a/arch/xtensa/lib/Makefile
++++ b/arch/xtensa/lib/Makefile
+@@ -3,6 +3,6 @@
+ # (C) Copyright 2007 - 2013 Tensilica Inc.
+ # (C) Copyright 2014 - 2016 Cadence Design Systems Inc.
+ 
+-obj-$(CONFIG_CMD_BOOTM) += bootm.o
++obj-$(CONFIG_BOOTM) += bootm.o
+ 
+ obj-y	+= cache.o misc.o relocate.o time.o
 -- 
 2.43.0.472.g3155946c3a-goog
 
