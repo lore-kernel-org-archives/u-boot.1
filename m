@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88137C35274
-	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:41:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE34C41535
+	for <u-boot@archiver.kernel.org>; Fri, 15 Dec 2023 14:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A569087BCC;
-	Fri, 15 Dec 2023 15:41:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BE3087B9C;
+	Fri, 15 Dec 2023 15:42:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="giPq7tMP";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="uZrK8ikF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66F1587BB7; Fri, 15 Dec 2023 15:41:32 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D3C3987B77; Fri, 15 Dec 2023 15:42:32 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44C27875FA
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:41:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3744B87BD6
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 15:42:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-67ab16c38caso5049836d6.1
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 06:41:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702651289; x=1703256089; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WDifocf9+imxTEUjtITXQDzH0m0xAZuvKlFENsjgu+k=;
- b=giPq7tMPpDBMzqQ7XkwbsNg5Vda/Tdu0lHs506v9O3uzwusinXeT+zw4HDCr8ueesJ
- gYajqbWuW9iZ1xvF89fTHCF5FcA7LD20O8t+5ZwSXz9uwxK1PWDM2qMAan0bXwJlphpP
- K28MGcHK2qdTrivchg3uYhuj1xwGJ3WBZwpvs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702651289; x=1703256089;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WDifocf9+imxTEUjtITXQDzH0m0xAZuvKlFENsjgu+k=;
- b=YlpYSEwRqXSEWn2ay2b9TyLz6FYaVCY9DSV4nSwRv4RF8K4mUIH0ryf/pFA2uXuff+
- yalikIt5Lxtn4invfjEYv5je/wkwTqlXE40Jc+kVrRzZeIjVQsA/zblXOKDM5WMg5+cs
- IBqMzSGhD3RaJtQOwN3wOhejAJB4Knw66Hx5hZaCGL+8EYid7IN6xYkGL3hSiBWInoGh
- k2RlG5uX7yXDxOeSYi7SRhKpQ+5+k6NzVDQq1itXhRMoCRHmo9il2WcIhJlM/YPOGI7u
- Z0GvD16qFRa/nJlzY5m6WTPd3GjcpVC9k5J0IUihPqaKoj4HFAeociFT6rg/+Ktjot5j
- N/Hw==
-X-Gm-Message-State: AOJu0YwDd4Gza2+MfQj3Fg00psMn7UhlGNzVSVRTzO7YAuleJZuiY4IU
- +rMdrPjiyFr3lyjHdJYpOXw/6g==
-X-Google-Smtp-Source: AGHT+IFWIjQx8BR3AaWY+dBKl1+A11u40LiFyIC4v6g0WNuf8WWnkaQfZcOXKd7+RMlvONTuFDp9wg==
-X-Received: by 2002:a05:6214:d8c:b0:67f:9e3:f128 with SMTP id
- e12-20020a0562140d8c00b0067f09e3f128mr4074633qve.13.1702651289045; 
- Fri, 15 Dec 2023 06:41:29 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-faf3-908c-f76f-32dd.res6.spectrum.com.
- [2603:6081:7b00:6400:faf3:908c:f76f:32dd])
- by smtp.gmail.com with ESMTPSA id
- cx11-20020a056214188b00b0067ef50893afsm2492391qvb.115.2023.12.15.06.41.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 06:41:28 -0800 (PST)
-Date: Fri, 15 Dec 2023 09:41:26 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Alexander Dahl <ada@thorsis.com>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>, Terry Lv <terry.lv@nxp.com>
-Subject: Re: [PATCH v2 2/2] tools: fix build without LIBCRYPTO support
-Message-ID: <20231215144126.GZ2513409@bill-the-cat>
-References: <20231214121136.3286703-1-ada@thorsis.com>
- <20231214121136.3286703-3-ada@thorsis.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0713d16bf2=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3BF9TrKW006665; Fri, 15 Dec 2023 15:42:27 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=cepyr1K+SZomwnQrKIK7ucVYeK1okcGDtLp7lzkclqA=; b=uZ
+ rK8ikFiXewGydAI7ntIPlF+sIXtPgTCdRax4jfBbXi2yR8PZjm3Ti3pihfSwW3ql
+ cGf2ovbHv2y3dqrvkIXCjNcgibX27y3KlP0Nm8gI1TN94J5s4o48JTYFqx15LCKc
+ 9pXWJ2PFdL3xwQHlsi+NPwK8OmNjudv349QSrKCEuZONeghmz0GljVuMNfod+DWK
+ CGOftNZVK0mOdm1z+v+WhpyM1mcnQ2x/CiU8fwDpihtz901AkIqR5YGO+NuHpzZn
+ JsDxnkaLyxAmFP6PzBE8hYIso8HDtBcEa6Zoh9mRaFAsvgYMI7lktjhUhKDqwFGJ
+ Bhwoak+xjWkjOU0JTLIQ==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvg0ha0xj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 15 Dec 2023 15:42:27 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B2159100052;
+ Fri, 15 Dec 2023 15:42:26 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A828F228A22;
+ Fri, 15 Dec 2023 15:42:26 +0100 (CET)
+Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
+ 2023 15:42:26 +0100
+Message-ID: <ea021247-ce01-40bd-a162-4f938b10603d@foss.st.com>
+Date: Fri, 15 Dec 2023 15:42:25 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TQXXXYGeTHPKllxe"
-Content-Disposition: inline
-In-Reply-To: <20231214121136.3286703-3-ada@thorsis.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/6] ARM: dts: stm32f469-disco: sync with Linux 6.5
+Content-Language: en-US
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: <linux-amarula@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20231211220643.1073606-1-dario.binacchi@amarulasolutions.com>
+ <20231211220643.1073606-2-dario.binacchi@amarulasolutions.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20231211220643.1073606-2-dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.23.141]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-15_08,2023-12-14_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,49 +93,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TQXXXYGeTHPKllxe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 14, 2023 at 01:11:36PM +0100, Alexander Dahl wrote:
+On 12/11/23 23:05, Dario Binacchi wrote:
+> Sync the devicetree with linux 6.5 for stm32f746-disco board.
+> 
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> ---
+> 
+> (no changes since v2)
+> 
+> Changes in v2:
+> - Add Patrice Chotard's Reviewed-by tag.
+> 
+>  arch/arm/dts/stm32f469-disco.dts | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
+> index 6e0ffc1903be..c9acabf0f530 100644
+> --- a/arch/arm/dts/stm32f469-disco.dts
+> +++ b/arch/arm/dts/stm32f469-disco.dts
+> @@ -119,7 +119,7 @@
+>  		};
+>  	};
+>  
+> -	panel-dsi@0 {
+> +	panel@0 {
+>  		compatible = "orisetech,otm8009a";
+>  		reg = <0>; /* dsi virtual channel (0..3) */
+>  		reset-gpios = <&gpioh 7 GPIO_ACTIVE_LOW>;
+> @@ -138,7 +138,7 @@
+>  	status = "okay";
+>  
+>  	port {
+> -		ltdc_out_dsi: endpoint@0 {
+> +		ltdc_out_dsi: endpoint {
+>  			remote-endpoint = <&dsi_in>;
+>  		};
+>  	};
+Applied to u-boot-stm32/next
 
-> From: Paul-Erwan Rio <paulerwan.rio@gmail.com>
->=20
-> Commit cb9faa6f98ae ("tools: Use a single target-independent config to
-> enable OpenSSL") introduced a target-independent configuration to build
-> crypto features in host tools.
->=20
-> But since commit 2c21256b27d7 ("hash: Use Kconfig to enable hashing in
-> host tools and SPL") the build without OpenSSL is broken, due to FIT
-> signature/encryption features. Add missing conditional compilation
-> tokens to fix this.
->=20
-> Signed-off-by: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-> Tested-by: Alexander Dahl <ada@thorsis.com>
-> Cc: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---TQXXXYGeTHPKllxe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV8ZZYACgkQFHw5/5Y0
-tyxz4AwAi9lspzRlXHknuvpweGtgfjUcGPlGGihrQ/95svQmbXwN0XEKBmbUzK4f
-CSx/fz8DkxT3t73Pnm6j7KZH8Er0fORbGOW8/RX33tKi5oq/Urhc/9pbcg9LMFGs
-WHDtKO2zORVHqMMuPH+4fpkQ9ZNPn1jHDfN2p5decQom171k8UCtOIkzQ8qcVWxW
-JTQEFe0/ePr8xfoVXG+su7rP2snt/jInF6sZka6mo/Kia6661ZjLiGurSA6ECIOu
-sU6ZlDGpbpUxHB4wyiKSr1mZ/91+8uYA+OrBBfBktaMSes6gsFZvCojeQN/Ded5Z
-l9I1G+LNA2IgKFCLxfuEXL5kWAUqjELXpE8nlea5ZkjL/wJ4RpbOk0IAJ3u1Nsxy
-WiABKbpMsivtf+c0LM3wR62f4i8aKfiv7NpYkfWXiQ7Y6ceJ6/ix20nMrsckGWoD
-YQQ96Ras+bba6RNxBLMG5DJkmh/iKwVHBuIFQl09a3ByJOXdZZehCg1i/XQZsT0x
-JSNCkyAx
-=9D/t
------END PGP SIGNATURE-----
-
---TQXXXYGeTHPKllxe--
+Thanks
+Patrice
