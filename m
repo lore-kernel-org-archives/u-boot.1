@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DE9C38147
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 08:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D85C38147
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 08:12:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE8B787B79;
-	Sat, 16 Dec 2023 09:12:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C79E87BB9;
+	Sat, 16 Dec 2023 09:12:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QYqaTiy1";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="PN0fnqbW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67C2E87A8C; Sat, 16 Dec 2023 09:12:14 +0100 (CET)
+ id F3C9187B45; Sat, 16 Dec 2023 09:12:14 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9F5E87AA2
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 09:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11EAB87620
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 09:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,27 +31,28 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 2FD85401CB; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 9DAA23F6B8; 
  Sat, 16 Dec 2023 08:12:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1702714331;
- bh=vSKFBDD1uCe3FNsNH9zDRIvokn3QaFQE4uXD4w5cTpw=;
+ bh=jxuEG0n9G5ifs2JGpRXf8I5fpZiGy1R3rgUkV+AJsMU=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=QYqaTiy17q10dvM6drPDH1Mfg3TLahWA2jGxsMl43Dv0LbqYdqvLuqap+DANKki5U
- 3eZOzvF1KQ3S0zIoyZdoySNBu7Od2nlaipWFOd0Nz6WC8sYEfiFQZ8ts3E67wBzWZv
- rKIBZ7Xo8faPe/ehGZ7T3ZFH3RVGXBUH+xv+q9S/PuiF5Sd/8SSt/hNG6I0P+Moong
- kzXy/reJh0z0IPpXWGNm3JxhDamrGHnMF5umngSXjM1dpJ6LHL7AMpm+0d6AliJlcd
- hCtuHC1Uvhuoh3MdNRFoUFIFn+4CBZJ5NWld3gyNnw17DH7FviYNPbOtlv1Otv6oqK
- Km/T7qBd5hR1Q==
+ b=PN0fnqbWiazBwjLIb2/jVsjPsqRJPtxaHdJcf5Ylkl8PPcEQ79QOz6UXXg3Iy1UK9
+ PPXGoz7VfnFB2yQsWfakW4uOSKsBZkqSla4TkYzt4iQtIV28AppJjQHa2XZKWUIC9X
+ 4/fD7nI1Q0GJg0GivAD7j7CBMcRLaxkut/2r7evdfA9guHKE3nsQsgl2qMJZ9LUP7C
+ jACcLXWgurJUkd3wo7IQ/T2EGpuQJj3K4Jlq5W1FyEfkXY7N3YVpwFVgR8Z38OyLEG
+ FJYeWVBDZO5Ohlw1fOCwweaWGt68cgRQUkdval+SJh26j8V4YAig3XeBI41QTs/BSV
+ tCIJGcsConnKQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 3/4] cmd: acpi: check HW reduced flag in acpi list
-Date: Sat, 16 Dec 2023 09:11:59 +0100
-Message-Id: <20231216081200.7677-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 4/4] acpi: support 64bit in acpi_find_table for DSDT and
+ FACS
+Date: Sat, 16 Dec 2023 09:12:00 +0100
+Message-Id: <20231216081200.7677-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231216081200.7677-1-heinrich.schuchardt@canonical.com>
 References: <20231216081200.7677-1-heinrich.schuchardt@canonical.com>
@@ -73,36 +74,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On non x86 platforms the hardware reduce flag must be set in the FADT
-table. Write an error message if the flag is missing.
+Use X_DSDT and X_FIRMWARE_CTRL if available.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- cmd/acpi.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ lib/acpi/acpi.c | 29 ++++++++++++++++++++++++-----
+ 1 file changed, 24 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/acpi.c b/cmd/acpi.c
-index 8d9eaf36c9..f6e02ea7a5 100644
---- a/cmd/acpi.c
-+++ b/cmd/acpi.c
-@@ -6,6 +6,7 @@
- #include <common.h>
- #include <command.h>
- #include <display_options.h>
-+#include <log.h>
- #include <mapmem.h>
- #include <acpi/acpi_table.h>
- #include <asm/acpi_table.h>
-@@ -57,6 +58,9 @@ static void list_fadt(struct acpi_fadt *fadt)
- 		dump_hdr(map_sysmem(fadt->x_dsdt, 0));
- 	else if (fadt->dsdt)
- 		dump_hdr(map_sysmem(fadt->dsdt, 0));
-+	if (!IS_ENABLED(CONFIG_X86) &&
-+	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
-+		log_err("FADT not ACPI hardware reduced compliant\n");
- 	if (fadt->header.revision >= 3 && fadt->x_firmware_ctrl)
- 		dump_hdr(map_sysmem(fadt->x_firmware_ctrl, 0));
- 	else if (fadt->firmware_ctrl)
+diff --git a/lib/acpi/acpi.c b/lib/acpi/acpi.c
+index f21e509461..f80b2176e1 100644
+--- a/lib/acpi/acpi.c
++++ b/lib/acpi/acpi.c
+@@ -45,11 +45,30 @@ struct acpi_table_header *acpi_find_table(const char *sig)
+ 		if (!memcmp(hdr->signature, "FACP", ACPI_NAME_LEN)) {
+ 			struct acpi_fadt *fadt = (struct acpi_fadt *)hdr;
+ 
+-			if (!memcmp(sig, "DSDT", ACPI_NAME_LEN) && fadt->dsdt)
+-				return map_sysmem(fadt->dsdt, 0);
+-			if (!memcmp(sig, "FACS", ACPI_NAME_LEN) &&
+-			    fadt->firmware_ctrl)
+-				return map_sysmem(fadt->firmware_ctrl, 0);
++			if (!memcmp(sig, "DSDT", ACPI_NAME_LEN)) {
++				void *dsdt;
++
++				if (fadt->header.revision >= 3 && fadt->x_dsdt)
++					dsdt = map_sysmem(fadt->x_dsdt, 0);
++				else if (fadt->dsdt)
++					dsdt = map_sysmem(fadt->dsdt, 0);
++				else
++					dsdt = NULL;
++				return dsdt;
++			}
++
++			if (!memcmp(sig, "FACS", ACPI_NAME_LEN)) {
++				void *facs;
++
++				if (fadt->header.revision >= 3 &&
++				    fadt->x_firmware_ctrl)
++					facs = map_sysmem(fadt->x_firmware_ctrl, 0);
++				else if (fadt->firmware_ctrl)
++					facs = map_sysmem(fadt->firmware_ctrl, 0);
++				else
++					facs = NULL;
++				return facs;
++			}
+ 		}
+ 	}
+ 
 -- 
 2.40.1
 
