@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22E42C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2053C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78C9A87650;
-	Sat, 16 Dec 2023 19:29:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63A66876A7;
+	Sat, 16 Dec 2023 19:32:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aAR45m5d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XAEv4UlL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54EB087721; Sat, 16 Dec 2023 19:29:32 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id E0C3087669; Sat, 16 Dec 2023 19:32:41 +0100 (CET)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3C7B875D6
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:29:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1A348773F
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:32:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-77f50307a1fso135272085a.3
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:29:29 -0800 (PST)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-67f2a5d8a05so5439606d6.3
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:32:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702751368; x=1703356168; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1702751557; x=1703356357; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hA6FY0js//mciPZ25aOMweDgTd9I0Ur/6mQ3FvE7IKY=;
- b=aAR45m5dAUq9xyelTmfgZN0veLWL0roJ/iZ+wyICH8gvSvwlJ+wFUH5qf04CjhEtf1
- 2CC3dypHJiVROAkIPk34/xRGAhv80FaEv/UcR+G9MRO/Erv8f4T1keXbV4FJdxgkNhue
- kQfEd6SjdjSOzq6eAwJ5OpNXWarhxY3rXeijc=
+ bh=8uAVgEhcaODQ9ILCFV6eWcQMXtcJHnkEkluhhU+d0TE=;
+ b=XAEv4UlLkrlLBKmPAusVxsGrJftGvO0XB6bxVgKXktMx7WK0bRWX/WYYIwlgCtrrqZ
+ Una6lcO4pfkaNEORi0DTm7ivh5FQonK3gnbUGdZ7ipAdsDOH9cKENuMBkVvB7uDbNtKP
+ zcUGcX3DJDi0ENdKlQQop8GH9oQyPhFUx6/Z4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702751368; x=1703356168;
+ d=1e100.net; s=20230601; t=1702751557; x=1703356357;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hA6FY0js//mciPZ25aOMweDgTd9I0Ur/6mQ3FvE7IKY=;
- b=MMGYKea8/UwesJ3CZjSHVQ7qZYceqcw2GzVaqGq53bJ/jpsGRpbdMuLVGZ+NJJ4bOy
- RQcHKW1UfuOGcV5dkm4uOLLcJsGBxgdzlI/dmLtD48vm3lOgBtsTlKOT2OGvnbrZBOPi
- 2Zw/26r8o4cPE7SijsCFFD3RGyHH+GHd+4DsyIWZo0cKQRprr+gW7TfFSFJT7s0c7mUm
- Kge6j48++4UFRKNFhd1Y4g3uLABymwbmP8LGpiJbcaj5GaamdHHZHk66bIm0ORujTjAO
- qEcuR6jBp7iV+ij3mCpIJosICj3QbZmL0uFu0GzlWsvhf6TTJ9UiUPLXqYKgP3MWI/7q
- Cp3g==
-X-Gm-Message-State: AOJu0YxvgI/eue2OUFnJtRBFNB11JWiGS1bjbjLHvhfRL/N8vQYk9xHo
- 0E6DCFZDHFhgS3SHXcauwDBe8UvjoHZGefDCf8g=
-X-Google-Smtp-Source: AGHT+IHZk5qGcJPX3B3GGQm7LwwRAAvA/E2IQJ1FSyGjK/eAof32XUFNOlaWc93GKkhiSktTHuOZwA==
-X-Received: by 2002:a05:620a:29d6:b0:77e:fba3:9d24 with SMTP id
- s22-20020a05620a29d600b0077efba39d24mr16636804qkp.136.1702751368617; 
- Sat, 16 Dec 2023 10:29:28 -0800 (PST)
+ bh=8uAVgEhcaODQ9ILCFV6eWcQMXtcJHnkEkluhhU+d0TE=;
+ b=Q1P39+D2i3kLtdzBlVQRvotCJWymvi9QLeAZEEuo8Z3rs8zN6ih400v+io1+kyphq5
+ eQSkfNORq2ivvzTTtWbNlesagJEV2vP4zu6oNlGhIhAC216eTWPRpDCbBtF0ASAiFbGc
+ HbNpspAMmKSym7tnKFEmhSDwR/427gcxi78JePvKWd4+itr9hrujfIOKn15Qs/kZLwya
+ POrTCQJdKLST25bdmvabTsYp7qctFUeoFZqEDav8YnnrGX7mZjXoEFlIV2SCQv8AoNea
+ F66aiOOXENMqNw4biqPF1MZoKKNfJyVl9OC72PfwNMCFCeofmKpBVoXyhcWGftdBFCoo
+ EvVw==
+X-Gm-Message-State: AOJu0YxKAIVv1x6/t7Fdff8ziVfang0XgcPUnwLDS1hCo+CjfRu5BkDC
+ CDDqk8we+zsWpXRYoEm+lPrNfQ==
+X-Google-Smtp-Source: AGHT+IH75E3IBhgbliUbcWTDys/DDG+Lz6fJsEGfbF6Ez8m31523FnGd5tvcknygiBzi57u57e1tQw==
+X-Received: by 2002:a05:6214:f0d:b0:67f:132c:6c1 with SMTP id
+ gw13-20020a0562140f0d00b0067f132c06c1mr5477123qvb.40.1702751557575; 
+ Sat, 16 Dec 2023 10:32:37 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-4efc-63ef-4955-a8ab.res6.spectrum.com.
  [2603:6081:7b00:6400:4efc:63ef:4955:a8ab])
  by smtp.gmail.com with ESMTPSA id
- c9-20020a05620a0ce900b0077fb3fca44asm1173825qkj.95.2023.12.16.10.29.27
+ c13-20020a056214004d00b0067a4f49a13csm7710159qvr.127.2023.12.16.10.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Dec 2023 10:29:27 -0800 (PST)
-Date: Sat, 16 Dec 2023 13:29:25 -0500
+ Sat, 16 Dec 2023 10:32:37 -0800 (PST)
+Date: Sat, 16 Dec 2023 13:32:35 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] arm: Add OVERLAY command to BSS section
-Message-ID: <20231216182925.GW2513409@bill-the-cat>
-References: <20231216180842.173422-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] get_maintainer.pl: Add --git to look up CCed in git
+ history
+Message-ID: <20231216183235.GX2513409@bill-the-cat>
+References: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kPj98AGEDdFRIMMD"
+ protocol="application/pgp-signature"; boundary="mhUQNpJld3PQfuaw"
 Content-Disposition: inline
-In-Reply-To: <20231216180842.173422-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,98 +93,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kPj98AGEDdFRIMMD
+--mhUQNpJld3PQfuaw
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 16, 2023 at 07:08:22PM +0100, Marek Vasut wrote:
+On Sat, Dec 16, 2023 at 07:07:52PM +0100, Marek Vasut wrote:
 
-> Avoid allocating and loading the BSS section.
->=20
-> $ aarch64-linux-gnu-objdump -Sh u-boot
->=20
-> Before:
->   10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8=
-  2**0
->                    CONTENTS, ALLOC, LOAD, DATA
->   11 .bss          000068f8  00000000000f2200  00000000000f2200  001021d8=
-  2**6
->                    ALLOC
->   12 .bss_end      00000000  00000000000f8af8  00000000000f8af8  00108af8=
-  2**0
->                    CONTENTS, ALLOC, LOAD, DATA
->=20
-> After:
->   10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8=
-  2**0
->                    CONTENTS
->   11 .bss          000068f8  00000000000f2200  00000000000f2200  00102200=
-  2**6
->                    CONTENTS
->   12 .bss_end      00000000  00000000000f21d8  00000000000f21d8  00108af8=
-  2**0
->                    CONTENTS
+> Add the --git parameter, else recent contributors are left out of the CC =
+list.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  arch/arm/cpu/armv8/u-boot.lds | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> index fb6a30c922f..25838b9892c 100644
-> --- a/arch/arm/cpu/armv8/u-boot.lds
-> +++ b/arch/arm/cpu/armv8/u-boot.lds
-> @@ -151,16 +151,16 @@ SECTIONS
-> =20
->  	. =3D ALIGN(8);
-> =20
-> -	.bss_start : {
-> +	.bss_start (OVERLAY) : {
->  		KEEP(*(.__bss_start));
->  	}
-> =20
-> -	.bss : {
-> +	.bss (OVERLAY) : {
->  		*(.bss*)
->  		 . =3D ALIGN(8);
->  	}
-> =20
-> -	.bss_end : {
-> +	.bss_end (OVERLAY) : {
->  		KEEP(*(.__bss_end));
->  	}
 
-This is, I think not sufficient. Looking at arch/arm/cpu/u-boot.lds,
-seeing the comment about overlay ordering (and that it needs to point to
-arch/arm/lib/sections.c not bss.c now) and looking harder at
-arch/arm/cpu/armv8/u-boot.lds I don't know what to think at first about
-what's going on here. My guess is that what v7 has to / had to do for
-relocation / etc stuff back at the time is just done differently with
-the v8 infrastructure (and possibly v7m).
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---kPj98AGEDdFRIMMD
+--mhUQNpJld3PQfuaw
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV97IIACgkQFHw5/5Y0
-tywK5Qv/bMRJXUdqE+NSP+pgJgocB4Nm5rBSb0S4MthXWq5ZLV1pRnwaEww05u4j
-rzp03bPIA05lT7Zv5Tiv4OpKfmbYzSs7yISWez7a5QNmf1WXeNoQ4T7mRVs6QG2U
-AJPDyU6iZv0FphSMf+UvzbkVowHxaVK0JTu6VSjZTcI4nXLybna7cguwVM53+rNQ
-8QbrTTC2F2sAcASbU4EyclkFWPpqQ0b5MbLAOFPAK96tGCXurfGhcOAxOGfXMjCm
-kfPBlhLCp2Tu7aLoyer2B73mbHGHWSwyNZxjd287kvg0d3/TWsZb1qY9sv4OSg93
-dxeQMTfwimU95GWJcWCybmkH+/aiq+sGkn++YBqY+kE7aueaEI84fh+6QkHf+Izr
-BXje4s74K/rJLXoFH8MvOG+25/1QtxbWcrMORrOrNDnNXFLdOHu068jpUf7X2W+D
-2tPratKXkYOQyH3n4tIrV1l9MwG079OwyQDKZxXQBVwmCIife6sEqwR/TDrw4wq9
-vxa8Xz/V
-=Rrdc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV97UMACgkQFHw5/5Y0
+tyx4gQv+JcYmWOJm9T9IOiN0fQszd59eNj8qNhuZS2qyXczEt+EBVb7w/8mKjCHo
+cflDE32G/fnCLvGW6O45SNijpZT0rKBHeizh0mq48afibW2xnkzugKtm1s5+X0Yy
++0VdvLkHrRGvwfsGoX8RgkmExsTQY9BI4rE2iC7ECu4vlActz3K6mMkfE3spS0x9
++qm0qLnBiUE6NLytf2L6AHro0liRrhcJhTqGv28X66J5GUdmloixZ1dfYY1n2YJh
+GBtV0TdTJQmAhC5WUZAx3uuXi/Yh+ePpm2smetArK7C3p0UE/2McPeBFExYnVSI0
+05UgFvzuWI8wTqbMvalFTgkRn5UUAEd6f2iYJtolpygxSXZqKjiU5853TBz5pTO8
+XeS4NziQ9FNca3Ium1PFviu5NG8s9qUDvczdcswZG5wRk07KrBireD9f01WzHagP
+UBcHh7Hn1xX38hLT2QmYgx+6I5ykH9knHl6kqk2jvHFOLF330y1DlK9aM+zF49zm
+JiXErMfn
+=PmqW
 -----END PGP SIGNATURE-----
 
---kPj98AGEDdFRIMMD--
+--mhUQNpJld3PQfuaw--
