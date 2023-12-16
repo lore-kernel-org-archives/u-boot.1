@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E96C4167B
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 05:36:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3551C4167B
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 05:43:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4FC287AF3;
-	Sat, 16 Dec 2023 06:36:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3109C87BA3;
+	Sat, 16 Dec 2023 06:43:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1702705002;
-	bh=iG/PH68N6Y1jtMRYs+tk+qoN3BK0/FlkCFzjQAN5xmQ=;
+	s=phobos-20191101; t=1702705384;
+	bh=AYYyhMK01+kqMQqBLuFPs6XHhZKNKI+F59sWYcNoNNU=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=uRmk/wMGJTi60cUg7jKjt9u0x58wybgGsnKIjj4g84BfR37U128eScLW1a0vU2hKo
-	 OHmHFoB0nz7tRa+dLMNuirUbTbEjolZY1/+H97JjUu+0SOPLWuSNPv9JWpmKPprvaw
-	 tCGh2CFVt1+nWG7fVszO6nyCurMyDuNRb6cJx9EbQd2FmQ+O2Nble8EmxiyuP8v+gf
-	 fOVlFggLT7AoiF5TzVH+RC36zXjhm9PtsijTo8uRZLHlLOEEeciFtto62zkqMP/owS
-	 F9QstZRi0s8n7FM8Ym/1GmZr3+R66Wa6wHKrCBzz3cNIQwEua0RDjdLoS2tiszmu6t
-	 p/GUtl8rBqN/g==
+	b=i3MkStSvSnTscfJlpJumbh/3qD6AQNWbfv8pCIR+dXnZhPVrZHe+mOS0RjHVXfkKC
+	 urOShJghpcx96UmzEDzaYm6C3rTznUvLESopm6ziBILpHoQoSg7z4nJheFnL+EvehF
+	 O0d0GcMajxZbiiKXqqnFE/jMYdXYrco03hEDBzTZ2G9OMVn4LoKD/7PZMehsree5ZA
+	 WZY7avQqgILAC8ZndZklOfKrCaqHCmqS71zqtPBVzYvE7GZkA4b6RL8l6wJo/GHslq
+	 +vl9smi4FnYfgSqveBuVgo1k9fhQzgQhVg6l924Wq4EahUBx4HGdi46Drv7Y2L7AvH
+	 s87xzhfdocDSA==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 36DE887A4E;
- Sat, 16 Dec 2023 06:36:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id BD9A787AF3;
+ Sat, 16 Dec 2023 06:43:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1702705001;
- bh=iG/PH68N6Y1jtMRYs+tk+qoN3BK0/FlkCFzjQAN5xmQ=;
+ s=phobos-20191101; t=1702705382;
+ bh=AYYyhMK01+kqMQqBLuFPs6XHhZKNKI+F59sWYcNoNNU=;
  h=From:To:Cc:Subject:Date:From;
- b=PHCKLf0scnxh1QAy2+ByQCc+oPVS93MkdAUkUyZ2zSxVW2IQJsRJ0x1FHY+DrKEvx
- YYm5/It06zLZ2enMyc0kh3MzmhYTqFkBm6dDMUHlkt51RujvKu1ic//tCvo0u4irm/
- AXO1+pKVPXMt3ZZVAlcCUYQBuDi2j+VQX64/z0+CF+78+R7lAuRxTFPizCJfJvvwID
- Wtvk4+M9xZ7/08Qxv8wHnIeh75ylRERl2gJ5igKwQSxM5LdkLQnAgtVeLwzO6CZ7QI
- Ndmp/NTn8qdPo2vdGPrzl16m+2eArFnN8Pt8DUyGPbxJzhSZFu8La05IXKk9Ca6reS
- GB/kNVY/ruQvQ==
+ b=pv0gKRCl/p6XRmPcly+CH/aZRg81hxraK+IpzUVNe6QqmsXxUiT0PC+zgC/ZcI3Xl
+ XhYhPfHkZVr/lDAVq7tL+vBDCTCk96fE6VSyd58jYZjiUJNJBdEoiU4TZSVjQyRNag
+ 2te1vH6/Pi9rQhhjlxsVq90vl5651ttKGVdZ4JQdM/1YPSdTKOd6HDMl4lSUhbGuNU
+ uAsFBFMEntW14VZaZGFrm7WYLGdORU0iNAiJCYBn37PpIeJYAfjNRqqfGQT7ayIl5U
+ f8cSpWLmu6BnhCwU+8mG8zIuuQgq1u1Yodhi/phmd/V5Uto0sDAhPHqu/snwDBR1C4
+ av4N0qCW3HF+w==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
-Subject: [PATCH] ARM: dts: imx7d-pico: Fix alias node indent
-Date: Sat, 16 Dec 2023 06:36:01 +0100
-Message-ID: <20231216053624.326731-1-marex@denx.de>
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>,
+ u-boot@dh-electronics.com
+Subject: [PATCH 1/2] ARM: imx: Force DRAM regulators into FPWM mode on DH
+ i.MX8MP DHCOM SoM
+Date: Sat, 16 Dec 2023 06:42:28 +0100
+Message-ID: <20231216054243.327104-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -64,40 +66,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch from indent with spaces to indent with tabs. No functional change.
+In case the Buck5 and Buck6 regulators which supply DRAM Vdd1 and Vdd2/Vddq
+respectively operate in automatic PWM/PFM mode, the DRAM EDAC detects more
+correctable errors than if the regulators operate in forced PWM only mode.
+Force DRAM regulators to forced PWM mode only to stop tempting the DRAM.
 
-Fixes: f8548ce0e093 ("imx7d-pico: Fix the name of the u-boot.dtsi file")
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Fabio Estevam <festevam@gmail.com>
 Cc: Stefano Babic <sbabic@denx.de>
-Cc: u-boot@lists.denx.de
+Cc: u-boot@dh-electronics.com
 ---
- arch/arm/dts/imx7d-pico-pi-u-boot.dtsi | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ board/dhelectronics/dh_imx8mp/spl.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-index c6856823c64..220748723b0 100644
---- a/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-+++ b/arch/arm/dts/imx7d-pico-pi-u-boot.dtsi
-@@ -1,11 +1,11 @@
- #include "imx7s-u-boot.dtsi"
+diff --git a/board/dhelectronics/dh_imx8mp/spl.c b/board/dhelectronics/dh_imx8mp/spl.c
+index 1b05da53c35..21b12a70c8e 100644
+--- a/board/dhelectronics/dh_imx8mp/spl.c
++++ b/board/dhelectronics/dh_imx8mp/spl.c
+@@ -94,6 +94,11 @@ static int dh_imx8mp_board_power_init(void)
+ 	/* To avoid timing risk from SoC to ARM, increase VDD_ARM to OD voltage 0.95V */
+ 	pmic_reg_write(dev, PCA9450_BUCK2OUT_DVS0, 0x1c);
  
- /{
--    aliases {
--        mmc0 = &usdhc3;
--        usb0 = &usbotg1;
--        display0 = &lcdif;
--    };
-+	aliases {
-+		mmc0 = &usdhc3;
-+		usb0 = &usbotg1;
-+		display0 = &lcdif;
-+	};
- 
- 	wdt-reboot {
- 		compatible = "wdt-reboot";
++	/* DRAM Vdd1 always FPWM */
++	pmic_reg_write(dev, PCA9450_BUCK5CTRL, 0x0d);
++	/* DRAM Vdd2/Vddq always FPWM */
++	pmic_reg_write(dev, PCA9450_BUCK6CTRL, 0x0d);
++
+ 	/* Set LDO4 and CONFIG2 to enable the I2C level translator. */
+ 	pmic_reg_write(dev, PCA9450_LDO4CTRL, 0x59);
+ 	pmic_reg_write(dev, PCA9450_CONFIG2, 0x1);
 -- 
 2.43.0
 
