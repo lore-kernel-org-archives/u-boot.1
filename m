@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E85C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:16:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE1A6C4332F
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25A6F87C69;
+	by phobos.denx.de (Postfix) with ESMTP id BE41C87C7B;
 	Sat, 16 Dec 2023 04:15:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B7CpfZi7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yyqa78md";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 352B787B5B; Sat, 16 Dec 2023 04:15:19 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id BEBB087B52; Sat, 16 Dec 2023 04:15:20 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BF5687B59
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E21787C4F
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7b701b75f36so57775339f.0
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:16 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-35f77a076e1so3231125ab.1
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702696515; x=1703301315; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702696517; x=1703301317; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iVa4GGEzLXHzIlMJjYWf4Pv6ZLXSe9ySVZ+m3wV8MfI=;
- b=B7CpfZi7vzmG1D1OcL1Bm3JWRpsddXK6pyVtjQMBqhEloN9qSkicrXnJh2FMESEXJl
- OUoD1u/bZC0o0K4dKq8aJKEzW76Z2h2tsGza1TAxPplJ4XPnI3VsM9Yunget0yv5k/VF
- d4CjDpYXbpfYEnHB+Zdy4xFT8Bdn/bKHQre40=
+ bh=4S9K4VtkYqHSTfS5AhSHz0kuHeipFhFPFLKwmETBBGQ=;
+ b=Yyqa78md9hGTBYerIIrwY/BuOdr0oCAhvpsoD04nD1ts3AnTfY5Yv6C0ILJoNNv7l7
+ WEbLcfVVvSz52DGh/H2SWUVfvQsXrE7e8IsvJMDxX+KYL57I0X6yVEq+ZV8VpGG92/7U
+ hk1B5+8Uj+hR69QtBNBSnVu5YUQX5Ud5xQB9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702696515; x=1703301315;
+ d=1e100.net; s=20230601; t=1702696517; x=1703301317;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iVa4GGEzLXHzIlMJjYWf4Pv6ZLXSe9ySVZ+m3wV8MfI=;
- b=FJyZL6SHQ2qCkY0BZifPRbndZrr+6TLCw6Ig+tSDlKleJfD/2rZd8fUISmTy5tGmMi
- 7DJj6/Ay+v9hkGtmjQ50RnJJvfb0RNMi/HqduM/QBeDfcG1kdchHsBSCYfDjMZ1T/AAO
- iyAR02bRNMMHHz4Uy9/qlMEmQXIGFalqWohEA2GDVFMZM36y4579yTapYykbeJtQXw9s
- XvfeFTeSgy/xcr6O0fj0MBXUTf1pjGh+P9WO3aGEeM+gI19WGY5RBeQZKtcNRTZxb72v
- NvcGBz48ni6WWrGLtJnrYFGIvT3rZnEvkHQ0jP19iPOC6mG44F/EfJ+Hc/SqI9XkPe99
- mekg==
-X-Gm-Message-State: AOJu0Yx8VV+BEFE5IuiqbIQlehkQ0t9fTtbz5T1658CaEyA7jhIO/S2P
- 0q9jaI1OU04QW8MUsOB0haH7BxWJiqMmp3uBI1uWSQ==
-X-Google-Smtp-Source: AGHT+IEonNA/ZTuzSBc/HZoHbOSWKIpGJiVD+nphJi28udT9hfw1VKbDaXt37zOSnWepd8iJyHhRjA==
-X-Received: by 2002:a05:6e02:320f:b0:35f:847c:1e5b with SMTP id
- cd15-20020a056e02320f00b0035f847c1e5bmr4607527ilb.53.1702696514832; 
- Fri, 15 Dec 2023 19:15:14 -0800 (PST)
+ bh=4S9K4VtkYqHSTfS5AhSHz0kuHeipFhFPFLKwmETBBGQ=;
+ b=ErP9vfX6msaF3xZGzcioZk+XkilW8CQYjLhQVzjosg7VRMgWE9F8hoSITJlU35WYlM
+ 09n0ClF9Lj75SPA+DCgVSDh7O0aolFqPFe5G+kTKNOp8IJhtkMrZbKzwzc8SukwJGHRP
+ pt30z8lIyYeR71QJwN9UNiHQImrfo13N3A64gB4jwG6cyKfpSxgfHVDO+feIJD7wR8tH
+ 6O1QzmhelYVNBkpTZuvu/YblE4o7ElAKT0IqDvNA7+yk2ZdfCpdmGqCa65gSOyTaygGg
+ aujpp5JgRiGdGjuHmP0zuVRpVU/J60Wx0S8qpOXMCDr5Xe7F49aqKqPb5+bTR6p8yo96
+ QcJw==
+X-Gm-Message-State: AOJu0Yy2QazVVBnpG0G4CDd7D9wnmA94iVSjgEaw7e07LMlFhtZsA+JC
+ 4/xODQyGvRhcUFgRC5YU9erOhNAMcoxy2WZltCJR3w==
+X-Google-Smtp-Source: AGHT+IHbrm1VcN9N4DUS8wzP5pxf8X21wuBzJ7z7lvFRG77bNt/CqLVcUCwOouPCmn7kEi0IXQR1cA==
+X-Received: by 2002:a05:6e02:1b06:b0:35d:59b3:2f87 with SMTP id
+ i6-20020a056e021b0600b0035d59b32f87mr9967524ilv.28.1702696516961; 
+ Fri, 15 Dec 2023 19:15:16 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- z10-20020a92ceca000000b0035f75e80d1esm542163ilq.52.2023.12.15.19.15.14
+ z10-20020a92ceca000000b0035f75e80d1esm542163ilq.52.2023.12.15.19.15.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 19:15:14 -0800 (PST)
+ Fri, 15 Dec 2023 19:15:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Eddie James <eajames@linux.ibm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH v3 08/22] bootm: Create a struct for argument information
-Date: Fri, 15 Dec 2023 20:14:12 -0700
-Message-ID: <20231216031446.2222362-4-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v3 10/22] bootm: Add more fields to bootm_info
+Date: Fri, 15 Dec 2023 20:14:14 -0700
+Message-ID: <20231216031446.2222362-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231216031446.2222362-1-sjg@chromium.org>
 References: <20231216031446.2222362-1-sjg@chromium.org>
@@ -90,67 +91,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some OS functions require the arguments to the 'bootm' command. This is
-inconvenient for two reasons.
-
-Firstly, there may not be any actual command, if CMDLINE is not enabled
-and programmatic boot is being used.
-
-Secondly, most functions don't require the arguments, so it is
-inefficient to pass them when not needed. For example it increases code
-size.
-
-Create a new struct which holds the arguments, which can be used if
-needed.
-
-Add the images pointer as well, since this is commonly needed.
+Add fields for the three bootm parameters and other things needed for
+booting. Also add a helper to set up the struct correctly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Rename addr_fit to addr_img in struct bootm_info
 
 Changes in v2:
-- Split addition of struct bootm_info to its own patch
+- Split out adding the rest of struct bootm_info fields to separate patch
 
- include/bootm.h | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+ boot/bootm.c    |  8 ++++++++
+ include/bootm.h | 35 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 43 insertions(+)
 
+diff --git a/boot/bootm.c b/boot/bootm.c
+index f1c45c380659..9e42fa5117d0 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1192,6 +1192,14 @@ int bootm_boot_start(ulong addr, const char *cmdline)
+ 	return ret;
+ }
+ 
++void bootm_init(struct bootm_info *bmi)
++{
++	memset(bmi, '\0', sizeof(struct bootm_info));
++	bmi->boot_progress = true;
++	if (IS_ENABLED(CONFIG_CMD_BOOTM))
++		bmi->images = &images;
++}
++
+ /**
+  * switch_to_non_secure_mode() - switch to non-secure mode
+  *
 diff --git a/include/bootm.h b/include/bootm.h
-index f5229ea90b33..a6d5d5ceee8f 100644
+index 85c560d5a0ae..7cfaa0a7d053 100644
 --- a/include/bootm.h
 +++ b/include/bootm.h
-@@ -16,6 +16,20 @@ struct cmd_tbl;
- #define BOOTM_ERR_OVERLAP		(-2)
- #define BOOTM_ERR_UNIMPLEMENTED	(-3)
+@@ -19,17 +19,52 @@ struct cmd_tbl;
+ /**
+  * struct bootm_info() - information used when processing images to boot
+  *
++ * These mirror the first three arguments of the bootm command. They are
++ * designed to handle any type of image, but typically it is a FIT.
++ *
++ * @addr_img: Address of image to bootm, as passed to
++ *	genimg_get_kernel_addr_fit() for processing:
++ *
++ *    NULL: Usees default load address, i.e. image_load_addr
++ *    <addr>: Uses hex address
++ *
++ * For FIT:
++ *    "[<addr>]#<conf>": Uses address (or image_load_addr) and also specifies
++ *	the FIT configuration to use
++ *    "[<addr>]:<subimage>": Uses address (or image_load_addr) and also
++ *	specifies the subimage name containing the OS
++ *
++ * @conf_ramdisk: Address (or with FIT, the name) of the ramdisk image, as
++ *	passed to boot_get_ramdisk() for processing, or NULL for none
++ * @conf_fdt: Address (or with FIT, the name) of the FDT image, as passed to
++ *	boot_get_fdt() for processing, or NULL for none
++ * @boot_progress: true to show boot progress
+  * @images: images information
++ * @cmd_name: command which invoked this operation, e.g. "bootm"
+  * @argc: Number of arguments to the command (excluding the actual command).
+  *	This is 0 if there are no arguments
+  * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
+  */
+ struct bootm_info {
++	const char *addr_img;
++	const char *conf_ramdisk;
++	const char *conf_fdt;
++	bool boot_progress;
+ 	struct bootm_headers *images;
++	const char *cmd_name;
+ 	int argc;
+ 	char *const *argv;
+ };
  
 +/**
-+ * struct bootm_info() - information used when processing images to boot
++ * bootm_init() - Set up a bootm_info struct with useful defaults
 + *
-+ * @images: images information
-+ * @argc: Number of arguments to the command (excluding the actual command).
-+ *	This is 0 if there are no arguments
-+ * @argv: NULL-terminated list of arguments, or NULL if there are no arguments
++ * Set up the struct with default values for all members:
++ * @boot_progress is set to true and @images is set to the global images
++ * variable. Everything else is set to NULL except @argc which is 0
 + */
-+struct bootm_info {
-+	struct bootm_headers *images;
-+	int argc;
-+	char *const *argv;
-+};
++void bootm_init(struct bootm_info *bmi);
 +
  /*
   *  Continue booting an OS image; caller already has:
   *  - copied image header to global variable `header'
-@@ -39,7 +53,7 @@ typedef int boot_os_fn(int flag, int argc, char *const argv[],
- extern boot_os_fn do_bootm_linux;
- extern boot_os_fn do_bootm_vxworks;
- 
--int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
-+int do_bootelf(struct cmd_tbl *cmdtp, int fglag, int argc, char *const argv[]);
- 
- boot_os_fn *bootm_os_get_boot_func(int os);
- 
 -- 
 2.43.0.472.g3155946c3a-goog
 
