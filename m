@@ -4,72 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE76C38147
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 08:49:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DFBCC38147
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 08:49:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A613E8797F;
-	Sat, 16 Dec 2023 09:49:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23AEF87B59;
+	Sat, 16 Dec 2023 09:49:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vp+9JqT8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gBAeODWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA21987B8C; Sat, 16 Dec 2023 09:49:06 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id DBD3E87AD2; Sat, 16 Dec 2023 09:49:08 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C0A4876F7
+ by phobos.denx.de (Postfix) with ESMTPS id BEFCE87AD2
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 09:49:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-552231d9c1dso1935868a12.0
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2c9f8faf57bso16972771fa.3
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 00:49:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702716544; x=1703321344; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jY3q45KUIp44it7BTupf25SkTW1eIU2wrwfWOiGQX1A=;
- b=Vp+9JqT8drxLOnTzI1zRc9lV0O4soiNAP9GXuwZ7i3PY4b5gfHjeej9NpNWJWC08tO
- fMDf9kCIm+SMlXvDCbO/xjQVpdivHelHLLleeceibC3LrCfziYLa6q3ANHKdCIdw68GM
- 0iT/Qqv1eGXKC1UiJwTtN6ANUB7G/7yDrMuzcWpjgu+GZvXdX6feAN5NNQ1dquu7MXCH
- pWC5IHqKdXDpTLWUQjUl7xojkKHoTU0De1MPQvGsLLAc22t1xbL3OO0A6tQA6hF5aw4T
- Q9NxkeUuodUyre+r/yvLd15FnfgW8yMkMmOxhWI3X/nrY6UrJ2kEJ4P+iBwe6CZYIoxq
- 1CQA==
+ d=gmail.com; s=20230601; t=1702716545; x=1703321345; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I4S9dmTB4CyjJIpE5hsbNq+12+100fkLf58lp1eDHVE=;
+ b=gBAeODWUniln2Jcbmx+QoveT9e5y91auC4zooH3IqdVAiRPMZ+vdUwcnc0h608i2kf
+ Wnk/yoMsaklxrlLBqZ5Gq71ZVyb2tZOQECt7n2rtqaHSDRG2/4LWsrZBOh7Rz76TMm1Q
+ HinsUOgkca+GRVltBW7tPPEyczzHnpFduirVoZGhLH/P51f7SKvA+qFUiJ2tkjtjMLQX
+ MYL9PanwiTIOXsSPobLpi9/aR2SaiDCtkvY2YOBLAOF8SlCZzgEumwuKNqmD8YR1KDC9
+ iQO5Hp3G+9ZWnr5a9kVS7DDS3PeyW2SiCbwI+bxL5B1nmwCnvSb+nVdM+tclEcpEuwtx
+ oDQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702716544; x=1703321344;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jY3q45KUIp44it7BTupf25SkTW1eIU2wrwfWOiGQX1A=;
- b=IqPLnPYT7KsRZOd28Jkoi1kh8hfWd9OhknsAxKjzr5E63bpZK7D33IX60QbuaRLl9F
- ie7gJBysXY4Ajgshz+9j4BO09kOHw58SsC+IjpFLaJT9zXRlum/I27RFLkDsr8z7CjWN
- vvLajpeLX9ydfiWBjAm3R7sFMF7olqsRwd2swnaR7/Rv8lzhxQj9T+60/6npGFJCMYok
- MqH5eAd7Hw39H+PXtQig5H5MkgbJZSDbp1P9UPalhxOipYBxp+I7QX86DgUBEN8zepr0
- h6h5U62tx89Pv30KnxvKH6vR6FNoZWhlyAfnu7g+98mcq3/hkqT+tE30xEpt6I5PAbGh
- kAow==
-X-Gm-Message-State: AOJu0YxcWOTP0IXZFWJl80Tty4LDEDOrRhKvf5yrEMs0vmiiMPnb1scf
- +xvhJnpwBETFSnY5ImVpRAE=
-X-Google-Smtp-Source: AGHT+IF6Z0kfoVnTZVDgR32OdBqkLUo6NBV3HoJsjI5e30ki6w7zFclWv/7iGrOzCoTlYNxdl7C66A==
-X-Received: by 2002:a50:8dc5:0:b0:552:351e:fd0f with SMTP id
- s5-20020a508dc5000000b00552351efd0fmr2988925edh.73.1702716544095; 
+ d=1e100.net; s=20230601; t=1702716545; x=1703321345;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I4S9dmTB4CyjJIpE5hsbNq+12+100fkLf58lp1eDHVE=;
+ b=OKi49yYcfCz/Zmcg++Zr+BAMDqZnmS4hLDcVCCjn1j5nmKtXWjZjaeK9JHGGFkKfwy
+ IvWgX7NMgS4v+NWB/wf8ZUoQaUwrqQUqToxT4dF+nucuM7/8Z0eM4aeYyD7ZuEWkVytL
+ rYHJ02LUOtJj8ScwlanEWQ4cfE7Hp6l5Vf5VKtbbcqHM1lujzEvcvxIg4pqHoAc5daz6
+ Tk3ZKj5y2uRuyH0BXbCT6qsqgfVn/rqpkrTPLlyPoHGad8iUXaql4iPKCc49AN5N1IQU
+ 0cL0LibVAlUnUunsFJY4iM79EnEiPnT8V7FS0McD70uCrbGZnORZZ6KlxqpUCgosWYbt
+ znVw==
+X-Gm-Message-State: AOJu0YzVJS95LIukF8i9f4kvTufgAsRUsxC3S58au0+wP8FfP+VjQ7mV
+ zNhhjJrpzuoAuABTSJJtQdo=
+X-Google-Smtp-Source: AGHT+IEiX7N+182UaiXi8LR3Vib6houLgOkf88a8BQSihtAxnfr59G84cuuVo6iYkHDQz4Xwgk/6tg==
+X-Received: by 2002:a2e:be0c:0:b0:2cc:200f:4392 with SMTP id
+ z12-20020a2ebe0c000000b002cc200f4392mr5901878ljq.46.1702716544874; 
  Sat, 16 Dec 2023 00:49:04 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
- f22-20020a056402195600b00552687b7b1fsm2525197edz.39.2023.12.16.00.49.03
+ f22-20020a056402195600b00552687b7b1fsm2525197edz.39.2023.12.16.00.49.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Dec 2023 00:49:03 -0800 (PST)
+ Sat, 16 Dec 2023 00:49:04 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/1] Fix clk-gpio driver
-Date: Sat, 16 Dec 2023 10:48:37 +0200
-Message-Id: <20231216084838.19403-1-clamor95@gmail.com>
+Subject: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
+Date: Sat, 16 Dec 2023 10:48:38 +0200
+Message-Id: <20231216084838.19403-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231216084838.19403-1-clamor95@gmail.com>
+References: <20231216084838.19403-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,22 +95,101 @@ Existing gpio-gate-clock driver acts like a simple GPIO switch without any
 effect on gated clock. Add actual clock actions into enable/disable ops and
 implement get_rate op by passing gated clock if it is enabled.
 
-Testing current driver implementation shows that it is not fully capable
-and lacks gated clock manipulations.
-
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes from v1
-- added comments for priv struct members
-- return gatet clock rate unconditionally
-- switch log_err > log_debug on of_to_plat
----
-
-Svyatoslav Ryhel (1):
-  clk: clk-gpio: add actual gated clock
-
  drivers/clk/clk-gpio.c | 44 ++++++++++++++++++++++++++++++++++--------
  1 file changed, 36 insertions(+), 8 deletions(-)
 
+diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+index 26d795b978..72d9747a47 100644
+--- a/drivers/clk/clk-gpio.c
++++ b/drivers/clk/clk-gpio.c
+@@ -3,19 +3,23 @@
+  * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
+  */
+ 
+-#include <asm/gpio.h>
+-#include <common.h>
+-#include <clk-uclass.h>
++#include <clk.h>
+ #include <dm.h>
++#include <clk-uclass.h>
++#include <linux/clk-provider.h>
++
++#include <asm/gpio.h>
+ 
+ struct clk_gpio_priv {
+-	struct gpio_desc	enable;
++	struct gpio_desc	enable;	/* GPIO, controlling the gate */
++	struct clk		*clk;	/* Gated clock */
+ };
+ 
+ static int clk_gpio_enable(struct clk *clk)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
++	clk_enable(priv->clk);
+ 	dm_gpio_set_value(&priv->enable, 1);
+ 
+ 	return 0;
+@@ -26,21 +30,45 @@ static int clk_gpio_disable(struct clk *clk)
+ 	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+ 
+ 	dm_gpio_set_value(&priv->enable, 0);
++	clk_disable(priv->clk);
+ 
+ 	return 0;
+ }
+ 
++static ulong clk_gpio_get_rate(struct clk *clk)
++{
++	struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
++
++	return clk_get_rate(priv->clk);
++}
++
+ const struct clk_ops clk_gpio_ops = {
+ 	.enable		= clk_gpio_enable,
+ 	.disable	= clk_gpio_disable,
++	.get_rate	= clk_gpio_get_rate,
+ };
+ 
+-static int clk_gpio_probe(struct udevice *dev)
++static int clk_gpio_of_to_plat(struct udevice *dev)
+ {
+ 	struct clk_gpio_priv *priv = dev_get_priv(dev);
++	int ret;
+ 
+-	return gpio_request_by_name(dev, "enable-gpios", 0,
+-				    &priv->enable, GPIOD_IS_OUT);
++	priv->clk = devm_clk_get(dev, NULL);
++	if (IS_ERR(priv->clk)) {
++		log_debug("%s: Could not get gated clock: %ld\n",
++			  __func__, PTR_ERR(priv->clk));
++		return PTR_ERR(priv->clk);
++	}
++
++	ret = gpio_request_by_name(dev, "enable-gpios", 0,
++				   &priv->enable, GPIOD_IS_OUT);
++	if (ret) {
++		log_debug("%s: Could not decode enable-gpios (%d)\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	return 0;
+ }
+ 
+ /*
+@@ -59,7 +87,7 @@ U_BOOT_DRIVER(gpio_gate_clock) = {
+ 	.name		= "gpio_clock",
+ 	.id		= UCLASS_CLK,
+ 	.of_match	= clk_gpio_match,
+-	.probe		= clk_gpio_probe,
++	.of_to_plat	= clk_gpio_of_to_plat,
+ 	.priv_auto	= sizeof(struct clk_gpio_priv),
+ 	.ops		= &clk_gpio_ops,
+ 	.flags		= DM_FLAG_PRE_RELOC,
 -- 
 2.40.1
 
