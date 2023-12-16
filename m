@@ -4,82 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DD84C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 22:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA06C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 23:23:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C45B987756;
-	Sat, 16 Dec 2023 23:30:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A427E87BBB;
+	Sun, 17 Dec 2023 00:23:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=yandex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jZWwvrRs";
+	dkim=pass (1024-bit key; unprotected) header.d=yandex.com header.i=@yandex.com header.b="g+d6y/Nm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 025F787784; Sat, 16 Dec 2023 23:30:37 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id B736487752; Sat, 16 Dec 2023 23:45:09 +0100 (CET)
+Received: from forward501a.mail.yandex.net (forward501a.mail.yandex.net
+ [178.154.239.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CFFA87730
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 23:30:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DA0187788
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 23:45:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=yandex.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702765833; x=1703370633; i=xypron.glpk@gmx.de;
- bh=wUDD4U5tW7bhW6gmxpw5rHvEAUOnlbh4Ut7wAzPOe2U=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=jZWwvrRsds01D685qmHGmg4zwQN/x1OZjrFhB06N5LokteZ64SBS9m6XRGOL7tem
- KRJeLTFoCZXXI3bUdkH5DENb945sb9RWqksSMWa88lA/PHuIbggW17BOj1Ub0SaRk
- gHcv/Q8lHnT+2i3dHvj4IOBQMg6LCHG/JpShzUZIIUYvyo1TH95XPd/nV118c5V6A
- RvxsRChWwBJWszpdbn0rAxG1qM9a68gpR9yPcLqZ0bk3M5ayfnQrd421Qr8cMhpzG
- ju3z+VyRwLN3PbtLsMPYQyKOKc3WwG6qlR9ErhGdDeu0d+H9U0R4GEb8uy5x4C9bx
- cHjN/OsQdFULmVJEhQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MK3W0-1qtG2Z2M8M-00LUcl; Sat, 16
- Dec 2023 23:30:33 +0100
-Date: Sat, 16 Dec 2023 23:30:32 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 3/3] efi: Avoid using dm_scan_other()
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231216221420.GA2513409@bill-the-cat>
-References: <20231112205516.183410-1-sjg@chromium.org>
- <20231112205516.183410-4-sjg@chromium.org>
- <082aeedd-4371-4ba4-a29a-bf0f0730b77b@gmx.de>
- <20231121132110.GQ2513409@bill-the-cat>
- <CAPnjgZ30CjQZ0+DMp2gy0HzrnRsjcY5NMi1YVVRQiN8UG-5oBg@mail.gmail.com>
- <c8f1c7cf-346f-42b4-9652-69476e763d5f@gmx.de>
- <20231216221420.GA2513409@bill-the-cat>
-Message-ID: <5C28134C-16F4-4959-8EB6-A5A01488F33B@gmx.de>
+ spf=pass smtp.mailfrom=jbx6244@yandex.com
+Received: from mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c18:3d80:0:640:1395:0])
+ by forward501a.mail.yandex.net (Yandex) with ESMTP id 960E86141B;
+ Sun, 17 Dec 2023 01:45:05 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
+ (smtp/Yandex) with ESMTPSA id 1jvPLN1d1W20-IJQDhObR; 
+ Sun, 17 Dec 2023 01:45:04 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.com; s=mail;
+ t=1702766704; bh=WvKemtKAYPSr9PArWwtGHEDSnODYX5BD7dvTyuajg38=;
+ h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
+ b=g+d6y/NmDLJxf5b33MM+Hz6GJd3NHlTNA/IomynI+/iC6gQtj6Vp4FyYo7RJVDQzL
+ 0ePda3endPKdMt/EMIbraop2qqMObHv6NKVntdLp6b5IcpOXAv4EYerBK08W7AV0i1
+ 2A89ezNUX8Y8TO0J/7eyw6RjlEO5VTz/20N8YFnw=
+Authentication-Results: mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net;
+ dkim=pass header.i=@yandex.com
+Message-ID: <f59bcbea-fd04-864f-b95c-5b4c4872c28d@yandex.com>
+Date: Sat, 16 Dec 2023 23:45:00 +0100
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:KlLHdbB8HQvDqCzlXk11KfppVt0pRpCiFuxPuvseQxjGI3MBjPp
- QhHU0z0/5xIsx6PqYY2NJ6BVYfzlcSkJ1XjBNvBUgbNUIzm4mu5vQueCrIZGQgitrrnyX8c
- wDE77KVrSml2hOWoRJFEgKPvWkXJjo94NiprThbKAUjjM6xGXK2E51uK5EQrQY21JVs/zQ1
- Z1tnqOSECEN9nPazJjreg==
-UI-OutboundReport: notjunk:1;M01:P0:53Zqh1xAGKc=;FUatwFO4mBKnCkFXLc712ec66QC
- 7O2GZMzHgiKWwi/6NgnDt3DLzITGDdFCrlpunOeOIKXRkqPTPO40AYoQEY2P8XF6GylvUgS9G
- wpA8XvsSh+5PN+itLoynJegb+BKnlbIddxIcAoUnx1smcVYIsGjm/uNMDlMQBLhjvI4R8+pLx
- 7Eu0LraQuYu8rtjRN3z/TkR0Kz7ugPSGU2200Bep2fPkbvjkDzM59jDuM6/V8TN3kj1MukJUp
- odvES3cJcdaN+ECNuUEsfiUnfn6T1JxuESWQwgHn0h8zvttE9i17DuEpsKnzMyHD2LNoWXF+K
- GYN9e2tZD7znyS5TPXLSXCh1FnNYAUVeOcfI/QUJyEso0lLx2Rtur0qXPOhrg1/hCMLPsygKf
- uxu3xy9lrnRKi1NLXIYsLmlO3qe3dMPkKRQTNYk8FxC5qdx/xzw4DDhZ23J0STMNFo+uBknJv
- 8vI8O2u2mmqyJtIuAIcDw/a5pzUkodSRWBFMr2v4+UJdpwI6I8Q8k6TMhfwoi4BpZzkYeO/jz
- g/uA+cDVy2yhq50hJYN/Coc0NMO9wN2h4KJftbiddNLB2YOt49AIlHPuPAPjqA8TwfrK2d87S
- c7VdXgKO36xmIzc51srylbtzpVUttTRkfjst2KOcQ39fsrzsmZJQf623TWyHxj1FY4SMrzE7b
- YTz7lgf0dI0qhIybeNDrk2ZVwMzVx5EfC5HGjL3dINslnjcm/QoB/ndf1wxbQVaaEgyrYqW88
- YQdWG37Ym9kM/k9VNulAc2c8/8vPdzArREHVolx9rBEcOiLHk8Ug7e0Mj1yoeeSwkEwk4qMn8
- EHxyKE4w/BAw+zRdCR8ILD8uywNe+yRzxdnsFPg3Ztku9e2XI8fPFiAisxFgSCMrgYbLmK1i7
- 5Ho4gJlDYM6Xy7OZgpQCVcj+cBAP6TatPDc0jutge97elWPbC5rlMijfPYSGwl+vk9n5GYW8u
- jSJ7nQ==
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 13/17] video: rockchip: Add rk3328 vop support
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Stuebner <heiko@sntech.de>
+Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
+ Jagan Teki <jagan@edgeble.ai>
+References: <20231211085939.5478-1-jagan@amarulasolutions.com>
+ <20231211085939.5478-14-jagan@amarulasolutions.com>
+Content-Language: en-US
+From: Johan Jonker <jbx6244@yandex.com>
+In-Reply-To: <20231211085939.5478-14-jagan@amarulasolutions.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 17 Dec 2023 00:23:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,78 +81,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jagan,
+
+In  your patch U-boot users must add a new file for each new Rockchip SoC.
+
+With the VOP2 introduction the VOP1 structures and functions are frozen/stabilized.
+
+My proposal would be to use a file simular to Linux rockchip_vop_reg.c and port it to U-boot as is done in the manufacturer tree.
+
+Together with a simple basic rockchip_vop.c to start with.
+
+Not sure if we need a kind of DRM frame work.
+
+Question: What do the U-boot maintainers think of this DRM implementation in use by Rockchip. Is that a route that useful for mainline?
+
+Let me know your ideas.
+
+Johan
 
 
-Am 16=2E Dezember 2023 23:14:20 MEZ schrieb Tom Rini <trini@konsulko=2Ecom=
->:
->On Sat, Dec 16, 2023 at 09:57:41PM +0100, Heinrich Schuchardt wrote:
->> On 12/16/23 21:46, Simon Glass wrote:
->> > Hi,
->> >=20
->> > On Tue, 21 Nov 2023 at 06:21, Tom Rini <trini@konsulko=2Ecom> wrote:
->> > >=20
->> > > On Tue, Nov 21, 2023 at 01:18:09PM +0100, Heinrich Schuchardt wrote=
-:
->> > > > On 11/12/23 21:55, Simon Glass wrote:
->> > > > > This function is defined by bootstd so using it precludes using=
- that
->> > > > > feature=2E Use the board_early_init_r() feature instead=2E
->> > > > >=20
->> > > > > This requires moving quite a lot of code into the board directo=
-ry, butt
->> > > > > this is the normal place for code called by board_early_init_r(=
-)
->> > > > >=20
->> > > > > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->> > > > > ---
->> > > > >=20
->> > > > > Changes in v2:
->> > > > > - Drop duplicate acpi_xsdt patch
->> > > > > - Put the board_early_init_r code into board/
->> > > > >=20
->> > > > >    board/efi/efi-x86_app/Makefile  |   5 +
->> > > > >    board/efi/efi-x86_app/efi_app=2Ec | 205 ++++++++++++++++++++=
-++++++++++++
->> > > >=20
->> > > > Our target should be to enable building the EFI app on all archit=
-ectures=2E
->> > > >=20
->> > > > Only x86 specific code should be added to board/efi/efi-x86_app/e=
-fi_app=2Ec=2E
->> > >=20
->> > > A later enhancement to make U-Boot as an EFI app more generic would=
- be
->> > > good, but outside the scope of this patch which is moving generic c=
-ode
->> > > out from "lib" and in to "board"=2E
->>=20
->> I cannot see that this patch is moving any code our of lib/=2E
->>=20
->> But why should we move generic code into board?
->>=20
->> >=20
->> > This patch was marked as old /archived in patchwork so has been
->> > forgotten=2E I have marked it new and non-archived in the hope that i=
-t
->> > can be applied to -master soon=2E
->>=20
->> There is nothing x86 specific about the code=2E Generic code should be =
-in
->> lib/=2E Please, provide a new version of the patch=2E
+On 12/11/23 09:59, Jagan Teki wrote:
+> From: Jagan Teki <jagan@edgeble.ai>
 >
->It's not generic EFI code, it's generic "U-Boot as EFI application" code
->and so the whole "board" needs a bit of a clean and re-work as we all
->agree that there shouldn't be anything architecture specific about it,
->only building the binary for the correct architecture=2E However, we just
->aren't well structured to support that right now=2E Where on the list of
->priorities does that have to fall rather than just allowing for
->functionality to be tested / used? There's not yet IIRC efi-arm64_app
->but what we have today (and would have had with Simon's patch) should
->have just built and worked=2E
+> Add support for Rockchip RK3328 VOP.
 >
-
-We have /lib/efi/ for that code=2E
-
-Regards
-
-Heinrich
+> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
+> ---
+>  drivers/video/rockchip/Makefile     |  1 +
+>  drivers/video/rockchip/rk3328_vop.c | 66 +++++++++++++++++++++++++++++
+>  2 files changed, 67 insertions(+)
+>  create mode 100644 drivers/video/rockchip/rk3328_vop.c
+>
+> diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
+> index 4991303c73..f55beceebf 100644
+> --- a/drivers/video/rockchip/Makefile
+> +++ b/drivers/video/rockchip/Makefile
+> @@ -6,6 +6,7 @@
+>  ifdef CONFIG_VIDEO_ROCKCHIP
+>  obj-y += rk_vop.o
+>  obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
+> +obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
+>  obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
+>  obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
+>  obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
+> diff --git a/drivers/video/rockchip/rk3328_vop.c b/drivers/video/rockchip/rk3328_vop.c
+> new file mode 100644
+> index 0000000000..2512314e64
+> --- /dev/null
+> +++ b/drivers/video/rockchip/rk3328_vop.c
+> @@ -0,0 +1,66 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2023 Edgeble AI Technologies Pvt. Ltd.
+> + */
+> +
+> +#include <common.h>
+> +#include <dm.h>
+> +#include <video.h>
+> +#include <asm/io.h>
+> +#include "rk_vop.h"
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +static void rk3328_set_pin_polarity(struct udevice *dev,
+> +				    enum vop_modes mode, u32 polarity)
+> +{
+> +	struct rk_vop_priv *priv = dev_get_priv(dev);
+> +	struct rk3288_vop *regs = priv->regs;
+> +
+> +	switch (mode) {
+> +	case VOP_MODE_HDMI:
+> +		clrsetbits_le32(&regs->dsp_ctrl1,
+> +				M_RK3399_DSP_HDMI_POL,
+> +				V_RK3399_DSP_HDMI_POL(polarity));
+> +		break;
+> +	default:
+> +		debug("%s: unsupported output mode %x\n", __func__, mode);
+> +	}
+> +}
+> +
+> +static int rk3328_vop_probe(struct udevice *dev)
+> +{
+> +	/* Before relocation we don't need to do anything */
+> +	if (!(gd->flags & GD_FLG_RELOC))
+> +		return 0;
+> +
+> +	return rk_vop_probe(dev);
+> +}
+> +
+> +struct rkvop_driverdata rk3328_driverdata = {
+> +	.dsp_offset = 0x490,
+> +	.win_offset = 0xd0,
+> +	.features = VOP_FEATURE_OUTPUT_10BIT,
+> +	.set_pin_polarity = rk3328_set_pin_polarity,
+> +};
+> +
+> +static const struct udevice_id rk3328_vop_ids[] = {
+> +	{
+> +		.compatible = "rockchip,rk3328-vop",
+> +		.data = (ulong)&rk3328_driverdata
+> +	},
+> +	{ /* sentile */ }
+> +};
+> +
+> +static const struct video_ops rk3328_vop_ops = {
+> +};
+> +
+> +U_BOOT_DRIVER(rk3328_vop) = {
+> +	.name	= "rk3328_vop",
+> +	.id	= UCLASS_VIDEO,
+> +	.of_match = rk3328_vop_ids,
+> +	.ops	= &rk3328_vop_ops,
+> +	.bind	= rk_vop_bind,
+> +	.probe	= rk3328_vop_probe,
+> +	.priv_auto	= sizeof(struct rk_vop_priv),
+> +};
