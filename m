@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1519C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6462C46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:49:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9E0787C42;
-	Sat, 16 Dec 2023 19:48:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D579587C79;
+	Sat, 16 Dec 2023 19:48:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VjPXGqNh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RtSLxmLI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550D487C7D; Sat, 16 Dec 2023 19:48:38 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 7126287C8E; Sat, 16 Dec 2023 19:48:38 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B6BF87C6C
+ by phobos.denx.de (Postfix) with ESMTPS id 98BEB87C6B
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5e4ee907295so8413257b3.3
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-dbcd0928530so1180934276.1
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702752514; x=1703357314; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GvqpfdItUy8sBwsMBHLJAVJYWkV8nVq1InLwjv0ADYI=;
- b=VjPXGqNh+j4LzwJ+JyfBsXqXK5vIdEhIBeGb1fK3ZMnqFeX6CN4/lu6gnxpNcptqrK
- kTxth+gctt+pskJIs7b6S+kmVblZzI0IAjOLqINVSbFusXscdD67YFbi3pDHqf2voEM2
- RR0CXvHGwXplvDNbDmkgq5QumToJ/yZK6yb4Y=
+ bh=HS2b2uJyUj1823H9WTxxiQt26h64zEHE0mE0OAVNB7s=;
+ b=RtSLxmLIkk3t0JZKTIB2YB6N0sXW8HPAnQlwsIMFHDtS/AzO2lBPFuyzjuG0kc8ha0
+ L1i4KWoiBXiHuNyRHWJDKY8exKzv1gsaRmMptr31nGF4TZIOgjLWz+7DMY8Z3doKlenX
+ mDSoNlJA/1ta7shMNfnoCYuIoF1pCerydMb/4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702752514; x=1703357314;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=GvqpfdItUy8sBwsMBHLJAVJYWkV8nVq1InLwjv0ADYI=;
- b=Y8HZThiMpmhOMePJuWfKoO/j3qwygGMypt4zZ/9tTeF5CoZ70O/g2SZzmg2FVttguj
- golLrueexDDp/N2V9lZ6CSw961XsLuzN3hGOWfdTOWLAHSBnC03bZp/J1KUT+10Evkm9
- /Mks/okRPZ5TDYrZqaMTevDxiajukgHpQ2HJqRGBoK4TaEi1hKpPdosy6du1itSyErzg
- cfQuNi3zGOQ9EKRXdSmdB9SUXQ2ArelHdtoFDDU2LuC8vMAI0kr6XZN2gWZlKL/Tk2ja
- Vd/1irbBDO6qd5Qi0438+/LoHZv9eB3t1jqG0yK6TLjqcJdler7h43SpeVRwQKJyTqvn
- 04CQ==
-X-Gm-Message-State: AOJu0YyRQbZqwXpzC2qSOlRUl+48SqB50H/19z6vzYC9zGV4SrDvJz+G
- uXn82qr8tydqqB6fZpRt2XJkAr0KXVtXn8w8FCp55wgwnYLzqq6xz1E=
-X-Google-Smtp-Source: AGHT+IHKNQIkOs6Pdw4tC2STExRtpcuuG3UPPe3jCF80iMfusUiZNNxNVOUqeTHcSAfwdswO25GZuXgbJq6NV/oUP0k=
-X-Received: by 2002:a81:5b85:0:b0:5de:96ec:6f35 with SMTP id
- p127-20020a815b85000000b005de96ec6f35mr11105537ywb.11.1702752514142; Sat, 16
- Dec 2023 10:48:34 -0800 (PST)
+ bh=HS2b2uJyUj1823H9WTxxiQt26h64zEHE0mE0OAVNB7s=;
+ b=QkmPEqJipuLPNRqKeAbDGP3K2AqqyZhdgH97E27xXzMaYZs2SbpoID95D/zihD0L0G
+ XJjmqPIvJgncKaR8gqrlCZ+LzGWIdsmf+h/HhkumfSTThT3r8zvFfcy5chjKjAxBdfON
+ qqhjhQ/3rbDqNDWTRAGe4DdS0OCvmRMTIKn48dhsLhDTyXA59THIVQepxq7H6x5B4KFu
+ +wC6qI9sn93BzfDJLEnvM+kOY66BzQUSgaW2v9RsRRJ7InJO4onYQroFpo7xjc8iiTtW
+ 7UZNRLnAkP9L4Jl2VPpD7yMRB9tmaDbO5YF2SU5ZOEl+doI/mY90+MzEaxwvURjh5ZsT
+ f1SA==
+X-Gm-Message-State: AOJu0YwAHMKN82zwzLoPAKD3vh74p3M4f99sUz1juR9g1+nInvCAyrEX
+ JrB6S+lubWiitbIM01vTTIwqBBcu/ldkS4QHB9GwKR5G+sxjkunYeDk=
+X-Google-Smtp-Source: AGHT+IFYguoInqnqYgRN9Oho1yTjyA8Pd3NUOGGcmfMJPsZN9A6QgPXm3bUvnt/Ox3cg4dSqvnT/M8uadUGfbt5o9l4=
+X-Received: by 2002:a0d:dbd6:0:b0:5e5:eba:9d5 with SMTP id
+ d205-20020a0ddbd6000000b005e50eba09d5mr889766ywe.94.1702752514147; 
+ Sat, 16 Dec 2023 10:48:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214121654.3042335-1-trini@konsulko.com>
-In-Reply-To: <20231214121654.3042335-1-trini@konsulko.com>
+References: <5d800e23-e427-4198-ab24-f2e1fe595c4f@longervision.com>
+In-Reply-To: <5d800e23-e427-4198-ab24-f2e1fe595c4f@longervision.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:45:55 -0700
-Message-ID: <CAPnjgZ0nWLPC=H7FpkFhjnFB0G4+nfhxfQNxKCKQg3RrUhCQVQ@mail.gmail.com>
-Subject: Re: [PATCH] global: Restrict use of '#include <linux/kconfig.h>'
-To: Tom Rini <trini@konsulko.com>
+Date: Sat, 16 Dec 2023 11:46:20 -0700
+Message-ID: <CAPnjgZ3U+6E42HgO0gXirp6n6NKXt1tH2kRwK6T-EpSkaYXAzA@mail.gmail.com>
+Subject: Re: Where is the u-boot for BeagleV-Fire?
+To: jiapei@longervision.com
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -80,37 +80,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Dec 2023 at 05:16, Tom Rini <trini@konsulko.com> wrote:
->
-> In general terms, we -include include/linux/kconfig.h and so normal
-> U-Boot code does not need to also #include it. However, for code which
-> is shared with userspace we may need to add it so that either our full
-> config is available or so that macros such as CONFIG_IS_ENABLED() can be
-> evaluated. In this case make sure that we guard these includes with a
-> test for USE_HOSTCC so that it clear as to why we're doing this.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  arch/arm/include/asm/arch-fsl-layerscape/config.h | 1 -
->  arch/arm/mach-rockchip/tpl.c                      | 1 -
->  arch/arm/mach-sunxi/dram_sun50i_h6.c              | 1 -
->  arch/arm/mach-sunxi/dram_sun50i_h616.c            | 1 -
->  arch/arm/mach-sunxi/dram_sunxi_dw.c               | 1 -
->  boot/image-fit.c                                  | 2 +-
->  boot/image.c                                      | 2 +-
->  drivers/timer/dw-apb-timer.c                      | 1 -
->  env/embedded.c                                    | 2 ++
->  include/bootstage.h                               | 2 ++
->  include/configs/at91-sama5_common.h               | 2 --
->  include/configs/tqma6.h                           | 1 -
->  include/env_internal.h                            | 1 -
->  include/u-boot/ecdsa.h                            | 1 -
->  lib/rsa/rsa-verify.c                              | 2 +-
->  test/dm/scmi.c                                    | 1 -
->  tools/mkeficapsule.c                              | 1 -
->  17 files changed, 7 insertions(+), 16 deletions(-)
->
+Hi,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Fri, 15 Dec 2023 at 06:15, Pei Jia <jiapei@longervision.com> wrote:
+>
+>
+> Where can I find the u-boot defconfig file for BeagleV-Fire?
+>
+> I've got an issue posted at
+> https://forum.beagleboard.org/t/error-illegal-operands-li-t1/36823 .
+
+You could check here, or ask the vendor?
+
+https://github.com/orgs/beagleboard/repositories
+
+Regards,
+Simon
