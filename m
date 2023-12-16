@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 925FCC41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 19:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA28AC46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 19:27:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E4C587A7F;
-	Sat, 16 Dec 2023 20:23:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4939D87BDB;
+	Sat, 16 Dec 2023 20:27:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Fxu5A6JE";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JHKh2rPK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC40487B59; Sat, 16 Dec 2023 20:23:06 +0100 (CET)
+ id E3D4387BF2; Sat, 16 Dec 2023 20:27:12 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6E7B87720
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 20:23:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBB3B87A7F
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 20:27:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,24 +31,24 @@ Received: from [172.25.0.170] (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 03CB0413C5; 
- Sat, 16 Dec 2023 19:23:03 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 44566413C5; 
+ Sat, 16 Dec 2023 19:27:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702754584;
- bh=ZWMYaYROxzdV0ku/69FzvSGf67onMYYCWgGygjUukW4=;
+ s=20210705; t=1702754828;
+ bh=xIcqcIeG4fmmaKuB3Iv+tY89zLStJQkuEvWqYbBbM+U=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=Fxu5A6JEcHThjpCo/hgXntTEPJzlj/pLI0oZ3Gri4f1OG37qQQp1AWf9YCbjJN4IA
- J0dVaZGTqp5MzOhA0jT8/avoYJ2hVlqRxw/j8oCQ6wqWh6tvW4PFYiB7LW8h/NwuuL
- ayoDzce3zevADpXUUk6JtkojOq5zk8OHhYMzkpgHGllG/3qwoIS5ols2zCcLGnT8xY
- 95noSAZfF7DGFO/CFW4fOpg9ykKGrNAVk3vDk/0E5D8QdeIeFQ1XAzT3jIHJ9Q//RA
- 91fFX4/TLPiqNm8KxcAlRCqtr2zVFN43BTXi6JEIYn5D4G7NWHdl8wCiLNxhbhtmfj
- OMi0L+dIurZrg==
-Message-ID: <05b45f95-f760-49ee-9888-39ff913177a6@canonical.com>
-Date: Sat, 16 Dec 2023 20:23:03 +0100
+ b=JHKh2rPKlVVr97qb18oR5CLSX8XkciMXc0qv5XRs0ZYkxhYkC51gcdmfUBE2K+Mxi
+ MJ7JG256kBtpDOwUOmTfBAgf1JH7vsVIdZTcsGvGOEgVPanPiPPQU09eI3k/y8Kyug
+ Woi8zk9ZXyjKzSH9pG979pU501HwoasKOaQSU073DDA0mIQzvjidklOf+D8G7jk2HU
+ 6u0e6U7XJJJS+C4K+Lz8/oUYMuhob65lEs0rKpeu06vieWYoFE4NmuoH0q0Nx9FNqf
+ IxUAno+oZmC0Jc3fJeGLuOhYLRfQISJecH2dCXyeA6rflhz1IaiVM5tilnD8yH+wjO
+ wL0GQX8gHf3WQ==
+Message-ID: <3dd6f971-0c2b-402f-b6ca-0821f8cccfa3@canonical.com>
+Date: Sat, 16 Dec 2023 20:27:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/9] arrm: add ACPI fields to global data
+Subject: Re: [PATCH v2 8/9] configs: qemu: add config fragment for ACPI
 Content-Language: en-US, de-DE
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
@@ -56,10 +56,10 @@ Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Bin Meng <bmeng.cn@gmail.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
- <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
- <CAPnjgZ23cv=i+9_vuM3EaQ2-vUhEvzcd7Dynowd41M5hsSGHrA@mail.gmail.com>
+ <20231215133245.7923-9-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ2C45f_WhDQz5TKk_THVh5HZ8t6PzozKZ1ROF4r16Cw8Q@mail.gmail.com>
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAPnjgZ23cv=i+9_vuM3EaQ2-vUhEvzcd7Dynowd41M5hsSGHrA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2C45f_WhDQz5TKk_THVh5HZ8t6PzozKZ1ROF4r16Cw8Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -79,51 +79,31 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 12/16/23 19:46, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Fri, 15 Dec 2023 at 06:32, Heinrich Schuchardt
+> On Fri, 15 Dec 2023 at 06:33, Heinrich Schuchardt
 > <heinrich.schuchardt@canonical.com> wrote:
 >>
->> Add fields for the location of ACPI tables to the global data.
+>> Provide a configuration fragment to enable ACPI on QEMU.
 >>
 >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >> ---
 >> v2:
->>          new patch
+>>          no change
 >> ---
->>   arch/arm/include/asm/global_data.h | 4 ++++
->>   1 file changed, 4 insertions(+)
+>>   MAINTAINERS                         |  1 +
+>>   board/emulation/configs/acpi.config |  3 +++
+>>   doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
+>>   doc/board/emulation/index.rst       |  1 +
+>>   4 files changed, 28 insertions(+)
+>>   create mode 100644 board/emulation/configs/acpi.config
+>>   create mode 100644 doc/board/emulation/acpi.rst
+>>
 > 
-> These need to be #ifdefed as they affect global_data size,
-> particularly in SPL. In fact, we have a problem there.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Why would it be problematic to have more unused fields in global data?
+Are you planning to enable binman to build configurations with config 
+fragments? This would be needed for testing in CI.
 
 Best regards
 
 Heinrich
-
-> 
->>
->> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
->> index 75bd9d56f8..9505399bb1 100644
->> --- a/arch/arm/include/asm/global_data.h
->> +++ b/arch/arm/include/asm/global_data.h
->> @@ -19,6 +19,10 @@ struct arch_global_data {
->>   #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
->>          u32 sdhc_clk;
->>   #endif
->> +       ulong table_start;              /* Start address of ACPI tables */
->> +       ulong table_end;                /* End address of ACPI tables */
->> +       ulong table_start_high;         /* Start address of high ACPI tables */
->> +       ulong table_end_high;           /* End address of high ACPI tables */
->>
->>   #if defined(CONFIG_FSL_ESDHC)
->>          u32 sdhc_per_clk;
->> --
->> 2.40.1
->>
-> 
-> Regards,
-> Simon
-
