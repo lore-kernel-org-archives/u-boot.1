@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D070C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A88FC4332F
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:17:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 601FA87C94;
-	Sat, 16 Dec 2023 04:15:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA86D87C78;
+	Sat, 16 Dec 2023 04:15:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HPUMBNvk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V2eqKWiw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAA2487C76; Sat, 16 Dec 2023 04:15:24 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 0F31987C66; Sat, 16 Dec 2023 04:15:25 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D3D387B3B
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 63ABD87C5F
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-35f89f18daeso5488815ab.3
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:21 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-7b3708b3eacso48409739f.2
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702696519; x=1703301319; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0MSzuf5ZtitDxQ2UhGFg+YURrNd2q5NkShFXIw1AVQw=;
- b=HPUMBNvkNzVFdgMU5QizpZQtH4OaSOmAzGLRNjf991Ja5QcT/ErtTcbvsZwwGQH3OX
- HdWNYbVYSV1vIjGtRuSZ4WwXPMPgKtVQ8gUw/yg8GmBAmZZjQpoJKR8cuulu7KWFrHgr
- aOFFMUTL0CUcZIfRI+W9vQ9GL7ynh3JTG23e0=
+ bh=ZcI3S7KsB86sE2M9KXDz0ZapSUpAtWc9NrprvXPTAY8=;
+ b=V2eqKWiw/CU96J7vzrMV2B9kJ74MGcmU8uYo+pHc4ju0eUHAr1BHT6buYlKYLCa26t
+ npSg/zxYLsVyawHlo6/RojdKK/Ohvqhs2DBLS0COblA6g7EQYMqWVGW9B6Zezoy1nB+b
+ KHxAffH+ua6LzfC4BbbAqeCtmcRIUCF0b/33g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702696519; x=1703301319;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0MSzuf5ZtitDxQ2UhGFg+YURrNd2q5NkShFXIw1AVQw=;
- b=BUPyPLs76kR9TlD7aEP1vZE18X+AjfqWTo7Yz1eFrk1DZt0770etgCAAol9BaN8oF1
- 99Aj2f1+JU6TX2nxq6aoj2uD08afHPCv2cGNzc5TUQtpq8o8ESCJ8F4s5BURbfqrLVTN
- SHTFoYEIEvoPhVyqRQIzUSShqpTa0iF1a+7AjcU9q1yEY0ZnQ1EuCcRz5GxqZ9l/o0cp
- T6Xd77tXyR/IQbUPUDRn1eSonk3uG4Im/bK9wJGzE6ia5uVQO4wFEOr2W4vUwIexGM7D
- Tn7nPLFEoW9Q2ABsq+5NRUw+YtvnQ5U0Kf83NBdaOxE742XjyNKepRuQNMkR4vks6mq+
- TjLw==
-X-Gm-Message-State: AOJu0Yz/8FbAfwcLRiYnLwr9cPNOYaPawkItVOjewu6GEDqyTqH4dZvH
- mRRdRo+dRt94HLHd2YkIn2uQJhs3p83aH9pMV2ZslA==
-X-Google-Smtp-Source: AGHT+IHX1JqPR5yhOysWdB/N5bYUiUTZQCYsShQflutiDZi1oU6RArgcx4QZW3hK7YTg0Te7QfO6tA==
-X-Received: by 2002:a05:6e02:1ba1:b0:35f:79ca:4e34 with SMTP id
- n1-20020a056e021ba100b0035f79ca4e34mr5987693ili.15.1702696519674; 
- Fri, 15 Dec 2023 19:15:19 -0800 (PST)
+ bh=ZcI3S7KsB86sE2M9KXDz0ZapSUpAtWc9NrprvXPTAY8=;
+ b=EZkSwQa5UkcRX9y4leyH25kT2CrR0D2n6mTLuMmYJxSFjODNuldd1jghxiGiPI+qkr
+ iXUtC07JJHV1AN2GdQ/f57p9Ilw0mtSVb1+TdXIcwNfSfZ5jaTH2SJNLfy+UkD68qwjL
+ 4KyCFTEDjOXps7bcdTsJcSAnsN+hTIAuu5WAs7mBeTCHp4lBIVM3Wjv7gPKjHO74roxb
+ G+ZFWpdbtb3/L1YO+ZZqlGZrB2LTuW5FMqPL+9hjqk0+iBVYfZhtR+M+vWUzsqu+Gpql
+ CPc/VV6EAiBRnceexU3jcD15CwYP2/1myHMNKIPm4CgR5dWjtG31GRSfU8CP1QtHBkM3
+ d3wA==
+X-Gm-Message-State: AOJu0Ywy/hr7GruVpW7DkHeLsQ4soH0xpJiQM2Gs/5IclFcCvHNTzIfH
+ UHpcH25vZbmWP9OgHfRswrb8jrrVvF/YMEOjPEhNXA==
+X-Google-Smtp-Source: AGHT+IHiGIJb3rgS5ASM5kOLJ/UFGZoFKzj7SCdmM2oUTxndRgEg4cWqfSIvui1wz/Mz8XmMJgGT7w==
+X-Received: by 2002:a92:ca4a:0:b0:35d:5405:e63 with SMTP id
+ q10-20020a92ca4a000000b0035d54050e63mr15282268ilo.31.1702696518967; 
+ Fri, 15 Dec 2023 19:15:18 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- z10-20020a92ceca000000b0035f75e80d1esm542163ilq.52.2023.12.15.19.15.19
+ z10-20020a92ceca000000b0035f75e80d1esm542163ilq.52.2023.12.15.19.15.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 19:15:19 -0800 (PST)
+ Fri, 15 Dec 2023 19:15:18 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Eddie James <eajames@linux.ibm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v3 13/22] bootz: Avoid use of #ifdef
-Date: Fri, 15 Dec 2023 20:14:17 -0700
-Message-ID: <20231216031446.2222362-9-sjg@chromium.org>
+Subject: [PATCH v3 12/22] booti: Avoid use of #ifdef
+Date: Fri, 15 Dec 2023 20:14:16 -0700
+Message-ID: <20231216031446.2222362-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231216031446.2222362-1-sjg@chromium.org>
 References: <20231216031446.2222362-1-sjg@chromium.org>
@@ -98,28 +98,32 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 (no changes since v2)
 
 Changes in v2:
-- Split out bootz removal of #ifdef
+- Split out booti removal of #ifdef
 
- cmd/bootz.c | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+ cmd/booti.c | 24 +++++++++++-------------
+ 1 file changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/cmd/bootz.c b/cmd/bootz.c
-index a652879ea5ec..8c25905598a8 100644
---- a/cmd/bootz.c
-+++ b/cmd/bootz.c
-@@ -64,7 +64,7 @@ static int bootz_start(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/cmd/booti.c b/cmd/booti.c
+index 41d40c962ec2..d3cceb7e0a39 100644
+--- a/cmd/booti.c
++++ b/cmd/booti.c
+@@ -105,6 +105,7 @@ static int booti_start(struct cmd_tbl *cmdtp, int flag, int argc,
  
- int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  {
--	int ret;
-+	int states, ret;
++	int states;
+ 	int ret;
  
- 	/* Consume 'bootz' */
- 	argc--; argv++;
-@@ -79,14 +79,13 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	/* Consume 'booti' */
+@@ -120,19 +121,16 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  	bootm_disable_interrupts();
  
  	images.os.os = IH_OS_LINUX;
+-#ifdef CONFIG_RISCV_SMODE
+-	images.os.arch = IH_ARCH_RISCV;
+-#elif CONFIG_ARM64
+-	images.os.arch = IH_ARCH_ARM64;
+-#endif
 -	ret = do_bootm_states(cmdtp, flag, argc, argv,
 -#ifdef CONFIG_SYS_BOOT_RAMDISK_HIGH
 -			      BOOTM_STATE_RAMDISK |
@@ -128,12 +132,15 @@ index a652879ea5ec..8c25905598a8 100644
 -			      BOOTM_STATE_OS_PREP | BOOTM_STATE_OS_FAKE_GO |
 -			      BOOTM_STATE_OS_GO,
 -			      &images, 1);
++	if (IS_ENABLED(CONFIG_RISCV_SMODE))
++		images.os.arch = IH_ARCH_RISCV;
++	else if (IS_ENABLED(CONFIG_ARM64))
++		images.os.arch = IH_ARCH_ARM64;
 +
 +	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
 +		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
 +	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
 +		states |= BOOTM_STATE_RAMDISK;
-+
 +	ret = do_bootm_states(cmdtp, flag, argc, argv, states, &images, 1);
  
  	return ret;
