@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E1D6C46CA2
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 10:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A954BC46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 12:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30A6387A7B;
-	Sat, 16 Dec 2023 11:49:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DEF9587669;
+	Sat, 16 Dec 2023 13:33:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MCAjQPFP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PvX1z+wk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B501487A10; Sat, 16 Dec 2023 11:49:28 +0100 (CET)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
+ id DBDF6876AB; Sat, 16 Dec 2023 13:33:10 +0100 (CET)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F47A87B4D
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 11:49:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B52A387620
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 13:33:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-5c6910e93e3so370654a12.1
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 02:49:21 -0800 (PST)
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-5c67fdbe7d4so391394a12.0
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:33:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702723760; x=1703328560; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702729987; x=1703334787; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J0t8t0FCQrbY4KfO+mRU5jnh/vaWzjqi+WnpvR36NrI=;
- b=MCAjQPFPB+DZ9AUgbCGhKByLNrN8/IAORZlxhyJxh5lIcHtrJ52hcn9GVxKBUReVsQ
- S51XrGxywo5eAyxvtvJwlZE7ZwNcTkLw7qIHnANmrGkn8lWobKbKsvJeMfpDbUbbh2tV
- B7TuogKKusFB2p9S2uM0GnxIOxKdMTp5CG+rkmzIVmbsXvmRCTKL3G2/z0k1QCsnqm5C
- wHcuOBwEE4jon9r6EgiNUN033i7Ab0zY6moVDidp3HKCYCCnx5D46PmBxZl558e4I1lw
- 59U+zn3d6Z1Bp08Tgh4Vp5d0KqD9FpbDqP69DiG4drq6Y9TlqOODDtve3CHaK5KLef0S
- c+/Q==
+ bh=dykua6EDH4ylIqzSyv2Ad0oV27T/NIRx4uUV6Vn5TkQ=;
+ b=PvX1z+wkVD+hLa6wa5Y0oPhiNTQGKvT67H+UNhfhSEUHkf9LOlMPq0BuQC6B7gsXCS
+ rb2XFsz0cKXyftg1YX75Fw49y3LEqB8KXbG283/iBsebgIyCVK5YDAFvU14XlBPyafjr
+ jHg+WhzPaZA1ufD3rtsi4EH2Dwa77WAuqHiRnPaP7sQtM9OFUuuupi6Hx1vIj5R7s9bZ
+ ClaiX11JVX3bwGrSE/SjenUZ5uLAx6/++RPMRfe2Y3sqKO10QkuZjMW+Z1e6Rz7cxc9R
+ bJzB+soOYwMsqD4c33irY8Qga38Wlnfq1B9+jtjvxcjGCwxZ0vHRtAm0gCRyVoeOAEZD
+ rEYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702723760; x=1703328560;
+ d=1e100.net; s=20230601; t=1702729987; x=1703334787;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J0t8t0FCQrbY4KfO+mRU5jnh/vaWzjqi+WnpvR36NrI=;
- b=wFInUeA4MJawEGEFL7iLELACZ9m8V2qQ2NXFcf+6X9uCAkCHwYr7xmmhYzJjQgjqNu
- afL5fAZFr/aarSQE7c6o6poy7dgBlUHzzvo2SmLUW/aQvf2vNgyKlZ1MZhaYSAE2orq9
- jvsGsOlxxfp0IH0crdrcaBzGq3jjukZo7du/Fdl/50RhHxPKahlF61NknR0u1RC1+Spt
- F6ZZ6EkhN/MJzLsCw53t6decEuhi7uWS9nPoiPXSPguX0Oprj1eah+8h9fr8lhH1IRC7
- 9lxvm+kJ6LEEi1+vVXFkxPuLECOR+aOHnT6Kv03MCLbHRePtoe/BriAjtkbwK+XZaPcm
- O4rA==
-X-Gm-Message-State: AOJu0Yw4WEhngSrZsQDWh+5nqWAN1UO8w/obTGfznKSZBV47EvlhxY9O
- JTyJTwOKz1G4um46nuHtUsjxr16qQI7HW03hx7m6FTdo
-X-Google-Smtp-Source: AGHT+IGGVK6VxbakB3O60/2nSvcV2Rd3qCdsQKv8wYPwYY7hVuYE/9i9j4JgUAw7EUQTmpPD2LiidFC8OchKDwIatks=
-X-Received: by 2002:a05:6a00:2d9e:b0:68e:2fd4:288a with SMTP id
- fb30-20020a056a002d9e00b0068e2fd4288amr27799542pfb.3.1702723759843; Sat, 16
- Dec 2023 02:49:19 -0800 (PST)
+ bh=dykua6EDH4ylIqzSyv2Ad0oV27T/NIRx4uUV6Vn5TkQ=;
+ b=WFeCTvU8sgDa1E7wasamwRXH1ZXfZi/+KX6TrLginImVovTzSHJ2+2ksqKipuNZRwJ
+ sn6HNLTs7kjoH5Y5AEV2B+3uG+rg+oqFer88yODCZwmCSI5nvV/Xw2doE5Nb/l/4i/1J
+ tCfGWYjshe4sY1N5n8w/W0yRw4XfmkTDXElJDkcGsImwf7oL1YLvY/FhAkY9lk7bLcUG
+ 6lsJ1q5PlhYY81NXRadklOuabvvsUms9Umnlh2mS5e4/wTsWo2sISSJLEW+b3t7LL24Q
+ AX8qlMACPeBJQ5MDHVKK1r/h5GBugiZwPC5zuKs/W5M4/OS+1FMNsyPQ7MFuPmlNumEP
+ vi6Q==
+X-Gm-Message-State: AOJu0YxTA8H8q7xRNh1CeYsP7IJjB4jhnuqVqx0xdKvoIiXXnj8Ul6xb
+ MR0KhFY7hoIdCQaad5zzud5SnVQ5hMhIOaMG/Ks=
+X-Google-Smtp-Source: AGHT+IFhx3OofzKBf8/Yv86idb+Et9BQiV9iIo81x28rRjqJE1LQUT0WUFK1m9YZww0w97xTdF8q4e9tq91+i+p53y8=
+X-Received: by 2002:a17:90a:9905:b0:286:7cc2:4c15 with SMTP id
+ b5-20020a17090a990500b002867cc24c15mr22359360pjp.0.1702729987000; Sat, 16 Dec
+ 2023 04:33:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214162543.1200276-1-tharvey@gateworks.com>
-In-Reply-To: <20231214162543.1200276-1-tharvey@gateworks.com>
+References: <20231216054243.327104-1-marex@denx.de>
+In-Reply-To: <20231216054243.327104-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 16 Dec 2023 07:49:07 -0300
-Message-ID: <CAOMZO5B14b9f=Tt8rpru-Y41Yd5MjLyZPY+eQ_SvBCdYYzZvZg@mail.gmail.com>
-Subject: Re: [PATCH 1/2] configs: imx8m{m, n,
- p}_venice_defconfig: add arch_misc_init
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Date: Sat, 16 Dec 2023 09:32:54 -0300
+Message-ID: <CAOMZO5DRFMtp6Tj3_kWLKoLf1ek12vieje_sFQMtgQZzuLQ_Ew@mail.gmail.com>
+Subject: Re: [PATCH 1/2] ARM: imx: Force DRAM regulators into FPWM mode on DH
+ i.MX8MP DHCOM SoM
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,11 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 14, 2023 at 1:25=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+On Sat, Dec 16, 2023 at 2:43=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> Enable call to arch_misc_init in order to probe the CAAM driver.
+> In case the Buck5 and Buck6 regulators which supply DRAM Vdd1 and Vdd2/Vd=
+dq
+> respectively operate in automatic PWM/PFM mode, the DRAM EDAC detects mor=
+e
+> correctable errors than if the regulators operate in forced PWM only mode=
+.
+> Force DRAM regulators to forced PWM mode only to stop tempting the DRAM.
 >
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Applied only this one to u-boot-imx next, thanks.
+Applied both to u-boot-imx master, thanks.
