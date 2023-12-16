@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B49AC46CA2
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:48:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C9DC46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:48:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C66B87C34;
-	Sat, 16 Dec 2023 19:48:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C742A87C11;
+	Sat, 16 Dec 2023 19:48:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g9aEeJOv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SrsWUjBO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1753687C30; Sat, 16 Dec 2023 19:48:22 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 959F187BDB; Sat, 16 Dec 2023 19:48:23 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 252C8876A4
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC5A87BDB
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5e4fda12ef0so7483647b3.1
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:18 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-dbd085edf43so686962276.1
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702752497; x=1703357297; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702752500; x=1703357300; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+54beplCkN8DE/PssNmI4FLUUvhXIBJWvRf7L5a6AsQ=;
- b=g9aEeJOvSEqwtuTeJ46JE95UO0txkb5H4T2P8psLmll17xWkDN32cGfGzMpmVA3pPK
- ELdPHwlRRh1kOacboW0C4vjHTL+cJ0l/UWqhlpQr8V7B23t4SSUSpXJnC0GgvXhJzb3P
- XIUb9m/V88KkeQ3t/RDzwHF4eci8Em2LXXvig=
+ bh=YIeMeq6YiZezYm8BiWkj136DvZCqlRY1wUErOF+tHE8=;
+ b=SrsWUjBOonUHI0B601VvCkEoPDMpQcwyawz83PWxMh+AltjgroshW26audwdVADQ3l
+ J8PGqO0LYPioDb9LkZRbWrRoTdrQcauZgC53Y5SysMABj4GvDSspsdxpVh7Zq39264wl
+ TYmXZsld38g/6reYlDMeoShjieluWiVkrIYVw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702752497; x=1703357297;
+ d=1e100.net; s=20230601; t=1702752500; x=1703357300;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+54beplCkN8DE/PssNmI4FLUUvhXIBJWvRf7L5a6AsQ=;
- b=Pk88rC5H5WIJItsy/BMIy0AiKjKOU3ORJwUqKHtO3kalJS1A1yc9NvUPAD0AF8nm89
- HMeCoGbDJVj2LIdfnPWdXAf8SA6c1NEqpeE9Nuug6dYlCPm092EpCBlvTuG5irKUtJ21
- 86N6iNgZv4nEnojzmMKSdCRF9KXiJW+p+3hetaIFYUw0Cy9RO8DjVgrKkUSiKMEAgCJ1
- 6P0pf0x+Wv8GtA4Zd0h/oR9mhMpM0S0q90DPRE4x9PkRddEG/YRwm1lYwes05BG3MGYE
- z4rdlREd+VbZoUA+arnA2zfgEuLbIcrpzIqy/dLWWxJqNE16H4KqvWpBGdvDqV2Qdhfa
- 58sA==
-X-Gm-Message-State: AOJu0YwLElCtIKYWnDmIJF7VEtcWt8RT0PKMhoj+ZIUfllL/9xn9l4me
- +bhscuOs9nx51oOMa/JGvrafwpCvng6MTuHAPvehT1Ot4eRNw4OVsis=
-X-Google-Smtp-Source: AGHT+IE+4Zz1dtyH9nSmyfaQRCMrtuBzU9azP9vJ8oHPVO5H9HIOS8TEAC8WXMnW9QUP82iD1cjs8WtYNTvBx8l4tfk=
-X-Received: by 2002:a0d:f0c4:0:b0:5e5:64a6:a04 with SMTP id
- z187-20020a0df0c4000000b005e564a60a04mr546846ywe.32.1702752496563; Sat, 16
- Dec 2023 10:48:16 -0800 (PST)
+ bh=YIeMeq6YiZezYm8BiWkj136DvZCqlRY1wUErOF+tHE8=;
+ b=ag244gqSj4Yn/4cw1gt6a3KIU78CGqOcJ8O9HXxYx02+ldHXwXILo1xjZt1mi6yI/I
+ J1Y7T3Jc/IUeCsKPB8NWsU72lloBMrc+aEIgee6eV61EF1hMlmhh9FNTFq+/1JV2ssPa
+ OAUEWrFMHGYnXxO5zgw26mxZ4FrqOSd2kV3CyRCuu37VZL5aj+7ccktZxk/f/5pDovQL
+ imF+gXskJfdFKldXgkKYC+E81BaQJrgFvElJYhdFKSByvou3g+ofuRnUPfr7DvYP/xcD
+ 3ZqqHRHOl0b+oCXuYXCLDh6QoaqDcHalNmJ7Jy8etEdUJXVKxHCmsu/g1jLxGU2XjE4l
+ 79hg==
+X-Gm-Message-State: AOJu0YyjeuSHz/ZWWgcVvuHESd52xJCVMMkiJCxXdJqt/NatPqqrwo3P
+ jC2iRUz1F9ith9sCfvxDn/5xc5+DKumdannMgh6Yzw==
+X-Google-Smtp-Source: AGHT+IGaxThX7hTGFTSh6CNFGQFp5lAJ7+vI5ZEYHD4Dd41RGlXjYT3HYcRWjV5tglZWIOqHHiqoTyQj66J43rfCVCM=
+X-Received: by 2002:a81:a155:0:b0:5e4:e7ff:957f with SMTP id
+ y82-20020a81a155000000b005e4e7ff957fmr1688089ywg.29.1702752500071; Sat, 16
+ Dec 2023 10:48:20 -0800 (PST)
 MIME-Version: 1.0
-References: <c3c391b1-a7ec-48e5-a193-1c63a6c696bb@longervision.com>
-In-Reply-To: <c3c391b1-a7ec-48e5-a193-1c63a6c696bb@longervision.com>
+References: <acfe7ea1-a25a-4293-9e05-bfe4ed7c2a05@gmx.de>
+In-Reply-To: <acfe7ea1-a25a-4293-9e05-bfe4ed7c2a05@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:47:22 -0700
-Message-ID: <CAPnjgZ3GCG7rv0oRrGnWf8o+4fqW7FKFtTeR-H06FpcQWeBbTw@mail.gmail.com>
-Subject: Re: Where to find those definition for particular boards?
- CFG_SYS_INIT_RAM_ADDR, CFG_SYS_INIT_RAM_SIZE, GENERATED_GBL_DATA_SIZE? etc.
-To: jiapei@longervision.com
-Cc: u-boot@lists.denx.de
+Date: Sat, 16 Dec 2023 11:45:39 -0700
+Message-ID: <CAPnjgZ1CmmEHxOKPRVbo1zjQ8FDQ1HxdU9ww6c5fJBFc7+Dtjw@mail.gmail.com>
+Subject: Re: Booting fails on the sandbox
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,52 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Heinrich,
 
-On Fri, 15 Dec 2023 at 06:15, Pei Jia <jiapei@longervision.com> wrote:
+On Sat, 16 Dec 2023 at 07:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
+> Hello Simon,
 >
-> Hi, all:
+> I have built sandbox_defconfig with PREBOOT='host bind 0 ../sct.img'
 >
-> I'm using a *BeagleV-Fire*, However, I failed to build *u-boot*, and now
-> traced to this step. Where to find those *macro values* specifically for
-> this board *BeagleV-Fire*?
+> On the image I have an ESP with file EFI/BOOT/BOOTX64.EFI.
+>
+> I would expect the sandbox to boot from the ESP.
+>
+> But when starting the sandbox is does not boot. Instead it shows a menu
+> with some Fedora related entry:
+>
+> Fedora-Workstation-armhfp-31-1.9 Boot Options.
+> 1:      Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+>
+> This makes absolutely no sense on an x86_64 system. Could you, please,
+> fix sandbox_defconfig to boot according to distroboot.
 
-I assume that beaglebone.org has a U-Boot for this board. Perhaps it
-is somewhere at [1] ?
+What sort of 'fix' are you thinking of? You should be able to discover
+all the options with 'bootflow scan' and then use 'bootflow select' or
+'bootflow menu' to choose which one you want.
 
-If you are wanting to do the port yourself, then the SoC docs should
-provide the memory map.
+The Fedora thing is used for testing and development.
 
-CUSTOM_SYS_INIT_SP_ADDR could be set to somewhere near the top of RAM,
-perhaps? It is just used to start up U-Boot and prepare for
-relocation.
+Regards.
 
->
->
-> #ifdef CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR
-> #define SYS_INIT_SP_ADDR    CONFIG_CUSTOM_SYS_INIT_SP_ADDR
-> #else
-> #ifdef CONFIG_MIPS
-> #define SYS_INIT_SP_ADDR    (CFG_SYS_SDRAM_BASE + CFG_SYS_INIT_SP_OFFSET)
-> #else
-> #define SYS_INIT_SP_ADDR    \
->      (CFG_SYS_INIT_RAM_ADDR + CFG_SYS_INIT_RAM_SIZE -
-> GENERATED_GBL_DATA_SIZE)
-> #endif
-> #endif
->
->
-> Cheers
->
->
-> --
-> Dr. Pei Jia
-> Email: jiapei@longervision.com
-> Cell: +1 778-863-5816 <tel:+17788635816>
-> Website: https://www.longervision.ca
-
-Regards,
 Simon
-
-[1] https://github.com/orgs/beagleboard/repositories
