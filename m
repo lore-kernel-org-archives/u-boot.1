@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 140DBC46CA2
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 20:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15371C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 20:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9D487C4A;
-	Sat, 16 Dec 2023 21:11:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DF158797F;
+	Sat, 16 Dec 2023 21:46:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="SxstWDX7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fy+F5oQB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4050E87B0F; Sat, 16 Dec 2023 21:11:27 +0100 (CET)
-Received: from mail-vk1-xa4a.google.com (mail-vk1-xa4a.google.com
- [IPv6:2607:f8b0:4864:20::a4a])
+ id 91DF287B0F; Sat, 16 Dec 2023 21:46:47 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE9A87B0F
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 21:11:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8931987725
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 21:46:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=3awR-ZQcKBp4KMPGRXDEMMEJC.AMKS-9MMRJGQRQ.BCLV.BC@flex--moritzf.bounces.google.com
-Received: by mail-vk1-xa4a.google.com with SMTP id
- 71dfb90a1353d-4b2c93002cbso686236e0c.2
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 12:11:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-50e30b28c1aso339790e87.0
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 12:46:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1702757483; x=1703362283; darn=lists.denx.de;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=R+TXkMJ/t6Q+3fjY90wLx224mzpS5P1fMn5YjECxOas=;
- b=SxstWDX7cD5/oJe6sQWpa1kXRc7M3MdeQKMiwJZA8pJNd0jOyopPFLbyNRNleF8qFG
- RUzkinOpcxBBaE+cHeyyNUCdegCiW556N2kc5foGv3QBOC+an500PjbDcydMYqSgP9gK
- VQUliZsTSP90cWuAisgVmB7JFxh8nWr/O28u83+/wQLmhoLC0bfjkwVE1MOOBObnlqlo
- NSN7NZZzO/GdBhrEPTF66nS/+cFiRwrjYOIkDb9WWDXG0vGXxQA86zh/OssM3yWuas6z
- IIJv6y7faOX/rf2ifeLqS25k7U0Z3+KR8YI+s4WKQ9k36AxJjdHygIFVUV2+lN35ii/N
- xP2w==
+ d=chromium.org; s=google; t=1702759605; x=1703364405; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NBAiBAw9V1v9GaPVdQll4DVSpbIGS5ixTtzrRmraLuU=;
+ b=Fy+F5oQB0biBtZ9Y4sh0rwGmvDDBv7oZ0UBiLSbjWIRCm+6iNcB+EpzVMq8schjobI
+ eaPxmR8YZb20sKTRUZ95Vy2xLiKjuhsprFlfK6FLffrcjLFqV2pOu4reHHhbVQ5pfFBW
+ a820iTEKYijOx/Vl6UeumtKYNwZOcW5ZnUm3k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702757483; x=1703362283;
- h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=R+TXkMJ/t6Q+3fjY90wLx224mzpS5P1fMn5YjECxOas=;
- b=Rj4f1MFU7BGYYaB7HUs/qB3sFOwe4rZoC1upa7iCZlAx8l+LQSZFsF8uB3FExC7mqx
- vk01Bl330tWX7lej2n08a0x8cEGQ554hjsgII1ov0rIY/mrjo/wnpvNENpOqLT3oHIiF
- OCvKgq2mKonRZK9xM6sth8kzeDP2YYmR2dXVVG7jbyUQKMM29YXbpSe4zhg1pa+REnDv
- pah8FNw4Wbnl5yJLREAA1XtwyUqs82OFlSPsZuVdjD9K64pbQFkWUqs4o++7aOR4gshP
- 2MT7dRJxg+xKbut1ZuC1reWfxwpfbSoT56Vm4WAph+AzldhWNl9qe1EXA8p4THSKZL9X
- 9neA==
-X-Gm-Message-State: AOJu0YyEzCB/a7MyQ2HCaw90OPyNuRhARMeLX8M7mMXMfy4GOz/Ex23H
- debtbTy1aGU13TqLrykydbdZQRCyr/Dq
-X-Google-Smtp-Source: AGHT+IGwePY9dUe876CZQIU5Z1jp7ZjbvOCDP02RrvTMWUfWzvp89BU19TL/2yu502bEKxvaLO/scCCHZPDf
-X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
- (user=moritzf job=sendgmr) by 2002:a05:6102:1612:b0:464:a368:25fc
- with SMTP
- id cu18-20020a056102161200b00464a36825fcmr380819vsb.4.1702757483712; Sat, 16
- Dec 2023 12:11:23 -0800 (PST)
-Date: Sat, 16 Dec 2023 20:11:19 +0000
-In-Reply-To: <20231216201120.2735840-1-moritzf@google.com>
-Mime-Version: 1.0
-References: <20231216201120.2735840-1-moritzf@google.com>
-X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
-Message-ID: <20231216201120.2735840-2-moritzf@google.com>
-Subject: [PATCH v2 2/2] nvme: Update scan namespace to keep trying on busy
-From: Moritz Fischer <moritzf@google.com>
-To: bmeng.cn@gmail.com, sjg@chromium.org, wenbin.song@nxp.com, 
- u-boot@lists.denx.de, trini@konsulko.com
-Cc: mdf@kernel.org, patrick@blueri.se, Moritz Fischer <moritzf@google.com>
+ d=1e100.net; s=20230601; t=1702759605; x=1703364405;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NBAiBAw9V1v9GaPVdQll4DVSpbIGS5ixTtzrRmraLuU=;
+ b=MdG+JyfOkui1J+uE0aWAXvo2Vihmk+gii4eh+9wrJ+f5eilBSgu7ZC8McTjQb57l8a
+ 1rvAWb6BCVRkN4l7WXlin8R69G6wjnPYNJ0dJnpAmrdt+83XBJ6aHYQG4VC50bfWkRn/
+ bhwKHA1tHH7hq6GquE1lZZz+shdjvml5WbPicCE5pA0CB6sMYOh9VZrfMqT7vvJd5R0N
+ 7QVqdDVyCA0dETW0gB4zvfhcv+mLY7EGP7lsx/lStLkmjvuQ0gOG9ZqB+B2+FY5dsuPS
+ ocq9+c/mn7pLKEH3FBfgX+Qi9YuPyA2ukcOkcFtTRlKXVfThA2iLEBaR+zQWGXwtG7Vx
+ qyMg==
+X-Gm-Message-State: AOJu0YykZHziqd3ucLEg88JjkwPm3XcnpDkfWgprDiryUN7vUlG/BbZD
+ Bg9Q9hpH3QF27iDj2jtCbbCcplfhbiJWJhHkRTRlIw==
+X-Google-Smtp-Source: AGHT+IFPgyrksBzzhYqWnBUFbTb6PKSY7bKq0tUOEUiePcLkmGavccZcrHn60GjiSVxtwkBGa+yWh1fH+tqtbeMH8XI=
+X-Received: by 2002:a05:6512:10cb:b0:50e:16f4:5928 with SMTP id
+ k11-20020a05651210cb00b0050e16f45928mr3386661lfg.102.1702759604508; Sat, 16
+ Dec 2023 12:46:44 -0800 (PST)
+MIME-Version: 1.0
+References: <20231112205516.183410-1-sjg@chromium.org>
+ <20231112205516.183410-4-sjg@chromium.org>
+ <082aeedd-4371-4ba4-a29a-bf0f0730b77b@gmx.de>
+ <20231121132110.GQ2513409@bill-the-cat>
+In-Reply-To: <20231121132110.GQ2513409@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 16 Dec 2023 13:46:25 -0700
+Message-ID: <CAPnjgZ30CjQZ0+DMp2gy0HzrnRsjcY5NMi1YVVRQiN8UG-5oBg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] efi: Avoid using dm_scan_other()
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,38 +85,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A busy controller shouldn't be game-over for all controllers,
-so keep trying on hitting -EBUSY.
+Hi,
 
-This change brings the actual behavior of the routine in line
-with what the descriptions says.
+On Tue, 21 Nov 2023 at 06:21, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Nov 21, 2023 at 01:18:09PM +0100, Heinrich Schuchardt wrote:
+> > On 11/12/23 21:55, Simon Glass wrote:
+> > > This function is defined by bootstd so using it precludes using that
+> > > feature. Use the board_early_init_r() feature instead.
+> > >
+> > > This requires moving quite a lot of code into the board directory, butt
+> > > this is the normal place for code called by board_early_init_r()
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v2:
+> > > - Drop duplicate acpi_xsdt patch
+> > > - Put the board_early_init_r code into board/
+> > >
+> > >   board/efi/efi-x86_app/Makefile  |   5 +
+> > >   board/efi/efi-x86_app/efi_app.c | 205 ++++++++++++++++++++++++++++++++
+> >
+> > Our target should be to enable building the EFI app on all architectures.
+> >
+> > Only x86 specific code should be added to board/efi/efi-x86_app/efi_app.c.
+>
+> A later enhancement to make U-Boot as an EFI app more generic would be
+> good, but outside the scope of this patch which is moving generic code
+> out from "lib" and in to "board".
 
-Fixes: 982388eaa991 ("nvme: Add NVM Express driver support")
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Moritz Fischer <moritzf@google.com>
----
-Changes from V1:
-- Added Simon's Reviewed-by
----
+This patch was marked as old /archived in patchwork so has been
+forgotten. I have marked it new and non-archived in the hope that it
+can be applied to -master soon.
 
- drivers/nvme/nvme.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+I believe that having the EFI app support bootstd could be a useful addition.
 
-diff --git a/drivers/nvme/nvme.c b/drivers/nvme/nvme.c
-index ec45f831a3..59a139baa0 100644
---- a/drivers/nvme/nvme.c
-+++ b/drivers/nvme/nvme.c
-@@ -695,7 +695,9 @@ int nvme_scan_namespace(void)
- 		if (ret) {
- 			log_err("Failed to probe '%s': err=%dE\n", dev->name,
- 				ret);
--			return ret;
-+			/* Bail if we ran out of memory, else keep trying */
-+			if (ret != -EBUSY)
-+				return ret;
- 		}
- 	}
- 
--- 
-2.43.0.472.g3155946c3a-goog
-
+Regards,
+Simon
