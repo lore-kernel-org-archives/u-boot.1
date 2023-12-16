@@ -4,78 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E142C46CCD
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 16:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C65C46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 16:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E401876F6;
-	Sat, 16 Dec 2023 17:04:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F34A876D3;
+	Sat, 16 Dec 2023 17:52:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oi/rH/Xc";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D6CC876C8; Sat, 16 Dec 2023 17:04:29 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1702745574;
+	bh=vehid7NQVCL2LONV9zZjDcN4GRlTUAxTOmmk4ICPXbM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=P3eQ6Y3wVkuDryC/+T3dZsKYNJUP4R45rJefLzD/6Y5mAM9zApysrSl2oRKiEB4NA
+	 HhZNamkrucB1qoofpyW2quxZBzAIXnCf0e/0Py1tyRAURIBHiOiCXTigo2pFZSwH1J
+	 /2GkfwtaUELUFgj/XSMatCcpBGQJiauddSLZgKgHrPPD1Fw328CpJGTYoEAhBopfAD
+	 c9etWYF1bwEbnC98F9/sUo+XeSQ7GECxKKqe290M2Nyoc1emKyWiGxnI32nsljvV0I
+	 Yv9j+z4dtid+FlFkWRRVm43ob++kxbd2sh/s8rgQUqpWkscgwhFjyTy23e2vIOVF0n
+	 A4QLiGQqbaaRA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5E53876E5
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 17:04:21 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-425c6157762so15165671cf.2
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 08:04:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702742660; x=1703347460; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0RRitIYAZOilYibBK/98nyCiTMHIpCB80rcbKOnbrCA=;
- b=oi/rH/XcW80NPMiGM2bjezBid3zYSDYVvwGadKUvJ6Q8Fs39v48z3d470JxLy860fA
- Fr+FdwY4kXr3j4DSxXvSk5ksgwEuQn7S4vO6ZBwQGLVRnMv7NQcL7BMW/IlGXC9zxNs8
- YMay8kOGcSlEX7qnkmbnzxpZYu+nguJKR78e4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702742660; x=1703347460;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0RRitIYAZOilYibBK/98nyCiTMHIpCB80rcbKOnbrCA=;
- b=tUIyBxQgu8ND7s01ItqONIw7EgeWyfHQBUiPwy0DIOG6/Ibyi2GGFruozoD/zwobAo
- 0eHNO1yajnDlE8JXnolqe48pin4GhD+FJMLs1scZoEhObbH9NsX03Pw9Qy/DbkQWfJ1h
- VQjxm8DltC5MxiJSLsmYSmfB4lMdGawdWk/e4wzM4trgHuCRtvyUOcTiWh9J2JLXU/Wz
- OYsbymrwbxfO96NoDLPFnH2VnXgS1M8xCqCZRbXr/cv8vZcbVlfGZsEWJDs898agAxJR
- w6LL0bGYxxVIWeGsNeTWVMZzNoCW+k1ggXDjovSg7/gRmQpodZ4UKYisbS6KHrfMriDZ
- p/tQ==
-X-Gm-Message-State: AOJu0YwLu8Qs0jiIBreiTkrRBQmDz40Yq/aIUFdwcCz1HKmHV9XgIH9A
- NOUl7tHgko0XWeK4976cOBWgaA==
-X-Google-Smtp-Source: AGHT+IGqPD5oS7htbtxd9Lf2B8Ne0EtUI5S930xuY1000bh1Wg73XZloWL8VpD96JlGxiuSDXt3C6w==
-X-Received: by 2002:ac8:5f48:0:b0:425:8a50:cbcd with SMTP id
- y8-20020ac85f48000000b004258a50cbcdmr20467500qta.45.1702742660700; 
- Sat, 16 Dec 2023 08:04:20 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4efc-63ef-4955-a8ab.res6.spectrum.com.
- [2603:6081:7b00:6400:4efc:63ef:4955:a8ab])
- by smtp.gmail.com with ESMTPSA id
- a13-20020ac8720d000000b00425406b64a1sm7571193qtp.24.2023.12.16.08.04.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Dec 2023 08:04:19 -0800 (PST)
-Date: Sat, 16 Dec 2023 11:04:17 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Jim Liu <jim.t90615@gmail.com>,
- Igor Prusov <ivprusov@sberdevices.ru>
-Subject: Re: [GIT PULL] clock changes for u-boot/next
-Message-ID: <20231216160417.GP2513409@bill-the-cat>
-References: <30d112d0-3952-5b40-5689-a0abfc37f989@gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 930488718A;
+ Sat, 16 Dec 2023 17:52:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1702745572;
+ bh=vehid7NQVCL2LONV9zZjDcN4GRlTUAxTOmmk4ICPXbM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=zoQOYUkgM0HuJnhM0Y4R1DLJ9/PEQl8R/8IP5o7Lml9kiFNJkZbezRSt9vyQtpC98
+ EmhrHvbsg0x3t9roMbdA3Ypd4XXFXkfLka3J7Ww1y6QLhSWwUN6Ia53H5o+IzwmBZb
+ L847GE1lmZTdjrxdBou4lw0sCnUbRWb4xqtJUuUI9Y40iPStidiznd8NbK5wpii1JJ
+ HyCzCDroHT4HWYkvmsw0zu9CCtbOgYDdeG9wlyJP2YJxdveA/O7MKXpUFKWTQ9nxM5
+ DWN9WCfqIh8vvANqqqTFY0/l3IiFLjgfmZSscIYmOY9gbuTNg5b76X83mCBuhXBHcz
+ I4ZOeczm+tXKg==
+Message-ID: <17d230d0-0118-4a22-9f75-14c5b06dd915@denx.de>
+Date: Sat, 16 Dec 2023 17:52:52 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xgehQzENTOF9Na28"
-Content-Disposition: inline
-In-Reply-To: <30d112d0-3952-5b40-5689-a0abfc37f989@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
+To: Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
+References: <20231216084838.19403-1-clamor95@gmail.com>
+ <20231216084838.19403-2-clamor95@gmail.com>
+ <e53a31db-aea2-fe0e-daf6-f1338c59b2a8@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <e53a31db-aea2-fe0e-daf6-f1338c59b2a8@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,52 +70,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/16/23 16:37, Sean Anderson wrote:
+> On 12/16/23 03:48, Svyatoslav Ryhel wrote:
+>> Existing gpio-gate-clock driver acts like a simple GPIO switch without 
+>> any
+>> effect on gated clock. Add actual clock actions into enable/disable 
+>> ops and
+>> implement get_rate op by passing gated clock if it is enabled.
+>>
+>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>> ---
+>>   drivers/clk/clk-gpio.c | 44 ++++++++++++++++++++++++++++++++++--------
+>>   1 file changed, 36 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+>> index 26d795b978..72d9747a47 100644
+>> --- a/drivers/clk/clk-gpio.c
+>> +++ b/drivers/clk/clk-gpio.c
+>> @@ -3,19 +3,23 @@
+>>    * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>    */
+>> -#include <asm/gpio.h>
+>> -#include <common.h>
+>> -#include <clk-uclass.h>
+>> +#include <clk.h>
+>>   #include <dm.h>
+>> +#include <clk-uclass.h>
+>> +#include <linux/clk-provider.h>
+>> +
+>> +#include <asm/gpio.h>
+>>   struct clk_gpio_priv {
+>> -    struct gpio_desc    enable;
+>> +    struct gpio_desc    enable;    /* GPIO, controlling the gate */
+>> +    struct clk        *clk;    /* Gated clock */
+>>   };
+>>   static int clk_gpio_enable(struct clk *clk)
+>>   {
+>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>> +    clk_enable(priv->clk);
+>>       dm_gpio_set_value(&priv->enable, 1);
+>>       return 0;
+>> @@ -26,21 +30,45 @@ static int clk_gpio_disable(struct clk *clk)
+>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>>       dm_gpio_set_value(&priv->enable, 0);
+>> +    clk_disable(priv->clk);
+>>       return 0;
+>>   }
+>> +static ulong clk_gpio_get_rate(struct clk *clk)
+>> +{
+>> +    struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>> +
+>> +    return clk_get_rate(priv->clk);
+>> +}
+>> +
+>>   const struct clk_ops clk_gpio_ops = {
+>>       .enable        = clk_gpio_enable,
+>>       .disable    = clk_gpio_disable,
+>> +    .get_rate    = clk_gpio_get_rate,
+>>   };
+>> -static int clk_gpio_probe(struct udevice *dev)
+>> +static int clk_gpio_of_to_plat(struct udevice *dev)
+>>   {
+>>       struct clk_gpio_priv *priv = dev_get_priv(dev);
+>> +    int ret;
+>> -    return gpio_request_by_name(dev, "enable-gpios", 0,
+>> -                    &priv->enable, GPIOD_IS_OUT);
+>> +    priv->clk = devm_clk_get(dev, NULL);
+>> +    if (IS_ERR(priv->clk)) {
+>> +        log_debug("%s: Could not get gated clock: %ld\n",
+>> +              __func__, PTR_ERR(priv->clk));
+>> +        return PTR_ERR(priv->clk);
+>> +    }
+>> +
+>> +    ret = gpio_request_by_name(dev, "enable-gpios", 0,
+>> +                   &priv->enable, GPIOD_IS_OUT);
+>> +    if (ret) {
+>> +        log_debug("%s: Could not decode enable-gpios (%d)\n",
+>> +              __func__, ret);
+>> +        return ret;
+>> +    }
+>> +
+>> +    return 0;
 
---xgehQzENTOF9Na28
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 15, 2023 at 03:52:26PM -0500, Sean Anderson wrote:
-
-> The following changes since commit fa3f19aa56c519d6345cc774187b7a8fdc053d=
-71:
->=20
->   Merge tag 'xilinx-for-v2024.04-rc1' of https://source.denx.de/u-boot/cu=
-stodians/u-boot-microblaze into next (2023-12-14 13:27:11 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-clk.git tags/clk-2024.0=
-1-next
->=20
-> for you to fetch changes up to 652d8d4561a34fc71d9bcb6ad2b0035d2c4189c1:
->=20
->   clk: nuvoton: add read only feature for clk driver (2023-12-15 13:05:55=
- -0500)
->=20
-
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---xgehQzENTOF9Na28
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV9yoEACgkQFHw5/5Y0
-tyy/Mgv+Pf7a1aoCryvYBd/z1ASZgx7DDDII/Mw1M6nSTCcQpxE+u4IOp3MMrQgy
-XzlGMPWK/8IYPBUKOTfuY09sg3J1iRllBmprk/fuDGnPT4sMiDMcjxWqt/epv586
-8QaYc4NDtgMDtvnnVwxYTFZAa3v3EqelwcKNDefHPjofdP9DXsvcxnimscX9lpCR
-V4aKuI54HtxwpEtmNtVdJuYy5+ku+5MG9eFEGna2wuXRNSUhVdbf8l+RKc2BDcTt
-9rBXhglfrEifADz0rZ1Xyy7+UXCc2wkFvP2mtsltuGhYUAM8mm0ji6jz1TsNWQoI
-Vkn0oOiG3DPLr0v5Tc8i+uJhpWrxdI+Wnza/OzHvMJbwC8jqrt1JbwHFb5z3BkmU
-ufA3FCyrOjoZtwP4nqj8Wxa1H2B87C8GDjR0o1n1C03kqMR8iv3IJi+CM/udfL69
-HliVzqwZ+rKl3Xw47dqGT3WQdfjZPp86iE2ArLikdLJY+ZXUOMK7wRiX4SbjU02Y
-OVEhx2wB
-=IZqq
------END PGP SIGNATURE-----
-
---xgehQzENTOF9Na28--
+All this forwarding of clock enable/disable/get_rate for parent clock 
+should already be done in clock core. If it is not, then it should be 
+fixed in clock core.
