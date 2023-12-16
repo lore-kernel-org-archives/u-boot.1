@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6462C46CA2
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC128C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:50:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D579587C79;
-	Sat, 16 Dec 2023 19:48:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D4FA87C75;
+	Sat, 16 Dec 2023 19:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RtSLxmLI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZ48NwKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7126287C8E; Sat, 16 Dec 2023 19:48:38 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 14C6A87C97; Sat, 16 Dec 2023 19:48:40 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98BEB87C6B
+ by phobos.denx.de (Postfix) with ESMTPS id 96A1687C6A
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-dbcd0928530so1180934276.1
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6da45aa5549so1391724a34.0
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702752514; x=1703357314; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HS2b2uJyUj1823H9WTxxiQt26h64zEHE0mE0OAVNB7s=;
- b=RtSLxmLIkk3t0JZKTIB2YB6N0sXW8HPAnQlwsIMFHDtS/AzO2lBPFuyzjuG0kc8ha0
- L1i4KWoiBXiHuNyRHWJDKY8exKzv1gsaRmMptr31nGF4TZIOgjLWz+7DMY8Z3doKlenX
- mDSoNlJA/1ta7shMNfnoCYuIoF1pCerydMb/4=
+ bh=qVkteyzRBFuDFYJgtBPvJnAfS3iqgT+Rf2zbQtb7qgw=;
+ b=gZ48NwKZDgn7HWza6vq/zfm+LDZiYVtkGiZmzUZF71axC5row7n8wueCtyX9OFHuq9
+ qVAWWmyZTWGP/tm1KSnGfVT9yKMu0FDQ+Jjil+Pi4CMS93bh8JfW8x23cDv7oJC7jIOl
+ WEcIG56F6tQ7JNjcWc2W0oGjewyOv12EFfkIk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702752514; x=1703357314;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HS2b2uJyUj1823H9WTxxiQt26h64zEHE0mE0OAVNB7s=;
- b=QkmPEqJipuLPNRqKeAbDGP3K2AqqyZhdgH97E27xXzMaYZs2SbpoID95D/zihD0L0G
- XJjmqPIvJgncKaR8gqrlCZ+LzGWIdsmf+h/HhkumfSTThT3r8zvFfcy5chjKjAxBdfON
- qqhjhQ/3rbDqNDWTRAGe4DdS0OCvmRMTIKn48dhsLhDTyXA59THIVQepxq7H6x5B4KFu
- +wC6qI9sn93BzfDJLEnvM+kOY66BzQUSgaW2v9RsRRJ7InJO4onYQroFpo7xjc8iiTtW
- 7UZNRLnAkP9L4Jl2VPpD7yMRB9tmaDbO5YF2SU5ZOEl+doI/mY90+MzEaxwvURjh5ZsT
- f1SA==
-X-Gm-Message-State: AOJu0YwAHMKN82zwzLoPAKD3vh74p3M4f99sUz1juR9g1+nInvCAyrEX
- JrB6S+lubWiitbIM01vTTIwqBBcu/ldkS4QHB9GwKR5G+sxjkunYeDk=
-X-Google-Smtp-Source: AGHT+IFYguoInqnqYgRN9Oho1yTjyA8Pd3NUOGGcmfMJPsZN9A6QgPXm3bUvnt/Ox3cg4dSqvnT/M8uadUGfbt5o9l4=
-X-Received: by 2002:a0d:dbd6:0:b0:5e5:eba:9d5 with SMTP id
- d205-20020a0ddbd6000000b005e50eba09d5mr889766ywe.94.1702752514147; 
- Sat, 16 Dec 2023 10:48:34 -0800 (PST)
+ bh=qVkteyzRBFuDFYJgtBPvJnAfS3iqgT+Rf2zbQtb7qgw=;
+ b=H/mr18qq+xMzJIhFw9rszVahgm1CB9SjYr5fGWIMzSeV6IpMCrtEQ9tP2OilCuw9EF
+ yHWgxNOPVjB4L1P0QAg7GNDJm+C6xpsiotOSR2b4IG51qZU/5PL7tdMfGGYrChfGiaZ7
+ mq5UZn37Hy3GCQAPtQ0YCVMIlr/UoawsjEMv7Bv2XO8J41cyYx8a4/yl56oa7xjqQKZj
+ pmRtzTugnpAS9Kglw9NG/leR0aN3YaRGtuG/51ROvr0Q2GBL5myAFa/+dc2BcTYZ9CiZ
+ YxaHjOawhJ1h15LXlTryBC7s/yHP6hZgq2+8FYmCzy3Ye3JFkCvnqLlnpGvvtWwWg5WV
+ SsEA==
+X-Gm-Message-State: AOJu0YxN1PPfBM4D2zsIoyw4XBEVE4Y7Msw27HNy36Vwj1n82kIAC3Rq
+ 9qLT7jFLGEk+jEZ01C4SrcDXT3mkVf92eyMN6fyquIKxKSgBrd+Ha64=
+X-Google-Smtp-Source: AGHT+IGtygmag0qt7iPoDYxAbfmpK7F0j+OodcnRSSokjxMmANvqnZDyYBZ5m5IPh4gE7JunchNAEhY8FzZkhXHBL5M=
+X-Received: by 2002:a05:6830:1185:b0:6da:5218:46e8 with SMTP id
+ u5-20020a056830118500b006da521846e8mr3221317otq.58.1702752514154; Sat, 16 Dec
+ 2023 10:48:34 -0800 (PST)
 MIME-Version: 1.0
-References: <5d800e23-e427-4198-ab24-f2e1fe595c4f@longervision.com>
-In-Reply-To: <5d800e23-e427-4198-ab24-f2e1fe595c4f@longervision.com>
+References: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:46:20 -0700
-Message-ID: <CAPnjgZ3U+6E42HgO0gXirp6n6NKXt1tH2kRwK6T-EpSkaYXAzA@mail.gmail.com>
-Subject: Re: Where is the u-boot for BeagleV-Fire?
-To: jiapei@longervision.com
-Cc: u-boot@lists.denx.de
+Date: Sat, 16 Dec 2023 11:46:00 -0700
+Message-ID: <CAPnjgZ0=wMzY8oaVUGzszGZahvdJH1Z1XnX2JOtjVfyPFKWvZg@mail.gmail.com>
+Subject: Re: [PATCH] get_maintainer.pl: Add --git to look up CCed in git
+ history
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,19 +81,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Fri, 15 Dec 2023 at 06:15, Pei Jia <jiapei@longervision.com> wrote:
+On Sat, 16 Dec 2023 at 11:08, Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 >
+> Add the --git parameter, else recent contributors are left out of the CC list.
 >
-> Where can I find the u-boot defconfig file for BeagleV-Fire?
->
-> I've got an issue posted at
-> https://forum.beagleboard.org/t/error-illegal-operands-li-t1/36823 .
-
-You could check here, or ask the vendor?
-
-https://github.com/orgs/beagleboard/repositories
-
-Regards,
-Simon
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  .get_maintainer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Simon Glass <sjg@chromium.org>
