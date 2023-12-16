@@ -4,77 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB944C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:51:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C24D3C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05BBE87BD2;
+	by phobos.denx.de (Postfix) with ESMTP id 6288087CB7;
 	Sat, 16 Dec 2023 19:48:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HkmeXvbU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RzW4O4Bg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54A9B87C69; Sat, 16 Dec 2023 19:48:42 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 50AA287C3C; Sat, 16 Dec 2023 19:48:42 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCD6F87C79
+ by phobos.denx.de (Postfix) with ESMTPS id CA91887C7E
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d2d0661a8dso14593647b3.2
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5c85e8fdd2dso15601367b3.2
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702752514; x=1703357314; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iWZKZZOH1HlVUhQLPRqjMjlHLGOPxKKPS9vTyyAgFWk=;
- b=HkmeXvbUoeZY2BKsDu2Avsg5ZTHR4KqB4W91XjEUAAAq6XbLhpP3fwMM8WLTAy7S0i
- L5Rc0IfO78SBNx1NJJi1+gQKKRaQDoNT8C01M44vaHM0Lkq36M/vkZhwg4+43rSpQL3J
- hBKmPccydwCK/Lr9TVNSVDQETVSOUn7P07BzY=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VQj5a2BgNDbB5/bgw44dr3o3aX0R5V6IhmrGgsdNfx0=;
+ b=RzW4O4BgRgAgIp6WUFoMVw9EvVVHc4q3WgLICkdw2qQv/ea4E6vaIJhdXqXKiO0UHm
+ GaCPOaC2T9iOUblGICWYrgpGverKCcnX4Z7iuOPiMy58rNxhSzo3Sht8OGK2agTiJkp2
+ TYZejPeX5R9hIPwQbGVieIbBlOhV2j8gGgfoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702752514; x=1703357314;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iWZKZZOH1HlVUhQLPRqjMjlHLGOPxKKPS9vTyyAgFWk=;
- b=GiBXS+qYEGBxGwpsOXN93Mh/uWphZFh8/QBxQko0aez/CFSXoMYg9BwNWj4/LEA9t/
- JuMtGB4qoau8EX8lsfuf0lohKNTKoocLUb7M0YyukhzH2WuvBcE0HPMmpOKiIjcYLBbz
- SLotYSmJin2W8zxGb8HGunGwj501pJLgc3mCOCyXzO6rDIYMaHKq//om/xJwBBcfrSlf
- LvnjHb++eoDeZIOUsTmxa9RfYB6cA5fVty/cnG+jytjSAxt5mf4oAvsaMgwhJTvjDIxp
- wTO2Ezy2WPVSpo9MeNsywDJRZ45di9WPdXUK/YOjJT7m+kkBl0DTye6XY4UA4faXVCp0
- VQ1Q==
-X-Gm-Message-State: AOJu0Yy8xiS9LBneji6gnLpEzUcBIEIn1HBCX/WwYhk79L/dLU26mBS5
- 06U95/AKstvG1ZdBptnb96f8xdbQqwK46f63QOZovgI3vqhPcWDUZwo=
-X-Google-Smtp-Source: AGHT+IGR6V0y6WSbyOTCWkXE2hZKFkYB+boy7irxtOoWp3Ln0UlL2xzHjEBI1WIgyUzg5Qp7Ex7OiYQCcW6laB9CQ58=
-X-Received: by 2002:a0d:d652:0:b0:5e5:b8ca:c68f with SMTP id
- y79-20020a0dd652000000b005e5b8cac68fmr373453ywd.41.1702752514146; Sat, 16 Dec
- 2023 10:48:34 -0800 (PST)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VQj5a2BgNDbB5/bgw44dr3o3aX0R5V6IhmrGgsdNfx0=;
+ b=w55M/6mJYfXnlKH6F29H8NiBCIQIdSFV/pmws+ukge7qiOS4c59m6xayMQB0aArKub
+ lfuvToKjAnX+zsKkNWWOWr9m3tem6IvKeNvn2T5SXPjbcOvyy2W9cME0rsZTNJdkSLGm
+ qkN5S8bHtpSk3mrVPD9UZsXWNkoEykWUIN7ovcvvM3s+b4TZqEsJkDKL1MydOuqzA1J1
+ nh6RaB5GCi9tsxIvQzLTb2E+s4CwC7fkJqG9/WHR2XRbzZwO9oBHwbJuPdWpze6h6b1P
+ mLu34KML9KymiOc//0wcp4fmvTe1eFr+PcNkwWS+AfZEMDD2oA/hJp0SAjHKH2bZYTma
+ AXYw==
+X-Gm-Message-State: AOJu0Yx6lh9CcXT7eQpAfN5UiGJOQuwHbfF8NLIoOsOuQdUPzPRKHx/5
+ wyfl6Jjvm9t9IARKOnbh5XBXVWARGamFLK6eadnHlQ==
+X-Google-Smtp-Source: AGHT+IFMqN89pTaMpdHxuidrNhrGgizVFjWLKNAB69heMFG46+/gSpwQimCMaJQprh/36MPF2WzrstIkS1Cw+tG0h1Q=
+X-Received: by 2002:a81:5b85:0:b0:5d7:3f4d:2e2f with SMTP id
+ p127-20020a815b85000000b005d73f4d2e2fmr12218429ywb.14.1702752514154; Sat, 16
+ Dec 2023 10:48:34 -0800 (PST)
 MIME-Version: 1.0
-References: <cfad9ff8b9263104cc48aaabe4e1eddb@manjaro.org>
- <20231113112309.730323-1-i@shantur.com>
- <CABEcMwUwDypY090MOYSEtBGMRZOBnTk6hKuM2-OcJW-n+M7OHg@mail.gmail.com>
- <20231211205326.GX2513409@bill-the-cat>
- <CAPnjgZ23x6dAwq8UDvTXBikRgC3mbTfH5PV=KVF45pFPXY3cQA@mail.gmail.com>
- <20231213202951.GH2513409@bill-the-cat>
- <CAPnjgZ2=P-kmGFEO0k_fp=XVps0YC16YJ_+yAqk4xVz0CGYz=g@mail.gmail.com>
- <CABEcMwVbb-6670ESQJKFva_jnSPQMzCrzrscDmwnGvQqhXHMSw@mail.gmail.com>
-In-Reply-To: <CABEcMwVbb-6670ESQJKFva_jnSPQMzCrzrscDmwnGvQqhXHMSw@mail.gmail.com>
+References: <20231215232604.260081-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231215232604.260081-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:46:07 -0700
-Message-ID: <CAPnjgZ1dvG9visuy4TtnAk9VSnmE11ba-qPOwgZw47b24L+0qA@mail.gmail.com>
-Subject: Re: [PATCH v4] arm: dts: rockpro64: Add RockPro64 smbios
-To: Shantur Rathore <i@shantur.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- philipp.tomsich@vrull.eu, 
- kever.yang@rock-chips.com, jagan@amarulasolutions.com
+Date: Sat, 16 Dec 2023 11:46:05 -0700
+Message-ID: <CAPnjgZ0wDm2CdQ94=9w5Cn8Py5mcYPcm-txZbTp-YO1g+xL-0A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] binman: used-before-assignment in ftest.py
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,98 +80,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur,
-
-On Thu, 14 Dec 2023 at 07:14, Shantur Rathore <i@shantur.com> wrote:
+On Fri, 15 Dec 2023 at 16:26, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Hi,
+> Pytest 7.4.3 complains if a variable is used in a finally clause without
+> having been initialized before the try clause.
 >
-> On Wed, Dec 13, 2023 at 8:41=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Tom,
-> >
-> > On Wed, 13 Dec 2023 at 13:29, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Dec 13, 2023 at 12:50:06PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 11 Dec 2023 at 13:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Dec 11, 2023 at 08:42:19PM +0000, Shantur Rathore wrote:
-> > > > > > Hi,
-> > > > > >
-> > > > > > On Mon, Nov 13, 2023 at 11:24=E2=80=AFAM Shantur Rathore <i@sha=
-ntur.com> wrote:
-> > > > > > >
-> > > > > > > Add smbios information for Pine64 RockPro64 board and enable =
-in
-> > > > > > > config
-> > > > > > >
-> > > > > > > Signed-off-by: Shantur Rathore <i@shantur.com>
-> > > > > > > ---
-> > > > > > >  Changes
-> > > > > > >  v4: Change PINE64 to Pine64
-> > > > > > >  v3: Enable SYSINFO and SYSINFO_SMBIOS in defconfig
-> > > > > > >
-> > > > > > >  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 22 +++++++++++++=
-+++++++++
-> > > > > > >  configs/rockpro64-rk3399_defconfig        |  2 ++
-> > > > > > >  2 files changed, 24 insertions(+)
-> > > > > > >
-> > > > > > > diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch=
-/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > > index 732727d9b0..089732524a 100644
-> > > > > > > --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > > +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> > > > > > > @@ -9,6 +9,28 @@
-> > > > > > >         chosen {
-> > > > > > >                 u-boot,spl-boot-order =3D "same-as-spl", &spi=
-_flash, &sdmmc, &sdhci;
-> > > > > > >         };
-> > > > > > > +
-> > > > > > > +        smbios {
-> > > > > > > +                compatible =3D "u-boot,sysinfo-smbios";
-> > > > > > > +                smbios {
-> > > > > > > +                        system {
-> > > > > > > +                                manufacturer =3D "Pine64";
-> > > > > > > +                                product =3D "RockPro64";
-> > > > > > > +                        };
-> > > [snip]
-> > > > > Yes, we should just defer this and pickup the SMBIOS series that =
-Ilias
-> > > > > has posted.
-> > > >
-> > > > I don't think it is a suitable substitute, it is just a fallback.
-> > > >
-> > > > So I believe this patch should be applied.
-> > >
-> > > Please note that this patch is adding _less_ details than the top-lev=
-el
-> > > model field contains today for the platform.  The only difference is
-> > > "Pine64" vs "pine64".
-> >
-> > The top-level model is "Pine64 RockPro64 v2.1", I believe. But:
-> >
-> > - the first part of that is the manufacturer, not the product
-> > - the second part is what we have in this patch
-> > - the third part is the version
-> >
-> > SMBIOS tries to split things up into separate fields.
-> >
-> > So, perhaps a new version of this patch could add:
-> >
-> >    system {
-> >      version =3D "2.1";
-> >    };
-> >
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  tools/binman/ftest.py | 20 +++++++++++++++-----
+>  1 file changed, 15 insertions(+), 5 deletions(-)
 >
-> I can add the above or any more details needed to a new patch
-> Will that be enough to make it merge-able
 
-From my POV, yes. Having dug into this a bit, patches like this are
-the only way we can get authoritative SMBIOS data. There are various
-user-space workarounds, but these should not cause any problems.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
