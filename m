@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D5AFC41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0523C46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:46:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21B9687729;
+	by phobos.denx.de (Postfix) with ESMTP id 843188775F;
 	Sat, 16 Dec 2023 19:46:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IrlXMUIh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jgeyk/Di";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80E6987752; Sat, 16 Dec 2023 19:46:02 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 827A287721; Sat, 16 Dec 2023 19:46:02 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A8CF87721
+ by phobos.denx.de (Postfix) with ESMTPS id A378B87729
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:46:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a1f5cb80a91so212007966b.3
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-40c580ba223so21620025e9.3
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:46:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702752360; x=1703357160; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G+0uw7p43Qf+m57N2TJG5fy6fMfWLwVJqtlpAbQVoJc=;
- b=IrlXMUIhUarc9WRH3VUe3KQ1YQ4gx4yw1uidYHA5yX6QktqKOtC9iq8DuA8zAx7zFt
- JhrPLV6H0L2ys26DdizU869wHa4SxLG0KeCQllGei9Me41188E9VoktNcMoLGbcqm8My
- WZ8ZCoqQ7+GVYM9ZE0jBPJ/okAIz+dqbxPldM=
+ bh=/l9O0x5gEzCM6HSw6ITOt+VPJtb0c97OyJvhAvObtos=;
+ b=Jgeyk/Di6RW5aASeQZHgV0YGlFXeg+RwrIZYe6HVwnSehcb4rOcfaIrstRb8wqiySh
+ 03uPLizgpR/0FT1s/pIGHzphEP8ZVp+41BpA3Q6GDeCSXPS7k6abadyuka7ZJurtyRXs
+ yCSv9kG7SPNTa7lC5hMfJJcvGUrysHqRIUCF4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702752360; x=1703357160;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G+0uw7p43Qf+m57N2TJG5fy6fMfWLwVJqtlpAbQVoJc=;
- b=SEgJTdPoFGi5q4smU8oGvYCPaOkiyYVYD8lgHakVrSzu/8pVTSIdEiXxz0gLkEpr3O
- PkpiqE02m4OSDQb1tHj/cknqk/boCfQTOLH0jYRqoIOebYA2vnatJqlro3MKs6NRz9Eo
- KTBEh9Fp39nm4oJvJOubnfqBO4T69rD81lQP/rGbKA5eV7ux/J8QuDMoPqo3ILgQdJlj
- 0c1bRvCJywp5OTE7ZyRH1HM/e/DPkgep3iuL4nt/zjFKuuYM3HzEHZ+oYTN0hiSIV8Kk
- 8N1p9Yz60P0E4l/z8O50ye3zDd/Oc92Pvlp992kbyUG5UWY8lXq2NfG/R4vlafnWHUMh
- YySQ==
-X-Gm-Message-State: AOJu0Yzk465qcd6UGHbqBGDDsD4fadi5EDxatYMrqiqSQaZnUncM6StI
- vvadmtNxay6tatm2pf7/AgzXutYQLdDbkl25TvvwJW4+DjRSmRKs4C4=
-X-Google-Smtp-Source: AGHT+IGt19N7Oj4q8d617rsc7pmT/6xEsnIX9DRESR+mU6HFmytV8NpW0OF3zFW4KOY0ChLyj6nY3iNvfgzEwbbsWB4=
-X-Received: by 2002:a17:906:7f90:b0:a19:a19b:422d with SMTP id
- f16-20020a1709067f9000b00a19a19b422dmr4284068ejr.152.1702752359793; Sat, 16
+ bh=/l9O0x5gEzCM6HSw6ITOt+VPJtb0c97OyJvhAvObtos=;
+ b=V+QNayJ6XwjIROEFIvda/c7+Ws68CRWiACM7a7qluWlM7g7asmQeVuqIaWhGi9Hthf
+ VqI808j27QW+hnlOtPokcaFTwHKUqo4u8vdrS+lnGvnnK41Qn6+AceudNWXhQCeqaMPq
+ jooT674Gkk06Ld6+vefCWqIuQ+nv5Vn9RMYYWYrHWGT1iBN2jYMdiqM2QclGW6Gtvuv1
+ sU+BvKRmZK9jK8bXoZxhUcOXhDtm4/r0ZDkR+L9R1jPKuJF4SFjkRAmUl8UwCnRqg7J+
+ mj6+C7/Pm9g32zevcV0A5AQtVsonqxqxjRY4xtJhHIH3OlrcJlXZkkeUZCWnXT+DwU/j
+ hzmQ==
+X-Gm-Message-State: AOJu0Yz4PJIwczFL6wIRHjNF2E4/9mcqxdxRmRy6Wqx4GXmMw4Ekb9gY
+ ZdxjPenzUZz3q7ofsxVambDG8J3Pc9w2kWzWjjeedg==
+X-Google-Smtp-Source: AGHT+IH2xvCG/Moz3wUZYBeP+0BLVGXkRN7YqgmRNmjNquzCxe9kShiypHU+Z+qvVYcPzL5AlvvxIOvAlnsE84NC5ac=
+X-Received: by 2002:a05:600c:181c:b0:40c:2f84:59b1 with SMTP id
+ n28-20020a05600c181c00b0040c2f8459b1mr7355589wmp.151.1702752359871; Sat, 16
  Dec 2023 10:45:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20231216081200.7677-1-heinrich.schuchardt@canonical.com>
- <20231216081200.7677-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231216081200.7677-4-heinrich.schuchardt@canonical.com>
+ <20231216081200.7677-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231216081200.7677-3-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:45:31 -0700
-Message-ID: <CAPnjgZ2mD=+sgLPFCL6Vm1z7CP65JkEkKxvgxacS5y-qSsr9Aw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] cmd: acpi: check HW reduced flag in acpi list
+Date: Sat, 16 Dec 2023 11:45:27 -0700
+Message-ID: <CAPnjgZ2tJSTO7HC+_zCzxBBxSFAPmg2g+hyacqXoKWM+u1HhEQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/4] cmd: acpi: fix listing DSDT and FACS
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>, u-boot@lists.denx.de
@@ -85,12 +85,12 @@ X-Virus-Status: Clean
 On Sat, 16 Dec 2023 at 01:12, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> On non x86 platforms the hardware reduce flag must be set in the FADT
-> table. Write an error message if the flag is missing.
+> If field X_FIRMWARE_CTRL is filled, field FIRMWARE must be ignored. If
+> field X_DSDT is filled, field DSDT must be ignored.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  cmd/acpi.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  cmd/acpi.c | 8 ++++++--
+>  1 file changed, 6 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
