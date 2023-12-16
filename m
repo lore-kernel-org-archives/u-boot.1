@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA135C4332F
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:18:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB386C46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 03:18:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ADEC87CB0;
+	by phobos.denx.de (Postfix) with ESMTP id 925E887CB5;
 	Sat, 16 Dec 2023 04:15:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oSRU6Dq6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XSU/g0+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A07187C88; Sat, 16 Dec 2023 04:15:27 +0100 (CET)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 0EF3E87C9A; Sat, 16 Dec 2023 04:15:29 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2450787C36
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C8A8987C7E
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 04:15:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-35f71436397so8300635ab.3
- for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:25 -0800 (PST)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-7b35d476d61so56225539f.0
+ for <u-boot@lists.denx.de>; Fri, 15 Dec 2023 19:15:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702696523; x=1703301323; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702696525; x=1703301325; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MJVWtRT9ZrlY1O4g/GbYbgPQ6m5bJcTqEgw567On5rM=;
- b=oSRU6Dq6G552yLw/W1UTBvm8uFJg0QcovjNTq2R0/zfq/eCl4l3ipyu4qwM2kwUP+e
- jHew1+qYFkvxvfXRxjBY1h8cPBvijxiMw/G1QuoNDuxeyYFUsuCOyFQkHYRYJxd/21NG
- l6/HT2tGcPWpOqtjSQd3DlfkXGoyS0Tognshc=
+ bh=piHy8oBmnmrhrPJFkod4gdNpKnDh4EQ03FhQvYR3eg0=;
+ b=XSU/g0+DdLGWyJPcWpTPvcxaFwaglV6tWH6smHvWnGf7uIbZBfkszylTmbDJfNODWV
+ p1Rn8Swesqr55fJrLJz4NQA5rabQSG0xmhaa4ek6TKTikG7EoghepMunyxO+HUWXvSCi
+ JKOov2TmR1mTEsqnr6yaY6NsNtpbnWhuWzSgQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702696523; x=1703301323;
+ d=1e100.net; s=20230601; t=1702696525; x=1703301325;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MJVWtRT9ZrlY1O4g/GbYbgPQ6m5bJcTqEgw567On5rM=;
- b=YfMv9Ve2G/6bdm3ayo9fpMmymLaqwrWjM/Q+FzSfM12TUiDupecxUEIvLwVlyr2hD/
- B9iq6Z4V28yX/0ChKU4rA3s6ry4rsg00u7e2TFvJsTbwPdgt/cXpQd0z0RdOq6geHjzd
- dR4SfU6c++8/rnguc44bMJqS2wqi/MXsD0HnB2TGQbuoT0PD+6s/Qf/FGUCwGfEO9Ucy
- l9eYow9mej4vvjgcT5TdkFXGAbMx1B76WBnI/Qec1Gdq4aUBE61y1NGIOrmr17986W7p
- TRZVPrx+v0QBPS+Xl/KBR/5TMDFcCsBzqHACUe4tkH1mwiN+j6tCfqfouvMSkKAxwod+
- Opgw==
-X-Gm-Message-State: AOJu0YxjvE3vpV3Q/tI9aDrLLY5DZnmg3dyiychUXYhDhKMSVuAzvYF6
- 4rQBFGfazk1/1aFPy6IhEprebWv9lo/7cdWLNA3ZxA==
-X-Google-Smtp-Source: AGHT+IFIJ0c5Y6e8rbvzxM618i+7s/BaEpZSPZWXdtLf9KebSi4BqUrgy5BzzIwrRHQNNfvj0erTIg==
-X-Received: by 2002:a05:6e02:339a:b0:35f:7f58:4f3b with SMTP id
- bn26-20020a056e02339a00b0035f7f584f3bmr5868297ilb.131.1702696523699; 
- Fri, 15 Dec 2023 19:15:23 -0800 (PST)
+ bh=piHy8oBmnmrhrPJFkod4gdNpKnDh4EQ03FhQvYR3eg0=;
+ b=TnKZPAgAALgocAsxMdSYUbrgKJXZH+rw1WhDWTXvb9QjIkJFScpWPildxW9lwuYaSL
+ /1Zdp1IwXoxY7KqaxRyLOxd+SFFqV6zMJHdkpFo+dWdR9Ayi1ZvxXWJ4Cla7KXo3G7s+
+ 3p4IPl1/yr2QO4TNKmtMPrw48g7b2SM5Pbq1CZx0ubVkZrwef3ZvVGJs/VVrx2TE9dvE
+ SGEauTfdMxdRPU90Nfl/p3IMfyPrwtZu++2t7/P10rHgqPEDy+xbrG4KueZbnLdtCT0W
+ NalHAS3OqTjW2uHavi3oOCZFp+WA5Iz90COBNf75E3UGj7EIqhN7aXbw6Ki49LEU6ABQ
+ fmCw==
+X-Gm-Message-State: AOJu0YxFO/x6pmVlRYOW/4OYaL5eRPAonyfg7JXU6GBADIEJn0YsgPOB
+ rgJOB63TT8l1WVQIq1U+IkfKVhKJV9EXtmiytIyrqA==
+X-Google-Smtp-Source: AGHT+IFyDi27o080t6YwsuCan6p88NaQ2g/IexULcbToXe5oAa84qF4HG5uaffKYpmkuTAhDQf7LuQ==
+X-Received: by 2002:a05:6e02:12c4:b0:35d:a911:4973 with SMTP id
+ i4-20020a056e0212c400b0035da9114973mr16596253ilm.28.1702696524967; 
+ Fri, 15 Dec 2023 19:15:24 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
  z10-20020a92ceca000000b0035f75e80d1esm542163ilq.52.2023.12.15.19.15.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Dec 2023 19:15:23 -0800 (PST)
+ Fri, 15 Dec 2023 19:15:24 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Sean Anderson <sean.anderson@seco.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v3 18/22] stm32: Use local vars in stm32prog for initrd and fdt
-Date: Fri, 15 Dec 2023 20:14:22 -0700
-Message-ID: <20231216031446.2222362-14-sjg@chromium.org>
+ Eddie James <eajames@linux.ibm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v3 19/22] bootm: Create a function to run through the bootz
+ states
+Date: Fri, 15 Dec 2023 20:14:23 -0700
+Message-ID: <20231216031446.2222362-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231216031446.2222362-1-sjg@chromium.org>
 References: <20231216031446.2222362-1-sjg@chromium.org>
@@ -91,72 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than assigning to the bootm_argv[] array multiple times, use
-local variables for the two things that can change and assign them at
-the end.
-
-This makes it easier to drop the array eventually.
-
-Tidu up an overly short line while we are here.
+In a few places, the bootz command is used to handle a boot. We want
+these to be done without needing CONFIG_CMDLINE, so add a new
+bootz_run() function to handle this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
 (no changes since v1)
 
- .../cmd_stm32prog/cmd_stm32prog.c             | 23 +++++++++++--------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ boot/bootm.c    | 13 +++++++++++++
+ cmd/bootz.c     |  9 ++-------
+ include/bootm.h | 13 +++++++++++++
+ 3 files changed, 28 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index 2411bcf06d8f..8670535844d3 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -124,30 +124,35 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		char boot_addr_start[20];
- 		char dtb_addr[20];
- 		char initrd_addr[40];
-+		char *fdt_arg, *initrd_arg;
- 		char *bootm_argv[5] = {
--			"bootm", boot_addr_start, "-", dtb_addr, NULL
-+			"bootm", boot_addr_start,
- 		};
- 		const void *uimage = (void *)data->uimage;
- 		const void *dtb = (void *)data->dtb;
- 		const void *initrd = (void *)data->initrd;
+diff --git a/boot/bootm.c b/boot/bootm.c
+index cce8485f2d47..40751a4c6e6f 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -1140,6 +1140,19 @@ int bootm_run(struct bootm_info *bmi)
+ 	return bootm_run_states(bmi, states);
+ }
  
-+		fdt_arg = dtb_addr;
- 		if (!dtb)
--			bootm_argv[3] = env_get("fdtcontroladdr");
-+			fdt_arg = env_get("fdtcontroladdr");
- 		else
--			snprintf(dtb_addr, sizeof(dtb_addr) - 1,
--				 "0x%p", dtb);
-+			snprintf(dtb_addr, sizeof(dtb_addr) - 1, "0x%p", dtb);
- 
- 		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
- 			 "0x%p", uimage);
- 
-+		initrd_arg = "-";
- 		if (initrd) {
--			snprintf(initrd_addr, sizeof(initrd_addr) - 1, "0x%p:0x%zx",
--				 initrd, data->initrd_size);
--			bootm_argv[2] = initrd_addr;
-+			snprintf(initrd_addr, sizeof(initrd_addr) - 1,
-+				 "0x%p:0x%zx", initrd, data->initrd_size);
-+			initrd_arg = initrd_addr;
- 		}
- 
--		printf("Booting kernel at %s %s %s...\n\n\n",
--		       boot_addr_start, bootm_argv[2], bootm_argv[3]);
-+		printf("Booting kernel at %s %s %s...\n\n\n", boot_addr_start,
-+		       initrd_arg, fdt_arg);
-+		bootm_argv[2] = initrd_arg;
-+		bootm_argv[3] = fdt_arg;
++int bootz_run(struct bootm_info *bmi)
++{
++	int states;
 +
- 		/* Try bootm for legacy and FIT format image */
- 		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
- 			do_bootm(cmdtp, 0, 4, bootm_argv);
++	bmi->cmd_name = "bootz";
++	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
++		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
++	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
++		states |= BOOTM_STATE_RAMDISK;
++
++	return bootm_run_states(bmi, states);
++}
++
+ int bootm_boot_start(ulong addr, const char *cmdline)
+ {
+ 	char addr_str[30];
+diff --git a/cmd/bootz.c b/cmd/bootz.c
+index 05b15eb4d761..b6bb4aae72d4 100644
+--- a/cmd/bootz.c
++++ b/cmd/bootz.c
+@@ -74,7 +74,7 @@ static int bootz_start(struct cmd_tbl *cmdtp, int flag, int argc,
+ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	struct bootm_info bmi;
+-	int states, ret;
++	int ret;
+ 
+ 	/* Consume 'bootz' */
+ 	argc--; argv++;
+@@ -99,12 +99,7 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		bmi.conf_fdt = argv[2];
+ 	bmi.cmd_name = "bootz";
+ 
+-	states = BOOTM_STATE_MEASURE | BOOTM_STATE_OS_PREP |
+-		BOOTM_STATE_OS_FAKE_GO | BOOTM_STATE_OS_GO;
+-	if (IS_ENABLED(CONFIG_SYS_BOOT_RAMDISK_HIGH))
+-		states |= BOOTM_STATE_RAMDISK;
+-
+-	ret = bootm_run_states(&bmi, states);
++	ret = bootz_run(&bmi);
+ 
+ 	return ret;
+ }
+diff --git a/include/bootm.h b/include/bootm.h
+index 6e6b2ad8f7ef..f7d6d27ecb0a 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -163,6 +163,19 @@ int bootm_run_states(struct bootm_info *bmi, int states);
+  */
+ int bootm_run(struct bootm_info *bmi);
+ 
++/**
++ * bootz_run() - Run the entire bootz process
++ *
++ * This runs through the bootz process from start to finish, using the default
++ * set of states.
++ *
++ * This uses bootm_run_states().
++ *
++ * @bmi: bootm information
++ * Return: 0 if ok, something else on error
++ */
++int bootz_run(struct bootm_info *bmi);
++
+ void arch_preboot_os(void);
+ 
+ /*
 -- 
 2.43.0.472.g3155946c3a-goog
 
