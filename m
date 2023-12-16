@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B918C46CCD
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 13:17:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 149E6C46CA2
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 14:50:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E04D876AC;
-	Sat, 16 Dec 2023 14:17:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1C4A98755C;
+	Sat, 16 Dec 2023 15:50:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j663YGmA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MYdHEOSN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE590876B4; Sat, 16 Dec 2023 14:17:03 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED161875D6; Sat, 16 Dec 2023 15:50:43 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCE1687692
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 14:17:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1464587525
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 15:50:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-7b783ee485eso86621439f.0
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 05:17:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702732619; x=1703337419; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9XtPSTr5C5xJD6byipLkCjP/vNpjcM33RXSCtyH9djM=;
- b=j663YGmAcDszmdcmPbSDRhP6sZHrU9LoLhmzz4BUfmwhFAjy2XahJVjiHmDHuwj975
- WiZcExb6oC5BSOyjqFlxl+iY1kMqD5p7GYvywB+roUPtZyNUCY6Yd2A50noadog8s33p
- PLO38zTksn9juH+GcdnI/a6tJMfxPXozsDx3E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702732619; x=1703337419;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9XtPSTr5C5xJD6byipLkCjP/vNpjcM33RXSCtyH9djM=;
- b=ThxvGbTxr1pDkSRffYMu+LOTCPbfy9OWSCsBDw16gfKeQ1QHtO2gqx+Lrg0mh5Qvjx
- W77/YarbXdWBhdcGpxN40Xs3hQQXiQ8Up1tLOfZhWo6/o8ANqCGejSzQ1L0QFv2fIa4X
- S28q62TXUWRqg6sPftQzV15GBD//F8WdHBBwzhh7AxGs/HOHUWTCSfgBw686cv8Ak5Gi
- vNIYunbaUtbSMQ5rZ9jlrenlVpYYSeU1PCy6LdmVimzBrvjNbva9LYF9CIG/5r+q6fQ+
- TyBQfr/hxcRRfVX3UcXEOUoDdiZxH4cCBW2/D/XhlNCclfbdGPNThhYax/S6eG4zNYza
- do7A==
-X-Gm-Message-State: AOJu0YzRwEvLG5R0BY+9OfQm+o/T7/g/t1SkvE5hluummbRqAN1IClpz
- yQJSEdknVogo01T9XQsd2MGsBTwvc3z5az2EUMehVA==
-X-Google-Smtp-Source: AGHT+IGHJbebyEDHYusmbeUTXWZF5E/SsAYK+qwnRIT2c1djaiyJDPqWA5o1hr3f4zDHqhNrh0BpwQ==
-X-Received: by 2002:a05:6e02:1a46:b0:35d:5995:903b with SMTP id
- u6-20020a056e021a4600b0035d5995903bmr13578364ilv.46.1702732619250; 
- Sat, 16 Dec 2023 05:16:59 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- p8-20020a0566380e8800b0046926dafa32sm4424818jas.135.2023.12.16.05.16.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Dec 2023 05:16:58 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Alex Kiernan <alex.kiernan@gmail.com>
-Subject: [PATCH v3 08/16] fastboot: Remove dependencies on CMDLINE
-Date: Sat, 16 Dec 2023 06:16:38 -0700
-Message-ID: <20231216131650.2242749-8-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1702738241; x=1703343041; i=xypron.glpk@gmx.de;
+ bh=0Ilm52WSz2wPkqAc4WkebTmt4E9kUqOixI+nxnxVhx0=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=MYdHEOSNI5YVCml4IS3j3GlS9rJxkk8hpDYOZ+okmR4AWiSBZPahzxIrlqxzwi7a
+ Z29/oHCFonnAx8Cu5RPMRX7gqLS5aou9KWa1JkGpD9/QLRNnaqshYibz9h++Fgihx
+ /U8kUh+AKtFd1VM7If4qLnDbQYQhSPV758UVFtXgHhE580bkchI1ljEpv9nViMxsy
+ v0FRPpiUWYf9TTpccdEsYlkm6WPh96ceG46TCjDyN8awZjNeDwiw5SOMqwKnS64ej
+ Y1qJqZ9RWsdvgmS2n0AgfJR4ZQ/1JFRrml4PTG7A1RWfWVuAlEloF25bJXPQaMeaX
+ hO/DYVC2A1eNsXppkw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.25.0.170] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MLiCu-1qwz7A3wYq-00Hj9r; Sat, 16
+ Dec 2023 15:50:40 +0100
+Message-ID: <acfe7ea1-a25a-4293-9e05-bfe4ed7c2a05@gmx.de>
+Date: Sat, 16 Dec 2023 15:50:32 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Booting fails on the sandbox
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:zz0II80iDT3TEWzsprYjMm2ZtqcQLGh+dhbPIfWOl4HQY93MrjD
+ 4iBaEwJJuQ7LquhlQuvO4zDQFiGUxo1GDWegUmQtVlm8RIlF5j3keYQeSMKCTauXjxGMFNb
+ U49FaLV/xZxTzpDKKqg8B0jIki4dPBel5tFrGewFQa5KwnhYDgnuT7y3Ng42r60cYJCT+vf
+ YKiMYYKpBLi50JKjOLb0g==
+UI-OutboundReport: notjunk:1;M01:P0:rKE+NIdZGZk=;KsiVujRxCXi0HWQuVn6tay0B0rb
+ 58WWPoov4ggAnjpXkqV/DtSj6bhw42iBaikJiMTdPjlFCASbkPwg2xHbk6po7ye6YAg2MF/Gd
+ ddtfvoS92gi3xMEFFJiMFTK0kLI9kzgceTnpTg/q+pcZyq7/hvS2peTFp8ndRRC10fyWES0by
+ FP25amDdOzeg2YkxZEmdlLeanTvOLzR41SLfRW8j979qu0ybGLnGMcMwEiGIXjZKFDLLcrxy8
+ RBH2YUGYldK5nKSmARWfEdDUwa+4iz4O+kuO6AK0ncmQx+Eh0C/dQhLeAdCik+6yzVyEZt1nC
+ T06t5e/8w9YKXhS1VQBeaordBnyhCEOQ6+9uAvTnr25VeGe0e6Hx2BkrkwTsptWaCyBDvVter
+ NqjDJXcGSUFueVQ/kN/EAIGhK5WYaPswBF2UWiYePyGu+nPrIXqX6MNrnAIKk7sI94ZBY+Duw
+ k6qLBCVFsdfPoK1xw3G7oDIMwbelXGfg5C0bqAS9shRSkteh0QBs/U4pQgyONzBx619PtHlgP
+ XPdFN8nJz3I7ev+P4xj8+mfCMih//LzdCVjrAXUiJnah+zK7iKMl451PEx7lkdGr5Q9JS0Nxu
+ BfXfedCIFhRIIzJjxc2/4AIpbOZrAA532fg2K8NrSTCMvax33kcq8KeFq4aIIo8TwI18wVMdx
+ F5XOok3YF9F40smED4S01el13MLjZKOjO+G3JWlKBzDP857E5LFmaNbokm0f0LB/+9xNfC5Z6
+ PQkTlTdTfyizIY/uF3ox55lp1UFxYGDrLV4YCUzizJNwUBpthgspUpR0qDyFpMxrOC6DqR5e3
+ lUEmxzRCpVDwukGcBeVuVLlWrNvdCI8Q6/qWvZcrm+f3JAxr7TA3140ZU7gK2GYsYPhr43Pe+
+ prB/4WvilA4outDd5DtkXf4Z8tYze+yTX2rqeGfFk3zxVH1qBbpIxbCLxnfhY9r5jg6/ociQn
+ HpAgJ/6cfjDn+Xdt0SMm4192IhQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,94 +85,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is possible to boot a kernel without CMDLINE being enabled. Update
-the implementation to handle this, and drop the condition from the
-FASTBOOT config.
+Hello Simon,
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+I have built sandbox_defconfig with PREBOOT=3D'host bind 0 ../sct.img'
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On the image I have an ESP with file EFI/BOOT/BOOTX64.EFI.
 
-Changes in v3:
-- Expand the fastboot help
+I would expect the sandbox to boot from the ESP.
 
-Changes in v2:
-- Avoid changing the logic when a command is not set
+But when starting the sandbox is does not boot. Instead it shows a menu
+with some Fedora related entry:
 
- drivers/fastboot/Kconfig     |  5 ++++-
- drivers/fastboot/fb_common.c | 30 ++++++++++++++----------------
- 2 files changed, 18 insertions(+), 17 deletions(-)
+Fedora-Workstation-armhfp-31-1.9 Boot Options.
+1:      Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
 
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 11fc0fe1c800..449244ab6a8e 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -1,5 +1,4 @@
- menu "Fastboot support"
--	depends on CMDLINE
- 
- config FASTBOOT
- 	bool
-@@ -13,6 +12,10 @@ config FASTBOOT
- 	  More information about the protocol and usecases:
- 	  https://android.googlesource.com/platform/system/core/+/refs/heads/master/fastboot/
- 
-+	  Note that enabling CMDLINE is recommended since fastboot allows U-Boot
-+	  commands to be executed on request. The CMDLINE option is required
-+	  for anything other than simply booting the OS.
-+
- config USB_FUNCTION_FASTBOOT
- 	bool "Enable USB fastboot gadget"
- 	depends on USB_GADGET
-diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-index 07f5946d9ed1..595954542a6e 100644
---- a/drivers/fastboot/fb_common.c
-+++ b/drivers/fastboot/fb_common.c
-@@ -11,6 +11,7 @@
-  */
- 
- #include <bcb.h>
-+#include <bootm.h>
- #include <common.h>
- #include <command.h>
- #include <env.h>
-@@ -142,22 +143,19 @@ void (*fastboot_get_progress_callback(void))(const char *)
-  */
- void fastboot_boot(void)
- {
--	char *s;
--
--	s = env_get("fastboot_bootcmd");
--	if (s) {
--		run_command(s, CMD_FLAG_ENV);
--	} else if (IS_ENABLED(CONFIG_CMD_BOOTM)) {
--		static char boot_addr_start[20];
--		static char *const bootm_args[] = {
--			"bootm", boot_addr_start, NULL
--		};
--
--		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
--			 "%lx", fastboot_buf_addr);
--		printf("Booting kernel at %s...\n\n\n", boot_addr_start);
--
--		do_bootm(NULL, 0, 2, bootm_args);
-+	char *s = NULL;
-+
-+	if (IS_ENABLED(CONFIG_CMDLINE)) {
-+		s = env_get("fastboot_bootcmd");
-+		if (s)
-+			run_command(s, CMD_FLAG_ENV);
-+	}
-+
-+	if (!s && IS_ENABLED(CONFIG_BOOTM)) {
-+		int ret;
-+
-+		printf("Booting kernel at %lx...\n\n\n", fastboot_buf_addr);
-+		ret = bootm_boot_start(fastboot_buf_addr, NULL);
- 
- 		/*
- 		 * This only happens if image is somehow faulty so we start
--- 
-2.43.0.472.g3155946c3a-goog
+This makes absolutely no sense on an x86_64 system. Could you, please,
+fix sandbox_defconfig to boot according to distroboot.
 
+Best regards
+
+Heinrich
