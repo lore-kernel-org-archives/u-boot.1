@@ -4,66 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC128C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:50:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E8EDC41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D4FA87C75;
+	by phobos.denx.de (Postfix) with ESMTP id B14AA87C6F;
 	Sat, 16 Dec 2023 19:48:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gZ48NwKZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aM+Pw/7j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14C6A87C97; Sat, 16 Dec 2023 19:48:40 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 314BD87C6A; Sat, 16 Dec 2023 19:48:40 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96A1687C6A
+ by phobos.denx.de (Postfix) with ESMTPS id AAA9E87C6F
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:48:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6da45aa5549so1391724a34.0
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5cd81e76164so15711787b3.1
  for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:48:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702752514; x=1703357314; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qVkteyzRBFuDFYJgtBPvJnAfS3iqgT+Rf2zbQtb7qgw=;
- b=gZ48NwKZDgn7HWza6vq/zfm+LDZiYVtkGiZmzUZF71axC5row7n8wueCtyX9OFHuq9
- qVAWWmyZTWGP/tm1KSnGfVT9yKMu0FDQ+Jjil+Pi4CMS93bh8JfW8x23cDv7oJC7jIOl
- WEcIG56F6tQ7JNjcWc2W0oGjewyOv12EFfkIk=
+ bh=yRp7Ez5Vx5p4ZtAgwExCJxq1fkHR2WmvvAYMRLJvK5A=;
+ b=aM+Pw/7jaS7rBr+Ut3aYhxbgMYtC1XDuMrvJkVwp/BREpAqlbTbwF7IOdtS5G02uHh
+ U5j5dzZQ1kIGfaL56/wS68SYSfcW6kXxprpIjksRef4ZHUil1fL3mBs1WqMdZg8JkIJ4
+ 4kia+l70BdcCWQt9zYVK/BObJ3TNnKPI/tuQM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702752514; x=1703357314;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qVkteyzRBFuDFYJgtBPvJnAfS3iqgT+Rf2zbQtb7qgw=;
- b=H/mr18qq+xMzJIhFw9rszVahgm1CB9SjYr5fGWIMzSeV6IpMCrtEQ9tP2OilCuw9EF
- yHWgxNOPVjB4L1P0QAg7GNDJm+C6xpsiotOSR2b4IG51qZU/5PL7tdMfGGYrChfGiaZ7
- mq5UZn37Hy3GCQAPtQ0YCVMIlr/UoawsjEMv7Bv2XO8J41cyYx8a4/yl56oa7xjqQKZj
- pmRtzTugnpAS9Kglw9NG/leR0aN3YaRGtuG/51ROvr0Q2GBL5myAFa/+dc2BcTYZ9CiZ
- YxaHjOawhJ1h15LXlTryBC7s/yHP6hZgq2+8FYmCzy3Ye3JFkCvnqLlnpGvvtWwWg5WV
- SsEA==
-X-Gm-Message-State: AOJu0YxN1PPfBM4D2zsIoyw4XBEVE4Y7Msw27HNy36Vwj1n82kIAC3Rq
- 9qLT7jFLGEk+jEZ01C4SrcDXT3mkVf92eyMN6fyquIKxKSgBrd+Ha64=
-X-Google-Smtp-Source: AGHT+IGtygmag0qt7iPoDYxAbfmpK7F0j+OodcnRSSokjxMmANvqnZDyYBZ5m5IPh4gE7JunchNAEhY8FzZkhXHBL5M=
-X-Received: by 2002:a05:6830:1185:b0:6da:5218:46e8 with SMTP id
- u5-20020a056830118500b006da521846e8mr3221317otq.58.1702752514154; Sat, 16 Dec
+ bh=yRp7Ez5Vx5p4ZtAgwExCJxq1fkHR2WmvvAYMRLJvK5A=;
+ b=FJeSJx6yMyt2lL498Rl1rmXdNNCVBpeAFcW+CrEF1N9O0KtI3E19C2y8kUVBlaP5ic
+ sv8XXcJnMgChi+XwGrqRLQikMQcClOJMl8I+CttXwCmUvS5Ehl/sqjsqONu/HvylW72g
+ iXSE8DAexTcox0zHpr5EEF+B0fwgQYN+GdgnxEEfVIdzBn7cA3LY7DWKtp5QH8kBtKKH
+ xztyPyPxfFxknlt1omzWwdTNqn311p23o3OoD/6H+iBnp2FG69mKuZwGXMfxpEd5F7xQ
+ BnZnH7oy1zDGzkNDbF1hYi8CHkifenReo4IPh8q1ET2MCMdi68uhUru2LTlN2Ngeb1wi
+ yebg==
+X-Gm-Message-State: AOJu0YyGwcgjPIJqFJ+JwqkuSpfT4/jEblkDqAUEEbN8Qm+aE/uXagQR
+ rHWrvbVe9UxvgvtrJM39pIWwJGSTU4r7Wzmxj26SgNnJ8SrX/AwIN5w=
+X-Google-Smtp-Source: AGHT+IH69sFOfdL+Le5WXfYbR/pZNMLSsqRn8GqAQxiiNt/LZMpik2q0j9BhUlWuyQm2Zx7hlxCatNbs+x+3CCoFfGo=
+X-Received: by 2002:a81:5258:0:b0:5e5:6c05:904e with SMTP id
+ g85-20020a815258000000b005e56c05904emr736243ywb.11.1702752514132; Sat, 16 Dec
  2023 10:48:34 -0800 (PST)
 MIME-Version: 1.0
-References: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
+References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
+ <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 16 Dec 2023 11:46:00 -0700
-Message-ID: <CAPnjgZ0=wMzY8oaVUGzszGZahvdJH1Z1XnX2JOtjVfyPFKWvZg@mail.gmail.com>
-Subject: Re: [PATCH] get_maintainer.pl: Add --git to look up CCed in git
- history
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Date: Sat, 16 Dec 2023 11:46:09 -0700
+Message-ID: <CAPnjgZ23cv=i+9_vuM3EaQ2-vUhEvzcd7Dynowd41M5hsSGHrA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/9] arrm: add ACPI fields to global data
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,16 +84,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 16 Dec 2023 at 11:08, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
+Hi Heinrich,
+
+On Fri, 15 Dec 2023 at 06:32, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Add the --git parameter, else recent contributors are left out of the CC list.
+> Add fields for the location of ACPI tables to the global data.
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
+> v2:
+>         new patch
 > ---
->  .get_maintainer.conf | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-Reviewed-by: Simon Glass <sjg@chromium.org>
+>  arch/arm/include/asm/global_data.h | 4 ++++
+>  1 file changed, 4 insertions(+)
+
+These need to be #ifdefed as they affect global_data size,
+particularly in SPL. In fact, we have a problem there.
+
+>
+> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+> index 75bd9d56f8..9505399bb1 100644
+> --- a/arch/arm/include/asm/global_data.h
+> +++ b/arch/arm/include/asm/global_data.h
+> @@ -19,6 +19,10 @@ struct arch_global_data {
+>  #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
+>         u32 sdhc_clk;
+>  #endif
+> +       ulong table_start;              /* Start address of ACPI tables */
+> +       ulong table_end;                /* End address of ACPI tables */
+> +       ulong table_start_high;         /* Start address of high ACPI tables */
+> +       ulong table_end_high;           /* End address of high ACPI tables */
+>
+>  #if defined(CONFIG_FSL_ESDHC)
+>         u32 sdhc_per_clk;
+> --
+> 2.40.1
+>
+
+Regards,
+Simon
