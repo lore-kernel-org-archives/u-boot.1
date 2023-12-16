@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 210D7C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 17:20:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9285FC41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 18:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A37D58770C;
-	Sat, 16 Dec 2023 18:20:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8710A876E4;
+	Sat, 16 Dec 2023 19:02:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="horcnQ8g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S/b6kBJZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F66787714; Sat, 16 Dec 2023 18:20:48 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id A309287714; Sat, 16 Dec 2023 19:02:06 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 386798770A
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 18:20:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AEB0876D5
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 19:02:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40c236624edso18638605e9.1
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 09:20:46 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-67f16446498so13786636d6.1
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 10:02:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702747245; x=1703352045; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702749723; x=1703354523; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qlVYvuYttBlz4MvOEXzDyVsI9sjQaLQLZx7gGfaU1Zs=;
- b=horcnQ8gJJX7/8E66WBogz86GiQs1vPoHDXGQjv3orjX069EIJ4ld6AOJbgL59h9Zu
- //3VkgvxQF5ub1hqiVh/1mg0eQm6XaMAbElHIddcwR3YN/Xewsn1J3Mulgx/GhJS+qxt
- ZldpgCF06sOmRsf/sI0UBf9TBckKF5YjVZcSADknx1ZbuREGZD/+u53U4oBVnqrTvbMm
- yvwTGyJuHZpCPfAgA74dxvoLjp5UFmB/9oE2VqvA2Z7yyPhFOxa+HkBw8sQBKTcn9n73
- 0/nJw6PIZgVhUtCFIftWVxg3lnTOSNJPY3V1XimXdeYgOl6Kj48OT9UPAzqRIWy8eHRb
- 7fFg==
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+6LDvGUO26yUlT/OHvDVhRsqmsmXBuwBe2wBgioCGBM=;
+ b=S/b6kBJZ6lB1BECI0xxwEpvMIgMCj474pRKD3Z12XSff77n2EK2zm5uWhoCxYB7iGq
+ 0LmqMbYr/to09ymq6Cv8ESFFFgpoWAs3KM3f5XL/UELisrq13G1QoRQ2ChLqnf/X35/O
+ PG+g5Ru7KixFXNAHuz55s1ZxoP4mW9BYG1nJc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702747245; x=1703352045;
+ d=1e100.net; s=20230601; t=1702749723; x=1703354523;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qlVYvuYttBlz4MvOEXzDyVsI9sjQaLQLZx7gGfaU1Zs=;
- b=fWNOek9KOQUnQ3HIumiEwdNOtIgkPLlkAPRDPKgnKuzEdbw6EYuEiCYCHBNQg2oV63
- HIZOT6mWxfCklVSMGrhdat8un3pyNRFYGVGuDrSlRwFwJPCIqq60anA8WguBx5sfUsC/
- f/kC4nAkuRceLE0fi7sbaZ4+l7D+A/obiFCYPFuonmRP/rJ46ij6OhbaEi/SElFO8V9I
- 0AG6xGPzAa91of1GdypRQU2cmWB/DY/he65+TE6ULU1koyVlc1NNC2qcHMyKWq7CCZP+
- pBf/t8YkGMDachJYrscKPrBjSi8jioQo2EwyGYstRuj9PlZWXfCSUbTNwNImvO59iPG0
- w9qQ==
-X-Gm-Message-State: AOJu0YxT7wKvW0FimjZF7iTd8QFySz+/0cvSB7nHgQ6WcuR+cPAz2t/+
- KS+hdivYEeN/jseDHL/S1IX+XfOLrn6Ux6q17VQ=
-X-Google-Smtp-Source: AGHT+IFC6/Asg7AyHWPZ4sapBoV9ZyuTToXaEyXSNFCIEnJVdReRloQI89lwtnNIfubrb3gvCNvhRUBWcrdH6GjdX2Y=
-X-Received: by 2002:a5d:6b8e:0:b0:336:4e43:b6cb with SMTP id
- n14-20020a5d6b8e000000b003364e43b6cbmr1567926wrx.41.1702747245353; Sat, 16
- Dec 2023 09:20:45 -0800 (PST)
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+6LDvGUO26yUlT/OHvDVhRsqmsmXBuwBe2wBgioCGBM=;
+ b=cK7OvjMbeCU7vYuxNwomRSl4/V5cESGdlJ2sN4iApo9B48fRQRFMftYq6DoPLkk6X2
+ 9AQ0BVjoeumGmxy4zlKDLQ0YU6d/DlUL62nP7NzDyxuvQ/cQT3t9pEHFtiVVg4PsBO4x
+ IBXGPhrDw120Al0OGA5PHTohKLiud4xkYw0lDtti5xavrI2sStrkXfCKPETfa71US9vz
+ CPDtKu+IVgUCK7S8U+ZucGfsJxg+H5AfAneQYzW8BtAXF7FkWrXh2MwKiwjbT4C3f+gO
+ yW4Y95UbMN9+GFOyZqdPBw6Eupw/UMZXyqmfpIhfzblzpAKzEueL2Slqu4/yT93icWoM
+ 0KrQ==
+X-Gm-Message-State: AOJu0YxLAsb+DmKGz9dPjvx2ZzpVrxNxEDo+cG2jNkIHXUcJS5x7sGoY
+ UhXzbZhg7WpiXDiXrFk7OX9DnjRxfjLf091o1s2PRhz6jIiLXzkx2V0=
+X-Google-Smtp-Source: AGHT+IH8k5mS+MxJfDESxVsckxGmrp700sfR42SGPbc2JUEBhhsGccCeBCjWnGqR4WlAVbYViw32qUykE8Hm2VMWJso=
+X-Received: by 2002:a0c:fb09:0:b0:67e:fa34:42db with SMTP id
+ c9-20020a0cfb09000000b0067efa3442dbmr7013623qvp.85.1702749722691; Sat, 16 Dec
+ 2023 10:02:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20231204082054.4943-1-clamor95@gmail.com>
- <ZW2pYqo6hjGqKo_-@orome.fritz.box>
- <CAPVz0n1XDNvD8G06i_qEdr3SNXwWtFfkyURp6uZbr86rbH2jQA@mail.gmail.com>
- <20231209141406.GF2513409@bill-the-cat>
-In-Reply-To: <20231209141406.GF2513409@bill-the-cat>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 16 Dec 2023 19:20:34 +0200
-Message-ID: <CAPVz0n09nOSzn7nYkOBrr4_DL1Tk_czJnt-gdOYibpPfeL38RA@mail.gmail.com>
-Subject: Re: [PATCH v1 0/8] Convert Tegra pinctrl to DM
-To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>
-Cc: Ramin Khonsari <raminterex@yahoo.com>,
- Jianlong Huang <jianlong.huang@starfivetech.com>, 
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Emil Renner Berthing <kernel@esmil.dk>, 
- Kuan Lim Lee <kuanlim.lee@linux.starfivetech.com>, 
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 16 Dec 2023 11:01:52 -0700
+Message-ID: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
+Subject: Proposal: U-Boot memory management
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,148 +81,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D0=B1, 9 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE 16:14=
- Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Dec 04, 2023 at 04:45:38PM +0200, Svyatoslav Ryhel wrote:
-> > =D0=BF=D0=BD, 4 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE 1=
-2:26 Thierry Reding <treding@nvidia.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > On Mon, Dec 04, 2023 at 10:20:46AM +0200, Svyatoslav Ryhel wrote:
-> > > > Create a DM supported wrapper arround existing Tegra pinmux logic.
-> > > > This implementation is backwards compatible with all existing board
-> > > > setups and early stages of setup. All new boards must be device tre=
-e
-> > > > based. Linux dts pinmux nodes are fully compatible with this driver=
-.
-> > > >
-> > > > As an example I have converted recently merged T30 boards to this
-> > > > layout (I have those devices and was able to test them properly) an=
-d
-> > > > Paz00 T20 board which was tested as well by owner.
-> > > >
-> > > > Svyatoslav Ryhel (8):
-> > > >   ARM: mach-tegra: rearrange SPL configs
-> > > >   drivers: pinctrl: create Tegra DM pinctrl driver
-> > > >   drivers: pinctrl: tegra: incorporate existing code
-> > > >   board: asus: grouper: switch to DM pinmux
-> > > >   board: lg: x3-t30: switch to DM pinmux
-> > > >   board: asus: transformer: switch to DM pinmux
-> > > >   board: htc: endeavoru: switch to DM pinmux
-> > > >   board: compal: paz00: clean up the board
-> > > >
-> > > >  arch/arm/dts/tegra20-paz00.dts                |    4 +-
-> > > >  arch/arm/dts/tegra30-asus-grouper-common.dtsi |  712 ++++++++++
-> > > >  .../dts/tegra30-asus-nexus7-grouper-E1565.dts |  113 ++
-> > > >  .../dts/tegra30-asus-nexus7-grouper-PM269.dts |  113 ++
-> > > >  .../dts/tegra30-asus-nexus7-tilapia-E1565.dts |  149 +++
-> > > >  arch/arm/dts/tegra30-asus-p1801-t.dts         |  982 +++++++++++++=
-+
-> > > >  arch/arm/dts/tegra30-asus-tf201.dts           |   45 +
-> > > >  arch/arm/dts/tegra30-asus-tf300t.dts          |   45 +
-> > > >  arch/arm/dts/tegra30-asus-tf300tg.dts         |  128 ++
-> > > >  arch/arm/dts/tegra30-asus-tf300tl.dts         |  163 +++
-> > > >  arch/arm/dts/tegra30-asus-tf600t.dts          |  889 +++++++++++++
-> > > >  arch/arm/dts/tegra30-asus-tf700t.dts          |   53 +
-> > > >  arch/arm/dts/tegra30-asus-transformer.dtsi    |  984 +++++++++++++=
-+
-> > > >  arch/arm/dts/tegra30-htc-endeavoru.dts        | 1147 +++++++++++++=
-++++
-> > > >  arch/arm/dts/tegra30-lg-p880.dts              |   90 ++
-> > > >  arch/arm/dts/tegra30-lg-p895.dts              |   93 ++
-> > > >  arch/arm/dts/tegra30-lg-x3.dtsi               |  845 ++++++++++++
-> > > >  arch/arm/include/asm/arch-tegra114/pinmux.h   |  303 +++++
-> > > >  arch/arm/include/asm/arch-tegra124/pinmux.h   |  327 +++++
-> > > >  arch/arm/include/asm/arch-tegra20/pinmux.h    |  291 +++++
-> > > >  arch/arm/include/asm/arch-tegra210/pinmux.h   |  394 ++++++
-> > > >  arch/arm/include/asm/arch-tegra30/pinmux.h    |  381 ++++++
-> > > >  arch/arm/mach-tegra/Kconfig                   |   16 +-
-> > > >  arch/arm/mach-tegra/Makefile                  |    1 -
-> > > >  arch/arm/mach-tegra/board.c                   |    6 +-
-> > > >  arch/arm/mach-tegra/board2.c                  |    2 +-
-> > > >  arch/arm/mach-tegra/tegra114/Makefile         |    2 +-
-> > > >  arch/arm/mach-tegra/tegra124/Makefile         |    2 -
-> > > >  arch/arm/mach-tegra/tegra20/Makefile          |    2 +-
-> > > >  arch/arm/mach-tegra/tegra210/Makefile         |    1 -
-> > > >  arch/arm/mach-tegra/tegra30/Makefile          |    2 +-
-> > > >  board/asus/grouper/grouper.c                  |   18 -
-> > > >  board/asus/grouper/pinmux-config-grouper.h    |  362 ------
-> > > >  .../pinmux-config-transformer.h               |  365 ------
-> > > >  board/asus/transformer-t30/transformer-t30.c  |   23 -
-> > > >  board/compal/paz00/Makefile                   |    8 -
-> > > >  board/compal/paz00/paz00.c                    |   53 -
-> > > >  board/htc/endeavoru/endeavoru.c               |   14 -
-> > > >  board/htc/endeavoru/pinmux-config-endeavoru.h |  362 ------
-> > > >  board/lg/x3-t30/Kconfig                       |   12 -
-> > > >  board/lg/x3-t30/configs/p880.config           |    1 -
-> > > >  board/lg/x3-t30/configs/p895.config           |    1 -
-> > > >  board/lg/x3-t30/pinmux-config-x3.h            |  449 -------
-> > > >  board/lg/x3-t30/x3-t30.c                      |   23 -
-> > > >  configs/paz00_defconfig                       |    3 +
-> > > >  drivers/pinctrl/Kconfig                       |    1 +
-> > > >  drivers/pinctrl/Makefile                      |    1 +
-> > > >  drivers/pinctrl/tegra/Kconfig                 |   18 +
-> > > >  drivers/pinctrl/tegra/Makefile                |   16 +
-> > > >  .../pinctrl/tegra/funcmux-tegra114.c          |    0
-> > > >  .../pinctrl/tegra/funcmux-tegra124.c          |    0
-> > > >  .../pinctrl/tegra/funcmux-tegra20.c           |    0
-> > > >  .../pinctrl/tegra/funcmux-tegra210.c          |    0
-> > > >  .../pinctrl/tegra/funcmux-tegra30.c           |    0
-> > > >  drivers/pinctrl/tegra/pinctrl-tegra.c         |  248 ++++
-> > > >  drivers/pinctrl/tegra/pinctrl-tegra20.c       |  177 +++
-> > > >  .../pinctrl/tegra}/pinmux-common.c            |    0
-> > > >  .../pinctrl/tegra/pinmux-tegra114.c           |    0
-> > > >  .../pinctrl/tegra/pinmux-tegra124.c           |    0
-> > > >  .../pinctrl/tegra/pinmux-tegra20.c            |    0
-> > > >  drivers/pinctrl/tegra/pinmux-tegra210.c       |  190 +++
-> > > >  .../pinctrl/tegra/pinmux-tegra30.c            |    0
-> > > >  include/configs/x3-t30.h                      |   13 +-
-> > > >  63 files changed, 8920 insertions(+), 1723 deletions(-)
-> > >
-> > > So we're adding 7000 extra lines here just to get the same level of
-> > > functionality? Do we really want this?
-> >
-> > Tom, as a project maintainer, may you answer? Does U-Boot really want
-> > this? And ensure there will never ever be a forced pinmux DM
-> > migration.
-> >
-> > >
-> > > For things like the kernel this makes a bit more sense because we can
-> > > have generic kernel images for a wide variety of boards, and
-> > > additionally we can have dynamic reconfiguration of the pinmux at
-> > > runtime. We have neither of those in U-Boot, so do we really need to
-> > > move all this into DT and add this extra overhead?
-> >
-> > There would not be so much overhead if Linux kernel used numbers for
-> > pin definitions, not strings.
->
-> Well, yes, this is the right direction. One of the goals is to be able
-> to use the linux device trees as-is and be able to pass that along to
-> the OS to use. And so we move a little away from the absolute thinnest
-> case that we used to be and a bit more towards a generic case just like
-> Linux did. In some cases, one can just change the device tree passed to
-> U-Boot and re-use the same binary. And if Tegra platforms moved in that
-> direction that's nice too.
->
-> --
-> Tom
+Hi,
 
-Tom and Thierry.
-I have examined the size increase of the produced u-boot binary.
+This records my thoughts after a discussion with Ilias & Heinrich re
+memory allocation in U-Boot.
 
-With only conversion code binary size increased by around 15 kb (based
-on cardhu board examination). While, if dts conversion is performed as
-well I have got a 27.5 kb binary increase (based on lg-x3 board
-examination). Yes, this is a lot so it is up to you to decide if these
-patches should be implemented in any way or if they should be
-rejected.
+1. malloc()
 
-From my perspective this increase is acceptable since even the oldest
-devices should have 2 mb of bootloader size reserved. Devices I own
-can easily have a 2 mb bootloader extendable to 3.5 mb and even
-further if use stages. Same time header pinmux setup is preserved and
-DM wrapper should protect Tegra from being dropped as it was in case
-of timer DM conversion.
+malloc() is used for programmatic memory allocation. It allows memory
+to be freed. It is not designed for very large allocations (e.g. a
+10MB kernel or 100MB ramdisk).
 
-Best regards,
-Svyatoslav R.
+2. lmb
+
+lmb is used for large blocks of memory, such as those needed for a
+kernel or ramdisk. Allocation is only transitory, for the purposes of
+loading some images and booting. If the boot fails, then all lmb
+allocations go away.
+
+lmb is set up by getting all available memory and then removing what
+is used by U-Boot (code, data, malloc() space, etc.)
+
+lmb reservations have a few flags so that areas of memory can be
+provided with attributes
+
+There are some corner cases...e.g. loading a file does an lmb
+allocation but only for the purpose of avoiding a file being loaded
+over U-Boot code/data. The allocation is dropped immediately after the
+file is loaded. Within the bootm command, or when using standard boot,
+this would be fairly easy to solve.
+
+Linux has renamed lmb to memblock. We should consider doing the same.
+
+3. EFI
+
+EFI has its own memory-allocation tables.
+
+Like lmb, EFI is able to deal with large allocations. But via a 'pool'
+function it can also do smaller allocations similar to malloc(),
+although each one uses at least 4KB at present.
+
+EFI allocations do not go away when a boot fails.
+
+With EFI it is possible to add allocations post facto, in which case
+they are added to the allocation table just as if the memory was
+allocated with EFI to begin with.
+
+The EFI allocations and the lmb allocations use the same memory, so in
+principle could conflict.
+
+EFI allocations are sometimes used to allocate internal U-Boot data as
+well, if needed by the EFI app. For example, while efi_image_parse()
+uses malloc(), efi_var_mem.c uses EFI allocations since the code runs
+in the app context and may need to access the memory after U-Boot has
+exited. Also efi_smbios.c uses allocate_pages() and then adds a new
+mapping as well.
+
+EFI memory has attributes, including what the memory is used for (to
+some degree of granularity). See enum efi_memory_type and struct
+efi_mem_desc. In the latter there are also attribute flags - whether
+memory is cacheable, etc.
+
+EFI also has the x86 idea of 'conventional' memory, meaning (I
+believe) that below 4GB that isn't reserved for the hardware/system.
+This is meaningless, or at least confusing, on ARM systems.
+
+4. reservations
+
+It is perhaps worth mentioning a fourth method of memory management,
+where U-Boot reserves chunks of memory before relocation (in
+board_init_f.c), e.g. for the framebuffer, U-Boot code, the malloc()
+region, etc.
+
+
+Problems
+=E2=80=94-------
+
+There are no urgent problems, but here are some things that could be improv=
+ed:
+
+1. EFI should attach most of its data structures to driver model. This
+work has started, with the partition support, but more effort would
+help. This would make it easier to see which memory is related to
+devices and which is separate.
+
+2. Some drivers do EFI reservations today, whether EFI is used for
+booting or not (e.g. rockchip video rk_vop_probe()).
+
+3. U-Boot doesn't really map arch-specific memory attributes (e.g.
+armv8's struct mm_region) to EFI ones.
+
+4. EFI duplicates some code from bootm, some of which relates to
+memory allocation (e.g. FDT fixup).
+
+5. EFI code is used even if EFI is never used to boot
+
+6. EFI allocations can result in the same memory being used as has
+already been allocated by lmb. Users may load files which overwrite
+memory allocated by EFI.
+
+
+Lifetime
+--------
+
+We have three different memory allocators with different purposes. Can
+we unify them a little?
+
+Within U-Boot:
+- malloc() space lives forever
+- lmb lives while setting out images for booting
+- EFI (mostly) lives while booting an EFI app
+
+In practice, EFI is set up early in U-Boot. Some of this is necessary,
+some not. EFI allocations stay around forever. This works OK since
+large allocations are normally not done in EFI, so memory isn't really
+consumed to any great degree by the boot process.
+
+What happens to EFI allocations if the app returns? They are still
+present, in case another app is run. This seems fine.
+
+API
+=E2=80=93--
+Can we unify some APIs?
+
+It should be possible to use lmb for large EFI memory allocations, so
+long as they are only needed for booting. We effectively do this
+today, since EFI does not manage the arrangement of loaded images in
+memory. for the most part.
+
+It would not make sense to use EFI allocation to replace lmb and
+malloc(), of course.
+
+Could we use a common (lower-level) API for allocation, used by both
+lmb and EFI? They do have some similarities. However they have
+different lifetime constraints (EFI allocations are never dropped,
+unlikely lmb).
+
+** Overall, it seems that the existence of memory allocation in
+boot-time services has created confusion. Memory allocation is
+muddled, with both U-Boot code and boot-time services calling the same
+memory allocator. This just has not been clearly thought out.
+
+
+Proposal
+=E2=80=94-------
+
+Here are some ideas:
+
+1. For video, use the driver model API to locate the video regions, or
+block off the entire framebuffer memory, for all devices as a whole.
+Use efi_add_memory_map()
+
+2. Add memory attributes to UCLASS_RAM and use them in EFI, mapping to
+the EFI_MEMORY_... attributes in struct efi_mem_desc.
+
+3. Add all EFI reservations just before booting the app, as we do with
+devicetree fixup. With this model, malloc() and lmb are used for all
+allocation. Then efi_add_memory_map() is called for each region in
+turn just before booting. Memory attributes are dealt with above. The
+type (enum efi_memory_type) can be determined simply by the data
+structure stored in it, as is done today. For example, SMBIOS tables
+can use EFI_ACPI_RECLAIM_MEMORY. Very few types are used and EFI code
+understands the meaning of each.
+
+4. Avoid setting up EFI memory at the start of U-Boot. Do it only when
+booting. This looks to require very little effort.
+
+5. Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
+boot-time services. This solves the problem 6. If memory is needed by
+an app, allocate it with malloc() and see 3. There are only two
+efi_allocate_pages() (smbios and efi_runtime). There are more calls of
+efi_allocate_pool(), but most of these seem easy to fix up. For
+example, efi_init_event_log() allocates a buffer, but this can be
+allocated in normal malloc() space or in a bloblist.
+
+6. Don't worry too much about whether EFI will be used for booting.
+The cost is likely not that great: use bootstage to measure it as is
+done for driver model. Try to minmise the cost of its tables,
+particularly for execution time, but otherwise just rely on the
+ability to disable EFI_LOADER.
+
+=E2=80=93
+
+Regards,
+Simon
