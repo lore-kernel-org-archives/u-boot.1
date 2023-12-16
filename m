@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0B11C46CA2
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 16:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9368C41535
+	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 16:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF894876E8;
-	Sat, 16 Dec 2023 17:55:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 38FC5876F2;
+	Sat, 16 Dec 2023 17:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QsOPhD9i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Tw5aDdiF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00938876F8; Sat, 16 Dec 2023 17:55:16 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C18928770A; Sat, 16 Dec 2023 17:56:14 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E353A876DB
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 17:55:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA8E876E8
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 17:56:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40c3fe6c1b5so18358015e9.2
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 08:55:12 -0800 (PST)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-67f09756761so15548936d6.3
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 08:56:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702745712; x=1703350512; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lselR/hKOYOY3TijP7NJgKfh7dIIffYxax+R2OYLv1k=;
- b=QsOPhD9iIiQSqujTAl7JkJPZFgkLV/u2nMwakeNhwAlSh7jX0LUB8mZjlgQxyJj1xu
- YpEfwdM8vLUnBknEsMPlj7w6odqtkwBQxjPuDjMNyO56oPTKCO6/ZF88X2o1YQ98oxst
- Rz+x+lcUs+KXnC7Lhv9BIjXDPjUlLVXOFOgg4xAZNVvHqgP+TIWQuwDROv2TCRQTnUkZ
- T9QG7R8+uapomFtJ6Nz/gciNr4Nr+Wd5u6NOUDwdAM0zBdV7ILpafjAYF4klMCJ27y09
- 0rsCuhOcWEyFmPaSxOC993yKlUQS1GU+DTq7NleqnbGlW0jq12EY1ze37UPCfIzclzzi
- 7g/g==
+ d=gmail.com; s=20230601; t=1702745771; x=1703350571; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zrjT+mFj74wkaLA2io1e1uUkbHke3ExyOx+mylWbkNs=;
+ b=Tw5aDdiF9SEM/zC4HR2CxtSybTmkEzWTwjK+Zx8nQzH/XO9JMMpDOlo48dxqUmsXKI
+ Nq2NocZCWXhP9ZoJRqTdsCynPz9EJFiLUIDyLv+AIUAj2xYR5LRjdPFnnWwvYi0dLns6
+ IEG2ho398PhBKcuykOsy4qUHVgLHxX1GbnketQel3mrKi19HwxTdFZw2hKu+loAQ2QZ3
+ H13/JDIYua6B5tDOg9eT1p574q241ksq/zaN+WR1tKYky6ihWYrAV7JzSP/ziih5b3c1
+ mjTz6xXiD52eBZJ81HbhWHUQnNxpPUTA9X+tPrrElY/6IMXVM07e1o3OYATEUcYl1in3
+ 7d8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702745712; x=1703350512;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lselR/hKOYOY3TijP7NJgKfh7dIIffYxax+R2OYLv1k=;
- b=tpxaAQv3Yc10unxZv7iWXOINXL//2ES7qy+wHLsZC52ZM+vyriSKi+o4VwQlzZoV8n
- x3cTJx0dZYBtHzDNhYT3Qs+JMuh6dmp7k1J/rozHZKz9ao1qLRHsZl6524zIim9anVtF
- PAT3E8TcOdBwf1O24xHt6NtdLzblMg2T5gX73Nj3Rfvi54YwpGqJRKm0bB/UcjKd9NzJ
- apgnXe3t85y1d71FWSpQv4a/B5zeN+G7hB4PoZyQ9uFQEIYiY7bW+Sk/YJ1BKzL/SvHv
- P8j/t5EstJdOzOG0cVzEZblnuLpJr6eWRgvpwLEr1rYWgYvfsO1fIdRZ5kP5aNQpHOFD
- zK1g==
-X-Gm-Message-State: AOJu0YxQ4MHGk9gIEpkxpKtqRuEuRkEU401HFAaEN2TaJjkbhCtKDzHv
- m/qlsw4nTN2SLF6BtvqN9meCE8oDXF/c6sXE5AU=
-X-Google-Smtp-Source: AGHT+IEqN3bKVKMmoQMolUapWqf2mkoBRJDwDf0fUokTx82oFkkz01DR8VL9fNpqRLZiFcGD3i5uHPR7OXj7kGl6Ygo=
-X-Received: by 2002:a05:600c:54f1:b0:40c:2395:1fa7 with SMTP id
- jb17-20020a05600c54f100b0040c23951fa7mr6435391wmb.141.1702745712002; Sat, 16
- Dec 2023 08:55:12 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702745771; x=1703350571;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zrjT+mFj74wkaLA2io1e1uUkbHke3ExyOx+mylWbkNs=;
+ b=hEaG11yc8MEctAAtDnqwjaZrrmqze3J+WeYdwNXiDBz5ER14rvTK5T5dG/C2L5DGSw
+ Ej5RGl21QZ3khnzF7aT3UfgPj2NNRNeLet6So1MMZEybXS2ksOmOmwFRCiN4LrsVrgUb
+ nwViXxEVvS0Z/ZMgONbHtVFDINqQlqYaopk6qyHsykpGPzl5uQ5V5dREAJ6/gDUL2sD6
+ mab1nSqN4tQ6O2NY46dbHMi9RAgWfOvkh4sxXzeVmXWLrddbLtMUxI0IrI8wE/nRa0JH
+ hT/epmeW+0oqxlpgYNI4usmyWEJdYCsPW3m+/kGg/YR24ymDlmMX5Y9Bo+Q3NgpLCajK
+ sK9w==
+X-Gm-Message-State: AOJu0Yx5Eu7OkJhNZP7930HSQMRCYrkBq6IvpuDUzlPl9dCWMVO5CTKH
+ RdpWa6JOIo+J4m6ZhspCeaU=
+X-Google-Smtp-Source: AGHT+IG5SnjKvql5b2KkQlw9Olj7OZXO7rhGLgYP+mxnnxHUr6DGaIJr7OF4vsQfp3PLa+ZPfTXOBw==
+X-Received: by 2002:a05:6214:1d29:b0:67a:a721:f31e with SMTP id
+ f9-20020a0562141d2900b0067aa721f31emr19663705qvd.94.1702745771282; 
+ Sat, 16 Dec 2023 08:56:11 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ ec15-20020ad44e6f000000b0067f0306b4c7sm2811682qvb.105.2023.12.16.08.56.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 16 Dec 2023 08:56:10 -0800 (PST)
+Message-ID: <56f7d33e-88dd-edeb-9a1e-d79fd057b380@gmail.com>
+Date: Sat, 16 Dec 2023 11:56:10 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
 References: <20231216084838.19403-1-clamor95@gmail.com>
  <20231216084838.19403-2-clamor95@gmail.com>
  <e53a31db-aea2-fe0e-daf6-f1338c59b2a8@gmail.com>
  <17d230d0-0118-4a22-9f75-14c5b06dd915@denx.de>
+From: Sean Anderson <seanga2@gmail.com>
 In-Reply-To: <17d230d0-0118-4a22-9f75-14c5b06dd915@denx.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 16 Dec 2023 18:55:00 +0200
-Message-ID: <CAPVz0n1nX6kC6UOd8kSa9=NuYtdumvrWQaScXUh-KnYKiAqMAw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
-To: Marek Vasut <marex@denx.de>
-Cc: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de, 
- Lukasz Majewski <lukma@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,95 +97,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D0=B1, 16 =D0=B3=D1=80=D1=83=D0=B4. 2023=E2=80=AF=D1=80. =D0=BE 18:5=
-2 Marek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On 12/16/23 16:37, Sean Anderson wrote:
-> > On 12/16/23 03:48, Svyatoslav Ryhel wrote:
-> >> Existing gpio-gate-clock driver acts like a simple GPIO switch without
-> >> any
-> >> effect on gated clock. Add actual clock actions into enable/disable
-> >> ops and
-> >> implement get_rate op by passing gated clock if it is enabled.
-> >>
-> >> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> >> ---
-> >>   drivers/clk/clk-gpio.c | 44 ++++++++++++++++++++++++++++++++++------=
---
-> >>   1 file changed, 36 insertions(+), 8 deletions(-)
-> >>
-> >> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
-> >> index 26d795b978..72d9747a47 100644
-> >> --- a/drivers/clk/clk-gpio.c
-> >> +++ b/drivers/clk/clk-gpio.c
-> >> @@ -3,19 +3,23 @@
-> >>    * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >>    */
-> >> -#include <asm/gpio.h>
-> >> -#include <common.h>
-> >> -#include <clk-uclass.h>
-> >> +#include <clk.h>
-> >>   #include <dm.h>
-> >> +#include <clk-uclass.h>
-> >> +#include <linux/clk-provider.h>
-> >> +
-> >> +#include <asm/gpio.h>
-> >>   struct clk_gpio_priv {
-> >> -    struct gpio_desc    enable;
-> >> +    struct gpio_desc    enable;    /* GPIO, controlling the gate */
-> >> +    struct clk        *clk;    /* Gated clock */
-> >>   };
-> >>   static int clk_gpio_enable(struct clk *clk)
-> >>   {
-> >>       struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
-> >> +    clk_enable(priv->clk);
-> >>       dm_gpio_set_value(&priv->enable, 1);
-> >>       return 0;
-> >> @@ -26,21 +30,45 @@ static int clk_gpio_disable(struct clk *clk)
-> >>       struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
-> >>       dm_gpio_set_value(&priv->enable, 0);
-> >> +    clk_disable(priv->clk);
-> >>       return 0;
-> >>   }
-> >> +static ulong clk_gpio_get_rate(struct clk *clk)
-> >> +{
-> >> +    struct clk_gpio_priv *priv =3D dev_get_priv(clk->dev);
-> >> +
-> >> +    return clk_get_rate(priv->clk);
-> >> +}
-> >> +
-> >>   const struct clk_ops clk_gpio_ops =3D {
-> >>       .enable        =3D clk_gpio_enable,
-> >>       .disable    =3D clk_gpio_disable,
-> >> +    .get_rate    =3D clk_gpio_get_rate,
-> >>   };
-> >> -static int clk_gpio_probe(struct udevice *dev)
-> >> +static int clk_gpio_of_to_plat(struct udevice *dev)
-> >>   {
-> >>       struct clk_gpio_priv *priv =3D dev_get_priv(dev);
-> >> +    int ret;
-> >> -    return gpio_request_by_name(dev, "enable-gpios", 0,
-> >> -                    &priv->enable, GPIOD_IS_OUT);
-> >> +    priv->clk =3D devm_clk_get(dev, NULL);
-> >> +    if (IS_ERR(priv->clk)) {
-> >> +        log_debug("%s: Could not get gated clock: %ld\n",
-> >> +              __func__, PTR_ERR(priv->clk));
-> >> +        return PTR_ERR(priv->clk);
-> >> +    }
-> >> +
-> >> +    ret =3D gpio_request_by_name(dev, "enable-gpios", 0,
-> >> +                   &priv->enable, GPIOD_IS_OUT);
-> >> +    if (ret) {
-> >> +        log_debug("%s: Could not decode enable-gpios (%d)\n",
-> >> +              __func__, ret);
-> >> +        return ret;
-> >> +    }
-> >> +
-> >> +    return 0;
->
-> All this forwarding of clock enable/disable/get_rate for parent clock
-> should already be done in clock core. If it is not, then it should be
-> fixed in clock core.
-
-It is not and this driver, as is, did not work on tegra since you
-messed up headers.
+T24gMTIvMTYvMjMgMTE6NTIsIE1hcmVrIFZhc3V0IHdyb3RlOg0KPiBPbiAxMi8xNi8yMyAx
+NjozNywgU2VhbiBBbmRlcnNvbiB3cm90ZToNCj4+IE9uIDEyLzE2LzIzIDAzOjQ4LCBTdnlh
+dG9zbGF2IFJ5aGVsIHdyb3RlOg0KPj4+IEV4aXN0aW5nIGdwaW8tZ2F0ZS1jbG9jayBkcml2
+ZXIgYWN0cyBsaWtlIGEgc2ltcGxlIEdQSU8gc3dpdGNoIHdpdGhvdXQgYW55DQo+Pj4gZWZm
+ZWN0IG9uIGdhdGVkIGNsb2NrLiBBZGQgYWN0dWFsIGNsb2NrIGFjdGlvbnMgaW50byBlbmFi
+bGUvZGlzYWJsZSBvcHMgYW5kDQo+Pj4gaW1wbGVtZW50IGdldF9yYXRlIG9wIGJ5IHBhc3Np
+bmcgZ2F0ZWQgY2xvY2sgaWYgaXQgaXMgZW5hYmxlZC4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYt
+Ynk6IFN2eWF0b3NsYXYgUnloZWwgPGNsYW1vcjk1QGdtYWlsLmNvbT4NCj4+PiAtLS0NCj4+
+PiDCoCBkcml2ZXJzL2Nsay9jbGstZ3Bpby5jIHwgNDQgKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKy0tLS0tLS0tDQo+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDM2IGluc2Vy
+dGlvbnMoKyksIDggZGVsZXRpb25zKC0pDQo+Pj4NCj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9jbGsvY2xrLWdwaW8uYyBiL2RyaXZlcnMvY2xrL2Nsay1ncGlvLmMNCj4+PiBpbmRleCAy
+NmQ3OTViOTc4Li43MmQ5NzQ3YTQ3IDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMvY2xrL2Ns
+ay1ncGlvLmMNCj4+PiArKysgYi9kcml2ZXJzL2Nsay9jbGstZ3Bpby5jDQo+Pj4gQEAgLTMs
+MTkgKzMsMjMgQEANCj4+PiDCoMKgICogQ29weXJpZ2h0IChDKSAyMDIzIE1hcmVrIFZhc3V0
+IDxtYXJlay52YXN1dCtyZW5lc2FzQG1haWxib3gub3JnPg0KPj4+IMKgwqAgKi8NCj4+PiAt
+I2luY2x1ZGUgPGFzbS9ncGlvLmg+DQo+Pj4gLSNpbmNsdWRlIDxjb21tb24uaD4NCj4+PiAt
+I2luY2x1ZGUgPGNsay11Y2xhc3MuaD4NCj4+PiArI2luY2x1ZGUgPGNsay5oPg0KPj4+IMKg
+ICNpbmNsdWRlIDxkbS5oPg0KPj4+ICsjaW5jbHVkZSA8Y2xrLXVjbGFzcy5oPg0KPj4+ICsj
+aW5jbHVkZSA8bGludXgvY2xrLXByb3ZpZGVyLmg+DQo+Pj4gKw0KPj4+ICsjaW5jbHVkZSA8
+YXNtL2dwaW8uaD4NCj4+PiDCoCBzdHJ1Y3QgY2xrX2dwaW9fcHJpdiB7DQo+Pj4gLcKgwqDC
+oCBzdHJ1Y3QgZ3Bpb19kZXNjwqDCoMKgIGVuYWJsZTsNCj4+PiArwqDCoMKgIHN0cnVjdCBn
+cGlvX2Rlc2PCoMKgwqAgZW5hYmxlO8KgwqDCoCAvKiBHUElPLCBjb250cm9sbGluZyB0aGUg
+Z2F0ZSAqLw0KPj4+ICvCoMKgwqAgc3RydWN0IGNsa8KgwqDCoMKgwqDCoMKgICpjbGs7wqDC
+oMKgIC8qIEdhdGVkIGNsb2NrICovDQo+Pj4gwqAgfTsNCj4+PiDCoCBzdGF0aWMgaW50IGNs
+a19ncGlvX2VuYWJsZShzdHJ1Y3QgY2xrICpjbGspDQo+Pj4gwqAgew0KPj4+IMKgwqDCoMKg
+wqAgc3RydWN0IGNsa19ncGlvX3ByaXYgKnByaXYgPSBkZXZfZ2V0X3ByaXYoY2xrLT5kZXYp
+Ow0KPj4+ICvCoMKgwqAgY2xrX2VuYWJsZShwcml2LT5jbGspOw0KPj4+IMKgwqDCoMKgwqAg
+ZG1fZ3Bpb19zZXRfdmFsdWUoJnByaXYtPmVuYWJsZSwgMSk7DQo+Pj4gwqDCoMKgwqDCoCBy
+ZXR1cm4gMDsNCj4+PiBAQCAtMjYsMjEgKzMwLDQ1IEBAIHN0YXRpYyBpbnQgY2xrX2dwaW9f
+ZGlzYWJsZShzdHJ1Y3QgY2xrICpjbGspDQo+Pj4gwqDCoMKgwqDCoCBzdHJ1Y3QgY2xrX2dw
+aW9fcHJpdiAqcHJpdiA9IGRldl9nZXRfcHJpdihjbGstPmRldik7DQo+Pj4gwqDCoMKgwqDC
+oCBkbV9ncGlvX3NldF92YWx1ZSgmcHJpdi0+ZW5hYmxlLCAwKTsNCj4+PiArwqDCoMKgIGNs
+a19kaXNhYmxlKHByaXYtPmNsayk7DQo+Pj4gwqDCoMKgwqDCoCByZXR1cm4gMDsNCj4+PiDC
+oCB9DQo+Pj4gK3N0YXRpYyB1bG9uZyBjbGtfZ3Bpb19nZXRfcmF0ZShzdHJ1Y3QgY2xrICpj
+bGspDQo+Pj4gK3sNCj4+PiArwqDCoMKgIHN0cnVjdCBjbGtfZ3Bpb19wcml2ICpwcml2ID0g
+ZGV2X2dldF9wcml2KGNsay0+ZGV2KTsNCj4+PiArDQo+Pj4gK8KgwqDCoCByZXR1cm4gY2xr
+X2dldF9yYXRlKHByaXYtPmNsayk7DQo+Pj4gK30NCj4+PiArDQo+Pj4gwqAgY29uc3Qgc3Ry
+dWN0IGNsa19vcHMgY2xrX2dwaW9fb3BzID0gew0KPj4+IMKgwqDCoMKgwqAgLmVuYWJsZcKg
+wqDCoMKgwqDCoMKgID0gY2xrX2dwaW9fZW5hYmxlLA0KPj4+IMKgwqDCoMKgwqAgLmRpc2Fi
+bGXCoMKgwqAgPSBjbGtfZ3Bpb19kaXNhYmxlLA0KPj4+ICvCoMKgwqAgLmdldF9yYXRlwqDC
+oMKgID0gY2xrX2dwaW9fZ2V0X3JhdGUsDQo+Pj4gwqAgfTsNCj4+PiAtc3RhdGljIGludCBj
+bGtfZ3Bpb19wcm9iZShzdHJ1Y3QgdWRldmljZSAqZGV2KQ0KPj4+ICtzdGF0aWMgaW50IGNs
+a19ncGlvX29mX3RvX3BsYXQoc3RydWN0IHVkZXZpY2UgKmRldikNCj4+PiDCoCB7DQo+Pj4g
+wqDCoMKgwqDCoCBzdHJ1Y3QgY2xrX2dwaW9fcHJpdiAqcHJpdiA9IGRldl9nZXRfcHJpdihk
+ZXYpOw0KPj4+ICvCoMKgwqAgaW50IHJldDsNCj4+PiAtwqDCoMKgIHJldHVybiBncGlvX3Jl
+cXVlc3RfYnlfbmFtZShkZXYsICJlbmFibGUtZ3Bpb3MiLCAwLA0KPj4+IC3CoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAmcHJpdi0+ZW5hYmxlLCBHUElPRF9JU19P
+VVQpOw0KPj4+ICvCoMKgwqAgcHJpdi0+Y2xrID0gZGV2bV9jbGtfZ2V0KGRldiwgTlVMTCk7
+DQo+Pj4gK8KgwqDCoCBpZiAoSVNfRVJSKHByaXYtPmNsaykpIHsNCj4+PiArwqDCoMKgwqDC
+oMKgwqAgbG9nX2RlYnVnKCIlczogQ291bGQgbm90IGdldCBnYXRlZCBjbG9jazogJWxkXG4i
+LA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBfX2Z1bmNfXywgUFRSX0VSUihw
+cml2LT5jbGspKTsNCj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIFBUUl9FUlIocHJpdi0+
+Y2xrKTsNCj4+PiArwqDCoMKgIH0NCj4+PiArDQo+Pj4gK8KgwqDCoCByZXQgPSBncGlvX3Jl
+cXVlc3RfYnlfbmFtZShkZXYsICJlbmFibGUtZ3Bpb3MiLCAwLA0KPj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgJnByaXYtPmVuYWJsZSwgR1BJT0RfSVNfT1VU
+KTsNCj4+PiArwqDCoMKgIGlmIChyZXQpIHsNCj4+PiArwqDCoMKgwqDCoMKgwqAgbG9nX2Rl
+YnVnKCIlczogQ291bGQgbm90IGRlY29kZSBlbmFibGUtZ3Bpb3MgKCVkKVxuIiwNCj4+PiAr
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgX19mdW5jX18sIHJldCk7DQo+Pj4gK8KgwqDC
+oMKgwqDCoMKgIHJldHVybiByZXQ7DQo+Pj4gK8KgwqDCoCB9DQo+Pj4gKw0KPj4+ICvCoMKg
+wqAgcmV0dXJuIDA7DQo+IA0KPiBBbGwgdGhpcyBmb3J3YXJkaW5nIG9mIGNsb2NrIGVuYWJs
+ZS9kaXNhYmxlL2dldF9yYXRlIGZvciBwYXJlbnQgY2xvY2sgc2hvdWxkIGFscmVhZHkgYmUg
+ZG9uZSBpbiBjbG9jayBjb3JlLiBJZiBpdCBpcyBub3QsIHRoZW4gaXQgc2hvdWxkIGJlIGZp
+eGVkIGluIGNsb2NrIGNvcmUuDQoNCk9ubHkgQ0NGIGZvcndhcmRzIHRoaW5ncy4gSXQncyB1
+cCB0byB0aGUgZHJpdmVyIHRvIGRvIGl0IGluIHRoZSBub24tQ0NGIGNhc2UuDQoNCi0tU2Vh
+bg0K
