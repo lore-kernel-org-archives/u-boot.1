@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863CDC3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 16:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807D2C46CD3
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 16:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 43A4487CD2;
+	by phobos.denx.de (Postfix) with ESMTP id CA02B87CD8;
 	Sun, 17 Dec 2023 17:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hLtpeq7m";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="n6d0o5sO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D045E87C8F; Sun, 17 Dec 2023 17:36:46 +0100 (CET)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id E1F5B87CAE; Sun, 17 Dec 2023 17:36:46 +0100 (CET)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3C2787CA9
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 17:36:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A309B87C96
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 17:36:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-7b7a9f90ee9so86999139f.0
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 08:36:41 -0800 (PST)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-7b7020f03c9so110596639f.3
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 08:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702831000; x=1703435800; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702831001; x=1703435801; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RcgQluQqNMcVNvTsXACQeH7hM0OQB9gYi/tIKcUbYnk=;
- b=hLtpeq7mNy23pxu+mM+EQfGMMW6BkuecGEzHhS6NSwq96HrkUUWfh6ZOf9LL5BQZe4
- BcVuJa0zrrIQ+GpOLQ6OJxqdNh3pgUBCjk3dmdW3nYn00C2bHuevD2tZ2QPvLdru/7Ex
- C7BS79c+aWXhEarjOmQ+KeoANwgjaMuBfy0gU=
+ bh=De1+a+m+4UWj3EBkJvn/XottNehwYnCTOBJVCOY34jc=;
+ b=n6d0o5sOxFWlFJ8YupkMpl2O+ZTtDk7GCPz5a+j7fFqv1Ubve74QUn0PLr/O7qEC6n
+ ubuQ6Md2AbUmgSzhSEHGdiiouIqeXypiYQ3Wte9yIxhVOMUoGP1axTCWn7lLvFNe702e
+ o162BoR0UnOYHp09mYp/ugUZp4YGBQMueAYbc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702831000; x=1703435800;
+ d=1e100.net; s=20230601; t=1702831001; x=1703435801;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RcgQluQqNMcVNvTsXACQeH7hM0OQB9gYi/tIKcUbYnk=;
- b=r4L0uhuNHxJiiI4sa0PjDAr6ptet/+FmpDKwAAPTalMeSeoN/8c3ot3TRsLh2Lcay3
- sjP7wuOF1u4cMNnnULst1ev+7k6rwKjll0nqF7gFGFDxixF7DNyr78KGKdvqfqUMui1i
- WTa76cWDAZIJ6Brupg8O0AY1HCMZJsVvG7WxzsXLWlSOnnvlTxpQe1BwdJrVn5/+J3y4
- VhLrCPHNUeFIfFzjzgnD4FMhGhn/998TSDZT7iY2NwzLKB2rBEJhj93M3MoD5oo6QRX1
- 0ST4FnzUs06qaIrIsHkHj0Uwr0w2gUGJI8n0udfsAuN18acVCA43mu9qU1v9tDYtcSBW
- aeIA==
-X-Gm-Message-State: AOJu0YyATHnyswQpod4BNdiPCE29zeya8H6Qcb3gTdjpTiTchEkUJ47N
- 0VecYOheByykauo7c92PRHIBdHfxCPC2UglQW7rJ1w==
-X-Google-Smtp-Source: AGHT+IFdrlDqNmyPZRB+iucCMx1oRmbkVbxTG5UhEJWQj/F1JkStBAd9Opj4pyGDox9JkMobECTtOw==
-X-Received: by 2002:a05:6602:35b:b0:7a9:6a65:e361 with SMTP id
- w27-20020a056602035b00b007a96a65e361mr17318232iou.9.1702831000549; 
- Sun, 17 Dec 2023 08:36:40 -0800 (PST)
+ bh=De1+a+m+4UWj3EBkJvn/XottNehwYnCTOBJVCOY34jc=;
+ b=stmt0lfUziKObcwLhLRin0UFyZ1OSbueYQswl6Pu819EQTQ1hjtO3noGgJ6dDkbSLp
+ u3+DD6Pu5sdK3hFljtK1sWSdhZIWV9yP8C9rMuKc7uSS2avkg4AZxGf3yL2e/m2mVRFV
+ IfLdy7vuwurNpn40UZ7gxI910W4x/z9wknwLUI8jgwkL81VYW657TZ89v3it2KCFt0EX
+ KiIJZOXRR4uE6QilfwWK6fACuViGRCTEjsW9HseJmeat8y0mpNR/Zo76q9zcu1Nleu9P
+ k4O6xqnxLeixCJSH45Bblh60QonVDndt+75Rvxt1RUd3FjX4oY+C6CmVuNuY7DJaPolR
+ 1CXw==
+X-Gm-Message-State: AOJu0YyNGQ6fSRCDqm+zMJhyqPlxQdV2T/IDegvMZPai4TzW4y03NK1O
+ TgiPO/cupf1S02R+yXc1WvBoF3XueCCkf/T6bbAYQg==
+X-Google-Smtp-Source: AGHT+IHQcq7K2i+S/rnasvIlRiO43aoCaVSp/U/VhRJolFQYy4/S7pvpwGsBiegGzNNp77xqKm4AKQ==
+X-Received: by 2002:a5d:8d0c:0:b0:7b7:652a:7497 with SMTP id
+ p12-20020a5d8d0c000000b007b7652a7497mr11272947ioj.3.1702831001173; 
+ Sun, 17 Dec 2023 08:36:41 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- ei10-20020a05663829aa00b00466917fbfc4sm4925770jab.71.2023.12.17.08.36.39
+ ei10-20020a05663829aa00b00466917fbfc4sm4925770jab.71.2023.12.17.08.36.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sun, 17 Dec 2023 08:36:40 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Nishanth Menon <nm@ti.com>
-Subject: [PATCH 08/10] sandbox: Correct SPL condition for building devicetree
-Date: Sun, 17 Dec 2023 09:36:21 -0700
-Message-ID: <20231217163627.2339802-9-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 09/10] fdtgrep: Allow propagating properties up to supernodes
+Date: Sun, 17 Dec 2023 09:36:22 -0700
+Message-ID: <20231217163627.2339802-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231217163627.2339802-1-sjg@chromium.org>
 References: <20231217163627.2339802-1-sjg@chromium.org>
@@ -88,33 +88,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With sandbox, CONFIG_SANDBOX is y so the current rule ends up building
-the devicetree for only those SPL builds where it is unwanted.
+The existing bootph binding is defined such that properties in a
+subnode are also implied in the supernode also, as in this example:
 
-Correct the condition. This allows sandbox_vpl to produce a
-u-boot-vpl.dtb file.
+   buttons {
+      /* bootph,pre-ram is implied by btn1 */
+      compatible = "gpio-keys";
 
-Fixes: e7fb789612e ("sandbox: Remove OF_HOSTFILE")
+      btn1 {
+         bootph,pre-ram;
+         gpios = <&gpio_a 3 0>;
+         label = "button1";
+         linux,code = <BTN_1>;
+      };
+
+Provide an option to implement this in fdtgrep.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- scripts/Makefile.spl | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/fdtgrep.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
-index e450ffd5d5ef..407fc52376a5 100644
---- a/scripts/Makefile.spl
-+++ b/scripts/Makefile.spl
-@@ -314,7 +314,7 @@ endif
- #   - we have either OF_SEPARATE or OF_HOSTFILE
- build_dtb :=
- ifneq ($(CONFIG_$(SPL_TPL_)OF_REAL),)
--ifeq ($(CONFIG_OF_SEPARATE)$(CONFIG_SANDBOX),y)
-+ifneq ($(CONFIG_OF_SEPARATE)$(CONFIG_SANDBOX),)
- build_dtb := y
- endif
- endif
+diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+index ca639a2d9f4f..f1ff1946bd4a 100644
+--- a/tools/fdtgrep.c
++++ b/tools/fdtgrep.c
+@@ -63,6 +63,7 @@ struct display_info {
+ 	int types_inc;		/* Mask of types that we include (FDT_IS...) */
+ 	int types_exc;		/* Mask of types that we exclude (FDT_IS...) */
+ 	int invert;		/* Invert polarity of match */
++	int props_up;		/* Imply properties up to supernodes */
+ 	struct value_node *value_head;	/* List of values to match */
+ 	const char *output_fname;	/* Output filename */
+ 	FILE *fout;		/* File to write dts/dtb output */
+@@ -606,6 +607,16 @@ static int check_props(struct display_info *disp, const void *fdt, int node,
+ 					 strlen(str));
+ 	}
+ 
++	/* if requested, check all subnodes for this property too */
++	if (inc != 1 && disp->props_up) {
++		int subnode;
++
++		for (subnode = fdt_first_subnode(fdt, node);
++		     subnode > 0 && inc != 1;
++		     subnode = fdt_next_subnode(fdt, subnode))
++			inc = check_props(disp, fdt, subnode, inc);
++	}
++
+ 	return inc;
+ }
+ 
+@@ -955,7 +966,7 @@ static const char usage_synopsis[] =
+ 	case '?': usage("unknown option");
+ 
+ static const char usage_short_opts[] =
+-		"haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTv"
++		"haAc:b:C:defg:G:HIlLmn:N:o:O:p:P:rRsStTuv"
+ 		USAGE_COMMON_SHORT_OPTS;
+ static const struct option usage_long_opts[] = {
+ 	{"show-address",	no_argument, NULL, 'a'},
+@@ -985,6 +996,7 @@ static const struct option usage_long_opts[] = {
+ 	{"skip-supernodes",	no_argument, NULL, 'S'},
+ 	{"show-stringtab",	no_argument, NULL, 't'},
+ 	{"show-aliases",	no_argument, NULL, 'T'},
++	{"props-up-to-supernode", no_argument, NULL, 'u'},
+ 	{"invert-match",	no_argument, NULL, 'v'},
+ 	USAGE_COMMON_LONG_OPTS,
+ };
+@@ -1016,6 +1028,7 @@ static const char * const usage_opts_help[] = {
+ 	"Don't include supernodes of matching nodes",
+ 	"Include string table in binary output",
+ 	"Include matching aliases in output",
++	"Add -p properties to supernodes too",
+ 	"Invert the sense of matching (select non-matching lines)",
+ 	USAGE_COMMON_OPTS_HELP
+ };
+@@ -1202,6 +1215,9 @@ static void scan_args(struct display_info *disp, int argc, char *argv[])
+ 		case 'T':
+ 			disp->add_aliases = 1;
+ 			break;
++		case 'u':
++			disp->props_up = 1;
++			break;
+ 		case 'v':
+ 			disp->invert = 1;
+ 			break;
 -- 
 2.43.0.472.g3155946c3a-goog
 
