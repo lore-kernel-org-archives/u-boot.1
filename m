@@ -4,67 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA06C41535
-	for <u-boot@archiver.kernel.org>; Sat, 16 Dec 2023 23:23:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB774C46CD2
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 00:19:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A427E87BBB;
-	Sun, 17 Dec 2023 00:23:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=yandex.com
+	by phobos.denx.de (Postfix) with ESMTP id 1BD0C87702;
+	Sun, 17 Dec 2023 01:19:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=yandex.com header.i=@yandex.com header.b="g+d6y/Nm";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B736487752; Sat, 16 Dec 2023 23:45:09 +0100 (CET)
-Received: from forward501a.mail.yandex.net (forward501a.mail.yandex.net
- [178.154.239.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1702772371;
+	bh=VYEH/w2aim25MuCZNT2Yqm213jy0wAyxUiwYQkQK/Uw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=nCONsNPymFImpYRzQb4rWXT+csk8pFDaee+bNuuQYEJ2MsMkgWJKMZSbffv9UlWev
+	 KTv6uv8+ZBUOf2iAbZaWO2/1lZAL45RaD7wWWKi6iJ93V6q4MWvvhwgtidsNMKqNj3
+	 hx2yYKzDTATfGBJjZWJkwz5v5Rzn1kvlrPX/IAxxJncUQ2jDmGIQucdrhl2Th/JWnr
+	 qEfCTvLcgJ3tUxiI3hCsbvlzyO77t8NxxYKEk2yFlQvPK6fIVgA/jZKcGZ+W7U7MaM
+	 cN8ZNgGskTconapHTneg4d2H5ZDb32RZ0P4JXx25DLxtbgrmQN+ru3RuVDG9k5mP+U
+	 bWOuTlic+Da6g==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DA0187788
- for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 23:45:06 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=yandex.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@yandex.com
-Received: from mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
- (mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
- [IPv6:2a02:6b8:c18:3d80:0:640:1395:0])
- by forward501a.mail.yandex.net (Yandex) with ESMTP id 960E86141B;
- Sun, 17 Dec 2023 01:45:05 +0300 (MSK)
-Received: by mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net
- (smtp/Yandex) with ESMTPSA id 1jvPLN1d1W20-IJQDhObR; 
- Sun, 17 Dec 2023 01:45:04 +0300
-X-Yandex-Fwd: 1
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex.com; s=mail;
- t=1702766704; bh=WvKemtKAYPSr9PArWwtGHEDSnODYX5BD7dvTyuajg38=;
- h=From:In-Reply-To:Cc:Date:References:To:Subject:Message-ID;
- b=g+d6y/NmDLJxf5b33MM+Hz6GJd3NHlTNA/IomynI+/iC6gQtj6Vp4FyYo7RJVDQzL
- 0ePda3endPKdMt/EMIbraop2qqMObHv6NKVntdLp6b5IcpOXAv4EYerBK08W7AV0i1
- 2A89ezNUX8Y8TO0J/7eyw6RjlEO5VTz/20N8YFnw=
-Authentication-Results: mail-nwsmtp-smtp-production-main-54.vla.yp-c.yandex.net;
- dkim=pass header.i=@yandex.com
-Message-ID: <f59bcbea-fd04-864f-b95c-5b4c4872c28d@yandex.com>
-Date: Sat, 16 Dec 2023 23:45:00 +0100
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id F24DF8753C;
+ Sun, 17 Dec 2023 01:19:28 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1702772369;
+ bh=VYEH/w2aim25MuCZNT2Yqm213jy0wAyxUiwYQkQK/Uw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=YIYlxTlSu52OlnEXd77yyOnDNjpjgOZYoNJJ5p3/0/3OKma6CbuOPS1I0BIhL/eR2
+ RPGv8NcsxscsLRBWFjcobRRagfQl8ynzXDid5FJ6Tx4+jeYDGT7SGP/9OEJH+Ylk8s
+ moeEklSOiRjlLUAgFGF/8yPwp7BHUcG/Tuq0jzHPmX3/mn5yM7cCTNtLUaiqrKtQSR
+ zD9E2hleWH51JpUcJUHC7ACLzprVHyhdiUaF6UPi4XrGXmTWdwRo+GpWUmPDYQmAEV
+ r4Q9bcCjrkOlzuODVg9zxsu8xEA8cEY3RwVGqTOh450l6k8V0nKSQN8RuAplMj1ma4
+ QxeAv0gZa/8qw==
+Message-ID: <ed3eb880-c0a5-4060-9727-18ffce40fc46@denx.de>
+Date: Sun, 17 Dec 2023 01:19:28 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 13/17] video: rockchip: Add rk3328 vop support
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Heiko Stuebner <heiko@sntech.de>
-Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Jagan Teki <jagan@edgeble.ai>
-References: <20231211085939.5478-1-jagan@amarulasolutions.com>
- <20231211085939.5478-14-jagan@amarulasolutions.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
+To: Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
+References: <20231216084838.19403-1-clamor95@gmail.com>
+ <20231216084838.19403-2-clamor95@gmail.com>
+ <e53a31db-aea2-fe0e-daf6-f1338c59b2a8@gmail.com>
+ <17d230d0-0118-4a22-9f75-14c5b06dd915@denx.de>
+ <56f7d33e-88dd-edeb-9a1e-d79fd057b380@gmail.com>
 Content-Language: en-US
-From: Johan Jonker <jbx6244@yandex.com>
-In-Reply-To: <20231211085939.5478-14-jagan@amarulasolutions.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <56f7d33e-88dd-edeb-9a1e-d79fd057b380@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 17 Dec 2023 00:23:35 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,118 +72,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jagan,
+On 12/16/23 17:56, Sean Anderson wrote:
+> On 12/16/23 11:52, Marek Vasut wrote:
+>> On 12/16/23 16:37, Sean Anderson wrote:
+>>> On 12/16/23 03:48, Svyatoslav Ryhel wrote:
+>>>> Existing gpio-gate-clock driver acts like a simple GPIO switch 
+>>>> without any
+>>>> effect on gated clock. Add actual clock actions into enable/disable 
+>>>> ops and
+>>>> implement get_rate op by passing gated clock if it is enabled.
+>>>>
+>>>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+>>>> ---
+>>>>   drivers/clk/clk-gpio.c | 44 
+>>>> ++++++++++++++++++++++++++++++++++--------
+>>>>   1 file changed, 36 insertions(+), 8 deletions(-)
+>>>>
+>>>> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
+>>>> index 26d795b978..72d9747a47 100644
+>>>> --- a/drivers/clk/clk-gpio.c
+>>>> +++ b/drivers/clk/clk-gpio.c
+>>>> @@ -3,19 +3,23 @@
+>>>>    * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>    */
+>>>> -#include <asm/gpio.h>
+>>>> -#include <common.h>
+>>>> -#include <clk-uclass.h>
+>>>> +#include <clk.h>
+>>>>   #include <dm.h>
+>>>> +#include <clk-uclass.h>
+>>>> +#include <linux/clk-provider.h>
+>>>> +
+>>>> +#include <asm/gpio.h>
+>>>>   struct clk_gpio_priv {
+>>>> -    struct gpio_desc    enable;
+>>>> +    struct gpio_desc    enable;    /* GPIO, controlling the gate */
+>>>> +    struct clk        *clk;    /* Gated clock */
+>>>>   };
+>>>>   static int clk_gpio_enable(struct clk *clk)
+>>>>   {
+>>>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>>>> +    clk_enable(priv->clk);
+>>>>       dm_gpio_set_value(&priv->enable, 1);
+>>>>       return 0;
+>>>> @@ -26,21 +30,45 @@ static int clk_gpio_disable(struct clk *clk)
+>>>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>>>>       dm_gpio_set_value(&priv->enable, 0);
+>>>> +    clk_disable(priv->clk);
+>>>>       return 0;
+>>>>   }
+>>>> +static ulong clk_gpio_get_rate(struct clk *clk)
+>>>> +{
+>>>> +    struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
+>>>> +
+>>>> +    return clk_get_rate(priv->clk);
+>>>> +}
+>>>> +
+>>>>   const struct clk_ops clk_gpio_ops = {
+>>>>       .enable        = clk_gpio_enable,
+>>>>       .disable    = clk_gpio_disable,
+>>>> +    .get_rate    = clk_gpio_get_rate,
+>>>>   };
+>>>> -static int clk_gpio_probe(struct udevice *dev)
+>>>> +static int clk_gpio_of_to_plat(struct udevice *dev)
+>>>>   {
+>>>>       struct clk_gpio_priv *priv = dev_get_priv(dev);
+>>>> +    int ret;
+>>>> -    return gpio_request_by_name(dev, "enable-gpios", 0,
+>>>> -                    &priv->enable, GPIOD_IS_OUT);
+>>>> +    priv->clk = devm_clk_get(dev, NULL);
+>>>> +    if (IS_ERR(priv->clk)) {
+>>>> +        log_debug("%s: Could not get gated clock: %ld\n",
+>>>> +              __func__, PTR_ERR(priv->clk));
+>>>> +        return PTR_ERR(priv->clk);
+>>>> +    }
+>>>> +
+>>>> +    ret = gpio_request_by_name(dev, "enable-gpios", 0,
+>>>> +                   &priv->enable, GPIOD_IS_OUT);
+>>>> +    if (ret) {
+>>>> +        log_debug("%s: Could not decode enable-gpios (%d)\n",
+>>>> +              __func__, ret);
+>>>> +        return ret;
+>>>> +    }
+>>>> +
+>>>> +    return 0;
+>>
+>> All this forwarding of clock enable/disable/get_rate for parent clock 
+>> should already be done in clock core. If it is not, then it should be 
+>> fixed in clock core.
+> 
+> Only CCF forwards things. It's up to the driver to do it in the non-CCF 
+> case.
 
-In  your patch U-boot users must add a new file for each new Rockchip SoC.
-
-With the VOP2 introduction the VOP1 structures and functions are frozen/stabilized.
-
-My proposal would be to use a file simular to Linux rockchip_vop_reg.c and port it to U-boot as is done in the manufacturer tree.
-
-Together with a simple basic rockchip_vop.c to start with.
-
-Not sure if we need a kind of DRM frame work.
-
-Question: What do the U-boot maintainers think of this DRM implementation in use by Rockchip. Is that a route that useful for mainline?
-
-Let me know your ideas.
-
-Johan
-
-
-On 12/11/23 09:59, Jagan Teki wrote:
-> From: Jagan Teki <jagan@edgeble.ai>
->
-> Add support for Rockchip RK3328 VOP.
->
-> Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-> ---
->  drivers/video/rockchip/Makefile     |  1 +
->  drivers/video/rockchip/rk3328_vop.c | 66 +++++++++++++++++++++++++++++
->  2 files changed, 67 insertions(+)
->  create mode 100644 drivers/video/rockchip/rk3328_vop.c
->
-> diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Makefile
-> index 4991303c73..f55beceebf 100644
-> --- a/drivers/video/rockchip/Makefile
-> +++ b/drivers/video/rockchip/Makefile
-> @@ -6,6 +6,7 @@
->  ifdef CONFIG_VIDEO_ROCKCHIP
->  obj-y += rk_vop.o
->  obj-$(CONFIG_ROCKCHIP_RK3288) += rk3288_vop.o
-> +obj-$(CONFIG_ROCKCHIP_RK3328) += rk3328_vop.o
->  obj-$(CONFIG_ROCKCHIP_RK3399) += rk3399_vop.o
->  obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) += rk_edp.o
->  obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) += rk_lvds.o
-> diff --git a/drivers/video/rockchip/rk3328_vop.c b/drivers/video/rockchip/rk3328_vop.c
-> new file mode 100644
-> index 0000000000..2512314e64
-> --- /dev/null
-> +++ b/drivers/video/rockchip/rk3328_vop.c
-> @@ -0,0 +1,66 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2023 Edgeble AI Technologies Pvt. Ltd.
-> + */
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <video.h>
-> +#include <asm/io.h>
-> +#include "rk_vop.h"
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +static void rk3328_set_pin_polarity(struct udevice *dev,
-> +				    enum vop_modes mode, u32 polarity)
-> +{
-> +	struct rk_vop_priv *priv = dev_get_priv(dev);
-> +	struct rk3288_vop *regs = priv->regs;
-> +
-> +	switch (mode) {
-> +	case VOP_MODE_HDMI:
-> +		clrsetbits_le32(&regs->dsp_ctrl1,
-> +				M_RK3399_DSP_HDMI_POL,
-> +				V_RK3399_DSP_HDMI_POL(polarity));
-> +		break;
-> +	default:
-> +		debug("%s: unsupported output mode %x\n", __func__, mode);
-> +	}
-> +}
-> +
-> +static int rk3328_vop_probe(struct udevice *dev)
-> +{
-> +	/* Before relocation we don't need to do anything */
-> +	if (!(gd->flags & GD_FLG_RELOC))
-> +		return 0;
-> +
-> +	return rk_vop_probe(dev);
-> +}
-> +
-> +struct rkvop_driverdata rk3328_driverdata = {
-> +	.dsp_offset = 0x490,
-> +	.win_offset = 0xd0,
-> +	.features = VOP_FEATURE_OUTPUT_10BIT,
-> +	.set_pin_polarity = rk3328_set_pin_polarity,
-> +};
-> +
-> +static const struct udevice_id rk3328_vop_ids[] = {
-> +	{
-> +		.compatible = "rockchip,rk3328-vop",
-> +		.data = (ulong)&rk3328_driverdata
-> +	},
-> +	{ /* sentile */ }
-> +};
-> +
-> +static const struct video_ops rk3328_vop_ops = {
-> +};
-> +
-> +U_BOOT_DRIVER(rk3328_vop) = {
-> +	.name	= "rk3328_vop",
-> +	.id	= UCLASS_VIDEO,
-> +	.of_match = rk3328_vop_ids,
-> +	.ops	= &rk3328_vop_ops,
-> +	.bind	= rk_vop_bind,
-> +	.probe	= rk3328_vop_probe,
-> +	.priv_auto	= sizeof(struct rk_vop_priv),
-> +};
+Shall we add dependency on CCF instead of duplicating code in drivers ?
