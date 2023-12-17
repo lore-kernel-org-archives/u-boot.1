@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0098DC41535
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 00:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B2ABC41535
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 00:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 381DF87B52;
-	Sun, 17 Dec 2023 01:34:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C6BF87BBB;
+	Sun, 17 Dec 2023 01:52:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XY0j+Bjf";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hu7fJ6Yq";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="z8EaObyl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D09A28797F; Sun, 17 Dec 2023 01:34:00 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4764187BE2; Sun, 17 Dec 2023 01:52:38 +0100 (CET)
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [IPv6:2607:f8b0:4864:20::114a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C520D87775
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 01:33:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 291C2876C5
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 01:52:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4St3qB27ynz9sWC;
- Sun, 17 Dec 2023 01:33:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702773238;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=J6Yb54dI+NCcZOvjbk6QC/oAnHb36NFGhSvXv2GQvMM=;
- b=XY0j+BjfLPJz2HF0x/G+lg9MfvkHUEUD+U/dfxgxA1sFh7LmhkSwrUDHDeJfmOoGv9puiL
- F6U9DLyhRGmUfJ6BRBFLBvI5R9aAx8kTVMMnsoLnoOJp/aevU+xlOdR1i0sCuFDKhBf1hn
- yZ4B6C0ySWU9pJtcIvbJFb38uh9GIg3HwN91NkbeEcZ2scJSGx93yDlE8dTiIPdOW1pFqy
- ym7V9vQdebYPR7tM4QJ12eWBZ8IQNTi87qU1k/1N/X68AazACiE5N0vwaunSkRDsmPXz+E
- laJh+bPwJ9MeH5ZFdbRjLhlXpKG0T6X7rqZlH8pgxBoBE9+nzJY2OWV4RDjG4w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1702773236;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=J6Yb54dI+NCcZOvjbk6QC/oAnHb36NFGhSvXv2GQvMM=;
- b=hu7fJ6YqoLuG/5eMivU8CyFp2ayLwOtqPEI97yP+Z/dkJfCtBAF0Im4Zl2WOaAZ/2yE7Qr
- hMU8tdaCIbLL7FMv0pu2ULRJc8kaer8j1JNmDkcM2w3srBSqh/iFTBR4scrmMs1rW4pk+f
- 1BSw16Vg9EQCSQEzWrCDyTq6cR5KLfHcoG5fZ0UsCBh51NRA5lVSjq1tv6uJ7d40cZhS4k
- qaMESQetH4dZ8AkKtomnZxW/BSxJiYCzu+8u7xrGIC1BQj2088XNy4uiiIpiF2eZ3BJz1U
- 3KJutWmEvGvhxyQma2WG6HfUx7ZxFDOTLqfDWcAqakzV4Mn1qyNryrnfM/KK/g==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] arm: Add OVERLAY command to BSS section on ARM64
-Date: Sun, 17 Dec 2023 01:33:39 +0100
-Message-ID: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: dc8d787f1d36b24b261
-X-MBO-RS-META: roduz9xo356hypq98xiqeezuhbzoz8pd
-X-Rspamd-Queue-Id: 4St3qB27ynz9sWC
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3UkZ-ZQcKBgsxz2t4Aqrzzrwp.nzx5-mzz4wt343.opy8.op@flex--moritzf.bounces.google.com
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-5e19414f714so21529787b3.0
+ for <u-boot@lists.denx.de>; Sat, 16 Dec 2023 16:52:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1702774355; x=1703379155; darn=lists.denx.de;
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=2Zs8sClYzzGwQfMicncjIriK9D7gzxZU6UpjTCJ8kto=;
+ b=z8EaObylZU9fV+/lODw24Ffpa6LgUUgikGlP+Z3FwK0G1ntDzj9cwWb0/bcflUsI9y
+ gg+EjAAxoROVv0uJ2yxdy0gClAsb5E9dnhYB5z60/bu5pUXsy5g5UH9xR0Q7h6rjDWG7
+ HJEkm8fLarB68/sz2ktVSWef66kbHDcBU12RbyPg7z/64klL03Ct5+2w0IDL21aO66Zq
+ 14o80nmfMCA3eUSF7Yh/G4LL136mMibiGGFUIvObCpH/l9JW8x4gOqa+0rBVKmm5h+p/
+ vMd6/PbZMwULcCqzW0AScwHWS4dM7krFy9HGZztxRtcsezuWXkbcdsU/rEqACftlAg/C
+ kg7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702774355; x=1703379155;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2Zs8sClYzzGwQfMicncjIriK9D7gzxZU6UpjTCJ8kto=;
+ b=PTm418nw87ATr43UXjNQJu4Qymd3mFot+yRFHtOUjHFv7jye8gyDG1Ge/D9mwDIFVE
+ Csdxkcz/lRjzH3o6lE+7byw8qw2sVVILWu2mejy++IKLTi0GfKB33/aPR0XTPnODTd3T
+ 3YBzdPITrR/bwk/G1Z8gB3hIk4tbFVQvxB8b9kaqilb1XZpy3Uok1PBeARNm+zYR3WzT
+ TNwqvFO5krkfIgP0Uq5eW98qGbVeU1MEM5rSNjaU2NFlS/42eoXB08bz8RH81dburpn3
+ uGUWwS4bSRMB7VnRIgFcS8Lm92z9sU1F4oEN1b4+NhAReR8yPJme9+OW3foJMSbNMetc
+ M06A==
+X-Gm-Message-State: AOJu0YwDxLelgfjNjTBSnH4+JjpdigOTHvAqeTKdmeqUuqOEZCeaeONd
+ DVcNoy+lkK+phCgu+eSjH/4DwEhZHNpo
+X-Google-Smtp-Source: AGHT+IGnRY9a2FCnkWuV31porCExveYiQhpimYVu0Waiob5KB/YOla7kL/FU2564IO7oKEW4uPYEnOvWUsWp
+X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
+ (user=moritzf job=sendgmr) by 2002:a05:690c:c19:b0:5e4:15b:5746
+ with SMTP id
+ cl25-20020a05690c0c1900b005e4015b5746mr936440ywb.9.1702774354865; Sat, 16 Dec
+ 2023 16:52:34 -0800 (PST)
+Date: Sun, 17 Dec 2023 00:52:09 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+Message-ID: <20231217005209.2789651-1-moritzf@google.com>
+Subject: [PATCH v2 RESEND] pci: Enable dm_pci_map_bar() for 64-bit BARs
+From: Moritz Fischer <moritzf@google.com>
+To: sjg@chromium.org
+Cc: bmeng.cn@gmail.com, xypron.glpk@gmx.de, pro@denx.de, marex@denx.de, 
+ stcarlso@linux.microsoft.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ Moritz Fischer <moritzf@google.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,62 +86,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Avoid allocating and loading the BSS section.
+Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
 
-$ aarch64-linux-gnu-objdump -Sh u-boot
-
-Before:
-  10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8  2**0
-                   CONTENTS, ALLOC, LOAD, DATA
-  11 .bss          000068f8  00000000000f2200  00000000000f2200  001021d8  2**6
-                   ALLOC
-  12 .bss_end      00000000  00000000000f8af8  00000000000f8af8  00108af8  2**0
-                   CONTENTS, ALLOC, LOAD, DATA
-
-After:
-  10 .bss_start    00000000  00000000000bf990  00000000000bf990  001021e0  2**0
-                   CONTENTS
-  11 .bss          000068e8  00000000000bf990  00000000000bf990  001021e0  2**4
-                   CONTENTS
-  12 .bss_end      00000000  00000000000c6278  00000000000c6278  00108ac8  2**0
-                   CONTENTS
-
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Reviewed-by: Philip Oberfichtner <pro@denx.de>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Moritz Fischer <moritzf@google.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
----
-V2: Replicate arch/arm/cpu/u-boot.lds BSS part verbatim
----
- arch/arm/cpu/armv8/u-boot.lds | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ drivers/pci/pci-uclass.c | 11 +++++++++++
+ include/pci.h            |  4 ++--
+ 2 files changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index fb6a30c922f..ebdc079552d 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -151,16 +151,18 @@ SECTIONS
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index e0d01f6a85..82308c7477 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -1611,6 +1611,17 @@ void *dm_pci_map_bar(struct udevice *dev, int bar, size_t offset, size_t len,
+ 	dm_pci_read_config32(udev, bar, &bar_response);
+ 	pci_bus_addr = (pci_addr_t)(bar_response & ~0xf);
  
- 	. = ALIGN(8);
++	/*
++	 * This assumes that dm_pciauto_setup_device() will allocate
++	 * a 64-bit address if CONFIG_SYS_PCI_64BIT is enabled and
++	 * the device advertises that it supports it.
++	 */
++	if (IS_ENABLED(CONFIG_SYS_PCI_64BIT) &&
++	    (bar_response & PCI_BASE_ADDRESS_MEM_TYPE_64)) {
++		dm_pci_read_config32(udev, bar + 4, &bar_response);
++		pci_bus_addr |= (pci_addr_t)bar_response << 32;
++	}
++
+ 	if (~((pci_addr_t)0) - pci_bus_addr < offset)
+ 		return NULL;
  
--	.bss_start : {
-+	.bss_start __rel_dyn_start (OVERLAY) : {
- 		KEEP(*(.__bss_start));
-+		__bss_base = .;
- 	}
- 
--	.bss : {
-+	.bss __bss_base (OVERLAY) : {
- 		*(.bss*)
- 		 . = ALIGN(8);
-+		 __bss_limit = .;
- 	}
- 
--	.bss_end : {
-+	.bss_end __bss_limit (OVERLAY) : {
- 		KEEP(*(.__bss_end));
- 	}
- 
+diff --git a/include/pci.h b/include/pci.h
+index 2f5eb30b83..0d1ac7b015 100644
+--- a/include/pci.h
++++ b/include/pci.h
+@@ -1350,8 +1350,8 @@ pci_addr_t dm_pci_phys_to_bus(struct udevice *dev, phys_addr_t addr, size_t len,
+  *
+  * Looks up a base address register and finds the physical memory address
+  * that corresponds to it.
+- * Can be used for 32b BARs 0-5 on type 0 functions and for 32b BARs 0-1 on
+- * type 1 functions.
++ * Can be used for 32b/64b BARs 0-5 on type 0 functions and for 32b BARs 0-1
++ * on type 1 functions.
+  * Can also be used on type 0 functions that support Enhanced Allocation for
+  * 32b/64b BARs.  Note that duplicate BEI entries are not supported.
+  *
 -- 
-2.43.0
+2.43.0.472.g3155946c3a-goog
 
