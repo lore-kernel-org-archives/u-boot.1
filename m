@@ -4,77 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E161EC3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 12:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A79BC3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 13:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55A758777C;
-	Sun, 17 Dec 2023 13:03:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9670B87713;
+	Sun, 17 Dec 2023 14:02:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ixypsilon.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ZMRQTo/x";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ixypsilon.net header.i=@ixypsilon.net header.b="mNsMK5YQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EA1487786; Sun, 17 Dec 2023 13:03:52 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id C59E487727; Sun, 17 Dec 2023 12:40:58 +0100 (CET)
+Received: from uvw.ixypsilon.net (uvw.ixypsilon.net [81.223.58.118])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 452D787759
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 13:03:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7971F87702
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 12:40:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ixypsilon.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702814628; x=1703419428; i=xypron.glpk@gmx.de;
- bh=8mx+iik62ttzYFe/HtFXtzNmMq8gWZJKVFU00h5i35Q=;
- h=X-UI-Sender-Class:Date:Subject:From:To:Cc:References:
- In-Reply-To;
- b=ZMRQTo/xpjmrWdyX19PI6dB5FsujW+Of8CAYVc5l/9W4c99NFg/TPzdzVfD06eRS
- FWoTIBTu+dCOgGKMAqYOg/6WKWS9/wx3/L0eGaClc7GDK/coBnQh5sEnOd5FSx6bf
- GTVxPogQSDzlNsstgHUOjUnLOOIU3ch4ZV0NcPyKG+AA7jrZG+V+FjIzQwa117xE6
- wx87P5OJrvRoc3e6sQy/cO2YJWFUv17zfnmnH0iCCtp8jweDaYqAjg9zzh3FurxgO
- s3+suYp59Xpo1eRlwGiFMYEL+OoWpcAcHGr9T4I3WU29akNMXll6ODm4CBYDK9po8
- MqZq7NlZ3jE5TzPFxA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M72sJ-1r6t7j2xsl-008Xh9; Sun, 17
- Dec 2023 13:03:48 +0100
-Message-ID: <35eed798-1866-4410-836e-5ae5f62f8c26@gmx.de>
-Date: Sun, 17 Dec 2023 13:03:48 +0100
+ spf=pass smtp.mailfrom=stefan.nagy@ixypsilon.net
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=ixypsilon.net; s=20210903; h=Content-Transfer-Encoding:MIME-Version:
+ Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=o7+jyzuP9R0qdA/35pcL5ajv29csKgaHgXwA05p/Mq4=; t=1702813256; x=1704022856; 
+ b=mNsMK5YQJWdtcQXWMjXR05Ylbmdzgi0Me0hZ5tgl0oFjZgVZLpJk/2G6kTsPfDuMfDN/pWlSWGG
+ aVvVPGewu8tw9qBNWjJgVcF8dPy4kr4RhzEgMqJ33PUUY/y+ZaxG1XwYHIiHR0V9NP7Ko+w8fc/2d
+ gsZMMi7ZtCOP+4kkvqaZNpRuJSTlLyLHWdnHTMJSIbkZeIP+hJBfQEWweaxLsdSqt9185WXFT38hl
+ 5SPWpHotMz8OLUv62J/TaONB/snaurizadM/SPr84GCvKsVM80N+eoDmi+xtYUPXHoIjHJRAcREE8
+ 06LSe95ipfRhGnRxdK48+4i36InYNhw7Za6A==;
+Received: from [192.168.0.1] (helo=[192.168.0.12])
+ by uvw.ixypsilon.net with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <stefan.nagy@ixypsilon.net>) id 1rEpVs-0001Ni-2e;
+ Sun, 17 Dec 2023 12:40:54 +0100
+Message-ID: <00759158bcb2b4fa3cb037d571949459bfc3487a.camel@ixypsilon.net>
+Subject: Re: [PATCH] rock-pi-4: Enable SPI flash
+From: Stefan Nagy <stefan.nagy@ixypsilon.net>
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
+Date: Sun, 17 Dec 2023 12:40:53 +0100
+In-Reply-To: <8bf532f00e9713b410ebb0d80d765357@manjaro.org>
+References: <20231215140015.13671-1-stefan.nagy@ixypsilon.net>
+ <8bf532f00e9713b410ebb0d80d765357@manjaro.org>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.38.3-1+deb11u2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/12] cmd: bootefi: re-organize do_bootefi()
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com,
- ilias.apalodimas@linaro.org
-References: <20231121012950.156539-1-takahiro.akashi@linaro.org>
- <20231121012950.156539-3-takahiro.akashi@linaro.org>
- <a41187cd-02de-4594-b822-ccc23d00f33c@gmx.de>
-In-Reply-To: <a41187cd-02de-4594-b822-ccc23d00f33c@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-X-Provags-ID: V03:K1:zADPxi1pRMW7AqlC4rmajzjZUqNnabS8ZkpBnF+nXAUVYfvEyAT
- An9xT0D52g7s4fJYTX8Rnvpd7d29l7hxCgApPXYNJoaTnwr3job6FoBbG92asMomWEdAJGA
- m3jW5wvW7QVBypcZq8PClHReqHfBbPA9VofmLz/4KYnMe29QUweHmDjddNzTIBfBRqmgVZG
- OthKxQQdZGMGiK0YVWfrg==
-UI-OutboundReport: notjunk:1;M01:P0:Wvl5oeNzV/Y=;3B3+D5f61z9/Ib2jPS/JSiTxf6s
- OMPKVYkd+Eson47+Khkqft42L2h4TqT5mhj4tOcikTrVHeJf+CiTpCrHk4Vst8rF0w4+c2bCf
- w0kbpXIw6o/beAfJC1c4QwG6uf2gYm0tGffEfuNfocyJ/isJylDiIBRvgcpXJYIR4CmiuBhjo
- dinirv1V3Qdv1lfPQNlJGZ8urmcKMqaLuqBnuKlPOjnxY43qjHmbRH90mHN8xgqdtgub852F5
- sb1KVHyOBWXd4R9wQZBXAXowrt/VxIkbIcaWRb6ug+4GHp/mrHY6Prjm5KMRT4M3NoteLCkrU
- YVr3VMRSmSUVtDTpekv1o7qc6QYAjAQAFrKCy8EBFnkCk/xCJXJnzfahAlLx8GNM8E3INh2ZB
- G1Dv5h77/8UMUtRvzkn+lWJZAi+hLWRHdkt2nkFDRJB9dL3c2f+oDFWPPp0hrj6bodwXShPTo
- BSQDNNrcIqpVyEZFN9IshsBWapU9NF4QLYOEvV91YKVCnre0sotx09pTzl9ryi4FUfePQXb38
- SiDIp8nxXRaYsSnl8pTUvQb3APrdQy35vkuaBK+9ZaiTeGI2e0xvCyWhIczNg3vPDswHe8pyr
- g9Fpv1TgKQiwUHtm11tnf0LjYM96JTjs/QAHvcj6J/c+tK+6vqjaYWXNOFvWKX22pdX8jM/Gy
- WdxcjfN5Q5H3Sy91MdLppFTz7QX61F0KjtfQoAjm5v9a+r9zAaEmgJF8zDO9PrFqIoTvc0hxx
- /+1BJufBdd1eu+CYh3I43+gNlUuOaXl9/TUzWTgKkR+f9pJAvMbD5CU6lqU/Fuz2itzfERoVM
- cZ5eCUxKYsx91jVTRY5Q0S/JhWgKazQDVRIhcsO0oEqimqwxaOS7C5ASLdKHBdNEqm0pLE9IW
- +M+j3AqDa5IVdql8ICx+25aURl5nmnHloaAmixp7FpJO/Fn93anVCvSw+jXHEHcq0XJEnPNJH
- +g2HZ+BVf1i1g4K7uav9gt6fqtw=
+Content-Transfer-Encoding: 8bit
+X-Spam_score: -1.0
+X-Mailman-Approved-At: Sun, 17 Dec 2023 14:02:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,152 +73,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMTIvMTcvMjMgMTM6MDAsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6DQo+IE9uIDExLzIx
-LzIzIDAyOjI5LCBBS0FTSEkgVGFrYWhpcm8gd3JvdGU6DQo+PiBSZXBsaWNhdGUgc29tZSBjb2Rl
-IGFuZCByZS1vcmdhbml6ZSBkb19ib290ZWZpKCkgaW50byB0aHJlZSBjYXNlcywgd2hpY2gNCj4+
-IHdpbGwgYmUgY2FydmVkIG91dCBhcyBpbmRlcGVuZGVudCBmdW5jdGlvbnMgaW4gdGhlIG5leHQg
-dHdvIGNvbW1pdHMuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogQUtBU0hJIFRha2FoaXJvIDx0YWth
-aGlyby5ha2FzaGlAbGluYXJvLm9yZz4NCj4+IC0tLQ0KPj4gwqAgY21kL0tjb25maWfCoMKgwqDC
-oMKgwqDCoMKgwqAgfCAxNSArKysrKystLQ0KPj4gwqAgY21kL2Jvb3RlZmkuY8KgwqDCoMKgwqDC
-oMKgIHwgODIgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0NCj4+
-IMKgIGluY2x1ZGUvZWZpX2xvYWRlci5oIHzCoCAyIC0tDQo+PiDCoCAzIGZpbGVzIGNoYW5nZWQs
-IDY5IGluc2VydGlvbnMoKyksIDMwIGRlbGV0aW9ucygtKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS9j
-bWQvS2NvbmZpZyBiL2NtZC9LY29uZmlnDQo+PiBpbmRleCA2ZjYzNjE1NWU1YjYuLjRjZjlhMjEw
-YzRhMSAxMDA2NDQNCj4+IC0tLSBhL2NtZC9LY29uZmlnDQo+PiArKysgYi9jbWQvS2NvbmZpZw0K
-Pj4gQEAgLTM2Miw5ICszNjIsMTkgQEAgY29uZmlnIENNRF9CT09URUZJDQo+PiDCoMKgwqDCoMKg
-IGhlbHANCj4+IMKgwqDCoMKgwqDCoMKgIEJvb3QgYW4gRUZJIGltYWdlIGZyb20gbWVtb3J5Lg0K
-Pj4NCj4+ICtpZiBDTURfQk9PVEVGSQ0KPj4gK2NvbmZpZyBDTURfQk9PVEVGSV9CSU5BUlkNCj4+
-ICvCoMKgwqAgYm9vbCAiQWxsb3cgYm9vdGluZyBhbiBFRkkgYmluYXJ5IGRpcmVjdGx5Ig0KPj4g
-K8KgwqDCoCBkZXBlbmRzIG9uIEJPT1RFRklfQk9PVE1HUg0KPj4gK8KgwqDCoCBkZWZhdWx0IHkN
-Cj4+ICvCoMKgwqAgaGVscA0KPj4gK8KgwqDCoMKgwqAgU2VsZWN0IHRoaXMgb3B0aW9uIHRvIGVu
-YWJsZSBkaXJlY3QgZXhlY3V0aW9uIG9mIGJpbmFyeSBhdCANCj4+ICdib290ZWZpJy4NCj4+ICvC
-oMKgwqDCoMKgIFRoaXMgc3ViY29tbWFuZCB3aWxsIGFsbG93IHlvdSB0byBsb2FkIHRoZSBVRUZJ
-IGJpbmFyeSB1c2luZw0KPj4gK8KgwqDCoMKgwqAgb3RoZXIgVS1Cb290IGNvbW1hbmRzIG9yIGV4
-dGVybmFsIG1ldGhvZHMgYW5kIHRoZW4gcnVuIGl0Lg0KPj4gKw0KPj4gwqAgY29uZmlnIENNRF9C
-T09URUZJX0JPT1RNR1INCj4+IMKgwqDCoMKgwqAgYm9vbCAiVUVGSSBCb290IE1hbmFnZXIgY29t
-bWFuZCINCj4+IC3CoMKgwqAgZGVwZW5kcyBvbiBCT09URUZJX0JPT1RNR1IgJiYgQ01EX0JPT1RF
-RkkNCj4+ICvCoMKgwqAgZGVwZW5kcyBvbiBCT09URUZJX0JPT1RNR1INCj4+IMKgwqDCoMKgwqAg
-ZGVmYXVsdCB5DQo+PiDCoMKgwqDCoMKgIGhlbHANCj4+IMKgwqDCoMKgwqDCoMKgIFNlbGVjdCB0
-aGlzIG9wdGlvbiB0byBlbmFibGUgdGhlICdib290bWdyJyBzdWJjb21tYW5kIG9mIA0KPj4gJ2Jv
-b3RlZmknLg0KPj4gQEAgLTM3Myw3ICszODMsNyBAQCBjb25maWcgQ01EX0JPT1RFRklfQk9PVE1H
-Ug0KPj4NCj4+IMKgIGNvbmZpZyBDTURfQk9PVEVGSV9IRUxMT19DT01QSUxFDQo+PiDCoMKgwqDC
-oMKgIGJvb2wgIkNvbXBpbGUgYSBzdGFuZGFyZCBFRkkgaGVsbG8gd29ybGQgYmluYXJ5IGZvciB0
-ZXN0aW5nIg0KPj4gLcKgwqDCoCBkZXBlbmRzIG9uIENNRF9CT09URUZJICYmICFDUFVfVjdNDQo+
-PiArwqDCoMKgIGRlcGVuZHMgb24gIUNQVV9WN00NCj4gDQo+IENNRF9CT09URUZJX0hFTExPX0NP
-TVBJTEUgbWFrZXMgbm8gc2Vuc2Ugd2l0aG91dCBhIGNvbW1hbmQgdG8gcnVuIHRoZQ0KPiBoZWxs
-byBjb21tYW5kLiBUaGUgQ1BVX1Y3TSBkZXBlbmRlbmN5IGlzIG5vdCBuZWVkZWQgYXMgZGVzY3Jp
-YmVkIGluDQoNCk1pc3NlZCB0aGF0IHlvdSBwdWxsZWQgdGhhdCBDTURfQk9PVEVGSSBpbnRvIHRo
-ZSBpZiBhYm92ZS4NCg0KPiANCj4gW1BBVENIIDEvMV0gY21kOiBDT05GSUdfQ01EX0JPT1RFRklf
-SEVMTE9fQ09NUElMRSBkZXBlbmRlbmNpZXMNCj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1i
-b290LzIwMjMxMjE3MTE0NDU3LjcwMTI4LTEtaGVpbnJpY2guc2NodWNoYXJkdEBjYW5vbmljYWwu
-Y29tL1QvI3UNCj4gDQo+IEJlc3QgcmVnYXJkcw0KPiANCj4gSGVpbnJpY2gNCj4gDQo+PiDCoMKg
-wqDCoMKgIGRlZmF1bHQgeQ0KPj4gwqDCoMKgwqDCoCBoZWxwDQo+PiDCoMKgwqDCoMKgwqDCoCBU
-aGlzIGNvbXBpbGVzIGEgc3RhbmRhcmQgRUZJIGhlbGxvIHdvcmxkIGFwcGxpY2F0aW9uIHdpdGgg
-DQo+PiBVLUJvb3Qgc28NCj4+IEBAIC0zOTUsNiArNDA1LDcgQEAgY29uZmlnIENNRF9CT09URUZJ
-X0hFTExPDQo+PiDCoMKgwqDCoMKgwqDCoCB1cCBFRkkgc3VwcG9ydCBvbiBhIG5ldyBhcmNoaXRl
-Y3R1cmUuDQo+Pg0KPj4gwqAgc291cmNlIGxpYi9lZmlfc2VsZnRlc3QvS2NvbmZpZw0KPj4gK2Vu
-ZGlmDQo+Pg0KPj4gwqAgY29uZmlnIENNRF9CT09UTUVOVQ0KPj4gwqDCoMKgwqDCoCBib29sICJi
-b290bWVudSINCj4+IGRpZmYgLS1naXQgYS9jbWQvYm9vdGVmaS5jIGIvY21kL2Jvb3RlZmkuYw0K
-Pj4gaW5kZXggMTkwY2NiYTI2MGUwLi5lOWU1YWI2N2ExZjUgMTAwNjQ0DQo+PiAtLS0gYS9jbWQv
-Ym9vdGVmaS5jDQo+PiArKysgYi9jbWQvYm9vdGVmaS5jDQo+PiBAQCAtNTAzLDcgKzUwMyw2IEBA
-IG91dDoNCj4+IMKgwqDCoMKgwqAgcmV0dXJuIChyZXQgIT0gRUZJX1NVQ0NFU1MpID8gcmV0IDog
-cmV0MjsNCj4+IMKgIH0NCj4+DQo+PiAtI2lmZGVmIENPTkZJR19DTURfQk9PVEVGSV9TRUxGVEVT
-VA0KPj4gwqAgc3RhdGljIGVmaV9zdGF0dXNfdCBib290ZWZpX3J1bl9wcmVwYXJlKGNvbnN0IGNo
-YXIgKmxvYWRfb3B0aW9uc19wYXRoLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBlZmlf
-ZGV2aWNlX3BhdGggKmRldmljZV9wYXRoLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBl
-ZmlfZGV2aWNlX3BhdGggKmltYWdlX3BhdGgsDQo+PiBAQCAtNTkzLDcgKzU5Miw2IEBAIHN0YXRp
-YyBpbnQgZG9fZWZpX3NlbGZ0ZXN0KHZvaWQpDQo+Pg0KPj4gwqDCoMKgwqDCoCByZXR1cm4gcmV0
-ICE9IEVGSV9TVUNDRVNTOw0KPj4gwqAgfQ0KPj4gLSNlbmRpZiAvKiBDT05GSUdfQ01EX0JPT1RF
-RklfU0VMRlRFU1QgKi8NCj4+DQo+PiDCoCAvKioNCj4+IMKgwqAgKiBkb19ib290ZWZpKCkgLSBl
-eGVjdXRlIGBib290ZWZpYCBjb21tYW5kDQo+PiBAQCAtNjE1LDE0ICs2MTMsNiBAQCBzdGF0aWMg
-aW50IGRvX2Jvb3RlZmkoc3RydWN0IGNtZF90YmwgKmNtZHRwLCBpbnQgDQo+PiBmbGFnLCBpbnQg
-YXJnYywNCj4+IMKgwqDCoMKgwqAgaWYgKGFyZ2MgPCAyKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
-IHJldHVybiBDTURfUkVUX1VTQUdFOw0KPj4NCj4+IC3CoMKgwqAgLyogSW5pdGlhbGl6ZSBFRkkg
-ZHJpdmVycyAqLw0KPj4gLcKgwqDCoCByZXQgPSBlZmlfaW5pdF9vYmpfbGlzdCgpOw0KPj4gLcKg
-wqDCoCBpZiAocmV0ICE9IEVGSV9TVUNDRVNTKSB7DQo+PiAtwqDCoMKgwqDCoMKgwqAgbG9nX2Vy
-cigiRXJyb3I6IENhbm5vdCBpbml0aWFsaXplIFVFRkkgc3ViLXN5c3RlbSwgciA9ICVsdVxuIiwN
-Cj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldCAmIH5FRklfRVJST1JfTUFTSyk7DQo+PiAt
-wqDCoMKgwqDCoMKgwqAgcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsNCj4+IC3CoMKgwqAgfQ0KPj4g
-LQ0KPj4gwqDCoMKgwqDCoCBpZiAoYXJnYyA+IDIpIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCB1
-aW50cHRyX3QgZmR0X2FkZHI7DQo+Pg0KPj4gQEAgLTYzMSwyOSArNjIxLDU0IEBAIHN0YXRpYyBp
-bnQgZG9fYm9vdGVmaShzdHJ1Y3QgY21kX3RibCAqY21kdHAsIGludCANCj4+IGZsYWcsIGludCBh
-cmdjLA0KPj4gwqDCoMKgwqDCoCB9IGVsc2Ugew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGZkdCA9
-IEVGSV9GRFRfVVNFX0lOVEVSTkFMOw0KPj4gwqDCoMKgwqDCoCB9DQo+PiAtwqDCoMKgIHJldCA9
-IGVmaV9pbnN0YWxsX2ZkdChmZHQpOw0KPj4gLcKgwqDCoCBpZiAocmV0ID09IEVGSV9JTlZBTElE
-X1BBUkFNRVRFUikNCj4+IC3CoMKgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9VU0FHRTsNCj4+
-IC3CoMKgwqAgZWxzZSBpZiAocmV0ICE9IEVGSV9TVUNDRVNTKQ0KPj4gLcKgwqDCoMKgwqDCoMKg
-IHJldHVybiBDTURfUkVUX0ZBSUxVUkU7DQo+Pg0KPj4gLcKgwqDCoCBpZiAoSVNfRU5BQkxFRChD
-T05GSUdfQ01EX0JPT1RFRklfQk9PVE1HUikpIHsNCj4+IC3CoMKgwqDCoMKgwqDCoCBpZiAoIXN0
-cmNtcChhcmd2WzFdLCAiYm9vdG1nciIpKQ0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0
-dXJuIGRvX2VmaWJvb3RtZ3IoKTsNCj4+ICvCoMKgwqAgaWYgKElTX0VOQUJMRUQoQ09ORklHX0NN
-RF9CT09URUZJX0JPT1RNR1IpICYmDQo+PiArwqDCoMKgwqDCoMKgwqAgIXN0cmNtcChhcmd2WzFd
-LCAiYm9vdG1nciIpKSB7DQo+PiArwqDCoMKgwqDCoMKgwqAgLyogSW5pdGlhbGl6ZSBFRkkgZHJp
-dmVycyAqLw0KPj4gK8KgwqDCoMKgwqDCoMKgIHJldCA9IGVmaV9pbml0X29ial9saXN0KCk7DQo+
-PiArwqDCoMKgwqDCoMKgwqAgaWYgKHJldCAhPSBFRklfU1VDQ0VTUykgew0KPj4gK8KgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgbG9nX2VycigiRXJyb3I6IENhbm5vdCBpbml0aWFsaXplIFVFRkkgc3Vi
-LXN5c3RlbSwgciA9IA0KPj4gJWx1XG4iLA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCByZXQgJiB+RUZJX0VSUk9SX01BU0spOw0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-cmV0dXJuIENNRF9SRVRfRkFJTFVSRTsNCj4+ICvCoMKgwqDCoMKgwqDCoCB9DQo+PiArDQo+PiAr
-wqDCoMKgwqDCoMKgwqAgcmV0ID0gZWZpX2luc3RhbGxfZmR0KGZkdCk7DQo+PiArwqDCoMKgwqDC
-oMKgwqAgaWYgKHJldCA9PSBFRklfSU5WQUxJRF9QQVJBTUVURVIpDQo+PiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9VU0FHRTsNCj4+ICvCoMKgwqDCoMKgwqDCoCBlbHNl
-IGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1
-cm4gQ01EX1JFVF9GQUlMVVJFOw0KPj4gKw0KPj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiBkb19l
-Zmlib290bWdyKCk7DQo+PiDCoMKgwqDCoMKgIH0NCj4+IC0jaWZkZWYgQ09ORklHX0NNRF9CT09U
-RUZJX1NFTEZURVNUDQo+PiAtwqDCoMKgIGlmICghc3RyY21wKGFyZ3ZbMV0sICJzZWxmdGVzdCIp
-KQ0KPj4gKw0KPj4gK8KgwqDCoCBpZiAoSVNfRU5BQkxFRChDT05GSUdfQ01EX0JPT1RFRklfU0VM
-RlRFU1QpICYmDQo+PiArwqDCoMKgwqDCoMKgwqAgIXN0cmNtcChhcmd2WzFdLCAic2VsZnRlc3Qi
-KSkgew0KPj4gK8KgwqDCoMKgwqDCoMKgIC8qIEluaXRpYWxpemUgRUZJIGRyaXZlcnMgKi8NCj4+
-ICvCoMKgwqDCoMKgwqDCoCByZXQgPSBlZmlfaW5pdF9vYmpfbGlzdCgpOw0KPj4gK8KgwqDCoMKg
-wqDCoMKgIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIGxvZ19lcnIoIkVycm9yOiBDYW5ub3QgaW5pdGlhbGl6ZSBVRUZJIHN1Yi1zeXN0ZW0sIHIg
-PSANCj4+ICVsdVxuIiwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ICYg
-fkVGSV9FUlJPUl9NQVNLKTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiBDTURf
-UkVUX0ZBSUxVUkU7DQo+PiArwqDCoMKgwqDCoMKgwqAgfQ0KPj4gKw0KPj4gK8KgwqDCoMKgwqDC
-oMKgIHJldCA9IGVmaV9pbnN0YWxsX2ZkdChmZHQpOw0KPj4gK8KgwqDCoMKgwqDCoMKgIGlmIChy
-ZXQgPT0gRUZJX0lOVkFMSURfUEFSQU1FVEVSKQ0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-cmV0dXJuIENNRF9SRVRfVVNBR0U7DQo+PiArwqDCoMKgwqDCoMKgwqAgZWxzZSBpZiAocmV0ICE9
-IEVGSV9TVUNDRVNTKQ0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIENNRF9SRVRf
-RkFJTFVSRTsNCj4+ICsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gZG9fZWZpX3NlbGZ0
-ZXN0KCk7DQo+PiAtI2VuZGlmDQo+PiArwqDCoMKgIH0NCj4+DQo+PiAtI2lmZGVmIENPTkZJR19D
-TURfQk9PVEVGSV9IRUxMTw0KPj4gLcKgwqDCoCBpZiAoIXN0cmNtcChhcmd2WzFdLCAiaGVsbG8i
-KSkgew0KPj4gK8KgwqDCoCBpZiAoIUlTX0VOQUJMRUQoQ09ORklHX0NNRF9CT09URUZJX0JJTkFS
-WSkpDQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIENNRF9SRVRfU1VDQ0VTUzsNCj4+ICsNCj4+
-ICvCoMKgwqAgaWYgKElTX0VOQUJMRUQoQ09ORklHX0NNRF9CT09URUZJX0hFTExPKSAmJg0KPj4g
-K8KgwqDCoMKgwqDCoMKgICFzdHJjbXAoYXJndlsxXSwgImhlbGxvIikpIHsNCj4+IMKgwqDCoMKg
-wqDCoMKgwqDCoCBpbWFnZV9idWYgPSBfX2VmaV9oZWxsb3dvcmxkX2JlZ2luOw0KPj4gwqDCoMKg
-wqDCoMKgwqDCoMKgIHNpemUgPSBfX2VmaV9oZWxsb3dvcmxkX2VuZCAtIF9fZWZpX2hlbGxvd29y
-bGRfYmVnaW47DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgZWZpX2NsZWFyX2Jvb3RkZXYoKTsNCj4+
-IC3CoMKgwqAgfSBlbHNlDQo+PiAtI2VuZGlmDQo+PiAtwqDCoMKgIHsNCj4+ICvCoMKgwqAgfSBl
-bHNlIHsNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBhZGRyID0gc3RydG91bChhcmd2WzFdLCBOVUxM
-LCAxNik7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLyogQ2hlY2sgdGhhdCBhIG51bWVyaWMgdmFs
-dWUgd2FzIHBhc3NlZCAqLw0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGlmICghYWRkcikNCj4+IEBA
-IC02NzUsNiArNjkwLDIxIEBAIHN0YXRpYyBpbnQgZG9fYm9vdGVmaShzdHJ1Y3QgY21kX3RibCAq
-Y21kdHAsIGludCANCj4+IGZsYWcsIGludCBhcmdjLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgc2l6ZSA9IGltYWdlX3NpemU7DQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgfQ0KPj4gwqDC
-oMKgwqDCoCB9DQo+PiArDQo+PiArwqDCoMKgIC8qIEluaXRpYWxpemUgRUZJIGRyaXZlcnMgKi8N
-Cj4+ICvCoMKgwqAgcmV0ID0gZWZpX2luaXRfb2JqX2xpc3QoKTsNCj4+ICvCoMKgwqAgaWYgKHJl
-dCAhPSBFRklfU1VDQ0VTUykgew0KPj4gK8KgwqDCoMKgwqDCoMKgIGxvZ19lcnIoIkVycm9yOiBD
-YW5ub3QgaW5pdGlhbGl6ZSBVRUZJIHN1Yi1zeXN0ZW0sIHIgPSAlbHVcbiIsDQo+PiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCByZXQgJiB+RUZJX0VSUk9SX01BU0spOw0KPj4gK8KgwqDCoMKgwqDC
-oMKgIHJldHVybiBDTURfUkVUX0ZBSUxVUkU7DQo+PiArwqDCoMKgIH0NCj4+ICsNCj4+ICvCoMKg
-wqAgcmV0ID0gZWZpX2luc3RhbGxfZmR0KGZkdCk7DQo+PiArwqDCoMKgIGlmIChyZXQgPT0gRUZJ
-X0lOVkFMSURfUEFSQU1FVEVSKQ0KPj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiBDTURfUkVUX1VT
-QUdFOw0KPj4gK8KgwqDCoCBlbHNlIGlmIChyZXQgIT0gRUZJX1NVQ0NFU1MpDQo+PiArwqDCoMKg
-wqDCoMKgwqAgcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsNCj4+ICsNCj4+IMKgwqDCoMKgwqAgcmV0
-ID0gZWZpX3J1bl9pbWFnZShpbWFnZV9idWYsIHNpemUpOw0KPj4NCj4+IMKgwqDCoMKgwqAgaWYg
-KHJldCAhPSBFRklfU1VDQ0VTUykNCj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2VmaV9sb2FkZXIu
-aCBiL2luY2x1ZGUvZWZpX2xvYWRlci5oDQo+PiBpbmRleCA2NjRkYWUyOGY4ODIuLjQ0NDM2ZDM0
-NjI4NiAxMDA2NDQNCj4+IC0tLSBhL2luY2x1ZGUvZWZpX2xvYWRlci5oDQo+PiArKysgYi9pbmNs
-dWRlL2VmaV9sb2FkZXIuaA0KPj4gQEAgLTg3OSwxNCArODc5LDEyIEBAIGVmaV9zdGF0dXNfdCBf
-X2VmaV9ydW50aW1lIEVGSUFQSSBlZmlfZ2V0X3RpbWUoDQo+PkNNRF9CT09URUZJIA0KPj4gwqAg
-ZWZpX3N0YXR1c190IF9fZWZpX3J1bnRpbWUgRUZJQVBJIGVmaV9zZXRfdGltZShzdHJ1Y3QgZWZp
-X3RpbWUgKnRpbWUpOw0KPj4NCj4+IC0jaWZkZWYgQ09ORklHX0NNRF9CT09URUZJX1NFTEZURVNU
-DQo+PiDCoCAvKg0KPj4gwqDCoCAqIEVudHJ5IHBvaW50IGZvciB0aGUgdGVzdHMgb2YgdGhlIEVG
-SSBBUEkuDQo+PiDCoMKgICogSXQgaXMgY2FsbGVkIGJ5ICdib290ZWZpIHNlbGZ0ZXN0Jw0KPj4g
-wqDCoCAqLw0KPj4gwqAgZWZpX3N0YXR1c190IEVGSUFQSSBlZmlfc2VsZnRlc3QoZWZpX2hhbmRs
-ZV90IGltYWdlX2hhbmRsZSwNCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCBzdHJ1Y3QgZWZpX3N5c3RlbV90YWJsZSAqc3lzdGFiKTsNCj4+IC0jZW5kaWYNCj4+DQo+PiDC
-oCBlZmlfc3RhdHVzX3QgRUZJQVBJIGVmaV9nZXRfdmFyaWFibGUodTE2ICp2YXJpYWJsZV9uYW1l
-LA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgY29uc3Qg
-ZWZpX2d1aWRfdCAqdmVuZG9yLCB1MzIgKmF0dHJpYnV0ZXMsDQo+IA0KDQo=
+Am Freitag, dem 15.12.2023 um 19:26 +0100 schrieb Dragan Simic:
+> On 2023-12-15 15:00, Stefan Nagy wrote:
+> > The ROCK Pi 4A/B/C boards come with a 32 Mbit SPI NOR flash chip
+> > (XTX Technology Limited XT25F32).
+> > 
+> > Sync the devicetrees from Linux to enable spi1 and add a device
+> > node for the NOR flash chip. In the board's defconfig files enable
+> > the Rockchip SPI driver, add XTX SPI flash support and set the
+> > SPI flash default bus identifier.
+> > 
+> > This patch has been tested on ROCK Pi 4A.
+> > 
+> > Signed-off-by: Stefan Nagy <stefan.nagy@ixypsilon.net>
+> > ---
+> >  arch/arm/dts/rk3399-rock-pi-4a.dts  | 10 ++++++++++
+> >  arch/arm/dts/rk3399-rock-pi-4c.dts  | 10 ++++++++++
+> >  configs/rock-pi-4-rk3399_defconfig  |  3 +++
+> >  configs/rock-pi-4c-rk3399_defconfig |  3 +++
+> >  4 files changed, 26 insertions(+)
+> > 
+> > diff --git a/arch/arm/dts/rk3399-rock-pi-4a.dts
+> > b/arch/arm/dts/rk3399-rock-pi-4a.dts
+> > index 931334aa..d5df8939 100644
+> > --- a/arch/arm/dts/rk3399-rock-pi-4a.dts
+> > +++ b/arch/arm/dts/rk3399-rock-pi-4a.dts
+> > @@ -12,3 +12,13 @@
+> >         model = "Radxa ROCK Pi 4A";
+> >         compatible = "radxa,rockpi4a", "radxa,rockpi4",
+> > "rockchip,rk3399";
+> >  };
+> > +
+> > +&spi1 {
+> > +       status = "okay";
+> > +
+> > +       flash@0 {
+> > +               compatible = "jedec,spi-nor";
+> > +               reg = <0>;
+> > +               spi-max-frequency = <10000000>;
+> > +       };
+> > +};
+> > diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> > b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> > index d32efab7..de2ebe4c 100644
+> > --- a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> > +++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> > @@ -43,6 +43,16 @@
+> >         hp-det-gpio = <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
+> >  };
+> > 
+> > +&spi1 {
+> > +       status = "okay";
+> > +
+> > +       flash@0 {
+> > +               compatible = "jedec,spi-nor";
+> > +               reg = <0>;
+> > +               spi-max-frequency = <10000000>;
+> > +       };
+> > +};
+> > +
+> >  &uart0 {
+> >         status = "okay";
+> > 
+> > diff --git a/configs/rock-pi-4-rk3399_defconfig
+> > b/configs/rock-pi-4-rk3399_defconfig
+> > index 84e0dcf0..c45a8c04 100644
+> > --- a/configs/rock-pi-4-rk3399_defconfig
+> > +++ b/configs/rock-pi-4-rk3399_defconfig
+> > @@ -61,6 +61,8 @@ CONFIG_MMC_DW_ROCKCHIP=y
+> >  CONFIG_MMC_SDHCI=y
+> >  CONFIG_MMC_SDHCI_SDMA=y
+> >  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> > +CONFIG_SF_DEFAULT_BUS=1
+> > +CONFIG_SPI_FLASH_XTX=y
+> >  CONFIG_ETH_DESIGNWARE=y
+> >  CONFIG_GMAC_ROCKCHIP=y
+> >  CONFIG_NVME_PCI=y
+> > @@ -74,6 +76,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> >  CONFIG_BAUDRATE=1500000
+> >  CONFIG_DEBUG_UART_SHIFT=2
+> >  CONFIG_SYS_NS16550_MEM32=y
+> > +CONFIG_ROCKCHIP_SPI=y
+> >  CONFIG_SYSRESET=y
+> >  CONFIG_USB=y
+> >  CONFIG_USB_XHCI_HCD=y
+> > diff --git a/configs/rock-pi-4c-rk3399_defconfig
+> > b/configs/rock-pi-4c-rk3399_defconfig
+> > index 5c9fb147..1ca19b4e 100644
+> > --- a/configs/rock-pi-4c-rk3399_defconfig
+> > +++ b/configs/rock-pi-4c-rk3399_defconfig
+> > @@ -58,6 +58,8 @@ CONFIG_MMC_DW=y
+> >  CONFIG_MMC_DW_ROCKCHIP=y
+> >  CONFIG_MMC_SDHCI=y
+> >  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> > +CONFIG_SF_DEFAULT_BUS=1
+> > +CONFIG_SPI_FLASH_XTX=y
+> >  CONFIG_ETH_DESIGNWARE=y
+> >  CONFIG_GMAC_ROCKCHIP=y
+> >  CONFIG_NVME_PCI=y
+> > @@ -71,6 +73,7 @@ CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> >  CONFIG_BAUDRATE=1500000
+> >  CONFIG_DEBUG_UART_SHIFT=2
+> >  CONFIG_SYS_NS16550_MEM32=y
+> > +CONFIG_ROCKCHIP_SPI=y
+> >  CONFIG_SYSRESET=y
+> >  CONFIG_USB=y
+> >  CONFIG_USB_XHCI_HCD=y
+> 
+> Perhaps it would be better to wait a bit until your patch for the
+> Linux 
+> kernel [1] is accepted, and then have the updated spi-max-frequency 
+> values synced back to U-Boot in the v2 of this patch.
+> 
+> [1] 
+> https://lore.kernel.org/linux-rockchip/4fce0de996d6cc3056d972cd3fc3fb93@manjaro.org/T/#m0621f671c597a4c0138b27bfc6fa3a16f82b721f
+
+Yes, you are right. I'll try to be a bit more patient and send a v2 of
+this as soon as my patch for the kernel is accepted.
+
