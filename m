@@ -4,58 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB774C46CD2
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 00:19:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0098DC41535
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 00:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BD0C87702;
-	Sun, 17 Dec 2023 01:19:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 381DF87B52;
+	Sun, 17 Dec 2023 01:34:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1702772371;
-	bh=VYEH/w2aim25MuCZNT2Yqm213jy0wAyxUiwYQkQK/Uw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=nCONsNPymFImpYRzQb4rWXT+csk8pFDaee+bNuuQYEJ2MsMkgWJKMZSbffv9UlWev
-	 KTv6uv8+ZBUOf2iAbZaWO2/1lZAL45RaD7wWWKi6iJ93V6q4MWvvhwgtidsNMKqNj3
-	 hx2yYKzDTATfGBJjZWJkwz5v5Rzn1kvlrPX/IAxxJncUQ2jDmGIQucdrhl2Th/JWnr
-	 qEfCTvLcgJ3tUxiI3hCsbvlzyO77t8NxxYKEk2yFlQvPK6fIVgA/jZKcGZ+W7U7MaM
-	 cN8ZNgGskTconapHTneg4d2H5ZDb32RZ0P4JXx25DLxtbgrmQN+ru3RuVDG9k5mP+U
-	 bWOuTlic+Da6g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XY0j+Bjf";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hu7fJ6Yq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D09A28797F; Sun, 17 Dec 2023 01:34:00 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id F24DF8753C;
- Sun, 17 Dec 2023 01:19:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1702772369;
- bh=VYEH/w2aim25MuCZNT2Yqm213jy0wAyxUiwYQkQK/Uw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YIYlxTlSu52OlnEXd77yyOnDNjpjgOZYoNJJ5p3/0/3OKma6CbuOPS1I0BIhL/eR2
- RPGv8NcsxscsLRBWFjcobRRagfQl8ynzXDid5FJ6Tx4+jeYDGT7SGP/9OEJH+Ylk8s
- moeEklSOiRjlLUAgFGF/8yPwp7BHUcG/Tuq0jzHPmX3/mn5yM7cCTNtLUaiqrKtQSR
- zD9E2hleWH51JpUcJUHC7ACLzprVHyhdiUaF6UPi4XrGXmTWdwRo+GpWUmPDYQmAEV
- r4Q9bcCjrkOlzuODVg9zxsu8xEA8cEY3RwVGqTOh450l6k8V0nKSQN8RuAplMj1ma4
- QxeAv0gZa/8qw==
-Message-ID: <ed3eb880-c0a5-4060-9727-18ffce40fc46@denx.de>
-Date: Sun, 17 Dec 2023 01:19:28 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id C520D87775
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 01:33:58 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4St3qB27ynz9sWC;
+ Sun, 17 Dec 2023 01:33:58 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702773238;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=J6Yb54dI+NCcZOvjbk6QC/oAnHb36NFGhSvXv2GQvMM=;
+ b=XY0j+BjfLPJz2HF0x/G+lg9MfvkHUEUD+U/dfxgxA1sFh7LmhkSwrUDHDeJfmOoGv9puiL
+ F6U9DLyhRGmUfJ6BRBFLBvI5R9aAx8kTVMMnsoLnoOJp/aevU+xlOdR1i0sCuFDKhBf1hn
+ yZ4B6C0ySWU9pJtcIvbJFb38uh9GIg3HwN91NkbeEcZ2scJSGx93yDlE8dTiIPdOW1pFqy
+ ym7V9vQdebYPR7tM4QJ12eWBZ8IQNTi87qU1k/1N/X68AazACiE5N0vwaunSkRDsmPXz+E
+ laJh+bPwJ9MeH5ZFdbRjLhlXpKG0T6X7rqZlH8pgxBoBE9+nzJY2OWV4RDjG4w==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1702773236;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=J6Yb54dI+NCcZOvjbk6QC/oAnHb36NFGhSvXv2GQvMM=;
+ b=hu7fJ6YqoLuG/5eMivU8CyFp2ayLwOtqPEI97yP+Z/dkJfCtBAF0Im4Zl2WOaAZ/2yE7Qr
+ hMU8tdaCIbLL7FMv0pu2ULRJc8kaer8j1JNmDkcM2w3srBSqh/iFTBR4scrmMs1rW4pk+f
+ 1BSw16Vg9EQCSQEzWrCDyTq6cR5KLfHcoG5fZ0UsCBh51NRA5lVSjq1tv6uJ7d40cZhS4k
+ qaMESQetH4dZ8AkKtomnZxW/BSxJiYCzu+8u7xrGIC1BQj2088XNy4uiiIpiF2eZ3BJz1U
+ 3KJutWmEvGvhxyQma2WG6HfUx7ZxFDOTLqfDWcAqakzV4Mn1qyNryrnfM/KK/g==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] arm: Add OVERLAY command to BSS section on ARM64
+Date: Sun, 17 Dec 2023 01:33:39 +0100
+Message-ID: <20231217003347.194657-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] clk: clk-gpio: add actual gated clock
-To: Sean Anderson <seanga2@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
-References: <20231216084838.19403-1-clamor95@gmail.com>
- <20231216084838.19403-2-clamor95@gmail.com>
- <e53a31db-aea2-fe0e-daf6-f1338c59b2a8@gmail.com>
- <17d230d0-0118-4a22-9f75-14c5b06dd915@denx.de>
- <56f7d33e-88dd-edeb-9a1e-d79fd057b380@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <56f7d33e-88dd-edeb-9a1e-d79fd057b380@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: dc8d787f1d36b24b261
+X-MBO-RS-META: roduz9xo356hypq98xiqeezuhbzoz8pd
+X-Rspamd-Queue-Id: 4St3qB27ynz9sWC
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,96 +84,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/16/23 17:56, Sean Anderson wrote:
-> On 12/16/23 11:52, Marek Vasut wrote:
->> On 12/16/23 16:37, Sean Anderson wrote:
->>> On 12/16/23 03:48, Svyatoslav Ryhel wrote:
->>>> Existing gpio-gate-clock driver acts like a simple GPIO switch 
->>>> without any
->>>> effect on gated clock. Add actual clock actions into enable/disable 
->>>> ops and
->>>> implement get_rate op by passing gated clock if it is enabled.
->>>>
->>>> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
->>>> ---
->>>>   drivers/clk/clk-gpio.c | 44 
->>>> ++++++++++++++++++++++++++++++++++--------
->>>>   1 file changed, 36 insertions(+), 8 deletions(-)
->>>>
->>>> diff --git a/drivers/clk/clk-gpio.c b/drivers/clk/clk-gpio.c
->>>> index 26d795b978..72d9747a47 100644
->>>> --- a/drivers/clk/clk-gpio.c
->>>> +++ b/drivers/clk/clk-gpio.c
->>>> @@ -3,19 +3,23 @@
->>>>    * Copyright (C) 2023 Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>    */
->>>> -#include <asm/gpio.h>
->>>> -#include <common.h>
->>>> -#include <clk-uclass.h>
->>>> +#include <clk.h>
->>>>   #include <dm.h>
->>>> +#include <clk-uclass.h>
->>>> +#include <linux/clk-provider.h>
->>>> +
->>>> +#include <asm/gpio.h>
->>>>   struct clk_gpio_priv {
->>>> -    struct gpio_desc    enable;
->>>> +    struct gpio_desc    enable;    /* GPIO, controlling the gate */
->>>> +    struct clk        *clk;    /* Gated clock */
->>>>   };
->>>>   static int clk_gpio_enable(struct clk *clk)
->>>>   {
->>>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
->>>> +    clk_enable(priv->clk);
->>>>       dm_gpio_set_value(&priv->enable, 1);
->>>>       return 0;
->>>> @@ -26,21 +30,45 @@ static int clk_gpio_disable(struct clk *clk)
->>>>       struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
->>>>       dm_gpio_set_value(&priv->enable, 0);
->>>> +    clk_disable(priv->clk);
->>>>       return 0;
->>>>   }
->>>> +static ulong clk_gpio_get_rate(struct clk *clk)
->>>> +{
->>>> +    struct clk_gpio_priv *priv = dev_get_priv(clk->dev);
->>>> +
->>>> +    return clk_get_rate(priv->clk);
->>>> +}
->>>> +
->>>>   const struct clk_ops clk_gpio_ops = {
->>>>       .enable        = clk_gpio_enable,
->>>>       .disable    = clk_gpio_disable,
->>>> +    .get_rate    = clk_gpio_get_rate,
->>>>   };
->>>> -static int clk_gpio_probe(struct udevice *dev)
->>>> +static int clk_gpio_of_to_plat(struct udevice *dev)
->>>>   {
->>>>       struct clk_gpio_priv *priv = dev_get_priv(dev);
->>>> +    int ret;
->>>> -    return gpio_request_by_name(dev, "enable-gpios", 0,
->>>> -                    &priv->enable, GPIOD_IS_OUT);
->>>> +    priv->clk = devm_clk_get(dev, NULL);
->>>> +    if (IS_ERR(priv->clk)) {
->>>> +        log_debug("%s: Could not get gated clock: %ld\n",
->>>> +              __func__, PTR_ERR(priv->clk));
->>>> +        return PTR_ERR(priv->clk);
->>>> +    }
->>>> +
->>>> +    ret = gpio_request_by_name(dev, "enable-gpios", 0,
->>>> +                   &priv->enable, GPIOD_IS_OUT);
->>>> +    if (ret) {
->>>> +        log_debug("%s: Could not decode enable-gpios (%d)\n",
->>>> +              __func__, ret);
->>>> +        return ret;
->>>> +    }
->>>> +
->>>> +    return 0;
->>
->> All this forwarding of clock enable/disable/get_rate for parent clock 
->> should already be done in clock core. If it is not, then it should be 
->> fixed in clock core.
-> 
-> Only CCF forwards things. It's up to the driver to do it in the non-CCF 
-> case.
+Avoid allocating and loading the BSS section.
 
-Shall we add dependency on CCF instead of duplicating code in drivers ?
+$ aarch64-linux-gnu-objdump -Sh u-boot
+
+Before:
+  10 .bss_start    00000000  00000000000f21d8  00000000000f21d8  001021d8  2**0
+                   CONTENTS, ALLOC, LOAD, DATA
+  11 .bss          000068f8  00000000000f2200  00000000000f2200  001021d8  2**6
+                   ALLOC
+  12 .bss_end      00000000  00000000000f8af8  00000000000f8af8  00108af8  2**0
+                   CONTENTS, ALLOC, LOAD, DATA
+
+After:
+  10 .bss_start    00000000  00000000000bf990  00000000000bf990  001021e0  2**0
+                   CONTENTS
+  11 .bss          000068e8  00000000000bf990  00000000000bf990  001021e0  2**4
+                   CONTENTS
+  12 .bss_end      00000000  00000000000c6278  00000000000c6278  00108ac8  2**0
+                   CONTENTS
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+V2: Replicate arch/arm/cpu/u-boot.lds BSS part verbatim
+---
+ arch/arm/cpu/armv8/u-boot.lds | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+index fb6a30c922f..ebdc079552d 100644
+--- a/arch/arm/cpu/armv8/u-boot.lds
++++ b/arch/arm/cpu/armv8/u-boot.lds
+@@ -151,16 +151,18 @@ SECTIONS
+ 
+ 	. = ALIGN(8);
+ 
+-	.bss_start : {
++	.bss_start __rel_dyn_start (OVERLAY) : {
+ 		KEEP(*(.__bss_start));
++		__bss_base = .;
+ 	}
+ 
+-	.bss : {
++	.bss __bss_base (OVERLAY) : {
+ 		*(.bss*)
+ 		 . = ALIGN(8);
++		 __bss_limit = .;
+ 	}
+ 
+-	.bss_end : {
++	.bss_end __bss_limit (OVERLAY) : {
+ 		KEEP(*(.__bss_end));
+ 	}
+ 
+-- 
+2.43.0
+
