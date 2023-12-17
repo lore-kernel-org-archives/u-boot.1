@@ -4,74 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1493C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 13:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6FEC3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 14:38:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E892877AC;
-	Sun, 17 Dec 2023 14:47:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 103A1876F0;
+	Sun, 17 Dec 2023 15:38:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="IThS0lFy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PKKCBlyf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60052877B3; Sun, 17 Dec 2023 14:47:46 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 147A887743; Sun, 17 Dec 2023 15:38:33 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21288877AA
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 14:47:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E295876E9
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 15:38:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702820861; x=1703425661; i=xypron.glpk@gmx.de;
- bh=iHBdAnTjEnIWn8KukBZIEdKTjW0wmnLJRBZsHdfZ1dQ=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=IThS0lFyNch6DruDdsZ1NZOwc/nbTeLaqOzPZPsCdcthNbhIu9byYAZFtyoxFFq6
- 5xYQs858yvEwfoiBOFqkiE2EggWD4FEyzsBLYZYo0mWHHerL3eaEz/nSiBA5jmvex
- p4q4xx0vVLxHH6sDtFi7TfmHdexFepKfaDlnnzMDBc5uQ0JBuhu9h2liE4arLvCl1
- 4ywx/8TJm/hU+htGbmE6w7z/7QvldrZs+dKke4KXoJbfmQwq1cV4b26ae/CCHGGgh
- Pm1YmsJXRpHPFBoIFcwoo0SL94WJXtPCynvH0s0Gowt0PlKeFDTMVuZruOZ7eOTH0
- Q5AX1uMQOrYZJykDmA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N0G1n-1rQSks0zvL-00xM8K; Sun, 17
- Dec 2023 14:47:41 +0100
-Message-ID: <2836e8ee-2a9d-4d8f-848f-ce77ac8bf080@gmx.de>
-Date: Sun, 17 Dec 2023 14:47:40 +0100
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-425c54f5842so23195251cf.2
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 06:38:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702823909; x=1703428709; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zZ0fhcitCRiRDad4OFaDYAndmS8VcvUWMhm8lq8xBZk=;
+ b=PKKCBlyf6FeIESKwffjC1lcOWOsB/YmuPbOUMBk2k8L62DbjE/km0tPd78keXYCOVR
+ iSTP5/AZjGLuylXlgmeoWnyOm05J8vzXDamK3HP3Rw8nHnx5FIXQ7fW8GSaFhG1mLukD
+ 0visjLunL4qwWR1RuY8rTvgNCFXT//fVQr0tNrC6YsHd+C50VA7Rz2+GPlOFqfg/nyqO
+ 1MNAwAYLyl5Pi4WPt2tGTs+14ctQk4rscLh2QRnYfHKHs2Urm5QJwCq4Q4ixzWc+/+W2
+ ve7fDj/DerzfbEnIFGmS2Pr6bl8K0ulAUHEski9nCDewu2EZWXVMc9YnoHl+GiRte5Va
+ /mvg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702823909; x=1703428709;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zZ0fhcitCRiRDad4OFaDYAndmS8VcvUWMhm8lq8xBZk=;
+ b=H5/OrX1l3hRoJj31IpcFKy5YHpg1xbGVKx3KIvB7SLyhnpXeS1eb4x9Ei0KnO4hQsA
+ OEIRfwjhaywrctPav2cGiZRFoewVeHIf8MZMtArQbnT7ANtTBwoaHA8OZu/j5xfwklE3
+ Ur0WZ9xux7TbmCq/DtjEYvg93IUP1jmJ/I77Hl1IDko/JYIWtpEddDglSCI/SsBAkq+E
+ YBE2Gduyvi1LNfwSowzTDzvidRisDQwfPA1S2g4BVdnuDRvzZ5F763XBG2BWF9dw6nt6
+ gvXB/fVTkB/VjPnJ5xE+XLE8Uao3i7LyLu+vgdcAUTc8RlLvtSsoUJDb5rMvgeENB0wR
+ Y1Kg==
+X-Gm-Message-State: AOJu0Yyd/bEAvqCamsqeBeLNKkm8YHPeTfWsidRsiCnANWGGquOw+Iox
+ eKKbZbwNg+m6PH8UM3xuRUY=
+X-Google-Smtp-Source: AGHT+IFKIuidclRZQgSLrX1JeGT/d4OS8+NmV6TvHT9CEjxGhS4HsuSw+OsumigEks3YcyjcKnhHaQ==
+X-Received: by 2002:a05:622a:11c5:b0:423:f353:9ce1 with SMTP id
+ n5-20020a05622a11c500b00423f3539ce1mr19469435qtk.31.1702823909290; 
+ Sun, 17 Dec 2023 06:38:29 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ fv5-20020a05622a4a0500b004275e9cdf15sm183333qtb.11.2023.12.17.06.38.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 17 Dec 2023 06:38:28 -0800 (PST)
+Message-ID: <28ee700e-120a-bb8d-9ca2-493d6a371405@gmail.com>
+Date: Sun, 17 Dec 2023 09:38:28 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [NEXT] Pull request for efi-next-20231217
+Content-Language: en-US
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Sean Anderson <seanga2@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [NEXT] Pull request for efi-next-20231217
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+References: <2836e8ee-2a9d-4d8f-848f-ce77ac8bf080@gmx.de>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <2836e8ee-2a9d-4d8f-848f-ce77ac8bf080@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cBZDUq+Wr9Zz4dEaa79G4s4oho4SS2e6iNQ+A7/OgQyHNlJxBez
- jRY4kTYosO5XLLvJNiAXiKhRo5NAFrVX7bG/OK9wYVsDBdp0kwTrOOC5neqJN9ASE6gEQwm
- r3OjqEKyyaXp3P892u7oksu0l5NdtfpRip21bQ1wsNF+TpgE0oLYmrz7DIhfgbyYNqCWhLy
- am43Pa2KZAXUl15Kkcq/w==
-UI-OutboundReport: notjunk:1;M01:P0:rm3lBqyOwc4=;teZNcRzhe3SXnc+zBqjAIiH4p1Z
- t1wStjlHiR60t4ByxQeyN/XbC0e+aCUdbIMztobTS1Fr2yAmEKiulF17uLaHvs8BSNkoC1FDK
- YJQLYoKb1tO27uw72MzzgWd8X8H5yrh2Z9d29Blb9sn+xUtG6jlCfuYF3KpEhcTFZTm1GKoJO
- +r1jjGMsTtp2ZrJ9UPvzUQUccfjAP//cp4M3Exb3BLj9d5b6CAJ7B+hwWe4/+ZtqmnhmVgDME
- 5RI2CQPNngFV8h5RKRcSP+IR7K45JQBbsuwdGE/PZpJ0butZCCsRVDCQ3Lfes4/PLzXm2lTZU
- 0TxZS+0aQtyDbktKgrxxbINNQPAwz3ITmNaslkLID2Yf44h6aiyI9c0bBqImtZJoxmqK9NQ04
- QNz9ShXIB/LE955UIJMqxEcNz+MM9KpHz8+PFR2V1Kn8FU34XKcw+YRkdV2SpuoBc6/HhrQzA
- pDFMHtnr1DqN3DPwJY/idxcQC/qjuZmyOfRSszGbAz7KtYhW/iBIWtILuNm2B84cBWbGSmOjd
- 6OLuwf6X7RovM7MotwtLf2jbI8bk7kxfd/8F4/14ujSrBsppvYJc/GxRNeHp+QPNBf/prCLIG
- mYqV+vCl4LJX98PThu5eigP2L/amvvOh7rD1MnGhIDo//8x4uBHrmQatCuEoowo5Gj9DgEFQX
- t+0dHdl1MxqthItn6BipV8Q2GV9OwvmwHwW2N3+fvED58/OwPtEqRnvi+a2nmo1aWQFWsqhBX
- uqLc5Fe9DahDAlPQcr0eLdR7I0QKtDNsB2ZzBkLpZpFkjm/DzozQ/wRzL3avzofdtJ2lW3pLq
- Dl4uV1YGuqbbqtXOQTe4vQviZOsCOSNUVKEBCCaOtjAZOTZY3adR95nCo8mh0D34ux5M+46Nl
- tcPfFMZ/6Q+t5ABTIggFVDoJ76Ul0qBLQ3CqGvf9Lyy1/eQQ/46kCWR5gzNJYNyntszS1/YBL
- unKCdU+fgaBgJG9NaY1pB4Eqzlc=
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,83 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
-
-This pull request if for the next branch.
-
-The following changes since commit cd948210332783c2b1c6d10a982a80c0da4f69b=
-9:
-
-   Revert "board: ti: am62x/am62ax: Update virtual interrupt allocations
-in board config" (2023-12-15 20:23:59 -0500)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-next-20231217
-
-for you to fetch changes up to 291ab919355df5ee28183546049d5fbdb2777d2d:
-
-   doc: Replace examples of MD5 and SHA1 with SHA256 (2023-12-17
-13:06:48 +0100)
-
-Gitlab CI showed no issues:
-
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18990
-
-=2D---------------------------------------------------------------
-Pull request for efi-next-20231217
-
-Documentation:
-
-* replace MD5 and SHA1 by SHA256 in examples
-
-UEFI:
-
-* Refactor boot manager and bootefi command to let the EFI boot method
-work without shell.
-
-=2D---------------------------------------------------------------
-AKASHI Takahiro (8):
-       cmd: bootefi: unfold do_bootefi_image()
-       cmd: bootefi: re-organize do_bootefi()
-       cmd: bootefi: carve out EFI boot manager interface
-       cmd: bootefi: carve out binary execution interface
-       cmd: bootefi: localize global device paths for efi_selftest
-       cmd: bootefi: move library interfaces under lib/efi_loader
-       cmd: efidebug: ease efi configuration dependency
-       bootmeth: use efi_loader interfaces instead of bootefi command
-
-Sean Anderson (1):
-       doc: Replace examples of MD5 and SHA1 with SHA256
-
-  boot/Kconfig                             |   4 +-
-  boot/Makefile                            |   2 +-
-  boot/bootm_os.c                          |  32 +-
-  boot/bootmeth_efi.c                      |   8 +-
-  boot/bootmeth_efi_mgr.c                  |   2 +-
-  cmd/Kconfig                              |  16 +-
-  cmd/bootefi.c                            | 670
-+++++--------------------------
-  cmd/efidebug.c                           |   4 +-
-  doc/chromium/files/chromebook_jerry.its  |   4 +-
-  doc/chromium/files/nyan-big.its          |   4 +-
-  doc/usage/cmd/imxtract.rst               |   6 +-
-  doc/usage/fit/beaglebone_vboot.rst       |  74 ++--
-  doc/usage/fit/howto.rst                  |  40 +-
-  doc/usage/fit/kernel.rst                 |   6 +-
-  doc/usage/fit/kernel_fdt.rst             |   4 +-
-  doc/usage/fit/kernel_fdts_compressed.rst |   6 +-
-  doc/usage/fit/multi-with-fpga.rst        |   6 +-
-  doc/usage/fit/multi-with-loadables.rst   |   8 +-
-  doc/usage/fit/multi.rst                  |  12 +-
-  doc/usage/fit/sign-configs.rst           |   6 +-
-  doc/usage/fit/sign-images.rst            |   4 +-
-  doc/usage/fit/signature.rst              |  22 +-
-  doc/usage/fit/update3.rst                |   6 +-
-  doc/usage/fit/update_uboot.rst           |   2 +-
-  doc/usage/fit/x86-fit-boot.rst           |   8 +-
-  include/efi_loader.h                     |  12 +-
-  lib/efi_loader/efi_bootmgr.c             | 530 ++++++++++++++++++++++++
-  test/boot/bootflow.c                     |   2 +-
-  28 files changed, 771 insertions(+), 729 deletions(-)
+T24gMTIvMTcvMjMgMDg6NDcsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6DQo+IERlYXIg
+VG9tLA0KPiANCj4gVGhpcyBwdWxsIHJlcXVlc3QgaWYgZm9yIHRoZSBuZXh0IGJyYW5jaC4N
+Cj4gDQo+IFRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzaW5jZSBjb21taXQgY2Q5NDgyMTAzMzI3
+ODNjMmIxYzZkMTBhOTgyYTgwYzBkYTRmNjliOToNCj4gDQo+ICDCoCBSZXZlcnQgImJvYXJk
+OiB0aTogYW02MngvYW02MmF4OiBVcGRhdGUgdmlydHVhbCBpbnRlcnJ1cHQgYWxsb2NhdGlv
+bnMNCj4gaW4gYm9hcmQgY29uZmlnIiAoMjAyMy0xMi0xNSAyMDoyMzo1OSAtMDUwMCkNCj4g
+DQo+IGFyZSBhdmFpbGFibGUgaW4gdGhlIEdpdCByZXBvc2l0b3J5IGF0Og0KPiANCj4gIMKg
+IGh0dHBzOi8vc291cmNlLmRlbnguZGUvdS1ib290L2N1c3RvZGlhbnMvdS1ib290LWVmaS5n
+aXQNCj4gdGFncy9lZmktbmV4dC0yMDIzMTIxNw0KPiANCj4gZm9yIHlvdSB0byBmZXRjaCBj
+aGFuZ2VzIHVwIHRvIDI5MWFiOTE5MzU1ZGY1ZWUyODE4MzU0NjA0OWQ1ZmJkYjI3NzdkMmQ6
+DQo+IA0KPiAgwqAgZG9jOiBSZXBsYWNlIGV4YW1wbGVzIG9mIE1ENSBhbmQgU0hBMSB3aXRo
+IFNIQTI1NiAoMjAyMy0xMi0xNw0KPiAxMzowNjo0OCArMDEwMCkNCj4gDQo+IEdpdGxhYiBD
+SSBzaG93ZWQgbm8gaXNzdWVzOg0KPiANCj4gaHR0cHM6Ly9zb3VyY2UuZGVueC5kZS91LWJv
+b3QvY3VzdG9kaWFucy91LWJvb3QtZWZpLy0vcGlwZWxpbmVzLzE4OTkwDQo+IA0KPiAtLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tDQo+IFB1bGwgcmVxdWVzdCBmb3IgZWZpLW5leHQtMjAyMzEyMTcNCj4gDQo+IERv
+Y3VtZW50YXRpb246DQo+IA0KPiAqIHJlcGxhY2UgTUQ1IGFuZCBTSEExIGJ5IFNIQTI1NiBp
+biBleGFtcGxlcw0KPiANCj4gVUVGSToNCj4gDQo+ICogUmVmYWN0b3IgYm9vdCBtYW5hZ2Vy
+IGFuZCBib290ZWZpIGNvbW1hbmQgdG8gbGV0IHRoZSBFRkkgYm9vdCBtZXRob2QNCj4gd29y
+ayB3aXRob3V0IHNoZWxsLg0KPiANCj4gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiBBS0FTSEkgVGFrYWhpcm8g
+KDgpOg0KPiAgwqDCoMKgwqDCoCBjbWQ6IGJvb3RlZmk6IHVuZm9sZCBkb19ib290ZWZpX2lt
+YWdlKCkNCj4gIMKgwqDCoMKgwqAgY21kOiBib290ZWZpOiByZS1vcmdhbml6ZSBkb19ib290
+ZWZpKCkNCj4gIMKgwqDCoMKgwqAgY21kOiBib290ZWZpOiBjYXJ2ZSBvdXQgRUZJIGJvb3Qg
+bWFuYWdlciBpbnRlcmZhY2UNCj4gIMKgwqDCoMKgwqAgY21kOiBib290ZWZpOiBjYXJ2ZSBv
+dXQgYmluYXJ5IGV4ZWN1dGlvbiBpbnRlcmZhY2UNCj4gIMKgwqDCoMKgwqAgY21kOiBib290
+ZWZpOiBsb2NhbGl6ZSBnbG9iYWwgZGV2aWNlIHBhdGhzIGZvciBlZmlfc2VsZnRlc3QNCj4g
+IMKgwqDCoMKgwqAgY21kOiBib290ZWZpOiBtb3ZlIGxpYnJhcnkgaW50ZXJmYWNlcyB1bmRl
+ciBsaWIvZWZpX2xvYWRlcg0KPiAgwqDCoMKgwqDCoCBjbWQ6IGVmaWRlYnVnOiBlYXNlIGVm
+aSBjb25maWd1cmF0aW9uIGRlcGVuZGVuY3kNCj4gIMKgwqDCoMKgwqAgYm9vdG1ldGg6IHVz
+ZSBlZmlfbG9hZGVyIGludGVyZmFjZXMgaW5zdGVhZCBvZiBib290ZWZpIGNvbW1hbmQNCj4g
+DQo+IFNlYW4gQW5kZXJzb24gKDEpOg0KPiAgwqDCoMKgwqDCoCBkb2M6IFJlcGxhY2UgZXhh
+bXBsZXMgb2YgTUQ1IGFuZCBTSEExIHdpdGggU0hBMjU2DQoNCkZZSSB0aGVyZSBpcyBhIHYy
+IG9mIHRoaXMsIGJ1dCBpcyBtb3N0bHkganVzdCBleHBhbmRzIHRoZSBjb21taXQgbWVzc2Fn
+ZS4gSSBhbQ0KZmluZSBzZW5kaW5nIGEgZm9sbG93LXVwIHBhdGNoLg0KDQotLVNlYW4NCg0K
+PiAgwqBib290L0tjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+ICDCoGJvb3QvTWFrZWZpbGXCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
+wqAgMiArLQ0KPiAgwqBib290L2Jvb3RtX29zLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMzIgKy0NCj4gIMKgYm9vdC9ib290bWV0
+aF9lZmkuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDC
+oCA4ICstDQo+ICDCoGJvb3QvYm9vdG1ldGhfZWZpX21nci5jwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAyICstDQo+ICDCoGNtZC9LY29uZmlnwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAg
+MTYgKy0NCj4gIMKgY21kL2Jvb3RlZmkuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDY3MA0KPiArKysrKy0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tDQo+ICDCoGNtZC9lZmlkZWJ1Zy5jwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA0ICstDQo+ICDCoGRvYy9j
+aHJvbWl1bS9maWxlcy9jaHJvbWVib29rX2plcnJ5Lml0c8KgIHzCoMKgIDQgKy0NCj4gIMKg
+ZG9jL2Nocm9taXVtL2ZpbGVzL255YW4tYmlnLml0c8KgwqDCoMKgwqDCoMKgwqDCoCB8wqDC
+oCA0ICstDQo+ICDCoGRvYy91c2FnZS9jbWQvaW14dHJhY3QucnN0wqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCB8wqDCoCA2ICstDQo+ICDCoGRvYy91c2FnZS9maXQvYmVhZ2xlYm9u
+ZV92Ym9vdC5yc3TCoMKgwqDCoMKgwqAgfMKgIDc0ICsrLS0NCj4gIMKgZG9jL3VzYWdlL2Zp
+dC9ob3d0by5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA0MCAr
+LQ0KPiAgwqBkb2MvdXNhZ2UvZml0L2tlcm5lbC5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqDCoCA2ICstDQo+ICDCoGRvYy91c2FnZS9maXQva2VybmVsX2ZkdC5y
+c3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNCArLQ0KPiAgwqBkb2MvdXNhZ2Uv
+Zml0L2tlcm5lbF9mZHRzX2NvbXByZXNzZWQucnN0IHzCoMKgIDYgKy0NCj4gIMKgZG9jL3Vz
+YWdlL2ZpdC9tdWx0aS13aXRoLWZwZ2EucnN0wqDCoMKgwqDCoMKgwqAgfMKgwqAgNiArLQ0K
+PiAgwqBkb2MvdXNhZ2UvZml0L211bHRpLXdpdGgtbG9hZGFibGVzLnJzdMKgwqAgfMKgwqAg
+OCArLQ0KPiAgwqBkb2MvdXNhZ2UvZml0L211bHRpLnJzdMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfMKgIDEyICstDQo+ICDCoGRvYy91c2FnZS9maXQvc2lnbi1jb25m
+aWdzLnJzdMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDYgKy0NCj4gIMKgZG9jL3VzYWdl
+L2ZpdC9zaWduLWltYWdlcy5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDQgKy0N
+Cj4gIMKgZG9jL3VzYWdlL2ZpdC9zaWduYXR1cmUucnN0wqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgIDIyICstDQo+ICDCoGRvYy91c2FnZS9maXQvdXBkYXRlMy5yc3TCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgNiArLQ0KPiAgwqBkb2MvdXNhZ2UvZml0
+L3VwZGF0ZV91Ym9vdC5yc3TCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAyICstDQo+ICDC
+oGRvYy91c2FnZS9maXQveDg2LWZpdC1ib290LnJzdMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzC
+oMKgIDggKy0NCj4gIMKgaW5jbHVkZS9lZmlfbG9hZGVyLmjCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxMiArLQ0KPiAgwqBsaWIvZWZpX2xvYWRlci9l
+ZmlfYm9vdG1nci5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgNTMwICsrKysrKysrKysr
+KysrKysrKysrKysrKw0KPiAgwqB0ZXN0L2Jvb3QvYm9vdGZsb3cuY8KgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMiArLQ0KPiAgwqAyOCBmaWxlcyBj
+aGFuZ2VkLCA3NzEgaW5zZXJ0aW9ucygrKSwgNzI5IGRlbGV0aW9ucygtKQ0KDQo=
