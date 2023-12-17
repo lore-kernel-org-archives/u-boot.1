@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FC0C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 17:35:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAF87C3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 17:36:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CB0287CF4;
-	Sun, 17 Dec 2023 18:35:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19E3387CFC;
+	Sun, 17 Dec 2023 18:36:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dibyh9XA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XFn5zaYV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDF0F87CF5; Sun, 17 Dec 2023 18:35:41 +0100 (CET)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id DF8FB87D02; Sun, 17 Dec 2023 18:36:55 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B5F87C34
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 18:35:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 614DA87CF4
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 18:36:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-50bfd8d5c77so2332512e87.1
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 09:35:39 -0800 (PST)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2cc5a0130faso16808341fa.1
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 09:36:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702834539; x=1703439339; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702834612; x=1703439412; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DriLpsppq63p0O7hkCtAAOeEzm4ZZr01Kdr4sBspnhQ=;
- b=dibyh9XAXWvXYtEr/nheKP2wSK9J9Z4UXcO6PeujGlCVWusE/62ia0vPltV6OhZiwC
- GqpUPUp0nTHVjOTmh4fviptBpt9VuZQ5hkOLbPgEjZxiKhMssoS6wre2iY4LW6it/LF8
- B6tIzf2I6bNLZnrKQMn+e5/IxQHmlME5xaZbQzmIskpfREKCLHwhZSa3GA1OUU5ZoBg/
- P1OiBVBeMKa5p4Nb+uA6YQ+Xw6ApuiY2d4hY1kEOSHBi+xdfBu7iH4udAWOMvhcUie4R
- kLrLtsQ0ExSFHDdNSrOz6M8F5bFV7TSRGniZbGw+ANjaqZfVAk1yLhkRVIdL6QPjG7xE
- 67fw==
+ bh=iN0VyQc9xYmUxz+ed28MhFl6zs4jEyK21qYMAk65z0U=;
+ b=XFn5zaYVvW1onCgU5kKMb3JMeJ4iZUVRJh0ndATVFQcoNY6TwovmXhDGJHHdRfTEzC
+ 4OFZRA0FweKWdrv+UFfXaOmk5lXasNIK1va4LflBNGiRhprCqzdh9AAxymZC2JJ43JpK
+ nP+jOrKIUzNtwYGeQ+uAzvDF1nRu4TooYEZRs1d72Z0SxjMxuPrPPB74lxyZneG9rso2
+ SAMCDbaJyalXlwh7DcUQo0GVjOUR4/IsJIgqz04P2ueajE4VeiXckO29gMsi32ordefd
+ RsVVhaKxF2J/lCp+pG3mUo8BCpdk7c0EPNf1QKRpleV9aSL3DjXcCtVdyfls1PiKEVkh
+ DuGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702834539; x=1703439339;
+ d=1e100.net; s=20230601; t=1702834612; x=1703439412;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DriLpsppq63p0O7hkCtAAOeEzm4ZZr01Kdr4sBspnhQ=;
- b=Sxc2qWHs3K+TEVo3VpzScmrmIfD7YdUc7WhzNIv1EWJ9ecVyfDKIOx8llpevAd6jww
- Z4B2ogvDEWtNrlHsyjCZYL9Tk/UJeuvjmwzIP6CZv5KXKakEp79BXfUpHPJACBVZUGhm
- RECOZeIsZQOrV6avHB+55T8nODJNk12q+VBcTFBrDkkmHFdsVBbro/Fn/iguX9E/QKk/
- Wtk50G/ly7MUtog6mNDqUTCEHgoUQneLJ8wxTdpfEc5oXQo/K1VB4AmOfKjg9tyQ1p0x
- 2kPx3+f7o7WZI4WBSZbCR+4vd/cMXNNFzEmu5iWV8jvYhBFNU5FYArdJfp5bbH6CBcit
- jtWg==
-X-Gm-Message-State: AOJu0YwDdWlGCaFSjPIKHbMunYGxupnpdlfsxuqR34AuNqVWS/5zO66j
- gkXTN7AuTIwo8iFQF5ErWTJZLIcrTw/2DU2CxkOS7PlseLo3b6FlXb4=
-X-Google-Smtp-Source: AGHT+IFCQ/GIG7G5SpiHgkocynre5fgUVUMOWOk1GwCW//GdcA4YIjWSBW/1ds5/JzTu/nT2TzAz0JlQPSzH1to9zJo=
-X-Received: by 2002:a19:6753:0:b0:50e:378b:363d with SMTP id
- e19-20020a196753000000b0050e378b363dmr107902lfj.0.1702834538962; Sun, 17 Dec
- 2023 09:35:38 -0800 (PST)
+ bh=iN0VyQc9xYmUxz+ed28MhFl6zs4jEyK21qYMAk65z0U=;
+ b=mFN6ha7LivKQe7DrK5DhKouuyx1sraQisHIrvKKFM9W+yc2srp09VD5hr89zzon71+
+ nPJp20rC/6BJXbQMlNsX3K18Ww8a2oaEmNNwX9cGVkWKqd78eEBNRAG4r5viP58ufs7F
+ z6qgNdVTqeQ59UC1F7pxoaTRDOFEvZKhVr5CwppC85cD6H1OOZAjBXy6aCc5OD6iN58w
+ xCNmrwOEqSdJwYaAUsbAfmDkWXDclZYLqYvZlAuJd5/pdQKbl13dImBsHgedFN9230Ya
+ RJvxWZarKyjCo9U2dJkCnkQT+X2FIBkqt2yyuBkwh5YOEYfOSn81X6eXyeeyOb5d/pzg
+ buAw==
+X-Gm-Message-State: AOJu0Yw8aeZSnfDyy7/JOY3ltS1b4uhQZ/Nirnolc79JQjwl8IRYFGR5
+ QpvJK3gUvH9inSU5pCB6l9OdMKzbcfzg+fPfqenJ6pwxe7oN78AoGNA=
+X-Google-Smtp-Source: AGHT+IEZQ3rZ/MDbTfeZ8TmwDkZbpWOR7qJWc8DJv9aTzXvdN2DfBcK/hEjhbWNw0PMVczCj8ZCGdfssuyNqxWKNpgw=
+X-Received: by 2002:a2e:80d6:0:b0:2cc:5d9c:f77b with SMTP id
+ r22-20020a2e80d6000000b002cc5d9cf77bmr1159808ljg.56.1702834612340; Sun, 17
+ Dec 2023 09:36:52 -0800 (PST)
 MIME-Version: 1.0
-References: <20231217114457.70128-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231217114457.70128-1-heinrich.schuchardt@canonical.com>
+References: <20231216151954.66658-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231216151954.66658-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 17 Dec 2023 19:35:02 +0200
-Message-ID: <CAC_iWjJ+VUY+FVyyh8fib+i=qy3K0fDwvcjTfmJMfJkSW25SQg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: CONFIG_CMD_BOOTEFI_HELLO_COMPILE dependencies
+Date: Sun, 17 Dec 2023 19:36:16 +0200
+Message-ID: <CAC_iWj+yr-LL7mmZK5+ypNt=WpygwTPW6KN7vfs_knJeMnkcxA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] test: build test/boot for CONFIG_UT_BOOTSTD=n
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>, 
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,31 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 17 Dec 2023 at 13:45, Heinrich Schuchardt
+On Sat, 16 Dec 2023 at 17:20, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> CONFIG_EFI_LOADER cannot be chosen for ARM v7m. Remove the superfluous
-> dependency on CONFIG_CPU_V7M=n.
+> Building sandbox_defconfig with
 >
-> Fixes: b20bb09b2108 ("efi_loader: restrict EFI_LOADER to armv7 and armv8 on ARM")
+>     CONFIG_UT_BOOTSTD=n
+>     CONFIG_MEASURMENT=y
+>
+> results in an error:
+>
+>     /usr/bin/ld: test/cmd_ut.o:(.data.rel.cmd_ut_sub+0x408):
+>     undefined reference to `do_ut_measurement'
+>
+> Fixes: 5999ea20fa42 ("test: Add sandbox TPM boot measurement")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  cmd/Kconfig | 2 +-
+>  test/Makefile | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 748b959961..0ae5bcd981 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -373,7 +373,7 @@ config CMD_BOOTEFI_BOOTMGR
+> diff --git a/test/Makefile b/test/Makefile
+> index 6b8a1506f5..feba097543 100644
+> --- a/test/Makefile
+> +++ b/test/Makefile
+> @@ -23,7 +23,7 @@ obj-$(CONFIG_UT_TIME) += time_ut.o
+>  obj-y += ut.o
 >
->  config CMD_BOOTEFI_HELLO_COMPILE
->         bool "Compile a standard EFI hello world binary for testing"
-> -       depends on CMD_BOOTEFI && !CPU_V7M
-> +       depends on CMD_BOOTEFI
->         default y
->         help
->           This compiles a standard EFI hello world application with U-Boot so
+>  ifeq ($(CONFIG_SPL_BUILD),)
+> -obj-$(CONFIG_$(SPL_)UT_BOOTSTD) += boot/
+> +obj-y += boot/
+>  obj-$(CONFIG_UNIT_TEST) += common/
+>  obj-y += log/
+>  obj-$(CONFIG_$(SPL_)UT_UNICODE) += unicode_ut.o
 > --
 > 2.40.1
 >
