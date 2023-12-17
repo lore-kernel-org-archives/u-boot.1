@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AE2C3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 16:37:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 913C3C3DA6E
+	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 16:37:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D141E87CB7;
-	Sun, 17 Dec 2023 17:36:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 56D8D87CC1;
+	Sun, 17 Dec 2023 17:36:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OsuaKEtl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VADsthRw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0FD687CA1; Sun, 17 Dec 2023 17:36:42 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id CA1AA87CA1; Sun, 17 Dec 2023 17:36:42 +0100 (CET)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1476887C96
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 17:36:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A887987C9E
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 17:36:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7b712c0fddeso94734939f.3
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 08:36:39 -0800 (PST)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-35d67aa6951so8538015ab.0
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 08:36:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702830997; x=1703435797; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702830999; x=1703435799; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FyN+CCALzM97LVpap0P1DTEpXMA1KXjvqQ1cTjYEngU=;
- b=OsuaKEtlQMTZ7HMzXpxJlqbMVjcGJIn8hMlWohwgqnZ0hbo2ZVqr+alEQdSPYXtuMP
- KWc3KGWe0C9Gp4OFfYOxbQo8BNBQv/qO5K80M0lJMfa9gr/eG5yQlI99G6sZ5N6wwUol
- P9GkYibK96IvAvjB4dtiphLMNTl/K6DfeA/sk=
+ bh=3PkzhxIi4+fq3rDE7+/HI/4m7VHcmTn0a+o+Veb7a7I=;
+ b=VADsthRwL3FNKgB4I/bPS0Vgq91e4W4PlGbmqLuJCw4gtHKidIFwLNww5XL5aTgMXI
+ XAAbgp5gXLaMzC19N0r5IIBSjq9jE7rDSwlDD0bunPOlFfysRqIgxoN+pcMNVl18urjh
+ b1JznDPCRPfoLw12te0ucie6L5+l4+PEkZiiM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702830997; x=1703435797;
+ d=1e100.net; s=20230601; t=1702830999; x=1703435799;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FyN+CCALzM97LVpap0P1DTEpXMA1KXjvqQ1cTjYEngU=;
- b=camxeXlB4Xhu8156eoghq2Buz38W9rXMnkqD27LeMLhMMFQS5UdD9qFEkSnAOtplKs
- VNMTnxfXn3kr6QN06w1Fy0Zi5el3vM4dZFhabN2Y6yfT1OQvsrZN3xSQa/WaQ4jdbcMh
- mEMP0G/JUl9oMDd9MnCaadXRbhhh4h5epLzKb4nTz7gC5yUChoJJLHSA2bvWEVuJzYor
- LpBgZkA9JuDuoktOazDL+HBqt1Mu2DQ4ARB4bvTuflzlVTi0BUKS1I2oP5KlhZAf12n/
- lM0pAx5g050YqYw4PRImwHcz00ztHmQnydFK8/4AOjjas6OmXNuiOAtHbNXp6Pebgh6J
- PqMA==
-X-Gm-Message-State: AOJu0YzgkoBrGN9l/4NTieZSLN39CC63wcwa5JA0i7abZN7y/d9Be0hx
- AyUIqMTrIU3VfPlDjwge3YoLVS2lnM0e9c/w1fKgaQ==
-X-Google-Smtp-Source: AGHT+IHZtegRgKFNcqgHfV2gZp/vPPgcl+VHr8wWw0hSTkKBStxptntvbdc/AuGcBWSLlaeJaTXiqg==
-X-Received: by 2002:a6b:c891:0:b0:7b7:29:bfb2 with SMTP id
- y139-20020a6bc891000000b007b70029bfb2mr16973603iof.10.1702830997619; 
- Sun, 17 Dec 2023 08:36:37 -0800 (PST)
+ bh=3PkzhxIi4+fq3rDE7+/HI/4m7VHcmTn0a+o+Veb7a7I=;
+ b=aWjV0VuuXa+BFkBAE/GKNYScNIrxkYhdNeL5UtPhPofS90sBz/cDHUFndMIf+WT3sR
+ 2nM2o9BvKp7sL+dDIIvSCk/xPPTkyYXU08C2JgKDejiUIoqLPttK1oNVp3WmjoNdXlMt
+ gkdgUdHYrZatCFgQJAcXt1LTWiuac33FXPw6JqoayoJISX0t4s3F3XYuGPdfl3d0tUWV
+ mmPHNXRMlAM+KE3U/8vNrV7OYhLz8rGCiAmv5CXwEbW3if8mKXBYJq9cO+fSqwSoshol
+ UZDj4Xce08uJ8zY7kqbSZOl0QEBQ3FYfCEwcFu9eBkHzRCsrUmh+Fb5f9o6wqP59GWPo
+ zyEA==
+X-Gm-Message-State: AOJu0Yx+VMZkT4Z+1Ll2q0wDTPQw/CLC7UglE3qSYBYUKEZXPc5wvmrr
+ w6R7Za09trPIw0sPm179NeKRkvcPU5iXfcazOzzs4Q==
+X-Google-Smtp-Source: AGHT+IEAbWNngU+UCvhsT1/gKWRTU7tAc9VNfVzuaAaWuMEP1RVtMXBfpafzAshU+alQDgSHtMHt5g==
+X-Received: by 2002:a05:6e02:1a05:b0:35f:aa70:687b with SMTP id
+ s5-20020a056e021a0500b0035faa70687bmr804376ild.20.1702830999068; 
+ Sun, 17 Dec 2023 08:36:39 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- ei10-20020a05663829aa00b00466917fbfc4sm4925770jab.71.2023.12.17.08.36.36
+ ei10-20020a05663829aa00b00466917fbfc4sm4925770jab.71.2023.12.17.08.36.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Dec 2023 08:36:36 -0800 (PST)
+ Sun, 17 Dec 2023 08:36:38 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 04/10] fdtgrep: Correct references to fdt_find_regions()
-Date: Sun, 17 Dec 2023 09:36:17 -0700
-Message-ID: <20231217163627.2339802-5-sjg@chromium.org>
+Subject: [PATCH 06/10] fdtgrep: Simplify code to inverting the match
+Date: Sun, 17 Dec 2023 09:36:19 -0700
+Message-ID: <20231217163627.2339802-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231217163627.2339802-1-sjg@chromium.org>
 References: <20231217163627.2339802-1-sjg@chromium.org>
@@ -88,41 +88,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function name is actually fdtgrep_find_regions() so update the name
-in comments accordinging.
+The code to invert the match in h_include() is a bit convoluted.
+Simplify it by using disp->invert only once.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/fdtgrep.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ tools/fdtgrep.c | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
 
 diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-index 41d8b41252dd..b56d2fe21c9a 100644
+index a6cdc326709d..b06a1a7a8384 100644
 --- a/tools/fdtgrep.c
 +++ b/tools/fdtgrep.c
-@@ -576,10 +576,10 @@ static int check_type_include(void *priv, int type, const char *data, int size)
- }
+@@ -634,14 +634,8 @@ static int h_include(void *priv, const void *fdt, int offset, int type,
+ 			inc = 0;
+ 	}
  
- /**
-- * h_include() - Include handler function for fdt_find_regions()
-+ * h_include() - Include handler function for fdtgrep_find_regions()
-  *
-  * This function decides whether to include or exclude a node, property or
-- * compatible string. The function is defined by fdt_find_regions().
-+ * compatible string. The function is defined by fdtgrep_find_regions().
-  *
-  * The algorithm is documented in the code - disp->invert is 0 for normal
-  * operation, and 1 to invert the sense of all matches.
-@@ -822,7 +822,7 @@ static int do_fdtgrep(struct display_info *disp, const char *filename)
- 				region, max_regions, path, sizeof(path),
- 				disp->flags);
- 		if (count < 0) {
--			report_error("fdt_find_regions", count);
-+			report_error("fdtgrep_find_regions", count);
- 			free(region);
- 			return -1;
- 		}
+-	switch (inc) {
+-	case 1:
+-		inc = !disp->invert;
+-		break;
+-	case 0:
+-		inc = disp->invert;
+-		break;
+-	}
++	if (inc != -1 && disp->invert)
++		inc = !inc;
+ 	debug("   - returning %d\n", inc);
+ 
+ 	return inc;
 -- 
 2.43.0.472.g3155946c3a-goog
 
