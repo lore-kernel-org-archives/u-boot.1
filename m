@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E696BC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 19:55:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0286C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 20:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040C187252;
-	Mon, 18 Dec 2023 20:55:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 021B587463;
+	Mon, 18 Dec 2023 21:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="eP/5uFFV";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Xgce/ke/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550F0874B1; Mon, 18 Dec 2023 20:55:00 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 1F708874CA; Mon, 18 Dec 2023 21:59:19 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6417987076
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 20:54:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C594587227
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 21:59:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702929294; x=1703534094; i=xypron.glpk@gmx.de;
- bh=d80SuclEppA0ljhChDcnLslthESLehxDLECKwGZvtrA=;
+ t=1702933155; x=1703537955; i=xypron.glpk@gmx.de;
+ bh=f6bljqDfa/MJIUTluYSetDk1cWHqyRdHIVgo5nj6YeM=;
  h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
  References;
- b=eP/5uFFVTuY5vaX7eOn20b1tkxY4Y8UCk+oSuj/rkXSlmGj/OAt5mGqivJy5Io5n
- v7yqIUQhuIT/+o0orsrPrZi5O3OKl9l9iY6f5UMM+nYiOCPu4tiWKyLxAtsZ14gmL
- h+Fip1bLDWnCIdREJAkH15rXaVS7yd+Iu75u7jnMMEMz8ebcJ36nu0EPAsIZNzL2V
- vJngrVO6xyF86fQtk4u62Fij3MDFxy21Mwj3cJ3yL0JQyoZaKzaUC75EjaCcofCjX
- 5uVZ022nqxYxn8s2sjoUNb4m3/3mYVfuf8fG8Sj3fzZmLnGA2e+2iySgE8hy4Uhn1
- y56+8sosfXZI8ZXTyg==
+ b=Xgce/ke/vtE3uVBrdKMVhxAKnEw0E5aIX/MorS/s1RkiK3D/CqpHClbSG9Av/dl+
+ aYzCdoZPUvaZsVtHv3OUTUXMedmNAxDsY5gKTOwmx9kb8pQydw3j8m0aB8Zmu9CEE
+ 4sKOBog5E7sCayIVOKFoHETkU+/WBXjNdTNKo9cCVXVB4zDxjyqRbjnju/7iAQzLo
+ 0k8wI2Ny4UItzM1D9hi5KHpglKlx8dzGbGLffzfS/GhYuwAbGxj8QyS5AVnVE5Fky
+ 7Ml56UopEn+qL7WWrzNJYkAUb6xt5d+E9pIN6Nhh47/s6rgAG+XxWNV6chDHzVffP
+ kVaF1nnbbOWPPVcEXA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MA7GS-1rQq1s2buM-00Beas; Mon, 18
- Dec 2023 20:54:54 +0100
-Date: Mon, 18 Dec 2023 20:54:53 +0100
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MG9kM-1rVnF03yI8-00GbFB; Mon, 18
+ Dec 2023 21:59:15 +0100
+Date: Mon, 18 Dec 2023 21:59:13 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Proposal: U-Boot memory management
+To: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Abdellatif El Khlifi <Abdellatif.ElKhlifi@arm.com>, Drew.Reed@arm.com,
+ u-boot@lists.denx.de, nd@arm.com
+Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
 User-Agent: K-9 Mail for Android
-In-Reply-To: <CAPnjgZ0r1xM-bky6VQXV4N-FkBC-YFsX1ibJRiJ_17XXAe5ang@mail.gmail.com>
-References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
- <a55d0848-c70e-43a9-9223-60515aea8052@gmx.de>
- <CAPnjgZ0r1xM-bky6VQXV4N-FkBC-YFsX1ibJRiJ_17XXAe5ang@mail.gmail.com>
-Message-ID: <D7A16A62-0C71-4374-AAF6-9D021A6C42A2@gmx.de>
+In-Reply-To: <CAPnjgZ1TsFCzTd2pD3j4SoAhnJWw1qz90DfEzsU6Y-4bSkEf7A@mail.gmail.com>
+References: <20231214155346.GB295924@e130802.arm.com>
+ <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
+ <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
+ <CAPnjgZ1TsFCzTd2pD3j4SoAhnJWw1qz90DfEzsU6Y-4bSkEf7A@mail.gmail.com>
+Message-ID: <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Tm3CQfCw2wxI3dNPEjh1GZUb6mZl2/lIVyTDF/M1BDS6Nw3zbVZ
- rX9GUX1o6G1nogiDe2cTsNTs3acIow+QMo6B7lZGJTNmWmjJOqn8tLp0JlmkF/5GAszrQCR
- 55l/79H0+ivj66Z2XqnQ84SZaEH5ReQmwhEtI6NUvG91nz7WLcPvitWCScU7zs3dIi3GpPW
- Q9sTnt9aM662Dd5ZzvPww==
-UI-OutboundReport: notjunk:1;M01:P0:o1jCp0DEmq4=;MbTK/d04/j0ALCGAXn0/UPZA981
- Rrvg3JtBImJrZIYR4dCdk4OflMdhljSHPGFB9KilNjuoNqHQnq1cq8R4zMtt0FtEThznZjeGh
- P7CvJ3cqzUdR4hhbawKpqFLQoziXjJfYZRwoLZ1s6HH4KVwSRjHQaElnDP1Q1m7t922maEqHD
- oxD0ImDVajKLJeh0BPdWkAJx9Wz9ejCH0R6DyiBtdLpRcr+H8iWXxvMLW7Gpqe/bjrtANAvXS
- Fg3jnX/khUKpaO7UKs6oLHXEJXgRHifNl7qMm8IYtTx8OstHl//ik5oNGSPCLZCCuJ+kJHrd3
- 1xSC7QSPy2AayhOB7W/2tjNgHpN12s/Oqtx7c9HKIKtHVk8xvkzIN8zvPFbENz1NqLXvqCKA8
- drAbZhz6ebtMrYUOJDPs/g7OSCXcxP0FIVIL/HHnCn4pTJ308vjfwCp8J6IP1rQiK5hyC6WvU
- owXvrfR0FCaPHm0cAx1LgquVAY8yv9qVCDR9Sbwz/T45B8ICy8AFzhy5Cteb7QXHVvqGWBW38
- G0ZHjlLuis4BQ+YfTNDCA41D02ocPOysyalHCQQmc/TWsYQFcFhBkyxN3YDQ7XTeXVwn3VTAH
- erZN0XfbscRpd1NgQ/AcF7sbe9oovaTHvixqpWWYUi0SJXlcUmYPD885KoCPq3yKCvy/z0YxY
- uHtKUEtXN0Eq8dp5W/c1MWrT9LdYzN3p4bjcHXapf0oJYPkfM6WT54Aj6+SYczNOzfW+yu82U
- q4gK+2NknX1/YF3y4R8QU8mtoToR9NOjsxjM/AwuTkJrYPcO4h0RPzRdsI8hakIuhwuSQ11HD
- LAxiJSqsLVoFCDPV+BoK4yQ4v5zGQ91WJKbBNxBOySQd35p9DXp8MuwEKiZGMwokSh2p5ZK/7
- GojgRj3bb16MCzhR/H58JwE5KTrN0d3dhfIujFp1Pb8pIH4UlFR1LBGTkG0Y8qvi+2IX8EbYg
- r911PrZtTKDszKkWSWLGW4N9dkk=
+X-Provags-ID: V03:K1:q3J5tRwgbB1due2g54cTHVP+cwl0Ik3whqDEOVHv6Hx0tvonPYC
+ DYs2G//H4WS9biCXgTXJ5r7cCbXyb+tBpswsoTAiznz1F8kJQUOt8cCxi8r8yA4VBZmhAgl
+ 6x+lDvy6iab338mJlyqlmjcLRAOwofw+A1EyxH7igFhxX16j6qakEQ6QjEAN7FjHu/458GA
+ +dIFUseT5kPIbfvTwPg1g==
+UI-OutboundReport: notjunk:1;M01:P0:QXRTRCFJCjc=;TrO2nG8AicT/4ua0pCsFljcDi4e
+ kA3Mbl8zgM/DW4t0H/dpgplvB9+5UedW5K3QyRkjIceSUNRGqK9Tzz6GdADWoE74R9Ho0Zl5a
+ EeYm7DPugV0EeLWang3dybUrVBsvYsIBo2vYjkcfGmW+AJPcdWoOhD3QbNb9FmikooIs6f4Sg
+ 6M8P5CBkqd15c54zZl58wa+/RN2s9PUMgTWEp0SPYl80qzIIgBTUKuXNbFHAWWsfZsqMcnZji
+ N2LQWMCks3mh51F3DVIZX4VeHicse9LJkdTLVZHROHx5UeJ6PPQNL6gnaHEeatvPAsh52FNmz
+ L5qdBZbvEPKZJIWyU0AXJ7kQu5TOfWCxrZu5iFeG3QqHQ0INJeDj8eFf8F4CKXqQEJ+mHDPN8
+ xiBaqXgCqbWv8lrvWKpDdu207I7jIsN2xP7m0cqy7gR8O+7bTsFVoyh7iDhyj3m8x1hVskR3U
+ W+FcHe3D8H4cXFiz0gIhHcL+mASjnI8eF1U8kojuhaWOUbYLiXtkB4qdt1N+83ZJL78V7Aq2T
+ mlb+gZ1MSsZ/i2x99W7qJ1L1FeMnCb4R9lWQAD1LWj+NU2DgRJXnhmxsrEqT9sN3K7TMlyZjT
+ xBmDT+K5zHHANNQy3o5rmjIqyWFsR+dhMf7QqXeN1l3Dp7zJ70OM6oczD8dsQUcDU2mSaHey1
+ dsj0BoMzD95erLHxWdCCvCdqEQvKLPc08HvAKDQkasyZASojU8WZIjNxtGcsza3tY3KaxoLjr
+ FJ9g9SVASMqmbNgTtQT++x3qiBVg4jKTZN+Ju8IVQroxrpli+T3e4+tutMe2bKmlBUM833qkZ
+ b8pYUtZRimGnMAGbnNvx9YDtzl98mUe4KJlnN+uNogv9FP7exOxWi/ACSD0FJmMehKhCsR6tr
+ wx6N2HE6Mw+HZdY/MlzIj5WbhF8fWMqSGEOz4TkvgHcPfMuFUTfTd9beKFoLZ+U77wXMLt7Vz
+ YnZnN4fV3WZFSIwUAY0PaK69tsg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,349 +96,161 @@ X-Virus-Status: Clean
 
 
 
-Am 18=2E Dezember 2023 19:12:11 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+Am 18=2E Dezember 2023 16:01:44 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
 g>:
->Hi Heinrich,
+>Hi,
 >
->On Sat, 16 Dec 2023 at 12:04, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede=
-> wrote:
+>On Thu, 14 Dec 2023 at 12:47, Ilias Apalodimas
+><ilias=2Eapalodimas@linaro=2Eorg> wrote:
 >>
->> On 12/16/23 19:01, Simon Glass wrote:
->> > Hi,
+>> Hi Mark, Abdellatif
+>>
+>> On Thu, 14 Dec 2023 at 18:47, Mark Kettenis <mark=2Ekettenis@xs4all=2En=
+l> wrote:
 >> >
->> > This records my thoughts after a discussion with Ilias & Heinrich re
->> > memory allocation in U-Boot=2E
+>> > > Date: Thu, 14 Dec 2023 15:53:46 +0000
+>> > > From: Abdellatif El Khlifi <abdellatif=2Eelkhlifi@arm=2Ecom>
 >> >
->> > 1=2E malloc()
+>> > Hi Abdellatif,
 >> >
->> > malloc() is used for programmatic memory allocation=2E It allows memo=
-ry
->> > to be freed=2E It is not designed for very large allocations (e=2Eg=
-=2E a
->> > 10MB kernel or 100MB ramdisk)=2E
+>> > > Hi guys,
+>> > >
+>> > > I'd like to ask for advice regarding adding EFI RT support to the A=
+rm's FF-A bus
+>> > > in U-Boot=2E
+>> > >
+>> > > The objective is to enable the FF-A messaging APIs in EFI RT to be
+>> > > used for comms with the secure world=2E This will help getting/sett=
+ing
+>> > > EFI variables through FF-A=2E
+>> > >
+>> > > The existing FF-A APIs in U-Boot call the DM APIs (which are not av=
+ailable at RT)=2E
+>> > >
+>> > > Two possible solutions:
+>> > >
+>> > > 1/ having the entire U-Boot in RT space (as Simon stated in this di=
+scussion[1])
 >> >
->> > 2=2E lmb
->> >
->> > lmb is used for large blocks of memory, such as those needed for a
->> > kernel or ramdisk=2E Allocation is only transitory, for the purposes =
-of
->> > loading some images and booting=2E If the boot fails, then all lmb
->> > allocations go away=2E
->> >
->> > lmb is set up by getting all available memory and then removing what
->> > is used by U-Boot (code, data, malloc() space, etc=2E)
->> >
->> > lmb reservations have a few flags so that areas of memory can be
->> > provided with attributes
->> >
->> > There are some corner cases=2E=2E=2Ee=2Eg=2E loading a file does an l=
-mb
->> > allocation but only for the purpose of avoiding a file being loaded
->> > over U-Boot code/data=2E The allocation is dropped immediately after =
-the
->> > file is loaded=2E Within the bootm command, or when using standard bo=
-ot,
->> > this would be fairly easy to solve=2E
->> >
->> > Linux has renamed lmb to memblock=2E We should consider doing the sam=
-e=2E
->> >
->> > 3=2E EFI
->> >
->> > EFI has its own memory-allocation tables=2E
->> >
->> > Like lmb, EFI is able to deal with large allocations=2E But via a 'po=
-ol'
->> > function it can also do smaller allocations similar to malloc(),
->> > although each one uses at least 4KB at present=2E
->> >
->> > EFI allocations do not go away when a boot fails=2E
->> >
->> > With EFI it is possible to add allocations post facto, in which case
->> > they are added to the allocation table just as if the memory was
->> > allocated with EFI to begin with=2E
->> >
->> > The EFI allocations and the lmb allocations use the same memory, so i=
-n
->> > principle could conflict=2E
->> >
->> > EFI allocations are sometimes used to allocate internal U-Boot data a=
-s
->> > well, if needed by the EFI app=2E For example, while efi_image_parse(=
-)
->> > uses malloc(), efi_var_mem=2Ec uses EFI allocations since the code ru=
-ns
->> > in the app context and may need to access the memory after U-Boot has
->> > exited=2E Also efi_smbios=2Ec uses allocate_pages() and then adds a n=
-ew
->> > mapping as well=2E
->> >
->> > EFI memory has attributes, including what the memory is used for (to
->> > some degree of granularity)=2E See enum efi_memory_type and struct
->> > efi_mem_desc=2E In the latter there are also attribute flags - whethe=
+>> > I don't think this is a terribly good idea=2E  With this approach ord=
+ers
+>> > of magnitude more code will be present in kernel address space one th=
+e
+>> > OS kernel is running and calling into the EFI runtime=2E  Including c=
+ode
+>> > that may access hardware devices that are now under OS control=2E  It
+>> > will be nigh impossible to audit all that code and make sure that onl=
+y
+>> > a safe subset of it gets called=2E  So=2E=2E=2E
+>>
+>> +100
+>> I think we should draw a line here=2E I mentioned it on another thread,
+>> but I did a shot BoF in Plumbers discussing issues like this,
+>> problems, and potential solutions [0] [1]=2E Since that talk patches fo=
 r
->> > memory is cacheable, etc=2E
->> >
->> > EFI also has the x86 idea of 'conventional' memory, meaning (I
->> > believe) that below 4GB that isn't reserved for the hardware/system=
+>> the kernel that 'solve' the problem for RPMBs got pulled into
+>> linux-next [2]=2E
+>> The TL;DR of that talk is that if the kernel ends up being in control
+>> of the hardware that stores the EFI variables, we need to find elegant
+>> ways to teach the kernel how to store those directly=2E The EFI
+>> requirement of an isolated flash is something that mostly came from
+>> the x86 world and is not a reality on the majority of embedded boards=
 =2E
->> > This is meaningless, or at least confusing, on ARM systems=2E
->> >
->> > 4=2E reservations
->> >
->> > It is perhaps worth mentioning a fourth method of memory management,
->> > where U-Boot reserves chunks of memory before relocation (in
->> > board_init_f=2Ec), e=2Eg=2E for the framebuffer, U-Boot code, the mal=
-loc()
->> > region, etc=2E
->> >
->> >
->> > Problems
->> > =E2=80=94-------
->> >
->> > There are no urgent problems, but here are some things that could be =
-improved:
->> >
->> > 1=2E EFI should attach most of its data structures to driver model=2E=
- This
->> > work has started, with the partition support, but more effort would
->> > help=2E This would make it easier to see which memory is related to
->> > devices and which is separate=2E
->> >
->> > 2=2E Some drivers do EFI reservations today, whether EFI is used for
->> > booting or not (e=2Eg=2E rockchip video rk_vop_probe())=2E
->>
->> Hello Simon,
->>
->> thank you for summarizing our discussion=2E
->>
->> Some U-Boot drivers including rockchip video inform the EFI sub-system
->> that memory is reserved=2E
->>
->> Furthermore drivers like arch/arm/mach-bcm283x/reset=2Ec exist that are
->> still used after ExitBootServices=2E mmio addresses have to be updated
->> when Linux creates its virtual memory map=2E Currently this is done via
->> efi_add_runtime_mmio()=2E A more UEFI style method would be to register=
- an
->> event handler for ExitBootServices() and use ConvertPointer() in the
->> event handler=2E
->>
->> >
->> > 3=2E U-Boot doesn't really map arch-specific memory attributes (e=2Eg=
-=2E
->> > armv8's struct mm_region) to EFI ones=2E
->>
->> U-Boot fails to set up RWX properties=2E E=2Eg=2E the region where a FI=
-T image
->> is loaded should not be executable=2E
->>
->> >
->> > 4=2E EFI duplicates some code from bootm, some of which relates to
->> > memory allocation (e=2Eg=2E FDT fixup)=2E
->>
->> Fixup code is not duplicated but invoked via image_setup_libfdt()=2E
->>
->> >
->> > 5=2E EFI code is used even if EFI is never used to boot
->>
->>
->> * Only a minimum initialization of the EFI sub-system happens in
->> efi_init_early()=2E
->> * Some EFI code is called when probing block devices because we wanted
->> the EFI and the dm part to be integrated=2E
->> * The rest of the initialization in efi_init_obj_list() is only invoked
->> if an EFI command is invoked=2E
->>
->> >
->> > 6=2E EFI allocations can result in the same memory being used as has
->> > already been allocated by lmb=2E Users may load files which overwrite
->> > memory allocated by EFI=2E
->>
->> The most worrisome issue is that EFI may allocate memory where U-Boot
->> has loaded files like initrd as the EFI sub-system is never informed
->> which memory is used for files=2E
->>
->> Loading files should not be possible without creating a memory
->> reservation that becomes visible to the EFI sub-system=2E
->>
->> >
->> >
->> > Lifetime
->> > --------
->> >
->> > We have three different memory allocators with different purposes=2E =
-Can
->> > we unify them a little?
->> >
->> > Within U-Boot:
->> > - malloc() space lives forever
->> > - lmb lives while setting out images for booting
->> > - EFI (mostly) lives while booting an EFI app
->> >
->> > In practice, EFI is set up early in U-Boot=2E Some of this is necessa=
-ry,
->> > some not=2E EFI allocations stay around forever=2E This works OK sinc=
-e
->> > large allocations are normally not done in EFI, so memory isn't reall=
-y
->> > consumed to any great degree by the boot process=2E
->>
->> U-Boot can load EFI drivers which stay resident in memory after the
->> efi_main() method has returned to U-Boot=2E The next EFI application th=
-en
->> may use the driver=2E Therefore is essential that the EFI subsystem has
->> access to a valid memory model at all times=2E
->>
->> >
->> > What happens to EFI allocations if the app returns? They are still
->> > present, in case another app is run=2E This seems fine=2E
->> >
->> > API
->> > =E2=80=93--
->> > Can we unify some APIs?
->> >
->> > It should be possible to use lmb for large EFI memory allocations, so
->> > long as they are only needed for booting=2E We effectively do this
->> > today, since EFI does not manage the arrangement of loaded images in
->> > memory=2E for the most part=2E
->> >
->> > It would not make sense to use EFI allocation to replace lmb and
->> > malloc(), of course=2E
->> >
->> > Could we use a common (lower-level) API for allocation, used by both
->> > lmb and EFI? They do have some similarities=2E However they have
->> > different lifetime constraints (EFI allocations are never dropped,
->> > unlikely lmb)=2E
->>
->> The way lmb is used is a deficiency of U-Boot=2E E=2Eg=2E you can load =
-an
->> initrd that overwrites the previously loaded kernel and then try to boo=
-t=2E
->>
->> What we need is a common memory management library where allocations ar=
-e
->> never dropped and which is used by all file loads=2E
->>
->> >
->> > ** Overall, it seems that the existence of memory allocation in
->> > boot-time services has created confusion=2E Memory allocation is
->> > muddled, with both U-Boot code and boot-time services calling the sam=
-e
->> > memory allocator=2E This just has not been clearly thought out=2E
->> >
->>
->> We have to implement what the UEFI specification requires=2E Some
->> boot-time services must allocate memory via AllocatePool() or
->> AllocatePages() because that memory is handed out to the caller of an
->> API function and it is the callers obligation to free the memory via
->> FreePool() or FreePages()=2E
->>
->> >
->> > Proposal
->> > =E2=80=94-------
->> >
->> > Here are some ideas:
->> >
->> > 1=2E For video, use the driver model API to locate the video regions,=
- or
->> > block off the entire framebuffer memory, for all devices as a whole=
-=2E
->> > Use efi_add_memory_map()
->>
->> When video memory is located higher than the stack the EFI sub-system
->> will not make use of the memory=2E
->>
->> >
->> > 2=2E Add memory attributes to UCLASS_RAM and use them in EFI, mapping=
- to
->> > the EFI_MEMORY_=2E=2E=2E attributes in struct efi_mem_desc=2E
->> >
->> > 3=2E Add all EFI reservations just before booting the app, as we do w=
-ith
->> > devicetree fixup=2E With this model, malloc() and lmb are used for al=
-l
->> > allocation=2E Then efi_add_memory_map() is called for each region in
->> > turn just before booting=2E Memory attributes are dealt with above=2E=
- The
->> > type (enum efi_memory_type) can be determined simply by the data
->> > structure stored in it, as is done today=2E For example, SMBIOS table=
-s
->> > can use EFI_ACPI_RECLAIM_MEMORY=2E Very few types are used and EFI co=
-de
->> > understands the meaning of each=2E
->>
->> This would require a permanent storage of the reservations=2E Keep it
->> easy, unify the memory management and make it persistent=2E
->>
->> >
->> > 4=2E Avoid setting up EFI memory at the start of U-Boot=2E Do it only=
- when
->> > booting=2E This looks to require very little effort=2E
->>
->> There is no such thing as EFI memory=2E We only have one physical memor=
-y
->> that we have to keep track of=2E
->>
->> It is not possible to set up the EFI memory map if you don't keep track
->> of all memory allocations including all file loads over the whole
->> lifetime of U-Boot=2E
->>
->> >
->> > 5=2E Avoid calling efi_allocate_pages() and efi_allocate_pool() outsi=
-de
->> > boot-time services=2E This solves the problem 6=2E If memory is neede=
-d by
->> > an app, allocate it with malloc() and see 3=2E There are only two
->> > efi_allocate_pages() (smbios and efi_runtime)=2E There are more calls=
- of
->> > efi_allocate_pool(), but most of these seem easy to fix up=2E For
->> > example, efi_init_event_log() allocates a buffer, but this can be
->> > allocated in normal malloc() space or in a bloblist=2E
->>
->> If we have a unified memory allocation layer, efi_allocate_pages() and
->> efi_allocate_pool() will be implemented by calls into that layer and
->> issue 6) will vanish=2E
->>
->> >
->> > 6=2E Don't worry too much about whether EFI will be used for booting=
-=2E
->> > The cost is likely not that great: use bootstage to measure it as is
->> > done for driver model=2E Try to minmise the cost of its tables,
->> > particularly for execution time, but otherwise just rely on the
->> > ability to disable EFI_LOADER=2E
->>
->> The time intensive part of having EFI enabled is scanning file systems
->> for boot files and capsules=2E
+>> I also think we should give up on Authenticated EFI variables in that
+>> case=2E We get zero guarantees unless the medium has similar properties
+>> to an RPMB=2E
+>> If a vendor cares about proper UEFI secure boot he can implement
+>> proper hardware=2E
 >
->Thank you for your thoughts on this=2E
+>Just to copy in my thoughts as they are lost at this point:
 >
->It does not look like my write-up has helped at all with getting
->aligned on this=2E Do you have any other ideas?
+>> We would need to publish a runtime interface with access to the driver
+>> API=2E I did ask for this when the EFI runtime support was added, but i=
+t
+>> wasn't done=2E
 >
->Perhaps we could at least figure out the 'allocation lifetime'
->approach? It seems clear to me that we have allocations with short
->lifetimes (e=2Eg=2E kernel & ramdisk allocations will remain in effect
->only when booting)=2E Do you agree with that?
+>> It would be possible to create a new 'runtime' phase of U-Boot (RPL?),
+>> separate from the others=2E That will be much easier once we get the XP=
+L
+>> stuff sorted out=2E, since adding new [hase would be fairly trivial  CP=
+L
+>> died as another contributor had a series which went in first=2E=2E=2Eth=
+en I
+>> never got back to it=2E
+>
+>> So for now having the entire U-Boot in runtime space seems reasonable t=
+o me=2E
+>
+>> I'll also mention that it would be nice to have s new-style API
+>> (replacing the old API U-Boot currently has) which uses more of a
+>> module approach=2E E=2Eg=2E we could declare that uclass_first_device()=
+ is
+>> exported and can be called from outside U-Boot=2E
+>
+>>
+>> >
+>> > >
+>> > > 2/ Create an RT variant for the FF-A APIs needed=2E
+>> > >       These RT variant don't call the DM APIs
+>> > >       (e=2Eg: ffa_mm_communicate_runtime, ffa_sync_send_receive_run=
+time, =2E=2E=2E)
+>> > >
+>> > > What do you recommend please ?
+>> >
+>> > =2E=2E=2Ethis is what I would recommend=2E  Preferably in a way that =
+refactors
+>> > the code such that the low-level functionality is shared between the
+>> > DM and non-DM APIs=2E
+>>
+>> Yes=2E The only thing you need to keep alive is the machinery to talk t=
+o
+>> the secure world=2E The bus, flash driver etc should all be running
+>> isolated in there=2E In that case you can implement SetVariableRT as
+>> described the the EFI spec=2E
+>
+>The current approach is pretty brittle, since it relies on putting
+>some of the U-Boot code into a separate area=2E There is no good way to
+>know which U-Boot code should be in that area, since we don't create a
+>separate build=2E If a function calls one that has not been specially
+>marked, or accesses data that is not in the area, then it will crash
+>or hang=2E
+>
+>So, as I said, I think we need a new build, if we want to avoid all of
+>U-Boot in there=2E Anything else is hard to maintain=2E
 
-We agree that we want to have a unified memory management=2E
+The EFI runtime is the most security exposed part of U-Boot=2E We should s=
+trive to keep the attack surface small=2E No matter how we define the runti=
+me (by section assignment as today or by a dedicated build) I would not wan=
+t to have the driver model in the runtime=2E
 
-Memory management implies that memory allocations remain in effect until t=
-he memory is freed=2E
+The only drivers that are required by the EBBR are for resetting the syste=
+m=2E ARM has PSCI as reset handler, RISC-V has SBI=2E These are invoked by =
+simple ecalls=2E
 
-This must be true for all allocations whether it is for a kernel, a ramdis=
-k, for loading a file, for an allocation by an EFI binary, or for anything =
-else=2E
+Any runtime device drivers for variable storage should not be in the U-Boo=
+t runtime but live in the secure world (e=2Eg=2E OP-TEE)=2E FF-A is the new=
+  ARM protocol for talking to the secure world and hence fits into the pict=
+ure=2E
 
-If boot commands like bootm allocate memory and free it after a failure, t=
-hat time will be short=2E
+@Abdellatif=20
 
-If a file is loaded and never unloaded that memory allocation must stay un=
-til the OS takes over memory management=2E This is what is missing in U-Boo=
-t=2E
+Does an OP-TEE module for managing EFI variables via FF-A already exist? F=
+or QEMU?
 
 Best regards
 
 Heinrich
 
-
-
+>
+>>
+>> [=2E=2E=2E]
+>>
+>> [0] https://www=2Eyoutube=2Ecom/watch?v=3DUdQk0SCUAlA
+>> [1] https://lpc=2Eevents/event/17/contributions/1653/attachments/1338/2=
+682/Plumbers%20-%20EFI%20setvariable%20problems%20and%20solutions=2Epdf
+>> [2] https://git=2Ekernel=2Eorg/pub/scm/linux/kernel/git/next/linux-next=
+=2Egit/commit/?id=3Dc44b6be62e8dd4ee0a308c36a70620613e6fc55f
+>>
+>
+>Regards,
+>Simon
