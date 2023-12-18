@@ -4,80 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1ADAC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D0BC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA228700D;
-	Mon, 18 Dec 2023 16:02:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 02ECB87E18;
+	Mon, 18 Dec 2023 16:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IUo+8S8S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hh3eJPUb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5522F87E5A; Mon, 18 Dec 2023 16:02:41 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 6321787E22; Mon, 18 Dec 2023 16:02:41 +0100 (CET)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52EB687E22
+ by phobos.denx.de (Postfix) with ESMTPS id 59D7187E2E
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5e611740893so9960117b3.0
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-6da5278c6fbso2482228a34.3
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702911753; x=1703516553; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NOE8Vu38wz4RXEK7ByWe31GH4ffU6lUE7Seb+5aQC88=;
- b=IUo+8S8Su+wUJzugD2pDiTXS6eCpvBgW/WktgZw7drF/9u5uXLQoBTClCWAegTMey3
- B4mm8SC37IucquA/k1HMoDGpU+NVRY5Vrr3YaEc/RyjjAgbx3q8gU9wN1t0rFWbKUHqh
- GqAuyhBy3mTutUW4WU3fE0/GI4S3ROUw3li8U=
+ bh=/HskKR/fPit6ZjwlrMqCjjo/Dpe/DBKcg9KAVpTZRJw=;
+ b=Hh3eJPUbc0ralHLX3XRrMvIkVA9AAixnJ3b10XSfUKME6vDu/DcLa+5mrIbvCjWv4E
+ R9SLl7duo4fEjWiBil43xg5EV5CuWgKETnUkBCIc1X9bs5U+IysQxT40qyHddSXctdB4
+ SSLJKQNHwrfcAdl1hLlh/UH4joxJNEVtVTYm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702911753; x=1703516553;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NOE8Vu38wz4RXEK7ByWe31GH4ffU6lUE7Seb+5aQC88=;
- b=DCINJgIegJG4Z5dlzfyJsArA8eRwFem6n90U5TLIs4deAlz56VvC/9AGUhQeHZVy2y
- E6Bia6zLxmEv6d6/RpRvnH4tTFLVXCR8uGqSBprWxJUsB6ytajWAjkx1YueYWmhrTC5L
- V0duGh1ip/9ygj+7uyeyF34p6io9+l3ZH1p+7knJUqS2gIusx4Y97bzlVA8hZVBszfcC
- vXy0w0ba9Pb/Hq4Q0BjfV/kmqoApFNbrZ51nPALUfPU1g7qxu0I/gtbMY9lZ7tK27VJx
- wsK0Hj+2Czd55LYwZHVEw58R6r3QpMIfoFnt6vKGdP6QKV5woDQvbll/CRrDvvAgORiM
- l3sg==
-X-Gm-Message-State: AOJu0Yy7c/P+XSTFC1YfSibYAyKbDtVBF/we+QgYlqqxxFiVtGSSTdK2
- 7ZwFyBzgKrNy9/CQWUF2vWbTgrqvpnWdKAoG6GI9Cg==
-X-Google-Smtp-Source: AGHT+IGkpuA9JLHouElLqUMPURRsN/zVQuYYB2VnEK5ZF3xoi6XPaWZD2Fy+2czEO/xwWZf/YsEHevDM5Dxd+27ioTY=
-X-Received: by 2002:a81:6d51:0:b0:5e5:c45b:10e6 with SMTP id
- i78-20020a816d51000000b005e5c45b10e6mr2883556ywc.7.1702911752793; Mon, 18 Dec
- 2023 07:02:32 -0800 (PST)
+ bh=/HskKR/fPit6ZjwlrMqCjjo/Dpe/DBKcg9KAVpTZRJw=;
+ b=YdKGOLBqS0vHnIdoXxrwOw91d3IxP4UjY7ddyARAhxS03dq/XEyWfmY22HIG/9YpdF
+ iZw+aTRXS8sT8+133951v5wS/GLtiZUE+2oDz9ZVzLz59+s2WhzpeNFj+BrtL6xvK+kF
+ QrKK+fKMhQgPVAlCrCmtUsn212A1TzhaaD+oF1Sii9sY7k8k/6aeI99CFtYjqp73X+aY
+ sinK+qB5B3faOr+CNSGYlUxGdmpK+jGpujxFdaiL1TcJkZwIayDahqO5BevUwsWIW1I8
+ +Rj7yuMgxaFeQnNXqjo2pMPJjlj1rr8JK5V2uGn43qDt6VPx3KqbKPgscOqgi4/Xl1F+
+ Qslw==
+X-Gm-Message-State: AOJu0YwBrLd9+vVmIQwM9oCFYPA4PVmJrGh5Afb9EVuGoChn7p2eSrLe
+ JCk/jaM7T+Ejm8S26+vhKPqjrEbey0Sv6hR6cdFCKA==
+X-Google-Smtp-Source: AGHT+IFMH+7nFNV6EHD8kve1Y2a2hmjuuiS9WZW6mRFHygkhsj2RHLlf9UTWTWKDie+A5Nk8mzXVyYz9k/jqbx6vpYs=
+X-Received: by 2002:a05:6830:1399:b0:6d9:deb0:d31f with SMTP id
+ d25-20020a056830139900b006d9deb0d31fmr15993982otq.15.1702911752815; Mon, 18
+ Dec 2023 07:02:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20231207091850.17776-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
- <20231213201655.GF2513409@bill-the-cat>
- <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
- <20231213205634.GK2513409@bill-the-cat>
- <CAPnjgZ2hV25e1zjrNqKqd-doO9A1L9H58oToDANOSEQr5jwexA@mail.gmail.com>
- <20231213230545.GM2513409@bill-the-cat>
- <CAPnjgZ0L+kVG0DWExwDJXYG5FfObq34LULV=se9T50OvcmhfMw@mail.gmail.com>
- <20231214131139.GY2513409@bill-the-cat>
- <CAPnjgZ17b7sZX-dey5mdXJJ17g5ho_U2UZkawyFYU19R-gidhQ@mail.gmail.com>
- <20231217184100.GC2513409@bill-the-cat>
- <06036b6f-70b8-4b80-823d-d9716cbbf160@linaro.org>
-In-Reply-To: <06036b6f-70b8-4b80-823d-d9716cbbf160@linaro.org>
+References: <20231217114457.70128-1-heinrich.schuchardt@canonical.com>
+ <CAC_iWjJ+VUY+FVyyh8fib+i=qy3K0fDwvcjTfmJMfJkSW25SQg@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ+VUY+FVyyh8fib+i=qy3K0fDwvcjTfmJMfJkSW25SQg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:39 -0700
-Message-ID: <CAPnjgZ2wcmGOjbVdNCyzSWNGzBPjPqcjdVcbPu8J2wadnxFRrQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-To: neil.armstrong@linaro.org
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- sean.anderson@seco.com, heinrich.schuchardt@canonical.com, 
- mark.kettenis@xs4all.nl, u-boot@lists.denx.de
+Date: Mon, 18 Dec 2023 08:01:48 -0700
+Message-ID: <CAPnjgZ2gnrdULFVLqHEXAYvb6crBCg_LMzFNC9f62vND6jjJsQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] cmd: CONFIG_CMD_BOOTEFI_HELLO_COMPILE dependencies
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,34 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
-
-On Mon, 18 Dec 2023 at 02:54, <neil.armstrong@linaro.org> wrote:
+On Sun, 17 Dec 2023 at 10:35, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On 17/12/2023 19:41, Tom Rini wrote:
-> > On Sat, Dec 16, 2023 at 11:46:18AM -0700, Simon Glass wrote:
-> >> Hi Tom,
-> >>
-> >> On Thu, 14 Dec 2023 at 06:11, Tom Rini <trini@konsulko.com> wrote:
-> >>>
-[..]
-
-> > And my point with the above is that other SoC maintainers (Neil, for
-> > amlogic) have said (paraphrasing) he does not want to do N smbios node
-> > patches. Which is why Ilias' patch is if not 1000% correct, it's Good
-> > Enough and will, if it's really a problem to have all lower case
-> > information displayed, spur people to see providing that information as
-> > a real problem that needs to be solved. Or it will be seen as good
-> > enough.
+> On Sun, 17 Dec 2023 at 13:45, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > CONFIG_EFI_LOADER cannot be chosen for ARM v7m. Remove the superfluous
+> > dependency on CONFIG_CPU_V7M=n.
+> >
+> > Fixes: b20bb09b2108 ("efi_loader: restrict EFI_LOADER to armv7 and armv8 on ARM")
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  cmd/Kconfig | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 748b959961..0ae5bcd981 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -373,7 +373,7 @@ config CMD_BOOTEFI_BOOTMGR
+> >
+> >  config CMD_BOOTEFI_HELLO_COMPILE
+> >         bool "Compile a standard EFI hello world binary for testing"
+> > -       depends on CMD_BOOTEFI && !CPU_V7M
+> > +       depends on CMD_BOOTEFI
+> >         default y
+> >         help
+> >           This compiles a standard EFI hello world application with U-Boot so
+> > --
+> > 2.40.1
 > >
 >
-> If some platforms requires a more "correct" smbios dataset, then they're
-> welcome adding the required smbios node, and it's perfectly understandable,
-> but for the other community-maintained platforms we need some valid fallback
-> data otherwise they'll be de facto excluded from some tools for no valid reasons.
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Do you know which tools require SMBIOS tables? I found sos and another
-Redhat one.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
