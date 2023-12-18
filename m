@@ -4,71 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6484C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:02:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80E9C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:02:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 417B987E2E;
-	Mon, 18 Dec 2023 16:02:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 240BC87E44;
+	Mon, 18 Dec 2023 16:02:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cYbCrniK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bMBlgqMT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68BDA87E30; Mon, 18 Dec 2023 16:01:59 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 0967D87E08; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E90287E1B
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:01:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B13A87E26
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a1ca24776c3so814054566b.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:01:57 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-6d9f069e9b0so2731482a34.3
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702911717; x=1703516517; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702911749; x=1703516549; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=teOZNP/5GVaJ4WSwIQ61OKImPm325QYo7v7uaatujeU=;
- b=cYbCrniKiAy3IGglBW7vfYOZ2keOfdK9iKgvWN+0KZfVJz2ZGWkWTSdGcq5M9kuWwf
- 0JgU+nRKwomuO8jxDicM6imnfm9L4+YEivqYR6uLvN0XnbHzzmvMawdLYuiab9BEsM7x
- hxl2uJitXG+kACeTlVVI9g6IzVNLYUU8t30FU=
+ bh=a3wteGXy3SsC89x5yHRZy36gldGaYHlEXsDFQotQ5vk=;
+ b=bMBlgqMTRUWUcEhBHFDVdzwcvSJBzuAe4VQ3o9kIvB7ieoeInFU7if0mCWOeyPSHxc
+ F8AnsjJFITiqZTUlRDgqYK6+U1mNCMpeK7LwsVPtHDEk0/sKB2E80ke24VYty+p6hPzz
+ a4C0RNQHn0W12ZDYOXr0+MO/lc5vBCIfEhc0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702911717; x=1703516517;
+ d=1e100.net; s=20230601; t=1702911749; x=1703516549;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=teOZNP/5GVaJ4WSwIQ61OKImPm325QYo7v7uaatujeU=;
- b=pwoZAayJiiVGAym08BzZKaoeTy/xqwV8Y8KVwUBHKwzY+s8O4D0ewflLah8G7FLkjU
- kgaRhA61X7lcSCwS20EmsTWDV4EB0tYSsRtp7/QDvhifqSDY38osktWJznTMF8VNA9A+
- nGkCaYnA7WbsFNz5DufHYVPVSyT6YHNpbb5FppFx0g6KGuSAlVz+smKIRJURzbpMZyV/
- WvH0dZHQgI9rgLDdRWzK2IMyrtI85l9ndJhMLWrl/02iAUvq9hKC89Qt4ggex8B4zbqE
- 9+jgdQ+Tx88AWZyXwps5AcYrF0O909N+EMe6CRRWFXv593s39dkdzY4Igk2XQfNJebfX
- 16AA==
-X-Gm-Message-State: AOJu0YwzqohZe+g0bdmZFEAsd6YfKqWihto3IzLZq6Rf/t+FmwGNb5fR
- tCkzbqVU8ZT6y3qIXkMfc9ZRV5bbIrB3Hr4/3aJg55sqS01gg2p1Nrw=
-X-Google-Smtp-Source: AGHT+IExT0LiYf+lmgEwhq9E5x+RWmQS6TUD/xjEWzsFW9oZaonakiAcZVc0aFsZndSVceb46K7ANxUgxpmrZ5fYRA4=
-X-Received: by 2002:a17:906:55:b0:a1b:7700:2c0b with SMTP id
- 21-20020a170906005500b00a1b77002c0bmr18100819ejg.19.1702911716845; Mon, 18
- Dec 2023 07:01:56 -0800 (PST)
+ bh=a3wteGXy3SsC89x5yHRZy36gldGaYHlEXsDFQotQ5vk=;
+ b=uaxA9XeXawBkezMkdD5h33TcYr3U634JcoUDnAgrNGQWbY5bt0eexGek9gOB5d4EF3
+ rnIVvUkdxa1WxS2QWg8OGTE7tQVzOfZD/17eq+D7kwLvFN1GPehHcbugZbIakmpAlj1s
+ 3VCDqagQ8Xanjb7GUCY6ucYIJ1L9Y5HWKgnJmU+wUsaeSn/VhUn9SCWRRHUBd9nqUlUR
+ lBExhVoiLnl4LTAPWTYTGfZYXaASAkDOly4EpHd3U2XncvJbBw8eqg4vJJAxAi260CDL
+ f7gO4bM+WXyvVd8maNtKUOAO/SyFYLAKExRROCuh5cLiLM5SSOfFZ2sLXqf2mUj5T8aj
+ n/FA==
+X-Gm-Message-State: AOJu0Ywc7oLgR6Bqmdd6B1B86a0kOLXpnpuq4xGFyCWSIp5DuDgP3L6C
+ QYE0Nk+8qM8wMFGuVt0cCukp8uGoUR8yCwHae3cn/A==
+X-Google-Smtp-Source: AGHT+IG4WXrZykdvNrbwXahinqIuyBvQ3OQ3NhNL9SaHYoQ6tVyhNsmrkEOaekrm69lgozuV70YJkNl1d7GIceE2BPg=
+X-Received: by 2002:a05:6830:138a:b0:6d8:a456:d99d with SMTP id
+ d10-20020a056830138a00b006d8a456d99dmr16857205otq.5.1702911748709; Mon, 18
+ Dec 2023 07:02:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20231112205516.183410-1-sjg@chromium.org>
- <20231112205516.183410-4-sjg@chromium.org>
- <082aeedd-4371-4ba4-a29a-bf0f0730b77b@gmx.de>
- <20231121132110.GQ2513409@bill-the-cat>
- <CAPnjgZ30CjQZ0+DMp2gy0HzrnRsjcY5NMi1YVVRQiN8UG-5oBg@mail.gmail.com>
- <c8f1c7cf-346f-42b4-9652-69476e763d5f@gmx.de>
-In-Reply-To: <c8f1c7cf-346f-42b4-9652-69476e763d5f@gmx.de>
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+In-Reply-To: <20231218023842.281336-4-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:35 -0700
-Message-ID: <CAPnjgZ2DM55YjF845k2uGscwr6-yrQ7KU=mZFsoo9K-6Gik1WA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] efi: Avoid using dm_scan_other()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Mon, 18 Dec 2023 08:01:46 -0700
+Message-ID: <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
+ dependency
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,61 +83,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi AKASHI,
 
-On Sat, 16 Dec 2023 at 14:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> On 12/16/23 21:46, Simon Glass wrote:
-> > Hi,
-> >
-> > On Tue, 21 Nov 2023 at 06:21, Tom Rini <trini@konsulko.com> wrote:
-> >>
-> >> On Tue, Nov 21, 2023 at 01:18:09PM +0100, Heinrich Schuchardt wrote:
-> >>> On 11/12/23 21:55, Simon Glass wrote:
-> >>>> This function is defined by bootstd so using it precludes using that
-> >>>> feature. Use the board_early_init_r() feature instead.
-> >>>>
-> >>>> This requires moving quite a lot of code into the board directory, butt
-> >>>> this is the normal place for code called by board_early_init_r()
-> >>>>
-> >>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>>> ---
-> >>>>
-> >>>> Changes in v2:
-> >>>> - Drop duplicate acpi_xsdt patch
-> >>>> - Put the board_early_init_r code into board/
-> >>>>
-> >>>>    board/efi/efi-x86_app/Makefile  |   5 +
-> >>>>    board/efi/efi-x86_app/efi_app.c | 205 ++++++++++++++++++++++++++++++++
-> >>>
-> >>> Our target should be to enable building the EFI app on all architectures.
-> >>>
-> >>> Only x86 specific code should be added to board/efi/efi-x86_app/efi_app.c.
-> >>
-> >> A later enhancement to make U-Boot as an EFI app more generic would be
-> >> good, but outside the scope of this patch which is moving generic code
-> >> out from "lib" and in to "board".
+> Now it is clear that the feature actually depends on efi interfaces,
+> not "bootefi" command. efi_set_bootdev() will automatically be nullified
+> if necessary efi component is disabled.
 >
-> I cannot see that this patch is moving any code our of lib/.
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>  net/tftp.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
 >
-> But why should we move generic code into board?
 
-It isn't really generic
+I have the same comment here as the 'fs' patch.
 
+> diff --git a/net/tftp.c b/net/tftp.c
+> index 88e71e67de35..2e335413492b 100644
+> --- a/net/tftp.c
+> +++ b/net/tftp.c
+> @@ -302,12 +302,10 @@ static void tftp_complete(void)
+>                         time_start * 1000, "/s");
+>         }
+>         puts("\ndone\n");
+> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+
+Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
+is not enabled?
+
+> -               if (!tftp_put_active)
+> -                       efi_set_bootdev("Net", "", tftp_filename,
+> -                                       map_sysmem(tftp_load_addr, 0),
+> -                                       net_boot_file_size);
+> -       }
+> +       if (!tftp_put_active)
+> +               efi_set_bootdev("Net", "", tftp_filename,
+> +                               map_sysmem(tftp_load_addr, 0),
+> +                               net_boot_file_size);
+>         net_set_state(NETLOOP_SUCCESS);
+>  }
 >
-> >
-> > This patch was marked as old /archived in patchwork so has been
-> > forgotten. I have marked it new and non-archived in the hope that it
-> > can be applied to -master soon.
+> --
+> 2.34.1
 >
-> There is nothing x86 specific about the code. Generic code should be in
-> lib/. Please, provide a new version of the patch.
->
-> >
-> > I believe that having the EFI app support bootstd could be a useful addition.
->
-> That was not disputed.
->
-> Best regards
->
-> Heinrich
+
+Regards,
+Simon
