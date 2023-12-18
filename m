@@ -4,77 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D73C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 12:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284FEC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 12:57:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0384A877D0;
-	Mon, 18 Dec 2023 13:41:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id DA15587E00;
+	Mon, 18 Dec 2023 13:57:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="CXXvSkc1";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="dZazbEvO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F087876CF; Mon, 18 Dec 2023 13:41:08 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F7C887E05; Mon, 18 Dec 2023 13:57:34 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::607])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CFDB876CF
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 13:41:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2648F87DFB
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 13:57:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5d2d0661a8dso22275477b3.2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 04:41:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702903265; x=1703508065;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vxz9V0XnG4nkiD7BLYW3z50drHaAOJDUF7jRzF7XLRM=;
- b=CXXvSkc1xkxGVlmZ2sWbJPCxX2Dgc48wlapxtrgXWLpbLjtfwm6rgx9VgBYHhomEnq
- dcqrCInf7+zDzSxBum0ihq3rHpRARG45qjn3uAqe8UFLBoldUkJwvLmupGIT5SqxPyF2
- nV2st4nrYnFzZdzE8GbvNK/fzuVe0dFBkd66c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702903265; x=1703508065;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vxz9V0XnG4nkiD7BLYW3z50drHaAOJDUF7jRzF7XLRM=;
- b=WfF0gjFV1wjCx84tFbJPh7uSj8Is82bavqbC+Luot02y7rRj508D+mjEHY3pbO7n2v
- GcRqgkGkh1vUaR/KU+BMgIvul83mKQpsDFtbixN30zYaBI5N9djzKITPFE0hRhJ4U+oT
- GUbHvqjvymJFfPOQtDVAkf7P/AUXACBkfFP+cwuvryfJyGBeI+in6ls8vPtnDt4H67Y7
- /Buw/UWjg5RWoKVjThp4CY9s5hNie3OGro1wkRwGkDtSQqJ9whV1b5X+P9vlp7M99iAV
- dZBCfVcxH2+mhhIy/N2TjShTE5yBw1SOSFdSNqBBU8h6aZS8WXSIdADxXRRsH2XKkemi
- eQ0w==
-X-Gm-Message-State: AOJu0YzGQZdGZR1UJmXhBT+8wQ2M0D1FrW/LOjjMeaM83hq6i4SyZY77
- gHiS5WgKfD60GAMuQe+SPfUB19w1oerfAiHcZVLpfg==
-X-Google-Smtp-Source: AGHT+IFltFRB5ag7DFzIIwVoOYfkqS1UoD2rCY2AsKr40FmvIaVY8ZlfbIAmTg2vF0O1mvVJc49V+KCieGfVN6VOu3Y=
-X-Received: by 2002:a0d:f904:0:b0:5d7:1940:b36d with SMTP id
- j4-20020a0df904000000b005d71940b36dmr13382840ywf.57.1702903265074; Mon, 18
- Dec 2023 04:41:05 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=NO+KEhVGCLNH96YVpi5v41ttBzFDutkxLRVD2NUdDVrHAuwv7u9WbZhaRfhQpcsw93aNhY5YjpB6F4Pc1npuAMR02H0PQP88V7mo/KK10s3B21OnFqbSy0FGfTp+GHXZgYGlsa+Oo1EjuvUPfA47E5ORTMDzC7e7d9yH30u3W315C04bTu/xRvsKFP14v12xKVr4aUtfBx8fiDgXMbx/30e2GvkiTLbFUWdpLI/vgpAu6ZBtXi4XvyE/Gd7oUWmGBPoTWunoqYGQhSaxYVrQAm8os6EyYtw85PoNbGj9eUKHc1tSowuIp6LR4DhX26QCYAg0/bLwUSDbmZ6j0ND2rw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nvYUDy7ORI0z/4kFQbhMRyGsNuyzOx0UzVP5le2prRM=;
+ b=Jhwz8+Azwz8OhmE5G2Ibm2UQY6MjuUFAGnIYorME7+5QkJ393yYG+nqJQkLYVgVQFB4DTy/9gkY8XRQOiESs69jXS6+ADza7ejRAHcyFm2O9/kXP+wlqDIuXuqO9gKWRitM14U02NfuDDcbo2ni5mG4/Q0GxuslRsrPNXzx3iV2TMPFLK526Yqg2NzBR6Nmn6vDJHg96BtAdzhLRJJKusZLBAedr2k+UZEYUzTlyd70dAzI3VVXc4LGSIwdkTkeqhuV6+c9d2KY0ohGkDwKBAICxDfOG0SKfoufRyI4ZFyLo6scdJmPkO6BakHJwoTvL7XedQylCUGkng2agc9a4PQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nvYUDy7ORI0z/4kFQbhMRyGsNuyzOx0UzVP5le2prRM=;
+ b=dZazbEvOQJJEN4ZzL6D0SRakkGnoMSkYpTAG/V3xFUn9/Ed6JLPdHYxEdYOjE6idJ5hyaFWx+7n6vWbM2QDsIusR2c9yKAdymOJ6pwhfIw+K7dP4wryfbWreHL59QODM/biGAhUMP9QZ3eEjSxoCHVqEHXuOkotRKZxcLu0H1v4=
+Received: from SA9PR13CA0057.namprd13.prod.outlook.com (2603:10b6:806:22::32)
+ by IA0PR12MB8352.namprd12.prod.outlook.com (2603:10b6:208:3dd::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.37; Mon, 18 Dec
+ 2023 12:57:27 +0000
+Received: from SN1PEPF0002636B.namprd02.prod.outlook.com
+ (2603:10b6:806:22:cafe::47) by SA9PR13CA0057.outlook.office365.com
+ (2603:10b6:806:22::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.16 via Frontend
+ Transport; Mon, 18 Dec 2023 12:57:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002636B.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7113.14 via Frontend Transport; Mon, 18 Dec 2023 12:57:27 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 18 Dec
+ 2023 06:57:25 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+Subject: [PATCH] arm64: zynqmp: Describe ethernet phy on kd240
+Date: Mon, 18 Dec 2023 13:57:22 +0100
+Message-ID: <61f89dc055f191fd4138b80bb7e3217d814502f5.1702904236.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-References: <20231211085939.5478-1-jagan@amarulasolutions.com>
- <20231211085939.5478-14-jagan@amarulasolutions.com>
- <f59bcbea-fd04-864f-b95c-5b4c4872c28d@yandex.com>
-In-Reply-To: <f59bcbea-fd04-864f-b95c-5b4c4872c28d@yandex.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 18 Dec 2023 18:10:53 +0530
-Message-ID: <CAMty3ZArSzsRQjNc-aB=JZF_6LzkD+OQZA_E=WcFg7dtDv8TVA@mail.gmail.com>
-Subject: Re: [PATCH 13/17] video: rockchip: Add rk3328 vop support
-To: Johan Jonker <jbx6244@yandex.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>,
- u-boot@lists.denx.de, 
- Da Xue <da.xue@libretech.co>, Jagan Teki <jagan@edgeble.ai>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=737; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=yrW5IEiM1lquaFwfEqQWN10aajAg6PfNxEWYSUeA8MI=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtQGx7Um8uUpp3INnnLevxj3ynvyZ/tJV0seHzi/pV96s
+ eJciXvGHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAiGTIM890eKYV9XXvqtka6
+ op7XlSqtFb+2+zHMU87gDJb4+PxI5oWbfovakp+5BSrmAQA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636B:EE_|IA0PR12MB8352:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0cf4855b-25a9-42f6-bc91-08dbffc8e329
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ZeteKteH5JFgJd8SvYct27FGM7/meGuWn4XQdiH0c7EgG9Wd7iDOy0T7fF9nYzTavrVEptacQggtvr0eCcRbqBW1RLd/cIakWi4GCIMJ96U3ydyoINoo2Re6RFnPpLEz0HSpfXaQE/5hak7bNGxbnQbRHrmZJG3SSsink61vpJEv25IZGoMMdNI/AMf/fZxFTgZp7Kia3/HUkhuHn1xQrk6RVXuxsNyeziH4jG5KEl+qlaJ6iJTUkkdeQC2KvqdgkEslqqNMtZ1vlLo9KD2plCbYQr+GvLb9X03bQ8PzHTu0zd5bjx4nCnhOtA74rVzwdh9VuUOTHIofpH8oUX4WrnbHlqOz35xzydEsQ4MPgAksOaYKKQXmFN57WixFzdZ9KofPRvN6iBywOPwltJIClRRDg8iAHkVsUFjRlJWDxkAQBOJMW5yD3QcGdxUTy8ItxUItmTakhZ+H5NPtdhV/27JvDr1un0PApKbAI9BllbIW7hUE4fvDHRqmgdXzO6dQ3krnv9Zmk5YN5Gkx7SXQRXjinVyNLQ1qGmbn5cfh9ysyCdNB1K7wkvagxL6HJohnRXzsfv7lt39Cnkqm37HN1M7acc248+f8Wn/c8LAljwdQq1rCdHa4vCMPxw1SnMk0xlrRI5YhfoeFw8reRZ5+hAfYUIKnjS6nv4/CeBhMzZ6VvaM1h9gv6Oqf7ewMQDqhD/5n3PQ7nfq6TIMzOslM6h4GN39HYPv7jF1M2guyTWmLZZcky/oGayHTex8kvE3oAt/1Tvk6YMT6KlUsanBhVA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(396003)(376002)(346002)(136003)(39860400002)(230922051799003)(64100799003)(186009)(451199024)(82310400011)(1800799012)(36840700001)(40470700004)(46966006)(40460700003)(40480700001)(26005)(2616005)(426003)(6666004)(16526019)(336012)(82740400003)(44832011)(356005)(81166007)(86362001)(36756003)(8936002)(8676002)(110136005)(70206006)(36860700001)(478600001)(4744005)(2906002)(5660300002)(47076005)(41300700001)(316002)(70586007)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Dec 2023 12:57:27.2137 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0cf4855b-25a9-42f6-bc91-08dbffc8e329
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636B.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8352
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,34 +123,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please don't top-post.
+Describe ADIN phy present on KD240 via ethernet-phy-id compatible string.
 
-On Sun, Dec 17, 2023 at 4:15=E2=80=AFAM Johan Jonker <jbx6244@yandex.com> w=
-rote:
->
-> Hi Jagan,
->
-> In  your patch U-boot users must add a new file for each new Rockchip SoC=
-.
->
-> With the VOP2 introduction the VOP1 structures and functions are frozen/s=
-tabilized.
->
-> My proposal would be to use a file simular to Linux rockchip_vop_reg.c an=
-d port it to U-boot as is done in the manufacturer tree.
->
-> Together with a simple basic rockchip_vop.c to start with.
->
-> Not sure if we need a kind of DRM frame work.
->
-> Question: What do the U-boot maintainers think of this DRM implementation=
- in use by Rockchip. Is that a route that useful for mainline?
->
-> Let me know your ideas.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-Yes, I got your point-based rockchip-bsp tree of DRM. Technically it
-wouldn't required as we have created this structure before and more
-likely the new RK SoCs like RK3568, RK3588 are working on this tree as
-well. Why do we need DRM framework as long as this seems suitable?
+ arch/arm/dts/zynqmp-sck-kd-g-revA.dtso | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Jagan.
+diff --git a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+index 8d0ddecdc14c..298e80265e2a 100644
+--- a/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
+@@ -120,6 +120,8 @@
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 		phy0: ethernet-phy@8 { /* Adin u31 */
++			#phy-cells = <1>;
++			compatible = "ethernet-phy-id0283.bc30";
+ 			reg = <8>;
+ 			adi,rx-internal-delay-ps = <2000>;
+ 			adi,tx-internal-delay-ps = <2000>;
+-- 
+2.36.1
+
