@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF66C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:04:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92216C46CCD
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:04:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC3BD87E60;
-	Mon, 18 Dec 2023 16:02:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55B6D87E39;
+	Mon, 18 Dec 2023 16:02:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GhiYWNPo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dHM+RChJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D65DE87E0A; Mon, 18 Dec 2023 16:02:46 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 2146887E0A; Mon, 18 Dec 2023 16:02:47 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D4F587E3A
+ by phobos.denx.de (Postfix) with ESMTPS id 6505987E37
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-5e76948cda7so554067b3.3
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dbd4608121fso359873276.0
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702911753; x=1703516553; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1LZFuybsunCdBYorS01/1fmt+YuOdA2ZcOSqPsl/CLU=;
- b=GhiYWNPolAreUR22FXXDnvF/MCSMwraDQ/af6Y8Im34pWyjteIyveggmKduYCYzzYF
- 4spx2ziNRzzsDcIGK8KBKun/EmiKgW4B2DFGN2gdckHFanp4XSymbeyi5BpXjYSe6cw0
- 29V8c3dvEtKdswj6As/JLRtcRQQYV9r6ghNk4=
+ bh=juYM4HsBAk2fy1jHONRBYzW9qe+khotBjYUfJZORppQ=;
+ b=dHM+RChJf9h/TkkVsPpEjTAvd/v+aenoZ99i4M6GD7X+VKrVejfnm9D/+LlQRZ1qev
+ lUZhNGyyMCEMUM5YfPsaHrLgq2NauiXIeFgyzVfpUqXdOzDlypKyNnalTjTK2UiNFlSf
+ UnfBD5xF2uS8ub316URuqucQlKDDIwGQiTSPU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702911753; x=1703516553;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1LZFuybsunCdBYorS01/1fmt+YuOdA2ZcOSqPsl/CLU=;
- b=kMoevv6RYt4dBmzBW/hhgfuhvwxQ99Bz4KobIq8ehqEvOEqO8poYccoKqUp110t3u9
- FYgcarjNaolyqsbFs0dh+fKh3Fo7tWcnRUUi/C+I+JfIHt2NBPdBkqfa6JFJBoxg/vYh
- mhkkid0925pqOgtMzawIGSYDBndqwruiHEnENMMwoQQfuZG06eQbHNxd0a5084fGAddU
- zjIfgOsSZaJ8cQmd4osRMnDlBGmP82d38lfXj0FLeP3ChGOGg+9q5QfMJA24FOAqAc03
- PVW3sBzIvzWIjc9rcc6yXs5MCA8ILc+i36LgdyQfdizNhADHfRsy4s+T7yWm8x3MRHFC
- XbWQ==
-X-Gm-Message-State: AOJu0YzCJWznu1C1tAgkQfaNBqkxMs8QEkVgFharsO2SOPl36GFkvf3j
- M1IBT5Zv0QAqwa/abhOeyUqkytFP+/Y9EOxX8WGQxw==
-X-Google-Smtp-Source: AGHT+IF/6cZPrRqki15hBAQxZq9r6MkyNkcJuBAckkE/5U1gShhqdUsgY1yWmZM46Mp1EkcgX8I6KJ6X2Coh2as2eRM=
-X-Received: by 2002:a0d:f546:0:b0:5d8:b575:9681 with SMTP id
- e67-20020a0df546000000b005d8b5759681mr13337666ywf.80.1702911752811; Mon, 18
- Dec 2023 07:02:32 -0800 (PST)
+ bh=juYM4HsBAk2fy1jHONRBYzW9qe+khotBjYUfJZORppQ=;
+ b=q90cHawEpXuxr9NGqDziMbZU53GhQaFIK6hsUDZ4IJ/1IMZD8TCVlSyZK/RevXSJow
+ s81dQo2g+lZ9PYw6t8idHHbndktU3NvYE/w8T5q/y4K/7f8SpGKG1/KntUSzVKGin02C
+ dW6tLDXbMK4BSKIvbWaoOZy7ZpCZvyGiIziRkDeExrAjkHDRttKCUmFCWtPlqYBb9EHO
+ Q9zkk2TG7y9Hdl3k10LAeSV0UROwHHGZ+mkDVmnukZP1zLwqmA7CDWjyam+dN0ifp3n0
+ IxZMWdvRb6jHekGrU2YJ1EQ/VDvp5wipyFIKrzNKoGDAqlgPtlqGWRo1O89IZ/QQoyty
+ nL7Q==
+X-Gm-Message-State: AOJu0YxudgdS8P5DKQ8+b8+XVpxPEGrZVI2FseywxNFgo+jQ1uZPkzyN
+ C6l2NAm3z7skRYzTzL8+pKDIfEsT6+SPWM2G4wMgYQ==
+X-Google-Smtp-Source: AGHT+IFN+CK60CwS4LXUtrhsNBgdUe3RZVgxSDZfYKpnV6E++dajDdM0QJVT+UClJ0HGiQjZdvR2JNlKCGqWg3pULTk=
+X-Received: by 2002:a25:2e08:0:b0:dbc:f196:eadd with SMTP id
+ u8-20020a252e08000000b00dbcf196eaddmr2998116ybu.16.1702911752786; Mon, 18 Dec
+ 2023 07:02:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214155346.GB295924@e130802.arm.com>
- <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
- <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
-In-Reply-To: <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
+References: <20231218072428.1802969-1-sumit.garg@linaro.org>
+In-Reply-To: <20231218072428.1802969-1-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:44 -0700
-Message-ID: <CAPnjgZ1TsFCzTd2pD3j4SoAhnJWw1qz90DfEzsU6Y-4bSkEf7A@mail.gmail.com>
-Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Abdellatif El Khlifi <Abdellatif.ElKhlifi@arm.com>, xypron.glpk@gmx.de,
- Drew.Reed@arm.com, u-boot@lists.denx.de, nd@arm.com
+Date: Mon, 18 Dec 2023 08:01:47 -0700
+Message-ID: <CAPnjgZ2rYujD-yb=Zgz=bxe8iS3MGSdrL9KfVsDqz8R_H+FVfA@mail.gmail.com>
+Subject: Re: [PATCH 0/7] Add SE HMBSC board support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
+ lukma@denx.de, seanga2@gmail.com, marex@denx.de, laetitia.mariottini@se.com, 
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com, 
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,112 +83,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sumit,
 
-On Thu, 14 Dec 2023 at 12:47, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Mon, 18 Dec 2023 at 00:24, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> Hi Mark, Abdellatif
+> SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
+
+Could you please add a doc/ file for this board and explain how to
+build it and how to run U-Boot on it?
+
+> difference from db410c is serial port where HMIBSC board uses UART1 as
+> the debug console with an RS232 port, patch #1 - #3 adds corresponding
+> driver support.
 >
-> On Thu, 14 Dec 2023 at 18:47, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
-> >
-> > > Date: Thu, 14 Dec 2023 15:53:46 +0000
-> > > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-> >
-> > Hi Abdellatif,
-> >
-> > > Hi guys,
-> > >
-> > > I'd like to ask for advice regarding adding EFI RT support to the Arm's FF-A bus
-> > > in U-Boot.
-> > >
-> > > The objective is to enable the FF-A messaging APIs in EFI RT to be
-> > > used for comms with the secure world. This will help getting/setting
-> > > EFI variables through FF-A.
-> > >
-> > > The existing FF-A APIs in U-Boot call the DM APIs (which are not available at RT).
-> > >
-> > > Two possible solutions:
-> > >
-> > > 1/ having the entire U-Boot in RT space (as Simon stated in this discussion[1])
-> >
-> > I don't think this is a terribly good idea.  With this approach orders
-> > of magnitude more code will be present in kernel address space one the
-> > OS kernel is running and calling into the EFI runtime.  Including code
-> > that may access hardware devices that are now under OS control.  It
-> > will be nigh impossible to audit all that code and make sure that only
-> > a safe subset of it gets called.  So...
+> Patch #4 adds main HMIBSC board specific bits, features:
+> - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> - 2GiB RAM
+> - 64GiB eMMC, SD slot
+> - WiFi and Bluetooth
+> - 2x Host, 1x Device USB port
+> - HDMI
+> - Discrete TPM2 chip over SPI
 >
-> +100
-> I think we should draw a line here. I mentioned it on another thread,
-> but I did a shot BoF in Plumbers discussing issues like this,
-> problems, and potential solutions [0] [1]. Since that talk patches for
-> the kernel that 'solve' the problem for RPMBs got pulled into
-> linux-next [2].
-> The TL;DR of that talk is that if the kernel ends up being in control
-> of the hardware that stores the EFI variables, we need to find elegant
-> ways to teach the kernel how to store those directly. The EFI
-> requirement of an isolated flash is something that mostly came from
-> the x86 world and is not a reality on the majority of embedded boards.
-> I also think we should give up on Authenticated EFI variables in that
-> case. We get zero guarantees unless the medium has similar properties
-> to an RPMB.
-> If a vendor cares about proper UEFI secure boot he can implement
-> proper hardware.
-
-Just to copy in my thoughts as they are lost at this point:
-
-> We would need to publish a runtime interface with access to the driver
-> API. I did ask for this when the EFI runtime support was added, but it
-> wasn't done.
-
-> It would be possible to create a new 'runtime' phase of U-Boot (RPL?),
-> separate from the others. That will be much easier once we get the XPL
-> stuff sorted out., since adding new [hase would be fairly trivial  CPL
-> died as another contributor had a series which went in first...then I
-> never got back to it.
-
-> So for now having the entire U-Boot in runtime space seems reasonable to me.
-
-> I'll also mention that it would be nice to have s new-style API
-> (replacing the old API U-Boot currently has) which uses more of a
-> module approach. E.g. we could declare that uclass_first_device() is
-> exported and can be called from outside U-Boot.
-
+> Patch #5 - #7 enables specific board features like RAUC support,
+> environment protection and USB networking support.
 >
-> >
-> > >
-> > > 2/ Create an RT variant for the FF-A APIs needed.
-> > >       These RT variant don't call the DM APIs
-> > >       (e.g: ffa_mm_communicate_runtime, ffa_sync_send_receive_runtime, ...)
-> > >
-> > > What do you recommend please ?
-> >
-> > ...this is what I would recommend.  Preferably in a way that refactors
-> > the code such that the low-level functionality is shared between the
-> > DM and non-DM APIs.
+> This patch series is based on top of Qcom maintainer tree [1] + the latest
+> PMIC patch-set [2]. Feedback is very much welcome.
 >
-> Yes. The only thing you need to keep alive is the machinery to talk to
-> the secure world. The bus, flash driver etc should all be running
-> isolated in there. In that case you can implement SetVariableRT as
-> described the the EFI spec.
-
-The current approach is pretty brittle, since it relies on putting
-some of the U-Boot code into a separate area. There is no good way to
-know which U-Boot code should be in that area, since we don't create a
-separate build. If a function calls one that has not been specially
-marked, or accesses data that is not in the area, then it will crash
-or hang.
-
-So, as I said, I think we need a new build, if we want to avoid all of
-U-Boot in there. Anything else is hard to maintain.
-
+> [1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/u-boot-qcom-next?ref_type=heads
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=385322
 >
-> [...]
+> Sumit Garg (7):
+>   clk: apq8016: Add support for UART1 clocks
+>   serial_msm: Add support for RS232 GPIOs
+>   serial_msm: Enable RS232 flow control
+>   board: Add SE HMIBSC board support
+>   hmibsc: Enable RAUC support
+>   hmibsc: enable U-Boot Environment variables protection
+>   hmibsc: Enable LAN75XX USB ethernet driver
 >
-> [0] https://www.youtube.com/watch?v=UdQk0SCUAlA
-> [1] https://lpc.events/event/17/contributions/1653/attachments/1338/2682/Plumbers%20-%20EFI%20setvariable%20problems%20and%20solutions.pdf
-> [2] https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=c44b6be62e8dd4ee0a308c36a70620613e6fc55f
+>  arch/arm/dts/Makefile              |   1 +
+>  arch/arm/dts/hmibsc-uboot.dtsi     |  43 +++++++
+>  arch/arm/dts/hmibsc.dts            | 188 +++++++++++++++++++++++++++++
+>  arch/arm/mach-snapdragon/Kconfig   |  18 +++
+>  arch/arm/mach-snapdragon/Makefile  |   1 +
+>  board/schneider/hmibsc/Kconfig     |  15 +++
+>  board/schneider/hmibsc/MAINTAINERS |   6 +
+>  board/schneider/hmibsc/Makefile    |   5 +
+>  board/schneider/hmibsc/hmibsc.c    | 179 +++++++++++++++++++++++++++
+>  board/schneider/hmibsc/hmibsc.env  |  11 ++
+>  configs/hmibsc_defconfig           |  79 ++++++++++++
+>  drivers/clk/qcom/clock-apq8016.c   |  44 ++++++-
+>  drivers/serial/serial_msm.c        |  23 +++-
+>  drivers/usb/host/Kconfig           |   1 +
+>  include/configs/hmibsc.h           |  59 +++++++++
+>  15 files changed, 665 insertions(+), 8 deletions(-)
+>  create mode 100644 arch/arm/dts/hmibsc-uboot.dtsi
+>  create mode 100644 arch/arm/dts/hmibsc.dts
+>  create mode 100644 board/schneider/hmibsc/Kconfig
+>  create mode 100644 board/schneider/hmibsc/MAINTAINERS
+>  create mode 100644 board/schneider/hmibsc/Makefile
+>  create mode 100644 board/schneider/hmibsc/hmibsc.c
+>  create mode 100644 board/schneider/hmibsc/hmibsc.env
+>  create mode 100644 configs/hmibsc_defconfig
+>  create mode 100644 include/configs/hmibsc.h
+>
+> --
+> 2.34.1
 >
 
 Regards,
