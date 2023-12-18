@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80E9C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:02:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55CD1C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:02:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 240BC87E44;
-	Mon, 18 Dec 2023 16:02:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C6DA87E4E;
+	Mon, 18 Dec 2023 16:02:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bMBlgqMT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J/gpxEYf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0967D87E08; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 58B7087E49; Mon, 18 Dec 2023 16:02:38 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B13A87E26
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CDB787E0A
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-6d9f069e9b0so2731482a34.3
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:30 -0800 (PST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-dbcfb7e8ad0so2364862276.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702911749; x=1703516549; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702911753; x=1703516553; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a3wteGXy3SsC89x5yHRZy36gldGaYHlEXsDFQotQ5vk=;
- b=bMBlgqMTRUWUcEhBHFDVdzwcvSJBzuAe4VQ3o9kIvB7ieoeInFU7if0mCWOeyPSHxc
- F8AnsjJFITiqZTUlRDgqYK6+U1mNCMpeK7LwsVPtHDEk0/sKB2E80ke24VYty+p6hPzz
- a4C0RNQHn0W12ZDYOXr0+MO/lc5vBCIfEhc0o=
+ bh=CPeDCxhWMaRT5JkRJXw8bkg+FzXYwF07j3YAZcZDhbo=;
+ b=J/gpxEYfAqIsT0XxZDTvgUNHWjhUk9KKBcQUkDbeWfJHhGQIwg6Wjgiff/Skq3sSOR
+ jqZyNk5GpXvsiRaGvEIbGyjrbJNFMDm4bJp5iH9YMjATkftUVV61+19ujnMmDQ//0bCK
+ cB44JwHulaZpAyimgfEMZIopy8AkTCC71C01Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702911749; x=1703516549;
+ d=1e100.net; s=20230601; t=1702911753; x=1703516553;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a3wteGXy3SsC89x5yHRZy36gldGaYHlEXsDFQotQ5vk=;
- b=uaxA9XeXawBkezMkdD5h33TcYr3U634JcoUDnAgrNGQWbY5bt0eexGek9gOB5d4EF3
- rnIVvUkdxa1WxS2QWg8OGTE7tQVzOfZD/17eq+D7kwLvFN1GPehHcbugZbIakmpAlj1s
- 3VCDqagQ8Xanjb7GUCY6ucYIJ1L9Y5HWKgnJmU+wUsaeSn/VhUn9SCWRRHUBd9nqUlUR
- lBExhVoiLnl4LTAPWTYTGfZYXaASAkDOly4EpHd3U2XncvJbBw8eqg4vJJAxAi260CDL
- f7gO4bM+WXyvVd8maNtKUOAO/SyFYLAKExRROCuh5cLiLM5SSOfFZ2sLXqf2mUj5T8aj
- n/FA==
-X-Gm-Message-State: AOJu0Ywc7oLgR6Bqmdd6B1B86a0kOLXpnpuq4xGFyCWSIp5DuDgP3L6C
- QYE0Nk+8qM8wMFGuVt0cCukp8uGoUR8yCwHae3cn/A==
-X-Google-Smtp-Source: AGHT+IG4WXrZykdvNrbwXahinqIuyBvQ3OQ3NhNL9SaHYoQ6tVyhNsmrkEOaekrm69lgozuV70YJkNl1d7GIceE2BPg=
-X-Received: by 2002:a05:6830:138a:b0:6d8:a456:d99d with SMTP id
- d10-20020a056830138a00b006d8a456d99dmr16857205otq.5.1702911748709; Mon, 18
- Dec 2023 07:02:28 -0800 (PST)
+ bh=CPeDCxhWMaRT5JkRJXw8bkg+FzXYwF07j3YAZcZDhbo=;
+ b=kDQcHqM+8xoNhzk/fCUdtHRN64Kd/zQB5E2HrbIvO4V/3lOakKbwp3Xz8ZWbXP+BLU
+ NaOkR04feNlz4aFLTYwJ9PT3ZAXD67tqfZgXYKOjCjlVATAGSDvclXTeO7kJtT9Ez161
+ O+zq7y4pocy79K5Z/s21+Pci2zC8hQQDkzc4ah2UYCj+3ukw77Sflb7BVuGZ0iu1lXFi
+ QhUQlWJgupZFl71MY+7sO48naq916/0wbu5WjtW5p3C3cDgxixXGOFpsGmOeIQ/uusk/
+ q3SezWopKDhemzqmc3elVi+9D9kHnNGwC1KCUCNNG9G7xSfaTVLLJldeq1zIL7EckeYz
+ 2dNA==
+X-Gm-Message-State: AOJu0YyxdqGDG/B6NDO7r+IDil1n8aflSgjQEb28wMuj4VnX3LwAYKTu
+ qKrEjIiKJiWvUF5MqKRf3CkSZKbNTGkKa8TyVqYMjEj1xzgWCL6BlJk=
+X-Google-Smtp-Source: AGHT+IE2CLfvghx9+MVyrF9wqJZaX8X1paT0KlUYAj+rbZJMAVChktiJwu6EUMS/qpohlJcYX7Tx2WDU5XY6GVwZjpw=
+X-Received: by 2002:a05:6902:70c:b0:dbc:d6ae:22ec with SMTP id
+ k12-20020a056902070c00b00dbcd6ae22ecmr5453451ybt.82.1702911752776; Mon, 18
+ Dec 2023 07:02:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-4-takahiro.akashi@linaro.org>
-In-Reply-To: <20231218023842.281336-4-takahiro.akashi@linaro.org>
+References: <acfe7ea1-a25a-4293-9e05-bfe4ed7c2a05@gmx.de>
+ <CAPnjgZ1CmmEHxOKPRVbo1zjQ8FDQ1HxdU9ww6c5fJBFc7+Dtjw@mail.gmail.com>
+ <6d926cc2-6100-4b1a-8ee1-11a19ac36f35@gmx.de>
+In-Reply-To: <6d926cc2-6100-4b1a-8ee1-11a19ac36f35@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:46 -0700
-Message-ID: <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
- dependency
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
- u-boot@lists.denx.de
+Date: Mon, 18 Dec 2023 08:01:36 -0700
+Message-ID: <CAPnjgZ1X50hb63FdSWJVnN1-2OOao38C0qtWVTr5HfmmWF8Smw@mail.gmail.com>
+Subject: Re: Booting fails on the sandbox
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,51 +82,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi AKASHI,
+Hi Heinrich,
 
-On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
-<takahiro.akashi@linaro.org> wrote:
+On Sat, 16 Dec 2023 at 14:08, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Now it is clear that the feature actually depends on efi interfaces,
-> not "bootefi" command. efi_set_bootdev() will automatically be nullified
-> if necessary efi component is disabled.
+> On 12/16/23 19:45, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Sat, 16 Dec 2023 at 07:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> Hello Simon,
+> >>
+> >> I have built sandbox_defconfig with PREBOOT='host bind 0 ../sct.img'
+> >>
+> >> On the image I have an ESP with file EFI/BOOT/BOOTX64.EFI.
+> >>
+> >> I would expect the sandbox to boot from the ESP.
+> >>
+> >> But when starting the sandbox is does not boot. Instead it shows a menu
+> >> with some Fedora related entry:
+> >>
+> >> Fedora-Workstation-armhfp-31-1.9 Boot Options.
+> >> 1:      Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+> >>
+> >> This makes absolutely no sense on an x86_64 system. Could you, please,
+> >> fix sandbox_defconfig to boot according to distroboot.
+> >
+> > What sort of 'fix' are you thinking of? You should be able to discover
+> > all the options with 'bootflow scan' and then use 'bootflow select' or
+> > 'bootflow menu' to choose which one you want.
+> >
+> > The Fedora thing is used for testing and development.
 >
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> ---
->  net/tftp.c | 10 ++++------
->  1 file changed, 4 insertions(+), 6 deletions(-)
->
+> I want to autoboot the sandbox without manual intervention. This
+> requires a sane state.
 
-I have the same comment here as the 'fs' patch.
+Well, stop doing that :-)
 
-> diff --git a/net/tftp.c b/net/tftp.c
-> index 88e71e67de35..2e335413492b 100644
-> --- a/net/tftp.c
-> +++ b/net/tftp.c
-> @@ -302,12 +302,10 @@ static void tftp_complete(void)
->                         time_start * 1000, "/s");
->         }
->         puts("\ndone\n");
-> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+Really, sandbox is for development and CI testing. It is not designed
+to boot anything automatically.
 
-Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
-is not enabled?
-
-> -               if (!tftp_put_active)
-> -                       efi_set_bootdev("Net", "", tftp_filename,
-> -                                       map_sysmem(tftp_load_addr, 0),
-> -                                       net_boot_file_size);
-> -       }
-> +       if (!tftp_put_active)
-> +               efi_set_bootdev("Net", "", tftp_filename,
-> +                               map_sysmem(tftp_load_addr, 0),
-> +                               net_boot_file_size);
->         net_set_state(NETLOOP_SUCCESS);
->  }
 >
-> --
-> 2.34.1
->
+> If that Fedora thingy is only needed in CI, can't we put it into a
+> config segment that only used by the CI scripts and have the sandbox in
+> a generally usable state? Or can we let the Python tests add the
+> otherwise not needed bootflow?
+
+Yes, we could. We have some extra mmc devices which are manually
+enabled in tests.
+
+But it is handy to be able to try out a distro without doing anything
+special. I suppose we could add a sandbox command to enable an mmc
+device in test.dts
+
+If you have ideas / patches that is fine...it's just that I do want to
+be able to use sandbox for basic development and trying things out.
 
 Regards,
 Simon
