@@ -4,51 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3903AC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ABE4C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:54:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81BEA877D0;
-	Mon, 18 Dec 2023 14:53:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CAC287E23;
+	Mon, 18 Dec 2023 14:54:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4+gW7kG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73754877D0; Mon, 18 Dec 2023 14:53:46 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E535187DD0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:53:41 +0100 (CET)
+ id 9803C87E20; Mon, 18 Dec 2023 14:54:04 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A87E87E22
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:53:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robin.murphy@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BD6212F4;
- Mon, 18 Dec 2023 05:54:25 -0800 (PST)
-Received: from [10.57.86.174] (unknown [10.57.86.174])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3F2F23F5A1;
- Mon, 18 Dec 2023 05:53:38 -0800 (PST)
-Message-ID: <75c3b7e3-5184-4ec6-88b5-ec11ff269dd5@arm.com>
-Date: Mon, 18 Dec 2023 13:53:36 +0000
+ spf=pass smtp.mailfrom=rfried.dev@gmail.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5906988ab8dso1224303eaf.0
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 05:53:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702907638; x=1703512438; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I/wyw4b7rYnip7gPRdkfrBw65oHGpyOI8GqP8I3wbTc=;
+ b=b4+gW7kGCMEfhRgR/3onJufcP0VcNJMUGSR9mPEATfws8cHGUJxHgRGXb2QmCV1FSf
+ VdHuDJ6ThJQJG9KcmF0+49eabLvqfDaJF2F01jTYkTWVDJ3P5AIu+Y30TFIsgMU0rQas
+ 5fAnM4fbPKNY0D+W92yCVwpvTxNgRvs/4KvJlBwMqbkttl6SWCwelDV9K0XLenQxrgGd
+ cWB0EboOAh0VmRknGSHjhWgc+I/jkSS/WtuisI4z245M6Oe92Ltn0nTjcVLRYM1/UqHN
+ IPr4tpimpeKUD67YejJQt212O64WYdARPRxZHr3QZQzETU9OK8QdeXMPpXRDSQJKt5MQ
+ WZhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702907638; x=1703512438;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I/wyw4b7rYnip7gPRdkfrBw65oHGpyOI8GqP8I3wbTc=;
+ b=ryPhykc7uAzp9iVtEPAIxRuj6KjwAKs19r9vIT9Wyq90u2dOpHYd3wag7LXv4DgNuI
+ GB8X8bFTZ1J4+LhTQRtY80GH6FrUJA+HVBzRYB4Imj+40w32evOKoCwxRzqTRbQlb5Mx
+ bZAIv0yER4Qpt1WF6+aQMgfM84E48spuvPM8ANDK0kgUvdfYzeX6RgybObaoSWs02lvt
+ IAJRgrBKKUdERN8bmuRLIH17AZ0EGmQZhj07JtsgBo657mmnJjsIRdlpcqLZgzFDlZ06
+ pVCmOl3lfefPgsv2HwmBK6FJMjMW8Pzit7wg89CGqiwttSykp0tQ4+h3rl54j6NG+fV5
+ HcZg==
+X-Gm-Message-State: AOJu0Ywc4ZSfn8vX7n+N/ctVxBCDIEPRAIzmv2pLPnAMmvt/1wpugExO
+ bem+O9gQsnDt8SO3cWMnF2uVwnFVErp8bVm6n3c=
+X-Google-Smtp-Source: AGHT+IG6EzkAbH1aY4nNsCFRK27x73uwk0r0zSQqGyXK1auWAb29qrudLzTOQ4ZIia99fjwGHvcR87WcEalAkQseF7I=
+X-Received: by 2002:a4a:98c4:0:b0:58e:250f:7c25 with SMTP id
+ b4-20020a4a98c4000000b0058e250f7c25mr5942417ooj.3.1702907637776; Mon, 18 Dec
+ 2023 05:53:57 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/17] video: dw_hdmi: Support Vendor PHY
-Content-Language: en-GB
-To: Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>,
- Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
- =?UTF-8?B?6Jab5bCP5piO?= <xxm@rock-chips.com>, =?UTF-8?B?5pON55Ge5p2w?=
- <algea.cao@rock-chips.com>, =?UTF-8?B?6Zer5a2d5Yab?=
- <andy.yan@rock-chips.com>
-References: <20231211085939.5478-1-jagan@amarulasolutions.com>
- <CAMty3ZBNC7Fpi-S4uOwfJ3ULWQ27PiVAKTqbnQKB3nB5vXHrhg@mail.gmail.com>
- <f04a716f-1383-493c-87b5-e39edacee857@rock-chips.com>
-From: Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <f04a716f-1383-493c-87b5-e39edacee857@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+In-Reply-To: <20231218023842.281336-4-takahiro.akashi@linaro.org>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Mon, 18 Dec 2023 15:53:47 +0200
+Message-ID: <CAGi-RULTO1p8zkZ274QgDLhp_jo7JOwJVFyjDur2c4cX3+5sRg@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
+ dependency
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, 
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,101 +89,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-12-15 7:13 am, Kever Yang wrote:
-> Hi Jagan,
-> 
-> On 2023/12/15 14:36, Jagan Teki wrote:
->> Hi Heiko/Kerver/Anatoloj,
->>
->> On Mon, Dec 11, 2023 at 2:30 PM Jagan Teki 
->> <jagan@amarulasolutions.com> wrote:
->>> Unlike RK3399, Sunxi/Meson DW HDMI the new Rockchip SoC Rk3328 would
->>> support external vendor PHY with DW HDMI chip.
->>>
->>> Support this vendor PHY by adding new platform PHY ops via DW HDMI
->>> driver and call the respective generic phy from platform driver code.
->>>
->>> This series tested in RK3328 with 1080p (1920x1080) resolution.
->>>
->>> Patch 0001/0005: Support Vendor PHY
->>> Patch 0006/0008: VOP extension for win, dsp offsets
->>> Patch 0009/0010: RK3328 VOP, HDMI clocks
->>> Patch 0011:      Rockchip Inno HDMI PHY
->>> Patch 0012:      RK3328 HDMI driver
->>> Patch 0013:      RK3328 VOP driver
->>> Patch 0014/0017: Enable HDMI Out for RK3328
->>>
->>> Importent:
->>> One pontential issues is that Linux HDMI out on RK3328 has effected by
->>> this patchset as I wouldn't find any relation or clue.
->>>
->>> [    0.752016] Loading compiled-in X.509 certificates
->>> [    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
->>> [    0.788391] inno-hdmi-phy ff430000.phy: 
->>> inno_hdmi_phy_rk3328_clk_recalc_rate rate 148500000 vco 148500000
->>> [    0.798353] rockchip-drm display-subsystem: bound ff370000.vop 
->>> (ops vop_component_ops)
->>> [    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not 
->>> found, using dummy regulator
->>> [    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed 
->>> out, status: 0x00004b
->>> [    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not 
->>> found, using dummy regulator
->>> [    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed 
->>> out, status: 0x00004b
->>> [    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX 
->>> controller v2.11a with HDCP (inno_dw_hdmi_phy2)
->>> [    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare 
->>> HDMI I2C bus driver
->>> [    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi 
->>> (ops dw_hdmi_rockchip_ops)
->>> [    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for 
->>> display-subsystem on minor 0
->>>
->>> The only way I can use Linux HDMI by disabling IOMMU or support
->>> disable-iommu link for RK3328 via DT [1].
->>>
->>> [1] https://www.spinics.net/lists/devicetree/msg605124.html
->> Is anyone aware of this issue? I did post the patches for Linux IOMMU
->> but seems not a proper solution. Any suggestions?
-> 
-> I'm not expert in HDMI/VOP, so I can't provide a suitable solution in 
-> the kernel,
-> 
-> but here is the reason why we need patch to workaround the issue in the 
-> kernel:
-> 
-> - The VOP driver working in U-Boot is non-IOMMU mode, and the VOP access 
-> DDR by physical address;
-> 
-> - The VOP driver working in kernel with IOMMU enabled(by default), the 
-> VOP access DDR with virtual address(by IOMMU);
-> 
-> - The VOP is keep working in kernel before kernel VOP driver is enabled, 
-> and the IOMMU driver will be enabled by
-> 
->     the Linux PM framework, since the IOMMU is not correctly configured 
-> at this point, the VOP will access unknown
-> 
->      space(the original physical address in U-Boot) convert by IOMMU;
-> 
-> So we need to disable the IOMMU temporary in kernel startup before VOP 
-> driver is enabled.
-
-If U-Boot isn't handing off an active framebuffer, then it should be 
-U-Boot's responsibility to stop the VOP before it exits; if on the other 
-hand it is, then it can now use the "iommu-addresses" DT property (see 
-the reserved-memory schema) on the framebuffer region, and we should 
-just need a bit of work in the IOMMU driver to ensure that is respected 
-during the period between the IOMMU initialising and the Linux VOP 
-driver subsequently taking over (i.e. so it won't get stuck on an 
-unexpected page fault as seems to be happening above). The IOMMU aspect 
-of that ought to be fairly straightforward; the trickier part might be 
-the runtime PM aspect to ensure the IOMMU doesn't let itself go idle and 
-actually turn anything off during that period. I also still think that 
-doing the full rk_iommu_disable() upon runtime suspend is wrong, but 
-that's more of a thing which confounds the underlying issue here, rather 
-than being the problem in itself.
-
-Thanks,
-Robin.
+On Mon, Dec 18, 2023 at 5:17=E2=80=AFAM AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
+>
+> Now it is clear that the feature actually depends on efi interfaces,
+> not "bootefi" command. efi_set_bootdev() will automatically be nullified
+> if necessary efi component is disabled.
+>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>  net/tftp.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
+>
+> diff --git a/net/tftp.c b/net/tftp.c
+> index 88e71e67de35..2e335413492b 100644
+> --- a/net/tftp.c
+> +++ b/net/tftp.c
+> @@ -302,12 +302,10 @@ static void tftp_complete(void)
+>                         time_start * 1000, "/s");
+>         }
+>         puts("\ndone\n");
+> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+> -               if (!tftp_put_active)
+> -                       efi_set_bootdev("Net", "", tftp_filename,
+> -                                       map_sysmem(tftp_load_addr, 0),
+> -                                       net_boot_file_size);
+> -       }
+> +       if (!tftp_put_active)
+> +               efi_set_bootdev("Net", "", tftp_filename,
+> +                               map_sysmem(tftp_load_addr, 0),
+> +                               net_boot_file_size);
+>         net_set_state(NETLOOP_SUCCESS);
+>  }
+>
+> --
+> 2.34.1
+>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
