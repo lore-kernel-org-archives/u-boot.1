@@ -4,64 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB16C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 14:21:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C647C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 14:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FBED87DE8;
-	Mon, 18 Dec 2023 15:21:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C0FE87CD5;
+	Mon, 18 Dec 2023 15:47:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="LpWZMhU+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r5UiMpkd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0B8F87DF3; Mon, 18 Dec 2023 15:21:20 +0100 (CET)
-Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 813F787E22; Mon, 18 Dec 2023 15:47:25 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FBCB87DE6
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 15:21:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8507287C82
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 15:47:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 40F0E240002;
- Mon, 18 Dec 2023 14:21:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1702909278;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=VcFINdpUM3413RjJFum1h+gsTWlsCTgB3Zco0HFf37w=;
- b=LpWZMhU+/FlDz/l6g9cAsHmsE93Bhq4Id8XqSYWOsaMalk5GcvOUsDi//RUZIFy+2Q+nKp
- r0Ue5TYs8IiSKetzoBq1URx/7EQWB342qgDX9X4FQkp3TvAfan3jwJ/jm+EMzOscAy6PJt
- z1av9pI3PSW8EUlbraBlXyEOr+LrwjXs4Fm5641BoWxtj/ZC1A/Qt4/8tguLpW2jCJi9YY
- N4d1OHK+l82zLAWuHEjEGFXpbIQFgiGXVdCq4bJhDwmJDqIhJTzoOkQFokmWPmv+8OtQ/M
- XljLCSnzggt7fIDqzF58t8GnU7eBiYK4OrDKmG307kg9prYOyXR/b0+KZOspMA==
-Date: Mon, 18 Dec 2023 15:21:16 +0100
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Rob Herring
- <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
- <michael@walle.cc>, linux-mtd@lists.infradead.org,
- devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWC?=
- =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH 4/4] nvmem: layouts: add U-Boot env layout
-Message-ID: <20231218152116.59d59bad@xps-13>
-In-Reply-To: <20231218133722.16150-4-zajec5@gmail.com>
-References: <20231218133722.16150-1-zajec5@gmail.com>
- <20231218133722.16150-4-zajec5@gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-336690479eeso879327f8f.2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 06:47:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702910843; x=1703515643; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3M8r/pKC/5cF4KZMeEeOmmP29PiiDCpSdePMQasdQhg=;
+ b=r5UiMpkd0yp+oV6hreOy0xioSgk2BUcVQB1DHrtQqw9sjXCid9oy/+8CCJlf4iJ4HN
+ ojCmL0W5H+vVUM7953z5f3NWvhwwYRRV2csD6JXXbT8w/hZUZeCON3n9IArTbqdQb/8C
+ /dTN0Xwzmofi5ArW/4b8xeoIdhy9M5SUE3V6M4R9IKYwDzD7gowGMZPtC4C/Ri4SHEYo
+ s72hFKTLohpgMV983EjlHuZfizx/NVWmBOc87QtVJQYSfkjIEAF9eZWQRgULesn+GTkw
+ K3TDAxsXWxM0h/ZsGwqKa0uBfbmjb8GQ5KBtMY+YpjhSPwpcdviwHkaOmlVmDdhy+RxC
+ 6oIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702910843; x=1703515643;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3M8r/pKC/5cF4KZMeEeOmmP29PiiDCpSdePMQasdQhg=;
+ b=JJXUKpEjMmjD4MDQfsQb785q2eTNE9hmu+wxAI5oVqrU4aQS+GxnJQsFK9AwVjsQWU
+ CwgpABVPzxm3XcSho03qr683jdTi+qKJPNbaMD33Rgj96JC1QJikGfAoKC+BN9cLWWQw
+ dZx6Mo9uodPupG42kLlEC42P73RmgJ2Rxt7OWguUiv63N62xkpia7YKNd4CYRIPK+3Ht
+ 6ZlQde+iij4o4Yet2RlAtNsrj5K+LwtwFqycqWLaXFh/qO0Wq8kCTF66+bEUWJ3qaBlj
+ QCf9Vk3o+ZINJxYIAT9f9p6jQ6opvvxBVAuQ394wRExVkEeR7kNIpj1epy5ClEtXZQNC
+ Savw==
+X-Gm-Message-State: AOJu0YwEcHt2rFULmIjoQO3FTOQuv5l5tJ6zCE9Ey4CiCkLIe2QdKQTk
+ QArRp7iUYCZOwBfHbZIiNthXGQ==
+X-Google-Smtp-Source: AGHT+IELQJSwEBYrsaI1DaxAJ5jY3U4Err84TcQ039c8O+YRI1IoWTHUP2RQ5T81xUuuThUa/ric7w==
+X-Received: by 2002:adf:ee0c:0:b0:336:5fbf:c86f with SMTP id
+ y12-20020adfee0c000000b003365fbfc86fmr1473995wrn.1.1702910842921; 
+ Mon, 18 Dec 2023 06:47:22 -0800 (PST)
+Received: from [192.168.1.83] (host-92-17-96-230.as13285.net. [92.17.96.230])
+ by smtp.gmail.com with ESMTPSA id
+ z11-20020a5d4d0b000000b003365b2047c5sm8228311wrt.114.2023.12.18.06.47.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Dec 2023 06:47:22 -0800 (PST)
+Message-ID: <a543b77c-8829-4510-b1d4-f23478d58907@linaro.org>
+Date: Mon, 18 Dec 2023 14:47:21 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 6/9] dts: qcom: adjust pmic gpio to use upstream
+ bindings
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ramon Fried <rfried.dev@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>, u-boot@lists.denx.de
+References: <20231205-b4-qcom-dt-compat-v6-0-61d104a8f920@linaro.org>
+ <20231205-b4-qcom-dt-compat-v6-6-61d104a8f920@linaro.org>
+ <CAPnjgZ0gC2nhpX=fA=s3b+LiABN4E-cHqY-qH5+4LuVfBwp1Gg@mail.gmail.com>
+ <bda2b648-a481-47a9-891b-9d1b81727706@linaro.org>
+In-Reply-To: <bda2b648-a481-47a9-891b-9d1b81727706@linaro.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,148 +104,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rafa=C5=82,
 
-zajec5@gmail.com wrote on Mon, 18 Dec 2023 14:37:22 +0100:
 
-> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
->=20
-> This patch moves all generic (NVMEM devices independent) code from NVMEM
-> device driver to NVMEM layout driver. Then it adds a simple NVMEM layout
-> code on top of it.
->=20
-> Thanks to proper layout it's possible to support U-Boot env data stored
-> on any kind of NVMEM device.
->=20
-> For backward compatibility with old DT bindings we need to keep old
-> NVMEM device driver functional. To avoid code duplication a parsing
-> function is exported and reused in it.
->=20
-> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
-> ---
+On 06/12/2023 11:39, Caleb Connolly wrote:
+> Hi Simon,
+> 
+> On 06/12/2023 03:54, Simon Glass wrote:
+>> Hi Caleb,
+>>
+>> On Tue, 5 Dec 2023 at 06:48, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>>
+>>> Use the upstream gpio-ranges property instead of gpio-count, and drop
+>>> the bank-name property for Qualcomm boards.
+>>>
+>>> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>> Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+>>> Tested-by: Sumit Garg <sumit.garg@linaro.org>
+>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>> ---
+>>>  arch/arm/dts/dragonboard410c.dts | 3 +--
+>>>  arch/arm/dts/dragonboard820c.dts | 3 +--
+>>>  arch/arm/dts/qcs404-evb.dts      | 3 +--
+>>>  arch/arm/dts/sdm845.dtsi         | 3 +--
+>>>  4 files changed, 4 insertions(+), 8 deletions(-)
+>>>
+>>
+>> What is the replacement for the GPIO bank name?
+> 
+> The bank name is hardcoded to "pmic". In previous revisions of this
+> patch I tried to keep the specific PMIC model, but after some discussion
+> we decided that there was no benefit to this over just "pmic".
 
-I have a couple of comments about the original driver which gets
-copy-pasted in the new layout driver, maybe you could clean these
-(the memory leak should be fixed before the migration so it can be
-backported easily, the others are just style so it can be done after, I
-don't mind).
+Hi Simon,
 
-...
-
-> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
-> +		     enum u_boot_env_format format)
-> +{
-> +	size_t crc32_data_offset;
-> +	size_t crc32_data_len;
-> +	size_t crc32_offset;
-> +	size_t data_offset;
-> +	size_t data_len;
-> +	size_t dev_size;
-> +	uint32_t crc32;
-> +	uint32_t calc;
-> +	uint8_t *buf;
-> +	int bytes;
-> +	int err;
-> +
-> +	dev_size =3D nvmem_dev_size(nvmem);
-> +
-> +	buf =3D kcalloc(1, dev_size, GFP_KERNEL);
-
-Out of curiosity, why kcalloc(1,...) rather than kzalloc() ?
-
-> +	if (!buf) {
-> +		err =3D -ENOMEM;
-> +		goto err_out;
-
-We could directly return ENOMEM here I guess.
-
-> +	}
-> +
-> +	bytes =3D nvmem_device_read(nvmem, 0, dev_size, buf);
-> +	if (bytes < 0)
-> +		return bytes;
-> +	else if (bytes !=3D dev_size)
-> +		return -EIO;
-
-Don't we need to free buf in the above cases?
-
-> +	switch (format) {
-> +	case U_BOOT_FORMAT_SINGLE:
-> +		crc32_offset =3D offsetof(struct u_boot_env_image_single, crc32);
-> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_single, data);
-> +		data_offset =3D offsetof(struct u_boot_env_image_single, data);
-> +		break;
-> +	case U_BOOT_FORMAT_REDUNDANT:
-> +		crc32_offset =3D offsetof(struct u_boot_env_image_redundant, crc32);
-> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_redundant, data=
-);
-> +		data_offset =3D offsetof(struct u_boot_env_image_redundant, data);
-> +		break;
-> +	case U_BOOT_FORMAT_BROADCOM:
-> +		crc32_offset =3D offsetof(struct u_boot_env_image_broadcom, crc32);
-> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_broadcom, data);
-> +		data_offset =3D offsetof(struct u_boot_env_image_broadcom, data);
-> +		break;
-> +	}
-> +	crc32 =3D le32_to_cpu(*(__le32 *)(buf + crc32_offset));
-
-Looks a bit convoluted, any chances we can use intermediate variables
-to help decipher this?
-
-> +	crc32_data_len =3D dev_size - crc32_data_offset;
-> +	data_len =3D dev_size - data_offset;
-> +
-> +	calc =3D crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
-> +	if (calc !=3D crc32) {
-> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n", =
-calc, crc32);
-> +		err =3D -EINVAL;
-> +		goto err_kfree;
-> +	}
-> +
-> +	buf[dev_size - 1] =3D '\0';
-> +	err =3D u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_len);
-> +	if (err)
-> +		dev_err(dev, "Failed to add cells: %d\n", err);
-
-Please drop this error message, the only reason for which the function
-call would fail is apparently an ENOMEM case.
-
-> +
-> +err_kfree:
-> +	kfree(buf);
-> +err_out:
-> +	return err;
-> +}
-> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
-> +
-> +static int u_boot_env_add_cells(struct device *dev, struct nvmem_device =
-*nvmem)
-> +{
-> +	const struct of_device_id *match;
-> +	struct device_node *layout_np;
-> +	enum u_boot_env_format format;
-> +
-> +	layout_np =3D of_nvmem_layout_get_container(nvmem);
-> +	if (!layout_np)
-> +		return -ENOENT;
-> +
-> +	match =3D of_match_node(u_boot_env_of_match_table, layout_np);
-> +	if (!match)
-> +		return -ENOENT;
-> +
-> +	format =3D (uintptr_t)match->data;
-
-In the core there is currently an unused helper called
-nvmem_layout_get_match_data() which does that. I think the original
-intent of this function was to be used in this driver, so depending on
-your preference, can you please either use it or remove it?
-
-> +
-> +	of_node_put(layout_np);
-> +
-> +	return u_boot_env_parse(dev, nvmem, format);
-> +}
+Just wanted to check this is ok with you before merging this series.
 
 Thanks,
-Miqu=C3=A8l
+>>
+>> Regards,
+>> Simon
+> 
+
+-- 
+// Caleb (they/them)
