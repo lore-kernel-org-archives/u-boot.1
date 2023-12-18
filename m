@@ -4,84 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E93FCC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:45:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3903AC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 596D887E1A;
-	Mon, 18 Dec 2023 14:45:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 81BEA877D0;
+	Mon, 18 Dec 2023 14:53:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PN9x/+GY";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1D8587E1C; Mon, 18 Dec 2023 14:45:33 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B023A87D85
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:45:31 +0100 (CET)
+ id 73754877D0; Mon, 18 Dec 2023 14:53:46 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id E535187DD0
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:53:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-336437ae847so2954720f8f.2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 05:45:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702907131; x=1703511931; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cWStvqK6KrlPpDCxoD+LXp2BPwdp0DZEpw1OHP4LGGI=;
- b=PN9x/+GY/VrfBYy5+ETud2l2LRZgyeuL7vLQXFzK/WLxvVTLNGqXcWQh7ql4jeorqv
- ehGAkKGg/mjH0bqCmXtwXgNk9sqfJiz15S+nGYFOrpX7+Y/un7M8YHzcE1QhZRn1fN+9
- N5BjhnoM9JUjK72CuvO5JbSAc8o0+HaJHSVSmyt3Xykd/d0gqSOPYfybpl4/u6VabDzi
- ByLgQizh783TgCbwLv+52EFSVrKV8V4Mj5XR7RQhqauIqYbg16aOJb02J60U1H4uN2IK
- cs8wUOjbsMSfszxWZSco7ogWuw+jEPU11ToOjcyB8kVQ6Edkw8dYOOgSLOaivyt835YR
- XUUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702907131; x=1703511931;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cWStvqK6KrlPpDCxoD+LXp2BPwdp0DZEpw1OHP4LGGI=;
- b=M/I4DR8Y7y3sIgMFOelUwJXxSAMOAhVuoXZHalQtLnxJ99R4w1CrDlcEaByxiC2aat
- wxn5vSOM7CJ/WCNzr3v123fOMD/6ae7YjVHuagmYsQ8Ae9iueyVVGy9qyd8lxU0boc8p
- fKfLZ8BVHcUF1qQcwtP+BGPWA/KU7xk+UUktPNAWFbyaqFacX+TbRdTfP86Ufr3PGMyV
- guqqo1CrlDlVtkgcxSfHDQIDfL0WzQ0y6PN3i5HtCWDM/Y+cIBpGEifz1zlO9nSrG1I1
- OidF0O5rxpYqxhzLtaG/ESfX/ZSC4cS8RzcB5DW/lwNX7FEa0TLa5WFZjKRi1iGvGByq
- DIqg==
-X-Gm-Message-State: AOJu0Yzxo+VK50HdLS3hfMI6wTpAA5lfPJGvK4xW5Lxxruc0aQzGHsSf
- nlOwVNugbXC6yGo3QS8yXuVRLJ+GkzY=
-X-Google-Smtp-Source: AGHT+IHp95pnHBpGST+4vtRvNyTH5biaemOYZgB8XiiCBPCxXrTDcGLJjvu3bDnbMTy8rJsQqRJ+XQ==
-X-Received: by 2002:a05:6512:39cb:b0:50b:f03c:1ea2 with SMTP id
- k11-20020a05651239cb00b0050bf03c1ea2mr10860168lfu.84.1702906664468; 
- Mon, 18 Dec 2023 05:37:44 -0800 (PST)
-Received: from localhost.lan (031011218106.poznan.vectranet.pl.
- [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
- f20-20020a1709067f9400b00a234907311asm1891537ejr.55.2023.12.18.05.37.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 05:37:44 -0800 (PST)
-From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
- Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Conor Dooley <conor+dt@kernel.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Michael Walle <michael@walle.cc>,
- Miquel Raynal <miquel.raynal@bootlin.com>, linux-mtd@lists.infradead.org,
- devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, u-boot@lists.denx.de,
- =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
-Subject: [PATCH 3/4] nvmem: u-boot-env: use more nvmem subsystem helpers
-Date: Mon, 18 Dec 2023 14:37:21 +0100
-Message-Id: <20231218133722.16150-3-zajec5@gmail.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231218133722.16150-1-zajec5@gmail.com>
-References: <20231218133722.16150-1-zajec5@gmail.com>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=robin.murphy@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BD6212F4;
+ Mon, 18 Dec 2023 05:54:25 -0800 (PST)
+Received: from [10.57.86.174] (unknown [10.57.86.174])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3F2F23F5A1;
+ Mon, 18 Dec 2023 05:53:38 -0800 (PST)
+Message-ID: <75c3b7e3-5184-4ec6-88b5-ec11ff269dd5@arm.com>
+Date: Mon, 18 Dec 2023 13:53:36 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/17] video: dw_hdmi: Support Vendor PHY
+Content-Language: en-GB
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Heiko Stuebner <heiko@sntech.de>,
+ Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ "open list:ARM/Rockchip SoC..." <linux-rockchip@lists.infradead.org>,
+ =?UTF-8?B?6Jab5bCP5piO?= <xxm@rock-chips.com>, =?UTF-8?B?5pON55Ge5p2w?=
+ <algea.cao@rock-chips.com>, =?UTF-8?B?6Zer5a2d5Yab?=
+ <andy.yan@rock-chips.com>
+References: <20231211085939.5478-1-jagan@amarulasolutions.com>
+ <CAMty3ZBNC7Fpi-S4uOwfJ3ULWQ27PiVAKTqbnQKB3nB5vXHrhg@mail.gmail.com>
+ <f04a716f-1383-493c-87b5-e39edacee857@rock-chips.com>
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <f04a716f-1383-493c-87b5-e39edacee857@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,186 +65,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Rafał Miłecki <rafal@milecki.pl>
+On 2023-12-15 7:13 am, Kever Yang wrote:
+> Hi Jagan,
+> 
+> On 2023/12/15 14:36, Jagan Teki wrote:
+>> Hi Heiko/Kerver/Anatoloj,
+>>
+>> On Mon, Dec 11, 2023 at 2:30 PM Jagan Teki 
+>> <jagan@amarulasolutions.com> wrote:
+>>> Unlike RK3399, Sunxi/Meson DW HDMI the new Rockchip SoC Rk3328 would
+>>> support external vendor PHY with DW HDMI chip.
+>>>
+>>> Support this vendor PHY by adding new platform PHY ops via DW HDMI
+>>> driver and call the respective generic phy from platform driver code.
+>>>
+>>> This series tested in RK3328 with 1080p (1920x1080) resolution.
+>>>
+>>> Patch 0001/0005: Support Vendor PHY
+>>> Patch 0006/0008: VOP extension for win, dsp offsets
+>>> Patch 0009/0010: RK3328 VOP, HDMI clocks
+>>> Patch 0011:      Rockchip Inno HDMI PHY
+>>> Patch 0012:      RK3328 HDMI driver
+>>> Patch 0013:      RK3328 VOP driver
+>>> Patch 0014/0017: Enable HDMI Out for RK3328
+>>>
+>>> Importent:
+>>> One pontential issues is that Linux HDMI out on RK3328 has effected by
+>>> this patchset as I wouldn't find any relation or clue.
+>>>
+>>> [    0.752016] Loading compiled-in X.509 certificates
+>>> [    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
+>>> [    0.788391] inno-hdmi-phy ff430000.phy: 
+>>> inno_hdmi_phy_rk3328_clk_recalc_rate rate 148500000 vco 148500000
+>>> [    0.798353] rockchip-drm display-subsystem: bound ff370000.vop 
+>>> (ops vop_component_ops)
+>>> [    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not 
+>>> found, using dummy regulator
+>>> [    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed 
+>>> out, status: 0x00004b
+>>> [    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not 
+>>> found, using dummy regulator
+>>> [    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed 
+>>> out, status: 0x00004b
+>>> [    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX 
+>>> controller v2.11a with HDCP (inno_dw_hdmi_phy2)
+>>> [    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare 
+>>> HDMI I2C bus driver
+>>> [    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi 
+>>> (ops dw_hdmi_rockchip_ops)
+>>> [    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for 
+>>> display-subsystem on minor 0
+>>>
+>>> The only way I can use Linux HDMI by disabling IOMMU or support
+>>> disable-iommu link for RK3328 via DT [1].
+>>>
+>>> [1] https://www.spinics.net/lists/devicetree/msg605124.html
+>> Is anyone aware of this issue? I did post the patches for Linux IOMMU
+>> but seems not a proper solution. Any suggestions?
+> 
+> I'm not expert in HDMI/VOP, so I can't provide a suitable solution in 
+> the kernel,
+> 
+> but here is the reason why we need patch to workaround the issue in the 
+> kernel:
+> 
+> - The VOP driver working in U-Boot is non-IOMMU mode, and the VOP access 
+> DDR by physical address;
+> 
+> - The VOP driver working in kernel with IOMMU enabled(by default), the 
+> VOP access DDR with virtual address(by IOMMU);
+> 
+> - The VOP is keep working in kernel before kernel VOP driver is enabled, 
+> and the IOMMU driver will be enabled by
+> 
+>     the Linux PM framework, since the IOMMU is not correctly configured 
+> at this point, the VOP will access unknown
+> 
+>      space(the original physical address in U-Boot) convert by IOMMU;
+> 
+> So we need to disable the IOMMU temporary in kernel startup before VOP 
+> driver is enabled.
 
-1. Use nvmem_dev_size() and nvmem_device_read() to make this driver less
-   mtd dependent
-2. Use nvmem_add_one_cell() to simplify adding NVMEM cells
+If U-Boot isn't handing off an active framebuffer, then it should be 
+U-Boot's responsibility to stop the VOP before it exits; if on the other 
+hand it is, then it can now use the "iommu-addresses" DT property (see 
+the reserved-memory schema) on the framebuffer region, and we should 
+just need a bit of work in the IOMMU driver to ensure that is respected 
+during the period between the IOMMU initialising and the Linux VOP 
+driver subsequently taking over (i.e. so it won't get stuck on an 
+unexpected page fault as seems to be happening above). The IOMMU aspect 
+of that ought to be fairly straightforward; the trickier part might be 
+the runtime PM aspect to ensure the IOMMU doesn't let itself go idle and 
+actually turn anything off during that period. I also still think that 
+doing the full rk_iommu_disable() upon runtime suspend is wrong, but 
+that's more of a thing which confounds the underlying issue here, rather 
+than being the problem in itself.
 
-Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
----
- drivers/nvmem/u-boot-env.c | 79 +++++++++++++++++---------------------
- 1 file changed, 35 insertions(+), 44 deletions(-)
-
-diff --git a/drivers/nvmem/u-boot-env.c b/drivers/nvmem/u-boot-env.c
-index c4ae94af4af7..ab8c9bf63d99 100644
---- a/drivers/nvmem/u-boot-env.c
-+++ b/drivers/nvmem/u-boot-env.c
-@@ -23,13 +23,10 @@ enum u_boot_env_format {
- 
- struct u_boot_env {
- 	struct device *dev;
-+	struct nvmem_device *nvmem;
- 	enum u_boot_env_format format;
- 
- 	struct mtd_info *mtd;
--
--	/* Cells */
--	struct nvmem_cell_info *cells;
--	int ncells;
- };
- 
- struct u_boot_env_image_single {
-@@ -94,72 +91,69 @@ static int u_boot_env_read_post_process_ethaddr(void *context, const char *id, i
- static int u_boot_env_add_cells(struct u_boot_env *priv, uint8_t *buf,
- 				size_t data_offset, size_t data_len)
- {
-+	struct nvmem_device *nvmem = priv->nvmem;
- 	struct device *dev = priv->dev;
- 	char *data = buf + data_offset;
- 	char *var, *value, *eq;
--	int idx;
--
--	priv->ncells = 0;
--	for (var = data; var < data + data_len && *var; var += strlen(var) + 1)
--		priv->ncells++;
- 
--	priv->cells = devm_kcalloc(dev, priv->ncells, sizeof(*priv->cells), GFP_KERNEL);
--	if (!priv->cells)
--		return -ENOMEM;
--
--	for (var = data, idx = 0;
-+	for (var = data;
- 	     var < data + data_len && *var;
--	     var = value + strlen(value) + 1, idx++) {
-+	     var = value + strlen(value) + 1) {
-+		struct nvmem_cell_info info = {};
-+
- 		eq = strchr(var, '=');
- 		if (!eq)
- 			break;
- 		*eq = '\0';
- 		value = eq + 1;
- 
--		priv->cells[idx].name = devm_kstrdup(dev, var, GFP_KERNEL);
--		if (!priv->cells[idx].name)
-+		info.name = devm_kstrdup(dev, var, GFP_KERNEL);
-+		if (!info.name)
- 			return -ENOMEM;
--		priv->cells[idx].offset = data_offset + value - data;
--		priv->cells[idx].bytes = strlen(value);
--		priv->cells[idx].np = of_get_child_by_name(dev->of_node, priv->cells[idx].name);
-+		info.offset = data_offset + value - data;
-+		info.bytes = strlen(value);
-+		info.np = of_get_child_by_name(dev->of_node, info.name);
- 		if (!strcmp(var, "ethaddr")) {
--			priv->cells[idx].raw_len = strlen(value);
--			priv->cells[idx].bytes = ETH_ALEN;
--			priv->cells[idx].read_post_process = u_boot_env_read_post_process_ethaddr;
-+			info.raw_len = strlen(value);
-+			info.bytes = ETH_ALEN;
-+			info.read_post_process = u_boot_env_read_post_process_ethaddr;
- 		}
--	}
- 
--	if (WARN_ON(idx != priv->ncells))
--		priv->ncells = idx;
-+		nvmem_add_one_cell(nvmem, &info);
-+	}
- 
- 	return 0;
- }
- 
- static int u_boot_env_parse(struct u_boot_env *priv)
- {
-+	struct nvmem_device *nvmem = priv->nvmem;
- 	struct device *dev = priv->dev;
- 	size_t crc32_data_offset;
- 	size_t crc32_data_len;
- 	size_t crc32_offset;
- 	size_t data_offset;
- 	size_t data_len;
-+	size_t dev_size;
- 	uint32_t crc32;
- 	uint32_t calc;
--	size_t bytes;
- 	uint8_t *buf;
-+	int bytes;
- 	int err;
- 
--	buf = kcalloc(1, priv->mtd->size, GFP_KERNEL);
-+	dev_size = nvmem_dev_size(nvmem);
-+
-+	buf = kcalloc(1, dev_size, GFP_KERNEL);
- 	if (!buf) {
- 		err = -ENOMEM;
- 		goto err_out;
- 	}
- 
--	err = mtd_read(priv->mtd, 0, priv->mtd->size, &bytes, buf);
--	if ((err && !mtd_is_bitflip(err)) || bytes != priv->mtd->size) {
--		dev_err(dev, "Failed to read from mtd: %d\n", err);
--		goto err_kfree;
--	}
-+	bytes = nvmem_device_read(nvmem, 0, dev_size, buf);
-+	if (bytes < 0)
-+		return bytes;
-+	else if (bytes != dev_size)
-+		return -EIO;
- 
- 	switch (priv->format) {
- 	case U_BOOT_FORMAT_SINGLE:
-@@ -179,8 +173,8 @@ static int u_boot_env_parse(struct u_boot_env *priv)
- 		break;
- 	}
- 	crc32 = le32_to_cpu(*(__le32 *)(buf + crc32_offset));
--	crc32_data_len = priv->mtd->size - crc32_data_offset;
--	data_len = priv->mtd->size - data_offset;
-+	crc32_data_len = dev_size - crc32_data_offset;
-+	data_len = dev_size - data_offset;
- 
- 	calc = crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
- 	if (calc != crc32) {
-@@ -189,7 +183,7 @@ static int u_boot_env_parse(struct u_boot_env *priv)
- 		goto err_kfree;
- 	}
- 
--	buf[priv->mtd->size - 1] = '\0';
-+	buf[dev_size - 1] = '\0';
- 	err = u_boot_env_add_cells(priv, buf, data_offset, data_len);
- 	if (err)
- 		dev_err(dev, "Failed to add cells: %d\n", err);
-@@ -209,7 +203,6 @@ static int u_boot_env_probe(struct platform_device *pdev)
- 	struct device *dev = &pdev->dev;
- 	struct device_node *np = dev->of_node;
- 	struct u_boot_env *priv;
--	int err;
- 
- 	priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
- 	if (!priv)
-@@ -224,17 +217,15 @@ static int u_boot_env_probe(struct platform_device *pdev)
- 		return PTR_ERR(priv->mtd);
- 	}
- 
--	err = u_boot_env_parse(priv);
--	if (err)
--		return err;
--
- 	config.dev = dev;
--	config.cells = priv->cells;
--	config.ncells = priv->ncells;
- 	config.priv = priv;
- 	config.size = priv->mtd->size;
- 
--	return PTR_ERR_OR_ZERO(devm_nvmem_register(dev, &config));
-+	priv->nvmem = devm_nvmem_register(dev, &config);
-+	if (IS_ERR(priv->nvmem))
-+		return PTR_ERR(priv->nvmem);
-+
-+	return u_boot_env_parse(priv);
- }
- 
- static const struct of_device_id u_boot_env_of_match_table[] = {
--- 
-2.35.3
-
+Thanks,
+Robin.
