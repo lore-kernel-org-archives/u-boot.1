@@ -4,96 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14BAC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 09:48:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD257C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 09:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 432DF87CB9;
-	Mon, 18 Dec 2023 10:48:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5DD4F87D31;
+	Mon, 18 Dec 2023 10:54:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KlIVPksR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HMHJx/HA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59E9287CE6; Mon, 18 Dec 2023 10:48:12 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 46A4287D31; Mon, 18 Dec 2023 10:54:37 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A00E68644E
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:48:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F158C87DDB
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:54:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40c2c65e6aaso34166405e9.2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 01:48:09 -0800 (PST)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-33668cdb982so531712f8f.0
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 01:54:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702892877; x=1703497677; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SAx3QRhBqChZgnecCFwBavkI3YvpzExhmV6nCmDqidY=;
- b=KlIVPksRfRUk+OrOyPA2XPCr6oHBt7cXmGOMnjJTR6h0mQnWNAMPc2Ogs6qnCe4EdP
- fO58XoNyBUwhuzkYMA6HgVDhaxNsUhbfGb8VIvIUXR/6y1McXjeipStP6zUC7IeyJpU5
- pE78w1phzlEdke3RRFoUwxEzcga/YoKqJzuOb5CrxNk3ArofOaaKahKKtGvQ9rlFS5BX
- Kvys1pBr5oHLU5rxPNwZGcsVhTmdDW92s/hHmXNUGMY+GZClTepg9suJ7Prth+vzUrrr
- CGpmZCtq4kZ6fz8y0VN0OhFb39u64N5NI3DJ6PebLo1zvCdsQiTsa6md/1Z7kLLEJd26
- 7Uag==
+ d=linaro.org; s=google; t=1702893274; x=1703498074; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=SXy89cPJlqsZx/xXSRs6rpsjGjKxXjWRtAvDFE45onM=;
+ b=HMHJx/HAxVqNpuM6L1IluW79cOOCFlMyTeAIulGWykD4MyY3g2wlTdk8jgE22qSmq6
+ fpqpO0Xy3+PDsWLyhbopdPswwnFxgaOpcq7Ho0yrEyfZHBuzp+hN2tGLgtD41DLQ7zS7
+ xZI1h0GMYAim1GSkRWChWYT69z3axxwox/s/2B6ZExkVp+ucuxOwa4EqxqIQhV1Qx7XG
+ tfyZ84IbjJbuuN5EXlCj4XrG5pybdtZ890dsZ0zsj29i/+LjDF7EEp2A7Qko+GXkl7bA
+ GY4bzLCYvSJbOK5tQR8Ofyn37G3h9O1UIpgodnAvAsOBr/DQ8vdQ7eNDTS/mYyPaYMoq
+ vLZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702892877; x=1703497677;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SAx3QRhBqChZgnecCFwBavkI3YvpzExhmV6nCmDqidY=;
- b=U1wfQixY2Hl3ndsFz0+CboxXcjjbOi/L5OfKOsZT6/5ayKcDg1LomjgODmXXIGKK7a
- nRstb7aH3/dltOxxFh5cxsDBwpk8uWHUf1wJoMCFflkBgIL3jJpErmO1PL7bMRi8l2uI
- Pg59jHGTAHmhX8rOvWYRI93mE7OMFlvloCmD9Hrgae1vpglGLOLEnJsJ15VkPSaIQqpY
- Qv/QBkK/LPTRXGqgJFMI4b8CjvIN/zf4kkq2zcOoj/uiXNGLFthAPIjya3XHX2pbu7oO
- 2G2uWjGIw+YDclr3faK8HrlC36JXzzo6zYEWUSdushEcELGywBkzkQi8RMIIRimsmyfq
- oaug==
-X-Gm-Message-State: AOJu0YzQwM7QMYoflti+bpsvk2tvHXkVpikkWEtjy314sTP3dZhbJSC6
- XFVeGF7p+H4SmvJ7rcp1yzdOUJ3lsb4LChkH3Yy/W75X
-X-Google-Smtp-Source: AGHT+IFjGHibp8ulB+43y3lCe7XiRxY97rtqKq4OqlC3tEk84x5jxUddRVpvEYnvnIAhwjbauieSDw==
-X-Received: by 2002:a05:600c:474a:b0:40c:6ae0:8cf3 with SMTP id
- w10-20020a05600c474a00b0040c6ae08cf3mr2360793wmo.153.1702892876673; 
- Mon, 18 Dec 2023 01:47:56 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1702893274; x=1703498074;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=SXy89cPJlqsZx/xXSRs6rpsjGjKxXjWRtAvDFE45onM=;
+ b=h0KQ67gtUllvAS8lFdWy5kCSVVffbsUyBNNUOrNsqshVWZCuzdixkfmy5WVu5ZNYF6
+ uskSs3Rjk/kLCXoufv6F2ZuPWSuoYIgI5vxQXUL78GB8IL5q7nWpWbUROj1eCBFN3/OE
+ KbXCpaOuJvpahXLMoBjawjdVPd/nk0OhQrHbj7hpaFQ3RsoflcFAS3dLKAUmQaigKldD
+ 7Pl8Xvm78Eh3tFt6XFPqkXAa3Z+M6y9MEEJgNunx0b87vKIDviHHcQ54SNdZdcW8ah32
+ /YZr15a3YL2ICBSPoAbOo+pLwF3AOmMTCYgPWC33YvdwvlbXWaZF7C0Wj/4gKqHR5CUf
+ LARQ==
+X-Gm-Message-State: AOJu0YzoAxMeKJmss9Qt1iwquaghSXXOPlzUL3i0dVJyY5r4CYRhqEC0
+ WhXw1QgRLG1SgZ+Zlk/+RNw/pw==
+X-Google-Smtp-Source: AGHT+IF+b0ONrS7s/t0CoIh0vK2cFQcwHwzLyAU+rqETs9yvDyOjvbVFpsPG6LVaIKBJXkLz5wmCCg==
+X-Received: by 2002:adf:ebc7:0:b0:333:4913:c465 with SMTP id
+ v7-20020adfebc7000000b003334913c465mr7621641wrn.102.1702893274102; 
+ Mon, 18 Dec 2023 01:54:34 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:b425:da5d:c0cf:a505?
+ ([2a01:e0a:982:cbb0:b425:da5d:c0cf:a505])
  by smtp.gmail.com with ESMTPSA id
- x18-20020a5d6512000000b00336670abdcasm3025435wru.40.2023.12.18.01.47.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 01:47:56 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Mon, 18 Dec 2023 10:47:55 +0100
-Subject: [PATCH v3] clk: meson: add Hardware Clock measure driver
+ m2-20020a056000180200b003366d6b0df6sm522171wrh.13.2023.12.18.01.54.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Dec 2023 01:54:33 -0800 (PST)
+Message-ID: <06036b6f-70b8-4b80-823d-d9716cbbf160@linaro.org>
+Date: Mon, 18 Dec 2023 10:54:32 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
+ nodes are missing
+Content-Language: en-US, fr
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, sean.anderson@seco.com,
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
+ u-boot@lists.denx.de
+References: <20231207091850.17776-3-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2hMB0uTTd7tKZ2bGHkPiKM8j+Dz47nXKwiXH6vWHF8tQ@mail.gmail.com>
+ <20231213201655.GF2513409@bill-the-cat>
+ <CAPnjgZ3G_3iUcHoOFGGYQ5Dxho5HwqcH=TqwS3j-NoNcBCEdkA@mail.gmail.com>
+ <20231213205634.GK2513409@bill-the-cat>
+ <CAPnjgZ2hV25e1zjrNqKqd-doO9A1L9H58oToDANOSEQr5jwexA@mail.gmail.com>
+ <20231213230545.GM2513409@bill-the-cat>
+ <CAPnjgZ0L+kVG0DWExwDJXYG5FfObq34LULV=se9T50OvcmhfMw@mail.gmail.com>
+ <20231214131139.GY2513409@bill-the-cat>
+ <CAPnjgZ17b7sZX-dey5mdXJJ17g5ho_U2UZkawyFYU19R-gidhQ@mail.gmail.com>
+ <20231217184100.GC2513409@bill-the-cat>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231217184100.GC2513409@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231218-uboot-meson-clk-msr-v3-1-acf4d90ccfee@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAEoVgGUC/33NTQrCMBCG4auUrB3JTAq1rryHuEjzY4NtIkkNS
- undTbsRQVy+H8wzM0smOpPYsZpZNNklF3wJsauY6qW/GnC6NCNOAhEFPLoQJhhNCh7UcIMxRSB
- UtkWO1Bw6Vi7v0Vj33NTzpXTv0hTia3uScV3/exkBoRHEa81bq3h3GpyXMexDvLIVzPRBCOk3Q
- gVBpbnU2tZayy9kWZY3qv8/p/wAAAA=
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=21600;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=GzVOVc6WFEGnv5EB1J462SN0BaxnFljV6CB9DIBB6PY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBlgBVLu4zIxje2UBXtS++5QGxndqTaQKawp71T30PI
- 9cpqfgOJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZYAVSwAKCRB33NvayMhJ0VmWD/
- 94VkyDvlkUy2N+9lPdL+PsIhW/MALMYW7PruCdMplll06rHzgaQPYWmkcMHgw0KhKYN0gmO115MrGk
- lIBZCuP2KirNEpmCpr0CroRLV+g2pewWVBzCJUivYRsOQ1K8jRyzZFrdksGpqHcd9KINPShi2ErZBY
- DCVwDOMXy7h0cupaZFDlMzcmJkO8aqx9sGOU/uN2SnqRSg5bGdW7uLmUrAmFoaX69DAoimJdrK5ozG
- NNAyqYI1s43UkYSCqgI2RZV4sC6GU3xnz5DZ5Bh6/7y3ddFP1KIzHhk64FWOFlBkWMtSmTAUCr+4cN
- w9gpcOB+W6av3KuO1piyrRlpqCkHg+LyN7Hjwykn2KzZs0q+MuBdDfQ0Vf7HuxzHYyjfBnlGC4aFr3
- HVQ+gLqKcCRNR7U6bjuL54of6bCEXj6QF/geiQMlrgeQPDbI18aBcGDR0JaTF7JcyS/KBjZBRrO5Px
- i2j345lByuL4aZ6N1l0Z8Q9qUpGhTbnW7OUxqa2V3lxiTKBgiwyqXIDf2qZOsCosuTAPDmjBt6iKDa
- Tr3K/WkILaHiXV4XbCb7PtpgCTmxsw/R0AA4wZn1EYJbFS/INNBc7tox50bN7DvlMjXFaEomxF2zfn
- GU9c+A7FLUX+2Y4zA0D5eXQ7hnC4+zBL7fRn3Phd0bhOs57bApPl4YGYBRTw==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,708 +128,72 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Amlogic SoCs embeds an hardware clock measure block, port it
-from Linux and implement it as a UCLK_CLK with only the dump
-op and fail-only xlate.
+On 17/12/2023 19:41, Tom Rini wrote:
+> On Sat, Dec 16, 2023 at 11:46:18AM -0700, Simon Glass wrote:
+>> Hi Tom,
+>>
+>> On Thu, 14 Dec 2023 at 06:11, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Wed, Dec 13, 2023 at 08:19:11PM -0700, Simon Glass wrote:
+>>>
+>>> [snip]
+>>>> The new DT nodes / SMBIOS binding [1] allows for the correct
+>>>> information to be provided, though.
+>>> [snip]
+>>>> [1] https://github.com/u-boot/u-boot/blob/master/doc/device-tree-bindings/sysinfo/smbios.txt
+>>>
+>>> I think the only feedback I can give on your message here is to please
+>>> go upstream that binding, and then we can see what to do afterwards.
+>>
+>> I am still tearing my hair out waiting for the reserved-memory and
+>> binman patches to be accepted. Every few weeks there is another
+>> comment, but no action. Rob seems to be the only one engaged.
+>>
+>> Perhaps I should do a conference talk about what is wrong with DT?
+> 
+> Perhaps.
+> 
+>> This is my experience so far:
+>>
+>> - there is no urgency to apply anything
+>> - no one wins acclaim for applying a patch
+>> - everyone complains later if a patch is applied that they didn't agree with
+>> - people chime in wanting to understand the use case, but don't/can't/won't
+>> - any sort of expressed doubt results in delay
+>> - maintainers hope that the submitter will lose interest and go away
+>> - not enough people add review tags, even if they look at it
+>>     ... because they are worried about looking bad to others on the ML
 
-Based on the Linux driver introduced in [1].
+I agree some subsystems are not easy to deal with, but it's not the case for most of them (Qcom, Amlogic, TI, ST...),
+and I think it's the case of some other Linux subsystems, and we all know it's
+an issue but I do not have the power to solve that, so yes please do
+a conference talk but not only about DT because it's simply not true.
 
-[1] commit 2b45ebef39a2 ("soc: amlogic: Add Meson Clock Measure driver").
+>>
+>> I would be happy to discuss how to improve matters, but that is what I see.
+>>
+>> Anyway, the lowest-hanging fruit at present is the U-Boot /options
+>> stuff. I was hoping someone else would step up to clean it up. There
+>> should be no impediment.
+> 
+> And my point with the above is that other SoC maintainers (Neil, for
+> amlogic) have said (paraphrasing) he does not want to do N smbios node
+> patches. Which is why Ilias' patch is if not 1000% correct, it's Good
+> Enough and will, if it's really a problem to have all lower case
+> information displayed, spur people to see providing that information as
+> a real problem that needs to be solved. Or it will be seen as good
+> enough.
+> 
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
-Changes in v3:
-- Fixed/extended Kconfig and commit message following Sean's advices
-- Link to v2: https://lore.kernel.org/r/20231212-uboot-meson-clk-msr-v2-1-1cd0addf4dda@linaro.org
+If some platforms requires a more "correct" smbios dataset, then they're
+welcome adding the required smbios node, and it's perfectly understandable,
+but for the other community-maintained platforms we need some valid fallback
+data otherwise they'll be de facto excluded from some tools for no valid reasons.
 
-Changes in v2:
-- remove common.h and include time.h instead
-- Link to v1: https://lore.kernel.org/r/20231113-uboot-meson-clk-msr-v1-1-73204d09fc0b@linaro.org
----
- drivers/clk/meson/Kconfig       |  10 +
- drivers/clk/meson/Makefile      |   1 +
- drivers/clk/meson/clk-measure.c | 634 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 645 insertions(+)
-
-diff --git a/drivers/clk/meson/Kconfig b/drivers/clk/meson/Kconfig
-index cdc9d6f76c..ee33c61140 100644
---- a/drivers/clk/meson/Kconfig
-+++ b/drivers/clk/meson/Kconfig
-@@ -29,3 +29,13 @@ config CLK_MESON_A1
- 	help
- 	  Enable clock support for the Amlogic A1 SoC family, such as
- 	  the A113L
-+
-+config CLK_MESON_MSR
-+	bool "Enable clock measure driver for Amlogic SoCs"
-+	depends on CLK && ARCH_MESON
-+	depends on CMD_CLK
-+	default ARCH_MESON
-+	help
-+	  Enable measuring a set of internal Amlogic SoC clock frequencies
-+	  using the Hardware Clock Measure registers and print them using
-+	  the clk dump command.
-diff --git a/drivers/clk/meson/Makefile b/drivers/clk/meson/Makefile
-index d975f07aab..c7a446e86c 100644
---- a/drivers/clk/meson/Makefile
-+++ b/drivers/clk/meson/Makefile
-@@ -9,3 +9,4 @@ obj-$(CONFIG_CLK_MESON_AXG) += axg-ao.o
- obj-$(CONFIG_CLK_MESON_G12A) += g12a.o
- obj-$(CONFIG_CLK_MESON_G12A) += g12a-ao.o
- obj-$(CONFIG_CLK_MESON_A1) += a1.o
-+obj-$(CONFIG_CLK_MESON_MSR) += clk-measure.o
-diff --git a/drivers/clk/meson/clk-measure.c b/drivers/clk/meson/clk-measure.c
-new file mode 100644
-index 0000000000..f653fc6355
---- /dev/null
-+++ b/drivers/clk/meson/clk-measure.c
-@@ -0,0 +1,634 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Based on Linux driver from:
-+ * (C) Copyright 2018 - BayLibre, SAS
-+ * Author: Neil Armstrong <narmstrong@baylibre.com>
-+ * (C) Copyright 2023 - Neil Armstrong <neil.armstrong@linaro.org>
-+ */
-+
-+#include <log.h>
-+#include <clk-uclass.h>
-+#include <div64.h>
-+#include <dm.h>
-+#include <time.h>
-+#include <regmap.h>
-+#include <syscon.h>
-+#include <linux/bitops.h>
-+#include <linux/bitfield.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/kernel.h>
-+
-+#define MSR_CLK_DUTY		0x0
-+#define MSR_CLK_REG0		0x4
-+#define MSR_CLK_REG1		0x8
-+#define MSR_CLK_REG2		0xc
-+
-+#define MSR_DURATION		GENMASK(15, 0)
-+#define MSR_ENABLE		BIT(16)
-+#define MSR_CONT		BIT(17) /* continuous measurement */
-+#define MSR_INTR		BIT(18) /* interrupts */
-+#define MSR_RUN			BIT(19)
-+#define MSR_CLK_SRC		GENMASK(26, 20)
-+#define MSR_BUSY		BIT(31)
-+
-+#define MSR_VAL_MASK		GENMASK(15, 0)
-+
-+#define DIV_MIN			32
-+#define DIV_STEP		32
-+#define DIV_MAX			640
-+
-+#define CLK_MSR_MAX		128
-+
-+struct meson_msr_id {
-+	unsigned int id;
-+	const char *name;
-+};
-+
-+struct meson_msr {
-+	struct regmap *regmap;
-+	struct meson_msr_id *msr_table;
-+};
-+
-+#define CLK_MSR_ID(__id, __name) \
-+	[__id] = {.id = __id, .name = __name,}
-+
-+static struct meson_msr_id clk_msr_m8[CLK_MSR_MAX] = {
-+	CLK_MSR_ID(0, "ring_osc_out_ee0"),
-+	CLK_MSR_ID(1, "ring_osc_out_ee1"),
-+	CLK_MSR_ID(2, "ring_osc_out_ee2"),
-+	CLK_MSR_ID(3, "a9_ring_osck"),
-+	CLK_MSR_ID(6, "vid_pll"),
-+	CLK_MSR_ID(7, "clk81"),
-+	CLK_MSR_ID(8, "encp"),
-+	CLK_MSR_ID(9, "encl"),
-+	CLK_MSR_ID(11, "eth_rmii"),
-+	CLK_MSR_ID(13, "amclk"),
-+	CLK_MSR_ID(14, "fec_clk_0"),
-+	CLK_MSR_ID(15, "fec_clk_1"),
-+	CLK_MSR_ID(16, "fec_clk_2"),
-+	CLK_MSR_ID(18, "a9_clk_div16"),
-+	CLK_MSR_ID(19, "hdmi_sys"),
-+	CLK_MSR_ID(20, "rtc_osc_clk_out"),
-+	CLK_MSR_ID(21, "i2s_clk_in_src0"),
-+	CLK_MSR_ID(22, "clk_rmii_from_pad"),
-+	CLK_MSR_ID(23, "hdmi_ch0_tmds"),
-+	CLK_MSR_ID(24, "lvds_fifo"),
-+	CLK_MSR_ID(26, "sc_clk_int"),
-+	CLK_MSR_ID(28, "sar_adc"),
-+	CLK_MSR_ID(30, "mpll_clk_test_out"),
-+	CLK_MSR_ID(31, "audac_clkpi"),
-+	CLK_MSR_ID(32, "vdac"),
-+	CLK_MSR_ID(33, "sdhc_rx"),
-+	CLK_MSR_ID(34, "sdhc_sd"),
-+	CLK_MSR_ID(35, "mali"),
-+	CLK_MSR_ID(36, "hdmi_tx_pixel"),
-+	CLK_MSR_ID(38, "vdin_meas"),
-+	CLK_MSR_ID(39, "pcm_sclk"),
-+	CLK_MSR_ID(40, "pcm_mclk"),
-+	CLK_MSR_ID(41, "eth_rx_tx"),
-+	CLK_MSR_ID(42, "pwm_d"),
-+	CLK_MSR_ID(43, "pwm_c"),
-+	CLK_MSR_ID(44, "pwm_b"),
-+	CLK_MSR_ID(45, "pwm_a"),
-+	CLK_MSR_ID(46, "pcm2_sclk"),
-+	CLK_MSR_ID(47, "ddr_dpll_pt"),
-+	CLK_MSR_ID(48, "pwm_f"),
-+	CLK_MSR_ID(49, "pwm_e"),
-+	CLK_MSR_ID(59, "hcodec"),
-+	CLK_MSR_ID(60, "usb_32k_alt"),
-+	CLK_MSR_ID(61, "gpio"),
-+	CLK_MSR_ID(62, "vid2_pll"),
-+	CLK_MSR_ID(63, "mipi_csi_cfg"),
-+};
-+
-+static struct meson_msr_id clk_msr_gx[CLK_MSR_MAX] = {
-+	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
-+	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
-+	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
-+	CLK_MSR_ID(3, "a53_ring_osc"),
-+	CLK_MSR_ID(4, "gp0_pll"),
-+	CLK_MSR_ID(6, "enci"),
-+	CLK_MSR_ID(7, "clk81"),
-+	CLK_MSR_ID(8, "encp"),
-+	CLK_MSR_ID(9, "encl"),
-+	CLK_MSR_ID(10, "vdac"),
-+	CLK_MSR_ID(11, "rgmii_tx"),
-+	CLK_MSR_ID(12, "pdm"),
-+	CLK_MSR_ID(13, "amclk"),
-+	CLK_MSR_ID(14, "fec_0"),
-+	CLK_MSR_ID(15, "fec_1"),
-+	CLK_MSR_ID(16, "fec_2"),
-+	CLK_MSR_ID(17, "sys_pll_div16"),
-+	CLK_MSR_ID(18, "sys_cpu_div16"),
-+	CLK_MSR_ID(19, "hdmitx_sys"),
-+	CLK_MSR_ID(20, "rtc_osc_out"),
-+	CLK_MSR_ID(21, "i2s_in_src0"),
-+	CLK_MSR_ID(22, "eth_phy_ref"),
-+	CLK_MSR_ID(23, "hdmi_todig"),
-+	CLK_MSR_ID(26, "sc_int"),
-+	CLK_MSR_ID(28, "sar_adc"),
-+	CLK_MSR_ID(31, "mpll_test_out"),
-+	CLK_MSR_ID(32, "vdec"),
-+	CLK_MSR_ID(35, "mali"),
-+	CLK_MSR_ID(36, "hdmi_tx_pixel"),
-+	CLK_MSR_ID(37, "i958"),
-+	CLK_MSR_ID(38, "vdin_meas"),
-+	CLK_MSR_ID(39, "pcm_sclk"),
-+	CLK_MSR_ID(40, "pcm_mclk"),
-+	CLK_MSR_ID(41, "eth_rx_or_rmii"),
-+	CLK_MSR_ID(42, "mp0_out"),
-+	CLK_MSR_ID(43, "fclk_div5"),
-+	CLK_MSR_ID(44, "pwm_b"),
-+	CLK_MSR_ID(45, "pwm_a"),
-+	CLK_MSR_ID(46, "vpu"),
-+	CLK_MSR_ID(47, "ddr_dpll_pt"),
-+	CLK_MSR_ID(48, "mp1_out"),
-+	CLK_MSR_ID(49, "mp2_out"),
-+	CLK_MSR_ID(50, "mp3_out"),
-+	CLK_MSR_ID(51, "nand_core"),
-+	CLK_MSR_ID(52, "sd_emmc_b"),
-+	CLK_MSR_ID(53, "sd_emmc_a"),
-+	CLK_MSR_ID(55, "vid_pll_div_out"),
-+	CLK_MSR_ID(56, "cci"),
-+	CLK_MSR_ID(57, "wave420l_c"),
-+	CLK_MSR_ID(58, "wave420l_b"),
-+	CLK_MSR_ID(59, "hcodec"),
-+	CLK_MSR_ID(60, "alt_32k"),
-+	CLK_MSR_ID(61, "gpio_msr"),
-+	CLK_MSR_ID(62, "hevc"),
-+	CLK_MSR_ID(66, "vid_lock"),
-+	CLK_MSR_ID(70, "pwm_f"),
-+	CLK_MSR_ID(71, "pwm_e"),
-+	CLK_MSR_ID(72, "pwm_d"),
-+	CLK_MSR_ID(73, "pwm_c"),
-+	CLK_MSR_ID(75, "aoclkx2_int"),
-+	CLK_MSR_ID(76, "aoclk_int"),
-+	CLK_MSR_ID(77, "rng_ring_osc_0"),
-+	CLK_MSR_ID(78, "rng_ring_osc_1"),
-+	CLK_MSR_ID(79, "rng_ring_osc_2"),
-+	CLK_MSR_ID(80, "rng_ring_osc_3"),
-+	CLK_MSR_ID(81, "vapb"),
-+	CLK_MSR_ID(82, "ge2d"),
-+};
-+
-+static struct meson_msr_id clk_msr_axg[CLK_MSR_MAX] = {
-+	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
-+	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
-+	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
-+	CLK_MSR_ID(3, "a53_ring_osc"),
-+	CLK_MSR_ID(4, "gp0_pll"),
-+	CLK_MSR_ID(5, "gp1_pll"),
-+	CLK_MSR_ID(7, "clk81"),
-+	CLK_MSR_ID(9, "encl"),
-+	CLK_MSR_ID(17, "sys_pll_div16"),
-+	CLK_MSR_ID(18, "sys_cpu_div16"),
-+	CLK_MSR_ID(20, "rtc_osc_out"),
-+	CLK_MSR_ID(23, "mmc_clk"),
-+	CLK_MSR_ID(28, "sar_adc"),
-+	CLK_MSR_ID(31, "mpll_test_out"),
-+	CLK_MSR_ID(40, "mod_eth_tx_clk"),
-+	CLK_MSR_ID(41, "mod_eth_rx_clk_rmii"),
-+	CLK_MSR_ID(42, "mp0_out"),
-+	CLK_MSR_ID(43, "fclk_div5"),
-+	CLK_MSR_ID(44, "pwm_b"),
-+	CLK_MSR_ID(45, "pwm_a"),
-+	CLK_MSR_ID(46, "vpu"),
-+	CLK_MSR_ID(47, "ddr_dpll_pt"),
-+	CLK_MSR_ID(48, "mp1_out"),
-+	CLK_MSR_ID(49, "mp2_out"),
-+	CLK_MSR_ID(50, "mp3_out"),
-+	CLK_MSR_ID(51, "sd_emmm_c"),
-+	CLK_MSR_ID(52, "sd_emmc_b"),
-+	CLK_MSR_ID(61, "gpio_msr"),
-+	CLK_MSR_ID(66, "audio_slv_lrclk_c"),
-+	CLK_MSR_ID(67, "audio_slv_lrclk_b"),
-+	CLK_MSR_ID(68, "audio_slv_lrclk_a"),
-+	CLK_MSR_ID(69, "audio_slv_sclk_c"),
-+	CLK_MSR_ID(70, "audio_slv_sclk_b"),
-+	CLK_MSR_ID(71, "audio_slv_sclk_a"),
-+	CLK_MSR_ID(72, "pwm_d"),
-+	CLK_MSR_ID(73, "pwm_c"),
-+	CLK_MSR_ID(74, "wifi_beacon"),
-+	CLK_MSR_ID(75, "tdmin_lb_lrcl"),
-+	CLK_MSR_ID(76, "tdmin_lb_sclk"),
-+	CLK_MSR_ID(77, "rng_ring_osc_0"),
-+	CLK_MSR_ID(78, "rng_ring_osc_1"),
-+	CLK_MSR_ID(79, "rng_ring_osc_2"),
-+	CLK_MSR_ID(80, "rng_ring_osc_3"),
-+	CLK_MSR_ID(81, "vapb"),
-+	CLK_MSR_ID(82, "ge2d"),
-+	CLK_MSR_ID(84, "audio_resample"),
-+	CLK_MSR_ID(85, "audio_pdm_sys"),
-+	CLK_MSR_ID(86, "audio_spdifout"),
-+	CLK_MSR_ID(87, "audio_spdifin"),
-+	CLK_MSR_ID(88, "audio_lrclk_f"),
-+	CLK_MSR_ID(89, "audio_lrclk_e"),
-+	CLK_MSR_ID(90, "audio_lrclk_d"),
-+	CLK_MSR_ID(91, "audio_lrclk_c"),
-+	CLK_MSR_ID(92, "audio_lrclk_b"),
-+	CLK_MSR_ID(93, "audio_lrclk_a"),
-+	CLK_MSR_ID(94, "audio_sclk_f"),
-+	CLK_MSR_ID(95, "audio_sclk_e"),
-+	CLK_MSR_ID(96, "audio_sclk_d"),
-+	CLK_MSR_ID(97, "audio_sclk_c"),
-+	CLK_MSR_ID(98, "audio_sclk_b"),
-+	CLK_MSR_ID(99, "audio_sclk_a"),
-+	CLK_MSR_ID(100, "audio_mclk_f"),
-+	CLK_MSR_ID(101, "audio_mclk_e"),
-+	CLK_MSR_ID(102, "audio_mclk_d"),
-+	CLK_MSR_ID(103, "audio_mclk_c"),
-+	CLK_MSR_ID(104, "audio_mclk_b"),
-+	CLK_MSR_ID(105, "audio_mclk_a"),
-+	CLK_MSR_ID(106, "pcie_refclk_n"),
-+	CLK_MSR_ID(107, "pcie_refclk_p"),
-+	CLK_MSR_ID(108, "audio_locker_out"),
-+	CLK_MSR_ID(109, "audio_locker_in"),
-+};
-+
-+static struct meson_msr_id clk_msr_g12a[CLK_MSR_MAX] = {
-+	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
-+	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
-+	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
-+	CLK_MSR_ID(3, "sys_cpu_ring_osc"),
-+	CLK_MSR_ID(4, "gp0_pll"),
-+	CLK_MSR_ID(6, "enci"),
-+	CLK_MSR_ID(7, "clk81"),
-+	CLK_MSR_ID(8, "encp"),
-+	CLK_MSR_ID(9, "encl"),
-+	CLK_MSR_ID(10, "vdac"),
-+	CLK_MSR_ID(11, "eth_tx"),
-+	CLK_MSR_ID(12, "hifi_pll"),
-+	CLK_MSR_ID(13, "mod_tcon"),
-+	CLK_MSR_ID(14, "fec_0"),
-+	CLK_MSR_ID(15, "fec_1"),
-+	CLK_MSR_ID(16, "fec_2"),
-+	CLK_MSR_ID(17, "sys_pll_div16"),
-+	CLK_MSR_ID(18, "sys_cpu_div16"),
-+	CLK_MSR_ID(19, "lcd_an_ph2"),
-+	CLK_MSR_ID(20, "rtc_osc_out"),
-+	CLK_MSR_ID(21, "lcd_an_ph3"),
-+	CLK_MSR_ID(22, "eth_phy_ref"),
-+	CLK_MSR_ID(23, "mpll_50m"),
-+	CLK_MSR_ID(24, "eth_125m"),
-+	CLK_MSR_ID(25, "eth_rmii"),
-+	CLK_MSR_ID(26, "sc_int"),
-+	CLK_MSR_ID(27, "in_mac"),
-+	CLK_MSR_ID(28, "sar_adc"),
-+	CLK_MSR_ID(29, "pcie_inp"),
-+	CLK_MSR_ID(30, "pcie_inn"),
-+	CLK_MSR_ID(31, "mpll_test_out"),
-+	CLK_MSR_ID(32, "vdec"),
-+	CLK_MSR_ID(33, "sys_cpu_ring_osc_1"),
-+	CLK_MSR_ID(34, "eth_mpll_50m"),
-+	CLK_MSR_ID(35, "mali"),
-+	CLK_MSR_ID(36, "hdmi_tx_pixel"),
-+	CLK_MSR_ID(37, "cdac"),
-+	CLK_MSR_ID(38, "vdin_meas"),
-+	CLK_MSR_ID(39, "bt656"),
-+	CLK_MSR_ID(41, "eth_rx_or_rmii"),
-+	CLK_MSR_ID(42, "mp0_out"),
-+	CLK_MSR_ID(43, "fclk_div5"),
-+	CLK_MSR_ID(44, "pwm_b"),
-+	CLK_MSR_ID(45, "pwm_a"),
-+	CLK_MSR_ID(46, "vpu"),
-+	CLK_MSR_ID(47, "ddr_dpll_pt"),
-+	CLK_MSR_ID(48, "mp1_out"),
-+	CLK_MSR_ID(49, "mp2_out"),
-+	CLK_MSR_ID(50, "mp3_out"),
-+	CLK_MSR_ID(51, "sd_emmc_c"),
-+	CLK_MSR_ID(52, "sd_emmc_b"),
-+	CLK_MSR_ID(53, "sd_emmc_a"),
-+	CLK_MSR_ID(54, "vpu_clkc"),
-+	CLK_MSR_ID(55, "vid_pll_div_out"),
-+	CLK_MSR_ID(56, "wave420l_a"),
-+	CLK_MSR_ID(57, "wave420l_c"),
-+	CLK_MSR_ID(58, "wave420l_b"),
-+	CLK_MSR_ID(59, "hcodec"),
-+	CLK_MSR_ID(61, "gpio_msr"),
-+	CLK_MSR_ID(62, "hevcb"),
-+	CLK_MSR_ID(63, "dsi_meas"),
-+	CLK_MSR_ID(64, "spicc_1"),
-+	CLK_MSR_ID(65, "spicc_0"),
-+	CLK_MSR_ID(66, "vid_lock"),
-+	CLK_MSR_ID(67, "dsi_phy"),
-+	CLK_MSR_ID(68, "hdcp22_esm"),
-+	CLK_MSR_ID(69, "hdcp22_skp"),
-+	CLK_MSR_ID(70, "pwm_f"),
-+	CLK_MSR_ID(71, "pwm_e"),
-+	CLK_MSR_ID(72, "pwm_d"),
-+	CLK_MSR_ID(73, "pwm_c"),
-+	CLK_MSR_ID(75, "hevcf"),
-+	CLK_MSR_ID(77, "rng_ring_osc_0"),
-+	CLK_MSR_ID(78, "rng_ring_osc_1"),
-+	CLK_MSR_ID(79, "rng_ring_osc_2"),
-+	CLK_MSR_ID(80, "rng_ring_osc_3"),
-+	CLK_MSR_ID(81, "vapb"),
-+	CLK_MSR_ID(82, "ge2d"),
-+	CLK_MSR_ID(83, "co_rx"),
-+	CLK_MSR_ID(84, "co_tx"),
-+	CLK_MSR_ID(89, "hdmi_todig"),
-+	CLK_MSR_ID(90, "hdmitx_sys"),
-+	CLK_MSR_ID(91, "sys_cpub_div16"),
-+	CLK_MSR_ID(92, "sys_pll_cpub_div16"),
-+	CLK_MSR_ID(94, "eth_phy_rx"),
-+	CLK_MSR_ID(95, "eth_phy_pll"),
-+	CLK_MSR_ID(96, "vpu_b"),
-+	CLK_MSR_ID(97, "cpu_b_tmp"),
-+	CLK_MSR_ID(98, "ts"),
-+	CLK_MSR_ID(99, "ring_osc_out_ee_3"),
-+	CLK_MSR_ID(100, "ring_osc_out_ee_4"),
-+	CLK_MSR_ID(101, "ring_osc_out_ee_5"),
-+	CLK_MSR_ID(102, "ring_osc_out_ee_6"),
-+	CLK_MSR_ID(103, "ring_osc_out_ee_7"),
-+	CLK_MSR_ID(104, "ring_osc_out_ee_8"),
-+	CLK_MSR_ID(105, "ring_osc_out_ee_9"),
-+	CLK_MSR_ID(106, "ephy_test"),
-+	CLK_MSR_ID(107, "au_dac_g128x"),
-+	CLK_MSR_ID(108, "audio_locker_out"),
-+	CLK_MSR_ID(109, "audio_locker_in"),
-+	CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
-+	CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
-+	CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
-+	CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
-+	CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
-+	CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
-+	CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
-+	CLK_MSR_ID(117, "audio_resample"),
-+	CLK_MSR_ID(118, "audio_pdm_sys"),
-+	CLK_MSR_ID(119, "audio_spdifout_b"),
-+	CLK_MSR_ID(120, "audio_spdifout"),
-+	CLK_MSR_ID(121, "audio_spdifin"),
-+	CLK_MSR_ID(122, "audio_pdm_dclk"),
-+};
-+
-+static struct meson_msr_id clk_msr_sm1[CLK_MSR_MAX] = {
-+	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
-+	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
-+	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
-+	CLK_MSR_ID(3, "ring_osc_out_ee_3"),
-+	CLK_MSR_ID(4, "gp0_pll"),
-+	CLK_MSR_ID(5, "gp1_pll"),
-+	CLK_MSR_ID(6, "enci"),
-+	CLK_MSR_ID(7, "clk81"),
-+	CLK_MSR_ID(8, "encp"),
-+	CLK_MSR_ID(9, "encl"),
-+	CLK_MSR_ID(10, "vdac"),
-+	CLK_MSR_ID(11, "eth_tx"),
-+	CLK_MSR_ID(12, "hifi_pll"),
-+	CLK_MSR_ID(13, "mod_tcon"),
-+	CLK_MSR_ID(14, "fec_0"),
-+	CLK_MSR_ID(15, "fec_1"),
-+	CLK_MSR_ID(16, "fec_2"),
-+	CLK_MSR_ID(17, "sys_pll_div16"),
-+	CLK_MSR_ID(18, "sys_cpu_div16"),
-+	CLK_MSR_ID(19, "lcd_an_ph2"),
-+	CLK_MSR_ID(20, "rtc_osc_out"),
-+	CLK_MSR_ID(21, "lcd_an_ph3"),
-+	CLK_MSR_ID(22, "eth_phy_ref"),
-+	CLK_MSR_ID(23, "mpll_50m"),
-+	CLK_MSR_ID(24, "eth_125m"),
-+	CLK_MSR_ID(25, "eth_rmii"),
-+	CLK_MSR_ID(26, "sc_int"),
-+	CLK_MSR_ID(27, "in_mac"),
-+	CLK_MSR_ID(28, "sar_adc"),
-+	CLK_MSR_ID(29, "pcie_inp"),
-+	CLK_MSR_ID(30, "pcie_inn"),
-+	CLK_MSR_ID(31, "mpll_test_out"),
-+	CLK_MSR_ID(32, "vdec"),
-+	CLK_MSR_ID(34, "eth_mpll_50m"),
-+	CLK_MSR_ID(35, "mali"),
-+	CLK_MSR_ID(36, "hdmi_tx_pixel"),
-+	CLK_MSR_ID(37, "cdac"),
-+	CLK_MSR_ID(38, "vdin_meas"),
-+	CLK_MSR_ID(39, "bt656"),
-+	CLK_MSR_ID(40, "arm_ring_osc_out_4"),
-+	CLK_MSR_ID(41, "eth_rx_or_rmii"),
-+	CLK_MSR_ID(42, "mp0_out"),
-+	CLK_MSR_ID(43, "fclk_div5"),
-+	CLK_MSR_ID(44, "pwm_b"),
-+	CLK_MSR_ID(45, "pwm_a"),
-+	CLK_MSR_ID(46, "vpu"),
-+	CLK_MSR_ID(47, "ddr_dpll_pt"),
-+	CLK_MSR_ID(48, "mp1_out"),
-+	CLK_MSR_ID(49, "mp2_out"),
-+	CLK_MSR_ID(50, "mp3_out"),
-+	CLK_MSR_ID(51, "sd_emmc_c"),
-+	CLK_MSR_ID(52, "sd_emmc_b"),
-+	CLK_MSR_ID(53, "sd_emmc_a"),
-+	CLK_MSR_ID(54, "vpu_clkc"),
-+	CLK_MSR_ID(55, "vid_pll_div_out"),
-+	CLK_MSR_ID(56, "wave420l_a"),
-+	CLK_MSR_ID(57, "wave420l_c"),
-+	CLK_MSR_ID(58, "wave420l_b"),
-+	CLK_MSR_ID(59, "hcodec"),
-+	CLK_MSR_ID(60, "arm_ring_osc_out_5"),
-+	CLK_MSR_ID(61, "gpio_msr"),
-+	CLK_MSR_ID(62, "hevcb"),
-+	CLK_MSR_ID(63, "dsi_meas"),
-+	CLK_MSR_ID(64, "spicc_1"),
-+	CLK_MSR_ID(65, "spicc_0"),
-+	CLK_MSR_ID(66, "vid_lock"),
-+	CLK_MSR_ID(67, "dsi_phy"),
-+	CLK_MSR_ID(68, "hdcp22_esm"),
-+	CLK_MSR_ID(69, "hdcp22_skp"),
-+	CLK_MSR_ID(70, "pwm_f"),
-+	CLK_MSR_ID(71, "pwm_e"),
-+	CLK_MSR_ID(72, "pwm_d"),
-+	CLK_MSR_ID(73, "pwm_c"),
-+	CLK_MSR_ID(74, "arm_ring_osc_out_6"),
-+	CLK_MSR_ID(75, "hevcf"),
-+	CLK_MSR_ID(76, "arm_ring_osc_out_7"),
-+	CLK_MSR_ID(77, "rng_ring_osc_0"),
-+	CLK_MSR_ID(78, "rng_ring_osc_1"),
-+	CLK_MSR_ID(79, "rng_ring_osc_2"),
-+	CLK_MSR_ID(80, "rng_ring_osc_3"),
-+	CLK_MSR_ID(81, "vapb"),
-+	CLK_MSR_ID(82, "ge2d"),
-+	CLK_MSR_ID(83, "co_rx"),
-+	CLK_MSR_ID(84, "co_tx"),
-+	CLK_MSR_ID(85, "arm_ring_osc_out_8"),
-+	CLK_MSR_ID(86, "arm_ring_osc_out_9"),
-+	CLK_MSR_ID(87, "mipi_dsi_phy"),
-+	CLK_MSR_ID(88, "cis2_adapt"),
-+	CLK_MSR_ID(89, "hdmi_todig"),
-+	CLK_MSR_ID(90, "hdmitx_sys"),
-+	CLK_MSR_ID(91, "nna_core"),
-+	CLK_MSR_ID(92, "nna_axi"),
-+	CLK_MSR_ID(93, "vad"),
-+	CLK_MSR_ID(94, "eth_phy_rx"),
-+	CLK_MSR_ID(95, "eth_phy_pll"),
-+	CLK_MSR_ID(96, "vpu_b"),
-+	CLK_MSR_ID(97, "cpu_b_tmp"),
-+	CLK_MSR_ID(98, "ts"),
-+	CLK_MSR_ID(99, "arm_ring_osc_out_10"),
-+	CLK_MSR_ID(100, "arm_ring_osc_out_11"),
-+	CLK_MSR_ID(101, "arm_ring_osc_out_12"),
-+	CLK_MSR_ID(102, "arm_ring_osc_out_13"),
-+	CLK_MSR_ID(103, "arm_ring_osc_out_14"),
-+	CLK_MSR_ID(104, "arm_ring_osc_out_15"),
-+	CLK_MSR_ID(105, "arm_ring_osc_out_16"),
-+	CLK_MSR_ID(106, "ephy_test"),
-+	CLK_MSR_ID(107, "au_dac_g128x"),
-+	CLK_MSR_ID(108, "audio_locker_out"),
-+	CLK_MSR_ID(109, "audio_locker_in"),
-+	CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
-+	CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
-+	CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
-+	CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
-+	CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
-+	CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
-+	CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
-+	CLK_MSR_ID(117, "audio_resample"),
-+	CLK_MSR_ID(118, "audio_pdm_sys"),
-+	CLK_MSR_ID(119, "audio_spdifout_b"),
-+	CLK_MSR_ID(120, "audio_spdifout"),
-+	CLK_MSR_ID(121, "audio_spdifin"),
-+	CLK_MSR_ID(122, "audio_pdm_dclk"),
-+	CLK_MSR_ID(123, "audio_resampled"),
-+	CLK_MSR_ID(124, "earcrx_pll"),
-+	CLK_MSR_ID(125, "earcrx_pll_test"),
-+	CLK_MSR_ID(126, "csi_phy0"),
-+	CLK_MSR_ID(127, "csi2_data"),
-+};
-+
-+static int meson_clk_msr_measure_id(struct meson_msr *priv, unsigned int id,
-+				    unsigned int duration)
-+{
-+	unsigned int val;
-+	int ret;
-+
-+	regmap_write(priv->regmap, MSR_CLK_REG0, 0);
-+
-+	/* Set measurement duration */
-+	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_DURATION,
-+			   FIELD_PREP(MSR_DURATION, duration - 1));
-+
-+	/* Set ID */
-+	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_CLK_SRC,
-+			   FIELD_PREP(MSR_CLK_SRC, id));
-+
-+	/* Enable & Start */
-+	regmap_update_bits(priv->regmap, MSR_CLK_REG0,
-+			   MSR_RUN | MSR_ENABLE,
-+			   MSR_RUN | MSR_ENABLE);
-+
-+	ret = regmap_read_poll_timeout(priv->regmap, MSR_CLK_REG0,
-+				       val, !(val & MSR_BUSY), 10, 10000);
-+	if (ret)
-+		return ret;
-+
-+	/* Disable */
-+	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_ENABLE, 0);
-+
-+	/* Get the value in multiple of gate time counts */
-+	regmap_read(priv->regmap, MSR_CLK_REG2, &val);
-+
-+	if (val >= MSR_VAL_MASK)
-+		return -EINVAL;
-+
-+	return DIV_ROUND_CLOSEST_ULL((val & MSR_VAL_MASK) * 1000000ULL,
-+				     duration);
-+}
-+
-+static int meson_clk_msr_best_id(struct meson_msr *priv, unsigned int id,
-+				 unsigned int *precision)
-+{
-+	unsigned int duration = DIV_MAX;
-+	int ret;
-+
-+	/* Start from max duration and down to min duration */
-+	do {
-+		ret = meson_clk_msr_measure_id(priv, id, duration);
-+		if (ret >= 0)
-+			*precision = (2 * 1000000) / duration;
-+		else
-+			duration -= DIV_STEP;
-+	} while (duration >= DIV_MIN && ret == -EINVAL);
-+
-+	return ret;
-+}
-+
-+static void meson_clk_msr_dump(struct udevice *dev)
-+{
-+	struct meson_msr *priv = dev_get_priv(dev);
-+	unsigned int precision = 0;
-+	int val, i;
-+
-+	printf("  clock                     rate    precision\n");
-+	printf("---------------------------------------------\n");
-+
-+	for (i = 0 ; i < CLK_MSR_MAX ; ++i) {
-+		if (!priv->msr_table[i].name)
-+			continue;
-+
-+		val = meson_clk_msr_best_id(priv, i, &precision);
-+		if (val < 0)
-+			return;
-+
-+		printf(" %-20s %10d    +/-%dHz\n",
-+		       priv->msr_table[i].name, val, precision);
-+	}
-+}
-+
-+static int meson_clk_msr_xlate(struct clk *clk, struct ofnode_phandle_args *args)
-+{
-+	/* This driver doesn't expose any clocks */
-+	return -EINVAL;
-+}
-+
-+static int meson_clk_msr_probe(struct udevice *dev)
-+{
-+	struct meson_msr *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	priv->msr_table = (struct meson_msr_id *)dev_get_driver_data(dev);
-+
-+	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static struct clk_ops meson_clk_msr_ops = {
-+	.of_xlate = meson_clk_msr_xlate,
-+	.dump = meson_clk_msr_dump,
-+};
-+
-+static const struct udevice_id meson_clk_msr_ids[] = {
-+	{
-+		.compatible = "amlogic,meson-gx-clk-measure",
-+		.data = (ulong)clk_msr_gx,
-+	},
-+	{
-+		.compatible = "amlogic,meson8-clk-measure",
-+		.data = (ulong)clk_msr_m8,
-+	},
-+	{
-+		.compatible = "amlogic,meson8b-clk-measure",
-+		.data = (ulong)clk_msr_m8,
-+	},
-+	{
-+		.compatible = "amlogic,meson-axg-clk-measure",
-+		.data = (ulong)clk_msr_axg,
-+	},
-+	{
-+		.compatible = "amlogic,meson-g12a-clk-measure",
-+		.data = (ulong)clk_msr_g12a,
-+	},
-+	{
-+		.compatible = "amlogic,meson-sm1-clk-measure",
-+		.data = (ulong)clk_msr_sm1,
-+	},
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(meson_clk_msr) = {
-+	.name		= "meson_clk_msr",
-+	.id		= UCLASS_CLK,
-+	.of_match	= meson_clk_msr_ids,
-+	.priv_auto	= sizeof(struct meson_msr),
-+	.ops		= &meson_clk_msr_ops,
-+	.probe		= meson_clk_msr_probe,
-+};
-
----
-base-commit: e1b7717928eff69178604a400fe40dbf3287d9a1
-change-id: 20231113-uboot-meson-clk-msr-21cf9101278b
-
-Best regards,
--- 
-Neil Armstrong <neil.armstrong@linaro.org>
-
+Neil
