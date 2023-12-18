@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 394F9C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 18:19:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D761FC46CA2
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 18:19:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FF778745E;
-	Mon, 18 Dec 2023 19:19:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 27A9A870DF;
+	Mon, 18 Dec 2023 19:19:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lTUra1zN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L1/9Mscw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 570BB871C3; Mon, 18 Dec 2023 19:19:32 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 3571E871C3; Mon, 18 Dec 2023 19:19:41 +0100 (CET)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD90870D5
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 19:19:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2E678743A
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 19:19:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-67f2f1008e1so15638956d6.1
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:19:29 -0800 (PST)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-59091e4a0f9so1424088eaf.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:19:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702923568; x=1703528368; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=YBNP5h/vyaPNdABOyvxb0RkiEtLvMcEVr6YcTL2N3Uo=;
- b=lTUra1zNl5VcwkaNE9n4YbnjB/CqODjdp4ZX0pW5RmmTwX78sqCEWqH5KBHCk64Pfj
- P0GFmkeqFThbAx74OjTNBwQgFdpHaTDyKx1ZW6jmKrBKCli9lbVaUXZX/dIzSRtyr9Q3
- Gq1BWUf9EU/q0H6s/PVUwa8NvhnYEEk3pmkbU/nPc6yFAHtnCnSbQyOvbY2PfaDAcDHL
- 5LcWtbdwOl1XCjCXwisQuGBcXFHTPNRigE+lL83jXo3/vGcS6CcfOFxebBraqiPuNud8
- AJcp5I02/6UEEbAAx85I/GkqW7s2t+rDpbSg7i1NcHBey50n6/WJO7nVWZwgIbDMTEBQ
- gKUQ==
+ d=linaro.org; s=google; t=1702923576; x=1703528376; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TPrgZpWodwgPb0KblJAhNU0xeDi0U0o9ZvIxm3m/fmI=;
+ b=L1/9Mscw7aOM85tE9odTS9uoHtfKtrbHdnJoylte0vGTSSpnPztv0rK4mmkvI0uV95
+ aT+k79kXBGhb/ztI8Ckia8GOBUVAMlEkHitqcgnRaIdt+Kh3h7cYAGJAzIKzkde8Anm0
+ FOoP3MpajVBQfR2/awecRngcEgti2bHombDIk3Q7TT574r8sChfy8bF/Ao2EhaxGzXot
+ UtNYDzFpeVZc4t2IUyvZ6T3chOnVx6Cl8KakZ7VA++REFUSYOLq844riIkhws2KVANIC
+ bvujR1ovfe9D3ysmNtniffBJT/42ZLk9ygomvEq318ZyLOwx6V7eksEkiEysA06zw+Wt
+ cVsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702923568; x=1703528368;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YBNP5h/vyaPNdABOyvxb0RkiEtLvMcEVr6YcTL2N3Uo=;
- b=jb1wxV2/IPqsxHIJvM7NAm/hX/G0sm2G3knK6s+NGMMneMVmDVJyadlxfJBJqjRfwl
- 515hi57kLGUtdfCHgwklBOgsnayA23wuJtIFvk17xDRWvpNmCUpFwuUyFUPZt/E+LGlQ
- +Dqqd0QyBEt+XBTqjEoAtpt9XLPdBiQjQ1WPIdqnAFRL7dSrXHdpkO/Mo0V7BXKMTI5W
- jOPuwv44r4D6ITrrrimVKQ85WCSLBvNmT2WjiQAjzgZqTTD5tXFfUz33dSjIS11Sd7QU
- XkynQWRPwhYGxmtq2AajCN+ug9M5CMYm7jnklByoIUvGFhtVEWAZTOTWFPqUw+qRPZVU
- KvOQ==
-X-Gm-Message-State: AOJu0YyRWZXgGhC8gmJoQ2/kaNnus8eIsWuoaAnV6jRFfws7xF/TbRLI
- uWXrfqCXBrrQXxhXpX7doJ+arElqwWy+gRsT15A=
-X-Google-Smtp-Source: AGHT+IGbG4A9R2RgE2So6ZctkZglURPOsXGQB7ap30GKha4UlSiYWUh7JIXI591fwfTPSaF67qhwhw==
-X-Received: by 2002:a05:6214:e4c:b0:67f:4881:1ad0 with SMTP id
- o12-20020a0562140e4c00b0067f48811ad0mr2431208qvc.34.1702923568312; 
- Mon, 18 Dec 2023 10:19:28 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702923576; x=1703528376;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TPrgZpWodwgPb0KblJAhNU0xeDi0U0o9ZvIxm3m/fmI=;
+ b=NPTsxH/0T09zIy7GRsWWBX8nT7siTffbelhj++AuB5jB8/CF8AJ0rS0vrmouTMDWC9
+ J2DPTNFyuzobJruO7sLq/+eWOVlI3ZeValPwkE/I1vHGkVK9WPWz3wmsMoYlTJXAp2e5
+ 2RPiGCUX8b77TfnguWw/ANYkWxb5Thw8qJ6EF9U8c2g04WQsLEeY1C5kaQrb1HQqXPf9
+ WjRHJOPrLKTG/8gVPgYQOKJ7w3xJBZqErqN3Tn/v91ZpvUsXbgEGBQ6CNBpCU5Sii050
+ n+wVoKEVU+SRsUvFHiRa1vIDMKMUa3X+3D1SUpw6pw//LZffPD5XP84lUuOTmmDLBtpq
+ J7TQ==
+X-Gm-Message-State: AOJu0YzU9naL1rDxRAk2O9bESC8pG2icIKuFOGWBYdzifTon57CE1JxM
+ tGesAOSqvqxZYA5dkkw3WpkUnvbcoUfrEUDGJ/Q=
+X-Google-Smtp-Source: AGHT+IFZKWSvUCIz0GHux3vVx2eUeS3o9s58d24Byeq6vOoi4WTXsabtR/AHPbXSfDUXmLEZl0Zgaw==
+X-Received: by 2002:a05:6358:921d:b0:16d:bc51:7601 with SMTP id
+ d29-20020a056358921d00b0016dbc517601mr5408954rwb.9.1702923575961; 
+ Mon, 18 Dec 2023 10:19:35 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- dy7-20020ad44e87000000b0067f213933bdsm3046136qvb.2.2023.12.18.10.19.27
+ dy7-20020ad44e87000000b0067f213933bdsm3046136qvb.2.2023.12.18.10.19.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 10:19:28 -0800 (PST)
+ Mon, 18 Dec 2023 10:19:35 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
  Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH v3 00/14] Support Firmware Handoff spec via bloblist
-Date: Mon, 18 Dec 2023 10:18:45 -0800
-Message-Id: <20231218181901.337515-1-raymond.mao@linaro.org>
+Subject: [PATCH v3 01/14] bloblist: Update the tag numbering
+Date: Mon, 18 Dec 2023 10:18:46 -0800
+Message-Id: <20231218181901.337515-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231218181901.337515-1-raymond.mao@linaro.org>
+References: <20231218181901.337515-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,49 +94,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Major changes:
+From: Simon Glass <sjg@chromium.org>
 
-Update bloblist to align to Firmware Handoff spec v0.9 (up to commit #3592349 of the spec)
-(https://github.com/FirmwareHandoff/firmware_handoff).
+Align bloblist tags with the FW handoff spec v0.9.
+The most common ones are from 0.
+TF related ones are from 0x100.
+All non-standard ones from 0xfff000.
 
-Includes:
-- Align bloblist tags with the FW handoff spec
-- Add an explicit alignment field in the header
-- Update bloblist magic and version
-- Use a packed format for blob record header
-- Change the checksum alorigthm
-- Use a void entry to handle the alignment
-- Adjust the headers of bloblist and blob record
-- Align the bloblist record data section start address
+Added new defined tags:
+BLOBLISTT_OPTEE_PAGABLE_PART for TF.
+BLOBLISTT_TPM_EVLOG and BLOBLISTT_TPM_CRB_BASE for TPM.
 
-In v3, the implementation from boot arguments to bloblist and how to load the
-FDT from the bloblist are moved to a forthcoming patch serie.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+Changes in v2
+- Align bloblist tags to FW handoff spec v0.9.
+Changes in v3
+- Add TPM related tags
 
-Raymond Mao (1):
-  bloblist: Align bloblist used_size and total_size to spec
+ common/bloblist.c  | 18 ++++++++++---
+ include/bloblist.h | 67 +++++++++++++++++++++++++---------------------
+ test/bloblist.c    |  4 +--
+ 3 files changed, 52 insertions(+), 37 deletions(-)
 
-Simon Glass (13):
-  bloblist: Update the tag numbering
-  bloblist: Adjust API to align in powers of 2
-  bloblist: Change the magic value
-  bloblist: Set version to 1
-  bloblist: Access record hdr_size and tag via a function
-  bloblist: Drop spare value from bloblist record
-  bloblist: Change the checksum algorithm
-  bloblist: Checksum the entire bloblist
-  bloblist: Handle alignment with a void entry
-  bloblist: Reduce blob-header size
-  bloblist: Adjust the bloblist header
-  bloblist: Add alignment to bloblist_new()
-  bloblist: Update documentation and header comment
-
- arch/x86/lib/tables.c    |   3 +-
- common/bloblist.c        | 205 ++++++++++++++++++++++++---------------
- doc/develop/bloblist.rst |   4 +-
- include/bloblist.h       | 166 ++++++++++++++++++-------------
- test/bloblist.c          | 105 +++++++++++---------
- 5 files changed, 287 insertions(+), 196 deletions(-)
-
+diff --git a/common/bloblist.c b/common/bloblist.c
+index a22f6c12b0..5606487f5b 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -36,16 +36,26 @@ static struct tag_name {
+ 	enum bloblist_tag_t tag;
+ 	const char *name;
+ } tag_name[] = {
+-	{ BLOBLISTT_NONE, "(none)" },
++	{ BLOBLISTT_VOID, "(void)" },
+ 
+ 	/* BLOBLISTT_AREA_FIRMWARE_TOP */
++	{ BLOBLISTT_CONTROL_FDT, "Control FDT" },
++	{ BLOBLISTT_HOB_BLOCK, "HOB block" },
++	{ BLOBLISTT_HOB_LIST, "HOB list" },
++	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
++	{ BLOBLISTT_TPM_EVLOG, "TPM event log defined by TCG EFI" },
++	{ BLOBLISTT_TPM_CRB_BASE, "TPM Command Response Buffer address" },
+ 
+ 	/* BLOBLISTT_AREA_FIRMWARE */
+-	{ BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
+-	{ BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+ 	{ BLOBLISTT_TPM2_TCG_LOG, "TPM v2 log space" },
+ 	{ BLOBLISTT_TCPA_LOG, "TPM log space" },
+-	{ BLOBLISTT_ACPI_TABLES, "ACPI tables for x86" },
++	{ BLOBLISTT_ACPI_GNVS, "ACPI GNVS" },
++
++	/* BLOBLISTT_AREA_TF */
++	{ BLOBLISTT_OPTEE_PAGABLE_PART, "OP-TEE pagable part" },
++
++	/* BLOBLISTT_AREA_OTHER */
++	{ BLOBLISTT_INTEL_VBT, "Intel Video-BIOS table" },
+ 	{ BLOBLISTT_SMBIOS_TABLES, "SMBIOS tables for x86" },
+ 	{ BLOBLISTT_VBOOT_CTX, "Chrome OS vboot context" },
+ 
+diff --git a/include/bloblist.h b/include/bloblist.h
+index 080cc46a12..92dbfda21b 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -81,7 +81,7 @@ enum {
+ 
+ /* Supported tags - add new ones to tag_name in bloblist.c */
+ enum bloblist_tag_t {
+-	BLOBLISTT_NONE = 0,
++	BLOBLISTT_VOID = 0,
+ 
+ 	/*
+ 	 * Standard area to allocate blobs used across firmware components, for
+@@ -89,42 +89,36 @@ enum bloblist_tag_t {
+ 	 * projects.
+ 	 */
+ 	BLOBLISTT_AREA_FIRMWARE_TOP = 0x1,
++	/*
++	 * Devicetree for use by firmware. On some platforms this is passed to
++	 * the OS also
++	 */
++	BLOBLISTT_CONTROL_FDT = 1,
++	BLOBLISTT_HOB_BLOCK = 2,
++	BLOBLISTT_HOB_LIST = 3,
++	BLOBLISTT_ACPI_TABLES = 4,
++	BLOBLISTT_TPM_EVLOG = 5,
++	BLOBLISTT_TPM_CRB_BASE = 6,
+ 
+ 	/* Standard area to allocate blobs used across firmware components */
+-	BLOBLISTT_AREA_FIRMWARE = 0x100,
++	BLOBLISTT_AREA_FIRMWARE = 0x10,
++	BLOBLISTT_TPM2_TCG_LOG = 0x10,	/* TPM v2 log space */
++	BLOBLISTT_TCPA_LOG = 0x11,	/* TPM log space */
+ 	/*
+ 	 * Advanced Configuration and Power Interface Global Non-Volatile
+ 	 * Sleeping table. This forms part of the ACPI tables passed to Linux.
+ 	 */
+-	BLOBLISTT_ACPI_GNVS = 0x100,
+-	BLOBLISTT_INTEL_VBT = 0x101,	/* Intel Video-BIOS table */
+-	BLOBLISTT_TPM2_TCG_LOG = 0x102,	/* TPM v2 log space */
+-	BLOBLISTT_TCPA_LOG = 0x103,	/* TPM log space */
+-	BLOBLISTT_ACPI_TABLES = 0x104,	/* ACPI tables for x86 */
+-	BLOBLISTT_SMBIOS_TABLES = 0x105, /* SMBIOS tables for x86 */
+-	BLOBLISTT_VBOOT_CTX = 0x106,	/* Chromium OS verified boot context */
++	BLOBLISTT_ACPI_GNVS = 0x12,
+ 
+-	/*
+-	 * Project-specific tags are permitted here. Projects can be open source
+-	 * or not, but the format of the data must be fuily documented in an
+-	 * open source project, including all fields, bits, etc. Naming should
+-	 * be: BLOBLISTT_<project>_<purpose_here>
+-	 */
+-	BLOBLISTT_PROJECT_AREA = 0x8000,
+-	BLOBLISTT_U_BOOT_SPL_HANDOFF = 0x8000, /* Hand-off info from SPL */
+-	BLOBLISTT_VBE		= 0x8001,	/* VBE per-phase state */
+-	BLOBLISTT_U_BOOT_VIDEO = 0x8002, /* Video information from SPL */
+-
+-	/*
+-	 * Vendor-specific tags are permitted here. Projects can be open source
+-	 * or not, but the format of the data must be fuily documented in an
+-	 * open source project, including all fields, bits, etc. Naming should
+-	 * be BLOBLISTT_<vendor>_<purpose_here>
+-	 */
+-	BLOBLISTT_VENDOR_AREA = 0xc000,
++	/* Standard area to allocate blobs used for Trusted Firmware */
++	BLOBLISTT_AREA_TF = 0x100,
++	BLOBLISTT_OPTEE_PAGABLE_PART = 0x100,
+ 
+-	/* Tags after this are not allocated for now */
+-	BLOBLISTT_EXPANSION = 0x10000,
++	/* Other standard area to allocate blobs */
++	BLOBLISTT_AREA_OTHER = 0x200,
++	BLOBLISTT_INTEL_VBT = 0x200,	/* Intel Video-BIOS table */
++	BLOBLISTT_SMBIOS_TABLES = 0x201, /* SMBIOS tables for x86 */
++	BLOBLISTT_VBOOT_CTX = 0x202,	/* Chromium OS verified boot context */
+ 
+ 	/*
+ 	 * Tags from here are on reserved for private use within a single
+@@ -133,9 +127,20 @@ enum bloblist_tag_t {
+ 	 * implementation, but cannot be used in upstream code. Allocate a
+ 	 * tag in one of the areas above if you want that.
+ 	 *
+-	 * This area may move in future.
++	 * Project-specific tags are permitted here. Projects can be open source
++	 * or not, but the format of the data must be fuily documented in an
++	 * open source project, including all fields, bits, etc. Naming should
++	 * be: BLOBLISTT_<project>_<purpose_here>
++	 *
++	 * Vendor-specific tags are also permitted. Projects can be open source
++	 * or not, but the format of the data must be fuily documented in an
++	 * open source project, including all fields, bits, etc. Naming should
++	 * be BLOBLISTT_<vendor>_<purpose_here>
+ 	 */
+-	BLOBLISTT_PRIVATE_AREA = 0xffff0000,
++	BLOBLISTT_PRIVATE_AREA		= 0xfff000,
++	BLOBLISTT_U_BOOT_SPL_HANDOFF	= 0xfff000, /* Hand-off info from SPL */
++	BLOBLISTT_VBE			= 0xfff001, /* VBE per-phase state */
++	BLOBLISTT_U_BOOT_VIDEO		= 0xfff002, /* Video info from SPL */
+ };
+ 
+ /**
+diff --git a/test/bloblist.c b/test/bloblist.c
+index 720be7e244..efa1e32afd 100644
+--- a/test/bloblist.c
++++ b/test/bloblist.c
+@@ -291,9 +291,9 @@ static int bloblist_test_cmd_list(struct unit_test_state *uts)
+ 	console_record_reset();
+ 	run_command("bloblist list", 0);
+ 	ut_assert_nextline("Address       Size   Tag Name");
+-	ut_assert_nextline("%08lx  %8x  8000 SPL hand-off",
++	ut_assert_nextline("%08lx  %8x  fff000 SPL hand-off",
+ 			   (ulong)map_to_sysmem(data), TEST_SIZE);
+-	ut_assert_nextline("%08lx  %8x   106 Chrome OS vboot context",
++	ut_assert_nextline("%08lx  %8x   202 Chrome OS vboot context",
+ 			   (ulong)map_to_sysmem(data2), TEST_SIZE2);
+ 	ut_assert_console_end();
+ 	ut_unsilence_console(uts);
 -- 
 2.25.1
 
