@@ -4,72 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 472EAC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 22:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 110C7C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 23:08:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89094874F6;
-	Mon, 18 Dec 2023 23:41:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C51487227;
+	Tue, 19 Dec 2023 00:08:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WgHe0FCd";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ObkUz3J9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 537FF8747A; Mon, 18 Dec 2023 23:41:14 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4760D87252; Tue, 19 Dec 2023 00:08:36 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15D9C87186
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 23:41:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 38D35870A4
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 00:08:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5d7a47d06eeso31634117b3.1
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:41:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702939271; x=1703544071; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=sou0yFGzaWpbXLGdMlf56s/B6B5c4nB0V9YQkAMxXBg=;
- b=WgHe0FCd8EGtu6rSnmcy//N34DGwCd6ImLjFEN3gD3gXMAQ691mML9eQnt1o4/m/9W
- DAOtIWFIraHU/bpO6fAFPYdVfR+v2qYixGlc5i72w8Tk1uBn+hCXBDEbgdqNDrtKtqbO
- jwWTmQ12Zc5wLtFAbUli7N8XJI8cRcCr1TmFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702939271; x=1703544071;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sou0yFGzaWpbXLGdMlf56s/B6B5c4nB0V9YQkAMxXBg=;
- b=e93ZO7NRlF5fFKh6Ffd7JquldCoEI+J27jqglPrlFGHSRSWTBgGseJEwPCZ/AxXq4e
- UUVEFexWrhxVZ3EneGsyCIodqyi4luqk4St52L6DSJpDbyXWxRt5XMeWqK0P9sBaWX/s
- RnlRGzwdJdV4sKi1Qp9cZNX6Sq8TT0uAxYMQ0uL7GXe5LP5jSxPgCbLluEG9iL4ZoI+A
- dIAWCchsfx/EHetQFsCwvIpwlZXoJLUKRZTXNUXCw4ZaGIyhRHZ8r69vT7sn+vEPRR83
- nZJ5qcYfpa4njvhnqRaClLojx+XlUHyvGZvDFsOq00Ih4dppDpbQIg3An7aINs9xeBa7
- gqUQ==
-X-Gm-Message-State: AOJu0YwO/AQuaSdMtvc8WDLLtnLGlzuz0DPiDNMgKBl8Bc3MlgKQLey0
- izBkLEbbTPCMFpzVa99ShhAfgA==
-X-Google-Smtp-Source: AGHT+IFWC8gzPgDx8zDR0emrVOZBmAdw/FCbzl0LYdk/iHI5p4Q/CAM2IhcT5moqqy2/hsCLLlJ6iw==
-X-Received: by 2002:a81:4887:0:b0:5e5:1d9c:4996 with SMTP id
- v129-20020a814887000000b005e51d9c4996mr3370143ywa.16.1702939270763; 
- Mon, 18 Dec 2023 14:41:10 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
- [2603:6081:7b00:6400:923c:ac63:6854:a688])
- by smtp.gmail.com with ESMTPSA id
- 4-20020a251804000000b00d9abff76f5csm8164044yby.9.2023.12.18.14.41.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 14:41:10 -0800 (PST)
-Date: Mon, 18 Dec 2023 17:41:08 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1702940912; x=1703545712; i=xypron.glpk@gmx.de;
+ bh=A/wm9jTc59iVRx3X09sObPATwoyxuNyTQLP7WsfaKhk=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
+ References;
+ b=ObkUz3J9GX3rn+GvyT8WE36mXRHQhj3rBC1H6SEU4PTlEnFsgynV63iTfomvL1JD
+ 4dqskKRmxIb/P8jE/teZ73hhYr0RbRXdVf+bjj5XQrsgXRfULmGcPHa8cpqp1s0pu
+ JHrWt7enlkyaL3zUtRejzoo67pDpXGPfyhowlaM9+sFjGUzmAOwAf3OmqyfLxG6b7
+ J4ygoQLxUhw4k7NP/iKDzorMm0QdywbzRS2B4fKKshWOMS0j28nostK242RkqgXjC
+ 9UYLUKVWWKL8LOTPnPqcOAS4QNgm7KuHJ6ZiHTZyRc5XNTK4sKTqwNU1PMy2Jc7RP
+ FG8r7eh0XOv8qXiu/A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N4QsO-1r838g0yGM-011QA3; Tue, 19
+ Dec 2023 00:08:32 +0100
+Date: Tue, 19 Dec 2023 00:08:31 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Tom Rini <trini@konsulko.com>
+CC: Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 Subject: Re: Proposal: U-Boot memory management
-Message-ID: <20231218224108.GN2513409@bill-the-cat>
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231218224108.GN2513409@bill-the-cat>
 References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
  <a55d0848-c70e-43a9-9223-60515aea8052@gmx.de>
  <CAPnjgZ0r1xM-bky6VQXV4N-FkBC-YFsX1ibJRiJ_17XXAe5ang@mail.gmail.com>
@@ -78,12 +57,31 @@ References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
  <3A9B3E83-545B-4CAC-9D65-737BD9D6BE0C@gmx.de>
  <CAPnjgZ1=JBEh49G654DfkYM-fcOEhwh=Xuu1scXTLsNkZk2SNQ@mail.gmail.com>
  <DEECD6D4-58C6-4032-BBF9-28A65B9096DD@gmx.de>
+ <20231218224108.GN2513409@bill-the-cat>
+Message-ID: <3DAFAD12-98E4-46CC-B02E-E8EE40D57AC3@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GgxcIfI6dtA76jWU"
-Content-Disposition: inline
-In-Reply-To: <DEECD6D4-58C6-4032-BBF9-28A65B9096DD@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:C09KkR4sQ0jFQkNk194pMX2tRodaOXkW0JEn63OCdaJxxJK4YA5
+ yKjxlWdkZTTJK6q9oi+Ff0E90Ud+KYIxnitZc2TpptAIYtmdT7Ahz7Ohi98f88trnNLBOJL
+ bi2ZCkPD/rMBqYep+F9ERJ8i6RqQVMoaTuf86gYkWGT7MCcK9P2THLPVNz0vFfXqikh25HI
+ Xa/hKGoaAEvvw32PX3gQA==
+UI-OutboundReport: notjunk:1;M01:P0:XioKF09iCWs=;VcVXNFjrB6nDOqEuL6Rnt/QI0Cb
+ usN9AT+29MswBA4ncwuutDNien6U2lXzCB69kkZrYXbSx3H0wO8Y0ID3ed1obiW8sBARHmHpd
+ Olq0f1c1ApqOj1SaS6HY5/ZL7Ye1e9LW5EqG83nz5igPgBOyQWvVwU24RPIwaQ6BOOjv+gFt/
+ NloFZD2Zp55NGfk/96EoNjYm7o5LoRQ8SNcf3AyBDURr81Tc+sQ+dDdjdPdCJEE5uFo1CMRFq
+ EXv3JJdbk5gQLVf/dSaqHpUQiWsa8+zTPEKH1MPG8CzOUhTn5iMayHOeHWGnNlftt2nBu4Msy
+ Y1kHcraSmb9nujCSb7z24Xad/VgNT0xej9hDUMj+r+IUAfMfvr+glchKBTiIS4OqX9d+o4RM2
+ aVvmFi/gvSxtGZnCG/EXElWFRuVjb3LNW1ShMu4/eSR/G9cA7KgSHbJmEcF2uA6xgHz4mDWLL
+ 6zoCILRtUDdpP4+rOPmAgGNftfgms6Y6XxFKhA+e+ZPKbyrI5SxIPkrJ01MTjkQItb3Uv4k9T
+ ThF6+ZDlONOOTBwki1oO28kGp3nD72FkcmJZVf7fKLXsczChFKWy5ubknM4txblxa6vvcenGI
+ UlcpYFBgfXBy49gBvRhPIdh9Gg8GsHV+41ROK3XUdKOrPriTm3JIstLLm2HEtKjz6W9GbpDj6
+ yfo6EgwYebrksAoFojDsKY/ozFACX4hQ4eevapsRrhqz5TFXK/hZ3qKfOmmP/URL1dRMrUgSz
+ 2KOQCbkUEPV77x9Tdiby5D+ZpVc93ug8HEMWaJwDo3QqZDVBtlU9xh3qGUAoR7p8Dm1gvVWr+
+ H7bYSrawD64e5pFKOpI3rbn9V2SXRvkeBPJDCVwewucjvXocjYQHohOSwNqY8vxwtljs1bWKD
+ q/RM5f6iU+70t6b9D7XHespMdFjGl9cuXMqM9xrDj9IkNvsWP2jsSC3IqZqXYT2fqT5noHSdO
+ RoqmcP852BTfrxlYMqO0XDNmtV8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,55 +99,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GgxcIfI6dtA76jWU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchardt wrote:
+Am 18=2E Dezember 2023 23:41:08 MEZ schrieb Tom Rini <trini@konsulko=2Ecom=
+>:
+>On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchardt wrote:
+>
+>[snip]
+>> Or take:
+>>=20
+>> load host 0:1 $c kernel=2Eefi
+>> load host 0:1 $d initrd=2Eimg
+>>=20
+>> How could we ensure that initrd=2Eimg is not overwriting a part of kern=
+el=2Eefi without memory allocation?
+>
+>Today, invalid checksum as part of some part of the kernel fails=2E But
+>how do we do this tomorrow, are you suggesting that "load" perform
+>malloc() in some predefined size? If $c is below $d and $c + kernel=2Eefi
+>is now above $d we can throw an error before trying to load, yes=2E But
+>what about:
+>load host 0:1 $d initrd=2Eimg
+>load host 0:1 $c kernel=2Eefi
+>
+>In that case (which is only marginally contrived, the more real case is
+>loading device tree in to unexpectedly large ramdisk because someone
+>didn't understand the general advice on why device tree is lower than
+>ramdisk address) I'm fine with an error that amounts to "you just
+>corrupted another allocation" and then "fail, reset the board" or so=2E
+>
 
-[snip]
-> Or take:
->=20
-> load host 0:1 $c kernel.efi
-> load host 0:1 $d initrd.img
->=20
-> How could we ensure that initrd.img is not overwriting a part of kernel.e=
-fi without memory allocation?
+Our current malloc library cannot manage the complete memory=2E We need a =
+library like lmb which should also cover the memory management that we curr=
+ently have in lib/efi/efi_memory=2Ec=2E This must include a memory type att=
+ribute for usage in the GetMemoryMap() service=2E A management on page leve=
+l seems sufficient=2E
 
-Today, invalid checksum as part of some part of the kernel fails. But
-how do we do this tomorrow, are you suggesting that "load" perform
-malloc() in some predefined size? If $c is below $d and $c + kernel.efi
-is now above $d we can throw an error before trying to load, yes. But
-what about:
-load host 0:1 $d initrd.img
-load host 0:1 $c kernel.efi
+The load command should permanently allocate memory in that lmb+ library=
+=2E
 
-In that case (which is only marginally contrived, the more real case is
-loading device tree in to unexpectedly large ramdisk because someone
-didn't understand the general advice on why device tree is lower than
-ramdisk address) I'm fine with an error that amounts to "you just
-corrupted another allocation" and then "fail, reset the board" or so.
+We need an unload command to free the memory if we want to reuse the memor=
+y or we might let the load comand free the memory if exactly the same start=
+ address is reused=2E
 
---=20
-Tom
+Best regards
 
---GgxcIfI6dtA76jWU
-Content-Type: application/pgp-signature; name="signature.asc"
+Heinrich
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWAyoEACgkQFHw5/5Y0
-tyz+Nwv9HUQ9vRxcBnMm2wTOgmj5pGF3iNvK7bIhweydXUtGyxEMJTmhypC1EI83
-ucZCEtnrHYBX094rJrsPf5j4rlHyhMAtncdHJcIhoKrwDUoXBASvwQj3ksajdlvL
-bK+C44AFsJRNB0AIXFyxINnWcMyvOKeTntqgZSsG/xqm1Hr5oSpW5z8+xNcWNlmE
-c299tQ9Elki5VNR2qG4mR85NG1qWCqgyLUT7KaSjJzLRfCREn9inYVcZkBMQKubu
-C4yazyyZ37KVpZkiOjCEtH7fFGIZqNcHDpRwWEkplC81ZBeVPVEa+NF+2W1gd2LV
-jO+1V28R/QRkZ6xcQZ4tuO9i8MOw2haC/vsphW+NZo1O0G5wY0PWR1bhsgiBAV3O
-3r6lkpzXUH5caVR3cz7SV7Uoy/HO8wilOEyAxKChm/n5uhCE8v3raJHDz/6VtFhL
-ZtfZ7rODPT9BIDXNvS9vRHhNN5H5tQ2MxUuNLHg+CaPHPOXVtHqE8HO3M7cFNJOX
-hsrGfGmb
-=WU0j
------END PGP SIGNATURE-----
-
---GgxcIfI6dtA76jWU--
