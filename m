@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ABE4C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:54:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9592C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6CAC287E23;
-	Mon, 18 Dec 2023 14:54:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DA0287DD0;
+	Mon, 18 Dec 2023 14:54:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4+gW7kG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OesBIe6o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9803C87E20; Mon, 18 Dec 2023 14:54:04 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 5C5A187DD0; Mon, 18 Dec 2023 14:54:49 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A87E87E22
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:53:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48D9187E23
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:54:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5906988ab8dso1224303eaf.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 05:53:59 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-590bb31ccf5so2390539eaf.3
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 05:54:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702907638; x=1703512438; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1702907686; x=1703512486; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I/wyw4b7rYnip7gPRdkfrBw65oHGpyOI8GqP8I3wbTc=;
- b=b4+gW7kGCMEfhRgR/3onJufcP0VcNJMUGSR9mPEATfws8cHGUJxHgRGXb2QmCV1FSf
- VdHuDJ6ThJQJG9KcmF0+49eabLvqfDaJF2F01jTYkTWVDJ3P5AIu+Y30TFIsgMU0rQas
- 5fAnM4fbPKNY0D+W92yCVwpvTxNgRvs/4KvJlBwMqbkttl6SWCwelDV9K0XLenQxrgGd
- cWB0EboOAh0VmRknGSHjhWgc+I/jkSS/WtuisI4z245M6Oe92Ltn0nTjcVLRYM1/UqHN
- IPr4tpimpeKUD67YejJQt212O64WYdARPRxZHr3QZQzETU9OK8QdeXMPpXRDSQJKt5MQ
- WZhQ==
+ bh=qHXdqXWizK2NzGBbhWfsWlxZtiOM9CipfRsYjvx/yoc=;
+ b=OesBIe6o88q2MdabsIxKPJTmFhZCswkoNPLgg84HiRKxzRNOu5+q0K5dPURCVrfHb8
+ +T+I+1//AZ1s3hGwoELEtYCUB16bj88GMTMk0lcbKBKbO013BzS5bF47FGksuSj/+0Dr
+ 4PWDF8Mro07ULhO2vFVWfMpJ5vH0TGXP2bktDKrXvgYwnik7yNSMaCeDxqw84c/LvcIS
+ A4uHLA0Your4AskJ3ysxvF8X9EIcq7lmeakCO79zNk77QkD5C8PBPg6CpOpY5/n+lJBR
+ XwZLKaZ0uC66s8hFuAp7WfzsVpgeiPkLqSbyJfzbMbOgKzwDZla5atxLEWqYYKQf1Fl3
+ zgbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702907638; x=1703512438;
+ d=1e100.net; s=20230601; t=1702907686; x=1703512486;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I/wyw4b7rYnip7gPRdkfrBw65oHGpyOI8GqP8I3wbTc=;
- b=ryPhykc7uAzp9iVtEPAIxRuj6KjwAKs19r9vIT9Wyq90u2dOpHYd3wag7LXv4DgNuI
- GB8X8bFTZ1J4+LhTQRtY80GH6FrUJA+HVBzRYB4Imj+40w32evOKoCwxRzqTRbQlb5Mx
- bZAIv0yER4Qpt1WF6+aQMgfM84E48spuvPM8ANDK0kgUvdfYzeX6RgybObaoSWs02lvt
- IAJRgrBKKUdERN8bmuRLIH17AZ0EGmQZhj07JtsgBo657mmnJjsIRdlpcqLZgzFDlZ06
- pVCmOl3lfefPgsv2HwmBK6FJMjMW8Pzit7wg89CGqiwttSykp0tQ4+h3rl54j6NG+fV5
- HcZg==
-X-Gm-Message-State: AOJu0Ywc4ZSfn8vX7n+N/ctVxBCDIEPRAIzmv2pLPnAMmvt/1wpugExO
- bem+O9gQsnDt8SO3cWMnF2uVwnFVErp8bVm6n3c=
-X-Google-Smtp-Source: AGHT+IG6EzkAbH1aY4nNsCFRK27x73uwk0r0zSQqGyXK1auWAb29qrudLzTOQ4ZIia99fjwGHvcR87WcEalAkQseF7I=
-X-Received: by 2002:a4a:98c4:0:b0:58e:250f:7c25 with SMTP id
- b4-20020a4a98c4000000b0058e250f7c25mr5942417ooj.3.1702907637776; Mon, 18 Dec
- 2023 05:53:57 -0800 (PST)
+ bh=qHXdqXWizK2NzGBbhWfsWlxZtiOM9CipfRsYjvx/yoc=;
+ b=M5AF/BliHS348MR9ZNMtQXUi7dHwmZ/pznqa57HyvgsLNB9ymFHxZCR+wmNPOCKULp
+ MMvSvLBnTKhLheCIAwiMfzBTm6My0U9B3MZR7Tnb1tvZaC01NxMon7errI2H0Pku/fbJ
+ jylHbYmCqVBEFGbwKiK5pezw5f1iEZyHcSgplviBR9mVik71b7sAYpW0yHpq0l5LNJyd
+ cdHetYbn/oYfEvB6nuflf7955FtmQkcl2YLwLpHlpjibtc4AUt4ijuW8SzL2kHXcJ/wQ
+ AXun6ieHj0ebUbDnJHch20D4y9Boz5H2177yd6phjF2fVkFfG4jN+fi9qL2RJXqwszLE
+ m2mA==
+X-Gm-Message-State: AOJu0Ywk8EGYt1FSkg1RiWikhUWdzXCv025hlPvvI7pWmwTt1rAe94Ll
+ ehPEwpgzfT0f6SOJT86Y1djLquaHuIy610VGoX8=
+X-Google-Smtp-Source: AGHT+IH4bTLSq/CyTFROTCNIhenO/onhbYvo8OcSVv0pYeaP9ICPLiGMod/ZXSf2eN6oUDUoWTURETmapTCQuPoxG5A=
+X-Received: by 2002:a4a:b005:0:b0:590:aaff:e4a5 with SMTP id
+ f5-20020a4ab005000000b00590aaffe4a5mr11045870oon.19.1702907685931; Mon, 18
+ Dec 2023 05:54:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-4-takahiro.akashi@linaro.org>
-In-Reply-To: <20231218023842.281336-4-takahiro.akashi@linaro.org>
+References: <20231213211125.279880-1-marex@denx.de>
+ <20231213230622.GT2513409@bill-the-cat>
+In-Reply-To: <20231213230622.GT2513409@bill-the-cat>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Mon, 18 Dec 2023 15:53:47 +0200
-Message-ID: <CAGi-RULTO1p8zkZ274QgDLhp_jo7JOwJVFyjDur2c4cX3+5sRg@mail.gmail.com>
-Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
- dependency
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, 
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+Date: Mon, 18 Dec 2023 15:54:35 +0200
+Message-ID: <CAGi-RUJGLxQ2aT4rQidE=SnK4o2CrXQFHPs5ChF9aQYO0b6yrQ@mail.gmail.com>
+Subject: Re: [PATCH v2] net: wget: Support non-default HTTP port
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Duncan Hare <DuncanCHare@yahoo.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,40 +90,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 18, 2023 at 5:17=E2=80=AFAM AKASHI Takahiro
-<takahiro.akashi@linaro.org> wrote:
+On Thu, Dec 14, 2023 at 1:06=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Now it is clear that the feature actually depends on efi interfaces,
-> not "bootefi" command. efi_set_bootdev() will automatically be nullified
-> if necessary efi component is disabled.
+> On Wed, Dec 13, 2023 at 10:11:13PM +0100, Marek Vasut wrote:
 >
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> ---
->  net/tftp.c | 10 ++++------
->  1 file changed, 4 insertions(+), 6 deletions(-)
+> > Currently the wget command is hard wired to HTTP port 80. This is
+> > inconvenient, as it is extremely easy to start trivial HTTP server
+> > as an unprivileged user using e.g. python http module to serve the
+> > files, but such a server has to run on one of the higher ports:
+> > "
+> > $ python3 -m http.server -d $(pwd) 8080
+> > "
+> >
+> > Make it possible to configure HTTP server port the same way it is
+> > possible to configure TFTP server port, using environment variable
+> > 'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
+> > fallback port. This way, users can start their own trivial server
+> > and conveniently download whatever files they need into U-Boot.
+> >
+> > Signed-off-by: Marek Vasut <marex@denx.de>
 >
-> diff --git a/net/tftp.c b/net/tftp.c
-> index 88e71e67de35..2e335413492b 100644
-> --- a/net/tftp.c
-> +++ b/net/tftp.c
-> @@ -302,12 +302,10 @@ static void tftp_complete(void)
->                         time_start * 1000, "/s");
->         }
->         puts("\ndone\n");
-> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
-> -               if (!tftp_put_active)
-> -                       efi_set_bootdev("Net", "", tftp_filename,
-> -                                       map_sysmem(tftp_load_addr, 0),
-> -                                       net_boot_file_size);
-> -       }
-> +       if (!tftp_put_active)
-> +               efi_set_bootdev("Net", "", tftp_filename,
-> +                               map_sysmem(tftp_load_addr, 0),
-> +                               net_boot_file_size);
->         net_set_state(NETLOOP_SUCCESS);
->  }
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 >
 > --
-> 2.34.1
->
+> Tom
 Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
