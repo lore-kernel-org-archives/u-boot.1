@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 513FCC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 07:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31579C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 07:26:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7DC387DED;
-	Mon, 18 Dec 2023 08:25:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 968AD87DE1;
+	Mon, 18 Dec 2023 08:25:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wgt2tjeR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T3ydjKXl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FDCF87DE1; Mon, 18 Dec 2023 08:25:22 +0100 (CET)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id AA05087DE8; Mon, 18 Dec 2023 08:25:29 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A57F087DE2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 08:25:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 59A0087DE7
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 08:25:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-5cdaa16ada8so42388a12.2
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 23:25:17 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-28b406a0fbfso2032344a91.0
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 23:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702884316; x=1703489116; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702884320; x=1703489120; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IK+ADiv6RJioLn2TE34SiYKpwSEbF3I+hmtgTd3SEMA=;
- b=Wgt2tjeR1IZsS2R81AGKLO/9D95xfn/3OIfqjv4XAvrSgZhpnl1s+U6cgs64vbhwUi
- 2hohqXZvKuPfsaLXz7KR0ND22uDYupck4eLw5RRhRDT//lqYgGVw9auLpNJdG8e+gpsv
- ATW8V6ffa0IROHNhUnMLWrv0Qk63vFcwUI9Fzn4UxvtaDJso8o3YV+A/tPJ87J/d+9Mn
- kmNTdKYOL/zDywAUXthTpy0WTFJepOgheUWjSZzOF5AMqoWxmxtbd59gniMgrsPmFSHR
- X7gR1VNxZHZvUvV3jFLeBWRXQI3aDAqqjfxAkTrbtOHbx+Vv16g2/AfUVcFvbKRaBM9E
- Oxsg==
+ bh=9KX0oMS9fKHDG92d984I+WGMrCqo5x7crkUbdPUftnA=;
+ b=T3ydjKXlqbqWJvpjI8SPsvjZ/AxANWuHtSZIxpqrCaaDrouvfpOA0rezEUsSzKmYR7
+ iuoVX3+sNR/O8ZEbZJwL7V90pZdtvGu1rHNXGIAsHRfrHi3is4KfjIWe97jHcyLu1R8Q
+ 7iLDAAhxPYuG3dPOu4Zi92ehwoKV9FwUBQ5p4e0+EnDEN7vtx+k9lFHpv0eyiurDmVDr
+ OZAZIecyU7UWN8y6T/oCpWsiP9gLsrpOgrfz5ALabRZnbX8qeO+d1wudZXnXjRfqs3Vo
+ MsT1Uih0WOH4We2W8p6ST3aK6dd9qBon164BJ8yzBVxM6JfD5nhXuvsz/n3wQ1oWPWu6
+ LffA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702884316; x=1703489116;
+ d=1e100.net; s=20230601; t=1702884320; x=1703489120;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IK+ADiv6RJioLn2TE34SiYKpwSEbF3I+hmtgTd3SEMA=;
- b=PCEIRwz9Q8xyd66+kIfuiIuKGRtiBcWS1RK2zHBMLGrk+1sqxciAPut5fGRcYymV6T
- K5G4PzykxPPQOsScCIus8G3uZX5An5HRitWo56SaEREMqqjAte2UnoFBqH9KpBDWu+Ew
- rwCuQAYN/62Ls+mPGsPy1sp82yhueHFLOCl/w+YUhGKLBI9cyh9FezB4xzLeW59cAkG+
- Fy+Y1ac/grxlSwK1njX/ow6Ksjo+Jkq/TiKpyucRdkLXHX7dYVSPTdePwD0U80Qbu3bp
- Pcj5kcmPASHbDY0JKculvYLj98dqRN84dRVf/LsIHJ4L+D31Ij2OigC3ZAfWo0U5jQRS
- CDag==
-X-Gm-Message-State: AOJu0YxFizdr4R1Tr5f8Uw7gYlyJUzwY5gyggKOvxjcNCKt77i5olUxQ
- B7GW1hQwg0e0bVI2cJyesY+ZkjfKpQ4l0HiqdZeCqg==
-X-Google-Smtp-Source: AGHT+IHmywZ4PlP3eUpeX6e4BfQ9fcNDDOFfxhC9f9mdok8+Cmp4s8vi4EOR/eoLxlL2jqP2SqKqbQ==
-X-Received: by 2002:a05:6a20:8e13:b0:18c:5c04:a548 with SMTP id
- y19-20020a056a208e1300b0018c5c04a548mr9404568pzj.28.1702884315806; 
- Sun, 17 Dec 2023 23:25:15 -0800 (PST)
+ bh=9KX0oMS9fKHDG92d984I+WGMrCqo5x7crkUbdPUftnA=;
+ b=kzi0AI64ngmp+CpmjtEFen8loxwHgZm4v/BtCntlpXQczIqRfybyLi7nw9Yjb+tZPg
+ 2T5M6q5OHD8rUIq/5NJAn3D54jf74FbPDscb9qwarKLdqC3LX/vaJ9USEhXlsgqFv+vx
+ FEWibE05D6A6OSiJjqEEx04CY17JhtPwToDuL6dwiGmOoODvXepmwF0iN2q2B4P5jB42
+ /RdknxwJ4+TuJUgFLu/tqTg6vQH6Z43SIr4i42Z8I6au07c0U72YKTW8Gu1FSogUJkUy
+ njP/wc4DciFODDchtuK5FXE7OInAwbJSP8lJ2Vi/tmLiLpcedqrZSPVS1GyI3brkjV4h
+ IAGA==
+X-Gm-Message-State: AOJu0YxNc/vLTHzp8gxrurSrG/SkAqQObwGaOFI9FGYn2HfM4e3fMZQD
+ mFVkf+YMSuksdFWbfGS19DxdCCgPSsudiqPHZamGeQ==
+X-Google-Smtp-Source: AGHT+IGZZiD6abVezN/J/gEmGZDKn5WyPD83J/+38XaAsVbT+htw3npY84WpyQpyURxFkIo+sub0/A==
+X-Received: by 2002:a17:90b:1bd0:b0:28b:52f3:3dc1 with SMTP id
+ oa16-20020a17090b1bd000b0028b52f33dc1mr908864pjb.50.1702884320572; 
+ Sun, 17 Dec 2023 23:25:20 -0800 (PST)
 Received: from sumit-X1.. ([223.178.213.6]) by smtp.gmail.com with ESMTPSA id
- nr21-20020a17090b241500b0028b8b269aedsm1038997pjb.57.2023.12.17.23.25.11
+ nr21-20020a17090b241500b0028b8b269aedsm1038997pjb.57.2023.12.17.23.25.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Dec 2023 23:25:15 -0800 (PST)
+ Sun, 17 Dec 2023 23:25:20 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, lukma@denx.de,
@@ -70,9 +70,9 @@ Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, lukma@denx.de,
  pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
  benjamin.missey@non.se.com, daniel.thompson@linaro.org,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH 6/7] hmibsc: enable U-Boot Environment variables protection
-Date: Mon, 18 Dec 2023 12:54:27 +0530
-Message-Id: <20231218072428.1802969-7-sumit.garg@linaro.org>
+Subject: [PATCH 7/7] hmibsc: Enable LAN75XX USB ethernet driver
+Date: Mon, 18 Dec 2023 12:54:28 +0530
+Message-Id: <20231218072428.1802969-8-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231218072428.1802969-1-sumit.garg@linaro.org>
 References: <20231218072428.1802969-1-sumit.garg@linaro.org>
@@ -94,43 +94,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable Environment protection with:
+HMIBSC board has hardwired support for 2 USB host LAN75XX ethernet
+adaptors. So enable corresponding driver in u-boot.
 
-CONFIG_ENV_WRITEABLE_LIST=y
-CONFIG_ENV_ACCESS_IGNORE_FORCE=y
+Steps to test networking:
+
+hmibsc => setenv bootfile fitImage
+hmibsc => setenv serverip 192.168.1.24
+hmibsc => usb start
+starting USB...
+Bus ehci@78d9000: USB EHCI 1.00
+scanning bus ehci@78d9000 for devices... 5 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+hmibsc => dhcp
+lan75xx_eth Waiting for PHY auto negotiation to complete......... TIMEOUT !
+phy_startup failed
+lan75xx_eth Waiting for PHY auto negotiation to complete....... done
+BOOTP broadcast 1
+BOOTP broadcast 2
+*** Unhandled DHCP Option in OFFER/ACK: 125
+*** Unhandled DHCP Option in OFFER/ACK: 125
+DHCP client bound to address 192.168.1.22 (6220 ms)
+Using lan75xx_eth device
+TFTP from server 192.168.1.24; our IP address is 192.168.1.22
+Filename 'fitImage'.
+Load address: 0x90000000
+Loading: #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         ################################
+         5.2 MiB/s
+done
+Bytes transferred = 30992680 (1d8e928 hex)
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- configs/hmibsc_defconfig | 4 ++++
- include/configs/hmibsc.h | 2 ++
- 2 files changed, 6 insertions(+)
+ configs/hmibsc_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/configs/hmibsc_defconfig b/configs/hmibsc_defconfig
-index cef9e304b3a..656c9c6d0d6 100644
+index 656c9c6d0d6..dd3d18a5953 100644
 --- a/configs/hmibsc_defconfig
 +++ b/configs/hmibsc_defconfig
-@@ -36,6 +36,10 @@ CONFIG_CMD_USB=y
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_TIMER=y
-+CONFIG_CMD_ENV_FLAGS=y
-+CONFIG_CMD_NVEDIT_INFO=y
-+CONFIG_ENV_WRITEABLE_LIST=y
-+CONFIG_ENV_ACCESS_IGNORE_FORCE=y
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_PART=2
-diff --git a/include/configs/hmibsc.h b/include/configs/hmibsc.h
-index b614dec7870..b228e035429 100644
---- a/include/configs/hmibsc.h
-+++ b/include/configs/hmibsc.h
-@@ -54,4 +54,6 @@
- 	"fi; " \
- 	"load ${devtype} ${devnum}:${distro_bootpart} ${loadaddr} /boot/fitImage && bootm"
- 
-+#define CFG_ENV_FLAGS_LIST_STATIC "BOOT_A_LEFT:dw,BOOT_B_LEFT:dw,BOOT_ORDER:sw"
-+
- #endif
+@@ -71,6 +71,8 @@ CONFIG_USB_ETHER_ASIX=y
+ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_PHYLIB=y
++CONFIG_USB_ETHER_LAN75XX=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_VENDOR_NUM=0x18d1
+ CONFIG_USB_GADGET_PRODUCT_NUM=0xd00d
 -- 
 2.34.1
 
