@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6281C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 22:02:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31EFEC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 22:10:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 567C6871B1;
-	Mon, 18 Dec 2023 23:02:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9CB0086F8E;
+	Mon, 18 Dec 2023 23:10:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RxfUU9+I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fkj55eA6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7825871CC; Mon, 18 Dec 2023 23:02:27 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 4ED4F86FF4; Mon, 18 Dec 2023 23:10:28 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D460F870AB
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 23:02:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 796B886F64
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 23:10:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a2331caab22so279154466b.3
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:02:25 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-40c3ca9472dso43747405e9.2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:10:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702936945; x=1703541745; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=gmail.com; s=20230601; t=1702937422; x=1703542222; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=j78u/AxbFW/PvB7ob0xH35r+RLxqVn7NFYykJEfCNm4=;
- b=RxfUU9+ImzPuaVTQeOAh3R18f6ZkoazKTB5t/NEr1ZPaysIn5b3PJAd4QQ9U11rcPm
- 4jXGjFo4sl9rVuCz/zZD9Yg42LU1oondhz8IgBx514oQl/Bo+JkpOZLvcubu2w+oRZ4y
- VwgQ5jX4DhjOlxx7jaU9jrQWff+SF3qe8tR8urRMfUv/qW6QN8vKU86Paeeocv9ETGOE
- vgOntGPFShwM6acYLsCPyDTgQ/fEg9qWvbp+TdzypU/X2sthiDzDDyf4ccdZGOonnmmO
- CWJSPfJVXLdVpN1sFKbUcQzeVZ3FVODPJdSk7B9jAvug+GhQpH3PKXpDwTT6Fwkq3KUZ
- QXFg==
+ bh=ZGd5eZtf8Hv14giEbllgU0p0iNlUw0xe+ZL+XhV0YwA=;
+ b=Fkj55eA6qNcWEayM562Xl+eMmKGSjhlg1aFGN3P0y+W29UVSWZeDUNYnBZs1lObTym
+ /+34K/5tf13d3n4THpNmpb3vyFXI8LQi5PiVUS7CNzJbKA0hOdvfpLu2TYt0/PYhKXZ2
+ RGf5LfVSuNxyRzrZ9LU71EK7NNyLyk6mXKq18fQS2lcEKJ2N9DhFZ/a/mrUMdaWh/ysK
+ 1YySoaCSHszTftl+MmN+vNrxxd9/2vdJu//B8PGp+oXqfAOJkqR8rhZBYduSo0cEKoWi
+ EXA/QFseMeV3KckjyzgDk5aXfzQZCL954olUClGKfaKxv/3Z/IpT9a3Q5FAU7OouWPcI
+ Vwlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702936945; x=1703541745;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1702937422; x=1703542222;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j78u/AxbFW/PvB7ob0xH35r+RLxqVn7NFYykJEfCNm4=;
- b=ooA+h432Ow49zsih2T8vVRtKiv+u/Jot0ZnYRk5BQ+UmZxAV295l7dxlZs32Jglj2C
- OhMTqkBL+TME1BLtgln2mOr/xV7N2eMnrNeSNK6O9ESOgSV2bUIvOvD9VrChkxa/aLak
- 8BJfDv0+ft6t3D07bzoGBXvVMq6VKrIt3GGOsNvU5ry0G8ehyxNbc2zURckxTTLO0nyG
- ImBvoH32ZYmafiWw9d2JcXdLhTPPgWA3lnG0ZnEd2f3x46u5brm+pHTYk1goJOV/CnHW
- rK7ctRTqxN7kI7SPj5bUfTTqiq2rUXgtD5x2FfP2ErzjtKpePHqnWKzDggH9Oc8T4P5V
- 6RAg==
-X-Gm-Message-State: AOJu0YyM0kvNP78NSArIOgkT138czkDqbacP/gPC3vKfURR+3LXBhPj+
- hFv/SqrSWqLJ+aFTVNBwR2I=
-X-Google-Smtp-Source: AGHT+IEPZqXlfacA0u2n1vljM6X29jA54J6/WAEvQI9gh7KtlZMgF3FICfR713o6WiYGui2vKNrWNQ==
-X-Received: by 2002:a17:906:7386:b0:a14:b151:72e6 with SMTP id
- f6-20020a170906738600b00a14b15172e6mr7515981ejl.21.1702936945048; 
- Mon, 18 Dec 2023 14:02:25 -0800 (PST)
+ bh=ZGd5eZtf8Hv14giEbllgU0p0iNlUw0xe+ZL+XhV0YwA=;
+ b=eZFxd/zaarFJkcxmKpVS/QZN5/syioOLx5+FvvKLEjIW/ZgoBQIPIp2Agjhi3NVHYe
+ E2qRLFXk6AoIR/OZwiR0zLkEKLxIkrdtNSDqIDpYGxSeAhPpAzB7GXfqWm/j+M7jXIZX
+ cYzVEvW+ut6M7Pvt8fO2em07L4GfQ7OnkFmvnUOH1iBPlathsX7/1D4byTfCC3ZS8qmY
+ lB64j7O/oCqFwA+FAoFcyMzDN7++92dTSAwpo87AigRAbGiEO2MEHPyh8nRzsvyYF1As
+ Ry2ZtUFOn1WDdd7bRKcjKrFAK9/mfxskhhDdYYNgPeuo451QjvL6qlVfeL1WUHrDFDST
+ A84A==
+X-Gm-Message-State: AOJu0Yxrq1jAiGDPfdFrFECTtqGNLeegm5OHPtwNck54zFjUK26NqsK+
+ 5pLSV3alOe/Hlj442i+j8FQ=
+X-Google-Smtp-Source: AGHT+IEBbcmVZ5J1up2cuYJCebaOe8ZMt+KkRSENCjqveVZvpvJnjm6IWHNe5Kipr+m+yLqv2VxZYg==
+X-Received: by 2002:a05:600c:4e8d:b0:40c:2787:571e with SMTP id
+ f13-20020a05600c4e8d00b0040c2787571emr6555783wmq.7.1702937421627; 
+ Mon, 18 Dec 2023 14:10:21 -0800 (PST)
 Received: from [192.168.26.149] (031011218106.poznan.vectranet.pl.
  [31.11.218.106]) by smtp.googlemail.com with ESMTPSA id
- tg10-20020a1709078dca00b00a178b965899sm14647993ejc.100.2023.12.18.14.02.23
+ vs6-20020a170907a58600b00a1f99e749dasm11859919ejc.210.2023.12.18.14.10.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Dec 2023 14:02:24 -0800 (PST)
-Message-ID: <1b4feb5d-f03c-44b3-9474-901534db5eb7@gmail.com>
-Date: Mon, 18 Dec 2023 23:02:22 +0100
+ Mon, 18 Dec 2023 14:10:21 -0800 (PST)
+Message-ID: <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
+Date: Mon, 18 Dec 2023 23:10:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] dt-bindings: nvmem: u-boot, env: add any-name MAC
- cells compatible
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh+dt@kernel.org>,
+Subject: Re: [PATCH 4/4] nvmem: layouts: add U-Boot env layout
+Content-Language: en-US
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Rob Herring <robh+dt@kernel.org>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
  Conor Dooley <conor+dt@kernel.org>,
- Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
- devicetree@vger.kernel.org, linux-mtd@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
-References: <20231214153620.23998-1-zajec5@gmail.com>
- <CAPnjgZ31AAauR876W1RmU4JPzKUD8XAMCZrJDumE+Dr4miqABQ@mail.gmail.com>
-Content-Language: en-US
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Michael Walle <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de,
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
+References: <20231218133722.16150-1-zajec5@gmail.com>
+ <20231218133722.16150-4-zajec5@gmail.com> <20231218152116.59d59bad@xps-13>
 From: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-In-Reply-To: <CAPnjgZ31AAauR876W1RmU4JPzKUD8XAMCZrJDumE+Dr4miqABQ@mail.gmail.com>
+In-Reply-To: <20231218152116.59d59bad@xps-13>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,93 +101,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 14.12.2023 22:27, Simon Glass wrote:
-> On Thu, 14 Dec 2023 at 08:36, Rafał Miłecki <zajec5@gmail.com> wrote:
->>
+On 18.12.2023 15:21, Miquel Raynal wrote:
+> Hi Rafał,
+> 
+> zajec5@gmail.com wrote on Mon, 18 Dec 2023 14:37:22 +0100:
+> 
 >> From: Rafał Miłecki <rafal@milecki.pl>
 >>
->> So far we had a property for "ethaddr" NVMEM cell containing base
->> Ethernet MAC address. The problem is vendors often pick non-standard
->> names for storing MAC(s) (other than "ethaddr"). A few names were
->> noticed over years:
->> 1. "wanaddr" (Edimax, ELECOM, EnGenius, I-O DATA, Sitecom)
->> 2. "et1macaddr" (ASUS)
->> 3. "eth1addr" (Buffalo)
->> 4. "athaddr" (EnGenius)
->> 5. "baseMAC" (Netgear)
->> 6. "mac" (Netgear)
->> 7. "mac_addr" (Moxa)
->> and more ("HW_LAN_MAC", "HW_WAN_MAC", "INIC_MAC_ADDR", "LAN_MAC_ADDR",
->> "RADIOADDR0", "RADIOADDR1", "WAN_MAC_ADDR", "lan1_mac_addr", "wanmac",
->> "wmac1", "wmac2").
+>> This patch moves all generic (NVMEM devices independent) code from NVMEM
+>> device driver to NVMEM layout driver. Then it adds a simple NVMEM layout
+>> code on top of it.
 >>
->> It doesn't make sense to add property for every possible MAC cell name.
->> Instead allow specifying cells with "mac" compatible.
+>> Thanks to proper layout it's possible to support U-Boot env data stored
+>> on any kind of NVMEM device.
+>>
+>> For backward compatibility with old DT bindings we need to keep old
+>> NVMEM device driver functional. To avoid code duplication a parsing
+>> function is exported and reused in it.
 >>
 >> Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
 >> ---
->> List of devices and their U-Boot MAC variables:
->> alphanetworks,asl56026) wanmac
->> asus,rt-ac65p) et1macaddr
->> asus,rt-ac85p) et1macaddr
->> belkin,f9k1109v1) HW_WAN_MAC + HW_LAN_MAC
->> buffalo,ls220de) eth1addr
->> buffalo,ls421de) eth1addr
->> checkpoint,l-50) lan1_mac_addr
->> dovado,tiny-ac) INIC_MAC_ADDR
->> dovado,tiny-ac) LAN_MAC_ADDR + WAN_MAC_ADDR
->> edimax,ra21s) wanaddr
->> edimax,rg21s) wanaddr
->> elecom,wrc-2533ghbk-i) wanaddr
->> elecom,wrc-2533ghbk2-t) wanaddr
->> engenius,ecb1200) athaddr
->> engenius,ecb1750) athaddr
->> engenius,epg5000) wanaddr
->> engenius,epg600) wanaddr
->> engenius,esr1200) wanaddr
->> engenius,esr1750) wanaddr
->> engenius,esr600) wanaddr
->> engenius,esr600h) wanaddr
->> engenius,esr900) wanaddr
->> enterasys,ws-ap3705i) RADIOADDR0 + RADIOADDR1
->> iodata,wn-ac1167dgr) wanaddr
->> iodata,wn-ac1167gr) wanaddr
->> iodata,wn-ac1600dgr) wanaddr
->> iodata,wn-ac1600dgr2) wanaddr
->> iodata,wn-ac733gr3) wanaddr
->> iodata,wn-ag300dgr) wanaddr
->> iodata,wnpr2600g) wanaddr
->> moxa,awk-1137c) mac_addr
->> netgear,wax220) mac
->> netgear,wndap620) baseMAC
->> netgear,wndap660) baseMAC
->> ocedo,panda) wmac1 + wmac2
->> sitecom,wlr-7100) wanaddr
->> sitecom,wlr-8100) wanaddr
->>
->>   .../devicetree/bindings/nvmem/u-boot,env.yaml | 33 +++++++++++++++++++
->>   1 file changed, 33 insertions(+)
->>
 > 
-> Are these upstream U-Boots, or just vendor forks?
+> I have a couple of comments about the original driver which gets
+> copy-pasted in the new layout driver, maybe you could clean these
+> (the memory leak should be fixed before the migration so it can be
+> backported easily, the others are just style so it can be done after, I
+> don't mind).
+> 
+> ...
+> 
+>> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
+>> +		     enum u_boot_env_format format)
+>> +{
+>> +	size_t crc32_data_offset;
+>> +	size_t crc32_data_len;
+>> +	size_t crc32_offset;
+>> +	size_t data_offset;
+>> +	size_t data_len;
+>> +	size_t dev_size;
+>> +	uint32_t crc32;
+>> +	uint32_t calc;
+>> +	uint8_t *buf;
+>> +	int bytes;
+>> +	int err;
+>> +
+>> +	dev_size = nvmem_dev_size(nvmem);
+>> +
+>> +	buf = kcalloc(1, dev_size, GFP_KERNEL);
+> 
+> Out of curiosity, why kcalloc(1,...) rather than kzalloc() ?
 
-I guess most of those devices don't have upstream U-Boot support. Please
-note that while upstreaming vendors changes would be great in most cases
-it doesn't happen. Most vendors sadly don't care and most end users
-don't have enough time for that. In practice we often stick with vendor
-provided bootloader to flash and boot self build Linux system (like
-OpenWrt).
+I used kcalloc() initially as I didn't need buffer to be zeroed.
 
-I'm not sure if/how does it help with this PATCH but please note that
-upstream U-Boot code also supports few extra variables.
+I see that memory-allocation.rst however says:
+ > And, to be on the safe side it's best to use routines that set memory to zero, like kzalloc().
 
-There is generic eth_env_get_enetaddr_by_index() that supports variables
-like "<%s><%d>addr" and "<%s>addr". Right now it's used only for
-"eth<%d>addr" and "ethaddr" so that mostly limits us to "ethaddr",
-"eth1addr", "eth2addr" and "eth3addr".
+It's probably close to zero cost to zero that buffer so it could be kzalloc().
 
- From some rare cases: there are also "usbnet_devaddr" and "wolpassword".
 
-So given that U-Boot oficially supports at least 6 env variables for
-MAC and there are many used with custom U-Boots and firmwares this
-binding would help a lot.
+>> +	if (!buf) {
+>> +		err = -ENOMEM;
+>> +		goto err_out;
+> 
+> We could directly return ENOMEM here I guess.
+> 
+>> +	}
+>> +
+>> +	bytes = nvmem_device_read(nvmem, 0, dev_size, buf);
+>> +	if (bytes < 0)
+>> +		return bytes;
+>> +	else if (bytes != dev_size)
+>> +		return -EIO;
+> 
+> Don't we need to free buf in the above cases?
+> 
+>> +	switch (format) {
+>> +	case U_BOOT_FORMAT_SINGLE:
+>> +		crc32_offset = offsetof(struct u_boot_env_image_single, crc32);
+>> +		crc32_data_offset = offsetof(struct u_boot_env_image_single, data);
+>> +		data_offset = offsetof(struct u_boot_env_image_single, data);
+>> +		break;
+>> +	case U_BOOT_FORMAT_REDUNDANT:
+>> +		crc32_offset = offsetof(struct u_boot_env_image_redundant, crc32);
+>> +		crc32_data_offset = offsetof(struct u_boot_env_image_redundant, data);
+>> +		data_offset = offsetof(struct u_boot_env_image_redundant, data);
+>> +		break;
+>> +	case U_BOOT_FORMAT_BROADCOM:
+>> +		crc32_offset = offsetof(struct u_boot_env_image_broadcom, crc32);
+>> +		crc32_data_offset = offsetof(struct u_boot_env_image_broadcom, data);
+>> +		data_offset = offsetof(struct u_boot_env_image_broadcom, data);
+>> +		break;
+>> +	}
+>> +	crc32 = le32_to_cpu(*(__le32 *)(buf + crc32_offset));
+> 
+> Looks a bit convoluted, any chances we can use intermediate variables
+> to help decipher this?
+> 
+>> +	crc32_data_len = dev_size - crc32_data_offset;
+>> +	data_len = dev_size - data_offset;
+>> +
+>> +	calc = crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
+>> +	if (calc != crc32) {
+>> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n", calc, crc32);
+>> +		err = -EINVAL;
+>> +		goto err_kfree;
+>> +	}
+>> +
+>> +	buf[dev_size - 1] = '\0';
+>> +	err = u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_len);
+>> +	if (err)
+>> +		dev_err(dev, "Failed to add cells: %d\n", err);
+> 
+> Please drop this error message, the only reason for which the function
+> call would fail is apparently an ENOMEM case.
+> 
+>> +
+>> +err_kfree:
+>> +	kfree(buf);
+>> +err_out:
+>> +	return err;
+>> +}
+>> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
+>> +
+>> +static int u_boot_env_add_cells(struct device *dev, struct nvmem_device *nvmem)
+>> +{
+>> +	const struct of_device_id *match;
+>> +	struct device_node *layout_np;
+>> +	enum u_boot_env_format format;
+>> +
+>> +	layout_np = of_nvmem_layout_get_container(nvmem);
+>> +	if (!layout_np)
+>> +		return -ENOENT;
+>> +
+>> +	match = of_match_node(u_boot_env_of_match_table, layout_np);
+>> +	if (!match)
+>> +		return -ENOENT;
+>> +
+>> +	format = (uintptr_t)match->data;
+> 
+> In the core there is currently an unused helper called
+> nvmem_layout_get_match_data() which does that. I think the original
+> intent of this function was to be used in this driver, so depending on
+> your preference, can you please either use it or remove it?
+
+The problem is that nvmem_layout_get_match_data() uses:
+layout->dev.driver
+
+It doesn't work with layouts driver (since refactoring?) as driver is
+NULL. That results in NULL pointer dereference when trying to reach
+of_match_table.
+
+That is why I used u_boot_env_of_match_table directly.
+
+If you know how to fix nvmem_layout_get_match_data() that would be
+great. Do we need driver_register() somewhere in NVMEM core?
+
+
+>> +
+>> +	of_node_put(layout_np);
+>> +
+>> +	return u_boot_env_parse(dev, nvmem, format);
+>> +}
+> 
+> Thanks,
+> Miquèl
+
