@@ -4,68 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 791C7C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 08:01:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F79AC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 08:32:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87D6A8773F;
-	Mon, 18 Dec 2023 09:01:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ED6487B92;
+	Mon, 18 Dec 2023 09:32:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="b+t29Vbj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="REPCvh8G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F293877BF; Mon, 18 Dec 2023 09:01:51 +0100 (CET)
-Received: from mail-m127220.xmail.ntesmail.com
- (mail-m127220.xmail.ntesmail.com [115.236.127.220])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 915428746A; Mon, 18 Dec 2023 09:32:08 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 282B4876CA
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 09:01:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 736FD87B92
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 09:32:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=b+t29Vbjp4jRazTR6g2mRtK5S/3UFmNbmdTSuRrFlt1foM6+gHBa5a6KxKsCxgHyXTt1wWT8b8/RxmexsnPBCzvJ/N7Fwla6xMfbZZ6bOOnXO1+QIlQUlZh6WUz6ClJfDzH0ff3vjV+8NTRLLNvnmWPAyQkl3B011OBq1xUPV8k=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=ohc8GdpRwSNKlerePXR8dcyY1GhAPb+rqhEDrl8ph54=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id A2E1F4003B0;
- Mon, 18 Dec 2023 16:01:31 +0800 (CST)
-Message-ID: <db4842c3-f581-4a83-8bec-a1d873f6b5e1@rock-chips.com>
-Date: Mon, 18 Dec 2023 16:01:31 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-40c6736d10fso33894955e9.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 00:32:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702888324; x=1703493124; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=+O6htTISCEOa5B1C56KCkOtcZX7LzY9/LCF5/WaECfc=;
+ b=REPCvh8GbaFxaTzyW08iyq1UCuurnlGkFEYRhMYygl/42ENikgURAilRF+lF0PMjqU
+ DTOJDHE0r+1K6B/wfAJTFBRIQsd38F2uQTfUy5Xdn3z60djkrbX1pdmojz5ZJtwO8q4N
+ pWDOUc0AuQzLzVF2mVFfTA3z68+LV/rQr0u8RdP0OvkrBN4NlsGGAga9hc0EWnbnV1Rw
+ Vi39QsAobYT1hhPkRgdQKHVrNSHg2fxJ3of9bi1iGclQxDqkHSct/f3t1JjNcMEPUXTZ
+ jNKRSsVq2DOIsGtFhbev6RLAmj0UvqjzTvidladMcjPIvlyMUBSQ/3PDcSYzjGNEyjHk
+ v9GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702888324; x=1703493124;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=+O6htTISCEOa5B1C56KCkOtcZX7LzY9/LCF5/WaECfc=;
+ b=nfr/r/wQFhha2rA9i32qf0I68Jfmu8jTyrQKdPNOTG/LFYbyvMTFM2sZ8i9jAZRlR1
+ fEWj405FGIKN+mZDbbKS6+J2BelUlweb5mlb6YIV4MoBVwRPRAgL1bCN9rIJFYji1r9k
+ Ipr2SMmEtfl8YEVNboDVKyJFQzdbY343TQkTQoKx9P7D252xyUAMuOgRqAoTgSN3Wbbp
+ J2K1f2cnOOHlmqviTKlidGUz8vGWjdifcN9NOA4eR4N81K60BZ5z+U6pVwbk27J+dmct
+ w+x0JZJKkpGFxBzXwaJhT16VMobKsniUKkDAw0rqH0xXsByFqW/6HMIeK2DDqgKYExyO
+ f7kA==
+X-Gm-Message-State: AOJu0YxyNyLHfn3GbO6KosMdroFmk41TohwzMRxX0D19DVpepoOBNmwS
+ hSroUKAGmZBsDT4P8eUo4KeOVw==
+X-Google-Smtp-Source: AGHT+IHoZpdeQzWA2yGtj5cXLOlG8/WFyboXrLNHhZvB7s0gM5s6H1D2VW64K4DwBnk0Axq/4BT8Dg==
+X-Received: by 2002:a7b:ce8f:0:b0:40b:5e21:dd4d with SMTP id
+ q15-20020a7bce8f000000b0040b5e21dd4dmr8827507wmj.123.1702888323660; 
+ Mon, 18 Dec 2023 00:32:03 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:b425:da5d:c0cf:a505?
+ ([2a01:e0a:982:cbb0:b425:da5d:c0cf:a505])
+ by smtp.gmail.com with ESMTPSA id
+ m16-20020a05600c4f5000b0040c57e4ea28sm24059711wmq.17.2023.12.18.00.32.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 18 Dec 2023 00:32:03 -0800 (PST)
+Message-ID: <e0799d4e-5b17-4cbc-87b5-2171af000159@linaro.org>
+Date: Mon, 18 Dec 2023 09:32:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] board: rockchip: Add the Turing RK1 SoM
-Content-Language: en-US
-To: Joshua Riek <jjriek@verizon.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Sam Edwards <CFSworks@gmail.com>, Jagan Teki <jagan@edgeble.ai>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, John Clark <inindev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- u-boot@lists.denx.de
-References: <20231214234647.296129-1-jjriek.ref@verizon.net>
- <20231214234647.296129-1-jjriek@verizon.net>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231214234647.296129-1-jjriek@verizon.net>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2] clk: meson: add Hardware Clock measure driver
+Content-Language: en-US, fr
+To: Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io
+References: <20231212-uboot-meson-clk-msr-v2-1-1cd0addf4dda@linaro.org>
+ <75fa68fe-cdc4-4036-3798-6fd2f281fbc9@gmail.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <75fa68fe-cdc4-4036-3798-6fd2f281fbc9@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGk8eQ1YdQk9IHxhOSk8aHhhVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8c7bf1c78f2eb3kusna2e1f4003b0
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6N006Lio6TDwyGSkYPjpKLgMN
- HBQwCwxVSlVKTEtJQ0NNT0JJQ0lOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISUtJTzcG
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,1060 +116,740 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sean,
 
-On 2023/12/15 07:46, Joshua Riek wrote:
-> The Turing RK1 is a Rockchip RK3588 based SoM from Turing Machines.
->
-> Specifications:
->
->      Rockchip RK3588 SoC
->      4x ARM Cortex-A76, 4x ARM Cortex-A55
->      8/16/32GB memory LPDDR4x
->      Mali G610MC4 GPU
->      32GB eMMC HS400
->      2x USB 2.0, 2x USB 3.0
->      2x MIPI CSI 4x lanes
->      1x MIPI-DSI DPHY 2x lanes
->      PCIe 2.0 x1, PCIe 3.0 x4
->      1x HDMI 2.1 output, 1x DP 1.4 output
->      Gigabit Ethernet
->      Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
->
-> Kernel commit:
-> 2806a69f3fef ("arm64: dts: rockchip: Add Turing RK1 SoM support")
->
-> Signed-off-by: Joshua Riek <jjriek@verizon.net>
-> Cc: Sam Edwards <CFSworks@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On 15/12/2023 18:52, Sean Anderson wrote:
+> On 12/12/23 09:12, Neil Armstrong wrote:
+>> Amlogic SoCs embeds an hardware clock measure block, port it
+>> from Linux and implement it as a UCLK_CLK with only the dump
+>> op and fail-only xlate.
+> 
+> Please include a short blurb describing the hardware like you did for Linux
+> commit 2b45ebef39a2 ("soc: amlogic: Add Meson Clock Measure driver").
+
+Sure, I'll add it
+
+> 
+>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>> ---
+>> Changes in v2:
+>> - remove common.h and include time.h instead
+>> - Link to v1: https://lore.kernel.org/r/20231113-uboot-meson-clk-msr-v1-1-73204d09fc0b@linaro.org
+>> ---
+>>   drivers/clk/meson/Kconfig       |   9 +
+>>   drivers/clk/meson/Makefile      |   1 +
+>>   drivers/clk/meson/clk-measure.c | 634 ++++++++++++++++++++++++++++++++++++++++
+>>   3 files changed, 644 insertions(+)
+>>
+>> diff --git a/drivers/clk/meson/Kconfig b/drivers/clk/meson/Kconfig
+>> index cdc9d6f76c..da097ae7b8 100644
+>> --- a/drivers/clk/meson/Kconfig
+>> +++ b/drivers/clk/meson/Kconfig
+>> @@ -29,3 +29,12 @@ config CLK_MESON_A1
+>>       help
+>>         Enable clock support for the Amlogic A1 SoC family, such as
+>>         the A113L
+>> +
+>> +config CLK_MESON_MSR
+>> +    bool "Enable clock measure driver for Amlogic SoCs"
+>> +    depends on CLK && ARCH_MESON
+>> +    depends on CMD_CLK
+>> +    default ARCH_MESON
+>> +    help
+>> +      Enable clock support for the Hardware Clock Measure for various
+>> +      Amlogic SoCs.
+> 
+> And something closer to the Linux Kconfig would be nice too. E.g.
+> 
+> Enable measuring a set of internal SoC clock frequencies with the clk dump
+> command.
+
+Sure thx for the proposal
+
+> 
+> 
+>> diff --git a/drivers/clk/meson/Makefile b/drivers/clk/meson/Makefile
+>> index d975f07aab..c7a446e86c 100644
+>> --- a/drivers/clk/meson/Makefile
+>> +++ b/drivers/clk/meson/Makefile
+>> @@ -9,3 +9,4 @@ obj-$(CONFIG_CLK_MESON_AXG) += axg-ao.o
+>>   obj-$(CONFIG_CLK_MESON_G12A) += g12a.o
+>>   obj-$(CONFIG_CLK_MESON_G12A) += g12a-ao.o
+>>   obj-$(CONFIG_CLK_MESON_A1) += a1.o
+>> +obj-$(CONFIG_CLK_MESON_MSR) += clk-measure.o
+>> diff --git a/drivers/clk/meson/clk-measure.c b/drivers/clk/meson/clk-measure.c
+>> new file mode 100644
+>> index 0000000000..f653fc6355
+>> --- /dev/null
+>> +++ b/drivers/clk/meson/clk-measure.c
+>> @@ -0,0 +1,634 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Based on Linux driver from:
+>> + * (C) Copyright 2018 - BayLibre, SAS
+>> + * Author: Neil Armstrong <narmstrong@baylibre.com>
+>> + * (C) Copyright 2023 - Neil Armstrong <neil.armstrong@linaro.org>
+>> + */
+>> +
+>> +#include <log.h>
+>> +#include <clk-uclass.h>
+>> +#include <div64.h>
+>> +#include <dm.h>
+>> +#include <time.h>
+>> +#include <regmap.h>
+>> +#include <syscon.h>
+>> +#include <linux/bitops.h>
+>> +#include <linux/bitfield.h>
+>> +#include <linux/delay.h>
+>> +#include <linux/err.h>
+>> +#include <linux/kernel.h>
+>> +
+>> +#define MSR_CLK_DUTY        0x0
+>> +#define MSR_CLK_REG0        0x4
+>> +#define MSR_CLK_REG1        0x8
+>> +#define MSR_CLK_REG2        0xc
+>> +
+>> +#define MSR_DURATION        GENMASK(15, 0)
+>> +#define MSR_ENABLE        BIT(16)
+>> +#define MSR_CONT        BIT(17) /* continuous measurement */
+>> +#define MSR_INTR        BIT(18) /* interrupts */
+>> +#define MSR_RUN            BIT(19)
+>> +#define MSR_CLK_SRC        GENMASK(26, 20)
+>> +#define MSR_BUSY        BIT(31)
+>> +
+>> +#define MSR_VAL_MASK        GENMASK(15, 0)
+>> +
+>> +#define DIV_MIN            32
+>> +#define DIV_STEP        32
+>> +#define DIV_MAX            640
+>> +
+>> +#define CLK_MSR_MAX        128
+>> +
+>> +struct meson_msr_id {
+>> +    unsigned int id;
+>> +    const char *name;
+>> +};
+>> +
+>> +struct meson_msr {
+>> +    struct regmap *regmap;
+>> +    struct meson_msr_id *msr_table;
+>> +};
+>> +
+>> +#define CLK_MSR_ID(__id, __name) \
+>> +    [__id] = {.id = __id, .name = __name,}
+> 
+> To reduce binary size you may want to ifdef these arrays out depending on the
+> platform. Up to you.
+
+It's an idea, but for current platform we're not really space constrained,
+perhaps one day if we hit the limit!
+
+> 
+>> +static struct meson_msr_id clk_msr_m8[CLK_MSR_MAX] = {
+>> +    CLK_MSR_ID(0, "ring_osc_out_ee0"),
+>> +    CLK_MSR_ID(1, "ring_osc_out_ee1"),
+>> +    CLK_MSR_ID(2, "ring_osc_out_ee2"),
+>> +    CLK_MSR_ID(3, "a9_ring_osck"),
+>> +    CLK_MSR_ID(6, "vid_pll"),
+>> +    CLK_MSR_ID(7, "clk81"),
+>> +    CLK_MSR_ID(8, "encp"),
+>> +    CLK_MSR_ID(9, "encl"),
+>> +    CLK_MSR_ID(11, "eth_rmii"),
+>> +    CLK_MSR_ID(13, "amclk"),
+>> +    CLK_MSR_ID(14, "fec_clk_0"),
+>> +    CLK_MSR_ID(15, "fec_clk_1"),
+>> +    CLK_MSR_ID(16, "fec_clk_2"),
+>> +    CLK_MSR_ID(18, "a9_clk_div16"),
+>> +    CLK_MSR_ID(19, "hdmi_sys"),
+>> +    CLK_MSR_ID(20, "rtc_osc_clk_out"),
+>> +    CLK_MSR_ID(21, "i2s_clk_in_src0"),
+>> +    CLK_MSR_ID(22, "clk_rmii_from_pad"),
+>> +    CLK_MSR_ID(23, "hdmi_ch0_tmds"),
+>> +    CLK_MSR_ID(24, "lvds_fifo"),
+>> +    CLK_MSR_ID(26, "sc_clk_int"),
+>> +    CLK_MSR_ID(28, "sar_adc"),
+>> +    CLK_MSR_ID(30, "mpll_clk_test_out"),
+>> +    CLK_MSR_ID(31, "audac_clkpi"),
+>> +    CLK_MSR_ID(32, "vdac"),
+>> +    CLK_MSR_ID(33, "sdhc_rx"),
+>> +    CLK_MSR_ID(34, "sdhc_sd"),
+>> +    CLK_MSR_ID(35, "mali"),
+>> +    CLK_MSR_ID(36, "hdmi_tx_pixel"),
+>> +    CLK_MSR_ID(38, "vdin_meas"),
+>> +    CLK_MSR_ID(39, "pcm_sclk"),
+>> +    CLK_MSR_ID(40, "pcm_mclk"),
+>> +    CLK_MSR_ID(41, "eth_rx_tx"),
+>> +    CLK_MSR_ID(42, "pwm_d"),
+>> +    CLK_MSR_ID(43, "pwm_c"),
+>> +    CLK_MSR_ID(44, "pwm_b"),
+>> +    CLK_MSR_ID(45, "pwm_a"),
+>> +    CLK_MSR_ID(46, "pcm2_sclk"),
+>> +    CLK_MSR_ID(47, "ddr_dpll_pt"),
+>> +    CLK_MSR_ID(48, "pwm_f"),
+>> +    CLK_MSR_ID(49, "pwm_e"),
+>> +    CLK_MSR_ID(59, "hcodec"),
+>> +    CLK_MSR_ID(60, "usb_32k_alt"),
+>> +    CLK_MSR_ID(61, "gpio"),
+>> +    CLK_MSR_ID(62, "vid2_pll"),
+>> +    CLK_MSR_ID(63, "mipi_csi_cfg"),
+>> +};
+>> +
+>> +static struct meson_msr_id clk_msr_gx[CLK_MSR_MAX] = {
+>> +    CLK_MSR_ID(0, "ring_osc_out_ee_0"),
+>> +    CLK_MSR_ID(1, "ring_osc_out_ee_1"),
+>> +    CLK_MSR_ID(2, "ring_osc_out_ee_2"),
+>> +    CLK_MSR_ID(3, "a53_ring_osc"),
+>> +    CLK_MSR_ID(4, "gp0_pll"),
+>> +    CLK_MSR_ID(6, "enci"),
+>> +    CLK_MSR_ID(7, "clk81"),
+>> +    CLK_MSR_ID(8, "encp"),
+>> +    CLK_MSR_ID(9, "encl"),
+>> +    CLK_MSR_ID(10, "vdac"),
+>> +    CLK_MSR_ID(11, "rgmii_tx"),
+>> +    CLK_MSR_ID(12, "pdm"),
+>> +    CLK_MSR_ID(13, "amclk"),
+>> +    CLK_MSR_ID(14, "fec_0"),
+>> +    CLK_MSR_ID(15, "fec_1"),
+>> +    CLK_MSR_ID(16, "fec_2"),
+>> +    CLK_MSR_ID(17, "sys_pll_div16"),
+>> +    CLK_MSR_ID(18, "sys_cpu_div16"),
+>> +    CLK_MSR_ID(19, "hdmitx_sys"),
+>> +    CLK_MSR_ID(20, "rtc_osc_out"),
+>> +    CLK_MSR_ID(21, "i2s_in_src0"),
+>> +    CLK_MSR_ID(22, "eth_phy_ref"),
+>> +    CLK_MSR_ID(23, "hdmi_todig"),
+>> +    CLK_MSR_ID(26, "sc_int"),
+>> +    CLK_MSR_ID(28, "sar_adc"),
+>> +    CLK_MSR_ID(31, "mpll_test_out"),
+>> +    CLK_MSR_ID(32, "vdec"),
+>> +    CLK_MSR_ID(35, "mali"),
+>> +    CLK_MSR_ID(36, "hdmi_tx_pixel"),
+>> +    CLK_MSR_ID(37, "i958"),
+>> +    CLK_MSR_ID(38, "vdin_meas"),
+>> +    CLK_MSR_ID(39, "pcm_sclk"),
+>> +    CLK_MSR_ID(40, "pcm_mclk"),
+>> +    CLK_MSR_ID(41, "eth_rx_or_rmii"),
+>> +    CLK_MSR_ID(42, "mp0_out"),
+>> +    CLK_MSR_ID(43, "fclk_div5"),
+>> +    CLK_MSR_ID(44, "pwm_b"),
+>> +    CLK_MSR_ID(45, "pwm_a"),
+>> +    CLK_MSR_ID(46, "vpu"),
+>> +    CLK_MSR_ID(47, "ddr_dpll_pt"),
+>> +    CLK_MSR_ID(48, "mp1_out"),
+>> +    CLK_MSR_ID(49, "mp2_out"),
+>> +    CLK_MSR_ID(50, "mp3_out"),
+>> +    CLK_MSR_ID(51, "nand_core"),
+>> +    CLK_MSR_ID(52, "sd_emmc_b"),
+>> +    CLK_MSR_ID(53, "sd_emmc_a"),
+>> +    CLK_MSR_ID(55, "vid_pll_div_out"),
+>> +    CLK_MSR_ID(56, "cci"),
+>> +    CLK_MSR_ID(57, "wave420l_c"),
+>> +    CLK_MSR_ID(58, "wave420l_b"),
+>> +    CLK_MSR_ID(59, "hcodec"),
+>> +    CLK_MSR_ID(60, "alt_32k"),
+>> +    CLK_MSR_ID(61, "gpio_msr"),
+>> +    CLK_MSR_ID(62, "hevc"),
+>> +    CLK_MSR_ID(66, "vid_lock"),
+>> +    CLK_MSR_ID(70, "pwm_f"),
+>> +    CLK_MSR_ID(71, "pwm_e"),
+>> +    CLK_MSR_ID(72, "pwm_d"),
+>> +    CLK_MSR_ID(73, "pwm_c"),
+>> +    CLK_MSR_ID(75, "aoclkx2_int"),
+>> +    CLK_MSR_ID(76, "aoclk_int"),
+>> +    CLK_MSR_ID(77, "rng_ring_osc_0"),
+>> +    CLK_MSR_ID(78, "rng_ring_osc_1"),
+>> +    CLK_MSR_ID(79, "rng_ring_osc_2"),
+>> +    CLK_MSR_ID(80, "rng_ring_osc_3"),
+>> +    CLK_MSR_ID(81, "vapb"),
+>> +    CLK_MSR_ID(82, "ge2d"),
+>> +};
+>> +
+>> +static struct meson_msr_id clk_msr_axg[CLK_MSR_MAX] = {
+>> +    CLK_MSR_ID(0, "ring_osc_out_ee_0"),
+>> +    CLK_MSR_ID(1, "ring_osc_out_ee_1"),
+>> +    CLK_MSR_ID(2, "ring_osc_out_ee_2"),
+>> +    CLK_MSR_ID(3, "a53_ring_osc"),
+>> +    CLK_MSR_ID(4, "gp0_pll"),
+>> +    CLK_MSR_ID(5, "gp1_pll"),
+>> +    CLK_MSR_ID(7, "clk81"),
+>> +    CLK_MSR_ID(9, "encl"),
+>> +    CLK_MSR_ID(17, "sys_pll_div16"),
+>> +    CLK_MSR_ID(18, "sys_cpu_div16"),
+>> +    CLK_MSR_ID(20, "rtc_osc_out"),
+>> +    CLK_MSR_ID(23, "mmc_clk"),
+>> +    CLK_MSR_ID(28, "sar_adc"),
+>> +    CLK_MSR_ID(31, "mpll_test_out"),
+>> +    CLK_MSR_ID(40, "mod_eth_tx_clk"),
+>> +    CLK_MSR_ID(41, "mod_eth_rx_clk_rmii"),
+>> +    CLK_MSR_ID(42, "mp0_out"),
+>> +    CLK_MSR_ID(43, "fclk_div5"),
+>> +    CLK_MSR_ID(44, "pwm_b"),
+>> +    CLK_MSR_ID(45, "pwm_a"),
+>> +    CLK_MSR_ID(46, "vpu"),
+>> +    CLK_MSR_ID(47, "ddr_dpll_pt"),
+>> +    CLK_MSR_ID(48, "mp1_out"),
+>> +    CLK_MSR_ID(49, "mp2_out"),
+>> +    CLK_MSR_ID(50, "mp3_out"),
+>> +    CLK_MSR_ID(51, "sd_emmm_c"),
+>> +    CLK_MSR_ID(52, "sd_emmc_b"),
+>> +    CLK_MSR_ID(61, "gpio_msr"),
+>> +    CLK_MSR_ID(66, "audio_slv_lrclk_c"),
+>> +    CLK_MSR_ID(67, "audio_slv_lrclk_b"),
+>> +    CLK_MSR_ID(68, "audio_slv_lrclk_a"),
+>> +    CLK_MSR_ID(69, "audio_slv_sclk_c"),
+>> +    CLK_MSR_ID(70, "audio_slv_sclk_b"),
+>> +    CLK_MSR_ID(71, "audio_slv_sclk_a"),
+>> +    CLK_MSR_ID(72, "pwm_d"),
+>> +    CLK_MSR_ID(73, "pwm_c"),
+>> +    CLK_MSR_ID(74, "wifi_beacon"),
+>> +    CLK_MSR_ID(75, "tdmin_lb_lrcl"),
+>> +    CLK_MSR_ID(76, "tdmin_lb_sclk"),
+>> +    CLK_MSR_ID(77, "rng_ring_osc_0"),
+>> +    CLK_MSR_ID(78, "rng_ring_osc_1"),
+>> +    CLK_MSR_ID(79, "rng_ring_osc_2"),
+>> +    CLK_MSR_ID(80, "rng_ring_osc_3"),
+>> +    CLK_MSR_ID(81, "vapb"),
+>> +    CLK_MSR_ID(82, "ge2d"),
+>> +    CLK_MSR_ID(84, "audio_resample"),
+>> +    CLK_MSR_ID(85, "audio_pdm_sys"),
+>> +    CLK_MSR_ID(86, "audio_spdifout"),
+>> +    CLK_MSR_ID(87, "audio_spdifin"),
+>> +    CLK_MSR_ID(88, "audio_lrclk_f"),
+>> +    CLK_MSR_ID(89, "audio_lrclk_e"),
+>> +    CLK_MSR_ID(90, "audio_lrclk_d"),
+>> +    CLK_MSR_ID(91, "audio_lrclk_c"),
+>> +    CLK_MSR_ID(92, "audio_lrclk_b"),
+>> +    CLK_MSR_ID(93, "audio_lrclk_a"),
+>> +    CLK_MSR_ID(94, "audio_sclk_f"),
+>> +    CLK_MSR_ID(95, "audio_sclk_e"),
+>> +    CLK_MSR_ID(96, "audio_sclk_d"),
+>> +    CLK_MSR_ID(97, "audio_sclk_c"),
+>> +    CLK_MSR_ID(98, "audio_sclk_b"),
+>> +    CLK_MSR_ID(99, "audio_sclk_a"),
+>> +    CLK_MSR_ID(100, "audio_mclk_f"),
+>> +    CLK_MSR_ID(101, "audio_mclk_e"),
+>> +    CLK_MSR_ID(102, "audio_mclk_d"),
+>> +    CLK_MSR_ID(103, "audio_mclk_c"),
+>> +    CLK_MSR_ID(104, "audio_mclk_b"),
+>> +    CLK_MSR_ID(105, "audio_mclk_a"),
+>> +    CLK_MSR_ID(106, "pcie_refclk_n"),
+>> +    CLK_MSR_ID(107, "pcie_refclk_p"),
+>> +    CLK_MSR_ID(108, "audio_locker_out"),
+>> +    CLK_MSR_ID(109, "audio_locker_in"),
+>> +};
+>> +
+>> +static struct meson_msr_id clk_msr_g12a[CLK_MSR_MAX] = {
+>> +    CLK_MSR_ID(0, "ring_osc_out_ee_0"),
+>> +    CLK_MSR_ID(1, "ring_osc_out_ee_1"),
+>> +    CLK_MSR_ID(2, "ring_osc_out_ee_2"),
+>> +    CLK_MSR_ID(3, "sys_cpu_ring_osc"),
+>> +    CLK_MSR_ID(4, "gp0_pll"),
+>> +    CLK_MSR_ID(6, "enci"),
+>> +    CLK_MSR_ID(7, "clk81"),
+>> +    CLK_MSR_ID(8, "encp"),
+>> +    CLK_MSR_ID(9, "encl"),
+>> +    CLK_MSR_ID(10, "vdac"),
+>> +    CLK_MSR_ID(11, "eth_tx"),
+>> +    CLK_MSR_ID(12, "hifi_pll"),
+>> +    CLK_MSR_ID(13, "mod_tcon"),
+>> +    CLK_MSR_ID(14, "fec_0"),
+>> +    CLK_MSR_ID(15, "fec_1"),
+>> +    CLK_MSR_ID(16, "fec_2"),
+>> +    CLK_MSR_ID(17, "sys_pll_div16"),
+>> +    CLK_MSR_ID(18, "sys_cpu_div16"),
+>> +    CLK_MSR_ID(19, "lcd_an_ph2"),
+>> +    CLK_MSR_ID(20, "rtc_osc_out"),
+>> +    CLK_MSR_ID(21, "lcd_an_ph3"),
+>> +    CLK_MSR_ID(22, "eth_phy_ref"),
+>> +    CLK_MSR_ID(23, "mpll_50m"),
+>> +    CLK_MSR_ID(24, "eth_125m"),
+>> +    CLK_MSR_ID(25, "eth_rmii"),
+>> +    CLK_MSR_ID(26, "sc_int"),
+>> +    CLK_MSR_ID(27, "in_mac"),
+>> +    CLK_MSR_ID(28, "sar_adc"),
+>> +    CLK_MSR_ID(29, "pcie_inp"),
+>> +    CLK_MSR_ID(30, "pcie_inn"),
+>> +    CLK_MSR_ID(31, "mpll_test_out"),
+>> +    CLK_MSR_ID(32, "vdec"),
+>> +    CLK_MSR_ID(33, "sys_cpu_ring_osc_1"),
+>> +    CLK_MSR_ID(34, "eth_mpll_50m"),
+>> +    CLK_MSR_ID(35, "mali"),
+>> +    CLK_MSR_ID(36, "hdmi_tx_pixel"),
+>> +    CLK_MSR_ID(37, "cdac"),
+>> +    CLK_MSR_ID(38, "vdin_meas"),
+>> +    CLK_MSR_ID(39, "bt656"),
+>> +    CLK_MSR_ID(41, "eth_rx_or_rmii"),
+>> +    CLK_MSR_ID(42, "mp0_out"),
+>> +    CLK_MSR_ID(43, "fclk_div5"),
+>> +    CLK_MSR_ID(44, "pwm_b"),
+>> +    CLK_MSR_ID(45, "pwm_a"),
+>> +    CLK_MSR_ID(46, "vpu"),
+>> +    CLK_MSR_ID(47, "ddr_dpll_pt"),
+>> +    CLK_MSR_ID(48, "mp1_out"),
+>> +    CLK_MSR_ID(49, "mp2_out"),
+>> +    CLK_MSR_ID(50, "mp3_out"),
+>> +    CLK_MSR_ID(51, "sd_emmc_c"),
+>> +    CLK_MSR_ID(52, "sd_emmc_b"),
+>> +    CLK_MSR_ID(53, "sd_emmc_a"),
+>> +    CLK_MSR_ID(54, "vpu_clkc"),
+>> +    CLK_MSR_ID(55, "vid_pll_div_out"),
+>> +    CLK_MSR_ID(56, "wave420l_a"),
+>> +    CLK_MSR_ID(57, "wave420l_c"),
+>> +    CLK_MSR_ID(58, "wave420l_b"),
+>> +    CLK_MSR_ID(59, "hcodec"),
+>> +    CLK_MSR_ID(61, "gpio_msr"),
+>> +    CLK_MSR_ID(62, "hevcb"),
+>> +    CLK_MSR_ID(63, "dsi_meas"),
+>> +    CLK_MSR_ID(64, "spicc_1"),
+>> +    CLK_MSR_ID(65, "spicc_0"),
+>> +    CLK_MSR_ID(66, "vid_lock"),
+>> +    CLK_MSR_ID(67, "dsi_phy"),
+>> +    CLK_MSR_ID(68, "hdcp22_esm"),
+>> +    CLK_MSR_ID(69, "hdcp22_skp"),
+>> +    CLK_MSR_ID(70, "pwm_f"),
+>> +    CLK_MSR_ID(71, "pwm_e"),
+>> +    CLK_MSR_ID(72, "pwm_d"),
+>> +    CLK_MSR_ID(73, "pwm_c"),
+>> +    CLK_MSR_ID(75, "hevcf"),
+>> +    CLK_MSR_ID(77, "rng_ring_osc_0"),
+>> +    CLK_MSR_ID(78, "rng_ring_osc_1"),
+>> +    CLK_MSR_ID(79, "rng_ring_osc_2"),
+>> +    CLK_MSR_ID(80, "rng_ring_osc_3"),
+>> +    CLK_MSR_ID(81, "vapb"),
+>> +    CLK_MSR_ID(82, "ge2d"),
+>> +    CLK_MSR_ID(83, "co_rx"),
+>> +    CLK_MSR_ID(84, "co_tx"),
+>> +    CLK_MSR_ID(89, "hdmi_todig"),
+>> +    CLK_MSR_ID(90, "hdmitx_sys"),
+>> +    CLK_MSR_ID(91, "sys_cpub_div16"),
+>> +    CLK_MSR_ID(92, "sys_pll_cpub_div16"),
+>> +    CLK_MSR_ID(94, "eth_phy_rx"),
+>> +    CLK_MSR_ID(95, "eth_phy_pll"),
+>> +    CLK_MSR_ID(96, "vpu_b"),
+>> +    CLK_MSR_ID(97, "cpu_b_tmp"),
+>> +    CLK_MSR_ID(98, "ts"),
+>> +    CLK_MSR_ID(99, "ring_osc_out_ee_3"),
+>> +    CLK_MSR_ID(100, "ring_osc_out_ee_4"),
+>> +    CLK_MSR_ID(101, "ring_osc_out_ee_5"),
+>> +    CLK_MSR_ID(102, "ring_osc_out_ee_6"),
+>> +    CLK_MSR_ID(103, "ring_osc_out_ee_7"),
+>> +    CLK_MSR_ID(104, "ring_osc_out_ee_8"),
+>> +    CLK_MSR_ID(105, "ring_osc_out_ee_9"),
+>> +    CLK_MSR_ID(106, "ephy_test"),
+>> +    CLK_MSR_ID(107, "au_dac_g128x"),
+>> +    CLK_MSR_ID(108, "audio_locker_out"),
+>> +    CLK_MSR_ID(109, "audio_locker_in"),
+>> +    CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
+>> +    CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
+>> +    CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
+>> +    CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
+>> +    CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
+>> +    CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
+>> +    CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
+>> +    CLK_MSR_ID(117, "audio_resample"),
+>> +    CLK_MSR_ID(118, "audio_pdm_sys"),
+>> +    CLK_MSR_ID(119, "audio_spdifout_b"),
+>> +    CLK_MSR_ID(120, "audio_spdifout"),
+>> +    CLK_MSR_ID(121, "audio_spdifin"),
+>> +    CLK_MSR_ID(122, "audio_pdm_dclk"),
+>> +};
+>> +
+>> +static struct meson_msr_id clk_msr_sm1[CLK_MSR_MAX] = {
+>> +    CLK_MSR_ID(0, "ring_osc_out_ee_0"),
+>> +    CLK_MSR_ID(1, "ring_osc_out_ee_1"),
+>> +    CLK_MSR_ID(2, "ring_osc_out_ee_2"),
+>> +    CLK_MSR_ID(3, "ring_osc_out_ee_3"),
+>> +    CLK_MSR_ID(4, "gp0_pll"),
+>> +    CLK_MSR_ID(5, "gp1_pll"),
+>> +    CLK_MSR_ID(6, "enci"),
+>> +    CLK_MSR_ID(7, "clk81"),
+>> +    CLK_MSR_ID(8, "encp"),
+>> +    CLK_MSR_ID(9, "encl"),
+>> +    CLK_MSR_ID(10, "vdac"),
+>> +    CLK_MSR_ID(11, "eth_tx"),
+>> +    CLK_MSR_ID(12, "hifi_pll"),
+>> +    CLK_MSR_ID(13, "mod_tcon"),
+>> +    CLK_MSR_ID(14, "fec_0"),
+>> +    CLK_MSR_ID(15, "fec_1"),
+>> +    CLK_MSR_ID(16, "fec_2"),
+>> +    CLK_MSR_ID(17, "sys_pll_div16"),
+>> +    CLK_MSR_ID(18, "sys_cpu_div16"),
+>> +    CLK_MSR_ID(19, "lcd_an_ph2"),
+>> +    CLK_MSR_ID(20, "rtc_osc_out"),
+>> +    CLK_MSR_ID(21, "lcd_an_ph3"),
+>> +    CLK_MSR_ID(22, "eth_phy_ref"),
+>> +    CLK_MSR_ID(23, "mpll_50m"),
+>> +    CLK_MSR_ID(24, "eth_125m"),
+>> +    CLK_MSR_ID(25, "eth_rmii"),
+>> +    CLK_MSR_ID(26, "sc_int"),
+>> +    CLK_MSR_ID(27, "in_mac"),
+>> +    CLK_MSR_ID(28, "sar_adc"),
+>> +    CLK_MSR_ID(29, "pcie_inp"),
+>> +    CLK_MSR_ID(30, "pcie_inn"),
+>> +    CLK_MSR_ID(31, "mpll_test_out"),
+>> +    CLK_MSR_ID(32, "vdec"),
+>> +    CLK_MSR_ID(34, "eth_mpll_50m"),
+>> +    CLK_MSR_ID(35, "mali"),
+>> +    CLK_MSR_ID(36, "hdmi_tx_pixel"),
+>> +    CLK_MSR_ID(37, "cdac"),
+>> +    CLK_MSR_ID(38, "vdin_meas"),
+>> +    CLK_MSR_ID(39, "bt656"),
+>> +    CLK_MSR_ID(40, "arm_ring_osc_out_4"),
+>> +    CLK_MSR_ID(41, "eth_rx_or_rmii"),
+>> +    CLK_MSR_ID(42, "mp0_out"),
+>> +    CLK_MSR_ID(43, "fclk_div5"),
+>> +    CLK_MSR_ID(44, "pwm_b"),
+>> +    CLK_MSR_ID(45, "pwm_a"),
+>> +    CLK_MSR_ID(46, "vpu"),
+>> +    CLK_MSR_ID(47, "ddr_dpll_pt"),
+>> +    CLK_MSR_ID(48, "mp1_out"),
+>> +    CLK_MSR_ID(49, "mp2_out"),
+>> +    CLK_MSR_ID(50, "mp3_out"),
+>> +    CLK_MSR_ID(51, "sd_emmc_c"),
+>> +    CLK_MSR_ID(52, "sd_emmc_b"),
+>> +    CLK_MSR_ID(53, "sd_emmc_a"),
+>> +    CLK_MSR_ID(54, "vpu_clkc"),
+>> +    CLK_MSR_ID(55, "vid_pll_div_out"),
+>> +    CLK_MSR_ID(56, "wave420l_a"),
+>> +    CLK_MSR_ID(57, "wave420l_c"),
+>> +    CLK_MSR_ID(58, "wave420l_b"),
+>> +    CLK_MSR_ID(59, "hcodec"),
+>> +    CLK_MSR_ID(60, "arm_ring_osc_out_5"),
+>> +    CLK_MSR_ID(61, "gpio_msr"),
+>> +    CLK_MSR_ID(62, "hevcb"),
+>> +    CLK_MSR_ID(63, "dsi_meas"),
+>> +    CLK_MSR_ID(64, "spicc_1"),
+>> +    CLK_MSR_ID(65, "spicc_0"),
+>> +    CLK_MSR_ID(66, "vid_lock"),
+>> +    CLK_MSR_ID(67, "dsi_phy"),
+>> +    CLK_MSR_ID(68, "hdcp22_esm"),
+>> +    CLK_MSR_ID(69, "hdcp22_skp"),
+>> +    CLK_MSR_ID(70, "pwm_f"),
+>> +    CLK_MSR_ID(71, "pwm_e"),
+>> +    CLK_MSR_ID(72, "pwm_d"),
+>> +    CLK_MSR_ID(73, "pwm_c"),
+>> +    CLK_MSR_ID(74, "arm_ring_osc_out_6"),
+>> +    CLK_MSR_ID(75, "hevcf"),
+>> +    CLK_MSR_ID(76, "arm_ring_osc_out_7"),
+>> +    CLK_MSR_ID(77, "rng_ring_osc_0"),
+>> +    CLK_MSR_ID(78, "rng_ring_osc_1"),
+>> +    CLK_MSR_ID(79, "rng_ring_osc_2"),
+>> +    CLK_MSR_ID(80, "rng_ring_osc_3"),
+>> +    CLK_MSR_ID(81, "vapb"),
+>> +    CLK_MSR_ID(82, "ge2d"),
+>> +    CLK_MSR_ID(83, "co_rx"),
+>> +    CLK_MSR_ID(84, "co_tx"),
+>> +    CLK_MSR_ID(85, "arm_ring_osc_out_8"),
+>> +    CLK_MSR_ID(86, "arm_ring_osc_out_9"),
+>> +    CLK_MSR_ID(87, "mipi_dsi_phy"),
+>> +    CLK_MSR_ID(88, "cis2_adapt"),
+>> +    CLK_MSR_ID(89, "hdmi_todig"),
+>> +    CLK_MSR_ID(90, "hdmitx_sys"),
+>> +    CLK_MSR_ID(91, "nna_core"),
+>> +    CLK_MSR_ID(92, "nna_axi"),
+>> +    CLK_MSR_ID(93, "vad"),
+>> +    CLK_MSR_ID(94, "eth_phy_rx"),
+>> +    CLK_MSR_ID(95, "eth_phy_pll"),
+>> +    CLK_MSR_ID(96, "vpu_b"),
+>> +    CLK_MSR_ID(97, "cpu_b_tmp"),
+>> +    CLK_MSR_ID(98, "ts"),
+>> +    CLK_MSR_ID(99, "arm_ring_osc_out_10"),
+>> +    CLK_MSR_ID(100, "arm_ring_osc_out_11"),
+>> +    CLK_MSR_ID(101, "arm_ring_osc_out_12"),
+>> +    CLK_MSR_ID(102, "arm_ring_osc_out_13"),
+>> +    CLK_MSR_ID(103, "arm_ring_osc_out_14"),
+>> +    CLK_MSR_ID(104, "arm_ring_osc_out_15"),
+>> +    CLK_MSR_ID(105, "arm_ring_osc_out_16"),
+>> +    CLK_MSR_ID(106, "ephy_test"),
+>> +    CLK_MSR_ID(107, "au_dac_g128x"),
+>> +    CLK_MSR_ID(108, "audio_locker_out"),
+>> +    CLK_MSR_ID(109, "audio_locker_in"),
+>> +    CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
+>> +    CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
+>> +    CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
+>> +    CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
+>> +    CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
+>> +    CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
+>> +    CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
+>> +    CLK_MSR_ID(117, "audio_resample"),
+>> +    CLK_MSR_ID(118, "audio_pdm_sys"),
+>> +    CLK_MSR_ID(119, "audio_spdifout_b"),
+>> +    CLK_MSR_ID(120, "audio_spdifout"),
+>> +    CLK_MSR_ID(121, "audio_spdifin"),
+>> +    CLK_MSR_ID(122, "audio_pdm_dclk"),
+>> +    CLK_MSR_ID(123, "audio_resampled"),
+>> +    CLK_MSR_ID(124, "earcrx_pll"),
+>> +    CLK_MSR_ID(125, "earcrx_pll_test"),
+>> +    CLK_MSR_ID(126, "csi_phy0"),
+>> +    CLK_MSR_ID(127, "csi2_data"),
+>> +};
+>> +
+>> +static int meson_clk_msr_measure_id(struct meson_msr *priv, unsigned int id,
+>> +                    unsigned int duration)
+>> +{
+>> +    unsigned int val;
+>> +    int ret;
+>> +
+>> +    regmap_write(priv->regmap, MSR_CLK_REG0, 0);
+>> +
+>> +    /* Set measurement duration */
+>> +    regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_DURATION,
+>> +               FIELD_PREP(MSR_DURATION, duration - 1));
+>> +
+>> +    /* Set ID */
+>> +    regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_CLK_SRC,
+>> +               FIELD_PREP(MSR_CLK_SRC, id));
+>> +
+>> +    /* Enable & Start */
+>> +    regmap_update_bits(priv->regmap, MSR_CLK_REG0,
+>> +               MSR_RUN | MSR_ENABLE,
+>> +               MSR_RUN | MSR_ENABLE);
+>> +
+>> +    ret = regmap_read_poll_timeout(priv->regmap, MSR_CLK_REG0,
+>> +                       val, !(val & MSR_BUSY), 10, 10000);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    /* Disable */
+>> +    regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_ENABLE, 0);
+>> +
+>> +    /* Get the value in multiple of gate time counts */
+>> +    regmap_read(priv->regmap, MSR_CLK_REG2, &val);
+>> +
+>> +    if (val >= MSR_VAL_MASK)
+>> +        return -EINVAL;
+>> +
+>> +    return DIV_ROUND_CLOSEST_ULL((val & MSR_VAL_MASK) * 1000000ULL,
+>> +                     duration);
+>> +}
+>> +
+>> +static int meson_clk_msr_best_id(struct meson_msr *priv, unsigned int id,
+>> +                 unsigned int *precision)
+>> +{
+>> +    unsigned int duration = DIV_MAX;
+>> +    int ret;
+>> +
+>> +    /* Start from max duration and down to min duration */
+>> +    do {
+>> +        ret = meson_clk_msr_measure_id(priv, id, duration);
+>> +        if (ret >= 0)
+>> +            *precision = (2 * 1000000) / duration;
+>> +        else
+>> +            duration -= DIV_STEP;
+>> +    } while (duration >= DIV_MIN && ret == -EINVAL);
+>> +
+>> +    return ret;
+>> +}
+>> +
+>> +static void meson_clk_msr_dump(struct udevice *dev)
+>> +{
+>> +    struct meson_msr *priv = dev_get_priv(dev);
+>> +    unsigned int precision = 0;
+>> +    int val, i;
+>> +
+>> +    printf("  clock                     rate    precision\n");
+>> +    printf("---------------------------------------------\n");
+>> +
+>> +    for (i = 0 ; i < CLK_MSR_MAX ; ++i) {
+>> +        if (!priv->msr_table[i].name)
+>> +            continue;
+>> +
+>> +        val = meson_clk_msr_best_id(priv, i, &precision);
+>> +        if (val < 0)
+>> +            return;
+>> +
+>> +        printf(" %-20s %10d    +/-%dHz\n",
+>> +               priv->msr_table[i].name, val, precision);
+>> +    }
+>> +}
+> 
+> To confirm, this is based on [1], right?
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/cover/20231109105516.24892-1-ivprusov@sberdevices.ru/
+
+Exact
+
+> 
+>> +static int meson_clk_msr_xlate(struct clk *clk, struct ofnode_phandle_args *args)
+>> +{
+>> +    /* This driver doesn't expose any clocks */
+>> +    return -EINVAL;
+>> +}
+>> +
+>> +static int meson_clk_msr_probe(struct udevice *dev)
+>> +{
+>> +    struct meson_msr *priv = dev_get_priv(dev);
+>> +    int ret;
+>> +
+>> +    priv->msr_table = (struct meson_msr_id *)dev_get_driver_data(dev);
+>> +
+>> +    ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
+>> +    if (ret)
+>> +        return ret;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +static struct clk_ops meson_clk_msr_ops = {
+>> +    .of_xlate = meson_clk_msr_xlate,
+>> +    .dump = meson_clk_msr_dump,
+>> +};
+>> +
+>> +static const struct udevice_id meson_clk_msr_ids[] = {
+>> +    {
+>> +        .compatible = "amlogic,meson-gx-clk-measure",
+>> +        .data = (ulong)clk_msr_gx,
+>> +    },
+>> +    {
+>> +        .compatible = "amlogic,meson8-clk-measure",
+>> +        .data = (ulong)clk_msr_m8,
+>> +    },
+>> +    {
+>> +        .compatible = "amlogic,meson8b-clk-measure",
+>> +        .data = (ulong)clk_msr_m8,
+>> +    },
+>> +    {
+>> +        .compatible = "amlogic,meson-axg-clk-measure",
+>> +        .data = (ulong)clk_msr_axg,
+>> +    },
+>> +    {
+>> +        .compatible = "amlogic,meson-g12a-clk-measure",
+>> +        .data = (ulong)clk_msr_g12a,
+>> +    },
+>> +    {
+>> +        .compatible = "amlogic,meson-sm1-clk-measure",
+>> +        .data = (ulong)clk_msr_sm1,
+>> +    },
+>> +    { /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(meson_clk_msr) = {
+>> +    .name        = "meson_clk_msr",
+>> +    .id        = UCLASS_CLK,
+>> +    .of_match    = meson_clk_msr_ids,
+>> +    .priv_auto    = sizeof(struct meson_msr),
+>> +    .ops        = &meson_clk_msr_ops,
+>> +    .probe        = meson_clk_msr_probe,
+>> +};
+>>
+>> ---
+>> base-commit: e1b7717928eff69178604a400fe40dbf3287d9a1
+>> change-id: 20231113-uboot-meson-clk-msr-21cf9101278b
+>>
+>> Best regards,
+> 
+> With the commit/kconfig message expanded a bit,
+> 
+> Reviewed-by: Sean Anderson <seanga2@gmail.com>
 
 Thanks,
-- Kever
-> ---
-> Changes in v2:
-> - removed BOOT_TARGET #ifdef ... #endif in the RK1 header file
-> ---
->   arch/arm/dts/Makefile                         |   1 +
->   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi    |  25 +
->   arch/arm/dts/rk3588-turing-rk1.dts            |  21 +
->   arch/arm/dts/rk3588-turing-rk1.dtsi           | 614 ++++++++++++++++++
->   arch/arm/mach-rockchip/rk3588/Kconfig         |  24 +
->   board/turing/turing-rk1-rk3588/Kconfig        |  15 +
->   board/turing/turing-rk1-rk3588/MAINTAINERS    |   9 +
->   board/turing/turing-rk1-rk3588/Makefile       |   6 +
->   .../turing-rk1-rk3588/turing-rk1-rk3588.c     |  39 ++
->   configs/turing-rk1-rk3588_defconfig           | 133 ++++
->   doc/board/rockchip/rockchip.rst               |   1 +
->   include/configs/turing-rk1-rk3588.h           |  15 +
->   12 files changed, 903 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
->   create mode 100644 arch/arm/dts/rk3588-turing-rk1.dts
->   create mode 100644 arch/arm/dts/rk3588-turing-rk1.dtsi
->   create mode 100644 board/turing/turing-rk1-rk3588/Kconfig
->   create mode 100644 board/turing/turing-rk1-rk3588/MAINTAINERS
->   create mode 100644 board/turing/turing-rk1-rk3588/Makefile
->   create mode 100644 board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
->   create mode 100644 configs/turing-rk1-rk3588_defconfig
->   create mode 100644 include/configs/turing-rk1-rk3588.h
->
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 1be08c5fdc..97355d84de 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -195,6 +195,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
->   	rk3588s-orangepi-5.dtb \
->   	rk3588-orangepi-5-plus.dtb \
->   	rk3588-quartzpro64.dtb \
-> +	rk3588-turing-rk1.dtb \
->   	rk3588s-rock-5a.dtb \
->   	rk3588-rock-5b.dtb
->   
-> diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..06c6f327c1
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> @@ -0,0 +1,25 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2023 Joshua Riek <jjriek@verizon.net>
-> + *
-> + */
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +/ {
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
-> +	};
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-ddr-1_8v;
-> +	mmc-hs200-1_8v;
-> +};
-> +
-> +&uart9 {
-> +	bootph-pre-ram;
-> +	clock-frequency = <24000000>;
-> +	status = "okay";
-> +};
-> diff --git a/arch/arm/dts/rk3588-turing-rk1.dts b/arch/arm/dts/rk3588-turing-rk1.dts
-> new file mode 100644
-> index 0000000000..7bcad28d73
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-turing-rk1.dts
-> @@ -0,0 +1,21 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * This device tree covers the common case where the RK1 is used as a
-> + * "compute node" system, where the carrier board is functioning more like a
-> + * generic backplane (with no non-autoenumerable peripherals of its own) than
-> + * like a device that the SoM is meant to enable.
-> + *
-> + * Copyright (c) 2023 Sam Edwards <CFSworks@gmail.com>
-> + */
-> +
-> +/dts-v1/;
-> +#include "rk3588-turing-rk1.dtsi"
-> +
-> +/ {
-> +	model = "Turing Machines RK1";
-> +	compatible = "turing,rk1", "rockchip,rk3588";
-> +
-> +	chosen {
-> +		stdout-path = "serial9:115200n8";
-> +	};
-> +};
-> diff --git a/arch/arm/dts/rk3588-turing-rk1.dtsi b/arch/arm/dts/rk3588-turing-rk1.dtsi
-> new file mode 100644
-> index 0000000000..9570b34aca
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-turing-rk1.dtsi
-> @@ -0,0 +1,614 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Device tree definitions for the Turing RK1 SoM.
-> + *
-> + * Copyright (c) 2023 Sam Edwards <CFSworks@gmail.com>
-> + *
-> + * Based on RK3588-EVB1 devicetree
-> + * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
-> + */
-> +
-> +/dts-v1/;
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/pinctrl/rockchip.h>
-> +#include "rk3588.dtsi"
-> +
-> +/ {
-> +	compatible = "turing,rk1", "rockchip,rk3588";
-> +
-> +	aliases {
-> +		ethernet0 = &gmac1;
-> +		mmc0 = &sdhci;
-> +		serial2 = &uart2;
-> +		serial9 = &uart9;
-> +	};
-> +
-> +	fan: pwm-fan {
-> +		compatible = "pwm-fan";
-> +		cooling-levels = <0 25 95 145 195 255>;
-> +		fan-supply = <&vcc5v0_sys>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pwm0m2_pins &fan_int>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <RK_PA4 IRQ_TYPE_EDGE_FALLING>;
-> +		pwms = <&pwm0 0 50000 0>;
-> +		#cooling-cells = <2>;
-> +	};
-> +
-> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc3v3_pcie30";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		enable-active-high;
-> +		gpios = <&gpio2 RK_PC5 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&vcc3v3_pcie30_en>;
-> +		startup-delay-us = <5000>;
-> +	};
-> +
-> +	vcc5v0_sys: vcc5v0-sys-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc5v0_sys";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +	};
-> +
-> +	vcc_1v1_nldo_s3: vcc-1v1-nldo-s3-regulator {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc_1v1_nldo_s3";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <1100000>;
-> +		regulator-max-microvolt = <1100000>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +	};
-> +};
-> +
-> +&combphy2_psu {
-> +	status = "okay";
-> +};
-> +
-> +&cpu_b0 {
-> +	cpu-supply = <&vdd_cpu_big0_s0>;
-> +};
-> +
-> +&cpu_b1 {
-> +	cpu-supply = <&vdd_cpu_big0_s0>;
-> +};
-> +
-> +&cpu_b2 {
-> +	cpu-supply = <&vdd_cpu_big1_s0>;
-> +};
-> +
-> +&cpu_b3 {
-> +	cpu-supply = <&vdd_cpu_big1_s0>;
-> +};
-> +
-> +&cpu_l0 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l1 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l2 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&cpu_l3 {
-> +	cpu-supply = <&vdd_cpu_lit_s0>;
-> +};
-> +
-> +&gmac1 {
-> +	clock_in_out = "output";
-> +	phy-handle = <&rgmii_phy>;
-> +	phy-mode = "rgmii-rxid";
-> +	pinctrl-0 = <&gmac1_miim
-> +		     &gmac1_tx_bus2
-> +		     &gmac1_rx_bus2
-> +		     &gmac1_rgmii_clk
-> +		     &gmac1_rgmii_bus>;
-> +	pinctrl-names = "default";
-> +	rx_delay = <0x00>;
-> +	tx_delay = <0x43>;
-> +	status = "okay";
-> +};
-> +
-> +&i2c0 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&i2c0m2_xfer>;
-> +	status = "okay";
-> +
-> +	vdd_cpu_big0_s0: regulator@42 {
-> +		compatible = "rockchip,rk8602";
-> +		reg = <0x42>;
-> +		fcs,suspend-voltage-selector = <1>;
-> +		regulator-name = "vdd_cpu_big0_s0";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <550000>;
-> +		regulator-max-microvolt = <1050000>;
-> +		regulator-ramp-delay = <2300>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +
-> +		regulator-state-mem {
-> +			regulator-off-in-suspend;
-> +		};
-> +	};
-> +
-> +	vdd_cpu_big1_s0: regulator@43 {
-> +		compatible = "rockchip,rk8603", "rockchip,rk8602";
-> +		reg = <0x43>;
-> +		fcs,suspend-voltage-selector = <1>;
-> +		regulator-name = "vdd_cpu_big1_s0";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <550000>;
-> +		regulator-max-microvolt = <1050000>;
-> +		regulator-ramp-delay = <2300>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +
-> +		regulator-state-mem {
-> +			regulator-off-in-suspend;
-> +		};
-> +	};
-> +};
-> +
-> +&i2c1 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&i2c1m2_xfer>;
-> +	status = "okay";
-> +
-> +	vdd_npu_s0: regulator@42 {
-> +		compatible = "rockchip,rk8602";
-> +		reg = <0x42>;
-> +		fcs,suspend-voltage-selector = <1>;
-> +		regulator-name = "vdd_npu_s0";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt = <550000>;
-> +		regulator-max-microvolt = <950000>;
-> +		regulator-ramp-delay = <2300>;
-> +		vin-supply = <&vcc5v0_sys>;
-> +
-> +		regulator-state-mem {
-> +			regulator-off-in-suspend;
-> +		};
-> +	};
-> +};
-> +
-> +&i2c6 {
-> +	status = "okay";
-> +
-> +	hym8563: rtc@51 {
-> +		compatible = "haoyu,hym8563";
-> +		reg = <0x51>;
-> +		#clock-cells = <0>;
-> +		clock-output-names = "hym8563";
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&hym8563_int>;
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <RK_PB0 IRQ_TYPE_LEVEL_LOW>;
-> +		wakeup-source;
-> +	};
-> +};
-> +
-> +&mdio1 {
-> +	rgmii_phy: ethernet-phy@1 {
-> +		/* RTL8211F */
-> +		compatible = "ethernet-phy-id001c.c916",
-> +			     "ethernet-phy-ieee802.3-c22";
-> +		reg = <0x1>;
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&rtl8211f_rst>;
-> +		reset-assert-us = <15000>;
-> +		reset-deassert-us = <50000>;
-> +		reset-gpios = <&gpio3 RK_PB7 GPIO_ACTIVE_LOW>;
-> +	};
-> +};
-> +
-> +&pcie2x1l1 {
-> +	linux,pci-domain = <1>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pcie2_reset>;
-> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-> +	status = "okay";
-> +};
-> +
-> +&pcie30phy {
-> +	status = "okay";
-> +};
-> +
-> +&pcie3x4 {
-> +	linux,pci-domain = <0>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&pcie3_reset>;
-> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply = <&vcc3v3_pcie30>;
-> +	status = "okay";
-> +};
-> +
-> +&pinctrl {
-> +	fan {
-> +		fan_int: fan-int {
-> +			rockchip,pins = <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	hym8563 {
-> +		hym8563_int: hym8563-int {
-> +			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	pcie2 {
-> +		pcie2_reset: pcie2-reset {
-> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	pcie3 {
-> +		pcie3_reset: pcie3-reset {
-> +			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		vcc3v3_pcie30_en: pcie3-reg {
-> +			rockchip,pins = <2 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	rtl8211f {
-> +		rtl8211f_rst: rtl8211f-rst {
-> +			rockchip,pins = <3 RK_PB7 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +};
-> +
-> +&pwm0 {
-> +	status = "okay";
-> +};
-> +
-> +&sdhci {
-> +	bus-width = <8>;
-> +	no-sdio;
-> +	no-sd;
-> +	non-removable;
-> +	mmc-hs400-1_8v;
-> +	mmc-hs400-enhanced-strobe;
-> +	status = "okay";
-> +};
-> +
-> +&spi2 {
-> +	status = "okay";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&spi2m2_cs0 &spi2m2_pins>;
-> +	num-cs = <1>;
-> +
-> +	pmic@0 {
-> +		compatible = "rockchip,rk806";
-> +		spi-max-frequency = <1000000>;
-> +		reg = <0x0>;
-> +
-> +		interrupt-parent = <&gpio0>;
-> +		interrupts = <7 IRQ_TYPE_LEVEL_LOW>;
-> +
-> +		pinctrl-names = "default";
-> +		pinctrl-0 = <&pmic_pins>, <&rk806_dvs1_null>,
-> +			    <&rk806_dvs2_null>, <&rk806_dvs3_null>;
-> +
-> +		vcc1-supply = <&vcc5v0_sys>;
-> +		vcc2-supply = <&vcc5v0_sys>;
-> +		vcc3-supply = <&vcc5v0_sys>;
-> +		vcc4-supply = <&vcc5v0_sys>;
-> +		vcc5-supply = <&vcc5v0_sys>;
-> +		vcc6-supply = <&vcc5v0_sys>;
-> +		vcc7-supply = <&vcc5v0_sys>;
-> +		vcc8-supply = <&vcc5v0_sys>;
-> +		vcc9-supply = <&vcc5v0_sys>;
-> +		vcc10-supply = <&vcc5v0_sys>;
-> +		vcc11-supply = <&vcc_2v0_pldo_s3>;
-> +		vcc12-supply = <&vcc5v0_sys>;
-> +		vcc13-supply = <&vcc_1v1_nldo_s3>;
-> +		vcc14-supply = <&vcc_1v1_nldo_s3>;
-> +		vcca-supply = <&vcc5v0_sys>;
-> +
-> +		gpio-controller;
-> +		#gpio-cells = <2>;
-> +
-> +		rk806_dvs1_null: dvs1-null-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		rk806_dvs2_null: dvs2-null-pins {
-> +			pins = "gpio_pwrctrl2";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		rk806_dvs3_null: dvs3-null-pins {
-> +			pins = "gpio_pwrctrl3";
-> +			function = "pin_fun0";
-> +		};
-> +
-> +		regulators {
-> +			vdd_gpu_s0: vdd_gpu_mem_s0: dcdc-reg1 {
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_gpu_s0";
-> +				regulator-enable-ramp-delay = <400>;
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_cpu_lit_s0: vdd_cpu_lit_mem_s0: dcdc-reg2 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_cpu_lit_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_log_s0: dcdc-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <675000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_log_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <750000>;
-> +				};
-> +			};
-> +
-> +			vdd_vdenc_s0: vdd_vdenc_mem_s0: dcdc-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <550000>;
-> +				regulator-max-microvolt = <950000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_vdenc_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_ddr_s0: dcdc-reg5 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <675000>;
-> +				regulator-max-microvolt = <900000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_ddr_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <850000>;
-> +				};
-> +			};
-> +
-> +			vdd2_ddr_s3: dcdc-reg6 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-name = "vdd2_ddr_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_2v0_pldo_s3: dcdc-reg7 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <2000000>;
-> +				regulator-max-microvolt = <2000000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vdd_2v0_pldo_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <2000000>;
-> +				};
-> +			};
-> +
-> +			vcc_3v3_s3: dcdc-reg8 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcc_3v3_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <3300000>;
-> +				};
-> +			};
-> +
-> +			vddq_ddr_s0: dcdc-reg9 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-name = "vddq_ddr_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_1v8_s3: dcdc-reg10 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc_1v8_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			avcc_1v8_s0: pldo-reg1 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "avcc_1v8_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_1v8_s0: pldo-reg2 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc_1v8_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			avdd_1v2_s0: pldo-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1200000>;
-> +				regulator-max-microvolt = <1200000>;
-> +				regulator-name = "avdd_1v2_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vcc_3v3_s0: pldo-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vcc_3v3_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vccio_sd_s0: pldo-reg5 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-ramp-delay = <12500>;
-> +				regulator-name = "vccio_sd_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			pldo6_s3: pldo-reg6 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "pldo6_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <1800000>;
-> +				};
-> +			};
-> +
-> +			vdd_0v75_s3: nldo-reg1 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <750000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-name = "vdd_0v75_s3";
-> +
-> +				regulator-state-mem {
-> +					regulator-on-in-suspend;
-> +					regulator-suspend-microvolt = <750000>;
-> +				};
-> +			};
-> +
-> +			vdd_ddr_pll_s0: nldo-reg2 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <850000>;
-> +				regulator-max-microvolt = <850000>;
-> +				regulator-name = "vdd_ddr_pll_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +					regulator-suspend-microvolt = <850000>;
-> +				};
-> +			};
-> +
-> +			avdd_0v75_s0: nldo-reg3 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <750000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-name = "avdd_0v75_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_0v85_s0: nldo-reg4 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <850000>;
-> +				regulator-max-microvolt = <850000>;
-> +				regulator-name = "vdd_0v85_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +
-> +			vdd_0v75_s0: nldo-reg5 {
-> +				regulator-always-on;
-> +				regulator-boot-on;
-> +				regulator-min-microvolt = <750000>;
-> +				regulator-max-microvolt = <750000>;
-> +				regulator-name = "vdd_0v75_s0";
-> +
-> +				regulator-state-mem {
-> +					regulator-off-in-suspend;
-> +				};
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&uart2 {
-> +	pinctrl-0 = <&uart2m0_xfer>;
-> +	status = "okay";
-> +};
-> +
-> +&uart9 {
-> +	pinctrl-0 = <&uart9m0_xfer>;
-> +	status = "okay";
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index e5282dd112..a2193fbd41 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -132,6 +132,29 @@ config TARGET_QUARTZPRO64_RK3588
->   	  Pine64 QuartzPro64 is a Rockchip RK3588 based SBC (Single Board
->   	  Computer) by Pine64.
->   
-> +config TARGET_TURINGRK1_RK3588
-> +	bool "Turing Machines RK1 RK3588 board"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  The Turing RK1 is a Rockchip RK3588 based SoM from Turing Machines.
-> +
-> +	  There are three variants depending on the DRAM size : 8G, 16G and 32G.
-> +
-> +	  Specifications:
-> +
-> +	  Rockchip RK3588 SoC
-> +	  4x ARM Cortex-A76, 4x ARM Cortex-A55
-> +	  8/16/32GB memory LPDDR4x
-> +	  Mali G610MC4 GPU
-> +	  32GB eMMC HS400
-> +	  2x USB 2.0, 2x USB 3.0
-> +	  2x MIPI CSI 4x lanes
-> +	  1x MIPI-DSI DPHY 2x lanes
-> +	  PCIe 2.0 x1, PCIe 3.0 x4
-> +	  1x HDMI 2.1 output, 1x DP 1.4 output
-> +	  Gigabit Ethernet
-> +	  Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
-> +
->   config ROCKCHIP_BOOT_MODE_REG
->   	default 0xfd588080
->   
-> @@ -147,6 +170,7 @@ config SYS_MALLOC_F_LEN
->   source board/edgeble/neural-compute-module-6/Kconfig
->   source board/friendlyelec/nanopc-t6-rk3588/Kconfig
->   source board/pine64/quartzpro64-rk3588/Kconfig
-> +source board/turing/turing-rk1-rk3588/Kconfig
->   source board/rockchip/evb_rk3588/Kconfig
->   source board/radxa/rock5a-rk3588s/Kconfig
->   source board/radxa/rock5b-rk3588/Kconfig
-> diff --git a/board/turing/turing-rk1-rk3588/Kconfig b/board/turing/turing-rk1-rk3588/Kconfig
-> new file mode 100644
-> index 0000000000..4c6cd6af34
-> --- /dev/null
-> +++ b/board/turing/turing-rk1-rk3588/Kconfig
-> @@ -0,0 +1,15 @@
-> +if TARGET_TURINGRK1_RK3588
-> +
-> +config SYS_BOARD
-> +	default "turing-rk1-rk3588"
-> +
-> +config SYS_VENDOR
-> +	default "turing"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "turing-rk1-rk3588"
-> +
-> +config BOARD_SPECIFIC_OPTIONS # dummy
-> +	def_bool y
-> +
-> +endif
-> diff --git a/board/turing/turing-rk1-rk3588/MAINTAINERS b/board/turing/turing-rk1-rk3588/MAINTAINERS
-> new file mode 100644
-> index 0000000000..4f313732fa
-> --- /dev/null
-> +++ b/board/turing/turing-rk1-rk3588/MAINTAINERS
-> @@ -0,0 +1,9 @@
-> +TURINGRK1-RK3588
-> +M:	Joshua Riek <jjriek@verizon.net>
-> +S:	Maintained
-> +F:	board/turing/turing-rk1-rk3588
-> +F:	include/configs/turing-rk1-rk3588.h
-> +F:	configs/turing-rk1-rk3588_defconfig
-> +F:	arch/arm/dts/rk3588-turing-rk1.dts
-> +F:	arch/arm/dts/rk3588-turing-rk1.dtsi
-> +F:	arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
-> diff --git a/board/turing/turing-rk1-rk3588/Makefile b/board/turing/turing-rk1-rk3588/Makefile
-> new file mode 100644
-> index 0000000000..a979d8023a
-> --- /dev/null
-> +++ b/board/turing/turing-rk1-rk3588/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier:     GPL-2.0+
-> +#
-> +# Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
-> +#
-> +
-> +obj-y += turing-rk1-rk3588.o
-> diff --git a/board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c b/board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
-> new file mode 100644
-> index 0000000000..e2338a2a35
-> --- /dev/null
-> +++ b/board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
-> @@ -0,0 +1,39 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
-> + */
-> +
-> +#include <fdtdec.h>
-> +#include <fdt_support.h>
-> +
-> +#ifdef CONFIG_OF_BOARD_SETUP
-> +int turing_rk1_add_reserved_memory_fdt_nodes(void *new_blob)
-> +{
-> +	struct fdt_memory gap1 = {
-> +		.start = 0x3fc000000,
-> +		.end = 0x3fc4fffff,
-> +	};
-> +	struct fdt_memory gap2 = {
-> +		.start = 0x3fff00000,
-> +		.end = 0x3ffffffff,
-> +	};
-> +	unsigned long flags = FDTDEC_RESERVED_MEMORY_NO_MAP;
-> +	unsigned int ret;
-> +
-> +	/*
-> +	 * Inject the reserved-memory nodes into the DTS
-> +	 */
-> +	ret = fdtdec_add_reserved_memory(new_blob, "gap1", &gap1,  NULL, 0,
-> +					 NULL, flags);
-> +	if (ret)
-> +		return ret;
-> +
-> +	return fdtdec_add_reserved_memory(new_blob, "gap2", &gap2,  NULL, 0,
-> +					  NULL, flags);
-> +}
-> +
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +	return turing_rk1_add_reserved_memory_fdt_nodes(blob);
-> +}
-> +#endif
-> diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
-> new file mode 100644
-> index 0000000000..289f2da775
-> --- /dev/null
-> +++ b/configs/turing-rk1-rk3588_defconfig
-> @@ -0,0 +1,133 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_TEXT_BASE=0x00a00000
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_NR_DRAM_BANKS=2
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_STACK_R_ADDR=0x600000
-> +CONFIG_TARGET_TURINGRK1_RK3588=y
-> +CONFIG_SPL_STACK=0x400000
-> +CONFIG_DEBUG_UART_BASE=0xFEBC0000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_OF_BOARD_SETUP=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-turing-rk1.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0x4000000
-> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_SCSI=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_TFTPPUT=y
-> +CONFIG_CMD_TFTPSRV=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SATA=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_SPI_FLASH_XMC=y
-> +CONFIG_PHYLIB=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_REGULATOR_PWM=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_DM_SCSI=y
-> +CONFIG_BAUDRATE=115200
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_XHCI_DWC3=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_XHCI_PCI=y
-> +CONFIG_SPL_USB_DWC3_GENERIC=y
-> +CONFIG_USB_HOST_ETHER=y
-> +CONFIG_USB_ETHER_ASIX=y
-> +CONFIG_USB_ETHER_ASIX88179=y
-> +CONFIG_USB_ETHER_LAN75XX=y
-> +CONFIG_USB_ETHER_LAN78XX=y
-> +CONFIG_USB_ETHER_MCS7830=y
-> +CONFIG_USB_ETHER_RTL8152=y
-> +CONFIG_USB_ETHER_SMSC95XX=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_PRODUCT_NUM=0x350b
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 18d0b6f089..9fe69fc942 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -117,6 +117,7 @@ List of mainline supported Rockchip boards:
->        - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
->        - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
->        - Pine64 QuartzPro64 (quartzpro64-rk3588)
-> +     - Turing Machines RK1 (turing-rk1-rk3588)
->        - Radxa ROCK 5A (rock5a-rk3588s)
->        - Radxa ROCK 5B (rock5b-rk3588)
->        - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
-> diff --git a/include/configs/turing-rk1-rk3588.h b/include/configs/turing-rk1-rk3588.h
-> new file mode 100644
-> index 0000000000..760f3c6ab3
-> --- /dev/null
-> +++ b/include/configs/turing-rk1-rk3588.h
-> @@ -0,0 +1,15 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2023 Rockchip Electronics Co., Ltd.
-> + */
-> +
-> +#ifndef __TURINGRK1_RK3588_H
-> +#define __TURINGRK1_RK3588_H
-> +
-> +#define ROCKCHIP_DEVICE_SETTINGS \
-> +		"stdout=serial,vidconsole\0" \
-> +		"stderr=serial,vidconsole\0"
-> +
-> +#include <configs/rk3588_common.h>
-> +
-> +#endif /* __TURINGRK1_RK3588_H */
+I'll fix all those in a v3.
+
+Neil
+
