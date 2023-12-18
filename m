@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECBEC3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 02:39:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09D0AC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 02:39:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 727EE87DCD;
-	Mon, 18 Dec 2023 03:39:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E41EA87DD2;
+	Mon, 18 Dec 2023 03:39:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wFAIZSjM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bChwSZF5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A253987DB2; Mon, 18 Dec 2023 03:39:14 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id C5C6E87DD1; Mon, 18 Dec 2023 03:39:16 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E21F87DB2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:39:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EF5D87DC2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:39:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d2eea4af93so6580295ad.1
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 18:39:12 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1d03f03cda9so6757885ad.0
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 18:39:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702867151; x=1703471951; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1702867153; x=1703471953; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f1xnsDhYxoGq8Q7UUWBB8Cvz7zbisEXPmyyhu/S5S0E=;
- b=wFAIZSjMCOZ/dwX8o0+ioKX1Slx3gu2UYUMW4NO+syIDLBINFJJ8S+563pkLltdhaA
- dbQj/GdprEH6k/hX6XDDdBQ+ALogj7bWt6kAqKEsS1hEFToAHZcZ2gJrf8UOmxE0UFPL
- /oZVh0j/kdUBbnzAlKTpFwki4B6K7hZuY6Af1H42lNMpDVVbprXlhMbjgcAe9Rp3nB+G
- NuQpcFIaPaiN/97bCTjQKv30MspiAFYYEYcJLkbyJL2seFwLhcFVxSONJcRgBGmoT+9i
- 9QugaRlIBGKKx3QZ+zmXEiiaAugPUAQ7WWvOr5Z5hNIZwy1AbahwxRuKC6vDOTIlqLVr
- u9Ow==
+ bh=1tKfvzfDa8NGiiAEbBmpMamIEwVygPzTfOnYpGKXyEU=;
+ b=bChwSZF5ykuUZ8Op9s13eZvJtK3Md1GCCDJWPFCwKjnvvie5LAhI9yAKB8k6C7CbrS
+ V5qq3hh5tFpSFNCb13rfDhXGT+Lj7VHqOYJZBWiOUrUBQFbMlitIIXc7CnjkpGAQm1yn
+ x79knpOKcAC5ceaSfMcO5ag+K66NegbWYvENTT5WMGIEAI2tPgX5g5YrmDiGcoApZZwj
+ NgpKWDx8RSatvBfKxYNP3e9gou67lwjvNX94kbFrTxCkD3TmYF9Ev+7MyYg3gtCERF9w
+ 7o94TsZqO55RB9hxEviGaf5k7jj7g8gFQcgsyxpgFqMIX0EE/tvcohCdY0Hp7I/di29I
+ pGjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702867151; x=1703471951;
+ d=1e100.net; s=20230601; t=1702867153; x=1703471953;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f1xnsDhYxoGq8Q7UUWBB8Cvz7zbisEXPmyyhu/S5S0E=;
- b=bu2lKoSXNWl4N8SJFVlH0iFLN0ELsvfa/VnkQkUIKwGwfY5EgIuVCnhLpAMDSzVE7L
- YUpim/6aDCyIq+IlgHLjpBP2/k3jNiXgV/YLXgIlLRjTpno9IZwy4v7MpmS0TMRoWPsF
- WDCT/28Adhi3uoBmtMmyCgNNA4+9DqpcZngNvCB+GT1V8oAi/sdHvc+T4M4P3PbmKd9H
- 0QweJSgLBS6FJDjZlQxJDFWfQ6SA4QBwSYN71LwNxFCxE0YwofYGeqUnWq7stWG1jH5s
- RwLdP6cK/xlCUm8h2x0JkMaXkLsXjBCn8AxJngTEjeVYaQJMAQB7VWeljc8TQJvCaGBj
- grRg==
-X-Gm-Message-State: AOJu0YzrMb3LRSIRTNKry57Rm1Fb65jDbHRGTmecmNixaxaQqwgbMCvK
- nPHBr1tR5xsOv0N8/kWLYKJbYg==
-X-Google-Smtp-Source: AGHT+IF0xkGspX6kSkSdAEUusNK0a/2fAjIGXHBgZjyAhBLdTclUYpoJF4wzGZD7XBX0gjNJ91J3Ig==
-X-Received: by 2002:a17:902:b201:b0:1d3:6420:4361 with SMTP id
- t1-20020a170902b20100b001d364204361mr15032444plr.0.1702867150783; 
- Sun, 17 Dec 2023 18:39:10 -0800 (PST)
+ bh=1tKfvzfDa8NGiiAEbBmpMamIEwVygPzTfOnYpGKXyEU=;
+ b=Lrg/KAJ04I8R2qwYMBn2iA2fLoPpSziy8ovo/d0TstLxe/E6TUwgDh5SbHLpO1W94+
+ gcxvQbqTUX0BEtFhbhxCG3SptbJ6n+CkjuyYO54X2c3pbyzb98OmVRRIZ2umSKMT3VcN
+ uad1vpEPOkENJsZuFkcoRXLr8QO4GZnPwdAPO7i7JNE/zfOmsbSuPenvCnlr29fAchud
+ 9s4UAxo87QGMriwq/gzZnACDgYltPDcCKlmX/feeYAHSdScPAwEZytyjPc3h/LOIRFaQ
+ dwRkNq0IpsDjqGe2OIpDXCgDxEyBWSwW29+Qha5eh3RBLkXuPMPa3HvqDj1tocDOYz5l
+ stvA==
+X-Gm-Message-State: AOJu0YwEP42DfegmbXcLGzVpdvMLvUXJX0q3xZKbV6/PL7hzPB572tRv
+ UUXU40PfgRVx+xewqeF8pFSYjg==
+X-Google-Smtp-Source: AGHT+IFNwVvPzQhMC+SJgxT+hI8N7Eh+cKnxovyF4AFrXUyhXxRx8OPdglDBqc7Vxo3z4x7VkaS3yQ==
+X-Received: by 2002:a17:902:e746:b0:1d3:c23a:6859 with SMTP id
+ p6-20020a170902e74600b001d3c23a6859mr713209plf.1.1702867152942; 
+ Sun, 17 Dec 2023 18:39:12 -0800 (PST)
 Received: from octopus.. ([2400:4050:c3e1:100:a448:a260:721d:a9f0])
  by smtp.gmail.com with ESMTPSA id
- w24-20020a1709029a9800b001d316770044sm13754305plp.56.2023.12.17.18.39.08
+ w24-20020a1709029a9800b001d316770044sm13754305plp.56.2023.12.17.18.39.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Dec 2023 18:39:10 -0800 (PST)
+ Sun, 17 Dec 2023 18:39:12 -0800 (PST)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
  ilias.apalodimas@linaro.org
 Cc: u-boot@lists.denx.de,
 	AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v3 3/4] net: tftp: remove explicit efi configuration dependency
-Date: Mon, 18 Dec 2023 11:38:41 +0900
-Message-Id: <20231218023842.281336-4-takahiro.akashi@linaro.org>
+Subject: [PATCH v3 4/4] fs: remove explicit efi configuration dependency
+Date: Mon, 18 Dec 2023 11:38:42 +0900
+Message-Id: <20231218023842.281336-5-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231218023842.281336-1-takahiro.akashi@linaro.org>
 References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
@@ -99,30 +99,27 @@ if necessary efi component is disabled.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
- net/tftp.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ fs/fs.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/net/tftp.c b/net/tftp.c
-index 88e71e67de35..2e335413492b 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -302,12 +302,10 @@ static void tftp_complete(void)
- 			time_start * 1000, "/s");
+diff --git a/fs/fs.c b/fs/fs.c
+index f33b85f92b61..82ee03b160e9 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
+ 		return 1;
  	}
- 	puts("\ndone\n");
--	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
--		if (!tftp_put_active)
--			efi_set_bootdev("Net", "", tftp_filename,
--					map_sysmem(tftp_load_addr, 0),
--					net_boot_file_size);
--	}
-+	if (!tftp_put_active)
-+		efi_set_bootdev("Net", "", tftp_filename,
-+				map_sysmem(tftp_load_addr, 0),
-+				net_boot_file_size);
- 	net_set_state(NETLOOP_SUCCESS);
- }
  
+-	if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
+-		efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+-				(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
+-				len_read);
++	efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
++			(argc > 4) ? argv[4] : "", map_sysmem(addr, 0),
++			len_read);
+ 
+ 	printf("%llu bytes read in %lu ms", len_read, time);
+ 	if (time > 0) {
 -- 
 2.34.1
 
