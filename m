@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 187B7C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 10:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA95C46CA2
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 11:25:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 615D587D6A;
-	Mon, 18 Dec 2023 11:26:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AAF8787E06;
+	Mon, 18 Dec 2023 12:25:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="g463E3dc";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="o8M0Nqwg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12A1087DE0; Mon, 18 Dec 2023 11:26:35 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 8153387E06; Mon, 18 Dec 2023 12:25:53 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C1578773F
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 11:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CCFC87CF5
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 12:25:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-28b79d1ebd6so311890a91.1
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 02:26:32 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5e6c8b70766so4536417b3.3
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:25:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702895190; x=1703499990;
+ d=amarulasolutions.com; s=google; t=1702898749; x=1703503549;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NHYMFt14l3UhYykO02ZuYW5r47gls3XoT6qB9zK/yIU=;
- b=g463E3dcPMl75mp6KFIflK8xXIx2mATElKi3Hm1GHoqEt07mS7vcAqZ5GMaQh1fBZA
- aKkBBCwyR1VTeMa3x+YTKrxLWkNvu8MT1bA6Bd9XU1B0K1t/ar9kLQZHAr/5LX+oOuIW
- OTGqguXbBSJ0k/YZ1uCHtUJblviLsvxuUbw1Y=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EguggACRFpvg5l2wHrBnGSod6NA0Ol1sniMhUTqYZjQ=;
+ b=o8M0NqwgvgHn311JmZcRTH5Hk5hVeiJLbr8BcIi7fr0JFRNntZIhl6k7lcN1cLn/xp
+ lbQ7BjiPvVOrY8KmWPH+zSfuWikQW5Wotjajwg8Vv4aImlXv/Ul4Y8Ss5LyLdxhDyxRB
+ b8v98v5cagB0cAXYk20l0e7ZLmdkWvxPP41wI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702895190; x=1703499990;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NHYMFt14l3UhYykO02ZuYW5r47gls3XoT6qB9zK/yIU=;
- b=wLRegEKxSiDevDT5oQ82WQnvhLdOGZmcK7SGCpyrbKHWOxyucwwV1RJdTYDvDIuKAH
- qhczOumLOkfebVBMqnOSbryJmQzllZKNcNCeN/uKpOyn19vzKl191wDwhh+TpzZF/+Yo
- 771NG700N5MVJfcNg40zUIZi70QQekKMQzc2K09jkUF8dbDanHF5JYck0mf7fPtYQKiI
- cI40ZT3CritaQrZTxx5f6PT1p61SFGoz5aqN3sHzbypB2Kzr6SAsmsb6pqfRAdf3bJMG
- PSHsrLk8stxXaSr0XctmMy+P3zlRZOx+oTB3Zgg3UlY+pya3PO4IuvWkOqHXf8Utt+s6
- mirQ==
-X-Gm-Message-State: AOJu0Yz1q704JimpeVT10Fm8uOy6J5z7IzWUDfe2QHwC8bqMNokpZlRe
- hm1DPOCO0WYWeMTx7+MV4G9HAWIePPFKH6lpjFf6bw==
-X-Google-Smtp-Source: AGHT+IE4DTU2PKnvMM+HZyQ1khDtZi5yW6uwUlRGEFCW5FAdYL4HEdItqlddt6fb8t2yOmTBU6hk4Q==
-X-Received: by 2002:a17:90a:e54d:b0:28b:6b52:8198 with SMTP id
- ei13-20020a17090ae54d00b0028b6b528198mr370090pjb.37.1702895190566; 
- Mon, 18 Dec 2023 02:26:30 -0800 (PST)
-Received: from localhost.localdomain ([49.205.242.204])
- by smtp.gmail.com with ESMTPSA id
- sc16-20020a17090b511000b0028b2ff2208esm5961002pjb.19.2023.12.18.02.26.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 02:26:30 -0800 (PST)
-From: Jagan Teki <jagan@amarulasolutions.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-spi/master [for-next]
-Date: Mon, 18 Dec 2023 15:56:25 +0530
-Message-Id: <20231218102625.1050191-1-jagan@amarulasolutions.com>
-X-Mailer: git-send-email 2.25.1
+ d=1e100.net; s=20230601; t=1702898749; x=1703503549;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EguggACRFpvg5l2wHrBnGSod6NA0Ol1sniMhUTqYZjQ=;
+ b=C1Tk4SAdud0g5LcJmRbWSWRIbgCioIUPio0w9vCohEkzZm5ug4eZBpaX4uq6ThcZ4l
+ zy26VZM4lbDXLcH1AYAQbmbSrgLjhJOU63cWI2ZZExkkU+5g7M2+U3Nmb364izQVhmv/
+ Ypncv9Lu8nzT3d2pJqIkb8EqjPK4HdbuLl5vKDVyqdTykvXrs7mkS390drFIEb0theIj
+ 8EyPSQBOx4rXoQsPGxukxm3WdEhTMofwaafYO0OReuWxh9PAAnppYgv/cBXI5l8Ego2k
+ J0VVaO+xp3IV5l+PPq3tfsHeYXhlTIxsYzN9j1zj3CjrXIzWBQjd9WYTbiAEELlqbp2A
+ yfoQ==
+X-Gm-Message-State: AOJu0YyeaBafZKsdG0ZtuEGdu2sdydGOAOCc4HS23c3IAKQTTQftzWKG
+ vO0QnAnwRHbU7dIkX0DBSD7Y/AoCRgYWq21SHLirJQ==
+X-Google-Smtp-Source: AGHT+IE/602lXq0najyy7bciULalgByvI6Yu82FK/4DSn8PmOf/e+qdrt8BXDOXUeJDyH9IS6FfiY0xK+W1938QMneM=
+X-Received: by 2002:a05:690c:2c91:b0:5e2:5d81:3c0c with SMTP id
+ ep17-20020a05690c2c9100b005e25d813c0cmr5964470ywb.60.1702898749283; Mon, 18
+ Dec 2023 03:25:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231027134924.5771-1-bolsh@synopsys.com>
+In-Reply-To: <20231027134924.5771-1-bolsh@synopsys.com>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Mon, 18 Dec 2023 16:55:38 +0530
+Message-ID: <CAMty3ZAW4gqQsJaXTY0NsAHwzZv7QMCu3A2E3SKCDB318++0pw@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi: flash_is_unlocked return values fix
+To: Stanislav Bolshakov <Stanislav.Bolshakov@synopsys.com>
+Cc: u-boot@lists.denx.de, Alexey Brodkin <Alexey.Brodkin@synopsys.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,76 +84,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, Oct 27, 2023 at 9:22=E2=80=AFPM Stanislav Bolshakov
+<Stanislav.Bolshakov@synopsys.com> wrote:
+>
+> In accordance with the name of the function 'flash_is_unlocked()',
+> it is implied that the return value will be either 'true' or 'false'.
+> Moreover, calling this function from other parts of the program is
+> based precisely on this fact. The value of the pointer to the actual
+> called function 'flash_is_unlocked()' depends on the memory manufacturer
+> and can be stm_is_unlocked() or sst26_is_unlocked(). These two
+> functions have inconsistent return values. This patch fixes this
+> inconsistency.
 
-Please pull this PR for next.
-
-Summary:
-- spi_nor_read_sfdp_dma_unsafe (Vaishnav)
-- w25q01/02 (Jim)
-
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-spi/-/pipelines/18995
-
-thanks,
-Jagan.
-
-The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b63:
-
-  Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-spi master
-
-for you to fetch changes up to 959a4a0838acf7ef733e000d1304cea6711b8945:
-
-  spi: cadence-quadspi: Fix error message on stuck busy state (2023-12-14 23:56:19 +0530)
-
-----------------------------------------------------------------
-Bruce Suen (1):
-      mtd: spi-nor-ids: add support for xtx XT55Q02G
-
-Godfrey Mwangi (1):
-      mtd: spi-nor: Add MT25QU128AB params
-
-Igor Prusov (1):
-      mtd: spinand: add support for ESMT F50x1G41LB
-
-Jan Kiszka (1):
-      spi: cadence-quadspi: Fix error message on stuck busy state
-
-Jim Liu (1):
-      mtd: spi-nor: add flash model w25q01/02 support
-
-Jit Loon Lim (1):
-      mtd: spi-nor: Add MT25U01G part number for SPI NOR Flash
-
-Jonas Karlman (1):
-      mtd: spi-nor: Add support for Silicon Kaiser sk25lp128
-
-Teik Heng Chong (1):
-      drivers: mtd: spi: Add support for GD55LB02GEBIR SPI NOR flash
-
-Udit Kumar (1):
-      spi: cadence_qspi: Select flash subnode at runtime
-
-Vaishnav Achath (1):
-      mtd: spi-nor-core: Implement spi_nor_read_sfdp_dma_unsafe() for sfdp parse
-
-William Zhang (1):
-      spi: bcm63xx-hsspi: Fix compiler warning
-
- drivers/mtd/nand/spi/Makefile  |   3 +-
- drivers/mtd/nand/spi/core.c    |   1 +
- drivers/mtd/nand/spi/esmt.c    | 137 +++++++++++++++++++++++++++++++++++++++++
- drivers/mtd/spi/Kconfig        |   5 ++
- drivers/mtd/spi/spi-nor-core.c |  34 +++++++++-
- drivers/mtd/spi/spi-nor-ids.c  |  23 +++++++
- drivers/spi/bcm63xx_hsspi.c    |   2 +-
- drivers/spi/cadence_qspi.c     |   7 ++-
- drivers/spi/cadence_qspi.h     |   1 +
- drivers/spi/cadence_qspi_apb.c |   3 +-
- include/linux/mtd/spinand.h    |   1 +
- 11 files changed, 210 insertions(+), 7 deletions(-)
- create mode 100644 drivers/mtd/nand/spi/esmt.c
+Missing s-o-b
