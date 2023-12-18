@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0106C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D02C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08355875FC;
-	Mon, 18 Dec 2023 16:22:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 18BBF87509;
+	Mon, 18 Dec 2023 16:32:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DeRbY3cd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q3Xf2txC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1730D8767C; Mon, 18 Dec 2023 16:22:30 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id B5F91874AC; Mon, 18 Dec 2023 16:32:03 +0100 (CET)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81C4F875DB
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:22:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 006F287495
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:32:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-67ac0ef6bb8so20512456d6.1
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:22:27 -0800 (PST)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-517ab9a4a13so2613777a12.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:32:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702912946; x=1703517746; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PWUk/BKHi2oVCOyW697E2vayOak4YTzdY6r2vWBzD+w=;
- b=DeRbY3cd0OAbLlYhjUYa5PZ2Lt8g1jExn4Gr20Lc0SHNbHVEx+yF/nQILYbkZDUwBG
- Sk8ac5YVYRXVOKwRSiQtAbj1Jfo61CVNn2ZwVpAlCE1dUopscEGiiecKvIh/Hjql7Oa3
- 4DzhE0O5Y5fEExFZ4mn/bjCUwNYHUyPN8WfEw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702912946; x=1703517746;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1702913519; x=1703518319; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PWUk/BKHi2oVCOyW697E2vayOak4YTzdY6r2vWBzD+w=;
- b=duoOpK9jkCOldoRKGsiHnCasVdDp2dFYqQulURYt6WsaRR0UWVpD+rjSx7xI1tpJ2A
- 4C+OgNsd6+uvxPOAm2Rp2Hrd+4wQFQAKd2mDwZCqNO6u7DmiMoSndT2r+4JY3nzhiJeg
- A+tQmpsv39e3ZsFngWRqqq4I+rYuXtqOZJb6LtvseBJww0gHIo6jfFbR9WIi99IiGJQH
- sPzq4xirmOu5HQVkPSYu1sdXc8rS4OKER8slv2b3L36QZ7ZPHokIB/bB/5AM1MF2d6ob
- WjaaGpfszEBG5gBVcFf0pKM3YUGU/tvuINGckDOitz5S2H7hRIWwReQJo1QlMbT/39mS
- pknw==
-X-Gm-Message-State: AOJu0YxOv64rsMetkYTVObeGZQ37Fe/t7M4YJAMVhfSlyNuwxwayZQMK
- tnOt6P+dyOx9M/v7Sl7xDKCJ1Q==
-X-Google-Smtp-Source: AGHT+IGQXfPqXvfeQ/isWEv1z2yAt/MNrOCfNTOPS33XN9+EcRyHqsj/yKhRa8Rtt+UKfQa+yLEAvQ==
-X-Received: by 2002:a05:6214:21ad:b0:67f:1247:ec8f with SMTP id
- t13-20020a05621421ad00b0067f1247ec8fmr8164486qvc.41.1702912946240; 
- Mon, 18 Dec 2023 07:22:26 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a72b-a3fc-ffa6-9927.res6.spectrum.com.
- [2603:6081:7b00:6400:a72b:a3fc:ffa6:9927])
- by smtp.gmail.com with ESMTPSA id
- j16-20020a0ceb10000000b0067f37d9196esm1633710qvp.93.2023.12.18.07.22.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 07:22:25 -0800 (PST)
-Date: Mon, 18 Dec 2023 10:22:23 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 8/9] configs: qemu: add config fragment for ACPI
-Message-ID: <20231218152223.GH2513409@bill-the-cat>
-References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
- <20231215133245.7923-9-heinrich.schuchardt@canonical.com>
- <CAPnjgZ2C45f_WhDQz5TKk_THVh5HZ8t6PzozKZ1ROF4r16Cw8Q@mail.gmail.com>
- <3dd6f971-0c2b-402f-b6ca-0821f8cccfa3@canonical.com>
- <CAPnjgZ2hhOhQtcH0DRLx_tPaGowA=Jbr+n5DcQ6+fjijcS1LXg@mail.gmail.com>
+ bh=XWSLfIjOFl4xEq6zFmb3fZX61h+zN/LQFh6CF+HaI9g=;
+ b=Q3Xf2txCk5j7JmUx1VdZuTC1Bw/lS3/z0miOoRFtwJuyp2/uRZKCAgCY2AAf3p14eH
+ MbckfgIYyuDJiyyceOk30uj8VQyY9LUO/7cZMNQySbGFhD8VYubYBdF8ewujIk+2k8GE
+ NGaTZXTAtpHGCUaxTC0NfC01EhGrV66Uro/RA4tWpRxgFqxoS5cI8ztmxEILmf+pbg7G
+ muMDoyygIGD5V+dqtB+hG/V1VieoagPPUfB/2xXyqI1Uo6v3eSYNWlrS70AjUw53nJAh
+ pOQ+po1urPcP6ISNLlaGQlXwfDySmU8ptOalR67d8CjscFrv93+vjHe/l5ODqcon7JL4
+ OfBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702913519; x=1703518319;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XWSLfIjOFl4xEq6zFmb3fZX61h+zN/LQFh6CF+HaI9g=;
+ b=CGZWZfO0bU9A/PKnKpIl5JlbOGAnguvGI1rmiTjwiJY5vtUPsEgZIreqCNXNYElR6U
+ oAgx5gzSRaf0L6Dz5eOoE1Oes2GRboXI+N6F0xF3wf3PfatUcxJ5moavVYlSQq8TVOA9
+ bMAZuu0GGzXCS4mRmXOk9croYWMQzTSuTqdZ5NAB7SdmdYMHoITn9AwCPME9x3bTcypo
+ 1D/csR5uyggRdjyVfcA4NbDlSQIgFq7Rcx61+UvDs2SRDTKivL8RSRA1Gz3GvPa36LH9
+ T7MDeAUxJ5mOYh62xJRTOStTLgOXXO43vjnOlgY+JcRkW8moYhC8+E/aH/wrKMWpnyc0
+ XHKA==
+X-Gm-Message-State: AOJu0Yxj7yOXbW6nUMl/IhYBjw32TNfo7CfLGag3ZOqPQaojGPXfq/CB
+ 9x5GkA6MdbFTXNLjEcIMLGXbJu9xPIV+dCFSEbo+zg==
+X-Google-Smtp-Source: AGHT+IEKDAo/SsbuvjBQ/KB6uDR2dfEmee8p38R4U0aKWMJ950R2c97DlHenHrNCAl79eff/5jQYB6sgmMmuskO5ISk=
+X-Received: by 2002:a17:90a:8503:b0:28b:35ce:7d4f with SMTP id
+ l3-20020a17090a850300b0028b35ce7d4fmr2466113pjn.37.1702913519316; Mon, 18 Dec
+ 2023 07:31:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T7ljQ3Qp4VRY7vNC"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2hhOhQtcH0DRLx_tPaGowA=Jbr+n5DcQ6+fjijcS1LXg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231213031646.28828-1-semen.protsenko@linaro.org>
+In-Reply-To: <20231213031646.28828-1-semen.protsenko@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Mon, 18 Dec 2023 09:31:48 -0600
+Message-ID: <CAPLW+4m01gZBd38oTWeJZ=EMgS0-7tFUAFaqpVAHJQfVkVBN3Q@mail.gmail.com>
+Subject: Re: [PATCH 00/13] arm: exynos: Add E850-96 board
+To: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,80 +88,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Dec 12, 2023 at 9:16=E2=80=AFPM Sam Protsenko
+<semen.protsenko@linaro.org> wrote:
+>
+> NOTE: This patch series depends on "pinctrl: exynos: Prepare for other
+> SoCs support" series [1]. It should be applied first.
+>
+> Add Exynos850 SoC and WinLink's E850-96 board support. A short overview
+> of series additions and modifications:
+>   * USI driver: configures UART block
+>   * PMU driver: connects AP UART lines to uart1 pins)
+>   * Exynos850 clock driver: generates UART clocks
+>   * Exynos850 pinctrl driver: mux UART pins
+>   * serial_s5p: UART driver
+>   * Exynos850 SoC: dtsi files and MMU maps
+>   * E850-96 board: dts files, defconfig, board file and doc
+>
+> Most of the code was borrowed from mainline Linux kernel (where this
+> board is already enabled) and adapted for U-Boot. Preliminary
+> preparation for this series includes next patches / series (already
+> merged):
+>
+>   * commit 585a2aaac2ac ("arm: exynos: Include missing CPU header in
+>                           soc.c")
+>   * commit c9ab9f30c8e4 ("arm: exynos: Include missing CPU header in
+>                           gpio.h")
+>   * commit 11bd2787deff ("watchdog: s5p_wdt: Include missing CPU
+>                           header")
+>   * commit 08cfa971a717 ("exynos: Avoid duplicate reset_cpu with
+>                           SYSRESET enabled")
+>   * commit f655090901dc ("clk: exynos: Add header guard for clk-pll.h")
+>   * commit 2227f4c0afed ("serial: s5p: Fix clk_get_by_index() error code
+>                           check")
+>   * commit a0615ffc99a5 ("serial: s5p: Remove common.h inclusion")
+>   * commit 5ad21de6bae0 ("serial: s5p: Use livetree API to get "id"
+>                           property")
+>   * commit e79f630dbf67 ("serial: s5p: Use named constants for register
+>                           values")
+>   * commit a627f2802a71 ("serial: s5p: Improve coding style")
+>   * commit 33e7ca5a9b6a ("serial: s5p: Use dev_read_addr_ptr() to get
+>                           base address")
+>   * commit 6219b47c4d91 ("board: samsung: Fix SYS_CONFIG_NAME configs in
+>                           axy17lte Kconfig")
+>   * commit 470682ace1e0 ("configs: Remove unneeded SYS_CONFIG_NAME from
+>                           a*y17lte defconfigs")
+>
+> and series [1] (dependency) is still pending.
+>
+> For more detailed description please see the board documentation (added
+> in PATCH #12) and corresponding commit messages.
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2023-November/539033.html
+>
+> Sam Protsenko (13):
+>   dt-bindings: soc: samsung: Add Exynos USI
+>   dt-bindings: soc: samsung: Add Exynos PMU
+>   dt-bindings: clock: Add Exynos850 clock controller
+>   soc: samsung: Add Exynos USI driver
+>   soc: samsung: Add Exynos PMU driver
+>   clk: exynos: Move pll code into clk-exynos7420
+>   clk: exynos: Add Samsung clock framework
+>   clk: exynos: Add Exynos850 clock driver
+>   pinctrl: exynos: Add pinctrl support for Exynos850
+>   serial: s5p: Add Exynos850 compatible
+>   arm: exynos: Add Exynos850 SoC support
+>   board: samsung: Add support for E850-96 board
+>   MAINTAINERS: Add new Samsung subsystems
+>
+>  MAINTAINERS                                   |   25 +
+>  arch/arm/dts/Makefile                         |    1 +
+>  arch/arm/dts/exynos-pinctrl.h                 |   79 +
+>  arch/arm/dts/exynos850-e850-96-u-boot.dtsi    |   37 +
+>  arch/arm/dts/exynos850-e850-96.dts            |  273 ++++
+>  arch/arm/dts/exynos850-pinctrl.dtsi           |  663 +++++++++
+>  arch/arm/dts/exynos850.dtsi                   |  809 +++++++++++
+>  arch/arm/mach-exynos/Kconfig                  |   28 +-
+>  arch/arm/mach-exynos/mmu-arm64.c              |   34 +
+>  board/samsung/e850-96/Kconfig                 |   16 +
+>  board/samsung/e850-96/MAINTAINERS             |    9 +
+>  board/samsung/e850-96/Makefile                |    6 +
+>  board/samsung/e850-96/e850-96.c               |   22 +
+>  configs/e850-96_defconfig                     |   21 +
+>  doc/board/samsung/e850-96.rst                 |   87 ++
+>  .../img/exynos850-boot-architecture.svg       | 1283 +++++++++++++++++
+>  doc/board/samsung/index.rst                   |    1 +
+>  .../clock/samsung,exynos850-clock.yaml        |  307 ++++
+>  .../soc/samsung/exynos-pmu.yaml               |   85 ++
+>  .../soc/samsung/exynos-usi.yaml               |  162 +++
+>  drivers/clk/exynos/Kconfig                    |    7 +
+>  drivers/clk/exynos/Makefile                   |   11 +-
+>  drivers/clk/exynos/clk-exynos7420.c           |   25 +-
+>  drivers/clk/exynos/clk-exynos850.c            |  189 +++
+>  drivers/clk/exynos/clk-pll.c                  |  167 ++-
+>  drivers/clk/exynos/clk-pll.h                  |   16 +-
+>  drivers/clk/exynos/clk.c                      |  121 ++
+>  drivers/clk/exynos/clk.h                      |  228 +++
+>  drivers/pinctrl/exynos/Kconfig                |    8 +
+>  drivers/pinctrl/exynos/Makefile               |    1 +
+>  drivers/pinctrl/exynos/pinctrl-exynos850.c    |  125 ++
+>  drivers/serial/serial_s5p.c                   |    1 +
+>  drivers/soc/Kconfig                           |    1 +
+>  drivers/soc/Makefile                          |    1 +
+>  drivers/soc/samsung/Kconfig                   |   33 +
+>  drivers/soc/samsung/Makefile                  |    4 +
+>  drivers/soc/samsung/exynos-pmu.c              |  102 ++
+>  drivers/soc/samsung/exynos-usi.c              |  218 +++
+>  include/configs/e850-96.h                     |   12 +
+>  include/dt-bindings/clock/exynos850.h         |  337 +++++
+>  include/dt-bindings/soc/samsung,exynos-usi.h  |   17 +
+>  41 files changed, 5548 insertions(+), 24 deletions(-)
+>  create mode 100644 arch/arm/dts/exynos-pinctrl.h
+>  create mode 100644 arch/arm/dts/exynos850-e850-96-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/exynos850-e850-96.dts
+>  create mode 100644 arch/arm/dts/exynos850-pinctrl.dtsi
+>  create mode 100644 arch/arm/dts/exynos850.dtsi
+>  create mode 100644 board/samsung/e850-96/Kconfig
+>  create mode 100644 board/samsung/e850-96/MAINTAINERS
+>  create mode 100644 board/samsung/e850-96/Makefile
+>  create mode 100644 board/samsung/e850-96/e850-96.c
+>  create mode 100644 configs/e850-96_defconfig
+>  create mode 100644 doc/board/samsung/e850-96.rst
+>  create mode 100644 doc/board/samsung/img/exynos850-boot-architecture.svg
+>  create mode 100644 doc/device-tree-bindings/clock/samsung,exynos850-cloc=
+k.yaml
+>  create mode 100644 doc/device-tree-bindings/soc/samsung/exynos-pmu.yaml
+>  create mode 100644 doc/device-tree-bindings/soc/samsung/exynos-usi.yaml
+>  create mode 100644 drivers/clk/exynos/clk-exynos850.c
+>  create mode 100644 drivers/clk/exynos/clk.c
+>  create mode 100644 drivers/clk/exynos/clk.h
+>  create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos850.c
+>  create mode 100644 drivers/soc/samsung/Kconfig
+>  create mode 100644 drivers/soc/samsung/Makefile
+>  create mode 100644 drivers/soc/samsung/exynos-pmu.c
+>  create mode 100644 drivers/soc/samsung/exynos-usi.c
+>  create mode 100644 include/configs/e850-96.h
+>  create mode 100644 include/dt-bindings/clock/exynos850.h
+>  create mode 100644 include/dt-bindings/soc/samsung,exynos-usi.h
+>
+> --
 
---T7ljQ3Qp4VRY7vNC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Tom, Minkyu,
 
-On Mon, Dec 18, 2023 at 08:01:34AM -0700, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Sat, 16 Dec 2023 at 12:27, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > On 12/16/23 19:46, Simon Glass wrote:
-> > > On Fri, 15 Dec 2023 at 06:33, Heinrich Schuchardt
-> > > <heinrich.schuchardt@canonical.com> wrote:
-> > >>
-> > >> Provide a configuration fragment to enable ACPI on QEMU.
-> > >>
-> > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.co=
-m>
-> > >> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > >> ---
-> > >> v2:
-> > >>          no change
-> > >> ---
-> > >>   MAINTAINERS                         |  1 +
-> > >>   board/emulation/configs/acpi.config |  3 +++
-> > >>   doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
-> > >>   doc/board/emulation/index.rst       |  1 +
-> > >>   4 files changed, 28 insertions(+)
-> > >>   create mode 100644 board/emulation/configs/acpi.config
-> > >>   create mode 100644 doc/board/emulation/acpi.rst
-> > >>
-> > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > Are you planning to enable binman to build configurations with config
-> > fragments? This would be needed for testing in CI.
->=20
-> We still have not decided on a mechanism to name things which are made
-> up of a base config and a fragment. The current proposal is [1] which
-> I think is probably OK, but I have not tried to look at this in
-> buildman yet.
->=20
-> Regards,
-> Simon
->=20
-> [1] https://patchwork.ozlabs.org/user/todo/uboot/?series=3D380278
+Would really appreciate a review for this series. It's not only adding
+a new board, but also a bunch of stuff that I think can be useful for
+other modern Exynos platforms (CCF Samsung clock framework, USI
+driver, etc).
 
-Patchwork a little frustrating about links sometimes, this should be:
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D380278&state=3D*
+Thanks!
 
-Which _I_ don't think we need, but I'm also in the minority here so I'm
-not nak'ing it.
-
---=20
-Tom
-
---T7ljQ3Qp4VRY7vNC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWAY6wACgkQFHw5/5Y0
-tyxcLwv/eDnsO00kagMGbz0u+VUPb6oHfB35vcoV4PHXcrOyvgukjet7Mj6z4gPO
-7CWNfVsOX9BvUVSld5TYTb0RZvYuPKeHDG4HFdpxDNGEju+pX9jVZIEBdtmNB9ZO
-03iTh1aPlr5LaKBixtmnzV5qqyw7i7kpsFwdeMxrdSu65OCwELTR8RMLrGzK3Ut3
-MkvQP2U/i/QSKn2Wp+p34nQkQ+Erbt+TkUK1FSdUIZQVq0H9zeySWrLXMZXhU+PQ
-GTSpSwYcHQ/mqlK1g+jpwnEmvUYLYGkZ9kHVBi1ZkXpW0W+L8jq1C+7OJ29Aqnp8
-dl2AT+HdUCMs7jMbrGdNHgZxEHD8W7Fg2DOn0emBrgv35+1XsWHS5axqxt8I9gku
-iN7iKxLBCTXUpTtEbU4jh76xVZTKry8GuV0AD0rhKeVoR339fflGG3LHbMnLoQgc
-PkT60HtVjzgEHGnja6D8yqmt3hM+mCuC1Jo+ya7JswIUUWEempxpoyuclMxX09Ke
-izGgX//J
-=2Siq
------END PGP SIGNATURE-----
-
---T7ljQ3Qp4VRY7vNC--
+> 2.39.2
+>
