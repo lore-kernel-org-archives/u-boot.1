@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8FE4C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 11:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1122C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 11:38:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F17F7870FC;
-	Mon, 18 Dec 2023 12:36:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D89D877EA;
+	Mon, 18 Dec 2023 12:38:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Wp0iD34r";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="UnBQI7xG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7A35871C7; Mon, 18 Dec 2023 12:36:48 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 8DD71877EA; Mon, 18 Dec 2023 12:38:43 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DA1587076
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 12:36:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7375A8773C
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 12:38:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5e7415df4d6so715877b3.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:36:46 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5e745891a69so646007b3.2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:38:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702899404; x=1703504204;
+ d=amarulasolutions.com; s=google; t=1702899520; x=1703504320;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HwZY5dHkSbKe8BdAK+7yeLiiNClGhn4n5TpSGDc/jzI=;
- b=Wp0iD34rkGozSvXC9RaAkFf9aqPl4MvWpLnKxe0CjNZ5P9YJFcs9JGOUeilbWtbmkg
- wpS6/3L+TDQDjN5Z4RTPUvQ7lQaYESug3fn3bfkag11f3PIjFL5X3rxb5PJdQJ/CLHI+
- j77PcbgGPGeoLJkQZmr3hEI/PCRmoNpCWTNg4=
+ bh=nir/ny9zCIziJl6oq7VlFDcFFx0Ad+GR0KBgsiYL1FY=;
+ b=UnBQI7xGqt1SlNBTAoh6S/xHJpaYvo2QcZv0XPG3XjormNf/5s+NEBmUPr5UIzlgSI
+ Ile38plJeIov8ypXBZlP/8ZYhEa7Hi8i9HHTUUzb/bHnY0E8TWO8IycweTM7cM1lVpjw
+ xPGxlTM6AexoWN0y0wbpexqF8eq43GoMwRqS8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702899404; x=1703504204;
+ d=1e100.net; s=20230601; t=1702899520; x=1703504320;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HwZY5dHkSbKe8BdAK+7yeLiiNClGhn4n5TpSGDc/jzI=;
- b=ss5rLDXH+wmSDsUhw/QcK+QARJWdInYn7T2KhYUcHF+vHd2rP3Rwt5JJF8wd32yTy5
- GouUyzJ21T+6AOL38gbDkte+PuSZZPEy3HHjdiWsQnzPfK744BWawGkL5f8PVacGvkJ6
- jo1ZY14Wh2y9mk73AMwE/91+ufi/2GHG5+nkjKWnHeFT++yeUauwYwuArT0zrWheJxMq
- 3O8p4M6VTCwyonpUqvgVOJXVT50f9UpxOyc76juH8oC/l4hPk9ZU5RUqUPS+/BS5PdfC
- +hCqTmk7vR3RdlHjnxbolTc0o00O4l76M7EC82nBoi+hNroDu2itnEsc98fzKByMvj64
- GXzw==
-X-Gm-Message-State: AOJu0YwGnWfoqmlmAckDOADgL/4oCoou6K5eHy+AK05GckCwLXAWxuT0
- /0NFr3p1O3MnllJ7SuCcO7hX8yzJCmuOnqOQslOxHA==
-X-Google-Smtp-Source: AGHT+IG2dNwICfk8S+/oZlP6ZP5SuLJt2ksWQx5f9gWLgqHQJxdmgpfw0LknsF5nDKSu/EIxqV/PmvQIpl1ZkPudH0I=
-X-Received: by 2002:a25:ce13:0:b0:dbc:fbba:2e6c with SMTP id
- x19-20020a25ce13000000b00dbcfbba2e6cmr3061652ybe.45.1702899404644; Mon, 18
- Dec 2023 03:36:44 -0800 (PST)
+ bh=nir/ny9zCIziJl6oq7VlFDcFFx0Ad+GR0KBgsiYL1FY=;
+ b=Oy2LWP5otWZZ9d64nuN3hy6Keft4TjJ57Ndlu8z0+zXR9cU0iabYBpOK9TkILGnGom
+ LN4GAMHe1ajEZSC1DIO/1jTSao1qtSWny/Z6XtbqY1Y0S5SzTYt/+eMOqxY9EiJwsQ9s
+ HAuXvo6GwzRbxczPyOyQLHtkhJw9YDXru6Xan7XBaL2LECT2yyxy9PbT7q5OZVdjnP2X
+ 0fjwzx5JIcKAdal8sn9rbLqpmbl3BGHShLJJwd2R3GxlwvwLlDWfeTAShYW6a4kQ9hg9
+ vpyuH7S656ALjHlYsj2DHSIMdSH8zPyOK8n86SDlzl7ZmLLMjYrVc7hxgd8YocNbdAlY
+ rGsw==
+X-Gm-Message-State: AOJu0YxnazhOmt0WOLAlkO7i+NoJ06k550dQtfHqrte3twGRZKpBBSWm
+ 119JTAfXode+Fgr0y+wBo2i0CPuyi/abzOsFwsWLQRSKKHDkNvW48+Y=
+X-Google-Smtp-Source: AGHT+IFa+TtstrN733rPtTFtTexrd4XMMHChWH6TVnhMsyc72oinDH41+YMyQ2Wk//814P/KcgUKhpAlF+d2SR6bZD0=
+X-Received: by 2002:a81:7c05:0:b0:5d7:1940:7d79 with SMTP id
+ x5-20020a817c05000000b005d719407d79mr12154132ywc.80.1702899520165; Mon, 18
+ Dec 2023 03:38:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20231106052438.12903-1-venkatesh.abbarapu@amd.com>
-In-Reply-To: <20231106052438.12903-1-venkatesh.abbarapu@amd.com>
+References: <20231204085247.9772-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20231204085247.9772-1-venkatesh.abbarapu@amd.com>
 From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 18 Dec 2023 17:06:33 +0530
-Message-ID: <CAMty3ZBan8u-Y-UpABjVU0DcVu2ZRP_LhOkV3Bu9M1Unx770WA@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi-nor: Update block protection flags for ospi
- flash parts
+Date: Mon, 18 Dec 2023 17:08:29 +0530
+Message-ID: <CAMty3ZBKK1fB3jGZs9PrrUi5d26Cm4XBRvBgN_KREjYV8eZzgg@mail.gmail.com>
+Subject: Re: [PATCH v2] mtd: spi-nor: Add IS25LP02G flash support
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com, 
+ Sreekanth Sunnam <Sreekanth.Sunnam@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,13 +85,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Nov 6, 2023 at 10:55=E2=80=AFAM Venkatesh Yadav Abbarapu
+On Mon, Dec 4, 2023 at 2:23=E2=80=AFPM Venkatesh Yadav Abbarapu
 <venkatesh.abbarapu@amd.com> wrote:
 >
-> Updating the block protection flags for Gigadevice gd25lx256e and
-> ISSI is25wx256 OSPI flash parts.
+> Add support for ISSI 256MB flash IS25LP02G. This part supports 4byte
+> opcodes. It also supports dual and quad read.
 >
+> Signed-off-by: Sreekanth Sunnam <Sreekanth.Sunnam@amd.com>
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+> Changes in v2:
+> - Fixed the name to Sreekanth Sunnam.
 > ---
 
 Applied to u-boot-spi/master
