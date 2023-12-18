@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92216C46CCD
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4137CC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55B6D87E39;
-	Mon, 18 Dec 2023 16:02:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A888287E68;
+	Mon, 18 Dec 2023 16:03:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dHM+RChJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JYJQqDVW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2146887E0A; Mon, 18 Dec 2023 16:02:47 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id C19B587E6B; Mon, 18 Dec 2023 16:02:58 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6505987E37
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A51A487E38
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dbd4608121fso359873276.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:34 -0800 (PST)
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-5e32af77f15so25202137b3.2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702911753; x=1703516553; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1702911775; x=1703516575; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=juYM4HsBAk2fy1jHONRBYzW9qe+khotBjYUfJZORppQ=;
- b=dHM+RChJf9h/TkkVsPpEjTAvd/v+aenoZ99i4M6GD7X+VKrVejfnm9D/+LlQRZ1qev
- lUZhNGyyMCEMUM5YfPsaHrLgq2NauiXIeFgyzVfpUqXdOzDlypKyNnalTjTK2UiNFlSf
- UnfBD5xF2uS8ub316URuqucQlKDDIwGQiTSPU=
+ bh=allODNl3I9oH9ENbsvWSp/Frrm+inwRxCOSMqYewisE=;
+ b=JYJQqDVWl+3QCzX42gPGgpgZcPmnn/vR03zV8m7/+2o4b1u29x6Sxn/kmPH8+HJnrs
+ qnAtqaEy7jtUudaeooJXgIEVoba5jbQd4m1sKMG2aqgaKY8+nSs3QNJoc4Qhd7XwjnaB
+ FRfdMXJxl0qeDWf/rv3TTaWbJNIz7wsL3veqM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702911753; x=1703516553;
+ d=1e100.net; s=20230601; t=1702911775; x=1703516575;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=juYM4HsBAk2fy1jHONRBYzW9qe+khotBjYUfJZORppQ=;
- b=q90cHawEpXuxr9NGqDziMbZU53GhQaFIK6hsUDZ4IJ/1IMZD8TCVlSyZK/RevXSJow
- s81dQo2g+lZ9PYw6t8idHHbndktU3NvYE/w8T5q/y4K/7f8SpGKG1/KntUSzVKGin02C
- dW6tLDXbMK4BSKIvbWaoOZy7ZpCZvyGiIziRkDeExrAjkHDRttKCUmFCWtPlqYBb9EHO
- Q9zkk2TG7y9Hdl3k10LAeSV0UROwHHGZ+mkDVmnukZP1zLwqmA7CDWjyam+dN0ifp3n0
- IxZMWdvRb6jHekGrU2YJ1EQ/VDvp5wipyFIKrzNKoGDAqlgPtlqGWRo1O89IZ/QQoyty
- nL7Q==
-X-Gm-Message-State: AOJu0YxudgdS8P5DKQ8+b8+XVpxPEGrZVI2FseywxNFgo+jQ1uZPkzyN
- C6l2NAm3z7skRYzTzL8+pKDIfEsT6+SPWM2G4wMgYQ==
-X-Google-Smtp-Source: AGHT+IFN+CK60CwS4LXUtrhsNBgdUe3RZVgxSDZfYKpnV6E++dajDdM0QJVT+UClJ0HGiQjZdvR2JNlKCGqWg3pULTk=
-X-Received: by 2002:a25:2e08:0:b0:dbc:f196:eadd with SMTP id
- u8-20020a252e08000000b00dbcf196eaddmr2998116ybu.16.1702911752786; Mon, 18 Dec
- 2023 07:02:32 -0800 (PST)
+ bh=allODNl3I9oH9ENbsvWSp/Frrm+inwRxCOSMqYewisE=;
+ b=psBIQeaKamJeQMJSwi3WB68fhjC6iwxr/mC3W/VweHqi56gJR9TjsSY2EWe+TWz1tX
+ Q0bIt+ndaf83zswRXTpEY0cQpdfGj/UEu+ljIUOKHbqQMt6dCAF0VAls3iXlhwotlrHr
+ 2QyuWP8Zfq0M63Ag/p5GnwZAYIDDzrcnlURFw5OLWn7Dt6hK/VwmXtuKZKUhm52CJw3v
+ mTMt6eaVAhz3R64Rn1Gl2dmEksbwCNxgRmoiWRhWFE06337F0QPWfKZn9bnrKMMeGIz5
+ tm8+mdctKPwtItCRmISq0JBZ02IJaierp6U4LAfTky/kTOQMIi14oF7IeJX8gdlN5Owc
+ nR9Q==
+X-Gm-Message-State: AOJu0YzrQ+sZHMxfCrNk4v9AbJjNYo10w6zgSpDi5ujzgHxH0PhqCNFp
+ Oc8hPPlbUUZFwedLlyB2ClpXxAwmTJpl1CEUAKxH0A==
+X-Google-Smtp-Source: AGHT+IFzwkEjQFGsVE9Mtig9zT6Dlru53NhtP0cPsHd28jCN2FX85nvrem0l4L8Ek33h8nyZHfiPLqqGTVyMKi+ZUcQ=
+X-Received: by 2002:a0d:cc16:0:b0:5e2:6e50:e33c with SMTP id
+ o22-20020a0dcc16000000b005e26e50e33cmr8683139ywd.9.1702911775258; Mon, 18 Dec
+ 2023 07:02:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20231218072428.1802969-1-sumit.garg@linaro.org>
-In-Reply-To: <20231218072428.1802969-1-sumit.garg@linaro.org>
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-2-takahiro.akashi@linaro.org>
+In-Reply-To: <20231218023842.281336-2-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:47 -0700
-Message-ID: <CAPnjgZ2rYujD-yb=Zgz=bxe8iS3MGSdrL9KfVsDqz8R_H+FVfA@mail.gmail.com>
-Subject: Re: [PATCH 0/7] Add SE HMBSC board support
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
- lukma@denx.de, seanga2@gmail.com, marex@denx.de, laetitia.mariottini@se.com, 
- pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com, 
- benjamin.missey@non.se.com, daniel.thompson@linaro.org
+Date: Mon, 18 Dec 2023 08:01:51 -0700
+Message-ID: <CAPnjgZ3SyOqUWYJSRH878Z=J=_ez6pO59AneZ8P-FOo4sjc_OA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] efi_loader: split unrelated code from efi_bootmgr.c
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,75 +82,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi AKASHI,
 
-On Mon, 18 Dec 2023 at 00:24, Sumit Garg <sumit.garg@linaro.org> wrote:
+On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
+> Some code moved from cmd/bootefi.c is actually necessary only for "bootefi
+> <addr>" command (starting an image manually loaded by a user using U-Boot
+> load commands or other methods (like JTAG debugger).
+>
+> The code will never been opted out as unused code by a compiler which
+> doesn't know how EFI boot manager is implemented. So introduce a new
+> configuration, CONFIG_EFI_BINARY_EXEC, to enforce theem opted out
+> explicitly.
+>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> ---
+>  boot/Kconfig                     |   4 +-
+>  cmd/Kconfig                      |   6 +-
+>  include/efi_loader.h             |  28 +-
+>  lib/efi_loader/Kconfig           |   9 +
+>  lib/efi_loader/efi_bootmgr.c     | 493 ------------------------------
+>  lib/efi_loader/efi_device_path.c |   3 +-
+>  lib/efi_loader/efi_helper.c      | 499 ++++++++++++++++++++++++++++++-
+>  7 files changed, 529 insertions(+), 513 deletions(-)
 
-Could you please add a doc/ file for this board and explain how to
-build it and how to run U-Boot on it?
+'helper' seems a bit vague to me. How about efi_boot.c ?
 
-> difference from db410c is serial port where HMIBSC board uses UART1 as
-> the debug console with an RS232 port, patch #1 - #3 adds corresponding
-> driver support.
->
-> Patch #4 adds main HMIBSC board specific bits, features:
-> - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
-> - 2GiB RAM
-> - 64GiB eMMC, SD slot
-> - WiFi and Bluetooth
-> - 2x Host, 1x Device USB port
-> - HDMI
-> - Discrete TPM2 chip over SPI
->
-> Patch #5 - #7 enables specific board features like RAUC support,
-> environment protection and USB networking support.
->
-> This patch series is based on top of Qcom maintainer tree [1] + the latest
-> PMIC patch-set [2]. Feedback is very much welcome.
->
-> [1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/u-boot-qcom-next?ref_type=heads
-> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=385322
->
-> Sumit Garg (7):
->   clk: apq8016: Add support for UART1 clocks
->   serial_msm: Add support for RS232 GPIOs
->   serial_msm: Enable RS232 flow control
->   board: Add SE HMIBSC board support
->   hmibsc: Enable RAUC support
->   hmibsc: enable U-Boot Environment variables protection
->   hmibsc: Enable LAN75XX USB ethernet driver
->
->  arch/arm/dts/Makefile              |   1 +
->  arch/arm/dts/hmibsc-uboot.dtsi     |  43 +++++++
->  arch/arm/dts/hmibsc.dts            | 188 +++++++++++++++++++++++++++++
->  arch/arm/mach-snapdragon/Kconfig   |  18 +++
->  arch/arm/mach-snapdragon/Makefile  |   1 +
->  board/schneider/hmibsc/Kconfig     |  15 +++
->  board/schneider/hmibsc/MAINTAINERS |   6 +
->  board/schneider/hmibsc/Makefile    |   5 +
->  board/schneider/hmibsc/hmibsc.c    | 179 +++++++++++++++++++++++++++
->  board/schneider/hmibsc/hmibsc.env  |  11 ++
->  configs/hmibsc_defconfig           |  79 ++++++++++++
->  drivers/clk/qcom/clock-apq8016.c   |  44 ++++++-
->  drivers/serial/serial_msm.c        |  23 +++-
->  drivers/usb/host/Kconfig           |   1 +
->  include/configs/hmibsc.h           |  59 +++++++++
->  15 files changed, 665 insertions(+), 8 deletions(-)
->  create mode 100644 arch/arm/dts/hmibsc-uboot.dtsi
->  create mode 100644 arch/arm/dts/hmibsc.dts
->  create mode 100644 board/schneider/hmibsc/Kconfig
->  create mode 100644 board/schneider/hmibsc/MAINTAINERS
->  create mode 100644 board/schneider/hmibsc/Makefile
->  create mode 100644 board/schneider/hmibsc/hmibsc.c
->  create mode 100644 board/schneider/hmibsc/hmibsc.env
->  create mode 100644 configs/hmibsc_defconfig
->  create mode 100644 include/configs/hmibsc.h
->
-> --
-> 2.34.1
->
-
-Regards,
+REgards,
 Simon
