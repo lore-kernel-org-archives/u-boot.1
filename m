@@ -4,70 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE36C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 11:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E4E8C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 11:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D63F877EA;
-	Mon, 18 Dec 2023 12:41:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B812987DFF;
+	Mon, 18 Dec 2023 12:45:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZXWHT7yx";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9495B8773C; Mon, 18 Dec 2023 12:41:02 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B9D7987C9E; Mon, 18 Dec 2023 12:45:10 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C80087E00
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 12:41:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6856387032
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 12:45:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5e730eb1770so1783707b3.1
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:41:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702899659; x=1703504459;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ki0O0zvXe2/IpEYiuN8A+k4vnW/67tP/11jv0gfZwrQ=;
- b=ZXWHT7yxMgY0UdifKlS19j95JnWI7k/DbWZwWr+blp5oYNbtWAe9V/4nWOG818kply
- 2BYPtAQfyFN4u5ASfzAPsVDIvf3R0hTjQNhiYieKMPB+xBvfKba/1iCl2tL8XWSe+RUd
- MkYt5HrF3bvZstL+333iSqJ6H0nK+2sSY60/s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702899659; x=1703504459;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ki0O0zvXe2/IpEYiuN8A+k4vnW/67tP/11jv0gfZwrQ=;
- b=Eh+1Wmms29yfhpSHWteA1SldQEkgRb4FWdMNLgv9+8SePw8ZrWbpK5fDH3GIHlXuDE
- doh+/AytdvKOGzQpd96Ef3lANk3RFNfv2lD0bstdyQVwbiqT/xYCIVT+P3m3bvMojG/9
- Cb9hNKXPl2K9TIZRuJsz4E6E4FPrHCuKjSlXuTUMValYdCCEX6SUD2oBsnW/exiptxnM
- nIO8TW6RYHWI5Q+RMIlVrt/UXBId6tIjClaQjr4iK/EZe/tVKeugnL4+YcDq0lhdKgEF
- 4J6mZtN6YBXmm3Lile24ZcuswZubK43STzPlDBKFfzCCmSiCb6v87iGIpgtJ7tpVI1ct
- Oxfw==
-X-Gm-Message-State: AOJu0Yy+RVA3dJzGfk+BPTzyWEoscZgzAxHNnBlbm57v7Z/rTsT7WY61
- WL+o6o9BUBd96hoFDHay/aHkMu0saKBvRf38Ojm9N9XpLtotJnjItJQ=
-X-Google-Smtp-Source: AGHT+IEOIlIY3sxs+XYm33aGrHCbVoWN5fy25bYo4/6WnTsfg+BGNHmcbc87P7ajLI622t0p7cyE9TmeYehDNhNzyoE=
-X-Received: by 2002:a81:6586:0:b0:5d8:96c:690d with SMTP id
- z128-20020a816586000000b005d8096c690dmr10952530ywb.7.1702899658900; Mon, 18
- Dec 2023 03:40:58 -0800 (PST)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3BIBiqLY058864;
+ Mon, 18 Dec 2023 19:44:52 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Mon, 18 Dec 2023 19:44:47 +0800
+Date: Mon, 18 Dec 2023 19:44:15 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [GIT PULL] u-boot-riscv/next
+Message-ID: <ZYAwj034fNBg1HOk@swlinux02>
 MIME-Version: 1.0
-References: <20231025074951.3161356-1-hayashi.kunihiko@socionext.com>
-In-Reply-To: <20231025074951.3161356-1-hayashi.kunihiko@socionext.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Mon, 18 Dec 2023 17:10:47 +0530
-Message-ID: <CAMty3ZD3Bxh-2ragz1RcXWf44kxAue6gT-xO-5k59m-vBd0n9Q@mail.gmail.com>
-Subject: Re: [PATCH] spi: dw: Use controller clock rate as maximum frequency
-To: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3BIBiqLY058864
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,42 +59,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 25, 2023 at 1:20=E2=80=AFPM Kunihiko Hayashi
-<hayashi.kunihiko@socionext.com> wrote:
->
-> Currently the controller driver has maximum frequency in plat->frequency
-> that is specified by "spi-max-frequency" DT property in the controller
-> node. This is special to U-Boot and doesn't exist to Linux.
->
->     spi {
->         spi-max-frequency =3D <A>;
->     };
->
-> Usually the frequency should be specified by "spi-max-frequency" at the
-> slave device node.
->
->     spi {
->         slave {
->             spi-max-frequency =3D <B>;
->         };
->     };
->
-> The final maximum frequency is set to the smaller value of the controller
-> node (A) and the slave device node (B).
->
-> Currently, if the property in the controller node is omitted, the default
-> frequency is fixed at 500kHz. Even if the controller and the slave device
-> allow the higher frequency than 500kHz, the maximum frequency can't excee=
-d
-> 500kHz.
->
-> The upper limit of the maximum frequency should be determined by the cloc=
-k
-> rate of the controller clock. And this patch determines the maximum
-> frequency based on the clock rate if the controller node property isn't
-> specified.
->
-> Signed-off-by: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-> ---
+Hi Tom,
 
-Applied to u-boot-spi/master
+The following changes since commit fdefb4e194c65777fa11479119adaa71651f41d4:
+
+  Merge tag 'efi-next-20231217' of https://source.denx.de/u-boot/custodians/u-boot-efi into next (2023-12-17 09:11:06 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+
+for you to fetch changes up to 44a792c99498f5a9d3526019779d66585978c491:
+
+  riscv: sifive: unmatched: migrate to text environment (2023-12-18 11:09:01 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18996
+----------------------------------------------------------------
+- VisionFive2: Enable CONFIG_SYSRESET
+- StarFive: Modify starfive timer driver
+- AMD/Xilinx: Add MicroBlaze V support
+- Unmatched: Migrate to text environment
+----------------------------------------------------------------
+Jaehoon Chung (2):
+      riscv: dts: jh7110: Add a gpio-restart node
+      configs: visionfive2: Enable CONFIG_SYSRESET config
+
+Kuan Lim Lee (1):
+      timer: starfive: Add Starfive timer support
+
+Michal Simek (1):
+      riscv: Add support for AMD/Xilinx MicroBlaze V
+
+Yong-Xuan Wang (1):
+      riscv: sifive: unmatched: migrate to text environment
+
+ arch/riscv/Kconfig                               |   4 +
+ arch/riscv/dts/Makefile                          |   2 +
+ arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi |   5 ++
+ arch/riscv/dts/xilinx-mbv32.dts                  | 106 +++++++++++++++++++++++
+ board/sifive/unmatched/unmatched.env             |  19 ++++
+ board/xilinx/Kconfig                             |   3 +-
+ board/xilinx/common/board.c                      |   5 ++
+ board/xilinx/mbv/Kconfig                         |  28 ++++++
+ board/xilinx/mbv/MAINTAINERS                     |   7 ++
+ board/xilinx/mbv/Makefile                        |   5 ++
+ board/xilinx/mbv/board.c                         |  11 +++
+ configs/sifive_unmatched_defconfig               |   2 +-
+ configs/starfive_visionfive2_defconfig           |   1 +
+ configs/xilinx_mbv32_defconfig                   |  30 +++++++
+ configs/xilinx_mbv32_smode_defconfig             |  32 +++++++
+ drivers/timer/starfive-timer.c                   |  16 ++--
+ include/configs/sifive-unmatched.h               |  37 --------
+ include/configs/xilinx_mbv.h                     |   6 ++
+ 18 files changed, 273 insertions(+), 46 deletions(-)
+ create mode 100644 arch/riscv/dts/xilinx-mbv32.dts
+ create mode 100644 board/sifive/unmatched/unmatched.env
+ create mode 100644 board/xilinx/mbv/Kconfig
+ create mode 100644 board/xilinx/mbv/MAINTAINERS
+ create mode 100644 board/xilinx/mbv/Makefile
+ create mode 100644 board/xilinx/mbv/board.c
+ create mode 100644 configs/xilinx_mbv32_defconfig
+ create mode 100644 configs/xilinx_mbv32_smode_defconfig
+ create mode 100644 include/configs/xilinx_mbv.h
+
+Best regards,
+Leo
