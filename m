@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D0BC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8B3C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 15:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02ECB87E18;
+	by phobos.denx.de (Postfix) with ESMTP id 75C1D87E3C;
 	Mon, 18 Dec 2023 16:02:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Hh3eJPUb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D6eMuua2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6321787E22; Mon, 18 Dec 2023 16:02:41 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 4D1CE87E48; Mon, 18 Dec 2023 16:02:43 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59D7187E2E
+ by phobos.denx.de (Postfix) with ESMTPS id 619A587E34
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:02:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-6da5278c6fbso2482228a34.3
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5d7a47d06eeso26541617b3.1
  for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1702911753; x=1703516553; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/HskKR/fPit6ZjwlrMqCjjo/Dpe/DBKcg9KAVpTZRJw=;
- b=Hh3eJPUbc0ralHLX3XRrMvIkVA9AAixnJ3b10XSfUKME6vDu/DcLa+5mrIbvCjWv4E
- R9SLl7duo4fEjWiBil43xg5EV5CuWgKETnUkBCIc1X9bs5U+IysQxT40qyHddSXctdB4
- SSLJKQNHwrfcAdl1hLlh/UH4joxJNEVtVTYm0=
+ bh=wA8Le2A4sePK4t/WDfQ4aSek7z+zBbUD7PNEcY9kSQ8=;
+ b=D6eMuua2w0VEQqqqY5LKmWTX/7U9ZSYgXcxM6O/wVMBAZ7k8LXs3X++PHOPsBmzAza
+ 7JS/3gDultwaGWkWbw2yGFG+5ChGrFAKtusJlJYsS+898+BGWJ4hhsB9Ykj+KgamS+7F
+ xitOVcaysD7Z+PIlMEj2DNX7mfmk/Qbv1V0CQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1702911753; x=1703516553;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/HskKR/fPit6ZjwlrMqCjjo/Dpe/DBKcg9KAVpTZRJw=;
- b=YdKGOLBqS0vHnIdoXxrwOw91d3IxP4UjY7ddyARAhxS03dq/XEyWfmY22HIG/9YpdF
- iZw+aTRXS8sT8+133951v5wS/GLtiZUE+2oDz9ZVzLz59+s2WhzpeNFj+BrtL6xvK+kF
- QrKK+fKMhQgPVAlCrCmtUsn212A1TzhaaD+oF1Sii9sY7k8k/6aeI99CFtYjqp73X+aY
- sinK+qB5B3faOr+CNSGYlUxGdmpK+jGpujxFdaiL1TcJkZwIayDahqO5BevUwsWIW1I8
- +Rj7yuMgxaFeQnNXqjo2pMPJjlj1rr8JK5V2uGn43qDt6VPx3KqbKPgscOqgi4/Xl1F+
- Qslw==
-X-Gm-Message-State: AOJu0YwBrLd9+vVmIQwM9oCFYPA4PVmJrGh5Afb9EVuGoChn7p2eSrLe
- JCk/jaM7T+Ejm8S26+vhKPqjrEbey0Sv6hR6cdFCKA==
-X-Google-Smtp-Source: AGHT+IFMH+7nFNV6EHD8kve1Y2a2hmjuuiS9WZW6mRFHygkhsj2RHLlf9UTWTWKDie+A5Nk8mzXVyYz9k/jqbx6vpYs=
-X-Received: by 2002:a05:6830:1399:b0:6d9:deb0:d31f with SMTP id
- d25-20020a056830139900b006d9deb0d31fmr15993982otq.15.1702911752815; Mon, 18
+ bh=wA8Le2A4sePK4t/WDfQ4aSek7z+zBbUD7PNEcY9kSQ8=;
+ b=rQLbqAFajemeACyAoXydsG5s8wOQ1CKGSC+K/g4PKxiENgvsr5zFvI77cB0b1CKw4U
+ 3gX9A7b6QeDqjG5XK0VL0+FmSlm7YnnuAErbvwmRVC5h+nh/4rL4d7inO2JYhFbdMXMq
+ fSk+7guMzvp9Antf9fHAcrlEyd6nzcWvCf+6mbGzIUR35EDJhYmtPyF45bk/uNPPjFKU
+ D7aU7zt2FKlCurkhq7B4tO8F1ORnGLqcQ4eNX2aduul2G2iTKy2qvhEqf6qGJFmo9T35
+ Dsd+6v+AaIKUJ0VczLbRcVYLTWaIJqOAPasqVW/ZpZ2RdwSbHrCRVoULDW6RIHQbzJZm
+ fgHA==
+X-Gm-Message-State: AOJu0YxSGYWpZ3PLItMM/O7UDzypj9kvw53MG77Y+cJalZch14wXy01j
+ HG2mX3jGSGuUL4pDHMugbldevhraXrSMTvsNndrRag==
+X-Google-Smtp-Source: AGHT+IH+nvQh6bWF2B7BdD42BSbD08lgoVy9wATEddsDinSAQKR0LXRrQPnFqboQvoWeCgA5KEs6yHO7TfYfYEUK1L0=
+X-Received: by 2002:a81:d54e:0:b0:5d7:1940:f3d2 with SMTP id
+ l14-20020a81d54e000000b005d71940f3d2mr11558446ywj.58.1702911752813; Mon, 18
  Dec 2023 07:02:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20231217114457.70128-1-heinrich.schuchardt@canonical.com>
- <CAC_iWjJ+VUY+FVyyh8fib+i=qy3K0fDwvcjTfmJMfJkSW25SQg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ+VUY+FVyyh8fib+i=qy3K0fDwvcjTfmJMfJkSW25SQg@mail.gmail.com>
+References: <20231215133245.7923-1-heinrich.schuchardt@canonical.com>
+ <20231215133245.7923-4-heinrich.schuchardt@canonical.com>
+ <CAPnjgZ23cv=i+9_vuM3EaQ2-vUhEvzcd7Dynowd41M5hsSGHrA@mail.gmail.com>
+ <05b45f95-f760-49ee-9888-39ff913177a6@canonical.com>
+In-Reply-To: <05b45f95-f760-49ee-9888-39ff913177a6@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 18 Dec 2023 08:01:48 -0700
-Message-ID: <CAPnjgZ2gnrdULFVLqHEXAYvb6crBCg_LMzFNC9f62vND6jjJsQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] cmd: CONFIG_CMD_BOOTEFI_HELLO_COMPILE dependencies
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+Date: Mon, 18 Dec 2023 08:01:33 -0700
+Message-ID: <CAPnjgZ2BOkNrN=oK2j-vWaCJqwcvK1FHMhnztAW_V3H=b0f7KA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/9] arrm: add ACPI fields to global data
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,38 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 17 Dec 2023 at 10:35, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Sun, 17 Dec 2023 at 13:45, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > CONFIG_EFI_LOADER cannot be chosen for ARM v7m. Remove the superfluous
-> > dependency on CONFIG_CPU_V7M=n.
-> >
-> > Fixes: b20bb09b2108 ("efi_loader: restrict EFI_LOADER to armv7 and armv8 on ARM")
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  cmd/Kconfig | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 748b959961..0ae5bcd981 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -373,7 +373,7 @@ config CMD_BOOTEFI_BOOTMGR
-> >
-> >  config CMD_BOOTEFI_HELLO_COMPILE
-> >         bool "Compile a standard EFI hello world binary for testing"
-> > -       depends on CMD_BOOTEFI && !CPU_V7M
-> > +       depends on CMD_BOOTEFI
-> >         default y
-> >         help
-> >           This compiles a standard EFI hello world application with U-Boot so
-> > --
-> > 2.40.1
-> >
->
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Heinrich,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sat, 16 Dec 2023 at 12:23, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 12/16/23 19:46, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Fri, 15 Dec 2023 at 06:32, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com> wrote:
+> >>
+> >> Add fields for the location of ACPI tables to the global data.
+> >>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >> v2:
+> >>          new patch
+> >> ---
+> >>   arch/arm/include/asm/global_data.h | 4 ++++
+> >>   1 file changed, 4 insertions(+)
+> >
+> > These need to be #ifdefed as they affect global_data size,
+> > particularly in SPL. In fact, we have a problem there.
+>
+> Why would it be problematic to have more unused fields in global data?
+
+It uses memory, i.e. SRAM, which is not that large.
+
+Regards,
+Simon
