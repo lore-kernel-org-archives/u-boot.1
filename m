@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1487C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 09:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 187B7C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 10:26:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3390876A4;
-	Mon, 18 Dec 2023 10:59:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 615D587D6A;
+	Mon, 18 Dec 2023 11:26:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gpqQiJDO";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="g463E3dc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCCC887DEB; Mon, 18 Dec 2023 10:59:29 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 12A1087DE0; Mon, 18 Dec 2023 11:26:35 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 419EB8768A
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:59:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C1578773F
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 11:26:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1d3c21a95e6so1489035ad.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 01:59:27 -0800 (PST)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-28b79d1ebd6so311890a91.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 02:26:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702893565; x=1703498365; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1702895190; x=1703499990;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=J0sHLCFvY6nXJCDnIu62Y8MNMhmglBgoMaH3IwSTlFM=;
- b=gpqQiJDObs62EjfkcyPHo8s9g86FjTa205hCmMGBijUtv3OuzhG16oIVlVadxcLqX5
- Xhty2vHwk+rS+yXnguo/plGMlkQlE4q3eJTp9QJqGP01eWpbClK1pRlusE2A+AS4Tk0B
- XheKrY56DS8fahYOFqdcNvG7oxwiC2R+5xNT+DrNmOl9wn0O9Bx0wS5ove/b31yC6dDv
- nuMx0kZMQrAIMxynyGj5bHGzQvK2hCRYz6iYLVxA/XaIQ/2P6mqinO499ItJJzXiQP2U
- 2XBf/AIf7SwjkW74K5gUD9BlKCdNfN0NMIPyOhsY8ZM3MQfYzlpq7yJGoGvjqt69e1dh
- pH+w==
+ bh=NHYMFt14l3UhYykO02ZuYW5r47gls3XoT6qB9zK/yIU=;
+ b=g463E3dcPMl75mp6KFIflK8xXIx2mATElKi3Hm1GHoqEt07mS7vcAqZ5GMaQh1fBZA
+ aKkBBCwyR1VTeMa3x+YTKrxLWkNvu8MT1bA6Bd9XU1B0K1t/ar9kLQZHAr/5LX+oOuIW
+ OTGqguXbBSJ0k/YZ1uCHtUJblviLsvxuUbw1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702893565; x=1703498365;
+ d=1e100.net; s=20230601; t=1702895190; x=1703499990;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J0sHLCFvY6nXJCDnIu62Y8MNMhmglBgoMaH3IwSTlFM=;
- b=RvqrUCi7TyBgqzJXeFjE9Sr8czkasqM0xVxH9WdjQpWtPBXd+DKfFN+Sb9mbDCGUM2
- VawLeCmiLVrrlUNCgA8KntTiGFrfIwL58Mso1lSDvwSV0ll89rMyOIhsZE43fm0bZi7Z
- QC8PM+Gk/CBWt8Tg1dI487349wphWYcRlCLqY1lzMgciPxNEzUYXB4vlZM+CeE41fPRw
- SmytH6/qcT0akpaKoNFkcJTfbAPb/wjDJAocgZnLisGGVk7xD6lO2ZrjJJlWSS/+/Key
- vhe5Uwj2U6NiqNYt2L7OzntDNIsB7S0t3SExj8yP8ksAy8uZV/cdKHQUqeU+uQM7+RIw
- 7fDQ==
-X-Gm-Message-State: AOJu0Yw0TChH61i7YbzHRJjCBK+iM+iUQREToZpplcXxUtmAL1sBdo6A
- o4TZNlFHu/pN6ONMtQJoHN8aUonUZwYxLSDgFQs=
-X-Google-Smtp-Source: AGHT+IEkZ6iOYdObOL//ObOmofHy3rXmTHwH25ST5+2bKQFYsQWCqY2SKwo4UjonUU+Wqd8ZHttleg==
-X-Received: by 2002:a17:903:2311:b0:1d3:6400:5532 with SMTP id
- d17-20020a170903231100b001d364005532mr4484181plh.96.1702893564808; 
- Mon, 18 Dec 2023 01:59:24 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- q14-20020a170902dace00b001d08e08003esm18664915plx.174.2023.12.18.01.59.23
+ bh=NHYMFt14l3UhYykO02ZuYW5r47gls3XoT6qB9zK/yIU=;
+ b=wLRegEKxSiDevDT5oQ82WQnvhLdOGZmcK7SGCpyrbKHWOxyucwwV1RJdTYDvDIuKAH
+ qhczOumLOkfebVBMqnOSbryJmQzllZKNcNCeN/uKpOyn19vzKl191wDwhh+TpzZF/+Yo
+ 771NG700N5MVJfcNg40zUIZi70QQekKMQzc2K09jkUF8dbDanHF5JYck0mf7fPtYQKiI
+ cI40ZT3CritaQrZTxx5f6PT1p61SFGoz5aqN3sHzbypB2Kzr6SAsmsb6pqfRAdf3bJMG
+ PSHsrLk8stxXaSr0XctmMy+P3zlRZOx+oTB3Zgg3UlY+pya3PO4IuvWkOqHXf8Utt+s6
+ mirQ==
+X-Gm-Message-State: AOJu0Yz1q704JimpeVT10Fm8uOy6J5z7IzWUDfe2QHwC8bqMNokpZlRe
+ hm1DPOCO0WYWeMTx7+MV4G9HAWIePPFKH6lpjFf6bw==
+X-Google-Smtp-Source: AGHT+IE4DTU2PKnvMM+HZyQ1khDtZi5yW6uwUlRGEFCW5FAdYL4HEdItqlddt6fb8t2yOmTBU6hk4Q==
+X-Received: by 2002:a17:90a:e54d:b0:28b:6b52:8198 with SMTP id
+ ei13-20020a17090ae54d00b0028b6b528198mr370090pjb.37.1702895190566; 
+ Mon, 18 Dec 2023 02:26:30 -0800 (PST)
+Received: from localhost.localdomain ([49.205.242.204])
+ by smtp.gmail.com with ESMTPSA id
+ sc16-20020a17090b511000b0028b2ff2208esm5961002pjb.19.2023.12.18.02.26.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 01:59:24 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v2] efi_loader: fix iteration of FMP protocols
-Date: Mon, 18 Dec 2023 18:57:41 +0900
-Message-Id: <20231218095742.376839-1-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ Mon, 18 Dec 2023 02:26:30 -0800 (PST)
+From: Jagan Teki <jagan@amarulasolutions.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-spi/master [for-next]
+Date: Mon, 18 Dec 2023 15:56:25 +0530
+Message-Id: <20231218102625.1050191-1-jagan@amarulasolutions.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,88 +86,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If one of the FMP protocols fails when calling GetImageInfo(),
-populating the ESRT ends up with failure and other FMP protocols
-are not added to the ESRT. We should still add all other FMP
-protocols to the ESRT.
+Hi Tom,
 
-With this commit, iteration of all FMP protocols continues
-even though one of the FMP protocols fails.
+Please pull this PR for next.
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
----
-Note that this patch addresses the following issue.
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/3
+Summary:
+- spi_nor_read_sfdp_dma_unsafe (Vaishnav)
+- w25q01/02 (Jim)
 
-changes in v2
-- add error handling when num_entries is 0 after calling fmp->get_image_info()
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-spi/-/pipelines/18995
 
- lib/efi_loader/efi_esrt.c | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+thanks,
+Jagan.
 
-diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
-index 7f46d651e6..1f629a6023 100644
---- a/lib/efi_loader/efi_esrt.c
-+++ b/lib/efi_loader/efi_esrt.c
-@@ -365,7 +365,7 @@ efi_status_t efi_esrt_populate(void)
- 		if (ret != EFI_SUCCESS) {
- 			EFI_PRINT("ESRT Unable to find FMP handle (%u)\n",
- 				  idx);
--			goto out;
-+			continue;
- 		}
- 		fmp = handler->protocol_interface;
- 
-@@ -380,15 +380,14 @@ efi_status_t efi_esrt_populate(void)
- 			 * fmp->get_image_info to return BUFFER_TO_SMALL.
- 			 */
- 			EFI_PRINT("ESRT erroneous FMP implementation\n");
--			ret = EFI_INVALID_PARAMETER;
--			goto out;
-+			continue;
- 		}
- 
- 		ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, info_size,
- 					(void **)&img_info);
- 		if (ret != EFI_SUCCESS) {
- 			EFI_PRINT("ESRT failed to allocate memory for image info\n");
--			goto out;
-+			continue;
- 		}
- 
- 		/*
-@@ -406,7 +405,7 @@ efi_status_t efi_esrt_populate(void)
- 		if (ret != EFI_SUCCESS) {
- 			EFI_PRINT("ESRT failed to obtain image info from FMP\n");
- 			efi_free_pool(img_info);
--			goto out;
-+			continue;
- 		}
- 
- 		num_entries += desc_count;
-@@ -414,6 +413,13 @@ efi_status_t efi_esrt_populate(void)
- 		efi_free_pool(img_info);
- 	}
- 
-+	/* error occurs in fmp->get_image_info() if num_entries is 0 here */
-+	if (!num_entries) {
-+		EFI_PRINT("Error occurs, num_entries should not be 0\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto out;
-+	}
-+
- 	EFI_PRINT("ESRT create table with %u entries\n", num_entries);
- 	/*
- 	 * Allocate an ESRT with the sufficient number of entries to accommodate
-@@ -437,7 +443,7 @@ efi_status_t efi_esrt_populate(void)
- 		if (ret != EFI_SUCCESS) {
- 			EFI_PRINT("ESRT unable to find FMP handle (%u)\n",
- 				  idx);
--			break;
-+			continue;
- 		}
- 		fmp = handler->protocol_interface;
- 
--- 
-2.34.1
+The following changes since commit 2f0282922b2c458eea7f85c500a948a587437b63:
 
+  Prepare v2024.01-rc4 (2023-12-04 13:46:56 -0500)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-spi master
+
+for you to fetch changes up to 959a4a0838acf7ef733e000d1304cea6711b8945:
+
+  spi: cadence-quadspi: Fix error message on stuck busy state (2023-12-14 23:56:19 +0530)
+
+----------------------------------------------------------------
+Bruce Suen (1):
+      mtd: spi-nor-ids: add support for xtx XT55Q02G
+
+Godfrey Mwangi (1):
+      mtd: spi-nor: Add MT25QU128AB params
+
+Igor Prusov (1):
+      mtd: spinand: add support for ESMT F50x1G41LB
+
+Jan Kiszka (1):
+      spi: cadence-quadspi: Fix error message on stuck busy state
+
+Jim Liu (1):
+      mtd: spi-nor: add flash model w25q01/02 support
+
+Jit Loon Lim (1):
+      mtd: spi-nor: Add MT25U01G part number for SPI NOR Flash
+
+Jonas Karlman (1):
+      mtd: spi-nor: Add support for Silicon Kaiser sk25lp128
+
+Teik Heng Chong (1):
+      drivers: mtd: spi: Add support for GD55LB02GEBIR SPI NOR flash
+
+Udit Kumar (1):
+      spi: cadence_qspi: Select flash subnode at runtime
+
+Vaishnav Achath (1):
+      mtd: spi-nor-core: Implement spi_nor_read_sfdp_dma_unsafe() for sfdp parse
+
+William Zhang (1):
+      spi: bcm63xx-hsspi: Fix compiler warning
+
+ drivers/mtd/nand/spi/Makefile  |   3 +-
+ drivers/mtd/nand/spi/core.c    |   1 +
+ drivers/mtd/nand/spi/esmt.c    | 137 +++++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/spi/Kconfig        |   5 ++
+ drivers/mtd/spi/spi-nor-core.c |  34 +++++++++-
+ drivers/mtd/spi/spi-nor-ids.c  |  23 +++++++
+ drivers/spi/bcm63xx_hsspi.c    |   2 +-
+ drivers/spi/cadence_qspi.c     |   7 ++-
+ drivers/spi/cadence_qspi.h     |   1 +
+ drivers/spi/cadence_qspi_apb.c |   3 +-
+ include/linux/mtd/spinand.h    |   1 +
+ 11 files changed, 210 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/mtd/nand/spi/esmt.c
