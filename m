@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E95C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 19:12:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 420D9C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 19:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DACB87509;
-	Mon, 18 Dec 2023 20:11:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8BB8787252;
+	Mon, 18 Dec 2023 20:12:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="OZKf8uyp";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ivDHhWU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7E95874ED; Mon, 18 Dec 2023 20:11:57 +0100 (CET)
+ id 69DFE8715C; Mon, 18 Dec 2023 20:12:01 +0100 (CET)
 Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
  [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3047C8761C
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 20:11:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEC1D87252
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 20:11:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jagan@amarulasolutions.com
 Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-53fa455cd94so1389674a12.2
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 11:11:55 -0800 (PST)
+ 41be03b00d2f7-5c673b01eeeso1341220a12.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 11:11:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702926713; x=1703531513;
+ d=amarulasolutions.com; s=google; t=1702926717; x=1703531517;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E4UhcsK3ZbbFilY0m42WLmk5Fv86D+fHPZZXuEWLsRw=;
- b=OZKf8uypo7I1iY42CIhvK58u+7wpGbVzZJ5hSLcb+kDiZDShflkoKPVA/4WOKgQVMa
- izi1sRzg3BX2iBrOu8BGvwpJJIh75gz2+J3UEBowY5WxWzCeSHkPRFo/u99Q1EPnDvVP
- Nu6ElaaCmUVyNuER6L57f99UfpnkYmQSRP1UY=
+ bh=ZU03AWD78AcVQvGB6vWKP75Nwr9sgVJy1Evf3TSi4rA=;
+ b=ivDHhWU9+KLrPUt/Hxq3HCefhwTFI8sA+xEbhgffhsG8U/Wv9uYQWHNbu0UA+qEIVf
+ lfP/KWU8NnPBSsXA6hmhk0pa0xCqJLXiddcoUAk1N0b9lVCGyvNzIjb8aL0eJy1+ae7b
+ cz6hwWzxLQs9+Kd0a9im445VYyIVLqNBPjR6g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702926713; x=1703531513;
+ d=1e100.net; s=20230601; t=1702926717; x=1703531517;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E4UhcsK3ZbbFilY0m42WLmk5Fv86D+fHPZZXuEWLsRw=;
- b=pkTfMlxSpFoJajRSrKJ3/Yhnp9w9YsGjJUBxXirHHlg3l36qDETskkV/5fQTw8o9lV
- Z8JPbxr6FhChgZOo0p/xpqpxM/5LI6SKVv7X0zDtsfAFZcNCCGgzKsx2gzDtkOZw5tQt
- oWVEAQ42259y0bCAvVqym1aSZG3ieZZ6Gp8qXcDqU0UUKEJjJThovZO90mO7E4K4NEI4
- BmsZnbHS26qHXj1SgmI9bub/3ZXZffwIz75yoCX1o7nwZDXw7r7DD68VIM1ZRP4oznXw
- itSaGqxSrMfrncXISrMyQFV6PLHdZ/UETho8UzPa59rSKlPW3wc28jiIpBr6QlQ2yn+U
- WGGg==
-X-Gm-Message-State: AOJu0YweqdCprYmGQj4XfFe7FFQQR1gHxkIrwODK0AAN3weske7knKdP
- f3KvN7k8juO2J2REA3K80+neQw==
-X-Google-Smtp-Source: AGHT+IGDuWQpov3VCPSu+Na6UISWirwBwKxG6hGQI1yXbpdA1OoX3S3/qKKolYlMOm817Gl+RZFRYA==
-X-Received: by 2002:a17:90a:c7c3:b0:28b:7ee0:4ef0 with SMTP id
- gf3-20020a17090ac7c300b0028b7ee04ef0mr991572pjb.39.1702926713553; 
- Mon, 18 Dec 2023 11:11:53 -0800 (PST)
+ bh=ZU03AWD78AcVQvGB6vWKP75Nwr9sgVJy1Evf3TSi4rA=;
+ b=PbeoywqxoTkFtAHreb1kPdAkyepkXaMm/zhEk6ZX7J3bUXLxqWwJBRiUvN/xkvSf/7
+ npxbLl0bdg+XfM4mXWA86t9oWP+IdnHMI6ALb1U1j9HVioZ/INHWwI/W3Rk2LSnQF4rg
+ Hn9fkfFAewyAY/W6jfoe1GUiVPMpUK63CR1czR0nTlY9YctBTjWjRdIpbhxX/jKZr1GV
+ dIqjm/PkwOKDjcgflR0/zcaJZDtpPenHucIOgugx/D0bF4suxWPoXLAWRl34620PEy88
+ lkRDNabFRFK/VbIBTx4aNGESbUbYu9wKVO4IzG0O11MPevbUtiQx53s3WZtUeNm9ZUOf
+ muRw==
+X-Gm-Message-State: AOJu0Yxhy/wkXvPxOKWCZevje3e8J0JE86pVbjKYyDQ9zwW8fBZX7zf8
+ jd+A7oK33VNrW/ETrpHnB87nLg==
+X-Google-Smtp-Source: AGHT+IGTx8/FcPh1JZMo24q5Xu6vWT6nQ+JmC3/iZu76e2IJDp9CnhmYTDH9p/NyRJu3FCnfpJ24Ig==
+X-Received: by 2002:a17:90b:1918:b0:28b:865a:8dad with SMTP id
+ mp24-20020a17090b191800b0028b865a8dadmr856885pjb.85.1702926717259; 
+ Mon, 18 Dec 2023 11:11:57 -0800 (PST)
 Received: from localhost.localdomain ([49.205.242.204])
  by smtp.gmail.com with ESMTPSA id
- pt10-20020a17090b3d0a00b0028afd8b1e0bsm2873941pjb.57.2023.12.18.11.11.49
+ pt10-20020a17090b3d0a00b0028afd8b1e0bsm2873941pjb.57.2023.12.18.11.11.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 11:11:53 -0800 (PST)
+ Mon, 18 Dec 2023 11:11:56 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Anatolij Gustschin <agust@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -70,9 +70,9 @@ To: Anatolij Gustschin <agust@denx.de>,
  Heiko Stuebner <heiko@sntech.de>
 Cc: Robin Murphy <robin.murphy@arm.com>, u-boot@lists.denx.de,
  Da Xue <da.xue@libretech.co>, Jagan Teki <jagan@edgeble.ai>
-Subject: [PATCH v2 07/17] video: rockchip: vop: Add win offset support
-Date: Tue, 19 Dec 2023 00:41:04 +0530
-Message-Id: <20231218191114.129329-8-jagan@amarulasolutions.com>
+Subject: [PATCH v2 08/17] video: rockchip: vop: Add dsp offset support
+Date: Tue, 19 Dec 2023 00:41:05 +0530
+Message-Id: <20231218191114.129329-9-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231218191114.129329-1-jagan@amarulasolutions.com>
 References: <20231218191114.129329-1-jagan@amarulasolutions.com>
@@ -97,121 +97,91 @@ X-Virus-Status: Clean
 From: Jagan Teki <jagan@edgeble.ai>
 
 Unlike RK3399, RK3288 the Newer Rockchip SoC's like RK3328 have
-different offsets for win registers.
+different offsets for dsp registers.
 
-Group the win register set via win_regs pointers so that win_offset
-would point the win_regs to access for any changes in the offset value.
+Group the dsp register set via dsp_regs pointers so that dsp_offset
+would point the dsp_regs to access for any changes in the offset value.
 
 Signed-off-by: Jagan Teki <jagan@edgeble.ai>
 ---
 Changes for v2:
 - none
 
- drivers/video/rockchip/rk_vop.c | 22 +++++++++++++---------
+ drivers/video/rockchip/rk_vop.c | 14 ++++++++------
  drivers/video/rockchip/rk_vop.h |  2 ++
- 2 files changed, 15 insertions(+), 9 deletions(-)
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/video/rockchip/rk_vop.c b/drivers/video/rockchip/rk_vop.c
-index 158ba7cbf6..b719a4e4ea 100644
+index b719a4e4ea..acc02e5d7c 100644
 --- a/drivers/video/rockchip/rk_vop.c
 +++ b/drivers/video/rockchip/rk_vop.c
-@@ -46,6 +46,7 @@ static void rkvop_enable(struct udevice *dev, ulong fbbase,
+@@ -165,6 +165,7 @@ static void rkvop_mode_set(struct udevice *dev,
  {
  	struct rk_vop_priv *priv = dev_get_priv(dev);
  	struct rk3288_vop *regs = priv->regs;
-+	struct rk3288_vop *win_regs = priv->regs + priv->win_offset;
- 	u32 lb_mode;
- 	u32 rgb_mode;
- 	u32 hactive = edid->hactive.typ;
-@@ -53,32 +54,32 @@ static void rkvop_enable(struct udevice *dev, ulong fbbase,
- 	int ret;
++	struct rk3288_vop *dsp_regs = priv->regs + priv->dsp_offset;
+ 	struct rkvop_driverdata *data =
+ 		(struct rkvop_driverdata *)dev_get_driver_data(dev);
  
- 	writel(V_ACT_WIDTH(hactive - 1) | V_ACT_HEIGHT(vactive - 1),
--	       &regs->win0_act_info);
-+	       &win_regs->win0_act_info);
+@@ -198,27 +199,27 @@ static void rkvop_mode_set(struct udevice *dev,
  
- 	writel(V_DSP_XST(edid->hsync_len.typ + edid->hback_porch.typ) |
- 	       V_DSP_YST(edid->vsync_len.typ + edid->vback_porch.typ),
--	       &regs->win0_dsp_st);
-+	       &win_regs->win0_dsp_st);
+ 	writel(V_HSYNC(hsync_len) |
+ 	       V_HORPRD(hsync_len + hback_porch + hactive + hfront_porch),
+-			&regs->dsp_htotal_hs_end);
++			&dsp_regs->dsp_htotal_hs_end);
  
- 	writel(V_DSP_WIDTH(hactive - 1) |
- 		V_DSP_HEIGHT(vactive - 1),
--		&regs->win0_dsp_info);
-+		&win_regs->win0_dsp_info);
+ 	writel(V_HEAP(hsync_len + hback_porch + hactive) |
+ 	       V_HASP(hsync_len + hback_porch),
+-	       &regs->dsp_hact_st_end);
++	       &dsp_regs->dsp_hact_st_end);
  
--	clrsetbits_le32(&regs->win0_color_key, M_WIN0_KEY_EN | M_WIN0_KEY_COLOR,
-+	clrsetbits_le32(&win_regs->win0_color_key, M_WIN0_KEY_EN | M_WIN0_KEY_COLOR,
- 			V_WIN0_KEY_EN(0) | V_WIN0_KEY_COLOR(0));
+ 	writel(V_VSYNC(vsync_len) |
+ 	       V_VERPRD(vsync_len + vback_porch + vactive + vfront_porch),
+-	       &regs->dsp_vtotal_vs_end);
++	       &dsp_regs->dsp_vtotal_vs_end);
  
- 	switch (fb_bits_per_pixel) {
- 	case 16:
- 		rgb_mode = RGB565;
--		writel(V_RGB565_VIRWIDTH(hactive), &regs->win0_vir);
-+		writel(V_RGB565_VIRWIDTH(hactive), &win_regs->win0_vir);
- 		break;
- 	case 24:
- 		rgb_mode = RGB888;
--		writel(V_RGB888_VIRWIDTH(hactive), &regs->win0_vir);
-+		writel(V_RGB888_VIRWIDTH(hactive), &win_regs->win0_vir);
- 		break;
- 	case 32:
- 	default:
- 		rgb_mode = ARGB8888;
--		writel(V_ARGB888_VIRWIDTH(hactive), &regs->win0_vir);
-+		writel(V_ARGB888_VIRWIDTH(hactive), &win_regs->win0_vir);
- 		break;
- 	}
+ 	writel(V_VAEP(vsync_len + vback_porch + vactive)|
+ 	       V_VASP(vsync_len + vback_porch),
+-	       &regs->dsp_vact_st_end);
++	       &dsp_regs->dsp_vact_st_end);
  
-@@ -91,12 +92,12 @@ static void rkvop_enable(struct udevice *dev, ulong fbbase,
- 	else
- 		lb_mode = LB_RGB_1280X8;
+ 	writel(V_HEAP(hsync_len + hback_porch + hactive) |
+ 	       V_HASP(hsync_len + hback_porch),
+-	       &regs->post_dsp_hact_info);
++	       &dsp_regs->post_dsp_hact_info);
  
--	clrsetbits_le32(&regs->win0_ctrl0,
-+	clrsetbits_le32(&win_regs->win0_ctrl0,
- 			M_WIN0_LB_MODE | M_WIN0_DATA_FMT | M_WIN0_EN,
- 			V_WIN0_LB_MODE(lb_mode) | V_WIN0_DATA_FMT(rgb_mode) |
- 			V_WIN0_EN(1));
+ 	writel(V_VAEP(vsync_len + vback_porch + vactive)|
+ 	       V_VASP(vsync_len + vback_porch),
+-	       &regs->post_dsp_vact_info);
++	       &dsp_regs->post_dsp_vact_info);
  
--	writel(fbbase, &regs->win0_yrgb_mst);
-+	writel(fbbase, &win_regs->win0_yrgb_mst);
  	writel(0x01, &regs->reg_cfg_done); /* enable reg config */
- 
- 	ret = reset_assert(dclk_rst);
-@@ -415,6 +416,8 @@ int rk_vop_probe(struct udevice *dev)
- {
- 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
- 	struct rk_vop_priv *priv = dev_get_priv(dev);
-+	struct rkvop_driverdata *ops =
-+		(struct rkvop_driverdata *)dev_get_driver_data(dev);
- 	int ret = 0;
- 	ofnode port, node;
- 	struct reset_ctl ahb_rst;
-@@ -448,6 +451,7 @@ int rk_vop_probe(struct udevice *dev)
- #endif
+ }
+@@ -452,6 +453,7 @@ int rk_vop_probe(struct udevice *dev)
  
  	priv->regs = dev_read_addr_ptr(dev);
-+	priv->win_offset = ops->win_offset;
+ 	priv->win_offset = ops->win_offset;
++	priv->dsp_offset = ops->dsp_offset;
  
  	/*
  	 * Try all the ports until we find one that works. In practice this
 diff --git a/drivers/video/rockchip/rk_vop.h b/drivers/video/rockchip/rk_vop.h
-index 0528fb23f5..909f5602e5 100644
+index 909f5602e5..eba68d87c4 100644
 --- a/drivers/video/rockchip/rk_vop.h
 +++ b/drivers/video/rockchip/rk_vop.h
-@@ -11,6 +11,7 @@
- struct rk_vop_priv {
+@@ -12,6 +12,7 @@ struct rk_vop_priv {
  	void *grf;
  	void *regs;
-+	int win_offset;
+ 	int win_offset;
++	int dsp_offset;
  };
  
  enum vop_features {
-@@ -18,6 +19,7 @@ enum vop_features {
- };
+@@ -20,6 +21,7 @@ enum vop_features {
  
  struct rkvop_driverdata {
-+	int win_offset;
+ 	int win_offset;
++	int dsp_offset;
  	/* configuration */
  	u32 features;
  	/* block-specific setters/getters */
