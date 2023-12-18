@@ -4,81 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EAFFC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 09:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14BAC35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 09:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A644087DC2;
-	Mon, 18 Dec 2023 10:40:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 432DF87CB9;
+	Mon, 18 Dec 2023 10:48:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Z78qqLeZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KlIVPksR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2782D87DDB; Mon, 18 Dec 2023 10:40:53 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 59E9287CE6; Mon, 18 Dec 2023 10:48:12 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2446987D5D
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:40:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A00E68644E
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 10:48:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BI9eX7m029660;
- Mon, 18 Dec 2023 03:40:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702892433;
- bh=UsbFMlPO/z9rjEiz6jGSYqDIPEeFRUdmGD1BjYHTtCU=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=Z78qqLeZqElKwE1dnY99HT04xtHFnsgjDjXSU5x2naCJx+e6mU40HxnCN7mGhULjG
- U3178FmlbBEnuUxouOBoeZe8xgD3+dj/hNiksEY/97rHgKNzVESchbyAxdfbjo5qFU
- wJ5yBBvsSzFXXJdRoaAYoFSXIMry5/ziymhMOM6g=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BI9eXTx016929
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Dec 2023 03:40:33 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Dec 2023 03:40:32 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Dec 2023 03:40:32 -0600
-Received: from [10.249.128.104] ([10.249.128.104])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BI9eMK9098702;
- Mon, 18 Dec 2023 03:40:23 -0600
-Message-ID: <4cc59965-e7bc-4138-a73a-260036bc3523@ti.com>
-Date: Mon, 18 Dec 2023 15:10:21 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40c2c65e6aaso34166405e9.2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 01:48:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702892877; x=1703497677; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SAx3QRhBqChZgnecCFwBavkI3YvpzExhmV6nCmDqidY=;
+ b=KlIVPksRfRUk+OrOyPA2XPCr6oHBt7cXmGOMnjJTR6h0mQnWNAMPc2Ogs6qnCe4EdP
+ fO58XoNyBUwhuzkYMA6HgVDhaxNsUhbfGb8VIvIUXR/6y1McXjeipStP6zUC7IeyJpU5
+ pE78w1phzlEdke3RRFoUwxEzcga/YoKqJzuOb5CrxNk3ArofOaaKahKKtGvQ9rlFS5BX
+ Kvys1pBr5oHLU5rxPNwZGcsVhTmdDW92s/hHmXNUGMY+GZClTepg9suJ7Prth+vzUrrr
+ CGpmZCtq4kZ6fz8y0VN0OhFb39u64N5NI3DJ6PebLo1zvCdsQiTsa6md/1Z7kLLEJd26
+ 7Uag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702892877; x=1703497677;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SAx3QRhBqChZgnecCFwBavkI3YvpzExhmV6nCmDqidY=;
+ b=U1wfQixY2Hl3ndsFz0+CboxXcjjbOi/L5OfKOsZT6/5ayKcDg1LomjgODmXXIGKK7a
+ nRstb7aH3/dltOxxFh5cxsDBwpk8uWHUf1wJoMCFflkBgIL3jJpErmO1PL7bMRi8l2uI
+ Pg59jHGTAHmhX8rOvWYRI93mE7OMFlvloCmD9Hrgae1vpglGLOLEnJsJ15VkPSaIQqpY
+ Qv/QBkK/LPTRXGqgJFMI4b8CjvIN/zf4kkq2zcOoj/uiXNGLFthAPIjya3XHX2pbu7oO
+ 2G2uWjGIw+YDclr3faK8HrlC36JXzzo6zYEWUSdushEcELGywBkzkQi8RMIIRimsmyfq
+ oaug==
+X-Gm-Message-State: AOJu0YzQwM7QMYoflti+bpsvk2tvHXkVpikkWEtjy314sTP3dZhbJSC6
+ XFVeGF7p+H4SmvJ7rcp1yzdOUJ3lsb4LChkH3Yy/W75X
+X-Google-Smtp-Source: AGHT+IFjGHibp8ulB+43y3lCe7XiRxY97rtqKq4OqlC3tEk84x5jxUddRVpvEYnvnIAhwjbauieSDw==
+X-Received: by 2002:a05:600c:474a:b0:40c:6ae0:8cf3 with SMTP id
+ w10-20020a05600c474a00b0040c6ae08cf3mr2360793wmo.153.1702892876673; 
+ Mon, 18 Dec 2023 01:47:56 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ x18-20020a5d6512000000b00336670abdcasm3025435wru.40.2023.12.18.01.47.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Dec 2023 01:47:56 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Mon, 18 Dec 2023 10:47:55 +0100
+Subject: [PATCH v3] clk: meson: add Hardware Clock measure driver
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
-Content-Language: en-US
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, "jh80.chung@samsung.com"
- <jh80.chung@samsung.com>, "ralph.siemsen@linaro.org"
- <ralph.siemsen@linaro.org>, "nm@ti.com" <nm@ti.com>, "u-kumar1@ti.com"
- <u-kumar1@ti.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "n-francis@ti.com" <n-francis@ti.com>,
- "kamlesh@ti.com" <kamlesh@ti.com>, "afd@ti.com" <afd@ti.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>,
- "lukma@denx.de" <lukma@denx.de>, "hnagalla@ti.com" <hnagalla@ti.com>,
- "a-bhatia1@ti.com" <a-bhatia1@ti.com>, "m-chawdhry@ti.com"
- <m-chawdhry@ti.com>, "j-choudhary@ti.com" <j-choudhary@ti.com>,
- "rasmus.villemoes@prevas.dk" <rasmus.villemoes@prevas.dk>,
- "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "sinthu.raja@mistralsolutions.com" <sinthu.raja@mistralsolutions.com>,
- "sabiya.d@ti.com" <sabiya.d@ti.com>, "sjg@chromium.org" <sjg@chromium.org>,
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, "bb@ti.com" <bb@ti.com>,
- "rogerq@kernel.org" <rogerq@kernel.org>
-References: <20231206123753.1486031-1-a-nandan@ti.com>
- <51eeab25314144926eaefaa2e83353ffec9309fe.camel@toradex.com>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <51eeab25314144926eaefaa2e83353ffec9309fe.camel@toradex.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20231218-uboot-meson-clk-msr-v3-1-acf4d90ccfee@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAEoVgGUC/33NTQrCMBCG4auUrB3JTAq1rryHuEjzY4NtIkkNS
+ undTbsRQVy+H8wzM0smOpPYsZpZNNklF3wJsauY6qW/GnC6NCNOAhEFPLoQJhhNCh7UcIMxRSB
+ UtkWO1Bw6Vi7v0Vj33NTzpXTv0hTia3uScV3/exkBoRHEa81bq3h3GpyXMexDvLIVzPRBCOk3Q
+ gVBpbnU2tZayy9kWZY3qv8/p/wAAAA=
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=21600;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=GzVOVc6WFEGnv5EB1J462SN0BaxnFljV6CB9DIBB6PY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBlgBVLu4zIxje2UBXtS++5QGxndqTaQKawp71T30PI
+ 9cpqfgOJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZYAVSwAKCRB33NvayMhJ0VmWD/
+ 94VkyDvlkUy2N+9lPdL+PsIhW/MALMYW7PruCdMplll06rHzgaQPYWmkcMHgw0KhKYN0gmO115MrGk
+ lIBZCuP2KirNEpmCpr0CroRLV+g2pewWVBzCJUivYRsOQ1K8jRyzZFrdksGpqHcd9KINPShi2ErZBY
+ DCVwDOMXy7h0cupaZFDlMzcmJkO8aqx9sGOU/uN2SnqRSg5bGdW7uLmUrAmFoaX69DAoimJdrK5ozG
+ NNAyqYI1s43UkYSCqgI2RZV4sC6GU3xnz5DZ5Bh6/7y3ddFP1KIzHhk64FWOFlBkWMtSmTAUCr+4cN
+ w9gpcOB+W6av3KuO1piyrRlpqCkHg+LyN7Hjwykn2KzZs0q+MuBdDfQ0Vf7HuxzHYyjfBnlGC4aFr3
+ HVQ+gLqKcCRNR7U6bjuL54of6bCEXj6QF/geiQMlrgeQPDbI18aBcGDR0JaTF7JcyS/KBjZBRrO5Px
+ i2j345lByuL4aZ6N1l0Z8Q9qUpGhTbnW7OUxqa2V3lxiTKBgiwyqXIDf2qZOsCosuTAPDmjBt6iKDa
+ Tr3K/WkILaHiXV4XbCb7PtpgCTmxsw/R0AA4wZn1EYJbFS/INNBc7tox50bN7DvlMjXFaEomxF2zfn
+ GU9c+A7FLUX+2Y4zA0D5eXQ7hnC4+zBL7fRn3Phd0bhOs57bApPl4YGYBRTw==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,281 +110,703 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Amlogic SoCs embeds an hardware clock measure block, port it
+from Linux and implement it as a UCLK_CLK with only the dump
+op and fail-only xlate.
 
-On 14/12/23 23:13, Marcel Ziswiler wrote:
-> Hi Apurva
->
-> Thanks!
->
-> On Wed, 2023-12-06 at 18:07 +0530, Apurva Nandan wrote:
->> Hello Everyone!
->>
->> This series will introduce basic support (SD and UART) support for Texas
->> Instruments J784S4 EVM.
-> For the whole series:
->
-> Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
->
-> However, one thing I noticed is that with upstream TF-A I do get the following errors:
->
-> NOTICE:  BL31: v2.10.0  (release):v2.10.0-76-g02091541d
-> NOTICE:  BL31: Built : 18:13:08, Dec 14 2023
-> ERROR:   Failed to get response (-19)
-> ERROR:   Transfer send failed (-19)
-> ERROR:   Unable to query firmware capabilities (-19)
->
-> While with latest TF-A from downstream TI BSP (both 9.0 and 9.1 use the same versin) I do not get any errors:
->
-> NOTICE:  BL31: v2.9(release):v2.9.0-614-gd7a7135d3
-> NOTICE:  BL31: Built : 18:40:38, Dec 14 2023
->
-> Any idea?
->
-> Cheers
->
-> Marcel
-thanks for pointing it out, I am looking into the bug, and will be fixed 
-in next re-roll.
->> The J784S4 SoC device tree patches are taken from kernel patch submissions
->> and will be updated as they are accepted and merged to the kernel tree.
->> All other patches are specific to SPL and u-boot and do not have
->> dependency on other trees. Appreciate a review for acceptance to u-boot
->> tree.
->>
->> Here are some of the salient features of the J784S4 automotive grade
->> application processor:
->>
->> The J784S4 SoC belongs to the K3 Multicore SoC architecture
->> platform, providing advanced system integration in automotive,
->> ADAS and industrial applications requiring AI at the network edge.
->> This SoC extends the K3 Jacinto 7 family of SoCs with focus on
->> raising performance and integration while providing interfaces,
->> memory architecture and compute performance for multi-sensor, high
->> concurrency applications.
->>
->> Some highlights of this SoC are:
->> * Up to 8 Cortex-A72s, four clusters of lockstep capable dual Cortex-R5F MCUs,
->>    4 C7x floating point vector DSPs with Matrix Multiply Accelerator(MMA) for
->>    deep learning and CNN.
->> * 3D GPU: Automotive grade IMG BXS-4-64 MC1
->> * Vision Processing Accelerator (VPAC) with image signal processor and Depth
->>    and Motion Processing Accelerator (DMPAC)
->> * Three CSI2.0 4L RX plus two CSI2.0 4L TX, two DSI Tx, one eDP/DP and one
->>    DPI interface.
->> * Integrated gigabit ethernet switch, up to 8 ports (TDA4VH), two ports
->>    support 10Gb USXGMII; Two 4 lane PCIe-GEN3 controllers, USB3.0 Dual-role
->>    device subsystems, Up to 20 MCANs, among other peripherals.
->>
->> See J784S4 Technical Reference Manual (SPRUJ52 - JUNE 2022)
->> for further details: http://www.ti.com/lit/zip/spruj52
->>
->> In addtion, the J784S4 EVM board is designed for TI J784S4 SoC. It
->> supports the following interfaces:
->> * 32 GB DDR4 RAM
->> * x2 Gigabit Ethernet interfaces capable of working in Switch and MAC mode
->> * x1 Input Audio Jack, x1 Output Audio Jack
->> * x1 USB2.0 Hub with two Type A host and x1 USB 3.1 Type-C Port
->> * x2 4L PCIe connector
->> * x1 UHS-1 capable micro-SD card slot
->> * 512 Mbit OSPI flash, 1 Gbit Octal NAND flash, 512 Mbit QSPI flash,
->>    UFS flash.
->> * x6 UART through UART-USB bridge
->> * XDS110 for onboard JTAG debug using USB
->> * Temperature sensors, user push buttons and LEDs
->> * 40-pin User Expansion Connector
->> * x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
->> * x1 15-pin CSI header
->> * x6 MCAN instances
->>
->> Schematics: https://www.ti.com/lit/zip/sprr458
->>
->> eMMC UDA moode bootlog:
->> https://gist.githubusercontent.com/apurvanandan1997/3cffada252d50a8aa0c00a91f1f2f856/raw/
->>
->> Changes in v6:
->> 1) Move bootph-all of memory node to u-boot.dtsi
->> 2) Used a while loop for DRAM controller init, instead of hard-coding for 4 DRAM
->> 3) Fixed build error by adding board/ti/j784s4/Kconfig
->> 4) Trimmed out j784s4_evm.h
->> 5) Fixed checkpatch warnings
->>
->> Link to v5:
->> https://patchwork.ozlabs.org/project/uboot/cover/20231130115552.3580995-1-a-nandan@ti.com/
->>
->> Changes in v5:
->> 1) Incorporated Andrew Davis' "Move R5 specific code into new r5/ directory" and
->>     "Move board selection to mach-k3" series changes.
->> 2) Incorporated Neha Francis' "Move to using templated FITs" series changes.
->> 3) Synced device tree files with Linux v6.7-rc1
->> 4) Changed ti_mmc to mmc1 target from bootstd
->> 5) Updated doc based on review comments
->> 6) Removed remoteproc support from the series
->> 7) Splitted board files patch into smaller patches
->> 8) Trimmed j784s4.env to necessary variables
->> 9) Used fdtdec_setup_mem_size_base fdtdec_setup_memory_banksize in evm.c
->> 10) Trimmed down evm.c to essential header files.
->> 11) Switched to multi-dtb fit compilation with config fragments
->>
->> Link to v4:
->> https://lore.kernel.org/u-boot/20231001165545.494212-1-a-nandan@ti.com/
->>
->> Changes in v4:
->> 1) Cleaned up Copyright and SPDX identifiers
->> 2) Synced the device trees to Linux v6.6-rc1 tag
->> 3) Added cleanup patch for sorting SoC JTAG ID entries
->> 4) Removed EEPROM board detect from evm.c and added am69 config fragments
->> 5) Updated MAINTAINERS files and commit messages
->> 6) Removed struct renaming in ti_k3_r5f_rproc driver
->>
->> Link to v3:
->> https://lore.kernel.org/u-boot/20230908110551.861575-1-a-nandan@ti.com/
->>
->> Changes in v3:
->> 1) Added AM69 SK support in the series
->> 2) Switched from distroboot to bootstd support
->> 3) Added remoteproc support for J784S4
->> 4) Added documentation for both SoCs
->> 5) Added binman support
->> 6) Removed unnecessarry nodes from r5-evm.dts and evm-u-boot.dtsi
->> 7) Added HS device support
->> 8) Added env file for environement variables
->> 9) Removed ti-serdes-mux bindings
->> 10) Cleaned up all files and synced with latest
->> 11) Addressed all previous review comments
->>
->> Note: The base dts files have been sync from next-20230905 linux tag as per review comment received
->> on previous re-roll:
->> https://lore.kernel.org/u-boot/20230321155227.GV8135@bill-the-cat/
->>
->> Link to v2:
->> https://lore.kernel.org/u-boot/20230321141028.24456-1-hnagalla@ti.com/
->>
->> Changes in v2:
->> - Refactored environement scripts to 'j784s4.env' and removed scripts not
->>    needed for basic board bootup.
->> - Imported the J7874S4 basic device tree files from v6.2 linux kernel.
->> - Moved j784s4 clock definitions and clock data into one patch/commit.
->> - coalesce board commits into one commit.
->>
->> Apurva Nandan (14):
->>    arm: dts: Introduce j784s4 dts from linux kernel
->>    arm: mach-k3: Add basic support for J784S4 SoC definition
->>    arm: mach-k3: Sort SoC JTAG_ID entries
->>    soc: ti: k3-socinfo: Add entry for J784S4 SoC
->>    arm: mach-k3: j784s4: Add clk and power support
->>    drivers: dma: Add support for J784S4 SoC
->>    board: ti: j784s4: Add board support for J784S4 EVM
->>    board: ti: j748s4: Add board config yaml files
->>    board: ti: j784s4: Add boot environment variables
->>    arm: dts: Introduce j784s4 u-boot dts files
->>    arm: dts: Add bootph-all for memory node
->>    configs: j784s4_evm: Add defconfig for j784s4 evm board
->>    doc: board: ti: k3: Add J784S4 EVM and AM69 SK documentation
->>    board: ti: j784s4: Add MAINTAINERS file
->>
->> Dasnavis Sabiya (3):
->>    arm: dts: Introduce am69-sk dts from linux kernel
->>    arm: dts: Introduce am69-sk u-boot dts files
->>    configs: Add am69_sk_* defconfig fragments
->>
->>   arch/arm/dts/Makefile                         |    4 +
->>   arch/arm/dts/k3-am69-r5-sk.dts                |  105 +
->>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |   31 +
->>   arch/arm/dts/k3-am69-sk.dts                   |  900 ++
->>   arch/arm/dts/k3-j784s4-binman.dtsi            |  435 +
->>   arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi  | 8757 ++++++++++++++++
->>   arch/arm/dts/k3-j784s4-ddr.dtsi               | 8858 +++++++++++++++++
->>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |   31 +
->>   arch/arm/dts/k3-j784s4-evm.dts                |  981 ++
->>   arch/arm/dts/k3-j784s4-main.dtsi              | 2068 ++++
->>   arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi        |  743 ++
->>   arch/arm/dts/k3-j784s4-r5-evm.dts             |  105 +
->>   arch/arm/dts/k3-j784s4-thermal.dtsi           |  101 +
->>   arch/arm/dts/k3-j784s4.dtsi                   |  294 +
->>   arch/arm/mach-k3/Kconfig                      |   17 +-
->>   arch/arm/mach-k3/Makefile                     |    2 +
->>   arch/arm/mach-k3/arm64-mmu.c                  |   52 +
->>   arch/arm/mach-k3/include/mach/hardware.h      |   13 +-
->>   .../mach-k3/include/mach/j784s4_hardware.h    |   60 +
->>   arch/arm/mach-k3/include/mach/j784s4_spl.h    |   47 +
->>   arch/arm/mach-k3/include/mach/spl.h           |    4 +
->>   arch/arm/mach-k3/j784s4/Kconfig               |   35 +
->>   arch/arm/mach-k3/j784s4_fdt.c                 |   15 +
->>   arch/arm/mach-k3/j784s4_init.c                |  335 +
->>   arch/arm/mach-k3/r5/Makefile                  |    1 +
->>   arch/arm/mach-k3/r5/j784s4/Makefile           |    7 +
->>   arch/arm/mach-k3/r5/j784s4/clk-data.c         |  428 +
->>   arch/arm/mach-k3/r5/j784s4/dev-data.c         |   98 +
->>   board/ti/j784s4/Kconfig                       |   37 +
->>   board/ti/j784s4/MAINTAINERS                   |   25 +
->>   board/ti/j784s4/Makefile                      |    7 +
->>   board/ti/j784s4/board-cfg.yaml                |   37 +
->>   board/ti/j784s4/evm.c                         |   38 +
->>   board/ti/j784s4/j784s4.env                    |   18 +
->>   board/ti/j784s4/pm-cfg.yaml                   |   13 +
->>   board/ti/j784s4/rm-cfg.yaml                   | 3058 ++++++
->>   board/ti/j784s4/sec-cfg.yaml                  |  380 +
->>   board/ti/j784s4/tifs-rm-cfg.yaml              | 2656 +++++
->>   configs/am69_sk_a72.config                    |    3 +
->>   configs/am69_sk_r5.config                     |    3 +
->>   configs/j784s4_evm_a72_defconfig              |  180 +
->>   configs/j784s4_evm_r5_defconfig               |  163 +
->>   doc/board/ti/j784s4_evm.rst                   |  303 +
->>   doc/board/ti/k3.rst                           |    1 +
->>   drivers/clk/ti/clk-k3.c                       |    6 +
->>   drivers/dma/ti/Makefile                       |    1 +
->>   drivers/dma/ti/k3-psil-j784s4.c               |  166 +
->>   drivers/dma/ti/k3-psil-priv.h                 |    1 +
->>   drivers/dma/ti/k3-psil.c                      |    2 +
->>   drivers/firmware/ti_sci_static_data.h         |   34 +
->>   drivers/power/domain/ti-power-domain.c        |    6 +
->>   drivers/ram/Kconfig                           |    2 +-
->>   drivers/soc/soc_ti_k3.c                       |    3 +
->>   include/configs/j784s4_evm.h                  |   15 +
->>   include/k3-clk.h                              |    1 +
->>   include/k3-dev.h                              |    1 +
->>   56 files changed, 31675 insertions(+), 12 deletions(-)
->>   create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
->>   create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/k3-am69-sk.dts
->>   create mode 100644 arch/arm/dts/k3-j784s4-binman.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-ddr.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-evm.dts
->>   create mode 100644 arch/arm/dts/k3-j784s4-main.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4-r5-evm.dts
->>   create mode 100644 arch/arm/dts/k3-j784s4-thermal.dtsi
->>   create mode 100644 arch/arm/dts/k3-j784s4.dtsi
->>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_hardware.h
->>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_spl.h
->>   create mode 100644 arch/arm/mach-k3/j784s4/Kconfig
->>   create mode 100644 arch/arm/mach-k3/j784s4_fdt.c
->>   create mode 100644 arch/arm/mach-k3/j784s4_init.c
->>   create mode 100644 arch/arm/mach-k3/r5/j784s4/Makefile
->>   create mode 100644 arch/arm/mach-k3/r5/j784s4/clk-data.c
->>   create mode 100644 arch/arm/mach-k3/r5/j784s4/dev-data.c
->>   create mode 100644 board/ti/j784s4/Kconfig
->>   create mode 100644 board/ti/j784s4/MAINTAINERS
->>   create mode 100644 board/ti/j784s4/Makefile
->>   create mode 100644 board/ti/j784s4/board-cfg.yaml
->>   create mode 100644 board/ti/j784s4/evm.c
->>   create mode 100644 board/ti/j784s4/j784s4.env
->>   create mode 100644 board/ti/j784s4/pm-cfg.yaml
->>   create mode 100644 board/ti/j784s4/rm-cfg.yaml
->>   create mode 100644 board/ti/j784s4/sec-cfg.yaml
->>   create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
->>   create mode 100644 configs/am69_sk_a72.config
->>   create mode 100644 configs/am69_sk_r5.config
->>   create mode 100644 configs/j784s4_evm_a72_defconfig
->>   create mode 100644 configs/j784s4_evm_r5_defconfig
->>   create mode 100644 doc/board/ti/j784s4_evm.rst
->>   create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
->>   create mode 100644 include/configs/j784s4_evm.h
+Based on the Linux driver introduced in [1].
 
+[1] commit 2b45ebef39a2 ("soc: amlogic: Add Meson Clock Measure driver").
+
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v3:
+- Fixed/extended Kconfig and commit message following Sean's advices
+- Link to v2: https://lore.kernel.org/r/20231212-uboot-meson-clk-msr-v2-1-1cd0addf4dda@linaro.org
+
+Changes in v2:
+- remove common.h and include time.h instead
+- Link to v1: https://lore.kernel.org/r/20231113-uboot-meson-clk-msr-v1-1-73204d09fc0b@linaro.org
+---
+ drivers/clk/meson/Kconfig       |  10 +
+ drivers/clk/meson/Makefile      |   1 +
+ drivers/clk/meson/clk-measure.c | 634 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 645 insertions(+)
+
+diff --git a/drivers/clk/meson/Kconfig b/drivers/clk/meson/Kconfig
+index cdc9d6f76c..ee33c61140 100644
+--- a/drivers/clk/meson/Kconfig
++++ b/drivers/clk/meson/Kconfig
+@@ -29,3 +29,13 @@ config CLK_MESON_A1
+ 	help
+ 	  Enable clock support for the Amlogic A1 SoC family, such as
+ 	  the A113L
++
++config CLK_MESON_MSR
++	bool "Enable clock measure driver for Amlogic SoCs"
++	depends on CLK && ARCH_MESON
++	depends on CMD_CLK
++	default ARCH_MESON
++	help
++	  Enable measuring a set of internal Amlogic SoC clock frequencies
++	  using the Hardware Clock Measure registers and print them using
++	  the clk dump command.
+diff --git a/drivers/clk/meson/Makefile b/drivers/clk/meson/Makefile
+index d975f07aab..c7a446e86c 100644
+--- a/drivers/clk/meson/Makefile
++++ b/drivers/clk/meson/Makefile
+@@ -9,3 +9,4 @@ obj-$(CONFIG_CLK_MESON_AXG) += axg-ao.o
+ obj-$(CONFIG_CLK_MESON_G12A) += g12a.o
+ obj-$(CONFIG_CLK_MESON_G12A) += g12a-ao.o
+ obj-$(CONFIG_CLK_MESON_A1) += a1.o
++obj-$(CONFIG_CLK_MESON_MSR) += clk-measure.o
+diff --git a/drivers/clk/meson/clk-measure.c b/drivers/clk/meson/clk-measure.c
+new file mode 100644
+index 0000000000..f653fc6355
+--- /dev/null
++++ b/drivers/clk/meson/clk-measure.c
+@@ -0,0 +1,634 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Based on Linux driver from:
++ * (C) Copyright 2018 - BayLibre, SAS
++ * Author: Neil Armstrong <narmstrong@baylibre.com>
++ * (C) Copyright 2023 - Neil Armstrong <neil.armstrong@linaro.org>
++ */
++
++#include <log.h>
++#include <clk-uclass.h>
++#include <div64.h>
++#include <dm.h>
++#include <time.h>
++#include <regmap.h>
++#include <syscon.h>
++#include <linux/bitops.h>
++#include <linux/bitfield.h>
++#include <linux/delay.h>
++#include <linux/err.h>
++#include <linux/kernel.h>
++
++#define MSR_CLK_DUTY		0x0
++#define MSR_CLK_REG0		0x4
++#define MSR_CLK_REG1		0x8
++#define MSR_CLK_REG2		0xc
++
++#define MSR_DURATION		GENMASK(15, 0)
++#define MSR_ENABLE		BIT(16)
++#define MSR_CONT		BIT(17) /* continuous measurement */
++#define MSR_INTR		BIT(18) /* interrupts */
++#define MSR_RUN			BIT(19)
++#define MSR_CLK_SRC		GENMASK(26, 20)
++#define MSR_BUSY		BIT(31)
++
++#define MSR_VAL_MASK		GENMASK(15, 0)
++
++#define DIV_MIN			32
++#define DIV_STEP		32
++#define DIV_MAX			640
++
++#define CLK_MSR_MAX		128
++
++struct meson_msr_id {
++	unsigned int id;
++	const char *name;
++};
++
++struct meson_msr {
++	struct regmap *regmap;
++	struct meson_msr_id *msr_table;
++};
++
++#define CLK_MSR_ID(__id, __name) \
++	[__id] = {.id = __id, .name = __name,}
++
++static struct meson_msr_id clk_msr_m8[CLK_MSR_MAX] = {
++	CLK_MSR_ID(0, "ring_osc_out_ee0"),
++	CLK_MSR_ID(1, "ring_osc_out_ee1"),
++	CLK_MSR_ID(2, "ring_osc_out_ee2"),
++	CLK_MSR_ID(3, "a9_ring_osck"),
++	CLK_MSR_ID(6, "vid_pll"),
++	CLK_MSR_ID(7, "clk81"),
++	CLK_MSR_ID(8, "encp"),
++	CLK_MSR_ID(9, "encl"),
++	CLK_MSR_ID(11, "eth_rmii"),
++	CLK_MSR_ID(13, "amclk"),
++	CLK_MSR_ID(14, "fec_clk_0"),
++	CLK_MSR_ID(15, "fec_clk_1"),
++	CLK_MSR_ID(16, "fec_clk_2"),
++	CLK_MSR_ID(18, "a9_clk_div16"),
++	CLK_MSR_ID(19, "hdmi_sys"),
++	CLK_MSR_ID(20, "rtc_osc_clk_out"),
++	CLK_MSR_ID(21, "i2s_clk_in_src0"),
++	CLK_MSR_ID(22, "clk_rmii_from_pad"),
++	CLK_MSR_ID(23, "hdmi_ch0_tmds"),
++	CLK_MSR_ID(24, "lvds_fifo"),
++	CLK_MSR_ID(26, "sc_clk_int"),
++	CLK_MSR_ID(28, "sar_adc"),
++	CLK_MSR_ID(30, "mpll_clk_test_out"),
++	CLK_MSR_ID(31, "audac_clkpi"),
++	CLK_MSR_ID(32, "vdac"),
++	CLK_MSR_ID(33, "sdhc_rx"),
++	CLK_MSR_ID(34, "sdhc_sd"),
++	CLK_MSR_ID(35, "mali"),
++	CLK_MSR_ID(36, "hdmi_tx_pixel"),
++	CLK_MSR_ID(38, "vdin_meas"),
++	CLK_MSR_ID(39, "pcm_sclk"),
++	CLK_MSR_ID(40, "pcm_mclk"),
++	CLK_MSR_ID(41, "eth_rx_tx"),
++	CLK_MSR_ID(42, "pwm_d"),
++	CLK_MSR_ID(43, "pwm_c"),
++	CLK_MSR_ID(44, "pwm_b"),
++	CLK_MSR_ID(45, "pwm_a"),
++	CLK_MSR_ID(46, "pcm2_sclk"),
++	CLK_MSR_ID(47, "ddr_dpll_pt"),
++	CLK_MSR_ID(48, "pwm_f"),
++	CLK_MSR_ID(49, "pwm_e"),
++	CLK_MSR_ID(59, "hcodec"),
++	CLK_MSR_ID(60, "usb_32k_alt"),
++	CLK_MSR_ID(61, "gpio"),
++	CLK_MSR_ID(62, "vid2_pll"),
++	CLK_MSR_ID(63, "mipi_csi_cfg"),
++};
++
++static struct meson_msr_id clk_msr_gx[CLK_MSR_MAX] = {
++	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
++	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
++	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
++	CLK_MSR_ID(3, "a53_ring_osc"),
++	CLK_MSR_ID(4, "gp0_pll"),
++	CLK_MSR_ID(6, "enci"),
++	CLK_MSR_ID(7, "clk81"),
++	CLK_MSR_ID(8, "encp"),
++	CLK_MSR_ID(9, "encl"),
++	CLK_MSR_ID(10, "vdac"),
++	CLK_MSR_ID(11, "rgmii_tx"),
++	CLK_MSR_ID(12, "pdm"),
++	CLK_MSR_ID(13, "amclk"),
++	CLK_MSR_ID(14, "fec_0"),
++	CLK_MSR_ID(15, "fec_1"),
++	CLK_MSR_ID(16, "fec_2"),
++	CLK_MSR_ID(17, "sys_pll_div16"),
++	CLK_MSR_ID(18, "sys_cpu_div16"),
++	CLK_MSR_ID(19, "hdmitx_sys"),
++	CLK_MSR_ID(20, "rtc_osc_out"),
++	CLK_MSR_ID(21, "i2s_in_src0"),
++	CLK_MSR_ID(22, "eth_phy_ref"),
++	CLK_MSR_ID(23, "hdmi_todig"),
++	CLK_MSR_ID(26, "sc_int"),
++	CLK_MSR_ID(28, "sar_adc"),
++	CLK_MSR_ID(31, "mpll_test_out"),
++	CLK_MSR_ID(32, "vdec"),
++	CLK_MSR_ID(35, "mali"),
++	CLK_MSR_ID(36, "hdmi_tx_pixel"),
++	CLK_MSR_ID(37, "i958"),
++	CLK_MSR_ID(38, "vdin_meas"),
++	CLK_MSR_ID(39, "pcm_sclk"),
++	CLK_MSR_ID(40, "pcm_mclk"),
++	CLK_MSR_ID(41, "eth_rx_or_rmii"),
++	CLK_MSR_ID(42, "mp0_out"),
++	CLK_MSR_ID(43, "fclk_div5"),
++	CLK_MSR_ID(44, "pwm_b"),
++	CLK_MSR_ID(45, "pwm_a"),
++	CLK_MSR_ID(46, "vpu"),
++	CLK_MSR_ID(47, "ddr_dpll_pt"),
++	CLK_MSR_ID(48, "mp1_out"),
++	CLK_MSR_ID(49, "mp2_out"),
++	CLK_MSR_ID(50, "mp3_out"),
++	CLK_MSR_ID(51, "nand_core"),
++	CLK_MSR_ID(52, "sd_emmc_b"),
++	CLK_MSR_ID(53, "sd_emmc_a"),
++	CLK_MSR_ID(55, "vid_pll_div_out"),
++	CLK_MSR_ID(56, "cci"),
++	CLK_MSR_ID(57, "wave420l_c"),
++	CLK_MSR_ID(58, "wave420l_b"),
++	CLK_MSR_ID(59, "hcodec"),
++	CLK_MSR_ID(60, "alt_32k"),
++	CLK_MSR_ID(61, "gpio_msr"),
++	CLK_MSR_ID(62, "hevc"),
++	CLK_MSR_ID(66, "vid_lock"),
++	CLK_MSR_ID(70, "pwm_f"),
++	CLK_MSR_ID(71, "pwm_e"),
++	CLK_MSR_ID(72, "pwm_d"),
++	CLK_MSR_ID(73, "pwm_c"),
++	CLK_MSR_ID(75, "aoclkx2_int"),
++	CLK_MSR_ID(76, "aoclk_int"),
++	CLK_MSR_ID(77, "rng_ring_osc_0"),
++	CLK_MSR_ID(78, "rng_ring_osc_1"),
++	CLK_MSR_ID(79, "rng_ring_osc_2"),
++	CLK_MSR_ID(80, "rng_ring_osc_3"),
++	CLK_MSR_ID(81, "vapb"),
++	CLK_MSR_ID(82, "ge2d"),
++};
++
++static struct meson_msr_id clk_msr_axg[CLK_MSR_MAX] = {
++	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
++	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
++	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
++	CLK_MSR_ID(3, "a53_ring_osc"),
++	CLK_MSR_ID(4, "gp0_pll"),
++	CLK_MSR_ID(5, "gp1_pll"),
++	CLK_MSR_ID(7, "clk81"),
++	CLK_MSR_ID(9, "encl"),
++	CLK_MSR_ID(17, "sys_pll_div16"),
++	CLK_MSR_ID(18, "sys_cpu_div16"),
++	CLK_MSR_ID(20, "rtc_osc_out"),
++	CLK_MSR_ID(23, "mmc_clk"),
++	CLK_MSR_ID(28, "sar_adc"),
++	CLK_MSR_ID(31, "mpll_test_out"),
++	CLK_MSR_ID(40, "mod_eth_tx_clk"),
++	CLK_MSR_ID(41, "mod_eth_rx_clk_rmii"),
++	CLK_MSR_ID(42, "mp0_out"),
++	CLK_MSR_ID(43, "fclk_div5"),
++	CLK_MSR_ID(44, "pwm_b"),
++	CLK_MSR_ID(45, "pwm_a"),
++	CLK_MSR_ID(46, "vpu"),
++	CLK_MSR_ID(47, "ddr_dpll_pt"),
++	CLK_MSR_ID(48, "mp1_out"),
++	CLK_MSR_ID(49, "mp2_out"),
++	CLK_MSR_ID(50, "mp3_out"),
++	CLK_MSR_ID(51, "sd_emmm_c"),
++	CLK_MSR_ID(52, "sd_emmc_b"),
++	CLK_MSR_ID(61, "gpio_msr"),
++	CLK_MSR_ID(66, "audio_slv_lrclk_c"),
++	CLK_MSR_ID(67, "audio_slv_lrclk_b"),
++	CLK_MSR_ID(68, "audio_slv_lrclk_a"),
++	CLK_MSR_ID(69, "audio_slv_sclk_c"),
++	CLK_MSR_ID(70, "audio_slv_sclk_b"),
++	CLK_MSR_ID(71, "audio_slv_sclk_a"),
++	CLK_MSR_ID(72, "pwm_d"),
++	CLK_MSR_ID(73, "pwm_c"),
++	CLK_MSR_ID(74, "wifi_beacon"),
++	CLK_MSR_ID(75, "tdmin_lb_lrcl"),
++	CLK_MSR_ID(76, "tdmin_lb_sclk"),
++	CLK_MSR_ID(77, "rng_ring_osc_0"),
++	CLK_MSR_ID(78, "rng_ring_osc_1"),
++	CLK_MSR_ID(79, "rng_ring_osc_2"),
++	CLK_MSR_ID(80, "rng_ring_osc_3"),
++	CLK_MSR_ID(81, "vapb"),
++	CLK_MSR_ID(82, "ge2d"),
++	CLK_MSR_ID(84, "audio_resample"),
++	CLK_MSR_ID(85, "audio_pdm_sys"),
++	CLK_MSR_ID(86, "audio_spdifout"),
++	CLK_MSR_ID(87, "audio_spdifin"),
++	CLK_MSR_ID(88, "audio_lrclk_f"),
++	CLK_MSR_ID(89, "audio_lrclk_e"),
++	CLK_MSR_ID(90, "audio_lrclk_d"),
++	CLK_MSR_ID(91, "audio_lrclk_c"),
++	CLK_MSR_ID(92, "audio_lrclk_b"),
++	CLK_MSR_ID(93, "audio_lrclk_a"),
++	CLK_MSR_ID(94, "audio_sclk_f"),
++	CLK_MSR_ID(95, "audio_sclk_e"),
++	CLK_MSR_ID(96, "audio_sclk_d"),
++	CLK_MSR_ID(97, "audio_sclk_c"),
++	CLK_MSR_ID(98, "audio_sclk_b"),
++	CLK_MSR_ID(99, "audio_sclk_a"),
++	CLK_MSR_ID(100, "audio_mclk_f"),
++	CLK_MSR_ID(101, "audio_mclk_e"),
++	CLK_MSR_ID(102, "audio_mclk_d"),
++	CLK_MSR_ID(103, "audio_mclk_c"),
++	CLK_MSR_ID(104, "audio_mclk_b"),
++	CLK_MSR_ID(105, "audio_mclk_a"),
++	CLK_MSR_ID(106, "pcie_refclk_n"),
++	CLK_MSR_ID(107, "pcie_refclk_p"),
++	CLK_MSR_ID(108, "audio_locker_out"),
++	CLK_MSR_ID(109, "audio_locker_in"),
++};
++
++static struct meson_msr_id clk_msr_g12a[CLK_MSR_MAX] = {
++	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
++	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
++	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
++	CLK_MSR_ID(3, "sys_cpu_ring_osc"),
++	CLK_MSR_ID(4, "gp0_pll"),
++	CLK_MSR_ID(6, "enci"),
++	CLK_MSR_ID(7, "clk81"),
++	CLK_MSR_ID(8, "encp"),
++	CLK_MSR_ID(9, "encl"),
++	CLK_MSR_ID(10, "vdac"),
++	CLK_MSR_ID(11, "eth_tx"),
++	CLK_MSR_ID(12, "hifi_pll"),
++	CLK_MSR_ID(13, "mod_tcon"),
++	CLK_MSR_ID(14, "fec_0"),
++	CLK_MSR_ID(15, "fec_1"),
++	CLK_MSR_ID(16, "fec_2"),
++	CLK_MSR_ID(17, "sys_pll_div16"),
++	CLK_MSR_ID(18, "sys_cpu_div16"),
++	CLK_MSR_ID(19, "lcd_an_ph2"),
++	CLK_MSR_ID(20, "rtc_osc_out"),
++	CLK_MSR_ID(21, "lcd_an_ph3"),
++	CLK_MSR_ID(22, "eth_phy_ref"),
++	CLK_MSR_ID(23, "mpll_50m"),
++	CLK_MSR_ID(24, "eth_125m"),
++	CLK_MSR_ID(25, "eth_rmii"),
++	CLK_MSR_ID(26, "sc_int"),
++	CLK_MSR_ID(27, "in_mac"),
++	CLK_MSR_ID(28, "sar_adc"),
++	CLK_MSR_ID(29, "pcie_inp"),
++	CLK_MSR_ID(30, "pcie_inn"),
++	CLK_MSR_ID(31, "mpll_test_out"),
++	CLK_MSR_ID(32, "vdec"),
++	CLK_MSR_ID(33, "sys_cpu_ring_osc_1"),
++	CLK_MSR_ID(34, "eth_mpll_50m"),
++	CLK_MSR_ID(35, "mali"),
++	CLK_MSR_ID(36, "hdmi_tx_pixel"),
++	CLK_MSR_ID(37, "cdac"),
++	CLK_MSR_ID(38, "vdin_meas"),
++	CLK_MSR_ID(39, "bt656"),
++	CLK_MSR_ID(41, "eth_rx_or_rmii"),
++	CLK_MSR_ID(42, "mp0_out"),
++	CLK_MSR_ID(43, "fclk_div5"),
++	CLK_MSR_ID(44, "pwm_b"),
++	CLK_MSR_ID(45, "pwm_a"),
++	CLK_MSR_ID(46, "vpu"),
++	CLK_MSR_ID(47, "ddr_dpll_pt"),
++	CLK_MSR_ID(48, "mp1_out"),
++	CLK_MSR_ID(49, "mp2_out"),
++	CLK_MSR_ID(50, "mp3_out"),
++	CLK_MSR_ID(51, "sd_emmc_c"),
++	CLK_MSR_ID(52, "sd_emmc_b"),
++	CLK_MSR_ID(53, "sd_emmc_a"),
++	CLK_MSR_ID(54, "vpu_clkc"),
++	CLK_MSR_ID(55, "vid_pll_div_out"),
++	CLK_MSR_ID(56, "wave420l_a"),
++	CLK_MSR_ID(57, "wave420l_c"),
++	CLK_MSR_ID(58, "wave420l_b"),
++	CLK_MSR_ID(59, "hcodec"),
++	CLK_MSR_ID(61, "gpio_msr"),
++	CLK_MSR_ID(62, "hevcb"),
++	CLK_MSR_ID(63, "dsi_meas"),
++	CLK_MSR_ID(64, "spicc_1"),
++	CLK_MSR_ID(65, "spicc_0"),
++	CLK_MSR_ID(66, "vid_lock"),
++	CLK_MSR_ID(67, "dsi_phy"),
++	CLK_MSR_ID(68, "hdcp22_esm"),
++	CLK_MSR_ID(69, "hdcp22_skp"),
++	CLK_MSR_ID(70, "pwm_f"),
++	CLK_MSR_ID(71, "pwm_e"),
++	CLK_MSR_ID(72, "pwm_d"),
++	CLK_MSR_ID(73, "pwm_c"),
++	CLK_MSR_ID(75, "hevcf"),
++	CLK_MSR_ID(77, "rng_ring_osc_0"),
++	CLK_MSR_ID(78, "rng_ring_osc_1"),
++	CLK_MSR_ID(79, "rng_ring_osc_2"),
++	CLK_MSR_ID(80, "rng_ring_osc_3"),
++	CLK_MSR_ID(81, "vapb"),
++	CLK_MSR_ID(82, "ge2d"),
++	CLK_MSR_ID(83, "co_rx"),
++	CLK_MSR_ID(84, "co_tx"),
++	CLK_MSR_ID(89, "hdmi_todig"),
++	CLK_MSR_ID(90, "hdmitx_sys"),
++	CLK_MSR_ID(91, "sys_cpub_div16"),
++	CLK_MSR_ID(92, "sys_pll_cpub_div16"),
++	CLK_MSR_ID(94, "eth_phy_rx"),
++	CLK_MSR_ID(95, "eth_phy_pll"),
++	CLK_MSR_ID(96, "vpu_b"),
++	CLK_MSR_ID(97, "cpu_b_tmp"),
++	CLK_MSR_ID(98, "ts"),
++	CLK_MSR_ID(99, "ring_osc_out_ee_3"),
++	CLK_MSR_ID(100, "ring_osc_out_ee_4"),
++	CLK_MSR_ID(101, "ring_osc_out_ee_5"),
++	CLK_MSR_ID(102, "ring_osc_out_ee_6"),
++	CLK_MSR_ID(103, "ring_osc_out_ee_7"),
++	CLK_MSR_ID(104, "ring_osc_out_ee_8"),
++	CLK_MSR_ID(105, "ring_osc_out_ee_9"),
++	CLK_MSR_ID(106, "ephy_test"),
++	CLK_MSR_ID(107, "au_dac_g128x"),
++	CLK_MSR_ID(108, "audio_locker_out"),
++	CLK_MSR_ID(109, "audio_locker_in"),
++	CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
++	CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
++	CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
++	CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
++	CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
++	CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
++	CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
++	CLK_MSR_ID(117, "audio_resample"),
++	CLK_MSR_ID(118, "audio_pdm_sys"),
++	CLK_MSR_ID(119, "audio_spdifout_b"),
++	CLK_MSR_ID(120, "audio_spdifout"),
++	CLK_MSR_ID(121, "audio_spdifin"),
++	CLK_MSR_ID(122, "audio_pdm_dclk"),
++};
++
++static struct meson_msr_id clk_msr_sm1[CLK_MSR_MAX] = {
++	CLK_MSR_ID(0, "ring_osc_out_ee_0"),
++	CLK_MSR_ID(1, "ring_osc_out_ee_1"),
++	CLK_MSR_ID(2, "ring_osc_out_ee_2"),
++	CLK_MSR_ID(3, "ring_osc_out_ee_3"),
++	CLK_MSR_ID(4, "gp0_pll"),
++	CLK_MSR_ID(5, "gp1_pll"),
++	CLK_MSR_ID(6, "enci"),
++	CLK_MSR_ID(7, "clk81"),
++	CLK_MSR_ID(8, "encp"),
++	CLK_MSR_ID(9, "encl"),
++	CLK_MSR_ID(10, "vdac"),
++	CLK_MSR_ID(11, "eth_tx"),
++	CLK_MSR_ID(12, "hifi_pll"),
++	CLK_MSR_ID(13, "mod_tcon"),
++	CLK_MSR_ID(14, "fec_0"),
++	CLK_MSR_ID(15, "fec_1"),
++	CLK_MSR_ID(16, "fec_2"),
++	CLK_MSR_ID(17, "sys_pll_div16"),
++	CLK_MSR_ID(18, "sys_cpu_div16"),
++	CLK_MSR_ID(19, "lcd_an_ph2"),
++	CLK_MSR_ID(20, "rtc_osc_out"),
++	CLK_MSR_ID(21, "lcd_an_ph3"),
++	CLK_MSR_ID(22, "eth_phy_ref"),
++	CLK_MSR_ID(23, "mpll_50m"),
++	CLK_MSR_ID(24, "eth_125m"),
++	CLK_MSR_ID(25, "eth_rmii"),
++	CLK_MSR_ID(26, "sc_int"),
++	CLK_MSR_ID(27, "in_mac"),
++	CLK_MSR_ID(28, "sar_adc"),
++	CLK_MSR_ID(29, "pcie_inp"),
++	CLK_MSR_ID(30, "pcie_inn"),
++	CLK_MSR_ID(31, "mpll_test_out"),
++	CLK_MSR_ID(32, "vdec"),
++	CLK_MSR_ID(34, "eth_mpll_50m"),
++	CLK_MSR_ID(35, "mali"),
++	CLK_MSR_ID(36, "hdmi_tx_pixel"),
++	CLK_MSR_ID(37, "cdac"),
++	CLK_MSR_ID(38, "vdin_meas"),
++	CLK_MSR_ID(39, "bt656"),
++	CLK_MSR_ID(40, "arm_ring_osc_out_4"),
++	CLK_MSR_ID(41, "eth_rx_or_rmii"),
++	CLK_MSR_ID(42, "mp0_out"),
++	CLK_MSR_ID(43, "fclk_div5"),
++	CLK_MSR_ID(44, "pwm_b"),
++	CLK_MSR_ID(45, "pwm_a"),
++	CLK_MSR_ID(46, "vpu"),
++	CLK_MSR_ID(47, "ddr_dpll_pt"),
++	CLK_MSR_ID(48, "mp1_out"),
++	CLK_MSR_ID(49, "mp2_out"),
++	CLK_MSR_ID(50, "mp3_out"),
++	CLK_MSR_ID(51, "sd_emmc_c"),
++	CLK_MSR_ID(52, "sd_emmc_b"),
++	CLK_MSR_ID(53, "sd_emmc_a"),
++	CLK_MSR_ID(54, "vpu_clkc"),
++	CLK_MSR_ID(55, "vid_pll_div_out"),
++	CLK_MSR_ID(56, "wave420l_a"),
++	CLK_MSR_ID(57, "wave420l_c"),
++	CLK_MSR_ID(58, "wave420l_b"),
++	CLK_MSR_ID(59, "hcodec"),
++	CLK_MSR_ID(60, "arm_ring_osc_out_5"),
++	CLK_MSR_ID(61, "gpio_msr"),
++	CLK_MSR_ID(62, "hevcb"),
++	CLK_MSR_ID(63, "dsi_meas"),
++	CLK_MSR_ID(64, "spicc_1"),
++	CLK_MSR_ID(65, "spicc_0"),
++	CLK_MSR_ID(66, "vid_lock"),
++	CLK_MSR_ID(67, "dsi_phy"),
++	CLK_MSR_ID(68, "hdcp22_esm"),
++	CLK_MSR_ID(69, "hdcp22_skp"),
++	CLK_MSR_ID(70, "pwm_f"),
++	CLK_MSR_ID(71, "pwm_e"),
++	CLK_MSR_ID(72, "pwm_d"),
++	CLK_MSR_ID(73, "pwm_c"),
++	CLK_MSR_ID(74, "arm_ring_osc_out_6"),
++	CLK_MSR_ID(75, "hevcf"),
++	CLK_MSR_ID(76, "arm_ring_osc_out_7"),
++	CLK_MSR_ID(77, "rng_ring_osc_0"),
++	CLK_MSR_ID(78, "rng_ring_osc_1"),
++	CLK_MSR_ID(79, "rng_ring_osc_2"),
++	CLK_MSR_ID(80, "rng_ring_osc_3"),
++	CLK_MSR_ID(81, "vapb"),
++	CLK_MSR_ID(82, "ge2d"),
++	CLK_MSR_ID(83, "co_rx"),
++	CLK_MSR_ID(84, "co_tx"),
++	CLK_MSR_ID(85, "arm_ring_osc_out_8"),
++	CLK_MSR_ID(86, "arm_ring_osc_out_9"),
++	CLK_MSR_ID(87, "mipi_dsi_phy"),
++	CLK_MSR_ID(88, "cis2_adapt"),
++	CLK_MSR_ID(89, "hdmi_todig"),
++	CLK_MSR_ID(90, "hdmitx_sys"),
++	CLK_MSR_ID(91, "nna_core"),
++	CLK_MSR_ID(92, "nna_axi"),
++	CLK_MSR_ID(93, "vad"),
++	CLK_MSR_ID(94, "eth_phy_rx"),
++	CLK_MSR_ID(95, "eth_phy_pll"),
++	CLK_MSR_ID(96, "vpu_b"),
++	CLK_MSR_ID(97, "cpu_b_tmp"),
++	CLK_MSR_ID(98, "ts"),
++	CLK_MSR_ID(99, "arm_ring_osc_out_10"),
++	CLK_MSR_ID(100, "arm_ring_osc_out_11"),
++	CLK_MSR_ID(101, "arm_ring_osc_out_12"),
++	CLK_MSR_ID(102, "arm_ring_osc_out_13"),
++	CLK_MSR_ID(103, "arm_ring_osc_out_14"),
++	CLK_MSR_ID(104, "arm_ring_osc_out_15"),
++	CLK_MSR_ID(105, "arm_ring_osc_out_16"),
++	CLK_MSR_ID(106, "ephy_test"),
++	CLK_MSR_ID(107, "au_dac_g128x"),
++	CLK_MSR_ID(108, "audio_locker_out"),
++	CLK_MSR_ID(109, "audio_locker_in"),
++	CLK_MSR_ID(110, "audio_tdmout_c_sclk"),
++	CLK_MSR_ID(111, "audio_tdmout_b_sclk"),
++	CLK_MSR_ID(112, "audio_tdmout_a_sclk"),
++	CLK_MSR_ID(113, "audio_tdmin_lb_sclk"),
++	CLK_MSR_ID(114, "audio_tdmin_c_sclk"),
++	CLK_MSR_ID(115, "audio_tdmin_b_sclk"),
++	CLK_MSR_ID(116, "audio_tdmin_a_sclk"),
++	CLK_MSR_ID(117, "audio_resample"),
++	CLK_MSR_ID(118, "audio_pdm_sys"),
++	CLK_MSR_ID(119, "audio_spdifout_b"),
++	CLK_MSR_ID(120, "audio_spdifout"),
++	CLK_MSR_ID(121, "audio_spdifin"),
++	CLK_MSR_ID(122, "audio_pdm_dclk"),
++	CLK_MSR_ID(123, "audio_resampled"),
++	CLK_MSR_ID(124, "earcrx_pll"),
++	CLK_MSR_ID(125, "earcrx_pll_test"),
++	CLK_MSR_ID(126, "csi_phy0"),
++	CLK_MSR_ID(127, "csi2_data"),
++};
++
++static int meson_clk_msr_measure_id(struct meson_msr *priv, unsigned int id,
++				    unsigned int duration)
++{
++	unsigned int val;
++	int ret;
++
++	regmap_write(priv->regmap, MSR_CLK_REG0, 0);
++
++	/* Set measurement duration */
++	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_DURATION,
++			   FIELD_PREP(MSR_DURATION, duration - 1));
++
++	/* Set ID */
++	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_CLK_SRC,
++			   FIELD_PREP(MSR_CLK_SRC, id));
++
++	/* Enable & Start */
++	regmap_update_bits(priv->regmap, MSR_CLK_REG0,
++			   MSR_RUN | MSR_ENABLE,
++			   MSR_RUN | MSR_ENABLE);
++
++	ret = regmap_read_poll_timeout(priv->regmap, MSR_CLK_REG0,
++				       val, !(val & MSR_BUSY), 10, 10000);
++	if (ret)
++		return ret;
++
++	/* Disable */
++	regmap_update_bits(priv->regmap, MSR_CLK_REG0, MSR_ENABLE, 0);
++
++	/* Get the value in multiple of gate time counts */
++	regmap_read(priv->regmap, MSR_CLK_REG2, &val);
++
++	if (val >= MSR_VAL_MASK)
++		return -EINVAL;
++
++	return DIV_ROUND_CLOSEST_ULL((val & MSR_VAL_MASK) * 1000000ULL,
++				     duration);
++}
++
++static int meson_clk_msr_best_id(struct meson_msr *priv, unsigned int id,
++				 unsigned int *precision)
++{
++	unsigned int duration = DIV_MAX;
++	int ret;
++
++	/* Start from max duration and down to min duration */
++	do {
++		ret = meson_clk_msr_measure_id(priv, id, duration);
++		if (ret >= 0)
++			*precision = (2 * 1000000) / duration;
++		else
++			duration -= DIV_STEP;
++	} while (duration >= DIV_MIN && ret == -EINVAL);
++
++	return ret;
++}
++
++static void meson_clk_msr_dump(struct udevice *dev)
++{
++	struct meson_msr *priv = dev_get_priv(dev);
++	unsigned int precision = 0;
++	int val, i;
++
++	printf("  clock                     rate    precision\n");
++	printf("---------------------------------------------\n");
++
++	for (i = 0 ; i < CLK_MSR_MAX ; ++i) {
++		if (!priv->msr_table[i].name)
++			continue;
++
++		val = meson_clk_msr_best_id(priv, i, &precision);
++		if (val < 0)
++			return;
++
++		printf(" %-20s %10d    +/-%dHz\n",
++		       priv->msr_table[i].name, val, precision);
++	}
++}
++
++static int meson_clk_msr_xlate(struct clk *clk, struct ofnode_phandle_args *args)
++{
++	/* This driver doesn't expose any clocks */
++	return -EINVAL;
++}
++
++static int meson_clk_msr_probe(struct udevice *dev)
++{
++	struct meson_msr *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->msr_table = (struct meson_msr_id *)dev_get_driver_data(dev);
++
++	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
++static struct clk_ops meson_clk_msr_ops = {
++	.of_xlate = meson_clk_msr_xlate,
++	.dump = meson_clk_msr_dump,
++};
++
++static const struct udevice_id meson_clk_msr_ids[] = {
++	{
++		.compatible = "amlogic,meson-gx-clk-measure",
++		.data = (ulong)clk_msr_gx,
++	},
++	{
++		.compatible = "amlogic,meson8-clk-measure",
++		.data = (ulong)clk_msr_m8,
++	},
++	{
++		.compatible = "amlogic,meson8b-clk-measure",
++		.data = (ulong)clk_msr_m8,
++	},
++	{
++		.compatible = "amlogic,meson-axg-clk-measure",
++		.data = (ulong)clk_msr_axg,
++	},
++	{
++		.compatible = "amlogic,meson-g12a-clk-measure",
++		.data = (ulong)clk_msr_g12a,
++	},
++	{
++		.compatible = "amlogic,meson-sm1-clk-measure",
++		.data = (ulong)clk_msr_sm1,
++	},
++	{ /* sentinel */ }
++};
++
++U_BOOT_DRIVER(meson_clk_msr) = {
++	.name		= "meson_clk_msr",
++	.id		= UCLASS_CLK,
++	.of_match	= meson_clk_msr_ids,
++	.priv_auto	= sizeof(struct meson_msr),
++	.ops		= &meson_clk_msr_ops,
++	.probe		= meson_clk_msr_probe,
++};
+
+---
+base-commit: e1b7717928eff69178604a400fe40dbf3287d9a1
+change-id: 20231113-uboot-meson-clk-msr-21cf9101278b
+
+Best regards,
 -- 
-Thanks and regards,
-Apurva Nandan,
-Texas Instruments India.
+Neil Armstrong <neil.armstrong@linaro.org>
 
