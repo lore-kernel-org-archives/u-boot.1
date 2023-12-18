@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AACC35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 06:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5132C46CA2
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 07:24:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FAB6877FE;
-	Mon, 18 Dec 2023 07:46:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F364787DCA;
+	Mon, 18 Dec 2023 08:24:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WFO7pB+c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OvhLb104";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5723A877FE; Mon, 18 Dec 2023 07:46:33 +0100 (CET)
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
+ id 3207E87DC7; Mon, 18 Dec 2023 08:24:54 +0100 (CET)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 790F287C14
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 07:46:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A411887D6C
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 08:24:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-464811e5b3cso1534291137.1
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 22:46:28 -0800 (PST)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6d7750e2265so162613b3a.3
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 23:24:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702881982; x=1703486782; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aXuyzRtg4+Ai+dDAvgnTTx5D8olQjGvQjtsLS+JC/fU=;
- b=WFO7pB+c9rgmmYR9/D/woGb4fIHLGzbKI/4WA4IhDn8sYK5MMhX8Qe8aBBT+Ww4ope
- zgMMOvaj/zs3V48vsQjr/r+Brj+6P4sezTEQXg4MejiH7wT4L1H4c9JiMqh+Z4KsMBoO
- L4FWmMqW2R7SeN6qug/yWo+3cQEDIH+qxR/lYwm7GatW9q8HV1vQ9ebgIrgFk2v1ubDN
- GIqE3gLnaTUcEn2gOLoYSrJdaAYMR7U7Yrz3maPI4AZOIX1bHOP3+a0pbAkwHpOsQxm+
- Mn9jFwWqYIfmijUONlWRX8zY1mPZHKo9PvYVF5jzF/fh0/hK+qBrxjPu+68fv0/slSZv
- a58g==
+ d=linaro.org; s=google; t=1702884287; x=1703489087; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=w/HINKxIMvGWAJbWWviwZdhPBcTtd4IbKCdKur7cKck=;
+ b=OvhLb104PioxDjS1PR+ufzgS0FNF4jv5luKVOtP0g4xd/d9pyjFrzL94Ox3I1xCjUc
+ Wdb6Y+1mYkvMD5g69rJqkzPoqVprf9YQyhki4tSIa/obtI+XMm8VVXLWIUsVeDfoD9rr
+ 3+G9CkYxBluCOcwGcZft0kaiF+/FtlvKllvsv4yaTMzdIYw27lyEG0YTEzIqoXjr6sxx
+ oVecwTnRYhMVnVkCMOZWwFB5EWLmiLASnHbsQA+YeA6p9kHDbjauUZyfzte622fkvJKp
+ FRbRGSzRaSMCnEql8bUIROGaapZ+ojtGri4evGH/Ghx62dOxDgrcZBSxkre5GVRYlcCO
+ h00w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702881982; x=1703486782;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1702884287; x=1703489087;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aXuyzRtg4+Ai+dDAvgnTTx5D8olQjGvQjtsLS+JC/fU=;
- b=XV0z/A6CTAjrg9nS30zZbezRq1vCX1ZbfmtVpWBv5FL/7KcAZGSY9iM2kbOH8X8pKx
- LqFsAxvD2HecO52j+D3BXD81QXNGNhqnOjTQ+VKxpSZPaxtTiyAOvNQmoK7Bc09YMMl7
- gLwrzPSEDY7tKu7cJTmDBJukfTBBYG/FC+K+gAhzM9nG5os+a6lmCsTrWpQ8cS21HiTo
- zvYo4eI92gxxqrzLIoKY+7eYUczSvDukeiaa8yePBXSbTlqAFBnUnL1NXdCfLRJC11HV
- JhpaBz834XGEpJw53S9mg5mjaVBo0tCci3jObO+hMTeEMC9lXdikHSog2VRqTipAv+s1
- ybpQ==
-X-Gm-Message-State: AOJu0YyBI9cJ2s4NhRGbFvXgB3l2udU1BXIj/JBoM0TJODwehSL70GL0
- rFozI/hI7DyjgfLnNGSo5i593lnHU+L/D1NLpwNJHg==
-X-Google-Smtp-Source: AGHT+IEh0f2Zh5kMNzCsOrQWJz4RFNvVZQNLBS0NxnrIt7AOZJC9udA0Ui3v+UDSH0yMmcaWvaY6pAle2Bl7vt2/+8E=
-X-Received: by 2002:a67:fdcf:0:b0:466:88e5:c563 with SMTP id
- l15-20020a67fdcf000000b0046688e5c563mr1427365vsq.0.1702881982104; Sun, 17 Dec
- 2023 22:46:22 -0800 (PST)
-MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <287883d6-ff1d-4172-bdab-476e880fa8b7@linaro.org>
- <20231214182328.GQ2513409@bill-the-cat>
- <CAL_JsqKTTL2jZfom2J+2Z_vLCS=LgZdaZ198-4yxZ-U1cW-hCg@mail.gmail.com>
- <0a143e84-5379-4455-b3c8-dc97beb9514c@linaro.org>
- <20231215133743.GV2513409@bill-the-cat>
- <20231215-sputter-puzzle-128dc9f85d73@spud>
- <20231215191954.GA2513409@bill-the-cat>
-In-Reply-To: <20231215191954.GA2513409@bill-the-cat>
+ bh=w/HINKxIMvGWAJbWWviwZdhPBcTtd4IbKCdKur7cKck=;
+ b=tI4ilLt9qAW1uvzToNb1/GPQKCu19wLhkw4eP3zxhvI4ATgF0OUos+VAtx+kFDbPjz
+ EqMi3xtVnFWW2bv296PhD7R3XVhGuXwUq6eVAkex72qTd6jHXAqzK+Vxw73kIX/z+oXM
+ DzSO1MHHQt6b2iEBmXb7X4wvKCmOUvChBlL1WWih6KqUyQWy7bSb2ArmR38wmQsY3xRW
+ DroEC4K0aPA7XAQGzxHWhFJtpt3Q/HWMz9dn9EwMxYyzozrPdm9GTRsHJLfHhGdLJz79
+ 68sG1qa1zTwHqXzqiI3igeHdoE2n6MNWrRLArX0YPugTQUeKSm1qYN2jS3Oov9YQsQnU
+ em6A==
+X-Gm-Message-State: AOJu0YyI/Adzq5IL2MPkthovwJl/Iy2WmmWLSX6Tayo4yQ9tJFVDeIUc
+ nWSWBvAPcy+9FnhkL7dFuEmxBKD+iBBQMW9qyfBK7Q==
+X-Google-Smtp-Source: AGHT+IFCxc9MpjPYRG63rYVADRRZg6rwE4JJzNhj98P0qcE/BZCDqQG1kYxXYnbkcHMV4l2UU7/95A==
+X-Received: by 2002:a05:6a20:1445:b0:194:7a99:2791 with SMTP id
+ a5-20020a056a20144500b001947a992791mr99759pzi.72.1702884287585; 
+ Sun, 17 Dec 2023 23:24:47 -0800 (PST)
+Received: from sumit-X1.. ([223.178.213.6]) by smtp.gmail.com with ESMTPSA id
+ nr21-20020a17090b241500b0028b8b269aedsm1038997pjb.57.2023.12.17.23.24.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 17 Dec 2023 23:24:46 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 18 Dec 2023 12:16:10 +0530
-Message-ID: <CAFA6WYM3mybKOm_F_J4knCDJ5bn7gwL8=vQPYXL_AhtEmRwL=g@mail.gmail.com>
-Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
- U-boot
-To: Tom Rini <trini@konsulko.com>
-Cc: Conor Dooley <conor@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, 
- Rob Herring <robh+dt@kernel.org>, neil.armstrong@linaro.org,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org, 
- krzysztof.kozlowski+dt@linaro.org, caleb.connolly@linaro.org, 
- ff@shokubai.tech, daniel.thompson@linaro.org, dgilmore@fedoraproject.org, 
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, 
- b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com, 
- seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com, 
- jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: u-boot@lists.denx.de
+Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, lukma@denx.de,
+ seanga2@gmail.com, marex@denx.de, laetitia.mariottini@se.com,
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com,
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH 0/7] Add SE HMBSC board support
+Date: Mon, 18 Dec 2023 12:54:21 +0530
+Message-Id: <20231218072428.1802969-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,105 +91,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 16 Dec 2023 at 00:49, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 15, 2023 at 02:45:11PM +0000, Conor Dooley wrote:
-> > On Fri, Dec 15, 2023 at 08:37:43AM -0500, Tom Rini wrote:
-> > > On Fri, Dec 15, 2023 at 08:50:51AM +0100, Krzysztof Kozlowski wrote:
-> > > > On 14/12/2023 20:48, Rob Herring wrote:
-> > > > >>
-> > > > >> I think some of the important questions to ask are, how often / likely
-> > > > >> are the breakages to occur? It seems like these days it's either:
-> > > > >> - U-Boot had an early version of the binding and we already state we
-> > > > >>   don't support backwards compatibility here. It should be on the
-> > > > >>   maintainer to be proactive in this case.
-> > > > >> - It's a "the DT was wrong about the hardware, sorry not sorry it's an
-> > > > >>   incompatible DTS change now". This too is hopefully the kind of thing
-> > > > >>   that at least board maintainers will be more actively aware of needing
-> > > > >>   to deal with in U-Boot, if it's really a problem.
-> > > > >
-> > > > > A common issue in the kernel is with forward compatibility when
-> > > > > platforms add new resources from a new provider. Then the kernel
-> > > > > expects a driver for the provider and waits for the dependency. Of
-> > > > > course, older kernels don't have that provider driver and so the
-> > > > > dependency is never met. Not sure if u-boot will have similar issues?
-> > > > > At least you should/could know if the provider driver exists or not.
-> > > > > (The kernel doesn't because modules.)
-> > > >
-> > > > If some U-Boot platform decides to aggressively sync with kernel DTS,
-> > > > then probably the kernel subarch maintainer should be aware of it.
-> > > > Mentioned forward compatibility issue is a result of assumption that
-> > > > there are no out-of-tree upstream consumers of our DTS. I am certainly
-> > > > not aware of any such consumer for Samsung. If someone told me (me
-> > > > wearing Samsung hat), hey U-Boot now cares, I would start caring as well.
-> > > >
-> > > > The usual argument of contributors wanting to break the backward and
-> > > > forward compatibility, is "there is no other OS depending on this"
-> > > > (recent discussion with Johan about order of interrupts:
-> > > > https://lore.kernel.org/all/ZWcPZPX-eT-xHAOv@hovoldconsulting.com/ ).
-> > > > You need to tell the maintainers of that platform, that now they have
-> > > > other OS/firmware/bootloader depending on DTS compatibility.
-> > >
-> > > I think this hints at one of the bigger impacts this might have.
-> > > Reminding everyone that other projects do use the device trees and have
-> > > for years.
-> >
-> > TBF, we do try to ask these questions as much as possible, usually (for
-> > me at least) citing U-Boot or the BSDs as users. It largely seems to me
-> > like we are all bark and no bite though, so a project like U-Boot having
-> > a defined "schedule" as you suggest below would add more meaning to our
-> > questioning.
-> >
-> > > Without rehashing history, BSD does use the trees as-is and
-> > > for platforms U-Boot supports they are supposed to be re-synced
-> > > periodically.
-> >
-> > I know this is the theory, but I also know that how well this is
-> > implemented varies wildly per-platform. I generally don't pay all
-> > that much attention to the various arm platforms, but I do pay
-> > attention to what's going on for RISC-V and there appear to be no
-> > active maintainers of individual platforms and the architecture
-> > maintainers are not aware of the status of the equivalent patches
-> > for Linux when they apply patches.
-> >
-> > In recent memory, this has lead to the clock indices in the DT
-> > differing between U-Boot and Linux for one such platform, which, IMO,
-> > is an insidious difference that is hard to spot during review and highly
-> > unlikely to crop up while comparing dts files, since the defines were named
-> > identically. To be clear, I am not expecting the architecture code
-> > maintainers to be aware of the minutiae of the various RISC-V platforms,
-> > but rather suggesting they might have an easier time reviewing if both
-> > projects' dts files and binding headers were tied together.
-> >
-> > That said, automatically synced devicetrees will, as has been pointed out,
-> > require the platform maintainers in Linux to be more aware of the affect of
-> > what they accept on other users, but it will also require the equivalent
-> > maintainers on the U-Boot side to engage too, so that the "upstream" dts
-> > files do not change in a way that screws the usecase in U-Boot.
->
-> Yeah, it will hopefully lead to better coordination between maintainers
-> in some places. There are SoCs where the kernel DTS people are the
-> U-Boot DTS people too. All in all, I should probably CC more people than
-> I usually do on these resync patches just to try and head off any
-> tricky changes like you've mentioned above.
+SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
+difference from db410c is serial port where HMIBSC board uses UART1 as
+the debug console with an RS232 port, patch #1 - #3 adds corresponding
+driver support.
 
-Makes sense.
+Patch #4 adds main HMIBSC board specific bits, features:
+- Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+- 2GiB RAM
+- 64GiB eMMC, SD slot
+- WiFi and Bluetooth
+- 2x Host, 1x Device USB port
+- HDMI
+- Discrete TPM2 chip over SPI
 
->
-> > Also, if people send fixes to the U-Boot copies of these devicetrees,
-> > would the plan be to request that these are sent to Linux and the fixes
-> > pulled in via a resync after each -rc release of Linux (or similar, just
-> > throwing some example schedule out there)?
->
-> The way we've always tried to operate is that changes should be pushed
-> to Linux and resynced down, or at least submitted simultaneously. If
-> there's some specific bugfixes that need to come in out of cycle I
-> _think_ subtree handles cherry picked commits in a reasonable fashion.
->
+Patch #5 - #7 enables specific board features like RAUC support,
+environment protection and USB networking support.
 
-Agree.
+This patch series is based on top of Qcom maintainer tree [1] + the latest
+PMIC patch-set [2]. Feedback is very much welcome.
 
--Sumit
+[1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/u-boot-qcom-next?ref_type=heads
+[2] https://patchwork.ozlabs.org/project/uboot/list/?series=385322
 
-> --
-> Tom
+Sumit Garg (7):
+  clk: apq8016: Add support for UART1 clocks
+  serial_msm: Add support for RS232 GPIOs
+  serial_msm: Enable RS232 flow control
+  board: Add SE HMIBSC board support
+  hmibsc: Enable RAUC support
+  hmibsc: enable U-Boot Environment variables protection
+  hmibsc: Enable LAN75XX USB ethernet driver
+
+ arch/arm/dts/Makefile              |   1 +
+ arch/arm/dts/hmibsc-uboot.dtsi     |  43 +++++++
+ arch/arm/dts/hmibsc.dts            | 188 +++++++++++++++++++++++++++++
+ arch/arm/mach-snapdragon/Kconfig   |  18 +++
+ arch/arm/mach-snapdragon/Makefile  |   1 +
+ board/schneider/hmibsc/Kconfig     |  15 +++
+ board/schneider/hmibsc/MAINTAINERS |   6 +
+ board/schneider/hmibsc/Makefile    |   5 +
+ board/schneider/hmibsc/hmibsc.c    | 179 +++++++++++++++++++++++++++
+ board/schneider/hmibsc/hmibsc.env  |  11 ++
+ configs/hmibsc_defconfig           |  79 ++++++++++++
+ drivers/clk/qcom/clock-apq8016.c   |  44 ++++++-
+ drivers/serial/serial_msm.c        |  23 +++-
+ drivers/usb/host/Kconfig           |   1 +
+ include/configs/hmibsc.h           |  59 +++++++++
+ 15 files changed, 665 insertions(+), 8 deletions(-)
+ create mode 100644 arch/arm/dts/hmibsc-uboot.dtsi
+ create mode 100644 arch/arm/dts/hmibsc.dts
+ create mode 100644 board/schneider/hmibsc/Kconfig
+ create mode 100644 board/schneider/hmibsc/MAINTAINERS
+ create mode 100644 board/schneider/hmibsc/Makefile
+ create mode 100644 board/schneider/hmibsc/hmibsc.c
+ create mode 100644 board/schneider/hmibsc/hmibsc.env
+ create mode 100644 configs/hmibsc_defconfig
+ create mode 100644 include/configs/hmibsc.h
+
+-- 
+2.34.1
+
