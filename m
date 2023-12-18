@@ -4,76 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9592C35274
-	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE466C35274
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 13:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DA0287DD0;
-	Mon, 18 Dec 2023 14:54:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A5F987DF6;
+	Mon, 18 Dec 2023 14:55:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OesBIe6o";
+	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="G0H43pqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C5A187DD0; Mon, 18 Dec 2023 14:54:49 +0100 (CET)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 86E6087682; Mon, 18 Dec 2023 14:52:53 +0100 (CET)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48D9187E23
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:54:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 77A0D86FBD
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 14:52:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-590bb31ccf5so2390539eaf.3
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 05:54:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702907686; x=1703512486; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qHXdqXWizK2NzGBbhWfsWlxZtiOM9CipfRsYjvx/yoc=;
- b=OesBIe6o88q2MdabsIxKPJTmFhZCswkoNPLgg84HiRKxzRNOu5+q0K5dPURCVrfHb8
- +T+I+1//AZ1s3hGwoELEtYCUB16bj88GMTMk0lcbKBKbO013BzS5bF47FGksuSj/+0Dr
- 4PWDF8Mro07ULhO2vFVWfMpJ5vH0TGXP2bktDKrXvgYwnik7yNSMaCeDxqw84c/LvcIS
- A4uHLA0Your4AskJ3ysxvF8X9EIcq7lmeakCO79zNk77QkD5C8PBPg6CpOpY5/n+lJBR
- XwZLKaZ0uC66s8hFuAp7WfzsVpgeiPkLqSbyJfzbMbOgKzwDZla5atxLEWqYYKQf1Fl3
- zgbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702907686; x=1703512486;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qHXdqXWizK2NzGBbhWfsWlxZtiOM9CipfRsYjvx/yoc=;
- b=M5AF/BliHS348MR9ZNMtQXUi7dHwmZ/pznqa57HyvgsLNB9ymFHxZCR+wmNPOCKULp
- MMvSvLBnTKhLheCIAwiMfzBTm6My0U9B3MZR7Tnb1tvZaC01NxMon7errI2H0Pku/fbJ
- jylHbYmCqVBEFGbwKiK5pezw5f1iEZyHcSgplviBR9mVik71b7sAYpW0yHpq0l5LNJyd
- cdHetYbn/oYfEvB6nuflf7955FtmQkcl2YLwLpHlpjibtc4AUt4ijuW8SzL2kHXcJ/wQ
- AXun6ieHj0ebUbDnJHch20D4y9Boz5H2177yd6phjF2fVkFfG4jN+fi9qL2RJXqwszLE
- m2mA==
-X-Gm-Message-State: AOJu0Ywk8EGYt1FSkg1RiWikhUWdzXCv025hlPvvI7pWmwTt1rAe94Ll
- ehPEwpgzfT0f6SOJT86Y1djLquaHuIy610VGoX8=
-X-Google-Smtp-Source: AGHT+IH4bTLSq/CyTFROTCNIhenO/onhbYvo8OcSVv0pYeaP9ICPLiGMod/ZXSf2eN6oUDUoWTURETmapTCQuPoxG5A=
-X-Received: by 2002:a4a:b005:0:b0:590:aaff:e4a5 with SMTP id
- f5-20020a4ab005000000b00590aaffe4a5mr11045870oon.19.1702907685931; Mon, 18
- Dec 2023 05:54:45 -0800 (PST)
+ spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
+ [127.0.0.1])
+ by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 05AA1A0AB8;
+ Mon, 18 Dec 2023 14:52:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :from:from:message-id:mime-version:reply-to:subject:subject:to
+ :to; s=mail; bh=tONiAqFGkhdDFiXJp5XANfX9NuMMAJMn8osdGtJGwM0=; b=
+ G0H43pqU0FYAkY2UWWWrWgw2cjt0XkKasrUXS+3F86GwwXvRZ3fGr2kc7oVGG4oh
+ gGqD+tcJM6kRT90KSnjX7pVUcH2wMlIDUlgyjN4Tf+cQ+lHz8P45NZG4oZK+YW/S
+ OU7NGsYn0+yZ19rIHjNUlvi1L70JANFeZP06hel5JGT52kVBucoT1miMVRV5AjxF
+ MyRAeX9Z8ptkCzfc0Pf0aEaC1f6rW/KNPckTwrZviK3v5Q15Asbe+HoH2a7xxBY1
+ WUg4g4fzJO87lbuHvbm1KNCrat/AmGgEI/O5HScGrig4vnU/BOAm13Y9m7Firzg2
+ qyGWJb/0+qaAumhzEeFaPSFaZIK7YMiPTPQwIY+cSnLKWCCOaiR1WrB+C1gpISqg
+ GB7Y/WguopIuI/HmvSCYPz9al3mTd/FScqcr4DCfCEE6aN2RaERLZwsxfvTaiMkb
+ pK/TtsjwQZ0oQIb9nMl+mieUst2HuKTvzwTjPiynaGOSuYkP5qeffpNiSE37x3uH
+ igPSY0I7MfCOrlxvUnRauMK2ptbZIVhDbJwRm/rIoRYwWn8Mk8jvjigCX2c/Dn4g
+ GUHexZHAKEra3geSTWogx6IjPenLoY1JUkqX4e3rjQ5+e7ICG+tLVZy8x40On2u4
+ M3necWK5cKV3Ep/Na3tujeX/SNMYAhfH1aAbb4DU3dQ=
+From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?=
+ <csokas.bence@prolan.hu>
+Subject: [PATCH] arm: spl: Use separate fault handlers instead of a single
+ common one
+Date: Mon, 18 Dec 2023 14:52:37 +0100
+Message-ID: <20231218135236.12542-1-csokas.bence@prolan.hu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20231213211125.279880-1-marex@denx.de>
- <20231213230622.GT2513409@bill-the-cat>
-In-Reply-To: <20231213230622.GT2513409@bill-the-cat>
-From: Ramon Fried <rfried.dev@gmail.com>
-Date: Mon, 18 Dec 2023 15:54:35 +0200
-Message-ID: <CAGi-RUJGLxQ2aT4rQidE=SnK4o2CrXQFHPs5ChF9aQYO0b6yrQ@mail.gmail.com>
-Subject: Re: [PATCH v2] net: wget: Support non-default HTTP port
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Duncan Hare <DuncanCHare@yahoo.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-ESET-AS: R=OK; S=0; OP=CALC; TIME=1702907567; VERSION=7966; MC=8498122;
+ ID=112695; TRN=0; CRV=0; IPC=; SP=0; SIPS=0; PI=3; F=0
+X-ESET-Antispam: OK
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29CE70385C6D7D66
+X-Mailman-Approved-At: Mon, 18 Dec 2023 14:55:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +78,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 14, 2023 at 1:06=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Wed, Dec 13, 2023 at 10:11:13PM +0100, Marek Vasut wrote:
->
-> > Currently the wget command is hard wired to HTTP port 80. This is
-> > inconvenient, as it is extremely easy to start trivial HTTP server
-> > as an unprivileged user using e.g. python http module to serve the
-> > files, but such a server has to run on one of the higher ports:
-> > "
-> > $ python3 -m http.server -d $(pwd) 8080
-> > "
-> >
-> > Make it possible to configure HTTP server port the same way it is
-> > possible to configure TFTP server port, using environment variable
-> > 'httpdstp' (similar to 'tftpdstp'). Retain port 80 as the default
-> > fallback port. This way, users can start their own trivial server
-> > and conveniently download whatever files they need into U-Boot.
-> >
-> > Signed-off-by: Marek Vasut <marex@denx.de>
->
-> Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> --
-> Tom
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
+Add a Kconfig option to separate the different handlers into their own individual infinite loops.
+
+Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
+---
+ arch/arm/Kconfig       |  9 +++++++++
+ arch/arm/lib/vectors.S | 18 ++++++++++++++++++
+ 2 files changed, 27 insertions(+)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 328e2ddc33..a6ddbad30c 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -79,6 +79,15 @@ config SPL_SYS_NO_VECTOR_TABLE
+ 	depends on SPL
+ 	bool
+ 
++config SPL_USE_SEPARATE_FAULT_HANDLERS
++	bool "Use separate fault handlers instead of a single common one"
++	depends on !SPL_SYS_NO_VECTOR_TABLE && !ARM64 && !CPU_V7M
++	help
++	  Instead of a common fault handler, generate a separate one for
++	  undefined_instruction, software_interrupt, prefetch_abort etc.
++	  This is for debugging purposes, when you want to set breakpoints
++	  on them separately.
++
+ config LINUX_KERNEL_IMAGE_HEADER
+ 	depends on ARM64
+ 	bool
+diff --git a/arch/arm/lib/vectors.S b/arch/arm/lib/vectors.S
+index 7cf7d1636f..a14bca6fb8 100644
+--- a/arch/arm/lib/vectors.S
++++ b/arch/arm/lib/vectors.S
+@@ -138,11 +138,29 @@ _fiq:			.word fiq
+ #if !CONFIG_IS_ENABLED(SYS_NO_VECTOR_TABLE)
+ 	.align	5
+ undefined_instruction:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	undefined_instruction
++#endif
+ software_interrupt:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	software_interrupt
++#endif
+ prefetch_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	prefetch_abort
++#endif
+ data_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	data_abort
++#endif
+ not_used:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	not_used
++#endif
+ irq:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	irq
++#endif
+ fiq:
+ 1:
+ 	b	1b			/* hang and never return */
+-- 
+2.25.1
+
+
