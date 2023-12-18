@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1744AC3DA6E
-	for <u-boot@archiver.kernel.org>; Sun, 17 Dec 2023 18:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52549C3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 18 Dec 2023 02:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 263ED87D42;
-	Sun, 17 Dec 2023 19:41:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 590DA87CD4;
+	Mon, 18 Dec 2023 03:39:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cMWR7kpu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vHUPq0F7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C680487D3A; Sun, 17 Dec 2023 19:41:16 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id D922987CE6; Mon, 18 Dec 2023 03:39:02 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61BAD87D34
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 19:41:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 163B887CB2
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 03:39:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5df49931b4eso17158037b3.0
- for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 10:41:14 -0800 (PST)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1d3b84173feso1328705ad.1
+ for <u-boot@lists.denx.de>; Sun, 17 Dec 2023 18:38:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702838473; x=1703443273; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Nou3vAKJn3YoQS92MhifJbQERe/ApRpEl5l75nJUR4M=;
- b=cMWR7kpu6VSNUNh7oxr0gKfOQKTU4X408E+DN/AGVZTuFMHO/vuRTlZ0L5TbUMvlvN
- FMTTwlnvgUqCEOJFr7D0vJbfonvb1Scneo+s8860SoMIlTBD7sPsoFlAMTEN8qUk4UbI
- PcEK6jelNCWaLXsgZuavrpQnrcrt8u1oRoHlM=
+ d=linaro.org; s=google; t=1702867138; x=1703471938; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=sNrJrXKjkpK+OKpLFB+1wnXI02qAudN/5Q+vKHOIFTk=;
+ b=vHUPq0F7Q70+ukgiYG8XEFvUhZJzaSjUkduwmvGyIHvenPKg1YVLjECZZpSUR+xXgY
+ rKvm3hSVkKq+6aBIKplIo/yLc2Ndp3aKMM6gysGVSrMlCxfoyRij4L1L3VYou4HKLIyN
+ +0JrhgqPVSDlvp0uIGirsKexrjm3c4i+xzQh9W5FFak8mrsm1HChbVCCzB3nw88mlkIu
+ x2kVCc44gcUsgvWgCDNIgMQn2uZJvzfU0bArY4hPNEAgV3/wC4aohwM6ZSd4I+mLxxXh
+ N9MepR57epBcghsbbbXdlwUhj95p3FkVB0y2uGXcrq8M2uwDPPKqJ+VykHxfUxxlRh9I
+ 1hiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702838473; x=1703443273;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Nou3vAKJn3YoQS92MhifJbQERe/ApRpEl5l75nJUR4M=;
- b=EOmLhMy6U6CtLbywfNi5v1xabF+KG8BeuF2Z8uMrpZwHbSN4UNzDZP6SnRgTa5Rbld
- SpvO8z1OKYi+El09WHBnvIc17/ZX6yK+3XBKLXedntVg25D9CAUeBxkHUxX8TO5j61SZ
- zl9OB5gtaUZdFxkViwh3UX6Gis7/EICIfY6lM+Le0LbGR8J0I+9fBDnLAXjVCZSZgyVc
- Qqa77CtmHwIGZ79yLjEAZdrKDjxcEMSL8gC/HtvdUt1uSrVVLL8OTM3JHHP+k8WeizO8
- q9xra+94B5Rqvo40ctEQkulZR8yIkw4IoYiJBekAiu/9yIStfDF6IL3NTE67eEMTasQE
- bkow==
-X-Gm-Message-State: AOJu0YzifjH9wPA2Rwa5RVqcei/0Wb7UWvpVKdvvj4B1tfZgx7wAAoOk
- eq8Gux1CcD19bD5b2l29LYb9Bg==
-X-Google-Smtp-Source: AGHT+IFpY4Oic6Q4Ceeb1+m02XjBt0FJQz143Fi9BVTERKRusW7BZzRS0PuKzF2MHq7ZtfWlt8+fxw==
-X-Received: by 2002:a81:df06:0:b0:5d4:b7a:ebfc with SMTP id
- c6-20020a81df06000000b005d40b7aebfcmr12328826ywn.22.1702838473131; 
- Sun, 17 Dec 2023 10:41:13 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-c7d6-a760-1f4b-e321.res6.spectrum.com.
- [2603:6081:7b00:6400:c7d6:a760:1f4b:e321])
+ d=1e100.net; s=20230601; t=1702867138; x=1703471938;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sNrJrXKjkpK+OKpLFB+1wnXI02qAudN/5Q+vKHOIFTk=;
+ b=ll6Vhd34D5vd51Vc+Y4+WdI6Qeq1sbX1V1D4Qf9b5BycjKG4wA6DwzC0Dzn47hSGxn
+ fBq/EUg0aLmFlPZnJx+09Ah9g5ylWUZh7qjgnfDJeSImCzEhM++Xjj5a+RwP4l8USP0P
+ dSRzKjljEPGRNYqHrAJ/yDGXtlV0N3zGNsy6ULhb1uOi4i3MoIxyMRfKAnjjgmo7xGQg
+ FCDv/Q0eVFC8imvQYiZEisgKi1Nlj6AIySBIxGi/ge2m7DTib3Mgq4QEbN3XAhEb0KqS
+ E7o5fh75+O1W9smWphPqjLcOAzWsAPPR88MZTgtWYucAARDPoc+t+HTHZCOZx39w67F7
+ 3DrQ==
+X-Gm-Message-State: AOJu0Yy9MerbQa/6W9FsrNrvMK81Pg1EM4cEN8qConP9koryzQkIphZy
+ joPJXGgfoJMnbwOSJHBgq5ATNQ==
+X-Google-Smtp-Source: AGHT+IGM4pPc5IoojSf88JUw3C17n3PGmPJj9w7g77BqW90roRB9H9wG1QHkdqoZs32OR9HcnDT8Rg==
+X-Received: by 2002:a17:902:d48b:b0:1d0:73ca:660 with SMTP id
+ c11-20020a170902d48b00b001d073ca0660mr31776140plg.4.1702867138261; 
+ Sun, 17 Dec 2023 18:38:58 -0800 (PST)
+Received: from octopus.. ([2400:4050:c3e1:100:a448:a260:721d:a9f0])
  by smtp.gmail.com with ESMTPSA id
- p135-20020a25d88d000000b00dbccd3a2d02sm3756208ybg.55.2023.12.17.10.41.12
+ w24-20020a1709029a9800b001d316770044sm13754305plp.56.2023.12.17.18.38.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Dec 2023 10:41:12 -0800 (PST)
-Date: Sun, 17 Dec 2023 13:41:10 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH 10/10] Makefile: Use the fdtgrep -u flag
-Message-ID: <20231217184110.GE2513409@bill-the-cat>
-References: <20231217163627.2339802-1-sjg@chromium.org>
- <20231217163627.2339802-11-sjg@chromium.org>
+ Sun, 17 Dec 2023 18:38:57 -0800 (PST)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de,
+ ilias.apalodimas@linaro.org
+Cc: u-boot@lists.denx.de,
+	AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v3 0/4] cmd: bootefi: refactor the code for bootmgr
+Date: Mon, 18 Dec 2023 11:38:38 +0900
+Message-Id: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+MoG8WGCPtFOgo0E"
-Content-Disposition: inline
-In-Reply-To: <20231217163627.2339802-11-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,67 +90,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch set is motivated by the discussion[1] regarding
+CONFIG_BOOTEFI_BOOTMGR option.
 
---+MoG8WGCPtFOgo0E
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+# It has been partially merged in -next branch. So this version (v3)
+# contains only the remaining commits.
 
-On Sun, Dec 17, 2023 at 09:36:23AM -0700, Simon Glass wrote:
-> Use this flag so that the bootph binding is obeyed correctly.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/12
+At the end, bootefi.c will be decomposed into two parts, one for
+providing the command itself and one for implementing helper functions.
+EFI_LOADER will now be available without CONFIG_CMDLINE or specifically
+CONFIG_CMD_BOOTEFI if invoked via bootmeth/bootstd.
 
-First of all, yay, this will I believe unblock upstreaming of these
-properties.
+Then, EFI_LOADER library side will be further split into two options
+for fine-grain control:
+CONFIG_EFI_BINARY_EXEC: execute UEFI binaries which are to be explicitly
+    loaded by U-Boot's load commands/functions or other methods
+    (like a jtag debugger?)
+    It supports bootmeth_efi as well as "bootefi <addr>|hello"(/"bootm"?).
 
-> ---
->=20
->  scripts/Makefile.lib | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 8dc6ec82cd56..21b1f7daa72c 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -631,7 +631,7 @@ fdtgrep_props :=3D -b bootph-all -b bootph-pre-ram $(=
-migrate_spl)
->  endif
->  endif
->  quiet_cmd_fdtgrep =3D FDTGREP $@
-> -      cmd_fdtgrep =3D $(objtree)/tools/fdtgrep $(fdtgrep_props) -RT $< \
-> +      cmd_fdtgrep =3D $(objtree)/tools/fdtgrep $(fdtgrep_props) -u -RT $=
-< \
->  		-n /chosen -n /config -O dtb | \
->  	$(objtree)/tools/fdtgrep -r -O dtb - -o $@ \
->  		-P bootph-all -P bootph-pre-ram -P bootph-pre-sram \
+CONFIG_EFI_BOOTMGR: provide EFI boot manger functionality
+    It supports bootmeth_efi_mgr as well as "bootefi bootmgr".
 
-Maybe we need to expand / add some comment here? In practice right now
-I don't think we have an issue in that say "keep-power-in-suspend" is
-already not being included in these special subset trees, but we want to
-I think at least make it clear for future users what unexpected things
-might happen.
+As such, We will no longer need CONFIG_EFI_BINARY_EXEC if we want to only
+make use of the UEFI boot manger for booting a next stage OS.
 
---=20
-Tom
+Prerequisite
+============
+This patch set is based on top of Tom's latest "next" branch.
 
---+MoG8WGCPtFOgo0E
-Content-Type: application/pgp-signature; name="signature.asc"
+Tests
+=====
+* run UT efi_selftest on sandbox locally
+* run test_efi_bootmgr on sandbox locally
 
------BEGIN PGP SIGNATURE-----
+Unfortunately, I could not submit a pull request for CI test.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmV/QMYACgkQFHw5/5Y0
-tyyBPQv8DB6D4JLeyz6VISKMM3bGS1oVJ90mqIdfnJkBMToVgpmLJYXacFfMt2JT
-lcgIyQ36DNqyopu7pnYkEknz1yt9sKrHZRrXFpSK4YzxFgNFf/heyEmGHiqob/+P
-p6Rfeui1yPS4sVNUMCITNThRR1WAbDmkSgTjAYAr2d3Itt5EBsd/w01lTv6KeFd3
-Ibnt+zyGsVdQst9GUmOK7LzAr94V2VPYXl5Qlez9nHfwv+XFWADaAGMQ7odkqTrx
-Iq5gvS5wjnaFbO5YcufwIJ66Cp8zweS51do+kGwBMmIMwOJxmVsFPOFNFBteRdJE
-fXhSEowj3vm0nbJTLP06bx3+d35jto5VYXMQfTyHb37lZA0Zb7flkZ9BjcXqfwkj
-bjyi+cIO3OJ1NMWee3K1hSrZT/9I4wwwkB2J8FF+4IS+H68dGnuZZIf5yEQs6QTu
-F2xZDu9MZSb8hXF/MszBAzdGVevX0jpGmUoBkyDlt5HaAkZIZZfOBAannjFWxzK8
-1wJiAfMd
-=6bxA
------END PGP SIGNATURE-----
+Changes
+=======
+v3 (Dec 18, 2023)
+* rebased onto Tom's latest next branch
+* remove already-merged commits
 
---+MoG8WGCPtFOgo0E--
+v2 (Nov 21, 2023)
+* rebased onto Tom's next branch
+* remove already merged commits
+* revise commit messages
+* add patch #5 which was split from ex-patch#5
+RFC (Oct 26, 2023)
+
+[1] https://lists.denx.de/pipermail/u-boot/2023-October/534598.html
+
+AKASHI Takahiro (4):
+  efi_loader: split unrelated code from efi_bootmgr.c
+  efi_loader: rename BOOTEFI_BOOTMGR to EFI_BOOTMGR
+  net: tftp: remove explicit efi configuration dependency
+  fs: remove explicit efi configuration dependency
+
+ boot/Kconfig                     |   4 +-
+ boot/Makefile                    |   2 +-
+ cmd/Kconfig                      |  10 +-
+ cmd/efidebug.c                   |   4 +-
+ fs/fs.c                          |   7 +-
+ include/efi_loader.h             |  28 +-
+ lib/efi_loader/Kconfig           |  11 +-
+ lib/efi_loader/Makefile          |   2 +-
+ lib/efi_loader/efi_bootmgr.c     | 493 ------------------------------
+ lib/efi_loader/efi_device_path.c |   3 +-
+ lib/efi_loader/efi_helper.c      | 499 ++++++++++++++++++++++++++++++-
+ net/tftp.c                       |  10 +-
+ test/boot/bootflow.c             |   2 +-
+ 13 files changed, 544 insertions(+), 531 deletions(-)
+
+-- 
+2.34.1
+
