@@ -4,68 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63BEAC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:16:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4C9C46CA2
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:17:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5B1C87032;
-	Tue, 19 Dec 2023 17:16:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DDD9D87561;
+	Tue, 19 Dec 2023 17:17:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BgtfNdpd";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="WJfxQSJc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEB1F8700D; Tue, 19 Dec 2023 17:16:31 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 92C108751B; Tue, 19 Dec 2023 17:17:07 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::62b])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 554838743A
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:16:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AB1D87561
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:17:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marietto2008@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a235eb41251so304435866b.3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:16:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703002588; x=1703607388; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Rbw0qiH29KhuJH/5Ij75WrRnuxQU+FAbyKVmQAvsW4w=;
- b=BgtfNdpdy2c3DbJ5tD3CKUdajQVI7eIfzCKlMLYeseBFCymORz5hxKEePVcKLtVgZi
- Y2PeIR66ax17GuV3R53Iy9KJpju0/OE9G9TyM7Qx7tftY3NlbhJHHlrB/mwrqgTDUrnQ
- thvB9yqxFgNPW1IyIy3mmrmlt6kE3h44nb/3MmwqhhdID4kjK/cPqzxKugbOyZNqEtXP
- SziUgaLNb8nkbhF5JCiB7+qdXPb71ZsdNgrShBd5q3lEGg11rXnwcjL6/T06Z1f7d+ZC
- X/wrXtg4jn+KYvIWUR8bimFv8pGasQAl293ND0hNIUulXE6qFVvrZuAL74i9nXy/QBhi
- 6jSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703002588; x=1703607388;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Rbw0qiH29KhuJH/5Ij75WrRnuxQU+FAbyKVmQAvsW4w=;
- b=twon7ZAYuBSG2ZH3sOuplL6vfs4T+3SIzWmb8tv668U2/w8cyvF7n4WrPMJPxttYn3
- Cl6D2MgZtM/vdWVov1Y01kKfs6OuEiFtmUudUhDlg08TfEYCfDc9AF5yVuWfzjPLD0c2
- 6Ix3THZn2l++0ze3olYIso7XfP/gtMB2grMVSSu98GYxJlOlBoBzUiCAmCIAI+3Ohtwo
- uYCIIR9OQrrKDGGhzijQP2u2Mmk7mEXuHdVJsGJSzFpQbdr83u5qXClTRBTf8siFKnPh
- E88VQsB+oWXEH+19ZS1eWnhm6hYmk3WOcE0si0Tt2ipurWkjiy7gjHc0EqVO/ByeNA1o
- 8Tlg==
-X-Gm-Message-State: AOJu0YzsDm9XUqLVAeN7+LIi4dDw3+AilMmpLjGS+uQt3SxxHmmmb3sQ
- JnvELNZILtHvRP80v1BF+nn7WIV5/lVTDi7OMl3b4/SBykU=
-X-Google-Smtp-Source: AGHT+IF66F8Igpv9IXomkwtJ5CavJONb4AGTdXxIK6745Kk5Rr6KMiYsDmW3Z7aaSCSu5q+yNlmi8mTJH06lCEt3xws=
-X-Received: by 2002:a17:906:fd85:b0:a23:329c:3435 with SMTP id
- xa5-20020a170906fd8500b00a23329c3435mr1986712ejb.68.1703002588055; Tue, 19
- Dec 2023 08:16:28 -0800 (PST)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VgsA6beFF6Lg9wThcKHgiKPf4z2ynpEofvgefrDkGmk0STCtgCo59OOIatNxt+kJsaHqjGs+rJdC53e05WkJfx2n44IMqzpMtcZoSEJqAIxDN6ePa1qnUih8v9LFBO20apXbsnc/+5BzWJJ53r3ig/z7ubBN2YJmhumxBIOsEcukWxGLbMTZg/ywGjVCEtQwc84C31a+kV8VY+8DtZjx5yyrklFrxm4j3CeUjx7NJ0Q/c5B2v2ygBMv+rN+TQuJ6j+muakci0SlvRLuE9Ii8FNvgHl88Ilx2N82XPxOckJoDBsVOn1UuAbC28du/wcHtPKxjQ/6QPiss2ZGvXVvG1w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mv7YypoJKDyL9eQhRvE2U4bG48t7ORuuAhtNKRkPchM=;
+ b=PdOHO1E5MNuFEa6b0R9MXBUGGCB4EqvDurhQyRZ9SygPU1q7ZUxeIcHQJSU7wofcSWaW33My5oI7b2skRC+S7DHy3UUtvy9SaSE124/1Hf16ZtXspuxP98xf/RZpU8NIoeh5hmqBW4AoXQ+KWGJRCe0utM4njPrD8Cth5mHoDAZJ+u54kAUwaMMH6fO8oRwEEthx6EBZJrCmPvQBrIpcExqxJp9xIgfhAdT+DS3cKVesnToGG8HSWluvJRu7RrqMKR5+sI4yzTMJyeY/OOCmskQbi1nViGshLASINe7MpyY66GNJ6khEYyYbq+40KJX5g6iIr8Yb3O1CUGgbaWJLEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mv7YypoJKDyL9eQhRvE2U4bG48t7ORuuAhtNKRkPchM=;
+ b=WJfxQSJcPQQNrsYqX7euRLLuwFxQiiLDP+23GdDpnhoetdM3BBEZuhYzOkuqv4PuUEqYopF7lGWT72zlAO1Sxv3THQ+pL8IsO6vZcOZcx/CIDStnQnT0Z6YNYy+CGwunb53bMZ3i5QVT4BTJmGS2VrhDjJBtZkQhXf57gHmdcUg=
+Received: from DS7PR03CA0305.namprd03.prod.outlook.com (2603:10b6:8:2b::25) by
+ CY5PR12MB6369.namprd12.prod.outlook.com (2603:10b6:930:21::10) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7091.38; Tue, 19 Dec 2023 16:17:02 +0000
+Received: from DS1PEPF00017094.namprd03.prod.outlook.com
+ (2603:10b6:8:2b:cafe::93) by DS7PR03CA0305.outlook.office365.com
+ (2603:10b6:8:2b::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.38 via Frontend
+ Transport; Tue, 19 Dec 2023 16:17:02 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS1PEPF00017094.mail.protection.outlook.com (10.167.17.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7113.14 via Frontend Transport; Tue, 19 Dec 2023 16:17:02 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 19 Dec
+ 2023 10:17:00 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+Subject: [PATCH 2/4] arm64: zynqmp: Fix clock node name in kv260 cards
+Date: Tue, 19 Dec 2023 17:16:48 +0100
+Message-ID: <8f392c7ff13bdf2322798818ddeda06446b6d7b8.1703002605.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <cover.1703002605.git.michal.simek@amd.com>
+References: <cover.1703002605.git.michal.simek@amd.com>
 MIME-Version: 1.0
-From: Mario Marietto <marietto2008@gmail.com>
-Date: Tue, 19 Dec 2023 17:15:51 +0100
-Message-ID: <CA+1FSii-TywZeob9tHirWYE7vNMC=LPK76LAgRopKVQUzSeYzA@mail.gmail.com>
-Subject: How to boot FreeBSD as a domU using u-boot.bin as a kernel bootloader
- on my ARM Chromebook
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2904; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=Uf5V22xafN2Pjt2WsY32P8NKvmFAPMqPGwj8U5SNbWA=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtTGg++1XYx2fOxX11K7MmupcHaBm71FzdZqAZUlUzt2X
+ shU/rmsI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEyEO5Rhvmf2y+hd8boHpYvO
+ N/66+yQg9mHdG4b54RoX/RlY0lfXeOl2XBJ6O8121fqDAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017094:EE_|CY5PR12MB6369:EE_
+X-MS-Office365-Filtering-Correlation-Id: 238ade10-9176-4157-b822-08dc00adef4c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: erXM+/4uWIiEJKYaSfGjEpp7aZ8+O6ASy5o3z6SYlxJI6KINilC0JrF1uLPpV7PW6g6gjpLGusSQjqeQGbHoVpoYLsPEwvt6jcsdQ7IAxoGDJaKzxLdRKOkGPDaQY9xLueALkPR2g1Ymc8peQ6jzuGYawdDj5UKGMFkfNLMHtcPnFyGjqN4wU/ERJMQZJKTpG2fOn8RA/KHPdR4oEhFisJLhsoAKk2z79gtMvXLENzj8YEUEmHN1X1S9VN2jx6vT+ftXEYWzkkm5hZM1L5KCiPQrZNl16QocL9xyiYIXqJt94Ia/h1M8tA6OGNfJIVPTn3IwGMTnMvTywjLPcWcAOF+xSkvcRCOxYYYG7mbbijLZdVROWt8VtBxeyDX3WwsROy1ThtEOAMRB60vjjR+yqMXBMxfpevLyqDHANI2aeLNT8w9d56x5Jk+2QenIpePCcdXmec1YBVfOL+Lj59oKci0NjyiS7iAcqivgWZDHL2UPolOYGwajoDRUacmtezYQ718rnkKdfA2Az9Fhm9I6axpB3dfu4PQ75bi93kSGGmIrURWDoFetUPBqbO9H/KY9MabqJWsTzzLBGEDbrmrXdv3IY5EZGx/n3XuCFQeR5ZDt7VewgFYGkN7iigecD4IRGnjFn6KSE2keRpL5/myjts7kh2mbW/33rARSlwYxGkPqTFNad/XB62/fkpj0bESI0I5zO5kCjE2lW+nCIQRg6RF9MFtxoXoPKc44ZTlx1vG8TAutMg7gkUD2PZPAlEmh+t2JJjGwThsAbBEaPk0ZTw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(39860400002)(376002)(396003)(346002)(230922051799003)(64100799003)(186009)(451199024)(1800799012)(82310400011)(36840700001)(46966006)(40470700004)(40480700001)(40460700003)(16526019)(36860700001)(110136005)(70586007)(81166007)(82740400003)(36756003)(86362001)(356005)(5660300002)(83380400001)(47076005)(426003)(336012)(26005)(2616005)(478600001)(6666004)(316002)(2906002)(44832011)(8936002)(8676002)(41300700001)(70206006)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 16:17:02.3111 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 238ade10-9176-4157-b822-08dc00adef4c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017094.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6369
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,124 +125,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello.
+node name shouldn't use '_' that's why convert it to '-'.
 
-I'm trying to boot FreeBSD for arm32 bit as DomU on my ARM Chromebook.
-Basically there are two ways to accomplish this task :
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-1) to write a patch that allows the FreeBSD kernel to boot as a zImage
-file. This could be accomplished applying this patch to a specific file
-that's on the source code of FreeBSD :
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 12 ++++++------
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 12 ++++++------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
 
-
-https://xenbits.xen.org/gitweb/?p=p...8;hb=0782e25d98cc1391472717035f986c979edef0c9
-<https://xenbits.xen.org/gitweb/?p=people/julieng/freebsd.git;a=blob_plain;f=sys/arm/conf/XENVIRT;h=ff6433392e6fc2d5fa7c1ad1f7c40155003af9a8;hb=0782e25d98cc1391472717035f986c979edef0c9>
-
-
-This patch was written by Julien Grall a lot of time ago and now it does
-not work anymore. This is the reason :
-
-It appears FreeBSD-CURRENT removed the last step converting the kernel file
-to kernel.bin. The patch can be readily rebased, but without kernel.bin
-that doesn't do too much.
-
-
-So,without a rebase of that patch the first option is not applicable. And
-I'm not able to fix it.
-
-2) booting FreeBSD using U-Boot,as explained to me by a xen developer :
-
-I was trying to explain why and how Julien's patch works so that you could
-be the one to re-do something similar or fix the patch on the FreeBSD
-kernel that you are working with. I am happy to help review and write
-patches but I don't work with the FreeBSD kernel so I wouldn't be able to
-help you quickly. However, I might have a suggestion. Do you know if
-FreeBSD can be booted by U-Boot ? Because U-Boot definitely boots as Xen on
-ARM guest firmware/bootloader. You should be able to build U-Boot and use
-the U-Boot binary as Xen guest kernel, then U-Boot could load FreeBSD from
-disk or network and start it. For instance as domU config file:
-
-kernel="/home/petalinux/u-boot.bin"
-disk = [ '/home/petalinux/test.img,raw,xvda' ]
-
-I know it is important to build u-boot with the following config to make it
-work on Xen.
-
-CONFIG_CMO_BY_VA_ONLY=y
-
-
-According with these suggestions (and with the suggestions of a FreeBSD
-developer) I have compiled the needed u-boot.bin from scratch using this
-procedure :
-
-# git clone https://github.com/u-boot/u-boot.git
-
-# cd u-boot
-
-# ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make snow_defconfig : this
-line generates the file .config
-
-# nano .config and I've added these parameters :
-
-CONFIG_ARMV7_NONSEC=n
-CONFIG_EFI_GRUB_ARM32_WORKAROUND=y
-
-suggested to me by a FreeBSD developer in relation to the FreeBSD fragment :
-
-https://github.com/freebsd/freebsd-ports/blob/main/sysutils/u-boot-master/files/FreeBSD_Fragment
-
-but I haven't added this parameter :
-
-CONFIG_CMO_BY_VA_ONLY=y
-
-according with what he said,instead :
-
-"I took a brief look at your post and it seems to me that the option
-CONFIG_CMO_BY_VA_ONLY is irrelevant to your target armv7 32 bit platform :
-
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/cpu/armv8/Kconfig?ref_type=heads#L3
-
-Finally,the uboot-bin file is generated with this command :
-
-# ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make
-
-At this point,I took a look inside the .config file and I saw that the
-parameter "CONFIG_ARMV7_NONSEC=n" has been removed. So,for some reason,it
-is not accepted and this could be a problem....
-
-These are the xen config files that I've used :
-
-nano freebsd.cfg
-
-name="test"
-kernel="u-boot.bin"
-extra = "console=hvc0"
-memory=256
-vcpus=1
-disk = [ 'FreeBSD-13.2-RELEASE-armv7.img,raw,xvda' ]
-
-nano start-freebsd
-
-xl create freebsd.cfg
-xl console freebsd
-
-This is what happens when I launch the vm :
-
-# ./start-freebsd
-
-Parsing config from freebsd.cfg
-xc: error: panic: xg_dom_core.c:689: xc_dom_find_loader: no loader found:
-Invalid kernel
-libxl: error: libxl_dom.c:571:libxl__build_dom: xc_dom_parse_image failed
-libxl: error: libxl_create.c:1640:domcreate_rebuild_done: Domain 1:cannot
-(re-)build domain: -3
-libxl: error: libxl_domain.c:1183:libxl__destroy_domid: Domain
-1:Non-existent domain
-libxl: error: libxl_domain.c:1137:domain_destroy_callback: Domain 1:Unable
-to destroy guest
-libxl: error: libxl_domain.c:1064:domain_destroy_cb: Domain 1:Destruction
-of domain failed
-freebsd is an invalid domain identifier (rc=-6)
-
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index 3db420cc94bb..04ae59290a0b 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -33,37 +33,37 @@
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+ 	};
+ 
+-	si5332_0: si5332_0 { /* u17 */
++	si5332_0: si5332-0 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* u17 */
++	si5332_1: si5332-1 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <25000000>;
+ 	};
+ 
+-	si5332_2: si5332_2 { /* u17 */
++	si5332_2: si5332-2 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <48000000>;
+ 	};
+ 
+-	si5332_3: si5332_3 { /* u17 */
++	si5332_3: si5332-3 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <24000000>;
+ 	};
+ 
+-	si5332_4: si5332_4 { /* u17 */
++	si5332_4: si5332-4 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+ 	};
+ 
+-	si5332_5: si5332_5 { /* u17 */
++	si5332_5: si5332-5 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index 6756fdbdfe9d..adf3511ad313 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -28,37 +28,37 @@
+ 		io-channels = <&u14 0>, <&u14 1>, <&u14 2>;
+ 	};
+ 
+-	si5332_0: si5332_0 { /* u17 */
++	si5332_0: si5332-0 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <125000000>;
+ 	};
+ 
+-	si5332_1: si5332_1 { /* u17 */
++	si5332_1: si5332-1 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <25000000>;
+ 	};
+ 
+-	si5332_2: si5332_2 { /* u17 */
++	si5332_2: si5332-2 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <48000000>;
+ 	};
+ 
+-	si5332_3: si5332_3 { /* u17 */
++	si5332_3: si5332-3 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <24000000>;
+ 	};
+ 
+-	si5332_4: si5332_4 { /* u17 */
++	si5332_4: si5332-4 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <26000000>;
+ 	};
+ 
+-	si5332_5: si5332_5 { /* u17 */
++	si5332_5: si5332-5 { /* u17 */
+ 		compatible = "fixed-clock";
+ 		#clock-cells = <0>;
+ 		clock-frequency = <27000000>;
 -- 
-Mario.
+2.36.1
+
