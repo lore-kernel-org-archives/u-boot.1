@@ -4,78 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40A7EC46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 14:55:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B881C46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 15:04:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3DBC87646;
-	Tue, 19 Dec 2023 15:55:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC33587633;
+	Tue, 19 Dec 2023 16:04:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="usfFhb9P";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MFwfgiNw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A644487620; Tue, 19 Dec 2023 15:55:21 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC8AB875A0; Tue, 19 Dec 2023 16:04:24 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64FA18760D
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 15:55:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2477A87508
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 16:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5d2d0661a8dso35626017b3.2
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 06:55:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702997715; x=1703602515; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KHQw+PH7k1/0pY9quZMtVHVaBXbSLml0/z2PHeJO0XY=;
- b=usfFhb9PTTDSmdqg8Hb0ndKox0/GuE4zTG5Cl+TZLsvwQ81hZ8vqRtM/SI6Icu9Rc2
- JZhBDpX54PE3WridS5gZYMQsXJ4DRy77/MkCes5gDMfzVo1fnp7O5vfNYQb2OFUMxjxg
- bWkwEiB5pRmyjMDuWsyWHdriiy+kCQjR7A7Bk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702997715; x=1703602515;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KHQw+PH7k1/0pY9quZMtVHVaBXbSLml0/z2PHeJO0XY=;
- b=HA9iJH+z0KKSFQ55pytzHFDzu5LWWfT1Q+EFlWWmxg4zIH7vKsbJ8NIWHIVGe1Ht9N
- CMYkLB0YPrIVUf7pAA8bug4CVOn9P7r/vTI2W68J4xA3MxiNg4n8pwhz7PAShwd4SHm8
- LtAGoTjQIpJvd71cYjs9jJ+fa29Yq5TRhv3ZRuQoEREq/9Y40L4mmEj3T+Rl27RY3M+t
- 2hKNiLaXwo7UYC4dFaNeD5CE3tf3BlRFxJOeLXw8g+eRZT6kSTfL4ym3mvADtkmai4t+
- KbzsyypaksopPHFfY8qQ45CSdZBscxsKGmAe4KygKjJq1aj3yyAJledM8xZDcMICtQJY
- 7SeA==
-X-Gm-Message-State: AOJu0Yz1/IYEw9StTnVLFpdmEATDbcfC0kmMTjxMMOPg7rutbHQwaCPM
- FRNjYz8LmJNAWkwv3trvKXLCxqL0naLP5XPTnBA=
-X-Google-Smtp-Source: AGHT+IGfMG7QZEsrAmTx9CfdSkZmlrb+PhwBJBKLDGN80Z0mXHjI8l2ryOxNUOWFrlLawTFkWi/c+A==
-X-Received: by 2002:a81:d541:0:b0:5d2:bb18:5834 with SMTP id
- l1-20020a81d541000000b005d2bb185834mr14049583ywj.15.1702997715017; 
- Tue, 19 Dec 2023 06:55:15 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
- [2603:6081:7b00:6400:923c:ac63:6854:a688])
- by smtp.gmail.com with ESMTPSA id
- e4-20020a0df504000000b005d746ac7f6bsm9657580ywf.69.2023.12.19.06.55.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 06:55:13 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
-References: <20231216180804.173374-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] get_maintainer.pl: Add --git to look up CCed in git
- history
-Message-Id: <170299771337.2342388.6659714303467887607.b4-ty@konsulko.com>
-Date: Tue, 19 Dec 2023 09:55:13 -0500
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 48D823F6B9; 
+ Tue, 19 Dec 2023 15:04:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1702998257;
+ bh=fjwjjMxWYHM+wAQBg0mxLHO+hw206h6wpnecVplA9O8=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=MFwfgiNwXBd0qmHJ+N/SfmFYHdmpCzUS7df9ofIRQGD+kG0vASiWonIMrsmiN0nbD
+ QrK6wWujh53jy//V1nengg0v2citFBJj5YTIeENJDMFEoZjSb6vcU5afwv5bblocNe
+ l4UZd/Y1zGvA3fnAmYHTYpz264tFzpA0GKvEBL1FazGk87I8ts50hmL/3g0IH2FaCl
+ EzTivRa9dyKccFt2dpPEBQDIvBXRG35QxBPU6dxNDiQmDmq7mBQS+9ci+4b7Zfre/O
+ Q51MD9vt19RcpKP3dSKwWGD1RlqqAOMzV9UF1QQ5PwhcO//Az9bwEnVdArANjUkZiJ
+ hT5GToJebi+1Q==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 0/9] acpi: add ACPI support on QEMU ARM and RISC-V
+Date: Tue, 19 Dec 2023 16:03:59 +0100
+Message-Id: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,15 +71,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 16 Dec 2023 19:07:52 +0100, Marek Vasut wrote:
+QEMU 8.1.2 can create ACPI tables for the ARM and RISC-V architectures
+Allow passing them through to the operating system.
+Provide a new config fragment that enables this.
 
-> Add the --git parameter, else recent contributors are left out of the CC list.
-> 
-> 
+v4:
+	mention that RISC-V ACPI support is available since QEMU v8.0.0
+v3:
+	let tables in global data depend on CONFIG_(SPL_)ACPI
+v2:
+	consider ARM architecture too
+	invoke write_acpi_tables() via EVT_LAST_STAGE_INIT
 
-Applied to u-boot/master, thanks!
+Heinrich Schuchardt (9):
+  acpi: Kconfig symbol CONFIG_QFW_ACPI
+  acpi: carve out qfw_acpi.c
+  arm: add ACPI fields to global data
+  risc-v: add ACPI fields to global data
+  acpi: enable writing ACPI tables on QEMU
+  risc-v: add support for QEMU firmware tables
+  riscv: allow usage of ACPI
+  configs: qemu: add config fragment for ACPI
+  arm: enable support for QEMU firmware tables
+
+ MAINTAINERS                          |   1 +
+ arch/Kconfig                         |   1 +
+ arch/arm/include/asm/global_data.h   |   7 +-
+ arch/riscv/include/asm/global_data.h |   6 +
+ board/emulation/configs/acpi.config  |   3 +
+ board/emulation/qemu-arm/Kconfig     |   1 +
+ board/emulation/qemu-riscv/Kconfig   |   2 +
+ doc/board/emulation/acpi.rst         |  23 +++
+ doc/board/emulation/index.rst        |   1 +
+ drivers/misc/Kconfig                 |   7 +
+ drivers/misc/Makefile                |   1 +
+ drivers/misc/qfw.c                   | 240 -----------------------
+ drivers/misc/qfw_acpi.c              | 281 +++++++++++++++++++++++++++
+ lib/acpi/Makefile                    |   2 +-
+ lib/acpi/acpi_writer.c               |   4 +-
+ 15 files changed, 336 insertions(+), 244 deletions(-)
+ create mode 100644 board/emulation/configs/acpi.config
+ create mode 100644 doc/board/emulation/acpi.rst
+ create mode 100644 drivers/misc/qfw_acpi.c
 
 -- 
-Tom
-
+2.40.1
 
