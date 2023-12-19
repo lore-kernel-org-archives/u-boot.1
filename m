@@ -4,83 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4F3C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:30:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5336DC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:39:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32202871C7;
-	Tue, 19 Dec 2023 17:30:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 953F487646;
+	Tue, 19 Dec 2023 17:39:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tMAUZym/";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="etkHbpxV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A713876E4; Tue, 19 Dec 2023 17:30:11 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2F9E487646; Tue, 19 Dec 2023 17:39:17 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDE4E87561
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:30:06 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40c2308faedso56512625e9.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:30:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703003406; x=1703608206; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=I37BfProkbUipmqo36X32ZdLhmG5uPtbDM+Bt1EH1iY=;
- b=tMAUZym/LPginTDeD2H4r6vrC/+Xa4/wMIkwoYdk0GLWlIIks/YofF5w8t6aFuH22r
- R+dywetk/rCYNq9NkLkUkh3iiUSTmyZlCgKnkMCgUHcv9QdryAYYIo5jDgMfnJhtSlEZ
- 4w9PVG/FdYm83OIX3F0Sk6AGYMAzaXKxPfqUhiQaGo/RlHIaMLkongddZ1/LGFjGaTTC
- HzCt8O16kNQq9xr8+GRdYWJV00lQ6lSmwsPfNdRv2R/jcjdKJH/HJNPdLJBn4wSUcjxI
- Z99fASU3bUx5lGXqk6WcgvjkF/0KFduv1QECqb3WSNVLEqEfYMCvHEDP/BmKcUYCWCN9
- X/Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703003406; x=1703608206;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=I37BfProkbUipmqo36X32ZdLhmG5uPtbDM+Bt1EH1iY=;
- b=FjJlrd0N3Nmu06kxbztO0NHANLyM4psXeF0+cm4Ddf6e9mEjjYeHESXZiKyClcmtso
- BUcjcY65pOneRicVSD0kOOVVidpJHx2SVcSE5GehmRO5jumFvwZPfYLqQDuDMRRtJrWj
- GfqUJvX/wlNVUXsSnKepB+dgxLkp+QwMZYzxgUHK3CQcS3DTs0U7HMDYjzugnUBCSm7f
- mScW4uwTygeCRndv0i8lGmKsBHkcfVfdkyKcwKcajVZ2bhrKCCvTOE2I9Qy4jbkcfYa9
- sz2hDcD/GMI9onywowhLDHX4XXrJ25JKpGUhy7MQjO1cTHyvc3ZtsXm7tQ3d5euTOJzZ
- rB6w==
-X-Gm-Message-State: AOJu0YwAL7jGYP9+FpJ2pWazjpxLriW2HD7HfYxwG+O2ostgPRLi/BCS
- j5MhCPykdN+SDtudrl+QCU5z1A==
-X-Google-Smtp-Source: AGHT+IE7hJc6uYLo7A09xxf6jBo6PiQopHscEEdCrdzF6vy5c9YElq2RSZh/YHWZJBUHAr3sc9LUGQ==
-X-Received: by 2002:a05:600c:ac6:b0:40b:5e21:d361 with SMTP id
- c6-20020a05600c0ac600b0040b5e21d361mr10703603wmr.106.1703003406391; 
- Tue, 19 Dec 2023 08:30:06 -0800 (PST)
-Received: from [192.168.1.83] (host-92-17-96-230.as13285.net. [92.17.96.230])
- by smtp.gmail.com with ESMTPSA id
- l2-20020a05600c4f0200b003feae747ff2sm3584702wmq.35.2023.12.19.08.30.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Dec 2023 08:30:06 -0800 (PST)
-Message-ID: <5cc0e3dc-2fe9-4788-9d76-bf0e64d8fdf7@linaro.org>
-Date: Tue, 19 Dec 2023 16:30:05 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/7] hmibsc: Enable RAUC support
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: neil.armstrong@linaro.org, lukma@denx.de, seanga2@gmail.com,
- marex@denx.de, laetitia.mariottini@se.com, pascal.eberhard@se.com,
- abdou.saker@se.com, jimmy.lalande@se.com, benjamin.missey@non.se.com,
- daniel.thompson@linaro.org
-References: <20231218072428.1802969-1-sumit.garg@linaro.org>
- <20231218072428.1802969-6-sumit.garg@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20231218072428.1802969-6-sumit.garg@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ by phobos.denx.de (Postfix) with ESMTPS id 238E1876CF
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:39:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Date: Tue, 19 Dec 2023 17:39:12 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1703003953;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
+ references:references; bh=cK/AaOFDLVEx9iEuZGZs+3qZTk3OLZHPDC37L8bQzJQ=;
+ b=etkHbpxV43XLFzTXYWvWI8iK7oAMKU+f0Fes+CJCLlFh/fzR7B/DSQj+6+iJsemadF9ESE
+ ARYiSPIo788d28wvqYPUyvNhKJxhnz3MkUSByIdzlWox791CmY+VXTe7h8vSD0A3d0X3Jp
+ HETrsEQ3IjWoRtth+G26MFekX1EZmkZUvVdFEDGeqvBsA+/FG2Y85bkKY7lWhilPE/1wQe
+ S1HHs5LOWst5M/8btT4QkfmV6mMCiE0PkgmMXBqN3k4Rvq1cJHp1ipdxMHHYZ05eO75SqA
+ u2NZmRIOLTFhMAV8RHreUDceVVO2FfqjVZ97sW/0R7Q8GeNpO6tceYG41WXzDQ==
+From: Alexander Dahl <ada@thorsis.com>
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+Subject: Re: [PATCH 4/4] mtd: nand: raw: atmel: Remove duplicate definitions
+Message-ID: <20231219-c9fb0a5045bd2aa69c2bdf2b@thorsis.com>
+Mail-Followup-To: Eugen Hristev <eugen.hristev@collabora.com>,
+ u-boot@lists.denx.de,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+References: <20231212160423.44290-1-ada@thorsis.com>
+ <20231212160423.44290-5-ada@thorsis.com>
+ <966f57cc-79c9-4a80-b561-a77575fcc7a0@collabora.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <966f57cc-79c9-4a80-b561-a77575fcc7a0@collabora.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +70,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hello Eugen,
 
-Please add a description to this patch (what is RAUC?).
-
-On 18/12/2023 07:24, Sumit Garg wrote:
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  include/configs/hmibsc.h | 38 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 38 insertions(+)
+Am Tue, Dec 19, 2023 at 04:32:07PM +0200 schrieb Eugen Hristev:
+> On 12/12/23 18:04, Alexander Dahl wrote:
+> > These removed definitions were specific to some sam9 SoCs, but not
+> > generic over all at91 SoCs.  The correct SoC specific definitions for
+> > ATMEL_BASE_PMECC are spread over different header files in
+> > arch/arm/mach-at91/include/mach directory.
+> > 
+> > Fixes a build error on a custon board based on SAMA5D2:
+> > 
+> >     Building current source for 73 boards (16 threads, 1 job per thread)
+> >            arm:  +   vera2
+> >     +drivers/mtd/nand/raw/atmel/pmecc.c:819: warning: "ATMEL_BASE_PMECC" redefined
+> >     +  819 | #define ATMEL_BASE_PMECC        0xffffe000
+> >     +      |
+> >     +In file included from include/configs/vera2.h:11,
+> >     +                 from include/config.h:3,
+> >     +                 from include/linux/mtd/rawnand.h:16,
+> >     +                 from drivers/mtd/nand/raw/atmel/pmecc.c:44:
+> >     +include/asm/arch/sama5d2.h:171: note: this is the location of the previous definition
+> >     +  171 | #define ATMEL_BASE_PMECC        (ATMEL_BASE_HSMC + 0x70)
+> >     +drivers/mtd/nand/raw/atmel/pmecc.c:820: warning: "ATMEL_BASE_PMERRLOC" redefined
+> >     +  820 | #define ATMEL_BASE_PMERRLOC     0xffffe600
+> >     +include/asm/arch/sama5d2.h:172: note: this is the location of the previous definition
+> >     +  172 | #define ATMEL_BASE_PMERRLOC     (ATMEL_BASE_HSMC + 0x500)
+> > 
+> > Fixes: a490e1b7c017 ("nand: atmel: Add pmecc driver")
+> > Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> > ---
+> >  drivers/mtd/nand/raw/atmel/pmecc.c | 3 ---
+> >  1 file changed, 3 deletions(-)
+> > 
+> > diff --git a/drivers/mtd/nand/raw/atmel/pmecc.c b/drivers/mtd/nand/raw/atmel/pmecc.c
+> > index e2e3f1ee6b5..51f6bd2e65b 100644
+> > --- a/drivers/mtd/nand/raw/atmel/pmecc.c
+> > +++ b/drivers/mtd/nand/raw/atmel/pmecc.c
+> > @@ -816,9 +816,6 @@ int atmel_pmecc_wait_rdy(struct atmel_pmecc_user *user)
+> >  }
+> >  EXPORT_SYMBOL_GPL(atmel_pmecc_wait_rdy);
+> >  
+> > -#define ATMEL_BASE_PMECC	0xffffe000
+> > -#define ATMEL_BASE_PMERRLOC	0xffffe600
+> > -
+> >  static struct atmel_pmecc *
+> >  atmel_pmecc_create(struct udevice *dev,
+> >  		   const struct atmel_pmecc_caps *caps,
 > 
-> diff --git a/include/configs/hmibsc.h b/include/configs/hmibsc.h
-> index 04052ed6dee..b614dec7870 100644
-> --- a/include/configs/hmibsc.h
-> +++ b/include/configs/hmibsc.h
-> @@ -16,4 +16,42 @@
->  #define PHYS_SDRAM_1_SIZE		SZ_1G
->  #define CFG_SYS_SDRAM_BASE		PHYS_SDRAM_1
->  
-> +#undef CONFIG_BOOTCOMMAND
-> +# define CONFIG_BOOTCOMMAND \
-> +	"setenv devtype mmc; setenv devnum 0; " \
-> +	"test -n \"${BOOT_ORDER}\" || setenv BOOT_ORDER \"A B\"; " \
-> +	"test -n \"${BOOT_A_LEFT}\" || setenv BOOT_A_LEFT 3; " \
-> +	"test -n \"${BOOT_B_LEFT}\" || setenv BOOT_B_LEFT 3; " \
-> +	"setenv raucslot; " \
-> +	"for BOOT_SLOT in \"${BOOT_ORDER}\"; do " \
-> +	"  if test \"x${raucslot}\" != \"x\"; then " \
-> +	"      echo \"skip remaining slots...\"; " \
-> +	"  elif test \"x${BOOT_SLOT}\" = \"xA\"; then " \
-> +	"    if test ${BOOT_A_LEFT} -gt 0; then " \
-> +	"      setexpr BOOT_A_LEFT ${BOOT_A_LEFT} - 1; " \
-> +	"      echo \"Found valid RAUC slot A\"; " \
-> +	"      setenv raucslot \"rauc.slot=A\"; " \
-> +	"      setenv raucpart A; setenv distro_bootpart 6;" \
-> +	"    fi; " \
-> +	"  elif test \"x${BOOT_SLOT}\" = \"xB\"; then " \
-> +	"    if test ${BOOT_B_LEFT} -gt 0; then " \
-> +	"      setexpr BOOT_B_LEFT ${BOOT_B_LEFT} - 1; " \
-> +	"      echo \"Found valid RAUC slot B\"; " \
-> +	"      setenv raucslot \"rauc.slot=B\"; " \
-> +	"      setenv raucpart B; setenv distro_bootpart 7;" \
-> +	"    fi; " \
-> +	"  fi; " \
-> +	"done; " \
-> +	"if test -n \"${raucslot}\"; then " \
-> +	"  setenv bootargs console=ttyMSM1 root=PARTLABEL=rootfs_${raucpart} rw rootwait ${raucslot}; " \
-> +	"  saveenv; " \
-> +	"else " \
-> +	"  echo \"No valid RAUC slot found. Resetting tries to 3\"; " \
-> +	"  setenv BOOT_A_LEFT 3; " \
-> +	"  setenv BOOT_B_LEFT 3; " \
-> +	"  saveenv; " \
-> +	"  reset; " \
-> +	"fi; " \
-> +	"load ${devtype} ${devnum}:${distro_bootpart} ${loadaddr} /boot/fitImage && bootm"
-> +
->  #endif
+> 
+> Hi Alexander,
+> 
+> What happens if we try to select and build this driver without
+> sama5d2/sama5d3/sama5d4/sam9x5/sam9x60 ?
+> Is it even possible ?
 
--- 
-// Caleb (they/them)
+It is not possible on non-at91 boards because <mach/at91_sfr.h> is
+included so you need to select arch at91.  But it is possible on older
+sam9 boards like sam9260, sam9g20 and the like.  Tried that by using
+at91sam9g20ek_nandflash_defconfig as a base, then disabling
+CONFIG_NAND_ATMEL, then enabling CONFIG_DM_NAND_ATMEL (which activates
+build of drivers/mtd/nand/raw/atmel/pmecc.c), then enabling some more
+missing dependencies (CONFIG_MFD_ATMEL_SMC, CONFIG_REGMAP,
+CONFIG_SYSCON) and then it builds just fine.
+
+(btw: should those be selected or implied by CONFIG_DM_NAND_ATMEL in
+'drivers/mtd/nand/raw/Kconfig' then in another patch or is this stuff
+rather loose coupled?)
+
+> Because it appears these defines are done for those SoCs in their
+> mach header, but the driver uses them in any situation. 
+
+I don't think so.  There are two drivers, the old one is
+'drivers/mtd/nand/raw/atmel_nand.c' selected by CONFIG_NAND_ATMEL
+while the new one is 'drivers/mtd/nand/raw/atmel/nand-controller.c'
+selected by CONFIG_DM_NAND_ATMEL (note the extra sub-directory).  Only
+the new one leads to building the file in question.  The symbols
+removed from pmecc.c are not used in pmecc.c but only in the old
+driver.  The scope of those removed symbols would have been in pmecc.c
+only however, they are pointless at the place where they are currently
+defined.  (Unless someone would #include that .c file, but that
+seems rather unusual.)
+
+And the part where the symbols of the same name are used is
+conditionally built only if CONFIG_ATMEL_NAND_HW_PMECC is set.  From a
+quick glance I would say that one is set only for newer boards, those
+families you mentioned below.  But as said, all this is for the old
+driver.
+
+> And currently, these warnings are being ignored if the driver is
+> built with sama5d2/sama5d3/sama5d4/sam9x5/sam9x60 ? 
+
+The warning only popped up for a custom board build, where I include
+<asm/arch/sama5d2.h> in file 'include/configs/myboard.h' and keep some
+old definitions for the old driver and then switching from the old to
+the new driver.  I did not see it for any mainline at91 defconfig.
+Nevertheless I consider those defines wrong in that place.
+
+> or the
+> driver actually isn't even built with these platforms at all ?
+
+It depends on the (def)config.  Currently in mainline U-Boot to my
+knowledge the new driver is only used by sam9x60 and sam7g*something,
+but it was ported from Linux and it should support all at91 SoCs.  I
+think it is just a matter of who migrates all those boards to the new
+driver?
+
+> So, I guess it would be safer to do #ifndef ATMEL_BASE_PMECC, #define ...
+> 
+> Or, we could fix the driver to get these base addresses from the platform/DT ?
+
+As said above.  The new driver does not these definitions at all, but
+already gets these addresses from DT.  See sam9x60 curiosity for
+example.
+
+Greets
+Alex
+
