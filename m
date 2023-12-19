@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC3AFC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 19:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28953C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 19:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA99F86D37;
-	Tue, 19 Dec 2023 20:19:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C1CC8718F;
+	Tue, 19 Dec 2023 20:32:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="j9oLOoSx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i+DJATo1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3903875FD; Tue, 19 Dec 2023 20:19:29 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E8B5F8718F; Tue, 19 Dec 2023 20:32:05 +0100 (CET)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDCE586BFA
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:19:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 01DDF86EA6
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:32:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJJJHMB104399;
- Tue, 19 Dec 2023 13:19:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703013557;
- bh=EpikwyY4VUXLT1Pnn7U+HDwNq8jdBSanzbVzcAujakg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=j9oLOoSxUcIgyV77bZwE9xp6hN24OKJIAdao58CqqrPc95rjqF+zcNKiDJkObkNRE
- VCG1RjvdG8Jw0kTn8Nxvl7LqiNHx3yPm6dc2dRXzRuPlhi4B/Sup9QSzWbbC2JpazK
- ji6mftWBhECUSABIKAeERZc5Illxs9FMo7FcVvWw=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJJJHC8055318
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 13:19:17 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 13:19:17 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 13:19:17 -0600
-Received: from [10.249.128.104] ([10.249.128.104])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJJJ8GW016024;
- Tue, 19 Dec 2023 13:19:09 -0600
-Message-ID: <3d113c6a-0e41-4363-acde-a1bc2adf1fdd@ti.com>
-Date: Wed, 20 Dec 2023 00:49:07 +0530
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3ba10647a19so3885741b6e.3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:32:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703014321; x=1703619121; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NQCz7gjlAE4kyFB+HYUp5mDvnKcAVLnmcBmUDUEv6cM=;
+ b=i+DJATo1fYw1gNQJtjGLnG8z9PmvtxpiKTwZCCYrgWWngh+pgij9vgZR1+11tKeiyT
+ 5cBmIKwd5/YyK4FBwW/vc3Miq8FMi8F0LeZIdt7pj5NS7U6ZNSL29SWIBp97xaXpptpL
+ zgy2BUvM3K3yTxkTuSQgxZMtF5viQJBP9MjTE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703014321; x=1703619121;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NQCz7gjlAE4kyFB+HYUp5mDvnKcAVLnmcBmUDUEv6cM=;
+ b=QL7Ru7ZbPYYWNgr4CBJUSTotVdEynXLBJ2jdRflXIQ599nq3HHBwsPCqTZRUpAYGK1
+ GgpP2WQzGarxH2ZVZKSRVM/9lVD4lO+bT1jRW+yZvtrrL/wXxli7/Od3Ac4RwiY9iZZF
+ B1wUi6Uq44AB5FpMLP3vAMlD3Y/HSlDtk4hgeNTtu/k2nn+dnzqYrlzNnCFpm/g4PpGa
+ Dm3njXZnhmZnc9ouOzVblBhHEr75oalp2oM3mQw2DZtkXAKzHILrMEORCpVJIktPNaXs
+ 97m94V+h25ccCZH4VqsYoc0fNX7jwt9VHkahISh8piG+PIxJlnedfG2H/ZS+Sf9GY40P
+ Q+SA==
+X-Gm-Message-State: AOJu0Yz0RlhMoFTw6qlh+Dt0ZUN1iOPBM5bXGzDpVMzxAituBbMrV6iR
+ dBS6LXY+Pv9ISQADykT5bbM2YEeLRin+bYmfn/E=
+X-Google-Smtp-Source: AGHT+IEFC6US9dxDWJ/gqbdkHeSGotTV4gsnMyIo3RCCrvzu/ctAVfQ7rWPX+R3UAu/nhlhz0tYPGg==
+X-Received: by 2002:a05:6808:1307:b0:3b8:3442:8d99 with SMTP id
+ y7-20020a056808130700b003b834428d99mr24148641oiv.20.1703014321611; 
+ Tue, 19 Dec 2023 11:32:01 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
+ [2603:6081:7b00:6400:923c:ac63:6854:a688])
+ by smtp.gmail.com with ESMTPSA id
+ n75-20020a25404e000000b00dbd5bb05b16sm490067yba.59.2023.12.19.11.32.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Dec 2023 11:32:00 -0800 (PST)
+Date: Tue, 19 Dec 2023 14:31:59 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v12 00/24] Modernize U-Boot shell
+Message-ID: <20231219193159.GA3259099@bill-the-cat>
+References: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
- Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20231206123753.1486031-1-a-nandan@ti.com>
- <20231219174538.GX2513409@bill-the-cat>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20231219174538.GX2513409@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0JlbHfjNDYwGTr0M"
+Content-Disposition: inline
+In-Reply-To: <20231208223025.55076-1-francis.laniel@amarulasolutions.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,25 +94,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 19/12/23 23:15, Tom Rini wrote:
-> On Wed, Dec 06, 2023 at 06:07:36PM +0530, Apurva Nandan wrote:
->
->> Hello Everyone!
->>
->> This series will introduce basic support (SD and UART) support for Texas
->> Instruments J784S4 EVM.
->>
->> The J784S4 SoC device tree patches are taken from kernel patch submissions
->> and will be updated as they are accepted and merged to the kernel tree.
->> All other patches are specific to SPL and u-boot and do not have
->> dependency on other trees. Appreciate a review for acceptance to u-boot
->> tree.
-> Please rebase this on top of current -next as it doesn't apply / build,
-> thanks.
-Okay, sent it. Thanks!
+--0JlbHfjNDYwGTr0M
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Thanks and regards,
-Apurva Nandan,
-Texas Instruments India.
+On Fri, Dec 08, 2023 at 11:30:01PM +0100, Francis Laniel wrote:
 
+> Hi.
+>=20
+>=20
+> During 2021 summer, Sean Anderson wrote a contribution to add a new shell=
+, based
+> on LIL, to U-Boot [1, 2].
+> While one of the goals of this contribution was to address the fact actual
+> U-Boot shell, which is based on Busybox hush, is old there was a discussi=
+on
+> about adding a new shell versus updating the actual one [3, 4].
+>=20
+> So, in this series, with Harald Seiler, we updated the actual U-Boot shel=
+l to
+> reflect what is currently in Busybox source code.
+> Basically, this contribution is about taking a snapshot of Busybox shell/=
+hush.c
+> file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
+
+So, here's a problem.  With:
+commit a4bee0b45504397d71302cd1b186f5651424a332
+Author: Simon Glass <sjg@chromium.org>
+Date:   Sun Oct 1 19:15:25 2023 -0600
+
+    bootstd: Add a menu option to bootflow scan
+   =20
+    Allow showing a menu and automatically booting, with 'bootflow scan'.
+    This is more convenient than using a script.
+   =20
+    Signed-off-by: Simon Glass <sjg@chromium.org>
+
+We now have a test that checks for a return code getting populated back
+up to the command line. With the old hush, we eventually get:
+Boot failed (err=3D-14)
+And -14 means -EFAULT which is what's expected. With the new hush we
+get:
+Boot failed (err=3D1)
+Which isn't right. Can you please see what needs to be fixed and post
+v13? Thanks.
+
+--=20
+Tom
+
+--0JlbHfjNDYwGTr0M
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB76sACgkQFHw5/5Y0
+tyyXOQwAlpqgj6nRuRlfMBEcoldbtvTRwMtFx8DKZdA3w4kOHDcL2kQ0b1yg7CMy
+2o083OPjPUHnRdaKT9OJo++FpmC3ek8yc9WfI+SlKiuvMBrSLuY9GuV+Np8+ArbE
+mDtb3G1GEFCHMrRj+eNFBa6sDtzX8rF0aSq+1Lmilpg77WaZkPBYArUrfKr5zybu
+PY0nZfx8PxKRVTWJm03Zi0kKnJznERB5Lv3N/uzskDT2Q1f2l+nma7HZshPR1Ssb
+Ifj5+OLJ4b0T0ZLYQo3XLecM5wAQYHv1G3/OFzA0nhcD7cJqJ4gy3lkMfIFSAvzy
+hB55ZryhZvkfZ9wisZuNqyLh49AubgBvU1bai8Q5FyWM05DIrDQSMs6AZh/3uL3Y
+8ml7/IkJNfpzULEuvK1XNFcaC6FzxPmsUDAicnbPAsrlWCLqfEXyrYSCjdI5qH7j
+3omxe3L+K3m3wB13dY3JJTLMBDTMdroVVaO+uLqbhp9n4/97U8ydlH6+gOFSOF/R
+jhF69Wdb
+=jFQH
+-----END PGP SIGNATURE-----
+
+--0JlbHfjNDYwGTr0M--
