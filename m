@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F09F7C46CA2
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:04:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA5CBC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:05:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF21A8752B;
-	Tue, 19 Dec 2023 17:04:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C4BB3877F3;
+	Tue, 19 Dec 2023 17:04:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pnM1GS6Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iTn62wJe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA6FF87729; Tue, 19 Dec 2023 17:04:29 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id EBB64874F3; Tue, 19 Dec 2023 17:04:30 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C53B787646
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:04:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E457D876E4
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:04:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40c3fe6c1b5so51933935e9.2
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:04:24 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40d12b56a38so38480805e9.2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:04:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703001864; x=1703606664; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703001865; x=1703606665; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=fck7kwG7s/JPNczN5pI04EsIr9yeduUZAtln9zEiAhs=;
- b=pnM1GS6ZsvKWXzgFHqWvpkyqwzyo+vUrk8NnjKbTh5ohBEpwTh0WdO+smB+xK5JgRz
- h0GsyJ6GncoXiIqh4kmCgzFyCCFjSAGQTwVDCgTUtHFOu4ahzj2XVVoXy27dhq2k5DLW
- nyB29+Cm3viMba9nw+hlXmQ/fivvrz88nXPcfQeGLFpL/26vd1vGrIjoJ4EcMIlf/Aut
- HZZqa3jyR9W+ztI9XUCsdY1OQUxV1ZkA6oaeCCBftp6ZYWPOf54u0TuEx4uCF7BXv0Dt
- 2Okithxb5AP7UXL+nRsXO9GaCmkTC2R7Sc2eqwuVzA4JgM8+ehCgOBkj2NZY/L+dQcm3
- aYYQ==
+ :reply-to; bh=DPJhInPprtSGS01+kizPo2arar41qkzyaZzz7lBbaDo=;
+ b=iTn62wJekkoM2ztqPGp+wu88mhvkgsEuO8XaVYH4o23G7d0NNBhMOamP6H9IdNc+gE
+ nPM3CB2gpdHZFjMF5XWX+VNs1GfW38oiYrK9vJacmp7CUWxQXvAXkVHPZ5uKRUU8AppZ
+ CX85ywGkdez9chP7MUmV8mUMbx2pnA1Lc6PHcr6KcwdCw//hufk6u7Oqy9QcNAHxsx9q
+ NGE+i3FrqLJL4m95NXMZ7FAY39SgXUD3DVj6kRLHNaM3UnSr/jzP9IgK98czST4r5p06
+ 7d/2h7g4Fc2LygcNkldrKQ1s19pRpUK1zCaWpTKz6EokT/VfmhNfB7zT/Ic9csDIUSmZ
+ +u4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703001864; x=1703606664;
+ d=1e100.net; s=20230601; t=1703001865; x=1703606665;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fck7kwG7s/JPNczN5pI04EsIr9yeduUZAtln9zEiAhs=;
- b=jsLNbYZ1jvMvhNzrMJEwWauESf/H4Gg2ktOj1roWZiS03pvqbQj0ofOwUKxbBRDSFh
- 7opGl682WWedpbVaAi5a+h9QtTqDbAzLPkFNHCpXi3LsAK2mPrW4jLaB1+fYw30P8kNo
- DBOlC3XjKMzYv5hV/U5THT0OwYzQANkxH3ClR8DFXvsycJzZv5LHCR6aNERz6mBJCkQw
- axWbAl2LCz1knO49FubA4ydYCl8bqf93QhiIKJ3394WVYvEe0nF4ZgHyMGk36z8INFyy
- ImPSo5kxWKt4Bs5XLIC2W4Zi9WJPYnJOppz09ji9M1IJTAxIZkdrR6YakiWrxDnBl/2b
- ELFg==
-X-Gm-Message-State: AOJu0Yz3zsJKGbzCmd6plHfEqrY4+Tdz8CksAC+VvJPQiP+8Ahm2b275
- qrw22VdqtawUlOAWMxezEv1irQ==
-X-Google-Smtp-Source: AGHT+IG54rY+i3zvv6qCMEHVXEQWQEdcTTodQFAxV5B3gie8ELB5M0ze8oQsWPfHjd5+VPuOS1rlUA==
-X-Received: by 2002:a05:600c:450e:b0:40c:2b2b:6414 with SMTP id
- t14-20020a05600c450e00b0040c2b2b6414mr8572973wmo.100.1703001864274; 
- Tue, 19 Dec 2023 08:04:24 -0800 (PST)
+ bh=DPJhInPprtSGS01+kizPo2arar41qkzyaZzz7lBbaDo=;
+ b=s6duVIZ8Yz0SDa3pku/Zs2dNIKNdjqYGzJm0ny6F+PeI8vdN+HLTtyEnfQMLv51PU1
+ HxO6ljoxpUvu8jJVf5nFlcmpO2t+LRIZcxGzn60d8T4Me48w3grvWTEzCc32RrMPeKrL
+ HIAd/aiJul7FetldhiePmBYy7I5Oiprl7imO8Df2zygcY8GpY0tVqZ410yo3rkuO94iM
+ +B3q1HhQRDaWgO93dTAZppWe7f79pcWob/zebVjzTZaM50j9y3+iQP5FKfWsi3JhSVrU
+ PMDQ4Y33oKlXT/v3Go1wSi3ezcZFt3zoK+8lMlwX72nYtMZk8bceCE4HG8PL46HgxXM1
+ 1NpQ==
+X-Gm-Message-State: AOJu0YxJQjwjs+kYrr/7G9apy5Gyr/ZBxCaXibhtFZGyimnsgUpIcBPG
+ OmT45s8c9lTXzEe2DY/vNvJv+w==
+X-Google-Smtp-Source: AGHT+IFgF9xg/ISIIsQr0zkHa9aoXQmhRfXc3fZRl4Fi+Kwxxs//en9Jvk7svFoWIoYn4FZ5UnfkpA==
+X-Received: by 2002:a05:600c:138e:b0:40c:4b4e:959d with SMTP id
+ u14-20020a05600c138e00b0040c4b4e959dmr4271115wmf.167.1703001865376; 
+ Tue, 19 Dec 2023 08:04:25 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-230.as13285.net. [92.17.96.230])
  by smtp.gmail.com with ESMTPSA id
- je17-20020a05600c1f9100b0040d1450ca7esm3429723wmb.7.2023.12.19.08.04.23
+ je17-20020a05600c1f9100b0040d1450ca7esm3429723wmb.7.2023.12.19.08.04.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 08:04:23 -0800 (PST)
+ Tue, 19 Dec 2023 08:04:24 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 19 Dec 2023 16:04:03 +0000
-Subject: [PATCH v2 02/32] usb: dwc3-generic: support external vbus
- regulator
+Date: Tue, 19 Dec 2023 16:04:04 +0000
+Subject: [PATCH v2 03/32] mmc: msm_sdhci: use modern clock handling
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20231219-b4-qcom-common-target-v2-2-b6dd9704219e@linaro.org>
+Message-Id: <20231219-b4-qcom-common-target-v2-3-b6dd9704219e@linaro.org>
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
 In-Reply-To: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>, 
@@ -84,13 +83,13 @@ To: Neil Armstrong <neil.armstrong@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1758;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3016;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=AYKQKTYOB4WSQ5O/zOkvXjHUummdDNXBGhhB4keYTpE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtTG/YxrjO5dkpz4pqh1dUexN4fOyV+fYxZ3b43crxP0Z
- tqv8pAHHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAit48y/FOQ2uPkxTZ91q63
- 8TbFlnqvVnpOq5//lTPz7tOqPR/VexQZGSZ4vt/yJu/a05VpLK/CopQWn/33+cFbq0Pq+skOtaJ
- ua74CAA==
+ bh=Ujb36j4MQVuf19gAZZ2EIB8TJJKZEN52OmMZLBaZVto=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtTG/Yz5bT9mvhTbmbb2z9p55TYnDzi9NpnN6P271F6w7
+ ZRbJNPMjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRjM0M/5Ntq13e28sdzY/Z
+ qX3LV76sUma/ukjvrpCVh7+qibKqyjL89+YPXb5j67u/LVcfny3/nvBogqDutZfPJmY+mSQTeYR
+ JzgoA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,61 +108,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for a vbus-supply regulator specified in devicetree. This
-provides generic support to avoid hardcoded GPIO configuration in board
-init code.
+Use the clk_* helper functions and the correct property name for clocks.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-This patch has no dependencies
+ drivers/mmc/msm_sdhci.c | 69 ++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 46 insertions(+), 23 deletions(-)
 
-Cc: Marek Vasut <marex@denx.de>
----
- drivers/usb/dwc3/dwc3-generic.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 744fde806948..e66e7961c70f 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -21,6 +21,7 @@
- #include <linux/usb/ch9.h>
- #include <linux/usb/gadget.h>
- #include <malloc.h>
-+#include <power/regulator.h>
- #include <usb.h>
- #include "core.h"
- #include "gadget.h"
-@@ -47,6 +48,7 @@ struct dwc3_generic_priv {
- struct dwc3_generic_host_priv {
- 	struct xhci_ctrl xhci_ctrl;
- 	struct dwc3_generic_priv gen_priv;
-+	struct udevice *vbus_dev;
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 604f9c3ff99c..863e6007a905 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -44,6 +44,7 @@ struct msm_sdhc_plat {
+ struct msm_sdhc {
+ 	struct sdhci_host host;
+ 	void *base;
++	struct clk_bulk clks;
  };
  
- static int dwc3_generic_probe(struct udevice *dev,
-@@ -240,6 +242,13 @@ static int dwc3_generic_host_probe(struct udevice *dev)
- 	if (rc)
- 		return rc;
+ struct msm_sdhc_variant_info {
+@@ -54,36 +55,56 @@ DECLARE_GLOBAL_DATA_PTR;
  
-+	rc = device_get_supply_regulator(dev, "vbus-supply", &priv->vbus_dev);
-+	if (rc)
-+		debug("%s: No vbus regulator found: %d\n", dev->name, rc);
-+
-+	if (priv->vbus_dev)
-+		regulator_set_enable(priv->vbus_dev, true);
-+
- 	hccr = (struct xhci_hccr *)priv->gen_priv.base;
- 	hcor = (struct xhci_hcor *)(priv->gen_priv.base +
- 			HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
-@@ -256,6 +265,9 @@ static int dwc3_generic_host_remove(struct udevice *dev)
- 	if (rc)
- 		return rc;
+ static int msm_sdc_clk_init(struct udevice *dev)
+ {
+-	int node = dev_of_offset(dev);
+-	uint clk_rate = fdtdec_get_uint(gd->fdt_blob, node, "clock-frequency",
+-					400000);
+-	uint clkd[2]; /* clk_id and clk_no */
+-	int clk_offset;
+-	struct udevice *clk_dev;
+-	struct clk clk;
+-	int ret;
++	struct msm_sdhc *prv = dev_get_priv(dev);
++	ofnode node = dev_ofnode(dev);
++	uint clk_rate;
++	int ret, i = 0, n_clks;
++	const char *clk_name;
  
-+	if (priv->vbus_dev)
-+		regulator_set_enable(priv->vbus_dev, false);
+-	ret = fdtdec_get_int_array(gd->fdt_blob, node, "clock", clkd, 2);
++	ret = ofnode_read_u32(node, "clock-frequency", &clk_rate);
+ 	if (ret)
+-		return ret;
++		clk_rate = 400000;
+ 
+-	clk_offset = fdt_node_offset_by_phandle(gd->fdt_blob, clkd[0]);
+-	if (clk_offset < 0)
+-		return clk_offset;
+-
+-	ret = uclass_get_device_by_of_offset(UCLASS_CLK, clk_offset, &clk_dev);
+-	if (ret)
++	ret = clk_get_bulk(dev, &prv->clks);
++	if (ret) {
++		debug("Couldn't get mmc clocks: %d\n", ret);
+ 		return ret;
++	}
+ 
+-	clk.id = clkd[1];
+-	ret = clk_request(clk_dev, &clk);
+-	if (ret < 0)
++	ret = clk_enable_bulk(&prv->clks);
++	if (ret) {
++		debug("Couldn't enable mmc clocks: %d\n", ret);
+ 		return ret;
++	}
+ 
+-	ret = clk_set_rate(&clk, clk_rate);
+-	clk_free(&clk);
+-	if (ret < 0)
+-		return ret;
++	/* If clock-names is unspecified, then the first clock is the core clock */
++	if (!ofnode_get_property(node, "clock-names", &n_clks)) {
++		if (!clk_set_rate(&prv->clks.clks[0], clk_rate)) {
++			printf("Couldn't set core clock rate: %d\n", ret);
++			return -EINVAL;
++		}
++	}
 +
- 	return dwc3_generic_remove(dev, &priv->gen_priv);
++	/* Find the index of the "core" clock */
++	while (i < n_clks) {
++		ofnode_read_string_index(node, "clock-names", i, &clk_name);
++		if (!strcmp(clk_name, "core"))
++			break;
++		i++;
++	}
++
++	if (i >= prv->clks.count) {
++		printf("Couldn't find core clock (index %d but only have %d clocks)\n", i,
++		       prv->clks.count);
++		return -EINVAL;
++	}
++
++	/* The clock is already enabled by the clk_bulk above */
++	ret = clk_set_rate(&prv->clks.clks[i], clk_rate);
++	if (!ret) {
++		printf("Couldn't set core clock rate: %d\n", ret);
++		return -EINVAL;
++	}
+ 
+ 	return 0;
+ }
+@@ -188,6 +209,8 @@ static int msm_sdc_remove(struct udevice *dev)
+ 	if (!var_info->mci_removed)
+ 		writel(0, priv->base + SDCC_MCI_HC_MODE);
+ 
++	clk_release_bulk(&priv->clks);
++
+ 	return 0;
  }
  
 
