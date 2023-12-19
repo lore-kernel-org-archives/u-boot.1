@@ -4,109 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0819C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40280C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 642A9876C8;
-	Tue, 19 Dec 2023 17:18:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C9C8875FD;
+	Tue, 19 Dec 2023 17:21:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="HitMQUOe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GVop2tLP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DFE187561; Tue, 19 Dec 2023 17:18:04 +0100 (CET)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::600])
+ id F322F87729; Tue, 19 Dec 2023 17:21:52 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC225876CF
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:18:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40CC287561
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:21:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VH6zJYxw5//HfTVfwi7pDfewaKVdqliqEaiNVTkH5N6KfTDx2/P3rrw0wolmEKm79p0ZDMT3idaS0KU5I2I9E6vD5cEDydNZvVKeaM5xfp+Pztc/mdm5eoZTlwxJ2fFgnoz7u1jSj5JMMB3SqYZI0pJzFGQanXOPy1xOQFgsHZCpJxuxqHo5vyFp5mXLHZWKQdvK7h3Br8Xbyoy8482bEoTru/VhK9qwueHsJcK752z6FHcLAd8vIC5cH0iZhO6F6QF1jnC5qc4BqNm+zO9ePJQvZA91kPrHekKSGHU6X0vyGDY9Yvdxh7BqBc29a52rQ895ENuUuWn+o0kyYMcpuA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=key5/x7ABj+dNIZU6esa/pAMPNJsdzfSOvVrkFX5lko=;
- b=OnY/lsOn3GrHFvC5BHNwsoZ6AAynky5EuIb0PzWSTEtaeXwhtkHEaXPH+1eEG/cAFzWUHuI5cN2F4a+UfE3muqKddytFhJEs+FmdSceAxD2YZL2ObI5LNR57o27qMFsRhkh0nK+Xk0sIvuDWFt8eBH/LqEc5IDs6F+JymO9t0TWgPi5Aj7KMYL0712Menr548Vw0RyfScHBe+jh7HhGXHRemH7qWko4WQJul9iL7zV/Ys6lFIgvdRnaXv6GffNGkZyGdGmOxTvRFaH4HXgTn+4iz3t8o3LxL++ZN+SSPyIGoZemQTgIBSEOwUQB8DmfeuLlAD+7gKsGaT8kHfddfxw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=key5/x7ABj+dNIZU6esa/pAMPNJsdzfSOvVrkFX5lko=;
- b=HitMQUOetUPqUi6+CtKeKu0Mj5X+CrAqR7rB941cd+GTPHqCzGLuLvcazs835DMgZgmsBpQmzQep+4+5xlqZvjpZJMl1MLWj4lSbyl+N8EIIr1/HSKiESSqSuXAlcuKvrp0ievYM6wGRqFjf2VTS/JQu78n2KthSug5pG4bCZGw=
-Received: from CH0P221CA0041.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::25)
- by IA1PR12MB6209.namprd12.prod.outlook.com (2603:10b6:208:3e7::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.38; Tue, 19 Dec
- 2023 16:16:55 +0000
-Received: from DS1PEPF0001708E.namprd03.prod.outlook.com
- (2603:10b6:610:11d:cafe::e1) by CH0P221CA0041.outlook.office365.com
- (2603:10b6:610:11d::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.39 via Frontend
- Transport; Tue, 19 Dec 2023 16:16:55 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001708E.mail.protection.outlook.com (10.167.17.134) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7113.14 via Frontend Transport; Tue, 19 Dec 2023 16:16:54 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Tue, 19 Dec
- 2023 10:16:52 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH 0/4] arm64: zymqmp: DT alignments
-Date: Tue, 19 Dec 2023 17:16:46 +0100
-Message-ID: <cover.1703002605.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJGLZK6063775;
+ Tue, 19 Dec 2023 10:21:35 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1703002895;
+ bh=Y7myKEMGsGHCyVntTQJ3zUYCeiI/BhoTQLCrO8YLIVs=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=GVop2tLP+fHV0jgXTPYGIgzzQyw8ILWBq8PQrdovyTlusD1zcoMZYvBeKctOgtOWi
+ HMpIiK1zouGT/EKutuN+b4nIofDwfkZa9MsdbvqqySne/zmWhB1gOx8QT+Gd1p0Mib
+ d+tmQvkdPWkpiQOG8rEdPfbxtmx/MzXRJi9mJEkY=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJGLZc4077539
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 19 Dec 2023 10:21:35 -0600
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Dec 2023 10:21:35 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 19 Dec 2023 10:21:34 -0600
+Received: from [10.24.69.34] (ti.dhcp.ti.com [10.24.69.34] (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJGLS7e048444;
+ Tue, 19 Dec 2023 10:21:29 -0600
+Message-ID: <e452e23c-e5b3-47fc-99a9-b3f559b8a7f6@ti.com>
+Date: Tue, 19 Dec 2023 21:51:27 +0530
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1873; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=iLF8GNlioOrfnMoHxpkUFuOXZdHMgjSFUrl6r+rV5NA=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtTGg+8MytQW3El9WFE2aV/Ybo8TkzpvtAp8LEv+NauRZ
- +nDY1/qO2JZGASZGGTFFFmkba6c2Vs5Y4rwxcNyMHNYmUCGMHBxCsBEKtYxzOGPeu+XEq238eek
- vPmcEcVSZu1i0gwLGp783G9brLvI6K/D/KoFFZmzgq8LAgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+Content-Language: en-US
+From: Apurva Nandan <a-nandan@ti.com>
+To: Enric Balletbo i Serra <eballetb@redhat.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
+ Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+References: <20231206123753.1486031-1-a-nandan@ti.com>
+ <CALE0LRuSnxtkO8Mi9a0MSrnzWyDbi91PvXBzA2zhffur29v0cQ@mail.gmail.com>
+ <6696cd93-394b-4df0-9f50-a689ea8be573@ti.com>
+In-Reply-To: <6696cd93-394b-4df0-9f50-a689ea8be573@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001708E:EE_|IA1PR12MB6209:EE_
-X-MS-Office365-Filtering-Correlation-Id: b824746c-e37d-451b-03c9-08dc00adeae6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PimxBggL68r/rBLZHVPuxG1zFA3tjjhUsbCP09BR5dgRtnb7t+di0oLL5B1QWGIK1s9Hkx1ZkRakJ9xTIU5g0wpEKx+Va8rQtudklouT9uaWT187iI/HlGR1rUGWuNRiL1pPcOXvERjjF6zGgxRKsGxCCP+Kav8z7lArFBI1owEyOCM+D75EJEGPJrqm8YR5YMzdRr2EfXI97594r8lDEBZpzG+qCKamxgtxA2pJ4YakPMLohIwc+RW+CGY7GRwcRY0S7Opnr0o3QZetg2gxelAIwedNRwwFSn27/RhMvJ+NtIxKFiI1VjVHicMc9eK8yXdqGAx9+yrCSDJSmFvRGS5rvCNp0IYlAY1cSe8zPKvu8H7W8ZFyy9JUe1e62BYhGVpHcc5McpcC4q1S7RtklLzheglj2lphp0ANkG0PJ9cdJ4xDUlGrfu+sMSXH5Qi892BiVheS8p5nnFa0AXZX+K8BLMEhQ9xPFX68/UzjIwthi4VmCk6Y3foYFHpKOeM8ArKnVBMxj2Y1Pgh/nvUOn4HBVAgfnUGbTsfjSx591F00z8vA0lSUxrJqfGZ6Wec1gYqYoush+9MpIVCqpDJJMB9HS8srm5GnTdsm7LCjG/TW3dh0EMzrYc99TyYGo6xYHI+DMJ/eMEGrXDDM3DZ2a4DeHzx65GaVThOd7UjyAIen7awEX/z8oltpjZgiVFO00NfUzdrm0J5674sEgwaq/SLTF10ZLSnBEeRx+zkAQt9BjL3w6vFm38G5+CuvcIm1iqUA7TxVfaFAd16btgS7/w==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(396003)(39860400002)(136003)(376002)(230922051799003)(1800799012)(64100799003)(82310400011)(186009)(451199024)(40470700004)(36840700001)(46966006)(40480700001)(40460700003)(16526019)(26005)(2906002)(336012)(44832011)(426003)(6666004)(36756003)(110136005)(2616005)(70206006)(316002)(5660300002)(70586007)(36860700001)(83380400001)(8676002)(41300700001)(8936002)(82740400003)(478600001)(81166007)(47076005)(86362001)(356005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 16:16:54.9271 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b824746c-e37d-451b-03c9-08dc00adeae6
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001708E.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6209
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,49 +93,297 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-sending couple of patches to get in sync with Linux kernel and they are
-already in linux-next.
-The last patch is based on the latest proposed update in dt binding.
-When dt binding is reviewed this patch can be merged to U-Boot too but I
-want to make it available earlier.
-
-Thanks,
-Michal
-
-
-Michal Simek (4):
-  arm64: zynqmp: Move fixed clock to / for kv260
-  arm64: zynqmp: Fix clock node name in kv260 cards
-  arm64: zynqmp: Remove mt25qu512a compatible string from SOM
-  arm64: zynqmp: Rename i2c?-gpio to i2c?-gpio-grp
-
- arch/arm/dts/zynq-zc702.dts                |  2 +-
- arch/arm/dts/zynqmp-sc-revB.dts            |  4 +-
- arch/arm/dts/zynqmp-sck-kd-g-revA.dtso     |  2 +-
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso     |  2 +-
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso     |  2 +-
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso     | 52 ++++++++++-----------
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso     | 54 +++++++++++-----------
- arch/arm/dts/zynqmp-sm-k26-revA.dts        |  2 +-
- arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts |  4 +-
- arch/arm/dts/zynqmp-vpk120-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts   |  2 +-
- arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts   |  2 +-
- arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts   |  4 +-
- arch/arm/dts/zynqmp-zcu100-revC.dts        |  2 +-
- arch/arm/dts/zynqmp-zcu102-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu104-revA.dts        |  2 +-
- arch/arm/dts/zynqmp-zcu104-revC.dts        |  2 +-
- arch/arm/dts/zynqmp-zcu106-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu111-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu208-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu216-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu670-revA.dts        |  4 +-
- arch/arm/dts/zynqmp-zcu670-revB.dts        |  4 +-
- 23 files changed, 83 insertions(+), 87 deletions(-)
+On 18/12/23 15:05, Apurva Nandan wrote:
+>
+> On 15/12/23 15:40, Enric Balletbo i Serra wrote:
+>> Hello Apurva,
+>>
+>>
+>> On Wed, Dec 6, 2023 at 1:38 PM Apurva Nandan <a-nandan@ti.com> wrote:
+>>> Hello Everyone!
+>>>
+>>> This series will introduce basic support (SD and UART) support for 
+>>> Texas
+>>> Instruments J784S4 EVM.
+>>>
+>>> The J784S4 SoC device tree patches are taken from kernel patch 
+>>> submissions
+>>> and will be updated as they are accepted and merged to the kernel tree.
+>>> All other patches are specific to SPL and u-boot and do not have
+>>> dependency on other trees. Appreciate a review for acceptance to u-boot
+>>> tree.
+>>>
+>>> Here are some of the salient features of the J784S4 automotive grade
+>>> application processor:
+>>>
+>>> The J784S4 SoC belongs to the K3 Multicore SoC architecture
+>>> platform, providing advanced system integration in automotive,
+>>> ADAS and industrial applications requiring AI at the network edge.
+>>> This SoC extends the K3 Jacinto 7 family of SoCs with focus on
+>>> raising performance and integration while providing interfaces,
+>>> memory architecture and compute performance for multi-sensor, high
+>>> concurrency applications.
+>>>
+>>> Some highlights of this SoC are:
+>>> * Up to 8 Cortex-A72s, four clusters of lockstep capable dual 
+>>> Cortex-R5F MCUs,
+>>>    4 C7x floating point vector DSPs with Matrix Multiply 
+>>> Accelerator(MMA) for
+>>>    deep learning and CNN.
+>>> * 3D GPU: Automotive grade IMG BXS-4-64 MC1
+>>> * Vision Processing Accelerator (VPAC) with image signal processor 
+>>> and Depth
+>>>    and Motion Processing Accelerator (DMPAC)
+>>> * Three CSI2.0 4L RX plus two CSI2.0 4L TX, two DSI Tx, one eDP/DP 
+>>> and one
+>>>    DPI interface.
+>>> * Integrated gigabit ethernet switch, up to 8 ports (TDA4VH), two ports
+>>>    support 10Gb USXGMII; Two 4 lane PCIe-GEN3 controllers, USB3.0 
+>>> Dual-role
+>>>    device subsystems, Up to 20 MCANs, among other peripherals.
+>>>
+>>> See J784S4 Technical Reference Manual (SPRUJ52 - JUNE 2022)
+>>> for further details: http://www.ti.com/lit/zip/spruj52
+>>>
+>>> In addtion, the J784S4 EVM board is designed for TI J784S4 SoC. It
+>>> supports the following interfaces:
+>>> * 32 GB DDR4 RAM
+>>> * x2 Gigabit Ethernet interfaces capable of working in Switch and 
+>>> MAC mode
+>>> * x1 Input Audio Jack, x1 Output Audio Jack
+>>> * x1 USB2.0 Hub with two Type A host and x1 USB 3.1 Type-C Port
+>>> * x2 4L PCIe connector
+>>> * x1 UHS-1 capable micro-SD card slot
+>>> * 512 Mbit OSPI flash, 1 Gbit Octal NAND flash, 512 Mbit QSPI flash,
+>>>    UFS flash.
+>>> * x6 UART through UART-USB bridge
+>>> * XDS110 for onboard JTAG debug using USB
+>>> * Temperature sensors, user push buttons and LEDs
+>>> * 40-pin User Expansion Connector
+>>> * x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
+>>> * x1 15-pin CSI header
+>>> * x6 MCAN instances
+>>>
+>>> Schematics: https://www.ti.com/lit/zip/sprr458
+>>>
+>>> eMMC UDA moode bootlog: 
+>>> https://gist.githubusercontent.com/apurvanandan1997/3cffada252d50a8aa0c00a91f1f2f856/raw/
+>>>
+>>> Changes in v6:
+>>> 1) Move bootph-all of memory node to u-boot.dtsi
+>>> 2) Used a while loop for DRAM controller init, instead of 
+>>> hard-coding for 4 DRAM
+>>> 3) Fixed build error by adding board/ti/j784s4/Kconfig
+>>> 4) Trimmed out j784s4_evm.h
+>>> 5) Fixed checkpatch warnings
+>>>
+>>> Link to v5:
+>>> https://patchwork.ozlabs.org/project/uboot/cover/20231130115552.3580995-1-a-nandan@ti.com/ 
+>>>
+>>>
+>>> Changes in v5:
+>>> 1) Incorporated Andrew Davis' "Move R5 specific code into new r5/ 
+>>> directory" and
+>>>     "Move board selection to mach-k3" series changes.
+>>> 2) Incorporated Neha Francis' "Move to using templated FITs" series 
+>>> changes.
+>>> 3) Synced device tree files with Linux v6.7-rc1
+>>> 4) Changed ti_mmc to mmc1 target from bootstd
+>>> 5) Updated doc based on review comments
+>>> 6) Removed remoteproc support from the series
+>>> 7) Splitted board files patch into smaller patches
+>>> 8) Trimmed j784s4.env to necessary variables
+>>> 9) Used fdtdec_setup_mem_size_base fdtdec_setup_memory_banksize in 
+>>> evm.c
+>>> 10) Trimmed down evm.c to essential header files.
+>>> 11) Switched to multi-dtb fit compilation with config fragments
+>>>
+>>> Link to v4:
+>>> https://lore.kernel.org/u-boot/20231001165545.494212-1-a-nandan@ti.com/
+>>>
+>>> Changes in v4:
+>>> 1) Cleaned up Copyright and SPDX identifiers
+>>> 2) Synced the device trees to Linux v6.6-rc1 tag
+>>> 3) Added cleanup patch for sorting SoC JTAG ID entries
+>>> 4) Removed EEPROM board detect from evm.c and added am69 config 
+>>> fragments
+>>> 5) Updated MAINTAINERS files and commit messages
+>>> 6) Removed struct renaming in ti_k3_r5f_rproc driver
+>>>
+>>> Link to v3:
+>>> https://lore.kernel.org/u-boot/20230908110551.861575-1-a-nandan@ti.com/
+>>>
+>>> Changes in v3:
+>>> 1) Added AM69 SK support in the series
+>>> 2) Switched from distroboot to bootstd support
+>>> 3) Added remoteproc support for J784S4
+>>> 4) Added documentation for both SoCs
+>>> 5) Added binman support
+>>> 6) Removed unnecessarry nodes from r5-evm.dts and evm-u-boot.dtsi
+>>> 7) Added HS device support
+>>> 8) Added env file for environement variables
+>>> 9) Removed ti-serdes-mux bindings
+>>> 10) Cleaned up all files and synced with latest
+>>> 11) Addressed all previous review comments
+>>>
+>>> Note: The base dts files have been sync from next-20230905 linux tag 
+>>> as per review comment received
+>>> on previous re-roll:
+>>> https://lore.kernel.org/u-boot/20230321155227.GV8135@bill-the-cat/
+>>>
+>>> Link to v2:
+>>> https://lore.kernel.org/u-boot/20230321141028.24456-1-hnagalla@ti.com/
+>>>
+>>> Changes in v2:
+>>> - Refactored environement scripts to 'j784s4.env' and removed 
+>>> scripts not
+>>>    needed for basic board bootup.
+>>> - Imported the J7874S4 basic device tree files from v6.2 linux kernel.
+>>> - Moved j784s4 clock definitions and clock data into one patch/commit.
+>>> - coalesce board commits into one commit.
+>>>
+>>> Apurva Nandan (14):
+>>>    arm: dts: Introduce j784s4 dts from linux kernel
+>>>    arm: mach-k3: Add basic support for J784S4 SoC definition
+>>>    arm: mach-k3: Sort SoC JTAG_ID entries
+>>>    soc: ti: k3-socinfo: Add entry for J784S4 SoC
+>>>    arm: mach-k3: j784s4: Add clk and power support
+>>>    drivers: dma: Add support for J784S4 SoC
+>>>    board: ti: j784s4: Add board support for J784S4 EVM
+>>>    board: ti: j748s4: Add board config yaml files
+>>>    board: ti: j784s4: Add boot environment variables
+>>>    arm: dts: Introduce j784s4 u-boot dts files
+>>>    arm: dts: Add bootph-all for memory node
+>>>    configs: j784s4_evm: Add defconfig for j784s4 evm board
+>>>    doc: board: ti: k3: Add J784S4 EVM and AM69 SK documentation
+>>>    board: ti: j784s4: Add MAINTAINERS file
+>>>
+>>> Dasnavis Sabiya (3):
+>>>    arm: dts: Introduce am69-sk dts from linux kernel
+>>>    arm: dts: Introduce am69-sk u-boot dts files
+>>>    configs: Add am69_sk_* defconfig fragments
+>>>
+>>>   arch/arm/dts/Makefile                         |    4 +
+>>>   arch/arm/dts/k3-am69-r5-sk.dts                |  105 +
+>>>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |   31 +
+>>>   arch/arm/dts/k3-am69-sk.dts                   |  900 ++
+>>>   arch/arm/dts/k3-j784s4-binman.dtsi            |  435 +
+>>>   arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi  | 8757 ++++++++++++++++
+>>>   arch/arm/dts/k3-j784s4-ddr.dtsi               | 8858 
+>>> +++++++++++++++++
+>>>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |   31 +
+>>>   arch/arm/dts/k3-j784s4-evm.dts                |  981 ++
+>>>   arch/arm/dts/k3-j784s4-main.dtsi              | 2068 ++++
+>>>   arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi        |  743 ++
+>>>   arch/arm/dts/k3-j784s4-r5-evm.dts             |  105 +
+>>>   arch/arm/dts/k3-j784s4-thermal.dtsi           |  101 +
+>>>   arch/arm/dts/k3-j784s4.dtsi                   |  294 +
+>>>   arch/arm/mach-k3/Kconfig                      |   17 +-
+>>>   arch/arm/mach-k3/Makefile                     |    2 +
+>>>   arch/arm/mach-k3/arm64-mmu.c                  |   52 +
+>>>   arch/arm/mach-k3/include/mach/hardware.h      |   13 +-
+>>>   .../mach-k3/include/mach/j784s4_hardware.h    |   60 +
+>>>   arch/arm/mach-k3/include/mach/j784s4_spl.h    |   47 +
+>>>   arch/arm/mach-k3/include/mach/spl.h           |    4 +
+>>>   arch/arm/mach-k3/j784s4/Kconfig               |   35 +
+>>>   arch/arm/mach-k3/j784s4_fdt.c                 |   15 +
+>>>   arch/arm/mach-k3/j784s4_init.c                |  335 +
+>>>   arch/arm/mach-k3/r5/Makefile                  |    1 +
+>>>   arch/arm/mach-k3/r5/j784s4/Makefile           |    7 +
+>>>   arch/arm/mach-k3/r5/j784s4/clk-data.c         |  428 +
+>>>   arch/arm/mach-k3/r5/j784s4/dev-data.c         |   98 +
+>>>   board/ti/j784s4/Kconfig                       |   37 +
+>>>   board/ti/j784s4/MAINTAINERS                   |   25 +
+>>>   board/ti/j784s4/Makefile                      |    7 +
+>>>   board/ti/j784s4/board-cfg.yaml                |   37 +
+>>>   board/ti/j784s4/evm.c                         |   38 +
+>>>   board/ti/j784s4/j784s4.env                    |   18 +
+>>>   board/ti/j784s4/pm-cfg.yaml                   |   13 +
+>>>   board/ti/j784s4/rm-cfg.yaml                   | 3058 ++++++
+>>>   board/ti/j784s4/sec-cfg.yaml                  |  380 +
+>>>   board/ti/j784s4/tifs-rm-cfg.yaml              | 2656 +++++
+>>>   configs/am69_sk_a72.config                    |    3 +
+>>>   configs/am69_sk_r5.config                     |    3 +
+>>>   configs/j784s4_evm_a72_defconfig              |  180 +
+>>>   configs/j784s4_evm_r5_defconfig               |  163 +
+>>>   doc/board/ti/j784s4_evm.rst                   |  303 +
+>>>   doc/board/ti/k3.rst                           |    1 +
+>>>   drivers/clk/ti/clk-k3.c                       |    6 +
+>>>   drivers/dma/ti/Makefile                       |    1 +
+>>>   drivers/dma/ti/k3-psil-j784s4.c               |  166 +
+>>>   drivers/dma/ti/k3-psil-priv.h                 |    1 +
+>>>   drivers/dma/ti/k3-psil.c                      |    2 +
+>>>   drivers/firmware/ti_sci_static_data.h         |   34 +
+>>>   drivers/power/domain/ti-power-domain.c        |    6 +
+>>>   drivers/ram/Kconfig                           |    2 +-
+>>>   drivers/soc/soc_ti_k3.c                       |    3 +
+>>>   include/configs/j784s4_evm.h                  |   15 +
+>>>   include/k3-clk.h                              |    1 +
+>>>   include/k3-dev.h                              |    1 +
+>>>   56 files changed, 31675 insertions(+), 12 deletions(-)
+>>>   create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
+>>>   create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-am69-sk.dts
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-binman.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-ddr.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-evm.dts
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-main.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-r5-evm.dts
+>>>   create mode 100644 arch/arm/dts/k3-j784s4-thermal.dtsi
+>>>   create mode 100644 arch/arm/dts/k3-j784s4.dtsi
+>>>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_hardware.h
+>>>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_spl.h
+>>>   create mode 100644 arch/arm/mach-k3/j784s4/Kconfig
+>>>   create mode 100644 arch/arm/mach-k3/j784s4_fdt.c
+>>>   create mode 100644 arch/arm/mach-k3/j784s4_init.c
+>>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/Makefile
+>>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/clk-data.c
+>>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/dev-data.c
+>>>   create mode 100644 board/ti/j784s4/Kconfig
+>>>   create mode 100644 board/ti/j784s4/MAINTAINERS
+>>>   create mode 100644 board/ti/j784s4/Makefile
+>>>   create mode 100644 board/ti/j784s4/board-cfg.yaml
+>>>   create mode 100644 board/ti/j784s4/evm.c
+>>>   create mode 100644 board/ti/j784s4/j784s4.env
+>>>   create mode 100644 board/ti/j784s4/pm-cfg.yaml
+>>>   create mode 100644 board/ti/j784s4/rm-cfg.yaml
+>>>   create mode 100644 board/ti/j784s4/sec-cfg.yaml
+>>>   create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
+>>>   create mode 100644 configs/am69_sk_a72.config
+>>>   create mode 100644 configs/am69_sk_r5.config
+>>>   create mode 100644 configs/j784s4_evm_a72_defconfig
+>>>   create mode 100644 configs/j784s4_evm_r5_defconfig
+>>>   create mode 100644 doc/board/ti/j784s4_evm.rst
+>>>   create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
+>>>   create mode 100644 include/configs/j784s4_evm.h
+>>>
+>>> -- 
+>>> 2.34.1
+>>>
+>> Thanks for sending these patches, this has been tested against AM69-SK
+>> board, so for the full series you can also add:
+>>
+>> Tested-by: Enric Balletbo i Serra <eballetbo@redhat.com>
+>>
+>> While here, it would be really nice if you can send the required
+>> firmware (ti-sysfw and ti-dm if I'm not mistaken) to linux-firmware.
+>>
+>> Thanks,
+>>    Enric
+>>
+> Okay, sure will send firmware also. Thanks for the tested-by.
+>
+We will work on upstreaming the firmwares to linux-firmware, in the 
+meantime you
+can use firmwares from ti-linux-firmware: 
+https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/
 
 -- 
-2.36.1
+Regards,
+Apurva Nandan,
+Texas Instruments.
 
