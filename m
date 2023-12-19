@@ -4,77 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 465FDC46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A5EC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:42:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA8B687876;
-	Tue, 19 Dec 2023 12:33:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BEDE877C8;
+	Tue, 19 Dec 2023 12:34:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xu+ZAvoU";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WoUHEG/2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 762D386C68; Tue, 19 Dec 2023 11:35:07 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 6DBA487879; Tue, 19 Dec 2023 12:33:58 +0100 (CET)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F1D5874B1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:35:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0A6487834
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 12:33:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYo6m005591;
- Tue, 19 Dec 2023 04:34:50 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982090;
- bh=7S0ky+qLUv4mYZcZdN8bCTtgfz7kZfz83qDX7Rh0ot0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Xu+ZAvoUb1mGBpbpUNDrb9UEBVEA6vuOyfw6LMChphsfX0a5vlToayIGpXJoSIC2h
- d4ePr1cIDfLP0YhThIhiPj6wtpb50So9tvCNi6OW1bTuAyLTgx+BCuHKqD6f71ciAk
- iGHdewiX3Kxc6Mh6nJAxxk8ZJxrs9Iof9FOzPK4s=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYoME130236
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:50 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:50 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:49 -0600
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYnnM011726;
- Tue, 19 Dec 2023 04:34:49 -0600
-Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYnPi022853;
- Tue, 19 Dec 2023 04:34:49 -0600
-From: MD Danish Anwar <danishanwar@ti.com>
-To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
- <nm@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- MD Danish Anwar <danishanwar@ti.com>, Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 15/16] tools/fdtgrep: Include __symbols__ table
-Date: Tue, 19 Dec 2023 16:04:17 +0530
-Message-ID: <20231219103418.3445886-16-danishanwar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
-References: <20231219103418.3445886-1-danishanwar@ti.com>
+ spf=pass smtp.mailfrom=chanho61.park@samsung.com
+Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20231219113352epoutp026cf7bc05af159e236baea3cbbf8d5c1c~iOGjvRvEw0999709997epoutp02Y
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:33:52 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20231219113352epoutp026cf7bc05af159e236baea3cbbf8d5c1c~iOGjvRvEw0999709997epoutp02Y
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1702985632;
+ bh=AU/wQCvvj3MOZA2mlLRRyvdOd27+xX4wpwr6QxF5q00=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=WoUHEG/2DajnfKqowNqvlWF3XN1zR1p/GYOwQqZ5txo0Kgu8+7U6MR2N2sVNQIQ+q
+ T5Me8wQA/wKU2vZLw+Ugq27aLMJ6c6WZu0GARm4ml7SAZ6hn8m23GZd4BFebAmpo2y
+ X0ZpWs0Nzlf0fnz1liIRatz9xIeuST9xyU8fRE94=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas2p3.samsung.com (KnoxPortal) with ESMTP id
+ 20231219113351epcas2p34b5d607dba8ed3f8bf3d8ee785279980~iOGjTT04l1545715457epcas2p3t;
+ Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
+Received: from epsmges2p3.samsung.com (unknown [182.195.36.89]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4SvZMg38nlz4x9Pw; Tue, 19 Dec
+ 2023 11:33:51 +0000 (GMT)
+Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
+ epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 66.27.10022.F9F71856; Tue, 19 Dec 2023 20:33:51 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
+ 20231219113351epcas2p217dab3d7ee26e61b9f83bb825d517ca9~iOGicatvJ2535325353epcas2p2r;
+ Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20231219113351epsmtrp1737a8ab53505ee6a776757c27659e81b~iOGibk9WR2021420214epsmtrp18;
+ Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
+X-AuditID: b6c32a47-bfdfa70000002726-23-65817f9f9b79
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 1D.80.08755.E9F71856; Tue, 19 Dec 2023 20:33:50 +0900 (KST)
+Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20231219113350epsmtip1dca3b5763922f7dad2620e0d44e9c3e4~iOGiRCBMz2787727877epsmtip1R;
+ Tue, 19 Dec 2023 11:33:50 +0000 (GMT)
+From: "Chanho Park" <chanho61.park@samsung.com>
+To: "'Sam Protsenko'" <semen.protsenko@linaro.org>, "'Minkyu Kang'"
+ <mk7.kang@samsung.com>, "'Tom Rini'" <trini@konsulko.com>, "'Lukasz
+ Majewski'" <lukma@denx.de>, "'Sean Anderson'" <seanga2@gmail.com>
+Cc: "'Simon Glass'" <sjg@chromium.org>, "'Heinrich Schuchardt'"
+ <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
+In-Reply-To: <20231213031646.28828-9-semen.protsenko@linaro.org>
+Subject: RE: [PATCH 08/13] clk: exynos: Add Exynos850 clock driver
+Date: Tue, 19 Dec 2023 20:33:50 +0900
+Message-ID: <006d01da326f$3d29d000$b77d7000$@samsung.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Tue, 19 Dec 2023 12:33:18 +0100
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-us
+X-Drm-Type: PERSONAL
+X-Msg-Type: PERSONAL
+Thread-Index: AQJxF1WUQWvk8XWc6dZlUfJtoqni1wI6sLFMAnYhAe6vXSkJIA==
+x-delete-securityphrase: Y
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNJsWRmVeSWpSXmKPExsWy7bCmqe78+sZUg0ndohbP311msug40sJo
+ sfXeBCaL5337mCy+bdnGaDF10mZ2i7d7O9ktDk/9wOjA4TG74SKLx7xZJ1g8ds66y+7x4WOc
+ x6sDq9g97lzbw+Zx9s4ORo++LasYAziism0yUhNTUosUUvOS81My89JtlbyD453jTc0MDHUN
+ LS3MlRTyEnNTbZVcfAJ03TJzgE5TUihLzCkFCgUkFhcr6dvZFOWXlqQqZOQXl9gqpRak5BSY
+ F+gVJ+YWl+al6+WlllgZGhgYmQIVJmRnnNh6mq1gO3vFoofdbA2MC9m6GDk5JARMJFben8zY
+ xcjFISSwg1HiUtsJNgjnE6PEjitrWCGcb4wS/773MsK0rNiyGSqxl1Hi9qrLLBDOC0aJR/e+
+ MINUsQnoS7zs2AZWJSJwllHizK1T7CAJZoE8iRn7ZwDZHBycAg4SSxpYQMLCAk4Sn3ccASth
+ EVCVePpxFRNICa+ApcSFzUkgYV4BQYmTM5+wQEyRl9j+dg4zxEEKEj+fLmOFiItLvDwKMUZC
+ QETi4eqPcHbrvbNg9SJAq97++g8Vl5KY/follP2GQ+LCb3cI20Wi8c9XFghbWOLV8S1w9S/7
+ 26DsYomutktgv0sINDBKnG6/ApWwl/hxcworyP3MApoS63fpQ9zGJ9Fx+C/Y5xICvBIdbUIT
+ GFVmIflsFpLPZiH5ZhbCoAWMLKsYxVILinPTU4uNCozhkZ2cn7uJEZxqtdx3MM54+0HvECMT
+ B+MhRgkOZiURXpdF9alCvCmJlVWpRfnxRaU5qcWHGE2BQT2RWUo0OR+Y7PNK4g1NLA1MzMwM
+ zY1MDcyVxHnvtc5NERJITyxJzU5NLUgtgulj4uCUamBieVqkrs4w33nhIdnU2btzYv+1Pf+V
+ czfHjOtnL9/iq+2HNnE846wrY9UPX8PzrrNXtLlRL/DnMuYD5z5uq3jfabFz3dugzgfhZof+
+ tK8W//NR/WSx7/J+xesSWt8iFYVnVTya3xOwek7d03/WPI5Hd7nxyS27klxaLrdD+Er79Pdn
+ Pz5LmhKW/YA9RPXr5O+Z928Ih37NifF5PP3/yQfiHxUTNmwT2bJD3eWXRh6XX/9zy2W8Mzav
+ TMv/Ei2xcalboae1yfSbz31uLq55Fxci3z1xP0PXlJAzC1Rcz3krJ2eufjPv//JbdSuaivQ+
+ X2BZxFnhv3Al/7GH7/wYPesn+L5vNNNet+KlZ0GHKM9iJZbijERDLeai4kQAS9RSDT4EAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrNIsWRmVeSWpSXmKPExsWy7bCSnO68+sZUg9csFs/fXWay6DjSwmix
+ 9d4EJovnffuYLL5t2cZoMXXSZnaLt3s72S0OT/3A6MDhMbvhIovHvFknWDx2zrrL7vHhY5zH
+ qwOr2D3uXNvD5nH2zg5Gj74tqxgDOKK4bFJSczLLUov07RK4Mk5sPc1WsJ29YtHDbrYGxoVs
+ XYycHBICJhIrtmxmBbGFBHYzSkw7bQURl5V49m4HO4QtLHG/5QhQDRdQzTNGiR/HPoM1swno
+ S7zs2AaWEBG4yCixpmEnI0iCWaBA4uL8a2wQHUcZJbbum87UxcjBwSngILGkgQWkRljASeLz
+ jiNgG1gEVCWeflwFVsIrYClxYXMSSJhXQFDi5MwnLCBhZgE9ibaNUNPlJba/ncMMcZuCxM+n
+ y1hhbv5zdC4bRI24xMujR6DuF5F4uPoj3C+vjm+Bi7feOws2RwTomre//kPFxSRmTrsMNV9K
+ Yvbrl+wTGCVnIbloFsJFs5BcNAvJ5gWMLKsYJVMLinPTc4sNCwzzUsv1ihNzi0vz0vWS83M3
+ MYLjX0tzB+P2VR/0DjEycTAeYpTgYFYS4XVZVJ8qxJuSWFmVWpQfX1Sak1p8iFGag0VJnFf8
+ RW+KkEB6YklqdmpqQWoRTJaJg1OqgUnZeq3sP8czy428/2w9eDzFnWl9wO2of6mTAoL3cbRO
+ +Tsz3OHtpull/7mFci7JMCUoNFcvWabsfWOlxwGVY+fF2A7Gr/yTvXyGg4Tzi2hjz7VzHK3u
+ 35JUFNmV2qQck7PX6uiWCb1OVcvP3H+0/n5ZWtH9mc9jGI/wHLGyKPldebrNXmnSz6PczYYf
+ Z9XHcdvu/5D/5yJDfbppcFIYi9YGoc13vCPqGi4xf43xfy87rd9zRofY31nrFq9OZVtz9eMZ
+ B7G3NQqHTRXmXXwlXNR2onwG89olU3uFsgQ3Vy8XPdfzfYrqPw2xNmN5Z79HH002s92TcfQq
+ NZq1jPnAS8VL4r8KGlxF/q6aJKlSm6HEUpyRaKjFXFScCAAiWv/jbgMAAA==
+X-CMS-MailID: 20231219113351epcas2p217dab3d7ee26e61b9f83bb825d517ca9
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20231213031843epcas2p33e1d770b197b3053635facb5212f26dc
+References: <20231213031646.28828-1-semen.protsenko@linaro.org>
+ <CGME20231213031843epcas2p33e1d770b197b3053635facb5212f26dc@epcas2p3.samsung.com>
+ <20231213031646.28828-9-semen.protsenko@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +141,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is required for overlays to work at SPL.
+> -----Original Message-----
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Sam Protsenko
+> Sent: Wednesday, December 13, 2023 12:17 PM
+> To: Minkyu Kang <mk7.kang@samsung.com>; Tom Rini <trini@konsulko.com>;
+> Lukasz Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>; Heinrich Schuchardt
+> <xypron.glpk@gmx.de>; u-boot@lists.denx.de
+> Subject: [PATCH 08/13] clk: exynos: Add Exynos850 clock driver
+> 
+> Heavily influenced by its Linux kernel counterpart. It's implemented on
+> top of recently added Samsung CCF clock framework API. For now only UART
+> leaf clocks are implemented, along with all preceding clocks in CMU_TOP
+> and CMU_PERI. The UART baud clock is required in the serial driver, to
+> get its rate for the consequent baud rate calculation.
+> 
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-Loading of symbol table depends on DT Overlay support in SPL
-so make it compile-time dependent. Without this SPL fails to
-boot some platforms where this feature is not enabled
-(e.g. dra71-evm.)
-
-Without including the <linux/kconfig.h> file, the symbol
-CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY will not be visible and
-we will never include the symbol table.
-
-So include <linux/kconfig.h>
-
-Due to some reason it needs to be included after
-[#include "fdt_host.h"] otherwise it causes a build error.
-
-Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
----
- tools/fdtgrep.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-index 7eabcab439..706b4a35f4 100644
---- a/tools/fdtgrep.c
-+++ b/tools/fdtgrep.c
-@@ -22,6 +22,8 @@
- #include "fdt_host.h"
- #include "libfdt_internal.h"
- 
-+#include <linux/kconfig.h>
-+
- /* Define DEBUG to get some debugging output on stderr */
- #ifdef DEBUG
- #define debug(a, b...) fprintf(stderr, a, ## b)
-@@ -1234,6 +1236,12 @@ int main(int argc, char *argv[])
- 		disp.fout = stdout;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY)) {
-+		/* include symbol table */
-+		if (value_add(&disp, &disp.value_head, FDT_IS_NODE, 1, "/__symbols__"))
-+			usage("Cannot add __symbols__ value");
-+	}
-+
- 	/* Run the grep and output the results */
- 	ret = do_fdtgrep(&disp, filename);
- 	if (disp.output_fname)
--- 
-2.34.1
+Reviewed-by: Chanho Park <chanho61.park@samsung.com>
 
