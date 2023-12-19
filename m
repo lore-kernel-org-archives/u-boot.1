@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 267CDC46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 15:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4A33C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 15:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6895B87530;
-	Tue, 19 Dec 2023 16:04:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 74E3A876C0;
+	Tue, 19 Dec 2023 16:04:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="QmiEaKni";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mBO8Z5SR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30AA287695; Tue, 19 Dec 2023 16:04:26 +0100 (CET)
+ id 8943687695; Tue, 19 Dec 2023 16:04:26 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CBB7871C3
+ by phobos.denx.de (Postfix) with ESMTPS id B964687508
  for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 16:04:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,28 +31,28 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id E9AAD3F6CB; 
- Tue, 19 Dec 2023 15:04:18 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DEB7242F66; 
+ Tue, 19 Dec 2023 15:04:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1702998259;
- bh=4kwdl1ChXa+lpy0q8XCKJiyrrDmjARdBTU6yqmGiXPw=;
+ s=20210705; t=1702998262;
+ bh=MzopbwjGiEFun8q4EPmgVNudrXbt+SGO+F8n/e3J++w=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=QmiEaKniWV1tk2GD6cOzs+sWtwZIliJ+CMOt4xP8ORc37ngh9JtCgsBMSUb7gNE1p
- omM/DswXmJRsj4bx6GnBkefKXSVNe/eynjF8/wuj6u3+KUQzLRqLCc2bzbIVcLDw6G
- aDClbO4CZrxOxgMjTkVbYw6rZrS9iPGIHwtkFs/g743nHMvT/VrYI+l5ush1MpAsyo
- aZpMzHPfTeXhRH2yguqR8X1aDnC5ftDv7HrmYFCEXXiZD//Q4CqzBZbjNAFoot15Ve
- nY3ot2GqYkP0P4gI+Qn/dxkrdya6f4e1coXJ/NX6Mnpp/keBkdfNxPdnrJShAtEyrn
- 5r61Wrtcd+PiA==
+ b=mBO8Z5SRv889aRKu3MXZ2svNVmRnVLLihe43KrZPMP1zydctA1fBnOM/FX8BXimR/
+ Z/XDH4rBwiFCJEq6+cJz7403JxjZQ/9LhBbjkH5QJvqPzfNKpa4l2JcWhc9/yLyTa4
+ JKyc9wun7ACHKHkDEHd/vURkC0tsAZSoL0QzT8FeNtzetm4kuGYN7TMg461MrYXtbk
+ QENFJOShg2Kqzk1gn1lAbw6otJhC8C+3tpHeJpt/O4xMrM/kDb789KOVjJbmTr9vP7
+ BUVo2YXhbTslrZILlsCNhglINkHGshQwQhlTHGV0+vk02c5/OfuBc5RhwjHnmljvUr
+ Z+g5e72HKgn3Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 1/9] acpi: Kconfig symbol CONFIG_QFW_ACPI
-Date: Tue, 19 Dec 2023 16:04:00 +0100
-Message-Id: <20231219150408.10949-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 3/9] arm: add ACPI fields to global data
+Date: Tue, 19 Dec 2023 16:04:02 +0100
+Message-Id: <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
 References: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
@@ -74,104 +74,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have two implementations of write_acpi_tables(). One for writing ACPI
-tables based on ACPI_WRITER() entries another based on copying tables from
-QEMU.
-
-Create a symbol CONFIG_QFW_ACPI that signifies copying ACPI tables from
-QEMU and use it consistently.
+Add fields for the location of ACPI tables to the global data.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 v4:
 	no change
 v3:
-	no change
+	let tables in global data depend on CONFIG_(SPL_)ACPI
 v2:
-	no change
+	new patch
 ---
- drivers/misc/Kconfig   | 7 +++++++
- drivers/misc/qfw.c     | 4 ++--
- lib/acpi/Makefile      | 2 +-
- lib/acpi/acpi_writer.c | 4 ++--
- 4 files changed, 12 insertions(+), 5 deletions(-)
+ arch/arm/include/asm/global_data.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index ed7ecedd3a..e8e4400516 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -540,6 +540,13 @@ config QFW
- 	  Hidden option to enable QEMU fw_cfg interface and uclass. This will
- 	  be selected by either CONFIG_CMD_QFW or CONFIG_GENERATE_ACPI_TABLE.
- 
-+config QFW_ACPI
-+	bool
-+	default y
-+	depends on QFW && GENERATE_ACPI_TABLE && !SANDBOX
-+	help
-+	  Hidden option to read ACPI tables from QEMU.
-+
- config QFW_PIO
- 	bool
- 	depends on QFW
-diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
-index e3b6b4cd74..307334faf4 100644
---- a/drivers/misc/qfw.c
-+++ b/drivers/misc/qfw.c
-@@ -21,7 +21,7 @@
- #include <tables_csum.h>
- #include <asm/acpi_table.h>
- 
--#if defined(CONFIG_GENERATE_ACPI_TABLE) && !defined(CONFIG_SANDBOX)
-+#ifdef QFW_ACPI
- /*
-  * This function allocates memory for ACPI tables
-  *
-@@ -259,7 +259,7 @@ ulong acpi_get_rsdp_addr(void)
- 	file = qfw_find_file(dev, "etc/acpi/rsdp");
- 	return file->addr;
- }
--#endif
-+#endif /* QFW_ACPI */
- 
- static void qfw_read_entry_io(struct qfw_dev *qdev, u16 entry, u32 size,
- 			      void *address)
-diff --git a/lib/acpi/Makefile b/lib/acpi/Makefile
-index c1c9675b5d..cc2868488a 100644
---- a/lib/acpi/Makefile
-+++ b/lib/acpi/Makefile
-@@ -12,7 +12,7 @@ obj-$(CONFIG_$(SPL_)ACPIGEN) += acpi_table.o
- obj-y += acpi_writer.o
- 
- # With QEMU the ACPI tables come from there, not from U-Boot
--ifndef CONFIG_QEMU
-+ifndef CONFIG_QFW_ACPI
- obj-y += base.o
- obj-y += csrt.o
- obj-y += mcfg.o
-diff --git a/lib/acpi/acpi_writer.c b/lib/acpi/acpi_writer.c
-index 946f90e8e7..9b9fdc190b 100644
---- a/lib/acpi/acpi_writer.c
-+++ b/lib/acpi/acpi_writer.c
-@@ -48,7 +48,7 @@ int acpi_write_one(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	return 0;
- }
- 
--#ifndef CONFIG_QEMU
-+#ifndef CONFIG_QFW_ACPI
- static int acpi_write_all(struct acpi_ctx *ctx)
- {
- 	const struct acpi_writer *writer =
-@@ -115,7 +115,7 @@ ulong acpi_get_rsdp_addr(void)
- 
- 	return map_to_sysmem(gd->acpi_ctx->rsdp);
- }
--#endif /* QEMU */
-+#endif /* QFW_ACPI */
- 
- void acpi_setup_ctx(struct acpi_ctx *ctx, ulong start)
- {
+diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+index 75bd9d56f8..c3d87caa0b 100644
+--- a/arch/arm/include/asm/global_data.h
++++ b/arch/arm/include/asm/global_data.h
+@@ -19,7 +19,12 @@ struct arch_global_data {
+ #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
+ 	u32 sdhc_clk;
+ #endif
+-
++#if CONFIG_IS_ENABLED(ACPI)
++	ulong table_start;		/* Start address of ACPI tables */
++	ulong table_end;		/* End address of ACPI tables */
++	ulong table_start_high;		/* Start address of high ACPI tables */
++	ulong table_end_high;		/* End address of high ACPI tables */
++#endif
+ #if defined(CONFIG_FSL_ESDHC)
+ 	u32 sdhc_per_clk;
+ #endif
 -- 
 2.40.1
 
