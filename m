@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49135C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AFAFC46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:42:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4F8E87282;
-	Tue, 19 Dec 2023 14:42:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+	by phobos.denx.de (Postfix) with ESMTP id 55ACB876A4;
+	Tue, 19 Dec 2023 14:42:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="X9yYHFUU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MpkX0pEK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 253198752B; Tue, 19 Dec 2023 14:39:08 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0191087669; Tue, 19 Dec 2023 14:42:53 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FCAC871CC
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:39:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F4A386EA6
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:42:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 044D7A13E8;
- Tue, 19 Dec 2023 14:39:01 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=mail; bh=PYDF6pWKn6RBcgBlAXHy
- 692IiZus+0Nl1w+yib3VAzQ=; b=X9yYHFUUlgplscpx9K6D/1M9fGHQGlwtMLZt
- 0dw6gv3sSiHfAyn6RxkMLHUe/zhCo75AZeav5W1af04CyZB+F2lsnooXH1xNEybf
- g7JuN54ZhuYeYscnGlbEg85qSgLZ6Ut7aPoWkFzkkWsgupTyLfkDLBUk/z7klt5r
- EeAVk8GT7hbs0jR1TpQT3AJk/IceItLIEYDKsL/NZB1fhRCiINpO19IuW08kAoTA
- Ej+cGWxiQkR+rEtjU5YgxSrXd5/IvtA5bXQg42d2EDSLvUNFk82DkBCVqYN7DyOd
- r4fAIAOdXQPg6Ye+pqUnid1JhUmkbABlWYiecivcjKCYwCL+jJxLJ0GK0aU7NIic
- 3p45pEt8HxKkNKee58psDQK1d7zP2bD9rNtUtg1g1Dsk9Ey/qTqhvlCfFQtbXTnU
- Ngg4aOBNQgzan9eEdvpzorrR+Q2qUTS+2rTiHlbMn00Y3Ws04fE9ONIbAOjqfRtV
- Mr7OWZYtyB9N12pTunI86OZjqvExucorjnijv1tmvuM17qZNZwVFDEDmPP+eRVrW
- l+BZiXrd+hkl9Mc4qgPl8V4DP7z/kKWK7ebLjZvMQMXdsV3tavyIOREEyJIOTwD3
- e0nl4hzE7KYmnSVnoHE5t9BGQipTJzSpVYktX8AWrFF9qg77trVEx8z+64OZ1q21
- uSUEgnw=
-Message-ID: <7069b019-cc2b-46fa-b293-034e9dbbc698@prolan.hu>
-Date: Tue, 19 Dec 2023 14:38:59 +0100
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a23350cd51cso344138266b.2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:42:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702993370; x=1703598170; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+4c/D109t7fxkb91zr1iUdnvCib1309hmGtfe003yL8=;
+ b=MpkX0pEKaxqOOXpc3GAlQmiy2+kyrNrgwcAdoAkV5D5Pv5UUrM97uUdLZIBvu8GnhT
+ HrfQStpjyj+VJIfMcAfqiIO1FIRhw6EfgN7SMeLnOxE2KWtQ1Xju9NX32cuSD3E+IyFJ
+ WdKdpdWXF59SjUfTBgzAbb6clkC9HN1fliY7HdrT1z5ba6ZL14RBCW594Q9yzdfBsd9w
+ Yj2ChEsBNpcT4Y3z3cZvzwNgUcMU6i272M6xQLDXVprp8qdRpy9zKKvMudSizUuA9qsm
+ iNa2CrMDl+xgohWUnHnDRqzTpY9NL74U4vxT+EMKjvllkrHV4olSABg8Wi1mq7qXD4N1
+ aRhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702993370; x=1703598170;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+4c/D109t7fxkb91zr1iUdnvCib1309hmGtfe003yL8=;
+ b=t6g2rNJl/3gCsGzjzsi2WlNBQ3DjMGEO9/bq759lkCBbe9BIHs7QXTpo3XHny6E6uS
+ 47c5F3mx3sOeK8BKjLcFDDAXrGpu4+k0jaUE8G2xsUmhWxt7JX9OvI7j87PEkoxS/ZXS
+ pIgZbvM2TN9LR/TK0zb68uSfBqsSoml0KSMmS/ZK3eUoXnC+pN0AF8hnSuPiDZ1njaOD
+ ICaOA//wn7UD1KtQ1g2feQjTAlSSHdHuWQY0FmOMFj+4Pbl+PZ164jBa8jgPkssWpRHg
+ ygkdNj+IloSbcV0RpxPgT5V9qZ/91nnvlv3gRQ0Ivv9JzzjyWezXNsK4R4NT8ExhNVgf
+ VQ5g==
+X-Gm-Message-State: AOJu0YwraxMlNdpDv1WrxHb9AO7X8e/wxHFoFaJPjSZ2hsPih6u2MRn4
+ +CV9j1BAMFFuGHPkXgrZFVqula7W3mMX8vbwn8Y=
+X-Google-Smtp-Source: AGHT+IGXIXg251vN0/OHuyP1oZjA/XLqgwEDNQg4P2b4l0KHC2gU6wTdXDYD9bNK8De/d5zibOqT6E/l4cVj3khJ5pU=
+X-Received: by 2002:a17:906:209e:b0:a23:54a7:3b13 with SMTP id
+ 30-20020a170906209e00b00a2354a73b13mr2072571ejq.123.1702993369693; Tue, 19
+ Dec 2023 05:42:49 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lib: rsa: Print detailed error info in rsa_engine_init()
- on engine resolution failure
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Haijun Qin
- <qinhaijun@eswincomputing.com>
-References: <20231214165416.35354-1-csokas.bence@prolan.hu>
- <20231214175402.GN2513409@bill-the-cat>
-Content-Language: en-US
-From: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>
-In-Reply-To: <20231214175402.GN2513409@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.254.7.28]
-X-ClientProxiedBy: ATLAS.intranet.prolan.hu (10.254.0.229) To
- ATLAS.intranet.prolan.hu (10.254.0.229)
-X-EsetResult: clean, is OK
-X-EsetId: 37303A29CE70385C6D7C66
-X-Mailman-Approved-At: Tue, 19 Dec 2023 14:42:46 +0100
+References: <20231219122439.31983-1-heinrich.schuchardt@canonical.com>
+ <20231219122439.31983-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231219122439.31983-5-heinrich.schuchardt@canonical.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 19 Dec 2023 21:42:43 +0800
+Message-ID: <CAEUhbmVTn3_noumF2NSsPKZwrcdUwgopvRJCOd_VtmBR0W9PpA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/9] risc-v: add ACPI fields to global data
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,15 +89,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thank you. Just one question: When can we expect it to be applied?
+On Tue, Dec 19, 2023 at 8:24=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Add fields for the location of ACPI tables to the global data.
 
-2023. 12. 14. 18:54 keltezéssel, Tom Rini írta:
-> On Thu, Dec 14, 2023 at 05:54:17PM +0100, Csókás Bence wrote:
-> 
->> Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
-> 
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> 
+nits: I believe the tag should be 'riscv' instead of 'risc-v'.
 
-Bence
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> v3:
+>         let tables in global data depend on CONFIG_(SPL_)ACPI
+> v2:
+>         no change
+> ---
+>  arch/riscv/include/asm/global_data.h | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
 
+Otherwise,
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
