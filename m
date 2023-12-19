@@ -4,67 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A95DC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 14:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43DB7C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 14:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 771928715C;
-	Tue, 19 Dec 2023 15:37:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nic.cz
+	by phobos.denx.de (Postfix) with ESMTP id 9457D8715C;
+	Tue, 19 Dec 2023 15:51:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=nic.cz header.i=@nic.cz header.b="nEApgaQj";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hRhbNq3i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D7B98700D; Tue, 19 Dec 2023 15:37:32 +0100 (CET)
-Received: from mail.nic.cz (mail.nic.cz [217.31.204.67])
+ id 0A28A871C3; Tue, 19 Dec 2023 15:51:33 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E65AD86BF7
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 15:37:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9133D8700D
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 15:51:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nic.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.behun@nic.cz
-Received: from dellmb (unknown [IPv6:2001:1488:fffe:6:8747:7254:5571:3010])
- by mail.nic.cz (Postfix) with ESMTPSA id BD3A81C0CA1;
- Tue, 19 Dec 2023 15:37:28 +0100 (CET)
-Authentication-Results: mail.nic.cz;
- auth=pass smtp.auth=marek.behun@nic.cz smtp.mailfrom=marek.behun@nic.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1702996648; bh=3MvEUsbplw/jDMfEuKjD+ZJY6UOL8Bnc8OWmez0XJQU=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From:Reply-To:
- Subject:To:Cc;
- b=nEApgaQjC5yuyzd9tFfD5VCJTIGiK0/naL45ymRp1BoQA1tAM0Tv7zrGPTuCBpqHa
- 8NIgXXn+fEzlTQkHu7rKE01W15qNnFqdU4o20V5fELAao3MnG2jZcnlULbCWAttdWe
- czKqNWglYIILk4a9+zUW/Y2rDxoF+H0T8vH0ACvU=
-Date: Tue, 19 Dec 2023 15:37:28 +0100
-From: Marek =?UTF-8?B?QmVow7pu?= <marek.behun@nic.cz>
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- trini@konsulko.com, goldsimon@gmx.de
-Subject: Re: [PATHv11 28/43] configs/turris_omnia_defconfig: enable LTO
-Message-ID: <20231219153728.7e39b826@dellmb>
-In-Reply-To: <20231219103833.2c211ae0@dellmb>
-References: <20231127125726.3735-1-maxim.uvarov@linaro.org>
- <20231127125726.3735-29-maxim.uvarov@linaro.org>
- <20231219103833.2c211ae0@dellmb>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id CB18B3F6CB; 
+ Tue, 19 Dec 2023 14:51:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1702997488;
+ bh=p0Zf4wzIOlEnHldsl/XfUn1TdD5tGcdaveCmdaH1QR0=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=hRhbNq3iJXtJrzAusbcHkESu4mq+Lb4jL4jRrdh5uwwTcAfbGe2E+cbBzgikTGKtg
+ vnCXmxIELYG0m5DAfqWJ/drXAdVGobFwFWzWEwDf+bacK9T9YKxIFsrZtkTPDK6F07
+ T96lvQmAL4U2LPfU59pYPaVou5CbsfNfSaMchg/FCaKPhDwVCGcMAbiRqX061UG9Nw
+ qWxHWpDlx4Z764NgHZ9EK5iwGg2vEWK2BreWQkAn7MmxejJsLXf/p/QugOoKTTp0Th
+ OUmF2TjbnfAvE+FIJVX5d6D6ACVlMZYO/3KAe1G0+nt3InBK/4PwD3TTmFwl8qGPRW
+ bsr/DXuiq7uYQ==
+Message-ID: <fe7f09db-7e1f-47bd-be98-0bc13cec3933@canonical.com>
+Date: Tue, 19 Dec 2023 15:51:26 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Action: no action
-X-Rspamd-Pre-Result: action=no action; module=multimap;
- Matched map: WHITELISTED_IP
-X-Rspamd-Server: mail
-X-Spamd-Bar: /
-X-Rspamd-Queue-Id: BD3A81C0CA1
-X-Spamd-Result: default: False [-0.10 / 20.00]; MIME_GOOD(-0.10)[text/plain];
- WHITELISTED_IP(0.00)[2001:1488:fffe:6:8747:7254:5571:3010];
- MIME_TRACE(0.00)[0:+];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.de];
- ASN(0.00)[asn:25192, ipnet:2001:1488::/32, country:CZ];
- FROM_EQ_ENVFROM(0.00)[]; ARC_NA(0.00)[]; FROM_HAS_DN(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com]
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 8/9] configs: qemu: add config fragment for ACPI
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231219122439.31983-1-heinrich.schuchardt@canonical.com>
+ <20231219122439.31983-9-heinrich.schuchardt@canonical.com>
+ <CAEUhbmV9zSOPaB-avSSGXq_uTAJ+JEiZ2P-5mjz04BWv3SN_jg@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAEUhbmV9zSOPaB-avSSGXq_uTAJ+JEiZ2P-5mjz04BWv3SN_jg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,47 +77,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Dec 2023 10:38:33 +0100
-Marek Beh=C3=BAn <marek.behun@nic.cz> wrote:
+On 12/19/23 14:41, Bin Meng wrote:
+> Hi Heinrich,
+> 
+> On Tue, Dec 19, 2023 at 8:25 PM Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> Provide a configuration fragment to enable ACPI on QEMU.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>> v3:
+>>          no change
+>> v2:
+>>          no change
+>> ---
+>>   MAINTAINERS                         |  1 +
+>>   board/emulation/configs/acpi.config |  3 +++
+>>   doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
+>>   doc/board/emulation/index.rst       |  1 +
+>>   4 files changed, 28 insertions(+)
+>>   create mode 100644 board/emulation/configs/acpi.config
+>>   create mode 100644 doc/board/emulation/acpi.rst
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 25f2bb80de..bf437b253b 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -53,6 +53,7 @@ Maintainers List (try to look for most precise areas first)
+>>   ACPI:
+>>   M:     Simon Glass <sjg@chromium.org>
+>>   S:     Maintained
+>> +F:     board/emulation/configs/acpi.config
+>>   F:     cmd/acpi.c
+>>   F:     lib/acpi/
+>>
+>> diff --git a/board/emulation/configs/acpi.config b/board/emulation/configs/acpi.config
+>> new file mode 100644
+>> index 0000000000..b7ed811e33
+>> --- /dev/null
+>> +++ b/board/emulation/configs/acpi.config
+>> @@ -0,0 +1,3 @@
+>> +CONFIG_CMD_QFW=y
+>> +CONFIG_ACPI=y
+>> +CONFIG_GENERATE_ACPI_TABLE=y
+>> diff --git a/doc/board/emulation/acpi.rst b/doc/board/emulation/acpi.rst
+>> new file mode 100644
+>> index 0000000000..e1208ca51e
+>> --- /dev/null
+>> +++ b/doc/board/emulation/acpi.rst
+>> @@ -0,0 +1,23 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+
+>> +
+>> +ACPI on QEMU
+>> +============
+>> +
+>> +QEMU can provide ACPI tables on ARM, RISC-V, and x86.
+> 
+> ACPI support on RISC-V landed on QEMU in a pretty recent version.
+> Would you mind documenting its version?
 
-> On Mon, 27 Nov 2023 18:57:11 +0600
-> Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
->=20
-> > Decrease allowed binary size to fit lwip code.
-> > u-boot-with-spl.kwb exceeds file size limit:
-> >   limit:  0xf6000 bytes
-> >   actual: 0xf8600 bytes
-> >   excess: 0x2600 bytes
-> >=20
-> > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > ---
-> >  configs/turris_omnia_defconfig | 1 +
-> >  1 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defc=
-onfig
-> > index afcd4a1eb7..4e965c795a 100644
-> > --- a/configs/turris_omnia_defconfig
-> > +++ b/configs/turris_omnia_defconfig
-> > @@ -118,3 +118,4 @@ CONFIG_USB_EHCI_HCD=3Dy
-> >  CONFIG_WDT=3Dy
-> >  CONFIG_WDT_ORION=3Dy
-> >  CONFIG_EXT4_WRITE=3Dy
-> > +CONFIG_LTO=3Dy =20
->=20
-> I finally tested it and LTO is currently broken on Omnia:
->=20
->   Missing DTB
->   spl_init() failed: -2
->   ### ERROR ### Please RESET the board ###
->=20
-> Marek
+7da2fb240f97 ("hw/riscv/virt: Enable basic ACPI infrastructure") 
+appeared first in QEMU v8.0.0.
 
-I take it back, it was cause by my toolchain.
+f5d8c8cd792b ("hw/arm/virt-acpi-build: Basic framework for building ACPI 
+tables on ARM")
+made it into QEMU v2.4.0
 
-Seems that LTO can be enabled on omnia.
+> 
+> I haven't checked QEMU yet. Is ACPI default on in QEMU for Arm and
+> RISC-V virt? If not, we should document QEMU commands to enable ACPI.
 
-Is this patchset still active? Or should I send a separate patch to
-u-boot-marvell?
+It is enabled by default in the virt machine. You can switch it off with 
+'-M virt,acpi=off'. See
 
-Marek
+[PATCH 1/1] docs/system/riscv: document acpi parameter of virt machine
+https://lore.kernel.org/qemu-devel/20231219143829.8961-1-heinrich.schuchardt@canonical.com/T/#u
+
+Best regards
+
+Heinrich
+
+> 
+>> +
+>> +The following settings are needed::
+>> +
+>> +    CONFIG_CMD_QFW=y
+>> +    CONFIG_ACPI=y
+>> +    CONFIG_GENERATE_ACPI_TABLE=y
+>> +
+>> +On x86 these settings are already included in the defconfig files. ARM and
+>> +RISC-V default to use device-trees.
+>> +
+>> +Instead of updating the configuration manually you can add the configuration
+>> +fragment `acpi.config` to the make command for initializing the configuration.
+>> +E.g.
+>> +
+>> +.. code-block:: bash
+>> +
+>> +    make qemu-riscv64_smode_defconfig acpi.config
+>> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rst
+>> index 932c65adeb..d3d6b8f3d8 100644
+>> --- a/doc/board/emulation/index.rst
+>> +++ b/doc/board/emulation/index.rst
+>> @@ -6,6 +6,7 @@ Emulation
+>>   .. toctree::
+>>      :maxdepth: 1
+>>
+>> +   acpi
+>>      blkdev
+>>      ../../usage/semihosting
+>>      qemu-arm
+>> --
+> 
+> Regards,
+> Bin
+
