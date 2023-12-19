@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 478DBC46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3599C46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:36:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4639E876FA;
+	by phobos.denx.de (Postfix) with ESMTP id A6A24876DA;
 	Tue, 19 Dec 2023 12:33:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X/RsP0pm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G7pCWM0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A25A386F1E; Tue, 19 Dec 2023 11:13:19 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 34B4A86FBD; Tue, 19 Dec 2023 11:13:21 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FEF586FB8
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:13:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF0E2871AA
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:13:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAD2Ej040941;
- Tue, 19 Dec 2023 04:13:02 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJADA4a051453;
+ Tue, 19 Dec 2023 04:13:10 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702980782;
- bh=VNV7C3nfSnXd+iR83CpF8av0mz84N7Fxn4+Th9ov1qc=;
+ s=ti-com-17Q1; t=1702980790;
+ bh=7JLS4PBaz9fzv9WirnIjblU+XZVn7woZZHphApG+2Yg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=X/RsP0pmZEeWY1Mf/yr00hCRBK7X1qijXhsYa4dejBZlcSeYQ+UZUT7zbeoIGqrgC
- 4Tlmmh3VdNZd0XWVoRUkG9d6eCYfIMdVT6fec0DOtMg+RWgGlM8/cZu3V/j4xgQhRt
- BhjFpr7swH4nLEeA35HEHoj/YGHxy0L81iP6cMoM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAD2wj005054
+ b=G7pCWM0tPSpLvZrX4Tcc2NOK7o44JkixL9p6/rl9Pos1d44X/i8jE7k3jNylx/Ozg
+ WvDM9ykQVlXsVtk5Acl1YxQo8r7gIuzMwjpiSjMSn8HH6CeCAkXCLLHWQj0gxAsvPH
+ OoQvm+EgVj2+9XZy/P9SJ++bLfPNHzi4VMTt05S8=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJADAq1113505
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:13:02 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:13:10 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:13:02 -0600
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:13:10 -0600
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:13:02 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:13:09 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAD2ZP119559;
- Tue, 19 Dec 2023 04:13:02 -0600
+ by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAD9xQ089412;
+ Tue, 19 Dec 2023 04:13:09 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAD1l5018901;
- Tue, 19 Dec 2023 04:13:01 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAD9MP018926;
+ Tue, 19 Dec 2023 04:13:09 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,9 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 08/16] arm: dts: k3-am65: Add cfg reg region to ringacc
- node
-Date: Tue, 19 Dec 2023 15:42:09 +0530
-Message-ID: <20231219101225.3443978-17-danishanwar@ti.com>
+Subject: [RFC PATCH 10/16] arm: dts: k3-am65-main: Add ICSSG IEP nodes
+Date: Tue, 19 Dec 2023 15:42:13 +0530
+Message-ID: <20231219101225.3443978-21-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219101225.3443978-1-danishanwar@ti.com>
 References: <20231219101225.3443978-1-danishanwar@ti.com>
@@ -92,49 +91,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add register range of ringacc cfg node to k3-am65* dtsi files. This is
-normally under Device Management firmware control but some entities like
-bootloader have to access directly and thus required to be present in
-DT.
+The ICSSG IP on AM65x SoCs have two Industrial Ethernet Peripherals (IEPs)
+to manage/generate Industrial Ethernet functions such as time stamping.
+Each IEP sub-module is sourced from an internal clock mux that can be
+sourced from either of the IP instance's ICSSG_IEP_GCLK or ICSSG_ICLK.
+Add the IEP nodes for all the ICSSG instances.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- arch/arm/dts/k3-am65-main.dtsi | 5 +++--
- arch/arm/dts/k3-am65-mcu.dtsi  | 5 +++--
- 2 files changed, 6 insertions(+), 4 deletions(-)
+ arch/arm/dts/k3-am65-main.dtsi | 36 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
 diff --git a/arch/arm/dts/k3-am65-main.dtsi b/arch/arm/dts/k3-am65-main.dtsi
-index 691c9978e6..7f10520236 100644
+index 7f10520236..da48887559 100644
 --- a/arch/arm/dts/k3-am65-main.dtsi
 +++ b/arch/arm/dts/k3-am65-main.dtsi
-@@ -603,8 +603,9 @@
- 			reg =	<0x0 0x3c000000 0x0 0x400000>,
- 				<0x0 0x38000000 0x0 0x400000>,
- 				<0x0 0x31120000 0x0 0x100>,
--				<0x0 0x33000000 0x0 0x40000>;
--			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target";
-+				<0x0 0x33000000 0x0 0x40000>,
-+				<0x0 0x31080000 0x0 0x40000>;
-+			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
- 			ti,num-rings = <818>;
- 			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
- 			ti,sci = <&dmsc>;
-diff --git a/arch/arm/dts/k3-am65-mcu.dtsi b/arch/arm/dts/k3-am65-mcu.dtsi
-index d7111aa8b2..b7f0456de7 100644
---- a/arch/arm/dts/k3-am65-mcu.dtsi
-+++ b/arch/arm/dts/k3-am65-mcu.dtsi
-@@ -129,8 +129,9 @@
- 			reg =	<0x0 0x2b800000 0x0 0x400000>,
- 				<0x0 0x2b000000 0x0 0x400000>,
- 				<0x0 0x28590000 0x0 0x100>,
--				<0x0 0x2a500000 0x0 0x40000>;
--			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target";
-+				<0x0 0x2a500000 0x0 0x40000>,
-+				<0x0 0x28440000 0x0 0x40000>;
-+			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
- 			ti,num-rings = <286>;
- 			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
- 			ti,sci = <&dmsc>;
+@@ -969,6 +969,18 @@
+ 			};
+ 		};
+ 
++		icssg0_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg0_iepclk_mux>;
++		};
++
++		icssg0_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg0_iepclk_mux>;
++		};
++
+ 		icssg0_mii_rt: mii-rt@32000 {
+ 			compatible = "ti,pruss-mii", "syscon";
+ 			reg = <0x32000 0x100>;
+@@ -1110,6 +1122,18 @@
+ 			};
+ 		};
+ 
++		icssg1_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg1_iepclk_mux>;
++		};
++
++		icssg1_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg1_iepclk_mux>;
++		};
++
+ 		icssg1_mii_rt: mii-rt@32000 {
+ 			compatible = "ti,pruss-mii", "syscon";
+ 			reg = <0x32000 0x100>;
+@@ -1256,6 +1280,18 @@
+ 			reg = <0x32000 0x100>;
+ 		};
+ 
++		icssg2_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg2_iepclk_mux>;
++		};
++
++		icssg2_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg2_iepclk_mux>;
++		};
++
+ 		icssg2_mii_g_rt: mii-g-rt@33000 {
+ 			compatible = "ti,pruss-mii-g", "syscon";
+ 			reg = <0x33000 0x1000>;
 -- 
 2.34.1
 
