@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D27EC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:41:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA34C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:42:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D40668755C;
-	Tue, 19 Dec 2023 14:41:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A86A875F0;
+	Tue, 19 Dec 2023 14:42:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mVaxKDFY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uDGE/taN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0680871CC; Tue, 19 Dec 2023 14:41:14 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 0AC4E874F3; Tue, 19 Dec 2023 14:42:38 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FEDA8755C
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:41:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB7F1871CC
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:42:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-50e2ce4fb22so4332470e87.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:41:11 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5e784ce9bb8so7761327b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:42:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702993270; x=1703598070; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CgVEcH5HFfJ3rQ+xzrx0xM3V5+HGrxMreS2l5VVWoo4=;
- b=mVaxKDFYfXcZjyHLGQGHefyeufSodQ7tE/Rbwjnv5jt0L4f0Rwzi205lSyGAWdueYA
- 9y+yp+Stl22vabaTNkqmvNraOQZUPjbvgkbgghtEfwflgAioYO0A8GTjhtXC/Nr8Pn0a
- +18/LQv31j5aVimH4iDI6H4wtkBJwvMJhbvYjwkgrnShMN0YpDTDiXH8RCGuBB9/eq/o
- MjNygm3mCJRXXKMOp6hrfZXvSYV4DOTGqDEYEm410Agfi3QJuW16WUCoHT78sXDUnX/+
- nfDMR1KmjMxRX7kPf36dQsMiu2cpftN/rtP7NlNezpQbUIhIVD7OKwpyvtqcBLDl9Tct
- hesg==
+ d=konsulko.com; s=google; t=1702993354; x=1703598154; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=49+SFKPwdnMSyKLKXbFjCCJzCMUuXJzSeY/WRH6pqBY=;
+ b=uDGE/taNH6oO7DtMhXN+AlRlGUUnqrvNwB+SqP6u3maw3LfciaMN3L67tWvMA4RLG9
+ t4Ins/CqfqndKXkd3MMVfvteWEI6tLqWOTSFyh+cSKge4jmHPVw/IqB7eyAx3HLPq42n
+ RARuA1snU0vknSI2wPyZQQF1+P7sJ3zav3/eU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702993270; x=1703598070;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CgVEcH5HFfJ3rQ+xzrx0xM3V5+HGrxMreS2l5VVWoo4=;
- b=uuaqRjqFXovChGMFE9FxKIa8oy1odXVc5umhB0dzgmlSO/DTEFHZ2J7W/+ndSvmpkR
- BpvEBCoJpk4pKPhjdqpgmMrZvTTzZCGJ623Y2roBPtjB2giOEIkE51fyI1nK2LUNRTBG
- wV2JznoEfhwP15sSjZgJz74iVReYk/C1fGwpALJvjvuJF0FvXkgCnJVT/TuQQP9qoSQ5
- 3YUFP1OdWjrwGZiRmWQnEw7U3lYWQ+xz6jKelnIpdLKCajess5IynAtccsd9VZ/lSBPg
- Uicge0xMvCXhcFUY0UtOnpzbvDba1tEM/P7EKid8WMxvJceNUTlrYHnBByD5vJEoD1Pm
- e2yw==
-X-Gm-Message-State: AOJu0YwbYtPFzrI+e64+MrzuBxRFmPyn/3EZLeqzfNcdcCuzh/knc7Kg
- I785wNpjRjKDXIicRVtUOnmEdwQw8sDmG3N36Co=
-X-Google-Smtp-Source: AGHT+IGgWuaaQM9/aTjDbzamjGVgVb5TrL2vCrRiLgdzNx9cmIF5Yjg/QZI+mfPspa5HyC/dJQJ50bH8Rkluek0PvDo=
-X-Received: by 2002:a05:6512:39d4:b0:50e:3ce2:9264 with SMTP id
- k20-20020a05651239d400b0050e3ce29264mr1672233lfu.26.1702993270103; Tue, 19
- Dec 2023 05:41:10 -0800 (PST)
+ d=1e100.net; s=20230601; t=1702993354; x=1703598154;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=49+SFKPwdnMSyKLKXbFjCCJzCMUuXJzSeY/WRH6pqBY=;
+ b=QN7SJ5Li4LIShPhmF5WdsK9oF8NHkQDHfYu03MRwftiljP2l5VFglYnUpzGRB28KNR
+ 0QKl3NAKZAafOKik5ODlo/BXM9rlfQfqL++m6XZRTAcugQNyNh5Pb78EnMXKeyqL8W5G
+ n4BLuTAaoSJWVdblwI4dMojhI5x1j9qaZnhB+vstZgj6jR9fpTS4SQjwW/TMNihQBFeJ
+ nK7fo8OuP4f9uyhRg1ybZy/qy/+3y7fKun0TG7yVqPfAsAt4o2DgKqf+vKGR9HjHCcY5
+ Wl0O4nUpF5ZvY7RftGYua2yrxddLziimVf//Z0CfGTe66vVbk+5DlNxYT2G+O0pgY7Rm
+ 8PxQ==
+X-Gm-Message-State: AOJu0YzTULglXCfMVV7ABy9IFg7QGJFPVhcZqJOc1weanMhamjUZVvHq
+ ndjNl1orskqoZ27nZw1llXv7rbOyX99qhyevbRMpRL2b0ik=
+X-Google-Smtp-Source: AGHT+IExks1Agi+/6Z6QLjkNKfqVZ031GKyd5ilJ0I9jQNDuctVG9ZJujonUvYAW4r/n8F3SSADVxg==
+X-Received: by 2002:a0d:eb53:0:b0:5e2:78d8:f3a7 with SMTP id
+ u80-20020a0deb53000000b005e278d8f3a7mr463831ywe.7.1702993354411; 
+ Tue, 19 Dec 2023 05:42:34 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
+ [2603:6081:7b00:6400:923c:ac63:6854:a688])
+ by smtp.gmail.com with ESMTPSA id
+ x125-20020a817c83000000b005a4da74b869sm9759178ywc.139.2023.12.19.05.42.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Dec 2023 05:42:33 -0800 (PST)
+Date: Tue, 19 Dec 2023 08:42:32 -0500
+From: Tom Rini <trini@konsulko.com>
+To: =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Haijun Qin <qinhaijun@eswincomputing.com>
+Subject: Re: [PATCH] lib: rsa: Print detailed error info in rsa_engine_init()
+ on engine resolution failure
+Message-ID: <20231219134232.GU2513409@bill-the-cat>
+References: <20231214165416.35354-1-csokas.bence@prolan.hu>
+ <20231214175402.GN2513409@bill-the-cat>
+ <7069b019-cc2b-46fa-b293-034e9dbbc698@prolan.hu>
 MIME-Version: 1.0
-References: <20231219122439.31983-1-heinrich.schuchardt@canonical.com>
- <20231219122439.31983-9-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231219122439.31983-9-heinrich.schuchardt@canonical.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Dec 2023 21:41:04 +0800
-Message-ID: <CAEUhbmV9zSOPaB-avSSGXq_uTAJ+JEiZ2P-5mjz04BWv3SN_jg@mail.gmail.com>
-Subject: Re: [PATCH v3 8/9] configs: qemu: add config fragment for ACPI
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="m0LQ66YOIrYoU0Oj"
+Content-Disposition: inline
+In-Reply-To: <7069b019-cc2b-46fa-b293-034e9dbbc698@prolan.hu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,106 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
 
-On Tue, Dec 19, 2023 at 8:25=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Provide a configuration fragment to enable ACPI on QEMU.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> v3:
->         no change
-> v2:
->         no change
-> ---
->  MAINTAINERS                         |  1 +
->  board/emulation/configs/acpi.config |  3 +++
->  doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
->  doc/board/emulation/index.rst       |  1 +
->  4 files changed, 28 insertions(+)
->  create mode 100644 board/emulation/configs/acpi.config
->  create mode 100644 doc/board/emulation/acpi.rst
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 25f2bb80de..bf437b253b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -53,6 +53,7 @@ Maintainers List (try to look for most precise areas fi=
-rst)
->  ACPI:
->  M:     Simon Glass <sjg@chromium.org>
->  S:     Maintained
-> +F:     board/emulation/configs/acpi.config
->  F:     cmd/acpi.c
->  F:     lib/acpi/
->
-> diff --git a/board/emulation/configs/acpi.config b/board/emulation/config=
-s/acpi.config
-> new file mode 100644
-> index 0000000000..b7ed811e33
-> --- /dev/null
-> +++ b/board/emulation/configs/acpi.config
-> @@ -0,0 +1,3 @@
-> +CONFIG_CMD_QFW=3Dy
-> +CONFIG_ACPI=3Dy
-> +CONFIG_GENERATE_ACPI_TABLE=3Dy
-> diff --git a/doc/board/emulation/acpi.rst b/doc/board/emulation/acpi.rst
-> new file mode 100644
-> index 0000000000..e1208ca51e
-> --- /dev/null
-> +++ b/doc/board/emulation/acpi.rst
-> @@ -0,0 +1,23 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +ACPI on QEMU
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +QEMU can provide ACPI tables on ARM, RISC-V, and x86.
+--m0LQ66YOIrYoU0Oj
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-ACPI support on RISC-V landed on QEMU in a pretty recent version.
-Would you mind documenting its version?
+On Tue, Dec 19, 2023 at 02:38:59PM +0100, Cs=F3k=E1s Bence wrote:
 
-I haven't checked QEMU yet. Is ACPI default on in QEMU for Arm and
-RISC-V virt? If not, we should document QEMU commands to enable ACPI.
+> Thank you. Just one question: When can we expect it to be applied?
 
-> +
-> +The following settings are needed::
-> +
-> +    CONFIG_CMD_QFW=3Dy
-> +    CONFIG_ACPI=3Dy
-> +    CONFIG_GENERATE_ACPI_TABLE=3Dy
-> +
-> +On x86 these settings are already included in the defconfig files. ARM a=
-nd
-> +RISC-V default to use device-trees.
-> +
-> +Instead of updating the configuration manually you can add the configura=
-tion
-> +fragment `acpi.config` to the make command for initializing the configur=
-ation.
-> +E.g.
-> +
-> +.. code-block:: bash
-> +
-> +    make qemu-riscv64_smode_defconfig acpi.config
-> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rs=
-t
-> index 932c65adeb..d3d6b8f3d8 100644
-> --- a/doc/board/emulation/index.rst
-> +++ b/doc/board/emulation/index.rst
-> @@ -6,6 +6,7 @@ Emulation
->  .. toctree::
->     :maxdepth: 1
->
-> +   acpi
->     blkdev
->     ../../usage/semihosting
->     qemu-arm
-> --
+General rule is at least 2 weeks. This will get pulled in for v2024.04.
 
-Regards,
-Bin
+>=20
+> 2023. 12. 14. 18:54 keltez=E9ssel, Tom Rini =EDrta:
+> > On Thu, Dec 14, 2023 at 05:54:17PM +0100, Cs=F3k=E1s Bence wrote:
+> >=20
+> > > Signed-off-by: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
+> >=20
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >=20
+>=20
+> Bence
+>=20
+
+--=20
+Tom
+
+--m0LQ66YOIrYoU0Oj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWBncEACgkQFHw5/5Y0
+tyx7jQv/dITq35nrUSdE9C20NUCsZCyQhqPlKpLyzH5J3vxgg+tj4X6isemt0dmO
+UScoGg5/cZyh0Q8YJ0IBMR4Clf2fvmnfShRMqFfRk5BcsHkNeT0EqF59spgYaDP7
+/m5bnz5tv9GUDBR0eIeptU+RCDr8yTk9Zz88nPhoSA7jJxgIv0BZM1qYibeAnAzw
+p+0v8xAZRhomYySwZY/iuWlURGxXoYDDWe/tazxPoZerm/GCG7xGaQg1huCLmvnP
+/AsbjOBpTG27Kmk/w+oldz+N2S90tP3XAg4SPCCjhgFyqu2NEUSMyOtjDpdHViEB
+GB9xcv02ccRMNxaLmObJGv8ntD165vPqYEiUi3j6G9m+u1Neu5MoBpMqGI/nNYKe
+hA++Rwm6qEuIV4ZxuiZ36Ke7QCCczRFpPbL++Rh4EUloNfJTpGQ3/Md9LZei6wqF
+xGK40ECeJL9T8XX1w83OgO7ZZJnsg61XZ3Bsk2e3+/d5RDp1qc0K13ouLhBvBNdS
+V87JOdCy
+=RaU5
+-----END PGP SIGNATURE-----
+
+--m0LQ66YOIrYoU0Oj--
