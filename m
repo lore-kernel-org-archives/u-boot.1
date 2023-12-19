@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40280C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DAAC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:22:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C9C8875FD;
-	Tue, 19 Dec 2023 17:21:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 30C80876CF;
+	Tue, 19 Dec 2023 17:22:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GVop2tLP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nf5XJYc5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F322F87729; Tue, 19 Dec 2023 17:21:52 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0EB1B877D9; Tue, 19 Dec 2023 17:22:09 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40CC287561
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:21:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D1C687775
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:22:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJGLZK6063775;
- Tue, 19 Dec 2023 10:21:35 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703002895;
- bh=Y7myKEMGsGHCyVntTQJ3zUYCeiI/BhoTQLCrO8YLIVs=;
- h=Date:Subject:From:To:CC:References:In-Reply-To;
- b=GVop2tLP+fHV0jgXTPYGIgzzQyw8ILWBq8PQrdovyTlusD1zcoMZYvBeKctOgtOWi
- HMpIiK1zouGT/EKutuN+b4nIofDwfkZa9MsdbvqqySne/zmWhB1gOx8QT+Gd1p0Mib
- d+tmQvkdPWkpiQOG8rEdPfbxtmx/MzXRJi9mJEkY=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJGLZc4077539
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 10:21:35 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 10:21:35 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 10:21:34 -0600
-Received: from [10.24.69.34] (ti.dhcp.ti.com [10.24.69.34] (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJGLS7e048444;
- Tue, 19 Dec 2023 10:21:29 -0600
-Message-ID: <e452e23c-e5b3-47fc-99a9-b3f559b8a7f6@ti.com>
-Date: Tue, 19 Dec 2023 21:51:27 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40d22d3e751so5677925e9.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:22:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703002926; x=1703607726; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=xfKRXsMRMxYuKp/6ao5NVo6ddSGFnoYx1GAIdpY/eqk=;
+ b=nf5XJYc5JQKrD35zAiftvSb6wYlYUR07a6PAH1vp/uO+jgX6Q7HBNF96pX1eNV9OjG
+ fusGiiJZx69+6GtU90RjNgXOpJeEMsJqNrA/s4Q+xRyeDm0edrRTrO+Mi6xWcBpmR5CI
+ Idn2GLhHv5XpnlgBCMXZy0CV4DOErxxRn8yNejNhQb+ksKwQLZ6XhTw8WsLCm+V8UMeY
+ MFIqNs4RJ90T7v8UBGID6PRxPceXf7grEWsEHIjEp/d1wuPPx5EHe4aWqvD32f1JfHxL
+ TCueHtoImiHObXVz8Rx+zjAxyLLw4zO7ssqY4dUQAC2kCKc7ThMkgQwOpCRfxOpByEt9
+ 8q6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703002926; x=1703607726;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xfKRXsMRMxYuKp/6ao5NVo6ddSGFnoYx1GAIdpY/eqk=;
+ b=Dkc1+Em+x40MMm9iOPHDmgVKWfRIkyNfP+QQ3ceBKrvDopCtV0JQ5NihzyRTlBWwAV
+ e0Wgt7darSYmi5B8jzRwKW1mroUluVaQr7odqDsdnQlA4BJL4UTwfaqPHP0erjekbp9U
+ UgaaNkRAEXK31NSuiWjdyCC+pezt/y+8Rr3JumCO/eahFpOu95tEE3+bZCQ76rvQI8qM
+ ivKgKdj1vaTO2KJPOV5jgCB6mFAbXzOCr7c4qCi76KyDH/2CzGc8FgXY44wgAJ1sslbY
+ 5BUZjMWGfQKGkukgnY4acn/DgGBjy9Xnzuy9Fr7o1k0Nsx84p9iMlZW9le2qhIYg7+aM
+ CNVA==
+X-Gm-Message-State: AOJu0Yxciy8ERl8/kvA66bUDtvpoQKXqB3hScrKsbXxdkIXnlN16Wt/F
+ hxJF82dzLXsK2XRDOhstZGeT4A==
+X-Google-Smtp-Source: AGHT+IHovgljYx18d2dKN4wX97VbkXd531F4k6HoFIOAWYCy6eth35SHqNK+KbR1tAODRlPTCt2RSg==
+X-Received: by 2002:a05:600c:6988:b0:40b:5e4a:233e with SMTP id
+ fp8-20020a05600c698800b0040b5e4a233emr735531wmb.64.1703002926487; 
+ Tue, 19 Dec 2023 08:22:06 -0800 (PST)
+Received: from [192.168.1.83] (host-92-17-96-230.as13285.net. [92.17.96.230])
+ by smtp.gmail.com with ESMTPSA id
+ f18-20020adffcd2000000b0033660aabe76sm8745564wrs.39.2023.12.19.08.22.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Dec 2023 08:22:05 -0800 (PST)
+Message-ID: <0bce65e8-18d8-482a-8cd6-9b1d3a54ea7a@linaro.org>
+Date: Tue, 19 Dec 2023 16:22:05 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
+Subject: Re: [PATCH v2 16/32] mach-snapdragon: dynamic load addresses
 Content-Language: en-US
-From: Apurva Nandan <a-nandan@ti.com>
-To: Enric Balletbo i Serra <eballetb@redhat.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Nishanth Menon <nm@ti.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Roger Quadros <rogerq@kernel.org>, Jayesh
- Choudhary <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20231206123753.1486031-1-a-nandan@ti.com>
- <CALE0LRuSnxtkO8Mi9a0MSrnzWyDbi91PvXBzA2zhffur29v0cQ@mail.gmail.com>
- <6696cd93-394b-4df0-9f50-a689ea8be573@ti.com>
-In-Reply-To: <6696cd93-394b-4df0-9f50-a689ea8be573@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
+ Stephan Gerhold <stephan@gerhold.net>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-16-b6dd9704219e@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-16-b6dd9704219e@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,296 +102,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 18/12/23 15:05, Apurva Nandan wrote:
->
-> On 15/12/23 15:40, Enric Balletbo i Serra wrote:
->> Hello Apurva,
->>
->>
->> On Wed, Dec 6, 2023 at 1:38 PM Apurva Nandan <a-nandan@ti.com> wrote:
->>> Hello Everyone!
->>>
->>> This series will introduce basic support (SD and UART) support for 
->>> Texas
->>> Instruments J784S4 EVM.
->>>
->>> The J784S4 SoC device tree patches are taken from kernel patch 
->>> submissions
->>> and will be updated as they are accepted and merged to the kernel tree.
->>> All other patches are specific to SPL and u-boot and do not have
->>> dependency on other trees. Appreciate a review for acceptance to u-boot
->>> tree.
->>>
->>> Here are some of the salient features of the J784S4 automotive grade
->>> application processor:
->>>
->>> The J784S4 SoC belongs to the K3 Multicore SoC architecture
->>> platform, providing advanced system integration in automotive,
->>> ADAS and industrial applications requiring AI at the network edge.
->>> This SoC extends the K3 Jacinto 7 family of SoCs with focus on
->>> raising performance and integration while providing interfaces,
->>> memory architecture and compute performance for multi-sensor, high
->>> concurrency applications.
->>>
->>> Some highlights of this SoC are:
->>> * Up to 8 Cortex-A72s, four clusters of lockstep capable dual 
->>> Cortex-R5F MCUs,
->>>    4 C7x floating point vector DSPs with Matrix Multiply 
->>> Accelerator(MMA) for
->>>    deep learning and CNN.
->>> * 3D GPU: Automotive grade IMG BXS-4-64 MC1
->>> * Vision Processing Accelerator (VPAC) with image signal processor 
->>> and Depth
->>>    and Motion Processing Accelerator (DMPAC)
->>> * Three CSI2.0 4L RX plus two CSI2.0 4L TX, two DSI Tx, one eDP/DP 
->>> and one
->>>    DPI interface.
->>> * Integrated gigabit ethernet switch, up to 8 ports (TDA4VH), two ports
->>>    support 10Gb USXGMII; Two 4 lane PCIe-GEN3 controllers, USB3.0 
->>> Dual-role
->>>    device subsystems, Up to 20 MCANs, among other peripherals.
->>>
->>> See J784S4 Technical Reference Manual (SPRUJ52 - JUNE 2022)
->>> for further details: http://www.ti.com/lit/zip/spruj52
->>>
->>> In addtion, the J784S4 EVM board is designed for TI J784S4 SoC. It
->>> supports the following interfaces:
->>> * 32 GB DDR4 RAM
->>> * x2 Gigabit Ethernet interfaces capable of working in Switch and 
->>> MAC mode
->>> * x1 Input Audio Jack, x1 Output Audio Jack
->>> * x1 USB2.0 Hub with two Type A host and x1 USB 3.1 Type-C Port
->>> * x2 4L PCIe connector
->>> * x1 UHS-1 capable micro-SD card slot
->>> * 512 Mbit OSPI flash, 1 Gbit Octal NAND flash, 512 Mbit QSPI flash,
->>>    UFS flash.
->>> * x6 UART through UART-USB bridge
->>> * XDS110 for onboard JTAG debug using USB
->>> * Temperature sensors, user push buttons and LEDs
->>> * 40-pin User Expansion Connector
->>> * x2 ENET Expansion Connector, x1 GESI expander, x2 Display connector
->>> * x1 15-pin CSI header
->>> * x6 MCAN instances
->>>
->>> Schematics: https://www.ti.com/lit/zip/sprr458
->>>
->>> eMMC UDA moode bootlog: 
->>> https://gist.githubusercontent.com/apurvanandan1997/3cffada252d50a8aa0c00a91f1f2f856/raw/
->>>
->>> Changes in v6:
->>> 1) Move bootph-all of memory node to u-boot.dtsi
->>> 2) Used a while loop for DRAM controller init, instead of 
->>> hard-coding for 4 DRAM
->>> 3) Fixed build error by adding board/ti/j784s4/Kconfig
->>> 4) Trimmed out j784s4_evm.h
->>> 5) Fixed checkpatch warnings
->>>
->>> Link to v5:
->>> https://patchwork.ozlabs.org/project/uboot/cover/20231130115552.3580995-1-a-nandan@ti.com/ 
->>>
->>>
->>> Changes in v5:
->>> 1) Incorporated Andrew Davis' "Move R5 specific code into new r5/ 
->>> directory" and
->>>     "Move board selection to mach-k3" series changes.
->>> 2) Incorporated Neha Francis' "Move to using templated FITs" series 
->>> changes.
->>> 3) Synced device tree files with Linux v6.7-rc1
->>> 4) Changed ti_mmc to mmc1 target from bootstd
->>> 5) Updated doc based on review comments
->>> 6) Removed remoteproc support from the series
->>> 7) Splitted board files patch into smaller patches
->>> 8) Trimmed j784s4.env to necessary variables
->>> 9) Used fdtdec_setup_mem_size_base fdtdec_setup_memory_banksize in 
->>> evm.c
->>> 10) Trimmed down evm.c to essential header files.
->>> 11) Switched to multi-dtb fit compilation with config fragments
->>>
->>> Link to v4:
->>> https://lore.kernel.org/u-boot/20231001165545.494212-1-a-nandan@ti.com/
->>>
->>> Changes in v4:
->>> 1) Cleaned up Copyright and SPDX identifiers
->>> 2) Synced the device trees to Linux v6.6-rc1 tag
->>> 3) Added cleanup patch for sorting SoC JTAG ID entries
->>> 4) Removed EEPROM board detect from evm.c and added am69 config 
->>> fragments
->>> 5) Updated MAINTAINERS files and commit messages
->>> 6) Removed struct renaming in ti_k3_r5f_rproc driver
->>>
->>> Link to v3:
->>> https://lore.kernel.org/u-boot/20230908110551.861575-1-a-nandan@ti.com/
->>>
->>> Changes in v3:
->>> 1) Added AM69 SK support in the series
->>> 2) Switched from distroboot to bootstd support
->>> 3) Added remoteproc support for J784S4
->>> 4) Added documentation for both SoCs
->>> 5) Added binman support
->>> 6) Removed unnecessarry nodes from r5-evm.dts and evm-u-boot.dtsi
->>> 7) Added HS device support
->>> 8) Added env file for environement variables
->>> 9) Removed ti-serdes-mux bindings
->>> 10) Cleaned up all files and synced with latest
->>> 11) Addressed all previous review comments
->>>
->>> Note: The base dts files have been sync from next-20230905 linux tag 
->>> as per review comment received
->>> on previous re-roll:
->>> https://lore.kernel.org/u-boot/20230321155227.GV8135@bill-the-cat/
->>>
->>> Link to v2:
->>> https://lore.kernel.org/u-boot/20230321141028.24456-1-hnagalla@ti.com/
->>>
->>> Changes in v2:
->>> - Refactored environement scripts to 'j784s4.env' and removed 
->>> scripts not
->>>    needed for basic board bootup.
->>> - Imported the J7874S4 basic device tree files from v6.2 linux kernel.
->>> - Moved j784s4 clock definitions and clock data into one patch/commit.
->>> - coalesce board commits into one commit.
->>>
->>> Apurva Nandan (14):
->>>    arm: dts: Introduce j784s4 dts from linux kernel
->>>    arm: mach-k3: Add basic support for J784S4 SoC definition
->>>    arm: mach-k3: Sort SoC JTAG_ID entries
->>>    soc: ti: k3-socinfo: Add entry for J784S4 SoC
->>>    arm: mach-k3: j784s4: Add clk and power support
->>>    drivers: dma: Add support for J784S4 SoC
->>>    board: ti: j784s4: Add board support for J784S4 EVM
->>>    board: ti: j748s4: Add board config yaml files
->>>    board: ti: j784s4: Add boot environment variables
->>>    arm: dts: Introduce j784s4 u-boot dts files
->>>    arm: dts: Add bootph-all for memory node
->>>    configs: j784s4_evm: Add defconfig for j784s4 evm board
->>>    doc: board: ti: k3: Add J784S4 EVM and AM69 SK documentation
->>>    board: ti: j784s4: Add MAINTAINERS file
->>>
->>> Dasnavis Sabiya (3):
->>>    arm: dts: Introduce am69-sk dts from linux kernel
->>>    arm: dts: Introduce am69-sk u-boot dts files
->>>    configs: Add am69_sk_* defconfig fragments
->>>
->>>   arch/arm/dts/Makefile                         |    4 +
->>>   arch/arm/dts/k3-am69-r5-sk.dts                |  105 +
->>>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |   31 +
->>>   arch/arm/dts/k3-am69-sk.dts                   |  900 ++
->>>   arch/arm/dts/k3-j784s4-binman.dtsi            |  435 +
->>>   arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi  | 8757 ++++++++++++++++
->>>   arch/arm/dts/k3-j784s4-ddr.dtsi               | 8858 
->>> +++++++++++++++++
->>>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |   31 +
->>>   arch/arm/dts/k3-j784s4-evm.dts                |  981 ++
->>>   arch/arm/dts/k3-j784s4-main.dtsi              | 2068 ++++
->>>   arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi        |  743 ++
->>>   arch/arm/dts/k3-j784s4-r5-evm.dts             |  105 +
->>>   arch/arm/dts/k3-j784s4-thermal.dtsi           |  101 +
->>>   arch/arm/dts/k3-j784s4.dtsi                   |  294 +
->>>   arch/arm/mach-k3/Kconfig                      |   17 +-
->>>   arch/arm/mach-k3/Makefile                     |    2 +
->>>   arch/arm/mach-k3/arm64-mmu.c                  |   52 +
->>>   arch/arm/mach-k3/include/mach/hardware.h      |   13 +-
->>>   .../mach-k3/include/mach/j784s4_hardware.h    |   60 +
->>>   arch/arm/mach-k3/include/mach/j784s4_spl.h    |   47 +
->>>   arch/arm/mach-k3/include/mach/spl.h           |    4 +
->>>   arch/arm/mach-k3/j784s4/Kconfig               |   35 +
->>>   arch/arm/mach-k3/j784s4_fdt.c                 |   15 +
->>>   arch/arm/mach-k3/j784s4_init.c                |  335 +
->>>   arch/arm/mach-k3/r5/Makefile                  |    1 +
->>>   arch/arm/mach-k3/r5/j784s4/Makefile           |    7 +
->>>   arch/arm/mach-k3/r5/j784s4/clk-data.c         |  428 +
->>>   arch/arm/mach-k3/r5/j784s4/dev-data.c         |   98 +
->>>   board/ti/j784s4/Kconfig                       |   37 +
->>>   board/ti/j784s4/MAINTAINERS                   |   25 +
->>>   board/ti/j784s4/Makefile                      |    7 +
->>>   board/ti/j784s4/board-cfg.yaml                |   37 +
->>>   board/ti/j784s4/evm.c                         |   38 +
->>>   board/ti/j784s4/j784s4.env                    |   18 +
->>>   board/ti/j784s4/pm-cfg.yaml                   |   13 +
->>>   board/ti/j784s4/rm-cfg.yaml                   | 3058 ++++++
->>>   board/ti/j784s4/sec-cfg.yaml                  |  380 +
->>>   board/ti/j784s4/tifs-rm-cfg.yaml              | 2656 +++++
->>>   configs/am69_sk_a72.config                    |    3 +
->>>   configs/am69_sk_r5.config                     |    3 +
->>>   configs/j784s4_evm_a72_defconfig              |  180 +
->>>   configs/j784s4_evm_r5_defconfig               |  163 +
->>>   doc/board/ti/j784s4_evm.rst                   |  303 +
->>>   doc/board/ti/k3.rst                           |    1 +
->>>   drivers/clk/ti/clk-k3.c                       |    6 +
->>>   drivers/dma/ti/Makefile                       |    1 +
->>>   drivers/dma/ti/k3-psil-j784s4.c               |  166 +
->>>   drivers/dma/ti/k3-psil-priv.h                 |    1 +
->>>   drivers/dma/ti/k3-psil.c                      |    2 +
->>>   drivers/firmware/ti_sci_static_data.h         |   34 +
->>>   drivers/power/domain/ti-power-domain.c        |    6 +
->>>   drivers/ram/Kconfig                           |    2 +-
->>>   drivers/soc/soc_ti_k3.c                       |    3 +
->>>   include/configs/j784s4_evm.h                  |   15 +
->>>   include/k3-clk.h                              |    1 +
->>>   include/k3-dev.h                              |    1 +
->>>   56 files changed, 31675 insertions(+), 12 deletions(-)
->>>   create mode 100644 arch/arm/dts/k3-am69-r5-sk.dts
->>>   create mode 100644 arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>>   create mode 100644 arch/arm/dts/k3-am69-sk.dts
->>>   create mode 100644 arch/arm/dts/k3-j784s4-binman.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-ddr.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-evm.dts
->>>   create mode 100644 arch/arm/dts/k3-j784s4-main.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-mcu-wakeup.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4-r5-evm.dts
->>>   create mode 100644 arch/arm/dts/k3-j784s4-thermal.dtsi
->>>   create mode 100644 arch/arm/dts/k3-j784s4.dtsi
->>>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_hardware.h
->>>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_spl.h
->>>   create mode 100644 arch/arm/mach-k3/j784s4/Kconfig
->>>   create mode 100644 arch/arm/mach-k3/j784s4_fdt.c
->>>   create mode 100644 arch/arm/mach-k3/j784s4_init.c
->>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/Makefile
->>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/clk-data.c
->>>   create mode 100644 arch/arm/mach-k3/r5/j784s4/dev-data.c
->>>   create mode 100644 board/ti/j784s4/Kconfig
->>>   create mode 100644 board/ti/j784s4/MAINTAINERS
->>>   create mode 100644 board/ti/j784s4/Makefile
->>>   create mode 100644 board/ti/j784s4/board-cfg.yaml
->>>   create mode 100644 board/ti/j784s4/evm.c
->>>   create mode 100644 board/ti/j784s4/j784s4.env
->>>   create mode 100644 board/ti/j784s4/pm-cfg.yaml
->>>   create mode 100644 board/ti/j784s4/rm-cfg.yaml
->>>   create mode 100644 board/ti/j784s4/sec-cfg.yaml
->>>   create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
->>>   create mode 100644 configs/am69_sk_a72.config
->>>   create mode 100644 configs/am69_sk_r5.config
->>>   create mode 100644 configs/j784s4_evm_a72_defconfig
->>>   create mode 100644 configs/j784s4_evm_r5_defconfig
->>>   create mode 100644 doc/board/ti/j784s4_evm.rst
->>>   create mode 100644 drivers/dma/ti/k3-psil-j784s4.c
->>>   create mode 100644 include/configs/j784s4_evm.h
->>>
->>> -- 
->>> 2.34.1
->>>
->> Thanks for sending these patches, this has been tested against AM69-SK
->> board, so for the full series you can also add:
->>
->> Tested-by: Enric Balletbo i Serra <eballetbo@redhat.com>
->>
->> While here, it would be really nice if you can send the required
->> firmware (ti-sysfw and ti-dm if I'm not mistaken) to linux-firmware.
->>
->> Thanks,
->>    Enric
->>
-> Okay, sure will send firmware also. Thanks for the tested-by.
->
-We will work on upstreaming the firmwares to linux-firmware, in the 
-meantime you
-can use firmwares from ti-linux-firmware: 
-https://git.ti.com/cgit/processor-firmware/ti-linux-firmware/
+
+On 19/12/2023 16:04, Caleb Connolly wrote:
+> Heavily inspired by Apple board code. Use the LMB allocator to configure
+> load addresses at runtime, and implement a lookup table for selecting a
+> devicetree.
+> 
+> As some Qualcomm RBx boards have different RAM capacities and base
+> addresses, it isn't possible to hardcode these regions.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  arch/arm/Kconfig                                 |  1 +
+>  arch/arm/mach-snapdragon/board.c                 | 35 ++++++++++++++++++++++++
+>  board/qualcomm/dragonboard410c/dragonboard410c.c |  2 +-
+>  3 files changed, 37 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index e814910cb495..5ed9cbf378fa 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1075,6 +1075,7 @@ config ARCH_SNAPDRAGON
+>  	select OF_SEPARATE
+>  	select SMEM
+>  	select SPMI
+> +	select BOARD_LATE_INIT
+>  	select OF_BOARD
+>  	select SAVE_PREV_BL_FDT_ADDR
+>  	select LINUX_KERNEL_IMAGE_HEADER
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index bf9b57682178..b00f536d38b4 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -20,6 +20,7 @@
+>  #include <linux/bug.h>
+>  #include <linux/psci.h>
+>  #include <linux/sizes.h>
+> +#include <lmb.h>
+>  #include <malloc.h>
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+> @@ -112,6 +113,40 @@ int board_init(void)
+>  	return 0;
+>  }
+>  
+> +void __weak qcom_late_init(void)
+> +{
+> +}
+> +
+> +#define KERNEL_COMP_SIZE	SZ_64M
+> +#define SZ_96M			(SZ_64M + SZ_32M)
+
+This patch should have been adjusted to use SZ_128M, I already confirmed
+this to work on all boards. Somehow the old version crept in.
+> +
+> +#define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_2M)
+> +
+> +/* Stolen from arch/arm/mach-apple/board.c */
+> +int board_late_init(void)
+> +{
+> +	struct lmb lmb;
+> +	u32 status = 0;
+> +
+> +	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
+> +
+> +	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
+> +	status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_128M));
+> +	status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_96M));
+> +	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, KERNEL_COMP_SIZE));
+> +	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
+> +	status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
+> +	status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
+> +	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
+> +
+> +	if (status)
+> +		log_warning("%s: Failed to set run time variables\n", __func__);
+> +
+> +	qcom_late_init();
+> +
+> +	return 0;
+> +}
+> +
+>  static void build_mem_map(void)
+>  {
+>  	int i;
+> diff --git a/board/qualcomm/dragonboard410c/dragonboard410c.c b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> index e403ecf0ad7c..2a502c7c2841 100644
+> --- a/board/qualcomm/dragonboard410c/dragonboard410c.c
+> +++ b/board/qualcomm/dragonboard410c/dragonboard410c.c
+> @@ -77,7 +77,7 @@ int misc_init_r(void)
+>  	return 0;
+>  }
+>  
+> -int board_late_init(void)
+> +int qcom_late_init(void)
+>  {
+>  	char serial[16];
+>  
+> 
 
 -- 
-Regards,
-Apurva Nandan,
-Texas Instruments.
-
+// Caleb (they/them)
