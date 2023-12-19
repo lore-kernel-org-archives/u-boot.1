@@ -4,71 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D31C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 09:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B95C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 09:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C558786EE0;
-	Tue, 19 Dec 2023 10:54:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5939E86EEB;
+	Tue, 19 Dec 2023 10:55:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1702979663;
-	bh=ZOdGzy0KA4MXeUwAQi4u1Qbv6wZzWHDL3L/CJ21CCHQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rMfBlCVXwfjjVzmj0gLLqb8eC9D2kVvyXV/LpIw3vdMgcwavCmVTZVilZ9qlKJQ+R
-	 mPOB2OoacuVBtfl73OisecTU90t7IJ8ThJ/3rqt01vtS1fDtiGNNUeNpoNdjp1Z/BU
-	 rZRnHeheOtWTeBCrRpI+2lMMeLGamQqNI+aaE0F+f4uBrlezuSRGkUNK8tx+bzIzAo
-	 nJW1Sn+yYhs2MN9JhQBHHIEZ4gbdHdZnLUdcl92lmOgI4lzNLlMb0mgHzsG7APZ6ef
-	 7F/WQ+3qao283FF+bhdmOIbBacRV7BOhJCM7Mtex1yWxKrfhlNJIhvwanWWMQmFBLP
-	 3vYnxNuKeqrww==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N6K9TJUs";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7275786EE0; Tue, 19 Dec 2023 10:55:11 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BF39A86EEB;
- Tue, 19 Dec 2023 10:54:20 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1702979662;
- bh=ZOdGzy0KA4MXeUwAQi4u1Qbv6wZzWHDL3L/CJ21CCHQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=UjLePv1/SOAx9l8ChUZU0mkgGLYmVV4nOWIwc2WAAtRr+Uc0hj39cemBPnXiv1wIe
- rptpkwpcda7/DvVDLl9pHOxMoEiOgBQNAN9Mj7RilYN8yrkTxkknFEK1YDCnVh+Bwi
- HNMdkCIFc98jtdH0I3jSp0ybwOzr3qFTlX9I5XLObPYjGZXKKzdkcLwnIZU+ZHJIgc
- ytyHA3+HaYsc+p8v8kyn3kvXbVQU8VDSDveuBLaMgzBETWKPqgcGyFIGWzPRtUIaMJ
- 7eoB7DNMPWBqx5xxSQ+RUX3wYQTHk3Frjug+K/XICuySBBX2Exf9Vk+y6JW/SPShA3
- siLZ5281wqbwg==
-Message-ID: <edccf82f-2c65-4f09-bd9d-f94765ae015d@denx.de>
-Date: Tue, 19 Dec 2023 10:54:19 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id C3E6986EEB
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 10:55:08 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-54cd2281ccbso5068408a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 01:55:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702979708; x=1703584508; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DG64c7dRFIL5Y3MImZBgQFQYMUNsfuD/yEeTvtHu888=;
+ b=N6K9TJUs2oHwmR2BUwQn45HtFS4FInk0CIsE9uvAL/CzurOUUAkO8WuzxlF/+egkZY
+ ym+1Z8xwkw1juenJrCepAGyd/0CMvvSnHWw/AHmKB3uLDRm+HaBwNTlxP4FZxAaaW6YN
+ A/5geB3vapkPUzFijhrqAjO+nwaykItFrIIM/lqiB+Co9wYBU0so2G3G1ZXezTwh0OaG
+ hK14ebZ4APZci/ag4FgiFvkd/AavxLAnKxx9WDDzniFgU+KgafPrSP6sbzgYbYRga1Wa
+ 2FcjB4fEGuiw/sgzejg//RFrf03GNfhJaZhHX+SNaJYVUskjxzSSb5fZeMkIbqtmwxdq
+ gSBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702979708; x=1703584508;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DG64c7dRFIL5Y3MImZBgQFQYMUNsfuD/yEeTvtHu888=;
+ b=rDlYKB4LEEuDy9W9QcWB1KAEcYt9Gh8naSlrtJiqNnM3ZJSG4VVy7yuRB0Er4sp1SE
+ qLuBEK+wt58uVHk3z36NlNMoz1CVFX071pEr2NRy0jxZb1W/DVbJ1mk8+L4nc+62I0a5
+ czYvog+ZUQzSOwFinmn0+DR4EFHmlPEqNMJgbLWUW1cPwEOQo2cfiuaYEBjIIk4vZfb+
+ 2aG5/npAgy6ll+biQM+Q4U/Ng3CcoyGCHjIFiYu6nrpvC4UGI1CwOQMKXXmPvCEjXHYL
+ zqkbUX7QxZfHmXV+LGVYHMmzVTv+v8wXcPTOMUX2fbQul0YwyhUBzXeNoAPWP/Ifhvoo
+ Jg9w==
+X-Gm-Message-State: AOJu0YxGuQa3Icf2KuiqroHrz+CtIRb1EoKbVYGZPLFYJVCuVG2xqfUW
+ 3oPqLPM+YqsBfoBamae8ujg=
+X-Google-Smtp-Source: AGHT+IFgsycW3lLLHo/b1K3oXGZiIye8ulRB1V67R2Tb1+vQZV6/Q4Pq5c7JsjoIyZKsaS6e2nvObw==
+X-Received: by 2002:a17:907:7f8b:b0:a26:861f:c05c with SMTP id
+ qk11-20020a1709077f8b00b00a26861fc05cmr58827ejc.114.1702979707884; 
+ Tue, 19 Dec 2023 01:55:07 -0800 (PST)
+Received: from [192.168.26.149] (031011218106.poznan.vectranet.pl.
+ [31.11.218.106]) by smtp.googlemail.com with ESMTPSA id
+ s19-20020a170906c31300b00a236e9cfe74sm928058ejz.103.2023.12.19.01.55.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Dec 2023 01:55:07 -0800 (PST)
+Message-ID: <ba8abaf6-6f16-4742-a3ea-ad00d4151698@gmail.com>
+Date: Tue, 19 Dec 2023 10:55:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/1] drivers: misc: Add socfpga_dtreg driver for Intel
- SoCFPGA
-To: "Chee, Tien Fong" <tien.fong.chee@intel.com>,
- "Lau, Wan Yee" <wan.yee.lau@intel.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Bin Meng <bmeng.cn@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>, Peng Fan <peng.fan@nxp.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Konrad Dybcio <konrad.dybcio@linaro.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@intel.com>,
- "Maniyam, Dinesh" <dinesh.maniyam@intel.com>,
- "Ng, Boon Khai" <boon.khai.ng@intel.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
- "Chong, Teik Heng" <teik.heng.chong@intel.com>,
- "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>,
- "Lim, Jit Loon" <jit.loon.lim@intel.com>,
- "Tang, Sieu Mun" <sieu.mun.tang@intel.com>
-References: <20231208083726.26906-1-wan.yee.lau@intel.com>
- <DM8PR11MB5592CA687BF05641806BA22BD297A@DM8PR11MB5592.namprd11.prod.outlook.com>
+Subject: Re: [PATCH 4/4] nvmem: layouts: add U-Boot env layout
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Michael Walle <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de,
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
+References: <20231218133722.16150-1-zajec5@gmail.com>
+ <20231218133722.16150-4-zajec5@gmail.com> <20231218152116.59d59bad@xps-13>
+ <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
+ <20231219085517.4b6ec4fc@xps-13>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <DM8PR11MB5592CA687BF05641806BA22BD297A@DM8PR11MB5592.namprd11.prod.outlook.com>
+From: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
+In-Reply-To: <20231219085517.4b6ec4fc@xps-13>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,165 +103,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/19/23 08:03, Chee, Tien Fong wrote:
-> Hi,
+On 19.12.2023 08:55, Miquel Raynal wrote:
+> Hi Rafał,
 > 
->> -----Original Message-----
->> From: Lau, Wan Yee <wan.yee.lau@intel.com>
->> Sent: Friday, December 8, 2023 4:37 PM
->> To: u-boot@lists.denx.de
->> Cc: Simon Glass <sjg@chromium.org>; Kever Yang <kever.yang@rock-
->> chips.com>; Bin Meng <bmeng.cn@gmail.com>; Jonas Karlman
->> <jonas@kwiboo.se>; Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>; Peng
->> Fan <peng.fan@nxp.com>; Vladimir Zapolskiy
->> <vladimir.zapolskiy@linaro.org>; Konrad Dybcio <konrad.dybcio@linaro.org>;
->> Marek Vasut <marex@denx.de>; Simon Goldschmidt
->> <simon.k.r.goldschmidt@gmail.com>; Chee, Tien Fong
->> <tien.fong.chee@intel.com>; Hea, Kok Kiang <kok.kiang.hea@intel.com>;
->> Maniyam, Dinesh <dinesh.maniyam@intel.com>; Ng, Boon Khai
->> <boon.khai.ng@intel.com>; Yuslaimi, Alif Zakuan
->> <alif.zakuan.yuslaimi@intel.com>; Chong, Teik Heng
->> <teik.heng.chong@intel.com>; Zamri, Muhammad Hazim Izzat
->> <muhammad.hazim.izzat.zamri@intel.com>; Lim, Jit Loon
->> <jit.loon.lim@intel.com>; Tang, Sieu Mun <sieu.mun.tang@intel.com>
->> Subject: [PATCH v1 1/1] drivers: misc: Add socfpga_dtreg driver for Intel
->> SoCFPGA
->>
->> From: Wan Yee Lau <wan.yee.lau@intel.com>
->>
->> This driver can be used to provide user a clean interface and all register
->> settings are centralized in one place, device tree without need for
->> hardcoding in the source code.
->>
->> Signed-off-by: Wan Yee Lau <wan.yee.lau@intel.com>
->> ---
->>   .../misc/socfpga_dtreg.txt                    |  66 ++++++++++
->>   drivers/misc/Kconfig                          |   7 ++
->>   drivers/misc/Makefile                         |   1 +
->>   drivers/misc/socfpga_dtreg.c                  | 117 ++++++++++++++++++
->>   4 files changed, 191 insertions(+)
->>   create mode 100644 doc/device-tree-bindings/misc/socfpga_dtreg.txt
->>   create mode 100644 drivers/misc/socfpga_dtreg.c
->>
->> diff --git a/doc/device-tree-bindings/misc/socfpga_dtreg.txt b/doc/device-
->> tree-bindings/misc/socfpga_dtreg.txt
->> new file mode 100644
->> index 0000000000..5458103f88
->> --- /dev/null
->> +++ b/doc/device-tree-bindings/misc/socfpga_dtreg.txt
->> @@ -0,0 +1,66 @@
->> +* Firewall and privilege register settings in device tree
->> +
->> +Required properties:
->> +--------------------
->> +
->> +- compatible: should contain "intel,socfpga-dtreg"
->> +- reg: Physical base address and size of block register.
->> +- intel,offset-settings: 32-bit offset address of block register,
->> +			 followed by 32-bit value settings and
->> +			 the masking bits, only masking bit
->> +			 set to 1 allows modification.
->> +
->> +This driver can be used to provide user a clean interface and all
->> +register settings are centralized in one place, device tree without
->> +need for hardcoding in the source code.
->> +
->> +General setup would be to set the memory address used by the register,
->> +followed by the offset-settings containing the 32-bit offset address of
->> +the block register, then the 32-bit value settings and lastly the
->> +masking bits.
->> +
->> +Example:
->> +--------
->> +
->> +Configuration for multiple dtreg node support in device tree:
->> +
->> +	socfpga_mainfirewall: socfpga-mainfirewall {
->> +		compatible = "intel,socfpga-dtreg";
->> +                	#address-cells = <1>;
->> +                        #size-cells = <1>;
->> +		        bootph-all;
->> +
->> +                        coh_cpu0_bypass_OC_Firewall_main_Firewall@f7100200 {
->> +                        	reg = <0xf7100200 0x00000014>;
->> +                                intel,offset-settings =
->> +                                	/* Disable ocram security at CCU for non secure
->> access */
->> +                                        <0x0000004 0x8000ffff 0xe007ffff>,
->> +                                        <0x0000008 0x8000ffff 0xe007ffff>,
->> +                                        <0x000000c 0x8000ffff 0xe007ffff>,
->> +                                        <0x0000010 0x8000ffff 0xe007ffff>;
->> +                                bootph-all;
->> +                        };
->> +                };
->> +
->> +	socfpga_mpfefirewall: socfpga-mpfefirewall {
->> +        	compatible = "intel,socfpga-dtreg";
->> +                	#address-cells = <1>;
->> +                        #size-cells = <1>;
->> +			bootph-all;
->> +
->> +                        soc_noc_fw_mpfe_csr_inst_0_mpfe_scr@f8020000 {
->> +                                reg = <0xf8020000 0x0000001c>;
->> +                                intel,offset-settings =
->> +                                        /* Disable MPFE firewall for SMMU */
->> +                                        <0x00000000 0x00010101 0x00010101>,
->> +                                        /* Disable MPFE firewall for HMC adapter */
->> +                                        <0x00000004 0x00000001 0x00010101>;
->> +				bootph-all;
->> +                        };
->> +                };
->> +
->> +To call the nodes use:
->> +
->> +	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-
->> mainfirewall", &dev);
->> +	ret = uclass_get_device_by_name(UCLASS_NOP, "socfpga-
->> mpfefirewall",
->> +&dev);
->> +
->> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig index
->> fccd9b89b8..c423905ba2 100644
->> --- a/drivers/misc/Kconfig
->> +++ b/drivers/misc/Kconfig
->> @@ -683,4 +683,11 @@ config SL28CPLD
->>   	  the base driver which provides common access methods for the
->>   	  sub-drivers.
->>
->> +config SPL_SOCFPGA_DT_REG
->> +	bool "Enable register setting from device tree in SPL"
->> +	depends on SPL
->> +	help
->> +	  Enable register setting from device tree. This also
->> +	  provides user a clean interface and all register settings are
->> +	  centralized in one place, device tree.
->>   endmenu
->> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile index
->> b67b82358a..8f813edd84 100644
->> --- a/drivers/misc/Makefile
->> +++ b/drivers/misc/Makefile
->> @@ -89,3 +89,4 @@ obj-$(CONFIG_K3_AVS0) += k3_avs.o
->>   obj-$(CONFIG_ESM_K3) += k3_esm.o
->>   obj-$(CONFIG_ESM_PMIC) += esm_pmic.o
->>   obj-$(CONFIG_SL28CPLD) += sl28cpld.o
->> +obj-$(CONFIG_SPL_SOCFPGA_DT_REG) += socfpga_dtreg.o
->> diff --git a/drivers/misc/socfpga_dtreg.c b/drivers/misc/socfpga_dtreg.c new
->> file mode 100644 index 0000000000..982f9592cb
->> --- /dev/null
->> +++ b/drivers/misc/socfpga_dtreg.c
->> @@ -0,0 +1,117 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Copyright (C) 2023 Intel Corporation <www.intel.com>  */
->> +
->> +#include <asm/io.h>
->> +#include <common.h>
->> +#include <dm.h>
->> +#include <errno.h>
+> zajec5@gmail.com wrote on Mon, 18 Dec 2023 23:10:20 +0100:
 > 
-> Please move <asm/io.h> above to here
+>> On 18.12.2023 15:21, Miquel Raynal wrote:
+>>> Hi Rafał,
+>>>
+>>> zajec5@gmail.com wrote on Mon, 18 Dec 2023 14:37:22 +0100:
+>>>    
+>>>> From: Rafał Miłecki <rafal@milecki.pl>
+>>>>
+>>>> This patch moves all generic (NVMEM devices independent) code from NVMEM
+>>>> device driver to NVMEM layout driver. Then it adds a simple NVMEM layout
+>>>> code on top of it.
+>>>>
+>>>> Thanks to proper layout it's possible to support U-Boot env data stored
+>>>> on any kind of NVMEM device.
+>>>>
+>>>> For backward compatibility with old DT bindings we need to keep old
+>>>> NVMEM device driver functional. To avoid code duplication a parsing
+>>>> function is exported and reused in it.
+>>>>
+>>>> Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+>>>> ---
+>>>
+>>> I have a couple of comments about the original driver which gets
+>>> copy-pasted in the new layout driver, maybe you could clean these
+>>> (the memory leak should be fixed before the migration so it can be
+>>> backported easily, the others are just style so it can be done after, I
+>>> don't mind).
+>>>
+>>> ...
+>>>    
+>>>> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
+>>>> +		     enum u_boot_env_format format)
+>>>> +{
+>>>> +	size_t crc32_data_offset;
+>>>> +	size_t crc32_data_len;
+>>>> +	size_t crc32_offset;
+>>>> +	size_t data_offset;
+>>>> +	size_t data_len;
+>>>> +	size_t dev_size;
+>>>> +	uint32_t crc32;
+>>>> +	uint32_t calc;
+>>>> +	uint8_t *buf;
+>>>> +	int bytes;
+>>>> +	int err;
+>>>> +
+>>>> +	dev_size = nvmem_dev_size(nvmem);
+>>>> +
+>>>> +	buf = kcalloc(1, dev_size, GFP_KERNEL);
+>>>
+>>> Out of curiosity, why kcalloc(1,...) rather than kzalloc() ?
+>>
+>> I used kcalloc() initially as I didn't need buffer to be zeroed.
 > 
->> +#include <linux/sizes.h>
+> I think kcalloc() initializes the memory to zero.
+> https://elixir.bootlin.com/linux/latest/source/include/linux/slab.h#L659
+> 
+> If you don't need it you can switch to kmalloc() instead, I don't mind,
+> but kcalloc() is meant to be used with arrays, I don't see the point of
+> using kcalloc() in this case.
+> 
+>>
+>> I see that memory-allocation.rst however says:
+>>   > And, to be on the safe side it's best to use routines that set memory to zero, like kzalloc().
+>>
+>> It's probably close to zero cost to zero that buffer so it could be kzalloc().
+>>
+>>
+>>>> +	if (!buf) {
+>>>> +		err = -ENOMEM;
+>>>> +		goto err_out;
+>>>
+>>> We could directly return ENOMEM here I guess.
+>>>    
+>>>> +	}
+>>>> +
+>>>> +	bytes = nvmem_device_read(nvmem, 0, dev_size, buf);
+>>>> +	if (bytes < 0)
+>>>> +		return bytes;
+>>>> +	else if (bytes != dev_size)
+>>>> +		return -EIO;
+>>>
+>>> Don't we need to free buf in the above cases?
+>>>    
+>>>> +	switch (format) {
+>>>> +	case U_BOOT_FORMAT_SINGLE:
+>>>> +		crc32_offset = offsetof(struct u_boot_env_image_single, crc32);
+>>>> +		crc32_data_offset = offsetof(struct u_boot_env_image_single, data);
+>>>> +		data_offset = offsetof(struct u_boot_env_image_single, data);
+>>>> +		break;
+>>>> +	case U_BOOT_FORMAT_REDUNDANT:
+>>>> +		crc32_offset = offsetof(struct u_boot_env_image_redundant, crc32);
+>>>> +		crc32_data_offset = offsetof(struct u_boot_env_image_redundant, data);
+>>>> +		data_offset = offsetof(struct u_boot_env_image_redundant, data);
+>>>> +		break;
+>>>> +	case U_BOOT_FORMAT_BROADCOM:
+>>>> +		crc32_offset = offsetof(struct u_boot_env_image_broadcom, crc32);
+>>>> +		crc32_data_offset = offsetof(struct u_boot_env_image_broadcom, data);
+>>>> +		data_offset = offsetof(struct u_boot_env_image_broadcom, data);
+>>>> +		break;
+>>>> +	}
+>>>> +	crc32 = le32_to_cpu(*(__le32 *)(buf + crc32_offset));
+>>>
+>>> Looks a bit convoluted, any chances we can use intermediate variables
+>>> to help decipher this?
+>>>    
+>>>> +	crc32_data_len = dev_size - crc32_data_offset;
+>>>> +	data_len = dev_size - data_offset;
+>>>> +
+>>>> +	calc = crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
+>>>> +	if (calc != crc32) {
+>>>> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n", calc, crc32);
+>>>> +		err = -EINVAL;
+>>>> +		goto err_kfree;
+>>>> +	}
+>>>> +
+>>>> +	buf[dev_size - 1] = '\0';
+>>>> +	err = u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_len);
+>>>> +	if (err)
+>>>> +		dev_err(dev, "Failed to add cells: %d\n", err);
+>>>
+>>> Please drop this error message, the only reason for which the function
+>>> call would fail is apparently an ENOMEM case.
+>>>    
+>>>> +
+>>>> +err_kfree:
+>>>> +	kfree(buf);
+>>>> +err_out:
+>>>> +	return err;
+>>>> +}
+>>>> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
+>>>> +
+>>>> +static int u_boot_env_add_cells(struct device *dev, struct nvmem_device *nvmem)
+>>>> +{
+>>>> +	const struct of_device_id *match;
+>>>> +	struct device_node *layout_np;
+>>>> +	enum u_boot_env_format format;
+>>>> +
+>>>> +	layout_np = of_nvmem_layout_get_container(nvmem);
+>>>> +	if (!layout_np)
+>>>> +		return -ENOENT;
+>>>> +
+>>>> +	match = of_match_node(u_boot_env_of_match_table, layout_np);
+>>>> +	if (!match)
+>>>> +		return -ENOENT;
+>>>> +
+>>>> +	format = (uintptr_t)match->data;
+>>>
+>>> In the core there is currently an unused helper called
+>>> nvmem_layout_get_match_data() which does that. I think the original
+>>> intent of this function was to be used in this driver, so depending on
+>>> your preference, can you please either use it or remove it?
+>>
+>> The problem is that nvmem_layout_get_match_data() uses:
+>> layout->dev.driver
+> 
+> I'm surprised .driver is unset. Well anyway, please either fix the core
+> helper and use it or drop the core helper, because we have no user for
+> it otherwise?
 
-A good starting point would be to have socfpga 64bit maintainer , 
-without that , these patches are only being archived .
+I believe it's because of a very minimalistic "nvmem_bus_type" bus
+implementation.
+
+ From a quick look it seems that default expected FORWARD-trace is:
+driver_register()
+bus_add_driver()
+driver_attach()
+__driver_attach()
+driver_probe_device()
+__driver_probe_device()
+really_probe()
+
+It's really_probe() that seems to set dev->driver pointer.
+
+
+>> It doesn't work with layouts driver (since refactoring?) as driver is
+>> NULL. That results in NULL pointer dereference when trying to reach
+>> of_match_table.
+>>
+>> That is why I used u_boot_env_of_match_table directly.
+>>
+>> If you know how to fix nvmem_layout_get_match_data() that would be
+>> great. Do we need driver_register() somewhere in NVMEM core?
+
