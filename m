@@ -4,80 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B950EC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BA3C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:36:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08C2887252;
-	Tue, 19 Dec 2023 14:00:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6601F87282;
+	Tue, 19 Dec 2023 14:36:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VCjYiqTH";
+	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="BuxAM0CS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F04C087282; Tue, 19 Dec 2023 14:00:21 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4500386FBD; Tue, 19 Dec 2023 14:33:47 +0100 (CET)
+Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A321D87005
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:00:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26CE0874ED
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:33:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=prolan.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5e248b40c97so36782427b3.2
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:00:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1702990818; x=1703595618; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wQsELJUcX84CPUKB7i5L+mwivCo1LSqY29OjPTYZdwE=;
- b=VCjYiqTHIWL1eMa7wWapPaXkxbgvRBufwPf//9H8NcnYBiOPnfmfYYjLlddMJ6WKin
- N5nYO1BGNCIzDV+wFShZ0HLBjBEYDPEdhmxcPtXC71Dyu3vMRV3mRNsBjdokAhHXilxP
- o5wFWgUWlkNv83RNyP94X2dhX/zHrrrb31yyA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702990818; x=1703595618;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wQsELJUcX84CPUKB7i5L+mwivCo1LSqY29OjPTYZdwE=;
- b=DGmymDfjQ+H2u+9hiEz0oOnItNVguS0TtxfKzDzkPGhEG7KUF44yZUj7hpaXt7T7J/
- oH9IC653PSwB193yZFkOQMfIO4MXBmImu3rkNF8AJiro5xqhyKh4i4p68JhkJdmOQm5i
- etBufR011JyRmG4eBRdE2t4YU+2kcb7qBuujEFuW681HCxo1GGJ/V4WMOy4tQLV4VQoz
- JQXsYfmnw8iDND8nu5lyhefm0Pcb9qhcxXQoXrMPNgo2RgmmtOsHm8trk/q6iZuYCEP4
- yYcTjH4LiXU+dlikEZCeh478NJBzollPU/lfpofe8zSIjsQvTAwwiHDrXSbbv9CNRnf6
- NsBw==
-X-Gm-Message-State: AOJu0YxitctiVQT+OdOPr4Dqnje2c+niE9I/oOtrL4XYWCN8WUy6UhW4
- VbmD/dhHiF06kTtVsqSh1Oc/8A==
-X-Google-Smtp-Source: AGHT+IH5lMZ5/PFVNTsp5+Gcj5emvpFg3UgrSQmUuORnhqJoqCLy5tAkuz2+uhDMOhvsyQHfL5uzlQ==
-X-Received: by 2002:a5b:7d0:0:b0:db7:52f8:1381 with SMTP id
- t16-20020a5b07d0000000b00db752f81381mr10800220ybq.52.1702990817974; 
- Tue, 19 Dec 2023 05:00:17 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
- [2603:6081:7b00:6400:923c:ac63:6854:a688])
- by smtp.gmail.com with ESMTPSA id
- n75-20020a25404e000000b00dbd5bb05b16sm235024yba.59.2023.12.19.05.00.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 05:00:17 -0800 (PST)
-Date: Tue, 19 Dec 2023 08:00:15 -0500
-From: Tom Rini <trini@konsulko.com>
-To: TracyMg_Li@outlook.com
-Cc: jagan@amarulasolutions.com, andre.przywara@arm.com, festevam@gmail.com,
- patrick.delaunay@foss.st.com, tharvey@gateworks.com,
- pbrobinson@gmail.com, weichangzheng@phytium.com.cn, hs@denx.de,
- d-gerlach@ti.com, u-boot@lists.denx.de, robh+dt@kernel.org
-Subject: Re: [PATCH V3] ARM add initial support for the Phytium Pe2201 Board.
-Message-ID: <20231219130015.GT2513409@bill-the-cat>
-References: <SEYPR01MB588425FB8D218BF66F13E05DF197A@SEYPR01MB5884.apcprd01.prod.exchangelabs.com>
+ spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
+Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
+ [127.0.0.1])
+ by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 7EA51A13E8;
+ Tue, 19 Dec 2023 14:33:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
+ :cc:content-transfer-encoding:content-type:content-type:date
+ :from:from:message-id:mime-version:reply-to:subject:subject:to
+ :to; s=mail; bh=H2eYNxvF2Y0DaRMAn+619lRldElamij/MdZAYite9rU=; b=
+ BuxAM0CSWPFZxqij+Ua07WtQim41MMG3rtBd3mTiJa94k/w9UYMSTkGch/pTBUi5
+ lZ+9ovCACS71YG2xRl2oincytGXlDOTEJIbWo8yo7DFJGiorEehazu/u4+3SZWVT
+ OpA2sbFgJkpI+2SrbIs8Y8PbLn5y15bUBCB9SvEHloap/xHlRxIJGZLk4sgNSxmr
+ XqQX2uGCcl9GsCaJ3qJ3FP6t3dRW4+oYBfP8QQNY1HiFbbqFgvR7L/za4XCyzdNx
+ O8lOGc4wR1j0dFJPL0nOt75ESiIp6u6pqHuG7SDFBy4zWGYcljh4v/nXw4L+fyMZ
+ sfvZovRKF7JwNg27HJ4Aa0wMRC/ow5C7ejhHa3+QEO8kAZ6JDa9AWQa8t7o4naH1
+ N4HPFvZOfEayGF2GhcC+Y7jXcA8WvwNnovMvk2Swy9+8d43HwDZXlRpGB7l5jbN1
+ INP1bBElgc2jqVYFBhZOdUnfAw1+67WjTgAPvHzqyM/Aet8bb8H+nxo65X6oSaPC
+ zH0TxeX3sH+tjMKORM9yN15yMdp07MHxDJioVttVlS+PV8+aZbi/QlDPS4wfpue+
+ UGUtRVhQyu0fQkYGRTDMVIoODHe+rSPhx6Us6jL3nA/cVuvMLM/KCnyer9Wz3OzD
+ BsrD4r/pAd6iQyEBQFqGBHg8RIcjSQljmK1vMezZuQM=
+From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?=
+ <csokas.bence@prolan.hu>
+Subject: [PATCH v2] arm: spl: Use separate fault handlers instead of a single
+ common one
+Date: Tue, 19 Dec 2023 14:33:18 +0100
+Message-ID: <20231219133317.11101-1-csokas.bence@prolan.hu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SEJ7wZxiQ3cc/i1p"
-Content-Disposition: inline
-In-Reply-To: <SEYPR01MB588425FB8D218BF66F13E05DF197A@SEYPR01MB5884.apcprd01.prod.exchangelabs.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-ESET-AS: R=OK; S=0; OP=CALC; TIME=1702992823; VERSION=7966; MC=1964262394;
+ ID=56356; TRN=0; CRV=0; IPC=; SP=0; SIPS=0; PI=3; F=0
+X-ESET-Antispam: OK
+X-EsetResult: clean, is OK
+X-EsetId: 37303A29CE70385C6D7C66
+X-Mailman-Approved-At: Tue, 19 Dec 2023 14:36:16 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,78 +78,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
+Add a Kconfig option to separate the different handlers into their own individual infinite loops.
 
---SEJ7wZxiQ3cc/i1p
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
+---
 
-On Tue, Dec 19, 2023 at 10:27:27AM +0800, TracyMg_Li@outlook.com wrote:
-> From: TracyMg_Li <TracyMg_Li@outlook.com>
->=20
-> Add pe2201 platform code and the device tree of pe2201 platform board.
-> The initial support comprises the UART and PCIe.
->=20
-> Signed-off-by: TracyMg_Li <TracyMg_Li@outlook.com>
-> Changes since v1:
-> 		fix space corrupt.
-> Changes since v2:
-> 		switch to bootstd and text environment.
+Notes:
+    Changes in v2:
+    * Change `depends`: add `&& !ARM64 && !CPU_V7M`
+    * Remove `default n`
 
-Changes go below "---".  And:
+ arch/arm/Kconfig       |  9 +++++++++
+ arch/arm/lib/vectors.S | 18 ++++++++++++++++++
+ 2 files changed, 27 insertions(+)
 
-[snip]
-> diff --git a/board/phytium/pe2201/pe2201.env b/board/phytium/pe2201/pe220=
-1.env
-> new file mode 100644
-> index 0000000000..46f68ede2f
-> --- /dev/null
-> +++ b/board/phytium/pe2201/pe2201.env
-> @@ -0,0 +1,12 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2023, Phytium Technology Co., Ltd.
-> + */
-> +
-> +/* Initial environment variables */
-> +image=3DImage
-> +scriptaddr=3D0x90100000
-> +kernel_addr_r=3D0x90200000
-> +fdt_addr_r=3D0x95000000
-> +boot_fit=3Dno
-> +fdtfile=3Dphytium-pe2201.dtb
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 328e2ddc33..a6ddbad30c 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -79,6 +79,15 @@ config SPL_SYS_NO_VECTOR_TABLE
+ 	depends on SPL
+ 	bool
+ 
++config SPL_USE_SEPARATE_FAULT_HANDLERS
++	bool "Use separate fault handlers instead of a single common one"
++	depends on !SPL_SYS_NO_VECTOR_TABLE && !ARM64 && !CPU_V7M
++	help
++	  Instead of a common fault handler, generate a separate one for
++	  undefined_instruction, software_interrupt, prefetch_abort etc.
++	  This is for debugging purposes, when you want to set breakpoints
++	  on them separately.
++
+ config LINUX_KERNEL_IMAGE_HEADER
+ 	depends on ARM64
+ 	bool
+diff --git a/arch/arm/lib/vectors.S b/arch/arm/lib/vectors.S
+index 7cf7d1636f..a14bca6fb8 100644
+--- a/arch/arm/lib/vectors.S
++++ b/arch/arm/lib/vectors.S
+@@ -138,11 +138,29 @@ _fiq:			.word fiq
+ #if !CONFIG_IS_ENABLED(SYS_NO_VECTOR_TABLE)
+ 	.align	5
+ undefined_instruction:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	undefined_instruction
++#endif
+ software_interrupt:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	software_interrupt
++#endif
+ prefetch_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	prefetch_abort
++#endif
+ data_abort:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	data_abort
++#endif
+ not_used:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	not_used
++#endif
+ irq:
++#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
++	b	irq
++#endif
+ fiq:
+ 1:
+ 	b	1b			/* hang and never return */
+-- 
+2.25.1
 
-Please see doc/develop/bootstd.rst as there's environment variables you
-should be setting and..
 
-[snip]
-> +/* BOOT */
-> +#define BOOT_TARGET_DEVICES(func)	\
-> +	func(SCSI, scsi, 0)	\
-> +
-> +#include <config_distro_bootcmd.h>
-
-This can be removed.
-
---=20
-Tom
-
---SEJ7wZxiQ3cc/i1p
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWBk9gACgkQFHw5/5Y0
-tyypyQv+KZWSg4chNkFEuw+O4NNbSway5c2YCSg8nHd7e7VDgrTcFpioP/7eiH6B
-TmGrRVmlfvjWZMA81OcylpRi1hPW1biFWktTrYcXVPTpgk9m86umSgoD02YWkhxy
-y0PvqzojdXZLLnd9Xr7lSGC8K+Q5/OqZw6pbN3tW4Vi79Fc1puNsEOwPoNHD9jba
-pWxKOo/O34vKAAYWch99FrFSKJXxxDtyBegQQCjHeXV8Y6xeXAEjjdJcUcI4svnP
-s7sgnruCix5HcxqHKfaILw/uFGV/yx6XaEUjE+3KGn1+7VSoecMUhNsnvaCU7T4D
-+sk32I5fpPL5doG0U1A1Wiyd1AeMJ7pAoPmPkfMXTas85ec1D844Cq1680zRE0vX
-ARQkwJekkvFEJAjLrTUroVFiVLy+nOPRyk/QDIVY8Eb8KktdIRLsB0PceTkRQxRg
-YsPR/bpZwmkKTWgFBMiZ/nOX312+pfqemmJQS+1iF2lz13LifmEqc0hQG8qVjFwW
-zY2NND4c
-=267i
------END PGP SIGNATURE-----
-
---SEJ7wZxiQ3cc/i1p--
