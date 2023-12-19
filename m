@@ -4,81 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50E77C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC4CC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8A6286FF7;
-	Tue, 19 Dec 2023 09:51:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=londelec.com
+	by phobos.denx.de (Postfix) with ESMTP id B6A09871B4;
+	Tue, 19 Dec 2023 09:51:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=londelec-com.20230601.gappssmtp.com header.i=@londelec-com.20230601.gappssmtp.com header.b="yfi1HxFg";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="YHbbkDHE";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="jYA5V81W";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="YHbbkDHE";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="jYA5V81W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55C0C86FB8; Tue, 19 Dec 2023 09:51:05 +0100 (CET)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F1A9F86F34; Tue, 19 Dec 2023 09:51:24 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F144487073
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:51:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4815871B4
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:51:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=londelec.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=cody@londelec.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50e23c620e8so4005453e87.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 00:51:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=londelec-com.20230601.gappssmtp.com; s=20230601; t=1702975860; x=1703580660;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5/SY+ajO6S3kK0lwR465ZeFt2LeKuHk20HT99E2GQWI=;
- b=yfi1HxFgg/TMByZLsRpa3TvsHs3pT9UCbVO+ku/Tyk/u/mBLgD08IJrjXdXp3CpPA4
- G4HQxfNvn2ZP5NR49HN4UDs1oSVORCtk7UEq9pM8ql++am7YWVFGkY08TTYJf3CGhAAC
- N/Y2rgiODoEMcUEM5iWFG9kN3bcXZroEsbkBxL+wmc+xHDXKIphyhUzGnt2rCigWR5hp
- gzgx5yeH1oLkSKJxghxLsAFLb27Ng0KV+jYqcknIdem/IxIHvoN/oO/2Hmp0DEwb78+s
- JKX++4aD3NQB5G6EWV1R5e157xVyJpXfApDC75WrY78kp6H/WqFs/36q7yjKPyzRfvXu
- LnZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702975860; x=1703580660;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5/SY+ajO6S3kK0lwR465ZeFt2LeKuHk20HT99E2GQWI=;
- b=M1bSJPOSfZRREMWDHyuYYWr2KMBb7V0h+yG6f1abvstVP5zHJ3HzMp6PZ8+Q6C0rfx
- mR629GSAhjsdUE6Fb7xxV6QdHcJtZNxngc/oeqxjVbybFJw31kxDtUsIaR9YZ+1+lN8G
- d0tmN8KvetOARlU/jPDmmQw7yh91Mrhv9IjNRnSWYFeXtbWpG52PzJu6tEBF2fcsZCzK
- E4ylt+iCvV8s9drTZbiAQS2jymtF2iXHDgMd7Gq9DNgeIPaZtBzcY1Fw4XZsFxnDDPhD
- W2Lr0URVVXvEuOg6L8HQbUrOd5ZlpRsTjd0ApM08aEIWz2RQEggqEC4ZQ8pGhycr7H26
- QI3g==
-X-Gm-Message-State: AOJu0Yw0Bxe43YW7MXkn5vmAKjZ/LteTGHDk36X3COBgBScLn8XT0tVo
- LkDure3ODloBlqhNSYF63crsH4PDDOgb1hmzJ0wOEg==
-X-Google-Smtp-Source: AGHT+IFaOXnlob4m9gy6e2Wfm+LpPQlYz1ok1IKDa2/Nqb6L+JlT3Z2Bu87EAQKmPOmNMJymAEeBxw==
-X-Received: by 2002:a19:7510:0:b0:50e:22cb:6f2e with SMTP id
- y16-20020a197510000000b0050e22cb6f2emr2344320lfe.0.1702975859201; 
- Tue, 19 Dec 2023 00:50:59 -0800 (PST)
-Received: from localhost.localdomain ([87.110.52.154])
- by smtp.gmail.com with ESMTPSA id
- j15-20020ac2550f000000b0050aa6e2ae87sm787845lfk.2.2023.12.19.00.50.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 00:50:58 -0800 (PST)
-From: Cody Green <cody@londelec.com>
-To: u-boot@lists.denx.de
-Cc: Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Stefano Babic <sbabic@denx.de>, Marek Vasut <marex@denx.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alan Kay <alan@londelec.com>
-Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
- from DCDC_BATT without 5V
-Date: Tue, 19 Dec 2023 08:50:18 +0000
-Message-Id: <20231219085018.8266-1-cody@londelec.com>
-In-Reply-To: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
-References: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 654DB1FD58;
+ Tue, 19 Dec 2023 08:51:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1702975881; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zHHQ4InJCdy0qUaJqhd4XGOVZ1rDsuwvxlmFNq9KYw0=;
+ b=YHbbkDHEO79F9WqoyMMU02KYra/bXBjvedIp2vSNf50Ly8msoiqxoEYu5/F2xHytz1FGvb
+ bgukxBk/KK95U6w7pwF3JMB0GtEw8LvHVqx2J39Qp9gkN8+cCCF8pnZ3CPBkj74DvOUlXz
+ HDLz1m3ErGu5CLG9IPTLfISknZYQHoE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1702975881;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zHHQ4InJCdy0qUaJqhd4XGOVZ1rDsuwvxlmFNq9KYw0=;
+ b=jYA5V81W56eBIOk0j8vjd5V0HWTzQ2kfqSbl+E+0zLIA5TaZ7c1GjLV9XVS9/WAS3D3Yju
+ VefzYVVYLw3Vm5Ag==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1702975881; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zHHQ4InJCdy0qUaJqhd4XGOVZ1rDsuwvxlmFNq9KYw0=;
+ b=YHbbkDHEO79F9WqoyMMU02KYra/bXBjvedIp2vSNf50Ly8msoiqxoEYu5/F2xHytz1FGvb
+ bgukxBk/KK95U6w7pwF3JMB0GtEw8LvHVqx2J39Qp9gkN8+cCCF8pnZ3CPBkj74DvOUlXz
+ HDLz1m3ErGu5CLG9IPTLfISknZYQHoE=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1702975881;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=zHHQ4InJCdy0qUaJqhd4XGOVZ1rDsuwvxlmFNq9KYw0=;
+ b=jYA5V81W56eBIOk0j8vjd5V0HWTzQ2kfqSbl+E+0zLIA5TaZ7c1GjLV9XVS9/WAS3D3Yju
+ VefzYVVYLw3Vm5Ag==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 42D64136A5;
+ Tue, 19 Dec 2023 08:51:21 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id gr8WDolZgWW/CQAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Tue, 19 Dec 2023 08:51:21 +0000
+Date: Tue, 19 Dec 2023 10:51:20 +0200
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Stefan Wahren <wahrenst@gmx.net>
+Cc: Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Dmitry Malkin <dmitry@bedrocksystems.com>, 
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>, 
+ florian.fainelli@broadcom.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 4/7] bcm2835: brcm,bcm2708-fb device is using r5g6b5
+ format
+Message-ID: <tosej62qjugymvxevjaqq6kqkkjlo3qpkbzaw4xx4ot6fk3j54@evih5bgvfdtf>
+References: <20231218210341.30073-1-iivanov@suse.de>
+ <20231218210341.30073-5-iivanov@suse.de>
+ <7764be07-c3cc-47e0-a284-4ba9420a843f@gmx.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7764be07-c3cc-47e0-a284-4ba9420a843f@gmx.net>
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [-1.02 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ NEURAL_HAM_LONG(-1.00)[-1.000]; RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-0.998]; RCPT_COUNT_SEVEN(0.00)[10];
+ FREEMAIL_TO(0.00)[gmx.net]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ MID_RHS_NOT_FQDN(0.50)[];
+ FREEMAIL_CC(0.00)[suse.com,gmail.com,bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,broadcom.com,lists.denx.de];
+ RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-0.22)[72.15%]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,18 +124,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12-18 23:32, Stefan Wahren wrote:
+> > 
+> >   static const struct udevice_id bcm2835_video_ids[] = {
+> > -	{ .compatible = "brcm,bcm2835-hdmi" },
+> > -	{ .compatible = "brcm,bcm2711-hdmi0" },
+> > -	{ .compatible = "brcm,bcm2708-fb" },
+> > +	{ .compatible = "brcm,bcm2835-hdmi",  .data = VIDEO_BPP32},
+> > +	{ .compatible = "brcm,bcm2711-hdmi0", .data = VIDEO_BPP32},
+> > +	{ .compatible = "brcm,bcm2708-fb",    .data = VIDEO_BPP16 },
+> this change looks wrong to me. Before we used VIDEO_BPP32 for
+> brcm,bcm2708-fb. I think it's hard to explain why we should downgrade
+> the other boards. I would expect some brcm,bcm2712 compatible at least
+> this needs an explanation in the commit message.
+> 
 
-On Fri, Dec 15, 2023 at 7:23 PM Fabio Estevam <festevam@gmail.com> wrote:
->
-> On Fri, Dec 15, 2023 at 1:20 PM Fabio Estevam <festevam@gmail.com> wrote:
->
-> > Ok, what about the patch below?
-> >
-> > https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-cody@londelec.com/
-> >
-> > Is this still needed?
->
-> I looked in the i.MX28 Reference Manual, and the one above looks a
-> correct fix. I will queue it.
+If you are confident that this semi device was working before with
+BPP32 I will try to find better way to handle this. Do you remember
+which RPi version was this?
 
-Yes, this patch is needed, thank you for queuing it.
+Thanks,
+Ivan
+
