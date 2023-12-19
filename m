@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ADB9C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 16:47:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08325C46CA2
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:03:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A64158752B;
-	Tue, 19 Dec 2023 17:47:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42369807D9;
+	Tue, 19 Dec 2023 18:03:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nwqXfEEu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eG/STg6Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DB12871B4; Tue, 19 Dec 2023 17:47:18 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id AC5B5871C3; Tue, 19 Dec 2023 18:03:34 +0100 (CET)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50641876E9
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 17:47:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5AA9807A8
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:03:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40c31f18274so60458745e9.0
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:47:12 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2cc4029dc6eso57315081fa.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:03:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703004432; x=1703609232; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LJ1dbJBqJPfhT3kCSj94Zw04NbqXp5mrseCBda5B9O4=;
- b=nwqXfEEuOcXnvTOozMURYpQng3oxXRdp7msU1uJ3GzpJujT48TPEAiUiVdazCNSiDa
- DPsfhT/EA9cwhahbppfFIx9Od7meTuVPRD2Cp2MDyhOWjKq2eGWQ0rSz54oytGfj33hb
- /rWFk/bD9TAP8s5r4S6ZH6/SsZTwqxFK78DV5QhKbi+b8Ynbf+FRU7ewUjmWEG5qYD8W
- wYGfg/bwoIZNPZAUxww1b/l3Qmx7b8oQZHhDhIAGmoVtQOgoTNqx4efIMOJ8VOzpJVzL
- scgQ+3IOoX4NvFyxo7+3yJr+OZdUWLCxJUvvIFFVwO+kYLXXmAO72F3BbxoRfYnJMYCB
- M27Q==
+ d=linaro.org; s=google; t=1703005412; x=1703610212; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=2rRQrwmLrPfWjkPfaFIT3ezmW8sVYr0s1EKkL2tR/nE=;
+ b=eG/STg6YRuttKwF2mHa/srxGk7daGSfEWoYoDuYTx5PASSZHw/7ryhMujK+hrGqM5I
+ grOaqggk+Z8cuFkv6xebaH7rVmrqRGpT4TXB2vwsA78dWULBvrtOoqZDNpGu6OMEAAeY
+ sVAh+Zw//WCQyJSfiAmK1lE4YxGzjKcGRSecWViXR/hNp1PfKcXAkMX4g2Cda4Hx8Qa3
+ eVOF54N9ORFh8weXfHPSh5uU8ic26dzBvUpTAlHHCWJLJHCMiycj0lfGlbvTfrpVIF3A
+ Vs922lqD7lzgIiEWTUdlfkytEoEW1U/KhFrHnyr0JaTiGnxOV1r02tBMLkPWTK7MhpgM
+ Jxmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703004432; x=1703609232;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LJ1dbJBqJPfhT3kCSj94Zw04NbqXp5mrseCBda5B9O4=;
- b=fXP9K/Z1+A3BOd/lcUd9g0EmZXDkz7k+vd04UTzoqJIVLEqjo6myuFV6thJeWtTEFR
- MnS3rLAOrgySYJ4SRdtESQYkT2kA1NOFKPF3JpQmXp+PPcRstOdP1g5lH/GbfHSIUQty
- QYWv1+zrtvRRdXHE8cwK9kMkqP3AZjyA918H0pzUIBt25OHuv7XBNa7Z58nZwX22sQqc
- SyAgqVVCWW66+I5LeFQUuC1ua9nNI9itRY1QZW/Pq2QkqYP4OdBD71vMzSJsnzDaHSpJ
- wAVYLFKa5ceqk9FhfzewQefakr0XveoL8bwYXckwMGTWFJGm9gGvFffxITuDnqAw8nrt
- HWqw==
-X-Gm-Message-State: AOJu0YyNKDkh9aq3Ju8YXHTrpN74mHnm0m1W5zxPy8mERffFt3N7z8Ig
- 0yRRoJM7ohq2EfEcuBezrnBGgA==
-X-Google-Smtp-Source: AGHT+IHFXtiLXU3fYlzHfd3l+w9mCcSk9DE9jwKFBlPnVuydIV7w57gX1wU2fqbF4+CgeqOo6VaS9A==
-X-Received: by 2002:a05:600c:474a:b0:40c:6ae0:8cf3 with SMTP id
- w10-20020a05600c474a00b0040c6ae08cf3mr3574698wmo.153.1703004431733; 
- Tue, 19 Dec 2023 08:47:11 -0800 (PST)
-Received: from [192.168.1.83] (host-92-17-96-230.as13285.net. [92.17.96.230])
- by smtp.gmail.com with ESMTPSA id
- m12-20020adffe4c000000b003366827c9c6sm5933776wrs.2.2023.12.19.08.47.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 19 Dec 2023 08:47:11 -0800 (PST)
-Message-ID: <3310b183-c0f5-48e9-b92c-5c98508b2b90@linaro.org>
-Date: Tue, 19 Dec 2023 16:47:10 +0000
+ d=1e100.net; s=20230601; t=1703005412; x=1703610212;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2rRQrwmLrPfWjkPfaFIT3ezmW8sVYr0s1EKkL2tR/nE=;
+ b=Z4VyhYrnDBaE0plMXlpNPMV70Mska/ROG2r2yWGTUK707VbYaiSv788lyHRrmEEO1a
+ WcAdWPDuZQQTXd0Ue8XElJGDD0tPl6+3xaG8Xf7muHooDeCJ4KEysM4QXyB38Ckkf1Wc
+ vUKr9XszsD7YrKugZSkMXP0c5mN1iz/ogAEDERZxwf+kx5IrO948ZEdE/Z1YkBoLp9Bw
+ QaJWfamxSeDoDl5Q3J2edKkbU/+rlU+P8HPDhrwYfELrIiqBWSbcdCdWFsXdfvr7RWCb
+ /V1vU8OT5r2iaJX9nHK0Zhp3mrFB+QfIQ9T1dNW6KQQX/hLO+pcetg+VoiRD3H1u7gvK
+ whXw==
+X-Gm-Message-State: AOJu0YyT/DgnaRlAGtY253N43nnGTErfFGWfcQMHC41E3tjVQex9s7oE
+ YKhgejMl+vz5ZGAqLsP+ClEk9UzH6AQmU6unCgCvpit50D0XBjElg08=
+X-Google-Smtp-Source: AGHT+IEmJI23fXFgsOda9IUcihQgXiys/SaxJZzQSJ8Vh1EKkQIb/cYMROAYLkRsvXzqMyHMtOMgqtOsMRNJThvs50Y=
+X-Received: by 2002:a2e:9883:0:b0:2cc:5c96:429c with SMTP id
+ b3-20020a2e9883000000b002cc5c96429cmr2887688ljj.46.1703005411933; Tue, 19 Dec
+ 2023 09:03:31 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] serial_msm: Add support for RS232 GPIOs
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: neil.armstrong@linaro.org, lukma@denx.de, seanga2@gmail.com,
- marex@denx.de, laetitia.mariottini@se.com, pascal.eberhard@se.com,
- abdou.saker@se.com, jimmy.lalande@se.com, benjamin.missey@non.se.com,
- daniel.thompson@linaro.org
-References: <20231218072428.1802969-1-sumit.garg@linaro.org>
- <20231218072428.1802969-3-sumit.garg@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20231218072428.1802969-3-sumit.garg@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
+ <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 19 Dec 2023 19:02:56 +0200
+Message-ID: <CAC_iWjLV7PCjqz3dmfAWFqXeDJNK52-kYZBs-q6HnrcQXoP1CA@mail.gmail.com>
+Subject: Re: [PATCH v4 3/9] arm: add ACPI fields to global data
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,59 +88,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I guess these GPIOs are RTS/CTS? Missing description...
-
-Given that you just set them to their respective values, you should be
-able to configure these using pinctrl with this patch [1], so we can
-avoid adding these non-standard bindings.
-
-I tested your next patch, setting "MSM_UART_MR1_RX_RDY_CTL" in
-uart_dm_init() on db410c and db820c and I don't notice any issues with
-setting that bit unconditionally. If it's definitely needed for your
-board then I'd be ok with a patch to always set it with a comment
-offering some context.
-
-[1]:
-https://lore.kernel.org/u-boot/20231219-b4-qcom-common-target-v2-10-b6dd9704219e@linaro.org/
-
-On 18/12/2023 07:24, Sumit Garg wrote:
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+On Tue, 19 Dec 2023 at 17:04, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Add fields for the location of ACPI tables to the global data.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/serial/serial_msm.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> index a22623c316e..43e58595dc2 100644
-> --- a/drivers/serial/serial_msm.c
-> +++ b/drivers/serial/serial_msm.c
-> @@ -16,6 +16,7 @@
->  #include <serial.h>
->  #include <watchdog.h>
->  #include <asm/global_data.h>
-> +#include <asm/gpio.h>
->  #include <asm/io.h>
->  #include <linux/compiler.h>
->  #include <linux/delay.h>
-> @@ -210,6 +211,7 @@ static int msm_serial_probe(struct udevice *dev)
->  {
->  	int ret;
->  	struct msm_serial_data *priv = dev_get_priv(dev);
-> +	struct gpio_desc rs232_0, rs232_1;
->  
->  	/* No need to reinitialize the UART after relocation */
->  	if (gd->flags & GD_FLG_RELOC)
-> @@ -219,6 +221,11 @@ static int msm_serial_probe(struct udevice *dev)
->  	if (ret)
->  		return ret;
->  
-> +	if (!gpio_request_by_name(dev, "gpios", 0, &rs232_0, GPIOD_IS_OUT))
-> +		dm_gpio_set_value(&rs232_0, 1);
-> +	if (!gpio_request_by_name(dev, "gpios", 1, &rs232_1, GPIOD_IS_OUT))
-> +		dm_gpio_set_value(&rs232_1, 0);
-> +
->  	pinctrl_select_state(dev, "uart");
->  	uart_dm_init(priv);
->  
+> v4:
+>         no change
+> v3:
+>         let tables in global data depend on CONFIG_(SPL_)ACPI
+> v2:
+>         new patch
+> ---
+>  arch/arm/include/asm/global_data.h | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+> index 75bd9d56f8..c3d87caa0b 100644
+> --- a/arch/arm/include/asm/global_data.h
+> +++ b/arch/arm/include/asm/global_data.h
+> @@ -19,7 +19,12 @@ struct arch_global_data {
+>  #if defined(CONFIG_FSL_ESDHC) || defined(CONFIG_FSL_ESDHC_IMX)
+>         u32 sdhc_clk;
+>  #endif
+> -
+> +#if CONFIG_IS_ENABLED(ACPI)
+> +       ulong table_start;              /* Start address of ACPI tables */
+> +       ulong table_end;                /* End address of ACPI tables */
+> +       ulong table_start_high;         /* Start address of high ACPI tables */
+> +       ulong table_end_high;           /* End address of high ACPI tables */
+> +#endif
+>  #if defined(CONFIG_FSL_ESDHC)
+>         u32 sdhc_per_clk;
+>  #endif
+> --
+> 2.40.1
+>
 
--- 
-// Caleb (they/them)
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
