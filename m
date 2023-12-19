@@ -4,72 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9D9C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEEAAC46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:40:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12AA9875B5;
-	Tue, 19 Dec 2023 18:07:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DA1D786D33;
+	Tue, 19 Dec 2023 18:40:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hkNqfpII";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AheWE3n7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CA3F875B5; Tue, 19 Dec 2023 18:07:36 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 3441187603; Tue, 19 Dec 2023 18:40:41 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DADE807D9
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:07:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F043586D2E
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:40:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50e3c6f1c10so3138758e87.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:07:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a2331e7058aso416904866b.2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:40:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703005653; x=1703610453; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bMEB2kn+p2aTlLBE7g2PrVWqXTXeF+tvJmue+MCkG/w=;
- b=hkNqfpIIU5z+9mLjC6HpwViBxc/StxGzBt43VZfBzUY4RneP8VizGNWLoi8uZysmtA
- NLqWbCr8emwmwzZ3U0tTgt/c4qEhpEOLa0ixEiylHTG3n3lZJlyEnlVWhP3vd2hvEX71
- FSZF7jXOr45pqXNjO1hTLqcehsmaRbBFPYY7dxa6JoXGeXWjnMR8DglhvFlyIOqBqanv
- 9ZwtxWOrGrXqyXdlf6qnEyfGuyVHaBUt8OsQkhdlfv6rS9ciAYUY5bCxT2/g+oxe31WP
- kJkaMvSfZKoUz/GW6lxjbd+XoLzfgtUvVkM1eUUj//yqShmIgGhxXIH4vfUld5mEDqFl
- Xh0A==
+ d=gmail.com; s=20230601; t=1703007638; x=1703612438; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WUAvVSVhxfpG8xQnwKnlglz0LVM7Vn2JPxTl2XGCxyQ=;
+ b=AheWE3n7CVMvKJGVyF/45xb/q3ow8Ho5gbUzgtTvsrFi3qtd0Fb2klbLKI9wSPASyN
+ DJyXHFwHf78Ibco3vuwxDSoOIq8XCcr3e+9kyDPDsjUoybirewFkOEECAskLdVEZahIF
+ 9xDofBKMh9I3ss6cmvuTTeMKLDsIQBqwzd+eWfD9OsLWvwBs1POHgmHbn+dklrAwCq2V
+ 1tAKbUcFYDDVJeEjXr6Hf7mtcDNauAuiqQ7/T7WMn9B2cdcHMWLtwnlLDwbzZxLjXOWb
+ 5dCZZI+Z+Ut+S+NUD20hJNEmSiiJ9aUcC4HyWh4/TfY5gpRgmGqjoSluowaNTTBpgILf
+ NWPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703005653; x=1703610453;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1703007638; x=1703612438;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bMEB2kn+p2aTlLBE7g2PrVWqXTXeF+tvJmue+MCkG/w=;
- b=BN7A2eRJMu7spsCjoF2C5syhXkyMUuxLfN7L8Ripu5FMcNPZ4xNlx8GHci2jfzpGdR
- zf+XMoFbzZjv5VrKP42IyiZIKSPJ3TeasWQ29TVWjAC3ybvuxA0AZ01p4fsdBXCO4PYa
- wAidqBZ8p9cXZ3Ma86OlD41sluNsNdFYdGfMzKP81k674JcDtwqHk3PlBqyZEMLfpqLI
- nEePI2GsUHbmi/NoLauYrIVZHXvxMyfr9HGyfRy7G6rNsuyioj1zwiHdHsDyv99UNaVu
- yhX2oTrdfeBjusEJkidehEgQv8nHYqHfzGvidBReVXGflYAPmeDfhI5iTWlJLA1psGtd
- tVMg==
-X-Gm-Message-State: AOJu0YzB3x6cOfrsQoDIrDoUuFnVRmlxpIaN4pUbzbqgJ9MlpNlaEky5
- AlDhYGFeoWMK6lKfvHck9bsr5XNF/IA25VCTBNyaEg==
-X-Google-Smtp-Source: AGHT+IFEfuu8pD/BkSzrzzS9sJA4qZlVud6vIWQqzqU0kPDjN9Eq45JS8b584WjkOfdWXTefmcG1nMK9/7aBz2kxBH8=
-X-Received: by 2002:ac2:55b0:0:b0:50e:2b8e:2ca0 with SMTP id
- y16-20020ac255b0000000b0050e2b8e2ca0mr1119347lfg.243.1703005653477; Tue, 19
- Dec 2023 09:07:33 -0800 (PST)
+ bh=WUAvVSVhxfpG8xQnwKnlglz0LVM7Vn2JPxTl2XGCxyQ=;
+ b=wsEmKCKjMh2o+EksyObxzdoSm34nEAnCiRt4ZygqX2LQBlskggegtTFyD7P/C9H1Mt
+ pFdOm/Y/yKQNxLS+SroQ715zY8OR34m20hbukYJA5Fv8tMsR3Ge2b8kNnlU3BNilVfg/
+ viWvUjoettIsTNRUBWlpYL5C5GT7UnS2j7gWTxu0a58ldq+FXNNt0cWvuUWWBvBOMKv1
+ Mt0p0sZkfKMtWtarbep4RAvXzxrTp72wRpBzURxim96hOGI47wuZWikmx2l6E7NxosrD
+ cP6tGRWCU+7K7jsLET+YLANevR1VENjJa7alZx9hA8AErqaPKB+ost9pClgkj4WkLhR1
+ DrEA==
+X-Gm-Message-State: AOJu0Yzp90D8TWqyouk58eNTBjkANRnKNpltT5Dhg4BiskINuOKBC5SU
+ GoU9ryXwYzDzOdXhY9EEkuw=
+X-Google-Smtp-Source: AGHT+IGj03k4tKfPpLbPbo44mQ331d1Cth9MTNhfOJCUqRXauznoIRp+BrTJhH+JppWzVsGZ3iN7Rw==
+X-Received: by 2002:a17:907:764c:b0:a26:8ab0:43b8 with SMTP id
+ kj12-20020a170907764c00b00a268ab043b8mr48795ejc.41.1703007638248; 
+ Tue, 19 Dec 2023 09:40:38 -0800 (PST)
+Received: from localhost.lan (031011218106.poznan.vectranet.pl.
+ [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
+ tx27-20020a1709078e9b00b00a1c85124b08sm15834840ejc.94.2023.12.19.09.40.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Dec 2023 09:40:37 -0800 (PST)
+From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Michael Walle <michael@walle.cc>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
+Subject: [PATCH V2 1/5] dt-bindings: nvmem: layouts: add U-Boot environment
+ variables layout
+Date: Tue, 19 Dec 2023 18:40:21 +0100
+Message-Id: <20231219174025.15228-1-zajec5@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-References: <20231218181901.337515-1-raymond.mao@linaro.org>
- <20231218181901.337515-4-raymond.mao@linaro.org>
-In-Reply-To: <20231218181901.337515-4-raymond.mao@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 19 Dec 2023 19:06:57 +0200
-Message-ID: <CAC_iWjKm-tJ8nXtEcVYcvqx9cB3=agr0YMgHfd+OfXV0z5bUTg@mail.gmail.com>
-Subject: Re: [PATCH v3 03/14] bloblist: Change the magic value
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,39 +97,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 18 Dec 2023 at 20:19, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> From: Simon Glass <sjg@chromium.org>
->
-> This uses a new value with spec v0.9 so change it.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Co-developed-by: Raymond Mao <raymond.mao@linaro.org>
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - Update the bloblist magic to align to FW handoff spec v0.9.
-> Changes in v3
-> - Update the bloblist magic to align to FW handoff spec up to commit 3592349.
->
->  include/bloblist.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/include/bloblist.h b/include/bloblist.h
-> index 5ad1337d1f..72c785411d 100644
-> --- a/include/bloblist.h
-> +++ b/include/bloblist.h
-> @@ -75,7 +75,7 @@
->
->  enum {
->         BLOBLIST_VERSION        = 0,
-> -       BLOBLIST_MAGIC          = 0xb00757a3,
-> +       BLOBLIST_MAGIC          = 0x4a0fb10b,
->
->         BLOBLIST_ALIGN_LOG2     = 3,
->         BLOBLIST_ALIGN          = 1 << BLOBLIST_ALIGN_LOG2,
-> --
-> 2.25.1
->
+From: Rafał Miłecki <rafal@milecki.pl>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+U-Boot env data is a way of storing firmware variables. It's a format
+that can be used of top of various storage devices. Its binding should
+be an NVMEM layout instead of a standalone device.
+
+This patch adds layout binding which allows using it on top of MTD NVMEM
+device as well as any other. At the same time it deprecates the old
+combined binding.
+
+Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+---
+V2: Add "-layout" suffix to compatibles to avoid conflict
+
+ .../nvmem/layouts/u-boot,env-layout.yaml      | 55 +++++++++++++++++++
+ .../devicetree/bindings/nvmem/u-boot,env.yaml |  6 ++
+ 2 files changed, 61 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/nvmem/layouts/u-boot,env-layout.yaml
+
+diff --git a/Documentation/devicetree/bindings/nvmem/layouts/u-boot,env-layout.yaml b/Documentation/devicetree/bindings/nvmem/layouts/u-boot,env-layout.yaml
+new file mode 100644
+index 000000000000..3b4d8f2a44e1
+--- /dev/null
++++ b/Documentation/devicetree/bindings/nvmem/layouts/u-boot,env-layout.yaml
+@@ -0,0 +1,55 @@
++# SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/nvmem/layouts/u-boot,env-layout.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: NVMEM layout of U-Boot environment variables
++
++maintainers:
++  - Rafał Miłecki <rafal@milecki.pl>
++
++description:
++  U-Boot uses environment variables to store device parameters and
++  configuration. They may be used for booting process, setup or keeping end user
++  info.
++
++  Data is stored using U-Boot specific formats (variant specific header and NUL
++  separated key-value pairs).
++
++properties:
++  compatible:
++    oneOf:
++      - description: A standalone env data block
++        const: u-boot,env-layout
++      - description: Two redundant blocks with active one flagged
++        const: u-boot,env-redundant-bool-layout
++      - description: Two redundant blocks with active having higher counter
++        const: u-boot,env-redundant-count-layout
++      - description: Broadcom's variant with custom header
++        const: brcm,env-layout
++
++additionalProperties: false
++
++examples:
++  - |
++    partitions {
++        compatible = "fixed-partitions";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@0 {
++            reg = <0x0 0x40000>;
++            label = "u-boot";
++            read-only;
++        };
++
++        partition@40000 {
++            reg = <0x40000 0x10000>;
++            label = "u-boot-env";
++
++            nvmem-layout {
++                compatible = "u-boot,env-layout";
++            };
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml b/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
+index 9c36afc7084b..6c2a3ca5f051 100644
+--- a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
++++ b/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
+@@ -26,9 +26,15 @@ description: |
+ 
+   Variables can be defined as NVMEM device subnodes.
+ 
++  Introduction of NVMEM layouts exposed a limitation of this binding design.
++  Description of NVMEM data content should be separated from NVMEM devices.
++  Since the introduction of U-Boot env data layout this binding is deprecated.
++
+ maintainers:
+   - Rafał Miłecki <rafal@milecki.pl>
+ 
++deprecated: true
++
+ properties:
+   compatible:
+     oneOf:
+-- 
+2.35.3
+
