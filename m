@@ -4,127 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A5EC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7A6DC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:42:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BEDE877C8;
-	Tue, 19 Dec 2023 12:34:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0B808875F0;
+	Tue, 19 Dec 2023 12:39:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WoUHEG/2";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="VPmAuecl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DBA487879; Tue, 19 Dec 2023 12:33:58 +0100 (CET)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id CC807875F0; Tue, 19 Dec 2023 12:39:01 +0100 (CET)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0A6487834
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 12:33:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E106B876A2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 12:38:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=chanho61.park@samsung.com
-Received: from epcas2p1.samsung.com (unknown [182.195.41.53])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20231219113352epoutp026cf7bc05af159e236baea3cbbf8d5c1c~iOGjvRvEw0999709997epoutp02Y
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:33:52 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20231219113352epoutp026cf7bc05af159e236baea3cbbf8d5c1c~iOGjvRvEw0999709997epoutp02Y
+Received: from epcas2p4.samsung.com (unknown [182.195.41.56])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20231219113854epoutp037711a3d1873a12f0b1dc8f1a9e931b5c~iOK8yW5Kh2373823738epoutp03Q
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:38:54 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20231219113854epoutp037711a3d1873a12f0b1dc8f1a9e931b5c~iOK8yW5Kh2373823738epoutp03Q
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1702985632;
- bh=AU/wQCvvj3MOZA2mlLRRyvdOd27+xX4wpwr6QxF5q00=;
+ s=mail20170921; t=1702985934;
+ bh=O0OwC2eltDWIw35pQoAP7RAy5B/89PTvEmyGzgrOhUI=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=WoUHEG/2DajnfKqowNqvlWF3XN1zR1p/GYOwQqZ5txo0Kgu8+7U6MR2N2sVNQIQ+q
- T5Me8wQA/wKU2vZLw+Ugq27aLMJ6c6WZu0GARm4ml7SAZ6hn8m23GZd4BFebAmpo2y
- X0ZpWs0Nzlf0fnz1liIRatz9xIeuST9xyU8fRE94=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ b=VPmAuecldhBfcH3qlFKsTeFqcxFcK9yNwaFEKtRH7k4PbmmbhnTNRDeZ3zfV++nJ1
+ 2lFRcGyYYM4aQpfPtZqsXWIR3QP1qAOGBVUB0zZ9EQpoH3lWJ+WIt/5vrXyw3lrLLt
+ 9+dSjsFj9bGS6iZodw2B0A2M3KumU4ckgAngdTQM=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
  epcas2p3.samsung.com (KnoxPortal) with ESMTP id
- 20231219113351epcas2p34b5d607dba8ed3f8bf3d8ee785279980~iOGjTT04l1545715457epcas2p3t;
- Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
-Received: from epsmges2p3.samsung.com (unknown [182.195.36.89]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4SvZMg38nlz4x9Pw; Tue, 19 Dec
- 2023 11:33:51 +0000 (GMT)
-Received: from epcas2p1.samsung.com ( [182.195.41.53]) by
- epsmges2p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 66.27.10022.F9F71856; Tue, 19 Dec 2023 20:33:51 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTPA id
- 20231219113351epcas2p217dab3d7ee26e61b9f83bb825d517ca9~iOGicatvJ2535325353epcas2p2r;
- Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20231219113351epsmtrp1737a8ab53505ee6a776757c27659e81b~iOGibk9WR2021420214epsmtrp18;
- Tue, 19 Dec 2023 11:33:51 +0000 (GMT)
-X-AuditID: b6c32a47-bfdfa70000002726-23-65817f9f9b79
+ 20231219113853epcas2p3eca21e9c10e3c7bc199d0c6341b2381c~iOK8YxGAm2380123801epcas2p3P;
+ Tue, 19 Dec 2023 11:38:53 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.36.89]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4SvZTT1jZLz4x9Pp; Tue, 19 Dec
+ 2023 11:38:53 +0000 (GMT)
+Received: from epcas2p3.samsung.com ( [182.195.41.55]) by
+ epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ F7.53.09607.DC081856; Tue, 19 Dec 2023 20:38:53 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20231219113851epcas2p4f4e758bc834255ffd80c31818e2e3343~iOK6rfqpK2454224542epcas2p4b;
+ Tue, 19 Dec 2023 11:38:51 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20231219113851epsmtrp2616b763c566e54b0d8e770476f02ebdc~iOK6q2nDS2201622016epsmtrp2m;
+ Tue, 19 Dec 2023 11:38:51 +0000 (GMT)
+X-AuditID: b6c32a48-963ff70000002587-bc-658180cdac7d
 Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 1D.80.08755.E9F71856; Tue, 19 Dec 2023 20:33:50 +0900 (KST)
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ DD.2C.18939.BC081856; Tue, 19 Dec 2023 20:38:51 +0900 (KST)
 Received: from KORCO082417 (unknown [75.12.40.192]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20231219113350epsmtip1dca3b5763922f7dad2620e0d44e9c3e4~iOGiRCBMz2787727877epsmtip1R;
- Tue, 19 Dec 2023 11:33:50 +0000 (GMT)
+ 20231219113851epsmtip16d0618d829b89216ca1a657f9badab92~iOK6erPzO2571225712epsmtip1j;
+ Tue, 19 Dec 2023 11:38:51 +0000 (GMT)
 From: "Chanho Park" <chanho61.park@samsung.com>
 To: "'Sam Protsenko'" <semen.protsenko@linaro.org>, "'Minkyu Kang'"
  <mk7.kang@samsung.com>, "'Tom Rini'" <trini@konsulko.com>, "'Lukasz
  Majewski'" <lukma@denx.de>, "'Sean Anderson'" <seanga2@gmail.com>
 Cc: "'Simon Glass'" <sjg@chromium.org>, "'Heinrich Schuchardt'"
  <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>
-In-Reply-To: <20231213031646.28828-9-semen.protsenko@linaro.org>
-Subject: RE: [PATCH 08/13] clk: exynos: Add Exynos850 clock driver
-Date: Tue, 19 Dec 2023 20:33:50 +0900
-Message-ID: <006d01da326f$3d29d000$b77d7000$@samsung.com>
+In-Reply-To: <20231213031646.28828-8-semen.protsenko@linaro.org>
+Subject: RE: [PATCH 07/13] clk: exynos: Add Samsung clock framework
+Date: Tue, 19 Dec 2023 20:38:51 +0900
+Message-ID: <006e01da326f$f07ea040$d17be0c0$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
 Content-Language: en-us
 X-Drm-Type: PERSONAL
 X-Msg-Type: PERSONAL
-Thread-Index: AQJxF1WUQWvk8XWc6dZlUfJtoqni1wI6sLFMAnYhAe6vXSkJIA==
+Thread-Index: AQJxF1WUQWvk8XWc6dZlUfJtoqni1wJ9/RaGAWZXJTivY401cA==
 x-delete-securityphrase: Y
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNJsWRmVeSWpSXmKPExsWy7bCmqe78+sZUg0ndohbP311msug40sJo
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNJsWRmVeSWpSXmKPExsWy7bCmue7ZhsZUg+tTOC2ev7vMZNFxpIXR
+ Yuu9CUwWz/v2MVl827KN0WLqpM3sFm/3drJbHJ76gdGBw2N2w0UWj3mzTrB47Jx1l93jw8c4
+ j1cHVrF73Lm2h83j7J0djB59W1YxBnBEZdtkpCampBYppOYl56dk5qXbKnkHxzvHm5oZGOoa
+ WlqYKynkJeam2iq5+AToumXmAJ2mpFCWmFMKFApILC5W0rezKcovLUlVyMgvLrFVSi1IySkw
+ L9ArTswtLs1L18tLLbEyNDAwMgUqTMjO+DTjCVvBbuuK1v4DzA2MOwy6GDk4JARMJBa2xHcx
+ cnEICexglNg/fzorhPOJUaJ353FGOOfE1DVAGU6wjs/vzrJBJHYySlyZdJEdJCEk8IJRYtJ1
+ MRCbTUBf4mXHNrBRIgJnGSXO3DoFVsQskCcxY/8MMJtTwEFiyaJHTCC2sICzxJf9V9hAbBYB
+ VYld+1ezgtzHK2Apsep0GEiYV0BQ4uTMJywQY+Qltr+dwwxxkILEz6fLWCHi4hIvjx5hh4iL
+ SDxc/RHObr13FqxeRMBJYt7E81DPSEnMfv2SHeROCYEXHBJHGy4zQiRcJGZPugRlC0u8Or6F
+ Habh87u9bBB2sURX2yUWiOYGRonT7VegiuwlftycAvYAs4CmxPpd+hDH8Ul0HP7LDgl3XomO
+ NqEJjCqzkLw2C8lrs5C8Mwth0AJGllWMYqkFxbnpqcVGBSbwyE7Oz93ECE61Wh47GGe//aB3
+ iJGJg/EQowQHs5IIr8ui+lQh3pTEyqrUovz4otKc1OJDjKbAsJ7ILCWanA9M9nkl8YYmlgYm
+ ZmaG5kamBuZK4rz3WuemCAmkJ5akZqemFqQWwfQxcXBKNTAZlUSoTyj+6r9ohUin5qf2lmNl
+ n7pvTLSfz74o9wqfKFdF6cVfdYw2nr4JATaHNY/sOvFzzszUXeqpMu4sojlteQ9cKtQUWDs0
+ iv6vOnLJ7ZDl2fCmSTc2syzcI7Sn6ZjMSb6F9h9C3hmGNUi/WhC6by6fxfw5bq+6WU4/KN2w
+ 6N4Uo/OfevPSZTfkTe9Oz3j+r/TChSjZ2pVTQwx+tz+7P+/X/Mc8/Ha8UTpC95L4miJdzv2J
+ 2fLwXJGu7M97GbXO4k+1+KU4nyyzzS0Kj7vK/2+K311h1Yt/rltf6juuI6T8ULxG0GXRp8WP
+ f7hlOFon2nE2nNArc30stHTHk+f3D54IvprQ1zi75qHW8RIlluKMREMt5qLiRABy29afPgQA
+ AA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrJIsWRmVeSWpSXmKPExsWy7bCSnO7phsZUg975phbP311msug40sJo
  sfXeBCaL5337mCy+bdnGaDF10mZ2i7d7O9ktDk/9wOjA4TG74SKLx7xZJ1g8ds66y+7x4WOc
- x6sDq9g97lzbw+Zx9s4ORo++LasYAziism0yUhNTUosUUvOS81My89JtlbyD453jTc0MDHUN
- LS3MlRTyEnNTbZVcfAJ03TJzgE5TUihLzCkFCgUkFhcr6dvZFOWXlqQqZOQXl9gqpRak5BSY
- F+gVJ+YWl+al6+WlllgZGhgYmQIVJmRnnNh6mq1gO3vFoofdbA2MC9m6GDk5JARMJFben8zY
- xcjFISSwg1HiUtsJNgjnE6PEjitrWCGcb4wS/773MsK0rNiyGSqxl1Hi9qrLLBDOC0aJR/e+
- MINUsQnoS7zs2AZWJSJwllHizK1T7CAJZoE8iRn7ZwDZHBycAg4SSxpYQMLCAk4Sn3ccASth
- EVCVePpxFRNICa+ApcSFzUkgYV4BQYmTM5+wQEyRl9j+dg4zxEEKEj+fLmOFiItLvDwKMUZC
- QETi4eqPcHbrvbNg9SJAq97++g8Vl5KY/follP2GQ+LCb3cI20Wi8c9XFghbWOLV8S1w9S/7
- 26DsYomutktgv0sINDBKnG6/ApWwl/hxcworyP3MApoS63fpQ9zGJ9Fx+C/Y5xICvBIdbUIT
- GFVmIflsFpLPZiH5ZhbCoAWMLKsYxVILinPTU4uNCozhkZ2cn7uJEZxqtdx3MM54+0HvECMT
- B+MhRgkOZiURXpdF9alCvCmJlVWpRfnxRaU5qcWHGE2BQT2RWUo0OR+Y7PNK4g1NLA1MzMwM
- zY1MDcyVxHnvtc5NERJITyxJzU5NLUgtgulj4uCUamBieVqkrs4w33nhIdnU2btzYv+1Pf+V
- czfHjOtnL9/iq+2HNnE846wrY9UPX8PzrrNXtLlRL/DnMuYD5z5uq3jfabFz3dugzgfhZof+
- tK8W//NR/WSx7/J+xesSWt8iFYVnVTya3xOwek7d03/WPI5Hd7nxyS27klxaLrdD+Er79Pdn
- Pz5LmhKW/YA9RPXr5O+Z928Ih37NifF5PP3/yQfiHxUTNmwT2bJD3eWXRh6XX/9zy2W8Mzav
- TMv/Ei2xcalboae1yfSbz31uLq55Fxci3z1xP0PXlJAzC1Rcz3krJ2eufjPv//JbdSuaivQ+
- X2BZxFnhv3Al/7GH7/wYPesn+L5vNNNet+KlZ0GHKM9iJZbijERDLeai4kQAS9RSDT4EAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrNIsWRmVeSWpSXmKPExsWy7bCSnO68+sZUg9csFs/fXWay6DjSwmix
- 9d4EJovnffuYLL5t2cZoMXXSZnaLt3s72S0OT/3A6MDhMbvhIovHvFknWDx2zrrL7vHhY5zH
- qwOr2D3uXNvD5nH2zg5Gj74tqxgDOKK4bFJSczLLUov07RK4Mk5sPc1WsJ29YtHDbrYGxoVs
- XYycHBICJhIrtmxmBbGFBHYzSkw7bQURl5V49m4HO4QtLHG/5QhQDRdQzTNGiR/HPoM1swno
- S7zs2AaWEBG4yCixpmEnI0iCWaBA4uL8a2wQHUcZJbbum87UxcjBwSngILGkgQWkRljASeLz
- jiNgG1gEVCWeflwFVsIrYClxYXMSSJhXQFDi5MwnLCBhZgE9ibaNUNPlJba/ncMMcZuCxM+n
- y1hhbv5zdC4bRI24xMujR6DuF5F4uPoj3C+vjm+Bi7feOws2RwTomre//kPFxSRmTrsMNV9K
- Yvbrl+wTGCVnIbloFsJFs5BcNAvJ5gWMLKsYJVMLinPTc4sNCwzzUsv1ihNzi0vz0vWS83M3
- MYLjX0tzB+P2VR/0DjEycTAeYpTgYFYS4XVZVJ8qxJuSWFmVWpQfX1Sak1p8iFGag0VJnFf8
- RW+KkEB6YklqdmpqQWoRTJaJg1OqgUnZeq3sP8czy428/2w9eDzFnWl9wO2of6mTAoL3cbRO
- +Tsz3OHtpull/7mFci7JMCUoNFcvWabsfWOlxwGVY+fF2A7Gr/yTvXyGg4Tzi2hjz7VzHK3u
- 35JUFNmV2qQck7PX6uiWCb1OVcvP3H+0/n5ZWtH9mc9jGI/wHLGyKPldebrNXmnSz6PczYYf
- Z9XHcdvu/5D/5yJDfbppcFIYi9YGoc13vCPqGi4xf43xfy87rd9zRofY31nrFq9OZVtz9eMZ
- B7G3NQqHTRXmXXwlXNR2onwG89olU3uFsgQ3Vy8XPdfzfYrqPw2xNmN5Z79HH002s92TcfQq
- NZq1jPnAS8VL4r8KGlxF/q6aJKlSm6HEUpyRaKjFXFScCAAiWv/jbgMAAA==
-X-CMS-MailID: 20231219113351epcas2p217dab3d7ee26e61b9f83bb825d517ca9
+ x6sDq9g97lzbw+Zx9s4ORo++LasYAziiuGxSUnMyy1KL9O0SuDI+zXjCVrDbuqK1/wBzA+MO
+ gy5GTg4JAROJz+/OsoHYQgLbGSXOPbKCiMtKPHu3gx3CFpa433KEtYuRC6jmGaNE35XNYAk2
+ AX2Jlx3bwBIiAhcZJdY07GQESTALFEhcnH+NDaLjKKNE0+wOZpAEp4CDxJJFj5hAbGEBZ4kv
+ +6+ArWYRUJXYtX810CQODl4BS4lVp8NAwrwCghInZz5hAQkzC+hJtG2EGi8vsf3tHGaI4xQk
+ fj5dxgpz9J+jc9kgasQlXh49AvWAiMTD1R/hnnl1fAtcvPXeWbA5IgJOEvMmnoeaIyYxc9pl
+ qPlSErNfv2SfwCg5C8lFsxAumoXkollINi9gZFnFKJpaUJybnptcYKhXnJhbXJqXrpecn7uJ
+ ERz7WkE7GJet/6t3iJGJg/EQowQHs5IIr8ui+lQh3pTEyqrUovz4otKc1OJDjNIcLErivMo5
+ nSlCAumJJanZqakFqUUwWSYOTqkGJg/ucl19mf61CvUbLrD7fUv8YRNn/YVDad10/d9aul/v
+ 3CpQZpu0/Na0n0GscZ51AUL7fHtF1qmE6rXrvdHvqFWQt25Z3xWderagjrUnJX3uRq3MqVPT
+ XNLZKhc+6DTLyT4q9ejmhZotnayfWKVeH088kRja+3RffW3w2+kFv5p9T1+p7nt5IlbwlNoM
+ 4aRHzp+MW/x2Pl8ieXf9/LzF2l6Kf2ylYmfWzmjrYyib879g3XObNKFaf7X+ot7yjalXPY9H
+ GBzJZny6lWWPSuTjBe+dnoR1ixn75bmV31ze3uxkG17hkKzTx3cjIOnk3D17F3eIh0qmqD4U
+ Uvc48levb9eGVX9e78k6UGajYqTEUpyRaKjFXFScCACVOMZVbAMAAA==
+X-CMS-MailID: 20231219113851epcas2p4f4e758bc834255ffd80c31818e2e3343
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 102P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20231213031843epcas2p33e1d770b197b3053635facb5212f26dc
+X-CMS-RootMailID: 20231213031832epcas2p17caec6a1a70ecdfcef2a359fb732dcb2
 References: <20231213031646.28828-1-semen.protsenko@linaro.org>
- <CGME20231213031843epcas2p33e1d770b197b3053635facb5212f26dc@epcas2p3.samsung.com>
- <20231213031646.28828-9-semen.protsenko@linaro.org>
+ <CGME20231213031832epcas2p17caec6a1a70ecdfcef2a359fb732dcb2@epcas2p1.samsung.com>
+ <20231213031646.28828-8-semen.protsenko@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,15 +149,240 @@ X-Virus-Status: Clean
 > Lukasz Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>
 > Cc: Simon Glass <sjg@chromium.org>; Heinrich Schuchardt
 > <xypron.glpk@gmx.de>; u-boot@lists.denx.de
-> Subject: [PATCH 08/13] clk: exynos: Add Exynos850 clock driver
+> Subject: [PATCH 07/13] clk: exynos: Add Samsung clock framework
 > 
-> Heavily influenced by its Linux kernel counterpart. It's implemented on
-> top of recently added Samsung CCF clock framework API. For now only UART
-> leaf clocks are implemented, along with all preceding clocks in CMU_TOP
-> and CMU_PERI. The UART baud clock is required in the serial driver, to
-> get its rate for the consequent baud rate calculation.
+> Heavily based on Linux kernel Samsung clock framework, with some changes
+> to accommodate the differences in U-Boot CCF implementation. It's also
+> quite minimal as compared to the Linux version.
 > 
 > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> ---
+>  drivers/clk/exynos/Makefile  |   9 +-
+>  drivers/clk/exynos/clk-pll.c | 167 +++++++++++++++++++++++++
+>  drivers/clk/exynos/clk-pll.h |  23 ++++
+>  drivers/clk/exynos/clk.c     | 121 +++++++++++++++++++
+>  drivers/clk/exynos/clk.h     | 228 +++++++++++++++++++++++++++++++++++
+>  5 files changed, 546 insertions(+), 2 deletions(-)
+>  create mode 100644 drivers/clk/exynos/clk-pll.c
+>  create mode 100644 drivers/clk/exynos/clk-pll.h
+>  create mode 100644 drivers/clk/exynos/clk.c
+>  create mode 100644 drivers/clk/exynos/clk.h
+> 
+> diff --git a/drivers/clk/exynos/Makefile b/drivers/clk/exynos/Makefile
+> index 7faf238571ef..04c5b9a39e16 100644
+> --- a/drivers/clk/exynos/Makefile
+> +++ b/drivers/clk/exynos/Makefile
+> @@ -1,6 +1,11 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>  #
+>  # Copyright (C) 2016 Samsung Electronics
+> -# Thomas Abraham <thomas.ab@samsung.com>
+> +# Copyright (C) 2023 Linaro Ltd.
+> +#
+> +# Authors:
+> +#   Thomas Abraham <thomas.ab@samsung.com>
+> +#   Sam Protsenko <semen.protsenko@linaro.org>
+> 
+> -obj-$(CONFIG_CLK_EXYNOS7420)	+= clk-exynos7420.o
+> +obj-$(CONFIG_$(SPL_TPL_)CLK_CCF)	+= clk.o clk-pll.o
+> +obj-$(CONFIG_CLK_EXYNOS7420)		+= clk-exynos7420.o
+> diff --git a/drivers/clk/exynos/clk-pll.c b/drivers/clk/exynos/clk-pll.c
+> new file mode 100644
+> index 000000000000..9e496ff83aaf
+> --- /dev/null
+> +++ b/drivers/clk/exynos/clk-pll.c
+> @@ -0,0 +1,167 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (C) 2016 Samsung Electronics
+> + * Copyright (C) 2023 Linaro Ltd.
+> + *
+> + * Authors:
+> + *   Thomas Abraham <thomas.ab@exynos.com>
 
+Need to correct Thomas's email to samsung.com if you want to keep his
+original credit even though his e-mail was already stale since he left the
+company.
+
+> + *   Sam Protsenko <semen.protsenko@linaro.org>
+> + *
+> + * This file contains the utility functions to register the pll clocks.
+> + */
+> +
+> +#include <asm/io.h>
+> +#include <div64.h>
+> +#include <malloc.h>
+> +#include <clk-uclass.h>
+> +#include <dm/device.h>
+> +#include <clk.h>
+> +#include "clk.h"
+> +
+> +#define UBOOT_DM_CLK_SAMSUNG_PLL0822X	"samsung_clk_pll0822x"
+> +#define UBOOT_DM_CLK_SAMSUNG_PLL0831X	"samsung_clk_pll0831x"
+> +
+> +struct samsung_clk_pll {
+> +	struct clk		clk;
+> +	void __iomem		*con_reg;
+> +	enum samsung_pll_type	type;
+> +};
+> +
+> +#define to_clk_pll(_clk) container_of(_clk, struct samsung_clk_pll, clk)
+> +
+> +/*
+> + * PLL0822x Clock Type
+> + */
+> +
+> +#define PLL0822X_MDIV_MASK		0x3ff
+> +#define PLL0822X_PDIV_MASK		0x3f
+> +#define PLL0822X_SDIV_MASK		0x7
+> +#define PLL0822X_MDIV_SHIFT		16
+> +#define PLL0822X_PDIV_SHIFT		8
+> +#define PLL0822X_SDIV_SHIFT		0
+> +
+> +static unsigned long samsung_pll0822x_recalc_rate(struct clk *clk)
+> +{
+> +	struct samsung_clk_pll *pll = to_clk_pll(clk);
+> +	u32 mdiv, pdiv, sdiv, pll_con3;
+> +	u64 fvco = clk_get_parent_rate(clk);
+> +
+> +	pll_con3 = readl_relaxed(pll->con_reg);
+> +	mdiv = (pll_con3 >> PLL0822X_MDIV_SHIFT) & PLL0822X_MDIV_MASK;
+> +	pdiv = (pll_con3 >> PLL0822X_PDIV_SHIFT) & PLL0822X_PDIV_MASK;
+> +	sdiv = (pll_con3 >> PLL0822X_SDIV_SHIFT) & PLL0822X_SDIV_MASK;
+> +
+> +	fvco *= mdiv;
+> +	do_div(fvco, (pdiv << sdiv));
+> +	return (unsigned long)fvco;
+> +}
+> +
+> +static const struct clk_ops samsung_pll0822x_clk_min_ops = {
+> +	.get_rate = samsung_pll0822x_recalc_rate,
+> +};
+> +
+> +/*
+> + * PLL0831x Clock Type
+> + */
+> +
+> +#define PLL0831X_KDIV_MASK		0xffff
+> +#define PLL0831X_MDIV_MASK		0x1ff
+> +#define PLL0831X_PDIV_MASK		0x3f
+> +#define PLL0831X_SDIV_MASK		0x7
+> +#define PLL0831X_MDIV_SHIFT		16
+> +#define PLL0831X_PDIV_SHIFT		8
+> +#define PLL0831X_SDIV_SHIFT		0
+> +#define PLL0831X_KDIV_SHIFT		0
+> +
+> +static unsigned long samsung_pll0831x_recalc_rate(struct clk *clk)
+> +{
+> +	struct samsung_clk_pll *pll = to_clk_pll(clk);
+> +	u32 mdiv, pdiv, sdiv, pll_con3, pll_con5;
+> +	s16 kdiv;
+> +	u64 fvco = clk_get_parent_rate(clk);
+> +
+> +	pll_con3 = readl_relaxed(pll->con_reg);
+> +	pll_con5 = readl_relaxed(pll->con_reg + 8);
+> +	mdiv = (pll_con3 >> PLL0831X_MDIV_SHIFT) & PLL0831X_MDIV_MASK;
+> +	pdiv = (pll_con3 >> PLL0831X_PDIV_SHIFT) & PLL0831X_PDIV_MASK;
+> +	sdiv = (pll_con3 >> PLL0831X_SDIV_SHIFT) & PLL0831X_SDIV_MASK;
+> +	kdiv = (s16)((pll_con5 >> PLL0831X_KDIV_SHIFT) &
+> PLL0831X_KDIV_MASK);
+> +
+> +	fvco *= (mdiv << 16) + kdiv;
+> +	do_div(fvco, (pdiv << sdiv));
+> +	fvco >>= 16;
+> +
+> +	return (unsigned long)fvco;
+> +}
+> +
+> +static const struct clk_ops samsung_pll0831x_clk_min_ops = {
+> +	.get_rate = samsung_pll0831x_recalc_rate,
+> +};
+> +
+> +static struct clk *_samsung_clk_register_pll(void __iomem *base,
+> +					const struct samsung_pll_clock
+*pll_clk)
+> +{
+> +	struct samsung_clk_pll *pll;
+> +	struct clk *clk;
+> +	const char *drv_name;
+> +	int ret;
+> +
+> +	pll = kzalloc(sizeof(*pll), GFP_KERNEL);
+> +	if (!pll)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	pll->con_reg = base + pll_clk->con_offset;
+> +	pll->type = pll_clk->type;
+> +	clk = &pll->clk;
+> +	clk->flags = pll_clk->flags;
+> +
+> +	switch (pll_clk->type) {
+> +	case pll_0822x:
+> +		drv_name = UBOOT_DM_CLK_SAMSUNG_PLL0822X;
+> +		break;
+> +	case pll_0831x:
+> +		drv_name = UBOOT_DM_CLK_SAMSUNG_PLL0831X;
+> +		break;
+> +	default:
+> +		kfree(pll);
+> +		return ERR_PTR(-ENODEV);
+> +	}
+> +
+> +	ret = clk_register(clk, drv_name, pll_clk->name, pll_clk-
+> >parent_name);
+> +	if (ret) {
+> +		kfree(pll);
+> +		return ERR_PTR(ret);
+> +	}
+> +
+> +	return clk;
+> +}
+> +
+> +void samsung_clk_register_pll(void __iomem *base,
+> +			      const struct samsung_pll_clock *clk_list,
+> +			      unsigned int nr_clk)
+> +{
+> +	unsigned int cnt;
+> +
+> +	for (cnt = 0; cnt < nr_clk; cnt++) {
+> +		struct clk *clk;
+> +		const struct samsung_pll_clock *pll_clk;
+> +
+> +		pll_clk = &clk_list[cnt];
+> +		clk = _samsung_clk_register_pll(base, pll_clk);
+> +		clk_dm(pll_clk->id, clk);
+> +	}
+> +}
+> +
+> +U_BOOT_DRIVER(samsung_pll0822x_clk) = {
+> +	.name	= UBOOT_DM_CLK_SAMSUNG_PLL0822X,
+> +	.id	= UCLASS_CLK,
+> +	.ops	= &samsung_pll0822x_clk_min_ops,
+> +	.flags	= DM_FLAG_PRE_RELOC,
+> +};
+> +
+> +U_BOOT_DRIVER(samsung_pll0831x_clk) = {
+> +	.name	= UBOOT_DM_CLK_SAMSUNG_PLL0831X,
+> +	.id	= UCLASS_CLK,
+> +	.ops	= &samsung_pll0831x_clk_min_ops,
+> +	.flags	= DM_FLAG_PRE_RELOC,
+> +};
+> diff --git a/drivers/clk/exynos/clk-pll.h b/drivers/clk/exynos/clk-pll.h
+> new file mode 100644
+> index 000000000000..3b477369aeb8
+> --- /dev/null
+> +++ b/drivers/clk/exynos/clk-pll.h
+> @@ -0,0 +1,23 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2016 Samsung Electronics
+> + * Copyright (C) 2023 Linaro Ltd.
+> + *
+> + * Authors:
+> + *   Thomas Abraham <thomas.ab@exynos.com>
+
+Ditto.
+
+Othewise,
 Reviewed-by: Chanho Park <chanho61.park@samsung.com>
 
