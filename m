@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1465DC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 20:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9406C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 20:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 808D686F1E;
-	Tue, 19 Dec 2023 21:19:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70A67871A7;
+	Tue, 19 Dec 2023 21:23:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JvGRDIlC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MDE77tIn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8650D86F42; Tue, 19 Dec 2023 21:19:21 +0100 (CET)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 88B6D875FE; Tue, 19 Dec 2023 21:23:06 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DDAE86EF3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 21:19:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A76A786F1E
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 21:23:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2cc6acf5e3dso37577731fa.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 12:19:19 -0800 (PST)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-548ce39b101so6247074a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 12:23:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703017158; x=1703621958; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703017384; x=1703622184; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G6XVYM5ceoSY5E0sB9M8AHP0+C3mbdYcgnGsikHIiZo=;
- b=JvGRDIlCnMcFn+Qvw8zkDWgmgpV3bjgQaYOeKWz0XbR9z316DMgg2drRNeFqrBTEha
- ad8+nF3QJMGkHsiN0VsWRTV5vVAa7lAxPriCC2Tlui7/WBkZdO8Cfqt2OPrNJIrJHRBZ
- Rup9WFj6M98ama9klURASGebeZ+VeCOcvSlrScrPlWQVyAOwot3vBz26wj1ZMv3kShFq
- 8Zg9A2FmqsYlzIezFVw6hddxUHhBfAImBe5lazNhrmt4JbfGkcsFimxwkSV5pJ+7zv9f
- kT2S55zq1BZmbEVL8INLUWlZVWRVdazQ53US8G87aikAhv0GJSPRoyIKkvA9WL+1Zn8+
- Ybqg==
+ bh=f28ApKepDm98/1RtgJTxuJ1yG6eGIxswTeqs111lnbs=;
+ b=MDE77tIntOKT3aV+JaJYmYDJBekdp1rdEZDxT7hILjHwba4Phj5jsiO5FIIO4HD+aC
+ rTXjV0qtHaXVsbzkmb7xjKaOJGaVbXH40pM8XYQhPAW791P+QEZIn9LV1u76CgGttf3J
+ 1QgWKAS3eMznZ5IjzjdYBpGmyRI3XbhWFfvXf13mBXFSCPEjGqcTvHoXYe4jhdWbUzfU
+ pyUZF6A4j2XaDg8qXgXTCEO0MVqHxg38FOCZfPHxDmN76s+aLXRM1tlwZrO2zf6RSRe7
+ +VRwUohQXDKth0wUa/p2bUmbevibTghJCu5taoNFFEqyBghMjb37VxhHBABc12QkQdZ9
+ /alQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703017158; x=1703621958;
+ d=1e100.net; s=20230601; t=1703017384; x=1703622184;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G6XVYM5ceoSY5E0sB9M8AHP0+C3mbdYcgnGsikHIiZo=;
- b=tg7dmpBu3PlLnGQ4SKia5D520sPwKybIcS9Bq7MgUd/DMTKAyjZzZC0W8t/ntcuNRM
- 8v3XgsJ8PtySwyh85QIYOhoxVZV4Jt2JJTADAlmzdTOc5HHCpodXOhQpLnKUzYCjEipy
- ZaqWXFCxI/RmnjSMyZNS/udbA70jvReA2IDQUVOV0CDGaF4MUso+tr6yc2klKzWXE4Js
- SxSyZr+Mr3bpkKMVtZRxnYWdB4x324pmyaP71Xx3pS0PyPKwtF77pvPoUJMiPhd6dqag
- hfopkLv2OKEJ+FSXn4t2GmIuzRqYb2f+Wj8sP8KDfHFiP0sQeHblFXzwLW9iMrZ0vUqU
- /X2w==
-X-Gm-Message-State: AOJu0YyaFtYomqL0oEmEJa1LyOzAZHmBZ76230HYA8EvkSLRrO0qQi1l
- iM+aqlF4iYgk/jX7IWJMi6AcBh6Xysxe/Xi+GYfbwSn7mZw=
-X-Google-Smtp-Source: AGHT+IG0nJUQBqL1GWdyzldLWQoBycVcT/J3qbv+Xg9ZAQZVwaOGwVGxX6jvVHx9lWGOMtJuYFDw2JUeDIXiVINcGmo=
-X-Received: by 2002:a2e:2e12:0:b0:2cc:6bbf:ea8c with SMTP id
- u18-20020a2e2e12000000b002cc6bbfea8cmr1109232lju.176.1703017158226; Tue, 19
- Dec 2023 12:19:18 -0800 (PST)
+ bh=f28ApKepDm98/1RtgJTxuJ1yG6eGIxswTeqs111lnbs=;
+ b=sfuZRUJIyRLJALxEXZM0hoF14voUhlcV5IU8Dpnp7zLSWVzOF86PsYOS8jcAIeEK//
+ lHWsQQ+w41uDgh1DUhCYwFf/nRT04PVV10pFRFgTlPuf/C6yW5lmJb0KybL+1aOiqYI/
+ 6lgiPzpxwgdHHOWuA2Y4ABCIKZd/CN1wzAue+nPKVgNy6U6v9lcXOShNqI2Wme1IM5lj
+ MjOcjivONJ0b8NKPp/H61Jv+IAwuXMycE4UQRsnguBQsIDAdRBMrkjw+TJxoLF48bLQF
+ 6sjvuDCA+rrE3TU6164eguI+jVq61BHvLvuFkVGTJAYO4A66dxVeFTvZgdSsheYJiAK9
+ 4AuA==
+X-Gm-Message-State: AOJu0YxwVzDByigLOtpjWCOG0AhJffcxlQj7H2YF2sWrUw0iQQY6O8ND
+ rw+fq8Deb4vxfMvpkEnSs1uG037NRijn+f7gfLM=
+X-Google-Smtp-Source: AGHT+IE/w07EwOyozMV4qSamO6iSMLIzvWS/0bbUubTGP+0mn2RVcxtwpz+PtRYp5ASA/YkCBomrdN5ERXRBLsmuXUg=
+X-Received: by 2002:a50:a45c:0:b0:553:884b:4468 with SMTP id
+ v28-20020a50a45c000000b00553884b4468mr631943edb.27.1703017383943; Tue, 19 Dec
+ 2023 12:23:03 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
  <20231127171058.165777-3-ilias.apalodimas@linaro.org>
@@ -70,17 +70,18 @@ References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
  <CAPnjgZ27G=6fDadAiJk_aG9He2ZpyFhhsZDYxUwEp5+0AQatYg@mail.gmail.com>
  <20231213201909.GG2513409@bill-the-cat>
  <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
+ <87y1dx6cnd.fsf@bloch.sibelius.xs4all.nl>
+ <CAPnjgZ1c5MM-51qpj6tBMV03ofwFyfv2Z230S=5aatLaGN5ziQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1c5MM-51qpj6tBMV03ofwFyfv2Z230S=5aatLaGN5ziQ@mail.gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 19 Dec 2023 20:19:06 +0000
-Message-ID: <CALeDE9OH4Yqir53rYzbDXLL_sRtCRy2cT7HHD3CmYLeh3C_fPQ@mail.gmail.com>
+Date: Tue, 19 Dec 2023 20:22:53 +0000
+Message-ID: <CALeDE9PRUhZ-cHhaU_0=3pUBET0sZ4iQ=A3yDxrtywoyWgvv3A@mail.gmail.com>
 Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
  nodes are missing
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- sean.anderson@seco.com, neil.armstrong@linaro.org, 
- heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com, 
+ ilias.apalodimas@linaro.org, sean.anderson@seco.com, 
+ neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
  u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -99,73 +100,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> > > > > > Not always.  I am not sure if x86 does that, but on the rest of the
-> > > > > > architectures, they are only initialized when the efi smbios code
-> > > > > > runs. Wasn't this something you were trying to change?
-> > > > >
-> > > > > One of those things I keep repeating is that we don't know for sure what
-> > > > > the right values here are until we load the DT the OS _will_ use. It's
-> > > > > quite valid to start U-Boot and pass it a generic "good enough" DT at
-> > > > > run time until U-Boot can see (GPIOs, EEPROM, whatever) what it's on and
-> > > > > what the real DT to load before passing to the OS is. Since U-Boot
-> > > > > doesn't need SMBIOS tables itself, we should make these "late" not
-> > > > > "early".
-> > > >
-> > > > Fair enough, we can defer the init and testing of those late, just
-> > > > before we are about to boot. But this is irrelevant to what this patch
-> > > > does, can we get the fallback mechanism in first, assuming everyone is
-> > > > ok with the patch now?
-> > > >
+> > > > What do you mean wrong, exactly?
 > > >
-> > > I would like this behind a Kconfig. Making it the default means people
-> > > are going to start relying on (in user space) and then discover later
-> > > that it is wrong.
+> > > "raspberrypi" instead of "Raspberry Pi", for example, or "friendlyarm"
+> > > instead of "FriendlyElec"
 > >
-> > What do you mean wrong, exactly?
+> > Heh, well, even in the x86 world vendors can't even spell their own
+> > name consistently.
+> >
+> > > I just wonder what this information is actually used for. If it is
+> > > just for fun, that is fine, but I believe some tools do use dmidecode,
+> > > at which point it needs to be accurate and should not change later,
+> > > e.g. when someone decides to actually add the info.
+> >
+> > So the Linux kernel uses this information to apply quirks for specific
+> > machines.  But I hope that on platforms that have a device tree folks
+> > will just use the board compatible string for that purpose.
 >
-> "raspberrypi" instead of "Raspberry Pi", for example, or "friendlyarm"
-> instead of "FriendlyElec"
+> Right.
+>
+> >
+> > Otherwise I think this information is mostly used to populate system
+> > information UIs and asset databases.
+>
+> So perhaps the devicetree should be used instead? How do these things
+> work today? And what are they, exactly?
 
-Well "raspberrypi" is better that what we get on the Raspberry Pi with
-my testing at the moment which is "Unknown", which from what I can
-tell from commit 330419727 should have at least the minimal amount but
-it doesn't.
+Device tree used for what? To populate the SMBIOS tables? Or to
+populate "system information UIs and asset databases."
 
-> I just wonder what this information is actually used for. If it is
-> just for fun, that is fine, but I believe some tools do use dmidecode,
-> at which point it needs to be accurate and should not change later,
-> e.g. when someone decides to actually add the info.
-
-So a lot of tools use the output of dmidecode, it's used extensively
-through various support platforms and management tools.
-
-In Fedora I would generally get around a dozen reports every few
-months because anything booted with U-Boot was basically populated
-with "Unknown".
-
-At the moment, on the RPi4 with default upstream I get Unkown [1] with
-these patches I get at least some useful information [2]. I've been
-shipping this patch set, in various versions, for a while and have not
-had a single bug report about wrong information.
-
-When Ilias and I first spoke about these patches the intention was to
-get initial useful information, them they could be possibly expanded
-using things like information from eFuses (serial numbers etc).
-
-In some cases with U-Boot you get SMBIOS tables that are incorrect and
-crash the tools.
-
-With this patch set you get at least the basics which is important
-because support teams can easily work out the basics of what they're
-working with even if they don't have physical access all without the
-vendor of the HW having to work out what to do in firmware to make
-something work.
-
-This patch set moves the needle forward, if we wait for everything to
-be properly formatted we will wait for ever, with information we
-already have available ON EVERY DEVICE.
-
-Peter
-
-[1] https://pbrobinson.fedorapeople.org/dmi-decode-rpi-defaults.txt
-[2] https://pbrobinson.fedorapeople.org/dmi-decode-rpi-auto-fallback-patchset.txt
+If you mean the later, that is not going to work. These platforms are
+often proprietary, and are generally remote. They have local agents
+that use dmidecode to populate things for support and management. It's
+kind of in the name "System Management". To get all these platforms
+updated to "just use devicetree" will take decades. No thanks!
