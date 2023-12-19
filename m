@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71D0C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D174C46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FE3B87835;
-	Tue, 19 Dec 2023 12:33:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0341E87842;
+	Tue, 19 Dec 2023 12:33:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Bw9El5GL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dopDHIFx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 482BB871C7; Tue, 19 Dec 2023 11:34:50 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 144C786C68; Tue, 19 Dec 2023 11:34:51 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CD2A86C68
+ by phobos.denx.de (Postfix) with ESMTPS id BC0C3871B4
  for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYTHm005550;
- Tue, 19 Dec 2023 04:34:29 -0600
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYecj103332;
+ Tue, 19 Dec 2023 04:34:40 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982069;
- bh=fBreZmf/hIAKOi+L6jlv7d1IFT7IKQMj/yQ6UDotVQ0=;
+ s=ti-com-17Q1; t=1702982080;
+ bh=7JLS4PBaz9fzv9WirnIjblU+XZVn7woZZHphApG+2Yg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Bw9El5GLtC6OpTw54MhkEE4afGwoiIDL3WuqTi2fR7BDHHkDgNdEHH58dyRzTPpLa
- 5RjykHGFWXRRoqzs8o9c8uKPolBQc8veGuHkz8L2R4yyEAHWjIAUZ+J4hJFePPw9nu
- 927dMqNJKYsd6KqBIfqxlm7u1rUZDd9MLnUPBmKc=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYTuC057438
+ b=dopDHIFxhbFXJeBoc3APh5APyRoxa/SyUVEvvwAShm0tKuIIw/MFBlbhBhv1OrzXE
+ v1TgVBL4h9CLKQtczT61seBviLpm/w17U6GviOcEuujUoGCn6RNa/pKV0/xOkj2PDy
+ mEYeg0R+p47FRxVEaFPxcgjdoyf8f1j1I62pCMZg=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYen2017918
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:29 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:34:40 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:29 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:34:40 -0600
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:29 -0600
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYThi070989;
- Tue, 19 Dec 2023 04:34:29 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:34:40 -0600
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYeMg007506;
+ Tue, 19 Dec 2023 04:34:40 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYSBm022781;
- Tue, 19 Dec 2023 04:34:28 -0600
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYdqX014590;
+ Tue, 19 Dec 2023 04:34:40 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,9 +64,9 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 04/16] net: ti: icssg: Add icssg queues APIs and macros
-Date: Tue, 19 Dec 2023 16:04:06 +0530
-Message-ID: <20231219103418.3445886-5-danishanwar@ti.com>
+Subject: [RFC PATCH 10/16] arm: dts: k3-am65-main: Add ICSSG IEP nodes
+Date: Tue, 19 Dec 2023 16:04:12 +0530
+Message-ID: <20231219103418.3445886-11-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
 References: <20231219103418.3445886-1-danishanwar@ti.com>
@@ -91,87 +91,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add icssg_queue.c file. This file introduces macros and APIs related to
-ICSSG queues. These will be used by ICSSG Ethernet driver.
+The ICSSG IP on AM65x SoCs have two Industrial Ethernet Peripherals (IEPs)
+to manage/generate Industrial Ethernet functions such as time stamping.
+Each IEP sub-module is sourced from an internal clock mux that can be
+sourced from either of the IP instance's ICSSG_IEP_GCLK or ICSSG_ICLK.
+Add the IEP nodes for all the ICSSG instances.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/icssg_prueth.h |  5 ++++
- drivers/net/ti/icssg_queues.c | 51 +++++++++++++++++++++++++++++++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 drivers/net/ti/icssg_queues.c
+ arch/arm/dts/k3-am65-main.dtsi | 36 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
-index 26b77dd8f3..f34ab5d6d4 100644
---- a/drivers/net/ti/icssg_prueth.h
-+++ b/drivers/net/ti/icssg_prueth.h
-@@ -75,4 +75,9 @@ void icssg_config_ipg(struct prueth *prueth, int speed, int mii);
- int icssg_config(struct prueth *prueth);
- int emac_set_port_state(struct prueth *prueth, enum icssg_port_state_cmd cmd);
+diff --git a/arch/arm/dts/k3-am65-main.dtsi b/arch/arm/dts/k3-am65-main.dtsi
+index 7f10520236..da48887559 100644
+--- a/arch/arm/dts/k3-am65-main.dtsi
++++ b/arch/arm/dts/k3-am65-main.dtsi
+@@ -969,6 +969,18 @@
+ 			};
+ 		};
  
-+/* Buffer queue helpers */
-+int icssg_queue_pop(struct prueth *prueth, u8 queue);
-+void icssg_queue_push(struct prueth *prueth, int queue, u16 addr);
-+u32 icssg_queue_level(struct prueth *prueth, int queue);
++		icssg0_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg0_iepclk_mux>;
++		};
 +
- #endif /* __NET_TI_ICSSG_PRUETH_H */
-diff --git a/drivers/net/ti/icssg_queues.c b/drivers/net/ti/icssg_queues.c
-new file mode 100644
-index 0000000000..6a95ef5d58
---- /dev/null
-+++ b/drivers/net/ti/icssg_queues.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* ICSSG Buffer queue helpers
-+ *
-+ * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com
-+ */
++		icssg0_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg0_iepclk_mux>;
++		};
 +
-+#include <dm/ofnode.h>
-+#include <regmap.h>
-+#include "icssg_prueth.h"
+ 		icssg0_mii_rt: mii-rt@32000 {
+ 			compatible = "ti,pruss-mii", "syscon";
+ 			reg = <0x32000 0x100>;
+@@ -1110,6 +1122,18 @@
+ 			};
+ 		};
+ 
++		icssg1_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg1_iepclk_mux>;
++		};
 +
-+#define ICSSG_QUEUES_MAX		64
-+#define ICSSG_QUEUE_OFFSET		0xd00
-+#define ICSSG_QUEUE_PEEK_OFFSET		0xe00
-+#define ICSSG_QUEUE_CNT_OFFSET		0xe40
-+#define	ICSSG_QUEUE_RESET_OFFSET	0xf40
++		icssg1_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg1_iepclk_mux>;
++		};
 +
-+int icssg_queue_pop(struct prueth *prueth, u8 queue)
-+{
-+	u32 val, cnt;
+ 		icssg1_mii_rt: mii-rt@32000 {
+ 			compatible = "ti,pruss-mii", "syscon";
+ 			reg = <0x32000 0x100>;
+@@ -1256,6 +1280,18 @@
+ 			reg = <0x32000 0x100>;
+ 		};
+ 
++		icssg2_iep0: iep@2e000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2e000 0x1000>;
++			clocks = <&icssg2_iepclk_mux>;
++		};
 +
-+	if (queue >= ICSSG_QUEUES_MAX)
-+		return -EINVAL;
++		icssg2_iep1: iep@2f000 {
++			compatible = "ti,am654-icss-iep";
++			reg = <0x2f000 0x1000>;
++			clocks = <&icssg2_iepclk_mux>;
++		};
 +
-+	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &cnt);
-+	if (!cnt)
-+		return -EINVAL;
-+
-+	regmap_read(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, &val);
-+
-+	return val;
-+}
-+
-+void icssg_queue_push(struct prueth *prueth, int queue, u16 addr)
-+{
-+	if (queue >= ICSSG_QUEUES_MAX)
-+		return;
-+
-+	regmap_write(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, addr);
-+}
-+
-+u32 icssg_queue_level(struct prueth *prueth, int queue)
-+{
-+	u32 reg;
-+
-+	if (queue >= ICSSG_QUEUES_MAX)
-+		return 0;
-+
-+	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &reg);
-+
-+	return reg;
-+}
+ 		icssg2_mii_g_rt: mii-g-rt@33000 {
+ 			compatible = "ti,pruss-mii-g", "syscon";
+ 			reg = <0x33000 0x1000>;
 -- 
 2.34.1
 
