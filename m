@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF099C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55B4C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEA2C8779D;
-	Tue, 19 Dec 2023 12:33:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C36087830;
+	Tue, 19 Dec 2023 12:33:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uUDMztqi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wTdPNgIX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F185686C68; Tue, 19 Dec 2023 11:34:42 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 33D18871C7; Tue, 19 Dec 2023 11:34:49 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C287A86FF7
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A99BC86D82
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYX2x055901;
- Tue, 19 Dec 2023 04:34:33 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYPma005532;
+ Tue, 19 Dec 2023 04:34:25 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982073;
- bh=dqhCSWNsSWNFZuzG8Bw8RYlTvUKWyZN5bbFbOjdcUEw=;
+ s=ti-com-17Q1; t=1702982065;
+ bh=Pi2giqw34blj0ta9b90u6otYmr+oTjwpPyjS9wAOU8M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=uUDMztqizxQazOut6l/bh1MXJQQFMexD1qeia0br6cz36fJw8wfKgi1/bqNQC5Fs7
- z4gBhaeZ/6iIsbV2EHavXsBN7Opur92H9J8wzwmQ9QfCemp07Y5/4gXGqCRHq+5/Hh
- Zi1jPfR+ar3juylSqLxMmfyjteAixCoDyyqHmfiY=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYXQW017768
+ b=wTdPNgIXSnsXHqQmO5t/ro3uX/+nbodR8FE9CzJ9a0v7nm/3YEp3YAuWWz3g2nxgq
+ Wq7pqLFgq1KQp3NGjwoC+EeH18pIXIfPogCGEvzvHFwSnLyiqf4097ZL/yzXSCZ+x8
+ K0ObLJhJtBXSaid+HHhOmfDeoDRcMg5MyjovAQxg=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYPfM129931
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:33 -0600
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:34:25 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:33 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:34:25 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:33 -0600
-Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYXwW011480;
- Tue, 19 Dec 2023 04:34:33 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:34:25 -0600
+Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYPQu011349;
+ Tue, 19 Dec 2023 04:34:25 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYWlV014564;
- Tue, 19 Dec 2023 04:34:32 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYOUg022769;
+ Tue, 19 Dec 2023 04:34:25 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,10 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 06/16] net: ti: icssg: Add support sending FDB command to
- update rx_flow_id
-Date: Tue, 19 Dec 2023 16:04:08 +0530
-Message-ID: <20231219103418.3445886-7-danishanwar@ti.com>
+Subject: [RFC PATCH 02/16] net: ti: icssg: Add Firmware Interface for ICSSG
+ Ethernet driver.
+Date: Tue, 19 Dec 2023 16:04:04 +0530
+Message-ID: <20231219103418.3445886-3-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
 References: <20231219103418.3445886-1-danishanwar@ti.com>
@@ -92,174 +92,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ICSSG firmware supports FDB commands. Add support to send FDB commands
-from driver. Once rx_flow_id is obtained from dma, let firmware know that
-we are using this rx_flow_id by sending a FDB command.
+Add firmware interface related headers and macros for ICSSG Ethernet
+driver. These macros will be later used by the ICSSG ethernet driver.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/icssg_config.c | 66 +++++++++++++++++++++++++++++++++++
- drivers/net/ti/icssg_config.h | 18 ++++++++++
- drivers/net/ti/icssg_prueth.c |  6 ++++
- drivers/net/ti/icssg_prueth.h |  6 ++++
- 4 files changed, 96 insertions(+)
+ drivers/net/ti/icssg_switch_map.h | 209 ++++++++++++++++++++++++++++++
+ 1 file changed, 209 insertions(+)
+ create mode 100644 drivers/net/ti/icssg_switch_map.h
 
-diff --git a/drivers/net/ti/icssg_config.c b/drivers/net/ti/icssg_config.c
-index 33298c3374..7e11ef128f 100644
---- a/drivers/net/ti/icssg_config.c
-+++ b/drivers/net/ti/icssg_config.c
-@@ -9,6 +9,7 @@
- #include "icssg_switch_map.h"
- #include "icss_mii_rt.h"
- #include <dm/device_compat.h>
-+#include <linux/iopoll.h>
- 
- /* TX IPG Values to be set for 100M and 1G link speeds.  These values are
-  * in ocp_clk cycles. So need change if ocp_clk is changed for a specific
-@@ -401,3 +402,68 @@ int emac_set_port_state(struct prueth *prueth,
- 
- 	return ret;
- }
+diff --git a/drivers/net/ti/icssg_switch_map.h b/drivers/net/ti/icssg_switch_map.h
+new file mode 100644
+index 0000000000..ba87a44023
+--- /dev/null
++++ b/drivers/net/ti/icssg_switch_map.h
+@@ -0,0 +1,209 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Texas Instruments ICSSG Ethernet driver
++ *
++ * Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
++ *
++ */
 +
-+int icssg_send_fdb_msg(struct prueth *prueth, struct mgmt_cmd *cmd,
-+		       struct mgmt_cmd_rsp *rsp)
-+{
-+	int slice = prueth->slice;
-+	int ret, addr;
++#ifndef __NET_TI_ICSSG_SWITCH_MAP_H
++#define __NET_TI_ICSSG_SWITCH_MAP_H
 +
-+	addr = icssg_queue_pop(prueth, slice == 0 ?
-+			       ICSSG_CMD_POP_SLICE0 : ICSSG_CMD_POP_SLICE1);
-+	if (addr < 0)
-+		return addr;
++/*Time after which FDB entries are checked for aged out values. Value in nanoseconds*/
++#define FDB_AGEING_TIMEOUT_OFFSET                          0x0014
 +
-+	/* First 4 bytes have FW owned buffer linking info which should
-+	 * not be touched
-+	 */
-+	memcpy_toio((void __iomem *)prueth->shram.pa + addr + 4, cmd, sizeof(*cmd));
-+	icssg_queue_push(prueth, slice == 0 ?
-+			 ICSSG_CMD_PUSH_SLICE0 : ICSSG_CMD_PUSH_SLICE1, addr);
-+	ret = read_poll_timeout(icssg_queue_pop, addr, addr >= 0,
-+				2000, 20000000, prueth, slice == 0 ?
-+				ICSSG_RSP_POP_SLICE0 : ICSSG_RSP_POP_SLICE1);
++/*default VLAN tag for Host Port*/
++#define HOST_PORT_DF_VLAN_OFFSET                           0x001C
 +
-+	if (ret) {
-+		dev_err(prueth->dev, "Timedout sending HWQ message\n");
-+		return ret;
-+	}
++/*Same as HOST_PORT_DF_VLAN_OFFSET*/
++#define EMAC_ICSSG_SWITCH_PORT0_DEFAULT_VLAN_OFFSET        HOST_PORT_DF_VLAN_OFFSET
 +
-+	memcpy_fromio(rsp, (void __iomem *)prueth->shram.pa + addr, sizeof(*rsp));
-+	/* Return buffer back for to pool */
-+	icssg_queue_push(prueth, slice == 0 ?
-+			 ICSSG_RSP_PUSH_SLICE0 : ICSSG_RSP_PUSH_SLICE1, addr);
++/*default VLAN tag for P1 Port*/
++#define P1_PORT_DF_VLAN_OFFSET                             0x0020
 +
-+	return 0;
-+}
++/*Same as P1_PORT_DF_VLAN_OFFSET*/
++#define EMAC_ICSSG_SWITCH_PORT1_DEFAULT_VLAN_OFFSET        P1_PORT_DF_VLAN_OFFSET
 +
-+int emac_fdb_flow_id_updated(struct prueth *prueth)
-+{
-+	struct mgmt_cmd_rsp fdb_cmd_rsp = { 0 };
-+	int slice = prueth->slice;
-+	struct mgmt_cmd fdb_cmd = { 0 };
-+	int ret = 0;
++/*default VLAN tag for P2 Port*/
++#define P2_PORT_DF_VLAN_OFFSET                             0x0024
 +
-+	fdb_cmd.header = ICSSG_FW_MGMT_CMD_HEADER;
-+	fdb_cmd.type   = ICSSG_FW_MGMT_FDB_CMD_TYPE_RX_FLOW;
-+	fdb_cmd.seqnum = ++(prueth->icssg_hwcmdseq);
-+	fdb_cmd.param  = 0;
++/*Same as P2_PORT_DF_VLAN_OFFSET*/
++#define EMAC_ICSSG_SWITCH_PORT2_DEFAULT_VLAN_OFFSET        P2_PORT_DF_VLAN_OFFSET
 +
-+	fdb_cmd.param |= (slice << 4);
-+	fdb_cmd.cmd_args[0] = 0;
++/*VLAN-FID Table offset. 4096 VIDs. 2B per VID = 8KB = 0x2000*/
++#define VLAN_STATIC_REG_TABLE_OFFSET                       0x0100
 +
-+	ret = icssg_send_fdb_msg(prueth, &fdb_cmd, &fdb_cmd_rsp);
-+	if (ret)
-+		return ret;
++/*VLAN-FID Table offset for EMAC*/
++#define EMAC_ICSSG_SWITCH_DEFAULT_VLAN_TABLE_OFFSET        VLAN_STATIC_REG_TABLE_OFFSET
 +
-+	if (fdb_cmd.seqnum != fdb_cmd_rsp.seqnum) {
-+		dev_err(prueth->dev, "seqnum doesn't match, cmd.seqnum %d != rsp.seqnum %d\n",
-+			fdb_cmd.seqnum, fdb_cmd_rsp.seqnum);
-+		return -EINVAL;
-+	}
++/*packet descriptor Q reserved memory*/
++#define PORT_DESC0_HI                                      0x2104
 +
-+	if (fdb_cmd_rsp.status == 1)
-+		return 0;
++/*packet descriptor Q reserved memory*/
++#define PORT_DESC0_LO                                      0x2F6C
 +
-+	return -EINVAL;
-+}
-diff --git a/drivers/net/ti/icssg_config.h b/drivers/net/ti/icssg_config.h
-index fc6eae0426..156127bd3d 100644
---- a/drivers/net/ti/icssg_config.h
-+++ b/drivers/net/ti/icssg_config.h
-@@ -80,6 +80,7 @@ struct icssg_rxq_ctx {
- #define ICSSG_FW_MGMT_FDB_CMD_TYPE	0x03
- #define ICSSG_FW_MGMT_CMD_TYPE		0x04
- #define ICSSG_FW_MGMT_PKT		0x80000000
-+#define ICSSG_FW_MGMT_FDB_CMD_TYPE_RX_FLOW	0x05
- 
- struct icssg_r30_cmd {
- 	u32 cmd[4];
-@@ -156,6 +157,23 @@ struct icssg_setclock_desc {
- 	u32 CMP0_new;
- } __packed;
- 
-+struct mgmt_cmd {
-+	u8 param;
-+	u8 seqnum;
-+	u8 type;
-+	u8 header;
-+	u32 cmd_args[3];
-+} __packed;
++/*packet descriptor Q reserved memory*/
++#define PORT_DESC1_HI                                      0x3DD4
 +
-+struct mgmt_cmd_rsp {
-+	u32 reserved;
-+	u8 status;
-+	u8 seqnum;
-+	u8 type;
-+	u8 header;
-+	u32 cmd_args[3];
-+} __packed;
++/*packet descriptor Q reserved memory*/
++#define PORT_DESC1_LO                                      0x4C3C
 +
- #define ICSSG_CMD_POP_SLICE0	56
- #define ICSSG_CMD_POP_SLICE1	60
- 
-diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
-index 9cc700eca5..1a7445a015 100644
---- a/drivers/net/ti/icssg_prueth.c
-+++ b/drivers/net/ti/icssg_prueth.c
-@@ -225,6 +225,12 @@ static int prueth_start(struct udevice *dev)
- 	dev_info(dev, "K3 ICSSG: rflow_id_base: %u, chn_name = %s\n",
- 		 dma_rx_cfg_data->flow_id_base, chn_name);
- 
-+	ret = emac_fdb_flow_id_updated(priv);
-+	if (ret) {
-+		dev_err(dev, "Failed to update Rx Flow ID %d", ret);
-+		goto phy_fail;
-+	}
++/*packet descriptor Q reserved memory*/
++#define HOST_DESC0_HI                                      0x5AA4
 +
- 	ret = phy_startup(priv->phydev);
- 	if (ret) {
- 		dev_err(dev, "phy_startup failed\n");
-diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
-index f34ab5d6d4..e41ed16a05 100644
---- a/drivers/net/ti/icssg_prueth.h
-+++ b/drivers/net/ti/icssg_prueth.h
-@@ -68,6 +68,7 @@ struct prueth {
- 	bool			mdio_manual_mode;
- 	int			speed;
- 	int			duplex;
-+	u8			icssg_hwcmdseq;
- };
- 
- /* config helpers */
-@@ -80,4 +81,9 @@ int icssg_queue_pop(struct prueth *prueth, u8 queue);
- void icssg_queue_push(struct prueth *prueth, int queue, u16 addr);
- u32 icssg_queue_level(struct prueth *prueth, int queue);
- 
-+/* FDB helpers */
-+int icssg_send_fdb_msg(struct prueth *prueth, struct mgmt_cmd *cmd,
-+		       struct mgmt_cmd_rsp *rsp);
-+int emac_fdb_flow_id_updated(struct prueth *prueth);
++/*packet descriptor Q reserved memory*/
++#define HOST_DESC0_LO                                      0x5F0C
 +
- #endif /* __NET_TI_ICSSG_PRUETH_H */
++/*packet descriptor Q reserved memory*/
++#define HOST_DESC1_HI                                      0x6374
++
++/*packet descriptor Q reserved memory*/
++#define HOST_DESC1_LO                                      0x67DC
++
++/*special packet descriptor Q reserved memory*/
++#define HOST_SPPD0                                         0x7AAC
++
++/*special packet descriptor Q reserved memory*/
++#define HOST_SPPD1                                         0x7EAC
++
++/*_Small_Description_*/
++#define TIMESYNC_FW_WC_CYCLECOUNT_OFFSET                   0x83EC
++
++/*IEP count hi roll over count*/
++#define TIMESYNC_FW_WC_HI_ROLLOVER_COUNT_OFFSET            0x83F4
++
++/*_Small_Description_*/
++#define TIMESYNC_FW_WC_COUNT_HI_SW_OFFSET_OFFSET           0x83F8
++
++/*Set clock descriptor*/
++#define TIMESYNC_FW_WC_SETCLOCK_DESC_OFFSET                0x83FC
++
++/*_Small_Description_*/
++#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_FACTOR_OFFSET     0x843C
++
++/*_Small_Description_*/
++#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_COUNT_OFFSET      0x8440
++
++/*_Small_Description_*/
++#define TIMESYNC_FW_WC_SYNCOUT_START_TIME_CYCLECOUNT_OFFSET 0x8444
++
++/*Control variable to generate SYNC1*/
++#define TIMESYNC_FW_WC_ISOM_PIN_SIGNAL_EN_OFFSET           0x844C
++
++/*SystemTime Sync0 periodicity*/
++#define TIMESYNC_FW_ST_SYNCOUT_PERIOD_OFFSET               0x8450
++
++/*pktTxDelay for P1 = link speed dependent p1 mac delay + p1 phy delay*/
++#define TIMESYNC_FW_WC_PKTTXDELAY_P1_OFFSET                0x8454
++
++/*pktTxDelay for P2 = link speed dependent p2 mac delay + p2 phy delay*/
++#define TIMESYNC_FW_WC_PKTTXDELAY_P2_OFFSET                0x8458
++
++/*Set clock operation done signal for next task*/
++#define TIMESYNC_FW_SIG_PNFW_OFFSET                        0x845C
++
++/*Set clock operation done signal for next task*/
++#define TIMESYNC_FW_SIG_TIMESYNCFW_OFFSET                  0x8460
++
++/*New list is copied at this time*/
++#define TAS_CONFIG_CHANGE_TIME                             0x000C
++
++/*config change error counter*/
++#define TAS_CONFIG_CHANGE_ERROR_COUNTER                    0x0014
++
++/*TAS List update pending flag*/
++#define TAS_CONFIG_PENDING                                 0x0018
++
++/*TAS list update trigger flag*/
++#define TAS_CONFIG_CHANGE                                  0x0019
++
++/*List length for new TAS schedule*/
++#define TAS_ADMIN_LIST_LENGTH                              0x001A
++
++/*Currently active TAS list index*/
++#define TAS_ACTIVE_LIST_INDEX                              0x001B
++
++/*Cycle time for the new TAS schedule*/
++#define TAS_ADMIN_CYCLE_TIME                               0x001C
++
++/*Cycle counts remaining till the TAS list update*/
++#define TAS_CONFIG_CHANGE_CYCLE_COUNT                      0x0020
++
++/*Base Flow ID for sending packets to Host for Slice0*/
++#define PSI_L_REGULAR_FLOW_ID_BASE_OFFSET                  0x0024
++
++/*Same as PSI_L_REGULAR_FLOW_ID_BASE_OFFSET*/
++#define EMAC_ICSSG_SWITCH_PSI_L_REGULAR_FLOW_ID_BASE_OFFSET PSI_L_REGULAR_FLOW_ID_BASE_OFFSET
++
++/*Base Flow ID for sending mgmt and Tx TS to Host for Slice0*/
++#define PSI_L_MGMT_FLOW_ID_OFFSET                          0x0026
++
++/*Same as PSI_L_MGMT_FLOW_ID_OFFSET*/
++#define EMAC_ICSSG_SWITCH_PSI_L_MGMT_FLOW_ID_BASE_OFFSET   PSI_L_MGMT_FLOW_ID_OFFSET
++
++/*Queue number for Special packets written here*/
++#define SPL_PKT_DEFAULT_PRIORITY                           0x0028
++
++/*Express Preemptible Queue Mask*/
++#define EXPRESS_PRE_EMPTIVE_Q_MASK                         0x0029
++
++/*Port1/Port2 Default Queue number for untagged packets, only 1B is used*/
++#define QUEUE_NUM_UNTAGGED                                 0x002A
++
++/*Stores the table used for priority regeneration. 1B per PCP/Queue*/
++#define PORT_Q_PRIORITY_REGEN_OFFSET                       0x002C
++
++/* For marking Packet as priority/express (this feature is disabled) or
++ * cut-through/S&F.
++ */
++#define EXPRESS_PRE_EMPTIVE_Q_MAP                          0x0034
++
++/*Stores the table used for priority mapping. 1B per PCP/Queue*/
++#define PORT_Q_PRIORITY_MAPPING_OFFSET                     0x003C
++
++/*TAS gate mask for windows list0*/
++#define TAS_GATE_MASK_LIST0                                0x0100
++
++/*TAS gate mask for windows list1*/
++#define TAS_GATE_MASK_LIST1                                0x0350
++
++/*Memory to Enable/Disable Preemption on TX side*/
++#define PRE_EMPTION_ENABLE_TX                              0x05A0
++
++/*Active State of Preemption on TX side*/
++#define PRE_EMPTION_ACTIVE_TX                              0x05A1
++
++/*Memory to Enable/Disable Verify State Machine Preemption*/
++#define PRE_EMPTION_ENABLE_VERIFY                          0x05A2
++
++/*Verify Status of State Machine*/
++#define PRE_EMPTION_VERIFY_STATUS                          0x05A3
++
++/*Non Final Fragment Size supported by Link Partner*/
++#define PRE_EMPTION_ADD_FRAG_SIZE_REMOTE                   0x05A4
++
++/*Non Final Fragment Size supported by Firmware*/
++#define PRE_EMPTION_ADD_FRAG_SIZE_LOCAL                    0x05A6
++
++/*Time in ms the State machine waits for respond packet*/
++#define PRE_EMPTION_VERIFY_TIME                            0x05A8
++
++/*Memory used for R30 related management commands*/
++#define MGR_R30_CMD_OFFSET                                 0x05AC
++
++/*HW Buffer Pool0 base address*/
++#define BUFFER_POOL_0_ADDR_OFFSET                          0x05BC
++
++/*16B for Host Egress MSMC Q (Pre-emptible) context*/
++#define HOST_RX_Q_PRE_CONTEXT_OFFSET                       0x0684
++
++/*Buffer for 8 FDB entries to be added by 'Add Multiple FDB entries IOCTL*/
++#define FDB_CMD_BUFFER                                     0x0894
++
++/*16B for Host Egress MSMC Q (Express) context*/
++#define HOST_RX_Q_EXP_CONTEXT_OFFSET                       0x0940
++
++/*Start of 32 bits PA_STAT counters*/
++#define PA_STAT_32b_START_OFFSET                           0x0080
++
++#endif
++/* __NET_TI_ICSSG_SWITCH_MAP_H */
 -- 
 2.34.1
 
