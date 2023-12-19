@@ -4,78 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33961C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 07:42:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44549C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 07:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 649BD8700D;
-	Tue, 19 Dec 2023 08:42:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 917338709C;
+	Tue, 19 Dec 2023 08:55:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="h61bc0hM";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="A1zyJPqe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4079C86FF7; Tue, 19 Dec 2023 08:42:42 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06B90870B7; Tue, 19 Dec 2023 08:55:24 +0100 (CET)
+Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
+ [217.70.183.198])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F3708709C
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:42:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id E58BC87053
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:55:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5e7415df4d6so9056467b3.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 23:42:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1702971758; x=1703576558;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p2mDcxWGGSF670/jtmnCi8F7nHtFZxkeL8yxrv9WPRE=;
- b=h61bc0hMmIZ5n9lnVVzG9mg1fFgm1sOE6NZciorj9Hvbwjx2w3KqtqsZDg//kiJGtS
- 6elzIHm2otnohD89eknuJSOJUPaA+C3emeFs/UUcTIqm/VVcpk4Zkd0yQQRY/5BdlZhc
- 2IO7kielkWYq7+QKnDXtycovo7gNR/+gfcmjw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702971758; x=1703576558;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=p2mDcxWGGSF670/jtmnCi8F7nHtFZxkeL8yxrv9WPRE=;
- b=CToQcKC5swJencFgc5c/QX0C2yW1xgbCZYv8/9lZxkmJivk2EdqQdWpQ+rlWlEvH6D
- +nFrrE9DJJ1AC8zSfwtsjg299qGRy+BV0+/RDIaD8CGV/0rvOgZ/65RO9zfKNF4j06Tc
- bWi2r0kLKiAbRhcAxZsc4TUMR7kBevd1dKXYz+VJeB7qhBfkqSP9CesIZggZ86kOHtNo
- 2XezwVvWUOyhxnp3ROGNRiLxZl/udLe1wjI2IcX6ij8UAxTTQpTD5qI8tVW+IrrPieJv
- 4SCmg/nqZ1IM+xjl8+LChnHsarBbxR+UQIADnAv9qNb7qBI5ZlkMhTgpKSSshsI4TJ2P
- jMGQ==
-X-Gm-Message-State: AOJu0Yxg/On7WOFmAKZP08QazridC2Ejp98MvNB9YrdZPXfI80gy4cm2
- 5G4FKxH9Wa6HhofoBm+TypSVAlDl/36QTYKn92Xemg==
-X-Google-Smtp-Source: AGHT+IFw1nk2ikkxFCZTgjYK5YnLpmeKLzfizyqLfZ6Tb9dlvwKbKabCtGhom+f9Yi1j9WCXK+DOLlSMUfCcsW3aYdE=
-X-Received: by 2002:a05:6902:144:b0:dbc:da55:b397 with SMTP id
- p4-20020a056902014400b00dbcda55b397mr305865ybh.65.1702971757773; Mon, 18 Dec
- 2023 23:42:37 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 238FDC000B;
+ Tue, 19 Dec 2023 07:55:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1702972520;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NZXHfcE8iV40Vx6zOQ3A1z/zKCAFk19AQvCsz5cKV2k=;
+ b=A1zyJPqeBC5Dif3oK8hakbVcuQQHQwi4BYa/8qZANOzdws66iSlDfaUPaaafuOpKMWy4SG
+ wWAve1Gjpm1bvkK/QOcA9o6oOLuGbqJgls3NxwxHH9oc/1MCqORHre2eYxNZJQlO/ZzMsJ
+ 5AK9lnXgpjgNJhK7zfnrg4vKz5ciaiIijDNSkByHynUWpwDIoxD/S/RKT72TPy6wfrCb4C
+ pburPoxHz4kVzOaDj0U0hRI3ftpc+6ARkMfb+//JIfPgZ9sn4kHuPZDF/cROuT8IIBfLBh
+ z1TWk1BWyIp/706xhpccd+LpdbId0WNdYwxqvXv/QqHLOofdYVwwgROrW+s06A==
+Date: Tue, 19 Dec 2023 08:55:17 +0100
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Rob Herring
+ <robh+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
+ <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWC?=
+ =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
+Subject: Re: [PATCH 4/4] nvmem: layouts: add U-Boot env layout
+Message-ID: <20231219085517.4b6ec4fc@xps-13>
+In-Reply-To: <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
+References: <20231218133722.16150-1-zajec5@gmail.com>
+ <20231218133722.16150-4-zajec5@gmail.com>
+ <20231218152116.59d59bad@xps-13>
+ <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20231218191114.129329-1-jagan@amarulasolutions.com>
- <20231218191114.129329-14-jagan@amarulasolutions.com>
- <672979fb.5ea.18c7fa8dce9.Coremail.andyshrk@163.com>
-In-Reply-To: <672979fb.5ea.18c7fa8dce9.Coremail.andyshrk@163.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Tue, 19 Dec 2023 13:12:26 +0530
-Message-ID: <CAMty3ZDUtZvjOrHgovAxwvwLFO6YnS3jLi_3=v707gfg9EkEeg@mail.gmail.com>
-Subject: Re: [PATCH v2 13/17] video: rockchip: Add rk3328 vop support
-To: Andy Yan <andyshrk@163.com>
-Cc: Anatolij Gustschin <agust@denx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Andre Przywara <andre.przywara@arm.com>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>,
- Robin Murphy <robin.murphy@arm.com>, 
- u-boot@lists.denx.de, Da Xue <da.xue@libretech.co>,
- Jagan Teki <jagan@edgeble.ai>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,146 +80,188 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andy,
+Hi Rafa=C5=82,
 
-On Tue, Dec 19, 2023 at 6:50=E2=80=AFAM Andy Yan <andyshrk@163.com> wrote:
->
->
-> Hi Jaqan=EF=BC=9A
->
-> At 2023-12-19 03:11:10, "Jagan Teki" <jagan@amarulasolutions.com> wrote:
-> >From: Jagan Teki <jagan@edgeble.ai>
-> >
-> >Add support for Rockchip RK3328 VOP.
-> >
-> >Require VOP cleanup before handoff to Linux by writing reset values to
-> >WIN registers. Without this Linux VOP trigger page fault as below
-> >[    0.752016] Loading compiled-in X.509 certificates
-> >[    0.787796] inno_hdmi_phy_rk3328_clk_recalc_rate: parent 24000000
-> >[    0.788391] inno-hdmi-phy ff430000.phy: inno_hdmi_phy_rk3328_clk_reca=
-lc_rate rate 148500000 vco 148500000
-> >[    0.798353] rockchip-drm display-subsystem: bound ff370000.vop (ops v=
-op_component_ops)
-> >[    0.799403] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-0v9 not found,=
- using dummy regulator
-> >[    0.800288] rk_iommu ff373f00.iommu: Enable stall request timed out, =
-status: 0x00004b
-> >[    0.801131] dwhdmi-rockchip ff3c0000.hdmi: supply avdd-1v8 not found,=
- using dummy regulator
-> >[    0.802056] rk_iommu ff373f00.iommu: Disable paging request timed out=
-, status: 0x00004b
-> >[    0.803233] dwhdmi-rockchip ff3c0000.hdmi: Detected HDMI TX controlle=
-r v2.11a with HDCP (inno_dw_hdmi_phy2)
-> >[    0.805355] dwhdmi-rockchip ff3c0000.hdmi: registered DesignWare HDMI=
- I2C bus driver
-> >[    0.808769] rockchip-drm display-subsystem: bound ff3c0000.hdmi (ops =
-dw_hdmi_rockchip_ops)
-> >[    0.810869] [drm] Initialized rockchip 1.0.0 20140818 for display-sub=
-system on minor 0
-> >
-> >Signed-off-by: Jagan Teki <jagan@edgeble.ai>
-> >---
-> >Changes for v2:
-> >- Add VOP cleanup
-> >- Update commit
-> >
-> > drivers/video/rockchip/Makefile     |  1 +
-> > drivers/video/rockchip/rk3328_vop.c | 83 +++++++++++++++++++++++++++++
-> > 2 files changed, 84 insertions(+)
-> > create mode 100644 drivers/video/rockchip/rk3328_vop.c
-> >
-> >diff --git a/drivers/video/rockchip/Makefile b/drivers/video/rockchip/Ma=
-kefile
-> >index 4991303c73..f55beceebf 100644
-> >--- a/drivers/video/rockchip/Makefile
-> >+++ b/drivers/video/rockchip/Makefile
-> >@@ -6,6 +6,7 @@
-> > ifdef CONFIG_VIDEO_ROCKCHIP
-> > obj-y +=3D rk_vop.o
-> > obj-$(CONFIG_ROCKCHIP_RK3288) +=3D rk3288_vop.o
-> >+obj-$(CONFIG_ROCKCHIP_RK3328) +=3D rk3328_vop.o
-> > obj-$(CONFIG_ROCKCHIP_RK3399) +=3D rk3399_vop.o
-> > obj-$(CONFIG_DISPLAY_ROCKCHIP_EDP) +=3D rk_edp.o
-> > obj-$(CONFIG_DISPLAY_ROCKCHIP_LVDS) +=3D rk_lvds.o
-> >diff --git a/drivers/video/rockchip/rk3328_vop.c b/drivers/video/rockchi=
-p/rk3328_vop.c
-> >new file mode 100644
-> >index 0000000000..a4da3a91e8
-> >--- /dev/null
-> >+++ b/drivers/video/rockchip/rk3328_vop.c
-> >@@ -0,0 +1,83 @@
-> >+// SPDX-License-Identifier: GPL-2.0+
-> >+/*
-> >+ * Copyright (c) 2023 Edgeble AI Technologies Pvt. Ltd.
-> >+ */
-> >+
-> >+#include <dm.h>
-> >+#include <video.h>
-> >+#include <asm/io.h>
-> >+#include "rk_vop.h"
-> >+
-> >+DECLARE_GLOBAL_DATA_PTR;
-> >+
-> >+static void rk3328_set_pin_polarity(struct udevice *dev,
-> >+                                  enum vop_modes mode, u32 polarity)
-> >+{
-> >+      struct rk_vop_priv *priv =3D dev_get_priv(dev);
-> >+      struct rk3288_vop *regs =3D priv->regs;
-> >+
-> >+      switch (mode) {
-> >+      case VOP_MODE_HDMI:
-> >+              clrsetbits_le32(&regs->dsp_ctrl1,
-> >+                              M_RK3399_DSP_HDMI_POL,
-> >+                              V_RK3399_DSP_HDMI_POL(polarity));
-> >+              break;
-> >+      default:
-> >+              debug("%s: unsupported output mode %x\n", __func__, mode)=
-;
-> >+      }
-> >+}
-> >+
-> >+static int rk3328_vop_probe(struct udevice *dev)
-> >+{
-> >+      /* Before relocation we don't need to do anything */
-> >+      if (!(gd->flags & GD_FLG_RELOC))
-> >+              return 0;
-> >+
-> >+      return rk_vop_probe(dev);
-> >+}
-> >+
-> >+static int rk3328_vop_remove(struct udevice *dev)
-> >+{
-> >+      struct rk_vop_priv *priv =3D dev_get_priv(dev);
-> >+      struct rk3288_vop *regs =3D priv->regs;
-> >+      struct rk3288_vop *win_regs =3D priv->regs + priv->win_offset;
-> >+
-> >+      /* write reset values */
-> >+      writel(0xef013f, &win_regs->win0_act_info);
-> >+      writel(0xef013f, &win_regs->win0_dsp_info);
-> >+      writel(0xa000a, &win_regs->win0_dsp_st);
-> >+      writel(0x0, &win_regs->win0_yrgb_mst);
-> >+      writel(0x01, &regs->reg_cfg_done);
-> >+
-> >+      return 0;
-> >+}
->
-> I think this just workaround Linux iommu page fault by luck=E3=80=82
-> The reset value=EF=BC=88what you called it is=EF=BC=89your write just let=
- win0 read a
-> 320x240 rectangular from address 0 and display it at next frame=EF=BC=88m=
-aybe 16ms later if your
-> current display is run at 60HZ=EF=BC=89=E3=80=82
->
-> 1. we don't know what content is at address 0, so you will see something =
-strange on your monitor.
-> 2. there is no guarantee that address 0 is really readable=EF=BC=88maybe =
-a security memory space=EF=BC=8C or maybe
->     it is not a valid address=EF=BC=89=EF=BC=8C this may cause another is=
-sue that not easy to detect=E3=80=82
+zajec5@gmail.com wrote on Mon, 18 Dec 2023 23:10:20 +0100:
 
-Okay. Can you suggest any proper way to clean up VOP? All these reset
-values are referred to as per the TRM and read before enabling the
-video.
+> On 18.12.2023 15:21, Miquel Raynal wrote:
+> > Hi Rafa=C5=82,
+> >=20
+> > zajec5@gmail.com wrote on Mon, 18 Dec 2023 14:37:22 +0100:
+> >  =20
+> >> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+> >>
+> >> This patch moves all generic (NVMEM devices independent) code from NVM=
+EM
+> >> device driver to NVMEM layout driver. Then it adds a simple NVMEM layo=
+ut
+> >> code on top of it.
+> >>
+> >> Thanks to proper layout it's possible to support U-Boot env data stored
+> >> on any kind of NVMEM device.
+> >>
+> >> For backward compatibility with old DT bindings we need to keep old
+> >> NVMEM device driver functional. To avoid code duplication a parsing
+> >> function is exported and reused in it.
+> >>
+> >> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
+> >> --- =20
+> >=20
+> > I have a couple of comments about the original driver which gets
+> > copy-pasted in the new layout driver, maybe you could clean these
+> > (the memory leak should be fixed before the migration so it can be
+> > backported easily, the others are just style so it can be done after, I
+> > don't mind).
+> >=20
+> > ...
+> >  =20
+> >> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
+> >> +		     enum u_boot_env_format format)
+> >> +{
+> >> +	size_t crc32_data_offset;
+> >> +	size_t crc32_data_len;
+> >> +	size_t crc32_offset;
+> >> +	size_t data_offset;
+> >> +	size_t data_len;
+> >> +	size_t dev_size;
+> >> +	uint32_t crc32;
+> >> +	uint32_t calc;
+> >> +	uint8_t *buf;
+> >> +	int bytes;
+> >> +	int err;
+> >> +
+> >> +	dev_size =3D nvmem_dev_size(nvmem);
+> >> +
+> >> +	buf =3D kcalloc(1, dev_size, GFP_KERNEL); =20
+> >=20
+> > Out of curiosity, why kcalloc(1,...) rather than kzalloc() ? =20
+>=20
+> I used kcalloc() initially as I didn't need buffer to be zeroed.
+
+I think kcalloc() initializes the memory to zero.
+https://elixir.bootlin.com/linux/latest/source/include/linux/slab.h#L659
+
+If you don't need it you can switch to kmalloc() instead, I don't mind,
+but kcalloc() is meant to be used with arrays, I don't see the point of
+using kcalloc() in this case.
+
+>=20
+> I see that memory-allocation.rst however says:
+>  > And, to be on the safe side it's best to use routines that set memory =
+to zero, like kzalloc(). =20
+>=20
+> It's probably close to zero cost to zero that buffer so it could be kzall=
+oc().
+>=20
+>=20
+> >> +	if (!buf) {
+> >> +		err =3D -ENOMEM;
+> >> +		goto err_out; =20
+> >=20
+> > We could directly return ENOMEM here I guess.
+> >  =20
+> >> +	}
+> >> +
+> >> +	bytes =3D nvmem_device_read(nvmem, 0, dev_size, buf);
+> >> +	if (bytes < 0)
+> >> +		return bytes;
+> >> +	else if (bytes !=3D dev_size)
+> >> +		return -EIO; =20
+> >=20
+> > Don't we need to free buf in the above cases?
+> >  =20
+> >> +	switch (format) {
+> >> +	case U_BOOT_FORMAT_SINGLE:
+> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_single, crc32);
+> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_single, data=
+);
+> >> +		data_offset =3D offsetof(struct u_boot_env_image_single, data);
+> >> +		break;
+> >> +	case U_BOOT_FORMAT_REDUNDANT:
+> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_redundant, crc32);
+> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_redundant, d=
+ata);
+> >> +		data_offset =3D offsetof(struct u_boot_env_image_redundant, data);
+> >> +		break;
+> >> +	case U_BOOT_FORMAT_BROADCOM:
+> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_broadcom, crc32);
+> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_broadcom, da=
+ta);
+> >> +		data_offset =3D offsetof(struct u_boot_env_image_broadcom, data);
+> >> +		break;
+> >> +	}
+> >> +	crc32 =3D le32_to_cpu(*(__le32 *)(buf + crc32_offset)); =20
+> >=20
+> > Looks a bit convoluted, any chances we can use intermediate variables
+> > to help decipher this?
+> >  =20
+> >> +	crc32_data_len =3D dev_size - crc32_data_offset;
+> >> +	data_len =3D dev_size - data_offset;
+> >> +
+> >> +	calc =3D crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
+> >> +	if (calc !=3D crc32) {
+> >> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n=
+", calc, crc32);
+> >> +		err =3D -EINVAL;
+> >> +		goto err_kfree;
+> >> +	}
+> >> +
+> >> +	buf[dev_size - 1] =3D '\0';
+> >> +	err =3D u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_le=
+n);
+> >> +	if (err)
+> >> +		dev_err(dev, "Failed to add cells: %d\n", err); =20
+> >=20
+> > Please drop this error message, the only reason for which the function
+> > call would fail is apparently an ENOMEM case.
+> >  =20
+> >> +
+> >> +err_kfree:
+> >> +	kfree(buf);
+> >> +err_out:
+> >> +	return err;
+> >> +}
+> >> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
+> >> +
+> >> +static int u_boot_env_add_cells(struct device *dev, struct nvmem_devi=
+ce *nvmem)
+> >> +{
+> >> +	const struct of_device_id *match;
+> >> +	struct device_node *layout_np;
+> >> +	enum u_boot_env_format format;
+> >> +
+> >> +	layout_np =3D of_nvmem_layout_get_container(nvmem);
+> >> +	if (!layout_np)
+> >> +		return -ENOENT;
+> >> +
+> >> +	match =3D of_match_node(u_boot_env_of_match_table, layout_np);
+> >> +	if (!match)
+> >> +		return -ENOENT;
+> >> +
+> >> +	format =3D (uintptr_t)match->data; =20
+> >=20
+> > In the core there is currently an unused helper called
+> > nvmem_layout_get_match_data() which does that. I think the original
+> > intent of this function was to be used in this driver, so depending on
+> > your preference, can you please either use it or remove it? =20
+>=20
+> The problem is that nvmem_layout_get_match_data() uses:
+> layout->dev.driver
+
+I'm surprised .driver is unset. Well anyway, please either fix the core
+helper and use it or drop the core helper, because we have no user for
+it otherwise?
+
+> It doesn't work with layouts driver (since refactoring?) as driver is
+> NULL. That results in NULL pointer dereference when trying to reach
+> of_match_table.
+>=20
+> That is why I used u_boot_env_of_match_table directly.
+>=20
+> If you know how to fix nvmem_layout_get_match_data() that would be
+> great. Do we need driver_register() somewhere in NVMEM core?
+>=20
+
 
 Thanks,
-Jagan.
+Miqu=C3=A8l
