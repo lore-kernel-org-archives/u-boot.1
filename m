@@ -4,59 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B230C35274
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 01:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E651C35274
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 01:26:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F28087053;
-	Tue, 19 Dec 2023 02:21:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 719928713C;
+	Tue, 19 Dec 2023 02:26:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="FY0ngQTI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SF/dGqGs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35F758713C; Tue, 19 Dec 2023 02:21:11 +0100 (CET)
-Received: from m1397.mail.163.com (m1397.mail.163.com [220.181.13.97])
- by phobos.denx.de (Postfix) with ESMTP id D102A87005
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 02:21:08 +0100 (CET)
+ id C29AA87053; Tue, 19 Dec 2023 02:26:07 +0100 (CET)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 560FE8744F
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 02:26:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=7hFgXC4PWXdiJb44lF4Tdck5vNUOPWvf1MAhqSZhyQg=; b=F
- Y0ngQTIJqMhdKNOd8/Jc5nh4CZ6rerp/PxQAOclQnDAi4qUmeNjG4Uz5aBW4jfar
- 7POh+UBJcaUgma5dNslygy3pH4+XL7Meh+aKlfNRdnmaWZl3a+l4jzTQz/CelVXv
- VEC2wsacHgJckNHGx7qExSUwy09TrFTmoLQcRp8BMs=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr97
- (Coremail) ; Tue, 19 Dec 2023 09:20:22 +0800 (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Tue, 19 Dec 2023 09:20:22 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Jagan Teki" <jagan@amarulasolutions.com>
-Cc: "Anatolij Gustschin" <agust@denx.de>, 
- "Neil Armstrong" <neil.armstrong@linaro.org>, 
- "Andre Przywara" <andre.przywara@arm.com>, 
- "Kever Yang" <kever.yang@rock-chips.com>, 
- "Simon Glass" <sjg@chromium.org>, "Heiko Stuebner" <heiko@sntech.de>, 
- "Robin Murphy" <robin.murphy@arm.com>, u-boot@lists.denx.de, 
- "Da Xue" <da.xue@libretech.co>, "Jagan Teki" <jagan@edgeble.ai>
-Subject: Re:[PATCH v2 13/17] video: rockchip: Add rk3328 vop support
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2023 www.mailtech.cn 163com
-In-Reply-To: <20231218191114.129329-14-jagan@amarulasolutions.com>
-References: <20231218191114.129329-1-jagan@amarulasolutions.com>
- <20231218191114.129329-14-jagan@amarulasolutions.com>
-X-NTES-SC: AL_Qu2bAPWft0Ap5CKcYukXn0kXhec2W8Czvvgg34JRP5k0tCvn8ycaU2NvBn/T8OegBxKRrAS8XhF16fRQZYZdcJ4v50tNeaC0L0O7yvZ6kgTb
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5cbcfdeaff3so32560117b3.0
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 17:26:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1702949163; x=1703553963; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zv1cyza+SxMu8h3qAcsHVxK3OxoNykYS+Z588yJ9gek=;
+ b=SF/dGqGsARHw+RGAQwGfCuQPO+jjUTlUXv8MVfLwmaQcTE+fpsm5SSq48yGvauP9Ap
+ paxMDL4VwHqlkfblaiOlFWR5aOX5i/RIgL7nMF1pv0k9+yFJena2sLBuFNTwHIoylNcq
+ hDOUBZ9ThuYJPaxybMclAfSNq3hZNFKrQJK2A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702949163; x=1703553963;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zv1cyza+SxMu8h3qAcsHVxK3OxoNykYS+Z588yJ9gek=;
+ b=YK48niI6vsjEXAf60+JpFt+h7TTLzueW6mo19TozweztOVc1cSanCy7sEdD8JCdbEN
+ aGoQgiRQarBHVz0fegr1N8SQdgScp6hW4KuQPk9w5ofe5Kv0WWeTo8JXT1MBJyvk1z7s
+ rtDNWnuIGpekvnmcvvnQEIldcUXhIiKkdlQS8ARJvToBhS4ZKaQdlL5U7UA9scp2VcPe
+ JfWmr4yqgvSl19UrQ4Thl0NAU/Pf/dxVRLpzAFj23GUYdwPrzWlF0nSuH8eYo+mgX3RV
+ 5TSE/HInPkdcziTzCVBRCyWuYDhSWTqLoL2ojzdTQjYev3Wf4uK+Ap7i2b7yF+tCmPEN
+ Bytw==
+X-Gm-Message-State: AOJu0Yylrtxi33lH/SCcOsrZNNbywansSjYEQVQi6Yk8uy+ke16iTgWK
+ VYrLjV+IMyALzlyXa8ta3oH70A==
+X-Google-Smtp-Source: AGHT+IGMecFDEhJbc9dvp7zyuIBfMLb9P+9DKg1P2K8r5HvYtaJrg5cQzyXBQwS83WTKCWLt21aebA==
+X-Received: by 2002:a0d:ca8f:0:b0:5e5:a519:33e4 with SMTP id
+ m137-20020a0dca8f000000b005e5a51933e4mr2943380ywd.53.1702949162895; 
+ Mon, 18 Dec 2023 17:26:02 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
+ [2603:6081:7b00:6400:923c:ac63:6854:a688])
+ by smtp.gmail.com with ESMTPSA id
+ g184-20020a0dc4c1000000b005a7d46770f2sm9299949ywd.83.2023.12.18.17.26.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Dec 2023 17:26:02 -0800 (PST)
+Date: Mon, 18 Dec 2023 20:26:00 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Proposal: U-Boot memory management
+Message-ID: <20231219012600.GQ2513409@bill-the-cat>
+References: <CAPnjgZ0YBJ9bN4VHbYkR-r3V8winGmm5TA0UXvh-mBLeRgza3g@mail.gmail.com>
+ <3A9B3E83-545B-4CAC-9D65-737BD9D6BE0C@gmx.de>
+ <CAPnjgZ1=JBEh49G654DfkYM-fcOEhwh=Xuu1scXTLsNkZk2SNQ@mail.gmail.com>
+ <DEECD6D4-58C6-4032-BBF9-28A65B9096DD@gmx.de>
+ <20231218224108.GN2513409@bill-the-cat>
+ <3DAFAD12-98E4-46CC-B02E-E8EE40D57AC3@gmx.de>
+ <20231218231640.GO2513409@bill-the-cat>
+ <058AE676-FD71-4DEB-AEB3-0C805B74E8EE@gmx.de>
+ <20231218233130.GP2513409@bill-the-cat>
+ <688C13A3-9C5F-4A39-9F8F-54C2E8D08EE8@gmx.de>
 MIME-Version: 1.0
-Message-ID: <672979fb.5ea.18c7fa8dce9.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: YcGowADnz_HW74BlGNspAA--.62116W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEgtLXmVOBBer3wACsC
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8khRpa+oPc/vD037"
+Content-Disposition: inline
+In-Reply-To: <688C13A3-9C5F-4A39-9F8F-54C2E8D08EE8@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,93 +102,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CkhpIEphcWFu77yaCgpBdCAyMDIzLTEyLTE5IDAzOjExOjEwLCAiSmFnYW4gVGVraSIgPGphZ2Fu
-QGFtYXJ1bGFzb2x1dGlvbnMuY29tPiB3cm90ZToKPkZyb206IEphZ2FuIFRla2kgPGphZ2FuQGVk
-Z2VibGUuYWk+Cj4KPkFkZCBzdXBwb3J0IGZvciBSb2NrY2hpcCBSSzMzMjggVk9QLgo+Cj5SZXF1
-aXJlIFZPUCBjbGVhbnVwIGJlZm9yZSBoYW5kb2ZmIHRvIExpbnV4IGJ5IHdyaXRpbmcgcmVzZXQg
-dmFsdWVzIHRvCj5XSU4gcmVnaXN0ZXJzLiBXaXRob3V0IHRoaXMgTGludXggVk9QIHRyaWdnZXIg
-cGFnZSBmYXVsdCBhcyBiZWxvdwo+WyAgICAwLjc1MjAxNl0gTG9hZGluZyBjb21waWxlZC1pbiBY
-LjUwOSBjZXJ0aWZpY2F0ZXMKPlsgICAgMC43ODc3OTZdIGlubm9faGRtaV9waHlfcmszMzI4X2Ns
-a19yZWNhbGNfcmF0ZTogcGFyZW50IDI0MDAwMDAwCj5bICAgIDAuNzg4MzkxXSBpbm5vLWhkbWkt
-cGh5IGZmNDMwMDAwLnBoeTogaW5ub19oZG1pX3BoeV9yazMzMjhfY2xrX3JlY2FsY19yYXRlIHJh
-dGUgMTQ4NTAwMDAwIHZjbyAxNDg1MDAwMDAKPlsgICAgMC43OTgzNTNdIHJvY2tjaGlwLWRybSBk
-aXNwbGF5LXN1YnN5c3RlbTogYm91bmQgZmYzNzAwMDAudm9wIChvcHMgdm9wX2NvbXBvbmVudF9v
-cHMpCj5bICAgIDAuNzk5NDAzXSBkd2hkbWktcm9ja2NoaXAgZmYzYzAwMDAuaGRtaTogc3VwcGx5
-IGF2ZGQtMHY5IG5vdCBmb3VuZCwgdXNpbmcgZHVtbXkgcmVndWxhdG9yCj5bICAgIDAuODAwMjg4
-XSBya19pb21tdSBmZjM3M2YwMC5pb21tdTogRW5hYmxlIHN0YWxsIHJlcXVlc3QgdGltZWQgb3V0
-LCBzdGF0dXM6IDB4MDAwMDRiCj5bICAgIDAuODAxMTMxXSBkd2hkbWktcm9ja2NoaXAgZmYzYzAw
-MDAuaGRtaTogc3VwcGx5IGF2ZGQtMXY4IG5vdCBmb3VuZCwgdXNpbmcgZHVtbXkgcmVndWxhdG9y
-Cj5bICAgIDAuODAyMDU2XSBya19pb21tdSBmZjM3M2YwMC5pb21tdTogRGlzYWJsZSBwYWdpbmcg
-cmVxdWVzdCB0aW1lZCBvdXQsIHN0YXR1czogMHgwMDAwNGIKPlsgICAgMC44MDMyMzNdIGR3aGRt
-aS1yb2NrY2hpcCBmZjNjMDAwMC5oZG1pOiBEZXRlY3RlZCBIRE1JIFRYIGNvbnRyb2xsZXIgdjIu
-MTFhIHdpdGggSERDUCAoaW5ub19kd19oZG1pX3BoeTIpCj5bICAgIDAuODA1MzU1XSBkd2hkbWkt
-cm9ja2NoaXAgZmYzYzAwMDAuaGRtaTogcmVnaXN0ZXJlZCBEZXNpZ25XYXJlIEhETUkgSTJDIGJ1
-cyBkcml2ZXIKPlsgICAgMC44MDg3NjldIHJvY2tjaGlwLWRybSBkaXNwbGF5LXN1YnN5c3RlbTog
-Ym91bmQgZmYzYzAwMDAuaGRtaSAob3BzIGR3X2hkbWlfcm9ja2NoaXBfb3BzKQo+WyAgICAwLjgx
-MDg2OV0gW2RybV0gSW5pdGlhbGl6ZWQgcm9ja2NoaXAgMS4wLjAgMjAxNDA4MTggZm9yIGRpc3Bs
-YXktc3Vic3lzdGVtIG9uIG1pbm9yIDAKPgo+U2lnbmVkLW9mZi1ieTogSmFnYW4gVGVraSA8amFn
-YW5AZWRnZWJsZS5haT4KPi0tLQo+Q2hhbmdlcyBmb3IgdjI6Cj4tIEFkZCBWT1AgY2xlYW51cAo+
-LSBVcGRhdGUgY29tbWl0Cj4KPiBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlICAgICB8
-ICAxICsKPiBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrMzMyOF92b3AuYyB8IDgzICsrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrCj4gMiBmaWxlcyBjaGFuZ2VkLCA4NCBpbnNlcnRpb25zKCsp
-Cj4gY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvdmlkZW8vcm9ja2NoaXAvcmszMzI4X3ZvcC5j
-Cj4KPmRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlIGIvZHJpdmVy
-cy92aWRlby9yb2NrY2hpcC9NYWtlZmlsZQo+aW5kZXggNDk5MTMwM2M3My4uZjU1YmVjZWViZiAx
-MDA2NDQKPi0tLSBhL2RyaXZlcnMvdmlkZW8vcm9ja2NoaXAvTWFrZWZpbGUKPisrKyBiL2RyaXZl
-cnMvdmlkZW8vcm9ja2NoaXAvTWFrZWZpbGUKPkBAIC02LDYgKzYsNyBAQAo+IGlmZGVmIENPTkZJ
-R19WSURFT19ST0NLQ0hJUAo+IG9iai15ICs9IHJrX3ZvcC5vCj4gb2JqLSQoQ09ORklHX1JPQ0tD
-SElQX1JLMzI4OCkgKz0gcmszMjg4X3ZvcC5vCj4rb2JqLSQoQ09ORklHX1JPQ0tDSElQX1JLMzMy
-OCkgKz0gcmszMzI4X3ZvcC5vCj4gb2JqLSQoQ09ORklHX1JPQ0tDSElQX1JLMzM5OSkgKz0gcmsz
-Mzk5X3ZvcC5vCj4gb2JqLSQoQ09ORklHX0RJU1BMQVlfUk9DS0NISVBfRURQKSArPSBya19lZHAu
-bwo+IG9iai0kKENPTkZJR19ESVNQTEFZX1JPQ0tDSElQX0xWRFMpICs9IHJrX2x2ZHMubwo+ZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvdmlkZW8vcm9ja2NoaXAvcmszMzI4X3ZvcC5jIGIvZHJpdmVycy92
-aWRlby9yb2NrY2hpcC9yazMzMjhfdm9wLmMKPm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj5pbmRleCAw
-MDAwMDAwMDAwLi5hNGRhM2E5MWU4Cj4tLS0gL2Rldi9udWxsCj4rKysgYi9kcml2ZXJzL3ZpZGVv
-L3JvY2tjaGlwL3JrMzMyOF92b3AuYwo+QEAgLTAsMCArMSw4MyBAQAo+Ky8vIFNQRFgtTGljZW5z
-ZS1JZGVudGlmaWVyOiBHUEwtMi4wKwo+Ky8qCj4rICogQ29weXJpZ2h0IChjKSAyMDIzIEVkZ2Vi
-bGUgQUkgVGVjaG5vbG9naWVzIFB2dC4gTHRkLgo+KyAqLwo+Kwo+KyNpbmNsdWRlIDxkbS5oPgo+
-KyNpbmNsdWRlIDx2aWRlby5oPgo+KyNpbmNsdWRlIDxhc20vaW8uaD4KPisjaW5jbHVkZSAicmtf
-dm9wLmgiCj4rCj4rREVDTEFSRV9HTE9CQUxfREFUQV9QVFI7Cj4rCj4rc3RhdGljIHZvaWQgcmsz
-MzI4X3NldF9waW5fcG9sYXJpdHkoc3RydWN0IHVkZXZpY2UgKmRldiwKPisJCQkJICAgIGVudW0g
-dm9wX21vZGVzIG1vZGUsIHUzMiBwb2xhcml0eSkKPit7Cj4rCXN0cnVjdCBya192b3BfcHJpdiAq
-cHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+KwlzdHJ1Y3QgcmszMjg4X3ZvcCAqcmVncyA9IHBy
-aXYtPnJlZ3M7Cj4rCj4rCXN3aXRjaCAobW9kZSkgewo+KwljYXNlIFZPUF9NT0RFX0hETUk6Cj4r
-CQljbHJzZXRiaXRzX2xlMzIoJnJlZ3MtPmRzcF9jdHJsMSwKPisJCQkJTV9SSzMzOTlfRFNQX0hE
-TUlfUE9MLAo+KwkJCQlWX1JLMzM5OV9EU1BfSERNSV9QT0wocG9sYXJpdHkpKTsKPisJCWJyZWFr
-Owo+KwlkZWZhdWx0Ogo+KwkJZGVidWcoIiVzOiB1bnN1cHBvcnRlZCBvdXRwdXQgbW9kZSAleFxu
-IiwgX19mdW5jX18sIG1vZGUpOwo+Kwl9Cj4rfQo+Kwo+K3N0YXRpYyBpbnQgcmszMzI4X3ZvcF9w
-cm9iZShzdHJ1Y3QgdWRldmljZSAqZGV2KQo+K3sKPisJLyogQmVmb3JlIHJlbG9jYXRpb24gd2Ug
-ZG9uJ3QgbmVlZCB0byBkbyBhbnl0aGluZyAqLwo+KwlpZiAoIShnZC0+ZmxhZ3MgJiBHRF9GTEdf
-UkVMT0MpKQo+KwkJcmV0dXJuIDA7Cj4rCj4rCXJldHVybiBya192b3BfcHJvYmUoZGV2KTsKPit9
-Cj4rCj4rc3RhdGljIGludCByazMzMjhfdm9wX3JlbW92ZShzdHJ1Y3QgdWRldmljZSAqZGV2KQo+
-K3sKPisJc3RydWN0IHJrX3ZvcF9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4rCXN0
-cnVjdCByazMyODhfdm9wICpyZWdzID0gcHJpdi0+cmVnczsKPisJc3RydWN0IHJrMzI4OF92b3Ag
-Kndpbl9yZWdzID0gcHJpdi0+cmVncyArIHByaXYtPndpbl9vZmZzZXQ7Cj4rCj4rCS8qIHdyaXRl
-IHJlc2V0IHZhbHVlcyAqLwo+Kwl3cml0ZWwoMHhlZjAxM2YsICZ3aW5fcmVncy0+d2luMF9hY3Rf
-aW5mbyk7Cj4rCXdyaXRlbCgweGVmMDEzZiwgJndpbl9yZWdzLT53aW4wX2RzcF9pbmZvKTsKPisJ
-d3JpdGVsKDB4YTAwMGEsICZ3aW5fcmVncy0+d2luMF9kc3Bfc3QpOwo+Kwl3cml0ZWwoMHgwLCAm
-d2luX3JlZ3MtPndpbjBfeXJnYl9tc3QpOwo+Kwl3cml0ZWwoMHgwMSwgJnJlZ3MtPnJlZ19jZmdf
-ZG9uZSk7Cj4rCj4rCXJldHVybiAwOwo+K30KCkkgdGhpbmsgdGhpcyBqdXN0IHdvcmthcm91bmQg
-TGludXggaW9tbXUgcGFnZSBmYXVsdCBieSBsdWNr44CCClRoZSByZXNldCB2YWx1Ze+8iHdoYXQg
-eW91IGNhbGxlZCBpdCBpc++8iXlvdXIgd3JpdGUganVzdCBsZXQgd2luMCByZWFkIGEKMzIweDI0
-MCByZWN0YW5ndWxhciBmcm9tIGFkZHJlc3MgMCBhbmQgZGlzcGxheSBpdCBhdCBuZXh0IGZyYW1l
-77yIbWF5YmUgMTZtcyBsYXRlciBpZiB5b3VyCmN1cnJlbnQgZGlzcGxheSBpcyBydW4gYXQgNjBI
-Wu+8ieOAggoKMS4gd2UgZG9uJ3Qga25vdyB3aGF0IGNvbnRlbnQgaXMgYXQgYWRkcmVzcyAwLCBz
-byB5b3Ugd2lsbCBzZWUgc29tZXRoaW5nIHN0cmFuZ2Ugb24geW91ciBtb25pdG9yLgoyLiB0aGVy
-ZSBpcyBubyBndWFyYW50ZWUgdGhhdCBhZGRyZXNzIDAgaXMgcmVhbGx5IHJlYWRhYmxl77yIbWF5
-YmUgYSBzZWN1cml0eSBtZW1vcnkgc3BhY2XvvIwgb3IgbWF5YmUKICAgIGl0IGlzIG5vdCBhIHZh
-bGlkIGFkZHJlc3PvvInvvIwgdGhpcyBtYXkgY2F1c2UgYW5vdGhlciBpc3N1ZSB0aGF0IG5vdCBl
-YXN5IHRvIGRldGVjdOOAggoKPisKPitzdHJ1Y3Qgcmt2b3BfZHJpdmVyZGF0YSByazMzMjhfZHJp
-dmVyZGF0YSA9IHsKPisJLmRzcF9vZmZzZXQgPSAweDQ5MCwKPisJLndpbl9vZmZzZXQgPSAweGQw
-LAo+KwkuZmVhdHVyZXMgPSBWT1BfRkVBVFVSRV9PVVRQVVRfMTBCSVQsCj4rCS5zZXRfcGluX3Bv
-bGFyaXR5ID0gcmszMzI4X3NldF9waW5fcG9sYXJpdHksCj4rfTsKPisKPitzdGF0aWMgY29uc3Qg
-c3RydWN0IHVkZXZpY2VfaWQgcmszMzI4X3ZvcF9pZHNbXSA9IHsKPisJewo+KwkJLmNvbXBhdGli
-bGUgPSAicm9ja2NoaXAscmszMzI4LXZvcCIsCj4rCQkuZGF0YSA9ICh1bG9uZykmcmszMzI4X2Ry
-aXZlcmRhdGEKPisJfSwKPisJeyAvKiBzZW50aWxlICovIH0KPit9Owo+Kwo+K3N0YXRpYyBjb25z
-dCBzdHJ1Y3QgdmlkZW9fb3BzIHJrMzMyOF92b3Bfb3BzID0gewo+K307Cj4rCj4rVV9CT09UX0RS
-SVZFUihyazMzMjhfdm9wKSA9IHsKPisJLm5hbWUJPSAicmszMzI4X3ZvcCIsCj4rCS5pZAk9IFVD
-TEFTU19WSURFTywKPisJLm9mX21hdGNoID0gcmszMzI4X3ZvcF9pZHMsCj4rCS5vcHMJPSAmcmsz
-MzI4X3ZvcF9vcHMsCj4rCS5iaW5kCT0gcmtfdm9wX2JpbmQsCj4rCS5wcm9iZQk9IHJrMzMyOF92
-b3BfcHJvYmUsCj4rCS5yZW1vdmUgPSByazMzMjhfdm9wX3JlbW92ZSwKPisJLnByaXZfYXV0bwk9
-IHNpemVvZihzdHJ1Y3Qgcmtfdm9wX3ByaXYpLAo+KwkuZmxhZ3MJPSBETV9GTEFHX1BSRV9SRUxP
-QyB8IERNX0ZMQUdfT1NfUFJFUEFSRSwKPit9Owo+LS0gCj4yLjI1LjEK
+
+--8khRpa+oPc/vD037
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Dec 19, 2023 at 01:01:51AM +0100, Heinrich Schuchardt wrote:
+>=20
+>=20
+> Am 19. Dezember 2023 00:31:30 MEZ schrieb Tom Rini <trini@konsulko.com>:
+> >On Tue, Dec 19, 2023 at 12:29:19AM +0100, Heinrich Schuchardt wrote:
+> >>=20
+> >>=20
+> >> Am 19. Dezember 2023 00:16:40 MEZ schrieb Tom Rini <trini@konsulko.com=
+>:
+> >> >On Tue, Dec 19, 2023 at 12:08:31AM +0100, Heinrich Schuchardt wrote:
+> >> >>=20
+> >> >>=20
+> >> >> Am 18. Dezember 2023 23:41:08 MEZ schrieb Tom Rini <trini@konsulko.=
+com>:
+> >> >> >On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchardt wrot=
+e:
+> >> >> >
+> >> >> >[snip]
+> >> >> >> Or take:
+> >> >> >>=20
+> >> >> >> load host 0:1 $c kernel.efi
+> >> >> >> load host 0:1 $d initrd.img
+> >> >> >>=20
+> >> >> >> How could we ensure that initrd.img is not overwriting a part of=
+ kernel.efi without memory allocation?
+> >> >> >
+> >> >> >Today, invalid checksum as part of some part of the kernel fails. =
+But
+> >> >> >how do we do this tomorrow, are you suggesting that "load" perform
+> >> >> >malloc() in some predefined size? If $c is below $d and $c + kerne=
+l.efi
+> >> >> >is now above $d we can throw an error before trying to load, yes. =
+But
+> >> >> >what about:
+> >> >> >load host 0:1 $d initrd.img
+> >> >> >load host 0:1 $c kernel.efi
+> >> >> >
+> >> >> >In that case (which is only marginally contrived, the more real ca=
+se is
+> >> >> >loading device tree in to unexpectedly large ramdisk because someo=
+ne
+> >> >> >didn't understand the general advice on why device tree is lower t=
+han
+> >> >> >ramdisk address) I'm fine with an error that amounts to "you just
+> >> >> >corrupted another allocation" and then "fail, reset the board" or =
+so.
+> >> >> >
+> >> >>=20
+> >> >> Our current malloc library cannot manage the complete memory. We ne=
+ed a library like lmb which should also cover the memory management that we=
+ currently have in lib/efi/efi_memory.c. This must include a memory type at=
+tribute for usage in the GetMemoryMap() service. A management on page level=
+ seems sufficient.
+> >> >>=20
+> >> >> The load command should permanently allocate memory in that lmb+ li=
+brary.
+> >> >>=20
+> >> >> We need an unload command to free the memory if we want to reuse th=
+e memory or we might let the load comand free the memory if exactly the sam=
+e start address is reused.
+> >> >
+> >> >Our current way of loading things in to memory does not handle the ca=
+se
+> >> >I described, yes. How would what you're proposing handle it?
+> >>=20
+> >> If the load command has to allocate memory for the image and that allo=
+cation is kept, any attempt to allocate overlapping memory would fail.
+> >
+> >So you're saying that the load command has to pre-allocate memory? Or as
+> >it goes? If the latter, in what size chunks? This starts to get at what
+> >Simon was talking about with respect to memory fragmentation. Which to
+> >be clear is a problem we have today, we just let things overlap and hope
+> >something later catches an incorrect checksum.
+> >
+>=20
+> I don't want to replace the malloc library which handles large numbets of=
+ allocations.
+
+I'm confused. The normal malloc library is not involved with current
+image loading, it's direct to memory (with some attempts at sanity
+checking by lmb).  Are you proposing a different allocator with
+malloc/free like behavior? If so, please outline how it will determine
+pool size, and how we'll use it to load thing to memory.
+
+> Closing the eyes when the user loads multiple files does not solve the fr=
+agmentation problem.
+
+Yes. I'm only noting that today we just ignore the problem and sometimes
+catch it via checksums.
+
+> Fragmentation only happens if we have many concurrent allocations.  In EF=
+I we are allocating top down. The number of concurrent allocations is low. =
+Typically a few dozen at most. After terminating an application these shoul=
+d be freed again.
+
+OK, so are you saying that we would no longer be loading _to_ a location
+in memory and instead just be saying "load this thing" and picking where
+dynamically?
+
+> When loading a file from a file system we know the filesize beforehand. S=
+o allocation is trivial.
+>=20
+> The loady command currently does not use the  offered size information bu=
+t could do so.
+
+We should be using that information to make sure we don't overwrite
+U-Boot itself, but I don't recall how exactly we handle it today
+off-hand.
+
+> TFTP is problematic because it does not transfer the filesize. We would p=
+robably try to allocate a large chunk of memory and then downsize the alloc=
+ation after reading the whole file.
+
+Reading from non-filesystem flash also has this problem, but we at least
+specify the amount to read too. But yes, it gets back to what I was
+asking about on how you're proposing to handle network load cases.
+
+--=20
+Tom
+
+--8khRpa+oPc/vD037
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWA8SUACgkQFHw5/5Y0
+tyxzxwv8CEDc4AnxzIMS+PuuyAwpsfqlqSKAZDKfPxUs8SfZGLp+1nM2h03Galah
+lJNPRJ7xZujGD7crlCzjmNs1T2fOFdJXRdJjZXcuGGaps3Qn8SgTogxZi20nKbMx
+robXNTOEWwhvv4m0lKw6llQtlFFBpB0I2XiC8E9Qn6NuAPCyYp/XIMKr8n90pIhz
+vSU2QwJoKI1TFgdWFesoVlEmN8+ifhfdoTh/boUsQGpclN8BbkprhJWcq7d9KrPm
+fAgaFvTqa807/QvCkd8xquGr6AaDN8Rvhg5slZlffqr+nQ4swlWG/HHj8QoaYKSy
+Utv8qCm3z/ZRdc7A4jo5ByGjJwkMdQO+FFKC3/fiXHpsYje010+E7lXcWZzLcRHR
+6LEh/D+MJ5hV9QVRkY5GxzgYrSLgCd8zkAGc+EdRnQoDkJ6iuO9oUMRqBbogJ/0R
+AAAen5fG0LBVE2ftO5dZRCHkYyIha56jTpY9D8vcnz8IWxC3BgEIV6yw4lqpsq00
+6sGBaNxv
+=YkQS
+-----END PGP SIGNATURE-----
+
+--8khRpa+oPc/vD037--
