@@ -4,85 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03980C35274
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 00:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF72CC35274
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 00:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 302CB8744F;
-	Tue, 19 Dec 2023 01:17:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1273B8718F;
+	Tue, 19 Dec 2023 01:34:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fyo0/Zou";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VEabP9fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA1DD874D9; Tue, 19 Dec 2023 01:17:21 +0100 (CET)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 0DE908744F; Tue, 19 Dec 2023 01:34:31 +0100 (CET)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75DEE8718F
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 01:17:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AB42686D2B
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 01:34:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5c67fdbe7d4so633943a12.0
- for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:17:19 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-6d2793532d2so527982b3a.1
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:34:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1702945038; x=1703549838; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z6q6Fmxd6AHFluJfj/zrRQKq5SCBuemjCvKmjM5c/gg=;
- b=fyo0/Zoup+OjIYp509xZ8IM14YaNirRImGfvEn3w31JENPbWCiH9Oe6N2pEHeq9SGp
- XA9OK4wNqoP17EZpkWf9E6OWCHEvG7o4Ie7cheFbN6GQdaK/HwKrk06KBXGXOVKLqxby
- H65YlTWfknVcmQqPHnlGj8rR44d8xz/VmNMT8HOeLtCeHgd2HPBVyhj9LniLT5vLNRWO
- Q0MdvCyXPxES24cRBVs/Ota8b0+4gAsXyFWalBPRuB72fyUgo94plT4KvByFcx9P5d1S
- iVnGBhkRCpzSdM69oeSlXKQ076oTQTeNWrEgo2CzBECXzwwIdKHV3ptRy0zylMWJGTIU
- jwhA==
+ d=gmail.com; s=20230601; t=1702946067; x=1703550867; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fFc/whY94ldUSolDAKZQJPkJSxNpycC3wtRww1+Tmo4=;
+ b=VEabP9fp5t9H926CaEj5RdSh7FJj/UUXmSVI6Y1cKKtuGttdDb38YbFADfajnfgyg5
+ lDs8R/JKDuEWJjcpK0dnjl1ShGdROIftqIWk2CA7R9m0yR1muelAI3NpqagOsh1ugvLA
+ XXwT1kM+oXosYkDqGVHz69kMPX8ArsBEjD/Q7KKIreiBYKRGN4I/R5HsOVxvFcZOOdEe
+ pjbgzCopiCqx4qXHUIPfr2Dlx9qEHwsd209krCi5pwzSe0yoLURJWo53aAtvXFIxhsRn
+ LPH62qxvS7aKtbnJQ0VjEJPCFNy2DCkAD+fQSQazRSmqJ5irz1kfMXwbbrZqgN8hI20w
+ okBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702945038; x=1703549838;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Z6q6Fmxd6AHFluJfj/zrRQKq5SCBuemjCvKmjM5c/gg=;
- b=Rst/Uwr8nhdGXWHnZH7lFyCFwmLasSeRr13IftG8vT9geibKrEHbCB484mNc9hQw8Z
- nvKG3hpym9e7hiRTTMJtGeZUhUPS0Z6dDvTKWN/Sr7G9tAwTiitNt5Ft3EOTF5bWkuhw
- OY3D0otOs6OvcX0QXxC3sRZ3hPH5FGH381m4OaUveaxvQdbtYT4FH4Uxe6BfAhxr3gr+
- tX/7qqUl0SZs7uYkwNuarooTISTQRJejM+nQIbrPDxBDHLQwxzhdCPhrmOSHuFWBqwVy
- i1aWNxDkdxZoicLje67qiwsttOuQIZX0DLI8mRBcUyJ8/fNQiqNf+gMIOndH8APD5WTA
- zgAg==
-X-Gm-Message-State: AOJu0YwaLkCtFs3WVhd6N7VUSle3EnBVBlNsmJd6QfoPnGoPZvJG0CwC
- zaXJf2OjXH1RyAUyoAXf9bM2eg==
-X-Google-Smtp-Source: AGHT+IFmBIEsfqpN+sSojNqFsFv2LATPOKnxKTAFH8Ip2EKJt8depAP8BypSgZr4rWRAaw/2L/CsmA==
-X-Received: by 2002:a05:6a20:7d9c:b0:18f:c77b:9fdd with SMTP id
- v28-20020a056a207d9c00b0018fc77b9fddmr40388811pzj.1.1702945037710; 
- Mon, 18 Dec 2023 16:17:17 -0800 (PST)
-Received: from octopus ([2400:4050:c3e1:100:3aac:5efb:223c:7d9c])
- by smtp.gmail.com with ESMTPSA id
- f13-20020a170902e98d00b001d0511c990csm2421238plb.237.2023.12.18.16.17.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Dec 2023 16:17:17 -0800 (PST)
-Date: Tue, 19 Dec 2023 09:17:14 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
- dependency
-Message-ID: <ZYDhClYupQxNJ++a@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, trini@konsulko.com,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- u-boot@lists.denx.de
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-4-takahiro.akashi@linaro.org>
- <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1702946067; x=1703550867;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fFc/whY94ldUSolDAKZQJPkJSxNpycC3wtRww1+Tmo4=;
+ b=XeWVjEviaFDkwQ4uKOIKLE65dGsMCQnj9z0RTBlT0nmDT20VWZXQIZCqgDHZlFcOd/
+ 30X6+cSYShSk9BjQt8apASKsc/MvuPZqwAv3mHtfYf6RVoRJSBaXJMFlaiiy3N+zgWUr
+ 8ETuVREam5NJGR21Fz1q9JT7mCp9WWU67xsCZM8mzu3H6kqsq5ucDvwEP3TUQU5fPXKT
+ 1qQ6PGR8/KAGaFU0zbmv0PHD2yOlUxDoBjoQYbHWQvRM3Boo9xsykH4dUMl/05ZRU16y
+ IKjpGQIs7F32iDvLdLnPSALlCcwI+HKIvGa4tngbxs2qW5uT1XHewde9u/n39s3nZ/BR
+ C61g==
+X-Gm-Message-State: AOJu0Yz8pQF8qt9ReCekr78FSr2GDKEsI19g0JkSBn6kNh5tUiE43WT5
+ pVKEA8j7zrV7m860RmKDoGhNBX/e096M2r/fvvc=
+X-Google-Smtp-Source: AGHT+IGcnnFSgc8loooWXkqsFzFxu+J7tas4Z788wOPC72vL0fonkCojxC7/B/u3TZqCaGRkwO4reeXmNz0/eCIsZZE=
+X-Received: by 2002:a05:6a20:3942:b0:18c:198a:469b with SMTP id
+ r2-20020a056a20394200b0018c198a469bmr40006307pzg.6.1702946066918; Mon, 18 Dec
+ 2023 16:34:26 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
+References: <20231218180226.37685-1-marex@denx.de>
+In-Reply-To: <20231218180226.37685-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 18 Dec 2023 21:34:13 -0300
+Message-ID: <CAOMZO5AdEWsvcHPX1EK9LDwgmBRqfRrMPZGwTbGjfgofCYRCpw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: imx: Power off display output on Data Modul
+ i.MX8M Mini/Plus eDM SBC
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,63 +88,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Mon, Dec 18, 2023 at 3:02=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Turn display connector power off on boot and reboot to prevent any
+> bogus start up sequence of any panel potentially attached to the
+> display connector.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-On Mon, Dec 18, 2023 at 08:01:46AM -0700, Simon Glass wrote:
-> Hi AKASHI,
-> 
-> On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
-> <takahiro.akashi@linaro.org> wrote:
-> >
-> > Now it is clear that the feature actually depends on efi interfaces,
-> > not "bootefi" command. efi_set_bootdev() will automatically be nullified
-> > if necessary efi component is disabled.
-> >
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > ---
-> >  net/tftp.c | 10 ++++------
-> >  1 file changed, 4 insertions(+), 6 deletions(-)
-> >
-> 
-> I have the same comment here as the 'fs' patch.
-> 
-> > diff --git a/net/tftp.c b/net/tftp.c
-> > index 88e71e67de35..2e335413492b 100644
-> > --- a/net/tftp.c
-> > +++ b/net/tftp.c
-> > @@ -302,12 +302,10 @@ static void tftp_complete(void)
-> >                         time_start * 1000, "/s");
-> >         }
-> >         puts("\ndone\n");
-> > -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
-> 
-> Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
-> is not enabled?
-
-The trick is in efi_loader.h.
-If EFI_LOADER (more specifically CONFIG_EFI_BINARY_EXEC) is not defined,
-this function gets voided.  See patch#1 in this version.
-
-I took this approach in order not to make users much worried about
-what config be used as they are not familiar with UEFI implementation.
-
--Takahiro Akashi
-
-> > -               if (!tftp_put_active)
-> > -                       efi_set_bootdev("Net", "", tftp_filename,
-> > -                                       map_sysmem(tftp_load_addr, 0),
-> > -                                       net_boot_file_size);
-> > -       }
-> > +       if (!tftp_put_active)
-> > +               efi_set_bootdev("Net", "", tftp_filename,
-> > +                               map_sysmem(tftp_load_addr, 0),
-> > +                               net_boot_file_size);
-> >         net_set_state(NETLOOP_SUCCESS);
-> >  }
-> >
-> > --
-> > 2.34.1
-> >
-> 
-> Regards,
-> Simon
+Applied to u-boot-imx/master, thanks.
