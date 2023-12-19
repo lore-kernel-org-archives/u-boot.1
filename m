@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70B32C46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:41:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E698C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:41:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BCB887866;
+	by phobos.denx.de (Postfix) with ESMTP id 932F087852;
 	Tue, 19 Dec 2023 12:33:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ROWmRCVP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e3ZdeQfp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E947871B1; Tue, 19 Dec 2023 11:35:01 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 87A9086C68; Tue, 19 Dec 2023 11:35:01 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2490186C68
+ by phobos.denx.de (Postfix) with ESMTPS id 5A02386FF7
  for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYqsC055944;
- Tue, 19 Dec 2023 04:34:52 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYiZR047190;
+ Tue, 19 Dec 2023 04:34:44 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982092;
- bh=Fid3o+LulWJ085fAwe+SrrojtGnOIwgvFfgYxy7Q83w=;
+ s=ti-com-17Q1; t=1702982084;
+ bh=JijppZxq27gRCxBmi8qoNEVZ6HLGM2vyioNj7PX7B+8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ROWmRCVPEemfD7PhUeiaRWUVysd38yrzzsTiVfzEl2YAtJ39T8Xh5/2XP8txRD1Tp
- CSOnzramUkcGaC7mOqa4686K49RM1ZL49eRji1HH+Pu7d+oCfdbdnAwQTYH61qaXTZ
- DmFkLs/+iTNa3IK0pJ/3tITAEGRPq6c0lTnmeN20=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYqCD018061
+ b=e3ZdeQfp7uegcP3yMx3Aju04RZXoARDal+IbfkUVA2HfSzQdgGbZgMzvkVAmRg/t1
+ QtMDhg/P2tNkuiihPEovhBOhQDahyr+jZ5AMnsIzddBBPL+Boa9D/Cjb7qd+dCQG9c
+ MPuvFjOagsY3BNkEnCP5j+O2dl5KB568j8hFvGcs=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYiZW057612
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:52 -0600
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:34:44 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:51 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:34:44 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:51 -0600
-Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYpYh071378;
- Tue, 19 Dec 2023 04:34:51 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:34:44 -0600
+Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYiU8071250;
+ Tue, 19 Dec 2023 04:34:44 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYpVf022859;
- Tue, 19 Dec 2023 04:34:51 -0600
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYhCv014600;
+ Tue, 19 Dec 2023 04:34:43 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,10 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 16/16] board: ti: am65x: Add check for k3-am654-icssg2 in
- board_fit_config_match()
-Date: Tue, 19 Dec 2023 16:04:18 +0530
-Message-ID: <20231219103418.3445886-17-danishanwar@ti.com>
+Subject: [RFC PATCH 12/16] arm: dts: k3-am65x-binman: Add ICSSG2 overlay and
+ configuration
+Date: Tue, 19 Dec 2023 16:04:14 +0530
+Message-ID: <20231219103418.3445886-13-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
 References: <20231219103418.3445886-1-danishanwar@ti.com>
@@ -92,36 +92,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When CONFIG_TI_ICSSG_PRUETH is enabled, add config name check for the
-icssg2 overlay in board_fit_config_match() API.
+Add ICSSG2 overlay and configuration to tispl and u-boot images.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- board/ti/am65x/evm.c | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ arch/arm/dts/k3-am65x-binman.dtsi | 85 +++++++++++++++++++++++++++++++
+ 1 file changed, 85 insertions(+)
 
-diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
-index df209021c1..0b661f0084 100644
---- a/board/ti/am65x/evm.c
-+++ b/board/ti/am65x/evm.c
-@@ -90,10 +90,13 @@ int dram_init_banksize(void)
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
--#ifdef CONFIG_TARGET_AM654_A53_EVM
--	if (!strcmp(name, "k3-am654-base-board"))
--		return 0;
--#endif
-+	if (IS_ENABLED(CONFIG_TI_ICSSG_PRUETH)) {
-+		if (!strcmp(name, "k3-am654-icssg2"))
-+			return 0;
-+	} else {
-+		if (!strcmp(name, "k3-am654-base-board"))
-+			return 0;
-+	}
+diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+index 8cc24da1f3..9a0c0fca47 100644
+--- a/arch/arm/dts/k3-am65x-binman.dtsi
++++ b/arch/arm/dts/k3-am65x-binman.dtsi
+@@ -98,6 +98,8 @@
+ #define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
+ #define AM654_EVM_DTB "u-boot.dtb"
  
- 	return -1;
- }
++#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
++
+ &binman {
+ 	ti-spl {
+ 		insert-template = <&ti_spl_template>;
+@@ -124,6 +126,20 @@
+ 						filename = SPL_AM654_EVM_DTB;
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&spl_am65x_evm_icssg2_dtb>;
++						keyfile = "custMpk.pem";
++					};
++					spl_am65x_evm_icssg2_dtb: blob-ext {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -135,6 +151,13 @@
+ 					loadables = "tee", "dm", "spl";
+ 					fdt = "fdt-0";
+ 				};
++
++				conf-1 {
++					description = "k3-am654-icssg2";
++					firmware = "atf";
++					loadables = "tee", "dm", "spl";
++					fdt = "fdt-0", "fdt-1";
++				};
+ 			};
+ 		};
+ 	};
+@@ -168,6 +191,24 @@
+ 					};
+ 				};
+ 
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&am65x_evm_icssg2_dtb>;
++						keyfile = "custMpk.pem";
++
++					};
++					am65x_evm_icssg2_dtb: blob-ext {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++					hash {
++						algo = "crc32";
++					};
++				};
++
+ 			};
+ 
+ 			configurations {
+@@ -179,6 +220,13 @@
+ 					loadables = "uboot";
+ 					fdt = "fdt-0";
+ 				};
++
++				conf-1 {
++					description = "k3-am654-icssg2";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0", "fdt-1";
++				};
+ 			};
+ 		};
+ 	};
+@@ -205,6 +253,16 @@
+ 						filename = SPL_AM654_EVM_DTB;
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					blob {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -216,6 +274,13 @@
+ 					loadables = "tee", "dm", "spl";
+ 					fdt = "fdt-0";
+ 				};
++
++				conf-1 {
++					description = "k3-am654-icssg2";
++					firmware = "atf";
++					loadables = "tee", "dm", "spl";
++					fdt = "fdt-0", "fdt-1";
++				};
+ 			};
+ 		};
+ 	};
+@@ -243,6 +308,19 @@
+ 						algo = "crc32";
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					blob {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++					hash {
++						algo = "crc32";
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -254,6 +332,13 @@
+ 					loadables = "uboot";
+ 					fdt = "fdt-0";
+ 				};
++
++				conf-1 {
++					description = "k3-am654-icssg2";
++					firmware = "uboot";
++					loadables = "uboot";
++					fdt = "fdt-0", "fdt-1";
++				};
+ 			};
+ 		};
+ 	};
 -- 
 2.34.1
 
