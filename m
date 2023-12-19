@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B7BC35274
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 00:01:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03980C35274
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 00:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CFA98718F;
-	Tue, 19 Dec 2023 01:01:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 302CB8744F;
+	Tue, 19 Dec 2023 01:17:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ea/B4Idz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fyo0/Zou";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 425F98744F; Tue, 19 Dec 2023 01:01:56 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AA1DD874D9; Tue, 19 Dec 2023 01:17:21 +0100 (CET)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19E3287005
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 01:01:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75DEE8718F
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 01:17:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702944112; x=1703548912; i=xypron.glpk@gmx.de;
- bh=MuU4rkMgIBBIRsIvRozFXWSQQ3mCU6fgfJ9Bh1Eid7A=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=ea/B4IdzXBGm7ZmtDp65hIiVJS9KHA0w6V1AJJXcqe5KqitvhguYx8qdhQ1kArs8
- QV7CRQyk4fmcFF6BG9uulM08E5b26PDS/qi4us+rnL7o4rmyk8xlhqgy/DNeZdPAm
- q8ObYRJx/Jm7T2uapZNp4CvTTW4GehWvwESqe+HvNQRdOfoLMxpLs9DKnPBdYneeC
- UQL2u0ceugOXX0ZDvmyiX3sBEO20OrcgSCJtK2Bos2IbesSgCmzoAnXRuHj4hxUJo
- Y/3+j3LkdYBmgmXMptPKtWFIdUefRLjMArfc706v/WYzzwAnWWRmkldhQqpJ3Q/gB
- uX06HSjySJhaxqp9+w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mf0BG-1qnAbq0lK6-00gXa9; Tue, 19
- Dec 2023 01:01:52 +0100
-Date: Tue, 19 Dec 2023 01:01:51 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Proposal: U-Boot memory management
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231218233130.GP2513409@bill-the-cat>
-References: <CAPnjgZ0r1xM-bky6VQXV4N-FkBC-YFsX1ibJRiJ_17XXAe5ang@mail.gmail.com>
- <D7A16A62-0C71-4374-AAF6-9D021A6C42A2@gmx.de>
- <CAPnjgZ0YBJ9bN4VHbYkR-r3V8winGmm5TA0UXvh-mBLeRgza3g@mail.gmail.com>
- <3A9B3E83-545B-4CAC-9D65-737BD9D6BE0C@gmx.de>
- <CAPnjgZ1=JBEh49G654DfkYM-fcOEhwh=Xuu1scXTLsNkZk2SNQ@mail.gmail.com>
- <DEECD6D4-58C6-4032-BBF9-28A65B9096DD@gmx.de>
- <20231218224108.GN2513409@bill-the-cat>
- <3DAFAD12-98E4-46CC-B02E-E8EE40D57AC3@gmx.de>
- <20231218231640.GO2513409@bill-the-cat>
- <058AE676-FD71-4DEB-AEB3-0C805B74E8EE@gmx.de>
- <20231218233130.GP2513409@bill-the-cat>
-Message-ID: <688C13A3-9C5F-4A39-9F8F-54C2E8D08EE8@gmx.de>
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-5c67fdbe7d4so633943a12.0
+ for <u-boot@lists.denx.de>; Mon, 18 Dec 2023 16:17:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702945038; x=1703549838; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Z6q6Fmxd6AHFluJfj/zrRQKq5SCBuemjCvKmjM5c/gg=;
+ b=fyo0/Zoup+OjIYp509xZ8IM14YaNirRImGfvEn3w31JENPbWCiH9Oe6N2pEHeq9SGp
+ XA9OK4wNqoP17EZpkWf9E6OWCHEvG7o4Ie7cheFbN6GQdaK/HwKrk06KBXGXOVKLqxby
+ H65YlTWfknVcmQqPHnlGj8rR44d8xz/VmNMT8HOeLtCeHgd2HPBVyhj9LniLT5vLNRWO
+ Q0MdvCyXPxES24cRBVs/Ota8b0+4gAsXyFWalBPRuB72fyUgo94plT4KvByFcx9P5d1S
+ iVnGBhkRCpzSdM69oeSlXKQ076oTQTeNWrEgo2CzBECXzwwIdKHV3ptRy0zylMWJGTIU
+ jwhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702945038; x=1703549838;
+ h=in-reply-to:content-disposition:mime-version:references
+ :mail-followup-to:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z6q6Fmxd6AHFluJfj/zrRQKq5SCBuemjCvKmjM5c/gg=;
+ b=Rst/Uwr8nhdGXWHnZH7lFyCFwmLasSeRr13IftG8vT9geibKrEHbCB484mNc9hQw8Z
+ nvKG3hpym9e7hiRTTMJtGeZUhUPS0Z6dDvTKWN/Sr7G9tAwTiitNt5Ft3EOTF5bWkuhw
+ OY3D0otOs6OvcX0QXxC3sRZ3hPH5FGH381m4OaUveaxvQdbtYT4FH4Uxe6BfAhxr3gr+
+ tX/7qqUl0SZs7uYkwNuarooTISTQRJejM+nQIbrPDxBDHLQwxzhdCPhrmOSHuFWBqwVy
+ i1aWNxDkdxZoicLje67qiwsttOuQIZX0DLI8mRBcUyJ8/fNQiqNf+gMIOndH8APD5WTA
+ zgAg==
+X-Gm-Message-State: AOJu0YwaLkCtFs3WVhd6N7VUSle3EnBVBlNsmJd6QfoPnGoPZvJG0CwC
+ zaXJf2OjXH1RyAUyoAXf9bM2eg==
+X-Google-Smtp-Source: AGHT+IFmBIEsfqpN+sSojNqFsFv2LATPOKnxKTAFH8Ip2EKJt8depAP8BypSgZr4rWRAaw/2L/CsmA==
+X-Received: by 2002:a05:6a20:7d9c:b0:18f:c77b:9fdd with SMTP id
+ v28-20020a056a207d9c00b0018fc77b9fddmr40388811pzj.1.1702945037710; 
+ Mon, 18 Dec 2023 16:17:17 -0800 (PST)
+Received: from octopus ([2400:4050:c3e1:100:3aac:5efb:223c:7d9c])
+ by smtp.gmail.com with ESMTPSA id
+ f13-20020a170902e98d00b001d0511c990csm2421238plb.237.2023.12.18.16.17.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 Dec 2023 16:17:17 -0800 (PST)
+Date: Tue, 19 Dec 2023 09:17:14 +0900
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: trini@konsulko.com, xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
+ dependency
+Message-ID: <ZYDhClYupQxNJ++a@octopus>
+Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, trini@konsulko.com,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ u-boot@lists.denx.de
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+ <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:BKFdmUVn5EdcbPEmNeElB2SrKQOtI8zZYXKmwtKE/zfmf66Whyi
- UraI0ibJxxP45mXp+h/ZKtAqRVmtFAPC5UJO//dVB+z6xHCFlCsFaP3fPz0jWE4YX8oj8KQ
- GPf/m42p0pw7CAulWy/LUBT2Gmr3BvaaxsCYeC7j5xx4cMUL+eRRqgoC8ye+xeWVre0RCsn
- h9nVj3ZkZhuYlic3AHZpA==
-UI-OutboundReport: notjunk:1;M01:P0:gS6qLBulBAs=;WvojsTzhpHKGdL+1ruVLHb7/f8N
- 9nZTGNfuxxsKD/ulv9rpS0ayvp2L9uvzlyekOUmqMkF0dvsMwP8Y/QYT5UlNDJ859PlK3nTCb
- DQFuZXG1yPYPHtKB1/aRLtRcL3ODSz0VzR2druJ8BWryrH6phnJTyR7HoTMyHmB+mO0DzRjVS
- h5cpZdLWyFUi3+VXjn3HveG7E+GT0LtrQnJ0NlBlm8DRdPnagRG2XV1axAZvSVjzFjTU/7Acp
- GW/MxsI4YvMDwtIyjF2tKZ+Ju1C6jQwDe2xXU8Var1YReiL7UGuoOKiJ9xcD3KohgZz3oQCY4
- ITeCYJ8+o0mh3dk9u4BbOavGdEeS87X8eEKto93MIXqpvO0FC9WoNTSCEY2zV/QLNOscbkCC8
- FasXVD0zN9YgvwFW85Nfx8Z6v2IWsa4Z3TfBWdoK02bYUNePQbXrWBNTB5mNnKWcpAp3Q2Q2B
- jpOC9oXTVM5UKslP0So7xBLUbW2YNFoS7kMhiVV5gysVFI79ciVWhAxhqeqHN034blE5dplm0
- EzO4IL3JXD/v38790a1XijZ2vVzxEGsdyETDtDpfh9msG4AJ0u9zt6+W1IMnGf4unqrZRKpsr
- F6kgi91dsJUaYXDz3byZXrawbE+7xceNyqTBWgvktYIRh/hEY9lQnrbm5BMOLPiA5nYSuwOgK
- PCpRFEbw9wYXB8kaSg6oIs2j9txPmprFgEQVrcK1bT8AqV0igPAscUaAdUPlBi1wIXo7x4PMk
- EVrnaaVrNbSnwP7o1WGGrTg7a/frMr6j5DAUAhKp5pUwMqT98A3HdnEbjAbj/BnuoyAnkALEP
- No2wkJV/esb2juow5c5sq63bLUZziRL0wegk6iBmrqjZXfCCDq1xxamZdjO+M3R/ti7+l1ep5
- 1oFaOqGxxv3+zEVCF3aB70XAgqUYm1Rp5qtzAgzM73swy1+ibR81KmP6DB0PVjgvJniVoTvv2
- mEH2iQ==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,104 +99,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
+On Mon, Dec 18, 2023 at 08:01:46AM -0700, Simon Glass wrote:
+> Hi AKASHI,
+> 
+> On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > Now it is clear that the feature actually depends on efi interfaces,
+> > not "bootefi" command. efi_set_bootdev() will automatically be nullified
+> > if necessary efi component is disabled.
+> >
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> >  net/tftp.c | 10 ++++------
+> >  1 file changed, 4 insertions(+), 6 deletions(-)
+> >
+> 
+> I have the same comment here as the 'fs' patch.
+> 
+> > diff --git a/net/tftp.c b/net/tftp.c
+> > index 88e71e67de35..2e335413492b 100644
+> > --- a/net/tftp.c
+> > +++ b/net/tftp.c
+> > @@ -302,12 +302,10 @@ static void tftp_complete(void)
+> >                         time_start * 1000, "/s");
+> >         }
+> >         puts("\ndone\n");
+> > -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+> 
+> Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
+> is not enabled?
 
-Am 19=2E Dezember 2023 00:31:30 MEZ schrieb Tom Rini <trini@konsulko=2Ecom=
->:
->On Tue, Dec 19, 2023 at 12:29:19AM +0100, Heinrich Schuchardt wrote:
->>=20
->>=20
->> Am 19=2E Dezember 2023 00:16:40 MEZ schrieb Tom Rini <trini@konsulko=2E=
-com>:
->> >On Tue, Dec 19, 2023 at 12:08:31AM +0100, Heinrich Schuchardt wrote:
->> >>=20
->> >>=20
->> >> Am 18=2E Dezember 2023 23:41:08 MEZ schrieb Tom Rini <trini@konsulko=
-=2Ecom>:
->> >> >On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchardt wrote=
-:
->> >> >
->> >> >[snip]
->> >> >> Or take:
->> >> >>=20
->> >> >> load host 0:1 $c kernel=2Eefi
->> >> >> load host 0:1 $d initrd=2Eimg
->> >> >>=20
->> >> >> How could we ensure that initrd=2Eimg is not overwriting a part o=
-f kernel=2Eefi without memory allocation?
->> >> >
->> >> >Today, invalid checksum as part of some part of the kernel fails=2E=
- But
->> >> >how do we do this tomorrow, are you suggesting that "load" perform
->> >> >malloc() in some predefined size? If $c is below $d and $c + kernel=
-=2Eefi
->> >> >is now above $d we can throw an error before trying to load, yes=2E=
- But
->> >> >what about:
->> >> >load host 0:1 $d initrd=2Eimg
->> >> >load host 0:1 $c kernel=2Eefi
->> >> >
->> >> >In that case (which is only marginally contrived, the more real cas=
-e is
->> >> >loading device tree in to unexpectedly large ramdisk because someon=
-e
->> >> >didn't understand the general advice on why device tree is lower th=
-an
->> >> >ramdisk address) I'm fine with an error that amounts to "you just
->> >> >corrupted another allocation" and then "fail, reset the board" or s=
-o=2E
->> >> >
->> >>=20
->> >> Our current malloc library cannot manage the complete memory=2E We n=
-eed a library like lmb which should also cover the memory management that w=
-e currently have in lib/efi/efi_memory=2Ec=2E This must include a memory ty=
-pe attribute for usage in the GetMemoryMap() service=2E A management on pag=
-e level seems sufficient=2E
->> >>=20
->> >> The load command should permanently allocate memory in that lmb+ lib=
-rary=2E
->> >>=20
->> >> We need an unload command to free the memory if we want to reuse the=
- memory or we might let the load comand free the memory if exactly the same=
- start address is reused=2E
->> >
->> >Our current way of loading things in to memory does not handle the cas=
-e
->> >I described, yes=2E How would what you're proposing handle it?
->>=20
->> If the load command has to allocate memory for the image and that alloc=
-ation is kept, any attempt to allocate overlapping memory would fail=2E
->
->So you're saying that the load command has to pre-allocate memory? Or as
->it goes? If the latter, in what size chunks? This starts to get at what
->Simon was talking about with respect to memory fragmentation=2E Which to
->be clear is a problem we have today, we just let things overlap and hope
->something later catches an incorrect checksum=2E
->
+The trick is in efi_loader.h.
+If EFI_LOADER (more specifically CONFIG_EFI_BINARY_EXEC) is not defined,
+this function gets voided.  See patch#1 in this version.
 
-I don't want to replace the malloc library which handles large numbets of =
-allocations=2E
+I took this approach in order not to make users much worried about
+what config be used as they are not familiar with UEFI implementation.
 
-Closing the eyes when the user loads multiple files does not solve the fra=
-gmentation problem=2E
+-Takahiro Akashi
 
-Fragmentation only happens if we have many concurrent allocations=2E  In E=
-FI we are allocating top down=2E The number of concurrent allocations is lo=
-w=2E Typically a few dozen at most=2E After terminating an application thes=
-e should be freed again=2E
-
-When loading a file from a file system we know the filesize beforehand=2E =
-So allocation is trivial=2E
-
-The loady command currently does not use the  offered size information but=
- could do so=2E
-
-TFTP is problematic because it does not transfer the filesize=2E We would =
-probably try to allocate a large chunk of memory and then downsize the allo=
-cation after reading the whole file=2E
-
-We will have to review each file load method individually=2E
-
-Best regards
-
-Heinrich
+> > -               if (!tftp_put_active)
+> > -                       efi_set_bootdev("Net", "", tftp_filename,
+> > -                                       map_sysmem(tftp_load_addr, 0),
+> > -                                       net_boot_file_size);
+> > -       }
+> > +       if (!tftp_put_active)
+> > +               efi_set_bootdev("Net", "", tftp_filename,
+> > +                               map_sysmem(tftp_load_addr, 0),
+> > +                               net_boot_file_size);
+> >         net_set_state(NETLOOP_SUCCESS);
+> >  }
+> >
+> > --
+> > 2.34.1
+> >
+> 
+> Regards,
+> Simon
