@@ -4,64 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BA3C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:36:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D27EC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 13:41:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6601F87282;
-	Tue, 19 Dec 2023 14:36:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+	by phobos.denx.de (Postfix) with ESMTP id D40668755C;
+	Tue, 19 Dec 2023 14:41:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="BuxAM0CS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mVaxKDFY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4500386FBD; Tue, 19 Dec 2023 14:33:47 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F0680871CC; Tue, 19 Dec 2023 14:41:14 +0100 (CET)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26CE0874ED
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:33:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FEDA8755C
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 14:41:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 7EA51A13E8;
- Tue, 19 Dec 2023 14:33:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :from:from:message-id:mime-version:reply-to:subject:subject:to
- :to; s=mail; bh=H2eYNxvF2Y0DaRMAn+619lRldElamij/MdZAYite9rU=; b=
- BuxAM0CSWPFZxqij+Ua07WtQim41MMG3rtBd3mTiJa94k/w9UYMSTkGch/pTBUi5
- lZ+9ovCACS71YG2xRl2oincytGXlDOTEJIbWo8yo7DFJGiorEehazu/u4+3SZWVT
- OpA2sbFgJkpI+2SrbIs8Y8PbLn5y15bUBCB9SvEHloap/xHlRxIJGZLk4sgNSxmr
- XqQX2uGCcl9GsCaJ3qJ3FP6t3dRW4+oYBfP8QQNY1HiFbbqFgvR7L/za4XCyzdNx
- O8lOGc4wR1j0dFJPL0nOt75ESiIp6u6pqHuG7SDFBy4zWGYcljh4v/nXw4L+fyMZ
- sfvZovRKF7JwNg27HJ4Aa0wMRC/ow5C7ejhHa3+QEO8kAZ6JDa9AWQa8t7o4naH1
- N4HPFvZOfEayGF2GhcC+Y7jXcA8WvwNnovMvk2Swy9+8d43HwDZXlRpGB7l5jbN1
- INP1bBElgc2jqVYFBhZOdUnfAw1+67WjTgAPvHzqyM/Aet8bb8H+nxo65X6oSaPC
- zH0TxeX3sH+tjMKORM9yN15yMdp07MHxDJioVttVlS+PV8+aZbi/QlDPS4wfpue+
- UGUtRVhQyu0fQkYGRTDMVIoODHe+rSPhx6Us6jL3nA/cVuvMLM/KCnyer9Wz3OzD
- BsrD4r/pAd6iQyEBQFqGBHg8RIcjSQljmK1vMezZuQM=
-From: =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?=
- <csokas.bence@prolan.hu>
-Subject: [PATCH v2] arm: spl: Use separate fault handlers instead of a single
- common one
-Date: Tue, 19 Dec 2023 14:33:18 +0100
-Message-ID: <20231219133317.11101-1-csokas.bence@prolan.hu>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50e2ce4fb22so4332470e87.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:41:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1702993270; x=1703598070; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CgVEcH5HFfJ3rQ+xzrx0xM3V5+HGrxMreS2l5VVWoo4=;
+ b=mVaxKDFYfXcZjyHLGQGHefyeufSodQ7tE/Rbwjnv5jt0L4f0Rwzi205lSyGAWdueYA
+ 9y+yp+Stl22vabaTNkqmvNraOQZUPjbvgkbgghtEfwflgAioYO0A8GTjhtXC/Nr8Pn0a
+ +18/LQv31j5aVimH4iDI6H4wtkBJwvMJhbvYjwkgrnShMN0YpDTDiXH8RCGuBB9/eq/o
+ MjNygm3mCJRXXKMOp6hrfZXvSYV4DOTGqDEYEm410Agfi3QJuW16WUCoHT78sXDUnX/+
+ nfDMR1KmjMxRX7kPf36dQsMiu2cpftN/rtP7NlNezpQbUIhIVD7OKwpyvtqcBLDl9Tct
+ hesg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702993270; x=1703598070;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CgVEcH5HFfJ3rQ+xzrx0xM3V5+HGrxMreS2l5VVWoo4=;
+ b=uuaqRjqFXovChGMFE9FxKIa8oy1odXVc5umhB0dzgmlSO/DTEFHZ2J7W/+ndSvmpkR
+ BpvEBCoJpk4pKPhjdqpgmMrZvTTzZCGJ623Y2roBPtjB2giOEIkE51fyI1nK2LUNRTBG
+ wV2JznoEfhwP15sSjZgJz74iVReYk/C1fGwpALJvjvuJF0FvXkgCnJVT/TuQQP9qoSQ5
+ 3YUFP1OdWjrwGZiRmWQnEw7U3lYWQ+xz6jKelnIpdLKCajess5IynAtccsd9VZ/lSBPg
+ Uicge0xMvCXhcFUY0UtOnpzbvDba1tEM/P7EKid8WMxvJceNUTlrYHnBByD5vJEoD1Pm
+ e2yw==
+X-Gm-Message-State: AOJu0YwbYtPFzrI+e64+MrzuBxRFmPyn/3EZLeqzfNcdcCuzh/knc7Kg
+ I785wNpjRjKDXIicRVtUOnmEdwQw8sDmG3N36Co=
+X-Google-Smtp-Source: AGHT+IGgWuaaQM9/aTjDbzamjGVgVb5TrL2vCrRiLgdzNx9cmIF5Yjg/QZI+mfPspa5HyC/dJQJ50bH8Rkluek0PvDo=
+X-Received: by 2002:a05:6512:39d4:b0:50e:3ce2:9264 with SMTP id
+ k20-20020a05651239d400b0050e3ce29264mr1672233lfu.26.1702993270103; Tue, 19
+ Dec 2023 05:41:10 -0800 (PST)
 MIME-Version: 1.0
+References: <20231219122439.31983-1-heinrich.schuchardt@canonical.com>
+ <20231219122439.31983-9-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231219122439.31983-9-heinrich.schuchardt@canonical.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 19 Dec 2023 21:41:04 +0800
+Message-ID: <CAEUhbmV9zSOPaB-avSSGXq_uTAJ+JEiZ2P-5mjz04BWv3SN_jg@mail.gmail.com>
+Subject: Re: [PATCH v3 8/9] configs: qemu: add config fragment for ACPI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-ESET-AS: R=OK; S=0; OP=CALC; TIME=1702992823; VERSION=7966; MC=1964262394;
- ID=56356; TRN=0; CRV=0; IPC=; SP=0; SIPS=0; PI=3; F=0
-X-ESET-Antispam: OK
-X-EsetResult: clean, is OK
-X-EsetId: 37303A29CE70385C6D7C66
-X-Mailman-Approved-At: Tue, 19 Dec 2023 14:36:16 +0100
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,76 +89,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It may be necessary to set breakpoints etc. on a specific fault handler in SPL.
-Add a Kconfig option to separate the different handlers into their own individual infinite loops.
+Hi Heinrich,
 
-Signed-off-by: Csókás Bence <csokas.bence@prolan.hu>
----
+On Tue, Dec 19, 2023 at 8:25=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Provide a configuration fragment to enable ACPI on QEMU.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> v3:
+>         no change
+> v2:
+>         no change
+> ---
+>  MAINTAINERS                         |  1 +
+>  board/emulation/configs/acpi.config |  3 +++
+>  doc/board/emulation/acpi.rst        | 23 +++++++++++++++++++++++
+>  doc/board/emulation/index.rst       |  1 +
+>  4 files changed, 28 insertions(+)
+>  create mode 100644 board/emulation/configs/acpi.config
+>  create mode 100644 doc/board/emulation/acpi.rst
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 25f2bb80de..bf437b253b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -53,6 +53,7 @@ Maintainers List (try to look for most precise areas fi=
+rst)
+>  ACPI:
+>  M:     Simon Glass <sjg@chromium.org>
+>  S:     Maintained
+> +F:     board/emulation/configs/acpi.config
+>  F:     cmd/acpi.c
+>  F:     lib/acpi/
+>
+> diff --git a/board/emulation/configs/acpi.config b/board/emulation/config=
+s/acpi.config
+> new file mode 100644
+> index 0000000000..b7ed811e33
+> --- /dev/null
+> +++ b/board/emulation/configs/acpi.config
+> @@ -0,0 +1,3 @@
+> +CONFIG_CMD_QFW=3Dy
+> +CONFIG_ACPI=3Dy
+> +CONFIG_GENERATE_ACPI_TABLE=3Dy
+> diff --git a/doc/board/emulation/acpi.rst b/doc/board/emulation/acpi.rst
+> new file mode 100644
+> index 0000000000..e1208ca51e
+> --- /dev/null
+> +++ b/doc/board/emulation/acpi.rst
+> @@ -0,0 +1,23 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +ACPI on QEMU
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +QEMU can provide ACPI tables on ARM, RISC-V, and x86.
 
-Notes:
-    Changes in v2:
-    * Change `depends`: add `&& !ARM64 && !CPU_V7M`
-    * Remove `default n`
+ACPI support on RISC-V landed on QEMU in a pretty recent version.
+Would you mind documenting its version?
 
- arch/arm/Kconfig       |  9 +++++++++
- arch/arm/lib/vectors.S | 18 ++++++++++++++++++
- 2 files changed, 27 insertions(+)
+I haven't checked QEMU yet. Is ACPI default on in QEMU for Arm and
+RISC-V virt? If not, we should document QEMU commands to enable ACPI.
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 328e2ddc33..a6ddbad30c 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -79,6 +79,15 @@ config SPL_SYS_NO_VECTOR_TABLE
- 	depends on SPL
- 	bool
- 
-+config SPL_USE_SEPARATE_FAULT_HANDLERS
-+	bool "Use separate fault handlers instead of a single common one"
-+	depends on !SPL_SYS_NO_VECTOR_TABLE && !ARM64 && !CPU_V7M
-+	help
-+	  Instead of a common fault handler, generate a separate one for
-+	  undefined_instruction, software_interrupt, prefetch_abort etc.
-+	  This is for debugging purposes, when you want to set breakpoints
-+	  on them separately.
-+
- config LINUX_KERNEL_IMAGE_HEADER
- 	depends on ARM64
- 	bool
-diff --git a/arch/arm/lib/vectors.S b/arch/arm/lib/vectors.S
-index 7cf7d1636f..a14bca6fb8 100644
---- a/arch/arm/lib/vectors.S
-+++ b/arch/arm/lib/vectors.S
-@@ -138,11 +138,29 @@ _fiq:			.word fiq
- #if !CONFIG_IS_ENABLED(SYS_NO_VECTOR_TABLE)
- 	.align	5
- undefined_instruction:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	undefined_instruction
-+#endif
- software_interrupt:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	software_interrupt
-+#endif
- prefetch_abort:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	prefetch_abort
-+#endif
- data_abort:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	data_abort
-+#endif
- not_used:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	not_used
-+#endif
- irq:
-+#if CONFIG_IS_ENABLED(USE_SEPARATE_FAULT_HANDLERS)
-+	b	irq
-+#endif
- fiq:
- 1:
- 	b	1b			/* hang and never return */
--- 
-2.25.1
+> +
+> +The following settings are needed::
+> +
+> +    CONFIG_CMD_QFW=3Dy
+> +    CONFIG_ACPI=3Dy
+> +    CONFIG_GENERATE_ACPI_TABLE=3Dy
+> +
+> +On x86 these settings are already included in the defconfig files. ARM a=
+nd
+> +RISC-V default to use device-trees.
+> +
+> +Instead of updating the configuration manually you can add the configura=
+tion
+> +fragment `acpi.config` to the make command for initializing the configur=
+ation.
+> +E.g.
+> +
+> +.. code-block:: bash
+> +
+> +    make qemu-riscv64_smode_defconfig acpi.config
+> diff --git a/doc/board/emulation/index.rst b/doc/board/emulation/index.rs=
+t
+> index 932c65adeb..d3d6b8f3d8 100644
+> --- a/doc/board/emulation/index.rst
+> +++ b/doc/board/emulation/index.rst
+> @@ -6,6 +6,7 @@ Emulation
+>  .. toctree::
+>     :maxdepth: 1
+>
+> +   acpi
+>     blkdev
+>     ../../usage/semihosting
+>     qemu-arm
+> --
 
-
+Regards,
+Bin
