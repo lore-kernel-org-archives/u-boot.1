@@ -4,109 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BF8C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 04:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8954FC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 04:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EEF08709C;
-	Tue, 19 Dec 2023 05:15:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DF81387053;
+	Tue, 19 Dec 2023 05:16:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Q+epJdem";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="cKzM3Qfw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E0F287073; Tue, 19 Dec 2023 05:15:58 +0100 (CET)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on2062b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8c::62b])
+ id 656218744F; Tue, 19 Dec 2023 05:16:16 +0100 (CET)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20605.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eb2::605])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BB3686F1E
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:15:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1AEA871A7
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:16:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=AETN8xqaFFOtJoWEz7sNrMfxWM7vnGc198fIuahzqHr4WA7E0FH8FwOaZTrscgUlkOsSbhOKt4skZuV2+O4TPmPDaIbgA4s53iIBmG9ZBszCKdolzsS/vmoUeth9/JWNGo7x5uskYOBenzdZOsIHKl6Zqt6DvQJJ4PjCO/RrTViyREMLNISUcZp4nUsj19qUmzbqHdt/LxdwMbpLwY8fb0SuVUinUSWHVMxOdZcBkjLuGr5mjFfTJbxCsrDxv4gA+gkWXhY5C3rsqgbtgZTjgxxRnjmJ66Gz0F/RNyLntFtI3MQjHfXjRGoyyfgJzyPRSBfv68p3dtQyziE80R7yEQ==
+ b=ZbBC4aJnSuBxof9N+qPmbh3PB6MS7dMhFV5GvIzALblQmNbwf2IkUgTLHnp5HzL1npIgbhi4Mg9w+6/6o/uzmqtlLfQ8kZej4lUx7lHC3pbswV8VyoJeliRHygQGHQAV5cKxZ+6rP1ksA7tdZuBhOgWnqxJ5Mti6e2+dtZSXVViHfwUuhnOpnMERRPbp17cjPRYrIEad8U++5vpoiytKnwF+Ap25HLfCPltI1MW28SD9Zv6KySXiReXGYxBqRUCCEsZVDN8vt9fjMWSaR4K7tSmCs2YbV9LsUiikVRKKiVIjoV3kcYELNbYoatyhJmBBbe0RLyLf1QM5cYr4CWPQAw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IJIqC4VTf6YuRVckix/69RntaS0i1SlfxSDHnPbNOOo=;
- b=iAWNJN+irdyetre39LuO+mmTfuVpAGatLeoW+n53MSWf01yiM4NmOdYWvNe//Fkj3uqltEJ0Il446Q4wZeElReRdlfq6GktvXMo5HEMVMNOAyRdClt3sxwQ/envzG1sNJo4g/sjPGaFy0RXXhn+IXBMZ03qicoZXz6JQGXpEVeD43tegIMpucPLw+lw89whKqeAOc3gW6k6gz6JkvNYym/PHicaS+0SmhU4PJGkE9wY/GnXlZeHYmGgqXAMlMDkiqGEnLFiJPHTIUI3tARKvNRT5vkPFs/ea+f7VpCWip1xIZqgr+wHt/qXlBKxCfQAZunsLoDC1vKEN8xnziQYTkw==
+ bh=ya2HfxmCqowdxsSojb+ZdEuvcXa2QjAuCEJcZ86HZOA=;
+ b=fzqGKc4QSVlC5Ya+DcKRU1yHL0+hFYeogYnzthSg88Uw1coBlkUzZAEpozUu/6tlptmTBhLc9wmdO4icrt4g/QBBmwL6Ki3X2q3aZrWb5Q+Wp2vI3yw7Ue/wm0bOX4AtqIewNtQXTYAD6P7FtxYI003YNZ8i7ib8pvJ46MVNeEBz9fy2EnjneIZmX5R7rSf6plHHw/7m22y6mVRUPQTgcr30wlDp9r+TwrVEyqlw5M9ZSS/sFXIO1nnvZ7LjTzZXKq9JfBj69iQboftfrSxrIQx1FyTZdR+Gturjaq3Pr6cSRaXbrYsSCEeWmnvYY2wJUD8WnWUtdG5BPalk3XZy4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IJIqC4VTf6YuRVckix/69RntaS0i1SlfxSDHnPbNOOo=;
- b=Q+epJdemZqJBKpRdupFcRb2YHF402udtLDySlGlZGM5EOARXQlI8oU3cJkLLWjU8JWlNHq7Ey+ziPETSvQh+Y2VR57pcd++ZLh5EggC5uUZvv764YS/113XrrTZsJGBW6XbAyeF2QhkxboU5VIV68rkzrj3ll86W74jQbRibJn4=
-Received: from DM6PR06CA0034.namprd06.prod.outlook.com (2603:10b6:5:120::47)
- by CY5PR12MB6179.namprd12.prod.outlook.com (2603:10b6:930:24::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.38; Tue, 19 Dec
- 2023 04:15:52 +0000
-Received: from DS1PEPF00017098.namprd05.prod.outlook.com
- (2603:10b6:5:120:cafe::ab) by DM6PR06CA0034.outlook.office365.com
- (2603:10b6:5:120::47) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.37 via Frontend
- Transport; Tue, 19 Dec 2023 04:15:52 +0000
+ bh=ya2HfxmCqowdxsSojb+ZdEuvcXa2QjAuCEJcZ86HZOA=;
+ b=cKzM3QfwRW7Po/6qNfFI8BtWBIsybHPOLvy8Rn6RC5BcEPuMxCwSZHNsg10miJ/jiPDz3NaP/2zQjtdcKxn3iNQ5reaumrv4xvbjWwHfUWgvkjiKLB3xK3jrI7HY5Hr837nIMMuWT1aOtdbyJ2QIDrqIrIG8s9CQXd3nhrOyEaE=
+Received: from BL0PR1501CA0030.namprd15.prod.outlook.com
+ (2603:10b6:207:17::43) by CY5PR12MB6107.namprd12.prod.outlook.com
+ (2603:10b6:930:28::21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.37; Tue, 19 Dec
+ 2023 04:16:08 +0000
+Received: from BL02EPF0001A107.namprd05.prod.outlook.com
+ (2603:10b6:207:17:cafe::f) by BL0PR1501CA0030.outlook.office365.com
+ (2603:10b6:207:17::43) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7046.27 via Frontend
+ Transport; Tue, 19 Dec 2023 04:16:08 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS1PEPF00017098.mail.protection.outlook.com (10.167.18.102) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0001A107.mail.protection.outlook.com (10.167.241.136) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7113.14 via Frontend Transport; Tue, 19 Dec 2023 04:15:51 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7113.14 via Frontend Transport; Tue, 19 Dec 2023 04:16:08 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 18 Dec
- 2023 22:15:51 -0600
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 18 Dec
- 2023 22:15:50 -0600
+ 2023 22:15:52 -0600
 Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
- Transport; Mon, 18 Dec 2023 22:15:49 -0600
+ Transport; Mon, 18 Dec 2023 22:15:51 -0600
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <git@xilinx.com>
-Subject: [PATCH v7 0/6] spi-nor: Add parallel and stacked memories support
-Date: Tue, 19 Dec 2023 09:45:31 +0530
-Message-ID: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
+ <git@xilinx.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Subject: [PATCH v7 1/6] mtd: spi-nor: Add parallel and stacked memories support
+Date: Tue, 19 Dec 2023 09:45:32 +0530
+Message-ID: <20231219041537.1240070-2-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
+References: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|CY5PR12MB6179:EE_
-X-MS-Office365-Filtering-Correlation-Id: 02bce6e9-9f2e-41e4-9703-08dc0049300f
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A107:EE_|CY5PR12MB6107:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3295404b-b2c2-406c-a369-08dc004939d9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wEUYGqO+z7hVMopxwON9SSVSRvQ6WZp4Tq+5/S4ccN6g4df5iLrA9fuQ57fTn+ZMFSHPe9qSpdkILPs8CPz/dd7PIYutvDZEwctDsz3svc/4+ua1gBI9M30JCxZKp9JiZVg/5BJ0N8/ccf3b3hc+7Mq6AU8DSuE+QC7I1eGOIC4yS2xZ8qXBMTRC+1AsKi0OYs6PyArP2Y87NoNvur1baxkD9hnXq3s4x96ptOhEovcD+Dumyi7Du+IN3JCbPnF//GighsjHjFycXRFppaPinQWuxa5k4w2unFprYZhtb3OFlg5aquyG7LLuBrBtHgEF0YiSFXVMzqggJ2UmWSsaQhjkfeo/P1THwqqi3azQrzfAPgF0WsnCu3YZuvPQMyydO38MV9OqFRN8yK96PiUqHFm+ap9z1JvSpz2w6ogIejFCrhzOrIyWxjba5TsXECw8bSWohjHc6J6G6ypDql6J903WKu3tBmTedIuMeJmI+JwNG+pt86GYdh4YsXFDWEZLy0c2wpzzEBAQktJnLVC7KwzwGUhbokDLTUjJAFxnIZNtRaJ6Ol+9krvW0Jev7CvetkRbR1MomRi6GK6FcBE3I/bvcFvTCDoPy0ohjnxFHZ63TDNFmqGGMjWsq9uV0LiTWksxUbA73nfDBBowtXRQOjo1wp3Q8oEKoQa42a1oSOqwiKY48XPTMnds3r9k3Q84EPuN5ckiloAINDsJirLnVuvrvHh5kJhUssTZUMoY4WTkiArbYB3kyQKjWYF1hXr3sLVQgZTPEWRBAcXJeo/b7g==
+X-Microsoft-Antispam-Message-Info: JoN1STudPBzTguz5egKV3Gu2GMAFDFTQE8lnLgF3pAzbDlUTcsHSMPVZ9WJatK+clcDKfMlPghJ+26Cc2rlYPNOt9FUeWyjUHc1gSi0lOMd+BRMOMo7af1UimPEmFKZID8Ew4RHOd8k5O69bmSFWbrvSCZxwC+iyKM+SlxQY6eXQquTFm3e4DZJ4DVfjN+qQBPdW2DotOptaiQUbe+uRFfqe1WS3M+NCrQTBZHAlpINGmyhzJKGD9AhZuADoRwmx0TOFHlOMWgLovuXeFAJSjCn2CLRoXHnHlW/DdHV1muMXq+hzjRJlM4cGbNA1EV2Btw4vihLM/S7SBGhruqvvBw8BlQehQUR+X3pxR96aiy7MRaDulvS9Xx05AKbB//KK3FsHMsjl+Vop6vDBHPkNRAnS8oLiyWpftPdSDAcFgFYXwAPHvlwIJZaoOcmSbDbD1kO6885BCg5kHYUwWQjWvt2qe8woNiVtaVXMMvDaVJq60j1eMOL8LaqGU5KYZfgzZzEE6+khom+dLY+HigcRW8fZTFy9Ja6PWs1cphnyain8f1GIpUDBdqqnefVwPyfS/jMOh2f9wLaoXEuXjERnQ2zmld1HVI7S75QRJmecFO/dhqbPBOsgNsOu4/BhdTn7i4/P9ZXUzhC/S2qKMRNVdIMuMsrtXrgO+JgjJnUahSJv0hoiJkoogtn/NN/pJosOtGgy6dpezLMk0R8mSfhNkIM63Ctfiw1I1v3zYCypRotrqJsLH+3Dh2ffqOhudEEN4ZKqoNatb8kV9UZAqNf/9g==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(376002)(346002)(396003)(39860400002)(230922051799003)(1800799012)(64100799003)(82310400011)(186009)(451199024)(46966006)(40470700004)(36840700001)(40480700001)(40460700003)(316002)(426003)(6916009)(336012)(2616005)(107886003)(6666004)(26005)(1076003)(2906002)(70206006)(4326008)(54906003)(70586007)(5660300002)(36860700001)(83380400001)(478600001)(86362001)(41300700001)(8676002)(8936002)(356005)(47076005)(81166007)(36756003)(82740400003)(36900700001);
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(136003)(346002)(376002)(396003)(230922051799003)(64100799003)(451199024)(82310400011)(186009)(1800799012)(40470700004)(46966006)(36840700001)(82740400003)(40460700003)(2906002)(30864003)(356005)(81166007)(36756003)(41300700001)(86362001)(70206006)(70586007)(54906003)(6916009)(336012)(83380400001)(426003)(6666004)(40480700001)(2616005)(1076003)(478600001)(26005)(36860700001)(316002)(4326008)(5660300002)(8676002)(8936002)(47076005)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 04:15:51.7927 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02bce6e9-9f2e-41e4-9703-08dc0049300f
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 04:16:08.2476 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3295404b-b2c2-406c-a369-08dc004939d9
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017098.namprd05.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A107.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6179
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6107
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,98 +121,583 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series adds support for Xilinx qspi parallel and stacked memeories.
+From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
 
-In parallel mode, the current implementation assumes that a maximum of two flashes are connected. The QSPI controller splits the data evenly between both the flashes so, both the flashes that are connected in parallel mode should be identical.
+In parallel mode, the current implementation assumes that a maximum of
+two flashes are connected. The QSPI controller splits the data evenly
+between both the flashes so, both the flashes that are connected in
+parallel mode should be identical.
 During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
 nor->flags.
 
-In stacked mode the current implementation assumes that a maximum of two flashes are connected and both the flashes are of same make but can differ in sizes. So, except the sizes all other flash parameters of both the flashes are identical.
+In stacked mode the current implementation assumes that a maximum of two
+flashes are connected and both the flashes are of same make but can
+differ in sizes. So, except the sizes all other flash parameters of both
+the flashes are identical
 
-Spi-nor will pass on the appropriate flash select flag to low level driver, and it will select pass all the data to that particular flash.
+Spi-nor will pass on the appropriate flash select flag to low level
+driver, and it will select pass all the data to that particular flash.
 
-Write operation in parallel mode are performed in page size * 2 chunks as each write operation results in writing both the flashes. For doubling the address space each operation is performed at addr/2 flash offset, where addr is the address specified by the user.
+Write operation in parallel mode are performed in page size * 2 chunks as
+each write operation results in writing both the flashes. For doubling
+the address space each operation is performed at addr/2 flash offset,
+where addr is the address specified by the user.
 
-Similarly for read and erase operations it will read from both flashes, so size and offset are divided by 2 and send to flash.
+Similarly for read and erase operations it will read from both flashes,
+so size and offset are divided by 2 and send to flash.
 
-Changes in v2:
-- Fixed the compilation issues.
-Changes in v3:
-- Fixed the CI issues.
-Changes in v4:
-- Removed the dio,dummy_bytes variables from zynq_qspi driver.
-- Fix the compilation issue by including the DM_SPI config.
-Changes in v5:
-- Fixed the issue reported by buildman.
-Changes in v6:
-- Fixed the issues reported while running the sandbox test cases.
-Changes in v7:
-- Fixed the issues reported while running these da850evm_defconfig,
-  imx28_xea_defconfig configs.
-- Fixed the issue when DM_SPI config is disabled.
-- Fixed the issue while running the sandbox_noinst_defconfig with spl
-  ./spl/u-boot-spl -d arch/sandbox/dts/test.dtb
-   jedec_spi_nor spi.bin@0: has no valid 'reg' property (-12)
-   jedec_spi_nor spi.bin@1: has no valid 'reg' property (-12)
-   ### ERROR ### Please RESET the board ###
+Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/mtd/spi/spi-nor-core.c | 293 +++++++++++++++++++++++++++++----
+ include/linux/mtd/spi-nor.h    |  12 ++
+ include/spi.h                  |  11 ++
+ 3 files changed, 288 insertions(+), 28 deletions(-)
 
-Ashok Reddy Soma (4):
-  mtd: spi-nor: Add parallel and stacked memories support
-  mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
-  mtd: spi-nor: Add parallel and stacked memories support in read_bar
-    and write_bar
-  spi: spi-uclass: Read chipselect and restrict capabilities
-
-Venkatesh Yadav Abbarapu (2):
-  spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
-  spi: zynq_qspi: Add parallel memories support in QSPI driver
-
- drivers/mtd/spi/sandbox.c      |   2 +-
- drivers/mtd/spi/spi-nor-core.c | 398 ++++++++++++++++++++++++++++-----
- drivers/spi/altera_spi.c       |   4 +-
- drivers/spi/atcspi200_spi.c    |   2 +-
- drivers/spi/ath79_spi.c        |   2 +-
- drivers/spi/atmel_spi.c        |   6 +-
- drivers/spi/bcm63xx_hsspi.c    |  42 ++--
- drivers/spi/bcm63xx_spi.c      |   6 +-
- drivers/spi/bcmbca_hsspi.c     |  34 +--
- drivers/spi/cf_spi.c           |   6 +-
- drivers/spi/davinci_spi.c      |   8 +-
- drivers/spi/fsl_dspi.c         |  18 +-
- drivers/spi/fsl_espi.c         |   4 +-
- drivers/spi/fsl_qspi.c         |   4 +-
- drivers/spi/gxp_spi.c          |   2 +-
- drivers/spi/mpc8xx_spi.c       |   4 +-
- drivers/spi/mpc8xxx_spi.c      |  10 +-
- drivers/spi/mscc_bb_spi.c      |   4 +-
- drivers/spi/mxc_spi.c          |   6 +-
- drivers/spi/npcm_fiu_spi.c     |  14 +-
- drivers/spi/nxp_fspi.c         |   2 +-
- drivers/spi/octeon_spi.c       |   2 +-
- drivers/spi/omap3_spi.c        |   4 +-
- drivers/spi/pic32_spi.c        |   2 +-
- drivers/spi/rk_spi.c           |   4 +-
- drivers/spi/rockchip_sfc.c     |   2 +-
- drivers/spi/spi-aspeed-smc.c   |  28 +--
- drivers/spi/spi-mxic.c         |   6 +-
- drivers/spi/spi-qup.c          |   4 +-
- drivers/spi/spi-sifive.c       |   6 +-
- drivers/spi/spi-sn-f-ospi.c    |   2 +-
- drivers/spi/spi-sunxi.c        |   6 +-
- drivers/spi/spi-synquacer.c    |   4 +-
- drivers/spi/spi-uclass.c       |  33 ++-
- drivers/spi/stm32_qspi.c       |   2 +-
- drivers/spi/stm32_spi.c        |   4 +-
- drivers/spi/ti_qspi.c          |  14 +-
- drivers/spi/xilinx_spi.c       |   4 +-
- drivers/spi/zynq_qspi.c        | 119 ++++++++--
- drivers/spi/zynq_spi.c         |   6 +-
- drivers/spi/zynqmp_gqspi.c     | 141 ++++++++++--
- include/linux/mtd/spi-nor.h    |  12 +
- include/spi.h                  |  23 +-
- lib/acpi/acpi_device.c         |   2 +-
- 44 files changed, 781 insertions(+), 227 deletions(-)
-
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index 9a1801ba93..08319a881d 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -639,12 +639,17 @@ static u8 spi_nor_convert_3to4_erase(u8 opcode)
+ static void spi_nor_set_4byte_opcodes(struct spi_nor *nor,
+ 				      const struct flash_info *info)
+ {
++	bool shift = 0;
++
++	if (nor->flags & SNOR_F_HAS_PARALLEL)
++		shift = 1;
++
+ 	/* Do some manufacturer fixups first */
+ 	switch (JEDEC_MFR(info)) {
+ 	case SNOR_MFR_SPANSION:
+ 		/* No small sector erase for 4-byte command set */
+ 		nor->erase_opcode = SPINOR_OP_SE;
+-		nor->mtd.erasesize = info->sector_size;
++		nor->mtd.erasesize = info->sector_size << shift;
+ 		break;
+ 
+ 	default:
+@@ -965,8 +970,8 @@ static int spi_nor_erase_sector(struct spi_nor *nor, u32 addr)
+ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ {
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
++	u32 addr, len, rem, offset;
+ 	bool addr_known = false;
+-	u32 addr, len, rem;
+ 	int ret, err;
+ 
+ 	dev_dbg(nor->dev, "at 0x%llx, len %lld\n", (long long)instr->addr,
+@@ -991,6 +996,19 @@ static int spi_nor_erase(struct mtd_info *mtd, struct erase_info *instr)
+ 			ret = -EINTR;
+ 			goto erase_err;
+ 		}
++
++		offset = addr;
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			offset /= 2;
++
++		if (nor->flags & SNOR_F_HAS_STACKED) {
++			if (offset >= (mtd->size / 2)) {
++				offset = offset - (mtd->size / 2);
++				nor->spi->flags |= SPI_XFER_U_PAGE;
++			} else {
++				nor->spi->flags &= ~SPI_XFER_U_PAGE;
++			}
++		}
+ #ifdef CONFIG_SPI_FLASH_BAR
+ 		ret = write_bar(nor, addr);
+ 		if (ret < 0)
+@@ -1396,6 +1414,9 @@ static const struct flash_info *spi_nor_read_id(struct spi_nor *nor)
+ 	u8			id[SPI_NOR_MAX_ID_LEN];
+ 	const struct flash_info	*info;
+ 
++	if (nor->flags & SNOR_F_HAS_PARALLEL)
++		nor->spi->flags |= SPI_XFER_LOWER;
++
+ 	tmp = nor->read_reg(nor, SPINOR_OP_RDID, id, SPI_NOR_MAX_ID_LEN);
+ 	if (tmp < 0) {
+ 		dev_dbg(nor->dev, "error %d reading JEDEC ID\n", tmp);
+@@ -1420,28 +1441,66 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ {
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+ 	int ret;
++	u32 offset = from;
++	u32 stack_shift = 0;
++	u32 read_len = 0;
++	u32 rem_bank_len = 0;
++	u8 bank;
++	u8 is_ofst_odd = 0;
+ 
+ 	dev_dbg(nor->dev, "from 0x%08x, len %zd\n", (u32)from, len);
+ 
++	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (offset & 1)) {
++	    /* We can hit this case when we use file system like ubifs */
++		from = (loff_t)(from - 1);
++		len = (size_t)(len + 1);
++		is_ofst_odd = 1;
++	}
++
+ 	while (len) {
+-		loff_t addr = from;
+-		size_t read_len = len;
++		if (nor->addr_width == 3) {
++			if (nor->flags & SNOR_F_HAS_PARALLEL) {
++				bank = (u32)from / (SZ_16M << 0x01);
++				rem_bank_len = ((SZ_16M << 0x01) *
++					(bank + 1)) - from;
++			} else {
++				bank = (u32)from / SZ_16M;
++				rem_bank_len = (SZ_16M * (bank + 1)) - from;
++			}
++		}
++		offset = from;
++
++		if (nor->flags & SNOR_F_HAS_STACKED) {
++			stack_shift = 1;
++			if (offset >= (mtd->size / 2)) {
++				offset = offset - (mtd->size / 2);
++				nor->spi->flags |= SPI_XFER_U_PAGE;
++			} else {
++				nor->spi->flags &= ~SPI_XFER_U_PAGE;
++			}
++		}
+ 
+-#ifdef CONFIG_SPI_FLASH_BAR
+-		u32 remain_len;
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			offset /= 2;
+ 
+-		ret = write_bar(nor, addr);
+-		if (ret < 0)
+-			return log_ret(ret);
+-		remain_len = (SZ_16M * (nor->bank_curr + 1)) - addr;
++		if (nor->addr_width == 3) {
++#ifdef CONFIG_SPI_FLASH_BAR
++			ret = write_bar(nor, offset);
++			if (ret < 0)
++				return log_ret(ret);
++#endif
++		}
+ 
+-		if (len < remain_len)
++		if (len < rem_bank_len)
+ 			read_len = len;
+ 		else
+-			read_len = remain_len;
+-#endif
++			read_len = rem_bank_len;
++
++		ret = spi_nor_wait_till_ready(nor);
++		if (ret)
++			goto read_err;
+ 
+-		ret = nor->read(nor, addr, read_len, buf);
++		ret = nor->read(nor, offset, read_len, buf);
+ 		if (ret == 0) {
+ 			/* We shouldn't see 0-length reads */
+ 			ret = -EIO;
+@@ -1450,8 +1509,15 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 		if (ret < 0)
+ 			goto read_err;
+ 
+-		*retlen += ret;
+-		buf += ret;
++		if (is_ofst_odd == 1) {
++			memcpy(buf, (buf + 1), (len - 1));
++			*retlen += (ret - 1);
++			buf += ret - 1;
++			is_ofst_odd = 0;
++		} else {
++			*retlen += ret;
++			buf += ret;
++		}
+ 		from += ret;
+ 		len -= ret;
+ 	}
+@@ -1746,6 +1812,7 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 	struct spi_nor *nor = mtd_to_spi_nor(mtd);
+ 	size_t page_offset, page_remain, i;
+ 	ssize_t ret;
++	u32 offset;
+ 
+ #ifdef CONFIG_SPI_FLASH_SST
+ 	/* sst nor chips use AAI word program */
+@@ -1755,6 +1822,27 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 
+ 	dev_dbg(nor->dev, "to 0x%08x, len %zd\n", (u32)to, len);
+ 
++	if (!len)
++		return 0;
++
++	/*
++	 * Cannot write to odd offset in parallel mode,
++	 * so write 2 bytes first
++	 */
++	if ((nor->flags & SNOR_F_HAS_PARALLEL) && (to & 1)) {
++		u8 two[2] = {0xff, buf[0]};
++		size_t local_retlen;
++
++		ret = spi_nor_write(mtd, to & ~1, 2, &local_retlen, two);
++		if (ret < 0)
++			return ret;
++
++		*retlen += 1; /* We've written only one actual byte */
++		++buf;
++		--len;
++		++to;
++	}
++
+ 	for (i = 0; i < len; ) {
+ 		ssize_t written;
+ 		loff_t addr = to + i;
+@@ -1772,17 +1860,37 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 
+ 			page_offset = do_div(aux, nor->page_size);
+ 		}
+-		/* the size of data remaining on the first page */
+-		page_remain = min_t(size_t,
+-				    nor->page_size - page_offset, len - i);
+ 
++		offset = (to + i);
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			offset /= 2;
++
++		if (nor->flags & SNOR_F_HAS_STACKED) {
++			if (offset >= (mtd->size / 2)) {
++				offset = offset - (mtd->size / 2);
++				nor->spi->flags |= SPI_XFER_U_PAGE;
++			} else {
++				nor->spi->flags &= ~SPI_XFER_U_PAGE;
++			}
++		}
++
++		if (nor->addr_width == 3) {
+ #ifdef CONFIG_SPI_FLASH_BAR
+-		ret = write_bar(nor, addr);
+-		if (ret < 0)
+-			return ret;
++			ret = write_bar(nor, offset);
++			if (ret < 0)
++				return ret;
+ #endif
++		}
++
++		page_remain = min_t(size_t, nor->page_size - page_offset,
++				    len - i);
++
++		ret = spi_nor_wait_till_ready(nor);
++		if (ret)
++			goto write_err;
++
+ 		write_enable(nor);
+-		ret = nor->write(nor, addr, page_remain, buf + i);
++		ret = nor->write(nor, offset, page_remain, buf + i);
+ 		if (ret < 0)
+ 			goto write_err;
+ 		written = ret;
+@@ -1790,6 +1898,11 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 		ret = spi_nor_wait_till_ready(nor);
+ 		if (ret)
+ 			goto write_err;
++
++		ret = write_disable(nor);
++		if (ret)
++			goto write_err;
++
+ 		*retlen += written;
+ 		i += written;
+ 	}
+@@ -1830,6 +1943,10 @@ static int macronix_quad_enable(struct spi_nor *nor)
+ 	if (ret)
+ 		return ret;
+ 
++	ret = write_disable(nor);
++	if (ret)
++		return ret;
++
+ 	ret = read_sr(nor);
+ 	if (!(ret > 0 && (ret & SR_QUAD_EN_MX))) {
+ 		dev_err(nor->dev, "Macronix Quad bit not set\n");
+@@ -1891,7 +2008,7 @@ static int spansion_quad_enable_volatile(struct spi_nor *nor, u32 addr_base,
+ 		return -EINVAL;
+ 	}
+ 
+-	return 0;
++	return write_disable(nor);
+ }
+ #endif
+ 
+@@ -2067,6 +2184,10 @@ static int spi_nor_read_sfdp(struct spi_nor *nor, u32 addr,
+ 	nor->read_dummy = 8;
+ 
+ 	while (len) {
++		/* Both chips are identical, so should be the SFDP data */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			nor->spi->flags |= SPI_XFER_LOWER;
++
+ 		ret = nor->read(nor, addr, len, (u8 *)buf);
+ 		if (!ret || ret > len) {
+ 			ret = -EIO;
+@@ -2731,6 +2852,13 @@ static int spi_nor_init_params(struct spi_nor *nor,
+ 			       const struct flash_info *info,
+ 			       struct spi_nor_flash_parameter *params)
+ {
++#if CONFIG_IS_ENABLED(DM_SPI)
++	struct udevice *dev = nor->spi->dev;
++	u64 flash_size[SNOR_FLASH_CNT_MAX] = {0};
++	u32 idx = 0, i = 0;
++	int rc;
++#endif
++
+ 	/* Set legacy flash parameters as default. */
+ 	memset(params, 0, sizeof(*params));
+ 
+@@ -2849,6 +2977,62 @@ static int spi_nor_init_params(struct spi_nor *nor,
+ 		}
+ 	}
+ 
++#if CONFIG_IS_ENABLED(DM_SPI)
++	/*
++	 * The flashes that are connected in stacked mode should be of same make.
++	 * Except the flash size all other properties are identical for all the
++	 * flashes connected in stacked mode.
++	 * The flashes that are connected in parallel mode should be identical.
++	 */
++	while (i < SNOR_FLASH_CNT_MAX) {
++		rc = ofnode_read_u64_index(dev_ofnode(dev), "stacked-memories",
++					   idx, &flash_size[i]);
++		if (rc == -EINVAL) {
++			break;
++		} else if (rc == -EOVERFLOW) {
++			idx++;
++		} else {
++			idx++;
++			i++;
++			if (!(nor->flags & SNOR_F_HAS_STACKED))
++				nor->flags |= SNOR_F_HAS_STACKED;
++			if (!(nor->spi->flags & SPI_XFER_STACKED))
++				nor->spi->flags |= SPI_XFER_STACKED;
++		}
++	}
++
++	i = 0;
++	idx = 0;
++	while (i < SNOR_FLASH_CNT_MAX) {
++		rc = ofnode_read_u64_index(dev_ofnode(dev), "parallel-memories",
++					   idx, &flash_size[i]);
++		if (rc == -EINVAL) {
++			break;
++		} else if (rc == -EOVERFLOW) {
++			idx++;
++		} else {
++			idx++;
++			i++;
++			if (!(nor->flags & SNOR_F_HAS_PARALLEL))
++				nor->flags |= SNOR_F_HAS_PARALLEL;
++		}
++	}
++
++	if (nor->flags & (SNOR_F_HAS_STACKED | SNOR_F_HAS_PARALLEL)) {
++		params->size = 0;
++		for (idx = 0; idx < SNOR_FLASH_CNT_MAX; idx++)
++			params->size += flash_size[idx];
++	}
++	/*
++	 * In parallel-memories the erase operation is
++	 * performed on both the flashes simultaneously
++	 * so, double the erasesize.
++	 */
++	if (nor->flags & SNOR_F_HAS_PARALLEL) {
++		nor->mtd.erasesize <<= 1;
++		params->page_size <<= 1;
++	}
++#endif
+ 	spi_nor_post_sfdp_fixups(nor, params);
+ 
+ 	return 0;
+@@ -3163,16 +3347,54 @@ static int spi_nor_select_erase(struct spi_nor *nor,
+ 	/* prefer "small sector" erase if possible */
+ 	if (info->flags & SECT_4K) {
+ 		nor->erase_opcode = SPINOR_OP_BE_4K;
+-		mtd->erasesize = 4096;
++		/*
++		 * In parallel-memories the erase operation is
++		 * performed on both the flashes simultaneously
++		 * so, double the erasesize.
++		 */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			mtd->erasesize = 4096 * 2;
++		else
++			mtd->erasesize = 4096;
+ 	} else if (info->flags & SECT_4K_PMC) {
+ 		nor->erase_opcode = SPINOR_OP_BE_4K_PMC;
+-		mtd->erasesize = 4096;
++		/*
++		 * In parallel-memories the erase operation is
++		 * performed on both the flashes simultaneously
++		 * so, double the erasesize.
++		 */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			mtd->erasesize = 4096 * 2;
++		else
++			mtd->erasesize = 4096;
+ 	} else
+ #endif
+ 	{
+ 		nor->erase_opcode = SPINOR_OP_SE;
+-		mtd->erasesize = info->sector_size;
++		/*
++		 * In parallel-memories the erase operation is
++		 * performed on both the flashes simultaneously
++		 * so, double the erasesize.
++		 */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			mtd->erasesize = info->sector_size * 2;
++		else
++			mtd->erasesize = info->sector_size;
+ 	}
++
++	if ((JEDEC_MFR(info) == SNOR_MFR_SST) && info->flags & SECT_4K) {
++		nor->erase_opcode = SPINOR_OP_BE_4K;
++		/*
++		 * In parallel-memories the erase operation is
++		 * performed on both the flashes simultaneously
++		 * so, double the erasesize.
++		 */
++		if (nor->flags & SNOR_F_HAS_PARALLEL)
++			mtd->erasesize = 4096 * 2;
++		else
++			mtd->erasesize = 4096;
++	}
++
+ 	return 0;
+ }
+ 
+@@ -3872,6 +4094,9 @@ static int spi_nor_init(struct spi_nor *nor)
+ {
+ 	int err;
+ 
++	if (nor->flags & SNOR_F_HAS_PARALLEL)
++		nor->spi->flags |= SPI_NOR_ENABLE_MULTI_CS;
++
+ 	err = spi_nor_octal_dtr_enable(nor);
+ 	if (err) {
+ 		dev_dbg(nor->dev, "Octal DTR mode not supported\n");
+@@ -4038,6 +4263,7 @@ int spi_nor_scan(struct spi_nor *nor)
+ 	struct spi_slave *spi = nor->spi;
+ 	int ret;
+ 	int cfi_mtd_nb = 0;
++	bool shift = 0;
+ 
+ #ifdef CONFIG_FLASH_CFI_MTD
+ 	cfi_mtd_nb = CFI_FLASH_BANKS;
+@@ -4175,7 +4401,9 @@ int spi_nor_scan(struct spi_nor *nor)
+ 		nor->addr_width = 3;
+ 	}
+ 
+-	if (nor->addr_width == 3 && mtd->size > SZ_16M) {
++	if (nor->flags & (SNOR_F_HAS_PARALLEL | SNOR_F_HAS_STACKED))
++		shift = 1;
++	if (nor->addr_width == 3 && (mtd->size >> shift) > SZ_16M) {
+ #ifndef CONFIG_SPI_FLASH_BAR
+ 		/* enable 4-byte addressing if the device exceeds 16MiB */
+ 		nor->addr_width = 4;
+@@ -4185,6 +4413,7 @@ int spi_nor_scan(struct spi_nor *nor)
+ #else
+ 	/* Configure the BAR - discover bank cmds and read current bank */
+ 	nor->addr_width = 3;
++	set_4byte(nor, info, 0);
+ 	ret = read_bar(nor, info);
+ 	if (ret < 0)
+ 		return ret;
+@@ -4202,6 +4431,14 @@ int spi_nor_scan(struct spi_nor *nor)
+ 	if (ret)
+ 		return ret;
+ 
++	if (nor->flags & SNOR_F_HAS_STACKED) {
++		nor->spi->flags |= SPI_XFER_U_PAGE;
++		ret = spi_nor_init(nor);
++		if (ret)
++			return ret;
++		nor->spi->flags &= ~SPI_XFER_U_PAGE;
++	}
++
+ 	nor->rdsr_dummy = params.rdsr_dummy;
+ 	nor->rdsr_addr_nbytes = params.rdsr_addr_nbytes;
+ 	nor->name = info->name;
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index 2861b73edb..e8033a2703 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -13,6 +13,9 @@
+ #include <linux/mtd/mtd.h>
+ #include <spi-mem.h>
+ 
++/* In parallel configuration enable multiple CS */
++#define SPI_NOR_ENABLE_MULTI_CS	(BIT(0) | BIT(1))
++
+ /*
+  * Manufacturer IDs
+  *
+@@ -185,6 +188,12 @@
+ /* Status Register 2 bits. */
+ #define SR2_QUAD_EN_BIT7	BIT(7)
+ 
++/*
++ * Maximum number of flashes that can be connected
++ * in stacked/parallel configuration
++ */
++#define SNOR_FLASH_CNT_MAX	2
++
+ /* For Cypress flash. */
+ #define SPINOR_OP_RD_ANY_REG			0x65	/* Read any register */
+ #define SPINOR_OP_WR_ANY_REG			0x71	/* Write any register */
+@@ -298,6 +307,8 @@ enum spi_nor_option_flags {
+ 	SNOR_F_BROKEN_RESET	= BIT(6),
+ 	SNOR_F_SOFT_RESET	= BIT(7),
+ 	SNOR_F_IO_MODE_EN_VOLATILE = BIT(8),
++	SNOR_F_HAS_STACKED	= BIT(9),
++	SNOR_F_HAS_PARALLEL	= BIT(10),
+ };
+ 
+ struct spi_nor;
+@@ -555,6 +566,7 @@ struct spi_nor {
+ 	u8			bank_read_cmd;
+ 	u8			bank_write_cmd;
+ 	u8			bank_curr;
++	u8			upage_prev;
+ #endif
+ 	enum spi_nor_protocol	read_proto;
+ 	enum spi_nor_protocol	write_proto;
+diff --git a/include/spi.h b/include/spi.h
+index 1bc18e6552..56b8c26e9d 100644
+--- a/include/spi.h
++++ b/include/spi.h
+@@ -39,6 +39,15 @@
+ 
+ #define SPI_DEFAULT_WORDLEN	8
+ 
++/* SPI transfer flags */
++#define SPI_XFER_STRIPE	(1 << 6)
++#define SPI_XFER_MASK	(3 << 8)
++#define SPI_XFER_LOWER	(1 << 8)
++#define SPI_XFER_UPPER	(2 << 8)
++
++/* Max no. of CS supported per spi device */
++#define SPI_CS_CNT_MAX	2
++
+ /**
+  * struct dm_spi_bus - SPI bus info
+  *
+@@ -156,6 +165,8 @@ struct spi_slave {
+ #define SPI_XFER_BEGIN		BIT(0)	/* Assert CS before transfer */
+ #define SPI_XFER_END		BIT(1)	/* Deassert CS after transfer */
+ #define SPI_XFER_ONCE		(SPI_XFER_BEGIN | SPI_XFER_END)
++#define SPI_XFER_U_PAGE		BIT(4)
++#define SPI_XFER_STACKED	BIT(5)
+ };
+ 
+ /**
 -- 
 2.25.1
 
