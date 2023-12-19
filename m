@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E04C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 15:05:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0807C46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 15:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD7EB875FC;
-	Tue, 19 Dec 2023 16:04:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5113187600;
+	Tue, 19 Dec 2023 16:04:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SU12CYsI";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="O9feCxll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FEB8876A4; Tue, 19 Dec 2023 16:04:32 +0100 (CET)
+ id 1155187725; Tue, 19 Dec 2023 16:04:34 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57A17874A5
+ by phobos.denx.de (Postfix) with ESMTPS id 58AB1876A8
  for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 16:04:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
@@ -31,28 +31,28 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id A15EF42F73; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 0907442F72; 
  Tue, 19 Dec 2023 15:04:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1702998264;
- bh=p9hw3fsKLNo9RRD0UsNGZe0bxBRkDefcKl0knRqmff8=;
+ bh=4K79tdNxrOVuOEbPvE7tP7D1phv7HnVlbSTaPbx9nMc=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=SU12CYsIe+xe6hlV+mlwkle+pi6wF5Fi/IX5WqpRfs1JFfY/6kanvty55rzBsHx5m
- cpEin1I9RDnWrYdicG9ywKDifesap1w94XLwhycL7aqNS607br7mivaKFgcwn3ySzh
- Xni3+wjEEVcpGieqf2WG98WpcNcFMnSbwBFg7GR2X5AJt/NItBYun7XyoVe+ZfIbgr
- Te0nKsOL5NXkuGTCcx0AUEiJGQH7qc6qNXf4BaXyUGzmvN3mD3LETASLpQkMEm0ema
- gTdh2HJnuX/5cKtct+NY/QOTqPkJ3EgSSR1HkH+R9/jHqVPDMVyrW6rAyKqrhqaXIU
- hqwgiiw4p8TWQ==
+ b=O9feCxll6bEg9nmZEIWPsNjv91wCpQS2grlrtAAV6cb0RwsDRsu+0sDbi5K4SKW9p
+ dWJuCS3ZU7a+EWxm86RgGgAe+VLfE48RbO3Ye8NiITfK7f7AK+HuV4B6WxOe3teGwf
+ 7dnwngduliVimMN7QPnXQ17UrdNjI7CMnS0qlhnzpSmkJKZ6XKUitzViGd/5yk2RAW
+ fXj4w0fQHLSO7RCL1JJLmjrye+/QLyKB1SGj0vUIaUFfGsQpnhT1saj+ije8QiCeig
+ 6U7RqpTn/OcCREJkbJzq0l37MqXObVvEf9FXEoSwlOcWqYOzQ+wZwo0mBZnlJElV/m
+ AGGAY+l/taT3w==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v4 7/9] riscv: allow usage of ACPI
-Date: Tue, 19 Dec 2023 16:04:06 +0100
-Message-Id: <20231219150408.10949-8-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v4 6/9] riscv: add support for QEMU firmware tables
+Date: Tue, 19 Dec 2023 16:04:05 +0100
+Message-Id: <20231219150408.10949-7-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
 References: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
@@ -74,10 +74,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select CONFIG_SUPPORT_ACPI to allow usage of ACPI tables with RISC-V.
+Enable the QEMU firmware interface if ACPI tables are to be supported on
+the QEMU platform.
+
+Enable the QFW MMIO interface if the QEMU firmware interface is enabled.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 v4:
 	no change
@@ -86,21 +90,22 @@ v3:
 v2:
 	no change
 ---
- arch/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/emulation/qemu-riscv/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 2e0528d819..c23d57e4c4 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -108,6 +108,7 @@ config PPC
- config RISCV
- 	bool "RISC-V architecture"
- 	select CREATE_ARCH_SYMLINK
-+	select SUPPORT_ACPI
- 	select SUPPORT_OF_CONTROL
- 	select OF_CONTROL
- 	select DM
+diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
+index cdd0d0d95f..d5f302ffda 100644
+--- a/board/emulation/qemu-riscv/Kconfig
++++ b/board/emulation/qemu-riscv/Kconfig
+@@ -33,6 +33,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	def_bool y
+ 	select GENERIC_RISCV
+ 	select SUPPORT_SPL
++	select QFW if ACPI
++	select QFW_MMIO if QFW
+ 	imply AHCI
+ 	imply SMP
+ 	imply BOARD_LATE_INIT
 -- 
 2.40.1
 
