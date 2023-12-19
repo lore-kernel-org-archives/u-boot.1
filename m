@@ -4,119 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC0A3C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCBDC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:47:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1648486FBD;
-	Tue, 19 Dec 2023 09:40:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 1596586FF7;
+	Tue, 19 Dec 2023 09:47:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="ytOkps4L";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Jrea0Cu/";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="ytOkps4L";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="Jrea0Cu/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="N6wIfQaG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F56286FB8; Tue, 19 Dec 2023 09:40:45 +0100 (CET)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de
- [IPv6:2a07:de40:b251:101:10:150:64:2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CF0286FBD
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:40:42 +0100 (CET)
+ id 30C6687073; Tue, 19 Dec 2023 09:47:39 +0100 (CET)
+Received: from m1397.mail.163.com (m1397.mail.163.com [220.181.13.97])
+ by phobos.denx.de (Postfix) with ESMTP id 70FFD86FB8
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:47:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 9400C1F7B6;
- Tue, 19 Dec 2023 08:40:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1702975241; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=kQcwKt+4UoS9LJx8KVXvgf8dXiG7xNgLqbMRyDVwdnc=;
- b=ytOkps4LEUujda3H8XlrdGNXTfMV5WGAj3xGhBxbsd1z8+u6hVqDUdXw8FpEllsoJB1grR
- 2oqZGVJHCMJSQiE7kHNB3x6YwU8XeYI94cJFW7L9TY8DoD8FKdBOdHFRlV1Eh3KNEX7mfK
- VikO+0J4Yrw95gLDI/YLaTfnBQRwpZA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1702975241;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=kQcwKt+4UoS9LJx8KVXvgf8dXiG7xNgLqbMRyDVwdnc=;
- b=Jrea0Cu/ojiu/zUE5PUJmYsM0ghubI6T5B3bz91kqr46x4lPexpOpwyM7D1s1JbnfRAO17
- sgbLrBz8wM4AR9Aw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1702975241; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=kQcwKt+4UoS9LJx8KVXvgf8dXiG7xNgLqbMRyDVwdnc=;
- b=ytOkps4LEUujda3H8XlrdGNXTfMV5WGAj3xGhBxbsd1z8+u6hVqDUdXw8FpEllsoJB1grR
- 2oqZGVJHCMJSQiE7kHNB3x6YwU8XeYI94cJFW7L9TY8DoD8FKdBOdHFRlV1Eh3KNEX7mfK
- VikO+0J4Yrw95gLDI/YLaTfnBQRwpZA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1702975241;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=kQcwKt+4UoS9LJx8KVXvgf8dXiG7xNgLqbMRyDVwdnc=;
- b=Jrea0Cu/ojiu/zUE5PUJmYsM0ghubI6T5B3bz91kqr46x4lPexpOpwyM7D1s1JbnfRAO17
- sgbLrBz8wM4AR9Aw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 7157C136A5;
- Tue, 19 Dec 2023 08:40:41 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 7I5nGQlXgWXnBgAAD6G6ig
- (envelope-from <iivanov@suse.de>); Tue, 19 Dec 2023 08:40:41 +0000
-Date: Tue, 19 Dec 2023 10:40:36 +0200
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-To: Stefan Wahren <wahrenst@gmx.net>
-Cc: Matthias Brugger <mbrugger@suse.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Dmitry Malkin <dmitry@bedrocksystems.com>, 
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>, 
- florian.fainelli@broadcom.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 1/7] rpi5: add initial memory map for bcm2712
-Message-ID: <rtatihjkufxwf6rk67j272za4rmbrg5maa37pbnnnadoxpht3e@4rqvi7h5eeta>
-References: <20231218210341.30073-1-iivanov@suse.de>
- <20231218210341.30073-2-iivanov@suse.de>
- <9d0fc4f9-3f58-4ebc-9af6-82b8823f08dc@gmx.net>
+ dmarc=fail (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+ s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
+ Message-ID; bh=IgLXAyqz/Dhov18AFSuOoEHZETDsTMqz5oxqBSlS4n0=; b=N
+ 6wIfQaG7epRq/Ntu6/w06HpqeJg5P/gRTp/NmkQTJyvYkjog70WGxgHnwWvD+nYF
+ XQcuOgsbvPBZf9pLXUSytdh7hXJHC6uJOl9bEw1dUrLmN4wdbb4Dyv4gZ+Jkbp66
+ mTttfvA7k6iidWmLFm9LHLLOyiHZ1aAJZtAp75cCnc=
+Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr97
+ (Coremail) ; Tue, 19 Dec 2023 16:47:08 +0800 (CST)
+X-Originating-IP: [58.22.7.114]
+Date: Tue, 19 Dec 2023 16:47:08 +0800 (CST)
+From: "Andy Yan" <andyshrk@163.com>
+To: "Jagan Teki" <jagan@amarulasolutions.com>
+Cc: "Anatolij Gustschin" <agust@denx.de>, 
+ "Neil Armstrong" <neil.armstrong@linaro.org>, 
+ "Andre Przywara" <andre.przywara@arm.com>, 
+ "Kever Yang" <kever.yang@rock-chips.com>, 
+ "Simon Glass" <sjg@chromium.org>, "Heiko Stuebner" <heiko@sntech.de>, 
+ "Robin Murphy" <robin.murphy@arm.com>, u-boot@lists.denx.de, 
+ "Da Xue" <da.xue@libretech.co>, "Jagan Teki" <jagan@edgeble.ai>
+Subject: Re:Re: [PATCH v2 13/17] video: rockchip: Add rk3328 vop support
+X-Priority: 3
+X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
+ Copyright (c) 2002-2023 www.mailtech.cn 163com
+In-Reply-To: <CAMty3ZDUtZvjOrHgovAxwvwLFO6YnS3jLi_3=v707gfg9EkEeg@mail.gmail.com>
+References: <20231218191114.129329-1-jagan@amarulasolutions.com>
+ <20231218191114.129329-14-jagan@amarulasolutions.com>
+ <672979fb.5ea.18c7fa8dce9.Coremail.andyshrk@163.com>
+ <CAMty3ZDUtZvjOrHgovAxwvwLFO6YnS3jLi_3=v707gfg9EkEeg@mail.gmail.com>
+X-NTES-SC: AL_Qu2bAPWcuk4p7iWcZukXn0kXhec2W8Czvvgg34JRP5k0tCvn8ycaU2NvBn/T8OegBxKRrAS8XhF16fRQZYZdcJ4qdtL3i0vwy2S80jwNw7Kp
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <9d0fc4f9-3f58-4ebc-9af6-82b8823f08dc@gmx.net>
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ytOkps4L;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b="Jrea0Cu/"
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-6.01 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- NEURAL_HAM_LONG(-1.00)[-1.000];
- DWL_DNSWL_MED(-2.00)[suse.de:dkim];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- RCPT_COUNT_SEVEN(0.00)[10];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
- FREEMAIL_TO(0.00)[gmx.net]; FUZZY_BLOCKED(0.00)[rspamd.com];
- FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
- MID_RHS_NOT_FQDN(0.50)[];
- FREEMAIL_CC(0.00)[suse.com,gmail.com,bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,broadcom.com,lists.denx.de];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-3.00)[100.00%]
-X-Rspamd-Queue-Id: 9400C1F7B6
+Message-ID: <33a60ff6.2e50.18c8141e502.Coremail.andyshrk@163.com>
+X-Coremail-Locale: zh_CN
+X-CM-TRANSID: YcGowADnz_GMWIFlfxMqAA--.62811W
+X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEAZLXmVOBCL4hwACsz
+X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,68 +75,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12-18 23:25, Stefan Wahren wrote:
-> > 
-> > +static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
-> > +	{
-> in comparison to mach-imx/imx9/soc.c most of the memory maps doesn't
-> have a describing comment.
-
-Yep, I have thinking to add more comments, but decided to not modify too
-much patch from Dmitry. On the other side there is not much excitement
-stuff here.
-
-> > +		.virt = 0x00000000UL,
-> > +		.phys = 0x00000000UL,
-> > +		.size = 0x3f800000UL,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> > +			 PTE_BLOCK_INNER_SHARE
-> > +	}, {
-> > +		.virt = 0x3f800000UL,
-> > +		.phys = 0x3f800000UL,
-> > +		.size = 0x00800000UL,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* Beginning of AXI bus where uSD controller lives */
-> > +		.virt = 0x1000000000UL,
-> > +		.phys = 0x1000000000UL,
-> > +		.size = 0x0002000000UL,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		.virt = 0x107c000000UL,
-> > +		.phys = 0x107c000000UL,
-> > +		.size = 0x0004000000UL,
-> > +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > +			 PTE_BLOCK_NON_SHARE |
-> > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > +	}, {
-> > +		/* List terminator */
-> > +		0,
-> > +	}
-> > +};
-> > +
-> >   struct mm_region *mem_map = bcm283x_mem_map;
-> > 
-> >   /*
-> > @@ -78,6 +113,7 @@ static const struct udevice_id board_ids[] = {
-> >   	{ .compatible = "brcm,bcm2837", .data = (ulong)&bcm283x_mem_map},
-> >   	{ .compatible = "brcm,bcm2838", .data = (ulong)&bcm2711_mem_map},
-> >   	{ .compatible = "brcm,bcm2711", .data = (ulong)&bcm2711_mem_map},
-> > +	{ .compatible = "brcm,bcm2712", .data = (ulong)&bcm2712_mem_map},
-> >   	{ },
-> >   };
-> > 
-> Looking at the complete file, i saw the function print_cpuinfo().
-> Personally i think it's wrong to print BCM283x in case of a RPI 4 or 5.
-
-CONFIG_DISPLAY_CPUINFO is not set for RPi's, but I suppose this could be nice
-aesthetic enhancement.
-
-Thanks,
-Ivan
-
-
+CgpIaSBKYXFhbu+8jArlnKggMjAyMy0xMi0xOSAxNTo0MjoyNu+8jCJKYWdhbiBUZWtpIiA8amFn
+YW5AYW1hcnVsYXNvbHV0aW9ucy5jb20+IOWGmemBk++8mgo+SGkgQW5keSwKPgo+T24gVHVlLCBE
+ZWMgMTksIDIwMjMgYXQgNjo1MOKAr0FNIEFuZHkgWWFuIDxhbmR5c2hya0AxNjMuY29tPiB3cm90
+ZToKPj4KPj4KPj4gSGkgSmFxYW7vvJoKPj4KPj4gQXQgMjAyMy0xMi0xOSAwMzoxMToxMCwgIkph
+Z2FuIFRla2kiIDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT4gd3JvdGU6Cj4+ID5Gcm9tOiBK
+YWdhbiBUZWtpIDxqYWdhbkBlZGdlYmxlLmFpPgo+PiA+Cj4+ID5BZGQgc3VwcG9ydCBmb3IgUm9j
+a2NoaXAgUkszMzI4IFZPUC4KPj4gPgo+PiA+UmVxdWlyZSBWT1AgY2xlYW51cCBiZWZvcmUgaGFu
+ZG9mZiB0byBMaW51eCBieSB3cml0aW5nIHJlc2V0IHZhbHVlcyB0bwo+PiA+V0lOIHJlZ2lzdGVy
+cy4gV2l0aG91dCB0aGlzIExpbnV4IFZPUCB0cmlnZ2VyIHBhZ2UgZmF1bHQgYXMgYmVsb3cKPj4g
+PlsgICAgMC43NTIwMTZdIExvYWRpbmcgY29tcGlsZWQtaW4gWC41MDkgY2VydGlmaWNhdGVzCj4+
+ID5bICAgIDAuNzg3Nzk2XSBpbm5vX2hkbWlfcGh5X3JrMzMyOF9jbGtfcmVjYWxjX3JhdGU6IHBh
+cmVudCAyNDAwMDAwMAo+PiA+WyAgICAwLjc4ODM5MV0gaW5uby1oZG1pLXBoeSBmZjQzMDAwMC5w
+aHk6IGlubm9faGRtaV9waHlfcmszMzI4X2Nsa19yZWNhbGNfcmF0ZSByYXRlIDE0ODUwMDAwMCB2
+Y28gMTQ4NTAwMDAwCj4+ID5bICAgIDAuNzk4MzUzXSByb2NrY2hpcC1kcm0gZGlzcGxheS1zdWJz
+eXN0ZW06IGJvdW5kIGZmMzcwMDAwLnZvcCAob3BzIHZvcF9jb21wb25lbnRfb3BzKQo+PiA+WyAg
+ICAwLjc5OTQwM10gZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAwLmhkbWk6IHN1cHBseSBhdmRkLTB2
+OSBub3QgZm91bmQsIHVzaW5nIGR1bW15IHJlZ3VsYXRvcgo+PiA+WyAgICAwLjgwMDI4OF0gcmtf
+aW9tbXUgZmYzNzNmMDAuaW9tbXU6IEVuYWJsZSBzdGFsbCByZXF1ZXN0IHRpbWVkIG91dCwgc3Rh
+dHVzOiAweDAwMDA0Ygo+PiA+WyAgICAwLjgwMTEzMV0gZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAw
+LmhkbWk6IHN1cHBseSBhdmRkLTF2OCBub3QgZm91bmQsIHVzaW5nIGR1bW15IHJlZ3VsYXRvcgo+
+PiA+WyAgICAwLjgwMjA1Nl0gcmtfaW9tbXUgZmYzNzNmMDAuaW9tbXU6IERpc2FibGUgcGFnaW5n
+IHJlcXVlc3QgdGltZWQgb3V0LCBzdGF0dXM6IDB4MDAwMDRiCj4+ID5bICAgIDAuODAzMjMzXSBk
+d2hkbWktcm9ja2NoaXAgZmYzYzAwMDAuaGRtaTogRGV0ZWN0ZWQgSERNSSBUWCBjb250cm9sbGVy
+IHYyLjExYSB3aXRoIEhEQ1AgKGlubm9fZHdfaGRtaV9waHkyKQo+PiA+WyAgICAwLjgwNTM1NV0g
+ZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAwLmhkbWk6IHJlZ2lzdGVyZWQgRGVzaWduV2FyZSBIRE1J
+IEkyQyBidXMgZHJpdmVyCj4+ID5bICAgIDAuODA4NzY5XSByb2NrY2hpcC1kcm0gZGlzcGxheS1z
+dWJzeXN0ZW06IGJvdW5kIGZmM2MwMDAwLmhkbWkgKG9wcyBkd19oZG1pX3JvY2tjaGlwX29wcykK
+Pj4gPlsgICAgMC44MTA4NjldIFtkcm1dIEluaXRpYWxpemVkIHJvY2tjaGlwIDEuMC4wIDIwMTQw
+ODE4IGZvciBkaXNwbGF5LXN1YnN5c3RlbSBvbiBtaW5vciAwCj4+ID4KPj4gPlNpZ25lZC1vZmYt
+Ynk6IEphZ2FuIFRla2kgPGphZ2FuQGVkZ2VibGUuYWk+Cj4+ID4tLS0KPj4gPkNoYW5nZXMgZm9y
+IHYyOgo+PiA+LSBBZGQgVk9QIGNsZWFudXAKPj4gPi0gVXBkYXRlIGNvbW1pdAo+PiA+Cj4+ID4g
+ZHJpdmVycy92aWRlby9yb2NrY2hpcC9NYWtlZmlsZSAgICAgfCAgMSArCj4+ID4gZHJpdmVycy92
+aWRlby9yb2NrY2hpcC9yazMzMjhfdm9wLmMgfCA4MyArKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKwo+PiA+IDIgZmlsZXMgY2hhbmdlZCwgODQgaW5zZXJ0aW9ucygrKQo+PiA+IGNyZWF0ZSBt
+b2RlIDEwMDY0NCBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrMzMyOF92b3AuYwo+PiA+Cj4+ID5k
+aWZmIC0tZ2l0IGEvZHJpdmVycy92aWRlby9yb2NrY2hpcC9NYWtlZmlsZSBiL2RyaXZlcnMvdmlk
+ZW8vcm9ja2NoaXAvTWFrZWZpbGUKPj4gPmluZGV4IDQ5OTEzMDNjNzMuLmY1NWJlY2VlYmYgMTAw
+NjQ0Cj4+ID4tLS0gYS9kcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlCj4+ID4rKysgYi9k
+cml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlCj4+ID5AQCAtNiw2ICs2LDcgQEAKPj4gPiBp
+ZmRlZiBDT05GSUdfVklERU9fUk9DS0NISVAKPj4gPiBvYmoteSArPSBya192b3Aubwo+PiA+IG9i
+ai0kKENPTkZJR19ST0NLQ0hJUF9SSzMyODgpICs9IHJrMzI4OF92b3Aubwo+PiA+K29iai0kKENP
+TkZJR19ST0NLQ0hJUF9SSzMzMjgpICs9IHJrMzMyOF92b3Aubwo+PiA+IG9iai0kKENPTkZJR19S
+T0NLQ0hJUF9SSzMzOTkpICs9IHJrMzM5OV92b3Aubwo+PiA+IG9iai0kKENPTkZJR19ESVNQTEFZ
+X1JPQ0tDSElQX0VEUCkgKz0gcmtfZWRwLm8KPj4gPiBvYmotJChDT05GSUdfRElTUExBWV9ST0NL
+Q0hJUF9MVkRTKSArPSBya19sdmRzLm8KPj4gPmRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpZGVvL3Jv
+Y2tjaGlwL3JrMzMyOF92b3AuYyBiL2RyaXZlcnMvdmlkZW8vcm9ja2NoaXAvcmszMzI4X3ZvcC5j
+Cj4+ID5uZXcgZmlsZSBtb2RlIDEwMDY0NAo+PiA+aW5kZXggMDAwMDAwMDAwMC4uYTRkYTNhOTFl
+OAo+PiA+LS0tIC9kZXYvbnVsbAo+PiA+KysrIGIvZHJpdmVycy92aWRlby9yb2NrY2hpcC9yazMz
+Mjhfdm9wLmMKPj4gPkBAIC0wLDAgKzEsODMgQEAKPj4gPisvLyBTUERYLUxpY2Vuc2UtSWRlbnRp
+ZmllcjogR1BMLTIuMCsKPj4gPisvKgo+PiA+KyAqIENvcHlyaWdodCAoYykgMjAyMyBFZGdlYmxl
+IEFJIFRlY2hub2xvZ2llcyBQdnQuIEx0ZC4KPj4gPisgKi8KPj4gPisKPj4gPisjaW5jbHVkZSA8
+ZG0uaD4KPj4gPisjaW5jbHVkZSA8dmlkZW8uaD4KPj4gPisjaW5jbHVkZSA8YXNtL2lvLmg+Cj4+
+ID4rI2luY2x1ZGUgInJrX3ZvcC5oIgo+PiA+Kwo+PiA+K0RFQ0xBUkVfR0xPQkFMX0RBVEFfUFRS
+Owo+PiA+Kwo+PiA+K3N0YXRpYyB2b2lkIHJrMzMyOF9zZXRfcGluX3BvbGFyaXR5KHN0cnVjdCB1
+ZGV2aWNlICpkZXYsCj4+ID4rICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVudW0g
+dm9wX21vZGVzIG1vZGUsIHUzMiBwb2xhcml0eSkKPj4gPit7Cj4+ID4rICAgICAgc3RydWN0IHJr
+X3ZvcF9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4+ID4rICAgICAgc3RydWN0IHJr
+MzI4OF92b3AgKnJlZ3MgPSBwcml2LT5yZWdzOwo+PiA+Kwo+PiA+KyAgICAgIHN3aXRjaCAobW9k
+ZSkgewo+PiA+KyAgICAgIGNhc2UgVk9QX01PREVfSERNSToKPj4gPisgICAgICAgICAgICAgIGNs
+cnNldGJpdHNfbGUzMigmcmVncy0+ZHNwX2N0cmwxLAo+PiA+KyAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIE1fUkszMzk5X0RTUF9IRE1JX1BPTCwKPj4gPisgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBWX1JLMzM5OV9EU1BfSERNSV9QT0wocG9sYXJpdHkpKTsKPj4gPisgICAgICAg
+ICAgICAgIGJyZWFrOwo+PiA+KyAgICAgIGRlZmF1bHQ6Cj4+ID4rICAgICAgICAgICAgICBkZWJ1
+ZygiJXM6IHVuc3VwcG9ydGVkIG91dHB1dCBtb2RlICV4XG4iLCBfX2Z1bmNfXywgbW9kZSk7Cj4+
+ID4rICAgICAgfQo+PiA+K30KPj4gPisKPj4gPitzdGF0aWMgaW50IHJrMzMyOF92b3BfcHJvYmUo
+c3RydWN0IHVkZXZpY2UgKmRldikKPj4gPit7Cj4+ID4rICAgICAgLyogQmVmb3JlIHJlbG9jYXRp
+b24gd2UgZG9uJ3QgbmVlZCB0byBkbyBhbnl0aGluZyAqLwo+PiA+KyAgICAgIGlmICghKGdkLT5m
+bGFncyAmIEdEX0ZMR19SRUxPQykpCj4+ID4rICAgICAgICAgICAgICByZXR1cm4gMDsKPj4gPisK
+Pj4gPisgICAgICByZXR1cm4gcmtfdm9wX3Byb2JlKGRldik7Cj4+ID4rfQo+PiA+Kwo+PiA+K3N0
+YXRpYyBpbnQgcmszMzI4X3ZvcF9yZW1vdmUoc3RydWN0IHVkZXZpY2UgKmRldikKPj4gPit7Cj4+
+ID4rICAgICAgc3RydWN0IHJrX3ZvcF9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4+
+ID4rICAgICAgc3RydWN0IHJrMzI4OF92b3AgKnJlZ3MgPSBwcml2LT5yZWdzOwo+PiA+KyAgICAg
+IHN0cnVjdCByazMyODhfdm9wICp3aW5fcmVncyA9IHByaXYtPnJlZ3MgKyBwcml2LT53aW5fb2Zm
+c2V0Owo+PiA+Kwo+PiA+KyAgICAgIC8qIHdyaXRlIHJlc2V0IHZhbHVlcyAqLwo+PiA+KyAgICAg
+IHdyaXRlbCgweGVmMDEzZiwgJndpbl9yZWdzLT53aW4wX2FjdF9pbmZvKTsKPj4gPisgICAgICB3
+cml0ZWwoMHhlZjAxM2YsICZ3aW5fcmVncy0+d2luMF9kc3BfaW5mbyk7Cj4+ID4rICAgICAgd3Jp
+dGVsKDB4YTAwMGEsICZ3aW5fcmVncy0+d2luMF9kc3Bfc3QpOwo+PiA+KyAgICAgIHdyaXRlbCgw
+eDAsICZ3aW5fcmVncy0+d2luMF95cmdiX21zdCk7Cj4+ID4rICAgICAgd3JpdGVsKDB4MDEsICZy
+ZWdzLT5yZWdfY2ZnX2RvbmUpOwo+PiA+Kwo+PiA+KyAgICAgIHJldHVybiAwOwo+PiA+K30KPj4K
+Pj4gSSB0aGluayB0aGlzIGp1c3Qgd29ya2Fyb3VuZCBMaW51eCBpb21tdSBwYWdlIGZhdWx0IGJ5
+IGx1Y2vjgIIKPj4gVGhlIHJlc2V0IHZhbHVl77yId2hhdCB5b3UgY2FsbGVkIGl0IGlz77yJeW91
+ciB3cml0ZSBqdXN0IGxldCB3aW4wIHJlYWQgYQo+PiAzMjB4MjQwIHJlY3Rhbmd1bGFyIGZyb20g
+YWRkcmVzcyAwIGFuZCBkaXNwbGF5IGl0IGF0IG5leHQgZnJhbWXvvIhtYXliZSAxNm1zIGxhdGVy
+IGlmIHlvdXIKPj4gY3VycmVudCBkaXNwbGF5IGlzIHJ1biBhdCA2MEha77yJ44CCCj4+Cj4+IDEu
+IHdlIGRvbid0IGtub3cgd2hhdCBjb250ZW50IGlzIGF0IGFkZHJlc3MgMCwgc28geW91IHdpbGwg
+c2VlIHNvbWV0aGluZyBzdHJhbmdlIG9uIHlvdXIgbW9uaXRvci4KPj4gMi4gdGhlcmUgaXMgbm8g
+Z3VhcmFudGVlIHRoYXQgYWRkcmVzcyAwIGlzIHJlYWxseSByZWFkYWJsZe+8iG1heWJlIGEgc2Vj
+dXJpdHkgbWVtb3J5IHNwYWNl77yMIG9yIG1heWJlCj4+ICAgICBpdCBpcyBub3QgYSB2YWxpZCBh
+ZGRyZXNz77yJ77yMIHRoaXMgbWF5IGNhdXNlIGFub3RoZXIgaXNzdWUgdGhhdCBub3QgZWFzeSB0
+byBkZXRlY3TjgIIKPgo+T2theS4gQ2FuIHlvdSBzdWdnZXN0IGFueSBwcm9wZXIgd2F5IHRvIGNs
+ZWFuIHVwIFZPUD8gQWxsIHRoZXNlIHJlc2V0Cj52YWx1ZXMgYXJlIHJlZmVycmVkIHRvIGFzIHBl
+ciB0aGUgVFJNIGFuZCByZWFkIGJlZm9yZSBlbmFibGluZyB0aGUKCj52aWRlby4KCgpNYXliZSB3
+cml0ZSAwIHRvIHRoZSB3aW5kb3dzIGVuYWJsZSBiaXTvvIwgZGlzYWJsZSB0aGlzIHdpbmRvd+OA
+ggpCdXQgdGhpcyBpcyBhIGxpdHRsZSBydWRl77yMSSB3b25kZXIgaWYgdGhlIG1haW5saW5lIGhh
+cyBhIHdheSB0byBoYW5kbGVvZmYgCmJvb3Rsb2FkZXIgZnJhbWVidWZmZXIgdG8gbGludXgga2Vy
+bmVsIGRybSBzeXN0ZW0gc2VhbWxlc3PjgIIKClswXSBpcyBhbHNvIHdoYXQgUm9iaW4gbWVudGlv
+biBpcyBWMSwgIG1heWJlIGEgYmV0dGVyIGRpcmVjdGlvbi4KCgpbMF1odHRwczovL2xvcmUua2Vy
+bmVsLm9yZy9hbGwvMjAyMzAxMjAxNzQyNTEuNDAwNDEwMC0xLXRoaWVycnkucmVkaW5nQGdtYWls
+LmNvbS8gCgo+Cj5UaGFua3MsCj5KYWdhbi4K
