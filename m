@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BA41C46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43678C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:41:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B56287859;
-	Tue, 19 Dec 2023 12:33:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A5678785E;
+	Tue, 19 Dec 2023 12:33:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LfvR9/Sr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sHwSJG0G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C94F871C7; Tue, 19 Dec 2023 11:34:58 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9D7ED87282; Tue, 19 Dec 2023 11:34:59 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59A8C86C68
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 34A1786D82
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYZcb055910;
- Tue, 19 Dec 2023 04:34:35 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYdM5103327;
+ Tue, 19 Dec 2023 04:34:39 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982075;
- bh=yc74ztMDZt4ukeu6rHKY4GEBosCeNPSxAlraJdyzy1k=;
+ s=ti-com-17Q1; t=1702982079;
+ bh=VNV7C3nfSnXd+iR83CpF8av0mz84N7Fxn4+Th9ov1qc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=LfvR9/SrE1j7CLgHs/a/74VOLoTUjiSyhcAVmBpJCHC9IIimLJdmQxdCVDf0eVpJH
- s6+fNA2SftbTNmi/ZPxbY8m5CEdC4avaMyI/kWtJoBi8ukZ89dYjN6K9HXF3kvP9o3
- wKwvF9SujgJasmrjwn144mOo7GJV00F3l12zPAtM=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYZS7021788
+ b=sHwSJG0Gp1Afp1CK+HvhQn69sScDpEwye4v2SBYZ2S+s9fKFZvCRiT3NX65RQgt0F
+ TJsZOZg/aS1JaQJ/+vO7d7vJudkUKIlrPUN5uVlXWnnrsdgyfTzAZTKf8vd2apMiTI
+ dh1Ode/TP6tjBmL/inw0Db6lfANyAeJVW5tqfNO8=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYdM2057532
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:35 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:34:39 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:34 -0600
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:34:38 -0600
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:35 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:34:38 -0600
 Received: from fllv0122.itg.ti.com (fllv0122.itg.ti.com [10.247.120.72])
- by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYYim007422;
- Tue, 19 Dec 2023 04:34:34 -0600
+ by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYcbU106950;
+ Tue, 19 Dec 2023 04:34:38 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYYsj014576;
- Tue, 19 Dec 2023 04:34:34 -0600
+ by fllv0122.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYb0f014586;
+ Tue, 19 Dec 2023 04:34:38 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,10 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 07/16] net: ti: icssg: Enforce pinctrl state on the MDIO
- child node
-Date: Tue, 19 Dec 2023 16:04:09 +0530
-Message-ID: <20231219103418.3445886-8-danishanwar@ti.com>
+Subject: [RFC PATCH 09/16] arm: dts: k3-am65: Add cfg reg region to ringacc
+ node
+Date: Tue, 19 Dec 2023 16:04:11 +0530
+Message-ID: <20231219103418.3445886-10-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
 References: <20231219103418.3445886-1-danishanwar@ti.com>
@@ -92,123 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The binding represents the MDIO controller as a child device tree
-node of the MAC device tree node.
-
-The U-Boot driver mostly ignores that child device tree node and just
-hardcodes the resources it uses to support both the MAC and MDIO in a
-single driver.
-
-However, some resources like pinctrl muxing states are thus ignored.
-This has been a problem with some device trees that will put some
-pinctrl states on the MDIO device tree node.
-
-Let's rework the driver a bit to create a dummy MDIO driver that we will
-then get during our initialization to force the core to select the right
-muxing.
+Add register range of ringacc cfg node to k3-am65* dtsi files. This is
+normally under Device Management firmware control but some entities like
+bootloader have to access directly and thus required to be present in
+DT.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/Kconfig        |  1 +
- drivers/net/ti/icssg_prueth.c | 59 +++++++++++++++++++++++++++++++++++
- 2 files changed, 60 insertions(+)
+ arch/arm/dts/k3-am65-main.dtsi | 5 +++--
+ arch/arm/dts/k3-am65-mcu.dtsi  | 5 +++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/net/ti/Kconfig b/drivers/net/ti/Kconfig
-index 9fead2c7ce..6935b70e12 100644
---- a/drivers/net/ti/Kconfig
-+++ b/drivers/net/ti/Kconfig
-@@ -53,6 +53,7 @@ config TI_AM65_CPSW_NUSS
- config TI_ICSSG_PRUETH
- 	bool "TI Gigabit PRU Ethernet driver"
- 	depends on ARCH_K3
-+	imply DM_MDIO
- 	select PHYLIB
- 	help
- 	  Support Gigabit Ethernet ports over the ICSSG PRU Subsystem
-diff --git a/drivers/net/ti/icssg_prueth.c b/drivers/net/ti/icssg_prueth.c
-index 1a7445a015..40ad827e49 100644
---- a/drivers/net/ti/icssg_prueth.c
-+++ b/drivers/net/ti/icssg_prueth.c
-@@ -13,6 +13,7 @@
- #include <dm/device.h>
- #include <dma-uclass.h>
- #include <dm/of_access.h>
-+#include <dm/pinctrl.h>
- #include <fs_loader.h>
- #include <miiphy.h>
- #include <net.h>
-@@ -100,9 +101,56 @@ static int icssg_phy_init(struct udevice *dev)
- 	return ret;
- }
- 
-+static ofnode prueth_find_mdio(ofnode parent)
-+{
-+	ofnode node;
-+
-+	ofnode_for_each_subnode(node, parent)
-+		if (ofnode_device_is_compatible(node, "ti,davinci_mdio"))
-+			return node;
-+
-+	return ofnode_null();
-+}
-+
-+static int prueth_mdio_setup(struct udevice *dev)
-+{
-+	struct prueth *priv = dev_get_priv(dev);
-+	struct udevice *mdio_dev;
-+	ofnode mdio;
-+	int ret;
-+
-+	mdio = prueth_find_mdio(dev_ofnode(priv->pruss));
-+	if (!ofnode_valid(mdio))
-+		return 0;
-+
-+	/*
-+	 * The MDIO controller is represented in the DT binding by a
-+	 * subnode of the MAC controller.
-+	 *
-+	 * We don't have a DM driver for the MDIO device yet, and thus any
-+	 * pinctrl setting on its node will be ignored.
-+	 *
-+	 * However, we do need to make sure the pins states tied to the
-+	 * MDIO node are configured properly. Fortunately, the core DM
-+	 * does that for use when we get a device, so we can work around
-+	 * that whole issue by just requesting a dummy MDIO driver to
-+	 * probe, and our pins will get muxed.
-+	 */
-+	ret = uclass_get_device_by_ofnode(UCLASS_MDIO, mdio, &mdio_dev);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
- static int icssg_mdio_init(struct udevice *dev)
- {
- 	struct prueth *prueth = dev_get_priv(dev);
-+	int ret;
-+
-+	ret = prueth_mdio_setup(dev);
-+	if (ret)
-+		return ret;
- 
- 	prueth->bus = cpsw_mdio_init(dev->name, prueth->mdio_base,
- 				     prueth->mdio_freq,
-@@ -593,3 +641,14 @@ U_BOOT_DRIVER(prueth) = {
- 	.plat_auto = sizeof(struct eth_pdata),
- 	.flags = DM_FLAG_ALLOC_PRIV_DMA,
- };
-+
-+static const struct udevice_id prueth_mdio_ids[] = {
-+	{ .compatible = "ti,davinci_mdio" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(prueth_mdio) = {
-+	.name		= "prueth_mdio",
-+	.id			= UCLASS_MDIO,
-+	.of_match	= prueth_mdio_ids,
-+};
+diff --git a/arch/arm/dts/k3-am65-main.dtsi b/arch/arm/dts/k3-am65-main.dtsi
+index 691c9978e6..7f10520236 100644
+--- a/arch/arm/dts/k3-am65-main.dtsi
++++ b/arch/arm/dts/k3-am65-main.dtsi
+@@ -603,8 +603,9 @@
+ 			reg =	<0x0 0x3c000000 0x0 0x400000>,
+ 				<0x0 0x38000000 0x0 0x400000>,
+ 				<0x0 0x31120000 0x0 0x100>,
+-				<0x0 0x33000000 0x0 0x40000>;
+-			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target";
++				<0x0 0x33000000 0x0 0x40000>,
++				<0x0 0x31080000 0x0 0x40000>;
++			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
+ 			ti,num-rings = <818>;
+ 			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
+ 			ti,sci = <&dmsc>;
+diff --git a/arch/arm/dts/k3-am65-mcu.dtsi b/arch/arm/dts/k3-am65-mcu.dtsi
+index d7111aa8b2..b7f0456de7 100644
+--- a/arch/arm/dts/k3-am65-mcu.dtsi
++++ b/arch/arm/dts/k3-am65-mcu.dtsi
+@@ -129,8 +129,9 @@
+ 			reg =	<0x0 0x2b800000 0x0 0x400000>,
+ 				<0x0 0x2b000000 0x0 0x400000>,
+ 				<0x0 0x28590000 0x0 0x100>,
+-				<0x0 0x2a500000 0x0 0x40000>;
+-			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target";
++				<0x0 0x2a500000 0x0 0x40000>,
++				<0x0 0x28440000 0x0 0x40000>;
++			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
+ 			ti,num-rings = <286>;
+ 			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
+ 			ti,sci = <&dmsc>;
 -- 
 2.34.1
 
