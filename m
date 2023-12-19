@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55B4C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71D0C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:40:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C36087830;
+	by phobos.denx.de (Postfix) with ESMTP id 8FE3B87835;
 	Tue, 19 Dec 2023 12:33:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wTdPNgIX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Bw9El5GL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33D18871C7; Tue, 19 Dec 2023 11:34:49 +0100 (CET)
+ id 482BB871C7; Tue, 19 Dec 2023 11:34:50 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A99BC86D82
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CD2A86C68
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:34:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYPma005532;
- Tue, 19 Dec 2023 04:34:25 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYTHm005550;
+ Tue, 19 Dec 2023 04:34:29 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702982065;
- bh=Pi2giqw34blj0ta9b90u6otYmr+oTjwpPyjS9wAOU8M=;
+ s=ti-com-17Q1; t=1702982069;
+ bh=fBreZmf/hIAKOi+L6jlv7d1IFT7IKQMj/yQ6UDotVQ0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=wTdPNgIXSnsXHqQmO5t/ro3uX/+nbodR8FE9CzJ9a0v7nm/3YEp3YAuWWz3g2nxgq
- Wq7pqLFgq1KQp3NGjwoC+EeH18pIXIfPogCGEvzvHFwSnLyiqf4097ZL/yzXSCZ+x8
- K0ObLJhJtBXSaid+HHhOmfDeoDRcMg5MyjovAQxg=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYPfM129931
+ b=Bw9El5GLtC6OpTw54MhkEE4afGwoiIDL3WuqTi2fR7BDHHkDgNdEHH58dyRzTPpLa
+ 5RjykHGFWXRRoqzs8o9c8uKPolBQc8veGuHkz8L2R4yyEAHWjIAUZ+J4hJFePPw9nu
+ 927dMqNJKYsd6KqBIfqxlm7u1rUZDd9MLnUPBmKc=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJAYTuC057438
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:34:25 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:34:29 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:34:25 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Dec 2023 04:34:29 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:34:25 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:34:29 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYPQu011349;
- Tue, 19 Dec 2023 04:34:25 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJAYThi070989;
+ Tue, 19 Dec 2023 04:34:29 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYOUg022769;
- Tue, 19 Dec 2023 04:34:25 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJAYSBm022781;
+ Tue, 19 Dec 2023 04:34:28 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,9 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 02/16] net: ti: icssg: Add Firmware Interface for ICSSG
- Ethernet driver.
-Date: Tue, 19 Dec 2023 16:04:04 +0530
-Message-ID: <20231219103418.3445886-3-danishanwar@ti.com>
+Subject: [RFC PATCH 04/16] net: ti: icssg: Add icssg queues APIs and macros
+Date: Tue, 19 Dec 2023 16:04:06 +0530
+Message-ID: <20231219103418.3445886-5-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219103418.3445886-1-danishanwar@ti.com>
 References: <20231219103418.3445886-1-danishanwar@ti.com>
@@ -92,230 +91,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add firmware interface related headers and macros for ICSSG Ethernet
-driver. These macros will be later used by the ICSSG ethernet driver.
+Add icssg_queue.c file. This file introduces macros and APIs related to
+ICSSG queues. These will be used by ICSSG Ethernet driver.
 
 Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 ---
- drivers/net/ti/icssg_switch_map.h | 209 ++++++++++++++++++++++++++++++
- 1 file changed, 209 insertions(+)
- create mode 100644 drivers/net/ti/icssg_switch_map.h
+ drivers/net/ti/icssg_prueth.h |  5 ++++
+ drivers/net/ti/icssg_queues.c | 51 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
+ create mode 100644 drivers/net/ti/icssg_queues.c
 
-diff --git a/drivers/net/ti/icssg_switch_map.h b/drivers/net/ti/icssg_switch_map.h
+diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
+index 26b77dd8f3..f34ab5d6d4 100644
+--- a/drivers/net/ti/icssg_prueth.h
++++ b/drivers/net/ti/icssg_prueth.h
+@@ -75,4 +75,9 @@ void icssg_config_ipg(struct prueth *prueth, int speed, int mii);
+ int icssg_config(struct prueth *prueth);
+ int emac_set_port_state(struct prueth *prueth, enum icssg_port_state_cmd cmd);
+ 
++/* Buffer queue helpers */
++int icssg_queue_pop(struct prueth *prueth, u8 queue);
++void icssg_queue_push(struct prueth *prueth, int queue, u16 addr);
++u32 icssg_queue_level(struct prueth *prueth, int queue);
++
+ #endif /* __NET_TI_ICSSG_PRUETH_H */
+diff --git a/drivers/net/ti/icssg_queues.c b/drivers/net/ti/icssg_queues.c
 new file mode 100644
-index 0000000000..ba87a44023
+index 0000000000..6a95ef5d58
 --- /dev/null
-+++ b/drivers/net/ti/icssg_switch_map.h
-@@ -0,0 +1,209 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/* Texas Instruments ICSSG Ethernet driver
++++ b/drivers/net/ti/icssg_queues.c
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-2.0
++/* ICSSG Buffer queue helpers
 + *
-+ * Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
-+ *
++ * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com
 + */
 +
-+#ifndef __NET_TI_ICSSG_SWITCH_MAP_H
-+#define __NET_TI_ICSSG_SWITCH_MAP_H
++#include <dm/ofnode.h>
++#include <regmap.h>
++#include "icssg_prueth.h"
 +
-+/*Time after which FDB entries are checked for aged out values. Value in nanoseconds*/
-+#define FDB_AGEING_TIMEOUT_OFFSET                          0x0014
++#define ICSSG_QUEUES_MAX		64
++#define ICSSG_QUEUE_OFFSET		0xd00
++#define ICSSG_QUEUE_PEEK_OFFSET		0xe00
++#define ICSSG_QUEUE_CNT_OFFSET		0xe40
++#define	ICSSG_QUEUE_RESET_OFFSET	0xf40
 +
-+/*default VLAN tag for Host Port*/
-+#define HOST_PORT_DF_VLAN_OFFSET                           0x001C
++int icssg_queue_pop(struct prueth *prueth, u8 queue)
++{
++	u32 val, cnt;
 +
-+/*Same as HOST_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT0_DEFAULT_VLAN_OFFSET        HOST_PORT_DF_VLAN_OFFSET
++	if (queue >= ICSSG_QUEUES_MAX)
++		return -EINVAL;
 +
-+/*default VLAN tag for P1 Port*/
-+#define P1_PORT_DF_VLAN_OFFSET                             0x0020
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &cnt);
++	if (!cnt)
++		return -EINVAL;
 +
-+/*Same as P1_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT1_DEFAULT_VLAN_OFFSET        P1_PORT_DF_VLAN_OFFSET
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, &val);
 +
-+/*default VLAN tag for P2 Port*/
-+#define P2_PORT_DF_VLAN_OFFSET                             0x0024
++	return val;
++}
 +
-+/*Same as P2_PORT_DF_VLAN_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PORT2_DEFAULT_VLAN_OFFSET        P2_PORT_DF_VLAN_OFFSET
++void icssg_queue_push(struct prueth *prueth, int queue, u16 addr)
++{
++	if (queue >= ICSSG_QUEUES_MAX)
++		return;
 +
-+/*VLAN-FID Table offset. 4096 VIDs. 2B per VID = 8KB = 0x2000*/
-+#define VLAN_STATIC_REG_TABLE_OFFSET                       0x0100
++	regmap_write(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, addr);
++}
 +
-+/*VLAN-FID Table offset for EMAC*/
-+#define EMAC_ICSSG_SWITCH_DEFAULT_VLAN_TABLE_OFFSET        VLAN_STATIC_REG_TABLE_OFFSET
++u32 icssg_queue_level(struct prueth *prueth, int queue)
++{
++	u32 reg;
 +
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC0_HI                                      0x2104
++	if (queue >= ICSSG_QUEUES_MAX)
++		return 0;
 +
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC0_LO                                      0x2F6C
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &reg);
 +
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC1_HI                                      0x3DD4
-+
-+/*packet descriptor Q reserved memory*/
-+#define PORT_DESC1_LO                                      0x4C3C
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC0_HI                                      0x5AA4
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC0_LO                                      0x5F0C
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC1_HI                                      0x6374
-+
-+/*packet descriptor Q reserved memory*/
-+#define HOST_DESC1_LO                                      0x67DC
-+
-+/*special packet descriptor Q reserved memory*/
-+#define HOST_SPPD0                                         0x7AAC
-+
-+/*special packet descriptor Q reserved memory*/
-+#define HOST_SPPD1                                         0x7EAC
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_CYCLECOUNT_OFFSET                   0x83EC
-+
-+/*IEP count hi roll over count*/
-+#define TIMESYNC_FW_WC_HI_ROLLOVER_COUNT_OFFSET            0x83F4
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_COUNT_HI_SW_OFFSET_OFFSET           0x83F8
-+
-+/*Set clock descriptor*/
-+#define TIMESYNC_FW_WC_SETCLOCK_DESC_OFFSET                0x83FC
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_FACTOR_OFFSET     0x843C
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_REDUCTION_COUNT_OFFSET      0x8440
-+
-+/*_Small_Description_*/
-+#define TIMESYNC_FW_WC_SYNCOUT_START_TIME_CYCLECOUNT_OFFSET 0x8444
-+
-+/*Control variable to generate SYNC1*/
-+#define TIMESYNC_FW_WC_ISOM_PIN_SIGNAL_EN_OFFSET           0x844C
-+
-+/*SystemTime Sync0 periodicity*/
-+#define TIMESYNC_FW_ST_SYNCOUT_PERIOD_OFFSET               0x8450
-+
-+/*pktTxDelay for P1 = link speed dependent p1 mac delay + p1 phy delay*/
-+#define TIMESYNC_FW_WC_PKTTXDELAY_P1_OFFSET                0x8454
-+
-+/*pktTxDelay for P2 = link speed dependent p2 mac delay + p2 phy delay*/
-+#define TIMESYNC_FW_WC_PKTTXDELAY_P2_OFFSET                0x8458
-+
-+/*Set clock operation done signal for next task*/
-+#define TIMESYNC_FW_SIG_PNFW_OFFSET                        0x845C
-+
-+/*Set clock operation done signal for next task*/
-+#define TIMESYNC_FW_SIG_TIMESYNCFW_OFFSET                  0x8460
-+
-+/*New list is copied at this time*/
-+#define TAS_CONFIG_CHANGE_TIME                             0x000C
-+
-+/*config change error counter*/
-+#define TAS_CONFIG_CHANGE_ERROR_COUNTER                    0x0014
-+
-+/*TAS List update pending flag*/
-+#define TAS_CONFIG_PENDING                                 0x0018
-+
-+/*TAS list update trigger flag*/
-+#define TAS_CONFIG_CHANGE                                  0x0019
-+
-+/*List length for new TAS schedule*/
-+#define TAS_ADMIN_LIST_LENGTH                              0x001A
-+
-+/*Currently active TAS list index*/
-+#define TAS_ACTIVE_LIST_INDEX                              0x001B
-+
-+/*Cycle time for the new TAS schedule*/
-+#define TAS_ADMIN_CYCLE_TIME                               0x001C
-+
-+/*Cycle counts remaining till the TAS list update*/
-+#define TAS_CONFIG_CHANGE_CYCLE_COUNT                      0x0020
-+
-+/*Base Flow ID for sending packets to Host for Slice0*/
-+#define PSI_L_REGULAR_FLOW_ID_BASE_OFFSET                  0x0024
-+
-+/*Same as PSI_L_REGULAR_FLOW_ID_BASE_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PSI_L_REGULAR_FLOW_ID_BASE_OFFSET PSI_L_REGULAR_FLOW_ID_BASE_OFFSET
-+
-+/*Base Flow ID for sending mgmt and Tx TS to Host for Slice0*/
-+#define PSI_L_MGMT_FLOW_ID_OFFSET                          0x0026
-+
-+/*Same as PSI_L_MGMT_FLOW_ID_OFFSET*/
-+#define EMAC_ICSSG_SWITCH_PSI_L_MGMT_FLOW_ID_BASE_OFFSET   PSI_L_MGMT_FLOW_ID_OFFSET
-+
-+/*Queue number for Special packets written here*/
-+#define SPL_PKT_DEFAULT_PRIORITY                           0x0028
-+
-+/*Express Preemptible Queue Mask*/
-+#define EXPRESS_PRE_EMPTIVE_Q_MASK                         0x0029
-+
-+/*Port1/Port2 Default Queue number for untagged packets, only 1B is used*/
-+#define QUEUE_NUM_UNTAGGED                                 0x002A
-+
-+/*Stores the table used for priority regeneration. 1B per PCP/Queue*/
-+#define PORT_Q_PRIORITY_REGEN_OFFSET                       0x002C
-+
-+/* For marking Packet as priority/express (this feature is disabled) or
-+ * cut-through/S&F.
-+ */
-+#define EXPRESS_PRE_EMPTIVE_Q_MAP                          0x0034
-+
-+/*Stores the table used for priority mapping. 1B per PCP/Queue*/
-+#define PORT_Q_PRIORITY_MAPPING_OFFSET                     0x003C
-+
-+/*TAS gate mask for windows list0*/
-+#define TAS_GATE_MASK_LIST0                                0x0100
-+
-+/*TAS gate mask for windows list1*/
-+#define TAS_GATE_MASK_LIST1                                0x0350
-+
-+/*Memory to Enable/Disable Preemption on TX side*/
-+#define PRE_EMPTION_ENABLE_TX                              0x05A0
-+
-+/*Active State of Preemption on TX side*/
-+#define PRE_EMPTION_ACTIVE_TX                              0x05A1
-+
-+/*Memory to Enable/Disable Verify State Machine Preemption*/
-+#define PRE_EMPTION_ENABLE_VERIFY                          0x05A2
-+
-+/*Verify Status of State Machine*/
-+#define PRE_EMPTION_VERIFY_STATUS                          0x05A3
-+
-+/*Non Final Fragment Size supported by Link Partner*/
-+#define PRE_EMPTION_ADD_FRAG_SIZE_REMOTE                   0x05A4
-+
-+/*Non Final Fragment Size supported by Firmware*/
-+#define PRE_EMPTION_ADD_FRAG_SIZE_LOCAL                    0x05A6
-+
-+/*Time in ms the State machine waits for respond packet*/
-+#define PRE_EMPTION_VERIFY_TIME                            0x05A8
-+
-+/*Memory used for R30 related management commands*/
-+#define MGR_R30_CMD_OFFSET                                 0x05AC
-+
-+/*HW Buffer Pool0 base address*/
-+#define BUFFER_POOL_0_ADDR_OFFSET                          0x05BC
-+
-+/*16B for Host Egress MSMC Q (Pre-emptible) context*/
-+#define HOST_RX_Q_PRE_CONTEXT_OFFSET                       0x0684
-+
-+/*Buffer for 8 FDB entries to be added by 'Add Multiple FDB entries IOCTL*/
-+#define FDB_CMD_BUFFER                                     0x0894
-+
-+/*16B for Host Egress MSMC Q (Express) context*/
-+#define HOST_RX_Q_EXP_CONTEXT_OFFSET                       0x0940
-+
-+/*Start of 32 bits PA_STAT counters*/
-+#define PA_STAT_32b_START_OFFSET                           0x0080
-+
-+#endif
-+/* __NET_TI_ICSSG_SWITCH_MAP_H */
++	return reg;
++}
 -- 
 2.34.1
 
