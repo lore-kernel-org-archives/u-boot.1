@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386F4C46CCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:47:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD8FC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:47:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38D1F877FE;
+	by phobos.denx.de (Postfix) with ESMTP id ADCA68780E;
 	Tue, 19 Dec 2023 18:46:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pb5IKYin";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sGDM4RaB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B914E8709C; Tue, 19 Dec 2023 18:46:32 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 299B6876F6; Tue, 19 Dec 2023 18:46:37 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D546877CD
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:46:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F1DA877FE
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:46:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5e745891a69so15265547b3.2
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:46:29 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5e734d6cbe4so16992377b3.3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:46:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703007983; x=1703612783; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sxRYye+uFrBXshSuyM5wwistanGGjRNnGkwiRbFmBVc=;
- b=Pb5IKYinFq3FwHlpY76ny4Xf+enekd0HpMmIhpzBMAvPzJHywuOIp84jqPy0nyOGxe
- 4ROIODgHjW8Tl40wfOLe3maFh6/auz3YX5NVLiaCyhwQU6yc8Gv2x6makkWqMueLM4En
- 215nxt5g4SBffNLe9ZtLjOmai4lvjxzzX0Jmw=
+ d=konsulko.com; s=google; t=1703007993; x=1703612793; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8pkZY5+WVrwe1sMwV7kJtztSZwWfmGGs+IMHSe3jz/w=;
+ b=sGDM4RaBIFoKtZTu175lH8YL3u0fWUPA1RMmBBZ+tIXbt2oUGwaBP/3L7hdEqrvnbs
+ yj9U6TJ6rl1rLJz2D2k+uE4EnOzkuiNT8O/2ZEnS0e2NyD2U+Wa7TEtBXLs7ZZiy2kpJ
+ Y0dnT+iGXIVZtXoMhPLi/KKD8FfcZt3vGtjtE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703007983; x=1703612783;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sxRYye+uFrBXshSuyM5wwistanGGjRNnGkwiRbFmBVc=;
- b=HqWuarW3KEXXvQP5nN45KAsoKGPgh2zTlPL4nBsFNmh6OvCI95MRMNwReUK9f3K7i3
- KkIl333vRAO6SMXJt7+WC6ygoOmJ2895v4PRReKWYbsyp9czjBwDCTcg2BmoB3iGDWXh
- bnuXBS24DnnYQmV55tXDuZ97YvWXLNSXVIzEE8ksWDd/L1C0/w4U9wPBV4Uq7JxiZcW5
- ANypQSAhHP8bhX8heOoZnzO+SSkrEai1Rfvlrn4DAOVzrJjHr/pP/HUNqVcRS9/QpPEC
- KMLF9kOy99KQj9jW1FH52J/jGy4NVUO6QFvDnsjiMWqRF/YF0iSaXlnzrlJoxQyy+UOT
- HATQ==
-X-Gm-Message-State: AOJu0YxPgs0BPXvOGl9lFSf2FbaL6vyXefvXfmJcQNam+7QjILv+sFZS
- EnxOMwMzEozAmejaRGcX6X1mcw==
-X-Google-Smtp-Source: AGHT+IEyOaDVyaZ/6zqLGa9I+jj6EVYrsPEQ0Zwi3PS8Lxxwlt30MrIDfkI350/BucmVP2p/rznlyA==
-X-Received: by 2002:a81:a507:0:b0:5d7:1940:7d63 with SMTP id
- u7-20020a81a507000000b005d719407d63mr13594272ywg.58.1703007982995; 
- Tue, 19 Dec 2023 09:46:22 -0800 (PST)
-Received: from [127.0.1.1]
+ d=1e100.net; s=20230601; t=1703007993; x=1703612793;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8pkZY5+WVrwe1sMwV7kJtztSZwWfmGGs+IMHSe3jz/w=;
+ b=N3I2itq6JuZb8y8uMT2hfqLvwVUAeDN6LzPbQqorigmxxePWrKE/N+gMCsvz9NmJqd
+ QJMApYuoTAN12Dm/ev+w0qtPs2O/i8/wKg4+sLI6Gt28tXVTklQyNHos4LCOsG9WELro
+ PPPvjveXfAA8nVmc2Qnwr3PcyscnsmKYL5JsJMwbpM8hclvHknaSYBuR3EMh+7pHqBJY
+ OuFOUET9wV7aw4Qn523IILpXuUGHxhydg1RKPNAuwCBndQZfa/qeyLpYs1V7ggCymHjF
+ NQ3xFZo1VWm32BzB5PO/4obpBKxCPrjkFOGpT3Dl3ZIjFCvNX67J+lVGVhGIrI8jQ4z5
+ 9b3w==
+X-Gm-Message-State: AOJu0YyUivFLqJSatgmCZcthBVG0gRh3s4A+zK3Jq24xW4nN2lo7yRRZ
+ bOE4dg/Vt77gPUpgVv6VFf/VSivsY+6RRAwcKf0=
+X-Google-Smtp-Source: AGHT+IHm5Otmlwn8c5InBdES9sXllVBBma1Y3NbFs+ku4A2M0lUY5zEHhBonn+hpoaBc0P9f9bdxjQ==
+X-Received: by 2002:a81:a7c2:0:b0:5e0:765f:1e2b with SMTP id
+ e185-20020a81a7c2000000b005e0765f1e2bmr14414816ywh.78.1703007992817; 
+ Tue, 19 Dec 2023 09:46:32 -0800 (PST)
+Received: from bill-the-cat
  (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
  [2603:6081:7b00:6400:923c:ac63:6854:a688])
  by smtp.gmail.com with ESMTPSA id
- m7-20020a81ae07000000b005e79f80959bsm716585ywh.112.2023.12.19.09.46.21
+ p127-20020a819885000000b005e6ca69cb17sm1621269ywg.25.2023.12.19.09.46.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 09:46:22 -0800 (PST)
+ Tue, 19 Dec 2023 09:46:32 -0800 (PST)
+Date: Tue, 19 Dec 2023 12:46:30 -0500
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Julien Masson <jmasson@baylibre.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Vitor Sato Eschholz <vsatoes@baylibre.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-In-Reply-To: <87plzm450u.fsf@baylibre.com>
-References: <87plzm450u.fsf@baylibre.com>
-Subject: Re: [PATCH 0/6] Add support for MediaTek MT8365 EVK Board
-Message-Id: <170300798190.2765809.16611475591002385370.b4-ty@konsulko.com>
-Date: Tue, 19 Dec 2023 12:46:21 -0500
+To: Etienne Carriere <etienne.carriere@foss.st.com>
+Cc: u-boot@lists.denx.de, Jens Wiklander <jens.wiklander@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH 1/2] tee: optee: don't fail on services enumeration failure
+Message-ID: <20231219174630.GD2513409@bill-the-cat>
+References: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="m9SJ4z4N5sUyuzrx"
+Content-Disposition: inline
+In-Reply-To: <20231129123753.1906956-1-etienne.carriere@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 04 Dec 2023 11:48:49 +0100, Julien Masson wrote:
 
-> This patch series add the support for the MediaTek MT8365 EVK Board [1].
-> Most of the code have been copied/adapted from Linux tag v6.7-rc2.
-> 
-> For now we only enable/test these features:
-> Boot, UART, Watchdog and MMC.
-> 
-> [1] https://www.mediatek.com/products/iot-genio/mediatek-genio-350-evk
-> 
-> [...]
+--m9SJ4z4N5sUyuzrx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Nov 29, 2023 at 01:37:52PM +0100, Etienne Carriere wrote:
+
+> Change optee probe function to only warn when service enumeration
+> sequence fails instead of reporting an optee driver probe failure.
+> Indeed U-Boot can still use OP-TEE even if some OP-TEE services are
+> not discovered.
+>=20
+> Fixes: 94ccfb78a4d6 ("drivers: tee: optee: discover OP-TEE services")
+> Signed-off-by: Etienne Carriere <etienne.carriere@foss.st.com>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Jens Wiklander <jens.wiklander@linaro.org>
 
 Applied to u-boot/next, thanks!
 
--- 
+--=20
 Tom
 
+--m9SJ4z4N5sUyuzrx
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB1vYACgkQFHw5/5Y0
+tyzMrQv/UVBNQxDRiKNSR8qYfZECZJPScbMzUYrgckVRgg1lKqapSTa+Y/SBha0S
+hVCNq0n7tsatxFuz1T7v0XIZfnQJI72BORDats1IzcvS5IoEyonnNEHChJ13uuQT
+KV9dAY4xepRV4F7MPo0QWvr1ZNEFZuLEzEg6+S0WhdqOxNJWzo9dS0rAj9vyJoG1
+dY+KCvOxLgJHXkORkR+M7DnKZzkG6CIAi7KP/iBTsVSYho8tyoi0BqkoWkbg76uT
+4FPDL4Dlgr+CIv7W6aIuxtye0lmGA3CR4KR3n3EaNsIVCrcEhm1Ghn1jYynDEBKi
+ZksuOV5jFkbWR9fNayqBDzl//WQAp7733PwuF/dKaoaCQK7oG6Xm/jOnsaScsDof
+kZ+pm4jvC3mTN9GboaYxptNs++OH5REfEUMLauAFh5LdekW6r9V90chKEEr4581w
+fVwaeTz93/xmc6xSu5ZbPTE0ySRcm/cVODT33seUwEnrRge2YZir20z0PmxYbQS9
+HWwPuECk
+=HV99
+-----END PGP SIGNATURE-----
+
+--m9SJ4z4N5sUyuzrx--
