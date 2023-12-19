@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AC02C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D59E6C46CCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 11:34:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91A258755C;
-	Tue, 19 Dec 2023 12:33:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0E266875B6;
+	Tue, 19 Dec 2023 12:33:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ccD/C4TK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="krp7CHeY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA23786F1E; Tue, 19 Dec 2023 11:12:50 +0100 (CET)
+ id E3B56870A4; Tue, 19 Dec 2023 11:12:52 +0100 (CET)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24B1E86F34
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:12:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61B8D871C3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 11:12:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJACb3g001368;
- Tue, 19 Dec 2023 04:12:37 -0600
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BJACfmd001376;
+ Tue, 19 Dec 2023 04:12:41 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1702980757;
+ s=ti-com-17Q1; t=1702980761;
  bh=7qBuPMl9lLlpV8ZrnhWz7XeiENMCgFS/2w4pA2HYwPI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ccD/C4TKFfMW8AqMOws87lKSAsuuALiKGFu3OCFRUI7+rgDhWkhcN0aQvlJ3osZML
- OW2X6qBU5UUO4ZHOPwq6/Z+tuevOyvKxmXy8FfImPPEPuwZNrXRcw34+aeRDbD5b/p
- cblSZBETMOXg5/JoNmL8tkSHAlD5ITIVfYg162Yg=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJACbvj113127
+ b=krp7CHeYEHBbVbjOfqaVyqvartfMQbF4fWMgJ5ElCHL5KTeCdMm2KEz+plj90muPJ
+ OjZvOXEPQz4SY18FCyFjIfRWVwao1idcyEA+lyN+kDaBorYxUlEX7xLPUtZAaHwvR2
+ zMzfc170otunlbDDtVqUiEOLo4mEcE9KVbXJE1qQ=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BJACfFh004833
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Dec 2023 04:12:37 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Dec 2023 04:12:41 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Dec 2023 04:12:37 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ Dec 2023 04:12:41 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
  (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Dec 2023 04:12:37 -0600
+ Frontend Transport; Tue, 19 Dec 2023 04:12:41 -0600
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJACbxY115399;
- Tue, 19 Dec 2023 04:12:37 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BJACfju044708;
+ Tue, 19 Dec 2023 04:12:41 -0600
 Received: from localhost (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJACaI9018843;
- Tue, 19 Dec 2023 04:12:36 -0600
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 3BJACeco018857;
+ Tue, 19 Dec 2023 04:12:40 -0600
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>, Nishanth Menon
@@ -64,10 +64,10 @@ To: Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 02/16] net: ti: icssg: Add Firmware config and
+Subject: [RFC PATCH 03/16] net: ti: icssg: Add Firmware config and
  classification APIs.
-Date: Tue, 19 Dec 2023 15:41:56 +0530
-Message-ID: <20231219101225.3443978-4-danishanwar@ti.com>
+Date: Tue, 19 Dec 2023 15:41:58 +0530
+Message-ID: <20231219101225.3443978-6-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231219101225.3443978-1-danishanwar@ti.com>
 References: <20231219101225.3443978-1-danishanwar@ti.com>
