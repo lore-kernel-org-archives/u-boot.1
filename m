@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90AF2C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:45:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A66DC46CA2
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:45:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E745F8709C;
-	Tue, 19 Dec 2023 18:45:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86ABE8774D;
+	Tue, 19 Dec 2023 18:45:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hGZxFMeF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K446R1HR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B32C86D33; Tue, 19 Dec 2023 18:45:46 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id A947C86D33; Tue, 19 Dec 2023 18:45:54 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F16E8709C
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:45:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 060E18775F
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:45:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-dbcd67d4c29so2994372276.3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:45:44 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-dbd739853easo373480276.0
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:45:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703007943; x=1703612743; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703007951; x=1703612751; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KGoPaiwrHxxnk7rz69aVeppKNOtfgiG1CZDnxtzGuJs=;
- b=hGZxFMeFzYO5TfUmTU1BiW9Ke7ya4P5ktd7tzsqGdDLainqYCZrY2xqUNB+9Qy5S5c
- TVLOx5kUNZhE4TY6oiJd494gAl+R6LdXbzkLP7Yk3tPxryHDAnWc0hPfRbn5M7arNvvc
- 9XQF+cRGBKqxrrRQqkeWvQzl2d0mWmuDjj6co=
+ bh=gHqwJ1HjZ2jkMIgdQW2vjVG+z9PYayBH9ypAzW0U5qA=;
+ b=K446R1HRkqS8Nw6OcSFMuPmSbkJ6V2DvdLsO5kLmJ1jPRCNQySnVmPhfMiWvvCQVTP
+ yrKEjMAGbLD05jCaJD/ilkfmzxSUPbufX+8Mf23YCvV2vqSMAaTw8XnlZw9yCkO6jcZ7
+ vHJ6kozmsc9PbSIjvDeptpLAYU2fPTM8PVRS4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703007943; x=1703612743;
+ d=1e100.net; s=20230601; t=1703007951; x=1703612751;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KGoPaiwrHxxnk7rz69aVeppKNOtfgiG1CZDnxtzGuJs=;
- b=i46TjJVp8/X9bdsdi2qGbRbmklySiCDA60oNPslNu72oNO3l8wPKIeEGgDZ4sJq19J
- qUzN3WSu7JCLB4xDCTMiY/pCRMP8cl3mlySU383Z47qqtxBWQax7u5cVF+h9rR3wRXvY
- wrUjQpRehyF0uGoJ55PAsDR/0GqtuQ4++xhUpUoyB4tpposLgBOfXlSUQ2chKWlTtb7j
- wYAu7iBXE1KcRhJbXi1tRdt3U6oclK/zDT2eo6U2St3liHzbrNfjpYzpZiTG29gKWkyD
- kNeaH9emKRou7mAyifApsLoIR4w04J0w0iW+aIbaiR6nkEMwKTTyY0UliKOhBjzB9U1Z
- ZAEQ==
-X-Gm-Message-State: AOJu0YxTECmgq6MFJapboGzFkMNOlNyqJhbwfY8JN8qZYnagnQs4eh95
- 0dl8Eao7LGWizqln6SVpXn89sw==
-X-Google-Smtp-Source: AGHT+IGzPnt4gQtuSMKHWVDT7tca7X0IOkPcwj2g7TSvzZH3DoB65ZxgjHV4tvdbUguTZgD2K66r5Q==
-X-Received: by 2002:a5b:52:0:b0:dbd:56c7:da80 with SMTP id
- e18-20020a5b0052000000b00dbd56c7da80mr759227ybp.31.1703007942889; 
- Tue, 19 Dec 2023 09:45:42 -0800 (PST)
+ bh=gHqwJ1HjZ2jkMIgdQW2vjVG+z9PYayBH9ypAzW0U5qA=;
+ b=mUPsjzjR8YDwfMSChBzBd+vaLBbvf8efT05FMM7DKU1o2vop8PGvVL1Tlv0/B4HUhe
+ jT4ljWMtO3mlMbGyY4W9QA5FdbuiVa5QfBIPhPzYT5fMpDSegdkNeWi8NwTSDLJoO+Jb
+ pk1g8dcB1k/XuXWzkEqKys47sICqLt03YGpughWsYhlQa25uqkHi+MgUi7IaTj0ygK5C
+ TPzo/icPZgt0dr6HjaetVGQ5o6KxWsTQOixvYVZdXbKZYpmanqEjUHAw5yPnPwVzFBnv
+ /0Z8x3kmk+uVozfriWlpo22nP8QXXOjqHXfXkcDsZOc/vR4Ktl+AIEf3Vm5z9KJaJEMx
+ UNGQ==
+X-Gm-Message-State: AOJu0YyUuRHpaoOyMIdEoUmBptEcIvjurcRjYpii6hkrYgdw0M9/bqwX
+ k5DS4vEzlQBO4PjzY07nlQ92cg==
+X-Google-Smtp-Source: AGHT+IGdBh/GlGtMrEBA91BuUKrIZ9gc6JmGJXE49p7vBtOJEvhD4DXq21dKeHtiBeHXwFqxg0zQkQ==
+X-Received: by 2002:a25:d34f:0:b0:dbd:987d:2491 with SMTP id
+ e76-20020a25d34f000000b00dbd987d2491mr21579ybf.58.1703007950754; 
+ Tue, 19 Dec 2023 09:45:50 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
  [2603:6081:7b00:6400:923c:ac63:6854:a688])
  by smtp.gmail.com with ESMTPSA id
- w142-20020a25c794000000b00dbd48c5adb0sm1068794ybe.63.2023.12.19.09.45.40
+ g11-20020a25200b000000b00d7745e2bb19sm8779083ybg.29.2023.12.19.09.45.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 09:45:41 -0800 (PST)
-Date: Tue, 19 Dec 2023 12:45:38 -0500
+ Tue, 19 Dec 2023 09:45:49 -0800 (PST)
+Date: Tue, 19 Dec 2023 12:45:47 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Apurva Nandan <a-nandan@ti.com>
-Cc: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v6 00/17] Introduce initial TI's J784S4 and AM69 support
-Message-ID: <20231219174538.GX2513409@bill-the-cat>
-References: <20231206123753.1486031-1-a-nandan@ti.com>
+To: Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, nm@ti.com
+Subject: Re: [PATCH v3 1/2] board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
+Message-ID: <20231219174547.GY2513409@bill-the-cat>
+References: <20231208153311.2422720-1-w.egorov@phytec.de>
+ <20231208153311.2422720-2-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U/g9ql4kMuZy/0le"
+ protocol="application/pgp-signature"; boundary="aoQ7gayljrMj/PC9"
 Content-Disposition: inline
-In-Reply-To: <20231206123753.1486031-1-a-nandan@ti.com>
+In-Reply-To: <20231208153311.2422720-2-w.egorov@phytec.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,46 +93,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---U/g9ql4kMuZy/0le
+--aoQ7gayljrMj/PC9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Dec 06, 2023 at 06:07:36PM +0530, Apurva Nandan wrote:
+On Fri, Dec 08, 2023 at 04:33:10PM +0100, Wadim Egorov wrote:
 
-> Hello Everyone!
+> Add basic support for PHYTEC phyCORE-AM62x SoM.
 >=20
-> This series will introduce basic support (SD and UART) support for Texas
-> Instruments J784S4 EVM.
+> Supported features:
+>   - 2GB DDR4 RAM
+>   - eMMC Flash
+>   - OSPI NOR Flash
+>   - external uSD
+>   - Ethernet
+>   - debug UART
 >=20
-> The J784S4 SoC device tree patches are taken from kernel patch submissions
-> and will be updated as they are accepted and merged to the kernel tree.
-> All other patches are specific to SPL and u-boot and do not have
-> dependency on other trees. Appreciate a review for acceptance to u-boot
-> tree.
+> Product page SoM: https://www.phytec.com/product/phycore-am62x
+>=20
+> Device trees were taken from Linux v6.7-rc3.
+>=20
+> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+> Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-Please rebase this on top of current -next as it doesn't apply / build,
-thanks.
+Please rebase this on current -next as phycore_am62x_r5 fails to build
+due to yaml schema moving around, thanks.
 
 --=20
 Tom
 
---U/g9ql4kMuZy/0le
+--aoQ7gayljrMj/PC9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB1sIACgkQFHw5/5Y0
-tyxNNQv+JhPmcLvnJYFSPP4yM2tHlWFVaZbqAqpSVOfwFqxGYYqJuZapQ9kbcdJD
-XVgDXYdnw5jlSZ9+0Gc0WALB0wP7bdgvqM5GeIJXdky9K+aLX6wec+sO8/h/sZDK
-3LYiXvV7fZRHkhCdX4FSpxWw7t4YS1b1zX5bX4uUo1Dy6OK82t2DJMLcIm09wkhf
-EY6+E3orlh/2ixxLW+ql2aXc4YyOvnhvoq1PcCstXXkry4KHzXwz6YfIvgVJ0XCQ
-rOV9e6KDaZufCqZyd3T1BtjNUzipzsP9OyZ1fVCwaFHRRfIWKTKrt4LK5Y0oQyul
-IhHlO8/863/fQbqWwtvAzySh90Cxp5IH+KLr6kaVE06IuP+5NwygCjbqeXf8tb0j
-z4TYJyZ+ZoeFq1oOcMoZ2EwqF9asdPR9f/K8pjTB/jFCHn/Z1v2aXuurmjhdXkyj
-ekbFbe41r5hYJilBcaKAv4zgpABll1kAH1a3SKuzPLnSH+puetCwJSYby4LaeaGi
-uJswOlNv
-=O41H
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB1ssACgkQFHw5/5Y0
+tyyOAQv/fskxxBPnlUoeNRA9fFEmb6wx+qyEq/iD1wsQUvdHmc2xQKTxJn4H9FcZ
+McsYwOpmrWxpC9JW8tCNw5L229D0TZZ7WEMGXBAExMxSlI/46+FPZ9cCbP6CJ9vM
+q/StgdNae3Wvm5Ix3Bt78oVlhYnHQkYWusrGoERjGxcau/UnJXluSrmpQ6wjq2n4
+19AEOiWUV/+tl+/X6dwCsADHeDamNKUoXFMRg+bpLlhyHirrCOjY67lhEl3w/Etq
+Ory8EJmzvWFT4w5xy4uznX0fWwM6nRhOaBWJ9V/czX+2+FuZiU0LuAEuDAu/cNhv
+tE4yggxrUjbKj8ZnBu6FuvZ5SZfk52H/Ol0OiXiVCuWO/vjM7ZHWs0JMV5dBMMub
+PyTYivK96gphq1kE+VBgYQ4P5jGIFSfxecAAYhPpEE7DvvYEH6tKY+yqmEjg0VFK
+9ZebeQdJFLo5k0n0QXm3e7WfhOpxyBZ+EVrn+4mkaFFTl6LcCWBg2hWCUDg+5p5n
+s8OCYtTq
+=ykkH
 -----END PGP SIGNATURE-----
 
---U/g9ql4kMuZy/0le--
+--aoQ7gayljrMj/PC9--
