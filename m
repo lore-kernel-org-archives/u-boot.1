@@ -4,66 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44549C41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 07:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822CBC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 917338709C;
-	Tue, 19 Dec 2023 08:55:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id A003E86E82;
+	Tue, 19 Dec 2023 09:25:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="A1zyJPqe";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06B90870B7; Tue, 19 Dec 2023 08:55:24 +0100 (CET)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [217.70.183.198])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 77B6E86FD5; Tue, 19 Dec 2023 09:25:41 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E58BC87053
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 08:55:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 959CB86E65
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:25:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=none (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 238FDC000B;
- Tue, 19 Dec 2023 07:55:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1702972520;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=NZXHfcE8iV40Vx6zOQ3A1z/zKCAFk19AQvCsz5cKV2k=;
- b=A1zyJPqeBC5Dif3oK8hakbVcuQQHQwi4BYa/8qZANOzdws66iSlDfaUPaaafuOpKMWy4SG
- wWAve1Gjpm1bvkK/QOcA9o6oOLuGbqJgls3NxwxHH9oc/1MCqORHre2eYxNZJQlO/ZzMsJ
- 5AK9lnXgpjgNJhK7zfnrg4vKz5ciaiIijDNSkByHynUWpwDIoxD/S/RKT72TPy6wfrCb4C
- pburPoxHz4kVzOaDj0U0hRI3ftpc+6ARkMfb+//JIfPgZ9sn4kHuPZDF/cROuT8IIBfLBh
- z1TWk1BWyIp/706xhpccd+LpdbId0WNdYwxqvXv/QqHLOofdYVwwgROrW+s06A==
-Date: Tue, 19 Dec 2023 08:55:17 +0100
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Rob Herring
- <robh+dt@kernel.org>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
- <michael@walle.cc>, linux-mtd@lists.infradead.org,
- devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWC?=
- =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH 4/4] nvmem: layouts: add U-Boot env layout
-Message-ID: <20231219085517.4b6ec4fc@xps-13>
-In-Reply-To: <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
-References: <20231218133722.16150-1-zajec5@gmail.com>
- <20231218133722.16150-4-zajec5@gmail.com>
- <20231218152116.59d59bad@xps-13>
- <13bc621c-5fcb-4710-912c-06e3e80d7337@gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 93BDC20284;
+ Tue, 19 Dec 2023 09:25:37 +0100 (CET)
+From: Francesco Dolcini <francesco@dolcini.it>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v1] arm: dts: k3-am625-verdin: fix DDRSS configuration
+Date: Tue, 19 Dec 2023 09:25:33 +0100
+Message-Id: <20231219082533.8399-1-francesco@dolcini.it>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,188 +54,395 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rafa=C5=82,
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-zajec5@gmail.com wrote on Mon, 18 Dec 2023 23:10:20 +0100:
+The current DDR subsystem configuration occasionally results in write failures,
+impacting memory stability, on Verdin AM62 Solo 512MB WB IT 0072 SKU.
+This commit addresses the issue by adjusting Drive Pull-Up/Down and
+Write Latency to improve the eye diagram and ensure reliable write operations.
+This configuration is shared with all Verdin AM62 SoM and
+it does not introduce regressions.
 
-> On 18.12.2023 15:21, Miquel Raynal wrote:
-> > Hi Rafa=C5=82,
-> >=20
-> > zajec5@gmail.com wrote on Mon, 18 Dec 2023 14:37:22 +0100:
-> >  =20
-> >> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
-> >>
-> >> This patch moves all generic (NVMEM devices independent) code from NVM=
-EM
-> >> device driver to NVMEM layout driver. Then it adds a simple NVMEM layo=
-ut
-> >> code on top of it.
-> >>
-> >> Thanks to proper layout it's possible to support U-Boot env data stored
-> >> on any kind of NVMEM device.
-> >>
-> >> For backward compatibility with old DT bindings we need to keep old
-> >> NVMEM device driver functional. To avoid code duplication a parsing
-> >> function is exported and reused in it.
-> >>
-> >> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
-> >> --- =20
-> >=20
-> > I have a couple of comments about the original driver which gets
-> > copy-pasted in the new layout driver, maybe you could clean these
-> > (the memory leak should be fixed before the migration so it can be
-> > backported easily, the others are just style so it can be done after, I
-> > don't mind).
-> >=20
-> > ...
-> >  =20
-> >> +int u_boot_env_parse(struct device *dev, struct nvmem_device *nvmem,
-> >> +		     enum u_boot_env_format format)
-> >> +{
-> >> +	size_t crc32_data_offset;
-> >> +	size_t crc32_data_len;
-> >> +	size_t crc32_offset;
-> >> +	size_t data_offset;
-> >> +	size_t data_len;
-> >> +	size_t dev_size;
-> >> +	uint32_t crc32;
-> >> +	uint32_t calc;
-> >> +	uint8_t *buf;
-> >> +	int bytes;
-> >> +	int err;
-> >> +
-> >> +	dev_size =3D nvmem_dev_size(nvmem);
-> >> +
-> >> +	buf =3D kcalloc(1, dev_size, GFP_KERNEL); =20
-> >=20
-> > Out of curiosity, why kcalloc(1,...) rather than kzalloc() ? =20
->=20
-> I used kcalloc() initially as I didn't need buffer to be zeroed.
+Configurations changes from previous / default values:
+- Drive Pull-Up/Down from 40 to 34.3 Ohm
+- Write Latency from 8 to 10
+- ODTLon / ODTLoff latency from 0 / 0 to 4 / 20 nCK
+- VREF control range 1 at 27 %
+- tFAW from 30 to 40 ns
 
-I think kcalloc() initializes the memory to zero.
-https://elixir.bootlin.com/linux/latest/source/include/linux/slab.h#L659
+Configuration is output from SysConfig [1] web tool, currently at version
+1.18.1+3343 (DDR SubSystem v9.10).
 
-If you don't need it you can switch to kmalloc() instead, I don't mind,
-but kcalloc() is meant to be used with arrays, I don't see the point of
-using kcalloc() in this case.
+[1] https://dev.ti.com/sysconfig
 
->=20
-> I see that memory-allocation.rst however says:
->  > And, to be on the safe side it's best to use routines that set memory =
-to zero, like kzalloc(). =20
->=20
-> It's probably close to zero cost to zero that buffer so it could be kzall=
-oc().
->=20
->=20
-> >> +	if (!buf) {
-> >> +		err =3D -ENOMEM;
-> >> +		goto err_out; =20
-> >=20
-> > We could directly return ENOMEM here I guess.
-> >  =20
-> >> +	}
-> >> +
-> >> +	bytes =3D nvmem_device_read(nvmem, 0, dev_size, buf);
-> >> +	if (bytes < 0)
-> >> +		return bytes;
-> >> +	else if (bytes !=3D dev_size)
-> >> +		return -EIO; =20
-> >=20
-> > Don't we need to free buf in the above cases?
-> >  =20
-> >> +	switch (format) {
-> >> +	case U_BOOT_FORMAT_SINGLE:
-> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_single, crc32);
-> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_single, data=
-);
-> >> +		data_offset =3D offsetof(struct u_boot_env_image_single, data);
-> >> +		break;
-> >> +	case U_BOOT_FORMAT_REDUNDANT:
-> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_redundant, crc32);
-> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_redundant, d=
-ata);
-> >> +		data_offset =3D offsetof(struct u_boot_env_image_redundant, data);
-> >> +		break;
-> >> +	case U_BOOT_FORMAT_BROADCOM:
-> >> +		crc32_offset =3D offsetof(struct u_boot_env_image_broadcom, crc32);
-> >> +		crc32_data_offset =3D offsetof(struct u_boot_env_image_broadcom, da=
-ta);
-> >> +		data_offset =3D offsetof(struct u_boot_env_image_broadcom, data);
-> >> +		break;
-> >> +	}
-> >> +	crc32 =3D le32_to_cpu(*(__le32 *)(buf + crc32_offset)); =20
-> >=20
-> > Looks a bit convoluted, any chances we can use intermediate variables
-> > to help decipher this?
-> >  =20
-> >> +	crc32_data_len =3D dev_size - crc32_data_offset;
-> >> +	data_len =3D dev_size - data_offset;
-> >> +
-> >> +	calc =3D crc32(~0, buf + crc32_data_offset, crc32_data_len) ^ ~0L;
-> >> +	if (calc !=3D crc32) {
-> >> +		dev_err(dev, "Invalid calculated CRC32: 0x%08x (expected: 0x%08x)\n=
-", calc, crc32);
-> >> +		err =3D -EINVAL;
-> >> +		goto err_kfree;
-> >> +	}
-> >> +
-> >> +	buf[dev_size - 1] =3D '\0';
-> >> +	err =3D u_boot_env_parse_cells(dev, nvmem, buf, data_offset, data_le=
-n);
-> >> +	if (err)
-> >> +		dev_err(dev, "Failed to add cells: %d\n", err); =20
-> >=20
-> > Please drop this error message, the only reason for which the function
-> > call would fail is apparently an ENOMEM case.
-> >  =20
-> >> +
-> >> +err_kfree:
-> >> +	kfree(buf);
-> >> +err_out:
-> >> +	return err;
-> >> +}
-> >> +EXPORT_SYMBOL_GPL(u_boot_env_parse);
-> >> +
-> >> +static int u_boot_env_add_cells(struct device *dev, struct nvmem_devi=
-ce *nvmem)
-> >> +{
-> >> +	const struct of_device_id *match;
-> >> +	struct device_node *layout_np;
-> >> +	enum u_boot_env_format format;
-> >> +
-> >> +	layout_np =3D of_nvmem_layout_get_container(nvmem);
-> >> +	if (!layout_np)
-> >> +		return -ENOENT;
-> >> +
-> >> +	match =3D of_match_node(u_boot_env_of_match_table, layout_np);
-> >> +	if (!match)
-> >> +		return -ENOENT;
-> >> +
-> >> +	format =3D (uintptr_t)match->data; =20
-> >=20
-> > In the core there is currently an unused helper called
-> > nvmem_layout_get_match_data() which does that. I think the original
-> > intent of this function was to be used in this driver, so depending on
-> > your preference, can you please either use it or remove it? =20
->=20
-> The problem is that nvmem_layout_get_match_data() uses:
-> layout->dev.driver
+Fixes: 7d1a10659f5b ("board: toradex: add verdin am62 support")
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ .../dts/k3-am625-verdin-lpddr4-1600MTs.dtsi   | 151 +++++++++---------
+ 1 file changed, 76 insertions(+), 75 deletions(-)
 
-I'm surprised .driver is unset. Well anyway, please either fix the core
-helper and use it or drop the core helper, because we have no user for
-it otherwise?
+diff --git a/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi b/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
+index 9bad4309b491..841541bb2433 100644
+--- a/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-lpddr4-1600MTs.dtsi
+@@ -1,19 +1,20 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
+  * This file was generated with the
+- * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.09.08
+- * Fri Jun 09 2023 08:01:37 GMT+0200 (Central European Summer Time)
++ * AM62x SysConfig DDR Subsystem Register Configuration Tool v0.09.10
++ * Mon Dec 11 2023 17:07:35 GMT+0100 (Central European Standard Time)
+  * DDR Type: LPDDR4
+  * F0 = 50MHz    F1 = NA     F2 = 800MHz
+  * Density (per channel): 16Gb
+  * Write DBI: Enable
+  * Number of Ranks: 1
+- */
++*/
+ 
+ #define DDRSS_PLL_FHS_CNT 3
+ #define DDRSS_PLL_FREQUENCY_1 400000000
+ #define DDRSS_PLL_FREQUENCY_2 400000000
+ 
++
+ #define DDRSS_CTL_0_DATA 0x00000B00
+ #define DDRSS_CTL_1_DATA 0x00000000
+ #define DDRSS_CTL_2_DATA 0x00000000
+@@ -54,20 +55,20 @@
+ #define DDRSS_CTL_37_DATA 0x00000000
+ #define DDRSS_CTL_38_DATA 0x0000040C
+ #define DDRSS_CTL_39_DATA 0x00000000
+-#define DDRSS_CTL_40_DATA 0x0000081C
++#define DDRSS_CTL_40_DATA 0x00000A1C
+ #define DDRSS_CTL_41_DATA 0x00000000
+-#define DDRSS_CTL_42_DATA 0x0000081C
++#define DDRSS_CTL_42_DATA 0x00000A1C
+ #define DDRSS_CTL_43_DATA 0x00000000
+ #define DDRSS_CTL_44_DATA 0x05000804
+ #define DDRSS_CTL_45_DATA 0x00000B00
+ #define DDRSS_CTL_46_DATA 0x09090004
+-#define DDRSS_CTL_47_DATA 0x00000204
++#define DDRSS_CTL_47_DATA 0x00000304
+ #define DDRSS_CTL_48_DATA 0x00370008
+ #define DDRSS_CTL_49_DATA 0x09090024
+-#define DDRSS_CTL_50_DATA 0x00001910
++#define DDRSS_CTL_50_DATA 0x00002110
+ #define DDRSS_CTL_51_DATA 0x00370008
+ #define DDRSS_CTL_52_DATA 0x09090024
+-#define DDRSS_CTL_53_DATA 0x09001910
++#define DDRSS_CTL_53_DATA 0x09002110
+ #define DDRSS_CTL_54_DATA 0x000A0A09
+ #define DDRSS_CTL_55_DATA 0x0400036D
+ #define DDRSS_CTL_56_DATA 0x09092004
+@@ -223,19 +224,19 @@
+ #define DDRSS_CTL_206_DATA 0x00000000
+ #define DDRSS_CTL_207_DATA 0x00000000
+ #define DDRSS_CTL_208_DATA 0x00000024
+-#define DDRSS_CTL_209_DATA 0x00000012
++#define DDRSS_CTL_209_DATA 0x0000001A
+ #define DDRSS_CTL_210_DATA 0x00000000
+ #define DDRSS_CTL_211_DATA 0x00000024
+-#define DDRSS_CTL_212_DATA 0x00000012
++#define DDRSS_CTL_212_DATA 0x0000001A
+ #define DDRSS_CTL_213_DATA 0x00000000
+ #define DDRSS_CTL_214_DATA 0x00000004
+ #define DDRSS_CTL_215_DATA 0x00000000
+ #define DDRSS_CTL_216_DATA 0x00000000
+ #define DDRSS_CTL_217_DATA 0x00000024
+-#define DDRSS_CTL_218_DATA 0x00000012
++#define DDRSS_CTL_218_DATA 0x0000001A
+ #define DDRSS_CTL_219_DATA 0x00000000
+ #define DDRSS_CTL_220_DATA 0x00000024
+-#define DDRSS_CTL_221_DATA 0x00000012
++#define DDRSS_CTL_221_DATA 0x0000001A
+ #define DDRSS_CTL_222_DATA 0x00000000
+ #define DDRSS_CTL_223_DATA 0x00000000
+ #define DDRSS_CTL_224_DATA 0x00000031
+@@ -268,21 +269,21 @@
+ #define DDRSS_CTL_251_DATA 0x00000000
+ #define DDRSS_CTL_252_DATA 0x00000000
+ #define DDRSS_CTL_253_DATA 0x00000000
+-#define DDRSS_CTL_254_DATA 0x46004646
+-#define DDRSS_CTL_255_DATA 0x00002746
+-#define DDRSS_CTL_256_DATA 0x00000027
+-#define DDRSS_CTL_257_DATA 0x00000027
+-#define DDRSS_CTL_258_DATA 0x00000027
+-#define DDRSS_CTL_259_DATA 0x00000027
+-#define DDRSS_CTL_260_DATA 0x00000027
++#define DDRSS_CTL_254_DATA 0x44004444
++#define DDRSS_CTL_255_DATA 0x00004D44
++#define DDRSS_CTL_256_DATA 0x0000004D
++#define DDRSS_CTL_257_DATA 0x0000004D
++#define DDRSS_CTL_258_DATA 0x0000004D
++#define DDRSS_CTL_259_DATA 0x0000004D
++#define DDRSS_CTL_260_DATA 0x0000004D
+ #define DDRSS_CTL_261_DATA 0x00000000
+ #define DDRSS_CTL_262_DATA 0x00000000
+-#define DDRSS_CTL_263_DATA 0x0000000F
+-#define DDRSS_CTL_264_DATA 0x0000000F
+-#define DDRSS_CTL_265_DATA 0x0000000F
+-#define DDRSS_CTL_266_DATA 0x0000000F
+-#define DDRSS_CTL_267_DATA 0x0000000F
+-#define DDRSS_CTL_268_DATA 0x0000000F
++#define DDRSS_CTL_263_DATA 0x0000004D
++#define DDRSS_CTL_264_DATA 0x0000004D
++#define DDRSS_CTL_265_DATA 0x0000004D
++#define DDRSS_CTL_266_DATA 0x0000004D
++#define DDRSS_CTL_267_DATA 0x0000004D
++#define DDRSS_CTL_268_DATA 0x0000004D
+ #define DDRSS_CTL_269_DATA 0x00000000
+ #define DDRSS_CTL_270_DATA 0x00001000
+ #define DDRSS_CTL_271_DATA 0x00000015
+@@ -388,13 +389,13 @@
+ #define DDRSS_CTL_371_DATA 0x01000101
+ #define DDRSS_CTL_372_DATA 0x01010001
+ #define DDRSS_CTL_373_DATA 0x00010101
+-#define DDRSS_CTL_374_DATA 0x01050503
++#define DDRSS_CTL_374_DATA 0x01070703
+ #define DDRSS_CTL_375_DATA 0x05020201
+ #define DDRSS_CTL_376_DATA 0x08080C0C
+ #define DDRSS_CTL_377_DATA 0x00080308
+-#define DDRSS_CTL_378_DATA 0x000B030E
+-#define DDRSS_CTL_379_DATA 0x000B0310
+-#define DDRSS_CTL_380_DATA 0x0B0B0810
++#define DDRSS_CTL_378_DATA 0x0009030E
++#define DDRSS_CTL_379_DATA 0x00090312
++#define DDRSS_CTL_380_DATA 0x09090806
+ #define DDRSS_CTL_381_DATA 0x01000000
+ #define DDRSS_CTL_382_DATA 0x03020301
+ #define DDRSS_CTL_383_DATA 0x04000102
+@@ -416,7 +417,7 @@
+ #define DDRSS_CTL_399_DATA 0x00003690
+ #define DDRSS_CTL_400_DATA 0x00007940
+ #define DDRSS_CTL_401_DATA 0x070D0402
+-#define DDRSS_CTL_402_DATA 0x00260405
++#define DDRSS_CTL_402_DATA 0x00260607
+ #define DDRSS_CTL_403_DATA 0x00000C20
+ #define DDRSS_CTL_404_DATA 0x00000200
+ #define DDRSS_CTL_405_DATA 0x00000200
+@@ -425,7 +426,7 @@
+ #define DDRSS_CTL_408_DATA 0x00003690
+ #define DDRSS_CTL_409_DATA 0x00007940
+ #define DDRSS_CTL_410_DATA 0x070D0402
+-#define DDRSS_CTL_411_DATA 0x00000405
++#define DDRSS_CTL_411_DATA 0x00000607
+ #define DDRSS_CTL_412_DATA 0x00000000
+ #define DDRSS_CTL_413_DATA 0x0302000A
+ #define DDRSS_CTL_414_DATA 0x01000500
+@@ -609,8 +610,8 @@
+ #define DDRSS_PI_169_DATA 0x00020043
+ #define DDRSS_PI_170_DATA 0x02000200
+ #define DDRSS_PI_171_DATA 0x00000004
+-#define DDRSS_PI_172_DATA 0x0000080C
+-#define DDRSS_PI_173_DATA 0x00081C00
++#define DDRSS_PI_172_DATA 0x00000A0C
++#define DDRSS_PI_173_DATA 0x000A1C00
+ #define DDRSS_PI_174_DATA 0x001C0000
+ #define DDRSS_PI_175_DATA 0x00000013
+ #define DDRSS_PI_176_DATA 0x00000059
+@@ -624,15 +625,15 @@
+ #define DDRSS_PI_184_DATA 0x01000100
+ #define DDRSS_PI_185_DATA 0x00000100
+ #define DDRSS_PI_186_DATA 0x00000000
+-#define DDRSS_PI_187_DATA 0x05050503
++#define DDRSS_PI_187_DATA 0x05070703
+ #define DDRSS_PI_188_DATA 0x01010C0C
+ #define DDRSS_PI_189_DATA 0x01010101
+ #define DDRSS_PI_190_DATA 0x000C0C0A
+ #define DDRSS_PI_191_DATA 0x00000000
+ #define DDRSS_PI_192_DATA 0x00000000
+ #define DDRSS_PI_193_DATA 0x04000000
+-#define DDRSS_PI_194_DATA 0x04020808
+-#define DDRSS_PI_195_DATA 0x04040204
++#define DDRSS_PI_194_DATA 0x06020808
++#define DDRSS_PI_195_DATA 0x04040206
+ #define DDRSS_PI_196_DATA 0x00090031
+ #define DDRSS_PI_197_DATA 0x00110039
+ #define DDRSS_PI_198_DATA 0x00110039
+@@ -661,13 +662,13 @@
+ #define DDRSS_PI_221_DATA 0x00001900
+ #define DDRSS_PI_222_DATA 0x32000056
+ #define DDRSS_PI_223_DATA 0x06000101
+-#define DDRSS_PI_224_DATA 0x001D0204
+-#define DDRSS_PI_225_DATA 0x32120058
++#define DDRSS_PI_224_DATA 0x001F0204
++#define DDRSS_PI_225_DATA 0x72400056
+ #define DDRSS_PI_226_DATA 0x05000101
+-#define DDRSS_PI_227_DATA 0x001D0408
+-#define DDRSS_PI_228_DATA 0x32120058
++#define DDRSS_PI_227_DATA 0x001F0608
++#define DDRSS_PI_228_DATA 0x72400056
+ #define DDRSS_PI_229_DATA 0x05000101
+-#define DDRSS_PI_230_DATA 0x00000408
++#define DDRSS_PI_230_DATA 0x00000608
+ #define DDRSS_PI_231_DATA 0x05040900
+ #define DDRSS_PI_232_DATA 0x00060900
+ #define DDRSS_PI_233_DATA 0x00000315
+@@ -741,23 +742,23 @@
+ #define DDRSS_PI_301_DATA 0x00000000
+ #define DDRSS_PI_302_DATA 0x00000000
+ #define DDRSS_PI_303_DATA 0x00000000
+-#define DDRSS_PI_304_DATA 0x00100F27
++#define DDRSS_PI_304_DATA 0x00104D4D
+ #define DDRSS_PI_305_DATA 0x00000000
+ #define DDRSS_PI_306_DATA 0x00000024
+-#define DDRSS_PI_307_DATA 0x00000012
++#define DDRSS_PI_307_DATA 0x0000001A
+ #define DDRSS_PI_308_DATA 0x000000B1
+ #define DDRSS_PI_309_DATA 0x00000000
+ #define DDRSS_PI_310_DATA 0x00000000
+-#define DDRSS_PI_311_DATA 0x46000000
+-#define DDRSS_PI_312_DATA 0x00150F27
++#define DDRSS_PI_311_DATA 0x44000000
++#define DDRSS_PI_312_DATA 0x00154D4D
+ #define DDRSS_PI_313_DATA 0x00000000
+ #define DDRSS_PI_314_DATA 0x00000024
+-#define DDRSS_PI_315_DATA 0x00000012
++#define DDRSS_PI_315_DATA 0x0000001A
+ #define DDRSS_PI_316_DATA 0x000000B1
+ #define DDRSS_PI_317_DATA 0x00000000
+ #define DDRSS_PI_318_DATA 0x00000000
+-#define DDRSS_PI_319_DATA 0x46000000
+-#define DDRSS_PI_320_DATA 0x00150F27
++#define DDRSS_PI_319_DATA 0x44000000
++#define DDRSS_PI_320_DATA 0x00154D4D
+ #define DDRSS_PI_321_DATA 0x00000000
+ #define DDRSS_PI_322_DATA 0x00000004
+ #define DDRSS_PI_323_DATA 0x00000000
+@@ -765,23 +766,23 @@
+ #define DDRSS_PI_325_DATA 0x00000000
+ #define DDRSS_PI_326_DATA 0x00000000
+ #define DDRSS_PI_327_DATA 0x00000000
+-#define DDRSS_PI_328_DATA 0x00100F27
++#define DDRSS_PI_328_DATA 0x00104D4D
+ #define DDRSS_PI_329_DATA 0x00000000
+ #define DDRSS_PI_330_DATA 0x00000024
+-#define DDRSS_PI_331_DATA 0x00000012
++#define DDRSS_PI_331_DATA 0x0000001A
+ #define DDRSS_PI_332_DATA 0x000000B1
+ #define DDRSS_PI_333_DATA 0x00000000
+ #define DDRSS_PI_334_DATA 0x00000000
+-#define DDRSS_PI_335_DATA 0x46000000
+-#define DDRSS_PI_336_DATA 0x00150F27
++#define DDRSS_PI_335_DATA 0x44000000
++#define DDRSS_PI_336_DATA 0x00154D4D
+ #define DDRSS_PI_337_DATA 0x00000000
+ #define DDRSS_PI_338_DATA 0x00000024
+-#define DDRSS_PI_339_DATA 0x00000012
++#define DDRSS_PI_339_DATA 0x0000001A
+ #define DDRSS_PI_340_DATA 0x000000B1
+ #define DDRSS_PI_341_DATA 0x00000000
+ #define DDRSS_PI_342_DATA 0x00000000
+-#define DDRSS_PI_343_DATA 0x46000000
+-#define DDRSS_PI_344_DATA 0x00150F27
++#define DDRSS_PI_343_DATA 0x44000000
++#define DDRSS_PI_344_DATA 0x00154D4D
+ #define DDRSS_PHY_0_DATA 0x04F00000
+ #define DDRSS_PHY_1_DATA 0x00000000
+ #define DDRSS_PHY_2_DATA 0x00030200
+@@ -856,8 +857,8 @@
+ #define DDRSS_PHY_71_DATA 0x00000000
+ #define DDRSS_PHY_72_DATA 0x041F07FF
+ #define DDRSS_PHY_73_DATA 0x00000000
+-#define DDRSS_PHY_74_DATA 0x01CC0B01
+-#define DDRSS_PHY_75_DATA 0x1003CC0B
++#define DDRSS_PHY_74_DATA 0x01FF0B01
++#define DDRSS_PHY_75_DATA 0x1003FF0B
+ #define DDRSS_PHY_76_DATA 0x20000140
+ #define DDRSS_PHY_77_DATA 0x07FF0200
+ #define DDRSS_PHY_78_DATA 0x0000DD01
+@@ -872,7 +873,7 @@
+ #define DDRSS_PHY_87_DATA 0x02020010
+ #define DDRSS_PHY_88_DATA 0x51516041
+ #define DDRSS_PHY_89_DATA 0x31C06000
+-#define DDRSS_PHY_90_DATA 0x07AB0340
++#define DDRSS_PHY_90_DATA 0x06B60340
+ #define DDRSS_PHY_91_DATA 0x0000C0C0
+ #define DDRSS_PHY_92_DATA 0x04050000
+ #define DDRSS_PHY_93_DATA 0x00000504
+@@ -1112,8 +1113,8 @@
+ #define DDRSS_PHY_327_DATA 0x00000000
+ #define DDRSS_PHY_328_DATA 0x041F07FF
+ #define DDRSS_PHY_329_DATA 0x00000000
+-#define DDRSS_PHY_330_DATA 0x01CC0B01
+-#define DDRSS_PHY_331_DATA 0x1003CC0B
++#define DDRSS_PHY_330_DATA 0x01FF0B01
++#define DDRSS_PHY_331_DATA 0x1003FF0B
+ #define DDRSS_PHY_332_DATA 0x20000140
+ #define DDRSS_PHY_333_DATA 0x07FF0200
+ #define DDRSS_PHY_334_DATA 0x0000DD01
+@@ -1128,7 +1129,7 @@
+ #define DDRSS_PHY_343_DATA 0x02020010
+ #define DDRSS_PHY_344_DATA 0x51516041
+ #define DDRSS_PHY_345_DATA 0x31C06000
+-#define DDRSS_PHY_346_DATA 0x07AB0340
++#define DDRSS_PHY_346_DATA 0x06B60340
+ #define DDRSS_PHY_347_DATA 0x0000C0C0
+ #define DDRSS_PHY_348_DATA 0x04050000
+ #define DDRSS_PHY_349_DATA 0x00000504
+@@ -1326,7 +1327,7 @@
+ #define DDRSS_PHY_541_DATA 0x003F0000
+ #define DDRSS_PHY_542_DATA 0x000F013F
+ #define DDRSS_PHY_543_DATA 0x0000000F
+-#define DDRSS_PHY_544_DATA 0x020002CC
++#define DDRSS_PHY_544_DATA 0x020002FF
+ #define DDRSS_PHY_545_DATA 0x00030000
+ #define DDRSS_PHY_546_DATA 0x00000300
+ #define DDRSS_PHY_547_DATA 0x00000300
+@@ -1582,7 +1583,7 @@
+ #define DDRSS_PHY_797_DATA 0x00000000
+ #define DDRSS_PHY_798_DATA 0x000F0000
+ #define DDRSS_PHY_799_DATA 0x0000000F
+-#define DDRSS_PHY_800_DATA 0x020002CC
++#define DDRSS_PHY_800_DATA 0x020002FF
+ #define DDRSS_PHY_801_DATA 0x00030000
+ #define DDRSS_PHY_802_DATA 0x00000300
+ #define DDRSS_PHY_803_DATA 0x00000300
+@@ -1838,7 +1839,7 @@
+ #define DDRSS_PHY_1053_DATA 0x10000000
+ #define DDRSS_PHY_1054_DATA 0x000F0000
+ #define DDRSS_PHY_1055_DATA 0x0000000F
+-#define DDRSS_PHY_1056_DATA 0x020002CC
++#define DDRSS_PHY_1056_DATA 0x020002FF
+ #define DDRSS_PHY_1057_DATA 0x00030000
+ #define DDRSS_PHY_1058_DATA 0x00000300
+ #define DDRSS_PHY_1059_DATA 0x00000300
+@@ -2169,22 +2170,22 @@
+ #define DDRSS_PHY_1384_DATA 0x00000300
+ #define DDRSS_PHY_1385_DATA 0x00000300
+ #define DDRSS_PHY_1386_DATA 0x00000300
+-#define DDRSS_PHY_1387_DATA 0x3183BF77
++#define DDRSS_PHY_1387_DATA 0x31833F77
+ #define DDRSS_PHY_1388_DATA 0x00000000
+-#define DDRSS_PHY_1389_DATA 0x0C000DFF
+-#define DDRSS_PHY_1390_DATA 0x30000DFF
+-#define DDRSS_PHY_1391_DATA 0x3F0DFF11
+-#define DDRSS_PHY_1392_DATA 0x01990000
+-#define DDRSS_PHY_1393_DATA 0x780DFFCC
++#define DDRSS_PHY_1389_DATA 0x0C000DBF
++#define DDRSS_PHY_1390_DATA 0x30000DBF
++#define DDRSS_PHY_1391_DATA 0x3F0DBF11
++#define DDRSS_PHY_1392_DATA 0x01FF0000
++#define DDRSS_PHY_1393_DATA 0x780DBFFF
+ #define DDRSS_PHY_1394_DATA 0x00000C11
+ #define DDRSS_PHY_1395_DATA 0x00018011
+ #define DDRSS_PHY_1396_DATA 0x0089FF00
+ #define DDRSS_PHY_1397_DATA 0x000C3F11
+-#define DDRSS_PHY_1398_DATA 0x01990000
+-#define DDRSS_PHY_1399_DATA 0x000C3F11
+-#define DDRSS_PHY_1400_DATA 0x01990000
+-#define DDRSS_PHY_1401_DATA 0x3F0DFF11
+-#define DDRSS_PHY_1402_DATA 0x01990000
++#define DDRSS_PHY_1398_DATA 0x01FF0000
++#define DDRSS_PHY_1399_DATA 0x000C3F91
++#define DDRSS_PHY_1400_DATA 0x01FF0000
++#define DDRSS_PHY_1401_DATA 0x3F0DBF11
++#define DDRSS_PHY_1402_DATA 0x01FF0000
+ #define DDRSS_PHY_1403_DATA 0x00018011
+ #define DDRSS_PHY_1404_DATA 0x0089FF00
+ #define DDRSS_PHY_1405_DATA 0x20040004
+-- 
+2.25.1
 
-> It doesn't work with layouts driver (since refactoring?) as driver is
-> NULL. That results in NULL pointer dereference when trying to reach
-> of_match_table.
->=20
-> That is why I used u_boot_env_of_match_table directly.
->=20
-> If you know how to fix nvmem_layout_get_match_data() that would be
-> great. Do we need driver_register() somewhere in NVMEM core?
->=20
-
-
-Thanks,
-Miqu=C3=A8l
