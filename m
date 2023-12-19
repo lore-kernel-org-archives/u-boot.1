@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A66DC46CA2
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4113DC41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 17:46:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86ABE8774D;
-	Tue, 19 Dec 2023 18:45:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1943F87780;
+	Tue, 19 Dec 2023 18:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="K446R1HR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gOdjJiY7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A947C86D33; Tue, 19 Dec 2023 18:45:54 +0100 (CET)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 247C487767; Tue, 19 Dec 2023 18:46:00 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 060E18775F
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:45:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 140BF876F6
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 18:45:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-dbd739853easo373480276.0
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:45:51 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5d33574f64eso37642477b3.3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:45:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703007951; x=1703612751; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703007957; x=1703612757; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gHqwJ1HjZ2jkMIgdQW2vjVG+z9PYayBH9ypAzW0U5qA=;
- b=K446R1HRkqS8Nw6OcSFMuPmSbkJ6V2DvdLsO5kLmJ1jPRCNQySnVmPhfMiWvvCQVTP
- yrKEjMAGbLD05jCaJD/ilkfmzxSUPbufX+8Mf23YCvV2vqSMAaTw8XnlZw9yCkO6jcZ7
- vHJ6kozmsc9PbSIjvDeptpLAYU2fPTM8PVRS4=
+ bh=9ZS5sX9iIr0ViEcS0JDcqxEzYqCmg9gHNZ/aIlmPvHY=;
+ b=gOdjJiY7bBJS/mhqAHGSh3I/0FpJJSTo4hRDPjXSKj4uNkgM2elIzCHqni1ak/O9Fi
+ l2h2eLr4tGbxpKz6/d0id7aC2GdHCO0c0Jnx5gHpP8v5ZUu15JAnnD+ixhr7XHzCPBYT
+ jfb1R7OlpHiD4yFxzsLsVA3WabQrJgDBRTR7g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703007951; x=1703612751;
+ d=1e100.net; s=20230601; t=1703007957; x=1703612757;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gHqwJ1HjZ2jkMIgdQW2vjVG+z9PYayBH9ypAzW0U5qA=;
- b=mUPsjzjR8YDwfMSChBzBd+vaLBbvf8efT05FMM7DKU1o2vop8PGvVL1Tlv0/B4HUhe
- jT4ljWMtO3mlMbGyY4W9QA5FdbuiVa5QfBIPhPzYT5fMpDSegdkNeWi8NwTSDLJoO+Jb
- pk1g8dcB1k/XuXWzkEqKys47sICqLt03YGpughWsYhlQa25uqkHi+MgUi7IaTj0ygK5C
- TPzo/icPZgt0dr6HjaetVGQ5o6KxWsTQOixvYVZdXbKZYpmanqEjUHAw5yPnPwVzFBnv
- /0Z8x3kmk+uVozfriWlpo22nP8QXXOjqHXfXkcDsZOc/vR4Ktl+AIEf3Vm5z9KJaJEMx
- UNGQ==
-X-Gm-Message-State: AOJu0YyUuRHpaoOyMIdEoUmBptEcIvjurcRjYpii6hkrYgdw0M9/bqwX
- k5DS4vEzlQBO4PjzY07nlQ92cg==
-X-Google-Smtp-Source: AGHT+IGdBh/GlGtMrEBA91BuUKrIZ9gc6JmGJXE49p7vBtOJEvhD4DXq21dKeHtiBeHXwFqxg0zQkQ==
-X-Received: by 2002:a25:d34f:0:b0:dbd:987d:2491 with SMTP id
- e76-20020a25d34f000000b00dbd987d2491mr21579ybf.58.1703007950754; 
- Tue, 19 Dec 2023 09:45:50 -0800 (PST)
+ bh=9ZS5sX9iIr0ViEcS0JDcqxEzYqCmg9gHNZ/aIlmPvHY=;
+ b=bJwKeYpfC9lJbsiiI18ldvOHfYVWIaDyjoiPBmSCNqiVIkxlNEOrf90/PMO9UggNx6
+ rhXyLXlpGoM2w5/41PsYoeDbtxnKf32MGY5m7Xq27b7yplqmP6p6TL98t8YlVCVyv4BA
+ 9hFmiecGHmfet+mYwho0a9BsBG1k3X/5v/mDxY30/4OgWzsU/06NFsWuRb9FaE57CqWo
+ 90gMSb7fYRCdqfc7dK8yscVlsCov/FjShEUzKSnmy89TgWW/L7GZexagzoTi6VfG32d7
+ 60UgRNhm8eKz1lPb+BB7mWmSQkoFSDaF/Y+OA4oN2MeqpeMrJuL/SVFRivPfIvfw6pfK
+ CdDw==
+X-Gm-Message-State: AOJu0YxjiS17O1vra1Ho2Ildn6DRawRkVplnLGiHpVTuJcmjtzIQwtTo
+ E8xlRE4k3xcSy0kKNhnnX1YW6g==
+X-Google-Smtp-Source: AGHT+IFOxdewcv8Wg0zYeGLqUoWP+XYnrAZZdboiE/P9eUnKVdEhsovmBqkCMlkrM0kvquYRWPmFGQ==
+X-Received: by 2002:a25:b904:0:b0:d9b:eb86:2b26 with SMTP id
+ x4-20020a25b904000000b00d9beb862b26mr10956330ybj.21.1703007956788; 
+ Tue, 19 Dec 2023 09:45:56 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-923c-ac63-6854-a688.res6.spectrum.com.
  [2603:6081:7b00:6400:923c:ac63:6854:a688])
  by smtp.gmail.com with ESMTPSA id
- g11-20020a25200b000000b00d7745e2bb19sm8779083ybg.29.2023.12.19.09.45.49
+ v62-20020a25c541000000b00da10d9e96cesm1277721ybe.35.2023.12.19.09.45.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Dec 2023 09:45:49 -0800 (PST)
-Date: Tue, 19 Dec 2023 12:45:47 -0500
+ Tue, 19 Dec 2023 09:45:56 -0800 (PST)
+Date: Tue, 19 Dec 2023 12:45:54 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de, nm@ti.com
-Subject: Re: [PATCH v3 1/2] board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
-Message-ID: <20231219174547.GY2513409@bill-the-cat>
-References: <20231208153311.2422720-1-w.egorov@phytec.de>
- <20231208153311.2422720-2-w.egorov@phytec.de>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH] test/py: mdio: Add tests for mdio command
+Message-ID: <20231219174554.GZ2513409@bill-the-cat>
+References: <92907606c7b930808b82582bea752d4cee13cae6.1702988434.git.love.kumar@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aoQ7gayljrMj/PC9"
+ protocol="application/pgp-signature"; boundary="A6Cil7y1o7GewszJ"
 Content-Disposition: inline
-In-Reply-To: <20231208153311.2422720-2-w.egorov@phytec.de>
+In-Reply-To: <92907606c7b930808b82582bea752d4cee13cae6.1702988434.git.love.kumar@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,52 +92,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---aoQ7gayljrMj/PC9
+--A6Cil7y1o7GewszJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 08, 2023 at 04:33:10PM +0100, Wadim Egorov wrote:
+On Tue, Dec 19, 2023 at 05:50:51PM +0530, Love Kumar wrote:
 
-> Add basic support for PHYTEC phyCORE-AM62x SoM.
+> Add below test cases for mdio commands:
+> mdio_list - To list MDIO buses
+> mdio_read - To read PHY's register at <devad>.<reg>
+> mdio_write - To write PHY's register at <devad>.<reg>
 >=20
-> Supported features:
->   - 2GB DDR4 RAM
->   - eMMC Flash
->   - OSPI NOR Flash
->   - external uSD
->   - Ethernet
->   - debug UART
->=20
-> Product page SoM: https://www.phytec.com/product/phycore-am62x
->=20
-> Device trees were taken from Linux v6.7-rc3.
->=20
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
 
-Please rebase this on current -next as phycore_am62x_r5 fails to build
-due to yaml schema moving around, thanks.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---aoQ7gayljrMj/PC9
+--A6Cil7y1o7GewszJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB1ssACgkQFHw5/5Y0
-tyyOAQv/fskxxBPnlUoeNRA9fFEmb6wx+qyEq/iD1wsQUvdHmc2xQKTxJn4H9FcZ
-McsYwOpmrWxpC9JW8tCNw5L229D0TZZ7WEMGXBAExMxSlI/46+FPZ9cCbP6CJ9vM
-q/StgdNae3Wvm5Ix3Bt78oVlhYnHQkYWusrGoERjGxcau/UnJXluSrmpQ6wjq2n4
-19AEOiWUV/+tl+/X6dwCsADHeDamNKUoXFMRg+bpLlhyHirrCOjY67lhEl3w/Etq
-Ory8EJmzvWFT4w5xy4uznX0fWwM6nRhOaBWJ9V/czX+2+FuZiU0LuAEuDAu/cNhv
-tE4yggxrUjbKj8ZnBu6FuvZ5SZfk52H/Ol0OiXiVCuWO/vjM7ZHWs0JMV5dBMMub
-PyTYivK96gphq1kE+VBgYQ4P5jGIFSfxecAAYhPpEE7DvvYEH6tKY+yqmEjg0VFK
-9ZebeQdJFLo5k0n0QXm3e7WfhOpxyBZ+EVrn+4mkaFFTl6LcCWBg2hWCUDg+5p5n
-s8OCYtTq
-=ykkH
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWB1tIACgkQFHw5/5Y0
+tywPXQv+MQ51k7/VsyngcoM3oEjZT0YoEp66/XMB4MkNVVc06PPxQnJSag1ivR9t
+TDzSFjJD+OQ90po4adRlzrUPIT1/qLdHg8Aiphu/UdPNglL76EiidNUXe+XNaHzJ
+Vo5f4/wtg4RCd2x3cpfr9NYgOiaNzZAm/3bgwGI5GHkyjmv/iHEmEiRQ3mg24oNs
+IYnPFZKrFr0nQC56bxox+G6bAYEBnZa9az89rxAU0/I+xoyDCa+Q0IOlLMuQVgVT
+feS+iEepktfaww2O3tcYpyrtNcaxBcv/ZGEjjXWuAvXXWEhAXaTnNeaWCvypD0XN
+ZOcDuBTfcjBTM+Yw0vasPuQ1J20x7If+fjdnLHNNDvzVCQxqODdE1B2/aAHzZ9S5
+7qTZ5eaAno6h0STMzONwb+T9GsN7w4a0PC3ect6V+e+3iyDpCEStZtp/Ugtnp67P
+UskTFIp1x2JgspdfptjoYyWFugJD+bDDmxilmLnSLKYS4uslmpIJqBzP5QYaaG08
+nOZ+tlqm
+=R9o0
 -----END PGP SIGNATURE-----
 
---aoQ7gayljrMj/PC9--
+--A6Cil7y1o7GewszJ--
