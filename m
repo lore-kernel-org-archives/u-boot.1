@@ -4,86 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40F88C35274
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 02:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BF8C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 04:16:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72CDC8701D;
-	Tue, 19 Dec 2023 03:15:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6EEF08709C;
+	Tue, 19 Dec 2023 05:15:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="l9Au3hGk";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Q+epJdem";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35A5E87032; Tue, 19 Dec 2023 03:15:43 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7E0F287073; Tue, 19 Dec 2023 05:15:58 +0100 (CET)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam04on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8c::62b])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CAF986FF4
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 03:15:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BB3686F1E
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 05:15:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1702952139; x=1703556939; i=xypron.glpk@gmx.de;
- bh=ajvqpRyr5tN8Gs0n6kePULZT51mYPY411T/+93Bw05Q=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=l9Au3hGkwIgHtM5Bi4/09bcaNC/j56pukaf2f679SUhrSn0H671LSNzeya8SKDVt
- 3YGUbxZHgZEmhfWrZsMzj+NFKeT9FdD1M4TvRAJj592DT5hzKRFA/xceFlBQL71Zv
- jUQs32OLfDiccv8VlE04pYHBlhxVsoMy22sUDlEO0WbrHPBpnba9OFM4XImohWixo
- o5tlGfLjZWYDP8ypm3X+8r+wGiAnHd6uDj9gc2JViRVnY0DWRH38xr1Mw7f3/0YgO
- iC92QMn9hF6fm1mX+hCz96LSVAj1esk20kmruLvUNbdFWAudFDIuYPgvsPnqnoJvU
- 5IrhiSlhEZQR+2106Q==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtfJX-1r1ioG10O7-00vBzv; Tue, 19
- Dec 2023 03:15:39 +0100
-Date: Tue, 19 Dec 2023 03:15:38 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Tom Rini <trini@konsulko.com>
-CC: Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Proposal: U-Boot memory management
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231219012600.GQ2513409@bill-the-cat>
-References: <CAPnjgZ0YBJ9bN4VHbYkR-r3V8winGmm5TA0UXvh-mBLeRgza3g@mail.gmail.com>
- <3A9B3E83-545B-4CAC-9D65-737BD9D6BE0C@gmx.de>
- <CAPnjgZ1=JBEh49G654DfkYM-fcOEhwh=Xuu1scXTLsNkZk2SNQ@mail.gmail.com>
- <DEECD6D4-58C6-4032-BBF9-28A65B9096DD@gmx.de>
- <20231218224108.GN2513409@bill-the-cat>
- <3DAFAD12-98E4-46CC-B02E-E8EE40D57AC3@gmx.de>
- <20231218231640.GO2513409@bill-the-cat>
- <058AE676-FD71-4DEB-AEB3-0C805B74E8EE@gmx.de>
- <20231218233130.GP2513409@bill-the-cat>
- <688C13A3-9C5F-4A39-9F8F-54C2E8D08EE8@gmx.de>
- <20231219012600.GQ2513409@bill-the-cat>
-Message-ID: <E0572546-90AA-41C4-8433-EF02BB12E434@gmx.de>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AETN8xqaFFOtJoWEz7sNrMfxWM7vnGc198fIuahzqHr4WA7E0FH8FwOaZTrscgUlkOsSbhOKt4skZuV2+O4TPmPDaIbgA4s53iIBmG9ZBszCKdolzsS/vmoUeth9/JWNGo7x5uskYOBenzdZOsIHKl6Zqt6DvQJJ4PjCO/RrTViyREMLNISUcZp4nUsj19qUmzbqHdt/LxdwMbpLwY8fb0SuVUinUSWHVMxOdZcBkjLuGr5mjFfTJbxCsrDxv4gA+gkWXhY5C3rsqgbtgZTjgxxRnjmJ66Gz0F/RNyLntFtI3MQjHfXjRGoyyfgJzyPRSBfv68p3dtQyziE80R7yEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IJIqC4VTf6YuRVckix/69RntaS0i1SlfxSDHnPbNOOo=;
+ b=iAWNJN+irdyetre39LuO+mmTfuVpAGatLeoW+n53MSWf01yiM4NmOdYWvNe//Fkj3uqltEJ0Il446Q4wZeElReRdlfq6GktvXMo5HEMVMNOAyRdClt3sxwQ/envzG1sNJo4g/sjPGaFy0RXXhn+IXBMZ03qicoZXz6JQGXpEVeD43tegIMpucPLw+lw89whKqeAOc3gW6k6gz6JkvNYym/PHicaS+0SmhU4PJGkE9wY/GnXlZeHYmGgqXAMlMDkiqGEnLFiJPHTIUI3tARKvNRT5vkPFs/ea+f7VpCWip1xIZqgr+wHt/qXlBKxCfQAZunsLoDC1vKEN8xnziQYTkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IJIqC4VTf6YuRVckix/69RntaS0i1SlfxSDHnPbNOOo=;
+ b=Q+epJdemZqJBKpRdupFcRb2YHF402udtLDySlGlZGM5EOARXQlI8oU3cJkLLWjU8JWlNHq7Ey+ziPETSvQh+Y2VR57pcd++ZLh5EggC5uUZvv764YS/113XrrTZsJGBW6XbAyeF2QhkxboU5VIV68rkzrj3ll86W74jQbRibJn4=
+Received: from DM6PR06CA0034.namprd06.prod.outlook.com (2603:10b6:5:120::47)
+ by CY5PR12MB6179.namprd12.prod.outlook.com (2603:10b6:930:24::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.38; Tue, 19 Dec
+ 2023 04:15:52 +0000
+Received: from DS1PEPF00017098.namprd05.prod.outlook.com
+ (2603:10b6:5:120:cafe::ab) by DM6PR06CA0034.outlook.office365.com
+ (2603:10b6:5:120::47) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.37 via Frontend
+ Transport; Tue, 19 Dec 2023 04:15:52 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS1PEPF00017098.mail.protection.outlook.com (10.167.18.102) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7113.14 via Frontend Transport; Tue, 19 Dec 2023 04:15:51 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 18 Dec
+ 2023 22:15:51 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Mon, 18 Dec
+ 2023 22:15:50 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34 via Frontend
+ Transport; Mon, 18 Dec 2023 22:15:49 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <git@xilinx.com>
+Subject: [PATCH v7 0/6] spi-nor: Add parallel and stacked memories support
+Date: Tue, 19 Dec 2023 09:45:31 +0530
+Message-ID: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Ln5dBtEIkR59Ex0gdPYQmcR1HjAaCnv6MYQYzzQ5MxlELiO/UiF
- aMtOFF1gcPJKsrQicEULiVyx4cpS5hwAU8nB0wOq8XjmpUiZHm6mYtNFJPRGw70VErjG8v8
- QeA6UL4RAUaDsyQQu5Abf1djtR5+mizPyZfUmh8gbrpqeacZiytNALySoH6AnAR55zVBm0j
- 8gjZ5n37raK6UEmh13EFQ==
-UI-OutboundReport: notjunk:1;M01:P0:3vySec/Mdio=;EiaTg0qyadIkqADchC5NsocbWuy
- h+Qe/V9pjPhO2qg8H8H452bqBz4L7vohIxipqxQNBVqCKCDt0NV7D6Oc5kqZOAj/oWWL+A1iF
- kmsajV/gKbWUzknTW77DLVEo7H/9r97rFlZIY3RkFETnqdvKXEifQp+mqJuk93V+hsr9sT1Cn
- d4cyrYCpLqgPSYHVikaadMJHyweFDhR4mPpHvy7L9oFyizAJmsL0hv6Tf0iYQ5MPlbGbAmVz/
- 1xd/QUE7/8naS5XYjlehRGc183xT42PrA9yiZ8MhHjpvc6wDHbAPKhCnF+G9Dq7kpHRDSPtGy
- VBo10BVSVJr5Fe2JAXQ28hoNO+jbSSy/JPVPOujaJZCNvTPffkJ4tCDst4/YZk0HK96sDTZuh
- R817Kvuv3ZNd/spxtfHXoj9Uh/YmLfo5QRlHS7fvXJug56THMQbRuy7DAcGQRqYRmpYsgasCt
- JzIUX1THNOfTLVlvOYpsd7u7HDTOOcvESE7adsLB1vhQ9zJwhzGErawaogxSheuBO/OjS9AHQ
- BCie4Jq38Am4ZFzMdJY4uZJDeEbcH+oJsYi4fGBbpbUOWfWdnLuaFU40ylig/fdXLHGgrik5t
- F2NCNKHu3pe70bVfBotsfiL0XjcNXG9LM6vL+XsaFtRASQ6MGympDvPNj7XxD9HF2//WHLk10
- /u7yvFhniBBDKBMnlrXPbfjdvyiDESxPUI1NHmQTCl97cHnCdetBvogz6TcpkNAU8iVFYlBHB
- T2zdXhOlSFXk5FZNRUdYo1Ef5f5RwG5RLmwMQ5BKLSEdH3AYQVBABU0+U7WxB3v+pn013ZBAx
- AacAMwC61i2xnhaA2NiX8dHiKSYOc/OjfqRK7C0V5tOBGTgtcgKeKBVD8c/vCTr85WYyVnuMQ
- cUW1vH3Bfsp2OOqfZnOmJG1C3oCUIJme0kUvhxiho63/bqUAf+SdA5++NNhHZ74m4gOeYmbAs
- AX/htS+pn+R4776B1Nn6DhSFhZw=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|CY5PR12MB6179:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02bce6e9-9f2e-41e4-9703-08dc0049300f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wEUYGqO+z7hVMopxwON9SSVSRvQ6WZp4Tq+5/S4ccN6g4df5iLrA9fuQ57fTn+ZMFSHPe9qSpdkILPs8CPz/dd7PIYutvDZEwctDsz3svc/4+ua1gBI9M30JCxZKp9JiZVg/5BJ0N8/ccf3b3hc+7Mq6AU8DSuE+QC7I1eGOIC4yS2xZ8qXBMTRC+1AsKi0OYs6PyArP2Y87NoNvur1baxkD9hnXq3s4x96ptOhEovcD+Dumyi7Du+IN3JCbPnF//GighsjHjFycXRFppaPinQWuxa5k4w2unFprYZhtb3OFlg5aquyG7LLuBrBtHgEF0YiSFXVMzqggJ2UmWSsaQhjkfeo/P1THwqqi3azQrzfAPgF0WsnCu3YZuvPQMyydO38MV9OqFRN8yK96PiUqHFm+ap9z1JvSpz2w6ogIejFCrhzOrIyWxjba5TsXECw8bSWohjHc6J6G6ypDql6J903WKu3tBmTedIuMeJmI+JwNG+pt86GYdh4YsXFDWEZLy0c2wpzzEBAQktJnLVC7KwzwGUhbokDLTUjJAFxnIZNtRaJ6Ol+9krvW0Jev7CvetkRbR1MomRi6GK6FcBE3I/bvcFvTCDoPy0ohjnxFHZ63TDNFmqGGMjWsq9uV0LiTWksxUbA73nfDBBowtXRQOjo1wp3Q8oEKoQa42a1oSOqwiKY48XPTMnds3r9k3Q84EPuN5ckiloAINDsJirLnVuvrvHh5kJhUssTZUMoY4WTkiArbYB3kyQKjWYF1hXr3sLVQgZTPEWRBAcXJeo/b7g==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(376002)(346002)(396003)(39860400002)(230922051799003)(1800799012)(64100799003)(82310400011)(186009)(451199024)(46966006)(40470700004)(36840700001)(40480700001)(40460700003)(316002)(426003)(6916009)(336012)(2616005)(107886003)(6666004)(26005)(1076003)(2906002)(70206006)(4326008)(54906003)(70586007)(5660300002)(36860700001)(83380400001)(478600001)(86362001)(41300700001)(8676002)(8936002)(356005)(47076005)(81166007)(36756003)(82740400003)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Dec 2023 04:15:51.7927 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02bce6e9-9f2e-41e4-9703-08dc0049300f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017098.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6179
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,163 +123,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for Xilinx qspi parallel and stacked memeories.
 
+In parallel mode, the current implementation assumes that a maximum of two flashes are connected. The QSPI controller splits the data evenly between both the flashes so, both the flashes that are connected in parallel mode should be identical.
+During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
+nor->flags.
 
-Am 19=2E Dezember 2023 02:26:00 MEZ schrieb Tom Rini <trini@konsulko=2Ecom=
->:
->On Tue, Dec 19, 2023 at 01:01:51AM +0100, Heinrich Schuchardt wrote:
->>=20
->>=20
->> Am 19=2E Dezember 2023 00:31:30 MEZ schrieb Tom Rini <trini@konsulko=2E=
-com>:
->> >On Tue, Dec 19, 2023 at 12:29:19AM +0100, Heinrich Schuchardt wrote:
->> >>=20
->> >>=20
->> >> Am 19=2E Dezember 2023 00:16:40 MEZ schrieb Tom Rini <trini@konsulko=
-=2Ecom>:
->> >> >On Tue, Dec 19, 2023 at 12:08:31AM +0100, Heinrich Schuchardt wrote=
-:
->> >> >>=20
->> >> >>=20
->> >> >> Am 18=2E Dezember 2023 23:41:08 MEZ schrieb Tom Rini <trini@konsu=
-lko=2Ecom>:
->> >> >> >On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchardt wr=
-ote:
->> >> >> >
->> >> >> >[snip]
->> >> >> >> Or take:
->> >> >> >>=20
->> >> >> >> load host 0:1 $c kernel=2Eefi
->> >> >> >> load host 0:1 $d initrd=2Eimg
->> >> >> >>=20
->> >> >> >> How could we ensure that initrd=2Eimg is not overwriting a par=
-t of kernel=2Eefi without memory allocation?
->> >> >> >
->> >> >> >Today, invalid checksum as part of some part of the kernel fails=
-=2E But
->> >> >> >how do we do this tomorrow, are you suggesting that "load" perfo=
-rm
->> >> >> >malloc() in some predefined size? If $c is below $d and $c + ker=
-nel=2Eefi
->> >> >> >is now above $d we can throw an error before trying to load, yes=
-=2E But
->> >> >> >what about:
->> >> >> >load host 0:1 $d initrd=2Eimg
->> >> >> >load host 0:1 $c kernel=2Eefi
->> >> >> >
->> >> >> >In that case (which is only marginally contrived, the more real =
-case is
->> >> >> >loading device tree in to unexpectedly large ramdisk because som=
-eone
->> >> >> >didn't understand the general advice on why device tree is lower=
- than
->> >> >> >ramdisk address) I'm fine with an error that amounts to "you jus=
-t
->> >> >> >corrupted another allocation" and then "fail, reset the board" o=
-r so=2E
->> >> >> >
->> >> >>=20
->> >> >> Our current malloc library cannot manage the complete memory=2E W=
-e need a library like lmb which should also cover the memory management tha=
-t we currently have in lib/efi/efi_memory=2Ec=2E This must include a memory=
- type attribute for usage in the GetMemoryMap() service=2E A management on =
-page level seems sufficient=2E
->> >> >>=20
->> >> >> The load command should permanently allocate memory in that lmb+ =
-library=2E
->> >> >>=20
->> >> >> We need an unload command to free the memory if we want to reuse =
-the memory or we might let the load comand free the memory if exactly the s=
-ame start address is reused=2E
->> >> >
->> >> >Our current way of loading things in to memory does not handle the =
-case
->> >> >I described, yes=2E How would what you're proposing handle it?
->> >>=20
->> >> If the load command has to allocate memory for the image and that al=
-location is kept, any attempt to allocate overlapping memory would fail=2E
->> >
->> >So you're saying that the load command has to pre-allocate memory? Or =
-as
->> >it goes? If the latter, in what size chunks? This starts to get at wha=
-t
->> >Simon was talking about with respect to memory fragmentation=2E Which =
-to
->> >be clear is a problem we have today, we just let things overlap and ho=
-pe
->> >something later catches an incorrect checksum=2E
->> >
->>=20
->> I don't want to replace the malloc library which handles large numbets =
-of allocations=2E
->
->I'm confused=2E The normal malloc library is not involved with current
->image loading, it's direct to memory (with some attempts at sanity
->checking by lmb)=2E  Are you proposing a different allocator with
->malloc/free like behavior? If so, please outline how it will determine
->pool size, and how we'll use it to load thing to memory=2E
+In stacked mode the current implementation assumes that a maximum of two flashes are connected and both the flashes are of same make but can differ in sizes. So, except the sizes all other flash parameters of both the flashes are identical.
 
-All memory below the stack needs to be managed=2E Malloc uses a small memo=
-ry area (a few MiB) above the stack=2E
+Spi-nor will pass on the appropriate flash select flag to low level driver, and it will select pass all the data to that particular flash.
 
->
->> Closing the eyes when the user loads multiple files does not solve the =
-fragmentation problem=2E
->
->Yes=2E I'm only noting that today we just ignore the problem and sometime=
-s
->catch it via checksums=2E
->
->> Fragmentation only happens if we have many concurrent allocations=2E  I=
-n EFI we are allocating top down=2E The number of concurrent allocations is=
- low=2E Typically a few dozen at most=2E After terminating an application t=
-hese should be freed again=2E
->
->OK, so are you saying that we would no longer be loading _to_ a location
->in memory and instead just be saying "load this thing" and picking where
->dynamically?
+Write operation in parallel mode are performed in page size * 2 chunks as each write operation results in writing both the flashes. For doubling the address space each operation is performed at addr/2 flash offset, where addr is the address specified by the user.
 
-Both preassigned and allocator assigned adresses are compatible with memor=
-y management=2E
+Similarly for read and erase operations it will read from both flashes, so size and offset are divided by 2 and send to flash.
 
-Architectures and binaries have different requirements=2E On riscv64 you c=
-an load Linux kernel, initrd, fdt anywhere=2E We don't need predefined addr=
-esses there=2E Other architectures have restrictions=2E
+Changes in v2:
+- Fixed the compilation issues.
+Changes in v3:
+- Fixed the CI issues.
+Changes in v4:
+- Removed the dio,dummy_bytes variables from zynq_qspi driver.
+- Fix the compilation issue by including the DM_SPI config.
+Changes in v5:
+- Fixed the issue reported by buildman.
+Changes in v6:
+- Fixed the issues reported while running the sandbox test cases.
+Changes in v7:
+- Fixed the issues reported while running these da850evm_defconfig,
+  imx28_xea_defconfig configs.
+- Fixed the issue when DM_SPI config is disabled.
+- Fixed the issue while running the sandbox_noinst_defconfig with spl
+  ./spl/u-boot-spl -d arch/sandbox/dts/test.dtb
+   jedec_spi_nor spi.bin@0: has no valid 'reg' property (-12)
+   jedec_spi_nor spi.bin@1: has no valid 'reg' property (-12)
+   ### ERROR ### Please RESET the board ###
 
->
->> When loading a file from a file system we know the filesize beforehand=
-=2E So allocation is trivial=2E
->>=20
->> The loady command currently does not use the  offered size information =
-but could do so=2E
->
->We should be using that information to make sure we don't overwrite
->U-Boot itself, but I don't recall how exactly we handle it today
->off-hand=2E
+Ashok Reddy Soma (4):
+  mtd: spi-nor: Add parallel and stacked memories support
+  mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
+  mtd: spi-nor: Add parallel and stacked memories support in read_bar
+    and write_bar
+  spi: spi-uclass: Read chipselect and restrict capabilities
 
-If the user issues multiple load commands, he can overwrite previous files=
-=2E
+Venkatesh Yadav Abbarapu (2):
+  spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
+  spi: zynq_qspi: Add parallel memories support in QSPI driver
 
-During boot command execution I guess the different allocations respect ea=
-ch other=2E
+ drivers/mtd/spi/sandbox.c      |   2 +-
+ drivers/mtd/spi/spi-nor-core.c | 398 ++++++++++++++++++++++++++++-----
+ drivers/spi/altera_spi.c       |   4 +-
+ drivers/spi/atcspi200_spi.c    |   2 +-
+ drivers/spi/ath79_spi.c        |   2 +-
+ drivers/spi/atmel_spi.c        |   6 +-
+ drivers/spi/bcm63xx_hsspi.c    |  42 ++--
+ drivers/spi/bcm63xx_spi.c      |   6 +-
+ drivers/spi/bcmbca_hsspi.c     |  34 +--
+ drivers/spi/cf_spi.c           |   6 +-
+ drivers/spi/davinci_spi.c      |   8 +-
+ drivers/spi/fsl_dspi.c         |  18 +-
+ drivers/spi/fsl_espi.c         |   4 +-
+ drivers/spi/fsl_qspi.c         |   4 +-
+ drivers/spi/gxp_spi.c          |   2 +-
+ drivers/spi/mpc8xx_spi.c       |   4 +-
+ drivers/spi/mpc8xxx_spi.c      |  10 +-
+ drivers/spi/mscc_bb_spi.c      |   4 +-
+ drivers/spi/mxc_spi.c          |   6 +-
+ drivers/spi/npcm_fiu_spi.c     |  14 +-
+ drivers/spi/nxp_fspi.c         |   2 +-
+ drivers/spi/octeon_spi.c       |   2 +-
+ drivers/spi/omap3_spi.c        |   4 +-
+ drivers/spi/pic32_spi.c        |   2 +-
+ drivers/spi/rk_spi.c           |   4 +-
+ drivers/spi/rockchip_sfc.c     |   2 +-
+ drivers/spi/spi-aspeed-smc.c   |  28 +--
+ drivers/spi/spi-mxic.c         |   6 +-
+ drivers/spi/spi-qup.c          |   4 +-
+ drivers/spi/spi-sifive.c       |   6 +-
+ drivers/spi/spi-sn-f-ospi.c    |   2 +-
+ drivers/spi/spi-sunxi.c        |   6 +-
+ drivers/spi/spi-synquacer.c    |   4 +-
+ drivers/spi/spi-uclass.c       |  33 ++-
+ drivers/spi/stm32_qspi.c       |   2 +-
+ drivers/spi/stm32_spi.c        |   4 +-
+ drivers/spi/ti_qspi.c          |  14 +-
+ drivers/spi/xilinx_spi.c       |   4 +-
+ drivers/spi/zynq_qspi.c        | 119 ++++++++--
+ drivers/spi/zynq_spi.c         |   6 +-
+ drivers/spi/zynqmp_gqspi.c     | 141 ++++++++++--
+ include/linux/mtd/spi-nor.h    |  12 +
+ include/spi.h                  |  23 +-
+ lib/acpi/acpi_device.c         |   2 +-
+ 44 files changed, 781 insertions(+), 227 deletions(-)
 
->
->> TFTP is problematic because it does not transfer the filesize=2E We wou=
-ld probably try to allocate a large chunk of memory and then downsize the a=
-llocation after reading the whole file=2E
->
->Reading from non-filesystem flash also has this problem, but we at least
->specify the amount to read too=2E But yes, it gets back to what I was
->asking about on how you're proposing to handle network load cases=2E
->
+-- 
+2.25.1
 
-It depends on the protocol=2E Http conveys the size before the data=2E Tft=
-p does not=2E
-
-If you don't know the size, you must preallocate a big chunk, check that t=
-he download does not exceed it, and downsize the allocation afterwards=2E T=
-his is not a new problem but exists already with current lmb usage=2E
-
-Best regards
-
-Heinrich
