@@ -4,61 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCBDC41535
-	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:47:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50E77C41535
+	for <u-boot@archiver.kernel.org>; Tue, 19 Dec 2023 08:51:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1596586FF7;
-	Tue, 19 Dec 2023 09:47:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id B8A6286FF7;
+	Tue, 19 Dec 2023 09:51:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=londelec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="N6wIfQaG";
+	dkim=pass (2048-bit key; unprotected) header.d=londelec-com.20230601.gappssmtp.com header.i=@londelec-com.20230601.gappssmtp.com header.b="yfi1HxFg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C6687073; Tue, 19 Dec 2023 09:47:39 +0100 (CET)
-Received: from m1397.mail.163.com (m1397.mail.163.com [220.181.13.97])
- by phobos.denx.de (Postfix) with ESMTP id 70FFD86FB8
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:47:36 +0100 (CET)
+ id 55C0C86FB8; Tue, 19 Dec 2023 09:51:05 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F144487073
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 09:51:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=IgLXAyqz/Dhov18AFSuOoEHZETDsTMqz5oxqBSlS4n0=; b=N
- 6wIfQaG7epRq/Ntu6/w06HpqeJg5P/gRTp/NmkQTJyvYkjog70WGxgHnwWvD+nYF
- XQcuOgsbvPBZf9pLXUSytdh7hXJHC6uJOl9bEw1dUrLmN4wdbb4Dyv4gZ+Jkbp66
- mTttfvA7k6iidWmLFm9LHLLOyiHZ1aAJZtAp75cCnc=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by ajax-webmail-wmsvr97
- (Coremail) ; Tue, 19 Dec 2023 16:47:08 +0800 (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Tue, 19 Dec 2023 16:47:08 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Jagan Teki" <jagan@amarulasolutions.com>
-Cc: "Anatolij Gustschin" <agust@denx.de>, 
- "Neil Armstrong" <neil.armstrong@linaro.org>, 
- "Andre Przywara" <andre.przywara@arm.com>, 
- "Kever Yang" <kever.yang@rock-chips.com>, 
- "Simon Glass" <sjg@chromium.org>, "Heiko Stuebner" <heiko@sntech.de>, 
- "Robin Murphy" <robin.murphy@arm.com>, u-boot@lists.denx.de, 
- "Da Xue" <da.xue@libretech.co>, "Jagan Teki" <jagan@edgeble.ai>
-Subject: Re:Re: [PATCH v2 13/17] video: rockchip: Add rk3328 vop support
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2023 www.mailtech.cn 163com
-In-Reply-To: <CAMty3ZDUtZvjOrHgovAxwvwLFO6YnS3jLi_3=v707gfg9EkEeg@mail.gmail.com>
-References: <20231218191114.129329-1-jagan@amarulasolutions.com>
- <20231218191114.129329-14-jagan@amarulasolutions.com>
- <672979fb.5ea.18c7fa8dce9.Coremail.andyshrk@163.com>
- <CAMty3ZDUtZvjOrHgovAxwvwLFO6YnS3jLi_3=v707gfg9EkEeg@mail.gmail.com>
-X-NTES-SC: AL_Qu2bAPWcuk4p7iWcZukXn0kXhec2W8Czvvgg34JRP5k0tCvn8ycaU2NvBn/T8OegBxKRrAS8XhF16fRQZYZdcJ4qdtL3i0vwy2S80jwNw7Kp
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=none (p=none dis=none) header.from=londelec.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=cody@londelec.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-50e23c620e8so4005453e87.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 00:51:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=londelec-com.20230601.gappssmtp.com; s=20230601; t=1702975860; x=1703580660;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5/SY+ajO6S3kK0lwR465ZeFt2LeKuHk20HT99E2GQWI=;
+ b=yfi1HxFgg/TMByZLsRpa3TvsHs3pT9UCbVO+ku/Tyk/u/mBLgD08IJrjXdXp3CpPA4
+ G4HQxfNvn2ZP5NR49HN4UDs1oSVORCtk7UEq9pM8ql++am7YWVFGkY08TTYJf3CGhAAC
+ N/Y2rgiODoEMcUEM5iWFG9kN3bcXZroEsbkBxL+wmc+xHDXKIphyhUzGnt2rCigWR5hp
+ gzgx5yeH1oLkSKJxghxLsAFLb27Ng0KV+jYqcknIdem/IxIHvoN/oO/2Hmp0DEwb78+s
+ JKX++4aD3NQB5G6EWV1R5e157xVyJpXfApDC75WrY78kp6H/WqFs/36q7yjKPyzRfvXu
+ LnZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702975860; x=1703580660;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5/SY+ajO6S3kK0lwR465ZeFt2LeKuHk20HT99E2GQWI=;
+ b=M1bSJPOSfZRREMWDHyuYYWr2KMBb7V0h+yG6f1abvstVP5zHJ3HzMp6PZ8+Q6C0rfx
+ mR629GSAhjsdUE6Fb7xxV6QdHcJtZNxngc/oeqxjVbybFJw31kxDtUsIaR9YZ+1+lN8G
+ d0tmN8KvetOARlU/jPDmmQw7yh91Mrhv9IjNRnSWYFeXtbWpG52PzJu6tEBF2fcsZCzK
+ E4ylt+iCvV8s9drTZbiAQS2jymtF2iXHDgMd7Gq9DNgeIPaZtBzcY1Fw4XZsFxnDDPhD
+ W2Lr0URVVXvEuOg6L8HQbUrOd5ZlpRsTjd0ApM08aEIWz2RQEggqEC4ZQ8pGhycr7H26
+ QI3g==
+X-Gm-Message-State: AOJu0Yw0Bxe43YW7MXkn5vmAKjZ/LteTGHDk36X3COBgBScLn8XT0tVo
+ LkDure3ODloBlqhNSYF63crsH4PDDOgb1hmzJ0wOEg==
+X-Google-Smtp-Source: AGHT+IFaOXnlob4m9gy6e2Wfm+LpPQlYz1ok1IKDa2/Nqb6L+JlT3Z2Bu87EAQKmPOmNMJymAEeBxw==
+X-Received: by 2002:a19:7510:0:b0:50e:22cb:6f2e with SMTP id
+ y16-20020a197510000000b0050e22cb6f2emr2344320lfe.0.1702975859201; 
+ Tue, 19 Dec 2023 00:50:59 -0800 (PST)
+Received: from localhost.localdomain ([87.110.52.154])
+ by smtp.gmail.com with ESMTPSA id
+ j15-20020ac2550f000000b0050aa6e2ae87sm787845lfk.2.2023.12.19.00.50.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Dec 2023 00:50:58 -0800 (PST)
+From: Cody Green <cody@londelec.com>
+To: u-boot@lists.denx.de
+Cc: Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Stefano Babic <sbabic@denx.de>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alan Kay <alan@londelec.com>
+Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
+ from DCDC_BATT without 5V
+Date: Tue, 19 Dec 2023 08:50:18 +0000
+Message-Id: <20231219085018.8266-1-cody@londelec.com>
+In-Reply-To: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
+References: <CAOMZO5Cj9WcNKLUWzcNgjUOjyb7DGaTV+WTcSvoMgBPuJobuow@mail.gmail.com>
 MIME-Version: 1.0
-Message-ID: <33a60ff6.2e50.18c8141e502.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: YcGowADnz_GMWIFlfxMqAA--.62811W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbBEAZLXmVOBCL4hwACsz
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,102 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CgpIaSBKYXFhbu+8jArlnKggMjAyMy0xMi0xOSAxNTo0MjoyNu+8jCJKYWdhbiBUZWtpIiA8amFn
-YW5AYW1hcnVsYXNvbHV0aW9ucy5jb20+IOWGmemBk++8mgo+SGkgQW5keSwKPgo+T24gVHVlLCBE
-ZWMgMTksIDIwMjMgYXQgNjo1MOKAr0FNIEFuZHkgWWFuIDxhbmR5c2hya0AxNjMuY29tPiB3cm90
-ZToKPj4KPj4KPj4gSGkgSmFxYW7vvJoKPj4KPj4gQXQgMjAyMy0xMi0xOSAwMzoxMToxMCwgIkph
-Z2FuIFRla2kiIDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT4gd3JvdGU6Cj4+ID5Gcm9tOiBK
-YWdhbiBUZWtpIDxqYWdhbkBlZGdlYmxlLmFpPgo+PiA+Cj4+ID5BZGQgc3VwcG9ydCBmb3IgUm9j
-a2NoaXAgUkszMzI4IFZPUC4KPj4gPgo+PiA+UmVxdWlyZSBWT1AgY2xlYW51cCBiZWZvcmUgaGFu
-ZG9mZiB0byBMaW51eCBieSB3cml0aW5nIHJlc2V0IHZhbHVlcyB0bwo+PiA+V0lOIHJlZ2lzdGVy
-cy4gV2l0aG91dCB0aGlzIExpbnV4IFZPUCB0cmlnZ2VyIHBhZ2UgZmF1bHQgYXMgYmVsb3cKPj4g
-PlsgICAgMC43NTIwMTZdIExvYWRpbmcgY29tcGlsZWQtaW4gWC41MDkgY2VydGlmaWNhdGVzCj4+
-ID5bICAgIDAuNzg3Nzk2XSBpbm5vX2hkbWlfcGh5X3JrMzMyOF9jbGtfcmVjYWxjX3JhdGU6IHBh
-cmVudCAyNDAwMDAwMAo+PiA+WyAgICAwLjc4ODM5MV0gaW5uby1oZG1pLXBoeSBmZjQzMDAwMC5w
-aHk6IGlubm9faGRtaV9waHlfcmszMzI4X2Nsa19yZWNhbGNfcmF0ZSByYXRlIDE0ODUwMDAwMCB2
-Y28gMTQ4NTAwMDAwCj4+ID5bICAgIDAuNzk4MzUzXSByb2NrY2hpcC1kcm0gZGlzcGxheS1zdWJz
-eXN0ZW06IGJvdW5kIGZmMzcwMDAwLnZvcCAob3BzIHZvcF9jb21wb25lbnRfb3BzKQo+PiA+WyAg
-ICAwLjc5OTQwM10gZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAwLmhkbWk6IHN1cHBseSBhdmRkLTB2
-OSBub3QgZm91bmQsIHVzaW5nIGR1bW15IHJlZ3VsYXRvcgo+PiA+WyAgICAwLjgwMDI4OF0gcmtf
-aW9tbXUgZmYzNzNmMDAuaW9tbXU6IEVuYWJsZSBzdGFsbCByZXF1ZXN0IHRpbWVkIG91dCwgc3Rh
-dHVzOiAweDAwMDA0Ygo+PiA+WyAgICAwLjgwMTEzMV0gZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAw
-LmhkbWk6IHN1cHBseSBhdmRkLTF2OCBub3QgZm91bmQsIHVzaW5nIGR1bW15IHJlZ3VsYXRvcgo+
-PiA+WyAgICAwLjgwMjA1Nl0gcmtfaW9tbXUgZmYzNzNmMDAuaW9tbXU6IERpc2FibGUgcGFnaW5n
-IHJlcXVlc3QgdGltZWQgb3V0LCBzdGF0dXM6IDB4MDAwMDRiCj4+ID5bICAgIDAuODAzMjMzXSBk
-d2hkbWktcm9ja2NoaXAgZmYzYzAwMDAuaGRtaTogRGV0ZWN0ZWQgSERNSSBUWCBjb250cm9sbGVy
-IHYyLjExYSB3aXRoIEhEQ1AgKGlubm9fZHdfaGRtaV9waHkyKQo+PiA+WyAgICAwLjgwNTM1NV0g
-ZHdoZG1pLXJvY2tjaGlwIGZmM2MwMDAwLmhkbWk6IHJlZ2lzdGVyZWQgRGVzaWduV2FyZSBIRE1J
-IEkyQyBidXMgZHJpdmVyCj4+ID5bICAgIDAuODA4NzY5XSByb2NrY2hpcC1kcm0gZGlzcGxheS1z
-dWJzeXN0ZW06IGJvdW5kIGZmM2MwMDAwLmhkbWkgKG9wcyBkd19oZG1pX3JvY2tjaGlwX29wcykK
-Pj4gPlsgICAgMC44MTA4NjldIFtkcm1dIEluaXRpYWxpemVkIHJvY2tjaGlwIDEuMC4wIDIwMTQw
-ODE4IGZvciBkaXNwbGF5LXN1YnN5c3RlbSBvbiBtaW5vciAwCj4+ID4KPj4gPlNpZ25lZC1vZmYt
-Ynk6IEphZ2FuIFRla2kgPGphZ2FuQGVkZ2VibGUuYWk+Cj4+ID4tLS0KPj4gPkNoYW5nZXMgZm9y
-IHYyOgo+PiA+LSBBZGQgVk9QIGNsZWFudXAKPj4gPi0gVXBkYXRlIGNvbW1pdAo+PiA+Cj4+ID4g
-ZHJpdmVycy92aWRlby9yb2NrY2hpcC9NYWtlZmlsZSAgICAgfCAgMSArCj4+ID4gZHJpdmVycy92
-aWRlby9yb2NrY2hpcC9yazMzMjhfdm9wLmMgfCA4MyArKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKwo+PiA+IDIgZmlsZXMgY2hhbmdlZCwgODQgaW5zZXJ0aW9ucygrKQo+PiA+IGNyZWF0ZSBt
-b2RlIDEwMDY0NCBkcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL3JrMzMyOF92b3AuYwo+PiA+Cj4+ID5k
-aWZmIC0tZ2l0IGEvZHJpdmVycy92aWRlby9yb2NrY2hpcC9NYWtlZmlsZSBiL2RyaXZlcnMvdmlk
-ZW8vcm9ja2NoaXAvTWFrZWZpbGUKPj4gPmluZGV4IDQ5OTEzMDNjNzMuLmY1NWJlY2VlYmYgMTAw
-NjQ0Cj4+ID4tLS0gYS9kcml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlCj4+ID4rKysgYi9k
-cml2ZXJzL3ZpZGVvL3JvY2tjaGlwL01ha2VmaWxlCj4+ID5AQCAtNiw2ICs2LDcgQEAKPj4gPiBp
-ZmRlZiBDT05GSUdfVklERU9fUk9DS0NISVAKPj4gPiBvYmoteSArPSBya192b3Aubwo+PiA+IG9i
-ai0kKENPTkZJR19ST0NLQ0hJUF9SSzMyODgpICs9IHJrMzI4OF92b3Aubwo+PiA+K29iai0kKENP
-TkZJR19ST0NLQ0hJUF9SSzMzMjgpICs9IHJrMzMyOF92b3Aubwo+PiA+IG9iai0kKENPTkZJR19S
-T0NLQ0hJUF9SSzMzOTkpICs9IHJrMzM5OV92b3Aubwo+PiA+IG9iai0kKENPTkZJR19ESVNQTEFZ
-X1JPQ0tDSElQX0VEUCkgKz0gcmtfZWRwLm8KPj4gPiBvYmotJChDT05GSUdfRElTUExBWV9ST0NL
-Q0hJUF9MVkRTKSArPSBya19sdmRzLm8KPj4gPmRpZmYgLS1naXQgYS9kcml2ZXJzL3ZpZGVvL3Jv
-Y2tjaGlwL3JrMzMyOF92b3AuYyBiL2RyaXZlcnMvdmlkZW8vcm9ja2NoaXAvcmszMzI4X3ZvcC5j
-Cj4+ID5uZXcgZmlsZSBtb2RlIDEwMDY0NAo+PiA+aW5kZXggMDAwMDAwMDAwMC4uYTRkYTNhOTFl
-OAo+PiA+LS0tIC9kZXYvbnVsbAo+PiA+KysrIGIvZHJpdmVycy92aWRlby9yb2NrY2hpcC9yazMz
-Mjhfdm9wLmMKPj4gPkBAIC0wLDAgKzEsODMgQEAKPj4gPisvLyBTUERYLUxpY2Vuc2UtSWRlbnRp
-ZmllcjogR1BMLTIuMCsKPj4gPisvKgo+PiA+KyAqIENvcHlyaWdodCAoYykgMjAyMyBFZGdlYmxl
-IEFJIFRlY2hub2xvZ2llcyBQdnQuIEx0ZC4KPj4gPisgKi8KPj4gPisKPj4gPisjaW5jbHVkZSA8
-ZG0uaD4KPj4gPisjaW5jbHVkZSA8dmlkZW8uaD4KPj4gPisjaW5jbHVkZSA8YXNtL2lvLmg+Cj4+
-ID4rI2luY2x1ZGUgInJrX3ZvcC5oIgo+PiA+Kwo+PiA+K0RFQ0xBUkVfR0xPQkFMX0RBVEFfUFRS
-Owo+PiA+Kwo+PiA+K3N0YXRpYyB2b2lkIHJrMzMyOF9zZXRfcGluX3BvbGFyaXR5KHN0cnVjdCB1
-ZGV2aWNlICpkZXYsCj4+ID4rICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVudW0g
-dm9wX21vZGVzIG1vZGUsIHUzMiBwb2xhcml0eSkKPj4gPit7Cj4+ID4rICAgICAgc3RydWN0IHJr
-X3ZvcF9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4+ID4rICAgICAgc3RydWN0IHJr
-MzI4OF92b3AgKnJlZ3MgPSBwcml2LT5yZWdzOwo+PiA+Kwo+PiA+KyAgICAgIHN3aXRjaCAobW9k
-ZSkgewo+PiA+KyAgICAgIGNhc2UgVk9QX01PREVfSERNSToKPj4gPisgICAgICAgICAgICAgIGNs
-cnNldGJpdHNfbGUzMigmcmVncy0+ZHNwX2N0cmwxLAo+PiA+KyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIE1fUkszMzk5X0RTUF9IRE1JX1BPTCwKPj4gPisgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBWX1JLMzM5OV9EU1BfSERNSV9QT0wocG9sYXJpdHkpKTsKPj4gPisgICAgICAg
-ICAgICAgIGJyZWFrOwo+PiA+KyAgICAgIGRlZmF1bHQ6Cj4+ID4rICAgICAgICAgICAgICBkZWJ1
-ZygiJXM6IHVuc3VwcG9ydGVkIG91dHB1dCBtb2RlICV4XG4iLCBfX2Z1bmNfXywgbW9kZSk7Cj4+
-ID4rICAgICAgfQo+PiA+K30KPj4gPisKPj4gPitzdGF0aWMgaW50IHJrMzMyOF92b3BfcHJvYmUo
-c3RydWN0IHVkZXZpY2UgKmRldikKPj4gPit7Cj4+ID4rICAgICAgLyogQmVmb3JlIHJlbG9jYXRp
-b24gd2UgZG9uJ3QgbmVlZCB0byBkbyBhbnl0aGluZyAqLwo+PiA+KyAgICAgIGlmICghKGdkLT5m
-bGFncyAmIEdEX0ZMR19SRUxPQykpCj4+ID4rICAgICAgICAgICAgICByZXR1cm4gMDsKPj4gPisK
-Pj4gPisgICAgICByZXR1cm4gcmtfdm9wX3Byb2JlKGRldik7Cj4+ID4rfQo+PiA+Kwo+PiA+K3N0
-YXRpYyBpbnQgcmszMzI4X3ZvcF9yZW1vdmUoc3RydWN0IHVkZXZpY2UgKmRldikKPj4gPit7Cj4+
-ID4rICAgICAgc3RydWN0IHJrX3ZvcF9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4+
-ID4rICAgICAgc3RydWN0IHJrMzI4OF92b3AgKnJlZ3MgPSBwcml2LT5yZWdzOwo+PiA+KyAgICAg
-IHN0cnVjdCByazMyODhfdm9wICp3aW5fcmVncyA9IHByaXYtPnJlZ3MgKyBwcml2LT53aW5fb2Zm
-c2V0Owo+PiA+Kwo+PiA+KyAgICAgIC8qIHdyaXRlIHJlc2V0IHZhbHVlcyAqLwo+PiA+KyAgICAg
-IHdyaXRlbCgweGVmMDEzZiwgJndpbl9yZWdzLT53aW4wX2FjdF9pbmZvKTsKPj4gPisgICAgICB3
-cml0ZWwoMHhlZjAxM2YsICZ3aW5fcmVncy0+d2luMF9kc3BfaW5mbyk7Cj4+ID4rICAgICAgd3Jp
-dGVsKDB4YTAwMGEsICZ3aW5fcmVncy0+d2luMF9kc3Bfc3QpOwo+PiA+KyAgICAgIHdyaXRlbCgw
-eDAsICZ3aW5fcmVncy0+d2luMF95cmdiX21zdCk7Cj4+ID4rICAgICAgd3JpdGVsKDB4MDEsICZy
-ZWdzLT5yZWdfY2ZnX2RvbmUpOwo+PiA+Kwo+PiA+KyAgICAgIHJldHVybiAwOwo+PiA+K30KPj4K
-Pj4gSSB0aGluayB0aGlzIGp1c3Qgd29ya2Fyb3VuZCBMaW51eCBpb21tdSBwYWdlIGZhdWx0IGJ5
-IGx1Y2vjgIIKPj4gVGhlIHJlc2V0IHZhbHVl77yId2hhdCB5b3UgY2FsbGVkIGl0IGlz77yJeW91
-ciB3cml0ZSBqdXN0IGxldCB3aW4wIHJlYWQgYQo+PiAzMjB4MjQwIHJlY3Rhbmd1bGFyIGZyb20g
-YWRkcmVzcyAwIGFuZCBkaXNwbGF5IGl0IGF0IG5leHQgZnJhbWXvvIhtYXliZSAxNm1zIGxhdGVy
-IGlmIHlvdXIKPj4gY3VycmVudCBkaXNwbGF5IGlzIHJ1biBhdCA2MEha77yJ44CCCj4+Cj4+IDEu
-IHdlIGRvbid0IGtub3cgd2hhdCBjb250ZW50IGlzIGF0IGFkZHJlc3MgMCwgc28geW91IHdpbGwg
-c2VlIHNvbWV0aGluZyBzdHJhbmdlIG9uIHlvdXIgbW9uaXRvci4KPj4gMi4gdGhlcmUgaXMgbm8g
-Z3VhcmFudGVlIHRoYXQgYWRkcmVzcyAwIGlzIHJlYWxseSByZWFkYWJsZe+8iG1heWJlIGEgc2Vj
-dXJpdHkgbWVtb3J5IHNwYWNl77yMIG9yIG1heWJlCj4+ICAgICBpdCBpcyBub3QgYSB2YWxpZCBh
-ZGRyZXNz77yJ77yMIHRoaXMgbWF5IGNhdXNlIGFub3RoZXIgaXNzdWUgdGhhdCBub3QgZWFzeSB0
-byBkZXRlY3TjgIIKPgo+T2theS4gQ2FuIHlvdSBzdWdnZXN0IGFueSBwcm9wZXIgd2F5IHRvIGNs
-ZWFuIHVwIFZPUD8gQWxsIHRoZXNlIHJlc2V0Cj52YWx1ZXMgYXJlIHJlZmVycmVkIHRvIGFzIHBl
-ciB0aGUgVFJNIGFuZCByZWFkIGJlZm9yZSBlbmFibGluZyB0aGUKCj52aWRlby4KCgpNYXliZSB3
-cml0ZSAwIHRvIHRoZSB3aW5kb3dzIGVuYWJsZSBiaXTvvIwgZGlzYWJsZSB0aGlzIHdpbmRvd+OA
-ggpCdXQgdGhpcyBpcyBhIGxpdHRsZSBydWRl77yMSSB3b25kZXIgaWYgdGhlIG1haW5saW5lIGhh
-cyBhIHdheSB0byBoYW5kbGVvZmYgCmJvb3Rsb2FkZXIgZnJhbWVidWZmZXIgdG8gbGludXgga2Vy
-bmVsIGRybSBzeXN0ZW0gc2VhbWxlc3PjgIIKClswXSBpcyBhbHNvIHdoYXQgUm9iaW4gbWVudGlv
-biBpcyBWMSwgIG1heWJlIGEgYmV0dGVyIGRpcmVjdGlvbi4KCgpbMF1odHRwczovL2xvcmUua2Vy
-bmVsLm9yZy9hbGwvMjAyMzAxMjAxNzQyNTEuNDAwNDEwMC0xLXRoaWVycnkucmVkaW5nQGdtYWls
-LmNvbS8gCgo+Cj5UaGFua3MsCj5KYWdhbi4K
+
+On Fri, Dec 15, 2023 at 7:23 PM Fabio Estevam <festevam@gmail.com> wrote:
+>
+> On Fri, Dec 15, 2023 at 1:20 PM Fabio Estevam <festevam@gmail.com> wrote:
+>
+> > Ok, what about the patch below?
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20230703205700.9120-1-cody@londelec.com/
+> >
+> > Is this still needed?
+>
+> I looked in the i.MX28 Reference Manual, and the one above looks a
+> correct fix. I will queue it.
+
+Yes, this patch is needed, thank you for queuing it.
