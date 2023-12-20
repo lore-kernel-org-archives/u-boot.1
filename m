@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C729BC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:39:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB8DC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:39:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B529876C4;
-	Wed, 20 Dec 2023 11:39:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BFB8286CF4;
+	Wed, 20 Dec 2023 11:39:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bc54Xx+L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OcLe9vke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C88FA86CF4; Wed, 20 Dec 2023 11:39:15 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id EE538876C8; Wed, 20 Dec 2023 11:39:16 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A8D3876CA
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:39:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C7E8876C4
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:39:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrejs.cainikovs@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50e23c620e8so5590253e87.1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 02:39:12 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-54f4f7e88feso7589116a12.3
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 02:39:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1703068752; x=1703673552; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZvBHzwiIxx+OnzL1eK8v52Qpr4vWmh85jI5DG4tIkLg=;
- b=bc54Xx+LvqrwXdcdF2DUHO3TnXc1LgGX16CZA+fEXlaUKbe5FZn0jyeRWe+eY4Rxjo
- RUwtiicVL8HpCDVlQWyt7toaJVxIoX7uKPqB55mRfY/D9C/mu5qHb8UkchK/rjcuStRi
- MxHM9xEEy5MIpD9QSrHXv0VdQ3Rnjgp3t8hYPG0w4cVDoFc+rKYIWrD8gKE7yPdtygwj
- Le5rgE7s48z/LJQ2Kdl1U9/XrrIUBmPxIP8k4N/fZVUXw1y5ck+jpDPQDE4VAn46nv2A
- HIvX4FScWn1j1EYzIY4UMTZNccOPBQxXWB13KKM1uH06KYDxvXoArNuDynfXunYuYMZM
- Xqpw==
+ bh=CGXmKbVMU2+Qp/Js5XW4TU2OECmH9Ci+jrhwwpQKmVE=;
+ b=OcLe9vkeFm2OpE+SNtehrLiL5PGZVmIPQKFxrC9ttk9hXARPfLNvXsEm4jpH+wnaEp
+ uASx3k1jF+EmVEa15dstfYZPxz2ibj/r2nZ8nR/Rnwst8xhnCFM7rbk+bHu2a3H85z6p
+ Xz8szZO5V03ljPe354XS7Ro6c5UuTAsr7ta5fnWHSiiC599SxOg+G/GJAZDzboiHfE2D
+ VIy2qhH1INZj4CYlgGRbadshpUyRISOHaYaBQXfgsQRYKEmFwig76K79phWyW1J46Wow
+ 1Br3dChpwelDurgNpBUCFPl98ePaxf3Z8XbBe2g39jHNPmLxgjMrh2ydYhNva89NMdyG
+ /z8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1703068752; x=1703673552;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZvBHzwiIxx+OnzL1eK8v52Qpr4vWmh85jI5DG4tIkLg=;
- b=QCT0PbK9J8B5DHyh3QQ/1Riz94MTq7+4FzvFPD9O35XvoVdSPIh+ILNhWuxAeXpdKd
- xGYjgpB6In6SSoRwgdD0s8XS81DtD9ScIQMmYm0eUz8OwC4QhBVYPi6LrKZhJp7X+VRI
- ejKXuObHnQCP2X023t1JyXi6UfDaqaGMXYGEc4bnAfK33tPR8PQmfSpgSiYOTYvpi0B4
- RBS/bK+S+G0zGF0q1k2hypKICIiyQKjMcB3NrKsVF/+9+9tYWlxVuWYpC8rNOSt11l2d
- 3zDxpRzxr+/KUXcsmmHbT/AZ/loanAfJXdNCBVmXmRMyy56cKwOCwRIhxDD+1WBYFYFb
- nX9A==
-X-Gm-Message-State: AOJu0Ywhl4vtI+NtANdWBqag74sKg+lMqQdSn4cHcqyueNz69mfVIMWZ
- PvrR44IWP8iAFRw2lIofKB4m0TS85vKi9A==
-X-Google-Smtp-Source: AGHT+IGUPsm7W/r1KWr2p8aIDxftB5vWLE5r8J/jkqLeZxB2oK+9DIyZpJFcrx0SfFhjibpvqEn+aA==
-X-Received: by 2002:a05:6512:3f1c:b0:50d:1e51:507b with SMTP id
- y28-20020a0565123f1c00b0050d1e51507bmr9886407lfa.44.1703068751324; 
- Wed, 20 Dec 2023 02:39:11 -0800 (PST)
+ bh=CGXmKbVMU2+Qp/Js5XW4TU2OECmH9Ci+jrhwwpQKmVE=;
+ b=mL+e66OIFroBoSo0tRYmwEbdsaB16hrtu+iFbGixkG+mlCofA/HlcO6XfzWuwMUK2v
+ BepG9EcEs9UQYCwv5ykeEaVD3fqGOG2C2aBe5/cQTWTTRRvkVR1+C9/k2+TKyCJoQZGx
+ DAu0r9riIu9iKijNg0o+BG3QNS+Ya6JiROxko43Xj43hwT2YMh53RaLSVEhpCP4vK2+I
+ zAWo0Sl3TqmjokGWhGNF+ZsTuQ9k6UPPlcjKvDg4EAsJ3xk4wyNWXw4JFxmr70ZhkWm1
+ JcQ1z0cVFfLmxvKwGTuOkPMUh2nXjlfAwHPWPYuNlEWjFPaLbgwAfchW+xt/MfhEj9TJ
+ 4ZCg==
+X-Gm-Message-State: AOJu0YytK9AnvH+g3xz9W24dQ6bo4sRIjRtwNO39GX0azSrRSkqKDCbD
+ BDwwTJTPri/jYvOXrzXMbeAg55TaMvi/Vw==
+X-Google-Smtp-Source: AGHT+IHnS375P4gsM7tJGp/os4Dzc0B33sXY1UC4dAXKrwQJHZSq2D5gjpeVt93Y/ysn13hMnGmn/w==
+X-Received: by 2002:aa7:df18:0:b0:553:7407:eb02 with SMTP id
+ c24-20020aa7df18000000b005537407eb02mr2257716edy.58.1703068752190; 
+ Wed, 20 Dec 2023 02:39:12 -0800 (PST)
 Received: from andrejs-nb.int.toradex.com (77-59-154-235.dclient.hispeed.ch.
  [77.59.154.235]) by smtp.gmail.com with ESMTPSA id
- f19-20020a056402195300b005537b00132asm2259932edz.91.2023.12.20.02.39.09
+ f19-20020a056402195300b005537b00132asm2259932edz.91.2023.12.20.02.39.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 02:39:10 -0800 (PST)
+ Wed, 20 Dec 2023 02:39:11 -0800 (PST)
 From: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
 To: u-boot@lists.denx.de,
 	"NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
 Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: [PATCH v1 1/3] apalis-imx8: remove -u-boot.dtsi include
-Date: Wed, 20 Dec 2023 11:38:09 +0100
-Message-Id: <20231220103811.228515-2-andrejs.cainikovs@gmail.com>
+Subject: [PATCH v1 2/3] colibri-imx8x: remove -u-boot.dtsi include
+Date: Wed, 20 Dec 2023 11:38:10 +0100
+Message-Id: <20231220103811.228515-3-andrejs.cainikovs@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231220103811.228515-1-andrejs.cainikovs@gmail.com>
 References: <20231220103811.228515-1-andrejs.cainikovs@gmail.com>
@@ -112,21 +112,21 @@ u-boot.dtsi
 
 Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 ---
- arch/arm/dts/fsl-imx8qm-apalis.dts | 1 -
+ arch/arm/dts/fsl-imx8qxp-colibri.dts | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/dts/fsl-imx8qm-apalis.dts b/arch/arm/dts/fsl-imx8qm-apalis.dts
-index bc7c75d3372..e089ddb8468 100644
---- a/arch/arm/dts/fsl-imx8qm-apalis.dts
-+++ b/arch/arm/dts/fsl-imx8qm-apalis.dts
-@@ -9,7 +9,6 @@
- /memreserve/ 0x80000000 0x00020000;
+diff --git a/arch/arm/dts/fsl-imx8qxp-colibri.dts b/arch/arm/dts/fsl-imx8qxp-colibri.dts
+index df992ac6396..295090ad711 100644
+--- a/arch/arm/dts/fsl-imx8qxp-colibri.dts
++++ b/arch/arm/dts/fsl-imx8qxp-colibri.dts
+@@ -6,7 +6,6 @@
+ /dts-v1/;
  
- #include "fsl-imx8qm.dtsi"
--#include "fsl-imx8qm-apalis-u-boot.dtsi"
+ #include "fsl-imx8qxp.dtsi"
+-#include "fsl-imx8qxp-colibri-u-boot.dtsi"
  
  / {
- 	model = "Toradex Apalis iMX8";
+ 	model = "Toradex Colibri iMX8X";
 -- 
 2.34.1
 
