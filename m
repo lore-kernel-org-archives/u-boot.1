@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4807C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 17:32:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195F1C46CCD
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 17:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD2E5877CB;
-	Wed, 20 Dec 2023 18:32:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C2D7877CB;
+	Wed, 20 Dec 2023 18:32:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MFQswA+S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AQ+6v7Mf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68B8987650; Wed, 20 Dec 2023 18:32:08 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 3E937877CB; Wed, 20 Dec 2023 18:32:42 +0100 (CET)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E67E7877E2
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 18:32:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DC4B87650
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 18:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a2331e7058aso561561466b.2
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:32:05 -0800 (PST)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2cc8fd5d54bso11193191fa.2
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:32:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703093525; x=1703698325; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EmTm+r/G9p1kHFK87W/9CETMSXU4LhYF7/BpFaRzZ9o=;
- b=MFQswA+SSI0P3MvLaOgMvXQuquncS66aznhcr+nqdEp6JgGPSrjVaszwEu58Rlh6aj
- q5q/utLxRaHx0TEE0A/PiI4Uxl2L0XbB84U3InNz6y9xzQz+GuCkkaiENG6x4C7sESrJ
- RTdvymNIQqyT9Hjnem2DMWKnutQ+GKx1HeOUs=
+ d=chromium.org; s=google; t=1703093559; x=1703698359; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jGSTTv4iAvHRWOum0CrAGh5UaJ7tC6HBsF8Kr9fEU58=;
+ b=AQ+6v7Mf0YIn/Tk4rwbj7yTaUAkeen5c1Mho4APzePX5gvAjMWr5M19fNHuHzttSSk
+ uzLvkCEC9Z/ZaBLSn43qTYw7/xUbxjhwEseOq/qIxE7a1iybdCogoU//rbqMygBIUt2N
+ NIX2+/pDx1ihBGWcPp4cZWtjVXOWkkB+ugQnE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703093525; x=1703698325;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EmTm+r/G9p1kHFK87W/9CETMSXU4LhYF7/BpFaRzZ9o=;
- b=f34K85EEDl3zKfumQbG1/8Dq1Drs4WZqcv02KuL+seeV91OwJrsNivgTUD3fuPqycx
- Wkwf3XettGE8u0NyEEt5AwLvSLbCEn40X36WAOqdaNNyS1AemcFsbkzok26Ly5LNb/rI
- ziWb6kLXjFvuXWTke4CROoQrFIQC5pMc5Zc+hxKndGzVcJoQQmhWmHJxmPeIxgCOK3g3
- RmQmZOkrYBPwg3FRgbSFetavgGz4zFsqzLLhssohRRHqpqBuh0Zz6X0eGUHZRoO6ivWz
- 8q34WqJ3yVVL7tm5fMXC/HkH27f4qMo3iBKc77MNb8n3xBdYE0Qv/WhudRCcQXzPw7EM
- qJKw==
-X-Gm-Message-State: AOJu0YzrodgLFxFd0FA1DMECNEw1YLUt9wpC9sl3shGx/5J595iSXHgS
- hZptSEdXhDWUgXxw/3ddyUnEw7C2zNqByuxUE5hUZQ==
-X-Google-Smtp-Source: AGHT+IENm+OxMMa5cLx7FZveFDvTbXgpTurTqxlmAE8zAa2/U0cGxecqaeW9trZfSyh/suYpFIzTxsoHQ4gpkjRRR0I=
-X-Received: by 2002:a17:907:1394:b0:a23:453d:95d2 with SMTP id
- vs20-20020a170907139400b00a23453d95d2mr1348961ejb.309.1703093525151; Wed, 20
- Dec 2023 09:32:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703093559; x=1703698359;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jGSTTv4iAvHRWOum0CrAGh5UaJ7tC6HBsF8Kr9fEU58=;
+ b=KoT02IBqkspz8+7DLEHKlt50QyYd0AuL99WCJKe1Fob7xZq7lqcc4m8dJcDNIu+Zu/
+ x2//n1wUsYH/7ergcJLhWeHwe8z6wQhCwESKo6mqT+ikkyzlax/5p3udSAkboOjvLS/L
+ 84NYdP9KB3wrMYaydGcBfGp3xB/ue1qhwD0skgo8ky2K2pWGznRiweN0EN2iN3VsKJOO
+ JjHzn8xAnRbSNYy5BzRtwpynfFtSShYk3/AoUXh0MwbSnerGDSQWAMhM0RwmWG9Sm6Sk
+ h37Z8K7z35ZuV4Te4q3WGMHP+pMNqll/doT4CTFRDNMdSseAlF52YSF6IbpXVapL+yTn
+ skJA==
+X-Gm-Message-State: AOJu0Yz8MZcJF2UGdBtf5xn+xe0TldERZ7CYqojgYJ+RHzt3j/s3EGpD
+ 9BK0ZS6S6P0PR3FAjwrEzCWQwZ2G3A+8wdInltJipw==
+X-Google-Smtp-Source: AGHT+IHyw1yDQpadxmKouIj+5ICdVC3zTAEg8J5rdHmZc/a2RATxA6Vn98OVR1eytNc/+qkK1X8uRjgDiBR6svDy4Gs=
+X-Received: by 2002:a2e:2204:0:b0:2cc:5e32:bd87 with SMTP id
+ i4-20020a2e2204000000b002cc5e32bd87mr4008192lji.99.1703093558993; Wed, 20 Dec
+ 2023 09:32:38 -0800 (PST)
 MIME-Version: 1.0
 References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
- <20231127171058.165777-3-ilias.apalodimas@linaro.org>
- <CAPnjgZ2PtQQ81x-SqMs6NKSjMKFGShT65Rrtfc-CDOsdBxgJDQ@mail.gmail.com>
- <CAC_iWjJ52eK-v30T6XC1jHDDLvcuOX0p43PW8UCfakRPxMkQCw@mail.gmail.com>
- <CAPnjgZ2Ubr6kNfn+7bg+F_CV4H_wZMKaPq8F8njSfQNUF02+iA@mail.gmail.com>
- <CAC_iWj+X9Kw=1YOX0bny01JwkzCSyeZ6PB2-r_V-2TisgVG7WQ@mail.gmail.com>
- <20231209184915.GY2513409@bill-the-cat>
- <CAC_iWjKKG50d5QhUZFLUgxqO+VhgE7bC9Tk_SmCR0x4f3zD74g@mail.gmail.com>
- <CAPnjgZ27G=6fDadAiJk_aG9He2ZpyFhhsZDYxUwEp5+0AQatYg@mail.gmail.com>
- <20231213201909.GG2513409@bill-the-cat>
- <CAPnjgZ2Ljm2aR0w9zgJZ2O49XU8oNYsDi-EJ-PD=Z5mx2sQHrg@mail.gmail.com>
- <87y1dx6cnd.fsf@bloch.sibelius.xs4all.nl>
- <CAPnjgZ1c5MM-51qpj6tBMV03ofwFyfv2Z230S=5aatLaGN5ziQ@mail.gmail.com>
- <CALeDE9PRUhZ-cHhaU_0=3pUBET0sZ4iQ=A3yDxrtywoyWgvv3A@mail.gmail.com>
-In-Reply-To: <CALeDE9PRUhZ-cHhaU_0=3pUBET0sZ4iQ=A3yDxrtywoyWgvv3A@mail.gmail.com>
+ <20231127171058.165777-2-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2Vo22gasW05um2og==yRoC33YB3eW=xXVt2dE9xqDgVw@mail.gmail.com>
+ <CAC_iWjJE=-rOhOLVe4d7sUH8DEJjn5hdHoHpKe70d4gmB7---Q@mail.gmail.com>
+ <CAC_iWjLrmk2AwxoO8tDtG8notrLQuSdRtqzLpTzBRuM1QO0wzw@mail.gmail.com>
+ <CAPnjgZ3XXtD24cqn1eEtZu0rxuJz4DR8vttu2YDwes3_ToJNkQ@mail.gmail.com>
+ <CALeDE9Moypi85cM8H2z+7nxZPVvJzj5DWWej0Qvdebpdp1qR1A@mail.gmail.com>
+In-Reply-To: <CALeDE9Moypi85cM8H2z+7nxZPVvJzj5DWWej0Qvdebpdp1qR1A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Dec 2023 10:31:47 -0700
-Message-ID: <CAPnjgZ1gJt4YUsRv65=UVz4teB0-LW83XTwKMLyBnWhjYqn3jw@mail.gmail.com>
-Subject: Re: [PATCH 2/2 v2] smbios: Fallback to the default DT if sysinfo
- nodes are missing
+Date: Wed, 20 Dec 2023 10:32:26 -0700
+Message-ID: <CAPnjgZ0o7QENx3yFEx2SNpm0A7Li_qqvTeUmdDXNaCVuEA++Jg@mail.gmail.com>
+Subject: Re: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
 To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, trini@konsulko.com, 
- ilias.apalodimas@linaro.org, sean.anderson@seco.com, 
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com,
+ sean.anderson@seco.com, 
  neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
- u-boot@lists.denx.de
+ mark.kettenis@xs4all.nl, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,66 +93,130 @@ X-Virus-Status: Clean
 
 Hi Peter,
 
-On Tue, 19 Dec 2023 at 13:23, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Tue, 19 Dec 2023 at 13:40, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> > > > > What do you mean wrong, exactly?
+> Hi Simon,
+>
+> On Mon, Dec 18, 2023 at 3:02=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, 6 Dec 2023 at 04:36, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > [...]
+> > >
 > > > >
-> > > > "raspberrypi" instead of "Raspberry Pi", for example, or "friendlyarm"
-> > > > instead of "FriendlyElec"
+> > > >>
+> > > >> >                 str =3D "Unknown";
+> > > >> >
+> > > >> >         for (;;) {
+> > > >> > @@ -151,8 +151,7 @@ static int smbios_add_prop_si(struct smbios_=
+ctx *ctx, const char *prop,
+> > > >> >                 const char *str;
+> > > >> >
+> > > >> >                 str =3D ofnode_read_string(ctx->node, prop);
+> > > >> > -               if (str)
+> > > >> > -                       return smbios_add_string(ctx, str);
+> > > >> > +               return smbios_add_string(ctx, str);
+> > > >> >         }
+> > > >> >
+> > > >> >         return 0;
+> > > >> > @@ -231,7 +230,7 @@ static int smbios_write_type0(ulong *current=
+, int handle,
+> > > >> >         t->vendor =3D smbios_add_string(ctx, "U-Boot");
+> > > >> >
+> > > >> >         t->bios_ver =3D smbios_add_prop(ctx, "version");
+> > > >> > -       if (!t->bios_ver)
+> > > >> > +       if (!strcmp(ctx->last_str, "Unknown"))
+> > > >>
+> > > >> That is really ugly...checking the ctx value looking for a side ef=
+fect.
+> > > >>
+> > > >> Can you not have smbios_add_prop() continue to return NULL in this=
+ case?
+> > > >
+> > > >
+> > > > Hmm I don't know, but I wonder why I am not just checking t->bios_v=
+er for Unknown.
+> > > > I'll have a look and change it
 > > >
-> > > Heh, well, even in the x86 world vendors can't even spell their own
-> > > name consistently.
-> > >
-> > > > I just wonder what this information is actually used for. If it is
-> > > > just for fun, that is fine, but I believe some tools do use dmidecode,
-> > > > at which point it needs to be accurate and should not change later,
-> > > > e.g. when someone decides to actually add the info.
-> > >
-> > > So the Linux kernel uses this information to apply quirks for specific
-> > > machines.  But I hope that on platforms that have a device tree folks
-> > > will just use the board compatible string for that purpose.
+> > > Ok, this can't be changed as easily.  smbios_add_prop() will not
+> > > return NULL in any case. It returns an integer. With the cleanup, it
+> > > will always writes 'Uknown' and not return 0 anymore.
+> > > I can add that default value you suggested but the ctx->last_str is
+> > > still used on the next line anyway.
 > >
-> > Right.
+> > Would you mind if I tried to create a version of the patch which does
+> > the same thing but with less code, and perhaps a test? It might be
+> > easier to discuss it then. I can't claim to understand all the
+> > different code paths at this point.
 > >
-> > >
-> > > Otherwise I think this information is mostly used to populate system
-> > > information UIs and asset databases.
-> >
-> > So perhaps the devicetree should be used instead? How do these things
-> > work today? And what are they, exactly?
+> > My main concern is that with so many code paths it will be hard even
+> > to refactor the code in the future, since it will become
+> > 'load-bearing' and anyone might turn up and say it breaks their board
+> > because different information is provided.
 >
-> Device tree used for what? To populate the SMBIOS tables? Or to
-> populate "system information UIs and asset databases."
+> I don't buy this argument at all, sorry.
+
+OK.
+
 >
-> If you mean the later, that is not going to work. These platforms are
-> often proprietary, and are generally remote. They have local agents
-> that use dmidecode to populate things for support and management. It's
-> kind of in the name "System Management". To get all these platforms
-> updated to "just use devicetree" will take decades. No thanks!
+> > Overall, so long as the information isn't used for anything important
+> > in userspace, and we find a way to report SMBIOS to Linux without EFI,
+>
+> No, you can't tie random requirements to improving the SMBIOS support.
+> We *already* report SMBIOS to Linux, reporting SMBIOS to Linux without
+> EFI is changing things that will need different or extra standards,
+> that could take years.
+>
+> You are arbitrarily adding extra requirements just to suite yourself,
+> please STOP trying to hold things like this hostage.
 
-Do we care about these platforms? Do we even know what they are? Do
-they even run on ARM?
+Isn't that what is happening with Linux and ffi? My understanding is
+that there is no way to pass SMBIOS to Linux without EFI. Is that
+correct? I know some people at their wit's end about that.
 
-I found a thing called 'sos' and it does actually use the devicetree,
-which is actually the correct thing to do, on platforms which use
-device tree.
+You may know that I have tried for years to get bindings upstream to
+Linux....right now there is a reserved-memory binding which has been
+held up for longer than I can remember, because of EFI. How about a
+little give and take?
 
-At this point I'm wondering what problem is being solved here? We know
-we cannot pass the SMBIOS table without EFI in any case. A huge
-argument in Linux with hundreds of emails results in 'no patch
-applied', so far as I am aware. At the very least, that seems odd.
+>
+> > it is OK to enable this feature (with a new Kconfig so it can be
+> > disabled). But there is already authoritative info in the DT, so this
+>
+> There is two types of information in DT, the smbios "entries" in DT
+> are not standardised in the dtschema and in most cases they're
+> unnecessarily replicating data ALREADY in DT which is being produced
+> automatically with these patches, making it zero effort for vendors to
+> produce.
+>
+> > transformation into SMBIOS really should just be used for user
+> > display, etc., not for anything which affects operation of the device.
+>
+> Well SMBIOS tables are used for a number of different things already
+> in the kernel.
+>
+> > Do you agree? If you do, how to ensure that? Perhaps a special string
+> > in the table like 'GENERATED'?
+>
+> Nope, I do not agree, at all.
 
-Just to restate my suggestions:
-- Put this feature behind an #ifdef
-- Allow people to add the authoritative info if they want to
-- Add something to the SMBIOS info that indicates it is provisional /
-auto-generated
-- Figure out how to handle this when booting without EFI (or decide
-that SMBIOS is not used then?)
-- minor: simplify the code to just handle the two pieces of info
-currently decoded; add tests
+OK, well there it is.
 
-Do you agree with any or all of those?
+Anyway, as I said, I am happy for this to go in with a Kconfig
+controlling it (so it can be enabled/disabled). Then SoCs that don't
+want to go to the bother of adding authoritative info can just enable
+this Kconfig.
+
+I would very much like to see some signal that it is not
+authoritative. That should not be a big imposition.
+
+For my own interest, I would like to understand what actually uses it
+as I suspect it is just for display. The two programs I managed to
+find both handle devicetree and don't need SMBIOS.
 
 Regards,
 Simon
