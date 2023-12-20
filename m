@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22871C46CD3
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:14:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9A14C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:15:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD13A877D0;
-	Wed, 20 Dec 2023 13:13:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+	by phobos.denx.de (Postfix) with ESMTP id 4F515877DE;
+	Wed, 20 Dec 2023 13:13:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="Q0su+Q5H";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="eV4GxFW3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14FF8871A7; Wed, 20 Dec 2023 08:53:02 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 87F7E86FD5; Wed, 20 Dec 2023 10:12:49 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED3238700D
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 08:52:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8306687480
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:12:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
+ dmarc=pass (p=none dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 60963A13E7;
- Wed, 20 Dec 2023 08:52:59 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-id:content-transfer-encoding:content-type
- :content-type:date:from:from:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=mail; bh=ymRX7RNkP
- VzcsVH0DFWJ8pqv7/J1XK7avZ4u6cRz/vc=; b=Q0su+Q5HjYEp3hcAlUjrwe5V2
- /E3n48ZO3777OWpERtcQaVIW9zeq3JX3QVeFTJyKvJk/5ile5aTPQ+7CrZyySQoP
- rW6+BGcgfKboIyd8ahT9NWjxoh5aKRjbafi3BSxlJwKRkpIcupmnMqBR2Ql5K291
- 7GIZvzPHbTK0R2Euhjh7z9nyHhTXLsIhX+ZTgGpg5vywhJrRT15cOtB3+ml7Hv4S
- bEK253G7w1t/MZ7MSw/4H8lEIR8dUTu/n8rtIFK8iMjqFGX3WMmnbIpVdPbKb9w+
- TodViZ3SgiMSL1eQ0CGdtxI4nnGKWuR3W5ZxG/efkKtS66jfSurBWnInc6fnaAM2
- ey+wXlOFENEWwSv82uYRlU7FUZtYzKYPJS3kiuDSn70sfcUuMCzhXdzDa4k9fpj2
- PfImkWNjt1tPLDVDtU6DayZ2MduY5tvLa7tF59UZwc7S7xQO8koAz8r3RfIMcqHb
- GjGC9M3bW+0nY8uJD1NxrfIIgk8xW2vMtFuPXKr+8dxove2VE6aVhTEWPVJRximj
- Gn56nRxXxIG12t+C4Sn0AVhjQ43aMnLBIkSSj1Qb1mczpq9B474mBWvNI1dHf95U
- rCcyBy8AmkEBVqbKD1zz4kEsJGs8YPDtnzBDRbUjhbfyNDHKvIVlwioyQohQI2k8
- JEKotYDnEu7TJo2S+g=
-From: =?utf-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>
-To: Dragan Simic <dsimic@manjaro.org>
-CC: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Daniel Golle
- <daniel@makrotopia.org>
-Subject: Re: Passing boot logs to Linux?
-Thread-Topic: Passing boot logs to Linux?
-Thread-Index: AQHaMrctQ91qLkCwS0+C38IRePG/PrCxfvIAgAAJqQCAAAUhAIAAHXMAgAAFjICAAAwqgA==
-Date: Wed, 20 Dec 2023 07:52:58 +0000
-Message-ID: <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
-References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
- <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
- <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
- <16e633f9d4b1c426aaca510157479d65@manjaro.org>
- <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
- <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
-In-Reply-To: <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
-Accept-Language: hu-HU, en-US
-Content-Language: hu-HU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [195.228.188.73]
-x-esetresult: clean, is OK
-x-esetid: 37303A29CE70385C6C7566
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B472C035BBCA2D4D9CFF5A4091F4044F@prolan.hu>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=naresh.solanki@9elements.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40c339d2b88so58374125e9.3
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 01:12:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1703063566; x=1703668366; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TcmuEfxvBJvA4U3yIPgtYKn2+Egh6a8qao8SrdaKDao=;
+ b=eV4GxFW3Uj1PmO0RDr7nMPzO5Z6sTbq8pcKpQtYodyl/8ZCG1w6rY7syM/bctacAkJ
+ lYq70NLmaW/RA4MXHU+D2ykUKnNYOyHBlDvzpHktuSnkWo9fIHpojSFpR3VOzMEmO+Wh
+ GjfGmHxvwFMWPAEsfRe0BQX4jY9bquu+QEFp57cmlD0MaVt1tBe0KJqGLVTZhOV2ocau
+ yOj+KrTKlDE8GpCArfyXloxrbkQCjb/d3LI/WErF9HhR8jrhFu3OQ2+BI9Mc3w6tYVFX
+ aWsUbK6CwR+eqt762iUAxJQNLbou68kT1C7wt8rPYnIDOKh4CEHHdcxUmkIlL3am3PFk
+ nFIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703063566; x=1703668366;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TcmuEfxvBJvA4U3yIPgtYKn2+Egh6a8qao8SrdaKDao=;
+ b=bdW0Rslex4ODs3XM9OpcRxH+gZVw6mApep28ucazFFBKlMl+41nozDBi8+KGd47duO
+ IUMMRuopO7WcQiSxLRiF8qvyVysBZ5NWeGNPvQZGAAslhruzVGWfiW/Z4pSb3bxgkGQV
+ kW16ENkRMwgJVsTw0FjMolQtOjjTmT69U3IpE1NSa1f+e7Da2Spig5rOFTIddeJMoDMs
+ Itc5Ty/T7RSgYHNfa9IHDGAkwoGrUw/2ORfJkxHf5KujnypiD6WKO+Sx2rATtrqPJNrs
+ XvCmfgfu9LA9Rsp7LD7QcVlX5SeO55mao3URnuAMiuulrqcSoH7DrF/z7xGBhbMO6yVM
+ T3QA==
+X-Gm-Message-State: AOJu0YxuXnPZixehjrI8QWg9GkA0fpjth8c2alXqqAODdb1zAn0Qit7j
+ CioTRCJY9ptUIZXAA3OjPHPuYPVu4Rt12QzGB/Yd4Q==
+X-Google-Smtp-Source: AGHT+IHrhi2/UlFTfqbqsU/Gen4jnAcTa8qSjBidvPvJ62ggYkTMJwxjv0ismPhX55d6GdY0n55VcA==
+X-Received: by 2002:a05:600c:3d85:b0:40d:22d3:e359 with SMTP id
+ bi5-20020a05600c3d8500b0040d22d3e359mr1216190wmb.3.1703063566235; 
+ Wed, 20 Dec 2023 01:12:46 -0800 (PST)
+Received: from stroh80.sec.9e.network
+ (ip-078-094-000-051.um19.pools.vodafone-ip.de. [78.94.0.51])
+ by smtp.gmail.com with ESMTPSA id
+ bh20-20020a05600c3d1400b0040d15dcb77asm6530224wmb.23.2023.12.20.01.12.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Dec 2023 01:12:44 -0800 (PST)
+From: Naresh Solanki <naresh.solanki@9elements.com>
+To: u-boot@lists.denx.de, "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Naresh Solanki <naresh.solanki@9elements.com>
+Subject: [PATCH] sbp1: Add support for IBM SBP1 board
+Date: Wed, 20 Dec 2023 14:42:24 +0530
+Message-ID: <20231220091236.1059109-1-naresh.solanki@9elements.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 20 Dec 2023 13:13:44 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,56 +92,283 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMjAyMy4gMTIuIDIwLiA4OjA5LCBEcmFnYW4gU2ltaWMgd3JvdGU6DQo+IE9uIDIwMjMtMTIt
-MjAgMDc6NDksIENzw7Nrw6FzIEJlbmNlIHdyb3RlOg0KPj4gT24gMjAyMy4gMTIuIDE5LiAyMToz
-MywgRGFuaWVsIEdvbGxlIHdyb3RlOg0KPj4+IFdoYXQgY29tZXMgdG8gbWluZCBpcyB0aGF0IENP
-TkZJR19DT05TT0xFX1JFQ09SRCBhbHNvIGNhcHR1cmVzIEFOU0kNCj4+PiBzZXF1ZW5jZXMgZHVy
-aW5nIG1lbnUgb3IgY291bnQtZG93biBiZWZvcmUgYm9vdCwgc28gd2UnZCBoYXZlIHRvIGVpdGhl
-cg0KPj4+IGludHJvZHVjZSBhIGRlZGljYXRlZCBsb2dfcHJpbnRmKCkgY2FsbCBhbmQgdXNlIHRo
-YXQgd2hlbiBldmVyIHdlIHdhbnQNCj4+PiB0aGUgb3V0cHV0IHRvIGFsc28gYmVjb21lIHBhcnQg
-b2YgdGhlIGxvZyBidWZmZXIgb3Igd2UgY291bGQgc29tZWhvdw0KPj4+IGZpbHRlciB0aGUgcmVj
-b3JkZWQgY29uc29sZSwgZWxpbWluYXRpbmcgYWxsIHRlcm1pbmFsIGNvbnRyb2wgDQo+Pj4gc2Vx
-dWVuY2VzLg0KPj4NCj4+IEkgZG9uJ3QgdGhpbmsgdGhhdCB3b3VsZCBiZSBhIGh1Z2UgcHJvYmxl
-bSwgTGludXggdXNlcnNwYWNlIGNhbiBmaWx0ZXINCj4+IEFOU0kgY29udHJvbCBjb2RlcyBpZiBp
-dCB3YW50cyB0by4gRm9yIG5vdywgSSdkIGxpa2UgYSBieXRlLWZvci1ieXRlDQo+PiBjb3B5IG9m
-IHRoZSBjb25zb2xlLCBhcy1pcywgcHJlc2VudGVkIHRvIExpbnV4Lg0KPg0KPiBCdXQgd291bGRu
-J3QgcmVjb3JkaW5nIHRoZSBjb250cm9sIHNlcXVlbmNlcyBhcy1pcyBhY3R1YWxseSBiZSBwcmV0
-dHkgDQo+IG11Y2ggdXNlbGVzcz/CoCBGb3IgZXhhbXBsZSwgc29tZSB1c2VyIGNhbiBzcGVuZCBh
-IGZldyBtaW51dGVzIA0KPiBzY3JvbGxpbmcgdGhyb3VnaCB0aGUgYm9vdCBtZW51LCB3aGljaCB3
-b3VsZCBwcm9kdWNlIGEgZmFpciBhbW91bnQgb2YgDQo+IG5lYXJseSB1c2VsZXNzIHJlY29yZGVk
-IGRhdGEuDQo+DQo+IE1vcmVvdmVyLCBpZiBJJ20gbm90IHdyb25nLCB2aWV3aW5nIG9yIHBhcnNp
-bmcgc3VjaCBhcy1pcyBkYXRhIHdvdWxkIA0KPiBhY3R1YWxseSByZXF1aXJlIHJlcGxheWluZyB0
-aGUgY29udHJvbCBzZXF1ZW5jZXMsIHRvIHJlcHJvZHVjZSB0aGUgDQo+IGFjdHVhbCBjb25zb2xl
-IGNvbnRlbnRzIGFzIGl0IHdhcyByZWNvcmRlZCwgd2hpY2ggd291bGQgYmUgcXVpdGUgDQo+IGN1
-bWJlcnNvbWUuDQoNCg0KSXQgKmlzKiB1c2VsZXNzLCBidXQgbW9zdCBvZiB0aGUgdGltZXMgdGhl
-IHVzZXIgd29uJ3QgYmUgc2Nyb2xsaW5nIGF0IA0KYWxsIGFueXdheXMsIHRoYXQncyB3aHkgSSBk
-b24ndCB0aGluayB0aGVzZSBmZXcgZXh0cmEgYnl0ZXMgd291bGQgYmUgYSANCnByb2JsZW0uDQoN
-CkFuZCBubywgeW91IGRvbid0IG5lZWQgYW55dGhpbmcgdG8gInByb2Nlc3MiIEFOU0kgY29kZXMs
-IHlvdSBjYW4ganVzdCANCmBjYXRgIHRoZW0gYW5kIHlvdXIgdGVybWluYWwgd2lsbCBwYXJzZSBp
-dCBhbnl3YXlzLg0KDQoNCj4+IEFzIEkgdW5kZXJzYW5kIChuZXZlciB1c2VkIGl0IGJlZm9yZSwg
-anVzdCBxdWlja2x5IHJlYWQgdGhlIGtlcm5lbCBkb2MpLA0KPj4gUFN0b3JlIGlzIGZvciBMaW51
-eCAtPiBVLUJvb3QgY29tbXVuaWNhdGlvbi4gV2hhdCBJJ20gZG9pbmcgaXMgdGhlDQo+PiBvcHBv
-c2l0ZS4gQnV0IHRoZSBhcHByb2FjaCBJIGVudmlzaW9uZWQgaXMgc2ltaWxhcjogbWFrZSBVLUJv
-b3Qgc2F2ZSBhDQo+PiBjb3B5IG9mIHRoZSBsb2cgdG8gYSBzdHJ1Y3QgYXQgYSBmaXhlZCBtZW1v
-cnkgYWRkcmVzcywgdGhlbiBwYXNzIHRoaXMNCj4+IGFkZHJlc3MgKyB0aGUgbGVuZ3RoIG9mIHRo
-ZSBsb2cgdG8gdGhlIGtlcm5lbCB2aWEgRFQgYW5kL29yIGNvbW1hbmRsaW5lLg0KPg0KPiBBY3R1
-YWxseSwgcHN0b3JlIGlzIHByaW1hcmlseSBpbnRlbmRlZCBhcyBhIG1lYW5zIHRvIHJlY29yZCBh
-bmQgc3RvcmUgDQo+IGtlcm5lbCBjcmFzaCBkdW1wcyBmb3IgbGF0ZXIgaW52ZXN0aWdhdGlvbi7C
-oCBJbiBvdGhlciB3b3JkcywgdGhlIA0KPiBrZXJuZWwgd3JpdGVzIGRhdGEgdG8gcHN0b3JlIGR1
-cmluZyBhbiBvb3BzIHNvIGl0IGNhbiBiZSBpbnZlc3RpZ2F0ZWQgDQo+IGxhdGVyLg0KPg0KPiBP
-bmUgb2YgdGhlIGJlbmVmaXRzIG9mIHVzaW5nIHBzdG9yZSBmb3IgcmVjb3JkIHRoZSBVLUJvb3Qg
-Y29uc29sZSANCj4gY29udGVudHMsIGluc3RlYWQgb2YgdXNpbmcgYSBtZW1vcnkgcmVnaW9uLCBp
-cyB0aGF0IG5vIHNwZWNpYWwgDQo+IHV0aWxpdGllcyB3b3VsZCBiZSByZXF1aXJlZCB0byBhY2Nl
-c3MgdGhlIHJlY29yZGVkIGNvbnNvbGUgb3V0cHV0cy7CoCANCj4gQWxzbywgbWFueSBvZiB0aGUg
-cmVxdWlyZW1lbnRzIHRoYXQgeW91IGxpc3RlZCBiZWxvdyB3b3VsZCBiZSBhbHJlYWR5IA0KPiBm
-dWxmaWxsZWQuDQo+DQo+PiBXaGF0IEkgdGhvdWdodCB0byBpbmNsdWRlIGluIHRoZSBzdHJ1Y3Q6
-DQo+Pg0KPj4gKiBtYWdpYyBjb29raWUgKGl0IHdhcyBpbiB0aGUgM3JkIHBhcnR5IHNvbHV0aW9u
-LCBhbmQgaXQncyBhbiBlYXN5IHdheQ0KPj4gb2YgZG9pbmcgc29tZSBmb3JtIG9mIGludGVncml0
-eSBjaGVjaykNCj4+ICogc3RydWN0IHZlcnNpb24gKGluIGNhc2Ugd2UgZXZlciBjaGFuZ2UgdGhl
-IGxheW91dCkNCj4+ICogVS1Cb290IHZlcnNpb24gY29kZSAobWF5YmUgbm90IG5lY2Vzc2FyeT8g
-SXQgY2FuIGJlIHBhcnNlZCBvdXQgb2YgdGhlDQo+PiBsb2cgYXMgd2VsbCkNCj4+ICogbGVuZ3Ro
-IG9mIHRoZSBsb2cgKG9yIGl0IGNvdWxkIGFsc28gYmUgcGFzc2VkIHZpYSBEVC9jbWRsaW5lKQ0K
-Pj4gKiBhbmQgdGhlbiB0aGUgbG9nIGJ1ZmZlciBvZiBjb3Vyc2UNCj4NCg0KVGhhdCdzIHdoYXQg
-SSByZWFkIGFzIHdlbGwuIElzIHRoZXJlIHN1cHBvcnQgZm9yIFUtYm9vdCB0byB3cml0ZSBhbmQg
-DQpMaW51eCB0byByZWFkIFBTdG9yZXM/DQoNCkJlbmNlDQoNCg==
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+
+Add defconfig & devicetree for IBM SBP1 board BMC based on AST2600 SoC.
+
+Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
+Signed-off-by: Naresh Solanki <naresh.solanki@9elements.com>
+---
+
+Changes:
+- Update MAINTAINERS
+---
+ arch/arm/dts/Makefile                |   4 +-
+ arch/arm/dts/ast2600-sbp1.dts        |  96 ++++++++++++++++++++
+ board/aspeed/evb_ast2600/MAINTAINERS |   1 +
+ configs/ibm-sbp1_defconfig           | 126 +++++++++++++++++++++++++++
+ 4 files changed, 226 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/ast2600-sbp1.dts
+ create mode 100644 configs/ibm-sbp1_defconfig
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 1be08c5fdc..85514fb8ba 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1353,7 +1353,9 @@ dtb-$(CONFIG_BCM6878) += \
+ 	bcm96878.dtb
+ 
+ dtb-$(CONFIG_ASPEED_AST2500) += ast2500-evb.dtb
+-dtb-$(CONFIG_ASPEED_AST2600) += ast2600-evb.dtb
++dtb-$(CONFIG_ASPEED_AST2600) += \
++	ast2600-evb.dtb \
++	ast2600-sbp1.dtb
+ 
+ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
+ 
+diff --git a/arch/arm/dts/ast2600-sbp1.dts b/arch/arm/dts/ast2600-sbp1.dts
+new file mode 100644
+index 0000000000..5c862e2c1c
+--- /dev/null
++++ b/arch/arm/dts/ast2600-sbp1.dts
+@@ -0,0 +1,96 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include "ast2600-evb.dts"
++
++/ {
++	model = "IBM SBP1";
++	compatible = "ibm,sbp1-bmc", "aspeed,ast2600";
++	memory {
++		device_type = "memory";
++		reg = <0x80000000 0x20000000>;
++	};
++
++	chosen {
++		stdout-path = &uart1;
++	};
++
++	aliases {
++		mmc0 = &emmc;
++		mmc1 = &sdhci0;
++		mmc2 = &sdhci1;
++		ethernet0 = &mac2;
++		ethernet1 = &mac3;
++	};
++
++	cpus {
++		cpu@0 {
++			clock-frequency = <1200000000>;
++		};
++		cpu@1 {
++			clock-frequency = <1200000000>;
++		};
++	};
++
++};
++
++&uart1 {
++	bootph-all;
++	status = "okay";
++};
++
++&uart5 {
++	status = "disabled";
++};
++
++&mdio {
++	status = "okay";
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_mdio3_default &pinctrl_mdio4_default>;
++};
++
++&mac0 {
++	status = "disabled";
++};
++
++&mac1 {
++	status = "disabled";
++};
++
++&gpio0 {
++	status = "okay";
++	line_50 {
++		gpio-hog;
++		gpios = <50 GPIO_ACTIVE_LOW>;
++		output-low;
++		line-name = "BMC_MAC1_RESET_N";
++	};
++	line_175 {
++		gpio-hog;
++		gpios = <175 GPIO_ACTIVE_LOW>;
++		output-low;
++		line-name = "BMC_MAC0_RESET_N";
++	};
++};
++
++&spi1 {
++	status = "disabled";
++};
++
++&spi2 {
++	status = "disabled";
++};
++
++&emmc {
++	status = "disabled";
++};
++
++&sdhci0 {
++	status = "disabled";
++};
++
++&sdhci1 {
++	status = "disabled";
++};
+diff --git a/board/aspeed/evb_ast2600/MAINTAINERS b/board/aspeed/evb_ast2600/MAINTAINERS
+index e83aae5d6a..5368e8ee5f 100644
+--- a/board/aspeed/evb_ast2600/MAINTAINERS
++++ b/board/aspeed/evb_ast2600/MAINTAINERS
+@@ -4,3 +4,4 @@ S:	Maintained
+ F:	board/aspeed/evb_ast2600/
+ F:	include/configs/evb_ast2600.h
+ F:	configs/evb-ast2600_defconfig
++F:	configs/ibm-sbp1_defconfig
+diff --git a/configs/ibm-sbp1_defconfig b/configs/ibm-sbp1_defconfig
+new file mode 100644
+index 0000000000..cf667217cc
+--- /dev/null
++++ b/configs/ibm-sbp1_defconfig
+@@ -0,0 +1,126 @@
++CONFIG_ARM=y
++CONFIG_SYS_DCACHE_OFF=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_SPL_SYS_THUMB_BUILD=y
++CONFIG_ARCH_ASPEED=y
++CONFIG_TEXT_BASE=0x80000000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x800
++CONFIG_ASPEED_AST2600=y
++CONFIG_TARGET_EVB_AST2600=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=1
++CONFIG_SPL_LDSCRIPT="arch/arm/mach-aspeed/ast2600/u-boot-spl.lds"
++CONFIG_ENV_SIZE=0x10000
++CONFIG_ENV_OFFSET=0xe0000
++CONFIG_ENV_SECT_SIZE=0x10000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="ast2600-sbp1"
++CONFIG_DM_RESET=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x83000000
++CONFIG_SPL_SIZE_LIMIT=0x10000
++CONFIG_SPL=y
++# CONFIG_ARMV7_NONSEC is not set
++CONFIG_SYS_LOAD_ADDR=0x83000000
++CONFIG_SPL_PAYLOAD="u-boot.img"
++CONFIG_BUILD_TARGET="u-boot-with-spl.bin"
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_FIT=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000
++CONFIG_USE_BOOTARGS=y
++CONFIG_BOOTARGS="console=ttyS0,115200n8 root=/dev/ram rw earlycon"
++CONFIG_USE_BOOTCOMMAND=y
++CONFIG_BOOTCOMMAND="run bootspi"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x83000000
++CONFIG_SPL_BSS_MAX_SIZE=0x1000000
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000000
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SPL_FIT_IMAGE_TINY=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_CBSIZE=256
++CONFIG_SYS_PBSIZE=276
++CONFIG_CMD_BOOTZ=y
++# CONFIG_BOOTM_NETBSD is not set
++# CONFIG_BOOTM_PLAN9 is not set
++# CONFIG_BOOTM_RTEMS is not set
++# CONFIG_BOOTM_VXWORKS is not set
++# CONFIG_CMD_IMI is not set
++# CONFIG_CMD_XIMG is not set
++CONFIG_CMD_EEPROM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_DHCP=y
++CONFIG_BOOTP_BOOTFILESIZE=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_NCSI=y
++CONFIG_CMD_EXT4=y
++CONFIG_DOS_PARTITION=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_EFI_PARTITION=y
++# CONFIG_SPL_EFI_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_SECT_SIZE_AUTO=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_ASPEED_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_ASPEED=y
++CONFIG_I2C_EEPROM=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ASPEED=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_ISSI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_SST=y
++CONFIG_SPI_FLASH_WINBOND=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_PHY_REALTEK=y
++CONFIG_PHY_NCSI=y
++CONFIG_DM_MDIO=y
++CONFIG_FTGMAC100=y
++CONFIG_ASPEED_MDIO=y
++CONFIG_PHY=y
++CONFIG_PINCTRL=y
++CONFIG_RAM=y
++CONFIG_SPL_RAM=y
++CONFIG_DM_SERIAL=y
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_SPI_DIRMAP=y
++CONFIG_SPI_ASPEED_SMC=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_WDT=y
++CONFIG_SHA384=y
++CONFIG_SPL_CRC32=y
++CONFIG_HEXDUMP=y
++# CONFIG_EFI_LOADER is not set
++CONFIG_PHANDLE_CHECK_SEQ=y
+-- 
+2.41.0
 
