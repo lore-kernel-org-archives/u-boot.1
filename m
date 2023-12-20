@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B73C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 11:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A496C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 11:30:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8988187600;
-	Wed, 20 Dec 2023 12:28:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 85A8487706;
+	Wed, 20 Dec 2023 12:30:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LnjmeTFn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bP1My5eW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74E68876FF; Wed, 20 Dec 2023 12:28:04 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id B0823876FF; Wed, 20 Dec 2023 12:30:35 +0100 (CET)
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [IPv6:2607:f8b0:4864:20::e34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3038F87620
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:28:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C98F787702
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:30:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5e7f0bf46a2so14162627b3.1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 03:28:02 -0800 (PST)
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-4669347c6b6so664539137.1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 03:30:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703071681; x=1703676481; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703071831; x=1703676631; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vfDLIE52bS8HvDhc6h/xvsuBlhtPG04nzterLLUGczo=;
- b=LnjmeTFnCniTYnYNesRV0pG8TB9nf6P1sMYHNqkVx8pYlskeMrK5prbqqX7HjOzbCZ
- ixD05ziLJSffdvsShT8QE4En266uNPV30k4qwJYRvccbThDar+BRNRoE5G9aVrw0RAfI
- aCLidXnuaJm/ePfvJRCawYP3Fsz0hrd1bxPzHgafPebzE8X0KRRKg4LS3RtQ+3Z/DlWI
- UhA/GTJm3PEUUy8UDwn1gaV6S/blR6JEoMQIIXDehiPfih2rdQkSXhgRA+/Yr5lYp3fp
- 6bFtkgoauov+4sB5C9/Ma5y3CFJxkGkWwXSC2mDXfjtBnwfaLhSjlanM/GfFzs60Ao0C
- b2KQ==
+ bh=6/NnJBFiq7FYUkg4WYQtWt2kuFZ4wePHGcRAjEMRO7c=;
+ b=bP1My5eWoaqASqKQ2IQm8Cnj3pT85ipl9Sxjusf8MToyd89Y4Ix4Ovsd8MN8MAc8DP
+ OwkNDXg9Gl1QDBMq2i+zLveq+WBYOpbkNFdWsRMz7tDS62qpgwfvYSNxz79CTNzs40df
+ IaP3w30gi7+XASJg0g6a6hc4IuSGORD4HJiovzg9N2ZNER86+QCU8ZCAFlyuMX84OxCY
+ kUql6l1+xQ0GcDsD2MpJwqtF151wxVH3tHAn5uvfiP1Yeyt/i4TbBVg4eyBlSENkDoO6
+ edn9Rx+CSwzQ74wdfEIy9wSjCu0VlEFVpdZRiEWcbb3uThOlPQgtzUsnwstrkb4Z0Bmo
+ eVzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703071681; x=1703676481;
+ d=1e100.net; s=20230601; t=1703071831; x=1703676631;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vfDLIE52bS8HvDhc6h/xvsuBlhtPG04nzterLLUGczo=;
- b=VMJpZM+i+BmWTcAr/m5eJvHvYTtMDH5U8LcMnIV+JoHX99LIFUyy+35KtHf+8SwmAF
- 5yWFDo3ycAeRIm8ZtET3hl4PfXM8sRaRvLB8ADQ00Wpnokz7yLK9aIVKea71t+4Mx9K+
- u/uiafUeUHpevZK5xUjiBDfJfxb5niSOjAcaGgiml8p7sUdWWcCkeeA8fbDVqEMR5z0F
- uvaf2cmgPW4rdNiCPBPL+5l8ovKPLOBA6T6HqtBtgCfCN7mvwjAg8r9etRRBT/mVMwXD
- fdpRlyDSXm/f21OfE/+5ytWA0Z5juoW1z/2pKKgvG899/qLJvkx4/HB/j70qnEjoennT
- VDJQ==
-X-Gm-Message-State: AOJu0YwmHJ7WcWz2HqnstzV4Qtd2n6Wf2zZ74HeX/0GuhN3y8yrVTTPD
- qYez11bOY5eC/OT9dJORJ/kF+246BEtechWyeIQHug==
-X-Google-Smtp-Source: AGHT+IF/qoQCEJYf7aDwidLASTj7RR73NkX9AgNDY+/8Bv0rigRpTUvDHOzXlpsN2vKzS4i0Ez5rEcBMhBVy5wG0rx8=
-X-Received: by 2002:a0d:d882:0:b0:5e7:e1da:53eb with SMTP id
- a124-20020a0dd882000000b005e7e1da53ebmr1699134ywe.88.1703071680937; Wed, 20
- Dec 2023 03:28:00 -0800 (PST)
+ bh=6/NnJBFiq7FYUkg4WYQtWt2kuFZ4wePHGcRAjEMRO7c=;
+ b=Rg1zP918AAU2dklYHUdgvP59m1DpRzml2k+TKIhzdgMkm+TJtybAvwI9j7JEN6TiW/
+ GZuHFpc71zWsXdoygNmfaofE6bx/tXQgMOwhfNyW4osuBScR+/cgSBVXQYlKG3ufwE4W
+ HjNRfknjIQl9o1CujsVLdDlDXWsm0Y+T7kIk4nZgc724/OWZZcJrPtZpNqyFUu8A10cV
+ gTMCaxWGcx/LxyuT0FJ8zvS+haBF5c91poSmCL1ieXLTDR0I3Ftsy0Ygb/8yie94SFyp
+ PRDL/KaFLGHPQMEWbdgIS7/jUjpJ0fkOL0fBYF2nlgegUkBAAt+7EmqY9GX/ShWvvf+m
+ QFlw==
+X-Gm-Message-State: AOJu0YyAyu8WR9fjVKhsmLgLDO+tMC/m/FpeClzV8Hlx/LD0jz6HnG6k
+ HiOnw36Au1GoWD4WiEUMyiQJAlS+coEGqb47px1Huw==
+X-Google-Smtp-Source: AGHT+IGXe29Niiy5kV6p53MnUBl3AIcjeVE4XTxt9BKsFJ8tPKUoNSr3K0RAVhjn1lA4FPfa44+maGOuCFifbpwvbLQ=
+X-Received: by 2002:a05:6102:6d3:b0:466:c048:49dd with SMTP id
+ m19-20020a05610206d300b00466c04849ddmr309805vsg.6.1703071831562; Wed, 20 Dec
+ 2023 03:30:31 -0800 (PST)
 MIME-Version: 1.0
 References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-3-sumit.garg@linaro.org>
- <CAPnjgZ2v5WZ4aEOTqrGB7mxdmVAMYsHc8A7+YgUKubL51dp9WQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2v5WZ4aEOTqrGB7mxdmVAMYsHc8A7+YgUKubL51dp9WQ@mail.gmail.com>
+ <20231214135103.1606605-4-sumit.garg@linaro.org>
+ <CAPnjgZ0h5u8TS=SwAkSgAmbmJiTFriqY8Le++pfS=Yp7R+yabQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0h5u8TS=SwAkSgAmbmJiTFriqY8Le++pfS=Yp7R+yabQ@mail.gmail.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 20 Dec 2023 16:57:49 +0530
-Message-ID: <CAFA6WYPWVf+=Y5fLnhFJHsfZoqb6w8rvLOb_=G5zzU858B67pw@mail.gmail.com>
-Subject: Re: [PATCH 2/8] Makefile: Add support for DT bindings schema checks
+Date: Wed, 20 Dec 2023 17:00:20 +0530
+Message-ID: <CAFA6WYOYV=Aob+x10XfpagiDoDC1AhiwvT=mc3cQfr4VGj1kxQ@mail.gmail.com>
+Subject: Re: [PATCH 3/8] scripts/Makefile.lib: Statically define *-u-boot.dtsi
+ files location
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
@@ -98,123 +99,91 @@ On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sumit,
 >
-> On Thu, 14 Dec 2023 at 06:51, Sumit Garg <sumit.garg@linaro.org> wrote:
+> On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
 > >
-> > This adds the build infrastructure for checking DT binding schema
-> > documents and validating dtb files using the binding schema. Here we use
-> > devicetree-rebasing directory to provide the DT bindings.
+> > Allow u-boot to build DTB from a different directory tree such that
+> > *-u-boot.dtsi files can be included from a common location. Currently
+> > that location is arch/$(ARCH)/dts/, so statically define that common
+> > location.
 > >
-> > Dependency:
-> > -----------
-> >
-> > The DT schema project must be installed in order to validate the DT schema
-> > binding documents and validate DTS files using the DT schema. The DT schema
-> > project can be installed with pip::
-> >
-> >     pip3 install dtschema
-> >
-> > Note that 'dtschema' installation requires 'swig' and Python development
-> > files installed first. On Debian/Ubuntu systems::
-> >
-> >     apt install swig python3-dev
-> >
-> > Testing:
-> > --------
-> >
-> > Build dts files and check using DT binding schema:
-> > $ make dtbs_check
-> >
-> > Optionally, DT_SCHEMA_FILES can be passed in with a schema file(s) to
-> > use for validation. This makes it easier to find and fix errors
-> > generated by a specific schema.
-> >
-> > Note, at this point dtbs_check is an optional build target as there are
-> > many warnings generated due to custom DT properties used by many
-> > platforms in u-boot. It is expected with these checks that compliance
-> > with DT bindings to take place. Once that's done it can be added to CI
-> > builds to remain compliant with DT bindings.
+> > This is needed for platform owners to start building DTB files from
+> > devicetree-rebasing directory but still being able to include
+> > *-u-boot.dtsi files.
 > >
 > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > > ---
-> >  Makefile             | 20 ++++++++++++++++++--
-> >  scripts/Makefile.lib | 17 +++++++++++++++--
-> >  2 files changed, 33 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/Makefile b/Makefile
-> > index 750bbdb1b71..d8d168cd4c3 100644
-> > --- a/Makefile
-> > +++ b/Makefile
-> > @@ -1158,12 +1158,28 @@ endif
-> >         @# disabling OF_BOARD.
-> >         $(call cmd,ofcheck,$(KCONFIG_CONFIG))
-> >
-> > -PHONY += dtbs
-> > +PHONY += dtbs dtbs_check
-> >  dtbs: dts/dt.dtb
-> >         @:
-> > -dts/dt.dtb: u-boot
-> > +dts/dt.dtb: dtbs_prepare u-boot
-> >         $(Q)$(MAKE) $(build)=dts dtbs
-> >
-> > +dtbs_prepare: prepare3
-> > +
-> > +ifneq ($(filter dtbs_check, $(MAKECMDGOALS)),)
-> > +export CHECK_DTBS=y
-> > +endif
-> > +
-> > +ifneq ($(CHECK_DTBS),)
-> > +dtbs_prepare: dt_binding_check
-> > +endif
-> > +
-> > +dtbs_check: dt_binding_check dtbs
-> > +
-> > +DT_BINDING_DIR := devicetree-rebasing/Bindings
-> > +dt_binding_check: scripts_dtc
-> > +       $(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) $(DT_BINDING_DIR)/processed-schema.json
-> > +
-> >  quiet_cmd_copy = COPY    $@
-> >        cmd_copy = cp $< $@
+> >  scripts/Makefile.lib | 25 ++++++++++++++-----------
+> >  1 file changed, 14 insertions(+), 11 deletions(-)
 > >
 > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > index 16bbc277a9f..27b9437027c 100644
+> > index 27b9437027c..4a002b0e0ca 100644
 > > --- a/scripts/Makefile.lib
 > > +++ b/scripts/Makefile.lib
-> > @@ -356,8 +356,21 @@ endif
+> > @@ -159,18 +159,20 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
+> >  ld_flags       = $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
 > >
-> >  dtsi_include_list_deps = $(addprefix $(obj)/,$(subst $(quote),,$(dtsi_include_list)))
-> >
-> > -$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) FORCE
-> > -       $(call if_changed_dep,dtc)
-> > +ifneq ($(CHECK_DTBS),)
-> > +DT_CHECKER ?= dt-validate
-> > +DT_CHECKER_FLAGS ?= $(if $(DT_SCHEMA_FILES),-l $(DT_SCHEMA_FILES),-m)
-> > +DT_BINDING_DIR := devicetree-rebasing/Bindings
-> > +DT_TMP_SCHEMA := $(objtree)/$(DT_BINDING_DIR)/processed-schema.json
+> >  # Try these files in order to find the U-Boot-specific .dtsi include file
+> > -u_boot_dtsi_options = $(strip $(wildcard $(dir $<)$(basename $(notdir $<))-u-boot.dtsi) \
+> > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
+> > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
+> > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
+> > -       $(wildcard $(dir $<)u-boot.dtsi))
+> > +UBOOT_DTSI_LOC = $(srctree)/arch/$(ARCH)/dts/
+>
+> How about lower case since it is internal. Also we know it is U-Boot,
+> so perhap  ?
+
+Although I just named it after *-u-boot.dtsi, I am fine with dtsi_loc
+too. So I will use that instead.
+
+>
+> Otherwise looks OK to me.
+
+Thanks,
+-Sumit
+
+>
 > > +
-> > +quiet_cmd_dtb = DTC_CHK $@
-> > +      cmd_dtb = $(cmd_dtc) ; $(DT_CHECKER) $(DT_CHECKER_FLAGS) -u $(srctree)/$(DT_BINDING_DIR) -p $(DT_TMP_SCHEMA) $@ || true
-> > +else
-> > +quiet_cmd_dtb = $(quiet_cmd_dtc)
-> > +      cmd_dtb = $(cmd_dtc)
-> > +endif
-> > +
-> > +$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) $(DT_TMP_SCHEMA) FORCE
-> > +       $(call if_changed_dep,dtb)
+> > +u_boot_dtsi_options = $(strip $(wildcard $(UBOOT_DTSI_LOC)$(basename $(notdir $<))-u-boot.dtsi) \
+> > +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
+> > +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
+> > +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
+> > +       $(wildcard $(UBOOT_DTSI_LOC)u-boot.dtsi))
 > >
-> >  pre-tmp = $(subst $(comma),_,$(dot-target).pre.tmp)
-> >  dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
+> >  u_boot_dtsi_options_raw = $(warning Automatic .dtsi inclusion: options: \
+> > -       $(dir $<)$(basename $(notdir $<))-u-boot.dtsi \
+> > -       $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
+> > -       $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
+> > -       $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
+> > -       $(dir $<)u-boot.dtsi ... \
+> > +       $(UBOOT_DTSI_LOC)$(basename $(notdir $<))-u-boot.dtsi \
+> > +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
+> > +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
+> > +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
+> > +       $(UBOOT_DTSI_LOC)u-boot.dtsi ... \
+> >         found: $(if $(u_boot_dtsi_options),"$(u_boot_dtsi_options)",nothing!))
+> >
+> >  # Uncomment for debugging
+> > @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
+> >  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
+> >                  $(UBOOTINCLUDE)                                         \
+> >                  -I$(dir $<)                                             \
+> > +                -I$(UBOOT_DTSI_LOC)                                     \
+> >                  -I$(srctree)/arch/$(ARCH)/dts/include                   \
+> >                  -I$(srctree)/include                                    \
+> >                  -D__ASSEMBLY__                                          \
+> > @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+> >           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+> >         $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+> >         $(DTC) -O dtb -o $@ -b 0 \
+> > -               -i $(dir $<) $(DTC_FLAGS) \
+> > +               -i $(dir $<) -i $(UBOOT_DTSI_LOC) $(DTC_FLAGS) \
+> >                 -d $(depfile).dtc.tmp $(dtc-tmp) || \
+> >                 (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
+> >                 ; \
 > > --
 > > 2.34.1
 > >
->
-> This is great.
->
-> Can you put the commit message in doc/ somewhere?
-
-As per your comment on the doc patch, this is already addressed.
-
--Sumit
-
 >
 > Regards,
 > Simon
