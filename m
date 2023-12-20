@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88901C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:03:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A1E1C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E28B8784D;
-	Wed, 20 Dec 2023 22:02:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B07ED87878;
+	Wed, 20 Dec 2023 22:02:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OBupWwci";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rdRpzmnK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6957887846; Wed, 20 Dec 2023 22:02:09 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 1B2EF87872; Wed, 20 Dec 2023 22:02:15 +0100 (CET)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3029F8784D
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:02:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F8B88786A
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:02:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5e745891a69so1454747b3.2
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:02:07 -0800 (PST)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6dbaee3a31eso44194a34.3
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:02:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703106126; x=1703710926; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703106131; x=1703710931; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KgxrZpA5h+dFLt5P6lRKrYhlLif4DNs4JTKfzM+c2Uk=;
- b=OBupWwci1ZqjsQaTiVd+USL6WRj8LgVLzXs2uMrLC1AkZ7FoOOvrSI6y/y7CmDnnD0
- m/eG0i36aJi1GzJYG3reYGep9VkamHSf2Y0OWdZiQEnwK4C5KTmczI0gODQQFb8dPYcW
- imIF2iWgYUow0pVyQXntJWZFBwZHVy+R9GQxM=
+ bh=SRMbCbzIQNB6INiOEguBHHy+ZjbNnrRim40W7DHVlvY=;
+ b=rdRpzmnKzGVbJpyurxlk/UGMG+VyDW+uww2x4wua7TnQqhsbLh+6W+UOgHalXAAIEp
+ seXidmp1P08NodpEuGOy/SrBO5jsD667Q0no6+kW5cNmzA9mMuBiGRqpAfAvRn3uv1jj
+ HAEzgNcTPSx/CHFq5/Kp2S8IhwknY2LsKj6To=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703106126; x=1703710926;
+ d=1e100.net; s=20230601; t=1703106131; x=1703710931;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KgxrZpA5h+dFLt5P6lRKrYhlLif4DNs4JTKfzM+c2Uk=;
- b=p5fpUTV8RCnObu7yZjW1v+Um4JsUEEX47EU6RhMJ/bdhbrYMCmpsY1WKjqxsGDsQLO
- AYpKDt/Pza62CrfthYZf4tqMLf9P1W6rHNHh16RDo06NMzJPXtZkCM8Fko7wNaVacx9q
- JqMe0F4cMCGVFt4Ur3U7+87HLjj0rTVdWlua+SmRDuHJARGNrVNWjTJ8n1mEl/SAVazZ
- ZBeRMsAcKMI7CMGqxYCLL7SwgQpZ6YU3QjyVbSaaCj3v41dh6Il7Q7uh1Y4ergShWn6/
- J+sVRlAsWhkkLVVgyVU/FnpTJsh55akd0EnAl/VUNV909TfJey7162yy69PmMv8XV+gL
- KJ6w==
-X-Gm-Message-State: AOJu0YxOoUoQacGJWW87haLpRuaeJchXHnCMk6NmxzAdOrYymyfoRA/i
- 6CZ6XHhZ0e1SqZtGBP8gh9WeZA==
-X-Google-Smtp-Source: AGHT+IEs100ElYep2jVQTnSxMnwDO93Mt3CofQbwOCGyTA2NyLDRGYoShBstkSmohh8UPvxeABZ7zQ==
-X-Received: by 2002:a81:4f08:0:b0:5e7:dcb7:37e5 with SMTP id
- d8-20020a814f08000000b005e7dcb737e5mr327010ywb.49.1703106125938; 
- Wed, 20 Dec 2023 13:02:05 -0800 (PST)
+ bh=SRMbCbzIQNB6INiOEguBHHy+ZjbNnrRim40W7DHVlvY=;
+ b=gi3x2p7s55c6I8DD+zC4kDTYNA4clAHhUpPkgM7DMXuDxXNBrK//MPbOjWzbgBcUEB
+ gW7elZZ2iYWN6DY/4EOnJblpXvKobVd36CRwBTR05xGrX13SxFTXcxcO0uP3JIwBMwyl
+ agbZX2nX5m99+rOUNBbCisq/2POO8NnCNr2CE9wdnqup15Xz1DteHKvmvzW22jij766Z
+ smpaPE+Pmb3LSRGeJBUGJgS2F2gLY6e9Wgivg0HL1/JvxqSeDGWL/RImeBUqYFVCoLgJ
+ Xs7N+enFGSDWvejdEwWBWwUKlAsfSj+3Bro9nxg+6lGOjaQ9U0NSvqF5+IZcUnYgF3vt
+ JOow==
+X-Gm-Message-State: AOJu0Yz67qMmhy2kSNltdjY7/QGIuB3SXeWFlFsImvpmQ6w6V7o1Fj6a
+ wLdfIqdlIhT1dPMTPhONAV8DHQ==
+X-Google-Smtp-Source: AGHT+IF5XUfMbYD2ItMIzOih1fRS5m38J+lO1uA85AyMQ9FdU/HtKTcUvIHAaT+1yDwookqUbLt3Ow==
+X-Received: by 2002:a05:6830:ed1:b0:6d9:cbc4:efd3 with SMTP id
+ dq17-20020a0568300ed100b006d9cbc4efd3mr20201342otb.69.1703106130935; 
+ Wed, 20 Dec 2023 13:02:10 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
  [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
  by smtp.gmail.com with ESMTPSA id
- k190-20020a0dc8c7000000b005e703079702sm231530ywd.87.2023.12.20.13.02.05
+ h1-20020a81b401000000b005e7b1884183sm230224ywi.21.2023.12.20.13.02.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 13:02:05 -0800 (PST)
-Date: Wed, 20 Dec 2023 16:02:03 -0500
+ Wed, 20 Dec 2023 13:02:10 -0800 (PST)
+Date: Wed, 20 Dec 2023 16:02:08 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/2] command: Allocate history buffer using calloc()
-Message-ID: <20231220210203.GZ2513409@bill-the-cat>
+Subject: Re: [PATCH 2/2] command: Move command completion temporary buffer to
+ stack
+Message-ID: <20231220210208.GA2513409@bill-the-cat>
 References: <20231202205255.169670-1-marek.vasut+renesas@mailbox.org>
+ <20231202205255.169670-2-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tgKuf6iQKvG7pt2k"
+ protocol="application/pgp-signature"; boundary="kfbGWSHSkh1Bi3iQ"
 Content-Disposition: inline
-In-Reply-To: <20231202205255.169670-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20231202205255.169670-2-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,41 +94,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---tgKuf6iQKvG7pt2k
+--kfbGWSHSkh1Bi3iQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 02, 2023 at 09:52:30PM +0100, Marek Vasut wrote:
+On Sat, Dec 02, 2023 at 09:52:31PM +0100, Marek Vasut wrote:
 
-> The history buffer is currently a static array which can be some
-> 10-40 kiB depending on configuration, and so adds considerably to
-> the U-Boot binary size. Allocate it dynamically instead to reduce
-> the U-Boot binary size.
+> The command completion temporary buffer seems to be only
+> used by the argv tokenizer, move it to stack. This saves
+> 2 kiB from the binary size (depends on configuration) per:
+> $ aarch64-linux-gnu-readelf -s u-boot | sort -n -k 3
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---tgKuf6iQKvG7pt2k
+--kfbGWSHSkh1Bi3iQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVksACgkQFHw5/5Y0
-tyx5tQwAtyHOn+vRiJThIXagP6okvlbxi7lCSpAe8jawMjjiuOksHli4hDCROZ4O
-lJ90aFcZ/SHPGx46z4QFcb61bpBaETbFtwV27BEkdwDb7ZwMqgGsf9V3zrZerQH4
-ERUqHhJdcCepWiRaAsNs+KMeK/P+as3GiSGL87yt7bHAgLYi9S398yzZur8peaTr
-Z878+obbqwfus8ht2y/JwWfw+RBmBWkaETdmEBry68dj0IumsptDzwF0Od+WRESK
-y5CuZBtW8rt8zQ5eGgRTzqGkl0sMTHKVBTfssaSJwkCGO6G9LcFIzs8AaD3mbKYB
-KjC0NPwq1V1mHknABYc/fpaUv/YSAYtt9mJsfpalpEXppGCmupPz+HYXsK+hAZ8B
-zHaWxpsDUWnc1Zb9VRgzEPtCOsQgOchIG949M3t/dv4QJWzcoLswMj5NOAKz675q
-RYthU144BzrzyaYGbutU6QqwAwvZ2iimA54J1McQBQ6QP9tba68nKzObtqaSW6tV
-28mToTdc
-=57ku
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVlAACgkQFHw5/5Y0
+tyzDqAv/f2SDjol+nVqsjJY2UqIh4IukU4by6YhJMm6Pit6vHcnsqUBXgBVtXinP
+Yr//uYwflvKLHvFKUwVYLfFWrv5/F0BTrfQHt8XoZ+aBxvXenSKNh1QBJxVeIvJI
+NwgyYczcpaewIbbKf+DoUp0ACAoTuvksnqxKvvUrnlaPMvmRNHcJK1koomWtj9Hn
+tElpn3mcu1HuloFQypWn5d5YwUBgdnwuryDVL3YXRrsI1/Z2spCZNoESkPlsboDb
+o43KVLgaRnexMgA8JPh79nrZila6lWFAjJ5dHLuoOzjT5/Hu13DP7BPCKfqwm8mu
+m7xe1ToC86/F4DC9eSibs2b8J72MJmcb50+T5FccjznJVKlDmCV6i+r9f+65RNkt
+d1HZtFYcgfVG7rQQMFwHOP50dNrOqtPpLM9/R2vPUjoTE4LzM/StbKFRI3Xvq/4d
+pv12FpEUEVdgDlgKF8MldvMj0X/Q+Hry9SU7ngwRyEImFCJm12VyeBFL1yJMtD/V
+oY6IpEpU
+=fdr1
 -----END PGP SIGNATURE-----
 
---tgKuf6iQKvG7pt2k--
+--kfbGWSHSkh1Bi3iQ--
