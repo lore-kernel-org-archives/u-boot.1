@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88E7C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81C63C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BB9E8753C;
-	Wed, 20 Dec 2023 05:46:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9FA46875E9;
+	Wed, 20 Dec 2023 05:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oa1z/Vx3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mBmYl3tm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9804E8752B; Wed, 20 Dec 2023 05:46:25 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 63F62875E9; Wed, 20 Dec 2023 05:46:30 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A41338751B
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71AEF875F0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a268dd99597so49916266b.3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:23 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a2339262835so411383166b.3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047583; x=1703652383; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/p+saRITCJ78lgcdsOEUPOpXKpFRfZEj9HKi8cBbheE=;
- b=Oa1z/Vx3fV7l6HeOG4bVh3dlKbUzI+mlvNP8ObLd1VNQ3lKInViT/YRUR/sPQDQq3N
- FXz7SEwXzakr8nrIOVya2PED7Xx47JagMQdpAL2QselZDsAD+qgecgqq5xDGVaa1jUMP
- tQm2P9UFeE/oibeKUah4g3A8R1UkjSyZV8Xmk=
+ d=chromium.org; s=google; t=1703047588; x=1703652388; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=O/5t34SFBrCPoNLpnEkQXt2qR0rXllkXJmpXVFchzGM=;
+ b=mBmYl3tmYVEURbrJW80iGuFad2x4Jdf12bEh5AhErlv8roLi/wTv3ZblqjeqARMWXB
+ iHsEbL9u5Qv4QRewZ+CsZxRej7bHYpWRsUbgfxDP0Ld+RApy1eE00LTz2eJWb5Uy8En2
+ G5Awl4DwePJ+paV9/33/b0wED8hBFnczMVzBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047583; x=1703652383;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/p+saRITCJ78lgcdsOEUPOpXKpFRfZEj9HKi8cBbheE=;
- b=Tf0fj0Wkd25ubtAR6gmwjfOuHhyUO5ws78+raxWaTqE7GeINKTsf8vw8Q/aXcR76vO
- LmSzYefxD9JYpNuWLS+ZL15YvNnOSSkvjvu5OaOyyTNmwaWu/wsFGm+WgGN8uiw+OcX7
- auidIUTSnB7GTi5R2PtGDgiQq8qrW7WQo5S3wkKWJ725nBvLeQfgrcpdSe+uuf868JZx
- lEmF7cBXyDBlUyFCxUBY2rujq4qaCFUi5dQN6FLsjWgd6hSG82L+Oy9Q72hzi6Gq+F4t
- MFkYh6UGHaexUjG+IAIi27PRTJC9odeVDJgdHQMNUIvVqnzSGwWYTZ8S/m8xaXcDH9xn
- Slww==
-X-Gm-Message-State: AOJu0Yw2UMGtaVt+2wgadqiIrCapn7MgtQVlN+2VlzJGvuWpJJgVbBWX
- psgwO7gDluXy6OvMpG3Kmoto1DqIxBJ/MgpLqO0zTw==
-X-Google-Smtp-Source: AGHT+IHluhzXW9z8vK+4ynMTSjRZYzLa8HaDLIL8oxhYbHHoCtr9vC8Rp1vjanbNqnj+24W6lpgNLkafDsyjhex3HAE=
-X-Received: by 2002:a17:906:2d4:b0:a1d:fed:38d0 with SMTP id
- 20-20020a17090602d400b00a1d0fed38d0mr4498387ejk.174.1703047582740; Tue, 19
- Dec 2023 20:46:22 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703047588; x=1703652388;
+ h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O/5t34SFBrCPoNLpnEkQXt2qR0rXllkXJmpXVFchzGM=;
+ b=ZESTuo/Vp3Q6jncBpvGkbvuPwagDjR1+S4P+eILIspFm0EVuQTZLHheThrzCEFSDUL
+ dw9bJ92sPq2r0vZKTB/riqsgLpFh4XyqxQOch3Yy0E3eBffabZKQuNCrlAjrwAL2Ac5a
+ Ndm3GLi/96nYebWYMYidCJ3NR+x5ZP+xRUeL+9XSdzyJPe9x/65peL3q6vwar2pjh9+T
+ 6dOMjR4qZX4q+GwnCp/AQCusONNVtdUTP8E4GNbKvmhAZa4k/F8Ad969ok1FuFcRKgES
+ iaioLMf/C1R//ceafvS1FkHAlpCumHRAeC69UeXsF556wNFc9YClz6shr+LzNynIO+xf
+ 7P4A==
+X-Gm-Message-State: AOJu0Yzus5zCcQB4zT/fagemv4yYe5fqoDW6nOmcOxA3UHpHXcxwglGq
+ 71zjOq/5XM1jNL0GANnRGFdsX49GsYgRxH1204q+yA==
+X-Google-Smtp-Source: AGHT+IGA9+IRaozVG2mshywzo4TX//tkJiEeV8CXe9ujGhK1K0uWaiJGGPhagaIUOWCCMi9wMKIz4LAqhIMCTNZe6z8=
+X-Received: by 2002:a17:907:90c3:b0:a26:894f:133 with SMTP id
+ gk3-20020a17090790c300b00a26894f0133mr467191ejb.86.1703047587802; Tue, 19 Dec
+ 2023 20:46:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20231219101225.3443978-1-danishanwar@ti.com>
- <20231219101225.3443978-33-danishanwar@ti.com>
-In-Reply-To: <20231219101225.3443978-33-danishanwar@ti.com>
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+ <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
+ <ZYDhClYupQxNJ++a@octopus>
+In-Reply-To: <ZYDhClYupQxNJ++a@octopus>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:46:11 -0700
-Message-ID: <CAPnjgZ18vCeBT9ykZdF1iV8ten1OJti1qXyU5BPKmcf5kMmiUA@mail.gmail.com>
-Subject: Re: [RFC PATCH 16/16] Revert "dm: core: Report bootph-pre-ram/sram
- node as pre-reloc after relocation"
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, 
- Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Andrew Davis <afd@ti.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, srk@ti.com,
- r-gunasekaran@ti.com
+Date: Tue, 19 Dec 2023 21:46:16 -0700
+Message-ID: <CAPnjgZ222JWVWws04Tk93QommHXY6=qJFfiQfosYs5FG4JVGrA@mail.gmail.com>
+Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
+ dependency
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Simon Glass <sjg@chromium.org>, trini@konsulko.com, 
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,58 +86,71 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 19 Dec 2023 at 03:13, MD Danish Anwar <danishanwar@ti.com> wrote:
+On Mon, 18 Dec 2023 at 17:17, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> This reverts commit 9e644284ab812f2db23f6185af77c0e771b0be73.
-> ---
->  drivers/core/ofnode.c | 2 +-
->  include/dm/ofnode.h   | 8 ++++----
->  2 files changed, 5 insertions(+), 5 deletions(-)
+> Hi Simon,
 >
+> On Mon, Dec 18, 2023 at 08:01:46AM -0700, Simon Glass wrote:
+> > Hi AKASHI,
+> >
+> > On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+> > <takahiro.akashi@linaro.org> wrote:
+> > >
+> > > Now it is clear that the feature actually depends on efi interfaces,
+> > > not "bootefi" command. efi_set_bootdev() will automatically be nullified
+> > > if necessary efi component is disabled.
+> > >
+> > > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > > ---
+> > >  net/tftp.c | 10 ++++------
+> > >  1 file changed, 4 insertions(+), 6 deletions(-)
+> > >
+> >
+> > I have the same comment here as the 'fs' patch.
+> >
+> > > diff --git a/net/tftp.c b/net/tftp.c
+> > > index 88e71e67de35..2e335413492b 100644
+> > > --- a/net/tftp.c
+> > > +++ b/net/tftp.c
+> > > @@ -302,12 +302,10 @@ static void tftp_complete(void)
+> > >                         time_start * 1000, "/s");
+> > >         }
+> > >         puts("\ndone\n");
+> > > -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
+> >
+> > Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
+> > is not enabled?
+>
+> The trick is in efi_loader.h.
+> If EFI_LOADER (more specifically CONFIG_EFI_BINARY_EXEC) is not defined,
+> this function gets voided.  See patch#1 in this version.
+>
+> I took this approach in order not to make users much worried about
+> what config be used as they are not familiar with UEFI implementation.
 
-Can you please add some info more info about why this is needed?
+OK, but we really need to delete this function, so what is the plan
+for that? The info that EFI needs should be passed to the bootefi()
+function, not set in a global.
+
+
+>
+> -Takahiro Akashi
+>
+> > > -               if (!tftp_put_active)
+> > > -                       efi_set_bootdev("Net", "", tftp_filename,
+> > > -                                       map_sysmem(tftp_load_addr, 0),
+> > > -                                       net_boot_file_size);
+> > > -       }
+> > > +       if (!tftp_put_active)
+> > > +               efi_set_bootdev("Net", "", tftp_filename,
+> > > +                               map_sysmem(tftp_load_addr, 0),
+> > > +                               net_boot_file_size);
+> > >         net_set_state(NETLOOP_SUCCESS);
+> > >  }
+> > >
+> > > --
+> > > 2.34.1
 
 Regards,
 Simon
-
-
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index 21a233f90f..cc2029e62d 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -1485,7 +1485,7 @@ bool ofnode_pre_reloc(ofnode node)
->          */
->         if (ofnode_read_bool(node, "bootph-pre-ram") ||
->             ofnode_read_bool(node, "bootph-pre-sram"))
-> -               return gd->flags & GD_FLG_RELOC;
-> +               return true;
->
->         if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
->                 /* detect and handle old tags */
-> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-> index 5795115c49..5f1c8c2787 100644
-> --- a/include/dm/ofnode.h
-> +++ b/include/dm/ofnode.h
-> @@ -1254,15 +1254,15 @@ int ofnode_read_simple_size_cells(ofnode node);
->   * determine if a node was bound in one of SPL/TPL stages.
->   *
->   * There are 4 settings currently in use
-> - * - bootph-some-ram: U-Boot proper pre-relocation phase
-> + * - bootph-some-ram: U-Boot proper pre-relocation only
->   * - bootph-all: all phases
->   * Existing platforms only use it to indicate nodes needed in
->   * SPL. Should probably be replaced by bootph-pre-ram for new platforms.
-> - * - bootph-pre-ram: SPL phase
-> - * - bootph-pre-sram: TPL phase
-> + * - bootph-pre-ram: SPL and U-Boot pre-relocation
-> + * - bootph-pre-sram: TPL and U-Boot pre-relocation
->   *
->   * @node: node to check
-> - * Return: true if node should be or was bound, false otherwise
-> + * Return: true if node is needed in SPL/TL, false otherwise
->   */
->  bool ofnode_pre_reloc(ofnode node);
->
-> --
-> 2.34.1
->
