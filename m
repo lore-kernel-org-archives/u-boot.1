@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F5FBC46CD3
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:52:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A44E1C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:55:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 708EF87650;
-	Wed, 20 Dec 2023 13:52:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E7C0877A1;
+	Wed, 20 Dec 2023 13:55:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mBilnYZm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jYCiEKSu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B52A7876D5; Wed, 20 Dec 2023 13:52:38 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E8BE9874D5; Wed, 20 Dec 2023 13:55:02 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A6DA874D5
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:52:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 661D087600
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:55:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BKCqKVa096463;
- Wed, 20 Dec 2023 06:52:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703076740;
- bh=uqdwUPlykc0H4ank25Zu7c682b1I0tqnTFyfnS9sh3k=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=mBilnYZmZXn2UV9RgIZiqAqqS+6lSM3+vsVrUlZ3oNfxwkEAh//eaim1jUJCiupnq
- EDNyb4dL9kM3lraYdzJaGLKablN21HDun45Fh88WvIRJWmLRJZbzZs6V10j6+sbcW2
- bkL3bbF66HGNhWFPeSU6OFPnvw4xVw7kzgkpIwww=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BKCqK41013710
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 20 Dec 2023 06:52:20 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Dec 2023 06:52:20 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Dec 2023 06:52:20 -0600
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BKCqKST064444;
- Wed, 20 Dec 2023 06:52:20 -0600
-Date: Wed, 20 Dec 2023 06:52:20 -0600
-From: Nishanth Menon <nm@ti.com>
-To: MD Danish Anwar <danishanwar@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Ramon Fried <rfried.dev@gmail.com>, Joe
- Hershberger <joe.hershberger@ni.com>,
- Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>, <srk@ti.com>,
- <r-gunasekaran@ti.com>
-Subject: Re: [RFC PATCH 10/16] arm: dts: k3-am65-main: Add ICSSG IEP nodes
-Message-ID: <20231220125220.ucobgoruw7vdjqx6@tumble>
-References: <20231219103418.3445886-1-danishanwar@ti.com>
- <20231219103418.3445886-11-danishanwar@ti.com>
- <20231219174601.GA2513409@bill-the-cat>
- <8a4fe530-370d-469c-a518-f52b3e65658d@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50e558e16e7so340908e87.1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 04:55:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703076899; x=1703681699; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sAJbfHQCZYXu8fk6eohVIqnOKoJ0IgXNifbLuZz5qPI=;
+ b=jYCiEKSuzxW3N2/EVmkODY7yOAI9rv2SyLnrchMbXllXcsGyiTN/ReNEDVIFdI8tYy
+ lif5LplD9YkMncBbHAF03XScvBTzwtlITClErlMpPjbZlgYcP6hWNn+OS8utGLJfwol/
+ CaVqW9+BBZ7dniH6U0qciTBavktj73WPol+5hRg6JSByuegneoGcY0WDyEd8TV30CfI2
+ /L0UWr4W5cML/nAvmGfQ4R8ZlSeTmkh6UEiNmzHhSa4QA8+ALBpDU1U2FJxQyqtPh3L9
+ T4bvVhl+fKbXqfN6EUH63q/05vZwQMY7XkwebZL7HYjSTEtWhEW6KRrSl4EoFKEB46VR
+ tNEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703076899; x=1703681699;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sAJbfHQCZYXu8fk6eohVIqnOKoJ0IgXNifbLuZz5qPI=;
+ b=GwzROoMkiqZy+/XzIULH0MnlZucHBsNLl6UsDesNYOthTrUsSShgvUieeUpk5Ys42C
+ U6IIy7HjfQFV0HDn9mwU4yXQypbzPuRwfKGbq2ZZd2OXCKo2T+qqMzDOEf9kIysKrXMk
+ 8wZKUy51jLp0jIKOoOXDyggInckG7U+IpczSgC5hz2ZDnTfW4QkKO46pa59Mz49oOzGc
+ 95lXu+aGmcOcNo0bpd/op6E2162eTU/bDM8dsIe6d2KWGtNBOspLbKQ3DH1tPmxxZRoK
+ D9Yj5lgStg0t3tUZqyPwEuUkLXueCcUAWd1FAZfOyx96SHQNe9TspsVUij0f/qv3caGU
+ 6tJA==
+X-Gm-Message-State: AOJu0Yw7m+CwwPdJNSO4a1DSGaZEAYHxy9Hlih+XrfsHJj0Fodap6xPP
+ IhWIVIclOrR6yFfy3+70XLNnNArmu5ug3vIuAZEIfw==
+X-Google-Smtp-Source: AGHT+IE3wz/tI6Rvxh8SDq522GINGR7JcRFjM9A+t/19hoa1Id+iPeQZyspsMOUyT7CO6i/nClFb1f2YVFqxxiwyd/I=
+X-Received: by 2002:ac2:5b03:0:b0:50e:3879:8222 with SMTP id
+ v3-20020ac25b03000000b0050e38798222mr1585439lfn.21.1703076899384; Wed, 20 Dec
+ 2023 04:54:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <8a4fe530-370d-469c-a518-f52b3e65658d@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20231219211114.393193-1-raymond.mao@linaro.org>
+ <20231219211114.393193-2-raymond.mao@linaro.org>
+In-Reply-To: <20231219211114.393193-2-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 20 Dec 2023 14:54:23 +0200
+Message-ID: <CAC_iWj+Ld1Tpw4pyZ1P=GS6We_+CfUFvDC7HmDTug4x2fDmMFw@mail.gmail.com>
+Subject: Re: [PATCH 1/5] bloblist: add API to check the register conventions
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,40 +90,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:17-20231220, MD Danish Anwar wrote:
-> Hi Tom,
-> 
-> On 19/12/23 11:16 pm, Tom Rini wrote:
-> > On Tue, Dec 19, 2023 at 04:04:12PM +0530, MD Danish Anwar wrote:
-> > 
-> >> The ICSSG IP on AM65x SoCs have two Industrial Ethernet Peripherals (IEPs)
-> >> to manage/generate Industrial Ethernet functions such as time stamping.
-> >> Each IEP sub-module is sourced from an internal clock mux that can be
-> >> sourced from either of the IP instance's ICSSG_IEP_GCLK or ICSSG_ICLK.
-> >> Add the IEP nodes for all the ICSSG instances.
-> >>
-> >> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> >> ---
-> >>  arch/arm/dts/k3-am65-main.dtsi | 36 ++++++++++++++++++++++++++++++++++
-> >>  1 file changed, 36 insertions(+)
-> > 
-> > What's the status of all of the DT side of this, upstream?
-> > 
-> 
-> All of the DT patches are already part of upstream linux kernel except
-> for patch 08/16. This patch is currently in linux-next and will be in
-> linux in 6.8-rc1.
-> 
+Hi Raymond,
 
-NAK.
+On Tue, 19 Dec 2023 at 23:11, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Add bloblist_check_reg_conv() to check whether the bloblist is compliant
+> to the register conventions defined in Firmware Handoff specification.
+> This API can be used for all Arm platforms.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+>  common/bloblist.c  | 15 +++++++++++++++
+>  include/bloblist.h | 12 ++++++++++++
+>  2 files changed, 27 insertions(+)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 625e480f6b..232ca4c6ce 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -542,3 +542,18 @@ int bloblist_maybe_init(void)
+>
+>         return 0;
+>  }
+> +
+> +int bloblist_check_reg_conv(ulong rfdt, ulong rzero)
+> +{
+> +       ulong fdt;
+> +
+> +       if (!IS_ENABLED(CONFIG_OF_BOARD))
+> +               return 0;
+> +
+> +       fdt = (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> +
+> +       if (rfdt != fdt || rzero != 0)
+> +               return -EIO;
 
-Send a sync at 6.8-rc1 and then start working - DONOT SEND patches
-modifying SoC dtsi or evm files directly in u-boot.
+What is rzero supposed to be doing here? If its only valid value is !0
+why arent we checking it earlier?
 
-I think you need to start talking to other folks in the team who have
-have received the same feedback.
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Thanks
+/Ilias
+> +
+> +       return 0;
+> +}
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index 84fc943819..b5d0f147f6 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -461,4 +461,16 @@ static inline int bloblist_maybe_init(void)
+>  }
+>  #endif /* BLOBLIST */
+>
+> +/**
+> + * bloblist_check_reg_conv() - Check whether the bloblist is compliant to
+> + *                            the register conventions according to the
+> + *                            Firmware Handoff spec.
+> + *
+> + * @rfdt:  Register that holds the FDT base address.
+> + * @rzero: Register that must be zero.
+> + * Return: 0 if OK, -EIO if the bloblist is not compliant to the register
+> + *        conventions.
+> + */
+> +int bloblist_check_reg_conv(ulong rfdt, ulong rzero);
+> +
+>  #endif /* __BLOBLIST_H */
+> --
+> 2.25.1
+>
