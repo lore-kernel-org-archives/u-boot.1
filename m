@@ -4,134 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C52C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:35:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC78C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:59:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EEF187646;
-	Wed, 20 Dec 2023 10:35:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 8B82D8753C;
+	Wed, 20 Dec 2023 10:59:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Za1j99tD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="T1GMl1ta";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1736287692; Wed, 20 Dec 2023 10:35:48 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E8C6787646; Wed, 20 Dec 2023 10:59:22 +0100 (CET)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E06138752B
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:35:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89A338744F
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:59:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TXu7ZEX1BMXt8W/hQVooCJ6WIVA5DufHi0zAvznKr+q9chcac6ULB5KIAwwvvHcWaE+tNtl0I9zj5F7bjsn38lsYJD7huiM3Nz8sv503g1Sl8KU7vloNgXdf3gqkyxSFyl/k2Z1rsys/3GTogh8w4gY0VKOYxLigu91j2/A5T1DyYiGg+ct8UegtFtMy2G9ioCXCLcKMEvqok4xETS2vKyesRgAev8/Xd5rjNTWmeJjmX8E8lFdwzTUhgum8iWhtBfxYCxnfwYBp3g95sZ99cGQjsD8E2IzUFiMbsz6WavWvlzF7fi0cXPtg/+t6jbqYo/pXiJSGu8h3MGeKPm4b/g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5jrcK8TpZf3JAV4+M7DrZzrUv2Yh8fTJUI3wA6m6vxg=;
- b=Mi1YelUFHoMS7miEYTULQgp6JgKpSzgfChOD4ZoGiNbzo1ei7F08TdPBk3UaryEV83/P5HVod6r6zY9oZIps0eXAymlTF9NDfIoG8bYN1l34cwEm4k4zyo8HbZpw3tXYU7c4nJjffPtvoBDXe3lNgeCjFQCKCu0O38KuKVdO08RCC9Q/s4K81pRdMQst9ncK1Kelp4orD5VFepjkDJspyePxfj5D+EzB+H6npLQn13CLTTMXyKrPv25wDnZmZ0FNLLVAu8AiupIo6XVnRJh63/M8YZVKfqQTbrLf7B09Axau6G32p7mQjcPV8qOjqfHWtaeLuLN+EmuxuswGr55TXA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5jrcK8TpZf3JAV4+M7DrZzrUv2Yh8fTJUI3wA6m6vxg=;
- b=Za1j99tDIFrbKsH3fPTFVJfqzGJCYAJV0b2wPreWLhQK8DHe0ywiVCJ/JF6gCyWX5NbvySrcvfMP/cBfyu+W7L1KRNMje2v4alx0Gh+iaGkk3RWGOExiSuKtK3G95FdP+GJYe3arFf0ogEIV8fypEPsnuruzb67fCYj8HXHgTMM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by DB8PR10MB3660.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:138::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18; Wed, 20 Dec
- 2023 09:35:42 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8bd9:31bc:d048:af15]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8bd9:31bc:d048:af15%5]) with mapi id 15.20.7091.034; Wed, 20 Dec 2023
- 09:35:42 +0000
-Message-ID: <aa0ef8d8-45f1-4199-ba89-67ec1bb49a7c@prevas.dk>
-Date: Wed, 20 Dec 2023 10:35:39 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] Makefile: pass -ansi option to cmd_gen_envp
-Content-Language: en-US, da
-To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Le Jin <le.jin@siemens.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Fabio Estevam <festevam@denx.de>,
- Heiko Schocher <hs@denx.de>, Jesse Taube <mr.bossman075@gmail.com>,
- Eduard Strehlau <eduard@lionizers.com>
-References: <20231220085955.25561-1-sebastien.szymanski@armadeus.com>
- <20231220085955.25561-2-sebastien.szymanski@armadeus.com>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <20231220085955.25561-2-sebastien.szymanski@armadeus.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS4P195CA0052.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:65a::12) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 0B495B81C38;
+ Wed, 20 Dec 2023 09:59:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E82EC433C9;
+ Wed, 20 Dec 2023 09:59:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1703066359;
+ bh=jERsH1L33LJ35wjC8ILQd5svyt7k1W0r5nodHL9wEnI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=T1GMl1ta11v4tF419wfnC+rce+sWYAFta+2g4A99yhz0Y47FE2oAs3YbRiMWKSVhT
+ WMGYjyxFSLgTB8xleNezcnsAlTEnp4d+NCJBtgtNeDFYYZotLAtt90eZmG66uqJ8EP
+ 1MBxbAecCPjEcho5XqsWCgiAV673PQzdFjRtL8flZXGvl+n9oFEv13xVbt/Jcap4Dy
+ zOkTm8dNeXjBWIONla2CwRZEWqepj+P8oOgYrn+7QMgD0SczTRg0Tk/SnWD5MlLqHR
+ woNW8uL6tJ+WkwVJgDKgA4floZ7WO9P6sziW3uoGcM7GaplRB8vWo1zh4x+JHBBFZ2
+ U6SkWQJEuWT5Q==
+Message-ID: <6d9456ec-a483-4721-8713-626aacdc9f81@kernel.org>
+Date: Wed, 20 Dec 2023 11:59:12 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DB8PR10MB3660:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18034326-ed66-44b7-fe68-08dc013f08ea
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MYQf+m3UOkF6F9+GJ5uIQifpPm0opaHY4skSYhuRsqctWGtPEqVyKwNObuUMeDgKQ1kwbReqznTEhGVSotm6kCgpcIBXFWSvwVaK7yOszkHg7pmJsa+Zkjj1q/z6O/D0e8Eg7NDSNvbkCrmKyRC60LjfVgshfeI5ue+p+qHCMrsIwiuUdttlKWb6e4p+KSVWQRslSEpjHgb35Y5IdPR2bb5CpD17/hUZqgM9cbku3TSsy1HZtOsovuTgBPgxzaUhm4AidBPv0Pp61U03B5uePS7YxsKiDywJKIGCbZmbP3Sr3GTdfIztdkq4NB1lzBCc9j+AFOne+pyy73NyuPZHXHBlXkj9zVr7UH5Fb2+QLMSfP45n2d2mncRg7yLyajx6TXPUOhb7hnp7Ur9znHz9tSrOlZOtr0sKhgy9xD2t/p1HQaoqhz/TebX1FFUfE7GQZb/5/qVLPBHQvmiyKxs3Qm6Lth0dC3R9zyjeQCy1bn24Fexb1e7UcvOkGxO1rNqUkLotHVV2hI68ftCwdmz/nxvH2gb48kVo5i0+oB8HiPYU4po1OaPW8Ojayxgm9IwcyGIOoXwM6+8zAYT0nOLK8FxPhp6NxhIesIZs2KkB2KKJxz3gn6biw37RdK5T5NW8D3qtS3LDjk8U3FQsfTDmXQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(39850400004)(136003)(376002)(366004)(396003)(346002)(230922051799003)(1800799012)(64100799003)(451199024)(186009)(4744005)(8676002)(8976002)(8936002)(4326008)(6512007)(6506007)(6666004)(316002)(5660300002)(44832011)(66946007)(66556008)(66476007)(2906002)(54906003)(38100700002)(478600001)(31686004)(26005)(6486002)(2616005)(41300700001)(36756003)(86362001)(31696002)(45980500001)(43740500002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eVBWY3NBZG9HZmo2eDJRQ2F1VEQzblplSXJ5NTVtbksvaXRQZVF2U3BUcEhU?=
- =?utf-8?B?M01YQUordTM2MTFlbE9jS0NTVnN2WkxSTWRhZEkvY3hrVXMrY1FrZUhId1Fl?=
- =?utf-8?B?RU9vTVdCOUtyL3ArYlNKcmhFdmNSVWxVZWlaQXBVQW12VDFGdFMzd0I2dDA2?=
- =?utf-8?B?YWdRSHM3cjMzZlNoczZsdStZNG40NVZkZ3BFLzZRMkNJMUdncFk3Y05wRjJI?=
- =?utf-8?B?ZktVY1JYWE9SeVF1NjhWYVdicVZuS3pkUUk0NXMwY255OE9iNWY5RGpCYTIr?=
- =?utf-8?B?WHBiemhIdHo5NFlTWDk0ZEt5Tjl5cEE3UE5JdnM4RlVGbjdhNmtROU5RVFo0?=
- =?utf-8?B?Mk9RN0hMM2RjZURtZDN5MTR4MERMd05QYkloUVpsdFlDSjJQOC9kYU05VUIv?=
- =?utf-8?B?QzF3azBydlAyWmRDYUljN0FFU2tNb0wxQzM3U1lETFdVelpGM05UM0FhTzh3?=
- =?utf-8?B?WFU3cE5LZlN3WjdjM0pRL3ZMclljRm1NbTIrM3hwckNtZy9teUlNek15Vzcz?=
- =?utf-8?B?bnVPRjhyS09xdkNrZDJsTlROanRUZkxrUWNVZjByL1E0M29CdHZGRDN5OWdU?=
- =?utf-8?B?ajZSMEVpTVErcFVzYnNNczZaNXVJdXBoSU16MVVRR04rZ0pYSDkxY1UzOUpV?=
- =?utf-8?B?amlmUk52ZlFsWlRTNVh5VTFhcEJaR0d2UXpjSUhMRjBJVDRDVkFVbGdDdUEz?=
- =?utf-8?B?WkFaUit2SHNITnNXekhyb3UrUnB4VkFXdnMyeHY0dVUwSmtYQlE2QW5BMTZP?=
- =?utf-8?B?WGJ2OVNHMExicVBFemg4Z1VRNVNHRlVlbTdkQ01hZ0QrQitUOGhVNnlBZHly?=
- =?utf-8?B?aDRQVjFTdjNpRmZQRnlnZ2JUdkFrR0t4MTJZWlExamZIVTd5NTg3RXVlVHZh?=
- =?utf-8?B?aTV0Vm5IZFkra1ZZOFVyVnZKaENBandJLyszdEdUdDh3ZUlZdldCaTErZ0wy?=
- =?utf-8?B?ZU9wRVRTZlRHY3g0Wk04MkxtRk5sRXhEblhSMHZ2VXpWblZYYVlDdkxsY2lQ?=
- =?utf-8?B?TnVDTkNFUTRPREcrL05rOWtrZ1B4Tm94YW0rZExuMjIzRm1JN3NpWjJIN2dK?=
- =?utf-8?B?eFJ3aThUOHdGZmFGbmhFeUxBZS9HMkFkSzJjOFJLUDhiOHFGRmxLQ3pnbVp6?=
- =?utf-8?B?UFZrNnVmeWhiYVpad2s4TFYxMkJCaldBUDdCbGJxQlU4bW9RZ1lqZ0xTbkl0?=
- =?utf-8?B?SGxqNzBacHduVFFvaWZIT01xUWx0N2xjeWpLbGRLTnd0S0VFYS9Ucm0rUm5V?=
- =?utf-8?B?NitFSHNGSmN2Q0JkdlpQd0ZrUVpkTHZPQ3RXZm1Yamc3b3JvUUNuQWQxSGpr?=
- =?utf-8?B?L3VqME1ndGtndlhDaHFWR09DY1h0VmNla0FuTklYU1BvS2JtQjg1TWNtV0tY?=
- =?utf-8?B?WEpIbG5CVU5JdlJ5UU5WL29CYys5MENPNDZnWHBpZHdMOG0rMXdVYS9nQXJ5?=
- =?utf-8?B?YXRGMFIzOGJIb1AwcGlCekVvVGZvTFFQVkE3eXh2RXJMaXVxb3llSzNrbEFm?=
- =?utf-8?B?SXlZTWx0MlV2S2FoTWQ5WUxvRld0UWd3ZkE3V0VQVXVhZkVad0ZENGljbEtp?=
- =?utf-8?B?TFlhQVpxdnl4Zk5LVm5MNWx5VkJYSHR3MHF3YzJ0bUJtT01yR2xyd1MxUUts?=
- =?utf-8?B?T1dkWEUwVVRpYjRudk5oUlo4N3lkVzZvUHFZNnRIb0QrQm9zSkNzQUczNS9s?=
- =?utf-8?B?eFFBaWxoWlc5U3hDV0daaVE4WWo4eUUwMUI1ZVNhamV6eWprR3J0VVhsN2hE?=
- =?utf-8?B?RkJiWmdyTWtSSHpaWDIzSHduTThWcllkWUR6aDR6MGxocFVQejQ3aXJaN1JM?=
- =?utf-8?B?SEJLNUdBTHRuTExTUlVaMkxzNUk1SEZta3EvaHFWeXZuSjhPcXdYT2dEaVhi?=
- =?utf-8?B?NHZUa0xZQzRZVk1EUnJIL0tVTVhTdFdvQmVJN2ZuWWJXYjM1QkpVTWtwbUxo?=
- =?utf-8?B?OVlmZ1VqNHdWd0RjYmRMdGh3ZGpRb3gyNFVqV21tTWNyUndjZFpqWVhGZUZQ?=
- =?utf-8?B?eXRwSFZNdGIwcXAzdEk3M1o2RS9SazA5cFFYYy9QRXBzVUE1NEE3VkIvSloz?=
- =?utf-8?B?MFhNbHJWZWdQQjIxcVo3c09EU2NJR0FKcWwrdWk4bk1kZng0VHhEYXh1NEJn?=
- =?utf-8?B?TzM3K1ljdHFEbWF2c2pMaFhlenBkWkwybjdUS2hhLy96aVBBdWZCUWpTOHBY?=
- =?utf-8?B?dkE9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18034326-ed66-44b7-fe68-08dc013f08ea
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 09:35:42.5267 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vArFys1EN8MZlcUblBSti1dmg196uf2AkQlWdMLXajnHNKkwPI4FmsULYRYTf9WLr7OnxskpTW8zp0rA4knxAmztixBU+DVmuI8BXHkl6vo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3660
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 00/16] Introduce ICSSG Ethernet driver
+Content-Language: en-US
+To: MD Danish Anwar <danishanwar@ti.com>, Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, r-gunasekaran@ti.com
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20231219101225.3443978-1-danishanwar@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,29 +78,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20/12/2023 09.59, Sébastien Szymanski wrote:
-> Without the '-ansi' option, the 'linux' string in env. files is replaced
-> with the string '1 '. For example, in the
-> board/armadeus/opos6uldev/opos6uldev.env file,
-> 
-> kernelimg=opos6ul-linux.bin
-> 
-> becomes
-> 
-> kernelimg=opos6ul-1 .bin
-> 
-> in the include/generated/env.in file.
-> 
-> That's because 'linux' is a System-specific Predefined Macros. [1]
-> 
-> Pass the '-ansi' option as suggested by the GCC documentation. [1]
+Hi,
 
-So when the .dtb files are built, we use
+On 19/12/2023 12:11, MD Danish Anwar wrote:
+> Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used in TI
+> AM654 SR2.0.
+> 
+> The ICSSG PRU Sub-system runs on EMAC firmware. This series Introduces
+> support for ICSSG driver in uboot. This series also adds the driver's
+> dependencies.
+> 
+> The ICSSG2 node is added in device tree overlay so that it remains in
+> sync with linux kernel.
+> 
+> The series introduces device tree and config changes and AM65x
+> to enable ICSSG driver. The series also enables SPL_LOAD_FIT_APPLY_OVERLAY
+> for AM65x in order to load overlay over spl.
+> 
+> This series has been tested on AM65x SR2.0, and the ICSSG interface is
+> able to ping / dhcp and boot kernel using tftp in uboot.
+> 
+> To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to PRU RPROC
+> cores and RPROC cores need to be booted with the firmware. This step is
+> done inside driver in kernel as kernel supports APIs like
+> rproc_set_firmware() and rproc_fw_boot(). But as u-boot doesn't have these
+> APIs, the same needs to be done via u-boot cmds.
+> 
+> To make sure icssg-eth works we need to do below steps.
+> 
+> 1. Initialize rproc cores i.e. rproc_init()
+> 2. Load $firmware_file from partition '1:2' (root) on device (mmc in this
+>    example)
+> 3. Load the firmware file to rproc cores passing. i.e. rproc_load()
+>    taking rproc_id, loadaddr and file size as arguments.
+> 4. Start rproc cores. i.e. rproc_start() taking rproc_id as arguments
+> 
+> The above steps are done by running the below commands at u-boot prompt.
+> 
+> => setenv start_icssg2 'rproc start 14; rproc start 15; rproc start 16; rproc start 17; rproc start 18; rproc start 19'
+> => setenv stop_icssg2 'rproc stop 14; rproc stop 15; rproc stop 16; rproc stop 17; rproc stop 18; rproc stop 19'
+> => setenv firmware_dir '/lib/firmware/ti-pruss'
+> => setenv get_firmware_mmc 'load mmc ${bootpart} ${loadaddr} ${firmware_dir}/${firmware_file}'
+> 
+> => setenv init_icssg2 'setenv ethact icssg2-eth; setenv autoload no; rproc init; setenv loadaddr 0x80000000; \
+>     setenv firmware_file am65x-sr2-pru0-prueth-fw.elf; run get_firmware_mmc;  rproc load 14 0x80000000 ${filesize}; \
+>     setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu0-prueth-fw.elf; run get_firmware_mmc; rproc load 15 0x89000000 ${filesize}; \
+>     setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru0-prueth-fw.elf; run get_firmware_mmc; rproc load 16 0x90000000 ${filesize}; \
+>     setenv loadaddr 0x80000000; setenv firmware_file am65x-sr2-pru1-prueth-fw.elf; run get_firmware_mmc; rproc load 17 0x80000000 ${filesize}; \
+>     setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu1-prueth-fw.elf; run get_firmware_mmc; rproc load 18 0x89000000 ${filesize}; \
+>     setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru1-prueth-fw.elf; run get_firmware_mmc; rproc load 19 0x90000000 ${filesize}; \
+>     run start_icssg2;'
 
-  -x assembler-with-cpp -undef
+A whole bunch of commands are required to get ethernet functional.
+This is not at all user friendly and will be a maintenance nightmare.
+What worries me is tracking the 6 different rproc cores and the 6 different firmware files to start 1 ethernet device.
+This will get even more interesting when we have to deal with different ICSSG instances on different boards.
 
-and that -undef seems to suppress a lot more than just the linux and
-unix defines. So I wonder if this case should also use that? I think
-that would also allow the c++ comments to remain.
+What is preventing the driver from starting the rproc cores it needs so user doesn't need to care about it?
+All the necessary information is in the Device tree. At least this is how it is done on Linux.
 
-Rasmus
+> 
+> => run init_icssg2
+> => dhcp
+> k3-navss-ringacc ringacc@3c000000: Ring Accelerator probed rings:818, gp-rings[304,100] sci-dev-id:187
+> k3-navss-ringacc ringacc@3c000000: dma-ring-reset-quirk: disabled
+> prueth icssg2-eth: K3 ICSSG: rflow_id_base: 8, chn_name = rx0
+> link up on port 0, speed 1000, full duplex
+> BOOTP broadcast 1
+> BOOTP broadcast 2
+> BOOTP broadcast 3
+> DHCP client bound to address 192.168.4.58 (1020 ms)
+> 
+
+What about shutting down the interface?
+I believe this has to be done manually too?
+
+> Thanks and Regards,
+> MD Danish Anwar
+> 
+> MD Danish Anwar (16):
+>   net: ti: icssg: Add Firmware Interface for ICSSG Ethernet driver.
+>   net: ti: icssg: Add Firmware config and classification APIs.
+>   net: ti: icssg: Add icssg queues APIs and macros
+>   net: ti: icssg: Add ICSSG ethernet driver
+>   net: ti: icssg: Add support sending FDB command to update rx_flow_id
+>   net: ti: icssg: Enforce pinctrl state on the MDIO child node
+>   arm: dts: k3-am65: Add additional regs for DMA components
+>   arm: dts: k3-am65: Add cfg reg region to ringacc node
+>   arm: dts: k3-am65-main: Add ICSSG IEP nodes
+>   arm: dts: k3-am654-base-board: Add ICSSG2 Ethernet support
+>   arm: dts: k3-am65x-binman: Add ICSSG2 overlay and configuration
+>   configs: am65x_evm_a53: Enable ICSSG Driver
+>   configs: am65x_evm_a53_defconfig: add SPL_LOAD_FIT_APPLY_OVERLAY
+>   tools/fdtgrep: Include __symbols__ table
+>   board: ti: am65x: Add check for k3-am654-icssg2 in
+>     board_fit_config_match()
+>   Revert "dm: core: Report bootph-pre-ram/sram node as pre-reloc after
+>     relocation"
+> 
+>  arch/arm/dts/Makefile             |   3 +-
+>  arch/arm/dts/k3-am65-main.dtsi    |  49 ++-
+>  arch/arm/dts/k3-am65-mcu.dtsi     |  13 +-
+>  arch/arm/dts/k3-am654-icssg2.dtso | 145 +++++++
+>  arch/arm/dts/k3-am65x-binman.dtsi |  85 ++++
+>  board/ti/am65x/evm.c              |  11 +-
+>  configs/am65x_evm_a53_defconfig   |   4 +
+>  drivers/core/ofnode.c             |   2 +-
+>  drivers/net/ti/Kconfig            |   9 +
+>  drivers/net/ti/Makefile           |   1 +
+>  drivers/net/ti/icss_mii_rt.h      | 192 +++++++++
+>  drivers/net/ti/icssg_classifier.c | 376 +++++++++++++++++
+>  drivers/net/ti/icssg_config.c     | 469 +++++++++++++++++++++
+>  drivers/net/ti/icssg_config.h     | 195 +++++++++
+>  drivers/net/ti/icssg_prueth.c     | 654 ++++++++++++++++++++++++++++++
+>  drivers/net/ti/icssg_prueth.h     |  89 ++++
+>  drivers/net/ti/icssg_queues.c     |  51 +++
+>  drivers/net/ti/icssg_switch_map.h | 209 ++++++++++
+>  include/dm/ofnode.h               |   8 +-
+>  tools/fdtgrep.c                   |   8 +
+>  20 files changed, 2555 insertions(+), 18 deletions(-)
+>  create mode 100644 arch/arm/dts/k3-am654-icssg2.dtso
+>  create mode 100644 drivers/net/ti/icss_mii_rt.h
+>  create mode 100644 drivers/net/ti/icssg_classifier.c
+>  create mode 100644 drivers/net/ti/icssg_config.c
+>  create mode 100644 drivers/net/ti/icssg_config.h
+>  create mode 100644 drivers/net/ti/icssg_prueth.c
+>  create mode 100644 drivers/net/ti/icssg_prueth.h
+>  create mode 100644 drivers/net/ti/icssg_queues.c
+>  create mode 100644 drivers/net/ti/icssg_switch_map.h
+> 
+> base:commit: a6f86132e30a407c7f96461df53c62fbe52e2b54
+
+-- 
+cheers,
+-roger
