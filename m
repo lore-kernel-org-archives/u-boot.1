@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B344C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:20:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60CE9C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACC358761C;
-	Wed, 20 Dec 2023 09:20:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3C89387661;
+	Wed, 20 Dec 2023 09:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="gzGLFko8";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="kqO42K9g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 275558761C; Wed, 20 Dec 2023 09:20:06 +0100 (CET)
+ id 41A0E875B6; Wed, 20 Dec 2023 09:20:06 +0100 (CET)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85EB3875B6
+ by phobos.denx.de (Postfix) with ESMTPS id CE60B875FD
  for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:20:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -30,28 +30,27 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=iWYNZNY5vtceoidwOOSiYrX63YoeUZSjfNlwvuqNVoc=;
- b=gzGLFko8z2kxgtk9UeD7YcnP5PQuX7cl/THL927g21lxd0zqHB71Neq8KWbJEml3
- V7UJEn7xovpeLDze8folKXK0RsVkKxrX67NAYaPIpJBexh+HEWgwrOPUgdJnD/cf
- eLXmRmQTKUrDXf1IgcHIcakm0NlsFvxtAhEmy1OBeWU=;
-X-AuditID: ac14000a-fbefe7000000290d-47-6582a3b273d9
+ bh=+p9cSagMgdIthOEDQCevQKCsaJYplLP/nKN79+vfSgw=;
+ b=kqO42K9gpHqVwVyVBfke+IBJEgZUN7AxhDk1kNZJxy/xawqOpQ6hFWDUfnh78Tk4
+ GI7vMu7W0GwmzYFrGVLbY9IvGCGNbSEHXaWxNCxdOpDoHfug2kLnt8yUQ3hVZk/I
+ pXSH98Wkpyw/96SUaKz0B6p1psV3aYnBUilRM/mHjBY=;
+X-AuditID: ac14000a-fbefe7000000290d-4d-6582a3b274b4
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id BE.A0.10509.2B3A2856;
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 51.B0.10509.2B3A2856;
  Wed, 20 Dec 2023 09:20:02 +0100 (CET)
 Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
  2023 09:20:02 +0100
 From: Yannic Moog <y.moog@phytec.de>
-Date: Wed, 20 Dec 2023 09:19:34 +0100
-Subject: [PATCH 2/4] board: phytec: imx8m_som_detection: fix uninitialized
- pointer bug
+Date: Wed, 20 Dec 2023 09:19:36 +0100
+Subject: [PATCH 4/4] board: phytec: phytec_som_detection: fix uninitialized bug
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-2-c24f3239b4c3@phytec.de>
+Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-4-c24f3239b4c3@phytec.de>
 References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-0-c24f3239b4c3@phytec.de>
 In-Reply-To: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-0-c24f3239b4c3@phytec.de>
 To: Fabio Estevam <festevam@gmail.com>
@@ -61,17 +60,17 @@ X-Mailer: b4 0.12.3
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrILMWRmVeSWpSXmKPExsWyRpKBR3fT4qZUg03X5SweXvW3eLu3k92i
- +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlXH+4jW2gr3sFW8/z2ZqYJzC
- 1sXIySEhYCKxeOYnli5GLg4hgcVMEicPbGWHcB4ySnw89x2sik1AReLxi3usIDaLgKrE5Rs3
- wWxhgQiJp9+a2UFsXgFBiZMznwBN4uBgFtCUWL9LHyTMLCAvsf3tHGaIkhSJ508ngNlCQPa/
- Y5PAbE6BVIlzq1exg7SKCKhJnJ4H1VojMfX+PHaIO4Ul2hfdYoJolZV4cb4XKi4vMe3ca2YI
- O1Ri65ftTBMYhWYhOWgWwkGzkBy0gJF5FaNQbmZydmpRZrZeQUZlSWqyXkrqJkZQMIswcO1g
- 7JvjcYiRiYPxEKMEB7OSCO/ezqZUId6UxMqq1KL8+KLSnNTiQ4zSHCxK4ryrO4JThQTSE0tS
- s1NTC1KLYLJMHJxSDYwbdL6H3E3M2dM1iesZ57MJh6y+eRl8LluZrfLol+UzuZlLxB70r90e
- uunFjaiby4UK9xa+z/OvSf3rfDSdN6KRz4HvpsCiPT1FW/d48wYKbjJQveKkdbCgc6/ZpLKZ
- lypsQp/GpNxYvG3upjOHRaQYvKRN4qJV7zo6VP3OkX24YGJeTaeNn6kSS3FGoqEWc1FxIgAp
- 7qO/VAIAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHLMWRmVeSWpSXmKPExsWyRpKBR3fT4qZUg+UHDSweXvW3eLu3k92i
+ +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlXHi3wu2gr3sFQuvajcwzmHr
+ YuTkkBAwkZj8t4+xi5GLQ0hgMZPEuk/XWSCch4wSH899B6tiE1CRePziHmsXIwcHi4CqxNU5
+ WSCmsECgxLfGDJAKXgFBiZMzn7CAhJkFNCXW79IHCTMLyEtsfzuHGaIkReLjhn2MILYQkP3v
+ 2CSwOKdAqsS51avYQVpFBNQkTs+Daq2RmHp/HjvElcIS7YtuMUG0ykq8ON8LFZeXmHbuNTOE
+ HSqx9ct2pgmMQrOQHDQL4aBZSA5awMi8ilEoNzM5O7UoM1uvIKOyJDVZLyV1EyMojEUYuHYw
+ 9s3xOMTIxMF4iFGCg1lJhHdvZ1OqEG9KYmVValF+fFFpTmrxIUZpDhYlcd7VHcGpQgLpiSWp
+ 2ampBalFMFkmDk6pBkZ5nlVq04/NUs+X6qu/Ghkgs6u5Nc92Y9DO1W9cFgWz73p/L7ErjnuL
+ 3BWuqkRHh5mn4q4srqk+seyAFX+Gx3auCvbPf9f83er483TlQUWu1Jkxezvao7/nW66b5BFQ
+ PuOkV87+UpVd3DrzjU/9m3t/39slVuGHub5pFF1YVHXF4Ziy7HzWxA1KLMUZiYZazEXFiQAi
+ 7SltUQIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,35 +87,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pointer in phytec_imx8m_detect was accessed without checking it first.
-Fix this by moving the pointer check in front of any accesses.
+When som_type does not match any case, it is uninitialized and the
+function still tries to print the SoM info. Rather, this is an error
+condition and the function should abort prematurely. Highlight this by
+printing an error message and returning early.
 
 Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
- board/phytec/common/imx8m_som_detection.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ board/phytec/common/phytec_som_detection.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/board/phytec/common/imx8m_som_detection.c b/board/phytec/common/imx8m_som_detection.c
-index 45f5767c565..a229eae152d 100644
---- a/board/phytec/common/imx8m_som_detection.c
-+++ b/board/phytec/common/imx8m_som_detection.c
-@@ -28,13 +28,13 @@ int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
- 	char *opt;
- 	u8 som;
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index f879702df45..1b10923b62f 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -161,7 +161,8 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
+ 			sub_som_type2 = 2;
+ 			break;
+ 		default:
+-			break;
++			pr_err("%s: Invalid SoM type: %i", __func__, api2->som_type);
++			return;
+ 		};
  
-+	if (!data)
-+		data = &eeprom_data;
-+
- 	/* We can not do the check for early API revisions */
- 	if (data->api_rev < PHYTEC_API_REV2)
- 		return -1;
- 
--	if (!data)
--		data = &eeprom_data;
--
- 	som = data->data.data_api2.som_no;
- 	debug("%s: som id: %u\n", __func__, som);
- 
+ 		printf("SoM: %s-%03u-%s-%03u ",
 
 -- 
 2.34.1
