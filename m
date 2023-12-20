@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89669C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC67C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFD62871A7;
-	Wed, 20 Dec 2023 05:45:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5228F8744F;
+	Wed, 20 Dec 2023 05:46:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WQ680DWK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J/yc9spu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A1F8749F; Wed, 20 Dec 2023 05:45:59 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 3F48C874B7; Wed, 20 Dec 2023 05:46:03 +0100 (CET)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 005A4870B7
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:45:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D89B870B7
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-54bf9a54fe3so6502504a12.3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:45:56 -0800 (PST)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-40c3ceded81so53058155e9.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047556; x=1703652356; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703047561; x=1703652361; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M9nbNxn+kxMu9rQDI3RCWd+bAsZFHodZtwJ/+q6OqAY=;
- b=WQ680DWKYjKkCn9guGl+fgaNxdg+Xq0BMrkI3JLTRqvNsLKFu8ViclnY+orW5H8j+s
- mDrUxjSMudoeOkzVwK1ntTdEDnxp/YltJxAEtAYAjVS9QXv7WuQXUJ2N97f+7T2FWiIr
- //1skJ7kwgtdzISfuWyj1b1q1fmn/RDGlGyh0=
+ bh=eku3lJFPGsEdC1S5l9YE9ViaQ9M7CKQqEiFxiYHk5KQ=;
+ b=J/yc9spu5gYJuLH4Hs6B2tZtgleUaK5e2EBmYx5WN98KEezjHozbCwTEmLBpWcYCL/
+ X2NG7DsG/yDkK3PCGhJ9VPG3bT38vjsr20DBneodtk4Nt/ESFDfeUNL81qnK40MRohpw
+ UaJ7Dp1nRa9uk5dFNFDJoL4Az4IAkG+DznADU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047556; x=1703652356;
+ d=1e100.net; s=20230601; t=1703047561; x=1703652361;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M9nbNxn+kxMu9rQDI3RCWd+bAsZFHodZtwJ/+q6OqAY=;
- b=BDGeHud9oZX3/Wv+UYHEB6Va5tucc6AAY1SY4itFyU/5VSbwNMULepyqcwGxCieS5G
- +kPQ7Roo/OsDeBctPctX2fzq5QrLdQT3PHB4ysPRTBC6cQw6H/4rnqdhC4VvU5ZYrsno
- b52dFyAffVyyNL7ebkICzald3a1ojU6S4nNGxEwgYrMCxUcjPtQNIaGTn2vxYltfUP8I
- l7Iw0GZ1RZVS6TB4XRMyPsUA2Y/dL3leoQBwfqorhbgu7sL1xGnndaaushIt7uSojf+F
- 31l9yDIAqgscykdXc52UnTtPGRY5Oo8Q1FFpvdFmFalxMB1egs0rHkucIG4vx3J2fyYn
- 8tmw==
-X-Gm-Message-State: AOJu0YzYTcw2Q79Hdqb29VUPCqp3Dt6E8wD0L2SpHYSXhOf4LM8262GS
- VNadq2ckh7J6notBYK3ilmNm4Nn6J24p08w5Q0RKpA==
-X-Google-Smtp-Source: AGHT+IEs6mg17PQwgaon8clJqh7g7smpovaOQx/gQgpi4qVOfnFjL97PZD1Bgg4QfB2Sc9xHCu/774XKNDP2mX9YtOY=
-X-Received: by 2002:a50:c05b:0:b0:553:ac86:3a4c with SMTP id
- u27-20020a50c05b000000b00553ac863a4cmr721598edd.51.1703047556255; Tue, 19 Dec
- 2023 20:45:56 -0800 (PST)
+ bh=eku3lJFPGsEdC1S5l9YE9ViaQ9M7CKQqEiFxiYHk5KQ=;
+ b=l5vLmEC3OS+1jxqtkbbtxW5S4162613xmdl27Sj2ijLl3txkBZ5p1uQdaZGA2udxB5
+ iro04E3oVWR0lLV2pMdNg+3WTXvob2/Ccujon9R7aqXEtnsA/1qANOkPFOIsv0+ZCmBk
+ Wg3JLXQz6vdO/T/dvuf9CL0Yumjlo1jsbsDsY2/sTxGKEi70KH/ai0KhJTF0nnGsswOV
+ RdgiTvDYIG3hrV2fASgD7OwaAuPO6ua95PcBjgwmXGndxP03UXvYrWOmbF0uIxaswgyi
+ KXHQW16clGUzdK/P4U/sUgTb81n+9N4G194qh7v2/p8CxG0hvR3XDTex8OtSJKgHRTt7
+ gwlQ==
+X-Gm-Message-State: AOJu0YzizZxNtnPjL032jnq4OTksk3Fc8XjacRveJeT2TkpZGao0WxL3
+ 4D3XbzDph2V2hggW6xVCt2/0eQBQdC7yPeq6QVcjUQ==
+X-Google-Smtp-Source: AGHT+IHGCIZ57IvjU5BbVRLPoNrTuD1nVe7TnuAu4BnqP6tQM03wfj/ghuyygRy36rV/1XVWCyj+fDKPpmDybFNu6ZU=
+X-Received: by 2002:a05:600c:3c89:b0:40c:4a4d:b53c with SMTP id
+ bg9-20020a05600c3c8900b0040c4a4db53cmr8080964wmb.162.1703047560451; Tue, 19
+ Dec 2023 20:46:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20231218210341.30073-1-iivanov@suse.de>
- <20231218210341.30073-2-iivanov@suse.de>
-In-Reply-To: <20231218210341.30073-2-iivanov@suse.de>
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+ <20231219101225.3443978-29-danishanwar@ti.com>
+In-Reply-To: <20231219101225.3443978-29-danishanwar@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:45:44 -0700
-Message-ID: <CAPnjgZ2n2o1mu2PtkgwEB1dFeaeRx+uNSkSrSogU76vnLGfKRA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/7] rpi5: add initial memory map for bcm2712
-To: "Ivan T. Ivanov" <iivanov@suse.de>
-Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>,
- Dmitry Malkin <dmitry@bedrocksystems.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Anatolij Gustschin <agust@denx.de>, wahrenst@gmx.net,
- florian.fainelli@broadcom.com, u-boot@lists.denx.de
+Date: Tue, 19 Dec 2023 21:45:48 -0700
+Message-ID: <CAPnjgZ24Q_kAx4wkHtcWzwZr-K3DfMzUOABWGGEO80+_m7duKQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 14/16] tools/fdtgrep: Include __symbols__ table
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, srk@ti.com,
+ r-gunasekaran@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,51 +91,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ivan,
+Hi,
 
-On Mon, 18 Dec 2023 at 14:04, Ivan T. Ivanov <iivanov@suse.de> wrote:
+On Tue, 19 Dec 2023 at 03:13, MD Danish Anwar <danishanwar@ti.com> wrote:
 >
-> From: Dmitry Malkin <dmitry@bedrocksystems.com>
+> This is required for overlays to work at SPL.
 >
-> includes:
-> * 1GB of RAM (from 4GB or 8GB total)
-> * VPU memory interface
-> * AXI ranges (main peripherals)
+> Loading of symbol table depends on DT Overlay support in SPL
+> so make it compile-time dependent. Without this SPL fails to
+> boot some platforms where this feature is not enabled
+> (e.g. dra71-evm.)
 >
-> Signed-off-by: Dmitry Malkin <dmitry@bedrocksystems.com>
-> Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
+> Without including the <linux/kconfig.h> file, the symbol
+> CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY will not be visible and
+> we will never include the symbol table.
+>
+> So include <linux/kconfig.h>
+>
+> Due to some reason it needs to be included after
+> [#include "fdt_host.h"] otherwise it causes a build error.
+>
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
 > ---
->  arch/arm/mach-bcm283x/init.c | 38 +++++++++++++++++++++++++++++++++++-
->  1 file changed, 37 insertions(+), 1 deletion(-)
+>  tools/fdtgrep.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/arch/arm/mach-bcm283x/init.c b/arch/arm/mach-bcm283x/init.c
-> index 7265faf6ce..af23b9711a 100644
-> --- a/arch/arm/mach-bcm283x/init.c
-> +++ b/arch/arm/mach-bcm283x/init.c
-> @@ -19,7 +19,7 @@
->  #ifdef CONFIG_ARM64
->  #include <asm/armv8/mmu.h>
+> diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
+> index 7eabcab439..706b4a35f4 100644
+> --- a/tools/fdtgrep.c
+> +++ b/tools/fdtgrep.c
+> @@ -22,6 +22,8 @@
+>  #include "fdt_host.h"
+>  #include "libfdt_internal.h"
 >
-> -#define MEM_MAP_MAX_ENTRIES (4)
-> +#define MEM_MAP_MAX_ENTRIES (5)
->
->  static struct mm_region bcm283x_mem_map[MEM_MAP_MAX_ENTRIES] = {
->         {
-> @@ -68,6 +68,41 @@ static struct mm_region bcm2711_mem_map[MEM_MAP_MAX_ENTRIES] = {
+> +#include <linux/kconfig.h>
+> +
+>  /* Define DEBUG to get some debugging output on stderr */
+>  #ifdef DEBUG
+>  #define debug(a, b...) fprintf(stderr, a, ## b)
+> @@ -1234,6 +1236,12 @@ int main(int argc, char *argv[])
+>                 disp.fout = stdout;
 >         }
->  };
 >
-> +static struct mm_region bcm2712_mem_map[MEM_MAP_MAX_ENTRIES] = {
+> +       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY)) {
+> +               /* include symbol table */
+> +               if (value_add(&disp, &disp.value_head, FDT_IS_NODE, 1, "/__symbols__"))
+> +                       usage("Cannot add __symbols__ value");
+> +       }
 
-Would it be possible to read these from the devicetree?
+This will need to be a new fdtgrep flag as we cannot build different
+versions of fdtgrep.
 
-> +       {
-> +               .virt = 0x00000000UL,
-> +               .phys = 0x00000000UL,
-> +               .size = 0x3f800000UL,
-> +               .attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +                        PTE_BLOCK_INNER_SHARE
-> +       }, {
+Also, can we not update Makefile.lib to pass something like '-n __symbols__' ?
+
+> +
+>         /* Run the grep and output the results */
+>         ret = do_fdtgrep(&disp, filename);
+>         if (disp.output_fname)
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
