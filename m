@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57949C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:09:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E50EDC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:14:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA42C874B1;
-	Wed, 20 Dec 2023 14:09:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5EC1587509;
+	Wed, 20 Dec 2023 14:14:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JhIkK8YO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="flrZo2/I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE08587646; Wed, 20 Dec 2023 14:09:03 +0100 (CET)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id ADA97876D5; Wed, 20 Dec 2023 14:14:26 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C72BA86CF4
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:09:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AD44874B1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:14:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50e23c620e8so5768169e87.1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:09:01 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5e7d306ee27so14274337b3.3
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:14:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703077741; x=1703682541; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703078063; x=1703682863; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DTsBwd44X974O1wzq1ZmhH/0O/ZfLzi8quNL6LU49D0=;
- b=JhIkK8YOmyuHZJj+4QNycz9CNh4F8ijOnJG5Ylv5WhE0XxnA8RMqGwdz4TyhzG0poH
- RaerVZRIQIuKiePZ4yT5gG6U8aJZqtN88AItYzPG45SX65zxijtJ6e6FbZcuR4mmf8Pc
- QSsD6E+C5+mcOS32V7bM6tFr1t/E19Lf+k0lX17+G8Chd/Asyviv/8tii+c4fwTfBUmC
- zhMz6DrhkVkf0Ebaf3vl+liQjlNwZvqF7F1JkXrUgYvv+eVf/GcQ0obGufcEX21LqMSX
- mP8YXABo4IoIkJGNqa0kwMP+NlwTUufae4fuS49gIsnzE59eeVmEAi1/HM75aL1is+8M
- etLQ==
+ bh=UIAk7S3Ofw1fVwSd7loRrora3zGhXQPhGL7t0sXHoQ8=;
+ b=flrZo2/Iod565ncUwotvw0zvg8I1MWOxHxhL3hoUiVw/k3HwcFZ7AtQavZCuDA6wUm
+ w29yDxGUqWdigrVkxqBTL4IWWgBc9G9xxBoKjzuTfnND17woC3F0lBUaaX5bJnaPkTOq
+ RhkCHGPC4Q+oIzc9suipGBjEmRl3VeZpscGsA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703077741; x=1703682541;
+ d=1e100.net; s=20230601; t=1703078063; x=1703682863;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DTsBwd44X974O1wzq1ZmhH/0O/ZfLzi8quNL6LU49D0=;
- b=LUdBIvtDeVKiTo8+McvAKuRcuvHo+Tlt6QPiVrVYklDMgqltR+hbwt7VvTDZ+c6dZ/
- 5sfa1Qwn7ePzY2kf/Mhh1F6LVxNe2ybj1XuyD7VGDx46LwNczSU49w1rstGoGknljMqr
- 1c870/aGvk+QX1T+WZ8Bhevu/EEyEnbDXOr9mgSFqM/BoYh53vMrR7eMtMDNbb0wVriR
- 3vHEYXO92hPslVTuxAET2+lPNpTwvD/PKKPnLDcF1bgvi6xIXVN9qfqrbwVqnfcy0if7
- opAJpehcYNziafAILRRnV7xQw22It+cZkS57Q/R7RVKRjGwubcPFrHRJedkcc5rYPv6Z
- j34w==
-X-Gm-Message-State: AOJu0YyFfBueEPp+71H7obdH6FVd4UdCnK1EsSMjD9UsdCs0f2x4dCkw
- tyVz+Z/miu63QC3oDNKd1u07sw==
-X-Google-Smtp-Source: AGHT+IHxuoVm45OnfpLlyKzzhwKW3nUjN6O+NU4eFpUcHhJiLIoSjuCG3utzS9AY3LRYe6jHM89Mug==
-X-Received: by 2002:ac2:548c:0:b0:50e:3639:f88 with SMTP id
- t12-20020ac2548c000000b0050e36390f88mr2554058lfk.16.1703077740766; 
- Wed, 20 Dec 2023 05:09:00 -0800 (PST)
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
+ bh=UIAk7S3Ofw1fVwSd7loRrora3zGhXQPhGL7t0sXHoQ8=;
+ b=oZoBZZSCjU3u0TmxsmWjR+vsVWfkZYX13N4SZB+81dUSwquT5PiN/39ty8u37An/y/
+ N5GdRacEC/w0Did6Cgu4mubuODNflnNc9M/FWXifOszlm3UI/WsFWIeOoT6IpwQwNPQc
+ eKrl5st8ZQjMsVb9KTUie5nw6cmY97RwG8UPF8yJPQNGpzxQYi49pItH2o8FCiY6NZCq
+ Zm59F/msKO1BAfh54gPM/ra+Fa/0aRWbIpZIw8I+hA6/cfD2hE3/ork2u2WcPPjKTr/Q
+ EDE1C4qsOKKYwTDgklEcgpgl77WwejLX301PwcVEKhzi0zi9vHpw3d6gdoywJSAYHFCr
+ 6JvQ==
+X-Gm-Message-State: AOJu0YyvY1nV3jgKB0LidjIycpR7xm/TNzj1zILD9TX5J/J55edoBP8o
+ oKpmzWf1WgJsz77ZNZd0n+Q3ZQ==
+X-Google-Smtp-Source: AGHT+IGylPkpHnGHmwqmOKn5u4kuEZbs5fjro9p6f4awPUr/Xoxim1oA6M/TrBzfX4oSd++do40DLQ==
+X-Received: by 2002:a0d:eb10:0:b0:5e7:d248:6b86 with SMTP id
+ u16-20020a0deb10000000b005e7d2486b86mr1763720ywe.19.1703078062911; 
+ Wed, 20 Dec 2023 05:14:22 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
+ [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
  by smtp.gmail.com with ESMTPSA id
- u10-20020a056402110a00b00553a094dd5csm1676948edv.32.2023.12.20.05.08.59
+ e4-20020a0df504000000b005d746ac7f6bsm10502555ywf.69.2023.12.20.05.14.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 05:09:00 -0800 (PST)
-Date: Wed, 20 Dec 2023 15:08:57 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Nikhil M Jain <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
- Michal Simek <michal.simek@amd.com>,
- Sean Anderson <seanga2@gmail.com>, Qu Wenruo <wqu@suse.com>
-Subject: Re: [PATCH 5/5] qemu-arm: get FDT from bloblist
-Message-ID: <ZYLnaUhGuR-X56fx@hera>
-References: <20231219211114.393193-1-raymond.mao@linaro.org>
- <20231219211114.393193-6-raymond.mao@linaro.org>
+ Wed, 20 Dec 2023 05:14:21 -0800 (PST)
+Date: Wed, 20 Dec 2023 08:14:20 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Please pull u-boot-tegra staging
+Message-ID: <20231220131420.GI2513409@bill-the-cat>
+References: <20231219201353.433090-1-clamor95@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jOqp/V5c7m5Pl+BI"
 Content-Disposition: inline
-In-Reply-To: <20231219211114.393193-6-raymond.mao@linaro.org>
+In-Reply-To: <20231219201353.433090-1-clamor95@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,53 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Dec 19, 2023 at 01:11:12PM -0800, Raymond Mao wrote:
-> Get devicetree from a bloblist if it exists.
-> If not, fallback to get FDT from the specified memory address.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  board/emulation/qemu-arm/qemu-arm.c | 15 +++++++++++++--
->  1 file changed, 13 insertions(+), 2 deletions(-)
->
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> index 72e0a97567..455c042a9a 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -148,9 +148,20 @@ int dram_init_banksize(void)
->
->  void *board_fdt_blob_setup(int *err)
->  {
-> +	void *fdt = NULL;
->  	*err = 0;
-> -	/* QEMU loads a generated DTB for us at the start of RAM. */
-> -	return (void *)CFG_SYS_SDRAM_BASE;
-> +
-> +	/* Check if a DTB exists in bloblist */
-> +	if (IS_ENABLED(CONFIG_BLOBLIST)) {
-> +		if (bloblist_maybe_init())
-> +			return (void *)CFG_SYS_SDRAM_BASE;
-> +		fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
 
-if (!bloblist_maybe_init())
-    fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+--jOqp/V5c7m5Pl+BI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-and you wont need the explicit return, since the code below will catch it
+On Tue, Dec 19, 2023 at 10:13:53PM +0200, Svyatoslav Ryhel wrote:
 
-> +	}
-> +	if (!fdt)
-> +		/* QEMU loads a generated DTB for us at the start of RAM. */
-> +		return (void *)CFG_SYS_SDRAM_BASE;
-> +	else
+> Dear Tom,
+>=20
+> The following changes since commit 936d0f9dd713a913fe952eae576c893e1d5ecb=
+d1:
+>=20
+>   Merge patch series "Fix J7200 kernel boot when using upstream u-boot" (=
+2023-12-19 11:42:03 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+>=20
+> for you to fetch changes up to 4989628c1d2b6ea19a38aae34b1c08b12141c64b:
+>=20
+>   board: compal: paz00: clean up the board (2023-12-19 21:24:30 +0200)
+>=20
 
-and you dont need the else here either
+Applied to u-boot/next, thanks!
 
-Thanks
-/Ilias
-> +		return fdt;
->  }
->
->  int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size)
-> --
-> 2.25.1
->
+--=20
+Tom
+
+--jOqp/V5c7m5Pl+BI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWC6KIACgkQFHw5/5Y0
+tywiEgwAhVfgZweFsFmXrViocn3hG3nocX7Hi4kwSt/385wO1BN5XF4F1qMXiSST
+9K0EA7UN6AbfdL56jzsR+vgP4bRxCvPkKgygc9tG5SEu06DGQymPoZJP+y+V+Viu
+J3x0GLi4EsKfWn9pu9TJz5qRYxcPGCV8dt7H4TFrBTizSxkGieEXMGVwSvsuGaWC
+20KAoYNRKiaO35H7ImMoGmH4BlzFAXE8YBwLhNylkPZDfHXhVTmnBBnklFXWfth4
+TOAEg1WCFQqSHYtXLIVdPW1Ba/B/11H7qo48v3QrzNAhbcyvOpBwQLIQnQJkx29v
+0b6l5h0/I1vAdi5S6mZ1r/qlpOWKY2nzvexZSWeSBb3KKhtFtaKhhHMmHMJk+E4X
+iqNbx6Kzvkz5ygR893tlqb1ihXjl/M2Mw8riDWLJZCaiIsvcv3O+SXQgsqGfcvpe
+qrbDK/u9CaydF/dBLeA5fs0GS9Hs8YPjlHMR9IpqVGKUvt7NpLhHbB3R7+nVGESs
+0ag0+qly
+=I6F4
+-----END PGP SIGNATURE-----
+
+--jOqp/V5c7m5Pl+BI--
