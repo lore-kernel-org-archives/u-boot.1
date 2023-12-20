@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19056C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAF7C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:03:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2630C87872;
-	Wed, 20 Dec 2023 22:02:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 98FA487849;
+	Wed, 20 Dec 2023 22:02:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jmjOL2wI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iq5VyBkX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E787D87846; Wed, 20 Dec 2023 22:02:18 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id D5FAF87849; Wed, 20 Dec 2023 22:02:22 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EF228787E
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:02:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C555A8787E
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:02:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5e54d40cca2so1326657b3.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:02:16 -0800 (PST)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6dbb328a238so39820a34.1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:02:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703106135; x=1703710935; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703106139; x=1703710939; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wc9kvAp21tON0hIQ0YY5OR33mB9pXTdID2VFgV3BXK0=;
- b=jmjOL2wI68FlD4IYl0+Ck/E2NWqqx9iDSy1svkxk4ohMn8dFj9A22IhxmqXFYsNSnS
- ay/TA0NJXVVp/H6ZRcxnOYEeM8jl/p4B3j7WX6AZe9pYfzfmFSJH3w/QeJGxgefFu2Za
- SSQeONHObQ+F/sC8CJmx/zPjLcd72wkX+WRfk=
+ bh=yyEBbLTyrAVJrOXInQzc2NEeXcI6ihiuieypkyQSeCw=;
+ b=iq5VyBkXyP4R6e7B7gPKp8mm4ZV9brm3q49Xs+6oWka2ZQj58vk0sMZgusO8/BJDOP
+ A5oEVzduuwome0TwK23CiFKu/qJmpKqwj3ReR4UfbEVxdiBwT5Ay9CqOhOdklhAAuLx1
+ nbrqMHnPWKGhPXym2xgHGA7oSDa14ssu1bIS0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703106135; x=1703710935;
+ d=1e100.net; s=20230601; t=1703106139; x=1703710939;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wc9kvAp21tON0hIQ0YY5OR33mB9pXTdID2VFgV3BXK0=;
- b=hlJfw5W+xFZt1YrKrC+rPPIabjuyzIw6JLLFKj66cJtyYSSL1lUNpgu0ErZqoc9McU
- VKFQC6CrPl3MJQ81fl0xLIK0e6RjsdN0OfGkr0/EjY4BH5mOcGVKJTuMkA7OX9pcuh8w
- mUT7UmIYVm7T7KVbYcEiAOK48pcxSyJi6C7AJHLxI8/lbh8Esp3ZskNSrrdM4wV/e113
- 0NmmdNGZheBpGCrhl/yE2tuH1+Aubd9NUDVvqpHodx7U8II/aeFnR/F08gLBNVeFx2Tj
- rEXZg00uN4wQOB/0m/leQPYiftOkIdgSpd+ddujaxBIeQl8Dp700SKhhZOOh4PzT36K0
- PIoA==
-X-Gm-Message-State: AOJu0YzytdzghnsS78KtKR2GGZEh7ThMUbkv4uQ/7fFsZj3W+TebZuTr
- ep01RBErk25OD6VNB++T6q6aOATMKv9vj28xz/4=
-X-Google-Smtp-Source: AGHT+IFeTbFUXiQdS17LUMgGynNaeIqPTOD3Y7+ymoOceDrKjncVbImz37faw/NxupLKh/Vtt+tgWA==
-X-Received: by 2002:a0d:da04:0:b0:5d7:1940:8df0 with SMTP id
- c4-20020a0dda04000000b005d719408df0mr289490ywe.87.1703106135225; 
- Wed, 20 Dec 2023 13:02:15 -0800 (PST)
+ bh=yyEBbLTyrAVJrOXInQzc2NEeXcI6ihiuieypkyQSeCw=;
+ b=gg+OsnshkMp0oT4XL9DWH/lZexeUGcqq497aW3SyW/KcuQ7DXr2b++W01VnfIEaPHx
+ oGaghZjpw8q4hYLw+1CUeJkiRnriC/73IP+8sa0IpTrn9eC4UxYCYf28Ce3Ao/Lx5BUO
+ 0ZYYtNFcZa4xR7IAo9lhG+8KXOfeAR4DyqCnniwSuElID2OXChEGn7IOQxPn3S4d+KZe
+ T6BEn3G9XufOevYM8ikTNRuJJLcbjOLl4durXwxB+1HQJhaFNkjU8kTlfCixxsDiO0zI
+ exHUMxmSvoGbNKuKlIbpirulR9mHl7+L3uMZ55RlaWvYpSdsrO8MGDxx8J+JWYyQnPdq
+ lhzg==
+X-Gm-Message-State: AOJu0YzMGxgPDg3gj1XaHuMa+hfBLgaNyNr9h1C1xcbAxYKDMTKq+US9
+ bsfHonYsRZWcerL5bwxdS43IEw==
+X-Google-Smtp-Source: AGHT+IF7rmcjvgd/dYsKPoOG82U6xgxqZcDRberlSeQWR/bWGz1L79GqfHnjoXvFvAYGJ4kak6CiSQ==
+X-Received: by 2002:a9d:6393:0:b0:6d8:4993:9455 with SMTP id
+ w19-20020a9d6393000000b006d849939455mr12056225otk.19.1703106139506; 
+ Wed, 20 Dec 2023 13:02:19 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
  [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
  by smtp.gmail.com with ESMTPSA id
- h206-20020a8153d7000000b005d755416307sm231986ywb.73.2023.12.20.13.02.14
+ m125-20020a0dfc83000000b005ca4e49bb54sm221126ywf.142.2023.12.20.13.02.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 13:02:14 -0800 (PST)
-Date: Wed, 20 Dec 2023 16:02:13 -0500
+ Wed, 20 Dec 2023 13:02:18 -0800 (PST)
+Date: Wed, 20 Dec 2023 16:02:17 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Simon Glass <sjg@chromium.org>, linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] pxe_utils: Increase feedback to user when fdt file is
- not found
-Message-ID: <20231220210213.GB2513409@bill-the-cat>
-References: <20231207142819.1511709-1-michael@amarulasolutions.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] cmd: part: Cover both part type entries with GUID ifdef
+Message-ID: <20231220210217.GC2513409@bill-the-cat>
+References: <20231210212522.398132-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Kd3xTHpDzc+Nn91k"
+ protocol="application/pgp-signature"; boundary="U9cMQCjbhNbCR3Ig"
 Content-Disposition: inline
-In-Reply-To: <20231207142819.1511709-1-michael@amarulasolutions.com>
+In-Reply-To: <20231210212522.398132-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,42 +92,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Kd3xTHpDzc+Nn91k
+--U9cMQCjbhNbCR3Ig
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 07, 2023 at 03:28:19PM +0100, Michael Trimarchi wrote:
+On Sun, Dec 10, 2023 at 10:25:07PM +0100, Marek Vasut wrote:
 
-> extlinux.conf can set fdtdir. fdtdir look for fdt file using
-> information found in the enviroment variable. The function does
-> not report any error in the case the file is not found
+> The 'part type' subcommand depends on GUID partition table support.
+> The help text exposes one of two 'part type' subcommand entries,
+> hide both in case GUID partition table support is not enabled to
+> avoid confusing users.
 >=20
-> Scanning for bootflows in all bootdevs
-> Seq  Method       State   Uclass    Part  Name                      Filen=
-ame
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---Kd3xTHpDzc+Nn91k
+--U9cMQCjbhNbCR3Ig
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVlQACgkQFHw5/5Y0
-tyyS+wwAnAAB0dAYNP7UzfFphG4JSCOHW4UMlv2h6I3QVSaSZhSc+wCa8+igS3eC
-MbBVF/F8k62W02ZGQGVjEsNlKyXC4G43bMoM0lAldMM50CbuC0EFAknI5byN8Q2Z
-pXeOzHfhtASnOVvFF16gQctfmMl9xUATCw93bJVwJ29V4qEbb5+y5jThKY9Fq8MC
-X4EiRpFWTOWLhfR9LlqAdNuKFdReDmI+pxDH2S4Ntf4RT7Y44TRvZeLIFOT6qfnc
-qY8oQPBWWY1zHLyuDV4z//IaMSkemfjrZ4n3hD2+0KdvulEdRRxX5XixABW91dqg
-KgKSnOgGRXiO9hmDZqQSRAj061Rc6Vm3ZOSiGAjFyVLg+6mrJIfbAYUk/e35FVi8
-N6cMmJtLcBH+DWj6SKOK0e8p7utlPQe8P/AvWdl0EJ/6P6uIWAjcHvr8RpI7zsxp
-7EssBdBolJuYrg3wDjy0mHm1c5RK7j7vVV5+XXYN9ceq2CeuYSePKWGJMP+8vypg
-yKN/HH5G
-=J/CO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVlkACgkQFHw5/5Y0
+tyz8sQv+KTb2D3nr977zAtCVv9xXS9ICIgcWVonCf3eaKpOMfEmxUsTtEdMV7524
+L9eiMVF+ZxidMAP1rFoaP3FWgWTiJNT4W9NmRptWGErKyjtMlNkPAK/B3fnedQjY
+KQC77F5jB6TRwPgPDPPp4g84PfXiC8iQgLtJM4Vk5X8SCGboJPCrPx9yPRH2Vxko
+eH/zEa/R9ERjtGBknXuoMscUTDOZfMqm9ng0SwU+SOZkKOWmj84CQKiStkJQ4bhD
+aG79IAa9Qg1EkCN7TXWmP5hCzalqMG1NJqh7JfZY9J1l+V2+2/HUOA8ioZucTSIo
+Z0TC2cknPDcHiCjAUg3i1RGLhZrtmgWmHXrqILZdYfhvdjGGrA+eQk+NqcBrrfCN
+JmSjgVW1NboYBy9IzAUDH+4nZsOWk2b2Ye5tVaT8H8gblNeok8p4xbpv3R9GYBet
+Q02oEEQcBRypY05UT28REeSKGU+kMaw/D3ISxJVrDDqkBAXbPnw5z2QHebz90ScK
+DcHZ3APy
+=v/yr
 -----END PGP SIGNATURE-----
 
---Kd3xTHpDzc+Nn91k--
+--U9cMQCjbhNbCR3Ig--
