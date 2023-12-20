@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AC9CC46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 16:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76CA7C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 17:07:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90439875B6;
-	Wed, 20 Dec 2023 17:53:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CA274876D5;
+	Wed, 20 Dec 2023 18:06:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="v1CpE84Y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="J8w37cOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16DA1876A8; Wed, 20 Dec 2023 17:53:47 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id EDA77876FF; Wed, 20 Dec 2023 18:06:58 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B678E807A7
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 17:53:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED493875FE
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 18:06:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-40d2e56f3a6so6164985e9.1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 08:53:44 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40c60dfa5bfso69022855e9.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:06:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1703091224; x=1703696024;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1703092016; x=1703696816;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=t/E3gRP8/jTLvNejTRV+pEGJwGdO8+5Qd1bnam6jWUk=;
- b=v1CpE84Y96QVgIQj/uRKBnIuwgBhv7jweYqX9JKymMc3GbIDa+oa/tHzefUF5Y34uQ
- gWSrjI+MEOvMMoqew0TLfnLa9TeZDWlHbhfWd69TBBE86bf9uEsdJRqU9XzOogqvkNU/
- 1VgpwDOODu5ahX/kIbcGGCFgaCBJh7l5g2uDR6os+rHmkDtTaD9dAvLltO0P0uZHyoyE
- f5LXR1DDPzz/kvD3VZwtSoy7I22rPvXJJUrAP8ZOdu7zbyaNGnjWbelrr1Eyfux+z+UA
- PD0XI9QmKQba1Zh9dVBEhlJbJXc4/TNYaZ0JXs91StcGWaBMTdXGkzButUP/F/0+u8oA
- UETg==
+ bh=Hw5G1KcHB1ZICBjkwbPXFo0TUZvdPlZ00SINsnvLNGo=;
+ b=J8w37cOnSivsxrDAOvKfOh1YGb8kFgw/5E46kqiwPtaLU764O3MudSe7zTsKzGMldL
+ 76znBAbCUEqP2M5tRCHhtqU2T0MRdqt2arYiRzhJwrj5lxl8TV5hEQ+v0uSI04XFAQZO
+ InI1hoHhzlsvUkz0LhE85hVDS2n1Lsp3hMJY1hR8wJxB9uV63H72/UGEPlkM6hY+/sUp
+ r8+HTA3edCWWOpJEqPqx18bW3WH5MsOzXh/yjjdNF7mn5nCt6jNhZlGYoBoc/aBI7c+L
+ urQ5GbgQZMcWcxAfZ0gs/8A4FaKCMEp0vAUESGqRRwNpWqr+2aq5tNkqZpmiXN1ryyts
+ Ib3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703091224; x=1703696024;
+ d=1e100.net; s=20230601; t=1703092016; x=1703696816;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t/E3gRP8/jTLvNejTRV+pEGJwGdO8+5Qd1bnam6jWUk=;
- b=qVue5L82fNnWuhPnxNUGVE5dy3AvoU9G3/u/pqct43J5amaIBOPgakdYlrG8LxCDpm
- PI/DfGuN85E9DXl0ivBo/JRzQPeIVm3hCYz1Yt9sPZc/TfkojR3TtCKAUy/HhQIK1D+2
- 67CuYnSxZKBFQXIW9TqB0hpbpyZE7uiZYIRIeCUDc1UN1wHHP3zI+j2hJHNtV3/L3kUz
- 79pZzCthfiAaFOrgH2CLG3/t8RupK67qxLxkdvK0Sh8YITuxsmpDnDJh3Sz7uOeUEKa2
- 5CWPBBO32WMdcdmFyTKwlSssn2uacmx5rmpckdSQrqcuLNKqpbrL6L0Tq9z//PxhE+oO
- GMCA==
-X-Gm-Message-State: AOJu0YwrKtaHdwf+YZFCrc8q5uz/XbNT850cNZtrk5oAEFQHYbjis9lP
- ngA7eWKMxK6FMv6wN+aJbHVW4A==
-X-Google-Smtp-Source: AGHT+IEBr2rSHCdx4kypSmPZIykR8i7IKOq6cvLUZeOaM44HjxyvOJmTWfsPKKGMIsefiz0l6gQYHg==
-X-Received: by 2002:a05:600c:45cd:b0:40d:2665:f11b with SMTP id
- s13-20020a05600c45cd00b0040d2665f11bmr1712961wmo.89.1703091223992; 
- Wed, 20 Dec 2023 08:53:43 -0800 (PST)
+ bh=Hw5G1KcHB1ZICBjkwbPXFo0TUZvdPlZ00SINsnvLNGo=;
+ b=puy6lkxNuM3foSgdI8BHQgCK/SdtH96Wklu3BQvijadXnRaKOcka1h3GGZzfn8cv4M
+ SII9JQsgGflUQRtdvXDNExwOZKpn7Cy4fYZiAUrUyHbx6R7OeemwTRjwMnCI1WCH9gud
+ gwx5T1FKw3JwLO8mpRBTX8auj+DePe9ghf3Bsmg30/l2ITHMS+EgjWAjHxIF0vhxlcAc
+ cZfxHnDVIK82GDWPeiT2faiqNxXlgkTU5EjaIY1A+rImOxQ1g69Q1Wksduabd3Ia/4D/
+ u80m0QuHhlFgjelRtEeoxp4UBCulk1NZ7QgxeyjgpucatsyMN+qmQnj0piqN0romjjLL
+ IMMg==
+X-Gm-Message-State: AOJu0YwC8dOIhh7VQOBOIy62R4vADVhR3h9dzTTsbNcnJncf0ywxLeWk
+ E5SmkktNYgo5ybi+dpWnXQj9Yg==
+X-Google-Smtp-Source: AGHT+IEHxG70xMqa5V++INmlrISFSnfdCj7pJtMSjYlPpr0d0CF22lLi0nz9+X53yi+pSrAvaZzQlQ==
+X-Received: by 2002:a05:600c:4e8d:b0:40c:3e98:5309 with SMTP id
+ f13-20020a05600c4e8d00b0040c3e985309mr5145wmq.98.1703092015976; 
+ Wed, 20 Dec 2023 09:06:55 -0800 (PST)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- t10-20020a05600c198a00b0040c490db950sm7927646wmq.47.2023.12.20.08.53.43
+ iw11-20020a05600c54cb00b0040b3515cdf8sm267771wmb.7.2023.12.20.09.06.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 08:53:43 -0800 (PST)
+ Wed, 20 Dec 2023 09:06:55 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Alexey Romanov <avromanov@salutedevices.com>, jpewhacker@gmail.com,
- sjg@google.com
-Cc: u-boot@lists.denx.de, kernel@salutedevices.com, Alexey Romanov
- <avromanov@salutedevices.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: Re: [PATCH v1] android_ab: don't ignore ab_control_store return code
-In-Reply-To: <20231128112636.26655-1-avromanov@salutedevices.com>
-References: <20231128112636.26655-1-avromanov@salutedevices.com>
-Date: Wed, 20 Dec 2023 17:53:42 +0100
-Message-ID: <87sf3w24tl.fsf@baylibre.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, trini@konsulko.com,
+ m-chawdhry@ti.com, bmeng.cn@gmail.com, sjg@chromium.org, afd@ti.com,
+ n-francis@ti.com, nm@ti.com
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, srk@ti.com, s-vadapalli@ti.com
+Subject: Re: [PATCH] include: env: ti: ti_common: Run
+ main_cpsw0_qsgmii_phyinit conditionally
+In-Reply-To: <20231211104209.1078892-1-s-vadapalli@ti.com>
+References: <20231211104209.1078892-1-s-vadapalli@ti.com>
+Date: Wed, 20 Dec 2023 18:06:54 +0100
+Message-ID: <87plz0247l.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -92,80 +92,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+On Mon, Dec 11, 2023 at 16:12, Siddharth Vadapalli <s-vadapalli@ti.com> wrote:
 
-Thank you for your patch.
-
-I'm looping in the Android AB reviewers and maintainers (Sam and Igor).
-
-They were not automatically add due to a stale MAINTAINERS entry[1]
-
-[1] https://lore.kernel.org/all/20231220-maintainers-fix-ab-v1-1-dd16fc5285ed@baylibre.com/
-
-On Tue, Nov 28, 2023 at 14:26, Alexey Romanov <avromanov@salutedevices.com> wrote:
-
-> ab_control_store() can return an error if writing to disk fails.
-> In this case, we have to pass the error code to the caller.
+> From: Manorit Chawdhry <m-chawdhry@ti.com>
 >
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->  boot/android_ab.c | 18 ++++++++++++++++--
->  1 file changed, 16 insertions(+), 2 deletions(-)
+> The main_cpsw0_qsgmii_phyinit command is defined only for certain TI
+> SoCs which have the do_main_cpsw0_qsgmii_phyinit variable set.
 >
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index 73b55c196c..5a3152dd53 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -337,7 +337,15 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->  
->  	if (store_needed) {
->  		abc->crc32_le = ab_control_compute_crc(abc);
-> -		ab_control_store(dev_desc, part_info, abc, 0);
-> +		ret = ab_control_store(dev_desc, part_info, abc, 0);
-> +		if (ret < 0) {
-> +#if ANDROID_AB_BACKUP_OFFSET
-> +			free(backup_abc);
-> +#endif
-> +			free(abc);
-> +			log_err("ANDROID: failed to store boot control block: %d\n", ret);
-
-There is no point in logging here, because ab_control_store() already
-logs:
-
-	ret = blk_dwrite(dev_desc, part_info->start + abc_offset, abc_blocks,
-			 abc);
-	if (IS_ERR_VALUE(ret)) {
-		log_err("ANDROID: Could not write back the misc partition\n");
-		return -EIO;
-	}
-
-> +			return ret;
-> +		}
->  	}
->  
->  #if ANDROID_AB_BACKUP_OFFSET
-> @@ -346,8 +354,14 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->  	 * to the backup offset
->  	 */
->  	if (memcmp(backup_abc, abc, sizeof(*abc)) != 0) {
-> -		ab_control_store(dev_desc, part_info, abc,
-> +		ret = ab_control_store(dev_desc, part_info, abc,
->  				 ANDROID_AB_BACKUP_OFFSET);
-> +		if (ret < 0) {
-> +			free(backup_abc);
-> +			free(abc);
-> +			log_err("ANDROID: failed to store boot control block: %d\n", ret);
-
-Same here
-
-With that addressed:
+> Add a check to ensure that the main_cpsw0_qsgmii_phyinit command is run
+> only for such SoCs.
+>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-> +			return ret;
-> +		}
->  	}
->  	free(backup_abc);
+> ---
+>
+> Hello,
+>
+> This patch is based on commit
+> 65eed68772 test/py: Disable error E0611 in two cases for pylint
+>
+> Regards,
+> Siddharth.
+>
+>  include/env/ti/ti_common.env | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index f5d84216e3..f0f89a2287 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -25,7 +25,10 @@ run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+>  bootcmd_ti_mmc=
+>  	run findfdt; run init_${boot};
+>  #if CONFIG_CMD_REMOTEPROC
+> -	run main_cpsw0_qsgmii_phyinit; run boot_rprocs;
+> +	if test ${do_main_cpsw0_qsgmii_phyinit} -eq 1;
+> +		then run main_cpsw0_qsgmii_phyinit;
+> +	fi
+> +	run boot_rprocs;
 >  #endif
+>  	if test ${boot_fit} -eq 1;
+>  		then run get_fit_${boot}; run get_fit_overlaystring; run run_fit;
 > -- 
-> 2.39.2
+> 2.34.1
