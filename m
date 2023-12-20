@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AE5C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 122B5C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04D8786FFE;
-	Wed, 20 Dec 2023 10:00:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A9A38760D;
+	Wed, 20 Dec 2023 10:01:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1619D86DEE; Wed, 20 Dec 2023 10:00:56 +0100 (CET)
-Received: from 7.mo584.mail-out.ovh.net (7.mo584.mail-out.ovh.net
- [178.33.253.54])
+ id 083798765B; Wed, 20 Dec 2023 10:01:22 +0100 (CET)
+Received: from 5.mo550.mail-out.ovh.net (5.mo550.mail-out.ovh.net
+ [178.33.45.107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9944687480
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:00:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AB318761C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director4.ghost.mail-out.ovh.net (unknown [10.108.25.156])
- by mo584.mail-out.ovh.net (Postfix) with ESMTP id 0BBBF289D9
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:00:50 +0000 (UTC)
+Received: from director4.ghost.mail-out.ovh.net (unknown [10.108.9.73])
+ by mo550.mail-out.ovh.net (Postfix) with ESMTP id C6D9B26B27
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:01:18 +0000 (UTC)
 Received: from ghost-submission-6684bf9d7b-8n8c9 (unknown [10.111.182.166])
- by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 164D21FE94;
- Wed, 20 Dec 2023 09:00:50 +0000 (UTC)
+ by director4.ghost.mail-out.ovh.net (Postfix) with ESMTPS id ED18C1FED4;
+ Wed, 20 Dec 2023 09:01:17 +0000 (UTC)
 Received: from armadeus.com ([37.59.142.97])
  by ghost-submission-6684bf9d7b-8n8c9 with ESMTPSA
- id jDdyAEKtgmXqFQAA+qPHTg
+ id 4MM7NF2tgmXqFQAA+qPHTg
  (envelope-from <sebastien.szymanski@armadeus.com>);
- Wed, 20 Dec 2023 09:00:49 +0000
+ Wed, 20 Dec 2023 09:01:17 +0000
 Authentication-Results: garm.ovh; auth=pass
- (GARM-97G0024a5eb072-6ccb-4b1a-9261-c667a59cfd72,
+ (GARM-97G0027aff7159-53ee-45f6-97a9-5694e135af5a,
  CCF55E9A36CE62B71F09469834F038924BAB166A)
  smtp.auth=sebastien.szymanski@armadeus.com
 X-OVh-ClientIp: 92.148.253.243
@@ -46,17 +46,19 @@ Cc: Simon Glass <sjg@chromium.org>, Le Jin <le.jin@siemens.com>,
  Heiko Schocher <hs@denx.de>, Jesse Taube <mr.bossman075@gmail.com>,
  Eduard Strehlau <eduard@lionizers.com>,
  =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
-Subject: [PATCH 1/1] Makefile: pass -ansi option to cmd_gen_envp
-Date: Wed, 20 Dec 2023 09:59:54 +0100
-Message-ID: <20231220085955.25561-1-sebastien.szymanski@armadeus.com>
+Subject: [PATCH v2 1/1] Makefile: pass -ansi option to cmd_gen_envp
+Date: Wed, 20 Dec 2023 09:59:55 +0100
+Message-ID: <20231220085955.25561-2-sebastien.szymanski@armadeus.com>
 X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20231220085955.25561-1-sebastien.szymanski@armadeus.com>
+References: <20231220085955.25561-1-sebastien.szymanski@armadeus.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 12484541119409613803
+X-Ovh-Tracer-Id: 12492422416434195435
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrvdduuddguddviecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnheptdevkeeuhfdtvdevkeegffegveduleehvdetkeegtdekjeefhfettdfggedviefgnecuffhomhgrihhnpehgnhhurdhorhhgnecukfhppeduvdejrddtrddtrddupdelvddrudegkedrvdehfedrvdegfedpfeejrdehledrudegvddrleejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheekgedpmhhouggvpehsmhhtphhouhht
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrvdduvdcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnhepudevgfevlefghfelteevvefhieekudfhfeeuvdegudeludejkeefffeffeffueelnecuffhomhgrihhnpehgnhhurdhorhhgnecukfhppeduvdejrddtrddtrddupdelvddrudegkedrvdehfedrvdegfedpfeejrdehledrudegvddrleejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheehtddpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,24 +85,30 @@ becomes
 
 kernelimg=opos6ul-1 .bin
 
-in the include/generated/env.in.
+in the include/generated/env.in file.
 
 That's because 'linux' is a System-specific Predefined Macros. [1]
 
 Pass the '-ansi' option as suggested by the GCC documentation. [1]
-Fix the two .env files using C++ comment style for their SPDX licence.
+The option "disables recognition of C++ style ‘//’ comments" [2] so fix the
+two .env files using C++ comment style for the SPDX licence.
 
 [1] https://gcc.gnu.org/onlinedocs/gcc-13.2.0/cpp/System-specific-Predefined-Macros.html
+[2] https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html#index-ANSI-support
 
 Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
 ---
+
+Changes for v2:
+ - explain the change of iot2050.env and smegw01.env in the commit log
+
  Makefile                            | 3 ++-
  board/siemens/iot2050/iot2050.env   | 2 +-
  board/storopack/smegw01/smegw01.env | 2 +-
  3 files changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 750bbdb1b713..5fc7a20df7f0 100644
+index 220411a293f4..6703646d48a4 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1803,7 +1803,8 @@ ENV_FILE := $(if $(ENV_SOURCE_FILE),$(ENV_FILE_CFG),$(wildcard $(ENV_FILE_BOARD)
