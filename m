@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EC78C46CCD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3141FC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 066EF86FFE;
-	Wed, 20 Dec 2023 10:07:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8081087480;
+	Wed, 20 Dec 2023 10:17:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="hhqQ2UIE";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nY0zgoxI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD64487480; Wed, 20 Dec 2023 10:07:44 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 0721A8755B; Wed, 20 Dec 2023 10:17:23 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44FE786FD5
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:07:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1348886FD5
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:17:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703063260; x=1703668060; i=xypron.glpk@gmx.de;
- bh=v1L/0pO1HP+Hr/C63N5T0WKpxS+2ui26qq45eJgVJXE=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=hhqQ2UIEWqxaVI/ZAyv/tB/fLTB/Bo8UrrjJSTI48o7t5aXyTWGAwtOGkp86AktV
- NKzhH4wVcQ2zab1HCafIibAcmZ1LuOLLBKany9gjIZiH/8l3Jgterpd2FfffLeRXi
- Tq8Aa18704PNv/lt4xRkWCvwmd/bidgsAqPpMRQ7W2RTgQ25UoEkDRlcaReSGgqh4
- QfqXTWfKhLkvLIHpniSchIP6sCaTRE8roVm46N2HooixxvEaucWFI8oJH2cWx1w/h
- qA0uJsgkP+m+k7Q23hgJy3BOW20LPD7iRcwpyCPN5eOmfGBSRJdPeUCsZPM3b81sB
- VasAfvPjJV8zW1M2JQ==
+ t=1703063839; x=1703668639; i=xypron.glpk@gmx.de;
+ bh=Yleul7H8+nbGr2Pb71l9zNbLTcykMWHCsXgYfiv+dLU=;
+ h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References;
+ b=nY0zgoxIvzpDrkTvIPDt6TLVGY/3noQ7H1iqd6z6VO4mrg+2i9yxoYen1X3PFGzu
+ 9CfryNQgA2TkwyQAfS47DM8TU4+f5DgaTA34JxzVcZttPKobPrwi0Qa7Jn9yG0NjC
+ xv8f4hGcXmiZh8JaS62zfsimzdzzPWSviPfMJcUlX/bzJjhE45lT61SYVUScWlr9A
+ +/FU9dAejaLNowfBVfzB2C/b2Xb9SwK3U/sRVHz78pwtGkpoNNHd6R/F8rgFvbtzJ
+ zP7QYAD8sxUIuEOCXKMuomxgc6K1wROmkflVjm5PoCvDluX0LSBMU0XoXF5cR+JeD
+ jeIBO8j6026DkUH1/w==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MUXpQ-1rgJMy1mRU-00QVVw; Wed, 20
- Dec 2023 10:07:40 +0100
-Date: Wed, 20 Dec 2023 10:07:39 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MSc1B-1rinSQ1CDR-00Sz7n; Wed, 20
+ Dec 2023 10:17:19 +0100
+Date: Wed, 20 Dec 2023 10:17:18 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-CC: AKASHI Takahiro <takahiro.akashi@linaro.org>, trini@konsulko.com,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 4/4] fs: remove explicit efi configuration dependency
+To: Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ trini@konsulko.com, ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3_3/4=5D_net=3A_tftp=3A_remove_?=
+ =?US-ASCII?Q?explicit_efi_configuration_dependency?=
 User-Agent: K-9 Mail for Android
-In-Reply-To: <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
+In-Reply-To: <CAPnjgZ222JWVWws04Tk93QommHXY6=qJFfiQfosYs5FG4JVGrA@mail.gmail.com>
 References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-5-takahiro.akashi@linaro.org>
- <CAPnjgZ0vq6kxiBNOwbi1JyMxV44S46uKXd1vbPNHFX5nwYLVtQ@mail.gmail.com>
- <14EA5E9B-23EB-4BD5-ACA9-7CEA6BC35453@gmx.de>
- <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
-Message-ID: <AB97A043-AFAB-4814-AA62-AB8514ED51C2@gmx.de>
+ <20231218023842.281336-4-takahiro.akashi@linaro.org>
+ <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
+ <ZYDhClYupQxNJ++a@octopus>
+ <CAPnjgZ222JWVWws04Tk93QommHXY6=qJFfiQfosYs5FG4JVGrA@mail.gmail.com>
+Message-ID: <CD73D0D7-1040-4AD9-B5CD-741146DE0C34@gmx.de>
 MIME-Version: 1.0
 Content-Type: text/plain;
  charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:j9KS37dN2NsmuIRwkIrtLdhlIA9Mtkndj7r3X6G2YaFIcTSVTgE
- KTRFM0HIhoYaDam9sGMK0F6c8iLtKatr3S8GvMWKog7JZ9G0pRFWt2rJvEd6sHySuDneT6M
- WwFwwG8963RwZocbMBxz7U1cUFtb8PGtg+e6RS33ABO6WWZMXjXctU6vKxmlWdtuG23aeip
- 0eku6osIIDCB/ymNn8V/Q==
-UI-OutboundReport: notjunk:1;M01:P0:oTr4NG0+AxM=;hh1/l08ziyNNFcJ0NM08BrAdCng
- +VfK3h3f2wwoBapYJ32mW4d9aDrK7mFs9dcHtQYq0bcJEfN1cfvVgQccM0AZ5mIUJwemgZpc8
- XhCvQgTITI7f3uAnT9gB39WAM8y/SNJBXnlWLYO+n3LGC9qB6TszKtN/QlkcLNfz4tcK1LceM
- px9ZYcsnDpk6/zOAygDncHRy6JFyZJ35h1ikvlvOe3HT3SToQwdSrK1YHkjWs75Rezntiz6DP
- stt+Kqj9OLbXxrT4fMu4n7lm0k2m/9XbZaCFhqQh+zHCBL3L8Nf6AFxeClZKmNV8o0q4yba8s
- EFLVhzeX0LTzP/y+3lPqAjUoXhXFt3vFbaTbhShqr8RI6qpDuKQKvfIW+7FK+EKyYiTKz2r4/
- zqqvQ4NaaY4E+K0+Ut1ykGBH+cNxAVmol9kPii4ATfaLA852ZKnSaTjsLxc9Qu1KMQ+Q+HFRB
- nyRibKis37Mha2Qi3D7SeVurRDVbX5akF11/WPGhnL0mzvcxnlfyc0j4CffLa41MDC4BnHafe
- RJbEe74g+mtyx6SS6r2cWVdruK7GNkYIg9IiXPYzXGzrHEcWX4M5WJbq9kXwvj2YBUPblzBU0
- tLVqb7O8lf82L8OPeh0ZLQWPWRKTOprCHcVYshFUEoXvqbH/cz+VTXcf8/Zf8cGccIXcO+8MX
- XQHfeEglB994aNWnJpApGmKc+Fp80CEfsvqJ7gubo3x5QC3v+vki3vh/IQ10IDIhPDjmT6SRi
- wzTmOklsuZNF6wZQ5/XF73iHJJd4MvezjhjBy0cp+jopLt5L23nY/SBDi0ztzKjQCQPgyfKzH
- BaMrPuAlS+mHhAGseWcwEN1NRRQX7sbV6l3XBKDsndMC0hNocrgK1+Ohoafd5WDff/Au16MqZ
- mACeu5UbBhlDanhnN0mLGfpuqe7jw7oIpGH4fjHvpdU5YLGkmY2Mq4IUe8rVBcgiE6U/TJFO1
- Z84ALQ==
+X-Provags-ID: V03:K1:MDY+UkNrxVBSvtSr5lfg588aNduYmqFPk9+tNyrsG4NDZnOg0Fh
+ N6Mjukt4eajd6w1LfBBrvpVZpfgu20KeGEr3RIgv+4pNpLRwe2KaG5jXsZG2Xmw6H69ub+N
+ ds1/HTXO+JRe3SMeZjmOcaAfyOEwCjtDrtd5bmN1NywVV2t5O85Ga2ezWYqcBsk+NLFt4jd
+ ooFneqUvh48mumtjv1L5Q==
+UI-OutboundReport: notjunk:1;M01:P0:RZsmnz9fRIA=;BDFuUHxLhuPLUsimwu3/9Cpzor/
+ Xb8x8xzpIO+69IrSY0xQhpfNnCZRjkQ8UGNxQ88MVs3xKhXRJKp6aCSX8cmW+Vc2ZQWjryxSn
+ uI56oJmvKLdgEgZ5ylmQCS7AEwWBfe0YrxZ/jYLhPQlnItXVn5tuiGrxDoYgC4QspCEC23+0X
+ KZEvSlvGGQNlncjKMzXwAk0Y8cw2607pVYe1mZqITQ1px+NDdgwk/8j6rNciIFHtLCOxk88+Z
+ Kw8l6yJ0q5Oy2YJ67/4KlscH/5C9REM1Sk8whlXsT22/1EL1mOK6ZOmOeNaBuf1tbcps4cwmu
+ O4FCM+G6XhNbSMJDfSShhA+1DKtqmQSu5DHJ/XtzPz1wLUV9c8M60l0TBEUSMHaaD6kaz7VNI
+ cOaXHam2j/WG+aplj09e8u7VEhbAK6KDmFPzs5JtBW1u2FpuR3fvwnRBAK5GO8vbwqHB4JC5I
+ Y+4/Ln5YSKKcJhX+YRZUUR2oasi0BROqKY8NDISaoHmqiML5ecsmb0Xx4+wCoRwQ3Kir5JCc2
+ R8pxczRT1O/H9gMzQd/k/weSYYJznRClUuF5ZgZVuskzNHBPOAhMbgqJ4MfOaLPEOSBMrgJun
+ xyvyaU1FZmeAlRrOQwcpJKklqTd5BxpTGyUMkb0yw8U4QXC2/hGQ9hqepT1Rh4DI3kzkSr7rA
+ JE98iYTW0PDdwZ8JiZ1VADmPXIDWSuz1ldCJ7EI9NS34w98YYaIqjT5T9iWJEGtqt8GOgyAvU
+ FR1h5cVIBnGTICqdYCTeT9WZPVdeNGU1/mvwnx6dMWqbYs89yJd8rrcKcZBo7x1onqcpp0v2j
+ I7LMyLAiEULfLRbDoqRZzmnRnPQ9Olt4r43Byt07UomtU4+VLRakbXcX1usTZFBlNR+e9tIx1
+ +mD+b6ZQDIUygwRBdmT82DpfjcmAobG2QeJy8Kd9NnojvpE/tfPzy6HwRj/Nyv5El4/+jwwZD
+ oFxG+g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,84 +95,98 @@ X-Virus-Status: Clean
 
 
 
-Am 20=2E Dezember 2023 05:46:27 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
+Am 20=2E Dezember 2023 05:46:16 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
 g>:
->Hi Heinrich,
+>Hi,
 >
->On Mon, 18 Dec 2023 at 15:16, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede=
-> wrote:
+>On Mon, 18 Dec 2023 at 17:17, AKASHI Takahiro
+><takahiro=2Eakashi@linaro=2Eorg> wrote:
 >>
+>> Hi Simon,
 >>
->>
->> Am 18=2E Dezember 2023 16:01:40 MEZ schrieb Simon Glass <sjg@chromium=
-=2Eorg>:
->> >Hi AKASHI,
+>> On Mon, Dec 18, 2023 at 08:01:46AM -0700, Simon Glass wrote:
+>> > Hi AKASHI,
 >> >
->> >On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
->> ><takahiro=2Eakashi@linaro=2Eorg> wrote:
->> >>
->> >> Now it is clear that the feature actually depends on efi interfaces,
->> >> not "bootefi" command=2E efi_set_bootdev() will automatically be nul=
-lified
->> >> if necessary efi component is disabled=2E
->> >>
->> >> Signed-off-by: AKASHI Takahiro <takahiro=2Eakashi@linaro=2Eorg>
->> >> ---
->> >>  fs/fs=2Ec | 7 +++----
->> >>  1 file changed, 3 insertions(+), 4 deletions(-)
->> >>
->> >> diff --git a/fs/fs=2Ec b/fs/fs=2Ec
->> >> index f33b85f92b61=2E=2E82ee03b160e9 100644
->> >> --- a/fs/fs=2Ec
->> >> +++ b/fs/fs=2Ec
->> >> @@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, in=
-t argc, char *const argv[],
->> >>                 return 1;
->> >>         }
->> >>
->> >> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
->> >> -               efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
->> >> -                               (argc > 4) ? argv[4] : "", map_sysme=
-m(addr, 0),
->> >> -                               len_read);
->> >> +       efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
->> >> +                       (argc > 4) ? argv[4] : "", map_sysmem(addr, =
-0),
->> >> +                       len_read);
+>> > On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+>> > <takahiro=2Eakashi@linaro=2Eorg> wrote:
+>> > >
+>> > > Now it is clear that the feature actually depends on efi interfaces=
+,
+>> > > not "bootefi" command=2E efi_set_bootdev() will automatically be nu=
+llified
+>> > > if necessary efi component is disabled=2E
+>> > >
+>> > > Signed-off-by: AKASHI Takahiro <takahiro=2Eakashi@linaro=2Eorg>
+>> > > ---
+>> > >  net/tftp=2Ec | 10 ++++------
+>> > >  1 file changed, 4 insertions(+), 6 deletions(-)
+>> > >
 >> >
->> >As I understand it, this is setting the boot device so that (if it
->> >happens to be an efi application) it will know which device it came
->> >from=2E But this is a hack=2E For bootstd, the device is known as it l=
-oads
->> >the kernel=2E
->>
->> Please, consider what happens when the user interactively executes the =
-load and bootefi command from the console=2E
->>
+>> > I have the same comment here as the 'fs' patch=2E
 >> >
->> >Also it does not deal with memory allocation (nor can it)=2E
+>> > > diff --git a/net/tftp=2Ec b/net/tftp=2Ec
+>> > > index 88e71e67de35=2E=2E2e335413492b 100644
+>> > > --- a/net/tftp=2Ec
+>> > > +++ b/net/tftp=2Ec
+>> > > @@ -302,12 +302,10 @@ static void tftp_complete(void)
+>> > >                         time_start * 1000, "/s");
+>> > >         }
+>> > >         puts("\ndone\n");
+>> > > -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
 >> >
->> >Where are we using the 'load' command to load a kernel? The distro
->> >scripts are deprecated=2E
+>> > Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
+>> > is not enabled?
 >>
->> Some users use boot=2Escr scripts
+>> The trick is in efi_loader=2Eh=2E
+>> If EFI_LOADER (more specifically CONFIG_EFI_BINARY_EXEC) is not defined=
+,
+>> this function gets voided=2E  See patch#1 in this version=2E
 >>
->>
->> >
->> >At some point this code should be removed=2E Is it too early for that?
->>
->> Yes, as long as we allow users to invoke the bootefi command with an ad=
-dress pointer=2E
+>> I took this approach in order not to make users much worried about
+>> what config be used as they are not familiar with UEFI implementation=
+=2E
 >
->So how about we create the new path, with the info passed in as part
->of the bootefi call? Then we can remove the call from bootstd, at
->least=2E
+>OK, but we really need to delete this function, so what is the plan
+>for that? The info that EFI needs should be passed to the bootefi()
+>function, not set in a global=2E
 
 Hello Simon,
 
-Do you see a problem merging the current patch? Or are you talking about w=
-hat we might do after this patch?
+Bootstd is not the only way to boot=2E Please, do not forget the shell=2E
+
+The user loads a file with tftpboot=2E At some later moment the user execu=
+tes bootefi=2E
+
+We need a place where we store the device from which the image was loaded=
+=2E
+
+In future we might have a register of loaded files=2E But that is beyond t=
+he scope of this patch series=2E
 
 Best regards
 
 Heinrich
+
+>
+>
+>>
+>> -Takahiro Akashi
+>>
+>> > > -               if (!tftp_put_active)
+>> > > -                       efi_set_bootdev("Net", "", tftp_filename,
+>> > > -                                       map_sysmem(tftp_load_addr, =
+0),
+>> > > -                                       net_boot_file_size);
+>> > > -       }
+>> > > +       if (!tftp_put_active)
+>> > > +               efi_set_bootdev("Net", "", tftp_filename,
+>> > > +                               map_sysmem(tftp_load_addr, 0),
+>> > > +                               net_boot_file_size);
+>> > >         net_set_state(NETLOOP_SUCCESS);
+>> > >  }
+>> > >
+>> > > --
+>> > > 2=2E34=2E1
+>
+>Regards,
+>Simon
