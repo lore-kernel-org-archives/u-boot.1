@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34961C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 11:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B73C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 11:28:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8269687620;
-	Wed, 20 Dec 2023 12:26:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8988187600;
+	Wed, 20 Dec 2023 12:28:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lWTS3dKj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LnjmeTFn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67996876E9; Wed, 20 Dec 2023 12:26:35 +0100 (CET)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
+ id 74E68876FF; Wed, 20 Dec 2023 12:28:04 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AEB987509
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:26:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3038F87620
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:28:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-7cac4a9faccso1413757241.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 03:26:33 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5e7f0bf46a2so14162627b3.1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 03:28:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703071592; x=1703676392; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703071681; x=1703676481; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LilU9MTXpQFvcRtIxC4+1nN1E0nnvpiW3FEndOqTiVk=;
- b=lWTS3dKjnf/BUVmrFQCNDDQ2GgqxQNynd6KvlGjNdKpw1Mkp55hagTnxM4sRz7QvOy
- 1kBBpwgF9WOG7Dj3uPTzcPd4TtPfEH1dqMV18S4uVr2QPYK7J8kwJAmwwYVuWaA5aoNr
- mU3o21wbKhfwm68Gk7VuwCtSuzzoq8ayCOAZRDsvX65+Il4zNXDI1heDHMtv30nK7Ejf
- Okyc82mqv4grsK158mgWvXjoQwOpRv+PWfnLkm5Rl+rmEmSh9y4xZ7l6lVGLhdWFhnSe
- JtvsEiRBq3qFG7M6vUCg2guaHYyYjuY6SsheSAKgKqr3g7TeCWjt79rFx1CsPXn//fn7
- /yXg==
+ bh=vfDLIE52bS8HvDhc6h/xvsuBlhtPG04nzterLLUGczo=;
+ b=LnjmeTFnCniTYnYNesRV0pG8TB9nf6P1sMYHNqkVx8pYlskeMrK5prbqqX7HjOzbCZ
+ ixD05ziLJSffdvsShT8QE4En266uNPV30k4qwJYRvccbThDar+BRNRoE5G9aVrw0RAfI
+ aCLidXnuaJm/ePfvJRCawYP3Fsz0hrd1bxPzHgafPebzE8X0KRRKg4LS3RtQ+3Z/DlWI
+ UhA/GTJm3PEUUy8UDwn1gaV6S/blR6JEoMQIIXDehiPfih2rdQkSXhgRA+/Yr5lYp3fp
+ 6bFtkgoauov+4sB5C9/Ma5y3CFJxkGkWwXSC2mDXfjtBnwfaLhSjlanM/GfFzs60Ao0C
+ b2KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703071592; x=1703676392;
+ d=1e100.net; s=20230601; t=1703071681; x=1703676481;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LilU9MTXpQFvcRtIxC4+1nN1E0nnvpiW3FEndOqTiVk=;
- b=UZ5hVNS+XMEwTiBiP+qP1z2akeZ28Z/x0+Yy3gH9jTLP9LjXtLsO4YILwAgJCj3krj
- 8waw5jmxAAy4BT9j3eqILDC9m9D+l2Ca9y5AmssKzpcwwIqj3TZFYhRDEDI9evkukN/K
- N4L39/Rl+OAMzRisIoIpIgtsc5HWqscgTjkLnAPoVAnxqtwtmYs4S7ky1H1qkGg6tNHu
- kxI3oEvsok4fOFxfyVhfxwO3nWiqbRpi4H418r9+o6In2nRdtYVhGKENuAGQgOYQmMan
- YulYNc6Vv9tdcLWgSh2QeU/+a0dVTY43dpmshf92rgAzKf2xjIR1p3xgKeqmISIDwiCS
- zHpw==
-X-Gm-Message-State: AOJu0Yz2AGt/T+n1OVC44venjWZL4tmTBSSBhBiYiVfv72Y1D9LbKIYb
- qfGWbOb6+UFQHYD2qU+h7nY5lTHfL+H98UxINjbO3w==
-X-Google-Smtp-Source: AGHT+IEQD5Mzukt5P428mdL46BkVUeHxSkiIXEnGI6LEgACV3Aw9rXHqG/BSxrCcNEj9wRanZzV+mnRsjrtZxtV8GF0=
-X-Received: by 2002:a05:6102:3706:b0:464:89f2:801e with SMTP id
- s6-20020a056102370600b0046489f2801emr16409275vst.29.1703071592006; Wed, 20
- Dec 2023 03:26:32 -0800 (PST)
+ bh=vfDLIE52bS8HvDhc6h/xvsuBlhtPG04nzterLLUGczo=;
+ b=VMJpZM+i+BmWTcAr/m5eJvHvYTtMDH5U8LcMnIV+JoHX99LIFUyy+35KtHf+8SwmAF
+ 5yWFDo3ycAeRIm8ZtET3hl4PfXM8sRaRvLB8ADQ00Wpnokz7yLK9aIVKea71t+4Mx9K+
+ u/uiafUeUHpevZK5xUjiBDfJfxb5niSOjAcaGgiml8p7sUdWWcCkeeA8fbDVqEMR5z0F
+ uvaf2cmgPW4rdNiCPBPL+5l8ovKPLOBA6T6HqtBtgCfCN7mvwjAg8r9etRRBT/mVMwXD
+ fdpRlyDSXm/f21OfE/+5ytWA0Z5juoW1z/2pKKgvG899/qLJvkx4/HB/j70qnEjoennT
+ VDJQ==
+X-Gm-Message-State: AOJu0YwmHJ7WcWz2HqnstzV4Qtd2n6Wf2zZ74HeX/0GuhN3y8yrVTTPD
+ qYez11bOY5eC/OT9dJORJ/kF+246BEtechWyeIQHug==
+X-Google-Smtp-Source: AGHT+IF/qoQCEJYf7aDwidLASTj7RR73NkX9AgNDY+/8Bv0rigRpTUvDHOzXlpsN2vKzS4i0Ez5rEcBMhBVy5wG0rx8=
+X-Received: by 2002:a0d:d882:0:b0:5e7:e1da:53eb with SMTP id
+ a124-20020a0dd882000000b005e7e1da53ebmr1699134ywe.88.1703071680937; Wed, 20
+ Dec 2023 03:28:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-2-sumit.garg@linaro.org>
- <20231214142713.GZ2513409@bill-the-cat>
- <CAFA6WYNNpTeaPkrZiHHYChQ2EnFByH6DyeqfCn5=c0+C452Shg@mail.gmail.com>
- <CAPnjgZ0jzaNUmvUEQVAGdtv1_UKO=_VHJ8HtkofJXu6gFBVXXA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0jzaNUmvUEQVAGdtv1_UKO=_VHJ8HtkofJXu6gFBVXXA@mail.gmail.com>
+ <20231214135103.1606605-3-sumit.garg@linaro.org>
+ <CAPnjgZ2v5WZ4aEOTqrGB7mxdmVAMYsHc8A7+YgUKubL51dp9WQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2v5WZ4aEOTqrGB7mxdmVAMYsHc8A7+YgUKubL51dp9WQ@mail.gmail.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 20 Dec 2023 16:56:20 +0530
-Message-ID: <CAFA6WYOA7umuYv08aqVSS_PgXA7t+hGB7TaH=xLQrm8-s-Gv4g@mail.gmail.com>
-Subject: Re: [PATCH 1/8] Azure CI: Exclude devicetree-rebasing subtree for
- CONFIG checks
+Date: Wed, 20 Dec 2023 16:57:49 +0530
+Message-ID: <CAFA6WYPWVf+=Y5fLnhFJHsfZoqb6w8rvLOb_=G5zzU858B67pw@mail.gmail.com>
+Subject: Re: [PATCH 2/8] Makefile: Add support for DT bindings schema checks
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
  krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
  neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
  daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
@@ -102,42 +98,123 @@ On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sumit,
 >
-> On Thu, 14 Dec 2023 at 07:46, Sumit Garg <sumit.garg@linaro.org> wrote:
+> On Thu, 14 Dec 2023 at 06:51, Sumit Garg <sumit.garg@linaro.org> wrote:
 > >
-> > On Thu, 14 Dec 2023 at 19:57, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Dec 14, 2023 at 07:20:56PM +0530, Sumit Garg wrote:
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > ---
-> > > >  .azure-pipelines.yml | 3 ++-
-> > > >  1 file changed, 2 insertions(+), 1 deletion(-)
-> > > >
-> > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > > > index d6f3fa423c6..f100c4493e6 100644
-> > > > --- a/.azure-pipelines.yml
-> > > > +++ b/.azure-pipelines.yml
-> > > > @@ -65,7 +65,8 @@ stages:
-> > > >        # have no matches.
-> > > >        - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-> > > >                    :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
-> > > > -                  :^include/linux/kconfig.h :^tools/ && exit 1 || exit 0
-> > > > +                  :^include/linux/kconfig.h :^tools/ :^devicetree-rebasing/ &&
-> > > > +                  exit 1 || exit 0
-> > > >
-> > > >    - job: docs
-> > > >      displayName: 'Build documentation'
-> > >
-> > > The GitLab tests needs an equivalent change.
-> > >
+> > This adds the build infrastructure for checking DT binding schema
+> > documents and validating dtb files using the binding schema. Here we use
+> > devicetree-rebasing directory to provide the DT bindings.
 > >
-> > Sure I will do that in the next spin of this patch-set, thanks for catching it.
+> > Dependency:
+> > -----------
+> >
+> > The DT schema project must be installed in order to validate the DT schema
+> > binding documents and validate DTS files using the DT schema. The DT schema
+> > project can be installed with pip::
+> >
+> >     pip3 install dtschema
+> >
+> > Note that 'dtschema' installation requires 'swig' and Python development
+> > files installed first. On Debian/Ubuntu systems::
+> >
+> >     apt install swig python3-dev
+> >
+> > Testing:
+> > --------
+> >
+> > Build dts files and check using DT binding schema:
+> > $ make dtbs_check
+> >
+> > Optionally, DT_SCHEMA_FILES can be passed in with a schema file(s) to
+> > use for validation. This makes it easier to find and fix errors
+> > generated by a specific schema.
+> >
+> > Note, at this point dtbs_check is an optional build target as there are
+> > many warnings generated due to custom DT properties used by many
+> > platforms in u-boot. It is expected with these checks that compliance
+> > with DT bindings to take place. Once that's done it can be added to CI
+> > builds to remain compliant with DT bindings.
+> >
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  Makefile             | 20 ++++++++++++++++++--
+> >  scripts/Makefile.lib | 17 +++++++++++++++--
+> >  2 files changed, 33 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index 750bbdb1b71..d8d168cd4c3 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -1158,12 +1158,28 @@ endif
+> >         @# disabling OF_BOARD.
+> >         $(call cmd,ofcheck,$(KCONFIG_CONFIG))
+> >
+> > -PHONY += dtbs
+> > +PHONY += dtbs dtbs_check
+> >  dtbs: dts/dt.dtb
+> >         @:
+> > -dts/dt.dtb: u-boot
+> > +dts/dt.dtb: dtbs_prepare u-boot
+> >         $(Q)$(MAKE) $(build)=dts dtbs
+> >
+> > +dtbs_prepare: prepare3
+> > +
+> > +ifneq ($(filter dtbs_check, $(MAKECMDGOALS)),)
+> > +export CHECK_DTBS=y
+> > +endif
+> > +
+> > +ifneq ($(CHECK_DTBS),)
+> > +dtbs_prepare: dt_binding_check
+> > +endif
+> > +
+> > +dtbs_check: dt_binding_check dtbs
+> > +
+> > +DT_BINDING_DIR := devicetree-rebasing/Bindings
+> > +dt_binding_check: scripts_dtc
+> > +       $(Q)$(MAKE) $(build)=$(DT_BINDING_DIR) $(DT_BINDING_DIR)/processed-schema.json
+> > +
+> >  quiet_cmd_copy = COPY    $@
+> >        cmd_copy = cp $< $@
+> >
+> > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> > index 16bbc277a9f..27b9437027c 100644
+> > --- a/scripts/Makefile.lib
+> > +++ b/scripts/Makefile.lib
+> > @@ -356,8 +356,21 @@ endif
+> >
+> >  dtsi_include_list_deps = $(addprefix $(obj)/,$(subst $(quote),,$(dtsi_include_list)))
+> >
+> > -$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) FORCE
+> > -       $(call if_changed_dep,dtc)
+> > +ifneq ($(CHECK_DTBS),)
+> > +DT_CHECKER ?= dt-validate
+> > +DT_CHECKER_FLAGS ?= $(if $(DT_SCHEMA_FILES),-l $(DT_SCHEMA_FILES),-m)
+> > +DT_BINDING_DIR := devicetree-rebasing/Bindings
+> > +DT_TMP_SCHEMA := $(objtree)/$(DT_BINDING_DIR)/processed-schema.json
+> > +
+> > +quiet_cmd_dtb = DTC_CHK $@
+> > +      cmd_dtb = $(cmd_dtc) ; $(DT_CHECKER) $(DT_CHECKER_FLAGS) -u $(srctree)/$(DT_BINDING_DIR) -p $(DT_TMP_SCHEMA) $@ || true
+> > +else
+> > +quiet_cmd_dtb = $(quiet_cmd_dtc)
+> > +      cmd_dtb = $(cmd_dtc)
+> > +endif
+> > +
+> > +$(obj)/%.dtb: $(src)/%.dts $(DTC) $(dtsi_include_list_deps) $(DT_TMP_SCHEMA) FORCE
+> > +       $(call if_changed_dep,dtb)
+> >
+> >  pre-tmp = $(subst $(comma),_,$(dot-target).pre.tmp)
+> >  dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
+> > --
+> > 2.34.1
+> >
 >
-> Also, please add a commit message with that :-)
+> This is great.
 >
+> Can you put the commit message in doc/ somewhere?
 
-Ack.
+As per your comment on the doc patch, this is already addressed.
 
 -Sumit
 
+>
 > Regards,
 > Simon
