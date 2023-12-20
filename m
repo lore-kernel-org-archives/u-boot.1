@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77D5C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9ABBC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C748870B7;
-	Wed, 20 Dec 2023 05:46:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C08B98753C;
+	Wed, 20 Dec 2023 05:47:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mpQ9yRst";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Th+Aloht";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03B5687630; Wed, 20 Dec 2023 05:46:45 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 8C10D86E05; Wed, 20 Dec 2023 05:47:12 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C88D87527
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9801087530
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:47:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a235eb41251so370855066b.3
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:43 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40c31f18274so66898285e9.0
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:47:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047602; x=1703652402; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703047629; x=1703652429; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VhIOQNjmNnws5NLFK6NzKqIF62YFshtAD6147f39W4I=;
- b=mpQ9yRstPoT6g791Hks2NLzSC3HkpWQF+E7R4Bg6vsIxKoeACid0naF26xp2YwD5ip
- fTP6+CStliIe3MnWEV+JP+Hs9DBO9S9B/AolUlN7mQEdBAWw6afRv6tlInO/geeYMV8H
- P4R35Zc6qFm0urIXyYHQQ9IrIeNFBY0dV0Chw=
+ bh=2+pTteMb95Avy/VjKT2HksEXQkwfajK6UJHLNR/kNJQ=;
+ b=Th+AlohtbMuPltjeXHlYZ7GnKh0mpYuvw9ooKW4LaahfGyynxD5IWawUP0/Dtneugs
+ H/RMsNQ6kIbHWLtWeJo2VK8mkIymh9wnMkxgjLKcbkhx1rmKmN5qeefdi05mcRAWkqrP
+ MQFCRWL8Qv0cgQN8dRfy5R8AjsgMd0A/M++tQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047602; x=1703652402;
+ d=1e100.net; s=20230601; t=1703047629; x=1703652429;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VhIOQNjmNnws5NLFK6NzKqIF62YFshtAD6147f39W4I=;
- b=TpeH2Ka6aWD+uxgkcjTnxpdOE2E69sUQPFDETS7bss4GWgVHyMxVwlgoKECk2Db4JI
- V1YvgS5/ZeM/O7I4nQ8JFbBjRotwImybnJizvWgcLr5b6dZjZwau4QUuqME3Xmgjzqx6
- tMnQCpnQ9UXzIDAiC8Pqsu5sa1wWi+/At+woDazlCzpL8Iu7fql6m2Gbmi7PCCursuCM
- wQlLUbgtX1v/2nRSMdfImPf4cohbTwfugK1dpq/TXIwfAHqYhaiSixDPiebPMWj9e5aR
- tBOPCRWpJfxxr1jTGtFgsfMsV4c6MElosgosFwsz4EAH3zpE1xyRN0vu9Hl60jbecX/H
- Vj9A==
-X-Gm-Message-State: AOJu0YyIG/r1nCVrHAB42u4t3PIf8hV+QU16AW8kr94YYDqfypI82SHv
- sNd6V1TIWnfSuW1zXEOHk8XiqE33/LyqtgfsV4+7eA==
-X-Google-Smtp-Source: AGHT+IFjgrCjMKMPR7DckXiZVNd1hDL3HL80zDzNIAB0q3ITg2+0859Qtt7ogqx+79CJo9NMltB/9akq4pEJ2iWqNjQ=
-X-Received: by 2002:a17:907:c9a2:b0:a23:3629:f7b9 with SMTP id
- uj34-20020a170907c9a200b00a233629f7b9mr1582602ejc.90.1703047602586; Tue, 19
- Dec 2023 20:46:42 -0800 (PST)
+ bh=2+pTteMb95Avy/VjKT2HksEXQkwfajK6UJHLNR/kNJQ=;
+ b=ZWYy/J3oFTlz5GsQOlcLtTxdsJorZIJufXd/A1qt6MLObk6c6Bcvkt0I5QwciEcMDx
+ PsvHBVlklFO0Xlaj6qJXOOiUc+MnaonPmlJZcXmkEj68UX0ro7fq9UsSHiJvrEekgZq9
+ tSGnqaEt2PalwJKMyO2x9ryrO0SB22T2hurPQuAC9HufSD0C3Uo6wpOJhQlTIQnqx8qk
+ SVj/ZSLQdTB9x27njmH6PlnghDW6ol2Z5zRACfGjVyDnnohL3wJy9ayAiUxR3d088Dno
+ /xvqYf7NY53EzXV25GkkPuwlKceuVMFqofNKm3qOvXrb85kgaGG/x9LWHnR5+eDrhHcs
+ my/g==
+X-Gm-Message-State: AOJu0YwznUc8XhMPR5h9BZAmw7PTK2hnIf2IwZZQRNoRVZ0dLBn52/yI
+ efsh5jYv0STtf4vEX7YtrtgO/sSVwg4kyKRPKGhEQw==
+X-Google-Smtp-Source: AGHT+IGHQ6PHgfNNiewSP/qhrYoVPC61A3BgQCUPYU+yn+WF4nNoDshDwm4674R/m3+4+5vBwE7nfT1YvzRnx6jeiDI=
+X-Received: by 2002:a05:600c:34d2:b0:40d:381f:eac7 with SMTP id
+ d18-20020a05600c34d200b0040d381feac7mr7792wmq.214.1703047628872; Tue, 19 Dec
+ 2023 20:47:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
- <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231219150408.10949-4-heinrich.schuchardt@canonical.com>
+References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:46:30 -0700
-Message-ID: <CAPnjgZ303PP1B0zwiybV=m72bu2A7eQokg5GvW4XCE3Jc_y34w@mail.gmail.com>
-Subject: Re: [PATCH v4 3/9] arm: add ACPI fields to global data
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Date: Tue, 19 Dec 2023 21:46:57 -0700
+Message-ID: <CAPnjgZ13umAN1E2MqMwTmG98A=o_Q5RQFOY_Q_xpgQq-gmdoNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/32] Qualcomm generic board support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Stephan Gerhold <stephan@gerhold.net>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,21 +88,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Dec 2023 at 08:04, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Add fields for the location of ACPI tables to the global data.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v4:
->         no change
-> v3:
->         let tables in global data depend on CONFIG_(SPL_)ACPI
-> v2:
->         new patch
-> ---
->  arch/arm/include/asm/global_data.h | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+Hi Caleb,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 19 Dec 2023 at 09:04, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+[..]
+
+> == DT loading ==
+>
+> Previously, boards used the FDT blob embedded into U-Boot (via
+> OF_SEPARATE). However, most Qualcomm boards run U-Boot as a secondary
+> bootloader, so we can instead rely on the first-stage bootloader to
+> populate some useful FDT properties for us (notably the /memory node and
+> KASLR seed) and fetch the DTB that it provides. Combined with the memory
+> map changes above, this let's us entirely avoid configuring the memory
+> map explicitly.
+
+Running U-Boot as a secondary bootloader is the degenerate case. Are
+there any Qualcomm boards where U-Boot runs first? In that case,
+perhaps the DT could be used in SPL to determine the memory size as
+well?
+
+(this series is fine to me, BTW)
+
+Regards,
+Simon
