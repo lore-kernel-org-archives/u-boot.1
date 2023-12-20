@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD23C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:20:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05CDC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:25:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FC598772A;
-	Wed, 20 Dec 2023 14:20:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05E2A877C4;
+	Wed, 20 Dec 2023 14:25:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EqB1NFLs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uR90IruR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F3087786; Wed, 20 Dec 2023 14:20:54 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 46ED6877CD; Wed, 20 Dec 2023 14:25:09 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70B63876C1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:20:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FFD587727
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:25:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-db3a09e96daso3942597276.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:20:52 -0800 (PST)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-db3fa47c2f7so3966573276.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:25:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703078451; x=1703683251; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703078706; x=1703683506; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lcg4bIb1+w/l3J1kHwklsxzpPW+73YG9q4iqwGHMg3U=;
- b=EqB1NFLsfysOaglj+LH3z9mxU687weexRg66ZB3t/kwixYtAJjSK/rW0aINq9V/f84
- kp1Z/B1RDjec5PTbqXtixl8QrHWs+rY5Pifes3nd3K332ASjZvGtDf+bcLcIYtBP4yoT
- 2Uk2PrixjK9DqnXl21DpAA715q0nu3J1TR1tA=
+ bh=01P/vlPdXmnLKO8P4AkPbCSG8znawYVu4i4ZC4fClKE=;
+ b=uR90IruRpV/qQLV1KX9jGCpz9jiuLR09p9iAIoI9lt2NJa5Xa37msMOQrb2hiljpju
+ EObKV1PXjjTBU87sXODhRRe212LqBd3acPy00Hh1WJQVf7B3uMZSuiWjImSaKBTrFC7P
+ sKYjQko9tHf1BYnsW//066qXDkzIUv0V8j3fc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703078451; x=1703683251;
+ d=1e100.net; s=20230601; t=1703078706; x=1703683506;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lcg4bIb1+w/l3J1kHwklsxzpPW+73YG9q4iqwGHMg3U=;
- b=HZeGQuUWY83cTDWjBhRfijZF8ZeanSfk0DZ2nRrNTG4ty/kOJ+WGWAe5f3R8umu8gl
- I5+BNBO+dlkd6KX8RQIpTtwwvkQGuV+B2TwhYw5IhSnRbqviNweHO+1yHcmIEvPaGbBa
- 6WPCF03ykB6xuj28UM/282LoIBTqTGndL4HDVAvmFDz5al8rRyj7kPblEYvXFPN0gEp0
- ImSWdxI4KjwG6IECN6lE81Ne8pJrftNBLi9BB33eD1c8CDuNb0HS4LxCImz9OvzdOvD4
- s0OZUAI6zlV0J42rnoXnqF74ZH39UFLnAHBtQ1X2za7tr93kz3SFY9Qv1J3ivab83rGd
- Xqag==
-X-Gm-Message-State: AOJu0YwkFkACjno8c7EFl0JqoOtnYK6HhLlfA1ZTxiGH2IRlVNop7shU
- Ptua18RULmA8putexXLAsN7qxQ==
-X-Google-Smtp-Source: AGHT+IG4vzjjPrvnTnLuTg+hTurZkviubeZ4t+Uw99e/ojlORvuLoKk3LzhAlw7LODkTxquJM16llA==
-X-Received: by 2002:a25:8890:0:b0:dbd:564a:5ffb with SMTP id
- d16-20020a258890000000b00dbd564a5ffbmr1572293ybl.87.1703078449523; 
- Wed, 20 Dec 2023 05:20:49 -0800 (PST)
+ bh=01P/vlPdXmnLKO8P4AkPbCSG8znawYVu4i4ZC4fClKE=;
+ b=vlJleDmc9X1Ij9Ru8K5lXPETBCI/Hl/LORwESazrVi0Sk+6lx6hVmfYdl6koKjKbVs
+ SLxy93G1SaX80RjwGuF/HBv9vyuR0U80q1iyUxEgRFr0/4T924HHYvoPbV1iQ+huZuKq
+ NLCxUSdV1dMGWHxRHEHsg2/oxCd2S06v7lgrzcBQ81jRcRb6yeCqkB3ZDxN4SGQfqAjZ
+ 0Xa0uFVUwmVA0BbdVr3C8d+AE2nOWUjYFxVdtnHJaNESVihC3cAsKugBLfC2m99lwdV0
+ ySSdjduY57+zMfppjV0xRWu1YHL04K5shXS1uCoaBIPLrWx0UFgZbTf4sJtrd4LkGQap
+ 3rCg==
+X-Gm-Message-State: AOJu0Yyc4c6/sj+RVEl2Q9ZUysDy3fYooZZ3WY17NDWInlBDcqsouzdu
+ YCSB5BE09kXySoOKeDsZ7w2ViA==
+X-Google-Smtp-Source: AGHT+IHAcasPkoFJSw9UpEagF8/3GOGgjZu4MwplpeNz2Zl4M32blicQRzPvXib6d3wqnO72LyjxKg==
+X-Received: by 2002:a05:6902:38d:b0:db7:dad0:60e9 with SMTP id
+ f13-20020a056902038d00b00db7dad060e9mr11570414ybs.118.1703078705796; 
+ Wed, 20 Dec 2023 05:25:05 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
  [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
  by smtp.gmail.com with ESMTPSA id
- t127-20020a254685000000b00db39d501e8esm5102735yba.61.2023.12.20.05.20.48
+ z18-20020a25e312000000b00da05d771097sm9261596ybd.22.2023.12.20.05.25.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 05:20:49 -0800 (PST)
-Date: Wed, 20 Dec 2023 08:20:47 -0500
+ Wed, 20 Dec 2023 05:25:05 -0800 (PST)
+Date: Wed, 20 Dec 2023 08:25:03 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: neil.armstrong@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- sean.anderson@seco.com, heinrich.schuchardt@canonical.com,
- mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2 v3] smbios: Fallback to the default DT if sysinfo
- nodes are missing
-Message-ID: <20231220132047.GJ2513409@bill-the-cat>
-References: <20231213230545.GM2513409@bill-the-cat>
- <CAPnjgZ0L+kVG0DWExwDJXYG5FfObq34LULV=se9T50OvcmhfMw@mail.gmail.com>
- <20231214131139.GY2513409@bill-the-cat>
- <CAPnjgZ17b7sZX-dey5mdXJJ17g5ho_U2UZkawyFYU19R-gidhQ@mail.gmail.com>
- <20231217184100.GC2513409@bill-the-cat>
- <06036b6f-70b8-4b80-823d-d9716cbbf160@linaro.org>
- <CAPnjgZ2wcmGOjbVdNCyzSWNGzBPjPqcjdVcbPu8J2wadnxFRrQ@mail.gmail.com>
- <0b7d6cd7-4248-47d7-81c8-7466177d5172@linaro.org>
- <CAPnjgZ1XP4+0sefoXNfvgSmMef2zsRsNPN-hzxAUFhb7dDX6Hg@mail.gmail.com>
- <CAPnjgZ0hfGARdygcO0wV1R2_XNZ5mUvHfRxsKv2f1AKXiHghFw@mail.gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ ilias.apalodimas@linaro.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 4/4] fs: remove explicit efi configuration dependency
+Message-ID: <20231220132503.GK2513409@bill-the-cat>
+References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
+ <20231218023842.281336-5-takahiro.akashi@linaro.org>
+ <CAPnjgZ0vq6kxiBNOwbi1JyMxV44S46uKXd1vbPNHFX5nwYLVtQ@mail.gmail.com>
+ <14EA5E9B-23EB-4BD5-ACA9-7CEA6BC35453@gmx.de>
+ <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8BnO2A5boviMuoTN"
+ protocol="application/pgp-signature"; boundary="9xtbXm0nk8rI0y39"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0hfGARdygcO0wV1R2_XNZ5mUvHfRxsKv2f1AKXiHghFw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,117 +98,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8BnO2A5boviMuoTN
+--9xtbXm0nk8rI0y39
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 19, 2023 at 09:46:22PM -0700, Simon Glass wrote:
-> Hi again,
+On Tue, Dec 19, 2023 at 09:46:27PM -0700, Simon Glass wrote:
+> Hi Heinrich,
 >=20
-> On Mon, 18 Dec 2023 at 14:07, Simon Glass <sjg@chromium.org> wrote:
+> On Mon, 18 Dec 2023 at 15:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
 > >
-> > Hi Neil,
 > >
-> > On Mon, 18 Dec 2023 at 08:37, <neil.armstrong@linaro.org> wrote:
+> >
+> > Am 18. Dezember 2023 16:01:40 MEZ schrieb Simon Glass <sjg@chromium.org=
+>:
+> > >Hi AKASHI,
 > > >
-> > > Hi,
+> > >On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
+> > ><takahiro.akashi@linaro.org> wrote:
+> > >>
+> > >> Now it is clear that the feature actually depends on efi interfaces,
+> > >> not "bootefi" command. efi_set_bootdev() will automatically be nulli=
+fied
+> > >> if necessary efi component is disabled.
+> > >>
+> > >> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > >> ---
+> > >>  fs/fs.c | 7 +++----
+> > >>  1 file changed, 3 insertions(+), 4 deletions(-)
+> > >>
+> > >> diff --git a/fs/fs.c b/fs/fs.c
+> > >> index f33b85f92b61..82ee03b160e9 100644
+> > >> --- a/fs/fs.c
+> > >> +++ b/fs/fs.c
+> > >> @@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, in=
+t argc, char *const argv[],
+> > >>                 return 1;
+> > >>         }
+> > >>
+> > >> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
+> > >> -               efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+> > >> -                               (argc > 4) ? argv[4] : "", map_sysme=
+m(addr, 0),
+> > >> -                               len_read);
+> > >> +       efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
+> > >> +                       (argc > 4) ? argv[4] : "", map_sysmem(addr, =
+0),
+> > >> +                       len_read);
 > > >
-> > > On 18/12/2023 16:01, Simon Glass wrote:
-> > > > Hi Neil,
-> > > >
-> > > > On Mon, 18 Dec 2023 at 02:54, <neil.armstrong@linaro.org> wrote:
-> > > >>
-> > > >> On 17/12/2023 19:41, Tom Rini wrote:
-> > > >>> On Sat, Dec 16, 2023 at 11:46:18AM -0700, Simon Glass wrote:
-> > > >>>> Hi Tom,
-> > > >>>>
-> > > >>>> On Thu, 14 Dec 2023 at 06:11, Tom Rini <trini@konsulko.com> wrot=
-e:
-> > > >>>>>
-> > > > [..]
-> > > >
-> > > >>> And my point with the above is that other SoC maintainers (Neil, =
-for
-> > > >>> amlogic) have said (paraphrasing) he does not want to do N smbios=
- node
-> > > >>> patches. Which is why Ilias' patch is if not 1000% correct, it's =
-Good
-> > > >>> Enough and will, if it's really a problem to have all lower case
-> > > >>> information displayed, spur people to see providing that informat=
-ion as
-> > > >>> a real problem that needs to be solved. Or it will be seen as good
-> > > >>> enough.
-> > > >>>
-> > > >>
-> > > >> If some platforms requires a more "correct" smbios dataset, then t=
-hey're
-> > > >> welcome adding the required smbios node, and it's perfectly unders=
-tandable,
-> > > >> but for the other community-maintained platforms we need some vali=
-d fallback
-> > > >> data otherwise they'll be de facto excluded from some tools for no=
- valid reasons.
-> > > >
-> > > > Do you know which tools require SMBIOS tables? I found sos and anot=
-her
-> > > > Redhat one.
+> > >As I understand it, this is setting the boot device so that (if it
+> > >happens to be an efi application) it will know which device it came
+> > >from. But this is a hack. For bootstd, the device is known as it loads
+> > >the kernel.
+> >
+> > Please, consider what happens when the user interactively executes the =
+load and bootefi command from the console.
+> >
 > > >
-> > > SMBIOS data is translated into dmi informations in Linux, and a little
-> > > lookup in GitHub gives 6.4K files using something from /sys/devices/v=
-irtual/dmi/id/,
-> > > and by very commonly used tools like lshw and probably fwupd.
+> > >Also it does not deal with memory allocation (nor can it).
+> > >
+> > >Where are we using the 'load' command to load a kernel? The distro
+> > >scripts are deprecated.
 > >
-> > lshw also uses devicetree, so should not also need SMBIOS.
+> > Some users use boot.scr scripts
 > >
-> > fwupd uses UUIDs to indicate the device. So far as I know (and I wrote
-> > a plugin for it, so at least know something), it does not rely on
-> > SMBIOS tables.
 > >
-> > Here is my main question: is SMBIOS:
+> > >
+> > >At some point this code should be removed. Is it too early for that?
 > >
-> > 1) just informational, not affecting the operation of the device
-> > 2) important and needed for the device to function
-> >
-> > If it is (1), then I don't mind what is in the tables - we could
-> > perhaps add a '?' at the start of each string to indicate it is
-> > provisional?
-> > If it is (2), then I want to avoid adding information that might be
-> > wrong / might change over the life of the device
-> >
-> > In either case, putting these workarounds behind a Kconfig seems
-> > reasonable to me. What do you think?
+> > Yes, as long as we allow users to invoke the bootefi command with an ad=
+dress pointer.
 >=20
-> Hmmm and I forgot the other problem, which is that there is no way to
-> pass an SMBIOS table to Linux without booting via EFI. But I don't
-> follow it closely, so perhaps that has been resolved?
+> So how about we create the new path, with the info passed in as part
+> of the bootefi call? Then we can remove the call from bootstd, at
+> least.
 
-This issue here is firmly NOT a U-Boot problem. It's a problem for
-whomever wants to, I assume, design and upstream a DT binding to
-describe how to find a populated SMBIOS table? There is IIRC some
-MIPS-specific Linux Kernel option, but I imagine it wouldn't be allowed
-to be added to other architectures as I assume it's magic location based
-like non-EFI x86 ones?
+Why? It's not clear to me we'd have this information available at that
+point unless we stored things to pass along at that point too.
 
 --=20
 Tom
 
---8BnO2A5boviMuoTN
+--9xtbXm0nk8rI0y39
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWC6i8ACgkQFHw5/5Y0
-tyx1sAwAjLEfW/5TZTejj4LMMsli6LI27rdUj/20yMrjPpdaHVyXolrEPJDzepb9
-1KuSawrdlYTwqiJkmRRYc0PYsQrVKFwvykpG+OKb2sUBa+9vYZm5QrKqjV2iraLT
-IY80yxNK0AMeihEVb8CT90r6I/Fk2inc7ygGULJqNbAwGNFRoJJZYC6t2ocwrlCT
-Arx95xsG6xEB5/IZ+WYsrt1GIHmgjkHsEMWovmUPx+Qav8l+sMeuQXl6h5xhRvxC
-wKkboGW0ZqvYuI989ib1xoSqUh//akupDn1maqbJ+ObQiQK7B8Czusix9lU2ItUU
-UVfLUdKHL1/AocKR6nx1sfjydAY4ErlMlZ/AsqkKEM2N+zQPxPDgDne/0DzhP2Zu
-1AUz3NcmhMuePgOI/VcuL8pcAcKmNpRaJJcqpSvNTY7RlMGfGKIy4aOK1tyw7tb/
-O3mwNajMZqbEEz/LHjuuN7PJHBw9wHG0i1CZcrG/clEyUmo2op5I73N8tULZPspH
-cZfXr7Po
-=PgNI
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWC6y8ACgkQFHw5/5Y0
+tyxUFgv/Q3tMYCy+gu55HnbObqYRdpy8CUgQxfp50Ignyz4DFLGFL+jy8WIr7sSu
+iUPzVatGfMggDwbOsqFD94eVjjHkuYVsI8CfOKatqt7sXmU23iQdyRRnNHxgADtN
+0QYyVQGJBQ3AHxY4TRfguvrfaXKMp9wiDCy1V7Si4hwOsjcu73tovnx9SoMkDaTc
+uvunlMkfOdLVMKa2hHePGLi+c/hGCQ/gb7XnLq4p2eoT7BUZntFBxusfaTnQKYXy
+zuRbZYffOwBy5EzPwfUkwH0hPT1KRiT8t80HwynifsPDRIQT2WLapdWWvXSMibQw
+lyiVHLvp02eX2idBtegLZueIZexgw8rboKVv1QJMPnoZAC9S5miir5K8CLIn1w7C
+2zPl2Zkgp0f4UBdiZwIgkMoa0KLQK++ieTJscj6+NBLPTvUXQfw3TqYAij1A0dap
+k05mCl5jk2zCna9o79k9XAf6KAX1YfB9NaZwVCiiEnBuf8ozgmuu5MmVt9/PChRj
+T/xJaR2c
+=JgjS
 -----END PGP SIGNATURE-----
 
---8BnO2A5boviMuoTN--
+--9xtbXm0nk8rI0y39--
