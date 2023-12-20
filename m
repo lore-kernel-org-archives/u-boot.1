@@ -4,80 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9773C46CCD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A41B9C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 381E2876DE;
-	Wed, 20 Dec 2023 11:39:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 04B9D87509;
+	Wed, 20 Dec 2023 11:40:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iiz0zlFU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KS/VTWTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE9AE876C9; Wed, 20 Dec 2023 11:39:17 +0100 (CET)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D21D987646; Wed, 20 Dec 2023 11:40:53 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 588138750C
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:39:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A1B086CF4
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:40:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrejs.cainikovs@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-55361b7f38eso4093424a12.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 02:39:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703068753; x=1703673553; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MOFoml+FkhEHjDF9OkbvXs6jC30F7LjK8eDe8DmJADo=;
- b=iiz0zlFU/1fQANWTDmS/hGJJ2nif4fsOiNA/jb9bpiy+0acLH71imrAgeQpesDMplX
- hLIRUorkdDMIS/RnpXe30EGPRWIYNmN+GRftl3x2MIlte6QtLnOSX21RUsBiyHh4RbHH
- rXuen0u1is62csbujmob3vvnSpb+jRTKT5UOKCzOlAnGFq27apVhaOfcaZNayknJBYFj
- lLWE4b6hMjMcf7JprytPKJ5QP2e7OKM1RNsH1lZ2gxslnDCDK5gW5x1jY29R+kpuQMKA
- dphdSimvAj7rh60MnESyxfihNPUe2+C4lzgDcntOQmh9+sK0XYnLVpifofkCSWIJCi1b
- goug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703068753; x=1703673553;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MOFoml+FkhEHjDF9OkbvXs6jC30F7LjK8eDe8DmJADo=;
- b=tzU/MomsQ5mswGKuM9XB/aSUHHxsz5PQeIpgwzPZx4ySXJsrL6InH2eeV2Nd805cLy
- nr7abG9jTYaJD5IECMJaIY66Ye7Y7YsHiZ8CiaZB8aFEYWQoblsykEirLhgtghzU8z2N
- KWBU4aYB6gmaXbnLqaqOYhPGhgWPjFR+BQa8OEdykjF7I9P+OVRhJ/fUmBJgXV3a2DHV
- 06pMpMoz+WPbh36PIOGtN8rBfMLIqAZ0s/fPyzL+a9jpxKFBdM+aXeWhlf2MvIdqo1MX
- TxKmV3v7vtphSvFbmRMc7Ylkc7m9xwN1b5e3F7iLNMbCxUNOfS89cHVWEKciifOB9kIp
- ui7w==
-X-Gm-Message-State: AOJu0YyFdzgr/7mDyAAJsx0AFqXZEFlL+iEdWxYOxJ7u1ht9CbTMp+Qy
- Uh0pehOiMoTP350GeUZNhVvT0ZC52LmK5g==
-X-Google-Smtp-Source: AGHT+IF+tnO+bJabKcKE5vW539GZv26qiqBI4mDMa0Vd4fjWYb/VaMy3ooJ403pwIxeADY32pSK3sw==
-X-Received: by 2002:a50:ab08:0:b0:551:4f66:af27 with SMTP id
- s8-20020a50ab08000000b005514f66af27mr6293989edc.31.1703068753476; 
- Wed, 20 Dec 2023 02:39:13 -0800 (PST)
-Received: from andrejs-nb.int.toradex.com (77-59-154-235.dclient.hispeed.ch.
- [77.59.154.235]) by smtp.gmail.com with ESMTPSA id
- f19-20020a056402195300b005537b00132asm2259932edz.91.2023.12.20.02.39.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 02:39:12 -0800 (PST)
-From: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-To: u-boot@lists.denx.de,
-	"NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: [PATCH v1 3/3] colibri-imx8x: configure usb hub to bypass mode
-Date: Wed, 20 Dec 2023 11:38:11 +0100
-Message-Id: <20231220103811.228515-4-andrejs.cainikovs@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231220103811.228515-1-andrejs.cainikovs@gmail.com>
-References: <20231220103811.228515-1-andrejs.cainikovs@gmail.com>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 4A09BCE1AB7;
+ Wed, 20 Dec 2023 10:40:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1BE8C433C7;
+ Wed, 20 Dec 2023 10:40:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1703068847;
+ bh=zGi7lWjpfKEmC4KcJygwz+lcsW+ZD6gDzRDhIksnaHw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KS/VTWTwwxar+61yH0ozX9/N0zhS/b58w5xnQTKylSRmG0RTNnb/j6kCd+M2rnbwI
+ 8mamkGTVdEXiCA0IVk/xo3TfLxBicl8NAzFu7S8/iFOi5coZaZkWGg63IaEmUiIZNg
+ 4bvrH9sXsCaF4D17IfB87GYLLmGn4rlODKUYQljtK9LkWSLl2eLO3V2pc1wjAdLJ56
+ YUscMagRaGkyYVCO5QuzNwIcQRytCQy9mGVRv2YszaTY6l8v0ternxMaERaK5IUdqT
+ q1Lk+JGYPXwt+u4YyIf0bmEJhQeFGn8G2NALV3amXdIDrmJ2vPsvjEXqIwwoU8sJgi
+ BWmYs/1GzDzXg==
+Message-ID: <1745ec33-7446-41fc-886a-704eb6e53c7e@kernel.org>
+Date: Wed, 20 Dec 2023 12:40:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 12/16] arm: dts: k3-am65x-binman: Add ICSSG2 overlay
+ and configuration
+Content-Language: en-US
+To: MD Danish Anwar <danishanwar@ti.com>, Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, r-gunasekaran@ti.com
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-13-danishanwar@ti.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20231219103418.3445886-13-danishanwar@ti.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +80,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 
-This change configures Toradex Colibri iMX8X SoM USB
-hub to bypass mode, and brings out of the reset state.
 
-Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
----
- arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi | 15 +++++++++++++++
- arch/arm/dts/fsl-imx8qxp-colibri.dts         |  2 --
- configs/colibri-imx8x_defconfig              |  1 +
- 3 files changed, 16 insertions(+), 2 deletions(-)
+On 19/12/2023 12:34, MD Danish Anwar wrote:
+> Add ICSSG2 overlay and configuration to tispl and u-boot images.
+> 
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+> ---
+>  arch/arm/dts/k3-am65x-binman.dtsi | 85 +++++++++++++++++++++++++++++++
+>  1 file changed, 85 insertions(+)
+> 
+> diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+> index 8cc24da1f3..9a0c0fca47 100644
+> --- a/arch/arm/dts/k3-am65x-binman.dtsi
+> +++ b/arch/arm/dts/k3-am65x-binman.dtsi
+> @@ -98,6 +98,8 @@
+>  #define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
+>  #define AM654_EVM_DTB "u-boot.dtb"
+>  
+> +#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
+> +
+>  &binman {
+>  	ti-spl {
+>  		insert-template = <&ti_spl_template>;
+> @@ -124,6 +126,20 @@
+>  						filename = SPL_AM654_EVM_DTB;
+>  					};
+>  				};
+> +
+> +				fdt-1 {
+> +					description = "k3-am654-icssg2 overlay";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					ti-secure {
+> +						content = <&spl_am65x_evm_icssg2_dtb>;
+> +						keyfile = "custMpk.pem";
+> +					};
+> +					spl_am65x_evm_icssg2_dtb: blob-ext {
+> +						filename = AM654_EVM_ICSSG2_DTBO;
+> +					};
 
-diff --git a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi b/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
-index a6af4e5e2b7..6ab6b1f9ee6 100644
---- a/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
-+++ b/arch/arm/dts/fsl-imx8qxp-colibri-u-boot.dtsi
-@@ -84,6 +84,21 @@
- 	bootph-some-ram;
- };
- 
-+&gpio_expander_43 {
-+	usb-bypass-n-hog {
-+		gpio-hog;
-+		gpios = <5 GPIO_ACTIVE_LOW>;
-+		line-name = "usb-bypass-n";
-+		output-high;
-+	};
-+	usb-reset-n-hog {
-+		gpio-hog;
-+		gpios = <4 GPIO_ACTIVE_LOW>;
-+		line-name = "usb-reset-n";
-+		output-low;
-+	};
-+};
-+
- &gpio0 {
- 	bootph-some-ram;
- };
-diff --git a/arch/arm/dts/fsl-imx8qxp-colibri.dts b/arch/arm/dts/fsl-imx8qxp-colibri.dts
-index 295090ad711..b479921aff9 100644
---- a/arch/arm/dts/fsl-imx8qxp-colibri.dts
-+++ b/arch/arm/dts/fsl-imx8qxp-colibri.dts
-@@ -319,8 +319,6 @@
- 		gpio-controller;
- 		#gpio-cells = <2>;
- 		reg = <0x43>;
--		initial_io_dir = <0xff>;
--		initial_output = <0x05>;
- 	};
- };
- 
-diff --git a/configs/colibri-imx8x_defconfig b/configs/colibri-imx8x_defconfig
-index 13c16bde3d8..ce60c509582 100644
---- a/configs/colibri-imx8x_defconfig
-+++ b/configs/colibri-imx8x_defconfig
-@@ -65,6 +65,7 @@ CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_BOOTCOUNT_ENV=y
- CONFIG_CLK_IMX8=y
- CONFIG_CPU=y
-+CONFIG_GPIO_HOG=y
- CONFIG_FXL6408_GPIO=y
- CONFIG_MXC_GPIO=y
- CONFIG_DM_I2C=y
+This is wrong.
+
+ICSSG2 Ethernet should be part of the fdt-0 configuration as the 2 Ethernet ports
+on the board are hardwired to ICSSG2. Not having them working by default
+is an invalid configuration.
+
+> +				};
+>  			};
+>  
+>  			configurations {
+> @@ -135,6 +151,13 @@
+>  					loadables = "tee", "dm", "spl";
+>  					fdt = "fdt-0";
+>  				};
+> +
+> +				conf-1 {
+> +					description = "k3-am654-icssg2";
+> +					firmware = "atf";
+> +					loadables = "tee", "dm", "spl";
+> +					fdt = "fdt-0", "fdt-1";
+> +				};
+>  			};
+>  		};
+>  	};
+> @@ -168,6 +191,24 @@
+>  					};
+>  				};
+>  
+> +				fdt-1 {
+> +					description = "k3-am654-icssg2 overlay";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					ti-secure {
+> +						content = <&am65x_evm_icssg2_dtb>;
+> +						keyfile = "custMpk.pem";
+> +
+> +					};
+> +					am65x_evm_icssg2_dtb: blob-ext {
+> +						filename = AM654_EVM_ICSSG2_DTBO;
+> +					};
+> +					hash {
+> +						algo = "crc32";
+> +					};
+> +				};
+> +
+>  			};
+>  
+>  			configurations {
+> @@ -179,6 +220,13 @@
+>  					loadables = "uboot";
+>  					fdt = "fdt-0";
+>  				};
+> +
+> +				conf-1 {
+> +					description = "k3-am654-icssg2";
+> +					firmware = "uboot";
+> +					loadables = "uboot";
+> +					fdt = "fdt-0", "fdt-1";
+> +				};
+>  			};
+>  		};
+>  	};
+> @@ -205,6 +253,16 @@
+>  						filename = SPL_AM654_EVM_DTB;
+>  					};
+>  				};
+> +
+> +				fdt-1 {
+> +					description = "k3-am654-icssg2 overlay";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					blob {
+> +						filename = AM654_EVM_ICSSG2_DTBO;
+> +					};
+> +				};
+>  			};
+>  
+>  			configurations {
+> @@ -216,6 +274,13 @@
+>  					loadables = "tee", "dm", "spl";
+>  					fdt = "fdt-0";
+>  				};
+> +
+> +				conf-1 {
+> +					description = "k3-am654-icssg2";
+> +					firmware = "atf";
+> +					loadables = "tee", "dm", "spl";
+> +					fdt = "fdt-0", "fdt-1";
+> +				};
+>  			};
+>  		};
+>  	};
+> @@ -243,6 +308,19 @@
+>  						algo = "crc32";
+>  					};
+>  				};
+> +
+> +				fdt-1 {
+> +					description = "k3-am654-icssg2";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					blob {
+> +						filename = AM654_EVM_ICSSG2_DTBO;
+> +					};
+> +					hash {
+> +						algo = "crc32";
+> +					};
+> +				};
+>  			};
+>  
+>  			configurations {
+> @@ -254,6 +332,13 @@
+>  					loadables = "uboot";
+>  					fdt = "fdt-0";
+>  				};
+> +
+> +				conf-1 {
+> +					description = "k3-am654-icssg2";
+> +					firmware = "uboot";
+> +					loadables = "uboot";
+> +					fdt = "fdt-0", "fdt-1";
+> +				};
+>  			};
+>  		};
+>  	};
+
 -- 
-2.34.1
-
+cheers,
+-roger
