@@ -4,74 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34702C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE1EC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:51:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D54B876F7;
-	Wed, 20 Dec 2023 09:45:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id C298087695;
+	Wed, 20 Dec 2023 09:51:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="nIhL7/9Y";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="DtGFwc2p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4EF88765E; Wed, 20 Dec 2023 09:45:44 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8D40D87695; Wed, 20 Dec 2023 09:51:22 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4BD187646
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:45:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A835287480
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:51:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1703061940; x=1705653940;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hDjXdLDawBv0Xx+Is4OLF6TGbYFFM+t4sf98Z61kYV4=;
- b=nIhL7/9YmK5920jwoeZEyiz3fVB8D8hF5l3dvKvCW58Xb2qZS6mwhcl4q3useb7g
- opMs+CgyIz8eLRNgm7LenXO1mRDsD0WK4rylZlcGwtLGqiQKBSN/BsXgGcodhOTn
- O4IK4ktp69HsE5hxTYtdu++VSSuOuoc8xyi3U7Xp1W8=;
-X-AuditID: ac14000a-fadff7000000290d-ea-6582a9b47848
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 27.E0.10509.4B9A2856;
- Wed, 20 Dec 2023 09:45:40 +0100 (CET)
-Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
- 2023 09:45:40 +0100
-From: Yannic Moog <y.moog@phytec.de>
-Date: Wed, 20 Dec 2023 09:45:35 +0100
-Subject: [PATCH v2 4/5] board: phytec: som_detection: move definitions to
- source file
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-552d39ac3ccso944831a12.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 00:51:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=suse.com; s=google; t=1703062280; x=1703667080; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NKC0RIF5PH0nL/YwFwQUJ0O42qdNPOjw7t5j0XDRLj4=;
+ b=DtGFwc2pqrTYJ6HynpCglSAGBX8Ah9vggKk7Yn4MSSRI8NutP5BoN8v8HKByZgeCXT
+ 6E9EhrE4TGr5fECTY+m3euauMwX7WBDCysTJLy/iCZ3AhXoSzbrQePNgFjsReyAk5GSF
+ r4Z6mxEYWfxjzXvALBkY04j3EBPleBQRV/pp8vhkaYKYEmshA+a4Wouh9426mUD/+YiZ
+ lk/uT0yWuNrovdE5U8g3mLFYo7rpvezZzzFkIGsZvS2CBLrgAl+otSPJWvyXawbK2Z/w
+ /DCflSapNBM4cj710wERciHYtOv5oKgD4YtfPb/D+cWRg7KhnrsRjmvVV1H6CcL8Hs3R
+ A0FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703062280; x=1703667080;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NKC0RIF5PH0nL/YwFwQUJ0O42qdNPOjw7t5j0XDRLj4=;
+ b=JPTWbTuytTy7Oj8W9/NOUc1H9in0Ix9SN/8jtvdxHtwrqXnZ72Y2ix3vUfshezhOIu
+ 7Tk7Pt4c9cD/0c/2j0ADUZdPLSAucOo5yKAaoezPaFg/f7yu2NrzVtF6BCxYTKJaXa8I
+ hN+5OCmRIkDAwlE3U6yRrQfndz1O+UQEnsjKTNwmaKvaP02by/i5IMmnxo9piUnF35V1
+ Cv1sWkG3VTqsNu4w8uoIuvn8P+5HNz6S8lwqOQbkFzc/x3+ES0EoegZ1LcDqGf01IzbA
+ kMNdZeIgyz6d3NTwJBjep3sm3vNfQsT4T9gIbCM4ceSe+cl2mV0+lI+st+iaRbbJfAis
+ WVTQ==
+X-Gm-Message-State: AOJu0Ywp6jHWRaDKmPqiVx3T/NN7udHSQo2C7RH9hwRfMSnUOcLSgxT4
+ Gj/K7VBu6tD6Frry7oqUPgy/lw==
+X-Google-Smtp-Source: AGHT+IG5Mp/Ojq9TZtHtvatWe3sVmWGUfZ4NTcQgtlb4uoTALkrF3doEPK3bgAGAbwzjvrYmjU3/2A==
+X-Received: by 2002:a17:906:1045:b0:a25:a0c6:ebf5 with SMTP id
+ j5-20020a170906104500b00a25a0c6ebf5mr1783006ejj.21.1703062280204; 
+ Wed, 20 Dec 2023 00:51:20 -0800 (PST)
+Received: from ?IPV6:2a02:810d:8400:17a8:8ea:59af:d317:9dff?
+ ([2a02:810d:8400:17a8:8ea:59af:d317:9dff])
+ by smtp.gmail.com with ESMTPSA id
+ u25-20020a17090617d900b00a2328f844d2sm4965392eje.85.2023.12.20.00.51.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 20 Dec 2023 00:51:19 -0800 (PST)
+Message-ID: <27611da0-a16b-4392-9c87-68e03289ccbe@suse.com>
+Date: Wed, 20 Dec 2023 09:51:19 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/7] bcm2835: brcm,bcm2708-fb device is using r5g6b5
+ format
+Content-Language: en-US, ca-ES, es-ES
+To: "Ivan T. Ivanov" <iivanov@suse.de>, Stefan Wahren <wahrenst@gmx.net>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Dmitry Malkin <dmitry@bedrocksystems.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ florian.fainelli@broadcom.com, u-boot@lists.denx.de
+References: <20231218210341.30073-1-iivanov@suse.de>
+ <20231218210341.30073-5-iivanov@suse.de>
+ <7764be07-c3cc-47e0-a284-4ba9420a843f@gmx.net>
+ <tosej62qjugymvxevjaqq6kqkkjlo3qpkbzaw4xx4ot6fk3j54@evih5bgvfdtf>
+From: Matthias Brugger <mbrugger@suse.com>
+In-Reply-To: <tosej62qjugymvxevjaqq6kqkkjlo3qpkbzaw4xx4ot6fk3j54@evih5bgvfdtf>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-4-516abadb4f49@phytec.de>
-References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
-In-Reply-To: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
-To: Fabio Estevam <festevam@gmail.com>
-CC: Teresa Remmet <t.remmet@phytec.de>, <u-boot@lists.denx.de>,
- <upstream@lists.phytec.de>, Yannic Moog <y.moog@phytec.de>
-X-Mailer: b4 0.12.3
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrALMWRmVeSWpSXmKPExsWyRpKBR3fLyqZUg2kHVSweXvW3eLu3k92i
- +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlTH13BOWgmnGFTf67BsYT2l3
- MXJySAiYSFyesIW5i5GLQ0hgMZPEmSe9UM5DRokrK7uZQarYBFQkHr+4xwpiswioSjQfvcAO
- YgsLhEtMWTWVCcTmFRCUODnzCUsXIwcHs4CmxPpd+iBhZgF5ie1v5zBDlKRIdC/aDWYLAdln
- +u4xgticAqkSS96dZgdpFRFQkzg9D6q1RmLq/XnsEHcKS7QvusUE0Sor8eJ8L1RcXmLaudfM
- EHaoxJFNq5kmMArNQnLQLISDZiE5aAEj8ypGodzM5OzUosxsvYKMypLUZL2U1E2MoFAWYeDa
- wdg3x+MQIxMH4yFGCQ5mJRHevZ1NqUK8KYmVValF+fFFpTmpxYcYpTlYlMR5V3cEpwoJpCeW
- pGanphakFsFkmTg4pRoY45SqDp2duVV/z3026fNp3T9P3ugova3946Kyd8RpS+e1Ow4/MJ5u
- oGGw948eT+6LyTnO19UZ3ZZH/6ioebp+9+LVv75/Vyo+uiFQ30OH3d7A6+i09y1sv3ftZig+
- YmCqWSRbfZb3vuWP544ZtUp3J7B5ff/qYtu+Y++hzJ7uic2HP24+Ef5DVImlOCPRUIu5qDgR
- ABmXq8pTAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,221 +102,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move all function definitions in {phytec|imx8m}_som_detection from the
-header to the source file to prevent potential linker error regarding
-multiple definitions. Also move the #if blocks with the definitions.
 
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
----
- board/phytec/common/imx8m_som_detection.c  | 32 ++++++++++++++++++++++++
- board/phytec/common/imx8m_som_detection.h  | 32 ------------------------
- board/phytec/common/phytec_som_detection.c | 39 ++++++++++++++++++++++++++++++
- board/phytec/common/phytec_som_detection.h | 38 -----------------------------
- 4 files changed, 71 insertions(+), 70 deletions(-)
 
-diff --git a/board/phytec/common/imx8m_som_detection.c b/board/phytec/common/imx8m_som_detection.c
-index a229eae152d..214b75db3b0 100644
---- a/board/phytec/common/imx8m_som_detection.c
-+++ b/board/phytec/common/imx8m_som_detection.c
-@@ -15,6 +15,8 @@
- 
- extern struct phytec_eeprom_data eeprom_data;
- 
-+#if IS_ENABLED(CONFIG_PHYTEC_IMX8M_SOM_DETECTION)
-+
- /* Check if the SoM is actually one of the following products:
-  * - i.MX8MM
-  * - i.MX8MN
-@@ -166,3 +168,33 @@ u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data)
- 	debug("%s: rtc: %u\n", __func__, rtc);
- 	return rtc;
- }
-+
-+#else
-+
-+inline int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
-+{
-+	return -1;
-+}
-+
-+inline u8 __maybe_unused
-+phytec_get_imx8m_ddr_size(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline u8 __maybe_unused phytec_get_imx8m_spi(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline u8 __maybe_unused phytec_get_imx8m_eth(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+#endif /* IS_ENABLED(CONFIG_PHYTEC_IMX8M_SOM_DETECTION) */
-diff --git a/board/phytec/common/imx8m_som_detection.h b/board/phytec/common/imx8m_som_detection.h
-index 442085cfe97..0176347414f 100644
---- a/board/phytec/common/imx8m_som_detection.h
-+++ b/board/phytec/common/imx8m_som_detection.h
-@@ -13,42 +13,10 @@
- #define PHYTEC_IMX8MM_SOM       69
- #define PHYTEC_IMX8MP_SOM       70
- 
--#if IS_ENABLED(CONFIG_PHYTEC_IMX8M_SOM_DETECTION)
--
- int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data);
- u8 __maybe_unused phytec_get_imx8m_ddr_size(struct phytec_eeprom_data *data);
- u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data);
- u8 __maybe_unused phytec_get_imx8m_spi(struct phytec_eeprom_data *data);
- u8 __maybe_unused phytec_get_imx8m_eth(struct phytec_eeprom_data *data);
- 
--#else
--
--inline int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
--{
--	return -1;
--}
--
--inline u8 __maybe_unused
--phytec_get_imx8m_ddr_size(struct phytec_eeprom_data *data)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline u8 __maybe_unused phytec_get_imx8m_spi(struct phytec_eeprom_data *data)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline u8 __maybe_unused phytec_get_imx8m_eth(struct phytec_eeprom_data *data)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--#endif /* IS_ENABLED(CONFIG_PHYTEC_IMX8M_SOM_DETECTION) */
--
- #endif /* _PHYTEC_IMX8M_SOM_DETECTION_H */
-diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
-index 724b8e844b6..f879702df45 100644
---- a/board/phytec/common/phytec_som_detection.c
-+++ b/board/phytec/common/phytec_som_detection.c
-@@ -16,6 +16,8 @@
- 
- struct phytec_eeprom_data eeprom_data;
- 
-+#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION)
-+
- int phytec_eeprom_data_setup_fallback(struct phytec_eeprom_data *data,
- 				      int bus_num, int addr, int addr_fallback)
- {
-@@ -201,3 +203,40 @@ u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data)
- 
- 	return api2->pcb_rev;
- }
-+
-+#else
-+
-+inline int phytec_eeprom_data_setup(struct phytec_eeprom_data *data,
-+				    int bus_num, int addr)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline int phytec_eeprom_data_setup_fallback(struct phytec_eeprom_data *data,
-+					     int bus_num, int addr,
-+					     int addr_fallback)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline int phytec_eeprom_data_init(struct phytec_eeprom_data *data,
-+				   int bus_num, int addr)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+inline void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
-+{
-+}
-+
-+inline char *__maybe_unused phytec_get_opt(struct phytec_eeprom_data *data)
-+{
-+	return NULL;
-+}
-+
-+u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data)
-+{
-+	return PHYTEC_EEPROM_INVAL;
-+}
-+
-+#endif /* IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION) */
-diff --git a/board/phytec/common/phytec_som_detection.h b/board/phytec/common/phytec_som_detection.h
-index c68e2302cc4..11009240875 100644
---- a/board/phytec/common/phytec_som_detection.h
-+++ b/board/phytec/common/phytec_som_detection.h
-@@ -56,8 +56,6 @@ struct phytec_eeprom_data {
- 	} data;
- } __packed;
- 
--#if IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION)
--
- int phytec_eeprom_data_setup_fallback(struct phytec_eeprom_data *data,
- 				      int bus_num, int addr,
- 				      int addr_fallback);
-@@ -70,40 +68,4 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data);
- char * __maybe_unused phytec_get_opt(struct phytec_eeprom_data *data);
- u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data);
- 
--#else
--
--inline int phytec_eeprom_data_setup(struct phytec_eeprom_data *data,
--				    int bus_num, int addr)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline int phytec_eeprom_data_setup_fallback(struct phytec_eeprom_data *data,
--					     int bus_num, int addr,
--					     int addr_fallback)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline int phytec_eeprom_data_init(struct phytec_eeprom_data *data,
--				   int bus_num, int addr)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--
--inline void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
--{
--}
--
--inline char *__maybe_unused phytec_get_opt(struct phytec_eeprom_data *data)
--{
--	return NULL;
--}
--
--u8 __maybe_unused phytec_get_rev(struct phytec_eeprom_data *data)
--{
--	return PHYTEC_EEPROM_INVAL;
--}
--#endif /* IS_ENABLED(CONFIG_PHYTEC_SOM_DETECTION) */
--
- #endif /* _PHYTEC_SOM_DETECTION_H */
+On 19/12/2023 09:51, Ivan T. Ivanov wrote:
+> On 12-18 23:32, Stefan Wahren wrote:
+>>>
+>>>    static const struct udevice_id bcm2835_video_ids[] = {
+>>> -	{ .compatible = "brcm,bcm2835-hdmi" },
+>>> -	{ .compatible = "brcm,bcm2711-hdmi0" },
+>>> -	{ .compatible = "brcm,bcm2708-fb" },
+>>> +	{ .compatible = "brcm,bcm2835-hdmi",  .data = VIDEO_BPP32},
+>>> +	{ .compatible = "brcm,bcm2711-hdmi0", .data = VIDEO_BPP32},
+>>> +	{ .compatible = "brcm,bcm2708-fb",    .data = VIDEO_BPP16 },
+>> this change looks wrong to me. Before we used VIDEO_BPP32 for
+>> brcm,bcm2708-fb. I think it's hard to explain why we should downgrade
+>> the other boards. I would expect some brcm,bcm2712 compatible at least
+>> this needs an explanation in the commit message.
+>>
+> 
+> If you are confident that this semi device was working before with
+> BPP32 I will try to find better way to handle this. Do you remember
+> which RPi version was this?
+> 
 
--- 
-2.34.1
+I think that was RPi1 maybe RPi2 Zero W as well.
 
+Regards,
+Matthias
