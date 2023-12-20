@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BCA5C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEF74C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68E69875C5;
-	Wed, 20 Dec 2023 05:47:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07BC187530;
+	Wed, 20 Dec 2023 05:47:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i2G4nXGs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HuD6MtEu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0097C875C5; Wed, 20 Dec 2023 05:47:31 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 19FEC86E05; Wed, 20 Dec 2023 05:47:34 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B88987630
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:47:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A77E8875E9
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:47:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40d352c826eso2349565e9.0
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:47:28 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a268836254aso93306066b.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:47:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047647; x=1703652447; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703047651; x=1703652451; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z0j0XoX/F4CYjfrrCPTxHlaT+yiksoIM6Qy8SYqbu4M=;
- b=i2G4nXGsYDjfRwZSZEGivymwT56k3O8ffQDOCsIIl/ptpgfqwK8Xwur2bWBHdBzBTI
- rLeyJK9jE9gPFjeEgPWyEEz3ycEk/112sGrMHLAdYNKDO3qikkdZChWow0TfkMpd8kqA
- CwARxFDzEiQHiOJpdQ/3k56f4V3ym/ti8aXOo=
+ bh=MGBwOuSzTgvJ564O2l/POGSwftHo++A8lNWRav5U1qY=;
+ b=HuD6MtEu6wsBDgwqe9uQNcxEon8N0JNKFHnYMvpCJLXxajnllsuNtzLASxwkestx0O
+ 1fbd7u+rADpGj5Si0ZqNE2bK1RKiBO/BhCm9jA1bAUaf6LeaqprI2287r9QQdiLzjEUI
+ 7W+RC0KzO689gwIW14BDn6nyd+EyRE1ZGAYKU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047647; x=1703652447;
+ d=1e100.net; s=20230601; t=1703047651; x=1703652451;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z0j0XoX/F4CYjfrrCPTxHlaT+yiksoIM6Qy8SYqbu4M=;
- b=m/xjCL9+CEejL+mpuxH4JKdzWOUKyleg3Wa0gOEiBXOI+PbW7k6O/qhvLUpdU8aeqi
- 7R+TavN1l18U7kZgEoImSq7/ZJ2QraMcN+rOegsjE4sDDSx+VijOUX2zAhohWoQf4MAH
- wpnKQpXZyHT035LIDcN4tBf1JZV2BC9LsbSF1vZyios9y6rJLbC2L16NSEQLiFsul52g
- n/CNqCLvHFG3uoAdKvVV5ltS04QbQAcVvIDAIhN2NF6DVjvlUV6r9mQ2UITsY3ZhuW5x
- AYPJPM7POnbYXYiH1OhLbuT5qNXsIeLnmEsEoVPqRKXbwL9tF4ZWVvchTznc+7PT9VcM
- 790Q==
-X-Gm-Message-State: AOJu0YwWB2I5Yz2uDl1SjuzETcHTM+qBcXBNw7nkgxmH9NLI6eZnqaDc
- DxfF80KekLmXkiOhXK6G2PEUUg/Avbp8FO0Wy/Evsw==
-X-Google-Smtp-Source: AGHT+IH/9tW5NV6GCaMzuxvXkKRxguwQaOwhT3X3RkI6cJ8E1LvdCj5G9z/urywVSYomWPSAuBUoTGKCKRA1S6Gc6Bg=
-X-Received: by 2002:a05:600c:808b:b0:40c:32c7:84fd with SMTP id
- ew11-20020a05600c808b00b0040c32c784fdmr10727069wmb.80.1703047647489; Tue, 19
- Dec 2023 20:47:27 -0800 (PST)
+ bh=MGBwOuSzTgvJ564O2l/POGSwftHo++A8lNWRav5U1qY=;
+ b=JCB2F5S+G8XlryCrEEQ+2UcoNHhSB/oxBFwaOMBuvi4i7j3+b1UEVTP4pQsBn3NuBR
+ +PqdpC7n0dpRvgbCt0pFpOeOo5x5n79tS2NBzNQqspgOUpEa6TgyAJM2HwbFqE4ndkd/
+ xSBb19Itm5aZ4Gv8h9sZ7XD5ykjF6g1ZfJPUe2r3+PefT74/HcMafe3cAGxT+t2GlsgF
+ uEGrp3qawsVx5/2Pa6zvkSt80RYEV2UvCHbdXAeLTIYZjVtqMUXWvsdW2ttbSZPIVHKe
+ HmkymH6vQSO+sawmXvWGdXj+E6/b5tgvtmGMtLn8AWizeLzsE5gyOmE3+adzGuyziFwa
+ SdtA==
+X-Gm-Message-State: AOJu0YxqeXqZj2MJq0k+SesD5S/YIHLBaFkmRD9cN9+aWs56mZG/Q5iT
+ ceYvZlXvajnWMf0gqBdCK12mOpmWjy30n/pSsz9+1Gys7ipcuRnI8QE=
+X-Google-Smtp-Source: AGHT+IHbjHcRfRJu/ZrWR1Hgxpw6NDtClFIZVJjHkzGFgEVcdEeXYka8IgZBxf2DVdDRxMHXHjY1nCGSAK3APRmIxd0=
+X-Received: by 2002:a17:906:1447:b0:a23:65de:419c with SMTP id
+ q7-20020a170906144700b00a2365de419cmr1808741ejc.144.1703047650886; Tue, 19
+ Dec 2023 20:47:30 -0800 (PST)
 MIME-Version: 1.0
 References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-4-sumit.garg@linaro.org>
-In-Reply-To: <20231214135103.1606605-4-sumit.garg@linaro.org>
+ <20231214135103.1606605-6-sumit.garg@linaro.org>
+In-Reply-To: <20231214135103.1606605-6-sumit.garg@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:47:15 -0700
-Message-ID: <CAPnjgZ0h5u8TS=SwAkSgAmbmJiTFriqY8Le++pfS=Yp7R+yabQ@mail.gmail.com>
-Subject: Re: [PATCH 3/8] scripts/Makefile.lib: Statically define *-u-boot.dtsi
- files location
+Date: Tue, 19 Dec 2023 21:47:19 -0700
+Message-ID: <CAPnjgZ38rEbOH-nPktG=O2iD3RKpzoEX1BrmF9TnGyFWPKgppw@mail.gmail.com>
+Subject: Re: [PATCH 5/8] doc: devicetree: Updates for devicetree-rebasing
+ subtree
 To: Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
@@ -94,81 +94,194 @@ Hi Sumit,
 
 On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
 >
-> Allow u-boot to build DTB from a different directory tree such that
-> *-u-boot.dtsi files can be included from a common location. Currently
-> that location is arch/$(ARCH)/dts/, so statically define that common
-> location.
+> Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+> subtree and maintain a regular sync with Linux kernel devicetree files
+> and bindings.
 >
-> This is needed for platform owners to start building DTB files from
-> devicetree-rebasing directory but still being able to include
-> *-u-boot.dtsi files.
+> Along with that add documentation regarding how to run DT bindings
+> schema checks.
 >
 > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->  scripts/Makefile.lib | 25 ++++++++++++++-----------
->  1 file changed, 14 insertions(+), 11 deletions(-)
+>  doc/develop/devicetree/control.rst | 108 +++++++++++++++++++++++------
+>  1 file changed, 86 insertions(+), 22 deletions(-)
 >
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 27b9437027c..4a002b0e0ca 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -159,18 +159,20 @@ cpp_flags      = -Wp,-MD,$(depfile) $(NOSTDINC_FLAGS) $(UBOOTINCLUDE)     \
->  ld_flags       = $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
+> diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+> index cbb65c9b177..12ef55ed368 100644
+> --- a/doc/develop/devicetree/control.rst
+> +++ b/doc/develop/devicetree/control.rst
+> @@ -1,5 +1,6 @@
+>  .. SPDX-License-Identifier: GPL-2.0+
+>  .. sectionauthor:: Copyright 2011 The Chromium OS Authors
+> +.. Copyright 2023 Linaro Ltd.
 >
->  # Try these files in order to find the U-Boot-specific .dtsi include file
-> -u_boot_dtsi_options = $(strip $(wildcard $(dir $<)$(basename $(notdir $<))-u-boot.dtsi) \
-> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
-> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
-> -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
-> -       $(wildcard $(dir $<)u-boot.dtsi))
-> +UBOOT_DTSI_LOC = $(srctree)/arch/$(ARCH)/dts/
-
-How about lower case since it is internal. Also we know it is U-Boot,
-so perhap dtsi_loc ?
-
-Otherwise looks OK to me.
-
+>  Devicetree Control in U-Boot
+>  ============================
+> @@ -22,12 +23,11 @@ for three reasons:
+>    hierarchical format
+>  - It is fairly efficient to read incrementally
+>
+> -The arch/<arch>/dts directories contains a Makefile for building the devicetree
+> -blob and embedding it in the U-Boot image. This is useful since it allows
+> -U-Boot to configure itself according to what it finds there. If you have
+> -a number of similar boards with different peripherals, you can describe
+> -the features of each board in the devicetree file, and have a single
+> -generic source base.
+> +The U-boot Makefile infrastructure allows for building the devicetree blob
+> +and embedding it in the U-Boot image. This is useful since it allows U-Boot
+> +to configure itself according to what it finds there. If you have a number
+> +of similar boards with different peripherals, you can describe the features
+> +of each board in the devicetree file, and have a single generic source base.
+>
+>  To enable this feature, add CONFIG_OF_CONTROL to your board config file.
+>
+> @@ -68,8 +68,21 @@ a binary file. U-Boot adds its own `fdtgrep` for creating subsets of the file.
+>  Where do I get a devicetree file for my board?
+>  ----------------------------------------------
+>
+> -You may find that the Linux kernel has a suitable file. Look in the
+> -kernel source in arch/<arch>/boot/dts.
+> +Linux kernel Git repository has been the place where devicetree files along
+> +with devicetree bindings are stored and maintained. There is devicetee-rebasing
+> +(dtrepo_) which maintains a forked copy of devicetree files along with bindings
+> +at every Linux kernel major release or intermideate release candidates.
 > +
-> +u_boot_dtsi_options = $(strip $(wildcard $(UBOOT_DTSI_LOC)$(basename $(notdir $<))-u-boot.dtsi) \
-> +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi) \
-> +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi) \
-> +       $(wildcard $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi) \
-> +       $(wildcard $(UBOOT_DTSI_LOC)u-boot.dtsi))
+> +In order to maintain devicetree files sync, U-boot maintains a Git subtree for
+> +devicetee-rebasing repo as `devicetee-rebasing/` sub-directory. It is regularly
+> +kept updated with every new kernel major release via subtree pull as follows::
+> +
+> +    git subtree pull --prefix devicetree-rebasing \
+> +        git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+> +        <release-tag> --squash
+> +
+> +You may find that the `devicetee-rebasing/` sub-directory has a suitable
+> +devicetree file for your board. Look in `devicetree-rebasing/src/<arch>/`.
 >
->  u_boot_dtsi_options_raw = $(warning Automatic .dtsi inclusion: options: \
-> -       $(dir $<)$(basename $(notdir $<))-u-boot.dtsi \
-> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
-> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
-> -       $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
-> -       $(dir $<)u-boot.dtsi ... \
-> +       $(UBOOT_DTSI_LOC)$(basename $(notdir $<))-u-boot.dtsi \
-> +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dtsi \
-> +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dtsi \
-> +       $(UBOOT_DTSI_LOC)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot.dtsi \
-> +       $(UBOOT_DTSI_LOC)u-boot.dtsi ... \
->         found: $(if $(u_boot_dtsi_options),"$(u_boot_dtsi_options)",nothing!))
+>  If not you might find other boards with suitable files that you can
+>  modify to your needs. Look in the board directories for files with a
+> @@ -81,18 +94,21 @@ Failing that, you could write one from scratch yourself!
+>  Configuration
+>  -------------
 >
->  # Uncomment for debugging
-> @@ -190,6 +192,7 @@ dtsi_include_list += $(CONFIG_DEVICE_TREE_INCLUDES)
->  dtc_cpp_flags  = -Wp,-MD,$(depfile).pre.tmp -nostdinc                    \
->                  $(UBOOTINCLUDE)                                         \
->                  -I$(dir $<)                                             \
-> +                -I$(UBOOT_DTSI_LOC)                                     \
->                  -I$(srctree)/arch/$(ARCH)/dts/include                   \
->                  -I$(srctree)/include                                    \
->                  -D__ASSEMBLY__                                          \
-> @@ -328,7 +331,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
->           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
->         $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
->         $(DTC) -O dtb -o $@ -b 0 \
-> -               -i $(dir $<) $(DTC_FLAGS) \
-> +               -i $(dir $<) -i $(UBOOT_DTSI_LOC) $(DTC_FLAGS) \
->                 -d $(depfile).dtc.tmp $(dtc-tmp) || \
->                 (echo "Check $(shell pwd)/$(pre-tmp) for errors" && false) \
->                 ; \
+> -Use::
+> +Traditionally, U-boot placed copies of devicetree source files from Linux
+> +kernel into `arch/<arch>/dts/<name>.dts` which can be selected via::
+>
+> -   #define CONFIG_DEFAULT_DEVICE_TREE  "<name>"
+> +    #define CONFIG_DEFAULT_DEVICE_TREE "<name>"
+>
+> -to set the filename of the devicetree source. Then put your devicetree
+> -file into::
+> +However, it has become combersome over time for each SoC/board maintainer to
+> +keep devicetree files in sync with Linux kernel. Thereby, SoC/board maintainers
+> +are encouraged to migrate to use mirrored copies from `devicetree-rebasing/`
+> +into `dts/arch/<arch>/<vendor>` via::
+>
+> -   arch/<arch>/dts/<name>.dts
+> +    #define CONFIG_OF_UPSTREAM=y
+> +    #define CONFIG_DEFAULT_DEVICE_TREE "<vendor>/<name>"
+>
+> -This should include your CPU or SOC's devicetree file, placed in
+> -`arch/<arch>/dts`, and then make any adjustments required using a u-boot-dtsi
+> -file for your board.
+> +This should include your CPU or SOC's devicetree file. On top of that any U-boot
+> +specific tweaks (see: dttweaks_) can be made for your board.
+>
+>  If CONFIG_OF_EMBED is defined, then it will be picked up and built into
+>  the U-Boot image (including u-boot.bin). This is suitable for debugging
+> @@ -156,8 +172,9 @@ ways:
+>  Adding tweaks for U-Boot
+>  ------------------------
+>
+> -It is strongly recommended that devicetree files in U-Boot are an exact copy of
+> -those in Linux, so that it is easy to sync them up from time to time.
+> +With devicetee-rebasing Git subtree, it is ensured that devicetree files in
+> +U-Boot are an exact copy of those in Linux kernel via mirroring into
+> +`dts/arch/<arch>/<vendor>`.
+>
+>  U-Boot is of course a very different project from Linux, e.g. it operates under
+>  much more restrictive memory and code-size constraints. Where Linux may use a
+> @@ -170,8 +187,8 @@ constraints are even more extreme and the devicetree is shrunk to remove
+>  unwanted nodes, or even turned into C code to avoid access overhead.
+>
+>  U-Boot automatically looks for and includes a file with updates to the standard
+> -devicetree for your board, searching for them in the same directory as the
+> -main file, in this order::
+> +devicetree for your board, searching for them in `arch/<arch>/dts/` in this
+> +order::
+>
+>     <orig_filename>-u-boot.dtsi
+>     <CONFIG_SYS_SOC>-u-boot.dtsi
+> @@ -200,6 +217,52 @@ to specify a list of .dtsi files that will also be included when
+>  building .dtb files.
+>
+>
+> +Devicetree bindings schema checks
+> +---------------------------------
+> +
+> +With devicetee-rebasing Git subtree, the devicetree bindings are also regularly
+> +synced with Linux kernel as `devicetree-rebasing/Bindings/` sub-directory. This
+> +allows U-boot to run devicetree bindings schema checks which will bring
+> +compliance to U-boot core/drivers regarding usage of devicetree.
+> +
+> +Dependencies
+> +~~~~~~~~~~~~
+> +
+> +The DT schema project must be installed in order to validate the DT schema
+> +binding documents and validate DTS files using the DT schema. The DT schema
+> +project can be installed with pip::
+> +
+> +    pip3 install dtschema
+> +
+> +Note that 'dtschema' installation requires 'swig' and Python development files
+> +installed first. On Debian/Ubuntu systems::
+> +
+> +    apt install swig python3-dev
+> +
+> +Several executables (dt-doc-validate, dt-mk-schema, dt-validate) will be
+> +installed. Ensure they are in your PATH (~/.local/bin by default).
+> +
+> +Recommended is also to install yamllint (used by dtschema when present).
+> +
+> +Running checks
+> +~~~~~~~~~~~~~~
+> +
+> +In order to perform validation of DTB files, use the ``dtbs_check`` target::
+> +
+> +    make dtbs_check
+> +
+> +It is also possible to run checks with a subset of matching schema files by
+> +setting the ``DT_SCHEMA_FILES`` variable to 1 or more specific schema files or
+> +patterns (partial match of a fixed string). Each file or pattern should be
+> +separated by ':'.
+> +
+> +::
+> +
+> +    make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml:rtc.yaml
+> +    make dtbs_check DT_SCHEMA_FILES=/gpio/
+> +    make dtbs_check DT_SCHEMA_FILES=trivial-devices.yaml
+> +
+> +
+>  Relocation, SPL and TPL
+>  -----------------------
+>
+> @@ -261,8 +324,9 @@ used it before Linux (e.g. snow). The two projects developed in parallel
+>  and there are still some differences in the bindings for certain boards.
+>  While there has been discussion of having a separate repository for devicetree
+>  files, in practice the Linux kernel Git repository has become the place where
+> -these are stored, with U-Boot taking copies and adding tweaks with u-boot.dtsi
+> -files.
+> +these are stored, with U-Boot taking copies via devicetree-rebasing repo
+> +(see: dtrepo_) and adding tweaks with u-boot.dtsi files.
+>
+>  .. _dtspec: https://www.devicetree.org/specifications/
+>  .. _dtlist: https://www.spinics.net/lists/devicetree-compiler/
+> +.. _dtrepo: https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
 > --
 > 2.34.1
 >
+
+OK, ignore my comment about docs.
 
 Regards,
 Simon
