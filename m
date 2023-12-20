@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC7EC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:46:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CF2C46CCD
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC0D8876D5;
-	Wed, 20 Dec 2023 09:45:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BE24876E8;
+	Wed, 20 Dec 2023 09:45:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="s8G13188";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="SLbTO98I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2B888765B; Wed, 20 Dec 2023 09:45:44 +0100 (CET)
+ id A99F486D4C; Wed, 20 Dec 2023 09:45:44 +0100 (CET)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E4C486D4C
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:45:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03C278765E
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:45:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
@@ -30,32 +30,30 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8VUaPA1QH1AvkbCTDgP7JVisbqVuqKy9DRG8ugH+Huc=;
- b=s8G13188s8LWgUY+z0Zf4H8keW06yW7foPPOQBM53rxJeAThE/57sJ3c6DA5GHsa
- ocqLnpY+9x4DMJ5qD9sAZp1TUiy6kl/8dCpsOciI9pTzgt9o3FUZ7KXWJ8AQfhvY
- OTnyqFQ82dwp4KQfr1eJYubUHRLtYMeWG43BXh4ubeY=;
-X-AuditID: ac14000a-fadff7000000290d-e4-6582a9b3312a
+ bh=+p9cSagMgdIthOEDQCevQKCsaJYplLP/nKN79+vfSgw=;
+ b=SLbTO98Icf+hsLg2wHCARyISZReTVOydKAbmwzPTc8EfLIHFFvAF7dmgfyNjUUPa
+ bE6t8zoHYi8Ys7kV5bDzQbNXHwc6aMaQ+dF44KVhZ+NgGc5bsZ9/0tAcqtN6qecS
+ s69kcYlRE7cga4svD8mH4Qc+BWrBCLSC8H6JMiA1LFM=;
+X-AuditID: ac14000a-fbefe7000000290d-eb-6582a9b429a8
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 15.E0.10509.3B9A2856;
- Wed, 20 Dec 2023 09:45:39 +0100 (CET)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 67.E0.10509.4B9A2856;
+ Wed, 20 Dec 2023 09:45:40 +0100 (CET)
 Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
- 2023 09:45:39 +0100
+ 2023 09:45:40 +0100
 From: Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v2 0/5] This series fixes various bugs in the phytec
- som_detection unit.
-Date: Wed, 20 Dec 2023 09:45:31 +0100
-Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
+Date: Wed, 20 Dec 2023 09:45:36 +0100
+Subject: [PATCH v2 5/5] board: phytec: phytec_som_detection: fix
+ uninitialized bug
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAKupgmUC/6WOQQ6CMBBFr0K6dgydNg268h6GkEJH6ALatIgSw
- t0tsHGty/cn//1ZWKRgKbJrtrBAk43WDQnwlLGm00NLYE1ihjkKjryAl/UwQ+9cC76bR2rAEDx
- 9HAPpvoqurwyldEye6mHfFKGWEjUnroSQLHl9oP2QtPcycWfj6MK8vzDxLf1nbeKQA3GtlK4LR
- K5uR/FsaBs/zJj/am5QPgSKSy0b8WUu13X9AITbvr5MAQAA
+Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-5-516abadb4f49@phytec.de>
+References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
+In-Reply-To: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
 To: Fabio Estevam <festevam@gmail.com>
 CC: Teresa Remmet <t.remmet@phytec.de>, <u-boot@lists.denx.de>,
  <upstream@lists.phytec.de>, Yannic Moog <y.moog@phytec.de>
@@ -63,17 +61,17 @@ X-Mailer: b4 0.12.3
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWyRpKBR3fzyqZUgzdvbCweXvW3eLu3k92i
- +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlbH8w2SWgkkcFZ9OnWJsYPzG
- 1sXIySEhYCJx4ftexi5GLg4hgcVMEpPvXWGFcB4ySlzYtYQVpIpNQEXi8Yt7YLawQJTEzCnP
- 2UFsFgFVieabt1lAbF6BFIkH+89B2YISJ2c+AbI5OJgFNCXW79IHCTMLyEtsfzuHGWS+hMB0
- Jolrz3+ygtSICKhJnJ4HVVMjMfX+PHaI44Ql2hfdYgKxhQRkJV6c74WKy0tMO/eaGcIOlTiy
- aTXTBEbBWUg2z0LYPAvJ5gWMzKsYhXIzk7NTizKz9QoyKktSk/VSUjcxgsJWhIFrB2PfHI9D
- jEwcjIcYJTiYlUR493Y2pQrxpiRWVqUW5ccXleakFh9ilOZgURLnXd0RnCokkJ5YkpqdmlqQ
- WgSTZeLglGpg9PWsV2icwrVlTuNB/r0S8QwC/1oS0jIZMvI6VqxzWmKWKqX7hOXmBpmsiTqP
- S7VtLjoxPbhVqdocYXHbaxt/rn/hgznzt3Qy/Gpi3BbGc0fVxM3h2Z65q6f5/O98eHz6mTWr
- Ws/8WvOh6dydBRkhGzcsKr3svTddP2FR/ffeXeeZtY7UZDzgU2Ipzkg01GIuKk4EAGUV/LNJ
- AgAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrALMWRmVeSWpSXmKPExsWyRpKBR3fLyqZUg7aduhYPr/pbvN3byW7R
+ /U7dgdlj56y77B5n7+xg9OjvbmENYI7isklJzcksSy3St0vgyjjx7wVbwV72ioVXtRsY57B1
+ MXJySAiYSGxZv4G9i5GLQ0hgMZPE7aMP2CCch4wSV1Z2M4NUsQmoSDx+cY8VxGYRUJU48wSi
+ W1ggROLEtrvsIDavgKDEyZlPWLoYOTiYBTQl1u/SBwkzC8hLbH87hxmiJEVi0oYlYGOEgOwz
+ ffcYQWxOgVSJJe9Os4O0igioSZyeB9VaIzH1/jx2iDuFJdoX3WKCaJWVeHG+FyouLzHt3Gtm
+ CDtU4sim1UwTGIVmITloFsJBs5ActICReRWjUG5mcnZqUWa2XkFGZUlqsl5K6iZGUCiLMHDt
+ YOyb43GIkYmD8RCjBAezkgjv3s6mVCHelMTKqtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNL
+ UrNTUwtSi2CyTBycUg2M1Zsddhfv4jt4+5OlR2jI2T/9lafNhF9OXrZs6WmzZMYqvuaLnizz
+ Fu5s9filUdVodfnW1pa6tf9i3hxlldmQzPoqW89QRWOve53O48Ur5va7nevoLM1c6h5darXD
+ 6Fv5HmOGjJPKBu/cGKdc9ExXOvXLOXve/o2L122QOK9gtCHr3jTn3Px4JZbijERDLeai4kQA
+ es0BoFMCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,29 +88,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When som_type does not match any case, it is uninitialized and the
+function still tries to print the SoM info. Rather, this is an error
+condition and the function should abort prematurely. Highlight this by
+printing an error message and returning early.
 
+Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
-Changes in v2:
-- fixed accidental squashing of changes -> split into 2 separate patches
+ board/phytec/common/phytec_som_detection.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
----
-Yannic Moog (5):
-      board: phytec: imx8m_som_detection: change phytec_imx8m_detect return type
-      board: phytec: imx8m_som_detection: fix uninitialized pointer bug
-      board: phytec: phytec_som_detection: fix eeprom_data zero check
-      board: phytec: som_detection: move definitions to source file
-      board: phytec: phytec_som_detection: fix uninitialized bug
+diff --git a/board/phytec/common/phytec_som_detection.c b/board/phytec/common/phytec_som_detection.c
+index f879702df45..1b10923b62f 100644
+--- a/board/phytec/common/phytec_som_detection.c
++++ b/board/phytec/common/phytec_som_detection.c
+@@ -161,7 +161,8 @@ void __maybe_unused phytec_print_som_info(struct phytec_eeprom_data *data)
+ 			sub_som_type2 = 2;
+ 			break;
+ 		default:
+-			break;
++			pr_err("%s: Invalid SoM type: %i", __func__, api2->som_type);
++			return;
+ 		};
+ 
+ 		printf("SoM: %s-%03u-%s-%03u ",
 
- board/phytec/common/imx8m_som_detection.c  | 40 +++++++++++++++++++++++---
- board/phytec/common/imx8m_som_detection.h  | 34 +---------------------
- board/phytec/common/phytec_som_detection.c | 46 ++++++++++++++++++++++++++++--
- board/phytec/common/phytec_som_detection.h | 38 ------------------------
- 4 files changed, 80 insertions(+), 78 deletions(-)
----
-base-commit: 8f5043ee6d378d7c10d947cf48b047a5954ef5b3
-change-id: 20231218-wip-y-moog-phytec-de-upstream_som_detection_fixes-b442a1e16334
-
-Best regards,
 -- 
-Yannic Moog <y.moog@phytec.de>
+2.34.1
 
