@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FE2C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:24:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2AC4C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B32118701C;
-	Wed, 20 Dec 2023 09:24:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 7BBE38701C;
+	Wed, 20 Dec 2023 09:25:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="lJUZL88s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hNuzhob9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB6B6875F0; Wed, 20 Dec 2023 09:24:09 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4AF7B8744F; Wed, 20 Dec 2023 09:25:07 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D988A86FFE
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:24:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACF9586FFE
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:25:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=T.Remmet@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1703060647; x=1705652647;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/93cLeumMBA85jbt89JUm6ZUOTjA+7VR41AlK2M/utk=;
- b=lJUZL88sHc+VKgeqXum35/VGTt2tTrvmRowHmF2/lzSozz6dXlJA0XBghPZ9Fiud
- Sy4HH4I3Lehz+14mwvTDgvzBBMWeIrVV9TkOYkilNnp7jzX9bgIdhB3Td+Pd0IEf
- igvHgBpx8aqQ/dciI4gNyW3UfWyjO+YzqTIiz36K4rU=;
-X-AuditID: ac14000a-fbefe7000000290d-a5-6582a4a73dec
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 4F.B0.10509.7A4A2856;
- Wed, 20 Dec 2023 09:24:07 +0100 (CET)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
- 2023 09:24:07 +0100
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Wed, 20 Dec 2023 09:24:07 +0100
-From: Teresa Remmet <T.Remmet@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>, Yannic Moog <Y.Moog@phytec.de>
-CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/4] board: phytec: phytec_som_detection: fix eeprom_data
- zero check
-Thread-Topic: [PATCH 3/4] board: phytec: phytec_som_detection: fix eeprom_data
- zero check
-Thread-Index: AQHaMx1UvCMGAM7y2UW7dQdsW/EycLCxxM0A
-Date: Wed, 20 Dec 2023 08:24:07 +0000
-Message-ID: <89de23ce8e9e8b4acb3970dab61cf4cf472f515d.camel@phytec.de>
-References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-0-c24f3239b4c3@phytec.de>
- <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-3-c24f3239b4c3@phytec.de>
-In-Reply-To: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-3-c24f3239b4c3@phytec.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2B981DD932704E4F8DBAD0D15827A51C@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-50e548e0bd6so187137e87.2
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 00:25:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703060702; x=1703665502; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TR1YEEjd81+0wONqJHaVnY1Ll/IhQ7kluYGQhwBaiXA=;
+ b=hNuzhob9aBLx8f0wgtzhTmfpInzgXXzrTRGxbfjG9EwzVEvYU0cOlELhSQTBAVdhTn
+ 8WoHR6ssVDNUn8LJWM2FfPgBblE7A770phGEDi/3EjclCIWgxcHLKl6iFivkpw0oBMBF
+ z4ByGeTT+Rfa66iaobyVxRKYAz8/06DrjUt/8J0voLtUQEwdMz5UYaobmtVBZs6n/3QT
+ riHQ5xhDwH5M+gNxtMzCwt0AEdt6nRgRcD0n4IovxJwOw2VHr/AovWKbrcz7zOTLVkjk
+ 4Dx4ge763CIxwjbpCb00tsNu8IRGdefNiln0bDbtgjqD/ogKol+RsvMHbpYj3AA/e2sB
+ enwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703060702; x=1703665502;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TR1YEEjd81+0wONqJHaVnY1Ll/IhQ7kluYGQhwBaiXA=;
+ b=sz13iJUJB/cKRPhV5ztE4mIQ/+DfcCeLO3H9dEVHZ768G3K1aeGBkiVnRt4gigaKi+
+ Dj/lEfo6Wo5YF3WhyH3qHiVRJrnwOkWUs2VscfFdX6L32EnQAf2r1n8KMKJZB9q8jJJh
+ IhR3I7bnlquyvQe927gEgVHT+1gmQQaf1Uhf5B92r6S0cC7qI2I6RFfEqWW2aVOHDAmZ
+ XhV5SRMJwbhfx7wkYwOFfNoRWiM0+Ws4zGRDLNuvHObUtTaI2l01H8Zy1W5hX/XIhDfT
+ jzNTuQm8VqjNJI1Q2Xjlq4pMbT6XGCloFgOQUi4QlVsek/RshNwZExebM5tqL0Yb1+nd
+ Z7Pw==
+X-Gm-Message-State: AOJu0YxxqP2iMDSUE5zA88WJnPusAM2BLL5lmcojyIwLm1wpnbdK72Cf
+ jMK4+PzFl/yNoYkovo3DvW+wrNdlL1Y8DFPtKWNvtw==
+X-Google-Smtp-Source: AGHT+IHD4zhPrFdwNRUPs6SIi0Cz9EZ4sqxbw5f3M7C5G1FDJPwCe/ruK2ey9bb6oAsTuPn5ES+bULWU4Qmei+QQ1kg=
+X-Received: by 2002:a19:e04b:0:b0:50e:34e3:abab with SMTP id
+ g11-20020a19e04b000000b0050e34e3ababmr2473217lfj.18.1703060701970; Wed, 20
+ Dec 2023 00:25:01 -0800 (PST)
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCIsWRmVeSWpSXmKPExsWyRpKBV3f5kqZUgw/rNSweXvW3eLu3k92i
- +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlXH+fUjBnuSKpjkb2RsYvyR0
- MXJySAiYSPy7cIWpi5GLQ0hgMZNE77IlLBDOfUaJg3v2sEM4GxglTs0/zAzSwiagIfHyRDcT
- iC0i4CvxdNofdhCbWSBL4v/FWWwgtrBAlMTKiYdYIGqiJf53z2WEsI0k5l7/C1bDIqAq8ef/
- GrA5vAJuEkun7GKEWHaAUeLf5JdAQzk4OAVSJf7tzwSpYRSQldiw4TwzxC5xiU3PvrNCvCAg
- sWQPRFxCQFTi5eN/UHF5iRO3pjGBjGEW0JRYv0sfwrSQeLuhEmKKosSU7ofsEBcISpyc+YRl
- AqP4LCQLZiE0z0JonoWkeRaS5gWMrKsYhXIzk7NTizKz9QoyKktSk/VSUjcxgmJOhIFrB2Pf
- HI9DjEwcjIcYJTiYlUR493Y2pQrxpiRWVqUW5ccXleakFh9ilOZgURLnXd0RnCokkJ5Ykpqd
- mlqQWgSTZeLglGpg5Op9lbtBbC23TuVCD5fe0+s0mNyzXtgL/9je/fOqc87WcxxS4eVWmtmZ
- E+P5tSxPXLP6zG/sJp01xW3GvbPvLIU7u93zr7x9JLNFO+jFdkO1D/fvbdgj/OHyxBUfbMW+
- z5rt6Fz2aM6PspOH15QvLTqwecfRCVWnzI5UfD63VefUDeuzO3Ken1diKc5INNRiLipOBABr
- DB/OpwIAAA==
+References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+ <20231127171058.165777-2-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2Vo22gasW05um2og==yRoC33YB3eW=xXVt2dE9xqDgVw@mail.gmail.com>
+ <CAC_iWjJE=-rOhOLVe4d7sUH8DEJjn5hdHoHpKe70d4gmB7---Q@mail.gmail.com>
+ <CAC_iWjLrmk2AwxoO8tDtG8notrLQuSdRtqzLpTzBRuM1QO0wzw@mail.gmail.com>
+ <CAPnjgZ3XXtD24cqn1eEtZu0rxuJz4DR8vttu2YDwes3_ToJNkQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3XXtD24cqn1eEtZu0rxuJz4DR8vttu2YDwes3_ToJNkQ@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 20 Dec 2023 10:24:26 +0200
+Message-ID: <CAC_iWjLk1=hbAvTje6oOZcayfQTvZ7sCu3TiXKGPpj-5W1Ou5Q@mail.gmail.com>
+Subject: Re: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
+To: Simon Glass <sjg@chromium.org>
+Cc: trini@konsulko.com, sean.anderson@seco.com, neil.armstrong@linaro.org, 
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,167 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gWWFubmljLA0KDQpBbSBNaXR0d29jaCwgZGVtIDIwLjEyLjIwMjMgdW0gMDk6MTkgKzAx
-MDAgc2NocmllYiBZYW5uaWMgTW9vZzoNCj4gSW4gcGh5dGVjX2VlcHJvbV9kYXRhX2luaXQsIGFm
-dGVyIHJlYWRpbmcgZWVwcm9tIGRhdGEgaW50byBidWZmZXIsIGl0DQo+IGlzDQo+IGNoZWNrZWQg
-d2hldGhlciBhbGwgYnl0ZXMgYXJlIDB4MCBieSBpdGVyYXRpbmcgb3ZlciBjaHVua3Mgb2YgdGhl
-DQo+IGJ1ZmZlci4gVGhlIG9mZnNldCwgb3IgaW5kZXggb2YgdGhlIGNodW5rLCB3YXMgbmV2ZXIg
-Y2hhbmdlZCwgbGVhZGluZw0KPiB0bw0KPiByZXBlYXRlZCBjb21wYXJpc29uIG9mIG9ubHkgdGhl
-IGZpcnN0IGNodW5rLiBVc2UgYXJyYXkgbm90YXRpb24gYW5kDQo+IGFjY2VzcyBjaHVuayB2aWEg
-YXJyYXkgaW5kZXggdG8gY29tcGFyZSBhbGwgY2h1bmtzIG9mIHRoZSBidWZmZXIuDQoNCml0IHNl
-ZW1zIHRoYXQgeW91IGhhdmUgaGVyZSBhY2NpZGVudGFsbHkgdHdvIHBhdGNoZXMgaW4gb25lLg0K
-UGxlYXNlIGNoZWNrLg0KDQpUZXJlc2ENCg0KPiANCj4gU2lnbmVkLW9mZi1ieTogWWFubmljIE1v
-b2cgPHkubW9vZ0BwaHl0ZWMuZGU+DQo+IC0tLQ0KPiDCoGJvYXJkL3BoeXRlYy9jb21tb24vaW14
-OG1fc29tX2RldGVjdGlvbi5jwqAgfCAzMg0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+IMKg
-Ym9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21fZGV0ZWN0aW9uLmjCoCB8IDMyIC0tLS0tLS0t
-LS0tLS0tLS0tLS0tDQo+IC0tDQo+IMKgYm9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2Rl
-dGVjdGlvbi5jIHwgNDMNCj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tDQo+IMKgYm9h
-cmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5oIHwgMzggLS0tLS0tLS0tLS0t
-LS0tLS0tLS0NCj4gLS0tLS0tDQo+IMKgNCBmaWxlcyBjaGFuZ2VkLCA3MyBpbnNlcnRpb25zKCsp
-LCA3MiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9ib2FyZC9waHl0ZWMvY29tbW9u
-L2lteDhtX3NvbV9kZXRlY3Rpb24uYw0KPiBiL2JvYXJkL3BoeXRlYy9jb21tb24vaW14OG1fc29t
-X2RldGVjdGlvbi5jDQo+IGluZGV4IGEyMjllYWUxNTJkLi4yMTRiNzVkYjNiMCAxMDA2NDQNCj4g
-LS0tIGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21fZGV0ZWN0aW9uLmMNCj4gKysrIGIv
-Ym9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21fZGV0ZWN0aW9uLmMNCj4gQEAgLTE1LDYgKzE1
-LDggQEANCj4gwqANCj4gwqBleHRlcm4gc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSBlZXByb21f
-ZGF0YTsNCj4gwqANCj4gKyNpZiBJU19FTkFCTEVEKENPTkZJR19QSFlURUNfSU1YOE1fU09NX0RF
-VEVDVElPTikNCj4gKw0KPiDCoC8qIENoZWNrIGlmIHRoZSBTb00gaXMgYWN0dWFsbHkgb25lIG9m
-IHRoZSBmb2xsb3dpbmcgcHJvZHVjdHM6DQo+IMKgICogLSBpLk1YOE1NDQo+IMKgICogLSBpLk1Y
-OE1ODQo+IEBAIC0xNjYsMyArMTY4LDMzIEBAIHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRf
-aW14OG1wX3J0YyhzdHJ1Y3QNCj4gcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiDCoMKgwqDC
-oMKgwqDCoMKgZGVidWcoIiVzOiBydGM6ICV1XG4iLCBfX2Z1bmNfXywgcnRjKTsNCj4gwqDCoMKg
-wqDCoMKgwqDCoHJldHVybiBydGM7DQo+IMKgfQ0KPiArDQo+ICsjZWxzZQ0KPiArDQo+ICtpbmxp
-bmUgaW50IF9fbWF5YmVfdW51c2VkIHBoeXRlY19pbXg4bV9kZXRlY3Qoc3RydWN0DQo+IHBoeXRl
-Y19lZXByb21fZGF0YSAqZGF0YSkNCj4gK3sNCj4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIC0xOw0K
-PiArfQ0KPiArDQo+ICtpbmxpbmUgdTggX19tYXliZV91bnVzZWQNCj4gK3BoeXRlY19nZXRfaW14
-OG1fZGRyX3NpemUoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gK3sNCj4gK8Kg
-wqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+ICt9DQo+ICsNCj4gK2lu
-bGluZSB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtcF9ydGMoc3RydWN0DQo+IHBo
-eXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gK3sNCj4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIFBI
-WVRFQ19FRVBST01fSU5WQUw7DQo+ICt9DQo+ICsNCj4gK2lubGluZSB1OCBfX21heWJlX3VudXNl
-ZCBwaHl0ZWNfZ2V0X2lteDhtX3NwaShzdHJ1Y3QNCj4gcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRh
-KQ0KPiArew0KPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4g
-K30NCj4gKw0KPiAraW5saW5lIHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1fZXRo
-KHN0cnVjdA0KPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ICt7DQo+ICvCoMKgwqDCoMKg
-wqDCoHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFMOw0KPiArfQ0KPiArDQo+ICsjZW5kaWYgLyog
-SVNfRU5BQkxFRChDT05GSUdfUEhZVEVDX0lNWDhNX1NPTV9ERVRFQ1RJT04pICovDQo+IGRpZmYg
-LS1naXQgYS9ib2FyZC9waHl0ZWMvY29tbW9uL2lteDhtX3NvbV9kZXRlY3Rpb24uaA0KPiBiL2Jv
-YXJkL3BoeXRlYy9jb21tb24vaW14OG1fc29tX2RldGVjdGlvbi5oDQo+IGluZGV4IDQ0MjA4NWNm
-ZTk3Li4wMTc2MzQ3NDE0ZiAxMDA2NDQNCj4gLS0tIGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4
-bV9zb21fZGV0ZWN0aW9uLmgNCj4gKysrIGIvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21f
-ZGV0ZWN0aW9uLmgNCj4gQEAgLTEzLDQyICsxMywxMCBAQA0KPiDCoCNkZWZpbmUgUEhZVEVDX0lN
-WDhNTV9TT03CoMKgwqDCoMKgwqAgNjkNCj4gwqAjZGVmaW5lIFBIWVRFQ19JTVg4TVBfU09NwqDC
-oMKgwqDCoMKgIDcwDQo+IMKgDQo+IC0jaWYgSVNfRU5BQkxFRChDT05GSUdfUEhZVEVDX0lNWDhN
-X1NPTV9ERVRFQ1RJT04pDQo+IC0NCj4gwqBpbnQgX19tYXliZV91bnVzZWQgcGh5dGVjX2lteDht
-X2RldGVjdChzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ICpkYXRhKTsNCj4gwqB1OCBfX21h
-eWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX2Rkcl9zaXplKHN0cnVjdA0KPiBwaHl0ZWNfZWVw
-cm9tX2RhdGEgKmRhdGEpOw0KPiDCoHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1w
-X3J0YyhzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ICpkYXRhKTsNCj4gwqB1OCBfX21heWJl
-X3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX3NwaShzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+
-ICpkYXRhKTsNCj4gwqB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX2V0aChzdHJ1
-Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ICpkYXRhKTsNCj4gwqANCj4gLSNlbHNlDQo+IC0NCj4g
-LWlubGluZSBpbnQgX19tYXliZV91bnVzZWQgcGh5dGVjX2lteDhtX2RldGVjdChzdHJ1Y3QNCj4g
-cGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiAtew0KPiAtwqDCoMKgwqDCoMKgwqByZXR1cm4g
-LTE7DQo+IC19DQo+IC0NCj4gLWlubGluZSB1OCBfX21heWJlX3VudXNlZA0KPiAtcGh5dGVjX2dl
-dF9pbXg4bV9kZHJfc2l6ZShzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiAtew0K
-PiAtwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gLX0NCj4gLQ0K
-PiAtaW5saW5lIHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1wX3J0YyhzdHJ1Y3QN
-Cj4gcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiAtew0KPiAtwqDCoMKgwqDCoMKgwqByZXR1
-cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gLX0NCj4gLQ0KPiAtaW5saW5lIHU4IF9fbWF5YmVf
-dW51c2VkIHBoeXRlY19nZXRfaW14OG1fc3BpKHN0cnVjdA0KPiBwaHl0ZWNfZWVwcm9tX2RhdGEg
-KmRhdGEpDQo+IC17DQo+IC3CoMKgwqDCoMKgwqDCoHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFM
-Ow0KPiAtfQ0KPiAtDQo+IC1pbmxpbmUgdTggX19tYXliZV91bnVzZWQgcGh5dGVjX2dldF9pbXg4
-bV9ldGgoc3RydWN0DQo+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gLXsNCj4gLcKgwqDC
-oMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+IC19DQo+IC0NCj4gLSNlbmRp
-ZiAvKiBJU19FTkFCTEVEKENPTkZJR19QSFlURUNfSU1YOE1fU09NX0RFVEVDVElPTikgKi8NCj4g
-LQ0KPiDCoCNlbmRpZiAvKiBfUEhZVEVDX0lNWDhNX1NPTV9ERVRFQ1RJT05fSCAqLw0KPiBkaWZm
-IC0tZ2l0IGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5jDQo+IGIv
-Ym9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5jDQo+IGluZGV4IDU1NTYy
-NzMxMjcwLi5mODc5NzAyZGY0NSAxMDA2NDQNCj4gLS0tIGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9w
-aHl0ZWNfc29tX2RldGVjdGlvbi5jDQo+ICsrKyBiL2JvYXJkL3BoeXRlYy9jb21tb24vcGh5dGVj
-X3NvbV9kZXRlY3Rpb24uYw0KPiBAQCAtMTYsNiArMTYsOCBAQA0KPiDCoA0KPiDCoHN0cnVjdCBw
-aHl0ZWNfZWVwcm9tX2RhdGEgZWVwcm9tX2RhdGE7DQo+IMKgDQo+ICsjaWYgSVNfRU5BQkxFRChD
-T05GSUdfUEhZVEVDX1NPTV9ERVRFQ1RJT04pDQo+ICsNCj4gwqBpbnQgcGh5dGVjX2VlcHJvbV9k
-YXRhX3NldHVwX2ZhbGxiYWNrKHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGENCj4gKmRhdGEsDQo+
-IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIGludCBidXNfbnVtLCBpbnQgYWRkciwgaW50DQo+IGFkZHJfZmFs
-bGJhY2spDQo+IMKgew0KPiBAQCAtODMsOCArODUsOCBAQCBpbnQgcGh5dGVjX2VlcHJvbV9kYXRh
-X2luaXQoc3RydWN0DQo+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSwNCj4gwqDCoMKgwqDCoMKg
-wqDCoH0NCj4gwqANCj4gwqDCoMKgwqDCoMKgwqDCoHB0ciA9IChpbnQgKilkYXRhOw0KPiAtwqDC
-oMKgwqDCoMKgwqBmb3IgKGkgPSAwOyBpIDwgc2l6ZW9mKHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2Rh
-dGEpOyBpICs9DQo+IHNpemVvZihwdHIpKQ0KPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgaWYgKCpwdHIgIT0gMHgwKQ0KPiArwqDCoMKgwqDCoMKgwqBmb3IgKGkgPSAwOyBpIDwgc2l6
-ZW9mKHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGEpOyBpKyspDQo+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqBpZiAocHRyW2ldICE9IDB4MCkNCj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgYnJlYWs7DQo+IMKgDQo+IMKgwqDCoMKgwqDCoMKg
-wqBpZiAoaSA9PSBzaXplb2Yoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSkpIHsNCj4gQEAgLTIw
-MSwzICsyMDMsNDAgQEAgdTggX19tYXliZV91bnVzZWQgcGh5dGVjX2dldF9yZXYoc3RydWN0DQo+
-IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gwqANCj4gwqDCoMKgwqDCoMKgwqDCoHJldHVy
-biBhcGkyLT5wY2JfcmV2Ow0KPiDCoH0NCj4gKw0KPiArI2Vsc2UNCj4gKw0KPiAraW5saW5lIGlu
-dCBwaHl0ZWNfZWVwcm9tX2RhdGFfc2V0dXAoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSAqZGF0
-YSwNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIGludCBidXNfbnVtLCBpbnQgYWRkcikNCj4gK3sNCj4gK8KgwqDC
-oMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+ICt9DQo+ICsNCj4gK2lubGlu
-ZSBpbnQgcGh5dGVjX2VlcHJvbV9kYXRhX3NldHVwX2ZhbGxiYWNrKHN0cnVjdA0KPiBwaHl0ZWNf
-ZWVwcm9tX2RhdGEgKmRhdGEsDQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQg
-YnVzX251bSwgaW50IGFkZHIsDQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQg
-YWRkcl9mYWxsYmFjaykNCj4gK3sNCj4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBS
-T01fSU5WQUw7DQo+ICt9DQo+ICsNCj4gK2lubGluZSBpbnQgcGh5dGVjX2VlcHJvbV9kYXRhX2lu
-aXQoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSwNCj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQgYnVz
-X251bSwgaW50IGFkZHIpDQo+ICt7DQo+ICvCoMKgwqDCoMKgwqDCoHJldHVybiBQSFlURUNfRUVQ
-Uk9NX0lOVkFMOw0KPiArfQ0KPiArDQo+ICtpbmxpbmUgdm9pZCBfX21heWJlX3VudXNlZCBwaHl0
-ZWNfcHJpbnRfc29tX2luZm8oc3RydWN0DQo+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4g
-K3sNCj4gK30NCj4gKw0KPiAraW5saW5lIGNoYXIgKl9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRf
-b3B0KHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGENCj4gKmRhdGEpDQo+ICt7DQo+ICvCoMKgwqDC
-oMKgwqDCoHJldHVybiBOVUxMOw0KPiArfQ0KPiArDQo+ICt1OCBfX21heWJlX3VudXNlZCBwaHl0
-ZWNfZ2V0X3JldihzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiArew0KPiArwqDC
-oMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gK30NCj4gKw0KPiArI2Vu
-ZGlmIC8qIElTX0VOQUJMRUQoQ09ORklHX1BIWVRFQ19TT01fREVURUNUSU9OKSAqLw0KPiBkaWZm
-IC0tZ2l0IGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5oDQo+IGIv
-Ym9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5oDQo+IGluZGV4IGM2OGUy
-MzAyY2M0Li4xMTAwOTI0MDg3NSAxMDA2NDQNCj4gLS0tIGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9w
-aHl0ZWNfc29tX2RldGVjdGlvbi5oDQo+ICsrKyBiL2JvYXJkL3BoeXRlYy9jb21tb24vcGh5dGVj
-X3NvbV9kZXRlY3Rpb24uaA0KPiBAQCAtNTYsOCArNTYsNiBAQCBzdHJ1Y3QgcGh5dGVjX2VlcHJv
-bV9kYXRhIHsNCj4gwqDCoMKgwqDCoMKgwqDCoH0gZGF0YTsNCj4gwqB9IF9fcGFja2VkOw0KPiDC
-oA0KPiAtI2lmIElTX0VOQUJMRUQoQ09ORklHX1BIWVRFQ19TT01fREVURUNUSU9OKQ0KPiAtDQo+
-IMKgaW50IHBoeXRlY19lZXByb21fZGF0YV9zZXR1cF9mYWxsYmFjayhzdHJ1Y3QgcGh5dGVjX2Vl
-cHJvbV9kYXRhDQo+ICpkYXRhLA0KPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQgYnVzX251bSwgaW50
-IGFkZHIsDQo+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBhZGRyX2ZhbGxiYWNrKTsNCj4gQEAgLTcw
-LDQwICs2OCw0IEBAIHZvaWQgX19tYXliZV91bnVzZWQgcGh5dGVjX3ByaW50X3NvbV9pbmZvKHN0
-cnVjdA0KPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpOw0KPiDCoGNoYXIgKiBfX21heWJlX3Vu
-dXNlZCBwaHl0ZWNfZ2V0X29wdChzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ICpkYXRhKTsN
-Cj4gwqB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X3JldihzdHJ1Y3QgcGh5dGVjX2VlcHJv
-bV9kYXRhICpkYXRhKTsNCj4gwqANCj4gLSNlbHNlDQo+IC0NCj4gLWlubGluZSBpbnQgcGh5dGVj
-X2VlcHJvbV9kYXRhX3NldHVwKHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEsDQo+IC3C
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBpbnQgYnVzX251bSwgaW50IGFkZHIpDQo+IC17DQo+IC3CoMKgwqDCoMKgwqDC
-oHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFMOw0KPiAtfQ0KPiAtDQo+IC1pbmxpbmUgaW50IHBo
-eXRlY19lZXByb21fZGF0YV9zZXR1cF9mYWxsYmFjayhzdHJ1Y3QNCj4gcGh5dGVjX2VlcHJvbV9k
-YXRhICpkYXRhLA0KPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0s
-IGludCBhZGRyLA0KPiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGFkZHJfZmFs
-bGJhY2spDQo+IC17DQo+IC3CoMKgwqDCoMKgwqDCoHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFM
-Ow0KPiAtfQ0KPiAtDQo+IC1pbmxpbmUgaW50IHBoeXRlY19lZXByb21fZGF0YV9pbml0KHN0cnVj
-dCBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEsDQo+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0sIGlu
-dCBhZGRyKQ0KPiAtew0KPiAtwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZB
-TDsNCj4gLX0NCj4gLQ0KPiAtaW5saW5lIHZvaWQgX19tYXliZV91bnVzZWQgcGh5dGVjX3ByaW50
-X3NvbV9pbmZvKHN0cnVjdA0KPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+IC17DQo+IC19
-DQo+IC0NCj4gLWlubGluZSBjaGFyICpfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X29wdChzdHJ1
-Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ICpkYXRhKQ0KPiAtew0KPiAtwqDCoMKgwqDCoMKgwqBy
-ZXR1cm4gTlVMTDsNCj4gLX0NCj4gLQ0KPiAtdTggX19tYXliZV91bnVzZWQgcGh5dGVjX2dldF9y
-ZXYoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gLXsNCj4gLcKgwqDCoMKgwqDC
-oMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+IC19DQo+IC0jZW5kaWYgLyogSVNfRU5B
-QkxFRChDT05GSUdfUEhZVEVDX1NPTV9ERVRFQ1RJT04pICovDQo+IC0NCj4gwqAjZW5kaWYgLyog
-X1BIWVRFQ19TT01fREVURUNUSU9OX0ggKi8NCj4gDQoNCi0tIA0KUEhZVEVDIE1lc3N0ZWNobmlr
-IEdtYkggfCBCYXJjZWxvbmEtQWxsZWUgMSB8IDU1MTI5IE1haW56LCBHZXJtYW55DQoNCkdlc2No
-w6RmdHNmw7xocmVyOiBEaXBsLi1JbmcuIE1pY2hhZWwgTWl0ZXpraSwgRGlwbC4tSW5nLiBCb2Rv
-IEh1YmVyLA0KRGlwbC4tSW5nLiAoRkgpIE1hcmt1cyBMaWNrZXMgfCBIYW5kZWxzcmVnaXN0ZXIg
-TWFpbnogSFJCIDQ2NTYgfA0KRmluYW56YW10IE1haW56IHwgU3QuTnIuIDI2NjUwMDYwOCwgREUg
-MTQ5MDU5ODU1DQo=
+Hi Simon,
+
+The discussion is mostly on v3 now, so I assume this is outdated?
+
+Thanks
+/Ilias
+On Mon, 18 Dec 2023 at 17:02, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 6 Dec 2023 at 04:36, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > [...]
+> >
+> > >
+> > >>
+> > >> >                 str = "Unknown";
+> > >> >
+> > >> >         for (;;) {
+> > >> > @@ -151,8 +151,7 @@ static int smbios_add_prop_si(struct smbios_ctx *ctx, const char *prop,
+> > >> >                 const char *str;
+> > >> >
+> > >> >                 str = ofnode_read_string(ctx->node, prop);
+> > >> > -               if (str)
+> > >> > -                       return smbios_add_string(ctx, str);
+> > >> > +               return smbios_add_string(ctx, str);
+> > >> >         }
+> > >> >
+> > >> >         return 0;
+> > >> > @@ -231,7 +230,7 @@ static int smbios_write_type0(ulong *current, int handle,
+> > >> >         t->vendor = smbios_add_string(ctx, "U-Boot");
+> > >> >
+> > >> >         t->bios_ver = smbios_add_prop(ctx, "version");
+> > >> > -       if (!t->bios_ver)
+> > >> > +       if (!strcmp(ctx->last_str, "Unknown"))
+> > >>
+> > >> That is really ugly...checking the ctx value looking for a side effect.
+> > >>
+> > >> Can you not have smbios_add_prop() continue to return NULL in this case?
+> > >
+> > >
+> > > Hmm I don't know, but I wonder why I am not just checking t->bios_ver for Unknown.
+> > > I'll have a look and change it
+> >
+> > Ok, this can't be changed as easily.  smbios_add_prop() will not
+> > return NULL in any case. It returns an integer. With the cleanup, it
+> > will always writes 'Uknown' and not return 0 anymore.
+> > I can add that default value you suggested but the ctx->last_str is
+> > still used on the next line anyway.
+>
+> Would you mind if I tried to create a version of the patch which does
+> the same thing but with less code, and perhaps a test? It might be
+> easier to discuss it then. I can't claim to understand all the
+> different code paths at this point.
+>
+> My main concern is that with so many code paths it will be hard even
+> to refactor the code in the future, since it will become
+> 'load-bearing' and anyone might turn up and say it breaks their board
+> because different information is provided.
+>
+> Overall, so long as the information isn't used for anything important
+> in userspace, and we find a way to report SMBIOS to Linux without EFI,
+> it is OK to enable this feature (with a new Kconfig so it can be
+> disabled). But there is already authoritative info in the DT, so this
+> transformation into SMBIOS really should just be used for user
+> display, etc., not for anything which affects operation of the device.
+> Do you agree? If you do, how to ensure that? Perhaps a special string
+> in the table like 'GENERATED'?
+>
+> Regards,
+> Simon
