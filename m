@@ -4,86 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE611C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:28:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F11C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:29:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F12686FFE;
-	Wed, 20 Dec 2023 09:28:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 60B8986FFE;
+	Wed, 20 Dec 2023 09:29:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Ww/83zNY";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="KYAc/l4e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 365A48744F; Wed, 20 Dec 2023 09:28:09 +0100 (CET)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E668887578; Wed, 20 Dec 2023 09:29:42 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230E386D2B
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:28:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CC25986D2B
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:29:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1703060887; x=1705652887;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XdHbwn+pPJYqRW8mLa6JJEUWVVaElD3pAC9u4L4SBnk=;
- b=Ww/83zNYKqChPWpVYJVaOTVPyhzx7sCPJ/p+8BS7gnRwTvuUWV8qYDiiT9TW0qgY
- wn+n/iU99cnvu/1j5LeNJmNkjlNWIVjDWtkmnb0MT7o1NBFP+FJp0icMH4x9Af/v
- tixT5BkwtUNfYJEF3cNs4yQAHJOyYuaWtiyZH2Sax0M=;
-X-AuditID: ac14000a-fbefe7000000290d-cc-6582a5962d04
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 25.C0.10509.695A2856;
- Wed, 20 Dec 2023 09:28:06 +0100 (CET)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
- 2023 09:28:06 +0100
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Wed, 20 Dec 2023 09:28:06 +0100
-From: Yannic Moog <Y.Moog@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>, Teresa Remmet
- <T.Remmet@phytec.de>
-CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH 3/4] board: phytec: phytec_som_detection: fix eeprom_data
- zero check
-Thread-Topic: [PATCH 3/4] board: phytec: phytec_som_detection: fix eeprom_data
- zero check
-Thread-Index: AQHaMx1UganmrT76GE+9kAnDIulBArCxxM6AgAABHQA=
-Date: Wed, 20 Dec 2023 08:28:06 +0000
-Message-ID: <931acd850192a75b9ee1be27ee6f054a701f595b.camel@phytec.de>
-References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-0-c24f3239b4c3@phytec.de>
- <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v1-3-c24f3239b4c3@phytec.de>
- <89de23ce8e9e8b4acb3970dab61cf4cf472f515d.camel@phytec.de>
-In-Reply-To: <89de23ce8e9e8b4acb3970dab61cf4cf472f515d.camel@phytec.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <F66C35DC6EF8B74DB859BCA97CF28C3B@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprBIsWRmVeSWpSXmKPExsWyRpKBV3fa0qZUg93d1hYPr/pbvN3byW7R
- /U7dgdlj56y77B5n7+xg9OjvbmENYI7isklJzcksSy3St0vgyvg2/Q9zwYOsikeH5zE2MDZk
- dDFyckgImEj86Z/E0sXIxSEksJhJYteE+ewQzn1GiUdzF7JCOBsYJZ4sfcgG0sImoCJxcsYl
- RhBbRCBYYk3rd2YQm1kgS+L/xVlgNcICURIrJx5igaiJlvjfPReq3kpi+Z29TCA2i4CqxOtn
- h1lBbF4BN4lNX+5CnfGPUeL6wq1gQzkF3CVubFkKZjMKyEps2HAeapm4xKZn31khfhCQWLIH
- Ii4hICrx8vE/qLi8xIlb04CWcQDVa0qs36UP0WohMXXfJEYIW1FiSvdDdogbBCVOznzCMoFR
- fBaSDbMQumch6Z6FpHsWku4FjKyrGIVyM5OzU4sys/UKMipLUpP1UlI3MYJiT4SBawdj3xyP
- Q4xMHIyHGCU4mJVEePd2NqUK8aYkVlalFuXHF5XmpBYfYpTmYFES513dEZwqJJCeWJKanZpa
- kFoEk2Xi4JRqYFSd+PZmERvnAfZjWp4nK6qihZbM+7aRd/GduRmp+jfSGmxl5jhN5/+2T9hz
- j/6bTU9zS2RqE8X5DU7+C57gf6tYQ+58fdG3p3KSOlPfvd17b21I7F6+qVEp55es5/sXtctf
- yff55N5k9f87UtdMfhD30ubERCkGizV54vNs1KY7BNdWmTbcbVViKc5INNRiLipOBADw2etc
- qwIAAA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1703060980;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wPn+/R4UMu/ggLLlpIxYh5de6RLhSJe+cdemed4MaOY=;
+ b=KYAc/l4eEMkrybeG5klcrTL6snw7sfgxiyyR7MM8tsifhGJWYVPYSbVf41Riea6SHW5Fta
+ p6ndofx6/Fyb2lwh6CVHqBT3mHG5GAqu0p58Hwxd0B09ljS3mxZnGs9YrKTiQuEgHrxeC4
+ 8Bf58cRkoJyPesppkYeNiEKLusfKYm5djq5JE/PBWp0BGpxGLvFfVIpDL6CryjjNJbRepP
+ HSS1I2xS67xU3aS4fD2d/HJPspmMnb7jJMfS53bH7Wk9F0crZs3ePM/wZJYf1FxTo0XOBX
+ 4jjRHt/LEo/Ow41VvrmP1VDAzCF0bFRsurIv61/7hRuRv8awMKb95s5kuJdh2A==
+Date: Wed, 20 Dec 2023 09:29:39 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Cs=C3=B3k=C3=A1s_Bence?= <Csokas.Bence@prolan.hu>
+Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>
+Subject: Re: Passing boot logs to Linux?
+In-Reply-To: <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
+ <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
+ <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <16e633f9d4b1c426aaca510157479d65@manjaro.org>
+ <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
+ <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
+ <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+Message-ID: <3900f4b15852d0af65635b3a794d34af@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,179 +75,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gVGVyZXNhLA0KDQpPbiBXZWQsIDIwMjMtMTItMjAgYXQgMDk6MjQgKzAxMDAsIFRlcmVz
-YSBSZW1tZXQgd3JvdGU6DQo+IEhlbGxvIFlhbm5pYywNCj4gDQo+IEFtIE1pdHR3b2NoLCBkZW0g
-MjAuMTIuMjAyMyB1bSAwOToxOSArMDEwMCBzY2hyaWViIFlhbm5pYyBNb29nOg0KPiA+IEluIHBo
-eXRlY19lZXByb21fZGF0YV9pbml0LCBhZnRlciByZWFkaW5nIGVlcHJvbSBkYXRhIGludG8gYnVm
-ZmVyLCBpdA0KPiA+IGlzDQo+ID4gY2hlY2tlZCB3aGV0aGVyIGFsbCBieXRlcyBhcmUgMHgwIGJ5
-IGl0ZXJhdGluZyBvdmVyIGNodW5rcyBvZiB0aGUNCj4gPiBidWZmZXIuIFRoZSBvZmZzZXQsIG9y
-IGluZGV4IG9mIHRoZSBjaHVuaywgd2FzIG5ldmVyIGNoYW5nZWQsIGxlYWRpbmcNCj4gPiB0bw0K
-PiA+IHJlcGVhdGVkIGNvbXBhcmlzb24gb2Ygb25seSB0aGUgZmlyc3QgY2h1bmsuIFVzZSBhcnJh
-eSBub3RhdGlvbiBhbmQNCj4gPiBhY2Nlc3MgY2h1bmsgdmlhIGFycmF5IGluZGV4IHRvIGNvbXBh
-cmUgYWxsIGNodW5rcyBvZiB0aGUgYnVmZmVyLg0KPiANCj4gaXQgc2VlbXMgdGhhdCB5b3UgaGF2
-ZSBoZXJlIGFjY2lkZW50YWxseSB0d28gcGF0Y2hlcyBpbiBvbmUuDQo+IFBsZWFzZSBjaGVjay4N
-Cg0KSSBzZWUsIHdpbGwgdXBkYXRlOyBUaGFua3MNCg0KWWFubmljDQo+IA0KPiBUZXJlc2ENCj4g
-DQo+ID4gDQo+ID4gU2lnbmVkLW9mZi1ieTogWWFubmljIE1vb2cgPHkubW9vZ0BwaHl0ZWMuZGU+
-DQo+ID4gLS0tDQo+ID4gwqBib2FyZC9waHl0ZWMvY29tbW9uL2lteDhtX3NvbV9kZXRlY3Rpb24u
-Y8KgIHwgMzINCj4gPiArKysrKysrKysrKysrKysrKysrKysrDQo+ID4gwqBib2FyZC9waHl0ZWMv
-Y29tbW9uL2lteDhtX3NvbV9kZXRlY3Rpb24uaMKgIHwgMzIgLS0tLS0tLS0tLS0tLS0tLS0tLS0N
-Cj4gPiAtLQ0KPiA+IMKgYm9hcmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5j
-IHwgNDMNCj4gPiArKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0NCj4gPiDCoGJvYXJkL3Bo
-eXRlYy9jb21tb24vcGh5dGVjX3NvbV9kZXRlY3Rpb24uaCB8IDM4IC0tLS0tLS0tLS0tLS0tLS0t
-LS0tDQo+ID4gLS0tLS0tDQo+ID4gwqA0IGZpbGVzIGNoYW5nZWQsIDczIGluc2VydGlvbnMoKyks
-IDcyIGRlbGV0aW9ucygtKQ0KPiA+IA0KPiA+IGRpZmYgLS1naXQgYS9ib2FyZC9waHl0ZWMvY29t
-bW9uL2lteDhtX3NvbV9kZXRlY3Rpb24uYw0KPiA+IGIvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4
-bV9zb21fZGV0ZWN0aW9uLmMNCj4gPiBpbmRleCBhMjI5ZWFlMTUyZC4uMjE0Yjc1ZGIzYjAgMTAw
-NjQ0DQo+ID4gLS0tIGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21fZGV0ZWN0aW9uLmMN
-Cj4gPiArKysgYi9ib2FyZC9waHl0ZWMvY29tbW9uL2lteDhtX3NvbV9kZXRlY3Rpb24uYw0KPiA+
-IEBAIC0xNSw2ICsxNSw4IEBADQo+ID4gwqANCj4gPiDCoGV4dGVybiBzdHJ1Y3QgcGh5dGVjX2Vl
-cHJvbV9kYXRhIGVlcHJvbV9kYXRhOw0KPiA+IMKgDQo+ID4gKyNpZiBJU19FTkFCTEVEKENPTkZJ
-R19QSFlURUNfSU1YOE1fU09NX0RFVEVDVElPTikNCj4gPiArDQo+ID4gwqAvKiBDaGVjayBpZiB0
-aGUgU29NIGlzIGFjdHVhbGx5IG9uZSBvZiB0aGUgZm9sbG93aW5nIHByb2R1Y3RzOg0KPiA+IMKg
-ICogLSBpLk1YOE1NDQo+ID4gwqAgKiAtIGkuTVg4TU4NCj4gPiBAQCAtMTY2LDMgKzE2OCwzMyBA
-QCB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtcF9ydGMoc3RydWN0DQo+ID4gcGh5
-dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiA+IMKgwqDCoMKgwqDCoMKgwqBkZWJ1ZygiJXM6IHJ0
-YzogJXVcbiIsIF9fZnVuY19fLCBydGMpOw0KPiA+IMKgwqDCoMKgwqDCoMKgwqByZXR1cm4gcnRj
-Ow0KPiA+IMKgfQ0KPiA+ICsNCj4gPiArI2Vsc2UNCj4gPiArDQo+ID4gK2lubGluZSBpbnQgX19t
-YXliZV91bnVzZWQgcGh5dGVjX2lteDhtX2RldGVjdChzdHJ1Y3QNCj4gPiBwaHl0ZWNfZWVwcm9t
-X2RhdGEgKmRhdGEpDQo+ID4gK3sNCj4gPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gLTE7DQo+ID4g
-K30NCj4gPiArDQo+ID4gK2lubGluZSB1OCBfX21heWJlX3VudXNlZA0KPiA+ICtwaHl0ZWNfZ2V0
-X2lteDhtX2Rkcl9zaXplKHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ID4gK3sN
-Cj4gPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gPiArfQ0K
-PiA+ICsNCj4gPiAraW5saW5lIHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1wX3J0
-YyhzdHJ1Y3QNCj4gPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ID4gK3sNCj4gPiArwqDC
-oMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gPiArfQ0KPiA+ICsNCj4g
-PiAraW5saW5lIHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1fc3BpKHN0cnVjdA0K
-PiA+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gPiArew0KPiA+ICvCoMKgwqDCoMKgwqDC
-oHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFMOw0KPiA+ICt9DQo+ID4gKw0KPiA+ICtpbmxpbmUg
-dTggX19tYXliZV91bnVzZWQgcGh5dGVjX2dldF9pbXg4bV9ldGgoc3RydWN0DQo+ID4gcGh5dGVj
-X2VlcHJvbV9kYXRhICpkYXRhKQ0KPiA+ICt7DQo+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIFBI
-WVRFQ19FRVBST01fSU5WQUw7DQo+ID4gK30NCj4gPiArDQo+ID4gKyNlbmRpZiAvKiBJU19FTkFC
-TEVEKENPTkZJR19QSFlURUNfSU1YOE1fU09NX0RFVEVDVElPTikgKi8NCj4gPiBkaWZmIC0tZ2l0
-IGEvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9zb21fZGV0ZWN0aW9uLmgNCj4gPiBiL2JvYXJk
-L3BoeXRlYy9jb21tb24vaW14OG1fc29tX2RldGVjdGlvbi5oDQo+ID4gaW5kZXggNDQyMDg1Y2Zl
-OTcuLjAxNzYzNDc0MTRmIDEwMDY0NA0KPiA+IC0tLSBhL2JvYXJkL3BoeXRlYy9jb21tb24vaW14
-OG1fc29tX2RldGVjdGlvbi5oDQo+ID4gKysrIGIvYm9hcmQvcGh5dGVjL2NvbW1vbi9pbXg4bV9z
-b21fZGV0ZWN0aW9uLmgNCj4gPiBAQCAtMTMsNDIgKzEzLDEwIEBADQo+ID4gwqAjZGVmaW5lIFBI
-WVRFQ19JTVg4TU1fU09NwqDCoMKgwqDCoMKgIDY5DQo+ID4gwqAjZGVmaW5lIFBIWVRFQ19JTVg4
-TVBfU09NwqDCoMKgwqDCoMKgIDcwDQo+ID4gwqANCj4gPiAtI2lmIElTX0VOQUJMRUQoQ09ORklH
-X1BIWVRFQ19JTVg4TV9TT01fREVURUNUSU9OKQ0KPiA+IC0NCj4gPiDCoGludCBfX21heWJlX3Vu
-dXNlZCBwaHl0ZWNfaW14OG1fZGV0ZWN0KHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGENCj4gPiAq
-ZGF0YSk7DQo+ID4gwqB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX2Rkcl9zaXpl
-KHN0cnVjdA0KPiA+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSk7DQo+ID4gwqB1OCBfX21heWJl
-X3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtcF9ydGMoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YQ0K
-PiA+ICpkYXRhKTsNCj4gPiDCoHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1fc3Bp
-KHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGENCj4gPiAqZGF0YSk7DQo+ID4gwqB1OCBfX21heWJl
-X3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX2V0aChzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+
-ID4gKmRhdGEpOw0KPiA+IMKgDQo+ID4gLSNlbHNlDQo+ID4gLQ0KPiA+IC1pbmxpbmUgaW50IF9f
-bWF5YmVfdW51c2VkIHBoeXRlY19pbXg4bV9kZXRlY3Qoc3RydWN0DQo+ID4gcGh5dGVjX2VlcHJv
-bV9kYXRhICpkYXRhKQ0KPiA+IC17DQo+ID4gLcKgwqDCoMKgwqDCoMKgcmV0dXJuIC0xOw0KPiA+
-IC19DQo+ID4gLQ0KPiA+IC1pbmxpbmUgdTggX19tYXliZV91bnVzZWQNCj4gPiAtcGh5dGVjX2dl
-dF9pbXg4bV9kZHJfc2l6ZShzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiA+IC17
-DQo+ID4gLcKgwqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+ID4gLX0N
-Cj4gPiAtDQo+ID4gLWlubGluZSB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtcF9y
-dGMoc3RydWN0DQo+ID4gcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKQ0KPiA+IC17DQo+ID4gLcKg
-wqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+ID4gLX0NCj4gPiAtDQo+
-ID4gLWlubGluZSB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X2lteDhtX3NwaShzdHJ1Y3QN
-Cj4gPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ID4gLXsNCj4gPiAtwqDCoMKgwqDCoMKg
-wqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gPiAtfQ0KPiA+IC0NCj4gPiAtaW5saW5l
-IHU4IF9fbWF5YmVfdW51c2VkIHBoeXRlY19nZXRfaW14OG1fZXRoKHN0cnVjdA0KPiA+IHBoeXRl
-Y19lZXByb21fZGF0YSAqZGF0YSkNCj4gPiAtew0KPiA+IC3CoMKgwqDCoMKgwqDCoHJldHVybiBQ
-SFlURUNfRUVQUk9NX0lOVkFMOw0KPiA+IC19DQo+ID4gLQ0KPiA+IC0jZW5kaWYgLyogSVNfRU5B
-QkxFRChDT05GSUdfUEhZVEVDX0lNWDhNX1NPTV9ERVRFQ1RJT04pICovDQo+ID4gLQ0KPiA+IMKg
-I2VuZGlmIC8qIF9QSFlURUNfSU1YOE1fU09NX0RFVEVDVElPTl9IICovDQo+ID4gZGlmZiAtLWdp
-dCBhL2JvYXJkL3BoeXRlYy9jb21tb24vcGh5dGVjX3NvbV9kZXRlY3Rpb24uYw0KPiA+IGIvYm9h
-cmQvcGh5dGVjL2NvbW1vbi9waHl0ZWNfc29tX2RldGVjdGlvbi5jDQo+ID4gaW5kZXggNTU1NjI3
-MzEyNzAuLmY4Nzk3MDJkZjQ1IDEwMDY0NA0KPiA+IC0tLSBhL2JvYXJkL3BoeXRlYy9jb21tb24v
-cGh5dGVjX3NvbV9kZXRlY3Rpb24uYw0KPiA+ICsrKyBiL2JvYXJkL3BoeXRlYy9jb21tb24vcGh5
-dGVjX3NvbV9kZXRlY3Rpb24uYw0KPiA+IEBAIC0xNiw2ICsxNiw4IEBADQo+ID4gwqANCj4gPiDC
-oHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGEgZWVwcm9tX2RhdGE7DQo+ID4gwqANCj4gPiArI2lm
-IElTX0VOQUJMRUQoQ09ORklHX1BIWVRFQ19TT01fREVURUNUSU9OKQ0KPiA+ICsNCj4gPiDCoGlu
-dCBwaHl0ZWNfZWVwcm9tX2RhdGFfc2V0dXBfZmFsbGJhY2soc3RydWN0IHBoeXRlY19lZXByb21f
-ZGF0YQ0KPiA+ICpkYXRhLA0KPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBidXNfbnVtLCBpbnQg
-YWRkciwgaW50DQo+ID4gYWRkcl9mYWxsYmFjaykNCj4gPiDCoHsNCj4gPiBAQCAtODMsOCArODUs
-OCBAQCBpbnQgcGh5dGVjX2VlcHJvbV9kYXRhX2luaXQoc3RydWN0DQo+ID4gcGh5dGVjX2VlcHJv
-bV9kYXRhICpkYXRhLA0KPiA+IMKgwqDCoMKgwqDCoMKgwqB9DQo+ID4gwqANCj4gPiDCoMKgwqDC
-oMKgwqDCoMKgcHRyID0gKGludCAqKWRhdGE7DQo+ID4gLcKgwqDCoMKgwqDCoMKgZm9yIChpID0g
-MDsgaSA8IHNpemVvZihzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhKTsgaSArPQ0KPiA+IHNpemVv
-ZihwdHIpKQ0KPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqBpZiAoKnB0ciAhPSAw
-eDApDQo+ID4gK8KgwqDCoMKgwqDCoMKgZm9yIChpID0gMDsgaSA8IHNpemVvZihzdHJ1Y3QgcGh5
-dGVjX2VlcHJvbV9kYXRhKTsgaSsrKQ0KPiA+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqBpZiAocHRyW2ldICE9IDB4MCkNCj4gPiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqBicmVhazsNCj4gPiDCoA0KPiA+IMKgwqDCoMKgwqDCoMKgwqBpZiAo
-aSA9PSBzaXplb2Yoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YSkpIHsNCj4gPiBAQCAtMjAxLDMg
-KzIwMyw0MCBAQCB1OCBfX21heWJlX3VudXNlZCBwaHl0ZWNfZ2V0X3JldihzdHJ1Y3QNCj4gPiBw
-aHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ID4gwqANCj4gPiDCoMKgwqDCoMKgwqDCoMKgcmV0
-dXJuIGFwaTItPnBjYl9yZXY7DQo+ID4gwqB9DQo+ID4gKw0KPiA+ICsjZWxzZQ0KPiA+ICsNCj4g
-PiAraW5saW5lIGludCBwaHl0ZWNfZWVwcm9tX2RhdGFfc2V0dXAoc3RydWN0IHBoeXRlY19lZXBy
-b21fZGF0YSAqZGF0YSwNCj4gPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0sIGludCBhZGRyKQ0K
-PiA+ICt7DQo+ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+
-ID4gK30NCj4gPiArDQo+ID4gK2lubGluZSBpbnQgcGh5dGVjX2VlcHJvbV9kYXRhX3NldHVwX2Zh
-bGxiYWNrKHN0cnVjdA0KPiA+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSwNCj4gPiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0sIGludCBhZGRyLA0KPiA+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQgYWRkcl9mYWxsYmFjaykNCj4gPiArew0KPiA+
-ICvCoMKgwqDCoMKgwqDCoHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFMOw0KPiA+ICt9DQo+ID4g
-Kw0KPiA+ICtpbmxpbmUgaW50IHBoeXRlY19lZXByb21fZGF0YV9pbml0KHN0cnVjdCBwaHl0ZWNf
-ZWVwcm9tX2RhdGEgKmRhdGEsDQo+ID4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpbnQgYnVzX251bSwgaW50IGFkZHIp
-DQo+ID4gK3sNCj4gPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsN
-Cj4gPiArfQ0KPiA+ICsNCj4gPiAraW5saW5lIHZvaWQgX19tYXliZV91bnVzZWQgcGh5dGVjX3By
-aW50X3NvbV9pbmZvKHN0cnVjdA0KPiA+IHBoeXRlY19lZXByb21fZGF0YSAqZGF0YSkNCj4gPiAr
-ew0KPiA+ICt9DQo+ID4gKw0KPiA+ICtpbmxpbmUgY2hhciAqX19tYXliZV91bnVzZWQgcGh5dGVj
-X2dldF9vcHQoc3RydWN0IHBoeXRlY19lZXByb21fZGF0YQ0KPiA+ICpkYXRhKQ0KPiA+ICt7DQo+
-ID4gK8KgwqDCoMKgwqDCoMKgcmV0dXJuIE5VTEw7DQo+ID4gK30NCj4gPiArDQo+ID4gK3U4IF9f
-bWF5YmVfdW51c2VkIHBoeXRlY19nZXRfcmV2KHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRh
-dGEpDQo+ID4gK3sNCj4gPiArwqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZB
-TDsNCj4gPiArfQ0KPiA+ICsNCj4gPiArI2VuZGlmIC8qIElTX0VOQUJMRUQoQ09ORklHX1BIWVRF
-Q19TT01fREVURUNUSU9OKSAqLw0KPiA+IGRpZmYgLS1naXQgYS9ib2FyZC9waHl0ZWMvY29tbW9u
-L3BoeXRlY19zb21fZGV0ZWN0aW9uLmgNCj4gPiBiL2JvYXJkL3BoeXRlYy9jb21tb24vcGh5dGVj
-X3NvbV9kZXRlY3Rpb24uaA0KPiA+IGluZGV4IGM2OGUyMzAyY2M0Li4xMTAwOTI0MDg3NSAxMDA2
-NDQNCj4gPiAtLS0gYS9ib2FyZC9waHl0ZWMvY29tbW9uL3BoeXRlY19zb21fZGV0ZWN0aW9uLmgN
-Cj4gPiArKysgYi9ib2FyZC9waHl0ZWMvY29tbW9uL3BoeXRlY19zb21fZGV0ZWN0aW9uLmgNCj4g
-PiBAQCAtNTYsOCArNTYsNiBAQCBzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhIHsNCj4gPiDCoMKg
-wqDCoMKgwqDCoMKgfSBkYXRhOw0KPiA+IMKgfSBfX3BhY2tlZDsNCj4gPiDCoA0KPiA+IC0jaWYg
-SVNfRU5BQkxFRChDT05GSUdfUEhZVEVDX1NPTV9ERVRFQ1RJT04pDQo+ID4gLQ0KPiA+IMKgaW50
-IHBoeXRlY19lZXByb21fZGF0YV9zZXR1cF9mYWxsYmFjayhzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9k
-YXRhDQo+ID4gKmRhdGEsDQo+ID4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0sIGludCBh
-ZGRyLA0KPiA+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBhZGRyX2ZhbGxiYWNrKTsNCj4gPiBAQCAt
-NzAsNDAgKzY4LDQgQEAgdm9pZCBfX21heWJlX3VudXNlZCBwaHl0ZWNfcHJpbnRfc29tX2luZm8o
-c3RydWN0DQo+ID4gcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRhKTsNCj4gPiDCoGNoYXIgKiBfX21h
-eWJlX3VudXNlZCBwaHl0ZWNfZ2V0X29wdChzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhDQo+ID4g
-KmRhdGEpOw0KPiA+IMKgdTggX19tYXliZV91bnVzZWQgcGh5dGVjX2dldF9yZXYoc3RydWN0IHBo
-eXRlY19lZXByb21fZGF0YSAqZGF0YSk7DQo+ID4gwqANCj4gPiAtI2Vsc2UNCj4gPiAtDQo+ID4g
-LWlubGluZSBpbnQgcGh5dGVjX2VlcHJvbV9kYXRhX3NldHVwKHN0cnVjdCBwaHl0ZWNfZWVwcm9t
-X2RhdGEgKmRhdGEsDQo+ID4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBidXNfbnVtLCBpbnQgYWRkcikNCj4g
-PiAtew0KPiA+IC3CoMKgwqDCoMKgwqDCoHJldHVybiBQSFlURUNfRUVQUk9NX0lOVkFMOw0KPiA+
-IC19DQo+ID4gLQ0KPiA+IC1pbmxpbmUgaW50IHBoeXRlY19lZXByb21fZGF0YV9zZXR1cF9mYWxs
-YmFjayhzdHJ1Y3QNCj4gPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEsDQo+ID4gLcKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGludCBidXNfbnVtLCBpbnQgYWRkciwNCj4gPiAtwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGFkZHJfZmFsbGJhY2spDQo+ID4gLXsNCj4gPiAt
-wqDCoMKgwqDCoMKgwqByZXR1cm4gUEhZVEVDX0VFUFJPTV9JTlZBTDsNCj4gPiAtfQ0KPiA+IC0N
-Cj4gPiAtaW5saW5lIGludCBwaHl0ZWNfZWVwcm9tX2RhdGFfaW5pdChzdHJ1Y3QgcGh5dGVjX2Vl
-cHJvbV9kYXRhICpkYXRhLA0KPiA+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50IGJ1c19udW0sIGludCBhZGRyKQ0K
-PiA+IC17DQo+ID4gLcKgwqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7DQo+
-ID4gLX0NCj4gPiAtDQo+ID4gLWlubGluZSB2b2lkIF9fbWF5YmVfdW51c2VkIHBoeXRlY19wcmlu
-dF9zb21faW5mbyhzdHJ1Y3QNCj4gPiBwaHl0ZWNfZWVwcm9tX2RhdGEgKmRhdGEpDQo+ID4gLXsN
-Cj4gPiAtfQ0KPiA+IC0NCj4gPiAtaW5saW5lIGNoYXIgKl9fbWF5YmVfdW51c2VkIHBoeXRlY19n
-ZXRfb3B0KHN0cnVjdCBwaHl0ZWNfZWVwcm9tX2RhdGENCj4gPiAqZGF0YSkNCj4gPiAtew0KPiA+
-IC3CoMKgwqDCoMKgwqDCoHJldHVybiBOVUxMOw0KPiA+IC19DQo+ID4gLQ0KPiA+IC11OCBfX21h
-eWJlX3VudXNlZCBwaHl0ZWNfZ2V0X3JldihzdHJ1Y3QgcGh5dGVjX2VlcHJvbV9kYXRhICpkYXRh
-KQ0KPiA+IC17DQo+ID4gLcKgwqDCoMKgwqDCoMKgcmV0dXJuIFBIWVRFQ19FRVBST01fSU5WQUw7
-DQo+ID4gLX0NCj4gPiAtI2VuZGlmIC8qIElTX0VOQUJMRUQoQ09ORklHX1BIWVRFQ19TT01fREVU
-RUNUSU9OKSAqLw0KPiA+IC0NCj4gPiDCoCNlbmRpZiAvKiBfUEhZVEVDX1NPTV9ERVRFQ1RJT05f
-SCAqLw0KPiA+IA0KPiANCj4gLS0gDQo+IFBIWVRFQyBNZXNzdGVjaG5payBHbWJIIHwgQmFyY2Vs
-b25hLUFsbGVlIDEgfCA1NTEyOSBNYWlueiwgR2VybWFueQ0KPiANCj4gR2VzY2jDpGZ0c2bDvGhy
-ZXI6IERpcGwuLUluZy4gTWljaGFlbCBNaXRlemtpLCBEaXBsLi1JbmcuIEJvZG8gSHViZXIsDQo+
-IERpcGwuLUluZy4gKEZIKSBNYXJrdXMgTGlja2VzIHwgSGFuZGVsc3JlZ2lzdGVyIE1haW56IEhS
-QiA0NjU2IHwNCj4gRmluYW56YW10IE1haW56IHwgU3QuTnIuIDI2NjUwMDYwOCwgREUgMTQ5MDU5
-ODU1DQoNCg==
+On 2023-12-20 08:52, Csókás Bence wrote:
+> On 2023. 12. 20. 8:09, Dragan Simic wrote:
+>> On 2023-12-20 07:49, Csókás Bence wrote:
+>>> On 2023. 12. 19. 21:33, Daniel Golle wrote:
+>>>> What comes to mind is that CONFIG_CONSOLE_RECORD also captures ANSI
+>>>> sequences during menu or count-down before boot, so we'd have to 
+>>>> either
+>>>> introduce a dedicated log_printf() call and use that when ever we 
+>>>> want
+>>>> the output to also become part of the log buffer or we could somehow
+>>>> filter the recorded console, eliminating all terminal control
+>>>> sequences.
+>>> 
+>>> I don't think that would be a huge problem, Linux userspace can 
+>>> filter
+>>> ANSI control codes if it wants to. For now, I'd like a byte-for-byte
+>>> copy of the console, as-is, presented to Linux.
+>> 
+>> But wouldn't recording the control sequences as-is actually be pretty
+>> much useless?  For example, some user can spend a few minutes
+>> scrolling through the boot menu, which would produce a fair amount of
+>> nearly useless recorded data.
+>> 
+>> Moreover, if I'm not wrong, viewing or parsing such as-is data would
+>> actually require replaying the control sequences, to reproduce the
+>> actual console contents as it was recorded, which would be quite
+>> cumbersome.
+> 
+> It *is* useless, but most of the times the user won't be scrolling at
+> all anyways, that's why I don't think these few extra bytes would be a
+> problem.
+
+Quite frankly, when it comes to computing in general, taking the "ah, it 
+probably won't happen" approach isn't the best thing to do.  We should 
+aim toward covering properly even the edge cases, if you agree.
+
+> And no, you don't need anything to "process" ANSI codes, you can just
+> `cat` them and your terminal will parse it anyways.
+
+In that case, you'd probably see only the end results of the control 
+sequences, which makes logging them as-is quite pointless.  To see what 
+actually happened on the U-Boot console, you'd need to execute the 
+control sequences step by step and watch the results.
+
+>>> As I undersand (never used it before, just quickly read the kernel 
+>>> doc),
+>>> PStore is for Linux -> U-Boot communication. What I'm doing is the
+>>> opposite. But the approach I envisioned is similar: make U-Boot save 
+>>> a
+>>> copy of the log to a struct at a fixed memory address, then pass this
+>>> address + the length of the log to the kernel via DT and/or 
+>>> commandline.
+>> 
+>> Actually, pstore is primarily intended as a means to record and store
+>> kernel crash dumps for later investigation.  In other words, the
+>> kernel writes data to pstore during an oops so it can be investigated
+>> later.
+>> 
+>> One of the benefits of using pstore for record the U-Boot console
+>> contents, instead of using a memory region, is that no special
+>> utilities would be required to access the recorded console outputs. 
+>> Also, many of the requirements that you listed below would be already
+>> fulfilled.
+>> 
+>>> What I thought to include in the struct:
+>>> 
+>>> * magic cookie (it was in the 3rd party solution, and it's an easy 
+>>> way
+>>> of doing some form of integrity check)
+>>> * struct version (in case we ever change the layout)
+>>> * U-Boot version code (maybe not necessary? It can be parsed out of 
+>>> the
+>>> log as well)
+>>> * length of the log (or it could also be passed via DT/cmdline)
+>>> * and then the log buffer of course
+> 
+> That's what I read as well. Is there support for U-boot to write and
+> Linux to read PStores?
+
+No and yes, but U-Boot can already read pstore.  Please see 
+doc/usage/cmd/pstore.rst for the U-Boot part, and 
+Documentation/admin-guide/pstore-blk.rst for the Linux kernel part.
+
+Another benefit of using pstore would be no permanently wasted RAM for 
+the recorded console contents.  Also, having the data recorded to a 
+storage device also goes along with providing permanent records.
