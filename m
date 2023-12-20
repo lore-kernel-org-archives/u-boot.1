@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A29CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88E7C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9C618753E;
-	Wed, 20 Dec 2023 05:46:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3BB9E8753C;
+	Wed, 20 Dec 2023 05:46:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WN68kkdR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oa1z/Vx3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24D808753E; Wed, 20 Dec 2023 05:46:19 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 9804E8752B; Wed, 20 Dec 2023 05:46:25 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA986870B7
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A41338751B
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a2370535060so64890166b.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:16 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a268dd99597so49916266b.3
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047576; x=1703652376; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703047583; x=1703652383; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ObOjGHxxzANzBA20+fRUpz/qy8ssxRN2M1oEwSnchMg=;
- b=WN68kkdRWGGhdv3BINAztTdBiSyv4celyGG0CykFBnqEjtW/sYa9YYzEedzO/lNpYQ
- CucZ50YbdhxaHayKSPIRz8hXioNRx4NbdgC9g6CYhek6PdP72f8GzLNW0Oe47XjVwPU8
- TLqszz+SDUI10rMsErDm8xPYFtmqC0JKvAbdM=
+ bh=/p+saRITCJ78lgcdsOEUPOpXKpFRfZEj9HKi8cBbheE=;
+ b=Oa1z/Vx3fV7l6HeOG4bVh3dlKbUzI+mlvNP8ObLd1VNQ3lKInViT/YRUR/sPQDQq3N
+ FXz7SEwXzakr8nrIOVya2PED7Xx47JagMQdpAL2QselZDsAD+qgecgqq5xDGVaa1jUMP
+ tQm2P9UFeE/oibeKUah4g3A8R1UkjSyZV8Xmk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047576; x=1703652376;
+ d=1e100.net; s=20230601; t=1703047583; x=1703652383;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ObOjGHxxzANzBA20+fRUpz/qy8ssxRN2M1oEwSnchMg=;
- b=H73IBe2eFPWwMyC/UG1a6t7vvCEm2KmHqm00ngLXd+L4eCl+oWZ95+NSPn7ai26xaK
- W2fJiz6kdoT9En1m+NaJ/uT6ldeqWIoSXKoZ7QDOvG/5JI0Lj7fNuI4QMiIQ82L1VIdP
- dw+S3/DdrPgH4dkCnZsRXgN40TDYbyOaJC9yiXV5d5ZHStZelVQ9Fi03HzvYBM6YpwQQ
- ElVpr/WZtMEACnP8OX3y2sWHKySmEf3cera7BWoXufEpXY+iNWONmBi8BEXM3OqhMa8r
- M5vBOdQDul8FJ9Y7RQ+rfsj27Up+Ez5Y3o9akjqb5akvBjUL8pHw7saTiIrz96tD2AK5
- e5rA==
-X-Gm-Message-State: AOJu0YwSYAToQsVkSjhlwQQ3m9HnC5Apsz5dtn9Q/KDWpgI0+bacjaK7
- e8sJtLupSsnPlRHCAO3Zqr4DfufG5Gf600AJ3oAptCemIQvy
-X-Google-Smtp-Source: AGHT+IFiAtnYS6LXvMS3hEaXi1ylgrBmLLhNN+uioKFv9mVb/Ycop0Bj8klqTrKKv5ovgt1osw7sDYHdsp6TNkdiWcg=
-X-Received: by 2002:a17:906:c15:b0:a26:8f35:20e3 with SMTP id
- s21-20020a1709060c1500b00a268f3520e3mr484981ejf.4.1703047576066; Tue, 19 Dec
- 2023 20:46:16 -0800 (PST)
+ bh=/p+saRITCJ78lgcdsOEUPOpXKpFRfZEj9HKi8cBbheE=;
+ b=Tf0fj0Wkd25ubtAR6gmwjfOuHhyUO5ws78+raxWaTqE7GeINKTsf8vw8Q/aXcR76vO
+ LmSzYefxD9JYpNuWLS+ZL15YvNnOSSkvjvu5OaOyyTNmwaWu/wsFGm+WgGN8uiw+OcX7
+ auidIUTSnB7GTi5R2PtGDgiQq8qrW7WQo5S3wkKWJ725nBvLeQfgrcpdSe+uuf868JZx
+ lEmF7cBXyDBlUyFCxUBY2rujq4qaCFUi5dQN6FLsjWgd6hSG82L+Oy9Q72hzi6Gq+F4t
+ MFkYh6UGHaexUjG+IAIi27PRTJC9odeVDJgdHQMNUIvVqnzSGwWYTZ8S/m8xaXcDH9xn
+ Slww==
+X-Gm-Message-State: AOJu0Yw2UMGtaVt+2wgadqiIrCapn7MgtQVlN+2VlzJGvuWpJJgVbBWX
+ psgwO7gDluXy6OvMpG3Kmoto1DqIxBJ/MgpLqO0zTw==
+X-Google-Smtp-Source: AGHT+IHluhzXW9z8vK+4ynMTSjRZYzLa8HaDLIL8oxhYbHHoCtr9vC8Rp1vjanbNqnj+24W6lpgNLkafDsyjhex3HAE=
+X-Received: by 2002:a17:906:2d4:b0:a1d:fed:38d0 with SMTP id
+ 20-20020a17090602d400b00a1d0fed38d0mr4498387ejk.174.1703047582740; Tue, 19
+ Dec 2023 20:46:22 -0800 (PST)
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
- <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
- <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
- <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
- <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ0ngqCyC36QVAFWu07p+7SHNQhsuo0MYstTawnbDEEmLw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0ngqCyC36QVAFWu07p+7SHNQhsuo0MYstTawnbDEEmLw@mail.gmail.com>
+References: <20231219101225.3443978-1-danishanwar@ti.com>
+ <20231219101225.3443978-33-danishanwar@ti.com>
+In-Reply-To: <20231219101225.3443978-33-danishanwar@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:46:04 -0700
-Message-ID: <CAPnjgZ1EDx=NtC9aPSVYUwoLRzA3M0rXnDeWxxsEnSUVs8N4FQ@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: "Chiu, Chasel" <chasel.chiu@intel.com>
-Cc: Ard Biesheuvel <ardb@kernel.org>, 
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- "Brune, Maximilian" <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 19 Dec 2023 21:46:11 -0700
+Message-ID: <CAPnjgZ18vCeBT9ykZdF1iV8ten1OJti1qXyU5BPKmcf5kMmiUA@mail.gmail.com>
+Subject: Re: [RFC PATCH 16/16] Revert "dm: core: Report bootph-pre-ram/sram
+ node as pre-reloc after relocation"
+To: MD Danish Anwar <danishanwar@ti.com>
+Cc: Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Andrew Davis <afd@ti.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, srk@ti.com,
+ r-gunasekaran@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,81 +94,58 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Mon, 11 Dec 2023 at 10:52, Simon Glass <sjg@chromium.org> wrote:
+On Tue, 19 Dec 2023 at 03:13, MD Danish Anwar <danishanwar@ti.com> wrote:
 >
-> Hi,
+> This reverts commit 9e644284ab812f2db23f6185af77c0e771b0be73.
+> ---
+>  drivers/core/ofnode.c | 2 +-
+>  include/dm/ofnode.h   | 8 ++++----
+>  2 files changed, 5 insertions(+), 5 deletions(-)
 >
-> On Tue, 28 Nov 2023 at 13:31, Chiu, Chasel <chasel.chiu@intel.com> wrote:
-> >
-> >
-> >
-> >
-> > > -----Original Message-----
-> > > From: Ard Biesheuvel <ardb@kernel.org>
-> > > Sent: Tuesday, November 28, 2023 10:08 AM
-> > > To: Chiu, Chasel <chasel.chiu@intel.com>
-> > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Rutland
-> > > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
-> > > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
-> > > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
-> > > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
-> > > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minnich
-> > > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
-> > > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
-> > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
-> > > usages
-> > >
-> > > You are referring to a 2000 line patch so it is not 100% clear where to look tbh.
-> > >
-> > >
-> > > On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> wrote:
-> > > >
-> > > >
-> > > > In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line 268 is for
-> > > related example code.
-> > > >
-> > >
-> > > That refers to a 'memory-allocation' node, right? How does that relate to the
-> > > 'reserved-memory' node?
-> > >
-> > > And crucially, how does this clarify in which way "runtime-code" and "runtime-
-> > > data" reservations are being used?
-> > >
-> > > Since the very beginning of this discussion, I have been asking repeatedly for
-> > > examples that describe the wider context in which these reservations are used.
-> > > The "runtime" into runtime-code and runtime-data means that these regions have
-> > > a special significance to the operating system, not just to the next bootloader
-> > > stage. So I want to understand exactly why it is necessary to describe these
-> > > regions in a way where the operating system might be expected to interpret this
-> > > information and act upon it.
-> > >
-> >
-> >
-> > I think runtime code and data today are mainly for supporting UEFI runtime services - some BIOS functions for OS to utilize, OS may follow below ACPI spec to treat them as reserved range:
-> > https://uefi.org/specs/ACPI/6.5/15_System_Address_Map_Interfaces.html#uefi-memory-types-and-mapping-to-acpi-address-range-types
-> >
-> > Like I mentioned earlier, that PR is still in early phase and has not reflected all the required changes yet, but the idea is to build gEfiMemoryTypeInformationGuid HOB from FDT reserved-memory nodes.
-> > UEFI generic Payload has DxeMain integrated, however Memory Types are platform-specific, for example, some platforms may need bigger runtime memory for their implementation, that's why we want such FDT reserved-memory node to tell DxeMain.
-> >
-> > The Payload flow will be like this:
-> >   Payload creates built-in default MemoryTypes table ->
-> >     FDT reserved-memory node to override if required (this also ensures the same memory map cross boots so ACPI S4 works) ->
-> >       Build gEfiMemoryTypeInformationGuid HOB by "platfom specific" MemoryTypes Table ->
-> >         DxeMain/GCD to consume this MemoryTypes table and setup memory service ->
-> >           Install memory types table to UEFI system table.Configuration table...
-> >
-> > Note: if Payload built-in default MemoryTypes table works fine for the platform, then FDT reserved-memory node does not need to provide such 'usage' compatible strings. (optional)
-> > This FDT node could allow flexibility/compatibility without rebuilding Payload binary.
-> >
-> > Not sure if I answered all your questions, please highlight which area you need more information.
->
-> Any more thoughts on this? If not, I would like to see this patch
-> applied, please.
 
-I am really not sure who or what is holding this up, so far.
-
-Can we perhaps get this applied in time for Christmas? It would be a
-nice end to the year.
+Can you please add some info more info about why this is needed?
 
 Regards,
 Simon
+
+
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index 21a233f90f..cc2029e62d 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -1485,7 +1485,7 @@ bool ofnode_pre_reloc(ofnode node)
+>          */
+>         if (ofnode_read_bool(node, "bootph-pre-ram") ||
+>             ofnode_read_bool(node, "bootph-pre-sram"))
+> -               return gd->flags & GD_FLG_RELOC;
+> +               return true;
+>
+>         if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
+>                 /* detect and handle old tags */
+> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> index 5795115c49..5f1c8c2787 100644
+> --- a/include/dm/ofnode.h
+> +++ b/include/dm/ofnode.h
+> @@ -1254,15 +1254,15 @@ int ofnode_read_simple_size_cells(ofnode node);
+>   * determine if a node was bound in one of SPL/TPL stages.
+>   *
+>   * There are 4 settings currently in use
+> - * - bootph-some-ram: U-Boot proper pre-relocation phase
+> + * - bootph-some-ram: U-Boot proper pre-relocation only
+>   * - bootph-all: all phases
+>   * Existing platforms only use it to indicate nodes needed in
+>   * SPL. Should probably be replaced by bootph-pre-ram for new platforms.
+> - * - bootph-pre-ram: SPL phase
+> - * - bootph-pre-sram: TPL phase
+> + * - bootph-pre-ram: SPL and U-Boot pre-relocation
+> + * - bootph-pre-sram: TPL and U-Boot pre-relocation
+>   *
+>   * @node: node to check
+> - * Return: true if node should be or was bound, false otherwise
+> + * Return: true if node is needed in SPL/TL, false otherwise
+>   */
+>  bool ofnode_pre_reloc(ofnode node);
+>
+> --
+> 2.34.1
+>
