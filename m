@@ -4,88 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CF41C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 19:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B523C46CCD
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 19:45:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 607DE87828;
-	Wed, 20 Dec 2023 20:12:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 88AD787705;
+	Wed, 20 Dec 2023 20:45:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vwm+sM2m";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Pw/mkdth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A47BB8781E; Wed, 20 Dec 2023 20:12:25 +0100 (CET)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 827508781E; Wed, 20 Dec 2023 20:45:41 +0100 (CET)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A8B287823
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 20:12:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E904F8715C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 20:45:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5e811c5c1adso322657b3.2
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:12:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703099541; x=1703704341; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=U66yYd5uenOjtKdmj5Irm4oB7AuHrhI50cv22l4UhDw=;
- b=Vwm+sM2mfvI9IrpCuqC15eCdSwnIxPW/9Dm1zwtqfOThjK/VxSkWLhWJ+2wc19GBnE
- khlTp3czIR6+yqpNhRBSI+EZa8nR9+w9iiYiOqBIJwDsPgt0kqsLjdCQwpPEANwgutBO
- CO6elb1YZbKVSFM6nSQYBFs38D81Wehe9QvRc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703099541; x=1703704341;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=U66yYd5uenOjtKdmj5Irm4oB7AuHrhI50cv22l4UhDw=;
- b=maFYU47jMIq2GWgwjs3fZ1JqbeVgtEt8Vdyg19fE+cSnOrSQRa2GLqqQcR4/6WdwoB
- be5KSn/yIxlvwm9Al6qOMt8HsuykEXQY6LeVEjlF2++LE2J6/RymPQ9NoN0EvZPzQsqE
- f62P+vUTozGoTbukfyKW/VFitztUTdGCczhXKprqru9VsH0xNAfUMG4MxWi4eGuVLQgx
- cFMGR9vs2EjRzUCXncNC14Cw0aQVMt0vsq3qguyBAC7aEAKzpfJIsEXnNr5k1Hz2c9yO
- cLG4kBsADhlfB2fPW2D5QeRxKP980m3iBVxMiYdjzE+O/Wnp7Nf1eWxs6yE0xQwK2ycE
- 6a4A==
-X-Gm-Message-State: AOJu0YyNQ5bs/2ZC+Q/pO/9ECilN9XDAZyalencM2qDqLu0F0sh4ZQnZ
- QZixSByO5E5MCw0xunEErCfvPA==
-X-Google-Smtp-Source: AGHT+IFA4gLiGoFe/P4aHe1Oo2FWFdIHphvFGkP4OVHDGTQcZRKQq+TVyhe3ZacCuixWNaYaDN92xQ==
-X-Received: by 2002:a0d:d487:0:b0:5d3:b982:57ae with SMTP id
- w129-20020a0dd487000000b005d3b98257aemr250765ywd.4.1703099541269; 
- Wed, 20 Dec 2023 11:12:21 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
- [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
- by smtp.gmail.com with ESMTPSA id
- p84-20020a0de657000000b005e1a5593c0csm150285ywe.60.2023.12.20.11.12.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 11:12:20 -0800 (PST)
-Date: Wed, 20 Dec 2023 14:12:19 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Proposal: U-Boot memory management
-Message-ID: <20231220191219.GP2513409@bill-the-cat>
-References: <20231218224108.GN2513409@bill-the-cat>
- <3DAFAD12-98E4-46CC-B02E-E8EE40D57AC3@gmx.de>
- <20231218231640.GO2513409@bill-the-cat>
- <058AE676-FD71-4DEB-AEB3-0C805B74E8EE@gmx.de>
- <20231218233130.GP2513409@bill-the-cat>
- <688C13A3-9C5F-4A39-9F8F-54C2E8D08EE8@gmx.de>
- <20231219012600.GQ2513409@bill-the-cat>
- <E0572546-90AA-41C4-8433-EF02BB12E434@gmx.de>
- <20231219124553.GS2513409@bill-the-cat>
- <CAPnjgZ1SUoRKEWaK6k1rrVN4t0WLD24GGeRj7uer3A0XA_MKoA@mail.gmail.com>
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C5BBA12009C;
+ Wed, 20 Dec 2023 22:45:37 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C5BBA12009C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1703101537;
+ bh=7C7hCsQ3xuhnjSgcxxHS6pdFwJfeXpiOmNf+kuXq6S4=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=Pw/mkdth5yz1aRcDgjCwDZH45FZ/oVDsIgm+JmEDcj05N5e3gHo1cz8J5b7T58KRG
+ BDRQ21ByfOzdi76ASE2Ijzr4jU3mNJi6CLdETFQpbikMYxWwTCkKwmXXxUKeI+8C/b
+ RNlsEP+ZreNL5V1wybBYa/wZ8iHESq7JarkNckKXCTaFRq8YEan6npHB/uWf+r+NjS
+ 20IhB/HJtY1bo4vanPcrSVLLNa75OoXJhWgAT15/vn/yOndi2AzXuM4ui9SlSpZ70C
+ YNu7RceCb4yXIi6kw3zEJkEJA3ABrgET6/lnzh2tpwdJSRe4xbYMbKOyGZFiOcUSbZ
+ JK1OlGyQzcWiA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed, 20 Dec 2023 22:45:36 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Wed, 20 Dec 2023 22:45:36 +0300
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+To: Simon Glass <sjg@chromium.org>, Alexey Romanov <avromanov@sberdevices.ru>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>, 
+ Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Sean Edmond <seanedmond@microsoft.com>, Tobias
+ Waldekranz <tobias@waldekranz.com>, Stephen Carlson
+ <stcarlso@linux.microsoft.com>, Michael Walle <michael@walle.cc>, Peter
+ Robinson <pbrobinson@gmail.com>, Mikhail Kshevetskiy
+ <mikhail.kshevetskiy@iopsys.eu>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>
+CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, <oxffffaa@gmail.com>,
+ <avkrasnov@salutedevices.com>
+Subject: [PATCH v2] cmd: mtd: OTP access support
+Date: Wed, 20 Dec 2023 22:36:49 +0300
+Message-ID: <20231220193649.3154346-1-avkrasnov@salutedevices.com>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vNH3w7riGpuGyrWd"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1SUoRKEWaK6k1rrVN4t0WLD24GGeRj7uer3A0XA_MKoA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 182256 [Dec 20 2023]
+X-KSMG-AntiSpam-Version: 6.1.0.3
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
+ 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1; 100.64.160.123:7.1.2;
+ 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/12/20 18:48:00 #22710548
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,240 +110,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add access to OTP region. It supports info, dump, write and lock
+operations.
 
---vNH3w7riGpuGyrWd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+---
+ Changelog:
+ v1 -> v2:
+  * Remove warning that OTP can't be erased after write.
 
-On Tue, Dec 19, 2023 at 09:15:21PM -0700, Simon Glass wrote:
-> Hi,
->=20
-> On Tue, 19 Dec 2023 at 05:46, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Dec 19, 2023 at 03:15:38AM +0100, Heinrich Schuchardt wrote:
-> > >
-> > >
-> > > Am 19. Dezember 2023 02:26:00 MEZ schrieb Tom Rini <trini@konsulko.co=
-m>:
-> > > >On Tue, Dec 19, 2023 at 01:01:51AM +0100, Heinrich Schuchardt wrote:
-> > > >>
-> > > >>
-> > > >> Am 19. Dezember 2023 00:31:30 MEZ schrieb Tom Rini <trini@konsulko=
-=2Ecom>:
-> > > >> >On Tue, Dec 19, 2023 at 12:29:19AM +0100, Heinrich Schuchardt wro=
-te:
-> > > >> >>
-> > > >> >>
-> > > >> >> Am 19. Dezember 2023 00:16:40 MEZ schrieb Tom Rini <trini@konsu=
-lko.com>:
-> > > >> >> >On Tue, Dec 19, 2023 at 12:08:31AM +0100, Heinrich Schuchardt =
-wrote:
-> > > >> >> >>
-> > > >> >> >>
-> > > >> >> >> Am 18. Dezember 2023 23:41:08 MEZ schrieb Tom Rini <trini@ko=
-nsulko.com>:
-> > > >> >> >> >On Mon, Dec 18, 2023 at 11:34:16PM +0100, Heinrich Schuchar=
-dt wrote:
-> > > >> >> >> >
-> > > >> >> >> >[snip]
-> > > >> >> >> >> Or take:
-> > > >> >> >> >>
-> > > >> >> >> >> load host 0:1 $c kernel.efi
-> > > >> >> >> >> load host 0:1 $d initrd.img
-> > > >> >> >> >>
-> > > >> >> >> >> How could we ensure that initrd.img is not overwriting a =
-part of kernel.efi without memory allocation?
-> > > >> >> >> >
-> > > >> >> >> >Today, invalid checksum as part of some part of the kernel =
-fails. But
-> > > >> >> >> >how do we do this tomorrow, are you suggesting that "load" =
-perform
-> > > >> >> >> >malloc() in some predefined size? If $c is below $d and $c =
-+ kernel.efi
-> > > >> >> >> >is now above $d we can throw an error before trying to load=
-, yes. But
-> > > >> >> >> >what about:
-> > > >> >> >> >load host 0:1 $d initrd.img
-> > > >> >> >> >load host 0:1 $c kernel.efi
-> > > >> >> >> >
-> > > >> >> >> >In that case (which is only marginally contrived, the more =
-real case is
-> > > >> >> >> >loading device tree in to unexpectedly large ramdisk becaus=
-e someone
-> > > >> >> >> >didn't understand the general advice on why device tree is =
-lower than
-> > > >> >> >> >ramdisk address) I'm fine with an error that amounts to "yo=
-u just
-> > > >> >> >> >corrupted another allocation" and then "fail, reset the boa=
-rd" or so.
-> > > >> >> >> >
-> > > >> >> >>
-> > > >> >> >> Our current malloc library cannot manage the complete memory=
-=2E We need a library like lmb which should also cover the memory managemen=
-t that we currently have in lib/efi/efi_memory.c. This must include a memor=
-y type attribute for usage in the GetMemoryMap() service. A management on p=
-age level seems sufficient.
-> > > >> >> >>
-> > > >> >> >> The load command should permanently allocate memory in that =
-lmb+ library.
-> > > >> >> >>
-> > > >> >> >> We need an unload command to free the memory if we want to r=
-euse the memory or we might let the load comand free the memory if exactly =
-the same start address is reused.
-> > > >> >> >
-> > > >> >> >Our current way of loading things in to memory does not handle=
- the case
-> > > >> >> >I described, yes. How would what you're proposing handle it?
-> > > >> >>
-> > > >> >> If the load command has to allocate memory for the image and th=
-at allocation is kept, any attempt to allocate overlapping memory would fai=
-l.
-> > > >> >
-> > > >> >So you're saying that the load command has to pre-allocate memory=
-? Or as
-> > > >> >it goes? If the latter, in what size chunks? This starts to get a=
-t what
-> > > >> >Simon was talking about with respect to memory fragmentation. Whi=
-ch to
-> > > >> >be clear is a problem we have today, we just let things overlap a=
-nd hope
-> > > >> >something later catches an incorrect checksum.
-> > > >> >
-> > > >>
-> > > >> I don't want to replace the malloc library which handles large num=
-bets of allocations.
-> > > >
-> > > >I'm confused. The normal malloc library is not involved with current
-> > > >image loading, it's direct to memory (with some attempts at sanity
-> > > >checking by lmb).  Are you proposing a different allocator with
-> > > >malloc/free like behavior? If so, please outline how it will determi=
-ne
-> > > >pool size, and how we'll use it to load thing to memory.
-> > >
-> > > All memory below the stack needs to be managed. Malloc uses a small m=
-emory area (a few MiB) above the stack.
-> >
-> > That's a rather huge change for how U-Boot works.
-> >
-> > > >> Closing the eyes when the user loads multiple files does not solve=
- the fragmentation problem.
-> > > >
-> > > >Yes. I'm only noting that today we just ignore the problem and somet=
-imes
-> > > >catch it via checksums.
-> > > >
-> > > >> Fragmentation only happens if we have many concurrent allocations.=
-  In EFI we are allocating top down. The number of concurrent allocations i=
-s low. Typically a few dozen at most. After terminating an application thes=
-e should be freed again.
-> > > >
-> > > >OK, so are you saying that we would no longer be loading _to_ a loca=
-tion
-> > > >in memory and instead just be saying "load this thing" and picking w=
-here
-> > > >dynamically?
-> > >
-> > > Both preassigned and allocator assigned adresses are compatible with =
-memory management.
-> > >
-> > > Architectures and binaries have different requirements. On riscv64 yo=
-u can load Linux kernel, initrd, fdt anywhere. We don't need predefined add=
-resses there. Other architectures have restrictions.
-> >
-> > Yes, 64 bit architecture tend to only have alignment requirements while
-> > 32bit architectures have both alignment requirements and some memory
-> > window requirement. Whatever we implement here needs to handle both
-> > cases.
-> >
-> > > >> When loading a file from a file system we know the filesize before=
-hand. So allocation is trivial.
-> > > >>
-> > > >> The loady command currently does not use the  offered size informa=
-tion but could do so.
-> > > >
-> > > >We should be using that information to make sure we don't overwrite
-> > > >U-Boot itself, but I don't recall how exactly we handle it today
-> > > >off-hand.
-> > >
-> > > If the user issues multiple load commands, he can overwrite previous =
-files.
-> >
-> > Then it sounds like we lost one benefit of all of this overhead.
-> >
-> > > During boot command execution I guess the different allocations respe=
-ct each other.
-> > >
-> > > >
-> > > >> TFTP is problematic because it does not transfer the filesize. We =
-would probably try to allocate a large chunk of memory and then downsize th=
-e allocation after reading the whole file.
-> > > >
-> > > >Reading from non-filesystem flash also has this problem, but we at l=
-east
-> > > >specify the amount to read too. But yes, it gets back to what I was
-> > > >asking about on how you're proposing to handle network load cases.
-> > > >
-> > >
-> > > It depends on the protocol. Http conveys the size before the data. Tf=
-tp does not.
-> > >
-> > > If you don't know the size, you must preallocate a big chunk, check t=
-hat the download does not exceed it, and downsize the allocation afterwards=
-=2E This is not a new problem but exists already with current lmb usage.
-> >
-> > Yes, and what I'm trying to find out is if what you're suggesting would
-> > do anything about it, since previous statements you made implied to me
-> > that we would prevent it.
-> >
-> > To me, at this point it sounds like what we need is more like persistent
-> > memory blocks and a hook that can be called in to for both "give me all
-> > known memory blocks" and "add this memory block to the list", so that
-> > EFI can do whatever it needs to do upon starting an application and then
-> > upon return to U-Boot. Both malloc/free allocations and "load this blob
-> > to memory from whatever" allocations would call the appropriate hook for
-> > tracking.
->=20
-> In my mind the solution to this entire problem is fairly minor changes
-> to how memory is allocated and only for EFI.
->=20
-> I tried to map out what that would look like and we have IMO got lost
-> in the weeds a bit.
->=20
-> I am not trying to solve the problem of the 'load' command doing an
-> allocation and throwing it away. To be that is WAI, at least until we
-> come up with another type of command. This is one of the reasons for
-> standard boot, allowing a more cohesive approach to booting.
->=20
-> I will think about this some more...
+ cmd/Kconfig |   1 +
+ cmd/mtd.c   | 224 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 225 insertions(+)
 
-OK, but please keep in mind that lmb not being at all persistent is a
-problem for everyone, not just EFI. That really needs to be addressed,
-maybe with some flags for dis-allowing overwrites to the area. For
-example, the apple-m1 code to use lmb to find locations for the
-kernel/etc can be written to more than once (allocate the address, then
-write to it to start with, even) but the range that covers U-Boot itself
-(malloc pool and so forth) need to be stopped.
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 90e4ef93e0..c47523a03b 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1354,6 +1354,7 @@ config CMD_MTD
+ 	bool "mtd"
+ 	depends on MTD
+ 	select MTD_PARTITIONS
++	select HEXDUMP
+ 	help
+ 	  MTD commands support.
+ 
+diff --git a/cmd/mtd.c b/cmd/mtd.c
+index eb6e2d6892..1ab69b108b 100644
+--- a/cmd/mtd.c
++++ b/cmd/mtd.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <common.h>
+ #include <console.h>
++#include <hexdump.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <mtd.h>
+@@ -202,6 +203,219 @@ static bool mtd_oob_write_is_empty(struct mtd_oob_ops *op)
+ 	return true;
+ }
+ 
++static int do_mtd_otp_read(struct cmd_tbl *cmdtp, int flag, int argc,
++			   char *const argv[])
++{
++	struct mtd_info *mtd;
++	size_t retlen;
++	off_t from;
++	size_t len;
++	bool user;
++	int ret;
++	u8 *buf;
++
++	if (argc != 5)
++		return CMD_RET_USAGE;
++
++	if (!strcmp(argv[2], "u"))
++		user = true;
++	else if (!strcmp(argv[2], "f"))
++		user = false;
++	else
++		return CMD_RET_USAGE;
++
++	mtd = get_mtd_by_name(argv[1]);
++	if (IS_ERR_OR_NULL(mtd))
++		return CMD_RET_FAILURE;
++
++	from = simple_strtoul(argv[3], NULL, 0);
++	len = simple_strtoul(argv[4], NULL, 0);
++
++	ret = CMD_RET_FAILURE;
++
++	buf = malloc(len);
++	if (!buf)
++		goto put_mtd;
++
++	printf("Reading %s OTP from 0x%lx, %lu bytes\n",
++	       user ? "user" : "factory", from, len);
++
++	if (user)
++		ret = mtd_read_user_prot_reg(mtd, from, len, &retlen, buf);
++	else
++		ret = mtd_read_fact_prot_reg(mtd, from, len, &retlen, buf);
++	if (ret) {
++		free(buf);
++		pr_err("OTP read failed: %d\n", ret);
++		ret = CMD_RET_FAILURE;
++		goto put_mtd;
++	}
++
++	if (retlen != len)
++		pr_err("OTP read returns %zu, but %zu expected\n",
++		       retlen, len);
++
++	print_hex_dump("", 0, 16, 1, buf, retlen, true);
++
++	free(buf);
++
++	ret = CMD_RET_SUCCESS;
++
++put_mtd:
++	put_mtd_device(mtd);
++
++	return ret;
++}
++
++static int do_mtd_otp_lock(struct cmd_tbl *cmdtp, int flag, int argc,
++			   char *const argv[])
++{
++	struct mtd_info *mtd;
++	off_t from;
++	size_t len;
++	int ret;
++
++	if (argc != 4)
++		return CMD_RET_USAGE;
++
++	mtd = get_mtd_by_name(argv[1]);
++	if (IS_ERR_OR_NULL(mtd))
++		return CMD_RET_FAILURE;
++
++	from = simple_strtoul(argv[2], NULL, 0);
++	len = simple_strtoul(argv[3], NULL, 0);
++
++	ret = mtd_lock_user_prot_reg(mtd, from, len);
++	if (ret) {
++		pr_err("OTP lock failed: %d\n", ret);
++		ret = CMD_RET_FAILURE;
++		goto put_mtd;
++	}
++
++	ret = CMD_RET_SUCCESS;
++
++put_mtd:
++	put_mtd_device(mtd);
++
++	return ret;
++}
++
++static int do_mtd_otp_write(struct cmd_tbl *cmdtp, int flag, int argc,
++			    char *const argv[])
++{
++	struct mtd_info *mtd;
++	size_t retlen;
++	size_t binlen;
++	u8 *binbuf;
++	off_t from;
++	int ret;
++
++	if (argc != 4)
++		return CMD_RET_USAGE;
++
++	mtd = get_mtd_by_name(argv[1]);
++	if (IS_ERR_OR_NULL(mtd))
++		return CMD_RET_FAILURE;
++
++	from = simple_strtoul(argv[2], NULL, 0);
++	binlen = strlen(argv[3]) / 2;
++
++	ret = CMD_RET_FAILURE;
++	binbuf = malloc(binlen);
++	if (!binbuf)
++		goto put_mtd;
++
++	hex2bin(binbuf, argv[3], binlen);
++
++	printf("Will write:\n");
++
++	print_hex_dump("", 0, 16, 1, binbuf, binlen, true);
++
++	printf("to 0x%zx\n", from);
++
++	printf("Continue (y/n)?\n");
++
++	if (confirm_yesno() != 1) {
++		pr_err("OTP write canceled\n");
++		ret = CMD_RET_SUCCESS;
++		goto put_mtd;
++	}
++
++	ret = mtd_write_user_prot_reg(mtd, from, binlen, &retlen, binbuf);
++	if (ret) {
++		pr_err("OTP write failed: %d\n", ret);
++		ret = CMD_RET_FAILURE;
++		goto put_mtd;
++	}
++
++	if (retlen != binlen)
++		pr_err("OTP write returns %zu, but %zu expected\n",
++		       retlen, binlen);
++
++	ret = CMD_RET_SUCCESS;
++
++put_mtd:
++	free(binbuf);
++	put_mtd_device(mtd);
++
++	return ret;
++}
++
++static int do_mtd_otp_info(struct cmd_tbl *cmdtp, int flag, int argc,
++			   char *const argv[])
++{
++	struct otp_info otp_info;
++	struct mtd_info *mtd;
++	size_t retlen;
++	bool user;
++	int ret;
++
++	if (argc != 3)
++		return CMD_RET_USAGE;
++
++	if (!strcmp(argv[2], "u"))
++		user = true;
++	else if (!strcmp(argv[2], "f"))
++		user = false;
++	else
++		return CMD_RET_USAGE;
++
++	mtd = get_mtd_by_name(argv[1]);
++	if (IS_ERR_OR_NULL(mtd))
++		return CMD_RET_FAILURE;
++
++	if (user)
++		ret = mtd_get_user_prot_info(mtd, sizeof(otp_info), &retlen,
++					     &otp_info);
++	else
++		ret = mtd_get_fact_prot_info(mtd, sizeof(otp_info), &retlen,
++					     &otp_info);
++	if (ret) {
++		pr_err("OTP info failed: %d\n", ret);
++		ret = CMD_RET_FAILURE;
++		goto put_mtd;
++	}
++
++	if (retlen != sizeof(otp_info)) {
++		pr_err("OTP info returns %zu, but %zu expected\n",
++		       retlen, sizeof(otp_info));
++		ret = CMD_RET_FAILURE;
++		goto put_mtd;
++	}
++
++	printf("%s OTP region info:\n", user ? "User" : "Factory");
++	printf("\tstart: %u\n", otp_info.start);
++	printf("\tlength: %u\n", otp_info.length);
++	printf("\tlocked: %u\n", otp_info.locked);
++
++	ret = CMD_RET_SUCCESS;
++
++put_mtd:
++	put_mtd_device(mtd);
++
++	return ret;
++}
++
+ static int do_mtd_list(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		       char *const argv[])
+ {
+@@ -552,6 +766,10 @@ static char mtd_help_text[] =
+ 	"\n"
+ 	"Specific functions:\n"
+ 	"mtd bad                               <name>\n"
++	"mtd otpread                           <name> [u|f] <off> <size>\n"
++	"mtd otpwrite                          <name> <off> <hex string>\n"
++	"mtd otplock                           <name> <off> <size>\n"
++	"mtd otpinfo                           <name> [u|f]\n"
+ 	"\n"
+ 	"With:\n"
+ 	"\t<name>: NAND partition/chip name (or corresponding DM device name or OF path)\n"
+@@ -562,11 +780,17 @@ static char mtd_help_text[] =
+ 	"\t<size>: length of the operation in bytes (default: the entire device)\n"
+ 	"\t\t* must be a multiple of a block for erase\n"
+ 	"\t\t* must be a multiple of a page otherwise (special case: default is a page with dump)\n"
++	"\t<hex string>: hex string without '0x' and spaces. Example: ABCD1234\n"
++	"\t[u|f]: user or factory OTP region\n"
+ 	"\n"
+ 	"The .dontskipff option forces writing empty pages, don't use it if unsure.\n";
+ #endif
+ 
+ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
++		U_BOOT_SUBCMD_MKENT(otpread, 5, 1, do_mtd_otp_read),
++		U_BOOT_SUBCMD_MKENT(otpwrite, 4, 1, do_mtd_otp_write),
++		U_BOOT_SUBCMD_MKENT(otplock, 4, 1, do_mtd_otp_lock),
++		U_BOOT_SUBCMD_MKENT(otpinfo, 3, 1, do_mtd_otp_info),
+ 		U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mtd_list),
+ 		U_BOOT_SUBCMD_MKENT_COMPLETE(read, 5, 0, do_mtd_io,
+ 					     mtd_name_complete),
+-- 
+2.35.0
 
---=20
-Tom
-
---vNH3w7riGpuGyrWd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDPJMACgkQFHw5/5Y0
-tyzllAv/Wf7rOfRrGPVuWVPaai+8idcYNBkrB7a5JbJ+UIBtQyGCHDGnrcEXeffV
-gE4a/udUtopMeaPUTEi+jTTns2qcqEWHCoul2TENJPdU9Wps6FNaMg26usQ44zJa
-r6caoVv2J6HEA5/l01UZCFYgp6P0KZX8NdJUfu3GaSRLyLah0gHEdIzsZoxI+HRH
-f4zyp7bIffVW6og9QDRjGKV1+SWjMXFawkrA5DvVVnAXIzmF0kOFGAUd8Og4Yuyb
-CaKvQcY52gw3yuWpK7hbP/5s5twjznMEJPkZPVcoLrFPU5viCc+3LiqZhDEPuLUO
-njw3jvLA06n6UpVympHtahpv5MUFGLqLxJYBAdhXqroN2KHXLK+3jBvODUxFcY2Z
-gHh6T9x0Rf8zCpOAkB9RvwCLo8iEPrqGNO0/LygVTpXi5DkZ3FHBhQvN7aSKR0EI
-QPCG3MXNGpR6WkabXzbMcmn8OBmgIRA/fgADde7USKIIsoegKBZGmJocugUA4mlB
-9/OKnoic
-=jTJV
------END PGP SIGNATURE-----
-
---vNH3w7riGpuGyrWd--
