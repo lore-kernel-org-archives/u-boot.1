@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC67C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A29CC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:46:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5228F8744F;
-	Wed, 20 Dec 2023 05:46:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B9C618753E;
+	Wed, 20 Dec 2023 05:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J/yc9spu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WN68kkdR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F48C874B7; Wed, 20 Dec 2023 05:46:03 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 24D808753E; Wed, 20 Dec 2023 05:46:19 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D89B870B7
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AA986870B7
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:46:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-40c3ceded81so53058155e9.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:01 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a2370535060so64890166b.1
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:46:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047561; x=1703652361; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703047576; x=1703652376; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eku3lJFPGsEdC1S5l9YE9ViaQ9M7CKQqEiFxiYHk5KQ=;
- b=J/yc9spu5gYJuLH4Hs6B2tZtgleUaK5e2EBmYx5WN98KEezjHozbCwTEmLBpWcYCL/
- X2NG7DsG/yDkK3PCGhJ9VPG3bT38vjsr20DBneodtk4Nt/ESFDfeUNL81qnK40MRohpw
- UaJ7Dp1nRa9uk5dFNFDJoL4Az4IAkG+DznADU=
+ bh=ObOjGHxxzANzBA20+fRUpz/qy8ssxRN2M1oEwSnchMg=;
+ b=WN68kkdRWGGhdv3BINAztTdBiSyv4celyGG0CykFBnqEjtW/sYa9YYzEedzO/lNpYQ
+ CucZ50YbdhxaHayKSPIRz8hXioNRx4NbdgC9g6CYhek6PdP72f8GzLNW0Oe47XjVwPU8
+ TLqszz+SDUI10rMsErDm8xPYFtmqC0JKvAbdM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047561; x=1703652361;
+ d=1e100.net; s=20230601; t=1703047576; x=1703652376;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eku3lJFPGsEdC1S5l9YE9ViaQ9M7CKQqEiFxiYHk5KQ=;
- b=l5vLmEC3OS+1jxqtkbbtxW5S4162613xmdl27Sj2ijLl3txkBZ5p1uQdaZGA2udxB5
- iro04E3oVWR0lLV2pMdNg+3WTXvob2/Ccujon9R7aqXEtnsA/1qANOkPFOIsv0+ZCmBk
- Wg3JLXQz6vdO/T/dvuf9CL0Yumjlo1jsbsDsY2/sTxGKEi70KH/ai0KhJTF0nnGsswOV
- RdgiTvDYIG3hrV2fASgD7OwaAuPO6ua95PcBjgwmXGndxP03UXvYrWOmbF0uIxaswgyi
- KXHQW16clGUzdK/P4U/sUgTb81n+9N4G194qh7v2/p8CxG0hvR3XDTex8OtSJKgHRTt7
- gwlQ==
-X-Gm-Message-State: AOJu0YzizZxNtnPjL032jnq4OTksk3Fc8XjacRveJeT2TkpZGao0WxL3
- 4D3XbzDph2V2hggW6xVCt2/0eQBQdC7yPeq6QVcjUQ==
-X-Google-Smtp-Source: AGHT+IHGCIZ57IvjU5BbVRLPoNrTuD1nVe7TnuAu4BnqP6tQM03wfj/ghuyygRy36rV/1XVWCyj+fDKPpmDybFNu6ZU=
-X-Received: by 2002:a05:600c:3c89:b0:40c:4a4d:b53c with SMTP id
- bg9-20020a05600c3c8900b0040c4a4db53cmr8080964wmb.162.1703047560451; Tue, 19
- Dec 2023 20:46:00 -0800 (PST)
+ bh=ObOjGHxxzANzBA20+fRUpz/qy8ssxRN2M1oEwSnchMg=;
+ b=H73IBe2eFPWwMyC/UG1a6t7vvCEm2KmHqm00ngLXd+L4eCl+oWZ95+NSPn7ai26xaK
+ W2fJiz6kdoT9En1m+NaJ/uT6ldeqWIoSXKoZ7QDOvG/5JI0Lj7fNuI4QMiIQ82L1VIdP
+ dw+S3/DdrPgH4dkCnZsRXgN40TDYbyOaJC9yiXV5d5ZHStZelVQ9Fi03HzvYBM6YpwQQ
+ ElVpr/WZtMEACnP8OX3y2sWHKySmEf3cera7BWoXufEpXY+iNWONmBi8BEXM3OqhMa8r
+ M5vBOdQDul8FJ9Y7RQ+rfsj27Up+Ez5Y3o9akjqb5akvBjUL8pHw7saTiIrz96tD2AK5
+ e5rA==
+X-Gm-Message-State: AOJu0YwSYAToQsVkSjhlwQQ3m9HnC5Apsz5dtn9Q/KDWpgI0+bacjaK7
+ e8sJtLupSsnPlRHCAO3Zqr4DfufG5Gf600AJ3oAptCemIQvy
+X-Google-Smtp-Source: AGHT+IFiAtnYS6LXvMS3hEaXi1ylgrBmLLhNN+uioKFv9mVb/Ycop0Bj8klqTrKKv5ovgt1osw7sDYHdsp6TNkdiWcg=
+X-Received: by 2002:a17:906:c15:b0:a26:8f35:20e3 with SMTP id
+ s21-20020a1709060c1500b00a268f3520e3mr484981ejf.4.1703047576066; Tue, 19 Dec
+ 2023 20:46:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20231219101225.3443978-1-danishanwar@ti.com>
- <20231219101225.3443978-29-danishanwar@ti.com>
-In-Reply-To: <20231219101225.3443978-29-danishanwar@ti.com>
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
+ <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
+ <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
+ <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
+ <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
+ <CAPnjgZ0ngqCyC36QVAFWu07p+7SHNQhsuo0MYstTawnbDEEmLw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0ngqCyC36QVAFWu07p+7SHNQhsuo0MYstTawnbDEEmLw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:45:48 -0700
-Message-ID: <CAPnjgZ24Q_kAx4wkHtcWzwZr-K3DfMzUOABWGGEO80+_m7duKQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 14/16] tools/fdtgrep: Include __symbols__ table
-To: MD Danish Anwar <danishanwar@ti.com>
-Cc: Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, 
- Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Andrew Davis <afd@ti.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, srk@ti.com,
- r-gunasekaran@ti.com
+Date: Tue, 19 Dec 2023 21:46:04 -0700
+Message-ID: <CAPnjgZ1EDx=NtC9aPSVYUwoLRzA3M0rXnDeWxxsEnSUVs8N4FQ@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: "Chiu, Chasel" <chasel.chiu@intel.com>
+Cc: Ard Biesheuvel <ardb@kernel.org>, 
+ "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ "Brune, Maximilian" <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
+ "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,64 +103,81 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 19 Dec 2023 at 03:13, MD Danish Anwar <danishanwar@ti.com> wrote:
+On Mon, 11 Dec 2023 at 10:52, Simon Glass <sjg@chromium.org> wrote:
 >
-> This is required for overlays to work at SPL.
+> Hi,
 >
-> Loading of symbol table depends on DT Overlay support in SPL
-> so make it compile-time dependent. Without this SPL fails to
-> boot some platforms where this feature is not enabled
-> (e.g. dra71-evm.)
+> On Tue, 28 Nov 2023 at 13:31, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> >
+> >
+> >
+> >
+> > > -----Original Message-----
+> > > From: Ard Biesheuvel <ardb@kernel.org>
+> > > Sent: Tuesday, November 28, 2023 10:08 AM
+> > > To: Chiu, Chasel <chasel.chiu@intel.com>
+> > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Rutland
+> > > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
+> > > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
+> > > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
+> > > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
+> > > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minnich
+> > > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
+> > > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
+> > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
+> > > usages
+> > >
+> > > You are referring to a 2000 line patch so it is not 100% clear where to look tbh.
+> > >
+> > >
+> > > On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+> > > >
+> > > >
+> > > > In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line 268 is for
+> > > related example code.
+> > > >
+> > >
+> > > That refers to a 'memory-allocation' node, right? How does that relate to the
+> > > 'reserved-memory' node?
+> > >
+> > > And crucially, how does this clarify in which way "runtime-code" and "runtime-
+> > > data" reservations are being used?
+> > >
+> > > Since the very beginning of this discussion, I have been asking repeatedly for
+> > > examples that describe the wider context in which these reservations are used.
+> > > The "runtime" into runtime-code and runtime-data means that these regions have
+> > > a special significance to the operating system, not just to the next bootloader
+> > > stage. So I want to understand exactly why it is necessary to describe these
+> > > regions in a way where the operating system might be expected to interpret this
+> > > information and act upon it.
+> > >
+> >
+> >
+> > I think runtime code and data today are mainly for supporting UEFI runtime services - some BIOS functions for OS to utilize, OS may follow below ACPI spec to treat them as reserved range:
+> > https://uefi.org/specs/ACPI/6.5/15_System_Address_Map_Interfaces.html#uefi-memory-types-and-mapping-to-acpi-address-range-types
+> >
+> > Like I mentioned earlier, that PR is still in early phase and has not reflected all the required changes yet, but the idea is to build gEfiMemoryTypeInformationGuid HOB from FDT reserved-memory nodes.
+> > UEFI generic Payload has DxeMain integrated, however Memory Types are platform-specific, for example, some platforms may need bigger runtime memory for their implementation, that's why we want such FDT reserved-memory node to tell DxeMain.
+> >
+> > The Payload flow will be like this:
+> >   Payload creates built-in default MemoryTypes table ->
+> >     FDT reserved-memory node to override if required (this also ensures the same memory map cross boots so ACPI S4 works) ->
+> >       Build gEfiMemoryTypeInformationGuid HOB by "platfom specific" MemoryTypes Table ->
+> >         DxeMain/GCD to consume this MemoryTypes table and setup memory service ->
+> >           Install memory types table to UEFI system table.Configuration table...
+> >
+> > Note: if Payload built-in default MemoryTypes table works fine for the platform, then FDT reserved-memory node does not need to provide such 'usage' compatible strings. (optional)
+> > This FDT node could allow flexibility/compatibility without rebuilding Payload binary.
+> >
+> > Not sure if I answered all your questions, please highlight which area you need more information.
 >
-> Without including the <linux/kconfig.h> file, the symbol
-> CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY will not be visible and
-> we will never include the symbol table.
->
-> So include <linux/kconfig.h>
->
-> Due to some reason it needs to be included after
-> [#include "fdt_host.h"] otherwise it causes a build error.
->
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> ---
->  tools/fdtgrep.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/tools/fdtgrep.c b/tools/fdtgrep.c
-> index 7eabcab439..706b4a35f4 100644
-> --- a/tools/fdtgrep.c
-> +++ b/tools/fdtgrep.c
-> @@ -22,6 +22,8 @@
->  #include "fdt_host.h"
->  #include "libfdt_internal.h"
->
-> +#include <linux/kconfig.h>
-> +
->  /* Define DEBUG to get some debugging output on stderr */
->  #ifdef DEBUG
->  #define debug(a, b...) fprintf(stderr, a, ## b)
-> @@ -1234,6 +1236,12 @@ int main(int argc, char *argv[])
->                 disp.fout = stdout;
->         }
->
-> +       if (IS_ENABLED(CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY)) {
-> +               /* include symbol table */
-> +               if (value_add(&disp, &disp.value_head, FDT_IS_NODE, 1, "/__symbols__"))
-> +                       usage("Cannot add __symbols__ value");
-> +       }
+> Any more thoughts on this? If not, I would like to see this patch
+> applied, please.
 
-This will need to be a new fdtgrep flag as we cannot build different
-versions of fdtgrep.
+I am really not sure who or what is holding this up, so far.
 
-Also, can we not update Makefile.lib to pass something like '-n __symbols__' ?
-
-> +
->         /* Run the grep and output the results */
->         ret = do_fdtgrep(&disp, filename);
->         if (disp.output_fname)
-> --
-> 2.34.1
->
+Can we perhaps get this applied in time for Christmas? It would be a
+nice end to the year.
 
 Regards,
 Simon
