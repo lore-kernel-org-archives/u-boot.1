@@ -4,172 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D158C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 14:43:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EED2C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 14:53:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB23D86D33;
-	Wed, 20 Dec 2023 15:43:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DA59C876E9;
+	Wed, 20 Dec 2023 15:53:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tYT6B03s";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LyQ7wSFY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B35F187509; Wed, 20 Dec 2023 15:43:49 +0100 (CET)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::600])
+ id 9206587705; Wed, 20 Dec 2023 15:53:37 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20607.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::607])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 704798037B
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 15:43:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F327875B6
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 15:53:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JZtRcQjeu95UMP+pfCefNL5IvQLwZA3zsn6k39yV4Gis0r7ET0o3JKtYDrDEjFHasEngnmj2Ch0fvAVHoe68fWn1IAwF1P3sa94kPigdlJ79foaHz7pna3pbGnFEVfIsZ7liev7iXGI1b9PUsQPXYcJUbGvDTgYowYiuj/Zp0iSzN+DeI7QHT4njcIkD7G8ylGDFWBFYpiL9QesLww+ZspJFwcXLdkSUyMQv7CQ1AQxG5auJVFwk9C/UHd6CuYU+Gn0tCzCCuJtZ7cEaTxuLig1bPpXrIL9Bd40DoE0MV/R9reHIjbz9hug7t/860m9UHg9uzD2tlqZ/zGfFb9BgQw==
+ b=Fzf1idRP+SmhRpAoeQ9Zum9Vh/0e3bxDebJ9tGCNTmTr8lBQSHWpozCD6ZlVX+rm7Q8R04sYNOxIeAzbZNxxOz4c87HkKS+f+9mAMDpqxPBEBN1FNGh+Dm4RCb1TNKW1UCJNzEAPDHtupz2FWJE9ao6DwiuSeWpbKcgP2hBdsPTcbq9d2hHUC/vBH6UrkOUrCPDF3+E7etAhf44oa4RnNRAkswrW5fGCbPg6Qy5jtxJCa3mQgEZbAvDz32Or+LLsbwHyikPO77jt2OGCNz+eG16NTW0rjUT+vGp5OvKiUH6JHRZAkvYvcv6MzMEnhE2/ui7wX6MtqzuOCZzi3T54zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=w6aw75rOFNvEWgq49XmfNpp+5/R0hAPwSs0NktacQPM=;
- b=Pb+EjiDIIEfiyTH6UhwWkKJruANflJvw96j+ym/STFi86DTdwHIxm3x9GB9+cpTDlDPcEX+cHN5zOGSID26xd8L5fLoiGTmbYzVfHYW+9IJ2C16TjWUZUVerRG5/HIKk10MK/BLEa3K9rDwr5ZHgOv5Sue4bAKkSJNt5uvHzBvKFPE8k07gilYkBWxRgjg3hqVRQZPCMfGgDzHeK7sFQgSPAkw2HTH8TtADLDTYmDE83wkocDh4hidKWa9MWTpB0D1i3zYixlGl8Ku9Q8NNSZZiD0cOu0t5QNC7EurER7Ul/W5sTrPC0AoSMi5EvbzpB0Vfx+9u88BIOgqPBAmv6oA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=kZghoUclrf03AChAFV7UUWEPeIvy4vq1MYmK1pbB4Tw=;
+ b=cSN7YzJ8+HBCDJ934EZdq/EyZ2g1GWrT4Qw8mki9CqUQ8aHFWL3CvMmduQAbxhdPH7B6fKpn2oi3xh/LIMJWyQNqKQUnevsILZhHyjFWE3UdJGsO+u9VOSaq5kAr6Fs0MrMNiTYaKKdFWXIbtoPruX/DOOdxYjL3IgnSKbYclU56vgQz2/TBI5HG+T90dOAlZ0rNxkmgcJLpCPVPF5amxOAP+ls+1mBReuKc/2xKrGmLnBhEIOi1UnxQs/G95gdbdld96tBd+Hc3GrsPHh5jKqWKBGfpGyyhxRQ/RJgx5PQ7/VUOLt9qx/fzYtTCCQJNmBik4TLhYpXtHeEeIiRgjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=w6aw75rOFNvEWgq49XmfNpp+5/R0hAPwSs0NktacQPM=;
- b=tYT6B03s0ujeRM6OkYA2itW1PQZAWBKEmysgg4xFalbtNSWScCXkrRBsJBJM8s7nxuXMfFHhL4cHH6pYelalPQWERVanx3S/nC5Cx2iWTkCwA9A7GaBaMWnYwQzc4E0wt+VIbt6TqKlgR8HhE3EL1Z1btJUmIxvsyHXPDfWGC50=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
- by SJ0PR12MB8613.namprd12.prod.outlook.com (2603:10b6:a03:44d::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18; Wed, 20 Dec
- 2023 14:43:44 +0000
-Received: from BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
- ([fe80::39a2:42da:ea20:3349%5]) with mapi id 15.20.7091.034; Wed, 20 Dec 2023
- 14:43:44 +0000
-Message-ID: <f6dfa726-3b1b-448b-b4fb-8593ea97512f@amd.com>
-Date: Wed, 20 Dec 2023 15:43:33 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/6] spi-nor: Add parallel and stacked memories support
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, git@xilinx.com
-References: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
+ bh=kZghoUclrf03AChAFV7UUWEPeIvy4vq1MYmK1pbB4Tw=;
+ b=LyQ7wSFY/ExD9c3a/Piz2C3XQAT3ap9LSWSC399/3j7e/L+ijnAbDPwzmxOm1zCBJ4s3MytO9xWWmc6VFy66gj6xBFQxzb9C0glUGSeVP8UFPc86i7czErwJaRNxI4C9Pm1RF67rzvu6SOA6Y+/sUEeDRtZIx6uSV8O3MuiRoSs=
+Received: from DM6PR08CA0032.namprd08.prod.outlook.com (2603:10b6:5:80::45) by
+ CH0PR12MB5233.namprd12.prod.outlook.com (2603:10b6:610:d0::12) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7091.38; Wed, 20 Dec 2023 14:53:32 +0000
+Received: from CY4PEPF0000EE30.namprd05.prod.outlook.com
+ (2603:10b6:5:80:cafe::c9) by DM6PR08CA0032.outlook.office365.com
+ (2603:10b6:5:80::45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18 via Frontend
+ Transport; Wed, 20 Dec 2023 14:53:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE30.mail.protection.outlook.com (10.167.242.36) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7113.14 via Frontend Transport; Wed, 20 Dec 2023 14:53:31 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 20 Dec
+ 2023 08:53:30 -0600
 From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231219041537.1240070-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VE1PR03CA0053.eurprd03.prod.outlook.com
- (2603:10a6:803:118::42) To BYAPR12MB4758.namprd12.prod.outlook.com
- (2603:10b6:a03:a5::28)
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Leo <ycliang@andestech.com>, Padmarao Begari
+ <padmarao.begari@microchip.com>, Rick Chen <rick@andestech.com>
+Subject: [PATCH] riscv: Extend board compatible string with "qemu,mbv"
+Date: Wed, 20 Dec 2023 15:53:28 +0100
+Message-ID: <575ac34167776f3a3a00aa23cc5e182d1e41492f.1703084004.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=869; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=Rva0KsVquD8XoqLVPYuuczfrJRDcN0MympOHBu7mbTk=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtSm/0+q2wxFtMWjd+ZV7642K24+8MlnXWCKbs6j6dV3X
+ ALchbk6YlkYBJkYZMUUWaRtrpzZWzljivDFw3Iwc1iZQIYwcHEKwETELzAsmBbz6MOf3MkCLvOr
+ Txz7au4x57HSV4Z5Nj6rxJ4b/+2e/vpEGuf7qyZnmdMvAwA=
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|SJ0PR12MB8613:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7d37ab81-1a41-4683-0747-08dc016a10db
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE30:EE_|CH0PR12MB5233:EE_
+X-MS-Office365-Filtering-Correlation-Id: eedba20a-1b80-46b7-7f7f-08dc016b6f12
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: oRhOwL6kJJ0Pdcsf8EMRiLl69kEU+fBH6FCuYUcbE+3f4gIW+p9ltYuFn5Lqn4V0i5P0JdTiN0TmKTdR4jSFcAfdLq5S0sEocWoYZ8cQ/cUrQ8AOn/C81zbnVX1+S8XvXr02eXlYr0y1U7iPfx+FKkdAM01eN+4Ca/xwK/s9WZO0xomMo/XEOEygEr79w2fNoh7rHfYQhiayHKStcr8L1ZvyIzqCK7+bo9QUJvGZMeqnDJWu6iGprSS4h7VUcn0QYwDyQAMl+zq5vVwVqD0xOF6LBUZ+18f55jdkYUKuND4vYG2rbh4+wrBqzQsqAn+GdtcWAt98F3vQTTPGBsXRbBfjVyoENB/DIEUojTQ9/TpqiROmuRqQFbOX9H9HMsmV7ZrSGEOmpMFVV6mKfxHaVS4nWapSwu2QM60BTj30visU0PaSYaPHgwKL6t9TD/R0qmHJ67hCwzt0z/N4+PeERV6HJtQH0CHdgf4FaN9WBMyItd+nU6VUEcIhFCcyohRP4Lmba6IJ8qQvcK55hXj+Xe/ImjLBFtL710y3sIsD3EOlFHLNovX4+mEURWWn/tkBAB0z7H9+i0c08XjFULOL+xeGWybrlWRyRlE5lJeHwf2OP71Q9MorM749Em//YdSYZ5aWA2p2mj3k1XBLjdjkyA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(376002)(136003)(39860400002)(396003)(346002)(230922051799003)(64100799003)(451199024)(1800799012)(186009)(6666004)(26005)(6506007)(2616005)(6512007)(5660300002)(41300700001)(44832011)(4326008)(8676002)(8936002)(6486002)(53546011)(316002)(478600001)(66946007)(66476007)(66556008)(2906002)(31696002)(86362001)(36756003)(38100700002)(31686004)(45980500001)(43740500002);
+X-Microsoft-Antispam-Message-Info: eb6LzaBqz5Xikiu4AQnCniy+s6jyphHcQvSFWkd3eQaYVl7phRzMdsdRVoJXfmEDeKjjv94JOoj7Y4gKgX706j8eLP8v3j05Uu1Ur/07w4fMUKCWkc7dMynDgWOefEFORyKI2KWh1t0OLC3MdcaRcUG25NduzT0mT9zxwgxQ7L79t9jVTx17nMmdqh5t6lRAJuPAJ4RXQiRD2bCRfqWPUNhGMvjK4arqn2/mTZUDnCyhAYM3CBgslVAe0537L6gu1ZeRb0lKbXMjoup5hV12meZT3RmX7yywS++JD3efrbQPM89C14OYeUNUZkUoBSbZoD2sxQIUFZrZW8RKgG00Lv5A0nEDv+vO8i0J4pe5MRA/usaU5mmabtc5iE5adIX38ZqpyReCcnkADklsqxrwE2HnbV51VOo6Hm9+W7Kib6a9QUkbcniC3xrsHpT5/A56ThrWSOGjBdl/rcB5XtBaj5ngJVGgzGwLINFxo5fXUx3pA9V9Vv/R9wotvUadFu/4gryU4nku1+H2thp51g0COpOonowD+XV4gj5nHgBgHmr+2JKVE7KkYrx7THV8NSDT54yZtlnrl0xEk6GRA2hyeeXXjplY/DAm5wfu44we5Tmkd1RylxS/AgLXBDABfJCR3dIhgcVXb+TVT3u14cCjTy4pc1RD10rQc9kGC81mbXsP3opUzAuLtT53vlvOzPvea/7+oNOERchCfspVi4TKBWaXozoKBudULn5gizLjLxCkXZGp7OmnNk/XOeIcySpz0IHykI7g6Jhd0nfbzn4I8eZ02Yobgrw8hMtEyulRRy3MSMrrDgZ+h2pxiCOYNPVY
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(346002)(376002)(136003)(396003)(230922051799003)(82310400011)(1800799012)(451199024)(64100799003)(186009)(36840700001)(46966006)(40470700004)(336012)(16526019)(2616005)(2906002)(26005)(82740400003)(426003)(83380400001)(47076005)(4744005)(5660300002)(4326008)(110136005)(478600001)(8676002)(36860700001)(8936002)(41300700001)(54906003)(316002)(966005)(44832011)(70206006)(70586007)(81166007)(356005)(86362001)(36756003)(40480700001)(40460700003)(36900700001);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZTVHUGIwUEc2MWNwSW44MzFaU2ZMT3FhWit2UU5aMHRuN1hYVmNZTzNleUJJ?=
- =?utf-8?B?cUdoczBESmhaODhHRDZhdWt5bXhybHc2d21LNWNoYXB2SFY2b3RMdmk3SWZT?=
- =?utf-8?B?MVBpQXd6SUFyOURBT0RFUHhwdlhkdWIyRk9GTk90dEkvNkVVRVIrWGYrZlVR?=
- =?utf-8?B?eUxuNzJsUWdWSUVhQVdFRWdPWXJndzZ0NjY3L2NnV2s0NzJhSDFKeXRCU1FZ?=
- =?utf-8?B?SVJSS2ZkQXF0NFQ0cmkvYjV0azZkOHJwZWljWVFoZGtWY2ZJSElDT2VSMzV2?=
- =?utf-8?B?OFBHbjhyZWhqOStSTVB6SW9GamEyVFZwOTBJTDh3VVc1amd0QzNnNThISGs3?=
- =?utf-8?B?QXRtMkxTTmN2dzZ6YXYzZDBQemcwV2hLMGszYXZvWHJVQ0JmRDFGR2s4aEZZ?=
- =?utf-8?B?ZWVldXBZUGdzakMwMmRZM1E2dXRyTDZQRmMwd29TVmZ6c01xeU9hTmdXL1Mx?=
- =?utf-8?B?ZmlOQUc0V2ZSNnhwaDVnY3o1WGdveTlMYkFndXdCOGtPZXVTdjBMY085WTkv?=
- =?utf-8?B?cEtjcW92Wkp4bFlidkF4RXhpZWVyNEEvWWJ3YkJRNFJrZHRaWFo3bHNpWUh1?=
- =?utf-8?B?aUhHZGl6SS9pUm51UnB3RFlQNWtla3RIWThFNW12L081TS9YWVZMM3dDdFJ5?=
- =?utf-8?B?Zms1L2hvd29YS3dVbnY1dHVtMzk5RjNQNU5EdlBHVHhsMWJqZDA1bUhSd043?=
- =?utf-8?B?dnVDV2xDc0RxQlJrNGk0ei9pM3FhUFpMTlFLbXJLWGRpSFg1MUFmdFdmSVZo?=
- =?utf-8?B?QkE2Z2tyRUZJNXdzZXEwWklic2JGWGJUQUdja21SSHlpMVBMemZ1V3BWK2Fx?=
- =?utf-8?B?cDczaGNMM2NFWmlVWTZNbkxuOVVKby9UZEpqNFRKQjR2OGlpSWV3aFZIbG95?=
- =?utf-8?B?OWJpcXQ0UW5tTmpFVDhzVlFSeHc4Yys2R3NoSzJJczl4Nkh2eTU5VnpZMnNh?=
- =?utf-8?B?c1ZKYTlkbEM5TWVaMjVsaWxBTW5QRnVOZVFzSDN5YWh2Y0FqdGcrNC9BN1l3?=
- =?utf-8?B?TlBqenY1dTQrRXRyaXRrZHh3WEYzZ0hRNkx4UkQ3ZmRBRjg4UUJhdmVueWdr?=
- =?utf-8?B?QjRBK1RSZHV6cEtvenJ2azI3RFRaNUc5ZkRUWlFXY0ZkVzdBcWZkSS9CYXpC?=
- =?utf-8?B?bzgrbHhFMURIS1VmRjhodHFJN2twUXZSSDlJZ0Z4S2I2U2pNc25ycC9LM1BH?=
- =?utf-8?B?a3FYbnBJZytqYnFob2RtTThLU25VWDRLUnhiOEt5Q3p1dTcxVFJuZmJETE9H?=
- =?utf-8?B?K3lCcStGSnFRZmo5UWFrYjN1LzV4d0ZWS3FpL3V5dXF1cHQ4d0dOT2MraHNJ?=
- =?utf-8?B?ZHFDL2V5bGI3Ykt6cE1vaVloNDBZbGlCa0pwUkZhNTV0Nm0wc2RzeTQ5N0dL?=
- =?utf-8?B?R1gxZ0tEcWxVSnlzdWJPS3cxOGN5TnJSVXI5Z21RakR2cHB0NXl2dGxYN212?=
- =?utf-8?B?cXdHbE5PKzZWZ3FMUklOZWVQZTlnMjg4MTVFT0hVVkVjdHp3Y2hWZlZ1VmYx?=
- =?utf-8?B?U3dMcTRQeTZmWU1YYjdZYnpCVHN6NW1jemk3SVlpRFhkbmZHcjYyQ0FDSmxH?=
- =?utf-8?B?czNnajhKNXltWUlFaEo3R0Mxa09VNFRSNEo4YWNrQW9rL3RyZVZDMGNHWm5O?=
- =?utf-8?B?WThZVkF2SjNQV1I0eXhEcmpRSFRBdG9lL2E3dkpuWjZQWDk5NTdsaHc0bVZC?=
- =?utf-8?B?VEZKdy9tL2hWTlRmR0RBUnEzMjU3bTBzcVJNbElQVStVZjdINDFiNmE0MDI4?=
- =?utf-8?B?WjlWck1heWFrNG1IVndlM0lVbk5CcHJRZS9vUjNFZkZVeFhEVzh2YS9aeVVF?=
- =?utf-8?B?a3h3bXlXeFN2RTVTcEU3UzdnU3BlVy96S08rSEU3QVlkbzVlZENZakpjaE1o?=
- =?utf-8?B?ZWptelFjZzdRUTB4UXZvNnhWdG00eE01dUJySm51UTRpY29OT09SeSs1N0ZC?=
- =?utf-8?B?ZFZIWFJmU0djVXFMSitTOFpFM215MDVBai9NYXRNSjVWckxVNG82WWtuQysw?=
- =?utf-8?B?T3VtWmJhWmJrVkl4VEdFOU1STzVkbkVpckhtb084bWR2QnBqKyt0ZnptVWRn?=
- =?utf-8?B?bEJONWlYYlF6em40cXBJNjExbnFodU9hVTZQTWNNbm1pemY0MmY5Q2Y5bWVn?=
- =?utf-8?Q?duENs73s9GYXgxGdVv+CDOSNL?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d37ab81-1a41-4683-0747-08dc016a10db
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 14:43:44.3671 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 14:53:31.5285 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eedba20a-1b80-46b7-7f7f-08dc016b6f12
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /PpHTgGX74v3RymRWKNU6840RN4OCC1puYDARqCWyMUNzz3tHXxBVzu3dG+ra0Fx
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8613
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE30.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5233
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -186,37 +125,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Extend compatible string to match the latest change in dt binding.
 
+Fixes: 7576ab2facae ("riscv: Add support for AMD/Xilinx MicroBlaze V")
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
+dt binding patch is available here.
+https://lore.kernel.org/all/69670e5a46c98a2eb73d4f2e2d571a27c46b4640.1700722941.git.michal.simek@amd.com/
 
-On 12/19/23 05:15, Venkatesh Yadav Abbarapu wrote:
-> This series adds support for Xilinx qspi parallel and stacked memeories.
-> 
-> In parallel mode, the current implementation assumes that a maximum of two flashes are connected. The QSPI controller splits the data evenly between both the flashes so, both the flashes that are connected in parallel mode should be identical.
-> During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
-> nor->flags.
-> 
-> In stacked mode the current implementation assumes that a maximum of two flashes are connected and both the flashes are of same make but can differ in sizes. So, except the sizes all other flash parameters of both the flashes are identical.
-> 
-> Spi-nor will pass on the appropriate flash select flag to low level driver, and it will select pass all the data to that particular flash.
-> 
-> Write operation in parallel mode are performed in page size * 2 chunks as each write operation results in writing both the flashes. For doubling the address space each operation is performed at addr/2 flash offset, where addr is the address specified by the user.
-> 
-> Similarly for read and erase operations it will read from both flashes, so size and offset are divided by 2 and send to flash.
+---
+ arch/riscv/dts/xilinx-mbv32.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-There are much less errors which is good sign but still
-imx28_xea_defconfig shows this.
+diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
+index 6a6b8b694bd1..94e42c268115 100644
+--- a/arch/riscv/dts/xilinx-mbv32.dts
++++ b/arch/riscv/dts/xilinx-mbv32.dts
+@@ -12,7 +12,7 @@
+ 	#address-cells = <1>;
+ 	#size-cells = <1>;
+ 	model = "AMD MicroBlaze V 32bit";
+-	compatible = "amd,mbv";
++	compatible = "qemu,mbv", "amd,mbv";
+ 
+ 	cpus: cpus {
+ 		#address-cells = <1>;
+-- 
+2.36.1
 
-.../arm-xilinx-linux-gnueabi-ld.bfd.real: drivers/core/ofnode.o: in function 
-`ofnode_get_property':
-/mnt/disk/u-boot/drivers/core/ofnode.c:1185: undefined reference to `fdt_getprop'
-make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
-
-
-And SPL is bigger for taurus_defconfig and axm_defconfig.
-
-And can you please rebase it on the top of next branch?
-
-Thanks,
-Michal
