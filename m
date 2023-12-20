@@ -4,48 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE085C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6941EC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7D3787767;
-	Wed, 20 Dec 2023 13:19:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id C3F4D875FC;
+	Wed, 20 Dec 2023 13:35:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="WBZpO9+H";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="KO6IfDV/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBA8787767; Wed, 20 Dec 2023 13:19:11 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ id 90CAB87705; Wed, 20 Dec 2023 13:35:49 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDD1387705
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:19:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28DD986D38
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:35:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Date: Wed, 20 Dec 2023 13:19:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
- t=1703074749;
+ header.from=manjaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
+MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1703075746;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=acBTvWrrZ0vALGtORGu5MwKo0oYnx3l9QmS5hc/mjJA=;
- b=WBZpO9+HXPSEsAYXwW25yurQQ2abCfIq0/ohAEXfeMmXFBJ6PAJIIdMHrT3/T4Vz+7QAeU
- 57KagB7lD05YprvYzmBcwSCMp7CzLpbyeb6hiEtf73MpMexvrEuwrhhRXVhAQo58xGeRH7
- 5APmnQp3zNV0QUMWzIHB6iiIgePGIvzOqSaHmhsBc807FMiw1jHB0cIsz3zxxsxKMWQAng
- 5NL7noDac7aa8mxucuZ35wsujC7lwPUnRGTS/8udPzAWmEJkm8lrExFUiAS3ArIClRPR0C
- ofWO2UVDMWF+U0EGwB4ITjLzPfUjf7u98C0cNnfOnvmZCJZ+OVbzEY3O/AMCHA==
-From: Alexander Dahl <ada@thorsis.com>
-To: Kledson Silva <preventivaclinica@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Problem with CROSS_COMPILE
-Message-ID: <20231220-7038940eb70911fac7f0c5a1@thorsis.com>
-Mail-Followup-To: Kledson Silva <preventivaclinica@gmail.com>,
- u-boot@lists.denx.de
-References: <CAJik2ecgeu+zhzJK_bjJGi8_q2A81LpszO-ZJVDxvq5cynSGHQ@mail.gmail.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJik2ecgeu+zhzJK_bjJGi8_q2A81LpszO-ZJVDxvq5cynSGHQ@mail.gmail.com>
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=k+IFkylcX7pxhl1bzh3r0kkrhnCYMoRr4S7cKeQmmUU=;
+ b=KO6IfDV/gY4io7rOxNzcIYeHd34LEKQUMTUQj9h1pl613zcwQ6pSDY/FRHUjEsxBdXk2gj
+ eQj7v+3gAK6FgdbOVwrEApElwhCxbj72jOS0g/OYytPTHThb6G7S1Iulu+lAZeUyzdFGSB
+ o7wWtH3toxuNaBrkdDBvEbrT2VO830McytmTLqf1T3ZNv1IjeuBlN2FWlg7QNMAKJCETPO
+ RxWethVKfHs0314dShu/6uD8ux3oPhkcbmP+nHUaasOye98smkDQaYW8WhGwdjv34GW5Wf
+ uxO8KyKet6Psxn+0xEMb5wecf5hSO/feguCDs17vdd8IqxCwk0wytCRghZlIsg==
+Date: Wed, 20 Dec 2023 13:35:46 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: Sean Anderson <seanga2@gmail.com>, sjg@chromium.org,
+ Csokas.Bence@prolan.hu, u-boot@lists.denx.de
+Subject: Re: Passing boot logs to Linux?
+In-Reply-To: <87msu5np1w.fsf@bloch.sibelius.xs4all.nl>
+References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
+ <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
+ <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <87msu5np1w.fsf@bloch.sibelius.xs4all.nl>
+Message-ID: <52d6c4a1973f88607651672ce82af944@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,35 +72,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei hei,
+On 2023-12-20 11:31, Mark Kettenis wrote:
+>> Date: Tue, 19 Dec 2023 23:45:48 -0500
+>> From: Sean Anderson <seanga2@gmail.com>
+>> 
+>> On 12/19/23 23:11, Simon Glass wrote:
+>> > On Tue, 19 Dec 2023 at 13:15, Csókás Bence <Csokas.Bence@prolan.hu> wrote:
+>> >> Is passing the U-Boot boot log to Linux supported yet? We are working
+>> >> with a third-party solution, which works, but is a bit hacky, so I was
+>> >> wondering if an official solution has been merged yet.
+>> >>
+>> >> I saw that there was an option CONFIG_CONSOLE_RECORD that saves
+>> >> everything to a membuff, but I don't know if that can be exported to
+>> >> Linux yet. And if not in the tree yet, would such a patch be welcome?
+>> >
+>> > Not yet, but yes I would like to see this.
+>> 
+>> I think most of the infrastructure is already here. We could use
+>> either console recording (as mentioned above), which is more
+>> complete, or a new LOG_DRIVER (which would have the advantage of
+>> omitting things like countdowns).
+>> 
+>> In terms of sending things to Linux, I think the natural choice
+>> would be pstore, which we already have a parser for.
+> 
+> Well, this should be OS-agnostic of course ;)
 
-Am Tue, Dec 19, 2023 at 11:03:12PM -0300 schrieb Kledson Silva:
-> Hi,
-> I need help, if possible with for compile and install VxWorks in my
-> Raspbery 4
-> 
-> I follow the steps in page of WindRiver, but this step
-> (CROSS_COMPILE=aarch64-linux-gnu-
-> make), i have the problem below:
-> 
-> 
-> include/image.h:1397:12: fatal error: openssl/evp.h: No such file or
-> directory
->  1397 | #  include <openssl/evp.h>
->       |            ^~~~~~~~~~~~~~~
-> compilation terminated.
-> make[1]: *** [scripts/Makefile.host:112: tools/aisimage.o] Error 1
-> make: *** [Makefile:1858: tools] Error 2
-> 
-> Please, any idea? its for a my project of university
+If possible, of course.
 
-Your build host needs OpenSSL development library/headers installed.
-Depending on your Linux distribution this package might be named
-'libssl-dev' or similar.
+> What is pstore?  Is this documented somewhere?
 
-Greets
-Alex
+As I already explained briefly in one of my earlier posts, it's a 
+mechanism that the Linux kernel uses to store the kernel crash data on 
+persistent storage, for later examination.
 
-> 
-> Thank you very much!
-> Best regards
+Please see the following links, for exaple, for more details:
+
+- https://docs.kernel.org/admin-guide/pstore-blk.html
+- https://man7.org/linux/man-pages/man8/systemd-pstore.8.html
+- 
+https://blogs.oracle.com/linux/post/pstore-linux-kernel-persistent-storage-file-system
