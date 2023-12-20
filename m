@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC78C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327FBC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:02:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B82D8753C;
-	Wed, 20 Dec 2023 10:59:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F096876B2;
+	Wed, 20 Dec 2023 11:02:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="T1GMl1ta";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VvIrBdXB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8C6787646; Wed, 20 Dec 2023 10:59:22 +0100 (CET)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id C833A876C4; Wed, 20 Dec 2023 11:02:30 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89A338744F
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:59:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14648876B2
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:02:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 0B495B81C38;
- Wed, 20 Dec 2023 09:59:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E82EC433C9;
- Wed, 20 Dec 2023 09:59:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 5843A61573;
+ Wed, 20 Dec 2023 10:02:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41F38C433C7;
+ Wed, 20 Dec 2023 10:02:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703066359;
- bh=jERsH1L33LJ35wjC8ILQd5svyt7k1W0r5nodHL9wEnI=;
+ s=k20201202; t=1703066546;
+ bh=mJnnqnUZxRxY5jE3oWwx/PhjMgVf0Fdq2+8DKxFCpWU=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=T1GMl1ta11v4tF419wfnC+rce+sWYAFta+2g4A99yhz0Y47FE2oAs3YbRiMWKSVhT
- WMGYjyxFSLgTB8xleNezcnsAlTEnp4d+NCJBtgtNeDFYYZotLAtt90eZmG66uqJ8EP
- 1MBxbAecCPjEcho5XqsWCgiAV673PQzdFjRtL8flZXGvl+n9oFEv13xVbt/Jcap4Dy
- zOkTm8dNeXjBWIONla2CwRZEWqepj+P8oOgYrn+7QMgD0SczTRg0Tk/SnWD5MlLqHR
- woNW8uL6tJ+WkwVJgDKgA4floZ7WO9P6sziW3uoGcM7GaplRB8vWo1zh4x+JHBBFZ2
- U6SkWQJEuWT5Q==
-Message-ID: <6d9456ec-a483-4721-8713-626aacdc9f81@kernel.org>
-Date: Wed, 20 Dec 2023 11:59:12 +0200
+ b=VvIrBdXBOqViLcWmZ5Jw/IrQZreeJJh9qy6qG9rju8k0P/LzWherqyC9fbZtozYWv
+ i9AMvXhp+LunyTZbu7ZWfydPohBozfunMhB1jBKZ1wIrkEJgsllDQzTJiUvueGPOrp
+ u7B8wxB6oX22AozQHe4V3Y/fPOWSgbk9TmITuZ4v/0ijtpJO71t6mzwQ9QmsR8jeg1
+ bpFlymYU+gnZoeXHmnEqMDsf1lf5CFm6Tywp5W2tLvnbSqvLhUiNsX7S0DEXdDR+a0
+ H8oIIF7uBu5t04/tHGrh8mQq/05Uj8BCppOW937nvWL7zCtge7PtfjXOpaEjnT73T5
+ b8Xc2EztDWHaQ==
+Message-ID: <4a831eea-ce70-46b9-9e30-cc57a0182630@kernel.org>
+Date: Wed, 20 Dec 2023 12:02:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 00/16] Introduce ICSSG Ethernet driver
+Subject: Re: [RFC PATCH 14/16] configs: am65x_evm_a53_defconfig: add
+ SPL_LOAD_FIT_APPLY_OVERLAY
 Content-Language: en-US
 To: MD Danish Anwar <danishanwar@ti.com>, Maxime Ripard <mripard@kernel.org>, 
  Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
@@ -57,9 +57,10 @@ To: MD Danish Anwar <danishanwar@ti.com>, Maxime Ripard <mripard@kernel.org>,
  <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, srk@ti.com, r-gunasekaran@ti.com
-References: <20231219101225.3443978-1-danishanwar@ti.com>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-15-danishanwar@ti.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20231219101225.3443978-1-danishanwar@ti.com>
+In-Reply-To: <20231219103418.3445886-15-danishanwar@ti.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,136 +79,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 19/12/2023 12:11, MD Danish Anwar wrote:
-> Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used in TI
-> AM654 SR2.0.
-> 
-> The ICSSG PRU Sub-system runs on EMAC firmware. This series Introduces
-> support for ICSSG driver in uboot. This series also adds the driver's
-> dependencies.
-> 
-> The ICSSG2 node is added in device tree overlay so that it remains in
-> sync with linux kernel.
-> 
-> The series introduces device tree and config changes and AM65x
-> to enable ICSSG driver. The series also enables SPL_LOAD_FIT_APPLY_OVERLAY
-> for AM65x in order to load overlay over spl.
-> 
-> This series has been tested on AM65x SR2.0, and the ICSSG interface is
-> able to ping / dhcp and boot kernel using tftp in uboot.
-> 
-> To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to PRU RPROC
-> cores and RPROC cores need to be booted with the firmware. This step is
-> done inside driver in kernel as kernel supports APIs like
-> rproc_set_firmware() and rproc_fw_boot(). But as u-boot doesn't have these
-> APIs, the same needs to be done via u-boot cmds.
-> 
-> To make sure icssg-eth works we need to do below steps.
-> 
-> 1. Initialize rproc cores i.e. rproc_init()
-> 2. Load $firmware_file from partition '1:2' (root) on device (mmc in this
->    example)
-> 3. Load the firmware file to rproc cores passing. i.e. rproc_load()
->    taking rproc_id, loadaddr and file size as arguments.
-> 4. Start rproc cores. i.e. rproc_start() taking rproc_id as arguments
-> 
-> The above steps are done by running the below commands at u-boot prompt.
-> 
-> => setenv start_icssg2 'rproc start 14; rproc start 15; rproc start 16; rproc start 17; rproc start 18; rproc start 19'
-> => setenv stop_icssg2 'rproc stop 14; rproc stop 15; rproc stop 16; rproc stop 17; rproc stop 18; rproc stop 19'
-> => setenv firmware_dir '/lib/firmware/ti-pruss'
-> => setenv get_firmware_mmc 'load mmc ${bootpart} ${loadaddr} ${firmware_dir}/${firmware_file}'
-> 
-> => setenv init_icssg2 'setenv ethact icssg2-eth; setenv autoload no; rproc init; setenv loadaddr 0x80000000; \
->     setenv firmware_file am65x-sr2-pru0-prueth-fw.elf; run get_firmware_mmc;  rproc load 14 0x80000000 ${filesize}; \
->     setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu0-prueth-fw.elf; run get_firmware_mmc; rproc load 15 0x89000000 ${filesize}; \
->     setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru0-prueth-fw.elf; run get_firmware_mmc; rproc load 16 0x90000000 ${filesize}; \
->     setenv loadaddr 0x80000000; setenv firmware_file am65x-sr2-pru1-prueth-fw.elf; run get_firmware_mmc; rproc load 17 0x80000000 ${filesize}; \
->     setenv loadaddr 0x89000000; setenv firmware_file am65x-sr2-rtu1-prueth-fw.elf; run get_firmware_mmc; rproc load 18 0x89000000 ${filesize}; \
->     setenv loadaddr 0x90000000; setenv firmware_file am65x-sr2-txpru1-prueth-fw.elf; run get_firmware_mmc; rproc load 19 0x90000000 ${filesize}; \
->     run start_icssg2;'
 
-A whole bunch of commands are required to get ethernet functional.
-This is not at all user friendly and will be a maintenance nightmare.
-What worries me is tracking the 6 different rproc cores and the 6 different firmware files to start 1 ethernet device.
-This will get even more interesting when we have to deal with different ICSSG instances on different boards.
+On 19/12/2023 12:34, MD Danish Anwar wrote:
+> We want SPL to apply DTB overlays (e.g. NAND card overlay) so
+> enable SPL_LOAD_FIT_APPLY_OVERLAY.
+> Increase SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ and
+> SPL_STACK_R_MALLOC_SIMPLE_LEN. Without this SPL hangs.
+> 
+> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+> ---
+>  configs/am65x_evm_a53_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+> index e79a961317..2755d7082f 100644
+> --- a/configs/am65x_evm_a53_defconfig
+> +++ b/configs/am65x_evm_a53_defconfig
+> @@ -70,6 +70,9 @@ CONFIG_CMD_I2C=y
+>  CONFIG_CMD_MMC=y
+>  CONFIG_CMD_PCI=y
+>  CONFIG_CMD_REMOTEPROC=y
+> +CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
+> +CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ=0x100000
+> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x1000000
 
-What is preventing the driver from starting the rproc cores it needs so user doesn't need to care about it?
-All the necessary information is in the Device tree. At least this is how it is done on Linux.
+This change to 16MB is not required. I suppose default is 4MB.
+Did you face issues with it?
 
-> 
-> => run init_icssg2
-> => dhcp
-> k3-navss-ringacc ringacc@3c000000: Ring Accelerator probed rings:818, gp-rings[304,100] sci-dev-id:187
-> k3-navss-ringacc ringacc@3c000000: dma-ring-reset-quirk: disabled
-> prueth icssg2-eth: K3 ICSSG: rflow_id_base: 8, chn_name = rx0
-> link up on port 0, speed 1000, full duplex
-> BOOTP broadcast 1
-> BOOTP broadcast 2
-> BOOTP broadcast 3
-> DHCP client bound to address 192.168.4.58 (1020 ms)
-> 
-
-What about shutting down the interface?
-I believe this has to be done manually too?
-
-> Thanks and Regards,
-> MD Danish Anwar
-> 
-> MD Danish Anwar (16):
->   net: ti: icssg: Add Firmware Interface for ICSSG Ethernet driver.
->   net: ti: icssg: Add Firmware config and classification APIs.
->   net: ti: icssg: Add icssg queues APIs and macros
->   net: ti: icssg: Add ICSSG ethernet driver
->   net: ti: icssg: Add support sending FDB command to update rx_flow_id
->   net: ti: icssg: Enforce pinctrl state on the MDIO child node
->   arm: dts: k3-am65: Add additional regs for DMA components
->   arm: dts: k3-am65: Add cfg reg region to ringacc node
->   arm: dts: k3-am65-main: Add ICSSG IEP nodes
->   arm: dts: k3-am654-base-board: Add ICSSG2 Ethernet support
->   arm: dts: k3-am65x-binman: Add ICSSG2 overlay and configuration
->   configs: am65x_evm_a53: Enable ICSSG Driver
->   configs: am65x_evm_a53_defconfig: add SPL_LOAD_FIT_APPLY_OVERLAY
->   tools/fdtgrep: Include __symbols__ table
->   board: ti: am65x: Add check for k3-am654-icssg2 in
->     board_fit_config_match()
->   Revert "dm: core: Report bootph-pre-ram/sram node as pre-reloc after
->     relocation"
-> 
->  arch/arm/dts/Makefile             |   3 +-
->  arch/arm/dts/k3-am65-main.dtsi    |  49 ++-
->  arch/arm/dts/k3-am65-mcu.dtsi     |  13 +-
->  arch/arm/dts/k3-am654-icssg2.dtso | 145 +++++++
->  arch/arm/dts/k3-am65x-binman.dtsi |  85 ++++
->  board/ti/am65x/evm.c              |  11 +-
->  configs/am65x_evm_a53_defconfig   |   4 +
->  drivers/core/ofnode.c             |   2 +-
->  drivers/net/ti/Kconfig            |   9 +
->  drivers/net/ti/Makefile           |   1 +
->  drivers/net/ti/icss_mii_rt.h      | 192 +++++++++
->  drivers/net/ti/icssg_classifier.c | 376 +++++++++++++++++
->  drivers/net/ti/icssg_config.c     | 469 +++++++++++++++++++++
->  drivers/net/ti/icssg_config.h     | 195 +++++++++
->  drivers/net/ti/icssg_prueth.c     | 654 ++++++++++++++++++++++++++++++
->  drivers/net/ti/icssg_prueth.h     |  89 ++++
->  drivers/net/ti/icssg_queues.c     |  51 +++
->  drivers/net/ti/icssg_switch_map.h | 209 ++++++++++
->  include/dm/ofnode.h               |   8 +-
->  tools/fdtgrep.c                   |   8 +
->  20 files changed, 2555 insertions(+), 18 deletions(-)
->  create mode 100644 arch/arm/dts/k3-am654-icssg2.dtso
->  create mode 100644 drivers/net/ti/icss_mii_rt.h
->  create mode 100644 drivers/net/ti/icssg_classifier.c
->  create mode 100644 drivers/net/ti/icssg_config.c
->  create mode 100644 drivers/net/ti/icssg_config.h
->  create mode 100644 drivers/net/ti/icssg_prueth.c
->  create mode 100644 drivers/net/ti/icssg_prueth.h
->  create mode 100644 drivers/net/ti/icssg_queues.c
->  create mode 100644 drivers/net/ti/icssg_switch_map.h
-> 
-> base:commit: a6f86132e30a407c7f96461df53c62fbe52e2b54
+>  CONFIG_CMD_USB=y
+>  CONFIG_CMD_TIME=y
+>  CONFIG_MTDIDS_DEFAULT="nor0=47040000.spi.0"
 
 -- 
 cheers,
