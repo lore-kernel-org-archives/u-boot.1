@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC80AC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64ED0C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:43:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D8C2875FC;
-	Wed, 20 Dec 2023 09:43:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D4CA086FFE;
+	Wed, 20 Dec 2023 09:43:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pQTYn7th";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mDfwDfha";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EECC0875E9; Wed, 20 Dec 2023 09:43:33 +0100 (CET)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id D294586FFE; Wed, 20 Dec 2023 09:43:38 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DEB786D4C
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:43:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F275B8761C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:43:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-593fbf5c9feso562728eaf.2
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 00:43:31 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1d337dc9697so44074045ad.3
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 00:43:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703061810; x=1703666610; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703061813; x=1703666613; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Op9ORgsuTvwUOPG8fnGv6QdTMH3Z7MrlPulZi9dba/Y=;
- b=pQTYn7thQ4k6EZqTefTFHbyttOhdUmq01xSaBolYUDnlWqVhaTsvhgZWt5wG15Proh
- VNsGk9HSATpIhjcsh7KC/4nayF1tjQEoQMZIYo2ZmC1Xnm6Ik2iCH2+w2s20eZWcFimL
- fpOoO5SQHaB4/Q8E5hiIs182IXg8F95poz5hcpSi3CLZ1HaM09AsuSrUMmUWbIuiywVu
- pk3FWYTQXjPTgHbwb5o1wairKaAoNHSNbcXo4fSHqssgrWbrhc7+OXqwLx9rscYAQ5FO
- ef8Xp5fmjuiamVuA1ZqhxO5cGbnuaIxnEI8Ga8WT75GlcJYBr1uR7r9/qczIQrq8QfaV
- Ew5g==
+ bh=DmGgBfSQr7vKFYTwf/qAKZkof3bWieFVSPdJmkpTVMg=;
+ b=mDfwDfharR3d/lawt6n0pnQ5AZjEatmOLAkeCb13uyiWuwZPZrm7Rh9uuK69PjIYNK
+ X3Qx0oNpl+aDra+WTtPZuFDpoZOE8dpXMHQTjJbzHq++rC8VljLRE6/ljYABhvlsrSrW
+ Gm2Y6FfUaF80WcweOLq3vGWYBZx2j7S917I4b+rr384RjZzJa1nqPYnfkHBjWf6mg6Lo
+ 8g9et98a6rxgMhvhKBU/SLdXY18gqipvWpzagm/Hx5y82Z4Ov8AfBBlDv7gGNkrgBT16
+ s40wMYKaKgJF2JJMIqoyWSrL1feg/MaUB3ycQQ4frP80YDWZT+p7E8dIhcy+WAg2u27V
+ blag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703061810; x=1703666610;
+ d=1e100.net; s=20230601; t=1703061813; x=1703666613;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Op9ORgsuTvwUOPG8fnGv6QdTMH3Z7MrlPulZi9dba/Y=;
- b=u0bkbuO6vQuk7quKMhhYSE+eIfL7b5eDf1yTAkP8DT3bSJS8/Tf5XCX3Z9xGcX6aOh
- GmEYggTx3Ag0je8OPA1slPIg8mbkweVWTFme3QeL0XEYAjlvqm3Y0gpjm940H/3IKids
- 1hylq/IyMnccm/lmYp4L5hYNsC6pM/G9fI6JsiUIjp5EeO8MJqSelmRUkkgyMY7yrxun
- lw12ZCfVyTGNDVfkylSEnylQfZUlAzwWMiz9JePnFmg2sWFOjtFjJ2yMhIw5i5c1WlC9
- 8scfBqEpnZIr1X3zwJWlSh6APqe8eyY+o1ORD4hLG7jfCZzYsBOVQ1dWqMPUx/K24Atp
- cxlQ==
-X-Gm-Message-State: AOJu0YxiaPbHl42ifs1CaP4Oap20tprMD6LnNoUD/mGHUxw1cs+Etr14
- Zt9p8Oq4utXMI1XAQdFKG5+VxALpJuo0zMmcEvY=
-X-Google-Smtp-Source: AGHT+IHjXl346P/v/Q5qaHuswZ0Lw4pJvxQxKr8oqCvBf5uUylS/C5ox3xyV2NJPeDlRJ7nmkQUycw==
-X-Received: by 2002:a05:6358:787:b0:170:b81b:4a20 with SMTP id
- n7-20020a056358078700b00170b81b4a20mr20395791rwj.51.1703061809718; 
- Wed, 20 Dec 2023 00:43:29 -0800 (PST)
+ bh=DmGgBfSQr7vKFYTwf/qAKZkof3bWieFVSPdJmkpTVMg=;
+ b=IhN1KbSMU8n/B82TyLB+eT1GjF4hXBF+eMDqbD2JSyppBo5Nq6nzl/YjLRaHuqiBQ8
+ dK8+dYOBtc0d/cGTnh5rmS793aZAlUYgigsChGxCviZVZec0P8MyXVGuPeOAzIvJfIvo
+ 6MtQNej/lTFmcTQBEFZTfVq8GvxV5rJ79eUUXcD/IDaNmuyS3awNedevRW+2Ye38x/8K
+ ZBnR909Sx8Qs6on+EExEJDUpgp8e3C1JZf/2ye4aVa92dISuj9SEiMCHXDRfCxvz68+D
+ cAIlzZ5B+pLXyT7Y2M/GHFP+bXjHu83r2B2ZNAuvTXcRbrhX7kfvGgssiPP5uv/aAX9Z
+ Ewyg==
+X-Gm-Message-State: AOJu0YzP9zmKBoJr2bEVh8fp/TSG0KmU1zjB8mhuG6sJV3MfJd9HvJq3
+ EF7UAKe1y7ZTgS/alsSPxhPURTiMQCKAhi1wVXo=
+X-Google-Smtp-Source: AGHT+IHlIMI3Xjzen0gF+0kR0HYnJrDjYQNc7TL/bNANvM5vqdfkqBzVToKneaHNa0MdNrhWRiBHwA==
+X-Received: by 2002:a17:902:7ec1:b0:1d0:6297:150a with SMTP id
+ p1-20020a1709027ec100b001d06297150amr16662788plb.47.1703061813451; 
+ Wed, 20 Dec 2023 00:43:33 -0800 (PST)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- d6-20020aa78e46000000b006d088356541sm17526022pfr.104.2023.12.20.00.43.28
+ z3-20020a170902834300b001d1d1ef8be5sm22409694pln.173.2023.12.20.00.43.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 00:43:29 -0800 (PST)
+ Wed, 20 Dec 2023 00:43:32 -0800 (PST)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 1/2] efi_loader: auto-generate boot option for each blkio
- device
-Date: Wed, 20 Dec 2023 17:41:31 +0900
-Message-Id: <20231220084133.435240-2-masahisa.kojima@linaro.org>
+Subject: [PATCH 2/2] efi_loader: auto-generate removable media boot option
+ first
+Date: Wed, 20 Dec 2023 17:41:32 +0900
+Message-Id: <20231220084133.435240-3-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231220084133.435240-1-masahisa.kojima@linaro.org>
 References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
@@ -93,215 +93,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current efibootmgr auto-generates the boot option for all
-disks and partitions installing EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-while EDK II reference implementation auto-generates the boot option
-for all devices installing  EFI_BLOCK_IO_PROTOCOL with
-eliminating logical partitions.
-
-This commit modifies the efibootmgr to get aligned to EDK II.
+This commit auto-generates the boot option for removable
+block io devices followed by fixed block io devices.
+This is what EDK II reference implementation does.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 ---
- lib/efi_loader/efi_bootmgr.c | 94 +++++++++++++++++++++++++++---------
- 1 file changed, 71 insertions(+), 23 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 37 ++++++++++++++++++++++++++++--------
+ 1 file changed, 29 insertions(+), 8 deletions(-)
 
 diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 56d97f2382..636f01e2eb 100644
+index 636f01e2eb..6b02abcf0d 100644
 --- a/lib/efi_loader/efi_bootmgr.c
 +++ b/lib/efi_loader/efi_bootmgr.c
-@@ -560,6 +560,50 @@ err:
- 	return ret;
- }
- 
-+/**
-+ * try_load_from_media() - load file from media
-+ *
-+ * @fp:		file path
-+ * @handle:	pointer to handle for newly installed image
-+ *
-+ * If @fp contains a file name, load the file.
-+ * If @fp does not have a file name, search the architecture-specific
-+ * default file and load it.
-+ * TODO: If the FilePathList[0] device does not support
-+ * EFI_SIMPLE_FILE_SYSTEM_PROTOCOL but supports EFI_BLOCK_IO_PROTOCOL,
-+ * call EFI_BOOT_SERVICES.ConnectController()
-+ * TODO: FilePathList[0] device supports EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
-+ * not based on EFI_BLOCK_IO_PROTOCOL
-+ *
-+ * Return:	status code
-+ */
-+static efi_status_t try_load_from_media(struct efi_device_path *file_path,
-+					efi_handle_t *handle)
-+{
-+	efi_handle_t h;
-+	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_device_path *rem, *dp = NULL;
-+	struct efi_device_path *final_dp = file_path;
-+
-+	h = efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
-+	if (h) {
-+		if (rem->type == DEVICE_PATH_TYPE_END) {
-+			/* no file name present, try default file */
-+			ret = check_disk_has_default_file(h->dev, &dp);
-+			if (ret != EFI_SUCCESS)
-+				return ret;
-+
-+			final_dp = dp;
-+		}
-+	}
-+
-+	ret = EFI_CALL(efi_load_image(true, efi_root, final_dp, NULL, 0, handle));
-+
-+	efi_free_pool(dp);
-+
-+	return ret;
-+}
-+
- /**
-  * try_load_entry() - try to load image for boot option
-  *
-@@ -594,7 +638,6 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
- 	}
- 
- 	if (lo.attributes & LOAD_OPTION_ACTIVE) {
--		struct efi_device_path *file_path;
- 		u32 attributes;
- 
- 		log_debug("trying to load \"%ls\" from %pD\n", lo.label,
-@@ -611,10 +654,7 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
- 			else
- 				ret = EFI_LOAD_ERROR;
- 		} else {
--			file_path = expand_media_path(lo.file_path);
--			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
--						      NULL, 0, handle));
--			efi_free_pool(file_path);
-+			ret = try_load_from_media(lo.file_path, handle);
- 		}
- 		if (ret != EFI_SUCCESS) {
- 			log_warning("Loading %ls '%ls' failed\n",
-@@ -748,19 +788,19 @@ error:
+@@ -584,7 +584,6 @@ static efi_status_t try_load_from_media(struct efi_device_path *file_path,
+ 	efi_status_t ret = EFI_SUCCESS;
+ 	struct efi_device_path *rem, *dp = NULL;
+ 	struct efi_device_path *final_dp = file_path;
+-
+ 	h = efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
+ 	if (h) {
+ 		if (rem->type == DEVICE_PATH_TYPE_END) {
+@@ -788,15 +787,19 @@ error:
   * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootable media
   *
   * @opt:		pointer to the media boot option structure
-- * @volume_handles:	pointer to the efi handles
-+ * @handles:		pointer to the efi handles
++ * @index:		index of the opt array to store the boot option
+  * @handles:		pointer to the efi handles
   * @count:		number of efi handle
++ * @removable:		flag to parse removable only
   * Return:		status code
   */
  static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boot_option *opt,
--						      efi_handle_t *volume_handles,
--						      efi_status_t count)
-+						      efi_handle_t *handles,
-+						      efi_uintn_t *count)
++						      efi_uintn_t index,
+ 						      efi_handle_t *handles,
+-						      efi_uintn_t *count)
++						      efi_uintn_t *count,
++						      bool removable)
  {
--	u32 i;
-+	u32 i, num = 0;
+-	u32 i, num = 0;
++	u32 i, num = index;
  	struct efi_handler *handler;
  	efi_status_t ret = EFI_SUCCESS;
  
--	for (i = 0; i < count; i++) {
-+	for (i = 0; i < *count; i++) {
- 		u16 *p;
- 		u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
- 		char *optional_data;
-@@ -768,8 +808,15 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
- 		char buf[BOOTMENU_DEVICE_NAME_MAX];
- 		struct efi_device_path *device_path;
+@@ -810,12 +813,20 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
  		struct efi_device_path *short_dp;
-+		struct efi_block_io *blkio;
-+
-+		ret = efi_search_protocol(handles[i], &efi_block_io_guid, &handler);
-+		blkio = handler->protocol_interface;
+ 		struct efi_block_io *blkio;
  
--		ret = efi_search_protocol(volume_handles[i], &efi_guid_device_path, &handler);
-+		if (blkio->media->logical_partition)
++		if (num >= *count) {
++			ret = EFI_INVALID_PARAMETER;
++			goto out;
++		}
++
+ 		ret = efi_search_protocol(handles[i], &efi_block_io_guid, &handler);
+ 		blkio = handler->protocol_interface;
+ 
+ 		if (blkio->media->logical_partition)
+ 			continue;
+ 
++		if (removable != (blkio->media->removable_media != 0))
 +			continue;
 +
-+		ret = efi_search_protocol(handles[i], &efi_guid_device_path, &handler);
+ 		ret = efi_search_protocol(handles[i], &efi_guid_device_path, &handler);
  		if (ret != EFI_SUCCESS)
  			continue;
- 		ret = efi_protocol_open(handler, (void **)&device_path,
-@@ -777,7 +824,7 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
- 		if (ret != EFI_SUCCESS)
- 			continue;
- 
--		ret = efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEVICE_NAME_MAX);
-+		ret = efi_disk_get_device_name(handles[i], buf, BOOTMENU_DEVICE_NAME_MAX);
- 		if (ret != EFI_SUCCESS)
- 			continue;
- 
-@@ -801,17 +848,20 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
- 		 * to store guid, instead of realloc the load_option.
- 		 */
- 		lo.optional_data = "1234567";
--		opt[i].size = efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
--		if (!opt[i].size) {
-+		opt[num].size = efi_serialize_load_option(&lo, (u8 **)&opt[num].lo);
-+		if (!opt[num].size) {
- 			ret = EFI_OUT_OF_RESOURCES;
- 			goto out;
- 		}
- 		/* set the guid */
--		optional_data = (char *)opt[i].lo + (opt[i].size - u16_strsize(u"1234567"));
-+		optional_data = (char *)opt[num].lo + (opt[num].size - u16_strsize(u"1234567"));
- 		memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_guid_t));
-+		num++;
- 	}
- 
- out:
-+	*count = num;
-+
- 	return ret;
- }
- 
-@@ -1040,8 +1090,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index)
- /**
-  * efi_bootmgr_update_media_device_boot_option() - generate the media device boot option
-  *
-- * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
-- * and generate the bootmenu entries.
-+ * This function enumerates all BlockIo devices and add the boot option for it.
-  * This function also provide the BOOT#### variable maintenance for
-  * the media device entries.
-  * - Automatically create the BOOT#### variable for the newly detected device,
-@@ -1057,13 +1106,13 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+@@ -1105,7 +1116,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+ {
  	u32 i;
  	efi_status_t ret;
- 	efi_uintn_t count;
--	efi_handle_t *volume_handles = NULL;
-+	efi_handle_t *handles = NULL;
+-	efi_uintn_t count;
++	efi_uintn_t count, num, total;
+ 	efi_handle_t *handles = NULL;
  	struct eficonfig_media_boot_option *opt = NULL;
  
- 	ret = efi_locate_handle_buffer_int(BY_PROTOCOL,
--					   &efi_simple_file_system_protocol_guid,
-+					   &efi_block_io_guid,
- 					   NULL, &count,
--					   (efi_handle_t **)&volume_handles);
-+					   (efi_handle_t **)&handles);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
-@@ -1073,8 +1122,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+@@ -1122,22 +1133,32 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
  		goto out;
  	}
  
--	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
--	ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
-+	ret = efi_bootmgr_enumerate_boot_option(opt, handles, &count);
+-	ret = efi_bootmgr_enumerate_boot_option(opt, handles, &count);
++	/* parse removable block io followed by fixed block io */
++	num = count;
++	ret = efi_bootmgr_enumerate_boot_option(opt, 0, handles, &num, true);
  	if (ret != EFI_SUCCESS)
  		goto out;
  
-@@ -1122,7 +1170,7 @@ out:
++	total = num;
++	num = count;
++	ret = efi_bootmgr_enumerate_boot_option(opt, total, handles, &num, false);
++	if (ret != EFI_SUCCESS)
++		goto out;
++
++	total = num;
++
+ 	/*
+ 	 * System hardware configuration may vary depending on the user setup.
+ 	 * The boot option is automatically added by the bootmenu.
+ 	 * If the device is not attached to the system, the boot option needs
+ 	 * to be deleted.
+ 	 */
+-	ret = efi_bootmgr_delete_invalid_boot_option(opt, count);
++	ret = efi_bootmgr_delete_invalid_boot_option(opt, total);
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
+ 	/* add non-existent boot option */
+-	for (i = 0; i < count; i++) {
++	for (i = 0; i < total; i++) {
+ 		u32 boot_index;
+ 		u16 var_name[9];
+ 
+@@ -1166,7 +1187,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+ 
+ out:
+ 	if (opt) {
+-		for (i = 0; i < count; i++)
++		for (i = 0; i < total; i++)
  			free(opt[i].lo);
  	}
  	free(opt);
--	efi_free_pool(volume_handles);
-+	efi_free_pool(handles);
- 
- 	if (ret == EFI_NOT_FOUND)
- 		return EFI_SUCCESS;
 -- 
 2.34.1
 
