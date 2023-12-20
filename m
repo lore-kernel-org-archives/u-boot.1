@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64ED0C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:43:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D13CC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 08:45:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4CA086FFE;
-	Wed, 20 Dec 2023 09:43:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 063E4875FC;
+	Wed, 20 Dec 2023 09:45:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mDfwDfha";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="f4UjA99I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D294586FFE; Wed, 20 Dec 2023 09:43:38 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C2D4986FFE; Wed, 20 Dec 2023 09:45:42 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F275B8761C
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:43:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B674487480
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 09:45:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d337dc9697so44074045ad.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 00:43:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703061813; x=1703666613; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DmGgBfSQr7vKFYTwf/qAKZkof3bWieFVSPdJmkpTVMg=;
- b=mDfwDfharR3d/lawt6n0pnQ5AZjEatmOLAkeCb13uyiWuwZPZrm7Rh9uuK69PjIYNK
- X3Qx0oNpl+aDra+WTtPZuFDpoZOE8dpXMHQTjJbzHq++rC8VljLRE6/ljYABhvlsrSrW
- Gm2Y6FfUaF80WcweOLq3vGWYBZx2j7S917I4b+rr384RjZzJa1nqPYnfkHBjWf6mg6Lo
- 8g9et98a6rxgMhvhKBU/SLdXY18gqipvWpzagm/Hx5y82Z4Ov8AfBBlDv7gGNkrgBT16
- s40wMYKaKgJF2JJMIqoyWSrL1feg/MaUB3ycQQ4frP80YDWZT+p7E8dIhcy+WAg2u27V
- blag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703061813; x=1703666613;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DmGgBfSQr7vKFYTwf/qAKZkof3bWieFVSPdJmkpTVMg=;
- b=IhN1KbSMU8n/B82TyLB+eT1GjF4hXBF+eMDqbD2JSyppBo5Nq6nzl/YjLRaHuqiBQ8
- dK8+dYOBtc0d/cGTnh5rmS793aZAlUYgigsChGxCviZVZec0P8MyXVGuPeOAzIvJfIvo
- 6MtQNej/lTFmcTQBEFZTfVq8GvxV5rJ79eUUXcD/IDaNmuyS3awNedevRW+2Ye38x/8K
- ZBnR909Sx8Qs6on+EExEJDUpgp8e3C1JZf/2ye4aVa92dISuj9SEiMCHXDRfCxvz68+D
- cAIlzZ5B+pLXyT7Y2M/GHFP+bXjHu83r2B2ZNAuvTXcRbrhX7kfvGgssiPP5uv/aAX9Z
- Ewyg==
-X-Gm-Message-State: AOJu0YzP9zmKBoJr2bEVh8fp/TSG0KmU1zjB8mhuG6sJV3MfJd9HvJq3
- EF7UAKe1y7ZTgS/alsSPxhPURTiMQCKAhi1wVXo=
-X-Google-Smtp-Source: AGHT+IHlIMI3Xjzen0gF+0kR0HYnJrDjYQNc7TL/bNANvM5vqdfkqBzVToKneaHNa0MdNrhWRiBHwA==
-X-Received: by 2002:a17:902:7ec1:b0:1d0:6297:150a with SMTP id
- p1-20020a1709027ec100b001d06297150amr16662788plb.47.1703061813451; 
- Wed, 20 Dec 2023 00:43:33 -0800 (PST)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- z3-20020a170902834300b001d1d1ef8be5sm22409694pln.173.2023.12.20.00.43.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 00:43:32 -0800 (PST)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 2/2] efi_loader: auto-generate removable media boot option
- first
-Date: Wed, 20 Dec 2023 17:41:32 +0900
-Message-Id: <20231220084133.435240-3-masahisa.kojima@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231220084133.435240-1-masahisa.kojima@linaro.org>
-References: <20231220084133.435240-1-masahisa.kojima@linaro.org>
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1703061940; x=1705653940;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=oQCfmNk8sTvRDv4SvePOfeouy9zdrV80CBSUGxAslLc=;
+ b=f4UjA99IZMXMSGH6sp2eHoeFqsoGj4rsa9ZcgJNSHKYdxDmtBPdlKTQO75vcz8M3
+ IAf/Hc95B8cJa/8q/DVwxJJttLlhFfcvy94XkGtUzCT9Q+oWm1MlsHTsnDvOBYEE
+ eTqxQZoV712UhnFYVNv5+ugt5Fz4C5CPBzbAbcUawb0=;
+X-AuditID: ac14000a-fbefe7000000290d-e5-6582a9b489b9
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 55.E0.10509.4B9A2856;
+ Wed, 20 Dec 2023 09:45:40 +0100 (CET)
+Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
+ 2023 09:45:39 +0100
+From: Yannic Moog <y.moog@phytec.de>
+Date: Wed, 20 Dec 2023 09:45:32 +0100
+Subject: [PATCH v2 1/5] board: phytec: imx8m_som_detection: change
+ phytec_imx8m_detect return type
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-1-516abadb4f49@phytec.de>
+References: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
+In-Reply-To: <20231220-wip-y-moog-phytec-de-upstream_som_detection_fixes-v2-0-516abadb4f49@phytec.de>
+To: Fabio Estevam <festevam@gmail.com>
+CC: Teresa Remmet <t.remmet@phytec.de>, <u-boot@lists.denx.de>,
+ <upstream@lists.phytec.de>, Yannic Moog <y.moog@phytec.de>
+X-Mailer: b4 0.12.3
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrPLMWRmVeSWpSXmKPExsWyRpKBR3fLyqZUg6P/OSweXvW3eLu3k92i
+ +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlbH10ArGgtn8Fc/eejUwzuTt
+ YuTkkBAwkXi24TRbFyMXh5DAYiaJ91vmMUE4DxklLuxawgpSxSagIvH4xT0gm4ODRUBV4vgR
+ E5CwsECKxLS7uxlBbF4BQYmTM5+wgJQwC2hKrN+lDxJmFpCX2P52DjNESYrEmf+3mUBsIRC7
+ 7x5YK6dAqsSSd6fZQVpFBNQkTs+Daq2RmHp/HjvEmcIS7YtuQbXKSrw43wsVl5eYdu41M4Qd
+ KnFk02qmCYxCs5AcNAvhoFlIDlrAyLyKUSg3Mzk7tSgzW68go7IkNVkvJXUTIyiQRRi4djD2
+ zfE4xMjEwXiIUYKDWUmEd29nU6oQb0piZVVqUX58UWlOavEhRmkOFiVx3tUdwalCAumJJanZ
+ qakFqUUwWSYOTqkGxhmXTGPfFvXXJPoVvZC5+1t/w+6+ZudcwUN3Xis9ZOj2/tYdqHBa6pwK
+ wyKfsBnT7be+P2vWsKjxyoSU+EVns/YdTg7XOfG5ueif3XyWa15tzseY2rj+6wqtlfPYYDtT
+ K/3ojl4rvw0f3ELdpvIXPHIKOHJu98K5/TYsan/P7LRMfmEerdQpq8RSnJFoqMVcVJwIAIp0
+ oKNSAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,124 +88,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit auto-generates the boot option for removable
-block io devices followed by fixed block io devices.
-This is what EDK II reference implementation does.
+phytec_imx8m_detect returns -1 on error, but the return type is u8
+leading to 255 return values. Fix this by changing the return type to
+int; there is no reason to keep it as u8 .
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Signed-off-by: Yannic Moog <y.moog@phytec.de>
 ---
- lib/efi_loader/efi_bootmgr.c | 37 ++++++++++++++++++++++++++++--------
- 1 file changed, 29 insertions(+), 8 deletions(-)
+ board/phytec/common/imx8m_som_detection.c | 2 +-
+ board/phytec/common/imx8m_som_detection.h | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 636f01e2eb..6b02abcf0d 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -584,7 +584,6 @@ static efi_status_t try_load_from_media(struct efi_device_path *file_path,
- 	efi_status_t ret = EFI_SUCCESS;
- 	struct efi_device_path *rem, *dp = NULL;
- 	struct efi_device_path *final_dp = file_path;
--
- 	h = efi_dp_find_obj(file_path, &efi_block_io_guid, &rem);
- 	if (h) {
- 		if (rem->type == DEVICE_PATH_TYPE_END) {
-@@ -788,15 +787,19 @@ error:
-  * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootable media
+diff --git a/board/phytec/common/imx8m_som_detection.c b/board/phytec/common/imx8m_som_detection.c
+index c6c96ed19cb..45f5767c565 100644
+--- a/board/phytec/common/imx8m_som_detection.c
++++ b/board/phytec/common/imx8m_som_detection.c
+@@ -23,7 +23,7 @@ extern struct phytec_eeprom_data eeprom_data;
   *
-  * @opt:		pointer to the media boot option structure
-+ * @index:		index of the opt array to store the boot option
-  * @handles:		pointer to the efi handles
-  * @count:		number of efi handle
-+ * @removable:		flag to parse removable only
-  * Return:		status code
+  * Returns 0 in case it's a known SoM. Otherwise, returns -1.
   */
- static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boot_option *opt,
-+						      efi_uintn_t index,
- 						      efi_handle_t *handles,
--						      efi_uintn_t *count)
-+						      efi_uintn_t *count,
-+						      bool removable)
+-u8 __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
++int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
  {
--	u32 i, num = 0;
-+	u32 i, num = index;
- 	struct efi_handler *handler;
- 	efi_status_t ret = EFI_SUCCESS;
+ 	char *opt;
+ 	u8 som;
+diff --git a/board/phytec/common/imx8m_som_detection.h b/board/phytec/common/imx8m_som_detection.h
+index 88d3037bf36..442085cfe97 100644
+--- a/board/phytec/common/imx8m_som_detection.h
++++ b/board/phytec/common/imx8m_som_detection.h
+@@ -15,7 +15,7 @@
  
-@@ -810,12 +813,20 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
- 		struct efi_device_path *short_dp;
- 		struct efi_block_io *blkio;
+ #if IS_ENABLED(CONFIG_PHYTEC_IMX8M_SOM_DETECTION)
  
-+		if (num >= *count) {
-+			ret = EFI_INVALID_PARAMETER;
-+			goto out;
-+		}
-+
- 		ret = efi_search_protocol(handles[i], &efi_block_io_guid, &handler);
- 		blkio = handler->protocol_interface;
+-u8 __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data);
++int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_imx8m_ddr_size(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_imx8mp_rtc(struct phytec_eeprom_data *data);
+ u8 __maybe_unused phytec_get_imx8m_spi(struct phytec_eeprom_data *data);
+@@ -23,7 +23,7 @@ u8 __maybe_unused phytec_get_imx8m_eth(struct phytec_eeprom_data *data);
  
- 		if (blkio->media->logical_partition)
- 			continue;
+ #else
  
-+		if (removable != (blkio->media->removable_media != 0))
-+			continue;
-+
- 		ret = efi_search_protocol(handles[i], &efi_guid_device_path, &handler);
- 		if (ret != EFI_SUCCESS)
- 			continue;
-@@ -1105,7 +1116,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+-inline u8 __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
++inline int __maybe_unused phytec_imx8m_detect(struct phytec_eeprom_data *data)
  {
- 	u32 i;
- 	efi_status_t ret;
--	efi_uintn_t count;
-+	efi_uintn_t count, num, total;
- 	efi_handle_t *handles = NULL;
- 	struct eficonfig_media_boot_option *opt = NULL;
- 
-@@ -1122,22 +1133,32 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
- 		goto out;
- 	}
- 
--	ret = efi_bootmgr_enumerate_boot_option(opt, handles, &count);
-+	/* parse removable block io followed by fixed block io */
-+	num = count;
-+	ret = efi_bootmgr_enumerate_boot_option(opt, 0, handles, &num, true);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
-+	total = num;
-+	num = count;
-+	ret = efi_bootmgr_enumerate_boot_option(opt, total, handles, &num, false);
-+	if (ret != EFI_SUCCESS)
-+		goto out;
-+
-+	total = num;
-+
- 	/*
- 	 * System hardware configuration may vary depending on the user setup.
- 	 * The boot option is automatically added by the bootmenu.
- 	 * If the device is not attached to the system, the boot option needs
- 	 * to be deleted.
- 	 */
--	ret = efi_bootmgr_delete_invalid_boot_option(opt, count);
-+	ret = efi_bootmgr_delete_invalid_boot_option(opt, total);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
- 	/* add non-existent boot option */
--	for (i = 0; i < count; i++) {
-+	for (i = 0; i < total; i++) {
- 		u32 boot_index;
- 		u16 var_name[9];
- 
-@@ -1166,7 +1187,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
- 
- out:
- 	if (opt) {
--		for (i = 0; i < count; i++)
-+		for (i = 0; i < total; i++)
- 			free(opt[i].lo);
- 	}
- 	free(opt);
+ 	return -1;
+ }
+
 -- 
 2.34.1
 
