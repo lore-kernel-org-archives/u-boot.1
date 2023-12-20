@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379B5C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61E41C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B87F38772A;
-	Wed, 20 Dec 2023 14:29:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 740768701C;
+	Wed, 20 Dec 2023 14:36:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EmNNqqwS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="orjP2swr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08F3387716; Wed, 20 Dec 2023 14:29:17 +0100 (CET)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 8757486DEE; Wed, 20 Dec 2023 14:36:17 +0100 (CET)
+Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
+ [IPv6:2607:f8b0:4864:20::933])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9B2C877EC
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:29:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88063870B7
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:36:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5e637faa52fso28696067b3.1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:29:12 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-7caff8105dcso1706608241.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:36:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703078951; x=1703683751; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jdgBG+r/j6b59w65SjtBlhXZEMjPAa9m3KTDlVkKr1s=;
- b=EmNNqqwSuo2y8J894aRmT7ajxiVprIdZ+QhhBhtdc0i/NmKphet5MEI741dkf88rD2
- JLXToxQrL0cWq250TG/4ce7DlBgBdQEZ3U4NpS6Z6O8ah83HzShm3V9KTQ1m3Ck7deb8
- s0a2JUrNgaNQYi/ZFtSa6mdK6VLM5OIcEwl/g=
+ d=linaro.org; s=google; t=1703079371; x=1703684171; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JH8WwHjAfIJ99Uij6lUVrPdIT66OsZPVWOVxf7+NEYI=;
+ b=orjP2swrKxifWscnEPzcVH9YLCFX5xztZw08HiRUEYxKDZ5pKS1E2+FV55kxXELfv2
+ hxRQ14LaYHoMSgkrdLx9MNWk2zWCCwLUAYXeYGDODnZCYWxsZMbuaSxZEmp8M8bE6ci2
+ yqIfEcoM3kgZa0f/GaqjO+vs2Z8aTCs8H/UW0vNgYOSjfyYrn37cQpU9gjAmFEc9nUvi
+ jMLlefWf1xPj8JXNyhnRSVt6iPdLWQuHqK10RQtCtmiT6itDjQhTRQtd6uwgyFADmN1X
+ ZdqwekyJhRTfT5VvDtW+04R2sS8CPpxu7s3uJGx7JfBjxRozfZILRRng2hSJDWlCQhVT
+ BKoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703078951; x=1703683751;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jdgBG+r/j6b59w65SjtBlhXZEMjPAa9m3KTDlVkKr1s=;
- b=liuRNu6KpA0P8ob7X+YrZ1dxenHh88HZEJ12DWYVvaDlh8RuRy3eCLuj2GTdt69NB9
- rrGqAwi3FOc7UEm0bH2mwx/WPWYlLGWTg0c1dJcZcj+wu1RzFpJKJZ6X6SW5jq22bAMs
- mUCtoW/eDddFOYxPD7ALRxbQwNUgX10FnZUB0rtSHeLM9l6u7NqibZ0WOatmTra4uk3G
- kKZtyPCXL0xTvVn+m4ffombta4IN9XRf8z9O1nbyHfVBv3mJ9GRoi1QI26ToMhP6Ag3a
- XE6uJ+hB7msaQ3rGpVfqAYPrB8Omu7+kgTOy1CS8DvkWhN/W68/AaoTIaoMfoeD8agsP
- 8iGA==
-X-Gm-Message-State: AOJu0Yw8shRWLvquFGiA2vXh0u0qsUrvqnSSz169xb3rzxteiOYzzyLM
- yNnkyMVEfh9F8UrNr7mWnfe9bA==
-X-Google-Smtp-Source: AGHT+IHKZ8nQQlfe4zU5OdrdmifkaaRKBpcwZ1TZrUEFHlJGxvVBMz/1LznueXeWJ/BxNI5Uw7+dhQ==
-X-Received: by 2002:a25:1f46:0:b0:dbc:cb56:8a30 with SMTP id
- f67-20020a251f46000000b00dbccb568a30mr6943196ybf.118.1703078946541; 
- Wed, 20 Dec 2023 05:29:06 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
- [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
- by smtp.gmail.com with ESMTPSA id
- t3-20020a255f03000000b00d9cceda7947sm9294171ybb.3.2023.12.20.05.29.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 05:29:06 -0800 (PST)
-Date: Wed, 20 Dec 2023 08:29:03 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
- conor@kernel.org, neil.armstrong@linaro.org,
- caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
- maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
- michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
- peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
- marex@denx.de
-Subject: Re: [PATCH 3/8] scripts/Makefile.lib: Statically define
- *-u-boot.dtsi files location
-Message-ID: <20231220132903.GL2513409@bill-the-cat>
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-4-sumit.garg@linaro.org>
- <CAPnjgZ0h5u8TS=SwAkSgAmbmJiTFriqY8Le++pfS=Yp7R+yabQ@mail.gmail.com>
- <CAFA6WYOYV=Aob+x10XfpagiDoDC1AhiwvT=mc3cQfr4VGj1kxQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1703079371; x=1703684171;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JH8WwHjAfIJ99Uij6lUVrPdIT66OsZPVWOVxf7+NEYI=;
+ b=fp6Vcrol1/RE9qn1n02ITaLgChX09Q1aFG6krs4hZ8LM221sur004glHm+9IzA13ne
+ khIDuFaRkdfsbkNRC2cZGe3F28AGxmp7c04AOTJ9bNcQS+qCIfV0tcuX3z8V2LIaeBhJ
+ GV0Y6fYFJGJ3zPN8NmmScYLUGR8P18R8WFLdYaAYe9zwRWy4sb4d/8xq7gYN99k2bdPG
+ YjDo/3yxIKjqYSSonlCI71CWE1dxeu+ZN+FQ3SRpoIEF74BPL909TG4LMlgHIC+b7zcA
+ wyFexY4NG2ZkCM2bqXSWN3IjTI+pq/CCzCZBcWP4pHKQRP+vz1orc9XTkHENPbGy8a25
+ xDNA==
+X-Gm-Message-State: AOJu0YyIYIRIW6H8tCr1UZA8/zBpX8l/KqYrrSoZekHtKX0/0gIugsWy
+ eIPy4f6efWIm+FzGp8rPxAuiGuNpFJbsTqFqSpTGAA==
+X-Google-Smtp-Source: AGHT+IGbnrJpDNo28xG9MPlTYee+95p9kplsWP5gBVBgtDptSGz6J8jXDsX7XkC63dzXfHuL60Jg0A/NCXB/Dn7aKQg=
+X-Received: by 2002:ac5:cb0a:0:b0:4b6:edaa:39b1 with SMTP id
+ r10-20020ac5cb0a000000b004b6edaa39b1mr1318053vkl.11.1703079371233; Wed, 20
+ Dec 2023 05:36:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/AJ7ldBi7tCTiTO/"
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYOYV=Aob+x10XfpagiDoDC1AhiwvT=mc3cQfr4VGj1kxQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231218072428.1802969-1-sumit.garg@linaro.org>
+ <CAPnjgZ2rYujD-yb=Zgz=bxe8iS3MGSdrL9KfVsDqz8R_H+FVfA@mail.gmail.com>
+ <CAFA6WYOkQ6-jq2LkF=x36mdX+v3CX71zwn7VpUeczF885RBDaA@mail.gmail.com>
+ <65d0c4d7-ba69-4cf8-ae8e-89787f2aa009@linaro.org>
+In-Reply-To: <65d0c4d7-ba69-4cf8-ae8e-89787f2aa009@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 20 Dec 2023 19:06:00 +0530
+Message-ID: <CAFA6WYMR6tSvxDZ7Gym=YAhVxpP1dFP1Mie+DmBRYJxMi5yXwA@mail.gmail.com>
+Subject: Re: [PATCH 0/7] Add SE HMBSC board support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ neil.armstrong@linaro.org, 
+ lukma@denx.de, seanga2@gmail.com, marex@denx.de, laetitia.mariottini@se.com, 
+ pascal.eberhard@se.com, abdou.saker@se.com, jimmy.lalande@se.com, 
+ benjamin.missey@non.se.com, daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,82 +91,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---/AJ7ldBi7tCTiTO/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Dec 20, 2023 at 05:00:20PM +0530, Sumit Garg wrote:
-> On Wed, 20 Dec 2023 at 10:17, Simon Glass <sjg@chromium.org> wrote:
+On Tue, 19 Dec 2023 at 21:56, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 19/12/2023 06:25, Sumit Garg wrote:
+> > Hi Simon,
 > >
-> > Hi Sumit,
+> > On Mon, 18 Dec 2023 at 20:32, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Sumit,
+> >>
+> >> On Mon, 18 Dec 2023 at 00:24, Sumit Garg <sumit.garg@linaro.org> wrote:
+> >>>
+> >>> SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
+> >>
+> >> Could you please add a doc/ file for this board and explain how to
+> >> build it and how to run U-Boot on it?
 > >
-> > On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
-> > >
-> > > Allow u-boot to build DTB from a different directory tree such that
-> > > *-u-boot.dtsi files can be included from a common location. Currently
-> > > that location is arch/$(ARCH)/dts/, so statically define that common
-> > > location.
-> > >
-> > > This is needed for platform owners to start building DTB files from
-> > > devicetree-rebasing directory but still being able to include
-> > > *-u-boot.dtsi files.
-> > >
-> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > ---
-> > >  scripts/Makefile.lib | 25 ++++++++++++++-----------
-> > >  1 file changed, 14 insertions(+), 11 deletions(-)
-> > >
-> > > diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> > > index 27b9437027c..4a002b0e0ca 100644
-> > > --- a/scripts/Makefile.lib
-> > > +++ b/scripts/Makefile.lib
-> > > @@ -159,18 +159,20 @@ cpp_flags      =3D -Wp,-MD,$(depfile) $(NOSTDIN=
-C_FLAGS) $(UBOOTINCLUDE)     \
-> > >  ld_flags       =3D $(KBUILD_LDFLAGS) $(ldflags-y) $(LDFLAGS_$(@F))
-> > >
-> > >  # Try these files in order to find the U-Boot-specific .dtsi include=
- file
-> > > -u_boot_dtsi_options =3D $(strip $(wildcard $(dir $<)$(basename $(not=
-dir $<))-u-boot.dtsi) \
-> > > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_SOC))-u-boot.dt=
-si) \
-> > > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_CPU))-u-boot.dt=
-si) \
-> > > -       $(wildcard $(dir $<)$(subst $\",,$(CONFIG_SYS_VENDOR))-u-boot=
-=2Edtsi) \
-> > > -       $(wildcard $(dir $<)u-boot.dtsi))
-> > > +UBOOT_DTSI_LOC =3D $(srctree)/arch/$(ARCH)/dts/
+> > Ah I forgot to add that since the build/boot instructions are quite
+> > similar to db410c. BTW, I will add that in the next spin.
+>
+> Probably just referencing that document or making the language generic
+> would be good.
+>
+
+I will rename that doc to be rather SoC specific with board specific
+sub-sections.
+
+> Sumit, could you rebase this series on my generic board support? [1] in
+> it's current form this series conflicts, and includes some of the major
+> anti-patterns I'm trying to move away from in mach-snapdragon.
+
+Although, I haven't gone through your series but I was expecting those
+conflicts. Let's work together to make this series compatible on top
+of yours.
+
+>
+> You should not have to introduce a new CONFIG_TARGET_XYZ variable, and
+> from what I can tell you shouldn't even need to add the board/schneider
+> directory at all, you can just set the following in your defconfig:
+>
+> CONFIG_SYS_BOARD="dragonboard410c"
+
+This is simply a misnomer, its HMIBSC board. I suppose we should
+rather separate the SoC specific bits into mach-snapdragon and let
+different boards use them.
+
+> CONFIG_SYS_CONFIG_NAME="hmibsc"
+>
+> This will use the db410c board code (which yours is just a copy/paste of
+> from what I can tell) and your custom include/configs/hmibsc.h header.
+>
+> The addresses set in your environment file should be allocated
+> automatically at runtime too (see the ("mach-snapdragon: dynamic load
+> addresses") patch).
+>
+> You should also switch to an upstream board DTS based on my series, and
+> drop the "-uboot.dtsi" file.
+
+Unfortunately, currently there isn't any upstream DTS for this board
+but I will check with the SE team regarding their plans. Until then we
+have to use a U-Boot specific DTS file.
+
+-Sumit
+
+>
+> [1]:
+> https://lore.kernel.org/u-boot/20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org/
+>
+> Kind regards,
+>
 > >
-> > How about lower case since it is internal. Also we know it is U-Boot,
-> > so perhap  ?
->=20
-> Although I just named it after *-u-boot.dtsi, I am fine with dtsi_loc
-> too. So I will use that instead.
-
-I was going to say lets use "uboot_dtsi_loc" so it's both clear what the
-variable does and for future re-syncs.
-
---=20
-Tom
-
---/AJ7ldBi7tCTiTO/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWC7B8ACgkQFHw5/5Y0
-tywDywv8CJDdrJonbBm62QXBvDGKLJew43seqeK4KdG4b6J7PkM0sjDSlhgbiYRb
-D4VckoPsGj0p58nn1cemWiJ8PLGzT+JNLqnoW/L6vYQd7spuna4179NMa8nVQy2K
-WAVAbE/KOFnJMSGpv1bSX6zZea52bDeQXZ3uD4VzBozKCGKLJrBNO19CHXWPNeBn
-MjrO6LOkAAp/eGmoI2Zg+QImvmFQwXzyN6VFYxLPO2yX8V2VzJS7nQw9G3Bvh0Ds
-xe52b4ssbrHVCledAfZE+bjYdiORzWF2QSc3qNnV+LllJ/NVhDPaHKw3J8eOftSd
-mBDwBxS7U72kwY0sT0y2qnNHnydgQeLUk8/eygEbQyng083mPxOT6V2Mn9DNQGBG
-2hEBk0ga9iPArUr1xeNUKLGbXgd3tqYXw0ys+2Vqb7XDu4ZteiY2gSv+KIDW64Po
-lxNv4DgdeotNGNoetaDjDoNv/sRPnyRcpIMHd/OA80YQOddvOQ1LkKW62VHzfyGU
-A7lmHIG+
-=Py2d
------END PGP SIGNATURE-----
-
---/AJ7ldBi7tCTiTO/--
+> > -Sumit
+> >
+> >>
+> >>> difference from db410c is serial port where HMIBSC board uses UART1 as
+> >>> the debug console with an RS232 port, patch #1 - #3 adds corresponding
+> >>> driver support.
+> >>>
+> >>> Patch #4 adds main HMIBSC board specific bits, features:
+> >>> - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> >>> - 2GiB RAM
+> >>> - 64GiB eMMC, SD slot
+> >>> - WiFi and Bluetooth
+> >>> - 2x Host, 1x Device USB port
+> >>> - HDMI
+> >>> - Discrete TPM2 chip over SPI
+> >>>
+> >>> Patch #5 - #7 enables specific board features like RAUC support,
+> >>> environment protection and USB networking support.
+> >>>
+> >>> This patch series is based on top of Qcom maintainer tree [1] + the latest
+> >>> PMIC patch-set [2]. Feedback is very much welcome.
+> >>>
+> >>> [1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/u-boot-qcom-next?ref_type=heads
+> >>> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=385322
+> >>>
+> >>> Sumit Garg (7):
+> >>>   clk: apq8016: Add support for UART1 clocks
+> >>>   serial_msm: Add support for RS232 GPIOs
+> >>>   serial_msm: Enable RS232 flow control
+> >>>   board: Add SE HMIBSC board support
+> >>>   hmibsc: Enable RAUC support
+> >>>   hmibsc: enable U-Boot Environment variables protection
+> >>>   hmibsc: Enable LAN75XX USB ethernet driver
+> >>>
+> >>>  arch/arm/dts/Makefile              |   1 +
+> >>>  arch/arm/dts/hmibsc-uboot.dtsi     |  43 +++++++
+> >>>  arch/arm/dts/hmibsc.dts            | 188 +++++++++++++++++++++++++++++
+> >>>  arch/arm/mach-snapdragon/Kconfig   |  18 +++
+> >>>  arch/arm/mach-snapdragon/Makefile  |   1 +
+> >>>  board/schneider/hmibsc/Kconfig     |  15 +++
+> >>>  board/schneider/hmibsc/MAINTAINERS |   6 +
+> >>>  board/schneider/hmibsc/Makefile    |   5 +
+> >>>  board/schneider/hmibsc/hmibsc.c    | 179 +++++++++++++++++++++++++++
+> >>>  board/schneider/hmibsc/hmibsc.env  |  11 ++
+> >>>  configs/hmibsc_defconfig           |  79 ++++++++++++
+> >>>  drivers/clk/qcom/clock-apq8016.c   |  44 ++++++-
+> >>>  drivers/serial/serial_msm.c        |  23 +++-
+> >>>  drivers/usb/host/Kconfig           |   1 +
+> >>>  include/configs/hmibsc.h           |  59 +++++++++
+> >>>  15 files changed, 665 insertions(+), 8 deletions(-)
+> >>>  create mode 100644 arch/arm/dts/hmibsc-uboot.dtsi
+> >>>  create mode 100644 arch/arm/dts/hmibsc.dts
+> >>>  create mode 100644 board/schneider/hmibsc/Kconfig
+> >>>  create mode 100644 board/schneider/hmibsc/MAINTAINERS
+> >>>  create mode 100644 board/schneider/hmibsc/Makefile
+> >>>  create mode 100644 board/schneider/hmibsc/hmibsc.c
+> >>>  create mode 100644 board/schneider/hmibsc/hmibsc.env
+> >>>  create mode 100644 configs/hmibsc_defconfig
+> >>>  create mode 100644 include/configs/hmibsc.h
+> >>>
+> >>> --
+> >>> 2.34.1
+> >>>
+> >>
+> >> Regards,
+> >> Simon
+>
+> --
+> // Caleb (they/them)
