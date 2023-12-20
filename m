@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06197C46CD2
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:48:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A5FFC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:48:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D95B86813;
-	Wed, 20 Dec 2023 05:47:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D0C71875E9;
+	Wed, 20 Dec 2023 05:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N7muQ1Jo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mL7caDjl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82D8C876C0; Wed, 20 Dec 2023 05:47:52 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id C913E87669; Wed, 20 Dec 2023 05:48:13 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C0D7807D9
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:47:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 660AC8753E
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:48:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-33678156e27so497395f8f.1
- for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:47:50 -0800 (PST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-553eb4cee4aso42008a12.0
+ for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703047670; x=1703652470; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kAVYF8zMbbeSRptMp0piciVuVCSIiXV7VVXvv87BbpA=;
- b=N7muQ1JolQnPGOV4BT8hYHRKxsd2RMVfOfX06bmbzxMetjT4aLR1qH+u/K5bOvuCNl
- kzF80eanZrvadUtNZkPKgod7+k/+fzJNk84z87vPHTn8rYs2YK4oZL5w2ZJdpGmEmEgQ
- rvbxokjzzqhpiPzenTkIF1hUuw1fv8CrUX5Fk=
+ d=chromium.org; s=google; t=1703047691; x=1703652491; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MQryz8iwFhQBChmncC3G3gKTIqgT7a4dToJXjUUIXVE=;
+ b=mL7caDjl9N6I++fL3sppX+6VeZ52joy+51PzT3DP2rdbOTHlausUEYUjF158csfQS2
+ 9S/srOadyQqjpEns+/OlX5Mnh9mfptFNZ0+ItV1tRQdvS0wThIni9jGlIpFDV/eJom0s
+ VFFvt6leJyBBnjPy934/hcVbGy/efZqja5IYM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703047670; x=1703652470;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kAVYF8zMbbeSRptMp0piciVuVCSIiXV7VVXvv87BbpA=;
- b=jBCp/aBGiHk0g0ZiFz8aS3rhzU10s2/resVJyGciBSUTJLoDL3Ur8KpPOEftc6eeu3
- SCW9AuSYdgQCtYfj70Z7+36VUF8xFCSeF+Z0cMOiM5JN/H1Jp+UxN5YUqxkLiDzyTKvr
- SoMuJNyaqpS81ITNAeJHL4sa/FZdStXvnyADluEV5iRwWIYQNavPNyesyuNrBSh/069h
- NdME5SfVhLhTSnVTtEKFjGjt1HvNTH4sVmLMbrhTB2av8GLqHdo3e/7xjNr+w5kgC/RU
- XJ7kUWJnIgJHE5TekD4bVEioUUWlbPegG2c4TydBQZ+F/QtS3WjkH3HXMUoTSpkYO5Fq
- EzRg==
-X-Gm-Message-State: AOJu0YzxApMm5zwZVV7t/sHGSXuX1092MTMs0SGZUOU26Plng9Mad5oE
- Ksu7g8Mlf3mxqUMeKjz2hqld2wEVwqIrhrYBUOuftUkMt6Hl3mae9KI=
-X-Google-Smtp-Source: AGHT+IGz7UuauJkWmRvsgeDcPDAm/Gg3/HL6qLIhb3me9kc+hnH6afdpU8BR1GaS0mXzpk5JkNbrJKjt7VrdSt57oC8=
-X-Received: by 2002:a17:906:109a:b0:a26:8dd9:7bf5 with SMTP id
- u26-20020a170906109a00b00a268dd97bf5mr352058eju.44.1703047649290; Tue, 19 Dec
- 2023 20:47:29 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703047691; x=1703652491;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MQryz8iwFhQBChmncC3G3gKTIqgT7a4dToJXjUUIXVE=;
+ b=TeKani5DkougVXHgqhctJsv1J7nc9p5AQkwHKIWx0ARwGCKI+fFfE9Rw5Db3qNb/Y9
+ k6ExB800XoYgGrxVewVWyBq9eERfzQMqSvnP9ZayYMQYM4F8lvXo1jkMVCq2lKuah2uH
+ kmMw5qFAOXGPtpwxd7AtcrMNxY+g6/nRhBmhdXXsA2S7xa0Jq9myk0TqNx47QD9xSNh3
+ zXP4DiQri77EgzHmcZrGtoyUVgjNCE4KX46eFQA+AwbqBDmVsG9mQEfN1UgX4kCe2BG3
+ zPvgrAU/ZD4d3sxVl1p2p9zbOotUiOsjgmuDmBrwF5wIBcSozMluvY3CwrAYKIpFWYlX
+ a12w==
+X-Gm-Message-State: AOJu0Yw9aIm5Pt52DyD24KDcTyP5Huv+vcpPEj04KHEivCssmdVHCglR
+ Q+axx1cpD9fTKWAo5yy6KV5BK7NDZJ6h0FSNlgdDqQ==
+X-Google-Smtp-Source: AGHT+IFANJmLuLzhb8rBrIYFE0JGxXUonUruhKprxRQ8hERlzHHybSOCM7h8o1qCsnMg6Mmdvfg8nSzpG48HJdGt7+E=
+X-Received: by 2002:a17:906:73d3:b0:a23:4faa:dd66 with SMTP id
+ n19-20020a17090673d300b00a234faadd66mr2280475ejl.137.1703047690590; Tue, 19
+ Dec 2023 20:48:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20231214135103.1606605-1-sumit.garg@linaro.org>
- <20231214135103.1606605-5-sumit.garg@linaro.org>
-In-Reply-To: <20231214135103.1606605-5-sumit.garg@linaro.org>
+References: <20231214155346.GB295924@e130802.arm.com>
+ <87ttok689d.fsf@bloch.sibelius.xs4all.nl>
+ <CAC_iWjKYa1_GrU3XPKqbnOf6VJxx426qTfD1WcSMkmj982ECSw@mail.gmail.com>
+ <CAPnjgZ1TsFCzTd2pD3j4SoAhnJWw1qz90DfEzsU6Y-4bSkEf7A@mail.gmail.com>
+ <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
+In-Reply-To: <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:47:17 -0700
-Message-ID: <CAPnjgZ37QMzyVNxd8608dMBXVPed-PAU39CAhOrMRHVedEnSkQ@mail.gmail.com>
-Subject: Re: [PATCH 4/8] dts: Add alternative location for upstream DTB builds
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de
+Date: Tue, 19 Dec 2023 21:47:59 -0700
+Message-ID: <CAPnjgZ227GHMy2r=9fmK2XWNShpUL_vwt9-VhGeZMNec0qJ7XA@mail.gmail.com>
+Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Abdellatif El Khlifi <Abdellatif.ElKhlifi@arm.com>, Drew.Reed@arm.com,
+ u-boot@lists.denx.de, nd@arm.com
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,138 +89,169 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Hi Heinrich,
 
-On Thu, 14 Dec 2023 at 06:52, Sumit Garg <sumit.garg@linaro.org> wrote:
+On Mon, 18 Dec 2023 at 13:59, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+e:
 >
-> Allow platform owners to mirror devicetree files from devitree-rebasing
-> directory into dts/arch/$(ARCH) (special case for dts/arch/arm64). Then
-> build then along with any *-u-boot.dtsi file present in arch/$(ARCH)/dts
-> directory.
+>
+>
+> Am 18. Dezember 2023 16:01:44 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi,
+> >
+> >On Thu, 14 Dec 2023 at 12:47, Ilias Apalodimas
+> ><ilias.apalodimas@linaro.org> wrote:
+> >>
+> >> Hi Mark, Abdellatif
+> >>
+> >> On Thu, 14 Dec 2023 at 18:47, Mark Kettenis <mark.kettenis@xs4all.nl> =
+wrote:
+> >> >
+> >> > > Date: Thu, 14 Dec 2023 15:53:46 +0000
+> >> > > From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+> >> >
+> >> > Hi Abdellatif,
+> >> >
+> >> > > Hi guys,
+> >> > >
+> >> > > I'd like to ask for advice regarding adding EFI RT support to the =
+Arm's FF-A bus
+> >> > > in U-Boot.
+> >> > >
+> >> > > The objective is to enable the FF-A messaging APIs in EFI RT to be
+> >> > > used for comms with the secure world. This will help getting/setti=
+ng
+> >> > > EFI variables through FF-A.
+> >> > >
+> >> > > The existing FF-A APIs in U-Boot call the DM APIs (which are not a=
+vailable at RT).
+> >> > >
+> >> > > Two possible solutions:
+> >> > >
+> >> > > 1/ having the entire U-Boot in RT space (as Simon stated in this d=
+iscussion[1])
+> >> >
+> >> > I don't think this is a terribly good idea.  With this approach orde=
+rs
+> >> > of magnitude more code will be present in kernel address space one t=
+he
+> >> > OS kernel is running and calling into the EFI runtime.  Including co=
+de
+> >> > that may access hardware devices that are now under OS control.  It
+> >> > will be nigh impossible to audit all that code and make sure that on=
+ly
+> >> > a safe subset of it gets called.  So...
+> >>
+> >> +100
+> >> I think we should draw a line here. I mentioned it on another thread,
+> >> but I did a shot BoF in Plumbers discussing issues like this,
+> >> problems, and potential solutions [0] [1]. Since that talk patches for
+> >> the kernel that 'solve' the problem for RPMBs got pulled into
+> >> linux-next [2].
+> >> The TL;DR of that talk is that if the kernel ends up being in control
+> >> of the hardware that stores the EFI variables, we need to find elegant
+> >> ways to teach the kernel how to store those directly. The EFI
+> >> requirement of an isolated flash is something that mostly came from
+> >> the x86 world and is not a reality on the majority of embedded boards.
+> >> I also think we should give up on Authenticated EFI variables in that
+> >> case. We get zero guarantees unless the medium has similar properties
+> >> to an RPMB.
+> >> If a vendor cares about proper UEFI secure boot he can implement
+> >> proper hardware.
+> >
+> >Just to copy in my thoughts as they are lost at this point:
+> >
+> >> We would need to publish a runtime interface with access to the driver
+> >> API. I did ask for this when the EFI runtime support was added, but it
+> >> wasn't done.
+> >
+> >> It would be possible to create a new 'runtime' phase of U-Boot (RPL?),
+> >> separate from the others. That will be much easier once we get the XPL
+> >> stuff sorted out., since adding new [hase would be fairly trivial  CPL
+> >> died as another contributor had a series which went in first...then I
+> >> never got back to it.
+> >
+> >> So for now having the entire U-Boot in runtime space seems reasonable =
+to me.
+> >
+> >> I'll also mention that it would be nice to have s new-style API
+> >> (replacing the old API U-Boot currently has) which uses more of a
+> >> module approach. E.g. we could declare that uclass_first_device() is
+> >> exported and can be called from outside U-Boot.
+> >
+> >>
+> >> >
+> >> > >
+> >> > > 2/ Create an RT variant for the FF-A APIs needed.
+> >> > >       These RT variant don't call the DM APIs
+> >> > >       (e.g: ffa_mm_communicate_runtime, ffa_sync_send_receive_runt=
+ime, ...)
+> >> > >
+> >> > > What do you recommend please ?
+> >> >
+> >> > ...this is what I would recommend.  Preferably in a way that refacto=
+rs
+> >> > the code such that the low-level functionality is shared between the
+> >> > DM and non-DM APIs.
+> >>
+> >> Yes. The only thing you need to keep alive is the machinery to talk to
+> >> the secure world. The bus, flash driver etc should all be running
+> >> isolated in there. In that case you can implement SetVariableRT as
+> >> described the the EFI spec.
+> >
+> >The current approach is pretty brittle, since it relies on putting
+> >some of the U-Boot code into a separate area. There is no good way to
+> >know which U-Boot code should be in that area, since we don't create a
+> >separate build. If a function calls one that has not been specially
+> >marked, or accesses data that is not in the area, then it will crash
+> >or hang.
+> >
+> >So, as I said, I think we need a new build, if we want to avoid all of
+> >U-Boot in there. Anything else is hard to maintain.
+>
+> The EFI runtime is the most security exposed part of U-Boot. We should st=
+rive to keep the attack surface small. No matter how we define the runtime =
+(by section assignment as today or by a dedicated build) I would not want t=
+o have the driver model in the runtime.
+>
+> The only drivers that are required by the EBBR are for resetting the syst=
+em. ARM has PSCI as reset handler, RISC-V has SBI. These are invoked by sim=
+ple ecalls.
 
-Also add a new Makefile for arm64.
+So why not have Linux do it? Why do we need the runtime at all?
+
+But from the other POV, what if this expands? We are creating a little
+runtime stub without driver model? I suppose it will work until it
+doesn't.
 
 >
-> This will help easy migration for platforms which currently are compliant
-> with upstream Linux kernel devicetree files.
->
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->  dts/Kconfig             | 11 +++++++++++
->  dts/Makefile            | 17 ++++++++++++++---
->  dts/arch/arm64/Makefile | 14 ++++++++++++++
->  3 files changed, 39 insertions(+), 3 deletions(-)
->  create mode 100644 dts/arch/arm64/Makefile
->
-> diff --git a/dts/Kconfig b/dts/Kconfig
-> index 00c0aeff893..96396f12b67 100644
-> --- a/dts/Kconfig
-> +++ b/dts/Kconfig
-> @@ -85,6 +85,17 @@ config OF_LIVE
->           enables a live tree which is available after relocation,
->           and can be adjusted as needed.
->
-> +config OF_UPSTREAM
-> +       bool "Enable use of devicetree imported from Linux kernel release"
-> +       help
-> +         Traditionally, U-boot platforms used to have their custom devicetree
+> Any runtime device drivers for variable storage should not be in the U-Bo=
+ot runtime but live in the secure world (e.g. OP-TEE). FF-A is the new  ARM=
+ protocol for talking to the secure world and hence fits into the picture.
 
-U-Boot
-
-(I think I mentioned this, but you thought I said U-boot...but it
-really is U-Boot). Perhaps grep your patches next time.
-
-> +         files or copy devicetree files from Linux kernel which are hard to
-> +         maintain and can usually get out-of-sync from Linux kernel. This
-> +         option enables platforms to migrate to devicetree-rebasing repo where
-> +         a regular sync will be maintained every major Linux kernel release
-> +         cycle. However, platforms can still have some custom u-boot specific
-> +         bits maintained as part of *-u-boot.dtsi files.
-
-I'm a bit nervous about this. It means that boards chose between this
-dir of the local files. It means there is some effort to switch.
-
-I wonder if we could default to using the rebasing thing, with boards
-having to 'opt out'? So this should be 'default y' ?
-
-
-> +
->  choice
->         prompt "Provider of DTB for DT control"
->         depends on OF_CONTROL
-> diff --git a/dts/Makefile b/dts/Makefile
-> index 3437e54033d..8098bf8191a 100644
-> --- a/dts/Makefile
-> +++ b/dts/Makefile
-> @@ -10,10 +10,20 @@ ifeq ($(DEVICE_TREE),)
->  DEVICE_TREE := unset
->  endif
->
-> +ifeq ($(CONFIG_OF_UPSTREAM),y)
-> +ifeq ($(CONFIG_ARM64),y)
-> +DEVICE_TREE_LOC := dts/arch/arm64
-
-dt_dir ?
-
-Should we move the arm64 DTs to arch/arm64 ?
-
-What about the subdirs used in Linux?
-
-> +else
-> +DEVICE_TREE_LOC := dts/arch/$(ARCH)
-> +endif
-> +else
-> +DEVICE_TREE_LOC := arch/$(ARCH)/dts
-> +endif
-> +
->  ifneq ($(EXT_DTB),)
->  DTB := $(EXT_DTB)
+OK. This is all very complicated, of course. But OK.
 
 >
->  else
-> -DTB := arch/$(ARCH)/dts/$(DEVICE_TREE).dtb
-> +DTB := $(DEVICE_TREE_LOC)/$(DEVICE_TREE).dtb
->  endif
+> @Abdellatif
 >
->  $(obj)/dt-$(SPL_NAME).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
-> @@ -41,7 +51,7 @@ $(DTB): arch-dtbs
+> Does an OP-TEE module for managing EFI variables via FF-A already exist? =
+For QEMU?
 >
->  PHONY += arch-dtbs
->  arch-dtbs:
-> -       $(Q)$(MAKE) $(build)=arch/$(ARCH)/dts dtbs
-> +       $(Q)$(MAKE) $(build)=$(DEVICE_TREE_LOC) dtbs
+> Best regards
 >
->  ifeq ($(CONFIG_SPL_BUILD),y)
->  obj-$(CONFIG_OF_EMBED) := dt-spl.dtb.o
-> @@ -65,4 +75,5 @@ clean-files := dt.dtb.S
->  # Let clean descend into dts directories
->  subdir- += ../arch/arc/dts ../arch/arm/dts ../arch/m68k/dts ../arch/microblaze/dts     \
->            ../arch/mips/dts ../arch/nios2/dts ../arch/powerpc/dts ../arch/riscv/dts     \
-> -          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts
-> +          ../arch/sandbox/dts ../arch/sh/dts ../arch/x86/dts ../arch/xtensa/dts        \
-> +          ./arch/arm64 ./arch/$(ARCH)
-> diff --git a/dts/arch/arm64/Makefile b/dts/arch/arm64/Makefile
-> new file mode 100644
-> index 00000000000..16e9fea622d
-> --- /dev/null
-> +++ b/dts/arch/arm64/Makefile
-> @@ -0,0 +1,14 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +include $(srctree)/scripts/Makefile.dts
-> +
-> +targets += $(dtb-y)
-> +
-> +# Add any required device tree compiler flags here
-> +DTC_FLAGS += -a 0x8
-> +
-> +PHONY += dtbs
-> +dtbs: $(addprefix $(obj)/, $(dtb-y))
-> +       @:
-> +
-> +clean-files := */*.dtb */*.dtbo */*_HS
-> --
-> 2.34.1
+> Heinrich
+>
+> >
+> >>
+> >> [...]
+> >>
+> >> [0] https://www.youtube.com/watch?v=3DUdQk0SCUAlA
+> >> [1] https://lpc.events/event/17/contributions/1653/attachments/1338/26=
+82/Plumbers%20-%20EFI%20setvariable%20problems%20and%20solutions.pdf
+> >> [2] https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.gi=
+t/commit/?id=3Dc44b6be62e8dd4ee0a308c36a70620613e6fc55f
+> >>
+> >
 
 Regards,
 Simon
