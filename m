@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B8CC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 20:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E72D1C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37AD18783A;
-	Wed, 20 Dec 2023 21:25:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=prolan.hu
+	by phobos.denx.de (Postfix) with ESMTP id 22ABC87850;
+	Wed, 20 Dec 2023 22:01:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (4096-bit key; unprotected) header.d=prolan.hu header.i=@prolan.hu header.b="EP3RFo6d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kw6Gkhcl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD5C88718F; Wed, 20 Dec 2023 20:24:12 +0100 (CET)
-Received: from fw2.prolan.hu (fw2.prolan.hu [193.68.50.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B77F98784A; Wed, 20 Dec 2023 22:01:33 +0100 (CET)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47E5B8781D
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 20:24:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DBF08783A
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:01:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=prolan.hu
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Csokas.Bence@prolan.hu
-Received: from proxmox-mailgw.intranet.prolan.hu (localhost.localdomain
- [127.0.0.1])
- by proxmox-mailgw.intranet.prolan.hu (Proxmox) with ESMTP id 4AAD7A140D;
- Wed, 20 Dec 2023 20:24:41 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prolan.hu; h=cc
- :cc:content-id:content-transfer-encoding:content-type
- :content-type:date:from:from:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=mail; bh=FMtzl03IU
- B5WsaN2lQBaUMfw4JNabQSc4zKoHn6MoeY=; b=EP3RFo6dj1mMktb7BgRiypvel
- 0U8ZPP4KmO3btyYIbCBfi//5VbqcloA4EERX+VwBi+6Ffmn1HI+raS43twEWGkw9
- zRA1kCf2Rt6ibbz/aO1KVhl14skJfV+FVP4MChyzvge+ag3TLhY4Eqzs1/ttUlTR
- KUbQbXNC+swO9kVRErtLg7xk4UI19kOAxKCPscU/mGyXUSdS/Dnn4SPnbV9tLs7u
- en/PtgacaMp4D4k6AFQVpyGc78TzZUEmQ1bwkFnIKVsCqo+BVN+LRnOU3nlkbetm
- jcULV8DnKMlPLLHgm3qL4NeL6TWN1jIqLMxFTj79s6kfsjBrsjr4+Xb5z9y4k8ci
- 2LV8GRLn/spg9kFJP0mTX9fuzKH/0MAGdS0cmXc8+xRnmjFMatCpJg9sQ84l8+yD
- hQ+MqR6wZK+ZzouUwBn80qf69FPvKzyO25xGCO3YmJI9XZj1gDfVQPOnEl+jUPq4
- MraAFMkZ3viBuLectubo+WAxeG9/+9LmEpb367hpWFySsPk3O+1YbH2tLi9yw8u2
- PJq1KA16jFUQ4CMYqNGDoVoZEhZfNp9wMdoJ7PWAblrdOUgLx+ok2GY/q85XvhAO
- XF8A/JmLFFNmWxGLsyfu6Gdoiqljjw/R9jxTA11zfUgaopZJDsqIA1mXZ5ntB2oP
- yqIhw181elNARdzkUY=
-From: =?utf-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>
-To: Dragan Simic <dsimic@manjaro.org>
-CC: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Daniel Golle
- <daniel@makrotopia.org>, Mark Kettenis <mark.kettenis@xs4all.nl>
-Subject: Re: Passing boot logs to Linux?
-Thread-Topic: Passing boot logs to Linux?
-Thread-Index: AQHaMrctQ91qLkCwS0+C38IRePG/PrCxfvIAgAAJqQCAAAUhAIAAHXMAgAAFjICAAAwqgIAACkGAgAC224A=
-Date: Wed, 20 Dec 2023 19:24:07 +0000
-Message-ID: <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
-References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
- <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
- <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
- <16e633f9d4b1c426aaca510157479d65@manjaro.org>
- <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
- <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
- <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
- <3900f4b15852d0af65635b3a794d34af@manjaro.org>
-In-Reply-To: <3900f4b15852d0af65635b3a794d34af@manjaro.org>
-Accept-Language: hu-HU, en-US
-Content-Language: hu-HU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [152.66.192.27]
-x-esetresult: clean, is OK
-x-esetid: 37303A29CE70385C6C7462
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C4AB5BAE91FDE84B819C9B24A58FEC28@prolan.hu>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5e734251f48so894707b3.1
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:01:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703106090; x=1703710890; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nEqSzoCpz0qmsgbSJUjE4CkwbMajanUtXY6CNFtmbeQ=;
+ b=kw6GkhcluZSnJzRiTs44fgn8pAjzZEsFx1sPXmpQwRgR06TPPjNO+OTHhJXG1rDnbY
+ JUR6oi0sMCzMqo9gM/2zGzKXGfOYKWrXyIPFReUWl2izKk4dh0MExHzZCMGRJCk7d8dl
+ HeYAYImj7z22iEtg10DwADIMKL8X4EbLzRCmk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703106090; x=1703710890;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nEqSzoCpz0qmsgbSJUjE4CkwbMajanUtXY6CNFtmbeQ=;
+ b=qiUMWCdpmONhZFoeC8A2GZDBaj224xQj1r1sjreeX6SXfBBuZsjJjxOzzEiZHtryBZ
+ c9Ap/ALLl7QwMT4stTyNIIpnn9uhDmJB1W9a2NEfGAFnyYRaEp8brTqsYBQZM5RqUots
+ l0jMd9OqA+YicxBF+TMuZZRSxeaGJzqY/9e/uDEjVdAqS1JjbQnO4h6z7HomPhyA+RUy
+ 8fnYsK2WNG0XEfULotNPrrgnohd3SpHRYtNhf5lOVH7fTnFpObP06wHRV32wNT8occ7O
+ T1AdNrQ1h7F0rL6nLnbyvs6LWg5Az/31FEBXxaMlNehEBYcz981Kgs/2Ggg+hksDXs6+
+ Zuhg==
+X-Gm-Message-State: AOJu0YwYxHmhKcCHAFS3DXrdPgub4J901xUFmyVXAbYpFuvkEKtTkKsu
+ iGeTJo5Sq+c24RYiY25Mdp6XSg==
+X-Google-Smtp-Source: AGHT+IFG6M/Sj6FuGM4f8na5zEFW1sTpPHyjPXf48/SP7Qwp44EIzMQd2STzxUJV+GLOOXb85iS75w==
+X-Received: by 2002:a81:a241:0:b0:5e4:d68a:310 with SMTP id
+ z1-20020a81a241000000b005e4d68a0310mr240720ywg.36.1703106090107; 
+ Wed, 20 Dec 2023 13:01:30 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
+ [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
+ by smtp.gmail.com with ESMTPSA id
+ i2-20020a0dc602000000b005e85a52ac20sm235326ywd.55.2023.12.20.13.01.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Dec 2023 13:01:28 -0800 (PST)
+Date: Wed, 20 Dec 2023 16:01:26 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, marex@denx.de, u-boot@lists.denx.de
+Subject: Re: Pull request: Please pull u-boot-imx-master-20231220
+Message-ID: <20231220210126.GR2513409@bill-the-cat>
+References: <20231220184213.1448425-1-festevam@gmail.com>
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 20 Dec 2023 21:25:28 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1SCsqEh8xPmsTE0y"
+Content-Disposition: inline
+In-Reply-To: <20231220184213.1448425-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,65 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMjAyMy4gMTIuIDIwLiA5OjI5LCBEcmFnYW4gU2ltaWMgd3JvdGU6DQo+IE9uIDIwMjMtMTIt
-MjAgMDg6NTIsIENzw7Nrw6FzIEJlbmNlIHdyb3RlOg0KPj4gT24gMjAyMy4gMTIuIDIwLiA4OjA5
-LCBEcmFnYW4gU2ltaWMgd3JvdGU6DQo+Pj4gT24gMjAyMy0xMi0yMCAwNzo0OSwgQ3PDs2vDoXMg
-QmVuY2Ugd3JvdGU6DQo+Pj4+IEkgZG9uJ3QgdGhpbmsgdGhhdCB3b3VsZCBiZSBhIGh1Z2UgcHJv
-YmxlbSwgTGludXggdXNlcnNwYWNlIGNhbiBmaWx0ZXINCj4+Pj4gQU5TSSBjb250cm9sIGNvZGVz
-IGlmIGl0IHdhbnRzIHRvLiBGb3Igbm93LCBJJ2QgbGlrZSBhIGJ5dGUtZm9yLWJ5dGUNCj4+Pj4g
-Y29weSBvZiB0aGUgY29uc29sZSwgYXMtaXMsIHByZXNlbnRlZCB0byBMaW51eC4NCj4+Pg0KPj4+
-IEJ1dCB3b3VsZG4ndCByZWNvcmRpbmcgdGhlIGNvbnRyb2wgc2VxdWVuY2VzIGFzLWlzIGFjdHVh
-bGx5IGJlIHByZXR0eQ0KPj4+IG11Y2ggdXNlbGVzcz/CoCBGb3IgZXhhbXBsZSwgc29tZSB1c2Vy
-IGNhbiBzcGVuZCBhIGZldyBtaW51dGVzDQo+Pj4gc2Nyb2xsaW5nIHRocm91Z2ggdGhlIGJvb3Qg
-bWVudSwgd2hpY2ggd291bGQgcHJvZHVjZSBhIGZhaXIgYW1vdW50IG9mDQo+Pj4gbmVhcmx5IHVz
-ZWxlc3MgcmVjb3JkZWQgZGF0YS4NCj4+Pg0KPj4+IE1vcmVvdmVyLCBpZiBJJ20gbm90IHdyb25n
-LCB2aWV3aW5nIG9yIHBhcnNpbmcgc3VjaCBhcy1pcyBkYXRhIHdvdWxkDQo+Pj4gYWN0dWFsbHkg
-cmVxdWlyZSByZXBsYXlpbmcgdGhlIGNvbnRyb2wgc2VxdWVuY2VzLCB0byByZXByb2R1Y2UgdGhl
-DQo+Pj4gYWN0dWFsIGNvbnNvbGUgY29udGVudHMgYXMgaXQgd2FzIHJlY29yZGVkLCB3aGljaCB3
-b3VsZCBiZSBxdWl0ZQ0KPj4+IGN1bWJlcnNvbWUuDQo+Pg0KPj4gSXQgKmlzKiB1c2VsZXNzLCBi
-dXQgbW9zdCBvZiB0aGUgdGltZXMgdGhlIHVzZXIgd29uJ3QgYmUgc2Nyb2xsaW5nIGF0DQo+PiBh
-bGwgYW55d2F5cywgdGhhdCdzIHdoeSBJIGRvbid0IHRoaW5rIHRoZXNlIGZldyBleHRyYSBieXRl
-cyB3b3VsZCBiZSBhDQo+PiBwcm9ibGVtLg0KPiANCj4gUXVpdGUgZnJhbmtseSwgd2hlbiBpdCBj
-b21lcyB0byBjb21wdXRpbmcgaW4gZ2VuZXJhbCwgdGFraW5nIHRoZSAiYWgsIGl0IA0KPiBwcm9i
-YWJseSB3b24ndCBoYXBwZW4iIGFwcHJvYWNoIGlzbid0IHRoZSBiZXN0IHRoaW5nIHRvIGRvLsKg
-IFdlIHNob3VsZCANCj4gYWltIHRvd2FyZCBjb3ZlcmluZyBwcm9wZXJseSBldmVuIHRoZSBlZGdl
-IGNhc2VzLCBpZiB5b3UgYWdyZWUuDQoNCllvdSdyZSBhYnNvbHV0ZWx5IHJpZ2h0OyBob3dldmVy
-LCBJIGRpZCBub3Qgc2F5ICJpdCB3b24ndCBoYXBwZW4iLCBJIA0Kc2FpZCB0aGF0IExpbnV4IHVz
-ZXJzcGFjZSBjYW4gZ28gZGVhbCB3aXRoIGl0IGlmIGl0IGhhcHBlbnMsIGFuZCBpZiBpdCANCndh
-bnRzIHRvLiBBbmQgdGhhdCBpbiBteSBvcGluaW9uLCB0aGUgYmVzdCBjb3Vyc2Ugb2YgYWN0aW9u
-IGZvciBVLUJvb3QgDQppcyB0byByZWNvcmQgKmV2ZXJ5dGhpbmcqIChhcyBpdCBkb2VzIG5vdyks
-IGFuZCB0aGVuIHVzZXJzcGFjZSBjYW4gDQpkZWNpZGUgdG8gZmlsdGVyIGl0IGZvciBlZy4gQU5T
-SSBjb2Rlcy4gQnV0IEkgdGhpbmsgaXQncyBiZXN0IHRvIGtlZXAgDQp0aGUgVS1Cb290IGNvZGUg
-ZGVhZCBzaW1wbGUsIGFuZCBhbHNvIHN1cHBseSB0aGUgbW9zdCBkYXRhIHRvIHVzZXJzcGFjZS4N
-Cg0KDQo+PiBUaGF0J3Mgd2hhdCBJIHJlYWQgYXMgd2VsbC4gSXMgdGhlcmUgc3VwcG9ydCBmb3Ig
-VS1ib290IHRvIHdyaXRlIGFuZA0KPj4gTGludXggdG8gcmVhZCBQU3RvcmVzPw0KPiANCj4gTm8g
-YW5kIHllcywgYnV0IFUtQm9vdCBjYW4gYWxyZWFkeSByZWFkIHBzdG9yZS7CoCBQbGVhc2Ugc2Vl
-IA0KPiBkb2MvdXNhZ2UvY21kL3BzdG9yZS5yc3QgZm9yIHRoZSBVLUJvb3QgcGFydCwgYW5kIA0K
-PiBEb2N1bWVudGF0aW9uL2FkbWluLWd1aWRlL3BzdG9yZS1ibGsucnN0IGZvciB0aGUgTGludXgg
-a2VybmVsIHBhcnQuDQoNCklycmVsZXZhbnQsIGFzIHdlIG9ubHkgd2FudCB0byB3cml0ZSBvdXQg
-dGhlIGNvbnNvbGUgbG9nIHRvIFUtQm9vdCwgYW5kIA0Kbm90IHRoZSBvdGhlciB3YXkgYXJvdW5k
-ICh0aGF0J3MgZm9yIGNvbGxlY3RpbmcgcGFuaWMgbG9ncywgd2hpY2ggaXMgDQphbHJlYWR5IGlt
-cGxlbWVudGVkKS4NCg0KPiBBbm90aGVyIGJlbmVmaXQgb2YgdXNpbmcgcHN0b3JlIHdvdWxkIGJl
-IG5vIHBlcm1hbmVudGx5IHdhc3RlZCBSQU0gZm9yIA0KPiB0aGUgcmVjb3JkZWQgY29uc29sZSBj
-b250ZW50cy7CoCBBbHNvLCBoYXZpbmcgdGhlIGRhdGEgcmVjb3JkZWQgdG8gYSANCj4gc3RvcmFn
-ZSBkZXZpY2UgYWxzbyBnb2VzIGFsb25nIHdpdGggcHJvdmlkaW5nIHBlcm1hbmVudCByZWNvcmRz
-Lg0KDQpJJ20gcG9zaXRpdmVseSAqbm90IGdvbm5hIHNhdmUgYm9vdCBsb2dzIHRvIGRpc2sqLCBh
-cyBtb3N0IGVtYmVkZGVkIA0Kc3lzdGVtcyBoYXZlIEZsYXNoLWJhc2VkIHN0b3JhZ2UgbWVkaWE7
-IHdyaXRpbmcgdG8gdGhlbSBvbiBldmVyeSBib290IA0Kd291bGQgYmUgZGV2YXN0YXRpbmcuIFBs
-dXMsIEkgZG9uJ3Qgd2FudCB0aGUgY29uc29sZSBzdWJzeXN0ZW0gdG8gZGVwZW5kIA0Kb24gYW55
-IGZpbGUvZGlzayBvcGVyYXRpb25zL2RyaXZlcnMuDQoNClRoZXJlZm9yZSwgaXQgd2lsbCBiZSBu
-ZWNlc3NhcnkgdG8gcGVybWFuZW50bHkga2VlcCB0aGUgbG9ncyBpbi1tZW1vcnksIA0KcmVnYXJk
-bGVzcyBvZiB3aGV0aGVyIHdlIHVzZSB0aGUgUFN0b3JlIGZvcm1hdCBvciBzb21ldGhpbmcgZWxz
-ZS4gVW5sZXNzIA0KTGludXggd2FudHMgdG8gY29weSBpdCBlbHNld2hlcmUgKHdoaWNoIHByb2Jh
-Ymx5IHdpbGwgYmUgbWVtb3J5IA0KYW55d2F5cykuIEJ1dCBtYXliZSB3ZSBjb3VsZCBvZmZlciBz
-b21lIG9wdGlvbiBpbiB0aGUgTGludXggZHJpdmVyIHRvIA0KcmVsZWFzZSB0aGUgbG9ncywgYWxv
-bmcgd2l0aCB0aGUgYXNzb2NpYXRlZCBtZW1vcnkgcmVnaW9uLi4uDQoNCkFsbCBpbiBhbGwsIEkn
-bSBhbGwgZm9yIHVzaW5nIHByZS1leGlzdGluZyBzdGFuZGFyZCBpbnRlcmZhY2VzIGluc3RlYWQg
-DQpvZiBpbnZlbnRpbmcgc29tZXRoaW5nIG5ldyBhbmQgY3VzdG9tLCBidXQgYXMgSSBzZWUgaXQg
-bm93LCBQU3RvcmUganVzdCANCmNhbm5vdCBkbyB3aGF0IHdlIHdhbnQgaGVyZS4gSWYgYW55IG9m
-IHlvdSB0aGluayBvdGhlcndpc2UsIGZlZWwgZnJlZSB0byANCnRyeSB0byBjb252aW5jZSBtZSBm
-dXJ0aGVyLCBvciBldmVuIGd1aWRlIG1lIG9uIGhvdyB0byB1c2UgUFN0b3Jlcy4NCg0KSGVyZSdz
-IHdoYXQgSSB3b3VsZCB3YW50Og0KKiB3cml0aW5nIGFscmVhZHkgc3VwcG9ydGVkIGluIFUtQm9v
-dA0KKiBwdXJlIGluLW1lbW9yeSBzb2x1dGlvbg0KKiBtaW5pbWFsIG92ZXJoZWFkIHRvIHRoZSBj
-b25zb2xlIHN1YnN5c3RlbQ0KDQo=
 
+--1SCsqEh8xPmsTE0y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 20, 2023 at 03:42:13PM -0300, Fabio Estevam wrote:
+
+> Hi Tom,
+>=20
+> Please pull these fixes from u-boot-imx, thanks.
+>=20
+> The following changes since commit 3ac22891cfc0dc6d8eec25d2b0fbdd2eb8f3d3=
+ed:
+>=20
+>   Merge tag 'u-boot-imx-20231214' of https://gitlab.denx.de/u-boot/custod=
+ians/u-boot-imx (2023-12-15 08:22:31 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-master-20231220
+>=20
+> for you to fetch changes up to 1f25c75619d7fdacbaa8c2c9c152ebc9aec807b3:
+>=20
+>   ARM: dts: imx: Power off display output on Data Modul i.MX8M Mini/Plus =
+eDM SBC (2023-12-18 20:25:57 -0300)
+>=20
+> u-boot-imx-master-20231220
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--1SCsqEh8xPmsTE0y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDViMACgkQFHw5/5Y0
+tywsjAv/VXe6lQJmD9BKneuCiRO1TXc949W3LwnTz7Ib0azcHAzrFFKkmH6pAMtj
+82e8akEdlssbAVk4xpBGsxIsh4IeznLRbAoWNs1F1cGv3lRJwh1b0qCeFKgrdNsa
+0lrz/hb6ytPN/vk56uuOAtZGBBQZFRBLgLFfWDgvt+tUZotbbKQtv6/0hwWqDxXI
+8pRlm2qn3HrM57PvVzqj5oHd/3lo0dKSlVkfpjDY9lC3I2gawZPL0BO0vgqF3hkf
+HUhOlZTNKo0hAZLo6QojqJIC6b9dGkPB6lExJApwEJK8Q2qEUJQvl6VqkVdfXBdd
+PjAbRILJZrZAx7Ulb5a5HM5jPx+5CSa2YYCrc9Otv5V7SrWDQqTz2Xij85/aGULu
+Ftmuw6HtlTvkVyWboS/Jn7QM79edXhrzfsxSm+gwpvLURYxx/CE3KuT7XnIEBHKH
+slSlb7Q8R9UaaMj1h8STzFg6BByiEnKqAaoSxgr9oO8kOLiE5ahT+++TKZC4Uq7h
+PTebUV0J
+=fmH+
+-----END PGP SIGNATURE-----
+
+--1SCsqEh8xPmsTE0y--
