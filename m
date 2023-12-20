@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CFE5C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 322D6C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 21:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843E58784F;
-	Wed, 20 Dec 2023 22:01:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0046887854;
+	Wed, 20 Dec 2023 22:01:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AWg8XCHc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lO9A6edG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E129877F3; Wed, 20 Dec 2023 22:01:47 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id B9C8C8784D; Wed, 20 Dec 2023 22:01:54 +0100 (CET)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D69C8784D
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:01:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 069A68785B
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:01:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-35f71436397so316585ab.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:01:45 -0800 (PST)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5e784ce9bb8so1066797b3.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:01:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703106104; x=1703710904; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703106109; x=1703710909; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nOkVFC1xIhmrIwzXVj9pciWDDk+6RUTQDf6nrXJTIOk=;
- b=AWg8XCHcckYgRIUSJ+R7H20dAVpVHBO2f6DZzvSg/X3Zzs20SN58eJVxqZuDWevBLL
- E88UvDWWwx1+5INcXoE4SeWK5/7raLDrdZJy0XVmYe4ZULHe3w+dVLK8Sa/dcbRtWqoI
- FCHh/bEzsUnI5TL4wiAGuk4+ODvdXANZKnBaE=
+ bh=c42vy1dICOvnuKneboao5AS+gYA8XTDQ4QD+kVX4m4E=;
+ b=lO9A6edGqJrT8/FupTEH5G+IOuBIOvzHKepCpy2/4VlWhtkr6xplsEsCswbBgZhvjp
+ 3VT7rEwEMP/QigSTo+QtH0A/r+xsWgRjLrJ85iCPj8IjOTsVbmTIYqtDPMBaD291z29x
+ G4fznPk0NkRXJ1jLLenhhM+8dC7L6vVkMhbnU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703106104; x=1703710904;
+ d=1e100.net; s=20230601; t=1703106109; x=1703710909;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nOkVFC1xIhmrIwzXVj9pciWDDk+6RUTQDf6nrXJTIOk=;
- b=g5nAADNre8KevhF19itXqHbATl2ObGxi0zLYv2SXM/gAkdCCyeVHvxLclKMImA6tuH
- z4YPIwveGPqSX+KkJiv6Al8heg/7Rks7rAv/VRAQDvNh9xxhw/LmoM3H1EnPRqc/Xq6o
- bf6JIo5FBNk3aBcIf3EuabdZR85sI50ZWdi+kzJdUJpXCw+3CP+1sU4fyUimuJdUG1Vo
- FFn89aCNV2OlPn2U89lqDo9i5/xOKnVbZi2bNukTFV4EdGp+TfuDwrXBHyokuRupjqau
- N285lX/LGMWwxN+Q4TxOmbTAAf/+j5ynYUZXzyAk/3K4rz8676DKMFppz/z5u0vZ2Vxy
- JQaQ==
-X-Gm-Message-State: AOJu0Yyo7HknTC5Cdt9mBd01YZhp68/LYGM3Soe1gW/2GpAYxmYAivxN
- S9gjsMxpaalb4CgQ0tOtrRayFA==
-X-Google-Smtp-Source: AGHT+IEsVpBNN0CR+ShD77Q11wBBYWc+vvLiburPTjn/VQU7aK5PPqVYlwR+pYGyrq3VfNms39tfFQ==
-X-Received: by 2002:a05:6e02:198f:b0:35f:d1aa:f41c with SMTP id
- g15-20020a056e02198f00b0035fd1aaf41cmr384909ilf.10.1703106104168; 
- Wed, 20 Dec 2023 13:01:44 -0800 (PST)
+ bh=c42vy1dICOvnuKneboao5AS+gYA8XTDQ4QD+kVX4m4E=;
+ b=nM2gdbagG9Pnpj4Lk+b9j7CWQhO+6SkkKlKJimO2qz/9pa/+lveTythRhWljnbffoV
+ ugWSQfZDJVe03yY1Rh5FVtKzJMT2BPScF4XB/8/+B2PWu/y3PqXYykd2KvmHdGo2fJPM
+ gpfsq7dOBwbtibXGBTE8I7i4KYmQIMVFKJlEwcIxcaWhK1flju7ZCYVMaFsPCV1e26Dn
+ doiA6n2UTAPChyA2PVM8LAFXEGR8rN3OBtAIxb5JrqAB9LgRe4EPWoYIUs68Kq26XHKQ
+ apjsbB9QsR+mRVGwK75GcU14cmGsa8a1v0U1keT7CO681gb+OILLQEajWmC+aVLgVCCB
+ nnCA==
+X-Gm-Message-State: AOJu0YyXxjmEQS9y9Uey/glq/055oGS9c3E/DouXYvVUVFMQR4VDcAZw
+ YXs68bExFnobxFXcA1LNYusbGzXjb+Fco8uG6Uww1l2LVfw=
+X-Google-Smtp-Source: AGHT+IG8WIUmokFQe4XdxlD4LmlNtS9wTeVG8aluqV3Y+1ZdQVKp1X5YPD8TWvwHuFqjQ5/yXLg69g==
+X-Received: by 2002:a81:5385:0:b0:5e5:2f0:3fe7 with SMTP id
+ h127-20020a815385000000b005e502f03fe7mr227399ywb.0.1703106108430; 
+ Wed, 20 Dec 2023 13:01:48 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
  [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
  by smtp.gmail.com with ESMTPSA id
- z201-20020a0dd7d2000000b005d9729068f5sm238885ywd.42.2023.12.20.13.01.43
+ a187-20020a818ac4000000b005e4a023fcf3sm230575ywg.92.2023.12.20.13.01.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 13:01:43 -0800 (PST)
-Date: Wed, 20 Dec 2023 16:01:41 -0500
+ Wed, 20 Dec 2023 13:01:47 -0800 (PST)
+Date: Wed, 20 Dec 2023 16:01:46 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Nikita Shubin <nikita.shubin@maquefel.me>
-Cc: Simon Glass <sjg@chromium.org>, linux@yadro.com,
- Nikita Shubin <n.shubin@yadro.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Ovidiu Panait <ovidiu.panait@windriver.com>,
- Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
- Stefan Roese <sr@denx.de>, Daniel Golle <daniel@makrotopia.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] imxtract: specify max gunzip size
-Message-ID: <20231220210141.GU2513409@bill-the-cat>
-References: <CAPnjgZ2qsvtFui1Q97t8TOxMXWq8LLzvr=KEdNU=MG9Vm0aJ=g@mail.gmail.com>
- <20221219080527.17996-1-nikita.shubin@maquefel.me>
+To: Ayoub Zaki <ayoub.zaki@embetrix.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] rsa: use pkcs11 uri as defined in rfc7512
+Message-ID: <20231220210146.GV2513409@bill-the-cat>
+References: <20230826115329.12938-1-ayoub.zaki@embetrix.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="t1eLtDfC22y6Vc1a"
+ protocol="application/pgp-signature"; boundary="idzH8P/Suv78w2SF"
 Content-Disposition: inline
-In-Reply-To: <20221219080527.17996-1-nikita.shubin@maquefel.me>
+In-Reply-To: <20230826115329.12938-1-ayoub.zaki@embetrix.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,48 +92,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---t1eLtDfC22y6Vc1a
+--idzH8P/Suv78w2SF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 19, 2022 at 11:05:27AM +0300, Nikita Shubin wrote:
+On Sat, Aug 26, 2023 at 01:53:29PM +0200, Ayoub Zaki wrote:
 
-> From: Nikita Shubin <n.shubin@yadro.com>
+> pkcs11 : change engine uri to use full pk11-URI as defined in:
 >=20
-> Specify max gunzip size from config to override SYS_XIMG_LEN
-> default value wich is 0x800000. In case we have a large portion of FIT
-> image, for example gzipped kernel with decompressed size large than
-> 0x800000 we should enlarge imxract area, otherwise extracting it will
-> fail.
->=20
-> It used to be a hardcoded define in cmd/ximg.c and we are moving it to
-> config.
->=20
-> Signed-off-by: Nikita Shubin <n.shubin@yadro.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> https://www.rfc-editor.org/rfc/rfc7512.html
+> Signed-off-by: Ayoub Zaki <ayoub.zaki@embetrix.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---t1eLtDfC22y6Vc1a
+--idzH8P/Suv78w2SF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVjUACgkQFHw5/5Y0
-tyzyWQv/bNzCM0OJugBfUVyyCMUTOmk2+68rmd+ui8gaqw9JAZNdzeGuOhmAUizp
-xCdwoxZbllVW6yL6H7kmNRhsizERWu2cP3hvYRdY4CY9zPwIPSSelI7HfgvZx9Li
-LSZzWZiQNtEy8V+GWmhMvzL2CYLynzp6Mm03qb488zRe9yNHNjqAZi7iwrD39wA+
-/4raziriHR55G+O3By/A++jINyGsw5drmH2jf8eaPWQNu950iDN35V3ItmR001+X
-icYKkalh/ZpI++dcqqeVGPmMtKamKOl2FVR6zBQaqZDAf1LmGfVpMC/smKR8erqX
-vt+BBe1+ZsJp2II9IDVmvN0UirHwmNPk/FZfseCS1Y55pkemFNj3TUmjJ1yTgI+U
-QQ4YxShg5CgBBbd3QT7njci9KrWB0M0Qvxf4SmDx68GWDDSTVfBZm82FaehlRBvJ
-83pfRgWX6HNo9FqpnYLmrHFIiDzpyz1E5aKW32u01n2NU/cG8nDr/dh7Xqb0jw9C
-l9jTlcSC
-=T1yd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDVjoACgkQFHw5/5Y0
+tyxXkQwAlAk9qwtzRn5d2KGIAz+9RgeP9xxzALL83EhaFYnvx9UP99ZxYm/tRA1H
+HhV5cjHoNkgYPxInIeUvc6T4rZwFRZ50WyqcQp9ozTP7kYt0rOlzZu4AnfKyARO6
+dfCNU/5LVPgJ8jClK/0bnx9+gk9HN8Ltrd32cBgRs0eK7p193rcfkBzdmqdgTJCv
+1QBKJXFGcYg910sVVyU0nSS1ilkjF99TKH+oOKYCXud3RDuy89QSPog/GvqSYIO7
+5kschcaRZan69tFIDj/6jFYHt5e/E1k/RxgCb8rvhcmPjdBkRgTkePFC6NKug7ft
+upFBD4Sk9SNr0o+XzjB8zSX4VuT5/VFSAJ5+NMu+mXZ7XNZz+GeZMkNCl34pzZxw
+/OjbgFrwXcj1uvw8qwL+CVZPco2VUrBDCly3VRUmXq6mEplZNYXFyXCSVA9V2EI1
+wnWoH0eUmIIizybLYxMk6rXdCQuO9Zm3duD6dgpOckkIIdKln6s07iLON6ybEZjh
+FrFNTrdd
+=bHGd
 -----END PGP SIGNATURE-----
 
---t1eLtDfC22y6Vc1a--
+--idzH8P/Suv78w2SF--
