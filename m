@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8194C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:48:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F5FBC46CD3
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 12:52:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68FE2874D5;
-	Wed, 20 Dec 2023 13:48:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 708EF87650;
+	Wed, 20 Dec 2023 13:52:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I6gX35st";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mBilnYZm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 027ED8772A; Wed, 20 Dec 2023 13:48:49 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B52A7876D5; Wed, 20 Dec 2023 13:52:38 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DFDF874B1
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:48:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A6DA874D5
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 13:52:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-50e3cde8ab8so733047e87.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 04:48:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703076526; x=1703681326; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=smbOsUBEsGc4caUVMoi7EFhMuHSsN1bzdtNsmKmN8ZY=;
- b=I6gX35stlOlHDcKvY756tO0BIpN/NB0KN2AtPVH6BkcbxYmXC443FJOD2crzXKqnHa
- rQiW5KJ1aqKpu7P/93C7ZP6k+SRpLCRgg+dl1pL2sG+icVOAmIpkygWBszvSTJSq7Ady
- s6tS26zKy/aXiMKwkkyRk+yngkwm6fn35vxRKDdw/bPzX2v5erSycifzZIeiHhGu5o36
- 5BANtgHkYgRjXHlPW6jtbAFz6juleso7d7mLXNaPaNaWeldndVmiX2bxFxYWL5bEkKFm
- 46+7gvKPq/9/R3CivifLweXH9EYmzZejwRhmN6/NgxQdKaEOHao4T1QwKO5P0u6cCbxy
- B6IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703076526; x=1703681326;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=smbOsUBEsGc4caUVMoi7EFhMuHSsN1bzdtNsmKmN8ZY=;
- b=MxMf370/cs7VFGHr/QlzT85i4NJvVfdHbUw5s72WahOmOukorTvoCbhYpAvDcAWJ4l
- 335x5zciH/7M++vXLUaNcAG3G2fEQyjgXKGFrXEoR1Ar+79lOz+jbCBBqq3yCSUdaL7n
- 84SvcPJanwUdIhEu5wy455LCrY9RoCV/bLHFujb0K+LvMtJID+aajX0G8rVeRRT/J+EC
- maf2z2v+GZNYu7IRW1K1L0ul5mgxbXpGIj3i32Qkf95/DzmlY/pZub+16Z5boeWId3hT
- JcCii1jOHVT/GM0r7CGMysXCeA595X+q6GZSieIeklhKrm9g5M0RnybMIRwhR71XaBek
- iS5Q==
-X-Gm-Message-State: AOJu0Yz5fE3ILMwia8WRivZQ71F8tSJk05TOuUACYxJop319cmS3AGyy
- 7VhidD3qNE/fmejUW9qMA6aFVL/LKIZO8erg6bPbAJIL2nWmPw==
-X-Google-Smtp-Source: AGHT+IGqQFE0JkMsF8DsbFdPGfdvsaf0btATaZKPWkdFJwpGUqSQtnIC6CUps0/fu0cJMgvmbSiogm7t+tlCUfp+d4I=
-X-Received: by 2002:a05:6512:4898:b0:50e:26d2:8391 with SMTP id
- eq24-20020a056512489800b0050e26d28391mr1579732lfb.31.1703076526251; Wed, 20
- Dec 2023 04:48:46 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BKCqKVa096463;
+ Wed, 20 Dec 2023 06:52:20 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1703076740;
+ bh=uqdwUPlykc0H4ank25Zu7c682b1I0tqnTFyfnS9sh3k=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=mBilnYZmZXn2UV9RgIZiqAqqS+6lSM3+vsVrUlZ3oNfxwkEAh//eaim1jUJCiupnq
+ EDNyb4dL9kM3lraYdzJaGLKablN21HDun45Fh88WvIRJWmLRJZbzZs6V10j6+sbcW2
+ bkL3bbF66HGNhWFPeSU6OFPnvw4xVw7kzgkpIwww=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BKCqK41013710
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 20 Dec 2023 06:52:20 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
+ Dec 2023 06:52:20 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 20 Dec 2023 06:52:20 -0600
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BKCqKST064444;
+ Wed, 20 Dec 2023 06:52:20 -0600
+Date: Wed, 20 Dec 2023 06:52:20 -0600
+From: Nishanth Menon <nm@ti.com>
+To: MD Danish Anwar <danishanwar@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>,
+ Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>, <srk@ti.com>,
+ <r-gunasekaran@ti.com>
+Subject: Re: [RFC PATCH 10/16] arm: dts: k3-am65-main: Add ICSSG IEP nodes
+Message-ID: <20231220125220.ucobgoruw7vdjqx6@tumble>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-11-danishanwar@ti.com>
+ <20231219174601.GA2513409@bill-the-cat>
+ <8a4fe530-370d-469c-a518-f52b3e65658d@ti.com>
 MIME-Version: 1.0
-References: <20231219150408.10949-1-heinrich.schuchardt@canonical.com>
- <20231219150408.10949-10-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231219150408.10949-10-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 20 Dec 2023 14:48:10 +0200
-Message-ID: <CAC_iWjJi5hvTZCO0LgSaT6qmOskRrwbxHGCSiHwxyybdfu5gxg@mail.gmail.com>
-Subject: Re: [PATCH v4 9/9] arm: enable support for QEMU firmware tables
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <8a4fe530-370d-469c-a518-f52b3e65658d@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,39 +89,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Dec 2023 at 17:04, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Enable the QEMU firmware interface if ACPI tables are to be supported on
-> the QEMU platform.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> v4:
->         no change
-> v3:
->         no change
-> v2:
->         new patch
-> ---
->  board/emulation/qemu-arm/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/board/emulation/qemu-arm/Kconfig b/board/emulation/qemu-arm/Kconfig
-> index ac2d078f42..e21c135e86 100644
-> --- a/board/emulation/qemu-arm/Kconfig
-> +++ b/board/emulation/qemu-arm/Kconfig
-> @@ -5,6 +5,7 @@ config TEXT_BASE
->
->  config BOARD_SPECIFIC_OPTIONS # dummy
->         def_bool y
-> +       select QFW if ACPI
->         select QFW_MMIO if CMD_QFW
->         imply VIRTIO_MMIO
->         imply VIRTIO_PCI
-> --
-> 2.40.1
->
+On 10:17-20231220, MD Danish Anwar wrote:
+> Hi Tom,
+> 
+> On 19/12/23 11:16 pm, Tom Rini wrote:
+> > On Tue, Dec 19, 2023 at 04:04:12PM +0530, MD Danish Anwar wrote:
+> > 
+> >> The ICSSG IP on AM65x SoCs have two Industrial Ethernet Peripherals (IEPs)
+> >> to manage/generate Industrial Ethernet functions such as time stamping.
+> >> Each IEP sub-module is sourced from an internal clock mux that can be
+> >> sourced from either of the IP instance's ICSSG_IEP_GCLK or ICSSG_ICLK.
+> >> Add the IEP nodes for all the ICSSG instances.
+> >>
+> >> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+> >> ---
+> >>  arch/arm/dts/k3-am65-main.dtsi | 36 ++++++++++++++++++++++++++++++++++
+> >>  1 file changed, 36 insertions(+)
+> > 
+> > What's the status of all of the DT side of this, upstream?
+> > 
+> 
+> All of the DT patches are already part of upstream linux kernel except
+> for patch 08/16. This patch is currently in linux-next and will be in
+> linux in 6.8-rc1.
+> 
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+NAK.
+
+Send a sync at 6.8-rc1 and then start working - DONOT SEND patches
+modifying SoC dtsi or evm files directly in u-boot.
+
+I think you need to start talking to other folks in the team who have
+have received the same feedback.
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
