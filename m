@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3141FC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B12C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 09:18:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8081087480;
-	Wed, 20 Dec 2023 10:17:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 69E6C8752B;
+	Wed, 20 Dec 2023 10:18:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nY0zgoxI";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="d13zkR3s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0721A8755B; Wed, 20 Dec 2023 10:17:23 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1341287695; Wed, 20 Dec 2023 10:18:24 +0100 (CET)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1348886FD5
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:17:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9D0587480
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 10:18:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703063839; x=1703668639; i=xypron.glpk@gmx.de;
- bh=Yleul7H8+nbGr2Pb71l9zNbLTcykMWHCsXgYfiv+dLU=;
- h=X-UI-Sender-Class:Date:From:To:Subject:In-Reply-To:References;
- b=nY0zgoxIvzpDrkTvIPDt6TLVGY/3noQ7H1iqd6z6VO4mrg+2i9yxoYen1X3PFGzu
- 9CfryNQgA2TkwyQAfS47DM8TU4+f5DgaTA34JxzVcZttPKobPrwi0Qa7Jn9yG0NjC
- xv8f4hGcXmiZh8JaS62zfsimzdzzPWSviPfMJcUlX/bzJjhE45lT61SYVUScWlr9A
- +/FU9dAejaLNowfBVfzB2C/b2Xb9SwK3U/sRVHz78pwtGkpoNNHd6R/F8rgFvbtzJ
- zP7QYAD8sxUIuEOCXKMuomxgc6K1wROmkflVjm5PoCvDluX0LSBMU0XoXF5cR+JeD
- jeIBO8j6026DkUH1/w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MSc1B-1rinSQ1CDR-00Sz7n; Wed, 20
- Dec 2023 10:17:19 +0100
-Date: Wed, 20 Dec 2023 10:17:18 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- trini@konsulko.com, ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v3_3/4=5D_net=3A_tftp=3A_remove_?=
- =?US-ASCII?Q?explicit_efi_configuration_dependency?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAPnjgZ222JWVWws04Tk93QommHXY6=qJFfiQfosYs5FG4JVGrA@mail.gmail.com>
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-4-takahiro.akashi@linaro.org>
- <CAPnjgZ0qw7j3TCMN+xH6ONaWvUyRvkWpsZJd2PQWHYBhZkTD6g@mail.gmail.com>
- <ZYDhClYupQxNJ++a@octopus>
- <CAPnjgZ222JWVWws04Tk93QommHXY6=qJFfiQfosYs5FG4JVGrA@mail.gmail.com>
-Message-ID: <CD73D0D7-1040-4AD9-B5CD-741146DE0C34@gmx.de>
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1703063899; x=1705655899;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=CrtlMaWQbpLj1DNuPPiKp33iyz3qk/jQHPFLj8K3QMw=;
+ b=d13zkR3s2QpmuZ0FmMDGzRS//XNviOvDGM4VgIU0aa9LprR80Am8dH2+rqG+axWP
+ Vl6EJyDjhWI7txUhpMg5JYtPUc2VleYfBj6laseebYPddDxcWTbm2KDE/qUe6tPg
+ LJ05mc+xkQhUrQ9tQ3O+hnME7jY/twgeMp8acrbUegY=;
+X-AuditID: ac14000a-fbefe7000000290d-98-6582b15bb93c
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id EB.31.10509.B51B2856;
+ Wed, 20 Dec 2023 10:18:19 +0100 (CET)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 20 Dec
+ 2023 10:18:19 +0100
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, <nm@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v4 0/2] *** Add support for phyCORE-AM62x ***
+Date: Wed, 20 Dec 2023 10:18:09 +0100
+Message-ID: <20231220091811.80373-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:MDY+UkNrxVBSvtSr5lfg588aNduYmqFPk9+tNyrsG4NDZnOg0Fh
- N6Mjukt4eajd6w1LfBBrvpVZpfgu20KeGEr3RIgv+4pNpLRwe2KaG5jXsZG2Xmw6H69ub+N
- ds1/HTXO+JRe3SMeZjmOcaAfyOEwCjtDrtd5bmN1NywVV2t5O85Ga2ezWYqcBsk+NLFt4jd
- ooFneqUvh48mumtjv1L5Q==
-UI-OutboundReport: notjunk:1;M01:P0:RZsmnz9fRIA=;BDFuUHxLhuPLUsimwu3/9Cpzor/
- Xb8x8xzpIO+69IrSY0xQhpfNnCZRjkQ8UGNxQ88MVs3xKhXRJKp6aCSX8cmW+Vc2ZQWjryxSn
- uI56oJmvKLdgEgZ5ylmQCS7AEwWBfe0YrxZ/jYLhPQlnItXVn5tuiGrxDoYgC4QspCEC23+0X
- KZEvSlvGGQNlncjKMzXwAk0Y8cw2607pVYe1mZqITQ1px+NDdgwk/8j6rNciIFHtLCOxk88+Z
- Kw8l6yJ0q5Oy2YJ67/4KlscH/5C9REM1Sk8whlXsT22/1EL1mOK6ZOmOeNaBuf1tbcps4cwmu
- O4FCM+G6XhNbSMJDfSShhA+1DKtqmQSu5DHJ/XtzPz1wLUV9c8M60l0TBEUSMHaaD6kaz7VNI
- cOaXHam2j/WG+aplj09e8u7VEhbAK6KDmFPzs5JtBW1u2FpuR3fvwnRBAK5GO8vbwqHB4JC5I
- Y+4/Ln5YSKKcJhX+YRZUUR2oasi0BROqKY8NDISaoHmqiML5ecsmb0Xx4+wCoRwQ3Kir5JCc2
- R8pxczRT1O/H9gMzQd/k/weSYYJznRClUuF5ZgZVuskzNHBPOAhMbgqJ4MfOaLPEOSBMrgJun
- xyvyaU1FZmeAlRrOQwcpJKklqTd5BxpTGyUMkb0yw8U4QXC2/hGQ9hqepT1Rh4DI3kzkSr7rA
- JE98iYTW0PDdwZ8JiZ1VADmPXIDWSuz1ldCJ7EI9NS34w98YYaIqjT5T9iWJEGtqt8GOgyAvU
- FR1h5cVIBnGTICqdYCTeT9WZPVdeNGU1/mvwnx6dMWqbYs89yJd8rrcKcZBo7x1onqcpp0v2j
- I7LMyLAiEULfLRbDoqRZzmnRnPQ9Olt4r43Byt07UomtU4+VLRakbXcX1usTZFBlNR+e9tIx1
- +mD+b6ZQDIUygwRBdmT82DpfjcmAobG2QeJy8Kd9NnojvpE/tfPzy6HwRj/Nyv5El4/+jwwZD
- oFxG+g==
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWyRpKBRzd6Y1OqQcMfNYs3P84yWUydtJnd
+ 4u3eTnaL7nfqDiwerw6sYvc4e2cHo0d/dwurx/Eb25kCWKK4bFJSczLLUov07RK4Mq6fusZc
+ sEa8Yurp36wNjD+Euhg5OSQETCQ+znvF2MXIxSEksJhJ4tm5E+wQzmNGibdbm5lBqtgE1CXu
+ bPjGCmKLCEhJvOzcCBZnFnCUePrpPguILSxgK9Gw5zQbiM0ioCpxpWsCkM3BwStgLnHgOT/E
+ MnmJmZe+s4PYvAKCEidnPmGBGCMv0bx1NtRICYmDL16A2UJA8ReXlrPA9E4795oZwg6VOLJp
+ NdMERoFZSEbNQjJqFpJRCxiZVzEK5WYmZ6cWZWbrFWRUlqQm66WkbmIEha0IA9cOxr45HocY
+ mTgYDzFKcDArifDu7WxKFeJNSaysSi3Kjy8qzUktPsQozcGiJM67uiM4VUggPbEkNTs1tSC1
+ CCbLxMEp1cBoqbIh6MCaWTZ6NiYvrXVmNdYtqzPZoWyalDvPc86kySlzOEJcVM5837r/TVaq
+ 5z2W/T8Xnyv9sOzsktvB/wrklirP4Zwm0X62wmvJnuBdVktnJodZTQ7mLOT4zVxqJat4S5Dz
+ w9baqq8bF0fJ/54xl/HHDBnj70tC3haJ8RcrF278NTs7cDGjEktxRqKhFnNRcSIAbwEovEkC
+ AAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,100 +85,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+v4:
+  - Rebase on current next
+  - Drop schema file overrides from binman
 
+v3: https://lists.denx.de/pipermail/u-boot/2023-December/539779.html
+v2: https://lists.denx.de/pipermail/u-boot/2023-November/538971.html
+v1: https://lists.denx.de/pipermail/u-boot/2023-October/535750.html
 
-Am 20=2E Dezember 2023 05:46:16 MEZ schrieb Simon Glass <sjg@chromium=2Eor=
-g>:
->Hi,
->
->On Mon, 18 Dec 2023 at 17:17, AKASHI Takahiro
-><takahiro=2Eakashi@linaro=2Eorg> wrote:
->>
->> Hi Simon,
->>
->> On Mon, Dec 18, 2023 at 08:01:46AM -0700, Simon Glass wrote:
->> > Hi AKASHI,
->> >
->> > On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
->> > <takahiro=2Eakashi@linaro=2Eorg> wrote:
->> > >
->> > > Now it is clear that the feature actually depends on efi interfaces=
-,
->> > > not "bootefi" command=2E efi_set_bootdev() will automatically be nu=
-llified
->> > > if necessary efi component is disabled=2E
->> > >
->> > > Signed-off-by: AKASHI Takahiro <takahiro=2Eakashi@linaro=2Eorg>
->> > > ---
->> > >  net/tftp=2Ec | 10 ++++------
->> > >  1 file changed, 4 insertions(+), 6 deletions(-)
->> > >
->> >
->> > I have the same comment here as the 'fs' patch=2E
->> >
->> > > diff --git a/net/tftp=2Ec b/net/tftp=2Ec
->> > > index 88e71e67de35=2E=2E2e335413492b 100644
->> > > --- a/net/tftp=2Ec
->> > > +++ b/net/tftp=2Ec
->> > > @@ -302,12 +302,10 @@ static void tftp_complete(void)
->> > >                         time_start * 1000, "/s");
->> > >         }
->> > >         puts("\ndone\n");
->> > > -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
->> >
->> > Shouldn't this depend on your new CONFIG? What happens if EFI_LOADER
->> > is not enabled?
->>
->> The trick is in efi_loader=2Eh=2E
->> If EFI_LOADER (more specifically CONFIG_EFI_BINARY_EXEC) is not defined=
-,
->> this function gets voided=2E  See patch#1 in this version=2E
->>
->> I took this approach in order not to make users much worried about
->> what config be used as they are not familiar with UEFI implementation=
-=2E
->
->OK, but we really need to delete this function, so what is the plan
->for that? The info that EFI needs should be passed to the bootefi()
->function, not set in a global=2E
+Wadim Egorov (2):
+  board: phytec: am62x: Add PHYTEC phyCORE-AM62x SoM
+  doc: board: phytec: Add phyCORE-AM62x
 
-Hello Simon,
+ arch/arm/dts/Makefile                         |    4 +-
+ .../arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi | 2190 +++++++++++++++++
+ arch/arm/dts/k3-am62-phycore-som.dtsi         |  324 +++
+ .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  166 ++
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   |  266 ++
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  314 +++
+ arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts  |  119 +
+ arch/arm/mach-k3/am62x/Kconfig                |   17 +
+ board/phytec/phycore_am62x/Kconfig            |   33 +
+ board/phytec/phycore_am62x/MAINTAINERS        |   15 +
+ board/phytec/phycore_am62x/Makefile           |    8 +
+ board/phytec/phycore_am62x/board-cfg.yaml     |   36 +
+ board/phytec/phycore_am62x/phycore-am62x.c    |   59 +
+ board/phytec/phycore_am62x/phycore_am62x.env  |   23 +
+ board/phytec/phycore_am62x/pm-cfg.yaml        |   12 +
+ board/phytec/phycore_am62x/rm-cfg.yaml        | 1088 ++++++++
+ board/phytec/phycore_am62x/sec-cfg.yaml       |  379 +++
+ configs/phycore_am62x_a53_defconfig           |  115 +
+ configs/phycore_am62x_r5_defconfig            |  130 +
+ doc/board/phytec/index.rst                    |    1 +
+ doc/board/phytec/phycore-am62x.rst            |  158 ++
+ doc/board/ti/k3.rst                           |    1 +
+ include/configs/phycore_am62x.h               |   15 +
+ 23 files changed, 5472 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som-ddr4-2gb.dtsi
+ create mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
+ create mode 100644 arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am625-r5-phycore-som-2gb.dts
+ create mode 100644 board/phytec/phycore_am62x/Kconfig
+ create mode 100644 board/phytec/phycore_am62x/MAINTAINERS
+ create mode 100644 board/phytec/phycore_am62x/Makefile
+ create mode 100644 board/phytec/phycore_am62x/board-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/phycore-am62x.c
+ create mode 100644 board/phytec/phycore_am62x/phycore_am62x.env
+ create mode 100644 board/phytec/phycore_am62x/pm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/rm-cfg.yaml
+ create mode 100644 board/phytec/phycore_am62x/sec-cfg.yaml
+ create mode 100644 configs/phycore_am62x_a53_defconfig
+ create mode 100644 configs/phycore_am62x_r5_defconfig
+ create mode 100644 doc/board/phytec/phycore-am62x.rst
+ create mode 100644 include/configs/phycore_am62x.h
 
-Bootstd is not the only way to boot=2E Please, do not forget the shell=2E
+-- 
+2.34.1
 
-The user loads a file with tftpboot=2E At some later moment the user execu=
-tes bootefi=2E
-
-We need a place where we store the device from which the image was loaded=
-=2E
-
-In future we might have a register of loaded files=2E But that is beyond t=
-he scope of this patch series=2E
-
-Best regards
-
-Heinrich
-
->
->
->>
->> -Takahiro Akashi
->>
->> > > -               if (!tftp_put_active)
->> > > -                       efi_set_bootdev("Net", "", tftp_filename,
->> > > -                                       map_sysmem(tftp_load_addr, =
-0),
->> > > -                                       net_boot_file_size);
->> > > -       }
->> > > +       if (!tftp_put_active)
->> > > +               efi_set_bootdev("Net", "", tftp_filename,
->> > > +                               map_sysmem(tftp_load_addr, 0),
->> > > +                               net_boot_file_size);
->> > >         net_set_state(NETLOOP_SUCCESS);
->> > >  }
->> > >
->> > > --
->> > > 2=2E34=2E1
->
->Regards,
->Simon
