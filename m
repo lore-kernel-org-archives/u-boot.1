@@ -4,96 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B523C46CCD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 19:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE28EC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 19:58:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88AD787705;
-	Wed, 20 Dec 2023 20:45:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 567F887824;
+	Wed, 20 Dec 2023 20:58:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Pw/mkdth";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="J74HVrTm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 827508781E; Wed, 20 Dec 2023 20:45:41 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B844187828; Wed, 20 Dec 2023 20:58:28 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E904F8715C
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 20:45:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D953B87808
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 20:58:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C5BBA12009C;
- Wed, 20 Dec 2023 22:45:37 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C5BBA12009C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1703101537;
- bh=7C7hCsQ3xuhnjSgcxxHS6pdFwJfeXpiOmNf+kuXq6S4=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=Pw/mkdth5yz1aRcDgjCwDZH45FZ/oVDsIgm+JmEDcj05N5e3gHo1cz8J5b7T58KRG
- BDRQ21ByfOzdi76ASE2Ijzr4jU3mNJi6CLdETFQpbikMYxWwTCkKwmXXxUKeI+8C/b
- RNlsEP+ZreNL5V1wybBYa/wZ8iHESq7JarkNckKXCTaFRq8YEan6npHB/uWf+r+NjS
- 20IhB/HJtY1bo4vanPcrSVLLNa75OoXJhWgAT15/vn/yOndi2AzXuM4ui9SlSpZ70C
- YNu7RceCb4yXIi6kw3zEJkEJA3ABrgET6/lnzh2tpwdJSRe4xbYMbKOyGZFiOcUSbZ
- JK1OlGyQzcWiA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 20 Dec 2023 22:45:36 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Wed, 20 Dec 2023 22:45:36 +0300
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>, Alexey Romanov <avromanov@sberdevices.ru>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>, 
- Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Sean Edmond <seanedmond@microsoft.com>, Tobias
- Waldekranz <tobias@waldekranz.com>, Stephen Carlson
- <stcarlso@linux.microsoft.com>, Michael Walle <michael@walle.cc>, Peter
- Robinson <pbrobinson@gmail.com>, Mikhail Kshevetskiy
- <mikhail.kshevetskiy@iopsys.eu>, Michael Trimarchi
- <michael@amarulasolutions.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>
-CC: <u-boot@lists.denx.de>, <kernel@sberdevices.ru>, <oxffffaa@gmail.com>,
- <avkrasnov@salutedevices.com>
-Subject: [PATCH v2] cmd: mtd: OTP access support
-Date: Wed, 20 Dec 2023 22:36:49 +0300
-Message-ID: <20231220193649.3154346-1-avkrasnov@salutedevices.com>
-X-Mailer: git-send-email 2.35.0
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1703102301;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RF2+hbMteVMaM0xel87rjxlWs6P2SWLb6UVXPXGqSUw=;
+ b=J74HVrTmeI3jiOiM3kEK6Thttz+0Ua3o3nb9ECEDEdxMbskmgXAETtsk79STGV3XyDgeDZ
+ DUmzrHItCkt8QrT10lXLqAZNd95vF5T7mBVZQ9gfCpaUiiE5jPwlGBdyTy2h4v0l2Ks0RL
+ imp5VumKQpMKRmQ5fLlT2cvQ9qnLeqUfKn4Gq4cC1KRdF/QoRqRHBsS0fadlwgyXRXBRCF
+ oJOv12bwPBU95LL0BkbM53NOP2I4Ag20x+OydWnMcHaAfGM/0B7V7fPX3dPrGS2RjLgppW
+ m/4PKGPemHFDxLXtp/IxrqdXuVZ29oCudglfZd/90pt1ktBzncsiS8P9fRPIqg==
+Date: Wed, 20 Dec 2023 20:58:18 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Cs=C3=B3k=C3=A1s_Bence?= <Csokas.Bence@prolan.hu>
+Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Daniel Golle <daniel@makrotopia.org>, Mark Kettenis
+ <mark.kettenis@xs4all.nl>
+Subject: Re: Passing boot logs to Linux?
+In-Reply-To: <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
+References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
+ <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
+ <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <16e633f9d4b1c426aaca510157479d65@manjaro.org>
+ <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
+ <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
+ <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+ <3900f4b15852d0af65635b3a794d34af@manjaro.org>
+ <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
+Message-ID: <d1350e2c5ff1da1cf10c92b1b49dec6b@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 182256 [Dec 20 2023]
-X-KSMG-AntiSpam-Version: 6.1.0.3
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 7 0.3.7
- 6d6bf5bd8eea7373134f756a2fd73e9456bb7d1a,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
- salutedevices.com:7.1.1; 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/12/20 18:48:00 #22710548
-X-KSMG-AntiVirus-Status: Clean, skipped
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,292 +78,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add access to OTP region. It supports info, dump, write and lock
-operations.
+On 2023-12-20 20:24, Csókás Bence wrote:
+> On 2023. 12. 20. 9:29, Dragan Simic wrote:
+>> On 2023-12-20 08:52, Csókás Bence wrote:
+>>> On 2023. 12. 20. 8:09, Dragan Simic wrote:
+>>>> On 2023-12-20 07:49, Csókás Bence wrote:
+>>>>> I don't think that would be a huge problem, Linux userspace can 
+>>>>> filter
+>>>>> ANSI control codes if it wants to. For now, I'd like a 
+>>>>> byte-for-byte
+>>>>> copy of the console, as-is, presented to Linux.
+>>>> 
+>>>> But wouldn't recording the control sequences as-is actually be 
+>>>> pretty
+>>>> much useless?  For example, some user can spend a few minutes
+>>>> scrolling through the boot menu, which would produce a fair amount 
+>>>> of
+>>>> nearly useless recorded data.
+>>>> 
+>>>> Moreover, if I'm not wrong, viewing or parsing such as-is data would
+>>>> actually require replaying the control sequences, to reproduce the
+>>>> actual console contents as it was recorded, which would be quite
+>>>> cumbersome.
+>>> 
+>>> It *is* useless, but most of the times the user won't be scrolling at
+>>> all anyways, that's why I don't think these few extra bytes would be 
+>>> a
+>>> problem.
+>> 
+>> Quite frankly, when it comes to computing in general, taking the "ah, 
+>> it
+>> probably won't happen" approach isn't the best thing to do.  We should
+>> aim toward covering properly even the edge cases, if you agree.
+> 
+> You're absolutely right; however, I did not say "it won't happen", I
+> said that Linux userspace can go deal with it if it happens, and if it
+> wants to. And that in my opinion, the best course of action for U-Boot
+> is to record *everything* (as it does now), and then userspace can
+> decide to filter it for eg. ANSI codes. But I think it's best to keep
+> the U-Boot code dead simple, and also supply the most data to 
+> userspace.
 
-Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
----
- Changelog:
- v1 -> v2:
-  * Remove warning that OTP can't be erased after write.
+Hmm, maybe you're right, but I'd have to think a bit more about it.  I'd 
+also have to go through the relevant parts of the U-Boot source code in 
+detail.
 
- cmd/Kconfig |   1 +
- cmd/mtd.c   | 224 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 225 insertions(+)
+>>> That's what I read as well. Is there support for U-boot to write and
+>>> Linux to read PStores?
+>> 
+>> No and yes, but U-Boot can already read pstore.  Please see
+>> doc/usage/cmd/pstore.rst for the U-Boot part, and
+>> Documentation/admin-guide/pstore-blk.rst for the Linux kernel part.
+> 
+> Irrelevant, as we only want to write out the console log to U-Boot, and
+> not the other way around (that's for collecting panic logs, which is
+> already implemented).
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 90e4ef93e0..c47523a03b 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1354,6 +1354,7 @@ config CMD_MTD
- 	bool "mtd"
- 	depends on MTD
- 	select MTD_PARTITIONS
-+	select HEXDUMP
- 	help
- 	  MTD commands support.
- 
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index eb6e2d6892..1ab69b108b 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <common.h>
- #include <console.h>
-+#include <hexdump.h>
- #include <malloc.h>
- #include <mapmem.h>
- #include <mtd.h>
-@@ -202,6 +203,219 @@ static bool mtd_oob_write_is_empty(struct mtd_oob_ops *op)
- 	return true;
- }
- 
-+static int do_mtd_otp_read(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct mtd_info *mtd;
-+	size_t retlen;
-+	off_t from;
-+	size_t len;
-+	bool user;
-+	int ret;
-+	u8 *buf;
-+
-+	if (argc != 5)
-+		return CMD_RET_USAGE;
-+
-+	if (!strcmp(argv[2], "u"))
-+		user = true;
-+	else if (!strcmp(argv[2], "f"))
-+		user = false;
-+	else
-+		return CMD_RET_USAGE;
-+
-+	mtd = get_mtd_by_name(argv[1]);
-+	if (IS_ERR_OR_NULL(mtd))
-+		return CMD_RET_FAILURE;
-+
-+	from = simple_strtoul(argv[3], NULL, 0);
-+	len = simple_strtoul(argv[4], NULL, 0);
-+
-+	ret = CMD_RET_FAILURE;
-+
-+	buf = malloc(len);
-+	if (!buf)
-+		goto put_mtd;
-+
-+	printf("Reading %s OTP from 0x%lx, %lu bytes\n",
-+	       user ? "user" : "factory", from, len);
-+
-+	if (user)
-+		ret = mtd_read_user_prot_reg(mtd, from, len, &retlen, buf);
-+	else
-+		ret = mtd_read_fact_prot_reg(mtd, from, len, &retlen, buf);
-+	if (ret) {
-+		free(buf);
-+		pr_err("OTP read failed: %d\n", ret);
-+		ret = CMD_RET_FAILURE;
-+		goto put_mtd;
-+	}
-+
-+	if (retlen != len)
-+		pr_err("OTP read returns %zu, but %zu expected\n",
-+		       retlen, len);
-+
-+	print_hex_dump("", 0, 16, 1, buf, retlen, true);
-+
-+	free(buf);
-+
-+	ret = CMD_RET_SUCCESS;
-+
-+put_mtd:
-+	put_mtd_device(mtd);
-+
-+	return ret;
-+}
-+
-+static int do_mtd_otp_lock(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct mtd_info *mtd;
-+	off_t from;
-+	size_t len;
-+	int ret;
-+
-+	if (argc != 4)
-+		return CMD_RET_USAGE;
-+
-+	mtd = get_mtd_by_name(argv[1]);
-+	if (IS_ERR_OR_NULL(mtd))
-+		return CMD_RET_FAILURE;
-+
-+	from = simple_strtoul(argv[2], NULL, 0);
-+	len = simple_strtoul(argv[3], NULL, 0);
-+
-+	ret = mtd_lock_user_prot_reg(mtd, from, len);
-+	if (ret) {
-+		pr_err("OTP lock failed: %d\n", ret);
-+		ret = CMD_RET_FAILURE;
-+		goto put_mtd;
-+	}
-+
-+	ret = CMD_RET_SUCCESS;
-+
-+put_mtd:
-+	put_mtd_device(mtd);
-+
-+	return ret;
-+}
-+
-+static int do_mtd_otp_write(struct cmd_tbl *cmdtp, int flag, int argc,
-+			    char *const argv[])
-+{
-+	struct mtd_info *mtd;
-+	size_t retlen;
-+	size_t binlen;
-+	u8 *binbuf;
-+	off_t from;
-+	int ret;
-+
-+	if (argc != 4)
-+		return CMD_RET_USAGE;
-+
-+	mtd = get_mtd_by_name(argv[1]);
-+	if (IS_ERR_OR_NULL(mtd))
-+		return CMD_RET_FAILURE;
-+
-+	from = simple_strtoul(argv[2], NULL, 0);
-+	binlen = strlen(argv[3]) / 2;
-+
-+	ret = CMD_RET_FAILURE;
-+	binbuf = malloc(binlen);
-+	if (!binbuf)
-+		goto put_mtd;
-+
-+	hex2bin(binbuf, argv[3], binlen);
-+
-+	printf("Will write:\n");
-+
-+	print_hex_dump("", 0, 16, 1, binbuf, binlen, true);
-+
-+	printf("to 0x%zx\n", from);
-+
-+	printf("Continue (y/n)?\n");
-+
-+	if (confirm_yesno() != 1) {
-+		pr_err("OTP write canceled\n");
-+		ret = CMD_RET_SUCCESS;
-+		goto put_mtd;
-+	}
-+
-+	ret = mtd_write_user_prot_reg(mtd, from, binlen, &retlen, binbuf);
-+	if (ret) {
-+		pr_err("OTP write failed: %d\n", ret);
-+		ret = CMD_RET_FAILURE;
-+		goto put_mtd;
-+	}
-+
-+	if (retlen != binlen)
-+		pr_err("OTP write returns %zu, but %zu expected\n",
-+		       retlen, binlen);
-+
-+	ret = CMD_RET_SUCCESS;
-+
-+put_mtd:
-+	free(binbuf);
-+	put_mtd_device(mtd);
-+
-+	return ret;
-+}
-+
-+static int do_mtd_otp_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct otp_info otp_info;
-+	struct mtd_info *mtd;
-+	size_t retlen;
-+	bool user;
-+	int ret;
-+
-+	if (argc != 3)
-+		return CMD_RET_USAGE;
-+
-+	if (!strcmp(argv[2], "u"))
-+		user = true;
-+	else if (!strcmp(argv[2], "f"))
-+		user = false;
-+	else
-+		return CMD_RET_USAGE;
-+
-+	mtd = get_mtd_by_name(argv[1]);
-+	if (IS_ERR_OR_NULL(mtd))
-+		return CMD_RET_FAILURE;
-+
-+	if (user)
-+		ret = mtd_get_user_prot_info(mtd, sizeof(otp_info), &retlen,
-+					     &otp_info);
-+	else
-+		ret = mtd_get_fact_prot_info(mtd, sizeof(otp_info), &retlen,
-+					     &otp_info);
-+	if (ret) {
-+		pr_err("OTP info failed: %d\n", ret);
-+		ret = CMD_RET_FAILURE;
-+		goto put_mtd;
-+	}
-+
-+	if (retlen != sizeof(otp_info)) {
-+		pr_err("OTP info returns %zu, but %zu expected\n",
-+		       retlen, sizeof(otp_info));
-+		ret = CMD_RET_FAILURE;
-+		goto put_mtd;
-+	}
-+
-+	printf("%s OTP region info:\n", user ? "User" : "Factory");
-+	printf("\tstart: %u\n", otp_info.start);
-+	printf("\tlength: %u\n", otp_info.length);
-+	printf("\tlocked: %u\n", otp_info.locked);
-+
-+	ret = CMD_RET_SUCCESS;
-+
-+put_mtd:
-+	put_mtd_device(mtd);
-+
-+	return ret;
-+}
-+
- static int do_mtd_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 		       char *const argv[])
- {
-@@ -552,6 +766,10 @@ static char mtd_help_text[] =
- 	"\n"
- 	"Specific functions:\n"
- 	"mtd bad                               <name>\n"
-+	"mtd otpread                           <name> [u|f] <off> <size>\n"
-+	"mtd otpwrite                          <name> <off> <hex string>\n"
-+	"mtd otplock                           <name> <off> <size>\n"
-+	"mtd otpinfo                           <name> [u|f]\n"
- 	"\n"
- 	"With:\n"
- 	"\t<name>: NAND partition/chip name (or corresponding DM device name or OF path)\n"
-@@ -562,11 +780,17 @@ static char mtd_help_text[] =
- 	"\t<size>: length of the operation in bytes (default: the entire device)\n"
- 	"\t\t* must be a multiple of a block for erase\n"
- 	"\t\t* must be a multiple of a page otherwise (special case: default is a page with dump)\n"
-+	"\t<hex string>: hex string without '0x' and spaces. Example: ABCD1234\n"
-+	"\t[u|f]: user or factory OTP region\n"
- 	"\n"
- 	"The .dontskipff option forces writing empty pages, don't use it if unsure.\n";
- #endif
- 
- U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
-+		U_BOOT_SUBCMD_MKENT(otpread, 5, 1, do_mtd_otp_read),
-+		U_BOOT_SUBCMD_MKENT(otpwrite, 4, 1, do_mtd_otp_write),
-+		U_BOOT_SUBCMD_MKENT(otplock, 4, 1, do_mtd_otp_lock),
-+		U_BOOT_SUBCMD_MKENT(otpinfo, 3, 1, do_mtd_otp_info),
- 		U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mtd_list),
- 		U_BOOT_SUBCMD_MKENT_COMPLETE(read, 5, 0, do_mtd_io,
- 					     mtd_name_complete),
--- 
-2.35.0
+Quite frankly, this is a bit confusing to me.  Why should it be 
+irrelevant, if we want to store the U-Boot console logs into the pstore, 
+and read them later in Linux?  That's exactly what you asked about, and 
+it was a good question.
 
+>> Another benefit of using pstore would be no permanently wasted RAM for
+>> the recorded console contents.  Also, having the data recorded to a
+>> storage device also goes along with providing permanent records.
+> 
+> I'm positively *not gonna save boot logs to disk*, as most embedded
+> systems have Flash-based storage media; writing to them on every boot
+> would be devastating.
+
+Writing 30-40 KB of data to an even remotely modern flash-based storage 
+media on each boot is pretty much nothing.  OTOH, writing 30-40 KB of 
+data to an SPI chip on each boot would be rather bad, but we aren't 
+going to do that for sure.
+
+To put things into perspective, I'm writing this on a Pinebook Pro with 
+an eMMC chip, and it has stored many GBs of data over a few years.  Even 
+high-endurance microSD cards are rather reliable in that regard.
+
+> Plus, I don't want the console subsystem to depend on any file/disk
+> operations/drivers.
+
+Well, the console would still work as usual even if logging to disk 
+would fail for any reason, which is similar to the serial console still 
+working if the graphical console fails.  Moreover, if the disk fails, 
+the system isn't be able to boot, so any RAM-based console logs would be 
+lost in that case.  All this makes the RAM-based logging no more 
+resilient to disk failures.
+
+> Therefore, it will be necessary to permanently keep the logs in-memory,
+> regardless of whether we use the PStore format or something else. 
+> Unless
+> Linux wants to copy it elsewhere (which probably will be memory
+> anyways). But maybe we could offer some option in the Linux driver to
+> release the logs, along with the associated memory region...
+
+I still think that using disk-based pstore is a better option.  Just as 
+you don't want to wear out your flash disks with 30-40 KB of data, I 
+also don't want to waste 30-40 KB of RAM.  Also, embedded devices such 
+as the PinePhone would benefit additionally from using disk-based 
+logging, because people often can't do anything in the field if booting 
+fails for some reason, so RAM-based logs would end up being lost, 
+preventing any post-mortem debugging later.
+
+Perhaps we can actually offer both options, i.e. both logging to RAM and 
+to disk, so everyone can choose what they prefer.  I'd also be fine with 
+working on such a dual approach, but it would obviously be more complex.
+
+> All in all, I'm all for using pre-existing standard interfaces instead
+> of inventing something new and custom, but as I see it now, PStore just
+> cannot do what we want here. If any of you think otherwise, feel free 
+> to
+> try to convince me further, or even guide me on how to use PStores.
+
+Well, please don't get me wrong, but pstore and disk-based logging can't 
+do what _you_ want.  I already provided above some examples of why I'd 
+find it useful.
+
+> Here's what I would want:
+> * writing already supported in U-Boot
+> * pure in-memory solution
+> * minimal overhead to the console subsystem
+
+I understand your position, but I'd appreciate if you'd also try to 
+understand my position that I described above.
