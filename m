@@ -4,69 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05490C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED170C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 04:11:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E1938700D;
-	Wed, 20 Dec 2023 05:11:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7FF3886E5E;
+	Wed, 20 Dec 2023 05:11:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WENf9CvH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i99hbAKM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CB8686FF4; Wed, 20 Dec 2023 05:11:34 +0100 (CET)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3A6C986E05; Wed, 20 Dec 2023 05:11:36 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27FBC86E05
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF9386F1E
  for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:11:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-553a65b6ad4so1729230a12.0
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-50bf2d9b3fdso7185546e87.3
  for <u-boot@lists.denx.de>; Tue, 19 Dec 2023 20:11:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1703045491; x=1703650291; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1703045492; x=1703650292; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ltw8w40DhZusYGwcHiiBWUmpJulQAejvbNeAo3KKh+c=;
- b=WENf9CvHhVgYHG3afh03Nqr0kir6kaWlGe3DGhchdAFgF1GJ+ptn6hQGOu7EW7EeAH
- mcXD4txqo+fZlqKWXs+zuBtOmLsU/E6Owf1/9jxmq6ZYpC1Grun1RruEY75JkFFGaXjx
- j8gAUUGVMKNQbyJ6FEoUfBsmlHTKeY7dRfWo0=
+ bh=D1O0UugzaZXwISRp987nofu714lMKd9Xm/pS6GDYyvI=;
+ b=i99hbAKMEAGq7x9S+MB0ZPni1+CK69ZQkDX+7uNucWnSY0wcNr6UGzHykCWuiP56RW
+ Q8wHRd9VhmWlzSTu57KOoBfavezkOEidjpytA8DuGSFYJPlumzzk+ffaPQKPHdMM9dhu
+ ChbD27L610pRmyexUCpb5GBKnSZgL1qYEwnL0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703045491; x=1703650291;
+ d=1e100.net; s=20230601; t=1703045492; x=1703650292;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ltw8w40DhZusYGwcHiiBWUmpJulQAejvbNeAo3KKh+c=;
- b=SpyH8Mtp3pyJ9zMgwMp/zdmH2zycwzgpg/5NisEWffYSD/cYbTf0kgs5I/AbDCrkX+
- DVguVj3IWlB4X3T7jmJYmTWt0HY2zCpRPgAfmAbRK5bW/GMjugd+RYgBG77E8mXp9U7w
- 7mt+QlQjidjTsiy9mbNYsZNAvIfmLgeXBLsHUOKHpDyzIo4gbzcjH5C5u6kWYlywZxSb
- bojHLZdkAdmfYCZg42zmOlHoNUxTcfOIKyeXbESLr+OcVLgiKHxyNIyJ5tY3OSFhwiGg
- UUHEKsk5v2oX5KLVoMTSyDW6udNCfPGhdVTizI8jEhbw0vxTVTyPrs7N/KFQhyKBB0fY
- QIdg==
-X-Gm-Message-State: AOJu0YwX5HSINYdFYb+Ev5TE7nX/JloWpMSxmruAB8RLf5yApJ8Vc0Qr
- /OdligRXCSJeQEnS3BsvwyOO+Czo1BqGM3c7s5piQw==
-X-Google-Smtp-Source: AGHT+IHnMYvog380u2VXPN7OaE7kdNT5zKgDCfHEPUQr8AdAXpbA+mKjsQ48/ZOYubqKIs0JIBMUJOpBw7N/hElsJQU=
-X-Received: by 2002:a50:cdc7:0:b0:553:1681:2ad1 with SMTP id
- h7-20020a50cdc7000000b0055316812ad1mr4135173edj.32.1703045491291; Tue, 19 Dec
- 2023 20:11:31 -0800 (PST)
+ bh=D1O0UugzaZXwISRp987nofu714lMKd9Xm/pS6GDYyvI=;
+ b=hjT59nIxDXPXm7EDo2uWdgi66Hek06xtLqWSKPLB7NKPgtTJUdJLcTrvNN8Vnn/fp1
+ yj8pBmhy+ixk4fTVdBFSNQ2P7b4Otr19EhoYAnfH9EBIF0UB6TUyxYE0fy8S+vYf4Uiv
+ FsXgMTt43hFDG3gDw/9dvO93vdtVNMuexf8b38wYCR+RZjSlq4oXQS7alLI82ScFzt5+
+ xWZfbuliAaBHi5xSeYbWVcO+3O2TnJ7oZkPyylP2yRezhfvbB3+VR/ja7Qmls5ApWx0y
+ jrRcqc4TYIrqdDYEMqJKJ1fODbkRxesz/7nbTJzQV219QT7EwISS2Xp7f7A/tGhCjFk0
+ EITA==
+X-Gm-Message-State: AOJu0YyWuNF6INLiY28i5j5NOpneFXusmmtKOglhXh91vehyxwDmGkyS
+ l2DGFtwixk9OOHgVR4rV+OfvX5rv+VblmbiQeFoMgw==
+X-Google-Smtp-Source: AGHT+IHIvLOFEDlUKrFbwK6LoNLy4abCNGiZ2wCXKS2bJPm8S4nw6L9VGC4tA/wxzO9xvjvlGpj9TzJMT/Zkn3TUoeE=
+X-Received: by 2002:a05:6512:48b:b0:50e:3089:a6b5 with SMTP id
+ v11-20020a056512048b00b0050e3089a6b5mr3187376lfq.76.1703045491243; Tue, 19
+ Dec 2023 20:11:31 -0800 (PST)
 MIME-Version: 1.0
 References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
- <ZYH-K_UGat0yWMVH@makrotopia.org>
-In-Reply-To: <ZYH-K_UGat0yWMVH@makrotopia.org>
+In-Reply-To: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Dec 2023 21:11:10 -0700
-Message-ID: <CAPnjgZ3sNBuaNkbTF2d=E2JD4sQOaA5QRfzDfz1KSV==nOWbTw@mail.gmail.com>
+Date: Tue, 19 Dec 2023 21:11:14 -0700
+Message-ID: <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
 Subject: Re: Passing boot logs to Linux?
-To: Daniel Golle <daniel@makrotopia.org>
-Cc: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -85,53 +82,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Heinrich Schuchardt
+Hi Cs=C3=B3k=C3=A1s,
 
-On Tue, 19 Dec 2023 at 13:33, Daniel Golle <daniel@makrotopia.org> wrote:
+On Tue, 19 Dec 2023 at 13:15, Cs=C3=B3k=C3=A1s Bence <Csokas.Bence@prolan.h=
+u> wrote:
 >
-> Hi Bence,
+> Hi!
 >
-> On Tue, Dec 19, 2023 at 08:08:48PM +0000, Cs=C3=B3k=C3=A1s Bence wrote:
-> > Hi!
-> >
-> > Is passing the U-Boot boot log to Linux supported yet? We are working
-> > with a third-party solution, which works, but is a bit hacky, so I was
-> > wondering if an official solution has been merged yet.
-> >
-> > I saw that there was an option CONFIG_CONSOLE_RECORD that saves
-> > everything to a membuff, but I don't know if that can be exported to
-> > Linux yet. And if not in the tree yet, would such a patch be welcome?
+> Is passing the U-Boot boot log to Linux supported yet? We are working
+> with a third-party solution, which works, but is a bit hacky, so I was
+> wondering if an official solution has been merged yet.
 >
-> To me this sounds very useful and definitely something we'd like to
-> have in OpenWrt. So I'd volunteer to review and test your patches once
-> they are ready.
->
-> What comes to mind is that CONFIG_CONSOLE_RECORD also captures ANSI
-> sequences during menu or count-down before boot, so we'd have to either
-> introduce a dedicated log_printf() call and use that when ever we want
-> the output to also become part of the log buffer or we could somehow
-> filter the recorded console, eliminating all terminal control sequences.
+> I saw that there was an option CONFIG_CONSOLE_RECORD that saves
+> everything to a membuff, but I don't know if that can be exported to
+> Linux yet. And if not in the tree yet, would such a patch be welcome?
 
-I have been asking for this for a while. We need some sort of inline
-function to enable ANSI output. Perhaps something like this?
-
-#if CONFIG_IS_ENABLED(ANSI)
-bool use_ansi(void);
-#else
-static inline bool use_ansi(void) { return false; }
-#endif
-
-bool use_ansi(void)
-{
-    return gd->flags & GD_FLG_ANSI;
-}
-
->
->
-> Cheers
->
->
-> Daniel
+Not yet, but yes I would like to see this.
 
 Regards,
-SImon
+Simon
