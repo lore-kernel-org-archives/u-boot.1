@@ -4,111 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EED2C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 14:53:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFDF6C46CD2
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 14:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA59C876E9;
-	Wed, 20 Dec 2023 15:53:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 569A2877C4;
+	Wed, 20 Dec 2023 15:53:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LyQ7wSFY";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U0n6Oggm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9206587705; Wed, 20 Dec 2023 15:53:37 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20607.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::607])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 35D198773C; Wed, 20 Dec 2023 15:53:46 +0100 (CET)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F327875B6
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 15:53:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E62DA8773C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 15:53:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Fzf1idRP+SmhRpAoeQ9Zum9Vh/0e3bxDebJ9tGCNTmTr8lBQSHWpozCD6ZlVX+rm7Q8R04sYNOxIeAzbZNxxOz4c87HkKS+f+9mAMDpqxPBEBN1FNGh+Dm4RCb1TNKW1UCJNzEAPDHtupz2FWJE9ao6DwiuSeWpbKcgP2hBdsPTcbq9d2hHUC/vBH6UrkOUrCPDF3+E7etAhf44oa4RnNRAkswrW5fGCbPg6Qy5jtxJCa3mQgEZbAvDz32Or+LLsbwHyikPO77jt2OGCNz+eG16NTW0rjUT+vGp5OvKiUH6JHRZAkvYvcv6MzMEnhE2/ui7wX6MtqzuOCZzi3T54zg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kZghoUclrf03AChAFV7UUWEPeIvy4vq1MYmK1pbB4Tw=;
- b=cSN7YzJ8+HBCDJ934EZdq/EyZ2g1GWrT4Qw8mki9CqUQ8aHFWL3CvMmduQAbxhdPH7B6fKpn2oi3xh/LIMJWyQNqKQUnevsILZhHyjFWE3UdJGsO+u9VOSaq5kAr6Fs0MrMNiTYaKKdFWXIbtoPruX/DOOdxYjL3IgnSKbYclU56vgQz2/TBI5HG+T90dOAlZ0rNxkmgcJLpCPVPF5amxOAP+ls+1mBReuKc/2xKrGmLnBhEIOi1UnxQs/G95gdbdld96tBd+Hc3GrsPHh5jKqWKBGfpGyyhxRQ/RJgx5PQ7/VUOLt9qx/fzYtTCCQJNmBik4TLhYpXtHeEeIiRgjQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kZghoUclrf03AChAFV7UUWEPeIvy4vq1MYmK1pbB4Tw=;
- b=LyQ7wSFY/ExD9c3a/Piz2C3XQAT3ap9LSWSC399/3j7e/L+ijnAbDPwzmxOm1zCBJ4s3MytO9xWWmc6VFy66gj6xBFQxzb9C0glUGSeVP8UFPc86i7czErwJaRNxI4C9Pm1RF67rzvu6SOA6Y+/sUEeDRtZIx6uSV8O3MuiRoSs=
-Received: from DM6PR08CA0032.namprd08.prod.outlook.com (2603:10b6:5:80::45) by
- CH0PR12MB5233.namprd12.prod.outlook.com (2603:10b6:610:d0::12) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7091.38; Wed, 20 Dec 2023 14:53:32 +0000
-Received: from CY4PEPF0000EE30.namprd05.prod.outlook.com
- (2603:10b6:5:80:cafe::c9) by DM6PR08CA0032.outlook.office365.com
- (2603:10b6:5:80::45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18 via Frontend
- Transport; Wed, 20 Dec 2023 14:53:32 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE30.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7113.14 via Frontend Transport; Wed, 20 Dec 2023 14:53:31 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.34; Wed, 20 Dec
- 2023 08:53:30 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Leo <ycliang@andestech.com>, Padmarao Begari
- <padmarao.begari@microchip.com>, Rick Chen <rick@andestech.com>
-Subject: [PATCH] riscv: Extend board compatible string with "qemu,mbv"
-Date: Wed, 20 Dec 2023 15:53:28 +0100
-Message-ID: <575ac34167776f3a3a00aa23cc5e182d1e41492f.1703084004.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6d532e4f6d6so2200218b3a.2
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 06:53:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703084020; x=1703688820; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GtDGptG+YlbDaOvMtNgOc46Sf0Z+HhlpzxBmLKvKtNA=;
+ b=U0n6OggmphGcwdmn7y8PVkB4UbuweEaZXO+56YT4bKDbLJ+Y8WCZwYeC/C/C7R1d39
+ WiMbScHed9SzJj4KDpK8aEwcUuZa11lvwvhqJUdlnze5rNGMucWLMs1KRp6AuXVYfy24
+ oyYHW+aCswIdRuT4L8OgGDL8vTPG25U5CeNBVC0lG/GTnEWw07RzPZwAMlGqYWfUxR07
+ lra5FCISZ3JVVYhij5r0TYEwuAwkgiUWx7cQvEYBb9LHQGYFXAmR0BpiPB4cds4kFYaM
+ vRUGiy4X2L2Ubid/WDrcqqCFdB9bigmLv6c1T0XR02aSI99tD/Kyx74XIiqSn4hgtqW5
+ Gmgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703084020; x=1703688820;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GtDGptG+YlbDaOvMtNgOc46Sf0Z+HhlpzxBmLKvKtNA=;
+ b=d+NFzF6mqrxHmWcVhmGynuDei6LRswRZwxO3SsZSUv0/zvsefKD92PhgNNyZVMfnFi
+ InzaRuJLD/517Vvtcoh+R2Y2PihlxigSvH1zS1KJYh7UTdoLrsV7dz1RMFh95kX1JWsE
+ JkVFifdwTFffYEXf3XP+DnhnJcM6YBHhpJWZbcrJDyG/O+F4F6hWbIDfu0oCpVbtaf1r
+ C05FbRDa+2ewet+6rQPaDu0zZRmhteou2+W8KvyZ/xeVmrSHU1hrgrzl6xQm+n4eIwL9
+ da5QYoXHR1HvK5s9PAe4EoAk6BPXKnvJkzL6YjMybg0V5HQLk1xgYF0nAumWdeLitSU3
+ PcBg==
+X-Gm-Message-State: AOJu0YzvIen8c/3uhdR/cYFQm7ep2PWgF25cf/ZZ37FurbKtGSIaKtt9
+ FuXOdxDz/ZE7/RGhYGNblzVA+TLdo3cRwVCJLQYMyA==
+X-Google-Smtp-Source: AGHT+IEa0AgD2amJwQC3hLGTrDpf8YWb/RNCtvkRQN6K4xajLkws7cF8uh7fTafydEwgXYoW7prnNS4NnXyfi5KAcVc=
+X-Received: by 2002:a05:6a20:3ca2:b0:190:c670:8e43 with SMTP id
+ b34-20020a056a203ca200b00190c6708e43mr10375928pzj.92.1703084020163; Wed, 20
+ Dec 2023 06:53:40 -0800 (PST)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=869; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=Rva0KsVquD8XoqLVPYuuczfrJRDcN0MympOHBu7mbTk=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtSm/0+q2wxFtMWjd+ZV7642K24+8MlnXWCKbs6j6dV3X
- ALchbk6YlkYBJkYZMUUWaRtrpzZWzljivDFw3Iwc1iZQIYwcHEKwETELzAsmBbz6MOf3MkCLvOr
- Txz7au4x57HSV4Z5Nj6rxJ4b/+2e/vpEGuf7qyZnmdMvAwA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE30:EE_|CH0PR12MB5233:EE_
-X-MS-Office365-Filtering-Correlation-Id: eedba20a-1b80-46b7-7f7f-08dc016b6f12
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: eb6LzaBqz5Xikiu4AQnCniy+s6jyphHcQvSFWkd3eQaYVl7phRzMdsdRVoJXfmEDeKjjv94JOoj7Y4gKgX706j8eLP8v3j05Uu1Ur/07w4fMUKCWkc7dMynDgWOefEFORyKI2KWh1t0OLC3MdcaRcUG25NduzT0mT9zxwgxQ7L79t9jVTx17nMmdqh5t6lRAJuPAJ4RXQiRD2bCRfqWPUNhGMvjK4arqn2/mTZUDnCyhAYM3CBgslVAe0537L6gu1ZeRb0lKbXMjoup5hV12meZT3RmX7yywS++JD3efrbQPM89C14OYeUNUZkUoBSbZoD2sxQIUFZrZW8RKgG00Lv5A0nEDv+vO8i0J4pe5MRA/usaU5mmabtc5iE5adIX38ZqpyReCcnkADklsqxrwE2HnbV51VOo6Hm9+W7Kib6a9QUkbcniC3xrsHpT5/A56ThrWSOGjBdl/rcB5XtBaj5ngJVGgzGwLINFxo5fXUx3pA9V9Vv/R9wotvUadFu/4gryU4nku1+H2thp51g0COpOonowD+XV4gj5nHgBgHmr+2JKVE7KkYrx7THV8NSDT54yZtlnrl0xEk6GRA2hyeeXXjplY/DAm5wfu44we5Tmkd1RylxS/AgLXBDABfJCR3dIhgcVXb+TVT3u14cCjTy4pc1RD10rQc9kGC81mbXsP3opUzAuLtT53vlvOzPvea/7+oNOERchCfspVi4TKBWaXozoKBudULn5gizLjLxCkXZGp7OmnNk/XOeIcySpz0IHykI7g6Jhd0nfbzn4I8eZ02Yobgrw8hMtEyulRRy3MSMrrDgZ+h2pxiCOYNPVY
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(376002)(136003)(396003)(230922051799003)(82310400011)(1800799012)(451199024)(64100799003)(186009)(36840700001)(46966006)(40470700004)(336012)(16526019)(2616005)(2906002)(26005)(82740400003)(426003)(83380400001)(47076005)(4744005)(5660300002)(4326008)(110136005)(478600001)(8676002)(36860700001)(8936002)(41300700001)(54906003)(316002)(966005)(44832011)(70206006)(70586007)(81166007)(356005)(86362001)(36756003)(40480700001)(40460700003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 14:53:31.5285 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eedba20a-1b80-46b7-7f7f-08dc016b6f12
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE30.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR12MB5233
+References: <20231219211114.393193-1-raymond.mao@linaro.org>
+ <20231219211114.393193-4-raymond.mao@linaro.org>
+ <f2221d44-cbb7-4355-b9a1-ecea47af62c5@amd.com>
+In-Reply-To: <f2221d44-cbb7-4355-b9a1-ecea47af62c5@amd.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 20 Dec 2023 09:53:29 -0500
+Message-ID: <CAEfUkULk+gFBEg=6YPtzracvHJ6pU7AM=+fw0eB3=NuxjctNcA@mail.gmail.com>
+Subject: Re: [PATCH 3/5] bloblist: Load the bloblist from the previous loader
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
+ jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,32 +93,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend compatible string to match the latest change in dt binding.
+Hi Michal,
 
-Fixes: 7576ab2facae ("riscv: Add support for AMD/Xilinx MicroBlaze V")
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+Other vendors should add their own custom function under the
+"./board/<board-name>" directory.
+The inline function here is just to avoid the building errors on other
+platforms which do not yet implement the custom function.
+Otherwise we have to create a function "board_bloblist_from_boot_arg()"
+under all boards with this patch.
 
-dt binding patch is available here.
-https://lore.kernel.org/all/69670e5a46c98a2eb73d4f2e2d571a27c46b4640.1700722941.git.michal.simek@amd.com/
+Thanks and regards,
+Raymond
 
----
- arch/riscv/dts/xilinx-mbv32.dts | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/riscv/dts/xilinx-mbv32.dts b/arch/riscv/dts/xilinx-mbv32.dts
-index 6a6b8b694bd1..94e42c268115 100644
---- a/arch/riscv/dts/xilinx-mbv32.dts
-+++ b/arch/riscv/dts/xilinx-mbv32.dts
-@@ -12,7 +12,7 @@
- 	#address-cells = <1>;
- 	#size-cells = <1>;
- 	model = "AMD MicroBlaze V 32bit";
--	compatible = "amd,mbv";
-+	compatible = "qemu,mbv", "amd,mbv";
- 
- 	cpus: cpus {
- 		#address-cells = <1>;
--- 
-2.36.1
+On Wed, 20 Dec 2023 at 05:57, Michal Simek <michal.simek@amd.com> wrote:
 
+>
+>
+> On 12/19/23 22:11, Raymond Mao wrote:
+> > During bloblist initialization, when CONFIG_OF_BOARD is defined,
+> > invoke the platform custom function to load the bloblist via boot
+> > arguments from the previous loader.
+> > If the bloblist exists, copy it into the fixed bloblist memory region.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> >   common/bloblist.c  | 47 ++++++++++++++++++++++++++++------------------
+> >   include/bloblist.h | 16 ++++++++++++++++
+> >   2 files changed, 45 insertions(+), 18 deletions(-)
+> >
+> > diff --git a/common/bloblist.c b/common/bloblist.c
+> > index 232ca4c6ce..c89f7a1554 100644
+> > --- a/common/bloblist.c
+> > +++ b/common/bloblist.c
+> > @@ -486,31 +486,38 @@ int bloblist_init(void)
+> >       bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> >       int ret = -ENOENT;
+> >       ulong addr, size;
+> > -     bool expected;
+> > -
+> > -     /**
+> > -      * We don't expect to find an existing bloblist in the first phase
+> of
+> > -      * U-Boot that runs. Also we have no way to receive the address of
+> an
+> > -      * allocated bloblist from a previous stage, so it must be at a
+> fixed
+> > +     /*
+> > +      * If U-Boot is not in the first phase, an existing bloblist must
+> be
+> > +      * at a fixed address.
+> > +      */
+> > +     bool from_addr = fixed && !u_boot_first_phase();
+> > +     /*
+> > +      * If U-Boot is in the first phase that a board specific routine
+> should
+> > +      * install the bloblist passed from previous loader to this fixed
+> >        * address.
+> >        */
+> > -     expected = fixed && !u_boot_first_phase();
+> > +     bool from_board = fixed && IS_ENABLED(CONFIG_OF_BOARD) &&
+> > +                       u_boot_first_phase();
+> > +
+> >       if (spl_prev_phase() == PHASE_TPL &&
+> !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > -             expected = false;
+> > +             from_addr = false;
+> >       if (fixed)
+> >               addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> >                                     CONFIG_BLOBLIST_ADDR);
+> >       size = CONFIG_BLOBLIST_SIZE;
+> > -     if (expected) {
+> > +
+> > +     if (from_board)
+> > +             ret = board_bloblist_from_boot_arg(addr, size);
+> > +     else if (from_addr)
+> >               ret = bloblist_check(addr, size);
+> > -             if (ret) {
+> > -                     log_warning("Expected bloblist at %lx not found
+> (err=%d)\n",
+> > -                                 addr, ret);
+> > -             } else {
+> > -                     /* Get the real size, if it is not what we
+> expected */
+> > -                     size = gd->bloblist->total_size;
+> > -             }
+> > -     }
+> > +
+> > +     if (ret)
+> > +             log_warning("Bloblist at %lx not found (err=%d)\n",
+> > +                         addr, ret);
+> > +     else
+> > +             /* Get the real size */
+> > +             size = gd->bloblist->total_size;
+> > +
+> >       if (ret) {
+> >               if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> >                       void *ptr = memalign(BLOBLIST_ALIGN, size);
+> > @@ -519,7 +526,8 @@ int bloblist_init(void)
+> >                               return log_msg_ret("alloc", -ENOMEM);
+> >                       addr = map_to_sysmem(ptr);
+> >               } else if (!fixed) {
+> > -                     return log_msg_ret("!fixed", ret);
+> > +                     return log_msg_ret("BLOBLIST_FIXED is not enabled",
+> > +                                        ret);
+> >               }
+> >               log_debug("Creating new bloblist size %lx at %lx\n", size,
+> >                         addr);
+> > @@ -532,6 +540,9 @@ int bloblist_init(void)
+> >               return log_msg_ret("ini", ret);
+> >       gd->flags |= GD_FLG_BLOBLIST_READY;
+> >
+> > +     bloblist_show_stats();
+> > +     bloblist_show_list();
+> > +
+> >       return 0;
+> >   }
+> >
+> > diff --git a/include/bloblist.h b/include/bloblist.h
+> > index b5d0f147f6..f5c623133d 100644
+> > --- a/include/bloblist.h
+> > +++ b/include/bloblist.h
+> > @@ -445,6 +445,22 @@ void bloblist_reloc(void *to, uint to_size, void
+> *from, uint from_size);
+> >    */
+> >   int bloblist_init(void);
+> >
+> > +#if (IS_ENABLED(CONFIG_ARCH_QEMU) && IS_ENABLED(CONFIG_ARM))
+>
+> How do you think that others start to use it?
+> Adding that platforms here? I don't think it is scalable.
+>
+> Thanks,
+> Michal
+>
