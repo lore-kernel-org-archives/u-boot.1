@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC66C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 20:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0416C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 20:05:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A0718781C;
-	Wed, 20 Dec 2023 21:03:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4598687827;
+	Wed, 20 Dec 2023 21:05:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N0IB0icE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LjHIJ9BO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A1698783C; Wed, 20 Dec 2023 21:03:17 +0100 (CET)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id C343D8783A; Wed, 20 Dec 2023 21:05:35 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06B9187811
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 21:03:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 86D208781C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 21:05:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-4260ba19a57so51912791cf.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:03:14 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-5e7bb1e0db8so961217b3.0
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:05:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703102594; x=1703707394; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=aGsm8D4GbxDZpYnTcApwE0q5nAEnbm6tujnCGn4rZtw=;
- b=N0IB0icELtBCRsFrL/jftGtLhSgh9MNfwszj2wGfmcdDebBG2wXR246ZrMHIup7ZMp
- GKZa8RoWtWX/zS1SkELBOD9wYYSnpF/qmcgq/+bqbJ3Ci/NeafcudggsVlWoMyMBpod7
- uyLFKL35nNBngUYvoZjhR1phxBA4vBOPYint88yblkMNbFQApxpDKfujgBn6/W3/yVo1
- xyVL2UCa2HJL39k3qjttHo1NuvfmcgK2zhUNB0I5qkeahTWimfOkKrwnNC46xV9oQumX
- pxj6tRp+q0qwV7apNfwLPMBY5/IBmi70b95oJBrwhvwcIREilHlRebpYjEYq05UgJuTY
- ozFg==
+ d=konsulko.com; s=google; t=1703102732; x=1703707532; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2T7U5rPEPkshv36FDAvIoqwlfIGHFRLTVq9rpfQLSqk=;
+ b=LjHIJ9BOCN6jGj63ZS3nfBeNmmXH4iRJA8x6/LB22AKA1YJHenUEKo7I7klJI/U+Kg
+ jTqVlkoEiFxfhdR8mzCi+/viOWCFnFZVcN1CPG3cVHveOZviNUbGAb8JO7DyOkkmQxth
+ GPy76dlG4q/3KVCZcj6768NOkKZWVhKTvHIpI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703102594; x=1703707394;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aGsm8D4GbxDZpYnTcApwE0q5nAEnbm6tujnCGn4rZtw=;
- b=SKHNkkU1yRlcJXfsoNq18eWBuZ2Y5YCUYr24L3g3dUsY3BL4Jji7CAUeEj7P4/DGJa
- RwNro2Gv7pDYF6QTcEj6xb4J+0Y/ZjbCVAg7dXWB8Z1Aj1kc5VqlgELfwDuNsfgyIr1k
- Je2IWR9wSmXt0H1DcpkkcMU2hUVRqWm29Sn/V4XzneWwxD15g/0svScM7aCYD3Lo9vNP
- +7FRhsqzF5Np9+HYVjcLuyJh6qdDSKYwsaEWKeCNOeTk62ZMDNYVSmRn5HDZlkBCvJHA
- ihluERyv8rhJ9DtWZUkdSANOswh43u4w1KxEr662DWEMqvheMJtDC6tu9DGqLGTQvgbT
- Ke+g==
-X-Gm-Message-State: AOJu0Yyh+h+tcCsaEf18JFMGYKp46qr0KzK2KYe63r6Ls8633nu103iR
- eS1otwiNpKovJi7dAebimcdmhrnuDgyl4Q==
-X-Google-Smtp-Source: AGHT+IHO+Qjrgws7ZcdROvlNnVYgsJhaESOhblD7kUM8kbv+Dys7QnF6nOCjfOWejJH3oJRxUx1+VA==
-X-Received: by 2002:a05:622a:45:b0:425:a439:5f24 with SMTP id
- y5-20020a05622a004500b00425a4395f24mr27047966qtw.88.1703102593774; 
- Wed, 20 Dec 2023 12:03:13 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- fi8-20020a05622a58c800b004261956e72csm155832qtb.96.2023.12.20.12.03.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 20 Dec 2023 12:03:13 -0800 (PST)
-Message-ID: <cf0fea58-45f8-ba73-9652-2a501343e0c4@gmail.com>
-Date: Wed, 20 Dec 2023 15:03:12 -0500
+ d=1e100.net; s=20230601; t=1703102732; x=1703707532;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2T7U5rPEPkshv36FDAvIoqwlfIGHFRLTVq9rpfQLSqk=;
+ b=IPhYzPkSBr8aTHUbYoYuKtnPKyKgtagbseCYGu3vDMtWHHcstYOJnvElFuGohCHJ2a
+ Z7wKfEJs9HudN+B4Aaf6yTkH96oCcFWMXgXLqUkG7CyNgv5n6VaoTUEBnkvs43DIJiPM
+ YceCk6vlnXUCgAF+5at2szti2W+JfxXaDmpnHJhKBmGTaeMgYIfEcgKZDDVF/4qKOg3S
+ ZHRpEjK8GbZmBU8ngedkgQgwvpO1bf2Mou3Q2UH6GAWMAr5vHdhXV4PNFMXcgvG6rqyp
+ p8rLvE+fECOXsfAlTe4gxOUQqO15jcvKI366+U/7APRwz4BheZc1ctrZJQLSB8Wz6eVO
+ L2IQ==
+X-Gm-Message-State: AOJu0YykyoH18tqhPlx8bs0dkIxUGYrSmj+ZZHRdJLS0wnCcaznL+hLw
+ vwgcX2YMF8x1Jj7XX40qKTuMdA==
+X-Google-Smtp-Source: AGHT+IHjGzYDR0z4NfcvpNgsJehdjDLJdqTv+v1AR1pc+WBMuTl2hzfCbJ2ZhApvP2uEiXHvaBOWcg==
+X-Received: by 2002:a0d:f404:0:b0:5e8:545:e0cf with SMTP id
+ d4-20020a0df404000000b005e80545e0cfmr323230ywf.100.1703102732120; 
+ Wed, 20 Dec 2023 12:05:32 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
+ [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
+ by smtp.gmail.com with ESMTPSA id
+ w13-20020a81a20d000000b005a7d46770f2sm186468ywg.83.2023.12.20.12.05.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 Dec 2023 12:05:31 -0800 (PST)
+Date: Wed, 20 Dec 2023 15:05:29 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ sean.anderson@seco.com, neil.armstrong@linaro.org,
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
+Message-ID: <20231220200529.GQ2513409@bill-the-cat>
+References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+ <20231127171058.165777-2-ilias.apalodimas@linaro.org>
+ <CAPnjgZ2Vo22gasW05um2og==yRoC33YB3eW=xXVt2dE9xqDgVw@mail.gmail.com>
+ <CAC_iWjJE=-rOhOLVe4d7sUH8DEJjn5hdHoHpKe70d4gmB7---Q@mail.gmail.com>
+ <CAC_iWjLrmk2AwxoO8tDtG8notrLQuSdRtqzLpTzBRuM1QO0wzw@mail.gmail.com>
+ <CAPnjgZ3XXtD24cqn1eEtZu0rxuJz4DR8vttu2YDwes3_ToJNkQ@mail.gmail.com>
+ <CALeDE9Moypi85cM8H2z+7nxZPVvJzj5DWWej0Qvdebpdp1qR1A@mail.gmail.com>
+ <CAPnjgZ0o7QENx3yFEx2SNpm0A7Li_qqvTeUmdDXNaCVuEA++Jg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: Passing boot logs to Linux?
-Content-Language: en-US
-To: =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <Csokas.Bence@prolan.hu>,
- Dragan Simic <dsimic@manjaro.org>
-Cc: Simon Glass <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Daniel Golle <daniel@makrotopia.org>, Mark Kettenis <mark.kettenis@xs4all.nl>
-References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
- <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
- <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
- <16e633f9d4b1c426aaca510157479d65@manjaro.org>
- <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
- <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
- <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
- <3900f4b15852d0af65635b3a794d34af@manjaro.org>
- <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tx4Y/jOn3D7N/FE6"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0o7QENx3yFEx2SNpm0A7Li_qqvTeUmdDXNaCVuEA++Jg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,57 +102,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gMTIvMjAvMjMgMTQ6MjQsIENzw7Nrw6FzIEJlbmNlIHdyb3RlOg0KPiBPbiAyMDIzLiAx
-Mi4gMjAuIDk6MjksIERyYWdhbiBTaW1pYyB3cm90ZToNCj4+IE9uIDIwMjMtMTItMjAgMDg6
-NTIsIENzw7Nrw6FzIEJlbmNlIHdyb3RlOg0KPj4+IE9uIDIwMjMuIDEyLiAyMC4gODowOSwg
-RHJhZ2FuIFNpbWljIHdyb3RlOg0KPj4+PiBPbiAyMDIzLTEyLTIwIDA3OjQ5LCBDc8Oza8Oh
-cyBCZW5jZSB3cm90ZToNCj4+Pj4+IEkgZG9uJ3QgdGhpbmsgdGhhdCB3b3VsZCBiZSBhIGh1
-Z2UgcHJvYmxlbSwgTGludXggdXNlcnNwYWNlIGNhbiBmaWx0ZXINCj4+Pj4+IEFOU0kgY29u
-dHJvbCBjb2RlcyBpZiBpdCB3YW50cyB0by4gRm9yIG5vdywgSSdkIGxpa2UgYSBieXRlLWZv
-ci1ieXRlDQo+Pj4+PiBjb3B5IG9mIHRoZSBjb25zb2xlLCBhcy1pcywgcHJlc2VudGVkIHRv
-IExpbnV4Lg0KPj4+Pg0KPj4+PiBCdXQgd291bGRuJ3QgcmVjb3JkaW5nIHRoZSBjb250cm9s
-IHNlcXVlbmNlcyBhcy1pcyBhY3R1YWxseSBiZSBwcmV0dHkNCj4+Pj4gbXVjaCB1c2VsZXNz
-P8KgIEZvciBleGFtcGxlLCBzb21lIHVzZXIgY2FuIHNwZW5kIGEgZmV3IG1pbnV0ZXMNCj4+
-Pj4gc2Nyb2xsaW5nIHRocm91Z2ggdGhlIGJvb3QgbWVudSwgd2hpY2ggd291bGQgcHJvZHVj
-ZSBhIGZhaXIgYW1vdW50IG9mDQo+Pj4+IG5lYXJseSB1c2VsZXNzIHJlY29yZGVkIGRhdGEu
-DQo+Pj4+DQo+Pj4+IE1vcmVvdmVyLCBpZiBJJ20gbm90IHdyb25nLCB2aWV3aW5nIG9yIHBh
-cnNpbmcgc3VjaCBhcy1pcyBkYXRhIHdvdWxkDQo+Pj4+IGFjdHVhbGx5IHJlcXVpcmUgcmVw
-bGF5aW5nIHRoZSBjb250cm9sIHNlcXVlbmNlcywgdG8gcmVwcm9kdWNlIHRoZQ0KPj4+PiBh
-Y3R1YWwgY29uc29sZSBjb250ZW50cyBhcyBpdCB3YXMgcmVjb3JkZWQsIHdoaWNoIHdvdWxk
-IGJlIHF1aXRlDQo+Pj4+IGN1bWJlcnNvbWUuDQo+Pj4NCj4+PiBJdCAqaXMqIHVzZWxlc3Ms
-IGJ1dCBtb3N0IG9mIHRoZSB0aW1lcyB0aGUgdXNlciB3b24ndCBiZSBzY3JvbGxpbmcgYXQN
-Cj4+PiBhbGwgYW55d2F5cywgdGhhdCdzIHdoeSBJIGRvbid0IHRoaW5rIHRoZXNlIGZldyBl
-eHRyYSBieXRlcyB3b3VsZCBiZSBhDQo+Pj4gcHJvYmxlbS4NCj4+DQo+PiBRdWl0ZSBmcmFu
-a2x5LCB3aGVuIGl0IGNvbWVzIHRvIGNvbXB1dGluZyBpbiBnZW5lcmFsLCB0YWtpbmcgdGhl
-ICJhaCwgaXQNCj4+IHByb2JhYmx5IHdvbid0IGhhcHBlbiIgYXBwcm9hY2ggaXNuJ3QgdGhl
-IGJlc3QgdGhpbmcgdG8gZG8uwqAgV2Ugc2hvdWxkDQo+PiBhaW0gdG93YXJkIGNvdmVyaW5n
-IHByb3Blcmx5IGV2ZW4gdGhlIGVkZ2UgY2FzZXMsIGlmIHlvdSBhZ3JlZS4NCj4gDQo+IFlv
-dSdyZSBhYnNvbHV0ZWx5IHJpZ2h0OyBob3dldmVyLCBJIGRpZCBub3Qgc2F5ICJpdCB3b24n
-dCBoYXBwZW4iLCBJDQo+IHNhaWQgdGhhdCBMaW51eCB1c2Vyc3BhY2UgY2FuIGdvIGRlYWwg
-d2l0aCBpdCBpZiBpdCBoYXBwZW5zLCBhbmQgaWYgaXQNCj4gd2FudHMgdG8uIEFuZCB0aGF0
-IGluIG15IG9waW5pb24sIHRoZSBiZXN0IGNvdXJzZSBvZiBhY3Rpb24gZm9yIFUtQm9vdA0K
-PiBpcyB0byByZWNvcmQgKmV2ZXJ5dGhpbmcqIChhcyBpdCBkb2VzIG5vdyksIGFuZCB0aGVu
-IHVzZXJzcGFjZSBjYW4NCj4gZGVjaWRlIHRvIGZpbHRlciBpdCBmb3IgZWcuIEFOU0kgY29k
-ZXMuIEJ1dCBJIHRoaW5rIGl0J3MgYmVzdCB0byBrZWVwDQo+IHRoZSBVLUJvb3QgY29kZSBk
-ZWFkIHNpbXBsZSwgYW5kIGFsc28gc3VwcGx5IHRoZSBtb3N0IGRhdGEgdG8gdXNlcnNwYWNl
-Lg0KPiANCj4gDQo+Pj4gVGhhdCdzIHdoYXQgSSByZWFkIGFzIHdlbGwuIElzIHRoZXJlIHN1
-cHBvcnQgZm9yIFUtYm9vdCB0byB3cml0ZSBhbmQNCj4+PiBMaW51eCB0byByZWFkIFBTdG9y
-ZXM/DQo+Pg0KPj4gTm8gYW5kIHllcywgYnV0IFUtQm9vdCBjYW4gYWxyZWFkeSByZWFkIHBz
-dG9yZS7CoCBQbGVhc2Ugc2VlDQo+PiBkb2MvdXNhZ2UvY21kL3BzdG9yZS5yc3QgZm9yIHRo
-ZSBVLUJvb3QgcGFydCwgYW5kDQo+PiBEb2N1bWVudGF0aW9uL2FkbWluLWd1aWRlL3BzdG9y
-ZS1ibGsucnN0IGZvciB0aGUgTGludXgga2VybmVsIHBhcnQuDQo+IA0KPiBJcnJlbGV2YW50
-LCBhcyB3ZSBvbmx5IHdhbnQgdG8gd3JpdGUgb3V0IHRoZSBjb25zb2xlIGxvZyB0byBVLUJv
-b3QsIGFuZA0KPiBub3QgdGhlIG90aGVyIHdheSBhcm91bmQgKHRoYXQncyBmb3IgY29sbGVj
-dGluZyBwYW5pYyBsb2dzLCB3aGljaCBpcw0KPiBhbHJlYWR5IGltcGxlbWVudGVkKS4NCj4g
-DQo+PiBBbm90aGVyIGJlbmVmaXQgb2YgdXNpbmcgcHN0b3JlIHdvdWxkIGJlIG5vIHBlcm1h
-bmVudGx5IHdhc3RlZCBSQU0gZm9yDQo+PiB0aGUgcmVjb3JkZWQgY29uc29sZSBjb250ZW50
-cy7CoCBBbHNvLCBoYXZpbmcgdGhlIGRhdGEgcmVjb3JkZWQgdG8gYQ0KPj4gc3RvcmFnZSBk
-ZXZpY2UgYWxzbyBnb2VzIGFsb25nIHdpdGggcHJvdmlkaW5nIHBlcm1hbmVudCByZWNvcmRz
-Lg0KPiANCj4gSSdtIHBvc2l0aXZlbHkgKm5vdCBnb25uYSBzYXZlIGJvb3QgbG9ncyB0byBk
-aXNrKiwgYXMgbW9zdCBlbWJlZGRlZA0KPiBzeXN0ZW1zIGhhdmUgRmxhc2gtYmFzZWQgc3Rv
-cmFnZSBtZWRpYTsgd3JpdGluZyB0byB0aGVtIG9uIGV2ZXJ5IGJvb3QNCj4gd291bGQgYmUg
-ZGV2YXN0YXRpbmcuIFBsdXMsIEkgZG9uJ3Qgd2FudCB0aGUgY29uc29sZSBzdWJzeXN0ZW0g
-dG8gZGVwZW5kDQo+IG9uIGFueSBmaWxlL2Rpc2sgb3BlcmF0aW9ucy9kcml2ZXJzLg0KDQpw
-c3RvcmUgaXMgYWdub3N0aWMgdG8gdGhlIGJhY2tlbmQgdXNlZC4gSW4gVS1Cb290IHdlIG9u
-bHkgc3VwcG9ydCBSQU0NCmJhY2tlbmRzIGF0IHRoZSBtb21lbnQuDQoNCi0tU2Vhbg0KDQo=
 
+--tx4Y/jOn3D7N/FE6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 20, 2023 at 10:32:26AM -0700, Simon Glass wrote:
+> Hi Peter,
+>=20
+> On Tue, 19 Dec 2023 at 13:40, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Mon, Dec 18, 2023 at 3:02=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Wed, 6 Dec 2023 at 04:36, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > [...]
+> > > >
+> > > > >
+> > > > >>
+> > > > >> >                 str =3D "Unknown";
+> > > > >> >
+> > > > >> >         for (;;) {
+> > > > >> > @@ -151,8 +151,7 @@ static int smbios_add_prop_si(struct smbio=
+s_ctx *ctx, const char *prop,
+> > > > >> >                 const char *str;
+> > > > >> >
+> > > > >> >                 str =3D ofnode_read_string(ctx->node, prop);
+> > > > >> > -               if (str)
+> > > > >> > -                       return smbios_add_string(ctx, str);
+> > > > >> > +               return smbios_add_string(ctx, str);
+> > > > >> >         }
+> > > > >> >
+> > > > >> >         return 0;
+> > > > >> > @@ -231,7 +230,7 @@ static int smbios_write_type0(ulong *curre=
+nt, int handle,
+> > > > >> >         t->vendor =3D smbios_add_string(ctx, "U-Boot");
+> > > > >> >
+> > > > >> >         t->bios_ver =3D smbios_add_prop(ctx, "version");
+> > > > >> > -       if (!t->bios_ver)
+> > > > >> > +       if (!strcmp(ctx->last_str, "Unknown"))
+> > > > >>
+> > > > >> That is really ugly...checking the ctx value looking for a side =
+effect.
+> > > > >>
+> > > > >> Can you not have smbios_add_prop() continue to return NULL in th=
+is case?
+> > > > >
+> > > > >
+> > > > > Hmm I don't know, but I wonder why I am not just checking t->bios=
+_ver for Unknown.
+> > > > > I'll have a look and change it
+> > > >
+> > > > Ok, this can't be changed as easily.  smbios_add_prop() will not
+> > > > return NULL in any case. It returns an integer. With the cleanup, it
+> > > > will always writes 'Uknown' and not return 0 anymore.
+> > > > I can add that default value you suggested but the ctx->last_str is
+> > > > still used on the next line anyway.
+> > >
+> > > Would you mind if I tried to create a version of the patch which does
+> > > the same thing but with less code, and perhaps a test? It might be
+> > > easier to discuss it then. I can't claim to understand all the
+> > > different code paths at this point.
+> > >
+> > > My main concern is that with so many code paths it will be hard even
+> > > to refactor the code in the future, since it will become
+> > > 'load-bearing' and anyone might turn up and say it breaks their board
+> > > because different information is provided.
+> >
+> > I don't buy this argument at all, sorry.
+>=20
+> OK.
+>=20
+> >
+> > > Overall, so long as the information isn't used for anything important
+> > > in userspace, and we find a way to report SMBIOS to Linux without EFI,
+> >
+> > No, you can't tie random requirements to improving the SMBIOS support.
+> > We *already* report SMBIOS to Linux, reporting SMBIOS to Linux without
+> > EFI is changing things that will need different or extra standards,
+> > that could take years.
+> >
+> > You are arbitrarily adding extra requirements just to suite yourself,
+> > please STOP trying to hold things like this hostage.
+>=20
+> Isn't that what is happening with Linux and ffi? My understanding is
+> that there is no way to pass SMBIOS to Linux without EFI. Is that
+> correct? I know some people at their wit's end about that.
+>=20
+> You may know that I have tried for years to get bindings upstream to
+> Linux....right now there is a reserved-memory binding which has been
+> held up for longer than I can remember, because of EFI. How about a
+> little give and take?
+
+You aren't actually saying that since some patches are being held up by
+"but what about EFI?" you're trying to hold this up as retaliation with
+"but what about without EFI?". Right? And aside, I can point you at
+other people that got fed up with trying to make ARM+(EFI+ACPI) work
+because the feedback was "but what about DT?".
+
+> > > it is OK to enable this feature (with a new Kconfig so it can be
+> > > disabled). But there is already authoritative info in the DT, so this
+> >
+> > There is two types of information in DT, the smbios "entries" in DT
+> > are not standardised in the dtschema and in most cases they're
+> > unnecessarily replicating data ALREADY in DT which is being produced
+> > automatically with these patches, making it zero effort for vendors to
+> > produce.
+> >
+> > > transformation into SMBIOS really should just be used for user
+> > > display, etc., not for anything which affects operation of the device.
+> >
+> > Well SMBIOS tables are used for a number of different things already
+> > in the kernel.
+> >
+> > > Do you agree? If you do, how to ensure that? Perhaps a special string
+> > > in the table like 'GENERATED'?
+> >
+> > Nope, I do not agree, at all.
+>=20
+> OK, well there it is.
+>=20
+> Anyway, as I said, I am happy for this to go in with a Kconfig
+> controlling it (so it can be enabled/disabled). Then SoCs that don't
+> want to go to the bother of adding authoritative info can just enable
+> this Kconfig.
+>=20
+> I would very much like to see some signal that it is not
+> authoritative. That should not be a big imposition.
+
+Lets try a different track here. We've had 3 years now of the
+u-boot,sysinfo-smbios binding now. And there's been 14 ARM platforms
+that tried to fill it out. With Ilias' series, now there's a much larger
+chance that someone will see values populated and want to update them,
+rather than "Unknown" and assume there's no way to have them populated.
+
+> For my own interest, I would like to understand what actually uses it
+> as I suspect it is just for display. The two programs I managed to
+> find both handle devicetree and don't need SMBIOS.
+
+Please re-read the examples where people have already explained where
+they're used, today.
+
+--=20
+Tom
+
+--tx4Y/jOn3D7N/FE6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDSQYACgkQFHw5/5Y0
+tyz10wv+OwRGSwVb/hI4obaZApjJRgsKt1ajv0TOe89h49UTxjZtV1eRgPsCk+Km
+sG/6HFKe1Uzi3k/HKfa64wfN0w/NhFJQy4Xwq1glSBNT8Pp3vDh1V+uFk+fDHrL/
+FXqo0pCIt25fNMzfoN76cQApVFp8CeTGhHXer5lPxLP6eB72xFF713vjseCDqYLT
+L12BCjsoWQ/hvtgSZw5swbkdel7QTrz4M01DcQef3hVn3Z/L8uxxwfnFuG6w/2xu
+AKj3DNA5QRXJ21zWWqJ8sItm4IjK3ElEh0ikZ7RhmWBHxxxDMXw1cBrJPncqu0Yf
+v1bPtbE4g319tW1LrkUOj8EppzNeWf/Uv10JyIy/KDe89tMGaTHasID1xUeLol/Z
+PomUWZ7hn71xmrPdoqYx5ul4HIn8v4vqEs9NuvckS+q7flM/8DfLQh+xME5fX7L3
+n1MOVR1IobtSyxdAeK/chH/dWzcfUkJm4wBzz2++0PU1FfouszNQC95sgCArh0LT
+eEoGDPkD
+=EhuH
+-----END PGP SIGNATURE-----
+
+--tx4Y/jOn3D7N/FE6--
