@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05CDC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46FA8C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 13:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05E2A877C4;
-	Wed, 20 Dec 2023 14:25:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AB965877D8;
+	Wed, 20 Dec 2023 14:27:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uR90IruR";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X5TTTQYI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46ED6877CD; Wed, 20 Dec 2023 14:25:09 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AFE138755C; Wed, 20 Dec 2023 14:23:35 +0100 (CET)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FFD587727
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:25:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67E2487727
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 14:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-db3fa47c2f7so3966573276.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 05:25:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703078706; x=1703683506; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=01P/vlPdXmnLKO8P4AkPbCSG8znawYVu4i4ZC4fClKE=;
- b=uR90IruRpV/qQLV1KX9jGCpz9jiuLR09p9iAIoI9lt2NJa5Xa37msMOQrb2hiljpju
- EObKV1PXjjTBU87sXODhRRe212LqBd3acPy00Hh1WJQVf7B3uMZSuiWjImSaKBTrFC7P
- sKYjQko9tHf1BYnsW//066qXDkzIUv0V8j3fc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703078706; x=1703683506;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=01P/vlPdXmnLKO8P4AkPbCSG8znawYVu4i4ZC4fClKE=;
- b=vlJleDmc9X1Ij9Ru8K5lXPETBCI/Hl/LORwESazrVi0Sk+6lx6hVmfYdl6koKjKbVs
- SLxy93G1SaX80RjwGuF/HBv9vyuR0U80q1iyUxEgRFr0/4T924HHYvoPbV1iQ+huZuKq
- NLCxUSdV1dMGWHxRHEHsg2/oxCd2S06v7lgrzcBQ81jRcRb6yeCqkB3ZDxN4SGQfqAjZ
- 0Xa0uFVUwmVA0BbdVr3C8d+AE2nOWUjYFxVdtnHJaNESVihC3cAsKugBLfC2m99lwdV0
- ySSdjduY57+zMfppjV0xRWu1YHL04K5shXS1uCoaBIPLrWx0UFgZbTf4sJtrd4LkGQap
- 3rCg==
-X-Gm-Message-State: AOJu0Yyc4c6/sj+RVEl2Q9ZUysDy3fYooZZ3WY17NDWInlBDcqsouzdu
- YCSB5BE09kXySoOKeDsZ7w2ViA==
-X-Google-Smtp-Source: AGHT+IHAcasPkoFJSw9UpEagF8/3GOGgjZu4MwplpeNz2Zl4M32blicQRzPvXib6d3wqnO72LyjxKg==
-X-Received: by 2002:a05:6902:38d:b0:db7:dad0:60e9 with SMTP id
- f13-20020a056902038d00b00db7dad060e9mr11570414ybs.118.1703078705796; 
- Wed, 20 Dec 2023 05:25:05 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
- [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
- by smtp.gmail.com with ESMTPSA id
- z18-20020a25e312000000b00da05d771097sm9261596ybd.22.2023.12.20.05.25.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 05:25:05 -0800 (PST)
-Date: Wed, 20 Dec 2023 08:25:03 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- ilias.apalodimas@linaro.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 4/4] fs: remove explicit efi configuration dependency
-Message-ID: <20231220132503.GK2513409@bill-the-cat>
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-5-takahiro.akashi@linaro.org>
- <CAPnjgZ0vq6kxiBNOwbi1JyMxV44S46uKXd1vbPNHFX5nwYLVtQ@mail.gmail.com>
- <14EA5E9B-23EB-4BD5-ACA9-7CEA6BC35453@gmx.de>
- <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BKDNPdX019348;
+ Wed, 20 Dec 2023 07:23:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1703078605;
+ bh=62KfGU9+vBpMhL56jbPyDrH8TLf71hjzaJ0GdhVSGSM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=X5TTTQYIgWgQIIwd4dUz8YYBys45oPimIj7bFa6l+FjLROzU5Iu2giQqQT5G9yULI
+ 5eMwHi0BpCIHv6p1UYEXfiw4bfSb7IvCrN0JZ1BvI8VHHydmt4GJxPOSS3cb4auVzk
+ 9cbcgn4G9edpEZkGlhIY0KyPSOE9qvUA5HgTz+ec=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BKDNPQ2029383
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 20 Dec 2023 07:23:25 -0600
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
+ Dec 2023 07:23:25 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 20 Dec 2023 07:23:25 -0600
+Received: from [10.249.135.225] ([10.249.135.225])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BKDNJ6h102226;
+ Wed, 20 Dec 2023 07:23:20 -0600
+Message-ID: <e6f0e216-cdee-4139-ab4f-003f2e261d17@ti.com>
+Date: Wed, 20 Dec 2023 18:53:19 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9xtbXm0nk8rI0y39"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2n=yoL3GwUMsiL9dm-w8P88d_N5MUxMEHx+J9q666w0Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 10/16] arm: dts: k3-am65-main: Add ICSSG IEP nodes
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>, MD Danish Anwar <danishanwar@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe
+ Hershberger <joe.hershberger@ni.com>,
+ Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>, <srk@ti.com>,
+ <r-gunasekaran@ti.com>
+References: <20231219103418.3445886-1-danishanwar@ti.com>
+ <20231219103418.3445886-11-danishanwar@ti.com>
+ <20231219174601.GA2513409@bill-the-cat>
+ <8a4fe530-370d-469c-a518-f52b3e65658d@ti.com>
+ <20231220125220.ucobgoruw7vdjqx6@tumble>
+From: "Anwar, Md Danish" <a0501179@ti.com>
+In-Reply-To: <20231220125220.ucobgoruw7vdjqx6@tumble>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 20 Dec 2023 14:27:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,105 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/20/2023 6:22 PM, Nishanth Menon wrote:
+> On 10:17-20231220, MD Danish Anwar wrote:
+>> Hi Tom,
+>>
+>> On 19/12/23 11:16 pm, Tom Rini wrote:
+>>> On Tue, Dec 19, 2023 at 04:04:12PM +0530, MD Danish Anwar wrote:
+>>>
+>>>> The ICSSG IP on AM65x SoCs have two Industrial Ethernet Peripherals (IEPs)
+>>>> to manage/generate Industrial Ethernet functions such as time stamping.
+>>>> Each IEP sub-module is sourced from an internal clock mux that can be
+>>>> sourced from either of the IP instance's ICSSG_IEP_GCLK or ICSSG_ICLK.
+>>>> Add the IEP nodes for all the ICSSG instances.
+>>>>
+>>>> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+>>>> ---
+>>>>  arch/arm/dts/k3-am65-main.dtsi | 36 ++++++++++++++++++++++++++++++++++
+>>>>  1 file changed, 36 insertions(+)
+>>>
+>>> What's the status of all of the DT side of this, upstream?
+>>>
+>>
+>> All of the DT patches are already part of upstream linux kernel except
+>> for patch 08/16. This patch is currently in linux-next and will be in
+>> linux in 6.8-rc1.
+>>
+> 
+> NAK.
+> 
+> Send a sync at 6.8-rc1 and then start working - DONOT SEND patches
+> modifying SoC dtsi or evm files directly in u-boot.
+> 
 
---9xtbXm0nk8rI0y39
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sorry. I wasn't aware of this. I will resend this only after the changes
+are in mainline linux.
 
-On Tue, Dec 19, 2023 at 09:46:27PM -0700, Simon Glass wrote:
-> Hi Heinrich,
->=20
-> On Mon, 18 Dec 2023 at 15:16, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
-ote:
-> >
-> >
-> >
-> > Am 18. Dezember 2023 16:01:40 MEZ schrieb Simon Glass <sjg@chromium.org=
->:
-> > >Hi AKASHI,
-> > >
-> > >On Sun, 17 Dec 2023 at 19:39, AKASHI Takahiro
-> > ><takahiro.akashi@linaro.org> wrote:
-> > >>
-> > >> Now it is clear that the feature actually depends on efi interfaces,
-> > >> not "bootefi" command. efi_set_bootdev() will automatically be nulli=
-fied
-> > >> if necessary efi component is disabled.
-> > >>
-> > >> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > >> ---
-> > >>  fs/fs.c | 7 +++----
-> > >>  1 file changed, 3 insertions(+), 4 deletions(-)
-> > >>
-> > >> diff --git a/fs/fs.c b/fs/fs.c
-> > >> index f33b85f92b61..82ee03b160e9 100644
-> > >> --- a/fs/fs.c
-> > >> +++ b/fs/fs.c
-> > >> @@ -791,10 +791,9 @@ int do_load(struct cmd_tbl *cmdtp, int flag, in=
-t argc, char *const argv[],
-> > >>                 return 1;
-> > >>         }
-> > >>
-> > >> -       if (IS_ENABLED(CONFIG_CMD_BOOTEFI))
-> > >> -               efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
-> > >> -                               (argc > 4) ? argv[4] : "", map_sysme=
-m(addr, 0),
-> > >> -                               len_read);
-> > >> +       efi_set_bootdev(argv[1], (argc > 2) ? argv[2] : "",
-> > >> +                       (argc > 4) ? argv[4] : "", map_sysmem(addr, =
-0),
-> > >> +                       len_read);
-> > >
-> > >As I understand it, this is setting the boot device so that (if it
-> > >happens to be an efi application) it will know which device it came
-> > >from. But this is a hack. For bootstd, the device is known as it loads
-> > >the kernel.
-> >
-> > Please, consider what happens when the user interactively executes the =
-load and bootefi command from the console.
-> >
-> > >
-> > >Also it does not deal with memory allocation (nor can it).
-> > >
-> > >Where are we using the 'load' command to load a kernel? The distro
-> > >scripts are deprecated.
-> >
-> > Some users use boot.scr scripts
-> >
-> >
-> > >
-> > >At some point this code should be removed. Is it too early for that?
-> >
-> > Yes, as long as we allow users to invoke the bootefi command with an ad=
-dress pointer.
->=20
-> So how about we create the new path, with the info passed in as part
-> of the bootefi call? Then we can remove the call from bootstd, at
-> least.
+> I think you need to start talking to other folks in the team who have
+> have received the same feedback.
+> 
 
-Why? It's not clear to me we'd have this information available at that
-point unless we stored things to pass along at that point too.
+Sure Nishant. Will do.
 
---=20
-Tom
-
---9xtbXm0nk8rI0y39
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWC6y8ACgkQFHw5/5Y0
-tyxUFgv/Q3tMYCy+gu55HnbObqYRdpy8CUgQxfp50Ignyz4DFLGFL+jy8WIr7sSu
-iUPzVatGfMggDwbOsqFD94eVjjHkuYVsI8CfOKatqt7sXmU23iQdyRRnNHxgADtN
-0QYyVQGJBQ3AHxY4TRfguvrfaXKMp9wiDCy1V7Si4hwOsjcu73tovnx9SoMkDaTc
-uvunlMkfOdLVMKa2hHePGLi+c/hGCQ/gb7XnLq4p2eoT7BUZntFBxusfaTnQKYXy
-zuRbZYffOwBy5EzPwfUkwH0hPT1KRiT8t80HwynifsPDRIQT2WLapdWWvXSMibQw
-lyiVHLvp02eX2idBtegLZueIZexgw8rboKVv1QJMPnoZAC9S5miir5K8CLIn1w7C
-2zPl2Zkgp0f4UBdiZwIgkMoa0KLQK++ieTJscj6+NBLPTvUXQfw3TqYAij1A0dap
-k05mCl5jk2zCna9o79k9XAf6KAX1YfB9NaZwVCiiEnBuf8ozgmuu5MmVt9/PChRj
-T/xJaR2c
-=JgjS
------END PGP SIGNATURE-----
-
---9xtbXm0nk8rI0y39--
+-- 
+Thanks and Regards,
+Md Danish Anwar
