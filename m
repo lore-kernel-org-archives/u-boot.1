@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7684C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 15:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B3EEC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 16:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1686E876FF;
-	Wed, 20 Dec 2023 16:46:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3324D876C0;
+	Wed, 20 Dec 2023 17:10:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qCCTUHgJ";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8609F876D5; Wed, 20 Dec 2023 16:46:44 +0100 (CET)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1703088659;
+	bh=mb/snHew8x+oBo4Wkwh6bIq2zKoDKNcS6OyuBS3C9WI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qGD4PJ0/GUtOPJrZ/2mb2J/Os5UtVGURabVnEtA5s0cQ3UN1YUeLMk4ZkwDmN9ddH
+	 i/4wX5dVrPAwdqR2CB135bOMfypAWKIBRfAHEIt15LRQLiujUOQre/ZUjD9opZUUMK
+	 sBR75pWtaMxI82hiihZMc8Wexh61hzQgcT6aTCe8Aq+TBCi42QxSHxz7KlmnPxo+Iw
+	 y+vay2VP1Ujzcl0tKZoRWzWGh6UEKun+xWDA9uj4UA6w4TIRQ0af9BtWGCjccPYtgp
+	 EERx0AIJw4eI8Qxjn9wa+D9wTFFf1AvtfCTyyVzrudcXEUXkanGbFj99jUzE03/okT
+	 /YdhK+pITZdYA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A5B887032
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 16:46:42 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6da682e0a20so2913792a34.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 07:46:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703087200; x=1703692000; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vpukr1F9TFvvBzM7YY+Z96AFZtR1VHvSwx8fcnR3Jmk=;
- b=qCCTUHgJ2axQkQkcaonpIdPWPOjGNmhYZcJdvSewkEa9Ej1WK6qledGbQTv5Q4gF25
- BHgQ2Q5id1BvnKVKucoSCWfKDJ/cGxtDzufMWWwFkdyQ+Qv3/ouXjMpwfjTdaKGAIz6W
- 9cgOSTFIPUROBkb7soi+A9B6WrPfa0RNY42g8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703087200; x=1703692000;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vpukr1F9TFvvBzM7YY+Z96AFZtR1VHvSwx8fcnR3Jmk=;
- b=TdeYCSQA+eeTn51ZYn0PXNcqlAAwbm3h98a4QzsETec9SfB6GkOurxtXXLISABG6XP
- qEMPL+fwlEhv6FSGnumjhKxdhuAr/lNPrr1rfC294fgS/NslIaN2UaFqisS7lKnxfYgI
- YlY95E+C6S9e9COJWiCaU9HOjwY6kvukKiTOutfl0u0c4bUvP6R4v8AK7t0LEFVLN1er
- UJIx96fHPidggyCc/3jhBVSSnQIHogOssMYirI81HytT+8WLgD0MTvNRMTEZuXtkJoQ3
- btbTH42uSJ3u1mavQZtsrWJ2rOplQgtUyY76Y0dXQezYICvtVJzbdoiObvHubcSHvEu1
- gpJg==
-X-Gm-Message-State: AOJu0YzSqgTmc3ZEgIodhk7oNHXnE5P1klCm512EtfI4IurKsi32Z/CO
- VfjUJPrurTdq0bNqiUt/r79NAg==
-X-Google-Smtp-Source: AGHT+IHA+12GPu5N2buKqEBCcl7dtvV/v5DYTwf6DWyB92gm2OZ19y0pOWCGIka7jjJkAuVyiZRQeA==
-X-Received: by 2002:a9d:784d:0:b0:6d9:f4c1:2003 with SMTP id
- c13-20020a9d784d000000b006d9f4c12003mr19729776otm.15.1703087200767; 
- Wed, 20 Dec 2023 07:46:40 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-ae12-866a-2c78-8ee6.res6.spectrum.com.
- [2603:6081:7b00:6400:ae12:866a:2c78:8ee6])
- by smtp.gmail.com with ESMTPSA id
- g6-20020a0df606000000b005d317074440sm10742127ywf.79.2023.12.20.07.46.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 07:46:39 -0800 (PST)
-Date: Wed, 20 Dec 2023 10:46:37 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
-Subject: Re: [PATCH v2] test/py: i2c: Add tests for i2c command
-Message-ID: <20231220154637.GA4032343@bill-the-cat>
-References: <0d8e994ea619d3942ee215a8f5635627e89c3512.1700567875.git.love.kumar@amd.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0EEB686CF4;
+ Wed, 20 Dec 2023 17:10:54 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1703088657;
+ bh=mb/snHew8x+oBo4Wkwh6bIq2zKoDKNcS6OyuBS3C9WI=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=i+7r+lM8VkCATkvjo4b1B0rxF4sbeBzfzc2lKr0Dgj86k5NsJFHw1xJRQ/T1MPER+
+ m12O9RL0erpHM9+/l8M9UY7Dx5gqxvVihceIuWDnkgsq0K5LEaDZqAePCtzj6fxmoH
+ 3uuj1WXVuYFKnG0rIyzqiqpaVeFoH8o+IFnzBnax+jFPe0ke++IsP8ivIEIck7aJTX
+ 103WWn7Tq7x8ysKYkf57rCLPf0WBhSm1PEBYhjNWVpgc/4wxr2vDrKKsGrZRYwRjCU
+ IpatsIEg7rB4nmL69Wy2+B0Q+DMDHUDldtCwWStfb8dUaaL1VipiF606p4os8eHi8Q
+ VoxE0FvdzrNeA==
+Message-ID: <c85be092-64de-4bac-842a-b7d1d4587d84@denx.de>
+Date: Wed, 20 Dec 2023 17:10:54 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cOg/app94CYA2Iit"
-Content-Disposition: inline
-In-Reply-To: <0d8e994ea619d3942ee215a8f5635627e89c3512.1700567875.git.love.kumar@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/1] drivers: misc: Add socfpga_dtreg driver for Intel
+ SoCFPGA
+Content-Language: en-US
+To: "Lau, Wan Yee" <wan.yee.lau@intel.com>,
+ "Chee, Tien Fong" <tien.fong.chee@intel.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>, Peng Fan <peng.fan@nxp.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Konrad Dybcio <konrad.dybcio@linaro.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Hea, Kok Kiang" <kok.kiang.hea@intel.com>,
+ "Maniyam, Dinesh" <dinesh.maniyam@intel.com>,
+ "Ng, Boon Khai" <boon.khai.ng@intel.com>,
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
+ "Chong, Teik Heng" <teik.heng.chong@intel.com>,
+ "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>,
+ "Lim, Jit Loon" <jit.loon.lim@intel.com>,
+ "Tang, Sieu Mun" <sieu.mun.tang@intel.com>, Tom Rini <trini@konsulko.com>
+References: <20231208083726.26906-1-wan.yee.lau@intel.com>
+ <DM8PR11MB5592CA687BF05641806BA22BD297A@DM8PR11MB5592.namprd11.prod.outlook.com>
+ <edccf82f-2c65-4f09-bd9d-f94765ae015d@denx.de>
+ <MW3PR11MB4553AD65903767C338B8E43AB696A@MW3PR11MB4553.namprd11.prod.outlook.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <MW3PR11MB4553AD65903767C338B8E43AB696A@MW3PR11MB4553.namprd11.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 12/20/23 04:09, Lau, Wan Yee wrote:
 
---cOg/app94CYA2Iit
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Tue, Nov 21, 2023 at 05:28:43PM +0530, Love Kumar wrote:
+can you trim the CC list to relevant people ?
 
-> Add below test cases for i2c commands:
-> i2c_bus - To show i2c bus info,
-> i2c_dev - To set or show the current bus,
-> i2c_probe - To probe the i2c device,
-> i2c_eeprom - To test i2c eeprom device,
-> i2c_probe_all_buses - To list down all the buses and probes it
->=20
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
-> Changes in v2:
-> - Take the configured eeprom value from env to read back and compare
-> ---
->  test/py/tests/test_i2c.py | 108 ++++++++++++++++++++++++++++++++++++++
->  1 file changed, 108 insertions(+)
->  create mode 100644 test/py/tests/test_i2c.py
+[...]
 
-So this leads to failures in CI on other platforms.  Please put this and
-the other tests through CI:
-https://docs.u-boot.org/en/latest/develop/ci_testing.html
-Thanks!
+>>>> +++ b/drivers/misc/socfpga_dtreg.c
+>>>> @@ -0,0 +1,117 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0
+>>>> +/*
+>>>> + * Copyright (C) 2023 Intel Corporation <www.intel.com>  */
+>>>> +
+>>>> +#include <asm/io.h>
+>>>> +#include <common.h>
+>>>> +#include <dm.h>
+>>>> +#include <errno.h>
+>>>
+>>> Please move <asm/io.h> above to here
+>>>
+>>>> +#include <linux/sizes.h>
+>>
+>> A good starting point would be to have socfpga 64bit maintainer , without that ,
+>> these patches are only being archived .
+> 
+> Hi,
+> 
+> Is only one socfpga 64bit maintainer needed or the whole socfpga 64bit maintainer need to be included for this driver?
 
---=20
-Tom
-
---cOg/app94CYA2Iit
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWDDFoACgkQFHw5/5Y0
-tyzNMAwAsWpoItCT/8XdATR1R/4ypQAvcmkPyHUGtgxFSo1cG1qHRd3xuVbxEY3H
-Yes0R29LlvwxszccMq8Ffj/IEZDaLS99tBIVHwvtdM5vIkL+7u3p6I8NBNrjb0qY
-5JS5LvewB1CVQV+JD5ccUG9CurhoM3WFUEu2Y3BMu4P6xV8qRazxtGNq25foLUFH
-2JhJEyDiSeGY8MauCWo8nRzs/y2ev6Aw8ZdABbdda4rQNjjwycGb15Vij0pDOsns
-28GrIVnaV1aQUGVDBP2u6bm1SkIiYbRj00Gfr/Ixwr92OOJig5PhmpmnyRVVXFVX
-9b+m51Yxo7STY71wsnESU/uQduumUGu/dhDynHSV4UeX2y2PvouRuWrorAlBdSwG
-uspedPSDkto6W1YyTRC/OvRhc2CQpcejiYqJVK4hWpKC/fKtwhht8C42yS0D6c0i
-i+RFrU5YWRYmp2HvU640q5KDCcohudT4trJjmAoUqspNKpgY3ooCk4ghFBjiU5dU
-07HF/Z9u
-=hAw4
------END PGP SIGNATURE-----
-
---cOg/app94CYA2Iit--
+U-Boot currently does not have any SoCFPGA 64bit maintainer, that needs 
+to be fixed .
