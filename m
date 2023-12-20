@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BE4C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:56:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F4DCC3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 10:57:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27F0B8750C;
-	Wed, 20 Dec 2023 11:56:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 233FB8750C;
+	Wed, 20 Dec 2023 11:57:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="pwP6eYAv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="T5mLutxj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1D5E87630; Wed, 20 Dec 2023 11:55:59 +0100 (CET)
+ id C401487509; Wed, 20 Dec 2023 11:57:21 +0100 (CET)
 Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20624.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::624])
+ (mail-bn8nam12on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::61e])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDD3087509
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:55:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9ED148750C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 11:57:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cAV9KGXCJymBOInDaxy4qxg2MkgM10llmn2TJiuHQDPktRIdG0M8fUHiYTXGZK1kBwnx88dYDiCUJK6/k+CpskZYea4t0PbiFXYAN6DaRdHyAejks7cI2km67IHjkhmAAP4Bpft2t05Af7N5Pp55ugnP7oD14pT5EqK55STR67rohGrL5PbmTk8IA0cVwq8rUQB+vRYLbSiZnnwC0w+695FT+KEeozMG5QExz9tIPcJNS0g5IkXJfFtMi5meCCUe5qGKncB6DlqM21amVwoo1pRbxx5UTEh752b+y2gEoSSn6bLw4XHu09tbYuueXWdOIe+S8X8fzuN3OnSUk/RT/w==
+ b=lSCBvD9bfCbreUceqo8wO3nMHqvd1mYBpEf5Nz2014rRsjicchA2czfdb4n7cghnm2CUJWmGOnkTT72T5yU6pqxU9hPRFJMCaEEvYZ6qCp2tCsVfE8Z/vGNGeDSNUymawrGp6rRiK7obj7nA2nstnR2KLkwgsCkhuOcj4oDDU2g68DnQLaMgA+s6jyEJ/cPvHWathZFgv+BhhvwTtERW38sAGIaA9ILzDCsa+vN4o23o91rhw5HiH9mweFoWuVBokuIQd5Py6BgD0DlYu9svlG6G/nCr4jXQtJQwuCP3LXlwwIMMpJCzTPl4VYKPif6vuTZgsqA7iKeRnS8MMINUDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W/nc3cIVIJfrnWSE54DU2gxYMY34ZgSQs8E5PgNpAW0=;
- b=KoMPLYfPWn1or8mLJOcnCOfDvYj3dg8QONlcyBHobSVzBf2VAfApDCeg6dU2eIYUnqdHSby+T1C/iaLrCLKu8+7r/wJpaQ6U7bbGQraDtx3acWyYG745wtHbbIxPqaY1frU8OtLrr2M5lLkUB+I44E3Cog2VR2z1ZPA7tcBqGgzJDkcNuZeb+K204syOIiFLYdiXQopj7m6MizKOSqC+arq1npySlw52UcdzzE2jvO9Qo5OLx7h84xRdpQA3Gzsh3HU/tGnQ/+yVkRt0pKkr7espYdICLlGBjkaNz0ue6UBxaRrl2EPAd2QaVsTBZlBDIGK+E+ZH2k7R700bZQJMjA==
+ bh=a1LhD+r//e3gkIVmRpO62n+BwwYPLXNVhga9XO9glfk=;
+ b=a/jcoXCK7oHDt3QKSjAl3p7Z5zMLG39pBmjnQCUKPlKmSJG8J4KM5RvQ4SPYOMcUEJEhRazI/euzAi6YRVQff9hikFZBJzL7wdVdpUzplSaV1acWVWr66TOc13hJ4NwFUhyRIJpIF0abFlTyDqlw4zh2mVmjzhsXx/x3lqukiu+mBhX2uO3A7Rt/mxTNn26MjYQjNW4g+4trEJnI0m98SwQBEy7PUo+0fCuPI842ZSPmoq98w/Awn3jVvR5oYxXJ3Gu2LVIwBuxxxI+YxQcfM1OlRz61d7Mbj6vAn4LTUCsYmaZ6OG6iMQ/WRXcEHbej80Di3gaeCzTWj4wkN8q9aw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W/nc3cIVIJfrnWSE54DU2gxYMY34ZgSQs8E5PgNpAW0=;
- b=pwP6eYAvjTFxkwB02mUDnHDedB21QgLIkxie+T7su/rBYBq5qzfZWMQvLFuyWgkgbxTZG0YeGonx05pHw1/h0IMsTFwqhJ1hgVQ8GxAFjPLCdTo/urKXlDLqeVe48NaSQXx/H9ynbflkCEZxq+ZWppemuBdBSHYvfwixscdzwxU=
+ bh=a1LhD+r//e3gkIVmRpO62n+BwwYPLXNVhga9XO9glfk=;
+ b=T5mLutxjFM5J610Ee04u8qg1y+D1jQXnfUz9z/s/Y077jeOaMmyKwWIUab/fZ0jrDUxarTmjRtJCu0RttpQMOxEYHF3qF7Y6yl5hhb6HrF1iMFi1/nI5RN/XRs7Z4zkV3ZVTDTo3C17m7duMaBx6vfWo8WQW2R6VQ7BsJN5ITe8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com (2603:10b6:a03:a5::28)
  by DS7PR12MB5768.namprd12.prod.outlook.com (2603:10b6:8:77::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.18; Wed, 20 Dec
- 2023 10:55:52 +0000
+ 2023 10:57:17 +0000
 Received: from BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::39a2:42da:ea20:3349]) by BYAPR12MB4758.namprd12.prod.outlook.com
  ([fe80::39a2:42da:ea20:3349%5]) with mapi id 15.20.7091.034; Wed, 20 Dec 2023
- 10:55:51 +0000
-Message-ID: <aeac47cf-99bd-4256-a622-86d9f6369e4d@amd.com>
-Date: Wed, 20 Dec 2023 11:55:38 +0100
+ 10:57:17 +0000
+Message-ID: <f2221d44-cbb7-4355-b9a1-ecea47af62c5@amd.com>
+Date: Wed, 20 Dec 2023 11:57:09 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] qemu-arm: get FDT from bloblist
+Subject: Re: [PATCH 3/5] bloblist: Load the bloblist from the previous loader
 Content-Language: en-US
 To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
  ilias.apalodimas@linaro.org, sjg@chromium.org, jwerner@chromium.org
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Nikhil M Jain
- <n-jain1@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
- Sean Anderson <seanga2@gmail.com>, Qu Wenruo <wqu@suse.com>
+Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Bin Meng
+ <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Baruch Siach <baruch@tkos.co.il>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
 References: <20231219211114.393193-1-raymond.mao@linaro.org>
- <20231219211114.393193-6-raymond.mao@linaro.org>
+ <20231219211114.393193-4-raymond.mao@linaro.org>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -110,7 +111,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20231219211114.393193-6-raymond.mao@linaro.org>
+In-Reply-To: <20231219211114.393193-4-raymond.mao@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR07CA0128.eurprd07.prod.outlook.com
@@ -119,61 +120,61 @@ X-ClientProxiedBy: VI1PR07CA0128.eurprd07.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BYAPR12MB4758:EE_|DS7PR12MB5768:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebd1fe49-d4fe-4923-6f7d-08dc014a3b5b
+X-MS-Office365-Filtering-Correlation-Id: 40026147-9d79-4bdf-dbe0-08dc014a6e2d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LBYlv7M561+Pb9BcOd7HzKLHgfgYVVmAXtw1jZQexiOBhJA8mxYfsbamj7flwQ1k8d4ytu9LibRT7rorh3fVMGF1XscRVsY0vt0kPCsDNFmHu3KLei+6OBe2Ou9XPKAUSCiIrTegnpVh56mSUS4jBDUajfpu/CfQ8ozNVq3VG7Do56Lze3/e+H40CYHkqJgs6TMyWn2a8fPZ1YLuCYBmz5g6xlDJ0EZOEjbm4VcHRd3WWTtinhdZ9FPjgfp6ju1eWf6jUfYUjwaB92JDNIcmUWSzwo4baMslM9uoJ1ujnrV+jOO24ZTvnNMtDOAFoSCg9DN7OtkupyipufwcvL6IiryPxT2dZHfsvjkqmH3qqDG486kaervrUULuQEXEVK0g5VUd8AnV2n85RJ0w83h6zMTGtORNS2Zp/R3B8hvOB61Q6cMFOTnwUPVbJEWnijhh8Td4zPfwobesXUQFy8r0L5OmeI1vCEx9dhpSvIxq/owfr+qbBR8+gqYJdJo419JZXa4YK5g8EUQ9+c2qx+nUvCQGv6ufd0siyC+S9g0NR0MOfNPwgZULPhaKeETmPtD8NjP5/EBCJ1fqH5Ib/gpy3J0GCVZ0rjqDPaJd0Vu1IPZwzMg29Cc1nq+Y7A6NMmjg8Sce0YWkT7YoFMtHUoI+cg==
+X-Microsoft-Antispam-Message-Info: JqiuIlUThftvEE9oJeQLfxsPH4iZBOm/ZLTFc6JTipjXfbIS7zi0TYJr8YevtJysRZnKE8XH8eXb6tYNIprgta2qoot+9D9kH0A2vT18TH2l/dAYuFLiV6sefdOmyzeIIabRi3UOid1+jHCsQtyujW8CjvFxRfy432xCGEds9s2s9+MjjBu1aFtyYdGpmnJTAJk8g4sdrLLATJ9G/nski97xg1xM93lhTjo9BuQHa8S9ppBZ/l4QKwVS/g4idMAJWu44OrqGauDncs4h/eekXjZhAFnvT9gj3T6+C+rNc8be5PR/BsnolyZ+NqBIyUVoxO+9kQ9SkvXmTeulEr09xd3PppEs1H5iH3L8jBh94tAxFk4xS80inB4E+6yuceN1pWNKOKnOfIXNodvjp7sx/huX3TRBGStPjB/OaYNGO+0Gye6BEFRNjG5xPz9jZydbp7dJq88g/r/1ZnSZKspfoSNRVd/DKvDzzHsWS7s9pg40mQ4CWKyxp63ySheOa1YzjPEclc0qsgjBpTdc+5MXPQ8drKp0GoY2e3Kgyq7P5JgLWS77Dry4ueKSAUCp/ZAFPKM5szAbr0kP53vUC44F77b2Fc4o5nQ+xCZm7Dgej9WqNhDGrlJzBmhPu/Hy16r0b3ytd3FfJJxP/gFo6KPNpC4TwMgIDRZFJqmkEJ1G/6mZz1dtmNvJRN23TLkHKr7/
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BYAPR12MB4758.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(396003)(366004)(39860400002)(346002)(136003)(230922051799003)(186009)(64100799003)(451199024)(1800799012)(31686004)(86362001)(31696002)(36756003)(66476007)(6512007)(6506007)(53546011)(66946007)(6486002)(66556008)(6666004)(5660300002)(38100700002)(316002)(2616005)(8936002)(83380400001)(41300700001)(8676002)(478600001)(54906003)(2906002)(7416002)(44832011)(4326008)(26005)(45980500001)(43740500002);
+ SFS:(13230031)(376002)(396003)(366004)(39860400002)(346002)(136003)(230922051799003)(230273577357003)(230173577357003)(186009)(64100799003)(451199024)(1800799012)(31686004)(86362001)(31696002)(36756003)(66476007)(6512007)(6506007)(53546011)(66946007)(6486002)(66556008)(6666004)(5660300002)(38100700002)(316002)(2616005)(8936002)(83380400001)(41300700001)(8676002)(478600001)(54906003)(2906002)(7416002)(44832011)(4326008)(26005)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dVZ3bDhzZ2d5dlRvcGplWVRDbWU3MEtjcEFuM3hQT2RDcEpRNHRtUkk0U0pM?=
- =?utf-8?B?Z3oyRmszU0p3MkFZUjB2cisyS0pDYkxySGh0dmFwRzdtSTNyaHdGQnpmeFMy?=
- =?utf-8?B?TmY4eFNNTkRsY3cxbXo0K2RWVzBPcGxjK1ExbzV2YjNtYkU0WlBXNVdjVFpZ?=
- =?utf-8?B?YTJWSG5NbXIvaVdHcHZac2xobmtkMkZxREJxSEZOMEt0UUlEeXlXR0p3eDVi?=
- =?utf-8?B?L0Nsdjc4TVQwSC9iRWU4Wk1zNUZwYmJlTUd2dlV0QzZHMVV3TkVBd3hVUWQv?=
- =?utf-8?B?ZnZWZFR1TjZwU3FLdzF5SElDSnNGa0x2T3hmYS85UHo2c29xTGxPWmMyRlpB?=
- =?utf-8?B?SWVMQkpyNENWVElJZVJIalNGczBMRVZ0N1IwaldvVjFyNmpYOGk3Si94Y3NU?=
- =?utf-8?B?WlM3a2h1R21pQUxIZU1PbDBQRG5MRXhtayt2UWxENXJ6YlY1Uy8zYXlaTlhi?=
- =?utf-8?B?Y3ptdXhoU1dqUmo3WVJGdk9uenZuWVVxc1ZqNmw2cUpabklxYTNDYTFESndj?=
- =?utf-8?B?WG9STkEwU0V0VWlyeTd3d2s1V084U09rbTVURjdmVGt4cWhLMThVZ01TR2VM?=
- =?utf-8?B?OUlpM3o1akUvUWFsSWR3SE5nRnJxeFY2Q1RUUUhaQVd4eTJ2Nnc3RitqMTIw?=
- =?utf-8?B?bkNldVhCTGRLOXRRbUdTZVNNV2VITW1sdXRuRXNkNHRMVlJZOC9wUy9mZDZM?=
- =?utf-8?B?VHN5U3RlbWEvTnZwUnBXRnZxQUtvUTQvUE5qWk9FNURYRXNBeTIxK0piOFVK?=
- =?utf-8?B?cytCbDYzUkZreGwydmJjRklJbzdpMjRuN0VpNGFFbkU1dUFHNlkrS2dvWlRq?=
- =?utf-8?B?MzJaUnNzcjM2QWJ0OHhYbUc2VlFsd3JjWTVJaGR1d1NUeWUrMlpLUmxPMXFt?=
- =?utf-8?B?SEh1NWdhNDFXZTJ0NGtlTGVBN1NXYXRxWW42ZWVWbU5RWkNJWTgxQ1YySDdK?=
- =?utf-8?B?Sloxa1BQYnlUTit5NEZrdjlLS2RzYms1VWl4bjlXMXArRk1Id0k3TTJxaWlq?=
- =?utf-8?B?VHVzL3RQWWQycFlydFE0WldpUExZeGRQbU5UOXRuZm83UkwxVTI1dm5sYSs3?=
- =?utf-8?B?UnRnL2JFQ0JNTTdwMjgyWlRXdlRBZ1dsK2Q3ODVpR1cvbEdOU09Bcjc3Zk9O?=
- =?utf-8?B?U1FaNEwxQ2RtZjVCbUFDTmR5UnFDaXBMSE5EaldDLzk4MUUvdkZrTEtDWEJn?=
- =?utf-8?B?aHdRbnVVY2tZcGJzeUhYVlZhcWZBeFNEQ2ZDeEM0SE94b3ZTK3JRNlNOLzlW?=
- =?utf-8?B?dkNhaUVmU2VZRU1rSFVKN1FGNms1RGJodWV6R2VJQ3ZEY3Y0YS9TYUpjVlJR?=
- =?utf-8?B?dEQvTjdDK0dKeVRkeUk4VC93SFJ1RXFDQ0JQRE5ERzgxUERuYVhCWTN1dWdp?=
- =?utf-8?B?VkVJc1V6Y2JGb25ma0lXRUZ4ekVZcFBaN3ZpZ2w3NlA0QkVzcnlFdTd3bGFn?=
- =?utf-8?B?dXRCOVVuelM3b2x6aGJJdkU5emJwZUljME4vekRsaWQ0dkhMdGpYbEorR0xF?=
- =?utf-8?B?a25UMVZIWWMvTXFXam9hYzd3VkJOd1BtQ2lHNkxsdGN1ZXY4TG9uTytWbnpY?=
- =?utf-8?B?Wm1Zb3E2MkdoNUt6V1VORnlTMG9oc3ROa3ZKR1Y4bWtyamFUSk1IaTltbVRr?=
- =?utf-8?B?Q0VsMC9sOTdFdS91aWsvcitoQ0hxME0zZGRPWTlOUzlhOWlSdWQwRE5UTTJH?=
- =?utf-8?B?d2YzaWsxdUxHMmtaOWRvbS9rVGVtL0F6VmxMbFBtTjErTXh5bktWeEp4MStm?=
- =?utf-8?B?azVCRytQd01WUzhLeERSUlN2d1QvWmo2dUdKem5ZMGtFem5QaWZUNVpSUzd6?=
- =?utf-8?B?WnBycWxoS0pkcHdHTU5OajRBbm04QURrZG91RW01eHN6c25reUErNWwzYTda?=
- =?utf-8?B?bWJodUpldlVVRVRJUGJ1eGQxTGVNOG5BbVhjNC8xdTFqUW5Mbk5Nb0cwR3Za?=
- =?utf-8?B?MWt3cUtOSkVyL3VWV3hkVC9xS1Y2NDRva1VGKzRjR3loazdSSko1cXF6b3BV?=
- =?utf-8?B?VXFBcVZXckJQOWxkTUtxamJVakZaeFM0V2tCc242d1ZJc3ZseHkxUnFBKzM5?=
- =?utf-8?B?WGFFeHFJUVdNM1gvVy92bmNNemVRNWgwS1dkWFV6NUR3K0R1NE9XckZ4ajhp?=
- =?utf-8?Q?1lx6pet7j569WxAXTy8XoYTPv?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VEw4cWREMmpQQkw5RzZvdUVJSlhTRnB5SGdCRmZxU0orcmU0UzB1ckFlQVMx?=
+ =?utf-8?B?U05vZnhkdmQrUHErRzZpYVNSdG55dXN6ZHZnMDBjaWRQY0xBVks5emwyTFoz?=
+ =?utf-8?B?N0lldWtmUzNmYTYxM2NHOHBZV0RTZS9xblRIMWpyMTVTZkxmZDAzMW9LOFgv?=
+ =?utf-8?B?bDBYMmpaN2N0Y3d1K2I0ODlzZDBjSFhKdnBzOU82bW85M1Y4bUpEU0x0Z1JK?=
+ =?utf-8?B?V01za1Rjdm1mOE1ZY0Z6WjR1NDlUb1N4T2VFK3NmQVVYZnJFeGdzRHFUTzJ0?=
+ =?utf-8?B?SWoyZXA4VW5WNytFN2F0OW5LMjVTbG15VlAzYWhBNXBpWjJlRkFrOFNUbENE?=
+ =?utf-8?B?ZW1ENkc1R2VPWDBEV1R2N29aVTJ2WHUwZFY3dnpJdS9mNnM2Wk9QUjZXaGpW?=
+ =?utf-8?B?LzNVeXE1K2lubXVaRk5tekRtUFVqV2xrNjB0T002Umo0OXZGRnhJM2hqZ1Rx?=
+ =?utf-8?B?UytVbytxeUpMeklYbFhjV29hV2dYU0Nud1BrRENGTUk0bnppbW9iM2pvT0tL?=
+ =?utf-8?B?bUhzQWg2d1BlT1hXbVJZTExRNkluR2ZOeU5pQ09ncGxLYm5haDJpcmVUQ21C?=
+ =?utf-8?B?TGVIRytxbmNDUkRZRHM2dmU2NVFQTkJkeStoeDdwcWVTaUJwQjQzM242SWM3?=
+ =?utf-8?B?azRQb2p3TEw4Wi81b3c0SlNUbHRKRmtiS1RSUlVyakhWb09LbGRhMHIyclBB?=
+ =?utf-8?B?T0l1Rmw2Mlg0M0RGblpta3diSU5ocE1QcXRaMkhRUHduUHpXbWpIVzRQREsw?=
+ =?utf-8?B?QzJENzZrQnIraDVNdEY2cUVOaVJBR05DcDRBeGhsa3pqMjhzY3EyZnpqOENW?=
+ =?utf-8?B?bkpLajJMZUM2RThQWXNYR1ZuR1gwUTFGNjVFNGNKMGpaYXhsOEVkSktYOW13?=
+ =?utf-8?B?aGkwdms1MHNwNWF4V0RlY1UyeHhaeTgyZTZId1JsTVdNLzVhSlVKMmRpZ3Js?=
+ =?utf-8?B?RERtaVRoYnluTlhvY3Bpd3VlSHJFTEV4Q3AxNituK3h5ZlhQVlJ2d21wS0h2?=
+ =?utf-8?B?a2I5ZHNNalI4WGFoT3pSSUJuZEs4eEwyV1daYk9LRlNRQ1R1Q1lNK2k4RHZ4?=
+ =?utf-8?B?QUNiR0l1aXlIckg3MWg3djJidTVWd1VzU1V2VmJpbGN2L2g0NmIwWlkyQjdo?=
+ =?utf-8?B?UnlMMWZ4bHdqalE1ZHZ4T2ZyUmFFeFFQbXpMVFlwczhFbjgzREc4YzRKNXNh?=
+ =?utf-8?B?Qk5MblJaWkovcW4zZEE5ZFRyN1ZrNDdZZk1hV0JEYUtQbG9Zajl6cFdTWjUv?=
+ =?utf-8?B?UjRnUExOd0R4ZjBBL0ZOUFlubC9xbWgwNlZQaGFnalJnc3ZXV3Rhc2gzVEJt?=
+ =?utf-8?B?clRkR3NEemswcWxhMHIzcDVrdzR1ZXNZYnJaV0JGbm1PQzNxcnVHZEpTNFR4?=
+ =?utf-8?B?ZW10MnhJNTBxY2FqWklsbFJNSy94OXczT01LemNRRzBHbjJJdTZxcDZBQ1NF?=
+ =?utf-8?B?ZUphRVc3UnUxbnBycDJ6QVZ1TFRIZCs5YWlhaHNIVWtFcFpPSGoxSHlmYUQ0?=
+ =?utf-8?B?M25VMFBrb0diVit1SCtjUXdlYmdlanJXM0p4VFNaSlRlWHZzTk1JdmFCVUZN?=
+ =?utf-8?B?T1RVclhORHN2SHIrcWdxcDlNV0RwMmMrN2o5elAyM3hpSGEvcyt3WHNQWFJo?=
+ =?utf-8?B?UEM1T2RkMnQvRjBPNkNUSkZXQ1NSZDhHN21mRE4wVkhpWnhwQUFVb2FFMkRK?=
+ =?utf-8?B?KzJ5SlVkTXVyZGZGd1RyZkNpaldieDRmSnlkN01uNHlWb1ZyRlVxZVppdHZE?=
+ =?utf-8?B?eituY2tuSU83dVhhdE0zOUxmMWt5QVZ4bHk1L21ER0VYcit1Rm5EeG85TXNL?=
+ =?utf-8?B?VHRxMWlGU1RBaXl5T1JmWnRZMC83eE5WRlZHMjFFR3J4c29LVSszZWN6aC9j?=
+ =?utf-8?B?Ryt6am9vbG9ESXJYWlpVOUJEVzhyNUhwZzhaR3FrQWNkWW15MmY2bzFjVUZC?=
+ =?utf-8?B?Tk1iS0ZDTVQvVVlhVXQwaURQTG1GWXRQSi9Nb1g0TDJSSlRlendyZEg3Y2pN?=
+ =?utf-8?B?VDZqRStuT2xEelFoRW9DWjdIMDAzZXBzTWYrcFlGUy9Ja0xmN2dwWGVwdnUr?=
+ =?utf-8?B?QUdiZlA5UGlUTUpPa2dscTlneDNsTmsyRzVKZWMyUDlNRGxTQlFKM3kvNUtp?=
+ =?utf-8?Q?Iqm4auLr1OosO0rPk98X0FHPO?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebd1fe49-d4fe-4923-6f7d-08dc014a3b5b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 40026147-9d79-4bdf-dbe0-08dc014a6e2d
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB4758.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 10:55:51.7590 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2023 10:57:16.9994 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: e7WdJOM3kUfybgXt6vfdgFMUKg24I+YSt7cR5yr2L4aEZezbP5vfbIuXBXq7gOfm
+X-MS-Exchange-CrossTenant-UserPrincipalName: dkCRUTcQtbL4+O+vjPiNSvfoo1F6uKaLi9Hi7y+uqdMDaQXt/y9pqcE0nFAs+8IZ
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5768
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -194,49 +195,109 @@ X-Virus-Status: Clean
 
 
 On 12/19/23 22:11, Raymond Mao wrote:
-> Get devicetree from a bloblist if it exists.
-> If not, fallback to get FDT from the specified memory address.
+> During bloblist initialization, when CONFIG_OF_BOARD is defined,
+> invoke the platform custom function to load the bloblist via boot
+> arguments from the previous loader.
+> If the bloblist exists, copy it into the fixed bloblist memory region.
 > 
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->   board/emulation/qemu-arm/qemu-arm.c | 15 +++++++++++++--
->   1 file changed, 13 insertions(+), 2 deletions(-)
+>   common/bloblist.c  | 47 ++++++++++++++++++++++++++++------------------
+>   include/bloblist.h | 16 ++++++++++++++++
+>   2 files changed, 45 insertions(+), 18 deletions(-)
 > 
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> index 72e0a97567..455c042a9a 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -148,9 +148,20 @@ int dram_init_banksize(void)
->   
->   void *board_fdt_blob_setup(int *err)
->   {
-> +	void *fdt = NULL;
->   	*err = 0;
-> -	/* QEMU loads a generated DTB for us at the start of RAM. */
-> -	return (void *)CFG_SYS_SDRAM_BASE;
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 232ca4c6ce..c89f7a1554 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -486,31 +486,38 @@ int bloblist_init(void)
+>   	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+>   	int ret = -ENOENT;
+>   	ulong addr, size;
+> -	bool expected;
+> -
+> -	/**
+> -	 * We don't expect to find an existing bloblist in the first phase of
+> -	 * U-Boot that runs. Also we have no way to receive the address of an
+> -	 * allocated bloblist from a previous stage, so it must be at a fixed
+> +	/*
+> +	 * If U-Boot is not in the first phase, an existing bloblist must be
+> +	 * at a fixed address.
+> +	 */
+> +	bool from_addr = fixed && !u_boot_first_phase();
+> +	/*
+> +	 * If U-Boot is in the first phase that a board specific routine should
+> +	 * install the bloblist passed from previous loader to this fixed
+>   	 * address.
+>   	 */
+> -	expected = fixed && !u_boot_first_phase();
+> +	bool from_board = fixed && IS_ENABLED(CONFIG_OF_BOARD) &&
+> +			  u_boot_first_phase();
 > +
-> +	/* Check if a DTB exists in bloblist */
-> +	if (IS_ENABLED(CONFIG_BLOBLIST)) {
-> +		if (bloblist_maybe_init())
-> +			return (void *)CFG_SYS_SDRAM_BASE;
-> +		fdt = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-
-why not just.
-
-return bloblist_find(...);
-
-> +	}
-> +	if (!fdt)
-
-And you can ignore this if here.
-
-
-> +		/* QEMU loads a generated DTB for us at the start of RAM. */
-> +		return (void *)CFG_SYS_SDRAM_BASE;
+>   	if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> -		expected = false;
+> +		from_addr = false;
+>   	if (fixed)
+>   		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+>   				      CONFIG_BLOBLIST_ADDR);
+>   	size = CONFIG_BLOBLIST_SIZE;
+> -	if (expected) {
+> +
+> +	if (from_board)
+> +		ret = board_bloblist_from_boot_arg(addr, size);
+> +	else if (from_addr)
+>   		ret = bloblist_check(addr, size);
+> -		if (ret) {
+> -			log_warning("Expected bloblist at %lx not found (err=%d)\n",
+> -				    addr, ret);
+> -		} else {
+> -			/* Get the real size, if it is not what we expected */
+> -			size = gd->bloblist->total_size;
+> -		}
+> -	}
+> +
+> +	if (ret)
+> +		log_warning("Bloblist at %lx not found (err=%d)\n",
+> +			    addr, ret);
 > +	else
-> +		return fdt;
+> +		/* Get the real size */
+> +		size = gd->bloblist->total_size;
+> +
+>   	if (ret) {
+>   		if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+>   			void *ptr = memalign(BLOBLIST_ALIGN, size);
+> @@ -519,7 +526,8 @@ int bloblist_init(void)
+>   				return log_msg_ret("alloc", -ENOMEM);
+>   			addr = map_to_sysmem(ptr);
+>   		} else if (!fixed) {
+> -			return log_msg_ret("!fixed", ret);
+> +			return log_msg_ret("BLOBLIST_FIXED is not enabled",
+> +					   ret);
+>   		}
+>   		log_debug("Creating new bloblist size %lx at %lx\n", size,
+>   			  addr);
+> @@ -532,6 +540,9 @@ int bloblist_init(void)
+>   		return log_msg_ret("ini", ret);
+>   	gd->flags |= GD_FLG_BLOBLIST_READY;
+>   
+> +	bloblist_show_stats();
+> +	bloblist_show_list();
+> +
+>   	return 0;
 >   }
 >   
->   int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size)
+> diff --git a/include/bloblist.h b/include/bloblist.h
+> index b5d0f147f6..f5c623133d 100644
+> --- a/include/bloblist.h
+> +++ b/include/bloblist.h
+> @@ -445,6 +445,22 @@ void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
+>    */
+>   int bloblist_init(void);
+>   
+> +#if (IS_ENABLED(CONFIG_ARCH_QEMU) && IS_ENABLED(CONFIG_ARM))
 
-M
+How do you think that others start to use it?
+Adding that platforms here? I don't think it is scalable.
+
+Thanks,
+Michal
