@@ -4,81 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEDF0C3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 20:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A25C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 20:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A98B876CA;
-	Wed, 20 Dec 2023 21:12:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AD47B876CA;
+	Wed, 20 Dec 2023 21:16:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yp8j5IzK";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="ql+ZYwof";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76DDB8750C; Wed, 20 Dec 2023 21:12:35 +0100 (CET)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DE0148783B; Wed, 20 Dec 2023 21:16:32 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABD02876CA
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 21:12:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A76B8750C
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 21:16:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-28bec6ae0ffso27677a91.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 12:12:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703103151; x=1703707951; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IXbb5Y7n/t6/blF1b7RwNIrHdPB+M0zsnYUxTHdefmU=;
- b=yp8j5IzK4UpDXOy2CzWOJkFVwbn2hg+kJ0dH6Ht7PiX6z84L1r9qvRZQBbaREequ/l
- 2tYF+RNXaM2vnsdXHCJiBzbapAeN1PV5ozRnk+VjLc25ktRB9K3SKMlVA6+aVtAjWpV/
- QV8X7rmEzcL4mILs1VQ/m7l2NYRSoDM8+ftwOBw1GfrazxWiIExhePnMUiIksvUJ6iqT
- aHsQKnYxFllQauOM/RiTt28kLdh7aT24Gmk2OjrYqku92L1eexqnoRbGjx8i3aMEGyCF
- FJ9H5qFZEvmoQJvdPXh+Gg9bxd6PLMD7DaSNDB6/dlyeu369OIT1se8ahALbss6VcxQ3
- WNqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703103151; x=1703707951;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IXbb5Y7n/t6/blF1b7RwNIrHdPB+M0zsnYUxTHdefmU=;
- b=N3kO0F+IgMy65TVBA6HvT4smN/6dt9Ix/aIc9icjAgiqxK5p3BMgdqR5jwIFrPI5BO
- GTBi0p3tCyI4wuoMJGBpwCsJ6Ein6fkOeHXEHUnUlM9OtSg+gUIeSikZylF4RulDesKx
- 07kWom1AXZ1QKFW0c2C42pWjMC3RoPCCa7/ipKAtxYYP/vToLRafaPFSeBCShZoqNSl/
- 2PnVZOHZP+SK4BWVJGjnmaig/qtIm8MZz8ipT4HbgzxIe0PYtI/5ojs3H3XDJTF8SEHU
- wA63lb/gzpL4K22YOHpvGx4dKq2vMAwP0AAOA5NXbSvWBLlecHZYO09bE/9nz3IB05gm
- 9AcA==
-X-Gm-Message-State: AOJu0YxFry8rp9LBeWOKvZg/OzUEcWn6FZ8FOQVN/pZ3xEW0CbzotXBm
- ERjsU99Sgy5x6cBcil7gbGttcJJG8MRkPpEUq+05rw==
-X-Google-Smtp-Source: AGHT+IGppd6JHmEjna1Ryu7sQm0QhEU7WS7sMzsIUZZp2anYO/me5LVBfE5mj+Ak9x/wHcWKID3bPXqgBum1jVJAucc=
-X-Received: by 2002:a17:90a:e394:b0:28b:eacd:f917 with SMTP id
- b20-20020a17090ae39400b0028beacdf917mr157643pjz.31.1703103150892; Wed, 20 Dec
- 2023 12:12:30 -0800 (PST)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-References: <20231219211114.393193-1-raymond.mao@linaro.org>
- <20231219211114.393193-4-raymond.mao@linaro.org>
- <f2221d44-cbb7-4355-b9a1-ecea47af62c5@amd.com>
- <CAEfUkULk+gFBEg=6YPtzracvHJ6pU7AM=+fw0eB3=NuxjctNcA@mail.gmail.com>
- <ffb4597c-4031-4e1e-8c35-4b0c1c32bbd0@amd.com>
-In-Reply-To: <ffb4597c-4031-4e1e-8c35-4b0c1c32bbd0@amd.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 20 Dec 2023 15:12:19 -0500
-Message-ID: <CAEfUkUJ4s3qP0R=mRZZDqKfOgXW6B_tDhqJKHz7TPZCrqZLWrQ@mail.gmail.com>
-Subject: Re: [PATCH 3/5] bloblist: Load the bloblist from the previous loader
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org, 
- jwerner@chromium.org, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Baruch Siach <baruch@tkos.co.il>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Stefan Roese <sr@denx.de>, Sean Anderson <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1703103390;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=D+05uf3akNsxRDRy5xu6Dt1thk4dqkPYnTx5C9uAty4=;
+ b=ql+ZYwofUlMu+LBYLIvuVWdZGg+og/05/qTlJy37MGuExN3FF+SqbRm/iQS5ExpUGf7+HQ
+ /dwOxQk2qNI0WxYquxZuTO+VTDF07SYyJzUypMl6qZts2tXcUZqrs36e/21fizZy/nb5xQ
+ YVHrAkNjuii23VS6KTT9yAJpYrNAwGK1lsQRKDbNpWaK5let6/y/x8XlScR4ry1KfzincQ
+ CUrNXA5FZ0Lno4fVkbqV3a62ajGyWgFznT6hb40wxOalEB8aJCv8d1kJVWry96pbCIxM3w
+ 1b3Z8doVQAFCWXS73hfeDH6PWjMhXFHWWOSpCZFg652gdUk1cztb6gO7Bm5JAQ==
+Date: Wed, 20 Dec 2023 21:16:30 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: =?UTF-8?Q?Cs=C3=B3k=C3=A1s_Bence?= <Csokas.Bence@prolan.hu>, Simon Glass
+ <sjg@chromium.org>, u-boot@lists.denx.de, Daniel Golle
+ <daniel@makrotopia.org>, Mark Kettenis <mark.kettenis@xs4all.nl>
+Subject: Re: Passing boot logs to Linux?
+In-Reply-To: <cf0fea58-45f8-ba73-9652-2a501343e0c4@gmail.com>
+References: <6fd0dd4c-4bce-47cf-a669-7d093b9a1f10@prolan.hu>
+ <CAPnjgZ01=y-Kf=XmDv6UyEdPgXLp8bhZnSZDBVk1FPfBh8CdOw@mail.gmail.com>
+ <6ae238be-3c5f-5ef6-9e18-282be9ae24c2@gmail.com>
+ <16e633f9d4b1c426aaca510157479d65@manjaro.org>
+ <51121aee-faca-4196-8532-719fb6ec9bdc@prolan.hu>
+ <2c108e1ff92db2b74f5ccccd770872a7@manjaro.org>
+ <5e0e71a5-f3c8-413e-96a3-a0b6edee928f@prolan.hu>
+ <3900f4b15852d0af65635b3a794d34af@manjaro.org>
+ <f22f86ec-987f-4404-8722-82270f1e8da8@prolan.hu>
+ <cf0fea58-45f8-ba73-9652-2a501343e0c4@gmail.com>
+Message-ID: <83c598178705603a6b48a6797dc5b4d5@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,47 +79,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+On 2023-12-20 21:03, Sean Anderson wrote:
+> On 12/20/23 14:24, Csókás Bence wrote:
+>> On 2023. 12. 20. 9:29, Dragan Simic wrote:
+>>> On 2023-12-20 08:52, Csókás Bence wrote:
+>>>> On 2023. 12. 20. 8:09, Dragan Simic wrote:
+>>>>> On 2023-12-20 07:49, Csókás Bence wrote:
+>>>> That's what I read as well. Is there support for U-boot to write and
+>>>> Linux to read PStores?
+>>> 
+>>> No and yes, but U-Boot can already read pstore.  Please see
+>>> doc/usage/cmd/pstore.rst for the U-Boot part, and
+>>> Documentation/admin-guide/pstore-blk.rst for the Linux kernel part.
+>> 
+>> Irrelevant, as we only want to write out the console log to U-Boot, 
+>> and
+>> not the other way around (that's for collecting panic logs, which is
+>> already implemented).
+>> 
+>>> Another benefit of using pstore would be no permanently wasted RAM 
+>>> for
+>>> the recorded console contents.  Also, having the data recorded to a
+>>> storage device also goes along with providing permanent records.
+>> 
+>> I'm positively *not gonna save boot logs to disk*, as most embedded
+>> systems have Flash-based storage media; writing to them on every boot
+>> would be devastating. Plus, I don't want the console subsystem to 
+>> depend
+>> on any file/disk operations/drivers.
+> 
+> pstore is agnostic to the backend used. In U-Boot we only support RAM
+> backends at the moment.
 
-On Wed, 20 Dec 2023 at 11:41, Michal Simek <michal.simek@amd.com> wrote:
-
-> Hi Raymond,
->
-> On 12/20/23 15:53, Raymond Mao wrote:
-> > Hi Michal,
-> >
->
-> please avoid top posting.
->
-> > Other vendors should add their own custom function under the
-> > "./board/<board-name>" directory.
-> > The inline function here is just to avoid the building errors on other
-> platforms
-> > which do not yet implement the custom function.
-> > Otherwise we have to create a function "board_bloblist_from_boot_arg()"
-> under
-> > all boards with this patch.
->
-> pretty much platforms which enables bloblist via Kconfig want to start to
-> use
-> this functionality and start to get information out of it.
-> It means I think dependency is on BLOBLIST. Simon is using it for sandbox
-> that's
-> why I can understand that you want to limit it to ARM or ARM64 or both.
-> But I don't think you should connect it to any specific ARM arch like
-> ARCH_QEMU.
->
-The reason I have to limit it with ARCH_QEMU in this patch is due to the
-fact that currently
-only board "qemu-arm" has implemented the required platform custom function
-"board_bloblist_from_boot_arg()".
-We can remove this limit and make it depend on the BLOBLIST only when all
-arm boards
-implement the required function.
-But at least now, with this patch, we need it under ARCH_QEMU, otherwise we
-will have
-linking errors when BLOBLIST is enabled on a board which is not "qemu-arm".
-For the future, I agree, this only depends on ARM, BLOBLIST and OF_BOARD.
-
-Thanks and regards,
-Raymond
+That's a very good point.
