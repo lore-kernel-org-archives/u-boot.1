@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49F7DC3DA6E
-	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 07:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79DD4C3DA6E
+	for <u-boot@archiver.kernel.org>; Wed, 20 Dec 2023 07:19:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97E81871C3;
-	Wed, 20 Dec 2023 08:17:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD5B3870B7;
+	Wed, 20 Dec 2023 08:19:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="O+Cvo459";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hiMCouBw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5821D874BB; Wed, 20 Dec 2023 08:17:22 +0100 (CET)
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::224])
+ id 8081D871C3; Wed, 20 Dec 2023 08:19:29 +0100 (CET)
+Received: from relay1-d.mail.gandi.net (relay1-d.mail.gandi.net
+ [217.70.183.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BF5E8700D
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 08:17:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A24B08700D
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 08:19:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id C9D5CE0002;
- Wed, 20 Dec 2023 07:17:18 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id AB40D240003;
+ Wed, 20 Dec 2023 07:19:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1703056639;
+ t=1703056767;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=OBi+8NL7aE/XRZED3MqrIc3p9l2z2kSeWHJGCwCuiVU=;
- b=O+Cvo4591OIgVVq6asdrH1hS+zDMLhGXgs8JiEiI+QlBo98Rt8fCd8S7GN1yPJ0VcRdLwl
- 3v6KfKW+HKekpuGvj5BQwcK/ziuf/22EMCZR6+kxNRODklgpAPWvePigutFecov13JmxKt
- GIEld6cfo0cokWr4WVsNWqPD4LQUisg0qLCgaFoPRsyeKTmKV7yfvTA3+fh4QGQm6HCvEt
- be1geQbgJzIU3rKhwYtSZtM1NIDwM8m74BraPimkr7ime7QvmUpdUnRvevL0S2PMBT/nG4
- Vo0VVUfL8eqRCLyeUFMaXAT4EikQ9IumiBibwslHrjpYD7eBpMS/TJF+NKdd4g==
-Date: Wed, 20 Dec 2023 08:17:17 +0100
+ bh=Y6fzl6vcO4Hv/XujG9Dw3Folx8t279iaf7fTJn0KvN8=;
+ b=hiMCouBwpjTDotM2nWPy4MfCqL59dT0H4ebnMP4Wh99CZIvg5xa8mCUGrn/d5LI6eRQAIX
+ ir/6d8YLTlLQAFv2T6USU0WnkFWRkEDY7oE/2dpeXvueyhjIEsdJcPXYojokq4jnNvcu/B
+ GE0jb4PceNrrxwakYSszdrR/RvF0kV6Qg7FqnEj3M3IHlafqoOBioPjMw5a146+AN5AWHS
+ cKz7pFHemYRdjEWo7+fq3vBWL1ix+wLsy6PoNf422Md0FbUyzavzb3+/DL6js4YHt866XY
+ 6L/s3Ts5bSFWE7/Dpt4voAPef9a7pFYa3nnsnyJrxoBhGkS1A2j04qHBg2DyAA==
+Date: Wed, 20 Dec 2023 08:19:24 +0100
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Srinivas Kandagatla
- <srinivas.kandagatla@linaro.org>, Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley
- <conor+dt@kernel.org>, Michael Walle <michael@walle.cc>,
- linux-mtd@lists.infradead.org, devicetree@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>
-Subject: Re: [PATCH V2 3/5] nvmem: u-boot-env: use more nvmem subsystem helpers
-Message-ID: <20231220081717.0afc17f3@xps-13>
-In-Reply-To: <1b5d4c36-9963-476c-8edf-e807beceda80@gmail.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Rob Herring
+ <robh+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Michael Walle
+ <michael@walle.cc>, linux-mtd@lists.infradead.org,
+ devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, u-boot@lists.denx.de, =?UTF-8?B?UmFmYcWC?=
+ =?UTF-8?B?IE1pxYJlY2tp?= <rafal@milecki.pl>
+Subject: Re: [PATCH V2 4/5] nvmem: u-boot-env: improve coding style
+Message-ID: <20231220081924.39b96ec4@xps-13>
+In-Reply-To: <20231219174025.15228-4-zajec5@gmail.com>
 References: <20231219174025.15228-1-zajec5@gmail.com>
- <20231219174025.15228-3-zajec5@gmail.com>
- <2023121929-salami-pessimist-c943@gregkh>
- <1b5d4c36-9963-476c-8edf-e807beceda80@gmail.com>
+ <20231219174025.15228-4-zajec5@gmail.com>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
@@ -81,27 +80,23 @@ X-Virus-Status: Clean
 
 Hi Rafa=C5=82,
 
-zajec5@gmail.com wrote on Tue, 19 Dec 2023 19:16:37 +0100:
+zajec5@gmail.com wrote on Tue, 19 Dec 2023 18:40:24 +0100:
 
-> On 19.12.2023 19:13, Greg Kroah-Hartman wrote:
-> > On Tue, Dec 19, 2023 at 06:40:23PM +0100, Rafa=C5=82 Mi=C5=82ecki wrote=
-: =20
-> >> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
-> >>
-> >> 1. Use nvmem_dev_size() and nvmem_device_read() to make this driver le=
-ss
-> >>     mtd dependent
-> >> 2. Use nvmem_add_one_cell() to simplify adding NVMEM cells =20
-> >=20
-> > Shouldn't this be 2 different patches? =20
+> From: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
 >=20
-> I used to maintainers complaining my patches are too small and not the
-> other way ;) I think it happened two or three times with mtd subsys.
+> 1. Prefer kzalloc() over kcalloc()
+>    See memory-allocation.rst which says: "to be on the safe side it's
+>    best to use routines that set memory to zero, like kzalloc()"
+> 2. Drop dev_err() for u_boot_env_add_cells() fail
+>    It can fail only on -ENOMEM. We don't want to print error then.
+> 3. Add extra "crc32_addr" variable
+>    It makes code reading header's crc32 easier to understand / review.
+>=20
+> Signed-off-by: Rafa=C5=82 Mi=C5=82ecki <rafal@milecki.pl>
 
-A single patch may be too small if it's alone and we don't see the big
-picture, otherwise I have no issue with small patches, do I? Anyway, in
-this case I don't mind the patch being split or kept like this, just
-keep my R-by applied to both if you do indeed split.
+Looks much nicer :)
+
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Thanks,
 Miqu=C3=A8l
