@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D9FC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4566EC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:47:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 633BA87900;
-	Thu, 21 Dec 2023 18:44:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D56B87925;
+	Thu, 21 Dec 2023 18:44:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RbhigohV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kM8VptDx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC12287917; Thu, 21 Dec 2023 18:44:29 +0100 (CET)
+ id 68D8487917; Thu, 21 Dec 2023 18:44:30 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 995AD878D0
+ by phobos.denx.de (Postfix) with ESMTPS id 9E8E8878DE
  for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 18:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiElD083870;
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEDP083879;
  Thu, 21 Dec 2023 11:44:14 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1703180654;
- bh=B+C3Rmx/saUPBocFsmEDTtK+5TjH+W8z/s0YO0JM9+w=;
+ bh=TMAcgVQgdAuCtB9mMv91Knpil3lh5AGIf/++M4vMt00=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RbhigohVjY0VOkqSBZnG7GgjR153vI2JxlSiSiiWgnUmh71rLEDDyvnHeKqP2KlAG
- YkpAG6JTus8ZYg1NUjcE6ioO4QyQxDSZvC+E8wI1yLSFVTDfLMukGzvMNSrbOGuaUc
- jA4LFMEP40mcgq4zDVG5vHaiF7Cl9dQcQ8gr1gC0=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiETd097303
+ b=kM8VptDxPzgqyu7E6GcbhL+xxSh5JqUE0aT+2pi0dYyOzOMcAgNFQ41y4d1y/Fk4/
+ xtPVK0GtKmghZWkrvIC9euH2NTO2HB4vv9gQ0GK+p3xxQmvdXEsJepj8DZgrWHC/Dw
+ 3vZa4K7Xeoi5Jwmu+46zVXEWqbcZVqZqRSexRaRM=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiE3T097316
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 21 Dec 2023 11:44:14 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
  Dec 2023 11:44:14 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 21 Dec 2023 11:44:14 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEm4080226;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEaS080241;
  Thu, 21 Dec 2023 11:44:14 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -58,25 +58,22 @@ CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
  Martyn Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel
  <clamor95@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon
  Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 07/26] arm: dts: k3-am654: remove duplicate vtt_supply
-Date: Thu, 21 Dec 2023 11:43:53 -0600
-Message-ID: <20231221174412.210807-8-bb@ti.com>
+Subject: [PATCH 14/26] arm: dts: k3-am654: remove duplicate main_uart0
+Date: Thu, 21 Dec 2023 11:44:00 -0600
+Message-ID: <20231221174412.210807-15-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231221174412.210807-1-bb@ti.com>
 References: <20231221174412.210807-1-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=844; i=bb@ti.com;
- h=from:subject; bh=FRkh77SlZ3pD6pY+S7E+8OW4B+hO0vkd13DciefXgas=;
- b=owNCWmg5MUFZJlNZxxtwLQAAaP///v9/v7utz/vu22kr/z+297T31//zWV/97/9+3Z/b4X2wA
- RsYIeoGnqaBoAAGgDQAAaABpoeoAABoAAGgAAAA0DRk0AaPU09RtRpk9JmU2UOgDQ0AAeoeoAHq
- AaPUBo0A0AaA00NAaaaaNNPUGQyZABoAaPaoANAGRoyNNAAZTRp6hoNADTTIAAAGI0YjTQNAZGQ
- BkAGjJoDCDE00aBoDQAyaANNBk0aNGmgKFZhqnxBwZFze3h8fqUCViwUwgrZu7+HAfUnaAcCOmN
- BNNFkDDGyJPzcLQ5k8MhtJkRNMHbBcERVfcmDeGX+k/2TB3pL1hGvnQZNAwjzSEsIK+/SxFTLlK
- Ox3wx8JQeMJ9Wzv/NvGdhjZhOc18+1ubwCm+zOUuZKlv4/yaRIzgHDTutwVqUUI2gqVR+L40PPp
- ldBUrDJpac62Hhh0Di9EgELcTHjc3wHX2QBMaaYKCAXqrFXEVnxcuQZw3qJ0K02mQUQS6gR21CN
- MqZBKInPomvdBOFjuUypXs8H6rgMAduSIOAyY0bN6CxBAYpEmIQrDSrtdcMYu1dYnu+HelV8lzJ
- /VFNGFanuBFR2OytLfYqsDqIbxQI2POZFHEKqQJIeHcAFCgdZua94MUVHdmLYPpS+SP/E+xH6T4
- gBhlMZJQfgUC8/4u5IpwoSGONuBaA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1542; i=bb@ti.com;
+ h=from:subject; bh=3GFizAV9cT1nUFQk32ZXa+yunxjm2QQsvDpC7sq1fBU=;
+ b=kA0DAAoBwPir0+IT1wwByyZiAGWEd/KjrxxRCP0yXxpPZ/cEzazmkySH0vjCJZE4oer/KRWDc
+ YkBMwQAAQoAHRYhBPzosO+QdZyNP7UpvsD4q9PiE9cMBQJlhHfyAAoJEMD4q9PiE9cMsjIIAIbl
+ HTOXVVuCSCHdJanCqTqk5orHaxFNTcXqd+eTN+Cq3lnFQUrbEjTgwv5HKTgHzIvfjUVM/AKzh5v
+ TxW3RMYtVBx9HASeWGRalItR8QpBHicJ7PyxiTeVc9V8NjVMdtD/fuo0Fi1vHDu9S+1WJMOffQl
+ GCoOu2zsvV3mDh7IGQNyvnT66aqYvoG4noqFDbQxdOM354HVioFINAIjJpcQnJ3XyqHp9YU3fml
+ Ip2j9RczVcdc8LaC5prf3BxiJRbCBGLKllwkzd2xp3Upc/3BLA2mPDrvan31zG7xqbWrd9HojW5
+ xV9P1h7ItYQdYxxBzUzXoLtu3/vBCJQr4tIjrj8=
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -98,34 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the Linux and U-Boot board dtb files unified we now have a
-duplicate vtt_supply node. Remove it
+With the Linux and U-Boot board dtb files unified, we now have a
+duplicate main_uart0 node. Remove it
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/dts/k3-am654-r5-base-board.dts | 9 ---------
- 1 file changed, 9 deletions(-)
+ arch/arm/dts/k3-am654-r5-base-board.dts | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am654-r5-base-board.dts b/arch/arm/dts/k3-am654-r5-base-board.dts
-index bc7291a1adb60..d55ddb83837f3 100644
+index 8c14472f9b463..66953eb5581ae 100644
 --- a/arch/arm/dts/k3-am654-r5-base-board.dts
 +++ b/arch/arm/dts/k3-am654-r5-base-board.dts
-@@ -46,15 +46,6 @@
- 		ti,sci-host-id = <10>;
- 		bootph-pre-ram;
- 	};
--
--	vtt_supply: vtt_supply {
--		compatible = "regulator-gpio";
--		regulator-name = "vtt";
--		regulator-min-microvolt = <0>;
--		regulator-max-microvolt = <3300000>;
--		gpios = <&wkup_gpio0 28 GPIO_ACTIVE_HIGH>;
--		states = <0 0x0 3300000 0x1>;
--	};
+@@ -18,7 +18,6 @@
+ 		ethernet0 = &cpsw_port1;
+ 		remoteproc0 = &sysctrler;
+ 		remoteproc1 = &a53_0;
+-		serial2 = &main_uart0;
+ 		spi0 = &ospi0;
+ 		spi1 = &ospi1;
+ 		usb0 = &usb0;
+@@ -100,13 +99,6 @@
+ 	status = "okay";
  };
  
- &cbass_main {
+-&main_uart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart0_pins_default>;
+-	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
+-	status = "okay";
+-};
+-
+ &wkup_vtm0 {
+ 	compatible = "ti,am654-vtm", "ti,am654-avs";
+ 	vdd-supply-3 = <&vdd_mpu>;
+@@ -145,15 +137,6 @@
+ };
+ 
+ &main_pmx0 {
+-	main_uart0_pins_default: main-uart0-pins-default {
+-		pinctrl-single,pins = <
+-			AM65X_IOPAD(0x01e4, PIN_INPUT, 0)	/* (AF11) UART0_RXD */
+-			AM65X_IOPAD(0x01e8, PIN_OUTPUT, 0)	/* (AE11) UART0_TXD */
+-			AM65X_IOPAD(0x01ec, PIN_INPUT, 0)	/* (AG11) UART0_CTSn */
+-			AM65X_IOPAD(0x01f0, PIN_OUTPUT, 0)	/* (AD11) UART0_RTSn */
+-		>;
+-	};
+-
+ 	main_mmc0_pins_default: main_mmc0_pins_default {
+ 		pinctrl-single,pins = <
+ 			AM65X_IOPAD(0x01a8, PIN_INPUT_PULLDOWN, 0)	/* (B25) MMC0_CLK */
 -- 
 2.43.0
 
