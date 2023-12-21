@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37D3EC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6E0C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:07:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E19C876D7;
-	Thu, 21 Dec 2023 22:07:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D9DF86BFA;
+	Thu, 21 Dec 2023 22:07:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BIdqbOJJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WSjYoIWn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32BA786BFA; Thu, 21 Dec 2023 22:07:04 +0100 (CET)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id D21A6869B6; Thu, 21 Dec 2023 22:07:07 +0100 (CET)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCA65876C9
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:07:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A547876D5
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:07:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-67f6739d7acso9083816d6.1
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:07:00 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-42786ec994bso7242701cf.1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:07:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703192819; x=1703797619; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703192824; x=1703797624; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EWG1fCGdvYSgPP0WZrI0FbDLuibn58GTSvH6yPYFjL0=;
- b=BIdqbOJJ0sWoYonVIV6cnuBIqg4zSpF01ZlK4R0KWG80ywwOLZ/8p29ykoezD66ISp
- y8MFe0O+kgwrIzDThMspvZt/R6QbI/QidiuFLOR7Nsy8IrWOnEeGpoTgZ+Jdney5mr4H
- 5AfBsG8Vy6YY3YI7QkwLbz7VVxSvqXx3vIMFk=
+ bh=FdcuWZONBeamOsSzy/xc3tff99Wj8tpfPV/k+wNg/V0=;
+ b=WSjYoIWnu5NVXrT3Ks0Vj8KXalthY/DxZBQScvaTHbE+TXVW3lDDvrlKplNHq9euDV
+ UkrVi7lUAEVuRcO3A0TM+XKE5IPPqCn7Ubip//glQpRVnasjnxuDtnN7gvA+bCocjSbE
+ EJXcptA0MKTh17pNSVI2JvsUDSScfWWJdBPnM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703192819; x=1703797619;
+ d=1e100.net; s=20230601; t=1703192824; x=1703797624;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EWG1fCGdvYSgPP0WZrI0FbDLuibn58GTSvH6yPYFjL0=;
- b=LcHCAP9aEUUttpDkbbD6cuC6zbGKkXvHiS664Kk25v2kmEeeyHRUMYnyVLKs/PveQO
- 5lE14sS8GlOONeTHFo0ncWB8C9mR34kM9RPgfIhU+HKk/skgIqI1zBRUQEOMxjAbL8gt
- 5xCDjbESJWFpoC01UkFVERjZMg0+vwQhIjs2283+RFH4jlARLtv4iaYtu29yEhHARQSA
- MNlVmelelkDXKstLqnnfRvmWkRERCk7FdDg1mmy2ssuFBqyAAHRoBF7EuVs6i6EsZ4PP
- ZLnUSxRsHOfGppAQmWcrrpRpApwJYFdrjJAAcwG9OkUZMBUgyUJLxqYgojtBtZWv2jgA
- quXw==
-X-Gm-Message-State: AOJu0YyyHBmWcEmpTqjvDsFATVkq6iXb7tFdsNI6Fr0lpeBnr2h/f4PK
- YSYisAbAiCufWAWMpo4YYOJV5O8R6JFiN806Tbzka1YT+R4=
-X-Google-Smtp-Source: AGHT+IHuzRV0T6s232AGGQcLEZVmwGg2AjI3ut64j7s45a7073GQwbsPxMJJSUoc3vk/uGT0XO5lKg==
-X-Received: by 2002:a05:6214:2aa9:b0:67f:65f2:b2bf with SMTP id
- js9-20020a0562142aa900b0067f65f2b2bfmr551352qvb.46.1703192819641; 
- Thu, 21 Dec 2023 13:06:59 -0800 (PST)
+ bh=FdcuWZONBeamOsSzy/xc3tff99Wj8tpfPV/k+wNg/V0=;
+ b=aWgNxn9bS4KPHxVhbmMyN9zE4wKT1xwQzxQYOWSP0FprwD+oqdcHSTehclA2znUcCe
+ LnLRvAdobuUupcxFe2+Bawt+jiXLS7hSnTB2Hw6MaXsY+dF6uuPQZ6mMoV/7PYLkXkfu
+ GeJdTpjAsxNzBP/jL9VF2bnqGbqq5j/9GaO4kJ0bMqP+RE2S6lol7s8a6RIftEoo3Bb2
+ Anzsm8+ptC7lWJQ4ws0Ai61p93DG1KgooMIk2Du8TlPfYdp+0o4DxjJEFUobGfdincOn
+ QbHtTLvEckPFtms/EURc2RQouPDb1dhLqbpqsRgy++0H7luBE/cvk3vk8zBMpvBZYy80
+ Ds4Q==
+X-Gm-Message-State: AOJu0Yx3/aCIZTi/bFjTgSE3chqqmQkWkdGOcqsGnHiNkTnxoGjkwoyg
+ Qo7WP+KgPQdrPnUolh6CAzbtvXfNPSQYRg==
+X-Google-Smtp-Source: AGHT+IHJcdyg1lfHxVomyJ7qgRx78QDa0bNKox4lrqHW55zzOiV9+9NHGNG1RHcD5/7/12bi27jPbQ==
+X-Received: by 2002:ac8:5d88:0:b0:423:a31f:665a with SMTP id
+ d8-20020ac85d88000000b00423a31f665amr489819qtx.13.1703192823937; 
+ Thu, 21 Dec 2023 13:07:03 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
  [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
  by smtp.gmail.com with ESMTPSA id
- cs18-20020ad44c52000000b0067f593c4bdcsm858675qvb.104.2023.12.21.13.06.58
+ cj27-20020a05622a259b00b004259bbf166esm1154276qtb.63.2023.12.21.13.07.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 13:06:59 -0800 (PST)
-Date: Thu, 21 Dec 2023 16:06:57 -0500
+ Thu, 21 Dec 2023 13:07:03 -0800 (PST)
+Date: Thu, 21 Dec 2023 16:07:01 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: m-chawdhry@ti.com, bmeng.cn@gmail.com, sjg@chromium.org, afd@ti.com,
- mkorpershoek@baylibre.com, n-francis@ti.com, nm@ti.com,
- u-boot@lists.denx.de, vigneshr@ti.com, srk@ti.com
-Subject: Re: [PATCH] include: env: ti: ti_common: Run
- main_cpsw0_qsgmii_phyinit conditionally
-Message-ID: <20231221210657.GO2513409@bill-the-cat>
-References: <20231211104209.1078892-1-s-vadapalli@ti.com>
+To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ u-boot@ew.tq-group.com
+Subject: Re: [PATCH] boot: add support for fdt_fixup command in environment
+Message-ID: <20231221210701.GP2513409@bill-the-cat>
+References: <20231211110317.697011-1-matthias.schiffer@ew.tq-group.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="AkrXPGvleA3UTW4L"
+ protocol="application/pgp-signature"; boundary="qmWoEskIiEmcMpjp"
 Content-Disposition: inline
-In-Reply-To: <20231211104209.1078892-1-s-vadapalli@ti.com>
+In-Reply-To: <20231211110317.697011-1-matthias.schiffer@ew.tq-group.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,47 +93,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---AkrXPGvleA3UTW4L
+--qmWoEskIiEmcMpjp
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 11, 2023 at 04:12:09PM +0530, Siddharth Vadapalli wrote:
+On Mon, Dec 11, 2023 at 12:03:17PM +0100, Matthias Schiffer wrote:
 
-> From: Manorit Chawdhry <m-chawdhry@ti.com>
+> The "fdt" command is convenient for making small changes to the OS FDT,
+> especially during development. This is easy when the kernel and FDT are
+> loaded separately, but can be cumbersome for FIT images, requiring to
+> unpack the image, manually apply overlays, etc.
 >=20
-> The main_cpsw0_qsgmii_phyinit command is defined only for certain TI
-> SoCs which have the do_main_cpsw0_qsgmii_phyinit variable set.
+> Add an option to execute a command "fdt_fixup" from the environment at
+> the beginning of image_setup_libfdt() (after overlays are applied, and
+> before the other fixups).
 >=20
-> Add a check to ensure that the main_cpsw0_qsgmii_phyinit command is run
-> only for such SoCs.
->=20
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---AkrXPGvleA3UTW4L
+--qmWoEskIiEmcMpjp
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEqPEACgkQFHw5/5Y0
-tyztngv/fqQwJoQIWIUHJySZiV7ZtItgyH1/44W8ksFJwp+fDgRdRxzdDbAzOELt
-m+g6WE9zi4+AnucIGMmo3Ey19rgYZecI5ZZ0CVJp6K+eQ2+6cuFsVZ/uab3v13bY
-46p5YVL+MyhKaaz5MbeekzMGDn5egVBORzb9b2ub5Wl5JbQTc7t3zoz9lzfH/Svx
-iwoVt0fIv54q+kBvPgMdukckkeQCJpvKcAnJ6SiOTE/z0F4+QLEax4y/U/XlBKHt
-0dPMfm/cv9DkBa5FfX6P4O2qR9GyHjKZQFYBCvxHNaJhVP4Rfo5TR+2wiQ8ZG89f
-nouxp4CfJ07CoaZThU4pkbU2R97gVSi9oHpSR9Gsa9yiu5SSFXcCSd3kc/HchAbU
-dMuTjzW+3VV1qQ/7TWbmPfJLpmdjpqoXNqzW0phd2rt1Q0pLGYv/3LvvuzO9qzwz
-YtNYDNQikQEMNNoeQEYPqyU+0nlVUW99R8jAMfCbdBR9dvBwwZ/1O46mqcRh7pcg
-ev/duMBk
-=oyJm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEqPUACgkQFHw5/5Y0
+tyxgegwAs7QhrJcbykhCSVqvJejAa5BshG5fFaPPwNrnSxyuBuxj5PpBIM4s+Os9
+ZFm6Tm1M94I0ru3KtX4ZmH1M+JAPQQvlFwuxe3UZ7sl4UM0cvfjNpyzZf7g2LLq8
+bhFY9ILjSR9Mrs9enzSM12ckDiJxvPtj+MtbUHPl+BpVj5gaz32ViMUK9geYeYWr
+QSw3d+RkTqwxT7R7qgwWVYSDgJRrKfzS8+NsrMpxGfDXbjs1GLXVbQW2liJ1+4Fb
+8Q6ritcW4n+C8sH1JQ4REpsMwd9B93nKyRnJQMyAUE0s68VAkhje09eoOvqDicE6
+kdM4b6urxnIZTuip2ql9UrGWyREl6rx1k5qeJSTNX7j7p6dhZDfJmSFvg0VQO9w4
+ZZV3Flg2IXpnkLhp8jBCIuH+PoOU4dJBx8C5FWdGSE53KhiqBakJKOp+Us7LcUN5
+5LvMbNfIHGtb8db2xB50vzMLLMlyQkXtybeeUeKvVeyPglZgA6A8ehs/1nkmD0vO
+6yqluVTa
+=a9rR
 -----END PGP SIGNATURE-----
 
---AkrXPGvleA3UTW4L--
+--qmWoEskIiEmcMpjp--
