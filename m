@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49D5C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:15:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AD5BC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:15:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2308E87896;
-	Thu, 21 Dec 2023 17:15:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A5AC787860;
+	Thu, 21 Dec 2023 17:15:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jDR2q23y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PIAMsfne";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31567877E5; Thu, 21 Dec 2023 17:15:05 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 91E81877E5; Thu, 21 Dec 2023 17:15:22 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A634287896
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:15:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A757A878A4
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:15:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-40d3ae326f6so9804725e9.3
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:15:00 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-40c48d7a7a7so7614275e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:15:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703175300; x=1703780100; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703175320; x=1703780120; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=4fxOy1uq6y/F4gSgd/DNwMYwM6gjn+k9V48YySZWe0Y=;
- b=jDR2q23yc2yRFJ6t1K2WGU8USKUYqIZHGkFYhOs5oqkyNxXFil0I7WOunq4099HSR7
- R7+HDRYVhAOM0kTPVY5uE+jqCoHYtDcHFRn6JaLSq3vIF+Xi03YyoDLEy2eaU2WmyhAk
- zqwAO76HrLSBPBjqSBY33MbbGNajNAfZhI54t8P+cbO0iUIVgE1KInc8Im+7HP6j2lUb
- UHmTqyJacBmv/gk+JcnxNdemtmkEnwgeHENxEbBlW8RwZ+8KpZYc7T/hgYwZq32DT9sv
- FD68RDBw9O/qVi+c/zFre/bKLDMi/CB1CL3ULda+Gv5t0OaMSxCfdN2Ydb6TyVc2GR6m
- rgLA==
+ :reply-to; bh=9ZO0udYzCaoUjoA1VBJpagLT5vG5HHB4TndbW3qJ+QI=;
+ b=PIAMsfneHCMjn7ymXNqkUjLvPZLDtKpydkXN1Dz00PgEszxVhabXVJ5C11BapZinSm
+ QFlgQgxGqO9bNvr0Nsf07+Syzc1cbsSLZ2cI66VkIJhN69BMrsPv2MS3QTZamqX4uOYd
+ m4ndN2LnivgatGGzQNMAzqCSu/KO9sOyZKfmibBLJfkoot7NgRYn2BSptxq00rXsX6xc
+ mCHaT0PFuRBiZcrwgzI6K7avaw4KhZFuqGLWNtpGdm+szdzfn4B6B+eqB0NIFbdFrPLN
+ RAVg4c3dnSxj3v3bLSI/Xjvx+Zr8NFVkHPAOXiBIhlubrWuDTn6s9GnQ75LgS35TItqk
+ P/Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703175300; x=1703780100;
+ d=1e100.net; s=20230601; t=1703175320; x=1703780120;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=4fxOy1uq6y/F4gSgd/DNwMYwM6gjn+k9V48YySZWe0Y=;
- b=N9PSks6lhV+I/2c/c8tGhRuqK3kTdkmzYpz3nORFmbRnJW6Srm3Dtybx643X9h1qAL
- bs5Ep3151+mDn7hyM7NyJNAuPkjh61kLM/k6rmm+RGh7NHq77oyI3qwh20dfQjMv9SWL
- fru1eIPREMfUnwZb3IUzKRc93d877aOwrwyE3XDpdMfFXbUA7JC/RIu3uyRbANrQiCaM
- 6i/QUwDgL+uDVDbMf4PV7A0CS9QD3ahlfsgEgftFDsx/pkzvOd6zfvl70BYfS69KdKGs
- 5uuEbodjgR+6fJgasg79GROnIOrGJPTfAKuzJG0SyVDFn2XzAjbOvldsVTOE8kH1yjQP
- 96Yg==
-X-Gm-Message-State: AOJu0YxJkGlUStUIJZ0kWnE4LzIliBrYL05rimqo27wIact88H5Gf0Nk
- nmtuFwA6wAHBhKD3SdwbDDr22g==
-X-Google-Smtp-Source: AGHT+IEVKAoOedDEqoNznaWmB/2efPvj9d5LOvwRQHIDjTDVn8HwjkP+lJLo3BMynYgICoshKCzJkg==
-X-Received: by 2002:a05:600c:3f85:b0:40d:4181:4d23 with SMTP id
- fs5-20020a05600c3f8500b0040d41814d23mr324314wmb.105.1703175300018; 
- Thu, 21 Dec 2023 08:15:00 -0800 (PST)
+ bh=9ZO0udYzCaoUjoA1VBJpagLT5vG5HHB4TndbW3qJ+QI=;
+ b=rEV7PdyMsJbZPo8x6Jy6kQgomsUM6cMuaM5aCO3bVAHjZazetQ8AcTVSzzyTFANf8J
+ bjdVO4UD4pXZKgmr0iI8YaNptkb2Bh+NgyYM5LI8ThTwyrhXGTU/60XBGdO6gbK7tt5y
+ cUQ4jfAaaSFmKQy6AN7rzrWwUfvwsNtxwE5oG60w7AjuZCagvl2ajzvh4RCUSf9c1z/x
+ 7Khmn+IIl5+UDLzo0Q+wrvZmdBEQOMs6hw0ggOlmikGq+eh/A4g0URUAm4e6P4rRbadr
+ 6fftbtKJxo3teWADi2lYsOt0WQ7o8Fp6RqhqWOQgv2YIS5/FjzGvdYEpHuCZvwnexc+1
+ D2pg==
+X-Gm-Message-State: AOJu0Yxiq1HFjwwBowPx+RfknrG6lyMJL7/qyaCRPSQwQ3bYy1Y86UAX
+ 35lBPDf2aYexisNgw1sm/SrQrw==
+X-Google-Smtp-Source: AGHT+IHMnlWqh2qG4MlB+Zt1qD3qgxSylcldVyl2T9P1Nxq3ukKUYC+ebQc+1E/ZYeLEFdZXTCcEng==
+X-Received: by 2002:a05:600c:1897:b0:40d:3e05:9aab with SMTP id
+ x23-20020a05600c189700b0040d3e059aabmr832340wmp.112.1703175320105; 
+ Thu, 21 Dec 2023 08:15:20 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed?
  ([2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed])
  by smtp.gmail.com with ESMTPSA id
- j16-20020a05600c191000b0040c11fbe581sm3865415wmq.27.2023.12.21.08.14.58
+ j16-20020a05600c191000b0040c11fbe581sm3865415wmq.27.2023.12.21.08.15.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:14:59 -0800 (PST)
-Message-ID: <fe1ae3c5-bcf4-4563-91df-2e5c6554194d@linaro.org>
-Date: Thu, 21 Dec 2023 17:14:58 +0100
+ Thu, 21 Dec 2023 08:15:19 -0800 (PST)
+Message-ID: <814c4224-5054-40ab-b0fd-bbf9b17ba596@linaro.org>
+Date: Thu, 21 Dec 2023 17:15:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 04/32] dt-bindings: drop msm_sdhci binding
+Subject: Re: [PATCH v2 05/32] clk/qcom: use upstream compatible properties
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -83,7 +83,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-4-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-5-b6dd9704219e@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -109,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231219-b4-qcom-common-target-v2-4-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-5-b6dd9704219e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,45 +130,55 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19/12/2023 17:04, Caleb Connolly wrote:
-> The upstream DT is supported here, so drop the U-Boot specific binding
-> docs.
+> Adjust the apq8016 and apq8096 drivers to use the upstream compatible
+> properties, and adjust the associated dts files in U-Boot.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   doc/device-tree-bindings/mmc/msm_sdhci.txt | 25 -------------------------
->   1 file changed, 25 deletions(-)
+>   arch/arm/dts/dragonboard410c.dts | 2 +-
+>   drivers/clk/qcom/clock-apq8016.c | 2 +-
+>   drivers/clk/qcom/clock-apq8096.c | 2 +-
+>   3 files changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/doc/device-tree-bindings/mmc/msm_sdhci.txt b/doc/device-tree-bindings/mmc/msm_sdhci.txt
-> deleted file mode 100644
-> index 08a290c66931..000000000000
-> --- a/doc/device-tree-bindings/mmc/msm_sdhci.txt
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -Qualcomm Snapdragon SDHCI controller
-> -
-> -Required properties:
-> -- compatible : "qcom,sdhci-msm-v4"
-> -- reg: Base address and length of registers:
-> -	- Host controller registers (SDHCI)
-> -	- SD Core registers
-> -- clock: interface clock (must accept SD bus clock as a frequency)
-> -
-> -Optional properties:
-> -- index: If there is more than one controller - controller index (required
-> -	by generic SDHCI code).
-> -- bus_width: Width of SD/eMMC bus (default 4)
-> -- clock-frequency: Frequency of SD/eMMC bus (default 400 kHz)
-> -
-> -Example:
-> -
-> -sdhci@07864000 {
-> -	compatible = "qcom,sdhci-msm-v4";
-> -	reg = <0x7864900 0x11c 0x7864000 0x800>;
-> -	index = <0x1>;
-> -	bus-width = <0x4>;
-> -	clock = <&clkc 1>;
-> -	clock-frequency = <200000000>;
-> -};
+> diff --git a/arch/arm/dts/dragonboard410c.dts b/arch/arm/dts/dragonboard410c.dts
+> index 6a4e3ccf17b1..02c824d0226c 100644
+> --- a/arch/arm/dts/dragonboard410c.dts
+> +++ b/arch/arm/dts/dragonboard410c.dts
+> @@ -75,7 +75,7 @@
+>   			};
+>   		};
+>   		clkc: qcom,gcc@1800000 {
+> -			compatible = "qcom,gcc-apq8016";
+> +			compatible = "qcom,gcc-msm8916";
+>   			reg = <0x1800000 0x80000>;
+>   			#address-cells = <0x1>;
+>   			#size-cells = <0x0>;
+> diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
+> index c0ce570edc79..0af7191cff52 100644
+> --- a/drivers/clk/qcom/clock-apq8016.c
+> +++ b/drivers/clk/qcom/clock-apq8016.c
+> @@ -145,7 +145,7 @@ static struct msm_clk_data apq8016_clk_data = {
+>   
+>   static const struct udevice_id gcc_apq8016_of_match[] = {
+>   	{
+> -		.compatible = "qcom,gcc-apq8016",
+> +		.compatible = "qcom,gcc-msm8916",
+>   		.data = (ulong)&apq8016_clk_data,
+>   	},
+>   	{ }
+> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+> index cf1a347309a5..1e6fdb5cd42d 100644
+> --- a/drivers/clk/qcom/clock-apq8096.c
+> +++ b/drivers/clk/qcom/clock-apq8096.c
+> @@ -123,7 +123,7 @@ static struct msm_clk_data apq8096_clk_data = {
+>   
+>   static const struct udevice_id gcc_apq8096_of_match[] = {
+>   	{
+> -		.compatible = "qcom,gcc-apq8096",
+> +		.compatible = "qcom,gcc-msm8996",
+>   		.data = (ulong)&apq8096_clk_data,
+>   	},
+>   	{ }
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
