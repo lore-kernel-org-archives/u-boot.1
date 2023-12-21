@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536ACC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:47:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E5D6C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:48:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D1F287940;
-	Thu, 21 Dec 2023 18:44:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F49087944;
+	Thu, 21 Dec 2023 18:44:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B0r2jzjc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aBqf2YKz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66703878F5; Thu, 21 Dec 2023 18:44:32 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 8893B8785E; Thu, 21 Dec 2023 18:44:32 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB0B8878E3
+ by phobos.denx.de (Postfix) with ESMTPS id A0D75878DF
  for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 18:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiFl7027126;
- Thu, 21 Dec 2023 11:44:15 -0600
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEg0083875;
+ Thu, 21 Dec 2023 11:44:14 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703180655;
- bh=KODsTwbCXwowln1WNA86kMLi7G3gEF4k5zt0xA5wm0Q=;
+ s=ti-com-17Q1; t=1703180654;
+ bh=0f9kgs++Yb4hUPQgfPgMrZx6k2303iIi3cojdqMPdfc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=B0r2jzjcoI8u7oZIqvR+FE76RBIu/p8mIWWgwsr3hRw4gkvqLXSdAydSKBj3cSs5q
- OLLANQ1Tx7NRMm43jQrAK/kFljGg0OBmRbKlgD8q5cA4waJfKXlXITbtz67UP3VcBS
- i8tUOLmdShMrB6HJ5bGBQLucJ7/qOnqf6MflhqDQ=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiF5O032096
+ b=aBqf2YKzhzrE/WSU+PcD+m1i4Kkk70nmQ/vh0uyHQbnFbxPKUqHr6OH4G6tTLgMQo
+ i2+jfzq+bft23ix6koc1OFh6HhL2HzJuPBz0Pylf5IQ2F1EUHtWJNdtAJq9P2WG+nl
+ vaqZLKj4vOmbpnJ6oc8xK+N86+bdb53ldLO/Dj8w=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiEYb032092
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Dec 2023 11:44:15 -0600
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 21 Dec 2023 11:44:14 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
  Dec 2023 11:44:14 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 21 Dec 2023 11:44:14 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEZq069269;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiE54069258;
  Thu, 21 Dec 2023 11:44:14 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -58,25 +58,25 @@ CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
  Martyn Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel
  <clamor95@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon
  Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 16/26] arm: dts: k3-am654: remove duplicate sdhci1 pinmux node
-Date: Thu, 21 Dec 2023 11:44:02 -0600
-Message-ID: <20231221174412.210807-17-bb@ti.com>
+Subject: [PATCH 13/26] arm: dts: k3-am654: remove duplicate mcu_uart0 node
+Date: Thu, 21 Dec 2023 11:43:59 -0600
+Message-ID: <20231221174412.210807-14-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231221174412.210807-1-bb@ti.com>
 References: <20231221174412.210807-1-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1918; i=bb@ti.com;
- h=from:subject; bh=BC2j5h9tzNTs/ETxGWA/mT9vdOecyNErfav+z5RBT/s=;
- b=owNCWmg5MUFZJlNZNXKG3wAAZP///7drj//6fb/e4xrZH/Xzg7ey/XdcrerP84x6/1fn//+wA
- RrVmMoaMQNGhoNGho0NDTJkNAybUMmjQDRoBhGgGjENBoANBpmoekDT1NDQyGg9Q9RhyGQYjTQM
- BAADQxMJkNA0aaDQBkaDJphDQaMmBGgGmgYjRp6hkGgNDQ9EO9U09T0TNQ0PUyAHogAaGgBoaBo
- ADQA0NBiAADQ9QZNADRoAAA2oDNT9KCCFap9SKsJEeBkFOsESkG5SjrWh/RfEBpW1BfYJMF8aTQ
- iw9pfjD3gtJNQ9trq05WdiPPbEN+3oOdViOpw89HzbmVbjA9bHwdOO8dmPRb9VufS8Op8mkWcU6
- 0Q+nHi4agFXw87j0+8kq4xRwrMy32P1ALPCjAMezfRA20cVXra9/qL22miu+7ooN6P6fEHiG+4P
- jG7hRpNnLe9LnqAAz5cpRNOALH6t0IXoAOKW7Z24f8i8QAMGeVbqLCT9MPGGWHeaq5tDezVYh1X
- xKADBfgRQtNnz91m9hlbEw9wgwmHgihP+ty1MnLY5esnCQdHNVJWJ4nn9gd6udJ7ipQfP8nAzDa
- 69mO2A4H0B/XZAjKUrmyHd1DZDOl/Z2iMC3JXnnesoToVXIX5jGlbdgcmVCIuNMAKXeKogkwIxX
- +oXI3+GLAF3JFOFCQNXKG3w
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1510; i=bb@ti.com;
+ h=from:subject; bh=Wo9NCiD3TxujgX0ERR1PUOEK2W+cFQ2+3yr+5tQhZvw=;
+ b=owNCWmg5MUFZJlNZxW1DOQAAcP///n//r7n+/XvLj6wedv/+//+/Wl1te/ZR3/oZ/t5buX+wA
+ RswHagAaaBoBoAaA0AaPUDTTQaGgBoBoaANNDQNDag0AABoGgaaaZD1M1HqPIMogA0GTBNBhAyZ
+ Bo0GmRmo0AaZBpoaAYhkGJiZBoaAAGRk00aaNDQaaGgyAaByYjJkDQ0ZNNGTI0yaBo00YQaYmQG
+ jQAAAHpA0Mmg0aGTTRkNDRoDQGQ0xA0AGDPoNLLiQ4Be/DxEMLLiUpSCWio3PFVsXXRkSCP9IKd
+ gM0pjHuAtZyR4CY/Hy3wgTY5mWbIFahjephA4fG0oC493gOOhRVx8qkaSLVPyUL+bls5S+uXiHA
+ pvUT+EjBobduWzlqAaeBAbB2gfYcKUO+T/u4gLDIgIe/XcHDeY4lUpt/F3zYv0r+0x1gZnVjblQ
+ LoBYeOLRzDwz6Ctm8+3OIScUpF4SwptweeDXhNftlu7lt1YrilYAkrkMorKcjOZSDURbtRmkwuu
+ ZNNBBlUUnGU+pAQqANNQqA++JtDE83++iGjlWJ0kCSPCUz9MIlfdLYYfknEv3xMxepEwlIyPS7J
+ XkfTMIURAKfOlWpRwLz9gObagAsQGiIfwhwSDTvSR6gAKQ84UZocBJvmaocMdkSfKG0K0sBw2JG
+ FiOjYj9eyFxckv/i7kinChIYrahnIA=
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -98,58 +98,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the Linux and U-Boot board dtb files unified, we now have a
-duplicate sdhci1 pinmux node. Remove it
+With the Linux and U-Boot board dtb files unified we now have a
+duplicate mcu_uart0 node. Remove it
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/dts/k3-am654-r5-base-board.dts | 22 +++++++---------------
- 1 file changed, 7 insertions(+), 15 deletions(-)
+ arch/arm/dts/k3-am654-r5-base-board.dts | 12 ------------
+ 1 file changed, 12 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am654-r5-base-board.dts b/arch/arm/dts/k3-am654-r5-base-board.dts
-index 856917bdfaa5d..c4096d1b754c4 100644
+index 47d152cbd4b6d..8c14472f9b463 100644
 --- a/arch/arm/dts/k3-am654-r5-base-board.dts
 +++ b/arch/arm/dts/k3-am654-r5-base-board.dts
-@@ -137,19 +137,6 @@
+@@ -18,7 +18,6 @@
+ 		ethernet0 = &cpsw_port1;
+ 		remoteproc0 = &sysctrler;
+ 		remoteproc1 = &a53_0;
+-		serial1 = &mcu_uart0;
+ 		serial2 = &main_uart0;
+ 		spi0 = &ospi0;
+ 		spi1 = &ospi1;
+@@ -96,8 +95,6 @@
  };
  
- &main_pmx0 {
--	main_mmc1_pins_default: main_mmc1_pins_default {
+ &mcu_uart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_uart0_pins_default>;
+ 	clock-frequency = <48000000>;
+ 	/delete-property/ power-domains;
+ 	status = "okay";
+@@ -123,15 +120,6 @@
+ 		>;
+ 	};
+ 
+-	mcu_uart0_pins_default: mcu_uart0_pins_default {
 -		pinctrl-single,pins = <
--			AM65X_IOPAD(0x02d4, PIN_INPUT_PULLDOWN, 0)	/* (C27) MMC1_CLK */
--			AM65X_IOPAD(0x02d8, PIN_INPUT_PULLUP, 0)	/* (C28) MMC1_CMD */
--			AM65X_IOPAD(0x02d0, PIN_INPUT_PULLUP, 0)	/* (D28) MMC1_DAT0 */
--			AM65X_IOPAD(0x02cc, PIN_INPUT_PULLUP, 0)	/* (E27) MMC1_DAT1 */
--			AM65X_IOPAD(0x02c8, PIN_INPUT_PULLUP, 0)	/* (D26) MMC1_DAT2 */
--			AM65X_IOPAD(0x02c4, PIN_INPUT_PULLUP, 0)	/* (D27) MMC1_DAT3 */
--			AM65X_IOPAD(0x02dc, PIN_INPUT_PULLUP, 0)	/* (B24) MMC1_SDCD */
--			AM65X_IOPAD(0x02e0, PIN_INPUT, 0)		/* (C24) MMC1_SDWP */
+-			AM65X_WKUP_IOPAD(0x0044, PIN_INPUT, 4)	/* (P4) MCU_OSPI1_D1.MCU_UART0_RXD */
+-			AM65X_WKUP_IOPAD(0x0048, PIN_OUTPUT, 4)	/* (P5) MCU_OSPI1_D2.MCU_UART0_TXD */
+-			AM65X_WKUP_IOPAD(0x004C, PIN_INPUT, 4)	/* (P1) MCU_OSPI1_D3.MCU_UART0_CTSn */
+-			AM65X_WKUP_IOPAD(0x0054, PIN_OUTPUT, 4)	/* (N3) MCU_OSPI1_CSn1.MCU_UART0_RTSn */
 -		>;
 -	};
 -
- 	usb0_pins_default: usb0_pins_default {
+ 	wkup_i2c0_pins_default: wkup-i2c0-pins-default {
  		pinctrl-single,pins = <
- 			AM65X_IOPAD(0x02bc, PIN_OUTPUT, 0) /* (AD9) USB0_DRVVBUS */
-@@ -176,12 +163,17 @@
- 	/delete-property/ power-domains;
- };
- 
-+/* MMC is probed to pull in firmware, so any clock
-+ * or power-domain operation will fail as we do not
-+ * have the firmware running at this point. Delete the
-+ * power-domain properties to avoid making calls to
-+ * SYSFW before it is loaded. Public ROM has already
-+ * set it up for us anyway.
-+ */
- &sdhci1 {
- 	clock-names = "clk_xin";
- 	clocks = <&clk_200mhz>;
--	pinctrl-0 = <&main_mmc1_pins_default>;
- 	/delete-property/ power-domains;
--	ti,driver-strength-ohm = <50>;
- };
- 
- &wkup_i2c0 {
+ 			AM65X_WKUP_IOPAD(0x00e0, PIN_INPUT, 0) /* (AC7) WKUP_I2C0_SCL */
 -- 
 2.43.0
 
