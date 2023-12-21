@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24659C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 12:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B93C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 13:01:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72612877E5;
-	Thu, 21 Dec 2023 13:45:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 59748877E5;
+	Thu, 21 Dec 2023 14:01:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qe1zvb/b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I5kNM6k/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0B0A8783B; Thu, 21 Dec 2023 13:45:32 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 813788783A; Thu, 21 Dec 2023 14:01:14 +0100 (CET)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 850DE876AE
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:45:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75594876B4
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 14:01:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-50e3901c2e2so963548e87.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 04:45:30 -0800 (PST)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40d3c4bfe45so7728675e9.1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 05:01:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703162730; x=1703767530; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VETZ2ZXELThgiGrWTHw8PY2cqM2+NyllToj9Wokgvhg=;
- b=Qe1zvb/bfBhRK+cOjTY1ND3Aj+7D0sj/+7GGqHEdov45cGjmKG8OCs11c1kanbaC0y
- h+c6teyueRZ8bi82L/6LGVf4pzwCocSHYwR+ptog3GIusNsp2y8cfOhH5p3ff9vqob/H
- yKrfsOg59CVF0J+Vqamx1YMQNnafQgE1VsLgqaTsq/G1hhAL2qXrWOCuW4iTFzV1+kcb
- qoM44XVDWcIh6OpTGL3XAunzPESyyJnsf1/7xcsOsJNMdGkyiUuuSECCckaqXuEvFcFi
- iI1oT+PO8x+C9sk961vKhGZhHZye9sUlzOsCdHR+c4AwQVilQX6/gYp77xlUnx2ZT0B7
- QYAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703162730; x=1703767530;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1703163668; x=1703768468; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VETZ2ZXELThgiGrWTHw8PY2cqM2+NyllToj9Wokgvhg=;
- b=tpqVMKWl6GlKGr+GeXZSyvGTQgkDCZxLNBsd7G3tEEEIju8PczOsmdQALvvRHiZJfK
- UbjCLuYTcNmBFSNP4Q6A6R0ckP/LmTgHusmC9Q5JYLMlfkaY/n+PoymiRn6NxqdwD+3Y
- +Iyt2S/Z03vUC96rz8blJc/bkw1FHQuj6vbEYzZNzg/FViq2af+B518aAjqmtuULPBqB
- wzEyOOUS6thc/zFdfa6uqgIYIJFAjoi2p1S5aXEUpgr6yA8eK7pfbxpqhyVJhbpGP4+1
- kTlBw2osRMk3aZhSShgKt9dg+9iPsErTt/t1QmHenv5IWRTkEEoQFFpsDzBIY/wiU09Y
- 6bmQ==
-X-Gm-Message-State: AOJu0YyUh3xHSjEUNcEdEdvJIlWydMPfuc/jWwOI2on2Kat6T7BPM0I7
- AtO/LN0klK10exGChGOP3hVDKg==
-X-Google-Smtp-Source: AGHT+IGSFl8CFHk4KIndVhm/scikVNPbKjgZtJXGDqrFTJpI9zfxG9PV2kA0+t0DMDtsL0vzeUxF0A==
-X-Received: by 2002:ac2:5201:0:b0:50e:5b95:948 with SMTP id
- a1-20020ac25201000000b0050e5b950948mr508123lfl.103.1703162729760; 
- Thu, 21 Dec 2023 04:45:29 -0800 (PST)
-Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
- by smtp.gmail.com with ESMTPSA id
- en6-20020a17090728c600b00a23577b265csm923304ejc.173.2023.12.21.04.45.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 04:45:29 -0800 (PST)
-Date: Thu, 21 Dec 2023 14:45:27 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2] efi_loader: fix iteration of FMP protocols
-Message-ID: <ZYQzZ3xJApKdcOm4@hera>
-References: <20231218095742.376839-1-masahisa.kojima@linaro.org>
+ bh=TM/At2x44Xx9PtWTrfcZxOhuwNcbMCGAa1a2J9U0OdU=;
+ b=I5kNM6k/0op749KNGX3RMOL2NHldJv7PA13FJ/Wks6Ac9ulNrtWwHyqGPlqt7AStr+
+ N5OkEjWzmEl9Lby0ygOEtrFHLVi7hVt/n7ZPAO6ZIwR1yFn3gApU6Jkm0kkv7li+e5xt
+ tC82RhYCgeRW7GwEnVlYba70EUGOfFjBGBKAdazvatI1kzHBIi44vW70RzH92iwfKh0d
+ 3EgawH28ZkZNk0i55bd6dCx/wN1xrBrzxAPeib23+dGsZiGeK37Sn+M8UDCDLpYubk34
+ 4Otk040D9dOoUyRloyj7EMhu5H+2iikJnqjvDFkGfo25eqnYcuJ3qQN9PVXvnf2UoNIo
+ dJtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703163668; x=1703768468;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TM/At2x44Xx9PtWTrfcZxOhuwNcbMCGAa1a2J9U0OdU=;
+ b=jYF80vfdUkjeQBR3a2jT47C1pUIum4pkt5hmvXgMgAenlvf4Dd8CM5hBp2muaBNgDg
+ AJwwqBc/Wq9kErdhlppJtv+k6USJiURYlnAUJ0+ksPGkVRMvMH7+ppXRADGNS329l8uA
+ 3+7xSKK3iSBBmH8TgR8LcIPGsWSiN0IRhUbbx+79mPW17jhfvpBQp+rJwNZI5Ajina4V
+ a3lRmQyJK1BSOQLWFZgTNLEfaC9Sz9OCwuN6eRjL1R18Ui09+XKhNdetrlAYqWGzm5q9
+ 1KiIAbQmXu8z/KWTzCVS7CnUNxOoHBr4WjOEnM22Bw0gwK4ih8dLidi7HjnhHXkxNJmg
+ 3gLQ==
+X-Gm-Message-State: AOJu0Yz2XeyI/WtQdvQqO73bFRf+OSSkVf67ho54aJGmJnQnCCfvZEto
+ R7RCnkNsHdyOL8jkuRlEGnGc6iR/TlN+E4Qqm3k=
+X-Google-Smtp-Source: AGHT+IFjY2IAy2fpz2QLgtWRYxLV6W6D2p/j0BN7lvdanvdhU9xXiu6WvffRruC0sIFDHMpuIMhM5e7vYAn39S6rCyk=
+X-Received: by 2002:a05:600c:a081:b0:40d:40b4:bd08 with SMTP id
+ jh1-20020a05600ca08100b0040d40b4bd08mr145449wmb.153.1703163667959; Thu, 21
+ Dec 2023 05:01:07 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231218095742.376839-1-masahisa.kojima@linaro.org>
+References: <20231221105017.6895-1-heinrich.schuchardt@canonical.com>
+ <20231221105017.6895-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231221105017.6895-3-heinrich.schuchardt@canonical.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Thu, 21 Dec 2023 21:01:02 +0800
+Message-ID: <CAEUhbmX0Ea=p1pz4bf3Mz4vXxqg_W0P_c0bDUHPgvRKPdYqeUw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] smbios: copy QEMU tables
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,94 +90,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Dec 18, 2023 at 06:57:41PM +0900, Masahisa Kojima wrote:
-> If one of the FMP protocols fails when calling GetImageInfo(),
-> populating the ESRT ends up with failure and other FMP protocols
-> are not added to the ESRT. We should still add all other FMP
-> protocols to the ESRT.
+Hi Heinrich,
+
+On Thu, Dec 21, 2023 at 6:50=E2=80=AFPM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> With this commit, iteration of all FMP protocols continues
-> even though one of the FMP protocols fails.
+> QEMU provides SMBIOS tables with detailed information. We should not try =
+to
+> replicate them in U-Boot.
 >
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> If we want to inform about U-Boot, we can add a Firmware Inventory
+> Information (type 45) table in future.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
-> Note that this patch addresses the following issue.
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/3
+>  drivers/misc/Kconfig        |   8 ++
+>  drivers/misc/Makefile       |   1 +
+>  drivers/misc/qfw_smbios.c   | 195 ++++++++++++++++++++++++++++++++++++
+>  lib/efi_loader/efi_smbios.c |   4 +-
+>  4 files changed, 207 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/misc/qfw_smbios.c
 >
-> changes in v2
-> - add error handling when num_entries is 0 after calling fmp->get_image_info()
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index e8e4400516..3d885f12c8 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -561,6 +561,14 @@ config QFW_MMIO
+>           Hidden option to enable MMIO QEMU fw_cfg interface. This will b=
+e
+>           selected by the appropriate QEMU board.
 >
->  lib/efi_loader/efi_esrt.c | 18 ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
-> index 7f46d651e6..1f629a6023 100644
-> --- a/lib/efi_loader/efi_esrt.c
-> +++ b/lib/efi_loader/efi_esrt.c
-> @@ -365,7 +365,7 @@ efi_status_t efi_esrt_populate(void)
->  		if (ret != EFI_SUCCESS) {
->  			EFI_PRINT("ESRT Unable to find FMP handle (%u)\n",
->  				  idx);
-> -			goto out;
-> +			continue;
->  		}
->  		fmp = handler->protocol_interface;
->
-> @@ -380,15 +380,14 @@ efi_status_t efi_esrt_populate(void)
->  			 * fmp->get_image_info to return BUFFER_TO_SMALL.
->  			 */
->  			EFI_PRINT("ESRT erroneous FMP implementation\n");
-> -			ret = EFI_INVALID_PARAMETER;
-> -			goto out;
-> +			continue;
->  		}
->
->  		ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, info_size,
->  					(void **)&img_info);
->  		if (ret != EFI_SUCCESS) {
->  			EFI_PRINT("ESRT failed to allocate memory for image info\n");
-> -			goto out;
-> +			continue;
->  		}
->
->  		/*
-> @@ -406,7 +405,7 @@ efi_status_t efi_esrt_populate(void)
->  		if (ret != EFI_SUCCESS) {
->  			EFI_PRINT("ESRT failed to obtain image info from FMP\n");
->  			efi_free_pool(img_info);
-> -			goto out;
-> +			continue;
->  		}
->
->  		num_entries += desc_count;
-> @@ -414,6 +413,13 @@ efi_status_t efi_esrt_populate(void)
->  		efi_free_pool(img_info);
->  	}
->
-> +	/* error occurs in fmp->get_image_info() if num_entries is 0 here */
-> +	if (!num_entries) {
-> +		EFI_PRINT("Error occurs, num_entries should not be 0\n");
-> +		ret = EFI_INVALID_PARAMETER;
-> +		goto out;
-> +	}
+> +config QFW_SMBIOS
+> +       bool
+> +       default y if ARM64
+> +       default y if RISCV && 64BIT
+
+Would you add QEMU x86 support as well?
+
+> +       depends on QFW && SMBIOS
+> +       help
+> +         Hidden option to read SMBIOS tables from QEMU.
 > +
->  	EFI_PRINT("ESRT create table with %u entries\n", num_entries);
->  	/*
->  	 * Allocate an ESRT with the sufficient number of entries to accommodate
-> @@ -437,7 +443,7 @@ efi_status_t efi_esrt_populate(void)
->  		if (ret != EFI_SUCCESS) {
->  			EFI_PRINT("ESRT unable to find FMP handle (%u)\n",
->  				  idx);
-> -			break;
-> +			continue;
->  		}
->  		fmp = handler->protocol_interface;
->
-> --
-> 2.34.1
->
+>  config I2C_EEPROM
+>         bool "Enable driver for generic I2C-attached EEPROMs"
+>         depends on MISC
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-For the SynQuacer
-Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+[snip]
 
+Regards,
+Bin
