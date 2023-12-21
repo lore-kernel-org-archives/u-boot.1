@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5709C46CCD
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BFDC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:16:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBA278780C;
-	Thu, 21 Dec 2023 22:07:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DF9F18767C;
+	Thu, 21 Dec 2023 22:16:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nsaLKY4Q";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dp15QKn1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D333869B6; Thu, 21 Dec 2023 22:07:36 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id D9660869F7; Thu, 21 Dec 2023 22:16:14 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29EBB877DE
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:07:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B874B8767C
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:16:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-425a3cdbda9so9072381cf.1
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:07:34 -0800 (PST)
+ spf=pass smtp.mailfrom=moritzf@google.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1d3a9b9634dso37455ad.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703192853; x=1703797653; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7UpeT/h4qRm2Cw05z16Sv2Wx6LmKwF4ryvg9c1pOC8I=;
- b=nsaLKY4Qm2vwkGcawSObs3pT8JADrbW8IeHWq9Z2Fcewq/V88n8gmSwN22PUVe+lOl
- D8a+a7yTUUo4BpS7TtpY3rmUJeplwhSzwQFZO1X8OLAi81Z94P6+48+1CBP3j0dJRx2l
- pNICCqjeKeAlDrObcKE1pUM4/0SnEb9QLW/UU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703192853; x=1703797653;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=google.com; s=20230601; t=1703193371; x=1703798171; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7UpeT/h4qRm2Cw05z16Sv2Wx6LmKwF4ryvg9c1pOC8I=;
- b=IAYsef8/sGw5VKZK9Q3cn1F09zNZNVpajbYEO+whwOMg6F0uftpuUnzlpapEDhEC0S
- qAyIDN/D4AmngURvgtRzPQQ1EUZqbBu+IdFSrus+hXgq9JMJ31yOSNeXtI7bt+XLMBlH
- vkfbKBaVB1VTkj3EqkqMOdsKchZtzdwzNr6LCL8p1XOMrD84UX8vmS/AQMQGf9G+SDAQ
- lGWU6hwHbL8p+TT0P0QNTLqjj97KE9HJhVr/NNk1SQS+JI9BHQaOLX9Gw56FC1sJ0o79
- YEiv5W6YRe0XZahDU7aVf5mKT9dAmAS2D6CxIK5CAlCUaEdGweXzLf0qbobWH8yiETX9
- 3JCg==
-X-Gm-Message-State: AOJu0Yy9IcjpFlWcwikMICAEPn7aT2lO5JGmdEZDvfB91jTfJNb2taWw
- 4kGEhjANmJYWcKdFkiOnh6WRsRhnMnhG6g==
-X-Google-Smtp-Source: AGHT+IFQUqHTp6bLEuQpaELthWNyTiUwW2Om2vfX59faFn9O2vMvsRqxUR7OZapG6SevLzVHeKBHhQ==
-X-Received: by 2002:a05:622a:94:b0:427:8e97:1054 with SMTP id
- o20-20020a05622a009400b004278e971054mr607605qtw.50.1703192852953; 
- Thu, 21 Dec 2023 13:07:32 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
- [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
- by smtp.gmail.com with ESMTPSA id
- ks22-20020ac86216000000b00423f2acc614sm1148327qtb.87.2023.12.21.13.07.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 13:07:32 -0800 (PST)
-Date: Thu, 21 Dec 2023 16:07:30 -0500
-From: Tom Rini <trini@konsulko.com>
-To: =?iso-8859-1?B?Q3Pza+Fz?= Bence <csokas.bence@prolan.hu>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Haijun Qin <qinhaijun@eswincomputing.com>
-Subject: Re: [PATCH] lib: rsa: Print detailed error info in rsa_engine_init()
- on engine resolution failure
-Message-ID: <20231221210730.GV2513409@bill-the-cat>
-References: <20231214165416.35354-1-csokas.bence@prolan.hu>
+ bh=krzE7ZE5xgTkSF/pawgSl767dewjnI5Xo7TxEUurYfs=;
+ b=dp15QKn1HxHbg68sNwgpsXVOFesBpVta8H51pzAQkJ+79G2EJev3F3fEbf1+UO5tU9
+ srSse/gxd8oqqijmW3F6QLnbL85PPaJeEkBe9/7IM3IkXB+zCgNe5+1esxCMo93QJ15+
+ O3RaeUwvRzVGC3jp/3r7x5LR8dQlHC5KTknAgAbMJ4L286cKD83lI27xA9nzP/G5UJsX
+ qDfj35bkDbTv+VQeAkVvJ2TwjrNGMhrPm+d/RBtIdu+YvEYVD1+0AK7C4tep1kjBl61Y
+ GJ7db2Hyr8TE1cFS41WFqo4tLDh0IHABW4YqLa97MCQMA0yhw9cQipxke4AKFZvIBr5l
+ SeYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703193371; x=1703798171;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=krzE7ZE5xgTkSF/pawgSl767dewjnI5Xo7TxEUurYfs=;
+ b=ftDQxWDWyC25Lwf6wdvDvlSMboHOZo/MtXB+UtzWYIRwtIxWWx2SllHJwwWq4ZEh8f
+ 5aabQdRwQBFXHGDYqL4RHYxgKufhjzg/y2UNQ6ou6lAWJVP5sqp561iFF6pJdf/MVeTZ
+ Ly25qryt3gloBwiXcehz5YUCjO3lEs57EL5MtT2aRyZiorojF5ldbTiw5PLfUrrBauFG
+ Jo26OaDBmxUhT/XiuJfGAbQaKkK2PiaMvwg9jHgpw+v1cdlkcrFyUYmmoX6Ok+WXXqi5
+ gKPfmV/tsc0d11r/FynEgClKpei7NSITEMCeAymbuQH3F9VeI/aSoRaX8PYv8rC+rYKm
+ RP2A==
+X-Gm-Message-State: AOJu0YyXX+Qj7fb1dBucoxitqlLxVeQOo1C3apemwmQQgjpGixXH1jc/
+ ExJwkcEzJb60U6ufJRjaM6hy/2Kv9Mg50aZ2lPnLiNOyq2vv
+X-Google-Smtp-Source: AGHT+IHUTW3rkYoygdgu94vSwcS9wnzOMY5A0NE00H9g8biG4jZvCGq8AoimVW/wb6O6I6EEZMS73EX7hFIZYvPH/cE=
+X-Received: by 2002:a17:902:6503:b0:1d3:d293:7767 with SMTP id
+ b3-20020a170902650300b001d3d2937767mr324plk.7.1703193370806; Thu, 21 Dec 2023
+ 13:16:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ehtVfohFWLLO4J+N"
-Content-Disposition: inline
-In-Reply-To: <20231214165416.35354-1-csokas.bence@prolan.hu>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231217005209.2789651-1-moritzf@google.com>
+ <20231221175341.GK2513409@bill-the-cat>
+In-Reply-To: <20231221175341.GK2513409@bill-the-cat>
+From: Moritz Fischer <moritzf@google.com>
+Date: Thu, 21 Dec 2023 13:15:58 -0800
+Message-ID: <CAFyOScp=vSYFg6HB0MAKFQvEDqt78M8XhZwaJaFQ1nG-ooeigA@mail.gmail.com>
+Subject: Re: [PATCH v2 RESEND] pci: Enable dm_pci_map_bar() for 64-bit BARs
+To: Tom Rini <trini@konsulko.com>
+Cc: sjg@chromium.org, bmeng.cn@gmail.com, xypron.glpk@gmx.de, pro@denx.de, 
+ marex@denx.de, stcarlso@linux.microsoft.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,38 +88,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom,
 
---ehtVfohFWLLO4J+N
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Dec 21, 2023 at 9:53=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sun, Dec 17, 2023 at 12:52:09AM +0000, Moritz Fischer wrote:
+>
+> > Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
+> >
+> > Reviewed-by: Philip Oberfichtner <pro@denx.de>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Moritz Fischer <moritzf@google.com>
+>
+> This causes a failure to build on qemu_arm and a number of other
+> platforms, thanks.
 
-On Thu, Dec 14, 2023 at 05:54:17PM +0100, Cs=F3k=E1s Bence wrote:
+Argh, yes, I got got by the IS_ENABLED(). Switching it to #if
+defined(CONFIG_SYS_PCI_64BIT) makes it work.
 
-> Signed-off-by: Cs=F3k=E1s Bence <csokas.bence@prolan.hu>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+Sorry, let me resend this.
 
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---ehtVfohFWLLO4J+N
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEqRIACgkQFHw5/5Y0
-tywBeQwAlVNmYDIzZ9sTlINQMqPsV+RNob2bsaxbh0Fywl5Zc7zSot1+qImHc6c7
-YdHpZt1/ediyGL8K8H/emETlbJ2x4HdE9gweiQG0/CFpvQrQixUZlsr9m1zzWtI2
-spY32ufxi1I4WEBOzBW1arlNwtzd7NfeKMkrlF4OCXmchYL9UvzdU7fN4xQ1xOjF
-Gok714qg1hbGuhXtQ+ObEZ7RVdBWkbSZHI6r8HOss2eD8JsR5riNIvoPSZJeMBY+
-LDQ0zTJU3TdmtRlGzr0T12lS/Dx81GR60oSN+LIn3obp55AUCepF/2QcjVS9C4WM
-6nRiNxm0EOI59zAV1O1F5sspFfeoXv5EhDnmQfghXrowFnKXSW79TYbhbqelaCwg
-hknRih4q+Xj3x35iE/1xCL2kyqALxfW/df++aNAZXPFNyvIgTNW4Fjx/kdDuDFzj
-Si9qJQbXtCdwts2MH+YtXerN/OwleQbJBiHJReFGBGwF8CCaZDdSDDxdWmbpVZZx
-AniYnNcW
-=qKFF
------END PGP SIGNATURE-----
-
---ehtVfohFWLLO4J+N--
+- Moritz
