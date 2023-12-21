@@ -4,81 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 930F1C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 06:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972EEC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 07:26:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85E2C876DE;
-	Thu, 21 Dec 2023 07:30:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BC91B874AC;
+	Thu, 21 Dec 2023 08:26:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rBn7Vy7P";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="uMZNyTLh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7715D8763E; Thu, 21 Dec 2023 07:30:13 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC9C58783B; Thu, 21 Dec 2023 08:26:23 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3648C875A0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 07:30:11 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50c0f13ea11so557760e87.3
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 22:30:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703140210; x=1703745010; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FkQhaEyCFaTxrVNARIGkcVeh0YpJHUPFaojNcdZDUAA=;
- b=rBn7Vy7PUbEMbR2NYTI6eTpNhnNDj3+etAPm9xwKIHul8VTkmNizrnwwPRC+7xJf4J
- AYE1MS5xrOoB733OYT1msyB/TYdQAAbfcumNr53fm30bj1Z51KfJ4FGlOCDDezcbv4l/
- TXje5YyJ27SzPIEggZi145OPNjSvTLRUkFFWS0VsWF4wcI5LPWG5soCzeHVJnLuHGEfr
- FYjzuGZgkpAbsZXHUWkoVxRO0BEL7yCXjjNAFCgED6cKixMA92euQEBvy/UzGon0uqUG
- VT90/pF5FRyxkQ2BT5Anuz18aRMESlV0roBHfMEknkJKKoaCsH/ssX/6O/4YYrJHP6c5
- 92Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703140210; x=1703745010;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FkQhaEyCFaTxrVNARIGkcVeh0YpJHUPFaojNcdZDUAA=;
- b=LDGxCvG4UcEEXiMsC6U5mqLypOE19RKUO3fSDFE8FgQ6sO4iBLdZkAITBa6/mdz47+
- SjCvUycYidEN44pKITLI3M5YItz18AyBBx+VIWybG43GSRhwS00CL/CShVJ3pysmG3Ek
- 11xcVFpwMpUFRbyaqMluSJqR6mmE655KKDrJLJAmtqmOWKVreSQY8G3e0V7gmDH6/BUo
- xM497EdHB1gqeJyIZBGpz/unluNXvktQxcFsbYSz2YzdDTuRTITyyg0HPphHda+7z7cS
- N4yqjaZNF/ppFK/WnS1cX+ytOdwxYca9T4csOAY3TjZhV6T1Uv3JMulQwzhIXl4Y6JIE
- iREA==
-X-Gm-Message-State: AOJu0YzRNvhijKYMpiOzyYqUFmlcpJU9KlZDnZyc+eAkPY0WLAiqwOuQ
- pSMWJcqs4/WqBXyIDkhaJAJ05C85VH96VHORE9rF9g==
-X-Google-Smtp-Source: AGHT+IGC8qQHTeQzW60XvoOHpl+5fl1uF+gGDGIqiaeVnuiRIdm2H/y6BVmiWAVFuOS1TWV1kOaeqZtqg2hZVt8B2ts=
-X-Received: by 2002:a05:6512:12c4:b0:50e:3f07:771b with SMTP id
- p4-20020a05651212c400b0050e3f07771bmr3154185lfg.129.1703140210303; Wed, 20
- Dec 2023 22:30:10 -0800 (PST)
-MIME-Version: 1.0
-References: <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
- <20231219101124.2847425-1-mwalle@kernel.org>
- <87plz2nzr1.fsf@bloch.sibelius.xs4all.nl>
- <f2eb636cd895aae348d4357537267fd2@kernel.org>
- <CAC_iWj+gPVEm3obJZ2rxr8wd7DD5P9bdadeqW22QmwL0=B825g@mail.gmail.com>
- <CALeDE9NZyAF5iFrbfA2BtWxWdB__cijaME7ppyaPk5Cf7Fd-ZQ@mail.gmail.com>
- <CABEcMwVvu7e9sr8oZKJN+s3DH4wz_+LFx9cADAFZQj4eG+7skw@mail.gmail.com>
-In-Reply-To: <CABEcMwVvu7e9sr8oZKJN+s3DH4wz_+LFx9cADAFZQj4eG+7skw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 21 Dec 2023 08:29:34 +0200
-Message-ID: <CAC_iWjJOi3DmxVYx2X2aXtsFpvHDFOqskCYZu3s1U04ak5u7XQ@mail.gmail.com>
-Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
-To: Shantur Rathore <i@shantur.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Michael Walle <mwalle@kernel.org>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
- Abdellatif.ElKhlifi@arm.com, 
- Drew.Reed@arm.com, nd@arm.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ by phobos.denx.de (Postfix) with ESMTPS id 8F9FB8743A
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:26:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+From: Alexander Dahl <ada@thorsis.com>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1703143578;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=U0WVW1kZDgvfuOGFe/flPkGSRTMLL2Qf4cIrJgu473Y=;
+ b=uMZNyTLhQrtalar5Thu8lHqTgdfG3BtD24Pa5z7+Ory7tq4Qd6FubJO6BzpGLbpErwgK81
+ S4ENDhji6DaIu3ieSAW6kTWBRdJG8UQvRzQ17QEFSs8Fl0/vLome2KCg+WpP5QqD6u6g3L
+ dYR6u15hzljsrziL4VQ59eQupG+OKAkjkVXqaZZHMtNorOSMHxf0EhlhOe1rTumCRJ7iy+
+ IUWERuTZ34v6rGyPmJ/+bRq4vVVoXqTeeeh+ZXKUCCy2I/uPMuGrbLg8SsxAm3Gn4nUTFy
+ efkw88oZdqwJjnsUgM9Tku4drqqPj6PhFY8/+tEBpu0CqkGItTjo5pvAY/5Rjg==
+To: u-boot@lists.denx.de
+Cc: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Terry Lv <terry.lv@nxp.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/2] tools: kwbimage: Allow disabling build on non-mvebu
+ platforms
+Date: Thu, 21 Dec 2023 08:26:10 +0100
+Message-Id: <20231221072611.11479-2-ada@thorsis.com>
+In-Reply-To: <20231221072611.11479-1-ada@thorsis.com>
+References: <20231221072611.11479-1-ada@thorsis.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,72 +63,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Shantur
+Some users want to build with CONFIG_TOOLS_LIBCRYPTO disabled, which in
+general is possible for at least some boards.  32-bit mvebu however
+requires kwbimage for building SPL, and kwbimage has a hard dependency
+to host OpenSSL.
 
-On Thu, 21 Dec 2023 at 00:57, Shantur Rathore <i@shantur.com> wrote:
->
-> Hi Illias,
->
-> On Wed, Dec 20, 2023 at 3:43=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
-com> wrote:
-> >
-> > On Wed, Dec 20, 2023 at 6:37=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Michael
-> > >
-> > > On Tue, 19 Dec 2023 at 14:47, Michael Walle <mwalle@kernel.org> wrote=
-:
-> > > >
-> > > > Hi Mark,
-> > > >
-> > > > >> > Any runtime device drivers for variable storage should not be =
-in the
-> > > > >> > U-Boot runtime but live in the secure world (e.g. OP-TEE) FF-A=
- is the
-> > > > >> > new ARM protocol for talking to the secure world and hence fit=
-s into
-> > > > >> > the picture.
-> > > > >>
-> > > > >> What if I just want a simple embedded boot stack where I don't
-> > > > >> want any secure world and just want to be able to boot a COTS li=
-nux
-> > > > >> distribution via EFI?
-> > > > >
-> > > > > That already works for many Linux distros.  As long as the distro
-> > > > > installs the appropriate BOOTxxx.EFI file you don't actually need=
- to
-> > > > > set any EFI variables for the OS to boot.  It can't get any simpl=
-er
-> > > > > than that.  Of the main Linux distros it seems that only Debian
-> > > > > doesn't do this.  Someone should probably lobby Debian to do this=
- as
-> > > > > well as it would mean that Debian would just work on an EBBR comp=
-liant
-> > > > > system.
-> > > >
-> > > > I know. Last time I checked CentOS (or was it Ubuntu?) tried to
-> > > > set EFI variables and the installer just failed. Might be fixed now=
-,
-> > > > though.
-> > >
-> > > It's not. The error message is less scary in distros nowadays, but
-> > > setting the variable for Boot0000 is still not working. That being
-> > > said I have a plan to fix it for variables stored in a file, that's
-> > > why we standardized the efi variable format in EBBR.
->
-> Does this mean supporting SetVariableRT for files ?
-> If yes, would it work without the driver model in runtime?
+The new symbol CONFIG_TOOLS_KWBIMAGE allows disabling kwbimage build on
+non-mvebu platforms, and thus building without host libcrypto from
+OpenSSL.
 
-Yes.
+Based on previous work and discussions, see links below.
 
-The reasoning here is pretty simple. You can't keep alive drivers etc
-for devices that the *kernel* eventually owns. The proposal is to
-ignore the EFI spec and teach the kernel to write those directly. We
-already do that when the variables are stored in an RPMB, we need to
-figure out a decent scalable architecture for the rest.
+Link: https://lore.kernel.org/u-boot/20211021093304.25399-1-pali@kernel.org/
+Link: https://lore.kernel.org/u-boot/20220111153120.1276641-1-marex@denx.de/
+Link: https://lore.kernel.org/u-boot/20230121154743.667253-2-paulerwan.rio@gmail.com/
+Cc: Marek Vasut <marex@denx.de>
+Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
+Signed-off-by: Alexander Dahl <ada@thorsis.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
-/Ilias
->
-> Kind regards,
-> Shantur
+Notes:
+    This is more or less a mashup of the patches of Pali and Marek, but
+    considering the feedback given by Samuel on Pali's patch and considering
+    what I thought was the preferred style in other parts of the Makefile.
+    
+    Link: https://lore.kernel.org/u-boot/f4660467-9d25-dc46-9e60-b2f7f09236c2@sholland.org/
+    
+    v1 -> v2:
+    * removed a useless new newline added in v1
+    * collected tags
+
+ arch/arm/mach-mvebu/Kconfig | 1 +
+ tools/Kconfig               | 5 +++++
+ tools/Makefile              | 4 +++-
+ 3 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+index c80d8587b14..2058c95ca2d 100644
+--- a/arch/arm/mach-mvebu/Kconfig
++++ b/arch/arm/mach-mvebu/Kconfig
+@@ -15,6 +15,7 @@ config ARMADA_32BIT
+ 	select SUPPORT_SPL
+ 	select SYS_L2_PL310 if !SYS_L2CACHE_OFF
+ 	select TRANSLATION_OFFSET
++	select TOOLS_KWBIMAGE if SPL
+ 	select SPL_SYS_NO_VECTOR_TABLE if SPL
+ 	select ARCH_VERY_EARLY_INIT
+ 
+diff --git a/tools/Kconfig b/tools/Kconfig
+index 6e23f44d550..f8632cd59d0 100644
+--- a/tools/Kconfig
++++ b/tools/Kconfig
+@@ -25,6 +25,11 @@ config TOOLS_LIBCRYPTO
+ 	  This selection does not affect target features, such as runtime FIT
+ 	  signature verification.
+ 
++config TOOLS_KWBIMAGE
++	bool "Enable kwbimage support in host tools"
++	default y
++	select TOOLS_LIBCRYPTO
++
+ config TOOLS_FIT
+ 	def_bool y
+ 	help
+diff --git a/tools/Makefile b/tools/Makefile
+index 1aa1e36137b..6a4280e3668 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -94,6 +94,8 @@ LIBCRYPTO_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := \
+ 			generated/lib/fdt-libcrypto.o \
+ 			sunxi_toc0.o
+ 
++KWB_IMAGE_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := kwbimage.o
++
+ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
+ 
+ # common objs for dumpimage and mkimage
+@@ -114,7 +116,7 @@ dumpimage-mkimage-objs := aisimage.o \
+ 			imximage.o \
+ 			imx8image.o \
+ 			imx8mimage.o \
+-			kwbimage.o \
++			$(KWB_IMAGE_OBJS-y) \
+ 			generated/lib/md5.o \
+ 			lpc32xximage.o \
+ 			mxsimage.o \
+-- 
+2.39.2
+
