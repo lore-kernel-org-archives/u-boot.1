@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89596C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 12:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24659C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 12:45:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30D7187853;
-	Thu, 21 Dec 2023 13:26:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 72612877E5;
+	Thu, 21 Dec 2023 13:45:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UvFS4KAI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Qe1zvb/b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35E0C876F6; Thu, 21 Dec 2023 06:57:45 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F0B0A8783B; Thu, 21 Dec 2023 13:45:32 +0100 (CET)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D2FC8763E
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:57:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 850DE876AE
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:45:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BL5vVI2093361;
- Wed, 20 Dec 2023 23:57:31 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703138251;
- bh=rzF2ol9IUrshvc4L9U6kQcPUlPMsWNAx4Z71tlDmE10=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=UvFS4KAIj1h+JS5AnBLuZxSwdkufC3B2Zm/AvywgV1Rts3khOBFefk5O8EswDZD9y
- D/6t+o20y4TSWnUhMJhE4uMSEOtxSN4DMhbf+1s7Ec3+PrDHgsRNg8mPJDZuV9W7zO
- COKAdupwdGBydLsnptoFnzEXw2vboUYcdOfgflaE=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BL5vV3w109602
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 20 Dec 2023 23:57:31 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Dec 2023 23:57:30 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Dec 2023 23:57:30 -0600
-Received: from [10.24.69.31] (dhcp-10-24-69-31.dhcp.ti.com [10.24.69.31])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BL5vNaG114779;
- Wed, 20 Dec 2023 23:57:25 -0600
-Message-ID: <dec37f82-abf4-4300-88f0-511faf014564@ti.com>
-Date: Thu, 21 Dec 2023 11:27:22 +0530
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-50e3901c2e2so963548e87.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 04:45:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703162730; x=1703767530; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VETZ2ZXELThgiGrWTHw8PY2cqM2+NyllToj9Wokgvhg=;
+ b=Qe1zvb/bfBhRK+cOjTY1ND3Aj+7D0sj/+7GGqHEdov45cGjmKG8OCs11c1kanbaC0y
+ h+c6teyueRZ8bi82L/6LGVf4pzwCocSHYwR+ptog3GIusNsp2y8cfOhH5p3ff9vqob/H
+ yKrfsOg59CVF0J+Vqamx1YMQNnafQgE1VsLgqaTsq/G1hhAL2qXrWOCuW4iTFzV1+kcb
+ qoM44XVDWcIh6OpTGL3XAunzPESyyJnsf1/7xcsOsJNMdGkyiUuuSECCckaqXuEvFcFi
+ iI1oT+PO8x+C9sk961vKhGZhHZye9sUlzOsCdHR+c4AwQVilQX6/gYp77xlUnx2ZT0B7
+ QYAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703162730; x=1703767530;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VETZ2ZXELThgiGrWTHw8PY2cqM2+NyllToj9Wokgvhg=;
+ b=tpqVMKWl6GlKGr+GeXZSyvGTQgkDCZxLNBsd7G3tEEEIju8PczOsmdQALvvRHiZJfK
+ UbjCLuYTcNmBFSNP4Q6A6R0ckP/LmTgHusmC9Q5JYLMlfkaY/n+PoymiRn6NxqdwD+3Y
+ +Iyt2S/Z03vUC96rz8blJc/bkw1FHQuj6vbEYzZNzg/FViq2af+B518aAjqmtuULPBqB
+ wzEyOOUS6thc/zFdfa6uqgIYIJFAjoi2p1S5aXEUpgr6yA8eK7pfbxpqhyVJhbpGP4+1
+ kTlBw2osRMk3aZhSShgKt9dg+9iPsErTt/t1QmHenv5IWRTkEEoQFFpsDzBIY/wiU09Y
+ 6bmQ==
+X-Gm-Message-State: AOJu0YyUh3xHSjEUNcEdEdvJIlWydMPfuc/jWwOI2on2Kat6T7BPM0I7
+ AtO/LN0klK10exGChGOP3hVDKg==
+X-Google-Smtp-Source: AGHT+IGSFl8CFHk4KIndVhm/scikVNPbKjgZtJXGDqrFTJpI9zfxG9PV2kA0+t0DMDtsL0vzeUxF0A==
+X-Received: by 2002:ac2:5201:0:b0:50e:5b95:948 with SMTP id
+ a1-20020ac25201000000b0050e5b950948mr508123lfl.103.1703162729760; 
+ Thu, 21 Dec 2023 04:45:29 -0800 (PST)
+Received: from hera (ppp089210121239.access.hol.gr. [89.210.121.239])
+ by smtp.gmail.com with ESMTPSA id
+ en6-20020a17090728c600b00a23577b265csm923304ejc.173.2023.12.21.04.45.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Dec 2023 04:45:29 -0800 (PST)
+Date: Thu, 21 Dec 2023 14:45:27 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2] efi_loader: fix iteration of FMP protocols
+Message-ID: <ZYQzZ3xJApKdcOm4@hera>
+References: <20231218095742.376839-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 14/16] configs: am65x_evm_a53_defconfig: add
- SPL_LOAD_FIT_APPLY_OVERLAY
-Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Ramon Fried <rfried.dev@gmail.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Tom
- Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>
-References: <20231219103418.3445886-1-danishanwar@ti.com>
- <20231219103418.3445886-15-danishanwar@ti.com>
- <4a831eea-ce70-46b9-9e30-cc57a0182630@kernel.org>
-From: MD Danish Anwar <danishanwar@ti.com>
-In-Reply-To: <4a831eea-ce70-46b9-9e30-cc57a0182630@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 21 Dec 2023 13:26:33 +0100
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231218095742.376839-1-masahisa.kojima@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,57 +90,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Roger,
+On Mon, Dec 18, 2023 at 06:57:41PM +0900, Masahisa Kojima wrote:
+> If one of the FMP protocols fails when calling GetImageInfo(),
+> populating the ESRT ends up with failure and other FMP protocols
+> are not added to the ESRT. We should still add all other FMP
+> protocols to the ESRT.
+>
+> With this commit, iteration of all FMP protocols continues
+> even though one of the FMP protocols fails.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+> Note that this patch addresses the following issue.
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/issues/3
+>
+> changes in v2
+> - add error handling when num_entries is 0 after calling fmp->get_image_info()
+>
+>  lib/efi_loader/efi_esrt.c | 18 ++++++++++++------
+>  1 file changed, 12 insertions(+), 6 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
+> index 7f46d651e6..1f629a6023 100644
+> --- a/lib/efi_loader/efi_esrt.c
+> +++ b/lib/efi_loader/efi_esrt.c
+> @@ -365,7 +365,7 @@ efi_status_t efi_esrt_populate(void)
+>  		if (ret != EFI_SUCCESS) {
+>  			EFI_PRINT("ESRT Unable to find FMP handle (%u)\n",
+>  				  idx);
+> -			goto out;
+> +			continue;
+>  		}
+>  		fmp = handler->protocol_interface;
+>
+> @@ -380,15 +380,14 @@ efi_status_t efi_esrt_populate(void)
+>  			 * fmp->get_image_info to return BUFFER_TO_SMALL.
+>  			 */
+>  			EFI_PRINT("ESRT erroneous FMP implementation\n");
+> -			ret = EFI_INVALID_PARAMETER;
+> -			goto out;
+> +			continue;
+>  		}
+>
+>  		ret = efi_allocate_pool(EFI_BOOT_SERVICES_DATA, info_size,
+>  					(void **)&img_info);
+>  		if (ret != EFI_SUCCESS) {
+>  			EFI_PRINT("ESRT failed to allocate memory for image info\n");
+> -			goto out;
+> +			continue;
+>  		}
+>
+>  		/*
+> @@ -406,7 +405,7 @@ efi_status_t efi_esrt_populate(void)
+>  		if (ret != EFI_SUCCESS) {
+>  			EFI_PRINT("ESRT failed to obtain image info from FMP\n");
+>  			efi_free_pool(img_info);
+> -			goto out;
+> +			continue;
+>  		}
+>
+>  		num_entries += desc_count;
+> @@ -414,6 +413,13 @@ efi_status_t efi_esrt_populate(void)
+>  		efi_free_pool(img_info);
+>  	}
+>
+> +	/* error occurs in fmp->get_image_info() if num_entries is 0 here */
+> +	if (!num_entries) {
+> +		EFI_PRINT("Error occurs, num_entries should not be 0\n");
+> +		ret = EFI_INVALID_PARAMETER;
+> +		goto out;
+> +	}
+> +
+>  	EFI_PRINT("ESRT create table with %u entries\n", num_entries);
+>  	/*
+>  	 * Allocate an ESRT with the sufficient number of entries to accommodate
+> @@ -437,7 +443,7 @@ efi_status_t efi_esrt_populate(void)
+>  		if (ret != EFI_SUCCESS) {
+>  			EFI_PRINT("ESRT unable to find FMP handle (%u)\n",
+>  				  idx);
+> -			break;
+> +			continue;
+>  		}
+>  		fmp = handler->protocol_interface;
+>
+> --
+> 2.34.1
+>
 
-On 20/12/23 3:32 pm, Roger Quadros wrote:
-> 
-> 
-> On 19/12/2023 12:34, MD Danish Anwar wrote:
->> We want SPL to apply DTB overlays (e.g. NAND card overlay) so
->> enable SPL_LOAD_FIT_APPLY_OVERLAY.
->> Increase SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ and
->> SPL_STACK_R_MALLOC_SIMPLE_LEN. Without this SPL hangs.
->>
->> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
->> ---
->>  configs/am65x_evm_a53_defconfig | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
->> index e79a961317..2755d7082f 100644
->> --- a/configs/am65x_evm_a53_defconfig
->> +++ b/configs/am65x_evm_a53_defconfig
->> @@ -70,6 +70,9 @@ CONFIG_CMD_I2C=y
->>  CONFIG_CMD_MMC=y
->>  CONFIG_CMD_PCI=y
->>  CONFIG_CMD_REMOTEPROC=y
->> +CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
->> +CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ=0x100000
->> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x1000000
-> 
-> This change to 16MB is not required. I suppose default is 4MB.
-> Did you face issues with it?
-> 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+For the SynQuacer
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Without these I see below error in uboot,
-
-U-Boot SPL 2024.01-rc5-00539-gdc3afd4d5b (Dec 21 2023 - 11:23:56 +0530)
-SYSFW ABI: 3.1 (firmware rev 0x0009 '9.1.6--v09.01.06 (Kool Koala)')
-Trying to boot from MMC2
-spl_register_fat_device: fat register err - -1
-spl_load_image_fat: error reading image u-boot.img, err - -1
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-The only way to recover from here is to do a power cycle reset. But when
-you boot again, the issue is seen again. So I think these changes are
-also needed. Without this, SPL doesn't work properly.
-
->>  CONFIG_CMD_USB=y
->>  CONFIG_CMD_TIME=y
->>  CONFIG_MTDIDS_DEFAULT="nor0=47040000.spi.0"
-> 
-
--- 
-Thanks and Regards,
-Danish
