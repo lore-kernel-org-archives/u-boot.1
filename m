@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DA9C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDBFC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:38:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83143878A1;
-	Thu, 21 Dec 2023 17:38:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03D1A878C8;
+	Thu, 21 Dec 2023 17:38:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xEokDR1K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iRvNa1nW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5D878786E; Thu, 21 Dec 2023 17:38:12 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id CFF4F8786E; Thu, 21 Dec 2023 17:38:25 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DD56878D7
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:38:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18416878DD
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:38:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-40d3f2586d4so6977285e9.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:38:09 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40c6ea99429so10970145e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:38:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703176689; x=1703781489; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703176701; x=1703781501; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=EyVnAf77ckQX+w0UW1y8UPFX/V4LHkSoacTAjVL6Hxw=;
- b=xEokDR1K0viy6JDltx8bpS5gOYpAfjKPWQj1+bzEe44TB4ZyhEkPnS5bkGwI3C8NwD
- 8ny0zgFUIPDEeZfADK4bVAu9yvNotPnLJGWZREje7Kj8PhHVYrlkmNzdDp3rDl+bEfPx
- CLY7MeFYAmkqvgbR65yrOpQlx9WnQ3KK8J2vdcZyXCQVQs+7YBGKoHUFraFwgYcdRM7F
- amNYXr62uD+6KFSFoD0T2+sfU3//+D53pwIEpEvLHdH2t2fdK6AIGCurTx7fFl9kXHa9
- SjGyd57LCvUUdNYKI0yZf1+WdVH4lIoXLTTxpbtVDmFmgHYwsjCu+faxKduRDgCuaH3E
- 2S+w==
+ :reply-to; bh=R4CbUGSBQs/k8U6Al8nDH8wG+CSkosn5zpdrDB/D1XQ=;
+ b=iRvNa1nWMUpZnYwQwHnUnodt21RAS51ZamwZVcESPLLmuedcc9jRLRKeptzVDoXIA8
+ mSQzoqEpQo5qqKdU2oQ44w6rBg1SXmEk5IaBRpm5qxxhImE0dJW2tcoKu/T7HyYUIEJN
+ PXZ09zErEo/rU++opSStJkJAhHQ5LzrPH6+g6hLoWt0HHSrRcetILm5wqyT6HIgJ8iBX
+ CD+UO0leyj59aJhM2JTd9vkllOaLb27+ZlA8ZoJVdBIPevBylEANBNf4Tj1hOqQ843kd
+ AQIYuIV4KAd/tfMImnsKjE8kxIz2wyY3lP+z+CHqDIqDuf5s4ehLYoT7llEHjE1v21fj
+ Nc5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703176689; x=1703781489;
+ d=1e100.net; s=20230601; t=1703176701; x=1703781501;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=EyVnAf77ckQX+w0UW1y8UPFX/V4LHkSoacTAjVL6Hxw=;
- b=Fq5aoayE+O73Kc9oklR0W7niznNw0XAXK6ZZBZ/aX+gXf9TywrKkd8HqvPSDJ5utyM
- ugRjsnTIy95fiTSrc6s1Wbw5Sp+NT6sAc2xdUS5pwCvBzHOlddOfPf9uzBgCmpuvv6MK
- CurgMmKyaQaz6unjL6q9+o+gUTrhfBcA7Dznm1b/vc/vM+CYGraDl5xPj427StN1wXx+
- fAgWsr2gOQ8v8LAmO3bxtWNvNmQ1+uDIoD4pjjuz98b3up4Se+8JR8Sq3OoLwvzwBb8g
- ca9lDMzmH7tu+GuROudas78jvjP6WPTxNW1WayipoiTyz2Vfm4c7xTsAUz7YcaovO8ht
- eaQw==
-X-Gm-Message-State: AOJu0YyTIJbiqzYg1HM5wBk0SvuPIC1rKGbl/XXi8uBJhsfPlFNCKu6k
- GxSs4O6+uxZOVI8ri0b36JYPEw==
-X-Google-Smtp-Source: AGHT+IEmyqLkPzKdh84d5w21AW8lDCMYznorh/FRIkI5EppioLSYC0zNpuCjYtg6ZFQuXrCBdETTVg==
-X-Received: by 2002:a05:600c:b43:b0:40d:30c0:dda4 with SMTP id
- k3-20020a05600c0b4300b0040d30c0dda4mr976327wmr.150.1703176689010; 
- Thu, 21 Dec 2023 08:38:09 -0800 (PST)
+ bh=R4CbUGSBQs/k8U6Al8nDH8wG+CSkosn5zpdrDB/D1XQ=;
+ b=xOlNjOPC+W56DFsaEKsafW8JckY9uR2VBPlm6Qw4A/GEyziU7k2DJm7ULuMJ2G4lRQ
+ jnNJP+SoZDOfxfdqghMjxZYxyBnDsD+zIu9SQyzxVg9w4uVWge5ks2z36uvQx95ElG41
+ C1Eby6TFAAAykUPYfcXNiOuM9Ta4ts5AnQTS+FU0vPvXMAV1ETweklJ3TEa7Dicv9y1k
+ 1uo8lF50xbkhN7RnMNU34W0e61aHTF0wy5RYxdmvx6aLO3Cm0sOEaB0dpDjz98dlmnrp
+ GUq+xOi4eIWiqLMElQjNxWAdUVp3UGPxxTFtzll4dpGm8zL98wNqnfe/8SvAFDzZREEM
+ bKaQ==
+X-Gm-Message-State: AOJu0YzyrZy2AiM+padllJ593ON9jWqrt3I3F1fOgzNw91hkGL08PCPm
+ 1+MegX/DeHKqAmjRWqg45w3mf0Up7HJ8bQ==
+X-Google-Smtp-Source: AGHT+IFnKvCsGUOq4dDt0v3HNYJKGwptTnmfqr9vaSo6qm65zKYpkJvWZDZdBJRUwwlHu/8KGUVBww==
+X-Received: by 2002:a05:600c:3201:b0:40b:5e1e:fb9c with SMTP id
+ r1-20020a05600c320100b0040b5e1efb9cmr901wmp.81.1703176701326; 
+ Thu, 21 Dec 2023 08:38:21 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed?
  ([2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed])
  by smtp.gmail.com with ESMTPSA id
- bd7-20020a05600c1f0700b0040c420eda48sm12216169wmb.22.2023.12.21.08.38.08
+ bd7-20020a05600c1f0700b0040c420eda48sm12216169wmb.22.2023.12.21.08.38.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:38:08 -0800 (PST)
-Message-ID: <e628e721-4747-4b53-9a69-53c95864bb6d@linaro.org>
-Date: Thu, 21 Dec 2023 17:38:07 +0100
+ Thu, 21 Dec 2023 08:38:20 -0800 (PST)
+Message-ID: <93ff6cfe-9c16-4237-a63c-f2d7f6502664@linaro.org>
+Date: Thu, 21 Dec 2023 17:38:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 24/32] dts: msm8916: replace with upstream DTS
+Subject: Re: [PATCH v2 25/32] dt-bindings: import headers for MSM8996
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -83,7 +83,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-24-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-25-b6dd9704219e@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -109,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231219-b4-qcom-common-target-v2-24-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-25-b6dd9704219e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,19 +130,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19/12/2023 17:04, Caleb Connolly wrote:
-> Drop the U-Boot specific dragonboard410c.dts in favour of the upstream
-> msm8916-sbc.dts. No additional changes are needed to this DTS for U-Boot
-> support.
+> Import dt-binding headers for MSM8996/APQ8096 from Linux.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/dts/Makefile                   |    2 +-
->   arch/arm/dts/apq8016-sbc.dts            |  729 +++++++++
->   arch/arm/dts/dragonboard410c-uboot.dtsi |   44 -
->   arch/arm/dts/dragonboard410c.dts        |  209 +--
->   arch/arm/dts/msm8916.dtsi               | 2702 +++++++++++++++++++++++++++++++
->   configs/dragonboard410c_defconfig       |    2 +-
->   6 files changed, 3472 insertions(+), 216 deletions(-)
+>   include/dt-bindings/clock/qcom,gcc-msm8996.h       | 360 +++++++++++++++++++++
+>   include/dt-bindings/clock/qcom,mmcc-msm8996.h      | 295 +++++++++++++++++
+>   .../dt-bindings/interconnect/qcom,msm8996-cbf.h    |  12 +
+>   include/dt-bindings/interconnect/qcom,msm8996.h    | 163 ++++++++++
+>   include/dt-bindings/sound/qcom,wcd9335.h           |  15 +
+>   5 files changed, 845 insertions(+)
 > 
 
 <snip>
