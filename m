@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A10C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:38:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50E39C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AF5F878F7;
-	Thu, 21 Dec 2023 17:38:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 218C48788D;
+	Thu, 21 Dec 2023 17:39:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CUy/VZok";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vg2q/qil";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BDA9878F5; Thu, 21 Dec 2023 17:38:42 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 9BF6A8786E; Thu, 21 Dec 2023 17:39:00 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63F4E878DF
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:38:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CBF9878A4
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:38:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3367903b4dcso980362f8f.1
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:38:38 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e1112b95cso1200801e87.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:38:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703176718; x=1703781518; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703176732; x=1703781532; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=JCgYIqY5GbrIZvHOSU81pArlTXas9lKeAAg0DrpcZwc=;
- b=CUy/VZokU32g0E4oSg4P6vjUqOEXAIBLkkCW+oszS68I87bxXhppP2Ri+yiFFvHA4o
- NMBDvSz0MlO6GKRPOg1TAFDbbiD3rMAJ9RiUsuHAWB14m9i8gx6rikPILfIalvmJPqYe
- 1uPlSjMove5ZDAizIw7NarijrqNbZLHyxnQD63f6zeL9oTbACEE8bKbpMLIep13y3lZm
- XZqtDbbyhPML8yT1pZ0R09/idLWrSCk4+8tcHurxGPqh2phJFYhd1PJ+hlEEtbvbcnpQ
- 6uMYWX0Yx5U969rUp/AyeYhL5SFa3s6NrPDAD5U0zKj4TmFvI4VW85NDwmONMX08Rva2
- w89w==
+ :reply-to; bh=4uxOo+jjZS/1lo7o7evVd8vijjQe1z/YZ1P6cviPOA0=;
+ b=Vg2q/qil5T2QLpdSPBb1uJlw0Fvr8V0zS9CUshtxNEnQ9Jzoa1pWh+OPh/R0+KBGeB
+ LR2rLH0xpxJDvY4FIc5NFsb4amdlSsyVuFqRmiCwm9M81ByPinzONe5J1h0IjDpGhqc5
+ shONGYn/JXoknrtZqYvvuVSXXB4LceczvMixBWHpcil4stdyvdX8/1PkWGDBa3iocDNT
+ TUC2ig/kno7ZLWvNwu7RedrfNtoaxMe9fN5rj8LDNRU7zwpaTyHiBsaL0DT8ua9rfwn+
+ QIlj3PV3SJfsPP1PoFTSFJFHt3VsJXk4tK4EA0mn6cSygJlsjGOlGhhwnPnTOjlMW8U1
+ 3bvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703176718; x=1703781518;
+ d=1e100.net; s=20230601; t=1703176732; x=1703781532;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=JCgYIqY5GbrIZvHOSU81pArlTXas9lKeAAg0DrpcZwc=;
- b=pWK/dYE05JxqL2Hk+hw08E8XnlRVgbjGzVqTdNR5RXnkqzHE0zFMW1OGLOITLdj72W
- AJsv84IZhBmNd3bFncYM79tkr7xTNASP1Sh3YIkoICTWtlUEjk1z2YT0INbQemKOOlLy
- ZV2nz1amQIOABT4uduMzzXVGMtg5f3NSAAZASqMoRS+An5yV/5eO7+vMUF3EhH0aUigq
- qVpvIVjbAQK0NTFaIx9lA2hHaRnG+A8I5h4ggGb1VyrfL5XhZNwoeYZ3gdX3lPXJPV7Z
- 0vtCAEbZkTbFOpdNuW6vo5AmJwdjgrJgWgZKzuVwZv34J63ukhKAOItyItrzoRcqiL8G
- ArOg==
-X-Gm-Message-State: AOJu0YxwBGSxuTAsOAabAMIWoHIdPysjsLDxXiy6EcKZ+CAqp3OT1w07
- OVd8ZyPGfiofwY8neRE1o9hx83IRIB/f6g==
-X-Google-Smtp-Source: AGHT+IEehTu9mO8JPsQlXH/7lIG+QY78l1COE9r1VjT6rr8b/4aV5m48cHXat1wMP7nrfcNXUtYwwg==
-X-Received: by 2002:adf:ec8a:0:b0:336:5fd5:6bd1 with SMTP id
- z10-20020adfec8a000000b003365fd56bd1mr43595wrn.62.1703176717878; 
- Thu, 21 Dec 2023 08:38:37 -0800 (PST)
+ bh=4uxOo+jjZS/1lo7o7evVd8vijjQe1z/YZ1P6cviPOA0=;
+ b=XPEUAhr666Lm4WJJcHUvZp4y7tFAvlilHrALus44T4+t5iEEFBZBWvETwhTIvly/PB
+ XTS5ZABeK2pbADhN676yVQQNC6/mV0bhV0XYeYxVju2ejYVxnJekLgHWQ0W+3VNl0kT2
+ ljJ6SaomRzYb+I3uaQRhPDgyaMqPWMty8gNuO4YQspEvmfLewLHDNeg+2PTo0KX4AlEj
+ 6VGvOwH3MKNdakTh7nU5EcpcyA/SRXka9Ib4NRpAK3xe57OCYRZnYhGNKTyNfdnMsjEE
+ ppfCl8an4s3bKYgJyMLYoSAn+/QHBr2xJRd6T0f2DNo62XPBPBs+pSSf77+T7m2Xm8ft
+ OGRA==
+X-Gm-Message-State: AOJu0YwAKTSYSY+cb6vLzgoFaQlQKnkuPJtbyOqGgAr38jjHC5sa5IU6
+ m5WdZ56AwMcvJl6k53AFAXM6PA==
+X-Google-Smtp-Source: AGHT+IEho1j5c7mkJOwuxtR53WQQ/dMaOl67i1uOLMjo7dSvPuvEZsr4eHmpuPgO9sSZTxf88Ywj7w==
+X-Received: by 2002:a05:6512:68b:b0:50e:4a74:23a8 with SMTP id
+ t11-20020a056512068b00b0050e4a7423a8mr2088121lfe.150.1703176732492; 
+ Thu, 21 Dec 2023 08:38:52 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed?
  ([2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed])
  by smtp.gmail.com with ESMTPSA id
- d17-20020adfe2d1000000b0033673ddd81csm2372633wrj.112.2023.12.21.08.38.36
+ d17-20020adfe2d1000000b0033673ddd81csm2372633wrj.112.2023.12.21.08.38.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:38:37 -0800 (PST)
-Message-ID: <218af11e-3dcd-42f2-b757-dbc25c32da50@linaro.org>
-Date: Thu, 21 Dec 2023 17:38:36 +0100
+ Thu, 21 Dec 2023 08:38:52 -0800 (PST)
+Message-ID: <5e394e26-efd9-4abc-96c0-9b1afb3c1848@linaro.org>
+Date: Thu, 21 Dec 2023 17:38:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 26/32] dts: msm8996: import PMIC dtsi files
+Subject: Re: [PATCH v2 27/32] dts: dragonboard820c: use correct bindings for
+ clocks
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -83,7 +84,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-26-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-27-b6dd9704219e@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -109,7 +110,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231219-b4-qcom-common-target-v2-26-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-27-b6dd9704219e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,17 +131,70 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19/12/2023 17:04, Caleb Connolly wrote:
-> Import PM8994 and PMI8994 DTSI files in preparation for switching
-> MSM8996 boards to upstream DTS.
+> Don't use hardcoded clock IDs, use the IDs from the dt-bindings to be
+> compatible with upstream.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/dts/pm8994.dtsi  | 152 ++++++++++++++++++++++++++++++++++++++++++++++
->   arch/arm/dts/pmi8994.dtsi |  65 ++++++++++++++++++++
->   2 files changed, 217 insertions(+)
+>   arch/arm/dts/dragonboard820c.dts | 5 +++--
+>   drivers/clk/qcom/clock-apq8096.c | 5 +++--
+>   2 files changed, 6 insertions(+), 4 deletions(-)
 > 
-
-<snip>
-Same as patch 19, with the commit id:
+> diff --git a/arch/arm/dts/dragonboard820c.dts b/arch/arm/dts/dragonboard820c.dts
+> index 86b7f83d36d6..282c37e28f42 100644
+> --- a/arch/arm/dts/dragonboard820c.dts
+> +++ b/arch/arm/dts/dragonboard820c.dts
+> @@ -8,6 +8,7 @@
+>   /dts-v1/;
+>   
+>   #include "skeleton64.dtsi"
+> +#include <dt-bindings/clock/qcom,gcc-msm8996.h>
+>   
+>   / {
+>   	model = "Qualcomm Technologies, Inc. DB820c";
+> @@ -78,7 +79,7 @@
+>   		blsp2_uart2: serial@75b0000 {
+>   			compatible = "qcom,msm-uartdm-v1.4", "qcom,msm-uartdm";
+>   			reg = <0x75b0000 0x1000>;
+> -			clocks = <&gcc 4>;
+> +			clocks = <&gcc GCC_BLSP2_UART2_APPS_CLK>;
+>   			clock-names = "core";
+>   			pinctrl-names = "uart";
+>   			pinctrl-0 = <&blsp8_uart>;
+> @@ -89,7 +90,7 @@
+>   			reg = <0x74a4900 0x314>, <0x74a4000 0x800>;
+>   			index = <0x0>;
+>   			bus-width = <4>;
+> -			clock = <&gcc 0>;
+> +			clock = <&gcc GCC_SDCC1_APPS_CLK>;
+>   			clock-frequency = <200000000>;
+>   		 };
+>   
+> diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
+> index 1e6fdb5cd42d..a4731613c5e0 100644
+> --- a/drivers/clk/qcom/clock-apq8096.c
+> +++ b/drivers/clk/qcom/clock-apq8096.c
+> @@ -13,6 +13,7 @@
+>   #include <errno.h>
+>   #include <asm/io.h>
+>   #include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,gcc-msm8996.h>
+>   
+>   #include "clock-qcom.h"
+>   
+> @@ -107,10 +108,10 @@ static ulong apq8096_clk_set_rate(struct clk *clk, ulong rate)
+>   	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+>   
+>   	switch (clk->id) {
+> -	case 0: /* SDC1 */
+> +	case GCC_SDCC1_APPS_CLK: /* SDC1 */
+>   		return clk_init_sdc(priv, rate);
+>   		break;
+> -	case 4: /*UART2*/
+> +	case GCC_BLSP2_UART2_APPS_CLK: /*UART2*/
+>   		return clk_init_uart(priv);
+>   	default:
+>   		return 0;
+> 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
