@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D542C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 19:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF96EC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 20:01:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B798887886;
-	Thu, 21 Dec 2023 20:02:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 172938743A;
+	Thu, 21 Dec 2023 21:01:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eqWJXO4f";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QC+UB49O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 583C7877D8; Thu, 21 Dec 2023 20:02:46 +0100 (CET)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 4AD408743A; Thu, 21 Dec 2023 21:01:04 +0100 (CET)
+Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
+ [IPv6:2607:f8b0:4864:20::a32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 835FA8786F
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 20:02:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D582386D38
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 21:01:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-67f8ca6146aso2659506d6.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 11:02:43 -0800 (PST)
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-4b6d12cafbfso289184e0c.1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 12:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703185362; x=1703790162; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703188860; x=1703793660; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mNrA4t8rGCP6Ejaf8GHTFzCtbt2ZZufpGlJnbDLhDSk=;
- b=eqWJXO4fkT7iMDx0DsRgVRb9lwo7pnOUuQUsMgL9KGrKPwj6HQeutEGJS33nc9ia9a
- x0XqFD5hpMFJb6rBLmt2bbMS7DW3DgQ2BLOoJA1ht026RPGu7U1gC5BlAEpfGwh2OFlo
- BgsmnQV4KmhfvG/MHicaIE5/DK6Yi9lVEgP6M=
+ bh=84JErm83zl9g/9fmcWFAYNEbJZOq8ifEMN98EBx7+po=;
+ b=QC+UB49Obl/SyGIYpTyM2StXAHyTUe+oYw71WkqLwK7H6Pt4sR5V9h3NEZaypVkXy2
+ MBFyxdWWKoWo9T2dMrfJAw4XGMqNVre8ItULbOIrXoBKOvM1SPzBcFb3a7Bj7ggU6UeE
+ HSKLsdGjvxsDhV0fNnxCjMXZLOfWOaDmh5ZCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703185362; x=1703790162;
+ d=1e100.net; s=20230601; t=1703188860; x=1703793660;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mNrA4t8rGCP6Ejaf8GHTFzCtbt2ZZufpGlJnbDLhDSk=;
- b=Z4fPn9OayYFPz0WuwdpB/EoUtx0SUIpCpU64vvl0YbPcM7Ox7kPiugEHc/+fLNyM2v
- /zVe+FI0spPvsVFWS4B9ViLG1F6N6GS7WE/kvLY4vHeGlWZkSYCVn2XGR0kdR63UnsFf
- C7piHqgpompihr7p42lowzAv9dH+GhvCchdUAyw2D0dAp4wp81D10nixOYxokCj0dsZD
- EIyJwCxtfg525O26xG2FHVwqiyI5H1CB7/5OShUKQwsH3N5lECJqyRx06L1GegEltOIa
- eg95urFQSbfyKZPphtF3RGyJcqokKN5LYrEOtOuaktSuPTXnjdhy+guQwS5oJzJw5c94
- T0vQ==
-X-Gm-Message-State: AOJu0YwdDAbNh6wx5qN8gTfyCOKVFG28zCiZfBEdRMuCZ8pyXQ6ygMa5
- Tvl2WGWdwAuwu+488ru5xEYhIMC743aJgA==
-X-Google-Smtp-Source: AGHT+IEfh1HSA7fx+efv2SbfnWcj7NlpBJHGCE70rMfklVfDZwyA5O95PGnTLt2zMK0U+tR54N+0OQ==
-X-Received: by 2002:a05:6214:d4d:b0:67f:5dc2:a4a1 with SMTP id
- 13-20020a0562140d4d00b0067f5dc2a4a1mr141260qvr.105.1703185362256; 
- Thu, 21 Dec 2023 11:02:42 -0800 (PST)
+ bh=84JErm83zl9g/9fmcWFAYNEbJZOq8ifEMN98EBx7+po=;
+ b=KKQkTc6DJx/w88NLal+gURqsnGtNzBGdwBet0Y2AfCasFHF32bGhAtBup767PEklmv
+ GJc7VZ9acg66z15E+qHDPtNQU4Hn41JK2la3faOa07DO65823VWkEj6CzsMtH2gbo5rP
+ hNEwC1sSPBDSYSUgjiIjjLKcpu5HtkaOJBxrrfvPx5mPLxmj7DoaFsS7IzhSyuMIJJ/J
+ sWeH3rGeOvOk53PW/TCnHRlC0VyTJcXjbJRRGQEeZ2zKS8Dfm5JD57LpWUyf96pKLaud
+ 94jJE7GopO2wE4zXA10F5zh0HY0ZLDsxx5anQRm3qovx7rwznlCitsk60lPReqjrX/sc
+ vIdg==
+X-Gm-Message-State: AOJu0YwEz8vGeyxxNV6EVNHn9b11VDcRR2IoV6QVtzZMwe9z9oq9s0Wd
+ 9TeCoacj/EPHfTMwbeNFyDyAn/1wtWxgsQ==
+X-Google-Smtp-Source: AGHT+IHBewXdJqtQX5P7lrj7+wIRPadD0noX92gwvfequSbIMhYelAIOIOISkc2n7HcvFBkcElhD/g==
+X-Received: by 2002:a1f:ee4d:0:b0:4b6:f0f7:1b53 with SMTP id
+ m74-20020a1fee4d000000b004b6f0f71b53mr118309vkh.15.1703188860539; 
+ Thu, 21 Dec 2023 12:01:00 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
  [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
  by smtp.gmail.com with ESMTPSA id
- v8-20020ad448c8000000b0067f056e121csm810095qvx.97.2023.12.21.11.02.41
+ q26-20020ae9e41a000000b007810de6a161sm867993qkc.55.2023.12.21.12.00.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 11:02:41 -0800 (PST)
-Date: Thu, 21 Dec 2023 14:02:40 -0500
+ Thu, 21 Dec 2023 12:00:58 -0800 (PST)
+Date: Thu, 21 Dec 2023 15:00:56 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Enrico Leto <enrico.leto@siemens.com>
-Cc: u-boot@lists.denx.de, Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Subject: Re: [PATCH v3 4/6] siemens: board: clean up draco products vs common
-Message-ID: <20231221190240.GL2513409@bill-the-cat>
-References: <20231218085915.3739975-1-enrico.leto@siemens.com>
- <20231218085915.3739975-5-enrico.leto@siemens.com>
+To: Bryan Brattlof <bb@ti.com>
+Cc: UBoot Mailing List <u-boot@lists.denx.de>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 00/26] sync am65x device tree with Linux v6.7-rc1
+Message-ID: <20231221200056.GM2513409@bill-the-cat>
+References: <20231221174412.210807-1-bb@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7Ur58IwEjV/uq6Qx"
+ protocol="application/pgp-signature"; boundary="fMuXOFMRLatB3CQz"
 Content-Disposition: inline
-In-Reply-To: <20231218085915.3739975-5-enrico.leto@siemens.com>
+In-Reply-To: <20231221174412.210807-1-bb@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,48 +99,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7Ur58IwEjV/uq6Qx
+--fMuXOFMRLatB3CQz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 18, 2023 at 09:59:13AM +0100, Enrico Leto wrote:
+On Thu, Dec 21, 2023 at 11:43:46AM -0600, Bryan Brattlof wrote:
 
-> The common folder was initialially created for the common parts of the
-> products based on draco-am355x board family. These are the product
-> lines 'pxm2', 'rut' and the base line named 'draco'!
+> Hello Everyone!
 >=20
-> Adding the new capricorn-imx8 board family, common was enhanced without
-> cleanup.
+> This series gets the am65x booting again along with syncing the device
+> tree files with v6.7-rc1 Linux.
 >=20
-> Move all am355x specifics to a new file 'board_am335x'.
+> The bulk of these patches unify the WKUP SPL board file with the arm64
+> files to make future syncs from Linux much easier. In the end the DTBs
+> should look a lot like what the DTBs look like for the am64x which
+> is fairly similar to the am65x.
 >=20
-> Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> Signed-off-by: Enrico Leto <enrico.leto@siemens.com>
+> For those interested in what UART boot looks like:
+>    https://paste.sr.ht/~bryanb/7df8a645dc548912cd806abd5ecab967ef3287bc
+>=20
+> Thanks for reviewing and happy holidays
+> ~Bryan
 
-For this series, I see a few different failure to builds now:
-https://source.denx.de/u-boot/u-boot/-/jobs/759652
-https://source.denx.de/u-boot/u-boot/-/jobs/759653
+For the series,
+Tested-by: Tom Rini <trini@konsulko.com>
+
+Nishanth, does this path work for you?
 
 --=20
 Tom
 
---7Ur58IwEjV/uq6Qx
+--fMuXOFMRLatB3CQz
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEi8wACgkQFHw5/5Y0
-tyx5eQv+ITfqVHS3grw7FIq1LTjS2pO2H4AeJNRRQ9KebfvWzFTyvCH+rkKg2Li6
-Vha0O0iBB0rhsyOz6p7aFq4dXwm2cDJtNw9kCJKgi0i8tr5ENocXqUY4G6INwezj
-DxgAFVMooCsFUYQXXY28kCCNjy9BXFZWX822oX0sKm5AoXmWmPEoKr9LYLbmTuaN
-Re2mIyOxJ9Dbk5sPJ0zmj2o3Y+l6051xYWqBNlTBMI73WcQgFWGcYF+1r1kmNUNB
-K/Wf1ZpY4DNNWhjvdYzBzROHtXZzp/JP3hePZ6Txhli5TrUy8/cssdglekNiuWKq
-OMp8byJRRhn1FOGzBvXV5iKy8j4AO+e563VycEqKl9WsAdE+JiI2PdFPNjMIE5OC
-sI4F/P+0Tkgb5By0e/KP/BpkLIzAPtGkg3D+aNOgjJjeTKQtx6pMd3dfByQDE/Ev
-cL97byCS8+7f5Qgyx3A99RpHTIB0d6N+PCWlokD6pjZqQPbn7bSMBICnvGc+nbZo
-2vB668x+
-=g4Zi
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEmXUACgkQFHw5/5Y0
+tyxJuwv/WcP4Yw2t/QTokZb+D0A2VuC4zuKvG2klRa3x7/2nvh1YM1vXxsPRw904
+uKLHDTP7qGQXwljUJHfjBU2U/xurlgUtPTavaHc/RrvuMQ0ns5fhfy9lQAEXv1lX
+mLI/rNBQrhGs3lr0q54Eyp0csWOkIQgbiv5vi0bU8TjzYzMskycoW4mun+3rsUdH
+poGTO0sLO4KtqOfrpktb7f8A5Y5F11/07uR+RHBIAwHOpDu+BbacaCu9n4BplVWX
+uS3fm2BZU4Ga5G1sUU6o93/QhUwZ6ujGMFK+81WYOMJ86yaUDStCHxm2jtnGOGMS
+miQd1b5ohIDJkh2jzhl2JzmPG5SIChlaFOYnFinknMIacyESFka7RnGsiU4WcMPc
+n71FlC/mU2ReiOnOM2p/P9i2JD4KJ/7LYqqLk7ZdFhF9hFALhCBBf+oS293Sejsz
+BgANnSWQxDxj2B0qNcHXGl+U4z1zmUO9EcpMho5BCRyxNx4vV6YEgsZoh7X0xCMe
+ubUH0+XG
+=QI+S
 -----END PGP SIGNATURE-----
 
---7Ur58IwEjV/uq6Qx--
+--fMuXOFMRLatB3CQz--
