@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C33C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 10:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D99B2C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 10:50:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D510087854;
-	Thu, 21 Dec 2023 11:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 41F41876A6;
+	Thu, 21 Dec 2023 11:50:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="c23wxK8j";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RCN79fIO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 070A587854; Thu, 21 Dec 2023 11:50:35 +0100 (CET)
+ id AB9AD87854; Thu, 21 Dec 2023 11:50:35 +0100 (CET)
 Received: from smtp-relay-canonical-0.canonical.com
  (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B94F5874D5
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 11:50:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB36987834
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 11:50:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 41D683F2D2; 
- Thu, 21 Dec 2023 10:50:31 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 1986541666; 
+ Thu, 21 Dec 2023 10:50:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703155831;
- bh=XSnmAcsqd5rb9UOKZN3/iBHGbxcXIfMK/6w9NDDGGKk=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=c23wxK8jj6BGMLUNZ2M/8Jj8JzjAba1/eH81ZtkhO8NWpM12e8C+yV/ihFJyVNKwZ
- gD2MuEPLcR8ij0QbvQXFo7w9Yafd//O49/54VnuD0TK4PGfiAhJmo+V1CH5+EXG3oz
- +9CsO0ZcrARxZozstRAgBo9XmUs/RpnK+cSxU+aJAmI3fwIPcApiDadPel9F6y0qZT
- /mBDZ4D4dLrJZbjqKHNQqMMdEhrJHhX8btd2U+LJO9Y/sXw9lzyEpredKtTnVwCNUU
- SxIOsVhZjH8omTQ5v8KqMJ6HHJFZIg0lGucWFmNhLjfwmZU6sr5kfpx+d2kivEPfpC
- L9gM3JEzZnh7Q==
+ s=20210705; t=1703155832;
+ bh=FzVtfuNl6sKC4C9Lx9gIRfG2hv2oJlhazRW59iwjF6Y=;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+ MIME-Version;
+ b=RCN79fIO6Uu6MDvYGpK8oP3GkAMisz+TEZGQ3SAvy5w/DiALJ/Fgk/dYzV/7+1zqS
+ T+Cavr4ZLFr2+PwCnzMYn0rzo4SeH65euRNPo9XnG1fT86/sjoP6fNCkuoOYQyQIby
+ LOYpjikZpHYM+n1+cYl4ti1zupKW/WFb3sH/gRP+s+L+QChTvkuyjwzNcITZ2sLjIp
+ biKBtVR5ww6Up+gfWgr0yh3rCoApWS5nL242WYgbsRcN5PJRVM75CYCB41KFSp6ShG
+ oiftroy/7EcA/v9fQy8+H/f0p/4VYBnwvRba17N3Q9NTIsQZISbf+iG+W/glmnAsOK
+ 62rNNlIHMtdMg==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
@@ -50,10 +51,12 @@ Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/2] smbios: copy QEMU tables
-Date: Thu, 21 Dec 2023 11:50:15 +0100
-Message-Id: <20231221105017.6895-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/2] smbios: SMBIOS 3.0 (64-bit) Entry Point structure
+Date: Thu, 21 Dec 2023 11:50:16 +0100
+Message-Id: <20231221105017.6895-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20231221105017.6895-1-heinrich.schuchardt@canonical.com>
+References: <20231221105017.6895-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,45 +75,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QEMU provides SMBIOS tables with detailed information. We should not try to
-replicate them in U-Boot.
+Add definition of the SMBIOS 3.0 (64-bit) Entry Point structure.
 
-With this series we add code to copy the QEMU generated SMBIOS tables to
-RAM. efi_smbios_register() later installs the SMBIOS table as EFI
-configuration table for the OS to pick it up.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ include/smbios.h | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-If we want to inform about U-Boot, we can add a Firmware Inventory
-Information (type 45) table in future.
-
-With 32bit ARM I did not see a correct SMBIOS table being transferred. We
-need to check if our code in qfw_read_entry() is 32bit compliant.
-
-For providing SMBIOS support in QEMU for RISC-V I have sent a patch
-upstream:
-
-[PATCH 1/1] target/riscv: SMBIOS support for RISC-V virt machine
-https://lore.kernel.org/qemu-riscv/9183a3fb-b9f7-470c-b9a6-8d8cc6dce7c3@canonical.com/T/#t
-
-Currently we have a predefined constant TABLE_SIZE = SZ_4K in
-lib/efi_loader/efi_smbios.c. We should strive to refactor the code in
-future to provide the length of the SMBIOS tables in global data. But
-that is beyond the scope of this series.
-
-Further we should find a matainer for drivers/misc/qfw*. It would be
-plausible to add it to 'ACPI' maintenance.
-
-Heinrich Schuchardt (2):
-  smbios: SMBIOS 3.0 (64-bit) Entry Point structure
-  smbios: copy QEMU tables
-
- drivers/misc/Kconfig        |   8 ++
- drivers/misc/Makefile       |   1 +
- drivers/misc/qfw_smbios.c   | 195 ++++++++++++++++++++++++++++++++++++
- include/smbios.h            |  26 +++++
- lib/efi_loader/efi_smbios.c |   4 +-
- 5 files changed, 233 insertions(+), 1 deletion(-)
- create mode 100644 drivers/misc/qfw_smbios.c
-
+diff --git a/include/smbios.h b/include/smbios.h
+index c9df2706f5..e601283d29 100644
+--- a/include/smbios.h
++++ b/include/smbios.h
+@@ -54,6 +54,32 @@ struct __packed smbios_entry {
+ 	u8 bcd_rev;
+ };
+ 
++/**
++ * struct smbios3_entry - SMBIOS 3.0 (64-bit) Entry Point structure
++ */
++struct __packed smbios3_entry {
++	/** @anchor: anchor string */
++	u8 anchor[5];
++	/** @checksum: checksum of the entry point structure */
++	u8 checksum;
++	/** @length: length of the entry point structure */
++	u8 length;
++	/** @major_ver: major version of the SMBIOS specification */
++	u8 major_ver;
++	/** @minor_ver: minor version of the SMBIOS specification */
++	u8 minor_ver;
++	/** @docrev: revision of the SMBIOS specification */
++	u8 doc_rev;
++	/** @entry_point_rev: revision of the entry point structure */
++	u8 entry_point_rev;
++	/** @reserved: reserved */
++	u8 reserved;
++	/** maximum size of SMBIOS table */
++	u32 max_struct_size;
++	/** @struct_table_address: 64-bit physical starting address */
++	u64 struct_table_address;
++};
++
+ /* BIOS characteristics */
+ #define BIOS_CHARACTERISTICS_PCI_SUPPORTED	(1 << 7)
+ #define BIOS_CHARACTERISTICS_UPGRADEABLE	(1 << 11)
 -- 
 2.40.1
 
