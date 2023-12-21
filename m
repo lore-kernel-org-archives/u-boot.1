@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABCCC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:31:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7A6C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636148786C;
-	Thu, 21 Dec 2023 15:31:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 139CE8786C;
+	Thu, 21 Dec 2023 15:32:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="sqxSU2SK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qM9fxl1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F3DC8785B; Thu, 21 Dec 2023 15:30:59 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 618B48786C; Thu, 21 Dec 2023 15:32:16 +0100 (CET)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22DE7876C6
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:30:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B03D876C6
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6AEB061937
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 14:30:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11E37C433C7
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 14:30:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703169054;
- bh=OEBZ6p63sjTkW3Yk5dnKU9NG+4OMfKh+D8wi0t4gbvI=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=sqxSU2SKjq4jOLnNVZKMvhtezYvRUhITev29n1eiJrV6KHKvK32a8N98JqBX13gKL
- +OkLSfVCc3pzXUKumWzd8RaPCjYAwA973k5lQ76XhEmd+S7RXbidLj6h6HPA+h/b2r
- v3sRJtJ5dfX13Z7Z76mRY3LOMhO3pP0mLxgGXLPa7KTvnm8/lsQrEkpQ8qLZH9hlEZ
- n7vQnD6jJNsAadbmFeX1RN5dtVKvJGl+H6tDI0fi9xh/y5LAKBq+1/rAFx7nxlp5Km
- 3yXJa3ji+YQKhFXvmhHmEtnohhBo7FoiVQ+FXOWM1JwUqZWRzFTA2Ul2lhc3QRZZrH
- hdVi0NLA+r0jQ==
-Received: by mail-lf1-f44.google.com with SMTP id
- 2adb3069b0e04-50e587fb62fso1304382e87.2
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:30:53 -0800 (PST)
-X-Gm-Message-State: AOJu0YzVpj0TmxhoQV0H58qHyr6n2LlKspQSVizaMcEV+guhl2SXQnes
- 5FQOqPNB4Whi5IjCq37tf7dvse42976jrj+16Ok=
-X-Google-Smtp-Source: AGHT+IHPdxcsw7CIc8Zz9R57s+h3yCpmC0MOks9IUm441YI5k7PHlncS4N04abFTrQMbhLyNWoHo0BpkrAZ7Up7QGeI=
-X-Received: by 2002:ac2:419a:0:b0:50c:222b:2489 with SMTP id
- z26-20020ac2419a000000b0050c222b2489mr9235479lfh.135.1703169052253; Thu, 21
- Dec 2023 06:30:52 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-78117c8b6ccso51290485a.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:32:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703169133; x=1703773933; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=brxwcEUCubIR+ToXpyVoOcMlxQAy3J4RSPVYFTJL2UQ=;
+ b=qM9fxl1UYUoBeokAbcZO7OHw0IwFgVq0vYS6AYRtwf+HiJ56+Xt80S13cyvvSNaS+M
+ L6pXP+3tapRMLEUAWjElt9GbqTti1c0s080dvBYH45lfekkN1qgAzgB33u5V1QAfjZ4Y
+ bZE7n8JZjGc8HMccTJZFUA82x0NYfw1PP8qcs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703169133; x=1703773933;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=brxwcEUCubIR+ToXpyVoOcMlxQAy3J4RSPVYFTJL2UQ=;
+ b=K52NRYgzRgWaWJ+h6a7KhNq50N0WB7qwuGP2a8OhGxMvpwOUqn+GCpUUVi5jjV/bQI
+ z71Lc0vm+RUOIZIEpxhPFX9R5Y3IcbaoDnBJLuVqhwY3rOTWyEMDouYUQlESw7phtA2l
+ VbVaTCMgz4ex24irtdm7ym59ZcKufiy3ok+VFuMz7D7rSzakihyLRcMHfF0Z/MSgrEmx
+ aqE65XfOOHqUc1/3sCeS7Xwa7DcIfOf0YiT8Sl4tJwZArWNTq+eB6j0KO1GnCqI9e+e/
+ GfFIlDsvYsYXE8NcTzpqLzaoC/qNuOfqxXbyRw2bZZplPOIzKUbObzp9sCekpoMChku0
+ ceaw==
+X-Gm-Message-State: AOJu0YyZ4J3sj9IBWI7g7gs3nDpqUcOFJ8Yi5I35g/jVueiZeq50Dlrb
+ Ic+6GX+AWQpQjZbHJB04Tq41Hs0NAaX9iGpFpH0=
+X-Google-Smtp-Source: AGHT+IH1Nhbw+xAEc8X6VUetI8PyXF7AzObkBFNdixcBO14TpfSPjcPsxRt1rJF3JuWXggI9SJSJTw==
+X-Received: by 2002:ae9:f442:0:b0:781:2245:e006 with SMTP id
+ z2-20020ae9f442000000b007812245e006mr659082qkl.34.1703169132825; 
+ Thu, 21 Dec 2023 06:32:12 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
+ [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
+ by smtp.gmail.com with ESMTPSA id
+ bi5-20020a05620a318500b0077efb969151sm680145qkb.59.2023.12.21.06.32.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Dec 2023 06:32:12 -0800 (PST)
+Date: Thu, 21 Dec 2023 09:32:09 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] cmd: fdt: check fdt address
+Message-ID: <20231221143209.GH2513409@bill-the-cat>
+References: <20231221000011.297145-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
- <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
- <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
- <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
- <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
-In-Reply-To: <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Thu, 21 Dec 2023 15:30:40 +0100
-X-Gmail-Original-Message-ID: <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
-Message-ID: <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: "Chiu, Chasel" <chasel.chiu@intel.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- "Brune, Maximilian" <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="f8vz+9D9IupCXKwl"
+Content-Disposition: inline
+In-Reply-To: <20231221000011.297145-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,90 +91,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Nov 2023 at 21:31, Chiu, Chasel <chasel.chiu@intel.com> wrote:
->
->
->
->
-> > -----Original Message-----
-> > From: Ard Biesheuvel <ardb@kernel.org>
-> > Sent: Tuesday, November 28, 2023 10:08 AM
-> > To: Chiu, Chasel <chasel.chiu@intel.com>
-> > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Rutland
-> > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
-> > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
-> > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
-> > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
-> > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minnich
-> > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
-> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
-> > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
-> > usages
-> >
-> > You are referring to a 2000 line patch so it is not 100% clear where to look tbh.
-> >
-> >
-> > On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> wrote:
-> > >
-> > >
-> > > In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line 268 is for
-> > related example code.
-> > >
-> >
-> > That refers to a 'memory-allocation' node, right? How does that relate to the
-> > 'reserved-memory' node?
-> >
-> > And crucially, how does this clarify in which way "runtime-code" and "runtime-
-> > data" reservations are being used?
-> >
-> > Since the very beginning of this discussion, I have been asking repeatedly for
-> > examples that describe the wider context in which these reservations are used.
-> > The "runtime" into runtime-code and runtime-data means that these regions have
-> > a special significance to the operating system, not just to the next bootloader
-> > stage. So I want to understand exactly why it is necessary to describe these
-> > regions in a way where the operating system might be expected to interpret this
-> > information and act upon it.
-> >
->
->
-> I think runtime code and data today are mainly for supporting UEFI runtime services - some BIOS functions for OS to utilize, OS may follow below ACPI spec to treat them as reserved range:
-> https://uefi.org/specs/ACPI/6.5/15_System_Address_Map_Interfaces.html#uefi-memory-types-and-mapping-to-acpi-address-range-types
->
-> Like I mentioned earlier, that PR is still in early phase and has not reflected all the required changes yet, but the idea is to build gEfiMemoryTypeInformationGuid HOB from FDT reserved-memory nodes.
-> UEFI generic Payload has DxeMain integrated, however Memory Types are platform-specific, for example, some platforms may need bigger runtime memory for their implementation, that's why we want such FDT reserved-memory node to tell DxeMain.
->
 
-> The Payload flow will be like this:
->   Payload creates built-in default MemoryTypes table ->
->     FDT reserved-memory node to override if required (this also ensures the same memory map cross boots so ACPI S4 works) ->
->       Build gEfiMemoryTypeInformationGuid HOB by "platfom specific" MemoryTypes Table ->
->         DxeMain/GCD to consume this MemoryTypes table and setup memory service ->
->           Install memory types table to UEFI system table.Configuration table...
->
-> Note: if Payload built-in default MemoryTypes table works fine for the platform, then FDT reserved-memory node does not need to provide such 'usage' compatible strings. (optional)
-> This FDT node could allow flexibility/compatibility without rebuilding Payload binary.
->
-> Not sure if I answered all your questions, please highlight which area you need more information.
->
+--f8vz+9D9IupCXKwl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The gEfiMemoryTypeInformationGuid HOB typically carries platform
-defaults, and the actual memory type information is kept in a
-non-volatile EFI variable, which gets updated when the memory usage
-changes. Is this different for UefiPayloadPkg?
+On Thu, Dec 21, 2023 at 01:00:11AM +0100, Heinrich Schuchardt wrote:
 
-(For those among the cc'ees less versed in EFI/EDK2: when you get the
-'config changed -rebooting' message from the boot firmware, it
-typically means that this memory type table has changed, and a reboot
-is necessary.)
+> Trying to read a device-tree from an illegal address leads to a crash.
+>=20
+> Check that the parameter passed to 'fdt addr' is within the RAM area and
+> non-zero.
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  cmd/fdt.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/cmd/fdt.c b/cmd/fdt.c
+> index 331564c13b..dc954ea7d5 100644
+> --- a/cmd/fdt.c
+> +++ b/cmd/fdt.c
+> @@ -193,6 +193,11 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, i=
+nt argc, char *const argv[])
+>  		}
+> =20
+>  		addr =3D hextoul(argv[0], NULL);
+> +		if (!addr || addr < gd->ram_base || addr >=3D gd->ram_top) {
+> +			printf("Invalid address\n");
+> +			return CMD_RET_FAILURE;
+> +		}
+> +
+>  		blob =3D map_sysmem(addr, 0);
+>  		if ((quiet && fdt_check_header(blob)) ||
+>  		    (!quiet && !fdt_valid(&blob)))
 
-So the platform init needs to read this variable, or get the
-information in a different way. I assume it is the payload, not the
-platform init that updates the variable when necessary. This means the
-information flows from payload(n) to platform init(n+1), where n is a
-monotonic index tracking consecutive boots of the system.
+As I mentioned on IRC, we don't sanity check addresses being within
+memory normally. The problem (and one that is making me cranky) is that
+it seems a number of RISC-V platforms have invalid kernel/fdt/initrd
+addresses set in the environment and then have PREBOOT used to fix
+fdt_addr_r so that distro_bootcmd doesn't blow up.
 
-Can you explain how the DT fits into this? How are the runtime-code
-and runtime-data memory reservation nodes under /reserved-memory used
-to implement this information exchange between platform init and
-payload? And how do the HOB and the EFI variable fit into this
-picture?
+--=20
+Tom
+
+--f8vz+9D9IupCXKwl
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWETGkACgkQFHw5/5Y0
+tyyDowwAqvozXTOF5YmEuBpO5PSETtvYX/ZimU4Lb0lACy5eA8DolsSYrAYIbpQ1
+leE2FvZ3BTtjct4pqc/PKnXE2WoNL436lOb6ZSvvBpXzrU7sPSqH+SBf81ALx4J0
+GWXRxmpehfxMusn0s/Qo1q0A2ndekDrM7gNYO47i49Ll3vHLgDN56y+wMWvDR0MR
+TioYfcsrv7UZrqxruZNH2esAYR6Gq1Noc2m1cpulBZij5lqUaLPN3F4zroWiTBmT
+oIrwe8aaJAlkLPOBgysdvsV8P9LaQoGdcCY8n8t3By8NwCyVsVYV5O9q86WJP1+A
+BhTeVEAAW6732c5Y0wt941+MXW3mQ8lMpvcjjBwk3FkZCSYXsFitdbScyn8RJbDN
+KJN7IecWJJswDPxuOaZLKZHEnxbMKJNC+ZhOJA44TvQG5uvG9qWy3J1VWfBI38KG
+C3C28lpIiVK+SfB9ckMgCyKRED5A4Rf7krT2FSY4Y4XO05kVd7hsFc3oyof1I5ix
+U2/BIzpg
+=jZhW
+-----END PGP SIGNATURE-----
+
+--f8vz+9D9IupCXKwl--
