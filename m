@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE938C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9969AC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3C9A877D7;
-	Thu, 21 Dec 2023 22:07:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31FA5877E2;
+	Thu, 21 Dec 2023 22:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TnHE3EMJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nO68Dubn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92050869B6; Thu, 21 Dec 2023 22:07:22 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id DB8E2877D5; Thu, 21 Dec 2023 22:07:26 +0100 (CET)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E03B877EC
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:07:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CFB0E877C4
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:07:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-77faf967e65so63481985a.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:07:20 -0800 (PST)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7812750f665so34975485a.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:07:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703192839; x=1703797639; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1703192843; x=1703797643; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zPsZC+Oiqzf50okrWz/gzFijO4DK1PyCh9pr4UTxPrg=;
- b=TnHE3EMJZnpeTw7nL61CtO/R3wTB/9H5HsMehK0xixB9dSddSQBYNTZRLSEIuQ19uF
- APcTM8QlbrVOocThD4/mrmSmniy+mpY5fPdx3sWyyexJd8f931fbu4qpFIEswfFquTsb
- 2wNr7Qu79aShZkppHAmFPXslEnRXk7NgdntTQ=
+ bh=wz9AIXWzrCXOZV69pVnIde+zUvKpVhzaHx7AjBwofR4=;
+ b=nO68Dubnv0lZqgzAl34YOSzfA9UplcIjpmI1c+NbA4f0k9SrGKoiW/768or48TSi/B
+ fEblOFOIc/l6FtaJLVZ+h+d6re4dje22cjjB1e2ZGFsgYPZ6MRxXLKW9mjLYquj9sPR8
+ QcIZvAXrJyrpI3B32gtCgThUwCLU2VLsdLwTU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703192839; x=1703797639;
+ d=1e100.net; s=20230601; t=1703192843; x=1703797643;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zPsZC+Oiqzf50okrWz/gzFijO4DK1PyCh9pr4UTxPrg=;
- b=M6vDY9LadgrWmGYsq8kz9q4hM5nDkCE1+6sDkMM+YXHs00NdUQbabq0OGVWqQhelFN
- +5JI38//zRopX0XW3GLC+SuJdBB8dqjvmaGs9UZ8WtJjXb5M8l3ZkVf+fXffak/WlRhp
- ZOkCNbJVYL0Ggt5K2EpMZUtTcnKjdb4CYds3icVO/9ZO6agqLAqhhGdswyB+vl28Rjyu
- HgWoXb7omyg+0K2ILH7lyZ2idL/JzQUpLDJDXww9E/PWzee1+E61Z3Av656xCeczZm1H
- 2GDGrFZKrFKucycqvnpJtcTmHmB7c/6SxXWPcM5sc7rqukMSPWGoK8ps3GCBXqFdlyrj
- az5g==
-X-Gm-Message-State: AOJu0Yz/97bWW5GwO6YygUac9aFfM4I2oQ6+wfwj9Nxxp1xluj9LrVFT
- nNAUYmP2Fzd3L9AXeVtt1LWKrtgDUlxHDxA8gvC4bVZyogM=
-X-Google-Smtp-Source: AGHT+IGDN7wozhTmva7v9+qc2eoT9DYGgHdiBWIORNdyyumQmMOMUI0yP7b8NlJRAXEt+nvA6y989A==
-X-Received: by 2002:a05:620a:2e6:b0:77f:1827:a9b6 with SMTP id
- a6-20020a05620a02e600b0077f1827a9b6mr479802qko.138.1703192839289; 
- Thu, 21 Dec 2023 13:07:19 -0800 (PST)
+ bh=wz9AIXWzrCXOZV69pVnIde+zUvKpVhzaHx7AjBwofR4=;
+ b=gUdY8k4ivHsqq/ZlzJHqMGiLPT6tNx5p5nTAI7DXjYYnrEP7/qrBQY4JfEfyIhnBvU
+ 0uiDJx7ZLwZmaMVg64t1WJrF6ANra/nBcEVMVjEJu+cyzWNMZipDE9ZyWFObIqZ2c681
+ cJBykG9T60MtKFhoqkywnXV8Qcc/+rXXBlUeblhvfETRvFbd1PBSoShcI6bnIAnsl5B0
+ eWgvPqMss97XfefqqY0hg7oV5R1+ouGYlvvEoojYSwce08WTuQgyOFOxTYvGjN+gOjyo
+ Vl+CDZwxvdSBySHL/G9xhnXC+fNiyh/l1EpWKYRyY8R3wM6YA6/m0b19/BzFhkBySYgv
+ w+aw==
+X-Gm-Message-State: AOJu0YzIhZwc8IidmZfNvvd9EnEjGsaKG5HLIz1ZaYot4pqoOZLyoFhu
+ 2FbNYFpEBmudQb+54X8K5lhGziGyskUEmA==
+X-Google-Smtp-Source: AGHT+IGgrkQMW5vGpbxFEdclBYoaNx7vHkZSdaoSwcqkKK/W+t/MFJrq/a9e32bdJBCYj4dKUK6giQ==
+X-Received: by 2002:a05:6214:413:b0:67f:49e5:9711 with SMTP id
+ z19-20020a056214041300b0067f49e59711mr1875963qvx.53.1703192843649; 
+ Thu, 21 Dec 2023 13:07:23 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
  [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
  by smtp.gmail.com with ESMTPSA id
- b24-20020a05620a0cd800b007811c18c371sm822185qkj.36.2023.12.21.13.07.18
+ dh5-20020ad458c5000000b0067f24bd0afasm870547qvb.101.2023.12.21.13.07.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 13:07:18 -0800 (PST)
-Date: Thu, 21 Dec 2023 16:07:17 -0500
+ Thu, 21 Dec 2023 13:07:23 -0800 (PST)
+Date: Thu, 21 Dec 2023 16:07:21 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] iommu: add a connect op
-Message-ID: <20231221210717.GS2513409@bill-the-cat>
+Subject: Re: [PATCH 3/3] iommu: add qcom-hyp-smmu
+Message-ID: <20231221210721.GT2513409@bill-the-cat>
 References: <20231211-b4-dwc3-qcom-v1-0-46275113b4f2@linaro.org>
- <20231211-b4-dwc3-qcom-v1-2-46275113b4f2@linaro.org>
+ <20231211-b4-dwc3-qcom-v1-3-46275113b4f2@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dLhcMvtmSRW5Gu19"
+ protocol="application/pgp-signature"; boundary="mFKkOg8PaR8/YqhH"
 Content-Disposition: inline
-In-Reply-To: <20231211-b4-dwc3-qcom-v1-2-46275113b4f2@linaro.org>
+In-Reply-To: <20231211-b4-dwc3-qcom-v1-3-46275113b4f2@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,16 +95,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---dLhcMvtmSRW5Gu19
+--mFKkOg8PaR8/YqhH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 11, 2023 at 06:41:41PM +0000, Caleb Connolly wrote:
+On Mon, Dec 11, 2023 at 06:41:42PM +0000, Caleb Connolly wrote:
 
-> Add an optional iommu callback to be invoked before a device probes.
-> This can be used to configure the IOMMU in preparation for the device
-> (e.g. by allocating a context bank)
+> Add a basic implementation of the ARM SMMU. This driver is intended for
+> use on Qualcomm platforms where the SMMU has been configured by a previous
+> bootloader, cannot be turned off, and doesn't support BYPASS streams.
+> It keeps all existing stream mappings and only creates new ones for stream
+> ids that aren't already configured.
+>=20
+> This driver is necessary to support peripherals that perform DMA which
+> weren't configured by the previous stage bootloader (for example USB).
+> It works by allocating a context bank using identity mapping (as U-Boot
+> doesn't use virtual addresses).
 >=20
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 
@@ -113,22 +120,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---dLhcMvtmSRW5Gu19
+--mFKkOg8PaR8/YqhH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEqQUACgkQFHw5/5Y0
-tyyOlAv/eldia3f0FnkbUIMuIXpTMRcdO14bqK33XEmZDt2gFqVKJ4TwSOsGVlRY
-ePFW7mvlkheHc6r2EddECzVU4hAks8zmLmKSgrfkqV5PCDgA9vQJZkVEEi/AnPOH
-jn9yF45ILBaxh1Z3k2sVtz7i22UDM8vqOIu2cbpcVVmk4FC1V2vi5JgKy4uyJsnE
-/RzaNsgrmGPOj8UqCvcVSse4ZVg8mFsmTylvgMee/X3JmKvadocw6QROoPdxGmHy
-O49FxKiqCNll7rKN+QY+7arIlLlcIXQB7wx7sGv8Tsp0mBJyIEtBw2dDji/yxhln
-mf3ofENdwx+x9OJ/c2XrsSY9ZX3+H+2nI+eZ4VGG6fOTPcBfJuS/1aj1biu9bsDA
-j3PYmSY1udY7sI8do2bnFm3D+5xQuEqCaxa9h7BYEDJlDaftGVRhT7+Zwb1YvVOP
-6kcfGK/O99xq0FKyzahZbON0OCREVJ5I3Ha7MA51kgbfNWeyKcTEQUqmRQfP7yxg
-lCZOOAaP
-=gK/m
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWEqQkACgkQFHw5/5Y0
+tyy+9Qv7BkxwLw/xZcmyQwRPl2qWbJrYOnxQSMmC55Wte/MEvvBd1nOn1xvUPyvW
+xKiTIJvlJUT+d/uxKyqaKenG02NiI9ejK+8HugsfY1f7YoSdyq/pHWh/R178efej
+fkJRVon7AOHqLHcJl/w/udBDcyVHMHcH8eRwZ08Rk9jpOpT+RxIvg5HPbsLesB1t
+OXvhEXrSKw0oRmBLtuNKLmiOXNUWFc37NN3Jxx0rR9ZYcwRi3GmVhd2eq0dM6voO
+hhw/Bl5TW3aCgNzy71fYVFKRgs3Tj7LYDEkp3cXUDw2zKNEvkvT2t5vH2hBNwvcd
+49EJ1Im6jiiPkr/LHyxWszKgXeq0bf4tz+vg7tq188WUHr4hz45WQqsqddvGhiKc
+hPjAF880OYwudXivbSnZpPC58nWQugOBSXTvIYIG1FJWM7vReXyvbXf9E2BL0NHR
+08FWZh6E6CyEtIgANRSNM6DTSYFcTuzLyK6LIo1Pj5zXdov7eBczNaNgI5GTuIKC
+BmPqNit0
+=x+1I
 -----END PGP SIGNATURE-----
 
---dLhcMvtmSRW5Gu19--
+--mFKkOg8PaR8/YqhH--
