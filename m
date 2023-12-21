@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BFDC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:16:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BFCC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 21:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF9F18767C;
-	Thu, 21 Dec 2023 22:16:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 870D9876F3;
+	Thu, 21 Dec 2023 22:25:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dp15QKn1";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="0+vKs+wD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9660869F7; Thu, 21 Dec 2023 22:16:14 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 769F086D38; Thu, 21 Dec 2023 22:25:09 +0100 (CET)
+Received: from mail-yw1-x114a.google.com (mail-yw1-x114a.google.com
+ [IPv6:2607:f8b0:4864:20::114a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B874B8767C
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:16:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 67F228755B
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 22:25:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1d3a9b9634dso37455ad.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:16:12 -0800 (PST)
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=3Mq2EZQcKBtE9BE5GM23BB381.zB9H-yBBG85FGF.01AK.01@flex--moritzf.bounces.google.com
+Received: by mail-yw1-x114a.google.com with SMTP id
+ 00721157ae682-5e76b663ef3so22299767b3.1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 13:25:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1703193371; x=1703798171; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=krzE7ZE5xgTkSF/pawgSl767dewjnI5Xo7TxEUurYfs=;
- b=dp15QKn1HxHbg68sNwgpsXVOFesBpVta8H51pzAQkJ+79G2EJev3F3fEbf1+UO5tU9
- srSse/gxd8oqqijmW3F6QLnbL85PPaJeEkBe9/7IM3IkXB+zCgNe5+1esxCMo93QJ15+
- O3RaeUwvRzVGC3jp/3r7x5LR8dQlHC5KTknAgAbMJ4L286cKD83lI27xA9nzP/G5UJsX
- qDfj35bkDbTv+VQeAkVvJ2TwjrNGMhrPm+d/RBtIdu+YvEYVD1+0AK7C4tep1kjBl61Y
- GJ7db2Hyr8TE1cFS41WFqo4tLDh0IHABW4YqLa97MCQMA0yhw9cQipxke4AKFZvIBr5l
- SeYw==
+ d=google.com; s=20230601; t=1703193906; x=1703798706; darn=lists.denx.de;
+ h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=56B5QlmgiBhJjIU/02bwjiuW97QMGU+karPJt+FNKYk=;
+ b=0+vKs+wD62dwqreBEDJTT4mH/juNcmLdggQw3M4tnHzVz1VdcVozzL2uzwV3Z+pVEE
+ R4TawSxGUCsSgUt/Bo08e6w/qxBH94Oyu00+XlzYj99/C6r+TIli7dCGUO4Z6vg/6Wl2
+ 1OBcmj7qr5FRrFUBL6+u/si+1mTl4H6tKN7ujQWHZYUjB5z4unAhUoA8xv7zzaUbwxU8
+ UN/RdVKO8F+15zeC8IDORGZhohCwuvSCzBfGqD5I1zfxzTH7CCxwfl19xoosrk1KfRay
+ mFdQQfj6kr/dB08sSdRACqbMfyy9CU3mgWWnn2g/mXf9GKaphOz/kdXyNshBFdLcCrHx
+ oA6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703193371; x=1703798171;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=krzE7ZE5xgTkSF/pawgSl767dewjnI5Xo7TxEUurYfs=;
- b=ftDQxWDWyC25Lwf6wdvDvlSMboHOZo/MtXB+UtzWYIRwtIxWWx2SllHJwwWq4ZEh8f
- 5aabQdRwQBFXHGDYqL4RHYxgKufhjzg/y2UNQ6ou6lAWJVP5sqp561iFF6pJdf/MVeTZ
- Ly25qryt3gloBwiXcehz5YUCjO3lEs57EL5MtT2aRyZiorojF5ldbTiw5PLfUrrBauFG
- Jo26OaDBmxUhT/XiuJfGAbQaKkK2PiaMvwg9jHgpw+v1cdlkcrFyUYmmoX6Ok+WXXqi5
- gKPfmV/tsc0d11r/FynEgClKpei7NSITEMCeAymbuQH3F9VeI/aSoRaX8PYv8rC+rYKm
- RP2A==
-X-Gm-Message-State: AOJu0YyXX+Qj7fb1dBucoxitqlLxVeQOo1C3apemwmQQgjpGixXH1jc/
- ExJwkcEzJb60U6ufJRjaM6hy/2Kv9Mg50aZ2lPnLiNOyq2vv
-X-Google-Smtp-Source: AGHT+IHUTW3rkYoygdgu94vSwcS9wnzOMY5A0NE00H9g8biG4jZvCGq8AoimVW/wb6O6I6EEZMS73EX7hFIZYvPH/cE=
-X-Received: by 2002:a17:902:6503:b0:1d3:d293:7767 with SMTP id
- b3-20020a170902650300b001d3d2937767mr324plk.7.1703193370806; Thu, 21 Dec 2023
- 13:16:10 -0800 (PST)
-MIME-Version: 1.0
-References: <20231217005209.2789651-1-moritzf@google.com>
- <20231221175341.GK2513409@bill-the-cat>
-In-Reply-To: <20231221175341.GK2513409@bill-the-cat>
+ d=1e100.net; s=20230601; t=1703193906; x=1703798706;
+ h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=56B5QlmgiBhJjIU/02bwjiuW97QMGU+karPJt+FNKYk=;
+ b=LKjwH2tVgZw7I8Tnc43blxH/u0vJ6Lkwxa+x0jj80W6ZBjOs5qwN2SL1sJwTvolEuy
+ XzP4zRpUPX/jNiNngcGwKdV9tpHGZ0MUqjLqvU26U4NYELP5PLHDC9BgM/y6Vhg8M/iw
+ epFyNx9G+yMqaeN4EsdM25Y2eCsCdlwAQqkW7HFtEuGCcSr41DU45MAX9wYhho5HXlu7
+ Hpi/r+K2kZ1OQMbpfIsj3LIeyFLB16pGpstzyp3qCK33SEdk/X+LS/EUoPOgEOp9qvW6
+ rayRnvoSsxqZRcus/Awp9E5dSSTASO+7E+6BSLj2w5IsRWERL0qVYgfObU03xU4Jm/Qd
+ 5s2A==
+X-Gm-Message-State: AOJu0YzU2Z4EF2bO8IXsGreouDyreCW6xsJUooHsMfRa+HaCn0ia2xM7
+ +5XtryfV9DVZjTZl6SdGiJK3ygXcCZDpTkHwMdM=
+X-Google-Smtp-Source: AGHT+IFhNwxgzvOOM2+jC32IM9qSil0yhRcwBBcFbv+YJZ+2a1Y20XPKGPuXXaLJSimoBe+c0CwX4aU+DorU
+X-Received: from morats.c.googlers.com ([fda3:e722:ac3:cc00:14:4d90:c0a8:d9e])
+ (user=moritzf job=sendgmr) by 2002:a05:690c:a90:b0:5e8:1f45:30e6
+ with SMTP id
+ ci16-20020a05690c0a9000b005e81f4530e6mr212101ywb.5.1703193906147; Thu, 21 Dec
+ 2023 13:25:06 -0800 (PST)
+Date: Thu, 21 Dec 2023 21:24:42 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
+Message-ID: <20231221212443.2716500-1-moritzf@google.com>
+Subject: [PATCH v3] pci: Enable dm_pci_map_bar() for 64-bit BARs
 From: Moritz Fischer <moritzf@google.com>
-Date: Thu, 21 Dec 2023 13:15:58 -0800
-Message-ID: <CAFyOScp=vSYFg6HB0MAKFQvEDqt78M8XhZwaJaFQ1nG-ooeigA@mail.gmail.com>
-Subject: Re: [PATCH v2 RESEND] pci: Enable dm_pci_map_bar() for 64-bit BARs
-To: Tom Rini <trini@konsulko.com>
-Cc: sjg@chromium.org, bmeng.cn@gmail.com, xypron.glpk@gmx.de, pro@denx.de, 
- marex@denx.de, stcarlso@linux.microsoft.com, u-boot@lists.denx.de
+To: sjg@chromium.org
+Cc: bmeng.cn@gmail.com, xypron.glpk@gmx.de, pro@denx.de, marex@denx.de, 
+ stcarlso@linux.microsoft.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ Moritz Fischer <moritzf@google.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,25 +86,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom,
+Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
 
-On Thu, Dec 21, 2023 at 9:53=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Sun, Dec 17, 2023 at 12:52:09AM +0000, Moritz Fischer wrote:
->
-> > Allow dm_pci_map_bar() usage on systems with CONFIG_SYS_PCI_64BIT.
-> >
-> > Reviewed-by: Philip Oberfichtner <pro@denx.de>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Moritz Fischer <moritzf@google.com>
->
-> This causes a failure to build on qemu_arm and a number of other
-> platforms, thanks.
+Reviewed-by: Philip Oberfichtner <pro@denx.de>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Moritz Fischer <moritzf@google.com>
+---
 
-Argh, yes, I got got by the IS_ENABLED(). Switching it to #if
-defined(CONFIG_SYS_PCI_64BIT) makes it work.
+Changes from V2:
 
-Sorry, let me resend this.
+- Turned IS_ENABLED() into #if defined to allow
+  building on platforms that don't define 
+  CONFIG_SYS_PCI_64BIT
 
-- Moritz
+Changes from V1:
+
+- Reworded commit message / typo
+
+---
+ drivers/pci/pci-uclass.c | 12 ++++++++++++
+ include/pci.h            |  4 ++--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
+index e0d01f6a85..04c82d3884 100644
+--- a/drivers/pci/pci-uclass.c
++++ b/drivers/pci/pci-uclass.c
+@@ -1611,6 +1611,18 @@ void *dm_pci_map_bar(struct udevice *dev, int bar, size_t offset, size_t len,
+ 	dm_pci_read_config32(udev, bar, &bar_response);
+ 	pci_bus_addr = (pci_addr_t)(bar_response & ~0xf);
+ 
++#if defined(CONFIG_SYS_PCI_64BIT)
++	/*
++	 * This assumes that dm_pciauto_setup_device() will allocate
++	 * a 64-bit address if CONFIG_SYS_PCI_64BIT is enabled and
++	 * the device advertises that it supports it.
++	 */
++	if (bar_response & PCI_BASE_ADDRESS_MEM_TYPE_64) {
++		dm_pci_read_config32(udev, bar + 4, &bar_response);
++		pci_bus_addr |= (pci_addr_t)bar_response << 32;
++	}
++#endif /* CONFIG_SYS_PCI_64BIT */
++
+ 	if (~((pci_addr_t)0) - pci_bus_addr < offset)
+ 		return NULL;
+ 
+diff --git a/include/pci.h b/include/pci.h
+index 2f5eb30b83..0d1ac7b015 100644
+--- a/include/pci.h
++++ b/include/pci.h
+@@ -1350,8 +1350,8 @@ pci_addr_t dm_pci_phys_to_bus(struct udevice *dev, phys_addr_t addr, size_t len,
+  *
+  * Looks up a base address register and finds the physical memory address
+  * that corresponds to it.
+- * Can be used for 32b BARs 0-5 on type 0 functions and for 32b BARs 0-1 on
+- * type 1 functions.
++ * Can be used for 32b/64b BARs 0-5 on type 0 functions and for 32b BARs 0-1
++ * on type 1 functions.
+  * Can also be used on type 0 functions that support Enhanced Allocation for
+  * 32b/64b BARs.  Note that duplicate BEI entries are not supported.
+  *
+-- 
+2.43.0.472.g3155946c3a-goog
+
