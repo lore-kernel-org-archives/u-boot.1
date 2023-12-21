@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4165C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 15:40:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52BEEC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:07:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 190268785C;
-	Thu, 21 Dec 2023 16:40:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+	by phobos.denx.de (Postfix) with ESMTP id EE4BB8786E;
+	Thu, 21 Dec 2023 17:07:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="hLeGZ5TJ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ffOr2eJb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8E0D876A6; Thu, 21 Dec 2023 16:40:08 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F28728787E; Thu, 21 Dec 2023 17:07:38 +0100 (CET)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DABE87877
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 16:40:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5545877E5
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:07:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=s31663417; t=1703173195; x=1703777995; i=wahrenst@gmx.net;
- bh=LDwqgSG2vjDMcRaiuVFdLweoISFhyEUNZLB0kIPTdAw=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=hLeGZ5TJ5YiJp5OeQ9YwrqjD4JRZYt4O3vMWSK4PuacyY1IrPUQhGrQyML88POBI
- M07DT77nCTO6Je18A3mli4wDQcbQO19MuqdnMreNSvmuBx/ZwHRjWKXNa/F1W0eN4
- AfiPF0vRMrneAqvr3+mZQrzFUowxKFWZiG1AEbb9NQLDFgDIAbiaIK/19X18DeXGr
- I/uW5FSQ94jyQ27tvJ6QLEeS+eobbth5GEr3h9r8/ETMSwtHof3kzE4ACvwzYR4Kv
- 2aElDeHanGJjflVyyWfcbxBu4RzhUKwHF+zVu21nF85tw3Rg//hMzipPK4o2Xp2aR
- odsuZbSZt+1a6ENhWw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.1.130] ([37.4.248.43]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N4hvR-1r7MtA1p4h-011foG; Thu, 21
- Dec 2023 16:39:55 +0100
-Message-ID: <db91a259-d504-4e8b-8178-dad3e5709b93@gmx.net>
-Date: Thu, 21 Dec 2023 16:39:49 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/7] mmc: bcmstb: Add support for bcm2712 SD controller
-Content-Language: en-US
-To: Florian Fainelli <florian.fainelli@broadcom.com>,
- "Ivan T. Ivanov" <iivanov@suse.de>, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Dmitry Malkin <dmitry@bedrocksystems.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50e30b28c1aso1296047e87.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:07:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1703174856; x=1703779656;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=A0zzH/vBq2XqKhr5tzGMNeVqhxK7rrXe+zAIEM0foGY=;
+ b=ffOr2eJbfZkLSD+5JTcYe6UDX9c38FhXhMbDbT9Y2DYQlnzQ+euyfLlUJ3YsFtAi4L
+ JxL2quWGLN943RnyF7cFtjfv71dZbAl+z7NWCRsmsx7kQ2u6u0mhUX4/2iZONVzwrfqC
+ trffoB84J3xWC36GAjybv7xEk+49Jq20g7J2dvEQyDHhH/VgM53KpXl0H0aDgTgdRj1T
+ XmmXN5he1ilZLPRcdMhbRRFaBoaTU2yI9SwiLVSiLjjvFWlH2AyMXXKgXNI+veCerCoo
+ Qn/AKCfmtjSPtecCHIgby3Z52bveKO47FQaw9hSZi6OfKg1ABW0smJaFlxE/joRGhCq2
+ r7Cw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703174856; x=1703779656;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=A0zzH/vBq2XqKhr5tzGMNeVqhxK7rrXe+zAIEM0foGY=;
+ b=UgAoyYxjWcnytUeZXVD0Ds9TVhNoysfNCxhBTDOEsp34clnsAvBO89C/Y0NXaI1cFL
+ L4fssaY81QqETL/8vdsWgv3IAHsGrvkDS7Pb6gXZFDogx9AXkrHmvYHMhjNw8yWXFZDF
+ lG4ZZ9ADaTcCGPyN/qs4Af20WnHReSGnk1HElIscTNCAmpy4MHkQm0UMo322c4Q0OhBi
+ 3vBxGCAeIQYkuQhpCYTRJV3rpjZLOI4jmkVaLnpGwLC+FytmzeTXEyaKLGFQq5f0JsAj
+ QGW0JPUpyfdxONL8qcG7OcYOdFpvm5XUxNCNZJJsd5E1Pwu6tE49tonU+lEIYx3pzqeX
+ ZsUg==
+X-Gm-Message-State: AOJu0YxZ/1fab3SnW957IJkHIANJx2RImVSwsQMIfGyV3w63B9zadFyL
+ tj/nCxfRRisOHmE5W1aj3PoMGw==
+X-Google-Smtp-Source: AGHT+IFNAazV6Vyd8w/+xuel+h+y/1JdsUBCg55sihnmOVurxkdBUp62V4uonfZELz9iPyY/jM2p7A==
+X-Received: by 2002:a05:6512:3045:b0:50e:3776:2e16 with SMTP id
+ b5-20020a056512304500b0050e37762e16mr4886995lfb.73.1703174856057; 
+ Thu, 21 Dec 2023 08:07:36 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ bi18-20020a05600c3d9200b0040d378623b1sm3801442wmb.22.2023.12.21.08.07.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Dec 2023 08:07:35 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
  u-boot@lists.denx.de
-References: <20231218210341.30073-1-iivanov@suse.de>
- <20231218210341.30073-6-iivanov@suse.de>
- <fedeb96c-19db-442d-bab0-e87d6d8bba68@broadcom.com>
-From: Stefan Wahren <wahrenst@gmx.net>
-In-Reply-To: <fedeb96c-19db-442d-bab0-e87d6d8bba68@broadcom.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH] MAINTAINERS: Fix ANDROID AB unknown file entry
+In-Reply-To: <CAPLW+4nH3XO1kZrpsc3Q-g=8eX0fuDqTy1f-etynyXntTAFnEw@mail.gmail.com>
+References: <20231220-maintainers-fix-ab-v1-1-dd16fc5285ed@baylibre.com>
+ <CAPLW+4nH3XO1kZrpsc3Q-g=8eX0fuDqTy1f-etynyXntTAFnEw@mail.gmail.com>
+Date: Thu, 21 Dec 2023 17:07:34 +0100
+Message-ID: <87msu31qux.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:vkVT7TDmWYOeGfq3L+/CJqrZQk8LfogTS/F03dMCgTpro2I11sA
- 8Qchpe56gIaSCyhJWNFiSM8RE7906TbW5bv6iEXJRMWxl8t55jkOIuPrPIqmIACpBqHjVDJ
- Jdxq9mESpBxNrRYepaHTXltVLFoILJipYUaLTSTSjdZsO154nTkYVJvqToT8PwKeq94A4FK
- PNw9ddkUrkDwP8ife8J/g==
-UI-OutboundReport: notjunk:1;M01:P0:wPcpK1SPwbY=;onIaTxUlTDp7cMrnrT3m2Q19jmR
- 7n8zaDLqw0a31S1aNoTFOkyka9JBz3NvtP3av1SP3THYsk3UCxhErRVq01n3ndCE3/XRHvE8t
- li8sIpn3Ly2AWbXE3IFMoNunXIYh+C+JCIlPwN9HgZqKOoMO6BKZigIeosjygLIgki6kTRcgB
- U7Ji948vGv0sDUwGCOrQe4QbR7NaGYSnYYJG37GgnCkQvbg1PNgJL1r8h8BfM/GWQ7lAH7NLF
- ob1yqx6CXBa2Vu2dPqL3kXY4VrMbaQJ9dpCV4+ZyYgCp92dMSK3uC301rxsiuBNwtIVD/e0yt
- MdPYhbbAWC3MlfDO473JmW3/NY2sq0JTamZGu9gQ2lHz1CnjPImUDwUu6Yvj/lrSMvny8wf/y
- SJcLJ6PR6+LZIHpN1hN0hxbr5kRAp7P+kH5+J1DVrkgw6ccxEKg7vHVG16a6Ekz7sFQ93efKP
- BXFojlLnYswV5Qxm3kRitjPyrAAb1BgTbHWirC8TE4bIBM8g8gv9qTexkEiOCSYTTlNd3mhDm
- 2IuQ4qfU8tPYkQ80WVj7/AjXi6U1704f2KYG3vuUJ4aZ24FYbJv7OABpiK7OBTkoF/WVqA4nD
- i13OLHtW0pQgC8JXPozK5cWYTPn4K7w0Ufv1/esnuEVK0ShoHm/F0Tj7t4Qc7YSk6D/cylDSw
- Iw1TgfBgN+tPI9WVRvEQg12rgM+AEL8YR6mLs09znusuh8tvdTYr/P+lGHGkgKuLMTvUH10iy
- VlH15xtKAiRJf1A/39lCjbe4M6cDWPir2jAarfeveusJFPqYgzjwPh1c9pJ14XG7q8VFAoXBa
- q+nIde7f7QtTCXpyXTsnaBf7GVCt40UtcyCCWPC/4KPIMQokj01pCTRWKQJEnTOj7tCG8jTsi
- P7Ff9FyC8qrY0o1Dqmac3KT47zru8GgJkJZo1DiU5IR/sd+ASldcQCpciPa/wdnhPS1zJAcJ5
- k+AJSNwxW6r/eHO5z2v7+nsUQko=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,40 +93,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sam,
 
-Am 21.12.23 um 16:13 schrieb Florian Fainelli:
+Thank you for your review.
+
+On Thu, Dec 21, 2023 at 08:15, Sam Protsenko <semen.protsenko@linaro.org> w=
+rote:
+
+> Hi Mattijs,
 >
->
-> On 12/18/2023 10:03 PM, Ivan T. Ivanov wrote:
->> Borrow SD quirks from vendor Linux driver.
+> On Wed, Dec 20, 2023 at 10:43=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
 >>
->> "BCM2712 unfortunately carries with it a perennial bug with the SD
->> controller register interface present on previous chips
->> (2711/2709/2708).
->> Accesses must be dword-sized and a read-modify-write cycle to the 32-bi=
-t
->> registers containing the COMMAND, TRANSFER_MODE, BLOCK_SIZE and
->> BLOCK_COUNT registers tramples the upper/lower 16 bits of data written.
->> BCM2712 does not seem to need the extreme delay between each write as o=
-n
->> previous chips, just the serialisation of writes to these registers in =
-a
->> single 32-bit operation."
->>
->> Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
+>> Commit 19a91f2464a8 ("Create a new boot/ directory") moved the
+>> android_ab.c code under boot/android_ab but did not update
+>> the MAINTAINERS entry.
 >
-> This is diverging from the Linux sdhci-brcmstb.c driver where no such
-> quirk needs to be carried out, rather the logic for such quirks has
-> been present in sdhci-iproc.c...
+> Thanks for the patch! Would you mind adding corresponding "Fixes" tag
+> below your Signed-off?
 
-it seems this patch based the downstream kernel changes [1]. I would
-suggest to use an existing driver which already handle this bug
-(iproc_sdhci or bcm2835_sdhci).
+I don't mind, will send a v2.
 
-Does the Rpi 5 still works, if the compatible "brcm,bcm2712-sdhci" is
-added to mmc/iproc_sdhci.c?
-
-[1] -
-https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841=
-fdf4d4d7e9
+>
+> Other than that LGTM:
+>
+> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+>
+>>
+>> Update it so that the maintainer will get cc'ed again.
+>>
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> ---
+>>  MAINTAINERS | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 7c1cb2dc4dc0..f6de883a7d8f 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -60,8 +60,8 @@ ANDROID AB
+>>  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
+>>  R:     Sam Protsenko <semen.protsenko@linaro.org>
+>>  S:     Maintained
+>> +F:     boot/android_ab.c
+>>  F:     cmd/ab_select.c
+>> -F:     common/android_ab.c
+>>  F:     doc/android/ab.rst
+>>  F:     include/android_ab.h
+>>  F:     test/py/tests/test_android/test_ab.py
+>>
+>> ---
+>> base-commit: 9e53e45292ee2f1d9d2ccc59914b161bef9b10d7
+>> change-id: 20231220-maintainers-fix-ab-2afa7cee97bd
+>>
+>> Best regards,
+>> --
+>> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
