@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 800E6C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:40:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1DB4C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:42:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0AEB878D6;
-	Thu, 21 Dec 2023 17:40:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B64D878D6;
+	Thu, 21 Dec 2023 17:41:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I4mPcCvA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lO8fX14L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A16388786E; Thu, 21 Dec 2023 17:40:32 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 556658786E; Thu, 21 Dec 2023 17:41:58 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73E56878F4
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:40:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6868E878D6
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:41:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3367a304091so909472f8f.3
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:40:28 -0800 (PST)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2cc6d9b4c6aso11542181fa.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:41:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703176828; x=1703781628; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703176914; x=1703781714; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=zfvD7Kbpg6ThESznwG7za9jeFjP2fNZPPwUtmv0oPqo=;
- b=I4mPcCvASa5RPG9JH2szfBfAbJpNbCoZRPWnyuiPjGTK9xSNzbdPF7Tfyy75ONumcT
- q3wL+bX3HL0JieDFKKQw8pNvk0BV5uX+gFf+PYO/FfWbrVUxccCjDjXaCS5CpctMbOI7
- d+JfZgPvXx07unRr/0jQQHbl3SmkFy03HgYIFKJVrnp6Rsqzqvi5IPqD3RhXKBrSldet
- Q42BH1NfADcoELaS+7Wy9ziQR8ks6bEH33EwwdxqrKOUkgXV4fjF+4s2UkVT9N3NT6k6
- rMAypLW4HvvkuapnEVq6siPNYfuEeoXHvtOzNVd5xxr8ws6RzxvP5QbmVqoio/hMhbwW
- AScw==
+ :reply-to; bh=zoUEY+7YOdLkP1xS2UY8HLhwMhwqtWp4bhC0R9FGOJc=;
+ b=lO8fX14Ldpvd5w/+2WU4dhi7kAvmyzmFLoAZvodmh4rKS1K0D8KiyUkSI2Dg4dFaNr
+ 4f0U+bDoaoR9CMxor2a8TQaZ7ovX+ONrImAeiwHHuY6jYspmEYQWbzx01Ob9NHH/fGI5
+ MKhfISldDCm9GXL4tts6brCSDxJBxHUefVUXmg3hL2pk8bv8zqApr0Ppa1h4OZLwPvlC
+ 1edtNpeXtyBmquuwaBgZPfCQ9fdurKR0ENHAmVZr2Dok1YXFiBF4pBfbr6agxs4MbKk9
+ Je/ujHEJwHObobUfQi+vez44igORpM+MDZAVB9TNPb7GYJATt6m55RaWlg8Mgcp0iIAV
+ TXNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703176828; x=1703781628;
+ d=1e100.net; s=20230601; t=1703176914; x=1703781714;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=zfvD7Kbpg6ThESznwG7za9jeFjP2fNZPPwUtmv0oPqo=;
- b=KPnmWfc7Ha+zmIKdwgZLFs1bSNibe5F3COvqM+UQcLESIT8cmy1ITdyGwg62f8vmJN
- LmlVI6acOh+Lmxks1aV6P1bg/AmkuWZ6IJXxG5SPYCDkQdqveVfqZByNaVvoRZiSSGgs
- dkgSUgKUUVBWOHtf5QXxuD+RPxHU/Uh2i62RwFUiI1oBVHliea81tGWHAXNDnizDB5/M
- KrYsH0qpZ7sSm+tqBNA8GVbxULCBYpGT2omvjE9wAd7G6lPd10aQbR5N5ovrHpIZMXH5
- +haYnsabZ1RcQe/JT3M+Q0pHx7OlNt1meh/jilvB+POqTNc41uPPfA9S6OQa6yy/SRvS
- BszA==
-X-Gm-Message-State: AOJu0YwWhKydDiR1Dlgo6mU8sE2DZ85/pwZhjKnpE95TKIJ/AAOAC+mo
- L03uyYNZOmxbawJ0XYq3Uzbhz25PdYEFAg==
-X-Google-Smtp-Source: AGHT+IGTSeySUaO5zQDIYAuYQ7jhGkrVuunVOZKiCGa3hHLrr8diGDfOMoYV2MfM2t7fzOWeDOWPeQ==
-X-Received: by 2002:adf:a4dd:0:b0:336:5f9a:cea4 with SMTP id
- h29-20020adfa4dd000000b003365f9acea4mr24978wrb.62.1703176827854; 
- Thu, 21 Dec 2023 08:40:27 -0800 (PST)
+ bh=zoUEY+7YOdLkP1xS2UY8HLhwMhwqtWp4bhC0R9FGOJc=;
+ b=mGMZNrSVSgg5D90xnQ+2GKz/5MF5VNBosVSBxKoHBEBIqVjoS8qNnCxAt5GXGGO9Ps
+ iTOkFFJjy3gXN78zUaXUCwtRkt1XtlxrAHuYuVEAhwLj9k4StlYAqDPTLDJ4YA5Z8GEl
+ mOZaGbMNDVrpYd55aWt112YyNGAtBB6reNPdX+nbCTGUqkwYLEjEACcTVfnyDWl1znG6
+ 7ypuxwNck4pHyJNFlNkE3KJtEGA9lT953CH6dkiniuCm2P1Mk9JwJv4cALPATwYT9D4J
+ 52BAOtQQQYFU1Do7tcRH0ykwxRs7xLM8i9BaUxPu7Jz1+PlvbtKJHB6iF35g5rQEpzdb
+ nGgA==
+X-Gm-Message-State: AOJu0YxW0c1bWPsI0fpnJ8Wz72X2MqfsZIaSVDiwf4RDRgHsNcbBJ9+a
+ 7r+rAUuyXOhwpaYd+mvidASzWg==
+X-Google-Smtp-Source: AGHT+IFHsgTAkpgfe/AamsGuJYhozYe7IgFjL5HO6DZeYOxTa7KUx4+8lc7i4MD0z51YyYlYT21fzw==
+X-Received: by 2002:a2e:8516:0:b0:2cc:6bb3:d4d with SMTP id
+ j22-20020a2e8516000000b002cc6bb30d4dmr4363760lji.76.1703176913661; 
+ Thu, 21 Dec 2023 08:41:53 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed?
  ([2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed])
  by smtp.gmail.com with ESMTPSA id
- d17-20020adfe2d1000000b0033673ddd81csm2372633wrj.112.2023.12.21.08.40.26
+ d17-20020adfe2d1000000b0033673ddd81csm2372633wrj.112.2023.12.21.08.41.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:40:27 -0800 (PST)
-Message-ID: <aa9fbefc-1e48-4d5b-87fa-e141e6ac87c3@linaro.org>
-Date: Thu, 21 Dec 2023 17:40:26 +0100
+ Thu, 21 Dec 2023 08:41:53 -0800 (PST)
+Message-ID: <50899154-6527-4c61-81cd-c7bd72ecc6bd@linaro.org>
+Date: Thu, 21 Dec 2023 17:41:52 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 32/32] MAINTAINERS: Qualcomm: add some missing paths
+Subject: Re: [PATCH v2 06/32] serial: msm: add debug UART
 Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
@@ -83,7 +83,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-32-b6dd9704219e@linaro.org>
+ <20231219-b4-qcom-common-target-v2-6-b6dd9704219e@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -109,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231219-b4-qcom-common-target-v2-32-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-6-b6dd9704219e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,45 +130,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19/12/2023 17:04, Caleb Connolly wrote:
-> Add drivers and DTS files, as well as regex matches for
-> qcom/qualcomm/snapdragon.
+> Introduce support for early debugging.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   MAINTAINERS | 12 ++++++++----
->   1 file changed, 8 insertions(+), 4 deletions(-)
+>   drivers/serial/Kconfig      |  8 ++++++++
+>   drivers/serial/serial_msm.c | 32 ++++++++++++++++++++++++++++++++
+>   2 files changed, 40 insertions(+)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8cd102eaa070..b41801078c94 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -571,18 +571,22 @@ M:	Caleb Connolly <caleb.connolly@linaro.org>
->   M:	Neil Armstrong <neil.armstrong@linaro.org>
->   R:	Sumit Garg <sumit.garg@linaro.org>
->   S:	Maintained
-> -F:	arch/arm/mach-snapdragon/
-> -F:	drivers/button/button-qcom-pmic.c
-> -F:	drivers/clk/qcom/
-> +F:	arch/arm/dts/msm8*.dtsi
-> +F:	arch/arm/dts/pm8???.dtsi
-> +F:	arch/arm/dts/pms405.dtsi
-> +F:	arch/arm/dts/sdm845.dtsi
-> +F:	drivers/*/*/pm8???-*
->   F:	drivers/gpio/msm_gpio.c
->   F:	drivers/mmc/msm_sdhci.c
->   F:	drivers/phy/msm8916-usbh-phy.c
-> -F:	drivers/pinctrl/qcom/
->   F:	drivers/serial/serial_msm.c
->   F:	drivers/serial/serial_msm_geni.c
->   F:	drivers/smem/msm_smem.c
->   F:	drivers/spmi/spmi-msm.c
->   F:	drivers/usb/host/ehci-msm.c
-> +N:	qcom
-> +N:	snapdragon
-> +N:	qualcomm
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 81fdac047824..20713812c839 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -304,6 +304,14 @@ config DEBUG_UART_S5P
+>   	  will need to provide parameters to make this work. The driver will
+>   	  be available until the real driver-model serial is running.
 >   
->   ARM STI
->   M:	Patrice Chotard <patrice.chotard@foss.st.com>
+> +config DEBUG_UART_MSM
+> +	bool "Qualcomm QUP UART debug"
+> +	depends on ARCH_SNAPDRAGON
+> +	help
+> +	  Select this to enable a debug UART using the serial_msm driver. You
+> +	  will need to provide parameters to make this work. The driver will
+> +	  be available until the real driver-model serial is running.
+
+I'm confused, perhaps the config should be named DEBUG_UART_MSM_QUP ?
+
+> +
+>   config DEBUG_UART_MSM_GENI
+>   	bool "Qualcomm snapdragon"
+>   	depends on ARCH_SNAPDRAGON
+> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+> index a22623c316ed..19a5a3a788f7 100644
+> --- a/drivers/serial/serial_msm.c
+> +++ b/drivers/serial/serial_msm.c
+> @@ -253,3 +253,35 @@ U_BOOT_DRIVER(serial_msm) = {
+>   	.probe = msm_serial_probe,
+>   	.ops	= &msm_serial_ops,
+>   };
+> +
+> +#ifdef CONFIG_DEBUG_UART_MSM
+> +
+> +static struct msm_serial_data init_serial_data = {
+> +	.base = CONFIG_VAL(DEBUG_UART_BASE),
+> +	.clk_bit_rate = UART_DM_CLK_RX_TX_BIT_RATE,
+> +};
+> +
+> +#include <debug_uart.h>
+> +
+> +static inline void _debug_uart_init(void)
+> +{
+> +	uart_dm_init(&init_serial_data);
+> +}
+> +
+> +static inline void _debug_uart_putc(int ch)
+> +{
+> +	struct msm_serial_data *priv = &init_serial_data;
+> +
+> +	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
+> +	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
+> +		;
+> +
+> +	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
+> +
+> +	writel(1, priv->base + UARTDM_NCF_TX);
+> +	writel(ch, priv->base + UARTDM_TF);
+> +}
+> +
+> +DEBUG_UART_FUNCS
+> +
+> +#endif
 > 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
