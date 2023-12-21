@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7A6C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C980C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:36:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 139CE8786C;
-	Thu, 21 Dec 2023 15:32:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ADC3877E5;
+	Thu, 21 Dec 2023 15:36:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qM9fxl1U";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="T4xC1JbR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 618B48786C; Thu, 21 Dec 2023 15:32:16 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id C943E876C6; Thu, 21 Dec 2023 15:36:46 +0100 (CET)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B03D876C6
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:32:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 583FF8785E
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:36:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-78117c8b6ccso51290485a.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:32:14 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4669ac6df36so224072137.2
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:36:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703169133; x=1703773933; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=brxwcEUCubIR+ToXpyVoOcMlxQAy3J4RSPVYFTJL2UQ=;
- b=qM9fxl1UYUoBeokAbcZO7OHw0IwFgVq0vYS6AYRtwf+HiJ56+Xt80S13cyvvSNaS+M
- L6pXP+3tapRMLEUAWjElt9GbqTti1c0s080dvBYH45lfekkN1qgAzgB33u5V1QAfjZ4Y
- bZE7n8JZjGc8HMccTJZFUA82x0NYfw1PP8qcs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703169133; x=1703773933;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703169403; x=1703774203;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=brxwcEUCubIR+ToXpyVoOcMlxQAy3J4RSPVYFTJL2UQ=;
- b=K52NRYgzRgWaWJ+h6a7KhNq50N0WB7qwuGP2a8OhGxMvpwOUqn+GCpUUVi5jjV/bQI
- z71Lc0vm+RUOIZIEpxhPFX9R5Y3IcbaoDnBJLuVqhwY3rOTWyEMDouYUQlESw7phtA2l
- VbVaTCMgz4ex24irtdm7ym59ZcKufiy3ok+VFuMz7D7rSzakihyLRcMHfF0Z/MSgrEmx
- aqE65XfOOHqUc1/3sCeS7Xwa7DcIfOf0YiT8Sl4tJwZArWNTq+eB6j0KO1GnCqI9e+e/
- GfFIlDsvYsYXE8NcTzpqLzaoC/qNuOfqxXbyRw2bZZplPOIzKUbObzp9sCekpoMChku0
- ceaw==
-X-Gm-Message-State: AOJu0YyZ4J3sj9IBWI7g7gs3nDpqUcOFJ8Yi5I35g/jVueiZeq50Dlrb
- Ic+6GX+AWQpQjZbHJB04Tq41Hs0NAaX9iGpFpH0=
-X-Google-Smtp-Source: AGHT+IH1Nhbw+xAEc8X6VUetI8PyXF7AzObkBFNdixcBO14TpfSPjcPsxRt1rJF3JuWXggI9SJSJTw==
-X-Received: by 2002:ae9:f442:0:b0:781:2245:e006 with SMTP id
- z2-20020ae9f442000000b007812245e006mr659082qkl.34.1703169132825; 
- Thu, 21 Dec 2023 06:32:12 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-550c-6b1c-99f9-93ae.res6.spectrum.com.
- [2603:6081:7b00:6400:550c:6b1c:99f9:93ae])
- by smtp.gmail.com with ESMTPSA id
- bi5-20020a05620a318500b0077efb969151sm680145qkb.59.2023.12.21.06.32.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 06:32:12 -0800 (PST)
-Date: Thu, 21 Dec 2023 09:32:09 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] cmd: fdt: check fdt address
-Message-ID: <20231221143209.GH2513409@bill-the-cat>
-References: <20231221000011.297145-1-heinrich.schuchardt@canonical.com>
+ bh=+FQG9AEZlS3YYuVfBUWKIq+NOirDegPC/Qv09a0OItI=;
+ b=T4xC1JbRGmiuX4ZAWFwJh82BVPkyVv9Qlcr683CeDc0bBepgVCxlLum+y6XlmuUrgY
+ Z7FSCCYTmpAN2zRBldTuDNbVc5+VBga6nLyaf1mQLIqO8umwnYK8TWwoNH5GjzoJcv4X
+ 2PeU+q1NCI0l+MuSyv/PtTXlFnzdBsbcjXWl3WbbzhqC3e9ByxdsHpq/TTFqf5h3rRfE
+ cZdOsxeddURiGC9JH9O79K7JzFur5Ot0jnLGf2XHZva4WwKZpx6OvTA54K0Tfn8wL4zG
+ Y+A3pjvKMInfYtOtSgLGc11zkbYIahDbidjR9KDKQ2d1jcrb3jTp0o17/UBMPdZKohVI
+ VQWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703169403; x=1703774203;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+FQG9AEZlS3YYuVfBUWKIq+NOirDegPC/Qv09a0OItI=;
+ b=mj8/BI2tadkvf00KRvL4QZDgpmE6qhv6zvFORIJabsPKKT6XbEfPD5FefjvHiMcsYo
+ FgxTrJC7SS8+LvtmDGV2SKRko5P19hVoXXEq5KpDryOrtS6mHVpap35jdmBA1Gy1JFQ+
+ boqgOXyLfDn5gVFqCCuaKmB8vBm6IlRt2s8tPS00FkhDpqS6fZSMLqwnCq1r1hZioCJ4
+ 94+U+7BsuF7zTYf0Qp3jUVwTPDBi5wVt3KEWUhxQp1R/XOM3VOENmkbup9YDYZeloYfc
+ L2vsXyoCUZUFQNXBZLXreE5VmDI/HYqwMjwxwPuviNFFR48EWmiw4bVjwO6VTm/pXphF
+ ky1w==
+X-Gm-Message-State: AOJu0YzsRhf8RCfdIvRbFjzrBppN3eexbSy73VuuECHZNtkpO006nOeu
+ wIzPSl0yzz9X45/klyaIJiWw4N7fmlJpDHZ1YVZOmw==
+X-Google-Smtp-Source: AGHT+IEG//SCgyCVukMA6nOJxhlEKx0fEZ13AdSHoTWEg9wy9wywf+W2YsK3ghpI+A85qFvpoHRn1yfLdr7jwYkaDeA=
+X-Received: by 2002:a05:6122:3694:b0:4b6:e467:4ea1 with SMTP id
+ ec20-20020a056122369400b004b6e4674ea1mr821818vkb.13.1703169402988; Thu, 21
+ Dec 2023 06:36:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="f8vz+9D9IupCXKwl"
-Content-Disposition: inline
-In-Reply-To: <20231221000011.297145-1-heinrich.schuchardt@canonical.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <B06FB6F5-416C-440D-BC72-070673DF3177@gmx.de>
+ <20231219101124.2847425-1-mwalle@kernel.org>
+ <87plz2nzr1.fsf@bloch.sibelius.xs4all.nl>
+ <f2eb636cd895aae348d4357537267fd2@kernel.org>
+ <CAC_iWj+gPVEm3obJZ2rxr8wd7DD5P9bdadeqW22QmwL0=B825g@mail.gmail.com>
+ <CALeDE9NZyAF5iFrbfA2BtWxWdB__cijaME7ppyaPk5Cf7Fd-ZQ@mail.gmail.com>
+ <CABEcMwVvu7e9sr8oZKJN+s3DH4wz_+LFx9cADAFZQj4eG+7skw@mail.gmail.com>
+ <CAC_iWjJOi3DmxVYx2X2aXtsFpvHDFOqskCYZu3s1U04ak5u7XQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjJOi3DmxVYx2X2aXtsFpvHDFOqskCYZu3s1U04ak5u7XQ@mail.gmail.com>
+From: Shantur Rathore <i@shantur.com>
+Date: Thu, 21 Dec 2023 14:36:31 +0000
+Message-ID: <CABEcMwU==WKegXX0kKiVecAEmQQ=752Qiw8kFyF9oUC4w7_GEw@mail.gmail.com>
+Subject: Re: Adding EFI runtime support to the Arm's FF-A bus
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Michael Walle <mwalle@kernel.org>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, xypron.glpk@gmx.de,
+ Abdellatif.ElKhlifi@arm.com, 
+ Drew.Reed@arm.com, nd@arm.com, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,67 +96,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---f8vz+9D9IupCXKwl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Dec 21, 2023 at 6:30=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Shantur
+>
+> On Thu, 21 Dec 2023 at 00:57, Shantur Rathore <i@shantur.com> wrote:
+> >
+> > Hi Illias,
+> >
+> > On Wed, Dec 20, 2023 at 3:43=E2=80=AFPM Peter Robinson <pbrobinson@gmai=
+l.com> wrote:
+> > >
+> > > On Wed, Dec 20, 2023 at 6:37=E2=80=AFAM Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Michael
+> > > >
+> > > > On Tue, 19 Dec 2023 at 14:47, Michael Walle <mwalle@kernel.org> wro=
+te:
+> > > > >
+> > > > > Hi Mark,
+> > > > >
+> > > > > >> > Any runtime device drivers for variable storage should not b=
+e in the
+> > > > > >> > U-Boot runtime but live in the secure world (e.g. OP-TEE) FF=
+-A is the
+> > > > > >> > new ARM protocol for talking to the secure world and hence f=
+its into
+> > > > > >> > the picture.
+> > > > > >>
+> > > > > >> What if I just want a simple embedded boot stack where I don't
+> > > > > >> want any secure world and just want to be able to boot a COTS =
+linux
+> > > > > >> distribution via EFI?
+> > > > > >
+> > > > > > That already works for many Linux distros.  As long as the dist=
+ro
+> > > > > > installs the appropriate BOOTxxx.EFI file you don't actually ne=
+ed to
+> > > > > > set any EFI variables for the OS to boot.  It can't get any sim=
+pler
+> > > > > > than that.  Of the main Linux distros it seems that only Debian
+> > > > > > doesn't do this.  Someone should probably lobby Debian to do th=
+is as
+> > > > > > well as it would mean that Debian would just work on an EBBR co=
+mpliant
+> > > > > > system.
+> > > > >
+> > > > > I know. Last time I checked CentOS (or was it Ubuntu?) tried to
+> > > > > set EFI variables and the installer just failed. Might be fixed n=
+ow,
+> > > > > though.
+> > > >
+> > > > It's not. The error message is less scary in distros nowadays, but
+> > > > setting the variable for Boot0000 is still not working. That being
+> > > > said I have a plan to fix it for variables stored in a file, that's
+> > > > why we standardized the efi variable format in EBBR.
+> >
+> > Does this mean supporting SetVariableRT for files ?
+> > If yes, would it work without the driver model in runtime?
+>
+> Yes.
+>
+> The reasoning here is pretty simple. You can't keep alive drivers etc
+> for devices that the *kernel* eventually owns. The proposal is to
+> ignore the EFI spec and teach the kernel to write those directly. We
+> already do that when the variables are stored in an RPMB, we need to
+> figure out a decent scalable architecture for the rest.
+>
+Thanks for explaining this.
+It would be a good idea to provide EFI var storage info like location,
+offset, maxsize to linux
+and linux can modify vars as required.
 
-On Thu, Dec 21, 2023 at 01:00:11AM +0100, Heinrich Schuchardt wrote:
+Eg.
 
-> Trying to read a device-tree from an illegal address leads to a crash.
->=20
-> Check that the parameter passed to 'fdt addr' is within the RAM area and
-> non-zero.
->=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  cmd/fdt.c | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/cmd/fdt.c b/cmd/fdt.c
-> index 331564c13b..dc954ea7d5 100644
-> --- a/cmd/fdt.c
-> +++ b/cmd/fdt.c
-> @@ -193,6 +193,11 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, i=
-nt argc, char *const argv[])
->  		}
-> =20
->  		addr =3D hextoul(argv[0], NULL);
-> +		if (!addr || addr < gd->ram_base || addr >=3D gd->ram_top) {
-> +			printf("Invalid address\n");
-> +			return CMD_RET_FAILURE;
-> +		}
-> +
->  		blob =3D map_sysmem(addr, 0);
->  		if ((quiet && fdt_check_header(blob)) ||
->  		    (!quiet && !fdt_valid(&blob)))
+location=3Despfile://u-boot-efi.vars offset=3D0 maxsize=3D-1
+or
+location=3Dspi://0 offset=3D0x3D0000 maxsize=3D0xFFFF
 
-As I mentioned on IRC, we don't sanity check addresses being within
-memory normally. The problem (and one that is making me cranky) is that
-it seems a number of RISC-V platforms have invalid kernel/fdt/initrd
-addresses set in the environment and then have PREBOOT used to fix
-fdt_addr_r so that distro_bootcmd doesn't blow up.
+Then the linux kernel is able to modify vars correctly.
+I think SPI might be simpler to implement vs file as there can be.
+many different
+ESP partitions on multiple drives or no ESP partition at all.
 
---=20
-Tom
+Kind regards,
+Shantur
 
---f8vz+9D9IupCXKwl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWETGkACgkQFHw5/5Y0
-tyyDowwAqvozXTOF5YmEuBpO5PSETtvYX/ZimU4Lb0lACy5eA8DolsSYrAYIbpQ1
-leE2FvZ3BTtjct4pqc/PKnXE2WoNL436lOb6ZSvvBpXzrU7sPSqH+SBf81ALx4J0
-GWXRxmpehfxMusn0s/Qo1q0A2ndekDrM7gNYO47i49Ll3vHLgDN56y+wMWvDR0MR
-TioYfcsrv7UZrqxruZNH2esAYR6Gq1Noc2m1cpulBZij5lqUaLPN3F4zroWiTBmT
-oIrwe8aaJAlkLPOBgysdvsV8P9LaQoGdcCY8n8t3By8NwCyVsVYV5O9q86WJP1+A
-BhTeVEAAW6732c5Y0wt941+MXW3mQ8lMpvcjjBwk3FkZCSYXsFitdbScyn8RJbDN
-KJN7IecWJJswDPxuOaZLKZHEnxbMKJNC+ZhOJA44TvQG5uvG9qWy3J1VWfBI38KG
-C3C28lpIiVK+SfB9ckMgCyKRED5A4Rf7krT2FSY4Y4XO05kVd7hsFc3oyof1I5ix
-U2/BIzpg
-=jZhW
------END PGP SIGNATURE-----
-
---f8vz+9D9IupCXKwl--
+> /Ilias
+> >
+> > Kind regards,
+> > Shantur
