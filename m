@@ -4,85 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C619C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 13:51:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A1CC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ABFA87869;
-	Thu, 21 Dec 2023 14:51:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 60073876C9;
+	Thu, 21 Dec 2023 15:15:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="KOxGWwkM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uy/4dRUx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DC3487869; Thu, 21 Dec 2023 14:51:52 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id CBA32876D0; Thu, 21 Dec 2023 15:15:28 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39E728785B
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 14:51:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id AA4B6876AE
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:15:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3368d1c7b23so222103f8f.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 05:51:50 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3ba46a19689so678603b6e.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:15:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1703166709; x=1703771509; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Q+Z+9Je7557FtgUcYN0h6L08KrKsuNyWC9pJ39lYuaA=;
- b=KOxGWwkMik1nPd4FnvduG02BBBJItb4bC8mojg14xNZOuqf61ilJA9JADQI6h7nPt3
- p4GNuei7jtfCD2sEJgzDWmio3sdRzGFV0vM+jPbmbGQtdeAQQznzFS+m9AQTZx9oad9r
- b1JgONsIexj+cbIrvL11Owa5yjb7iQCF0N2y7Y+exAIQ14VUZXU+CDcayb6JKpJVM/0V
- 7Mx4xGllC+kTNtwK/GgoJ/OuIp8wsnxu55DixxDk8WCbYvSpIuqsN8B6K8EiVrq2clQQ
- ZsmkskNgU3TU4sT4FGrsUBPBtUJqpWwM5Fa9s/xlt5kPL8hBnSNNBU1WhFh5fMxIKfg0
- PovA==
+ d=linaro.org; s=google; t=1703168125; x=1703772925; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=78SOtyitqLcIYEgzlgFFiYay/81587mtS+YlXnpKQHc=;
+ b=uy/4dRUxvwTyaw/E8tDCNN5KSEQFi5La3cJTwXfNhXcsXluR3PbCGC9y+FaZepXJun
+ kzmregvmLc2y1hARAu5qxn6MFG/6eSTCUwMoth9TfOuQa1Vb+JaPzSgKE0l3ex8t5fr3
+ Rdz47RGW45LBFMt5oh5dhvGsCk1aOAsAvpFNvZlqrjt98P33KfztUleIJ+Bvu6Q7SxQ3
+ iEUB7LSMoe5HPW1PdNg+5c60ooC+vU5AV3WE92NfnuIegayWB9prz4N999AZxO+xTocs
+ WM/h0HHBRQqWIo9tt+s7wR0nS0tkDBRuDHntoEk45jMaq2L0smt7gh/Tho4C6m8Rq4A/
+ /xlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703166709; x=1703771509;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+Z+9Je7557FtgUcYN0h6L08KrKsuNyWC9pJ39lYuaA=;
- b=S6hvZbi7QEIZJUb12ODcjreXAccwabQWMPhBU/YuKws1kcoCMZEqIsxyJDJzjkgGTV
- XmjTr7/UcsSOimQEPopId9Ru+vAh3e1QkYJOZd3p5ekaOsCiKy8ke0MHkmRg74pZOry4
- 4CsiCOU6CHrpplIahtocbmVpA+VZaV8JIH45OKL58fJs7qOeiw4kT15FPoHTdZolohlh
- fnDE4UZ3XQpGJw1k0QhmdDKnyZGMk+b2DwwH/2e8NWpAc86Yk/BN8cCyDjPq5eT+3o3c
- +J9gn5wlvpzcNOPLbVJikG1OODeMC90IYNgY8aA5IFtk3/rq12gxGjgLSbNDtvaRpcQM
- y/tw==
-X-Gm-Message-State: AOJu0YzWpfX+IbMZ9riV33GsafJNO8jqT2YG3kqqNPf6bl9E+8Net3jN
- F1LyjNmKcSHQyRcv3xnZoBacuQ==
-X-Google-Smtp-Source: AGHT+IFMb8eOle4ifziMatQjxpfcm76dKSRX6U1jHIiajYtcH6m1rM/YKmn/3qUtaL+PuvzBa2yDRg==
-X-Received: by 2002:adf:a459:0:b0:336:18f6:aee with SMTP id
- e25-20020adfa459000000b0033618f60aeemr759207wra.48.1703166709518; 
- Thu, 21 Dec 2023 05:51:49 -0800 (PST)
-Received: from ?IPV6:2a02:810d:8400:17a8:8ea:59af:d317:9dff?
- ([2a02:810d:8400:17a8:8ea:59af:d317:9dff])
- by smtp.gmail.com with ESMTPSA id
- r16-20020adfe690000000b0033676f9e4cbsm2099387wrm.36.2023.12.21.05.51.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 05:51:49 -0800 (PST)
-Message-ID: <2dfd1dc9-e745-459c-ae21-e3f5a4e4559c@suse.com>
-Date: Thu, 21 Dec 2023 14:51:48 +0100
+ d=1e100.net; s=20230601; t=1703168125; x=1703772925;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=78SOtyitqLcIYEgzlgFFiYay/81587mtS+YlXnpKQHc=;
+ b=YLO0pmSobHZ3F3v90CEJ35yOmdCfVOjKD0SY9zev3mwDGeNTJqnUYkFLQ90O0PQfoz
+ pHCyHmMTMjxsFTeoCdt/468iEhrG1aUkuB2R5Ydll3JZeHRFWKiMHwGmCs7NTFmjyyj0
+ VZSt3U014p5+D5aeemIMUinfCh029DDKRnB9HqvDxLkaw47sHrP5xo9OW7DHbJYOcRn8
+ 2dosG+lSyVJ5VeemY2oOprSLcRuwwfNn/TeQzerrGnF00SBJc+7vdwA4zlC7Ilu0L944
+ v2jpj0o7RJL8a7exw94Fw90I0w35PIhAumSh3TUQfiyNg6f7MNOvYGinKgZFdYqmjxHy
+ kSpg==
+X-Gm-Message-State: AOJu0Yw12NxDBoXBUMid48gFldMonI6vvMstXdltJdWf1i2gIN57Q6i7
+ pgHaSj3eMIqUA0pQLxnZ22aZclbi5/Q8TDZh0OKWsg==
+X-Google-Smtp-Source: AGHT+IHGZ0O4/5kiDM1AXbm1+eXrEI/Q67lZoP7jRhfj9zbLrHgXSdCAA7i0bgdPvbKoQMyqW3KbTqEUE+kACWyUXSg=
+X-Received: by 2002:a05:6358:7f14:b0:16d:edaa:921c with SMTP id
+ p20-20020a0563587f1400b0016dedaa921cmr1478648rwn.12.1703168125245; Thu, 21
+ Dec 2023 06:15:25 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/7] rpi5: initial support
-Content-Language: en-US, ca-ES, es-ES
-To: Stefan Agner <stefan@agner.ch>, "Ivan T. Ivanov" <iivanov@suse.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- Dmitry Malkin <dmitry@bedrocksystems.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de
-References: <20231218210341.30073-1-iivanov@suse.de>
- <1cfe50401b3c4fe72064b9bd611e2347@agner.ch>
-From: Matthias Brugger <mbrugger@suse.com>
-In-Reply-To: <1cfe50401b3c4fe72064b9bd611e2347@agner.ch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20231220-maintainers-fix-ab-v1-1-dd16fc5285ed@baylibre.com>
+In-Reply-To: <20231220-maintainers-fix-ab-v1-1-dd16fc5285ed@baylibre.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Thu, 21 Dec 2023 08:15:13 -0600
+Message-ID: <CAPLW+4nH3XO1kZrpsc3Q-g=8eX0fuDqTy1f-etynyXntTAFnEw@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: Fix ANDROID AB unknown file entry
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,82 +87,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Mattijs,
 
+On Wed, Dec 20, 2023 at 10:43=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Commit 19a91f2464a8 ("Create a new boot/ directory") moved the
+> android_ab.c code under boot/android_ab but did not update
+> the MAINTAINERS entry.
 
-On 21/12/2023 14:42, Stefan Agner wrote:
-> Hi Ivan,
-> 
-> On 2023-12-18 22:03, Ivan T. Ivanov wrote:
->> Hi,
->>
->> These patches are adding basic support for RPi5.
->> They are based on v2 series from Dmitry Malkin[1].
->>
->> With them I am able to _start_ current openSUSE
->> Tumbleweed without modification. They are still
->> a lot of things to be added to the upstream Linux
->> before it runs flawlessly on this device, but at
->> least in U-Booot SD controller used for uSD card
->> and Frameboffer and HDMI0 devices are working fine
->> now. It seems that PCIe controller is working fine
->> too, but I have not tested it too much.
-> 
-> Thank you very much for this work!
-> 
->>
->> Serial console and reset are also functional.
-> 
-> I've applied the patchset to v2024.01-rc5 and built the
-> rpi_arm64_defconfig target. I added enable_uart=1 and kernel=u-boot.bin
-> to config.txt. While I see a brief U-Boot logo on HDMI, I haven't gotten
-> anything on the serial console on pin 8/10 of the Raspberry Pi pin
-> header. Is there anything specific needed to get the console going?
-> 
+Thanks for the patch! Would you mind adding corresponding "Fixes" tag
+below your Signed-off?
 
-Welcome to the club! :)
+Other than that LGTM:
 
-The RPi5 uses a rather non-standard port for debug console:
-https://www.raspberrypi.com/documentation/computers/raspberry-pi-5.html#uart-connector
+Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
 
-Up to now I wasn't able to get serial console on the normal pins 8/10.
-
-Regards
-Matthias
-
+>
+> Update it so that the maintainer will get cc'ed again.
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> ---
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7c1cb2dc4dc0..f6de883a7d8f 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -60,8 +60,8 @@ ANDROID AB
+>  M:     Igor Opaniuk <igor.opaniuk@gmail.com>
+>  R:     Sam Protsenko <semen.protsenko@linaro.org>
+>  S:     Maintained
+> +F:     boot/android_ab.c
+>  F:     cmd/ab_select.c
+> -F:     common/android_ab.c
+>  F:     doc/android/ab.rst
+>  F:     include/android_ab.h
+>  F:     test/py/tests/test_android/test_ab.py
+>
+> ---
+> base-commit: 9e53e45292ee2f1d9d2ccc59914b161bef9b10d7
+> change-id: 20231220-maintainers-fix-ab-2afa7cee97bd
+>
+> Best regards,
 > --
-> Stefan
-> 
->>
->> Hopefully this will help others add missing pieces
->> more easily.
->>
->> Happy hacking!
->>
->> Regards,
->> Ivan
->>
->> [1] https://lore.kernel.org/all/CAKRNjQ0dsWozGo4n8g58m4cCEk3n=qx1R+L24WBgpo-iP1yo7A@mail.gmail.com/
->>
->> Dmitry Malkin (2):
->>    rpi5: add initial memory map for bcm2712
->>    rpi5: Use devicetree as alternative way to read IO base addresses
->>
->> Ivan T. Ivanov (5):
->>    rpi5: Use devicetree to retrieve board revision
->>    bcm2835: brcm,bcm2708-fb device is using r5g6b5 format
->>    mmc: bcmstb: Add support for bcm2712 SD controller
->>    configs: rpi_arm64: enable SDHCI BCMSTB driver
->>    pci: pcie-brcmstb: Add bcm2712 PCIe controller support
->>
->>   arch/arm/mach-bcm283x/include/mach/base.h  |   5 +-
->>   arch/arm/mach-bcm283x/include/mach/mbox.h  |   3 +-
->>   arch/arm/mach-bcm283x/include/mach/sdhci.h |   3 +-
->>   arch/arm/mach-bcm283x/include/mach/timer.h |   3 +-
->>   arch/arm/mach-bcm283x/include/mach/wdog.h  |   3 +-
->>   arch/arm/mach-bcm283x/init.c               |  81 ++++++++--
->>   board/raspberrypi/rpi/rpi.c                |  22 ++-
->>   configs/rpi_arm64_defconfig                |   1 +
->>   drivers/mmc/bcmstb_sdhci.c                 | 173 ++++++++++++++++++++-
->>   drivers/pci/pcie_brcmstb.c                 |  23 ++-
->>   drivers/video/bcm2835.c                    |  10 +-
->>   11 files changed, 296 insertions(+), 31 deletions(-)
+> Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
