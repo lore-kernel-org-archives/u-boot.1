@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCAD3C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA54C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 14:24:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1B748785E;
-	Thu, 21 Dec 2023 15:24:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8EEB58785D;
+	Thu, 21 Dec 2023 15:24:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SgAjuApW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dz+yZKc9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268BF8784D; Thu, 21 Dec 2023 15:24:43 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id C1A4D876C6; Thu, 21 Dec 2023 15:24:43 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 527E9876AE
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:24:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C929876C9
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 15:24:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsankouski@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-50e44c1b35fso1097696e87.3
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:24:40 -0800 (PST)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-50e270639d9so1082890e87.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 06:24:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703168679; x=1703773479; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cpAvPOO+cTCE1+i/kdYvbAbJjNmRj4akotQOgDTfYDg=;
- b=SgAjuApWet16jm3dGGi1nspdmMCxwxDYAvGG/Ok2k9457YfHspbVQP2jb7O4PxnjAf
- vQaXxPFK5SlOOalUiI/RThcZcPqHtw+MJEwNp5AkJylNJlqLDSd4LjsA6LMw7umj2oBa
- jUZJ8RiR+Fw4gPLJRqCioMrTFRcR7b7mBbr/oFUnvWIswXEhmF5PB7w7kAMje0ZHLdJe
- arhfLkdVUexnx6zbvwFvJCJWnABzVuoX8d0OSwYTD5kcgAv18eIUquPzi0SEysMk1shD
- ojNh2+ZzBcNHDnbOweQrLXZu22W98hJ/NksOHPp9BXxhvOJgnpwbOPG+uLxIDLL0FIPr
- OtwQ==
+ d=gmail.com; s=20230601; t=1703168680; x=1703773480; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uFYucL3H2W4KKkAcQUNcz3JBnJSbk0icGucO3BAyex4=;
+ b=Dz+yZKc9Krn4OWuftZJQkwUhOo3WrMLkgXTirQBFhBmQgaJZOgpDZRMGkNw94iwSTz
+ 1Q05ThUElkvLUyT2owMvdW32FHIp1XKhDiqpuzcMnLKmPEqlvY0+kQTA0MVqTdUo7Fz8
+ vD5N7465r/cd9HCmVIZsYPtNBtXFEQRkeR+T9uqcSe8fYzk1fUYbZ97L3gNDgoMNzHer
+ /fUbrdPCoXvY7JGT6s4Pl1Qo5hzbiHwhdmkD+rIsQuP466SKBE+8iekZKsUXF238JKOF
+ 7AK2cQaV+Fdu+TkWUA2pg/99pQuKrdY81qhZ9a2QoYtD9UqbPVL1JV+F43C7lRWwVuwt
+ x0eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703168679; x=1703773479;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cpAvPOO+cTCE1+i/kdYvbAbJjNmRj4akotQOgDTfYDg=;
- b=xJ6jzqCfU9/+v4ZAR1c0do3v9WlaterQFH2aqVjZDiLbBXuY189moRK/giZPRIbkOg
- gJeRJJaR2NTjDmyMhOs116iYRLVWX9zcJrSaVKs6UmC8/W1KTT0J7qXZvxUw2UTMt/Jt
- zrbGdDWQMIb6Y92b2u0hirhjx8IgJqQTrzoOpz7TP6D8Kv7c6ebIzgZv3FhPjV+Sst0R
- hCXKzAbdPH/T28Basiy8dj1Qwci2CQWy8IxpeFRomCuT7InOE1B73pecwVKKqhZs0gu8
- ZzDeBevQ9Eb2QsY+7p0koWYl31h8QYUB0OIPw7atfeNEdm4mYZJX+lIXoKZlIMnq8SQM
- OWjA==
-X-Gm-Message-State: AOJu0Ywx82HBRqqPqUPn+TvRKJZ8gJ92qG8j7cmZHdbKPbq+QBZS+GUd
- 6XVZ5yoSOMCen6I0hdICHHKkud3kC94=
-X-Google-Smtp-Source: AGHT+IEv46YXh8OHhVUNC787QoQhrg2oeVbs2uCqAlkh4beFcuKuGzQcIroYnIHwTsLmARmfFLxevw==
-X-Received: by 2002:a05:6512:401e:b0:50e:4f60:7c8e with SMTP id
- br30-20020a056512401e00b0050e4f607c8emr1680213lfb.118.1703168679060; 
- Thu, 21 Dec 2023 06:24:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703168680; x=1703773480;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uFYucL3H2W4KKkAcQUNcz3JBnJSbk0icGucO3BAyex4=;
+ b=X69KXqKPQweKKmBcHb4IwyrOt6JMmyJQEKIljIX11Iz1wB76qf802HUWl2znLyt0x3
+ H3F+dKESvhvEIhnDzhbzrlHZ8ttrqSW7CM9Oex/PmEK0WhMued/jGquy5HmZmyiisKtL
+ 3yFiHD84kT3zQGHn/kIVUvwo627Dj3wKDTIKfXJJKhh9n91ERpsUBEh2kraq2zWhW1wU
+ dszh6+iQPpx2l1w0vRziVnJRzPmioHIIz1VphUHwisGSb0eoCMNr+ZoglAJTHM/WG8DR
+ vkOUjF/D8KsCvErm6mdzaDpq5M3RPzbwiCGs6akKy+hkojOzdnoEmVa9y7NSSYZgSyGo
+ sWOA==
+X-Gm-Message-State: AOJu0YxIbL+/9LXuJS7t+Aluc7od3yTHSRGSsUSdE7hQVbfna0X+4zMe
+ tavqlL1OjSmsEHhyvB9uU8cMZAwA4Rc=
+X-Google-Smtp-Source: AGHT+IGO7WPp8KSuZuuUdzLvhxVhfw/ztQLzS4vruUMIM7NBK0Q/qGA4KnBoc4cQSEFrllMXDKN9jQ==
+X-Received: by 2002:a19:2d03:0:b0:50e:2237:3f21 with SMTP id
+ k3-20020a192d03000000b0050e22373f21mr4167336lfj.46.1703168680136; 
+ Thu, 21 Dec 2023 06:24:40 -0800 (PST)
 Received: from debian.localdomain ([37.45.245.217])
  by smtp.googlemail.com with ESMTPSA id
- q17-20020ac25fd1000000b0050e3719148fsm280653lfg.235.2023.12.21.06.24.38
+ q17-20020ac25fd1000000b0050e3719148fsm280653lfg.235.2023.12.21.06.24.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 06:24:38 -0800 (PST)
+ Thu, 21 Dec 2023 06:24:39 -0800 (PST)
 From: Dzmitry Sankouski <dsankouski@gmail.com>
 To: u-boot@lists.denx.de
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>
-Subject: [PATCH 0/4] This enables more recently added drivers for starqltechn.
-Date: Thu, 21 Dec 2023 17:24:05 +0300
-Message-Id: <20231221142409.82877-1-dsankouski@gmail.com>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Subject: [PATCH 1/4] arm: dts: starqltechn: 4K align memory
+Date: Thu, 21 Dec 2023 17:24:06 +0300
+Message-Id: <20231221142409.82877-2-dsankouski@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20231221142409.82877-1-dsankouski@gmail.com>
+References: <20231221142409.82877-1-dsankouski@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,21 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Series is based on top of caleb work [1] and should
-be merged after that.
+Fix memory size to 4K aligned.
 
-[1]: https://lore.kernel.org/u-boot/20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org/
+Signed-off-by: Dzmitry Sankouski <dsankouski@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+---
 
+ arch/arm/dts/starqltechn.dts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Dzmitry Sankouski (4):
-  arm: dts: starqltechn: 4K align memory
-  arm: dts: starqltechn: add ufs support
-  arm: dts: starqltechn: add buttons
-  arm: dts: starqltechn: add muic i2c interface
-
- arch/arm/dts/starqltechn.dts | 38 ++++++++++++++++++++++++++++++++++--
- 1 file changed, 36 insertions(+), 2 deletions(-)
-
+diff --git a/arch/arm/dts/starqltechn.dts b/arch/arm/dts/starqltechn.dts
+index 3c0f42c977..e6d57d2668 100644
+--- a/arch/arm/dts/starqltechn.dts
++++ b/arch/arm/dts/starqltechn.dts
+@@ -25,7 +25,7 @@
+ 
+ 	memory@80000000 {
+ 		device_type = "memory";
+-		reg = <0 0x80000000 0 0xfe1bffff>;
++		reg = <0 0x80000000 0 0xfe1c0000>;
+ 	};
+ 
+ 	framebuffer: framebuffer@9D400000 {
 -- 
 2.39.2
 
