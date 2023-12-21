@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 972EEC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 07:26:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB6DC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 07:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC91B874AC;
-	Thu, 21 Dec 2023 08:26:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 21645877D8;
+	Thu, 21 Dec 2023 08:26:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="uMZNyTLh";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="uRuW3RfK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC9C58783B; Thu, 21 Dec 2023 08:26:23 +0100 (CET)
+ id 795D186D2B; Thu, 21 Dec 2023 08:26:24 +0100 (CET)
 Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F9FB8743A
+ by phobos.denx.de (Postfix) with ESMTPS id A510987730
  for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:26:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=thorsis.com
@@ -28,24 +28,20 @@ From: Alexander Dahl <ada@thorsis.com>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
  t=1703143578;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=U0WVW1kZDgvfuOGFe/flPkGSRTMLL2Qf4cIrJgu473Y=;
- b=uMZNyTLhQrtalar5Thu8lHqTgdfG3BtD24Pa5z7+Ory7tq4Qd6FubJO6BzpGLbpErwgK81
- S4ENDhji6DaIu3ieSAW6kTWBRdJG8UQvRzQ17QEFSs8Fl0/vLome2KCg+WpP5QqD6u6g3L
- dYR6u15hzljsrziL4VQ59eQupG+OKAkjkVXqaZZHMtNorOSMHxf0EhlhOe1rTumCRJ7iy+
- IUWERuTZ34v6rGyPmJ/+bRq4vVVoXqTeeeh+ZXKUCCy2I/uPMuGrbLg8SsxAm3Gn4nUTFy
- efkw88oZdqwJjnsUgM9Tku4drqqPj6PhFY8/+tEBpu0CqkGItTjo5pvAY/5Rjg==
+ to:to:cc:cc:content-transfer-encoding:content-transfer-encoding;
+ bh=iV5c7rl/C5CLU4t/e+A5o4IBErNbvW/yCqxQguLrpuE=;
+ b=uRuW3RfKx3FHuOJD7f0BdIiy+yX4RiUId+r9+lEOj1Qsp6fFOhd64ySBOIzLoL4UAyF7Go
+ 7+kS8FUaY5+jEW2m85N9x73AcIbUqpSWy58uBNQ6qQRtNy4LYw/6eELbtg7rDQzwrSc8St
+ mCujtEvc2V2MNkC0c9om11LtPeAsAVn9oaxrqoKHzY/zHH8oEDD3bD6C5wHcHCwYq6wZ3Z
+ hPzJNGMEa/7lOGs+4q8fF6KVxB1aySu0pO1g4lY8t26tDy9KVJo7mansWCQaS0BvzFEQWI
+ 0WLgiDrtZKxuunPVjAjOuYj7C3oNvFRlfF1oiyvOidbZI08IANtE6IQPvdXOtA==
 To: u-boot@lists.denx.de
 Cc: Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
  Terry Lv <terry.lv@nxp.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 1/2] tools: kwbimage: Allow disabling build on non-mvebu
- platforms
-Date: Thu, 21 Dec 2023 08:26:10 +0100
-Message-Id: <20231221072611.11479-2-ada@thorsis.com>
-In-Reply-To: <20231221072611.11479-1-ada@thorsis.com>
-References: <20231221072611.11479-1-ada@thorsis.com>
+Subject: [PATCH v3 0/2] tools: Fix build without host OpenSSL
+Date: Thu, 21 Dec 2023 08:26:09 +0100
+Message-Id: <20231221072611.11479-1-ada@thorsis.com>
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -63,92 +59,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some users want to build with CONFIG_TOOLS_LIBCRYPTO disabled, which in
-general is possible for at least some boards.  32-bit mvebu however
-requires kwbimage for building SPL, and kwbimage has a hard dependency
-to host OpenSSL.
+Hei hei,
 
-The new symbol CONFIG_TOOLS_KWBIMAGE allows disabling kwbimage build on
-non-mvebu platforms, and thus building without host libcrypto from
-OpenSSL.
+both patches of the series got a review and this is my last work day of
+the year, so I just incorporated the feedback, collected the tags, and
+send this out before returning to office in January.
 
-Based on previous work and discussions, see links below.
+Link to v2 with whole motivation text:
+https://lore.kernel.org/u-boot/20231214121136.3286703-1-ada@thorsis.com/
 
-Link: https://lore.kernel.org/u-boot/20211021093304.25399-1-pali@kernel.org/
-Link: https://lore.kernel.org/u-boot/20220111153120.1276641-1-marex@denx.de/
-Link: https://lore.kernel.org/u-boot/20230121154743.667253-2-paulerwan.rio@gmail.com/
+Have some peaceful days everyone.
+
+Greets
+Alex
+
+v2 -> v3:
+* Rebased on v2024.01-rc5
+* Removed a superflous new newline introduced in v1
+* Collected tags
+
 Cc: Marek Vasut <marex@denx.de>
 Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-Signed-off-by: Alexander Dahl <ada@thorsis.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Link: https://lore.kernel.org/u-boot/20211021093304.25399-1-pali@kernel.org/
+Link: https://lore.kernel.org/u-boot/20220111153120.1276641-1-marex@denx.de/
+Link: https://lore.kernel.org/u-boot/1884029.XjOfZupGQm@ada/
+Link: https://lore.kernel.org/u-boot/20230121154743.667253-1-paulerwan.rio@gmail.com/
+Link: https://lore.kernel.org/u-boot/AM6PR04MB61521B84F78571B282FE1D828FD5A@AM6PR04MB6152.eurprd04.prod.outlook.com/
 
-Notes:
-    This is more or less a mashup of the patches of Pali and Marek, but
-    considering the feedback given by Samuel on Pali's patch and considering
-    what I thought was the preferred style in other parts of the Makefile.
-    
-    Link: https://lore.kernel.org/u-boot/f4660467-9d25-dc46-9e60-b2f7f09236c2@sholland.org/
-    
-    v1 -> v2:
-    * removed a useless new newline added in v1
-    * collected tags
+
+Alexander Dahl (1):
+  tools: kwbimage: Allow disabling build on non-mvebu platforms
+
+Paul-Erwan Rio (1):
+  tools: fix build without LIBCRYPTO support
 
  arch/arm/mach-mvebu/Kconfig | 1 +
- tools/Kconfig               | 5 +++++
+ include/image.h             | 2 +-
+ tools/Kconfig               | 6 ++++++
  tools/Makefile              | 4 +++-
- 3 files changed, 9 insertions(+), 1 deletion(-)
+ tools/fit_image.c           | 2 +-
+ tools/image-host.c          | 4 ++++
+ tools/mkimage.c             | 5 +++--
+ 7 files changed, 19 insertions(+), 5 deletions(-)
 
-diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-index c80d8587b14..2058c95ca2d 100644
---- a/arch/arm/mach-mvebu/Kconfig
-+++ b/arch/arm/mach-mvebu/Kconfig
-@@ -15,6 +15,7 @@ config ARMADA_32BIT
- 	select SUPPORT_SPL
- 	select SYS_L2_PL310 if !SYS_L2CACHE_OFF
- 	select TRANSLATION_OFFSET
-+	select TOOLS_KWBIMAGE if SPL
- 	select SPL_SYS_NO_VECTOR_TABLE if SPL
- 	select ARCH_VERY_EARLY_INIT
- 
-diff --git a/tools/Kconfig b/tools/Kconfig
-index 6e23f44d550..f8632cd59d0 100644
---- a/tools/Kconfig
-+++ b/tools/Kconfig
-@@ -25,6 +25,11 @@ config TOOLS_LIBCRYPTO
- 	  This selection does not affect target features, such as runtime FIT
- 	  signature verification.
- 
-+config TOOLS_KWBIMAGE
-+	bool "Enable kwbimage support in host tools"
-+	default y
-+	select TOOLS_LIBCRYPTO
-+
- config TOOLS_FIT
- 	def_bool y
- 	help
-diff --git a/tools/Makefile b/tools/Makefile
-index 1aa1e36137b..6a4280e3668 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -94,6 +94,8 @@ LIBCRYPTO_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := \
- 			generated/lib/fdt-libcrypto.o \
- 			sunxi_toc0.o
- 
-+KWB_IMAGE_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := kwbimage.o
-+
- ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
- 
- # common objs for dumpimage and mkimage
-@@ -114,7 +116,7 @@ dumpimage-mkimage-objs := aisimage.o \
- 			imximage.o \
- 			imx8image.o \
- 			imx8mimage.o \
--			kwbimage.o \
-+			$(KWB_IMAGE_OBJS-y) \
- 			generated/lib/md5.o \
- 			lpc32xximage.o \
- 			mxsimage.o \
+
+base-commit: 97a897444235921ce19b4f8a3b27de6f5a9ab367
 -- 
 2.39.2
 
