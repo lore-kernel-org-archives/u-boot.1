@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72922C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 10:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32563C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 10:06:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E34848785D;
-	Thu, 21 Dec 2023 11:03:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8831D87866;
+	Thu, 21 Dec 2023 11:06:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60C568785F; Thu, 21 Dec 2023 11:03:33 +0100 (CET)
+ id D12C887860; Thu, 21 Dec 2023 11:06:07 +0100 (CET)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D91C877C8
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 11:03:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F35B87853
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 11:06:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 3BLA3Oq1094314;
- Thu, 21 Dec 2023 18:03:24 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 3BLA5uJO095738;
+ Thu, 21 Dec 2023 18:05:56 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Thu, 21 Dec 2023 18:03:23 +0800
-Date: Thu, 21 Dec 2023 18:03:22 +0800
+ Thu, 21 Dec 2023 18:05:54 +0800
+Date: Thu, 21 Dec 2023 18:05:51 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Zong Li <zong.li@sifive.com>
-CC: <rick@andestech.com>, <peterlin@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/2] riscv: cache: support cache enable in SPL stage
-Message-ID: <ZYQNalNhp8294NMy@swlinux02>
-References: <20231214140937.27784-1-zong.li@sifive.com>
- <20231214140937.27784-3-zong.li@sifive.com>
+To: Michal Simek <michal.simek@amd.com>
+CC: <u-boot@lists.denx.de>, <git@xilinx.com>, Padmarao Begari
+ <padmarao.begari@microchip.com>, Rick Chen <rick@andestech.com>
+Subject: Re: [PATCH] riscv: Extend board compatible string with "qemu,mbv"
+Message-ID: <ZYQN__IW1MP4tgG1@swlinux02>
+References: <575ac34167776f3a3a00aa23cc5e182d1e41492f.1703084004.git.michal.simek@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231214140937.27784-3-zong.li@sifive.com>
+In-Reply-To: <575ac34167776f3a3a00aa23cc5e182d1e41492f.1703084004.git.michal.simek@amd.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 3BLA3Oq1094314
+X-MAIL: Atcsqr.andestech.com 3BLA5uJO095738
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,13 +62,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Dec 14, 2023 at 02:09:37PM +0000, Zong Li wrote:
-> The power gating feature of pl2 should be enabled as early as possible,
-> it would be better to put it in SPL stage.
+On Wed, Dec 20, 2023 at 03:53:28PM +0100, Michal Simek wrote:
+> Extend compatible string to match the latest change in dt binding.
 > 
-> Signed-off-by: Zong Li <zong.li@sifive.com>
+> Fixes: 7576ab2facae ("riscv: Add support for AMD/Xilinx MicroBlaze V")
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
->  arch/riscv/lib/sifive_cache.c | 21 +++++++++++++++++++++
->  1 file changed, 21 insertions(+)
+> 
+> dt binding patch is available here.
+> https://lore.kernel.org/all/69670e5a46c98a2eb73d4f2e2d571a27c46b4640.1700722941.git.michal.simek@amd.com/
+> 
+> ---
+>  arch/riscv/dts/xilinx-mbv32.dts | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com> 
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
