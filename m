@@ -4,80 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2CFC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 09:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3978EC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 09:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8498F87527;
-	Thu, 21 Dec 2023 10:13:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A8547874D5;
+	Thu, 21 Dec 2023 10:18:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="irh67iQJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MM5mlxRp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70F2F876AE; Thu, 21 Dec 2023 10:13:25 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 13C56874D5; Thu, 21 Dec 2023 10:18:11 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29305874D5
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 10:13:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D645186DD1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 10:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-55322dbabf6so604259a12.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 01:13:23 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40d2e5e8d1dso6322315e9.0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 01:18:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703150002; x=1703754802; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=80Wno80/ux2aaX8ntmKp5L9bfTHADnaijQjEMbAwVeE=;
- b=irh67iQJ5GhHNGM9BExXNtr0+wOc8S6Uuyp7DOECL2mdU7wsPRy1InlINx8pqqM5Qj
- ssgSx0XeIQYhpL3xhmA5wee9aIdd2UeqqSLrW72DdspekFhehCsvNl6CPff0RaYozUUS
- UleBiPrkc5Lb51mv7b8+qokh8VqKLOPv8cKD5SjD0IjUstT01xd6PitSiF5ZBNSgrV3e
- 7oCR2BgjT/jWsJ9glnNplH+tU01qty+VMZApuntw3LXQxQORRByUAE5mHURS7QttgyOm
- VPvSnaPrQ1uapNpwExFKlfS+HjPuict1UbY3PLvEYO6nPvOO6+FJdf5aUJ3Qv1v+YNUc
- UiCA==
+ d=linaro.org; s=google; t=1703150287; x=1703755087; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=oG5WgSC2Na4YHNxzlvsRMjPZZCILzI1hltdHWbyAWNo=;
+ b=MM5mlxRpF4skSGQfql0+REZ+5I+dKSYISnX9bhzL/lTKjC+Xf4LxCjTG9afM2qCzWV
+ gODhEe1a7OKhXnubpvYcsABMPBEDNGvyXiz+uW6nyo88Dl82uz9Zvj7Vg1xB9QiW5u4j
+ ZBg/sQR1mw+klbtyPqGlg37iKHeVCDqoCUezb0wiZ5iZItITu0UjcB4K+6GTN8AkipFT
+ 2bPGkm0gxZ7rmDYyjAnPJ25JHSJX/xIKfLQgnq1NboqaX6SmZdPcVlxWZkavqWyjhrxU
+ cN5oXym5THbsqdvaF7nDkXqkEDnvrKVqXWz99SK0KvVrFlTPpq5ISS4Qq2VgN39j3jfG
+ pzZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703150002; x=1703754802;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=80Wno80/ux2aaX8ntmKp5L9bfTHADnaijQjEMbAwVeE=;
- b=hu3Ratml504fbH+24q2kcGkHBLHebLl+t9ybNJDIDpGU+HMur3gd2TZ2AZlIuZfYnG
- Z2zeUQ+xmBc3CHTdW8uP2dYD+SRUzNxeN7A1/pIDdryEew/UuoW1rveXBOO0+JvN8+OA
- CGrJwD+fsoehu/zDNaz4BrVod5QcFtM4erBWPkHJMSyRAY9+OhiMvKCKf65lhggK31Kg
- qGxxagSqNjITrJNE8b0LtDf2JzFyPZhD8cCWraZLWjYe3sw6Ohcy0JEiz1OKNX9+prMX
- Qo+BdPsK4ufivDnyUoPYSj8rnEGy2qhGIQ/yk5mTqihvfmHMT50qav6+q0D5PZed5PtD
- zehQ==
-X-Gm-Message-State: AOJu0Yw/uUljVRtFy9bd53ceD9Qr1W/fLFGU2miHXV4oZ/Gw/ftLGqSD
- e4LWiQYrEP6iMxp7nrCKGXLAo1bpr4ae40kLBA4=
-X-Google-Smtp-Source: AGHT+IH50XsACYLOPJlQxoHuu31yhdEq1GIZQrItcDqCraz18Sbymza2fxnk0Pm+eFHUQS7TPxQ8gOsMuSCwL4IIlDk=
-X-Received: by 2002:a50:d51b:0:b0:553:29ef:4f86 with SMTP id
- u27-20020a50d51b000000b0055329ef4f86mr3939231edi.69.1703150002383; Thu, 21
- Dec 2023 01:13:22 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703150287; x=1703755087;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=oG5WgSC2Na4YHNxzlvsRMjPZZCILzI1hltdHWbyAWNo=;
+ b=bXfo/zEIqj5wUxagXCS1pAppuZJJkc+VCVRSG4OWNz+U0qcD/wwdsf5BG8sIjqsYzE
+ yuVZtXOnf/lHmRRATFtFQAw0hjhFmmbhxpb5n2LdL2ADTbZRWojssQcGicyo137g6k//
+ CA9Dk1o00ae8ueKVK9KRDjwoiNmVK2t1/zKnA9hdN9Cs/V1ZRjQpD2LR1MLIHrfcmFr6
+ xXXC2TS0r506z5AwXl7pmzutCdLMFQl93BzdSgVLcWtEY88gzjSWu8JqblRapDIm3EEa
+ 2cynISL8NZjMSoyCCw0Bfp/+QdNVaK8/lypShdtVYSDu1G/6M+eyE90wuhVIgpNUwglJ
+ 863A==
+X-Gm-Message-State: AOJu0YzR8UoFRSKU03nppS9B5COEJHJ/JD4vb2gQ8aw0/9OfZV2gH/aR
+ CMoavGMDICrlK3Dz8Jv+842phA==
+X-Google-Smtp-Source: AGHT+IHrNQtNu5qJBBRRzAUn/QjNhTWJc0OUuTEUSMM/lGq3TMstu/N6yxhBfPZvIEw6v+ITSy3wRg==
+X-Received: by 2002:a05:600c:3b27:b0:40c:91f:506e with SMTP id
+ m39-20020a05600c3b2700b0040c091f506emr422957wms.126.1703150287667; 
+ Thu, 21 Dec 2023 01:18:07 -0800 (PST)
+Received: from [192.168.7.29] (679773502.box.freepro.com. [212.114.21.58])
+ by smtp.gmail.com with ESMTPSA id
+ bd7-20020a05600c1f0700b0040c420eda48sm10788212wmb.22.2023.12.21.01.18.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 Dec 2023 01:18:06 -0800 (PST)
+Message-ID: <22dc0cff-ab4c-4a07-9aa5-da30eec4877d@linaro.org>
+Date: Thu, 21 Dec 2023 10:18:04 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH 0/2 v2] Provide a fallback to smbios tables
+Content-Language: en-US, fr
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com
+Cc: sean.anderson@seco.com, sjg@chromium.org,
+ heinrich.schuchardt@canonical.com, mark.kettenis@xs4all.nl,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
 References: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
- <20231127171058.165777-2-ilias.apalodimas@linaro.org>
- <CAPnjgZ2Vo22gasW05um2og==yRoC33YB3eW=xXVt2dE9xqDgVw@mail.gmail.com>
- <CAC_iWjJE=-rOhOLVe4d7sUH8DEJjn5hdHoHpKe70d4gmB7---Q@mail.gmail.com>
- <CAC_iWjLrmk2AwxoO8tDtG8notrLQuSdRtqzLpTzBRuM1QO0wzw@mail.gmail.com>
- <CAPnjgZ3XXtD24cqn1eEtZu0rxuJz4DR8vttu2YDwes3_ToJNkQ@mail.gmail.com>
- <CALeDE9Moypi85cM8H2z+7nxZPVvJzj5DWWej0Qvdebpdp1qR1A@mail.gmail.com>
- <CAPnjgZ0o7QENx3yFEx2SNpm0A7Li_qqvTeUmdDXNaCVuEA++Jg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0o7QENx3yFEx2SNpm0A7Li_qqvTeUmdDXNaCVuEA++Jg@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 21 Dec 2023 09:13:11 +0000
-Message-ID: <CALeDE9Pc5Z0x1PED3u+OQ0agNUWE7f=DCa5eoRsgWCVHPLAiYQ@mail.gmail.com>
-Subject: Re: [PATCH 1/2 v2] smbios: Simplify reporting of unknown values
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, trini@konsulko.com,
- sean.anderson@seco.com, 
- neil.armstrong@linaro.org, heinrich.schuchardt@canonical.com, 
- mark.kettenis@xs4all.nl, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231127171058.165777-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,107 +116,39 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 27/11/2023 18:10, Ilias Apalodimas wrote:
+> Hi,
+> Tom asked me to clean up and resend [0].
+> I've made some adjustments -- The DT nodes are tokenized and a single
+> string is used. The DT node 'model' is used to fill the SMBIOS
+> 'Product Name' and 'compatible' is used for 'Manufacturer'.
+> 
+> The reason is explained in patch#2 but the tl;dr is that model doesn't
+> always include the manufacturer despite the suggestions of the DT spec.
+> 
+> [0] https://lore.kernel.org/u-boot/20220906134426.53748-1-ilias.apalodimas@linaro.org/
+> 
+> Ilias Apalodimas (2):
+>    smbios: Simplify reporting of unknown values
+>    smbios: Fallback to the default DT if sysinfo nodes are missing
+> 
+>   lib/smbios.c | 109 +++++++++++++++++++++++++++++++++++++++++++--------
+>   1 file changed, 92 insertions(+), 17 deletions(-)
+> 
+> --
+> 2.40.1
+> 
 
-> > > > > Hmm I don't know, but I wonder why I am not just checking t->bios_ver for Unknown.
-> > > > > I'll have a look and change it
-> > > >
-> > > > Ok, this can't be changed as easily.  smbios_add_prop() will not
-> > > > return NULL in any case. It returns an integer. With the cleanup, it
-> > > > will always writes 'Uknown' and not return 0 anymore.
-> > > > I can add that default value you suggested but the ctx->last_str is
-> > > > still used on the next line anyway.
-> > >
-> > > Would you mind if I tried to create a version of the patch which does
-> > > the same thing but with less code, and perhaps a test? It might be
-> > > easier to discuss it then. I can't claim to understand all the
-> > > different code paths at this point.
-> > >
-> > > My main concern is that with so many code paths it will be hard even
-> > > to refactor the code in the future, since it will become
-> > > 'load-bearing' and anyone might turn up and say it breaks their board
-> > > because different information is provided.
-> >
-> > I don't buy this argument at all, sorry.
->
-> OK.
->
-> >
-> > > Overall, so long as the information isn't used for anything important
-> > > in userspace, and we find a way to report SMBIOS to Linux without EFI,
-> >
-> > No, you can't tie random requirements to improving the SMBIOS support.
-> > We *already* report SMBIOS to Linux, reporting SMBIOS to Linux without
-> > EFI is changing things that will need different or extra standards,
-> > that could take years.
-> >
-> > You are arbitrarily adding extra requirements just to suite yourself,
-> > please STOP trying to hold things like this hostage.
->
-> Isn't that what is happening with Linux and ffi? My understanding is
-> that there is no way to pass SMBIOS to Linux without EFI. Is that
-> correct? I know some people at their wit's end about that.
+I did it already offline, but:
 
-Maybe the uses that want to go from a minimal firmware straight to a
-minimal kernel don't care about SMBIOS tables for their use cases,
-things don't need to be full parity to move forward the existing well
-defined usecase.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on libretech-cc
 
-> You may know that I have tried for years to get bindings upstream to
-> Linux....right now there is a reserved-memory binding which has been
-> held up for longer than I can remember, because of EFI. How about a
-> little give and take?
-
-I actually caught up on the reserved-memory binding thread a week or
-so ago and my general thoughts from that thread was that there was a
-lot of outstanding questions being asked of you that you haven't
-clearly articulated or even replied to and the thread ended with you
-asking a number of times "can this be merged now?" and my thought at
-the time was "No, because there's a bunch of outstanding details". May
-I suggest you re-read that thread and take some notes while you do so
-and make sure all the outstanding questions have been answered and
-reply with a single response addressing the remaining details, from
-there we may be able to move on.
-
-> >
-> > > it is OK to enable this feature (with a new Kconfig so it can be
-> > > disabled). But there is already authoritative info in the DT, so this
-> >
-> > There is two types of information in DT, the smbios "entries" in DT
-> > are not standardised in the dtschema and in most cases they're
-> > unnecessarily replicating data ALREADY in DT which is being produced
-> > automatically with these patches, making it zero effort for vendors to
-> > produce.
-> >
-> > > transformation into SMBIOS really should just be used for user
-> > > display, etc., not for anything which affects operation of the device.
-> >
-> > Well SMBIOS tables are used for a number of different things already
-> > in the kernel.
-> >
-> > > Do you agree? If you do, how to ensure that? Perhaps a special string
-> > > in the table like 'GENERATED'?
-> >
-> > Nope, I do not agree, at all.
->
-> OK, well there it is.
->
-> Anyway, as I said, I am happy for this to go in with a Kconfig
-> controlling it (so it can be enabled/disabled). Then SoCs that don't
-> want to go to the bother of adding authoritative info can just enable
-> this Kconfig.
->
-> I would very much like to see some signal that it is not
-> authoritative. That should not be a big imposition.
->
-> For my own interest, I would like to understand what actually uses it
-> as I suspect it is just for display. The two programs I managed to
-> find both handle devicetree and don't need SMBIOS.
->
-> Regards,
-> Simon
+Thanks,
+Neil
