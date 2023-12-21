@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF1DC35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:46:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8D9FC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:46:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 928C7878F2;
-	Thu, 21 Dec 2023 18:44:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 633BA87900;
+	Thu, 21 Dec 2023 18:44:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oDX2+abX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RbhigohV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6995E87913; Thu, 21 Dec 2023 18:44:29 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id DC12287917; Thu, 21 Dec 2023 18:44:29 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9634D878AD
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 18:44:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 995AD878D0
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 18:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEHo118513;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiElD083870;
  Thu, 21 Dec 2023 11:44:14 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1703180654;
- bh=HXhQqWDx+qqwbs+/bmRtrP46EfIppFv4tvFNw6kLjMI=;
+ bh=B+C3Rmx/saUPBocFsmEDTtK+5TjH+W8z/s0YO0JM9+w=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=oDX2+abXXeVkN/Ldw7d/YnjwYOjMxbM8XtWQfNmHuc5NIejuRnXBUs66lxoNTctyy
- b4/PdM+QI0aR9pwUTX/1XLQZwl4kRE+Sb/OBVW4pfpEdQY3D5B//cGDmF0s07z2JuO
- FopIXsc0fs9LOsKf1mg12noGVp1t6K6+flgQGtMI=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiE08032083
+ b=RbhigohVjY0VOkqSBZnG7GgjR153vI2JxlSiSiiWgnUmh71rLEDDyvnHeKqP2KlAG
+ YkpAG6JTus8ZYg1NUjcE6ioO4QyQxDSZvC+E8wI1yLSFVTDfLMukGzvMNSrbOGuaUc
+ jA4LFMEP40mcgq4zDVG5vHaiF7Cl9dQcQ8gr1gC0=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiETd097303
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 21 Dec 2023 11:44:14 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
  Dec 2023 11:44:14 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 21 Dec 2023 11:44:14 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiE4o069239;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEm4080226;
  Thu, 21 Dec 2023 11:44:14 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -58,25 +58,25 @@ CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
  Martyn Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel
  <clamor95@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon
  Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 06/26] arm: dts: k3-am654: include a53 board dtb for r5 build
-Date: Thu, 21 Dec 2023 11:43:52 -0600
-Message-ID: <20231221174412.210807-7-bb@ti.com>
+Subject: [PATCH 07/26] arm: dts: k3-am654: remove duplicate vtt_supply
+Date: Thu, 21 Dec 2023 11:43:53 -0600
+Message-ID: <20231221174412.210807-8-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231221174412.210807-1-bb@ti.com>
 References: <20231221174412.210807-1-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1414; i=bb@ti.com;
- h=from:subject; bh=Nuf5PC0ALbEC61gDoB6jdgtZvCsmBvDNC/AQxRrBxJU=;
- b=owNCWmg5MUFZJlNZdAkx6gAAYn///7/5++N4/vba41wP9ifui//3++/O/lsfWNz/9Xd//f+wA
- RswHahoGgAaAAGjIGgaaGmgNADQNAGgAZGjRiAZBpkB6hoMg0xMR6mm1MmTJ6CHIANGgNMj0Jk0
- 00AaDQZAaaMTI0Bk9QBoaDQyGg0ZAxAMQyMhkDTTT1ABk0AdGmmg0GjQyaAyGmmQxNMmQ0BoBiA
- xAMCGjEyZMJhDQADEAAYIGgADQAgXdE2GqDnEkKFitjHDJsMj5DYjqM/BzvAxogMAG9ADmVAcgH
- sjmHJOjOIx1wT0thBYrGhcseVJ5gbBWZfbtmepQDd656Mjc42m2Dsw/iFJ4hWBzZrBbYAPT2vV1
- 1vfWodW6oUqpaqWvuDP5zIpL365bagDGcBvvXF4Wp/RwkqcmqSiGFdFxDqF6ziBs0TOtQEgMRGa
- N34ijTyErSef8zPLMrAVeQpIVhCNrhFjjcmvckG3J6KRCSC9Phhm7OTJevArX564mZPXw4euRAq
- KcJePG7QZ9IBJGH8c3UCJ7patVmBpdKrxlRZA0RlGLZpOFgwQp03w/nyLhfg9mrUtS2j271zY4D
- USVRbhRgBpqhdwyBZWTH7OH1KwQBOyamkbjsZ5jo5+1Tdwo1ogUIMCZoXTtO52AiLlezr07sA6d
- QuivemdsMEvi/4u5IpwoSDoEmPU
+X-Developer-Signature: v=1; a=openpgp-sha256; l=844; i=bb@ti.com;
+ h=from:subject; bh=FRkh77SlZ3pD6pY+S7E+8OW4B+hO0vkd13DciefXgas=;
+ b=owNCWmg5MUFZJlNZxxtwLQAAaP///v9/v7utz/vu22kr/z+297T31//zWV/97/9+3Z/b4X2wA
+ RsYIeoGnqaBoAAGgDQAAaABpoeoAABoAAGgAAAA0DRk0AaPU09RtRpk9JmU2UOgDQ0AAeoeoAHq
+ AaPUBo0A0AaA00NAaaaaNNPUGQyZABoAaPaoANAGRoyNNAAZTRp6hoNADTTIAAAGI0YjTQNAZGQ
+ BkAGjJoDCDE00aBoDQAyaANNBk0aNGmgKFZhqnxBwZFze3h8fqUCViwUwgrZu7+HAfUnaAcCOmN
+ BNNFkDDGyJPzcLQ5k8MhtJkRNMHbBcERVfcmDeGX+k/2TB3pL1hGvnQZNAwjzSEsIK+/SxFTLlK
+ Ox3wx8JQeMJ9Wzv/NvGdhjZhOc18+1ubwCm+zOUuZKlv4/yaRIzgHDTutwVqUUI2gqVR+L40PPp
+ ldBUrDJpac62Hhh0Di9EgELcTHjc3wHX2QBMaaYKCAXqrFXEVnxcuQZw3qJ0K02mQUQS6gR21CN
+ MqZBKInPomvdBOFjuUypXs8H6rgMAduSIOAyY0bN6CxBAYpEmIQrDSrtdcMYu1dYnu+HelV8lzJ
+ /VFNGFanuBFR2OytLfYqsDqIbxQI2POZFHEKqQJIeHcAFCgdZua94MUVHdmLYPpS+SP/E+xH6T4
+ gBhlMZJQfgUC8/4u5IpwoSGONuBaA==
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -98,47 +98,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To make things as organized as possible, start from the Libux board dtbs
-and apply all properties needed for U-Boot in our *-u-boot.dtsi file for
-the MAIN SPL and U-Boot builds.
-
-We can then include these files for the WKUP SPL build making further
-edits to the needed properties and nodes for the WKUP SPL bootloader's
-view of the am65x.
+With the Linux and U-Boot board dtb files unified we now have a
+duplicate vtt_supply node. Remove it
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/dts/k3-am654-base-board-u-boot.dtsi | 2 +-
- arch/arm/dts/k3-am654-r5-base-board.dts      | 3 ++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ arch/arm/dts/k3-am654-r5-base-board.dts | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-index 0ecd7a56ebdbb..7ec65f8fa98aa 100644
---- a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-@@ -97,7 +97,7 @@
- 	bootph-pre-ram;
- };
- 
--&wkup_i2c_pins_default {
-+&wkup_i2c0_pins_default {
- 	bootph-pre-ram;
- };
- 
 diff --git a/arch/arm/dts/k3-am654-r5-base-board.dts b/arch/arm/dts/k3-am654-r5-base-board.dts
-index 821c7dcb5e936..bc7291a1adb60 100644
+index bc7291a1adb60..d55ddb83837f3 100644
 --- a/arch/arm/dts/k3-am654-r5-base-board.dts
 +++ b/arch/arm/dts/k3-am654-r5-base-board.dts
-@@ -5,7 +5,8 @@
+@@ -46,15 +46,6 @@
+ 		ti,sci-host-id = <10>;
+ 		bootph-pre-ram;
+ 	};
+-
+-	vtt_supply: vtt_supply {
+-		compatible = "regulator-gpio";
+-		regulator-name = "vtt";
+-		regulator-min-microvolt = <0>;
+-		regulator-max-microvolt = <3300000>;
+-		gpios = <&wkup_gpio0 28 GPIO_ACTIVE_HIGH>;
+-		states = <0 0x0 3300000 0x1>;
+-	};
+ };
  
- /dts-v1/;
- 
--#include "k3-am654.dtsi"
-+#include "k3-am654-base-board.dts"
-+#include "k3-am654-base-board-u-boot.dtsi"
- #include "k3-am654-base-board-ddr4-1600MTs.dtsi"
- #include "k3-am654-ddr.dtsi"
- 
+ &cbass_main {
 -- 
 2.43.0
 
