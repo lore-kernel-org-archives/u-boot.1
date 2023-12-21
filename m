@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC065C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536ACC35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 17:47:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23F118793F;
+	by phobos.denx.de (Postfix) with ESMTP id 8D1F287940;
 	Thu, 21 Dec 2023 18:44:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TKN411vB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B0r2jzjc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DE4D878F6; Thu, 21 Dec 2023 18:44:32 +0100 (CET)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 66703878F5; Thu, 21 Dec 2023 18:44:32 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3002878E2
+ by phobos.denx.de (Postfix) with ESMTPS id AB0B8878E3
  for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 18:44:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiE1w083881;
- Thu, 21 Dec 2023 11:44:14 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiFl7027126;
+ Thu, 21 Dec 2023 11:44:15 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1703180654;
- bh=CtQo3x4uNWfEKt4HuoCu6GQDeRaaGdTobFKhYKA3NeA=;
+ s=ti-com-17Q1; t=1703180655;
+ bh=KODsTwbCXwowln1WNA86kMLi7G3gEF4k5zt0xA5wm0Q=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=TKN411vBFKrTac0kAdGq5Vn0Im6ewJoQmAB4/ZYJNye/peXGuJKU+MQxHC4CFIr2/
- Hh5eEeva8P2fDOJ2X4JCFpcHx+pqYzw76q4YsBd/cSYzXRtSXzuFFfjFYAzCDnL53Q
- rp45cbU2vyIruQBSOm4QB5SivBJi93AMoGJJO514=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiE3U097316
+ b=B0r2jzjcoI8u7oZIqvR+FE76RBIu/p8mIWWgwsr3hRw4gkvqLXSdAydSKBj3cSs5q
+ OLLANQ1Tx7NRMm43jQrAK/kFljGg0OBmRbKlgD8q5cA4waJfKXlXITbtz67UP3VcBS
+ i8tUOLmdShMrB6HJ5bGBQLucJ7/qOnqf6MflhqDQ=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3BLHiF5O032096
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Dec 2023 11:44:14 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 21 Dec 2023 11:44:15 -0600
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
  Dec 2023 11:44:14 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 21 Dec 2023 11:44:14 -0600
 Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEak069266;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3BLHiEZq069269;
  Thu, 21 Dec 2023 11:44:14 -0600
 From: Bryan Brattlof <bb@ti.com>
 To: Tom Rini <trini@konsulko.com>
@@ -58,25 +58,25 @@ CC: UBoot Mailing List <u-boot@lists.denx.de>, Vignesh Raghavendra
  Martyn Welch <martyn.welch@collabora.com>, Svyatoslav Ryhel
  <clamor95@gmail.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon
  Glass <sjg@chromium.org>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 15/26] arm: dts: k3-am654: remove duplicate sdhci0 pinmux node
-Date: Thu, 21 Dec 2023 11:44:01 -0600
-Message-ID: <20231221174412.210807-16-bb@ti.com>
+Subject: [PATCH 16/26] arm: dts: k3-am654: remove duplicate sdhci1 pinmux node
+Date: Thu, 21 Dec 2023 11:44:02 -0600
+Message-ID: <20231221174412.210807-17-bb@ti.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20231221174412.210807-1-bb@ti.com>
 References: <20231221174412.210807-1-bb@ti.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2139; i=bb@ti.com;
- h=from:subject; bh=wcmCxvRbnhp7BYOgi2bKtQLpaDDW3WaivzjxWTvIsBw=;
- b=owNCWmg5MUFZJlNZetLo3QAAaH///n/93+/qfrO5c+nK/jXu/R/z3J/xrP9V769987d3+X2wA
- RsbRD1AaAAaGjEABoyDQDCaNNAAGho0ABkaBppkMEaaDJkGnqAABpppiNPR6SGU0GgGjQ0AaABo
- DQZNqDQMQNAAaGQaBoZNAyep6gDQYTTT1DaQyGmnqDIDRgO1GQeUafqmnqaZGgAyDQPUGIaAGgZ
- GgADIyAAAAyAMgAaaaYjTQDRtCNBoSJOA6kNA9J+V5BWa4IB9EcDXhoRqIMTcgf58sKQsedp0Mg
- swVMdiUo63OjooYM7Uez07Bkit+gnIPlSkzzrsazSCspWT6by5D+72DMXKd4BJCrxK9yXafO5i4
- O/R3PSEWGFUpj4vMwn41cSiEV8sjlIzcxVtphyV1MdeO+84EEzpS5NtItei6sWeQtC+FBQtVXmy
- BNie5s+l6wETIMcUfuJD/qC/hvBdXkIAd8XTfQE/aFeGY3FrIm+pWgNVveiBu2dKd9E/9IBsvJt
- Gk35yu6cZq6PgzCQVnFuDDTZH9bdbz0k3uRroZu25BWZDGiNAMnKN2jEtX/ycf0XNtIoat9odkj
- AAVzLFAkB907hNRKMefcbDaWBgHUYW25KfkYJYGyjX7/ZtG7dbpfwnYc3rPnsAyKEANS8wiQvFC
- ebO5FeCwP+LuSKcKEg9aXRugA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1918; i=bb@ti.com;
+ h=from:subject; bh=BC2j5h9tzNTs/ETxGWA/mT9vdOecyNErfav+z5RBT/s=;
+ b=owNCWmg5MUFZJlNZNXKG3wAAZP///7drj//6fb/e4xrZH/Xzg7ey/XdcrerP84x6/1fn//+wA
+ RrVmMoaMQNGhoNGho0NDTJkNAybUMmjQDRoBhGgGjENBoANBpmoekDT1NDQyGg9Q9RhyGQYjTQM
+ BAADQxMJkNA0aaDQBkaDJphDQaMmBGgGmgYjRp6hkGgNDQ9EO9U09T0TNQ0PUyAHogAaGgBoaBo
+ ADQA0NBiAADQ9QZNADRoAAA2oDNT9KCCFap9SKsJEeBkFOsESkG5SjrWh/RfEBpW1BfYJMF8aTQ
+ iw9pfjD3gtJNQ9trq05WdiPPbEN+3oOdViOpw89HzbmVbjA9bHwdOO8dmPRb9VufS8Op8mkWcU6
+ 0Q+nHi4agFXw87j0+8kq4xRwrMy32P1ALPCjAMezfRA20cVXra9/qL22miu+7ooN6P6fEHiG+4P
+ jG7hRpNnLe9LnqAAz5cpRNOALH6t0IXoAOKW7Z24f8i8QAMGeVbqLCT9MPGGWHeaq5tDezVYh1X
+ xKADBfgRQtNnz91m9hlbEw9wgwmHgihP+ty1MnLY5esnCQdHNVJWJ4nn9gd6udJ7ipQfP8nAzDa
+ 69mO2A4H0B/XZAjKUrmyHd1DZDOl/Z2iMC3JXnnesoToVXIX5jGlbdgcmVCIuNMAKXeKogkwIxX
+ +oXI3+GLAF3JFOFCQNXKG3w
 X-Developer-Key: i=bb@ti.com; a=openpgp;
  fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
@@ -98,43 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the Linux and U-Boot board dtb files unified, we now have
-a duplicate sdhci0 pinmux node. Remove it
+With the Linux and U-Boot board dtb files unified, we now have a
+duplicate sdhci1 pinmux node. Remove it
 
 Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
- arch/arm/dts/k3-am654-r5-base-board.dts | 25 +++++++------------------
- 1 file changed, 7 insertions(+), 18 deletions(-)
+ arch/arm/dts/k3-am654-r5-base-board.dts | 22 +++++++---------------
+ 1 file changed, 7 insertions(+), 15 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am654-r5-base-board.dts b/arch/arm/dts/k3-am654-r5-base-board.dts
-index 66953eb5581ae..856917bdfaa5d 100644
+index 856917bdfaa5d..c4096d1b754c4 100644
 --- a/arch/arm/dts/k3-am654-r5-base-board.dts
 +++ b/arch/arm/dts/k3-am654-r5-base-board.dts
-@@ -137,22 +137,6 @@
+@@ -137,19 +137,6 @@
  };
  
  &main_pmx0 {
--	main_mmc0_pins_default: main_mmc0_pins_default {
+-	main_mmc1_pins_default: main_mmc1_pins_default {
 -		pinctrl-single,pins = <
--			AM65X_IOPAD(0x01a8, PIN_INPUT_PULLDOWN, 0)	/* (B25) MMC0_CLK */
--			AM65X_IOPAD(0x01aC, PIN_INPUT_PULLUP, 0)	/* (B27) MMC0_CMD */
--			AM65X_IOPAD(0x01a4, PIN_INPUT_PULLUP, 0)	/* (A26) MMC0_DAT0 */
--			AM65X_IOPAD(0x01a0, PIN_INPUT_PULLUP, 0)	/* (E25) MMC0_DAT1 */
--			AM65X_IOPAD(0x019c, PIN_INPUT_PULLUP, 0)	/* (C26) MMC0_DAT2 */
--			AM65X_IOPAD(0x0198, PIN_INPUT_PULLUP, 0)	/* (A25) MMC0_DAT3 */
--			AM65X_IOPAD(0x0194, PIN_INPUT_PULLUP, 0)	/* (E24) MMC0_DAT4 */
--			AM65X_IOPAD(0x0190, PIN_INPUT_PULLUP, 0)	/* (A24) MMC0_DAT5 */
--			AM65X_IOPAD(0x018c, PIN_INPUT_PULLUP, 0)	/* (B26) MMC0_DAT6 */
--			AM65X_IOPAD(0x0188, PIN_INPUT_PULLUP, 0)	/* (D25) MMC0_DAT7 */
--			AM65X_IOPAD(0x01b0, PIN_INPUT, 0)		/* (C25) MMC0_DS */
+-			AM65X_IOPAD(0x02d4, PIN_INPUT_PULLDOWN, 0)	/* (C27) MMC1_CLK */
+-			AM65X_IOPAD(0x02d8, PIN_INPUT_PULLUP, 0)	/* (C28) MMC1_CMD */
+-			AM65X_IOPAD(0x02d0, PIN_INPUT_PULLUP, 0)	/* (D28) MMC1_DAT0 */
+-			AM65X_IOPAD(0x02cc, PIN_INPUT_PULLUP, 0)	/* (E27) MMC1_DAT1 */
+-			AM65X_IOPAD(0x02c8, PIN_INPUT_PULLUP, 0)	/* (D26) MMC1_DAT2 */
+-			AM65X_IOPAD(0x02c4, PIN_INPUT_PULLUP, 0)	/* (D27) MMC1_DAT3 */
+-			AM65X_IOPAD(0x02dc, PIN_INPUT_PULLUP, 0)	/* (B24) MMC1_SDCD */
+-			AM65X_IOPAD(0x02e0, PIN_INPUT, 0)		/* (C24) MMC1_SDWP */
 -		>;
 -	};
 -
- 	main_mmc1_pins_default: main_mmc1_pins_default {
+ 	usb0_pins_default: usb0_pins_default {
  		pinctrl-single,pins = <
- 			AM65X_IOPAD(0x02d4, PIN_INPUT_PULLDOWN, 0)	/* (C27) MMC1_CLK */
-@@ -179,12 +163,17 @@
- 	pinctrl-0 = <&wkup_vtt_pins_default>;
+ 			AM65X_IOPAD(0x02bc, PIN_OUTPUT, 0) /* (AD9) USB0_DRVVBUS */
+@@ -176,12 +163,17 @@
+ 	/delete-property/ power-domains;
  };
  
 +/* MMC is probed to pull in firmware, so any clock
@@ -144,15 +141,15 @@ index 66953eb5581ae..856917bdfaa5d 100644
 + * SYSFW before it is loaded. Public ROM has already
 + * set it up for us anyway.
 + */
- &sdhci0 {
+ &sdhci1 {
  	clock-names = "clk_xin";
  	clocks = <&clk_200mhz>;
--	pinctrl-0 = <&main_mmc0_pins_default>;
+-	pinctrl-0 = <&main_mmc1_pins_default>;
  	/delete-property/ power-domains;
 -	ti,driver-strength-ohm = <50>;
  };
  
- &sdhci1 {
+ &wkup_i2c0 {
 -- 
 2.43.0
 
