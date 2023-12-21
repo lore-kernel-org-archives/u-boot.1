@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F47C35274
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49D5C35274
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 16:15:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B340587860;
-	Thu, 21 Dec 2023 17:14:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2308E87896;
+	Thu, 21 Dec 2023 17:15:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k1oP/Oc6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jDR2q23y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 436B887897; Thu, 21 Dec 2023 17:14:44 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 31567877E5; Thu, 21 Dec 2023 17:15:05 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4490887860
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:14:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A634287896
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 17:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-40c60dfa5bfso11125385e9.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:14:42 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-40d3ae326f6so9804725e9.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 08:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703175281; x=1703780081; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703175300; x=1703780100; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=7CHpftek0nDIT71zY0J2Sk0CoxkuYTeFF/iLQyqoYjY=;
- b=k1oP/Oc6ngDIALdinm/qVm9AKcwyplzWefxVAg0d6gGEXjLEEAHuGwyD85K29kgUFG
- wTjL7NX5cAK+sOjT6txy5cQ3dfGz7KSWHB1uzZG/9dUvtCPY2HMuKfgjBVs887jKC76u
- vzpk0KjG1xQoFC8yUAp1Ni4GWQcaVY1jPKPREqwmOChAhuoZoIM94U41FvnzmZJS5Efo
- jHQ5zhKD3Ux/Wqo03fB8ovlgn/4/wO6uLlA2+GWHMId5o7Q0nsn8J3boPKJKGH2dadCq
- P5yNhLCOA0ZnW+BOuFwNV/L8zqpPqcHS81MrWgkQhXAZLU+CzvEQmgaBAQH0RNCqtZpW
- IoYA==
+ :reply-to; bh=4fxOy1uq6y/F4gSgd/DNwMYwM6gjn+k9V48YySZWe0Y=;
+ b=jDR2q23yc2yRFJ6t1K2WGU8USKUYqIZHGkFYhOs5oqkyNxXFil0I7WOunq4099HSR7
+ R7+HDRYVhAOM0kTPVY5uE+jqCoHYtDcHFRn6JaLSq3vIF+Xi03YyoDLEy2eaU2WmyhAk
+ zqwAO76HrLSBPBjqSBY33MbbGNajNAfZhI54t8P+cbO0iUIVgE1KInc8Im+7HP6j2lUb
+ UHmTqyJacBmv/gk+JcnxNdemtmkEnwgeHENxEbBlW8RwZ+8KpZYc7T/hgYwZq32DT9sv
+ FD68RDBw9O/qVi+c/zFre/bKLDMi/CB1CL3ULda+Gv5t0OaMSxCfdN2Ydb6TyVc2GR6m
+ rgLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703175281; x=1703780081;
+ d=1e100.net; s=20230601; t=1703175300; x=1703780100;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=7CHpftek0nDIT71zY0J2Sk0CoxkuYTeFF/iLQyqoYjY=;
- b=wp3zRRf1mflRkuQ5YyYWBxxh5w0Ng0bLiZcKzLHLjxD2KwzwxjqXlugbcmuPn400Ol
- hTDPd0cyhAnzKw9AJjwxgmyYhLaTig4c77UUCc7eN/bsIYSUoZHzdkLZZO5DDlIf6zmt
- pcY15W2Cf2v1Y4X6RpT0OHXYK2nTt/C6Qvo1TwJSLkDKgXY95tp3tJTKN4W1ioFBYaMt
- A+STT/QWCyvb0PWLjZR3RTnkTyelw8S06EA04WLVVTrgOU/zYMxJUw4xRUMGOAZVFlI0
- SU8wXa83V04BfXeVKW+fd0Y1S5jdWxeKhGz7kyFo57wLNvOomEDRjt4Da9lHBGUfno9X
- nZCQ==
-X-Gm-Message-State: AOJu0Ywk0U4cPA6p9sYA2NX9W4XHnjKRglWrDgw5gZadmUCpzpBD/MgY
- QxFQOPcI8H2c8oWVJRDQjC5m6A==
-X-Google-Smtp-Source: AGHT+IFzZBLF/xzOD23wqH0nwTAzBasU8t5KG/DHMR6l9JDEk8kKloCvrq1Palj018ttde1zpTV7yA==
-X-Received: by 2002:a05:600c:3f8e:b0:40d:3b88:451b with SMTP id
- fs14-20020a05600c3f8e00b0040d3b88451bmr850985wmb.157.1703175280692; 
- Thu, 21 Dec 2023 08:14:40 -0800 (PST)
+ bh=4fxOy1uq6y/F4gSgd/DNwMYwM6gjn+k9V48YySZWe0Y=;
+ b=N9PSks6lhV+I/2c/c8tGhRuqK3kTdkmzYpz3nORFmbRnJW6Srm3Dtybx643X9h1qAL
+ bs5Ep3151+mDn7hyM7NyJNAuPkjh61kLM/k6rmm+RGh7NHq77oyI3qwh20dfQjMv9SWL
+ fru1eIPREMfUnwZb3IUzKRc93d877aOwrwyE3XDpdMfFXbUA7JC/RIu3uyRbANrQiCaM
+ 6i/QUwDgL+uDVDbMf4PV7A0CS9QD3ahlfsgEgftFDsx/pkzvOd6zfvl70BYfS69KdKGs
+ 5uuEbodjgR+6fJgasg79GROnIOrGJPTfAKuzJG0SyVDFn2XzAjbOvldsVTOE8kH1yjQP
+ 96Yg==
+X-Gm-Message-State: AOJu0YxJkGlUStUIJZ0kWnE4LzIliBrYL05rimqo27wIact88H5Gf0Nk
+ nmtuFwA6wAHBhKD3SdwbDDr22g==
+X-Google-Smtp-Source: AGHT+IEVKAoOedDEqoNznaWmB/2efPvj9d5LOvwRQHIDjTDVn8HwjkP+lJLo3BMynYgICoshKCzJkg==
+X-Received: by 2002:a05:600c:3f85:b0:40d:4181:4d23 with SMTP id
+ fs5-20020a05600c3f8500b0040d41814d23mr324314wmb.105.1703175300018; 
+ Thu, 21 Dec 2023 08:15:00 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed?
  ([2a01:e0a:982:cbb0:a430:aed0:d0bb:a5ed])
  by smtp.gmail.com with ESMTPSA id
- j16-20020a05600c191000b0040c11fbe581sm3865415wmq.27.2023.12.21.08.14.39
+ j16-20020a05600c191000b0040c11fbe581sm3865415wmq.27.2023.12.21.08.14.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Dec 2023 08:14:40 -0800 (PST)
-Message-ID: <1c067ef6-a084-48e7-a4f6-33a30b74a84d@linaro.org>
-Date: Thu, 21 Dec 2023 17:14:38 +0100
+ Thu, 21 Dec 2023 08:14:59 -0800 (PST)
+Message-ID: <fe1ae3c5-bcf4-4563-91df-2e5c6554194d@linaro.org>
+Date: Thu, 21 Dec 2023 17:14:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 02/32] usb: dwc3-generic: support external vbus
- regulator
+Subject: Re: [PATCH v2 04/32] dt-bindings: drop msm_sdhci binding
+Content-Language: en-US, fr
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Ramon Fried <rfried.dev@gmail.com>,
  Dzmitry Sankouski <dsankouski@gmail.com>, Peng Fan <peng.fan@nxp.com>,
@@ -83,8 +83,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Stephan Gerhold <stephan@gerhold.net>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 References: <20231219-b4-qcom-common-target-v2-0-b6dd9704219e@linaro.org>
- <20231219-b4-qcom-common-target-v2-2-b6dd9704219e@linaro.org>
-Content-Language: en-US, fr
+ <20231219-b4-qcom-common-target-v2-4-b6dd9704219e@linaro.org>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -110,7 +109,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231219-b4-qcom-common-target-v2-2-b6dd9704219e@linaro.org>
+In-Reply-To: <20231219-b4-qcom-common-target-v2-4-b6dd9704219e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -131,63 +130,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 19/12/2023 17:04, Caleb Connolly wrote:
-> Add support for a vbus-supply regulator specified in devicetree. This
-> provides generic support to avoid hardcoded GPIO configuration in board
-> init code.
+> The upstream DT is supported here, so drop the U-Boot specific binding
+> docs.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
-> This patch has no dependencies
+>   doc/device-tree-bindings/mmc/msm_sdhci.txt | 25 -------------------------
+>   1 file changed, 25 deletions(-)
 > 
-> Cc: Marek Vasut <marex@denx.de>
-> ---
->   drivers/usb/dwc3/dwc3-generic.c | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 744fde806948..e66e7961c70f 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -21,6 +21,7 @@
->   #include <linux/usb/ch9.h>
->   #include <linux/usb/gadget.h>
->   #include <malloc.h>
-> +#include <power/regulator.h>
->   #include <usb.h>
->   #include "core.h"
->   #include "gadget.h"
-> @@ -47,6 +48,7 @@ struct dwc3_generic_priv {
->   struct dwc3_generic_host_priv {
->   	struct xhci_ctrl xhci_ctrl;
->   	struct dwc3_generic_priv gen_priv;
-> +	struct udevice *vbus_dev;
->   };
->   
->   static int dwc3_generic_probe(struct udevice *dev,
-> @@ -240,6 +242,13 @@ static int dwc3_generic_host_probe(struct udevice *dev)
->   	if (rc)
->   		return rc;
->   
-> +	rc = device_get_supply_regulator(dev, "vbus-supply", &priv->vbus_dev);
-> +	if (rc)
-> +		debug("%s: No vbus regulator found: %d\n", dev->name, rc);
-> +
-> +	if (priv->vbus_dev)
-> +		regulator_set_enable(priv->vbus_dev, true);
-> +
->   	hccr = (struct xhci_hccr *)priv->gen_priv.base;
->   	hcor = (struct xhci_hcor *)(priv->gen_priv.base +
->   			HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
-> @@ -256,6 +265,9 @@ static int dwc3_generic_host_remove(struct udevice *dev)
->   	if (rc)
->   		return rc;
->   
-> +	if (priv->vbus_dev)
-> +		regulator_set_enable(priv->vbus_dev, false);
-> +
->   	return dwc3_generic_remove(dev, &priv->gen_priv);
->   }
->   
+> diff --git a/doc/device-tree-bindings/mmc/msm_sdhci.txt b/doc/device-tree-bindings/mmc/msm_sdhci.txt
+> deleted file mode 100644
+> index 08a290c66931..000000000000
+> --- a/doc/device-tree-bindings/mmc/msm_sdhci.txt
+> +++ /dev/null
+> @@ -1,25 +0,0 @@
+> -Qualcomm Snapdragon SDHCI controller
+> -
+> -Required properties:
+> -- compatible : "qcom,sdhci-msm-v4"
+> -- reg: Base address and length of registers:
+> -	- Host controller registers (SDHCI)
+> -	- SD Core registers
+> -- clock: interface clock (must accept SD bus clock as a frequency)
+> -
+> -Optional properties:
+> -- index: If there is more than one controller - controller index (required
+> -	by generic SDHCI code).
+> -- bus_width: Width of SD/eMMC bus (default 4)
+> -- clock-frequency: Frequency of SD/eMMC bus (default 400 kHz)
+> -
+> -Example:
+> -
+> -sdhci@07864000 {
+> -	compatible = "qcom,sdhci-msm-v4";
+> -	reg = <0x7864900 0x11c 0x7864000 0x800>;
+> -	index = <0x1>;
+> -	bus-width = <0x4>;
+> -	clock = <&clkc 1>;
+> -	clock-frequency = <200000000>;
+> -};
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
