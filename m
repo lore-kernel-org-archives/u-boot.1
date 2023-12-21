@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94942C3DA6E
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 00:00:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4582C46CCD
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 00:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 301758783F;
-	Thu, 21 Dec 2023 01:00:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 56E198783F;
+	Thu, 21 Dec 2023 01:40:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="a6ECUFLQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CPiauPyT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27B3387852; Thu, 21 Dec 2023 01:00:25 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 81434875C5; Thu, 21 Dec 2023 01:40:51 +0100 (CET)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA2A78783F
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 01:00:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EC30F876C8
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 01:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 2E5E13F45F
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 00:00:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1703116820;
- bh=rXRTrfdVek5cW43L+IK4kqDIa9r4yFNGiHVxzGQttd4=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=a6ECUFLQF11pAmouJSGiozfbmkrpDylrcnpNVSzKhjw7z9VHh024JQGsNp41nfs8D
- gC2ccX7RoDt86aJyY4z/01e7GYgMDhiETUoTsgpPtTweL1fgvhLZrGxziWNXhC64lr
- wPjlq86u4n5CC6g0fstpdiWP3wCFJ1oW5xjeIaROed9gJz3r88GdNHkxPnyQxX0O5c
- mD41FHC3UvzhpYlDt1R8FVMtD6nWh5jGBYzAwy/6w2ux7hgzTUDOw/F4clnqoNMT91
- iDK5vSmKAHAKgaplBUiACWHZZ/AXKBExfMu9dgJHjFbgChPDTNXn7E8X0mETSTLLLe
- wqqXuFXPCPoZQ==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-336688e89dbso606010f8f.0
- for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 16:00:19 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-42795ea3e35so1564241cf.2
+ for <u-boot@lists.denx.de>; Wed, 20 Dec 2023 16:40:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703119245; x=1703724045; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3FImOp1PlD6mJ/tb8KDpg5Ogb6PPRfYgAowlA0GnWuY=;
+ b=CPiauPyTEnyvfxXzIgzFxku/9zyZEG3w0J7dg9ipQATXczyixFJsycQIagxIKLGAv7
+ WjjCFb57lwt32IwFGk4lxWXxkTJAh/ept/gReesvUYcLDTkwu14oAyVRuq1jfpFZv+VU
+ mwEFkR/+HRGUHPr1pcIktWsd3/QNV0HsuObYHWA8pbsLNzSdBXXQAEgkN8DeKFtiMRq5
+ gWWecAQJXJRKhRErdAxXJEdowATtIQK9dkdxz0/9GdO4l6Ua/N/txqUsez9YiQBeDh5s
+ WZTs0ijW0mbZKaxaMk4ZV8x6P8MFcvT9K0udNUsIfDPTK6RyhnMFhTrGqaBtANNOD4Mr
+ ERhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703116819; x=1703721619;
+ d=1e100.net; s=20230601; t=1703119245; x=1703724045;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rXRTrfdVek5cW43L+IK4kqDIa9r4yFNGiHVxzGQttd4=;
- b=UbZfsH5RpAt7KFOp8yRZ4a1NazGTUfknAMti9piezMAn2d4lzy7sYNHHV0FpOL0zIN
- BZPDLExLU5A3Bnd6tLqm3Gr8b4Kh36rvoeKR9HtN6nl3PRXwEQbCkzo8B+e1nYqd4dVZ
- glMXg5ZCekzf5KAREdnUgo8vpOH/1iHeSQKuSqPHaDGZMz/IsfizGTN23rMjYTuvDsTB
- P6QpIHPDjIIjsvLU4ntOKpgDeqKec/jceZD2hiSIZPtX9s1qWDnHobCagBkfPgejybO7
- tRiFHZrysF9Ew4ed9vuVN+Csmj6oxt+FhbJrc87HmT9WIZq0kzAYA16ypI7y4gSh5mEB
- iMPA==
-X-Gm-Message-State: AOJu0Yz8N1pW604M8+d3bthfom502gt/q8v9zl3H+5AJ/uab827k21Ee
- DKX8NCDu9GC83+NhRpjTw2MScT+jlZ/dqsMpL55Dw3Ex/z4rfbP8AqpUHUTUDFGdr4ZXr33huq8
- HNnS7YKBUqbBSP2NZr/md8D9UrDYh+OA=
-X-Received: by 2002:a05:600c:4f03:b0:40c:3dd7:98e0 with SMTP id
- l3-20020a05600c4f0300b0040c3dd798e0mr189927wmq.33.1703116818908; 
- Wed, 20 Dec 2023 16:00:18 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHhneL3elCaCVFKPkXM8uXMzZRivJPqr52j9goqTO95H8yXA9o/GcoaVyz8aMGDv1Wi8lUEKg==
-X-Received: by 2002:a05:600c:4f03:b0:40c:3dd7:98e0 with SMTP id
- l3-20020a05600c4f0300b0040c3dd798e0mr189919wmq.33.1703116818477; 
- Wed, 20 Dec 2023 16:00:18 -0800 (PST)
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de. [178.202.40.247])
+ bh=3FImOp1PlD6mJ/tb8KDpg5Ogb6PPRfYgAowlA0GnWuY=;
+ b=aS2rHqzQ4YCUnxjv9ipwizb/VMyrAaUOjNiK0JSebGIzbbqYsF+alwxbchbRy3QsWS
+ HsruI4BJZn9sVej5MRKbXFAx9ea2UPf1dlqapETQlc4ixIbJC6km4HXLHkHZ3OTlf3DY
+ 66DQLsRP+7jEKjgSBndpN60rCEPVeCPHeCNNzu1i4f+ufyv5TKs/NJ/o3rTnJmpHJYKD
+ tZk0sD+ktoe8lEee5xPqTDk1vrhlrzueg9cB7sEbdMvwmSXag0V6iYxE5cqoAQhA2/5t
+ CEZ3RWQrNag0OqRvFKuPh/W45FsrpvVuk8RsZlMnDnGl37pDRe7LzoLtKin1QWFvrzp1
+ c4hg==
+X-Gm-Message-State: AOJu0YzxWoOu8GPm/RXioEerXnHX9ks+iD9nQaEh+olCzhfgHArH2udC
+ 3mOWRE+EM4WiE9a+gc+Bgb/h1jYwD+13YwneFgk=
+X-Google-Smtp-Source: AGHT+IEEsZFjJhTH5fgPIdbgBRNHwJbaQssI/dQ0SSpmLDaN73KqSjuLdL52vyAqDOO8gZFq9lGVEA==
+X-Received: by 2002:ac8:7d4e:0:b0:427:8319:16fa with SMTP id
+ h14-20020ac87d4e000000b00427831916famr3148114qtb.15.1703119245418; 
+ Wed, 20 Dec 2023 16:40:45 -0800 (PST)
+Received: from ubuntu.localdomain
+ (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- m20-20020a05600c3b1400b0040b4c59f133sm1162514wms.1.2023.12.20.16.00.17
+ fv9-20020a05622a4a0900b00419801b1094sm354184qtb.13.2023.12.20.16.40.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Dec 2023 16:00:17 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: fdt: check fdt address
-Date: Thu, 21 Dec 2023 01:00:11 +0100
-Message-Id: <20231221000011.297145-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ Wed, 20 Dec 2023 16:40:44 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ jwerner@chromium.org
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>, Baruch Siach <baruch@tkos.co.il>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: [PATCH v2 0/9] Handoff bloblist from previous boot stage
+Date: Wed, 20 Dec 2023 16:40:19 -0800
+Message-Id: <20231221004030.581388-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,32 +100,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Trying to read a device-tree from an illegal address leads to a crash.
+This patch set depends on another series:
+"[PATCH v3 00/14] Support Firmware Handoff spec via bloblist".
 
-Check that the parameter passed to 'fdt addr' is within the RAM area and
-non-zero.
+This patch set implements Qemu-Arm platform custom functions to retrieve
+the bloblist (aka. Transfer List) from previous loader via boot arguments
+when CONFIG_OF_BOARD option is enabled and all boot arguments are compliant to
+the register conventions defined in the Firmware Handoff spec v0.9.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/fdt.c | 5 +++++
- 1 file changed, 5 insertions(+)
+Qemu-Arm platform custom function will load the FDT from the bloblist if it
+exists.
+Otherwise it fallbacks to get the FDT from the specified memory address.
 
-diff --git a/cmd/fdt.c b/cmd/fdt.c
-index 331564c13b..dc954ea7d5 100644
---- a/cmd/fdt.c
-+++ b/cmd/fdt.c
-@@ -193,6 +193,11 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		}
- 
- 		addr = hextoul(argv[0], NULL);
-+		if (!addr || addr < gd->ram_base || addr >= gd->ram_top) {
-+			printf("Invalid address\n");
-+			return CMD_RET_FAILURE;
-+		}
-+
- 		blob = map_sysmem(addr, 0);
- 		if ((quiet && fdt_check_header(blob)) ||
- 		    (!quiet && !fdt_valid(&blob)))
+If a platform vendor wish to have different behaviors for loading bloblist
+or FDT from the previous boot stage, it is required to implement the custom
+functions board_bloblist_from_boot_arg() and board_fdt_blob_setup().
+
+Raymond Mao (9):
+  bloblist: add API to check the register conventions
+  bloblist: check bloblist with specified buffer size
+  bloblist: refactor of bloblist_reloc()
+  arm: armv7: save boot arguments
+  arm: armv8: save boot arguments
+  qemu-arm: Get bloblist from boot arguments
+  bloblist: Load the bloblist from the previous loader
+  fdt: update the document and Kconfig description
+  qemu-arm: get FDT from bloblist
+
+ arch/arm/cpu/armv7/start.S          | 12 +++++
+ arch/arm/cpu/armv8/start.S          | 14 ++++++
+ board/emulation/qemu-arm/qemu-arm.c | 45 +++++++++++++++++-
+ common/bloblist.c                   | 72 ++++++++++++++++++++---------
+ common/board_f.c                    |  8 +---
+ configs/qemu_arm64_defconfig        |  3 ++
+ doc/develop/devicetree/control.rst  |  6 +--
+ dts/Kconfig                         |  7 ++-
+ include/bloblist.h                  | 34 ++++++++++++--
+ test/bloblist.c                     |  8 ++--
+ 10 files changed, 165 insertions(+), 44 deletions(-)
+
 -- 
-2.40.1
+2.25.1
 
