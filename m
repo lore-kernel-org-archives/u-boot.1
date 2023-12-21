@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3306C46CD3
-	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 22:45:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C587C46CD3
+	for <u-boot@archiver.kernel.org>; Thu, 21 Dec 2023 22:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B8E6876D7;
+	by phobos.denx.de (Postfix) with ESMTP id BCD05877B0;
 	Thu, 21 Dec 2023 23:45:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=loiseau.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=loiseau.fr header.i=@loiseau.fr header.b="Rw5wAtlN";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=loiseau.fr header.i=@loiseau.fr header.b="kxUQc/vN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB2F38767C; Thu, 21 Dec 2023 23:45:11 +0100 (CET)
+ id EFC5787718; Thu, 21 Dec 2023 23:45:11 +0100 (CET)
 Received: from enceinte.jabatus.fr (enceinte.jabatus.fr [109.234.163.232])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D1EA8779D
+ by phobos.denx.de (Postfix) with ESMTPS id 0D6DB877B0
  for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 23:45:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=loiseau.fr
@@ -27,36 +27,38 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=anthony@loiseau.fr
 X-MailPropre-MailScanner-From: anthony@loiseau.fr
 X-MailPropre-MailScanner-SpamCheck: not spam, SpamAssassin (cached,
- score=-25.979, required 5, autolearn=disabled, MED_SPX 1.00,
- RCVD_IN_DNSWL_HI 0.01, SPF_HELO_NONE 0.00, SPF_PASS -1.50, VM03 0.01,
+ score=-25.989, required 5, autolearn=disabled, MED_SPX 1.00,
+ RCVD_IN_DNSWL_HI 0.01, SPF_HELO_NONE 0.00, SPF_PASS -1.50,
  WHLISHOS -25.50)
 X-MailPropre-MailScanner: Not scanned: please contact your Internet E-Mail
  Service Provider for details
-X-MailPropre-MailScanner-ID: 36827E0200.A221C
+X-MailPropre-MailScanner-ID: 91414E0331.A1A86
 X-MailPropre-MailScanner-Information: Please contact the ISP for more
  information
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=loiseau.fr; 
  s=default;
- h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:MIME-Version:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+ :Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=py9Q0hSht/wwg1G4WsEyKBioN1PRHV17dsA/KJwH32c=; b=Rw5wAtlNtdnXurgJfBEnrtimro
- VkWM/rg6NZqwtVVOYXCrS8w5M5vBXfcNc7YExYMyWZWM/ODQM4pSat00x49GMzf7JLWknQo3jiVn+
- gPFfNmunGmZHJSrdjMQh5+64Hdw0mqDGeENFjarR6v+n9sD4zwAv9+1qJiwE6FbAtmLEJNqlzGLGK
- aNVzKO+dZXfGbld8iMF7azIQDXWm1BltYevNAZAHD5+oK/Y/yrd+3jDA8S2Lsrgpuy9aWomMqmpub
- 0rK6tGkvmnw97XyMrOYF17SAUhui/ofSFwWHQ5ydT7V75KcxJ7OPshGQuOdK1qbwTZTDaE97kzkFr
- LWtv7YgA==;
+ bh=oR5Xx4kExxA5hvOx/y9X1SaGegokwJB7QupkBz05cl8=; b=kxUQc/vNEFQ/UoSLHWnAHnHHLA
+ DuPkiXgOykqiOORzTFQYI6xej55zE411iLubPCSUokDwDmOomFUtt+o0dJNl/tf5mnA3C2nBt3tmI
+ TDmRwGwcqUtgwIqWLONhRvkdgw98TOAxSoxhF/xVphQzbfLbn50mHsKdGtxTt7N01PDsN9ZgORVXN
+ qBlHQYupqG1CSwKwu8MF6SZbCNJJ6+emqFJDC7ZcSIMKlwVvBNCr+0L6ixHXUqZDt/0YYnw2WSGg3
+ jsiGnQ3E5tA00dQUR1SF6vV4nE309obTCHEmzBKYRp+2lzfcd496hlnPELviSb99JANYtp4d7NmgN
+ y+w+ED5w==;
 From: Anthony Loiseau <anthony@loiseau.fr>
 To: u-boot@lists.denx.de
 Cc: Anthony Loiseau <anthony.loiseau@allcircuits.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Stefan Agner <stefan@agner.ch>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH v2 0/1] fw_env: auto-detect NAND characteristics
-Date: Thu, 21 Dec 2023 23:44:37 +0100
-Message-Id: <20231221224438.21247-1-anthony@loiseau.fr>
+Subject: [PATCH v2 1/1] fw_env: autodetect NAND erase size and env sectors
+Date: Thu, 21 Dec 2023 23:44:38 +0100
+Message-Id: <20231221224438.21247-2-anthony@loiseau.fr>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20231221224438.21247-1-anthony@loiseau.fr>
+References: <20231221224438.21247-1-anthony@loiseau.fr>
 X-AntiAbuse: This header was added to track abuse,
  please include it with any abuse report
 X-AntiAbuse: Primary Hostname - sucre.o2switch.net
@@ -87,48 +89,54 @@ X-Virus-Status: Clean
 
 From: Anthony Loiseau <anthony.loiseau@allcircuits.com>
 
-Hello,
-
-Here is a patch proposal which modifies fw_env so NAND chip erase size as well
-as environment sector counts are guessed at runtime if they are both statically
-configured as zero.
-This actually extends a previous similar behavior which was NOR-specific,
-useful when a same RootFS is executed with several flash chips,
-see e282c422e0b.
-
-Be aware that I did not test this exact patch for real. I extracted it from
-my older u-boot-flsc 2016 tree on which it works well, and built it using
-a sandbox configuration, without running it. I only checked my gcc was happy
-with those lines (no warnings added). My feeling is that this patch is small
-enough to feel confident it will work on master as it worked on my old tree.
-
-
-Opened to any reviews or requests,
-best rergards,
-Anthony Loiseau
-
-
-v1:
-  initial buggy submission (broken thread)
-  stephan toradex email no more valid
-v2:
-  fix cover letter
-  use another email for Stefan
-  cc Rasmus (author of the changed lines)
+As already done for NOR chips, if device ESIZE and ENVSECTORS static
+configurations are both zero, then autodetect them at runtime.
 
 Cc: Joe Hershberger <joe.hershberger@ni.com>
 cc: Stefan Agner <stefan@agner.ch>
 cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Signed-off-by: Anthony Loiseau <anthony.loiseau@allcircuits.com>
-
-
-Anthony Loiseau (1):
-  fw_env: autodetect NAND erase size and env sectors
-
+---
  tools/env/README   |  3 +++
  tools/env/fw_env.c | 11 +++++++++--
  2 files changed, 12 insertions(+), 2 deletions(-)
 
+diff --git a/tools/env/README b/tools/env/README
+index 480a893202..b8c6a7e197 100644
+--- a/tools/env/README
++++ b/tools/env/README
+@@ -58,6 +58,9 @@ DEVICEx_ENVSECTORS defines the number of sectors that may be used for
+ this environment instance. On NAND this is used to limit the range
+ within which bad blocks are skipped, on NOR it is not used.
+ 
++If DEVICEx_ESIZE and DEVICEx_ENVSECTORS are both zero, then a runtime
++detection is attempted for NOR and NAND mtd types.
++
+ To prevent losing changes to the environment and to prevent confusing the MTD
+ drivers, a lock file at /run/fw_printenv.lock is used to serialize access
+ to the environment.
+diff --git a/tools/env/fw_env.c b/tools/env/fw_env.c
+index c9a8774ace..9f57f19d80 100644
+--- a/tools/env/fw_env.c
++++ b/tools/env/fw_env.c
+@@ -1659,8 +1659,15 @@ static int check_device_config(int dev)
+ 		}
+ 		DEVTYPE(dev) = mtdinfo.type;
+ 		if (DEVESIZE(dev) == 0 && ENVSECTORS(dev) == 0 &&
+-		    mtdinfo.type == MTD_NORFLASH)
+-			DEVESIZE(dev) = mtdinfo.erasesize;
++		    mtdinfo.erasesize > 0) {
++			if (mtdinfo.type == MTD_NORFLASH)
++				DEVESIZE(dev) = mtdinfo.erasesize;
++			else if (mtdinfo.type == MTD_NANDFLASH) {
++				DEVESIZE(dev) = mtdinfo.erasesize;
++				ENVSECTORS(dev) =
++				    mtdinfo.size / mtdinfo.erasesize;
++			}
++		}
+ 		if (DEVESIZE(dev) == 0)
+ 			/* Assume the erase size is the same as the env-size */
+ 			DEVESIZE(dev) = ENVSIZE(dev);
 -- 
 2.11.0
 
