@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1080CC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 18:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E1DC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 19:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0271486E7E;
-	Fri, 22 Dec 2023 19:13:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C220886813;
+	Fri, 22 Dec 2023 20:10:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YUaZqRVF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lmzzEgWk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0471871DA; Fri, 22 Dec 2023 19:13:20 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 101DA86D4C; Fri, 22 Dec 2023 20:10:04 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14ECD81EC8
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 19:13:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF39586784
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 20:10:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703268797; x=1703873597; i=xypron.glpk@gmx.de;
- bh=t+Hw99GpbOaH+IqfjOh1J9m6jBli/YFy+9lUpSmkRSA=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
- b=YUaZqRVFIXy7aeEwZL6QhK/WLynLQ5WVSR3qYAgZdGs+13KSF/LxwjOTHwG423/s
- 2fH3o6oBJGlCY6UQNs1eH652vVn9k3ZFj9nu+5OKfYzWWPa1p0tj8w6elpa4+74ef
- qZEROHhBxTiQ+6qylD+5kTvLMH5mSSvR70HSOjuMd3qIbJ3JA+2kgiocO5tSOR64A
- p610gHiS14orsPfaXknNBRIPr+HjBs0poiFy4H/FeAn0nNp6UPnlPDFTm0NH5rl85
- 7StNLje8r6JPcOTLm1c2CUmgKvXbbcZ8GPBgIQ/SuPDWzfJyi2EE5s9ka+8uSwL0C
- 4mvnKOGAoEDZGCImIQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mel3t-1qg29o0QwH-00alfP; Fri, 22
- Dec 2023 19:13:17 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 1/1] lib: smbios: verify_checksum() is duplicate
-Date: Fri, 22 Dec 2023 19:12:50 +0100
-Message-ID: <20231222181250.49764-1-xypron.glpk@gmx.de>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e49a0b5caso2630273e87.0
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 11:10:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703272201; x=1703877001; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FDJ111tknS1VjCdvi/Nku63RRAbCcCIZ/W121BKHKfs=;
+ b=lmzzEgWkdzTuN+6MuATDtaTSWWbXdB7ePJeIu4GibDSNkBRo0mnMc8knsqKOF27iSM
+ QUEovXr0+l0ip1UhO+YfHIGl1WShGXF5AOdKKjLC78DBPiSpYjumBtc7afIVXYMTUSQY
+ MdYqCh7O8tVBgfIXsaHKTW6dDLaQYSlOkz1EnoF0ZmuJnoLyGbTSvmy4+ZELlf3fV0hU
+ SkB/F2UU4CYHtU+IT0lFhCtuhFOnvFSsckcnqXaPPdVp5SRu2Y5OPPFdWkTWa4nE5TTt
+ woQBj6IQuZVxx/v65EJeO9Iw07YBIGLPQM3qOb/fuAgy29wXuSwxKSZlnkm6yhC08IvK
+ A/1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703272201; x=1703877001;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FDJ111tknS1VjCdvi/Nku63RRAbCcCIZ/W121BKHKfs=;
+ b=GsSfnrVyqU74GY3CMoqAcG1hlHkKCshhz860wfBghOMiycLdYypgoNEF/3IgpfaXpi
+ 8LJQQKtpZhBB1pac19N+fF+ro79SXR8d8f8IOc3v5XIwpXHghAmByIZ5+xz88ghdzMVM
+ LWWLRgc7OhNSX0j7vzJBYMGN0ls4f5KlvfdMhSh7Xme28pszcECZpUzTdvfIsDhvTTC3
+ CME7v4SK4cSz0IfOxIUDjVGgu/WMW/WyupaJlUkCcDHJaMf6hnzSf6xFwey0dZGjRFTp
+ 7GsHi7qbwlRSMpNFI9QUO6cxpmBmFCGbhTQKWZ63jJ6HZV9fdj1nDWs6OXgd49wdYSJh
+ eQ6w==
+X-Gm-Message-State: AOJu0YwpNi8HoUt+ophlrV1LB6JDje0NRzBN9L5aZXbpu0VCauCzPJfs
+ gsDSfuOPjys5pS55vnNVePB/vfQnvXPVbR4BPBq0lpdxYHykOQ==
+X-Google-Smtp-Source: AGHT+IFVSF+UC6xvHHXydY7MIw9Q6gSMaVAXrq0dM9SC9bg+zVNxxzIy3uyWkDI0R634oopf7CFCxeu+BCt3QGs+Ibw=
+X-Received: by 2002:a05:6512:558:b0:50e:6482:be34 with SMTP id
+ h24-20020a056512055800b0050e6482be34mr863716lfl.124.1703272201087; Fri, 22
+ Dec 2023 11:10:01 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:W7ySwvHTUe3RA6JqpzhJvX0abshU/lpLRZkQl9vpCQvl3e268tC
- eFdKT4y3PZ5FtQQCweeyVZRLCmHz+yAHX5M3hrhdmoFmcVTx3asvHkxGTdhu8btbvE0jRFa
- FE1HPT16XWmA2H2a43Z5MlTi7dGgELu5Lnoe8irISQCRHy0bbr1f3YJAzfhnyAe2IYVUU2I
- +6eck1SG6Mj2KKcLyKWVQ==
-UI-OutboundReport: notjunk:1;M01:P0:/qaiXziFlzQ=;7c4uSDyJQsoikg+xhb5oi9hs6LF
- QsrIPqWHBcYk53+vRsi70eWUralvvm60/54f8eIjrL1hnbNJ8wfWE0Dclk/D2U2eeo4Dr81Ji
- KKRM7qfECc6fdN8rc6Vh3RbarOecHaiI2rcd1b/SBObZh5QzNBbJ0kneA6E5gbLCmAqOvsCn+
- /EQrXl9KYazOfcGTsBlWKIYwQVaqUjIYTNeMgHHWDMylWos8rvEjQ5c1tmYqzs06QJa6tq/Q2
- 2qbxSYO+EfB7DUwQQusXc8YqvtAHjCxik36GtzqUTkOv5uY2wWxGS0XsAdgh+kl9mwaw2RQtt
- yRYlkaSNUxzzZJFvSFzteZSlA9tCtGLE/1lCPiaXcTLOyt5pxetDm0deDG0MR9JNKhYLcY4aY
- iYV0j4K8aD8UHsNZdUX6Ej7Lovk+RsifYFFIlIpO/Cndb3HFFgR/AzrDX9h15oF6fg2uFzkEt
- 41ji9UkWbLV91HJRG2+x0UuvTNYByppRpPogCbHPdTVZv8Nb3EMM0FhKvhClWTzj9fw1/V9CP
- fVMdOPiDrTT4Y0O5aFlCi1r0V+fCq1YAuh0CTHuzvEMOnFukiM7JOIJ9T6380w5A/PLHH8eUF
- ZNIwAAjvxKB8Ulz/Nf64iLztNHItPkjT3LJKx4ycQr3o5RtxOesXuKknXPYz55zsJsfOmyBxq
- McAr4RWPjNIXmjAad8kvsugNBcDmwBiWzLAR3Zv46w2Ysgo2JpjXRTRET0+ys9GgaacQAji5c
- PMD9WV2ceyxmcWs7zFVn8HYHdvHE0xNv8YC2qapTxHgtAgy+mFPa0OOOsnBr63PwQ21MYM4Bg
- Je5fohks9a+89jHNiczXdUxOlS86vrLxqchzx9s5kTWJFp4nHc9124B2V9MG484Rj8IExggHF
- PV4B39s8AIPbtl0jEUL+OmzS+qpoWF5V9AWNB+ZRtd4N5RyesmRXhz1M+aSWz+IdBOxlYcjFt
- gX5EHw==
+References: <20231222175403.46629-1-xypron.glpk@gmx.de>
+In-Reply-To: <20231222175403.46629-1-xypron.glpk@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 22 Dec 2023 21:09:25 +0200
+Message-ID: <CAC_iWjK14ZoGbLZD2LmZMsZrKBuowUbGXDd22gYyguOoO5cXtA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] lib: smbios: remove redundant next_header()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,55 +85,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function verify_checksum() duplicates what table_compute_checksum()
-does. Replace it.
+Hi Heinrich,
 
-Fixes: 415eab0655a8 ("smbios: add parsing API")
-Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-=2D--
- lib/smbios-parser.c | 18 ++----------------
- 1 file changed, 2 insertions(+), 16 deletions(-)
+On Fri, 22 Dec 2023 at 19:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> next_header() and get_next_header() only differ in how the const attribute
+> is used. One function taking a const parameter and returning a non-const is
+> good enough.
+>
+> Fixes: 3d49ee8510d3 ("efi_loader: add SMBIOS table measurement")\
 
-diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-index f4de350e6e..a29a06398d 100644
-=2D-- a/lib/smbios-parser.c
-+++ b/lib/smbios-parser.c
-@@ -5,23 +5,9 @@
+This doesn't fix a bug. It correctly cleans up code, so I think the
+Fixes tag must be omitted.
 
- #define LOG_CATEGORY	LOGC_BOOT
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>  lib/smbios-parser.c | 11 ++---------
+>  1 file changed, 2 insertions(+), 9 deletions(-)
+>
+> diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
+> index b578c30840..f4de350e6e 100644
+> --- a/lib/smbios-parser.c
+> +++ b/lib/smbios-parser.c
+> @@ -50,14 +50,7 @@ static u8 *find_next_header(u8 *pos)
+>         return pos;
+>  }
+>
+> -static struct smbios_header *get_next_header(struct smbios_header *curr)
+> -{
+> -       u8 *pos = ((u8 *)curr) + curr->length;
+> -
+> -       return (struct smbios_header *)find_next_header(pos);
+> -}
+> -
+> -static const struct smbios_header *next_header(const struct smbios_header *curr)
+> +static struct smbios_header *get_next_header(const struct smbios_header *curr)
+>  {
+>         u8 *pos = ((u8 *)curr) + curr->length;
+>
+> @@ -73,7 +66,7 @@ const struct smbios_header *smbios_header(const struct smbios_entry *entry, int
+>                 if (header->type == type)
+>                         return header;
+>
+> -               header = next_header(header);
+> +               header = get_next_header(header);
+>         }
+>
+>         return NULL;
+> --
+> 2.43.0
+>
 
-+#include <tables_csum.h>
- #include <smbios.h>
-
--static inline int verify_checksum(const struct smbios_entry *e)
--{
--	/*
--	 * Checksums for SMBIOS tables are calculated to have a value, so that
--	 * the sum over all bytes yields zero (using unsigned 8 bit arithmetic).
--	 */
--	u8 *byte =3D (u8 *)e;
--	u8 sum =3D 0;
--
--	for (int i =3D 0; i < e->length; i++)
--		sum +=3D byte[i];
--
--	return sum;
--}
--
- const struct smbios_entry *smbios_entry(u64 address, u32 size)
- {
- 	const struct smbios_entry *entry =3D (struct smbios_entry *)(uintptr_t)a=
-ddress;
-@@ -32,7 +18,7 @@ const struct smbios_entry *smbios_entry(u64 address, u32=
- size)
- 	if (memcmp(entry->anchor, "_SM_", 4))
- 		return NULL;
-
--	if (verify_checksum(entry))
-+	if (table_compute_checksum(entry, entry->length))
- 		return NULL;
-
- 	return entry;
-=2D-
-2.43.0
-
+Other than that
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
