@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C24CC4706F
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B10C4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5803E8770F;
+	by phobos.denx.de (Postfix) with ESMTP id C32F087809;
 	Fri, 22 Dec 2023 22:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rNZ1epTF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KmLZrJXb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 840C387895; Fri, 22 Dec 2023 22:03:42 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 825F186C67; Fri, 22 Dec 2023 22:03:44 +0100 (CET)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E9C186C67
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 632E187800
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-40c2bb872e2so22564365e9.3
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:35 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-40d4ee4cbbcso632165e9.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1703279014; x=1703883814;
+ d=amarulasolutions.com; s=google; t=1703279016; x=1703883816;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cKtsDZHuve/IeD+B3K4xt6u/CTUlA7CQhlm77U2S50I=;
- b=rNZ1epTFNbvE5YMmGWcsCHPBvzhbw8y6vNHZvMDtbrSMdFWpE5t700l5rlzHaTRS2X
- MF/ye9H4H+qjqqGORhmGPzTQaZN7lb2gx8gBNGHdNQ5lN19xxHh3ygRT31O89l8Xv/Ku
- K5qm9oZsrsjXSEHM0ILrs6SYpGnofrXsUBWB8=
+ bh=BcgDjTUVo40UDuiyJdykmNbr2taIcntC0eai6o9YHmk=;
+ b=KmLZrJXbalXfewxD56aSNIqPesnQFDwNoYhnGvrjC1ZsWLX0MzXKrjSRTbKIyI09rk
+ f9P0a5U0zQhtjK0r5wOEU3wx+s8cFHUWo82IHcMahW3tkdzkecfRTiW+JZrQWxRGBlDr
+ +ihmAHTxIN/QNUp4mf5DzG33h+jZIwPA+5FSE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703279014; x=1703883814;
+ d=1e100.net; s=20230601; t=1703279016; x=1703883816;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cKtsDZHuve/IeD+B3K4xt6u/CTUlA7CQhlm77U2S50I=;
- b=nGIW4yrEBa+xBV0hCer55/SjJPyXFvmUaLfmJTw/H4vnBMds2ZGSkoSCftkYhR34FG
- PmZzQrk+M+oCXrxogktoNex1naqtlbAaNNeiEcV7hwwjHVS2txJ37kb6FSA6yjec7Xcl
- qhvVa17y66wCVnwyCImk+QRqgp/ebszyrGB0YeKkYpQhLJgdR8bCynOG04f0gdHLF2f1
- MFjATSCWxxjN7Y1Hf2d6KZvweu7vwBqK9xHzC3e035czqyWjkpNHDlbWF2i2uPjGbtZE
- a3pSQw45/fzrT7SJYb/HzGZDox3lPg9Z6JByZnyRDeuK1WFi+IGZNWVHCzFzmN/YYrqw
- NJbw==
-X-Gm-Message-State: AOJu0YzYwnSDDb4HMqm9VXQCkMPEMmWAiD7G3iJRdOyY1sF5ErdRpdKE
- WFLkKwowS5E5EjrLE2o33wYyt3117WxQS0yXiH2t1xeJQGc=
-X-Google-Smtp-Source: AGHT+IGTR4P1bf3SVlsfu+h4zKXdLhX3XqJQHhFGsUup56cNOc6pm97H60YBnLAyIbh7HjWyqmbkMQ==
-X-Received: by 2002:a05:600c:4f54:b0:40d:4a78:1227 with SMTP id
- m20-20020a05600c4f5400b0040d4a781227mr287326wmq.33.1703279014605; 
- Fri, 22 Dec 2023 13:03:34 -0800 (PST)
+ bh=BcgDjTUVo40UDuiyJdykmNbr2taIcntC0eai6o9YHmk=;
+ b=SX0qBQsJ35ehH0SR35O+UhianDjfNCNfsAURDC5GstbM6IfbG90mEVEZd5QliLN0cY
+ sEtE8MiQ1r9hF2h3n8sY1m/lznqKND5A8f9/lEKypG6TuEs1HG8NHGYoa2nOpcS9aUPK
+ Lw7yiFkY0Q5PZbp3DeUoev/edc80R2h6nGQI0f+y2Upy6nUAXrqgTekD56w3nTqiW6JC
+ 49gC2gv4KyHsSyl5rY9+VtlQu1ReTp6UpFDgpTuFkN5avxBx+c4x5GXZQ0r5NkTEepH2
+ e1nrEd2w2qo3GQH+hpbD0ASqZk3nvRmJKOO8LmGZ9ivCxXRODl7wxS0Xacu49Hua6r49
+ g+zA==
+X-Gm-Message-State: AOJu0Yz8igegyYV3qBv1eVocu0zAYLV9iZQhj2t+vC9Qfm0WTgPBAXQw
+ woqefPJgJk/hnVCocVG7qsgr9+S9551t7NnxCyGVnl8VxtU=
+X-Google-Smtp-Source: AGHT+IFX6KS7pQDoOum+yKckNC71Vvr68tuYMroeDKo8oPZXJf/V4ZeN0zMuIbOE6MMU+LZGDuajwA==
+X-Received: by 2002:a05:600c:474a:b0:40d:4eee:a604 with SMTP id
+ w10-20020a05600c474a00b0040d4eeea604mr37293wmo.170.1703279015997; 
+ Fri, 22 Dec 2023 13:03:35 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.34
+ j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:03:34 -0800 (PST)
+ Fri, 22 Dec 2023 13:03:35 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
  Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v13 17/24] test: hush: Fix variable expansion tests for modern
- hush
-Date: Fri, 22 Dec 2023 22:02:37 +0100
-Message-Id: <20231222210244.91830-18-francis.laniel@amarulasolutions.com>
+Subject: [PATCH v13 18/24] cli: hush_modern: Enable using < and > as string
+ compare operators
+Date: Fri, 22 Dec 2023 22:02:38 +0100
+Message-Id: <20231222210244.91830-19-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
 References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
@@ -93,153 +93,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modifies the expected result for modern hush.
-Indeed, there were bugs in actual U-Boot hush which were fixed in upstream
-Busybox.
-As modern hush is based on upstream Busybox, these bugs no longer exist.
+In Busybox hush, '<' and '>' are used as redirection operators.
+For example, cat foo > bar will write content of file foo inside file bar.
+In U-Boot, we do not have file system, so we can hardly redirect command output
+inside a file.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+But, in actual U-Boot hush, these operators ('<' and '>') are used as string
+compare operators.
+For example, test aaa < bbb returns 0 as aaa is before bbb in the dictionary.
+Busybox hush also permits this, but operators need to be escaped ('\<' and
+'\>').
+Indeed, if escaping is needed it permits the developer to think about its code,
+as in a lot of case, we want to compare integers (using '-lt' or '-gt') rather
+than strings.
+
+As testing in U-Boot is handled by the test command, we will stick with the
+original behaviour and not adapt to Busybox one.
+
+Nonetheless, if one day we decide to implement test with '[[ ]]', we will then
+stick to upstream Busybox behavior.
+
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- test/hush/dollar.c | 79 ++++++++++++++++++++++++++++++++++++++++------
- 1 file changed, 69 insertions(+), 10 deletions(-)
+ common/cli_hush_upstream.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
 
-diff --git a/test/hush/dollar.c b/test/hush/dollar.c
-index defb2c3fd0..7ab7ea7084 100644
---- a/test/hush/dollar.c
-+++ b/test/hush/dollar.c
-@@ -9,6 +9,9 @@
- #include <env_attr.h>
- #include <test/hush.h>
- #include <test/ut.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
- 
- static int hush_test_simple_dollar(struct unit_test_state *uts)
- {
-@@ -51,13 +54,29 @@ static int hush_test_simple_dollar(struct unit_test_state *uts)
- 	ut_asserteq(1, run_command("dollar_foo='bar quux", 0));
- 	/* Next line contains error message */
- 	ut_assert_skipline();
--	ut_assert_console_end();
-+
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/*
-+		 * For some strange reasons, the console is not empty after
-+		 * running above command.
-+		 * So, we reset it to not have side effects for other tests.
-+		 */
-+		console_record_reset_enable();
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_assert_console_end();
-+	}
- 
- 	ut_asserteq(1, run_command("dollar_foo=bar quux\"", 0));
- 	/* Two next lines contain error message */
- 	ut_assert_skipline();
- 	ut_assert_skipline();
--	ut_assert_console_end();
-+
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* See above comments. */
-+		console_record_reset_enable();
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_assert_console_end();
-+	}
- 
- 	ut_assertok(run_command("dollar_foo='bar \"quux'", 0));
- 
-@@ -71,17 +90,35 @@ static int hush_test_simple_dollar(struct unit_test_state *uts)
- 	 */
- 	console_record_reset_enable();
- 
--	ut_asserteq(1, run_command("dollar_foo=\"bar 'quux\"", 0));
--	/* Next line contains error message */
--	ut_assert_skipline();
--	ut_assert_console_end();
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/*
-+		 * Old parser returns an error because it waits for closing
-+		 * '\'', but this behavior is wrong as the '\'' is surrounded by
-+		 * '"', so no need to wait for a closing one.
-+		 */
-+		ut_assertok(run_command("dollar_foo=\"bar 'quux\"", 0));
-+
-+		ut_assertok(run_command("echo $dollar_foo", 0));
-+		ut_assert_nextline("bar 'quux");
-+		ut_assert_console_end();
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_asserteq(1, run_command("dollar_foo=\"bar 'quux\"", 0));
-+		/* Next line contains error message */
-+		ut_assert_skipline();
-+		ut_assert_console_end();
-+	}
- 
- 	ut_assertok(run_command("dollar_foo='bar quux'", 0));
- 	ut_assertok(run_command("echo $dollar_foo", 0));
- 	ut_assert_nextline("bar quux");
- 	ut_assert_console_end();
- 
--	puts("Beware: this test set local variable dollar_foo and it cannot be unset!");
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* Reset local variable. */
-+		ut_assertok(run_command("dollar_foo=", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		puts("Beware: this test set local variable dollar_foo and it cannot be unset!");
-+	}
- 
- 	return 0;
- }
-@@ -109,7 +146,12 @@ static int hush_test_env_dollar(struct unit_test_state *uts)
- 	/* Clean up setting the variable */
- 	env_set("env_foo", NULL);
- 
--	puts("Beware: this test set local variable env_foo and it cannot be unset!");
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* Reset local variable. */
-+		ut_assertok(run_command("env_foo=", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		puts("Beware: this test set local variable env_foo and it cannot be unset!");
-+	}
- 
- 	return 0;
- }
-@@ -144,7 +186,18 @@ static int hush_test_command_dollar(struct unit_test_state *uts)
- 	ut_assertok(run_command("dollar_bar='echo bar\\n'", 0));
- 
- 	ut_assertok(run_command("$dollar_bar", 0));
--	ut_assert_nextline("barn");
-+
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/*
-+		 * This difference seems to come from a bug solved in Busybox
-+		 * hush.
-+		 * Behavior of hush 2021 is coherent with bash and other shells.
-+		 */
-+		ut_assert_nextline("bar\\n");
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_assert_nextline("barn");
-+	}
-+
- 	ut_assert_console_end();
- 
- 	ut_assertok(run_command("dollar_bar='echo $bar'", 0));
-@@ -160,7 +213,13 @@ static int hush_test_command_dollar(struct unit_test_state *uts)
- 	ut_assert_nextline("quux");
- 	ut_assert_console_end();
- 
--	puts("Beware: this test sets local variable dollar_bar and dollar_quux and they cannot be unset!");
-+	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-+		/* Reset local variables. */
-+		ut_assertok(run_command("dollar_bar=", 0));
-+		ut_assertok(run_command("dollar_quux=", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		puts("Beware: this test sets local variable dollar_bar and dollar_quux and they cannot be unset!");
-+	}
- 
- 	return 0;
- }
+diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
+index 11870c51e8..a56ea6c5c8 100644
+--- a/common/cli_hush_upstream.c
++++ b/common/cli_hush_upstream.c
+@@ -6159,7 +6159,28 @@ static struct pipe *parse_stream(char **pstring,
+ 			if (parse_redirect(&ctx, redir_fd, redir_style, input))
+ 				goto parse_error_exitcode1;
+ 			continue; /* get next char */
+-#endif /* !__U_BOOT__ */
++#else /* __U_BOOT__ */
++			/*
++			 * In U-Boot, '<' and '>' can be used in test command to test if
++			 * a string is, alphabetically, before or after another.
++			 * In 2021 Busybox hush, we will keep the same behavior and so not treat
++			 * them as redirection operator.
++			 *
++			 * Indeed, in U-Boot, tests are handled by the test command and not by the
++			 * shell code.
++			 * So, better to give this character as input to test command.
++			 *
++			 * NOTE In my opinion, when you use '<' or '>' I am almost sure
++			 * you wanted to use "-gt" or "-lt" in place, so thinking to
++			 * escape these will make you should check your code (sh syntax
++			 * at this level is, for me, error prone).
++			 */
++			case '>':
++				fallthrough;
++			case '<':
++				o_addQchr(&ctx.word, ch);
++				continue;
++#endif /* __U_BOOT__ */
+ 		case '#':
+ 			if (ctx.word.length == 0 && !ctx.word.has_quoted_part) {
+ 				/* skip "#comment" */
 -- 
 2.34.1
 
