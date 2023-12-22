@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07BDC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 05:47:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCAC6C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 05:47:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0287877EC;
-	Fri, 22 Dec 2023 06:46:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4441E87650;
+	Fri, 22 Dec 2023 06:46:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GgWQ020N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="htqcuQBA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9949387650; Fri, 22 Dec 2023 06:46:44 +0100 (CET)
+ id 46BDB877C4; Fri, 22 Dec 2023 06:46:48 +0100 (CET)
 Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
  [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69B9E877E2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:46:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF50E87800
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:46:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
 Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1d3eabe9321so10466765ad.2
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 21:46:42 -0800 (PST)
+ d9443c01a7336-1d420aaa2abso789035ad.3
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 21:46:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703224001; x=1703828801; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703224004; x=1703828804; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yhonlz6dBLbPEeApf+akUUnz9ZMbYiPVL2+gHCwjZbA=;
- b=GgWQ020NZzSgn8Jw0dgJZFY+MfYu9+mdyfUmueeAV1Ay7CvrdJTOp+iwiSC0Fjdnn0
- Pup/zCr/W6tVQZr1OxxHaES5anhqCHQ+7Pe1dWlvCfgScSUQsbPYLWF3VfML91eldzNA
- CPBVxl3LY1hTn11Q9cd/KVgAKzbIjOkzw/OAq+Fgk79Rltz/187QNHuZUZ6n0cxPAz0C
- P7eIsQL/humT4HfmH6/2ZGeqKJsF/H0sy06XuNZiloFUbnJ/IQ62tMod2e2GMqhE6gNB
- GsyLSjrT69FbvMH/ImkRZtfYDie/SHB15+B1mpfvhPfbsFctXYA0goOZHI00XeCYy24a
- GZTg==
+ bh=W2+UgqjE6qQ0jTIYF3OlUrm8dqmAvIT1HiSjii4rjqU=;
+ b=htqcuQBAUMWVrGKp77i2GHvkZPac7r96Wg4M4w/P/0+WiH4IwV+qDRUQgSBF0iD3K2
+ ttORzABbHGZvFPWkJ8E7RehTModfxn4x6Gora6VWBT3TdCungdDlQBz4H4COTO2JAVDC
+ Z33VU/j4bhJCHH4KufyhASYsFSW+GgL+Nbidgf/oshhl4HJt+z23GEUWR+yoBnwoRvvD
+ aB0qLQVXjhAQx6EyFPpO/pSq6Y+oRwcF5APSe0Q2z7Bx7dnBg38iPit/KwhE95iwGihy
+ i9auTKlEYGJFzpTGe8inlrqpw496Su3RQU/gQdozMwSayoK9X34qQ1us3oLmaqwHvLjy
+ Q1iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703224001; x=1703828801;
+ d=1e100.net; s=20230601; t=1703224004; x=1703828804;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yhonlz6dBLbPEeApf+akUUnz9ZMbYiPVL2+gHCwjZbA=;
- b=hyGXNAd3hFl3K7decSKFBJA4MmyyBacNzbkxzDEDNNEpfyPSQrhBmCHVjljNutVCj1
- B6vguovg3eWJuUXJv7zm2a4lO7lJVev3z+dOm2MdSzNlwFfeUVZ72fkXUZ/ZDd2U+Y8/
- w571bj8r3Z+8ByCb/cQyyjEDqsD83bKx6rYbVa5kb5ut53cMLEeDbnLrH5QKTnmRWwrb
- 0SqWDKNMWtWf+BnYiqSzFU1D6KWEOYivtluvMyfk6CTGxF4XF8VWZ9jXv04O04zOy45c
- W/1jB8CucPUusS+t9QTGBBGCMN/YQrpf6mEf5TExDO9Go4ozMxhndL6ONFlYSQn1rT6c
- ENHA==
-X-Gm-Message-State: AOJu0YxGxm8/cFtmafwao/JBQdfZKHAmoAm4BPbt5dryT5Yns3aaYjJq
- g9llWjsmSCrJoDD6kDJI5aKnvlrR0lo=
-X-Google-Smtp-Source: AGHT+IH7pgudbKnh5ho89uH4+GA6QpBNdnZKEsguZVF4kDU/VomE55G1gDYzQ4s+3qjV2gHUPyJ6xA==
-X-Received: by 2002:a17:902:f814:b0:1d4:8a3:52f3 with SMTP id
- ix20-20020a170902f81400b001d408a352f3mr497821plb.32.1703224000799; 
- Thu, 21 Dec 2023 21:46:40 -0800 (PST)
+ bh=W2+UgqjE6qQ0jTIYF3OlUrm8dqmAvIT1HiSjii4rjqU=;
+ b=JdIS+VYGGte53ku60m0f7D3rk4/GPX/EZXuvrdCnUhfXArnTA1Sbx+ElvlZO2hqIdL
+ fnu5BGzRBN8hvzmeAjnX8dQWzoO9U9QShxEiRWTIq++FAYUavZ7b3ADc737WVVO+z5Md
+ FznaXwebGhaQJdyqeEO99vxhzAUXsYG8CuXmwERMpjm6iOeX/KJW1CxFj8NN9opsgwHX
+ jrXpAMosE0JSYN1M6KnmYbk4VOP1//IWYPMR/yd+KkKkUN1+UyflN6D7CjWhcrYx/Kko
+ LNJ7yI+VxIswkie39np1qXUvHJAJw/GNOid4b83X59vIoKPD0LO8rr0xqHTcbLRDq6wB
+ EYMQ==
+X-Gm-Message-State: AOJu0Yw69M5pJMOKXwco42QyxwCwlMoFRfSn790Em0hL2tv2L7jU3BRZ
+ 8rSl3m1SPX9Ha83XKg9158ZPLcut0Yo=
+X-Google-Smtp-Source: AGHT+IFybw0dWAMLzMyWx8Mz86dbdmUNkfG39x6pAxMFBk2zJnIIEbPRuS4jrkJvQKvaW7iRbJyf6Q==
+X-Received: by 2002:a17:903:2346:b0:1d3:ff24:b3b5 with SMTP id
+ c6-20020a170903234600b001d3ff24b3b5mr610620plh.92.1703224004178; 
+ Thu, 21 Dec 2023 21:46:44 -0800 (PST)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- h9-20020a170902704900b001d05456394csm2590661plt.28.2023.12.21.21.46.37
+ h9-20020a170902704900b001d05456394csm2590661plt.28.2023.12.21.21.46.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 21:46:40 -0800 (PST)
+ Thu, 21 Dec 2023 21:46:43 -0800 (PST)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, d-gole@ti.com, tkuw584924@gmail.com,
  Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH v2 3/9] mtd: spi-nor-core: Rework spansion_read_any_reg() to
- support Octal DTR mode
-Date: Fri, 22 Dec 2023 14:46:00 +0900
-Message-Id: <f3fa3d21143b36b0f7993b5c731c885571136e5d.1703220284.git.Takahiro.Kuwano@infineon.com>
+Subject: [PATCH v2 4/9] mtd: spi-nor-core: Use CLPEF(0x82) as alternative to
+ CLSR(0x30) for S25 and S28
+Date: Fri, 22 Dec 2023 14:46:01 +0900
+Message-Id: <ceb99692ba605ef079c6f796082055bed047248b.1703220284.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1703220284.git.Takahiro.Kuwano@infineon.com>
 References: <cover.1703220284.git.Takahiro.Kuwano@infineon.com>
@@ -97,63 +97,45 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-In Infineon multi-die package parts, we need to use Read Any Register op
-to read status register in 2nd or further die. Infineon S28HS02GT is
-dual-die package and supports Octal DTR interface. To support this,
-spansion_read_any_reg() needs to be reworked. Implementation is similar
-to existing read_sr() that already supports Octal DTR mode.
+Infineon(Cypress) S28Hx-T family does not support legacy CLSR(0x30) opcode.
+Instead, it supports CLPEF(0x82) which has the same functionality as CLSR.
+spansion_sr_ready() is for multi-die package parts including S28HS02GT, so
+we need to use CLPEF instead of CLSR.
+
+This change does not affect to S25x02GT which uses spansion_sr_ready() as
+S25Hx-T family also supports CLPEF(0x82) as well as CLSR(0x30).
 
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 34 +++++++++++++++++++++++++++++-----
- 1 file changed, 29 insertions(+), 5 deletions(-)
+ drivers/mtd/spi/spi-nor-core.c | 2 +-
+ include/linux/mtd/spi-nor.h    | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index f62a2f2008..3f761b9b9e 100644
+index 3f761b9b9e..20e82aaa65 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -331,12 +331,36 @@ static int spansion_read_any_reg(struct spi_nor *nor, u32 addr, u8 dummy,
- 				 u8 *val)
- {
- 	struct spi_mem_op op =
--		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_RD_ANY_REG, 1),
--			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 1),
--			   SPI_MEM_OP_DUMMY(dummy / 8, 1),
--			   SPI_MEM_OP_DATA_IN(1, NULL, 1));
-+		SPI_MEM_OP(SPI_MEM_OP_CMD(SPINOR_OP_RD_ANY_REG, 0),
-+			   SPI_MEM_OP_ADDR(nor->addr_mode_nbytes, addr, 0),
-+			   SPI_MEM_OP_DUMMY(dummy, 0),
-+			   SPI_MEM_OP_DATA_IN(1, NULL, 0));
-+	u8 buf[2];
-+	int ret;
-+
-+	spi_nor_setup_op(nor, &op, nor->reg_proto);
-+
-+	/*
-+	 * In Octal DTR mode, the number of address bytes is always 4 regardless
-+	 * of addressing mode setting.
-+	 */
-+	if (nor->reg_proto == SNOR_PROTO_8_8_8_DTR)
-+		op.addr.nbytes = 4;
-+
-+	/*
-+	 * We don't want to read only one byte in DTR mode. So, read 2 and then
-+	 * discard the second byte.
-+	 */
-+	if (spi_nor_protocol_is_dtr(nor->reg_proto))
-+		op.data.nbytes = 2;
+@@ -752,7 +752,7 @@ static int spansion_sr_ready(struct spi_nor *nor, u32 addr_base, u8 dummy)
+ 		else
+ 			dev_dbg(nor->dev, "Programming Error occurred\n");
  
--	return spi_nor_read_write_reg(nor, &op, val);
-+	ret = spi_nor_read_write_reg(nor, &op, buf);
-+	if (ret)
-+		return ret;
-+
-+	*val = buf[0];
-+
-+	return 0;
- }
+-		nor->write_reg(nor, SPINOR_OP_CLSR, NULL, 0);
++		nor->write_reg(nor, SPINOR_OP_CYPRESS_CLPEF, NULL, 0);
+ 		return -EIO;
+ 	}
  
- static int spansion_write_any_reg(struct spi_nor *nor, u32 addr, u8 val)
+diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
+index ebe38306a1..8a94e12037 100644
+--- a/include/linux/mtd/spi-nor.h
++++ b/include/linux/mtd/spi-nor.h
+@@ -180,6 +180,7 @@
+ /* For Cypress flash. */
+ #define SPINOR_OP_RD_ANY_REG			0x65	/* Read any register */
+ #define SPINOR_OP_WR_ANY_REG			0x71	/* Write any register */
++#define SPINOR_OP_CYPRESS_CLPEF			0x82	/* Clear P/E err flag */
+ #define SPINOR_REG_CYPRESS_ARCFN		0x00000006
+ #define SPINOR_REG_CYPRESS_STR1V		0x00800000
+ #define SPINOR_REG_CYPRESS_CFR1V		0x00800002
 -- 
 2.34.1
 
