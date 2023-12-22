@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CDFC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 11:12:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A55C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 11:19:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87FA58784C;
-	Fri, 22 Dec 2023 12:12:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD61487842;
+	Fri, 22 Dec 2023 12:19:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="imaJ15Wp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HXDkwb/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0950E869B6; Fri, 22 Dec 2023 12:12:13 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id B537C87858; Fri, 22 Dec 2023 12:19:03 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FB888784C
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 12:12:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB1AB87842
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 12:19:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-50e1112b95cso1963643e87.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 03:12:11 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50e6bcca684so301340e87.0
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 03:19:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703243530; x=1703848330; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703243941; x=1703848741; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g4y0n3zm48OfrSDy0WYEOAZVmoIzBaptmWeYQEkS0fA=;
- b=imaJ15WpQLLGmpqkXpmwLjDyRJSscDiBrz1EHvvrRT2X7QZcIEVuzVUEDZTk57d9gv
- qRChVrT/OzNH8ISppAIfBcLTMSOyQIuQmbl7KKLPxlNEZsohgqtq24DzlPPk9rYiLZF5
- c7SIPftKYPatVuORSTpYTiMKnggsV7d29NiQB843ze9y+urqR07LLPyQd7rxD4+bFY79
- aXzM6uOmzIWIIw1Smy8AmcEwQdjf5+omBseFbD6FZAHW1rnP611iyaxQjJD/SWGlwiRn
- pAh+SxEat9YOBw+TJ3Hl6aSunltpi1PRyzpOiIItQrnd50KQp8iteOtDHUZfVf8IxJk0
- AuCQ==
+ bh=IzUXznVYMwPbESVHN4lPG96ZwDdfET0NtrqQAbunPu8=;
+ b=HXDkwb/XFFAwB7zj8dJyydrK8mRHMRvN2ocpwaNtlWbWIZrgpXIllUWGvrjxax056C
+ SLt813W6WEc+SLQqdTlsjfKTmMlB+VgY53/XeHXOpxcHYUgVTpSqxNUX6ReuoGP3Rbm1
+ dqE0XqVjaJx6rv/oQu44Q2sSuRcVT07Z+SPZQQovVo3MAImCaUVRrIU6wHBXn0XeIYM9
+ rziKJyHETd7aaUeigW0Rgd61eehz23+KWs7LXlV27s/rdQcy3AS3p9etffFp5lMRLCCy
+ 36iaxb/Tqg+80VKkFLISc1vmqtSLUpCLQtIXB90/w5gPAPaC8EJPfxVMGSYksPK70QB+
+ fKsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703243530; x=1703848330;
+ d=1e100.net; s=20230601; t=1703243941; x=1703848741;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g4y0n3zm48OfrSDy0WYEOAZVmoIzBaptmWeYQEkS0fA=;
- b=qMAe/EDhaSKt5Xt7m3ehKnZJ5OXoqX3FK1RefmMKnEw7XHy9UizjVGpL2IVgFA9Z1A
- C918KDmDEUA+N4Evcx0uLIBukavIKTNvv9es2vGX+QR2VFj/4L5UbgEONVDvoHcn+mDI
- WfLVaBbrNpd8bEX76ztZvSAMv+fpDeDv0AYWduBNNW7YiGuIYwSXKZGOeXjrWsFwtxby
- PgXxYDKMmxxToYmS0v6mZM42Jp0hBGSKLvBTjzvvKyMmtqVcK1nT11YFjM4VP27Ly4Va
- FD4p13CLTqxcjZA4jDGnhFnnYC0nypXr6A46Yp7ebkVwufJWNzGD22gHNFR6ypYrPH3Q
- clGg==
-X-Gm-Message-State: AOJu0YyQEZuexmbYOYHYkCH3sQTOf8U+UC0CQmkwfOEB/AEJ/X5D6kEw
- s2pMWZ8n/h7T7XtCWCNUTPQu+Xc8hr5XwlzbY9EHqAKkTJEqxA==
-X-Google-Smtp-Source: AGHT+IHpnXGZ2xjZDJo1bH3AOVBeXM1QnYscbLpkkJQrLzmOKvwvssqg0APO5V41ASojk61ZUWtPiAddobVhciHIWWg=
-X-Received: by 2002:ac2:5e33:0:b0:50e:6b49:dcc with SMTP id
- o19-20020ac25e33000000b0050e6b490dccmr199321lfg.117.1703243530389; Fri, 22
- Dec 2023 03:12:10 -0800 (PST)
+ bh=IzUXznVYMwPbESVHN4lPG96ZwDdfET0NtrqQAbunPu8=;
+ b=qIhpGkVGbboq3TSjMPwUIdI554AbxzDKxWlU3TvvAg4u+yL20T1H7iVNIuGVgqY6Ja
+ wpFxu76rJoQJ6oV/zYPYGaOkPABuGN+QTSKmt/+VPlxfMJ4OL+G3yUK7HNlpIDkbGm9p
+ WzaJdCmrovHFFZBrNBZnALJDIp5cIyfDgQbwxIE6/axvzQGEXe8awt8BVxa1mD7zKlu5
+ v3+bUI4AYtF5B7MiSSE7zV2Y1xiGT+h1tXPjxqia4uYRs61rBW/pwAku3z6B/JJm+uUZ
+ zZ+Kbn8cWMpwyxB0C2Xy51pJrf+BOGXi6jqlgEvdndbZ5f+LH7bcaY28mVj4isJ9KWnw
+ DA+Q==
+X-Gm-Message-State: AOJu0Yyh3uXmsntLCdmez/iiXC0dMvQnzjFufDAXu0qVWv8xieW1QPMU
+ VPtaYRjbxmZ0OkgRJpKpmfJp7K+lK7NZz/YzeUKBHgYuEJ+BKQ==
+X-Google-Smtp-Source: AGHT+IFAl7uiyMuWvQPQA7z8BLcs3Db6FibXY32oiqjh1dTi3DL/l/c1LTkOPjoB5yJ7P96V7K7/465WFf6FFUnnGxo=
+X-Received: by 2002:a19:2d16:0:b0:50e:307a:80fe with SMTP id
+ k22-20020a192d16000000b0050e307a80femr305520lfj.188.1703243940884; Fri, 22
+ Dec 2023 03:19:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20231221004030.581388-1-raymond.mao@linaro.org>
- <20231221004030.581388-4-raymond.mao@linaro.org>
-In-Reply-To: <20231221004030.581388-4-raymond.mao@linaro.org>
+ <20231221004030.581388-7-raymond.mao@linaro.org>
+In-Reply-To: <20231221004030.581388-7-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Dec 2023 13:11:34 +0200
-Message-ID: <CAC_iWjL3JfxVA0HW_2vbV3ivWDm0H00R=Mj4to_BC2b2gNY4FA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/9] bloblist: refactor of bloblist_reloc()
+Date: Fri, 22 Dec 2023 13:18:24 +0200
+Message-ID: <CAC_iWjLNDo_jDUQ9gdimr+zfRtAGbJ15gP2niNcvb2V7aU_LzQ@mail.gmail.com>
+Subject: Re: [PATCH v2 6/9] qemu-arm: Get bloblist from boot arguments
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Devarsh Thakkar <devarsht@ti.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
  Shiji Yang <yangshiji66@outlook.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>, 
- Sean Anderson <sean.anderson@seco.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
+ Baruch Siach <baruch@tkos.co.il>, Michal Simek <michal.simek@amd.com>,
+ Stefan Roese <sr@denx.de>, Sean Anderson <sean.anderson@seco.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,49 +93,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
-
-On Thu, 21 Dec 2023 at 02:41, Raymond Mao <raymond.mao@linaro.org> wrote:
+>  #endif
 >
-> The current bloblist pointer and size can be retrieved from global
-> data, so we don't need to pass them from the function arguments.
-> This change also help to remove all external access of gd->bloblist
-> outside of bloblist module.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-
-[...]
-
->         }
->  }
->
-> -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
-> +void bloblist_reloc(void *to, uint to_size)
+> +/* Boot parameters saved from start.S */
+> +extern unsigned long saved_args[];
+> +
+>  int board_init(void)
 >  {
->         struct bloblist_hdr *hdr;
->
-> -       memcpy(to, from, from_size);
-> +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
->         hdr = to;
-> -       hdr->total_size = to_size;
-> +       if (to_size < gd->bloblist->total_size)
-
-What's the size of *to? Is it equal to to_size?
-Because if to_size can be smaller that gd->bloblist->total_size the
-memcpy above is wrong
-
-> +               hdr->total_size = gd->bloblist->total_size;
-> +       else
-> +               hdr->total_size = to_size;
-> +       gd->bloblist = to;
+>         return 0;
+> @@ -144,6 +148,35 @@ void *board_fdt_blob_setup(int *err)
+>         return (void *)CFG_SYS_SDRAM_BASE;
 >  }
 >
->  int bloblist_init(void)
-> diff --git a/common/board_f.c b/common/board_f.c
-> index d4d7d01f8f..00b0430889 100644
-> --- a/common/board_f.c
+> +int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size)
+> +{
+> +       int ret = -ENOENT;
+> +       unsigned long reg_fdt;
+> +       unsigned long reg_zero;
+> +
+> +       if (!IS_ENABLED(CONFIG_OF_BOARD) || !IS_ENABLED(CONFIG_BLOBLIST))
+> +               return -ENOENT;
+> +
+> +       ret = bloblist_check(saved_args[3], size);
+> +       if (ret)
+> +               return ret;
+> +
+> +       if (IS_ENABLED(CONFIG_ARM64)) {
+> +               reg_fdt = saved_args[0];
+> +               reg_zero = saved_args[2];
+> +       } else {
+> +               reg_fdt = saved_args[2];
+> +               reg_zero = saved_args[0];
+
+I think it's better if we fix up the order in the low-level asm code.
+Store the variables in the 'correct' order there and get rid of this
+if
 
 [...]
-
 /Ilias
