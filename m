@@ -4,71 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E61AC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB412C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:05:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D23AF87858;
-	Fri, 22 Dec 2023 13:02:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 12F9587861;
+	Fri, 22 Dec 2023 13:05:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R5Dna102";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="vvoYRKQP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AC888785D; Fri, 22 Dec 2023 13:02:46 +0100 (CET)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id A468387868; Fri, 22 Dec 2023 13:05:53 +0100 (CET)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 386CD8783E
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:02:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 81A7387858
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:05:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-50e6a806e4aso420110e87.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:02:44 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-20403a18a51so1015587fac.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:05:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703246563; x=1703851363; darn=lists.denx.de;
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703246750; x=1703851550;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TCFp0sqNzu9Nr24TU0UE1DTqZp6VRcthmHkvzc7IsP4=;
- b=R5Dna102CCSZUGBlA5CXeDyp5e6VyOuT6DzVVfuLmQLpsO+QNvBf5PWnSTqNLdzPh3
- MpyTKI+XFFe/7XnbMla4tKxSZ3AmgLa5w1BcP5VKJSV9RGVL/+NI/BKbDJgaN7GPgSyb
- J/lWHw4xSlSydYU8abo3q7ufcz5Hv9m5UO7oYq79pyznNjkz2JG64K2qssOEPbR0FpDZ
- QxbdDx8fMdudDyvpkwta+2twuHXnBXuM06juK5jYGB73EmEghkBuZC8cz9mw/mX5KpSi
- GkIAVBlPweF4ANA/bjrnWTSZtBOYtWeSpkwfg+uqMi1r9Tqmp34TrcTCWhNy6LDKKQkx
- CjPg==
+ bh=PLiqvnLrKlOANE7f0eFliK8JUtHjed31p/45EBPmMrs=;
+ b=vvoYRKQPnCaB5ewgMmgisj6lssBjgMbqbV09lil06qD5ys8MQ03P65QyS3il+ywYKK
+ tNTb3TtPyuvSBVOVYawsHQD/mvuWma0tusc7op9JhQur52R5+dzsgBOE/HgJKkptPV+v
+ joK0QTDMvR3Yfx3qxaAH4GyUVyA9xDNyG4GVfOqPEVhk8i00rXmGdTXKgZfKj05VGonp
+ g97h4L6XUllPIbH5u1ievU00WTNtAtM/HP3UveK3tM/eM5uv1haMfss8ZlnkDe0bAJ0x
+ IyWdfm6BVIwY1EwJQMRSIjILzCyyHQbxKgDfrDJi83J+w0dRnaMvr7VF83o++hJYGXgF
+ v5rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703246563; x=1703851363;
+ d=1e100.net; s=20230601; t=1703246750; x=1703851550;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TCFp0sqNzu9Nr24TU0UE1DTqZp6VRcthmHkvzc7IsP4=;
- b=MutOcZ59XufBfvUOZB3UKd5JTTC9RB5YWoQi2IbkTHc4iTwipC6yhMfOjvDyAMbwis
- GQQ5tKpxMaZ+Bdty81pXYmTvd5gxNclo6bUhpubTtelRXr6yOyqYgcMys9LdAqJd6Vwk
- c3TMgBQ1os9Ofp+OHTznMfzN+QcdxjM/et3ErT1ks3qCtXziUrLpgsIE8pECrYSpBICZ
- v6hTA5y5HBNmpuLLEc0YEhGrhWyGScfAaJ6U093iPZwemcDSTGavvCze5D8Y3Mm4/KWm
- x/o9TDT0J00lpLRFypXqyZCm5VP3tCzh1bYa+i8O1Y92krzyG8f5H6WpGo1pT1VSoU46
- +dag==
-X-Gm-Message-State: AOJu0YwxlRV6N4J6UyPB6LZ6o37U+j4XRAzKQKn4ApUblTIpP47DWTjp
- dPGKPPDTCG1oBCsn0UXNR0xXOBwCBBKNHKebgFSgoLHWyt8DNg==
-X-Google-Smtp-Source: AGHT+IFLXbzUv2UyPBBqCmglWcdyq9Pb6et7RrDxMiKCOLPKm8burGtrIFoEn9poo0LICK0S4bxh7dYM5vMWrS3xlRE=
-X-Received: by 2002:a19:4352:0:b0:50e:4bdf:f943 with SMTP id
- m18-20020a194352000000b0050e4bdff943mr556959lfj.69.1703246563351; Fri, 22 Dec
- 2023 04:02:43 -0800 (PST)
+ bh=PLiqvnLrKlOANE7f0eFliK8JUtHjed31p/45EBPmMrs=;
+ b=pVzj+V4xQHytiHbLqHeFPiemcPrwqg7gXH5v99ec6w4QieVlX7FjetcfIxie1l9890
+ DV1YpZqzPOU9z5u6bJP7AUTUMYxdoEpKQ3QiBCULP9TKLkRpFVmC7z4uQLn40+WN1AOv
+ E/37ljkOzTymCFx/F7af0KOAGz1ieTjwmshh5EmweiJvnlxnFoKemFVJ0apCdDRu9aUe
+ PFdsePaLfYdpcFmImjn1IHZ8ymijpivw64PdJYe1QrYjtjsXGuzX5g969pFcKBR6+2W1
+ F0dYdKRpRF7PpgEq3g46z7oBpPVX2k9eHww6/HrLz6/A9XTXInZg2Dodk5J9o5KOPSrV
+ Cy7g==
+X-Gm-Message-State: AOJu0Yy8deg7/v3jupZEZ1ZBYCGIXW6QIushcD2r26uYiBiVunLxSmYG
+ LJzxO9Yxd1iM4VAX5qhSE2xuwSpqmT4hh3iCFyXmnEOahr8ZrA==
+X-Google-Smtp-Source: AGHT+IHItB5v4RtkWIIDCRKcaNRKjplhWcb0UvSSX1sIA9cx3THcQ1IbbSehiJMrBpb0SbP2DDYgg015vtcW5ngnoQ0=
+X-Received: by 2002:a05:6870:f69d:b0:203:bcd8:c5c2 with SMTP id
+ el29-20020a056870f69d00b00203bcd8c5c2mr1305144oab.78.1703246750184; Fri, 22
+ Dec 2023 04:05:50 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
-In-Reply-To: <CAFLszTicT2yzsm+KAjRyqzV3bt1_W2XYJaCExX-LHNZ6+tFUkA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Dec 2023 14:02:07 +0200
-Message-ID: <CAC_iWjK2Rm_DPhk+1PwFmdARJ_7svNuKd3GTKUwzEm=+iWZS6A@mail.gmail.com>
-Subject: Re: Proposal: U-Boot memory management
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+References: <20231119172310.1307942-1-i@shantur.com>
+ <CAMty3ZDK3jcscgNfMZj4SySK6Kd9L1ZJ6nwaM3eJU_VTBA7yvw@mail.gmail.com>
+ <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
+ <CALeDE9NgZ_zRGgxo2kBaKYAKF-8tKmt-Eoddxf=8U2Q=T29Yjg@mail.gmail.com>
+ <CABEcMwUDnAQG3h-jrPEim2u_19UMtqhjcG5cSiE-QpjawHACCQ@mail.gmail.com>
+ <20231209205627.GI2513409@bill-the-cat>
+ <CABEcMwXYCczbTRVgqGC=USRJw138tDM0RkbmGoR4zSY7pBj1PA@mail.gmail.com>
+ <CAPnjgZ3gEoOFxahZ2mg=MTQTmBPyCBphS8uVcpSSwq2bg4eJwQ@mail.gmail.com>
+ <20231211181918.GS2513409@bill-the-cat>
+ <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
+ <20231211182710.GT2513409@bill-the-cat>
+In-Reply-To: <20231211182710.GT2513409@bill-the-cat>
+From: Shantur Rathore <i@shantur.com>
+Date: Fri, 22 Dec 2023 12:05:39 +0000
+Message-ID: <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
+ u-boot@lists.denx.de, Bharat Gooty <bharat.gooty@broadcom.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,37 +100,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+Hi all,
 
-I'll respond to the rest more thoroughly but I since I caught this early,
-
-[...]
-
+On Mon, Dec 11, 2023 at 6:27=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> 5. Avoid calling efi_allocate_pages() and efi_allocate_pool() outside
-> boot-time services. This solves the problem 6. If memory is needed by
-> an app, allocate it with malloc() and see 3. There are only two
-> efi_allocate_pages() (smbios and efi_runtime). There are more calls of
-> efi_allocate_pool(), but most of these seem easy to fix up. For
-> example, efi_init_event_log() allocates a buffer, but this can be
-> allocated in normal malloc() space or in a bloblist.
-
-The TCG event log is only valid in the EFI world and is described by
-the EFI spec extensions [0]. I prefer it to remain as is
-
+> On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> [snip]
+> > > I think in hind-sight too much stuff is omitted without BOOTSTD_FULL.
+> > > The option itself then enables other stuff too by default, but some
+> > > parts of the bootflow command itself should be visible even without F=
+ULL
+> > > to make things easier on the user.
+> >
+> > At the time the goal was to avoid growth compared to the distro
+> > scripts. We could perhaps add some more things in with BOOTSTD_FULL
+> > but still have it as an option?
 >
-> 6. Don't worry too much about whether EFI will be used for booting.
-> The cost is likely not that great: use bootstage to measure it as is
-> done for driver model. Try to minmise the cost of its tables,
-> particularly for execution time, but otherwise just rely on the
-> ability to disable EFI_LOADER.
->
-> =E2=80=93
->
-> Regards,
-> Simon
+> Right. But now that we've tried this, some of the feedback has been that
+> it's just too minimal right now. Like looking at the help message for
+> bootflow, list and info should probably always be available. And maybe
+> the flags for "scan" should be re-thought? Too late to change things now
+> but "bootflow scan -b" should maybe how it's always been for "scan and
+> boot".
 
-[0] https://trustedcomputinggroup.org/wp-content/uploads/EFI-Protocol-Speci=
-fication-rev13-160330final.pdf
+What would be the preferred approach for this patch?
+Is it to update the default capabilities of bootflow or we can have this pa=
+tch?
+
 Thanks
-/Ilias
+Shantur
+
+>
+> --
+> Tom
