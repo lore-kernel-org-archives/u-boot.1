@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1BCC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 14:09:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F677C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 14:43:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D0E2877E2;
-	Fri, 22 Dec 2023 15:09:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C0CB877CD;
+	Fri, 22 Dec 2023 15:43:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iAj/oVoR";
+	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="b87t+XZK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B83EB8775F; Fri, 22 Dec 2023 15:09:06 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 2749B8785F; Fri, 22 Dec 2023 15:43:47 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633BB877F1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 15:09:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 45B27877B2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 15:43:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3bb87bd6884so661190b6e.3
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:09:01 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=shantur.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-40c41b43e1eso23057735e9.1
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:43:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703254140; x=1703858940; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=17GXyaS2fxO5LiO+TC8Wxk3iIbCu0MCR/bji4+fxoDQ=;
- b=iAj/oVoRYsm0YYWTh45zY2i30cMHR6OLeaMU3xKbGu0ryNCMPN2+geU36WIMjanFcZ
- vhdmYyTS4+pYaAGLkNmkGjB8wQ/0Akn/B/yxiKD/XDpN8ulfNBV+hOWTOcDdZmMlr4hk
- mgkLxDVbV80vOF7do9MGu1QqBVVZWzxLWAWpbkUzTVJA8LW6Xc3HT+SsqsweC41YyADy
- cevbZurvtD3tyjQ4LPBQVUktCk8mcEY03z6dXUcwnN9OiRZ5neI7F8vi8LQHLIjcKUdx
- 9QMG3sH9W99lrFr083GECk0zKmnu0xeRCaJzSxxYcBWJSpY9/94hm0PD3JYTdn+uKmJ1
- oLxg==
+ d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703256224; x=1703861024;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6ug1b/u0jEH/GlOKuclvLQBMpKrr0p4fGjy0qRoQtGo=;
+ b=b87t+XZKyFHxw5/USg2T8/z0++DNNBbbof3A4xdElrkbZLkdi6SlJxzFABDSt8I/yR
+ uyEAtfC6zJcTZ04ZDIjmzRGaFvIYvAVr1Bl9lDvZA6EGcjn8iCjicrTaFJxdPQOVd5xX
+ jALT+Tj6j4FCxs642nJX80lXBxUQrXSH4N8ohgP4weCW1Sh/bbZa/Ais0Su7PKZTG4Ej
+ 7IZyNksP/JMvrTkOUG7WQCJ3SD1hstpyZJiTJFLRo21CK6J22nLalZir50f4kmgLWFD4
+ auYLJWCVyRPFZmnBxPbHfpD3rN0UFQDellFHW5ZdU3XCYatIMEASpmuMVgutTY1JinhF
+ 3tFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703254140; x=1703858940;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1703256224; x=1703861024;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=17GXyaS2fxO5LiO+TC8Wxk3iIbCu0MCR/bji4+fxoDQ=;
- b=IvcqYDljq5GfnR2AW4kLvoKQFJw5b773HGpidjdRRpqcKNopsSev/IpPZKX02GqLUk
- RwOAuk6Lv4i/L5Wg4QfPysEGAah61b5ayXnkp9Sg8uoW313IrHVaAafvetZOkPm9GcPL
- DLLbBEL1UCk+PUNsc6k5Qmw7GDB7Gss0gOfyQitad75CvyUb7Ms77ch2lsXveP/PiczF
- ht2dYZV5wfA+ADgh7iHVI6AXoQjkDVB4GcVjebicgHCa8nSyPkRsscEbN35XQ7cPKmdO
- 0jrs/296omGDIWd9xAaHE70HdSFy359mkNJDFRuvEmFm9IEdFOwHXWXXQF552+R5E+k1
- Z7qw==
-X-Gm-Message-State: AOJu0YwSDhU3eEkiuUuCUD/ECYcb9F1JfElupM8LjKXT4BZuzL4/dPjP
- 0ONeDvlwSzZD9uPqdOkmkjDhNWHsPMqW52JbRw9iwDftnZnLKg==
-X-Google-Smtp-Source: AGHT+IF0EBO4VEDd9rCiFdOBaT/bfsW7WinaIYgqzq0CjOuRaqmWWNiTPzdnuCbOPMylezliV5Js42Y7RohI6lHHozo=
-X-Received: by 2002:a05:6808:320f:b0:3bb:7c06:a713 with SMTP id
- cb15-20020a056808320f00b003bb7c06a713mr1333111oib.112.1703254139818; Fri, 22
- Dec 2023 06:08:59 -0800 (PST)
+ bh=6ug1b/u0jEH/GlOKuclvLQBMpKrr0p4fGjy0qRoQtGo=;
+ b=Hmw9/WeQgvJPQB6W13Az7EQYUTebMjVy9WIcL065xxTbQ4rfISQJGC2tFgooeMrHYW
+ j4Jp7W8/Jq3bXP7rqcUhkJRihGfu7Dh6Mf0kLbdFBjYtjixOZxGQ2tBs2Y2APjejkFvH
+ 1oA2CQ7oG2ZFgMScNe00dplz5dQM7vRr+3ec/7GEf5eL3GJ6yLSvXJ70apzgi+1vqVtL
+ Hi7j0p4hWUXSXreNUmrUTivk/+cLUW4nnmTSVEy/Qm58i58piuqtUEzVNwAZAys+eCm0
+ gn9UzmI1w8sUMlogziZ//C64T25cN951fa+caRlYDeGJ4LQ7Vhh6xVXkzQKi5OQReRdb
+ JL7w==
+X-Gm-Message-State: AOJu0YzbgHIDHqpOotv+Y50lyQ+eIBqC2Kd7vYq10xy8AZ50Zq1MohnT
+ JAnMPRyHwqg3d23Za9FjaEEXxnTZPjdNhw==
+X-Google-Smtp-Source: AGHT+IEMNAVSTiYymuGnBRWlgKwVc9khdrS6OiiQ9aXP559QadJhozB9Bww+IHs97MxZAmXnS4SBZA==
+X-Received: by 2002:a7b:cb8f:0:b0:40d:3756:97d7 with SMTP id
+ m15-20020a7bcb8f000000b0040d375697d7mr667822wmi.148.1703256224640; 
+ Fri, 22 Dec 2023 06:43:44 -0800 (PST)
+Received: from localhost.localdomain (host-212-159-138-247.static.as13285.net.
+ [212.159.138.247]) by smtp.gmail.com with ESMTPSA id
+ f18-20020a5d50d2000000b003366827c9c6sm4478221wrt.2.2023.12.22.06.43.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 06:43:44 -0800 (PST)
+From: Shantur Rathore <i@shantur.com>
+To: marex@denx.de
+Cc: bmeng.cn@gmail.com, clamor95@gmail.com, Shantur Rathore <i@shantur.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH v4] dts: rockpro64: Disable usb regulators-always-on
+Date: Fri, 22 Dec 2023 14:42:35 +0000
+Message-Id: <20231222144236.509978-1-i@shantur.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20231222061208.3009970-1-sumit.garg@linaro.org>
- <20231222061208.3009970-6-sumit.garg@linaro.org>
- <20231222123504.GA2513409@bill-the-cat>
- <CAFA6WYNo3mNE94tHo0-iogbk49ZSo4WXzRWPME=XPZ7F1H5a8g@mail.gmail.com>
- <20231222135639.GC2513409@bill-the-cat>
-In-Reply-To: <20231222135639.GC2513409@bill-the-cat>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 22 Dec 2023 19:38:48 +0530
-Message-ID: <CAFA6WYOWqwOwhLYooNSS32E-WwAfGRyXZjG=dgXXJyOjnzGA3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 5/8] doc: devicetree: Updates for devicetree-rebasing
- subtree
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
- rfried.dev@gmail.com, marex@denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,54 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Dec 2023 at 19:26, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Dec 22, 2023 at 07:18:05PM +0530, Sumit Garg wrote:
-> > On Fri, 22 Dec 2023 at 18:05, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Dec 22, 2023 at 11:42:05AM +0530, Sumit Garg wrote:
-> > >
-> > > > Encourage SoC/board maintainers to migrate to using devicetree-rebasing
-> > > > subtree and maintain a regular sync with Linux kernel devicetree files
-> > > > and bindings.
-> > > >
-> > > > Along with that add documentation regarding how to run DT bindings
-> > > > schema checks.
-> > > >
-> > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > > ---
-> > > >  doc/develop/devicetree/control.rst | 108 +++++++++++++++++++++++------
-> > > >  1 file changed, 86 insertions(+), 22 deletions(-)
-> > > [snip]
-> > > > @@ -81,18 +94,21 @@ Failing that, you could write one from scratch yourself!
-> > > >  Configuration
-> > > >  -------------
-> > > >
-> > > > -Use::
-> > > > +Traditionally, U-Boot placed copies of devicetree source files from Linux
-> > > > +kernel into `arch/<arch>/dts/<name>.dts` which can be selected via::
-> > > >
-> > > > -   #define CONFIG_DEFAULT_DEVICE_TREE        "<name>"
-> > > > +    #define CONFIG_DEFAULT_DEVICE_TREE       "<name>"
-> > >
-> > > Oh, oof. This never got updated for Kconfig rather than config.h. Can
-> > > you please include re-wording this to be setting <name> when prompted
-> > > for DEFAULT_DEVICE_TREE by Kconfig? And the rest of the text you're
-> > > updating as well to match, thanks.
-> > >
-> >
-> > Sure but how about changing it to say via board defconfig as
-> > CONFIG_DEFAULT_DEVICE_TREE="<name>", since AFAIK most people use
-> > defconfig to configure U-Boot.
->
-> Well, do kernel docs tell people to modify defconfigs, or to use the
-> config menu/etc?
->
+USB port regulators should be controlled by PHYs
+so we remove always-on property and let phy manage the
+regulator.
 
-Okay I see your point, I will use wording to select
-DEFAULT_DEVICE_TREE by Kconfig instead.
+phy-supply isn't configured for TypeC port in upstream and
+now that we are removing always-on, we need to add the
+phy-supply until its fixed upstream.
 
--Sumit
+Signed-off-by: Shantur Rathore <i@shantur.com>
 
-> --
-> Tom
+---
+
+Changes in v4:
+- otg port must be configured with phy-supply instead of host port node
+
+Changes in v3:
+- Split up patches as seperate series
+
+Changes in v2:
+- As requested, added fix for regulator-always-on in RockPro64
+
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+index 732727d9b0..0ac9fa9a03 100644
+--- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
+@@ -22,6 +22,18 @@
+ 	};
+ };
+ 
++&u2phy0_otg {
++	phy-supply = <&vcc5v0_typec>;
++};
++
++&vcc5v0_host {
++	/delete-property/ regulator-always-on;
++};
++
++&vcc5v0_typec {
++	/delete-property/ regulator-always-on;
++};
++
+ &vdd_center {
+ 	regulator-min-microvolt = <950000>;
+ 	regulator-max-microvolt = <950000>;
+-- 
+2.40.1
+
