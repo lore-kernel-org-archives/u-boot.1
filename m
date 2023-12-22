@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780BDC4706F
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 329AEC4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E00F3877DE;
-	Fri, 22 Dec 2023 22:10:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C26C875FA;
+	Fri, 22 Dec 2023 22:23:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="W+YOL59W";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N2ieXOqn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2A3087824; Fri, 22 Dec 2023 22:10:45 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 9290787652; Fri, 22 Dec 2023 22:23:20 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9E4F877CE
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:10:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40d2764c0f2so26583855e9.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:10:43 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BF83875A0
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:23:18 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4279007fb34so14048971cf.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:23:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1703279443; x=1703884243;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YRIUNlQel0sC+RSVQ1KwofwL8na+eFbUITDofeUcUzs=;
- b=W+YOL59WjNSNiMfdZUuqjCsVfqEyjJMAKvuUGBmrS+2/8Rpt7ccvbBr00Ioa8Uwgxk
- YobBt9SqNSGezArhcn7N3VWlwpI0/pJsQulc8DOZ7wnuFKDoNt/AUhFvuCZn+9uiuuSF
- sgAFEFfCExbyJqGS5JIPPUjfgtj0VFHLwnoww=
+ d=konsulko.com; s=google; t=1703280197; x=1703884997; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=e/t5zEfj7N370K7glUEj4uw6piZdpCQrnyrVuyCxi2U=;
+ b=N2ieXOqn9vN72SC6BdNlG26P7mhF73LPpY7R6c8co5jLdxiU5ant2vqjORLcOp7a0p
+ xSQ/kPBDrjea4f3l/pkVhZj7tZGN0iL8kXujpRevQ7F9Pzh9GVQ4IPbCmITd3gfFQrOq
+ ycXow8Gwrm5onaiQj05FxV0nQNOi4du1l1X+8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703279443; x=1703884243;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YRIUNlQel0sC+RSVQ1KwofwL8na+eFbUITDofeUcUzs=;
- b=m75gzZ56/Df/knktnU81tVxD/ToliA3ioKrZpsycS9PIwcT2Y2D+BgH2c5dPEpU4L+
- ciu6vzju8hGg53ch0kRMNenem8tjkIRVhfGzzLqFRCXXTImTiCXuLCVcbDEgg03s3tRp
- b+7mNRFcW5AgQ08vHSgKLWeqg6nsGmMGTgM/7z8wfrj4jjDWfkya6C2BydzFGGpqCS4A
- 85mknyzDoWP+Aiwhy+a0x3Ybhj6T/LQc37oeHWnZkKjGdSnEafs4/Ji302tDGWZTOIwO
- kf76VOkdvlPvainuOT9xZveOlvDlLtvQVvHMfQv5HlT7EFJVmpnOoT5qwZv9w2hABw7T
- CYjg==
-X-Gm-Message-State: AOJu0YwQkTZPVLXiNv/mOIevBEiaAubYWgJelIEAtQHISX41RrcmmYpp
- WPeDTWdQ94XJOcWXoCSqU0dqhyKQPSAiUtKLEidm0wYJde8=
-X-Google-Smtp-Source: AGHT+IHC3A5d9dfzXF/OFJTCrWyk5/3PrCzYEYJin726HG++wy8Mm9T6HEnRaPZyN16Ax2LEu6JG4w==
-X-Received: by 2002:a05:600c:4e87:b0:40c:343b:4515 with SMTP id
- f7-20020a05600c4e8700b0040c343b4515mr997504wmq.243.1703279443234; 
- Fri, 22 Dec 2023 13:10:43 -0800 (PST)
-Received: from pwmachine.localnet (85-170-33-133.rev.numericable.fr.
- [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- u13-20020a05600c19cd00b0040c2963e5f3sm8083224wmq.38.2023.12.22.13.10.42
+ d=1e100.net; s=20230601; t=1703280197; x=1703884997;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=e/t5zEfj7N370K7glUEj4uw6piZdpCQrnyrVuyCxi2U=;
+ b=BvkUgkxKqrlRNB5tOtENjUKnwnNxs5yz89QPoVLrS0iEmLGy9e5rFUyi0GWLrNShwA
+ B2Ekq+xTNQN4kVPoT0ns2AKKesGApXxK6thNl/zri9t41EsFt9ZDAaEMLVe0RduE6CSU
+ EM9OWYgNDhNPjQyaY6Xj4ImLxkJDNv6gZ/HkTwfPU84VRVJohMftG4NIaWbZs5E7/Nyo
+ xrH6B1NjGQUYSV4AHNMUPWa84cV5GYp5eXDBsuzQffB0V+03eNO/Y6/yuYiw7ascKUqY
+ SHEeNGm1aIw1HjKsLjMqJjMp3/Wlf2PvGUh4hcPkoPCe09GobBqtA3eM2KMxKKH3oMjf
+ icCA==
+X-Gm-Message-State: AOJu0YywGBDQbzTWTvYItl4AnBfwvrEhpxZmM7Wsg5NfxccCxWMlDlml
+ S7C/bbD+Y0KDK8ee4CNN9i1QXCCsMYssHw==
+X-Google-Smtp-Source: AGHT+IHroxKighvWp9XEE1+Vz04Pje9JY9aa9Mlwfc9g0ezOJB99uMRu8pDcXnqWdxOD5GQdeFzxFw==
+X-Received: by 2002:a05:622a:174a:b0:427:82a2:e70c with SMTP id
+ l10-20020a05622a174a00b0042782a2e70cmr2254500qtk.115.1703280197092; 
+ Fri, 22 Dec 2023 13:23:17 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-013d.res6.spectrum.com.
+ [2603:6081:7b00:6400::13d]) by smtp.gmail.com with ESMTPSA id
+ fa4-20020a05622a4cc400b0042783eface8sm2175902qtb.81.2023.12.22.13.23.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:10:42 -0800 (PST)
-From: Francis Laniel <francis.laniel@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
+ Fri, 22 Dec 2023 13:23:15 -0800 (PST)
+Date: Fri, 22 Dec 2023 16:23:12 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: u-boot@lists.denx.de,
  Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
  Evgeny Bachinin <EABachinin@sberdevices.ru>, Marek Vasut <marex@denx.de>,
  Hector Palacios <hector.palacios@digi.com>
 Subject: Re: [PATCH v13 15/24] cli: add modern hush as parser for
  run_command*()
-Date: Fri, 22 Dec 2023 22:10:42 +0100
-Message-ID: <5739012.DvuYhMxLoT@pwmachine>
-In-Reply-To: <20231222210244.91830-16-francis.laniel@amarulasolutions.com>
+Message-ID: <20231222212312.GE2652760@bill-the-cat>
 References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
  <20231222210244.91830-16-francis.laniel@amarulasolutions.com>
+ <5739012.DvuYhMxLoT@pwmachine>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Qi7+wN+2P6aNeQZx"
+Content-Disposition: inline
+In-Reply-To: <5739012.DvuYhMxLoT@pwmachine>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,225 +97,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi!
 
+--Qi7+wN+2P6aNeQZx
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Le vendredi 22 d=E9cembre 2023, 22:02:35 CET Francis Laniel a =E9crit :
-> Enables using, in code, modern hush as parser for run_command function
-> family. It also enables the command run to be used by CLI user of modern
-> hush.
+On Fri, Dec 22, 2023 at 10:10:42PM +0100, Francis Laniel wrote:
+> Hi!
 >=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
-> ---
->  common/cli.c               | 67 ++++++++++++++++++++++++++++----------
->  common/cli_hush_upstream.c |  2 +-
->  test/boot/bootflow.c       | 16 ++++++++-
->  3 files changed, 66 insertions(+), 19 deletions(-)
 >=20
-> diff --git a/common/cli.c b/common/cli.c
-> index b3eb512b62..a34938294e 100644
-> --- a/common/cli.c
-> +++ b/common/cli.c
-> @@ -25,6 +25,14 @@
->  #include <linux/errno.h>
+> Le vendredi 22 d=E9cembre 2023, 22:02:35 CET Francis Laniel a =E9crit :
+> > Enables using, in code, modern hush as parser for run_command function
+> > family. It also enables the command run to be used by CLI user of modern
+> > hush.
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+[snip]
+> > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > index a9b555c779..104f49deef 100644
+> > --- a/test/boot/bootflow.c
+> > +++ b/test/boot/bootflow.c
+> > @@ -710,7 +710,21 @@ static int bootflow_scan_menu_boot(struct
+> > unit_test_state *uts) ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> >=20
+> >  	ut_assert_nextline("Selected: Armbian");
+> > -	ut_assert_skip_to_line("Boot failed (err=3D-14)");
+> > +
+> > +	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
+> > +		/*
+> > +		 * With old hush, despite booti failing to boot, i.e. returning
+> > +		 * CMD_RET_FAILURE, run_command() returns 0 which leads=20
+> bootflow_boot(),
+> > as +		 * we are using bootmeth_script here, to return -EFAULT.
+> > +		 */
+> > +		ut_assert_skip_to_line("Boot failed (err=3D-14)");
+> > +	} else if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
+> > +		/*
+> > +		 * While with modern one, run_command() propagates=20
+> CMD_RET_FAILURE
+> > returned +		 * by booti, so we get 1 here.
+> > +		 */
+> > +		ut_assert_skip_to_line("Boot failed (err=3D1)");
+> > +	}
 >=20
->  #ifdef CONFIG_CMDLINE
-> +
-> +static inline bool use_hush_old(void)
-> +{
-> +	return IS_ENABLED(CONFIG_HUSH_SELECTABLE) ?
-> +	gd->flags & GD_FLG_HUSH_OLD_PARSER :
-> +	IS_ENABLED(CONFIG_HUSH_OLD_PARSER);
-> +}
-> +
->  /*
->   * Run a command using the selected parser.
->   *
-> @@ -43,15 +51,30 @@ int run_command(const char *cmd, int flag)
->  		return 1;
->=20
->  	return 0;
-> -#elif CONFIG_IS_ENABLED(HUSH_OLD_PARSER)
-> -	int hush_flags =3D FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
+> I would like to give a bit of context here.
+> With the following patch:
+> diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+> index c169c835e3..cc5adda0a3 100644
+> --- a/test/py/tests/test_ut.py
+> +++ b/test/py/tests/test_ut.py
+> @@ -173,7 +173,7 @@ else
+>         fi
+>  fi
+>  booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
 > -
-> -	if (flag & CMD_FLAG_ENV)
-> -		hush_flags |=3D FLAG_CONT_ON_NEWLINE;
-> -	return parse_string_outer(cmd, hush_flags);
-> -#else /* HUSH_MODERN_PARSER */
-> -	/* Not yet implemented. */
-> -	return 1;
-> +#else
-> +	if (use_hush_old()) {
-> +		int hush_flags =3D FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
-> +
-> +		if (flag & CMD_FLAG_ENV)
-> +			hush_flags |=3D FLAG_CONT_ON_NEWLINE;
-> +		return parse_string_outer(cmd, hush_flags);
-> +	}
-> +	/*
-> +	 * Possible values for flags are the following:
-> +	 * FLAG_EXIT_FROM_LOOP: This flags ensures we exit from loop in
-> +	 * parse_and_run_stream() after first iteration while normal
-> +	 * behavior, * i.e. when called from cli_loop(), is to loop
-> +	 * infinitely.
-> +	 * FLAG_PARSE_SEMICOLON: modern Hush parses ';' and does not stop
-> +	 * first time it sees one. So, I think we do not need this flag.
-> +	 * FLAG_REPARSING: For the moment, I do not understand the goal
-> +	 * of this flag.
-> +	 * FLAG_CONT_ON_NEWLINE: This flag seems to be used to continue
-> +	 * parsing even when reading '\n' when coming from
-> +	 * run_command(). In this case, modern Hush reads until it finds
-> +	 * '\0'. So, I think we do not need this flag.
-> +	 */
-> +	return parse_string_outer_modern(cmd, FLAG_EXIT_FROM_LOOP);
->  #endif
->  }
+> +echo $?
+>  # Recompile with:
+>  # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
+>  ''' % (mmc_dev)
+> We can easily see that booti is failing while running the test:
+> $ ./test/py/test.py -o log_cli=3Dtrue -s --build -v -k=20
+> 'test_ut[ut_bootstd_bootflow_scan_menu_boot'
+> ...
+> Aborting!
+> Failed to load '/boot/dtb/rockchip/overlay/-fixup.scr'
+> 1
 >=20
-> @@ -67,12 +90,23 @@ int run_command_repeatable(const char *cmd, int flag)
->  #ifndef CONFIG_HUSH_PARSER
->  	return cli_simple_run_command(cmd, flag);
->  #else
-> +	int ret;
-> +
-> +	if (use_hush_old()) {
-> +		ret =3D parse_string_outer(cmd,
-> +					 FLAG_PARSE_SEMICOLON
-> +					 | FLAG_EXIT_FROM_LOOP);
-> +	} else {
-> +		ret =3D parse_string_outer_modern(cmd,
-> +					      FLAG_PARSE_SEMICOLON
-> +					      | FLAG_EXIT_FROM_LOOP);
-> +	}
-> +
->  	/*
->  	 * parse_string_outer() returns 1 for failure, so clean up
->  	 * its result.
->  	 */
-> -	if (parse_string_outer(cmd,
-> -			       FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP))
-> +	if (ret)
->  		return -1;
+> The problem with old hush, is that the 1 returned here, which corresponds=
+ to=20
+> CMD_RET_FAILURE, is not propagated as the return value of run_command().
+> So, this lead the -EFAULT branch here to be taken:
+> int bootflow_boot(struct bootflow *bflow)
+> {
+> 	/* ... */
 >=20
->  	return 0;
-> @@ -111,12 +145,11 @@ int run_command_list(const char *cmd, int len, int
-> flag) buff[len] =3D '\0';
->  	}
->  #ifdef CONFIG_HUSH_PARSER
-> -#if CONFIG_IS_ENABLED(HUSH_OLD_PARSER)
-> -	rcode =3D parse_string_outer(buff, FLAG_PARSE_SEMICOLON);
-> -#else /* HUSH_MODERN_PARSER */
-> -	/* Not yet implemented. */
-> -	rcode =3D 1;
-> -#endif
-> +	if (use_hush_old()) {
-> +		rcode =3D parse_string_outer(buff, FLAG_PARSE_SEMICOLON);
-> +	} else {
-> +		rcode =3D parse_string_outer_modern(buff, FLAG_PARSE_SEMICOLON);
-> +	}
->  #else
->  	/*
->  	 * This function will overwrite any \n it sees with a \0, which
-> diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
-> index 7f6b058e6c..11870c51e8 100644
-> --- a/common/cli_hush_upstream.c
-> +++ b/common/cli_hush_upstream.c
-> @@ -8022,7 +8022,7 @@ static int parse_and_run_string(const char *s)
->  }
+> 	ret =3D bootmeth_boot(bflow->method, bflow);
+> 	if (ret)
+> 		return log_msg_ret("boot", ret);
 >=20
->  #ifdef __U_BOOT__
-> -int parse_string_outer(const char *cmd, int flags)
-> +int parse_string_outer_modern(const char *cmd, int flags)
->  {
->  	int ret;
->  	int old_flags;
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index a9b555c779..104f49deef 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -710,7 +710,21 @@ static int bootflow_scan_menu_boot(struct
-> unit_test_state *uts) ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> 	/*
+> 	 * internal error, should not get here since we should have booted
+> 	 * something or returned an error
+> 	 */
 >=20
->  	ut_assert_nextline("Selected: Armbian");
-> -	ut_assert_skip_to_line("Boot failed (err=3D-14)");
-> +
-> +	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-> +		/*
-> +		 * With old hush, despite booti failing to boot, i.e. returning
-> +		 * CMD_RET_FAILURE, run_command() returns 0 which leads=20
-bootflow_boot(),
-> as +		 * we are using bootmeth_script here, to return -EFAULT.
-> +		 */
-> +		ut_assert_skip_to_line("Boot failed (err=3D-14)");
-> +	} else if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
-> +		/*
-> +		 * While with modern one, run_command() propagates=20
-CMD_RET_FAILURE
-> returned +		 * by booti, so we get 1 here.
-> +		 */
-> +		ut_assert_skip_to_line("Boot failed (err=3D1)");
-> +	}
+> 	return log_msg_ret("end", -EFAULT);
+> }
+>=20
+> With modern hush, CMD_RET_FAILURE is propagated as the return value of=20
+> run_command().
+> As a consequence, we return with log_mst_ret("boot", 1), which leaded to =
+this=20
+> test to fail.
+> The above modification consists in adapting the expected output to the cu=
+rrent=20
+> shell flavor.
+> I think this is the good thing to do, as I find modern hush behavior bett=
+er=20
+> than the old one, i.e. it propagates CMD_RET_FAILURE as return of=20
+> run_command().
 
-I would like to give a bit of context here.
-With the following patch:
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index c169c835e3..cc5adda0a3 100644
-=2D-- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -173,7 +173,7 @@ else
-        fi
- fi
- booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-=2D
-+echo $?
- # Recompile with:
- # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
- ''' % (mmc_dev)
-We can easily see that booti is failing while running the test:
-$ ./test/py/test.py -o log_cli=3Dtrue -s --build -v -k=20
-'test_ut[ut_bootstd_bootflow_scan_menu_boot'
-=2E..
-Aborting!
-=46ailed to load '/boot/dtb/rockchip/overlay/-fixup.scr'
-1
+Oh very nice, thanks for digging in to this and explaining!
 
-The problem with old hush, is that the 1 returned here, which corresponds t=
-o=20
-CMD_RET_FAILURE, is not propagated as the return value of run_command().
-So, this lead the -EFAULT branch here to be taken:
-int bootflow_boot(struct bootflow *bflow)
-{
-	/* ... */
+--=20
+Tom
 
-	ret =3D bootmeth_boot(bflow->method, bflow);
-	if (ret)
-		return log_msg_ret("boot", ret);
+--Qi7+wN+2P6aNeQZx
+Content-Type: application/pgp-signature; name="signature.asc"
 
-	/*
-	 * internal error, should not get here since we should have booted
-	 * something or returned an error
-	 */
+-----BEGIN PGP SIGNATURE-----
 
-	return log_msg_ret("end", -EFAULT);
-}
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWF/jkACgkQFHw5/5Y0
+tyzhwAv/ZuY0CzxEUlzj24unwyAlsO5cSlZtc7e6nWKb0MSedmDfuG1CiL314J/B
+4zHyA8Fwep0VKXcSuamZFgZ1NB6AUi7y39ZxKI9SN8DBCd3QaSoclkn0Bv63ScwO
+ORdwpsxuTXzSkZZnwtnF+86uP0hz/h/c2lgv+MosVaxfbpkHPqjd/ci/snHh7ioB
+CCWSCNkC5rjIrX9gMiI86XgZY8wGUBReXS9jj4hRhSpb/ALkobKIfMZqzHYBY/DD
+Znp4hU74FMe5TNxlx2KjQC5NHIRNBoNDRxdbepm2L8ahES+qWTPNq2x0igVHMNHA
+Vso6g0OvpoMhMhlRq3pr0ai20SLKuZXYU4w0pr89MF2UL2vTTAh6yNT166YP146j
+PcvN4p0X3+GJ2RwEqIjhJdyMBCaQQ7PjISFLOiMcFgbNmBpP2744HNNO3Z3Hhw9t
+J1kfTBi58JSTgslaOixFQ6feASfBFVVHKwLHKZIK0HFNKwMgHB8RgDrvetMhMSL/
+xEsJUAdn
+=O3XT
+-----END PGP SIGNATURE-----
 
-With modern hush, CMD_RET_FAILURE is propagated as the return value of=20
-run_command().
-As a consequence, we return with log_mst_ret("boot", 1), which leaded to th=
-is=20
-test to fail.
-The above modification consists in adapting the expected output to the curr=
-ent=20
-shell flavor.
-I think this is the good thing to do, as I find modern hush behavior better=
-=20
-than the old one, i.e. it propagates CMD_RET_FAILURE as return of=20
-run_command().
-
->  	ut_assertnonnull(std->cur_bootflow);
->  	ut_assert_console_end();
-
-
-Happy end of the year!
-
-
+--Qi7+wN+2P6aNeQZx--
