@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76427C46CD2
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF623C46CD2
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D89B9877F1;
-	Fri, 22 Dec 2023 22:31:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4EE65877CD;
+	Fri, 22 Dec 2023 22:31:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mIwZd8K5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iW8XjkGq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E1DB877CA; Fri, 22 Dec 2023 22:31:49 +0100 (CET)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id BBF73877CA; Fri, 22 Dec 2023 22:31:57 +0100 (CET)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84BE9877BC
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:31:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D673E877CD
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:31:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-67a338dfca7so13676316d6.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:31:47 -0800 (PST)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-78120bb5592so105512585a.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:31:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703280706; x=1703885506; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703280712; x=1703885512; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=z2rx+gtoX65D+sG5rSlOLf55Ss6HbOoowEp2fYIt45c=;
- b=mIwZd8K55LExVBXJzxDPzlkHkSyaWOr9SmMI1CUmfXx1LTLnsnX59YYw/z7+BQtRQ4
- GuYLIx0U3LHRUf6B29WPtt5nGZf72H0KnePKqW8qNp/E6nRB5Jio7xCe5moyz+/q3fKA
- 5H0LVo2DsUL9OWnxksZm24WggfLYJgF/W1mwyY3EmYMm5rDa5v244ZALs08XFqV4Y/im
- pzb3XWCSFapvzH7gKWcq75HZddB1N+i3MO30m7v+epgcyHdAJByWVr+npdUFqbCR7klh
- yncLDSds9NKPUz/F9Le1eq+dGTPWmrBuAad08o3LIxIDdMyaru9Rf7JpwivE1CyMvTI3
- LVwA==
+ bh=90S5eGrJX62iUtWwdZTLVpCYSWiJCMPx+KDc/k+BtAo=;
+ b=iW8XjkGqa81daoxipDpZNW2wVuwxxvgGKXjZtGCOnuJjV3YOUwjgGp0Ivn2Ju1CSda
+ TQby7lXby3DB5OBweZ5lDLgLr/MVwGnjFktU1gET6Dvy9v6X/wS8vbBne40i8VQj7pO7
+ jxvixzqJsHSb0Vl1kuyb15O8vvl5qLeoPEpPMwtMn/bmeeLyBu6tcmx9x/Q/s66SLN0z
+ kUy6D7vTMB/Yq0Xu5G2Rfso40mSz1wET+ZnmgeJpEp5JIl7r7YnXm+oELPaej4UAbE0N
+ E5h6ZOn1FLIQJINvVwDFs3/Aj3hpToKZdoCe13pWNF8JIULyYM9kL+pl8GoWdEgl1K+4
+ TE6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703280706; x=1703885506;
+ d=1e100.net; s=20230601; t=1703280712; x=1703885512;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=z2rx+gtoX65D+sG5rSlOLf55Ss6HbOoowEp2fYIt45c=;
- b=jEPKuZ+n1Z8OPkBpXDnQ6ELlP4nzUHWU24zx+gszVoNVUj9naQOmiBWhPB7NddMcDX
- AbAbxhKptnpVJ5fJJq6UWRWxh0LGtywHkxPZ1JwqKVHkW0fdT7wzHgnJzhH9PblXB8aW
- 4qCygE7QD3GeczY08vvYtTkspi65/QSidc0Q8IuCA1TGI7HGBwAo6SBjr1dRYXS3J1fU
- 22wqZ8pbauO8QH7kyhbWMDHE2RGhC/brh9fKuRTLNke8SNGs7RXwV4xn4UBR3Ko+KE+f
- dyj+NC5GVKb9BFB+bky2en5nqv1Dbta1gbsoW6O9NmHnnm+jvE72/FgPH/NmFIIOSWrg
- N9/A==
-X-Gm-Message-State: AOJu0Yx3qwG0dtv+Nj0/pK+sZtKla8RgRxXY3SlIWPRlm3JJzbsO8Wim
- 0dypufc51AketchDZzUViAvvsuUm4l4QffKaPvmEi9k/hD0=
-X-Google-Smtp-Source: AGHT+IE/f2TAU0LuqMMW14psdUqdsqsahdMBT6KBa73SAKyO2z9avP0DbiN+rBpxeSU53+A/kJYs7w==
-X-Received: by 2002:a05:6214:1d24:b0:67f:3c59:a1af with SMTP id
- f4-20020a0562141d2400b0067f3c59a1afmr2653252qvd.7.1703280705976; 
- Fri, 22 Dec 2023 13:31:45 -0800 (PST)
+ bh=90S5eGrJX62iUtWwdZTLVpCYSWiJCMPx+KDc/k+BtAo=;
+ b=AH8m/b0nlOCWnIz+hG/JIE5fyrv3e+/nzDubM+TDavrs8OnQ1DUJljQhXoRJbYQYYw
+ oRu6boVmnOM4pKhzpImCwS00gsfFh7jPflCtDdF7vygrZUpumahPXrVUNP4/YiOsvlzt
+ jMJwpEuiJ5ldSqGg1pUVSpBiV3gtZoYGr2aLSKA+TBxOpAdzg88ctpccMxzAypnNcdwg
+ /RZ4pGXGiZJ5MpfuIXNtd8pUU5sSzpQ9BOjVqthrEd06nNKkUQnHDDxHefnzbd/9ItR3
+ EBDXOce5bRlMfnEB9FZMB3BPKDOoe2h/wV/EAawMQSH+l2XcQSTtP4VAXIWm4bIbod3t
+ X+kw==
+X-Gm-Message-State: AOJu0YwcJiWWUPh6cRtr54Rz+C/OMWA3rX4ycvz1gXY03Wg0jyP1lvZw
+ Ydf/CoOenaoI7a0dRsGUU6fYDLDf0WaEw8M5gPJVQ8198yE=
+X-Google-Smtp-Source: AGHT+IEQ6I7hP8Y9XNQRBsnG1S2R3od0Zah3dDpOl4dErSxoNAQEBiMnerWRVUMpgcX4+tb5IQS1mw==
+X-Received: by 2002:a05:6214:500e:b0:67a:a721:ec03 with SMTP id
+ jo14-20020a056214500e00b0067aa721ec03mr2070003qvb.71.1703280712200; 
+ Fri, 22 Dec 2023 13:31:52 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.31.44
+ dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.31.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:31:45 -0800 (PST)
+ Fri, 22 Dec 2023 13:31:51 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, Bin Meng <bmeng.cn@gmail.com>,
- Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: [PATCH v3 2/9] bloblist: check bloblist with specified buffer size
-Date: Fri, 22 Dec 2023 13:31:02 -0800
-Message-Id: <20231222213110.660402-3-raymond.mao@linaro.org>
+ Shiji Yang <yangshiji66@outlook.com>, Baruch Siach <baruch@tkos.co.il>,
+ Michal Simek <michal.simek@amd.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v3 3/9] bloblist: refactor of bloblist_reloc()
+Date: Fri, 22 Dec 2023 13:31:03 -0800
+Message-Id: <20231222213110.660402-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231222213110.660402-1-raymond.mao@linaro.org>
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
@@ -102,47 +102,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of expecting the bloblist total size to be the same as the
-pre-allocated buffer size, practically we are more interested in
-whether the pre-allocated buffer size is bigger than the bloblist
-total size.
+The current bloblist pointer and size can be retrieved from global
+data, so we don't need to pass them from the function arguments.
+This change also help to remove all external access of gd->bloblist
+outside of bloblist module.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
 - New patch file created for v2.
+Changes in v3
+- Check the space size before copying the bloblist.
+- Add return code of bloblist_reloc().
 
- common/bloblist.c | 2 +-
- test/bloblist.c   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ common/bloblist.c  | 10 ++++++++--
+ common/board_f.c   |  8 ++------
+ include/bloblist.h |  8 ++++----
+ test/bloblist.c    |  6 ++----
+ 4 files changed, 16 insertions(+), 16 deletions(-)
 
 diff --git a/common/bloblist.c b/common/bloblist.c
-index ba17dd851a..db3fbb20cf 100644
+index db3fbb20cf..5ad1db137a 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -384,7 +384,7 @@ int bloblist_check(ulong addr, uint size)
- 		return log_msg_ret("Bad magic", -ENOENT);
- 	if (hdr->version != BLOBLIST_VERSION)
- 		return log_msg_ret("Bad version", -EPROTONOSUPPORT);
--	if (!hdr->total_size || (size && hdr->total_size != size))
-+	if (!hdr->total_size || (size && hdr->total_size > size))
- 		return log_msg_ret("Bad total size", -EFBIG);
- 	if (hdr->used_size > hdr->total_size)
- 		return log_msg_ret("Bad used size", -ENOENT);
+@@ -472,13 +472,19 @@ void bloblist_show_list(void)
+ 	}
+ }
+ 
+-void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
++int bloblist_reloc(void *to, uint to_size)
+ {
+ 	struct bloblist_hdr *hdr;
+ 
+-	memcpy(to, from, from_size);
++	if (to_size < gd->bloblist->total_size)
++		return -ENOSPC;
++
++	memcpy(to, gd->bloblist, gd->bloblist->total_size);
+ 	hdr = to;
+ 	hdr->total_size = to_size;
++	gd->bloblist = to;
++
++	return 0;
+ }
+ 
+ int bloblist_init(void)
+diff --git a/common/board_f.c b/common/board_f.c
+index d4d7d01f8f..00b0430889 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -676,13 +676,9 @@ static int reloc_bloblist(void)
+ 		return 0;
+ 	}
+ 	if (gd->new_bloblist) {
+-		int size = CONFIG_BLOBLIST_SIZE;
+-
+ 		debug("Copying bloblist from %p to %p, size %x\n",
+-		      gd->bloblist, gd->new_bloblist, size);
+-		bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC,
+-			       gd->bloblist, size);
+-		gd->bloblist = gd->new_bloblist;
++		      gd->bloblist, gd->new_bloblist, gd->bloblist->total_size);
++		bloblist_reloc(gd->new_bloblist, CONFIG_BLOBLIST_SIZE_RELOC);
+ 	}
+ #endif
+ 
+diff --git a/include/bloblist.h b/include/bloblist.h
+index bd32e38a06..c1dab11f78 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -418,11 +418,11 @@ const char *bloblist_tag_name(enum bloblist_tag_t tag);
+  * bloblist_reloc() - Relocate the bloblist and optionally resize it
+  *
+  * @to: Pointer to new bloblist location (must not overlap old location)
+- * @to_size: New size for bloblist (must be larger than from_size)
+- * @from: Pointer to bloblist to relocate
+- * @from_size: Size of bloblist to relocate
++ * @to_size: New size for bloblist
++ * Return: 0 if OK, -ENOSPC if the new size is small than the bloblist total
++ *	   size.
+  */
+-void bloblist_reloc(void *to, uint to_size, void *from, uint from_size);
++int bloblist_reloc(void *to, uint to_size);
+ 
+ /**
+  * bloblist_init() - Init the bloblist system with a single bloblist
 diff --git a/test/bloblist.c b/test/bloblist.c
-index 17d9dd03d0..7dab9addf8 100644
+index 7dab9addf8..1c60bbac36 100644
 --- a/test/bloblist.c
 +++ b/test/bloblist.c
-@@ -207,7 +207,7 @@ static int bloblist_test_checksum(struct unit_test_state *uts)
- 	hdr->flags++;
+@@ -376,13 +376,12 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+ {
+ 	const uint large_size = TEST_BLOBLIST_SIZE;
+ 	const uint small_size = 0x20;
+-	void *old_ptr, *new_ptr;
++	void *new_ptr;
+ 	void *blob1, *blob2;
+ 	ulong new_addr;
+ 	ulong new_size;
  
- 	hdr->total_size--;
--	ut_asserteq(-EFBIG, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
-+	ut_asserteq(-EIO, bloblist_check(TEST_ADDR, TEST_BLOBLIST_SIZE));
- 	hdr->total_size++;
+ 	ut_assertok(bloblist_new(TEST_ADDR, TEST_BLOBLIST_SIZE, 0, 0));
+-	old_ptr = map_sysmem(TEST_ADDR, TEST_BLOBLIST_SIZE);
  
- 	hdr->spare++;
+ 	/* Add one blob and then one that won't fit */
+ 	blob1 = bloblist_add(TEST_TAG, small_size, 0);
+@@ -394,8 +393,7 @@ static int bloblist_test_reloc(struct unit_test_state *uts)
+ 	new_addr = TEST_ADDR + TEST_BLOBLIST_SIZE;
+ 	new_size = TEST_BLOBLIST_SIZE + 0x100;
+ 	new_ptr = map_sysmem(new_addr, TEST_BLOBLIST_SIZE);
+-	bloblist_reloc(new_ptr, new_size, old_ptr, TEST_BLOBLIST_SIZE);
+-	gd->bloblist = new_ptr;
++	ut_assertok(bloblist_reloc(new_ptr, new_size));
+ 
+ 	/* Check the old blob is there and that we can now add the bigger one */
+ 	ut_assertnonnull(bloblist_find(TEST_TAG, small_size));
 -- 
 2.25.1
 
