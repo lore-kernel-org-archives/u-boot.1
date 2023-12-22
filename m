@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8084AC46CD8
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A8BAC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 13:20:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB1A9877CD;
-	Fri, 22 Dec 2023 13:48:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D04E877F1;
+	Fri, 22 Dec 2023 14:20:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ly4DFqcI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TemK6GD/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B272D877CD; Fri, 22 Dec 2023 13:48:18 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2114B8781D; Fri, 22 Dec 2023 14:20:48 +0100 (CET)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDAB387880
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:48:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F06D2877CD
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 14:20:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id EE4C4CE21B6
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 12:48:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7297EC433CD
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 12:48:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1703249290;
- bh=V72pV+EXR1DLsor55xWUV6GPn2LtZ4+S8rLYXyUkQPM=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=Ly4DFqcIqG575M4GSPA1U0o94smm+XMk0G4zD/WWsU9CsHBfwE9cRLC/eJ+yIDpKa
- kRUn51b0erGl0TQVk4OADdDjdz1wiRGyy3W2IhDtCOMsmdij34xTGBGkwVxQi2w2B4
- qAFfo8IT/8+ENPD84LreX/2MV0BHMb9iaRTDT+L45LITW0LceaLp9tIWGpioXz6iCj
- XEaKPK2X9CaG7ltMs+ZYZ5Va9tVhFITOASK/kwV0aDpg04xk4HeroBR22dHesvuGiT
- AwhBlVD2SiQZCUrKJ9zIER8UFCQzliuEqTWWtnqQxwW4lLH3BFLHLa/f9w+ARPDHuL
- 5Xwn5L/AxeXyw==
-Received: by mail-lf1-f42.google.com with SMTP id
- 2adb3069b0e04-50e62c1245eso1651820e87.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:48:10 -0800 (PST)
-X-Gm-Message-State: AOJu0YwUnqII6cYfst/CbMUCWZYSe5W55zSwTljSVvwU7y/D508atMRy
- fEBNLSoyT9HNATCA7lmItwCSBtxEVEVuasR9m8s=
-X-Google-Smtp-Source: AGHT+IFeUV+nepXa2pRRmsunsTOc5QtiHCIzjxaYBxClPNYPYWoKSQCLb8x0ZJ/yZ0cBRxzjL76fjrwtzEai63KHemk=
-X-Received: by 2002:ac2:454e:0:b0:50e:384c:289a with SMTP id
- j14-20020ac2454e000000b0050e384c289amr643501lfm.78.1703249288530; Fri, 22 Dec
- 2023 04:48:08 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-6dbc2914825so371494a34.1
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 05:20:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1703251244; x=1703856044; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yb1C1ThATTnjjnvl+E7i/asKkB20QwLF7h84rO3TohE=;
+ b=TemK6GD/q50NpiDj7y7y0psNVNJQjb/eLDYKgyYKWjJYlSW9GQBqqNl0FclHPR4nCQ
+ F7mUUWA9cNGoiCHbI8qC5Qvy6VQn11AXe/1yO9BOThoSR0Ipw4tIoV4TeN+AeT5MgDVD
+ umeNP5QjkgQ8+jqWxKPZvKOrdn5C2+ZUD/50mSJGobJm3G+5yM1TGvIh6yoLOK/SdaiA
+ +zXjRHYVXq4m0A2vPA68SRtGTDIFzMeAR1UcOINZZUXzXpDc5SdXRNmIIAIWFnDUUjEM
+ IRviOgaK/kgAPjturkr8IY8/UiagDOm3i6HcJTBO+EgDnEy6mihu88EGNFDMKezaanYM
+ 26cA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703251244; x=1703856044;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yb1C1ThATTnjjnvl+E7i/asKkB20QwLF7h84rO3TohE=;
+ b=unw4gUis6eLq/mTPVOJ2tyMX62GXR19yKdYA7nXtd/OCiojPfx+f1+csZUf2RzyEax
+ G3OM03FaXsskAn+/X5KYzmn59AGTvh6p/XVMiHx9IEwa4nnWPuCkfIU99yKplSKI0em8
+ AJld9Rn9g4SpNtgSVZee3s8o6Wvb4b7l8VNHUMuj+SqSsE8L7r8Y9UUxqekmrN89J1NG
+ LRyYAvTzJb4shF80CXnvIK9oJmMjJSyOEf563D7JOWnPtZcsUJR3GTC6k/mcWkjyNPva
+ +kfy0CKvdyblpivX5xwPQ2o0fyvEwkf//F5oViu0ubwxzKVcHAPPOvVv5iWA8eyF2JVV
+ guUA==
+X-Gm-Message-State: AOJu0Yw9+vjsAI+yFooMffigWBlteHx0SoRmPXgKiJtvMaw+KKEPktLI
+ Q7Tzkg1yC/ETus5DIHcEDOsHaHyQBmG4eUzA6gILfctS8w8QCg==
+X-Google-Smtp-Source: AGHT+IGhBq6q5xmrUR+xDaOdzM2R5mDHs5b/2pGa0uZoxm9nIY9YaCZCfjU6eUUk7+PMBue0D4EdTtUxxBtgcpbmNGI=
+X-Received: by 2002:a05:6830:164b:b0:6db:ce9b:7af1 with SMTP id
+ h11-20020a056830164b00b006dbce9b7af1mr103602otr.14.1703251244575; Fri, 22 Dec
+ 2023 05:20:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
- <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
- <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
- <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
- <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
- <BN9PR11MB54837EEB391CC2A8FA6C0BF5E695A@BN9PR11MB5483.namprd11.prod.outlook.com>
-In-Reply-To: <BN9PR11MB54837EEB391CC2A8FA6C0BF5E695A@BN9PR11MB5483.namprd11.prod.outlook.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Fri, 22 Dec 2023 13:47:57 +0100
-X-Gmail-Original-Message-ID: <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
-Message-ID: <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: "Chiu, Chasel" <chasel.chiu@intel.com>
-Cc: Simon Glass <sjg@chromium.org>, 
- "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- "Brune, Maximilian" <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- "Dong, Guo" <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, "Guo, Gua" <gua.guo@intel.com>, 
- "linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <20231222061208.3009970-8-sumit.garg@linaro.org>
+ <20231222123133.GX2513409@bill-the-cat>
+In-Reply-To: <20231222123133.GX2513409@bill-the-cat>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 22 Dec 2023 18:50:32 +0530
+Message-ID: <CAFA6WYNbLRVZJq_geK4h9Z4oDdJ=8ne39AUqLMfL-Bf4zpnF_g@mail.gmail.com>
+Subject: Re: [PATCH v2 7/8] dts: meson-gxbb: Switch to using upstream DT
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com, 
+ rfried.dev@gmail.com, marex@denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,237 +94,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 21 Dec 2023 at 17:50, Chiu, Chasel <chasel.chiu@intel.com> wrote:
+On Fri, 22 Dec 2023 at 18:01, Tom Rini <trini@konsulko.com> wrote:
 >
+> On Fri, Dec 22, 2023 at 11:42:07AM +0530, Sumit Garg wrote:
 >
-> Hi Ard,
->
-> Please see my reply below inline and let me know your thoughts.
->
-> Thanks,
-> Chasel
->
->
-> > -----Original Message-----
-> > From: Ard Biesheuvel <ardb@kernel.org>
-> > Sent: Thursday, December 21, 2023 6:31 AM
-> > To: Chiu, Chasel <chasel.chiu@intel.com>
-> > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mark Ru=
-tland
-> > <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan, Lean Sheng
-> > <sheng.tan@9elements.com>; lkml <linux-kernel@vger.kernel.org>; Dhaval
-> > Sharma <dhaval@rivosinc.com>; Brune, Maximilian
-> > <maximilian.brune@9elements.com>; Yunhui Cui <cuiyunhui@bytedance.com>;
-> > Dong, Guo <guo.dong@intel.com>; Tom Rini <trini@konsulko.com>; ron minn=
-ich
-> > <rminnich@gmail.com>; Guo, Gua <gua.guo@intel.com>; linux-
-> > acpi@vger.kernel.org; U-Boot Mailing List <u-boot@lists.denx.de>
-> > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory
-> > usages
+> > Although there were still some variations in board DTS files based on
+> > meson-gxbb SoC but I think those were minor differences from upstream
+> > and shouldn't impact boot on these devices.
 > >
-> > On Tue, 28 Nov 2023 at 21:31, Chiu, Chasel <chasel.chiu@intel.com> wrot=
-e:
-> > >
-> > >
-> > >
-> > >
-> > > > -----Original Message-----
-> > > > From: Ard Biesheuvel <ardb@kernel.org>
-> > > > Sent: Tuesday, November 28, 2023 10:08 AM
-> > > > To: Chiu, Chasel <chasel.chiu@intel.com>
-> > > > Cc: Simon Glass <sjg@chromium.org>; devicetree@vger.kernel.org; Mar=
-k
-> > > > Rutland <mark.rutland@arm.com>; Rob Herring <robh@kernel.org>; Tan,
-> > > > Lean Sheng <sheng.tan@9elements.com>; lkml
-> > > > <linux-kernel@vger.kernel.org>; Dhaval Sharma <dhaval@rivosinc.com>=
-;
-> > > > Brune, Maximilian <maximilian.brune@9elements.com>; Yunhui Cui
-> > > > <cuiyunhui@bytedance.com>; Dong, Guo <guo.dong@intel.com>; Tom Rini
-> > > > <trini@konsulko.com>; ron minnich <rminnich@gmail.com>; Guo, Gua
-> > > > <gua.guo@intel.com>; linux- acpi@vger.kernel.org; U-Boot Mailing
-> > > > List <u-boot@lists.denx.de>
-> > > > Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memor=
-y
-> > > > usages
-> > > >
-> > > > You are referring to a 2000 line patch so it is not 100% clear wher=
-e to look tbh.
-> > > >
-> > > >
-> > > > On Tue, 21 Nov 2023 at 19:37, Chiu, Chasel <chasel.chiu@intel.com> =
-wrote:
-> > > > >
-> > > > >
-> > > > > In PR, UefiPayloadPkg/Library/FdtParserLib/FdtParserLib.c, line
-> > > > > 268 is for
-> > > > related example code.
-> > > > >
-> > > >
-> > > > That refers to a 'memory-allocation' node, right? How does that
-> > > > relate to the 'reserved-memory' node?
-> > > >
-> > > > And crucially, how does this clarify in which way "runtime-code" an=
-d
-> > > > "runtime- data" reservations are being used?
-> > > >
-> > > > Since the very beginning of this discussion, I have been asking
-> > > > repeatedly for examples that describe the wider context in which th=
-ese
-> > reservations are used.
-> > > > The "runtime" into runtime-code and runtime-data means that these
-> > > > regions have a special significance to the operating system, not
-> > > > just to the next bootloader stage. So I want to understand exactly
-> > > > why it is necessary to describe these regions in a way where the
-> > > > operating system might be expected to interpret this information an=
-d act
-> > upon it.
-> > > >
-> > >
-> > >
-> > > I think runtime code and data today are mainly for supporting UEFI ru=
-ntime
-> > services - some BIOS functions for OS to utilize, OS may follow below A=
-CPI spec to
-> > treat them as reserved range:
-> > > https://uefi.org/specs/ACPI/6.5/15_System_Address_Map_Interfaces.html=
-#
-> > > uefi-memory-types-and-mapping-to-acpi-address-range-types
-> > >
-> > > Like I mentioned earlier, that PR is still in early phase and has not=
- reflected all
-> > the required changes yet, but the idea is to build
-> > gEfiMemoryTypeInformationGuid HOB from FDT reserved-memory nodes.
-> > > UEFI generic Payload has DxeMain integrated, however Memory Types are
-> > platform-specific, for example, some platforms may need bigger runtime =
-memory
-> > for their implementation, that's why we want such FDT reserved-memory n=
-ode to
-> > tell DxeMain.
-> > >
+> > So switch to upstream DT via mirroring amlogic/ directory from
+> > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directly
+> > building DTB from there including *-u-boot.dtsi files from
+> > arch/$(ARCH)/dts/ directory.
 > >
-> > > The Payload flow will be like this:
-> > >   Payload creates built-in default MemoryTypes table ->
-> > >     FDT reserved-memory node to override if required (this also ensur=
-es the
-> > same memory map cross boots so ACPI S4 works) ->
-> > >       Build gEfiMemoryTypeInformationGuid HOB by "platfom specific"
-> > MemoryTypes Table ->
-> > >         DxeMain/GCD to consume this MemoryTypes table and setup memor=
-y
-> > service ->
-> > >           Install memory types table to UEFI system table.Configurati=
-on table...
-> > >
-> > > Note: if Payload built-in default MemoryTypes table works fine for th=
-e
-> > > platform, then FDT reserved-memory node does not need to provide such
-> > 'usage' compatible strings. (optional) This FDT node could allow
-> > flexibility/compatibility without rebuilding Payload binary.
-> > >
-> > > Not sure if I answered all your questions, please highlight which are=
-a you need
-> > more information.
-> > >
-> >
-> > The gEfiMemoryTypeInformationGuid HOB typically carries platform defaul=
-ts, and
-> > the actual memory type information is kept in a non-volatile EFI variab=
-le, which
-> > gets updated when the memory usage changes. Is this different for
-> > UefiPayloadPkg?
-> >
-> > (For those among the cc'ees less versed in EFI/EDK2: when you get the '=
-config
-> > changed -rebooting' message from the boot firmware, it typically means =
-that this
-> > memory type table has changed, and a reboot is necessary.)
-> >
-> > So the platform init needs to read this variable, or get the informatio=
-n in a
-> > different way. I assume it is the payload, not the platform init that u=
-pdates the
-> > variable when necessary. This means the information flows from payload(=
-n) to
-> > platform init(n+1), where n is a monotonic index tracking consecutive b=
-oots of the
-> > system.
-> >
-> > Can you explain how the DT fits into this? How are the runtime-code and
-> > runtime-data memory reservation nodes under /reserved-memory used to
-> > implement this information exchange between platform init and payload? =
-And
-> > how do the HOB and the EFI variable fit into this picture?
+> > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  configs/nanopi-k2_defconfig           | 3 ++-
+> >  configs/odroid-c2_defconfig           | 3 ++-
+> >  configs/p200_defconfig                | 3 ++-
+> >  configs/p201_defconfig                | 3 ++-
+> >  configs/videostrong-kii-pro_defconfig | 3 ++-
+> >  configs/wetek-hub_defconfig           | 3 ++-
+> >  configs/wetek-play2_defconfig         | 3 ++-
+> >  dts/arch/arm64/Makefile               | 9 +++++++++
+> >  dts/arch/arm64/amlogic                | 1 +
+> >  9 files changed, 24 insertions(+), 7 deletions(-)
+> >  create mode 120000 dts/arch/arm64/amlogic
 >
->
-> 1. With some offline discussion, we would move gEfiMemoryTypeInformationG=
-uid usage to FDT->upl-custom node. This is because it is edk2 implementatio=
-n choice and non-edk2 PlatformInit or Payload may not have such memory opti=
-mization implementation. (not a generic usage/requirement for PlatformInit =
-and Payload)
->
-> The edk2 example flow will be like below:
->
-> PlatformInit to GetVariable of gEfiMemoryTypeInformationGuid and create H=
-ob->
->   PlatformInit to initialize FDT->upl-custom node to report gEfiMemoryTyp=
-eInformationGuid HOB information ->
->     UefiPayload entry to re-create gEfiMemoryTypeInformationGuid HOB basi=
-ng on FDT input (instead of the default MemoryType inside UefiPayload) ->
->       UefiPayload DxeMain/Gcd will consume gEfiMemoryTypeInformationGuid =
-Hob for memory type information ->
->         UefiPayload to initialize UEFI environment (mainly DXE dispatcher=
-) ->
->           (additional FV binary appended to common UefiPayload binary) Pl=
-atformPayload to provide VariableService which is platform specific ->
->             UefiPayload UefiBootManager will SetVariable if memory type c=
-hange needed and request a warm reset ->
->               Back to PlatformInit ...
->
+> Do we need all of the Makefile portions of this? One of the things that
+> works today is that trees listed in ONFIG_DEFAULT_DEVICE_TREE (and a few
+> other variables) will be automatically built. We might just need the new
+> Makefiles to just have:
+> include $(srctree)/scripts/Makefile.dts
+> and then the trees a given config will need will be built.
 
-OK so the upl-custom node can do whatever it needs to. I imagine these
-will include the memory descriptor attribute field, and other parts
-that may be missing from the /reserved-memory DT node specification?
+That sounds fine for Amlogic SoC and many others too with
+CONFIG_DEFAULT_DEVICE_TREE="" CONFIG_OF_LIST="" options available.
+However, if in future we have truely generalized U-Boot (like efforts
+for Qcom platform) then CONFIG_OF_LIST="" may become an overloaded
+choice.
+
+For now, let me drop the Makefile portions.
+
+-Sumit
 
 >
-> 2. Now the proposed reserved-memory node usages will be for PlatformInit =
-to provide data which may be used by Payload or OS. This is not edk2 specif=
-ic and any PlatformInit/Payload could have same support.
-> Note: all of below are optional and PlatformInit may choose to implement =
-some of them or not.
->
->       - acpi
-> If PlatformInit created some ACPI tables, this will report a memory regio=
-n which contains all the tables to Payload and Payload may base on this to =
-add some more tables if required.
->
->       - acpi-nvs
-> If PlatformInit has created some ACPI tables which having ACPI NVS memory=
- dependency, this will be that nvs region.
->
-
-These make sense.
-
->       - boot-code
-> When PlatformInit having some FW boot phase code that could be freed for =
-OS to use when payload transferring control to UEFI OS
->
->       - boot-data
-> When PlatformInit having some FW boot phase data that could be freed for =
-OS to use when payload transferring control to UEFI OS.
->
->       - runtime-code
-> PlatformInit may provide some services code that can be used for Payload =
-to initialize UEFI Runtime Services for supporting UEFI OS.
->
->       - runtime-data
-> PlatformInit may provide some services data that can be used for Payload =
-to Initialize UEFI Runtime Services for supporting UEFI OS.
->
-
-A UEFI OS must consume this information from the UEFI memory map, not
-from the /reserved-memory nodes. So these nodes must either not be
-visible to the OS at all, or carry an annotation that the OS must
-ignore them.
-
-Would it be possible to include a restriction in the DT schema that
-these are only valid in the firmware boot phase?
+> --
+> Tom
