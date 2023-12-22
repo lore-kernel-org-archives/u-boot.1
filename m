@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D181C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:10:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3308EC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7957487874;
-	Fri, 22 Dec 2023 13:10:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id 993138786A;
+	Fri, 22 Dec 2023 13:19:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="FO5exVKD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Kuri+I46";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E71B287876; Fri, 22 Dec 2023 13:09:58 +0100 (CET)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9EA9B8786F; Fri, 22 Dec 2023 13:19:52 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D0B787858
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:09:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40B0787867
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:19:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-466a85a7e22so514508137.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:09:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703246995; x=1703851795;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S1fQecBIzuUpCeHOWvp5tHI0cAwnqx1iuQpIQcMwC04=;
- b=FO5exVKDPcIfK+glsYWfi8BKkb3HLbkKlVQLspsjItJKO7rtXZjRZlwWph+Rg91nYA
- tWp7CjmhmDiFWl39jUJReTc7jwue3TUylKambjrD2LpR2LnHbeCpSNsmrKkOsBJExcMr
- 2ehrOUfC5bSV1Yrc1M54lAwvD+xEwm7tJ2fxjtuDRs+HN/85rgzVMpNBGNlubysyMplN
- OH2KlMcNkNhBEWD1/PGTbMNNM2L50Ng3aNumJ3IVJqTCHwu9t5IFcJS2W/IyxXQG/xpw
- rwx40GU+bZw9v2Qlocg48wX8HXJEP/BMCiE0UpZnfutp9uwdd6oq+uw43Va7uI0OK7kN
- xsSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703246995; x=1703851795;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S1fQecBIzuUpCeHOWvp5tHI0cAwnqx1iuQpIQcMwC04=;
- b=vjeOJQX1q2TkVXC9wegNGy15oCKHegTv0Dp/iWu5+YDpUI8OR1u2iUUjqSQG8eJpSr
- 6bJmSzCfBHz8TTIVQ2nCFj+KUNq4eLo0jUjda/4hgJ2edxOQ6m2JdGydtKdrdAbCemtu
- BDfX4o4/1irFD2yXXsV2BnL6jBomNK35o0ymbeqIy/2+7Iw6Wrp9OCXAfaaStdUFyPZc
- N4L8SK8RB0gPuqDMAlcIzDNmkRSrVxwofqYD7OXO0vXPlkKzTmvH7YMS8CHnlVZwElQr
- ebThSghM0oKTI/j9nkZHD1cu/RpK3J9tj8CfbWO0xISxd6HDv/4fB9v06ZT3QUSZh6Bh
- mX1w==
-X-Gm-Message-State: AOJu0Yz8ung57ChXFIofDpu1ZMJmL8nSAIVNsh6U/x+8GLmAyx5SqjLH
- 7JTLtNLATaMTe5aJMYP37kiK/+sGj/Qb1l5HEUStpLc6LZq86A==
-X-Google-Smtp-Source: AGHT+IGVi40hGIstRswy88cCRg7Kyo7VEDqXoPUosAp7V0J3P008HCcIqSPY5MMMlOSHG4PgmNCboU4+At6x3/VG61k=
-X-Received: by 2002:a1f:ee47:0:b0:4b6:d1da:5bd1 with SMTP id
- m68-20020a1fee47000000b004b6d1da5bd1mr632787vkh.2.1703246995262; Fri, 22 Dec
- 2023 04:09:55 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=maz@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id A50AE61B75;
+ Fri, 22 Dec 2023 12:19:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53732C433C8;
+ Fri, 22 Dec 2023 12:19:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1703247588;
+ bh=VTyTL57pVUyjGPeZC/K4WrmCt+qh1/g5YG705cv0REQ=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=Kuri+I46R/2CQTRmq9xuTUzqXqFW7HQsfwPeTv4hy+mo6FSnji2fYrWFLP0YMjlC8
+ ibIpI5ledqDdKnX9t9RR3uA7S7QPNW9MnMeG+69oP79ow62f+sugv6SBfoelIETFPz
+ WhjBL27uRQlFTvUBfjBB4mC+FrutU4bhEX541PxNUROENo9iMtCwnG6P5gRMROeM9I
+ g8Qc3mfuQI3a0BrG9oh2LBLV6f3PmTP+3XZlvZn2ELip8+vc/dGnqyv9PHGxL19J/R
+ 0NGACxrpezRe3RguMbIoGFAKF2uQuJNoiwl4Jkh/AOUXSiwmU5jMxFWB/DSpxx1D54
+ w+y4/9u0iVckA==
+Received: from disco-boy.misterjones.org ([217.182.43.188] helo=www.loen.fr)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1rGeVF-006IqB-N4;
+ Fri, 22 Dec 2023 12:19:45 +0000
 MIME-Version: 1.0
-References: <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
- <CALeDE9NgZ_zRGgxo2kBaKYAKF-8tKmt-Eoddxf=8U2Q=T29Yjg@mail.gmail.com>
- <CABEcMwUDnAQG3h-jrPEim2u_19UMtqhjcG5cSiE-QpjawHACCQ@mail.gmail.com>
- <20231209205627.GI2513409@bill-the-cat>
- <CABEcMwXYCczbTRVgqGC=USRJw138tDM0RkbmGoR4zSY7pBj1PA@mail.gmail.com>
- <CAPnjgZ3gEoOFxahZ2mg=MTQTmBPyCBphS8uVcpSSwq2bg4eJwQ@mail.gmail.com>
- <20231211181918.GS2513409@bill-the-cat>
- <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
- <20231211182710.GT2513409@bill-the-cat>
- <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
- <20231222120700.GW2513409@bill-the-cat>
-In-Reply-To: <20231222120700.GW2513409@bill-the-cat>
-From: Shantur Rathore <i@shantur.com>
-Date: Fri, 22 Dec 2023 12:09:44 +0000
-Message-ID: <CABEcMwU521x5_JMsZkGS-hnr2B+w8SNA31-7VXfwo3aPrXytwQ@mail.gmail.com>
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Date: Fri, 22 Dec 2023 12:19:45 +0000
+From: Marc Zyngier <maz@kernel.org>
+To: "Ivan T. Ivanov" <iivanov@suse.de>
+Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Dmitry Malkin <dmitry@bedrocksystems.com>, Thomas
+ Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>, Jaehoon
+ Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 0/7] rpi5: initial support
+In-Reply-To: <20231218210341.30073-1-iivanov@suse.de>
+References: <20231218210341.30073-1-iivanov@suse.de>
+User-Agent: Roundcube Webmail/1.4.15
+Message-ID: <a277be3746ae7fd3bd2676090a90d233@kernel.org>
+X-Sender: maz@kernel.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 217.182.43.188
+X-SA-Exim-Rcpt-To: iivanov@suse.de, mbrugger@suse.com, pbrobinson@gmail.com,
+ dmitry@bedrocksystems.com, fitzsim@fitzsim.org, peng.fan@nxp.com,
+ jh80.chung@samsung.com, agust@denx.de, wahrenst@gmx.net,
+ florian.fainelli@broadcom.com, u-boot@lists.denx.de
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,56 +87,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Dec 22, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
-e:
->
-> On Fri, Dec 22, 2023 at 12:05:39PM +0000, Shantur Rathore wrote:
-> > Hi all,
-> >
-> > On Mon, Dec 11, 2023 at 6:27=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> > >
-> > > On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > [snip]
-> > > > > I think in hind-sight too much stuff is omitted without BOOTSTD_F=
-ULL.
-> > > > > The option itself then enables other stuff too by default, but so=
-me
-> > > > > parts of the bootflow command itself should be visible even witho=
-ut FULL
-> > > > > to make things easier on the user.
-> > > >
-> > > > At the time the goal was to avoid growth compared to the distro
-> > > > scripts. We could perhaps add some more things in with BOOTSTD_FULL
-> > > > but still have it as an option?
-> > >
-> > > Right. But now that we've tried this, some of the feedback has been t=
-hat
-> > > it's just too minimal right now. Like looking at the help message for
-> > > bootflow, list and info should probably always be available. And mayb=
-e
-> > > the flags for "scan" should be re-thought? Too late to change things =
-now
-> > > but "bootflow scan -b" should maybe how it's always been for "scan an=
-d
-> > > boot".
-> >
-> > What would be the preferred approach for this patch?
-> > Is it to update the default capabilities of bootflow or we can have thi=
-s patch?
->
-> Well, I don't see a problem with just adding this to the platforms which
-> enable BOOTSTD_FULL until we can rework what's included/excluded by that
-> flag, and there's an issue filed for it now.
->
-> --
-> Tom
+Hi Ivan,
 
-Great,  can we have this merged in please then [0]
+On 2023-12-18 21:03, Ivan T. Ivanov wrote:
+> Hi,
+> 
+> These patches are adding basic support for RPi5.
+> They are based on v2 series from Dmitry Malkin[1].
+> 
+> With them I am able to _start_ current openSUSE
+> Tumbleweed without modification. They are still
+> a lot of things to be added to the upstream Linux
+> before it runs flawlessly on this device, but at
+> least in U-Booot SD controller used for uSD card
+> and Frameboffer and HDMI0 devices are working fine
+> now. It seems that PCIe controller is working fine
+> too, but I have not tested it too much.
+> 
+> Serial console and reset are also functional.
+> 
+> Hopefully this will help others add missing pieces
+> more easily.
 
-[0] - https://patchwork.ozlabs.org/project/uboot/patch/20231119172310.13079=
-42-1-i@shantur.com/
+So I've given this a go, and the basics (serial) worked
+out of the box (thanks for that!) after performing the
+memory-map change you described in your reply to patch 1.
 
-Regards,
-Shantur
+However, I don't get anything on the PCIe front:
+
+U-Boot> pci enum
+PCIe BRCM: link down
+PCIe BRCM: link down
+
+despite having an nvme device connected and enabled
+(the RPi kernel finds it).
+
+I'm guessing I must be missing something. How did you
+test PCIe?
+
+Thanks,
+
+         M.
+-- 
+Jazz is not dead. It just smells funny...
