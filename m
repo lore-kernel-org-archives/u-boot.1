@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E1DC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 19:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7B6C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 20:16:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C220886813;
-	Fri, 22 Dec 2023 20:10:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 58E12869F6;
+	Fri, 22 Dec 2023 21:16:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lmzzEgWk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NAWXCw2f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 101DA86D4C; Fri, 22 Dec 2023 20:10:04 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2216986BA8; Fri, 22 Dec 2023 21:16:31 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF39586784
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 20:10:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 49A1C86611
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 21:16:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50e49a0b5caso2630273e87.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 11:10:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703272201; x=1703877001; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FDJ111tknS1VjCdvi/Nku63RRAbCcCIZ/W121BKHKfs=;
- b=lmzzEgWkdzTuN+6MuATDtaTSWWbXdB7ePJeIu4GibDSNkBRo0mnMc8knsqKOF27iSM
- QUEovXr0+l0ip1UhO+YfHIGl1WShGXF5AOdKKjLC78DBPiSpYjumBtc7afIVXYMTUSQY
- MdYqCh7O8tVBgfIXsaHKTW6dDLaQYSlOkz1EnoF0ZmuJnoLyGbTSvmy4+ZELlf3fV0hU
- SkB/F2UU4CYHtU+IT0lFhCtuhFOnvFSsckcnqXaPPdVp5SRu2Y5OPPFdWkTWa4nE5TTt
- woQBj6IQuZVxx/v65EJeO9Iw07YBIGLPQM3qOb/fuAgy29wXuSwxKSZlnkm6yhC08IvK
- A/1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703272201; x=1703877001;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FDJ111tknS1VjCdvi/Nku63RRAbCcCIZ/W121BKHKfs=;
- b=GsSfnrVyqU74GY3CMoqAcG1hlHkKCshhz860wfBghOMiycLdYypgoNEF/3IgpfaXpi
- 8LJQQKtpZhBB1pac19N+fF+ro79SXR8d8f8IOc3v5XIwpXHghAmByIZ5+xz88ghdzMVM
- LWWLRgc7OhNSX0j7vzJBYMGN0ls4f5KlvfdMhSh7Xme28pszcECZpUzTdvfIsDhvTTC3
- CME7v4SK4cSz0IfOxIUDjVGgu/WMW/WyupaJlUkCcDHJaMf6hnzSf6xFwey0dZGjRFTp
- 7GsHi7qbwlRSMpNFI9QUO6cxpmBmFCGbhTQKWZ63jJ6HZV9fdj1nDWs6OXgd49wdYSJh
- eQ6w==
-X-Gm-Message-State: AOJu0YwpNi8HoUt+ophlrV1LB6JDje0NRzBN9L5aZXbpu0VCauCzPJfs
- gsDSfuOPjys5pS55vnNVePB/vfQnvXPVbR4BPBq0lpdxYHykOQ==
-X-Google-Smtp-Source: AGHT+IFVSF+UC6xvHHXydY7MIw9Q6gSMaVAXrq0dM9SC9bg+zVNxxzIy3uyWkDI0R634oopf7CFCxeu+BCt3QGs+Ibw=
-X-Received: by 2002:a05:6512:558:b0:50e:6482:be34 with SMTP id
- h24-20020a056512055800b0050e6482be34mr863716lfl.124.1703272201087; Fri, 22
- Dec 2023 11:10:01 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703276187; x=1703880987; i=xypron.glpk@gmx.de;
+ bh=5gko8YhLDnHiZj2VIXDQFGXfSNsSo0H4Zn6w8AiXDkE=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=NAWXCw2fCKTwP3gwEu42/fV7oWouKimiGR1U9pIfNMdQhlPso+AEDkDOPGq2xz3c
+ VOtzrSM6DYbKyMab51r4wPFu+gw01nMESbr/j3MK9hBg2V0hwkH9/dylHsc0e2SqD
+ sjnwH0J3axcJ5TWskGz5vFQPemSsIhRbZ4EIyrFvC0ZQA6JBOHRVGfE+YHnhi57Iz
+ O4swhQjqESWo4LEls5LxKfVdo3yKpXSSFtS2vYfn+BgjbQ9ikvmHyL/QvS4MuC2/D
+ It7VOl5hJodQffzSs1t+6b7TjNDpmsgIMxPCk/W8kKKtHJ8zKeSDSYA6KmzVwokO1
+ j0m8A+jNeaigLfzdWw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MowKi-1qwFlt2v7u-00qTtL; Fri, 22
+ Dec 2023 21:16:27 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 1/1] smbios: type2: contained object handles
+Date: Fri, 22 Dec 2023 21:16:17 +0100
+Message-ID: <20231222201617.79950-1-xypron.glpk@gmx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20231222175403.46629-1-xypron.glpk@gmx.de>
-In-Reply-To: <20231222175403.46629-1-xypron.glpk@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Dec 2023 21:09:25 +0200
-Message-ID: <CAC_iWjK14ZoGbLZD2LmZMsZrKBuowUbGXDd22gYyguOoO5cXtA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] lib: smbios: remove redundant next_header()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:12h1Edd0u9UgPp307ZeCx9NWdjtQeS5m8DhAbB8eUspUZmnvVpF
+ oyIQkmhatWadduulFAkgjjTHjyRNE/2N6yDz1PWigkr9Y9B1KmOjRFNwJf5t1E/71oeXhvH
+ GaYeUDdMM5JmrzKyX0svcRo+GxiEU0ztxNqcscJ6K3Wpac7JGl7LxPNa6b9fNszXxnKqjqW
+ oqButmN6mdJLelj46LqLQ==
+UI-OutboundReport: notjunk:1;M01:P0:yalBntSRKRE=;WQfgDwajvtnykzbFl+yXkDePoZp
+ ke/HiNGMR1ajoj4k/6DENXSqxUQDIcSJWCCiM7e54SnnJYZH4Y3OXKj6XotkqkNJ+D3mh4vnY
+ XC7EY7737ZkjJyyhZVxtQ8JtLNLg0CDTkmbPUsEC3TAC7WiEvVLgwNMzepf2fwQUR2RUXRcs4
+ Y0NqTUtfnp/UPN7IdiGpi8wodjdo8ZX+RHLNWQMBrJUXcaF1aca93HbN5PtigRYNVErIuSefe
+ KOLDq056RZDVCl3iXUiksB1qIruR+UaPR6AcRNPOCb0UWZmn2JjCJEJWfYkTawlOZ0OxQjDe/
+ i0I1l4bYD7kUM/v1T3V1vWwgfUr/KPAKsihIZBxVMFeSssBeoDFaK5kNsSGMbwBG+GJyE07Wb
+ HTLVEkr1ZnbCV3JvxJdFk6b3ZysePb+4Y3OhIgHzAw/7QaRo1mY53Q3uIJaEd08FLd/NVWNwp
+ +bdnDTLuBwaDEcvT2KvlvWgdGcA7ztsO1LOSs1v8pjVjjUgPfuuSX3LOgqqLUCE9w95CacdjE
+ m27fbLHXmOU4ymvj/0a4cDtOdSIYSkJbCcZIpfiH5sw8oi/9HB7kCfseVCPPiyTfMbKYZZFaB
+ VbPacfvXIUTeM4w63h8/KjQEYU73eUKLbj6vUftyqmVvBWBjt/cRrAXb+n5GSpjnJOAQVOEy5
+ 3nPxoUhmB/Nr7KbuYSUYQp2NRHg5GZ3EFtU5B4/kclNbDyR2/Y01N0Gp+YcGCgH69WWBNWF41
+ rHHXyszRA9Wofff/1agUP1J/5y/wb1ZJ52Kb9prOWYXbdkGzPwoi3+r7TchGULLRhnzuYKj/9
+ rmaDp+4+C8TVyANuEKrPGh4fuQyMicfr2lD1hORoGbwDvqmuB3xQj2E7oxcUjE0VIc+Hl1AgM
+ D7gqttM1ndnNEG9ERa/Kj1oftnV8jjdUL4DcksjizC7Q0asznrRggjgdvNtwHs2KaPx1RgryN
+ TpdRWTXU/gPYhIfApZT6ge5HwJo=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,56 +85,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+The type 2 structure must include information about the contained objects.
+It is fine to set the number of contained object handles to 0.
 
-On Fri, 22 Dec 2023 at 19:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> next_header() and get_next_header() only differ in how the const attribute
-> is used. One function taking a const parameter and returning a non-const is
-> good enough.
->
-> Fixes: 3d49ee8510d3 ("efi_loader: add SMBIOS table measurement")\
+Add the missing field.
 
-This doesn't fix a bug. It correctly cleans up code, so I think the
-Fixes tag must be omitted.
+Fixes: 721e992a8af5 ("x86: Add SMBIOS table support")
+Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+=2D--
+ include/smbios.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  lib/smbios-parser.c | 11 ++---------
->  1 file changed, 2 insertions(+), 9 deletions(-)
->
-> diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-> index b578c30840..f4de350e6e 100644
-> --- a/lib/smbios-parser.c
-> +++ b/lib/smbios-parser.c
-> @@ -50,14 +50,7 @@ static u8 *find_next_header(u8 *pos)
->         return pos;
->  }
->
-> -static struct smbios_header *get_next_header(struct smbios_header *curr)
-> -{
-> -       u8 *pos = ((u8 *)curr) + curr->length;
-> -
-> -       return (struct smbios_header *)find_next_header(pos);
-> -}
-> -
-> -static const struct smbios_header *next_header(const struct smbios_header *curr)
-> +static struct smbios_header *get_next_header(const struct smbios_header *curr)
->  {
->         u8 *pos = ((u8 *)curr) + curr->length;
->
-> @@ -73,7 +66,7 @@ const struct smbios_header *smbios_header(const struct smbios_entry *entry, int
->                 if (header->type == type)
->                         return header;
->
-> -               header = next_header(header);
-> +               header = get_next_header(header);
->         }
->
->         return NULL;
-> --
-> 2.43.0
->
+diff --git a/include/smbios.h b/include/smbios.h
+index e601283d29..88c19ae062 100644
+=2D-- a/include/smbios.h
++++ b/include/smbios.h
+@@ -139,6 +139,7 @@ struct __packed smbios_type2 {
+ 	u8 chassis_location;
+ 	u16 chassis_handle;
+ 	u8 board_type;
++	u8 number_contained_objects;
+ 	char eos[SMBIOS_STRUCT_EOS_BYTES];
+ };
 
-Other than that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+=2D-
+2.43.0
+
