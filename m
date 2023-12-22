@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91A51C46CD2
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736CAC4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:32:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF4487863;
-	Fri, 22 Dec 2023 22:32:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 741278785E;
+	Fri, 22 Dec 2023 22:32:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NBWbJ0gK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pi8wD/rb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 979B186FB5; Fri, 22 Dec 2023 22:32:15 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 556E586FB5; Fri, 22 Dec 2023 22:32:20 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D65CD8785E
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:32:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB8138785E
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:32:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-67f95d69115so6457926d6.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:32:11 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3ba2dc0f6b7so1684845b6e.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:32:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703280730; x=1703885530; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703280735; x=1703885535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bCG/DVe01GyydbeQCZ1PAmA6FhcgYMKWy7veFsR5W0w=;
- b=NBWbJ0gKtlhnMpgq8J7w+3T7yHbM/C73gyry/usedW6X9vRPzy1wep/N7t5ZVBOeHS
- Z9Nks8L9wLlfVlrqVOSgJRT+I2oba/WI0Z++qDC1led17IwBUdB/6K/BwiF7buXZtMpO
- loWei2trUPLYxSrbLa6DwqF1easLLE3uYlRq8Gmsuma9a57LzR/vQANqDdSmZzJWY/98
- fDvqTt44dPKb5vQvcVupcBwcX7zpooC340Ek1+fYvVgFpJ5tOgA6la3YMXmegKHncvuO
- kfgnH5tLNEK5oyU6A7dlUO5o+QEbp8YDUm6x98RAzJDkz8+6AtXpQOBiZ/5gaAAuM2QN
- svNA==
+ bh=IWhK9E3F7Z6K8heZtrBrHp5U+k+K1SV72L5UTRpSFQ8=;
+ b=Pi8wD/rb/+3GqVoiF3WY8s1ujbX4y4U/Lz7R7s5mXkCmk21Benoxh8j/iu9ii4vFNN
+ xbB/giaIorg6LGLPsNKPrSuorgm7Ommu2q01UqONFmRE36vqxzHRsyNmTHOUVvBtI+zJ
+ gtAkS5fK812p63d7ij7CswrQlt4zXMUD8gpcZgC1gaQRw2GJkyHZhEfkw8yV3o1VMAZG
+ CzgjsgjArl4ph4cEUAhybzACXh9X8Od1o7OjAYFobzEyQ5nlbu06gWXqTkZfSR0chP++
+ h7/+/dB2CMLhtFtlnMY7DDsZQAQBD2J+VAXHafAn/EakXSEQAeJsbOwRhdwdkuTO2ix3
+ Kbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703280730; x=1703885530;
+ d=1e100.net; s=20230601; t=1703280735; x=1703885535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bCG/DVe01GyydbeQCZ1PAmA6FhcgYMKWy7veFsR5W0w=;
- b=Q8CXi222y5s702PXsK7vpICZIINqF1QuoAgbdotaG0hASL6O2Em0SGvWTtiVKBtPhb
- /ksDcZLTpZl315bsYdpFMyMzo8IwNAOhF6YOLnc8usQbMm7eqtiPYNkMlV5s6iPb1/td
- gF/UysBK5Kwl1lqdhgvv0EMy1LrMXIYMecSs5n9XrJj94+CWYRILxmkfy34E7iRdYOPi
- EQTDSPGosAoqwdAhJjEdDy8DRxpjmVT2sSbCl3ctyFF3Rads7dcrDTZ5FGkJmOuNzeha
- jYNFA8wWP9cdPxLxceMad44EEx8cALNcIPy2xL7PsEymN4jPTyisnvaGV0YqgdKtgchz
- el/g==
-X-Gm-Message-State: AOJu0Yz/ZZCfrPnXpNKvNzjQx/Z5m98fgkJ73foMLhj5uIM5i0jP8Y5m
- yZkFw/SQmLZMv1pQGYvXcg6BuDjA2UxPWuxy4a9bp+E2vh8=
-X-Google-Smtp-Source: AGHT+IH4UFWoEy+QMvcDop1h7Z5dHr1sVFo4d/dgLc+JneRnUxmn4G+VtXKWEttTR3FGqQbEUk0bnA==
-X-Received: by 2002:a05:6214:2308:b0:67f:4926:60cd with SMTP id
- gc8-20020a056214230800b0067f492660cdmr2453641qvb.83.1703280730549; 
- Fri, 22 Dec 2023 13:32:10 -0800 (PST)
+ bh=IWhK9E3F7Z6K8heZtrBrHp5U+k+K1SV72L5UTRpSFQ8=;
+ b=Xw/ut8+Nswv500Utm1iJ/IGaXp8Y7pvnouJ23UOkUXKmF4a11UnrB9HvpOY6TLYa6t
+ Y+mojFwKRDJT0SisUTvxH/l1vTV60An4RzMG5mx9UjAmzkR8mWFbkKAjKjf/wnUK7uE3
+ JWfeD4rNQu2koU1OAcXHlEso1RB8NhT66XBlStd8qwmcXBHZBgiFdC9YEDEt0iQEjyQ8
+ EopJw5D/OFbQBbw5i3uR2rDiRISMa3LxE7g0kAZ+WjsABjwt4kBmiXAErNSQA7wO17Ig
+ 8hY6acN15n59pG6nHvBqatZ925PsvFgW8n5Cp26vuhm0Zu3lXmp1n0tnysQOTwXCBXOT
+ uYfw==
+X-Gm-Message-State: AOJu0YyQnPy8HLzl0Q9bj89DZEd6F+htkCSfzx3weD0M25bpTSiRv8so
+ 1gJIm261WrYklF5Iz2cIP09XWuJ5/70aJUj169r0qCPbNWQ=
+X-Google-Smtp-Source: AGHT+IEmRRqLRgJTa83vJ/iawIx/LoY9kmHS7hw9aQEqSvawT0XGC9H60+QEs+7wQ12U0EruTw7apw==
+X-Received: by 2002:a05:6808:3023:b0:3ba:1287:f3dd with SMTP id
+ ay35-20020a056808302300b003ba1287f3ddmr2214975oib.96.1703280735255; 
+ Fri, 22 Dec 2023 13:32:15 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.32.09
+ dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.32.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:32:10 -0800 (PST)
+ Fri, 22 Dec 2023 13:32:14 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Kevin Chen <kevin_chen@aspeedtech.com>, Bin Meng <bmeng.cn@gmail.com>,
- Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, Baruch Siach <baruch@tkos.co.il>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Stefan Roese <sr@denx.de>
-Subject: [PATCH v3 7/9] bloblist: Load the bloblist from the previous loader
-Date: Fri, 22 Dec 2023 13:31:07 -0800
-Message-Id: <20231222213110.660402-8-raymond.mao@linaro.org>
+ Sean Anderson <sean.anderson@seco.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
+ Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v3 8/9] fdt: update the document and Kconfig description
+Date: Fri, 22 Dec 2023 13:31:08 -0800
+Message-Id: <20231222213110.660402-9-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231222213110.660402-1-raymond.mao@linaro.org>
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
@@ -101,124 +102,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During bloblist initialization, when CONFIG_OF_BOARD is defined,
-invoke the platform custom function to load the bloblist via boot
-arguments from the previous loader.
-If the bloblist exists, copy it into the fixed bloblist memory region.
+Update the document and Kconfig to describe the behavior of board
+specific custom functions when CONFIG_OF_BOARD is defined.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- common/bloblist.c  | 47 ++++++++++++++++++++++++++++------------------
- include/bloblist.h | 16 ++++++++++++++++
- 2 files changed, 45 insertions(+), 18 deletions(-)
+ doc/develop/devicetree/control.rst | 6 +++---
+ dts/Kconfig                        | 7 +++++--
+ 2 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 5ad1db137a..e66afcde64 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -492,31 +492,38 @@ int bloblist_init(void)
- 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
- 	int ret = -ENOENT;
- 	ulong addr, size;
--	bool expected;
--
--	/**
--	 * We don't expect to find an existing bloblist in the first phase of
--	 * U-Boot that runs. Also we have no way to receive the address of an
--	 * allocated bloblist from a previous stage, so it must be at a fixed
-+	/*
-+	 * If U-Boot is not in the first phase, an existing bloblist must be
-+	 * at a fixed address.
-+	 */
-+	bool from_addr = fixed && !u_boot_first_phase();
-+	/*
-+	 * If U-Boot is in the first phase that a board specific routine should
-+	 * install the bloblist passed from previous loader to this fixed
- 	 * address.
- 	 */
--	expected = fixed && !u_boot_first_phase();
-+	bool from_board = fixed && IS_ENABLED(CONFIG_OF_BOARD) &&
-+			  u_boot_first_phase();
-+
- 	if (spl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
--		expected = false;
-+		from_addr = false;
- 	if (fixed)
- 		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
- 				      CONFIG_BLOBLIST_ADDR);
- 	size = CONFIG_BLOBLIST_SIZE;
--	if (expected) {
-+
-+	if (from_board)
-+		ret = board_bloblist_from_boot_arg(addr, size);
-+	else if (from_addr)
- 		ret = bloblist_check(addr, size);
--		if (ret) {
--			log_warning("Expected bloblist at %lx not found (err=%d)\n",
--				    addr, ret);
--		} else {
--			/* Get the real size, if it is not what we expected */
--			size = gd->bloblist->total_size;
--		}
--	}
-+
-+	if (ret)
-+		log_warning("Bloblist at %lx not found (err=%d)\n",
-+			    addr, ret);
-+	else
-+		/* Get the real size */
-+		size = gd->bloblist->total_size;
-+
- 	if (ret) {
- 		if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
- 			void *ptr = memalign(BLOBLIST_ALIGN, size);
-@@ -525,7 +532,8 @@ int bloblist_init(void)
- 				return log_msg_ret("alloc", -ENOMEM);
- 			addr = map_to_sysmem(ptr);
- 		} else if (!fixed) {
--			return log_msg_ret("!fixed", ret);
-+			return log_msg_ret("BLOBLIST_FIXED is not enabled",
-+					   ret);
- 		}
- 		log_debug("Creating new bloblist size %lx at %lx\n", size,
- 			  addr);
-@@ -538,6 +546,9 @@ int bloblist_init(void)
- 		return log_msg_ret("ini", ret);
- 	gd->flags |= GD_FLG_BLOBLIST_READY;
+diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+index cbb65c9b17..e061f4e812 100644
+--- a/doc/develop/devicetree/control.rst
++++ b/doc/develop/devicetree/control.rst
+@@ -104,9 +104,9 @@ in u-boot.bin so you can still just flash u-boot.bin onto your board. If you are
+ using CONFIG_SPL_FRAMEWORK, then u-boot.img will be built to include the device
+ tree binary.
  
-+	bloblist_show_stats();
-+	bloblist_show_list();
-+
- 	return 0;
- }
+-If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
+-devicetree at runtime, for example if an earlier bootloader stage creates
+-it and passes it to U-Boot.
++If CONFIG_OF_BOARD is defined, board-specific routines will provide the
++bloblist and devicetree at runtime, for example if an earlier bootloader stage
++creates it and passes it to U-Boot.
  
-diff --git a/include/bloblist.h b/include/bloblist.h
-index c1dab11f78..2f4246576e 100644
---- a/include/bloblist.h
-+++ b/include/bloblist.h
-@@ -445,6 +445,22 @@ int bloblist_reloc(void *to, uint to_size);
-  */
- int bloblist_init(void);
+ If CONFIG_SANDBOX is defined, then it will be read from a file on
+ startup. Use the -d flag to U-Boot to specify the file to read, -D for the
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 00c0aeff89..12d61dc748 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -110,8 +110,11 @@ config OF_BOARD
+ 	default y if SANDBOX || OF_HAS_PRIOR_STAGE
+ 	help
+ 	  If this option is enabled, the device tree is provided at runtime by
+-	  a custom function called board_fdt_blob_setup(). The board must
+-	  implement this function if it wishes to provide special behaviour.
++	  a custom function called board_fdt_blob_setup().
++	  If this option is enabled, bloblist is provided at runtime by a
++	  custom function called board_bloblist_from_boot_arg().
++	  The board must implement these functions if it wishes to provide
++	  special behaviour.
  
-+#if (IS_ENABLED(CONFIG_ARCH_QEMU) && IS_ENABLED(CONFIG_ARM))
-+/* Board custom function for qemu-arm */
-+int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size);
-+#else
-+/*
-+ * A board need to implement this custom function if it needs to retrieve
-+ * bloblist from a previous loader
-+ */
-+static inline
-+int board_bloblist_from_boot_arg(unsigned long __always_unused addr,
-+				 unsigned long __always_unused size)
-+{
-+	return -1;
-+}
-+#endif
-+
- #if CONFIG_IS_ENABLED(BLOBLIST)
- /**
-  * bloblist_maybe_init() - Init the bloblist system if not already done
+ 	  With this option, the device tree build by U-Boot may be overridden or
+ 	  ignored. See OF_HAS_PRIOR_STAGE.
 -- 
 2.25.1
 
