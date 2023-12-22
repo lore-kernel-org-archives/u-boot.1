@@ -4,103 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2812CC46CD3
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 00:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD94C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 05:34:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E419876CA;
-	Fri, 22 Dec 2023 01:04:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 619FC8779D;
+	Fri, 22 Dec 2023 06:34:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hn0zozhD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aE6QKcDL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C5E0876CA; Fri, 22 Dec 2023 01:03:44 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 3F70F8779D; Fri, 22 Dec 2023 06:34:50 +0100 (CET)
+Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
+ [IPv6:2607:f8b0:4864:20::935])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A178877D5
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 01:03:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB0D787650
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:34:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7811b05d23bso81028185a.0
- for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 16:03:40 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-7cbf98dd9efso1476019241.1
+ for <u-boot@lists.denx.de>; Thu, 21 Dec 2023 21:34:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703203419; x=1703808219; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1703223285; x=1703828085; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vseWRKdOOZ3I2aZ/HETu5m6IXzSyvLr5QJxJAGL7rn8=;
- b=Hn0zozhDrP0PN9A9UPXUi2vXRLd/mwj41wtvxh/LRZplU2JdwywGY/JP8A+9zsphnb
- e0u3VMn0sxwq1vnKdEn40NqGzjqyx1BZcpC0Qz8613VqHnwbTAGiNdStC22tia1H/mox
- 4R2bTEEDlmy1ShxX/x309RtKC6opRdRPSBjhI=
+ bh=oqMelCzGiaQzWelsK82Mbi10SFZqDHmg/xciAtSRl54=;
+ b=aE6QKcDL6w91dEahVPAkTPRgCcG1xsMBZUHwBs3eFbBBxTmwVv8fIJDiURp6yfIx8U
+ j5TTIGM+HrIyFSqGMr38Izpv99ll8rDhVVAEUW6G1HeF8pLUsG/+KZJsdWT3KQLB9Qnz
+ nibwAy8BPSehaO/Hw0TtqHUs4EfW91jB4CUfgbNPv06TOgaBUMpNOM9bwUkN6WNGdGfw
+ 6kCEACp9rjD2UlmPz8GzLnf7HaFo9sqWuGzy0fV+zWpqryKnzl80xs85/8phNB5vM24r
+ velCsv8viHVYNb6M9QOWT8f1ADlLPy2HetKgF963u55Z/aHZLKMe228i7O3jUlvS/eFD
+ s64Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703203419; x=1703808219;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1703223285; x=1703828085;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vseWRKdOOZ3I2aZ/HETu5m6IXzSyvLr5QJxJAGL7rn8=;
- b=nCkVLeyz68baqMFqT1VfxZp/pfVTY2P/1dOjjeGZq9Y+NXZMyoBUlmWUSIp58GiwRe
- 6rKyFBrEBnocnITJtLMS6P5M1jI7ZAVvYVFovSxVga4t7HU2PgXRn7YrCsP9whgfgpnE
- /HIWtZfbOIbAobITtOEa0Z9eqd8tM5dF5UAAqQZyc3D3mDyEDujIN+D9+aEMZhwC/I1S
- KlBXF2XXmlBovaWVHL3YFnMyGA61hTJf+9NrZwPXbS0myk+bq7ZrHEKPbHtlj64YFEaN
- bAGkiuOXCrYAXbEctU3EqI4b9blw6+qfyGN64qc9ZmX53bT4q54m25Ke4jK1hEy5k0rj
- B+Kw==
-X-Gm-Message-State: AOJu0Yw/0+ho1oN1AItFi1SgDt7Sf+tD0KsAhz7OAfWPjKgiq+X7YGPg
- VNRzkCgcP0I+2/8l6vJr0DI5wq8obFlZwpd0ITlIto68mtE=
-X-Google-Smtp-Source: AGHT+IHrB9XCUEQqgyF4hvfzgcL4Hyn5ERp1Y4oHKD1Vuf0CxZjKB+Civ8gtnCSL6l91diIGO//UoQ==
-X-Received: by 2002:a05:620a:2441:b0:781:129e:100 with SMTP id
- h1-20020a05620a244100b00781129e0100mr759474qkn.98.1703203419044; 
- Thu, 21 Dec 2023 16:03:39 -0800 (PST)
-Received: from [127.0.1.1]
- (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
- [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
- by smtp.gmail.com with ESMTPSA id
- bk7-20020a05620a1a0700b0077d7326c60csm1008515qkb.38.2023.12.21.16.03.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Dec 2023 16:03:38 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, 
- Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>, 
- Chanho Park <chanho61.park@samsung.com>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Eddie James <eajames@linux.ibm.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Leo <ycliang@andestech.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mario Six <mario.six@gdsys.cc>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Nikita Shubin <n.shubin@yadro.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>, Rick Chen <rick@andestech.com>, 
- Safae Ouajih <souajih@baylibre.com>, Scott McNutt <smcnutt@psyent.com>, 
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>, 
- Thomas Chou <thomas@wytron.com.tw>, Wolfgang Denk <wd@denx.de>, 
- uboot-snps-arc@synopsys.com, uboot-stm32@st-md-mailman.stormreply.com
-In-Reply-To: <20231216031446.2222362-1-sjg@chromium.org>
-References: <20231216031446.2222362-1-sjg@chromium.org>
-Subject: Re: [PATCH v3 00/22] Complete decoupling of bootm logic from commands
-Message-Id: <170320341698.2190413.10444075609654502560.b4-ty@konsulko.com>
-Date: Thu, 21 Dec 2023 19:03:36 -0500
+ bh=oqMelCzGiaQzWelsK82Mbi10SFZqDHmg/xciAtSRl54=;
+ b=iM3vb3+MOreCAv2yUvlYS24pI0FYE9U+c5K64NREziD+8oE8OM7ghm5qRiLaqJaYG4
+ kzrRMlhdpWOckPZzDx53B1ZZyqP9yizS4f0ZNCb+otr3W+iLAqlpj8igpwa/ZDtxjqdE
+ 3CNL74IDc1d4EaqRcSeh9LCsySlAWWP6OAA7wBIUtpW/zE1X2Y/w4maDH+7FP3vnq2y7
+ joRCeQ8CiCA8CyjhbG2KY1RTQ/h9QA4RYc1AVximPOTePBHUnclOLs+Vvemcc0yKNp45
+ BloBBFTS/gRTK5xG1d6wVdgpkP1rmqaMF7aJsxCzs6vBJ1UomC/a855lMiTcrhE1gvSC
+ uUtA==
+X-Gm-Message-State: AOJu0YwlU4H7kPcIIaIz15QzZoqF/MU+P8B6GBc2f8rnjKprPO6TaozQ
+ ZmnEr3vl3LN1hC0GHGmftsv1YN32YAmbjHUDAteKMk4yCHMnYQ==
+X-Google-Smtp-Source: AGHT+IEwC2P6DbmOli8LoOMnuMnYaRAXg/rgTnxnBt7oEjx+QLhxbE5fWPfwI18L7auX/EJey0hYqJxpUAhYW+J2iIo=
+X-Received: by 2002:a67:f5d7:0:b0:466:932a:8829 with SMTP id
+ t23-20020a67f5d7000000b00466932a8829mr1482178vso.25.1703223285458; Thu, 21
+ Dec 2023 21:34:45 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.4
-X-Mailman-Approved-At: Fri, 22 Dec 2023 01:04:16 +0100
+References: <20231214135103.1606605-1-sumit.garg@linaro.org>
+ <20231221150303.GI2513409@bill-the-cat>
+ <CAFLszThCytoBrNEp8BqaNqe9FnzhAznC9dMHHP4g=FcZQH3zng@mail.gmail.com>
+In-Reply-To: <CAFLszThCytoBrNEp8BqaNqe9FnzhAznC9dMHHP4g=FcZQH3zng@mail.gmail.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 22 Dec 2023 11:04:33 +0530
+Message-ID: <CAFA6WYOd858K3oMxYn3XqS=UhwjMggj3ugfHgk1Ux19DCxRjVg@mail.gmail.com>
+Subject: Re: [PATCH 0/8] An effort to bring DT bindings compliance within
+ U-boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Maxim Uvarov <maxim.uvarov@linaro.org>,
+ u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de, 
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk, 
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,21 +97,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Dec 2023 20:14:04 -0700, Simon Glass wrote:
+On Thu, 21 Dec 2023 at 20:48, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi,
+>
+> On Thu, Dec 21, 2023 at 3:03=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Thu, Dec 14, 2023 at 07:20:55PM +0530, Sumit Garg wrote:
+> >
+> > > Prerquisite
+> > > -----------
+> > >
+> > > This patch series requires devicetree-rebasing git repo to be added a=
+s a
+> > > subtree to the main U-boot repo via:
+> > >
+> > > $ git subtree add --prefix devicetree-rebasing \
+> > >       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/device=
+tree-rebasing.git \
+> > >       v6.6-dts --squash
+> >
+> > So, I've played with subtree a little and I think this is the right way
+> > forward in these cases. If anyone wants to take a look at how this work=
+s
+> > in practice, take a look at:
+> > https://source.denx.de/u-boot/u-boot/-/commits/WIP/u-boot-with-devicetr=
+ee-rebasing-since-v6.1/?ref_type=3Dheads
+> > In that tree I started with the v6.1-dts tag, sync'd all the configs (t=
+o
+> > have an example of a normal commit) and then did a merge of each tag
+> > until v6.6-dts, so provide some history. And git log looks like what I
+> > want to see, the squash commit has clear references to what we are
+> > getting and I make a merge commit that says what I did. If you pull the
+> > tree and checkout the branch, all the code is right there already,
+> > nothing further to do. Same with tarball releases. The only thing I
+> > don't like is the size growth there, but we'll reclaim some of it when
+> > we delete our obsolete bindings, and then obsolete dts files.
+>
+> I spent a bit of time with subtree as well, as part of reviewing this
+> series, using the instructions Sumit provided. It seems OK to me. We
+> have to accept that it adds code and there will be changes/churn, but
+> it is not too different to accepting patches on those files within
+> U-Boot. We will bring in files which U-Boot doesn't use, but U-Boot
+> does support a good proportion of the boards supported by Linux, so I
+> don't see that as a big cost.
+>
+> From my experimentation, subtrees seem to have no impact on buildman,
+> which is great. Am I missing anything?
 
-> This series continues refactoring the bootm code to allow it to be used
-> with CONFIG_COMMAND disabled. The OS-handling code is refactored and
-> a new bootm_run() function is created to run through the bootm stages.
-> This completes the work.
-> 
-> A booti_go() function is created also, in case it proves useful, but at
-> last for now standard boot does not use this.
-> 
-> [...]
+No it shouldn't cause any regression on existing tools/CI/build
+systems. It is just a version controlled way of importing third party
+source code as a tarball.
 
-Applied to u-boot/next, thanks!
+>
+> I still worry about the board-level 'switch' between U-Boot DT and
+> upstream ones. I believe that should be at the SoC level instead.
+>
 
--- 
-Tom
+Probably I wasn't clear enough in my earlier replies but this series
+motivates for a SoC level switch only. Patch #7 is essentially a
+switch for Amlogic meson-gxbb SoC and its derived boards.
 
+-Sumit
 
+> >
+> > Maxim, please switch (back, sorry!) to subtree for the next lwIP
+> > patchset and just not in the prerequisite steps what the subtree comman=
+d
+> > is, and make sure the docs have an example of what future re-sync
+> > "subtree pull" commands should look like. For CI testing, you'll have t=
+o
+> > do that to start with and just not include that patch in the ML part.
+>
+> Regards,
+> Simon
