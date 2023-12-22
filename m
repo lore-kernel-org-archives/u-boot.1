@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2A9C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E58BC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:46:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EA26877BC;
-	Fri, 22 Dec 2023 16:46:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B0178877B8;
+	Fri, 22 Dec 2023 16:46:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OTp89Kxg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q/eExMY3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA7FC8785D; Fri, 22 Dec 2023 16:46:07 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 4EEE0877B7; Fri, 22 Dec 2023 16:46:23 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC2AD877B8
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:46:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 280C387874
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:46:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2ccb4adbffbso1232861fa.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:46:05 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7812750f665so87207685a.0
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:46:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703259965; x=1703864765; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CdSgHYjPedNucOyhJXGjHLcrrD5cy2/z3BFeGTlASRo=;
- b=OTp89KxgfWwvaUUF4TaqgicMU4F1NO2brMopLVPAAJip5XCTTfMYbDv+3IzoSo6qUx
- Rb27eNNxtAbr5/rUyoBx1sTp04peVn2kUN30a4mJbrd/n4bRE26cqqzjWxCfSaYOd9Vw
- vFELrd+0/GwA3u9jNLBTuoMr0RiUG08p180eSVOFgfFspwvTtfl/9gwGkkd2mhWA/TtY
- +uL8a4PYqheTk6qP0FN/yqplrmZtx6tm3X6yeX6NH4Z9oGafj9hnFHZ6zgJQ0B7iqNXs
- iRAKIs5fsSgnA/NKldpQbvyTa03vvDuxdyvMoYEf0nll41vpBR0qVbP6M9FS7cE+hmjF
- oRjg==
+ d=konsulko.com; s=google; t=1703259978; x=1703864778; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ISKj8DG8xg91j5/lFfAOmdaPlNr+VtYllr2Sg5I9lFM=;
+ b=Q/eExMY3jFKQuqXtNrxSHK2yO0ezz36InSqA2JZYFGpaob/qZwW7OfXxZbeZLbbr5E
+ vnqyGg+vv4uVIAOnoLFBwdMmli/O6gZo4bf6Wb/+GaauZdbQkznzLGan1ERuXb2mg+fr
+ Mh/pSWwb3JLq6AorSZNATESXUp30rSpxzp1+Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703259965; x=1703864765;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CdSgHYjPedNucOyhJXGjHLcrrD5cy2/z3BFeGTlASRo=;
- b=rF7Plmp407FPiz9tsORym4sqF9yVU61Zm4WV5UT+YIpxOEb7hipvVN/Ncmp3M6aOM7
- 1TCCJDSf3OoiHOKC45E9GP6XHS2u2d7rYwKhriGn92VcXi3HRB7usFvIhbm6FoF+bwbp
- EULlRFY+NOcU2opoC8rfCK1E1+ZeCA2OokPmH1cDJMMUBLqMDMI4SsKf0v05scvn7o+e
- wxRX1V2I0yZCBhBXTnRfnAj97LM8CaotChpTaVy8xtA5d+L8KcRKG6M7BIPXaf3Xc8lG
- 78En2OUJoAa2tklgSgtr92/oxQ7yLFNIrcBueZohMzaSi9QQlFKsU7mJ7DqIhv6dOZe4
- Bc3A==
-X-Gm-Message-State: AOJu0Yxyj49vcTIsvvnfSqOq6fcbnuwugg0OezV0+jnR5cyRgogZ84je
- FcqST8IpLULxxeiCESJIRcejjzjyiHNn8SasH48MQUyMliFGSg==
-X-Google-Smtp-Source: AGHT+IENty/ZLhNi9uXf9Jp4E7KJGUN+tTfwEC80r/Dy+ViEPOM226S4LePdSmpOCJM2eRQ6PP73h7Vcnq3Sukb8qew=
-X-Received: by 2002:ac2:4352:0:b0:50e:3f2e:c726 with SMTP id
- o18-20020ac24352000000b0050e3f2ec726mr848662lfl.87.1703259965124; Fri, 22 Dec
- 2023 07:46:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1703259978; x=1703864778;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ISKj8DG8xg91j5/lFfAOmdaPlNr+VtYllr2Sg5I9lFM=;
+ b=DWwx+1sg6Mb1v1THPqKBdfNDdUieQWagj+9hzNTjXF9mQbP01XFwkpPuq9Emquwc/R
+ VgjIf7+pvGj8XL0eQsxcbEAQxlJlzE9FdM1kpiFINNSSVWZBvA6ftSc1RmhF623rFOeM
+ lSZAfwlwBUgWh03Ccv3FCkA/dwxHRm5EHuibtY4ghbTXzzI6TiN74GfDARxy33WHlj6K
+ Nz6z9XVbXm7JQPSK1xzvjQ/GnuNHW4F4FCtVCIFizrTWZHMLcxV8bKcf+topYpQIgZqz
+ hHJRtZM/jx4At0SqCulW5CUMxzC5IfXvw1Z8i/i0CpyiJztaJCncGVfLeK4q5M8Zdde0
+ KuJQ==
+X-Gm-Message-State: AOJu0YyUyIW7KU1lcDZ0ncKTEFxZtp/gxRl3yxslpkB2/p2w5Zxme/9w
+ iNJPDR8Jjt23OUTGcsn/dfZwHIj9+74AEg==
+X-Google-Smtp-Source: AGHT+IGH7Taj8Fu25GNbBFH3bI1U2YLH3U6yEN+itL5fD0hcUJyGIT82ZSTEty3viQLv0zeyt4o2OQ==
+X-Received: by 2002:a05:620a:319a:b0:77e:fbba:6450 with SMTP id
+ bi26-20020a05620a319a00b0077efbba6450mr3677140qkb.47.1703259977922; 
+ Fri, 22 Dec 2023 07:46:17 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
+ [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
+ by smtp.gmail.com with ESMTPSA id
+ i1-20020a05620a144100b0077fac9d9c18sm1436251qkl.88.2023.12.22.07.46.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 07:46:17 -0800 (PST)
+Date: Fri, 22 Dec 2023 10:46:14 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ ff@shokubai.tech, daniel.thompson@linaro.org,
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com,
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
+Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
+ U-Boot
+Message-ID: <20231222154614.GA2652760@bill-the-cat>
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
+ <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
+ <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
 MIME-Version: 1.0
-References: <20231221004030.581388-1-raymond.mao@linaro.org>
- <20231221004030.581388-4-raymond.mao@linaro.org>
- <CAC_iWjL3JfxVA0HW_2vbV3ivWDm0H00R=Mj4to_BC2b2gNY4FA@mail.gmail.com>
- <CAEfUkUK22kEAsobLXS3eH-FJnUg4BW5TuWtfaBeYLGgJs-ksgA@mail.gmail.com>
-In-Reply-To: <CAEfUkUK22kEAsobLXS3eH-FJnUg4BW5TuWtfaBeYLGgJs-ksgA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Dec 2023 17:45:29 +0200
-Message-ID: <CAC_iWj+83faSBgg42G+9vUs1un92RFqiWYVCSq4hS8yn6GtFVA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/9] bloblist: refactor of bloblist_reloc()
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jwerner@chromium.org, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>, 
- Michal Simek <michal.simek@amd.com>, Stefan Roese <sr@denx.de>, 
- Sean Anderson <sean.anderson@seco.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="x628JJcQGeBoA+o5"
+Content-Disposition: inline
+In-Reply-To: <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,69 +105,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
 
-On Fri, 22 Dec 2023 at 17:30, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> Hi Ilias,
->
-> On Fri, 22 Dec 2023 at 06:12, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
->>
->> Hi Raymond,
->>
->> On Thu, 21 Dec 2023 at 02:41, Raymond Mao <raymond.mao@linaro.org> wrote:
->> >
->> > The current bloblist pointer and size can be retrieved from global
->> > data, so we don't need to pass them from the function arguments.
->> > This change also help to remove all external access of gd->bloblist
->> > outside of bloblist module.
->> >
->> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
->> > ---
->>
->> [...]
->>
->> >         }
->> >  }
->> >
->> > -void bloblist_reloc(void *to, uint to_size, void *from, uint from_size)
->> > +void bloblist_reloc(void *to, uint to_size)
->> >  {
->> >         struct bloblist_hdr *hdr;
->> >
->> > -       memcpy(to, from, from_size);
->> > +       memcpy(to, gd->bloblist, gd->bloblist->total_size);
->> >         hdr = to;
->> > -       hdr->total_size = to_size;
->> > +       if (to_size < gd->bloblist->total_size)
->>
->> What's the size of *to? Is it equal to to_size?
->> Because if to_size can be smaller that gd->bloblist->total_size the
->> memcpy above is wrong
->
-> to_size should be 0 (use the total_size) or a value larger than total_size.
-> I think I should keep the below line from the function header.
+--x628JJcQGeBoA+o5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The point here is, are we certain that the *to is big enough? Or we'll
-end up overflowing ?
+On Fri, Dec 22, 2023 at 04:38:01PM +0100, Krzysztof Kozlowski wrote:
+> On 22/12/2023 14:43, Sumit Garg wrote:
+> > On Fri, 22 Dec 2023 at 13:48, Krzysztof Kozlowski
+> > <krzysztof.kozlowski@linaro.org> wrote:
+> >>
+> >> On 22/12/2023 07:12, Sumit Garg wrote:
+> >>> Changes in v2:
+> >>> --------------
+> >>> - Patch #1: excluded gitab CI config check and added commit descripti=
+on.
+> >>> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+> >>> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+> >>> - Patch #5: s/U-boot/U-Boot/
+> >>> - Patch #6 and #7: Picked up review tags
+> >>>
+> >>> Prerequisite
+> >>> ------------
+> >>>
+> >>> This patch series requires devicetree-rebasing git repo to be added a=
+s a
+> >>> subtree to the main U-Boot repo via:
+> >>>
+> >>> $ git subtree add --prefix devicetree-rebasing \
+> >>>       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/device=
+tree-rebasing.git \
+> >>>       v6.6-dts --squash
+> >>>
+> >>> Background
+> >>> ----------
+> >>>
+> >>> This effort started while I was reviewing patch series corresponding =
+to
+> >>> Qcom platforms [1] which was about to import modified devicetree sour=
+ce
+> >>> files from Linux kernel. I suppose keeping devicetree files sync with
+> >>> Linux kernel without any DT bindings schema validation has been a pain
+> >>> for U-Boot SoC/platform maintainers. There has been past discussions
+> >>> about a single DT repo but that hasn't come up and Linux kernel remai=
+ned
+> >>> the place where DT source files as well as bindings are placed and
+> >>> maintained.
+> >>
+> >> Thanks for doing this.
+> >>
+> >> I really suggest to store information that kernel DTS is directly
+> >> re-used, thus DTS backward and forward compatibility matters, also in
+> >> Linux kernel sources. The point is that sub-arch maintainers should be
+> >> aware of it. I don't think that as DT maintainers we can efficiently
+> >> keep an eye on it. Maybe create a subsystem profile and include it to
+> >> maintainer entries of such affected platforms?
+> >>
+> >=20
+> > From U-Boot point of view, currently we have the config option:
+> > "CONFIG_OF_UPSTREAM=3Dy" per platform which means directly re-use of
+> > kernel DTS. So U-Boot sub-arch maintainers should be aware of
+> > platforms which get converted to re-use kernel DTS.
+>=20
+> I was speaking about kernel.
+>=20
+> >=20
+> > I suppose we have to relay information to kernel sub-arch maintainers
+> > who aren't the same as maintaining U-Boot counterparts. How about
+> > adding U-Boot ML to CC for whichever DT change gets submitted in the
+>=20
+> And every other project? Just setup lei filters.
+>=20
+> > kernel? Otherwise adding U-Boot sub-arch maintainers as reviewers for
+> > corresponding kernel DT changes works too if that's acceptable.
+>=20
+> You just entirely ignored my proposal without addressing it... ok let it
+> be. No, CC-ing U-boot maintainers changes nothing because as I said, I
+> want kernel maintainers and contributors to be aware.
 
-Thanks
-/Ilias
-> >> - * @to_size: New size for bloblist (must be larger than from_size)
-> I will refactor this part.
->
->>
->> > +               hdr->total_size = gd->bloblist->total_size;
->> > +       else
->> > +               hdr->total_size = to_size;
->> > +       gd->bloblist = to;
->> >  }
->> >
->> >  int bloblist_init(void)
->> > diff --git a/common/board_f.c b/common/board_f.c
->> > index d4d7d01f8f..00b0430889 100644
->> > --- a/common/board_f.c
->>
->> [...]
->>
->> /Ilias
+Maybe an underlying question is, what kernel maintainers aren't aware,
+but should have been already? Then we can figure out how to address
+that. For example, with your Samsung hat on you weren't aware that
+exynos 4/5/7 DTS files are cared about by U-Boot, but are now aware.
+Samsung platforms are only recently becoming more active in U-Boot as
+well, so that's all understandable. On the other hand TI folks know, and
+I expect the K3 families to switch over to this series ASAP, and STM32
+and all of the AMD/Xilinx stuff too.
+
+--=20
+Tom
+
+--x628JJcQGeBoA+o5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWFr0MACgkQFHw5/5Y0
+tyxEggwAqSD/KoOaRzTKhQvBn+pV5/XEx6bJqGkwHpulBqA7WUP+fG50tE9QwNhO
+dBlUIRnj7Kl58n5Rz/awLNaHXJY1W8d+djrdR84myDAYpnme2svygZvTaLPwdMgW
+YjEw+ZI2rBx2aV08Eo2YfmtiKb49SY/vym5J1O2iAxn5hcSbJP+XxCTxBbX4HYe1
+kmSBHMTsST913g+Y3e78DrpFVBvfJSCuZcw6usIMaP0Cmc4JfyGmMKX4Md63hTo/
+3d1RwIYOjEv5N0X9iQ6nJ4Y4u01frfyOKLMTKmg9WXZP+NtobZb5/aPvpKYYEIJZ
+0GPJX+nRd40089qZbib0eJ7yoOgE4kW1z4qWVA+7+omZ3ScDwBggoaoPkncz7U4Y
+/+c2C9jFozEy02e7Tc3Tk2xS/+dqB46K3s6XlkcMzSWuaUBvvDY2IDhs0xHwe9Oa
+Z4Bcwn0DC6cQid4h26jTXJGzJUKlG/0vcuUsDNLApzA07YmL8Zudf8eZX0wmBj41
+raZwnxl8
+=HIdB
+-----END PGP SIGNATURE-----
+
+--x628JJcQGeBoA+o5--
