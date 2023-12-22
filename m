@@ -4,115 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE6F5C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A275C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:35:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FBEE8783E;
-	Fri, 22 Dec 2023 13:33:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id D83D88788E;
+	Fri, 22 Dec 2023 13:35:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="lcYdKMlM";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="sWtMbb3f";
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="lcYdKMlM";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="sWtMbb3f";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oir5zz4O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3AC88788A; Fri, 22 Dec 2023 13:33:14 +0100 (CET)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5B0C78788F; Fri, 22 Dec 2023 13:35:11 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B09C8781E
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:33:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 49ED68781E
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:35:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id AFA9621FF8;
- Fri, 22 Dec 2023 12:33:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1703248392; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=iwbSCGTopwTyUJ/lGqBVFIdBwtNEh7E12jOToHONX70=;
- b=lcYdKMlMkDERkMTmFld9BUuzP4Gl9z2zq2Dbdc2DsH2GjGXdnCph4HGs/XCXXdJ7mVnmyy
- EpnMSl+4Ey6evmVe3PY0pMEMS0kucCVAO7346kmgf5zHL1qf6C/VoElHC+Rw36rx5mzLBW
- +seHbKFIs5dCu+EF+gg73Spn7cEAIco=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1703248392;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=iwbSCGTopwTyUJ/lGqBVFIdBwtNEh7E12jOToHONX70=;
- b=sWtMbb3fLXAHWUXdR0reQ3yX2MAJ1D55VWxBbwVKytbAebuPxnQ0XpmPKrUIiu7hdAmhfG
- YwYYSr3iznOCOrDQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1703248392; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=iwbSCGTopwTyUJ/lGqBVFIdBwtNEh7E12jOToHONX70=;
- b=lcYdKMlMkDERkMTmFld9BUuzP4Gl9z2zq2Dbdc2DsH2GjGXdnCph4HGs/XCXXdJ7mVnmyy
- EpnMSl+4Ey6evmVe3PY0pMEMS0kucCVAO7346kmgf5zHL1qf6C/VoElHC+Rw36rx5mzLBW
- +seHbKFIs5dCu+EF+gg73Spn7cEAIco=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1703248392;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=iwbSCGTopwTyUJ/lGqBVFIdBwtNEh7E12jOToHONX70=;
- b=sWtMbb3fLXAHWUXdR0reQ3yX2MAJ1D55VWxBbwVKytbAebuPxnQ0XpmPKrUIiu7hdAmhfG
- YwYYSr3iznOCOrDQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 8B22513997;
- Fri, 22 Dec 2023 12:33:12 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([10.150.64.162])
- by imap1.dmz-prg2.suse.org with ESMTPSA id jAx5HwiChWUiEgAAD6G6ig
- (envelope-from <iivanov@suse.de>); Fri, 22 Dec 2023 12:33:12 +0000
-Date: Fri, 22 Dec 2023 14:33:11 +0200
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-To: Marc Zyngier <maz@kernel.org>
-Cc: Matthias Brugger <mbrugger@suse.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Dmitry Malkin <dmitry@bedrocksystems.com>, 
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- wahrenst@gmx.net, florian.fainelli@broadcom.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 0/7] rpi5: initial support
-Message-ID: <evdxlvvwhotp77abj23arm2zwbgcqijqxxmuregf2uas4c3clj@jbfqnkc6fc7x>
-References: <20231218210341.30073-1-iivanov@suse.de>
- <a277be3746ae7fd3bd2676090a90d233@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3bb8977162aso461785b6e.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:35:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1703248508; x=1703853308; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HIZBfGv9LtAtFenv8+TGA6Xh14WHDP/c1bVzHrgUpxc=;
+ b=oir5zz4ON+DasM6L+fiSdUKkHC+UtCNcjN9NZDXv9GeHeuwT9kkVijf6/EWCSMOCl5
+ hxOIPb8o85Dr9xLdaMZAS0zeURulY5J2wuISEuLM7CpQ9G3l+TAwQoa2bk3eI3tDjPDf
+ FQ2jXvCFOUfoOklH72gc4se9pteSauK62XjHk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703248508; x=1703853308;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HIZBfGv9LtAtFenv8+TGA6Xh14WHDP/c1bVzHrgUpxc=;
+ b=n4U+2C1qeuQjCVa8meEygKqO/x2N/2raZa5q/jHsiB2+hC36ZPQBdz6/NGu7zSw9B/
+ W0fFZG8sWkCOKxY82wkC83Qn63Z8Kqcvnp61RH75yEUMQ2f5/+1u/qFhEkxl49nTzABB
+ D0yqoYcjOqS5CKD15LCXJkxTkTZgStXx/is3BYrvzqalgcCvI1IaL9g3jj1HTBfYfS4O
+ 8e7y2lgAV1X3M/nU++wXBvmekqWiHEkYWKWj1Z4DZ0qoTqp80upkzCiud3cNnqniay4I
+ eGrlXl5xljisYniLFr4OfnblIHlNyXd0q0lBbiy1jm2xLmymS7NV5htBUSzXlgUqwq+S
+ 1lAQ==
+X-Gm-Message-State: AOJu0YxVsTIywEdKADYAdAZooeriitvz++TsQmWBDXzXKTOrYoj1bX5F
+ LotYtAOFztpobx2d5Ti3A7xP1Y+1M9B+PQ==
+X-Google-Smtp-Source: AGHT+IE41PnzRSn2wS1tymZPbww5YxQimxV/E1yXR3PSCZFntEN1bMAcFmVTxbiyqDKrzEKV/oNUYg==
+X-Received: by 2002:a05:6808:1152:b0:3b9:d7a0:d152 with SMTP id
+ u18-20020a056808115200b003b9d7a0d152mr1386175oiu.40.1703248507869; 
+ Fri, 22 Dec 2023 04:35:07 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
+ [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
+ by smtp.gmail.com with ESMTPSA id
+ i13-20020a37c20d000000b0078131528fefsm139141qkm.32.2023.12.22.04.35.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 04:35:07 -0800 (PST)
+Date: Fri, 22 Dec 2023 07:35:04 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ u-boot-custodians@lists.denx.de, sjg@chromium.org,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor@kernel.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ maxim.uvarov@linaro.org, b.galvani@gmail.com, xypron.glpk@gmx.de,
+ michal.simek@amd.com, seanga2@gmail.com, rasmus.villemoes@prevas.dk,
+ peng.fan@nxp.com, jh80.chung@samsung.com, rfried.dev@gmail.com,
+ marex@denx.de
+Subject: Re: [PATCH v2 5/8] doc: devicetree: Updates for devicetree-rebasing
+ subtree
+Message-ID: <20231222123504.GA2513409@bill-the-cat>
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <20231222061208.3009970-6-sumit.garg@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WIFT3Kxx628i5V4Y"
 Content-Disposition: inline
-In-Reply-To: <a277be3746ae7fd3bd2676090a90d233@kernel.org>
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Spamd-Result: default: False [-3.81 / 50.00]; ARC_NA(0.00)[];
- RCVD_VIA_SMTP_AUTH(0.00)[];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
- DWL_DNSWL_LOW(-1.00)[suse.de:dkim]; RCVD_COUNT_THREE(0.00)[3];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- DKIM_TRACE(0.00)[suse.de:+]; MX_GOOD(-0.01)[];
- RCPT_COUNT_SEVEN(0.00)[11];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim];
- FUZZY_BLOCKED(0.00)[rspamd.com]; FROM_EQ_ENVFROM(0.00)[];
- MIME_TRACE(0.00)[0:+]; MID_RHS_NOT_FQDN(0.50)[];
- FREEMAIL_CC(0.00)[suse.com,gmail.com,bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,gmx.net,broadcom.com,lists.denx.de];
- RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-3.00)[100.00%];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=lcYdKMlM;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=sWtMbb3f
-X-Rspamd-Queue-Id: AFA9621FF8
+In-Reply-To: <20231222061208.3009970-6-sumit.garg@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,53 +103,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12-22 12:19, Marc Zyngier wrote:
-> 
-> Hi Ivan,
-> 
-> On 2023-12-18 21:03, Ivan T. Ivanov wrote:
-> > Hi,
-> > 
-> > These patches are adding basic support for RPi5.
-> > They are based on v2 series from Dmitry Malkin[1].
-> > 
-> > With them I am able to _start_ current openSUSE
-> > Tumbleweed without modification. They are still
-> > a lot of things to be added to the upstream Linux
-> > before it runs flawlessly on this device, but at
-> > least in U-Booot SD controller used for uSD card
-> > and Frameboffer and HDMI0 devices are working fine
-> > now. It seems that PCIe controller is working fine
-> > too, but I have not tested it too much.
-> > 
-> > Serial console and reset are also functional.
-> > 
-> > Hopefully this will help others add missing pieces
-> > more easily.
-> 
-> So I've given this a go, and the basics (serial) worked
-> out of the box (thanks for that!) after performing the
-> memory-map change you described in your reply to patch 1.
-> 
-> However, I don't get anything on the PCIe front:
-> 
-> U-Boot> pci enum
-> PCIe BRCM: link down
-> PCIe BRCM: link down
-> 
-> despite having an nvme device connected and enabled
-> (the RPi kernel finds it).
-> 
-> I'm guessing I must be missing something. How did you
-> test PCIe?
-> 
 
-No, you are not missing anything. I have not tested it
-for real. That is why I said "it seems". Sorry.
+--WIFT3Kxx628i5V4Y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yesterday I started looking more closely at what's missing
-and unfortunately a lot more changes are needed.
+On Fri, Dec 22, 2023 at 11:42:05AM +0530, Sumit Garg wrote:
 
-Regards,
-Ivan
+> Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+> subtree and maintain a regular sync with Linux kernel devicetree files
+> and bindings.
+>=20
+> Along with that add documentation regarding how to run DT bindings
+> schema checks.
+>=20
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> ---
+>  doc/develop/devicetree/control.rst | 108 +++++++++++++++++++++++------
+>  1 file changed, 86 insertions(+), 22 deletions(-)
+[snip]
+> @@ -81,18 +94,21 @@ Failing that, you could write one from scratch yourse=
+lf!
+>  Configuration
+>  -------------
+> =20
+> -Use::
+> +Traditionally, U-Boot placed copies of devicetree source files from Linux
+> +kernel into `arch/<arch>/dts/<name>.dts` which can be selected via::
+> =20
+> -   #define CONFIG_DEFAULT_DEVICE_TREE	"<name>"
+> +    #define CONFIG_DEFAULT_DEVICE_TREE	"<name>"
 
+Oh, oof. This never got updated for Kconfig rather than config.h. Can
+you please include re-wording this to be setting <name> when prompted
+for DEFAULT_DEVICE_TREE by Kconfig? And the rest of the text you're
+updating as well to match, thanks.
+
+--=20
+Tom
+
+--WIFT3Kxx628i5V4Y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWFgngACgkQFHw5/5Y0
+tywNvQv+PXpqYfCm/efG62coaHwNWo28VEE/MVnLf2mUSYx8LSHw+Hzyfk5Q6xlH
+MZTQJm+8GuUjNS9JMiLsAKIracsxpOvVtfeGrmMLrdOlzLcLLx1ueWRFYhynKEr3
+G3DXka8uDm4etz27fIGz96vcHPTtkxL9w+/SdQUFln/2Vk9GGxL9k9bL6w0sggez
+hTbDvkwcTov+5r1YCvzh9Kj26HN8sbpg7aT5hNbhSM4Ba8hvbq4UJ4yifnvAzseL
+Lfg+Us+QhuIJNbnieHYdV1riiFPC1fD21Gq2uIYZ2Rq4eFkm2ngZLtKqto8uHW71
+hEbdwh0FGkTwxvMMpLD6EdLTPrC8r/k6nkaCeRETciokisrV8mfOr9wrLoZjBXiu
+S/pTWLEXw/WlRtEs1ZwVAaEzAEnVvm7BHy3VPAW7zjffNvlJ0ffjR54YrTqYEJAW
+ySeAN2ILB5kttXmc7ylxtr1AUYqdnQigL5lF+X4dMuYcxceDmfcRYQ+FhFUjRUd8
+n4DngR11
+=B0Vc
+-----END PGP SIGNATURE-----
+
+--WIFT3Kxx628i5V4Y--
