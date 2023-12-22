@@ -4,132 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F27C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 08:18:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E890C46CD4
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 08:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5BC98769A;
-	Fri, 22 Dec 2023 09:18:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B23D9877B1;
+	Fri, 22 Dec 2023 09:22:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sgLTW7bE";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="nL7oLVAi";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="16usCTjq";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="gn2/NdAA";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="JQhpPa8v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A081987807; Fri, 22 Dec 2023 09:18:03 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CCCC3870B5; Fri, 22 Dec 2023 09:22:55 +0100 (CET)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de
+ [IPv6:2a07:de40:b251:101:10:150:64:1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F4BE87763
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 09:18:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3C7387768
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 09:22:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5545aa3532aso239350a12.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 00:18:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703233081; x=1703837881; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5Y/lxWF1yvWZP9Ixj+S4VHwVF1abu3FaZLOP/0Qmres=;
- b=sgLTW7bE+QcqcWRqNs8NayUd5XAz9WRA3K9794A/PgcFCfxRs4YenxQI48dGiY3Eec
- MCDKa9zlNQmi37b8m5UKIKc/rmcBx78oamFp9AQtdP/c5Vj0j6/uRv1JMm3r4jBHgqep
- +UeEgQX21B/MMD/b0OyyODBP1GOb9rZtCbD/ruOundqVUVahfSztJq1hiKwcAUe9ru5T
- hXlTiyV2iThmtQslFWvfRNseir/xudBqHB7A1ZNSfma92RbnucustiRv6gMgxfyI5Gai
- xWZS3+08/bDCKwfjC/2aDpZfwYZTZxHaxNG0iCQ+jxxnlde85X/r82zmP1f3UlKEfuE/
- Dh1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703233081; x=1703837881;
- h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
- :to:content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5Y/lxWF1yvWZP9Ixj+S4VHwVF1abu3FaZLOP/0Qmres=;
- b=OGgmMEzJhXS7UZOZwsuOkt/fv8Y83ngMgiGqgXxzHyjmPxhy+nKCnQ8wUFpNCLRwOL
- QmHsU8y47Jxhyq7VZrt9Hbw/gJKwqYtMzkwWu4roXl4c8lqA7/F512ljCjx1bKk6HhZF
- EwH/tES8Nk1hJfVWScnKF8ey8gw1BmTKEaIpyv8lNwxcewtVKoUFkzVPvSVdXwrkdH1b
- Du1+gBe/7yqm5LtfZGwgobbW1pEKdsU0zAD7PzBkbs+FIsrJaTrEzBK6tUx1x5Zdm3Jz
- NomhtYNRYfSuF8wZJuWIchgiJDkKbnVOgUqaHMfrA06IDUIH4OVX1dDtTgi6tdnLAuta
- zgMQ==
-X-Gm-Message-State: AOJu0YxajuOfyK7TGqk2+3hEugHzXVyrq6Is7/Am4JggkOYZHE6SMfAv
- 4bp9QgcrW0hlIt66vIytSmizzr7rWv1XmQ==
-X-Google-Smtp-Source: AGHT+IGfIHjjdn20upPj1QaVyI4NUHULPZvZ88oki3JvI7RShcTA28SHzEUz66IKZow87myeVZF94A==
-X-Received: by 2002:a17:906:6856:b0:a1e:7683:4da4 with SMTP id
- a22-20020a170906685600b00a1e76834da4mr466432ejs.11.1703233080925; 
- Fri, 22 Dec 2023 00:18:00 -0800 (PST)
-Received: from [192.168.0.22] ([78.10.206.178])
- by smtp.gmail.com with ESMTPSA id
- w25-20020a170906481900b00a26ac253486sm1185904ejq.134.2023.12.22.00.17.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Dec 2023 00:18:00 -0800 (PST)
-Message-ID: <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
-Date: Fri, 22 Dec 2023 09:17:58 +0100
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0D1E821FEE;
+ Fri, 22 Dec 2023 08:22:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1703233373; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=R4QNnkOV/7YfCRCumUTsGmD04f97xwUU8VCQgJBoKb0=;
+ b=nL7oLVAixYNBUv3ZDepU/kt8V0NCw/qvhl5T2by2x7BJjGqzAl86Z9Qnrn6pk19Ox6TNT0
+ hiXkutar6VPH0LB7xpgb8FhQ771CVkVLzgWWcS5MIht4ywVB8f4dq2mtaDTMUEe2HsRKPp
+ mp+dZeEaseq18Ou3H3l1RxDihJpPTj4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1703233373;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=R4QNnkOV/7YfCRCumUTsGmD04f97xwUU8VCQgJBoKb0=;
+ b=16usCTjqi1DuUaCofj0sN/+DXGnXzUpAShrKktk9F6Qq48dgZlyNxiZ+s9jsANLTttEKZD
+ CWakY444KF6EjHAQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1703233372; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=R4QNnkOV/7YfCRCumUTsGmD04f97xwUU8VCQgJBoKb0=;
+ b=gn2/NdAAfx1FmunVnI9XBXTeFEOqNFTujcaWqqN3Nk2rtyOjFlHAX3c17mRXYCwFUd04k1
+ Q4n59xQrgiqlXNeRd+4BgEVdnPQqGEqh9Zli0zE7kWAGfiTgwNItS9/1UMtY1DWeDHat4j
+ 2lV25LDXSmTwiK/9K7UNi0MjOGgvoPY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1703233372;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=R4QNnkOV/7YfCRCumUTsGmD04f97xwUU8VCQgJBoKb0=;
+ b=JQhpPa8vwIIWYfBKaHgeCOilcTuabnZsKAOrXaXE3oitIbiQr+HuUD7rE6fvqd2EDNDSga
+ HNj9G023ujstEOBQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D9FFF13AB5;
+ Fri, 22 Dec 2023 08:22:51 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([10.150.64.162])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id pJfSMltHhWVMZAAAD6G6ig
+ (envelope-from <iivanov@suse.de>); Fri, 22 Dec 2023 08:22:51 +0000
+Date: Fri, 22 Dec 2023 10:22:51 +0200
+From: "Ivan T. Ivanov" <iivanov@suse.de>
+To: Stefan Wahren <wahrenst@gmx.net>
+Cc: Florian Fainelli <florian.fainelli@broadcom.com>, 
+ Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Dmitry Malkin <dmitry@bedrocksystems.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, 
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 5/7] mmc: bcmstb: Add support for bcm2712 SD controller
+Message-ID: <ae2fhlqdltlrdkbaai7s3b7rqz44xxmabb6klqsnf2rez7vvjb@hkhxm42xpn3x>
+References: <20231218210341.30073-1-iivanov@suse.de>
+ <20231218210341.30073-6-iivanov@suse.de>
+ <fedeb96c-19db-442d-bab0-e87d6d8bba68@broadcom.com>
+ <db91a259-d504-4e8b-8178-dad3e5709b93@gmx.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
- U-Boot
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
- daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
- b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
- seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
- jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
-References: <20231222061208.3009970-1-sumit.garg@linaro.org>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
- 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
- D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20231222061208.3009970-1-sumit.garg@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <db91a259-d504-4e8b-8178-dad3e5709b93@gmx.net>
+X-Spamd-Result: default: False [-2.60 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_COUNT_THREE(0.00)[3];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ RCPT_COUNT_SEVEN(0.00)[10];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email];
+ FREEMAIL_TO(0.00)[gmx.net]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ MID_RHS_NOT_FQDN(0.50)[];
+ FREEMAIL_CC(0.00)[broadcom.com,suse.com,gmail.com,bedrocksystems.com,fitzsim.org,nxp.com,samsung.com,denx.de,lists.denx.de];
+ RCVD_TLS_ALL(0.00)[]; BAYES_HAM(-3.00)[100.00%]
+Authentication-Results: smtp-out1.suse.de;
+	none
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,49 +125,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22/12/2023 07:12, Sumit Garg wrote:
-> Changes in v2:
-> --------------
-> - Patch #1: excluded gitab CI config check and added commit description.
-> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
-> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> - Patch #5: s/U-boot/U-Boot/
-> - Patch #6 and #7: Picked up review tags
+On 12-21 16:39, Stefan Wahren wrote:
+> To: Florian Fainelli <florian.fainelli@broadcom.com>,  "Ivan T. Ivanov"
+> > 
+> > On 12/18/2023 10:03 PM, Ivan T. Ivanov wrote:
+> > > Borrow SD quirks from vendor Linux driver.
+> > > 
+> > > "BCM2712 unfortunately carries with it a perennial bug with the SD
+> > > controller register interface present on previous chips
+> > > (2711/2709/2708).
+> > > Accesses must be dword-sized and a read-modify-write cycle to the 32-bit
+> > > registers containing the COMMAND, TRANSFER_MODE, BLOCK_SIZE and
+> > > BLOCK_COUNT registers tramples the upper/lower 16 bits of data written.
+> > > BCM2712 does not seem to need the extreme delay between each write as on
+> > > previous chips, just the serialisation of writes to these registers in a
+> > > single 32-bit operation."
+> > > 
+> > > Signed-off-by: Ivan T. Ivanov <iivanov@suse.de>
+> > 
+> > This is diverging from the Linux sdhci-brcmstb.c driver where no such
+> > quirk needs to be carried out, rather the logic for such quirks has
+> > been present in sdhci-iproc.c...
 > 
-> Prerequisite
-> ------------
+> it seems this patch based the downstream kernel changes [1].
+
+Yep.
+
+> I would
+> suggest to use an existing driver which already handle this bug
+> (iproc_sdhci or bcm2835_sdhci).
 > 
-> This patch series requires devicetree-rebasing git repo to be added as a
-> subtree to the main U-Boot repo via:
+> Does the Rpi 5 still works, if the compatible "brcm,bcm2712-sdhci" is
+> added to mmc/iproc_sdhci.c?
+
+No, it is not working :-)
+
+Even after I added shadow variables usage in iproc_readw, which do not
+have it.
+
+Even after I used hard coded values for "clock-freq-min-max", which are
+missing in RPi5 device tree.
+
+Even after I added 2712 specific "cfg" space initialization procedure
+from the brcnstb driver.
+
+On the other hand they are some tuning procedures in iproc driver
+which I am not sure that are relevant for 2712 controller.
+
+And the diff stat is getting bigger that equivalent for brcmstb driver.
+
+To me it is  a bit easier to add 2712 support to brcmstb driver,
+because it will be easier to follow any vendor Linux driver changes.
+
+It looks like hardware engineers are just making the same mistake
+when integrating 2712 SDHCI controller as for IPROC controller.
+
+Regards,
+Ivan
+
 > 
-> $ git subtree add --prefix devicetree-rebasing \
->       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
->       v6.6-dts --squash
-> 
-> Background
-> ----------
-> 
-> This effort started while I was reviewing patch series corresponding to
-> Qcom platforms [1] which was about to import modified devicetree source
-> files from Linux kernel. I suppose keeping devicetree files sync with
-> Linux kernel without any DT bindings schema validation has been a pain
-> for U-Boot SoC/platform maintainers. There has been past discussions
-> about a single DT repo but that hasn't come up and Linux kernel remained
-> the place where DT source files as well as bindings are placed and
-> maintained.
-
-Thanks for doing this.
-
-I really suggest to store information that kernel DTS is directly
-re-used, thus DTS backward and forward compatibility matters, also in
-Linux kernel sources. The point is that sub-arch maintainers should be
-aware of it. I don't think that as DT maintainers we can efficiently
-keep an eye on it. Maybe create a subsystem profile and include it to
-maintainer entries of such affected platforms?
-
-Best regards,
-Krzysztof
-
-Best regards,
-Krzysztof
-
+> [1] -
+> https://github.com/raspberrypi/linux/commit/b627647c4500d39cb026924b608841fdf4d4d7e9
