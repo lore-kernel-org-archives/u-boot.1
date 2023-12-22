@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DF5C47072
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEB3C4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:06:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D260B8772E;
-	Fri, 22 Dec 2023 22:03:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 59FE9877DE;
+	Fri, 22 Dec 2023 22:03:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="k0IvszMS";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mq91OBkL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 746E8877BC; Fri, 22 Dec 2023 22:03:45 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 4C52C87768; Fri, 22 Dec 2023 22:03:46 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B820877DC
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 84F78875FA
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-40d190044c5so21668125e9.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:40 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-40d490a1936so7356555e9.0
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1703279020; x=1703883820;
+ d=amarulasolutions.com; s=google; t=1703279021; x=1703883821;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hRrQ2IkGgDDck5NLWp89AZx6iGV72Wv/tnqJuMkxcQU=;
- b=k0IvszMS4L/LbAQk8gG9BclxuF9cll3Vbz4ygUT545q7nDJfm/WQpFIPK+IvWh5M78
- JjJlVTnoggtu/Vmz1ODv62brXGgH9Z2jhVf00kTgnloWMR8yvPwVwnke1es7JhyXcHij
- wPgz5Un35QyvbrVnjkzUS5Jm7ji9E1IKOdqyc=
+ bh=doWty2U9xWIS6+YzeofXrePWP4HMK9WU0hHwvvDf5u0=;
+ b=mq91OBkLHSOeKizDR0K8K2KR8w4eeoOf3RbvlLW6wIYGJhmaiHxADSmSQC6BfCjeKv
+ eL06JJC/4wlEevv/Gihan7PkLwhbR88XBKshGywNDxnULgb3jDQs1r+Ss8QPvUsDLXdi
+ DKEU50rlbA4AyXZd6VbfBUSZH7Q/RbXuTwToc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703279020; x=1703883820;
+ d=1e100.net; s=20230601; t=1703279021; x=1703883821;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hRrQ2IkGgDDck5NLWp89AZx6iGV72Wv/tnqJuMkxcQU=;
- b=eDJMbnhqIYvE0vuUBdF9+WBcO2aZDwASkfgAt5aO4M9k/ty8RX5TYQSpqV5ywfdIoJ
- 7wSZ0Pnr59w2n8NZw2GBKfokJJJDsF90NpdwlvarpwmSf4UUisnq6ILsROkd/RqI/NNh
- roDIWKYtKN+49Ypm9hXTOiTQ8MzEdlVOotdj8uS/3J3ukNrYGKPCIorvO85EgrcZz5m6
- W0ICf9zSbeOLovycpTPt13Q3UzQ4b0feihjmaBg6fMseR21zCHjXERBfSIdIAQhq6Tr0
- qas4uSv6OugDMWLzzG94ArHvtzrSgvDKlVZ3rfowY5eFOm4reW3nFf1yDxr2NipDfMk+
- YUjQ==
-X-Gm-Message-State: AOJu0Yyse6q5QYlQaMDNcHUpT8syuyGnTSGaUr90iDQFiVfUVT1GUpwM
- r4XL37WTrCO4gqAxjODCVMaTyjJeu43c6+JB4iZQsmnO4Bg=
-X-Google-Smtp-Source: AGHT+IEMicp3Hz2dAvvt4jQ5qf/z3mpMhL7wW6NLSFIP8ZmQe8fhxWOFqJwXObd/dUtfUWAOLsgD5w==
-X-Received: by 2002:a05:600c:201:b0:40c:2766:5424 with SMTP id
- 1-20020a05600c020100b0040c27665424mr1025167wmi.171.1703279019842; 
- Fri, 22 Dec 2023 13:03:39 -0800 (PST)
+ bh=doWty2U9xWIS6+YzeofXrePWP4HMK9WU0hHwvvDf5u0=;
+ b=jRwXLttCL6JOIoSnzTYVQ6IZXo1+4O5jWsjPZNNMwPSg3xB6b/lu1gaM9k3w1cqm5O
+ n22O/JFb1peGLs3pxZ3NBK4cIRfR5GgDFS26HOHlFNwVPLAVe18NDnFROlsQf7JvxEw5
+ mPSn99cXLJNChkiXjvCHE3FNGkT0FeDdMrXJWTve9YnuEMM+1IlX2bYcHILIrWRr0dOZ
+ pkdbUmS7L132PhcsGE6JmUftlCJ2KyvzaTtHuNx3atD+I+kijEFNGX+4BWZ0hAVW59R+
+ huvP3W+ME+bTrR7A5MmlDCn+6s1ONZoSy8bFnJ59AI/dcpWpwZrk0nPped8DRlE9Vdbf
+ /Yvw==
+X-Gm-Message-State: AOJu0YyCJK7Nd0pnfOg3ygUoAVTqrcGVWf/jB9wcXVtlL0QtR9+0WC5d
+ 6OJSlLwZHdNRlU4xs6oanm9Tl8mvBiBKMES+OQ/yDHCvpBg=
+X-Google-Smtp-Source: AGHT+IF82uzvkPDVgm+DeyI6IrkNozTD1k8xqVGd3GFM4EsCsHM5WV+ispNdA+j0Hpeojjauj5MkXw==
+X-Received: by 2002:a05:600c:45ce:b0:40d:18da:452e with SMTP id
+ s14-20020a05600c45ce00b0040d18da452emr597394wmo.158.1703279021144; 
+ Fri, 22 Dec 2023 13:03:41 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.39
+ j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:03:39 -0800 (PST)
+ Fri, 22 Dec 2023 13:03:40 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
  Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v13 20/24] cli: hush_modern: Enable loops
-Date: Fri, 22 Dec 2023 22:02:40 +0100
-Message-Id: <20231222210244.91830-21-francis.laniel@amarulasolutions.com>
+Subject: [PATCH v13 21/24] test: hush: Fix loop tests for modern hush
+Date: Fri, 22 Dec 2023 22:02:41 +0100
+Message-Id: <20231222210244.91830-22-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
 References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
@@ -92,62 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enables the use of for, while and until loops for command line as
-well as with run_command().
+Modifies return code got from while loop as modern hush always returns 0 from
+while loop.
 
-Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 ---
- common/cli_hush_modern.c   |  1 +
- common/cli_hush_upstream.c | 15 ++++++++++++++-
- 2 files changed, 15 insertions(+), 1 deletion(-)
+ test/hush/loop.c | 34 ++++++++++++++++++++++++++++++----
+ 1 file changed, 30 insertions(+), 4 deletions(-)
 
-diff --git a/common/cli_hush_modern.c b/common/cli_hush_modern.c
-index 6360747f21..fb578c3853 100644
---- a/common/cli_hush_modern.c
-+++ b/common/cli_hush_modern.c
-@@ -34,6 +34,7 @@
- #define ENABLE_HUSH_INTERACTIVE	1
- #define ENABLE_FEATURE_EDITING	1
- #define ENABLE_HUSH_IF		1
-+#define ENABLE_HUSH_LOOPS	1
- /* No MMU in U-Boot */
- #define BB_MMU			0
- #define USE_FOR_NOMMU(...)	__VA_ARGS__
-diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
-index 06af538a48..748edc9d2f 100644
---- a/common/cli_hush_upstream.c
-+++ b/common/cli_hush_upstream.c
-@@ -10348,7 +10348,7 @@ static int run_list(struct pipe *pi)
- #ifndef __U_BOOT__
- 	for (; pi; pi = IF_HUSH_LOOPS(rword == RES_DONE ? loop_top : ) pi->next) {
- #else /* __U_BOOT__ */
--	for (; pi; pi = pi->next) {
-+	for (; pi; pi = rword == RES_DONE ? loop_top : pi->next) {
- #endif /* __U_BOOT__ */
- 		int r;
- 		int sv_errexit_depth;
-@@ -10450,7 +10450,20 @@ static int run_list(struct pipe *pi)
- 			}
- 			/* Insert next value from for_lcur */
- 			/* note: *for_lcur already has quotes removed, $var expanded, etc */
-+#ifndef __U_BOOT__
- 			set_local_var(xasprintf("%s=%s", pi->cmds[0].argv[0], *for_lcur++), /*flag:*/ 0);
-+#else /* __U_BOOT__ */
-+			/* We cannot use xasprintf, so we emulate it. */
-+			char *full_var;
-+			char *var = pi->cmds[0].argv[0];
-+			char *val = *for_lcur++;
+diff --git a/test/hush/loop.c b/test/hush/loop.c
+index ca777e38fe..80a9071a80 100644
+--- a/test/hush/loop.c
++++ b/test/hush/loop.c
+@@ -9,6 +9,9 @@
+ #include <env_attr.h>
+ #include <test/hush.h>
+ #include <test/ut.h>
++#include <asm/global_data.h>
 +
-+			/* + 1 to take into account =. */
-+			full_var = xmalloc(strlen(var) + strlen(val) + 1);
-+			sprintf(full_var, "%s=%s", var, val);
-+
-+			set_local_var_modern(full_var, /*flag:*/ 0);
-+#endif /* __U_BOOT__ */
- 			continue;
- 		}
- 		if (rword == RES_IN) {
++DECLARE_GLOBAL_DATA_PTR;
+ 
+ static int hush_test_for(struct unit_test_state *uts)
+ {
+@@ -21,7 +24,12 @@ static int hush_test_for(struct unit_test_state *uts)
+ 	ut_assert_nextline("quux");
+ 	ut_assert_console_end();
+ 
+-	puts("Beware: this test set local variable loop_i and it cannot be unset!");
++	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
++		/* Reset local variable. */
++		ut_assertok(run_command("loop_i=", 0));
++	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
++		puts("Beware: this test set local variable loop_i and it cannot be unset!");
++	}
+ 
+ 	return 0;
+ }
+@@ -31,12 +39,30 @@ static int hush_test_while(struct unit_test_state *uts)
+ {
+ 	console_record_reset_enable();
+ 
+-	/* Exit status is that of test, so 1 since test is false to quit the loop. */
+-	ut_asserteq(1, run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
++	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
++		/*
++		 * Hush 2021 always returns 0 from while loop...
++		 * You can see code snippet near this line to have a better
++		 * understanding:
++		 * debug_printf_exec(": while expr is false: breaking (exitcode:EXIT_SUCCESS)\n");
++		 */
++		ut_assertok(run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
++	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
++		/*
++		 * Exit status is that of test, so 1 since test is false to quit
++		 * the loop.
++		 */
++		ut_asserteq(1, run_command("while test -z \"$loop_foo\"; do echo bar; loop_foo=quux; done", 0));
++	}
+ 	ut_assert_nextline("bar");
+ 	ut_assert_console_end();
+ 
+-	puts("Beware: this test set local variable loop_foo and it cannot be unset!");
++	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
++		/* Reset local variable. */
++		ut_assertok(run_command("loop_foo=", 0));
++	} else if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
++		puts("Beware: this test set local variable loop_foo and it cannot be unset!");
++	}
+ 
+ 	return 0;
+ }
 -- 
 2.34.1
 
