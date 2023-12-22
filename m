@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F359C47072
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:05:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78C8C4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38EAA8788F;
+	by phobos.denx.de (Postfix) with ESMTP id B095D8785B;
 	Fri, 22 Dec 2023 22:03:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="RNQy0VhU";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="TNqzZT4y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE28C87874; Fri, 22 Dec 2023 22:03:39 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id B242B87768; Fri, 22 Dec 2023 22:03:39 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAFA787842
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE50887846
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-40d4103aed7so21033935e9.3
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:30 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-40c48d7a7a7so17166585e9.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1703279010; x=1703883810;
+ d=amarulasolutions.com; s=google; t=1703279009; x=1703883809;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o8atAYcSxJqkLUa7wNntNkVGkl8V2j+VlYvx4/+374E=;
- b=RNQy0VhU4rXPDDHAe/zhf6jkLbPkJeMkswhHqZPKLnGgvlT6ZV7FEQxBTWpVUIBgbr
- uBSSngFmDDDW3GWcCCHWI1RI/qIkDdgIgSMS9CitUmRwqFSaQA4nOLoFshIK36f0Vt2n
- 0QcEYrEZOXmPFIBkjiGluhMd4nNHnqOcXyWaQ=
+ bh=7FQiGT6dyvRqJqLFqOZMqShA1Ng02KSe8nZFEAUKyrY=;
+ b=TNqzZT4yC9whKybY+fqqwuyjL7pky+H8MI17Lgz8RQRO6z+q43gEOXiwWmyKpjMT5z
+ pnTgS7E15/2eN5XyRiZJsYrcBLXfQUadwg11x6vYaitENfeNT+dJsPkl4i9LJAS2rX9X
+ nGTdEFMVQIFfIwOhfTyp1lsfgzNfSe3xZSzuc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703279010; x=1703883810;
+ d=1e100.net; s=20230601; t=1703279009; x=1703883809;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=o8atAYcSxJqkLUa7wNntNkVGkl8V2j+VlYvx4/+374E=;
- b=wH7quUY77OzSOsUKfykv4SocEaz7BnUy46PuuryDJjFdaV2/twaIm/8sQEDAByThk0
- XM6Ol6juGRXKJCOlJ9xHojLJ7ouNQ8iHWM/yBxftuTH8JzRh8KRngaOW/q1K7z56vQ43
- nRCdrOKIQtuBBrfprNkn9i0L/wOc6tn8Fanl9i/fpjnls0D3j6gRySGO9vFUkvCayNOk
- sFsUdf34FIZA06IgVXoQmhCZtFQHkDxjKEpxZiPiTn1mrpMuUEJeiNILcnkW/f1/DThV
- i4DGhQMNtIUHdt23YLexyxGG1QjhZycKslprWs2Qk4lePGIZTp4LOCYufbtnEggd2PuM
- nWDA==
-X-Gm-Message-State: AOJu0YxboJFphvR7395RyUh6F+p8A2s4BdJq8opvZircvn/NqOF5ayxD
- zTTunaDB4G23JPLXK+y+csC76qGW/IWf3/+xE0Hyc1JpRas=
-X-Google-Smtp-Source: AGHT+IGk8705LUHBxtA8qhIVRMCIStk+iIqzP178AYU9S1ZNua5SgD5pYA8fJMD+xidF2c+2k8zJhA==
-X-Received: by 2002:a05:600c:1e20:b0:40c:2671:2c52 with SMTP id
- ay32-20020a05600c1e2000b0040c26712c52mr1189753wmb.99.1703279010554; 
- Fri, 22 Dec 2023 13:03:30 -0800 (PST)
+ bh=7FQiGT6dyvRqJqLFqOZMqShA1Ng02KSe8nZFEAUKyrY=;
+ b=flCk2vZE1x/ZuP3EUGPTbKaPj8mbd5UeQCrjjvmS8vMH8Qv340xtNkVgo9S0mNDo9L
+ 1yqf8HWh3yQ1Sal7I1jxdQOgw9FGJtSs8cJ8X+FchwQEZ4KivvHkpMV1in9pL/ZtiNcq
+ GE5ERdq7Y5lAukKqK6G9y696E6wXak4tqpoH/MQTuzOIQ4yae4KkLmFu6y/0K/H/+IiI
+ tJU/WMujyTAinl//v6QiOI8zxI26VJjEdr7NpWe50vz47GY1ngrK462Ho/30lvAyfeoB
+ Q4m0zflPHGDw7QQuGhbfJV58Vvrdc12RlhxnkZfRK8I1+fzNKDxnQnKOa16UC7lyYSiw
+ yBAw==
+X-Gm-Message-State: AOJu0YwfrrIw9LxfcEqgUyo3Zml5Gy8lPRApT0ZepLIg1GeZpcKmG1Lz
+ u/IkYsoGlDILkHLqnPu9ZSB5L1GsMy4B5PEqKlMVZxj1voQ=
+X-Google-Smtp-Source: AGHT+IFt5yFm1UpKjpdCo6CAHwq3k0HPs8PkFyUaDIzSJxpvf6UtNaTV/yie109BQQgtLklc8EI8Xg==
+X-Received: by 2002:a05:600c:3d8a:b0:40c:3245:4448 with SMTP id
+ bi10-20020a05600c3d8a00b0040c32454448mr1044678wmb.83.1703279009261; 
+ Fri, 22 Dec 2023 13:03:29 -0800 (PST)
 Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
  [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
- j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.30
+ j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:03:30 -0800 (PST)
+ Fri, 22 Dec 2023 13:03:28 -0800 (PST)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
  Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
  Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [PATCH v13 14/24] cli: hush_modern: Add functions to be called from
- run_command()
-Date: Fri, 22 Dec 2023 22:02:34 +0100
-Message-Id: <20231222210244.91830-15-francis.laniel@amarulasolutions.com>
+Subject: [PATCH v13 13/24] cli: hush_modern: Enable variables expansion for
+ modern hush
+Date: Fri, 22 Dec 2023 22:02:33 +0100
+Message-Id: <20231222210244.91830-14-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
 References: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
@@ -93,152 +93,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-run_command() is called internally by the command run and it can also be called
-directly from U-Boot code, e.g. to do unit tests.
-This commit adds this path to go to modern hush.
+Enables variables expansion for modern hush, both for local and environment
+variables.
+So the following commands:
+foo=bar
+echo $foo
+setenv bar foo
+echo $bar
+leads to "bar" and "foo" being printed on console output.
 
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- common/cli_hush_upstream.c | 66 ++++++++++++++++++++++++++++++++++++--
- 1 file changed, 63 insertions(+), 3 deletions(-)
+ common/cli_hush_modern.c   | 17 +++++++
+ common/cli_hush_upstream.c | 91 +++++++++++++++++++++++++++++++++++---
+ 2 files changed, 103 insertions(+), 5 deletions(-)
 
+diff --git a/common/cli_hush_modern.c b/common/cli_hush_modern.c
+index 626fed089b..15bb1f0d92 100644
+--- a/common/cli_hush_modern.c
++++ b/common/cli_hush_modern.c
+@@ -207,6 +207,23 @@ static const char* endofname(const char *name)
+ 	return name;
+ }
+ 
++/**
++ * list_size() - returns the number of elements in char ** before NULL.
++ *
++ * Argument must contain NULL to signalize its end.
++ *
++ * @list The list to count the number of element.
++ * @return The number of element in list.
++ */
++static size_t list_size(char **list)
++{
++	size_t size;
++
++	for (size = 0; list[size] != NULL; size++);
++
++	return size;
++}
++
+ struct in_str;
+ static int u_boot_cli_readline(struct in_str *i);
+ 
 diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
-index ff4a57c6e3..7f6b058e6c 100644
+index 4b6ab20f3b..ff4a57c6e3 100644
 --- a/common/cli_hush_upstream.c
 +++ b/common/cli_hush_upstream.c
-@@ -1011,6 +1011,7 @@ struct globals {
- #ifdef __U_BOOT__
- 	int flag_repeat;
- 	int do_repeat;
-+	int run_command_flags;
- #endif /* __U_BOOT__ */
- 	char *ifs_whitespace; /* = G.ifs or malloced */
- #ifndef __U_BOOT__
-@@ -3004,7 +3005,24 @@ static int i_getch(struct in_str *i)
- 	if (i->p && *i->p != '\0') {
- 		ch = (unsigned char)*i->p++;
- 		goto out;
-+#ifndef __U_BOOT__
- 	}
-+#else /* __U_BOOT__ */
-+	/*
-+	 * There are two ways for command to be called:
-+	 * 1. The first one is when they are typed by the user.
-+	 * 2. The second one is through run_command() (NOTE command run
-+	 * internally calls run_command()).
-+	 *
-+	 * In the second case, we do not get input from the user, so once we
-+	 * get a '\0', it means we need to stop.
-+	 * NOTE G.run_command_flags is only set on run_command call stack, so
-+	 * we use this to know if we come from user input or run_command().
-+	 */
-+	} else if (i->p && *i->p == '\0' && G.run_command_flags){
-+		return EOF;
-+	}
-+#endif /* __U_BOOT__ */
- #endif
- #ifndef __U_BOOT__
- 	/* peek_buf[] is an int array, not char. Can contain EOF. */
-@@ -3163,7 +3181,6 @@ static void setup_file_in_str(struct in_str *i)
- #endif /* !__U_BOOT__ */
+@@ -3485,7 +3485,6 @@ static int o_get_last_ptr(o_string *o, int n)
+ 	return ((int)(uintptr_t)list[n-1]) + string_start;
  }
  
 -#ifndef __U_BOOT__
- static void setup_string_in_str(struct in_str *i, const char *s)
- {
- 	memset(i, 0, sizeof(*i));
-@@ -3171,7 +3188,6 @@ static void setup_string_in_str(struct in_str *i, const char *s)
- 	i->p = s;
- }
- 
--#endif /* !__U_BOOT__ */
- 
  /*
-  * o_string support
-@@ -7910,7 +7926,11 @@ static int run_and_free_list(struct pipe *pi);
-  * NUL: parse all, execute, return
-  * ';': parse till ';' or newline, execute, repeat till EOF
+  * Globbing routines.
+  *
+@@ -3740,8 +3739,10 @@ static int glob_needed(const char *s)
   */
-+#ifndef __U_BOOT__
- static void parse_and_run_stream(struct in_str *inp, int end_trigger)
-+#else /* __U_BOOT__ */
-+static int parse_and_run_stream(struct in_str *inp, int end_trigger)
-+#endif /* __U_BOOT__ */
+ static int perform_glob(o_string *o, int n)
  {
- 	/* Why we need empty flag?
- 	 * An obscure corner case "false; ``; echo $?":
-@@ -7919,7 +7939,11 @@ static void parse_and_run_stream(struct in_str *inp, int end_trigger)
- 	 * this breaks "false; echo `echo $?`" case.
- 	 */
- 	bool empty = 1;
 +#ifndef __U_BOOT__
- 	while (1) {
-+#else /* __U_BOOT__ */
-+	do {
+ 	glob_t globdata;
+ 	int gr;
 +#endif /* __U_BOOT__ */
- 		struct pipe *pipe_list;
+ 	char *pattern;
  
- #if ENABLE_HUSH_INTERACTIVE
-@@ -7966,21 +7990,57 @@ static void parse_and_run_stream(struct in_str *inp, int end_trigger)
- 		empty = 0;
- 		if (G_flag_return_in_progress == 1)
- 			break;
+ 	debug_printf_glob("start perform_glob: n:%d o->data:%p\n", n, o->data);
+@@ -3750,13 +3751,16 @@ static int perform_glob(o_string *o, int n)
+ 	pattern = o->data + o_get_last_ptr(o, n);
+ 	debug_printf_glob("glob pattern '%s'\n", pattern);
+ 	if (!glob_needed(pattern)) {
 +#ifndef __U_BOOT__
+  literal:
++#endif /* __U_BOOT__ */
+ 		/* unbackslash last string in o in place, fix length */
+ 		o->length = unbackslash(pattern) - o->data;
+ 		debug_printf_glob("glob pattern '%s' is literal\n", pattern);
+ 		return o_save_ptr_helper(o, n);
  	}
-+#else /* __U_BOOT__ */
-+	/*
-+	 * This do/while is needed by run_command to avoid looping on a command
-+	 * with syntax error.
-+	 */
-+	} while (!(G.run_command_flags & FLAG_EXIT_FROM_LOOP));
-+
-+	return G.last_exitcode;
-+#endif /* __U_BOOT__ */
- }
  
- #ifndef __U_BOOT__
- static void parse_and_run_string(const char *s)
-+#else /* __U_BOOT__ */
-+static int parse_and_run_string(const char *s)
-+#endif /* __U_BOOT__ */
- {
- 	struct in_str input;
- 	//IF_HUSH_LINENO_VAR(unsigned sv = G.parse_lineno;)
- 
- 	setup_string_in_str(&input, s);
 +#ifndef __U_BOOT__
- 	parse_and_run_stream(&input, '\0');
+ 	memset(&globdata, 0, sizeof(globdata));
+ 	/* Can't use GLOB_NOCHECK: it does not unescape the string.
+ 	 * If we glob "*.\*" and don't find anything, we need
+@@ -3792,16 +3796,22 @@ static int perform_glob(o_string *o, int n)
+ 	if (DEBUG_GLOB)
+ 		debug_print_list("perform_glob returning", o, n);
+ 	return n;
 +#else /* __U_BOOT__ */
-+	return parse_and_run_stream(&input, '\0');
-+#endif /* __U_BOOT__ */
- 	//IF_HUSH_LINENO_VAR(G.parse_lineno = sv;)
- }
--#endif /* !__U_BOOT__ */
- 
-+#ifdef __U_BOOT__
-+int parse_string_outer(const char *cmd, int flags)
-+{
-+	int ret;
-+	int old_flags;
-+
 +	/*
-+	 * Keep old values of run_command to be able to restore them once
-+	 * command was executed.
++	 * NOTE We only use perform glob to call unbackslash to remove backslash
++	 * from string once expanded.
++	 * So, it seems OK to return this if no previous return was done.
 +	 */
-+	old_flags = G.run_command_flags;
-+	G.run_command_flags = flags;
-+
-+	ret = parse_and_run_string(cmd);
-+
-+	G.run_command_flags = old_flags;
-+
-+	return ret;
-+}
++	return o_save_ptr_helper(o, n);
 +#endif /* __U_BOOT__ */
+ }
+ 
+-#endif /* !__U_BOOT__ */
+ #endif /* !HUSH_BRACE_EXPANSION */
+ 
+ /* If o->o_expflags & EXP_FLAG_GLOB, glob the string so far remembered.
+  * Otherwise, just finish current list[] and start new */
+ static int o_save_ptr(o_string *o, int n)
+ {
+-#ifndef __U_BOOT__
+ 	if (o->o_expflags & EXP_FLAG_GLOB) {
+ 		/* If o->has_empty_slot, list[n] was already globbed
+ 		 * (if it was requested back then when it was filled)
+@@ -3809,7 +3819,6 @@ static int o_save_ptr(o_string *o, int n)
+ 		if (!o->has_empty_slot)
+ 			return perform_glob(o, n); /* o_save_ptr_helper is inside */
+ 	}
+-#endif /* !__U_BOOT__ */
+ 	return o_save_ptr_helper(o, n);
+ }
+ 
+@@ -5455,7 +5464,20 @@ static int parse_dollar(o_string *as_string,
+ 			nommu_addchr(as_string, ch);
+ 			if (ch == '}')
+ 				break;
++#ifndef __U_BOOT__
+ 			if (!isalnum(ch) && ch != '_') {
++#else /* __U_BOOT__ */
++			/*
++			 * In several places in U-Boot, we use variable like
++			 * foo# (e.g. serial#), particularly in env.
++			 * So, we need to authorize # to appear inside
++			 * variable name and then expand this variable.
++			 * NOTE Having # in variable name is not permitted in
++			 * upstream hush but expansion will be done (even though
++			 * the result will be empty).
++			 */
++			if (!isalnum(ch) && ch != '_' && ch != '#') {
++#endif /* __U_BOOT__ */
+ 				unsigned end_ch;
  #ifndef __U_BOOT__
- static void parse_and_run_file(HFILE *fp)
- #else /* __U_BOOT__ */
+ 				unsigned char last_ch;
+@@ -7030,7 +7052,20 @@ static NOINLINE int expand_one_var(o_string *output, int n,
+ 		}
+ #endif /* !__U_BOOT__ */
+ 		default:
++#ifndef __U_BOOT__
+ 			val = get_local_var_value(var);
++#else /* __U_BOOT__ */
++			/*
++			 * Environment variable set with setenv* have to be
++			 * expanded.
++			 * So, we first search if the variable exists in
++			 * environment, if this is not the case, we default to
++			 * local value.
++			 */
++			val = env_get(var);
++			if (!val)
++				val = get_local_var_value(var);
++#endif /* __U_BOOT__ */
+ 		}
+ 	}
+ 
+@@ -7375,7 +7410,11 @@ static NOINLINE int expand_vars_to_list(o_string *output, int n, char *arg)
+ 		case '*':
+ 		case '@': {
+ 			int i;
++#ifndef __U_BOOT__
+ 			if (!G.global_argv[1])
++#else /* __U_BOOT__ */
++			if (!G.global_argv || !G.global_argv[1])
++#endif /* __U_BOOT__ */
+ 				break;
+ 			i = 1;
+ 			cant_be_null |= first_ch; /* do it for "$@" _now_, when we know it's not empty */
+@@ -9976,7 +10015,30 @@ static NOINLINE int run_pipe(struct pipe *pi)
+ #endif /* !__U_BOOT__ */
+ 		command = &pi->cmds[cmd_no];
+ 		cmd_no++;
+-		if (command->argv) {
++
++#ifdef __U_BOOT__
++		/* Replace argv and argc by expanded if it exists. */
++		if (argv_expanded) {
++			/*
++			 * We need to save a pointer to argv, we will restore it
++			 * later, so it will be freed when pipe is freed.
++			 */
++			argv = command->argv;
++
++			/*
++			 * After expansion, there can be more or less argument, so we need to
++			 * update argc, for example:
++			 * - More arguments:
++			 *   foo='bar quuz'
++			 *   echo $foo
++			 * - Less arguments:
++			 *   echo $foo (if foo was never set)
++			 */
++			command->argc = list_size(argv_expanded);
++			command->argv = argv_expanded;
++		}
++#endif /* __U_BOOT__ */
++			if (command->argv) {
+ 			debug_printf_exec(": pipe member '%s' '%s'...\n",
+ 					command->argv[0], command->argv[1]);
+ 		} else {
+@@ -10091,6 +10153,25 @@ static NOINLINE int run_pipe(struct pipe *pi)
+ 		rcode = cmd_process(G.do_repeat ? CMD_FLAG_REPEAT : 0,
+ 				    command->argc, command->argv,
+ 				    &(G.flag_repeat), NULL);
++
++		if (argv_expanded) {
++			/*
++			 * expand_strvec_to_strvec() allocates memory to expand
++			 * argv, we need to free it.
++			 */
++			free(argv_expanded);
++
++			/*
++			 * We also restore command->argv to its original value
++			 * so no memory leak happens.
++			 */
++			command->argv = argv;
++
++			/*
++			 * NOTE argc exists only in U-Boot, so argv freeing does
++			 * not rely on it as this code exists in BusyBox.
++			 */
++		}
+ #endif /* __U_BOOT__ */
+ 	}
+ 
 -- 
 2.34.1
 
