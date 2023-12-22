@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 800DDC41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 14:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1BCC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 14:09:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3DAB8775F;
-	Fri, 22 Dec 2023 15:01:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D0E2877E2;
+	Fri, 22 Dec 2023 15:09:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gfTGMiZh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iAj/oVoR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF8DD87872; Fri, 22 Dec 2023 15:01:06 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
+ id B83EB8775F; Fri, 22 Dec 2023 15:09:06 +0100 (CET)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C51938775F
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 15:01:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 633BB877F1
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 15:09:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7c5f29423c5so362642241.1
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:01:04 -0800 (PST)
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3bb87bd6884so661190b6e.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 06:09:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703253663; x=1703858463; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703254140; x=1703858940; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QVnH+BJhr4h9aM9XiF+3yh7xp/1ECVHso4e2czYVg6U=;
- b=gfTGMiZhUhwEEZ0Wlw7gUZO0DGPS008lF7l2/Y3VcMyhwpisPAV7aP5J60QMfwMYsB
- Q9EITIa/XdJdxfzQ1FGbTDqiv5iw2aD8S3Yp4dD48Tt27UbI81Nmj9SxUxvAn28bnYbm
- ciewXK1EWh24RHttNEOYH5qDw42Ue547gdOB+GFFDWERUclpr/bh9TcpgGdH9DUm1ruo
- JKz5hM9R1sNA1GkU+7AqfmgXey82iUTI9QJNVJUUmqa7Ukdt7Ie4HJDTLSdHVmY+N4t1
- C/RUOs4abxt8ZjfXyBvWPsCrmkn9HGYDJYS7ejYCbjsY582yq6A79mixxVwrk6ySyOaE
- 4Zhg==
+ bh=17GXyaS2fxO5LiO+TC8Wxk3iIbCu0MCR/bji4+fxoDQ=;
+ b=iAj/oVoRYsm0YYWTh45zY2i30cMHR6OLeaMU3xKbGu0ryNCMPN2+geU36WIMjanFcZ
+ vhdmYyTS4+pYaAGLkNmkGjB8wQ/0Akn/B/yxiKD/XDpN8ulfNBV+hOWTOcDdZmMlr4hk
+ mgkLxDVbV80vOF7do9MGu1QqBVVZWzxLWAWpbkUzTVJA8LW6Xc3HT+SsqsweC41YyADy
+ cevbZurvtD3tyjQ4LPBQVUktCk8mcEY03z6dXUcwnN9OiRZ5neI7F8vi8LQHLIjcKUdx
+ 9QMG3sH9W99lrFr083GECk0zKmnu0xeRCaJzSxxYcBWJSpY9/94hm0PD3JYTdn+uKmJ1
+ oLxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703253663; x=1703858463;
+ d=1e100.net; s=20230601; t=1703254140; x=1703858940;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QVnH+BJhr4h9aM9XiF+3yh7xp/1ECVHso4e2czYVg6U=;
- b=wdeUdv4kXmgAsvPuqJwC2I9hWceM9CFt45k8yivcTCi9o7qkFu9TSmM/PcFp812b1h
- PiDVK3AWyYmyRPjQWfYgiTqVkcEoUgsiDvlk4aQEI9CxxE7RXIk90jMSfn6x9X2DL4Xr
- tPZsQw/v1yk1aisLdD5WyIGG8Zht9kYpUCPOT7jk9X7LBtk2TXvkIxswC4RgIymw9dQD
- VP53JFaRGfxpHcI9eftlci+lluVtSnK3Nc0WNK5A+rE+QmaNx+ZuEXiMgI9byI7RVLbt
- sb/QMYCO26OisVSWGNSgaOo5D91xWPEeLuvM0lA89XXM/5TJskF/pzGoTVS8wmXQjH6F
- HEhQ==
-X-Gm-Message-State: AOJu0YyHvGHfvTrHILMhTYQpB6acRccer+XD68RdBMgW85yBMVLG9hAQ
- wwkrJEecIuTL5sLaRpKngA3dqVMaQM8jsDNHIM7zvJGS+BovuQ==
-X-Google-Smtp-Source: AGHT+IEaI0WFdDBCBKQZmqGZWx+9rOdllCCktu34BFyh9FCLJhv6yfqrIoMNBTzGmyAsEFnjyiG6PAXWZKmY0knwvfg=
-X-Received: by 2002:ac5:c184:0:b0:4b6:beb3:99c3 with SMTP id
- z4-20020ac5c184000000b004b6beb399c3mr386922vkb.19.1703253663406; Fri, 22 Dec
- 2023 06:01:03 -0800 (PST)
+ bh=17GXyaS2fxO5LiO+TC8Wxk3iIbCu0MCR/bji4+fxoDQ=;
+ b=IvcqYDljq5GfnR2AW4kLvoKQFJw5b773HGpidjdRRpqcKNopsSev/IpPZKX02GqLUk
+ RwOAuk6Lv4i/L5Wg4QfPysEGAah61b5ayXnkp9Sg8uoW313IrHVaAafvetZOkPm9GcPL
+ DLLbBEL1UCk+PUNsc6k5Qmw7GDB7Gss0gOfyQitad75CvyUb7Ms77ch2lsXveP/PiczF
+ ht2dYZV5wfA+ADgh7iHVI6AXoQjkDVB4GcVjebicgHCa8nSyPkRsscEbN35XQ7cPKmdO
+ 0jrs/296omGDIWd9xAaHE70HdSFy359mkNJDFRuvEmFm9IEdFOwHXWXXQF552+R5E+k1
+ Z7qw==
+X-Gm-Message-State: AOJu0YwSDhU3eEkiuUuCUD/ECYcb9F1JfElupM8LjKXT4BZuzL4/dPjP
+ 0ONeDvlwSzZD9uPqdOkmkjDhNWHsPMqW52JbRw9iwDftnZnLKg==
+X-Google-Smtp-Source: AGHT+IF0EBO4VEDd9rCiFdOBaT/bfsW7WinaIYgqzq0CjOuRaqmWWNiTPzdnuCbOPMylezliV5Js42Y7RohI6lHHozo=
+X-Received: by 2002:a05:6808:320f:b0:3bb:7c06:a713 with SMTP id
+ cb15-20020a056808320f00b003bb7c06a713mr1333111oib.112.1703254139818; Fri, 22
+ Dec 2023 06:08:59 -0800 (PST)
 MIME-Version: 1.0
 References: <20231222061208.3009970-1-sumit.garg@linaro.org>
- <20231222061208.3009970-8-sumit.garg@linaro.org>
- <20231222123133.GX2513409@bill-the-cat>
- <CAFA6WYNbLRVZJq_geK4h9Z4oDdJ=8ne39AUqLMfL-Bf4zpnF_g@mail.gmail.com>
- <20231222135427.GB2513409@bill-the-cat>
-In-Reply-To: <20231222135427.GB2513409@bill-the-cat>
+ <20231222061208.3009970-6-sumit.garg@linaro.org>
+ <20231222123504.GA2513409@bill-the-cat>
+ <CAFA6WYNo3mNE94tHo0-iogbk49ZSo4WXzRWPME=XPZ7F1H5a8g@mail.gmail.com>
+ <20231222135639.GC2513409@bill-the-cat>
+In-Reply-To: <20231222135639.GC2513409@bill-the-cat>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 22 Dec 2023 19:30:52 +0530
-Message-ID: <CAFA6WYNH=mFKOLL_fz0cu1oKUmjENxf8PMEgv78k5KG61wTO8Q@mail.gmail.com>
-Subject: Re: [PATCH v2 7/8] dts: meson-gxbb: Switch to using upstream DT
+Date: Fri, 22 Dec 2023 19:38:48 +0530
+Message-ID: <CAFA6WYOWqwOwhLYooNSS32E-WwAfGRyXZjG=dgXXJyOjnzGA3Q@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] doc: devicetree: Updates for devicetree-rebasing
+ subtree
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
@@ -96,58 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Dec 2023 at 19:24, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 22 Dec 2023 at 19:26, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Dec 22, 2023 at 06:50:32PM +0530, Sumit Garg wrote:
-> > On Fri, 22 Dec 2023 at 18:01, Tom Rini <trini@konsulko.com> wrote:
+> On Fri, Dec 22, 2023 at 07:18:05PM +0530, Sumit Garg wrote:
+> > On Fri, 22 Dec 2023 at 18:05, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Dec 22, 2023 at 11:42:07AM +0530, Sumit Garg wrote:
+> > > On Fri, Dec 22, 2023 at 11:42:05AM +0530, Sumit Garg wrote:
 > > >
-> > > > Although there were still some variations in board DTS files based on
-> > > > meson-gxbb SoC but I think those were minor differences from upstream
-> > > > and shouldn't impact boot on these devices.
+> > > > Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+> > > > subtree and maintain a regular sync with Linux kernel devicetree files
+> > > > and bindings.
 > > > >
-> > > > So switch to upstream DT via mirroring amlogic/ directory from
-> > > > devicetree-rebasing/src/arm64/amlogic/ directory. And thereby directly
-> > > > building DTB from there including *-u-boot.dtsi files from
-> > > > arch/$(ARCH)/dts/ directory.
+> > > > Along with that add documentation regarding how to run DT bindings
+> > > > schema checks.
 > > > >
-> > > > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > > > > ---
-> > > >  configs/nanopi-k2_defconfig           | 3 ++-
-> > > >  configs/odroid-c2_defconfig           | 3 ++-
-> > > >  configs/p200_defconfig                | 3 ++-
-> > > >  configs/p201_defconfig                | 3 ++-
-> > > >  configs/videostrong-kii-pro_defconfig | 3 ++-
-> > > >  configs/wetek-hub_defconfig           | 3 ++-
-> > > >  configs/wetek-play2_defconfig         | 3 ++-
-> > > >  dts/arch/arm64/Makefile               | 9 +++++++++
-> > > >  dts/arch/arm64/amlogic                | 1 +
-> > > >  9 files changed, 24 insertions(+), 7 deletions(-)
-> > > >  create mode 120000 dts/arch/arm64/amlogic
+> > > >  doc/develop/devicetree/control.rst | 108 +++++++++++++++++++++++------
+> > > >  1 file changed, 86 insertions(+), 22 deletions(-)
+> > > [snip]
+> > > > @@ -81,18 +94,21 @@ Failing that, you could write one from scratch yourself!
+> > > >  Configuration
+> > > >  -------------
+> > > >
+> > > > -Use::
+> > > > +Traditionally, U-Boot placed copies of devicetree source files from Linux
+> > > > +kernel into `arch/<arch>/dts/<name>.dts` which can be selected via::
+> > > >
+> > > > -   #define CONFIG_DEFAULT_DEVICE_TREE        "<name>"
+> > > > +    #define CONFIG_DEFAULT_DEVICE_TREE       "<name>"
 > > >
-> > > Do we need all of the Makefile portions of this? One of the things that
-> > > works today is that trees listed in ONFIG_DEFAULT_DEVICE_TREE (and a few
-> > > other variables) will be automatically built. We might just need the new
-> > > Makefiles to just have:
-> > > include $(srctree)/scripts/Makefile.dts
-> > > and then the trees a given config will need will be built.
+> > > Oh, oof. This never got updated for Kconfig rather than config.h. Can
+> > > you please include re-wording this to be setting <name> when prompted
+> > > for DEFAULT_DEVICE_TREE by Kconfig? And the rest of the text you're
+> > > updating as well to match, thanks.
+> > >
 > >
-> > That sounds fine for Amlogic SoC and many others too with
-> > CONFIG_DEFAULT_DEVICE_TREE="" CONFIG_OF_LIST="" options available.
-> > However, if in future we have truely generalized U-Boot (like efforts
-> > for Qcom platform) then CONFIG_OF_LIST="" may become an overloaded
-> > choice.
+> > Sure but how about changing it to say via board defconfig as
+> > CONFIG_DEFAULT_DEVICE_TREE="<name>", since AFAIK most people use
+> > defconfig to configure U-Boot.
 >
-> I don't object to listing them when needed, I'm just not totally sure on
-> how the use case really works out. But we can cross that when we get
-> there, too.
+> Well, do kernel docs tell people to modify defconfigs, or to use the
+> config menu/etc?
+>
 
-Agree and I have similar concerns about it.
+Okay I see your point, I will use wording to select
+DEFAULT_DEVICE_TREE by Kconfig instead.
 
 -Sumit
 
->
 > --
 > Tom
