@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDAA3C46CD4
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 17:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D97C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 17:54:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50BB686FF7;
-	Fri, 22 Dec 2023 18:43:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 21A5F86E7E;
+	Fri, 22 Dec 2023 18:54:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I2xOobr4";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CGIMLhNg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D65D186611; Fri, 22 Dec 2023 18:43:37 +0100 (CET)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E13686FF7; Fri, 22 Dec 2023 18:54:18 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49FF4874D5
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 18:43:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7AD380245
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 18:54:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-78102c516a7so144248785a.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 09:43:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703267013; x=1703871813; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vwzQTYOLhB6xOKoKbNgzr6Q+26eVrZ0ia53G95eOM60=;
- b=I2xOobr4pqzom8GlnrlWerGhzHEzna8yCexih7NQfGPIuJROAf8rp/EQfIX7kZYkea
- HtP30x1R8NK9sEdlMcUzRA/FRuGk0ZMKWF60LiRaPCxawVyzZyMmaFf2yXv/rxP/Vcn1
- 9V0HDRwfYCk2pq6tFsiLzAxEYdejUBJWdapnI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703267013; x=1703871813;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vwzQTYOLhB6xOKoKbNgzr6Q+26eVrZ0ia53G95eOM60=;
- b=Eboq6YybWGr+XlDfSwSgfDOYun5vBDcBQPMIewhJOk2E2SbEF1J2bIpuiJVn0Ftj7S
- e6WinqrWW8zh0L+WJi1yCEtErcvsjPNBWK/0QNHAgLNOJKVAiTsnKGPZp59/LwrVw6Y2
- bqCbJwAhjH43ZYmGLpFBxT9z7OGMIY5UCaFWVmGiQvina3BQy4MwDZx+e4UvZLu6PZGA
- vOCx1OySlSz0UQ2EgDhB8GJlUDCr3lJwsyXJeTcV933p49GwEu0jzSmsnqttUsrWIP7j
- Y7guUevaD0B/WM3A8sUPjYUhNJLjeue5gZIq6HA3wXts3Tjase/OPv4q0NGJd8AOLc8q
- qX/w==
-X-Gm-Message-State: AOJu0Yx8DykN9AAIDXDQ1n/43pqncIARXgjLyXwMUlEGa2Z6exofZ7JR
- dwcCzgT/teYL5rdqf5ami9md0aiAxpPa/w==
-X-Google-Smtp-Source: AGHT+IEXAwb0u+Nf+PIT8Yi91k/+au+WdoILkGxSEH/n9LwXMcvKg1rIrT5BLB1/+wW7jcqtSuh/Pg==
-X-Received: by 2002:ae9:e10f:0:b0:77f:53ca:2e95 with SMTP id
- g15-20020ae9e10f000000b0077f53ca2e95mr2032531qkm.96.1703267013068; 
- Fri, 22 Dec 2023 09:43:33 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
- [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
- by smtp.gmail.com with ESMTPSA id
- j26-20020a05620a147a00b007812e1cff27sm457617qkl.78.2023.12.22.09.43.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 09:43:32 -0800 (PST)
-Date: Fri, 22 Dec 2023 12:43:29 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexander Gendin <agendin@matrox.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rick Chen <rick@andestech.com>, Roger Knecht <rknecht@pm.me>,
- Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Zong Li <zong.li@sifive.com>
-Subject: Re: [PATCH 00/13] Complete decoupling of zboot logic from commands
-Message-ID: <20231222174329.GD2652760@bill-the-cat>
-References: <20231204002944.897949-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703267655; x=1703872455; i=xypron.glpk@gmx.de;
+ bh=wk6v0gEC4vIE5kdeftz6Suv7VPb6ZFlgnWVXFSogc0Y=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=CGIMLhNgLHytmQpH3E56uvoI2nF7+6MJVflb9UNjLGZdtvcSsPrpoHNg4JgWG8lk
+ U+hQld+qgP7EWQwv2gO2Z4dYeeD2LnCKvATGJbc4rJWo3xmrOTFtLv81TT696KtTO
+ jbEiCVrD39Qw50q12FvPysG726KmjQ9EG/S11aX+zFOTZXbAnDf5sVfptmfDCcWih
+ kAxcUfW0h4jTvMURB/QolVlD6z4wzkRJXRISoKj3k8kZIwmImpQGeDiD0kdz6QzQ3
+ cu4YLBtCfS3CL4Ux0F+Mo+zxDVqwAFzUKTTqBJ+S/PZn7TT/5yGRSCzDOd5abhXf6
+ 9kHay9vXJS1U7lyCuw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrhUK-1qtY4B1h8W-00nf9g; Fri, 22
+ Dec 2023 18:54:15 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 1/1] lib: smbios: remove redundant next_header()
+Date: Fri, 22 Dec 2023 18:54:03 +0100
+Message-ID: <20231222175403.46629-1-xypron.glpk@gmx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IsS4JwXViBiYbc1T"
-Content-Disposition: inline
-In-Reply-To: <20231204002944.897949-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Ei+r/yyaAi7OUJ+/4QUeAVm/K5H8MzYrwv6Hvk1JmEZZIZ9vLYp
+ O5V3JJmODSyHFwnO3rDVpXcNHu3KatbRH0EbCwT9wFTtzSn56fO3/LkPjd0OJ4akZ+mxTpm
+ 1gtapiRjmc3J3P5np9hxSsXB7FTRx2D5f5Z1xYwNfu5c6Biz2VquHN4zqMvjnq6j3POYgSi
+ 5Gz1QE8AaEAzJubNcrAtw==
+UI-OutboundReport: notjunk:1;M01:P0:zmAsKXijCH8=;Ms9zKFKaHoR+W81RJY9r0EOj1HN
+ OwFd/iUG//USSj9PS/yqIbJM54CkSgd/2TwZOPUzvvBKd1KpxvMSGjqZclT8JjVCV9oPS9oh5
+ 2cHkpfDqbzgbqp/GyPuszz5+ERmfYsyhW0nVsa3zx/cu1NMu6XxG6BR+pSEwpjG/KDGZ9MhX+
+ aSx5GPE7HhIkWnlXc7Rq0Fw4kdP5ckJQijA2mqsnHP2+Y6BNFuMLBKeGkZ+OHppeyadokRpbr
+ L5fU9Lhb8tLFAp8uqG+gUi/RqsOCIod9DqpaogzoU25rvrAUfaJoNlr91FVu5Zzl3BmoDX5sq
+ VlEVNRhGTEfGsgz1ElXfK7QX77wtzyE1Psq9zD/UuqMlF5UlmV61bVAIMzTo2GKm2vsSHxtaE
+ Os2ag3HKUdPXPaGwAuPCIfqDrPiEnzIf0516B8OAXUN2qDiuBsVQfA9vpU4mE1T4hBYjDEg5A
+ TqHtKAjKJp9FG73iiDrhxiG6hVi6JSiEzWB3BUtJLSswgFayt1SUFLCuD3w7Vjy/9gZhZp2xq
+ 3WDmNR2VqnUWesC8tzb+NgUaZg5gm42Jku4gNcqhDjDK7obA+cNqSYaUaUhvL89FvAYb3XYkK
+ OmZWA2b0BMyBtL25krl3pQkfQ3SJOFB/gXTFgBxFUcu4+z6AGgqFPhWSCEwQhgslDcMZ6Xc34
+ M09teBAQmrVQLRcud+VoAreY8qGhVuz0BmUXrgrEWwKQnU6qYjHp465m21iWcSyU+AzoVCIdK
+ VgYimny3AzDXrHIc2eb+j293Nfm9eLzK9mRc5kmJxHMSSuTBzlAmA24/lzCkYiE1iwh78A26F
+ gaMNns9kN58lJco1yjIywxzkoyUOnVJF43YVHdrByoe/1C7TQ90KbYaJEAcS8p6JtvKVvXXpL
+ w23pjNsi0l61D6ghExIYvJTb/pwgkAYCeta63YZSfZrd0zEryi9Vwd7G7TJ0q7NbJ8MWNHbkN
+ oaKmmReIMvXAQAQyPObLuOKjw9s=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,46 +85,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+next_header() and get_next_header() only differ in how the const attribute
+is used. One function taking a const parameter and returning a non-const i=
+s
+good enough.
 
---IsS4JwXViBiYbc1T
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 3d49ee8510d3 ("efi_loader: add SMBIOS table measurement")
+Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+=2D--
+ lib/smbios-parser.c | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
 
-On Sun, Dec 03, 2023 at 05:29:25PM -0700, Simon Glass wrote:
+diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
+index b578c30840..f4de350e6e 100644
+=2D-- a/lib/smbios-parser.c
++++ b/lib/smbios-parser.c
+@@ -50,14 +50,7 @@ static u8 *find_next_header(u8 *pos)
+ 	return pos;
+ }
 
-> This series refactors the zboot code to allow it to be used with
-> CONFIG_COMMAND disabled.
->=20
-> A new zboot_run() function is used to boot a zimage.
->=20
-> This is cmde (part e of CMDLINE refactoring)
-> It depends on dm/cmdd-working
-> which depends on dm/bootstda-working
-> which depends on dm/cmdc-working
+-static struct smbios_header *get_next_header(struct smbios_header *curr)
+-{
+-	u8 *pos =3D ((u8 *)curr) + curr->length;
+-
+-	return (struct smbios_header *)find_next_header(pos);
+-}
+-
+-static const struct smbios_header *next_header(const struct smbios_header=
+ *curr)
++static struct smbios_header *get_next_header(const struct smbios_header *=
+curr)
+ {
+ 	u8 *pos =3D ((u8 *)curr) + curr->length;
 
-Just FYI, at this point all of the required series are now in -next so
-this could come in via the x86 tree now.
+@@ -73,7 +66,7 @@ const struct smbios_header *smbios_header(const struct s=
+mbios_entry *entry, int
+ 		if (header->type =3D=3D type)
+ 			return header;
 
---=20
-Tom
+-		header =3D next_header(header);
++		header =3D get_next_header(header);
+ 	}
 
---IsS4JwXViBiYbc1T
-Content-Type: application/pgp-signature; name="signature.asc"
+ 	return NULL;
+=2D-
+2.43.0
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWFyroACgkQFHw5/5Y0
-tyzYvgwAmuqIodNCu0CPofE8z4ZXVAP5Bam9S4UL1OHrIS+o0a1hNUJALM4vDsjU
-n3KKoEJIzNiU9/uHW/hprnlcjvSxgt+ro0YLdBvsiCxWUdMIlX6UhVNaDup6/a16
-lZKx09tRAUFHXbc4G0IJRr35ApyLGzc1HUBgxsVKjycVLNEegBDHLueB1iUaGFrO
-Gv271rJOuyuF5NYhkcaFm6ijtIX3zhsxAgHwU4s1+XrAp6icUn3rlESwNAeTE6Q4
-MWv6MtvtrZYAmXAz1545ZGseonJUxahUmFA7a85UXARhxH4gQHvN/2boY+i1FRp1
-Nxb4LW7SWA0NkN6bQnQfJ6P6XiEHoQfo7+ayOLITjY/QfpmN9wyFUIFLlGgE6f4R
-fvbfjwBfksRyBuiPCTwdJSvzNl3nrQFc04fq2l7eKZNQwqXl8ggt3P3CDz2Wb0+M
-rSs5h/pYMqre3o1VKK0x5ZhKdDmRn+lnYDkdVbmSNUO/n9fvTSWitJu4hyrLFQld
-AMcXT+6a
-=1JNl
------END PGP SIGNATURE-----
-
---IsS4JwXViBiYbc1T--
