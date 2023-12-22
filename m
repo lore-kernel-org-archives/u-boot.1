@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D97C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 17:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1080CC41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 18:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21A5F86E7E;
-	Fri, 22 Dec 2023 18:54:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0271486E7E;
+	Fri, 22 Dec 2023 19:13:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CGIMLhNg";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YUaZqRVF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E13686FF7; Fri, 22 Dec 2023 18:54:18 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id F0471871DA; Fri, 22 Dec 2023 19:13:20 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7AD380245
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 18:54:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14ECD81EC8
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 19:13:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703267655; x=1703872455; i=xypron.glpk@gmx.de;
- bh=wk6v0gEC4vIE5kdeftz6Suv7VPb6ZFlgnWVXFSogc0Y=;
+ t=1703268797; x=1703873597; i=xypron.glpk@gmx.de;
+ bh=t+Hw99GpbOaH+IqfjOh1J9m6jBli/YFy+9lUpSmkRSA=;
  h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
- b=CGIMLhNgLHytmQpH3E56uvoI2nF7+6MJVflb9UNjLGZdtvcSsPrpoHNg4JgWG8lk
- U+hQld+qgP7EWQwv2gO2Z4dYeeD2LnCKvATGJbc4rJWo3xmrOTFtLv81TT696KtTO
- jbEiCVrD39Qw50q12FvPysG726KmjQ9EG/S11aX+zFOTZXbAnDf5sVfptmfDCcWih
- kAxcUfW0h4jTvMURB/QolVlD6z4wzkRJXRISoKj3k8kZIwmImpQGeDiD0kdz6QzQ3
- cu4YLBtCfS3CL4Ux0F+Mo+zxDVqwAFzUKTTqBJ+S/PZn7TT/5yGRSCzDOd5abhXf6
- 9kHay9vXJS1U7lyCuw==
+ b=YUaZqRVFIXy7aeEwZL6QhK/WLynLQ5WVSR3qYAgZdGs+13KSF/LxwjOTHwG423/s
+ 2fH3o6oBJGlCY6UQNs1eH652vVn9k3ZFj9nu+5OKfYzWWPa1p0tj8w6elpa4+74ef
+ qZEROHhBxTiQ+6qylD+5kTvLMH5mSSvR70HSOjuMd3qIbJ3JA+2kgiocO5tSOR64A
+ p610gHiS14orsPfaXknNBRIPr+HjBs0poiFy4H/FeAn0nNp6UPnlPDFTm0NH5rl85
+ 7StNLje8r6JPcOTLm1c2CUmgKvXbbcZ8GPBgIQ/SuPDWzfJyi2EE5s9ka+8uSwL0C
+ 4mvnKOGAoEDZGCImIQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrhUK-1qtY4B1h8W-00nf9g; Fri, 22
- Dec 2023 18:54:15 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mel3t-1qg29o0QwH-00alfP; Fri, 22
+ Dec 2023 19:13:17 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de,
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 1/1] lib: smbios: remove redundant next_header()
-Date: Fri, 22 Dec 2023 18:54:03 +0100
-Message-ID: <20231222175403.46629-1-xypron.glpk@gmx.de>
+Subject: [PATCH 1/1] lib: smbios: verify_checksum() is duplicate
+Date: Fri, 22 Dec 2023 19:12:50 +0100
+Message-ID: <20231222181250.49764-1-xypron.glpk@gmx.de>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Ei+r/yyaAi7OUJ+/4QUeAVm/K5H8MzYrwv6Hvk1JmEZZIZ9vLYp
- O5V3JJmODSyHFwnO3rDVpXcNHu3KatbRH0EbCwT9wFTtzSn56fO3/LkPjd0OJ4akZ+mxTpm
- 1gtapiRjmc3J3P5np9hxSsXB7FTRx2D5f5Z1xYwNfu5c6Biz2VquHN4zqMvjnq6j3POYgSi
- 5Gz1QE8AaEAzJubNcrAtw==
-UI-OutboundReport: notjunk:1;M01:P0:zmAsKXijCH8=;Ms9zKFKaHoR+W81RJY9r0EOj1HN
- OwFd/iUG//USSj9PS/yqIbJM54CkSgd/2TwZOPUzvvBKd1KpxvMSGjqZclT8JjVCV9oPS9oh5
- 2cHkpfDqbzgbqp/GyPuszz5+ERmfYsyhW0nVsa3zx/cu1NMu6XxG6BR+pSEwpjG/KDGZ9MhX+
- aSx5GPE7HhIkWnlXc7Rq0Fw4kdP5ckJQijA2mqsnHP2+Y6BNFuMLBKeGkZ+OHppeyadokRpbr
- L5fU9Lhb8tLFAp8uqG+gUi/RqsOCIod9DqpaogzoU25rvrAUfaJoNlr91FVu5Zzl3BmoDX5sq
- VlEVNRhGTEfGsgz1ElXfK7QX77wtzyE1Psq9zD/UuqMlF5UlmV61bVAIMzTo2GKm2vsSHxtaE
- Os2ag3HKUdPXPaGwAuPCIfqDrPiEnzIf0516B8OAXUN2qDiuBsVQfA9vpU4mE1T4hBYjDEg5A
- TqHtKAjKJp9FG73iiDrhxiG6hVi6JSiEzWB3BUtJLSswgFayt1SUFLCuD3w7Vjy/9gZhZp2xq
- 3WDmNR2VqnUWesC8tzb+NgUaZg5gm42Jku4gNcqhDjDK7obA+cNqSYaUaUhvL89FvAYb3XYkK
- OmZWA2b0BMyBtL25krl3pQkfQ3SJOFB/gXTFgBxFUcu4+z6AGgqFPhWSCEwQhgslDcMZ6Xc34
- M09teBAQmrVQLRcud+VoAreY8qGhVuz0BmUXrgrEWwKQnU6qYjHp465m21iWcSyU+AzoVCIdK
- VgYimny3AzDXrHIc2eb+j293Nfm9eLzK9mRc5kmJxHMSSuTBzlAmA24/lzCkYiE1iwh78A26F
- gaMNns9kN58lJco1yjIywxzkoyUOnVJF43YVHdrByoe/1C7TQ90KbYaJEAcS8p6JtvKVvXXpL
- w23pjNsi0l61D6ghExIYvJTb/pwgkAYCeta63YZSfZrd0zEryi9Vwd7G7TJ0q7NbJ8MWNHbkN
- oaKmmReIMvXAQAQyPObLuOKjw9s=
+X-Provags-ID: V03:K1:W7ySwvHTUe3RA6JqpzhJvX0abshU/lpLRZkQl9vpCQvl3e268tC
+ eFdKT4y3PZ5FtQQCweeyVZRLCmHz+yAHX5M3hrhdmoFmcVTx3asvHkxGTdhu8btbvE0jRFa
+ FE1HPT16XWmA2H2a43Z5MlTi7dGgELu5Lnoe8irISQCRHy0bbr1f3YJAzfhnyAe2IYVUU2I
+ +6eck1SG6Mj2KKcLyKWVQ==
+UI-OutboundReport: notjunk:1;M01:P0:/qaiXziFlzQ=;7c4uSDyJQsoikg+xhb5oi9hs6LF
+ QsrIPqWHBcYk53+vRsi70eWUralvvm60/54f8eIjrL1hnbNJ8wfWE0Dclk/D2U2eeo4Dr81Ji
+ KKRM7qfECc6fdN8rc6Vh3RbarOecHaiI2rcd1b/SBObZh5QzNBbJ0kneA6E5gbLCmAqOvsCn+
+ /EQrXl9KYazOfcGTsBlWKIYwQVaqUjIYTNeMgHHWDMylWos8rvEjQ5c1tmYqzs06QJa6tq/Q2
+ 2qbxSYO+EfB7DUwQQusXc8YqvtAHjCxik36GtzqUTkOv5uY2wWxGS0XsAdgh+kl9mwaw2RQtt
+ yRYlkaSNUxzzZJFvSFzteZSlA9tCtGLE/1lCPiaXcTLOyt5pxetDm0deDG0MR9JNKhYLcY4aY
+ iYV0j4K8aD8UHsNZdUX6Ej7Lovk+RsifYFFIlIpO/Cndb3HFFgR/AzrDX9h15oF6fg2uFzkEt
+ 41ji9UkWbLV91HJRG2+x0UuvTNYByppRpPogCbHPdTVZv8Nb3EMM0FhKvhClWTzj9fw1/V9CP
+ fVMdOPiDrTT4Y0O5aFlCi1r0V+fCq1YAuh0CTHuzvEMOnFukiM7JOIJ9T6380w5A/PLHH8eUF
+ ZNIwAAjvxKB8Ulz/Nf64iLztNHItPkjT3LJKx4ycQr3o5RtxOesXuKknXPYz55zsJsfOmyBxq
+ McAr4RWPjNIXmjAad8kvsugNBcDmwBiWzLAR3Zv46w2Ysgo2JpjXRTRET0+ys9GgaacQAji5c
+ PMD9WV2ceyxmcWs7zFVn8HYHdvHE0xNv8YC2qapTxHgtAgy+mFPa0OOOsnBr63PwQ21MYM4Bg
+ Je5fohks9a+89jHNiczXdUxOlS86vrLxqchzx9s5kTWJFp4nHc9124B2V9MG484Rj8IExggHF
+ PV4B39s8AIPbtl0jEUL+OmzS+qpoWF5V9AWNB+ZRtd4N5RyesmRXhz1M+aSWz+IdBOxlYcjFt
+ gX5EHw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,49 +85,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-next_header() and get_next_header() only differ in how the const attribute
-is used. One function taking a const parameter and returning a non-const i=
-s
-good enough.
+The function verify_checksum() duplicates what table_compute_checksum()
+does. Replace it.
 
-Fixes: 3d49ee8510d3 ("efi_loader: add SMBIOS table measurement")
+Fixes: 415eab0655a8 ("smbios: add parsing API")
 Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 =2D--
- lib/smbios-parser.c | 11 ++---------
- 1 file changed, 2 insertions(+), 9 deletions(-)
+ lib/smbios-parser.c | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
 
 diff --git a/lib/smbios-parser.c b/lib/smbios-parser.c
-index b578c30840..f4de350e6e 100644
+index f4de350e6e..a29a06398d 100644
 =2D-- a/lib/smbios-parser.c
 +++ b/lib/smbios-parser.c
-@@ -50,14 +50,7 @@ static u8 *find_next_header(u8 *pos)
- 	return pos;
- }
+@@ -5,23 +5,9 @@
 
--static struct smbios_header *get_next_header(struct smbios_header *curr)
+ #define LOG_CATEGORY	LOGC_BOOT
+
++#include <tables_csum.h>
+ #include <smbios.h>
+
+-static inline int verify_checksum(const struct smbios_entry *e)
 -{
--	u8 *pos =3D ((u8 *)curr) + curr->length;
+-	/*
+-	 * Checksums for SMBIOS tables are calculated to have a value, so that
+-	 * the sum over all bytes yields zero (using unsigned 8 bit arithmetic).
+-	 */
+-	u8 *byte =3D (u8 *)e;
+-	u8 sum =3D 0;
 -
--	return (struct smbios_header *)find_next_header(pos);
+-	for (int i =3D 0; i < e->length; i++)
+-		sum +=3D byte[i];
+-
+-	return sum;
 -}
 -
--static const struct smbios_header *next_header(const struct smbios_header=
- *curr)
-+static struct smbios_header *get_next_header(const struct smbios_header *=
-curr)
+ const struct smbios_entry *smbios_entry(u64 address, u32 size)
  {
- 	u8 *pos =3D ((u8 *)curr) + curr->length;
+ 	const struct smbios_entry *entry =3D (struct smbios_entry *)(uintptr_t)a=
+ddress;
+@@ -32,7 +18,7 @@ const struct smbios_entry *smbios_entry(u64 address, u32=
+ size)
+ 	if (memcmp(entry->anchor, "_SM_", 4))
+ 		return NULL;
 
-@@ -73,7 +66,7 @@ const struct smbios_header *smbios_header(const struct s=
-mbios_entry *entry, int
- 		if (header->type =3D=3D type)
- 			return header;
+-	if (verify_checksum(entry))
++	if (table_compute_checksum(entry, entry->length))
+ 		return NULL;
 
--		header =3D next_header(header);
-+		header =3D get_next_header(header);
- 	}
-
- 	return NULL;
+ 	return entry;
 =2D-
 2.43.0
 
