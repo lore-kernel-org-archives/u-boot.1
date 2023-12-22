@@ -4,181 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C786C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 20:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D39B0C4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:03:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D987186BA8;
-	Fri, 22 Dec 2023 21:17:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 3279386E7E;
+	Fri, 22 Dec 2023 22:03:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="gvs8T72W";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="UsN0QIIY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA7C086BAC; Fri, 22 Dec 2023 20:53:03 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EC8838753D; Fri, 22 Dec 2023 22:03:06 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44677869F6
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 20:53:00 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chasel.chiu@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1703274780; x=1734810780;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=Gbhz66y81L3qZI+5R51ti0Se7H/Bktqq0lpFQlRLKOE=;
- b=gvs8T72WysixbFPh1a7ju8dT2aRuPS7K0HMnSyIIPKd4PydNrLhkzWSh
- Fjy+4pgFj6ALifGR20lYm9Lf61b1iZavPAdbYzPb1eJAyrSs+X6ryJ797
- pn7BsnGfJYOB4KlTn4Wv1n5PWVVYMWk3Sjq5caXe/QTLYuoJWCHTqvfl/
- YSVs3eVIeIT4HAr3p28tz8zpfSl9OsSwCPfFgJD+2nEaeBjGQj8OvWvm6
- VFSy4FMuudV1dDAc0o5L9r/5ezVNviOY9wrRhxsk3owQrEVrxHyjCS6wQ
- 5xdIAeYdy2VGRtfLPj6MlYtEnz9K9gUSioGVm+7uXYkfqJ/AtvA1YeZrq Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10932"; a="398932890"
-X-IronPort-AV: E=Sophos;i="6.04,297,1695711600"; d="scan'208";a="398932890"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 22 Dec 2023 11:52:41 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10932"; a="950367316"
-X-IronPort-AV: E=Sophos;i="6.04,297,1695711600"; d="scan'208";a="950367316"
-Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
- by orsmga005.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
- 22 Dec 2023 11:52:41 -0800
-Received: from orsmsx603.amr.corp.intel.com (10.22.229.16) by
- ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 22 Dec 2023 11:52:41 -0800
-Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
- orsmsx603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35 via Frontend Transport; Fri, 22 Dec 2023 11:52:41 -0800
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (104.47.66.41) by
- edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2507.35; Fri, 22 Dec 2023 11:52:40 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=BjhQm3SKWXZLHnf036qSpkBxG4vaJPVdKTiWG5b91twKhWM3xi4LbxEG6T26DEi+FL+R0NFtakRGkmfcPGAYguPnrUzRCYzGRf9jyw9jeVa75nqwL4ilCbwpgr9nxaZScvWUYCSh+uJS28onJmJ4H3m6Il/WzYBxpsWengxs6obfNhRC2FymsTHbUGMr7/6xlewG1SaToSdaiRMGlEndkE97AUXh1Bd0eiypnl5m39ebl7c4bEoVxyNqhLiTyeSU/WG9UC6+CJx4IEm4uoZmGhBV2GsgsR0pl8X+PAyFYxs3XEi+wx44LMgUmBUGpd3pL9CcTUKrRqkVNGXjGHYagA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Gbhz66y81L3qZI+5R51ti0Se7H/Bktqq0lpFQlRLKOE=;
- b=UPK5DzGY4mqE5YTMvneiTD0W7b1eyO2bA4XtvhR9gAoaTn4SCNgdfIhKJblDUQyeA12n7TB6tKdGNkrIF0rJLmpkLIlw1h7oeZAEzMNWvvTDX8Y2PKQJbMBtn4bBBp/J6k/o4UKNdjB0zNs6N2bcYLnG8X5+crZ23NJr4u+gzUezWh9r4N3IdNUQ0KIyfle4ykG8R4+fw/kjLyp28hv0EvrSRRVE9U/r1hV+8g6Vm+vvrSOk4QZtTR9HmYWxOaBfgM5iB/dglow7Bdbr/lrr4KYIiMoa0r2NEgYAuDKQq4x4i+XoVAJx4GCpwqLd+dUeqH13E/0jTQ1Rx/h7hXWrTA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from BN9PR11MB5483.namprd11.prod.outlook.com (2603:10b6:408:104::10)
- by CO1PR11MB4834.namprd11.prod.outlook.com (2603:10b6:303:90::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7113.21; Fri, 22 Dec
- 2023 19:52:37 +0000
-Received: from BN9PR11MB5483.namprd11.prod.outlook.com
- ([fe80::6da1:a4b7:4771:14e1]) by BN9PR11MB5483.namprd11.prod.outlook.com
- ([fe80::6da1:a4b7:4771:14e1%5]) with mapi id 15.20.7113.019; Fri, 22 Dec 2023
- 19:52:37 +0000
-From: "Chiu, Chasel" <chasel.chiu@intel.com>
-To: Ard Biesheuvel <ardb@kernel.org>
-CC: Simon Glass <sjg@chromium.org>, "devicetree@vger.kernel.org"
- <devicetree@vger.kernel.org>, Mark Rutland <mark.rutland@arm.com>, "Rob
- Herring" <robh@kernel.org>, "Tan, Lean Sheng" <sheng.tan@9elements.com>, lkml
- <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, "Brune,
- Maximilian" <maximilian.brune@9elements.com>, Yunhui Cui
- <cuiyunhui@bytedance.com>, "Dong, Guo" <guo.dong@intel.com>, Tom Rini
- <trini@konsulko.com>, ron minnich <rminnich@gmail.com>, "Guo, Gua"
- <gua.guo@intel.com>, "linux-acpi@vger.kernel.org"
- <linux-acpi@vger.kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: RE: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-Thread-Topic: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-Thread-Index: AQHZ8LGvpttG6mvEz0WlU57NBrVnTbB0GT1wgAEi2gCAA4/1oIALktuAgADzAICAABvkkIAABCKwgAr4SACAABVGMIAj06wAgAAR7BCAAWO2gIAAZ0/w
-Date: Fri, 22 Dec 2023 19:52:37 +0000
-Message-ID: <BN9PR11MB5483E191F1906641565A1337E694A@BN9PR11MB5483.namprd11.prod.outlook.com>
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <BN9PR11MB5483FF3039913334C7EA83E1E6AEA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXFG92NpL7T7YocOup0xLKyopt3MnSCp0RL8cLzozzJz7A@mail.gmail.com>
- <BN9PR11MB548303B09536EB1577472029E6B3A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAPnjgZ36t8g7E=0MSJyaV8-QKv9RVYe47Jd5E=NU-mFM4LWBQA@mail.gmail.com>
- <CAMj1kXHAEeK7x2f13k_JV3Xcw61nNLasyvXQf+mKwKekQ48EpQ@mail.gmail.com>
- <BN9PR11MB548334E0DA6495C438FBFDE1E6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <BN9PR11MB548314DDE8D4C9503103D51CE6BBA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHbM+ArLgNZgnmiok4gOfv6QLYxzyB9OCwfhEkJ2xGK_g@mail.gmail.com>
- <BN9PR11MB5483C2FBCD07DE61DCCDB523E6BCA@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXHmu=ykgBMRiFqG4_ra3FJtHa=GASoMUJswdMFa9v4Xgw@mail.gmail.com>
- <BN9PR11MB54837EEB391CC2A8FA6C0BF5E695A@BN9PR11MB5483.namprd11.prod.outlook.com>
- <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
-In-Reply-To: <CAMj1kXEQL9n1Adedow5KEyZ5gdFQY3Fn+Fz8vSK3mHib_vDFig@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN9PR11MB5483:EE_|CO1PR11MB4834:EE_
-x-ms-office365-filtering-correlation-id: 07b85495-7cfc-4a53-91cf-08dc03278c7b
-x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: tTy2tDeuBMCsaAhzj7aTl63/Tj+neG4be9PuygIB8LiRNR8HNL9AcTnxbz0Nzm8+FCCHetU2/+Mmr/m2ym71HfdHNvnt59eU1dDI2/UMQZpxN9KdCoT22MxLh9OqMdhgaKsKdvuqo4s0qpogVYFI5hpQhqDU0zwSbtFdbkPh2ALcatUZZtcEBBHkIkPSy3V1q0Zr/a4BmEdTRERSfYtvMiEyzQTshd5tR5EFOSGwwSnJB+YtrzKEDnrqgOtyiKIihavFZRI6Ee1SMzb7O7v//BPPpzc9q3FLtrMlcUFmpvvdmkNrubCqs8wJ3Ub4ilXWbGmV2EM/PyIZTy3BW+vIW+y6B6jNzPBKL9g6Ewj4i0adfr76Ib8exFd7xgMg1X5O0JCQ4z3NDTeNEHps9s7SULeUOP1Fiea5m2SqWWQs/PayLuUqkIJ9zN3BLJnU2sJ2uoJm+TsbuH26ZuPvd/4HHhi4zesaLB7Ld11u53mL1Qt+75l3t6kJR1n+EQt6+REub4AwyIoZ8U6GPSNvYG5c/h1QQ0NGJVF4rKybJG8NT+Vpy0lV5feUI1fVLF9fldSQWz7Wz1EDGUhgLaoKLr0VtbnNUVsvBsr6ReptfQskX6e8TEufEAuZTh7GiGakAm1Y35O1TDxUdCNFVsl2pcYQqQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN9PR11MB5483.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(39860400002)(396003)(366004)(136003)(346002)(230922051799003)(64100799003)(186009)(1800799012)(451199024)(2906002)(83380400001)(38100700002)(82960400001)(38070700009)(122000001)(41300700001)(33656002)(55016003)(86362001)(71200400001)(26005)(9686003)(6506007)(7696005)(316002)(53546011)(478600001)(6916009)(66556008)(66946007)(76116006)(64756008)(66476007)(66446008)(54906003)(8936002)(8676002)(4326008)(52536014)(7416002)(30864003)(5660300002)(966005);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZWtqbncyS1k5STdqYzZVSXBsZUlzRDJUakZqTFdNNW5oOW9rK0JpNHhlTkho?=
- =?utf-8?B?N3VRWjV4VTM2a3hCME5aVXJncUU0OFdwamNWZm1XL3pMbUF2U2hiMmJ1VFhY?=
- =?utf-8?B?eTZ3M2dJVGl0MDRTSzlyLzFua0VJUEorWFQvNytlL2JVdkdMUGFibEtLbzVh?=
- =?utf-8?B?WG5SakhkRm9jdUlEb0JITnZqT0ExSXdUV080ZTF2RTYybnhQT2t4Nlh4U0ZI?=
- =?utf-8?B?U2NsVGJpNm9Sd2VzRUZUZXliTUszTnRlQTNJRStUaWMreW9lT2tNc01TRklX?=
- =?utf-8?B?aVJSOHNFMDgycHMzMVNLV29sTDV6Y0UrVXA2cHBJdlRIT2E3dEJkdG5Ha0du?=
- =?utf-8?B?eEhveEExaGpkRUJFRWYzQXlDdmp5aE0yMmp1eFdRakNXeUhIc21CbnR3S2t2?=
- =?utf-8?B?d3liajZtYnhWazNFWk96ZnprWTdJY3JqVHBmYmJ0T2VsSGh5Vzg0SkhCWFkv?=
- =?utf-8?B?c2dmclJrWktUYlNPN080VVpYendqMTc2Y1BIelFTS1NTdTJVcm1LVmhHbHoz?=
- =?utf-8?B?VS85SFBpazJXUUFaclloSEpUNXRCRFcyVFEwY3NoU0JkOXM4TXFQMmhwaUNK?=
- =?utf-8?B?K1RuK0FaUFRveHloTFk2Z2tRaFBuc0x0UENLU2FLeTF0Z2dCdlA3M0ZsajU1?=
- =?utf-8?B?WTQvbi9KREJvTC9PSGFmNmhsc0grdGh0bWVpb3NsVmlPL1ZNYVZ2cDdvZXV4?=
- =?utf-8?B?Y0dDbTRRRU4wcVhaUkh3bUowUWRIbGxIUk5OS3hHQVh3d0h1Q1dnYTgxTnRV?=
- =?utf-8?B?VzdEeE1oaE9qSEJxb1lXYnBKUUFISEtyaWhJSDdSVkZobkkyMEdORzArQ04r?=
- =?utf-8?B?TE1meU1BR0xLQ016YjQ0K2hDQm0rak85aFlDL2s1N1ZrTmpaMmlBWXcweXM4?=
- =?utf-8?B?UHByWklFM2QwKzJyTDQ4azhJZ09HcUZWVnBWSnF5TVBjZVptZEhaZTJLNWVl?=
- =?utf-8?B?c3VKZEZCdWNVQVIzb3NPUmd4NDhVY2ppR013R1J5ZzM1c2RLMTZWQTdoSHNG?=
- =?utf-8?B?ZWYzeDM4YkMzRzZjcDd4bzhRaGtLRDlJSzljWnZwbVM0SitLamFaT05TS3hv?=
- =?utf-8?B?TWpvSEpiLzA2bmhrUWtqUVdhdUJFcjE2MlNoaEFUS052K29jR05qSEVEL3RK?=
- =?utf-8?B?aWIyU2JSMlNSWjRPa1ZkT3g0Q2FsUGN2ZXB4R0lpbWd0TmF1a3cybmgrTDhH?=
- =?utf-8?B?bnJUdGxDenJqTU5oREtiYWFBb3AyV21sdzRpc1ZxQ0pOZ2o1ajFIaUE2Q1NM?=
- =?utf-8?B?eTdLWWs5THBLU0Y5S1ZqcnZ0ZHVpbWdWK0lqZi9vUGN5aXh4bHp0QlJHd0ZB?=
- =?utf-8?B?Q1Rra2w2MVMreDZCZThISFdERjNZM1ppTUV2YzBUSXVrVGZGNngzVFM4QkxO?=
- =?utf-8?B?UG5lbmI4VXNpaFhUeFQ5ZFVrVkhvb0FsNVRJbEJncTV1OE1zTmFtK1V5RFRH?=
- =?utf-8?B?VWxGMkE1WVhyREJOUzNEc2RlaWhua3JGajdRODYwOVNBcW96MExzUjlUZjNt?=
- =?utf-8?B?YXUyUlJURllDUDZBY1FnRmFSK21qRXZjeG84dk03RW0rU0ZSeWNHeldEQ3BC?=
- =?utf-8?B?TGhRVlliM0QyT0FhaG9ib3lLU285T3E0VmlKaGdCdWlPWFZsMHdCL2xXcnFa?=
- =?utf-8?B?OU5rWnoyVkpnSm1za2ZtNXlsMy9vc3Z5TURYUWtKV0ZZWTg5QUU4LzQvN2FK?=
- =?utf-8?B?SXRqTlNkNHludXNiNGdWQm45bkFsVHhtQnBEdmVMcHJpdUhBMThtK0h4MnFx?=
- =?utf-8?B?QWdkbGExemNDOUpTKzJJcC81a0RDa1QvNkg1ZmhDTlUvT245NUlqTFBrcEYy?=
- =?utf-8?B?L3hYQm9hT3RCeFo4Y21rNzhCQlJRcWVUdUN2V256ZGpZZTNoaTJpUTNnZllo?=
- =?utf-8?B?U2Y1b2J5aTRvNTFJRW51L2g1dFAwbTIrNm1KQW1uV1dtck1PL3NDMjB2aTUy?=
- =?utf-8?B?aVkrRzFwVVNwRmpaYXFEWmE4UXFDVjdVNUlUVjFQRHdIMXpSRXBLRmZ2dUgr?=
- =?utf-8?B?bXRqaFZKclpBM2NNMWpvc2pNQmlQM3ExLzFwRHlMU2RQeGNZdno3OHQxdFRS?=
- =?utf-8?B?Mk00ckV5aE9wNFgyaDFqZnpjMGU2SzYySGR6QWUzZlArQWhKellyNng3ZSsz?=
- =?utf-8?Q?4Bj6/jT5iNuik8TSD6Qjtidg7?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ by phobos.denx.de (Postfix) with ESMTPS id 8CFE886C67
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:03:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=francis.laniel@amarulasolutions.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40d3ae326f6so21725455e9.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:03:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1703278984; x=1703883784;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=S4u42AA0KdAUF2hnrz4p8A9/BYzSVJGEqVkhTMRdF5c=;
+ b=UsN0QIIY2B6nmNDhlOXjgHDjAv87pHLZ2G0LllOM9T+ZJdleYovP3vJmGyMyzS8BDP
+ 7jXSGZfkdk/uonxv5/IT8JEOV/pr7eyOK9i1PsDTeMiI0ZT8Lq90nqyqqkFINMVLCTcs
+ 3cFf5YYGYNPSR0IU14+lxLg544SFwN+DXQzro=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1703278984; x=1703883784;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=S4u42AA0KdAUF2hnrz4p8A9/BYzSVJGEqVkhTMRdF5c=;
+ b=YCdg8h01dNgxAUCjZwIYNJYBl4Fp/dBM1oJWL18mYvgewcVY6ATcNEravJNkxS0UWR
+ fzJLk6zEHqTT3grcwX/dn0dcxADsn8SCeAvXe0aCTTF599nL64xASSK0sZOgTWAd6YpC
+ 10DSu66vyUpK4NGYM+7Yn9e6iBNNmcUhRwmbRAugsuihizUvwcZHBaD4wKRIefy4gAUq
+ a7aZE4+RA8NtUTTPikUujNddzQUTt4woe/Di1c2IHbTzopAnCA3gs2jFV38qhK8OCpRX
+ fnIASqE+ip25UlJNqWoHC+9daVU+cv3b5AmgBE7UO+JL/7TjNhaie5OqlD4SfYKymbrR
+ eQfw==
+X-Gm-Message-State: AOJu0Yx8lRp1D9FZJ4PeXu7sbPy9oSmsd90IuKReunMhUpqKkIZ8EOBX
+ MO3cwM62dYcFEr77baraO8qNL3Ro7MZxE9PAuwYjHojOQjI=
+X-Google-Smtp-Source: AGHT+IFOzdVeCwRgNRuKjXV1QRlY3BkgFB5+8w/5K1DWvjfdqQV5caieq1Y0GKf8gohyOrNfxHluMA==
+X-Received: by 2002:a05:600c:4694:b0:40d:4156:a59f with SMTP id
+ p20-20020a05600c469400b0040d4156a59fmr1075332wmo.165.1703278983898; 
+ Fri, 22 Dec 2023 13:03:03 -0800 (PST)
+Received: from pwmachine.numericable.fr (85-170-33-133.rev.numericable.fr.
+ [85.170.33.133]) by smtp.gmail.com with ESMTPSA id
+ j20-20020a05600c191400b0040b349c91acsm348294wmq.16.2023.12.22.13.03.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 13:03:03 -0800 (PST)
+From: Francis Laniel <francis.laniel@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Subject: [PATCH v13 00/24] Modernize U-Boot shell
+Date: Fri, 22 Dec 2023 22:02:20 +0100
+Message-Id: <20231222210244.91830-1-francis.laniel@amarulasolutions.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5483.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 07b85495-7cfc-4a53-91cf-08dc03278c7b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Dec 2023 19:52:37.4716 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: S/mT98pNRQPCqgn3xzA8NpRnK/g9e+CAX/FyAaWP5AswYvXppp9FhcVMaGyqXbxaSJ8t+jYddwJ+Z5T6T7ZBEQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR11MB4834
-X-OriginatorOrg: intel.com
-X-Mailman-Approved-At: Fri, 22 Dec 2023 21:17:15 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -195,209 +89,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DQpQbGVhc2Ugc2VlIG15IHJlcGx5IGJlbG93IGlubGluZS4NCg0KVGhhbmtzLA0KQ2hhc2VsDQoN
-Cg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBBcmQgQmllc2hldXZlbCA8
-YXJkYkBrZXJuZWwub3JnPg0KPiBTZW50OiBGcmlkYXksIERlY2VtYmVyIDIyLCAyMDIzIDQ6NDgg
-QU0NCj4gVG86IENoaXUsIENoYXNlbCA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPg0KPiBDYzogU2lt
-b24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+OyBkZXZpY2V0cmVlQHZnZXIua2VybmVsLm9yZzsg
-TWFyayBSdXRsYW5kDQo+IDxtYXJrLnJ1dGxhbmRAYXJtLmNvbT47IFJvYiBIZXJyaW5nIDxyb2Jo
-QGtlcm5lbC5vcmc+OyBUYW4sIExlYW4gU2hlbmcNCj4gPHNoZW5nLnRhbkA5ZWxlbWVudHMuY29t
-PjsgbGttbCA8bGludXgta2VybmVsQHZnZXIua2VybmVsLm9yZz47IERoYXZhbA0KPiBTaGFybWEg
-PGRoYXZhbEByaXZvc2luYy5jb20+OyBCcnVuZSwgTWF4aW1pbGlhbg0KPiA8bWF4aW1pbGlhbi5i
-cnVuZUA5ZWxlbWVudHMuY29tPjsgWXVuaHVpIEN1aSA8Y3VpeXVuaHVpQGJ5dGVkYW5jZS5jb20+
-Ow0KPiBEb25nLCBHdW8gPGd1by5kb25nQGludGVsLmNvbT47IFRvbSBSaW5pIDx0cmluaUBrb25z
-dWxrby5jb20+OyByb24gbWlubmljaA0KPiA8cm1pbm5pY2hAZ21haWwuY29tPjsgR3VvLCBHdWEg
-PGd1YS5ndW9AaW50ZWwuY29tPjsgbGludXgtDQo+IGFjcGlAdmdlci5rZXJuZWwub3JnOyBVLUJv
-b3QgTWFpbGluZyBMaXN0IDx1LWJvb3RAbGlzdHMuZGVueC5kZT4NCj4gU3ViamVjdDogUmU6IFtQ
-QVRDSCB2NyAyLzJdIHNjaGVtYXM6IEFkZCBzb21lIGNvbW1vbiByZXNlcnZlZC1tZW1vcnkNCj4g
-dXNhZ2VzDQo+IA0KPiBPbiBUaHUsIDIxIERlYyAyMDIzIGF0IDE3OjUwLCBDaGl1LCBDaGFzZWwg
-PGNoYXNlbC5jaGl1QGludGVsLmNvbT4gd3JvdGU6DQo+ID4NCj4gPg0KPiA+IEhpIEFyZCwNCj4g
-Pg0KPiA+IFBsZWFzZSBzZWUgbXkgcmVwbHkgYmVsb3cgaW5saW5lIGFuZCBsZXQgbWUga25vdyB5
-b3VyIHRob3VnaHRzLg0KPiA+DQo+ID4gVGhhbmtzLA0KPiA+IENoYXNlbA0KPiA+DQo+ID4NCj4g
-PiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiBGcm9tOiBBcmQgQmllc2hldXZl
-bCA8YXJkYkBrZXJuZWwub3JnPg0KPiA+ID4gU2VudDogVGh1cnNkYXksIERlY2VtYmVyIDIxLCAy
-MDIzIDY6MzEgQU0NCj4gPiA+IFRvOiBDaGl1LCBDaGFzZWwgPGNoYXNlbC5jaGl1QGludGVsLmNv
-bT4NCj4gPiA+IENjOiBTaW1vbiBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz47IGRldmljZXRyZWVA
-dmdlci5rZXJuZWwub3JnOyBNYXJrDQo+ID4gPiBSdXRsYW5kIDxtYXJrLnJ1dGxhbmRAYXJtLmNv
-bT47IFJvYiBIZXJyaW5nIDxyb2JoQGtlcm5lbC5vcmc+OyBUYW4sDQo+ID4gPiBMZWFuIFNoZW5n
-IDxzaGVuZy50YW5AOWVsZW1lbnRzLmNvbT47IGxrbWwNCj4gPiA+IDxsaW51eC1rZXJuZWxAdmdl
-ci5rZXJuZWwub3JnPjsgRGhhdmFsIFNoYXJtYSA8ZGhhdmFsQHJpdm9zaW5jLmNvbT47DQo+ID4g
-PiBCcnVuZSwgTWF4aW1pbGlhbiA8bWF4aW1pbGlhbi5icnVuZUA5ZWxlbWVudHMuY29tPjsgWXVu
-aHVpIEN1aQ0KPiA+ID4gPGN1aXl1bmh1aUBieXRlZGFuY2UuY29tPjsgRG9uZywgR3VvIDxndW8u
-ZG9uZ0BpbnRlbC5jb20+OyBUb20gUmluaQ0KPiA+ID4gPHRyaW5pQGtvbnN1bGtvLmNvbT47IHJv
-biBtaW5uaWNoIDxybWlubmljaEBnbWFpbC5jb20+OyBHdW8sIEd1YQ0KPiA+ID4gPGd1YS5ndW9A
-aW50ZWwuY29tPjsgbGludXgtIGFjcGlAdmdlci5rZXJuZWwub3JnOyBVLUJvb3QgTWFpbGluZw0K
-PiA+ID4gTGlzdCA8dS1ib290QGxpc3RzLmRlbnguZGU+DQo+ID4gPiBTdWJqZWN0OiBSZTogW1BB
-VENIIHY3IDIvMl0gc2NoZW1hczogQWRkIHNvbWUgY29tbW9uIHJlc2VydmVkLW1lbW9yeQ0KPiA+
-ID4gdXNhZ2VzDQo+ID4gPg0KPiA+ID4gT24gVHVlLCAyOCBOb3YgMjAyMyBhdCAyMTozMSwgQ2hp
-dSwgQ2hhc2VsIDxjaGFzZWwuY2hpdUBpbnRlbC5jb20+IHdyb3RlOg0KPiA+ID4gPg0KPiA+ID4g
-Pg0KPiA+ID4gPg0KPiA+ID4gPg0KPiA+ID4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0t
-DQo+ID4gPiA+ID4gRnJvbTogQXJkIEJpZXNoZXV2ZWwgPGFyZGJAa2VybmVsLm9yZz4NCj4gPiA+
-ID4gPiBTZW50OiBUdWVzZGF5LCBOb3ZlbWJlciAyOCwgMjAyMyAxMDowOCBBTQ0KPiA+ID4gPiA+
-IFRvOiBDaGl1LCBDaGFzZWwgPGNoYXNlbC5jaGl1QGludGVsLmNvbT4NCj4gPiA+ID4gPiBDYzog
-U2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+OyBkZXZpY2V0cmVlQHZnZXIua2VybmVsLm9y
-ZzsNCj4gPiA+ID4gPiBNYXJrIFJ1dGxhbmQgPG1hcmsucnV0bGFuZEBhcm0uY29tPjsgUm9iIEhl
-cnJpbmcNCj4gPiA+ID4gPiA8cm9iaEBrZXJuZWwub3JnPjsgVGFuLCBMZWFuIFNoZW5nIDxzaGVu
-Zy50YW5AOWVsZW1lbnRzLmNvbT47DQo+ID4gPiA+ID4gbGttbCA8bGludXgta2VybmVsQHZnZXIu
-a2VybmVsLm9yZz47IERoYXZhbCBTaGFybWENCj4gPiA+ID4gPiA8ZGhhdmFsQHJpdm9zaW5jLmNv
-bT47IEJydW5lLCBNYXhpbWlsaWFuDQo+ID4gPiA+ID4gPG1heGltaWxpYW4uYnJ1bmVAOWVsZW1l
-bnRzLmNvbT47IFl1bmh1aSBDdWkNCj4gPiA+ID4gPiA8Y3VpeXVuaHVpQGJ5dGVkYW5jZS5jb20+
-OyBEb25nLCBHdW8gPGd1by5kb25nQGludGVsLmNvbT47IFRvbQ0KPiA+ID4gPiA+IFJpbmkgPHRy
-aW5pQGtvbnN1bGtvLmNvbT47IHJvbiBtaW5uaWNoIDxybWlubmljaEBnbWFpbC5jb20+Ow0KPiA+
-ID4gPiA+IEd1bywgR3VhIDxndWEuZ3VvQGludGVsLmNvbT47IGxpbnV4LSBhY3BpQHZnZXIua2Vy
-bmVsLm9yZzsNCj4gPiA+ID4gPiBVLUJvb3QgTWFpbGluZyBMaXN0IDx1LWJvb3RAbGlzdHMuZGVu
-eC5kZT4NCj4gPiA+ID4gPiBTdWJqZWN0OiBSZTogW1BBVENIIHY3IDIvMl0gc2NoZW1hczogQWRk
-IHNvbWUgY29tbW9uDQo+ID4gPiA+ID4gcmVzZXJ2ZWQtbWVtb3J5IHVzYWdlcw0KPiA+ID4gPiA+
-DQo+ID4gPiA+ID4gWW91IGFyZSByZWZlcnJpbmcgdG8gYSAyMDAwIGxpbmUgcGF0Y2ggc28gaXQg
-aXMgbm90IDEwMCUgY2xlYXIgd2hlcmUgdG8gbG9vaw0KPiB0YmguDQo+ID4gPiA+ID4NCj4gPiA+
-ID4gPg0KPiA+ID4gPiA+IE9uIFR1ZSwgMjEgTm92IDIwMjMgYXQgMTk6MzcsIENoaXUsIENoYXNl
-bCA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPg0KPiB3cm90ZToNCj4gPiA+ID4gPiA+DQo+ID4gPiA+
-ID4gPg0KPiA+ID4gPiA+ID4gSW4gUFIsIFVlZmlQYXlsb2FkUGtnL0xpYnJhcnkvRmR0UGFyc2Vy
-TGliL0ZkdFBhcnNlckxpYi5jLA0KPiA+ID4gPiA+ID4gbGluZQ0KPiA+ID4gPiA+ID4gMjY4IGlz
-IGZvcg0KPiA+ID4gPiA+IHJlbGF0ZWQgZXhhbXBsZSBjb2RlLg0KPiA+ID4gPiA+ID4NCj4gPiA+
-ID4gPg0KPiA+ID4gPiA+IFRoYXQgcmVmZXJzIHRvIGEgJ21lbW9yeS1hbGxvY2F0aW9uJyBub2Rl
-LCByaWdodD8gSG93IGRvZXMgdGhhdA0KPiA+ID4gPiA+IHJlbGF0ZSB0byB0aGUgJ3Jlc2VydmVk
-LW1lbW9yeScgbm9kZT8NCj4gPiA+ID4gPg0KPiA+ID4gPiA+IEFuZCBjcnVjaWFsbHksIGhvdyBk
-b2VzIHRoaXMgY2xhcmlmeSBpbiB3aGljaCB3YXkgInJ1bnRpbWUtY29kZSINCj4gPiA+ID4gPiBh
-bmQNCj4gPiA+ID4gPiAicnVudGltZS0gZGF0YSIgcmVzZXJ2YXRpb25zIGFyZSBiZWluZyB1c2Vk
-Pw0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gU2luY2UgdGhlIHZlcnkgYmVnaW5uaW5nIG9mIHRoaXMg
-ZGlzY3Vzc2lvbiwgSSBoYXZlIGJlZW4gYXNraW5nDQo+ID4gPiA+ID4gcmVwZWF0ZWRseSBmb3Ig
-ZXhhbXBsZXMgdGhhdCBkZXNjcmliZSB0aGUgd2lkZXIgY29udGV4dCBpbiB3aGljaA0KPiA+ID4g
-PiA+IHRoZXNlDQo+ID4gPiByZXNlcnZhdGlvbnMgYXJlIHVzZWQuDQo+ID4gPiA+ID4gVGhlICJy
-dW50aW1lIiBpbnRvIHJ1bnRpbWUtY29kZSBhbmQgcnVudGltZS1kYXRhIG1lYW5zIHRoYXQNCj4g
-PiA+ID4gPiB0aGVzZSByZWdpb25zIGhhdmUgYSBzcGVjaWFsIHNpZ25pZmljYW5jZSB0byB0aGUg
-b3BlcmF0aW5nDQo+ID4gPiA+ID4gc3lzdGVtLCBub3QganVzdCB0byB0aGUgbmV4dCBib290bG9h
-ZGVyIHN0YWdlLiBTbyBJIHdhbnQgdG8NCj4gPiA+ID4gPiB1bmRlcnN0YW5kIGV4YWN0bHkgd2h5
-IGl0IGlzIG5lY2Vzc2FyeSB0byBkZXNjcmliZSB0aGVzZSByZWdpb25zDQo+ID4gPiA+ID4gaW4g
-YSB3YXkgd2hlcmUgdGhlIG9wZXJhdGluZyBzeXN0ZW0gbWlnaHQgYmUgZXhwZWN0ZWQgdG8NCj4g
-PiA+ID4gPiBpbnRlcnByZXQgdGhpcyBpbmZvcm1hdGlvbiBhbmQgYWN0DQo+ID4gPiB1cG9uIGl0
-Lg0KPiA+ID4gPiA+DQo+ID4gPiA+DQo+ID4gPiA+DQo+ID4gPiA+IEkgdGhpbmsgcnVudGltZSBj
-b2RlIGFuZCBkYXRhIHRvZGF5IGFyZSBtYWlubHkgZm9yIHN1cHBvcnRpbmcgVUVGSQ0KPiA+ID4g
-PiBydW50aW1lDQo+ID4gPiBzZXJ2aWNlcyAtIHNvbWUgQklPUyBmdW5jdGlvbnMgZm9yIE9TIHRv
-IHV0aWxpemUsIE9TIG1heSBmb2xsb3cNCj4gPiA+IGJlbG93IEFDUEkgc3BlYyB0byB0cmVhdCB0
-aGVtIGFzIHJlc2VydmVkIHJhbmdlOg0KPiA+ID4gPiBodHRwczovL3VlZmkub3JnL3NwZWNzL0FD
-UEkvNi41LzE1X1N5c3RlbV9BZGRyZXNzX01hcF9JbnRlcmZhY2VzLmgNCj4gPiA+ID4gdG1sIyB1
-ZWZpLW1lbW9yeS10eXBlcy1hbmQtbWFwcGluZy10by1hY3BpLWFkZHJlc3MtcmFuZ2UtdHlwZXMN
-Cj4gPiA+ID4NCj4gPiA+ID4gTGlrZSBJIG1lbnRpb25lZCBlYXJsaWVyLCB0aGF0IFBSIGlzIHN0
-aWxsIGluIGVhcmx5IHBoYXNlIGFuZCBoYXMNCj4gPiA+ID4gbm90IHJlZmxlY3RlZCBhbGwNCj4g
-PiA+IHRoZSByZXF1aXJlZCBjaGFuZ2VzIHlldCwgYnV0IHRoZSBpZGVhIGlzIHRvIGJ1aWxkDQo+
-ID4gPiBnRWZpTWVtb3J5VHlwZUluZm9ybWF0aW9uR3VpZCBIT0IgZnJvbSBGRFQgcmVzZXJ2ZWQt
-bWVtb3J5IG5vZGVzLg0KPiA+ID4gPiBVRUZJIGdlbmVyaWMgUGF5bG9hZCBoYXMgRHhlTWFpbiBp
-bnRlZ3JhdGVkLCBob3dldmVyIE1lbW9yeSBUeXBlcw0KPiA+ID4gPiBhcmUNCj4gPiA+IHBsYXRm
-b3JtLXNwZWNpZmljLCBmb3IgZXhhbXBsZSwgc29tZSBwbGF0Zm9ybXMgbWF5IG5lZWQgYmlnZ2Vy
-DQo+ID4gPiBydW50aW1lIG1lbW9yeSBmb3IgdGhlaXIgaW1wbGVtZW50YXRpb24sIHRoYXQncyB3
-aHkgd2Ugd2FudCBzdWNoIEZEVA0KPiA+ID4gcmVzZXJ2ZWQtbWVtb3J5IG5vZGUgdG8gdGVsbCBE
-eGVNYWluLg0KPiA+ID4gPg0KPiA+ID4NCj4gPiA+ID4gVGhlIFBheWxvYWQgZmxvdyB3aWxsIGJl
-IGxpa2UgdGhpczoNCj4gPiA+ID4gICBQYXlsb2FkIGNyZWF0ZXMgYnVpbHQtaW4gZGVmYXVsdCBN
-ZW1vcnlUeXBlcyB0YWJsZSAtPg0KPiA+ID4gPiAgICAgRkRUIHJlc2VydmVkLW1lbW9yeSBub2Rl
-IHRvIG92ZXJyaWRlIGlmIHJlcXVpcmVkICh0aGlzIGFsc28NCj4gPiA+ID4gZW5zdXJlcyB0aGUN
-Cj4gPiA+IHNhbWUgbWVtb3J5IG1hcCBjcm9zcyBib290cyBzbyBBQ1BJIFM0IHdvcmtzKSAtPg0K
-PiA+ID4gPiAgICAgICBCdWlsZCBnRWZpTWVtb3J5VHlwZUluZm9ybWF0aW9uR3VpZCBIT0IgYnkg
-InBsYXRmb20gc3BlY2lmaWMiDQo+ID4gPiBNZW1vcnlUeXBlcyBUYWJsZSAtPg0KPiA+ID4gPiAg
-ICAgICAgIER4ZU1haW4vR0NEIHRvIGNvbnN1bWUgdGhpcyBNZW1vcnlUeXBlcyB0YWJsZSBhbmQg
-c2V0dXANCj4gPiA+ID4gbWVtb3J5DQo+ID4gPiBzZXJ2aWNlIC0+DQo+ID4gPiA+ICAgICAgICAg
-ICBJbnN0YWxsIG1lbW9yeSB0eXBlcyB0YWJsZSB0byBVRUZJIHN5c3RlbSB0YWJsZS5Db25maWd1
-cmF0aW9uIHRhYmxlLi4uDQo+ID4gPiA+DQo+ID4gPiA+IE5vdGU6IGlmIFBheWxvYWQgYnVpbHQt
-aW4gZGVmYXVsdCBNZW1vcnlUeXBlcyB0YWJsZSB3b3JrcyBmaW5lIGZvcg0KPiA+ID4gPiB0aGUg
-cGxhdGZvcm0sIHRoZW4gRkRUIHJlc2VydmVkLW1lbW9yeSBub2RlIGRvZXMgbm90IG5lZWQgdG8N
-Cj4gPiA+ID4gcHJvdmlkZSBzdWNoDQo+ID4gPiAndXNhZ2UnIGNvbXBhdGlibGUgc3RyaW5ncy4g
-KG9wdGlvbmFsKSBUaGlzIEZEVCBub2RlIGNvdWxkIGFsbG93DQo+ID4gPiBmbGV4aWJpbGl0eS9j
-b21wYXRpYmlsaXR5IHdpdGhvdXQgcmVidWlsZGluZyBQYXlsb2FkIGJpbmFyeS4NCj4gPiA+ID4N
-Cj4gPiA+ID4gTm90IHN1cmUgaWYgSSBhbnN3ZXJlZCBhbGwgeW91ciBxdWVzdGlvbnMsIHBsZWFz
-ZSBoaWdobGlnaHQgd2hpY2gNCj4gPiA+ID4gYXJlYSB5b3UgbmVlZA0KPiA+ID4gbW9yZSBpbmZv
-cm1hdGlvbi4NCj4gPiA+ID4NCj4gPiA+DQo+ID4gPiBUaGUgZ0VmaU1lbW9yeVR5cGVJbmZvcm1h
-dGlvbkd1aWQgSE9CIHR5cGljYWxseSBjYXJyaWVzIHBsYXRmb3JtDQo+ID4gPiBkZWZhdWx0cywg
-YW5kIHRoZSBhY3R1YWwgbWVtb3J5IHR5cGUgaW5mb3JtYXRpb24gaXMga2VwdCBpbiBhDQo+ID4g
-PiBub24tdm9sYXRpbGUgRUZJIHZhcmlhYmxlLCB3aGljaCBnZXRzIHVwZGF0ZWQgd2hlbiB0aGUg
-bWVtb3J5IHVzYWdlDQo+ID4gPiBjaGFuZ2VzLiBJcyB0aGlzIGRpZmZlcmVudCBmb3IgVWVmaVBh
-eWxvYWRQa2c/DQo+ID4gPg0KPiA+ID4gKEZvciB0aG9zZSBhbW9uZyB0aGUgY2MnZWVzIGxlc3Mg
-dmVyc2VkIGluIEVGSS9FREsyOiB3aGVuIHlvdSBnZXQNCj4gPiA+IHRoZSAnY29uZmlnIGNoYW5n
-ZWQgLXJlYm9vdGluZycgbWVzc2FnZSBmcm9tIHRoZSBib290IGZpcm13YXJlLCBpdA0KPiA+ID4g
-dHlwaWNhbGx5IG1lYW5zIHRoYXQgdGhpcyBtZW1vcnkgdHlwZSB0YWJsZSBoYXMgY2hhbmdlZCwg
-YW5kIGENCj4gPiA+IHJlYm9vdCBpcyBuZWNlc3NhcnkuKQ0KPiA+ID4NCj4gPiA+IFNvIHRoZSBw
-bGF0Zm9ybSBpbml0IG5lZWRzIHRvIHJlYWQgdGhpcyB2YXJpYWJsZSwgb3IgZ2V0IHRoZQ0KPiA+
-ID4gaW5mb3JtYXRpb24gaW4gYSBkaWZmZXJlbnQgd2F5LiBJIGFzc3VtZSBpdCBpcyB0aGUgcGF5
-bG9hZCwgbm90IHRoZQ0KPiA+ID4gcGxhdGZvcm0gaW5pdCB0aGF0IHVwZGF0ZXMgdGhlIHZhcmlh
-YmxlIHdoZW4gbmVjZXNzYXJ5LiBUaGlzIG1lYW5zDQo+ID4gPiB0aGUgaW5mb3JtYXRpb24gZmxv
-d3MgZnJvbSBwYXlsb2FkKG4pIHRvIHBsYXRmb3JtIGluaXQobisxKSwgd2hlcmUgbg0KPiA+ID4g
-aXMgYSBtb25vdG9uaWMgaW5kZXggdHJhY2tpbmcgY29uc2VjdXRpdmUgYm9vdHMgb2YgdGhlIHN5
-c3RlbS4NCj4gPiA+DQo+ID4gPiBDYW4geW91IGV4cGxhaW4gaG93IHRoZSBEVCBmaXRzIGludG8g
-dGhpcz8gSG93IGFyZSB0aGUgcnVudGltZS1jb2RlDQo+ID4gPiBhbmQgcnVudGltZS1kYXRhIG1l
-bW9yeSByZXNlcnZhdGlvbiBub2RlcyB1bmRlciAvcmVzZXJ2ZWQtbWVtb3J5DQo+ID4gPiB1c2Vk
-IHRvIGltcGxlbWVudCB0aGlzIGluZm9ybWF0aW9uIGV4Y2hhbmdlIGJldHdlZW4gcGxhdGZvcm0g
-aW5pdA0KPiA+ID4gYW5kIHBheWxvYWQ/IEFuZCBob3cgZG8gdGhlIEhPQiBhbmQgdGhlIEVGSSB2
-YXJpYWJsZSBmaXQgaW50byB0aGlzIHBpY3R1cmU/DQo+ID4NCj4gPg0KPiA+IDEuIFdpdGggc29t
-ZSBvZmZsaW5lIGRpc2N1c3Npb24sIHdlIHdvdWxkIG1vdmUNCj4gPiBnRWZpTWVtb3J5VHlwZUlu
-Zm9ybWF0aW9uR3VpZCB1c2FnZSB0byBGRFQtPnVwbC1jdXN0b20gbm9kZS4gVGhpcyBpcw0KPiA+
-IGJlY2F1c2UgaXQgaXMgZWRrMiBpbXBsZW1lbnRhdGlvbiBjaG9pY2UgYW5kIG5vbi1lZGsyIFBs
-YXRmb3JtSW5pdCBvcg0KPiA+IFBheWxvYWQgbWF5IG5vdCBoYXZlIHN1Y2ggbWVtb3J5IG9wdGlt
-aXphdGlvbiBpbXBsZW1lbnRhdGlvbi4gKG5vdCBhDQo+ID4gZ2VuZXJpYyB1c2FnZS9yZXF1aXJl
-bWVudCBmb3IgUGxhdGZvcm1Jbml0IGFuZCBQYXlsb2FkKQ0KPiA+DQo+ID4gVGhlIGVkazIgZXhh
-bXBsZSBmbG93IHdpbGwgYmUgbGlrZSBiZWxvdzoNCj4gPg0KPiA+IFBsYXRmb3JtSW5pdCB0byBH
-ZXRWYXJpYWJsZSBvZiBnRWZpTWVtb3J5VHlwZUluZm9ybWF0aW9uR3VpZCBhbmQgY3JlYXRlIEhv
-Yi0NCj4gPg0KPiA+ICAgUGxhdGZvcm1Jbml0IHRvIGluaXRpYWxpemUgRkRULT51cGwtY3VzdG9t
-IG5vZGUgdG8gcmVwb3J0DQo+IGdFZmlNZW1vcnlUeXBlSW5mb3JtYXRpb25HdWlkIEhPQiBpbmZv
-cm1hdGlvbiAtPg0KPiA+ICAgICBVZWZpUGF5bG9hZCBlbnRyeSB0byByZS1jcmVhdGUgZ0VmaU1l
-bW9yeVR5cGVJbmZvcm1hdGlvbkd1aWQgSE9CIGJhc2luZw0KPiBvbiBGRFQgaW5wdXQgKGluc3Rl
-YWQgb2YgdGhlIGRlZmF1bHQgTWVtb3J5VHlwZSBpbnNpZGUgVWVmaVBheWxvYWQpIC0+DQo+ID4g
-ICAgICAgVWVmaVBheWxvYWQgRHhlTWFpbi9HY2Qgd2lsbCBjb25zdW1lIGdFZmlNZW1vcnlUeXBl
-SW5mb3JtYXRpb25HdWlkDQo+IEhvYiBmb3IgbWVtb3J5IHR5cGUgaW5mb3JtYXRpb24gLT4NCj4g
-PiAgICAgICAgIFVlZmlQYXlsb2FkIHRvIGluaXRpYWxpemUgVUVGSSBlbnZpcm9ubWVudCAobWFp
-bmx5IERYRSBkaXNwYXRjaGVyKSAtPg0KPiA+ICAgICAgICAgICAoYWRkaXRpb25hbCBGViBiaW5h
-cnkgYXBwZW5kZWQgdG8gY29tbW9uIFVlZmlQYXlsb2FkIGJpbmFyeSkNCj4gUGxhdGZvcm1QYXls
-b2FkIHRvIHByb3ZpZGUgVmFyaWFibGVTZXJ2aWNlIHdoaWNoIGlzIHBsYXRmb3JtIHNwZWNpZmlj
-IC0+DQo+ID4gICAgICAgICAgICAgVWVmaVBheWxvYWQgVWVmaUJvb3RNYW5hZ2VyIHdpbGwgU2V0
-VmFyaWFibGUgaWYgbWVtb3J5IHR5cGUgY2hhbmdlDQo+IG5lZWRlZCBhbmQgcmVxdWVzdCBhIHdh
-cm0gcmVzZXQgLT4NCj4gPiAgICAgICAgICAgICAgIEJhY2sgdG8gUGxhdGZvcm1Jbml0IC4uLg0K
-PiA+DQo+IA0KPiBPSyBzbyB0aGUgdXBsLWN1c3RvbSBub2RlIGNhbiBkbyB3aGF0ZXZlciBpdCBu
-ZWVkcyB0by4gSSBpbWFnaW5lIHRoZXNlIHdpbGwNCj4gaW5jbHVkZSB0aGUgbWVtb3J5IGRlc2Ny
-aXB0b3IgYXR0cmlidXRlIGZpZWxkLCBhbmQgb3RoZXIgcGFydHMgdGhhdCBtYXkgYmUgbWlzc2lu
-Zw0KPiBmcm9tIHRoZSAvcmVzZXJ2ZWQtbWVtb3J5IERUIG5vZGUgc3BlY2lmaWNhdGlvbj8NCg0K
-DQpZZXMsIGlmIG5lZWRlZCBieSBlZGsyIHNwZWNpZmljIGltcGxlbWVudGF0aW9uLCBub3QgZ2Vu
-ZXJpYyBlbm91Z2gsIHdlIG1heSBjb25zaWRlciB0byB1c2UgdXBsLWN1c3RvbSBub2RlIHRvIHBh
-c3MgdGhvc2UgZGF0YS4NCg0KDQo+IA0KPiA+DQo+ID4gMi4gTm93IHRoZSBwcm9wb3NlZCByZXNl
-cnZlZC1tZW1vcnkgbm9kZSB1c2FnZXMgd2lsbCBiZSBmb3IgUGxhdGZvcm1Jbml0IHRvDQo+IHBy
-b3ZpZGUgZGF0YSB3aGljaCBtYXkgYmUgdXNlZCBieSBQYXlsb2FkIG9yIE9TLiBUaGlzIGlzIG5v
-dCBlZGsyIHNwZWNpZmljIGFuZA0KPiBhbnkgUGxhdGZvcm1Jbml0L1BheWxvYWQgY291bGQgaGF2
-ZSBzYW1lIHN1cHBvcnQuDQo+ID4gTm90ZTogYWxsIG9mIGJlbG93IGFyZSBvcHRpb25hbCBhbmQg
-UGxhdGZvcm1Jbml0IG1heSBjaG9vc2UgdG8gaW1wbGVtZW50IHNvbWUNCj4gb2YgdGhlbSBvciBu
-b3QuDQo+ID4NCj4gPiAgICAgICAtIGFjcGkNCj4gPiBJZiBQbGF0Zm9ybUluaXQgY3JlYXRlZCBz
-b21lIEFDUEkgdGFibGVzLCB0aGlzIHdpbGwgcmVwb3J0IGEgbWVtb3J5IHJlZ2lvbiB3aGljaA0K
-PiBjb250YWlucyBhbGwgdGhlIHRhYmxlcyB0byBQYXlsb2FkIGFuZCBQYXlsb2FkIG1heSBiYXNl
-IG9uIHRoaXMgdG8gYWRkIHNvbWUgbW9yZQ0KPiB0YWJsZXMgaWYgcmVxdWlyZWQuDQo+ID4NCj4g
-PiAgICAgICAtIGFjcGktbnZzDQo+ID4gSWYgUGxhdGZvcm1Jbml0IGhhcyBjcmVhdGVkIHNvbWUg
-QUNQSSB0YWJsZXMgd2hpY2ggaGF2aW5nIEFDUEkgTlZTIG1lbW9yeQ0KPiBkZXBlbmRlbmN5LCB0
-aGlzIHdpbGwgYmUgdGhhdCBudnMgcmVnaW9uLg0KPiA+DQo+IA0KPiBUaGVzZSBtYWtlIHNlbnNl
-Lg0KPiANCj4gPiAgICAgICAtIGJvb3QtY29kZQ0KPiA+IFdoZW4gUGxhdGZvcm1Jbml0IGhhdmlu
-ZyBzb21lIEZXIGJvb3QgcGhhc2UgY29kZSB0aGF0IGNvdWxkIGJlIGZyZWVkDQo+ID4gZm9yIE9T
-IHRvIHVzZSB3aGVuIHBheWxvYWQgdHJhbnNmZXJyaW5nIGNvbnRyb2wgdG8gVUVGSSBPUw0KPiA+
-DQo+ID4gICAgICAgLSBib290LWRhdGENCj4gPiBXaGVuIFBsYXRmb3JtSW5pdCBoYXZpbmcgc29t
-ZSBGVyBib290IHBoYXNlIGRhdGEgdGhhdCBjb3VsZCBiZSBmcmVlZCBmb3IgT1MNCj4gdG8gdXNl
-IHdoZW4gcGF5bG9hZCB0cmFuc2ZlcnJpbmcgY29udHJvbCB0byBVRUZJIE9TLg0KPiA+DQo+ID4g
-ICAgICAgLSBydW50aW1lLWNvZGUNCj4gPiBQbGF0Zm9ybUluaXQgbWF5IHByb3ZpZGUgc29tZSBz
-ZXJ2aWNlcyBjb2RlIHRoYXQgY2FuIGJlIHVzZWQgZm9yIFBheWxvYWQgdG8NCj4gaW5pdGlhbGl6
-ZSBVRUZJIFJ1bnRpbWUgU2VydmljZXMgZm9yIHN1cHBvcnRpbmcgVUVGSSBPUy4NCj4gPg0KPiA+
-ICAgICAgIC0gcnVudGltZS1kYXRhDQo+ID4gUGxhdGZvcm1Jbml0IG1heSBwcm92aWRlIHNvbWUg
-c2VydmljZXMgZGF0YSB0aGF0IGNhbiBiZSB1c2VkIGZvciBQYXlsb2FkIHRvDQo+IEluaXRpYWxp
-emUgVUVGSSBSdW50aW1lIFNlcnZpY2VzIGZvciBzdXBwb3J0aW5nIFVFRkkgT1MuDQo+ID4NCj4g
-DQo+IEEgVUVGSSBPUyBtdXN0IGNvbnN1bWUgdGhpcyBpbmZvcm1hdGlvbiBmcm9tIHRoZSBVRUZJ
-IG1lbW9yeSBtYXAsIG5vdCBmcm9tDQo+IHRoZSAvcmVzZXJ2ZWQtbWVtb3J5IG5vZGVzLiBTbyB0
-aGVzZSBub2RlcyBtdXN0IGVpdGhlciBub3QgYmUgdmlzaWJsZSB0byB0aGUgT1MNCj4gYXQgYWxs
-LCBvciBjYXJyeSBhbiBhbm5vdGF0aW9uIHRoYXQgdGhlIE9TIG11c3QgaWdub3JlIHRoZW0uDQo+
-IA0KPiBXb3VsZCBpdCBiZSBwb3NzaWJsZSB0byBpbmNsdWRlIGEgcmVzdHJpY3Rpb24gaW4gdGhl
-IERUIHNjaGVtYSB0aGF0IHRoZXNlIGFyZSBvbmx5DQo+IHZhbGlkIGluIHRoZSBmaXJtd2FyZSBi
-b290IHBoYXNlPw0KDQoNCmh0dHBzOi8vdWVmaS5vcmcvc3BlY3MvVUVGSS8yLjEwLzA3X1NlcnZp
-Y2VzX0Jvb3RfU2VydmljZXMuaHRtbCNlZmktYm9vdC1zZXJ2aWNlcy1leGl0Ym9vdHNlcnZpY2Vz
-DQpQZXIgVUVGSSBzcGVjaWZpY2F0aW9uLCBVRUZJIE9TIHdpbGwgYWx3YXlzIGNhbGwgVUVGSSBH
-ZXRNZW1vcnlNYXAgZnVuY3Rpb24gdG8gcmV0cmlldmUgbWVtb3J5IG1hcCwgc28gRkRUIG5vZGUg
-cHJlc2VudCBvciBub3QgZG9lcyBub3QgbWF0dGVyIHRvIFVFRkkgT1MuIFdlIHByb2JhYmx5IGNv
-dWxkIGhhdmUgYW5ub3RhdGlvbiBpbiBVUEwgc3BlY2lmaWNhdGlvbiB0byBlbXBoYXNpemUgdGhp
-cy4NCkknbSBub3QgZmFtaWxpYXIgd2l0aCBMaW51eCBGRFQgYm9vdCwgYnV0IGlmIG5vbi1VRUZJ
-IE9TIGRvZXMgbm90IGNhbGwgVUVGSSBHZXRNZW1vcnlNYXAoKSBhbmQgZG9lcyBub3Qga25vdyB3
-aGF0IGlzIHJ1bnRpbWUtY29kZS9kYXRhLCBib290LWNvZGUvZGF0YSwgaXQgbWlnaHQganVzdCB0
-cmVhdCBzdWNoIHJlc2VydmVkLW1lbW9yeSBub2RlcyBhcyAncmVndWxhcicgcmVzZXJ2ZWQgbWVt
-b3J5IG5vZGVzLCBhbmQgdGhhdCdzIHN0aWxsIG9rIGJlY2F1c2Ugbm9uLVVFRkkgT1Mgd2lsbCBu
-b3QgY2FsbCB0byBhbnkgcnVudGltZSBzZXJ2aWNlIG9yIHJlLXB1cnBvc2UgYm9vdC1jb2RlL2Rh
-dGEgbWVtb3J5IHJlZ2lvbnMuDQoNCldvdWxkIHlvdSBwcm92aWRlIGEgcmVhbCBPUyBjYXNlIHdo
-aWNoIHdpbGwgYmUgaW1wYWN0ZWQgYnkgdGhpcyByZXNlcnZlZC1tZW1vcnkgc2NoZW1hIHNvIHdl
-IGNhbiBkaXNjdXNzIGJhc2luZyBvbiByZWFsIGNhc2U/DQoNCg==
+Hi!
+
+
+During 2021 summer, Sean Anderson wrote a contribution to add a new shell, based
+on LIL, to U-Boot [1, 2].
+While one of the goals of this contribution was to address the fact actual
+U-Boot shell, which is based on Busybox hush, is old there was a discussion
+about adding a new shell versus updating the actual one [3, 4].
+
+So, in this series, with Harald Seiler, we updated the actual U-Boot shell to
+reflect what is currently in Busybox source code.
+Basically, this contribution is about taking a snapshot of Busybox shell/hush.c
+file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
+
+This contribution was written to be as backward-compatible as possible to avoid
+breaking the existing.
+So, the modern hush flavor offers the same as the actual, that is to say:
+1. Variable expansion.
+2. Instruction lists (;, && and ||).
+3. If, then and else.
+4. Loops (for, while and until).
+No new features offered by Busybox hush were implemented (e.g. functions).
+
+It is possible to change the parser at runtime using the "cli" command:
+=> cli print
+old
+=> cli set modern
+=> cli print
+modern
+=> cli set old
+The default parser is the old one.
+Note that to use both parser, you would need to set both
+CONFIG_HUSH_MODERN_PARSER and CONFIG_HUSH_OLD_PARSER.
+
+In terms of testing, new unit tests were added to ut to ensure the new behavior
+is the same as the old one and it does not add regression.
+Nonetheless, if old behavior was buggy and fixed upstream, the fix is then added
+to U-Boot [5].
+In sandbox, all of these tests pass smoothly:
+=> printenv board
+board=sandbox
+=> ut hush
+Running 20 hush tests
+...
+Failures: 0
+=> cli set modern
+=> ut hush
+Running 20 hush tests
+...
+Failures: 0
+
+Thanks to the effort of Harald Seiler, I was successful booting a board:
+=> printenv fdtfile
+fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
+=> cli get
+old
+=> boot
+...
+root@lepotato:~#
+root@lepotato:~# reboot
+...
+=> cli set modern
+=> cli get
+modern
+=> printenv fdtfile
+fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
+=> boot
+...
+root@lepotato:~#
+
+This contribution indeed adds a lot of code and there were concern about its
+size [6, 7].
+With regard to the amount of code added, the cli_hush_upstream.c is 13030 lines
+long but it seems a smaller subset is really used:
+gcc -D__U_BOOT__ -E common/cli_hush_upstream.c | wc -l
+2870
+Despite this, it is better to still have the whole upstream code for the sake of
+easing maintenance.
+With regard to memory size, I conducted some experiments for version 8 of this
+series and for a subset of arm64 boards and found the worst case to be 4K [8].
+Tom Rini conducted more research on this and also found the increase to be
+acceptable [9].
+
+If you want to review it - your review will really be appreciated - here are
+some information regarding the commits:
+* commits marked as "test:" deal with unit tests.
+* commit "cli: Add Busybox upstream hush.c file." copies Busybox shell/hush.c
+into U-Boot tree, this explain why this commit contains around 12000 additions.
+* commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously added file
+to permit us to use this as new shell.
+The really good idea of #include'ing Busybox code into a wrapper file to define
+some particular functions while minimizing modifications to upstream code comes
+from Harald Seiler.
+* commit "cmd: Add new parser command" adds a new command which permits
+selecting parser at runtime.
+I am not really satisfied with the fact it calls cli_init() and cli_loop() each
+time the parser is set, so your reviews would be welcomed.
+* Other commits focus on enabling features we need (e.g. if).
+
+Changes since:
+ v2:
+  * Added a small fix to compile sandbox with NO_SDL=1.
+  * Added a command to change parser at runtime.
+  * Added 2021 parser function to all run_command*().
+ v3:
+  * Various bug fixes pointed by the CI.
+  * Added upstream busybox hush commits until 6th February 2022.
+ v4:
+  * Various cleaning.
+  * Modified python test to accept failure output when the test are designed to
+  fail.
+  * Bumped upstream busybox hush commits until 24h March 2022.
+ v5:
+  * Bumped upstream busybox hush commits until 30th January 2023.
+  * Fix how hush interprets '<' and '>', indeed we needed to escape them but I
+  removed this behavior as tests are handled by test command and not hush
+  itself. This permitted to have the ut fdt to pass.
+  * Fix a problem with how exit was handled. This was reported by the ut exit
+  test.
+ v6:
+  * There was no v6 and I got mixed up with version.
+ v7:
+  * Bumped upstream busybox hush commits until 9th May 2023.
+  * Renamed parser command to change parser at runtime to cli and added
+  documentation.
+  * Added better separation of patches.
+  * Removed code about __gnu_thumb1_case_si as it was merged in another series.
+  * Various cleaning.
+ v8:
+  * Bumped upstream busybox hush commits until 25th May 2023.
+ v9:
+  * Bumped upstream busybox hush commits until 2nd October 2023.
+ v10:
+  * Fixed a build error in commit adding cli command.
+  * Add new CONFIG_HUSH_SELECTABLE to only build cli command if the two shell
+  flavors are selected.
+ v11:
+  * Renamed everything containing 2021 to modern.
+  * Fixed cmd Kconfig indentation.
+  * Set modern parser as default for majority of boards except some.
+ v12:
+  * Rebased on top of 36d3db6c2c06.
+  * Fixed bootflow_scan_menu_boot for modern hush.
+
+Francis Laniel (24):
+  test: Add framework to test hush behavior
+  test: hush: Test hush if/else
+  test/py: hush_if_test: Remove the test file
+  test: hush: Test hush variable expansion
+  test: hush: Test hush commands list
+  test: hush: Test hush loops
+  cli: Add Busybox upstream hush.c file
+  cli: Port upstream Busybox hush to U-Boot
+  cli: Add menu for hush parser
+  global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
+  cmd: Add new cli command
+  cli: Enables using modern hush parser as command line parser
+  cli: hush_modern: Enable variables expansion for modern hush
+  cli: hush_modern: Add functions to be called from run_command()
+  cli: add modern hush as parser for run_command*()
+  test: hush: Fix instructions list tests for modern hush
+  test: hush: Fix variable expansion tests for modern hush
+  cli: hush_modern: Enable using < and > as string compare operators
+  cli: hush_modern: Enable if keyword
+  cli: hush_modern: Enable loops
+  test: hush: Fix loop tests for modern hush
+  cli: modern_hush: Add upstream commits up to 2nd October 2023.
+  cmd: Set modern hush as default shell
+  configs: Use old hush for several boards
+
+ cmd/Kconfig                            |    21 +
+ cmd/Makefile                           |     2 +
+ cmd/cli.c                              |   134 +
+ common/Makefile                        |     3 +-
+ common/cli.c                           |    82 +-
+ common/cli_hush_modern.c               |   324 +
+ common/cli_hush_upstream.c             | 13030 +++++++++++++++++++++++
+ configs/kmcent2_defconfig              |     1 +
+ configs/kmcoge5ne_defconfig            |     1 +
+ configs/kmeter1_defconfig              |     1 +
+ configs/kmopti2_defconfig              |     1 +
+ configs/kmsupx5_defconfig              |     1 +
+ configs/kmtepr2_defconfig              |     1 +
+ configs/pg_wcom_expu1_defconfig        |     1 +
+ configs/pg_wcom_expu1_update_defconfig |     1 +
+ configs/pg_wcom_seli8_defconfig        |     1 +
+ configs/pg_wcom_seli8_update_defconfig |     1 +
+ configs/socfpga_secu1_defconfig        |     1 +
+ configs/tuge1_defconfig                |     1 +
+ configs/tuxx1_defconfig                |     1 +
+ doc/usage/cmd/cli.rst                  |    74 +
+ doc/usage/index.rst                    |     1 +
+ include/asm-generic/global_data.h      |     8 +
+ include/cli_hush.h                     |    51 +-
+ include/test/hush.h                    |    15 +
+ include/test/suites.h                  |     1 +
+ test/Makefile                          |     3 +
+ test/boot/bootflow.c                   |    16 +-
+ test/cmd_ut.c                          |     6 +
+ test/hush/Makefile                     |    10 +
+ test/hush/cmd_ut_hush.c                |    20 +
+ test/hush/dollar.c                     |   226 +
+ test/hush/if.c                         |   316 +
+ test/hush/list.c                       |   140 +
+ test/hush/loop.c                       |    91 +
+ test/py/tests/test_hush_if_test.py     |   197 -
+ test/py/tests/test_ut.py               |     8 +-
+ 37 files changed, 14580 insertions(+), 212 deletions(-)
+ create mode 100644 cmd/cli.c
+ create mode 100644 common/cli_hush_modern.c
+ create mode 100644 common/cli_hush_upstream.c
+ create mode 100644 doc/usage/cmd/cli.rst
+ create mode 100644 include/test/hush.h
+ create mode 100644 test/hush/Makefile
+ create mode 100644 test/hush/cmd_ut_hush.c
+ create mode 100644 test/hush/dollar.c
+ create mode 100644 test/hush/if.c
+ create mode 100644 test/hush/list.c
+ create mode 100644 test/hush/loop.c
+ delete mode 100644 test/py/tests/test_hush_if_test.py
+
+
+Have a nice end of the year and thank you in advance!
+---
+[1] https://lists.denx.de/pipermail/u-boot/2021-July/453347.html
+[2] https://runtimeterror.com/tech/lil/
+[3] https://lists.denx.de/pipermail/u-boot/2021-July/453790.html
+[4] https://lists.denx.de/pipermail/u-boot/2021-July/453848.html
+[5] https://lists.denx.de/pipermail/u-boot/2021-August/458569.html
+[6] https://lists.denx.de/pipermail/u-boot/2023-November/536768.html
+[7] https://lists.denx.de/pipermail/u-boot/2023-May/518140.html
+[8] https://lists.denx.de/pipermail/u-boot/2023-May/518147.html
+[9] https://lists.denx.de/pipermail/u-boot/2023-November/536952.html
+--
+2.34.1
+
