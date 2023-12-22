@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF77EC4706F
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:32:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA07BC4706F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 21:32:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 352508753D;
-	Fri, 22 Dec 2023 22:32:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A22298784E;
+	Fri, 22 Dec 2023 22:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x5l5nfaS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LFXmuzkm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0970486FB5; Fri, 22 Dec 2023 22:32:06 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 74F56874D5; Fri, 22 Dec 2023 22:32:10 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F395787805
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:32:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58B398784E
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 22:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-67f8a5ed1a0so9498846d6.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:32:03 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3bb8977162aso863532b6e.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:32:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703280722; x=1703885522; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703280726; x=1703885526; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=87sG9HPEQ/b8s+kyD+6SBJ8evOSjubcYEd4dkOBwJ+4=;
- b=x5l5nfaSFlvszRRl9v/nRh2UjJTJ98+pQcVZduomdkpnFHWqvKu3fwdodObyr5K/8S
- xVanPiXTw3A5gHI2DIDpmpUdL+BavqHuvlTTKXLwqbu8xhRaDo2pnjQbpUPi9sSFff07
- ozrhZ/6rLdXon+6ZT+SCwM9S/gNushf/AlIj/wNyyl78L7R484m5QuTuVZaK99GeKzK6
- 7hb8Hxxba0lZh9ruXbQa04GFjwaHaZOuezJVK3ukSjWSGRGNGL3z//yQlse/oOOFeT7z
- J1CKlffPh2btCEchItPWPdKkw/Gx9S2SYEaX3PkA1TeMODdFi58nRo1bmW/+wCqYWoUx
- +Ibg==
+ bh=MhINwHp3iYV305XDyq272N0fwqaB+75Ty9O+gTlw/pI=;
+ b=LFXmuzkmR8ByQW0MAiO6AdUeBZVzrQgn8YK9iQ8puXszVJmlXPG8SRpvrZ8otp1Hxn
+ pFOspiRBY+amKer2V2YpIBkJJwr5k/CuScgzVTnNw4/HueTV8CGWXHmYJuvU8Ib2TW5N
+ DCHLXAGjVl29iMHYeCQm7zdqnHRr48Ns5uEqzxLn7QGUew21sjrHdN/6ljr3aVSuS5l4
+ mjNBf0inul6EE17WBP2t7Nj8AgikdyVhHcIuYZJVJS51AHrhF2KoAc9GZ0+3m8m6lZSR
+ +UMtHnjmys/Pi0Sbios9M9gMaj6QqAcLes/LMm13jMuYU5i60lXqPFF47y3oxLQuOWUP
+ CgMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703280722; x=1703885522;
+ d=1e100.net; s=20230601; t=1703280726; x=1703885526;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=87sG9HPEQ/b8s+kyD+6SBJ8evOSjubcYEd4dkOBwJ+4=;
- b=XqoDyd79815yu8gD/iaoq2cknWZ5/peNRj03jd7goKXm5ly/p7+yUdT9mxOsCAImuY
- NpOTI3fqvgGGRarI5JIWrWyiq8JQo3ngxhFQaERzV+XHfnjSpoT2XDcmx3mRHTqdHplD
- LIhB6JFcFhV1pJLJET6GO1QqbZ0kgYxr8jLoOLAHS+dNcmW2ne5m251HeHslUDbwkQJD
- qVlc5Dp7W7bDotvZKuOpos3M/E7I4GW+VeN6rs5jx8yo2WRYiJy38kK9j5IcYPnnqEle
- qqE5Ts4uUN9m4IaKOhWIfPyvKPMOpaUWnaV22gc1pCBt7Jtyl6GcGLegthJqd0S6upqx
- BDUg==
-X-Gm-Message-State: AOJu0YzNB9oAzoKmx01FNtQiZ3cnQq/DCkM4C7zm0tXqkdSVk3MfX9jE
- N7fxhJZDMcMhg7qEHzJNkdOPzoL8obVGKkIJuK36x2WnBDM=
-X-Google-Smtp-Source: AGHT+IGofkQ97qqbcQauHvGXjbxcNmQiP86Y16iyETCi4FjnKqzGIn5e7hEOrNDLgckwvDi0YHxfNA==
-X-Received: by 2002:a05:6214:f0d:b0:67f:5184:8e5c with SMTP id
- gw13-20020a0562140f0d00b0067f51848e5cmr2414015qvb.10.1703280722355; 
- Fri, 22 Dec 2023 13:32:02 -0800 (PST)
+ bh=MhINwHp3iYV305XDyq272N0fwqaB+75Ty9O+gTlw/pI=;
+ b=NV10wu5yK5TFZZiYK2vr3USob/7CSKaZz6RoW32ceVNRKcqdMLp+aNEZ/SAN6amFNU
+ iiGBrlwmWpcAAjOfg/8bTeQZMCLwT+MxAv7hAzQlvYAbN7csdWPI+bi2i7PmlXA30yGk
+ F9gLvDHaUJ+hO8mwPQ6qyDxrvzKjHISEzEz1pRVPadSmRk/oOnOlJZWeqNsecppWVKZu
+ h5AiPQX0k96W9xmJImr1NILj8OFlD4sIXSFeH/ZsU27wJ0oDV2pwS8gRK16OQOQJLusS
+ Fv7SApT/90ULsF1U+j2qMFpD1MxuiYlYtQNxAKoANHDVYYe4gJS/doC9raOlb+zUqax2
+ GoMw==
+X-Gm-Message-State: AOJu0Yzh2/sqeTBxvNlL44wU3hh2wucg2+y2qY6d1j/p7XKJfjxjM7K6
+ 8Gjg+x1OtiE2+k1ty1yAnL6hIDnFq9ta2/s2tEAIFteHpCE=
+X-Google-Smtp-Source: AGHT+IEU7KJ39NI92CGekwYYWjzZPdnkSGyo9Wz4aLkbPspsnv7H9jMz7k2oi9jxgPGupqgYpMNaAA==
+X-Received: by 2002:a05:6808:98:b0:3bb:6dfc:c0b0 with SMTP id
+ s24-20020a056808009800b003bb6dfcc0b0mr1805604oic.37.1703280726655; 
+ Fri, 22 Dec 2023 13:32:06 -0800 (PST)
 Received: from ubuntu.localdomain
  (cpe688f2e182063-cm688f2e182060.sdns.net.rogers.com. [174.115.4.214])
  by smtp.gmail.com with ESMTPSA id
- dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.32.01
+ dm6-20020ad44e26000000b0067f6ec98ae9sm1623096qvb.32.2023.12.22.13.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 13:32:01 -0800 (PST)
+ Fri, 22 Dec 2023 13:32:06 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
  jwerner@chromium.org
 Cc: Raymond Mao <raymond.mao@linaro.org>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Kevin Chen <kevin_chen@aspeedtech.com>, Nikhil M Jain <n-jain1@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>,
+ Kevin Chen <kevin_chen@aspeedtech.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Devarsh Thakkar <devarsht@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Baruch Siach <baruch@tkos.co.il>,
  Michal Simek <michal.simek@amd.com>, Qu Wenruo <wqu@suse.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
  Sean Anderson <sean.anderson@seco.com>
-Subject: [PATCH v3 5/9] arm: armv8: save boot arguments
-Date: Fri, 22 Dec 2023 13:31:05 -0800
-Message-Id: <20231222213110.660402-6-raymond.mao@linaro.org>
+Subject: [PATCH v3 6/9] qemu-arm: Get bloblist from boot arguments
+Date: Fri, 22 Dec 2023 13:31:06 -0800
+Message-Id: <20231222213110.660402-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231222213110.660402-1-raymond.mao@linaro.org>
 References: <20231222213110.660402-1-raymond.mao@linaro.org>
@@ -102,41 +100,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Save boot arguments x[0-3] into an array for handover of bloblist from
-previous boot stage.
+Add platform custom function to get bloblist from boot arguments.
+Check whether boot arguments aligns with the register conventions
+defined in FW Handoff spec v0.9.
+Add bloblist related options into qemu default config.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
-- New patch file created for v2.
+- Remove low level code for copying boot arguments.
+- Refactor board_fdt_blob_setup() and remove direct access of gd->bloblist.
+Changes in v3
+- Optimize board_bloblist_from_boot_arg().
 
- arch/arm/cpu/armv8/start.S | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ board/emulation/qemu-arm/qemu-arm.c | 30 +++++++++++++++++++++++++++++
+ configs/qemu_arm64_defconfig        |  3 +++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 6cc1d26e5e..8e704f590e 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -370,5 +370,19 @@ ENTRY(c_runtime_cpu_setup)
- ENDPROC(c_runtime_cpu_setup)
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index 942f1fff57..e225011bf0 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -4,6 +4,7 @@
+  */
  
- WEAK(save_boot_params)
-+#if (IS_ENABLED(CONFIG_OF_BOARD) && IS_ENABLED(CONFIG_BLOBLIST))
-+	adr x9, saved_args
-+	stp x0, x1, [x9]
-+	/* Increment the address by 16 bytes for the next pair of values */
-+	stp x2, x3, [x9, #16]
-+#endif
- 	b	save_boot_params_ret	/* back to my caller */
- ENDPROC(save_boot_params)
+ #include <common.h>
++#include <bloblist.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <efi.h>
+@@ -102,6 +103,15 @@ static struct mm_region qemu_arm64_mem_map[] = {
+ struct mm_region *mem_map = qemu_arm64_mem_map;
+ #endif
+ 
++/*
++ * Boot parameters saved from start.S
++ * saved_args[0]: FDT base address
++ * saved_args[1]: Bloblist signature
++ * saved_args[2]: must be 0
++ * saved_args[3]: Bloblist base address
++ */
++extern unsigned long saved_args[];
 +
-+.section .data
-+.global saved_args
-+saved_args:
-+	.rept 4
-+	.xword 0
-+	.endr
-+END(saved_args)
+ int board_init(void)
+ {
+ 	return 0;
+@@ -144,6 +154,26 @@ void *board_fdt_blob_setup(int *err)
+ 	return (void *)CFG_SYS_SDRAM_BASE;
+ }
+ 
++int board_bloblist_from_boot_arg(unsigned long addr, unsigned long size)
++{
++	int ret = -ENOENT;
++
++	if (!IS_ENABLED(CONFIG_OF_BOARD) || !IS_ENABLED(CONFIG_BLOBLIST))
++		return -ENOENT;
++
++	ret = bloblist_check(saved_args[3], size);
++	if (ret)
++		return ret;
++
++	/* Check the register conventions */
++	ret = bloblist_check_reg_conv(saved_args[0], saved_args[2]);
++	if (!ret)
++		/* Relocate the bloblist to the fixed address */
++		ret = bloblist_reloc((void *)addr, CONFIG_BLOBLIST_SIZE);
++
++	return ret;
++}
++
+ void enable_caches(void)
+ {
+ 	 icache_enable();
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index c010c25a92..418f48001c 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -69,3 +69,6 @@ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_PCI=y
+ CONFIG_SEMIHOSTING=y
+ CONFIG_TPM=y
++CONFIG_BLOBLIST=y
++CONFIG_BLOBLIST_ADDR=0x40004000
++CONFIG_BLOBLIST_SIZE=0x4000
 -- 
 2.25.1
 
