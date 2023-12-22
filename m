@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB412C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:05:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 588D9C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 12:07:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12F9587861;
-	Fri, 22 Dec 2023 13:05:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id C7EBD87871;
+	Fri, 22 Dec 2023 13:07:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="vvoYRKQP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="d3OZrPZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A468387868; Fri, 22 Dec 2023 13:05:53 +0100 (CET)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id E29D78786F; Fri, 22 Dec 2023 13:07:07 +0100 (CET)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81A7387858
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:05:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90B3587858
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 13:07:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-20403a18a51so1015587fac.3
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:05:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-781161d18ecso108196385a.3
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 04:07:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703246750; x=1703851550;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PLiqvnLrKlOANE7f0eFliK8JUtHjed31p/45EBPmMrs=;
- b=vvoYRKQPnCaB5ewgMmgisj6lssBjgMbqbV09lil06qD5ys8MQ03P65QyS3il+ywYKK
- tNTb3TtPyuvSBVOVYawsHQD/mvuWma0tusc7op9JhQur52R5+dzsgBOE/HgJKkptPV+v
- joK0QTDMvR3Yfx3qxaAH4GyUVyA9xDNyG4GVfOqPEVhk8i00rXmGdTXKgZfKj05VGonp
- g97h4L6XUllPIbH5u1ievU00WTNtAtM/HP3UveK3tM/eM5uv1haMfss8ZlnkDe0bAJ0x
- IyWdfm6BVIwY1EwJQMRSIjILzCyyHQbxKgDfrDJi83J+w0dRnaMvr7VF83o++hJYGXgF
- v5rw==
+ d=konsulko.com; s=google; t=1703246824; x=1703851624; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ObguiqvTC2PvxEVFFtoJvSF3z4DedDK80veDseZD8Qk=;
+ b=d3OZrPZToFzg9QDr9Gl1SbjQxHBLO4AeJnaWpWnYiK5KKsi1FMRaqcazZBPTx3OgeZ
+ z982i3AC56pDA4uoyU30Sk6cDReBVNIOV9nCmT0JbwFZ9ohm5Ek3QtngqTvIjzioC1/Q
+ YpqOWyqCmLTCgO4UPfnV3Ks49WdYsCBfuEEJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703246750; x=1703851550;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PLiqvnLrKlOANE7f0eFliK8JUtHjed31p/45EBPmMrs=;
- b=pVzj+V4xQHytiHbLqHeFPiemcPrwqg7gXH5v99ec6w4QieVlX7FjetcfIxie1l9890
- DV1YpZqzPOU9z5u6bJP7AUTUMYxdoEpKQ3QiBCULP9TKLkRpFVmC7z4uQLn40+WN1AOv
- E/37ljkOzTymCFx/F7af0KOAGz1ieTjwmshh5EmweiJvnlxnFoKemFVJ0apCdDRu9aUe
- PFdsePaLfYdpcFmImjn1IHZ8ymijpivw64PdJYe1QrYjtjsXGuzX5g969pFcKBR6+2W1
- F0dYdKRpRF7PpgEq3g46z7oBpPVX2k9eHww6/HrLz6/A9XTXInZg2Dodk5J9o5KOPSrV
- Cy7g==
-X-Gm-Message-State: AOJu0Yy8deg7/v3jupZEZ1ZBYCGIXW6QIushcD2r26uYiBiVunLxSmYG
- LJzxO9Yxd1iM4VAX5qhSE2xuwSpqmT4hh3iCFyXmnEOahr8ZrA==
-X-Google-Smtp-Source: AGHT+IHItB5v4RtkWIIDCRKcaNRKjplhWcb0UvSSX1sIA9cx3THcQ1IbbSehiJMrBpb0SbP2DDYgg015vtcW5ngnoQ0=
-X-Received: by 2002:a05:6870:f69d:b0:203:bcd8:c5c2 with SMTP id
- el29-20020a056870f69d00b00203bcd8c5c2mr1305144oab.78.1703246750184; Fri, 22
- Dec 2023 04:05:50 -0800 (PST)
-MIME-Version: 1.0
-References: <20231119172310.1307942-1-i@shantur.com>
- <CAMty3ZDK3jcscgNfMZj4SySK6Kd9L1ZJ6nwaM3eJU_VTBA7yvw@mail.gmail.com>
- <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1703246824; x=1703851624;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ObguiqvTC2PvxEVFFtoJvSF3z4DedDK80veDseZD8Qk=;
+ b=qyp+cR3umLQmWZZlfw4xB2+1CPb8j1exveloTYebN3ZrTjWXaC1PFuHZeDrlaWwebt
+ QTJSS7sprzNg/vkAk73n2TPIomZMjIEZXpE4b7M/WLC3urlIv3Lsw3VAQQhyJNhpsaSx
+ 4K8i6bneEmyg/TqLkgZAWL96V/FkQxVpXXxvQFqvIO6v25DQuVt+KxqCSoeXsfEhhpCG
+ Ocn+f6kKjDMmHVuLnQCDdWGJflEVO5YZsABjAmzqXoKpbWos6URhJE78jodhugn2hxh+
+ Q+eNARYpNGSYdOY44znINMCGJ4zaxKQsUL65CBsZG/1+GUjOhz5Rj2QT4zRYlBR5KDv/
+ vBXQ==
+X-Gm-Message-State: AOJu0YySUB1L5MncMKo0BDjuzIUoV7pjPSjMUadJHlkrDHA0awx65G19
+ IlW/K8pCOgzzmOwEXLrPOVdT2tTCsz1Ulw==
+X-Google-Smtp-Source: AGHT+IFcLtxOXMJaJAjbZK6NLErHOAye4BVtlZZc4l0K0xutn7Bwb/s5vWWGV0OGb47a2K8lnNf4cw==
+X-Received: by 2002:a37:e307:0:b0:77f:6d2:9912 with SMTP id
+ y7-20020a37e307000000b0077f06d29912mr1558773qki.38.1703246824358; 
+ Fri, 22 Dec 2023 04:07:04 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
+ [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
+ by smtp.gmail.com with ESMTPSA id
+ g4-20020a37e204000000b007810854dd46sm1312937qki.61.2023.12.22.04.07.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Dec 2023 04:07:03 -0800 (PST)
+Date: Fri, 22 Dec 2023 07:07:00 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Shantur Rathore <i@shantur.com>
+Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de,
+ Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
+ SoCs
+Message-ID: <20231222120700.GW2513409@bill-the-cat>
+References: <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
  <CALeDE9NgZ_zRGgxo2kBaKYAKF-8tKmt-Eoddxf=8U2Q=T29Yjg@mail.gmail.com>
  <CABEcMwUDnAQG3h-jrPEim2u_19UMtqhjcG5cSiE-QpjawHACCQ@mail.gmail.com>
  <20231209205627.GI2513409@bill-the-cat>
@@ -71,19 +82,13 @@ References: <20231119172310.1307942-1-i@shantur.com>
  <20231211181918.GS2513409@bill-the-cat>
  <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
  <20231211182710.GT2513409@bill-the-cat>
-In-Reply-To: <20231211182710.GT2513409@bill-the-cat>
-From: Shantur Rathore <i@shantur.com>
-Date: Fri, 22 Dec 2023 12:05:39 +0000
-Message-ID: <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Mo41Jtlv7oTFbI+I"
+Content-Disposition: inline
+In-Reply-To: <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,38 +105,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
 
-On Mon, Dec 11, 2023 at 6:27=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> [snip]
-> > > I think in hind-sight too much stuff is omitted without BOOTSTD_FULL.
-> > > The option itself then enables other stuff too by default, but some
-> > > parts of the bootflow command itself should be visible even without F=
-ULL
-> > > to make things easier on the user.
+--Mo41Jtlv7oTFbI+I
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Dec 22, 2023 at 12:05:39PM +0000, Shantur Rathore wrote:
+> Hi all,
+>=20
+> On Mon, Dec 11, 2023 at 6:27=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 > >
-> > At the time the goal was to avoid growth compared to the distro
-> > scripts. We could perhaps add some more things in with BOOTSTD_FULL
-> > but still have it as an option?
->
-> Right. But now that we've tried this, some of the feedback has been that
-> it's just too minimal right now. Like looking at the help message for
-> bootflow, list and info should probably always be available. And maybe
-> the flags for "scan" should be re-thought? Too late to change things now
-> but "bootflow scan -b" should maybe how it's always been for "scan and
-> boot".
+> > On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > [snip]
+> > > > I think in hind-sight too much stuff is omitted without BOOTSTD_FUL=
+L.
+> > > > The option itself then enables other stuff too by default, but some
+> > > > parts of the bootflow command itself should be visible even without=
+ FULL
+> > > > to make things easier on the user.
+> > >
+> > > At the time the goal was to avoid growth compared to the distro
+> > > scripts. We could perhaps add some more things in with BOOTSTD_FULL
+> > > but still have it as an option?
+> >
+> > Right. But now that we've tried this, some of the feedback has been that
+> > it's just too minimal right now. Like looking at the help message for
+> > bootflow, list and info should probably always be available. And maybe
+> > the flags for "scan" should be re-thought? Too late to change things now
+> > but "bootflow scan -b" should maybe how it's always been for "scan and
+> > boot".
+>=20
+> What would be the preferred approach for this patch?
+> Is it to update the default capabilities of bootflow or we can have this =
+patch?
 
-What would be the preferred approach for this patch?
-Is it to update the default capabilities of bootflow or we can have this pa=
-tch?
+Well, I don't see a problem with just adding this to the platforms which
+enable BOOTSTD_FULL until we can rework what's included/excluded by that
+flag, and there's an issue filed for it now.
 
-Thanks
-Shantur
+--=20
+Tom
 
->
-> --
-> Tom
+--Mo41Jtlv7oTFbI+I
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWFe+EACgkQFHw5/5Y0
+tyxi2Qv5AalEJZEh92t0Qz1ur9M7Y+LVgLSU0EW1k65FDv0exb+Z9uBnipRDehfs
+geUg3mm8DJRANWBeshrV/xQoznFDZqRvV3Yul5KXQglQ4BceK2azAEcQQ3AxyZVc
+was03vuKqeEZoCKQKf5GMbTAV98NSXmGbWOaWK9HmYvKOs/XTxbD37nYsmDA3w3N
+2wbrA8W6fIY7jJ1Gk6QKTfIDys3911tsQQkGLpWz5paCbe+1R96xWhtycYmYPvQv
+llKkvNzsTvvZJ7auH3KbYvWf0Ba5htnil1Pc2kmJff/9Nr0XYVH+DSsSMfr4FsnT
+4ERDHsYLrt4/C79mUJMgsH7cvYo9xeG5RpovgULZDzke5vh37tWOqEgTkk9vmd/S
+TMasdALzfFPoA3D35MMRDgExaV9OMfysrk+Iog4cUsdnfIiBqqGEs2Q7Ffx+7czr
++e+xRhGCT1AyvasLQM5Kf4UF5qGrgRoheldG3DIcFpQL60gzxS5H6v68w6QNK8ol
+mMd6uZG/
+=ZxpA
+-----END PGP SIGNATURE-----
+
+--Mo41Jtlv7oTFbI+I--
