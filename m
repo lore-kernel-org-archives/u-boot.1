@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30465C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 13:43:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCD7C46CD2
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 13:48:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E475877F1;
-	Fri, 22 Dec 2023 14:43:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1785487801;
+	Fri, 22 Dec 2023 14:48:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BLDFHJbC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ngl64XLO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FACC86FF7; Fri, 22 Dec 2023 14:43:29 +0100 (CET)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id C5A6D8781D; Fri, 22 Dec 2023 14:48:24 +0100 (CET)
+Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
+ [IPv6:2607:f8b0:4864:20::933])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D20B8775F
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 14:43:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3CB2877E2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 14:48:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6dbb650ad59so1137006a34.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 05:43:22 -0800 (PST)
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-7cc4fdfe799so334858241.1
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 05:48:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703252601; x=1703857401; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703252901; x=1703857701; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8xu+dlv+rL1SESGMvkuAJadS/EOjK/fDw8+C9ZtA5TQ=;
- b=BLDFHJbCqyVFaSg+TCrmMDLzoMQJW40p7j7KHDMJQElGgCBQKhiKsmOABnkFno6ElQ
- BgSlUiSQ1gtWxG/p9efd8dQ7SX6C+P0+v9kriplJSHt6KuAyX45th6p+Diyh8HBMJnM5
- n/+UWNTuBIkwSs2HexYHIxWTVOQ57PBCoiTkGcDwR//QXchb1uOe+pfUQGErvPK2VFtu
- P1RDzOS45vWCLCo9rp23J8p9U2crY5z2OrFLJhTB38qimVjFD7SIOFmxxr5y6FYkYvLm
- rf96VritNbNB5EXC4rl6a+OSk+mgSFMee4y/PZ58fFdNP6BPy4dIVS8AoTQTVY+7uAUq
- lb7g==
+ bh=WPid/ft+mvZtaPWmg5GYjl4VtlEonprjqhs+p6xFiLA=;
+ b=Ngl64XLOiWIbZSfIrn2mXJIBr3cL6/Z2fJ8a0j1Z+GhMQfZsyBsVJezCa2W6Vzf//x
+ vdQqmvfpJSRU3gWZT56d261hNYe18+nTIMJe5RVaSddn3Wp6IYRTGrkN9h/h79tl6amg
+ PL38OLDh4Zm6g58KzdjGYFqHtnRBl9tTps9x+GjM8w9l0HVY+5FJeM3MakEtHRJEQI3m
+ 1iCFw+zb4/XpNmBJV01cOXB/PKzPgouiRSnfmVQQiCOYvwkoDZGHHJFDvo00IXIw+7ut
+ uOMz+L5prD4O25haWAeBoGZl0TFVJr4jCKDyUKV5RzuXs2qOI0yc8ipQegVTrUtdC2ya
+ tObA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703252601; x=1703857401;
+ d=1e100.net; s=20230601; t=1703252901; x=1703857701;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8xu+dlv+rL1SESGMvkuAJadS/EOjK/fDw8+C9ZtA5TQ=;
- b=MA4u86okb0/rbD0HYt1ELbwAGQ06ZqBStCoA6S3VKq8VbGcoWuhttfE8ktDXzSKctx
- sODHgKX1SmEABWe6QoE/STZ4W5RzHsJBvmRn090+1g7zoY+jv2joWrTGqf4myhAYWdB/
- 3JL9p5Wni1zJdnQVzQ2alCRkHQlKmtC4z9laFTgt7Iqm5kBBC7wPHa3I+q+7fQAbt64p
- Tj6YJ/h+YWQH7wFATwSD/AKV6z3P9Q4uVEoMdaiZ8WxKNqPYDiag+URJW08dvNsLh+YF
- MxzLrkbOObPdVVtUw35D4PmMqqcsUdVsycx7PwoWQMi3gKPei4W/GDJLwHU5vlnqI4VC
- G4pQ==
-X-Gm-Message-State: AOJu0YyQ5gTQNbugxDilPI+PFeLev+yXxJXXM+XKjXSgp44ARn3+AbxQ
- Jn7K0OUL2G3YY52KDWyp62JmJArJx1jpmEfLvXqAxrNd5eyn5A==
-X-Google-Smtp-Source: AGHT+IFaQ6yTlQEdMv96jme5/w/nrNAA8zEDuGzKCS3A87OL+eF0tZHbXMIUbH2rfEIqQ9GRCVHewHCyGAwCo8+U9pc=
-X-Received: by 2002:a9d:6f85:0:b0:6d9:f512:54e2 with SMTP id
- h5-20020a9d6f85000000b006d9f51254e2mr1033241otq.48.1703252600885; Fri, 22 Dec
- 2023 05:43:20 -0800 (PST)
+ bh=WPid/ft+mvZtaPWmg5GYjl4VtlEonprjqhs+p6xFiLA=;
+ b=BP1kSCQK1KnOmM6fUL9eykd0oJVVClRvVfdi6ReyQBkFKHhwWAzMWC3zZAglbOEccA
+ YqbU/RZF1000B6nJoFiC9/KMecCQLizEofTIv7ZEoVh9Tf0/FXJH6QYbGrYE2HWZVBex
+ kZNK+PefUcmklzEzyBvySemWK7c3HRc6bscun3AC0z7q/WpZd7Zqn4H7CztKkWVcieq5
+ UvWOcAvmag4RScvzCN5X1lEhZJlXwD+uY6M6uki3jIbnfNXB5lFvRtUz9vOai17ryqMq
+ aLMPyKeh8ICJy4pBmMS6lVq6+0OVldHVf9y6hmZ4pgZjZ8QkDlUS3Iyq/AbsCzyJymw6
+ ew9g==
+X-Gm-Message-State: AOJu0YyCVfnPV5xflpwND+qo5RhAjlkc5x1U8GBoRr/B+9wg3q16aZgJ
+ IinXtKllAmzMsWB9m4HkdDW0s/dJ3EYUnf7jpqhoRWsYj/25kw==
+X-Google-Smtp-Source: AGHT+IHrl2Ddc+tzvoHnuQ/grXKkzQTPcWk13A3yakmfXbs2ZwqqB9flWoGPonuelsdHg9NXiP9ErX9lOZuVbQWdnnM=
+X-Received: by 2002:a05:6102:4404:b0:466:2f2:4d4c with SMTP id
+ df4-20020a056102440400b0046602f24d4cmr761133vsb.24.1703252896496; Fri, 22 Dec
+ 2023 05:48:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20231222061208.3009970-1-sumit.garg@linaro.org>
- <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
-In-Reply-To: <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
+ <20231222061208.3009970-6-sumit.garg@linaro.org>
+ <20231222123504.GA2513409@bill-the-cat>
+In-Reply-To: <20231222123504.GA2513409@bill-the-cat>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 22 Dec 2023 19:13:09 +0530
-Message-ID: <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
- U-Boot
-To: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Date: Fri, 22 Dec 2023 19:18:05 +0530
+Message-ID: <CAFA6WYNo3mNE94tHo0-iogbk49ZSo4WXzRWPME=XPZ7F1H5a8g@mail.gmail.com>
+Subject: Re: [PATCH v2 5/8] doc: devicetree: Updates for devicetree-rebasing
+ subtree
+To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- u-boot-custodians@lists.denx.de, trini@konsulko.com, sjg@chromium.org, 
- robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
+ u-boot-custodians@lists.denx.de, sjg@chromium.org, robh+dt@kernel.org, 
+ krzysztof.kozlowski+dt@linaro.org, conor@kernel.org, 
  neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech, 
  daniel.thompson@linaro.org, dgilmore@fedoraproject.org, pbrobinson@gmail.com, 
  ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com, 
@@ -94,66 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Dec 2023 at 13:48, Krzysztof Kozlowski
-<krzysztof.kozlowski@linaro.org> wrote:
+On Fri, 22 Dec 2023 at 18:05, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 22/12/2023 07:12, Sumit Garg wrote:
-> > Changes in v2:
-> > --------------
-> > - Patch #1: excluded gitab CI config check and added commit description.
-> > - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
-> > - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
-> > - Patch #5: s/U-boot/U-Boot/
-> > - Patch #6 and #7: Picked up review tags
-> >
-> > Prerequisite
-> > ------------
-> >
-> > This patch series requires devicetree-rebasing git repo to be added as a
-> > subtree to the main U-Boot repo via:
-> >
-> > $ git subtree add --prefix devicetree-rebasing \
-> >       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
-> >       v6.6-dts --squash
-> >
-> > Background
-> > ----------
-> >
-> > This effort started while I was reviewing patch series corresponding to
-> > Qcom platforms [1] which was about to import modified devicetree source
-> > files from Linux kernel. I suppose keeping devicetree files sync with
-> > Linux kernel without any DT bindings schema validation has been a pain
-> > for U-Boot SoC/platform maintainers. There has been past discussions
-> > about a single DT repo but that hasn't come up and Linux kernel remained
-> > the place where DT source files as well as bindings are placed and
-> > maintained.
+> On Fri, Dec 22, 2023 at 11:42:05AM +0530, Sumit Garg wrote:
 >
-> Thanks for doing this.
+> > Encourage SoC/board maintainers to migrate to using devicetree-rebasing
+> > subtree and maintain a regular sync with Linux kernel devicetree files
+> > and bindings.
+> >
+> > Along with that add documentation regarding how to run DT bindings
+> > schema checks.
+> >
+> > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> > ---
+> >  doc/develop/devicetree/control.rst | 108 +++++++++++++++++++++++------
+> >  1 file changed, 86 insertions(+), 22 deletions(-)
+> [snip]
+> > @@ -81,18 +94,21 @@ Failing that, you could write one from scratch yourself!
+> >  Configuration
+> >  -------------
+> >
+> > -Use::
+> > +Traditionally, U-Boot placed copies of devicetree source files from Linux
+> > +kernel into `arch/<arch>/dts/<name>.dts` which can be selected via::
+> >
+> > -   #define CONFIG_DEFAULT_DEVICE_TREE        "<name>"
+> > +    #define CONFIG_DEFAULT_DEVICE_TREE       "<name>"
 >
-> I really suggest to store information that kernel DTS is directly
-> re-used, thus DTS backward and forward compatibility matters, also in
-> Linux kernel sources. The point is that sub-arch maintainers should be
-> aware of it. I don't think that as DT maintainers we can efficiently
-> keep an eye on it. Maybe create a subsystem profile and include it to
-> maintainer entries of such affected platforms?
+> Oh, oof. This never got updated for Kconfig rather than config.h. Can
+> you please include re-wording this to be setting <name> when prompted
+> for DEFAULT_DEVICE_TREE by Kconfig? And the rest of the text you're
+> updating as well to match, thanks.
 >
 
-From U-Boot point of view, currently we have the config option:
-"CONFIG_OF_UPSTREAM=y" per platform which means directly re-use of
-kernel DTS. So U-Boot sub-arch maintainers should be aware of
-platforms which get converted to re-use kernel DTS.
-
-I suppose we have to relay information to kernel sub-arch maintainers
-who aren't the same as maintaining U-Boot counterparts. How about
-adding U-Boot ML to CC for whichever DT change gets submitted in the
-kernel? Otherwise adding U-Boot sub-arch maintainers as reviewers for
-corresponding kernel DT changes works too if that's acceptable.
+Sure but how about changing it to say via board defconfig as
+CONFIG_DEFAULT_DEVICE_TREE="<name>", since AFAIK most people use
+defconfig to configure U-Boot.
 
 -Sumit
 
-> Best regards,
-> Krzysztof
->
-> Best regards,
-> Krzysztof
->
+> --
+> Tom
