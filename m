@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695E9C46CD4
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957F8C41535
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E30CA87650;
-	Fri, 22 Dec 2023 16:53:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A75887650;
+	Fri, 22 Dec 2023 16:56:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L6n3SNnc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lgCPNJxO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEBC8876BA; Fri, 22 Dec 2023 16:53:54 +0100 (CET)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id D097A87579; Fri, 22 Dec 2023 16:55:59 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7C9187650
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:53:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CF0287650
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:55:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2041bb80cb3so1282057fac.2
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:53:50 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a234938c7f3so219902666b.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:55:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1703260429; x=1703865229; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1703260556; x=1703865356; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=f5Q/9CVLgSSt/TXdr7e8yQwBo13akY3m5hHPH1gcYXE=;
- b=L6n3SNncA+Z2jsl0yLipu8t7MCvuMmLXWwWYU4W9LWwvC/8xAUgW0ikc0qVrQfSY1b
- /uvZai23ZOEXS170pWKmYfzy4lnbl1dnD/5bj3sgwrPhHxa/sRX9CEca6DoECJJA4DxS
- bfRCCtH803XotgsAI85cwcqXHDRMjFiVJ2GLWcOo4ByvZG1KwjMdRYKvcMoBCRYXZegD
- kLSEKU4Y/XwIEzGJ7W8SuMrCZ2MRgrnNi6zTruVaxkGuaXo2Ok0naEF9cG2CRO6CWBHc
- JjVR9OvIANTgqw3sNgUhbOojOJ09gKEJye8VHYVvF6skbwObTtf/oEVR6Ej1MAcaRSxD
- +GWA==
+ bh=e1p7NHqzDMwkhzWPi8Y7J5bLsMJJa8aIi4Bd9y8MtRc=;
+ b=lgCPNJxOSJCqWmXrg5m7B8rhkqNeRAPkRIN/bEjUl96ILwzjzxBW60FRJW5yJHGEbf
+ N6/vQ0Zlg0S2jlricr3jyXbbtY9ViEuL/8JsdAuyP6T7XcAam8g7KtJ58CJiT0TGUeoQ
+ 4ctnFxngm2+46bVGiqeu9PQmhNKLWhVhZiFdFv9ehiX62XDhr94LmR1c0Ri5SGhBYOgF
+ 3BOH6DrlBUA+8rChg8B9Ww89zZnGMDHkc8+1HxZgoXNPAeUc1UofiodTX+QSmeOJx8Zm
+ txK5zYz/y5OTvcUijbK9uqlp2Bfd1YuzZzbKU7i+QR1nJJMVd0wyhFwAoJRDcSrxZmfQ
+ y20g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703260429; x=1703865229;
+ d=1e100.net; s=20230601; t=1703260556; x=1703865356;
  h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
  :to:content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=f5Q/9CVLgSSt/TXdr7e8yQwBo13akY3m5hHPH1gcYXE=;
- b=GAx0uoMWyf713uVIeGfQBwXBu8gDJ6u4nTq56+1JzOag3/69ItNDN5KB8mc3NNu8JC
- bbTkehImQuvlVhUJznDnepbBAv5pF2P5QaeK80ALHR0ai6I7qYAXy2n+siSqN6Hu+KRQ
- AolyxwV13++TiOZyi7IIiv12+7bXmCdp7qFc2Uf2gbdCovb5akQ9Uf38gRmqwXHAAdea
- LTgmXTBLAirhNgVAu6wf/oBNMZBPEJP8jXb6q0aK6j5b8QDl9LUW5SnUMSeCbKQe8eQ6
- DYy4Rfpmw4Eopi/J5ggDVlo/Nt4/OA8XPWveHCXpGBVGYAgODhJLw1tBg6q0unVYg2o6
- 6GNg==
-X-Gm-Message-State: AOJu0Yzx59WcZkW6aoCSufMi/G9Nq64gVxoaQcmH+S5XcZaPWph1lt5R
- AuLtj1ipiN90S+xz0hx2Qt/HdSf8EnvOjw==
-X-Google-Smtp-Source: AGHT+IE9VfaMgB4zC8K+TZD/rK7vznn9xa4RDdYZQs7GllSZ0ekw0nplHuf/CqbF18f58rUXWIR1Mg==
-X-Received: by 2002:a05:6870:9213:b0:1fa:e1c8:6cae with SMTP id
- e19-20020a056870921300b001fae1c86caemr1594526oaf.48.1703260429455; 
- Fri, 22 Dec 2023 07:53:49 -0800 (PST)
+ bh=e1p7NHqzDMwkhzWPi8Y7J5bLsMJJa8aIi4Bd9y8MtRc=;
+ b=RFY3rhRxc7ejWDb4VvRH9DFCV3SGrW46GzOZYpho57kgiNjEVQLOWbOicI5apKHjvc
+ /5CM4OSRoSsiAocfWVe4IIg+EGDDgG181iEs7qXa4fFe0z5vVy/komdhEKuyJW2BPXwY
+ aKSW6j7QD+UIOJneZWdnEzSzLuKyLSf93+/A8BEZqnfwweeWA5ZwhhxBms9DlrhbPftW
+ mjysok6kiZ3Qz2m14YUS6XL7lyhKT1/37CHyEA7m+fw6zgMDQrAN2/5GXrti/rOI9oi9
+ wO0nknjK8VeUM0um1y+gIYin4jG2ueU0fZPBiZB5XRZFsauxvs/HSC5SaKSBlpmTUfPo
+ mTtA==
+X-Gm-Message-State: AOJu0YyYMZX2bLSfP6WqjMw01HjA8F4fathuapmBRKaps01Xi0IOLpew
+ o7Hfhfju4yIoOdarYn3U0yFF6Z7GEAk63g==
+X-Google-Smtp-Source: AGHT+IFCiifGEShPlOmCbXPY/4nhseFXIuPB/ZNWk+C3QxzmBZH5vaAOo8P8mprrUxTbMgPt/z9T/A==
+X-Received: by 2002:a17:906:1c0d:b0:a1f:7fbb:7f92 with SMTP id
+ k13-20020a1709061c0d00b00a1f7fbb7f92mr830742ejg.117.1703260556659; 
+ Fri, 22 Dec 2023 07:55:56 -0800 (PST)
 Received: from [192.168.0.22] ([78.10.206.178])
  by smtp.gmail.com with ESMTPSA id
- pd17-20020a0568701f1100b0020418df0cf1sm1007251oab.32.2023.12.22.07.53.44
+ rh9-20020a17090720e900b00a269e87ad84sm2162877ejb.189.2023.12.22.07.55.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Dec 2023 07:53:49 -0800 (PST)
-Message-ID: <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
-Date: Fri, 22 Dec 2023 16:53:42 +0100
+ Fri, 22 Dec 2023 07:55:56 -0800 (PST)
+Message-ID: <d91437da-137c-411f-adce-8bd5d1069a41@linaro.org>
+Date: Fri, 22 Dec 2023 16:55:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
  U-Boot
 Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>
+To: Tom Rini <trini@konsulko.com>
 Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
- trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
- krzysztof.kozlowski+dt@linaro.org, neil.armstrong@linaro.org,
- caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
- dgilmore@fedoraproject.org, pbrobinson@gmail.com,
- ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
- xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
- rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
- rfried.dev@gmail.com, marex@denx.de
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de, sjg@chromium.org,
+ robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor@kernel.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org, ff@shokubai.tech,
+ daniel.thompson@linaro.org, dgilmore@fedoraproject.org,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org,
+ b.galvani@gmail.com, xypron.glpk@gmx.de, michal.simek@amd.com,
+ seanga2@gmail.com, rasmus.villemoes@prevas.dk, peng.fan@nxp.com,
+ jh80.chung@samsung.com, rfried.dev@gmail.com, marex@denx.de
 References: <20231222061208.3009970-1-sumit.garg@linaro.org>
  <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
  <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
  <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
- <20231222-whole-canola-81240881c2e7@spud>
+ <20231222154614.GA2652760@bill-the-cat>
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -132,7 +131,7 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20231222-whole-canola-81240881c2e7@spud>
+In-Reply-To: <20231222154614.GA2652760@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -151,7 +150,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22/12/2023 16:45, Conor Dooley wrote:
+On 22/12/2023 16:46, Tom Rini wrote:
+> On Fri, Dec 22, 2023 at 04:38:01PM +0100, Krzysztof Kozlowski wrote:
+>> On 22/12/2023 14:43, Sumit Garg wrote:
+>>> On Fri, 22 Dec 2023 at 13:48, Krzysztof Kozlowski
+>>> <krzysztof.kozlowski@linaro.org> wrote:
+>>>>
+>>>> On 22/12/2023 07:12, Sumit Garg wrote:
+>>>>> Changes in v2:
+>>>>> --------------
+>>>>> - Patch #1: excluded gitab CI config check and added commit description.
+>>>>> - Patch #3: s/UBOOT_DTSI_LOC/u_boot_dtsi_loc/
+>>>>> - Patch #4: s/DEVICE_TREE_LOC/dt_dir/ and s/U-boot/U-Boot/
+>>>>> - Patch #5: s/U-boot/U-Boot/
+>>>>> - Patch #6 and #7: Picked up review tags
+>>>>>
+>>>>> Prerequisite
+>>>>> ------------
+>>>>>
+>>>>> This patch series requires devicetree-rebasing git repo to be added as a
+>>>>> subtree to the main U-Boot repo via:
+>>>>>
+>>>>> $ git subtree add --prefix devicetree-rebasing \
+>>>>>       git://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git \
+>>>>>       v6.6-dts --squash
+>>>>>
+>>>>> Background
+>>>>> ----------
+>>>>>
+>>>>> This effort started while I was reviewing patch series corresponding to
+>>>>> Qcom platforms [1] which was about to import modified devicetree source
+>>>>> files from Linux kernel. I suppose keeping devicetree files sync with
+>>>>> Linux kernel without any DT bindings schema validation has been a pain
+>>>>> for U-Boot SoC/platform maintainers. There has been past discussions
+>>>>> about a single DT repo but that hasn't come up and Linux kernel remained
+>>>>> the place where DT source files as well as bindings are placed and
+>>>>> maintained.
+>>>>
+>>>> Thanks for doing this.
+>>>>
+>>>> I really suggest to store information that kernel DTS is directly
+>>>> re-used, thus DTS backward and forward compatibility matters, also in
+>>>> Linux kernel sources. The point is that sub-arch maintainers should be
+>>>> aware of it. I don't think that as DT maintainers we can efficiently
+>>>> keep an eye on it. Maybe create a subsystem profile and include it to
+>>>> maintainer entries of such affected platforms?
+>>>>
+>>>
+>>> From U-Boot point of view, currently we have the config option:
+>>> "CONFIG_OF_UPSTREAM=y" per platform which means directly re-use of
+>>> kernel DTS. So U-Boot sub-arch maintainers should be aware of
+>>> platforms which get converted to re-use kernel DTS.
+>>
+>> I was speaking about kernel.
+>>
 >>>
 >>> I suppose we have to relay information to kernel sub-arch maintainers
 >>> who aren't the same as maintaining U-Boot counterparts. How about
@@ -166,16 +218,20 @@ On 22/12/2023 16:45, Conor Dooley wrote:
 >> be. No, CC-ing U-boot maintainers changes nothing because as I said, I
 >> want kernel maintainers and contributors to be aware.
 > 
-> I don't think that adding U-Boot platform maintainers as reviewers for
-> the platforms in the kernel is a terrible idea. Certainly kernel
-> platform maintainers for which U-Boot platform maintainers are added to
-> the MAINTAINERS entry will be aware. That said, something like your
+> Maybe an underlying question is, what kernel maintainers aren't aware,
+> but should have been already? Then we can figure out how to address
 
-The point is it does not solve my concern here. I did not express
-problem that U-Boot maintainers are not aware. They can easily be aware
-by setting simple lei filters.
+None of them is aware.
 
-The problem I want to solve is the kernel maintainers to be aware.
+> that. For example, with your Samsung hat on you weren't aware that
+> exynos 4/5/7 DTS files are cared about by U-Boot, but are now aware.
+
+Hm, I am still not aware of this. I mean, you wrote it above, but it is
+the first time I see using directly usptream DTS for U-Boot on Samsung
+platforms.
+
+Did anyone test it actually? I certainly did not. I think this patchset
+did not remove U-Boot-tree Samsung DTS, did it?
 
 Best regards,
 Krzysztof
