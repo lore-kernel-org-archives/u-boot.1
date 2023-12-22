@@ -4,82 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F132C41535
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:47:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695E9C46CD4
+	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 15:53:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3D1F877B8;
-	Fri, 22 Dec 2023 16:47:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E30CA87650;
+	Fri, 22 Dec 2023 16:53:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q+2Rzy1M";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L6n3SNnc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB73C877BC; Fri, 22 Dec 2023 16:47:38 +0100 (CET)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id CEBC8876BA; Fri, 22 Dec 2023 16:53:54 +0100 (CET)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99ED0877B7
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:47:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D7C9187650
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 16:53:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-427a462fc5dso6939801cf.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:47:36 -0800 (PST)
+ spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-2041bb80cb3so1282057fac.2
+ for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 07:53:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1703260055; x=1703864855; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oanDUML6p+JCZdm6eOel3ZM1mSlFaDuAwsh9mje4yyU=;
- b=q+2Rzy1McALT/SRGAZcRMcKeY5EJAsUIektFSSaq8aqu0ts7GaEua27IOA45fySfJ+
- iWP83SX6BrVkA6IbJKfeEtgKMX4YhzqkmhNErwC6CvDvvdvEEY/Cbl0yrYlCtrZK4ThL
- xYYjUGwKZ2+OmxQcANTIa3DBLiTTKTLjEW4sk=
+ d=linaro.org; s=google; t=1703260429; x=1703865229; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=f5Q/9CVLgSSt/TXdr7e8yQwBo13akY3m5hHPH1gcYXE=;
+ b=L6n3SNncA+Z2jsl0yLipu8t7MCvuMmLXWwWYU4W9LWwvC/8xAUgW0ikc0qVrQfSY1b
+ /uvZai23ZOEXS170pWKmYfzy4lnbl1dnD/5bj3sgwrPhHxa/sRX9CEca6DoECJJA4DxS
+ bfRCCtH803XotgsAI85cwcqXHDRMjFiVJ2GLWcOo4ByvZG1KwjMdRYKvcMoBCRYXZegD
+ kLSEKU4Y/XwIEzGJ7W8SuMrCZ2MRgrnNi6zTruVaxkGuaXo2Ok0naEF9cG2CRO6CWBHc
+ JjVR9OvIANTgqw3sNgUhbOojOJ09gKEJye8VHYVvF6skbwObTtf/oEVR6Ej1MAcaRSxD
+ +GWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703260055; x=1703864855;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oanDUML6p+JCZdm6eOel3ZM1mSlFaDuAwsh9mje4yyU=;
- b=rDJUgzmPGwVMFV5dQ0WAKI8mV+Hwec+PLQmvEJKj+3ggvJ2X7bAsiSfZh70eoFBSvj
- kCYAWLJxewqqahBKd7F90dmO5ld1u8S798mstOXFoa8uPjhhONQ3jhphyJuiSBDqQkrd
- d/xZwqZxC8Qax/HdiO7u2ZutHefiB6bpreiZuw9UwtYFSshdQ9NFk14I9zrblyjXEh0g
- 7Ds21DpP9m8AnYucM+UkNfYIDNAMBVI6IXyShXI8C1A0noi5U6I4E0Rop3PbfA/q28tg
- UraPvws2jX296zuq3hCxtCjJlSA3O8/M2wHLOh7tZMk0MSyucOP0ByaFA/ihQhWPsD2B
- N9Iw==
-X-Gm-Message-State: AOJu0YxlhiS4hiLhKSnL2nCidw/G7+ZxYo2Y2fdnkewkzpweHFYIs8Nt
- Ufss0a2aJWUZ49lqZ+5+X3t4fJHApbn1tw==
-X-Google-Smtp-Source: AGHT+IGG/nBHByoSHeqaRp7Vh7xMy3jd6p4MTyDdR+sIxqkhD+RN/hL4vejZiY6TUPvkFUHpClouew==
-X-Received: by 2002:ac8:5782:0:b0:427:7bb7:ed55 with SMTP id
- v2-20020ac85782000000b004277bb7ed55mr1578579qta.48.1703260055391; 
- Fri, 22 Dec 2023 07:47:35 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a6f1-1968-9d2f-89bf.res6.spectrum.com.
- [2603:6081:7b00:6400:a6f1:1968:9d2f:89bf])
+ d=1e100.net; s=20230601; t=1703260429; x=1703865229;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+ :to:content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=f5Q/9CVLgSSt/TXdr7e8yQwBo13akY3m5hHPH1gcYXE=;
+ b=GAx0uoMWyf713uVIeGfQBwXBu8gDJ6u4nTq56+1JzOag3/69ItNDN5KB8mc3NNu8JC
+ bbTkehImQuvlVhUJznDnepbBAv5pF2P5QaeK80ALHR0ai6I7qYAXy2n+siSqN6Hu+KRQ
+ AolyxwV13++TiOZyi7IIiv12+7bXmCdp7qFc2Uf2gbdCovb5akQ9Uf38gRmqwXHAAdea
+ LTgmXTBLAirhNgVAu6wf/oBNMZBPEJP8jXb6q0aK6j5b8QDl9LUW5SnUMSeCbKQe8eQ6
+ DYy4Rfpmw4Eopi/J5ggDVlo/Nt4/OA8XPWveHCXpGBVGYAgODhJLw1tBg6q0unVYg2o6
+ 6GNg==
+X-Gm-Message-State: AOJu0Yzx59WcZkW6aoCSufMi/G9Nq64gVxoaQcmH+S5XcZaPWph1lt5R
+ AuLtj1ipiN90S+xz0hx2Qt/HdSf8EnvOjw==
+X-Google-Smtp-Source: AGHT+IE9VfaMgB4zC8K+TZD/rK7vznn9xa4RDdYZQs7GllSZ0ekw0nplHuf/CqbF18f58rUXWIR1Mg==
+X-Received: by 2002:a05:6870:9213:b0:1fa:e1c8:6cae with SMTP id
+ e19-20020a056870921300b001fae1c86caemr1594526oaf.48.1703260429455; 
+ Fri, 22 Dec 2023 07:53:49 -0800 (PST)
+Received: from [192.168.0.22] ([78.10.206.178])
  by smtp.gmail.com with ESMTPSA id
- q9-20020ac84509000000b00427720a980esm1929169qtn.2.2023.12.22.07.47.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Dec 2023 07:47:34 -0800 (PST)
-Date: Fri, 22 Dec 2023 10:47:33 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] bootmeth: pass size to efi_binary_run()
-Message-ID: <20231222154733.GB2652760@bill-the-cat>
-References: <20231222150156.39783-1-xypron.glpk@gmx.de>
- <170325942760.2653128.4640507980296072811.b4-ty@konsulko.com>
- <CALeDE9PwPsxKQx5j_embNv_4NwXSt68Mo7apBPwDOWdApPA=mw@mail.gmail.com>
- <CAC_iWjJTRZV9_n1-j93y=aMwQhhUgvx7N56n9d+-p1aPb3W+Aw@mail.gmail.com>
+ pd17-20020a0568701f1100b0020418df0cf1sm1007251oab.32.2023.12.22.07.53.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 Dec 2023 07:53:49 -0800 (PST)
+Message-ID: <4a809aa2-0cc5-4ffa-a19f-06d69ae9e460@linaro.org>
+Date: Fri, 22 Dec 2023 16:53:42 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p2bDEQdSIyjByF0m"
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjJTRZV9_n1-j93y=aMwQhhUgvx7N56n9d+-p1aPb3W+Aw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/8] An effort to bring DT bindings compliance within
+ U-Boot
+Content-Language: en-US
+To: Conor Dooley <conor@kernel.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-amlogic@groups.io, u-boot-custodians@lists.denx.de,
+ trini@konsulko.com, sjg@chromium.org, robh+dt@kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, neil.armstrong@linaro.org,
+ caleb.connolly@linaro.org, ff@shokubai.tech, daniel.thompson@linaro.org,
+ dgilmore@fedoraproject.org, pbrobinson@gmail.com,
+ ilias.apalodimas@linaro.org, maxim.uvarov@linaro.org, b.galvani@gmail.com,
+ xypron.glpk@gmx.de, michal.simek@amd.com, seanga2@gmail.com,
+ rasmus.villemoes@prevas.dk, peng.fan@nxp.com, jh80.chung@samsung.com,
+ rfried.dev@gmail.com, marex@denx.de
+References: <20231222061208.3009970-1-sumit.garg@linaro.org>
+ <02fdfc4b-113b-409f-8aaf-8f4a04822706@linaro.org>
+ <CAFA6WYM8EVY-D_Kptggsvxq0ZrFdP0gQ3y4UEbM+vLu0F8tLjw@mail.gmail.com>
+ <c6d65491-c407-4518-aee9-f53f6d4a84ed@linaro.org>
+ <20231222-whole-canola-81240881c2e7@spud>
+From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
+ 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
+ D2GYIS41Kv4Isx2dEFh+/Q==
+In-Reply-To: <20231222-whole-canola-81240881c2e7@spud>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,57 +151,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 22/12/2023 16:45, Conor Dooley wrote:
+>>>
+>>> I suppose we have to relay information to kernel sub-arch maintainers
+>>> who aren't the same as maintaining U-Boot counterparts. How about
+>>> adding U-Boot ML to CC for whichever DT change gets submitted in the
+>>
+>> And every other project? Just setup lei filters.
+>>
+>>> kernel? Otherwise adding U-Boot sub-arch maintainers as reviewers for
+>>> corresponding kernel DT changes works too if that's acceptable.
+>>
+>> You just entirely ignored my proposal without addressing it... ok let it
+>> be. No, CC-ing U-boot maintainers changes nothing because as I said, I
+>> want kernel maintainers and contributors to be aware.
+> 
+> I don't think that adding U-Boot platform maintainers as reviewers for
+> the platforms in the kernel is a terrible idea. Certainly kernel
+> platform maintainers for which U-Boot platform maintainers are added to
+> the MAINTAINERS entry will be aware. That said, something like your
 
---p2bDEQdSIyjByF0m
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The point is it does not solve my concern here. I did not express
+problem that U-Boot maintainers are not aware. They can easily be aware
+by setting simple lei filters.
 
-On Fri, Dec 22, 2023 at 05:46:11PM +0200, Ilias Apalodimas wrote:
-> On Fri, 22 Dec 2023 at 17:43, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > On Fri, Dec 22, 2023 at 3:37=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> > >
-> > > On Fri, 22 Dec 2023 16:01:56 +0100, Heinrich Schuchardt wrote:
-> > >
-> > > > If we call efi_binary_run() with size parameter set to zero, we get=
- an error
-> > > >
-> > > >      Not a PE-COFF file
-> > > >
-> > > > Fill the missing value.
-> > > >
-> > > >
-> > > > [...]
-> > >
-> > > Applied to u-boot/next, thanks!
-> >
-> > Is this a fix that should land for 2024.01?
->=20
-> I was about to ask the same. I think it should go into -master as well
+The problem I want to solve is the kernel maintainers to be aware.
 
-This specifically fixes the merge of -rc5 in to -next however.
+Best regards,
+Krzysztof
 
---=20
-Tom
-
---p2bDEQdSIyjByF0m
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWFr5QACgkQFHw5/5Y0
-tywwogv+MK9KLq5CN+r0MiaNhQ5eXosrVhsNCrqI/A+XgW8SbY/1StS3JQYrX2BH
-C1D0R6YxMklIMtSwvSPDK6zh2t2gNSqQkJh0vp3sTR2TrvWGIZXr69g4aq6U0Ko+
-2348674j+tClfr6nDbPWs1xzfUNOX3oKS5+VYxVwdI3QyCpBk3F/CRX8ZteWr60t
-efGSLgLMvhg1qQpj5x3/WuydaEgR1VpWWd+QCUrJBwVqDi86QUaqBQzoZuG/MXRt
-75gJCj3xo57adijQk5Eu+1pMx+JvKNK7BmeMSXnz2+IynXeHeu+M2s8UiErwOJtK
-jlHe17yhnAghy0VmR7kSvdEtSbB3CEufa0lKMg+15U8y0gU78VKb0hkNWoTF6wK8
-CkLqMjYeYkSWx8rEzIUyicc1rBvOh5n+JEjD6j/dAxS1hmtv+Rw+f+OW2AKrQM+Q
-Ykz3xNo8Gr1iC+RZO3AgV+f/G8qslrldovjLqxbJd8VMMUwZB+dV3Pr3UQnL98Yp
-N4i0RqhU
-=uM4o
------END PGP SIGNATURE-----
-
---p2bDEQdSIyjByF0m--
