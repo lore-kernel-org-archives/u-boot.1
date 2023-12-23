@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 419F9C3DA6E
-	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 16:46:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5B3C3DA6E
+	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 16:46:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA6F08772E;
-	Sat, 23 Dec 2023 17:45:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 443AD877DE;
+	Sat, 23 Dec 2023 17:45:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L9Pvqfqk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HQ8o1/Ts";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 944C28772E; Sat, 23 Dec 2023 17:45:53 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id CFA71877CB; Sat, 23 Dec 2023 17:45:54 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93EF38772E
- for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 17:45:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00DA1876BA
+ for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 17:45:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a2339262835so293021866b.3
- for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 08:45:51 -0800 (PST)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a235500d0e1so293195366b.2
+ for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 08:45:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1703349951; x=1703954751; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1703349952; x=1703954752; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LrioXIPSJtRBEeCwlqLJLz18T5G55RXvXYBRuVCAIUc=;
- b=L9Pvqfqkj3oiB+f88TumTwA35TOO1SPP/a3Zcomv6m0G+miBijMLz73Fog1u6X2fDP
- RXEJ2WuQ1mrxQxB2Ig3uKewqop+gL7sRPklnJIY56OOnNvj/sGAHDHJaLijZkBziGjdW
- W+wZrbrvFF5JFvpR1XR4O7DL9oyLVXApqYpVYMowmTZu8dCWpSlgvSDK0kMuKCTvnITE
- 22+xkztAq1zV9Al3DG4vW8EwM9sCUSkbLkbPy1pyZWPUO2PzRPJqA9Ng+i2iPBnfL2En
- Npn9HqebEJkz0/Uszv970yl0CI/s6Yg8ataYu26YJxcxy3j6OxeiXsRvH9V0m5cMjeGp
- LnTw==
+ bh=+EuibXtYxBa2Or6x75XxPjAmyyk8Bo/S0OL5GNGpuPE=;
+ b=HQ8o1/TsIl4SFczh4UovGfl275c5sgyTWh5xXkmaXRXendLglJK4iZfdVZtNgEADWs
+ tSvoMHBbsITQsF5L08LJoWusWtzhmesHL1tlk5LIw8qiqLOetul0gzGi6Sy8rTTT9yK+
+ iibnBdFwf6aws/kJdOMMSv2eaAhl49+F6EaqhsbvLEgJSleXgw+x0MaHEIGvS7iV9tLa
+ xXt+0Pbhqw34nAAxr06fxKJR0TfwM4KyCqTKWyMKSx16fqCRUHgWzOKigscT37aZqMFU
+ 84twRI5uE2XNraI224t7BLZjFxrPu0d8DeWypYYKe4w4YeNhr5KnPp7UAq/Stu52GijE
+ 7AUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703349951; x=1703954751;
+ d=1e100.net; s=20230601; t=1703349952; x=1703954752;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LrioXIPSJtRBEeCwlqLJLz18T5G55RXvXYBRuVCAIUc=;
- b=hhxDkp/svj2Wuq953MrkrNg8VDMDpreSLv2wiV8A9+LV6zKBBAH9rUmJBxKCPgk30G
- lbbylBe8adLmM2qE7jIuPIznr37MDKvNKUwFXJ3Dv2/lOcS4gyJHdBaoQRfqtostgIin
- KXEC0FstXxhwxWdjBrn3/xGeSsV0tytPhbsvTWhvm4GFRDWY0tD8gtR3dCu948TXCYXB
- 4Hkn+L8/5mMurZ/03FTc/BnTyGsY2qlJdKVXg53I7RzeNe5JjG9wqgzpv7tF9n+1ihaH
- wcdAyzagKTsg0NqFxPQVgPe8y6sN7r+HCafK3ptds6ZEC1+FCPBs8dS7Yx2CkZIgY0DW
- h0hA==
-X-Gm-Message-State: AOJu0Yxx9ktYZhWfrEKsPwsUyvB7Kk5KNOL4a87HEWwLZFyF5IuEVRaq
- arFL5SRukgRotT9cJ28M55c=
-X-Google-Smtp-Source: AGHT+IHwHMEu7Ii/IVOvmH+B2aCDBHHKHSEtKAbjTYnSeB9Z8fSTKIyUyIqqiTqD6wD6010fFBcnVw==
-X-Received: by 2002:a17:906:1099:b0:a23:4540:1570 with SMTP id
- u25-20020a170906109900b00a2345401570mr1471398eju.104.1703349950846; 
- Sat, 23 Dec 2023 08:45:50 -0800 (PST)
+ bh=+EuibXtYxBa2Or6x75XxPjAmyyk8Bo/S0OL5GNGpuPE=;
+ b=hEgRpQyLpkXEZik/4nDNvZoEVBgVsKHuBZlHhE6EAnz7QSMHdz7qBW5tw7GMkLhnpH
+ WIV9IeAhR2qJ6GjVRGgiHUTEoUEAB5ctqDs5fBRq/ti4dycJg19cUb0AU7WrrgpsQsjP
+ LpXwYlqpVuxgFYwd+dgHMyjCkVGQutfl6E6GGAeJIpnzlF5M07ffcqbVUcrYMrRlwJQb
+ q+pcavhaVLFbnW0b8NZ2zN8UabXahyz08JmjC8FlNDH+nOkm3aXA6YOeNR0orDAEjClc
+ QscPhuoCH8lUKEyU0REZWrNACBIrR0be6Q4mLCz4UDqufZZ2UApHSFvmcesB+g8+0UgJ
+ dDTA==
+X-Gm-Message-State: AOJu0YyeIkTbGUYwYIPYBKyjIqAmPZENrfhSDZVFxCqnSgaGLU4XPSRt
+ 1YYcsZtcYUijkym0ao9xu8Y=
+X-Google-Smtp-Source: AGHT+IHS7NtbtqAapGoQh2thxq5hM+3aA8CMjt6jydGVTm+WBMkwdxc4XcDhMx3j9f9mhr4EaptlxQ==
+X-Received: by 2002:a17:906:b746:b0:a26:9dc4:6695 with SMTP id
+ fx6-20020a170906b74600b00a269dc46695mr1491214ejb.39.1703349952267; 
+ Sat, 23 Dec 2023 08:45:52 -0800 (PST)
 Received: from xeon.. ([188.163.112.49]) by smtp.gmail.com with ESMTPSA id
  h1-20020a17090791c100b00a235e5139d5sm3221139ejz.110.2023.12.23.08.45.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Dec 2023 08:45:50 -0800 (PST)
+ Sat, 23 Dec 2023 08:45:51 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Martyn Welch <martyn.welch@collabora.com>,
  Sean Anderson <seanga2@gmail.com>, Linus Walleij <linus.walleij@linaro.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/3] ARM: tegra124: convert TEGRA_SUPPORT_NON_SECURE into
- Kconfig
-Date: Sat, 23 Dec 2023 18:45:23 +0200
-Message-Id: <20231223164525.3660-2-clamor95@gmail.com>
+Subject: [PATCH v1 2/3] ARM: tegra114: expand MC register map
+Date: Sat, 23 Dec 2023 18:45:24 +0200
+Message-Id: <20231223164525.3660-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20231223164525.3660-1-clamor95@gmail.com>
 References: <20231223164525.3660-1-clamor95@gmail.com>
@@ -94,63 +93,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This expansion is required for nonsecure detection to work correctly.
+
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- README                      | 7 -------
- arch/arm/mach-tegra/Kconfig | 7 +++++++
- arch/arm/mach-tegra/board.c | 3 ---
- 3 files changed, 7 insertions(+), 10 deletions(-)
+ arch/arm/include/asm/arch-tegra114/mc.h | 29 +++++++++++++++++++++++--
+ 1 file changed, 27 insertions(+), 2 deletions(-)
 
-diff --git a/README b/README
-index 805c06598d..b940fae706 100644
---- a/README
-+++ b/README
-@@ -300,13 +300,6 @@ The following options need to be configured:
- 		different from COUNTER_FREQUENCY, and can only be determined
- 		at run time.
- 
--- Tegra SoC options:
--		CONFIG_TEGRA_SUPPORT_NON_SECURE
--
--		Support executing U-Boot in non-secure (NS) mode. Certain
--		impossible actions will be skipped if the CPU is in NS mode,
--		such as ARM architectural timer initialization.
--
- - Linux Kernel Interface:
- 		CONFIG_OF_LIBFDT
- 
-diff --git a/arch/arm/mach-tegra/Kconfig b/arch/arm/mach-tegra/Kconfig
-index b18885f4c1..fb1a46b780 100644
---- a/arch/arm/mach-tegra/Kconfig
-+++ b/arch/arm/mach-tegra/Kconfig
-@@ -176,6 +176,13 @@ config TEGRA_DISCONNECT_UDC_ON_BOOT
- 	  USB controller when U-Boot boots to avoid leaving a stale USB device
- 	  present.
- 
-+config TEGRA_SUPPORT_NON_SECURE
-+	bool "Support executing U-Boot in non-secure (NS) mode"
-+	depends on TEGRA124
-+	help
-+	  Certain impossible actions will be skipped if the CPU is in NS mode,
-+	  such as ARM architectural timer initialization.
-+
- config CI_UDC_HAS_HOSTPC
- 	def_bool y
- 	depends on CI_UDC && !TEGRA20
-diff --git a/arch/arm/mach-tegra/board.c b/arch/arm/mach-tegra/board.c
-index 9224743d0e..327d70bd4c 100644
---- a/arch/arm/mach-tegra/board.c
-+++ b/arch/arm/mach-tegra/board.c
-@@ -77,9 +77,6 @@ bool spl_was_boot_source(void)
- }
- 
- #if defined(CONFIG_TEGRA_SUPPORT_NON_SECURE)
--#if !defined(CONFIG_TEGRA124)
--#error tegra_cpu_is_non_secure has only been validated on Tegra124
--#endif
- bool tegra_cpu_is_non_secure(void)
- {
- 	/*
+diff --git a/arch/arm/include/asm/arch-tegra114/mc.h b/arch/arm/include/asm/arch-tegra114/mc.h
+index 3930bab571..2fd2f50b0e 100644
+--- a/arch/arm/include/asm/arch-tegra114/mc.h
++++ b/arch/arm/include/asm/arch-tegra114/mc.h
+@@ -25,9 +25,34 @@ struct mc_ctlr {
+ 	u32 mc_emem_adr_cfg;			/* offset 0x54 */
+ 	u32 mc_emem_adr_cfg_dev0;		/* offset 0x58 */
+ 	u32 mc_emem_adr_cfg_dev1;		/* offset 0x5C */
+-	u32 reserved3[12];			/* offset 0x60 - 0x8C */
++	u32 reserved3[4];			/* offset 0x60 - 0x6C */
++	u32 mc_security_cfg0;			/* offset 0x70 */
++	u32 mc_security_cfg1;			/* offset 0x74 */
++	u32 reserved4[6];			/* offset 0x7C - 0x8C */
+ 	u32 mc_emem_arb_reserved[28];		/* offset 0x90 - 0xFC */
+-	u32 reserved4[338];			/* offset 0x100 - 0x644 */
++	u32 reserved5[74];			/* offset 0x100 - 0x224 */
++	u32 mc_smmu_translation_enable_0;	/* offset 0x228 */
++	u32 mc_smmu_translation_enable_1;	/* offset 0x22C */
++	u32 mc_smmu_translation_enable_2;	/* offset 0x230 */
++	u32 mc_smmu_translation_enable_3;	/* offset 0x234 */
++	u32 mc_smmu_afi_asid;			/* offset 0x238 */
++	u32 mc_smmu_avpc_asid;			/* offset 0x23C */
++	u32 mc_smmu_dc_asid;			/* offset 0x240 */
++	u32 mc_smmu_dcb_asid;			/* offset 0x244 */
++	u32 reserved6[2];                       /* offset 0x248 - 0x24C */
++	u32 mc_smmu_hc_asid;			/* offset 0x250 */
++	u32 mc_smmu_hda_asid;			/* offset 0x254 */
++	u32 mc_smmu_isp_asid;			/* offset 0x258 */
++	u32 reserved7[2];                       /* offset 0x25C - 0x260 */
++	u32 mc_smmu_mpe_asid;			/* offset 0x264 */
++	u32 mc_smmu_nv_asid;			/* offset 0x268 */
++	u32 mc_smmu_nv2_asid;			/* offset 0x26C */
++	u32 mc_smmu_ppcs_asid;			/* offset 0x270 */
++	u32 reserved8[1];                       /* offset 0x274 */
++	u32 mc_smmu_sata_asid;			/* offset 0x278 */
++	u32 mc_smmu_vde_asid;			/* offset 0x27C */
++	u32 mc_smmu_vi_asid;			/* offset 0x280 */
++	u32 reserved9[241];			/* offset 0x284 - 0x644 */
+ 	u32 mc_video_protect_bom;		/* offset 0x648 */
+ 	u32 mc_video_protect_size_mb;		/* offset 0x64c */
+ 	u32 mc_video_protect_reg_ctrl;		/* offset 0x650 */
 -- 
 2.40.1
 
