@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3D3EC3DA6E
-	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 07:09:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9F1C3DA6E
+	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 07:29:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB5268774E;
-	Sat, 23 Dec 2023 08:09:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 566A48774E;
+	Sat, 23 Dec 2023 08:29:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="Omtr1Lmq";
-	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="wj0gl+UI";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="W2Br78Rj";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="Pmk/u+5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 452CC87756; Sat, 23 Dec 2023 08:09:50 +0100 (CET)
+ id 8155E8774E; Sat, 23 Dec 2023 08:29:01 +0100 (CET)
 Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3776E87650
- for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 08:09:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F61C87650
+ for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 08:28:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=angelo@kernel-space.org
 Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id 1c676344;
- Sat, 23 Dec 2023 07:09:26 +0000 (UTC)
+ by kernel-space.org (OpenSMTPD) with ESMTP id 6c23e8d5;
+ Sat, 23 Dec 2023 07:28:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
  message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=N4
- jkFHYnlDPzhTkkMBXAJi8kCwg=; b=Omtr1Lmq0jlAuF2TQxMIQNrrEYpvtpwdZl
- 1ZtDuOZ4vlTC3oVCoE5ZYFVnepUkNMsIs//BCFaZLh3AjC605dyo19nOnuLhB+2H
- dkJZSLYQ2M2rZkzz1xNAmH5hpV2nGxVXUVhJ44SVfZaLKdZcUAiMKazUvDLioO6D
- FSihEEWoQ=
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=no
+ c+8jvNrQxaW13cUbr04zD7H28=; b=W2Br78RjlMefXLvegk6FEtblrmKfo5abQg
+ jn5ngLr8WhwPyrcIYCHlm56IjHp9wCRG01smlucb304bGeMP3h339M+Bx3tycJok
+ F+N8B/+j0wJVV8IQEpr2JmBL3gYJmVkBX0/rZi7XP/N8PX9AUmJg7L+SAE1YD/an
+ jdMBnB4xw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
- I2Ue4r+CMBJp36Ht6wbdLaAeQN4coAgS+4Zgrj9o3+PrJXNqou0jMBXbCY7L6SKW
- H3UZXvwXiUbzbS0tgTl2/znA43//wzWUD4TieWMCPmuYE+MF2nnIJ5Mc0RRQqTlF
- IUZPEcBM0PhN1Et8ofSObZs8sANR0ABa0G4MPOBSSMk=
+ fxnyn4rYUrkBiR0159/stK3VRDE4N6aJGy8sCGLe37/XhFtPWQ9+h11Kh9B+mtdq
+ a3ub9YJte4RCdUrkXoAEomv07PJ+ULlwemxm0Q2mRki5WOJ5XdALCrV93nJI1W1A
+ xvtn3gYPJYof1DTebVaxQPNoo0waELao8eXh0aIk4fM=
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1703315365;
+ s=s1; t=1703316517;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EpzaNmQHFgNqb1ifwXo5F4CE4MidJL+S3Lxo2a6zODc=;
- b=wj0gl+UIrIEAqApwTJLZCJuJKlBCgfCgtBVncpBqIj1lEQTp3CJzLkl0f3/ugz6SB9DtHe
- 0Q/HQkxuWoy3HoAWRLPq/KuDX1CDvXytE/esJ/bD2rvu0a4Ihkg2JlOJU/K3ZJqKdeAzlc
- YyJ6i2K0qWwfrXewq9mR59uxJ4q4gAo=
+ bh=mmUvxd/+0IUBfIbcOgzTGk1AlQ9uPD3HFZrsPMefPb8=;
+ b=Pmk/u+5DnezdJw34fijBDcCaa9xvq1dzVrjncDks3feG+VGKtewsmtoXfPdwv+JLAX/46h
+ sMsrGha8HAyjTp7CMImrUD20op8/VomTf46WgfSRxiaqtulvjMWtnvQZYQ2IKEDry3+T36
+ W9NT8yGs9HduH0nE4mUz3mK6/Q6qsI4=
 Received: from [192.168.0.2] (host-79-30-236-127.retail.telecomitalia.it
  [79.30.236.127])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id e68b487f
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 9fd59f62
  (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Sat, 23 Dec 2023 07:09:25 +0000 (UTC)
-Message-ID: <0d6bf326-b2d4-29f0-2e4e-99d53054a1e1@kernel-space.org>
-Date: Sat, 23 Dec 2023 08:09:06 +0100
+ Sat, 23 Dec 2023 07:28:37 +0000 (UTC)
+Message-ID: <3826b006-3d42-4a49-c9c9-1b2e96a9bb1e@kernel-space.org>
+Date: Sat, 23 Dec 2023 08:28:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Betterbird/102.11.0
-Subject: Re: [PATCH 04/14] treewide: Make arch-specific bootm code depend on
- BOOTM
+Subject: Re: [PATCH v2 04/16] treewide: Make arch-specific bootm code depend
+ on BOOTM
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
-References: <20231204003144.899097-1-sjg@chromium.org>
- <20231204003144.899097-4-sjg@chromium.org>
-From: Angelo Dureghello <angelo@kernel-space.org>
+References: <20231215041919.2197788-1-sjg@chromium.org>
+ <20231215041919.2197788-4-sjg@chromium.org>
 Content-Language: en-US, it
-In-Reply-To: <20231204003144.899097-4-sjg@chromium.org>
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20231215041919.2197788-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,12 +93,14 @@ Hi Simon,
 
 Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-On 04/12/23 1:31 AM, Simon Glass wrote:
+On 15/12/23 5:19 AM, Simon Glass wrote:
 > Allow these functions to be compiled in when CONFIG_BOOTM is enabled,
 > even if CONFIG_CMD_BOOTM is not.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
+> 
+> (no changes since v1)
 > 
 >   arch/arc/lib/Makefile        | 2 +-
 >   arch/arm/lib/Makefile        | 2 +-
