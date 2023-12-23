@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E99C4706F
-	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 00:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 131F3C46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 01:04:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB2A877C8;
-	Sat, 23 Dec 2023 01:44:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 47E7B869F7;
+	Sat, 23 Dec 2023 02:04:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mCCrSrKo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fAB0JG+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C4A187579; Sat, 23 Dec 2023 01:44:53 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 647728753D; Sat, 23 Dec 2023 02:03:58 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0B908765A
- for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 01:44:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E2A08646E
+ for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 02:03:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703292287; x=1703897087; i=xypron.glpk@gmx.de;
- bh=IaPG7a7Of7PGsljf85C33tr12ykGzUSrJgQLSDKeYuk=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:
- References;
- b=mCCrSrKoJZueI93euW78J4+L6soUTume6w9l7/vbxNzepcevmf+jYIHrzzrstU54
- XygCZyoe0d+1CqT2E76QYusvZGbOZFbXcWMB5TkosEwI8knMXJgdxe7il2zYqpJZx
- 04lsORFPQX/mivPx93CohSMPG/ASRVR/TDcWEKfmQchojIz/q67BFRBusqivZKxVz
- iQ5o3Mm6FgAnrBAgjpgjJ/U813El8qZOUB/An0qGVPWpq7Y47CfWfKc8Jep2zWARl
- rTzKsN3DFzdRq4ImMGZGcGA0h9ckysu0Jo38PLAUDlxaPV8vO8s61HDbhihFMYXvY
- +Enc6qQ/7CMPvfYatA==
+ t=1703293430; x=1703898230; i=xypron.glpk@gmx.de;
+ bh=iMdIailWBqKvUth1Fh4xN6yeSkiUWJI8s1cPvu2eg1E=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=fAB0JG+VQZd+ZkhR8stQ3dZgrPw7m5ybSooiHLf2SXYiHkCW0SLyNQYEEzV62LYC
+ GWvqa/oxuy7aeE3rkW/APjKWDCzFKXLphUWDLfkaJ+iE6KJHu6gIJkVOqEPZAMJVW
+ Q0KO3EtLOzsLmPmFD/WDFG/7tey1jzMES1IZAPoLan1Aodj002RY3b9NRiniP/9kn
+ fObCq8DWz81O8vcBsmzcCKErOK+lF+VnjeyQHp1KXZJ1kgPjiy7pqCPP8uBQTqtOu
+ w7V4jiJR0BJCgSfuriAR58kgpyvQ/pa3+0rTFZsfPRA7dvdfmLlIRoV0Txo4Wdl4j
+ rbLk9avqwb1vZStJ3A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MfpOd-1qof702vFZ-00gLA3; Sat, 23
- Dec 2023 01:44:47 +0100
+Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1McpJq-1qhEhA0HcA-00ZtMP; Sat, 23
+ Dec 2023 02:03:50 +0100
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 5/5] test: unit test for smbios command
-Date: Sat, 23 Dec 2023 01:44:29 +0100
-Message-ID: <20231223004429.247301-6-xypron.glpk@gmx.de>
+Subject: [PATCH v2 0/2] smbios: copy QEMU tables
+Date: Sat, 23 Dec 2023 02:03:32 +0100
+Message-ID: <20231223010334.248291-1-xypron.glpk@gmx.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20231223004429.247301-1-xypron.glpk@gmx.de>
-References: <20231223004429.247301-1-xypron.glpk@gmx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:PjDELppHGRwGKfuJ3rtIamgzG+wizpHXZOnvfz1A77QYnFKb5qM
- 8nSe9O7/iPLefJn7N1WSb9511FPI8s+WqRhlXxH5Ptse744dIA29VzP0g1v9beqKJ5/hRp5
- BPtR7gCnX1aCOIiqVex0hY21xiRNVBCk1GRqCcdcyRE+QNC7jhwFqKkDSj3QneTY0mg+vSd
- 2WgIPPwsn8JnHSxUtTPNw==
-UI-OutboundReport: notjunk:1;M01:P0:zZw5PJxPMNo=;8jWRr8OUfG7FJV26xcsvGOFoWhv
- 5c8L9UbukcDdmnJxkE/MFRaJSr1b2pG8UHFYxX+PJNw/00a7OdJNsVYyx+rtqPW/ApDQUNMYv
- LDV8c0zqYtJddFmD/zcOGTnC1LzcwiRblhEDd0r4XjYSHf+8NlSu3rntYSR3zB76b4oelcoLU
- /lDrGJQHOqAE+3+PQpHfVO7ArpOXqGbZQMvqrcsZ04sZM+1+96vkdVsVDaOcM1gZwRCgFpqG+
- CMR+Bo0h0+3fGUFbGGrv1o4w+lqZiYbO14ccdtBhhF33jhWKXMiF3v2Pg7s2XWXyVXPMs/DY2
- 3nRJE5mcvSc6ZdFWZil3hA3EYBgE2fX9EZ3ATDzI4rVuQuTREd7c/1de2govz24k1ycJ/37Qo
- hrtMeGrpBtrgAyawx1QlIeHYgAvaR+n1CF4QcApL4gNUqoXj4B+afxr4JXwHuRf3A/4nl8UDV
- OBQ5X/YsHPfELCTTczKqL5hXWKXsmp0F+R9Fybj5vEHmM+lcJ4mOXo5IRX1ijOq4gbX0EOMSA
- grPpbBzyTF7JSf+9T8FPzsNJCcbbq7M6KB+dcZIKqLu4Xap9LR9HVnVb/thTueIBuuxuE1DV6
- k2gWN6i1sc6znfZ1ZFJBJwiqn8iKdDAjQ3GGiyzytvrXid+RwKN9gSn7ia8c6zoMQYGQLqe8G
- MTvOoBQ/8dTB2GE1Mb2kHhwUrpnqEMsyeqsa1nNnIv5CSshPJZVXIChRsoJTgyqHYKz4Kz/IE
- 69XZ32MaJgMMiP+7H1GWqAqYenCTWUZp73ReReTOgJ/tksafQmn19ig2OkAdLIf9fI8enm1ax
- 4Ogu8+5Fo2wkzySM9Q6zvSagoU/D63fqZhIe/od4ImNWty4z5bnV9/GW/j+JUzUlLSGXg8Mdl
- +Vs8V7Rgs5WAI4qtYQfNgp3QVrVhpwmyR++l0VS8XVM4HK0yVcnSNwIwZ1LnORFVNl9ZB9+4K
- ILqz4CP5Dk4+05s529EDZfO5Nc8=
+X-Provags-ID: V03:K1:g/Cb5zTFXwYpmzdyG19KeshlKETaDKJzlWQW7ZF26RNf6EWVkou
+ FTgb3B6tNAydjj1l1yEpHC4tCDo7ATQ5ZKLr7FnD4uqisCoycIIHfebIvhKuZ1v7Si342pY
+ Cad1AIge2hvJfmxNXWfWctFUszPt68iABGx7vYBM41FJC+KxhUCwzVmVNJMLIlGKERGuBUN
+ KFcmsdDN8xpf6URnvt4hQ==
+UI-OutboundReport: notjunk:1;M01:P0:42O8tkPQiws=;W6jSTCgCT1gKcVhDcAPkZLv9xCP
+ +IW69AfB6WIZVn3dX57ldndHxnMDP3rGG/cJGw4xf5khikD+Q6f3kZ/C+716wFi5YW1fFlboH
+ 8q5pqsqBYfDkKQBWC/0Fs0xmB6m4ZL2ySHNM/VR0+Yb2YOVbrLBOc+oqGproExgiJRiFdVB/q
+ sXzKmJo+OYiOtknBrLbYbC5xgvWNWGdDIzSOnRrP7Tx1+W+3+XKgQeD5JtcG0XYkeKbsDQzSs
+ I4J41/cT6ggvX0SOzxqn2FVe7K5GcMNbPeNmDkub8I6hlrNasGruEvuzaCC6AUW0oReljyoSS
+ a2dHzcgmXViux1R57tcGSV38QSYnNFO7uxN2wLpG8gomkM4YVcxlbioT3bVXJ4eGzr+d+aY5Z
+ pTFVnWxW4QS5Z4JoGEhFqyxHiMOHdtrV1IuFCPO0YhgOPei/fZmjryZT+Gzm5EgzRC/ifEPvw
+ teWpqkLKgiux+DvNyS8heuFHuRosoKrQBngxFlBdSjASd9y0ngD5PtN+kSXs+MTufllwDfBm9
+ jwXMxORnAveNfu9QTIk27s4MJupF9n1J8gvvi/akQTmfHDQk0G0vvmyowIKS7cpbSbRrn0Cgr
+ T1vW+pDANPgxiHqdiEIYhD1rKSNubkSuihc8GZv5/i2K5VBfKxOx9jb2axkBzJntT4DC7VpIa
+ HyDXusNaEypKNriQh5OpdcVSiGVjkxQbse/E5utErmzgP+YT7L9Ri5nC+K8bXR2htPTJCx5TS
+ vaygFwfKhJOtpUcDftku/5ovZ8gVNMRLUZiXOzwICogePlvqgP8r90h5m+4z9bf6/Ays448fA
+ SzE7WsO175TmwP2ln9JLprJqiuc/hFhVrcF8wr1fo3RJdGOtnxlhQPbDISQhguUlBWHhu4k21
+ jBPU/l+2YLWCu8rm0CRqQcqVWaZm7K5GU4lzlehshx8AwoIplEX6hUK0aUQfktWrdYusO2biE
+ S5bBsFJGrFH45cxmg+t4elOaSPI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,70 +87,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a unit test for the smbios command.
+QEMU provides SMBIOS tables with detailed information. We should not try t=
+o
+replicate them in U-Boot.
 
-Provide different test functions for QEMU, sandbox, and other systems.
+With this series we add code to copy the QEMU generated SMBIOS tables to
+RAM. efi_smbios_register() later installs the SMBIOS table as EFI
+configuration table for the OS to pick it up.
 
-Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-=2D--
- test/py/tests/test_smbios.py | 47 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
- create mode 100644 test/py/tests/test_smbios.py
+If we want to inform about U-Boot, we can add a Firmware Inventory
+Information (type 45) table in future.
 
-diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
-new file mode 100644
-index 0000000000..86d8d07539
-=2D-- /dev/null
-+++ b/test/py/tests/test_smbios.py
-@@ -0,0 +1,47 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+"""Test smbios command"""
-+
-+import pytest
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.notbuildconfigspec('qfw_smbios')
-+@pytest.mark.notbuildconfigspec('sandbox')
-+def test_cmd_smbios(u_boot_console):
-+    """Run the smbios command"""
-+    output =3D u_boot_console.run_command('smbios')
-+    assert 'DMI type 0,' in output
-+    assert 'String 1: U-Boot' in output
-+    assert 'DMI type 1,' in output
-+    assert 'DMI type 2,' in output
-+    assert 'DMI type 3,' in output
-+    assert 'DMI type 4,' in output
-+    assert 'DMI type 127,' in output
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.buildconfigspec('qfw_smbios')
-+@pytest.mark.notbuildconfigspec('sandbox')
-+# TODO:
-+# QEMU v8.2.0 lacks SMBIOS support for RISC-V
-+# Once support is available in our Docker image we can remove the constra=
-int.
-+@pytest.mark.notbuildconfigspec('riscv')
-+def test_cmd_smbios_qemu(u_boot_console):
-+    """Run the smbios command on QEMU"""
-+    output =3D u_boot_console.run_command('smbios')
-+    assert 'DMI type 1,' in output
-+    assert 'Manufacturer: QEMU' in output
-+    assert 'DMI type 127,' in output
-+
-+@pytest.mark.buildconfigspec('cmd_smbios')
-+@pytest.mark.buildconfigspec('sandbox')
-+def test_cmd_smbios_sandbox(u_boot_console):
-+    """Run the smbios command on the sandbox"""
-+    output =3D u_boot_console.run_command('smbios')
-+    assert 'DMI type 0,' in output
-+    assert 'String 1: U-Boot' in output
-+    assert 'DMI type 1,' in output
-+    assert 'Manufacturer: sandbox' in output
-+    assert 'DMI type 2,' in output
-+    assert 'DMI type 3,' in output
-+    assert 'DMI type 4,' in output
-+    assert 'DMI type 127,' in output
+With 32bit ARM I did not see a correct SMBIOS table being transferred. We
+need to check if our code in qfw_read_entry() is 32bit compliant.
+
+For providing SMBIOS support in QEMU for RISC-V I have sent a patch
+upstream:
+
+[PATCH 1/1] target/riscv: SMBIOS support for RISC-V virt machine
+https://lore.kernel.org/qemu-riscv/9183a3fb-b9f7-470c-b9a6-8d8cc6dce7c3@ca=
+nonical.com/T/#t
+
+Currently we have a predefined constant TABLE_SIZE =3D SZ_4K in
+lib/efi_loader/efi_smbios.c. We should strive to refactor the code in
+future to provide the length of the SMBIOS tables in global data. But
+that is beyond the scope of this series.
+
+Further we should find a matainer for drivers/misc/qfw*. It would be
+plausible to add it to 'ACPI' maintenance.
+
+A test via a new SMBIOS command is supplied in
+
+[PATCH 0/5] cmd: provide command to display SMBIOS information
+https://lore.kernel.org/u-boot/20231223004429.247301-1-xypron.glpk@gmx.de/=
+T/#t
+
+v2:
+	fix parsing of SMBIOS anchor
+	enable copying on x86 and 32bit ARM/RISC-V
+
+Heinrich Schuchardt (2):
+  smbios: SMBIOS 3.0 (64-bit) Entry Point structure
+  smbios: copy QEMU tables
+
+ arch/x86/lib/tables.c       |   2 +-
+ drivers/misc/Kconfig        |   7 ++
+ drivers/misc/Makefile       |   1 +
+ drivers/misc/qfw_smbios.c   | 197 ++++++++++++++++++++++++++++++++++++
+ include/smbios.h            |  26 +++++
+ lib/efi_loader/efi_smbios.c |   4 +-
+ 6 files changed, 235 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/misc/qfw_smbios.c
+
 =2D-
 2.43.0
 
