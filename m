@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 161F3C46CD2
-	for <u-boot@archiver.kernel.org>; Fri, 22 Dec 2023 23:47:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86CA4C46CD2
+	for <u-boot@archiver.kernel.org>; Sat, 23 Dec 2023 00:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79B5E874AC;
-	Sat, 23 Dec 2023 00:47:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=shantur.com
+	by phobos.denx.de (Postfix) with ESMTP id AB072874AC;
+	Sat, 23 Dec 2023 01:44:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=shantur-com.20230601.gappssmtp.com header.i=@shantur-com.20230601.gappssmtp.com header.b="lnRuZaTt";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GibCFBlW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 607AE87579; Sat, 23 Dec 2023 00:47:51 +0100 (CET)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 757FA8766D; Sat, 23 Dec 2023 01:44:49 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3877286BA8
- for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 00:47:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9889C869F7
+ for <u-boot@lists.denx.de>; Sat, 23 Dec 2023 01:44:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=shantur.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=i@shantur.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7812bed1c86so77963885a.0
- for <u-boot@lists.denx.de>; Fri, 22 Dec 2023 15:47:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=shantur-com.20230601.gappssmtp.com; s=20230601; t=1703288867; x=1703893667;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GP+KcZkuSwUvU3Z2GfbbxLYv3KHM8OWjhtzKO2izPKY=;
- b=lnRuZaTtkodzvwsBGJaDwpM5T9rbXnkzP0kI73RYbD82zQ9j3Z+UzRf4hH4X4GS3Jf
- X+fOsCwb4TxxGhpucvQ69DbMlnWGsneOe9V5D4BR8Iq41jNCEW8MJYaR86UALDlSyVKU
- GfT1pm/CaT0ThOmQXoM/6KUmbYFtkA+XOcNGXvm2i6aLRc2bckjbSyz3xC0FxFiF4eBW
- n4rRGduWn/QzRspNZS6h9B5kIq91DwAkoH6vp7rvjhZTFfzFFynlr8jAtzd1UvD9Rqzz
- sB5t6/H4j+oOct1xnwcW2Tau7om/LZFZYAIrK+fnkF/xW5GCPa8ip3veEJQ1tWwcl0Uy
- tvYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1703288867; x=1703893667;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GP+KcZkuSwUvU3Z2GfbbxLYv3KHM8OWjhtzKO2izPKY=;
- b=A7RAILj4cLc/ezRwRMTzfbg8BhBCkdijDyP/ix9OEEIpnU2quzZgp8jELLxkNodTOn
- fi+J4WpP36J9RFqrw009/KLwnWBL675wnWU97KB9Kkzs6FcnwKxZ4DRC92ktUZdGqaqU
- ab89d5NEbd0xY5L8bsw3a1zlwEOT7PZTnhUCH8dIREaN/DSEzW/hZ5QO0jX6r5sr0u0m
- GTz7mdeeAJgitLcFRuoQPv0JUH1J4M/NSWrlENYXp9Ko3SHQOA6wuKCpAfOuAcpLACbN
- Op+31DffqCQP+8ZXpTHR+lZbC4+QoYdpUbILsrQ9xXEEhCwSsYAfBAp3ohdNXmGhHQzc
- rpgg==
-X-Gm-Message-State: AOJu0Yw1UcF8hgbldIrBJRxd42Ubqj0SkQdzuXvsYvIRFvMvZHbmo4tN
- 1ptnp+p/ypGm+R0gBnquaEzMjVnF/z+UZu10ZIUkzDOG9teSuA==
-X-Google-Smtp-Source: AGHT+IElZ0siJhBlYCyxu0ks2PDDOPol7CoFa5OF1eT805lYY1iIHnFm6T7G6HL6ahYp9Sv3YQ06UfS1EY0p6OVeoOs=
-X-Received: by 2002:ae9:f70e:0:b0:77b:e2ae:934c with SMTP id
- s14-20020ae9f70e000000b0077be2ae934cmr2370945qkg.12.1703288867045; Fri, 22
- Dec 2023 15:47:47 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1703292286; x=1703897086; i=xypron.glpk@gmx.de;
+ bh=2Q81nI6XdEvhliW/CPDPeR+AGa9js67uKwDj9HT35LM=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=GibCFBlWfFzYdGhH8Jen/UZsAWal3jMxC5cw1xlAnS/Il2W7T7TGvBxaDNiwf3b/
+ Ju4FEG01DetlYx9EcekwdVLHYP42ucAej5hWwY7ikihV2Xoh/ESy/KlTUeUM0lPs4
+ IABYuC+WJonr32jw1pkwPDEPdzcxpWDJMM6UyzxPIQwV4td6ymoFwVgKZ+H2TeaE7
+ nM5L0I5oWAe7TDZW7WBQfEF0kO4evED6v1Phx+Ak93m6ez+Ipz1N6aN+yJ3OZGMpJ
+ I7C1kSx3m5gNCd7AZpx1lXL8qPTDdlDasBzyAj+dNxR1dvYGyXfoBJnisUe7U9bm1
+ RZ0rc2qMXDpVhEvW7g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from x13s.fritz.box ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MD9T1-1rPsXX10sL-00993r; Sat, 23
+ Dec 2023 01:44:46 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 0/5] cmd: provide command to display SMBIOS information
+Date: Sat, 23 Dec 2023 01:44:24 +0100
+Message-ID: <20231223004429.247301-1-xypron.glpk@gmx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <CABEcMwXQaxfW9T9-Grpdf8jjjLn=4c=oV-e3cxgwd9wgerG5Sw@mail.gmail.com>
- <CALeDE9NgZ_zRGgxo2kBaKYAKF-8tKmt-Eoddxf=8U2Q=T29Yjg@mail.gmail.com>
- <CABEcMwUDnAQG3h-jrPEim2u_19UMtqhjcG5cSiE-QpjawHACCQ@mail.gmail.com>
- <20231209205627.GI2513409@bill-the-cat>
- <CABEcMwXYCczbTRVgqGC=USRJw138tDM0RkbmGoR4zSY7pBj1PA@mail.gmail.com>
- <CAPnjgZ3gEoOFxahZ2mg=MTQTmBPyCBphS8uVcpSSwq2bg4eJwQ@mail.gmail.com>
- <20231211181918.GS2513409@bill-the-cat>
- <CAPnjgZ3+yJCNgO635gSsDbrb-BpQvJTOqo4qHoWxunvbHZ8jyQ@mail.gmail.com>
- <20231211182710.GT2513409@bill-the-cat>
- <CABEcMwUuoHp2JWDkPacadL1X3-x9wVKH-OZuYx6Cvx_kWCCNUw@mail.gmail.com>
- <20231222120700.GW2513409@bill-the-cat>
- <CABEcMwU521x5_JMsZkGS-hnr2B+w8SNA31-7VXfwo3aPrXytwQ@mail.gmail.com>
-In-Reply-To: <CABEcMwU521x5_JMsZkGS-hnr2B+w8SNA31-7VXfwo3aPrXytwQ@mail.gmail.com>
-From: Shantur Rathore <i@shantur.com>
-Date: Fri, 22 Dec 2023 23:47:35 +0000
-Message-ID: <CABEcMwXKm_5XnxrftAzO27okrPVxozjMwDKSU4p6udyxccSrcg@mail.gmail.com>
-Subject: Re: [PATCH v3] arch: arm: Kconfig: Enable BOOTSTD_FULL for Rockchip
- SoCs
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de, Bharat Gooty <bharat.gooty@broadcom.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:+fTyXVExjk9bWb/vRpk7J7rophKG/qiWLq/yOolqxTMbxKj5AUR
+ HBqeIJxOnqRm8xsgLLFLFXlimgZCM/b7jROncw54MJuFRGWU2XOlS+Dv43R+2YxOe+nDgOP
+ 793rot68kuKtrb2jwNUjcirCzRetMYCfoA66NFerE7iYDL6pG5Lpda8t6Wdn4xnWfbNsVZu
+ eD1uMpLuYSVl/73SV7F/g==
+UI-OutboundReport: notjunk:1;M01:P0:Dt38Q5C+9Sc=;EIhDAtR7uHnxZ3lezso/Sfz21Cj
+ x3O1udFMHeOZhjfmrKBXIrzK7VaGHy8j7pTrTz3gFQMMxZWMUVqdZpgiHVHgzDwF0Kt7NX2tK
+ 93E/P9u/92Ub94R8zy88qBmZUf6uy5/2EET/7HRXfDt9Buw+r0HmQi3V1QUQtBOL0J5tqhmJr
+ uPkBmhhCCSQtekcspaHqofZnELz0cCEve8xJDSJu9HVicatcd4KAKLaFjCYgSukDmZZ0NXh/m
+ 0oc/00LLrgGFVcugWwdbov4deJgcnh7bolCeBo1F9BERozZ96B64YNZVBg+NwyZKuhlNREvJi
+ 7E8MzyUTGidW5z1WPHiQThybEmhLW2MZKJn35ykf9rrzWDSA7AvH1ADUaU8KeZmeWwPqnbLFh
+ he8IPCbykuKj0IKF11QE7ql6ikZQAoAcVrx0grzkOUvQhgR5ITJeazy+9ovhvyqSdnuqV6sCJ
+ D/peLvCeIUQD344RIYgEWg1Inn6pLT/8Sq8fpUwH+6ch0/r6I8wJkV9DSBburbPp+8cgXzKXz
+ HekhmGPLPa14VP8IW2FgfgVtKXAvrny7pnI8L3yNUiRpYAp8hv7Fz2A/owzenf6cAd8BaqjTE
+ hxklKeNuX/uUxxlr9viJptNgV4CbtfXDbc5xHvEFzUQtR+5xcADTGRHerZSqMoTBGFJcGsHQm
+ tnbNs2AutrH79hsHzYKXsSN39AiKhUfjIaO6xbmR024R+hPy1iXJ1XmhHZOqcKxDnnuwg+gau
+ CMnaSgls0VI8WhmfZWR4AdMjbtFfOgsrtBkRP+7wVq1UFPexGLNpsWrdyz7W5e+qN+BgG+ss2
+ T9JiRoLRBySVjTIMKa9I7FbRTFFmFwKc3ry9/NyJZECBqDkRrYTjJoxRpPMqN+k+bdEsf27LB
+ PgC/yKv7YSG08XHJg6KkbSNEOi1MWZazph6J86uKYe7ydU865uXVAPrVFqttcdqXQjZFG3Md5
+ RMBytuZ7QxhdDWuzP+AYvCGudyQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,72 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+U-Boot may supply an SMBIOS table or they may be copied from QEMU.
 
-On Fri, Dec 22, 2023 at 12:09=E2=80=AFPM Shantur Rathore <i@shantur.com> wr=
-ote:
->
-> On Fri, Dec 22, 2023 at 12:07=E2=80=AFPM Tom Rini <trini@konsulko.com> wr=
-ote:
-> >
-> > On Fri, Dec 22, 2023 at 12:05:39PM +0000, Shantur Rathore wrote:
-> > > Hi all,
-> > >
-> > > On Mon, Dec 11, 2023 at 6:27=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Mon, Dec 11, 2023 at 11:22:45AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > [snip]
-> > > > > > I think in hind-sight too much stuff is omitted without BOOTSTD=
-_FULL.
-> > > > > > The option itself then enables other stuff too by default, but =
-some
-> > > > > > parts of the bootflow command itself should be visible even wit=
-hout FULL
-> > > > > > to make things easier on the user.
-> > > > >
-> > > > > At the time the goal was to avoid growth compared to the distro
-> > > > > scripts. We could perhaps add some more things in with BOOTSTD_FU=
-LL
-> > > > > but still have it as an option?
-> > > >
-> > > > Right. But now that we've tried this, some of the feedback has been=
- that
-> > > > it's just too minimal right now. Like looking at the help message f=
-or
-> > > > bootflow, list and info should probably always be available. And ma=
-ybe
-> > > > the flags for "scan" should be re-thought? Too late to change thing=
-s now
-> > > > but "bootflow scan -b" should maybe how it's always been for "scan =
-and
-> > > > boot".
-> > >
-> > > What would be the preferred approach for this patch?
-> > > Is it to update the default capabilities of bootflow or we can have t=
-his patch?
-> >
-> > Well, I don't see a problem with just adding this to the platforms whic=
-h
-> > enable BOOTSTD_FULL until we can rework what's included/excluded by tha=
-t
-> > flag, and there's an issue filed for it now.
-> >
-> > --
-> > Tom
->
-> Great,  can we have this merged in please then [0]
->
-> [0] - https://patchwork.ozlabs.org/project/uboot/patch/20231119172310.130=
-7942-1-i@shantur.com/
->
+Provide a command to display the SMBIOS information.
 
-I tried this patch over the next branch and it failed to build.
+Currently only type 1 and 2 are translated to human readable text.
+Other types may be added later. Currently only a hexdump and the list of
+strings is provided for these.
 
-Sent v4 here :
-https://patchwork.ozlabs.org/project/uboot/patch/20231222234358.563121-1-i@=
-shantur.com/
+The following prerequisites had to be fixed:
 
-Regards,
-Shantur
+* The definition of SMBIOS type 2 lacked a field.
+
+Heinrich Schuchardt (5):
+  smbios: correct definition of gd_smbios_start() macro
+  smbios: type2: contained object handles
+  cmd: provide command to display SMBIOS information
+  doc: man-page for smbios command
+  test: unit test for smbios command
+
+ cmd/Kconfig                       |   7 ++
+ cmd/Makefile                      |   1 +
+ cmd/smbios.c                      | 191 ++++++++++++++++++++++++++++++
+ doc/usage/cmd/smbios.rst          |  93 +++++++++++++++
+ doc/usage/index.rst               |   1 +
+ include/asm-generic/global_data.h |   2 +-
+ include/smbios.h                  |   1 +
+ test/py/tests/test_smbios.py      |  47 ++++++++
+ 8 files changed, 342 insertions(+), 1 deletion(-)
+ create mode 100644 cmd/smbios.c
+ create mode 100644 doc/usage/cmd/smbios.rst
+ create mode 100644 test/py/tests/test_smbios.py
+
+=2D-
+2.43.0
+
