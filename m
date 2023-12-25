@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5D40C3DA6E
-	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 09:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B7FC3DA6E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Dec 2023 09:43:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE0A8877DA;
-	Mon, 25 Dec 2023 10:23:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2392D87719;
+	Mon, 25 Dec 2023 10:43:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qBY3VHQF";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="QA3D0xqF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB7B8877DB; Mon, 25 Dec 2023 10:23:39 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id 3858F8765B; Mon, 25 Dec 2023 10:43:01 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 058FD877BB
- for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 10:23:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 444928765B
+ for <u-boot@lists.denx.de>; Mon, 25 Dec 2023 10:42:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1703496215; x=1704101015; i=xypron.glpk@gmx.de;
- bh=+S0eBXxPXiZK4//2pPlWZe+vvSCNxu+xbEEWEAqlLRo=;
+ t=1703497378; x=1704102178; i=xypron.glpk@gmx.de;
+ bh=wqlzssIvl3lMju8Z0pPwQ0Igtl2eerFuxzoGznMBZXs=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
  In-Reply-To;
- b=qBY3VHQFHH477yKr8k+42xx4eQAuEFS5ww3hIG5KyIqLQwWCIGuk1VvipR98Sf8K
- yEg2HBexu23NLhrFNqO9+/EiIEEfUxSgC+ck+8p66w8Kj8zva08sazz3/3TaWfWZ3
- eirqW3Z/V1wSkv3NhtUdk7wynhIDhHJMeauT56Ii4QdTFseLhMX6OHkCLz4SI5HOh
- p7y6CZt5cbFXsgmoJyZHSk3I0o5A2tWIqswmgY/UNS1xDbNKkJleVWiLnTWKnadFP
- NR3vZfmbwZK1M8XxsqXSfsVkNEOZvTocxZLpUGx5rQwPx31QhjZSRK3CfgMxWXXkx
- Rpe6eKuW861FGnySDQ==
+ b=QA3D0xqFsNMb8FkQzFKmeqZvv6yUG2WzinVNiupJv2GnzEy7H4f1fteJP6zzT1Mh
+ U7jit13GYupXL22k0sIpx2uM4yCQ1+CzwzrjLHjoEv0OG4bkdr4Gf5kVriwM+jIMG
+ 7As74dNW6On3fHHr6jmHeV5Uk6XQ+4mKJD7u/8dLlwisxy9egOS/v6ux6/pvORqPa
+ T8mZNV0Ge76AZ7Bkq5/9ueQ0tzT67cX27soOb4xv3jCL4w4I/d76bdLC7f9d+6Mrb
+ 3/5FmVCcsuy8vt4LoKHnKenUcqrE+VXey5GqROFrIUDY+sU0I1XNa/EflMkLohPG+
+ /et0v6d1DirlgcvK6w==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.136] ([178.202.40.247]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MQe5k-1rfIKv3DLa-00Ng8W; Mon, 25
- Dec 2023 10:23:35 +0100
-Message-ID: <b236a38c-3b66-4b7d-8c00-bfd06b3d0e77@gmx.de>
-Date: Mon, 25 Dec 2023 10:23:35 +0100
+Received: from [192.168.123.136] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MA7Ka-1rOsDQ190E-00Be5G; Mon, 25
+ Dec 2023 10:42:58 +0100
+Message-ID: <76b22009-920f-4962-ba27-ff009b7e1e82@gmx.de>
+Date: Mon, 25 Dec 2023 10:42:57 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] net: tftp: remove explicit efi configuration
- dependency
+Subject: Re: [PATCH 1/3] efi_loader: remove unused members from struct
+ efi_disk_obj
 Content-Language: en-US
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
- ilias.apalodimas@linaro.org, Ramon Fried <rfried.dev@gmail.com>
-References: <20231218023842.281336-1-takahiro.akashi@linaro.org>
- <20231218023842.281336-4-takahiro.akashi@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi
+ <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
+References: <20231225044356.626900-1-masahisa.kojima@linaro.org>
+ <20231225044356.626900-2-masahisa.kojima@linaro.org>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231218023842.281336-4-takahiro.akashi@linaro.org>
+In-Reply-To: <20231225044356.626900-2-masahisa.kojima@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Ank5TvIpmeL0m0MYZ1mE8riU2USDhWnktRJ1ytWiNo8ObodDmKp
- 9qPzBz3iYNtwgiKojYTQAc+TTVKW59bjVMPAEcM6vxHTgJHr/u8Fs8aX2bgLIM3A/o5cOOU
- bDxTmnUCM+GUv42leTPfliPEs4GrEVY3KdmkwvJHIaSl4oGhJ0qlBEuZVwIMCmszqMFD4pu
- TashbEmJV7wtStH499V3w==
-UI-OutboundReport: notjunk:1;M01:P0:u4hf/J+X5HE=;3Sg/hCn8+CehSW//tPLRXecie7m
- PDPS2oVX/YORcfxmlQGfaTZhWm90wLlwzDACI4jzg3PVbR8DoREvomq16mBJQP4Jnyl68eZJR
- /sY24mq3WvydDUqX9MC7w95+5IeB/z4ldZIxnoRTLuczI9M/KzWEBJg7rrOTj1mJ+l5epYpiH
- REp8kt9QT7pBiuLhapAix7cWYgLP3cJ0/h3RC5gZZb3CBEb/kXbvX2fj4pRFQMwe9O4cqs57E
- VeWBObz6fDsiH7DtdgpDuHesleiC7lRdqiDPpI58o6zfuHs5OAiUNymoHxCylwGEee75/m2tk
- oMLIJjWOZmTf8KSj3dxVPH8K16GfuKw/0fXSHrve0D1odct+PaVuDULek3kx6uxwKxvn4ywI1
- grZxSzfIsL9C4lQAn+ZoZQGHK3eY1gXr1KJpDjD3Hxg1f3l4mu1KdqEDgFt6/Ub5P+yOxyPSU
- ePVoraSKbLxUI69T6+JzSnHW9AclpJwGRPSAs04U/729mFpIxkE/PwKGNgcnIeSWSTTTItra7
- dGaffYbavPXaCqa1ANVjdw8H9HHMlYkVUckQtB1tj1kXNfZJ3j7joriiob64cmH4PvdocRq6e
- wV3YOUfCHUt9M2Ousv7iXCGs+ccqMsOLFuHJXxf8l74yq+4Mo5dY8IfO3WEPEt6svrP1G402h
- XmPvTFMT7GEglEvSzAN3841Iy8bo3U6QiAT7D6PH9vmJxFP1H+glVmiUnzt0VSwoaR69KiTot
- uEjr5trV5WnaBQMj0TyM4inJhSLnlPLKmbK/V3uwTdbqL77KQlNSZGw1aO63Srw1BATgyiVRg
- 6/Rvg3yQBz/WB6sR0kkSFAuAukpQit2aCIyDW435OOLEUB+W2gLv1FTbBW/ITv/gBSfSVaTSa
- 1YVXl+cdv6zBZcvkitGL7gtDbJG9XVeW1L1z5K8ucUzRRHtaYiSPoAG24B6shGZ4Pxs4bQ/cn
- aEvu1w==
+X-Provags-ID: V03:K1:rW3FAYEZmR3EG5/nVP4nTiOU5P29SDunkkn4GUIMJeAo7H5aoSf
+ 3uTSzcMxEJnB2PsfKbM5JQVcryayxndikPYaNNOBdl2MsIR+QgFEPddAgkJRmb5oZQ3iMio
+ rtjnjonUUIndvlCgzdEJpFpCuknlC/cFURwdg13lULM7+P8f44HN2UMGexBoDI3QS2jF8ec
+ 46fvWgA5PBlFE1WTbkelQ==
+UI-OutboundReport: notjunk:1;M01:P0:+BPnfPfBy0M=;ke7uQ3cdMTKKTEey6iWquht9I74
+ q5ar125TTJFvxEt2nbnD2C5BjWvBjvVwPDIQxdNFYO8+cCLOYLEWW0Bn78u0lRVumBojMYWGr
+ +W5N5HWlhwYtFW23aq7Mup+DGqAjFAVVBsPKYNlUkmG8yWGn2ZqbvSahyxIfdnqOeMvq4mwcn
+ 0+g91w7i2XhCAPhcpr1a7qo6jTfH9YKqFLJ+rA6BWsRvo0S/MGUaqHLCBnERHqMdXx7jl97wL
+ AFLfFhhRabmAWdQj2Tv3F90NQz3rs25f+5nKk0iaF9Jsna0QmgPGJY5aoYpOG2lm78ha0ywPR
+ 9USNrM/8YrxqdP7oGlLesPpiBxzvez+SvuRrinVQ4G8aGqvkyDGdlMITWBiObX151r1y3degM
+ yib+EcUbFxQNZXpAqQpDZrIRiUYJHrt+1j2v2nCw92FbMyns767PyCxTWJnLEDcoMkRNDJAJn
+ KE/OxqbTIEKVdaImkxFTszgJQC7hruDy6WEPtKfbbTJ7JthfTOPNViCpW2/3lJB26c0DH6mEP
+ QSeFh/A31nUzpw6dvZGcRNivjV1C1U2cThKqZKuaGphIGyE74U85QBUDMyDGDJkLbftCn2w//
+ Y2sTx2Tnd4Acnkj602NILNDBnYV3iIbRTV0y2+6bKnpZUvSidyKf0ObduncV9cQFU51wswVAu
+ b9oFf4hph6ry6/g2O/8BKY1TNzMHvG3QrU7rJlmXATTZ/neC9hXDZeYwNDViYbqhjtYAd0a4+
+ FqpN+RSkII7YmI7i4ECk+90qgNannfQSRTujDdoFUIleiIbrq0Fd9lFkR+TDMdwnEEwklu5/c
+ jcKmcWgsXOVtZr7uNzDuIEJeNv6Ki2IjPKR6AIRQZxLbcCHLxBR4Qq6AY1iMN1uSkB2FE7ueg
+ rB/DelqrxNRSaPNFe21j7Y/EhObtSH7OMgpzTiIMz8zsaRC/UshB185NIFavGR1P+8h1zerco
+ Kj6cobBW8jzPTZoBSduSFQku6U8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +92,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12/18/23 03:38, AKASHI Takahiro wrote:
-> Now it is clear that the feature actually depends on efi interfaces,
-> not "bootefi" command. efi_set_bootdev() will automatically be nullified
-> if necessary efi component is disabled.
+On 12/25/23 05:43, Masahisa Kojima wrote:
+> part and dev_index in struct efi_disk_obj are not used,
+> let's remove it.
 >
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> This commit also removes the invalid structure comment
+> for @dev, it does not exist.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
->   net/tftp.c | 10 ++++------
->   1 file changed, 4 insertions(+), 6 deletions(-)
+>   lib/efi_loader/efi_disk.c | 15 +++------------
+>   1 file changed, 3 insertions(+), 12 deletions(-)
 >
-> diff --git a/net/tftp.c b/net/tftp.c
-> index 88e71e67de35..2e335413492b 100644
-> --- a/net/tftp.c
-> +++ b/net/tftp.c
-> @@ -302,12 +302,10 @@ static void tftp_complete(void)
->   			time_start * 1000, "/s");
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index f0d76113b0..a2f8b531a3 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -32,20 +32,15 @@ const efi_guid_t efi_system_partition_guid =3D PARTI=
+TION_SYSTEM_GUID;
+>    *
+>    * @header:	EFI object header
+>    * @ops:	EFI disk I/O protocol interface
+> - * @dev_index:	device index of block device
+>    * @media:	block I/O media information
+>    * @dp:		device path to the block device
+> - * @part:	partition
+>    * @volume:	simple file system protocol of the partition
+> - * @dev:	associated DM device
+>    */
+>   struct efi_disk_obj {
+>   	struct efi_object header;
+>   	struct efi_block_io ops;
+> -	int dev_index;
+>   	struct efi_block_io_media media;
+>   	struct efi_device_path *dp;
+> -	unsigned int part;
+>   	struct efi_simple_file_system_protocol *volume;
+>   };
+>
+> @@ -383,7 +378,6 @@ static int efi_fs_exists(struct blk_desc *desc, int =
+part)
+>    * @parent:		parent handle
+>    * @dp_parent:		parent device path
+>    * @desc:		internal block device
+> - * @dev_index:		device index for block device
+>    * @part_info:		partition info
+>    * @part:		partition
+>    * @disk:		pointer to receive the created handle
+> @@ -394,7 +388,6 @@ static efi_status_t efi_disk_add_dev(
+>   				efi_handle_t parent,
+>   				struct efi_device_path *dp_parent,
+>   				struct blk_desc *desc,
+> -				int dev_index,
+>   				struct disk_partition *part_info,
+>   				unsigned int part,
+>   				struct efi_disk_obj **disk,
+> @@ -456,7 +449,6 @@ static efi_status_t efi_disk_add_dev(
+>   		diskobj->dp =3D efi_dp_from_part(desc, part);
+>   		diskobj->media.last_block =3D desc->lba - 1;
 >   	}
->   	puts("\ndone\n");
-> -	if (IS_ENABLED(CONFIG_CMD_BOOTEFI)) {
-> -		if (!tftp_put_active)
-> -			efi_set_bootdev("Net", "", tftp_filename,
-> -					map_sysmem(tftp_load_addr, 0),
-> -					net_boot_file_size);
-> -	}
-> +	if (!tftp_put_active)
-> +		efi_set_bootdev("Net", "", tftp_filename,
-
-Function efi_set_bootdev() will not be compiled for CONFIG_EFI_LOADER=3Dn.
-So this change may lead to build failures.
-
-Best regards
-
-Heinrich
-
-> +				map_sysmem(tftp_load_addr, 0),
-> +				net_boot_file_size);
->   	net_set_state(NETLOOP_SUCCESS);
->   }
+> -	diskobj->part =3D part;
 >
+>   	/*
+>   	 * Install the device path and the block IO protocol.
+> @@ -499,7 +491,6 @@ static efi_status_t efi_disk_add_dev(
+>   			goto error;
+>   	}
+>   	diskobj->ops =3D block_io_disk_template;
+> -	diskobj->dev_index =3D dev_index;
+>
+>   	/* Fill in EFI IO Media info (for read/write callbacks) */
+>   	diskobj->media.removable_media =3D desc->removable;
+> @@ -519,7 +510,7 @@ static efi_status_t efi_disk_add_dev(
+>
+>   	EFI_PRINT("BlockIO: part %u, present %d, logical %d, removable %d"
+>   		  ", last_block %llu\n",
+> -		  diskobj->part,
+> +		  part,
+>   		  diskobj->media.media_present,
+>   		  diskobj->media.logical_partition,
+>   		  diskobj->media.removable_media,
+> @@ -566,7 +557,7 @@ static int efi_disk_create_raw(struct udevice *dev, =
+efi_handle_t agent_handle)
+>   	diskid =3D desc->devnum;
+>
+>   	ret =3D efi_disk_add_dev(NULL, NULL, desc,
+> -			       diskid, NULL, 0, &disk, agent_handle);
+> +			       NULL, 0, &disk, agent_handle);
+>   	if (ret !=3D EFI_SUCCESS) {
+>   		if (ret =3D=3D EFI_NOT_READY) {
+>   			log_notice("Disk %s not ready\n", dev->name);
+> @@ -627,7 +618,7 @@ static int efi_disk_create_part(struct udevice *dev,=
+ efi_handle_t agent_handle)
+>   		return -1;
+>   	dp_parent =3D (struct efi_device_path *)handler->protocol_interface;
+>
+> -	ret =3D efi_disk_add_dev(parent, dp_parent, desc, diskid,
+> +	ret =3D efi_disk_add_dev(parent, dp_parent, desc,
+>   			       info, part, &disk, agent_handle);
+>   	if (ret !=3D EFI_SUCCESS) {
+>   		log_err("Adding partition for %s failed\n", dev->name);
 
